@@ -1,7 +1,9 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using PnP.Core.Model.SharePoint;
 using PnP.Core.Model.Teams;
 using PnP.Core.Test.Utilities;
 using System;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -164,6 +166,86 @@ namespace PnP.Core.Test.Teams
         }
 
 
+        [TestMethod]
+        public async Task AddChatMessageFileAttachmentAsyncTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var team = await context.Team.GetAsync(o => o.PrimaryChannel);
+                var channel = team.PrimaryChannel;
+                Assert.IsNotNull(channel);
+
+                channel = await channel.GetAsync(o => o.Messages);
+                var chatMessages = channel.Messages;
+
+                Assert.IsNotNull(chatMessages);
+
+                // Upload File to SharePoint Library - it will have to remain i guess as onetime upload.
+                IFolder folder = await context.Web.Lists.GetByTitle("Documents").RootFolder.GetAsync();
+                IFile existingFile = await folder.Files.GetFirstOrDefaultAsync(o => o.Name == "test_added.docx");
+                if(existingFile == default)
+                {
+                    existingFile = await folder.Files.AddAsync("test_added.docx", System.IO.File.OpenRead($".{Path.DirectorySeparatorChar}TestAssets{Path.DirectorySeparatorChar}test.docx"));
+                }
+                
+                Assert.IsNotNull(existingFile);
+                Assert.AreEqual("test_added.docx", existingFile.Name);
+                
+                // Useful reference - https://docs.microsoft.com/en-us/graph/api/chatmessage-post?view=graph-rest-beta&tabs=http#example-4-file-attachments
+                // assume as if there are no chat messages
+                var attachmentId = existingFile.ETag.Replace("{","").Replace("}","").Replace("\"","").Split(',').First(); // Needs to be the documents eTag - just the GUID part
+                var body = $"<h1>Hello</h1><br />This is a unit test with a file attachment (AddChatMessageHtmlAsyncTest) posting a message - <attachment id=\"{attachmentId}\"></attachment>";
+                if (!chatMessages.Any(o => o.Body.Content == body))
+                {
+
+                    var fileUri = new Uri(existingFile.LinkingUrl);
+
+                    ITeamChatMessageAttachmentCollection coll = new TeamChatMessageAttachmentCollection
+                    {
+                        new TeamChatMessageAttachment
+                        {
+                           Id = attachmentId,
+                           ContentType = "reference",
+                           // Cannot have the extension with a query graph doesnt recognise and think its part of file extension - include in docs.
+                           ContentUrl = new Uri(fileUri.ToString().Replace(fileUri.Query, "")),
+                           Name = $"{existingFile.Name}",
+                           ThumbnailUrl = null,
+                           Content = null
+                        }
+                    };
+
+                    await chatMessages.AddAsync(body, ChatMessageContentType.Html, coll);
+                }
+
+                channel = await channel.GetAsync(o => o.Messages);
+                var updateMessages = channel.Messages;
+
+                var message = updateMessages.Last();
+                Assert.IsNotNull(message.CreatedDateTime);
+                // Depending on regional settings this check might fail
+                //Assert.AreEqual(message.DeletedDateTime, DateTime.MinValue);
+                Assert.IsNotNull(message.Etag);
+                Assert.IsNotNull(message.Importance);
+                Assert.IsNotNull(message.LastModifiedDateTime);
+                Assert.IsNotNull(message.Locale);
+                Assert.IsNotNull(message.MessageType);
+                Assert.IsNotNull(message.WebUrl);
+
+                Assert.IsTrue(message.IsPropertyAvailable(o => o.ReplyToId));
+                Assert.IsNull(message.ReplyToId);
+                Assert.IsTrue(message.IsPropertyAvailable(o => o.Subject));
+                Assert.IsNull(message.Subject);
+                Assert.IsTrue(message.IsPropertyAvailable(o => o.Summary));
+                Assert.IsNull(message.Summary);
+
+                //delete file
+                await existingFile.DeleteAsync(); //Note this will break the link in the Teams chat.
+
+            }
+        }
+
+
         //Disabled Test until subject support is implemented        
         //public async Task AddChatMessageSubjectAsyncTest()
         //{
@@ -186,7 +268,7 @@ namespace PnP.Core.Test.Teams
         //        {
         //            //TODO: Fix that null
         //            //TODO: Add Subject to method
-                    
+
         //            await chatMessages.AddAsync(body, subject: "This is a subject test");
         //        }
 
