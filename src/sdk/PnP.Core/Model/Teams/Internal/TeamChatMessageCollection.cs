@@ -21,8 +21,9 @@ namespace PnP.Core.Model.Teams
         /// <param name="contentType">Message content type e.g. Text, Html</param>
         /// <param name="attachments">Attachments within the message</param>
         /// <param name="subject">Message subject</param>
+        /// <param name="hostedContents">Hosted contents for inline content</param>
         /// <returns></returns>
-        public async Task<ITeamChatMessage> AddAsync(string content, ChatMessageContentType contentType = ChatMessageContentType.Text, ITeamChatMessageAttachmentCollection attachments = null, string subject = null)
+        public async Task<ITeamChatMessage> AddAsync(string content, ChatMessageContentType contentType = ChatMessageContentType.Text, ITeamChatMessageAttachmentCollection attachments = null, string subject = null, ITeamChatMessageHostedContentCollection hostedContents = null)
         {
             if (string.IsNullOrEmpty(content))
             {
@@ -45,6 +46,10 @@ namespace PnP.Core.Model.Teams
                 newChannelChatMessage.Attachments = attachments;
             }
 
+            if(hostedContents != null && hostedContents.Length > 0)
+            {
+                newChannelChatMessage.HostedContents = hostedContents;
+            }
 
             return await newChannelChatMessage.AddAsync().ConfigureAwait(false) as TeamChatMessage;
         }
@@ -56,10 +61,11 @@ namespace PnP.Core.Model.Teams
         /// <param name="contentType">Message content type e.g. Text, Html</param>
         /// <param name="attachments">Attachments within the message</param>
         /// <param name="subject">Message subject</param>
+        /// <param name="hostedContents">Hosted contents for inline content</param>
         /// <returns>Newly added channel chat message</returns>
-        public ITeamChatMessage Add(string content, ChatMessageContentType contentType = ChatMessageContentType.Text, ITeamChatMessageAttachmentCollection attachments = null, string subject = null)
+        public ITeamChatMessage Add(string content, ChatMessageContentType contentType = ChatMessageContentType.Text, ITeamChatMessageAttachmentCollection attachments = null, string subject = null, ITeamChatMessageHostedContentCollection hostedContents = null)
         {
-            return AddAsync(content).GetAwaiter().GetResult();
+            return AddAsync(content, contentType, attachments, subject, hostedContents).GetAwaiter().GetResult();
         }
 
         /// <summary>
@@ -70,8 +76,9 @@ namespace PnP.Core.Model.Teams
         /// <param name="contentType">Message content type e.g. Text, Html</param>
         /// <param name="attachments">Attachments within the message</param>
         /// <param name="subject">Message subject</param>
+        /// <param name="hostedContents">Hosted contents for inline content</param>
         /// <returns>Newly added channel chat message</returns>
-        public async Task<ITeamChatMessage> AddBatchAsync(Batch batch, string content, ChatMessageContentType contentType = ChatMessageContentType.Text, ITeamChatMessageAttachmentCollection attachments = null, string subject = null)
+        public async Task<ITeamChatMessage> AddBatchAsync(Batch batch, string content, ChatMessageContentType contentType = ChatMessageContentType.Text, ITeamChatMessageAttachmentCollection attachments = null, string subject = null, ITeamChatMessageHostedContentCollection hostedContents = null)
         {
             if (string.IsNullOrEmpty(content))
             {
@@ -89,6 +96,11 @@ namespace PnP.Core.Model.Teams
                 ContentType = contentType
             };
 
+            if (hostedContents != null && hostedContents.Length > 0)
+            {
+                newChannelChatMessage.HostedContents = hostedContents;
+            }
+
             return await newChannelChatMessage.AddBatchAsync(batch).ConfigureAwait(false) as TeamChatMessage;
         }
 
@@ -99,10 +111,11 @@ namespace PnP.Core.Model.Teams
         /// <param name="contentType">Message content type e.g. Text, Html</param>
         /// <param name="attachments">Attachments within the message</param>
         /// <param name="subject">Message subject</param>
+        /// <param name="hostedContents">Hosted contents for inline content</param>
         /// <returns>Newly added channel chat message</returns>
-        public async Task<ITeamChatMessage> AddBatchAsync(string content, ChatMessageContentType contentType = ChatMessageContentType.Text, ITeamChatMessageAttachmentCollection attachments = null, string subject = null)
+        public async Task<ITeamChatMessage> AddBatchAsync(string content, ChatMessageContentType contentType = ChatMessageContentType.Text, ITeamChatMessageAttachmentCollection attachments = null, string subject = null, ITeamChatMessageHostedContentCollection hostedContents = null)
         {
-            return await AddBatchAsync(PnPContext.CurrentBatch, content, contentType, attachments, subject).ConfigureAwait(false);
+            return await AddBatchAsync(PnPContext.CurrentBatch, content, contentType, attachments, subject, hostedContents).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -112,10 +125,11 @@ namespace PnP.Core.Model.Teams
         /// <param name="contentType">Message content type e.g. Text, Html</param>
         /// <param name="attachments">Attachments within the message</param>
         /// <param name="subject">Message subject</param>
+        /// <param name="hostedContents">Hosted contents for inline content</param>
         /// <returns>Newly added channel chat message</returns>
-        public ITeamChatMessage AddBatch(string content, ChatMessageContentType contentType = ChatMessageContentType.Text, ITeamChatMessageAttachmentCollection attachments = null, string subject = null)
+        public ITeamChatMessage AddBatch(string content, ChatMessageContentType contentType = ChatMessageContentType.Text, ITeamChatMessageAttachmentCollection attachments = null, string subject = null, ITeamChatMessageHostedContentCollection hostedContents = null)
         {
-            return AddBatchAsync(PnPContext.CurrentBatch, content, contentType, attachments, subject).GetAwaiter().GetResult();
+            return AddBatchAsync(PnPContext.CurrentBatch, content, contentType, attachments, subject, hostedContents).GetAwaiter().GetResult();
         }
 
         /// <summary>
@@ -126,10 +140,11 @@ namespace PnP.Core.Model.Teams
         /// <param name="contentType">Message content type e.g. Text, Html</param>
         /// <param name="attachments">Attachments within the message</param>
         /// <param name="subject">Message subject</param>
+        /// <param name="hostedContents">Hosted contents for inline content</param>
         /// <returns>Newly added channel chat message</returns>
-        public ITeamChatMessage AddBatch(Batch batch, string content, ChatMessageContentType contentType = ChatMessageContentType.Text, ITeamChatMessageAttachmentCollection attachments = null, string subject = null)
+        public ITeamChatMessage AddBatch(Batch batch, string content, ChatMessageContentType contentType = ChatMessageContentType.Text, ITeamChatMessageAttachmentCollection attachments = null, string subject = null, ITeamChatMessageHostedContentCollection hostedContents = null)
         {
-            return AddBatchAsync(batch, content, contentType, attachments, subject).GetAwaiter().GetResult();
+            return AddBatchAsync(batch, content, contentType, attachments, subject, hostedContents).GetAwaiter().GetResult();
         }
 
     }

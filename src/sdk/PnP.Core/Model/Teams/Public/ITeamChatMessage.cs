@@ -95,8 +95,12 @@ namespace PnP.Core.Model.Teams
         /// <summary>
         /// Attached files
         /// </summary>
-        //public List<ITeamChatMessageAttachment> Attachments { get; }
         public ITeamChatMessageAttachmentCollection Attachments { get; }
+
+        /// <summary>
+        /// Hosted Content tiles
+        /// </summary>
+        public ITeamChatMessageHostedContentCollection HostedContents { get; }
 
     }
 }

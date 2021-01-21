@@ -31,17 +31,34 @@ namespace PnP.Core.Model.Teams
                     foreach(var attachment in Attachments)
                     {
                         dynamic attach = new ExpandoObject();
-                        attach.id = attachment.Id;
+                        attach.id = attachment.Id;                        
                         attach.content = attachment.Content;
                         attach.contentUrl = attachment.ContentUrl;
                         attach.contentType = attachment.ContentType;
                         attach.name = attachment.Name;
                         attach.thumbnailUrl = attachment.ThumbnailUrl;
-
                         attachmentList.Add(attach);
                     }
 
                     body.attachments = attachmentList;
+                }
+
+                if(HostedContents.Length > 0)
+                {
+                    dynamic hostedContentList = new List<dynamic>();
+                    foreach (var hostedContent in HostedContents)
+                    {
+                        dynamic hContent = new ExpandoObject();
+                        hContent.contentBytes = hostedContent.ContentBytes;
+                        hContent.contentType = hostedContent.ContentType;
+
+                        //Complex named parameter
+                        ((IDictionary<string, object>)hContent).Add("@microsoft.graph.temporaryId", hostedContent.Id);
+                        
+                        hostedContentList.Add(hContent);
+                    }
+
+                    body.hostedContents = hostedContentList;
                 }
 
                 //TODO: Add subject
@@ -91,6 +108,8 @@ namespace PnP.Core.Model.Teams
         public ITeamChatMessageMentionCollection Mentions { get => GetModelCollectionValue<ITeamChatMessageMentionCollection>(); }
 
         public ITeamChatMessageAttachmentCollection Attachments { get => GetModelCollectionValue<ITeamChatMessageAttachmentCollection>(); set => SetModelValue(value); }
+
+        public ITeamChatMessageHostedContentCollection HostedContents { get => GetModelCollectionValue<ITeamChatMessageHostedContentCollection>(); set => SetModelValue(value); }
 
         [KeyProperty(nameof(Id))]
         public override object Key { get => Id; set => Id = value.ToString(); }
