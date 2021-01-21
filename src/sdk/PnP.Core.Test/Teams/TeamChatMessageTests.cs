@@ -306,55 +306,49 @@ namespace PnP.Core.Test.Teams
             }
         }
 
-        //Disabled Test until subject support is implemented        
-        //public async Task AddChatMessageSubjectAsyncTest()
-        //{
-        //    //TestCommon.Instance.Mocking = false;
-        //    using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
-        //    {
-        //        var team = await context.Team.GetAsync(o => o.PrimaryChannel);
-        //        var channel = team.PrimaryChannel;
-        //        Assert.IsNotNull(channel);
+        [TestMethod]    
+        public async Task AddChatMessageSubjectAsyncTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var team = await context.Team.GetAsync(o => o.PrimaryChannel);
+                var channel = team.PrimaryChannel;
+                Assert.IsNotNull(channel);
 
-        //        channel = await channel.GetAsync(o => o.Messages);
-        //        var chatMessages = channel.Messages;
+                channel = await channel.GetAsync(o => o.Messages);
+                var chatMessages = channel.Messages;
 
-        //        Assert.IsNotNull(chatMessages);
+                Assert.IsNotNull(chatMessages);
 
-        //        // assume as if there are no chat messages
-        //        // There appears to be no remove option yet in this feature - so add a recognisable message
-        //        var body = $"Hello, This is a unit test (AddChatMessageSubjectAsyncTest) posting a message - PnP Rocks! - Woah...";
-        //        if (!chatMessages.Any(o => o.Body.Content == body))
-        //        {
-        //            //TODO: Fix that null
-        //            //TODO: Add Subject to method
+                // assume as if there are no chat messages
+                // There appears to be no remove option yet in this feature - so add a recognisable message
+                var body = $"Hello, This is a unit test (AddChatMessageSubjectAsyncTest) posting a message - PnP Rocks! - Woah...";
+                await chatMessages.AddAsync(body, subject: "This is a subject test");
+               
+                channel = await channel.GetAsync(o => o.Messages);
+                var updateMessages = channel.Messages;
 
-        //            await chatMessages.AddAsync(body, subject: "This is a subject test");
-        //        }
+                var message = updateMessages.Last();
+                Assert.IsNotNull(message.CreatedDateTime);
+                // Depending on regional settings this check might fail
+                //Assert.AreEqual(message.DeletedDateTime, DateTime.MinValue);
+                Assert.IsNotNull(message.Etag);
+                Assert.IsNotNull(message.Importance);
+                Assert.IsNotNull(message.LastModifiedDateTime);
+                Assert.IsNotNull(message.Locale);
+                Assert.IsNotNull(message.MessageType);
+                Assert.IsNotNull(message.WebUrl);
 
-        //        channel = await channel.GetAsync(o => o.Messages);
-        //        var updateMessages = channel.Messages;
+                Assert.IsTrue(message.IsPropertyAvailable(o => o.ReplyToId));
+                Assert.IsNull(message.ReplyToId);
+                Assert.IsTrue(message.IsPropertyAvailable(o => o.Subject));
+                Assert.IsNotNull(message.Subject);
+                Assert.IsTrue(message.IsPropertyAvailable(o => o.Summary));
+                Assert.IsNull(message.Summary);
 
-        //        var message = updateMessages.Last();
-        //        Assert.IsNotNull(message.CreatedDateTime);
-        //        // Depending on regional settings this check might fail
-        //        //Assert.AreEqual(message.DeletedDateTime, DateTime.MinValue);
-        //        Assert.IsNotNull(message.Etag);
-        //        Assert.IsNotNull(message.Importance);
-        //        Assert.IsNotNull(message.LastModifiedDateTime);
-        //        Assert.IsNotNull(message.Locale);
-        //        Assert.IsNotNull(message.MessageType);
-        //        Assert.IsNotNull(message.WebUrl);
-
-        //        Assert.IsTrue(message.IsPropertyAvailable(o => o.ReplyToId));
-        //        Assert.IsNull(message.ReplyToId);
-        //        Assert.IsTrue(message.IsPropertyAvailable(o => o.Subject));
-        //        Assert.IsNull(message.Subject);
-        //        Assert.IsTrue(message.IsPropertyAvailable(o => o.Summary));
-        //        Assert.IsNull(message.Summary);
-
-        //    }
-        //}
+            }
+        }
 
         [TestMethod]
         public async Task AddChatMessageAdaptiveAsyncTest()

@@ -61,8 +61,10 @@ namespace PnP.Core.Model.Teams
                     body.hostedContents = hostedContentList;
                 }
 
-                //TODO: Add subject
-                //body.subject = Subject;
+                if (!string.IsNullOrEmpty(Subject))
+                {
+                    body.subject = Subject;
+                }
 
                 // Serialize object to json
                 var bodyContent = JsonSerializer.Serialize(body, typeof(ExpandoObject), new JsonSerializerOptions { WriteIndented = false });

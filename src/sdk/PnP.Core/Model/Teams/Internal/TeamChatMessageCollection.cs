@@ -51,6 +51,8 @@ namespace PnP.Core.Model.Teams
                 newChannelChatMessage.HostedContents = hostedContents;
             }
 
+            newChannelChatMessage.Subject = subject;
+
             return await newChannelChatMessage.AddAsync().ConfigureAwait(false) as TeamChatMessage;
         }
 
@@ -100,6 +102,8 @@ namespace PnP.Core.Model.Teams
             {
                 newChannelChatMessage.HostedContents = hostedContents;
             }
+
+            newChannelChatMessage.Subject = subject;
 
             return await newChannelChatMessage.AddBatchAsync(batch).ConfigureAwait(false) as TeamChatMessage;
         }
