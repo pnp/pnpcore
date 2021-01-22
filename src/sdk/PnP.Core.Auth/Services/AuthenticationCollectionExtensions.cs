@@ -78,10 +78,6 @@ namespace Microsoft.Extensions.DependencyInjection
             // Add the service for ExternalAuthenticationProvider
             collection.AddTransient<IAuthenticationProvider, ExternalAuthenticationProvider>();
             collection.AddTransient<ExternalAuthenticationProvider, ExternalAuthenticationProvider>();
-
-            // Add the service for ACSAuthenticationProvider
-            collection.AddTransient<IAuthenticationProvider, ACSAuthenticationProvider>();
-            collection.AddTransient<ACSAuthenticationProvider, ACSAuthenticationProvider>();
         }
     }
 }
