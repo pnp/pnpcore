@@ -16,7 +16,20 @@ namespace PnP.Core.Model.SharePoint
 
         internal override Guid CsomType => Guid.Parse("f1d34cc0-9b50-4a78-be78-d5facfcccfb7");
 
-        public int LookupId { get => GetValue<int>(); set => SetValue(value); }
+        public int LookupId 
+        {
+            get
+            {
+                if (!HasValue())
+                {
+                    return -1;
+                }
+
+                return GetValue<int>();
+            }
+            
+            set => SetValue(value); 
+        }
 
         public string LookupValue { get => GetValue<string>(); set => SetValue(value); }
 
