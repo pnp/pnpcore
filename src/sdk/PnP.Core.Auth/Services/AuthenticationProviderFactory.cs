@@ -120,17 +120,13 @@ namespace PnP.Core.Auth.Services
             {
                 providerType = typeof(UsernamePasswordAuthenticationProvider);
             }
-            else if (option.Interactive != null)
-            {
-                providerType = typeof(InteractiveAuthenticationProvider);
-            }
             else if (option.DeviceCode != null)
             {
                 providerType = typeof(DeviceCodeAuthenticationProvider);
             }
             else
             {
-                providerType = typeof(ExternalAuthenticationProvider);
+                providerType = typeof(InteractiveAuthenticationProvider);
             }
 
             return providerType;

@@ -79,7 +79,6 @@ namespace PnP.Core.Auth.Test.Providers
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ConfigurationErrorsException))]
 #pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
         public async Task TestInteractiveConstructorNoDI_NullRedirectUri()
 #pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
@@ -92,6 +91,11 @@ namespace PnP.Core.Auth.Test.Providers
                 clientId,
                 tenantId,
                 null);
+
+            Assert.IsNotNull(provider);
+            Assert.IsNotNull(provider.ClientId);
+            Assert.IsNotNull(provider.TenantId);
+            Assert.IsNotNull(provider.RedirectUri);
         }
 
         [TestMethod]

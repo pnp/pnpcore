@@ -58,22 +58,9 @@ namespace PnP.Core.Auth
         /// <param name="options">The options to use</param>
         internal override void Init(PnPCoreAuthenticationCredentialConfigurationOptions options)
         {
-            // We need the UsernamePassword options
-            if (options.Interactive == null)
-            {
-                throw new ConfigurationErrorsException(
-                    PnPCoreAuthResources.InteractiveAuthenticationProvider_InvalidConfiguration);
-            }
-
-            // We need the RedirectUri
-            if (options.Interactive.RedirectUri == null)
-            {
-                throw new ConfigurationErrorsException(PnPCoreAuthResources.InteractiveAuthenticationProvider_InvalidRedirectUri);
-            }
-
             ClientId = !string.IsNullOrEmpty(options.ClientId) ? options.ClientId : AuthGlobals.DefaultClientId;
             TenantId = !string.IsNullOrEmpty(options.TenantId) ? options.TenantId : AuthGlobals.OrganizationsTenantId;
-            RedirectUri = options.Interactive.RedirectUri;
+            RedirectUri = options.Interactive?.RedirectUri ?? AuthGlobals.DefaultRedirectUri;
 
             // Define the authority for the current security context
             var authority = new Uri(String.Format(System.Globalization.CultureInfo.InvariantCulture,
