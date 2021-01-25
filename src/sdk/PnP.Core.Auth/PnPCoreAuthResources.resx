@@ -165,9 +165,6 @@
   <data name="InteractiveAuthenticationProvider_InvalidConfiguration" xml:space="preserve">
     <value>Invalid configuration for InteractiveAuthenticationProvider</value>
   </data>
-  <data name="InteractiveAuthenticationProvider_InvalidRedirectUri" xml:space="preserve">
-    <value>Invalid or missing value for RedirectUri in InteractiveAuthenticationProvider configuration</value>
-  </data>
   <data name="InteractiveAuthenticationProvider_LogInit" xml:space="preserve">
     <value>Initialized InteractiveAuthenticationProvider</value>
   </data>

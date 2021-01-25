@@ -205,15 +205,6 @@ namespace PnP.Core.Auth {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Invalid or missing value for RedirectUri in InteractiveAuthenticationProvider configuration.
-        /// </summary>
-        internal static string InteractiveAuthenticationProvider_InvalidRedirectUri {
-            get {
-                return ResourceManager.GetString("InteractiveAuthenticationProvider_InvalidRedirectUri", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Initialized InteractiveAuthenticationProvider.
         /// </summary>
         internal static string InteractiveAuthenticationProvider_LogInit {
