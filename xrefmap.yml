@@ -90,6 +90,12 @@ references:
   fullName.vb: PnP.Core.Auth.CredentialManagerAuthenticationProvider.CredentialManagerAuthenticationProvider(ILogger(Of PnP.Core.Auth.OAuthAuthenticationProvider))
   nameWithType: CredentialManagerAuthenticationProvider.CredentialManagerAuthenticationProvider(ILogger<OAuthAuthenticationProvider>)
   nameWithType.vb: CredentialManagerAuthenticationProvider.CredentialManagerAuthenticationProvider(ILogger(Of OAuthAuthenticationProvider))
+- uid: PnP.Core.Auth.CredentialManagerAuthenticationProvider.#ctor(System.String,System.String,PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationCredentialManagerOptions)
+  name: CredentialManagerAuthenticationProvider(String, String, PnPCoreAuthenticationCredentialManagerOptions)
+  href: api/PnP.Core.Auth.CredentialManagerAuthenticationProvider.html#PnP_Core_Auth_CredentialManagerAuthenticationProvider__ctor_System_String_System_String_PnP_Core_Auth_Services_Builder_Configuration_PnPCoreAuthenticationCredentialManagerOptions_
+  commentId: M:PnP.Core.Auth.CredentialManagerAuthenticationProvider.#ctor(System.String,System.String,PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationCredentialManagerOptions)
+  fullName: PnP.Core.Auth.CredentialManagerAuthenticationProvider.CredentialManagerAuthenticationProvider(System.String, System.String, PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationCredentialManagerOptions)
+  nameWithType: CredentialManagerAuthenticationProvider.CredentialManagerAuthenticationProvider(String, String, PnPCoreAuthenticationCredentialManagerOptions)
 - uid: PnP.Core.Auth.CredentialManagerAuthenticationProvider.#ctor(System.String,System.String,System.String)
   name: CredentialManagerAuthenticationProvider(String, String, String)
   href: api/PnP.Core.Auth.CredentialManagerAuthenticationProvider.html#PnP_Core_Auth_CredentialManagerAuthenticationProvider__ctor_System_String_System_String_System_String_
@@ -166,6 +172,15 @@ references:
   fullName.vb: PnP.Core.Auth.DeviceCodeAuthenticationProvider.DeviceCodeAuthenticationProvider(ILogger(Of PnP.Core.Auth.OAuthAuthenticationProvider))
   nameWithType: DeviceCodeAuthenticationProvider.DeviceCodeAuthenticationProvider(ILogger<OAuthAuthenticationProvider>)
   nameWithType.vb: DeviceCodeAuthenticationProvider.DeviceCodeAuthenticationProvider(ILogger(Of OAuthAuthenticationProvider))
+- uid: PnP.Core.Auth.DeviceCodeAuthenticationProvider.#ctor(System.String,System.String,PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationDeviceCodeOptions,Action{PnP.Core.Auth.DeviceCodeNotification})
+  name: DeviceCodeAuthenticationProvider(String, String, PnPCoreAuthenticationDeviceCodeOptions, Action<DeviceCodeNotification>)
+  href: api/PnP.Core.Auth.DeviceCodeAuthenticationProvider.html#PnP_Core_Auth_DeviceCodeAuthenticationProvider__ctor_System_String_System_String_PnP_Core_Auth_Services_Builder_Configuration_PnPCoreAuthenticationDeviceCodeOptions_Action_PnP_Core_Auth_DeviceCodeNotification__
+  commentId: M:PnP.Core.Auth.DeviceCodeAuthenticationProvider.#ctor(System.String,System.String,PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationDeviceCodeOptions,Action{PnP.Core.Auth.DeviceCodeNotification})
+  name.vb: DeviceCodeAuthenticationProvider(String, String, PnPCoreAuthenticationDeviceCodeOptions, Action(Of DeviceCodeNotification))
+  fullName: PnP.Core.Auth.DeviceCodeAuthenticationProvider.DeviceCodeAuthenticationProvider(System.String, System.String, PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationDeviceCodeOptions, Action<PnP.Core.Auth.DeviceCodeNotification>)
+  fullName.vb: PnP.Core.Auth.DeviceCodeAuthenticationProvider.DeviceCodeAuthenticationProvider(System.String, System.String, PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationDeviceCodeOptions, Action(Of PnP.Core.Auth.DeviceCodeNotification))
+  nameWithType: DeviceCodeAuthenticationProvider.DeviceCodeAuthenticationProvider(String, String, PnPCoreAuthenticationDeviceCodeOptions, Action<DeviceCodeNotification>)
+  nameWithType.vb: DeviceCodeAuthenticationProvider.DeviceCodeAuthenticationProvider(String, String, PnPCoreAuthenticationDeviceCodeOptions, Action(Of DeviceCodeNotification))
 - uid: PnP.Core.Auth.DeviceCodeAuthenticationProvider.#ctor(System.String,System.String,Uri,Action{PnP.Core.Auth.DeviceCodeNotification})
   name: DeviceCodeAuthenticationProvider(String, String, Uri, Action<DeviceCodeNotification>)
   href: api/PnP.Core.Auth.DeviceCodeAuthenticationProvider.html#PnP_Core_Auth_DeviceCodeAuthenticationProvider__ctor_System_String_System_String_Uri_Action_PnP_Core_Auth_DeviceCodeNotification__
@@ -382,6 +397,12 @@ references:
   fullName.vb: PnP.Core.Auth.InteractiveAuthenticationProvider.InteractiveAuthenticationProvider(ILogger(Of PnP.Core.Auth.OAuthAuthenticationProvider))
   nameWithType: InteractiveAuthenticationProvider.InteractiveAuthenticationProvider(ILogger<OAuthAuthenticationProvider>)
   nameWithType.vb: InteractiveAuthenticationProvider.InteractiveAuthenticationProvider(ILogger(Of OAuthAuthenticationProvider))
+- uid: PnP.Core.Auth.InteractiveAuthenticationProvider.#ctor(System.String,System.String,PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationInteractiveOptions)
+  name: InteractiveAuthenticationProvider(String, String, PnPCoreAuthenticationInteractiveOptions)
+  href: api/PnP.Core.Auth.InteractiveAuthenticationProvider.html#PnP_Core_Auth_InteractiveAuthenticationProvider__ctor_System_String_System_String_PnP_Core_Auth_Services_Builder_Configuration_PnPCoreAuthenticationInteractiveOptions_
+  commentId: M:PnP.Core.Auth.InteractiveAuthenticationProvider.#ctor(System.String,System.String,PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationInteractiveOptions)
+  fullName: PnP.Core.Auth.InteractiveAuthenticationProvider.InteractiveAuthenticationProvider(System.String, System.String, PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationInteractiveOptions)
+  nameWithType: InteractiveAuthenticationProvider.InteractiveAuthenticationProvider(String, String, PnPCoreAuthenticationInteractiveOptions)
 - uid: PnP.Core.Auth.InteractiveAuthenticationProvider.#ctor(System.String,System.String,Uri)
   name: InteractiveAuthenticationProvider(String, String, Uri)
   href: api/PnP.Core.Auth.InteractiveAuthenticationProvider.html#PnP_Core_Auth_InteractiveAuthenticationProvider__ctor_System_String_System_String_Uri_
@@ -560,6 +581,15 @@ references:
   fullName.vb: PnP.Core.Auth.OnBehalfOfAuthenticationProvider.OnBehalfOfAuthenticationProvider(ILogger(Of PnP.Core.Auth.OAuthAuthenticationProvider))
   nameWithType: OnBehalfOfAuthenticationProvider.OnBehalfOfAuthenticationProvider(ILogger<OAuthAuthenticationProvider>)
   nameWithType.vb: OnBehalfOfAuthenticationProvider.OnBehalfOfAuthenticationProvider(ILogger(Of OAuthAuthenticationProvider))
+- uid: PnP.Core.Auth.OnBehalfOfAuthenticationProvider.#ctor(System.String,System.String,PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationOnBehalfOfOptions,Func{System.String})
+  name: OnBehalfOfAuthenticationProvider(String, String, PnPCoreAuthenticationOnBehalfOfOptions, Func<String>)
+  href: api/PnP.Core.Auth.OnBehalfOfAuthenticationProvider.html#PnP_Core_Auth_OnBehalfOfAuthenticationProvider__ctor_System_String_System_String_PnP_Core_Auth_Services_Builder_Configuration_PnPCoreAuthenticationOnBehalfOfOptions_Func_System_String__
+  commentId: M:PnP.Core.Auth.OnBehalfOfAuthenticationProvider.#ctor(System.String,System.String,PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationOnBehalfOfOptions,Func{System.String})
+  name.vb: OnBehalfOfAuthenticationProvider(String, String, PnPCoreAuthenticationOnBehalfOfOptions, Func(Of String))
+  fullName: PnP.Core.Auth.OnBehalfOfAuthenticationProvider.OnBehalfOfAuthenticationProvider(System.String, System.String, PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationOnBehalfOfOptions, Func<System.String>)
+  fullName.vb: PnP.Core.Auth.OnBehalfOfAuthenticationProvider.OnBehalfOfAuthenticationProvider(System.String, System.String, PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationOnBehalfOfOptions, Func(Of System.String))
+  nameWithType: OnBehalfOfAuthenticationProvider.OnBehalfOfAuthenticationProvider(String, String, PnPCoreAuthenticationOnBehalfOfOptions, Func<String>)
+  nameWithType.vb: OnBehalfOfAuthenticationProvider.OnBehalfOfAuthenticationProvider(String, String, PnPCoreAuthenticationOnBehalfOfOptions, Func(Of String))
 - uid: PnP.Core.Auth.OnBehalfOfAuthenticationProvider.#ctor(System.String,System.String,SecureString,Func{System.String})
   name: OnBehalfOfAuthenticationProvider(String, String, SecureString, Func<String>)
   href: api/PnP.Core.Auth.OnBehalfOfAuthenticationProvider.html#PnP_Core_Auth_OnBehalfOfAuthenticationProvider__ctor_System_String_System_String_SecureString_Func_System_String__
@@ -754,6 +784,38 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Auth.Services.Builder.Configuration.AuthenticationProvidersOptionsConfigurator.Configure
   nameWithType: AuthenticationProvidersOptionsConfigurator.Configure
+- uid: PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationBaseOptions
+  name: PnPCoreAuthenticationBaseOptions
+  href: api/PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationBaseOptions.html
+  commentId: T:PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationBaseOptions
+  fullName: PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationBaseOptions
+  nameWithType: PnPCoreAuthenticationBaseOptions
+- uid: PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationBaseOptions.AuthorityUri
+  name: AuthorityUri
+  href: api/PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationBaseOptions.html#PnP_Core_Auth_Services_Builder_Configuration_PnPCoreAuthenticationBaseOptions_AuthorityUri
+  commentId: P:PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationBaseOptions.AuthorityUri
+  fullName: PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationBaseOptions.AuthorityUri
+  nameWithType: PnPCoreAuthenticationBaseOptions.AuthorityUri
+- uid: PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationBaseOptions.AuthorityUri*
+  name: AuthorityUri
+  href: api/PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationBaseOptions.html#PnP_Core_Auth_Services_Builder_Configuration_PnPCoreAuthenticationBaseOptions_AuthorityUri_
+  commentId: Overload:PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationBaseOptions.AuthorityUri
+  isSpec: "True"
+  fullName: PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationBaseOptions.AuthorityUri
+  nameWithType: PnPCoreAuthenticationBaseOptions.AuthorityUri
+- uid: PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationBaseOptions.RedirectUri
+  name: RedirectUri
+  href: api/PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationBaseOptions.html#PnP_Core_Auth_Services_Builder_Configuration_PnPCoreAuthenticationBaseOptions_RedirectUri
+  commentId: P:PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationBaseOptions.RedirectUri
+  fullName: PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationBaseOptions.RedirectUri
+  nameWithType: PnPCoreAuthenticationBaseOptions.RedirectUri
+- uid: PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationBaseOptions.RedirectUri*
+  name: RedirectUri
+  href: api/PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationBaseOptions.html#PnP_Core_Auth_Services_Builder_Configuration_PnPCoreAuthenticationBaseOptions_RedirectUri_
+  commentId: Overload:PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationBaseOptions.RedirectUri
+  isSpec: "True"
+  fullName: PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationBaseOptions.RedirectUri
+  nameWithType: PnPCoreAuthenticationBaseOptions.RedirectUri
 - uid: PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationCredentialConfigurationOptions
   name: PnPCoreAuthenticationCredentialConfigurationOptions
   href: api/PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationCredentialConfigurationOptions.html
@@ -927,38 +989,12 @@ references:
   commentId: T:PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationDeviceCodeOptions
   fullName: PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationDeviceCodeOptions
   nameWithType: PnPCoreAuthenticationDeviceCodeOptions
-- uid: PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationDeviceCodeOptions.RedirectUri
-  name: RedirectUri
-  href: api/PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationDeviceCodeOptions.html#PnP_Core_Auth_Services_Builder_Configuration_PnPCoreAuthenticationDeviceCodeOptions_RedirectUri
-  commentId: P:PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationDeviceCodeOptions.RedirectUri
-  fullName: PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationDeviceCodeOptions.RedirectUri
-  nameWithType: PnPCoreAuthenticationDeviceCodeOptions.RedirectUri
-- uid: PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationDeviceCodeOptions.RedirectUri*
-  name: RedirectUri
-  href: api/PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationDeviceCodeOptions.html#PnP_Core_Auth_Services_Builder_Configuration_PnPCoreAuthenticationDeviceCodeOptions_RedirectUri_
-  commentId: Overload:PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationDeviceCodeOptions.RedirectUri
-  isSpec: "True"
-  fullName: PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationDeviceCodeOptions.RedirectUri
-  nameWithType: PnPCoreAuthenticationDeviceCodeOptions.RedirectUri
 - uid: PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationInteractiveOptions
   name: PnPCoreAuthenticationInteractiveOptions
   href: api/PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationInteractiveOptions.html
   commentId: T:PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationInteractiveOptions
   fullName: PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationInteractiveOptions
   nameWithType: PnPCoreAuthenticationInteractiveOptions
-- uid: PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationInteractiveOptions.RedirectUri
-  name: RedirectUri
-  href: api/PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationInteractiveOptions.html#PnP_Core_Auth_Services_Builder_Configuration_PnPCoreAuthenticationInteractiveOptions_RedirectUri
-  commentId: P:PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationInteractiveOptions.RedirectUri
-  fullName: PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationInteractiveOptions.RedirectUri
-  nameWithType: PnPCoreAuthenticationInteractiveOptions.RedirectUri
-- uid: PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationInteractiveOptions.RedirectUri*
-  name: RedirectUri
-  href: api/PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationInteractiveOptions.html#PnP_Core_Auth_Services_Builder_Configuration_PnPCoreAuthenticationInteractiveOptions_RedirectUri_
-  commentId: Overload:PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationInteractiveOptions.RedirectUri
-  isSpec: "True"
-  fullName: PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationInteractiveOptions.RedirectUri
-  nameWithType: PnPCoreAuthenticationInteractiveOptions.RedirectUri
 - uid: PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationOnBehalfOfOptions
   name: PnPCoreAuthenticationOnBehalfOfOptions
   href: api/PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationOnBehalfOfOptions.html
@@ -1112,6 +1148,19 @@ references:
   commentId: T:PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationX509CertificateOptions
   fullName: PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationX509CertificateOptions
   nameWithType: PnPCoreAuthenticationX509CertificateOptions
+- uid: PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationX509CertificateOptions.Certificate
+  name: Certificate
+  href: api/PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationX509CertificateOptions.html#PnP_Core_Auth_Services_Builder_Configuration_PnPCoreAuthenticationX509CertificateOptions_Certificate
+  commentId: P:PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationX509CertificateOptions.Certificate
+  fullName: PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationX509CertificateOptions.Certificate
+  nameWithType: PnPCoreAuthenticationX509CertificateOptions.Certificate
+- uid: PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationX509CertificateOptions.Certificate*
+  name: Certificate
+  href: api/PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationX509CertificateOptions.html#PnP_Core_Auth_Services_Builder_Configuration_PnPCoreAuthenticationX509CertificateOptions_Certificate_
+  commentId: Overload:PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationX509CertificateOptions.Certificate
+  isSpec: "True"
+  fullName: PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationX509CertificateOptions.Certificate
+  nameWithType: PnPCoreAuthenticationX509CertificateOptions.Certificate
 - uid: PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationX509CertificateOptions.StoreLocation
   name: StoreLocation
   href: api/PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationX509CertificateOptions.html#PnP_Core_Auth_Services_Builder_Configuration_PnPCoreAuthenticationX509CertificateOptions_StoreLocation
@@ -1243,6 +1292,12 @@ references:
   fullName.vb: PnP.Core.Auth.UsernamePasswordAuthenticationProvider.UsernamePasswordAuthenticationProvider(ILogger(Of PnP.Core.Auth.OAuthAuthenticationProvider))
   nameWithType: UsernamePasswordAuthenticationProvider.UsernamePasswordAuthenticationProvider(ILogger<OAuthAuthenticationProvider>)
   nameWithType.vb: UsernamePasswordAuthenticationProvider.UsernamePasswordAuthenticationProvider(ILogger(Of OAuthAuthenticationProvider))
+- uid: PnP.Core.Auth.UsernamePasswordAuthenticationProvider.#ctor(System.String,System.String,PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationUsernamePasswordOptions)
+  name: UsernamePasswordAuthenticationProvider(String, String, PnPCoreAuthenticationUsernamePasswordOptions)
+  href: api/PnP.Core.Auth.UsernamePasswordAuthenticationProvider.html#PnP_Core_Auth_UsernamePasswordAuthenticationProvider__ctor_System_String_System_String_PnP_Core_Auth_Services_Builder_Configuration_PnPCoreAuthenticationUsernamePasswordOptions_
+  commentId: M:PnP.Core.Auth.UsernamePasswordAuthenticationProvider.#ctor(System.String,System.String,PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationUsernamePasswordOptions)
+  fullName: PnP.Core.Auth.UsernamePasswordAuthenticationProvider.UsernamePasswordAuthenticationProvider(System.String, System.String, PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationUsernamePasswordOptions)
+  nameWithType: UsernamePasswordAuthenticationProvider.UsernamePasswordAuthenticationProvider(String, String, PnPCoreAuthenticationUsernamePasswordOptions)
 - uid: PnP.Core.Auth.UsernamePasswordAuthenticationProvider.#ctor(System.String,System.String,System.String,SecureString)
   name: UsernamePasswordAuthenticationProvider(String, String, String, SecureString)
   href: api/PnP.Core.Auth.UsernamePasswordAuthenticationProvider.html#PnP_Core_Auth_UsernamePasswordAuthenticationProvider__ctor_System_String_System_String_System_String_SecureString_
@@ -1332,6 +1387,12 @@ references:
   fullName.vb: PnP.Core.Auth.X509CertificateAuthenticationProvider.X509CertificateAuthenticationProvider(ILogger(Of PnP.Core.Auth.OAuthAuthenticationProvider))
   nameWithType: X509CertificateAuthenticationProvider.X509CertificateAuthenticationProvider(ILogger<OAuthAuthenticationProvider>)
   nameWithType.vb: X509CertificateAuthenticationProvider.X509CertificateAuthenticationProvider(ILogger(Of OAuthAuthenticationProvider))
+- uid: PnP.Core.Auth.X509CertificateAuthenticationProvider.#ctor(System.String,System.String,PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationX509CertificateOptions)
+  name: X509CertificateAuthenticationProvider(String, String, PnPCoreAuthenticationX509CertificateOptions)
+  href: api/PnP.Core.Auth.X509CertificateAuthenticationProvider.html#PnP_Core_Auth_X509CertificateAuthenticationProvider__ctor_System_String_System_String_PnP_Core_Auth_Services_Builder_Configuration_PnPCoreAuthenticationX509CertificateOptions_
+  commentId: M:PnP.Core.Auth.X509CertificateAuthenticationProvider.#ctor(System.String,System.String,PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationX509CertificateOptions)
+  fullName: PnP.Core.Auth.X509CertificateAuthenticationProvider.X509CertificateAuthenticationProvider(System.String, System.String, PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationX509CertificateOptions)
+  nameWithType: X509CertificateAuthenticationProvider.X509CertificateAuthenticationProvider(String, String, PnPCoreAuthenticationX509CertificateOptions)
 - uid: PnP.Core.Auth.X509CertificateAuthenticationProvider.#ctor(System.String,System.String,StoreName,StoreLocation,System.String)
   name: X509CertificateAuthenticationProvider(String, String, StoreName, StoreLocation, String)
   href: api/PnP.Core.Auth.X509CertificateAuthenticationProvider.html#PnP_Core_Auth_X509CertificateAuthenticationProvider__ctor_System_String_System_String_StoreName_StoreLocation_System_String_

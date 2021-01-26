@@ -80,7 +80,7 @@
           <div class="col-md-10">
             <article class="content wrap" id="_content" data-uid="PnP.Core.Auth.DeviceCodeAuthenticationProvider">
                   <div class="contribution-panel mobile-hide pull-right">
-                      <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Auth/Public/DeviceCodeAuthenticationProvider.cs/#L16" title="View Source" class="view-source-lg"><i class="fa fa-code"></i></a>
+                      <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Auth/Public/DeviceCodeAuthenticationProvider.cs/#L17" title="View Source" class="view-source-lg"><i class="fa fa-code"></i></a>
                       <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Auth_DeviceCodeAuthenticationProvider.md&amp;value=---%0Auid%3A%20PnP.Core.Auth.DeviceCodeAuthenticationProvider%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc" class="improve-doc-lg"><i class="glyphicon glyphicon-pencil"></i></a>
                   </div>
                       <h1 id="PnP_Core_Auth_DeviceCodeAuthenticationProvider" data-uid="PnP.Core.Auth.DeviceCodeAuthenticationProvider">Class DeviceCodeAuthenticationProvider
@@ -133,7 +133,7 @@
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Auth_DeviceCodeAuthenticationProvider__ctor_ILogger_PnP_Core_Auth_OAuthAuthenticationProvider__.md&amp;value=---%0Auid%3A%20PnP.Core.Auth.DeviceCodeAuthenticationProvider.%23ctor(ILogger%7BPnP.Core.Auth.OAuthAuthenticationProvider%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Auth/Public/DeviceCodeAuthenticationProvider.cs/#L58" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Auth/Public/DeviceCodeAuthenticationProvider.cs/#L72" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Auth_DeviceCodeAuthenticationProvider__ctor_" data-uid="PnP.Core.Auth.DeviceCodeAuthenticationProvider.#ctor*"></a>
@@ -176,10 +176,80 @@
   
   <span class="small pull-right mobile-hide">
     <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Auth_DeviceCodeAuthenticationProvider__ctor_System_String_System_String_PnP_Core_Auth_Services_Builder_Configuration_PnPCoreAuthenticationDeviceCodeOptions_Action_PnP_Core_Auth_DeviceCodeNotification__.md&amp;value=---%0Auid%3A%20PnP.Core.Auth.DeviceCodeAuthenticationProvider.%23ctor(System.String%2CSystem.String%2CPnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationDeviceCodeOptions%2CAction%7BPnP.Core.Auth.DeviceCodeNotification%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Auth/Public/DeviceCodeAuthenticationProvider.cs/#L55" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Auth_DeviceCodeAuthenticationProvider__ctor_" data-uid="PnP.Core.Auth.DeviceCodeAuthenticationProvider.#ctor*"></a>
+  
+  <h4 id="PnP_Core_Auth_DeviceCodeAuthenticationProvider__ctor_System_String_System_String_PnP_Core_Auth_Services_Builder_Configuration_PnPCoreAuthenticationDeviceCodeOptions_Action_PnP_Core_Auth_DeviceCodeNotification__" data-uid="PnP.Core.Auth.DeviceCodeAuthenticationProvider.#ctor(System.String,System.String,PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationDeviceCodeOptions,Action{PnP.Core.Auth.DeviceCodeNotification})"><a href="#collapsible-PnP_Core_Auth_DeviceCodeAuthenticationProvider__ctor_System_String_System_String_PnP_Core_Auth_Services_Builder_Configuration_PnPCoreAuthenticationDeviceCodeOptions_Action_PnP_Core_Auth_DeviceCodeNotification__" class="expander" data-toggle="collapse">DeviceCodeAuthenticationProvider(String, String, PnPCoreAuthenticationDeviceCodeOptions, Action&lt;DeviceCodeNotification&gt;)</a></h4>
+  
+  <div id="collapsible-PnP_Core_Auth_DeviceCodeAuthenticationProvider__ctor_System_String_System_String_PnP_Core_Auth_Services_Builder_Configuration_PnPCoreAuthenticationDeviceCodeOptions_Action_PnP_Core_Auth_DeviceCodeNotification__" class="collapse in">
+  <div class="markdown level1 summary"><p>Public constructor for external consumers of the library</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DeviceCodeAuthenticationProvider(string clientId, string tenantId, PnPCoreAuthenticationDeviceCodeOptions options, Action&lt;DeviceCodeNotification&gt; deviceCodeVerification)</code></pre>
+  </div>
+
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></span>
+        <span class="parametername">clientId</span>
+        <p><p>The Client ID for the Authentication Provider</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></span>
+        <span class="parametername">tenantId</span>
+        <p><p>The Tenant ID for the Authentication Provider</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationDeviceCodeOptions.html">PnPCoreAuthenticationDeviceCodeOptions</a></span>
+        <span class="parametername">options</span>
+        <p><p>Options for the authentication provider</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><span class="xref">Action</span>&lt;<a class="xref" href="PnP.Core.Auth.DeviceCodeNotification.html">DeviceCodeNotification</a>&gt;</span>
+        <span class="parametername">deviceCodeVerification</span>
+        <p><p>External action to manage the Device Code verification</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Auth_DeviceCodeAuthenticationProvider__ctor_System_String_System_String_Uri_Action_PnP_Core_Auth_DeviceCodeNotification__.md&amp;value=---%0Auid%3A%20PnP.Core.Auth.DeviceCodeAuthenticationProvider.%23ctor(System.String%2CSystem.String%2CUri%2CAction%7BPnP.Core.Auth.DeviceCodeNotification%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Auth/Public/DeviceCodeAuthenticationProvider.cs/#L38" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Auth/Public/DeviceCodeAuthenticationProvider.cs/#L39" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Auth_DeviceCodeAuthenticationProvider__ctor_" data-uid="PnP.Core.Auth.DeviceCodeAuthenticationProvider.#ctor*"></a>
@@ -210,7 +280,7 @@
       <td>
         <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></span>
         <span class="parametername">tenantId</span>
-        <p><p>The Tenand ID for the Authentication Provider</p>
+        <p><p>The Tenant ID for the Authentication Provider</p>
 </p>
       </td>
     </tr>
@@ -251,7 +321,7 @@
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Auth_DeviceCodeAuthenticationProvider_DeviceCodeVerification.md&amp;value=---%0Auid%3A%20PnP.Core.Auth.DeviceCodeAuthenticationProvider.DeviceCodeVerification%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Auth/Public/DeviceCodeAuthenticationProvider.cs/#L26" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Auth/Public/DeviceCodeAuthenticationProvider.cs/#L27" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Auth_DeviceCodeAuthenticationProvider_DeviceCodeVerification_" data-uid="PnP.Core.Auth.DeviceCodeAuthenticationProvider.DeviceCodeVerification*"></a>
@@ -295,7 +365,7 @@
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Auth_DeviceCodeAuthenticationProvider_RedirectUri.md&amp;value=---%0Auid%3A%20PnP.Core.Auth.DeviceCodeAuthenticationProvider.RedirectUri%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Auth/Public/DeviceCodeAuthenticationProvider.cs/#L21" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Auth/Public/DeviceCodeAuthenticationProvider.cs/#L22" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Auth_DeviceCodeAuthenticationProvider_RedirectUri_" data-uid="PnP.Core.Auth.DeviceCodeAuthenticationProvider.RedirectUri*"></a>
@@ -341,7 +411,7 @@
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Auth_DeviceCodeAuthenticationProvider_AuthenticateRequestAsync_Uri_HttpRequestMessage_.md&amp;value=---%0Auid%3A%20PnP.Core.Auth.DeviceCodeAuthenticationProvider.AuthenticateRequestAsync(Uri%2CHttpRequestMessage)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Auth/Public/DeviceCodeAuthenticationProvider.cs/#L108" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Auth/Public/DeviceCodeAuthenticationProvider.cs/#L119" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Auth_DeviceCodeAuthenticationProvider_AuthenticateRequestAsync_" data-uid="PnP.Core.Auth.DeviceCodeAuthenticationProvider.AuthenticateRequestAsync*"></a>
@@ -407,7 +477,7 @@
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Auth_DeviceCodeAuthenticationProvider_GetAccessTokenAsync_Uri_.md&amp;value=---%0Auid%3A%20PnP.Core.Auth.DeviceCodeAuthenticationProvider.GetAccessTokenAsync(Uri)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Auth/Public/DeviceCodeAuthenticationProvider.cs/#L189" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Auth/Public/DeviceCodeAuthenticationProvider.cs/#L200" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Auth_DeviceCodeAuthenticationProvider_GetAccessTokenAsync_" data-uid="PnP.Core.Auth.DeviceCodeAuthenticationProvider.GetAccessTokenAsync*"></a>
@@ -465,7 +535,7 @@
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Auth_DeviceCodeAuthenticationProvider_GetAccessTokenAsync_Uri_System_String___.md&amp;value=---%0Auid%3A%20PnP.Core.Auth.DeviceCodeAuthenticationProvider.GetAccessTokenAsync(Uri%2CSystem.String%5B%5D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Auth/Public/DeviceCodeAuthenticationProvider.cs/#L130" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Auth/Public/DeviceCodeAuthenticationProvider.cs/#L141" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Auth_DeviceCodeAuthenticationProvider_GetAccessTokenAsync_" data-uid="PnP.Core.Auth.DeviceCodeAuthenticationProvider.GetAccessTokenAsync*"></a>
@@ -488,7 +558,7 @@
       <td>
         <span class="pull-right"><span class="xref">Uri</span></span>
         <span class="parametername">resource</span>
-        <p><p>Resource to request an access token for</p>
+        <p><p>Resource to request an access token for (unused)</p>
 </p>
       </td>
     </tr>
