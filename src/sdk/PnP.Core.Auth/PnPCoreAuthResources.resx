@@ -141,9 +141,6 @@
   <data name="DeviceCodeAuthenticationProvider_InvalidConfiguration" xml:space="preserve">
     <value>Invalid configuration for DeviceCodeAuthenticationProvider</value>
   </data>
-  <data name="DeviceCodeAuthenticationProvider_InvalidRedirectUri" xml:space="preserve">
-    <value>Invalid or missing value for RedirectUri in DeviceCodeAuthenticationProvider configuration</value>
-  </data>
   <data name="DeviceCodeAuthenticationProvider_LogInit" xml:space="preserve">
     <value>Initialized DeviceCodeAuthenticationProvider</value>
   </data>

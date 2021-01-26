@@ -80,29 +80,23 @@ namespace PnP.Core.Auth
         /// <param name="options">The options to use</param>
         internal override void Init(PnPCoreAuthenticationCredentialConfigurationOptions options)
         {
-            // We need the UsernamePassword options
+            // We need the DeviceCode options
             if (options.DeviceCode == null)
             {
                 throw new ConfigurationErrorsException(
                     PnPCoreAuthResources.DeviceCodeAuthenticationProvider_InvalidConfiguration);
             }
 
-            // We need the RedirectUri
-            if (options.DeviceCode.RedirectUri == null)
-            {
-                throw new ConfigurationErrorsException(PnPCoreAuthResources.DeviceCodeAuthenticationProvider_InvalidRedirectUri);
-            }
-
             ClientId = !string.IsNullOrEmpty(options.ClientId) ? options.ClientId : AuthGlobals.DefaultClientId;
             TenantId = !string.IsNullOrEmpty(options.TenantId) ? options.TenantId : AuthGlobals.OrganizationsTenantId;
-            RedirectUri = options.DeviceCode.RedirectUri;
+            RedirectUri = options.DeviceCode.RedirectUri ?? AuthGlobals.DefaultRedirectUri;
 
             // Build the MSAL client
             publicClientApplication = PublicClientApplicationBuilder
                 .Create(ClientId)
                 .WithPnPAdditionalAuthenticationSettings(
                     options.DeviceCode.AuthorityUri,
-                    options.DeviceCode.RedirectUri,
+                    RedirectUri,
                     TenantId)
                 .Build();
 
