@@ -72,7 +72,7 @@ namespace PnP.Core.Auth.Services.Builder.Configuration
         public string ClientId { get; set; }
 
         /// <summary>
-        /// The Tenand ID for the application, can be null
+        /// The Tenant ID for the application, can be null
         /// </summary>
         public string TenantId { get; set; }
 
@@ -110,7 +110,7 @@ namespace PnP.Core.Auth.Services.Builder.Configuration
     /// <summary>
     /// Options for the X509CertificateAuthenticationProvider
     /// </summary>
-    public class PnPCoreAuthenticationX509CertificateOptions
+    public class PnPCoreAuthenticationX509CertificateOptions : PnPCoreAuthenticationBaseOptions
     {
         /// <summary>
         /// The name of the certificate store
@@ -126,12 +126,17 @@ namespace PnP.Core.Auth.Services.Builder.Configuration
         /// The thumbprint of the certificate
         /// </summary>
         public string Thumbprint { get; set; }
+
+        /// <summary>
+        /// Certificate can be set directly, if required
+        /// </summary>
+        public X509Certificate2 Certificate { get; set; }
     }
 
     /// <summary>
     /// Options for the CredentialManagerAuthenticationProvider
     /// </summary>
-    public class PnPCoreAuthenticationCredentialManagerOptions
+    public class PnPCoreAuthenticationCredentialManagerOptions : PnPCoreAuthenticationBaseOptions
     {
         /// <summary>
         /// The name of the Windows Credential Manager settings to use
@@ -142,7 +147,7 @@ namespace PnP.Core.Auth.Services.Builder.Configuration
     /// <summary>
     /// Options for the OnBehalfOfAuthenticationProvider
     /// </summary>
-    public class PnPCoreAuthenticationOnBehalfOfOptions
+    public class PnPCoreAuthenticationOnBehalfOfOptions : PnPCoreAuthenticationBaseOptions
     {
         /// <summary>
         /// The ClientSecret to authenticate the app with ClientId
@@ -168,7 +173,7 @@ namespace PnP.Core.Auth.Services.Builder.Configuration
     /// <summary>
     /// Options for the UsernamePasswordAuthenticationProvider
     /// </summary>
-    public class PnPCoreAuthenticationUsernamePasswordOptions
+    public class PnPCoreAuthenticationUsernamePasswordOptions : PnPCoreAuthenticationBaseOptions
     {
         /// <summary>
         /// The username for authentication
@@ -181,25 +186,30 @@ namespace PnP.Core.Auth.Services.Builder.Configuration
         public string Password { get; set; }
     }
 
+
     /// <summary>
-    /// Options for the UsernamePasswordAuthenticationProvider
+    /// Options for the InteractiveAuthenticationProvider
     /// </summary>
-    public class PnPCoreAuthenticationInteractiveOptions
-    {
-        /// <summary>
-        /// The Redirect URI for the authentication flow
-        /// </summary>
-        public Uri RedirectUri { get; set; }
-    }
+    public class PnPCoreAuthenticationInteractiveOptions : PnPCoreAuthenticationBaseOptions { }
 
     /// <summary>
     /// Options for the DeviceCodeAuthenticationProvider
     /// </summary>
-    public class PnPCoreAuthenticationDeviceCodeOptions
+    public class PnPCoreAuthenticationDeviceCodeOptions : PnPCoreAuthenticationBaseOptions { }
+
+    /// <summary>
+    /// Options for the DeviceCodeAuthenticationProvider
+    /// </summary>
+    public abstract class PnPCoreAuthenticationBaseOptions
     {
         /// <summary>
         /// The Redirect URI for the authentication flow
         /// </summary>
         public Uri RedirectUri { get; set; }
+
+        /// <summary>
+        /// The Authority URI for the authentication flow
+        /// </summary>
+        public Uri AuthorityUri { get; set; }
     }
 }

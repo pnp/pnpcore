@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using Microsoft.Identity.Client;
 using PnP.Core.Auth.Services.Builder.Configuration;
+using PnP.Core.Auth.Utilities;
 using System;
 using System.Configuration;
 using System.Linq;
@@ -36,22 +37,34 @@ namespace PnP.Core.Auth
         /// Public constructor for external consumers of the library
         /// </summary>
         /// <param name="clientId">The Client ID for the Authentication Provider</param>
-        /// <param name="tenantId">The Tenand ID for the Authentication Provider</param>
+        /// <param name="tenantId">The Tenant ID for the Authentication Provider</param>
         /// <param name="username">The Username for authentication</param>
         /// <param name="password">The Password for authentication</param>
         public UsernamePasswordAuthenticationProvider(string clientId, string tenantId,
             string username, SecureString password)
+            : this(clientId, tenantId, new PnPCoreAuthenticationUsernamePasswordOptions
+            {
+                Username = username,
+                Password = password?.ToInsecureString()
+            })
+        {
+        }
+
+        /// <summary>
+        /// Public constructor for external consumers of the library
+        /// </summary>
+        /// <param name="clientId">The Client ID for the Authentication Provider</param>
+        /// <param name="tenantId">The Tenant ID for the Authentication Provider</param>
+        /// <param name="options">Options for the authentication provider</param>
+        public UsernamePasswordAuthenticationProvider(string clientId, string tenantId,
+            PnPCoreAuthenticationUsernamePasswordOptions options)
             : this(null)
         {
             Init(new PnPCoreAuthenticationCredentialConfigurationOptions
             {
                 ClientId = clientId,
                 TenantId = tenantId,
-                UsernamePassword = new PnPCoreAuthenticationUsernamePasswordOptions
-                {
-                    Username = username,
-                    Password = password?.ToInsecureString()
-                }
+                UsernamePassword = options
             });
         }
 
@@ -94,15 +107,13 @@ namespace PnP.Core.Auth
             Username = options.UsernamePassword.Username;
             Password = options.UsernamePassword.Password.ToSecureString();
 
-            // Define the authority for the current security context
-            var authority = new Uri(String.Format(System.Globalization.CultureInfo.InvariantCulture,
-                AuthGlobals.AuthorityFormat,
-                TenantId));
-
             // Build the MSAL client
             publicClientApplication = PublicClientApplicationBuilder
                 .Create(ClientId)
-                .WithAuthority(authority)
+                .WithPnPAdditionalAuthenticationSettings(
+                    options.UsernamePassword.AuthorityUri,
+                    options.UsernamePassword.RedirectUri,
+                    TenantId)
                 .Build();
 
             // Log the initialization information
@@ -135,7 +146,7 @@ namespace PnP.Core.Auth
         /// <summary>
         /// Gets an access token for the requested resource and scope
         /// </summary>
-        /// <param name="resource">Resource to request an access token for</param>
+        /// <param name="resource">Resource to request an access token for (unused)</param>
         /// <param name="scopes">Scopes to request</param>
         /// <returns>An access token</returns>
         public override async Task<string> GetAccessTokenAsync(Uri resource, string[] scopes)

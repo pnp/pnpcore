@@ -295,20 +295,20 @@ namespace PnP.Core.Auth {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Invalid or missing value for certificate Thumbprint or Certificate in X509CertificateAuthenticationProvider configuration.
+        /// </summary>
+        internal static string X509CertificateAuthenticationProvider_InvalidCertificateOrThumbprint {
+            get {
+                return ResourceManager.GetString("X509CertificateAuthenticationProvider_InvalidCertificateOrThumbprint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Invalid configuration for X509CertificateAuthenticationProvider.
         /// </summary>
         internal static string X509CertificateAuthenticationProvider_InvalidConfiguration {
             get {
                 return ResourceManager.GetString("X509CertificateAuthenticationProvider_InvalidConfiguration", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Invalid or missing value for certificate Thumbprint in X509CertificateAuthenticationProvider configuration.
-        /// </summary>
-        internal static string X509CertificateAuthenticationProvider_InvalidThumbprint {
-            get {
-                return ResourceManager.GetString("X509CertificateAuthenticationProvider.InvalidThumbprint", resourceCulture);
             }
         }
         

@@ -13,7 +13,7 @@ namespace PnP.Core.Auth.Services
         public string ClientId { get; set; }
 
         /// <summary>
-        /// The Tenand ID for the application, can be "organizations" for multi-tenant applications
+        /// The Tenant ID for the application, can be "organizations" for multi-tenant applications
         /// </summary>
         public string TenantId { get; set; }
 

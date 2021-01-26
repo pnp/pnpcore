@@ -80,5 +80,4 @@ namespace Microsoft.Extensions.DependencyInjection
             collection.AddTransient<ExternalAuthenticationProvider, ExternalAuthenticationProvider>();
         }
     }
-
 }

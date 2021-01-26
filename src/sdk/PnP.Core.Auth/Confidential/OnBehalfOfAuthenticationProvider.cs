@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using Microsoft.Identity.Client;
 using PnP.Core.Auth.Services.Builder.Configuration;
+using PnP.Core.Auth.Utilities;
 using System;
 using System.Configuration;
 using System.Linq;
@@ -42,11 +43,28 @@ namespace PnP.Core.Auth
         /// Public constructor for external consumers of the library
         /// </summary>
         /// <param name="clientId">The Client ID for the Authentication Provider</param>
-        /// <param name="tenantId">The Tenand ID for the Authentication Provider</param>
+        /// <param name="tenantId">The Tenant ID for the Authentication Provider</param>
         /// <param name="clientSecret">The Client Secret of the app</param>
         /// <param name="userTokenProvider">A function providing the consumer user access token to use for the On-Behalf-Of flow</param>
         public OnBehalfOfAuthenticationProvider(string clientId, string tenantId,
             SecureString clientSecret,
+            Func<string> userTokenProvider)
+            : this(clientId, tenantId, new PnPCoreAuthenticationOnBehalfOfOptions
+            {                
+                ClientSecret = clientSecret?.ToInsecureString()
+            }, userTokenProvider)
+        {
+        }
+
+        /// <summary>
+        /// Public constructor for external consumers of the library
+        /// </summary>
+        /// <param name="clientId">The Client ID for the Authentication Provider</param>
+        /// <param name="tenantId">The Tenant ID for the Authentication Provider</param>
+        /// <param name="options">Options for the authentication provider</param>
+        /// <param name="userTokenProvider">A function providing the consumer user access token to use for the On-Behalf-Of flow</param>
+        public OnBehalfOfAuthenticationProvider(string clientId, string tenantId,
+            PnPCoreAuthenticationOnBehalfOfOptions options,
             Func<string> userTokenProvider)
             : this(null)
         {
@@ -55,18 +73,15 @@ namespace PnP.Core.Auth
             {
                 ClientId = clientId,
                 TenantId = tenantId,
-                OnBehalfOf = new PnPCoreAuthenticationOnBehalfOfOptions
-                {
-                    ClientSecret = clientSecret?.ToInsecureString()
-                }
-            }); ;
+                OnBehalfOf = options
+            });
         }
 
         /// <summary>
         /// Public constructor for external consumers of the library
         /// </summary>
         /// <param name="clientId">The Client ID for the Authentication Provider</param>
-        /// <param name="tenantId">The Tenand ID for the Authentication Provider</param>
+        /// <param name="tenantId">The Tenant ID for the Authentication Provider</param>
         /// <param name="storeName">The Store Name to get the X.509 certificate from</param>
         /// <param name="storeLocation">The Store Location to get the X.509 certificate from</param>
         /// <param name="thumbprint">The Thumbprint of the X.509 certificate</param>
@@ -87,7 +102,7 @@ namespace PnP.Core.Auth
                     StoreLocation = storeLocation,
                     Thumbprint = thumbprint
                 }
-            }); ;
+            });
         }
 
         /// <summary>
@@ -134,44 +149,27 @@ namespace PnP.Core.Auth
                 ClientSecret = options.OnBehalfOf.ClientSecret.ToSecureString();
             }
 
-            // Build the MSAL client
-            if (TenantId.Equals(AuthGlobals.OrganizationsTenantId, StringComparison.InvariantCultureIgnoreCase))
+            if (Certificate != null)
             {
-                if (Certificate != null)
-                {
-                    confidentialClientApplication = ConfidentialClientApplicationBuilder
-                        .Create(ClientId)
-                        .WithCertificate(Certificate)
-                        .WithAuthority(AadAuthorityAudience.AzureAdMultipleOrgs)
-                        .Build();
-                }
-                else
-                {
-                    confidentialClientApplication = ConfidentialClientApplicationBuilder
-                        .Create(ClientId)
-                        .WithClientSecret(ClientSecret.ToInsecureString())
-                        .WithAuthority(AadAuthorityAudience.AzureAdMultipleOrgs)
-                        .Build();
-                }
+                confidentialClientApplication = ConfidentialClientApplicationBuilder
+                    .Create(ClientId)
+                    .WithCertificate(Certificate)
+                    .WithPnPAdditionalAuthenticationSettings(
+                        options.OnBehalfOf.AuthorityUri, 
+                        options.OnBehalfOf.RedirectUri,
+                        TenantId)
+                    .Build();
             }
             else
             {
-                if (Certificate != null)
-                {
-                    confidentialClientApplication = ConfidentialClientApplicationBuilder
-                        .Create(ClientId)
-                        .WithCertificate(Certificate)
-                        .WithTenantId(TenantId)
-                        .Build();
-                }
-                else
-                {
-                    confidentialClientApplication = ConfidentialClientApplicationBuilder
-                        .Create(ClientId)
-                        .WithClientSecret(ClientSecret.ToInsecureString())
-                        .WithTenantId(TenantId)
-                        .Build();
-                }
+                confidentialClientApplication = ConfidentialClientApplicationBuilder
+                    .Create(ClientId)
+                    .WithClientSecret(ClientSecret.ToInsecureString())
+                    .WithPnPAdditionalAuthenticationSettings(
+                        options.OnBehalfOf.AuthorityUri,
+                        options.OnBehalfOf.RedirectUri,
+                        TenantId)
+                    .Build();
             }
 
             // Log the initialization information
@@ -203,7 +201,7 @@ namespace PnP.Core.Auth
         /// <summary>
         /// Gets an access token for the requested resource and scope
         /// </summary>
-        /// <param name="resource">Resource to request an access token for</param>
+        /// <param name="resource">Resource to request an access token for (unused)</param>
         /// <param name="scopes">Scopes to request</param>
         /// <returns>An access token</returns>
         public override async Task<string> GetAccessTokenAsync(Uri resource, string[] scopes)

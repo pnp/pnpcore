@@ -90,7 +90,7 @@ namespace PnP.Core.Auth.Test.Providers
             var provider = new InteractiveAuthenticationProvider(
                 clientId,
                 tenantId,
-                null);
+                redirectUri: null);
 
             Assert.IsNotNull(provider);
             Assert.IsNotNull(provider.ClientId);
