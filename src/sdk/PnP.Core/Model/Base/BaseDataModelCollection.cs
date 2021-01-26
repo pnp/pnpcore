@@ -99,6 +99,8 @@ namespace PnP.Core.Model
 
         public virtual void Clear()
         {
+            Requested = false;
+            Metadata.Clear();
             items.Clear();
         }
 
@@ -315,7 +317,7 @@ namespace PnP.Core.Model
 
         public async Task<IEnumerable<TModel>> GetAsync(Expression<Func<TModel, bool>> predicate, params Expression<Func<TModel, object>>[] expressions)
         {
-            (Guid batchRequestId, string receivingProperty) = await GetImplementationAsync(PnPContext.CurrentBatch, predicate, expressions, false).ConfigureAwait(false);
+            (Guid batchRequestId, string receivingProperty) = await GetImplementationAsync(PnPContext.CurrentBatch, predicate, expressions, false, "Get").ConfigureAwait(false);
 
             // and execute the request
             await PnPContext.ExecuteAsync().ConfigureAwait(false);
@@ -343,10 +345,10 @@ namespace PnP.Core.Model
 
         public async Task GetBatchAsync(Batch batch, Expression<Func<TModel, bool>> predicate, params Expression<Func<TModel, object>>[] expressions)
         {
-            await GetImplementationAsync(batch, predicate, expressions, false).ConfigureAwait(false);
+            await GetImplementationAsync(batch, predicate, expressions, false, "GetBatch").ConfigureAwait(false);
         }
 
-        private async Task<Tuple<Guid, string>> GetImplementationAsync(Batch batch, Expression<Func<TModel, bool>> predicate, Expression<Func<TModel, object>>[] expressions, bool firstOrDefault)
+        private async Task<Tuple<Guid, string>> GetImplementationAsync(Batch batch, Expression<Func<TModel, bool>> predicate, Expression<Func<TModel, object>>[] expressions, bool firstOrDefault, string operationName)
         {
             if (!(this is IQueryable<TModel>))
             {
@@ -410,7 +412,8 @@ namespace PnP.Core.Model
                     apiCall,
                     default,
                     parentEntityWithMappingHandlers.MappingHandler,
-                    parentEntityWithMappingHandlers.PostMappingHandler
+                    parentEntityWithMappingHandlers.PostMappingHandler,
+                    operationName
                     );
 
                 if (batchRequestId == Guid.Empty)
@@ -433,7 +436,7 @@ namespace PnP.Core.Model
 
         public async Task<TModel> GetFirstOrDefaultAsync(Expression<Func<TModel, bool>> predicate, params Expression<Func<TModel, object>>[] expressions)
         {
-            (Guid batchRequestId, string receivingProperty) = await GetImplementationAsync(PnPContext.CurrentBatch, predicate, expressions, true).ConfigureAwait(false);
+            (Guid batchRequestId, string receivingProperty) = await GetImplementationAsync(PnPContext.CurrentBatch, predicate, expressions, true, "GetFirstOrDefault").ConfigureAwait(false);
 
             // and execute the request
             await PnPContext.ExecuteAsync().ConfigureAwait(false);
@@ -461,7 +464,7 @@ namespace PnP.Core.Model
 
         public async Task GetFirstOrDefaultBatchAsync(Batch batch, Expression<Func<TModel, bool>> predicate, params Expression<Func<TModel, object>>[] expressions)
         {
-            await GetImplementationAsync(batch, predicate, expressions, true).ConfigureAwait(false);
+            await GetImplementationAsync(batch, predicate, expressions, true, "GetFirstOrDefaultBatch").ConfigureAwait(false);
         }
 
         #endregion
@@ -563,7 +566,8 @@ namespace PnP.Core.Model
                 },
                 default,
                 parentEntityWithMappingHandlers.MappingHandler,
-                parentEntityWithMappingHandlers.PostMappingHandler
+                parentEntityWithMappingHandlers.PostMappingHandler,
+                "GetPaged"
                 );
 
             await PnPContext.ExecuteAsync().ConfigureAwait(false);
@@ -611,7 +615,8 @@ namespace PnP.Core.Model
                     },
                     default,
                     parentEntityWithMappingHandlers.MappingHandler,
-                    parentEntityWithMappingHandlers.PostMappingHandler
+                    parentEntityWithMappingHandlers.PostMappingHandler,
+                    "GetNextPage"
                     );
 
                 await PnPContext.ExecuteAsync().ConfigureAwait(false);
@@ -832,7 +837,7 @@ namespace PnP.Core.Model
             else
             {
                 // Perform an interactive delete
-                await model.RawRequestBatchAsync(batch, query.ApiCall, HttpMethod.Delete).ConfigureAwait(false);
+                await model.RawRequestBatchAsync(batch, query.ApiCall, HttpMethod.Delete, "DeleteByIdBatch").ConfigureAwait(false);
             }
         }
 

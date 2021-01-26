@@ -473,6 +473,81 @@ namespace PnP.Core.Test.SharePoint
         }
 
         [TestMethod]
+        public async Task GetItemsByCAMLQueryOnCustomField()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                // Create a new list
+                string listTitle = TestCommon.GetPnPSdkTestAssetName("GetItemsByCAMLQueryOnCustomField");
+                var myList = context.Web.Lists.GetByTitle(listTitle);
+
+                if (TestCommon.Instance.Mocking && myList != null)
+                {
+                    Assert.Inconclusive("Test data set should be setup to not have the list available.");
+                }
+
+                IField customField;
+                if (myList == null)
+                {
+                    myList = await context.Web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
+                    customField = await myList.Fields.AddTextAsync("CustomField", new FieldTextOptions()
+                    {
+                        Group = "Custom fields",
+                        AddToDefaultView = true,
+                    });
+                }
+
+                // Add items to the list
+                for (int i = 0; i < 10; i++)
+                {
+                    Dictionary<string, object> values = new Dictionary<string, object>
+                        {
+                            { "Title", $"Item {i}" },
+                            { "CustomField", $"Field{i}" }
+                        };
+
+                    await myList.Items.AddBatchAsync(values);
+                }
+                await context.ExecuteAsync();
+
+                using (var context2 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+                {
+                    var list2 = context2.Web.Lists.GetByTitle(listTitle);
+                    if (list2 != null)
+                    {
+                        string query = @"<View>
+                                          <ViewFields>
+                                            <FieldRef Name='Title' />
+                                            <FieldRef Name='CustomField' />
+                                          </ViewFields>
+                                          <Query>
+                                            <Where>
+                                              <Eq>
+                                                <FieldRef Name='CustomField'/>
+                                                <Value Type='text'>Field6</Value>
+                                              </Eq>
+                                            </Where>
+                                          </Query>
+                                        </View>";
+
+                        await list2.GetItemsByCamlQueryAsync(new CamlQueryOptions()
+                        {
+                            ViewXml = query,
+                            DatesInUtc = true
+                        });
+                        Assert.IsTrue(list2.Items.Count() == 1);
+                        Assert.IsTrue(list2.Items.First()["CustomField"].ToString() == "Field6");
+                    }
+                }
+
+
+                // Cleanup the created list
+                await myList.DeleteAsync();
+            }
+        }
+
+        [TestMethod]
         public async Task RecycleList()
         {
             //TestCommon.Instance.Mocking = false;

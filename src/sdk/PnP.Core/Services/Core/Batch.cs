@@ -128,8 +128,9 @@ namespace PnP.Core.Services
         /// <param name="backupApiCall">Backup rest api call, will be used in case we encounter a mixed batch</param>
         /// <param name="fromJsonCasting">Delegate for json type parsing</param>
         /// <param name="postMappingJson">Delegate for post mapping</param>
+        /// <param name="operationName">Name of the operation, used for telemetry purposes</param>
         /// <returns>The id to created batch request</returns>
-        internal Guid Add(TransientObject model, EntityInfo entityInfo, HttpMethod method, ApiCall apiCall, ApiCall backupApiCall, Func<FromJson, object> fromJsonCasting, Action<string> postMappingJson)
+        internal Guid Add(TransientObject model, EntityInfo entityInfo, HttpMethod method, ApiCall apiCall, ApiCall backupApiCall, Func<FromJson, object> fromJsonCasting, Action<string> postMappingJson, string operationName)
         {
             var lastAddedRequest = GetLastRequest();
             int order = 0;
@@ -138,7 +139,7 @@ namespace PnP.Core.Services
                 order = lastAddedRequest.Order + 1;
             }
 
-            var batchRequest = new BatchRequest(model, entityInfo, method, apiCall, backupApiCall, fromJsonCasting, postMappingJson, order);
+            var batchRequest = new BatchRequest(model, entityInfo, method, apiCall, backupApiCall, fromJsonCasting, postMappingJson, operationName, order);
 
             Requests.Add(order, batchRequest);
 

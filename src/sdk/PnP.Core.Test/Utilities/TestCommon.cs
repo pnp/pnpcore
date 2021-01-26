@@ -107,6 +107,31 @@ namespace PnP.Core.Test.Utilities
             return await factory.CreateAsync(configurationName).ConfigureAwait(false);
         }
 
+        internal async Task<PnPContext> GetContextWithTelemetryManagerAsync(string configurationName, TelemetryManager telemetryManager, int id = 0,
+    [System.Runtime.CompilerServices.CallerMemberName] string testName = null,
+    [System.Runtime.CompilerServices.CallerFilePath] string sourceFilePath = null)
+        {
+            // Obtain factory (cached)
+            var factory = BuildContextFactory();
+
+            // Remove Async suffix
+            if (testName.EndsWith(AsyncSuffix))
+            {
+                testName = testName.Substring(0, testName.Length - AsyncSuffix.Length);
+            }
+
+            // Configure the factory for our testing mode
+            var testPnPContextFactory = factory as TestPnPContextFactory;
+            testPnPContextFactory.Mocking = Mocking;
+            testPnPContextFactory.Id = id;
+            testPnPContextFactory.TestName = testName;
+            testPnPContextFactory.SourceFilePath = sourceFilePath;
+            testPnPContextFactory.GenerateTestMockingDebugFiles = GenerateMockingDebugFiles;
+            testPnPContextFactory.TestUris = TestUris;
+
+            return await (factory as TestPnPContextFactory).CreateWithTelemetryManagerAsync(configurationName, telemetryManager).ConfigureAwait(false);
+        }
+
         public async Task<PnPContext> GetContextWithoutInitializationAsync(string configurationName, int id = 0,
             [System.Runtime.CompilerServices.CallerMemberName] string testName = null,
             [System.Runtime.CompilerServices.CallerFilePath] string sourceFilePath = null)

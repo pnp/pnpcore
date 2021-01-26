@@ -141,9 +141,6 @@
   <data name="DeviceCodeAuthenticationProvider_InvalidConfiguration" xml:space="preserve">
     <value>Invalid configuration for DeviceCodeAuthenticationProvider</value>
   </data>
-  <data name="DeviceCodeAuthenticationProvider_InvalidRedirectUri" xml:space="preserve">
-    <value>Invalid or missing value for RedirectUri in DeviceCodeAuthenticationProvider configuration</value>
-  </data>
   <data name="DeviceCodeAuthenticationProvider_LogInit" xml:space="preserve">
     <value>Initialized DeviceCodeAuthenticationProvider</value>
   </data>
@@ -161,9 +158,6 @@
   </data>
   <data name="InteractiveAuthenticationProvider_InvalidConfiguration" xml:space="preserve">
     <value>Invalid configuration for InteractiveAuthenticationProvider</value>
-  </data>
-  <data name="InteractiveAuthenticationProvider_InvalidRedirectUri" xml:space="preserve">
-    <value>Invalid or missing value for RedirectUri in InteractiveAuthenticationProvider configuration</value>
   </data>
   <data name="InteractiveAuthenticationProvider_LogInit" xml:space="preserve">
     <value>Initialized InteractiveAuthenticationProvider</value>
@@ -195,11 +189,11 @@
   <data name="UsernamePasswordAuthenticationProvider_LogInit" xml:space="preserve">
     <value>Initialized UsernamePasswordAuthenticationProvider with username {0}</value>
   </data>
-  <data name="X509CertificateAuthenticationProvider.InvalidThumbprint" xml:space="preserve">
-    <value>Invalid or missing value for certificate Thumbprint in X509CertificateAuthenticationProvider configuration</value>
-  </data>
   <data name="X509CertificateAuthenticationProvider_InvalidCertificate" xml:space="preserve">
     <value>Cannot find the certificate with thumbprint '{0}' in store '{1}' with store location '{2}' while parsing X509CertificateAuthenticationProvider configuration</value>
+  </data>
+  <data name="X509CertificateAuthenticationProvider_InvalidCertificateOrThumbprint" xml:space="preserve">
+    <value>Invalid or missing value for certificate Thumbprint or Certificate in X509CertificateAuthenticationProvider configuration</value>
   </data>
   <data name="X509CertificateAuthenticationProvider_InvalidConfiguration" xml:space="preserve">
     <value>Invalid configuration for X509CertificateAuthenticationProvider</value>

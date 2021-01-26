@@ -133,15 +133,6 @@ namespace PnP.Core.Auth {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Invalid or missing value for RedirectUri in DeviceCodeAuthenticationProvider configuration.
-        /// </summary>
-        internal static string DeviceCodeAuthenticationProvider_InvalidRedirectUri {
-            get {
-                return ResourceManager.GetString("DeviceCodeAuthenticationProvider_InvalidRedirectUri", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Initialized DeviceCodeAuthenticationProvider.
         /// </summary>
         internal static string DeviceCodeAuthenticationProvider_LogInit {
@@ -192,15 +183,6 @@ namespace PnP.Core.Auth {
         internal static string InteractiveAuthenticationProvider_InvalidConfiguration {
             get {
                 return ResourceManager.GetString("InteractiveAuthenticationProvider_InvalidConfiguration", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Invalid or missing value for RedirectUri in InteractiveAuthenticationProvider configuration.
-        /// </summary>
-        internal static string InteractiveAuthenticationProvider_InvalidRedirectUri {
-            get {
-                return ResourceManager.GetString("InteractiveAuthenticationProvider_InvalidRedirectUri", resourceCulture);
             }
         }
         
@@ -304,20 +286,20 @@ namespace PnP.Core.Auth {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Invalid or missing value for certificate Thumbprint or Certificate in X509CertificateAuthenticationProvider configuration.
+        /// </summary>
+        internal static string X509CertificateAuthenticationProvider_InvalidCertificateOrThumbprint {
+            get {
+                return ResourceManager.GetString("X509CertificateAuthenticationProvider_InvalidCertificateOrThumbprint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Invalid configuration for X509CertificateAuthenticationProvider.
         /// </summary>
         internal static string X509CertificateAuthenticationProvider_InvalidConfiguration {
             get {
                 return ResourceManager.GetString("X509CertificateAuthenticationProvider_InvalidConfiguration", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Invalid or missing value for certificate Thumbprint in X509CertificateAuthenticationProvider configuration.
-        /// </summary>
-        internal static string X509CertificateAuthenticationProvider_InvalidThumbprint {
-            get {
-                return ResourceManager.GetString("X509CertificateAuthenticationProvider.InvalidThumbprint", resourceCulture);
             }
         }
         

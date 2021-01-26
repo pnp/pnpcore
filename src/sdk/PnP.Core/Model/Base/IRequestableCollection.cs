@@ -22,5 +22,10 @@
         /// the back-end service
         /// </summary>
         public System.Collections.IEnumerable RequestedItems { get; }
+
+        /// <summary>
+        /// Clears the collection allowing it to be freshly loaded again
+        /// </summary>
+        public void Clear();
     }
 }

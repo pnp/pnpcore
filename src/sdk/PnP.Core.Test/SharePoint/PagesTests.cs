@@ -163,6 +163,34 @@ namespace PnP.Core.Test.SharePoint
                 await folderToDelete.DeleteAsync();
             }
         }
+
+        [TestMethod]
+        public async Task LoadPagesInNonEglishSite()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                // Create a new sub site to test as we don't want to break the main site home page
+                string webTitle = "DutchWeb";
+                var addedWeb = await context.Web.Webs.AddAsync(new WebOptions { Title = webTitle, Url = webTitle, Language = 1043 });
+
+                // Create a context for the newly created web
+                using (var context2 = await TestCommon.Instance.CloneAsync(context, addedWeb.Url, 1))
+                {
+                    // Read the current home page
+                    string pageName = "Home.aspx";
+                    var pages = await context2.Web.GetPagesAsync(pageName);
+
+                    Assert.IsTrue(pages.First() != null);
+                    Assert.IsTrue(pages.First().PagesLibrary != null);
+                    Assert.IsTrue(pages.First().PagesLibrary.Title == "Sitepagina's");
+                }
+
+                // Delete the web to cleanup the test artefacts
+                await addedWeb.DeleteAsync();
+            }
+        }
+
         #endregion
 
         #region Available web parts tests
@@ -1410,6 +1438,41 @@ namespace PnP.Core.Test.SharePoint
                 // Delete the page
                 await templatePage.DeleteAsync();
 
+            }
+        }
+
+        [TestMethod]
+        public async Task SavePageWithDataAsTemplate()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var newPage = await context.Web.NewPageAsync();
+                newPage.AddSection(CanvasSectionTemplate.TwoColumn, 1);
+                newPage.AddControl(newPage.NewTextPart("this page rocks!"), newPage.Sections[0].Columns[0]);
+
+                string templatePageName = TestCommon.GetPnPSdkTestAssetName("SavePageWithDataAsTemplate.aspx");
+                // Save the page
+                await newPage.SaveAsTemplateAsync(templatePageName);
+
+                // Load the template page again as regular page
+                var pages = await context.Web.GetPagesAsync(templatePageName);
+                var templatePage = pages.First();
+
+                // Create new page from this template
+                string pageName = TestCommon.GetPnPSdkTestAssetName("FromTemplate.aspx");
+                (templatePage.Sections[0].Controls[0] as IPageText).Text = "Updated content";
+                await templatePage.SaveAsync(pageName);                
+
+                pages = await context.Web.GetPagesAsync(TestCommon.GetPnPSdkTestAssetName(""));
+                var fromTemplatePage = pages.FirstOrDefault(p => p.Name == pageName);
+                templatePage = pages.FirstOrDefault(p => p.Name == templatePageName);
+
+                Assert.IsTrue((fromTemplatePage as Page).PageListItem["Description"].ToString() == "Updated content");
+
+                // Delete the pages
+                await templatePage.DeleteAsync();
+                await fromTemplatePage.DeleteAsync();
             }
         }
 

@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using Microsoft.Identity.Client;
 using PnP.Core.Auth.Services.Builder.Configuration;
+using PnP.Core.Auth.Utilities;
 using System;
 using System.Configuration;
 using System.Linq;
@@ -27,19 +28,30 @@ namespace PnP.Core.Auth
         /// Public constructor for external consumers of the library
         /// </summary>
         /// <param name="clientId">The Client ID for the Authentication Provider</param>
-        /// <param name="tenantId">The Tenand ID for the Authentication Provider</param>
+        /// <param name="tenantId">The Tenant ID for the Authentication Provider</param>
         /// <param name="redirectUri">The Redirect URI for the authentication flow</param>
         public InteractiveAuthenticationProvider(string clientId, string tenantId, Uri redirectUri)
+            : this(clientId, tenantId, new PnPCoreAuthenticationInteractiveOptions
+            {
+                RedirectUri = redirectUri
+            })
+        {
+        }
+
+        /// <summary>
+        /// Public constructor for external consumers of the library
+        /// </summary>
+        /// <param name="clientId">The Client ID for the Authentication Provider</param>
+        /// <param name="tenantId">The Tenant ID for the Authentication Provider</param>
+        /// <param name="options">Options for the authentication provider</param>
+        public InteractiveAuthenticationProvider(string clientId, string tenantId, PnPCoreAuthenticationInteractiveOptions options)
             : this(null)
         {
             Init(new PnPCoreAuthenticationCredentialConfigurationOptions
             {
                 ClientId = clientId,
                 TenantId = tenantId,
-                Interactive = new PnPCoreAuthenticationInteractiveOptions
-                {
-                    RedirectUri = redirectUri
-                }
+                Interactive = options
             });
         }
 
@@ -58,33 +70,17 @@ namespace PnP.Core.Auth
         /// <param name="options">The options to use</param>
         internal override void Init(PnPCoreAuthenticationCredentialConfigurationOptions options)
         {
-            // We need the UsernamePassword options
-            if (options.Interactive == null)
-            {
-                throw new ConfigurationErrorsException(
-                    PnPCoreAuthResources.InteractiveAuthenticationProvider_InvalidConfiguration);
-            }
-
-            // We need the RedirectUri
-            if (options.Interactive.RedirectUri == null)
-            {
-                throw new ConfigurationErrorsException(PnPCoreAuthResources.InteractiveAuthenticationProvider_InvalidRedirectUri);
-            }
-
             ClientId = !string.IsNullOrEmpty(options.ClientId) ? options.ClientId : AuthGlobals.DefaultClientId;
             TenantId = !string.IsNullOrEmpty(options.TenantId) ? options.TenantId : AuthGlobals.OrganizationsTenantId;
-            RedirectUri = options.Interactive.RedirectUri;
-
-            // Define the authority for the current security context
-            var authority = new Uri(String.Format(System.Globalization.CultureInfo.InvariantCulture,
-                AuthGlobals.AuthorityFormat,
-                TenantId));
+            RedirectUri = options.Interactive?.RedirectUri ?? AuthGlobals.DefaultRedirectUri;
 
             // Build the MSAL client
             publicClientApplication = PublicClientApplicationBuilder
                 .Create(ClientId)
-                .WithAuthority(authority)
-                .WithRedirectUri(RedirectUri.ToString())
+                .WithPnPAdditionalAuthenticationSettings(
+                    options.Interactive?.AuthorityUri,
+                    RedirectUri,
+                    TenantId)
                 .Build();
 
             // Log the initialization information
@@ -116,7 +112,7 @@ namespace PnP.Core.Auth
         /// <summary>
         /// Gets an access token for the requested resource and scope
         /// </summary>
-        /// <param name="resource">Resource to request an access token for</param>
+        /// <param name="resource">Resource to request an access token for (unused)</param>
         /// <param name="scopes">Scopes to request</param>
         /// <returns>An access token</returns>
         public override async Task<string> GetAccessTokenAsync(Uri resource, string[] scopes)

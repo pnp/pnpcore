@@ -225,7 +225,7 @@ namespace PnP.Core.Auth.Test.Providers
             var provider = new OnBehalfOfAuthenticationProvider(
                 AuthGlobals.DefaultClientId,
                 AuthGlobals.OrganizationsTenantId,
-                null,
+                clientSecret: null,
                 // We get the consumer access token using an InteractiveAuthenticationProvider
                 () => GetUserAccessToken().GetAwaiter().GetResult());
         }

@@ -203,7 +203,7 @@ namespace PnP.Core.Model.SharePoint
 
             // Add the request to the batch and execute the batch
             var batch = PnPContext.BatchClient.EnsureBatch();
-            batch.Add(this, entityInfo, HttpMethod.Post, api, default, null, null);
+            batch.Add(this, entityInfo, HttpMethod.Post, api, default, null, null, "Update");
             await PnPContext.BatchClient.ExecuteBatch(batch).ConfigureAwait(false);
         }
 
@@ -216,7 +216,7 @@ namespace PnP.Core.Model.SharePoint
             var api = await BuildUpdateApiCallAsync(PnPContext).ConfigureAwait(false);
 
             // Add the request to the batch
-            batch.Add(this, entityInfo, HttpMethod.Post, api, default, null, null);
+            batch.Add(this, entityInfo, HttpMethod.Post, api, default, null, null, "UpdateBatch");
         }
 
         private async Task<ApiCall> BuildUpdateApiCallAsync(PnPContext context)

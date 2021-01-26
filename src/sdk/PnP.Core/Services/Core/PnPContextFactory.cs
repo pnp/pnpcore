@@ -8,6 +8,7 @@ using System.Linq;
 using System.Net.Http;
 #if NET5_0
 using System.Runtime.InteropServices;
+using System.Text.Json;
 #endif
 using System.Threading.Tasks;
 
@@ -18,6 +19,9 @@ namespace PnP.Core.Services
     /// </summary>
     public class PnPContextFactory : IPnPContextFactory
     {
+        private static readonly HttpClient httpClient = new HttpClient();
+        private bool telemetryInitialized;
+
         /// <summary>
         /// Default constructor for <see cref="PnPContextFactory"/>
         /// </summary>
@@ -61,7 +65,7 @@ namespace PnP.Core.Services
         /// <summary>
         /// Connected Telemetry client
         /// </summary>
-        internal TelemetryManager TelemetryManager { get; private set; }
+        internal TelemetryManager TelemetryManager { get; set; }
 
         /// <summary>
         /// Options used to configure this <see cref="PnPContext"/>
@@ -175,6 +179,9 @@ namespace PnP.Core.Services
                 Uri = url
             };
 
+            // Configure telemetry, if enabled
+            await ConfigureTelemetry(context).ConfigureAwait(false);
+
             // Perform context initialization
             await InitializeContextAsync(context).ConfigureAwait(false);
 
@@ -182,8 +189,6 @@ namespace PnP.Core.Services
             context.GraphFirst = ContextOptions.GraphFirst;
             context.GraphCanUseBeta = ContextOptions.GraphCanUseBeta;
             context.GraphAlwaysUseBeta = ContextOptions.GraphAlwaysUseBeta;
-
-            await ConfigureTelemetry(context).ConfigureAwait(false);
 
             return context;
         }
@@ -210,12 +215,14 @@ namespace PnP.Core.Services
             // Use the provided settings to create a new instance of PnPContext
             var context = new PnPContext(Log, authenticationProvider, SharePointRestClient, MicrosoftGraphClient, ContextOptions, GlobalOptions, TelemetryManager);
 
+            // Configure telemetry, if enabled
+            await ConfigureTelemetry(context).ConfigureAwait(false);
+
+            // Load the group to find out what the SharePoint site url is
             await ConfigureForGroup(context, groupId).ConfigureAwait(false);
 
             // Perform context initialization
             await InitializeContextAsync(context).ConfigureAwait(false);
-
-            await ConfigureTelemetry(context).ConfigureAwait(false);
 
             return context;
         }
@@ -253,7 +260,7 @@ namespace PnP.Core.Services
             {
                 Interactive = true
             };
-            await (context.Web as Web).RequestAsync(api, HttpMethod.Get).ConfigureAwait(false);
+            await (context.Web as Web).RequestAsync(api, HttpMethod.Get, "Get").ConfigureAwait(false);
             
             // Replace the context URI with the value using the correct casing
             context.Uri = context.Web.Url;
@@ -299,11 +306,100 @@ namespace PnP.Core.Services
 
         internal async Task ConfigureTelemetry(PnPContext context)
         {
+            // We only configure telemetry and send the init event once per created PnPContextFactory
+            if (telemetryInitialized)
+            {
+                return;
+            }
+
+#if NET5_0
+            if (RuntimeInformation.RuntimeIdentifier == "browser-wasm")
+            {
+                // Blazor WASM cannot handle the AppInsights NuGet package way of working,
+                // hence we're sending just one event to track WASM usage via a manual post
+                await SendBlazorInitEventAsync(context).ConfigureAwait(false);                 
+                telemetryInitialized = true;
+            }
+#endif
+
             // Populate the Azure AD tenant id
             if (TelemetryManager != null && GlobalOptions != null && !GlobalOptions.DisableTelemetry)
             {
                 await context.SetAADTenantId().ConfigureAwait(false);
+
+                // Send a one time "Init" event
+                TelemetryManager.LogInitRequest();
+            }
+
+            telemetryInitialized = true;
+        }
+
+#if NET5_0
+        private async Task SendBlazorInitEventAsync(PnPContext context)
+        {
+            try
+            {
+                // Ensure the tenant id was fetched
+                await context.SetAADTenantId().ConfigureAwait(false);
+
+                using (var request = new HttpRequestMessage(HttpMethod.Post, $"https://dc.services.visualstudio.com/v2/track"))
+                {
+
+                    // Build payload
+                    var body = new
+                    {
+                        name = "AppEvents",
+                        time = DateTime.Now.ToUniversalTime().ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fffffffZ"),
+                        iKey = TelemetryManager.InstrumentationKey,
+                        data = new
+                        {
+                            baseType = "EventData",
+                            baseData = new
+                            {
+                                ver = 2,
+                                name = "PnPCoreInit",
+                                properties = new
+                                {
+                                    PnPCoreSDKVersion = "1.0.0.0",
+                                    AADTenantId = GlobalOptions.AADTenantId.ToString(),
+                                    OS = "WASM"
+                                }
+                            }
+                        }
+                    };
+
+                    var jsonBody = JsonSerializer.Serialize(body, new JsonSerializerOptions { IgnoreNullValues = true });
+
+                    using (StringContent content = new StringContent(jsonBody))
+                    {
+                        // Remove the default Content-Type content header
+                        if (content.Headers.Contains("Content-Type"))
+                        {
+                            content.Headers.Remove("Content-Type");
+                        }
+                        // Add the batch Content-Type header
+                        content.Headers.Add($"Content-Type", "application/x-json-stream");
+                        
+                        // Connect content to request
+                        request.Content = content;
+                        
+                        HttpResponseMessage response = await httpClient.SendAsync(request).ConfigureAwait(false);
+                        if (!response.IsSuccessStatusCode)
+                        {
+                            Log.LogDebug($"Blazor telemetry failure: {await response.Content.ReadAsStringAsync().ConfigureAwait(false)}");
+                        }
+                    }
+                }
+            }
+            // Never fail if telemetry is failing
+#pragma warning disable CA1031 // Do not catch general exception types
+            catch (Exception ex)
+#pragma warning restore CA1031 // Do not catch general exception types
+            {
+                Log.LogDebug($"Blazor telemetry failure: {ex}");
             }
         }
+#endif
+
     }
 }

@@ -86,7 +86,8 @@ namespace PnP.Core.QueryModel
                         apiCall,
                         default,
                         parentEntityWithMappingHandlers.MappingHandler,
-                        parentEntityWithMappingHandlers.PostMappingHandler
+                        parentEntityWithMappingHandlers.PostMappingHandler,
+                        "Linq"
                         );
                 }
 

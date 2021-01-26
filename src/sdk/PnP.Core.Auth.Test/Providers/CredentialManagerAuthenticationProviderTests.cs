@@ -93,7 +93,7 @@ namespace PnP.Core.Auth.Test.Providers
             var provider = new CredentialManagerAuthenticationProvider(
                 clientId,
                 tenantId,
-                null);
+                credentialManagerName: null);
         }
 
         [TestMethod]

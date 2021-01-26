@@ -187,6 +187,7 @@ namespace PnP.Core.Test.SharePoint
                 await list.DeleteAsync();
             }
         }
+
         [TestMethod]
         public async Task SystemUpdate()
         {

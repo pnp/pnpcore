@@ -92,7 +92,6 @@ namespace PnP.Core.Auth.Test.Providers
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ConfigurationErrorsException))]
 #pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
         public async Task TestDeviceCodeConstructorNoDI_NullRedirectUri()
 #pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
@@ -104,12 +103,17 @@ namespace PnP.Core.Auth.Test.Providers
             var provider = new DeviceCodeAuthenticationProvider(
                 clientId,
                 tenantId,
-                null,
+                redirectUri: null,
                 n => { }); // Fake notification, we don't care of it in this test
+
+            Assert.IsNotNull(provider);
+            Assert.IsNotNull(provider.ClientId);
+            Assert.IsNotNull(provider.TenantId);
+            Assert.IsNotNull(provider.RedirectUri);
+            Assert.IsNotNull(provider.DeviceCodeVerification);
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ConfigurationErrorsException))]
 #pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
         public async Task TestDeviceCodeConstructorNoDI_NullNotification()
 #pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
@@ -117,13 +121,19 @@ namespace PnP.Core.Auth.Test.Providers
             var configuration = TestCommon.GetConfigurationSettings();
             var clientId = configuration.GetValue<string>($"{TestGlobals.CredentialsConfigurationBasePath}:{deviceCodeConfigurationPath}:ClientId");
             var tenantId = configuration.GetValue<string>($"{TestGlobals.CredentialsConfigurationBasePath}:{deviceCodeConfigurationPath}:TenantId");
-            var redirectUri = configuration.GetValue<Uri>($"{TestGlobals.CredentialsConfigurationBasePath}:{deviceCodeConfigurationPath}:Interactive:RedirectUri");
+            var redirectUri = configuration.GetValue<Uri>($"{TestGlobals.CredentialsConfigurationBasePath}:{deviceCodeConfigurationPath}:DeviceCode:RedirectUri");
 
             var provider = new DeviceCodeAuthenticationProvider(
                 clientId,
                 tenantId,
                 redirectUri,
                 null);
+
+            Assert.IsNotNull(provider);
+            Assert.IsNotNull(provider.ClientId);
+            Assert.IsNotNull(provider.TenantId);
+            Assert.IsNotNull(provider.RedirectUri);
+            Assert.IsNull(provider.DeviceCodeVerification);
         }
 
         [TestMethod]

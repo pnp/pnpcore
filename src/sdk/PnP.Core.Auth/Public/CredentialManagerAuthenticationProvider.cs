@@ -24,21 +24,33 @@ namespace PnP.Core.Auth
         /// Public constructor for external consumers of the library
         /// </summary>
         /// <param name="clientId">The Client ID for the Authentication Provider</param>
-        /// <param name="tenantId">The Tenand ID for the Authentication Provider</param>
-        /// <param name="credentialManagerName">The Name of the Credential Manager item for authentication</param>
+        /// <param name="tenantId">The Tenant ID for the Authentication Provider</param>
+        /// <param name="options">Options for the authentication provider</param>
         public CredentialManagerAuthenticationProvider(string clientId, string tenantId,
-            string credentialManagerName)
+            PnPCoreAuthenticationCredentialManagerOptions options)
             : this(null)
         {
             Init(new PnPCoreAuthenticationCredentialConfigurationOptions
             {
                 ClientId = clientId,
                 TenantId = tenantId,
-                CredentialManager = new PnPCoreAuthenticationCredentialManagerOptions
-                {
-                    CredentialManagerName = credentialManagerName
-                }
+                CredentialManager = options
             });
+        }
+
+        /// <summary>
+        /// Public constructor for external consumers of the library
+        /// </summary>
+        /// <param name="clientId">The Client ID for the Authentication Provider</param>
+        /// <param name="tenantId">The Tenant ID for the Authentication Provider</param>
+        /// <param name="credentialManagerName">The Name of the Credential Manager item for authentication</param>
+        public CredentialManagerAuthenticationProvider(string clientId, string tenantId,
+            string credentialManagerName)
+            : this(clientId, tenantId, new PnPCoreAuthenticationCredentialManagerOptions
+            {
+                CredentialManagerName = credentialManagerName
+            })
+        {
         }
 
         /// <summary>
@@ -117,13 +129,18 @@ namespace PnP.Core.Auth
         }
 
         /// <summary>
-        /// Gets an access token for the requested resource and scope
+        /// Gets an access token for the requested resource and scope. Provide either scopes or resource parameter.
         /// </summary>
-        /// <param name="resource">Resource to request an access token for</param>
-        /// <param name="scopes">Scopes to request</param>
+        /// <param name="resource">Resource to request an access token for, only used if scopes is null</param>
+        /// <param name="scopes">Scopes to request, can be null</param>
         /// <returns>An access token</returns>
         public override async Task<string> GetAccessTokenAsync(Uri resource, string[] scopes)
         {
+            if (resource == null)
+            {
+                throw new ArgumentNullException(nameof(resource));
+            }
+
             if (scopes == null)
             {
                 // If scopes are missing, let's rely on the internal 

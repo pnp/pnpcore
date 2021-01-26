@@ -23,7 +23,7 @@ namespace PnP.Core.Auth
         public string ClientId { get; set; }
 
         /// <summary>
-        /// The Tenand ID for the application, default value is "organizations" for multi-tenant applications
+        /// The Tenant ID for the application, default value is "organizations" for multi-tenant applications
         /// </summary>
         public string TenantId { get; set; }
 
