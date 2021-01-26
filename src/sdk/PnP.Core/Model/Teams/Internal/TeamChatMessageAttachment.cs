@@ -1,21 +1,32 @@
-﻿using System;
+﻿using PnP.Core.Services;
+using System;
+using System.Dynamic;
+using System.Text.Json;
 
 namespace PnP.Core.Model.Teams
 {
-    [GraphType]
+    [GraphType(Beta = true)]
     internal partial class TeamChatMessageAttachment : BaseDataModel<ITeamChatMessageAttachment>, ITeamChatMessageAttachment
     {
+
         #region Properties
+
+        [GraphProperty("id")]
         public string Id { get => GetValue<string>(); set => SetValue(value); }
 
+        [GraphProperty("contentType")]
         public string ContentType { get => GetValue<string>(); set => SetValue(value); }
 
+        [GraphProperty("contentUrl")]
         public Uri ContentUrl { get => GetValue<Uri>(); set => SetValue(value); }
 
+        [GraphProperty("content")]
         public string Content { get => GetValue<string>(); set => SetValue(value); }
 
+        [GraphProperty("name")]
         public string Name { get => GetValue<string>(); set => SetValue(value); }
 
+        [GraphProperty("thumbnailUrl")]
         public Uri ThumbnailUrl { get => GetValue<Uri>(); set => SetValue(value); }
 
         [KeyProperty(nameof(Id))]

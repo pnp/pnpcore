@@ -93,10 +93,14 @@ namespace PnP.Core.Model.Teams
         public ITeamChatMessageMentionCollection Mentions { get; }
 
         /// <summary>
-        /// Attached files. Attachments are currently read-only – sending attachments is not supported.
+        /// Attached files
         /// </summary>
-        //public List<ITeamChatMessageAttachment> Attachments { get; }
         public ITeamChatMessageAttachmentCollection Attachments { get; }
+
+        /// <summary>
+        /// Hosted Content tiles
+        /// </summary>
+        public ITeamChatMessageHostedContentCollection HostedContents { get; }
 
     }
 }

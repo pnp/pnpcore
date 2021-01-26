@@ -13,6 +13,11 @@
         /// <summary>
         /// Chat message uses html
         /// </summary>
-        Html
+        Html,
+
+        /// <summary>
+        /// Chat message to use adaptive card
+        /// </summary>
+        AdaptiveCard
     }
 }

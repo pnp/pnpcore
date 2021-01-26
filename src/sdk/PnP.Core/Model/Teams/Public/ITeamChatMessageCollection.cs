@@ -13,45 +13,70 @@ namespace PnP.Core.Model.Teams
         /// <summary>
         /// Adds a new channel chat message
         /// </summary>
-        /// <param name="body">Body of the chat message</param>
-        /// <returns>Newly added channel chat message</returns>
-        public Task<ITeamChatMessage> AddAsync(string body);
+        /// <param name="content">Content of the message</param>
+        /// <param name="contentType">Message content type e.g. Text, Html</param>
+        /// <param name="attachments">Attachments within the message</param>
+        /// <param name="subject">Message subject</param>
+        /// <param name="hostedContents">Hosted contents for inline content</param>
+        /// <returns></returns>
+        public Task<ITeamChatMessage> AddAsync(string content, ChatMessageContentType contentType = ChatMessageContentType.Text, ITeamChatMessageAttachmentCollection attachments = null, string subject = null, ITeamChatMessageHostedContentCollection hostedContents = null);
+
+        /// <summary>
+        /// Adds a new channel chat
+        /// </summary>
+        /// <param name="content">Content of the message</param>
+        /// <param name="contentType">Message content type e.g. Text, Html</param>
+        /// <param name="attachments">Attachments within the message</param>
+        /// <param name="subject">Message subject</param>
+        /// <param name="hostedContents">Hosted contents for inline content</param>
+        /// <returns></returns>
+        public ITeamChatMessage Add(string content, ChatMessageContentType contentType = ChatMessageContentType.Text, ITeamChatMessageAttachmentCollection attachments = null, string subject = null, ITeamChatMessageHostedContentCollection hostedContents = null);
 
         /// <summary>
         /// Adds a new channel chat message
         /// </summary>
-        /// <param name="body">Body of the chat message</param>
+        /// <param name="batch">Batch the message is associated with</param>
+        /// <param name="content">Content of the message</param>
+        /// <param name="contentType">Message content type e.g. Text, Html</param>
+        /// <param name="attachments">Attachments within the message</param>
+        /// <param name="subject">Message subject</param>
+        /// <param name="hostedContents">Hosted contents for inline content</param>
         /// <returns>Newly added channel chat message</returns>
-        public ITeamChatMessage Add(string body);
+        public Task<ITeamChatMessage> AddBatchAsync(Batch batch, string content, ChatMessageContentType contentType = ChatMessageContentType.Text, ITeamChatMessageAttachmentCollection attachments = null, string subject = null, ITeamChatMessageHostedContentCollection hostedContents = null);
 
         /// <summary>
         /// Adds a new channel chat message
         /// </summary>
-        /// <param name="batch">Batch to use</param>
-        /// <param name="body">Body of the chat message</param>
+        /// <param name="batch">Batch the message is associated with</param>
+        /// <param name="content">Content of the message</param>
+        /// <param name="contentType">Message content type e.g. Text, Html</param>
+        /// <param name="attachments">Attachments within the message</param>
+        /// <param name="subject">Message subject</param>
+        /// <param name="hostedContents">Hosted contents for inline content</param>
         /// <returns>Newly added channel chat message</returns>
-        public Task<ITeamChatMessage> AddBatchAsync(Batch batch, string body);
+        public ITeamChatMessage AddBatch(Batch batch, string content, ChatMessageContentType contentType = ChatMessageContentType.Text, ITeamChatMessageAttachmentCollection attachments = null, string subject = null, ITeamChatMessageHostedContentCollection hostedContents = null);
 
         /// <summary>
         /// Adds a new channel chat message
         /// </summary>
-        /// <param name="batch">Batch to use</param>
-        /// <param name="body">Body of the chat message</param>
+        /// <param name="content">Content of the message</param>
+        /// <param name="contentType">Message content type e.g. Text, Html</param>
+        /// <param name="attachments">Attachments within the message</param>
+        /// <param name="subject">Message subject</param>
+        /// <param name="hostedContents">Hosted contents for inline content</param>
         /// <returns>Newly added channel chat message</returns>
-        public ITeamChatMessage AddBatch(Batch batch, string body);
+        public Task<ITeamChatMessage> AddBatchAsync(string content, ChatMessageContentType contentType = ChatMessageContentType.Text, ITeamChatMessageAttachmentCollection attachments = null, string subject = null, ITeamChatMessageHostedContentCollection hostedContents = null);
 
         /// <summary>
         /// Adds a new channel chat message
         /// </summary>
-        /// <param name="body">Body of the chat message</param>
+        /// <param name="content">Content of the message</param>
+        /// <param name="contentType">Message content type e.g. Text, Html</param>
+        /// <param name="attachments">Attachments within the message</param>
+        /// <param name="subject">Message subject</param>
+        /// <param name="hostedContents">Hosted contents for inline content</param>
         /// <returns>Newly added channel chat message</returns>
-        public Task<ITeamChatMessage> AddBatchAsync(string body);
+        public ITeamChatMessage AddBatch(string content, ChatMessageContentType contentType = ChatMessageContentType.Text, ITeamChatMessageAttachmentCollection attachments = null, string subject = null, ITeamChatMessageHostedContentCollection hostedContents = null);
 
-        /// <summary>
-        /// Adds a new channel chat message
-        /// </summary>
-        /// <param name="body">Body of the chat message</param>
-        /// <returns>Newly added channel chat message</returns>
-        public ITeamChatMessage AddBatch(string body);
     }
 }
