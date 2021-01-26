@@ -24857,6 +24857,12 @@ references:
   commentId: T:PnP.Core.Model.Teams.ChatMessageContentType
   fullName: PnP.Core.Model.Teams.ChatMessageContentType
   nameWithType: ChatMessageContentType
+- uid: PnP.Core.Model.Teams.ChatMessageContentType.AdaptiveCard
+  name: AdaptiveCard
+  href: api/PnP.Core.Model.Teams.ChatMessageContentType.html#PnP_Core_Model_Teams_ChatMessageContentType_AdaptiveCard
+  commentId: F:PnP.Core.Model.Teams.ChatMessageContentType.AdaptiveCard
+  fullName: PnP.Core.Model.Teams.ChatMessageContentType.AdaptiveCard
+  nameWithType: ChatMessageContentType.AdaptiveCard
 - uid: PnP.Core.Model.Teams.ChatMessageContentType.Html
   name: Html
   href: api/PnP.Core.Model.Teams.ChatMessageContentType.html#PnP_Core_Model_Teams_ChatMessageContentType_Html
@@ -26010,6 +26016,19 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.Teams.ITeamChatMessage.From
   nameWithType: ITeamChatMessage.From
+- uid: PnP.Core.Model.Teams.ITeamChatMessage.HostedContents
+  name: HostedContents
+  href: api/PnP.Core.Model.Teams.ITeamChatMessage.html#PnP_Core_Model_Teams_ITeamChatMessage_HostedContents
+  commentId: P:PnP.Core.Model.Teams.ITeamChatMessage.HostedContents
+  fullName: PnP.Core.Model.Teams.ITeamChatMessage.HostedContents
+  nameWithType: ITeamChatMessage.HostedContents
+- uid: PnP.Core.Model.Teams.ITeamChatMessage.HostedContents*
+  name: HostedContents
+  href: api/PnP.Core.Model.Teams.ITeamChatMessage.html#PnP_Core_Model_Teams_ITeamChatMessage_HostedContents_
+  commentId: Overload:PnP.Core.Model.Teams.ITeamChatMessage.HostedContents
+  isSpec: "True"
+  fullName: PnP.Core.Model.Teams.ITeamChatMessage.HostedContents
+  nameWithType: ITeamChatMessage.HostedContents
 - uid: PnP.Core.Model.Teams.ITeamChatMessage.Id
   name: Id
   href: api/PnP.Core.Model.Teams.ITeamChatMessage.html#PnP_Core_Model_Teams_ITeamChatMessage_Id
@@ -26249,12 +26268,12 @@ references:
   commentId: T:PnP.Core.Model.Teams.ITeamChatMessageCollection
   fullName: PnP.Core.Model.Teams.ITeamChatMessageCollection
   nameWithType: ITeamChatMessageCollection
-- uid: PnP.Core.Model.Teams.ITeamChatMessageCollection.Add(System.String)
-  name: Add(String)
-  href: api/PnP.Core.Model.Teams.ITeamChatMessageCollection.html#PnP_Core_Model_Teams_ITeamChatMessageCollection_Add_System_String_
-  commentId: M:PnP.Core.Model.Teams.ITeamChatMessageCollection.Add(System.String)
-  fullName: PnP.Core.Model.Teams.ITeamChatMessageCollection.Add(System.String)
-  nameWithType: ITeamChatMessageCollection.Add(String)
+- uid: PnP.Core.Model.Teams.ITeamChatMessageCollection.Add(System.String,PnP.Core.Model.Teams.ChatMessageContentType,PnP.Core.Model.Teams.ITeamChatMessageAttachmentCollection,System.String,PnP.Core.Model.Teams.ITeamChatMessageHostedContentCollection)
+  name: Add(String, ChatMessageContentType, ITeamChatMessageAttachmentCollection, String, ITeamChatMessageHostedContentCollection)
+  href: api/PnP.Core.Model.Teams.ITeamChatMessageCollection.html#PnP_Core_Model_Teams_ITeamChatMessageCollection_Add_System_String_PnP_Core_Model_Teams_ChatMessageContentType_PnP_Core_Model_Teams_ITeamChatMessageAttachmentCollection_System_String_PnP_Core_Model_Teams_ITeamChatMessageHostedContentCollection_
+  commentId: M:PnP.Core.Model.Teams.ITeamChatMessageCollection.Add(System.String,PnP.Core.Model.Teams.ChatMessageContentType,PnP.Core.Model.Teams.ITeamChatMessageAttachmentCollection,System.String,PnP.Core.Model.Teams.ITeamChatMessageHostedContentCollection)
+  fullName: PnP.Core.Model.Teams.ITeamChatMessageCollection.Add(System.String, PnP.Core.Model.Teams.ChatMessageContentType, PnP.Core.Model.Teams.ITeamChatMessageAttachmentCollection, System.String, PnP.Core.Model.Teams.ITeamChatMessageHostedContentCollection)
+  nameWithType: ITeamChatMessageCollection.Add(String, ChatMessageContentType, ITeamChatMessageAttachmentCollection, String, ITeamChatMessageHostedContentCollection)
 - uid: PnP.Core.Model.Teams.ITeamChatMessageCollection.Add*
   name: Add
   href: api/PnP.Core.Model.Teams.ITeamChatMessageCollection.html#PnP_Core_Model_Teams_ITeamChatMessageCollection_Add_
@@ -26262,12 +26281,12 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.Teams.ITeamChatMessageCollection.Add
   nameWithType: ITeamChatMessageCollection.Add
-- uid: PnP.Core.Model.Teams.ITeamChatMessageCollection.AddAsync(System.String)
-  name: AddAsync(String)
-  href: api/PnP.Core.Model.Teams.ITeamChatMessageCollection.html#PnP_Core_Model_Teams_ITeamChatMessageCollection_AddAsync_System_String_
-  commentId: M:PnP.Core.Model.Teams.ITeamChatMessageCollection.AddAsync(System.String)
-  fullName: PnP.Core.Model.Teams.ITeamChatMessageCollection.AddAsync(System.String)
-  nameWithType: ITeamChatMessageCollection.AddAsync(String)
+- uid: PnP.Core.Model.Teams.ITeamChatMessageCollection.AddAsync(System.String,PnP.Core.Model.Teams.ChatMessageContentType,PnP.Core.Model.Teams.ITeamChatMessageAttachmentCollection,System.String,PnP.Core.Model.Teams.ITeamChatMessageHostedContentCollection)
+  name: AddAsync(String, ChatMessageContentType, ITeamChatMessageAttachmentCollection, String, ITeamChatMessageHostedContentCollection)
+  href: api/PnP.Core.Model.Teams.ITeamChatMessageCollection.html#PnP_Core_Model_Teams_ITeamChatMessageCollection_AddAsync_System_String_PnP_Core_Model_Teams_ChatMessageContentType_PnP_Core_Model_Teams_ITeamChatMessageAttachmentCollection_System_String_PnP_Core_Model_Teams_ITeamChatMessageHostedContentCollection_
+  commentId: M:PnP.Core.Model.Teams.ITeamChatMessageCollection.AddAsync(System.String,PnP.Core.Model.Teams.ChatMessageContentType,PnP.Core.Model.Teams.ITeamChatMessageAttachmentCollection,System.String,PnP.Core.Model.Teams.ITeamChatMessageHostedContentCollection)
+  fullName: PnP.Core.Model.Teams.ITeamChatMessageCollection.AddAsync(System.String, PnP.Core.Model.Teams.ChatMessageContentType, PnP.Core.Model.Teams.ITeamChatMessageAttachmentCollection, System.String, PnP.Core.Model.Teams.ITeamChatMessageHostedContentCollection)
+  nameWithType: ITeamChatMessageCollection.AddAsync(String, ChatMessageContentType, ITeamChatMessageAttachmentCollection, String, ITeamChatMessageHostedContentCollection)
 - uid: PnP.Core.Model.Teams.ITeamChatMessageCollection.AddAsync*
   name: AddAsync
   href: api/PnP.Core.Model.Teams.ITeamChatMessageCollection.html#PnP_Core_Model_Teams_ITeamChatMessageCollection_AddAsync_
@@ -26275,18 +26294,18 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.Teams.ITeamChatMessageCollection.AddAsync
   nameWithType: ITeamChatMessageCollection.AddAsync
-- uid: PnP.Core.Model.Teams.ITeamChatMessageCollection.AddBatch(PnP.Core.Services.Batch,System.String)
-  name: AddBatch(Batch, String)
-  href: api/PnP.Core.Model.Teams.ITeamChatMessageCollection.html#PnP_Core_Model_Teams_ITeamChatMessageCollection_AddBatch_PnP_Core_Services_Batch_System_String_
-  commentId: M:PnP.Core.Model.Teams.ITeamChatMessageCollection.AddBatch(PnP.Core.Services.Batch,System.String)
-  fullName: PnP.Core.Model.Teams.ITeamChatMessageCollection.AddBatch(PnP.Core.Services.Batch, System.String)
-  nameWithType: ITeamChatMessageCollection.AddBatch(Batch, String)
-- uid: PnP.Core.Model.Teams.ITeamChatMessageCollection.AddBatch(System.String)
-  name: AddBatch(String)
-  href: api/PnP.Core.Model.Teams.ITeamChatMessageCollection.html#PnP_Core_Model_Teams_ITeamChatMessageCollection_AddBatch_System_String_
-  commentId: M:PnP.Core.Model.Teams.ITeamChatMessageCollection.AddBatch(System.String)
-  fullName: PnP.Core.Model.Teams.ITeamChatMessageCollection.AddBatch(System.String)
-  nameWithType: ITeamChatMessageCollection.AddBatch(String)
+- uid: PnP.Core.Model.Teams.ITeamChatMessageCollection.AddBatch(PnP.Core.Services.Batch,System.String,PnP.Core.Model.Teams.ChatMessageContentType,PnP.Core.Model.Teams.ITeamChatMessageAttachmentCollection,System.String,PnP.Core.Model.Teams.ITeamChatMessageHostedContentCollection)
+  name: AddBatch(Batch, String, ChatMessageContentType, ITeamChatMessageAttachmentCollection, String, ITeamChatMessageHostedContentCollection)
+  href: api/PnP.Core.Model.Teams.ITeamChatMessageCollection.html#PnP_Core_Model_Teams_ITeamChatMessageCollection_AddBatch_PnP_Core_Services_Batch_System_String_PnP_Core_Model_Teams_ChatMessageContentType_PnP_Core_Model_Teams_ITeamChatMessageAttachmentCollection_System_String_PnP_Core_Model_Teams_ITeamChatMessageHostedContentCollection_
+  commentId: M:PnP.Core.Model.Teams.ITeamChatMessageCollection.AddBatch(PnP.Core.Services.Batch,System.String,PnP.Core.Model.Teams.ChatMessageContentType,PnP.Core.Model.Teams.ITeamChatMessageAttachmentCollection,System.String,PnP.Core.Model.Teams.ITeamChatMessageHostedContentCollection)
+  fullName: PnP.Core.Model.Teams.ITeamChatMessageCollection.AddBatch(PnP.Core.Services.Batch, System.String, PnP.Core.Model.Teams.ChatMessageContentType, PnP.Core.Model.Teams.ITeamChatMessageAttachmentCollection, System.String, PnP.Core.Model.Teams.ITeamChatMessageHostedContentCollection)
+  nameWithType: ITeamChatMessageCollection.AddBatch(Batch, String, ChatMessageContentType, ITeamChatMessageAttachmentCollection, String, ITeamChatMessageHostedContentCollection)
+- uid: PnP.Core.Model.Teams.ITeamChatMessageCollection.AddBatch(System.String,PnP.Core.Model.Teams.ChatMessageContentType,PnP.Core.Model.Teams.ITeamChatMessageAttachmentCollection,System.String,PnP.Core.Model.Teams.ITeamChatMessageHostedContentCollection)
+  name: AddBatch(String, ChatMessageContentType, ITeamChatMessageAttachmentCollection, String, ITeamChatMessageHostedContentCollection)
+  href: api/PnP.Core.Model.Teams.ITeamChatMessageCollection.html#PnP_Core_Model_Teams_ITeamChatMessageCollection_AddBatch_System_String_PnP_Core_Model_Teams_ChatMessageContentType_PnP_Core_Model_Teams_ITeamChatMessageAttachmentCollection_System_String_PnP_Core_Model_Teams_ITeamChatMessageHostedContentCollection_
+  commentId: M:PnP.Core.Model.Teams.ITeamChatMessageCollection.AddBatch(System.String,PnP.Core.Model.Teams.ChatMessageContentType,PnP.Core.Model.Teams.ITeamChatMessageAttachmentCollection,System.String,PnP.Core.Model.Teams.ITeamChatMessageHostedContentCollection)
+  fullName: PnP.Core.Model.Teams.ITeamChatMessageCollection.AddBatch(System.String, PnP.Core.Model.Teams.ChatMessageContentType, PnP.Core.Model.Teams.ITeamChatMessageAttachmentCollection, System.String, PnP.Core.Model.Teams.ITeamChatMessageHostedContentCollection)
+  nameWithType: ITeamChatMessageCollection.AddBatch(String, ChatMessageContentType, ITeamChatMessageAttachmentCollection, String, ITeamChatMessageHostedContentCollection)
 - uid: PnP.Core.Model.Teams.ITeamChatMessageCollection.AddBatch*
   name: AddBatch
   href: api/PnP.Core.Model.Teams.ITeamChatMessageCollection.html#PnP_Core_Model_Teams_ITeamChatMessageCollection_AddBatch_
@@ -26294,18 +26313,18 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.Teams.ITeamChatMessageCollection.AddBatch
   nameWithType: ITeamChatMessageCollection.AddBatch
-- uid: PnP.Core.Model.Teams.ITeamChatMessageCollection.AddBatchAsync(PnP.Core.Services.Batch,System.String)
-  name: AddBatchAsync(Batch, String)
-  href: api/PnP.Core.Model.Teams.ITeamChatMessageCollection.html#PnP_Core_Model_Teams_ITeamChatMessageCollection_AddBatchAsync_PnP_Core_Services_Batch_System_String_
-  commentId: M:PnP.Core.Model.Teams.ITeamChatMessageCollection.AddBatchAsync(PnP.Core.Services.Batch,System.String)
-  fullName: PnP.Core.Model.Teams.ITeamChatMessageCollection.AddBatchAsync(PnP.Core.Services.Batch, System.String)
-  nameWithType: ITeamChatMessageCollection.AddBatchAsync(Batch, String)
-- uid: PnP.Core.Model.Teams.ITeamChatMessageCollection.AddBatchAsync(System.String)
-  name: AddBatchAsync(String)
-  href: api/PnP.Core.Model.Teams.ITeamChatMessageCollection.html#PnP_Core_Model_Teams_ITeamChatMessageCollection_AddBatchAsync_System_String_
-  commentId: M:PnP.Core.Model.Teams.ITeamChatMessageCollection.AddBatchAsync(System.String)
-  fullName: PnP.Core.Model.Teams.ITeamChatMessageCollection.AddBatchAsync(System.String)
-  nameWithType: ITeamChatMessageCollection.AddBatchAsync(String)
+- uid: PnP.Core.Model.Teams.ITeamChatMessageCollection.AddBatchAsync(PnP.Core.Services.Batch,System.String,PnP.Core.Model.Teams.ChatMessageContentType,PnP.Core.Model.Teams.ITeamChatMessageAttachmentCollection,System.String,PnP.Core.Model.Teams.ITeamChatMessageHostedContentCollection)
+  name: AddBatchAsync(Batch, String, ChatMessageContentType, ITeamChatMessageAttachmentCollection, String, ITeamChatMessageHostedContentCollection)
+  href: api/PnP.Core.Model.Teams.ITeamChatMessageCollection.html#PnP_Core_Model_Teams_ITeamChatMessageCollection_AddBatchAsync_PnP_Core_Services_Batch_System_String_PnP_Core_Model_Teams_ChatMessageContentType_PnP_Core_Model_Teams_ITeamChatMessageAttachmentCollection_System_String_PnP_Core_Model_Teams_ITeamChatMessageHostedContentCollection_
+  commentId: M:PnP.Core.Model.Teams.ITeamChatMessageCollection.AddBatchAsync(PnP.Core.Services.Batch,System.String,PnP.Core.Model.Teams.ChatMessageContentType,PnP.Core.Model.Teams.ITeamChatMessageAttachmentCollection,System.String,PnP.Core.Model.Teams.ITeamChatMessageHostedContentCollection)
+  fullName: PnP.Core.Model.Teams.ITeamChatMessageCollection.AddBatchAsync(PnP.Core.Services.Batch, System.String, PnP.Core.Model.Teams.ChatMessageContentType, PnP.Core.Model.Teams.ITeamChatMessageAttachmentCollection, System.String, PnP.Core.Model.Teams.ITeamChatMessageHostedContentCollection)
+  nameWithType: ITeamChatMessageCollection.AddBatchAsync(Batch, String, ChatMessageContentType, ITeamChatMessageAttachmentCollection, String, ITeamChatMessageHostedContentCollection)
+- uid: PnP.Core.Model.Teams.ITeamChatMessageCollection.AddBatchAsync(System.String,PnP.Core.Model.Teams.ChatMessageContentType,PnP.Core.Model.Teams.ITeamChatMessageAttachmentCollection,System.String,PnP.Core.Model.Teams.ITeamChatMessageHostedContentCollection)
+  name: AddBatchAsync(String, ChatMessageContentType, ITeamChatMessageAttachmentCollection, String, ITeamChatMessageHostedContentCollection)
+  href: api/PnP.Core.Model.Teams.ITeamChatMessageCollection.html#PnP_Core_Model_Teams_ITeamChatMessageCollection_AddBatchAsync_System_String_PnP_Core_Model_Teams_ChatMessageContentType_PnP_Core_Model_Teams_ITeamChatMessageAttachmentCollection_System_String_PnP_Core_Model_Teams_ITeamChatMessageHostedContentCollection_
+  commentId: M:PnP.Core.Model.Teams.ITeamChatMessageCollection.AddBatchAsync(System.String,PnP.Core.Model.Teams.ChatMessageContentType,PnP.Core.Model.Teams.ITeamChatMessageAttachmentCollection,System.String,PnP.Core.Model.Teams.ITeamChatMessageHostedContentCollection)
+  fullName: PnP.Core.Model.Teams.ITeamChatMessageCollection.AddBatchAsync(System.String, PnP.Core.Model.Teams.ChatMessageContentType, PnP.Core.Model.Teams.ITeamChatMessageAttachmentCollection, System.String, PnP.Core.Model.Teams.ITeamChatMessageHostedContentCollection)
+  nameWithType: ITeamChatMessageCollection.AddBatchAsync(String, ChatMessageContentType, ITeamChatMessageAttachmentCollection, String, ITeamChatMessageHostedContentCollection)
 - uid: PnP.Core.Model.Teams.ITeamChatMessageCollection.AddBatchAsync*
   name: AddBatchAsync
   href: api/PnP.Core.Model.Teams.ITeamChatMessageCollection.html#PnP_Core_Model_Teams_ITeamChatMessageCollection_AddBatchAsync_
@@ -26345,6 +26364,57 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.Teams.ITeamChatMessageContent.ContentType
   nameWithType: ITeamChatMessageContent.ContentType
+- uid: PnP.Core.Model.Teams.ITeamChatMessageHostedContent
+  name: ITeamChatMessageHostedContent
+  href: api/PnP.Core.Model.Teams.ITeamChatMessageHostedContent.html
+  commentId: T:PnP.Core.Model.Teams.ITeamChatMessageHostedContent
+  fullName: PnP.Core.Model.Teams.ITeamChatMessageHostedContent
+  nameWithType: ITeamChatMessageHostedContent
+- uid: PnP.Core.Model.Teams.ITeamChatMessageHostedContent.ContentBytes
+  name: ContentBytes
+  href: api/PnP.Core.Model.Teams.ITeamChatMessageHostedContent.html#PnP_Core_Model_Teams_ITeamChatMessageHostedContent_ContentBytes
+  commentId: P:PnP.Core.Model.Teams.ITeamChatMessageHostedContent.ContentBytes
+  fullName: PnP.Core.Model.Teams.ITeamChatMessageHostedContent.ContentBytes
+  nameWithType: ITeamChatMessageHostedContent.ContentBytes
+- uid: PnP.Core.Model.Teams.ITeamChatMessageHostedContent.ContentBytes*
+  name: ContentBytes
+  href: api/PnP.Core.Model.Teams.ITeamChatMessageHostedContent.html#PnP_Core_Model_Teams_ITeamChatMessageHostedContent_ContentBytes_
+  commentId: Overload:PnP.Core.Model.Teams.ITeamChatMessageHostedContent.ContentBytes
+  isSpec: "True"
+  fullName: PnP.Core.Model.Teams.ITeamChatMessageHostedContent.ContentBytes
+  nameWithType: ITeamChatMessageHostedContent.ContentBytes
+- uid: PnP.Core.Model.Teams.ITeamChatMessageHostedContent.ContentType
+  name: ContentType
+  href: api/PnP.Core.Model.Teams.ITeamChatMessageHostedContent.html#PnP_Core_Model_Teams_ITeamChatMessageHostedContent_ContentType
+  commentId: P:PnP.Core.Model.Teams.ITeamChatMessageHostedContent.ContentType
+  fullName: PnP.Core.Model.Teams.ITeamChatMessageHostedContent.ContentType
+  nameWithType: ITeamChatMessageHostedContent.ContentType
+- uid: PnP.Core.Model.Teams.ITeamChatMessageHostedContent.ContentType*
+  name: ContentType
+  href: api/PnP.Core.Model.Teams.ITeamChatMessageHostedContent.html#PnP_Core_Model_Teams_ITeamChatMessageHostedContent_ContentType_
+  commentId: Overload:PnP.Core.Model.Teams.ITeamChatMessageHostedContent.ContentType
+  isSpec: "True"
+  fullName: PnP.Core.Model.Teams.ITeamChatMessageHostedContent.ContentType
+  nameWithType: ITeamChatMessageHostedContent.ContentType
+- uid: PnP.Core.Model.Teams.ITeamChatMessageHostedContent.Id
+  name: Id
+  href: api/PnP.Core.Model.Teams.ITeamChatMessageHostedContent.html#PnP_Core_Model_Teams_ITeamChatMessageHostedContent_Id
+  commentId: P:PnP.Core.Model.Teams.ITeamChatMessageHostedContent.Id
+  fullName: PnP.Core.Model.Teams.ITeamChatMessageHostedContent.Id
+  nameWithType: ITeamChatMessageHostedContent.Id
+- uid: PnP.Core.Model.Teams.ITeamChatMessageHostedContent.Id*
+  name: Id
+  href: api/PnP.Core.Model.Teams.ITeamChatMessageHostedContent.html#PnP_Core_Model_Teams_ITeamChatMessageHostedContent_Id_
+  commentId: Overload:PnP.Core.Model.Teams.ITeamChatMessageHostedContent.Id
+  isSpec: "True"
+  fullName: PnP.Core.Model.Teams.ITeamChatMessageHostedContent.Id
+  nameWithType: ITeamChatMessageHostedContent.Id
+- uid: PnP.Core.Model.Teams.ITeamChatMessageHostedContentCollection
+  name: ITeamChatMessageHostedContentCollection
+  href: api/PnP.Core.Model.Teams.ITeamChatMessageHostedContentCollection.html
+  commentId: T:PnP.Core.Model.Teams.ITeamChatMessageHostedContentCollection
+  fullName: PnP.Core.Model.Teams.ITeamChatMessageHostedContentCollection
+  nameWithType: ITeamChatMessageHostedContentCollection
 - uid: PnP.Core.Model.Teams.ITeamChatMessageMention
   name: ITeamChatMessageMention
   href: api/PnP.Core.Model.Teams.ITeamChatMessageMention.html
