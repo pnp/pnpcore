@@ -104,7 +104,7 @@ namespace PnP.Core.Auth.Test.Providers
             var provider = new DeviceCodeAuthenticationProvider(
                 clientId,
                 tenantId,
-                null,
+                redirectUri: null,
                 n => { }); // Fake notification, we don't care of it in this test
         }
 

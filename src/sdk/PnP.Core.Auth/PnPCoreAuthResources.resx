@@ -117,9 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="ACSAuthenticationProvider_LogInit" xml:space="preserve">
-    <value>Initialized ACSAuthenticationProvider</value>
-  </data>
   <data name="AspNetCoreAuthenticationProvider_InvalidConfiguration" xml:space="preserve">
     <value>Invalid configuration for AspNetCoreAuthenticationProvider</value>
   </data>
@@ -165,9 +162,6 @@
   <data name="InteractiveAuthenticationProvider_InvalidConfiguration" xml:space="preserve">
     <value>Invalid configuration for InteractiveAuthenticationProvider</value>
   </data>
-  <data name="InteractiveAuthenticationProvider_InvalidRedirectUri" xml:space="preserve">
-    <value>Invalid or missing value for RedirectUri in InteractiveAuthenticationProvider configuration</value>
-  </data>
   <data name="InteractiveAuthenticationProvider_LogInit" xml:space="preserve">
     <value>Initialized InteractiveAuthenticationProvider</value>
   </data>
@@ -198,11 +192,11 @@
   <data name="UsernamePasswordAuthenticationProvider_LogInit" xml:space="preserve">
     <value>Initialized UsernamePasswordAuthenticationProvider with username {0}</value>
   </data>
-  <data name="X509CertificateAuthenticationProvider.InvalidThumbprint" xml:space="preserve">
-    <value>Invalid or missing value for certificate Thumbprint in X509CertificateAuthenticationProvider configuration</value>
-  </data>
   <data name="X509CertificateAuthenticationProvider_InvalidCertificate" xml:space="preserve">
     <value>Cannot find the certificate with thumbprint '{0}' in store '{1}' with store location '{2}' while parsing X509CertificateAuthenticationProvider configuration</value>
+  </data>
+  <data name="X509CertificateAuthenticationProvider_InvalidCertificateOrThumbprint" xml:space="preserve">
+    <value>Invalid or missing value for certificate Thumbprint or Certificate in X509CertificateAuthenticationProvider configuration</value>
   </data>
   <data name="X509CertificateAuthenticationProvider_InvalidConfiguration" xml:space="preserve">
     <value>Invalid configuration for X509CertificateAuthenticationProvider</value>

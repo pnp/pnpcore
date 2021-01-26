@@ -76,27 +76,17 @@ namespace PnP.Core.Auth
         /// <param name="options">The options to use</param>
         internal override void Init(PnPCoreAuthenticationCredentialConfigurationOptions options)
         {
-            // We need the UsernamePassword options
-            if (options.Interactive == null)
-            {
-                throw new ConfigurationErrorsException(
-                    PnPCoreAuthResources.InteractiveAuthenticationProvider_InvalidConfiguration);
-            }
-
-            // We need the RedirectUri
-            if (options.Interactive.RedirectUri == null)
-            {
-                throw new ConfigurationErrorsException(PnPCoreAuthResources.InteractiveAuthenticationProvider_InvalidRedirectUri);
-            }
-
             ClientId = !string.IsNullOrEmpty(options.ClientId) ? options.ClientId : AuthGlobals.DefaultClientId;
             TenantId = !string.IsNullOrEmpty(options.TenantId) ? options.TenantId : AuthGlobals.OrganizationsTenantId;
-            RedirectUri = options.Interactive.RedirectUri;
+            RedirectUri = options.Interactive?.RedirectUri ?? AuthGlobals.DefaultRedirectUri;
 
             // Build the MSAL client
             publicClientApplication = PublicClientApplicationBuilder
                 .Create(ClientId)
-                .WithPnPAdditionalAuthenticationSettings(options.Interactive, TenantId)
+                .WithPnPAdditionalAuthenticationSettings(
+                    options.Interactive?.AuthorityUri,
+                    RedirectUri,
+                    TenantId)
                 .Build();
 
             // Log the initialization information
@@ -133,6 +123,11 @@ namespace PnP.Core.Auth
         /// <returns>An access token</returns>
         public override async Task<string> GetAccessTokenAsync(Uri resource, string[] scopes)
         {
+            if (resource == null)
+            {
+                throw new ArgumentNullException(nameof(resource));
+            }
+
             if (scopes == null)
             {
                 throw new ArgumentNullException(nameof(scopes));

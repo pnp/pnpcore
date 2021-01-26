@@ -88,7 +88,7 @@ namespace PnP.Core.Auth
             // We need the certificate thumbprint
             if (options.X509Certificate.Certificate == null && string.IsNullOrEmpty(options.X509Certificate.Thumbprint))
             {
-                throw new ConfigurationErrorsException(PnPCoreAuthResources.X509CertificateAuthenticationProvider_LogInit);
+                throw new ConfigurationErrorsException(PnPCoreAuthResources.X509CertificateAuthenticationProvider_InvalidCertificateOrThumbprint);
             }
 
             ClientId = !string.IsNullOrEmpty(options.ClientId) ? options.ClientId : AuthGlobals.DefaultClientId;
@@ -101,7 +101,10 @@ namespace PnP.Core.Auth
             confidentialClientApplication = ConfidentialClientApplicationBuilder
                 .Create(ClientId)
                 .WithCertificate(Certificate)
-                .WithPnPAdditionalAuthenticationSettings(options.CredentialManager, TenantId)
+                .WithPnPAdditionalAuthenticationSettings(
+                    options.X509Certificate.AuthorityUri,
+                    options.X509Certificate.RedirectUri,
+                    TenantId)
                 .Build();
 
             // Log the initialization information
@@ -141,6 +144,11 @@ namespace PnP.Core.Auth
         /// <returns>An access token</returns>
         public override async Task<string> GetAccessTokenAsync(Uri resource, string[] scopes)
         {
+            if (resource == null)
+            {
+                throw new ArgumentNullException(nameof(resource));
+            }
+
             if (scopes == null)
             {
                 throw new ArgumentNullException(nameof(scopes));

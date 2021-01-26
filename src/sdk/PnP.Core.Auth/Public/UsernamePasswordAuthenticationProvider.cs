@@ -110,7 +110,10 @@ namespace PnP.Core.Auth
             // Build the MSAL client
             publicClientApplication = PublicClientApplicationBuilder
                 .Create(ClientId)
-                .WithPnPAdditionalAuthenticationSettings(options.UsernamePassword, TenantId)
+                .WithPnPAdditionalAuthenticationSettings(
+                    options.UsernamePassword.AuthorityUri,
+                    options.UsernamePassword.RedirectUri,
+                    TenantId)
                 .Build();
 
             // Log the initialization information
@@ -148,6 +151,11 @@ namespace PnP.Core.Auth
         /// <returns>An access token</returns>
         public override async Task<string> GetAccessTokenAsync(Uri resource, string[] scopes)
         {
+            if (resource == null)
+            {
+                throw new ArgumentNullException(nameof(resource));
+            }
+
             if (scopes == null)
             {
                 throw new ArgumentNullException(nameof(scopes));

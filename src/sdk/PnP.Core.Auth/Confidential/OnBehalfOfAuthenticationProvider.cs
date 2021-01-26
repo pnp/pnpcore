@@ -50,7 +50,7 @@ namespace PnP.Core.Auth
             SecureString clientSecret,
             Func<string> userTokenProvider)
             : this(clientId, tenantId, new PnPCoreAuthenticationOnBehalfOfOptions
-            {
+            {                
                 ClientSecret = clientSecret?.ToInsecureString()
             }, userTokenProvider)
         {
@@ -154,7 +154,10 @@ namespace PnP.Core.Auth
                 confidentialClientApplication = ConfidentialClientApplicationBuilder
                     .Create(ClientId)
                     .WithCertificate(Certificate)
-                    .WithPnPAdditionalAuthenticationSettings(options.OnBehalfOf, TenantId)
+                    .WithPnPAdditionalAuthenticationSettings(
+                        options.OnBehalfOf.AuthorityUri, 
+                        options.OnBehalfOf.RedirectUri,
+                        TenantId)
                     .Build();
             }
             else
@@ -162,7 +165,10 @@ namespace PnP.Core.Auth
                 confidentialClientApplication = ConfidentialClientApplicationBuilder
                     .Create(ClientId)
                     .WithClientSecret(ClientSecret.ToInsecureString())
-                    .WithPnPAdditionalAuthenticationSettings(options.OnBehalfOf, TenantId)
+                    .WithPnPAdditionalAuthenticationSettings(
+                        options.OnBehalfOf.AuthorityUri,
+                        options.OnBehalfOf.RedirectUri,
+                        TenantId)
                     .Build();
             }
 
@@ -200,6 +206,11 @@ namespace PnP.Core.Auth
         /// <returns>An access token</returns>
         public override async Task<string> GetAccessTokenAsync(Uri resource, string[] scopes)
         {
+            if (resource == null)
+            {
+                throw new ArgumentNullException(nameof(resource));
+            }
+
             if (scopes == null)
             {
                 throw new ArgumentNullException(nameof(scopes));

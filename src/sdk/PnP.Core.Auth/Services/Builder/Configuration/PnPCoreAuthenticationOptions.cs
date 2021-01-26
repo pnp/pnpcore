@@ -105,11 +105,6 @@ namespace PnP.Core.Auth.Services.Builder.Configuration
         /// The options for the Device Code Provider
         /// </summary>
         public PnPCoreAuthenticationDeviceCodeOptions DeviceCode { get; set; }
-
-        /// <summary>
-        /// The options for the ACS Provider
-        /// </summary>
-        public PnPCoreAuthenticationACSOptions ACS { get; set; }
     }
 
     /// <summary>
@@ -201,37 +196,6 @@ namespace PnP.Core.Auth.Services.Builder.Configuration
     /// Options for the DeviceCodeAuthenticationProvider
     /// </summary>
     public class PnPCoreAuthenticationDeviceCodeOptions : PnPCoreAuthenticationBaseOptions { }
-
-    /// <summary>
-    /// Defines a collection of credential settings for secure connections to the target resources
-    /// </summary>
-    public class PnPCoreAuthenticationACSOptions
-    {
-        /// <summary>
-        /// Hosted App HostName, can be null
-        /// </summary>
-        public string HostedAppHostName { get; set; }
-
-        /// <summary>
-        /// Secret to use for authentication
-        /// </summary>
-        public string ClientSecret { get; set; }
-
-        /// <summary>
-        /// Realm of the Site Collection, can be null
-        /// </summary>
-        public string Realm { get; set; }
-
-        /// <summary>
-        /// URL of the ACS endpoint
-        /// </summary>
-        public string AcsHostUrl { get; set; } = "accesscontrol.windows.net";
-
-        /// <summary>
-        /// Hostname prefix 
-        /// </summary>
-        public string GlobalEndPointPrefix { get; set; } = "accounts";
-    }
 
     /// <summary>
     /// Options for the DeviceCodeAuthenticationProvider

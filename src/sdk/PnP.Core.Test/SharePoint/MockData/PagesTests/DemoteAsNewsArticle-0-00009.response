@@ -1,4 +1,4 @@
---batchresponse_25ac686e-c928-4bd0-bd74-2aea3cd40bbf
+--batchresponse_a2110417-2d81-4e20-8fdc-763c72a46239
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
@@ -7,25 +7,24 @@ CONTENT-TYPE: application/json; charset=utf-8
 
 { "Row" : 
 [{
-"ID": "765",
+"ID": "857",
 "PermMask": "0x7ffffffffffbffff",
 "FSObjType": "0",
 "HTML_x0020_File_x0020_Type": "",
-"UniqueId": "{EB2B91F7-6E98-486F-8CB4-38142F64A355}",
+"UniqueId": "{0B9DAE38-41BE-437C-8CE8-972AB6833520}",
 "ProgId": "",
 "NoExecute": "0",
+"ContentType": "Site Page",
+"WelcomeViewId": "",
+"WelcomePageCustomized": "",
 "ContentTypeId": "0x0101009D1CB255DA76424F860D91F20E6C411800BC66A1F7CEC63943B700A35FCBCF0164",
 "FileRef": "\u002fsites\u002fprov-1\u002fSitePages\u002fPNP_SDK_TEST_DemoteAsNewsArticle.aspx",
-"FileRef.urlencode": "%2Fsites%2Fprov%2D1%2FSitePages%2FPNP%5FSDK%5FTEST%5FDemoteAsNewsArticle%2Easpx",
-"FileRef.urlencodeasurl": "\u002fsites\u002fprov-1\u002fSitePages\u002fPNP_SDK_TEST_DemoteAsNewsArticle.aspx",
-"FileRef.urlencoding": "\u002fsites\u002fprov-1\u002fSitePages\u002fPNP_SDK_TEST_DemoteAsNewsArticle.aspx",
-"FileRef.scriptencodeasurl": "\\u002fsites\\u002fprov-1\\u002fSitePages\\u002fPNP_SDK_TEST_DemoteAsNewsArticle.aspx",
 "_UIVersion": "512",
-"SMTotalSize": "6054",
-"File_x0020_Size": "4754",
+"SMTotalSize": "5983",
+"File_x0020_Size": "4696",
 "_CommentFlags": "",
 "File_x0020_Type": "aspx",
-"HTML_x0020_File_x0020_Type.File_x0020_Type.mapall": "ichtm.gif|Microsoft SharePoint Designer|SharePoint.OpenDocuments|",
+"File_x0020_Type.mapapp": "",
 "HTML_x0020_File_x0020_Type.File_x0020_Type.mapcon": "SharePoint.OpenDocuments",
 "HTML_x0020_File_x0020_Type.File_x0020_Type.mapico": "ichtm.gif",
 "serverurl.progid": "",
@@ -33,23 +32,13 @@ CONTENT-TYPE: application/json; charset=utf-8
 "File_x0020_Type.progid": "",
 "File_x0020_Type.url": "FALSE",
 "FileLeafRef": "PNP_SDK_TEST_DemoteAsNewsArticle.aspx",
-"FileLeafRef.Name": "PNP_SDK_TEST_DemoteAsNewsArticle",
-"FileLeafRef.Suffix": "aspx",
 "FileDirRef": "\u002fsites\u002fprov-1\u002fSitePages",
 "Description": "PnP",
 "Title": "PNP_SDK_TEST_DemoteAsNewsArticle",
 "ClientSideApplicationId": "{B6917CB1-93A0-4B97-A84D-7CF49975D4EC}",
 "PageLayoutType": "Article",
-"CanvasContent1": "<div dir=\"\" class=\"ms-rtestate-field\"><div><div data-sp-canvascontrol=\"\" data-sp-canvasdataversion=\"1.0\" data-sp-controldata=\"&#123;&quot;editorType&quot;&#58;&quot;CKEditor&quot;,&quot;controlType&quot;&#58;4,&quot;id&quot;&#58;&quot;46cd0eed-981f-44ed-a6b4-961d6010e31c&quot;,&quot;position&quot;&#58;&#123;&quot;controlIndex&quot;&#58;1,&quot;zoneIndex&quot;&#58;1,&quot;sectionIndex&quot;&#58;1,&quot;sectionFactor&quot;&#58;12,&quot;layoutIndex&quot;&#58;1&#125;,&quot;emphasis&quot;&#58;&#123;&quot;zoneEmphasis&quot;&#58;0&#125;&#125;\"><div data-sp-rte=\"\"><p>PnP<\u002fp><\u002fdiv><\u002fdiv><div data-sp-canvascontrol=\"\" data-sp-canvasdataversion=\"1.0\" data-sp-controldata=\"&#123;&quot;controlType&quot;&#58;0,&quot;pageSettingsSlice&quot;&#58;&#123;&quot;isDefaultDescription&quot;&#58;false,&quot;isDefaultThumbnail&quot;&#58;true&#125;&#125;\"><\u002fdiv><\u002fdiv><\u002fdiv>",
+"CanvasContent1": "<div dir=\"\" class=\"ms-rtestate-field\"><div><div data-sp-canvascontrol=\"\" data-sp-canvasdataversion=\"1.0\" data-sp-controldata=\"&#123;&quot;editorType&quot;&#58;&quot;CKEditor&quot;,&quot;controlType&quot;&#58;4,&quot;id&quot;&#58;&quot;a8b774d1-de05-495c-996b-c73fe538b78f&quot;,&quot;position&quot;&#58;&#123;&quot;controlIndex&quot;&#58;1,&quot;zoneIndex&quot;&#58;1,&quot;sectionIndex&quot;&#58;1,&quot;sectionFactor&quot;&#58;12,&quot;layoutIndex&quot;&#58;1&#125;,&quot;emphasis&quot;&#58;&#123;&quot;zoneEmphasis&quot;&#58;0&#125;&#125;\"><div data-sp-rte=\"\"><p>PnP<\u002fp><\u002fdiv><\u002fdiv><div data-sp-canvascontrol=\"\" data-sp-canvasdataversion=\"1.0\" data-sp-controldata=\"&#123;&quot;controlType&quot;&#58;0,&quot;pageSettingsSlice&quot;&#58;&#123;&quot;isDefaultDescription&quot;&#58;false,&quot;isDefaultThumbnail&quot;&#58;true&#125;&#125;\"><\u002fdiv><\u002fdiv><\u002fdiv>",
 "_AuthorByline": "",
-"_AuthorByline.id": "",
-"_AuthorByline.title": "\u002f_layouts\u002f15\u002fimages\u002fsitepagethumbnail.png",
-"_AuthorByline.span": "",
-"_AuthorByline.email": "<div><div data-sp-canvascontrol=\"\" data-sp-canvasdataversion=\"1.4\" data-sp-controldata=\"&#123;&quot;id&quot;&#58;&quot;cbe7b0a9-3504-44dd-a3a3-0e5cacd07788&quot;,&quot;instanceId&quot;&#58;&quot;cbe7b0a9-3504-44dd-a3a3-0e5cacd07788&quot;,&quot;title&quot;&#58;&quot;Title Region&quot;,&quot;description&quot;&#58;&quot;Title Region Description&quot;,&quot;serverProcessedContent&quot;&#58;&#123;&quot;htmlStrings&quot;&#58;&#123;&#125;,&quot;searchablePlainTexts&quot;&#58;&#123;&#125;,&quot;imageSources&quot;&#58;&#123;&#125;,&quot;links&quot;&#58;&#123;&#125;&#125;,&quot;dataVersion&quot;&#58;&quot;1.4&quot;,&quot;properties&quot;&#58;&#123;&quot;title&quot;&#58;&quot;&quot;,&quot;imageSourceType&quot;&#58;4,&quot;layoutType&quot;&#58;&quot;FullWidthImage&quot;,&quot;textAlignment&quot;&#58;&quot;Left&quot;,&quot;showTopicHeader&quot;&#58;false,&quot;showPublishDate&quot;&#58;false,&quot;topicHeader&quot;&#58;&quot;&quot;,&quot;authorByline&quot;&#58;[],&quot;authors&quot;&#58;[]&#125;&#125;\"><\u002fdiv><\u002fdiv>",
-"_AuthorByline.sip": "\u002f_layouts\u002f15\u002fimages\u002fsitepagethumbnail.png",
-"_AuthorByline.jobTitle": "",
-"_AuthorByline.department": "",
-"_AuthorByline.picture": "0",
 "LayoutWebpartsContent": "<div dir=\"\" class=\"ms-rtestate-field\"><div><div data-sp-canvascontrol=\"\" data-sp-canvasdataversion=\"1.4\" data-sp-controldata=\"&#123;&quot;id&quot;&#58;&quot;cbe7b0a9-3504-44dd-a3a3-0e5cacd07788&quot;,&quot;instanceId&quot;&#58;&quot;cbe7b0a9-3504-44dd-a3a3-0e5cacd07788&quot;,&quot;title&quot;&#58;&quot;Title Region&quot;,&quot;description&quot;&#58;&quot;Title Region Description&quot;,&quot;serverProcessedContent&quot;&#58;&#123;&quot;htmlStrings&quot;&#58;&#123;&#125;,&quot;searchablePlainTexts&quot;&#58;&#123;&#125;,&quot;imageSources&quot;&#58;&#123;&#125;,&quot;links&quot;&#58;&#123;&#125;&#125;,&quot;dataVersion&quot;&#58;&quot;1.4&quot;,&quot;properties&quot;&#58;&#123;&quot;title&quot;&#58;&quot;&quot;,&quot;imageSourceType&quot;&#58;4,&quot;layoutType&quot;&#58;&quot;FullWidthImage&quot;,&quot;textAlignment&quot;&#58;&quot;Left&quot;,&quot;showTopicHeader&quot;&#58;false,&quot;showPublishDate&quot;&#58;false,&quot;topicHeader&quot;&#58;&quot;&quot;,&quot;authorByline&quot;&#58;[],&quot;authors&quot;&#58;[]&#125;&#125;\"><\u002fdiv><\u002fdiv><\u002fdiv>",
 "BannerImageUrl": "\u002f_layouts\u002f15\u002fimages\u002fsitepagethumbnail.png",
 "BannerImageUrl.desc": "\u002f_layouts\u002f15\u002fimages\u002fsitepagethumbnail.png",
@@ -65,11 +54,11 @@ CONTENT-TYPE: application/json; charset=utf-8
 "A2ODMountCount": "",
 "owshiddenversion": "3",
 "_SPTranslatedLanguages": "",
+"_SPSitePageFlags": "",
 "ContentVersion": "1",
 "DocConcurrencyNumber": "2",
 "_VirusStatus": "",
-"Restricted": "",
-"ecb.dispex": "return DispEx(this,event,'TRUE','FALSE','FALSE','','1','SharePoint.OpenDocuments','','','','6','0','','0x7ffffffffffbffff','','')"
+"Restricted": ""
 }
 ],"FirstRow" : 1,
 "FolderPermissions" : "0x7ffffffffffbffff"
@@ -81,4 +70,4 @@ CONTENT-TYPE: application/json; charset=utf-8
 ,"CurrentFolderSpItemUrl" : ""
 
 }
---batchresponse_25ac686e-c928-4bd0-bd74-2aea3cd40bbf--
+--batchresponse_a2110417-2d81-4e20-8fdc-763c72a46239--

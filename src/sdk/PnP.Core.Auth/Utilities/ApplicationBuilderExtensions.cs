@@ -9,26 +9,32 @@ namespace PnP.Core.Auth.Utilities
         /// <summary>
         /// Helper method that configures an ApplicationBuilder object with the given options
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="builder"></param>
-        /// <param name="options"></param>
-        /// <param name="tenantid"></param>
+        /// <typeparam name="T">The type built by the ApplicationBuilder</typeparam>
+        /// <param name="builder">The extended ApplicationBuilder</param>
+        /// <param name="authorityUri">The URI of the Azure Active Directory Authority</param>
+        /// <param name="redirectUri">The Redirect URI for authentication</param>
+        /// <param name="tenantId">The ID of the Azure Active Directory Tenant</param>
         /// <returns></returns>
-        public static T WithPnPAdditionalAuthenticationSettings<T>(this AbstractApplicationBuilder<T> builder,
-            PnPCoreAuthenticationBaseOptions options, string tenantid) where T : AbstractApplicationBuilder<T>
+        internal static T WithPnPAdditionalAuthenticationSettings<T>(this AbstractApplicationBuilder<T> builder,
+            Uri authorityUri, Uri redirectUri, string tenantId) where T : AbstractApplicationBuilder<T>
         {
-            if (tenantid.Equals(AuthGlobals.OrganizationsTenantId, StringComparison.InvariantCultureIgnoreCase))
+            if (tenantId == null)
+            {
+                throw new ArgumentNullException(nameof(tenantId));
+            }
+
+            if (tenantId.Equals(AuthGlobals.OrganizationsTenantId, StringComparison.InvariantCultureIgnoreCase))
             {
                 builder = builder.WithAuthority(AadAuthorityAudience.AzureAdMultipleOrgs);
             }
             else
             {
-                builder = builder.WithAuthority(options.AuthorityUri.ToString() ?? "https://login.microsoftonline.com", tenantid, true);
+                builder = builder.WithAuthority(authorityUri?.ToString() ?? "https://login.microsoftonline.com", tenantId, true);
             }
 
-            if (options.RedirectUri != null)
+            if (redirectUri != null)
             {
-                builder = builder.WithRedirectUri(options.RedirectUri.ToString());
+                builder = builder.WithRedirectUri(redirectUri.ToString());
             }
 
             return (T)builder;

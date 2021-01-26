@@ -136,6 +136,11 @@ namespace PnP.Core.Auth
         /// <returns>An access token</returns>
         public override async Task<string> GetAccessTokenAsync(Uri resource, string[] scopes)
         {
+            if (resource == null)
+            {
+                throw new ArgumentNullException(nameof(resource));
+            }
+
             if (scopes == null)
             {
                 // If scopes are missing, let's rely on the internal 

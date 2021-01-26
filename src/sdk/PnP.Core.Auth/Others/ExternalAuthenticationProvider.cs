@@ -80,6 +80,11 @@ namespace PnP.Core.Auth
         public override async Task<string> GetAccessTokenAsync(Uri resource, string[] scopes)
 #pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
         {
+            if (resource == null)
+            {
+                throw new ArgumentNullException(nameof(resource));
+            }
+
             if (scopes == null)
             {
                 throw new ArgumentNullException(nameof(scopes));
