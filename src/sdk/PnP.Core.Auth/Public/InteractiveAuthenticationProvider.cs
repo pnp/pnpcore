@@ -31,17 +31,11 @@ namespace PnP.Core.Auth
         /// <param name="tenantId">The Tenant ID for the Authentication Provider</param>
         /// <param name="redirectUri">The Redirect URI for the authentication flow</param>
         public InteractiveAuthenticationProvider(string clientId, string tenantId, Uri redirectUri)
-            : this(null)
-        {
-            Init(new PnPCoreAuthenticationCredentialConfigurationOptions
+            : this(clientId, tenantId, new PnPCoreAuthenticationInteractiveOptions
             {
-                ClientId = clientId,
-                TenantId = tenantId,
-                Interactive = new PnPCoreAuthenticationInteractiveOptions
-                {
-                    RedirectUri = redirectUri
-                }
-            });
+                RedirectUri = redirectUri
+            })
+        {
         }
 
         /// <summary>
