@@ -45,6 +45,21 @@ namespace PnP.Core.Auth
         {
         }
 
+        /// <summary>
+        /// Public constructor for external consumers of the library
+        /// </summary>
+        /// <param name="clientId">The Client ID for the Authentication Provider</param>
+        /// <param name="tenantId">The Tenant ID for the Authentication Provider</param>
+        /// <param name="certificate">The X.509 certificate to use for authentication</param>
+        public X509CertificateAuthenticationProvider(string clientId, string tenantId,
+            X509Certificate2 certificate)
+            : this(clientId, tenantId,
+                 new PnPCoreAuthenticationX509CertificateOptions
+                 {
+                     Certificate = certificate
+                 })
+        {
+        }
 
         /// <summary>
         /// Public constructor for external consumers of the library
