@@ -1399,6 +1399,12 @@ references:
   commentId: M:PnP.Core.Auth.X509CertificateAuthenticationProvider.#ctor(System.String,System.String,StoreName,StoreLocation,System.String)
   fullName: PnP.Core.Auth.X509CertificateAuthenticationProvider.X509CertificateAuthenticationProvider(System.String, System.String, StoreName, StoreLocation, System.String)
   nameWithType: X509CertificateAuthenticationProvider.X509CertificateAuthenticationProvider(String, String, StoreName, StoreLocation, String)
+- uid: PnP.Core.Auth.X509CertificateAuthenticationProvider.#ctor(System.String,System.String,X509Certificate2)
+  name: X509CertificateAuthenticationProvider(String, String, X509Certificate2)
+  href: api/PnP.Core.Auth.X509CertificateAuthenticationProvider.html#PnP_Core_Auth_X509CertificateAuthenticationProvider__ctor_System_String_System_String_X509Certificate2_
+  commentId: M:PnP.Core.Auth.X509CertificateAuthenticationProvider.#ctor(System.String,System.String,X509Certificate2)
+  fullName: PnP.Core.Auth.X509CertificateAuthenticationProvider.X509CertificateAuthenticationProvider(System.String, System.String, X509Certificate2)
+  nameWithType: X509CertificateAuthenticationProvider.X509CertificateAuthenticationProvider(String, String, X509Certificate2)
 - uid: PnP.Core.Auth.X509CertificateAuthenticationProvider.#ctor*
   name: X509CertificateAuthenticationProvider
   href: api/PnP.Core.Auth.X509CertificateAuthenticationProvider.html#PnP_Core_Auth_X509CertificateAuthenticationProvider__ctor_

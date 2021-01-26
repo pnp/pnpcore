@@ -66,7 +66,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Auth.DeviceCodeAuthenticationProvider.html",
-          "hash": "rdYvkIdhKIMYvCiEkpBSQA=="
+          "hash": "JWp+jjRemyOK02gd8vvkvw=="
         }
       },
       "is_incremental": false,
@@ -78,7 +78,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Auth.DeviceCodeNotification.html",
-          "hash": "vtIFiJIIdND2aAoT51XhpA=="
+          "hash": "iaCLH5e/YYgoZgmecGlGGQ=="
         }
       },
       "is_incremental": false,
@@ -102,7 +102,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Auth.InteractiveAuthenticationProvider.html",
-          "hash": "yoFpQMNBhoIlJMX7EK1uRw=="
+          "hash": "XGG2yu5JaQZsS3qR+E0huw=="
         }
       },
       "is_incremental": false,
@@ -378,7 +378,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Auth.X509CertificateAuthenticationProvider.html",
-          "hash": "wAa9Ek80bKsPI/Fn4L4YsA=="
+          "hash": "hIl3unRqFPCTByrD/CkfhQ=="
         }
       },
       "is_incremental": false,
