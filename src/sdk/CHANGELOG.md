@@ -60,6 +60,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Expansion of the Web object with web properties, root folder, site user info list and more [ypcode - Yannick Plennevaux]
 - Rewrite of the auth model, fixes #43 [PaoloPia - Paolo Pialorsi]
 - LoadProperties now also supports Graph #145 [jansenbe - Bert Jansen]
+- Authentication enhancements #302 [sebastianmattar - Sebastian Mattar]
 
 ### Changed
 
