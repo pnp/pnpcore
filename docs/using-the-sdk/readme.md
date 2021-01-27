@@ -32,11 +32,11 @@ var host = Host.CreateDefaultBuilder()
     // Add the PnP Core SDK library services
     services.AddPnPCore();
     // Add the PnP Core SDK library services configuration from the appsettings.json file
-    services.Configure<PnPCoreOptions>(Configuration.GetSection("PnPCore"));
+    services.Configure<PnPCoreOptions>(hostingContext.Configuration.GetSection("PnPCore"));
     // Add the PnP Core SDK Authentication Providers
     services.AddPnPCoreAuthentication();
     // Add the PnP Core SDK Authentication Providers configuration from the appsettings.json file
-    services.Configure<PnPCoreAuthenticationOptions>(Configuration.GetSection("PnPCore"));
+    services.Configure<PnPCoreAuthenticationOptions>(hostingContext.Configuration.GetSection("PnPCore"));
 })
 // Let the builder know we're running in a console
 .UseConsoleLifetime()
