@@ -83,10 +83,6 @@
                     <h1 id="working-with-a-team-channel-chat-messages">Working with a Team Channel Chat messages</h1>
 
 <p>The Core SDK provides support for working with chat messages within a Teams Channel allowing you to post messages.</p>
-<div class="NOTE">
-<h5>Note</h5>
-<p>Currently, this is a limited implementation that only supports adding text messages, and message posting is currently limited to plain text formats.</p>
-</div>
 <h2 id="creating-context">Creating Context</h2>
 <p>In this article, you'll see a lot of <code>context</code> use: in this case this is a <code>PnPContext</code> which was obtained via the <code>PnPContextFactory</code> as explained in the <a href="readme.html">overview article</a> and show below:</p>
 <pre><code class="lang-csharp">using (var context = await pnpContextFactory.CreateAsync(&quot;SiteToWorkWith&quot;))
@@ -122,6 +118,23 @@ var body = &quot;Hello, I'm posting a message - PnP Rocks!&quot;;
 // Perform the add operation
 await chatMessages.AddAsync(body);
 
+</code></pre>
+<h2 id="add-chat-messages-with-html">Add Chat Messages with HTML</h2>
+<p>You can add chat messages that contain a HTML body, the following code sample will demonstrate how to do this:</p>
+<pre><code class="lang-csharp">// Get the Team
+var team = await context.Team.GetAsync(o =&gt; o.Channels);
+
+// Get the channel
+var channel = team.Channels.FirstOrDefault(i =&gt; i.DisplayName == &quot;General&quot;);
+
+channel = await channel.GetAsync(o =&gt; o.Messages);
+var chatMessages = channel.Messages;
+
+var body = $&quot;&lt;h1&gt;Hello&lt;/h1&gt;&lt;br /&gt;Example posting a HTML message - &lt;strong&gt;PnP Rocks!&lt;/strong&gt;&quot;;
+
+// Perform the add operation
+await chatMessages.AddAsync(body, ChatMessageContentType.Html);
+                
 </code></pre>
 <h2 id="adding-chat-messages-with-attachments">Adding Chat Messages with Attachments</h2>
 <p>Chat messages can support file attachments.</p>
@@ -214,6 +227,7 @@ await chatMessages.AddAsync(body, ChatMessageContentType.Html, coll);
 <p>Additionally, there are different types of cards, such as Adaptive Cards and Thumbnail - these have been tested with unit tests but not all types have yet.
 For information about the different types of cards, visit: <a href="https://docs.microsoft.com/en-us/microsoftteams/platform/task-modules-and-cards/cards/cards-reference">https://docs.microsoft.com/en-us/microsoftteams/platform/task-modules-and-cards/cards/cards-reference</a></p>
 <h2 id="adding-chat-messages-with-inline-images">Adding Chat Messages with Inline Images</h2>
+<p>Chat messages can also include inline images. The following example demonstrates this option:</p>
 <pre><code class="lang-csharp">// Get the Team
 var team = await context.Team.GetAsync(o =&gt; o.Channels);
 
