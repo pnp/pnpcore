@@ -135,12 +135,9 @@ namespace PnP.Core.Test.Teams
                 // assume as if there are no chat messages
                 // There appears to be no remove option yet in this feature - so add a recognisable message
                 var body = $"<h1>Hello</h1><br />This is a unit test (AddChatMessageHtmlAsyncTest) posting a message - <strong>PnP Rocks!</strong> - Woah...";
-                if (!chatMessages.Any(o => o.Body.Content == body))
-                {
-                    //TODO: Fix that null
-                    await chatMessages.AddAsync(body, ChatMessageContentType.Html, null);
-                }
-
+                
+                await chatMessages.AddAsync(body, ChatMessageContentType.Html);
+                
                 channel =  await channel.GetAsync(o => o.Messages);
                 var updateMessages = channel.Messages;
 

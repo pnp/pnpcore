@@ -2,9 +2,6 @@
 
 The Core SDK provides support for working with chat messages within a Teams Channel allowing you to post messages.
 
-> [!NOTE]
-> Currently, this is a limited implementation that only supports adding text messages, and message posting is currently limited to plain text formats.
-
 [!INCLUDE [Creating Context](fragments/creating-context.md)]
 
 ## Getting Chat Messages
@@ -43,6 +40,28 @@ var body = "Hello, I'm posting a message - PnP Rocks!";
 await chatMessages.AddAsync(body);
 
 ```
+
+## Add Chat Messages with HTML
+
+You can add chat messages that contain a HTML body, the following code sample will demonstrate how to do this:
+
+```csharp
+// Get the Team
+var team = await context.Team.GetAsync(o => o.Channels);
+
+// Get the channel
+var channel = team.Channels.FirstOrDefault(i => i.DisplayName == "General");
+
+channel = await channel.GetAsync(o => o.Messages);
+var chatMessages = channel.Messages;
+
+var body = $"<h1>Hello</h1><br />Example posting a HTML message - <strong>PnP Rocks!</strong>";
+
+// Perform the add operation
+await chatMessages.AddAsync(body, ChatMessageContentType.Html);
+                
+```
+
 
 ## Adding Chat Messages with Attachments
 
@@ -145,6 +164,8 @@ For information about the different types of cards, visit: [https://docs.microso
 
 
 ## Adding Chat Messages with Inline Images
+
+Chat messages can also include inline images. The following example demonstrates this option:
 
 ```csharp
 // Get the Team
