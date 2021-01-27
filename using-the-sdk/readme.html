@@ -109,11 +109,11 @@ Each night these preview packages are refreshed, so you can always upgrade to th
     // Add the PnP Core SDK library services
     services.AddPnPCore();
     // Add the PnP Core SDK library services configuration from the appsettings.json file
-    services.Configure&lt;PnPCoreOptions&gt;(Configuration.GetSection(&quot;PnPCore&quot;));
+    services.Configure&lt;PnPCoreOptions&gt;(hostingContext.Configuration.GetSection(&quot;PnPCore&quot;));
     // Add the PnP Core SDK Authentication Providers
     services.AddPnPCoreAuthentication();
     // Add the PnP Core SDK Authentication Providers configuration from the appsettings.json file
-    services.Configure&lt;PnPCoreAuthenticationOptions&gt;(Configuration.GetSection(&quot;PnPCore&quot;));
+    services.Configure&lt;PnPCoreAuthenticationOptions&gt;(hostingContext.Configuration.GetSection(&quot;PnPCore&quot;));
 })
 // Let the builder know we're running in a console
 .UseConsoleLifetime()
