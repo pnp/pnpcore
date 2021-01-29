@@ -188,10 +188,10 @@ namespace PnP.Core.Test.Teams
                 
                 Assert.IsNotNull(existingFile);
                 Assert.AreEqual("test_added.docx", existingFile.Name);
-                
+
                 // Useful reference - https://docs.microsoft.com/en-us/graph/api/chatmessage-post?view=graph-rest-beta&tabs=http#example-4-file-attachments
                 // assume as if there are no chat messages
-                var attachmentId = existingFile.ETag.Replace("{","").Replace("}","").Replace("\"","").Split(',').First(); // Needs to be the documents eTag - just the GUID part
+                var attachmentId = existingFile.ETag.AsGraphEtag(); // Needs to be the documents eTag - just the GUID part
                 var body = $"<h1>Hello</h1><br />This is a unit test with a file attachment (AddChatMessageHtmlAsyncTest) posting a message - <attachment id=\"{attachmentId}\"></attachment>";
                 
                 var fileUri = new Uri(existingFile.LinkingUrl);

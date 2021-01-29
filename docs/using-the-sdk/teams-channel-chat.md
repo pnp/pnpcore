@@ -88,7 +88,7 @@ if(existingFile == default)
 }
 
 // Prepare the attachment ID
-var attachmentId = existingFile.ETag.Replace("{","").Replace("}","").Replace("\"","").Split(',').First(); // Needs to be the documents eTag - just the GUID part
+var attachmentId = existingFile.ETag.AsGraphEtag(); ; // Needs to be the documents eTag - just the GUID part - use this extension method
 
 var body = $"<h1>Hello</h1><br />Example posting a message with a file attachment - <attachment id=\"{attachmentId}\"></attachment>";
 
@@ -117,7 +117,7 @@ For advanced information about the specific area of the Graph that handles sendi
 
 > [!Note]
 > There two areas you should be aware about this feature related to how the Graph works:
-> - The Graph produces a eTag reference in the format "{GUID},ID" with quotes, however this has to be stripped down to just the GUID element, without the surrounding braces, comma, quotes and ID for this to be recognised.
+> - The Graph produces a eTag reference in the format "{GUID},ID" with quotes, however this has to be stripped down to just the GUID element, without the surrounding braces, comma, quotes and ID for this to be recognised. An extension method has been created to avoid having to write this adaption to the eTag.
 > - File used to upload, must not have a query string parameter, this will not be recognised and the Graph treats this as part of the extension and thus will fail if the Name extension is different.
 
 ## Adding Chat Messages with Cards

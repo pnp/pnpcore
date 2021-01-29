@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using System.Text;
 
 namespace PnP.Core
@@ -15,5 +16,16 @@ namespace PnP.Core
         {
             return new MemoryStream(Encoding.UTF8.GetBytes(source));
         }
+
+        /// <summary>
+        /// Used to alter a SharePoint eTag for Graph
+        /// </summary>
+        /// <param name="source"></param>
+        /// <returns></returns>
+        internal static string AsGraphEtag(this string source)
+        {
+            return source?.Replace("{", "").Replace("}", "").Replace("\"", "").Split(',').FirstOrDefault();
+        }
+
     }
 }
