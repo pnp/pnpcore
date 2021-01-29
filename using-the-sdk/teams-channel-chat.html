@@ -157,7 +157,7 @@ if(existingFile == default)
 }
 
 // Prepare the attachment ID
-var attachmentId = existingFile.ETag.Replace(&quot;{&quot;,&quot;&quot;).Replace(&quot;}&quot;,&quot;&quot;).Replace(&quot;\&quot;&quot;,&quot;&quot;).Split(',').First(); // Needs to be the documents eTag - just the GUID part
+var attachmentId = existingFile.ETag.AsGraphEtag(); ; // Needs to be the documents eTag - just the GUID part - use this extension method
 
 var body = $&quot;&lt;h1&gt;Hello&lt;/h1&gt;&lt;br /&gt;Example posting a message with a file attachment - &lt;attachment id=\&quot;{attachmentId}\&quot;&gt;&lt;/attachment&gt;&quot;;
 
@@ -186,7 +186,7 @@ await chatMessages.AddAsync(body, ChatMessageContentType.Html, coll);
 <h5>Note</h5>
 <p>There two areas you should be aware about this feature related to how the Graph works:</p>
 <ul>
-<li>The Graph produces a eTag reference in the format &quot;{GUID},ID&quot; with quotes, however this has to be stripped down to just the GUID element, without the surrounding braces, comma, quotes and ID for this to be recognised.</li>
+<li>The Graph produces a eTag reference in the format &quot;{GUID},ID&quot; with quotes, however this has to be stripped down to just the GUID element, without the surrounding braces, comma, quotes and ID for this to be recognised. An extension method has been created to avoid having to write this adaption to the eTag.</li>
 <li>File used to upload, must not have a query string parameter, this will not be recognised and the Graph treats this as part of the extension and thus will fail if the Name extension is different.</li>
 </ul>
 </div>
