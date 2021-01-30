@@ -64,6 +64,27 @@ namespace PnP.Core.Test.SharePoint
             }
         }
 
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public async Task UnRegisterHubSiteExceptionTest()
+        {
+            TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                ISite site = await context.Site.GetAsync(
+                    p => p.HubSiteId,
+                    p => p.IsHubSite);
+
+                Assert.IsNotNull(site);
+                Assert.AreEqual(default, site.HubSiteId);
+                Assert.IsFalse(site.IsHubSite);
+
+                var result = await site.RegisterHubSiteAsync();
+                
+                await site.UnregisterHubSiteAsync();
+            }
+        }
+
         //[TestMethod]
         //public async Task JoinHubSiteTest()
         //{
