@@ -68,7 +68,7 @@ namespace PnP.Core.Test.SharePoint
         [ExpectedException(typeof(ArgumentException))]
         public async Task UnRegisterHubSiteExceptionTest()
         {
-            TestCommon.Instance.Mocking = false;
+            //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 ISite site = await context.Site.GetAsync(
@@ -79,8 +79,6 @@ namespace PnP.Core.Test.SharePoint
                 Assert.AreEqual(default, site.HubSiteId);
                 Assert.IsFalse(site.IsHubSite);
 
-                var result = await site.RegisterHubSiteAsync();
-                
                 await site.UnregisterHubSiteAsync();
             }
         }
