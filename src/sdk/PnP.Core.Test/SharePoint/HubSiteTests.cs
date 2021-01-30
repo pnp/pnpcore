@@ -83,6 +83,42 @@ namespace PnP.Core.Test.SharePoint
             }
         }
 
+        [TestMethod]
+        public async Task AlreadyRegisteredHubSiteTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                ISite site = await context.Site.GetAsync(
+                   p => p.HubSiteId,
+                   p => p.IsHubSite);
+
+                Assert.IsNotNull(site);
+                Assert.AreEqual(default, site.HubSiteId, "Site shouldnt be a hub site already");
+                Assert.IsFalse(site.IsHubSite);
+
+                var result = await site.RegisterHubSiteAsync();
+                Assert.IsNotNull(result);
+
+                await Assert.ThrowsExceptionAsync<ArgumentException>( async () => {
+
+                    // Check this is updated
+                    site = await context.Site.GetAsync(
+                           p => p.HubSiteId,
+                           p => p.IsHubSite);
+
+                    await site.RegisterHubSiteAsync();
+                });
+
+                // Cleanup
+                site = await context.Site.GetAsync(
+                    p => p.HubSiteId,
+                    p => p.IsHubSite);
+
+                await site.UnregisterHubSiteAsync();
+            }
+        }
+
         //[TestMethod]
         //public async Task JoinHubSiteTest()
         //{

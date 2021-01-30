@@ -1,0 +1,9 @@
+--batchresponse_8feed130-1ee6-463b-bbf5-8cfc401482a7
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+HTTP/1.1 200 OK
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+
+{"d":{"UnregisterHubSite":null}}
+--batchresponse_8feed130-1ee6-463b-bbf5-8cfc401482a7--
