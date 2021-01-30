@@ -284,7 +284,7 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// Unregisters the current site as a primary hub site
         /// </summary>
-        public Task UnregisterHubSiteAsync();
+        public Task<bool> UnregisterHubSiteAsync();
 
         /// <summary>
         /// Associates the current site to a primary hub site

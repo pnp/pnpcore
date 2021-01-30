@@ -40,7 +40,7 @@ namespace PnP.Core.Test.SharePoint
         [TestMethod]
         public async Task RegisterHubSiteTest()
         {
-            TestCommon.Instance.Mocking = false;
+            //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 ISite site = await context.Site.GetAsync(
@@ -53,6 +53,14 @@ namespace PnP.Core.Test.SharePoint
 
                 var result = await site.RegisterHubSiteAsync();
                 Assert.IsNotNull(result);
+
+                // Refresh
+                site = await context.Site.GetAsync(
+                    p => p.HubSiteId,
+                    p => p.IsHubSite);
+
+                await site.UnregisterHubSiteAsync();
+
             }
         }
 

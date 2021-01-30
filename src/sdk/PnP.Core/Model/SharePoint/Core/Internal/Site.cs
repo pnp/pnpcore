@@ -184,27 +184,48 @@ namespace PnP.Core.Model.SharePoint
         /// </summary>
         public async Task<IHubSite> RegisterHubSiteAsync()
         {
-            // There is documentation abiguity for hub site creation
 
-            var apiCall = new ApiCall($"_api/site/RegisterHubSite", ApiType.SPORest);
-            
+            await EnsurePropertiesAsync(p => p.IsHubSite).ConfigureAwait(false);
+
             HubSite hubSite = new HubSite()
             {
                 PnPContext = PnPContext
             };
 
-            await hubSite.RequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
+            if (!IsHubSite)
+            {
+                var apiCall = new ApiCall($"_api/site/RegisterHubSite", ApiType.SPORest);
+                await hubSite.RequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
+            }
+            else
+            {
+                throw new ArgumentException($"Site is already registered as a hub site");
+            }
 
             return hubSite;
-
         }
 
         /// <summary>
         /// Unregisters the current site as a primary hub site
         /// </summary>
-        public Task UnregisterHubSiteAsync()
+        public async Task<bool> UnregisterHubSiteAsync()
         {
-            throw new NotImplementedException();
+            var result = false;
+
+            await EnsurePropertiesAsync(p=>p.IsHubSite).ConfigureAwait(false);
+
+            if (IsHubSite)
+            {
+                var apiCall = new ApiCall($"_api/Site/UnRegisterHubSite", ApiType.SPORest);
+                var response = await RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
+                result = response.StatusCode == System.Net.HttpStatusCode.OK;
+            }
+            else
+            {
+                throw new ArgumentException($"Site is not a hub site");
+            }
+
+            return result;
         }
 
         /// <summary>
