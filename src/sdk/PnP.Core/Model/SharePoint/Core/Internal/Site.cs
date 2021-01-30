@@ -176,6 +176,46 @@ namespace PnP.Core.Model.SharePoint
         }
 
         #endregion
+        
+        #region Hub Site
+
+        /// <summary>
+        /// Registers the current site as a primary hub site
+        /// </summary>
+        public async Task<IHubSite> RegisterHubSiteAsync()
+        {
+            // There is documentation abiguity for hub site creation
+
+            var apiCall = new ApiCall($"_api/site/RegisterHubSite", ApiType.SPORest);
+            
+            HubSite hubSite = new HubSite()
+            {
+                PnPContext = PnPContext
+            };
+
+            await hubSite.RequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
+
+            return hubSite;
+
+        }
+
+        /// <summary>
+        /// Unregisters the current site as a primary hub site
+        /// </summary>
+        public Task UnregisterHubSiteAsync()
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Associates the current site to a primary hub site
+        /// </summary>
+        public Task JoinHubSiteAsync()
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion
 
         #endregion
     }

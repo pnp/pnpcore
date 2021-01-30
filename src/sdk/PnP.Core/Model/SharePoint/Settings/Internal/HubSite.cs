@@ -6,7 +6,7 @@ namespace PnP.Core.Model.SharePoint
     /// <summary>
     /// HubSite class, write your custom code here
     /// </summary>
-    [SharePointType("SP.HubSite", Uri = "_api/xxx", LinqGet = "_api/xxx")]
+    [SharePointType("SP.HubSite")] //Update = "_api/HubSites/getbyid(guid'{Id}')"
     internal partial class HubSite : BaseDataModel<IHubSite>, IHubSite
     {
         #region Construction
@@ -16,13 +16,15 @@ namespace PnP.Core.Model.SharePoint
         #endregion
 
         #region Properties
-        #region New properties
+       
 
         public string Description { get => GetValue<string>(); set => SetValue(value); }
 
         public bool EnablePermissionsSync { get => GetValue<bool>(); set => SetValue(value); }
 
         public string EnforcedECTs { get => GetValue<string>(); set => SetValue(value); }
+
+        public int EnforcedECTsVersion { get => GetValue<int>(); set => SetValue(value); }
 
         public bool HideNameInNavigation { get => GetValue<bool>(); set => SetValue(value); }
 
@@ -33,6 +35,8 @@ namespace PnP.Core.Model.SharePoint
         public Guid ParentHubSiteId { get => GetValue<Guid>(); set => SetValue(value); }
 
         public bool RequiresJoinApproval { get => GetValue<bool>(); set => SetValue(value); }
+
+        public int PermissionsSyncTag { get => GetValue<int>(); set => SetValue(value); }
 
         public Guid SiteDesignId { get => GetValue<Guid>(); set => SetValue(value); }
 
@@ -46,11 +50,10 @@ namespace PnP.Core.Model.SharePoint
 
         public string Title { get => GetValue<string>(); set => SetValue(value); }
 
-        #endregion
+        [KeyProperty(nameof(ID))]
+        public override object Key { get => ID; set => ID = (Guid)value; }
 
         #endregion
 
-        #region Extension methods
-        #endregion
     }
 }

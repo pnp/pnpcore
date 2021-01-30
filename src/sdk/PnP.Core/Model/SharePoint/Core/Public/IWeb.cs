@@ -872,6 +872,15 @@ namespace PnP.Core.Model.SharePoint
 
         #endregion
 
+        #region Hub Site
+
+        /// <summary>
+        /// Sync the hub site theme from parent hub site
+        /// </summary>
+        public Task SyncHubSiteThemeAsync();
+
+        #endregion
+
         #endregion
 
         #region TO IMPLEMENT

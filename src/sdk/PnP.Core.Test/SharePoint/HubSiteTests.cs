@@ -1,4 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using PnP.Core.Model.SharePoint;
+using PnP.Core.Test.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,9 +21,60 @@ namespace PnP.Core.Test.SharePoint
         }
 
         [TestMethod]
-        public void GetHubSiteTest()
+        public async Task GetHubSiteTest()
         {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                ISite site = await context.Site.GetAsync(
+                    p => p.HubSiteId,
+                    p => p.IsHubSite);
 
+                Assert.IsNotNull(site);
+                Assert.AreEqual(default, site.HubSiteId);
+                Assert.IsFalse(site.IsHubSite);
+                
+            }
         }
+
+        [TestMethod]
+        public async Task RegisterHubSiteTest()
+        {
+            TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                ISite site = await context.Site.GetAsync(
+                    p => p.HubSiteId,
+                    p => p.IsHubSite);
+
+                Assert.IsNotNull(site);
+                Assert.AreEqual(default, site.HubSiteId);
+                Assert.IsFalse(site.IsHubSite);
+
+                var result = await site.RegisterHubSiteAsync();
+                Assert.IsNotNull(result);
+            }
+        }
+
+        //[TestMethod]
+        //public async Task JoinHubSiteTest()
+        //{
+        //    throw new NotImplementedException();
+
+        //    //TestCommon.Instance.Mocking = false;
+        //    //using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+        //    //{
+        //    //    ISite site = await context.Site.GetAsync(
+        //    //        p => p.HubSiteId,
+        //    //        p => p.IsHubSite);
+
+        //    //    Assert.IsNotNull(site);
+        //    //    Assert.AreEqual(default, site.HubSiteId);
+        //    //    Assert.IsFalse(site.IsHubSite);
+
+        //    //}
+        //}
+
+
     }
 }
