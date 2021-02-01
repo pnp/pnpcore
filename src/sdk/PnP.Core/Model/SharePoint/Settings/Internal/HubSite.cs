@@ -6,12 +6,24 @@ namespace PnP.Core.Model.SharePoint
     /// <summary>
     /// HubSite class, write your custom code here
     /// </summary>
-    [SharePointType("SP.HubSite")] //Update = "_api/HubSites/getbyid(guid'{Id}')"
+#pragma warning disable CA2243 // Attribute string literals should parse correctly
+    [SharePointType("SP.HubSite", Uri = "_api/HubSites/GetById?hubSiteId='{Site.HubSiteId}'", Get = "_api/HubSites/GetById?hubSiteId='{Site.HubSiteId}'")]
+#pragma warning restore CA2243 // Attribute string literals should parse correctly
     internal partial class HubSite : BaseDataModel<IHubSite>, IHubSite
     {
         #region Construction
         public HubSite()
         {
+            GetApiCallOverrideHandler = async (ApiCallRequest api) =>
+#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
+            {
+                if (!PnPContext.Site.IsPropertyAvailable(p => p.HubSiteId) || PnPContext.Site.HubSiteId == Guid.Empty)
+                {
+                    api.CancelRequest("There is no hubsite associated with this site");
+                }
+                                           
+                return api;
+            };
         }
         #endregion
 
@@ -28,7 +40,8 @@ namespace PnP.Core.Model.SharePoint
 
         public bool HideNameInNavigation { get => GetValue<bool>(); set => SetValue(value); }
 
-        public Guid ID { get => GetValue<Guid>(); set => SetValue(value); }
+        [SharePointProperty("ID")]
+        public Guid Id { get => GetValue<Guid>(); set => SetValue(value); }
 
         public string LogoUrl { get => GetValue<string>(); set => SetValue(value); }
 
@@ -50,8 +63,8 @@ namespace PnP.Core.Model.SharePoint
 
         public string Title { get => GetValue<string>(); set => SetValue(value); }
 
-        [KeyProperty(nameof(ID))]
-        public override object Key { get => ID; set => ID = (Guid)value; }
+        [KeyProperty(nameof(Id))]
+        public override object Key { get => Id; set => Id = (Guid)value; }
 
         #endregion
 

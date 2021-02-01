@@ -38,9 +38,50 @@ namespace PnP.Core.Test.SharePoint
         }
 
         [TestMethod]
+        public async Task GetDirectHubSiteTest()
+        {
+            TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                ISite site = await context.Site.GetAsync(
+                    p => p.HubSiteId,
+                    p => p.IsHubSite);
+
+                Assert.IsNotNull(site);
+                Assert.IsTrue(site.IsPropertyAvailable(s => s.IsHubSite));
+
+                if (!site.IsHubSite) { 
+                    var hub = await site.RegisterHubSiteAsync();
+                    Assert.IsNotNull(hub);
+                }
+
+                // Seperate Get Operation
+                IHubSite hubSite = new HubSite()
+                {
+                    PnPContext = context,
+                    Id = site.HubSiteId
+                   
+                };
+
+                var result = await hubSite.GetAsync();
+
+                Assert.IsNotNull(result);
+                Assert.AreEqual(hubSite.Id, site.HubSiteId);
+                Assert.IsTrue(!string.IsNullOrEmpty(hubSite.Title));
+
+                // Refresh
+                site = await context.Site.GetAsync(
+                    p => p.HubSiteId,
+                    p => p.IsHubSite);
+
+                await site.UnregisterHubSiteAsync();
+            }
+        }
+
+        [TestMethod]
         public async Task RegisterHubSiteTest()
         {
-            //TestCommon.Instance.Mocking = false;
+            TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 ISite site = await context.Site.GetAsync(
