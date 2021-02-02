@@ -74,6 +74,53 @@ foreach (var listItem in myList.Items)
 }
 ```
 
+#### Using paging with CAML queries
+
+By setting a row limit in the CAML query combined with using the the PagingInfo attribute of the [CamlQueryOptions](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.CamlQueryOptions.html) class you can use CAML queries to load data in a paged manner. Below snippet shows the initial page load getting 20 items and the next one getting the next 20 items.
+
+```csharp
+// Assume the fields where not yet loaded, so loading them with the list
+var myList = context.Web.Lists.GetByTitle("My List", p => p.Title, p => p.Items, 
+                                                     p => p.Fields.LoadProperties(p => p.InternalName, p => p.FieldTypeKind, p => p.TypeAsString, p => p.Title));
+
+// Build a query that only returns the first 20 rows where the Title field starts with "Item1"
+string viewXml = @"<View>
+                    <ViewFields>
+                      <FieldRef Name='Title' />
+                    </ViewFields>
+                    <Query>
+                      <Where>
+                        <BeginsWith>
+                          <FieldRef Name='Title'/>
+                          <Value Type='text'>Item1</Value>
+                        </BeginsWith>
+                      </Where>
+                    </Query>
+                    <RowLimit>20</RowLimit>
+                   </View>";
+
+// Execute the query loading the first 20
+await myList.GetItemsByCamlQueryAsync(new CamlQueryOptions()
+{
+    ViewXml = viewXml,
+    DatesInUtc = true
+});
+
+// Execute the query loading the next 20
+await myList.GetItemsByCamlQueryAsync(new CamlQueryOptions()
+{
+    ViewXml = viewXml,
+    DatesInUtc = true,
+    PagingInfo = "Paged=TRUE&p_ID=20"
+});
+
+// Iterate over the retrieved list items
+foreach (var listItem in myList.Items)
+{
+    // Do something with the list item
+}
+```
+
 ### Using the ListDataAsStream approach
 
 Using the [GetListDataAsStreamAsync method](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_GetListDataAsStreamAsync_PnP_Core_Model_SharePoint_RenderListDataOptions_) gives you the most control over how to query the list and what data to return. Using this method is similar to the above described [GetItemsByCamlQueryAsync method](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_GetItemsByCamlQueryAsync_PnP_Core_Model_SharePoint_CamlQueryOptions_) as you typically specify a [CAML](https://docs.microsoft.com/en-us/sharepoint/dev/schema/query-schema) query when using this method. To configure the input of this method you need to use the [RenderListDataOptions class](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.RenderListDataOptions.html). Defining the CAML query to run can be done via the ViewXml property and telling what type of data to return can be done via the [RenderOptions](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.RenderListDataOptions.html#PnP_Core_Model_SharePoint_RenderListDataOptions_RenderOptions) property.
