@@ -398,18 +398,40 @@ namespace PnP.Core.Model.SharePoint
         private ApiCall BuildGetItemsByCamlQueryApiCall(CamlQueryOptions queryOptions)
         {
             // Build body
-            var camlQuery = new
+            ExpandoObject camlQuery;
+
+            if (!string.IsNullOrEmpty(queryOptions.PagingInfo))
             {
-                query = new
+                camlQuery = new
                 {
-                    __metadata = new { type = "SP.CamlQuery" },
-                    queryOptions.ViewXml,
-                    queryOptions.AllowIncrementalResults,
-                    queryOptions.DatesInUtc,
-                    queryOptions.FolderServerRelativeUrl,
-                    queryOptions.ListItemCollectionPosition
-                }
-            }.AsExpando();
+                    query = new
+                    {
+                        __metadata = new { type = "SP.CamlQuery" },
+                        queryOptions.ViewXml,
+                        queryOptions.AllowIncrementalResults,
+                        queryOptions.DatesInUtc,
+                        queryOptions.FolderServerRelativeUrl,
+                        ListItemCollectionPosition = new
+                        {
+                            queryOptions.PagingInfo
+                        }
+                    }
+                }.AsExpando();
+            }
+            else
+            {
+                camlQuery = new
+                {
+                    query = new
+                    {
+                        __metadata = new { type = "SP.CamlQuery" },
+                        queryOptions.ViewXml,
+                        queryOptions.AllowIncrementalResults,
+                        queryOptions.DatesInUtc,
+                        queryOptions.FolderServerRelativeUrl,
+                    }
+                }.AsExpando();
+            }
             string body = JsonSerializer.Serialize(camlQuery, typeof(ExpandoObject), new JsonSerializerOptions() { IgnoreNullValues = true });
 
             var apiCall = new ApiCall($"_api/Web/Lists(guid'{Id}')/GetItems", ApiType.SPORest, body, "Items");
