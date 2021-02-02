@@ -5191,19 +5191,19 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.CamlQueryOptions.FolderServerRelativeUrl
   nameWithType: CamlQueryOptions.FolderServerRelativeUrl
-- uid: PnP.Core.Model.SharePoint.CamlQueryOptions.ListItemCollectionPosition
-  name: ListItemCollectionPosition
-  href: api/PnP.Core.Model.SharePoint.CamlQueryOptions.html#PnP_Core_Model_SharePoint_CamlQueryOptions_ListItemCollectionPosition
-  commentId: P:PnP.Core.Model.SharePoint.CamlQueryOptions.ListItemCollectionPosition
-  fullName: PnP.Core.Model.SharePoint.CamlQueryOptions.ListItemCollectionPosition
-  nameWithType: CamlQueryOptions.ListItemCollectionPosition
-- uid: PnP.Core.Model.SharePoint.CamlQueryOptions.ListItemCollectionPosition*
-  name: ListItemCollectionPosition
-  href: api/PnP.Core.Model.SharePoint.CamlQueryOptions.html#PnP_Core_Model_SharePoint_CamlQueryOptions_ListItemCollectionPosition_
-  commentId: Overload:PnP.Core.Model.SharePoint.CamlQueryOptions.ListItemCollectionPosition
+- uid: PnP.Core.Model.SharePoint.CamlQueryOptions.PagingInfo
+  name: PagingInfo
+  href: api/PnP.Core.Model.SharePoint.CamlQueryOptions.html#PnP_Core_Model_SharePoint_CamlQueryOptions_PagingInfo
+  commentId: P:PnP.Core.Model.SharePoint.CamlQueryOptions.PagingInfo
+  fullName: PnP.Core.Model.SharePoint.CamlQueryOptions.PagingInfo
+  nameWithType: CamlQueryOptions.PagingInfo
+- uid: PnP.Core.Model.SharePoint.CamlQueryOptions.PagingInfo*
+  name: PagingInfo
+  href: api/PnP.Core.Model.SharePoint.CamlQueryOptions.html#PnP_Core_Model_SharePoint_CamlQueryOptions_PagingInfo_
+  commentId: Overload:PnP.Core.Model.SharePoint.CamlQueryOptions.PagingInfo
   isSpec: "True"
-  fullName: PnP.Core.Model.SharePoint.CamlQueryOptions.ListItemCollectionPosition
-  nameWithType: CamlQueryOptions.ListItemCollectionPosition
+  fullName: PnP.Core.Model.SharePoint.CamlQueryOptions.PagingInfo
+  nameWithType: CamlQueryOptions.PagingInfo
 - uid: PnP.Core.Model.SharePoint.CamlQueryOptions.ViewXml
   name: ViewXml
   href: api/PnP.Core.Model.SharePoint.CamlQueryOptions.html#PnP_Core_Model_SharePoint_CamlQueryOptions_ViewXml
