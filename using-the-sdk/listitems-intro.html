@@ -227,6 +227,48 @@ foreach (var listItem in myList.Items)
     // Do something with the list item
 }
 </code></pre>
+<h4 id="using-paging-with-listdataasstream">Using paging with ListDataAsStream</h4>
+<pre><code class="lang-csharp">// Assume the fields where not yet loaded, so loading them with the list
+var myList = context.Web.Lists.GetByTitle(&quot;My List&quot;, p =&gt; p.Title, p =&gt; p.Items, 
+                                                     p =&gt; p.Fields.LoadProperties(p =&gt; p.InternalName, p =&gt; p.FieldTypeKind, p =&gt; p.TypeAsString, p =&gt; p.Title));
+
+// Build a query that only returns the Title field for the first 20 items where the Title field starts with &quot;Item1&quot;
+string viewXml = @&quot;&lt;View&gt;
+                    &lt;ViewFields&gt;
+                      &lt;FieldRef Name='Title' /&gt;
+                    &lt;/ViewFields&gt;
+                    &lt;Query&gt;
+                      &lt;Where&gt;
+                        &lt;BeginsWith&gt;
+                          &lt;FieldRef Name='Title'/&gt;
+                          &lt;Value Type='text'&gt;Item1&lt;/Value&gt;
+                        &lt;/BeginsWith&gt;
+                      &lt;/Where&gt;
+                    &lt;/Query&gt;
+                    &lt;RowLimit Paged='TRUE'&gt;20&lt;/RowLimit&gt;
+                   &lt;/View&gt;&quot;;
+
+// Execute the query for the first page
+var output = await myList.GetListDataAsStreamAsync(new RenderListDataOptions()
+{
+    ViewXml = viewXml,
+    RenderOptions = RenderListDataOptionsFlags.ListData
+});
+
+// Execute the query for the next page
+output = await myList.GetListDataAsStreamAsync(new RenderListDataOptions()
+{
+    ViewXml = viewXml,
+    RenderOptions = RenderListDataOptionsFlags.ListData,
+    Paging = output[&quot;NextHref&quot;].ToString().Substring(1)
+});
+
+// Iterate over the retrieved list items
+foreach (var listItem in myList.Items)
+{
+    // Do something with the list item
+}
+</code></pre>
 <h2 id="adding-list-items">Adding list items</h2>
 <p>Adding list items is done using one of the Add methods on the <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IListItemCollection.html">ListItemCollection class</a>, e.g. the <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IListItemCollection.html#PnP_Core_Model_SharePoint_IListItemCollection_AddAsync_Dictionary_System_String_System_Object__">AddAsync method</a> and requires two steps:</p>
 <ul>
