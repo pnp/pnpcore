@@ -637,6 +637,77 @@ namespace PnP.Core.Test.Base
                 }
             }
         }
+
+        [TestMethod]
+        public async Task ListDataAsStreamListItemGetPagedAsyncPaging()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                // Force rest
+                context.GraphFirst = false;
+
+                var web = await context.Web.GetAsync(p => p.Lists);
+
+                string listTitle = "ListDataAsStreamListItemGetPagedAsyncPaging";
+                var list = web.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
+
+                if (list != null)
+                {
+                    Assert.Inconclusive("Test data set should be setup to not have the list available.");
+                }
+                else
+                {
+                    list = await web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
+                }
+
+                if (list != null)
+                {
+                    // Add items
+                    for (int i = 0; i < 100; i++)
+                    {
+                        Dictionary<string, object> values = new Dictionary<string, object>
+                        {
+                            { "Title", $"Item {i}" }
+                        };
+
+                        await list.Items.AddBatchAsync(values);
+                    }
+                    await context.ExecuteAsync();
+
+                    // Since we've already populated the model due to the add let's create a second context to perform a clean load again
+                    using (var context2 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+                    {
+                        // Force rest
+                        context2.GraphFirst = false;
+
+                        var list2 = context2.Web.Lists.Where(p => p.Id == list.Id).FirstOrDefault();
+
+                        var result = await list2.GetListDataAsStreamAsync(new RenderListDataOptions() 
+                        { 
+                            ViewXml = "<View><ViewFields><FieldRef Name='Title' /></ViewFields><RowLimit Paged='TRUE'>20</RowLimit></View>", 
+                            RenderOptions = RenderListDataOptionsFlags.ListData 
+                        });                        
+
+                        Assert.IsTrue(list2.Items.Count() == 20);
+
+                        result = await list2.GetListDataAsStreamAsync(new RenderListDataOptions()
+                        {
+                            ViewXml = "<View><ViewFields><FieldRef Name='Title' /></ViewFields><RowLimit Paged='TRUE'>20</RowLimit></View>",
+                            RenderOptions = RenderListDataOptionsFlags.ListData,
+                            Paging = result["NextHref"].ToString().Substring(1)
+                        });
+
+                        Assert.IsTrue(list2.Items.Count() == 40);
+                        Assert.IsTrue(list2.Items.ElementAt(21).Id == 22);
+
+                        // delete the list
+                        await list2.DeleteAsync();
+                    }
+                }
+            }
+        }
+
         #endregion
 
 

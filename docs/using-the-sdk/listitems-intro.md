@@ -165,6 +165,51 @@ foreach (var listItem in myList.Items)
 }
 ```
 
+#### Using paging with ListDataAsStream
+
+```csharp
+// Assume the fields where not yet loaded, so loading them with the list
+var myList = context.Web.Lists.GetByTitle("My List", p => p.Title, p => p.Items, 
+                                                     p => p.Fields.LoadProperties(p => p.InternalName, p => p.FieldTypeKind, p => p.TypeAsString, p => p.Title));
+
+// Build a query that only returns the Title field for the first 20 items where the Title field starts with "Item1"
+string viewXml = @"<View>
+                    <ViewFields>
+                      <FieldRef Name='Title' />
+                    </ViewFields>
+                    <Query>
+                      <Where>
+                        <BeginsWith>
+                          <FieldRef Name='Title'/>
+                          <Value Type='text'>Item1</Value>
+                        </BeginsWith>
+                      </Where>
+                    </Query>
+                    <RowLimit Paged='TRUE'>20</RowLimit>
+                   </View>";
+
+// Execute the query for the first page
+var output = await myList.GetListDataAsStreamAsync(new RenderListDataOptions()
+{
+    ViewXml = viewXml,
+    RenderOptions = RenderListDataOptionsFlags.ListData
+});
+
+// Execute the query for the next page
+output = await myList.GetListDataAsStreamAsync(new RenderListDataOptions()
+{
+    ViewXml = viewXml,
+    RenderOptions = RenderListDataOptionsFlags.ListData,
+    Paging = output["NextHref"].ToString().Substring(1)
+});
+
+// Iterate over the retrieved list items
+foreach (var listItem in myList.Items)
+{
+    // Do something with the list item
+}
+```
+
 ## Adding list items
 
 Adding list items is done using one of the Add methods on the [ListItemCollection class](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IListItemCollection.html), e.g. the [AddAsync method](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IListItemCollection.html#PnP_Core_Model_SharePoint_IListItemCollection_AddAsync_Dictionary_System_String_System_Object__) and requires two steps:
