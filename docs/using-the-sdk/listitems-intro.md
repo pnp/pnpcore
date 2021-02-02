@@ -111,7 +111,7 @@ await myList.GetItemsByCamlQueryAsync(new CamlQueryOptions()
 {
     ViewXml = viewXml,
     DatesInUtc = true,
-    PagingInfo = $"Paged=TRUE&p_ID={list2.Items.Last().Id}"
+    PagingInfo = $"Paged=TRUE&p_ID={myList.Items.Last().Id}"
 });
 
 // Iterate over the retrieved list items
