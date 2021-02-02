@@ -625,7 +625,7 @@ namespace PnP.Core.Test.Base
                         await list2.GetItemsByCamlQueryAsync(new CamlQueryOptions()
                         {
                             ViewXml = "<View><ViewFields><FieldRef Name='Title' /></ViewFields><RowLimit>20</RowLimit></View>",
-                            PagingInfo = "Paged=TRUE&p_ID=20"
+                            PagingInfo = $"Paged=TRUE&p_ID={list2.Items.Last().Id}"
                         });
 
                         Assert.IsTrue(list2.Items.Count() == 40);

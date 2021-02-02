@@ -111,7 +111,7 @@ await myList.GetItemsByCamlQueryAsync(new CamlQueryOptions()
 {
     ViewXml = viewXml,
     DatesInUtc = true,
-    PagingInfo = "Paged=TRUE&p_ID=20"
+    PagingInfo = $"Paged=TRUE&p_ID={list2.Items.Last().Id}"
 });
 
 // Iterate over the retrieved list items
@@ -120,6 +120,9 @@ foreach (var listItem in myList.Items)
     // Do something with the list item
 }
 ```
+
+> [!Note]
+> If you're query is ordered by one or more fields these fields also have to specified in the PagingInfo, e.g. if ordered on Title the PagingInfo would be `$"Paged=TRUE&p_ID={list2.Items.Last().Id}&p_Title=${list2.Items.Last().Title}"`. If you want to load the previous page you also need to add `&PagedPrev=TRUE`.
 
 ### Using the ListDataAsStream approach
 
