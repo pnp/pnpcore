@@ -34,5 +34,6 @@ Token | Description
 `{Site.Id}` | SharePoint Id value of the Site loaded in the current PnPContext.
 `{Web.Id}` | SharePoint Id value of the Web loaded in the current PnPContext.
 `{Web.GraphId}` | Microsoft Graph Id value of the Web loaded in the current PnPContext.
+`{List.Id}` | SharePoint Id value of the List loaded in the current PnPContext (works only when the target object is of type List or ListItem).
 `{hostname}` | Host name of the current site (so for https://contoso.sharepoint.com/sites/team1 this is contoso.sharepoint.com)
 `{serverrelativepath}` | Server relative path of the current site (so for https://contoso.sharepoint.com/sites/team1 this is /sites/team1)
