@@ -658,7 +658,7 @@ namespace PnP.Core.Test.SharePoint
                 Assert.IsTrue(myList.InformationRightsManagementSettings.AllowWriteCopy == false);
                 Assert.IsTrue(myList.InformationRightsManagementSettings.DisableDocumentBrowserView == false);
                 Assert.IsTrue(myList.InformationRightsManagementSettings.DocumentAccessExpireDays == 90);
-                Assert.IsTrue(myList.InformationRightsManagementSettings.DocumentLibraryProtectionExpireDate > DateTime.Today);
+                Assert.IsTrue(myList.InformationRightsManagementSettings.DocumentLibraryProtectionExpireDate > new DateTime(2021, 1, 1));
                 Assert.IsTrue(myList.InformationRightsManagementSettings.EnableDocumentAccessExpire == false);
                 Assert.IsTrue(myList.InformationRightsManagementSettings.EnableDocumentBrowserPublishingView == false);
                 Assert.IsTrue(myList.InformationRightsManagementSettings.EnableGroupProtection == false);
@@ -716,7 +716,7 @@ namespace PnP.Core.Test.SharePoint
                 Assert.IsTrue(myList.InformationRightsManagementSettings.AllowWriteCopy == false);
                 Assert.IsTrue(myList.InformationRightsManagementSettings.DisableDocumentBrowserView == false);
                 Assert.IsTrue(myList.InformationRightsManagementSettings.DocumentAccessExpireDays == 90);
-                Assert.IsTrue(myList.InformationRightsManagementSettings.DocumentLibraryProtectionExpireDate > DateTime.Today);
+                Assert.IsTrue(myList.InformationRightsManagementSettings.DocumentLibraryProtectionExpireDate > new DateTime(2021, 1, 1));
                 Assert.IsTrue(myList.InformationRightsManagementSettings.EnableDocumentAccessExpire == false);
                 Assert.IsTrue(myList.InformationRightsManagementSettings.EnableDocumentBrowserPublishingView == false);
                 Assert.IsTrue(myList.InformationRightsManagementSettings.EnableGroupProtection == false);
