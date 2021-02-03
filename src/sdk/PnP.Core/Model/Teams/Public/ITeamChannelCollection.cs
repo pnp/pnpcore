@@ -85,7 +85,5 @@ namespace PnP.Core.Model.Teams
         public Task<ITeamChannel> GetByDisplayNameAsync(string displayName, params Expression<Func<ITeamChannel, object>>[] selectors);
 
         #endregion
-
-
     }
 }
