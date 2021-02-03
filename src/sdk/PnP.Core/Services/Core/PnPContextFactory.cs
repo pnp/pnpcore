@@ -19,7 +19,9 @@ namespace PnP.Core.Services
     /// </summary>
     public class PnPContextFactory : IPnPContextFactory
     {
+#if NET5_0
         private static readonly HttpClient httpClient = new HttpClient();
+#endif
         private bool telemetryInitialized;
 
         /// <summary>

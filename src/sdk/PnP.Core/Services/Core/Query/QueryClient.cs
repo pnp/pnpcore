@@ -18,15 +18,13 @@ using System.Web;
 
 namespace PnP.Core.Services
 {
-    internal class QueryClient
+    internal static class QueryClient
     {
         #region GET
 
         #region Model data get
 
-#pragma warning disable CA1822 // Mark members as static
-        internal async Task<ApiCallRequest> BuildGetAPICallAsync<TModel>(BaseDataModel<TModel> model, EntityInfo entity, ApiCall apiOverride, bool forceSPORest = false, bool useLinqGet = false)
-#pragma warning restore CA1822 // Mark members as static
+        internal static async Task<ApiCallRequest> BuildGetAPICallAsync<TModel>(BaseDataModel<TModel> model, EntityInfo entity, ApiCall apiOverride, bool forceSPORest = false, bool useLinqGet = false)
         {
             // Can we use Microsoft Graph for this GET request?
             bool useGraph = model.PnPContext.GraphFirst &&    // See if Graph First is enabled/configured
@@ -470,9 +468,7 @@ namespace PnP.Core.Services
 
         #region API Calls for non expandable collections
 
-#pragma warning disable CA1822 // Mark members as static
-        internal async Task AddGraphBatchRequestsForNonExpandableCollectionsAsync<TModel>(BaseDataModel<TModel> model, Batch batch, EntityInfo entityInfo, Expression<Func<TModel, object>>[] expressions, Func<FromJson, object> fromJsonCasting, Action<string> postMappingJson)
-#pragma warning restore CA1822 // Mark members as static
+        internal static async Task AddGraphBatchRequestsForNonExpandableCollectionsAsync<TModel>(BaseDataModel<TModel> model, Batch batch, EntityInfo entityInfo, Expression<Func<TModel, object>>[] expressions, Func<FromJson, object> fromJsonCasting, Action<string> postMappingJson)
         {
             ApiType apiType = ApiType.Graph;
 
@@ -651,9 +647,7 @@ namespace PnP.Core.Services
             return null;
         }
 
-#pragma warning disable CA1822 // Mark members as static
-        internal Tuple<string, ApiType> BuildNextPageLink<TModel>(BaseDataModelCollection<TModel> collection)
-#pragma warning restore CA1822 // Mark members as static
+        internal static Tuple<string, ApiType> BuildNextPageLink<TModel>(BaseDataModelCollection<TModel> collection)
         {
             string nextLink;
             ApiType nextLinkApiType;
@@ -908,9 +902,7 @@ namespace PnP.Core.Services
         #endregion
 
         #region UPDATE
-#pragma warning disable CA1822 // Mark members as static
-        internal async Task<ApiCallRequest> BuildUpdateAPICallAsync<TModel>(BaseDataModel<TModel> model, EntityInfo entity)
-#pragma warning restore CA1822 // Mark members as static
+        internal static async Task<ApiCallRequest> BuildUpdateAPICallAsync<TModel>(BaseDataModel<TModel> model, EntityInfo entity)
         {
             bool useGraph = false;
 
@@ -1168,9 +1160,7 @@ namespace PnP.Core.Services
         #endregion
 
         #region DELETE
-#pragma warning disable CA1822 // Mark members as static
-        internal async Task<ApiCallRequest> BuildDeleteAPICallAsync<TModel>(BaseDataModel<TModel> model, EntityInfo entity)
-#pragma warning restore CA1822 // Mark members as static
+        internal static async Task<ApiCallRequest> BuildDeleteAPICallAsync<TModel>(BaseDataModel<TModel> model, EntityInfo entity)
         {
             bool useGraph = false;
 
