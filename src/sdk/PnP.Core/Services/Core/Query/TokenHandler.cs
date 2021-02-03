@@ -182,7 +182,7 @@ namespace PnP.Core.Services
                                 var list = pnpObject as Model.SharePoint.IList;
 
                                 // If the object is a list item
-                                if (list != null && pnpObject is Model.SharePoint.IListItem listItem)
+                                if (list == null && pnpObject is Model.SharePoint.IListItem listItem)
                                 {
                                     // Get the parent list of the current list item
                                     list = GetParentDataModel(listItem as IMetadataExtensible) as Model.SharePoint.IList;
