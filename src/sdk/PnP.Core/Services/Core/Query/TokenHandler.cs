@@ -178,17 +178,14 @@ namespace PnP.Core.Services
                     {
                         case "Id":
                             {
-                                // Try to see if the current object is a list item
-                                var listItem = pnpObject as Model.SharePoint.IListItem;
-
                                 // Try to see if the current object is a list
                                 var list = pnpObject as Model.SharePoint.IList;
 
                                 // If the object is a list item
-                                if (listItem != null)
+                                if (list != null && pnpObject is Model.SharePoint.IListItem listItem)
                                 {
                                     // Get the parent list of the current list item
-                                    list = listItem.Parent as Model.SharePoint.IList;
+                                    list = GetParentDataModel(listItem as IMetadataExtensible) as Model.SharePoint.IList;
                                 }
                                 
                                 // If we've got the list
