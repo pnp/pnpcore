@@ -2,6 +2,7 @@ using PnP.Core.QueryModel;
 using PnP.Core.Services;
 using System;
 using System.IO;
+using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 
@@ -53,9 +54,9 @@ namespace PnP.Core.Model.SharePoint
             {
                 throw new ArgumentNullException(nameof(serverRelativePageName));
             }
-
+            var encodedServerRelativePageName = WebUtility.UrlEncode(serverRelativePageName);
             var newFile = CreateNewAndAdd() as File;
-            string fileCreateRequest = $"_api/web/getFolderById('{{Parent.Id}}')/files/AddTemplateFile(urlOfFile='{serverRelativePageName}',templateFileType={(int)templateFileType})";
+            string fileCreateRequest = $"_api/web/getFolderById('{{Parent.Id}}')/files/AddTemplateFile(urlOfFile='{encodedServerRelativePageName}',templateFileType={(int)templateFileType})";
             var api = new ApiCall(fileCreateRequest, ApiType.SPORest);
             await newFile.RequestAsync(api, HttpMethod.Post).ConfigureAwait(false);
             return newFile;

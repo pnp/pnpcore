@@ -96,7 +96,7 @@ namespace PnP.Core.Model.SharePoint
         public bool Hidden { get; set; }
 
         /// <summary>
-        /// Gets or Sets the id of the field
+        /// Provides the id of the field
         /// </summary>
         public Guid Id { get; }
 

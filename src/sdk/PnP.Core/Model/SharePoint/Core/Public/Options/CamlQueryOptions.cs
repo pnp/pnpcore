@@ -28,6 +28,6 @@
         /// <summary>
         /// Value that specifies information, as name-value pairs, required to get the next page of data for a list view
         /// </summary>
-        public string ListItemCollectionPosition { get; set; }
+        public string PagingInfo { get; set; }
     }
 }

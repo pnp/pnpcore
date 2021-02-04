@@ -17,24 +17,6 @@ namespace PnP.Core.Model
     /// </summary>
     internal abstract class BaseDataModelCollection<TModel> : IDataModelCollection<TModel>, IManageableCollection<TModel>, ISupportPaging<TModel>, IMetadataExtensible
     {
-        private QueryClient query;
-
-        /// <summary>
-        /// Connected query client
-        /// </summary>
-        internal QueryClient Query
-        {
-            get
-            {
-                if (query == null)
-                {
-                    query = new QueryClient();
-                }
-
-                return query;
-            }
-        }
-
         #region Core properties
 
         /// <summary>
@@ -601,7 +583,7 @@ namespace PnP.Core.Model
                 }
 
                 // Prepare api call
-                (var nextLink, var nextLinkApiType) = Query.BuildNextPageLink(this);
+                (var nextLink, var nextLinkApiType) = QueryClient.BuildNextPageLink(this);
 
                 var batchRequestId = PnPContext.CurrentBatch.Add(
                     Parent as TransientObject,
@@ -896,7 +878,7 @@ namespace PnP.Core.Model
             var concreteEntityClassInfo = EntityManager.GetClassInfo(typeof(TModel), concreteEntity as BaseDataModel<TModel>, null);
 
             // Build the delete call
-            var query = await new QueryClient().BuildDeleteAPICallAsync(concreteEntity as BaseDataModel<TModel>, concreteEntityClassInfo).ConfigureAwait(false);
+            var query = await QueryClient.BuildDeleteAPICallAsync(concreteEntity as BaseDataModel<TModel>, concreteEntityClassInfo).ConfigureAwait(false);
 
             return new Tuple<ApiCallRequest, BaseDataModel<TModel>>(query, concreteEntity as BaseDataModel<TModel>);
         }

@@ -46,7 +46,7 @@ namespace PnP.Core.QueryModel
                     string.Format(PnPCoreResources.Exception_LinqError_MissingValue, nameof(memberName), GetType().Name));
             }
 
-            // At this point in time we support querying collections for which the model implements IQueryableModel
+            // At this point in time we support querying collections for which the model implements IQueryableDataModel
             if (typeof(TModel).ImplementsInterface(typeof(IQueryableDataModel)))
             {
                 // Get the entity info, depending on how we enter EntityInfo was already created

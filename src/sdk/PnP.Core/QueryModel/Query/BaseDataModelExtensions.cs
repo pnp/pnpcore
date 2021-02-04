@@ -211,7 +211,7 @@ namespace PnP.Core.QueryModel
             var entityInfo = EntityManager.GetClassInfo(concreteEntity.GetType(), (concreteEntity as BaseDataModel<T>), selectors);
 
             // Build the default get query but pass in our given API call as override
-            var query = await new QueryClient().BuildGetAPICallAsync(concreteEntity as BaseDataModel<T>, entityInfo, apiCall).ConfigureAwait(false);
+            var query = await QueryClient.BuildGetAPICallAsync(concreteEntity as BaseDataModel<T>, entityInfo, apiCall).ConfigureAwait(false);
 
             // Trigger the get request
             await (concreteEntity as BaseDataModel<T>).RequestAsync(query.ApiCall, HttpMethod.Get, "Get").ConfigureAwait(false);

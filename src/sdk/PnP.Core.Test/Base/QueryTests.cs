@@ -47,7 +47,7 @@ namespace PnP.Core.Test.Base
             List<string> requests = new List<string>();
 
             // Run the basic query generation
-            var apiCallRequest = await new QueryClient().BuildGetAPICallAsync(input.Item1 as BaseDataModel<TModelInterface>, input.Item2, default);
+            var apiCallRequest = await QueryClient.BuildGetAPICallAsync(input.Item1 as BaseDataModel<TModelInterface>, input.Item2, default);
             requests.Add(CleanRequestUrl((input.Item1 as IDataModelWithContext).PnPContext, apiCallRequest.ApiCall.Request));
 
             // Run the extra query generation (used to handle non expandable queries via a single batch)
@@ -64,7 +64,7 @@ namespace PnP.Core.Test.Base
         {
             var batch = (input.Item1 as IDataModelWithContext).PnPContext.NewBatch();
 
-            await new QueryClient().AddGraphBatchRequestsForNonExpandableCollectionsAsync(input.Item1 as BaseDataModel<TModelInterface>, batch, input.Item2, input.Item3, null, null);
+            await QueryClient.AddGraphBatchRequestsForNonExpandableCollectionsAsync(input.Item1 as BaseDataModel<TModelInterface>, batch, input.Item2, input.Item3, null, null);
 
             List<string> requests = new List<string>();
             foreach (var request in batch.Requests)

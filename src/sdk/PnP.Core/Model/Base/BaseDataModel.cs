@@ -44,8 +44,6 @@ namespace PnP.Core.Model
     /// <typeparam name="TModel">Model class</typeparam>
     internal class BaseDataModel<TModel> : TransientObject, IDataModel<TModel>, IDataModelGet, IRequestable, IMetadataExtensible, IDataModelWithKey, IDataModelMappingHandler
     {
-        private QueryClient query;
-
         #region Core properties
 
         /// <summary>
@@ -75,23 +73,6 @@ namespace PnP.Core.Model
             get
             {
                 return PnPContext.Logger;
-            }
-        }
-
-        /// <summary>
-        /// Connected query client
-        /// </summary>
-        [SystemProperty]
-        internal QueryClient Query
-        {
-            get
-            {
-                if (query == null)
-                {
-                    query = new QueryClient();
-                }
-
-                return query;
             }
         }
 
@@ -495,7 +476,7 @@ namespace PnP.Core.Model
             else
             {
                 // Construct the API call to make
-                var api = await Query.BuildGetAPICallAsync(this, entityInfo, apiOverride).ConfigureAwait(false);
+                var api = await QueryClient.BuildGetAPICallAsync(this, entityInfo, apiOverride).ConfigureAwait(false);
 
                 if (api.Cancelled)
                 {
@@ -510,7 +491,7 @@ namespace PnP.Core.Model
                 // Let's ensure these additional API calls's are included in a single batch
                 if (api.ApiCall.Type == ApiType.Graph || api.ApiCall.Type == ApiType.GraphBeta)
                 {
-                    await Query.AddGraphBatchRequestsForNonExpandableCollectionsAsync(this, batch, entityInfo, expressions, fromJsonCasting, postMappingJson).ConfigureAwait(false);
+                    await QueryClient.AddGraphBatchRequestsForNonExpandableCollectionsAsync(this, batch, entityInfo, expressions, fromJsonCasting, postMappingJson).ConfigureAwait(false);
                 }
 
                 await PnPContext.BatchClient.ExecuteBatch(batch).ConfigureAwait(false);
@@ -530,7 +511,7 @@ namespace PnP.Core.Model
             // Get entity information for the entity to load
             var entityInfo = GetClassInfo(expressions);
             // Construct the API call to make
-            var api = await Query.BuildGetAPICallAsync(this, entityInfo, apiOverride).ConfigureAwait(false);
+            var api = await QueryClient.BuildGetAPICallAsync(this, entityInfo, apiOverride).ConfigureAwait(false);
 
             if (api.Cancelled)
             {
@@ -544,7 +525,7 @@ namespace PnP.Core.Model
             if ((api.ApiCall.Type == ApiType.Graph || api.ApiCall.Type == ApiType.GraphBeta) && !string.IsNullOrEmpty(entityInfo.SharePointType))
             {
                 // Try to get the API call, but this time using rest
-                apiRestBackup = await Query.BuildGetAPICallAsync(this, entityInfo, apiOverride, true).ConfigureAwait(false);
+                apiRestBackup = await QueryClient.BuildGetAPICallAsync(this, entityInfo, apiOverride, true).ConfigureAwait(false);
             }
 
             batch.Add(this, entityInfo, HttpMethod.Get, api.ApiCall, apiRestBackup.ApiCall, fromJsonCasting, postMappingJson, "GetBatch");
@@ -553,7 +534,7 @@ namespace PnP.Core.Model
             // Let's ensure these additional API calls's are included in a single batch
             if (api.ApiCall.Type == ApiType.Graph || api.ApiCall.Type == ApiType.GraphBeta)
             {
-                await Query.AddGraphBatchRequestsForNonExpandableCollectionsAsync(this, batch, entityInfo, expressions, fromJsonCasting, postMappingJson).ConfigureAwait(false);
+                await QueryClient.AddGraphBatchRequestsForNonExpandableCollectionsAsync(this, batch, entityInfo, expressions, fromJsonCasting, postMappingJson).ConfigureAwait(false);
             }
         }
 
@@ -728,7 +709,7 @@ namespace PnP.Core.Model
             // Get entity information for the entity to update
             var entityInfo = GetClassInfo();
             // Construct the API call to make
-            var api = await Query.BuildUpdateAPICallAsync(this, entityInfo).ConfigureAwait(false);
+            var api = await QueryClient.BuildUpdateAPICallAsync(this, entityInfo).ConfigureAwait(false);
 
             if (api.Cancelled)
             {
@@ -749,7 +730,7 @@ namespace PnP.Core.Model
             // Get entity information for the entity to update
             var entityInfo = GetClassInfo();
             // Construct the API call to make
-            var api = await Query.BuildUpdateAPICallAsync(this, entityInfo).ConfigureAwait(false);
+            var api = await QueryClient.BuildUpdateAPICallAsync(this, entityInfo).ConfigureAwait(false);
 
             if (api.Cancelled)
             {
@@ -793,7 +774,7 @@ namespace PnP.Core.Model
             // Get entity information for the entity to update
             var entityInfo = GetClassInfo();
             // Construct the API call to make
-            var api = await Query.BuildDeleteAPICallAsync(this, entityInfo).ConfigureAwait(false);
+            var api = await QueryClient.BuildDeleteAPICallAsync(this, entityInfo).ConfigureAwait(false);
 
             if (api.Cancelled)
             {
@@ -815,7 +796,7 @@ namespace PnP.Core.Model
             // Get entity information for the entity to update
             var entityInfo = GetClassInfo();
             // Construct the API call to make
-            var api = await Query.BuildDeleteAPICallAsync(this, entityInfo).ConfigureAwait(false);
+            var api = await QueryClient.BuildDeleteAPICallAsync(this, entityInfo).ConfigureAwait(false);
 
             // Add the request to the batch
             var batch = PnPContext.BatchClient.EnsureBatch();
@@ -1190,6 +1171,7 @@ namespace PnP.Core.Model
         }
         #endregion
 
+        #region Check properties logic
         public bool IsPropertyAvailable(Expression<Func<TModel, object>> expression)
         {
             if (expression == null)
@@ -1358,6 +1340,6 @@ namespace PnP.Core.Model
 
             return true;
         }
-
+        #endregion
     }
 }

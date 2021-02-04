@@ -151,7 +151,7 @@ namespace PnP.Core.Services
                         }
                     }
                 }
-                // Replace tokens coming from the Site object connected to the current PnPContext
+                // Replace tokens coming from the Web object connected to the current PnPContext
                 else if (match.Value.StartsWith("{Web.") && context != null)
                 {
                     var propertyToLoad = match.Value.Split(new string[] { "." }, StringSplitOptions.RemoveEmptyEntries)[1].Replace("}", "");
@@ -174,6 +174,36 @@ namespace PnP.Core.Services
                                 if (model.Metadata.ContainsKey(PnPConstants.MetaDataGraphId))
                                 {
                                     result = result.Replace("{Web.GraphId}", model.Metadata[PnPConstants.MetaDataGraphId]);
+                                }
+                                break;
+                            }
+                    }
+                }
+                // Replace tokens coming from the List object connected to the current PnPContext
+                else if (match.Value.StartsWith("{List.") && context != null)
+                {
+                    var propertyToLoad = match.Value.Split(new string[] { "." }, StringSplitOptions.RemoveEmptyEntries)[1].Replace("}", "");
+
+                    switch (propertyToLoad)
+                    {
+                        case "Id":
+                            {
+                                // Try to see if the current object is a list
+                                var list = pnpObject as Model.SharePoint.IList;
+
+                                // If the object is a list item
+                                if (list == null && pnpObject is Model.SharePoint.IListItem listItem)
+                                {
+                                    // Get the parent list of the current list item
+                                    list = GetParentDataModel(listItem as IMetadataExtensible) as Model.SharePoint.IList;
+                                }
+                                
+                                // If we've got the list
+                                if (list != null)
+                                {
+                                    // We retrieve the Id and we use it as the token value
+                                    await list.EnsurePropertiesAsync(l => l.Id).ConfigureAwait(false);
+                                    result = result.Replace(match.Value, list.Id.ToString());
                                 }
                                 break;
                             }
@@ -225,6 +255,7 @@ namespace PnP.Core.Services
                     match.Value.Equals("{Site.Id}") ||
                     match.Value.Equals("{Web.Id}") ||
                     match.Value.Equals("{Web.GraphId}") ||
+                    match.Value.Equals("{List.Id}") ||
                     match.Value.Equals("{hostname") ||
                     match.Value.Equals("{serverrelativepath}"))
                 {
