@@ -50,7 +50,7 @@ namespace PnP.Core.Model
         /// Dictionary to access the domain model object Metadata
         /// </summary>
         [SystemProperty]
-        public Dictionary<string, string> Metadata { get; } = new Dictionary<string, string>();
+        public Dictionary<string, string> Metadata { get; internal set; } = new Dictionary<string, string>();
 
         /// <summary>
         /// PnP Context
