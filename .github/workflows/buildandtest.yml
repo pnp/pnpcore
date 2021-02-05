@@ -35,17 +35,11 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: '5.0.x'
-    - name: Install dependencies
-      run: dotnet restore
-      working-directory: src/sdk
-    - name: Build ⚙
-      run:  dotnet build --configuration debug --no-restore --verbosity normal
-      working-directory: src/sdk   
     - name: Test and Coverage report 📝
       run: |
-        dotnet test --no-restore --verbosity normal --collect:"XPlat Code Coverage"
-        find /home/runner/work/pnpcore/pnpcore/src/sdk -name "coverage.cobertura.xml" -type f -exec cp {} ./ \;
+        dotnet build
+        dotnet test --collect:"XPlat Code Coverage"
+        find ./src/sdk -name "coverage.cobertura.xml" -type f -exec cp {} ./ \;
         bash <(curl -s https://codecov.io/bash) -Z -f coverage.cobertura.xml -t $CODECOV_TOKEN
       env:
         CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
-      working-directory: src/sdk
