@@ -37,9 +37,14 @@ jobs:
     - name: Install dependencies
       run: dotnet restore
       working-directory: src/sdk
-    - name: Build
+    - name: Build ⚙
       run:  dotnet build --configuration debug --no-restore --verbosity normal
       working-directory: src/sdk   
-    - name: Test
-      run: dotnet test --no-restore --verbosity normal
+    - name: Test and Coverage report 📝
+      run: |
+        dotnet test --no-restore --verbosity normal --collect:"XPlat Code Coverage"
+        find ./tests -name "coverage.cobertura.xml" -type f -exec cp {} ./ \;
+        bash <(curl -s https://codecov.io/bash) -Z -f coverage.cobertura.xml -t $CODECOV_TOKEN
+      env:
+        CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
       working-directory: src/sdk
