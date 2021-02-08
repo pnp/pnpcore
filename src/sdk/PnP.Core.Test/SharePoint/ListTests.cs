@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using PnP.Core.QueryModel;
 
 namespace PnP.Core.Test.SharePoint
 {
@@ -809,12 +810,12 @@ namespace PnP.Core.Test.SharePoint
         }
 
         [TestMethod]
-        public async Task GetListByTitleWithLoadProperties()
+        public async Task GetListByTitleWithLoad()
         {
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                var list = await context.Web.Lists.GetByTitleAsync("Documents", p => p.Title, p => p.ListExperience, p => p.ContentTypes.LoadProperties(p => p.Id, p => p.Name));
+                var list = await context.Web.Lists.GetByTitleAsync("Documents", p => p.Title, p => p.ListExperience, p => p.ContentTypes.Load(p => p.Id, p => p.Name));
 
                 Assert.IsTrue(list.Requested);
                 Assert.AreEqual(list.Title, "documents", true);
@@ -825,14 +826,14 @@ namespace PnP.Core.Test.SharePoint
         }
 
         [TestMethod]
-        public async Task GetListByTitleWithLoadPropertiesRecursive()
+        public async Task GetListByTitleWithLoadRecursive()
         {
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 var list = await context.Web.Lists.GetByTitleAsync("Documents", p => p.Title, p => p.ListExperience,
-                    p => p.ContentTypes.LoadProperties(p => p.Id, p => p.Name,
-                        p => p.FieldLinks.LoadProperties(p => p.Id, p => p.Name)));
+                    p => p.ContentTypes.Load(p => p.Id, p => p.Name,
+                        p => p.FieldLinks.Load(p => p.Id, p => p.Name)));
 
                 Assert.IsTrue(list.Requested);
                 Assert.AreEqual(list.Title, "documents", true);
@@ -872,7 +873,7 @@ namespace PnP.Core.Test.SharePoint
                 {
                     // Get list without root folder - will trigger rootfolder load
                     var list = await context2.Web.Lists.GetByIdAsync(listId,
-                        l => l.Fields.LoadProperties(f => f.Id, f => f.Title, f => f.InternalName, f => f.TypeAsString));
+                        l => l.Fields.Load(f => f.Id, f => f.Title, f => f.InternalName, f => f.TypeAsString));
 
                     // Add a list item
                     Dictionary<string, object> values = new Dictionary<string, object>
@@ -884,7 +885,7 @@ namespace PnP.Core.Test.SharePoint
 
                     // Get list with roorfolder, more optimized
                     list = await context2.Web.Lists.GetByIdAsync(listId,
-                        l => l.RootFolder, l => l.Fields.LoadProperties(f => f.Id, f => f.Title, f => f.InternalName, f => f.TypeAsString));
+                        l => l.RootFolder, l => l.Fields.Load(f => f.Id, f => f.Title, f => f.InternalName, f => f.TypeAsString));
 
                     await list.Items.AddAsync(values);
 

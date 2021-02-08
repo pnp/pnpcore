@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using System.Linq.Expressions;
 using System.Threading;
+using System.Threading.Tasks;
 
 namespace PnP.Core.QueryModel
 {
@@ -15,5 +16,12 @@ namespace PnP.Core.QueryModel
         ///     Executes the strongly-typed query represented by a specified expression tree asynchronously.
         /// </summary>
         TResult ExecuteAsync<TResult>(Expression expression, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        ///     Adds the expression to the current batch
+        /// </summary>
+        /// <typeparam name="TResult"></typeparam>
+        /// <param name="expression"></param>
+        Task AddToCurrentBatchAsync<TResult>(Expression expression);
     }
 }

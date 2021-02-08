@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using PnP.Core.QueryModel;
 
 namespace PnP.Core.Test.SharePoint
 {
@@ -583,7 +584,7 @@ namespace PnP.Core.Test.SharePoint
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 // Create a new list
-                var web = await context.Web.GetAsync(p => p.Lists.LoadProperties(p => p.Title, p => p.Items));
+                var web = await context.Web.GetAsync(p => p.Lists.Load(p => p.Title, p => p.Items));
 
                 int listCount = web.Lists.Count();
 
@@ -626,7 +627,7 @@ namespace PnP.Core.Test.SharePoint
             }
             using (var context2 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
             {
-                var web2 = await context2.Web.GetAsync(p => p.Lists.LoadProperties(p => p.Title, p => p.Items));
+                var web2 = await context2.Web.GetAsync(p => p.Lists.Load(p => p.Title, p => p.Items));
                 var myList2 = web2.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
                 await myList2.GetAsync(p => p.Items);
 
@@ -638,7 +639,7 @@ namespace PnP.Core.Test.SharePoint
             }
             using (var contextFinal = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))
             {
-                var web = await contextFinal.Web.GetAsync(p => p.Lists.LoadProperties(p => p.Title, p => p.Items));
+                var web = await contextFinal.Web.GetAsync(p => p.Lists.Load(p => p.Title, p => p.Items));
                 var myList = web.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
 
                 // Cleanup the created list
@@ -656,7 +657,7 @@ namespace PnP.Core.Test.SharePoint
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 // Create a new list
-                var web = await context.Web.GetAsync(p => p.Lists.LoadProperties(p => p.Title, p => p.Items));
+                var web = await context.Web.GetAsync(p => p.Lists.Load(p => p.Title, p => p.Items));
 
                 int listCount = web.Lists.Count();
 
@@ -704,7 +705,7 @@ namespace PnP.Core.Test.SharePoint
 
             using (var context2 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
             {
-                var web2 = await context2.Web.GetAsync(p => p.Lists.LoadProperties(p => p.Title, p => p.Items));
+                var web2 = await context2.Web.GetAsync(p => p.Lists.Load(p => p.Title, p => p.Items));
                 var myList2 = web2.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
                 await myList2.GetAsync(p => p.Items);
 
@@ -720,7 +721,7 @@ namespace PnP.Core.Test.SharePoint
 
             using (var context3 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))
             {
-                var web3 = await context3.Web.GetAsync(p => p.Lists.LoadProperties(p => p.Title, p => p.Items));
+                var web3 = await context3.Web.GetAsync(p => p.Lists.Load(p => p.Title, p => p.Items));
                 var myList3 = web3.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
                 await myList3.GetAsync(p => p.Items);
 
@@ -738,7 +739,7 @@ namespace PnP.Core.Test.SharePoint
 
             using (var context4 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 3))
             {
-                var web4 = await context4.Web.GetAsync(p => p.Lists.LoadProperties(p => p.Title, p => p.Items));
+                var web4 = await context4.Web.GetAsync(p => p.Lists.Load(p => p.Title, p => p.Items));
                 var myList4 = web4.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
                 await myList4.GetAsync(p => p.Items);
 
@@ -755,7 +756,7 @@ namespace PnP.Core.Test.SharePoint
 
             using (var context5 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 4))
             {
-                var web5 = await context5.Web.GetAsync(p => p.Lists.LoadProperties(p => p.Title, p => p.Items));
+                var web5 = await context5.Web.GetAsync(p => p.Lists.Load(p => p.Title, p => p.Items));
                 var myList5 = web5.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
                 await myList5.GetAsync(p => p.Items);
 
@@ -768,7 +769,7 @@ namespace PnP.Core.Test.SharePoint
 
             using (var contextFinal = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 5))
             {
-                var web = await contextFinal.Web.GetAsync(p => p.Lists.LoadProperties(p => p.Title, p => p.Items));
+                var web = await contextFinal.Web.GetAsync(p => p.Lists.Load(p => p.Title, p => p.Items));
                 var myList = web.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
 
                 // Cleanup the created list
@@ -785,7 +786,7 @@ namespace PnP.Core.Test.SharePoint
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 // Create a new list
-                var web = await context.Web.GetAsync(p => p.Lists.LoadProperties(p => p.Title, p => p.Items));
+                var web = await context.Web.GetAsync(p => p.Lists.Load(p => p.Title, p => p.Items));
 
                 int listCount = web.Lists.Count();
 
@@ -833,7 +834,7 @@ namespace PnP.Core.Test.SharePoint
 
             using (var context2 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
             {
-                var web2 = await context2.Web.GetAsync(p => p.Lists.LoadProperties(p => p.Title, p => p.Items));
+                var web2 = await context2.Web.GetAsync(p => p.Lists.Load(p => p.Title, p => p.Items));
                 var myList2 = web2.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
                 await myList2.GetAsync(p => p.Items);
 
@@ -848,7 +849,7 @@ namespace PnP.Core.Test.SharePoint
 
             using (var context3 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))
             {
-                var web3 = await context3.Web.GetAsync(p => p.Lists.LoadProperties(p => p.Title, p => p.Items));
+                var web3 = await context3.Web.GetAsync(p => p.Lists.Load(p => p.Title, p => p.Items));
                 var myList3 = web3.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
                 await myList3.GetAsync(p => p.Items);
 
@@ -864,7 +865,7 @@ namespace PnP.Core.Test.SharePoint
 
             using (var context4 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 3))
             {
-                var web4 = await context4.Web.GetAsync(p => p.Lists.LoadProperties(p => p.Title, p => p.Items));
+                var web4 = await context4.Web.GetAsync(p => p.Lists.Load(p => p.Title, p => p.Items));
                 var myList4 = web4.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
                 await myList4.GetAsync(p => p.Items);
 
@@ -878,7 +879,7 @@ namespace PnP.Core.Test.SharePoint
             using (var contextFinal = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 4))
             {
                 // Create a new list
-                var web = await contextFinal.Web.GetAsync(p => p.Lists.LoadProperties(p => p.Title, p => p.Items));
+                var web = await contextFinal.Web.GetAsync(p => p.Lists.Load(p => p.Title, p => p.Items));
                 var myList = web.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
 
                 // Cleanup the created list
@@ -1489,7 +1490,7 @@ namespace PnP.Core.Test.SharePoint
         {
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, id, testName))
             {
-                var myList = context.Web.Lists.GetByTitle(listTitle, p => p.Title, p => p.Items, p => p.Fields.LoadProperties(p => p.InternalName, p => p.FieldTypeKind, p => p.TypeAsString, p => p.Title));
+                var myList = context.Web.Lists.GetByTitle(listTitle, p => p.Title, p => p.Items, p => p.Fields.Load(p => p.InternalName, p => p.FieldTypeKind, p => p.TypeAsString, p => p.Title));
                 var addedItem = myList.Items.FirstOrDefault(p => p.Title == "Item1");
 
                 AssertRegularListItemProperties(fieldData, addedItem);
@@ -2502,7 +2503,7 @@ namespace PnP.Core.Test.SharePoint
         {
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, id, testName))
             {
-                var myList = context.Web.Lists.GetByTitle(listTitle, p => p.Title, p => p.Items, p => p.Fields.LoadProperties(p => p.InternalName, p => p.FieldTypeKind, p => p.TypeAsString, p => p.Title));
+                var myList = context.Web.Lists.GetByTitle(listTitle, p => p.Title, p => p.Items, p => p.Fields.Load(p => p.InternalName, p => p.FieldTypeKind, p => p.TypeAsString, p => p.Title));
                 var addedItem = myList.Items.FirstOrDefault(p => p.Title == "Item1");
 
                 AssertListItemProperties(fieldData, addedItem);
@@ -2537,7 +2538,7 @@ namespace PnP.Core.Test.SharePoint
         //        */
 
 
-        //        var list = await context.Web.Lists.GetByTitleAsync("FieldTypes", p => p.Title, p => p.Items, p => p.Fields.LoadProperties(p => p.InternalName, p => p.FieldTypeKind, p => p.TypeAsString, p => p.Title));
+        //        var list = await context.Web.Lists.GetByTitleAsync("FieldTypes", p => p.Title, p => p.Items, p => p.Fields.Load(p => p.InternalName, p => p.FieldTypeKind, p => p.TypeAsString, p => p.Title));
 
         //        var item = list.Items.FirstOrDefault(p => p.Title == "Item1");
 

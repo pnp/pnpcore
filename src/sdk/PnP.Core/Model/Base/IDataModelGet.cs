@@ -144,13 +144,6 @@ namespace PnP.Core.Model
         /// <returns>The Domain Model object</returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Naming", "CA1716:Identifiers should not match keywords", Justification = "I prefer Get over Read :-)")]
         TModel Get(ApiResponse apiResponse, params Expression<Func<TModel, object>>[] expressions);
-
-        /// <summary>
-        /// Enables using the .LoadProperties lambda expression syntax on a model
-        /// </summary>
-        /// <param name="expressions">Expression</param>
-        /// <returns>Null...return value is not needed</returns>
-        public IQueryable<TModel> LoadProperties(params Expression<Func<TModel, object>>[] expressions);
-
+        
     }
 }

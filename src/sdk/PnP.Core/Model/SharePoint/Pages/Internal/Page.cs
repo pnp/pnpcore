@@ -1,4 +1,5 @@
 ﻿using AngleSharp.Html.Parser;
+using PnP.Core.QueryModel;
 using PnP.Core.Services;
 using System;
 using System.Collections.Generic;
@@ -396,7 +397,10 @@ namespace PnP.Core.Model.SharePoint
             // No pages library found, so reload it
             if (pagesLibrary == null)
             {
-                pagesLibrary = await context.Web.Lists.GetFirstOrDefaultAsync(p => p.TemplateType == ListTemplateType.WebPageLibrary, getPagesLibraryExpression).ConfigureAwait(false);
+                pagesLibrary = await context.Web.Lists
+                    .Load(getPagesLibraryExpression)
+                    .FirstOrDefaultAsync(p => p.TemplateType == ListTemplateType.WebPageLibrary)
+                    .ConfigureAwait(false);
             }
 
             return pagesLibrary;

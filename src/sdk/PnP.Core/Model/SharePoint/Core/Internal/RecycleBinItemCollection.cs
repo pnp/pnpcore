@@ -1,6 +1,8 @@
+using PnP.Core.Model.Teams;
 using PnP.Core.QueryModel;
 using PnP.Core.Services;
 using System;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -233,7 +235,7 @@ namespace PnP.Core.Model.SharePoint
 
         public async Task<IRecycleBinItem> GetByIdAsync(Guid id, params Expression<Func<IRecycleBinItem, object>>[] selectors)
         {
-            return await GetFirstOrDefaultAsync(l => l.Id == id, selectors).ConfigureAwait(false);
+            return await ((IQueryable<IRecycleBinItem>)this).Load(selectors).FirstOrDefaultAsync(l => l.Id == id).ConfigureAwait(false);
         }
 
         #endregion

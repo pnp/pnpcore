@@ -1,6 +1,7 @@
 ﻿using PnP.Core.QueryModel;
 using PnP.Core.Services;
 using System;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
@@ -143,7 +144,7 @@ namespace PnP.Core.Model.Teams
                 throw new ArgumentNullException(nameof(displayName));
             }
 
-            return await GetFirstOrDefaultAsync(c => c.DisplayName == displayName, selectors).ConfigureAwait(false);
+            return await this.Load(selectors).FirstOrDefaultAsync(c => c.DisplayName == displayName).ConfigureAwait(false);
         }
 
         #endregion

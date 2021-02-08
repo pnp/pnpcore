@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using PnP.Core.QueryModel;
 
 namespace PnP.Core.Test.Base
 {
@@ -291,8 +292,8 @@ namespace PnP.Core.Test.Base
 
                 var lists = await context.Web.Lists.GetPagedAsync(p => p.TemplateType == ListTemplateType.GenericList, 2,
                                                       p => p.Title, p => p.TemplateType,
-                                                                    p => p.ContentTypes.LoadProperties(
-                                                                         p => p.Name, p => p.FieldLinks.LoadProperties(p => p.Name)));
+                                                                    p => p.ContentTypes.Load(
+                                                                         p => p.Name, p => p.FieldLinks.Load(p => p.Name)));
 
                 // We should have loaded 2 lists
                 Assert.IsTrue(context.Web.Lists.Count() == 2);

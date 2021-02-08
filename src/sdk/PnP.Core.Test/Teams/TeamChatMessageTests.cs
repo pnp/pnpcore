@@ -6,6 +6,7 @@ using System;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using PnP.Core.QueryModel;
 
 namespace PnP.Core.Test.Teams
 {
@@ -180,7 +181,7 @@ namespace PnP.Core.Test.Teams
 
                 // Upload File to SharePoint Library - it will have to remain i guess as onetime upload.
                 IFolder folder = await context.Web.Lists.GetByTitle("Documents").RootFolder.GetAsync();
-                IFile existingFile = await folder.Files.GetFirstOrDefaultAsync(o => o.Name == "test_added.docx");
+                IFile existingFile = await folder.Files.FirstOrDefaultAsync(o => o.Name == "test_added.docx");
                 if(existingFile == default)
                 {
                     existingFile = await folder.Files.AddAsync("test_added.docx", System.IO.File.OpenRead($".{Path.DirectorySeparatorChar}TestAssets{Path.DirectorySeparatorChar}test.docx"));

@@ -1155,22 +1155,6 @@ namespace PnP.Core.Model
         }
         #endregion
 
-        #region LoadProperties
-        /// <summary>
-        /// Enables using the .LoadProperties lambda expression syntax on a model
-        /// </summary>
-        /// <param name="expressions">Expression</param>
-        /// <returns>Null...return value is not needed</returns>
-#pragma warning disable CA1822 // Mark members as static
-#pragma warning disable CA1801 // Review unused parameters
-        public IQueryable<TModel> LoadProperties(params Expression<Func<TModel, object>>[] expressions)
-#pragma warning restore CA1801 // Review unused parameters
-#pragma warning restore CA1822 // Mark members as static
-        {
-            return null;
-        }
-        #endregion
-
         #region Check properties logic
         public bool IsPropertyAvailable(Expression<Func<TModel, object>> expression)
         {
@@ -1237,7 +1221,7 @@ namespace PnP.Core.Model
                 {
                     // Future use? (includes)
                     var body = (MethodCallExpression)expression.Body;
-                    if (body.Method.Name == "LoadProperties")
+                    if (body.Method.Name == "Load")
                     {
                         if (body.Arguments.Count != 1)
                         {

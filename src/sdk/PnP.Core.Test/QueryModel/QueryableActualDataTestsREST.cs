@@ -205,7 +205,7 @@ namespace PnP.Core.Test.QueryModel
             {
                 context.GraphFirst = false;
 
-                var actual = await context.Web.Lists.GetFirstOrDefaultAsync(l => l.Title == expected, l => l.Id, l => l.Title);
+                var actual = await context.Web.Lists.Load(l => l.Id, l => l.Title).FirstOrDefaultAsync(l => l.Title == expected);
 
                 Assert.IsNotNull(actual);
                 Assert.AreEqual(expected, actual.Title);
@@ -241,7 +241,7 @@ namespace PnP.Core.Test.QueryModel
             {
                 context.GraphFirst = false;
 
-                var actual = await context.Web.Lists.GetFirstOrDefaultAsync(l => l.Title == expected);
+                var actual = await context.Web.Lists.FirstOrDefaultAsync(l => l.Title == expected);
 
                 Assert.IsNotNull(actual);
                 Assert.AreEqual(expected, actual.Title);

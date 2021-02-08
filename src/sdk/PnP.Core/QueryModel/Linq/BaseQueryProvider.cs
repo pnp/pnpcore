@@ -58,6 +58,13 @@ namespace PnP.Core.QueryModel
         }
 
         /// <summary>
+        ///     Adds the expression to the current batch
+        /// </summary>
+        /// <typeparam name="TResult"></typeparam>
+        /// <param name="expression"></param>
+        public abstract Task AddToCurrentBatchAsync<TResult>(Expression expression);
+
+        /// <summary>
         /// Executes the provided expression
         /// </summary>
         /// <typeparam name="TResult">Resulting type of the linq expression execution</typeparam>
