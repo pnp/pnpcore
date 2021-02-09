@@ -1,6 +1,7 @@
-name: Build and Test
+name: Build and Test 🚀✅
 
 on:
+  workflow_dispatch:
   push:
     branches: [ dev ]
     paths:
@@ -37,9 +38,14 @@ jobs:
     - name: Install dependencies
       run: dotnet restore
       working-directory: src/sdk
-    - name: Build
-      run:  dotnet build --configuration debug --no-restore --verbosity normal
+    - name: Build ⚙
+      run:  dotnet build --configuration debug --no-restore --verbosity normal 
       working-directory: src/sdk   
-    - name: Test
-      run: dotnet test --no-restore --verbosity normal
-      working-directory: src/sdk
+    - name: Test 🧪
+      run: dotnet test --no-restore --verbosity normal --collect:"XPlat Code Coverage"
+      working-directory: src/sdk    
+    - name: Upload coverage to Codecov 📝
+      uses: codecov/codecov-action@v1
+      with:
+        token: ${{ secrets.CODECOV_TOKEN }}
+        file: /**/*coverage*.xml        

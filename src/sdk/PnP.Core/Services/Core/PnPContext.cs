@@ -458,7 +458,7 @@ namespace PnP.Core.Services
             }
 
             PnPContext clonedContext = new PnPContext(Logger, AuthenticationProvider, RestClient, GraphClient, contextOptions, globalOptions, telemetry)
-            {
+            {                
                 // Take over graph settings
                 GraphCanUseBeta = graphCanUseBeta,
                 GraphAlwaysUseBeta = GraphAlwaysUseBeta,
@@ -467,7 +467,14 @@ namespace PnP.Core.Services
                 Uri = uri
             };
 
-            await PnPContextFactory.InitializeContextAsync(clonedContext).ConfigureAwait(false);
+            if (!uri.Equals(Uri))
+            {
+                await PnPContextFactory.InitializeContextAsync(clonedContext).ConfigureAwait(false);
+            }
+            else
+            {
+                await PnPContextFactory.CopyContextInitializationAsync(this, clonedContext).ConfigureAwait(false);
+            }
 
             return clonedContext;
         }
@@ -521,7 +528,14 @@ namespace PnP.Core.Services
                 clonedContext.SetRecordingMode(id, source.TestName, source.TestFilePath, source.GenerateTestMockingDebugFiles, source.TestUris);
             }
 
-            await PnPContextFactory.InitializeContextAsync(clonedContext).ConfigureAwait(false);
+            if (!uri.Equals(Uri))
+            {
+                await PnPContextFactory.InitializeContextAsync(clonedContext).ConfigureAwait(false);
+            }
+            else
+            {
+                await PnPContextFactory.CopyContextInitializationAsync(this, clonedContext).ConfigureAwait(false);
+            }
 
             return clonedContext;
         }
