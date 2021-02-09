@@ -179,12 +179,14 @@ namespace PnP.Core.Model.SharePoint
 
         internal override object ToValidateUpdateItemJson()
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
+            return null;
         }
 
         internal override string ToCsomXml()
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
+            return "";
         }
 
     }
