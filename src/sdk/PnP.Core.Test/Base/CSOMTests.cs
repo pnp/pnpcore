@@ -251,11 +251,11 @@ namespace PnP.Core.Test.Base
 
                 Assert.IsTrue(listA.Requested);
                 Assert.IsTrue(listB.Requested);
-                Assert.IsTrue(context.Web.Lists.Count() == 2);
+                Assert.IsTrue(context.Web.Lists.Length == 2);
 
                 var listC = await context.Web.Lists.GetByTitleAsync("Documents");
                 Assert.IsTrue(listC.Requested);
-                Assert.IsTrue(context.Web.Lists.Count() == 3);
+                Assert.IsTrue(context.Web.Lists.Length == 3);
 
                 // Clear the collection so we can do a fresh load
                 context.Web.Lists.Clear();

@@ -1,6 +1,6 @@
 # PnP Core SDK
 
-![Build and Test](https://github.com/pnp/pnpcore/workflows/Build%20and%20Test/badge.svg?branch=dev) ![Refresh documentation](https://github.com/pnp/pnpcore/workflows/Refresh%20documentation/badge.svg?branch=dev) ![Nightly nuget release](https://github.com/pnp/pnpcore/workflows/Nightly%20nuget%20release/badge.svg?branch=dev)
+![Build and Test](https://github.com/pnp/pnpcore/workflows/Build%20and%20Test/badge.svg?branch=dev) [![codecov](https://codecov.io/gh/jansenbe/pnpcore/branch/dev/graph/badge.svg?token=FL0EY8DRPQ)](https://codecov.io/gh/jansenbe/pnpcore) ![Refresh documentation](https://github.com/pnp/pnpcore/workflows/Refresh%20documentation/badge.svg?branch=dev) ![Nightly nuget release](https://github.com/pnp/pnpcore/workflows/Nightly%20nuget%20release/badge.svg?branch=dev)
 
 Nuget package | Description | Latest version | Latest nightly development version
 --------------|-------------|----------------|------------------------------------
