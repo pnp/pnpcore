@@ -42,7 +42,7 @@ namespace PnP.Core.Model
     /// Base class for all model classes
     /// </summary>
     /// <typeparam name="TModel">Model class</typeparam>
-    internal class BaseDataModel<TModel> : TransientObject, IDataModel<TModel>, IDataModelGet, IRequestable, IMetadataExtensible, IDataModelWithKey, IDataModelMappingHandler
+    internal class BaseDataModel<TModel> : TransientObject, IDataModel<TModel>, IDataModelGet, IDataModelLoad, IDataModelLoad<TModel>, IRequestable, IMetadataExtensible, IDataModelWithKey, IDataModelMappingHandler
     {
         #region Core properties
 
@@ -88,106 +88,37 @@ namespace PnP.Core.Model
 
         #region Get
 
-        public async Task<object> GetBatchAsync(Batch batch, params Expression<Func<object, object>>[] expressions)
+        public async Task<IBatchSingleResult> GetBatchAsync(Batch batch, params Expression<Func<object, object>>[] expressions)
         {
             var newExpressions = expressions.Select(e => Expression.Lambda<Func<TModel, object>>(e.Body, e.Parameters)).ToArray();
             return await GetInternalBatchAsync(batch, newExpressions).ConfigureAwait(false);
         }
-
-        public async Task<object> GetBatchAsync(params Expression<Func<object, object>>[] expressions)
-        {
-            var newExpressions = expressions.Select(e => Expression.Lambda<Func<TModel, object>>(e.Body, e.Parameters)).ToArray();
-            return await GetInternalBatchAsync(PnPContext.CurrentBatch, newExpressions).ConfigureAwait(false);
-        }
-
-        public object GetBatch(Batch batch, params Expression<Func<object, object>>[] expressions)
-        {
-            return GetBatchAsync(batch, expressions).GetAwaiter().GetResult();
-        }
-
-        public object GetBatch(params Expression<Func<object, object>>[] expressions)
-        {
-            return GetBatchAsync(expressions).GetAwaiter().GetResult();
-        }
-
-        public async Task<object> GetAsync(params Expression<Func<object, object>>[] expressions)
-        {
-            var newExpressions = expressions.Select(e => Expression.Lambda<Func<TModel, object>>(e.Body, e.Parameters)).ToArray();
-            return await GetAsyncInternal(default, newExpressions).ConfigureAwait(true);
-        }
-
+        
         public async Task<object> GetAsync(ApiResponse apiResponse, params Expression<Func<object, object>>[] expressions)
         {
             var newExpressions = expressions.Select(e => Expression.Lambda<Func<TModel, object>>(e.Body, e.Parameters)).ToArray();
             return await GetAsyncInternal(apiResponse, newExpressions).ConfigureAwait(true);
         }
-
-        public object Get(params Expression<Func<object, object>>[] expressions)
-        {
-            return GetAsync(expressions).GetAwaiter().GetResult();
-        }
-
-        public object Get(ApiResponse apiResponse, params Expression<Func<object, object>>[] expressions)
-        {
-            return GetAsync(apiResponse, expressions).GetAwaiter().GetResult();
-        }
-
+        
         /// <summary>
         /// Batches the retrieval of a Domain Model object from the remote data source, eventually selecting custom properties or using a default set of properties
         /// </summary>
         /// <param name="batch">Batch add this request to</param>
         /// <param name="expressions">The properties to select</param>
         /// <returns>The Domain Model object</returns>
-        public async virtual Task<TModel> GetBatchAsync(Batch batch, params Expression<Func<TModel, object>>[] expressions)
+        public virtual async Task<IBatchSingleResult<TModel>> GetBatchAsync(Batch batch, params Expression<Func<TModel, object>>[] expressions)
         {
             return await GetInternalBatchAsync(batch, expressions).ConfigureAwait(false);
         }
 
-        /// <summary>
-        /// Batches the retrieval of a Domain Model object from the remote data source, eventually selecting custom properties or using a default set of properties
-        /// </summary>
-        /// <param name="expressions">The properties to select</param>
-        /// <returns>The Domain Model object</returns>
-        public async virtual Task<TModel> GetBatchAsync(params Expression<Func<TModel, object>>[] expressions)
+        private async Task<IBatchSingleResult<TModel>> GetInternalBatchAsync(Batch batch, params Expression<Func<TModel, object>>[] expressions)
         {
-            return await GetInternalBatchAsync(PnPContext.CurrentBatch, expressions).ConfigureAwait(false);
-        }
-
-        /// <summary>
-        /// Batches the retrieval of a Domain Model object from the remote data source, eventually selecting custom properties or using a default set of properties
-        /// </summary>
-        /// <param name="batch">Batch add this request to</param>
-        /// <param name="expressions">The properties to select</param>
-        /// <returns>The Domain Model object</returns>
-        public virtual TModel GetBatch(Batch batch, params Expression<Func<TModel, object>>[] expressions)
-        {
-            return GetBatchAsync(batch, expressions).GetAwaiter().GetResult();
-        }
-
-        /// <summary>
-        /// Batches the retrieval of a Domain Model object from the remote data source, eventually selecting custom properties or using a default set of properties
-        /// </summary>
-        /// <param name="expressions">The properties to select</param>
-        /// <returns>The Domain Model object</returns>
-        public virtual TModel GetBatch(params Expression<Func<TModel, object>>[] expressions)
-        {
-            return GetBatchAsync(expressions).GetAwaiter().GetResult();
-        }
-
-        private async Task<TModel> GetInternalBatchAsync(Batch batch, params Expression<Func<TModel, object>>[] expressions)
-        {
+            batch ??= PnPContext.CurrentBatch;
             await BaseBatchGetAsync(batch, fromJsonCasting: MappingHandler, postMappingJson: PostMappingHandler, expressions: expressions).ConfigureAwait(false);
-            return AsDynamic(this);
-        }
+            //return AsDynamic(this);
 
-        /// <summary>
-        /// Retrieves a Domain Model object from the remote data source, eventually selecting custom properties or using a default set of properties
-        /// </summary>
-        /// <param name="expressions">The properties to select</param>
-        /// <returns>The Domain Model object</returns>
-        public virtual async Task<TModel> GetAsync(params Expression<Func<TModel, object>>[] expressions)
-        {
-            return await GetAsyncInternal(default, expressions).ConfigureAwait(true);
+            // TODO: return batch
+            throw new NotImplementedException();
         }
 
         /// <summary>
@@ -201,33 +132,57 @@ namespace PnP.Core.Model
         {
             return await GetAsyncInternal(apiResponse, expressions).ConfigureAwait(true);
         }
-
-        /// <summary>
-        /// Retrieves a Domain Model object from the remote data source, eventually selecting custom properties or using a default set of properties
-        /// </summary>
-        /// <param name="expressions">The properties to select</param>
-        /// <returns>The Domain Model object</returns>
-        public virtual TModel Get(params Expression<Func<TModel, object>>[] expressions)
-        {
-            return GetAsync(expressions).GetAwaiter().GetResult();
-        }
-
-        /// <summary>
-        /// Special override the load child model classes ==> if apiResponse != default then 
-        /// no get will be done but the system will handle the mapping from json to model
-        /// </summary>
-        /// <param name="apiResponse">Json response (when in recursive mapping of json to model), default otherwise</param>
-        /// <param name="expressions">The properties to select</param>
-        /// <returns>The Domain Model object</returns>
-        public virtual TModel Get(ApiResponse apiResponse, params Expression<Func<TModel, object>>[] expressions)
-        {
-            return GetAsync(apiResponse, expressions).GetAwaiter().GetResult();
-        }
-
+        
         private async Task<TModel> GetAsyncInternal(ApiResponse apiResponse, params Expression<Func<TModel, object>>[] expressions)
         {
             await BaseGet(apiResponse, fromJsonCasting: MappingHandler, postMappingJson: PostMappingHandler, expressions: expressions).ConfigureAwait(false);
             return AsDynamic(this);
+        }
+
+        #endregion
+
+        #region Load
+
+        /// <summary>
+        /// Batches the load of a Domain Model object from the remote data source, eventually selecting custom properties or using a default set of properties
+        /// </summary>
+        /// <param name="batch">Batch add this request to</param>
+        /// <param name="expressions">The properties to select</param>
+        /// <returns>The Domain Model object</returns>
+        public Task<IBatchSingleResult> LoadBatchAsync(Batch batch, params Expression<Func<object, object>>[] expressions)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Loads a Domain Model object from the remote data source, eventually selecting custom properties or using a default set of properties
+        /// </summary>
+        /// <param name="expressions">The properties to select</param>
+        /// <returns>The Domain Model object</returns>
+        public Task LoadAsync(params Expression<Func<object, object>>[] expressions)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Batches the load of a Domain Model object from the remote data source, eventually selecting custom properties or using a default set of properties
+        /// </summary>
+        /// <param name="batch">Batch add this request to</param>
+        /// <param name="expressions">The properties to select</param>
+        /// <returns>The Domain Model object</returns>
+        public Task<IBatchSingleResult> LoadBatchAsync(Batch batch, params Expression<Func<TModel, object>>[] expressions)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Loads a Domain Model object from the remote data source, eventually selecting custom properties or using a default set of properties
+        /// </summary>
+        /// <param name="expressions">The properties to select</param>
+        /// <returns>The Domain Model object</returns>
+        public Task LoadAsync(params Expression<Func<TModel, object>>[] expressions)
+        {
+            throw new NotImplementedException();
         }
 
         #endregion

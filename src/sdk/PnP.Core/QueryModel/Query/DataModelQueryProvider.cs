@@ -49,7 +49,7 @@ namespace PnP.Core.QueryModel
 
         #region BaseQueryProvider abstract methods implementation
 
-        public override async Task<IBatchResult<TResult>> AddToCurrentBatchAsync<TResult>(Expression expression)
+        public override async Task<IEnumerableBatchResult<TResult>> AddToCurrentBatchAsync<TResult>(Expression expression)
         {
             // Translate the query expression into an actual query text for the target Query Service
             var query = Translate(expression);

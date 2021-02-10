@@ -790,7 +790,7 @@ namespace PnP.Core.Model.SharePoint
             if (updated)
             {
                 await UpdateBatchAsync().ConfigureAwait(false);
-                await GetBatchAsync(p => p.SupportedUILanguageIds).ConfigureAwait(false);
+                await this.GetBatchAsync(p => p.SupportedUILanguageIds).ConfigureAwait(false);
                 await PnPContext.ExecuteAsync().ConfigureAwait(false);
             }
         }

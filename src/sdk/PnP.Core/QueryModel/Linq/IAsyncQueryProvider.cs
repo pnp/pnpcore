@@ -23,6 +23,6 @@ namespace PnP.Core.QueryModel
         /// </summary>
         /// <typeparam name="TResult"></typeparam>
         /// <param name="expression"></param>
-        Task<IBatchResult<TResult>> AddToCurrentBatchAsync<TResult>(Expression expression);
+        Task<IEnumerableBatchResult<TResult>> AddToCurrentBatchAsync<TResult>(Expression expression);
     }
 }

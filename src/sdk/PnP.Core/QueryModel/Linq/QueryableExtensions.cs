@@ -31,7 +31,7 @@ namespace PnP.Core.QueryModel
         /// <typeparam name="TSource"></typeparam>
         /// <param name="source"></param>
         /// <returns></returns>
-        public static Task<IBatchResult<TSource>> AddAsBatchAsync<TSource>(
+        public static Task<IEnumerableBatchResult<TSource>> AddAsBatchAsync<TSource>(
             this IQueryable<TSource> source)
         {
             if (source == null)

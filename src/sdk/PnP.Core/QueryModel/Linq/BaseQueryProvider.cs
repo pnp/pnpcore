@@ -49,7 +49,7 @@ namespace PnP.Core.QueryModel
         /// </summary>
         /// <typeparam name="TResult"></typeparam>
         /// <param name="expression"></param>
-        public abstract Task<IBatchResult<TResult>> AddToCurrentBatchAsync<TResult>(Expression expression);
+        public abstract Task<IEnumerableBatchResult<TResult>> AddToCurrentBatchAsync<TResult>(Expression expression);
 
         /// <summary>
         /// Executes the provided expression
