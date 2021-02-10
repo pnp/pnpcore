@@ -92,17 +92,12 @@ namespace PnP.Core.QueryModel
                 throw new ArgumentNullException(nameof(selector));
             }
 
-            if (source.Provider is IAsyncQueryProvider provider)
-            {
-                return provider.CreateQuery<TResult>(
-                    Expression.Call(
-                        null,
-                        QueryableMethods.Load.MakeGenericMethod(typeof(TResult)),
-                        new Expression[] { source.Expression, Expression.Quote(selector) }
-                    ));
-            }
-
-            return source;
+            return source.Provider.CreateQuery<TResult>(
+                Expression.Call(
+                    null,
+                    QueryableMethods.Load.MakeGenericMethod(typeof(TResult)),
+                    new Expression[] { source.Expression, Expression.Quote(selector) }
+                ));
         }
 
         /// <summary>
@@ -281,7 +276,7 @@ namespace PnP.Core.QueryModel
         }
 
         #endregion
-        
+
         #region ToDictionary
 
         /// <summary>
@@ -570,16 +565,17 @@ namespace PnP.Core.QueryModel
             Expression? expression,
             CancellationToken cancellationToken = default)
         {
+            // Create a typed version of the method
+            if (operatorMethodInfo.IsGenericMethod)
+            {
+                operatorMethodInfo
+                    = operatorMethodInfo.GetGenericArguments().Length == 2
+                        ? operatorMethodInfo.MakeGenericMethod(typeof(TSource), typeof(TResult).GetGenericArguments().Single())
+                        : operatorMethodInfo.MakeGenericMethod(typeof(TSource));
+            }
+
             if (source.Provider is IAsyncQueryProvider provider)
             {
-                if (operatorMethodInfo.IsGenericMethod)
-                {
-                    operatorMethodInfo
-                        = operatorMethodInfo.GetGenericArguments().Length == 2
-                            ? operatorMethodInfo.MakeGenericMethod(typeof(TSource), typeof(TResult).GetGenericArguments().Single())
-                            : operatorMethodInfo.MakeGenericMethod(typeof(TSource));
-                }
-
                 return provider.ExecuteAsync<TResult>(
                     Expression.Call(
                         instance: null,
@@ -590,7 +586,17 @@ namespace PnP.Core.QueryModel
                     cancellationToken);
             }
 
-            throw new InvalidOperationException(PnPCoreResources.Exception_InvalidOperation_NotAsyncQueryableSource);
+            var r = source.ToArray();
+
+            // This case occurs when original source has been already loaded
+            var v = Expression.Call(
+                instance: null,
+                method: operatorMethodInfo,
+                arguments: expression == null
+                    ? new[] {source.Expression}
+                    : new[] {source.Expression, expression});
+            return source.Provider.Execute<TResult>(
+                v);
         }
 
         private static TResult ExecuteAsync<TSource, TResult>(

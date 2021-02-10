@@ -1,6 +1,7 @@
 ﻿using PnP.Core.Model;
 using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Globalization;
 using System.Linq;
 using System.Linq.Expressions;
@@ -50,25 +51,24 @@ namespace PnP.Core.QueryModel
         public override string ToString()
         {
             // By default provide a Graph query without URL encoding
-            return ToQueryString(ODataTargetPlatform.Graph, false);
+            return ToQueryString(ODataTargetPlatform.Graph);
         }
 
         /// <summary>
         /// Converts the in-memory OData query representation into an actual set of querystring OData options
         /// </summary>
         /// <param name="targetPlatform">Defines the target platform for the OData query</param>
-        /// <param name="urlEncode">Declares whether to encode URL strings or not</param>
         /// <returns>The OData querystring for the current query</returns>
-        public string ToQueryString(ODataTargetPlatform targetPlatform, bool urlEncode = true)
+        public string ToQueryString(ODataTargetPlatform targetPlatform)
         {
-            var queryText = new StringBuilder();
-            var spacer = urlEncode ? EncodedSpace : " ";
-            // var argumentTrailer = targetPlatform == ODataTargetPlatform.SPORest ? "$" : string.Empty;
-            var argumentTrailer = "$";
+            var urlParameters = new Dictionary<string, string>();
+            AddODataToUrlParameters(urlParameters, targetPlatform);
 
-            // TODO: prepare URI
-
-            return queryText.ToString();
+            // Exclude empty items
+            IEnumerable<string> items = urlParameters
+                .Where(i => !string.IsNullOrEmpty(i.Value))
+                .Select(p => $"{p.Key}={p.Value}");
+            return String.Join("&", items);
         }
 
         /// <summary>
@@ -108,6 +108,33 @@ namespace PnP.Core.QueryModel
             var sb = new StringBuilder();
             ProcessFilters(Filters, sb, targetPlatform,0, urlEncode);
             return sb.ToString();
+        }
+
+        internal void AddODataToUrlParameters(Dictionary<string, string> urlParameters, ODataTargetPlatform targetPlatform)
+        {
+            // Process the $filter items
+            if (Filters.Count > 0)
+            {
+                urlParameters.Add("$filter", GetFilters(targetPlatform, false));
+            }
+
+            // Process any $top restriction
+            if (Top.HasValue)
+            {
+                urlParameters.Add("$top", Top.ToString());
+            }
+
+            // Process any $skip restriction
+            if (Skip.HasValue)
+            {
+                urlParameters.Add("$skip", Skip.ToString());
+            }
+
+            // Process the $orderby items
+            if (OrderBy.Count > 0)
+            {
+                urlParameters.Add("$orderby", GetOrderBy(targetPlatform, false));
+            }
         }
 
         private void ProcessFilters(List<ODataFilter> filters, StringBuilder queryText, ODataTargetPlatform targetPlatform, int depth = 0, bool urlEncode = true)

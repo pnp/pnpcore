@@ -4,7 +4,7 @@
     /// Collection of file versions
     /// </summary>
     [ConcreteType(typeof(FileVersionCollection))]
-    public interface IFileVersionCollection : IDataModelCollection<IFileVersion>
+    public interface IFileVersionCollection : IDataModelCollection<IFileVersion>, ISupportLoad<IFileVersion>
     {
 
     }

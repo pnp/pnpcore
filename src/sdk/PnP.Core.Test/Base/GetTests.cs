@@ -544,7 +544,7 @@ namespace PnP.Core.Test.Base
                     .Where(p => p.Title == "Site Pages")
                     .AddToCurrentBatchAsync();
                 await context.ExecuteAsync();
-
+                
                 Assert.IsTrue(context.Web.Lists.Length == 2);
                 Assert.IsTrue(context.Web.Lists.Requested);
                 var firstList = context.Web.Lists.First();

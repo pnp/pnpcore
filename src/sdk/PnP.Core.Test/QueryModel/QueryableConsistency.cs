@@ -573,7 +573,7 @@ namespace PnP.Core.Test.QueryModel
                 var listsQueryResult = listsQuery.ToList();
 
                 // Then try to get a specific list by title
-                var list = context.Web.Lists.GetByTitle(listTitle, l => l.Id, l => l.Title, l => l.Description);
+                var list = context.Web.Lists.GetByTitle(listTitle, l => l.Id);
 
                 // Then get the list items
                 await list.GetAsync(l => l.Items);

@@ -4,7 +4,7 @@
     /// Collection of chat messages
     /// </summary>
     [ConcreteType(typeof(TeamChatMessageAttachmentCollection))]
-    public interface ITeamChatMessageAttachmentCollection : IDataModelCollection<ITeamChatMessageAttachment>
+    public interface ITeamChatMessageAttachmentCollection : IDataModelCollection<ITeamChatMessageAttachment>, ISupportLoad<ITeamChatMessageAttachment>
     {
     }
 }

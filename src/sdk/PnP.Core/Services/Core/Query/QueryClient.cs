@@ -112,7 +112,7 @@ namespace PnP.Core.Services
             }
             urlParameters.Add("$expand", sb.ToString().TrimEnd(new char[] { ',' }));
 
-            AddODataToUrlParameters(oDataQuery, urlParameters, ODataTargetPlatform.SPORest);
+            oDataQuery.AddODataToUrlParameters(urlParameters, ODataTargetPlatform.SPORest);
 
             sb.Clear();
 
@@ -360,7 +360,7 @@ namespace PnP.Core.Services
             }
             urlParameters.Add("$expand", sb.ToString().TrimEnd(new char[] { ',' }));
 
-            AddODataToUrlParameters(oDataQuery, urlParameters, ODataTargetPlatform.Graph);
+            oDataQuery.AddODataToUrlParameters(urlParameters, ODataTargetPlatform.Graph);
 
             sb.Clear();
 
@@ -1081,33 +1081,6 @@ namespace PnP.Core.Services
         private static bool CanUseGraphBeta<TModel>(BaseDataModel<TModel> model, EntityInfo entity)
         {
             return model.PnPContext.GraphCanUseBeta && entity.GraphBeta;
-        }
-
-        private static void AddODataToUrlParameters<TModel>(ODataQuery<TModel> oDataQuery, Dictionary<string, string> urlParameters, ODataTargetPlatform targetPlatform)
-        {
-            // Process the $filter items
-            if (oDataQuery.Filters.Count > 0)
-            {
-                urlParameters.Add("$filter", oDataQuery.GetFilters(targetPlatform, false));
-            }
-
-            // Process any $top restriction
-            if (oDataQuery.Top.HasValue)
-            {
-                urlParameters.Add("top", oDataQuery.Top.ToString());
-            }
-
-            // Process any $skip restriction
-            if (oDataQuery.Skip.HasValue)
-            {
-                urlParameters.Add("skip", oDataQuery.Skip.ToString());
-            }
-
-            // Process the $orderby items
-            if (oDataQuery.OrderBy.Count > 0)
-            {
-                urlParameters.Add("$orderby", oDataQuery.GetOrderBy(targetPlatform, false));
-            }
         }
 
         #endregion

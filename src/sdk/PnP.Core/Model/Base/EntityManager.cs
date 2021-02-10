@@ -429,7 +429,7 @@ namespace PnP.Core.Model
         private static string ParseInclude(EntityInfo entityInfo, LambdaExpression expression, EntityFieldExpandInfo entityFieldExpandInfo)
         {
             var collectionPublicType = ((expression).Body as MethodCallExpression).Type.GenericTypeArguments[0];
-            var fieldToLoad = ((expression.Body as MethodCallExpression).Object as MemberExpression).Member.Name;
+            var fieldToLoad = ((expression.Body as MethodCallExpression).Arguments[0] as MemberExpression).Member.Name;
             var collectionEntityInfo = EntityManager.Instance.GetStaticClassInfo(collectionPublicType);
 
             bool first = false;
@@ -445,7 +445,7 @@ namespace PnP.Core.Model
 
             List<string> expandFieldsToLoad = new List<string>();
 
-            foreach (var includeFieldExpression in ((expression.Body as MethodCallExpression).Arguments[0] as NewArrayExpression).Expressions)
+            foreach (var includeFieldExpression in ((expression.Body as MethodCallExpression).Arguments[1] as NewArrayExpression).Expressions)
             {
                 string expandFieldToLoad = null;
                 if (includeFieldExpression is UnaryExpression)

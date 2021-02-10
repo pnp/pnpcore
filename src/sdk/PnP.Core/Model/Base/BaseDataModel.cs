@@ -1223,7 +1223,7 @@ namespace PnP.Core.Model
                     var body = (MethodCallExpression)expression.Body;
                     if (body.Method.Name == "Load")
                     {
-                        if (body.Arguments.Count != 1)
+                        if (body.Arguments.Count != 2)
                         {
                             throw new Exception(PnPCoreResources.Exception_InvalidArgumentsNumber);
                         }
@@ -1231,7 +1231,7 @@ namespace PnP.Core.Model
                         // Parse the expressions and get the relevant entity information
                         var entityInfo = EntityManager.GetClassInfo(model.GetType(), (model as BaseDataModel<TModel>), expressions);
 
-                        string fieldToLoad = ((expression.Body as MethodCallExpression).Object as MemberExpression).Member.Name;
+                        string fieldToLoad = ((expression.Body as MethodCallExpression).Arguments[0] as MemberExpression).Member.Name;
 
                         var collectionToCheck = entityInfo.Fields.FirstOrDefault(p => p.Name == fieldToLoad);
                         if (collectionToCheck != null)
