@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 namespace PnP.Core.Model
 {
     /// <summary>
-    /// Object supports explicit Load
+    /// Object supports explicit Query
     /// </summary>
-    public interface ISupportLoad<TResult>
+    public interface ISupportQuery<TResult>
     {
        
     }

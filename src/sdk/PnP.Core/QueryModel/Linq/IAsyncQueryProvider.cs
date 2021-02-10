@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using PnP.Core.Model;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
@@ -22,6 +23,6 @@ namespace PnP.Core.QueryModel
         /// </summary>
         /// <typeparam name="TResult"></typeparam>
         /// <param name="expression"></param>
-        Task AddToCurrentBatchAsync<TResult>(Expression expression);
+        Task<IBatchResult<TResult>> AddToCurrentBatchAsync<TResult>(Expression expression);
     }
 }

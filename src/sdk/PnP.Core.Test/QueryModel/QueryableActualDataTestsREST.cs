@@ -27,7 +27,7 @@ namespace PnP.Core.Test.QueryModel
                 context.GraphFirst = false;
 
                 var query = context.Site.AllWebs
-                            .Load(w => w.Id, w => w.Title, w => w.Description);
+                            .Query(w => w.Id, w => w.Title, w => w.Description);
 
                 var queryResult = query.ToList();
 
@@ -45,7 +45,7 @@ namespace PnP.Core.Test.QueryModel
                 context.GraphFirst = false;
 
                 var query = context.Site.AllWebs
-                    .Load(w => w.Id, w => w.Title, w => w.Description);
+                    .Query(w => w.Id, w => w.Title, w => w.Description);
 
                 var queryResult = await query.ToListAsync();
 
@@ -64,7 +64,7 @@ namespace PnP.Core.Test.QueryModel
 
                 var query = (from l in context.Web.Lists
                              select l)
-                            .Load(l => l.Id, l => l.Title, l => l.Description);
+                            .Query(l => l.Id, l => l.Title, l => l.Description);
 
                 var queryResult = query.ToList();
 
@@ -83,7 +83,7 @@ namespace PnP.Core.Test.QueryModel
 
                 var query = (from l in context.Web.Lists
                              select l)
-                            .Load(l => l.Id, l => l.Title, l => l.Description);
+                            .Query(l => l.Id, l => l.Title, l => l.Description);
 
                 var queryResult = await query.ToListAsync();
 
@@ -105,7 +105,7 @@ namespace PnP.Core.Test.QueryModel
                 var query = (from i in context.Web.Lists.GetByTitle("Site Pages").Items
                              where i.Title == expectedListItemTitle
                              select i)
-                             .Load(l => l.Id, l => l.Title);
+                             .Query(l => l.Id, l => l.Title);
 
                 var queryResult = query.ToList();
 
@@ -133,7 +133,7 @@ namespace PnP.Core.Test.QueryModel
                 var query = (from i in list.Items
                              where i.Title == expectedListItemTitle
                              select i)
-                    .Load(l => l.Id, l => l.Title);
+                    .Query(l => l.Id, l => l.Title);
 
                 var queryResult = await query.ToListAsync();
 
@@ -169,7 +169,7 @@ namespace PnP.Core.Test.QueryModel
             {
                 context.GraphFirst = false;
 
-                var actual = (await context.Web.Lists.GetAsync()).FirstOrDefault();
+                var actual = await context.Web.Lists.FirstOrDefaultAsync();
 
                 Assert.IsNotNull(actual);
             }
@@ -187,7 +187,7 @@ namespace PnP.Core.Test.QueryModel
 
                 var actual = (from l in context.Web.Lists
                               select l)
-                             .Load(l => l.Id, l => l.Title)
+                             .Query(l => l.Id, l => l.Title)
                              .FirstOrDefault(l => l.Title == expected);
 
                 Assert.IsNotNull(actual);
@@ -205,7 +205,7 @@ namespace PnP.Core.Test.QueryModel
             {
                 context.GraphFirst = false;
 
-                var actual = await context.Web.Lists.Load(l => l.Id, l => l.Title).FirstOrDefaultAsync(l => l.Title == expected);
+                var actual = await context.Web.Lists.Query(l => l.Id, l => l.Title).FirstOrDefaultAsync(l => l.Title == expected);
 
                 Assert.IsNotNull(actual);
                 Assert.AreEqual(expected, actual.Title);
@@ -408,7 +408,7 @@ namespace PnP.Core.Test.QueryModel
             {
                 context.GraphFirst = false;
 
-                var cts = context.Web.ContentTypes.Load(p => p.Id, p => p.Name);
+                var cts = context.Web.ContentTypes.Query(p => p.Id, p => p.Name);
                 var contentTypes = cts.ToList();
 
                 // Ensure that we a result
@@ -427,7 +427,7 @@ namespace PnP.Core.Test.QueryModel
             {
                 context.GraphFirst = false;
 
-                var cts = context.Web.ContentTypes.Load(p => p.Id, p => p.Name);
+                var cts = context.Web.ContentTypes.Query(p => p.Id, p => p.Name);
                 var contentTypes = await cts.ToListAsync();
 
                 // Ensure that we a result

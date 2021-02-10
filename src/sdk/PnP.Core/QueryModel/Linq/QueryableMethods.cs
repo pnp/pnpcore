@@ -32,9 +32,9 @@ namespace PnP.Core.QueryModel
         public static MethodInfo FirstOrDefaultWithPredicate { get; }
 
         /// <summary>
-        ///     The <see cref="MethodInfo" /> for <see cref="QueryableExtensions.Load" />
+        ///     The <see cref="MethodInfo" /> for <see cref="QueryableExtensions.Query{TResult}(System.Linq.IQueryable{TResult},System.Linq.Expressions.Expression{System.Func{TResult,object}})" />
         /// </summary>
-        public static MethodInfo Load { get; }
+        public static MethodInfo Query { get; }
 
         static QueryableMethods()
         {
@@ -43,8 +43,8 @@ namespace PnP.Core.QueryModel
             var queryableExtensionsMethods = typeof(QueryableExtensions)
                 .GetMethods(BindingFlags.Public | BindingFlags.Static | BindingFlags.DeclaredOnly).ToList();
 
-            Load = queryableExtensionsMethods.Single(
-                mi => mi.Name == nameof(QueryableExtensions.Load) && !mi.GetParameters()[1].ParameterType.IsArray);
+            Query = queryableExtensionsMethods.Single(
+                mi => mi.Name == nameof(QueryableExtensions.Query) && !mi.GetParameters()[1].ParameterType.IsArray);
             FirstWithoutPredicate = queryableMethods.Single(
                 mi => mi.Name == nameof(Queryable.First) && mi.GetParameters().Length == 1);
             FirstWithPredicate = queryableMethods.Single(

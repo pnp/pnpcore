@@ -398,7 +398,7 @@ namespace PnP.Core.Model.SharePoint
             if (pagesLibrary == null)
             {
                 pagesLibrary = await context.Web.Lists
-                    .Load(getPagesLibraryExpression)
+                    .Query(getPagesLibraryExpression)
                     .FirstOrDefaultAsync(p => p.TemplateType == ListTemplateType.WebPageLibrary)
                     .ConfigureAwait(false);
             }

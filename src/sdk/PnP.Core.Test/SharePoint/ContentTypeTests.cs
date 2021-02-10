@@ -131,7 +131,7 @@ namespace PnP.Core.Test.SharePoint
                 IContentType contentType = (from ct in context.Web.ContentTypes
                                             where ct.StringId == "0x01"
                                             select ct)
-                            .Load(ct => ct.StringId, ct => ct.Id)
+                            .Query(ct => ct.StringId, ct => ct.Id)
                             .FirstOrDefault();
 
                 Assert.IsNotNull(contentType);

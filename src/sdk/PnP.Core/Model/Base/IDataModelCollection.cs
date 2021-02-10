@@ -13,36 +13,6 @@ namespace PnP.Core.Model
     /// <typeparam name="TModel">The actual type of the Domain Model objects</typeparam>
     public interface IDataModelCollection<TModel> : IEnumerable<TModel>, IDataModelParent, IDataModelWithContext, IRequestableCollection
     {
-        /// <summary>
-        /// Queries for model instances using a given optional LINQ field load expressions
-        /// </summary>
-        /// <param name="expressions">LINQ field load expressions</param>
-        /// <returns>List of found model instances</returns>
-        public Task<IEnumerable<TModel>> GetAsync(params Expression<Func<TModel, object>>[] expressions);
-
-        /// <summary>
-        /// Queries for model instances using a given optional LINQ field load expressions
-        /// </summary>
-        /// <param name="expressions">LINQ field load expressions</param>
-        /// <returns>List of found model instances</returns>
-#pragma warning disable CA1716 // Identifiers should not match keywords
-        public IEnumerable<TModel> Get(params Expression<Func<TModel, object>>[] expressions);
-#pragma warning restore CA1716 // Identifiers should not match keywords
-
-        /// <summary>
-        /// Queries for model instances using a given optional LINQ field load expressions
-        /// </summary>
-        /// <param name="expressions">LINQ field load expressions</param>
-        /// <returns>List of found model instances</returns>
-        public Task GetBatchAsync(params Expression<Func<TModel, object>>[] expressions);
-
-        /// <summary>
-        /// Queries for model instances using a given optional LINQ field load expressions
-        /// </summary>
-        /// <param name="expressions">LINQ field load expressions</param>
-        /// <returns>List of found model instances</returns>
-        public void GetBatch(params Expression<Func<TModel, object>>[] expressions);
-
-
+       
     }
 }

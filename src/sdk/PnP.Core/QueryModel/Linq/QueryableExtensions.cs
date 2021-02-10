@@ -17,6 +17,12 @@ namespace PnP.Core.QueryModel
     public static class QueryableExtensions
     {
 
+        public static T Load<T>(this T source, params Expression<Func<T, object>>[] expressions)
+        {
+            // TODO: to move into BaseDataModel
+            return source;
+        }
+
         #region Batch
 
         /// <summary>
@@ -25,7 +31,7 @@ namespace PnP.Core.QueryModel
         /// <typeparam name="TSource"></typeparam>
         /// <param name="source"></param>
         /// <returns></returns>
-        public static Task AddToCurrentBatchAsync<TSource>(
+        public static Task<IBatchResult<TSource>> AddAsBatchAsync<TSource>(
             this IQueryable<TSource> source)
         {
             if (source == null)
@@ -52,22 +58,8 @@ namespace PnP.Core.QueryModel
         /// <param name="source">The collection of items to load the field/metadata from</param>
         /// <param name="selectors">A selector for a field/metadata</param>
         /// <returns>The resulting collection</returns>
-        public static IDataModelGet<TResult> Load<TResult>(
-            this IDataModelGet<TResult> source, params Expression<Func<TResult, object>>[] selectors)
-        {
-            // TODO: localize message
-            throw new InvalidOperationException();
-        }
-
-        /// <summary>
-        /// Extension method to declare a field/metadata property to load while executing the REST query
-        /// </summary>
-        /// <typeparam name="TResult">The type of the target entity</typeparam>
-        /// <param name="source">The collection of items to load the field/metadata from</param>
-        /// <param name="selectors">A selector for a field/metadata</param>
-        /// <returns>The resulting collection</returns>
-        public static ISupportLoad<TResult> Load<TResult>(
-            this ISupportLoad<TResult> source, params Expression<Func<TResult, object>>[] selectors)
+        public static ISupportQuery<TResult> Query<TResult>(
+            this ISupportQuery<TResult> source, params Expression<Func<TResult, object>>[] selectors)
         {
             // TODO: localize message
             throw new InvalidOperationException();
@@ -80,7 +72,7 @@ namespace PnP.Core.QueryModel
         /// <param name="source">The collection of items to load the field/metadata from</param>
         /// <param name="selector">A selector for a field/metadata</param>
         /// <returns>The resulting collection</returns>
-        public static IQueryable<TResult> Load<TResult>(
+        public static IQueryable<TResult> Query<TResult>(
             this IQueryable<TResult> source, Expression<Func<TResult, object>> selector)
         {
             if (source is null)
@@ -95,7 +87,7 @@ namespace PnP.Core.QueryModel
             return source.Provider.CreateQuery<TResult>(
                 Expression.Call(
                     null,
-                    QueryableMethods.Load.MakeGenericMethod(typeof(TResult)),
+                    QueryableMethods.Query.MakeGenericMethod(typeof(TResult)),
                     new Expression[] { source.Expression, Expression.Quote(selector) }
                 ));
         }
@@ -107,7 +99,7 @@ namespace PnP.Core.QueryModel
         /// <param name="source">The collection of items to load fields/metadata from</param>
         /// <param name="selectors">An array of selectors for the fields/metadata</param>
         /// <returns>The resulting collection</returns>
-        public static IQueryable<TResult> Load<TResult>(
+        public static IQueryable<TResult> Query<TResult>(
             this IQueryable<TResult> source, params Expression<Func<TResult, object>>[] selectors)
         {
             if (source is null)
@@ -123,7 +115,7 @@ namespace PnP.Core.QueryModel
 
             foreach (var s in selectors)
             {
-                result = result.Load(s);
+                result = result.Query(s);
             }
 
             return result;
@@ -593,8 +585,8 @@ namespace PnP.Core.QueryModel
                 instance: null,
                 method: operatorMethodInfo,
                 arguments: expression == null
-                    ? new[] {source.Expression}
-                    : new[] {source.Expression, expression});
+                    ? new[] { source.Expression }
+                    : new[] { source.Expression, expression });
             return source.Provider.Execute<TResult>(
                 v);
         }

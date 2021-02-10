@@ -34,8 +34,8 @@ namespace PnP.Core.QueryModel
                     case "Select":
                         VisitSelect(m);
                         return m;
-                    case "Load":
-                        VisitLoad(m);
+                    case "Query":
+                        VisitQuery(m);
                         return m;
                     case "OrderBy":
                     case "ThenBy":
@@ -82,14 +82,12 @@ namespace PnP.Core.QueryModel
             }
         }
 
-        private void VisitLoad(MethodCallExpression m)
+        private void VisitQuery(MethodCallExpression m)
         {
             Visit(m.Arguments[0]);
-            var propertySelector = m.Arguments[1] as UnaryExpression;
-            if (propertySelector != null)
+            if (m.Arguments[1] is UnaryExpression propertySelector)
             {
-                var lambda = propertySelector.Operand as Expression<Func<TModel, object>>;
-                if (lambda != null)
+                if (propertySelector.Operand is Expression<Func<TModel, object>> lambda)
                 {
                     query.Fields.Add(lambda);
                 }

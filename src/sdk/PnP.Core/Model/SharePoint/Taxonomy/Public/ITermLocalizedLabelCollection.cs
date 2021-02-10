@@ -4,7 +4,7 @@
     /// Collection of localized termset labels
     /// </summary>
     [ConcreteType(typeof(TermLocalizedLabelCollection))]
-    public interface ITermLocalizedLabelCollection : IDataModelCollection<ITermLocalizedLabel>, ISupportLoad<ITermLocalizedLabel>
+    public interface ITermLocalizedLabelCollection : IDataModelCollection<ITermLocalizedLabel>, ISupportQuery<ITermLocalizedLabel>
     {
     }
 }

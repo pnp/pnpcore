@@ -4,7 +4,7 @@
     /// Collection of chat messages
     /// </summary>
     [ConcreteType(typeof(TeamChatMessageHostedContentCollection))]
-    public interface ITeamChatMessageHostedContentCollection : IDataModelCollection<ITeamChatMessageHostedContent>, ISupportLoad<ITeamChatMessageHostedContent>
+    public interface ITeamChatMessageHostedContentCollection : IDataModelCollection<ITeamChatMessageHostedContent>, ISupportQuery<ITeamChatMessageHostedContent>
     {
     }
 }

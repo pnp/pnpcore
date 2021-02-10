@@ -308,7 +308,7 @@ namespace PnP.Core.Test.Base
         public async Task GetWebGraphFirstExpressionExpandablePlusSimplePropertiesPlusLoadSimple()
         {
             var requests = await GetAPICallTestAsync(BuildModel<Web, IWeb>(new Expression<Func<IWeb, object>>[]
-            { p => p.Title, p => p.Description, p => p.Lists.Load(
+            { p => p.Title, p => p.Description, p => p.Lists.Query(
                 p=>p.Title, p=>p.TemplateType)
             }));
             Assert.IsTrue(requests.Count == 1);
@@ -319,7 +319,7 @@ namespace PnP.Core.Test.Base
         public async Task GetWebGraphFirstExpressionExpandablePlusSimplePropertiesPlusLoadSimplePlusKeyProperty()
         {
             var requests = await GetAPICallTestAsync(BuildModel<Web, IWeb>(new Expression<Func<IWeb, object>>[]
-            { p => p.Title, p => p.Description, p => p.Lists.Load(
+            { p => p.Title, p => p.Description, p => p.Lists.Query(
                 p=>p.Title, p=>p.TemplateType, p=>p.Id)
             }));
             Assert.IsTrue(requests.Count == 1);
@@ -330,10 +330,8 @@ namespace PnP.Core.Test.Base
         public async Task GetWebGraphFirstExpressionExpandablePlusSimplePropertiesPlusLoadRecursive()
         {
             var requests = await GetAPICallTestAsync(BuildModel<Web, IWeb>(new Expression<Func<IWeb, object>>[]
-            { p => p.Title, p => p.Description, p => p.Lists.Load(
-                p => p.Title, p => p.TemplateType, p=>p.ContentTypes.Load(
-                    p=>p.Name, p=>p.FieldLinks.Load(
-                        p=> p.Name, p=> p.Hidden)))
+            { p => p.Title, p => p.Description, p => p.Lists.Query(
+                p => p.Title, p => p.TemplateType, p=>QueryableExtensions.Query(p.ContentTypes, p=>p.Name, p=>QueryableExtensions.Query(p.FieldLinks, p=> p.Name, p=> p.Hidden)))
             }));
             Assert.IsTrue(requests.Count == 1);
             Assert.AreEqual(requests[0], "_api/web?$select=Id%2cTitle%2cDescription%2cLists%2fTitle%2cLists%2fBaseTemplate%2cLists%2fId%2cLists%2fContentTypes%2fName%2cLists%2fContentTypes%2fStringId%2cLists%2fContentTypes%2fFieldLinks%2fName%2cLists%2fContentTypes%2fFieldLinks%2fHidden%2cLists%2fContentTypes%2fFieldLinks%2fId&$expand=Lists%2cLists%2fContentTypes%2cLists%2fContentTypes%2fFieldLinks", true);
@@ -343,10 +341,8 @@ namespace PnP.Core.Test.Base
         public async Task GetWebGraphFirstExpressionExpandablePlusSimplePropertiesPlusLoadRecursivePlusKeyProperties()
         {
             var requests = await GetAPICallTestAsync(BuildModel<Web, IWeb>(new Expression<Func<IWeb, object>>[]
-            { p => p.Title, p => p.Description, p => p.Lists.Load(
-                p => p.Title, p => p.TemplateType, p=>p.Id, p=>p.ContentTypes.Load(
-                    p=>p.Name, p=>p.StringId, p=>p.FieldLinks.Load(
-                        p=>p.Id, p=> p.Name, p=> p.Hidden)))
+            { p => p.Title, p => p.Description, p => p.Lists.Query(
+                p => p.Title, p => p.TemplateType, p=>p.Id, p=>QueryableExtensions.Query(p.ContentTypes, p=>p.Name, p=>p.StringId, p=>QueryableExtensions.Query(p.FieldLinks, p=>p.Id, p=> p.Name, p=> p.Hidden)))
             }));
             Assert.IsTrue(requests.Count == 1);
             Assert.AreEqual(requests[0], "_api/web?$select=Id%2cTitle%2cDescription%2cLists%2fTitle%2cLists%2fBaseTemplate%2cLists%2fId%2cLists%2fContentTypes%2fName%2cLists%2fContentTypes%2fStringId%2cLists%2fContentTypes%2fFieldLinks%2fId%2cLists%2fContentTypes%2fFieldLinks%2fName%2cLists%2fContentTypes%2fFieldLinks%2fHidden&$expand=Lists%2cLists%2fContentTypes%2cLists%2fContentTypes%2fFieldLinks", true);
@@ -409,7 +405,7 @@ namespace PnP.Core.Test.Base
         [TestMethod]
         public async Task GetTeamExpressionExpandableKeyPropertyPlusLoad()
         {
-            var requests = await GetAPICallTestAsync(BuildModel<TermStore, ITermStore>(new Expression<Func<ITermStore, object>>[] { p => p.Id, p => p.Groups.Load(
+            var requests = await GetAPICallTestAsync(BuildModel<TermStore, ITermStore>(new Expression<Func<ITermStore, object>>[] { p => p.Id, p => p.Groups.Query(
                 p=>p.Name )
             }));
             Assert.IsTrue(requests.Count == 2);
@@ -420,7 +416,7 @@ namespace PnP.Core.Test.Base
         [TestMethod]
         public async Task GetTeamExpressionExpandableKeyPropertyPlusLoadPlusKeyProperty()
         {
-            var requests = await GetAPICallTestAsync(BuildModel<TermStore, ITermStore>(new Expression<Func<ITermStore, object>>[] { p => p.Id, p => p.Groups.Load(
+            var requests = await GetAPICallTestAsync(BuildModel<TermStore, ITermStore>(new Expression<Func<ITermStore, object>>[] { p => p.Id, p => p.Groups.Query(
                 p=>p.Name, p=>p.Id )
             }));
             Assert.IsTrue(requests.Count == 2);
@@ -432,7 +428,7 @@ namespace PnP.Core.Test.Base
         [ExpectedException(typeof(ClientException))]
         public async Task GetTeamExpressionExpandableKeyPropertyPlusLoadPlusExpandKeyProperty()
         {
-            var requests = await GetAPICallTestAsync(BuildModel<TermStore, ITermStore>(new Expression<Func<ITermStore, object>>[] { p => p.Id, p => p.Groups.Load(
+            var requests = await GetAPICallTestAsync(BuildModel<TermStore, ITermStore>(new Expression<Func<ITermStore, object>>[] { p => p.Id, p => p.Groups.Query(
                 p=>p.Name, p=>p.Id, p=>p.Sets )
             }));
         }
@@ -521,7 +517,7 @@ namespace PnP.Core.Test.Base
         public async Task GetLinqListPlusLoad()
         {
             var requests = await GetODataAPICallTestAsync(
-                BuildModel<List, IList>(new Expression<Func<IList, object>>[] { p => p.ListExperience, p => p.Fields.Load(p => p.Id, p => p.InternalName) }),
+                BuildModel<List, IList>(new Expression<Func<IList, object>>[] { p => p.ListExperience, p => p.Fields.Query(p => p.Id, p => p.InternalName) }),
                 new ODataQuery<IList> { Top = 10, Skip = 5 });
             Assert.AreEqual(requests[0], "_api/web/lists?$select=id,listexperienceoptions,fields%2fid,fields%2finternalname&$expand=fields&$top=10&$skip=5", true);
         }

@@ -173,7 +173,7 @@ namespace PnP.Core.Model.Security
         public async Task<IRoleDefinitionCollection> GetRoleDefinitionsAsync()
         {
             var roleAssignment = await PnPContext.Web.RoleAssignments
-                .Load(r => r.RoleDefinitions)
+                .Query(r => r.RoleDefinitions)
                 .FirstOrDefaultAsync(p => p.PrincipalId == Id).ConfigureAwait(false);
             return roleAssignment?.RoleDefinitions;
         }

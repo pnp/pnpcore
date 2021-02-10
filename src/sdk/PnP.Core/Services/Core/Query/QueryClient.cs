@@ -730,7 +730,7 @@ namespace PnP.Core.Services
                         }
                         else
                         {
-                            selectionTarget = selectionTarget.Load(s);
+                            selectionTarget = selectionTarget.Query(s);
                         }
                     }
                 }

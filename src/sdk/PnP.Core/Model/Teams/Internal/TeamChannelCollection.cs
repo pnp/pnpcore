@@ -144,7 +144,7 @@ namespace PnP.Core.Model.Teams
                 throw new ArgumentNullException(nameof(displayName));
             }
 
-            return await this.Load(selectors).FirstOrDefaultAsync(c => c.DisplayName == displayName).ConfigureAwait(false);
+            return await this.Query(selectors).FirstOrDefaultAsync(c => c.DisplayName == displayName).ConfigureAwait(false);
         }
 
         #endregion
