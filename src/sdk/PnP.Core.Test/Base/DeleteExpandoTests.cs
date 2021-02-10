@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-
+using PnP.Core.Model;
 
 namespace PnP.Core.Test.Base
 {
@@ -108,12 +108,12 @@ namespace PnP.Core.Test.Base
                 await context.ExecuteAsync();
 
                 string listTitle = "DeleteListItemViaBatchRest";
-                var myList = web.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
+                var myList = web.Result.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
 
                 if (myList == null)
                 {
                     // Create the list
-                    myList = await web.Lists.AddBatchAsync(listTitle, ListTemplateType.GenericList);
+                    myList = await web.Result.Lists.AddBatchAsync(listTitle, ListTemplateType.GenericList);
                     await context.ExecuteAsync();
                     // Add a list item to this list
                     // Add a list item

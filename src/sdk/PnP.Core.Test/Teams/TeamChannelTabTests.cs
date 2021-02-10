@@ -126,18 +126,18 @@ namespace PnP.Core.Test.Teams
             {
                 var team = context.Team.GetBatch(o => o.Channels);
                 context.Execute();
-                Assert.IsTrue(team.Channels.Length > 0);
+                Assert.IsTrue(team.Result.Channels.Length > 0);
 
-                var channel = team.Channels.FirstOrDefault(i => i.DisplayName == "General");
+                var channelQuery = team.Result.Channels.FirstOrDefault(i => i.DisplayName == "General");
                 context.Execute();
-                Assert.IsNotNull(channel);
+                Assert.IsNotNull(channelQuery);
 
-                channel = channel.GetBatch(o => o.Tabs);
+                var channel = channelQuery.GetBatch(o => o.Tabs);
                 context.Execute();
 
                 var testSiteLib = $"{context.Uri.OriginalString}/Shared%20Documents";
                 var testTabName = "DocLibTab";
-                var result = channel.Tabs.AddDocumentLibraryTabBatch(testTabName, new Uri(testSiteLib));
+                var result = channel.Result.Tabs.AddDocumentLibraryTabBatch(testTabName, new Uri(testSiteLib));
 
                 context.Execute();
 
@@ -188,16 +188,16 @@ namespace PnP.Core.Test.Teams
                 var team = context.Team.GetBatch(batch, o => o.Channels);
                 context.Execute(batch);
 
-                var channel = team.Channels.FirstOrDefault(i => i.DisplayName == "General");
-                channel = channel.GetBatch(batch, o => o.Tabs);
+                var channelQuery = team.Result.Channels.FirstOrDefault(i => i.DisplayName == "General");
+                var channel = channelQuery.GetBatch(batch, o => o.Tabs);
 
                 context.Execute(batch);
-                Assert.IsTrue(team.Channels.Length > 0);
+                Assert.IsTrue(team.Result.Channels.Length > 0);
                 Assert.IsNotNull(channel);
 
                 var testSiteLib = $"{context.Uri.OriginalString}/Shared%20Documents";
                 var testTabName = "DocLibTab";
-                var result = channel.Tabs.AddDocumentLibraryTabBatch(batch, testTabName, new Uri(testSiteLib));
+                var result = channel.Result.Tabs.AddDocumentLibraryTabBatch(batch, testTabName, new Uri(testSiteLib));
 
                 context.Execute(batch);
                 
@@ -268,16 +268,16 @@ namespace PnP.Core.Test.Teams
             {
                 var team = context.Team.GetBatch(o => o.Channels);
                 context.Execute();
-                Assert.IsTrue(team.Channels.Length > 0);
+                Assert.IsTrue(team.Result.Channels.Length > 0);
 
-                var channel = team.Channels.FirstOrDefault(i => i.DisplayName == "General");
-                Assert.IsNotNull(channel);
+                var channelQuery = team.Result.Channels.FirstOrDefault(i => i.DisplayName == "General");
+                Assert.IsNotNull(channelQuery);
 
-                channel = channel.GetBatch(o => o.Tabs);
+                var channel = channelQuery.GetBatch(o => o.Tabs);
                 context.Execute();
 
                 var testTabName = "WikiTestTab";
-                var result = channel.Tabs.AddWikiTabBatch(testTabName);
+                var result = channel.Result.Tabs.AddWikiTabBatch(testTabName);
                 context.Execute();
 
                 Assert.IsNotNull(result);
@@ -298,16 +298,16 @@ namespace PnP.Core.Test.Teams
                 var batch = context.NewBatch();
                 var team = context.Team.GetBatch(batch, o => o.Channels);
                 context.Execute(batch);
-                Assert.IsTrue(team.Channels.Length > 0);
+                Assert.IsTrue(team.Result.Channels.Length > 0);
 
-                var channel = team.Channels.FirstOrDefault(i => i.DisplayName == "General");
-                Assert.IsNotNull(channel);
+                var firstChannel = team.Result.Channels.FirstOrDefault(i => i.DisplayName == "General");
+                Assert.IsNotNull(firstChannel);
 
-                channel = channel.GetBatch(batch, o => o.Tabs);
+                var channel = firstChannel.GetBatch(batch, o => o.Tabs);
                 context.Execute(batch);
 
                 var testTabName = "WikiTestTab";
-                var result = channel.Tabs.AddWikiTabBatch(batch,testTabName);
+                var result = channel.Result.Tabs.AddWikiTabBatch(batch,testTabName);
                 context.Execute(batch);
 
                 Assert.IsNotNull(result);

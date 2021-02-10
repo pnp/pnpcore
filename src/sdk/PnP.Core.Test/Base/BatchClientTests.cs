@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
+using PnP.Core.Model;
 
 namespace PnP.Core.Test.Base
 {
@@ -104,16 +105,16 @@ namespace PnP.Core.Test.Base
                 Assert.IsTrue(context.CurrentBatch.Requests.Count == 3);
 
                 // The model was not yet requested
-                Assert.IsFalse(web.Lists.Requested);
-                Assert.IsFalse(web2.Lists.Requested);
-                Assert.IsFalse(web3.Lists.Requested);
+                Assert.IsFalse(web.Result.Lists.Requested);
+                Assert.IsFalse(web2.Result.Lists.Requested);
+                Assert.IsFalse(web3.Result.Lists.Requested);
 
                 await context.ExecuteAsync();
 
                 // all variables should point to the same model, so all should be requested
-                Assert.IsTrue(web.Lists.Requested);
-                Assert.IsTrue(web2.Lists.Requested);
-                Assert.IsTrue(web3.Lists.Requested);
+                Assert.IsTrue(web.Result.Lists.Requested);
+                Assert.IsTrue(web2.Result.Lists.Requested);
+                Assert.IsTrue(web3.Result.Lists.Requested);
 
                 var executedBatch = context.BatchClient.GetBatchById(currentBatchId);
                 // Batch should be marked as executed

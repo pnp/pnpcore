@@ -6,6 +6,7 @@ using PnP.Core.Test.Utilities;
 using System;
 using System.Net.Http;
 using System.Threading.Tasks;
+using PnP.Core.Model;
 
 namespace PnP.Core.Test.Base
 {

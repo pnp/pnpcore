@@ -3,6 +3,7 @@ using PnP.Core.Test.Utilities;
 using System.Linq;
 using System.Threading.Tasks;
 using PnP.Core.QueryModel;
+using PnP.Core.Model;
 
 namespace PnP.Core.Test.Base
 {
