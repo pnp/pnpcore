@@ -14500,6 +14500,32 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IListItem.AreCommentsDisabledAsync
   nameWithType: IListItem.AreCommentsDisabledAsync
+- uid: PnP.Core.Model.SharePoint.IListItem.GetFolder
+  name: GetFolder()
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_GetFolder
+  commentId: M:PnP.Core.Model.SharePoint.IListItem.GetFolder
+  fullName: PnP.Core.Model.SharePoint.IListItem.GetFolder()
+  nameWithType: IListItem.GetFolder()
+- uid: PnP.Core.Model.SharePoint.IListItem.GetFolder*
+  name: GetFolder
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_GetFolder_
+  commentId: Overload:PnP.Core.Model.SharePoint.IListItem.GetFolder
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IListItem.GetFolder
+  nameWithType: IListItem.GetFolder
+- uid: PnP.Core.Model.SharePoint.IListItem.GetFolderAsync
+  name: GetFolderAsync()
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_GetFolderAsync
+  commentId: M:PnP.Core.Model.SharePoint.IListItem.GetFolderAsync
+  fullName: PnP.Core.Model.SharePoint.IListItem.GetFolderAsync()
+  nameWithType: IListItem.GetFolderAsync()
+- uid: PnP.Core.Model.SharePoint.IListItem.GetFolderAsync*
+  name: GetFolderAsync
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_GetFolderAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.IListItem.GetFolderAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IListItem.GetFolderAsync
+  nameWithType: IListItem.GetFolderAsync
 - uid: PnP.Core.Model.SharePoint.IListItem.Id
   name: Id
   href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_Id
@@ -14513,6 +14539,32 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IListItem.Id
   nameWithType: IListItem.Id
+- uid: PnP.Core.Model.SharePoint.IListItem.IsFolder
+  name: IsFolder()
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_IsFolder
+  commentId: M:PnP.Core.Model.SharePoint.IListItem.IsFolder
+  fullName: PnP.Core.Model.SharePoint.IListItem.IsFolder()
+  nameWithType: IListItem.IsFolder()
+- uid: PnP.Core.Model.SharePoint.IListItem.IsFolder*
+  name: IsFolder
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_IsFolder_
+  commentId: Overload:PnP.Core.Model.SharePoint.IListItem.IsFolder
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IListItem.IsFolder
+  nameWithType: IListItem.IsFolder
+- uid: PnP.Core.Model.SharePoint.IListItem.IsFolderAsync
+  name: IsFolderAsync()
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_IsFolderAsync
+  commentId: M:PnP.Core.Model.SharePoint.IListItem.IsFolderAsync
+  fullName: PnP.Core.Model.SharePoint.IListItem.IsFolderAsync()
+  nameWithType: IListItem.IsFolderAsync()
+- uid: PnP.Core.Model.SharePoint.IListItem.IsFolderAsync*
+  name: IsFolderAsync
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_IsFolderAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.IListItem.IsFolderAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IListItem.IsFolderAsync
+  nameWithType: IListItem.IsFolderAsync
 - uid: PnP.Core.Model.SharePoint.IListItem.NewFieldLookupValue(PnP.Core.Model.SharePoint.IField,System.Int32)
   name: NewFieldLookupValue(IField, Int32)
   href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_NewFieldLookupValue_PnP_Core_Model_SharePoint_IField_System_Int32_
