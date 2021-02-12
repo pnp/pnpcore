@@ -1,5 +1,6 @@
 ﻿using PnP.Core.Model.Security;
 using System;
+using System.Collections.Generic;
 
 namespace PnP.Core.Model.SharePoint
 {
@@ -451,7 +452,21 @@ namespace PnP.Core.Model.SharePoint
         /// <returns></returns>
         public IFieldValueCollection NewFieldValueCollection();
 
+        /// <summary>
+        /// Creates a new collection to hold <see cref="IFieldValue"/> objects
+        /// </summary>
+        /// <param name="fieldValues">Collection of field values to add</param>
+        /// <returns></returns>
+        public IFieldValueCollection NewFieldValueCollection(IEnumerable<IFieldValue> fieldValues);
+
+        /// <summary>
+        /// Creates a new collection to hold <see cref="IFieldTaxonomyValue"/> objects
+        /// </summary>
+        /// <param name="fieldValues">Collection of field values to add</param>
+        /// <returns></returns>
+        public IFieldValueCollection NewFieldValueCollection(IEnumerable<KeyValuePair<Guid, string>> fieldValues);
+
         #endregion
-        
+
     }
 }

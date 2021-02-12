@@ -1789,9 +1789,14 @@ namespace PnP.Core.Test.SharePoint
                 fieldData[fldTaxonomyMulti1].Properties.Add("Label2", label2);
                 fieldData[fldTaxonomyMulti1].Properties.Add("Term3", term3);
                 fieldData[fldTaxonomyMulti1].Properties.Add("Label3", label3);
-                var termCollection = addedTaxonomyMultiField1.NewFieldValueCollection();
-                termCollection.Values.Add(addedTaxonomyMultiField1.NewFieldTaxonomyValue((Guid)fieldData[fldTaxonomyMulti1].Properties["Term1"], fieldData[fldTaxonomyMulti1].Properties["Label1"].ToString()));
-                termCollection.Values.Add(addedTaxonomyMultiField1.NewFieldTaxonomyValue((Guid)fieldData[fldTaxonomyMulti1].Properties["Term2"], fieldData[fldTaxonomyMulti1].Properties["Label2"].ToString()));
+
+                // Use the option to specify a list of values in the constructor
+                List<IFieldTaxonomyValue> taxonomyValues = new List<IFieldTaxonomyValue>
+                {
+                    addedTaxonomyMultiField1.NewFieldTaxonomyValue((Guid)fieldData[fldTaxonomyMulti1].Properties["Term1"], fieldData[fldTaxonomyMulti1].Properties["Label1"].ToString()),
+                    addedTaxonomyMultiField1.NewFieldTaxonomyValue((Guid)fieldData[fldTaxonomyMulti1].Properties["Term2"], fieldData[fldTaxonomyMulti1].Properties["Label2"].ToString())
+                };
+                var termCollection = addedTaxonomyMultiField1.NewFieldValueCollection(taxonomyValues);
                 fieldData[fldTaxonomyMulti1].Properties.Add("Collection", termCollection);
                 item.Add(fldTaxonomyMulti1, termCollection);
 
@@ -2143,7 +2148,7 @@ namespace PnP.Core.Test.SharePoint
                 fieldData[fldUserSingle1].Properties.Add("Principal", currentUser);
                 item.Add(fldUserSingle1, addedUserSingleField1.NewFieldUserValue(currentUser));
 
-                // User multi field 1
+                // User multi field 1                
                 var userCollection = addedUserMultiField1.NewFieldValueCollection();
                 userCollection.Values.Add(addedUserMultiField1.NewFieldUserValue(currentUser));
                 fieldData[fldUserMulti1].Properties.Add("Collection", userCollection);
@@ -2165,9 +2170,17 @@ namespace PnP.Core.Test.SharePoint
                 fieldData[fldTaxonomyMulti1].Properties.Add("Label2", label2);
                 fieldData[fldTaxonomyMulti1].Properties.Add("Term3", term3);
                 fieldData[fldTaxonomyMulti1].Properties.Add("Label3", label3);
-                var termCollection = addedTaxonomyMultiField1.NewFieldValueCollection();
-                termCollection.Values.Add(addedTaxonomyMultiField1.NewFieldTaxonomyValue((Guid)fieldData[fldTaxonomyMulti1].Properties["Term1"], fieldData[fldTaxonomyMulti1].Properties["Label1"].ToString()));
-                termCollection.Values.Add(addedTaxonomyMultiField1.NewFieldTaxonomyValue((Guid)fieldData[fldTaxonomyMulti1].Properties["Term2"], fieldData[fldTaxonomyMulti1].Properties["Label2"].ToString()));
+
+                List<KeyValuePair<Guid, string>> terms = new List<KeyValuePair<Guid, string>>
+                {
+                    new KeyValuePair<Guid, string>((Guid)fieldData[fldTaxonomyMulti1].Properties["Term1"], fieldData[fldTaxonomyMulti1].Properties["Label1"].ToString()),
+                    new KeyValuePair<Guid, string>((Guid)fieldData[fldTaxonomyMulti1].Properties["Term2"], fieldData[fldTaxonomyMulti1].Properties["Label2"].ToString())
+                };
+
+                // Use the special constructor to get it covered
+                var termCollection = addedTaxonomyMultiField1.NewFieldValueCollection(terms);
+                //termCollection.Values.Add(addedTaxonomyMultiField1.NewFieldTaxonomyValue((Guid)fieldData[fldTaxonomyMulti1].Properties["Term1"], fieldData[fldTaxonomyMulti1].Properties["Label1"].ToString()));
+                //termCollection.Values.Add(addedTaxonomyMultiField1.NewFieldTaxonomyValue((Guid)fieldData[fldTaxonomyMulti1].Properties["Term2"], fieldData[fldTaxonomyMulti1].Properties["Label2"].ToString()));
                 fieldData[fldTaxonomyMulti1].Properties.Add("Collection", termCollection);
                 item.Add(fldTaxonomyMulti1, termCollection);
 
@@ -2253,7 +2266,8 @@ namespace PnP.Core.Test.SharePoint
                 (addedItem[fldUserSingle1] as IFieldUserValue).Principal = fieldData[fldUserSingle1].Properties["Principal"] as ISharePointPrincipal;
 
                 // User multi field2
-                (fieldData[fldUserMulti1].Properties["Collection"] as IFieldValueCollection).Values.Add(addedUserMultiField1.NewFieldUserValue(userTwo));
+                // Load via just user ID to test this constructor
+                (fieldData[fldUserMulti1].Properties["Collection"] as IFieldValueCollection).Values.Add(addedUserMultiField1.NewFieldUserValue(userTwo.Id));
                 addedItem[fldUserMulti1] = fieldData[fldUserMulti1].Properties["Collection"] as IFieldValueCollection;
 
                 // Taxonomy single field 1
