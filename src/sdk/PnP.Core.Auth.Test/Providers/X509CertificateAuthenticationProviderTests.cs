@@ -63,7 +63,7 @@ namespace PnP.Core.Auth.Test.Providers
         public async Task TestX509CertificateConstructorNoDI_NullClientId_NullTenantId()
 #pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
         {
-            if (TestCommon.RunningInGitHubWorkflow()) Assert.Inconclusive("Skipping test because we're running inside a GitHub action and we don't have access to the certificate store");
+            //if (TestCommon.RunningInGitHubWorkflow()) Assert.Inconclusive("Skipping test because we're running inside a GitHub action and we don't have access to the certificate store");
 
             var configuration = TestCommon.GetConfigurationSettings();
             var storeName = configuration.GetValue<StoreName>($"{TestGlobals.CredentialsConfigurationBasePath}:{x509CertificateConfigurationPath}:X509Certificate:StoreName");
@@ -171,7 +171,7 @@ namespace PnP.Core.Auth.Test.Providers
 
         private static X509CertificateAuthenticationProvider PrepareX509CertificateAuthenticationProvider()
         {
-            if (TestCommon.RunningInGitHubWorkflow()) Assert.Inconclusive("Skipping test because we're running inside a GitHub action and we don't have access to the certificate store");
+            //if (TestCommon.RunningInGitHubWorkflow()) Assert.Inconclusive("Skipping test because we're running inside a GitHub action and we don't have access to the certificate store");
 
             var configuration = TestCommon.GetConfigurationSettings();
             var clientId = configuration.GetValue<string>($"{TestGlobals.CredentialsConfigurationBasePath}:{x509CertificateConfigurationPath}:ClientId");

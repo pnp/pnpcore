@@ -49,7 +49,7 @@ namespace PnP.Core.Auth.Test.Providers
         public async Task TestCredentialManagerConstructorNoDI()
 #pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
         {
-            if (TestCommon.RunningInGitHubWorkflow()) Assert.Inconclusive("Skipping live test because we're running inside a GitHub action");
+            //if (TestCommon.RunningInGitHubWorkflow()) Assert.Inconclusive("Skipping live test because we're running inside a GitHub action");
 
             var provider = PrepareCredentialManagerAuthenticationProvider();
 
@@ -64,7 +64,7 @@ namespace PnP.Core.Auth.Test.Providers
         public async Task TestCredentialManagerConstructorNoDI_NullClientId_NullTenantId()
 #pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
         {
-            if (TestCommon.RunningInGitHubWorkflow()) Assert.Inconclusive("Skipping live test because we're running inside a GitHub action");
+            //if (TestCommon.RunningInGitHubWorkflow()) Assert.Inconclusive("Skipping live test because we're running inside a GitHub action");
 
             var configuration = TestCommon.GetConfigurationSettings();
             var credentialManagerName = configuration.GetValue<string>($"{TestGlobals.CredentialsConfigurationBasePath}:{credentialManagerConfigurationPath}:CredentialManager:CredentialManagerName");
