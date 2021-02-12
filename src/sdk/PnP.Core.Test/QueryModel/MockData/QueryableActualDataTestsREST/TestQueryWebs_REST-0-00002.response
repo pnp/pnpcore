@@ -1,9 +1,9 @@
---batchresponse_9255597e-fca4-4021-81d9-e36576d5c597
+--batchresponse_a2d58765-85b1-4ed7-bb67-544cc72faf0e
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{"d":{"results":[{"__metadata":{"id":"https://officedevpnp.sharepoint.com/sites/pnpcoresdkdemo/_api/SP.WebInformatione8b1381d-0129-43d3-be08-c160bca6d3e0","uri":"https://officedevpnp.sharepoint.com/sites/pnpcoresdkdemo/_api/SP.WebInformatione8b1381d-0129-43d3-be08-c160bca6d3e0","type":"SP.WebInformation"},"Description":"","Id":"7f4c2cff-fcfa-4d47-ba9f-c53bfe6e138d","Title":"sub site"}]}}
---batchresponse_9255597e-fca4-4021-81d9-e36576d5c597--
+{"d":{"results":[{"__metadata":{"id":"https://piasysdev.sharepoint.com/sites/prov-1/_api/SP.WebInformation29bdbb9d-f601-43d9-b9eb-841614a75a2d","uri":"https://piasysdev.sharepoint.com/sites/prov-1/_api/SP.WebInformation29bdbb9d-f601-43d9-b9eb-841614a75a2d","type":"SP.WebInformation"},"Description":"","Id":"a27d1aa9-d045-4916-9b64-2fb250b2c876","Title":"testsub1"}]}}
+--batchresponse_a2d58765-85b1-4ed7-bb67-544cc72faf0e--

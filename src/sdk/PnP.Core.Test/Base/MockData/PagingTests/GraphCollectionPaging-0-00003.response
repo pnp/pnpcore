@@ -1,1 +1,11 @@
-{"responses": [{"id": "1","status":201,"headers" : {"Location":"https://teamsgraph.teams.microsoft.com/v1.0/teams('b32780e9-df70-4548-a735-4e7f055415a1')/channels('19:5c88d34ae19945ab8d90a51efe9cdf9e@thread.tacv2')","OData-Version":"4.0","Content-Type":"application/json;odata.metadata=minimal;odata.streaming=true;IEEE754Compatible=false;charset=utf-8"},"body":{"@odata.context":"https://graph.microsoft.com/v1.0/$metadata#teams('b32780e9-df70-4548-a735-4e7f055415a1')/channels/$entity","id":"19:5c88d34ae19945ab8d90a51efe9cdf9e@thread.tacv2","displayName":"Paging test 682114571","description":"Test channel, will be deleted in 21 days","isFavoriteByDefault":false,"email":"","webUrl":"https://teams.microsoft.com/l/channel/19%3a5c88d34ae19945ab8d90a51efe9cdf9e%40thread.tacv2/Paging+test+682114571?groupId=b32780e9-df70-4548-a735-4e7f055415a1&tenantId=d8623c9e-30c7-473a-83bc-d907df44a26e","membershipType":"standard"}}]}
+{"responses": [{"id": "1","status":400,"headers" : {"Content-Type":"application/json"},"body":{
+  "error": {
+    "code": "BadRequest",
+    "message": "",
+    "innerError": {
+      "date": "2021-02-12T15:45:08",
+      "request-id": "ab4999d8-497f-4a0c-a1d9-f265c91925a4",
+      "client-request-id": "ab4999d8-497f-4a0c-a1d9-f265c91925a4"
+    }
+  }
+}}]}

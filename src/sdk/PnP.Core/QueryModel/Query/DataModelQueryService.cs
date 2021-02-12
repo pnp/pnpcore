@@ -14,7 +14,6 @@ namespace PnP.Core.QueryModel
         private readonly IDataModelParent parent;
         private readonly string memberName;
 
-
         /// <summary>
         /// Protected default constructor, to force creation using
         /// the PnPContext instance
@@ -109,6 +108,9 @@ namespace PnP.Core.QueryModel
                 // the whole collection of results
                 if (expressionType.ImplementsInterface(typeof(IQueryable)))
                 {
+                    // TODO: With the new querying model, where we always create a new container
+                    // for the result, here we don't need anymore to filter by BatchRequestId
+                    // but we can simply return the result
                     return resultValue.Where(p => (p as TransientObject).BatchRequestId == batchRequestId);
                 }
                 // Otherwise if the expression type is the type of TModel, we need
@@ -119,6 +121,8 @@ namespace PnP.Core.QueryModel
                     // sure that the result will be just one item
                     if (query.Top == 1)
                     {
+                        // TODO: Here as well it will suffice to return FirstOrDefault without 
+                        // any specific predicate
                         return resultValue.FirstOrDefault(p => (p as TransientObject).BatchRequestId == batchRequestId);
                     }
                     else

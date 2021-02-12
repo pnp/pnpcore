@@ -1,0 +1,9 @@
+--batchresponse_33811b4d-ae14-4ae9-be20-56e7988f0cfc
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+HTTP/1.1 200 OK
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+
+{"d":{"__metadata":{"id":"https://piasysdev.sharepoint.com/sites/prov-1/_api/Web/GetUserById(10)","uri":"https://piasysdev.sharepoint.com/sites/prov-1/_api/Web/GetUserById(10)","type":"SP.User"},"Id":10,"IsHiddenInUI":false,"LoginName":"i:0#.w|nt service\\spsearch","Title":"NT Service\\spsearch","PrincipalType":1,"AadObjectId":null,"Email":"","Expiration":"","IsEmailAuthenticationGuestUser":false,"IsShareByEmailGuestUser":false,"IsSiteAdmin":false,"UserId":{"__metadata":{"type":"SP.UserIdInfo"},"NameId":"s-1-5-80-87383287-2054257049-3601873072-440163018-3271026472","NameIdIssuer":"urn:office:idp:activedirectory"},"UserPrincipalName":null}}
+--batchresponse_33811b4d-ae14-4ae9-be20-56e7988f0cfc--

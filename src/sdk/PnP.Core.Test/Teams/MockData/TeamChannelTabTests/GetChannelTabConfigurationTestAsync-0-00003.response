@@ -1,1 +1,11 @@
-{"responses": [{"id": "1","status":200,"headers" : {"OData-Version":"4.0","Content-Type":"application/json;odata.metadata=minimal;odata.streaming=true;IEEE754Compatible=false;charset=utf-8"},"body":{"@odata.context":"https://graph.microsoft.com/v1.0/$metadata#teams('9d1aef4b-f974-433e-a3ac-26d29fc6719c')/channels(id,tabs)/$entity","id":"19:e62e0361ccc644e6922232c3bf4fec7a@thread.tacv2"}},{"id": "2","status":200,"headers" : {"OData-Version":"4.0","Content-Type":"application/json;odata.metadata=minimal;odata.streaming=true;IEEE754Compatible=false;charset=utf-8"},"body":{"@odata.context":"https://graph.microsoft.com/v1.0/$metadata#teams('9d1aef4b-f974-433e-a3ac-26d29fc6719c')/channels('19%3Ae62e0361ccc644e6922232c3bf4fec7a%40thread.tacv2')/tabs(teamsApp())","@odata.count":2,"value":[{"id":"b2753f37-0a75-4222-a12d-f5823271ef4a","displayName":"Wiki","webUrl":"https://teams.microsoft.com/l/channel/19%3ae62e0361ccc644e6922232c3bf4fec7a%40thread.tacv2/tab%3a%3a099ae6f7-8cc2-4d30-99d1-f7c833af2a6a?label=Wiki&groupId=9d1aef4b-f974-433e-a3ac-26d29fc6719c&tenantId=123307f9-9fac-46f3-a8a6-2d61828953c1","configuration":{"entityId":null,"contentUrl":null,"removeUrl":null,"websiteUrl":null,"wikiTabId":1,"wikiDefaultTab":true,"hasContent":false},"teamsApp":{"id":"com.microsoft.teamspace.tab.wiki","externalId":null,"displayName":"Wiki","distributionMethod":"store"}},{"id":"ffd5ad3b-c824-4276-91d8-a5b0a53ef77f","displayName":"Document Library","webUrl":"https://teams.microsoft.com/l/channel/19%3ae62e0361ccc644e6922232c3bf4fec7a%40thread.tacv2/tab%3a%3ae5996cfc-0572-48f3-ae8d-fb670e95846d?label=Document+Library&groupId=9d1aef4b-f974-433e-a3ac-26d29fc6719c&tenantId=123307f9-9fac-46f3-a8a6-2d61828953c1","configuration":{"entityId":null,"contentUrl":"https://capadevtest.sharepoint.com/sites/pnpcoresdktestgroup/Shared Documents","removeUrl":null,"websiteUrl":null},"teamsApp":{"id":"com.microsoft.teamspace.tab.files.sharepoint","externalId":null,"displayName":"Document Library","distributionMethod":"store"}}]}}]}
+{"responses": [{"id": "1","status":400,"headers" : {"Content-Type":"application/json"},"body":{
+  "error": {
+    "code": "BadRequest",
+    "message": "",
+    "innerError": {
+      "date": "2021-02-12T15:56:14",
+      "request-id": "524cb88f-270b-4e4f-9c8f-e4fb97fa6b7e",
+      "client-request-id": "524cb88f-270b-4e4f-9c8f-e4fb97fa6b7e"
+    }
+  }
+}}]}

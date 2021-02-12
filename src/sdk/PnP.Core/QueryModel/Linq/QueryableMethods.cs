@@ -6,33 +6,32 @@ using System.Reflection;
 namespace PnP.Core.QueryModel
 {
     /// <summary>
-    ///     A class that provides reflection metadata for translatable LINQ methods.
+    /// A class that provides reflection metadata for translatable LINQ methods.
     /// </summary>
     internal static class QueryableMethods
     {
-   
         /// <summary>
-        ///     The <see cref="MethodInfo" /> for <see cref="Queryable.First{TSource}(IQueryable{TSource})" />
+        /// The <see cref="MethodInfo" /> for <see cref="Queryable.First{TSource}(IQueryable{TSource})" />
         /// </summary>
         public static MethodInfo FirstWithoutPredicate { get; }
 
         /// <summary>
-        ///     The <see cref="MethodInfo" /> for <see cref="Queryable.First{TSource}(IQueryable{TSource},Expression{Func{TSource,bool}})" />
+        /// The <see cref="MethodInfo" /> for <see cref="Queryable.First{TSource}(IQueryable{TSource},Expression{Func{TSource,bool}})" />
         /// </summary>
         public static MethodInfo FirstWithPredicate { get; }
 
         /// <summary>
-        ///     The <see cref="MethodInfo" /> for <see cref="Queryable.FirstOrDefault{TSource}(IQueryable{TSource},Expression{Func{TSource,bool}})" />
+        /// The <see cref="MethodInfo" /> for <see cref="Queryable.FirstOrDefault{TSource}(IQueryable{TSource},Expression{Func{TSource,bool}})" />
         /// </summary>
         public static MethodInfo FirstOrDefaultWithoutPredicate { get; }
 
         /// <summary>
-        ///     The <see cref="MethodInfo" /> for <see cref="Queryable.FirstOrDefault{TSource}(IQueryable{TSource},Expression{Func{TSource,bool}})" />
+        /// The <see cref="MethodInfo" /> for <see cref="Queryable.FirstOrDefault{TSource}(IQueryable{TSource},Expression{Func{TSource,bool}})" />
         /// </summary>
         public static MethodInfo FirstOrDefaultWithPredicate { get; }
 
         /// <summary>
-        ///     The <see cref="MethodInfo" /> for <see cref="QueryableExtensions.Query{TResult}(System.Linq.IQueryable{TResult},System.Linq.Expressions.Expression{System.Func{TResult,object}})" />
+        /// The <see cref="MethodInfo" /> for <see cref="QueryableExtensions.Query{TResult}(System.Linq.IQueryable{TResult},System.Linq.Expressions.Expression{System.Func{TResult,object}})" />
         /// </summary>
         public static MethodInfo Query { get; }
 

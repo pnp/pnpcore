@@ -25,7 +25,6 @@ namespace PnP.Core.Model
         /// <param name="expressions">The properties to select</param>
         /// <returns>The Domain Model object</returns>
         Task LoadAsync(params Expression<Func<object, object>>[] expressions);
-
     }
 
     /// <summary>
@@ -41,13 +40,11 @@ namespace PnP.Core.Model
         /// <returns>The Domain Model object</returns>
         Task<IBatchSingleResult> LoadBatchAsync(Batch batch, params Expression<Func<TModel, object>>[] expressions);
 
-
         /// <summary>
         /// Loads a Domain Model object from the remote data source, eventually selecting custom properties or using a default set of properties
         /// </summary>
         /// <param name="expressions">The properties to select</param>
         /// <returns>The Domain Model object</returns>
         Task LoadAsync(params Expression<Func<TModel, object>>[] expressions);
-
     }
 }

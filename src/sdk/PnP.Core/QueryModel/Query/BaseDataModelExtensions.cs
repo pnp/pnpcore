@@ -15,6 +15,7 @@ namespace PnP.Core.QueryModel
     public static class BaseDataModelExtensions
     {
         #region Utility extension to make it easier to chain multiple async calls
+
         /// <summary>
         /// Chains async calls. See https://stackoverflow.com/a/52739551 for more information
         /// </summary>
@@ -37,6 +38,7 @@ namespace PnP.Core.QueryModel
             var input = await inputTask.ConfigureAwait(false);
             return (await mapping(input).ConfigureAwait(false));
         }
+
         #endregion
 
         #region Helper methods to obtain MethodInfo in a safe way
@@ -76,6 +78,7 @@ namespace PnP.Core.QueryModel
 #pragma warning restore CA1801 // Review unused parameters
 #pragma warning restore IDE0051 // Remove unused private members
 #pragma warning restore IDE0060 // Remove unused parameter
+
         #endregion
 
         #region Internal base methods for model specific extension methods
@@ -102,7 +105,7 @@ namespace PnP.Core.QueryModel
 
             return concreteEntity;
         }
-        #endregion
 
+        #endregion
     }
 }

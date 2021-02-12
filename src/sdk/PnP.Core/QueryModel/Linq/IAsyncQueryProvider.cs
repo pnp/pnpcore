@@ -14,12 +14,12 @@ namespace PnP.Core.QueryModel
     public interface IAsyncQueryProvider : IQueryProvider
     {
         /// <summary>
-        ///     Executes the strongly-typed query represented by a specified expression tree asynchronously.
+        /// Executes the strongly-typed query represented by a specified expression tree asynchronously.
         /// </summary>
         TResult ExecuteAsync<TResult>(Expression expression, CancellationToken cancellationToken = default);
 
         /// <summary>
-        ///     Adds the expression to the current batch
+        /// Adds the expression to the current batch
         /// </summary>
         /// <typeparam name="TResult"></typeparam>
         /// <param name="expression"></param>

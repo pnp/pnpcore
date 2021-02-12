@@ -49,7 +49,7 @@ namespace PnP.Core.QueryModel
 
         #endregion
 
-        #region Load implementation
+        #region Query
 
         /// <summary>
         /// Extension method to declare a field/metadata property to load while executing the REST query
@@ -126,18 +126,18 @@ namespace PnP.Core.QueryModel
         #region First/FirstOrDefault
 
         /// <summary>
-        ///     Asynchronously returns the first element of a sequence.
+        /// Asynchronously returns the first element of a sequence.
         /// </summary>
         /// <remarks>
-        ///     Multiple active operations on the same context instance are not supported.  Use <see langword="await" /> to ensure
-        ///     that any asynchronous operations have completed before calling another method on this context.
+        /// Multiple active operations on the same context instance are not supported.  Use <see langword="await" /> to ensure
+        /// that any asynchronous operations have completed before calling another method on this context.
         /// </remarks>
         /// <typeparam name="TSource"> The type of the elements of <paramref name="source" />. </typeparam>
         /// <param name="source"> An <see cref="IQueryable{T}" /> to return the first element of. </param>
         /// <param name="cancellationToken"> A <see cref="CancellationToken" /> to observe while waiting for the task to complete. </param>
         /// <returns>
-        ///     A task that represents the asynchronous operation.
-        ///     The task result contains the first element in <paramref name="source" />.
+        /// A task that represents the asynchronous operation.
+        /// The task result contains the first element in <paramref name="source" />.
         /// </returns>
         /// <exception cref="ArgumentNullException"> <paramref name="source" /> is <see langword="null" />. </exception>
         /// <exception cref="InvalidOperationException"> <paramref name="source" /> contains no elements. </exception>
@@ -155,20 +155,20 @@ namespace PnP.Core.QueryModel
         }
 
         /// <summary>
-        ///     Asynchronously returns the first element of a sequence that satisfies a specified condition.
+        /// Asynchronously returns the first element of a sequence that satisfies a specified condition.
         /// </summary>
         /// <remarks>
-        ///     Multiple active operations on the same context instance are not supported.  Use <see langword="await" /> to ensure
-        ///     that any asynchronous operations have completed before calling another method on this context.
+        /// Multiple active operations on the same context instance are not supported.  Use <see langword="await" /> to ensure
+        /// that any asynchronous operations have completed before calling another method on this context.
         /// </remarks>
         /// <typeparam name="TSource"> The type of the elements of <paramref name="source" />. </typeparam>
         /// <param name="source"> An <see cref="IQueryable{T}" /> to return the first element of. </param>
         /// <param name="predicate"> A function to test each element for a condition. </param>
         /// <param name="cancellationToken"> A <see cref="CancellationToken" /> to observe while waiting for the task to complete. </param>
         /// <returns>
-        ///     A task that represents the asynchronous operation.
-        ///     The task result contains the first element in <paramref name="source" /> that passes the test in
-        ///     <paramref name="predicate" />.
+        /// A task that represents the asynchronous operation.
+        /// The task result contains the first element in <paramref name="source" /> that passes the test in
+        /// <paramref name="predicate" />.
         /// </returns>
         /// <exception cref="ArgumentNullException">
         ///     <paramref name="source" /> or <paramref name="predicate" /> is <see langword="null" />.
@@ -204,19 +204,19 @@ namespace PnP.Core.QueryModel
         }
 
         /// <summary>
-        ///     Asynchronously returns the first element of a sequence, or a default value if the sequence contains no elements.
+        /// Asynchronously returns the first element of a sequence, or a default value if the sequence contains no elements.
         /// </summary>
         /// <remarks>
-        ///     Multiple active operations on the same context instance are not supported.  Use <see langword="await" /> to ensure
-        ///     that any asynchronous operations have completed before calling another method on this context.
+        /// Multiple active operations on the same context instance are not supported.  Use <see langword="await" /> to ensure
+        /// that any asynchronous operations have completed before calling another method on this context.
         /// </remarks>
         /// <typeparam name="TSource"> The type of the elements of <paramref name="source" />. </typeparam>
         /// <param name="source"> An <see cref="IQueryable{T}" /> to return the first element of. </param>
         /// <param name="cancellationToken"> A <see cref="CancellationToken" /> to observe while waiting for the task to complete. </param>
         /// <returns>
-        ///     A task that represents the asynchronous operation.
-        ///     The task result contains <see langword="default" /> ( <typeparamref name="TSource" /> ) if
-        ///     <paramref name="source" /> is empty; otherwise, the first element in <paramref name="source" />.
+        /// A task that represents the asynchronous operation.
+        /// The task result contains <see langword="default" /> ( <typeparamref name="TSource" /> ) if
+        /// <paramref name="source" /> is empty; otherwise, the first element in <paramref name="source" />.
         /// </returns>
         /// <exception cref="ArgumentNullException"> <paramref name="source" /> is <see langword="null" />. </exception>
         /// <exception cref="OperationCanceledException"> If the <see cref="CancellationToken"/> is canceled. </exception>
@@ -228,22 +228,22 @@ namespace PnP.Core.QueryModel
         }
 
         /// <summary>
-        ///     Asynchronously returns the first element of a sequence that satisfies a specified condition
-        ///     or a default value if no such element is found.
+        /// Asynchronously returns the first element of a sequence that satisfies a specified condition
+        /// or a default value if no such element is found.
         /// </summary>
         /// <remarks>
-        ///     Multiple active operations on the same context instance are not supported.  Use <see langword="await" /> to ensure
-        ///     that any asynchronous operations have completed before calling another method on this context.
+        /// Multiple active operations on the same context instance are not supported.  Use <see langword="await" /> to ensure
+        /// that any asynchronous operations have completed before calling another method on this context.
         /// </remarks>
         /// <typeparam name="TSource"> The type of the elements of <paramref name="source" />. </typeparam>
         /// <param name="source"> An <see cref="IQueryable{T}" /> to return the first element of. </param>
         /// <param name="predicate"> A function to test each element for a condition. </param>
         /// <param name="cancellationToken"> A <see cref="CancellationToken" /> to observe while waiting for the task to complete. </param>
         /// <returns>
-        ///     A task that represents the asynchronous operation.
-        ///     The task result contains <see langword="default" /> ( <typeparamref name="TSource" /> ) if <paramref name="source" />
-        ///     is empty or if no element passes the test specified by <paramref name="predicate" /> ; otherwise, the first
-        ///     element in <paramref name="source" /> that passes the test specified by <paramref name="predicate" />.
+        /// A task that represents the asynchronous operation.
+        /// The task result contains <see langword="default" /> ( <typeparamref name="TSource" /> ) if <paramref name="source" />
+        /// is empty or if no element passes the test specified by <paramref name="predicate" /> ; otherwise, the first
+        /// element in <paramref name="source" /> that passes the test specified by <paramref name="predicate" />.
         /// </returns>
         /// <exception cref="ArgumentNullException">
         ///     <paramref name="source" /> or <paramref name="predicate" /> is <see langword="null" />.
@@ -272,13 +272,13 @@ namespace PnP.Core.QueryModel
         #region ToDictionary
 
         /// <summary>
-        ///     Creates a <see cref="Dictionary{TKey, TValue}" /> from an <see cref="IQueryable{T}" /> by enumerating it
-        ///     asynchronously
-        ///     according to a specified key selector function.
+        /// Creates a <see cref="Dictionary{TKey, TValue}" /> from an <see cref="IQueryable{T}" /> by enumerating it
+        /// asynchronously
+        /// according to a specified key selector function.
         /// </summary>
         /// <remarks>
-        ///     Multiple active operations on the same context instance are not supported.  Use <see langword="await" /> to ensure
-        ///     that any asynchronous operations have completed before calling another method on this context.
+        /// Multiple active operations on the same context instance are not supported.  Use <see langword="await" /> to ensure
+        /// that any asynchronous operations have completed before calling another method on this context.
         /// </remarks>
         /// <typeparam name="TSource"> The type of the elements of <paramref name="source" />. </typeparam>
         /// <typeparam name="TKey"> The type of the key returned by <paramref name="keySelector" />. </typeparam>
@@ -286,8 +286,8 @@ namespace PnP.Core.QueryModel
         /// <param name="keySelector"> A function to extract a key from each element. </param>
         /// <param name="cancellationToken"> A <see cref="CancellationToken" /> to observe while waiting for the task to complete. </param>
         /// <returns>
-        ///     A task that represents the asynchronous operation.
-        ///     The task result contains a <see cref="Dictionary{TKey, TSource}" /> that contains selected keys and values.
+        /// A task that represents the asynchronous operation.
+        /// The task result contains a <see cref="Dictionary{TKey, TSource}" /> that contains selected keys and values.
         /// </returns>
         /// <exception cref="ArgumentNullException">
         ///     <paramref name="source" /> or <paramref name="keySelector" /> is <see langword="null" />.
@@ -301,13 +301,13 @@ namespace PnP.Core.QueryModel
             => ToDictionaryAsync(source, keySelector, e => e, comparer: null, cancellationToken);
 
         /// <summary>
-        ///     Creates a <see cref="Dictionary{TKey, TValue}" /> from an <see cref="IQueryable{T}" /> by enumerating it
-        ///     asynchronously
-        ///     according to a specified key selector function and a comparer.
+        /// Creates a <see cref="Dictionary{TKey, TValue}" /> from an <see cref="IQueryable{T}" /> by enumerating it
+        /// asynchronously
+        /// according to a specified key selector function and a comparer.
         /// </summary>
         /// <remarks>
-        ///     Multiple active operations on the same context instance are not supported.  Use <see langword="await" /> to ensure
-        ///     that any asynchronous operations have completed before calling another method on this context.
+        /// Multiple active operations on the same context instance are not supported.  Use <see langword="await" /> to ensure
+        /// that any asynchronous operations have completed before calling another method on this context.
         /// </remarks>
         /// <typeparam name="TSource"> The type of the elements of <paramref name="source" />. </typeparam>
         /// <typeparam name="TKey"> The type of the key returned by <paramref name="keySelector" />. </typeparam>
@@ -316,8 +316,8 @@ namespace PnP.Core.QueryModel
         /// <param name="comparer"> An <see cref="IEqualityComparer{TKey}" /> to compare keys. </param>
         /// <param name="cancellationToken"> A <see cref="CancellationToken" /> to observe while waiting for the task to complete. </param>
         /// <returns>
-        ///     A task that represents the asynchronous operation.
-        ///     The task result contains a <see cref="Dictionary{TKey, TSource}" /> that contains selected keys and values.
+        /// A task that represents the asynchronous operation.
+        /// The task result contains a <see cref="Dictionary{TKey, TSource}" /> that contains selected keys and values.
         /// </returns>
         /// <exception cref="ArgumentNullException">
         ///     <paramref name="source" /> or <paramref name="keySelector" /> is <see langword="null" />.
@@ -332,13 +332,13 @@ namespace PnP.Core.QueryModel
             => ToDictionaryAsync(source, keySelector, e => e, comparer, cancellationToken);
 
         /// <summary>
-        ///     Creates a <see cref="Dictionary{TKey, TValue}" /> from an <see cref="IQueryable{T}" /> by enumerating it
-        ///     asynchronously
-        ///     according to a specified key selector and an element selector function.
+        /// Creates a <see cref="Dictionary{TKey, TValue}" /> from an <see cref="IQueryable{T}" /> by enumerating it
+        /// asynchronously
+        /// according to a specified key selector and an element selector function.
         /// </summary>
         /// <remarks>
-        ///     Multiple active operations on the same context instance are not supported.  Use <see langword="await" /> to ensure
-        ///     that any asynchronous operations have completed before calling another method on this context.
+        /// Multiple active operations on the same context instance are not supported.  Use <see langword="await" /> to ensure
+        /// that any asynchronous operations have completed before calling another method on this context.
         /// </remarks>
         /// <typeparam name="TSource"> The type of the elements of <paramref name="source" />. </typeparam>
         /// <typeparam name="TKey"> The type of the key returned by <paramref name="keySelector" />. </typeparam>
@@ -348,9 +348,9 @@ namespace PnP.Core.QueryModel
         /// <param name="elementSelector"> A transform function to produce a result element value from each element. </param>
         /// <param name="cancellationToken"> A <see cref="CancellationToken" /> to observe while waiting for the task to complete. </param>
         /// <returns>
-        ///     A task that represents the asynchronous operation.
-        ///     The task result contains a <see cref="Dictionary{TKey, TElement}" /> that contains values of type
-        ///     <typeparamref name="TElement" /> selected from the input sequence.
+        /// A task that represents the asynchronous operation.
+        /// The task result contains a <see cref="Dictionary{TKey, TElement}" /> that contains values of type
+        /// <typeparamref name="TElement" /> selected from the input sequence.
         /// </returns>
         /// <exception cref="ArgumentNullException">
         ///     <paramref name="source" /> or <paramref name="keySelector" /> or <paramref name="elementSelector" /> is <see langword="null" />.
@@ -365,13 +365,13 @@ namespace PnP.Core.QueryModel
             => ToDictionaryAsync(source, keySelector, elementSelector, comparer: null, cancellationToken);
 
         /// <summary>
-        ///     Creates a <see cref="Dictionary{TKey, TValue}" /> from an <see cref="IQueryable{T}" /> by enumerating it
-        ///     asynchronously
-        ///     according to a specified key selector function, a comparer, and an element selector function.
+        /// Creates a <see cref="Dictionary{TKey, TValue}" /> from an <see cref="IQueryable{T}" /> by enumerating it
+        /// asynchronously
+        /// according to a specified key selector function, a comparer, and an element selector function.
         /// </summary>
         /// <remarks>
-        ///     Multiple active operations on the same context instance are not supported.  Use <see langword="await" /> to ensure
-        ///     that any asynchronous operations have completed before calling another method on this context.
+        /// Multiple active operations on the same context instance are not supported.  Use <see langword="await" /> to ensure
+        /// that any asynchronous operations have completed before calling another method on this context.
         /// </remarks>
         /// <typeparam name="TSource"> The type of the elements of <paramref name="source" />. </typeparam>
         /// <typeparam name="TKey"> The type of the key returned by <paramref name="keySelector" />. </typeparam>
@@ -382,9 +382,9 @@ namespace PnP.Core.QueryModel
         /// <param name="comparer"> An <see cref="IEqualityComparer{TKey}" /> to compare keys. </param>
         /// <param name="cancellationToken"> A <see cref="CancellationToken" /> to observe while waiting for the task to complete. </param>
         /// <returns>
-        ///     A task that represents the asynchronous operation.
-        ///     The task result contains a <see cref="Dictionary{TKey, TElement}" /> that contains values of type
-        ///     <typeparamref name="TElement" /> selected from the input sequence.
+        /// A task that represents the asynchronous operation.
+        /// The task result contains a <see cref="Dictionary{TKey, TElement}" /> that contains values of type
+        /// <typeparamref name="TElement" /> selected from the input sequence.
         /// </returns>
         /// <exception cref="ArgumentNullException">
         ///     <paramref name="source" /> or <paramref name="keySelector" /> or <paramref name="elementSelector" /> is <see langword="null" />.
@@ -425,11 +425,11 @@ namespace PnP.Core.QueryModel
         #region ForEach
 
         /// <summary>
-        ///     Asynchronously enumerates the query results and performs the specified action on each element.
+        /// Asynchronously enumerates the query results and performs the specified action on each element.
         /// </summary>
         /// <remarks>
-        ///     Multiple active operations on the same context instance are not supported.  Use <see langword="await" /> to ensure
-        ///     that any asynchronous operations have completed before calling another method on this context.
+        /// Multiple active operations on the same context instance are not supported.  Use <see langword="await" /> to ensure
+        /// that any asynchronous operations have completed before calling another method on this context.
         /// </remarks>
         /// <typeparam name="T"> The type of the elements of <paramref name="source" />. </typeparam>
         /// <param name="source"> An <see cref="IQueryable{T}" /> to enumerate. </param>
@@ -465,19 +465,19 @@ namespace PnP.Core.QueryModel
         #region ToList/Array
 
         /// <summary>
-        ///     Asynchronously creates a <see cref="List{T}" /> from an <see cref="IQueryable{T}" /> by enumerating it
-        ///     asynchronously.
+        /// Asynchronously creates a <see cref="List{T}" /> from an <see cref="IQueryable{T}" /> by enumerating it
+        /// asynchronously.
         /// </summary>
         /// <remarks>
-        ///     Multiple active operations on the same context instance are not supported.  Use <see langword="await" /> to ensure
-        ///     that any asynchronous operations have completed before calling another method on this context.
+        /// Multiple active operations on the same context instance are not supported.  Use <see langword="await" /> to ensure
+        /// that any asynchronous operations have completed before calling another method on this context.
         /// </remarks>
         /// <typeparam name="TSource"> The type of the elements of <paramref name="source" />. </typeparam>
         /// <param name="source"> An <see cref="IQueryable{T}" /> to create a list from. </param>
         /// <param name="cancellationToken"> A <see cref="CancellationToken" /> to observe while waiting for the task to complete. </param>
         /// <returns>
-        ///     A task that represents the asynchronous operation.
-        ///     The task result contains a <see cref="List{T}" /> that contains elements from the input sequence.
+        /// A task that represents the asynchronous operation.
+        /// The task result contains a <see cref="List{T}" /> that contains elements from the input sequence.
         /// </returns>
         /// <exception cref="ArgumentNullException"> <paramref name="source" /> is <see langword="null" />. </exception>
         /// <exception cref="OperationCanceledException"> If the <see cref="CancellationToken"/> is canceled. </exception>
@@ -495,18 +495,18 @@ namespace PnP.Core.QueryModel
         }
 
         /// <summary>
-        ///     Asynchronously creates an array from an <see cref="IQueryable{T}" /> by enumerating it asynchronously.
+        /// Asynchronously creates an array from an <see cref="IQueryable{T}" /> by enumerating it asynchronously.
         /// </summary>
         /// <remarks>
-        ///     Multiple active operations on the same context instance are not supported.  Use <see langword="await" /> to ensure
-        ///     that any asynchronous operations have completed before calling another method on this context.
+        /// Multiple active operations on the same context instance are not supported.  Use <see langword="await" /> to ensure
+        /// that any asynchronous operations have completed before calling another method on this context.
         /// </remarks>
         /// <typeparam name="TSource"> The type of the elements of <paramref name="source" />. </typeparam>
         /// <param name="source"> An <see cref="IQueryable{T}" /> to create an array from. </param>
         /// <param name="cancellationToken"> A <see cref="CancellationToken" /> to observe while waiting for the task to complete. </param>
         /// <returns>
-        ///     A task that represents the asynchronous operation.
-        ///     The task result contains an array that contains elements from the input sequence.
+        /// A task that represents the asynchronous operation.
+        /// The task result contains an array that contains elements from the input sequence.
         /// </returns>
         /// <exception cref="ArgumentNullException"> <paramref name="source" /> is <see langword="null" />. </exception>
         /// <exception cref="OperationCanceledException"> If the <see cref="CancellationToken"/> is canceled. </exception>
@@ -520,11 +520,11 @@ namespace PnP.Core.QueryModel
         #region AsAsyncEnumerable
 
         /// <summary>
-        ///     Returns an <see cref="IAsyncEnumerable{T}" /> which can be enumerated asynchronously.
+        /// Returns an <see cref="IAsyncEnumerable{T}" /> which can be enumerated asynchronously.
         /// </summary>
         /// <remarks>
-        ///     Multiple active operations on the same context instance are not supported.  Use <see langword="await" /> to ensure
-        ///     that any asynchronous operations have completed before calling another method on this context.
+        /// Multiple active operations on the same context instance are not supported.  Use <see langword="await" /> to ensure
+        /// that any asynchronous operations have completed before calling another method on this context.
         /// </remarks>
         /// <typeparam name="TSource"> The type of the elements of <paramref name="source" />. </typeparam>
         /// <param name="source"> An <see cref="IQueryable{T}" /> to enumerate. </param>

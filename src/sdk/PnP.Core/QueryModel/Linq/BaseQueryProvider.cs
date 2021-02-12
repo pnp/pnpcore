@@ -45,7 +45,7 @@ namespace PnP.Core.QueryModel
         }
 
         /// <summary>
-        ///     Adds the expression to the current batch
+        /// Adds the expression to the current batch
         /// </summary>
         /// <typeparam name="TResult"></typeparam>
         /// <param name="expression"></param>

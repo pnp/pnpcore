@@ -1,9 +1,9 @@
---batchresponse_1b7b7598-6888-474a-8d45-a552f017be77
+--batchresponse_320a6f75-babe-4178-a227-22d6cc18de36
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{"d":{"results":[{"__metadata":{"id":"https://officedevpnp.sharepoint.com/sites/pnpcoresdkdemo/_api/Web/Lists(guid'70d6d828-5f0d-41f9-9fde-f3e44c4e15be')","uri":"https://officedevpnp.sharepoint.com/sites/pnpcoresdkdemo/_api/Web/Lists(guid'70d6d828-5f0d-41f9-9fde-f3e44c4e15be')","etag":"\"6\"","type":"SP.List"},"Id":"70d6d828-5f0d-41f9-9fde-f3e44c4e15be","Title":"Site Pages"}]}}
---batchresponse_1b7b7598-6888-474a-8d45-a552f017be77--
+{"d":{"results":[{"__metadata":{"id":"https://piasysdev.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'529b1d62-8f36-44b7-83da-75d1b4433ecb')","uri":"https://piasysdev.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'529b1d62-8f36-44b7-83da-75d1b4433ecb')","etag":"\"24\"","type":"SP.List"},"Id":"529b1d62-8f36-44b7-83da-75d1b4433ecb","Title":"Site Pages"}]}}
+--batchresponse_320a6f75-babe-4178-a227-22d6cc18de36--

@@ -41,6 +41,13 @@ namespace PnP.Core.Model
         /// <param name="item">The untyped item to remove</param>
         /// <returns>True if the removal is successful</returns>
         bool Remove(object item);
+
+        /// <summary>
+        /// Replaces an item in the collection with a new one
+        /// </summary>
+        /// <param name="itemIndex">The index of the item to replace within the collection</param>
+        /// <param name="newItem">New item to replace the old one with</param>
+        void Replace(int itemIndex, object newItem);
     }
 
     /// <summary>

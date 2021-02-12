@@ -1,1 +1,11 @@
-{"responses": [{"id": "1","status":201,"headers" : {"Location":"https://teamsgraph.teams.microsoft.com/v1.0/teams('9d1aef4b-f974-433e-a3ac-26d29fc6719c')/channels('19:1cc87b565ffe42f9908b2a83504e20ae@thread.tacv2')","OData-Version":"4.0","Content-Type":"application/json;odata.metadata=minimal;odata.streaming=true;IEEE754Compatible=false;charset=utf-8"},"body":{"@odata.context":"https://graph.microsoft.com/v1.0/$metadata#teams('9d1aef4b-f974-433e-a3ac-26d29fc6719c')/channels/$entity","id":"19:1cc87b565ffe42f9908b2a83504e20ae@thread.tacv2","displayName":"Channel test 745421665","description":"Test channel, will be deleted in 21 days","isFavoriteByDefault":false,"email":"","webUrl":"https://teams.microsoft.com/l/channel/19%3a1cc87b565ffe42f9908b2a83504e20ae%40thread.tacv2/Channel+test+745421665?groupId=9d1aef4b-f974-433e-a3ac-26d29fc6719c&tenantId=123307f9-9fac-46f3-a8a6-2d61828953c1","membershipType":"standard"}}]}
+{"responses": [{"id": "1","status":400,"headers" : {"Content-Type":"application/json"},"body":{
+  "error": {
+    "code": "BadRequest",
+    "message": "",
+    "innerError": {
+      "date": "2021-02-12T15:43:41",
+      "request-id": "a5fb9330-d706-4a16-99e1-acfb28834bf8",
+      "client-request-id": "a5fb9330-d706-4a16-99e1-acfb28834bf8"
+    }
+  }
+}}]}

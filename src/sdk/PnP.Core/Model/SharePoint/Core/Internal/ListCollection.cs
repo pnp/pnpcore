@@ -130,6 +130,7 @@ namespace PnP.Core.Model.SharePoint
         #endregion
 
         #region GetByServerRelativeUrl methods
+
         public async Task<IList> GetByServerRelativeUrlAsync(string serverRelativeUrl, params Expression<Func<IList, object>>[] selectors)
         {
             if (serverRelativeUrl == null)
@@ -154,11 +155,12 @@ namespace PnP.Core.Model.SharePoint
 
             return GetByServerRelativeUrlAsync(serverRelativeUrl, selectors).GetAwaiter().GetResult();
         }
-        #endregion
 
+        #endregion
 
 #if DEBUG
         #region Only used for test purposes, hence marked as internal
+
         internal async Task<IList> BatchGetByTitleAsync(Batch batch, string title, params Expression<Func<IList, object>>[] expressions)
         {
             // Was this list previously loaded?
@@ -175,6 +177,7 @@ namespace PnP.Core.Model.SharePoint
         {
             return await BatchGetByTitleAsync(PnPContext.CurrentBatch, title, expressions).ConfigureAwait(false);
         }
+
         #endregion
 #endif
 

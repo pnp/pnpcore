@@ -1,9 +1,9 @@
---batchresponse_17c0f44d-7bfc-4be3-b80b-ee84f7f88e1a
+--batchresponse_571d7f5c-e93f-4237-b36a-c06966b01ea0
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{"d":{"results":[{"__metadata":{"id":"https://erwinmcm.sharepoint.com/sites/demo1/_api/Web/SiteGroups/GetById(46)","uri":"https://erwinmcm.sharepoint.com/sites/demo1/_api/Web/SiteGroups/GetById(46)","type":"SP.Group"},"Owner":{"__deferred":{"uri":"https://erwinmcm.sharepoint.com/sites/demo1/_api/Web/SiteGroups/GetById(46)/Owner"}},"Users":{"__deferred":{"uri":"https://erwinmcm.sharepoint.com/sites/demo1/_api/Web/SiteGroups/GetById(46)/Users"}},"Id":46,"IsHiddenInUI":false,"LoginName":"PNP_SDK_TEST_TestGroup","Title":"PNP_SDK_TEST_TestGroup","PrincipalType":8,"AllowMembersEditMembership":false,"AllowRequestToJoinLeave":false,"AutoAcceptRequestToJoinLeave":false,"Description":null,"OnlyAllowMembersViewMembership":true,"OwnerTitle":"Erwin van Hunen","RequestToJoinLeaveEmailSetting":null}]}}
---batchresponse_17c0f44d-7bfc-4be3-b80b-ee84f7f88e1a--
+{"d":{"results":[{"__metadata":{"id":"https://piasysdev.sharepoint.com/sites/prov-1/_api/Web/SiteGroups/GetById(12)","uri":"https://piasysdev.sharepoint.com/sites/prov-1/_api/Web/SiteGroups/GetById(12)","type":"SP.Group"},"Owner":{"__deferred":{"uri":"https://piasysdev.sharepoint.com/sites/prov-1/_api/Web/SiteGroups/GetById(12)/Owner"}},"Users":{"__deferred":{"uri":"https://piasysdev.sharepoint.com/sites/prov-1/_api/Web/SiteGroups/GetById(12)/Users"}},"Id":12,"IsHiddenInUI":false,"LoginName":"PNP_SDK_TEST_TestGroup","Title":"PNP_SDK_TEST_TestGroup","PrincipalType":8,"AllowMembersEditMembership":false,"AllowRequestToJoinLeave":false,"AutoAcceptRequestToJoinLeave":false,"Description":null,"OnlyAllowMembersViewMembership":true,"OwnerTitle":"Paolo Pialorsi","RequestToJoinLeaveEmailSetting":null}]}}
+--batchresponse_571d7f5c-e93f-4237-b36a-c06966b01ea0--

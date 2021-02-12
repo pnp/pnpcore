@@ -240,6 +240,21 @@ namespace PnP.Core.Model
             }
         }
 
+        /// <summary>
+        /// Replaces an item of the collection
+        /// </summary>
+        /// <param name="itemIndex">The index of the item to replace</param>
+        /// <param name="newItem">The new item to replace the existing one with</param>
+        public virtual void Replace(int itemIndex, object newItem)
+        {
+            Replace(itemIndex, (TModel)newItem);
+        }
+
+        /// <summary>
+        /// Replaces an item of the collection
+        /// </summary>
+        /// <param name="itemIndex">The index of the item to replace</param>
+        /// <param name="newItem">The new item to replace the existing one with</param>
         public virtual void Replace(int itemIndex, TModel newItem)
         {
             items[itemIndex] = newItem;
@@ -470,6 +485,9 @@ namespace PnP.Core.Model
 
         #region Delete by id
 
+        // TODO: Do we really need all these methods with all these options for ID type?
+        // Can't we make a unique generic method where we provide/infer the type of the ID?
+
         public void DeleteById(int id)
         {
             DeleteByIdAsync(id).GetAwaiter().GetResult();
@@ -632,7 +650,6 @@ namespace PnP.Core.Model
 
         private async Task<Tuple<ApiCallRequest, BaseDataModel<TModel>>> DeleteByIdImplementationAsync(int intId = 0, string stringId = null, Guid guidId = default)
         {
-
             // First check if we've a model instance loaded with the given key, if so let's use that to do the delete 
             // as then the model instance will also automatically be removed from the collection
             object keyValue = null;
@@ -689,6 +706,7 @@ namespace PnP.Core.Model
 
             return new Tuple<ApiCallRequest, BaseDataModel<TModel>>(query, concreteEntity as BaseDataModel<TModel>);
         }
+
         #endregion
 
         #region Metadata Management
@@ -704,6 +722,5 @@ namespace PnP.Core.Model
         {
         }
         #endregion
-
     }
 }

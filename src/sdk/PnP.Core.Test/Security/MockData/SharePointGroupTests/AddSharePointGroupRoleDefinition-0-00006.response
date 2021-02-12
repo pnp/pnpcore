@@ -1,9 +1,9 @@
---batchresponse_bda613f8-e03b-4fc9-a8d4-c06d8536132d
+--batchresponse_403e51f1-0815-4190-a623-aa60f78930f0
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{"d":{"results":[{"__metadata":{"id":"https://erwinmcm.sharepoint.com/sites/demo1/_api/Web/RoleAssignments/GetByPrincipalId(47)","uri":"https://erwinmcm.sharepoint.com/sites/demo1/_api/Web/RoleAssignments/GetByPrincipalId(47)","type":"SP.RoleAssignment"},"RoleDefinitionBindings":{"results":[{"__metadata":{"id":"https://erwinmcm.sharepoint.com/sites/demo1/_api/Web/RoleDefinitions(1073741954)","uri":"https://erwinmcm.sharepoint.com/sites/demo1/_api/Web/RoleDefinitions(1073741954)","type":"SP.RoleDefinition"},"BasePermissions":{"__metadata":{"type":"SP.BasePermissions"},"High":"0","Low":"65536"},"Description":null,"Hidden":false,"Id":1073741954,"Name":"PNP_SDK_TEST_TestRoleDef","Order":0,"RoleTypeKind":0}]},"PrincipalId":47}]}}
---batchresponse_bda613f8-e03b-4fc9-a8d4-c06d8536132d--
+{"d":{"results":[{"__metadata":{"id":"https://piasysdev.sharepoint.com/sites/prov-1/_api/Web/RoleAssignments/GetByPrincipalId(13)","uri":"https://piasysdev.sharepoint.com/sites/prov-1/_api/Web/RoleAssignments/GetByPrincipalId(13)","type":"SP.RoleAssignment"},"RoleDefinitionBindings":{"results":[{"__metadata":{"id":"https://piasysdev.sharepoint.com/sites/prov-1/_api/Web/RoleDefinitions(1073741925)","uri":"https://piasysdev.sharepoint.com/sites/prov-1/_api/Web/RoleDefinitions(1073741925)","type":"SP.RoleDefinition"},"BasePermissions":{"__metadata":{"type":"SP.BasePermissions"},"High":"0","Low":"65536"},"Description":null,"Hidden":false,"Id":1073741925,"Name":"PNP_SDK_TEST_TestRoleDef","Order":0,"RoleTypeKind":0}]},"PrincipalId":13}]}}
+--batchresponse_403e51f1-0815-4190-a623-aa60f78930f0--

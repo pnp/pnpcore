@@ -45,6 +45,9 @@ namespace PnP.Core.Services
                     root = document.RootElement;
                 }
 
+                // TODO: The below method's signature is quite complex and reuses the same object
+                // multiple times. Can we try to simplify it?
+
                 // Map the returned JSON to the respective entities
                 await FromJson(batchRequest.Model, batchRequest.EntityInfo, new ApiResponse(batchRequest.ApiCall, root, batchRequest.Id), batchRequest.FromJsonCasting).ConfigureAwait(false);
                 batchRequest.PostMappingJson?.Invoke(batchRequest.ResponseJson);
@@ -163,6 +166,9 @@ namespace PnP.Core.Services
                                 SetBatchRequestId(pnpChild as TransientObject, apiResponse.BatchRequestId);
 
                                 var contextAwarePnPChild = pnpChild as IDataModelWithContext;
+
+                                // TODO: In CreateNew (line 163) we already configure the PnPContext
+                                // Do we really need code in line 174?
 
                                 // Set PnPContext via a dynamic property
                                 contextAwarePnPChild.PnPContext = contextAwareObject.PnPContext;

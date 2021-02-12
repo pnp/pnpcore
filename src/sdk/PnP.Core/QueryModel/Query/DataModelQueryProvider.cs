@@ -18,6 +18,7 @@ namespace PnP.Core.QueryModel
         private readonly DataModelQueryService<TModel> queryService;
 
         private EntityInfo entityInfo;
+
         internal EntityInfo EntityInfo
         {
             get

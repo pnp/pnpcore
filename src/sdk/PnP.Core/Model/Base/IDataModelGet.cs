@@ -28,6 +28,7 @@ namespace PnP.Core.Model
         /// <returns>The Domain Model object</returns>
         Task<object> GetAsync(ApiResponse apiResponse, params Expression<Func<object, object>>[] expressions);
 
+        // TODO: Consider renaming the above method because GetAsync is a misleading name
     }
 
     /// <summary>
@@ -51,6 +52,5 @@ namespace PnP.Core.Model
         /// <param name="expressions">The properties to select</param>
         /// <returns>The Domain Model object</returns>
         Task<TModel> GetAsync(ApiResponse apiResponse, params Expression<Func<TModel, object>>[] expressions);
-
     }
 }
