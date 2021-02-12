@@ -7,7 +7,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a Field object of SharePoint Online
     /// </summary>
     [ConcreteType(typeof(Field))]
-    public interface IField : IDataModel<IField>, IDataModelGet<IField>, IDataModelUpdate, IDataModelDelete, IQueryableDataModel
+    public interface IField : IDataModel<IField>, IDataModelGet<IField>, IDataModelLoad<IField>, IDataModelUpdate, IDataModelDelete, IQueryableDataModel
     {
         /// <summary>
         /// Gets or sets a Boolean value that specifies whether the field is auto-indexed

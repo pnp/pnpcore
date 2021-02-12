@@ -1,9 +1,9 @@
---batchresponse_0a2eaaaf-5779-4047-8fcb-4ed60a5947cf
+--batchresponse_281bba4e-c1f4-4289-80c0-8cd95fac369d
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{"d":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetUserById(9)","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetUserById(9)","type":"SP.User"},"Alerts":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetUserById(9)/Alerts"}},"Groups":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetUserById(9)/Groups"}},"Id":9,"IsHiddenInUI":false,"LoginName":"c:0-.f|rolemanager|spo-grid-all-users/6492ece7-7f5d-4499-8130-50e761e25bd9","Title":"Everyone except external users","PrincipalType":4,"Email":"","Expiration":"","IsEmailAuthenticationGuestUser":false,"IsShareByEmailGuestUser":false,"IsSiteAdmin":false,"UserId":null,"UserPrincipalName":null}}
---batchresponse_0a2eaaaf-5779-4047-8fcb-4ed60a5947cf--
+{"d":{"__metadata":{"id":"https://piasysdev.sharepoint.com/sites/prov-1/_api/Web/GetUserById(9)","uri":"https://piasysdev.sharepoint.com/sites/prov-1/_api/Web/GetUserById(9)","type":"SP.User"},"Alerts":{"__deferred":{"uri":"https://piasysdev.sharepoint.com/sites/prov-1/_api/Web/GetUserById(9)/Alerts"}},"Groups":{"__deferred":{"uri":"https://piasysdev.sharepoint.com/sites/prov-1/_api/Web/GetUserById(9)/Groups"}},"Id":9,"IsHiddenInUI":false,"LoginName":"c:0-.f|rolemanager|spo-grid-all-users/981d023d-654e-4796-a835-d7d22bc3fe1f","Title":"Everyone except external users","PrincipalType":4,"Email":"","Expiration":"","IsEmailAuthenticationGuestUser":false,"IsShareByEmailGuestUser":false,"IsSiteAdmin":false,"UserId":null,"UserPrincipalName":null}}
+--batchresponse_281bba4e-c1f4-4289-80c0-8cd95fac369d--

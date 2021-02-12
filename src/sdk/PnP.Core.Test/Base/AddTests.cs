@@ -4,7 +4,7 @@ using PnP.Core.Test.Utilities;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
-
+using PnP.Core.Model;
 
 namespace PnP.Core.Test.Base
 {
@@ -230,29 +230,29 @@ namespace PnP.Core.Test.Base
                 await context.ExecuteAsync();
 
                 string listTitle = "AddListViaBatchAsyncRest";
-                var myList = web.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
+                var myList = web.Result.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
 
                 if (myList != null)
                 {
                     Assert.Inconclusive("Test data set should be setup to not have the list available.");
                 }
 
-                var listCount = web.Lists.Count();
+                var listCount = web.Result.Lists.Count();
                 // Add a new list
-                myList = await web.Lists.AddBatchAsync(listTitle, ListTemplateType.GenericList);
+                myList = await web.Result.Lists.AddBatchAsync(listTitle, ListTemplateType.GenericList);
                 await context.ExecuteAsync();
 
                 // Was the list added
                 Assert.IsTrue(myList.Requested);
                 Assert.IsTrue(myList.Id != Guid.Empty);
-                Assert.IsTrue(web.Lists.Count() == listCount + 1);
+                Assert.IsTrue(web.Result.Lists.Count() == listCount + 1);
 
                 // Load the list again
                 await context.Web.GetBatchAsync(p => p.Lists);
                 await context.ExecuteAsync();
 
                 // Check if we still have the same amount of lists
-                Assert.IsTrue(web.Lists.Count() == listCount + 1);
+                Assert.IsTrue(web.Result.Lists.Count() == listCount + 1);
             }
         }
 
@@ -266,29 +266,29 @@ namespace PnP.Core.Test.Base
                 await context.ExecuteAsync();
 
                 string listTitle = "AddListViaBatchRest";
-                var myList = web.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
+                var myList = web.Result.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
 
                 if (myList != null)
                 {
                     Assert.Inconclusive("Test data set should be setup to not have the list available.");
                 }
 
-                var listCount = web.Lists.Count();
+                var listCount = web.Result.Lists.Count();
                 // Add a new list
-                myList = web.Lists.AddBatch(listTitle, ListTemplateType.GenericList);
+                myList = web.Result.Lists.AddBatch(listTitle, ListTemplateType.GenericList);
                 await context.ExecuteAsync();
 
                 // Was the list added
                 Assert.IsTrue(myList.Requested);
                 Assert.IsTrue(myList.Id != Guid.Empty);
-                Assert.IsTrue(web.Lists.Count() == listCount + 1);
+                Assert.IsTrue(web.Result.Lists.Count() == listCount + 1);
 
                 // Load the list again
                 context.Web.GetBatch(p => p.Lists);
                 await context.ExecuteAsync();
 
                 // Check if we still have the same amount of lists
-                Assert.IsTrue(web.Lists.Count() == listCount + 1);
+                Assert.IsTrue(web.Result.Lists.Count() == listCount + 1);
             }
         }
 
@@ -303,23 +303,23 @@ namespace PnP.Core.Test.Base
                 await context.ExecuteAsync(batch);
 
                 string listTitle = "AddListViaExplicitBatchAsyncRest";
-                var myList = web.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
+                var myList = web.Result.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
 
                 if (myList != null)
                 {
                     Assert.Inconclusive("Test data set should be setup to not have the list available.");
                 }
 
-                var listCount = web.Lists.Count();
+                var listCount = web.Result.Lists.Count();
                 // Add a new list
                 batch = context.BatchClient.EnsureBatch();
-                myList = await web.Lists.AddBatchAsync(batch, listTitle, ListTemplateType.GenericList);
+                myList = await web.Result.Lists.AddBatchAsync(batch, listTitle, ListTemplateType.GenericList);
                 await context.ExecuteAsync(batch);
 
                 // Was the list added
                 Assert.IsTrue(myList.Requested);
                 Assert.IsTrue(myList.Id != Guid.Empty);
-                Assert.IsTrue(web.Lists.Count() == listCount + 1);
+                Assert.IsTrue(web.Result.Lists.Count() == listCount + 1);
 
                 // Load the list again
                 batch = context.BatchClient.EnsureBatch();
@@ -327,7 +327,7 @@ namespace PnP.Core.Test.Base
                 await context.ExecuteAsync(batch);
 
                 // Check if we still have the same amount of lists
-                Assert.IsTrue(web.Lists.Count() == listCount + 1);
+                Assert.IsTrue(web.Result.Lists.Count() == listCount + 1);
             }
         }
 
@@ -342,23 +342,23 @@ namespace PnP.Core.Test.Base
                 await context.ExecuteAsync(batch);
 
                 string listTitle = "AddListViaExplicitBatchRest";
-                var myList = web.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
+                var myList = web.Result.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
 
                 if (myList != null)
                 {
                     Assert.Inconclusive("Test data set should be setup to not have the list available.");
                 }
 
-                var listCount = web.Lists.Count();
+                var listCount = web.Result.Lists.Count();
                 // Add a new list
                 batch = context.BatchClient.EnsureBatch();
-                myList = web.Lists.AddBatch(batch, listTitle, ListTemplateType.GenericList);
+                myList = web.Result.Lists.AddBatch(batch, listTitle, ListTemplateType.GenericList);
                 await context.ExecuteAsync(batch);
 
                 // Was the list added
                 Assert.IsTrue(myList.Requested);
                 Assert.IsTrue(myList.Id != Guid.Empty);
-                Assert.IsTrue(web.Lists.Count() == listCount + 1);
+                Assert.IsTrue(web.Result.Lists.Count() == listCount + 1);
 
                 // Load the list again
                 batch = context.BatchClient.EnsureBatch();
@@ -366,7 +366,7 @@ namespace PnP.Core.Test.Base
                 await context.ExecuteAsync(batch);
 
                 // Check if we still have the same amount of lists
-                Assert.IsTrue(web.Lists.Count() == listCount + 1);
+                Assert.IsTrue(web.Result.Lists.Count() == listCount + 1);
             }
         }
 
@@ -449,19 +449,19 @@ namespace PnP.Core.Test.Base
                 // Channel names have to be unique
                 string channelName = $"Channel test {new Random().Next()}";
                 // Check if the channel exists
-                var channelFound = team.Channels.FirstOrDefault(p => p.DisplayName == channelName);
+                var channelFound = team.Result.Channels.FirstOrDefault(p => p.DisplayName == channelName);
                 if (channelFound == null)
                 {
-                    int channelCount = team.Channels.Count();
+                    int channelCount = team.Result.Channels.Count();
                     // Add a new channel
                     batch = context.BatchClient.EnsureBatch();
-                    channelFound = await team.Channels.AddBatchAsync(batch, channelName, "Test channel, will be deleted in 21 days");
+                    channelFound = await team.Result.Channels.AddBatchAsync(batch, channelName, "Test channel, will be deleted in 21 days");
                     await context.ExecuteAsync(batch);
 
                     Assert.IsNotNull(channelFound);
                     Assert.IsTrue(channelFound.Requested);
                     Assert.IsTrue(!string.IsNullOrEmpty(channelFound.Id));
-                    Assert.IsTrue(team.Channels.Count() == channelCount + 1);
+                    Assert.IsTrue(team.Result.Channels.Count() == channelCount + 1);
 
                 }
                 else
@@ -483,18 +483,18 @@ namespace PnP.Core.Test.Base
                 // Channel names have to be unique
                 string channelName = $"Channel test {new Random().Next()}";
                 // Check if the channel exists
-                var channelFound = team.Channels.FirstOrDefault(p => p.DisplayName == channelName);
+                var channelFound = team.Result.Channels.FirstOrDefault(p => p.DisplayName == channelName);
                 if (channelFound == null)
                 {
-                    int channelCount = team.Channels.Count();
+                    int channelCount = team.Result.Channels.Count();
                     // Add a new channel
-                    channelFound = await team.Channels.AddBatchAsync(channelName, "Test channel, will be deleted in 21 days");
+                    channelFound = await team.Result.Channels.AddBatchAsync(channelName, "Test channel, will be deleted in 21 days");
                     await context.ExecuteAsync();
 
                     Assert.IsNotNull(channelFound);
                     Assert.IsTrue(channelFound.Requested);
                     Assert.IsTrue(!string.IsNullOrEmpty(channelFound.Id));
-                    Assert.IsTrue(team.Channels.Count() == channelCount + 1);
+                    Assert.IsTrue(team.Result.Channels.Count() == channelCount + 1);
 
                 }
                 else
@@ -517,19 +517,19 @@ namespace PnP.Core.Test.Base
                 // Channel names have to be unique
                 string channelName = $"Channel test {new Random().Next()}";
                 // Check if the channel exists
-                var channelFound = team.Channels.FirstOrDefault(p => p.DisplayName == channelName);
+                var channelFound = team.Result.Channels.FirstOrDefault(p => p.DisplayName == channelName);
                 if (channelFound == null)
                 {
-                    int channelCount = team.Channels.Count();
+                    int channelCount = team.Result.Channels.Count();
                     // Add a new channel
                     batch = context.BatchClient.EnsureBatch();
-                    channelFound = team.Channels.AddBatch(batch, channelName, "Test channel, will be deleted in 21 days");
+                    channelFound = team.Result.Channels.AddBatch(batch, channelName, "Test channel, will be deleted in 21 days");
                     context.Execute(batch);
 
                     Assert.IsNotNull(channelFound);
                     Assert.IsTrue(channelFound.Requested);
                     Assert.IsTrue(!string.IsNullOrEmpty(channelFound.Id));
-                    Assert.IsTrue(team.Channels.Count() == channelCount + 1);
+                    Assert.IsTrue(team.Result.Channels.Count() == channelCount + 1);
 
                 }
                 else
@@ -551,18 +551,18 @@ namespace PnP.Core.Test.Base
                 // Channel names have to be unique
                 string channelName = $"Channel test {new Random().Next()}";
                 // Check if the channel exists
-                var channelFound = team.Channels.FirstOrDefault(p => p.DisplayName == channelName);
+                var channelFound = team.Result.Channels.FirstOrDefault(p => p.DisplayName == channelName);
                 if (channelFound == null)
                 {
-                    int channelCount = team.Channels.Count();
+                    int channelCount = team.Result.Channels.Count();
                     // Add a new channel
-                    channelFound = team.Channels.AddBatch(channelName, "Test channel, will be deleted in 21 days");
+                    channelFound = team.Result.Channels.AddBatch(channelName, "Test channel, will be deleted in 21 days");
                     context.Execute();
 
                     Assert.IsNotNull(channelFound);
                     Assert.IsTrue(channelFound.Requested);
                     Assert.IsTrue(!string.IsNullOrEmpty(channelFound.Id));
-                    Assert.IsTrue(team.Channels.Count() == channelCount + 1);
+                    Assert.IsTrue(team.Result.Channels.Count() == channelCount + 1);
 
                 }
                 else

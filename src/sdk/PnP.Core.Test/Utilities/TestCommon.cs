@@ -54,7 +54,7 @@ namespace PnP.Core.Test.Utilities
         /// <summary>
         /// Set Mocking to false to switch the test system in recording mode for all contexts being created
         /// </summary>
-        public bool Mocking { get; set; } = true;
+        public bool Mocking { get; set; } = false;
 
         /// <summary>
         /// Generate the .request and .debug files that can be useful to debug the test mocking system, these files

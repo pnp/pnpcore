@@ -1,4 +1,5 @@
-﻿using PnP.Core.Services;
+﻿using PnP.Core.QueryModel;
+using PnP.Core.Services;
 using System;
 using System.Linq;
 using System.Net.Http;
@@ -171,7 +172,9 @@ namespace PnP.Core.Model.Security
 
         public async Task<IRoleDefinitionCollection> GetRoleDefinitionsAsync()
         {
-            var roleAssignment = await PnPContext.Web.RoleAssignments.GetFirstOrDefaultAsync(p => p.PrincipalId == Id, r => r.RoleDefinitions).ConfigureAwait(false);
+            var roleAssignment = await PnPContext.Web.RoleAssignments
+                .Query(r => r.RoleDefinitions)
+                .FirstOrDefaultAsync(p => p.PrincipalId == Id).ConfigureAwait(false);
             return roleAssignment?.RoleDefinitions;
         }
 
@@ -185,7 +188,7 @@ namespace PnP.Core.Model.Security
             var result = false;
             foreach (var name in names)
             {
-                var roleDefinition = await PnPContext.Web.RoleDefinitions.GetFirstOrDefaultAsync(d => d.Name == name).ConfigureAwait(false);
+                var roleDefinition = await PnPContext.Web.RoleDefinitions.FirstOrDefaultAsync(d => d.Name == name).ConfigureAwait(false);
                 if (roleDefinition != null)
                 {
                     var apiCall = new ApiCall($"_api/web/roleassignments/addroleassignment(principalid={Id},roledefid={roleDefinition.Id})", ApiType.SPORest);

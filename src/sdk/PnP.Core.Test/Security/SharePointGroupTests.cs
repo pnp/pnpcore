@@ -2,6 +2,8 @@
 using PnP.Core.Test.Utilities;
 using System.Linq;
 using System.Threading.Tasks;
+using PnP.Core.QueryModel;
+using PnP.Core.Model;
 
 namespace PnP.Core.Test.Security
 {
@@ -126,7 +128,7 @@ namespace PnP.Core.Test.Security
 
                 await context.Web.SiteGroups.AddAsync(groupName);
 
-                var siteGroup = await context.Web.SiteGroups.GetFirstOrDefaultAsync(g => g.Title == groupName);
+                var siteGroup = await context.Web.SiteGroups.FirstOrDefaultAsync(g => g.Title == groupName);
 
                 Assert.IsTrue(siteGroup.Requested);
 
@@ -145,13 +147,13 @@ namespace PnP.Core.Test.Security
 
                 await context.Web.SiteGroups.AddAsync(groupName);
 
-                var siteGroup = await context.Web.SiteGroups.GetFirstOrDefaultAsync(g => g.Title == groupName);
+                var siteGroup = await context.Web.SiteGroups.FirstOrDefaultAsync(g => g.Title == groupName);
 
                 siteGroup.Title = groupNameRenamed;
 
                 await siteGroup.UpdateAsync();
 
-                var updatedSiteGroup = await context.Web.SiteGroups.GetFirstOrDefaultAsync(g => g.Title == groupNameRenamed);
+                var updatedSiteGroup = await context.Web.SiteGroups.FirstOrDefaultAsync(g => g.Title == groupNameRenamed);
 
                 Assert.IsTrue(updatedSiteGroup.Requested);
 

@@ -102,9 +102,9 @@ namespace PnP.Core.Model.SharePoint
             return GetByIdAsync(id).GetAwaiter().GetResult();
         }
 
-        public async Task<IListItem> GetByIdAsync(int id)
+        public Task<IListItem> GetByIdAsync(int id)
         {
-            return await GetFirstOrDefaultAsync(l => l.Id == id).ConfigureAwait(false);
+            return this.FirstOrDefaultAsync(l => l.Id == id);
         }
 
         #endregion

@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using PnP.Core.Model;
 
 namespace PnP.Core.Test.Base
 {
@@ -139,7 +140,7 @@ namespace PnP.Core.Test.Base
                 await context.ExecuteAsync(batch);
 
                 string listTitle = "AddListItemViaBatchRest";
-                var myList = web.Lists.FirstOrDefault(l => l.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
+                var myList = web.Result.Lists.FirstOrDefault(l => l.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
 
                 if (myList != null)
                 {
@@ -148,7 +149,7 @@ namespace PnP.Core.Test.Base
                 else
                 {
                     batch = context.BatchClient.EnsureBatch();
-                    myList = await web.Lists.AddBatchAsync(batch, listTitle, ListTemplateType.GenericList);
+                    myList = await web.Result.Lists.AddBatchAsync(batch, listTitle, ListTemplateType.GenericList);
                     await context.ExecuteAsync(batch);
                 }
 
@@ -198,7 +199,7 @@ namespace PnP.Core.Test.Base
                 await context.ExecuteAsync(batch);
 
                 string listTitle = "AddListItemViaSpecificBatchNonAsyncTest";
-                var myList = web.Lists.FirstOrDefault(l => l.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
+                var myList = web.Result.Lists.FirstOrDefault(l => l.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
 
                 if (myList != null)
                 {
@@ -207,7 +208,7 @@ namespace PnP.Core.Test.Base
                 else
                 {
                     batch = context.BatchClient.EnsureBatch();
-                    myList = await web.Lists.AddBatchAsync(batch, listTitle, ListTemplateType.GenericList);
+                    myList = await web.Result.Lists.AddBatchAsync(batch, listTitle, ListTemplateType.GenericList);
                     await context.ExecuteAsync(batch);
                 }
 
@@ -257,7 +258,7 @@ namespace PnP.Core.Test.Base
                 await context.ExecuteAsync(batch);
 
                 string listTitle = "AddListItemViaRestExceptionTest";
-                var myList = web.Lists.FirstOrDefault(l => l.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
+                var myList = web.Result.Lists.FirstOrDefault(l => l.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
 
                 if (myList != null)
                 {
@@ -266,7 +267,7 @@ namespace PnP.Core.Test.Base
                 else
                 {
                     batch = context.BatchClient.EnsureBatch();
-                    myList = await web.Lists.AddBatchAsync(batch, listTitle, ListTemplateType.GenericList);
+                    myList = await web.Result.Lists.AddBatchAsync(batch, listTitle, ListTemplateType.GenericList);
                     await context.ExecuteAsync(batch);
                 }
 

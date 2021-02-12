@@ -1,0 +1,11 @@
+{"responses": [{"id": "1","status":400,"headers" : {"Content-Type":"application/json"},"body":{
+  "error": {
+    "code": "BadRequest",
+    "message": "",
+    "innerError": {
+      "date": "2021-02-12T15:56:42",
+      "request-id": "aa95196a-5b32-49ef-aa5f-b09c3bcda3e8",
+      "client-request-id": "aa95196a-5b32-49ef-aa5f-b09c3bcda3e8"
+    }
+  }
+}}]}

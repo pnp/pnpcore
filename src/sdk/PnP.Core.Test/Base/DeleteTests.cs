@@ -4,6 +4,7 @@ using PnP.Core.Test.Utilities;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
+using PnP.Core.Model;
 
 namespace PnP.Core.Test.Base
 {
@@ -79,11 +80,11 @@ namespace PnP.Core.Test.Base
                 await context.ExecuteAsync();
 
                 string listTitle = "DeleteListViaBatchRest";
-                var myList = web.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
+                var myList = web.Result.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
 
                 if (myList == null)
                 {
-                    myList = await web.Lists.AddBatchAsync(listTitle, ListTemplateType.GenericList);
+                    myList = await web.Result.Lists.AddBatchAsync(listTitle, ListTemplateType.GenericList);
                     await context.ExecuteAsync();
                 }
                 else
@@ -91,7 +92,7 @@ namespace PnP.Core.Test.Base
                     Assert.Inconclusive("Test data set should be setup to not have the list available.");
                 }
 
-                var listCount = web.Lists.Count();
+                var listCount = web.Result.Lists.Count();
 
                 // Delete the list
                 await myList.DeleteBatchAsync();
@@ -113,7 +114,7 @@ namespace PnP.Core.Test.Base
                 await context.Web.GetBatchAsync(p => p.Lists);
                 await context.ExecuteAsync();
 
-                Assert.IsTrue(web.Lists.Count() == listCount - 1);
+                Assert.IsTrue(web.Result.Lists.Count() == listCount - 1);
             }
         }
 
@@ -128,12 +129,12 @@ namespace PnP.Core.Test.Base
                 await context.ExecuteAsync(batch);
 
                 string listTitle = "DeleteListViaExplicitBatchRest";
-                var myList = web.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
+                var myList = web.Result.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
 
                 if (myList == null)
                 {
                     batch = context.BatchClient.EnsureBatch();
-                    myList = await web.Lists.AddBatchAsync(batch, listTitle, ListTemplateType.GenericList);
+                    myList = await web.Result.Lists.AddBatchAsync(batch, listTitle, ListTemplateType.GenericList);
                     await context.ExecuteAsync(batch);
                 }
                 else
@@ -141,7 +142,7 @@ namespace PnP.Core.Test.Base
                     Assert.Inconclusive("Test data set should be setup to not have the list available.");
                 }
 
-                var listCount = web.Lists.Count();
+                var listCount = web.Result.Lists.Count();
 
                 // Delete the list
                 batch = context.BatchClient.EnsureBatch();
@@ -165,7 +166,7 @@ namespace PnP.Core.Test.Base
                 await context.Web.GetBatchAsync(batch, p => p.Lists);
                 await context.ExecuteAsync(batch);
 
-                Assert.IsTrue(web.Lists.Count() == listCount - 1);
+                Assert.IsTrue(web.Result.Lists.Count() == listCount - 1);
             }
         }
 
@@ -354,11 +355,11 @@ namespace PnP.Core.Test.Base
                 string channelName = $"Channel test {new Random().Next()}";
 
                 // Find first updatable channel
-                var channelToDelete = team.Channels.FirstOrDefault(p => p.DisplayName == channelName);
+                var channelToDelete = team.Result.Channels.FirstOrDefault(p => p.DisplayName == channelName);
 
                 if (channelToDelete == null)
                 {
-                    channelToDelete = await team.Channels.AddBatchAsync(channelName, "Test channel, will be deleted in 21 days");
+                    channelToDelete = await team.Result.Channels.AddBatchAsync(channelName, "Test channel, will be deleted in 21 days");
                     await context.ExecuteAsync();
                 }
                 else
@@ -366,7 +367,7 @@ namespace PnP.Core.Test.Base
                     Assert.Inconclusive("Test data set should be setup to not have the channel available.");
                 }
 
-                var channelCount = team.Channels.Count();
+                var channelCount = team.Result.Channels.Count();
 
                 // Delete channel
                 await channelToDelete.DeleteBatchAsync();
@@ -389,7 +390,7 @@ namespace PnP.Core.Test.Base
                 await context.ExecuteAsync();
 
                 // We should have one channel less
-                Assert.IsTrue(team.Channels.Count() == channelCount - 1);
+                Assert.IsTrue(team.Result.Channels.Count() == channelCount - 1);
             }
         }
 
@@ -406,12 +407,12 @@ namespace PnP.Core.Test.Base
                 string channelName = $"Channel test {new Random().Next()}";
 
                 // Find first updatable channel
-                var channelToDelete = team.Channels.FirstOrDefault(p => p.DisplayName == channelName);
+                var channelToDelete = team.Result.Channels.FirstOrDefault(p => p.DisplayName == channelName);
 
                 if (channelToDelete == null)
                 {
                     batch = context.BatchClient.EnsureBatch();
-                    channelToDelete = await team.Channels.AddBatchAsync(batch, channelName, "Test channel, will be deleted in 21 days");
+                    channelToDelete = await team.Result.Channels.AddBatchAsync(batch, channelName, "Test channel, will be deleted in 21 days");
                     await context.ExecuteAsync(batch);
                 }
                 else
@@ -419,7 +420,7 @@ namespace PnP.Core.Test.Base
                     Assert.Inconclusive("Test data set should be setup to not have the channel available.");
                 }
 
-                var channelCount = team.Channels.Count();
+                var channelCount = team.Result.Channels.Count();
 
                 // Delete channel
                 batch = context.BatchClient.EnsureBatch();
@@ -444,7 +445,7 @@ namespace PnP.Core.Test.Base
                 await context.ExecuteAsync(batch);
 
                 // We should have one channel less
-                Assert.IsTrue(team.Channels.Count() == channelCount - 1);
+                Assert.IsTrue(team.Result.Channels.Count() == channelCount - 1);
             }
         }
         #endregion

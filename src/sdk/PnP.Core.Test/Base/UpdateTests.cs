@@ -4,6 +4,7 @@ using PnP.Core.Test.Utilities;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
+using PnP.Core.Model;
 
 namespace PnP.Core.Test.Base
 {
@@ -76,7 +77,7 @@ namespace PnP.Core.Test.Base
                 await context.ExecuteAsync();
 
                 string listTitle = "Documents";
-                var myList = web.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
+                var myList = web.Result.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
 
                 if (myList != null)
                 {
@@ -124,7 +125,7 @@ namespace PnP.Core.Test.Base
                 await context.ExecuteAsync(batch);
 
                 string listTitle = "Documents";
-                var myList = web.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
+                var myList = web.Result.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
 
                 if (myList != null)
                 {
@@ -258,11 +259,11 @@ namespace PnP.Core.Test.Base
                 await context.ExecuteAsync();
 
                 // Find first updatable channel
-                var channelToUpdate = team.Channels.FirstOrDefault(p => p.DisplayName != "General");
+                var channelToUpdate = team.Result.Channels.FirstOrDefault(p => p.DisplayName != "General");
 
                 if (channelToUpdate == null)
                 {
-                    channelToUpdate = await team.Channels.AddBatchAsync($"Channel test {new Random().Next()}", "Test channel, will be deleted in 21 days");
+                    channelToUpdate = await team.Result.Channels.AddBatchAsync($"Channel test {new Random().Next()}", "Test channel, will be deleted in 21 days");
                     await context.ExecuteAsync();
                 }
 
@@ -300,12 +301,12 @@ namespace PnP.Core.Test.Base
                 await context.ExecuteAsync(batch);
 
                 // Find first updatable channel
-                var channelToUpdate = team.Channels.FirstOrDefault(p => p.DisplayName != "General");
+                var channelToUpdate = team.Result.Channels.FirstOrDefault(p => p.DisplayName != "General");
 
                 if (channelToUpdate == null)
                 {
                     batch = context.BatchClient.EnsureBatch();
-                    channelToUpdate = await team.Channels.AddBatchAsync(batch, $"Channel test {new Random().Next()}", "Test channel, will be deleted in 21 days");
+                    channelToUpdate = await team.Result.Channels.AddBatchAsync(batch, $"Channel test {new Random().Next()}", "Test channel, will be deleted in 21 days");
                     await context.ExecuteAsync(batch);
                 }
 

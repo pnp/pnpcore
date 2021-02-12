@@ -6,6 +6,8 @@ using System;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using PnP.Core.QueryModel;
+using PnP.Core.Model;
 
 namespace PnP.Core.Test.Teams
 {
@@ -180,7 +182,7 @@ namespace PnP.Core.Test.Teams
 
                 // Upload File to SharePoint Library - it will have to remain i guess as onetime upload.
                 IFolder folder = await context.Web.Lists.GetByTitle("Documents").RootFolder.GetAsync();
-                IFile existingFile = await folder.Files.GetFirstOrDefaultAsync(o => o.Name == "test_added.docx");
+                IFile existingFile = await folder.Files.FirstOrDefaultAsync(o => o.Name == "test_added.docx");
                 if(existingFile == default)
                 {
                     existingFile = await folder.Files.AddAsync("test_added.docx", System.IO.File.OpenRead($".{Path.DirectorySeparatorChar}TestAssets{Path.DirectorySeparatorChar}test.docx"));
@@ -306,15 +308,15 @@ namespace PnP.Core.Test.Teams
                 var batch = context.NewBatch();
 
                 var team = context.Team.GetBatch(batch, o => o.PrimaryChannel);
-                var channel = team.PrimaryChannel;
+                var primaryChannel = team.Result.PrimaryChannel;
                 context.Execute(batch);
 
-                Assert.IsNotNull(channel);
+                Assert.IsNotNull(primaryChannel);
 
-                channel = channel.GetBatch(batch, o => o.Messages);
+                var channel = primaryChannel.GetBatch(batch, o => o.Messages);
                 context.Execute(batch);
 
-                var chatMessages = channel.Messages;
+                var chatMessages = channel.Result.Messages;
                  Assert.IsNotNull(chatMessages);
 
                 // Useful reference - https://docs.microsoft.com/en-us/graph/api/chatmessage-post?view=graph-rest-beta&tabs=http#example-5-sending-inline-images-along-with-the-message
@@ -337,9 +339,9 @@ namespace PnP.Core.Test.Teams
                                 
                 var batch2 = context.NewBatch();
 
-                channel = channel.GetBatch(batch2, o => o.Messages);
+                channel = channel.Result.GetBatch(batch2, o => o.Messages);
                 context.Execute(batch2);
-                var updateMessages = channel.Messages;
+                var updateMessages = channel.Result.Messages;
 
                 var message = updateMessages.Last();
                 Assert.IsNotNull(message.CreatedDateTime);
@@ -539,14 +541,14 @@ namespace PnP.Core.Test.Teams
             {
                 var team = context.Team.GetBatch(o => o.Channels);
                 context.Execute();
-                Assert.IsTrue(team.Channels.Length > 0);
+                Assert.IsTrue(team.Result.Channels.Length > 0);
 
-                var channel = team.Channels.FirstOrDefault(i => i.DisplayName == "General");
-                Assert.IsNotNull(channel);
+                var channelQuery = team.Result.Channels.FirstOrDefault(i => i.DisplayName == "General");
+                Assert.IsNotNull(channelQuery);
 
-                channel = channel.GetBatch(o => o.Messages);
+                var channel = channelQuery.GetBatch(o => o.Messages);
                 context.Execute();
-                var chatMessages = channel.Messages;
+                var chatMessages = channel.Result.Messages;
 
                 Assert.IsNotNull(chatMessages);
                                 
@@ -559,9 +561,9 @@ namespace PnP.Core.Test.Teams
                     context.Execute();
                 }
 
-                channel = channel.GetBatch(o => o.Messages);
+                channel = channelQuery.GetBatch(o => o.Messages);
                 context.Execute();
-                var updateMessages = channel.Messages;
+                var updateMessages = channel.Result.Messages;
 
                 var message = updateMessages.FirstOrDefault(o => o.Body.Content == body);
 
@@ -595,14 +597,14 @@ namespace PnP.Core.Test.Teams
                 var batch = context.NewBatch();
                 var team = context.Team.GetBatch(batch, o => o.Channels);
                 context.Execute(batch);
-                Assert.IsTrue(team.Channels.Length > 0);
+                Assert.IsTrue(team.Result.Channels.Length > 0);
 
-                var channel = team.Channels.FirstOrDefault(i => i.DisplayName == "General");
-                Assert.IsNotNull(channel);
+                var channelQuery = team.Result.Channels.FirstOrDefault(i => i.DisplayName == "General");
+                Assert.IsNotNull(channelQuery);
 
-                channel = channel.GetBatch(batch, o => o.Messages);
+                var channel = channelQuery.GetBatch(batch, o => o.Messages);
                 context.Execute(batch);
-                var chatMessages = channel.Messages;
+                var chatMessages = channel.Result.Messages;
 
                 Assert.IsNotNull(chatMessages);
 
@@ -616,9 +618,9 @@ namespace PnP.Core.Test.Teams
                 }
 
                 var batch2 = context.NewBatch();
-                channel = channel.GetBatch(batch2, o => o.Messages);
+                channel = channelQuery.GetBatch(batch2, o => o.Messages);
                 context.Execute(batch2);
-                var updateMessages = channel.Messages;
+                var updateMessages = channel.Result.Messages;
 
                 var message = updateMessages.First(o => o.Body.Content == body);
                 Assert.IsNotNull(message.CreatedDateTime);
@@ -652,14 +654,14 @@ namespace PnP.Core.Test.Teams
                 var batch = context.NewBatch();
                 var team = context.Team.GetBatch(batch, o => o.Channels);
                 context.Execute(batch);
-                Assert.IsTrue(team.Channels.Length > 0);
+                Assert.IsTrue(team.Result.Channels.Length > 0);
 
-                var channel = team.Channels.FirstOrDefault(i => i.DisplayName == "General");
-                Assert.IsNotNull(channel);
+                var channelQuery = team.Result.Channels.FirstOrDefault(i => i.DisplayName == "General");
+                Assert.IsNotNull(channelQuery);
 
-                channel = channel.GetBatch(batch, o => o.Messages);
+                var channel = channelQuery.GetBatch(batch, o => o.Messages);
                 context.Execute(batch);
-                var chatMessages = channel.Messages;
+                var chatMessages = channel.Result.Messages;
 
                 Assert.IsNotNull(chatMessages);
 

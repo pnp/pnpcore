@@ -240,6 +240,21 @@ namespace PnP.Core.Model
             }
         }
 
+        /// <summary>
+        /// Replaces an item of the collection
+        /// </summary>
+        /// <param name="itemIndex">The index of the item to replace</param>
+        /// <param name="newItem">The new item to replace the existing one with</param>
+        public virtual void Replace(int itemIndex, object newItem)
+        {
+            Replace(itemIndex, (TModel)newItem);
+        }
+
+        /// <summary>
+        /// Replaces an item of the collection
+        /// </summary>
+        /// <param name="itemIndex">The index of the item to replace</param>
+        /// <param name="newItem">The new item to replace the existing one with</param>
         public virtual void Replace(int itemIndex, TModel newItem)
         {
             items[itemIndex] = newItem;
@@ -255,202 +270,7 @@ namespace PnP.Core.Model
         }
 
         #endregion
-
-        #region Get
-
-        public async Task<IEnumerable<TModel>> GetAsync(params Expression<Func<TModel, object>>[] expressions)
-        {
-            return await GetAsync(null, expressions).ConfigureAwait(false);
-        }
-
-        public IEnumerable<TModel> Get(params Expression<Func<TModel, object>>[] expressions)
-        {
-            return GetAsync(expressions).GetAwaiter().GetResult();
-        }
-
-        public async Task GetBatchAsync(params Expression<Func<TModel, object>>[] expressions)
-        {
-            await GetBatchAsync(PnPContext.CurrentBatch, expressions).ConfigureAwait(false);
-        }
-
-        public void GetBatch(params Expression<Func<TModel, object>>[] expressions)
-        {
-            GetBatchAsync(expressions).GetAwaiter().GetResult();
-        }
-
-        public async Task GetBatchAsync(Batch batch, params Expression<Func<TModel, object>>[] expressions)
-        {
-            await GetBatchAsync(batch, null, expressions).ConfigureAwait(false);
-        }
-
-        public void GetBatch(Batch batch, params Expression<Func<TModel, object>>[] expressions)
-        {
-            GetBatchAsync(batch, expressions).GetAwaiter().GetResult();
-        }
-
-        #endregion
-
-        #region Get with filter
-
-        public IEnumerable<TModel> Get(Expression<Func<TModel, bool>> predicate, params Expression<Func<TModel, object>>[] expressions)
-        {
-            return GetAsync(predicate, expressions).GetAwaiter().GetResult();
-        }
-
-        public async Task<IEnumerable<TModel>> GetAsync(Expression<Func<TModel, bool>> predicate, params Expression<Func<TModel, object>>[] expressions)
-        {
-            (Guid batchRequestId, string receivingProperty) = await GetImplementationAsync(PnPContext.CurrentBatch, predicate, expressions, false, "Get").ConfigureAwait(false);
-
-            // and execute the request
-            await PnPContext.ExecuteAsync().ConfigureAwait(false);
-
-            // Get the resulting property from the parent object
-            var resultValue = Parent.GetPublicInstancePropertyValue(receivingProperty) as IEnumerable<TModel>;
-
-            return resultValue.Where(p => (p as TransientObject).BatchRequestId == batchRequestId);
-        }
-
-        public void GetBatch(Expression<Func<TModel, bool>> predicate, params Expression<Func<TModel, object>>[] expressions)
-        {
-            GetBatchAsync(predicate, expressions).GetAwaiter().GetResult();
-        }
-
-        public async Task GetBatchAsync(Expression<Func<TModel, bool>> predicate, params Expression<Func<TModel, object>>[] expressions)
-        {
-            await GetBatchAsync(PnPContext.CurrentBatch, predicate, expressions).ConfigureAwait(false);
-        }
-
-        public void GetBatch(Batch batch, Expression<Func<TModel, bool>> predicate, params Expression<Func<TModel, object>>[] expressions)
-        {
-            GetBatchAsync(batch, predicate, expressions).GetAwaiter().GetResult();
-        }
-
-        public async Task GetBatchAsync(Batch batch, Expression<Func<TModel, bool>> predicate, params Expression<Func<TModel, object>>[] expressions)
-        {
-            await GetImplementationAsync(batch, predicate, expressions, false, "GetBatch").ConfigureAwait(false);
-        }
-
-        private async Task<Tuple<Guid, string>> GetImplementationAsync(Batch batch, Expression<Func<TModel, bool>> predicate, Expression<Func<TModel, object>>[] expressions, bool firstOrDefault, string operationName)
-        {
-            if (!(this is IQueryable<TModel>))
-            {
-                throw new ClientException(PnPCoreResources.Exception_Unsupported_CollectionModelIsNotQueryable);
-            }
-
-            // Get the parent (container) entity info (e.g. for Lists this is Web)
-            var parentEntityInfo = EntityManager.Instance.GetStaticClassInfo(Parent.GetType());
-
-            // and cast it to the IDataModelMappingHandler interface
-            var parentEntityWithMappingHandlers = (IDataModelMappingHandler)Parent;
-
-            // Create a concrete entity of what we expect to get back (e.g. for Lists this is List)
-            var concreteEntity = EntityManager.GetEntityConcreteInstance<TModel>(typeof(TModel), Parent);
-            (concreteEntity as BaseDataModel<TModel>).PnPContext = PnPContext;
-
-            // Get class info for the given concrete entity and the passed expressions
-            var concreteEntityClassInfo = EntityManager.GetClassInfo(typeof(TModel), concreteEntity as BaseDataModel<TModel>, expressions);
-
-            // Determine the receiving property
-            var receivingProperty = GetReceivingProperty(parentEntityInfo);
-            if (string.IsNullOrEmpty(receivingProperty))
-            {
-                throw new ClientException(ErrorType.ModelMetadataIncorrect,
-                    PnPCoreResources.Exception_ModelMetadataIncorrect_ModelOutOfSync);
-            }
-
-            // Build the query
-            IQueryable<TModel> selectionTarget = this as IQueryable<TModel>;
-
-            //if (expressions != null)
-            //{
-            //    selectionTarget = QueryClient.ProcessExpression(selectionTarget, concreteEntityClassInfo, expressions);
-            //}
-
-            if (predicate != null)
-            {
-                selectionTarget = selectionTarget.Where(predicate);
-            }
-
-            // Team Channel querying will not work with $top...let's rely on client side filtering instead
-            if (firstOrDefault && typeof(TModel) != typeof(ITeamChannel))
-            {
-                selectionTarget = selectionTarget.Take(1);
-            }
-
-            var query = DataModelQueryProvider<TModel>.Translate(selectionTarget.Expression);
-
-            var apiCalls = await QueryClient.BuildODataGetQueryAsync(concreteEntity, concreteEntityClassInfo, PnPContext, query, receivingProperty).ConfigureAwait(false);
-
-            // Prepare a variable to hold tha batch request ID
-            Guid batchRequestId = Guid.Empty;
-
-            foreach (var apiCall in apiCalls)
-            {
-                // Add the request to the current batch
-                var id = batch.Add(
-                    Parent as TransientObject,
-                    parentEntityInfo,
-                    HttpMethod.Get,
-                    apiCall,
-                    default,
-                    parentEntityWithMappingHandlers.MappingHandler,
-                    parentEntityWithMappingHandlers.PostMappingHandler,
-                    operationName
-                    );
-
-                if (batchRequestId == Guid.Empty)
-                {
-                    batchRequestId = id;
-                }
-            }
-
-            return new Tuple<Guid, string>(batchRequestId, receivingProperty);
-        }
-
-        #endregion
-
-        #region Get first or default with filter
-
-        public TModel GetFirstOrDefault(Expression<Func<TModel, bool>> predicate, params Expression<Func<TModel, object>>[] expressions)
-        {
-            return GetFirstOrDefaultAsync(predicate, expressions).GetAwaiter().GetResult();
-        }
-
-        public async Task<TModel> GetFirstOrDefaultAsync(Expression<Func<TModel, bool>> predicate, params Expression<Func<TModel, object>>[] expressions)
-        {
-            (Guid batchRequestId, string receivingProperty) = await GetImplementationAsync(PnPContext.CurrentBatch, predicate, expressions, true, "GetFirstOrDefault").ConfigureAwait(false);
-
-            // and execute the request
-            await PnPContext.ExecuteAsync().ConfigureAwait(false);
-
-            // Get the resulting property from the parent object
-            var resultValue = Parent.GetPublicInstancePropertyValue(receivingProperty) as IEnumerable<TModel>;
-
-            return resultValue.FirstOrDefault(p => (p as TransientObject).BatchRequestId == batchRequestId);
-        }
-
-        public void GetFirstOrDefaultBatch(Expression<Func<TModel, bool>> predicate, params Expression<Func<TModel, object>>[] expressions)
-        {
-            GetFirstOrDefaultBatchAsync(predicate, expressions).GetAwaiter().GetResult();
-        }
-
-        public async Task GetFirstOrDefaultBatchAsync(Expression<Func<TModel, bool>> predicate, params Expression<Func<TModel, object>>[] expressions)
-        {
-            await GetFirstOrDefaultBatchAsync(PnPContext.CurrentBatch, predicate, expressions).ConfigureAwait(false);
-        }
-
-        public void GetFirstOrDefaultBatch(Batch batch, Expression<Func<TModel, bool>> predicate, params Expression<Func<TModel, object>>[] expressions)
-        {
-            GetFirstOrDefaultBatchAsync(batch, predicate, expressions).GetAwaiter().GetResult();
-        }
-
-        public async Task GetFirstOrDefaultBatchAsync(Batch batch, Expression<Func<TModel, bool>> predicate, params Expression<Func<TModel, object>>[] expressions)
-        {
-            await GetImplementationAsync(batch, predicate, expressions, true, "GetFirstOrDefaultBatch").ConfigureAwait(false);
-        }
-
-        #endregion
-
+        
         #region Paging (ISupportPaging implementation)
 
         public bool CanPage
@@ -478,86 +298,88 @@ namespace PnP.Core.Model
 
         public async Task<IEnumerable<TModel>> GetPagedAsync(Expression<Func<TModel, bool>> predicate, int pageSize, params Expression<Func<TModel, object>>[] expressions)
         {
-            if (pageSize < 1)
-            {
-                throw new ArgumentException(PnPCoreResources.Exception_InvalidPageSize);
-            }
+            //if (pageSize < 1)
+            //{
+            //    throw new ArgumentException(PnPCoreResources.Exception_InvalidPageSize);
+            //}
 
-            // Get the parent (container) entity info (e.g. for Lists this is Web)
-            var parentEntityInfo = EntityManager.Instance.GetStaticClassInfo(Parent.GetType());
+            //// Get the parent (container) entity info (e.g. for Lists this is Web)
+            //var parentEntityInfo = EntityManager.Instance.GetStaticClassInfo(Parent.GetType());
 
-            // and cast it to the IDataModelMappingHandler interface
-            var parentEntityWithMappingHandlers = (IDataModelMappingHandler)Parent;
+            //// and cast it to the IDataModelMappingHandler interface
+            //var parentEntityWithMappingHandlers = (IDataModelMappingHandler)Parent;
 
-            // Create a concrete entity of what we expect to get back (e.g. for Lists this is List)
-            var concreteEntity = EntityManager.GetEntityConcreteInstance<TModel>(typeof(TModel), Parent);
-            (concreteEntity as BaseDataModel<TModel>).PnPContext = PnPContext;
+            //// Create a concrete entity of what we expect to get back (e.g. for Lists this is List)
+            //var concreteEntity = EntityManager.GetEntityConcreteInstance<TModel>(typeof(TModel), Parent);
+            //(concreteEntity as BaseDataModel<TModel>).PnPContext = PnPContext;
 
-            // Get class info for the given concrete entity and the passed expressions
-            var concreteEntityClassInfo = EntityManager.GetClassInfo(typeof(TModel), concreteEntity as BaseDataModel<TModel>, expressions);
+            //// Get class info for the given concrete entity and the passed expressions
+            //var concreteEntityClassInfo = EntityManager.GetClassInfo(typeof(TModel), concreteEntity as BaseDataModel<TModel>, expressions);
 
-            // Determine the receiving property
-            var receivingProperty = GetReceivingProperty(parentEntityInfo);
-            if (string.IsNullOrEmpty(receivingProperty))
-            {
-                throw new ClientException(ErrorType.ModelMetadataIncorrect,
-                    PnPCoreResources.Exception_ModelMetadataIncorrect_ModelOutOfSync);
-            }
+            //// Determine the receiving property
+            //var receivingProperty = GetReceivingProperty(parentEntityInfo);
+            //if (string.IsNullOrEmpty(receivingProperty))
+            //{
+            //    throw new ClientException(ErrorType.ModelMetadataIncorrect,
+            //        PnPCoreResources.Exception_ModelMetadataIncorrect_ModelOutOfSync);
+            //}
 
-            // Build the query
-            ODataQuery<TModel> query;
-            if (predicate != null)
-            {
-                IQueryable<TModel> selectionTarget = this as IQueryable<TModel>;
-                selectionTarget = selectionTarget.Where(predicate);
-                query = DataModelQueryProvider<TModel>.Translate(selectionTarget.Expression);
-            }
-            else
-            {
-                query = DataModelQueryProvider<TModel>.Translate(null);
-            }
+            //// Build the query
+            //ODataQuery<TModel> query;
+            //if (predicate != null)
+            //{
+            //    IQueryable<TModel> selectionTarget = this as IQueryable<TModel>;
+            //    selectionTarget = selectionTarget.Where(predicate);
+            //    query = DataModelQueryProvider<TModel>.Translate(selectionTarget.Expression);
+            //}
+            //else
+            //{
+            //    query = DataModelQueryProvider<TModel>.Translate(null);
+            //}
 
-            var apiCalls = await QueryClient.BuildODataGetQueryAsync(concreteEntity, concreteEntityClassInfo, PnPContext, query, receivingProperty).ConfigureAwait(false);
-            string nextLink = apiCalls[0].Request;
-            ApiType nextLinkApiType = apiCalls[0].Type;
+            //var apiCalls = await QueryClient.BuildODataGetQueryAsync(concreteEntity, concreteEntityClassInfo, PnPContext, query, receivingProperty).ConfigureAwait(false);
+            //string nextLink = apiCalls[0].Request;
+            //ApiType nextLinkApiType = apiCalls[0].Type;
 
-            // Build the API Get request, we'll require the LinqGet decoration to be set
-            //var apiCallRequest = await Query.BuildGetAPICallAsync(concreteEntity as BaseDataModel<TModel>, concreteEntityClassInfo, default, useLinqGet: true).ConfigureAwait(false);
-            //string nextLink = apiCallRequest.ApiCall.Request;
-            //ApiType nextLinkApiType = apiCallRequest.ApiCall.Type;
+            //// Build the API Get request, we'll require the LinqGet decoration to be set
+            ////var apiCallRequest = await Query.BuildGetAPICallAsync(concreteEntity as BaseDataModel<TModel>, concreteEntityClassInfo, default, useLinqGet: true).ConfigureAwait(false);
+            ////string nextLink = apiCallRequest.ApiCall.Request;
+            ////ApiType nextLinkApiType = apiCallRequest.ApiCall.Type;
 
-            if (string.IsNullOrEmpty(nextLink))
-            {
-                throw new ClientException(ErrorType.ModelMetadataIncorrect,
-                    PnPCoreResources.Exception_ModelMetadataIncorrect_MissingLinqGet);
-            }
+            //if (string.IsNullOrEmpty(nextLink))
+            //{
+            //    throw new ClientException(ErrorType.ModelMetadataIncorrect,
+            //        PnPCoreResources.Exception_ModelMetadataIncorrect_MissingLinqGet);
+            //}
 
-            // Ensure $top is added/updated to reflect the page size
-            nextLink = QueryClient.EnsureTopUrlParameter(nextLink, nextLinkApiType, pageSize);
+            //// Ensure $top is added/updated to reflect the page size
+            //nextLink = QueryClient.EnsureTopUrlParameter(nextLink, nextLinkApiType, pageSize);
 
-            // Make the server request
-            var batchRequestId = PnPContext.CurrentBatch.Add(
-                Parent as TransientObject,
-                parentEntityInfo,
-                HttpMethod.Get,
-                new ApiCall
-                {
-                    Type = nextLinkApiType,
-                    ReceivingProperty = receivingProperty,
-                    Request = nextLink
-                },
-                default,
-                parentEntityWithMappingHandlers.MappingHandler,
-                parentEntityWithMappingHandlers.PostMappingHandler,
-                "GetPaged"
-                );
+            //// Make the server request
+            //var batchRequestId = PnPContext.CurrentBatch.Add(
+            //    Parent as TransientObject,
+            //    parentEntityInfo,
+            //    HttpMethod.Get,
+            //    new ApiCall
+            //    {
+            //        Type = nextLinkApiType,
+            //        ReceivingProperty = receivingProperty,
+            //        Request = nextLink
+            //    },
+            //    default,
+            //    parentEntityWithMappingHandlers.MappingHandler,
+            //    parentEntityWithMappingHandlers.PostMappingHandler,
+            //    "GetPaged"
+            //    );
 
-            await PnPContext.ExecuteAsync().ConfigureAwait(false);
+            //await PnPContext.ExecuteAsync().ConfigureAwait(false);
 
-            // Get the resulting property from the parent object
-            var resultValue = Parent.GetPublicInstancePropertyValue(receivingProperty) as IEnumerable<TModel>;
+            //// Get the resulting property from the parent object
+            //var resultValue = Parent.GetPublicInstancePropertyValue(receivingProperty) as IEnumerable<TModel>;
 
-            return resultValue.Where(p => (p as TransientObject).BatchRequestId == batchRequestId);
+            //return resultValue.Where(p => (p as TransientObject).BatchRequestId == batchRequestId);
+            // TODO: remove this implementation
+            throw new NotImplementedException();
         }
 
         public IEnumerable<TModel> GetNextPage()
@@ -662,6 +484,9 @@ namespace PnP.Core.Model
         #endregion
 
         #region Delete by id
+
+        // TODO: Do we really need all these methods with all these options for ID type?
+        // Can't we make a unique generic method where we provide/infer the type of the ID?
 
         public void DeleteById(int id)
         {
@@ -825,7 +650,6 @@ namespace PnP.Core.Model
 
         private async Task<Tuple<ApiCallRequest, BaseDataModel<TModel>>> DeleteByIdImplementationAsync(int intId = 0, string stringId = null, Guid guidId = default)
         {
-
             // First check if we've a model instance loaded with the given key, if so let's use that to do the delete 
             // as then the model instance will also automatically be removed from the collection
             object keyValue = null;
@@ -882,6 +706,7 @@ namespace PnP.Core.Model
 
             return new Tuple<ApiCallRequest, BaseDataModel<TModel>>(query, concreteEntity as BaseDataModel<TModel>);
         }
+
         #endregion
 
         #region Metadata Management
@@ -895,18 +720,6 @@ namespace PnP.Core.Model
         async Task IMetadataExtensible.SetRestToGraphMetadataAsync()
 #pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
         {
-        }
-        #endregion
-
-        #region LoadProperties
-        /// <summary>
-        /// Enables using the .LoadProperties lambda expression syntax on a collection
-        /// </summary>
-        /// <param name="expressions">Expression</param>
-        /// <returns>Null...return value is not needed</returns>
-        public IQueryable<TModel> LoadProperties(params Expression<Func<TModel, object>>[] expressions)
-        {
-            return null;
         }
         #endregion
     }

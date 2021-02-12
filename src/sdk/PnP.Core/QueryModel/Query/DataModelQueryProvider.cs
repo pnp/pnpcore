@@ -18,6 +18,7 @@ namespace PnP.Core.QueryModel
         private readonly DataModelQueryService<TModel> queryService;
 
         private EntityInfo entityInfo;
+
         internal EntityInfo EntityInfo
         {
             get
@@ -48,6 +49,18 @@ namespace PnP.Core.QueryModel
         #endregion
 
         #region BaseQueryProvider abstract methods implementation
+
+        public override async Task<IEnumerableBatchResult<TResult>> AddToCurrentBatchAsync<TResult>(Expression expression)
+        {
+            // Translate the query expression into an actual query text for the target Query Service
+            var query = Translate(expression);
+
+            // Execute the query via the target Query Service
+            var batchRequestId = await queryService.AddToCurrentBatchAsync(expression.Type, query).ConfigureAwait(false);
+
+            // TODO: return batch
+            return null;
+        }
 
         public override Task<object> ExecuteObjectAsync(Expression expression)
         {

@@ -6,6 +6,8 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using PnP.Core.QueryModel;
+using PnP.Core.Model;
 
 namespace PnP.Core.Test.SharePoint
 {
@@ -31,7 +33,7 @@ namespace PnP.Core.Test.SharePoint
                 // Get the default document library root folder
                 string sharedDocumentsFolderUrl = $"{context.Uri.PathAndQuery}/Shared Documents";
                 IFolder sharedDocumentsFolder = await context.Web.GetFolderByServerRelativeUrlAsync(sharedDocumentsFolderUrl);
-                IFile documentToFind = await sharedDocumentsFolder.Files.GetFirstOrDefaultAsync(f => f.Name == documentName);
+                IFile documentToFind = await sharedDocumentsFolder.Files.FirstOrDefaultAsync(f => f.Name == documentName);
 
                 Assert.IsNotNull(documentToFind);
                 Assert.AreEqual(documentName, documentToFind.Name);
@@ -1810,7 +1812,7 @@ namespace PnP.Core.Test.SharePoint
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                IFolder parentFolder = await context.Web.Folders.GetFirstOrDefaultAsync(f => f.Name == "SiteAssets");
+                IFolder parentFolder = await context.Web.Folders.FirstOrDefaultAsync(f => f.Name == "SiteAssets");
 
                 string fileName = TestCommon.GetPnPSdkTestAssetName("test_added.docx");
                 IFile addedFile = await parentFolder.Files.AddAsync(fileName, System.IO.File.OpenRead($".{Path.DirectorySeparatorChar}TestAssets{Path.DirectorySeparatorChar}test.docx"));
@@ -1830,7 +1832,7 @@ namespace PnP.Core.Test.SharePoint
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                IFolder parentFolder = await context.Web.Folders.GetFirstOrDefaultAsync(f => f.Name == "SiteAssets");
+                IFolder parentFolder = await context.Web.Folders.FirstOrDefaultAsync(f => f.Name == "SiteAssets");
 
                 string fileName = TestCommon.GetPnPSdkTestAssetName("testchunked_added.docx");
 

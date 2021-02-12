@@ -4,7 +4,7 @@
     /// Chat mentions
     /// </summary>
     [ConcreteType(typeof(TeamChatMessageMentionCollection))]
-    public interface ITeamChatMessageMentionCollection : IDataModelCollection<ITeamChatMessageMention>
+    public interface ITeamChatMessageMentionCollection : IDataModelCollection<ITeamChatMessageMention>, ISupportQuery<ITeamChatMessageMention>
     {
     }
 }

@@ -14,7 +14,6 @@ namespace PnP.Core.QueryModel
         private readonly IDataModelParent parent;
         private readonly string memberName;
 
-
         /// <summary>
         /// Protected default constructor, to force creation using
         /// the PnPContext instance
@@ -38,6 +37,53 @@ namespace PnP.Core.QueryModel
 
         internal EntityInfo EntityInfo { get; set; }
 
+        public async Task<Guid> AddToCurrentBatchAsync(Type expressionType, ODataQuery<TModel> query)
+        {
+            // Get the entity info, depending on how we enter EntityInfo was already created
+            if (EntityInfo == null)
+            {
+                EntityInfo = EntityManager.GetClassInfo<TModel>(typeof(TModel), null, query.Fields.ToArray());
+            }
+
+            // In case a model can be used from different contexts (e.g. ContentType can be used from Web, but also from List)
+            // it's required to let the entity know this context so that it can provide the correct information when requested
+            if (parent != null)
+            {
+                EntityInfo.Target = parent.GetType();
+            }
+
+            // and its concrete instance
+            var concreteEntity = EntityManager.GetEntityConcreteInstance<TModel>(typeof(TModel), parent);
+            // Ensure the passed model has a PnPContext set
+            if (concreteEntity is IDataModelWithContext d && d.PnPContext == null)
+            {
+                d.PnPContext = context;
+            }
+
+            // Get the parent (container) entity info
+            var parentEntityInfo = EntityManager.Instance.GetStaticClassInfo(parent.GetType());
+            // and cast it to the IDataModelMappingHandler interface
+            var parentEntityWithMappingHandlers = (IDataModelMappingHandler)parent;
+
+
+            // Build the needed API call
+            ApiCallRequest apiCallRequest = await QueryClient.BuildGetAPICallAsync<TModel>(concreteEntity as BaseDataModel<TModel>, EntityInfo, query, default, false, true).ConfigureAwait(false);
+            var apiCall = apiCallRequest.ApiCall;
+            apiCall.ReceivingProperty = memberName;
+
+            // Add the request to the current batch
+            return context.CurrentBatch.Add(
+                parent as TransientObject,
+                parentEntityInfo,
+                HttpMethod.Get,
+                apiCall,
+                default,
+                parentEntityWithMappingHandlers.MappingHandler,
+                parentEntityWithMappingHandlers.PostMappingHandler,
+                "Linq"
+                );
+        }
+
         public async Task<object> ExecuteQueryAsync(Type expressionType, ODataQuery<TModel> query)
         {
             if (string.IsNullOrEmpty(memberName))
@@ -49,47 +95,8 @@ namespace PnP.Core.QueryModel
             // At this point in time we support querying collections for which the model implements IQueryableDataModel
             if (typeof(TModel).ImplementsInterface(typeof(IQueryableDataModel)))
             {
-                // Get the entity info, depending on how we enter EntityInfo was already created
-                if (EntityInfo == null)
-                {
-                    EntityInfo = EntityManager.GetClassInfo<TModel>(typeof(TModel), null);
-                }
-
-                // In case a model can be used from different contexts (e.g. ContentType can be used from Web, but also from List)
-                // it's required to let the entity know this context so that it can provide the correct information when requested
-                if (parent != null)
-                {
-                    EntityInfo.Target = parent.GetType();
-                }
-
-                // and its concrete instance
-                var concreteEntity = EntityManager.GetEntityConcreteInstance<TModel>(typeof(TModel), parent);
-
-                // Get the parent (container) entity info
-                var parentEntityInfo = EntityManager.Instance.GetStaticClassInfo(parent.GetType());
-                // and cast it to the IDataModelMappingHandler interface
-                var parentEntityWithMappingHandlers = (IDataModelMappingHandler)parent;
-
-                // Prepare a variable to hold tha batch request ID
-                Guid batchRequestId = Guid.Empty;
-
-                // Build the needed API call
-                var apiCalls = await QueryClient.BuildODataGetQueryAsync(concreteEntity, EntityInfo, context, query, memberName).ConfigureAwait(false);
-
-                foreach (var apiCall in apiCalls)
-                {
-                    // Add the request to the current batch
-                    batchRequestId = context.CurrentBatch.Add(
-                        parent as TransientObject,
-                        parentEntityInfo,
-                        HttpMethod.Get,
-                        apiCall,
-                        default,
-                        parentEntityWithMappingHandlers.MappingHandler,
-                        parentEntityWithMappingHandlers.PostMappingHandler,
-                        "Linq"
-                        );
-                }
+                // Prepare request and add to the current batch
+                var batchRequestId = await AddToCurrentBatchAsync(expressionType, query);
 
                 // and execute the request
                 await context.ExecuteAsync().ConfigureAwait(false);
@@ -101,6 +108,9 @@ namespace PnP.Core.QueryModel
                 // the whole collection of results
                 if (expressionType.ImplementsInterface(typeof(IQueryable)))
                 {
+                    // TODO: With the new querying model, where we always create a new container
+                    // for the result, here we don't need anymore to filter by BatchRequestId
+                    // but we can simply return the result
                     return resultValue.Where(p => (p as TransientObject).BatchRequestId == batchRequestId);
                 }
                 // Otherwise if the expression type is the type of TModel, we need
@@ -111,6 +121,8 @@ namespace PnP.Core.QueryModel
                     // sure that the result will be just one item
                     if (query.Top == 1)
                     {
+                        // TODO: Here as well it will suffice to return FirstOrDefault without 
+                        // any specific predicate
                         return resultValue.FirstOrDefault(p => (p as TransientObject).BatchRequestId == batchRequestId);
                     }
                     else

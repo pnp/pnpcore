@@ -114,27 +114,28 @@ namespace PnP.Core.Test.Base
 
                     query2.OrderBy.AddRange(query.OrderBy);
 
-                    if (query.Select.Count > 0)
-                    {
-                        foreach (var select in query.Select)
-                        {
-                            if (!query2.Select.Contains(select))
-                            {
-                                query2.Select.Add(select);
-                            }
-                        }
-                    }
+                    // TODO: to remove
+                    //if (query.Select.Count > 0)
+                    //{
+                    //    foreach (var select in query.Select)
+                    //    {
+                    //        if (!query2.Select.Contains(select))
+                    //        {
+                    //            query2.Select.Add(select);
+                    //        }
+                    //    }
+                    //}
 
-                    if (query.Expand.Count > 0)
-                    {
-                        foreach (var expand in query.Expand)
-                        {
-                            if (!query2.Expand.Contains(expand))
-                            {
-                                query2.Expand.Add(expand);
-                            }
-                        }
-                    }
+                    //if (query.Expand.Count > 0)
+                    //{
+                    //    foreach (var expand in query.Expand)
+                    //    {
+                    //        if (!query2.Expand.Contains(expand))
+                    //        {
+                    //            query2.Expand.Add(expand);
+                    //        }
+                    //    }
+                    //}
                 }
             }
             else
@@ -160,13 +161,14 @@ namespace PnP.Core.Test.Base
 
             List<string> requests = new List<string>();
 
-            // Build the proper ApiCall
-            var apiCalls = await QueryClient.BuildODataGetQueryAsync(input.Item1, input.Item2, (input.Item1 as IDataModelWithContext).PnPContext, query2, null);
+            // TODO: review
+            //// Build the proper ApiCall
+            //var apiCalls = await QueryClient.BuildODataGetQueryAsync(input.Item1, input.Item2, (input.Item1 as IDataModelWithContext).PnPContext, query2, null);
 
-            foreach (var apiCall in apiCalls)
-            {
-                requests.Add(CleanRequestUrl((input.Item1 as IDataModelWithContext).PnPContext, apiCall.Request));
-            }
+            //foreach (var apiCall in apiCalls)
+            //{
+            //    requests.Add(CleanRequestUrl((input.Item1 as IDataModelWithContext).PnPContext, apiCall.Request));
+            //}
 
             return requests;
         }
@@ -303,10 +305,10 @@ namespace PnP.Core.Test.Base
         }
 
         [TestMethod]
-        public async Task GetWebGraphFirstExpressionExpandablePlusSimplePropertiesPlusLoadPropertiesSimple()
+        public async Task GetWebGraphFirstExpressionExpandablePlusSimplePropertiesPlusLoadSimple()
         {
             var requests = await GetAPICallTestAsync(BuildModel<Web, IWeb>(new Expression<Func<IWeb, object>>[]
-            { p => p.Title, p => p.Description, p => p.Lists.LoadProperties(
+            { p => p.Title, p => p.Description, p => p.Lists.Query(
                 p=>p.Title, p=>p.TemplateType)
             }));
             Assert.IsTrue(requests.Count == 1);
@@ -314,10 +316,10 @@ namespace PnP.Core.Test.Base
         }
 
         [TestMethod]
-        public async Task GetWebGraphFirstExpressionExpandablePlusSimplePropertiesPlusLoadPropertiesSimplePlusKeyProperty()
+        public async Task GetWebGraphFirstExpressionExpandablePlusSimplePropertiesPlusLoadSimplePlusKeyProperty()
         {
             var requests = await GetAPICallTestAsync(BuildModel<Web, IWeb>(new Expression<Func<IWeb, object>>[]
-            { p => p.Title, p => p.Description, p => p.Lists.LoadProperties(
+            { p => p.Title, p => p.Description, p => p.Lists.Query(
                 p=>p.Title, p=>p.TemplateType, p=>p.Id)
             }));
             Assert.IsTrue(requests.Count == 1);
@@ -325,26 +327,22 @@ namespace PnP.Core.Test.Base
         }
 
         [TestMethod]
-        public async Task GetWebGraphFirstExpressionExpandablePlusSimplePropertiesPlusLoadPropertiesRecursive()
+        public async Task GetWebGraphFirstExpressionExpandablePlusSimplePropertiesPlusLoadRecursive()
         {
             var requests = await GetAPICallTestAsync(BuildModel<Web, IWeb>(new Expression<Func<IWeb, object>>[]
-            { p => p.Title, p => p.Description, p => p.Lists.LoadProperties(
-                p => p.Title, p => p.TemplateType, p=>p.ContentTypes.LoadProperties(
-                    p=>p.Name, p=>p.FieldLinks.LoadProperties(
-                        p=> p.Name, p=> p.Hidden)))
+            { p => p.Title, p => p.Description, p => p.Lists.Query(
+                p => p.Title, p => p.TemplateType, p=>QueryableExtensions.Query(p.ContentTypes, p=>p.Name, p=>QueryableExtensions.Query(p.FieldLinks, p=> p.Name, p=> p.Hidden)))
             }));
             Assert.IsTrue(requests.Count == 1);
             Assert.AreEqual(requests[0], "_api/web?$select=Id%2cTitle%2cDescription%2cLists%2fTitle%2cLists%2fBaseTemplate%2cLists%2fId%2cLists%2fContentTypes%2fName%2cLists%2fContentTypes%2fStringId%2cLists%2fContentTypes%2fFieldLinks%2fName%2cLists%2fContentTypes%2fFieldLinks%2fHidden%2cLists%2fContentTypes%2fFieldLinks%2fId&$expand=Lists%2cLists%2fContentTypes%2cLists%2fContentTypes%2fFieldLinks", true);
         }
 
         [TestMethod]
-        public async Task GetWebGraphFirstExpressionExpandablePlusSimplePropertiesPlusLoadPropertiesRecursivePlusKeyProperties()
+        public async Task GetWebGraphFirstExpressionExpandablePlusSimplePropertiesPlusLoadRecursivePlusKeyProperties()
         {
             var requests = await GetAPICallTestAsync(BuildModel<Web, IWeb>(new Expression<Func<IWeb, object>>[]
-            { p => p.Title, p => p.Description, p => p.Lists.LoadProperties(
-                p => p.Title, p => p.TemplateType, p=>p.Id, p=>p.ContentTypes.LoadProperties(
-                    p=>p.Name, p=>p.StringId, p=>p.FieldLinks.LoadProperties(
-                        p=>p.Id, p=> p.Name, p=> p.Hidden)))
+            { p => p.Title, p => p.Description, p => p.Lists.Query(
+                p => p.Title, p => p.TemplateType, p=>p.Id, p=>QueryableExtensions.Query(p.ContentTypes, p=>p.Name, p=>p.StringId, p=>QueryableExtensions.Query(p.FieldLinks, p=>p.Id, p=> p.Name, p=> p.Hidden)))
             }));
             Assert.IsTrue(requests.Count == 1);
             Assert.AreEqual(requests[0], "_api/web?$select=Id%2cTitle%2cDescription%2cLists%2fTitle%2cLists%2fBaseTemplate%2cLists%2fId%2cLists%2fContentTypes%2fName%2cLists%2fContentTypes%2fStringId%2cLists%2fContentTypes%2fFieldLinks%2fId%2cLists%2fContentTypes%2fFieldLinks%2fName%2cLists%2fContentTypes%2fFieldLinks%2fHidden&$expand=Lists%2cLists%2fContentTypes%2cLists%2fContentTypes%2fFieldLinks", true);
@@ -405,9 +403,9 @@ namespace PnP.Core.Test.Base
         }
 
         [TestMethod]
-        public async Task GetTeamExpressionExpandableKeyPropertyPlusLoadProperties()
+        public async Task GetTeamExpressionExpandableKeyPropertyPlusLoad()
         {
-            var requests = await GetAPICallTestAsync(BuildModel<TermStore, ITermStore>(new Expression<Func<ITermStore, object>>[] { p => p.Id, p => p.Groups.LoadProperties(
+            var requests = await GetAPICallTestAsync(BuildModel<TermStore, ITermStore>(new Expression<Func<ITermStore, object>>[] { p => p.Id, p => p.Groups.Query(
                 p=>p.Name )
             }));
             Assert.IsTrue(requests.Count == 2);
@@ -416,9 +414,9 @@ namespace PnP.Core.Test.Base
         }
 
         [TestMethod]
-        public async Task GetTeamExpressionExpandableKeyPropertyPlusLoadPropertiesPlusKeyProperty()
+        public async Task GetTeamExpressionExpandableKeyPropertyPlusLoadPlusKeyProperty()
         {
-            var requests = await GetAPICallTestAsync(BuildModel<TermStore, ITermStore>(new Expression<Func<ITermStore, object>>[] { p => p.Id, p => p.Groups.LoadProperties(
+            var requests = await GetAPICallTestAsync(BuildModel<TermStore, ITermStore>(new Expression<Func<ITermStore, object>>[] { p => p.Id, p => p.Groups.Query(
                 p=>p.Name, p=>p.Id )
             }));
             Assert.IsTrue(requests.Count == 2);
@@ -428,9 +426,9 @@ namespace PnP.Core.Test.Base
 
         [TestMethod]
         [ExpectedException(typeof(ClientException))]
-        public async Task GetTeamExpressionExpandableKeyPropertyPlusLoadPropertiesPlusExpandKeyProperty()
+        public async Task GetTeamExpressionExpandableKeyPropertyPlusLoadPlusExpandKeyProperty()
         {
-            var requests = await GetAPICallTestAsync(BuildModel<TermStore, ITermStore>(new Expression<Func<ITermStore, object>>[] { p => p.Id, p => p.Groups.LoadProperties(
+            var requests = await GetAPICallTestAsync(BuildModel<TermStore, ITermStore>(new Expression<Func<ITermStore, object>>[] { p => p.Id, p => p.Groups.Query(
                 p=>p.Name, p=>p.Id, p=>p.Sets )
             }));
         }
@@ -516,10 +514,10 @@ namespace PnP.Core.Test.Base
         }
 
         [TestMethod]
-        public async Task GetLinqListPlusLoadProperties()
+        public async Task GetLinqListPlusLoad()
         {
             var requests = await GetODataAPICallTestAsync(
-                BuildModel<List, IList>(new Expression<Func<IList, object>>[] { p => p.ListExperience, p => p.Fields.LoadProperties(p => p.Id, p => p.InternalName) }),
+                BuildModel<List, IList>(new Expression<Func<IList, object>>[] { p => p.ListExperience, p => p.Fields.Query(p => p.Id, p => p.InternalName) }),
                 new ODataQuery<IList> { Top = 10, Skip = 5 });
             Assert.AreEqual(requests[0], "_api/web/lists?$select=id,listexperienceoptions,fields%2fid,fields%2finternalname&$expand=fields&$top=10&$skip=5", true);
         }

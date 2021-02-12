@@ -1,4 +1,5 @@
 ﻿using PnP.Core.Model.Security;
+using PnP.Core.QueryModel;
 using PnP.Core.Services;
 using System;
 using System.Collections.Generic;
@@ -23,7 +24,7 @@ namespace PnP.Core.Model.SharePoint
         // Graph requires the "system" field to be loaded as trigger to return all lists 
         internal const string SystemFacet = "system";
         internal const string DefaultGraphFieldsToLoad = "system,createdDateTime,description,eTag,id,lastModifiedDateTime,name,webUrl,displayName,createdBy,lastModifiedBy,parentReference,list";
-        internal static Expression<Func<IList, object>>[] LoadFieldsExpression = new Expression<Func<IList, object>>[] { p => p.Fields.LoadProperties(p => p.InternalName, p => p.FieldTypeKind, p => p.TypeAsString, p => p.Title) };
+        internal static Expression<Func<IList, object>>[] LoadFieldsExpression = new Expression<Func<IList, object>>[] { p => p.Fields.Query(p => p.InternalName, p => p.FieldTypeKind, p => p.TypeAsString, p => p.Title) };
 
         #region Construction
         public List()
@@ -624,7 +625,10 @@ namespace PnP.Core.Model.SharePoint
         public async Task<IRoleDefinitionCollection> GetRoleDefinitionsAsync(int principalId)
         {
             await EnsurePropertiesAsync(l => l.RoleAssignments).ConfigureAwait(false);
-            var roleAssignment = await RoleAssignments.GetFirstOrDefaultAsync(p => p.PrincipalId == principalId, r => r.RoleDefinitions).ConfigureAwait(false);
+            var roleAssignment = await RoleAssignments
+                .Query(r => r.RoleDefinitions)
+                .FirstOrDefaultAsync(p => p.PrincipalId == principalId)
+                .ConfigureAwait(false);
             return roleAssignment?.RoleDefinitions;
         }
 
@@ -638,7 +642,7 @@ namespace PnP.Core.Model.SharePoint
             var result = false;
             foreach (var name in names)
             {
-                var roleDefinition = await PnPContext.Web.RoleDefinitions.GetFirstOrDefaultAsync(d => d.Name == name).ConfigureAwait(false);
+                var roleDefinition = await PnPContext.Web.RoleDefinitions.FirstOrDefaultAsync(d => d.Name == name).ConfigureAwait(false);
                 if (roleDefinition != null)
                 {
                     var apiCall = new ApiCall($"_api/web/lists(guid'{Id}')/roleassignments/addroleassignment(principalid={principalId},roledefid={roleDefinition.Id})", ApiType.SPORest);

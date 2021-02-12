@@ -100,7 +100,7 @@ namespace PnP.Core.Model.SharePoint
                 throw new ArgumentNullException(nameof(id));
             }
 
-            return await GetFirstOrDefaultAsync(l => l.Id == id, selectors).ConfigureAwait(false);
+            return await this.Query(selectors).FirstOrDefaultAsync(l => l.Id == id).ConfigureAwait(false);
         }
         #endregion
 

@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using PnP.Core.Model;
 
 namespace PnP.Core.Test.Base
 {
@@ -44,7 +45,7 @@ namespace PnP.Core.Test.Base
                 {
                     Assert.Inconclusive("Test data set should be setup to not have the list available.");
                 }
-                var myList = web.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
+                var myList = web.Result.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
 
                 if (myList != null)
                 {
@@ -84,7 +85,7 @@ namespace PnP.Core.Test.Base
                 {
                     Assert.Inconclusive("Test data set should be setup to not have the list available.");
                 }
-                var myList = web.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
+                var myList = web.Result.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
 
                 if (myList != null)
                 {
@@ -129,7 +130,7 @@ namespace PnP.Core.Test.Base
                 {
                     Assert.Inconclusive("Test data set should be setup to not have the list available.");
                 }
-                var myList = web.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
+                var myList = web.Result.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
 
                 if (myList != null)
                 {
@@ -166,7 +167,7 @@ namespace PnP.Core.Test.Base
                 {
                     Assert.Inconclusive("Test data set should be setup to not have the list available.");
                 }
-                var myList = web.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
+                var myList = web.Result.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
 
                 if (myList != null)
                 {
@@ -201,12 +202,12 @@ namespace PnP.Core.Test.Base
             var web = await context.Web.GetBatchAsync(p => p.Lists);
             context.ExecuteAsync().Wait();
 
-            var myList = web.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
+            var myList = web.Result.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
 
             if (myList == null)
             {
                 // Add a new list
-                myList = await web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
+                myList = await web.Result.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
 
                 // Add a number of list items and fetch them again in a single server call
                 Dictionary<string, object> values = new Dictionary<string, object>

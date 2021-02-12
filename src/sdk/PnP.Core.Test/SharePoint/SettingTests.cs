@@ -4,6 +4,7 @@ using PnP.Core.Services;
 using PnP.Core.Test.Utilities;
 using System;
 using System.Linq;
+using PnP.Core.Model;
 using System.Threading.Tasks;
 
 namespace PnP.Core.Test.SharePoint
