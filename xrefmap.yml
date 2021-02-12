@@ -9155,6 +9155,24 @@ references:
   commentId: M:PnP.Core.Model.SharePoint.IField.NewFieldValueCollection
   fullName: PnP.Core.Model.SharePoint.IField.NewFieldValueCollection()
   nameWithType: IField.NewFieldValueCollection()
+- uid: PnP.Core.Model.SharePoint.IField.NewFieldValueCollection(IEnumerable{KeyValuePair{Guid,System.String}})
+  name: NewFieldValueCollection(IEnumerable<KeyValuePair<Guid, String>>)
+  href: api/PnP.Core.Model.SharePoint.IField.html#PnP_Core_Model_SharePoint_IField_NewFieldValueCollection_IEnumerable_KeyValuePair_Guid_System_String___
+  commentId: M:PnP.Core.Model.SharePoint.IField.NewFieldValueCollection(IEnumerable{KeyValuePair{Guid,System.String}})
+  name.vb: NewFieldValueCollection(IEnumerable(Of KeyValuePair(Of Guid, String)))
+  fullName: PnP.Core.Model.SharePoint.IField.NewFieldValueCollection(IEnumerable<KeyValuePair<Guid, System.String>>)
+  fullName.vb: PnP.Core.Model.SharePoint.IField.NewFieldValueCollection(IEnumerable(Of KeyValuePair(Of Guid, System.String)))
+  nameWithType: IField.NewFieldValueCollection(IEnumerable<KeyValuePair<Guid, String>>)
+  nameWithType.vb: IField.NewFieldValueCollection(IEnumerable(Of KeyValuePair(Of Guid, String)))
+- uid: PnP.Core.Model.SharePoint.IField.NewFieldValueCollection(IEnumerable{PnP.Core.Model.SharePoint.IFieldValue})
+  name: NewFieldValueCollection(IEnumerable<IFieldValue>)
+  href: api/PnP.Core.Model.SharePoint.IField.html#PnP_Core_Model_SharePoint_IField_NewFieldValueCollection_IEnumerable_PnP_Core_Model_SharePoint_IFieldValue__
+  commentId: M:PnP.Core.Model.SharePoint.IField.NewFieldValueCollection(IEnumerable{PnP.Core.Model.SharePoint.IFieldValue})
+  name.vb: NewFieldValueCollection(IEnumerable(Of IFieldValue))
+  fullName: PnP.Core.Model.SharePoint.IField.NewFieldValueCollection(IEnumerable<PnP.Core.Model.SharePoint.IFieldValue>)
+  fullName.vb: PnP.Core.Model.SharePoint.IField.NewFieldValueCollection(IEnumerable(Of PnP.Core.Model.SharePoint.IFieldValue))
+  nameWithType: IField.NewFieldValueCollection(IEnumerable<IFieldValue>)
+  nameWithType.vb: IField.NewFieldValueCollection(IEnumerable(Of IFieldValue))
 - uid: PnP.Core.Model.SharePoint.IField.NewFieldValueCollection*
   name: NewFieldValueCollection
   href: api/PnP.Core.Model.SharePoint.IField.html#PnP_Core_Model_SharePoint_IField_NewFieldValueCollection_
