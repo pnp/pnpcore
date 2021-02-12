@@ -82,11 +82,7 @@ namespace PnP.Core.Model.SharePoint
             {
                 // Extra processing of returned json
             };
-
-#pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
-            AddApiCallHandler = async (keyValuePairs) =>
-#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
-            {
+            AddApiCallHandler = async (keyValuePairs) => {
                 var parentList = Parent.Parent as List;
                 // sample parent list uri: https://bertonline.sharepoint.com/sites/modern/_api/Web/Lists(guid'b2d52a36-52f1-48a4-b499-629063c6a38c')
                 var parentListUri = parentList.GetMetadata(PnPConstants.MetaDataUri);
