@@ -52,9 +52,12 @@ namespace PnP.Core.Auth.Test.Base
             Assert.IsTrue(result2);
 
             var cred = CredentialManager.GetCredential(appName);
-            Assert.IsTrue(cred != null);
-            Assert.IsTrue(cred.UserName == userName);
-            Assert.IsTrue(cred.Password == passWord);
+            if (!OperatingSystem.IsLinux())
+            {
+                Assert.IsTrue(cred != null);
+                Assert.IsTrue(cred.UserName == userName);
+                Assert.IsTrue(cred.Password == passWord);
+            }
         }
     }
 }
