@@ -192,6 +192,44 @@ namespace PnP.Core.Model.SharePoint
 
         #region Methods
 
+        #region Folder
+        public async Task<bool> IsFolderAsync()
+        {
+            if (!Values.ContainsKey("ContentTypeId"))
+            {
+                await LoadKeyListItemProperties().ConfigureAwait(false);
+            }
+
+            return Values["ContentTypeId"].ToString().StartsWith("0x0120", StringComparison.InvariantCultureIgnoreCase);
+        }
+
+        public bool IsFolder()
+        {
+            return IsFolderAsync().GetAwaiter().GetResult();
+        }
+
+        public async Task<IFolder> GetFolderAsync()
+        {
+            if (!Values.ContainsKey("FileDirRef"))
+            {
+                await LoadKeyListItemProperties().ConfigureAwait(false);
+            }
+
+            return await PnPContext.Web.GetFolderByServerRelativeUrlAsync(Values["FileDirRef"].ToString()).ConfigureAwait(false);
+        }
+
+        public IFolder GetFolder()
+        {
+            return GetFolderAsync().GetAwaiter().GetResult();
+        }
+
+        private async Task LoadKeyListItemProperties()
+        {
+            ApiCall apiCall = new ApiCall($"_api/web/lists/getbyid(guid'{{Parent.Id}}')/items({Id})?$select=ContentTypeId,FileDirRef", ApiType.SPORest);
+            await RequestAsync(apiCall, HttpMethod.Get).ConfigureAwait(false);
+        }
+        #endregion
+
         #region Item updates
 
         internal override async Task BaseUpdate(Func<FromJson, object> fromJsonCasting = null, Action<string> postMappingJson = null)

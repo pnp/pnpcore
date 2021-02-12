@@ -32,10 +32,21 @@ namespace PnP.Core.Test.SharePoint
                 list.EnableFolderCreation = true;
                 list.Update();
 
+                // Add item to root of the list
+                var rootItem = list.Items.Add(new Dictionary<string, object> { { "Title", "root" } });
+                var folderForRootItem = await rootItem.GetFolderAsync().ConfigureAwait(false);
+                Assert.IsFalse(await rootItem.IsFolderAsync());
+
                 var folderItem = await list.AddListFolderAsync("Test");
+                var folderForFolderItem = await folderItem.GetFolderAsync().ConfigureAwait(false);
+                Assert.IsTrue(folderForFolderItem != null);
+
                 var item = list.Items.Add(new Dictionary<string, object> { { "Title", "blabla" } }, "Test");
                 var newFolderItem = await list.Items.GetByIdAsync(folderItem.Id);
-                Assert.IsTrue(newFolderItem["ContentTypeId"].ToString().StartsWith("0x0120"));
+                Assert.IsTrue(newFolderItem.IsFolder());
+
+                var folder = await item.GetFolderAsync().ConfigureAwait(false);
+                Assert.IsTrue(folder.Name == "Test");
 
                 using (var context2 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))
                 {
@@ -43,9 +54,7 @@ namespace PnP.Core.Test.SharePoint
 
                     var result = await newList.GetListDataAsStreamAsync(new RenderListDataOptions() { ViewXml = "<View><ViewFields><FieldRef Name='Title' /><FieldRef Name='FileDirRef' /></ViewFields><RowLimit>1</RowLimit></View>", RenderOptions = RenderListDataOptionsFlags.ListData, FolderServerRelativeUrl = $"{newList.RootFolder.ServerRelativeUrl}/Test" });
 
-
                     Assert.IsTrue(newList.Items.FirstOrDefault() != null);
-
                 }
                 await list.DeleteAsync();
             }
