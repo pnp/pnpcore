@@ -83,13 +83,71 @@ namespace PnP.Core.Model.SharePoint
                 // Extra processing of returned json
             };
             AddApiCallHandler = async (keyValuePairs) => {
+
                 var parentList = Parent.Parent as List;
                 // sample parent list uri: https://bertonline.sharepoint.com/sites/modern/_api/Web/Lists(guid'b2d52a36-52f1-48a4-b499-629063c6a38c')
                 var parentListUri = parentList.GetMetadata(PnPConstants.MetaDataUri);
+                // sample parent list entity type name: DemolistList
+                var parentListTitle = !string.IsNullOrEmpty(parentList.GetMetadata(PnPConstants.MetaDataRestEntityTypeName)) ? parentList.GetMetadata(PnPConstants.MetaDataRestEntityTypeName).Substring(0, parentList.GetMetadata(PnPConstants.MetaDataRestEntityTypeName).Length - 4) : null;
 
-                // Fall back to loading the rootfolder propery if we can't determine the list name
-                await parentList.EnsurePropertiesAsync(p => p.RootFolder).ConfigureAwait(false);
-                var serverRelativeUrl = parentList.RootFolder.ServerRelativeUrl;
+                // If this list we're adding items to was not fetched from the server than throw an error
+                string serverRelativeUrl = null;
+                if (string.IsNullOrEmpty(parentListTitle) || string.IsNullOrEmpty(parentListUri))
+                {
+                    // Fall back to loading the rootfolder propery if we can't determine the list name
+                    await parentList.EnsurePropertiesAsync(p => p.RootFolder).ConfigureAwait(false);
+                    serverRelativeUrl = parentList.RootFolder.ServerRelativeUrl;
+                }
+                else
+                {
+                    // little trick here to ensure we can construct the correct list url based upon the data returned by a default load
+                    // Ensure the underscore "_" character is not encoded in the FolderPath to use
+                    bool isList = true;
+                    bool isCatalog = false;
+                    bool isLibrary = false;
+
+                    if (parentList.IsPropertyAvailable(p=>p.TemplateType))
+                    {
+                        if (parentList.TemplateType == ListTemplateType.DocumentLibrary ||
+                            parentList.TemplateType == ListTemplateType.WebPageLibrary ||
+                            parentList.TemplateType == ListTemplateType.XMLForm ||
+                            parentList.TemplateType == ListTemplateType.PictureLibrary ||
+                            parentList.TemplateType == ListTemplateType.WebPageLibrary ||
+                            parentList.TemplateType == ListTemplateType.DataConnectionLibrary ||
+                            parentList.TemplateType == ListTemplateType.HelpLibrary ||
+                            parentList.TemplateType == ListTemplateType.HomePageLibrary ||
+                            parentList.TemplateType == ListTemplateType.MySiteDocumentLibrary ||
+                            parentList.TemplateType == ListTemplateType.SharingLinks ||
+                            // IWConvertedForms
+                            parentList.TemplateType == (ListTemplateType)10102)
+                        {
+                            isList = false;
+                            isLibrary = true;
+                        }
+
+                        if (parentList.TemplateType.ToString().EndsWith("Catalog") ||
+                            parentList.TemplateType == ListTemplateType.MaintenanceLogs)
+                        {
+                            parentListTitle = parentListTitle.Replace("OData__x005f_catalogs_x002f_", "");
+                            isList = false;
+                            isCatalog = true;
+                        }
+                    }
+
+                    if (isList)
+                    {
+                        serverRelativeUrl = $"{PnPContext.Uri}/lists/{parentListTitle}".Replace("_x005f_", "_").Replace("_x0020_", " ");
+                    }
+                    else if (isLibrary)
+                    {
+                        serverRelativeUrl = $"{PnPContext.Uri}/{parentListTitle}".Replace("_x005f_", "_").Replace("_x0020_", " ");
+                    }
+                    else if (isCatalog)
+                    {
+                        serverRelativeUrl = $"{PnPContext.Uri}/_catalogs/{parentListTitle}".Replace("_x005f_", "_").Replace("_x0020_", " ");
+                    }
+                    
+                }
 
                 // drop the everything in front of _api as the batching logic will add that automatically
                 var baseApiCall = parentListUri.Substring(parentListUri.IndexOf("_api"));
