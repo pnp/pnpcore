@@ -103,13 +103,16 @@ namespace PnP.Core.Model.SharePoint
                     if (keyValuePairs[FolderPath] != null)
                     {
                         var folderPath = keyValuePairs[FolderPath].ToString();
-                        if (folderPath.ToLower().StartsWith(serverRelativeUrl))
+                        if (!string.IsNullOrEmpty(folderPath))
                         {
-                            decodedUrlFolderPath = folderPath;
-                        }
-                        else
-                        {
-                            decodedUrlFolderPath = $"{serverRelativeUrl}/{folderPath.TrimStart('/')}";
+                            if (folderPath.ToLower().StartsWith(serverRelativeUrl))
+                            {
+                                decodedUrlFolderPath = folderPath;
+                            }
+                            else
+                            {
+                                decodedUrlFolderPath = $"{serverRelativeUrl}/{folderPath.TrimStart('/')}";
+                            }
                         }
                     }
                 }

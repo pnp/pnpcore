@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using AngleSharp.Dom;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PnP.Core.Model.Security;
 using PnP.Core.Model.SharePoint;
 using PnP.Core.Test.Utilities;
@@ -74,6 +75,27 @@ namespace PnP.Core.Test.SharePoint
                 list.Update();
 
                 var folderItem = await list.AddListFolderAsync("Test");
+                var newFolderItem = await list.Items.GetByIdAsync(folderItem.Id);
+                Assert.IsTrue(newFolderItem["ContentTypeId"].ToString().StartsWith("0x0120"));
+
+                await list.DeleteAsync();
+            }
+        }
+
+        [TestMethod]
+        public async Task AddListFolder2Test()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var listTitle = TestCommon.GetPnPSdkTestAssetName("AddListWithFolder2Test");
+                var list = await context.Web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
+                await list.EnsurePropertiesAsync(l => l.RootFolder);
+                list.ContentTypesEnabled = true;
+                list.EnableFolderCreation = true;
+                list.Update();
+
+                IListItem folderItem = list.Items.Add(new Dictionary<string, object>() { { "Title", "Folder" } }, string.Empty, FileSystemObjectType.Folder);
                 var newFolderItem = await list.Items.GetByIdAsync(folderItem.Id);
                 Assert.IsTrue(newFolderItem["ContentTypeId"].ToString().StartsWith("0x0120"));
 
