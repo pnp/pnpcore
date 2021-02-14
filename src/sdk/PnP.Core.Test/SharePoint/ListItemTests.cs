@@ -82,6 +82,27 @@ namespace PnP.Core.Test.SharePoint
         }
 
         [TestMethod]
+        public async Task AddLibraryFolderTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var listTitle = TestCommon.GetPnPSdkTestAssetName("AddLibraryFolderTest");
+                var list = await context.Web.Lists.AddAsync(listTitle, ListTemplateType.DocumentLibrary);
+                await list.EnsurePropertiesAsync(l => l.RootFolder);
+                list.ContentTypesEnabled = true;
+                list.EnableFolderCreation = true;
+                list.Update();
+
+                var folderItem = await list.AddListFolderAsync("Test");
+                var newFolderItem = await list.Items.GetByIdAsync(folderItem.Id);
+                Assert.IsTrue(newFolderItem["ContentTypeId"].ToString().StartsWith("0x0120"));
+
+                await list.DeleteAsync();
+            }
+        }
+
+        [TestMethod]
         public async Task RecycleListItemTest()
         {
             //TestCommon.Instance.Mocking = false;
