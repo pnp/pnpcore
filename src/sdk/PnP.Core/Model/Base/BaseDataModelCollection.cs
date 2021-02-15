@@ -152,7 +152,7 @@ namespace PnP.Core.Model
         /// <returns>Model entity</returns>
         public TModel CreateNew()
         {
-            TModel newModel = (TModel)EntityManager.GetEntityConcreteInstance<TModel>(typeof(TModel), this);
+            TModel newModel = (TModel)EntityManager.GetEntityConcreteInstance(typeof(TModel), this);
             (newModel as IDataModelWithContext).PnPContext = PnPContext;
             return newModel;
         }
@@ -677,7 +677,7 @@ namespace PnP.Core.Model
             else
             {
                 // Create a concrete entity of what we expect to delete (e.g. for Lists this is List)
-                concreteEntity = EntityManager.GetEntityConcreteInstance<TModel>(typeof(TModel), Parent);
+                concreteEntity = EntityManager.GetEntityConcreteInstance(typeof(TModel), Parent);
                 (concreteEntity as BaseDataModel<TModel>).PnPContext = PnPContext;
 
                 // Ensure the key property of the created model is populated

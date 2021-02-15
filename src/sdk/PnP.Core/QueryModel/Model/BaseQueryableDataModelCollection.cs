@@ -43,7 +43,7 @@ namespace PnP.Core.QueryModel
         // Provides the IEnumerable<T> implementation
         public override IEnumerator<TModel> GetEnumerator()
         {
-            if (provider != null && Expression != null && !Requested)
+            if (provider != null && Expression != null)
             {
                 return ((IEnumerable<TModel>)provider.Execute(Expression)).GetEnumerator();
             }
@@ -60,14 +60,7 @@ namespace PnP.Core.QueryModel
         // Provides the IEnumerable implementation
         IEnumerator IEnumerable.GetEnumerator()
         {
-            if (provider != null & Expression != null && !Requested)
-            {
-                return ((IEnumerable)provider.Execute(Expression)).GetEnumerator();
-            }
-            else
-            {
-                return ((IEnumerable)items).GetEnumerator();
-            }
+            return GetEnumerator();
         }
 
         #endregion
@@ -76,7 +69,7 @@ namespace PnP.Core.QueryModel
 
         public IAsyncEnumerator<TModel> GetAsyncEnumerator(CancellationToken cancellationToken = default)
         {
-            if (provider != null & Expression != null && !Requested)
+            if (provider != null & Expression != null)
             {
                 return provider.ExecuteAsync<IAsyncEnumerable<TModel>>(Expression, cancellationToken).GetAsyncEnumerator(cancellationToken);
             }
