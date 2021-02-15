@@ -73,6 +73,9 @@ namespace PnP.Core.Test.Base
                 dynamic dynamicItem = item;
                 Assert.IsTrue(dynamicItem.ContentType == "Item");
                 Assert.IsTrue(dynamicItem["ContentType"] == "Item");
+
+                // Cleanup
+                await myList.DeleteAsync();
             }
         }
 
@@ -126,6 +129,9 @@ namespace PnP.Core.Test.Base
                 dynamic dynamicItem = item;
                 Assert.IsTrue(dynamicItem.ContentType == "Item");
                 Assert.IsTrue(dynamicItem["ContentType"] == "Item");
+
+                // Cleanup
+                await myList.DeleteAsync();
             }
         }
 
@@ -188,6 +194,9 @@ namespace PnP.Core.Test.Base
                 dynamic dynamicItem = item;
                 Assert.IsTrue(dynamicItem.ContentType == "Item");
                 Assert.IsTrue(dynamicItem["ContentType"] == "Item");
+
+                // Cleanup
+                await myList.DeleteAsync();
             }
         }
 
@@ -250,6 +259,9 @@ namespace PnP.Core.Test.Base
                 dynamic dynamicItem = item;
                 Assert.IsTrue(dynamicItem.ContentType == "Item");
                 Assert.IsTrue(dynamicItem["ContentType"] == "Item");
+
+                // Cleanup
+                await myList.DeleteAsync();
             }
         }
 
@@ -305,6 +317,8 @@ namespace PnP.Core.Test.Base
                     var item = await myList.Items.AddAsync(null);
                 });
 
+                // Cleanup
+                await myList.DeleteAsync();
             }
         }
         #endregion
