@@ -12,9 +12,6 @@ namespace PnP.Core.Services
     internal static class TestManager
     {
         private const string MockFolder = "MockData";
-        private const string TestSite = "TestSite";
-        private const string TestSubSite = "TestSubSite";
-        private const string NoGroupTestSite = "NoGroupTestSite";
 
         /// <summary>
         /// Record a the request for a future mock use
@@ -77,18 +74,6 @@ namespace PnP.Core.Services
                 response.CopyTo(memStream);
                 File.WriteAllBytes(fileName, memStream.ToArray());
             }
-        }
-
-        /// <summary>
-        /// Verifies if mock data is already available for the current request
-        /// </summary>
-        /// <param name="context">Current PnPContext</param>
-        /// <param name="requestKey">Key we used to calculate the hash, used to identify the response to return</param>
-        /// <returns>Returns true if the response from the mock is available</returns>
-        internal static bool IsMockAvailable(PnPContext context, string requestKey)
-        {
-            string fileName = GetResponseFile(context, /*SHA256(requestKey),*/ GetOrderPrefix(requestKey));
-            return File.Exists(fileName);
         }
 
         /// <summary>
@@ -228,62 +213,6 @@ namespace PnP.Core.Services
         {
             return string.Format("{0,5:00000}", int.Parse(requestKey.Split(new string[] { "@@" }, StringSplitOptions.RemoveEmptyEntries)[0]));
         }
-
-        //private static string SHA256(string text)
-        //{
-        //    var result = default(string);
-
-        //    using (var algo = new SHA256Managed())
-        //    {
-        //        result = GenerateHashString(algo, text);
-        //    }
-
-        //    return result;
-        //}
-
-        //private static string GenerateHashString(HashAlgorithm algo, string text)
-        //{
-        //    // Compute hash from text parameter
-        //    algo.ComputeHash(Encoding.UTF8.GetBytes(text));
-
-        //    // Get has value in array of bytes
-        //    var result = algo.Hash;
-
-        //    // Return as hexadecimal string
-        //    return string.Join(
-        //        string.Empty,
-        //        result.Select(x => x.ToString("x2")));
-        //}
-
-        private static string GeneralizeRequestKey(string requestKey, PnPContext context)
-        {
-            if (string.IsNullOrEmpty(requestKey))
-            {
-                return requestKey;
-            }
-
-            // Replace TestSubSite urls
-            if (context.TestUris.ContainsKey(TestSubSite))
-            {
-                requestKey = requestKey.Replace(context.TestUris[TestSubSite].ToString(), "https://pnprocks.sharepoint.com/sites/testsite/subsite");
-                requestKey = requestKey.Replace(context.TestUris[TestSubSite].PathAndQuery, "/sites/testsite/subsite");
-            }
-            if (context.TestUris.ContainsKey(TestSite))
-            {
-                requestKey = requestKey.Replace(context.TestUris[TestSite].ToString(), "https://pnprocks.sharepoint.com/sites/testsite");
-                requestKey = requestKey.Replace(context.TestUris[TestSite].PathAndQuery, "/sites/testsite");
-            }
-            if (context.TestUris.ContainsKey(NoGroupTestSite))
-            {
-                requestKey = requestKey.Replace(context.TestUris[NoGroupTestSite].ToString(), "https://pnprocks.sharepoint.com/sites/testsitenogroup");
-                requestKey = requestKey.Replace(context.TestUris[NoGroupTestSite].PathAndQuery, "/sites/testsitenogroup");
-            }
-
-            requestKey = requestKey.Replace(context.Uri.DnsSafeHost, "pnprocks.sharepoint.com");
-
-            return requestKey;
-        }
-
     }
 }
 #endif
