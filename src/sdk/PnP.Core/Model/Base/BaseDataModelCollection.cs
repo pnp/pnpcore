@@ -727,6 +727,7 @@ namespace PnP.Core.Model
 
         public Task LoadAsync(params Expression<Func<TModel, object>>[] expressions)
         {
+            // TODO: implement calling parent LoadAsync
             //if (Parent is IDataModelLoad l)
             //{
 
@@ -737,6 +738,7 @@ namespace PnP.Core.Model
 
         public Task<IBatchResult> LoadBatchAsync(Batch batch, params Expression<Func<TModel, object>>[] expressions)
         {
+            // TODO: implement calling parent LoadAsync
             throw new NotImplementedException();
         }
 
