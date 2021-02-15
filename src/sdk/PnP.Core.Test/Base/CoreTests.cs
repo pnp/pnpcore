@@ -1,6 +1,8 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
+using System.Text;
 
 namespace PnP.Core.Test.Base
 {
@@ -60,5 +62,30 @@ namespace PnP.Core.Test.Base
                 Assert.IsTrue(result.Any());
             }
         }
+
+        [TestMethod]
+        public void StreamCopyAsStringTest()
+        {
+            string test = "Testing 1-2-3";
+
+            // convert string to stream
+            byte[] byteArray = Encoding.ASCII.GetBytes(test);
+            using (MemoryStream stream = new MemoryStream(byteArray))
+            {
+                var streamPos = stream.Position;
+                var copiedString = stream.CopyAsString();
+                Assert.AreEqual(copiedString, test);
+                Assert.IsTrue(stream.Position == streamPos);
+            }
+        }
+
+        [TestMethod]
+        public void ContainsTest()
+        {
+            Assert.IsTrue(StringExtensions.Contains("ThisIsAString", "IsA", System.StringComparison.InvariantCulture));
+            Assert.IsFalse(StringExtensions.Contains("ThisIsAString", "isa", System.StringComparison.InvariantCulture));
+            Assert.IsTrue(StringExtensions.Contains("ThisIsAString", "isa", System.StringComparison.InvariantCultureIgnoreCase));
+        }
+
     }
 }
