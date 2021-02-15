@@ -174,7 +174,7 @@ namespace PnP.Core.Services
                                 contextAwarePnPChild.PnPContext = contextAwareObject.PnPContext;
 
                                 // Recursively map properties, call the method from the actual object as the object could have overriden it
-                                await ((IDataModelGet)pnpChild).GetAsync(new ApiResponse(apiResponse.ApiCall, childJson, apiResponse.BatchRequestId)).ConfigureAwait(false);
+                                await ((IDataModelProcess)pnpChild).ProcessResponseAsync(new ApiResponse(apiResponse.ApiCall, childJson, apiResponse.BatchRequestId)).ConfigureAwait(false);
 
                                 // Check if we've marked a field to be the key field for the entities in this collection
                                 if (pnpChildIdProperty == null)
@@ -249,7 +249,7 @@ namespace PnP.Core.Services
                         // Set parent
                         ((IDataModelParent)propertyToSetValue).Parent = (IDataModelParent)pnpObject;
 
-                        await ((IDataModelGet)propertyToSetValue).GetAsync(new ApiResponse(apiResponse.ApiCall, property.Value, apiResponse.BatchRequestId)).ConfigureAwait(false);
+                        await ((IDataModelProcess)propertyToSetValue).ProcessResponseAsync(new ApiResponse(apiResponse.ApiCall, property.Value, apiResponse.BatchRequestId)).ConfigureAwait(false);
                     }
                     else // Simple property mapping
                     {
@@ -783,7 +783,7 @@ namespace PnP.Core.Services
                                 contextAwarePnPChild.PnPContext = contextAwareObject.PnPContext;
 
                                 // Recursively map properties, call the method from the actual object as the object could have overriden it
-                                await ((IDataModelGet)pnpChild).GetAsync(new ApiResponse(apiResponse.ApiCall, childJson, apiResponse.BatchRequestId)).ConfigureAwait(false);
+                                await ((IDataModelProcess)pnpChild).ProcessResponseAsync(new ApiResponse(apiResponse.ApiCall, childJson, apiResponse.BatchRequestId)).ConfigureAwait(false);
 
                                 // Check if we've marked a field to be the key field for the entities in this collection
                                 if (pnpChildIdProperty == null)
@@ -837,7 +837,7 @@ namespace PnP.Core.Services
                             // Set the batch request id property
                             SetBatchRequestId(propertyToSetValue as TransientObject, apiResponse.BatchRequestId);
 
-                            await ((IDataModelGet)propertyToSetValue).GetAsync(new ApiResponse(apiResponse.ApiCall, property.Value, apiResponse.BatchRequestId)).ConfigureAwait(false);
+                            await ((IDataModelProcess)propertyToSetValue).ProcessResponseAsync(new ApiResponse(apiResponse.ApiCall, property.Value, apiResponse.BatchRequestId)).ConfigureAwait(false);
                         }
                         else
                         {

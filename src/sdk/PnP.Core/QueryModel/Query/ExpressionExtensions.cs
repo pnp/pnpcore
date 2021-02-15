@@ -6,6 +6,12 @@ namespace System.Linq
 {
     internal static class ExpressionExtensions
     {
+
+        internal static Expression<Func<T, object>>[] CastExpressions<T>(this Expression<Func<object, object>>[] expressions)
+        {
+            return expressions.Select(e => Expression.Lambda<Func<T, object>>(e.Body, e.Parameters)).ToArray();
+        }
+
         internal static object GetConstantValue(this Expression expression)
         {
             expression = StripQuotes(expression);

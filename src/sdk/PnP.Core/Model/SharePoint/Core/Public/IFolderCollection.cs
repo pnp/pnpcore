@@ -8,7 +8,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a collection of Folder objects
     /// </summary>
     [ConcreteType(typeof(FolderCollection))]
-    public interface IFolderCollection : IQueryable<IFolder>, IDataModelCollection<IFolder>, IDataModelCollectionDeleteByGuidId
+    public interface IFolderCollection : IQueryable<IFolder>, IDataModelCollection<IFolder>, IDataModelCollectionLoad<IFolder>, IDataModelCollectionDeleteByGuidId
     {
         #region Add
 

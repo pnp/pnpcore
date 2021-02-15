@@ -8,6 +8,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using PnP.Core.Model;
+using PnP.Core.QueryModel;
 
 namespace PnP.Core.Test.Base
 {
@@ -217,13 +218,13 @@ namespace PnP.Core.Test.Base
                 // The 2 individual loads should have been merged to a single loaded list
                 Assert.IsTrue(siteAssetsCount.Count() == 1);
                 // The properties from both loads should available on the first loaded model
-                Assert.IsTrue(list1.IsPropertyAvailable(p => p.Title));
-                Assert.IsTrue(list1.IsPropertyAvailable(p => p.NoCrawl));
+                Assert.IsTrue(list1.Result.IsPropertyAvailable(p => p.Title));
+                Assert.IsTrue(list1.Result.IsPropertyAvailable(p => p.NoCrawl));
 
-                Assert.IsTrue(list1.IsPropertyAvailable(p => p.EnableVersioning));
-                Assert.IsTrue(list1.IsPropertyAvailable(p => p.Items));
+                Assert.IsTrue(list1.Result.IsPropertyAvailable(p => p.EnableVersioning));
+                Assert.IsTrue(list1.Result.IsPropertyAvailable(p => p.Items));
                 // Site Assets should have items
-                Assert.IsTrue(list1.Items.Count() > 0);
+                Assert.IsTrue(list1.Result.Items.Count() > 0);
             }
         }
 

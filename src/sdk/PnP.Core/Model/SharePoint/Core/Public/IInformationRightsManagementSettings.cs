@@ -6,7 +6,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a InformationRightsManagementSettings object
     /// </summary>
     [ConcreteType(typeof(InformationRightsManagementSettings))]
-    public interface IInformationRightsManagementSettings : IDataModel<IInformationRightsManagementSettings>, IDataModelGet<IInformationRightsManagementSettings>
+    public interface IInformationRightsManagementSettings : IDataModel<IInformationRightsManagementSettings>, IDataModelGet<IInformationRightsManagementSettings>, IDataModelLoad<IInformationRightsManagementSettings>
     {
 
         /// <summary>

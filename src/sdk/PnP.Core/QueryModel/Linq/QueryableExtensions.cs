@@ -17,12 +17,6 @@ namespace PnP.Core.QueryModel
     public static class QueryableExtensions
     {
 
-        public static T Load<T>(this T source, params Expression<Func<T, object>>[] expressions)
-        {
-            // TODO: to move into BaseDataModel
-            return source;
-        }
-
         #region Batch
 
         /// <summary>
@@ -554,7 +548,7 @@ namespace PnP.Core.QueryModel
         private static TResult ExecuteAsync<TSource, TResult>(
             MethodInfo operatorMethodInfo,
             IQueryable<TSource> source,
-            Expression? expression,
+            Expression expression,
             CancellationToken cancellationToken = default)
         {
             // Create a typed version of the method

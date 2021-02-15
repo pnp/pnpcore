@@ -236,7 +236,7 @@ namespace PnP.Core.Model.SharePoint
 
         internal async Task<ITerm> GetByIdAsync(string id, params Expression<Func<ITerm, object>>[] expressions)
         {
-            await BaseGet(apiOverride: GetByIdApiCall(id), fromJsonCasting: MappingHandler, postMappingJson: PostMappingHandler, expressions: expressions).ConfigureAwait(false);
+            await BaseRetrieveAsync(apiOverride: GetByIdApiCall(id), fromJsonCasting: MappingHandler, postMappingJson: PostMappingHandler, expressions: expressions).ConfigureAwait(false);
 
             return this;
         }
