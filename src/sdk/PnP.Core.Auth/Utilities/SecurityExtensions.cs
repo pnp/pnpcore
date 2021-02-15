@@ -30,16 +30,7 @@ namespace PnP.Core.Auth
             byte[] encoded = Encoding.UTF8.GetBytes(stringToEncrypt);
             byte[] encrypted;
 
-            try
-            {
-                encrypted = X509CertificateUtility.Encrypt(encoded, true, certificate);
-            }
-#pragma warning disable CA1031 // Do not catch general exception types
-            catch (Exception)
-#pragma warning restore CA1031 // Do not catch general exception types
-            {
-                return string.Empty;
-            }
+            encrypted = X509CertificateUtility.Encrypt(encoded, certificate);
 
             string encryptedString = Convert.ToBase64String(encrypted);
             return encryptedString;
@@ -62,18 +53,9 @@ namespace PnP.Core.Auth
 
             byte[] encrypted;
             byte[] decrypted;
-            encrypted = Convert.FromBase64String(stringToDecrypt);
 
-            try
-            {
-                decrypted = X509CertificateUtility.Decrypt(encrypted, true, certificate);
-            }
-#pragma warning disable CA1031 // Do not catch general exception types
-            catch (Exception)
-#pragma warning restore CA1031 // Do not catch general exception types
-            {
-                return string.Empty;
-            }
+            encrypted = Convert.FromBase64String(stringToDecrypt);
+            decrypted = X509CertificateUtility.Decrypt(encrypted, certificate);
 
             string decryptedString = Encoding.UTF8.GetString(decrypted);
             return decryptedString;
