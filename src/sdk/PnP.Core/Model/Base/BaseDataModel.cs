@@ -148,8 +148,6 @@ namespace PnP.Core.Model
             ApiCall apiOverride,
             params Expression<Func<TModel, object>>[] expressions)
         {
-            batch ??= PnPContext.CurrentBatch;
-
             // Create a new object without a parent
             var newDataModel = (BaseDataModel<TModel>)EntityManager.GetEntityConcreteInstance<TModel>(this.GetType(), null, this.PnPContext.Clone());
             var batchResult = await newDataModel.BaseBatchRetrieveAsync(batch, fromJsonCasting: MappingHandler, postMappingJson: PostMappingHandler, expressions: expressions).ConfigureAwait(false);
@@ -193,7 +191,7 @@ namespace PnP.Core.Model
         {
             var newExpressions = expressions.CastExpressions<TModel>();
 
-            return await BaseBatchRetrieveAsync(batch, expressions: newExpressions);
+            return await BaseBatchRetrieveAsync(batch, expressions: newExpressions).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -204,7 +202,7 @@ namespace PnP.Core.Model
         /// <returns>The Domain Model object</returns>
         public virtual async Task<IBatchResult> LoadBatchAsync(Batch batch, params Expression<Func<TModel, object>>[] expressions)
         {
-            return await BaseBatchRetrieveAsync(batch, default, MappingHandler, PostMappingHandler, expressions);
+            return await BaseBatchRetrieveAsync(batch, default, MappingHandler, PostMappingHandler, expressions).ConfigureAwait(false);
         }
 
         #endregion
@@ -522,6 +520,7 @@ namespace PnP.Core.Model
 
             fromJsonCasting ??= MappingHandler;
             postMappingJson ??= PostMappingHandler;
+            batch ??= PnPContext.CurrentBatch;
 
             // Get entity information for the entity to load
             var entityInfo = GetClassInfo(expressions);
@@ -531,8 +530,7 @@ namespace PnP.Core.Model
             if (api.Cancelled)
             {
                 ApiCancellationMessage(api);
-                // TODO: return result
-                return null;
+                return BatchSingleResult<TModel>.None;
             }
 
             // Also try to build the rest equivalent, this will be used in case we encounter mixed rest/graph batches
@@ -544,7 +542,7 @@ namespace PnP.Core.Model
                 apiRestBackup = await QueryClient.BuildGetAPICallAsync(this, entityInfo, apiOverride, true).ConfigureAwait(false);
             }
 
-            batch.Add(this, entityInfo, HttpMethod.Get, api.ApiCall, apiRestBackup.ApiCall, fromJsonCasting, postMappingJson, "GetBatch");
+            Guid batchRequestId = batch.Add(this, entityInfo, HttpMethod.Get, api.ApiCall, apiRestBackup.ApiCall, fromJsonCasting, postMappingJson, "GetBatch");
 
             // The domain model for Graph can have non expandable collections, hence these require an additional API call to populate. 
             // Let's ensure these additional API calls's are included in a single batch
@@ -553,8 +551,7 @@ namespace PnP.Core.Model
                 await QueryClient.AddGraphBatchRequestsForNonExpandableCollectionsAsync(this, batch, entityInfo, expressions, fromJsonCasting, postMappingJson).ConfigureAwait(false);
             }
 
-            // TODO: return result
-            return null;
+            return new BatchSingleResult<TModel>(batch, batchRequestId);
         }
 
         private void ApiCancellationMessage(ApiCallRequest api)
