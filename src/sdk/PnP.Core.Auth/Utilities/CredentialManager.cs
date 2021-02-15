@@ -25,7 +25,7 @@ namespace PnP.Core.Auth
 
         internal static bool AddCredential(string name, string username, string password, bool overwrite)
         {
-            using (var securePassword = StringToSecureString(password))
+            using (var securePassword = password.ToSecureString())
             {
                 if (OperatingSystem.IsWindows())
                 {
@@ -71,20 +71,10 @@ namespace PnP.Core.Auth
 #pragma warning restore CA2000 // Dispose objects before losing scope
                 var cred = critCred.GetCredential();
                 var username = cred.UserName;
-                var securePassword = StringToSecureString(cred.CredentialBlob);
+                var securePassword = cred.CredentialBlob.ToSecureString();
                 return new NetworkCredential(username, securePassword);
             }
             return null;
-        }
-
-        internal static SecureString StringToSecureString(string inputString)
-        {
-            return new NetworkCredential("", inputString).SecurePassword;
-        }
-
-        internal static string SecureStringToString(SecureString value)
-        {
-            return new NetworkCredential("", value).Password;
         }
 
         private static void WriteWindowsCredentialManagerEntry(string applicationName, string userName, SecureString securePassword, bool overwrite)
@@ -108,7 +98,7 @@ namespace PnP.Core.Auth
 
             if (doWrite)
             {
-                var password = SecureStringToString(securePassword);
+                var password = securePassword.ToInsecureString();
 
                 byte[] byteArray = password == null ? null : Encoding.Unicode.GetBytes(password);
                 if (Environment.OSVersion.Version < new Version(6, 1))
@@ -151,7 +141,7 @@ namespace PnP.Core.Auth
 
         private static void WriteMacOSKeyChainEntry(string applicationName, string username, SecureString password, bool overwrite)
         {
-            var pw = SecureStringToString(password);
+            var pw = password.ToInsecureString();
             var cmd = $"/usr/bin/security add-generic-password -a '{username}' -w '{pw}' -s '{applicationName}'";
             if (overwrite)
             {
@@ -182,7 +172,7 @@ namespace PnP.Core.Auth
             }
             if (!string.IsNullOrEmpty(username) && !string.IsNullOrEmpty(password))
             {
-                return new NetworkCredential(username, StringToSecureString(password));
+                return new NetworkCredential(username, password.ToSecureString());
             }
             return null;
         }

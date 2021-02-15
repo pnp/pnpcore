@@ -18,22 +18,23 @@ namespace PnP.Core.Auth.Test.Base
         [TestMethod]
         public void SecureStringTest()
         {
-            var secureString = CredentialManager.StringToSecureString("I'm a secure string");
+            var secureString = "I'm a secure string".ToSecureString();
             Assert.IsTrue(secureString != null);
             Assert.IsTrue(secureString.Length > 0);
-            var insecureString = CredentialManager.SecureStringToString(secureString);
+            var insecureString = secureString.ToInsecureString();
             Assert.IsTrue(insecureString == "I'm a secure string");
 
-            var secureString2 = CredentialManager.StringToSecureString("");
+            var secureString2 = "".ToSecureString();
             Assert.IsTrue(secureString2 != null);
             Assert.IsTrue(secureString2.Length == 0);
-            var insecureString2 = CredentialManager.SecureStringToString(secureString2);
+            var insecureString2 = secureString2.ToInsecureString();
             Assert.IsTrue(insecureString2 == "");
 
-            var secureString3 = CredentialManager.StringToSecureString(null);
+            string string3 = null;
+            var secureString3 = string3.ToSecureString();
             Assert.IsTrue(secureString3 != null);
             Assert.IsTrue(secureString3.Length == 0);
-            var insecureString3 = CredentialManager.SecureStringToString(secureString3);
+            var insecureString3 = secureString3.ToInsecureString();
             Assert.IsTrue(insecureString3 == "");
         }
 

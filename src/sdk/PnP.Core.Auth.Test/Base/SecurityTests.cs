@@ -69,13 +69,6 @@ namespace PnP.Core.Auth.Test.Base
         }
 
         [TestMethod]
-        public void SecurityExtSecureEmptyStringTest()
-        {
-            var sampleText = "";
-            Assert.ThrowsException<ArgumentException>(() => sampleText.ToSecureString());
-        }
-
-        [TestMethod]
         public void SecurityExtDecryptFailTest()
         {
             var result = "decryptthisstring".Decrypt("3e69491285a9a26efea5c3aeddc75b0148040000"); //Fake
