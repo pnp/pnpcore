@@ -119,7 +119,7 @@ namespace PnP.Core.Model
         public virtual async Task<TModel> GetAsync(params Expression<Func<TModel, object>>[] expressions)
         {
             // Create a new object without a parent
-            var newDataModel = (BaseDataModel<TModel>)EntityManager.GetEntityConcreteInstance<TModel>(this.GetType(), null);
+            var newDataModel = (BaseDataModel<TModel>)EntityManager.GetEntityConcreteInstance<TModel>(this.GetType(), null, this.PnPContext.Clone());
             await newDataModel.BaseRetrieveAsync(expressions: expressions).ConfigureAwait(false);
 
             return (TModel)(object)newDataModel;
@@ -151,7 +151,7 @@ namespace PnP.Core.Model
             batch ??= PnPContext.CurrentBatch;
 
             // Create a new object without a parent
-            var newDataModel = (BaseDataModel<TModel>)EntityManager.GetEntityConcreteInstance<TModel>(this.GetType(), null);
+            var newDataModel = (BaseDataModel<TModel>)EntityManager.GetEntityConcreteInstance<TModel>(this.GetType(), null, this.PnPContext.Clone());
             var batchResult = await newDataModel.BaseBatchRetrieveAsync(batch, fromJsonCasting: MappingHandler, postMappingJson: PostMappingHandler, expressions: expressions).ConfigureAwait(false);
 
             return batchResult;
