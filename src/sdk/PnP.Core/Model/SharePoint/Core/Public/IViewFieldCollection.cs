@@ -4,7 +4,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a ViewFieldCollection object
     /// </summary>
     [ConcreteType(typeof(ViewFieldCollection))]
-    public interface IViewFieldCollection : IDataModel<IViewFieldCollection>, IDataModelUpdate, IDataModelDelete
+    public interface IViewFieldCollection : IDataModel<IViewFieldCollection>, IDataModelCollectionLoad<IViewFieldCollection>, IDataModelUpdate, IDataModelDelete
     {
 
         #region New properties

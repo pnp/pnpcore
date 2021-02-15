@@ -316,7 +316,7 @@ namespace PnP.Core.Model.SharePoint
 
         #region Delete
 
-        internal override Task BaseBatchDeleteAsync(Batch batch, Func<FromJson, object> fromJsonCasting = null, Action<string> postMappingJson = null)
+        internal override Task BaseDeleteBatchAsync(Batch batch, Func<FromJson, object> fromJsonCasting = null, Action<string> postMappingJson = null)
         {
             // Throw an exception to clarify that batch web delete is not supported
             throw new ClientException(ErrorType.Unsupported, PnPCoreResources.Exception_Unsupported_WebDeleteIsInteractive);
@@ -358,7 +358,7 @@ namespace PnP.Core.Model.SharePoint
                 Parent = this
             };
 
-            await folder.BaseGet(apiOverride: BuildGetFolderByRelativeUrlApiCall(serverRelativeUrl), fromJsonCasting: folder.MappingHandler, postMappingJson: folder.PostMappingHandler, expressions: expressions).ConfigureAwait(false);
+            await folder.BaseRetrieveAsync(apiOverride: BuildGetFolderByRelativeUrlApiCall(serverRelativeUrl), fromJsonCasting: folder.MappingHandler, postMappingJson: folder.PostMappingHandler, expressions: expressions).ConfigureAwait(false);
 
             return folder;
         }
@@ -377,7 +377,7 @@ namespace PnP.Core.Model.SharePoint
                 Parent = this
             };
 
-            await folder.BaseBatchGetAsync(batch, apiOverride: BuildGetFolderByRelativeUrlApiCall(serverRelativeUrl), fromJsonCasting: folder.MappingHandler, postMappingJson: folder.PostMappingHandler, expressions: expressions).ConfigureAwait(false);
+            await folder.BaseBatchRetrieveAsync(batch, apiOverride: BuildGetFolderByRelativeUrlApiCall(serverRelativeUrl), fromJsonCasting: folder.MappingHandler, postMappingJson: folder.PostMappingHandler, expressions: expressions).ConfigureAwait(false);
 
             return folder;
         }
@@ -416,7 +416,7 @@ namespace PnP.Core.Model.SharePoint
                 Parent = this
             };
 
-            await folder.BaseGet(apiOverride: BuildGetFolderByIdApiCall(folderId), fromJsonCasting: folder.MappingHandler, postMappingJson: folder.PostMappingHandler, expressions: expressions).ConfigureAwait(false);
+            await folder.BaseRetrieveAsync(apiOverride: BuildGetFolderByIdApiCall(folderId), fromJsonCasting: folder.MappingHandler, postMappingJson: folder.PostMappingHandler, expressions: expressions).ConfigureAwait(false);
 
             return folder;
         }
@@ -435,7 +435,7 @@ namespace PnP.Core.Model.SharePoint
                 Parent = this
             };
 
-            await folder.BaseBatchGetAsync(batch, apiOverride: BuildGetFolderByIdApiCall(folderId), fromJsonCasting: folder.MappingHandler, postMappingJson: folder.PostMappingHandler, expressions: expressions).ConfigureAwait(false);
+            await folder.BaseBatchRetrieveAsync(batch, apiOverride: BuildGetFolderByIdApiCall(folderId), fromJsonCasting: folder.MappingHandler, postMappingJson: folder.PostMappingHandler, expressions: expressions).ConfigureAwait(false);
 
             return folder;
         }
@@ -479,7 +479,7 @@ namespace PnP.Core.Model.SharePoint
                 Parent = this
             };
 
-            await file.BaseGet(apiOverride: BuildGetFileByRelativeUrlApiCall(serverRelativeUrl), fromJsonCasting: file.MappingHandler, postMappingJson: file.PostMappingHandler, expressions: expressions).ConfigureAwait(false);
+            await file.BaseRetrieveAsync(apiOverride: BuildGetFileByRelativeUrlApiCall(serverRelativeUrl), fromJsonCasting: file.MappingHandler, postMappingJson: file.PostMappingHandler, expressions: expressions).ConfigureAwait(false);
             return file;
         }
 
@@ -502,7 +502,7 @@ namespace PnP.Core.Model.SharePoint
                 Parent = this
             };
 
-            await file.BaseBatchGetAsync(batch, apiOverride: BuildGetFileByRelativeUrlApiCall(serverRelativeUrl), fromJsonCasting: file.MappingHandler, postMappingJson: file.PostMappingHandler, expressions: expressions).ConfigureAwait(false);
+            await file.BaseBatchRetrieveAsync(batch, apiOverride: BuildGetFileByRelativeUrlApiCall(serverRelativeUrl), fromJsonCasting: file.MappingHandler, postMappingJson: file.PostMappingHandler, expressions: expressions).ConfigureAwait(false);
             return file;
         }
 

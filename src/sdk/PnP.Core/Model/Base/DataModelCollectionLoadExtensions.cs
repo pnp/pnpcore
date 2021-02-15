@@ -6,18 +6,18 @@ using System.Threading.Tasks;
 namespace PnP.Core.Model
 {
     /// <summary>
-    /// Extension methods for <see cref="IDataModelLoad"/>
+    /// Extension methods for <see cref="IDataModelCollectionLoad{TModel}"/>
     /// </summary>
-    public static class DataModelLoadExtensions
+    public static class DataModelCollectionLoadExtensions
     {
 
         /// <summary>
-        /// Batches the load of a Domain Model object from the remote data source, eventually selecting custom properties or using a default set of properties
+        /// Batches the load of the list from the remote data source, eventually selecting custom properties or using a default set of properties
         /// </summary>
         /// <param name="dataModelLoad"></param>
         /// <param name="expressions">The properties to select</param>
         /// <returns>The Domain Model object</returns>
-        public static Task<IBatchResult> LoadBatchAsync<TModel>(this IDataModelLoad<TModel> dataModelLoad, params Expression<Func<TModel, object>>[] expressions)
+        public static Task<IBatchResult> LoadBatchAsync<TModel>(this IDataModelCollectionLoad<TModel> dataModelLoad, params Expression<Func<TModel, object>>[] expressions)
         {
             if (dataModelLoad == null)
             {
@@ -28,13 +28,13 @@ namespace PnP.Core.Model
         }
 
         /// <summary>
-        /// Batches the load of a Domain Model object from the remote data source, eventually selecting custom properties or using a default set of properties
+        /// Batches the load of the list from the remote data source, eventually selecting custom properties or using a default set of properties
         /// </summary>
         /// <param name="dataModelLoad"></param>
         /// <param name="batch">Batch add this request to</param>
         /// <param name="expressions">The properties to select</param>
         /// <returns>The Domain Model object</returns>
-        public static IBatchResult LoadBatch<TModel>(this IDataModelLoad<TModel> dataModelLoad, Batch batch, params Expression<Func<TModel, object>>[] expressions)
+        public static IBatchResult LoadBatch<TModel>(this IDataModelCollectionLoad<TModel> dataModelLoad, Batch batch, params Expression<Func<TModel, object>>[] expressions)
         {
             if (dataModelLoad == null)
             {
@@ -45,12 +45,12 @@ namespace PnP.Core.Model
         }
 
         /// <summary>
-        /// Batches the load of a Domain Model object from the remote data source, eventually selecting custom properties or using a default set of properties
+        /// Batches the load of the list from the remote data source, eventually selecting custom properties or using a default set of properties
         /// </summary>
         /// <param name="dataModelLoad"></param>
         /// <param name="expressions">The properties to select</param>
         /// <returns>The Domain Model object</returns>
-        public static IBatchResult LoadBatch<TModel>(this IDataModelLoad<TModel> dataModelLoad, params Expression<Func<TModel, object>>[] expressions)
+        public static IBatchResult LoadBatch<TModel>(this IDataModelCollectionLoad<TModel> dataModelLoad, params Expression<Func<TModel, object>>[] expressions)
         {
             if (dataModelLoad == null)
             {
@@ -62,12 +62,12 @@ namespace PnP.Core.Model
 
 
         /// <summary>
-        /// Loads a Domain Model object from the remote data source, eventually selecting custom properties or using a default set of properties
+        /// Loads the list from the remote data source, eventually selecting custom properties or using a default set of properties
         /// </summary>
         /// <param name="dataModelLoad"></param>
         /// <param name="expressions">The properties to select</param>
         /// <returns>The Domain Model object</returns>
-        public static void Load<TModel>(this IDataModelLoad<TModel> dataModelLoad, params Expression<Func<TModel, object>>[] expressions)
+        public static void Load<TModel>(this IDataModelCollectionLoad<TModel> dataModelLoad, params Expression<Func<TModel, object>>[] expressions)
         {
             if (dataModelLoad == null)
             {
@@ -77,17 +77,5 @@ namespace PnP.Core.Model
             dataModelLoad.LoadAsync(expressions).GetAwaiter().GetResult();
         }
 
-
-        /// <summary>
-        /// Loads a Domain Model object from the remote data source, eventually selecting custom properties or using a default set of properties
-        /// </summary>
-        /// <param name="dataModel"></param>
-        /// <param name="expressions">The properties to select</param>
-        /// <returns>The Domain Model object</returns>
-        public static IDataModelLoad<TModel> QueryProperties<TModel>(this IDataModelLoad<TModel> dataModel, params Expression<Func<TModel, object>>[] expressions)
-        {
-            // TODO: message from resources
-            throw new InvalidOperationException("This function can be called from a LINQ query only");
-        }
     }
 }

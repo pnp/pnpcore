@@ -6,7 +6,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a View object
     /// </summary>
     [ConcreteType(typeof(View))]
-    public interface IView : IDataModel<IView>, IDataModelGet<IView>, IDataModelUpdate, IDataModelDelete
+    public interface IView : IDataModel<IView>, IDataModelGet<IView>, IDataModelLoad<IView>, IDataModelUpdate, IDataModelDelete
     {
         #region Properties
 

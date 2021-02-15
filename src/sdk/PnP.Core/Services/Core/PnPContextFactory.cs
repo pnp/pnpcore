@@ -272,7 +272,7 @@ namespace PnP.Core.Services
             context.Uri = context.Web.Url;
 
             // Request the Site Id
-            await context.Site.GetAsync(p => p.Id, p=>p.GroupId).ConfigureAwait(false);
+            await context.Site.LoadAsync(p => p.Id, p=>p.GroupId).ConfigureAwait(false);
 
             // Ensure the Graph ID is set
             (context.Web as IMetadataExtensible).Metadata.Add(PnPConstants.MetaDataGraphId, $"{context.Uri.DnsSafeHost},{context.Site.Id},{context.Web.Id}");

@@ -29,7 +29,7 @@ namespace PnP.Core.Test.SharePoint
                 IContentType contentType = (from ct in context.Web.ContentTypes
                                             where ct.Name == "Document"
                                             select ct)
-                                            .Query(ct => ct.FieldLinks)
+                                            .QueryProperties(ct => ct.FieldLinks)
                                             .FirstOrDefault();
 
                 Assert.IsTrue(contentType.FieldLinks.Count() > 0);
@@ -57,7 +57,7 @@ namespace PnP.Core.Test.SharePoint
                 IContentType contentType = (from ct in context.Web.Lists.GetByTitle("Documents").ContentTypes
                                             where ct.Name == "Document"
                                             select ct)
-                                            .Query(ct => ct.FieldLinks)
+                                            .QueryProperties(ct => ct.FieldLinks)
                                             .FirstOrDefault();
 
                 Assert.IsTrue(contentType.FieldLinks.Count() > 0);

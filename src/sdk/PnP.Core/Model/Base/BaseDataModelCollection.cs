@@ -15,7 +15,7 @@ namespace PnP.Core.Model
     /// <summary>
     /// Base abstract class for every Domain Model objects collection
     /// </summary>
-    internal abstract class BaseDataModelCollection<TModel> : IDataModelCollection<TModel>, IManageableCollection<TModel>, ISupportPaging<TModel>, IMetadataExtensible
+    internal abstract class BaseDataModelCollection<TModel> : IDataModelCollection<TModel>, IManageableCollection<TModel>, ISupportPaging<TModel>, IMetadataExtensible, IDataModelCollectionLoad<TModel>
     {
         #region Core properties
 
@@ -722,5 +722,20 @@ namespace PnP.Core.Model
         {
         }
         #endregion
+
+        #region Load
+
+        public Task LoadAsync(params Expression<Func<TModel, object>>[] expressions)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IBatchResult> LoadBatchAsync(Batch batch, params Expression<Func<TModel, object>>[] expressions)
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion
+
     }
 }

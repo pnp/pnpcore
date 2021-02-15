@@ -242,21 +242,29 @@ namespace PnP.Core.Model
         /// </summary>
         /// <param name="type">The reference model type, can be an interface or a class</param>
         /// <param name="parent">Parent of the domain model object, optional</param>
+        /// <param name="context">The PnPContext to attach to the newly created item</param>
         /// <returns>Entity model class describing this model instance</returns>
-        internal static object GetEntityConcreteInstance<TModel>(Type type, IDataModelParent parent = null)
+        internal static object GetEntityConcreteInstance<TModel>(Type type, IDataModelParent parent = null, PnPContext context = null)
         {
             if (type is null)
             {
                 throw new ArgumentNullException(nameof(type));
             }
 
+            // Create the object instance
             type = GetEntityConcreteType(type);
-
             var result = (TModel)Activator.CreateInstance(type);
 
-            if (result is IDataModelParent modelWithParent)
+            // Set the parent, if any
+            if (parent != null && result is IDataModelParent modelWithParent)
             {
                 modelWithParent.Parent = parent;
+            }
+
+            // Set the PnPContext, if any
+            if (context != null && result is IDataModelWithContext modelWithContext)
+            {
+                modelWithContext.PnPContext = context;
             }
 
             return result;

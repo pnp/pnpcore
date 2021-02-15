@@ -263,10 +263,9 @@ namespace PnP.Core.Model.SharePoint
             return new ApiCall($"_api/web/lists/getbytitle('{title}')", ApiType.SPORest);
         }
 
-        internal async Task<IList> BatchGetByTitleAsync(Batch batch, string title, params Expression<Func<IList, object>>[] expressions)
+        internal Task<IBatchSingleResult<IList>> BatchGetByTitleAsync(Batch batch, string title, params Expression<Func<IList, object>>[] expressions)
         {
-            await BaseBatchGetAsync(batch, apiOverride: GetByTitleApiCall(title), fromJsonCasting: MappingHandler, postMappingJson: PostMappingHandler, expressions: expressions).ConfigureAwait(false);
-            return this;
+            return GetBatchAsync(batch, apiOverride: GetByTitleApiCall(title), expressions: expressions);
         }
         #endregion
 
@@ -626,7 +625,7 @@ namespace PnP.Core.Model.SharePoint
         {
             await EnsurePropertiesAsync(l => l.RoleAssignments).ConfigureAwait(false);
             var roleAssignment = await RoleAssignments
-                .Query(r => r.RoleDefinitions)
+                .QueryProperties(r => r.RoleDefinitions)
                 .FirstOrDefaultAsync(p => p.PrincipalId == principalId)
                 .ConfigureAwait(false);
             return roleAssignment?.RoleDefinitions;

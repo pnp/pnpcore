@@ -405,7 +405,7 @@ namespace PnP.Core.Test.Base
         [TestMethod]
         public async Task GetTeamExpressionExpandableKeyPropertyPlusLoad()
         {
-            var requests = await GetAPICallTestAsync(BuildModel<TermStore, ITermStore>(new Expression<Func<ITermStore, object>>[] { p => p.Id, p => p.Groups.Query(
+            var requests = await GetAPICallTestAsync(BuildModel<TermStore, ITermStore>(new Expression<Func<ITermStore, object>>[] { p => p.Id, p => p.Groups.QueryProperties(
                 p=>p.Name )
             }));
             Assert.IsTrue(requests.Count == 2);

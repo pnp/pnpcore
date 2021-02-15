@@ -17,12 +17,6 @@ namespace PnP.Core.QueryModel
     public static class QueryableExtensions
     {
 
-        public static T Load<T>(this T source, params Expression<Func<T, object>>[] expressions)
-        {
-            // TODO: to move into BaseDataModel
-            return source;
-        }
-
         #region Batch
 
         /// <summary>
@@ -58,7 +52,7 @@ namespace PnP.Core.QueryModel
         /// <param name="source">The collection of items to load the field/metadata from</param>
         /// <param name="selectors">A selector for a field/metadata</param>
         /// <returns>The resulting collection</returns>
-        public static ISupportQuery<TResult> Query<TResult>(
+        public static ISupportQuery<TResult> QueryProperties<TResult>(
             this ISupportQuery<TResult> source, params Expression<Func<TResult, object>>[] selectors)
         {
             // TODO: localize message
@@ -72,7 +66,7 @@ namespace PnP.Core.QueryModel
         /// <param name="source">The collection of items to load the field/metadata from</param>
         /// <param name="selector">A selector for a field/metadata</param>
         /// <returns>The resulting collection</returns>
-        public static IQueryable<TResult> Query<TResult>(
+        public static IQueryable<TResult> QueryProperties<TResult>(
             this IQueryable<TResult> source, Expression<Func<TResult, object>> selector)
         {
             if (source is null)
@@ -115,7 +109,7 @@ namespace PnP.Core.QueryModel
 
             foreach (var s in selectors)
             {
-                result = result.Query(s);
+                result = result.QueryProperties(s);
             }
 
             return result;
@@ -554,7 +548,7 @@ namespace PnP.Core.QueryModel
         private static TResult ExecuteAsync<TSource, TResult>(
             MethodInfo operatorMethodInfo,
             IQueryable<TSource> source,
-            Expression? expression,
+            Expression expression,
             CancellationToken cancellationToken = default)
         {
             // Create a typed version of the method

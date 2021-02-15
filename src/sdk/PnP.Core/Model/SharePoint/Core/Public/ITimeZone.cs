@@ -4,7 +4,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a TimeZone object
     /// </summary>
     [ConcreteType(typeof(TimeZone))]
-    public interface ITimeZone : IDataModel<ITimeZone>, IDataModelGet<ITimeZone>
+    public interface ITimeZone : IDataModel<ITimeZone>, IDataModelGet<ITimeZone>, IDataModelLoad<ITimeZone>
     {
         #region Properties
 

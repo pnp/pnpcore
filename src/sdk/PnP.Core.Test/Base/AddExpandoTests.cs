@@ -48,7 +48,7 @@ namespace PnP.Core.Test.Base
                 }
 
                 // get items from the list
-                await myList.GetAsync(p => p.Items);
+                await myList.LoadAsync(p => p.Items);
 
                 int listItemCount = myList.Items.Count();
 
@@ -64,7 +64,7 @@ namespace PnP.Core.Test.Base
                 Assert.IsTrue(myList.Items.Count() == listItemCount + 1);
 
                 // Load the list again, include extra list property
-                await myList.GetAsync(p => p.Items);
+                await myList.LoadAsync(p => p.Items);
 
                 // Should still have the same amount of items
                 Assert.IsTrue(myList.Items.Count() == listItemCount + 1);
@@ -97,7 +97,7 @@ namespace PnP.Core.Test.Base
                 }
 
                 // get items from the list
-                myList.Get(p => p.Items);
+                myList.Load(p => p.Items);
 
                 int listItemCount = myList.Items.Count();
 
@@ -117,7 +117,7 @@ namespace PnP.Core.Test.Base
                 Assert.IsTrue(myList.Items.Count() == listItemCount + 1);
 
                 // Load the list again, include extra list property
-                myList.Get(p => p.Items);
+                myList.Load(p => p.Items);
 
                 // Should still have the same amount of items
                 Assert.IsTrue(myList.Items.Count() == listItemCount + 1);
@@ -139,6 +139,9 @@ namespace PnP.Core.Test.Base
                 var web = await context.Web.GetBatchAsync(batch, p => p.Lists);
                 await context.ExecuteAsync(batch);
 
+                // Check that the result of the batch async request is now available
+                Assert.IsTrue(web.IsAvailable);
+
                 string listTitle = "AddListItemViaBatchRest";
                 var myList = web.Result.Lists.FirstOrDefault(l => l.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
 
@@ -155,7 +158,7 @@ namespace PnP.Core.Test.Base
 
                 // get items from the list
                 batch = context.BatchClient.EnsureBatch();
-                await myList.GetBatchAsync(batch, p => p.Items);
+                await myList.LoadBatchAsync(batch, p => p.Items);
                 await context.ExecuteAsync(batch);
 
                 int listItemCount = myList.Items.Count();
@@ -175,7 +178,7 @@ namespace PnP.Core.Test.Base
 
                 // Load the list again, include extra list property
                 batch = context.BatchClient.EnsureBatch();
-                await myList.GetBatchAsync(batch, p => p.Items);
+                await myList.LoadBatchAsync(batch, p => p.Items);
                 await context.ExecuteAsync(batch);
 
                 // Should still have the same amount of items
@@ -198,6 +201,9 @@ namespace PnP.Core.Test.Base
                 var web = context.Web.GetBatch(batch, p => p.Lists);
                 await context.ExecuteAsync(batch);
 
+                // Check that the result of the batch request is now available
+                Assert.IsTrue(web.IsAvailable);
+
                 string listTitle = "AddListItemViaSpecificBatchNonAsyncTest";
                 var myList = web.Result.Lists.FirstOrDefault(l => l.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
 
@@ -214,7 +220,7 @@ namespace PnP.Core.Test.Base
 
                 // get items from the list
                 batch = context.BatchClient.EnsureBatch();
-                myList.GetBatch(batch, p => p.Items);
+                myList.LoadBatch(batch, p => p.Items);
                 await context.ExecuteAsync(batch);
 
                 int listItemCount = myList.Items.Count();
@@ -234,7 +240,7 @@ namespace PnP.Core.Test.Base
 
                 // Load the list again, include extra list property
                 batch = context.BatchClient.EnsureBatch();
-                await myList.GetBatchAsync(batch, p => p.Items);
+                await myList.LoadBatchAsync(batch, p => p.Items);
                 await context.ExecuteAsync(batch);
 
                 // Should still have the same amount of items
@@ -257,6 +263,9 @@ namespace PnP.Core.Test.Base
                 var web = context.Web.GetBatch(batch, p => p.Lists);
                 await context.ExecuteAsync(batch);
 
+                // Check that the result of the batch request is now available
+                Assert.IsTrue(web.IsAvailable);
+
                 string listTitle = "AddListItemViaRestExceptionTest";
                 var myList = web.Result.Lists.FirstOrDefault(l => l.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
 
@@ -273,7 +282,7 @@ namespace PnP.Core.Test.Base
 
                 // get items from the list
                 batch = context.BatchClient.EnsureBatch();
-                myList.GetBatch(batch, p => p.Items);
+                myList.LoadBatch(batch, p => p.Items);
                 await context.ExecuteAsync(batch);
 
                 int listItemCount = myList.Items.Count();
