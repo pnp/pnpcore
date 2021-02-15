@@ -48,6 +48,35 @@ namespace PnP.Core.Test.Base
             }
         }
 
+        [TestMethod]
+        public async Task TestSPOAccessTokenLive()
+        {
+            TestCommon.PnPCoreSDKTestUserSetup();
+
+            using (var context = await TestCommon.Instance.GetLiveContextAsync())
+            {
+                var accessToken = await context.AuthenticationProvider.GetAccessTokenAsync(
+                    context.Uri, new string[] { "AllSites.FullControl" }).ConfigureAwait(true);
+
+                Assert.IsNotNull(accessToken);
+            }
+        }
+
+        [TestMethod]
+        public async Task TestGraphAccessTokenLive()
+        {
+            TestCommon.PnPCoreSDKTestUserSetup();
+
+            using (var context = await TestCommon.Instance.GetLiveContextAsync())
+            {
+                var accessToken = await context.AuthenticationProvider.GetAccessTokenAsync(
+                    PnPConstants.MicrosoftGraphBaseUri,
+                    new string[] { "Group.ReadWrite.All" }).ConfigureAwait(true);
+
+                Assert.IsNotNull(accessToken);
+            }
+        }
+
         //[TestMethod]
         //public async Task TestAccessTokenAuthenticationProvider()
         //{
