@@ -417,7 +417,7 @@ namespace PnP.Core.Model
             }
             else if (expression.Body is MethodCallExpression)
             {
-                if ((expression.Body as MethodCallExpression).Method.Name == "Load")
+                if ((expression.Body as MethodCallExpression).Method.Name == nameof(DataModelLoadExtensions.QueryProperties))
                 {
                     fieldToLoad = ParseInclude(entityInfo, expression, null);
                 }
@@ -469,9 +469,9 @@ namespace PnP.Core.Model
                     }
                     else if (fieldExpressionBody is MethodCallExpression)
                     {
-                        if ((fieldExpressionBody as MethodCallExpression).Method.Name == "Load")
+                        if ((fieldExpressionBody as MethodCallExpression).Method.Name == nameof(DataModelLoadExtensions.QueryProperties))
                         {
-                            var fld = ((fieldExpressionBody as MethodCallExpression).Object as MemberExpression).Member.Name;
+                            var fld = ((fieldExpressionBody as MethodCallExpression).Arguments[0] as MemberExpression).Member.Name;
                             var publicTypeRecursive = (fieldExpressionBody as MethodCallExpression).Type.GenericTypeArguments[0];
                             var entityInfoRecursive = EntityManager.Instance.GetStaticClassInfo(publicTypeRecursive);
 

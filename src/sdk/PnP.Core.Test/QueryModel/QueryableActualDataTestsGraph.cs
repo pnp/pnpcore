@@ -26,7 +26,7 @@ namespace PnP.Core.Test.QueryModel
                 context.GraphFirst = true;
 
                 var query = context.Site.AllWebs
-                            .Query(w => w.Id, w => w.Title, w => w.Description);
+                            .QueryProperties(w => w.Id, w => w.Title, w => w.Description);
 
                 Assert.ThrowsException<ClientException>(() =>
                 {
@@ -45,7 +45,7 @@ namespace PnP.Core.Test.QueryModel
 
                 var query = (from l in context.Web.Lists
                              select l)
-                            .Query(l => l.Id, l => l.Title, l => l.Description);
+                            .QueryProperties(l => l.Id, l => l.Title, l => l.Description);
 
                 var queryResult = query.ToList();
 
@@ -68,7 +68,7 @@ namespace PnP.Core.Test.QueryModel
                 var query = (from i in context.Web.Lists.GetByTitle(listName).Items
                              where i.Title == itemTitle
                              select i)
-                             .Query(l => l.Id, l => l.Title);
+                             .QueryProperties(l => l.Id, l => l.Title);
 
                 var queryResult = query.ToList();
 
@@ -110,7 +110,7 @@ namespace PnP.Core.Test.QueryModel
 
                 var actual = (from l in context.Web.Lists
                               select l)
-                             .Query(l => l.Id, l => l.Title)
+                             .QueryProperties(l => l.Id, l => l.Title)
                              .FirstOrDefault(l => l.Title == expected);
 
                 Assert.IsNotNull(actual);

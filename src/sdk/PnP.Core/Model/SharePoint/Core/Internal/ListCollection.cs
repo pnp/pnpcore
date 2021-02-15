@@ -99,7 +99,7 @@ namespace PnP.Core.Model.SharePoint
                 throw new ArgumentNullException(nameof(title));
             }
 
-            return await this.Query(selectors).FirstOrDefaultAsync(l => l.Title == title).ConfigureAwait(false);
+            return await this.QueryProperties(selectors).FirstOrDefaultAsync(l => l.Title == title).ConfigureAwait(false);
         }
 
         #endregion
@@ -124,7 +124,7 @@ namespace PnP.Core.Model.SharePoint
                 throw new ArgumentNullException(nameof(id));
             }
 
-            return await this.Query(selectors).FirstOrDefaultAsync(l => l.Id == id).ConfigureAwait(false);
+            return await this.QueryProperties(selectors).FirstOrDefaultAsync(l => l.Id == id).ConfigureAwait(false);
         }
 
         #endregion

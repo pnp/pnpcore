@@ -81,7 +81,7 @@ namespace PnP.Core.QueryModel
             return source.Provider.CreateQuery<TResult>(
                 Expression.Call(
                     null,
-                    QueryableMethods.Query.MakeGenericMethod(typeof(TResult)),
+                    QueryableMethods.QueryProperties.MakeGenericMethod(typeof(TResult)),
                     new Expression[] { source.Expression, Expression.Quote(selector) }
                 ));
         }
@@ -93,7 +93,7 @@ namespace PnP.Core.QueryModel
         /// <param name="source">The collection of items to load fields/metadata from</param>
         /// <param name="selectors">An array of selectors for the fields/metadata</param>
         /// <returns>The resulting collection</returns>
-        public static IQueryable<TResult> Query<TResult>(
+        public static IQueryable<TResult> QueryProperties<TResult>(
             this IQueryable<TResult> source, params Expression<Func<TResult, object>>[] selectors)
         {
             if (source is null)

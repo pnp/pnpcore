@@ -83,7 +83,7 @@ namespace PnP.Core.Test.QueryModel
                 // Get the whole set of lists via LINQ - shoudl use Graph and should contain the "Site Pages" system list
                 var query = (from l in context.Web.Lists
                              select l)
-                            .Query(l => l.Id, l => l.Title, l => l.Description);
+                            .QueryProperties(l => l.Id, l => l.Title, l => l.Description);
 
                 // Save the count of retrieved lists
                 var queryResult = query.ToList();
@@ -106,7 +106,7 @@ namespace PnP.Core.Test.QueryModel
 
                 var query = (from l in context.Web.Lists
                              select l)
-                            .Query(l => l.Id, l => l.Title, l => l.Description);
+                            .QueryProperties(l => l.Id, l => l.Title, l => l.Description);
 
                 var queryResult = query.ToList();
 
@@ -134,7 +134,7 @@ namespace PnP.Core.Test.QueryModel
                 // Get the whole set of lists via LINQ
                 var query = (from l in context.Web.Lists
                              select l)
-                            .Query(l => l.Id, l => l.Title, l => l.Description);
+                            .QueryProperties(l => l.Id, l => l.Title, l => l.Description);
 
                 // Save the count of retrieved lists
                 var queryResult = query.ToList();
@@ -184,7 +184,7 @@ namespace PnP.Core.Test.QueryModel
                 // Get the whole set of lists via LINQ
                 var query = (from l in context.Web.Lists
                              select l)
-                            .Query(l => l.Id, l => l.Title, l => l.Description);
+                            .QueryProperties(l => l.Id, l => l.Title, l => l.Description);
 
                 // Save the count of retrieved lists
                 var queryResult = query.ToList();
@@ -241,7 +241,7 @@ namespace PnP.Core.Test.QueryModel
                 // Get the whole set of lists via LINQ
                 var query = (from l in context.Web.Lists
                              select l)
-                            .Query(l => l.Id, l => l.Title, l => l.Description);
+                            .QueryProperties(l => l.Id, l => l.Title, l => l.Description);
 
                 // Save the count of retrieved lists
                 var queryResult = query.ToList();
@@ -311,7 +311,7 @@ namespace PnP.Core.Test.QueryModel
                 var query = (from i in sitePages.Items
                              where i.Title == expectedListItemTitle
                              select i)
-                             .Query(l => l.Id, l => l.Title);
+                             .QueryProperties(l => l.Id, l => l.Title);
 
                 var queryResult = query.ToList();
 
@@ -361,7 +361,7 @@ namespace PnP.Core.Test.QueryModel
                 // Retrieve all the list items via LINQ query
                 var query = (from i in myList.Items
                              select i)
-                             .Query(l => l.Id, l => l.Title);
+                             .QueryProperties(l => l.Id, l => l.Title);
 
                 var queryResult = query.ToList();
 
@@ -419,7 +419,7 @@ namespace PnP.Core.Test.QueryModel
                 // Retrieve all the list items via LINQ query
                 var query = (from i in myList.Items
                              select i)
-                             .Query(l => l.Id, l => l.Title);
+                             .QueryProperties(l => l.Id, l => l.Title);
 
                 var queryResult = query.ToList();
 
@@ -481,7 +481,7 @@ namespace PnP.Core.Test.QueryModel
                 // Retrieve all the list items via LINQ query
                 var query = (from i in myList.Items
                              select i)
-                             .Query(l => l.Id, l => l.Title);
+                             .QueryProperties(l => l.Id, l => l.Title);
 
                 var queryResult = query.ToList();
 
@@ -570,7 +570,7 @@ namespace PnP.Core.Test.QueryModel
                 context.GraphFirst = false;
 
                 // Get all the lists first
-                var listsQuery = context.Web.Lists.Query(l => l.Id, l => l.Title);
+                var listsQuery = context.Web.Lists.QueryProperties(l => l.Id, l => l.Title);
                 var listsQueryResult = listsQuery.ToList();
 
                 // Then try to get a specific list by title

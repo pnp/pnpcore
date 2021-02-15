@@ -816,7 +816,7 @@ namespace PnP.Core.Test.SharePoint
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                var list = await context.Web.Lists.GetByTitleAsync("Documents", p => p.Title, p => p.ListExperience, p => p.ContentTypes.Query(p => p.Id, p => p.Name));
+                var list = await context.Web.Lists.GetByTitleAsync("Documents", p => p.Title, p => p.ListExperience, p => p.ContentTypes.QueryProperties(p => p.Id, p => p.Name));
 
                 Assert.IsTrue(list.Requested);
                 Assert.AreEqual(list.Title, "documents", true);
@@ -833,8 +833,8 @@ namespace PnP.Core.Test.SharePoint
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 var list = await context.Web.Lists.GetByTitleAsync("Documents", p => p.Title, p => p.ListExperience,
-                    p => p.ContentTypes.Query(p => p.Id, p => p.Name,
-                        p => QueryableExtensions.Query(p.FieldLinks, p => p.Id, p => p.Name)));
+                    p => p.ContentTypes.QueryProperties(p => p.Id, p => p.Name,
+                        p => p.FieldLinks.QueryProperties(p => p.Id, p => p.Name)));
 
                 Assert.IsTrue(list.Requested);
                 Assert.AreEqual(list.Title, "documents", true);
@@ -874,7 +874,7 @@ namespace PnP.Core.Test.SharePoint
                 {
                     // Get list without root folder - will trigger rootfolder load
                     var list = await context2.Web.Lists.GetByIdAsync(listId,
-                        l => l.Fields.Query(f => f.Id, f => f.Title, f => f.InternalName, f => f.TypeAsString));
+                        l => l.Fields.QueryProperties(f => f.Id, f => f.Title, f => f.InternalName, f => f.TypeAsString));
 
                     // Add a list item
                     Dictionary<string, object> values = new Dictionary<string, object>
@@ -886,7 +886,7 @@ namespace PnP.Core.Test.SharePoint
 
                     // Get list with roorfolder, more optimized
                     list = await context2.Web.Lists.GetByIdAsync(listId,
-                        l => l.RootFolder, l => l.Fields.Query(f => f.Id, f => f.Title, f => f.InternalName, f => f.TypeAsString));
+                        l => l.RootFolder, l => l.Fields.QueryProperties(f => f.Id, f => f.Title, f => f.InternalName, f => f.TypeAsString));
 
                     await list.Items.AddAsync(values);
 

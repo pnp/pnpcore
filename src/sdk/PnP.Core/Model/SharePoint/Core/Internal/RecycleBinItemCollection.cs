@@ -235,7 +235,7 @@ namespace PnP.Core.Model.SharePoint
 
         public async Task<IRecycleBinItem> GetByIdAsync(Guid id, params Expression<Func<IRecycleBinItem, object>>[] selectors)
         {
-            return await ((IQueryable<IRecycleBinItem>)this).Query(selectors).FirstOrDefaultAsync(l => l.Id == id).ConfigureAwait(false);
+            return await ((IQueryable<IRecycleBinItem>)this).QueryProperties(selectors).FirstOrDefaultAsync(l => l.Id == id).ConfigureAwait(false);
         }
 
         #endregion

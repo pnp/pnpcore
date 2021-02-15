@@ -272,7 +272,7 @@ namespace PnP.Core.Services
             context.Uri = context.Web.Url;
 
             // Request the Site Id
-            await context.Site.GetAsync(p => p.Id, p=>p.GroupId).ConfigureAwait(false);
+            await context.Site.LoadAsync(p => p.Id, p=>p.GroupId).ConfigureAwait(false);
 
             // Ensure the Graph ID is set
             (context.Web as IMetadataExtensible).Metadata.Add(PnPConstants.MetaDataGraphId, $"{context.Uri.DnsSafeHost},{context.Site.Id},{context.Web.Id}");
@@ -345,7 +345,7 @@ namespace PnP.Core.Services
             // Ensure the group is loaded, given we've received the group id we can populate the metadata of the group model upfront before loading it
             (context.Group as GraphGroup).Metadata.Add(PnPConstants.MetaDataGraphId, groupId.ToString());
             // Do the default group load, should load all properties
-            await context.Group.GetAsync().ConfigureAwait(false);
+            await context.Group.LoadAsync().ConfigureAwait(false);
             // If the group has a linked SharePoint site then WebUrl is populated
             context.Uri = context.Group.WebUrl;
         }

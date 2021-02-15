@@ -241,8 +241,8 @@ namespace PnP.Core.Test.Base
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 var site = await context.Site.GetAsync(p => p.RootWeb.QueryProperties(p => p.Title, p => p.NoCrawl,
-                                                                                     p => p.Lists.QueryProperties(p=>p.Title)));
-                
+                                                                                     p => p.Lists.QueryProperties(p => p.Title)));
+
                 // Was the rootweb model property loaded
                 Assert.IsTrue(context.Site.IsPropertyAvailable(p => p.RootWeb));
                 // Do we we have the key property loaded on the model property
@@ -266,8 +266,8 @@ namespace PnP.Core.Test.Base
             {
                 context.GraphFirst = false;
                 var web = await context.Web.GetAsync(p => p.Title,
-                                                     p => QueryableExtensions.QueryProperties(p.ContentTypes, p => p.Name),
-                                                     p => p.Lists.Query(p => p.Id, p => p.Title, p => p.DocumentTemplate));
+                                                     p => p.ContentTypes.QueryProperties(p => p.Name),
+                                                     p => p.Lists.QueryProperties(p => p.Id, p => p.Title, p => p.DocumentTemplate));
                 Assert.IsTrue(web.Lists.Requested);
                 Assert.IsTrue(web.Lists.Count() > 0);
                 Assert.IsTrue(web.Lists.First().IsPropertyAvailable(p => p.Title));
@@ -290,7 +290,7 @@ namespace PnP.Core.Test.Base
                 context.GraphFirst = false;
                 var web = await context.Web.GetAsync(p => p.Title,
                                                      p => QueryableExtensions.QueryProperties(p.ContentTypes, p => p.Name),
-                                                     p => p.Lists.Query(p => p.Id, p => p.Title, p => p.DocumentTemplate, p => p.ContentTypes));
+                                                     p => p.Lists.QueryProperties(p => p.Id, p => p.Title, p => p.DocumentTemplate, p => p.ContentTypes));
                 Assert.IsTrue(web.Lists.Requested);
                 Assert.IsTrue(web.Lists.Count() > 0);
                 Assert.IsTrue(web.Lists.First().IsPropertyAvailable(p => p.Title));
@@ -314,9 +314,9 @@ namespace PnP.Core.Test.Base
             {
                 context.GraphFirst = false;
                 var web = await context.Web.GetAsync(p => p.Title,
-                                                     p => QueryableExtensions.QueryProperties(p.ContentTypes, p => p.Name),
-                                                     p => p.Lists.Query(p => p.Id, p => p.Title, p => p.DocumentTemplate,
-                                                          p => QueryableExtensions.Query(p.ContentTypes, p => p.Name,
+                                                     p => p.ContentTypes.QueryProperties(p => p.Name),
+                                                     p => p.Lists.QueryProperties(p => p.Id, p => p.Title, p => p.DocumentTemplate,
+                                                          p => p.ContentTypes.QueryProperties(p => p.Name,
                                                                p => p.FieldLinks.QueryProperties(p => p.Name)))
                                                     );
                 Assert.IsTrue(web.Lists.Requested);
@@ -348,8 +348,8 @@ namespace PnP.Core.Test.Base
                 context.GraphFirst = false;
                 var web = await context.Web.GetAsync(p => QueryableExtensions.QueryProperties(p.ContentTypes, p => p.Name),
                                                      p => p.Title,
-                                                     p => p.Lists.Query(p => p.DocumentTemplate,
-                                                                          p => QueryableExtensions.Query(p.ContentTypes, p => p.Name, p => p.FieldLinks, p => p.NewFormUrl),
+                                                     p => p.Lists.QueryProperties(p => p.DocumentTemplate,
+                                                                          p => p.ContentTypes.QueryProperties(p => p.Name, p => p.FieldLinks, p => p.NewFormUrl),
                                                                           p => p.Id, p => p.Title),
                                                      p => p.AlternateCssUrl
                                                     );
@@ -385,9 +385,9 @@ namespace PnP.Core.Test.Base
                 context.GraphFirst = false;
 
                 // Do a get with filter and custom properties specifying the data to load
-                var foundLists = await context.Web.Lists.Query(p => p.TemplateType == ListTemplateType.GenericList,
+                var foundLists = await context.Web.Lists.QueryProperties(p => p.TemplateType == ListTemplateType.GenericList,
                         p => p.Title, p => p.TemplateType,
-                        p => p.ContentTypes.Query(
+                        p => p.ContentTypes.QueryProperties(
                             p => p.Name, p => p.FieldLinks.QueryProperties(p => p.Name)))
                     .ToArrayAsync();
                 Assert.IsTrue(foundLists.Any());
@@ -417,9 +417,9 @@ namespace PnP.Core.Test.Base
                 context.GraphFirst = false;
 
                 // Do a get with filter and custom properties specifying the data to load
-                var result = await context.Web.Lists.Query(p => p.TemplateType == ListTemplateType.GenericList,
+                var result = await context.Web.Lists.QueryProperties(p => p.TemplateType == ListTemplateType.GenericList,
                         p => p.Title, p => p.TemplateType,
-                        p => p.ContentTypes.Query(
+                        p => p.ContentTypes.QueryProperties(
                             p => p.Name, p => p.FieldLinks.QueryProperties(p => p.Name)))
                     .AddAsBatchAsync();
 
@@ -469,8 +469,8 @@ namespace PnP.Core.Test.Base
                 context.GraphFirst = false;
 
                 // Do a get with filter and custom properties specifying the data to load
-                var foundLists = await context.Web.Lists.Query(p => p.Title, p => p.TemplateType,
-                                                                  p => p.ContentTypes.Query(
+                var foundLists = await context.Web.Lists.QueryProperties(p => p.Title, p => p.TemplateType,
+                                                                  p => p.ContentTypes.QueryProperties(
                                                                        p => p.Name, p => p.FieldLinks.QueryProperties(p => p.Name)))
                     .ToArrayAsync();
                 Assert.IsTrue(foundLists.Any());
@@ -500,9 +500,9 @@ namespace PnP.Core.Test.Base
                 context.GraphFirst = false;
 
                 // Do a get with filter and custom properties specifying the data to load
-                var foundList = await context.Web.Lists.Query(
+                var foundList = await context.Web.Lists.QueryProperties(
                         p => p.Title, p => p.TemplateType,
-                        p => QueryableExtensions.Query(p.ContentTypes, p => p.Name, p => p.FieldLinks.QueryProperties(p => p.Name)))
+                        p => p.ContentTypes.QueryProperties(p => p.Name, p => p.FieldLinks.QueryProperties(p => p.Name)))
                     .FirstOrDefaultAsync(p => p.Title == "Site Assets");
                 Assert.IsTrue(foundList != null);
                 Assert.IsTrue(foundList.Title == "Site Assets");
@@ -533,17 +533,17 @@ namespace PnP.Core.Test.Base
                 context.GraphFirst = false;
 
                 // Do a get with filter and custom properties specifying the data to load
-                await context.Web.Lists.Query(
+                await context.Web.Lists.QueryProperties(
                         p => p.Title, p => p.TemplateType,
-                        p => QueryableExtensions.Query(p.ContentTypes, p => p.Name, p => p.FieldLinks.QueryProperties(p => p.Name)))
+                        p => p.ContentTypes.QueryProperties(p => p.Name, p => p.FieldLinks.QueryProperties(p => p.Name)))
                     .Where(p => p.Title == "Site Assets")
                     .AddAsBatchAsync();
-                await context.Web.Lists.Query(p => p.Title, p => p.TemplateType,
-                        p => QueryableExtensions.Query(p.ContentTypes, p => p.Name, p => p.FieldLinks.QueryProperties(p => p.Name)))
+                await context.Web.Lists.QueryProperties(p => p.Title, p => p.TemplateType,
+                        p => p.ContentTypes.QueryProperties(p => p.Name, p => p.FieldLinks.QueryProperties(p => p.Name)))
                     .Where(p => p.Title == "Site Pages")
                     .AddAsBatchAsync();
                 await context.ExecuteAsync();
-                
+
                 Assert.IsTrue(context.Web.Lists.Length == 2);
                 Assert.IsTrue(context.Web.Lists.Requested);
                 var firstList = context.Web.Lists.First();
@@ -592,8 +592,8 @@ namespace PnP.Core.Test.Base
                 context.GraphFirst = false;
 
                 // Do a get with filter and custom properties specifying the data to load
-                var foundList = await context.Web.Lists.Query(p => p.Title, p => p.TemplateType,
-                        p => QueryableExtensions.Query(p.ContentTypes, p => p.Name, p => p.FieldLinks.QueryProperties(p => p.Name)))
+                var foundList = await context.Web.Lists.QueryProperties(p => p.Title, p => p.TemplateType,
+                        p => p.ContentTypes.QueryProperties(p => p.Name, p => p.FieldLinks.QueryProperties(p => p.Name)))
                     .FirstOrDefaultAsync();
                 Assert.IsTrue(foundList != null);
                 Assert.IsTrue(context.Web.Lists.Length == 1);
@@ -833,7 +833,7 @@ namespace PnP.Core.Test.Base
 
                 string newQuery = "";
                 string query = "";
-                
+
                 // Selecting one regular property on expand
                 (newQuery, query) = BuildGraphExpandSelect(new Expression<Func<ITeamChannel, object>>[] { p => p.Tabs.QueryProperties(p => p.DisplayName) },
                                                new TeamChannel() { PnPContext = context });

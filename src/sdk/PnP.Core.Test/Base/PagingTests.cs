@@ -293,7 +293,7 @@ namespace PnP.Core.Test.Base
 
                 var lists = await context.Web.Lists.GetPagedAsync(p => p.TemplateType == ListTemplateType.GenericList, 2,
                                                       p => p.Title, p => p.TemplateType,
-                                                                    p => p.ContentTypes.Query(
+                                                                    p => p.ContentTypes.QueryProperties(
                                                                          p => p.Name, p => p.FieldLinks.QueryProperties(p => p.Name)));
 
                 // We should have loaded 2 lists

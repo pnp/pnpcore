@@ -727,6 +727,11 @@ namespace PnP.Core.Model
 
         public Task LoadAsync(params Expression<Func<TModel, object>>[] expressions)
         {
+            //if (Parent is IDataModelLoad l)
+            //{
+
+            //    l.LoadAsync()
+            //}
             throw new NotImplementedException();
         }
 

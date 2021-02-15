@@ -4,7 +4,7 @@
     /// Reactions on this chat
     /// </summary>
     [ConcreteType(typeof(TeamChatMessageReactionCollection))]
-    public interface ITeamChatMessageReactionCollection : IDataModelCollection<ITeamChatMessageReaction>, ISupportQuery<ITeamChatMessageReaction>
+    public interface ITeamChatMessageReactionCollection : IDataModelCollection<ITeamChatMessageReaction>, IDataModelCollectionLoad<ITeamChatMessageReaction>, ISupportQuery<ITeamChatMessageReaction>
     {
     }
 }
