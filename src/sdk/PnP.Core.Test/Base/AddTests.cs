@@ -50,7 +50,7 @@ namespace PnP.Core.Test.Base
                 Assert.IsTrue(web.Lists.Count() == listCount + 1);
 
                 // Load the list again
-                await context.Web.GetAsync(p => p.Lists);
+                web = await context.Web.GetAsync(p => p.Lists);
 
                 // Check if we still have the same amount of lists
                 Assert.IsTrue(web.Lists.Count() == listCount + 1);
@@ -118,7 +118,7 @@ namespace PnP.Core.Test.Base
                 Assert.AreEqual(new Guid("00bfea71-de22-43b2-a848-c05709900100"), myListToCheck.TemplateFeatureId);
 
                 // Load the list again
-                await context.Web.GetAsync(p => p.Lists);
+                web = await context.Web.GetAsync(p => p.Lists);
 
                 // Check if we still have the same amount of lists
                 Assert.IsTrue(web.Lists.Count() == listCount + 1);
@@ -153,7 +153,7 @@ namespace PnP.Core.Test.Base
                 Assert.IsTrue(web.Lists.Count() == listCount + 1);
 
                 // Load the list again
-                context.Web.Get(p => p.Lists);
+                web = context.Web.Get(p => p.Lists);
 
                 // Check if we still have the same amount of lists
                 Assert.IsTrue(web.Lists.Count() == listCount + 1);
@@ -229,6 +229,9 @@ namespace PnP.Core.Test.Base
                 var web = await context.Web.GetBatchAsync(p => p.Lists);
                 await context.ExecuteAsync();
 
+                // Check that the result of the batch async request is now available
+                Assert.IsTrue(web.IsAvailable);
+
                 string listTitle = "AddListViaBatchAsyncRest";
                 var myList = web.Result.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
 
@@ -248,8 +251,11 @@ namespace PnP.Core.Test.Base
                 Assert.IsTrue(web.Result.Lists.Count() == listCount + 1);
 
                 // Load the list again
-                await context.Web.GetBatchAsync(p => p.Lists);
+                web = await context.Web.GetBatchAsync(p => p.Lists);
                 await context.ExecuteAsync();
+
+                // Check that the result of the batch async request is now available
+                Assert.IsTrue(web.IsAvailable);
 
                 // Check if we still have the same amount of lists
                 Assert.IsTrue(web.Result.Lists.Count() == listCount + 1);
@@ -264,6 +270,9 @@ namespace PnP.Core.Test.Base
             {
                 var web = context.Web.GetBatch(p => p.Lists);
                 await context.ExecuteAsync();
+
+                // Check that the result of the batch request is now available
+                Assert.IsTrue(web.IsAvailable);
 
                 string listTitle = "AddListViaBatchRest";
                 var myList = web.Result.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
@@ -284,8 +293,11 @@ namespace PnP.Core.Test.Base
                 Assert.IsTrue(web.Result.Lists.Count() == listCount + 1);
 
                 // Load the list again
-                context.Web.GetBatch(p => p.Lists);
+                web = context.Web.GetBatch(p => p.Lists);
                 await context.ExecuteAsync();
+
+                // Check that the result of the batch request is now available
+                Assert.IsTrue(web.IsAvailable);
 
                 // Check if we still have the same amount of lists
                 Assert.IsTrue(web.Result.Lists.Count() == listCount + 1);
@@ -301,6 +313,9 @@ namespace PnP.Core.Test.Base
                 var batch = context.BatchClient.EnsureBatch();
                 var web = await context.Web.GetBatchAsync(batch, p => p.Lists);
                 await context.ExecuteAsync(batch);
+
+                // Check that the result of the batch async request is now available
+                Assert.IsTrue(web.IsAvailable);
 
                 string listTitle = "AddListViaExplicitBatchAsyncRest";
                 var myList = web.Result.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
@@ -323,8 +338,11 @@ namespace PnP.Core.Test.Base
 
                 // Load the list again
                 batch = context.BatchClient.EnsureBatch();
-                await context.Web.GetBatchAsync(batch, p => p.Lists);
+                web = await context.Web.GetBatchAsync(batch, p => p.Lists);
                 await context.ExecuteAsync(batch);
+
+                // Check that the result of the batch async request is now available
+                Assert.IsTrue(web.IsAvailable);
 
                 // Check if we still have the same amount of lists
                 Assert.IsTrue(web.Result.Lists.Count() == listCount + 1);
@@ -340,6 +358,9 @@ namespace PnP.Core.Test.Base
                 var batch = context.BatchClient.EnsureBatch();
                 var web = context.Web.GetBatch(batch, p => p.Lists);
                 await context.ExecuteAsync(batch);
+
+                // Check that the result of the batch request is now available
+                Assert.IsTrue(web.IsAvailable);
 
                 string listTitle = "AddListViaExplicitBatchRest";
                 var myList = web.Result.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
@@ -362,8 +383,11 @@ namespace PnP.Core.Test.Base
 
                 // Load the list again
                 batch = context.BatchClient.EnsureBatch();
-                context.Web.GetBatch(batch, p => p.Lists);
+                web = context.Web.GetBatch(batch, p => p.Lists);
                 await context.ExecuteAsync(batch);
+
+                // Check that the result of the batch request is now available
+                Assert.IsTrue(web.IsAvailable);
 
                 // Check if we still have the same amount of lists
                 Assert.IsTrue(web.Result.Lists.Count() == listCount + 1);
@@ -446,6 +470,9 @@ namespace PnP.Core.Test.Base
                 var team = await context.Team.GetBatchAsync(batch, p => p.Channels);
                 await context.ExecuteAsync(batch);
 
+                // Check that the result of the batch async request is now available
+                Assert.IsTrue(team.IsAvailable);
+
                 // Channel names have to be unique
                 string channelName = $"Channel test {new Random().Next()}";
                 // Check if the channel exists
@@ -479,6 +506,9 @@ namespace PnP.Core.Test.Base
             {
                 var team = await context.Team.GetBatchAsync(p => p.Channels);
                 await context.ExecuteAsync();
+
+                // Check that the result of the batch async request is now available
+                Assert.IsTrue(team.IsAvailable);
 
                 // Channel names have to be unique
                 string channelName = $"Channel test {new Random().Next()}";
@@ -514,6 +544,9 @@ namespace PnP.Core.Test.Base
                 var team = context.Team.GetBatch(batch, p => p.Channels);
                 context.Execute(batch);
 
+                // Check that the result of the batch request is now available
+                Assert.IsTrue(team.IsAvailable);
+
                 // Channel names have to be unique
                 string channelName = $"Channel test {new Random().Next()}";
                 // Check if the channel exists
@@ -547,6 +580,9 @@ namespace PnP.Core.Test.Base
             {
                 var team = context.Team.GetBatch(p => p.Channels);
                 context.Execute();
+
+                // Check that the result of the batch async request is now available
+                Assert.IsTrue(team.IsAvailable);
 
                 // Channel names have to be unique
                 string channelName = $"Channel test {new Random().Next()}";
