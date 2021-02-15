@@ -1,5 +1,6 @@
 ﻿using PnP.Core.Services;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,7 +18,7 @@ namespace PnP.Core.Model
         public BatchResult(Batch batch, Guid batchRequestId)
         {
             Batch = batch;
-            BatchRequest = batch.Requests.First(r => r.Value.Id == batchRequestId).Value;
+            BatchRequest = batch.GetRequest(batchRequestId);
         }
     }
     
@@ -42,6 +43,32 @@ namespace PnP.Core.Model
                 }
                 return (T)(object)BatchRequest.Model;
             }
+        }
+    }
+
+    internal class BatchEnumerableBatchResult<T> : BatchResult, IEnumerableBatchResult<T>
+    {
+        private readonly IEnumerable<T> result;
+
+        public BatchEnumerableBatchResult(Batch batch, Guid batchRequestId, IEnumerable<T> result) : base(batch, batchRequestId)
+        {
+            this.result = result;
+        }
+
+        public IEnumerator<T> GetEnumerator()
+        {
+            if (!IsAvailable)
+            {
+                // TODO: use resources
+                throw new InvalidOperationException("Cannot access the result since batch is not available yet");
+            }
+
+            return this.result.GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
         }
     }
 }

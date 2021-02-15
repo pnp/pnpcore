@@ -43,7 +43,7 @@ namespace PnP.Core.QueryModel
                 .GetMethods(BindingFlags.Public | BindingFlags.Static | BindingFlags.DeclaredOnly).ToList();
 
             QueryProperties = queryableExtensionsMethods.Single(
-                mi => mi.Name == nameof(QueryableExtensions.QueryProperties));
+                mi => mi.Name == nameof(QueryableExtensions.QueryProperties) && mi.ReturnType.IsGenericType && mi.ReturnType.GetGenericTypeDefinition() == typeof(IQueryable<>));
             FirstWithoutPredicate = queryableMethods.Single(
                 mi => mi.Name == nameof(Queryable.First) && mi.GetParameters().Length == 1);
             FirstWithPredicate = queryableMethods.Single(

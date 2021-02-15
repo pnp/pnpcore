@@ -244,7 +244,7 @@ namespace PnP.Core.Model
         /// <param name="parent">Parent of the domain model object, optional</param>
         /// <param name="context">The PnPContext to attach to the newly created item</param>
         /// <returns>Entity model class describing this model instance</returns>
-        internal static object GetEntityConcreteInstance<TModel>(Type type, IDataModelParent parent = null, PnPContext context = null)
+        internal static object GetEntityConcreteInstance(Type type, IDataModelParent parent = null, PnPContext context = null)
         {
             if (type is null)
             {
@@ -253,7 +253,7 @@ namespace PnP.Core.Model
 
             // Create the object instance
             type = GetEntityConcreteType(type);
-            var result = (TModel)Activator.CreateInstance(type);
+            var result = Activator.CreateInstance(type);
 
             // Set the parent, if any
             if (parent != null && result is IDataModelParent modelWithParent)
@@ -279,15 +279,15 @@ namespace PnP.Core.Model
 
             type = GetEntityConcreteType(type);
 
-            TModel result;
+            object result;
 
             if (type.ImplementsInterface(typeof(IQueryable<>)))
             {
-                result = (TModel)Activator.CreateInstance(type, context, parent, propertyName);
+                result = Activator.CreateInstance(type, context, parent, propertyName);
             }
             else
             {
-                result = (TModel)Activator.CreateInstance(type);
+                result = Activator.CreateInstance(type);
                 if (result is IDataModelParent modelWithParent)
                 {
                     modelWithParent.Parent = parent;

@@ -34,7 +34,7 @@ namespace PnP.Core.QueryModel
                     case "Select":
                         VisitSelect(m);
                         return m;
-                    case "Query":
+                    case nameof(QueryableExtensions.QueryProperties):
                         VisitQuery(m);
                         return m;
                     case "OrderBy":
@@ -48,6 +48,7 @@ namespace PnP.Core.QueryModel
                     case "Where":
                         VisitWhere(m);
                         return m;
+                    case "First":
                     case "FirstOrDefault":
                         VisitFirstOrDefault(m);
                         return m;
@@ -90,6 +91,10 @@ namespace PnP.Core.QueryModel
                 if (propertySelector.Operand is Expression<Func<TModel, object>> lambda)
                 {
                     query.Fields.Add(lambda);
+                }
+                else if (propertySelector.Operand is Expression<Func<TModel, object>>[] lambdas)
+                {
+                    query.Fields.AddRange(lambdas);
                 }
             }
         }

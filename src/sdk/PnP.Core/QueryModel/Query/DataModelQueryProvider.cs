@@ -1,5 +1,7 @@
 ﻿using PnP.Core.Model;
+using PnP.Core.Services;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
@@ -56,10 +58,13 @@ namespace PnP.Core.QueryModel
             var query = Translate(expression);
 
             // Execute the query via the target Query Service
-            var batchRequestId = await queryService.AddToCurrentBatchAsync(expression.Type, query).ConfigureAwait(false);
+            BatchRequest batchRequest= await queryService.AddToCurrentBatchAsync(expression.Type, query).ConfigureAwait(false);
 
-            // TODO: return batch
-            return null;
+            // Get the resulting property from the parent object
+            var collection = batchRequest.Model.GetPublicInstancePropertyValue(queryService.MemberName) as IRequestableCollection;
+            var resultValue = (IEnumerable<TResult>)collection.RequestedItems;
+
+            return new BatchEnumerableBatchResult<TResult>(queryService.PnPContext.CurrentBatch, batchRequest.Id, resultValue);
         }
 
         public override Task<object> ExecuteObjectAsync(Expression expression)

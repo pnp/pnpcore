@@ -119,7 +119,7 @@ namespace PnP.Core.Model
         public virtual async Task<TModel> GetAsync(params Expression<Func<TModel, object>>[] expressions)
         {
             // Create a new object without a parent
-            var newDataModel = (BaseDataModel<TModel>)EntityManager.GetEntityConcreteInstance<TModel>(this.GetType(), null, this.PnPContext.Clone());
+            var newDataModel = (BaseDataModel<TModel>)EntityManager.GetEntityConcreteInstance(this.GetType(), null, this.PnPContext);
             await newDataModel.BaseRetrieveAsync(expressions: expressions).ConfigureAwait(false);
 
             return (TModel)(object)newDataModel;
@@ -149,7 +149,7 @@ namespace PnP.Core.Model
             params Expression<Func<TModel, object>>[] expressions)
         {
             // Create a new object without a parent
-            var newDataModel = (BaseDataModel<TModel>)EntityManager.GetEntityConcreteInstance<TModel>(this.GetType(), null, this.PnPContext.Clone());
+            var newDataModel = (BaseDataModel<TModel>)EntityManager.GetEntityConcreteInstance(this.GetType(), null, this.PnPContext);
             var batchResult = await newDataModel.BaseBatchRetrieveAsync(batch, fromJsonCasting: MappingHandler, postMappingJson: PostMappingHandler, expressions: expressions).ConfigureAwait(false);
 
             return batchResult;
@@ -1133,7 +1133,7 @@ namespace PnP.Core.Model
         {
             if (!NavigationPropertyInstantiated(propertyName))
             {
-                var propertyValue = EntityManager.GetEntityConcreteInstance<T>(typeof(T), this);
+                var propertyValue = EntityManager.GetEntityConcreteInstance(typeof(T), this);
                 (propertyValue as IDataModelWithContext).PnPContext = PnPContext;
 
                 SetValue(propertyValue, propertyName);
