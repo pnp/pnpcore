@@ -60,33 +60,6 @@ namespace PnP.Core.QueryModel
         }
 
         /// <summary>
-        /// Extension method to declare a field/metadata property to load while executing the REST query
-        /// </summary>
-        /// <typeparam name="TResult">The type of the target entity</typeparam>
-        /// <param name="source">The collection of items to load the field/metadata from</param>
-        /// <param name="selector">A selector for a field/metadata</param>
-        /// <returns>The resulting collection</returns>
-        public static IQueryable<TResult> QueryProperties<TResult>(
-            this IQueryable<TResult> source, Expression<Func<TResult, object>> selector)
-        {
-            if (source is null)
-            {
-                throw new ArgumentNullException(nameof(source));
-            }
-            if (selector is null)
-            {
-                throw new ArgumentNullException(nameof(selector));
-            }
-
-            return source.Provider.CreateQuery<TResult>(
-                Expression.Call(
-                    null,
-                    QueryableMethods.QueryProperties.MakeGenericMethod(typeof(TResult)),
-                    new Expression[] { source.Expression, Expression.Quote(selector) }
-                ));
-        }
-
-        /// <summary>
         /// Extension method to declare the fields/metadata properties to load while executing the REST query
         /// </summary>
         /// <typeparam name="TResult">The type of the target entity</typeparam>
@@ -105,14 +78,12 @@ namespace PnP.Core.QueryModel
                 throw new ArgumentNullException(nameof(selectors));
             }
 
-            IQueryable<TResult> result = source;
-
-            foreach (var s in selectors)
-            {
-                result = result.QueryProperties(s);
-            }
-
-            return result;
+            return source.Provider.CreateQuery<TResult>(
+                Expression.Call(
+                    null,
+                    QueryableMethods.QueryProperties.MakeGenericMethod(typeof(TResult)),
+                    new Expression[] { source.Expression, Expression.NewArrayInit(typeof(Expression<Func<TResult, object>>), selectors)}
+                ));
         }
 
         #endregion
