@@ -84,10 +84,10 @@ namespace PnP.Core.Model
         /// <param name="dataModel"></param>
         /// <param name="expressions">The properties to select</param>
         /// <returns>The Domain Model object</returns>
-        public static TModel Load<TModel>(this TModel dataModel, params Expression<Func<TModel, object>>[] expressions)
+        public static IDataModelLoad<TModel> QueryProperties<TModel>(this IDataModelLoad<TModel> dataModel, params Expression<Func<TModel, object>>[] expressions)
         {
             // TODO: message from resources
-            throw new InvalidOperationException("This function can be callend from a LINQ query only");
+            throw new InvalidOperationException("This function can be called from a LINQ query only");
         }
     }
 }

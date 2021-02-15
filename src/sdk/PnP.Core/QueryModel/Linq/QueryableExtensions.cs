@@ -52,7 +52,7 @@ namespace PnP.Core.QueryModel
         /// <param name="source">The collection of items to load the field/metadata from</param>
         /// <param name="selectors">A selector for a field/metadata</param>
         /// <returns>The resulting collection</returns>
-        public static ISupportQuery<TResult> Query<TResult>(
+        public static ISupportQuery<TResult> QueryProperties<TResult>(
             this ISupportQuery<TResult> source, params Expression<Func<TResult, object>>[] selectors)
         {
             // TODO: localize message
@@ -66,7 +66,7 @@ namespace PnP.Core.QueryModel
         /// <param name="source">The collection of items to load the field/metadata from</param>
         /// <param name="selector">A selector for a field/metadata</param>
         /// <returns>The resulting collection</returns>
-        public static IQueryable<TResult> Query<TResult>(
+        public static IQueryable<TResult> QueryProperties<TResult>(
             this IQueryable<TResult> source, Expression<Func<TResult, object>> selector)
         {
             if (source is null)
@@ -109,7 +109,7 @@ namespace PnP.Core.QueryModel
 
             foreach (var s in selectors)
             {
-                result = result.Query(s);
+                result = result.QueryProperties(s);
             }
 
             return result;

@@ -294,7 +294,7 @@ namespace PnP.Core.Test.Base
                 var lists = await context.Web.Lists.GetPagedAsync(p => p.TemplateType == ListTemplateType.GenericList, 2,
                                                       p => p.Title, p => p.TemplateType,
                                                                     p => p.ContentTypes.Query(
-                                                                         p => p.Name, p => p.FieldLinks.Query(p => p.Name)));
+                                                                         p => p.Name, p => p.FieldLinks.QueryProperties(p => p.Name)));
 
                 // We should have loaded 2 lists
                 Assert.IsTrue(context.Web.Lists.Count() == 2);
