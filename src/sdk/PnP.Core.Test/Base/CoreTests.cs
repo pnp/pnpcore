@@ -49,5 +49,16 @@ namespace PnP.Core.Test.Base
                 Assert.IsTrue(result.Any());
             }
         }
+
+        [TestMethod]
+        public void ShellBashTest()
+        {
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
+            {
+                // Simple test
+                var result = Shell.Bash("whoami");
+                Assert.IsTrue(result.Any());
+            }
+        }
     }
 }
