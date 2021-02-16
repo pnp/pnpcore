@@ -257,42 +257,42 @@ namespace PnP.Core.Test.Base
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                var web = await context.Web.GetBatchAsync(p => p.Lists);
+                // Load all the lists
+                await context.Web.LoadBatchAsync(w => w.Lists);
                 await context.ExecuteAsync();
 
-                // Check that the result of the batch async request is now available
-                Assert.IsTrue(web.IsAvailable);
-
                 string listTitle = "AddListViaBatchAsyncRest";
-                var myList = web.Result.Lists.FirstOrDefault(p => p.Title == listTitle);
+                var myList = context.Web.Lists.FirstOrDefault(p => p.Title == listTitle);
 
                 if (myList != null)
                 {
                     Assert.Inconclusive("Test data set should be setup to not have the list available.");
                 }
 
-                var listCount = web.Result.Lists.Length;
-                // Add a new list
-                myList = await web.Result.Lists.AddBatchAsync(listTitle, ListTemplateType.GenericList);
-                await context.ExecuteAsync();
+                try
+                {
+                    var listCount = context.Web.Lists.Length;
+                    // Add a new list
+                    myList = await context.Web.Lists.AddBatchAsync(listTitle, ListTemplateType.GenericList);
+                    await context.ExecuteAsync();
 
-                // Was the list added
-                Assert.IsTrue(myList.Requested);
-                Assert.IsTrue(myList.Id != Guid.Empty);
-                Assert.IsTrue(web.Result.Lists.Length == listCount + 1);
+                    // Was the list added
+                    Assert.IsTrue(myList.Requested);
+                    Assert.IsTrue(myList.Id != Guid.Empty);
+                    Assert.IsTrue(context.Web.Lists.Length == listCount + 1);
 
-                // Load the list again
-                web = await context.Web.GetBatchAsync(p => p.Lists);
-                await context.ExecuteAsync();
+                    // Load the list again
+                    await context.Web.LoadBatchAsync(p => p.Lists);
+                    await context.ExecuteAsync();
 
-                // Check that the result of the batch async request is now available
-                Assert.IsTrue(web.IsAvailable);
-
-                // Check if we still have the same amount of lists
-                Assert.IsTrue(web.Result.Lists.Length == listCount + 1);
-
-                // Cleanup
-                await myList.DeleteAsync();
+                    // Check if we still have the same amount of lists
+                    Assert.IsTrue(context.Web.Lists.Length == listCount + 1);
+                }
+                finally
+                {
+                    // Cleanup
+                    await myList.DeleteAsync();
+                }
             }
         }
 
