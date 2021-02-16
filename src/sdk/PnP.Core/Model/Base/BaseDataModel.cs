@@ -1261,7 +1261,7 @@ namespace PnP.Core.Model
                 {
                     // Future use? (includes)
                     var body = (MethodCallExpression)expression.Body;
-                    if (body.Method.Name == "Load")
+                    if (body.Method.Name == "QueryProperties")
                     {
                         if (body.Arguments.Count != 2)
                         {
@@ -1313,7 +1313,7 @@ namespace PnP.Core.Model
                     else
                     {
                         throw new ClientException(ErrorType.PropertyNotLoaded,
-                            PnPCoreResources.Exception_PropertyNotLoaded_OnlyLoadPropertiesSupported);
+                            PnPCoreResources.Exception_PropertyNotLoaded_OnlyQueryPropertiesSupported);
                     }
                 }
                 else if (!model.IsPropertyAvailable(expression))

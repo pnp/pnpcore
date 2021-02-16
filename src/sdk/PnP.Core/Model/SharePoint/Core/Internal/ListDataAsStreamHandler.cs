@@ -76,6 +76,8 @@ namespace PnP.Core.Model.SharePoint
                 {
                     if (int.TryParse(row.GetProperty("ID").GetString(), out int listItemId))
                     {
+                        // x PAOLO: We need to find a way to avoid the LINQ query here 
+                        // and we need to fall back to LINQ to Objects
                         var itemToUpdate = list.Items.FirstOrDefault(p => p.Id == listItemId);
                         if (itemToUpdate == null)
                         {

@@ -538,11 +538,11 @@ namespace PnP.Core {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Only the &apos;LoadProperties&apos; method is supported.
+        ///   Looks up a localized string similar to Only the &apos;QueryProperties&apos; method is supported.
         /// </summary>
-        internal static string Exception_PropertyNotLoaded_OnlyLoadPropertiesSupported {
+        internal static string Exception_PropertyNotLoaded_OnlyQueryPropertiesSupported {
             get {
-                return ResourceManager.GetString("Exception_PropertyNotLoaded_OnlyLoadPropertiesSupported", resourceCulture);
+                return ResourceManager.GetString("Exception_PropertyNotLoaded_OnlyQueryPropertiesSupported", resourceCulture);
             }
         }
         

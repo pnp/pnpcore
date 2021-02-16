@@ -276,8 +276,8 @@
   <data name="Exception_PropertyNotLoaded_NestedProperties" xml:space="preserve">
     <value>Loading nested properties (e.g. RootFolder.ServerRelativeUrl) is not supported, instead you can use RootFolder.LoadProperties(p =&gt; p.ServerRelativeUrl).</value>
   </data>
-  <data name="Exception_PropertyNotLoaded_OnlyLoadPropertiesSupported" xml:space="preserve">
-    <value>Only the 'LoadProperties' method is supported</value>
+  <data name="Exception_PropertyNotLoaded_OnlyQueryPropertiesSupported" xml:space="preserve">
+    <value>Only the 'QueryProperties' method is supported</value>
   </data>
   <data name="Exception_ServiceException_BatchMaxRetries" xml:space="preserve">
     <value>Requests inside a batch reached their max retry count of {0}</value>

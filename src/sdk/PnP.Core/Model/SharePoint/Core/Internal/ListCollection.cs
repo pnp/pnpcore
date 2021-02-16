@@ -164,7 +164,7 @@ namespace PnP.Core.Model.SharePoint
         internal Task<IBatchSingleResult<IList>> BatchGetByTitleAsync(Batch batch, string title, params Expression<Func<IList, object>>[] expressions)
         {
             // Was this list previously loaded?
-            if (!(items.FirstOrDefault(p => p.IsPropertyAvailable(p => p.Title) && p.Title.Equals(title, StringComparison.InvariantCultureIgnoreCase)) is List listToLoad))
+            if (!(items.FirstOrDefault(p => p.IsPropertyAvailable(p => p.Title) && p.Title == title) is List listToLoad))
             {
                 // List was not loaded before, so add it the current set of loaded lists
                 listToLoad = CreateNewAndAdd() as List;

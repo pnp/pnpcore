@@ -452,7 +452,7 @@ namespace PnP.Core.Model.SharePoint
             if (!ArePropertiesAvailable(LoadFieldsExpression))
             {
                 // Get field information via batch
-                await GetBatchAsync(batch, LoadFieldsExpression).ConfigureAwait(false);
+                await LoadBatchAsync(batch, LoadFieldsExpression).ConfigureAwait(false);
                 requestToUse++;
             }
             // GetListDataAsStream request via batch
