@@ -238,35 +238,5 @@ namespace PnP.Core.Test.Base
                 Assert.IsFalse(context.Web.Lists.First().IsPropertyAvailable(p => p.DefaultEditFormUrl));
             }
         }
-
-        [TestMethod]
-        public async Task CSOMPartitySubSequentModelLoads7()
-        {
-            //TestCommon.Instance.Mocking = false;
-            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
-            {
-                // This now works like CSOM
-                var listA = await context.Web.Lists.GetByTitleAsync("Site Assets");
-                var listB = await context.Web.Lists.GetByTitleAsync("Site Pages");
-
-                Assert.IsTrue(listA.Requested);
-                Assert.IsTrue(listB.Requested);
-                Assert.IsTrue(context.Web.Lists.Length == 0);
-
-                var listC = await context.Web.Lists.GetByTitleAsync("Documents");
-                Assert.IsTrue(listC.Requested);
-                Assert.IsTrue(context.Web.Lists.Length == 0);
-
-                // Clear the collection so we can do a fresh load
-                Assert.IsFalse(context.Web.Lists.Requested);
-                Assert.IsTrue(context.Web.Lists.Length == 0);
-
-                // Populate the collection again
-                // TODO: call new Load method
-                //await context.Web.Lists.GetAsync(p => p.TemplateType == ListTemplateType.DocumentLibrary);
-                //Assert.IsTrue(context.Web.Lists.Requested);
-                //Assert.IsTrue(context.Web.Lists.Length >= 3);
-            }
-        }
     }
 }
