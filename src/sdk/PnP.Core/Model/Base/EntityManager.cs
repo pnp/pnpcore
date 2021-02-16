@@ -425,17 +425,24 @@ namespace PnP.Core.Model
             }
             else if (expression.Body is MethodCallExpression)
             {
+                // x PAOLO: Here we have a problem. This could be a single property
+                // where we want to QueryProperties or a collection, but in this code
+                // we always assume that it is a collection
+
                 if ((expression.Body as MethodCallExpression).Method.Name == nameof(DataModelLoadExtensions.QueryProperties))
                 {
-                    fieldToLoad = ParseInclude(entityInfo, expression, null);
+                    fieldToLoad = ParseQueryProperties(entityInfo, expression, null);
                 }
             }
 
             return fieldToLoad;
         }
 
-        private static string ParseInclude(EntityInfo entityInfo, LambdaExpression expression, EntityFieldExpandInfo entityFieldExpandInfo)
+        private static string ParseQueryProperties(EntityInfo entityInfo, LambdaExpression expression, EntityFieldExpandInfo entityFieldExpandInfo)
         {
+            // x BERT: Here we need to slightly change the behavior
+            // in fact the target can be a collection or a single item
+
             var collectionPublicType = ((expression).Body as MethodCallExpression).Type.GenericTypeArguments[0];
             var fieldToLoad = ((expression.Body as MethodCallExpression).Arguments[0] as MemberExpression).Member.Name;
             var collectionEntityInfo = EntityManager.Instance.GetStaticClassInfo(collectionPublicType);
@@ -484,7 +491,7 @@ namespace PnP.Core.Model
                             var entityInfoRecursive = EntityManager.Instance.GetStaticClassInfo(publicTypeRecursive);
 
                             var expandedEntityField = new EntityFieldExpandInfo() { Name = fld, Type = publicTypeRecursive, Expandable = true };
-                            ParseInclude(entityInfo, (includeFieldExpression as UnaryExpression).Operand as LambdaExpression, expandedEntityField);
+                            ParseQueryProperties(entityInfo, (includeFieldExpression as UnaryExpression).Operand as LambdaExpression, expandedEntityField);
 
                             // Add key field if needed
                             var keyFieldRecursive = expandedEntityField.Fields.FirstOrDefault(p => p.Name == entityInfoRecursive.ActualKeyFieldName);
