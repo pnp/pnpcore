@@ -62,7 +62,7 @@ namespace PnP.Core.Test.Base
                     if (firstItem != null)
                     {
                         // get original item count
-                        int itemCount = myList.Items.Count();
+                        int itemCount = myList.Items.Length;
 
                         await firstItem.DeleteAsync();
 
@@ -93,7 +93,7 @@ namespace PnP.Core.Test.Base
                         // get items from the list
                         await myList.GetAsync(p => p.Items);
 
-                        Assert.IsTrue(myList.Items.Count() == itemCount - 1);
+                        Assert.IsTrue(myList.Items.Length == itemCount - 1);
                     }
                 }
                 finally
