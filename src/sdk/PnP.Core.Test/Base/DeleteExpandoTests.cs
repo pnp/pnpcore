@@ -32,15 +32,13 @@ namespace PnP.Core.Test.Base
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                var web = await context.Web.GetAsync(p => p.Lists);
-
                 string listTitle = "DeleteListItemViaRest";
-                var myList = web.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
+                var myList = context.Web.Lists.FirstOrDefault(p => p.Title == listTitle);
 
                 if (myList == null)
                 {
                     // Create the list
-                    myList = await web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
+                    myList = await context.Web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
                     // Add a list item to this list
                     // Add a list item
                     Dictionary<string, object> values = new Dictionary<string, object>
@@ -55,45 +53,53 @@ namespace PnP.Core.Test.Base
                 }
 
                 // get items from the list
-                await myList.GetAsync(p => p.Items);
+                await myList.LoadAsync(p => p.Items);
 
-                // grab first item
-                var firstItem = myList.Items.FirstOrDefault();
-                if (firstItem != null)
+                try
                 {
-                    // get original item count
-                    int itemCount = myList.Items.Count();
-
-                    await firstItem.DeleteAsync();
-
-                    // Using the deleted item should result in an error
-                    bool exceptionThrown = false;
-                    try
+                    // grab first item
+                    var firstItem = myList.Items.FirstOrDefault();
+                    if (firstItem != null)
                     {
-                        var deletedItemTitle = firstItem.Values["Title"];
-                    }
-                    catch (Exception)
-                    {
-                        exceptionThrown = true;
-                    }
-                    Assert.IsTrue(exceptionThrown);
+                        // get original item count
+                        int itemCount = myList.Items.Count();
 
-                    exceptionThrown = false;
-                    dynamic dynamicFirstItem = firstItem;
-                    try
-                    {
-                        var deletedItemTitle = dynamicFirstItem.Title;
-                    }
-                    catch (Exception)
-                    {
-                        exceptionThrown = true;
-                    }
-                    Assert.IsTrue(exceptionThrown);
+                        await firstItem.DeleteAsync();
 
-                    // get items from the list
-                    await myList.GetAsync(p => p.Items);
+                        // Using the deleted item should result in an error
+                        bool exceptionThrown = false;
+                        try
+                        {
+                            var deletedItemTitle = firstItem.Values["Title"];
+                        }
+                        catch (Exception)
+                        {
+                            exceptionThrown = true;
+                        }
+                        Assert.IsTrue(exceptionThrown);
 
-                    Assert.IsTrue(myList.Items.Count() == itemCount - 1);
+                        exceptionThrown = false;
+                        dynamic dynamicFirstItem = firstItem;
+                        try
+                        {
+                            var deletedItemTitle = dynamicFirstItem.Title;
+                        }
+                        catch (Exception)
+                        {
+                            exceptionThrown = true;
+                        }
+                        Assert.IsTrue(exceptionThrown);
+
+                        // get items from the list
+                        await myList.GetAsync(p => p.Items);
+
+                        Assert.IsTrue(myList.Items.Count() == itemCount - 1);
+                    }
+                }
+                finally
+                {
+                    // Cleanup
+                    await myList.DeleteAsync();
                 }
             }
         }
@@ -104,16 +110,13 @@ namespace PnP.Core.Test.Base
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                var web = await context.Web.GetBatchAsync(p => p.Lists);
-                await context.ExecuteAsync();
-
                 string listTitle = "DeleteListItemViaBatchRest";
-                var myList = web.Result.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
+                var myList = context.Web.Lists.FirstOrDefault(p => p.Title == listTitle);
 
                 if (myList == null)
                 {
                     // Create the list
-                    myList = await web.Result.Lists.AddBatchAsync(listTitle, ListTemplateType.GenericList);
+                    myList = await context.Web.Lists.AddBatchAsync(listTitle, ListTemplateType.GenericList);
                     await context.ExecuteAsync();
                     // Add a list item to this list
                     // Add a list item
@@ -130,48 +133,56 @@ namespace PnP.Core.Test.Base
                 }
 
                 // get items from the list
-                await myList.GetBatchAsync(p => p.Items);
+                await myList.LoadBatchAsync(p => p.Items);
                 await context.ExecuteAsync();
 
-                // grab first item
-                var firstItem = myList.Items.FirstOrDefault();
-                if (firstItem != null)
+                try
                 {
-                    // get original item count
-                    int itemCount = myList.Items.Count();
-
-                    await firstItem.DeleteBatchAsync();
-                    await context.ExecuteAsync();
-
-                    // Using the deleted item should result in an error
-                    bool exceptionThrown = false;
-                    try
+                    // grab first item
+                    var firstItem = myList.Items.FirstOrDefault();
+                    if (firstItem != null)
                     {
-                        var deletedItemTitle = firstItem.Values["Title"];
-                    }
-                    catch (Exception)
-                    {
-                        exceptionThrown = true;
-                    }
-                    Assert.IsTrue(exceptionThrown);
+                        // get original item count
+                        int itemCount = myList.Items.Length;
 
-                    exceptionThrown = false;
-                    dynamic dynamicFirstItem = firstItem;
-                    try
-                    {
-                        var deletedItemTitle = dynamicFirstItem.Title;
-                    }
-                    catch (Exception)
-                    {
-                        exceptionThrown = true;
-                    }
-                    Assert.IsTrue(exceptionThrown);
+                        await firstItem.DeleteBatchAsync();
+                        await context.ExecuteAsync();
 
-                    // get items from the list
-                    await myList.GetBatchAsync(p => p.Items);
-                    await context.ExecuteAsync();
+                        // Using the deleted item should result in an error
+                        bool exceptionThrown = false;
+                        try
+                        {
+                            var deletedItemTitle = firstItem.Values["Title"];
+                        }
+                        catch (Exception)
+                        {
+                            exceptionThrown = true;
+                        }
+                        Assert.IsTrue(exceptionThrown);
 
-                    Assert.IsTrue(myList.Items.Count() == itemCount - 1);
+                        exceptionThrown = false;
+                        dynamic dynamicFirstItem = firstItem;
+                        try
+                        {
+                            var deletedItemTitle = dynamicFirstItem.Title;
+                        }
+                        catch (Exception)
+                        {
+                            exceptionThrown = true;
+                        }
+                        Assert.IsTrue(exceptionThrown);
+
+                        // get items from the list
+                        await myList.GetBatchAsync(p => p.Items);
+                        await context.ExecuteAsync();
+
+                        Assert.IsTrue(myList.Items.Length == itemCount - 1);
+                    }
+                }
+                finally
+                {
+                    // Cleanup
+                    await myList.DeleteAsync();
                 }
             }
         }
