@@ -349,17 +349,14 @@ namespace PnP.Core.Test.Base
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                var team = await context.Team.GetBatchAsync(p => p.Channels);
-                await context.ExecuteAsync();
-
                 string channelName = $"Channel test {new Random().Next()}";
 
                 // Find first updatable channel
-                var channelToDelete = team.Result.Channels.FirstOrDefault(p => p.DisplayName == channelName);
+                var channelToDelete = context.Team.Channels.FirstOrDefault(p => p.DisplayName == channelName);
 
                 if (channelToDelete == null)
                 {
-                    channelToDelete = await team.Result.Channels.AddBatchAsync(channelName, "Test channel, will be deleted in 21 days");
+                    channelToDelete = await context.Team.Channels.AddBatchAsync(channelName, "Test channel, will be deleted in 21 days");
                     await context.ExecuteAsync();
                 }
                 else
@@ -367,7 +364,7 @@ namespace PnP.Core.Test.Base
                     Assert.Inconclusive("Test data set should be setup to not have the channel available.");
                 }
 
-                var channelCount = team.Result.Channels.Count();
+                var channelCount = context.Team.Channels.Length;
 
                 // Delete channel
                 await channelToDelete.DeleteBatchAsync();
@@ -390,7 +387,7 @@ namespace PnP.Core.Test.Base
                 await context.ExecuteAsync();
 
                 // We should have one channel less
-                Assert.IsTrue(team.Result.Channels.Count() == channelCount - 1);
+                Assert.IsTrue(context.Team.Channels.Length == channelCount - 1);
             }
         }
 
@@ -400,19 +397,16 @@ namespace PnP.Core.Test.Base
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                var batch = context.BatchClient.EnsureBatch();
-                var team = await context.Team.GetBatchAsync(batch, p => p.Channels);
-                await context.ExecuteAsync(batch);
-
+                Core.Services.Batch batch = null;
                 string channelName = $"Channel test {new Random().Next()}";
 
                 // Find first updatable channel
-                var channelToDelete = team.Result.Channels.FirstOrDefault(p => p.DisplayName == channelName);
+                var channelToDelete = context.Team.Channels.FirstOrDefault(p => p.DisplayName == channelName);
 
                 if (channelToDelete == null)
                 {
                     batch = context.BatchClient.EnsureBatch();
-                    channelToDelete = await team.Result.Channels.AddBatchAsync(batch, channelName, "Test channel, will be deleted in 21 days");
+                    channelToDelete = await context.Team.Channels.AddBatchAsync(batch, channelName, "Test channel, will be deleted in 21 days");
                     await context.ExecuteAsync(batch);
                 }
                 else
@@ -420,7 +414,7 @@ namespace PnP.Core.Test.Base
                     Assert.Inconclusive("Test data set should be setup to not have the channel available.");
                 }
 
-                var channelCount = team.Result.Channels.Count();
+                var channelCount = context.Team.Channels.Length;
 
                 // Delete channel
                 batch = context.BatchClient.EnsureBatch();
@@ -441,11 +435,11 @@ namespace PnP.Core.Test.Base
 
                 // Get the channel again
                 batch = context.BatchClient.EnsureBatch();
-                await context.Team.GetBatchAsync(batch, p => p.Channels);
+                await context.Team.LoadBatchAsync(batch, p => p.Channels);
                 await context.ExecuteAsync(batch);
 
                 // We should have one channel less
-                Assert.IsTrue(team.Result.Channels.Count() == channelCount - 1);
+                Assert.IsTrue(context.Team.Channels.Length == channelCount - 1);
             }
         }
         #endregion
