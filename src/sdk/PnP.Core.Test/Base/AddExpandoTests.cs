@@ -33,10 +33,8 @@ namespace PnP.Core.Test.Base
             // TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                var web = await context.Web.GetAsync(p => p.Lists);
-
                 string listTitle = "AddListItemViaRest";
-                var myList = web.Lists.FirstOrDefault(p => p.Title == listTitle);
+                var myList = context.Web.Lists.FirstOrDefault(p => p.Title == listTitle);
 
                 if (myList != null)
                 {
@@ -44,7 +42,7 @@ namespace PnP.Core.Test.Base
                 }
                 else
                 {
-                    myList = await web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
+                    myList = await context.Web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
                 }
 
                 // get items from the list
