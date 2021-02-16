@@ -120,7 +120,7 @@ namespace PnP.Core.Test.Base
                 Assert.IsTrue(web.IsPropertyAvailable(p => p.WelcomePage));
                 Assert.IsTrue(!string.IsNullOrEmpty(web.WelcomePage));
                 Assert.IsTrue(web.IsPropertyAvailable(p => p.Lists));
-                Assert.IsTrue(web.Lists.Count() > 0);
+                Assert.IsTrue(web.Lists.Length > 0);
 
                 // Are other properties still not available
                 Assert.IsFalse(web.IsPropertyAvailable(p => p.AlternateCssUrl));
@@ -143,7 +143,7 @@ namespace PnP.Core.Test.Base
                 Assert.IsTrue(web.IsPropertyAvailable(p => p.WelcomePage));
                 Assert.IsTrue(!string.IsNullOrEmpty(web.WelcomePage));
                 Assert.IsTrue(web.IsPropertyAvailable(p => p.Lists));
-                Assert.IsTrue(web.Lists.Count() > 0);
+                Assert.IsTrue(web.Lists.Length > 0);
                 Assert.IsTrue(web.Lists.First().IsPropertyAvailable(p => p.Title));
                 Assert.IsTrue(web.Lists.First().IsPropertyAvailable(p => p.TemplateType));
 
@@ -159,7 +159,7 @@ namespace PnP.Core.Test.Base
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                await context.Web.GetAsync(p => p.Lists.QueryProperties(p => p.Title));
+                await context.Web.LoadAsync(p => p.Lists.QueryProperties(p => p.Title));
 
                 Assert.IsTrue(context.Web.IsPropertyAvailable(p => p.Lists));
                 Assert.IsFalse(context.Web.IsPropertyAvailable(p => p.WelcomePage));
@@ -171,7 +171,7 @@ namespace PnP.Core.Test.Base
                 Assert.IsTrue(web.IsPropertyAvailable(p => p.WelcomePage));
                 Assert.IsTrue(!string.IsNullOrEmpty(web.WelcomePage));
                 Assert.IsTrue(web.IsPropertyAvailable(p => p.Lists));
-                Assert.IsTrue(web.Lists.Count() > 0);
+                Assert.IsTrue(web.Lists.Length > 0);
                 Assert.IsTrue(web.Lists.First().IsPropertyAvailable(p => p.Title));
                 Assert.IsTrue(web.Lists.First().IsPropertyAvailable(p => p.TemplateType));
 
@@ -187,7 +187,7 @@ namespace PnP.Core.Test.Base
             //TestCommon.Instance.Mocking = false;            
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                await context.Web.GetAsync(p => p.WelcomePage, p => p.Lists.QueryProperties(p => p.Title, p => p.Description, p => p.Fields.QueryProperties(p => p.Title)));
+                await context.Web.LoadAsync(p => p.WelcomePage, p => p.Lists.QueryProperties(p => p.Title, p => p.Description, p => p.Fields.QueryProperties(p => p.Title)));
 
                 Assert.IsTrue(context.Web.IsPropertyAvailable(p => p.Lists));
                 Assert.IsTrue(context.Web.IsPropertyAvailable(p => p.WelcomePage));
