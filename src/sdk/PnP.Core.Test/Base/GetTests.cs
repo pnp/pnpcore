@@ -421,7 +421,7 @@ namespace PnP.Core.Test.Base
                         p => p.Title, p => p.TemplateType,
                         p => p.ContentTypes.QueryProperties(
                             p => p.Name, p => p.FieldLinks.QueryProperties(p => p.Name)))
-                    .AddAsBatchAsync();
+                    .AsBatchAsync();
 
                 await context.ExecuteAsync();
 
@@ -537,11 +537,11 @@ namespace PnP.Core.Test.Base
                         p => p.Title, p => p.TemplateType,
                         p => p.ContentTypes.QueryProperties(p => p.Name, p => p.FieldLinks.QueryProperties(p => p.Name)))
                     .Where(p => p.Title == "Site Assets")
-                    .AddAsBatchAsync();
+                    .AsBatchAsync();
                 await context.Web.Lists.QueryProperties(p => p.Title, p => p.TemplateType,
                         p => p.ContentTypes.QueryProperties(p => p.Name, p => p.FieldLinks.QueryProperties(p => p.Name)))
                     .Where(p => p.Title == "Site Pages")
-                    .AddAsBatchAsync();
+                    .AsBatchAsync();
                 await context.ExecuteAsync();
 
                 Assert.IsTrue(context.Web.Lists.Length == 2);
