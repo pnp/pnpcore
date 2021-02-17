@@ -197,21 +197,24 @@ namespace PnP.Core.Test.Base
                 var web = context.Web;
 
                 // Are the property populated
-                Assert.IsTrue(web.Lists.First().IsPropertyAvailable(p => p.Title));
-                Assert.IsTrue(web.Lists.First().IsPropertyAvailable(p => p.Description));
-                Assert.IsTrue(web.Lists.First().Fields.Requested);
-                Assert.IsTrue(web.Lists.First().Fields.First().IsPropertyAvailable(p => p.StaticName));
+                var firstList = web.Lists.AsEnumerable().First();
+                Assert.IsTrue(firstList.IsPropertyAvailable(p => p.Title));
+                Assert.IsTrue(firstList.IsPropertyAvailable(p => p.Description));
+                Assert.IsTrue(firstList.Fields.Requested);
+
+                var firstField = firstList.Fields.AsEnumerable().First();
+                Assert.IsTrue(firstField.IsPropertyAvailable(p => p.StaticName));
 
                 // Are other properties still not available
                 Assert.IsFalse(web.IsPropertyAvailable(p => p.AlternateCssUrl));
-                Assert.IsFalse(web.Lists.First().IsPropertyAvailable(p => p.TemplateFeatureId));
-                Assert.IsFalse(web.Lists.First().Fields.First().IsPropertyAvailable(p => p.Title));
-                Assert.IsFalse(web.Lists.First().Fields.First().IsPropertyAvailable(p => p.SchemaXml));
+                Assert.IsFalse(firstList.IsPropertyAvailable(p => p.TemplateFeatureId));
+                Assert.IsFalse(firstField.IsPropertyAvailable(p => p.Title));
+                Assert.IsFalse(firstField.IsPropertyAvailable(p => p.SchemaXml));
             }
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))
             {
-                await context.Web.GetAsync(p => p.Lists.QueryProperties(p => p.Title, p => p.Description, p => p.Fields.QueryProperties(p => p.StaticName)), p => p.WelcomePage);
+                await context.Web.LoadAsync(p => p.Lists.QueryProperties(p => p.Title, p => p.Description, p => p.Fields.QueryProperties(p => p.StaticName)), p => p.WelcomePage);
 
                 Assert.IsTrue(context.Web.IsPropertyAvailable(p => p.Lists));
                 Assert.IsTrue(context.Web.IsPropertyAvailable(p => p.WelcomePage));
@@ -221,21 +224,24 @@ namespace PnP.Core.Test.Base
                 var web = context.Web;
 
                 // Are the property populated
-                Assert.IsTrue(web.Lists.First().IsPropertyAvailable(p => p.Title));
-                Assert.IsTrue(web.Lists.First().IsPropertyAvailable(p => p.Description));
-                Assert.IsTrue(web.Lists.First().Fields.Requested);
-                Assert.IsTrue(web.Lists.First().Fields.First().IsPropertyAvailable(p => p.StaticName));
+                var firstList = web.Lists.AsEnumerable().First();
+                Assert.IsTrue(firstList.IsPropertyAvailable(p => p.Title));
+                Assert.IsTrue(firstList.IsPropertyAvailable(p => p.Description));
+                Assert.IsTrue(firstList.Fields.Requested);
+
+                var firstField = firstList.Fields.AsEnumerable().First();
+                Assert.IsTrue(firstField.IsPropertyAvailable(p => p.StaticName));
 
                 // Are other properties still not available
                 Assert.IsFalse(web.IsPropertyAvailable(p => p.AlternateCssUrl));
-                Assert.IsFalse(web.Lists.First().IsPropertyAvailable(p => p.TemplateFeatureId));
-                Assert.IsFalse(web.Lists.First().Fields.First().IsPropertyAvailable(p => p.Title));
-                Assert.IsFalse(web.Lists.First().Fields.First().IsPropertyAvailable(p => p.SchemaXml));
+                Assert.IsFalse(firstList.IsPropertyAvailable(p => p.TemplateFeatureId));
+                Assert.IsFalse(firstField.IsPropertyAvailable(p => p.Title));
+                Assert.IsFalse(firstField.IsPropertyAvailable(p => p.SchemaXml));
             }
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 3))
             {
-                await context.Web.GetAsync(p => p.Lists.QueryProperties(p => p.Title, p => p.Description), p => p.WelcomePage);
+                await context.Web.LoadAsync(p => p.Lists.QueryProperties(p => p.Title, p => p.Description), p => p.WelcomePage);
 
                 Assert.IsTrue(context.Web.IsPropertyAvailable(p => p.Lists));
                 Assert.IsTrue(context.Web.IsPropertyAvailable(p => p.WelcomePage));
@@ -245,18 +251,20 @@ namespace PnP.Core.Test.Base
                 var web = context.Web;
 
                 // Are the property populated
-                Assert.IsTrue(web.Lists.First().IsPropertyAvailable(p => p.Title));
-                Assert.IsTrue(web.Lists.First().IsPropertyAvailable(p => p.Description));
-                Assert.IsTrue(web.Lists.First().Fields.Requested);
-                Assert.IsTrue(web.Lists.First().Fields.First().IsPropertyAvailable(p => p.StaticName));
+                var firstList = web.Lists.AsEnumerable().First();
+                Assert.IsTrue(firstList.IsPropertyAvailable(p => p.Title));
+                Assert.IsTrue(firstList.IsPropertyAvailable(p => p.Description));
+                Assert.IsTrue(firstList.Fields.Requested);
+
+                var firstField = firstList.Fields.AsEnumerable().First();
+                Assert.IsTrue(firstField.IsPropertyAvailable(p => p.StaticName));
 
                 // Are other properties still not available
                 Assert.IsFalse(web.IsPropertyAvailable(p => p.AlternateCssUrl));
-                Assert.IsFalse(web.Lists.First().IsPropertyAvailable(p => p.TemplateFeatureId));
-                Assert.IsFalse(web.Lists.First().Fields.First().IsPropertyAvailable(p => p.Title));
-                Assert.IsFalse(web.Lists.First().Fields.First().IsPropertyAvailable(p => p.SchemaXml));
+                Assert.IsFalse(firstList.IsPropertyAvailable(p => p.TemplateFeatureId));
+                Assert.IsFalse(firstField.IsPropertyAvailable(p => p.Title));
+                Assert.IsFalse(firstField.IsPropertyAvailable(p => p.SchemaXml));
             }
         }
-
     }
 }
