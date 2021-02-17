@@ -211,7 +211,7 @@ namespace PnP.Core.Test.Base
 
                 Assert.IsTrue(team.Requested);
                 Assert.IsTrue(!string.IsNullOrEmpty(team.DisplayName));
-                Assert.IsTrue(team.Channels.Any());
+                Assert.IsTrue(team.Channels.Length > 0);
             }
         }
 
@@ -273,7 +273,7 @@ namespace PnP.Core.Test.Base
 
                 Assert.IsTrue(team.Requested);
                 Assert.IsTrue(!string.IsNullOrEmpty(team.DisplayName));
-                Assert.IsTrue(team.Channels.Any());
+                Assert.IsTrue(team.Channels.Length > 0);
             }
         }
 
@@ -333,7 +333,7 @@ namespace PnP.Core.Test.Base
 
                 Assert.IsTrue(team.Requested);
                 Assert.IsTrue(!string.IsNullOrEmpty(team.DisplayName));
-                Assert.IsTrue(team.Channels.Any());
+                Assert.IsTrue(team.Channels.Length > 0);
             }
         }
 
