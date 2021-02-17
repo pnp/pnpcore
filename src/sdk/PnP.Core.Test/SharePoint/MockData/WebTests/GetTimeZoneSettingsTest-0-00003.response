@@ -1,9 +1,9 @@
---batchresponse_f1d3f739-2c16-430b-83ef-12bff32b5853
+--batchresponse_b170726d-cea9-4a39-b8e3-fc749eb7a9a8
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{"d":{"__metadata":{"id":"https://piasysdev.sharepoint.com/sites/prov-1/testsub1/_api/web/regionalsettings/timezone","uri":"https://piasysdev.sharepoint.com/sites/prov-1/testsub1/_api/web/regionalsettings/timezone","type":"SP.TimeZone"},"Description":"(UTC-08:00) Pacific Time (US and Canada)","Id":13,"Information":{"__metadata":{"type":"SP.TimeZoneInformation"},"Bias":480,"DaylightBias":-60,"StandardBias":0}}}
---batchresponse_f1d3f739-2c16-430b-83ef-12bff32b5853--
+{"d":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/testsub1/_api/web/regionalsettings/timezone","uri":"https://bertonline.sharepoint.com/sites/prov-1/testsub1/_api/web/regionalsettings/timezone","type":"SP.TimeZone"},"Description":"(UTC-08:00) Pacific Time (US and Canada)","Id":13,"Information":{"__metadata":{"type":"SP.TimeZoneInformation"},"Bias":480,"DaylightBias":-60,"StandardBias":0}}}
+--batchresponse_b170726d-cea9-4a39-b8e3-fc749eb7a9a8--

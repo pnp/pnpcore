@@ -47,6 +47,11 @@ namespace PnP.Core.Test.Utilities
         internal static string NoGroupTestSite { get { return "NoGroupTestSite"; } }
 
         /// <summary>
+        /// Name of the default no group test site configuration
+        /// </summary>
+        internal static string ClassicSTS0TestSite { get { return "ClassicSTS0TestSite"; } }
+
+        /// <summary>
         /// Name of the default test site confguration when using an access token to authenticate
         /// </summary>
         internal static string TestSiteAccessToken { get { return "TestSiteAccessToken"; } }
@@ -239,12 +244,14 @@ namespace PnP.Core.Test.Utilities
                 string targetSiteUrl = configuration.GetValue<string>("PnPCore:Sites:TestSite:SiteUrl");
                 string targetSubSiteUrl = configuration.GetValue<string>("PnPCore:Sites:TestSubSite:SiteUrl");
                 string noGroupSiteUrl = configuration.GetValue<string>("PnPCore:Sites:NoGroupTestSite:SiteUrl");
+                string classicSTS0SiteUrl = configuration.GetValue<string>("PnPCore:Sites:ClassicSTS0TestSite:SiteUrl");
 
                 if (RunningInGitHubWorkflow())
                 {
                     targetSiteUrl = "https://bertonline.sharepoint.com/sites/prov-1";
                     targetSubSiteUrl = "https://bertonline.sharepoint.com/sites/prov-1/testsub1";
                     noGroupSiteUrl = "https://bertonline.sharepoint.com/sites/modern";
+                    classicSTS0SiteUrl = "https://bertonline.sharepoint.com/sites/sts0";
                 }
 
                 var serviceProvider = new ServiceCollection()
@@ -269,7 +276,8 @@ namespace PnP.Core.Test.Utilities
                 {
                     { TestSite, new Uri(targetSiteUrl) },
                     { TestSubSite, new Uri(targetSubSiteUrl) },
-                    { NoGroupTestSite, new Uri(noGroupSiteUrl) }
+                    { NoGroupTestSite, new Uri(noGroupSiteUrl) },
+                    { ClassicSTS0TestSite, new Uri(classicSTS0SiteUrl) }
                 };
 
                 var pnpContextFactory = serviceProvider.GetRequiredService<IPnPTestContextFactory>();
