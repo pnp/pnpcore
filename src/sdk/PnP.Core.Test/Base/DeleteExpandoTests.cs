@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using PnP.Core.Model;
+using PnP.Core.QueryModel;
 
 namespace PnP.Core.Test.Base
 {
@@ -58,7 +59,7 @@ namespace PnP.Core.Test.Base
                 try
                 {
                     // grab first item
-                    var firstItem = myList.Items.FirstOrDefault();
+                    var firstItem = myList.Items.AsEnumerable().FirstOrDefault();
                     if (firstItem != null)
                     {
                         // get original item count
@@ -91,7 +92,7 @@ namespace PnP.Core.Test.Base
                         Assert.IsTrue(exceptionThrown);
 
                         // get items from the list
-                        await myList.GetAsync(p => p.Items);
+                        await myList.LoadAsync(p => p.Items);
 
                         Assert.IsTrue(myList.Items.Length == itemCount - 1);
                     }
@@ -139,7 +140,7 @@ namespace PnP.Core.Test.Base
                 try
                 {
                     // grab first item
-                    var firstItem = myList.Items.FirstOrDefault();
+                    var firstItem = myList.Items.AsEnumerable().FirstOrDefault();
                     if (firstItem != null)
                     {
                         // get original item count
@@ -173,7 +174,7 @@ namespace PnP.Core.Test.Base
                         Assert.IsTrue(exceptionThrown);
 
                         // get items from the list
-                        await myList.GetBatchAsync(p => p.Items);
+                        await myList.LoadBatchAsync(p => p.Items);
                         await context.ExecuteAsync();
 
                         Assert.IsTrue(myList.Items.Length == itemCount - 1);
