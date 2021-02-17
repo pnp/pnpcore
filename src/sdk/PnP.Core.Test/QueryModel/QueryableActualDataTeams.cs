@@ -35,7 +35,7 @@ namespace PnP.Core.Test.QueryModel
         }
 
         [TestMethod]
-        [ExpectedException(typeof(MicrosoftGraphServiceException))]
+        [ExpectedException(typeof(ClientException))]
         public async Task TestQueryTeamChannelMessages()
         {
             var expectedDisplayName = "General";
