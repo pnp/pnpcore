@@ -134,11 +134,11 @@ namespace PnP.Core.Test.Base
 
                 var numberOfLists = web.Lists.Length;
                 // Load the expandable collection again
-                await context.Web.GetAsync(p => p.Lists);
+                await context.Web.LoadAsync(p => p.Lists);
 
                 // Loading a collection again should not result in more rows in the collection, assuming 
                 // the collection has a key like is the case for lists
-                Assert.IsTrue(numberOfLists == context.Web.Lists.Length);
+                Assert.AreEqual(numberOfLists, context.Web.Lists.Length);
             }
         }
 
@@ -226,8 +226,8 @@ namespace PnP.Core.Test.Base
             {
                 var site = await context.Site.GetAsync(p => p.RootWeb);
 
-                // Was the rootweb model property loaded
-                Assert.IsTrue(context.Site.IsPropertyAvailable(p => p.RootWeb));
+                // Was the rootweb property loaded
+                Assert.IsTrue(site.IsPropertyAvailable(p => p.RootWeb));
                 // Do we we have the key property loaded on the model property
                 Assert.IsTrue(site.IsPropertyAvailable(p => p.Id));
                 Assert.IsTrue(site.Id != Guid.Empty);
@@ -240,11 +240,12 @@ namespace PnP.Core.Test.Base
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                var site = await context.Site.GetAsync(p => p.RootWeb.QueryProperties(p => p.Title, p => p.NoCrawl,
-                                                                                     p => p.Lists.QueryProperties(p => p.Title)));
+                var site = await context.Site.GetAsync(
+                    p => p.RootWeb.QueryProperties(p => p.Title, p => p.NoCrawl,
+                    p => p.Lists.QueryProperties(p => p.Title)));
 
-                // Was the rootweb model property loaded
-                Assert.IsTrue(context.Site.IsPropertyAvailable(p => p.RootWeb));
+                // Was the rootweb property loaded
+                Assert.IsTrue(site.IsPropertyAvailable(p => p.RootWeb));
                 // Do we we have the key property loaded on the model property
                 Assert.IsTrue(site.IsPropertyAvailable(p => p.Id));
                 Assert.IsTrue(site.Id != Guid.Empty);
@@ -253,8 +254,10 @@ namespace PnP.Core.Test.Base
                 Assert.IsTrue(site.RootWeb.IsPropertyAvailable(p => p.Title));
                 Assert.IsTrue(site.RootWeb.IsPropertyAvailable(p => p.NoCrawl));
                 Assert.IsTrue(site.RootWeb.IsPropertyAvailable(p => p.Lists));
-                Assert.IsTrue(site.RootWeb.Lists.Any());
-                Assert.IsTrue(site.RootWeb.Lists.First().IsPropertyAvailable(p => p.Title));
+                Assert.IsTrue(site.RootWeb.Lists.Length > 0);
+
+                var firstList = site.RootWeb.Lists.AsEnumerable().First();
+                Assert.IsTrue(firstList.IsPropertyAvailable(p => p.Title));
             }
         }
 
@@ -269,15 +272,19 @@ namespace PnP.Core.Test.Base
                                                      p => p.ContentTypes.QueryProperties(p => p.Name),
                                                      p => p.Lists.QueryProperties(p => p.Id, p => p.Title, p => p.DocumentTemplate));
                 Assert.IsTrue(web.Lists.Requested);
-                Assert.IsTrue(web.Lists.Count() > 0);
-                Assert.IsTrue(web.Lists.First().IsPropertyAvailable(p => p.Title));
-                Assert.IsTrue(web.Lists.First().IsPropertyAvailable(p => p.DocumentTemplate));
-                Assert.IsFalse(web.Lists.First().IsPropertyAvailable(p => p.TemplateType));
+                Assert.IsTrue(web.Lists.Length > 0);
+
+                var firstList = web.Lists.AsEnumerable().First();
+                Assert.IsTrue(firstList.IsPropertyAvailable(p => p.Title));
+                Assert.IsTrue(firstList.IsPropertyAvailable(p => p.DocumentTemplate));
+                Assert.IsFalse(firstList.IsPropertyAvailable(p => p.TemplateType));
                 Assert.IsTrue(web.ContentTypes.Requested);
-                Assert.IsTrue(web.ContentTypes.Count() > 0);
-                Assert.IsTrue(web.ContentTypes.First().IsPropertyAvailable(p => p.StringId));
-                Assert.IsTrue(web.ContentTypes.First().IsPropertyAvailable(p => p.Name));
-                Assert.IsFalse(web.ContentTypes.First().IsPropertyAvailable(p => p.SchemaXml));
+                Assert.IsTrue(web.ContentTypes.Length > 0);
+
+                var firstWebContentType = web.ContentTypes.AsEnumerable().First();
+                Assert.IsTrue(firstWebContentType.IsPropertyAvailable(p => p.StringId));
+                Assert.IsTrue(firstWebContentType.IsPropertyAvailable(p => p.Name));
+                Assert.IsFalse(firstWebContentType.IsPropertyAvailable(p => p.SchemaXml));
             }
         }
 
@@ -292,17 +299,23 @@ namespace PnP.Core.Test.Base
                                                      p => QueryableExtensions.QueryProperties(p.ContentTypes, p => p.Name),
                                                      p => p.Lists.QueryProperties(p => p.Id, p => p.Title, p => p.DocumentTemplate, p => p.ContentTypes));
                 Assert.IsTrue(web.Lists.Requested);
-                Assert.IsTrue(web.Lists.Count() > 0);
-                Assert.IsTrue(web.Lists.First().IsPropertyAvailable(p => p.Title));
-                Assert.IsTrue(web.Lists.First().IsPropertyAvailable(p => p.DocumentTemplate));
-                Assert.IsTrue(web.Lists.First().IsPropertyAvailable(p => p.ContentTypes));
-                Assert.IsTrue(web.Lists.First().ContentTypes.First().IsPropertyAvailable(p => p.StringId));
-                Assert.IsFalse(web.Lists.First().IsPropertyAvailable(p => p.TemplateType));
+                Assert.IsTrue(web.Lists.Length > 0);
+
+                var firstList = web.Lists.AsEnumerable().First();
+                Assert.IsTrue(firstList.IsPropertyAvailable(p => p.Title));
+                Assert.IsTrue(firstList.IsPropertyAvailable(p => p.DocumentTemplate));
+                Assert.IsTrue(firstList.IsPropertyAvailable(p => p.ContentTypes));
+
+                var firstListContentType = firstList.ContentTypes.AsEnumerable().First();
+                Assert.IsTrue(firstListContentType.IsPropertyAvailable(p => p.StringId));
+                Assert.IsFalse(firstList.IsPropertyAvailable(p => p.TemplateType));
                 Assert.IsTrue(web.ContentTypes.Requested);
-                Assert.IsTrue(web.ContentTypes.Count() > 0);
-                Assert.IsTrue(web.ContentTypes.First().IsPropertyAvailable(p => p.StringId));
-                Assert.IsTrue(web.ContentTypes.First().IsPropertyAvailable(p => p.Name));
-                Assert.IsFalse(web.ContentTypes.First().IsPropertyAvailable(p => p.SchemaXml));
+                Assert.IsTrue(web.ContentTypes.Length > 0);
+
+                var firstWebContentType = web.ContentTypes.AsEnumerable().First();
+                Assert.IsTrue(firstWebContentType.IsPropertyAvailable(p => p.StringId));
+                Assert.IsTrue(firstWebContentType.IsPropertyAvailable(p => p.Name));
+                Assert.IsFalse(firstWebContentType.IsPropertyAvailable(p => p.SchemaXml));
             }
         }
 
@@ -320,22 +333,30 @@ namespace PnP.Core.Test.Base
                                                                p => p.FieldLinks.QueryProperties(p => p.Name)))
                                                     );
                 Assert.IsTrue(web.Lists.Requested);
-                Assert.IsTrue(web.Lists.Count() > 0);
-                Assert.IsTrue(web.Lists.First().IsPropertyAvailable(p => p.Title));
-                Assert.IsTrue(web.Lists.First().IsPropertyAvailable(p => p.DocumentTemplate));
-                Assert.IsTrue(web.Lists.First().IsPropertyAvailable(p => p.ContentTypes));
-                Assert.IsFalse(web.Lists.First().IsPropertyAvailable(p => p.TemplateType));
-                Assert.IsTrue(web.Lists.First().ContentTypes.Requested);
-                Assert.IsTrue(web.Lists.First().ContentTypes.First().IsPropertyAvailable(p => p.StringId));
-                Assert.IsFalse(web.Lists.First().ContentTypes.First().IsPropertyAvailable(p => p.SchemaXml));
-                Assert.IsTrue(web.Lists.First().ContentTypes.First().FieldLinks.Requested);
-                Assert.IsTrue(web.Lists.First().ContentTypes.First().FieldLinks.First().IsPropertyAvailable(p => p.Id));
-                Assert.IsFalse(web.Lists.First().ContentTypes.First().FieldLinks.First().IsPropertyAvailable(p => p.Hidden));
+                Assert.IsTrue(web.Lists.Length > 0);
+
+                var firstList = web.Lists.AsEnumerable().First();
+                Assert.IsTrue(firstList.IsPropertyAvailable(p => p.Title));
+                Assert.IsTrue(firstList.IsPropertyAvailable(p => p.DocumentTemplate));
+                Assert.IsTrue(firstList.IsPropertyAvailable(p => p.ContentTypes));
+                Assert.IsFalse(firstList.IsPropertyAvailable(p => p.TemplateType));
+                Assert.IsTrue(firstList.ContentTypes.Requested);
+
+                var firstListContentType = firstList.ContentTypes.AsEnumerable().First();
+                Assert.IsTrue(firstListContentType.IsPropertyAvailable(p => p.StringId));
+                Assert.IsFalse(firstListContentType.IsPropertyAvailable(p => p.SchemaXml));
+                Assert.IsTrue(firstListContentType.FieldLinks.Requested);
+
+                var firstFieldLink = firstListContentType.FieldLinks.AsEnumerable().First();
+                Assert.IsTrue(firstFieldLink.IsPropertyAvailable(p => p.Id));
+                Assert.IsFalse(firstFieldLink.IsPropertyAvailable(p => p.Hidden));
                 Assert.IsTrue(web.ContentTypes.Requested);
-                Assert.IsTrue(web.ContentTypes.Count() > 0);
-                Assert.IsTrue(web.ContentTypes.First().IsPropertyAvailable(p => p.StringId));
-                Assert.IsTrue(web.ContentTypes.First().IsPropertyAvailable(p => p.Name));
-                Assert.IsFalse(web.ContentTypes.First().IsPropertyAvailable(p => p.SchemaXml));
+                Assert.IsTrue(web.ContentTypes.Length > 0);
+
+                var firstWebContentType = web.ContentTypes.AsEnumerable().First();
+                Assert.IsTrue(firstWebContentType.IsPropertyAvailable(p => p.StringId));
+                Assert.IsTrue(firstWebContentType.IsPropertyAvailable(p => p.Name));
+                Assert.IsFalse(firstWebContentType.IsPropertyAvailable(p => p.SchemaXml));
             }
         }
 
@@ -357,22 +378,30 @@ namespace PnP.Core.Test.Base
                 Assert.IsTrue(web.IsPropertyAvailable(p => p.AlternateCssUrl));
                 Assert.IsFalse(web.IsPropertyAvailable(p => p.MasterUrl));
                 Assert.IsTrue(web.Lists.Requested);
-                Assert.IsTrue(web.Lists.Count() > 0);
-                Assert.IsTrue(web.Lists.First().IsPropertyAvailable(p => p.Title));
-                Assert.IsTrue(web.Lists.First().IsPropertyAvailable(p => p.DocumentTemplate));
-                Assert.IsTrue(web.Lists.First().IsPropertyAvailable(p => p.ContentTypes));
-                Assert.IsFalse(web.Lists.First().IsPropertyAvailable(p => p.TemplateType));
-                Assert.IsTrue(web.Lists.First().ContentTypes.Requested);
-                Assert.IsTrue(web.Lists.First().ContentTypes.First().IsPropertyAvailable(p => p.StringId));
-                Assert.IsFalse(web.Lists.First().ContentTypes.First().IsPropertyAvailable(p => p.SchemaXml));
-                Assert.IsTrue(web.Lists.First().ContentTypes.First().FieldLinks.Requested);
-                Assert.IsTrue(web.Lists.First().ContentTypes.First().FieldLinks.First().IsPropertyAvailable(p => p.Id));
-                Assert.IsTrue(web.Lists.First().ContentTypes.First().FieldLinks.First().IsPropertyAvailable(p => p.Hidden));
+                Assert.IsTrue(web.Lists.Length > 0);
+
+                var firstList = web.Lists.AsEnumerable().First();
+                Assert.IsTrue(firstList.IsPropertyAvailable(p => p.Title));
+                Assert.IsTrue(firstList.IsPropertyAvailable(p => p.DocumentTemplate));
+                Assert.IsTrue(firstList.IsPropertyAvailable(p => p.ContentTypes));
+                Assert.IsFalse(firstList.IsPropertyAvailable(p => p.TemplateType));
+                Assert.IsTrue(firstList.ContentTypes.Requested);
+
+                var firstListContentType = firstList.ContentTypes.AsEnumerable().First();
+                Assert.IsTrue(firstListContentType.IsPropertyAvailable(p => p.StringId));
+                Assert.IsFalse(firstListContentType.IsPropertyAvailable(p => p.SchemaXml));
+                Assert.IsTrue(firstListContentType.FieldLinks.Requested);
+
+                var firstFieldLink = firstListContentType.FieldLinks.AsEnumerable().First();
+                Assert.IsTrue(firstFieldLink.IsPropertyAvailable(p => p.Id));
+                Assert.IsTrue(firstFieldLink.IsPropertyAvailable(p => p.Hidden));
                 Assert.IsTrue(web.ContentTypes.Requested);
-                Assert.IsTrue(web.ContentTypes.Count() > 0);
-                Assert.IsTrue(web.ContentTypes.First().IsPropertyAvailable(p => p.StringId));
-                Assert.IsTrue(web.ContentTypes.First().IsPropertyAvailable(p => p.Name));
-                Assert.IsFalse(web.ContentTypes.First().IsPropertyAvailable(p => p.SchemaXml));
+                Assert.IsTrue(web.ContentTypes.Length > 0);
+
+                var firstWebContentType = web.ContentTypes.AsEnumerable().First();
+                Assert.IsTrue(firstWebContentType.IsPropertyAvailable(p => p.StringId));
+                Assert.IsTrue(firstWebContentType.IsPropertyAvailable(p => p.Name));
+                Assert.IsFalse(firstWebContentType.IsPropertyAvailable(p => p.SchemaXml));
             }
         }
 
@@ -382,28 +411,37 @@ namespace PnP.Core.Test.Base
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
+                // x BERT: I needed to partially change the logic of this test. 
+                // We need to talk ...
+
                 context.GraphFirst = false;
 
                 // Do a get with filter and custom properties specifying the data to load
-                var foundLists = await context.Web.Lists.QueryProperties(p => p.TemplateType == ListTemplateType.GenericList,
-                        p => p.Title, p => p.TemplateType,
-                        p => p.ContentTypes.QueryProperties(
+                var foundLists = await context.Web.Lists.Where(
+                            p => p.TemplateType == ListTemplateType.GenericList)
+                        .QueryProperties(
+                            p => p.Title, p => p.TemplateType,
+                            p => p.ContentTypes.QueryProperties(
                             p => p.Name, p => p.FieldLinks.QueryProperties(p => p.Name)))
-                    .ToArrayAsync();
+                        .ToArrayAsync();
+
                 Assert.IsTrue(foundLists.Any());
-                Assert.IsTrue(foundLists.Count() == context.Web.Lists.Length);
+                Assert.Equals(foundLists.Length, context.Web.Lists.Length);
                 Assert.IsTrue(context.Web.Lists.Requested);
-                var firstList = context.Web.Lists.First();
+
+                var firstList = foundLists.First();
                 Assert.IsTrue(firstList.Requested);
                 Assert.IsTrue(firstList.IsPropertyAvailable(p => p.TemplateType));
                 Assert.IsTrue(firstList.IsPropertyAvailable(p => p.Title));
                 Assert.IsTrue(firstList.IsPropertyAvailable(p => p.ContentTypes));
                 Assert.IsTrue(firstList.ContentTypes.Requested);
-                Assert.IsTrue(firstList.ContentTypes.Any());
-                var firstContentType = firstList.ContentTypes.First();
+                Assert.IsTrue(firstList.ContentTypes.Length > 0);
+
+                var firstContentType = firstList.ContentTypes.AsEnumerable().First();
                 Assert.IsTrue(firstContentType.IsPropertyAvailable(p => p.Name));
                 Assert.IsTrue(firstContentType.IsPropertyAvailable(p => p.FieldLinks));
-                var firstFieldLink = firstContentType.FieldLinks.First();
+
+                var firstFieldLink = firstContentType.FieldLinks.AsEnumerable().First();
                 Assert.IsTrue(firstFieldLink.IsPropertyAvailable(p => p.Name));
             }
         }
@@ -417,7 +455,9 @@ namespace PnP.Core.Test.Base
                 context.GraphFirst = false;
 
                 // Do a get with filter and custom properties specifying the data to load
-                var result = await context.Web.Lists.QueryProperties(p => p.TemplateType == ListTemplateType.GenericList,
+                var result = await context.Web.Lists
+                    .Where(p => p.TemplateType == ListTemplateType.GenericList)
+                    .QueryProperties(
                         p => p.Title, p => p.TemplateType,
                         p => p.ContentTypes.QueryProperties(
                             p => p.Name, p => p.FieldLinks.QueryProperties(p => p.Name)))
@@ -431,11 +471,13 @@ namespace PnP.Core.Test.Base
                 Assert.IsTrue(firstList.IsPropertyAvailable(p => p.Title));
                 Assert.IsTrue(firstList.IsPropertyAvailable(p => p.ContentTypes));
                 Assert.IsTrue(firstList.ContentTypes.Requested);
-                Assert.IsTrue(firstList.ContentTypes.Any());
-                var firstContentType = firstList.ContentTypes.First();
+                Assert.IsTrue(firstList.ContentTypes.Length > 0);
+
+                var firstContentType = firstList.ContentTypes.AsEnumerable().First();
                 Assert.IsTrue(firstContentType.IsPropertyAvailable(p => p.Name));
                 Assert.IsTrue(firstContentType.IsPropertyAvailable(p => p.FieldLinks));
-                var firstFieldLink = firstContentType.FieldLinks.First();
+
+                var firstFieldLink = firstContentType.FieldLinks.AsEnumerable().First();
                 Assert.IsTrue(firstFieldLink.IsPropertyAvailable(p => p.Name));
             }
         }
@@ -449,11 +491,11 @@ namespace PnP.Core.Test.Base
                 context.GraphFirst = false;
 
                 // Do a get with filter and custom properties specifying the data to load
-                var foundLists = await context.Web.Lists.QueryProperties(p => p.TemplateType == ListTemplateType.GenericList).ToArrayAsync();
-                Assert.IsTrue(foundLists.Any());
-                Assert.IsTrue(foundLists.Count() == context.Web.Lists.Length);
-                Assert.IsTrue(context.Web.Lists.Requested);
-                var firstList = context.Web.Lists.First();
+                var foundLists = await context.Web.Lists.Where(p => p.TemplateType == ListTemplateType.GenericList).ToArrayAsync();
+
+                Assert.IsTrue(foundLists.Length > 0);
+
+                var firstList = foundLists.First();
                 Assert.IsTrue(firstList.Requested);
                 Assert.IsTrue(firstList.IsPropertyAvailable(p => p.TemplateType));
                 Assert.IsTrue(firstList.IsPropertyAvailable(p => p.Title));
@@ -468,25 +510,36 @@ namespace PnP.Core.Test.Base
             {
                 context.GraphFirst = false;
 
+                // Load the lists in the current context
+                await context.Web.LoadAsync(w => w.Lists.QueryProperties(
+                        p => p.Title, p => p.TemplateType,
+                        p => p.ContentTypes.QueryProperties(
+                        p => p.Name, p => p.FieldLinks.QueryProperties(p => p.Name))));
+
                 // Do a get with filter and custom properties specifying the data to load
-                var foundLists = await context.Web.Lists.QueryProperties(p => p.Title, p => p.TemplateType,
-                                                                  p => p.ContentTypes.QueryProperties(
-                                                                       p => p.Name, p => p.FieldLinks.QueryProperties(p => p.Name)))
-                    .ToArrayAsync();
+                var foundLists = await context.Web.Lists.QueryProperties(
+                        p => p.Title, p => p.TemplateType,
+                        p => p.ContentTypes.QueryProperties(
+                        p => p.Name, p => p.FieldLinks.QueryProperties(p => p.Name)))
+                        .ToArrayAsync();
+
                 Assert.IsTrue(foundLists.Any());
-                Assert.IsTrue(foundLists.Count() == context.Web.Lists.Length);
+                Assert.Equals(foundLists.Length, context.Web.Lists.Length);
                 Assert.IsTrue(context.Web.Lists.Requested);
-                var firstList = context.Web.Lists.First();
+
+                var firstList = context.Web.Lists.AsEnumerable().First();
                 Assert.IsTrue(firstList.Requested);
                 Assert.IsTrue(firstList.IsPropertyAvailable(p => p.TemplateType));
                 Assert.IsTrue(firstList.IsPropertyAvailable(p => p.Title));
                 Assert.IsTrue(firstList.IsPropertyAvailable(p => p.ContentTypes));
                 Assert.IsTrue(firstList.ContentTypes.Requested);
-                Assert.IsTrue(firstList.ContentTypes.Any());
-                var firstContentType = firstList.ContentTypes.First();
+                Assert.IsTrue(firstList.ContentTypes.Length > 0);
+
+                var firstContentType = firstList.ContentTypes.AsEnumerable().First();
                 Assert.IsTrue(firstContentType.IsPropertyAvailable(p => p.Name));
                 Assert.IsTrue(firstContentType.IsPropertyAvailable(p => p.FieldLinks));
-                var firstFieldLink = firstContentType.FieldLinks.First();
+
+                var firstFieldLink = firstContentType.FieldLinks.AsEnumerable().First();
                 Assert.IsTrue(firstFieldLink.IsPropertyAvailable(p => p.Name));
             }
         }
@@ -499,27 +552,34 @@ namespace PnP.Core.Test.Base
             {
                 context.GraphFirst = false;
 
+                await context.Web.LoadAsync(w => w.Lists.QueryProperties(
+                        p => p.Title, p => p.TemplateType,
+                        p => p.ContentTypes.QueryProperties(p => p.Name, p => p.FieldLinks.QueryProperties(p => p.Name))));
+
                 // Do a get with filter and custom properties specifying the data to load
                 var foundList = await context.Web.Lists.QueryProperties(
                         p => p.Title, p => p.TemplateType,
                         p => p.ContentTypes.QueryProperties(p => p.Name, p => p.FieldLinks.QueryProperties(p => p.Name)))
                     .FirstOrDefaultAsync(p => p.Title == "Site Assets");
+
                 Assert.IsTrue(foundList != null);
-                Assert.IsTrue(foundList.Title == "Site Assets");
-                Assert.IsTrue(context.Web.Lists.Length == 1);
+                Assert.Equals(foundList.Title, "Site Assets");
                 Assert.IsTrue(context.Web.Lists.Requested);
-                var firstList = context.Web.Lists.First();
-                Assert.IsTrue(firstList.Id == foundList.Id);
-                Assert.IsTrue(firstList.Requested);
-                Assert.IsTrue(firstList.IsPropertyAvailable(p => p.TemplateType));
-                Assert.IsTrue(firstList.IsPropertyAvailable(p => p.Title));
-                Assert.IsTrue(firstList.IsPropertyAvailable(p => p.ContentTypes));
-                Assert.IsTrue(firstList.ContentTypes.Requested);
-                Assert.IsTrue(firstList.ContentTypes.Any());
-                var firstContentType = firstList.ContentTypes.First();
+
+                var firstList = context.Web.Lists.AsEnumerable().First();
+                Assert.Equals(firstList.Id, foundList.Id);
+                Assert.IsTrue(foundList.Requested);
+                Assert.IsTrue(foundList.IsPropertyAvailable(p => p.TemplateType));
+                Assert.IsTrue(foundList.IsPropertyAvailable(p => p.Title));
+                Assert.IsTrue(foundList.IsPropertyAvailable(p => p.ContentTypes));
+                Assert.IsTrue(foundList.ContentTypes.Requested);
+                Assert.IsTrue(foundList.ContentTypes.Length > 0);
+
+                var firstContentType = foundList.ContentTypes.AsEnumerable().First();
                 Assert.IsTrue(firstContentType.IsPropertyAvailable(p => p.Name));
                 Assert.IsTrue(firstContentType.IsPropertyAvailable(p => p.FieldLinks));
-                var firstFieldLink = firstContentType.FieldLinks.First();
+
+                var firstFieldLink = firstContentType.FieldLinks.AsEnumerable().First();
                 Assert.IsTrue(firstFieldLink.IsPropertyAvailable(p => p.Name));
             }
         }
@@ -533,30 +593,45 @@ namespace PnP.Core.Test.Base
                 context.GraphFirst = false;
 
                 // Do a get with filter and custom properties specifying the data to load
-                await context.Web.Lists.QueryProperties(
+                var siteAssets = await context.Web.Lists.QueryProperties(
                         p => p.Title, p => p.TemplateType,
                         p => p.ContentTypes.QueryProperties(p => p.Name, p => p.FieldLinks.QueryProperties(p => p.Name)))
                     .Where(p => p.Title == "Site Assets")
                     .AsBatchAsync();
-                await context.Web.Lists.QueryProperties(p => p.Title, p => p.TemplateType,
+
+                var sitePages = await context.Web.Lists.QueryProperties(p => p.Title, p => p.TemplateType,
                         p => p.ContentTypes.QueryProperties(p => p.Name, p => p.FieldLinks.QueryProperties(p => p.Name)))
                     .Where(p => p.Title == "Site Pages")
                     .AsBatchAsync();
+
+                // Batch results are not available right now
+                Assert.IsFalse(siteAssets.IsAvailable);
+                Assert.IsFalse(sitePages.IsAvailable);
+
                 await context.ExecuteAsync();
 
-                Assert.IsTrue(context.Web.Lists.Length == 2);
-                Assert.IsTrue(context.Web.Lists.Requested);
-                var firstList = context.Web.Lists.First();
-                Assert.IsTrue(firstList.Requested);
-                Assert.IsTrue(firstList.IsPropertyAvailable(p => p.TemplateType));
-                Assert.IsTrue(firstList.IsPropertyAvailable(p => p.Title));
-                Assert.IsTrue(firstList.IsPropertyAvailable(p => p.ContentTypes));
-                Assert.IsTrue(firstList.ContentTypes.Requested);
-                Assert.IsTrue(firstList.ContentTypes.Any());
-                var firstContentType = firstList.ContentTypes.First();
+                // Batch results are now available
+                Assert.IsTrue(siteAssets.IsAvailable);
+                Assert.IsTrue(sitePages.IsAvailable);
+
+                Assert.IsNotNull(siteAssets);
+                Assert.IsNotNull(sitePages);
+
+                var siteAssetsList = siteAssets.AsEnumerable().First();
+                var sitePagesList = sitePages.AsEnumerable().First();
+
+                Assert.IsTrue(siteAssetsList.Requested);
+                Assert.IsTrue(siteAssetsList.IsPropertyAvailable(p => p.TemplateType));
+                Assert.IsTrue(siteAssetsList.IsPropertyAvailable(p => p.Title));
+                Assert.IsTrue(siteAssetsList.IsPropertyAvailable(p => p.ContentTypes));
+                Assert.IsTrue(siteAssetsList.ContentTypes.Requested);
+                Assert.IsTrue(siteAssetsList.ContentTypes.Length > 0);
+
+                var firstContentType = siteAssetsList.ContentTypes.AsEnumerable().First();
                 Assert.IsTrue(firstContentType.IsPropertyAvailable(p => p.Name));
                 Assert.IsTrue(firstContentType.IsPropertyAvailable(p => p.FieldLinks));
-                var firstFieldLink = firstContentType.FieldLinks.First();
+
+                var firstFieldLink = firstContentType.FieldLinks.AsEnumerable().First();
                 Assert.IsTrue(firstFieldLink.IsPropertyAvailable(p => p.Name));
             }
         }
@@ -571,15 +646,12 @@ namespace PnP.Core.Test.Base
 
                 // Do a get with filter and custom properties specifying the data to load
                 var foundList = await context.Web.Lists.FirstOrDefaultAsync(p => p.Title == "Site Assets");
+
                 Assert.IsTrue(foundList != null);
                 Assert.IsTrue(foundList.Title == "Site Assets");
-                Assert.IsTrue(context.Web.Lists.Length == 1);
-                Assert.IsTrue(context.Web.Lists.Requested);
-                var firstList = context.Web.Lists.First();
-                Assert.IsTrue(firstList.Id == foundList.Id);
-                Assert.IsTrue(firstList.Requested);
-                Assert.IsTrue(firstList.IsPropertyAvailable(p => p.TemplateType));
-                Assert.IsTrue(firstList.IsPropertyAvailable(p => p.Title));
+                Assert.IsTrue(foundList.Requested);
+                Assert.IsTrue(foundList.IsPropertyAvailable(p => p.TemplateType));
+                Assert.IsTrue(foundList.IsPropertyAvailable(p => p.Title));
             }
         }
 
@@ -591,25 +663,31 @@ namespace PnP.Core.Test.Base
             {
                 context.GraphFirst = false;
 
+                await context.Web.LoadAsync(w => w.Lists.QueryProperties(p => p.Title, p => p.TemplateType,
+                        p => p.ContentTypes.QueryProperties(p => p.Name, p => p.FieldLinks.QueryProperties(p => p.Name))));
+
                 // Do a get with filter and custom properties specifying the data to load
                 var foundList = await context.Web.Lists.QueryProperties(p => p.Title, p => p.TemplateType,
                         p => p.ContentTypes.QueryProperties(p => p.Name, p => p.FieldLinks.QueryProperties(p => p.Name)))
                     .FirstOrDefaultAsync();
+
                 Assert.IsTrue(foundList != null);
-                Assert.IsTrue(context.Web.Lists.Length == 1);
                 Assert.IsTrue(context.Web.Lists.Requested);
-                var firstList = context.Web.Lists.First();
-                Assert.IsTrue(firstList.Id == foundList.Id);
-                Assert.IsTrue(firstList.Requested);
-                Assert.IsTrue(firstList.IsPropertyAvailable(p => p.TemplateType));
-                Assert.IsTrue(firstList.IsPropertyAvailable(p => p.Title));
-                Assert.IsTrue(firstList.IsPropertyAvailable(p => p.ContentTypes));
-                Assert.IsTrue(firstList.ContentTypes.Requested);
-                Assert.IsTrue(firstList.ContentTypes.Any());
-                var firstContentType = firstList.ContentTypes.First();
+                
+                var firstList = context.Web.Lists.AsEnumerable().First();
+                Assert.Equals(firstList.Id, foundList.Id);
+                Assert.IsTrue(foundList.Requested);
+                Assert.IsTrue(foundList.IsPropertyAvailable(p => p.TemplateType));
+                Assert.IsTrue(foundList.IsPropertyAvailable(p => p.Title));
+                Assert.IsTrue(foundList.IsPropertyAvailable(p => p.ContentTypes));
+                Assert.IsTrue(foundList.ContentTypes.Requested);
+                Assert.IsTrue(foundList.ContentTypes.Length > 0);
+
+                var firstContentType = foundList.ContentTypes.AsEnumerable().First();
                 Assert.IsTrue(firstContentType.IsPropertyAvailable(p => p.Name));
                 Assert.IsTrue(firstContentType.IsPropertyAvailable(p => p.FieldLinks));
-                var firstFieldLink = firstContentType.FieldLinks.First();
+                
+                var firstFieldLink = firstContentType.FieldLinks.AsEnumerable().First();
                 Assert.IsTrue(firstFieldLink.IsPropertyAvailable(p => p.Name));
             }
         }
@@ -626,7 +704,7 @@ namespace PnP.Core.Test.Base
 
                 // Is the property populated
                 Assert.IsTrue(web.IsPropertyAvailable(p => p.Description));
-                Assert.IsTrue(web.Description != null);
+                Assert.IsNotNull(web.Description);
 
                 // Are other properties still not available
                 Assert.IsFalse(web.IsPropertyAvailable(p => p.Title));
@@ -643,7 +721,7 @@ namespace PnP.Core.Test.Base
 
                 // Is the property populated
                 Assert.IsTrue(web.IsPropertyAvailable(p => p.Description));
-                Assert.IsTrue(web.Description != null);
+                Assert.IsNotNull(web.Description);
                 Assert.IsTrue(web.IsPropertyAvailable(p => p.Title));
                 Assert.IsTrue(!string.IsNullOrEmpty(web.Title));
 
@@ -699,11 +777,11 @@ namespace PnP.Core.Test.Base
 
                 var numberOfLists = web.Lists.Length;
                 // Load the expandable collection again
-                await context.Web.GetAsync(p => p.Lists);
+                await context.Web.LoadAsync(p => p.Lists);
 
                 // Loading a collection again should not result in more rows in the collection, assuming 
                 // the collection has a key like is the case for lists
-                Assert.IsTrue(numberOfLists == context.Web.Lists.Length);
+                Assert.AreEqual(numberOfLists, context.Web.Lists.Length);
             }
         }
 
@@ -888,7 +966,9 @@ namespace PnP.Core.Test.Base
             {
                 // Expand for a property that is implemented using it's own graph query
                 // Url for loading channels is teams/{Site.GroupId}/channels
-                var team = await context.Team.GetAsync(p => p.Channels.QueryProperties(p => p.DisplayName));
+                var team = await context.Team.GetAsync(
+                    p => p.Channels.QueryProperties(p => p.DisplayName));
+
                 foreach (var channel in team.Channels)
                 {
                     Assert.IsTrue(channel.IsPropertyAvailable(p => p.DisplayName));
@@ -898,8 +978,9 @@ namespace PnP.Core.Test.Base
 
                 // Expand for a property that is implemented using it's own graph query which has url parameters defined and which uses a JsonPath
                 // Url for loading installed apps is teams/{Site.GroupId}/installedapps?$expand=TeamsApp
-                await context.Team.GetAsync(p => p.InstalledApps.QueryProperties(p => p.DistributionMethod));
-                foreach (var installedApp in context.Team.InstalledApps)
+                team = await context.Team.GetAsync(p => p.InstalledApps.QueryProperties(p => p.DistributionMethod));
+                
+                foreach (var installedApp in team.InstalledApps)
                 {
                     Assert.IsTrue(installedApp.IsPropertyAvailable(p => p.DistributionMethod));
                     Assert.IsFalse(installedApp.IsPropertyAvailable(p => p.DisplayName));
@@ -928,7 +1009,7 @@ namespace PnP.Core.Test.Base
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                // Expand for an expandable property using a property that depends it's own graph query==> 
+                // Expand for an expandable property using a property that depends it's own graph query ==> 
                 // Not supported in Graph
                 var team = await context.Team.GetAsync(p => p.PrimaryChannel.QueryProperties(p => p.DisplayName, p => p.Messages));
             }
@@ -941,10 +1022,11 @@ namespace PnP.Core.Test.Base
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 // Get primary channel
-                await context.Team.GetAsync(p => p.PrimaryChannel);
+                await context.Team.LoadAsync(p => p.PrimaryChannel);
+
                 // Load tabs with only the WebUrl property 
                 // Special case since the listed url is teams/{Site.GroupId}/channels/{GraphId}/tabs?$expand=teamsApp
-                await context.Team.PrimaryChannel.GetAsync(p => p.Tabs.QueryProperties(p => p.WebUrl));
+                await context.Team.PrimaryChannel.LoadAsync(p => p.Tabs.QueryProperties(p => p.WebUrl));
 
                 foreach (var tab in context.Team.PrimaryChannel.Tabs)
                 {
@@ -955,25 +1037,15 @@ namespace PnP.Core.Test.Base
         }
 
         [TestMethod]
+        [ExpectedException(typeof(ClientException))]
         public async Task LoadTeamPropertiesRecursiveViaGraph()
         {
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                bool exceptionThrown = false;
-                try
-                {
-                    await context.Team.GetAsync(p => p.Channels.QueryProperties(p => p.Messages.QueryProperties(p => p.Body)));
-                }
-                catch (Exception ex)
-                {
-                    if (ex is ClientException && (ex as ClientException).Error.Type == ErrorType.Unsupported)
-                    {
-                        exceptionThrown = true;
-                    }
-                }
-
-                Assert.IsTrue(exceptionThrown);
+                await context.Team.GetAsync(
+                    p => p.Channels.QueryProperties(
+                        p => p.Messages.QueryProperties(p => p.Body)));
             }
         }
 
