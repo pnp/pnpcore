@@ -1,9 +1,1 @@
---batchresponse_218770df-1f1b-454c-968c-71c42a9b3d74
-Content-Type: application/http
-Content-Transfer-Encoding: binary
-
-HTTP/1.1 200 OK
-CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
-
-
---batchresponse_218770df-1f1b-454c-968c-71c42a9b3d74--
+{"responses": [{"id": "1","status":200,"headers" : {"Cache-Control":"no-cache","OData-Version":"4.0","Content-Type":"application/json;odata.metadata=minimal;odata.streaming=true;IEEE754Compatible=false;charset=utf-8"},"body":{"@odata.context":"https://graph.microsoft.com/v1.0/$metadata#sites('piasysdev.sharepoint.com%2C409403da-217e-4c1b-b400-6dd624fe15d4%2C5f51ff75-e0e1-4063-a78d-7d5fef4be508')/lists","value":[]}}]}

@@ -1,81 +1,11 @@
---batchresponse_c70633b0-7475-4a46-a98a-347980384015
+--batchresponse_009690f8-6ddf-4224-a82e-3c654a53356d
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
-HTTP/1.1 200 OK
+HTTP/1.1 201 Created
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+ETAG: "1"
+LOCATION: https://piasysdev.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'7f309327-6c36-4ec5-887a-2b27fffbacee')
 
-{"d":{"AddValidateUpdateItemUsingPath":{"__metadata":{"type":"Collection(SP.ListItemFormUpdateValue)"},"results":[{"ErrorCode":0,"ErrorMessage":null,"FieldName":"Title","FieldValue":"Item 0","HasException":false,"ItemId":0},{"ErrorCode":0,"ErrorMessage":null,"FieldName":"Id","FieldValue":"1","HasException":false,"ItemId":0}]}}}
---batchresponse_c70633b0-7475-4a46-a98a-347980384015
-Content-Type: application/http
-Content-Transfer-Encoding: binary
-
-HTTP/1.1 200 OK
-CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
-
-{"d":{"AddValidateUpdateItemUsingPath":{"__metadata":{"type":"Collection(SP.ListItemFormUpdateValue)"},"results":[{"ErrorCode":0,"ErrorMessage":null,"FieldName":"Title","FieldValue":"Item 1","HasException":false,"ItemId":0},{"ErrorCode":0,"ErrorMessage":null,"FieldName":"Id","FieldValue":"2","HasException":false,"ItemId":0}]}}}
---batchresponse_c70633b0-7475-4a46-a98a-347980384015
-Content-Type: application/http
-Content-Transfer-Encoding: binary
-
-HTTP/1.1 200 OK
-CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
-
-{"d":{"AddValidateUpdateItemUsingPath":{"__metadata":{"type":"Collection(SP.ListItemFormUpdateValue)"},"results":[{"ErrorCode":0,"ErrorMessage":null,"FieldName":"Title","FieldValue":"Item 2","HasException":false,"ItemId":0},{"ErrorCode":0,"ErrorMessage":null,"FieldName":"Id","FieldValue":"3","HasException":false,"ItemId":0}]}}}
---batchresponse_c70633b0-7475-4a46-a98a-347980384015
-Content-Type: application/http
-Content-Transfer-Encoding: binary
-
-HTTP/1.1 200 OK
-CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
-
-{"d":{"AddValidateUpdateItemUsingPath":{"__metadata":{"type":"Collection(SP.ListItemFormUpdateValue)"},"results":[{"ErrorCode":0,"ErrorMessage":null,"FieldName":"Title","FieldValue":"Item 3","HasException":false,"ItemId":0},{"ErrorCode":0,"ErrorMessage":null,"FieldName":"Id","FieldValue":"4","HasException":false,"ItemId":0}]}}}
---batchresponse_c70633b0-7475-4a46-a98a-347980384015
-Content-Type: application/http
-Content-Transfer-Encoding: binary
-
-HTTP/1.1 200 OK
-CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
-
-{"d":{"AddValidateUpdateItemUsingPath":{"__metadata":{"type":"Collection(SP.ListItemFormUpdateValue)"},"results":[{"ErrorCode":0,"ErrorMessage":null,"FieldName":"Title","FieldValue":"Item 4","HasException":false,"ItemId":0},{"ErrorCode":0,"ErrorMessage":null,"FieldName":"Id","FieldValue":"5","HasException":false,"ItemId":0}]}}}
---batchresponse_c70633b0-7475-4a46-a98a-347980384015
-Content-Type: application/http
-Content-Transfer-Encoding: binary
-
-HTTP/1.1 200 OK
-CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
-
-{"d":{"AddValidateUpdateItemUsingPath":{"__metadata":{"type":"Collection(SP.ListItemFormUpdateValue)"},"results":[{"ErrorCode":0,"ErrorMessage":null,"FieldName":"Title","FieldValue":"Item 5","HasException":false,"ItemId":0},{"ErrorCode":0,"ErrorMessage":null,"FieldName":"Id","FieldValue":"6","HasException":false,"ItemId":0}]}}}
---batchresponse_c70633b0-7475-4a46-a98a-347980384015
-Content-Type: application/http
-Content-Transfer-Encoding: binary
-
-HTTP/1.1 200 OK
-CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
-
-{"d":{"AddValidateUpdateItemUsingPath":{"__metadata":{"type":"Collection(SP.ListItemFormUpdateValue)"},"results":[{"ErrorCode":0,"ErrorMessage":null,"FieldName":"Title","FieldValue":"Item 6","HasException":false,"ItemId":0},{"ErrorCode":0,"ErrorMessage":null,"FieldName":"Id","FieldValue":"7","HasException":false,"ItemId":0}]}}}
---batchresponse_c70633b0-7475-4a46-a98a-347980384015
-Content-Type: application/http
-Content-Transfer-Encoding: binary
-
-HTTP/1.1 200 OK
-CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
-
-{"d":{"AddValidateUpdateItemUsingPath":{"__metadata":{"type":"Collection(SP.ListItemFormUpdateValue)"},"results":[{"ErrorCode":0,"ErrorMessage":null,"FieldName":"Title","FieldValue":"Item 7","HasException":false,"ItemId":0},{"ErrorCode":0,"ErrorMessage":null,"FieldName":"Id","FieldValue":"8","HasException":false,"ItemId":0}]}}}
---batchresponse_c70633b0-7475-4a46-a98a-347980384015
-Content-Type: application/http
-Content-Transfer-Encoding: binary
-
-HTTP/1.1 200 OK
-CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
-
-{"d":{"AddValidateUpdateItemUsingPath":{"__metadata":{"type":"Collection(SP.ListItemFormUpdateValue)"},"results":[{"ErrorCode":0,"ErrorMessage":null,"FieldName":"Title","FieldValue":"Item 8","HasException":false,"ItemId":0},{"ErrorCode":0,"ErrorMessage":null,"FieldName":"Id","FieldValue":"9","HasException":false,"ItemId":0}]}}}
---batchresponse_c70633b0-7475-4a46-a98a-347980384015
-Content-Type: application/http
-Content-Transfer-Encoding: binary
-
-HTTP/1.1 200 OK
-CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
-
-{"d":{"AddValidateUpdateItemUsingPath":{"__metadata":{"type":"Collection(SP.ListItemFormUpdateValue)"},"results":[{"ErrorCode":0,"ErrorMessage":null,"FieldName":"Title","FieldValue":"Item 9","HasException":false,"ItemId":0},{"ErrorCode":0,"ErrorMessage":null,"FieldName":"Id","FieldValue":"10","HasException":false,"ItemId":0}]}}}
---batchresponse_c70633b0-7475-4a46-a98a-347980384015--
+{"d":{"__metadata":{"id":"https://piasysdev.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'7f309327-6c36-4ec5-887a-2b27fffbacee')","uri":"https://piasysdev.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'7f309327-6c36-4ec5-887a-2b27fffbacee')","etag":"\"1\"","type":"SP.List"},"FirstUniqueAncestorSecurableObject":{"__deferred":{"uri":"https://piasysdev.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'7f309327-6c36-4ec5-887a-2b27fffbacee')/FirstUniqueAncestorSecurableObject"}},"RoleAssignments":{"__deferred":{"uri":"https://piasysdev.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'7f309327-6c36-4ec5-887a-2b27fffbacee')/RoleAssignments"}},"Author":{"__deferred":{"uri":"https://piasysdev.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'7f309327-6c36-4ec5-887a-2b27fffbacee')/Author"}},"ContentTypes":{"__deferred":{"uri":"https://piasysdev.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'7f309327-6c36-4ec5-887a-2b27fffbacee')/ContentTypes"}},"CreatablesInfo":{"__deferred":{"uri":"https://piasysdev.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'7f309327-6c36-4ec5-887a-2b27fffbacee')/CreatablesInfo"}},"DefaultView":{"__deferred":{"uri":"https://piasysdev.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'7f309327-6c36-4ec5-887a-2b27fffbacee')/DefaultView"}},"DescriptionResource":{"__deferred":{"uri":"https://piasysdev.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'7f309327-6c36-4ec5-887a-2b27fffbacee')/DescriptionResource"}},"EventReceivers":{"__deferred":{"uri":"https://piasysdev.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'7f309327-6c36-4ec5-887a-2b27fffbacee')/EventReceivers"}},"Fields":{"__deferred":{"uri":"https://piasysdev.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'7f309327-6c36-4ec5-887a-2b27fffbacee')/Fields"}},"Forms":{"__deferred":{"uri":"https://piasysdev.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'7f309327-6c36-4ec5-887a-2b27fffbacee')/Forms"}},"InformationRightsManagementSettings":{"__deferred":{"uri":"https://piasysdev.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'7f309327-6c36-4ec5-887a-2b27fffbacee')/InformationRightsManagementSettings"}},"Items":{"__deferred":{"uri":"https://piasysdev.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'7f309327-6c36-4ec5-887a-2b27fffbacee')/Items"}},"ParentWeb":{"__deferred":{"uri":"https://piasysdev.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'7f309327-6c36-4ec5-887a-2b27fffbacee')/ParentWeb"}},"RootFolder":{"__deferred":{"uri":"https://piasysdev.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'7f309327-6c36-4ec5-887a-2b27fffbacee')/RootFolder"}},"Subscriptions":{"__deferred":{"uri":"https://piasysdev.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'7f309327-6c36-4ec5-887a-2b27fffbacee')/Subscriptions"}},"TitleResource":{"__deferred":{"uri":"https://piasysdev.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'7f309327-6c36-4ec5-887a-2b27fffbacee')/TitleResource"}},"UserCustomActions":{"__deferred":{"uri":"https://piasysdev.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'7f309327-6c36-4ec5-887a-2b27fffbacee')/UserCustomActions"}},"Views":{"__deferred":{"uri":"https://piasysdev.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'7f309327-6c36-4ec5-887a-2b27fffbacee')/Views"}},"WorkflowAssociations":{"__deferred":{"uri":"https://piasysdev.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'7f309327-6c36-4ec5-887a-2b27fffbacee')/WorkflowAssociations"}},"AllowContentTypes":true,"BaseTemplate":100,"BaseType":0,"ContentTypesEnabled":false,"CrawlNonDefaultViews":false,"Created":"2021-02-17T16:34:39Z","CurrentChangeToken":{"__metadata":{"type":"SP.ChangeToken"},"StringValue":"1;3;7f309327-6c36-4ec5-887a-2b27fffbacee;637491764794330000;263207652"},"DefaultContentApprovalWorkflowId":"00000000-0000-0000-0000-000000000000","DefaultItemOpenUseListSetting":false,"Description":"","Direction":"none","DisableGridEditing":false,"DocumentTemplateUrl":null,"DraftVersionVisibility":0,"EnableAttachments":true,"EnableFolderCreation":false,"EnableMinorVersions":false,"EnableModeration":false,"EnableRequestSignOff":true,"EnableVersioning":false,"EntityTypeName":"RESTListItemPagingList","ExemptFromBlockDownloadOfNonViewableFiles":false,"FileSavePostProcessingEnabled":false,"ForceCheckout":false,"HasExternalDataSource":false,"Hidden":false,"Id":"7f309327-6c36-4ec5-887a-2b27fffbacee","ImagePath":{"__metadata":{"type":"SP.ResourcePath"},"DecodedUrl":"/_layouts/15/images/itgen.png?rev=47"},"ImageUrl":"/_layouts/15/images/itgen.png?rev=47","IrmEnabled":false,"IrmExpire":false,"IrmReject":false,"IsApplicationList":false,"IsCatalog":false,"IsPrivate":false,"ItemCount":0,"LastItemDeletedDate":"2021-02-17T16:34:39Z","LastItemModifiedDate":"2021-02-17T16:34:39Z","LastItemUserModifiedDate":"2021-02-17T16:34:39Z","ListExperienceOptions":0,"ListItemEntityTypeFullName":"SP.Data.RESTListItemPagingListItem","MajorVersionLimit":0,"MajorWithMinorVersionsLimit":0,"MultipleDataList":false,"NoCrawl":false,"ParentWebPath":{"__metadata":{"type":"SP.ResourcePath"},"DecodedUrl":"/sites/prov-1"},"ParentWebUrl":"/sites/prov-1","ParserDisabled":false,"ServerTemplateCanCreateFolders":true,"TemplateFeatureId":"00bfea71-de22-43b2-a848-c05709900100","Title":"RESTListItemPaging"}}
+--batchresponse_009690f8-6ddf-4224-a82e-3c654a53356d--

@@ -1,11 +1,1 @@
-{"responses": [{"id": "1","status":400,"headers" : {"Content-Type":"application/json"},"body":{
-  "error": {
-    "code": "BadRequest",
-    "message": "",
-    "innerError": {
-      "date": "2021-02-12T15:44:21",
-      "request-id": "037b725a-ddcb-435a-9526-068fe326650f",
-      "client-request-id": "037b725a-ddcb-435a-9526-068fe326650f"
-    }
-  }
-}}]}
+{"responses": [{"id": "1","status":200,"headers" : {"OData-Version":"4.0","Content-Type":"application/json;odata.metadata=minimal;odata.streaming=true;IEEE754Compatible=false;charset=utf-8"},"body":{"@odata.context":"https://graph.microsoft.com/v1.0/$metadata#teams(id)/$entity","id":"a7ea7e26-5a76-4b72-ad99-1465b74857c8"}}]}

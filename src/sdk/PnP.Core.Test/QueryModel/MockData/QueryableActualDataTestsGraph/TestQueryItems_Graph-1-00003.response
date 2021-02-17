@@ -1,9 +1,1 @@
---batchresponse_a1803754-278f-44e5-99c6-72765ad2abf9
-Content-Type: application/http
-Content-Transfer-Encoding: binary
-
-HTTP/1.1 200 OK
-CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
-
-{"d":{"results":[{"__metadata":{"id":"96ddc533-f701-4607-a392-e783aaa4f4c4","uri":"https://piasysdev.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'b5855d7d-fed1-483e-903a-f6a8c05167c0')/Items(1)","etag":"\"1\"","type":"SP.Data.PNP_x005f_SDK_x005f_TEST_x005f_TestQueryItems_x005f_GraphListItem"},"Id":1,"ID":1,"Title":"PNP_SDK_TEST_TestQueryItems_Graph"}]}}
---batchresponse_a1803754-278f-44e5-99c6-72765ad2abf9--
+{"responses": [{"id": "1","status":200,"headers" : {"Cache-Control":"no-cache","OData-Version":"4.0","Content-Type":"application/json;odata.metadata=minimal;odata.streaming=true;IEEE754Compatible=false;charset=utf-8"},"body":{"@odata.context":"https://graph.microsoft.com/v1.0/$metadata#sites('piasysdev.sharepoint.com%2C409403da-217e-4c1b-b400-6dd624fe15d4%2C5f51ff75-e0e1-4063-a78d-7d5fef4be508')/lists","value":[{"@odata.etag":"\"fef769aa-11b7-4243-89fd-cf7b7ecfd555,2\"","createdDateTime":"2021-02-17T16:57:32Z","description":"","eTag":"\"fef769aa-11b7-4243-89fd-cf7b7ecfd555,2\"","id":"fef769aa-11b7-4243-89fd-cf7b7ecfd555","lastModifiedDateTime":"2021-02-17T16:57:32Z","name":"PNP_SDK_TEST_TestQueryItems_Graph","webUrl":"https://piasysdev.sharepoint.com/sites/prov-1/Lists/PNP_SDK_TEST_TestQueryItems_Graph","displayName":"PNP_SDK_TEST_TestQueryItems_Graph","createdBy":{"user":{"email":"paolo@PiaSysDev.onmicrosoft.com","id":"bea7a848-0459-4bee-9034-5513ee7f66e0","displayName":"Paolo Pialorsi"}},"lastModifiedBy":{"user":{"email":"paolo@PiaSysDev.onmicrosoft.com","id":"bea7a848-0459-4bee-9034-5513ee7f66e0","displayName":"Paolo Pialorsi"}},"parentReference":{"siteId":"piasysdev.sharepoint.com,409403da-217e-4c1b-b400-6dd624fe15d4,5f51ff75-e0e1-4063-a78d-7d5fef4be508"},"list":{"contentTypesEnabled":false,"hidden":false,"template":"genericList"}}]}}]}

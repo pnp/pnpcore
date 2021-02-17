@@ -1,4 +1,4 @@
---batchresponse_daa1d4b9-d681-4752-b84e-540be4523f9e
+--batchresponse_708bc465-e142-43b1-8684-d996e68659d9
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
@@ -6,4 +6,4 @@ HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
 {"d":{"__metadata":{"id":"https://piasysdev.sharepoint.com/sites/prov-1/_api/Web","uri":"https://piasysdev.sharepoint.com/sites/prov-1/_api/Web","type":"SP.Web"},"AssociatedOwnerGroup":{"__metadata":{"id":"https://piasysdev.sharepoint.com/sites/prov-1/_api/Web/AssociatedOwnerGroup","uri":"https://piasysdev.sharepoint.com/sites/prov-1/_api/Web/AssociatedOwnerGroup","type":"SP.Group"},"Owner":{"__deferred":{"uri":"https://piasysdev.sharepoint.com/sites/prov-1/_api/Web/AssociatedOwnerGroup/Owner"}},"Users":{"__deferred":{"uri":"https://piasysdev.sharepoint.com/sites/prov-1/_api/Web/AssociatedOwnerGroup/Users"}},"Id":3,"IsHiddenInUI":false,"LoginName":"prov-1 Owners","Title":"prov-1 Owners","PrincipalType":8,"AllowMembersEditMembership":false,"AllowRequestToJoinLeave":false,"AutoAcceptRequestToJoinLeave":false,"Description":null,"OnlyAllowMembersViewMembership":false,"OwnerTitle":"prov-1 Owners","RequestToJoinLeaveEmailSetting":""},"AlternateCssUrl":"","Id":"5f51ff75-e0e1-4063-a78d-7d5fef4be508"}}
---batchresponse_daa1d4b9-d681-4752-b84e-540be4523f9e--
+--batchresponse_708bc465-e142-43b1-8684-d996e68659d9--
