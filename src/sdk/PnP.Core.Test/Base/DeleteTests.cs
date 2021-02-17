@@ -303,44 +303,38 @@ namespace PnP.Core.Test.Base
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                var team = await context.Team.GetAsync(p => p.Channels);
+                // Initial load of channels
+                await context.Team.LoadAsync(p => p.Channels);
 
                 string channelName = $"Channel test {new Random().Next()}";
 
                 // Find first updatable channel
-                var channelToDelete = team.Channels.FirstOrDefault(p => p.DisplayName == channelName);
+                var channelToDelete = context.Team.Channels.FirstOrDefault(p => p.DisplayName == channelName);
 
                 if (channelToDelete == null)
                 {
-                    channelToDelete = await team.Channels.AddAsync(channelName, "Test channel, will be deleted in 21 days");
+                    channelToDelete = await context.Team.Channels.AddAsync(channelName, "Test channel, will be deleted in 21 days");
                 }
                 else
                 {
                     Assert.Inconclusive("Test data set should be setup to not have the channel available.");
                 }
 
-                var channelCount = team.Channels.Count();
+                var channelCount = context.Team.Channels.Length;
 
                 // Delete channel
                 await channelToDelete.DeleteAsync();
 
-                // Was the channel added
-                bool exceptionThrown = false;
-                try
-                {
+                // Was the channel deleted?
+                Assert.ThrowsException<ClientException>(() => {
                     var deletedChannelDescription = channelToDelete.Description;
-                }
-                catch (Exception)
-                {
-                    exceptionThrown = true;
-                }
-                Assert.IsTrue(exceptionThrown);
+                });
 
                 // Get the channel again
-                await context.Team.GetAsync(p => p.Channels);
+                await context.Team.LoadAsync(p => p.Channels);
 
                 // We should have one channel less
-                Assert.IsTrue(team.Channels.Length == channelCount - 1);
+                Assert.IsTrue(context.Team.Channels.Length == channelCount - 1);
             }
         }
 
@@ -350,6 +344,10 @@ namespace PnP.Core.Test.Base
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
+                // Initial load of channels
+                await context.Team.LoadBatchAsync(p => p.Channels);
+                await context.ExecuteAsync();
+
                 string channelName = $"Channel test {new Random().Next()}";
 
                 // Find first updatable channel
@@ -371,20 +369,13 @@ namespace PnP.Core.Test.Base
                 await channelToDelete.DeleteBatchAsync();
                 await context.ExecuteAsync();
 
-                // Was the channel added
-                bool exceptionThrown = false;
-                try
-                {
+                // Was the channel deleted?
+                Assert.ThrowsException<ClientException>(() => {
                     var deletedChannelDescription = channelToDelete.Description;
-                }
-                catch (Exception)
-                {
-                    exceptionThrown = true;
-                }
-                Assert.IsTrue(exceptionThrown);
+                });
 
                 // Get the channel again
-                await context.Team.GetBatchAsync(p => p.Channels);
+                await context.Team.LoadBatchAsync(p => p.Channels);
                 await context.ExecuteAsync();
 
                 // We should have one channel less
@@ -398,6 +389,10 @@ namespace PnP.Core.Test.Base
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
+                // Initial load of channels
+                await context.Team.LoadBatchAsync(p => p.Channels);
+                await context.ExecuteAsync();
+
                 Core.Services.Batch batch = null;
                 string channelName = $"Channel test {new Random().Next()}";
 
@@ -422,17 +417,10 @@ namespace PnP.Core.Test.Base
                 await channelToDelete.DeleteBatchAsync(batch);
                 await context.ExecuteAsync(batch);
 
-                // Was the channel added
-                bool exceptionThrown = false;
-                try
-                {
+                // Was the channel deleted?
+                Assert.ThrowsException<ClientException>(() => {
                     var deletedChannelDescription = channelToDelete.Description;
-                }
-                catch (Exception)
-                {
-                    exceptionThrown = true;
-                }
-                Assert.IsTrue(exceptionThrown);
+                });
 
                 // Get the channel again
                 batch = context.BatchClient.EnsureBatch();
@@ -444,6 +432,5 @@ namespace PnP.Core.Test.Base
             }
         }
         #endregion
-
     }
 }
