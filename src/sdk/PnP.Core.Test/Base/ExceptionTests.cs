@@ -3,9 +3,11 @@ using PnP.Core.Model.SharePoint;
 using PnP.Core.Services;
 using PnP.Core.Test.Utilities;
 using System;
+using System.Linq;
 using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
+using PnP.Core.Model;
 
 namespace PnP.Core.Test.Base
 {
@@ -128,30 +130,44 @@ namespace PnP.Core.Test.Base
         [TestMethod]
         public async Task ThrowSharePointRestServiceException()
         {
+            var listTitle = "Fail list";
+
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                bool SharePointRestServiceExceptionThrown = false;
-                SharePointRestError error = null;
                 try
                 {
-                    // try adding the same list twice, will always result in an error
-                    await context.Web.Lists.AddAsync("Fail list", ListTemplateType.GenericList);
-                    await context.Web.Lists.AddAsync("Fail list", ListTemplateType.GenericList);
-                }
-                catch (ServiceException ex)
-                {
-                    if (ex is SharePointRestServiceException)
+                    bool SharePointRestServiceExceptionThrown = false;
+                    SharePointRestError error = null;
+                    try
                     {
-                        error = ex.Error as SharePointRestError;
-                        SharePointRestServiceExceptionThrown = true;
+                        // try adding the same list twice, will always result in an error
+                        await context.Web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
+                        await context.Web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
+                    }
+                    catch (ServiceException ex)
+                    {
+                        if (ex is SharePointRestServiceException)
+                        {
+                            error = ex.Error as SharePointRestError;
+                            SharePointRestServiceExceptionThrown = true;
+                        }
+                    }
+
+                    Assert.IsTrue(SharePointRestServiceExceptionThrown);
+                    Assert.IsTrue(!string.IsNullOrEmpty(error.Code));
+                    Assert.IsTrue(!string.IsNullOrEmpty(error.Message));
+                    Assert.IsTrue(error.Type == ErrorType.SharePointRestServiceError);
+                }
+                finally
+                {
+                    // Clean up
+                    var listToDelete = context.Web.Lists.FirstOrDefault(l => l.Title == listTitle);
+                    if (listToDelete != null)
+                    {
+                        await listToDelete.DeleteAsync();
                     }
                 }
-
-                Assert.IsTrue(SharePointRestServiceExceptionThrown);
-                Assert.IsTrue(!string.IsNullOrEmpty(error.Code));
-                Assert.IsTrue(!string.IsNullOrEmpty(error.Message));
-                Assert.IsTrue(error.Type == ErrorType.SharePointRestServiceError);
             }
         }
 
