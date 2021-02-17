@@ -222,16 +222,16 @@ namespace PnP.Core.Test.Base
                 await context.Web.Lists.GetPagedAsync(2);
 
                 // We should have loaded 2 lists
-                Assert.IsTrue(context.Web.Lists.Count() == 2);
+                Assert.IsTrue(context.Web.Lists.Length == 2);
 
                 // Since we only asked 2 lists Graph will return a nextLink odata property 
                 if (context.Web.Lists.CanPage)
                 {
                     await context.Web.Lists.GetNextPageAsync();
-                    Assert.IsTrue(context.Web.Lists.Count() == 4);
+                    Assert.IsTrue(context.Web.Lists.Length == 4);
 
                     await context.Web.Lists.GetAllPagesAsync();
-                    Assert.IsTrue(context.Web.Lists.Count() >= 4);
+                    Assert.IsTrue(context.Web.Lists.Length >= 4);
 
                     // Once we've loaded all lists we can't page anymore
                     Assert.IsFalse(context.Web.Lists.CanPage);
@@ -255,16 +255,16 @@ namespace PnP.Core.Test.Base
                 await context.Web.Lists.GetPagedAsync(p=>p.TemplateType == ListTemplateType.GenericList, 2);
 
                 // We should have loaded 2 lists
-                Assert.IsTrue(context.Web.Lists.Count() == 2);
+                Assert.IsTrue(context.Web.Lists.Length == 2);
 
                 // Since we only asked 2 lists Graph will return a nextLink odata property 
                 if (context.Web.Lists.CanPage)
                 {
                     await context.Web.Lists.GetNextPageAsync();
-                    Assert.IsTrue(context.Web.Lists.Count() == 4);
+                    Assert.IsTrue(context.Web.Lists.Length == 4);
 
                     await context.Web.Lists.GetAllPagesAsync();
-                    Assert.IsTrue(context.Web.Lists.Count() >= 4);
+                    Assert.IsTrue(context.Web.Lists.Length >= 4);
 
                     // Once we've loaded all lists we can't page anymore
                     Assert.IsFalse(context.Web.Lists.CanPage);
@@ -285,24 +285,25 @@ namespace PnP.Core.Test.Base
                 // Force rest
                 context.GraphFirst = false;
 
-                var lists = await context.Web.Lists.GetPagedAsync(p => p.TemplateType == ListTemplateType.GenericList, 2,
-                                                      p => p.Title, p => p.TemplateType,
-                                                                    p => p.ContentTypes.QueryProperties(
-                                                                         p => p.Name, p => p.FieldLinks.QueryProperties(p => p.Name)));
+                var lists = await context.Web.Lists.GetPagedAsync(
+                    p => p.TemplateType == ListTemplateType.GenericList, 2,
+                        p => p.Title, p => p.TemplateType,
+                        p => p.ContentTypes.QueryProperties(
+                            p => p.Name, p => p.FieldLinks.QueryProperties(p => p.Name)));
 
                 // We should have loaded 2 lists
-                Assert.IsTrue(context.Web.Lists.Count() == 2);
+                Assert.IsTrue(context.Web.Lists.Length == 2);
                 Assert.IsTrue(lists.Count() == 2);
 
                 // Since we only asked 2 lists Graph will return a nextLink odata property 
                 if (context.Web.Lists.CanPage)
                 {
                     var nextLists = await context.Web.Lists.GetNextPageAsync();
-                    Assert.IsTrue(context.Web.Lists.Count() == 4);
+                    Assert.IsTrue(context.Web.Lists.Length == 4);
                     Assert.IsTrue(nextLists.Count() == 2);                    
 
                     await context.Web.Lists.GetAllPagesAsync();
-                    Assert.IsTrue(context.Web.Lists.Count() >= 4);
+                    Assert.IsTrue(context.Web.Lists.Length >= 4);
 
                     // Once we've loaded all lists we can't page anymore
                     Assert.IsFalse(context.Web.Lists.CanPage);
@@ -326,7 +327,7 @@ namespace PnP.Core.Test.Base
                 await context.Web.Lists.GetPagedAsync(2, p => p.Title);
 
                 // We should have loaded 2 lists
-                Assert.IsTrue(context.Web.Lists.Count() == 2);
+                Assert.IsTrue(context.Web.Lists.Length == 2);
 
                 // We only request the Title property, verify its loaded while others are not loaded
                 foreach (var list in context.Web.Lists)
@@ -340,7 +341,7 @@ namespace PnP.Core.Test.Base
                 if (context.Web.Lists.CanPage)
                 {
                     await context.Web.Lists.GetNextPageAsync();
-                    Assert.IsTrue(context.Web.Lists.Count() == 4);
+                    Assert.IsTrue(context.Web.Lists.Length == 4);
 
                     // We only request the Title property, verify its loaded while others are not loaded
                     foreach (var list in context.Web.Lists)
@@ -351,7 +352,7 @@ namespace PnP.Core.Test.Base
                     }
 
                     await context.Web.Lists.GetAllPagesAsync();
-                    Assert.IsTrue(context.Web.Lists.Count() >= 4);
+                    Assert.IsTrue(context.Web.Lists.Length >= 4);
 
                     // Once we've loaded all lists we can't page anymore
                     Assert.IsFalse(context.Web.Lists.CanPage);
@@ -384,10 +385,10 @@ namespace PnP.Core.Test.Base
                 if (context.Web.Lists.CanPage)
                 {
                     await context.Web.Lists.GetNextPageAsync();
-                    Assert.IsTrue(context.Web.Lists.Count() == 4);
+                    Assert.IsTrue(context.Web.Lists.Length == 4);
 
                     await context.Web.Lists.GetAllPagesAsync();
-                    Assert.IsTrue(context.Web.Lists.Count() >= 4);
+                    Assert.IsTrue(context.Web.Lists.Length >= 4);
 
                     // Once we've loaded all lists we can't page anymore
                     Assert.IsFalse(context.Web.Lists.CanPage);
@@ -411,7 +412,7 @@ namespace PnP.Core.Test.Base
                 var web = await context.Web.GetAsync(p => p.Lists);
 
                 string listTitle = "RESTListItemPaging";
-                var list = web.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
+                var list = web.Lists.FirstOrDefault(p => p.Title == listTitle);
 
                 if (list != null)
                 {
@@ -436,65 +437,49 @@ namespace PnP.Core.Test.Base
                     }
                     await context.ExecuteAsync();
 
-                    // Since we've already populated the model due to the add let's create a second context to perform a clean load again
-                    // Check paging when starting from the beginning
-                    using (var context2 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+                    var list2 = context.Web.Lists.FirstOrDefault(p => p.Id == list.Id);
+
+                    var items2 = list2.Items.Take(2);
+                    var queryResult2 = items2.ToList();
+
+                    // We should have loaded 1 list item
+                    Assert.IsTrue(queryResult2.Count == 2);
+
+                    if (list2.Items.CanPage)
                     {
-                        // Force rest
-                        context2.GraphFirst = false;
-
-                        var list2 = context2.Web.Lists.Where(p => p.Id == list.Id).FirstOrDefault();
-
-                        var items = list2.Items.Take(2);
-                        var queryResult = items.ToList();
-
-                        // We should have loaded 1 list item
-                        Assert.IsTrue(queryResult.Count == 2);
-
-                        if (list2.Items.CanPage)
-                        {
-                            await list2.Items.GetAllPagesAsync();
-                            // Once we've loaded all items we can't page anymore
-                            Assert.IsFalse(list2.Items.CanPage);
-                            // Do we have all items?
-                            Assert.IsTrue(list2.Items.Count() == 10);
-                        }
-                        else
-                        {
-                            Assert.Fail("No __next property returned and paging is not possible");
-                        }
+                        await list2.Items.GetAllPagesAsync();
+                        // Once we've loaded all items we can't page anymore
+                        Assert.IsFalse(list2.Items.CanPage);
+                        // Do we have all items?
+                        Assert.IsTrue(list2.Items.Length == 10);
+                    }
+                    else
+                    {
+                        Assert.Fail("No __next property returned and paging is not possible");
                     }
 
-                    // Since we've already populated the model due to the add let's create a second context to perform a clean load again
                     // Check paging when starting from the middle, the skip + take combination results in a __next url that 
                     // has both the skiptoken and skip parameters, an invalid combination. Paging logic will handle this
-                    using (var context3 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))
+                    var list3 = context.Web.Lists.Where(p => p.Id == list.Id).FirstOrDefault();
+
+                    var items3 = list3.Items.Skip(4).Take(2);
+                    var queryResult3 = items3.ToList();
+
+                    // We should have loaded 1 list item
+                    Assert.IsTrue(queryResult3.Count == 2);
+
+                    if (list3.Items.CanPage)
                     {
-                        // Force rest
-                        context3.GraphFirst = false;
-
-                        var list3 = context3.Web.Lists.Where(p => p.Id == list.Id).FirstOrDefault();
-
-                        var items = list3.Items.Skip(4).Take(2);
-                        var queryResult = items.ToList();
-
-                        // We should have loaded 1 list item
-                        Assert.IsTrue(queryResult.Count == 2);
-
-                        if (list3.Items.CanPage)
-                        {
-                            await list3.Items.GetAllPagesAsync();
-                            // Once we've loaded all items we can't page anymore
-                            Assert.IsFalse(list3.Items.CanPage);
-                            // Do we have all items?
-                            Assert.IsTrue(list3.Items.Count() == 10);
-                        }
-                        else
-                        {
-                            Assert.Fail("No __next property returned and paging is not possible");
-                        }
+                        await list3.Items.GetAllPagesAsync();
+                        // Once we've loaded all items we can't page anymore
+                        Assert.IsFalse(list3.Items.CanPage);
+                        // Do we have all items?
+                        Assert.IsTrue(list3.Items.Length == 10);
                     }
-
+                    else
+                    {
+                        Assert.Fail("No __next property returned and paging is not possible");
+                    }
                 }
             }
         }
@@ -511,7 +496,7 @@ namespace PnP.Core.Test.Base
                 var web = await context.Web.GetAsync(p => p.Lists);
 
                 string listTitle = "RESTListItemGetPagedAsyncPaging";
-                var list = web.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
+                var list = web.Lists.FirstOrDefault(p => p.Title == listTitle);
 
                 if (list != null)
                 {
@@ -524,30 +509,26 @@ namespace PnP.Core.Test.Base
 
                 if (list != null)
                 {
-                    // Add items
-                    for (int i = 0; i < 10; i++)
+                    try
                     {
-                        Dictionary<string, object> values = new Dictionary<string, object>
+                        // Add items
+                        for (int i = 0; i < 10; i++)
+                        {
+                            Dictionary<string, object> values = new Dictionary<string, object>
                         {
                             { "Title", $"Item {i}" }
                         };
 
-                        await list.Items.AddBatchAsync(values);
-                    }
-                    await context.ExecuteAsync();
+                            await list.Items.AddBatchAsync(values);
+                        }
+                        await context.ExecuteAsync();
 
-                    // Since we've already populated the model due to the add let's create a second context to perform a clean load again
-                    using (var context2 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
-                    {
-                        // Force rest
-                        context2.GraphFirst = false;
-
-                        var list2 = context2.Web.Lists.Where(p => p.Id == list.Id).FirstOrDefault();
+                        var list2 = context.Web.Lists.Where(p => p.Id == list.Id).FirstOrDefault();
 
                         await list2.Items.GetPagedAsync(2);
 
                         // We should have loaded 2 list items
-                        Assert.IsTrue(list2.Items.Count() == 2);
+                        Assert.IsTrue(list2.Items.Length == 2);
 
                         if (list2.Items.CanPage)
                         {
@@ -555,12 +536,17 @@ namespace PnP.Core.Test.Base
                             // Once we've loaded all items we can't page anymore
                             Assert.IsFalse(list2.Items.CanPage);
                             // Do we have all items?
-                            Assert.IsTrue(list2.Items.Count() == 10);
+                            Assert.IsTrue(list2.Items.Length == 10);
                         }
                         else
                         {
                             Assert.Fail("No __next property returned and paging is not possible");
                         }
+                    }
+                    finally
+                    {
+                        // Clean up
+                        await list.DeleteAsync();
                     }
                 }
             }
