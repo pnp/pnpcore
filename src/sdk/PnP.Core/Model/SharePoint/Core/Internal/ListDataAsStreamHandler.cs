@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text.Json;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using PnP.Core.QueryModel;
 
 namespace PnP.Core.Model.SharePoint
 {
@@ -76,9 +77,9 @@ namespace PnP.Core.Model.SharePoint
                 {
                     if (int.TryParse(row.GetProperty("ID").GetString(), out int listItemId))
                     {
-                        // x PAOLO: We need to find a way to avoid the LINQ query here 
-                        // and we need to fall back to LINQ to Objects
-                        var itemToUpdate = list.Items.FirstOrDefault(p => p.Id == listItemId);
+                        // Here we want to avoid the LINQ query
+                        // and we want to rely on LINQ to Objects
+                        var itemToUpdate = list.Items.AsEnumerable().FirstOrDefault(p => p.Id == listItemId);
                         if (itemToUpdate == null)
                         {
                             itemToUpdate = (list.Items as ListItemCollection).CreateNewAndAdd();
@@ -206,7 +207,7 @@ namespace PnP.Core.Model.SharePoint
 
             foreach (var property in row.EnumerateObject())
             {                
-                var field = fields.FirstOrDefault(p => p.InternalName == property.Name);
+                var field = fields.AsEnumerable().FirstOrDefault(p => p.InternalName == property.Name);
                 if (field != null)
                 {
                     var streamProperty = new ListDataAsStreamProperty()
@@ -402,7 +403,7 @@ namespace PnP.Core.Model.SharePoint
                     {
                         string[] nameParts = property.Name.Split(new char[] { '.' });
 
-                        var field2 = fields.FirstOrDefault(p => p.InternalName == nameParts[0]);
+                        var field2 = fields.AsEnumerable().FirstOrDefault(p => p.InternalName == nameParts[0]);
                         var propertyToUpdate = properties.FirstOrDefault(p => p.Name == nameParts[0]);
                         if (propertyToUpdate != null && propertyToUpdate.Values.Count == 1 && !string.IsNullOrEmpty(nameParts[1]))
                         {

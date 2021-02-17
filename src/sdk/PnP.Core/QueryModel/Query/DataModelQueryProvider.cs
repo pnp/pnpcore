@@ -58,7 +58,7 @@ namespace PnP.Core.QueryModel
             var query = Translate(expression);
 
             // Execute the query via the target Query Service
-            BatchRequest batchRequest= await queryService.AddToCurrentBatchAsync(expression.Type, query).ConfigureAwait(false);
+            BatchRequest batchRequest= await queryService.AddToCurrentBatchAsync(query).ConfigureAwait(false);
 
             // Get the resulting property from the parent object
             var collection = batchRequest.Model.GetPublicInstancePropertyValue(queryService.MemberName) as IRequestableCollection;

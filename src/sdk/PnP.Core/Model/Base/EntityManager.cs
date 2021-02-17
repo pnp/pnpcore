@@ -258,6 +258,7 @@ namespace PnP.Core.Model
             // Set the parent, if any
             if (parent != null && result is IDataModelParent modelWithParent)
             {
+                // Plug the parent into the concrete instance
                 modelWithParent.Parent = parent;
             }
 

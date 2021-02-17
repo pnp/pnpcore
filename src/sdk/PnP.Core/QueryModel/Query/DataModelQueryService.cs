@@ -39,9 +39,10 @@ namespace PnP.Core.QueryModel
 
         internal EntityInfo EntityInfo { get; set; }
 
-        public async Task<BatchRequest> AddToCurrentBatchAsync(Type expressionType, ODataQuery<TModel> query)
+        public async Task<BatchRequest> AddToCurrentBatchAsync(ODataQuery<TModel> query)
         {
-            // Get the entity info, depending on how we enter EntityInfo was already created
+            // Get the entity info, depending on how we access this method, EntityInfo 
+            // could be already created or not
             if (EntityInfo == null)
             {
                 EntityInfo = EntityManager.GetClassInfo<TModel>(typeof(TModel), null, query.Fields.ToArray());
@@ -103,7 +104,7 @@ namespace PnP.Core.QueryModel
             if (typeof(TModel).ImplementsInterface(typeof(IQueryableDataModel)))
             {
                 // Prepare request and add to the current batch
-                BatchRequest batchRequest = await AddToCurrentBatchAsync(expressionType, query).ConfigureAwait(false);
+                BatchRequest batchRequest = await AddToCurrentBatchAsync(query).ConfigureAwait(false);
 
                 // and execute the request
                 await PnPContext.ExecuteAsync().ConfigureAwait(false);
@@ -116,7 +117,7 @@ namespace PnP.Core.QueryModel
                 // the whole collection of results
                 if (expressionType.ImplementsInterface(typeof(IQueryable)))
                 {
-                    // TODO: With the new querying model, where we always create a new container
+                    // With the new querying model, where we always create a new container
                     // as such, we simply return the whole set of results
                     return resultValue;
                 }
@@ -128,7 +129,7 @@ namespace PnP.Core.QueryModel
                     // sure that the result will be just one item
                     if (query.Top == 1)
                     {
-                        // TODO: Here as well it will suffice to return FirstOrDefault without 
+                        // Here as well it will suffice to return FirstOrDefault without 
                         // any specific predicate
                         return resultValue.FirstOrDefault();
                     }

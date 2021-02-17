@@ -274,8 +274,14 @@ namespace PnP.Core.Services
             // Request the Site Id
             await context.Site.LoadAsync(p => p.Id, p=>p.GroupId).ConfigureAwait(false);
 
-            // Ensure the Graph ID is set
-            (context.Web as IMetadataExtensible).Metadata.Add(PnPConstants.MetaDataGraphId, $"{context.Uri.DnsSafeHost},{context.Site.Id},{context.Web.Id}");
+            // Ensure the Graph ID is set once and only once
+            if (context.Web is IMetadataExtensible me)
+            {
+                if (!me.Metadata.ContainsKey(PnPConstants.MetaDataGraphId))
+                {
+                    me.Metadata.Add(PnPConstants.MetaDataGraphId, $"{context.Uri.DnsSafeHost},{context.Site.Id},{context.Web.Id}");
+                }
+            }
         }
 
         internal static async Task CopyContextInitializationAsync(PnPContext source, PnPContext target)
