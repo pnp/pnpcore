@@ -483,27 +483,39 @@ namespace PnP.Core.Test.Base
                     Assert.Inconclusive("Test data set should be setup to not have the list available.");
                 }
 
-                var listCount = web.Lists.Length;
-
-                // Add a new list via interactive request
-                string body = $"{{\"__metadata\":{{\"type\":\"SP.List\"}},\"BaseTemplate\":100,\"Title\":\"{listTitle}\"}}";
-
-                var api = new ApiCall($"_api/web/lists", ApiType.SPORest, body)
+                try
                 {
-                    Interactive = true
-                };
+                    var listCount = web.Lists.Length;
 
-                var apiResponse = await (context.Web as Web).RequestAsync(api, HttpMethod.Post);
+                    // Add a new list via interactive request
+                    string body = $"{{\"__metadata\":{{\"type\":\"SP.List\"}},\"BaseTemplate\":100,\"Title\":\"{listTitle}\"}}";
 
-                Assert.IsTrue(apiResponse.Executed);
-                Assert.IsTrue((int)apiResponse.Requests.First().Value.ResponseHttpStatusCode < 400);
+                    var api = new ApiCall($"_api/web/lists", ApiType.SPORest, body)
+                    {
+                        Interactive = true
+                    };
 
-                // Load the list again
-                await context.Web.LoadAsync(p => p.Lists);
+                    var apiResponse = await (context.Web as Web).RequestAsync(api, HttpMethod.Post);
 
-                // Check if we still have the same amount of lists
-                Assert.IsTrue(context.Web.Lists.Length == listCount + 1);
+                    Assert.IsTrue(apiResponse.Executed);
+                    Assert.IsTrue((int)apiResponse.Requests.First().Value.ResponseHttpStatusCode < 400);
 
+                    // Load the list again
+                    await context.Web.LoadAsync(p => p.Lists);
+
+                    // Check if we still have the same amount of lists
+                    Assert.IsTrue(context.Web.Lists.Length == listCount + 1);
+                }
+                finally
+                {
+                    // Cleanup
+                    myList = web.Lists.FirstOrDefault(p => p.Title == listTitle);
+
+                    if (myList != null)
+                    {
+                        await myList.DeleteAsync();
+                    }
+                }
             }
         }
 
