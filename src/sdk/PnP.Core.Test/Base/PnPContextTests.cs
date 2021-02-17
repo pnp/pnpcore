@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using PnP.Core.Services;
 using PnP.Core.Test.Utilities;
 using System;
 using System.Threading.Tasks;
@@ -315,5 +316,21 @@ namespace PnP.Core.Test.Base
                 }
             }
         }
+
+        [TestMethod]
+        public async Task SetAADTenant()
+        {
+            PnPContextFactoryOptions options = new PnPContextFactoryOptions();
+            PnPGlobalSettingsOptions globalOptions = new PnPGlobalSettingsOptions();
+            using (var context = new PnPContext(logger: null, authenticationProvider: null, sharePointRestClient: null, microsoftGraphClient: null, contextOptions: options, globalOptions: globalOptions, telemetryManager: null))
+            {
+                context.Uri = new Uri("https://officedevpnp.sharepoint.com/sites/PnPCoreSDKDoNotDelete");
+
+                await context.SetAADTenantId();
+
+                Assert.AreEqual(globalOptions.AADTenantId, Guid.Parse("73da091f-a58d-405f-9015-9bd386425255"));
+            }
+        }
+
     }
 }

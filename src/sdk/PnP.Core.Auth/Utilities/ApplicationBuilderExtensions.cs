@@ -1,5 +1,4 @@
 ﻿using Microsoft.Identity.Client;
-using PnP.Core.Auth.Services.Builder.Configuration;
 using System;
 
 namespace PnP.Core.Auth.Utilities

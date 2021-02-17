@@ -27,4 +27,14 @@
     <ProjectReference Include="..\PnP.Core\PnP.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="TestAssets\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="TestAssets\pnp.pfx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

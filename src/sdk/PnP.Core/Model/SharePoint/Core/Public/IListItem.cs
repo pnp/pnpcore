@@ -24,6 +24,33 @@ namespace PnP.Core.Model.SharePoint
 
         #region Extension methods
 
+        #region Folder
+
+        /// <summary>
+        /// Checks if this <see cref="IListItem"/> is a folder
+        /// </summary>
+        /// <returns>Returns true if this <see cref="IListItem"/> is a folder.</returns>
+        public Task<bool> IsFolderAsync();
+
+        /// <summary>
+        /// Checks if this <see cref="IListItem"/> is a folder
+        /// </summary>
+        /// <returns>Returns true if this <see cref="IListItem"/> is a folder.</returns>
+        public bool IsFolder();
+
+        /// <summary>
+        /// Returns the <see cref="IFolder"/> that holds this item
+        /// </summary>
+        /// <returns>The <see cref="IFolder"/> for this item is returned, if the item itself is a folder then the item is returned as <see cref="IFolder"/>.</returns>
+        public Task<IFolder> GetFolderAsync();
+
+        /// <summary>
+        /// Returns the <see cref="IFolder"/> that holds this item
+        /// </summary>
+        /// <returns>The <see cref="IFolder"/> for this item is returned, if the item itself is a folder then the item is returned as <see cref="IFolder"/>.</returns>
+        public IFolder GetFolder();
+        #endregion
+
         #region SystemUpdate
 
         /// <summary>
