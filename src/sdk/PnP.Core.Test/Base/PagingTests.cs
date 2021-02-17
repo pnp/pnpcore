@@ -425,60 +425,68 @@ namespace PnP.Core.Test.Base
 
                 if (list != null)
                 {
-                    // Add items
-                    for (int i = 0; i < 10; i++)
+                    try
                     {
-                        Dictionary<string, object> values = new Dictionary<string, object>
+                        // Add items
+                        for (int i = 0; i < 10; i++)
+                        {
+                            Dictionary<string, object> values = new Dictionary<string, object>
                         {
                             { "Title", $"Item {i}" }
                         };
 
-                        await list.Items.AddBatchAsync(values);
+                            await list.Items.AddBatchAsync(values);
+                        }
+                        await context.ExecuteAsync();
+
+                        var list2 = context.Web.Lists.FirstOrDefault(p => p.Id == list.Id);
+
+                        var items2 = list2.Items.Take(2);
+                        var queryResult2 = items2.ToList();
+
+                        // We should have loaded 1 list item
+                        Assert.IsTrue(queryResult2.Count == 2);
+
+                        if (list2.Items.CanPage)
+                        {
+                            await list2.Items.GetAllPagesAsync();
+                            // Once we've loaded all items we can't page anymore
+                            Assert.IsFalse(list2.Items.CanPage);
+                            // Do we have all items?
+                            Assert.IsTrue(list2.Items.Length == 10);
+                        }
+                        else
+                        {
+                            Assert.Fail("No __next property returned and paging is not possible");
+                        }
+
+                        // Check paging when starting from the middle, the skip + take combination results in a __next url that 
+                        // has both the skiptoken and skip parameters, an invalid combination. Paging logic will handle this
+                        var list3 = context.Web.Lists.Where(p => p.Id == list.Id).FirstOrDefault();
+
+                        var items3 = list3.Items.Skip(4).Take(2);
+                        var queryResult3 = items3.ToList();
+
+                        // We should have loaded 1 list item
+                        Assert.IsTrue(queryResult3.Count == 2);
+
+                        if (list3.Items.CanPage)
+                        {
+                            await list3.Items.GetAllPagesAsync();
+                            // Once we've loaded all items we can't page anymore
+                            Assert.IsFalse(list3.Items.CanPage);
+                            // Do we have all items?
+                            Assert.IsTrue(list3.Items.Length == 10);
+                        }
+                        else
+                        {
+                            Assert.Fail("No __next property returned and paging is not possible");
+                        }
                     }
-                    await context.ExecuteAsync();
-
-                    var list2 = context.Web.Lists.FirstOrDefault(p => p.Id == list.Id);
-
-                    var items2 = list2.Items.Take(2);
-                    var queryResult2 = items2.ToList();
-
-                    // We should have loaded 1 list item
-                    Assert.IsTrue(queryResult2.Count == 2);
-
-                    if (list2.Items.CanPage)
+                    finally
                     {
-                        await list2.Items.GetAllPagesAsync();
-                        // Once we've loaded all items we can't page anymore
-                        Assert.IsFalse(list2.Items.CanPage);
-                        // Do we have all items?
-                        Assert.IsTrue(list2.Items.Length == 10);
-                    }
-                    else
-                    {
-                        Assert.Fail("No __next property returned and paging is not possible");
-                    }
-
-                    // Check paging when starting from the middle, the skip + take combination results in a __next url that 
-                    // has both the skiptoken and skip parameters, an invalid combination. Paging logic will handle this
-                    var list3 = context.Web.Lists.Where(p => p.Id == list.Id).FirstOrDefault();
-
-                    var items3 = list3.Items.Skip(4).Take(2);
-                    var queryResult3 = items3.ToList();
-
-                    // We should have loaded 1 list item
-                    Assert.IsTrue(queryResult3.Count == 2);
-
-                    if (list3.Items.CanPage)
-                    {
-                        await list3.Items.GetAllPagesAsync();
-                        // Once we've loaded all items we can't page anymore
-                        Assert.IsFalse(list3.Items.CanPage);
-                        // Do we have all items?
-                        Assert.IsTrue(list3.Items.Length == 10);
-                    }
-                    else
-                    {
-                        Assert.Fail("No __next property returned and paging is not possible");
+                        // Clean up
+                        await list.DeleteAsync();
                     }
                 }
             }
