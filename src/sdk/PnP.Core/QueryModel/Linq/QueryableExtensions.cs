@@ -17,7 +17,7 @@ namespace PnP.Core.QueryModel
     public static class QueryableExtensions
     {
 
-        #region Batch
+        #region AsBatchAsync
 
         /// <summary>
         /// Adds the query to the current batch
@@ -25,7 +25,7 @@ namespace PnP.Core.QueryModel
         /// <typeparam name="TSource"></typeparam>
         /// <param name="source"></param>
         /// <returns></returns>
-        public static Task<IEnumerableBatchResult<TSource>> AddAsBatchAsync<TSource>(
+        public static Task<IEnumerableBatchResult<TSource>> AsBatchAsync<TSource>(
             this IQueryable<TSource> source)
         {
             if (source == null)
@@ -43,7 +43,7 @@ namespace PnP.Core.QueryModel
 
         #endregion
 
-        #region Query
+        #region QueryProperties
 
         /// <summary>
         /// Extension method to declare a field/metadata property to load while executing the REST query
@@ -507,6 +507,34 @@ namespace PnP.Core.QueryModel
             if (source is IAsyncEnumerable<TSource> asyncEnumerable)
             {
                 return asyncEnumerable;
+            }
+
+            throw new InvalidOperationException(PnPCoreResources.Exception_InvalidOperation_NotAsyncQueryableSource);
+        }
+
+        #endregion
+
+        #region AsEnumerable
+
+        /// <summary>
+        /// Returns an <see cref="IEnumerable{T}" /> which can be enumerated without executing an actual LINQ query on the target data provider.
+        /// </summary>
+        /// <typeparam name="TSource"> The type of the elements of <paramref name="source" />. </typeparam>
+        /// <param name="source"> An <see cref="IDataModelCollection{T}" /> to enumerate. </param>
+        /// <returns> The query results. </returns>
+        /// <exception cref="InvalidOperationException"> <paramref name="source" /> is <see langword="null" />. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="source" /> is not a <see cref="IAsyncEnumerable{T}" />. </exception>
+        public static IEnumerable<TSource> AsEnumerable<TSource>(
+            this IDataModelCollection<TSource> source)
+        {
+            if (source == null)
+            {
+                throw new ArgumentNullException(nameof(source));
+            }
+
+            if (source is BaseQueryableDataModelCollection<TSource> enumerable)
+            {
+                return (IEnumerable<TSource>)enumerable.RequestedItems;
             }
 
             throw new InvalidOperationException(PnPCoreResources.Exception_InvalidOperation_NotAsyncQueryableSource);

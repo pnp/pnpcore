@@ -118,14 +118,16 @@ namespace PnP.Core.QueryModel
                 urlParameters.Add("$filter", GetFilters(targetPlatform, false));
             }
 
-            // Process any $top restriction
-            if (Top.HasValue)
+            // Process any $top restriction if and only if the target platform is not Graph
+            // or if the target platform is Graph, but there are no filters
+            if (Top.HasValue && (Filters.Count == 0 || targetPlatform != ODataTargetPlatform.Graph))
             {
                 urlParameters.Add("$top", Top.ToString());
             }
 
-            // Process any $skip restriction
-            if (Skip.HasValue)
+            // Process any $skip restriction if and only if the target platform is not Graph
+            // or if the target platform is Graph, but there are no filters
+            if (Skip.HasValue && (Filters.Count == 0 || targetPlatform != ODataTargetPlatform.Graph))
             {
                 urlParameters.Add("$skip", Skip.ToString());
             }

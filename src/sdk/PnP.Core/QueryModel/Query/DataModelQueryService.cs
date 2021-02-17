@@ -103,7 +103,7 @@ namespace PnP.Core.QueryModel
             if (typeof(TModel).ImplementsInterface(typeof(IQueryableDataModel)))
             {
                 // Prepare request and add to the current batch
-                BatchRequest batchRequest = await AddToCurrentBatchAsync(expressionType, query);
+                BatchRequest batchRequest = await AddToCurrentBatchAsync(expressionType, query).ConfigureAwait(false);
 
                 // and execute the request
                 await PnPContext.ExecuteAsync().ConfigureAwait(false);
@@ -117,6 +117,7 @@ namespace PnP.Core.QueryModel
                 if (expressionType.ImplementsInterface(typeof(IQueryable)))
                 {
                     // TODO: With the new querying model, where we always create a new container
+                    // as such, we simply return the whole set of results
                     return resultValue;
                 }
                 // Otherwise if the expression type is the type of TModel, we need
