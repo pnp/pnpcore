@@ -231,9 +231,27 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// Associates the current site to a primary hub site
         /// </summary>
-        public Task JoinHubSiteAsync()
+        public async Task<bool> JoinHubSiteAsync(Guid hubSiteId)
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
+
+            var result = false;
+
+            await EnsurePropertiesAsync(p => p.IsHubSite).ConfigureAwait(false);
+
+            if (!IsHubSite)
+            {
+                //TODO: Finish
+                var apiCall = new ApiCall($"_api/Site/JoinHubSite", ApiType.SPORest);
+                var response = await RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
+                result = response.StatusCode == System.Net.HttpStatusCode.OK;
+            }
+            else
+            {
+                throw new ArgumentException($"Site already part of a hub site");
+            }
+
+            return result;
         }
 
         #endregion
