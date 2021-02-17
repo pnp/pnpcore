@@ -258,7 +258,7 @@ namespace PnP.Core.Test.Base
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 // Load all the lists
-                await context.Web.LoadBatchAsync(w => w.Lists);
+                var w = await context.Web.GetBatchAsync(w => w.Lists);
                 await context.ExecuteAsync();
 
                 string listTitle = "AddListViaBatchAsyncRest";
