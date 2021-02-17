@@ -529,7 +529,6 @@ namespace PnP.Core.Test.Teams
                 Assert.IsNull(message.Subject);
                 Assert.IsTrue(message.IsPropertyAvailable(o => o.Summary));
                 Assert.IsNull(message.Summary);
-
             }
         }
 
