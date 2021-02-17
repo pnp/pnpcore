@@ -34,8 +34,6 @@ namespace PnP.Core.Test.Base
                     Assert.Inconclusive("This test requires Graph beta to be allowed.");
                 }
 
-                var team = await context.Team.GetAsync(p => p.Channels);
-
                 // Create a new channel and add enough messages to it
                 string channelName = $"Paging test {new Random().Next()}";
 
@@ -45,7 +43,7 @@ namespace PnP.Core.Test.Base
                     channelName = properties["ChannelName"];
                 }
 
-                var channelForPaging = team.Channels.FirstOrDefault(p => p.DisplayName == channelName);
+                var channelForPaging = context.Team.Channels.FirstOrDefault(p => p.DisplayName == channelName);
                 if (channelForPaging == null)
                 {
                     // Persist the created channel name as we need to have the same name when we run an offline test
@@ -58,7 +56,7 @@ namespace PnP.Core.Test.Base
                         TestManager.SaveProperties(context, properties);
                     }
 
-                    channelForPaging = await team.Channels.AddAsync(channelName, "Test channel, will be deleted in 21 days");
+                    channelForPaging = await context.Team.Channels.AddAsync(channelName, "Test channel, will be deleted in 21 days");
                 }
                 else
                 {
@@ -74,45 +72,41 @@ namespace PnP.Core.Test.Base
                 // Since we've not yet loaded the channel messages from the server paging is not yet allowed
                 Assert.IsFalse(channelForPaging.Messages.CanPage);
 
-                // Since we've already populated the model due to the add let's create a second context to perform a clean load again
-                using (var context2 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
-                {
-                    // Retrieve the already created channel
-                    await context2.Team.GetAsync(p => p.Channels);
-                    var channelForPaging2 = context2.Team.Channels.FirstOrDefault(p => p.DisplayName == channelName);
+                // Retrieve the already created channel
+                var channelForPaging2 = context.Team.Channels.FirstOrDefault(p => p.DisplayName == channelName);
 
-                    // Load the messages, this will populate the first batch of messages and will indicate paging is allowed
-                    await channelForPaging2.GetAsync(p => p.Messages);
+                // Load the messages, this will populate the first batch of messages and will indicate paging is allowed
+                await channelForPaging2.LoadAsync(p => p.Messages);
 
-                    // Paging should now be allowed
-                    Assert.IsTrue(channelForPaging2.Messages.CanPage);
+                // Paging should now be allowed
+                Assert.IsTrue(channelForPaging2.Messages.CanPage);
 
-                    // We should have messages loaded
+                // We should have messages loaded
+                int messageCount = channelForPaging2.Messages.Length;
+                Assert.IsTrue(messageCount > 0);
 
-                    int messageCount = channelForPaging2.Messages.Count();
-                    Assert.IsTrue(messageCount > 0);
+                // Get the next page
+                await channelForPaging2.Messages.GetNextPageAsync();
 
-                    // Get the next page
-                    await channelForPaging2.Messages.GetNextPageAsync();
+                // Seems like the Graph API does load all 45 at once since they where created too short ago
+                //Assert.IsTrue(channelForPaging2.Messages.Count() > messageCount);
 
-                    // Seems like the Graph API does load all 45 at once since they where created too short ago
-                    //Assert.IsTrue(channelForPaging2.Messages.Count() > messageCount);
+                // Trigger a load of the remaining pages via the GetAllPages call
+                await channelForPaging2.Messages.GetAllPagesAsync();
 
-                    // Trigger a load of the remaining pages via the GetAllPages call
-                    await channelForPaging2.Messages.GetAllPagesAsync();
+                // We now should have the full amount of messages loaded
+                Assert.IsTrue(channelForPaging2.Messages.Length == 45);
 
-                    // We now should have the full amount of messages loaded
-                    Assert.IsTrue(channelForPaging2.Messages.Count() == 45);
-
-                    // Cleanup by deleting the channel
-                    await channelForPaging2.DeleteAsync();
-                }
+                // Cleanup by deleting the channel
+                await channelForPaging2.DeleteAsync();
             }
         }
 
         [TestMethod]
         public async Task GraphLinqTakeToPaging()
         {
+            // x BERT: Here I see a different behavior, no @nextLink in the Graph response
+
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
@@ -127,7 +121,7 @@ namespace PnP.Core.Test.Base
                 if (context.Web.Lists.CanPage)
                 {
                     await context.Web.Lists.GetNextPageAsync();
-                    Assert.IsTrue(context.Web.Lists.Count() == 4);
+                    Assert.IsTrue(context.Web.Lists.Length == 4);
                 }
                 else
                 {
@@ -144,19 +138,19 @@ namespace PnP.Core.Test.Base
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
 
-                await context.Web.Lists.GetPagedAsync(2);
+                var result = await context.Web.Lists.GetPagedAsync(2);
 
                 // We should have loaded 2 lists
-                Assert.IsTrue(context.Web.Lists.Count() == 2);
+                Assert.IsTrue(result.Count() == 2);
 
                 // Since we only asked 2 lists Graph will return a nextLink odata property 
                 if (context.Web.Lists.CanPage)
                 {
-                    await context.Web.Lists.GetNextPageAsync();
-                    Assert.IsTrue(context.Web.Lists.Count() == 4);
+                    result = await context.Web.Lists.GetNextPageAsync();
+                    Assert.IsTrue(result.Count() == 4);
 
                     await context.Web.Lists.GetAllPagesAsync();
-                    Assert.IsTrue(context.Web.Lists.Count() >= 4);
+                    Assert.IsTrue(context.Web.Lists.Length >= 4);
 
                     // Once we've loaded all lists we can't page anymore
                     Assert.IsFalse(context.Web.Lists.CanPage);
@@ -652,7 +646,7 @@ namespace PnP.Core.Test.Base
                 var web = await context.Web.GetAsync(p => p.Lists);
 
                 string listTitle = "ListDataAsStreamListItemGetPagedAsyncPaging";
-                var list = web.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
+                var list = web.Lists.FirstOrDefault(p => p.Title == listTitle);
 
                 if (list != null)
                 {
@@ -665,33 +659,29 @@ namespace PnP.Core.Test.Base
 
                 if (list != null)
                 {
-                    // Add items
-                    for (int i = 0; i < 100; i++)
+                    try
                     {
-                        Dictionary<string, object> values = new Dictionary<string, object>
+                        // Add items
+                        for (int i = 0; i < 100; i++)
+                        {
+                            Dictionary<string, object> values = new Dictionary<string, object>
                         {
                             { "Title", $"Item {i}" }
                         };
 
-                        await list.Items.AddBatchAsync(values);
-                    }
-                    await context.ExecuteAsync();
+                            await list.Items.AddBatchAsync(values);
+                        }
+                        await context.ExecuteAsync();
 
-                    // Since we've already populated the model due to the add let's create a second context to perform a clean load again
-                    using (var context2 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
-                    {
-                        // Force rest
-                        context2.GraphFirst = false;
+                        var list2 = context.Web.Lists.Where(p => p.Id == list.Id).FirstOrDefault();
 
-                        var list2 = context2.Web.Lists.Where(p => p.Id == list.Id).FirstOrDefault();
+                        var result = await list2.GetListDataAsStreamAsync(new RenderListDataOptions()
+                        {
+                            ViewXml = "<View><ViewFields><FieldRef Name='Title' /></ViewFields><RowLimit Paged='TRUE'>20</RowLimit></View>",
+                            RenderOptions = RenderListDataOptionsFlags.ListData
+                        });
 
-                        var result = await list2.GetListDataAsStreamAsync(new RenderListDataOptions() 
-                        { 
-                            ViewXml = "<View><ViewFields><FieldRef Name='Title' /></ViewFields><RowLimit Paged='TRUE'>20</RowLimit></View>", 
-                            RenderOptions = RenderListDataOptionsFlags.ListData 
-                        });                        
-
-                        Assert.IsTrue(list2.Items.Count() == 20);
+                        Assert.IsTrue(list2.Items.Length == 20);
 
                         result = await list2.GetListDataAsStreamAsync(new RenderListDataOptions()
                         {
@@ -700,11 +690,13 @@ namespace PnP.Core.Test.Base
                             Paging = result["NextHref"].ToString().Substring(1)
                         });
 
-                        Assert.IsTrue(list2.Items.Count() == 40);
-                        Assert.IsTrue(list2.Items.ElementAt(21).Id == 22);
-
-                        // delete the list
-                        await list2.DeleteAsync();
+                        Assert.IsTrue(list2.Items.Length == 40);
+                        Assert.IsTrue(list2.Items.AsEnumerable().ElementAt(21).Id == 22);
+                    }
+                    finally
+                    {
+                        // Clean up
+                        await list.DeleteAsync();
                     }
                 }
             }
