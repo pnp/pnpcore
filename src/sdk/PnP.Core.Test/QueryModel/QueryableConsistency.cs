@@ -148,7 +148,7 @@ namespace PnP.Core.Test.QueryModel
 
                 // Now add a new list
                 string listTitle = "TestQueryListsConsistency";
-                var newList = context.Web.Lists.FirstOrDefault(l => l.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
+                var newList = context.Web.Lists.FirstOrDefault(l => l.Title == listTitle);
 
                 if (newList != null)
                 {
