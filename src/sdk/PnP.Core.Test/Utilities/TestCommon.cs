@@ -272,13 +272,25 @@ namespace PnP.Core.Test.Utilities
                     .Configure<PnPCoreAuthenticationOptions>(configuration.GetSection("PnPCore"))
                 .BuildServiceProvider();
 
-                TestUris = new Dictionary<string, Uri>
+                if (!string.IsNullOrEmpty(classicSTS0SiteUrl))
                 {
-                    { TestSite, new Uri(targetSiteUrl) },
-                    { TestSubSite, new Uri(targetSubSiteUrl) },
-                    { NoGroupTestSite, new Uri(noGroupSiteUrl) },
-                    { ClassicSTS0TestSite, new Uri(classicSTS0SiteUrl) }
-                };
+                    TestUris = new Dictionary<string, Uri>
+                    {
+                        { TestSite, new Uri(targetSiteUrl) },
+                        { TestSubSite, new Uri(targetSubSiteUrl) },
+                        { NoGroupTestSite, new Uri(noGroupSiteUrl) },
+                        { ClassicSTS0TestSite, new Uri(classicSTS0SiteUrl) }
+                    };
+                }
+                else
+                {
+                    TestUris = new Dictionary<string, Uri>
+                    {
+                        { TestSite, new Uri(targetSiteUrl) },
+                        { TestSubSite, new Uri(targetSubSiteUrl) },
+                        { NoGroupTestSite, new Uri(noGroupSiteUrl) }
+                    };
+                }
 
                 var pnpContextFactory = serviceProvider.GetRequiredService<IPnPTestContextFactory>();
 
