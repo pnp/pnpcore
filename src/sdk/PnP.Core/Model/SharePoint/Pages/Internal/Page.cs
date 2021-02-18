@@ -379,9 +379,10 @@ namespace PnP.Core.Model.SharePoint
         private static async Task<IList> EnsurePagesLibraryAsync(PnPContext context)
         {
             IList pagesLibrary = null;
-            if (context.Web.IsPropertyAvailable(p => p.Lists) && context.Web.Lists.Any())
+            var lists = context.Web.Lists.AsEnumerable();
+            if (context.Web.IsPropertyAvailable(p => p.Lists) && lists.Any())
             {
-                foreach (var list in context.Web.Lists)
+                foreach (var list in lists)
                 {
                     if (list.IsPropertyAvailable(p => p.TemplateType) && list.TemplateType == ListTemplateType.WebPageLibrary)
                     {
