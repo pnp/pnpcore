@@ -22,8 +22,8 @@ namespace PnP.Core.Test.Security
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                context.Web.Get(w => w.RoleAssignments);
-                Assert.IsTrue(context.Web.RoleAssignments.Count() > 0);
+                context.Web.Load(w => w.RoleAssignments);
+                Assert.IsTrue(context.Web.RoleAssignments.Length > 0);
             }
         }
     }

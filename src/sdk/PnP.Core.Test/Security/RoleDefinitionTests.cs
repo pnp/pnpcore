@@ -3,6 +3,7 @@ using PnP.Core.Test.Utilities;
 using System.Linq;
 using System.Threading.Tasks;
 using PnP.Core.Model;
+using PnP.Core.Model.Security;
 
 namespace PnP.Core.Test.Security
 {
@@ -22,8 +23,8 @@ namespace PnP.Core.Test.Security
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                context.Web.Get(w => w.RoleDefinitions);
-                Assert.IsTrue(context.Web.RoleDefinitions.Count() > 0);
+                context.Web.Load(w => w.RoleDefinitions);
+                Assert.IsTrue(context.Web.RoleDefinitions.Length > 0);
             }
         }
 
@@ -33,13 +34,26 @@ namespace PnP.Core.Test.Security
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                context.Web.Get(w => w.RoleDefinitions);
+                context.Web.Load(w => w.RoleDefinitions);
 
-                // get existing role def
-                var adminRoleDef = context.Web.RoleDefinitions.Where(r => r.Name == "Administrator");
-                var roleDefinition = await context.Web.RoleDefinitions.AddAsync("Test RoleDef 2", Model.SharePoint.RoleType.Administrator, new Model.SharePoint.PermissionKind[] { Model.SharePoint.PermissionKind.AddAndCustomizePages }, "", false, 0);
-                Assert.IsTrue(roleDefinition.Requested);
-                await roleDefinition.DeleteAsync();
+                IRoleDefinition roleDefinition = null;
+
+                try
+                {
+                    // get existing role def
+                    var adminRoleDef = context.Web.RoleDefinitions.AsEnumerable().Where(r => r.Name == "Administrator");
+                    Assert.IsNotNull(adminRoleDef);
+                    
+                    roleDefinition = await context.Web.RoleDefinitions.AddAsync("Test RoleDef 2", Model.SharePoint.RoleType.Administrator, new Model.SharePoint.PermissionKind[] { Model.SharePoint.PermissionKind.AddAndCustomizePages }, "", false, 0);
+                    Assert.IsTrue(roleDefinition.Requested);
+                }
+                finally
+                {
+                    if (roleDefinition != null)
+                    {
+                        await roleDefinition.DeleteAsync();
+                    }
+                }
             }
         }
     }
