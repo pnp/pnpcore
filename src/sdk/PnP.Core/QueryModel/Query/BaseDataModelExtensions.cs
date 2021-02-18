@@ -92,7 +92,7 @@ namespace PnP.Core.QueryModel
             var concreteEntity = (source as IManageableCollection<T>).CreateNew();
 
             // Grab entity information using the provided selectors
-            var entityInfo = EntityManager.GetClassInfo(concreteEntity.GetType(), (concreteEntity as BaseDataModel<T>), selectors);
+            var entityInfo = EntityManager.GetClassInfo(concreteEntity.GetType(), (concreteEntity as BaseDataModel<T>), expressions: selectors);
 
             // Build the default get query but pass in our given API call as override
             var query = await QueryClient.BuildGetAPICallAsync(concreteEntity as BaseDataModel<T>, entityInfo, apiCall).ConfigureAwait(false);

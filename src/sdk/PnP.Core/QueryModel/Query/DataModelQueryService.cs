@@ -45,7 +45,7 @@ namespace PnP.Core.QueryModel
             // could be already created or not
             if (EntityInfo == null)
             {
-                EntityInfo = EntityManager.GetClassInfo<TModel>(typeof(TModel), null, query.Fields.ToArray());
+                EntityInfo = EntityManager.GetClassInfo<TModel>(typeof(TModel), null, this.Parent, query.Fields.ToArray());
             }
 
             var batchParent = Parent;
@@ -57,6 +57,16 @@ namespace PnP.Core.QueryModel
                 EntityInfo.Target = batchParent.GetType();
                 // Clone parent object in order to keep original collection as is
                 batchParent = (IDataModelParent)EntityManager.GetEntityConcreteInstance(batchParent.GetType(), null, PnPContext);
+
+                // Copy parent metadata, if any
+                if (Parent is IMetadataExtensible mdParent &&
+                    batchParent is IMetadataExtensible mdBatchParent)
+                {
+                    foreach (var md in mdParent.Metadata)
+                    {
+                        mdBatchParent.Metadata[md.Key] = md.Value;
+                    }
+                }
             }
 
             // and its concrete instance
@@ -106,11 +116,14 @@ namespace PnP.Core.QueryModel
                 // Prepare request and add to the current batch
                 BatchRequest batchRequest = await AddToCurrentBatchAsync(query).ConfigureAwait(false);
 
+                // Cleanup the collection of results, before loading the new results
+                var collection = batchRequest.Model.GetPublicInstancePropertyValue(MemberName) as IRequestableCollection;
+                collection.Clear();
+
                 // and execute the request
                 await PnPContext.ExecuteAsync().ConfigureAwait(false);
 
                 // Get the resulting property from the parent object
-                var collection = batchRequest.Model.GetPublicInstancePropertyValue(MemberName) as IRequestableCollection;
                 var resultValue = (IEnumerable<TModel>)collection.RequestedItems;
 
                 // If the expression type implements IQueryable, we need to return
