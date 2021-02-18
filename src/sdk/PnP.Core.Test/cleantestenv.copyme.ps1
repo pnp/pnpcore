@@ -49,6 +49,7 @@ $tenantContext = Connect-PnPOnline -Url $tenantUrl -Credentials $credentials -Ve
 Connect-PnPOnline -Url $targetSiteUrl -Credentials $credentials
 
 # Remove lists
+Remove-PnPList -Identity AddListViaRestAsyncPropertiesTest -Force
 Remove-PnPList -Identity AddListItemViaBatchRest -Force
 Remove-PnPList -Identity AddListItemViaRest -Force
 Remove-PnPList -Identity AddListItemViaRestExceptionTest -Force
