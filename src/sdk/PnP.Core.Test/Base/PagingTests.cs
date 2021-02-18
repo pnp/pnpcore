@@ -572,7 +572,7 @@ namespace PnP.Core.Test.Base
                 var web = await context.Web.GetAsync(p => p.Lists);
 
                 string listTitle = "CamlListItemGetPagedAsyncPaging";
-                var list = web.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
+                var list = web.Lists.FirstOrDefault(p => p.Title == listTitle);
 
                 if (list != null)
                 {
