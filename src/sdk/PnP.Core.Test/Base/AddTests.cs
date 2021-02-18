@@ -87,13 +87,10 @@ namespace PnP.Core.Test.Base
                 myList.EnableModeration = true;
                 myList.EnableVersioning = true;
                 myList.ForceCheckout = false;
-                myList.Hidden = true;
                 myList.MaxVersionLimit = 400;
                 myList.MinorVersionLimit = 20;
                 myList.ListExperience = ListExperience.ClassicExperience; //Eek
                 await myList.UpdateAsync();
-
-                // x BERT: Here we do not switch to SPO REST, we need to investigate ...
 
                 var myListToCheck = web.Lists.QueryProperties(
                     l => l.Id,
@@ -134,7 +131,6 @@ namespace PnP.Core.Test.Base
                 Assert.IsTrue(myListToCheck.EnableModeration);
                 Assert.IsTrue(myListToCheck.EnableVersioning);
                 Assert.IsFalse(myListToCheck.ForceCheckout);
-                Assert.IsTrue(myListToCheck.Hidden);
                 Assert.IsTrue(myListToCheck.ImageUrl.Contains("itgen.png"));
                 Assert.IsFalse(myListToCheck.IrmExpire);
                 Assert.IsFalse(myListToCheck.IrmReject);
@@ -258,8 +254,10 @@ namespace PnP.Core.Test.Base
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 // Load all the lists
-                var w = await context.Web.GetBatchAsync(w => w.Lists);
+                await context.Web.LoadBatchAsync(w => w.Lists);
                 await context.ExecuteAsync();
+
+                var listCount = context.Web.Lists.Length;
 
                 string listTitle = "AddListViaBatchAsyncRest";
                 var myList = context.Web.Lists.FirstOrDefault(p => p.Title == listTitle);
@@ -271,7 +269,6 @@ namespace PnP.Core.Test.Base
 
                 try
                 {
-                    var listCount = context.Web.Lists.Length;
                     // Add a new list
                     myList = await context.Web.Lists.AddBatchAsync(listTitle, ListTemplateType.GenericList);
                     await context.ExecuteAsync();
