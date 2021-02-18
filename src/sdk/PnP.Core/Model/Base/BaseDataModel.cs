@@ -119,7 +119,7 @@ namespace PnP.Core.Model
         public virtual async Task<TModel> GetAsync(params Expression<Func<TModel, object>>[] expressions)
         {
             // Create a new object without a parent
-            var newDataModel = (BaseDataModel<TModel>)EntityManager.GetEntityConcreteInstance(this.GetType(), null, this.PnPContext);
+            var newDataModel = (BaseDataModel<TModel>)EntityManager.GetEntityConcreteInstance(this.GetType(), this.Parent, this.PnPContext);
             await newDataModel.BaseRetrieveAsync(expressions: expressions).ConfigureAwait(false);
 
             return (TModel)(object)newDataModel;
