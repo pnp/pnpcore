@@ -1,13 +1,12 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PnP.Core.Model.SharePoint;
+using PnP.Core.QueryModel;
 using PnP.Core.Test.Utilities;
 using System;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using PnP.Core.QueryModel;
-using PnP.Core.Model;
 
 namespace PnP.Core.Test.SharePoint
 {
@@ -261,13 +260,8 @@ namespace PnP.Core.Test.SharePoint
                 initialMajorVersion = testDocument.MajorVersion;
                 initialMinorVersion = testDocument.MinorVersion;
                 await testDocument.PublishAsync("TEST PUBLISH");
-            }
-
-            // Use a different context to make sure the file is reloaded
-            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))
-            {
-                IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl);
-
+            
+                testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl);
                 //Assert.AreEqual(currentVersion + 1, testDocument.MajorVersion);
                 Assert.AreEqual("TEST PUBLISH", testDocument.CheckInComment);
 
@@ -308,13 +302,8 @@ namespace PnP.Core.Test.SharePoint
                 initialMajorVersion = testDocument.MajorVersion;
                 initialMinorVersion = testDocument.MinorVersion;
                 testDocument.Publish("TEST PUBLISH");
-            }
-
-            // Use a different context to make sure the file is reloaded
-            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))
-            {
-                IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl);
-
+            
+                testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl);
                 //Assert.AreEqual(currentVersion + 1, testDocument.MajorVersion);
                 Assert.AreEqual("TEST PUBLISH", testDocument.CheckInComment);
 
@@ -343,13 +332,8 @@ namespace PnP.Core.Test.SharePoint
                 initialMinorVersion = testDocument.MinorVersion;
                 await testDocument.PublishBatchAsync("TEST PUBLISH");
                 await context.ExecuteAsync();
-            }
-
-            // Use a different context to make sure the file is reloaded
-            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))
-            {
-                IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl);
-
+            
+                testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl);
                 //Assert.AreEqual(currentVersion + 1, testDocument.MajorVersion);
                 Assert.AreEqual("TEST PUBLISH", testDocument.CheckInComment);
 
@@ -378,13 +362,8 @@ namespace PnP.Core.Test.SharePoint
                 initialMinorVersion = testDocument.MinorVersion;
                 testDocument.PublishBatch("TEST PUBLISH");
                 await context.ExecuteAsync();
-            }
-
-            // Use a different context to make sure the file is reloaded
-            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))
-            {
-                IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl);
-
+            
+                testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl);
                 //Assert.AreEqual(currentVersion + 1, testDocument.MajorVersion);
                 Assert.AreEqual("TEST PUBLISH", testDocument.CheckInComment);
 
@@ -413,13 +392,8 @@ namespace PnP.Core.Test.SharePoint
                 var batch = context.NewBatch();
                 await testDocument.PublishBatchAsync(batch, "TEST PUBLISH");
                 await context.ExecuteAsync(batch);
-            }
-
-            // Use a different context to make sure the file is reloaded
-            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))
-            {
-                IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl);
-
+            
+                testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl);
                 //Assert.AreEqual(currentVersion + 1, testDocument.MajorVersion);
                 Assert.AreEqual("TEST PUBLISH", testDocument.CheckInComment);
 
@@ -449,13 +423,8 @@ namespace PnP.Core.Test.SharePoint
                 var batch = context.NewBatch();
                 testDocument.PublishBatch(batch, "TEST PUBLISH");
                 await context.ExecuteAsync(batch);
-            }
-
-            // Use a different context to make sure the file is reloaded
-            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))
-            {
-                IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl);
-
+            
+                testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl);
                 //Assert.AreEqual(currentVersion + 1, testDocument.MajorVersion);
                 Assert.AreEqual("TEST PUBLISH", testDocument.CheckInComment);
 
@@ -486,13 +455,8 @@ namespace PnP.Core.Test.SharePoint
                 initialMinorVersion = testDocument.MinorVersion;
                 await testDocument.PublishAsync("TEST PUBLISH");
                 await testDocument.UnpublishAsync("TEST UNPUBLISHED");
-            }
 
-            // Use a different context to make sure the file is reloaded
-            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))
-            {
-                IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl);
-
+                testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl);
                 Assert.AreEqual("TEST UNPUBLISHED", testDocument.CheckInComment);
                 Assert.AreEqual(initialMajorVersion, testDocument.MajorVersion);
                 Assert.AreEqual(initialMinorVersion, testDocument.MinorVersion);
@@ -519,13 +483,8 @@ namespace PnP.Core.Test.SharePoint
                 initialMinorVersion = testDocument.MinorVersion;
                 await testDocument.PublishAsync("TEST PUBLISH");
                 testDocument.Unpublish("TEST UNPUBLISHED");
-            }
-
-            // Use a different context to make sure the file is reloaded
-            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))
-            {
-                IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl);
-
+                
+                testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl);
                 Assert.AreEqual("TEST UNPUBLISHED", testDocument.CheckInComment);
                 Assert.AreEqual(initialMajorVersion, testDocument.MajorVersion);
                 Assert.AreEqual(initialMinorVersion, testDocument.MinorVersion);
@@ -553,13 +512,8 @@ namespace PnP.Core.Test.SharePoint
                 await testDocument.PublishAsync("TEST PUBLISH");
                 await testDocument.UnpublishBatchAsync("TEST UNPUBLISHED");
                 await context.ExecuteAsync();
-            }
-
-            // Use a different context to make sure the file is reloaded
-            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))
-            {
-                IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl);
-
+                
+                testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl);
                 Assert.AreEqual("TEST UNPUBLISHED", testDocument.CheckInComment);
                 Assert.AreEqual(initialMajorVersion, testDocument.MajorVersion);
                 Assert.AreEqual(initialMinorVersion, testDocument.MinorVersion);
@@ -587,13 +541,8 @@ namespace PnP.Core.Test.SharePoint
                 await testDocument.PublishAsync("TEST PUBLISH");
                 testDocument.UnpublishBatch("TEST UNPUBLISHED");
                 await context.ExecuteAsync();
-            }
-
-            // Use a different context to make sure the file is reloaded
-            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))
-            {
-                IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl);
-
+                
+                testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl);
                 Assert.AreEqual("TEST UNPUBLISHED", testDocument.CheckInComment);
                 Assert.AreEqual(initialMajorVersion, testDocument.MajorVersion);
                 Assert.AreEqual(initialMinorVersion, testDocument.MinorVersion);
@@ -622,13 +571,8 @@ namespace PnP.Core.Test.SharePoint
                 var batch = context.NewBatch();
                 await testDocument.UnpublishBatchAsync(batch, "TEST UNPUBLISHED");
                 await context.ExecuteAsync(batch);
-            }
-
-            // Use a different context to make sure the file is reloaded
-            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))
-            {
-                IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl);
-
+            
+                testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl);
                 Assert.AreEqual("TEST UNPUBLISHED", testDocument.CheckInComment);
                 Assert.AreEqual(initialMajorVersion, testDocument.MajorVersion);
                 Assert.AreEqual(initialMinorVersion, testDocument.MinorVersion);
@@ -657,13 +601,8 @@ namespace PnP.Core.Test.SharePoint
                 var batch = context.NewBatch();
                 testDocument.UnpublishBatch(batch, "TEST UNPUBLISHED");
                 await context.ExecuteAsync(batch);
-            }
-
-            // Use a different context to make sure the file is reloaded
-            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))
-            {
-                IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl);
-
+            
+                testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl);
                 Assert.AreEqual("TEST UNPUBLISHED", testDocument.CheckInComment);
                 Assert.AreEqual(initialMajorVersion, testDocument.MajorVersion);
                 Assert.AreEqual(initialMinorVersion, testDocument.MinorVersion);
@@ -686,13 +625,8 @@ namespace PnP.Core.Test.SharePoint
             {
                 IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl);
                 await testDocument.CheckoutAsync();
-            }
-
-            // Use a different context to make sure the file is reloaded
-            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))
-            {
-                IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl, f => f.CheckOutType, f => f.CheckedOutByUser);
-
+            
+                testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl, f => f.CheckOutType, f => f.CheckedOutByUser);
                 Assert.AreNotEqual(CheckOutType.None, testDocument.CheckOutType);
                 Assert.IsNotNull(testDocument.CheckedOutByUser);
                 Assert.AreNotEqual(0, testDocument.CheckedOutByUser.Id);
@@ -715,13 +649,8 @@ namespace PnP.Core.Test.SharePoint
             {
                 IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl);
                 testDocument.Checkout();
-            }
-
-            // Use a different context to make sure the file is reloaded
-            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))
-            {
-                IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl, f => f.CheckOutType, f => f.CheckedOutByUser);
-
+            
+                testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl, f => f.CheckOutType, f => f.CheckedOutByUser);
                 Assert.AreNotEqual(CheckOutType.None, testDocument.CheckOutType);
                 Assert.IsNotNull(testDocument.CheckedOutByUser);
                 Assert.AreNotEqual(0, testDocument.CheckedOutByUser.Id);
@@ -745,13 +674,8 @@ namespace PnP.Core.Test.SharePoint
                 IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl);
                 await testDocument.CheckoutBatchAsync();
                 await context.ExecuteAsync();
-            }
-
-            // Use a different context to make sure the file is reloaded
-            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))
-            {
-                IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl, f => f.CheckOutType, f => f.CheckedOutByUser);
-
+            
+                testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl, f => f.CheckOutType, f => f.CheckedOutByUser);
                 Assert.AreNotEqual(CheckOutType.None, testDocument.CheckOutType);
                 Assert.IsNotNull(testDocument.CheckedOutByUser);
                 Assert.AreNotEqual(0, testDocument.CheckedOutByUser.Id);
@@ -775,13 +699,8 @@ namespace PnP.Core.Test.SharePoint
                 IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl);
                 testDocument.CheckoutBatch();
                 await context.ExecuteAsync();
-            }
-
-            // Use a different context to make sure the file is reloaded
-            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))
-            {
-                IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl, f => f.CheckOutType, f => f.CheckedOutByUser);
-
+            
+                testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl, f => f.CheckOutType, f => f.CheckedOutByUser);
                 Assert.AreNotEqual(CheckOutType.None, testDocument.CheckOutType);
                 Assert.IsNotNull(testDocument.CheckedOutByUser);
                 Assert.AreNotEqual(0, testDocument.CheckedOutByUser.Id);
@@ -806,13 +725,8 @@ namespace PnP.Core.Test.SharePoint
                 var batch = context.NewBatch();
                 await testDocument.CheckoutBatchAsync(batch);
                 await context.ExecuteAsync(batch);
-            }
-
-            // Use a different context to make sure the file is reloaded
-            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))
-            {
-                IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl, f => f.CheckOutType, f => f.CheckedOutByUser);
-
+            
+                testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl, f => f.CheckOutType, f => f.CheckedOutByUser);
                 Assert.AreNotEqual(CheckOutType.None, testDocument.CheckOutType);
                 Assert.IsNotNull(testDocument.CheckedOutByUser);
                 Assert.AreNotEqual(0, testDocument.CheckedOutByUser.Id);
@@ -837,13 +751,8 @@ namespace PnP.Core.Test.SharePoint
                 var batch = context.NewBatch();
                 testDocument.CheckoutBatch(batch);
                 await context.ExecuteAsync(batch);
-            }
-
-            // Use a different context to make sure the file is reloaded
-            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))
-            {
-                IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl, f => f.CheckOutType, f => f.CheckedOutByUser);
-
+            
+                testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl, f => f.CheckOutType, f => f.CheckedOutByUser);
                 Assert.AreNotEqual(CheckOutType.None, testDocument.CheckOutType);
                 Assert.IsNotNull(testDocument.CheckedOutByUser);
                 Assert.AreNotEqual(0, testDocument.CheckedOutByUser.Id);
@@ -874,13 +783,8 @@ namespace PnP.Core.Test.SharePoint
                 initialMinorVersion = testDocument.MinorVersion;
                 await testDocument.CheckoutAsync();
                 await testDocument.UndoCheckoutAsync();
-            }
-
-            // Use a different context to make sure the file is reloaded
-            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))
-            {
-                IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl);
-
+                            
+                testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl);
                 Assert.AreEqual(CheckOutType.None, testDocument.CheckOutType);
                 Assert.AreEqual(initialMajorVersion, testDocument.MajorVersion);
                 Assert.AreEqual(initialMinorVersion, testDocument.MinorVersion);
@@ -906,13 +810,8 @@ namespace PnP.Core.Test.SharePoint
                 initialMinorVersion = testDocument.MinorVersion;
                 testDocument.Checkout();
                 testDocument.UndoCheckout();
-            }
-
-            // Use a different context to make sure the file is reloaded
-            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))
-            {
-                IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl);
-
+            
+                testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl);
                 Assert.AreEqual(CheckOutType.None, testDocument.CheckOutType);
                 Assert.AreEqual(initialMajorVersion, testDocument.MajorVersion);
                 Assert.AreEqual(initialMinorVersion, testDocument.MinorVersion);
@@ -939,13 +838,8 @@ namespace PnP.Core.Test.SharePoint
                 await testDocument.CheckoutAsync();
                 await testDocument.UndoCheckoutBatchAsync();
                 await context.ExecuteAsync();
-            }
-
-            // Use a different context to make sure the file is reloaded
-            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))
-            {
-                IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl);
-
+            
+                testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl);
                 Assert.AreEqual(CheckOutType.None, testDocument.CheckOutType);
                 Assert.AreEqual(initialMajorVersion, testDocument.MajorVersion);
                 Assert.AreEqual(initialMinorVersion, testDocument.MinorVersion);
@@ -972,13 +866,8 @@ namespace PnP.Core.Test.SharePoint
                 testDocument.Checkout();
                 testDocument.UndoCheckoutBatch();
                 await context.ExecuteAsync();
-            }
-
-            // Use a different context to make sure the file is reloaded
-            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))
-            {
-                IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl);
-
+            
+                testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl);
                 Assert.AreEqual(CheckOutType.None, testDocument.CheckOutType);
                 Assert.AreEqual(initialMajorVersion, testDocument.MajorVersion);
                 Assert.AreEqual(initialMinorVersion, testDocument.MinorVersion);
@@ -1006,13 +895,8 @@ namespace PnP.Core.Test.SharePoint
                 var batch = context.NewBatch();
                 await testDocument.UndoCheckoutBatchAsync(batch);
                 await context.ExecuteAsync(batch);
-            }
-
-            // Use a different context to make sure the file is reloaded
-            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))
-            {
-                IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl);
-
+            
+                testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl);
                 Assert.AreEqual(CheckOutType.None, testDocument.CheckOutType);
                 Assert.AreEqual(initialMajorVersion, testDocument.MajorVersion);
                 Assert.AreEqual(initialMinorVersion, testDocument.MinorVersion);
@@ -1040,13 +924,8 @@ namespace PnP.Core.Test.SharePoint
                 var batch = context.NewBatch();
                 testDocument.UndoCheckoutBatch(batch);
                 await context.ExecuteAsync(batch);
-            }
-
-            // Use a different context to make sure the file is reloaded
-            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))
-            {
-                IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl);
-
+            
+                testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl);
                 Assert.AreEqual(CheckOutType.None, testDocument.CheckOutType);
                 Assert.AreEqual(initialMajorVersion, testDocument.MajorVersion);
                 Assert.AreEqual(initialMinorVersion, testDocument.MinorVersion);
@@ -1074,13 +953,8 @@ namespace PnP.Core.Test.SharePoint
                 initialMinorVersion = testDocument.MinorVersion;
                 await testDocument.CheckoutAsync();
                 await testDocument.CheckinAsync("TEST CHECK IN", CheckinType.MajorCheckIn);
-            }
-
-            // Use a different context to make sure the file is reloaded
-            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))
-            {
-                IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl);
-
+            
+                testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl);
                 Assert.AreEqual(CheckOutType.None, testDocument.CheckOutType);
                 Assert.AreEqual("TEST CHECK IN", testDocument.CheckInComment);
                 Assert.IsTrue(testDocument.MajorVersion == initialMajorVersion + 1);
@@ -1107,13 +981,8 @@ namespace PnP.Core.Test.SharePoint
                 initialMinorVersion = testDocument.MinorVersion;
                 await testDocument.CheckoutAsync();
                 await testDocument.CheckinAsync("TEST CHECK IN", CheckinType.MinorCheckIn);
-            }
-
-            // Use a different context to make sure the file is reloaded
-            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))
-            {
-                IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl);
-
+            
+                testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl);
                 Assert.AreEqual(CheckOutType.None, testDocument.CheckOutType);
                 Assert.AreEqual("TEST CHECK IN", testDocument.CheckInComment);
                 Assert.AreEqual(initialMajorVersion, testDocument.MajorVersion);
@@ -1141,13 +1010,8 @@ namespace PnP.Core.Test.SharePoint
                 initialMinorVersion = testDocument.MinorVersion;
                 await testDocument.CheckoutAsync();
                 await testDocument.CheckinAsync("TEST CHECK IN", CheckinType.OverwriteCheckIn);
-            }
-
-            // Use a different context to make sure the file is reloaded
-            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))
-            {
-                IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl);
-
+            
+                testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl);
                 Assert.AreEqual(CheckOutType.None, testDocument.CheckOutType);
                 Assert.AreEqual("TEST CHECK IN", testDocument.CheckInComment);
                 Assert.AreEqual(initialMajorVersion, testDocument.MajorVersion);
@@ -1175,13 +1039,8 @@ namespace PnP.Core.Test.SharePoint
                 await testDocument.CheckoutAsync();
                 await testDocument.CheckinBatchAsync("TEST CHECK IN", CheckinType.MajorCheckIn);
                 await context.ExecuteAsync();
-            }
-
-            // Use a different context to make sure the file is reloaded
-            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))
-            {
-                IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl);
-
+            
+                testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl);
                 Assert.AreEqual(CheckOutType.None, testDocument.CheckOutType);
                 Assert.AreEqual("TEST CHECK IN", testDocument.CheckInComment);
                 Assert.IsTrue(testDocument.MajorVersion > initialMajorVersion);
@@ -1207,14 +1066,10 @@ namespace PnP.Core.Test.SharePoint
                 Guid recycleBinId = await testDocument.RecycleAsync();
 
                 Assert.AreNotEqual(Guid.Empty, recycleBinId);
-            }
-
-            // Use a second context to make sure the file is reloaded from SharePoint
-            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))
-            {
+            
                 try
                 {
-                    IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl);
+                    testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl);
                     Assert.Fail("The document was found and should not");
                 }
                 catch (SharePointRestServiceException serviceException)
@@ -1238,14 +1093,10 @@ namespace PnP.Core.Test.SharePoint
                 Guid recycleBinId = testDocument.Recycle();
 
                 Assert.AreNotEqual(Guid.Empty, recycleBinId);
-            }
-
-            // Use a second context to make sure the file is reloaded from SharePoint
-            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))
-            {
+            
                 try
                 {
-                    IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl);
+                    testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl);
                     Assert.Fail("The document was found and should not");
                 }
                 catch (SharePointRestServiceException serviceException)
@@ -1268,14 +1119,10 @@ namespace PnP.Core.Test.SharePoint
 
                 await testDocument.RecycleBatchAsync();
                 await context.ExecuteAsync();
-            }
-
-            // Use a second context to make sure the file is reloaded from SharePoint
-            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))
-            {
+            
                 try
                 {
-                    IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl);
+                    testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl);
                     Assert.Fail("The document was found and should not");
                 }
                 catch (SharePointRestServiceException serviceException)
@@ -1298,14 +1145,10 @@ namespace PnP.Core.Test.SharePoint
 
                 testDocument.RecycleBatch();
                 await context.ExecuteAsync();
-            }
-
-            // Use a second context to make sure the file is reloaded from SharePoint
-            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))
-            {
+            
                 try
                 {
-                    IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl);
+                    testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl);
                     Assert.Fail("The document was found and should not");
                 }
                 catch (SharePointRestServiceException serviceException)
@@ -1329,14 +1172,10 @@ namespace PnP.Core.Test.SharePoint
                 var batch = context.NewBatch();
                 await testDocument.RecycleBatchAsync(batch);
                 await context.ExecuteAsync(batch);
-            }
-
-            // Use a second context to make sure the file is reloaded from SharePoint
-            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))
-            {
+            
                 try
                 {
-                    IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl);
+                    testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl);
                     Assert.Fail("The document was found and should not");
                 }
                 catch (SharePointRestServiceException serviceException)
@@ -1360,14 +1199,10 @@ namespace PnP.Core.Test.SharePoint
                 var batch = context.NewBatch();
                 testDocument.RecycleBatch(batch);
                 await context.ExecuteAsync(batch);
-            }
-
-            // Use a second context to make sure the file is reloaded from SharePoint
-            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))
-            {
+            
                 try
                 {
-                    IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl);
+                    testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl);
                     Assert.Fail("The document was found and should not");
                 }
                 catch (SharePointRestServiceException serviceException)
@@ -2013,16 +1848,12 @@ namespace PnP.Core.Test.SharePoint
 
                 await testDocument.CheckoutAsync();
                 await testDocument.CheckinAsync("TEST COMMENT", CheckinType.MajorCheckIn);
-            }
 
-            // New context to ensure reload the file
-            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))
-            {
                 IFile documentWithVersions = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl, f => f.Versions);
 
                 Assert.IsNotNull(documentWithVersions.Versions);
                 // The versions history contains 2 versions
-                Assert.AreEqual(3, documentWithVersions.Versions.Count());
+                Assert.AreEqual(3, documentWithVersions.Versions.Length);
                 Assert.AreEqual($"_vti_history/1/{libraryName}/{documentName}", documentWithVersions.Versions.ElementAt(0).Url);
                 Assert.AreEqual("0.1", documentWithVersions.Versions.ElementAt(0).VersionLabel);
                 Assert.AreEqual("0.2", documentWithVersions.Versions.ElementAt(1).VersionLabel);
@@ -2669,18 +2500,12 @@ namespace PnP.Core.Test.SharePoint
 
                 await testDocument.CheckoutAsync();
                 await testDocument.CheckinAsync("TEST COMMENT", CheckinType.MajorCheckIn);
-            }
-
-            // New context to ensure reload the file
-            // TODO: Shouldn't we implement a mechanism to ensure reload the properties after action
-            // (e.g. Publish() => refreshes the versions collection
-            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))
-            {
+            
                 IFile documentWithVersions = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl, f => f.Versions);
 
                 Assert.IsNotNull(documentWithVersions.Versions);
                 // The versions history contains 2 versions
-                Assert.AreEqual(3, documentWithVersions.Versions.Count());
+                Assert.AreEqual(3, documentWithVersions.Versions.Length);
                 Assert.AreEqual($"_vti_history/1/{libraryName}/{documentName}", documentWithVersions.Versions.ElementAt(0).Url);
                 Assert.AreEqual("0.1", documentWithVersions.Versions.ElementAt(0).VersionLabel);
                 Assert.AreEqual("0.2", documentWithVersions.Versions.ElementAt(1).VersionLabel);
@@ -2706,18 +2531,12 @@ namespace PnP.Core.Test.SharePoint
                 await testDocument.CheckinAsync();
                 await testDocument.CheckoutAsync();
                 await testDocument.CheckinAsync();
-            }
-
-            // New context to ensure reload the file
-            // TODO: Shouldn't we implement a mechanism to ensure reload the properties after action
-            // (e.g. Publish() => refreshes the versions collection
-            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))
-            {
+            
                 IFile documentWithVersions = context.Web.GetFileByServerRelativeUrl(documentUrl, f => f.Versions);
 
                 Assert.IsNotNull(documentWithVersions.Versions);
                 // The versions history contains 2 versions
-                Assert.AreEqual(2, documentWithVersions.Versions.Count());
+                Assert.AreEqual(2, documentWithVersions.Versions.Length);
                 Assert.AreEqual($"_vti_history/1/{libraryName}/{documentName}", documentWithVersions.Versions.ElementAt(0).Url);
                 Assert.AreEqual("0.1", documentWithVersions.Versions.ElementAt(0).VersionLabel);
                 Assert.AreEqual("0.2", documentWithVersions.Versions.ElementAt(1).VersionLabel);
@@ -2741,19 +2560,13 @@ namespace PnP.Core.Test.SharePoint
                 await testDocument.CheckoutBatchAsync();
                 await testDocument.CheckinBatchAsync();
                 await context.ExecuteAsync();
-            }
-
-            // New context to ensure reload the file
-            // TODO: Shouldn't we implement a mechanism to ensure reload the properties after action
-            // (e.g. Publish() => refreshes the versions collection
-            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))
-            {
+            
                 IFile documentWithVersions = await context.Web.GetFileByServerRelativeUrlBatchAsync(documentUrl, f => f.Versions);
                 await context.ExecuteAsync();
 
                 Assert.IsNotNull(documentWithVersions.Versions);
                 // The versions history contains 2 versions
-                Assert.AreEqual(2, documentWithVersions.Versions.Count());
+                Assert.AreEqual(2, documentWithVersions.Versions.Length);
                 Assert.AreEqual($"_vti_history/1/{libraryName}/{documentName}", documentWithVersions.Versions.ElementAt(0).Url);
                 Assert.AreEqual("0.1", documentWithVersions.Versions.ElementAt(0).VersionLabel);
                 Assert.AreEqual("0.2", documentWithVersions.Versions.ElementAt(1).VersionLabel);
@@ -2777,19 +2590,13 @@ namespace PnP.Core.Test.SharePoint
                 testDocument.CheckoutBatch();
                 testDocument.CheckinBatch();
                 await context.ExecuteAsync();
-            }
-
-            // New context to ensure reload the file
-            // TODO: Shouldn't we implement a mechanism to ensure reload the properties after action
-            // (e.g. Publish() => refreshes the versions collection
-            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))
-            {
+            
                 IFile documentWithVersions = context.Web.GetFileByServerRelativeUrlBatch(documentUrl, f => f.Versions);
                 await context.ExecuteAsync();
 
                 Assert.IsNotNull(documentWithVersions.Versions);
                 // The versions history contains 2 versions
-                Assert.AreEqual(2, documentWithVersions.Versions.Count());
+                Assert.AreEqual(2, documentWithVersions.Versions.Length);
                 Assert.AreEqual($"_vti_history/1/{libraryName}/{documentName}", documentWithVersions.Versions.ElementAt(0).Url);
                 Assert.AreEqual("0.1", documentWithVersions.Versions.ElementAt(0).VersionLabel);
                 Assert.AreEqual("0.2", documentWithVersions.Versions.ElementAt(1).VersionLabel);
@@ -2816,20 +2623,14 @@ namespace PnP.Core.Test.SharePoint
                 await testDocument.CheckinBatchAsync(newBatch);
 
                 await context.ExecuteAsync(newBatch);
-            }
-
-            // New context to ensure reload the file
-            // TODO: Shouldn't we implement a mechanism to ensure reload the properties after action
-            // (e.g. Publish() => refreshes the versions collection
-            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))
-            {
+            
                 var batch = context.NewBatch();
                 IFile documentWithVersions = await context.Web.GetFileByServerRelativeUrlBatchAsync(batch, documentUrl, f => f.Versions);
                 await context.ExecuteAsync(batch);
 
                 Assert.IsNotNull(documentWithVersions.Versions);
                 // The versions history contains 2 versions
-                Assert.AreEqual(2, documentWithVersions.Versions.Count());
+                Assert.AreEqual(2, documentWithVersions.Versions.Length);
                 Assert.AreEqual($"_vti_history/1/{libraryName}/{documentName}", documentWithVersions.Versions.ElementAt(0).Url);
                 Assert.AreEqual("0.1", documentWithVersions.Versions.ElementAt(0).VersionLabel);
                 Assert.AreEqual("0.2", documentWithVersions.Versions.ElementAt(1).VersionLabel);
@@ -2855,20 +2656,14 @@ namespace PnP.Core.Test.SharePoint
                 testDocument.CheckoutBatch(newBatch);
                 testDocument.CheckinBatch(newBatch);
                 await context.ExecuteAsync(newBatch);
-            }
-
-            // New context to ensure reload the file
-            // TODO: Shouldn't we implement a mechanism to ensure reload the properties after action
-            // (e.g. Publish() => refreshes the versions collection
-            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))
-            {
+            
                 var batch = context.NewBatch();
                 IFile documentWithVersions = context.Web.GetFileByServerRelativeUrlBatch(batch, documentUrl, f => f.Versions);
                 await context.ExecuteAsync(batch);
 
                 Assert.IsNotNull(documentWithVersions.Versions);
                 // The versions history contains 2 versions
-                Assert.AreEqual(2, documentWithVersions.Versions.Count());
+                Assert.AreEqual(2, documentWithVersions.Versions.Length);
                 Assert.AreEqual($"_vti_history/1/{libraryName}/{documentName}", documentWithVersions.Versions.ElementAt(0).Url);
                 Assert.AreEqual("0.1", documentWithVersions.Versions.ElementAt(0).VersionLabel);
                 Assert.AreEqual("0.2", documentWithVersions.Versions.ElementAt(1).VersionLabel);
@@ -2904,7 +2699,8 @@ namespace PnP.Core.Test.SharePoint
                 await testDocument.ListItemAllFields.UpdateAsync();
 
 
-                await testDocument.GetAsync(p => p.ListId);
+                await testDocument.LoadAsync(p => p.ListId);
+                
                 Assert.IsTrue(testDocument.ListId != Guid.Empty);
             }
 
@@ -2928,18 +2724,12 @@ namespace PnP.Core.Test.SharePoint
                 await testDocument.CheckinAsync();
                 await testDocument.CheckoutAsync();
                 await testDocument.CheckinAsync();
-            }
-
-            // New context to ensure reload the file
-            // TODO: Shouldn't we implement a mechanism to ensure reload the properties after action
-            // (e.g. Publish() => refreshes the versions collection
-            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))
-            {
+            
                 IFile documentWithVersionEvents = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl, f => f.VersionEvents);
 
                 Assert.IsNotNull(documentWithVersionEvents.VersionEvents);
                 // TODO The VersionEvents property return an empty array, double-check what it's supposed to return
-                Assert.AreEqual(0, documentWithVersionEvents.VersionEvents.Count());
+                Assert.AreEqual(0, documentWithVersionEvents.VersionEvents.Length);
 
             }
 

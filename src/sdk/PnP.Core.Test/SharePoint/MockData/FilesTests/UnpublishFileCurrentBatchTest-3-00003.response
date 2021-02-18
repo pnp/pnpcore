@@ -1,9 +1,1 @@
---batchresponse_eb726e7e-d236-468f-b74b-319c51d13e75
-Content-Type: application/http
-Content-Transfer-Encoding: binary
-
-HTTP/1.1 200 OK
-CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
-
-
---batchresponse_eb726e7e-d236-468f-b74b-319c51d13e75--
+{"responses": [{"id": "1","status":200,"headers" : {"Cache-Control":"no-cache","OData-Version":"4.0","Content-Type":"application/json;odata.metadata=minimal;odata.streaming=true;IEEE754Compatible=false;charset=utf-8"},"body":{"@odata.context":"https://graph.microsoft.com/v1.0/$metadata#sites('bertonline.sharepoint.com%2Cb56adf79-ff6a-4964-a63a-ff1fa23be9f8%2C8c8e101c-1b0d-4253-85e7-c30039bf46e2')/lists","value":[{"@odata.etag":"\"77e207af-7b11-4ff4-b9fc-a9c403c3c6a7,2\"","createdDateTime":"2021-02-18T14:14:37Z","description":"","eTag":"\"77e207af-7b11-4ff4-b9fc-a9c403c3c6a7,2\"","id":"77e207af-7b11-4ff4-b9fc-a9c403c3c6a7","lastModifiedDateTime":"2021-02-18T14:14:38Z","name":"PNP_SDK_TEST_UnpublishFileCurrentBatchTest","webUrl":"https://bertonline.sharepoint.com/sites/prov-1/PNP_SDK_TEST_UnpublishFileCurrentBatchTest","displayName":"PNP_SDK_TEST_UnpublishFileCurrentBatchTest","createdBy":{"user":{"email":"bert.jansen@bertonline.onmicrosoft.com","id":"33aca310-a489-4121-b853-663d0327fe08","displayName":"Bert Jansen (Cloud)"}},"lastModifiedBy":{"user":{"email":"bert.jansen@bertonline.onmicrosoft.com","id":"33aca310-a489-4121-b853-663d0327fe08","displayName":"Bert Jansen (Cloud)"}},"parentReference":{"siteId":"bertonline.sharepoint.com,b56adf79-ff6a-4964-a63a-ff1fa23be9f8,8c8e101c-1b0d-4253-85e7-c30039bf46e2"},"list":{"contentTypesEnabled":false,"hidden":false,"template":"documentLibrary"}}]}}]}

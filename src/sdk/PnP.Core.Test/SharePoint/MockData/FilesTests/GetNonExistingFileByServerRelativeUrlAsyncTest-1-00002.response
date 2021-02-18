@@ -1,9 +1,9 @@
---batchresponse_6652c93d-c858-43c8-960f-464729573cab
+--batchresponse_cf3ec993-673f-4cd2-b0f2-b576dd6af517
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 404 Not Found
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{"error":{"code":"-2130575338, Microsoft.SharePoint.SPException","message":{"lang":"en-US","value":"The file /sites/prov-1/Shared%20Documents/IdontExist.pdf does not exist."}}}
---batchresponse_6652c93d-c858-43c8-960f-464729573cab--
+{"error":{"code":"-2130575338, Microsoft.SharePoint.SPException","message":{"lang":"en-US","value":"The file /sites/Prov-1/Shared%20Documents/IdontExist.pdf does not exist."}}}
+--batchresponse_cf3ec993-673f-4cd2-b0f2-b576dd6af517--

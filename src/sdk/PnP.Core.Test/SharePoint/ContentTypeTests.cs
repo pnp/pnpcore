@@ -25,10 +25,12 @@ namespace PnP.Core.Test.SharePoint
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                IWeb web = await context.Web.GetAsync(p => p.ContentTypes);
-                Assert.IsTrue(web.ContentTypes.Count() > 0);
+                await context.Web.LoadAsync(p => p.ContentTypes);
+                IWeb web = context.Web;
 
-                IContentType contentType = web.ContentTypes.FirstOrDefault(p => p.Name == "Item");
+                Assert.IsTrue(web.ContentTypes.Length > 0);
+
+                IContentType contentType = web.ContentTypes.AsEnumerable().FirstOrDefault(p => p.Name == "Item");
                 // Test a string property
                 Assert.AreEqual(contentType.Name, "Item");
                 // Test a boolean property
@@ -42,10 +44,11 @@ namespace PnP.Core.Test.SharePoint
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                IWeb web = await context.Web.GetAsync(p => p.ContentTypes);
-                Assert.IsTrue(web.ContentTypes.Count() > 0);
+                await context.Web.LoadAsync(p => p.ContentTypes);
+                IWeb web = context.Web;
+                Assert.IsTrue(web.ContentTypes.Length > 0);
 
-                IContentType contentType = web.ContentTypes.FirstOrDefault(p => p.Name == "Item");
+                IContentType contentType = web.ContentTypes.AsEnumerable().FirstOrDefault(p => p.Name == "Item");
                 // Test a string property
                 Assert.AreEqual(contentType.Name, "Item");
 
@@ -88,16 +91,16 @@ namespace PnP.Core.Test.SharePoint
                 context.GraphFirst = false;
 
                 //var sitePages = context.Web.Lists.GetByTitle("Site Pages", p => p.ContentTypes);
-                await context.Web.GetAsync(p => p.Lists);
-                var sitePages = context.Web.Lists.FirstOrDefault(p => p.Title == "Site Pages");
+                await context.Web.LoadAsync(p => p.Lists);
+                var sitePages = context.Web.Lists.AsEnumerable().FirstOrDefault(p => p.Title == "Site Pages");
                 if (sitePages != null)
                 {
                     Assert.IsTrue(sitePages.Requested);
 
-                    await sitePages.GetAsync(p => p.ContentTypes);
+                    await sitePages.LoadAsync(p => p.ContentTypes);
                     Assert.IsTrue(sitePages.ContentTypes.Requested);
 
-                    Assert.IsTrue(sitePages.ContentTypes.Count() > 0);
+                    Assert.IsTrue(sitePages.ContentTypes.Length > 0);
                 }
             }
         }
@@ -110,11 +113,12 @@ namespace PnP.Core.Test.SharePoint
             {
                 context.GraphFirst = false;
 
-                await context.Web.GetAsync(p => p.Lists);
-                var sitePages = context.Web.Lists.FirstOrDefault(p => p.Title == "Site Pages");
+                await context.Web.LoadAsync(p => p.Lists);
+                var sitePages = context.Web.Lists.AsEnumerable().FirstOrDefault(p => p.Title == "Site Pages");
                 if (sitePages != null)
                 {
-                    IContentType contentType = sitePages.ContentTypes.FirstOrDefault(p => p.StringId.StartsWith("0x0101009D1CB255DA76424F860D91F20E6C4118"));
+                    await sitePages.LoadAsync(p => p.ContentTypes);
+                    IContentType contentType = sitePages.ContentTypes.AsEnumerable().FirstOrDefault(p => p.StringId.StartsWith("0x0101009D1CB255DA76424F860D91F20E6C4118"));
 
                     Assert.IsNotNull(contentType);
                     // Test Id property
@@ -203,10 +207,12 @@ namespace PnP.Core.Test.SharePoint
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 // Create a new list
-                var web = await context.Web.GetAsync(p => p.Lists);
+                await context.Web.LoadAsync(p => p.Lists);
+
+                var web = context.Web;
 
                 string listTitle = "ContentTypesOnListAddAvailableTest";
-                var myList = web.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
+                var myList = web.Lists.AsEnumerable().FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
 
                 if (TestCommon.Instance.Mocking && myList != null)
                 {
@@ -246,10 +252,12 @@ namespace PnP.Core.Test.SharePoint
                 var newBatch = context.NewBatch();
 
                 // Create a new list
-                var web = await context.Web.GetAsync(p => p.Lists);
+                await context.Web.LoadAsync(p => p.Lists);
+
+                var web = context.Web;
 
                 string listTitle = "ContentTypesOnListAddAvailableTest";
-                var myList = web.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
+                var myList = web.Lists.AsEnumerable().FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
 
                 if (TestCommon.Instance.Mocking && myList != null)
                 {
@@ -288,10 +296,12 @@ namespace PnP.Core.Test.SharePoint
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 // Create a new list
-                var web = await context.Web.GetAsync(p => p.Lists);
+                await context.Web.LoadAsync(p => p.Lists);
+
+                var web = context.Web;
 
                 string listTitle = "ContentTypesOnListAddAvailableTest";
-                var myList = web.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
+                var myList = web.Lists.AsEnumerable().FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
 
                 if (TestCommon.Instance.Mocking && myList != null)
                 {
@@ -332,10 +342,12 @@ namespace PnP.Core.Test.SharePoint
                 var newBatch = context.NewBatch();
 
                 // Create a new list
-                var web = await context.Web.GetAsync(p => p.Lists);
+                await context.Web.LoadAsync(p => p.Lists);
+
+                var web = context.Web;
 
                 string listTitle = "ContentTypesOnListAddAvailableTest";
-                var myList = web.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
+                var myList = web.Lists.AsEnumerable().FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
 
                 if (TestCommon.Instance.Mocking && myList != null)
                 {
@@ -374,10 +386,12 @@ namespace PnP.Core.Test.SharePoint
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 // Create a new list
-                var web = await context.Web.GetAsync(p => p.Lists);
+                await context.Web.LoadAsync(p => p.Lists);
+
+                var web = context.Web;
 
                 string listTitle = "ContentTypesOnListAddAvailableTest";
-                var myList = web.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
+                var myList = web.Lists.AsEnumerable().FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
 
                 if (TestCommon.Instance.Mocking && myList != null)
                 {
@@ -412,10 +426,12 @@ namespace PnP.Core.Test.SharePoint
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 // Create a new list
-                var web = await context.Web.GetAsync(p => p.Lists);
+                await context.Web.LoadAsync(p => p.Lists);
+
+                var web = context.Web;
 
                 string listTitle = "ContentTypesOnListAddAvailableTest";
-                var myList = web.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
+                var myList = web.Lists.AsEnumerable().FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
 
                 if (TestCommon.Instance.Mocking && myList != null)
                 {
@@ -450,10 +466,12 @@ namespace PnP.Core.Test.SharePoint
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 // Create a new list
-                var web = await context.Web.GetAsync(p => p.Lists);
+                await context.Web.LoadAsync(p => p.Lists);
+
+                var web = context.Web;
 
                 string listTitle = "ContentTypesOnListAddAvailableTest";
-                var myList = web.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
+                var myList = web.Lists.AsEnumerable().FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
 
                 if (TestCommon.Instance.Mocking && myList != null)
                 {
@@ -492,10 +510,12 @@ namespace PnP.Core.Test.SharePoint
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 // Create a new list
-                var web = await context.Web.GetAsync(p => p.Lists);
+                await context.Web.LoadAsync(p => p.Lists);
+
+                var web = context.Web;
 
                 string listTitle = "ContentTypesOnListAddTest";
-                var myList = web.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
+                var myList = web.Lists.AsEnumerable().FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
 
                 if (TestCommon.Instance.Mocking && myList != null)
                 {
@@ -585,10 +605,12 @@ namespace PnP.Core.Test.SharePoint
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 // Create a new list
-                var web = await context.Web.GetAsync(p => p.Lists);
+                await context.Web.LoadAsync(p => p.Lists);
+
+                var web = context.Web;
 
                 string listTitle = "ContentTypesOnListDeleteTest";
-                var myList = web.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
+                var myList = web.Lists.AsEnumerable().FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
 
                 if (TestCommon.Instance.Mocking && myList != null)
                 {
@@ -618,7 +640,7 @@ namespace PnP.Core.Test.SharePoint
                 await addedContentType.DeleteAsync();
 
                 // Try to load the content type again, ensure it was removed
-                IContentType contentType = myList.ContentTypes.FirstOrDefault(p => p.StringId.StartsWith("0x0106"));
+                IContentType contentType = myList.ContentTypes.AsEnumerable().FirstOrDefault(p => p.StringId.StartsWith("0x0106"));
 
                 Assert.IsTrue(contentType == null);
 
