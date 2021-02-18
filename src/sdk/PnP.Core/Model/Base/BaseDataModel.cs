@@ -119,7 +119,7 @@ namespace PnP.Core.Model
         public virtual async Task<TModel> GetAsync(params Expression<Func<TModel, object>>[] expressions)
         {
             // Create a new object without a parent
-            var newDataModel = (BaseDataModel<TModel>)EntityManager.GetEntityConcreteInstance(this.GetType(), null, this.PnPContext);
+            var newDataModel = (BaseDataModel<TModel>)EntityManager.GetEntityConcreteInstance(this.GetType(), this.Parent, this.PnPContext);
             await newDataModel.BaseRetrieveAsync(expressions: expressions).ConfigureAwait(false);
 
             return (TModel)(object)newDataModel;
@@ -1079,7 +1079,7 @@ namespace PnP.Core.Model
         internal EntityInfo GetClassInfo(params Expression<Func<TModel, object>>[] expressions)
         {
             // TODO: Do we really need this method? Can't we just use EntityManager?
-            return EntityManager.GetClassInfo(GetType(), this, expressions);
+            return EntityManager.GetClassInfo(GetType(), this, expressions: expressions);
         }
 
         #endregion
@@ -1269,7 +1269,7 @@ namespace PnP.Core.Model
                         }
 
                         // Parse the expressions and get the relevant entity information
-                        var entityInfo = EntityManager.GetClassInfo(model.GetType(), (model as BaseDataModel<TModel>), expressions);
+                        var entityInfo = EntityManager.GetClassInfo(model.GetType(), (model as BaseDataModel<TModel>), expressions: expressions);
 
                         string fieldToLoad = ((expression.Body as MethodCallExpression).Arguments[0] as MemberExpression).Member.Name;
 

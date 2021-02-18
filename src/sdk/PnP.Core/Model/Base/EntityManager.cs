@@ -308,9 +308,10 @@ namespace PnP.Core.Model
         /// </summary>
         /// <param name="modelType">The Type of the model object to process</param>
         /// <param name="target">Model instance we're working on</param>
-        /// <param name="expressions">Data load expressions</param>
+        /// <param name="parent">Model instance's parent object, optional</param>
+        /// <param name="expressions">Data load expressions, optional</param>
         /// <returns>Entity model class describing this model instance</returns>
-        internal static EntityInfo GetClassInfo<TModel>(Type modelType, BaseDataModel<TModel> target, params Expression<Func<TModel, object>>[] expressions)
+        internal static EntityInfo GetClassInfo<TModel>(Type modelType, BaseDataModel<TModel> target, IDataModelParent parent = null, params Expression<Func<TModel, object>>[] expressions)
         {
             // Get static information about the fields to work with and how to handle CRUD operations
             var staticClassInfo = EntityManager.Instance.GetStaticClassInfo(modelType);
@@ -383,21 +384,30 @@ namespace PnP.Core.Model
                 field.Load = true;
             }
 
-            if (target != null)
+            if (target != null && parent == null)
             {
                 // In case a model can be used from different contexts (e.g. ContentType can be used from Web, but also from List)
                 // it's required to let the entity know this context so that it can provide the correct information when requested
-                var parent = (target as IDataModelParent).Parent;
+                parent = (target as IDataModelParent).Parent;
                 if (parent is IManageableCollection)
                 {
                     // Parent is a collection, so jump one level up
                     parent = (target as IDataModelParent).Parent.Parent;
                 }
-
-                if (parent != null)
+            }
+            else if (target == null && parent != null)
+            {
+                // Otherwise fallback to the provided parent, if any
+                if (parent is IManageableCollection)
                 {
-                    entityInfo.Target = parent.GetType();
+                    // Parent is a collection, so jump one level up
+                    parent = parent.Parent;
                 }
+            }
+
+            if (parent != null)
+            {
+                entityInfo.Target = parent.GetType();
             }
 
             return entityInfo;
