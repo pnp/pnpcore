@@ -26,9 +26,9 @@ namespace PnP.Core.Test.SharePoint
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 var documents = context.Web.Lists.GetByTitle("Documents", l => l.Fields);
-                Assert.IsTrue(documents.Fields.Count() > 0);
+                Assert.IsTrue(documents.Fields.Length > 0);
 
-                IField field = documents.Fields.FirstOrDefault(p => p.InternalName == "Title");
+                IField field = documents.Fields.AsEnumerable().FirstOrDefault(p => p.InternalName == "Title");
                 // Test a string property
                 Assert.AreEqual("Title", field.InternalName);
                 // Test a boolean property

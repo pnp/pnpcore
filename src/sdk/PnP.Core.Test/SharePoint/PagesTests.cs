@@ -296,13 +296,13 @@ namespace PnP.Core.Test.SharePoint
 
                 CultureInfo culture1043 = new CultureInfo(1043);
                 CultureInfo culture1036 = new CultureInfo(1036);
-                Assert.IsTrue(pageTranslations.TranslatedLanguages.FirstOrDefault(p => p.Culture.Equals(culture1043.Name, StringComparison.InvariantCultureIgnoreCase)) == null);
-                Assert.IsTrue(pageTranslations.TranslatedLanguages.FirstOrDefault(p => p.Culture.Equals(culture1036.Name, StringComparison.InvariantCultureIgnoreCase)) == null);
+                Assert.IsTrue(pageTranslations.TranslatedLanguages.FirstOrDefault(p => p.Culture == culture1043.Name) == null);
+                Assert.IsTrue(pageTranslations.TranslatedLanguages.FirstOrDefault(p => p.Culture == culture1036.Name) == null);
 
                 // generate translation for the page
                 pageTranslations = await newPage.TranslatePagesAsync();
-                Assert.IsTrue(pageTranslations.TranslatedLanguages.FirstOrDefault(p => p.Culture.Equals(culture1043.Name, StringComparison.InvariantCultureIgnoreCase)) != null);
-                Assert.IsTrue(pageTranslations.TranslatedLanguages.FirstOrDefault(p => p.Culture.Equals(culture1036.Name, StringComparison.InvariantCultureIgnoreCase)) != null);
+                Assert.IsTrue(pageTranslations.TranslatedLanguages.FirstOrDefault(p => p.Culture == culture1043.Name) != null);
+                Assert.IsTrue(pageTranslations.TranslatedLanguages.FirstOrDefault(p => p.Culture == culture1036.Name) != null);
 
                 // Delete the created page and it's translations
                 foreach (var translation in pageTranslations.TranslatedLanguages)
