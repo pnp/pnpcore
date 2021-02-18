@@ -1,9 +1,9 @@
---batchresponse_8c217143-9878-4050-8514-a9ed5559cda6
+--batchresponse_fcacf1ac-2d81-4789-9c8f-f833b1bcc93a
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{"d":{"__metadata":{"id":"https://piasysdev.sharepoint.com/sites/prov-1/_api/Site","uri":"https://piasysdev.sharepoint.com/sites/prov-1/_api/Site","type":"SP.Site"},"AllowCreateDeclarativeWorkflow":true,"AllowDesigner":true,"AllowExternalEmbeddingWrapper":1,"AllowMasterPageEditing":false,"AllowRevertFromTemplate":false,"AllowSaveDeclarativeWorkflowAsTemplate":true,"AllowSavePublishDeclarativeWorkflow":true,"AuditLogTrimmingRetention":90,"CanSyncHubSitePermissions":false,"ChannelGroupId":"00000000-0000-0000-0000-000000000000","Classification":"MBI","CommentsOnSitePagesDisabled":false,"DisableAppViews":false,"DisableCompanyWideSharingLinks":false,"DisableFlows":false,"ExternalSharingTipsEnabled":false,"ExternalUserExpirationInDays":0,"GeoLocation":"EUR","GroupId":"a7ea7e26-5a76-4b72-ad99-1465b74857c8","Id":"409403da-217e-4c1b-b400-6dd624fe15d4"}}
---batchresponse_8c217143-9878-4050-8514-a9ed5559cda6--
+{"d":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Site","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Site","type":"SP.Site"},"AllowCreateDeclarativeWorkflow":true,"AllowDesigner":true,"AllowExternalEmbeddingWrapper":1,"AllowMasterPageEditing":false,"AllowRevertFromTemplate":false,"AllowSaveDeclarativeWorkflowAsTemplate":true,"AllowSavePublishDeclarativeWorkflow":true,"AuditLogTrimmingRetention":90,"CanSyncHubSitePermissions":false,"ChannelGroupId":"00000000-0000-0000-0000-000000000000","Classification":"","CommentsOnSitePagesDisabled":false,"DisableAppViews":false,"DisableCompanyWideSharingLinks":false,"DisableFlows":false,"ExternalSharingTipsEnabled":false,"ExternalUserExpirationInDays":0,"GeoLocation":"EUR","GroupId":"b32780e9-df70-4548-a735-4e7f055415a1","Id":"b56adf79-ff6a-4964-a63a-ff1fa23be9f8"}}
+--batchresponse_fcacf1ac-2d81-4789-9c8f-f833b1bcc93a--

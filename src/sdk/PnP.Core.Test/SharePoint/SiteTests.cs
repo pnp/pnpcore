@@ -22,7 +22,7 @@ namespace PnP.Core.Test.SharePoint
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                ISite site = await context.Site.GetAsync(
+                await context.Site.LoadAsync(
                     p => p.AllowCreateDeclarativeWorkflow,
                     p => p.AllowDesigner,
                     p => p.AllowExternalEmbeddingWrapper,
@@ -43,6 +43,8 @@ namespace PnP.Core.Test.SharePoint
                     p => p.GeoLocation,
                     p => p.GroupId
                     );
+
+                var site = context.Site;
 
                 Assert.IsNotNull(site);
                 Assert.IsTrue(site.AllowCreateDeclarativeWorkflow);
@@ -73,7 +75,7 @@ namespace PnP.Core.Test.SharePoint
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                ISite site = await context.Site.GetAsync(
+                await context.Site.LoadAsync(
                     p => p.HubSiteId,
                     p => p.IsHubSite,
                     p => p.LockIssue,
@@ -81,6 +83,8 @@ namespace PnP.Core.Test.SharePoint
                     p => p.ReadOnly,
                     p => p.RelatedGroupId
                     );
+
+                var site = context.Site;
 
                 Assert.IsNotNull(site);
                 Assert.AreEqual(default, site.HubSiteId);
@@ -98,7 +102,7 @@ namespace PnP.Core.Test.SharePoint
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                ISite site = await context.Site.GetAsync(
+                await context.Site.LoadAsync(
                     p => p.SearchBoxInNavBar,
                     p => p.SearchBoxPlaceholderText,
                     p => p.SensitivityLabelId,
@@ -113,6 +117,8 @@ namespace PnP.Core.Test.SharePoint
                     p => p.ThicketSupportDisabled,
                     p => p.TrimAuditLog
                     );
+
+                var site = context.Site;
 
                 Assert.IsNotNull(site);
                 Assert.AreEqual(SearchBoxInNavBar.Inherit, site.SearchBoxInNavBar);
