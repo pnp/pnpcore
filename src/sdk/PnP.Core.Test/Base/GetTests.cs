@@ -426,7 +426,7 @@ namespace PnP.Core.Test.Base
                         .ToArrayAsync();
 
                 Assert.IsTrue(foundLists.Any());
-                Assert.Equals(foundLists.Length, context.Web.Lists.Length);
+                Assert.AreEqual(foundLists.Length, context.Web.Lists.Length);
                 Assert.IsTrue(context.Web.Lists.Requested);
 
                 var firstList = foundLists.First();
@@ -524,7 +524,7 @@ namespace PnP.Core.Test.Base
                         .ToArrayAsync();
 
                 Assert.IsTrue(foundLists.Any());
-                Assert.Equals(foundLists.Length, context.Web.Lists.Length);
+                Assert.AreEqual(foundLists.Length, context.Web.Lists.Length);
                 Assert.IsTrue(context.Web.Lists.Requested);
 
                 var firstList = context.Web.Lists.AsEnumerable().First();
@@ -563,7 +563,7 @@ namespace PnP.Core.Test.Base
                     .FirstOrDefaultAsync(p => p.Title == "Site Assets");
 
                 Assert.IsTrue(foundList != null);
-                Assert.Equals(foundList.Title, "Site Assets");
+                Assert.AreEqual(foundList.Title, "Site Assets");
                 Assert.IsTrue(context.Web.Lists.Requested);
 
                 var firstList = context.Web.Lists.AsEnumerable().First();
@@ -675,7 +675,7 @@ namespace PnP.Core.Test.Base
                 Assert.IsTrue(context.Web.Lists.Requested);
                 
                 var firstList = context.Web.Lists.AsEnumerable().First();
-                Assert.Equals(firstList.Id, foundList.Id);
+                Assert.AreEqual(firstList.Id, foundList.Id);
                 Assert.IsTrue(foundList.Requested);
                 Assert.IsTrue(foundList.IsPropertyAvailable(p => p.TemplateType));
                 Assert.IsTrue(foundList.IsPropertyAvailable(p => p.Title));
@@ -1052,7 +1052,7 @@ namespace PnP.Core.Test.Base
 
         private Tuple<string, string> BuildGraphExpandSelect<TModel>(Expression<Func<TModel, object>>[] testExpression, BaseDataModel<TModel> instance)
         {
-            var entityInfo = EntityManager.GetClassInfo(instance.GetType(), instance, testExpression);
+            var entityInfo = EntityManager.GetClassInfo(instance.GetType(), instance, expressions: testExpression);
             var expandProperty = entityInfo.Fields.FirstOrDefault(p => p.ExpandFieldInfo != null);
             StringBuilder sb = new StringBuilder();
             QueryClient.AddExpandableSelectGraph(true, sb, expandProperty, null, "");
