@@ -6,7 +6,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a UserCustomAction object
     /// </summary>
     [ConcreteType(typeof(UserCustomAction))]
-    public interface IUserCustomAction : IDataModel<IUserCustomAction>, IDataModelGet<IUserCustomAction>, IDataModelLoad<IUserCustomAction>, IDataModelUpdate, IDataModelDelete
+    public interface IUserCustomAction : IDataModel<IUserCustomAction>, IDataModelGet<IUserCustomAction>, IDataModelLoad<IUserCustomAction>, IDataModelUpdate, IDataModelDelete, IQueryableDataModel
     {
         /// <summary>
         /// Gets or sets the unique identifier of the associated client side component.
