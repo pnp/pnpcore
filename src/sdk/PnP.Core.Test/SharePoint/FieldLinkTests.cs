@@ -32,10 +32,10 @@ namespace PnP.Core.Test.SharePoint
                                             .QueryProperties(ct => ct.FieldLinks)
                                             .FirstOrDefault();
 
-                Assert.IsTrue(contentType.FieldLinks.Count() > 0);
+                Assert.IsTrue(contentType.FieldLinks.Length > 0);
                 Assert.IsNotNull(contentType);
 
-                IFieldLink titleFieldLink = contentType.FieldLinks.FirstOrDefault(fl => fl.Name == "Title");
+                IFieldLink titleFieldLink = contentType.FieldLinks.AsEnumerable().FirstOrDefault(fl => fl.Name == "Title");
 
                 Assert.IsNotNull(titleFieldLink);
                 Assert.AreEqual("Title", titleFieldLink.Name);
@@ -60,10 +60,10 @@ namespace PnP.Core.Test.SharePoint
                                             .QueryProperties(ct => ct.FieldLinks)
                                             .FirstOrDefault();
 
-                Assert.IsTrue(contentType.FieldLinks.Count() > 0);
+                Assert.IsTrue(contentType.FieldLinks.Length > 0);
                 Assert.IsNotNull(contentType);
 
-                IFieldLink titleFieldLink = contentType.FieldLinks.FirstOrDefault(fl => fl.Name == "Title");
+                IFieldLink titleFieldLink = contentType.FieldLinks.AsEnumerable().FirstOrDefault(fl => fl.Name == "Title");
 
                 Assert.IsNotNull(titleFieldLink);
                 Assert.AreEqual("Title", titleFieldLink.Name);
