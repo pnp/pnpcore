@@ -215,7 +215,7 @@ namespace PnP.Core.Model.Security
             {
                 var roleDefinitions = await GetRoleDefinitionsAsync().ConfigureAwait(false);
 
-                var roleDefinition = roleDefinitions.FirstOrDefault(r => r.Name == name);
+                var roleDefinition = roleDefinitions.AsEnumerable().FirstOrDefault(r => r.Name == name);
                 if (roleDefinition != null)
                 {
                     var apiCall = new ApiCall($"_api/web/roleassignments/removeroleassignment(principalid={Id},roledefid={roleDefinition.Id})", ApiType.SPORest);
