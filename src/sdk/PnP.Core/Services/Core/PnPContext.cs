@@ -452,21 +452,13 @@ namespace PnP.Core.Services
         /// <returns>New <see cref="PnPContext"/></returns>
         public async Task<PnPContext> CloneAsync(Uri uri)
         {
-            if (uri == null)
-            {
-                throw new ArgumentNullException(nameof(uri));
-            }
+            PnPContext clonedContext = CreateClonedContext(uri);
+            await InitializeClonedContextAsync(uri, clonedContext).ConfigureAwait(false);
+            return clonedContext;
+        }
 
-            PnPContext clonedContext = new PnPContext(Logger, AuthenticationProvider, RestClient, GraphClient, contextOptions, globalOptions, telemetry)
-            {                
-                // Take over graph settings
-                GraphCanUseBeta = graphCanUseBeta,
-                GraphAlwaysUseBeta = GraphAlwaysUseBeta,
-                GraphFirst = GraphFirst,
-                // Set the Uri for which this context was cloned
-                Uri = uri
-            };
-
+        private async Task InitializeClonedContextAsync(Uri uri, PnPContext clonedContext)
+        {
             if (!uri.Equals(Uri))
             {
                 await PnPContextFactory.InitializeContextAsync(clonedContext).ConfigureAwait(false);
@@ -475,7 +467,24 @@ namespace PnP.Core.Services
             {
                 await PnPContextFactory.CopyContextInitializationAsync(this, clonedContext).ConfigureAwait(false);
             }
+        }
 
+        private PnPContext CreateClonedContext(Uri uri)
+        {
+            if (uri == null)
+            {
+                throw new ArgumentNullException(nameof(uri));
+            }
+
+            PnPContext clonedContext = new PnPContext(Logger, AuthenticationProvider, RestClient, GraphClient, contextOptions, globalOptions, telemetry)
+            {
+                // Take over graph settings
+                GraphCanUseBeta = graphCanUseBeta,
+                GraphAlwaysUseBeta = GraphAlwaysUseBeta,
+                GraphFirst = GraphFirst,
+                // Set the Uri for which this context was cloned
+                Uri = uri
+            };
             return clonedContext;
         }
 
@@ -509,15 +518,7 @@ namespace PnP.Core.Services
                 }
             }
 
-            PnPContext clonedContext = new PnPContext(Logger, AuthenticationProvider, RestClient, GraphClient, contextOptions, globalOptions, telemetry)
-            {
-                // Take over graph settings
-                GraphCanUseBeta = graphCanUseBeta,
-                GraphAlwaysUseBeta = GraphAlwaysUseBeta,
-                GraphFirst = GraphFirst,
-                // Set the Uri for which this context was cloned
-                Uri = uri,               
-            };
+            PnPContext clonedContext = CreateClonedContext(uri);            
 
             if (source.Mode == TestMode.Mock)
             {
@@ -528,14 +529,7 @@ namespace PnP.Core.Services
                 clonedContext.SetRecordingMode(id, source.TestName, source.TestFilePath, source.GenerateTestMockingDebugFiles, source.TestUris);
             }
 
-            if (!uri.Equals(Uri))
-            {
-                await PnPContextFactory.InitializeContextAsync(clonedContext).ConfigureAwait(false);
-            }
-            else
-            {
-                await PnPContextFactory.CopyContextInitializationAsync(this, clonedContext).ConfigureAwait(false);
-            }
+            await InitializeClonedContextAsync(uri, clonedContext).ConfigureAwait(false);
 
             return clonedContext;
         }

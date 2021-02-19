@@ -18,8 +18,12 @@ namespace PnP.Core
                 stream.Seek(0, SeekOrigin.Begin);
                 stream.CopyTo(ms);
                 stream.Seek(initialPosition, SeekOrigin.Begin);
+                // Set position to start after copying to ensure we can read the string
+                ms.Position = 0;
                 using (var reader = new StreamReader(ms))
+                {
                     return reader.ReadToEnd();
+                }
             }
         }
     }

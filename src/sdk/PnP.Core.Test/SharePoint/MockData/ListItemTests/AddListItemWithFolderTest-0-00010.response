@@ -1,9 +1,9 @@
---batchresponse_205a209c-bf2c-417f-b211-dad0956f7a62
+--batchresponse_111dcacf-b57d-4e5e-a6ec-a54fe7b708f4
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-
---batchresponse_205a209c-bf2c-417f-b211-dad0956f7a62--
+{"d":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/prov-1/Lists/PNP_SDK_TEST_AddListItemWithFolderTest')","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/prov-1/Lists/PNP_SDK_TEST_AddListItemWithFolderTest')","type":"SP.Folder"},"Files":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/prov-1/Lists/PNP_SDK_TEST_AddListItemWithFolderTest')/Files"}},"ListItemAllFields":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/prov-1/Lists/PNP_SDK_TEST_AddListItemWithFolderTest')/ListItemAllFields"}},"ParentFolder":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/prov-1/Lists/PNP_SDK_TEST_AddListItemWithFolderTest')/ParentFolder"}},"Properties":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/prov-1/Lists/PNP_SDK_TEST_AddListItemWithFolderTest')/Properties"}},"StorageMetrics":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/prov-1/Lists/PNP_SDK_TEST_AddListItemWithFolderTest')/StorageMetrics"}},"Folders":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/prov-1/Lists/PNP_SDK_TEST_AddListItemWithFolderTest')/Folders"}},"Exists":true,"IsWOPIEnabled":false,"ItemCount":2,"Name":"PNP_SDK_TEST_AddListItemWithFolderTest","ProgID":null,"ServerRelativeUrl":"/sites/prov-1/Lists/PNP_SDK_TEST_AddListItemWithFolderTest","TimeCreated":"2021-02-12T14:23:48Z","TimeLastModified":"2021-02-12T14:24:09Z","UniqueId":"94c103a7-b9b0-4c09-b121-165cc2116608","WelcomePage":""}}
+--batchresponse_111dcacf-b57d-4e5e-a6ec-a54fe7b708f4--

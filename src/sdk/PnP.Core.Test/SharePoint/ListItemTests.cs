@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using AngleSharp.Dom;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PnP.Core.Model.Security;
 using PnP.Core.Model.SharePoint;
 using PnP.Core.Test.Utilities;
@@ -34,10 +35,21 @@ namespace PnP.Core.Test.SharePoint
                 list.EnableFolderCreation = true;
                 list.Update();
 
+                // Add item to root of the list
+                var rootItem = list.Items.Add(new Dictionary<string, object> { { "Title", "root" } });
+                var folderForRootItem = await rootItem.GetFolderAsync().ConfigureAwait(false);
+                Assert.IsFalse(await rootItem.IsFolderAsync());
+
                 var folderItem = await list.AddListFolderAsync("Test");
+                var folderForFolderItem = await folderItem.GetFolderAsync().ConfigureAwait(false);
+                Assert.IsTrue(folderForFolderItem != null);
+
                 var item = list.Items.Add(new Dictionary<string, object> { { "Title", "blabla" } }, "Test");
                 var newFolderItem = await list.Items.GetByIdAsync(folderItem.Id);
-                Assert.IsTrue(newFolderItem["ContentTypeId"].ToString().StartsWith("0x0120"));
+                Assert.IsTrue(newFolderItem.IsFolder());
+
+                var folder = await item.GetFolderAsync().ConfigureAwait(false);
+                Assert.IsTrue(folder.Name == "Test");
 
                 using (var context2 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))
                 {
@@ -61,6 +73,48 @@ namespace PnP.Core.Test.SharePoint
             {
                 var listTitle = TestCommon.GetPnPSdkTestAssetName("AddListWithFolderTest");
                 var list = await context.Web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
+                await list.EnsurePropertiesAsync(l => l.RootFolder);
+                list.ContentTypesEnabled = true;
+                list.EnableFolderCreation = true;
+                list.Update();
+
+                var folderItem = await list.AddListFolderAsync("Test");
+                var newFolderItem = await list.Items.GetByIdAsync(folderItem.Id);
+                Assert.IsTrue(newFolderItem["ContentTypeId"].ToString().StartsWith("0x0120"));
+
+                await list.DeleteAsync();
+            }
+        }
+
+        [TestMethod]
+        public async Task AddListFolder2Test()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var listTitle = TestCommon.GetPnPSdkTestAssetName("AddListWithFolder2Test");
+                var list = await context.Web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
+                await list.EnsurePropertiesAsync(l => l.RootFolder);
+                list.ContentTypesEnabled = true;
+                list.EnableFolderCreation = true;
+                list.Update();
+
+                IListItem folderItem = list.Items.Add(new Dictionary<string, object>() { { "Title", "Folder" } }, string.Empty, FileSystemObjectType.Folder);
+                var newFolderItem = await list.Items.GetByIdAsync(folderItem.Id);
+                Assert.IsTrue(newFolderItem["ContentTypeId"].ToString().StartsWith("0x0120"));
+
+                await list.DeleteAsync();
+            }
+        }
+
+        [TestMethod]
+        public async Task AddLibraryFolderTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var listTitle = TestCommon.GetPnPSdkTestAssetName("AddLibraryFolderTest");
+                var list = await context.Web.Lists.AddAsync(listTitle, ListTemplateType.DocumentLibrary);
                 await list.EnsurePropertiesAsync(l => l.RootFolder);
                 list.ContentTypesEnabled = true;
                 list.EnableFolderCreation = true;
@@ -1742,9 +1796,14 @@ namespace PnP.Core.Test.SharePoint
                 fieldData[fldTaxonomyMulti1].Properties.Add("Label2", label2);
                 fieldData[fldTaxonomyMulti1].Properties.Add("Term3", term3);
                 fieldData[fldTaxonomyMulti1].Properties.Add("Label3", label3);
-                var termCollection = addedTaxonomyMultiField1.NewFieldValueCollection();
-                termCollection.Values.Add(addedTaxonomyMultiField1.NewFieldTaxonomyValue((Guid)fieldData[fldTaxonomyMulti1].Properties["Term1"], fieldData[fldTaxonomyMulti1].Properties["Label1"].ToString()));
-                termCollection.Values.Add(addedTaxonomyMultiField1.NewFieldTaxonomyValue((Guid)fieldData[fldTaxonomyMulti1].Properties["Term2"], fieldData[fldTaxonomyMulti1].Properties["Label2"].ToString()));
+
+                // Use the option to specify a list of values in the constructor
+                List<IFieldTaxonomyValue> taxonomyValues = new List<IFieldTaxonomyValue>
+                {
+                    addedTaxonomyMultiField1.NewFieldTaxonomyValue((Guid)fieldData[fldTaxonomyMulti1].Properties["Term1"], fieldData[fldTaxonomyMulti1].Properties["Label1"].ToString()),
+                    addedTaxonomyMultiField1.NewFieldTaxonomyValue((Guid)fieldData[fldTaxonomyMulti1].Properties["Term2"], fieldData[fldTaxonomyMulti1].Properties["Label2"].ToString())
+                };
+                var termCollection = addedTaxonomyMultiField1.NewFieldValueCollection(taxonomyValues);
                 fieldData[fldTaxonomyMulti1].Properties.Add("Collection", termCollection);
                 item.Add(fldTaxonomyMulti1, termCollection);
 
@@ -2096,7 +2155,7 @@ namespace PnP.Core.Test.SharePoint
                 fieldData[fldUserSingle1].Properties.Add("Principal", currentUser);
                 item.Add(fldUserSingle1, addedUserSingleField1.NewFieldUserValue(currentUser));
 
-                // User multi field 1
+                // User multi field 1                
                 var userCollection = addedUserMultiField1.NewFieldValueCollection();
                 userCollection.Values.Add(addedUserMultiField1.NewFieldUserValue(currentUser));
                 fieldData[fldUserMulti1].Properties.Add("Collection", userCollection);
@@ -2118,9 +2177,17 @@ namespace PnP.Core.Test.SharePoint
                 fieldData[fldTaxonomyMulti1].Properties.Add("Label2", label2);
                 fieldData[fldTaxonomyMulti1].Properties.Add("Term3", term3);
                 fieldData[fldTaxonomyMulti1].Properties.Add("Label3", label3);
-                var termCollection = addedTaxonomyMultiField1.NewFieldValueCollection();
-                termCollection.Values.Add(addedTaxonomyMultiField1.NewFieldTaxonomyValue((Guid)fieldData[fldTaxonomyMulti1].Properties["Term1"], fieldData[fldTaxonomyMulti1].Properties["Label1"].ToString()));
-                termCollection.Values.Add(addedTaxonomyMultiField1.NewFieldTaxonomyValue((Guid)fieldData[fldTaxonomyMulti1].Properties["Term2"], fieldData[fldTaxonomyMulti1].Properties["Label2"].ToString()));
+
+                List<KeyValuePair<Guid, string>> terms = new List<KeyValuePair<Guid, string>>
+                {
+                    new KeyValuePair<Guid, string>((Guid)fieldData[fldTaxonomyMulti1].Properties["Term1"], fieldData[fldTaxonomyMulti1].Properties["Label1"].ToString()),
+                    new KeyValuePair<Guid, string>((Guid)fieldData[fldTaxonomyMulti1].Properties["Term2"], fieldData[fldTaxonomyMulti1].Properties["Label2"].ToString())
+                };
+
+                // Use the special constructor to get it covered
+                var termCollection = addedTaxonomyMultiField1.NewFieldValueCollection(terms);
+                //termCollection.Values.Add(addedTaxonomyMultiField1.NewFieldTaxonomyValue((Guid)fieldData[fldTaxonomyMulti1].Properties["Term1"], fieldData[fldTaxonomyMulti1].Properties["Label1"].ToString()));
+                //termCollection.Values.Add(addedTaxonomyMultiField1.NewFieldTaxonomyValue((Guid)fieldData[fldTaxonomyMulti1].Properties["Term2"], fieldData[fldTaxonomyMulti1].Properties["Label2"].ToString()));
                 fieldData[fldTaxonomyMulti1].Properties.Add("Collection", termCollection);
                 item.Add(fldTaxonomyMulti1, termCollection);
 
@@ -2206,7 +2273,8 @@ namespace PnP.Core.Test.SharePoint
                 (addedItem[fldUserSingle1] as IFieldUserValue).Principal = fieldData[fldUserSingle1].Properties["Principal"] as ISharePointPrincipal;
 
                 // User multi field2
-                (fieldData[fldUserMulti1].Properties["Collection"] as IFieldValueCollection).Values.Add(addedUserMultiField1.NewFieldUserValue(userTwo));
+                // Load via just user ID to test this constructor
+                (fieldData[fldUserMulti1].Properties["Collection"] as IFieldValueCollection).Values.Add(addedUserMultiField1.NewFieldUserValue(userTwo.Id));
                 addedItem[fldUserMulti1] = fieldData[fldUserMulti1].Properties["Collection"] as IFieldValueCollection;
 
                 // Taxonomy single field 1

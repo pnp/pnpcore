@@ -1,6 +1,7 @@
 ﻿using PnP.Core.Model.Security;
 using PnP.Core.Services;
 using System;
+using System.Collections.Generic;
 using System.Dynamic;
 using System.Net.Http;
 using System.Text.Json;
@@ -310,6 +311,29 @@ namespace PnP.Core.Model.SharePoint
             return new FieldValueCollection(this, InternalName);
         }
 
+        public IFieldValueCollection NewFieldValueCollection(IEnumerable<IFieldValue> fieldValues)
+        {
+            var fieldValueCollection = NewFieldValueCollection();
+
+            foreach(var value in fieldValues)
+            {
+                fieldValueCollection.Values.Add(value);
+            }
+
+            return fieldValueCollection;
+        }
+
+        public IFieldValueCollection NewFieldValueCollection(IEnumerable<KeyValuePair<Guid, string>> fieldValues)
+        {
+            var fieldValueCollection = NewFieldValueCollection();
+
+            foreach(var keyValuePair in fieldValues)
+            {
+                fieldValueCollection.Values.Add(NewFieldTaxonomyValue(keyValuePair.Key, keyValuePair.Value));
+            }
+
+            return fieldValueCollection;
+        }
         #endregion
 
         #endregion

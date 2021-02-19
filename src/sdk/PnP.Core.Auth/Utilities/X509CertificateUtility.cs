@@ -44,10 +44,9 @@ namespace PnP.Core.Auth
         /// Encrypts data based on the RSACryptoServiceProvider
         /// </summary>
         /// <param name="plainData">Bytes to encrypt</param>
-        /// <param name="fOAEP"> true to perform direct System.Security.Cryptography.RSA decryption using OAEP padding</param>
         /// <param name="certificate">Certificate to use</param>
         /// <returns>Encrypted bytes</returns>
-        internal static byte[] Encrypt(byte[] plainData, bool fOAEP, X509Certificate2 certificate)
+        internal static byte[] Encrypt(byte[] plainData, X509Certificate2 certificate)
         {
             if (plainData == null)
             {
@@ -59,12 +58,10 @@ namespace PnP.Core.Auth
                 throw new ArgumentNullException(nameof(certificate));
             }
 
-            using (RSACryptoServiceProvider provider = new RSACryptoServiceProvider())
+            using (RSA provider = (RSA)certificate.PublicKey.Key)
             {
-                provider.FromXmlString(GetPublicKey(certificate));
-
                 // We use the publickey to encrypt.
-                return provider.Encrypt(plainData, fOAEP);
+                return provider.Encrypt(plainData, RSAEncryptionPadding.OaepSHA1);
             }
         }
 
@@ -72,10 +69,9 @@ namespace PnP.Core.Auth
         /// Decrypts data based on the RSACryptoServiceProvider
         /// </summary>
         /// <param name="encryptedData">Bytes to decrypt</param>
-        /// <param name="fOAEP"> true to perform direct System.Security.Cryptography.RSA decryption using OAEP padding</param>
         /// <param name="certificate">Certificate to use</param>
         /// <returns>Decrypted bytes</returns>
-        internal static byte[] Decrypt(byte[] encryptedData, bool fOAEP, X509Certificate2 certificate)
+        internal static byte[] Decrypt(byte[] encryptedData, X509Certificate2 certificate)
         {
             if (encryptedData == null)
             {
@@ -87,26 +83,11 @@ namespace PnP.Core.Auth
                 throw new ArgumentNullException(nameof(certificate));
             }
 
-            using (RSACryptoServiceProvider provider = (RSACryptoServiceProvider)certificate.PrivateKey)
+            using (RSA provider = (RSA)certificate.PrivateKey)
             {
                 // We use the private key to decrypt.
-                return provider.Decrypt(encryptedData, fOAEP);
+                return provider.Decrypt(encryptedData, RSAEncryptionPadding.OaepSHA1);
             }
-        }
-
-        /// <summary>
-        /// Returns the certificate public key
-        /// </summary>
-        /// <param name="certificate">Certificate to operate on</param>
-        /// <returns>Public key of the certificate</returns>
-        internal static string GetPublicKey(X509Certificate2 certificate)
-        {
-            if (certificate == null)
-            {
-                throw new ArgumentNullException(nameof(certificate));
-            }
-
-            return certificate.PublicKey.Key.ToXmlString(false);
         }
 
     }

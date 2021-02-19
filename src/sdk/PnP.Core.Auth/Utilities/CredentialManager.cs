@@ -25,7 +25,7 @@ namespace PnP.Core.Auth
 
         internal static bool AddCredential(string name, string username, string password, bool overwrite)
         {
-            using (var securePassword = StringToSecureString(password))
+            using (var securePassword = password.ToSecureString())
             {
                 if (OperatingSystem.IsWindows())
                 {
@@ -71,37 +71,10 @@ namespace PnP.Core.Auth
 #pragma warning restore CA2000 // Dispose objects before losing scope
                 var cred = critCred.GetCredential();
                 var username = cred.UserName;
-#pragma warning disable CA2000 // Dispose objects before losing scope
-                var securePassword = StringToSecureString(cred.CredentialBlob);
-#pragma warning restore CA2000 // Dispose objects before losing scope
+                var securePassword = cred.CredentialBlob.ToSecureString();
                 return new NetworkCredential(username, securePassword);
             }
             return null;
-        }
-
-        private static SecureString StringToSecureString(string inputString)
-        {
-            var securityString = new SecureString();
-            char[] chars = inputString.ToCharArray();
-            foreach (var c in chars)
-            {
-                securityString.AppendChar(c);
-            }
-            return securityString;
-        }
-
-        private static string SecureStringToString(SecureString value)
-        {
-            IntPtr valuePtr = IntPtr.Zero;
-            try
-            {
-                valuePtr = Marshal.SecureStringToGlobalAllocUnicode(value);
-                return Marshal.PtrToStringUni(valuePtr);
-            }
-            finally
-            {
-                Marshal.ZeroFreeGlobalAllocUnicode(valuePtr);
-            }
         }
 
         private static void WriteWindowsCredentialManagerEntry(string applicationName, string userName, SecureString securePassword, bool overwrite)
@@ -125,7 +98,7 @@ namespace PnP.Core.Auth
 
             if (doWrite)
             {
-                var password = SecureStringToString(securePassword);
+                var password = securePassword.ToInsecureString();
 
                 byte[] byteArray = password == null ? null : Encoding.Unicode.GetBytes(password);
                 if (Environment.OSVersion.Version < new Version(6, 1))
@@ -168,7 +141,7 @@ namespace PnP.Core.Auth
 
         private static void WriteMacOSKeyChainEntry(string applicationName, string username, SecureString password, bool overwrite)
         {
-            var pw = SecureStringToString(password);
+            var pw = password.ToInsecureString();
             var cmd = $"/usr/bin/security add-generic-password -a '{username}' -w '{pw}' -s '{applicationName}'";
             if (overwrite)
             {
@@ -199,9 +172,7 @@ namespace PnP.Core.Auth
             }
             if (!string.IsNullOrEmpty(username) && !string.IsNullOrEmpty(password))
             {
-#pragma warning disable CA2000 // Dispose objects before losing scope
-                return new NetworkCredential(username, StringToSecureString(password));
-#pragma warning restore CA2000 // Dispose objects before losing scope
+                return new NetworkCredential(username, password.ToSecureString());
             }
             return null;
         }
@@ -211,64 +182,37 @@ namespace PnP.Core.Auth
         [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
         internal struct NativeCredential
         {
-            public UInt32 Flags;
+            public uint Flags;
             public CRED_TYPE Type;
             public IntPtr TargetName;
             public IntPtr Comment;
             public FILETIME LastWritten;
-            public UInt32 CredentialBlobSize;
+            public uint CredentialBlobSize;
             public IntPtr CredentialBlob;
-            public UInt32 Persist;
-            public UInt32 AttributeCount;
+            public uint Persist;
+            public uint AttributeCount;
             public IntPtr Attributes;
             public IntPtr TargetAlias;
             public IntPtr UserName;
-
-            internal static NativeCredential GetNativeCredential(Credential cred)
-            {
-                NativeCredential ncred = new NativeCredential
-                {
-                    AttributeCount = 0,
-                    Attributes = IntPtr.Zero,
-                    Comment = IntPtr.Zero,
-                    TargetAlias = IntPtr.Zero,
-                    Type = CRED_TYPE.GENERIC,
-                    Persist = 1,
-                    CredentialBlobSize = cred.CredentialBlobSize,
-                    TargetName = Marshal.StringToCoTaskMemUni(cred.TargetName),
-                    CredentialBlob = Marshal.StringToCoTaskMemUni(cred.CredentialBlob),
-                    UserName = Marshal.StringToCoTaskMemUni(Environment.UserName)
-                };
-                return ncred;
-            }
         }
 
         [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
         internal struct Credential
         {
-            public UInt32 Flags;
+            public uint Flags;
             public CRED_TYPE Type;
             public string TargetName;
             public string Comment;
             public FILETIME LastWritten;
-            public UInt32 CredentialBlobSize;
+            public uint CredentialBlobSize;
             public string CredentialBlob;
-            public UInt32 Persist;
-            public UInt32 AttributeCount;
+            public uint Persist;
+            public uint AttributeCount;
             public IntPtr Attributes;
             public string TargetAlias;
             public string UserName;
         }
 
-        internal enum CRED_PERSIST : uint
-        {
-#pragma warning disable CA1712
-            CRED_PERSIST_SESSION = 1,
-            CRED_PERSIST_LOCAL_MACHINE = 2,
-
-            CRED_PERSIST_ENTERPRISE = 3
-#pragma warning restore
-        }
         internal enum CRED_TYPE : uint
         {
             GENERIC = 1,
@@ -329,7 +273,7 @@ namespace PnP.Core.Auth
 
 
         [DllImport("Advapi32.dll", SetLastError = true, EntryPoint = "CredWriteW", CharSet = CharSet.Unicode)]
-        private static extern bool CredWrite([In] ref NativeCredential userCredential, [In] UInt32 flags);
+        private static extern bool CredWrite([In] ref NativeCredential userCredential, [In] uint flags);
 
         [DllImport("Advapi32.dll", EntryPoint = "CredReadW", CharSet = CharSet.Unicode, SetLastError = true)]
         private static extern bool CredRead(string target, CRED_TYPE type, int reservedFlag, out IntPtr CredentialPtr);

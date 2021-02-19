@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 --batchresponse_2feb37ee-63d5-473a-95e2-8ea541b60c0b
+=======
+--batchresponse_caa212a0-0653-4389-911d-b75d1f1a64e4
+>>>>>>> dev
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
@@ -7,4 +11,8 @@ CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 ETAG: "2"
 
 
+<<<<<<< HEAD
 --batchresponse_2feb37ee-63d5-473a-95e2-8ea541b60c0b--
+=======
+--batchresponse_caa212a0-0653-4389-911d-b75d1f1a64e4--
+>>>>>>> dev

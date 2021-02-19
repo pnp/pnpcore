@@ -82,20 +82,19 @@ namespace PnP.Core.Model.SharePoint
             {
                 // Extra processing of returned json
             };
+            AddApiCallHandler = async (keyValuePairs) => {
 
-#pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
-            AddApiCallHandler = async (keyValuePairs) =>
-#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
-            {
                 var parentList = Parent.Parent as List;
                 // sample parent list uri: https://bertonline.sharepoint.com/sites/modern/_api/Web/Lists(guid'b2d52a36-52f1-48a4-b499-629063c6a38c')
                 var parentListUri = parentList.GetMetadata(PnPConstants.MetaDataUri);
-                // sample parent list entity type name: DemolistList
-                var parentListTitle = !string.IsNullOrEmpty(parentList.GetMetadata(PnPConstants.MetaDataRestEntityTypeName)) ? parentList.GetMetadata(PnPConstants.MetaDataRestEntityTypeName).Substring(0, parentList.GetMetadata(PnPConstants.MetaDataRestEntityTypeName).Length - 4) : null;
+
+                // sample parent list entity type name: DemolistList (skip last 4 chars)
+                // Sample parent library type name: MyDocs
+                var parentListTitle = !string.IsNullOrEmpty(parentList.GetMetadata(PnPConstants.MetaDataRestEntityTypeName)) ? parentList.GetMetadata(PnPConstants.MetaDataRestEntityTypeName) : null;
 
                 // If this list we're adding items to was not fetched from the server than throw an error
                 string serverRelativeUrl = null;
-                if (string.IsNullOrEmpty(parentListTitle) || string.IsNullOrEmpty(parentListUri))
+                if (string.IsNullOrEmpty(parentListTitle) || string.IsNullOrEmpty(parentListUri) || !parentList.IsPropertyAvailable(p => p.TemplateType))
                 {
                     // Fall back to loading the rootfolder propery if we can't determine the list name
                     await parentList.EnsurePropertiesAsync(p => p.RootFolder).ConfigureAwait(false);
@@ -103,14 +102,11 @@ namespace PnP.Core.Model.SharePoint
                 }
                 else
                 {
-                    // little trick here to ensure we can construct the correct list url based upon the data returned by a default load
-                    // Ensure the underscore "_" character is not encoded in the FolderPath to use
-                    serverRelativeUrl = $"{PnPContext.Uri}/lists/{parentListTitle}".Replace("_x005f_", "_");
+                    serverRelativeUrl = ListMetaDataMapper.RestEntityTypeNameToUrl(PnPContext.Uri, parentListTitle, parentList.TemplateType);
                 }
 
                 // drop the everything in front of _api as the batching logic will add that automatically
                 var baseApiCall = parentListUri.Substring(parentListUri.IndexOf("_api"));
-
 
                 // Define the JSON body of the update request based on the actual changes
                 dynamic body = new ExpandoObject();
@@ -121,13 +117,16 @@ namespace PnP.Core.Model.SharePoint
                     if (keyValuePairs[FolderPath] != null)
                     {
                         var folderPath = keyValuePairs[FolderPath].ToString();
-                        if (folderPath.ToLower().StartsWith(serverRelativeUrl))
+                        if (!string.IsNullOrEmpty(folderPath))
                         {
-                            decodedUrlFolderPath = folderPath;
-                        }
-                        else
-                        {
-                            decodedUrlFolderPath = $"{serverRelativeUrl}/{folderPath.TrimStart('/')}";
+                            if (folderPath.ToLower().StartsWith(serverRelativeUrl))
+                            {
+                                decodedUrlFolderPath = folderPath;
+                            }
+                            else
+                            {
+                                decodedUrlFolderPath = $"{serverRelativeUrl}/{folderPath.TrimStart('/')}";
+                            }
                         }
                     }
                 }
@@ -191,6 +190,44 @@ namespace PnP.Core.Model.SharePoint
         #endregion
 
         #region Methods
+
+        #region Folder
+        public async Task<bool> IsFolderAsync()
+        {
+            if (!Values.ContainsKey("ContentTypeId"))
+            {
+                await LoadKeyListItemProperties().ConfigureAwait(false);
+            }
+
+            return Values["ContentTypeId"].ToString().StartsWith("0x0120", StringComparison.InvariantCultureIgnoreCase);
+        }
+
+        public bool IsFolder()
+        {
+            return IsFolderAsync().GetAwaiter().GetResult();
+        }
+
+        public async Task<IFolder> GetFolderAsync()
+        {
+            if (!Values.ContainsKey("FileDirRef"))
+            {
+                await LoadKeyListItemProperties().ConfigureAwait(false);
+            }
+
+            return await PnPContext.Web.GetFolderByServerRelativeUrlAsync(Values["FileDirRef"].ToString()).ConfigureAwait(false);
+        }
+
+        public IFolder GetFolder()
+        {
+            return GetFolderAsync().GetAwaiter().GetResult();
+        }
+
+        private async Task LoadKeyListItemProperties()
+        {
+            ApiCall apiCall = new ApiCall($"_api/web/lists/getbyid(guid'{{Parent.Id}}')/items({Id})?$select=ContentTypeId,FileDirRef", ApiType.SPORest);
+            await RequestAsync(apiCall, HttpMethod.Get).ConfigureAwait(false);
+        }
+        #endregion
 
         #region Item updates
 
