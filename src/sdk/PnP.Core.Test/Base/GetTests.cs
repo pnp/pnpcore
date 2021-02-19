@@ -411,9 +411,6 @@ namespace PnP.Core.Test.Base
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                // x BERT: I needed to partially change the logic of this test. 
-                // We need to talk ...
-
                 context.GraphFirst = false;
 
                 // Do a get with filter and custom properties specifying the data to load
@@ -426,8 +423,6 @@ namespace PnP.Core.Test.Base
                         .ToArrayAsync();
 
                 Assert.IsTrue(foundLists.Any());
-                Assert.AreEqual(foundLists.Length, context.Web.Lists.Length);
-                Assert.IsTrue(context.Web.Lists.Requested);
 
                 var firstList = foundLists.First();
                 Assert.IsTrue(firstList.Requested);
@@ -547,6 +542,8 @@ namespace PnP.Core.Test.Base
         [TestMethod]
         public async Task GetCollectionFirstFilterExpressionViaRest()
         {
+            var listTitle = "Site Assets";
+
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
@@ -560,14 +557,15 @@ namespace PnP.Core.Test.Base
                 var foundList = await context.Web.Lists.QueryProperties(
                         p => p.Title, p => p.TemplateType,
                         p => p.ContentTypes.QueryProperties(p => p.Name, p => p.FieldLinks.QueryProperties(p => p.Name)))
-                    .FirstOrDefaultAsync(p => p.Title == "Site Assets");
+                    .FirstOrDefaultAsync(p => p.Title == listTitle);
 
                 Assert.IsTrue(foundList != null);
-                Assert.AreEqual(foundList.Title, "Site Assets");
+                Assert.AreEqual(foundList.Title, listTitle);
                 Assert.IsTrue(context.Web.Lists.Requested);
 
-                var firstList = context.Web.Lists.AsEnumerable().First();
-                Assert.Equals(firstList.Id, foundList.Id);
+                var firstList = context.Web.Lists.AsEnumerable().FirstOrDefault(l => l.Title == listTitle);
+                Assert.IsNotNull(firstList);
+                Assert.AreEqual(firstList.Id, foundList.Id);
                 Assert.IsTrue(foundList.Requested);
                 Assert.IsTrue(foundList.IsPropertyAvailable(p => p.TemplateType));
                 Assert.IsTrue(foundList.IsPropertyAvailable(p => p.Title));
