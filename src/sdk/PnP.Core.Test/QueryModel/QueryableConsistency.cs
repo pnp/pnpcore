@@ -210,6 +210,7 @@ namespace PnP.Core.Test.QueryModel
                 }
 
                 // Double-check that the number of lists is now increased by 1
+                await context.Web.LoadAsync(w => w.Lists);
                 var newListsCount = context.Web.Lists.Length;
                 Assert.AreEqual(listsCount + 1, newListsCount);
 
@@ -217,6 +218,7 @@ namespace PnP.Core.Test.QueryModel
                 await newList.DeleteAsync();
 
                 // And double-check that the number of lists is now decreased by 1
+                await context.Web.LoadAsync(w => w.Lists);
                 newListsCount = context.Web.Lists.Length;
                 Assert.AreEqual(listsCount, newListsCount);
 
