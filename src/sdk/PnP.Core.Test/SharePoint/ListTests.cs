@@ -902,7 +902,7 @@ namespace PnP.Core.Test.SharePoint
                     using (var context3 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 3))
                     {
                         // We should have 2 list items
-                        var list3 = await context2.Web.Lists.GetByIdAsync(listId, p => p.Items);
+                        var list3 = await context3.Web.Lists.GetByIdAsync(listId, p => p.Items);
 
                         Assert.IsTrue(list3.Items.Length == 2);
                     }

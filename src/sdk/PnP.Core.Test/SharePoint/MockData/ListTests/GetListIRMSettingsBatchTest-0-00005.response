@@ -1,9 +1,10 @@
---batchresponse_86975376-99a8-458d-89c9-3d91b6af0ca8
+--batchresponse_b775fd7a-5e68-4e5b-a270-cf4a289c7b9f
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
-HTTP/1.1 200 OK
+HTTP/1.1 204 No Content
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+ETAG: "2"
 
-{"d":{"__metadata":{"id":"https://piasysdev.sharepoint.com/sites/prov-1/_api/web/lists/getbyid(guid'bff2e690-c1f7-43c9-956d-139d68ec7c94')/InformationRightsManagementSettings","uri":"https://piasysdev.sharepoint.com/sites/prov-1/_api/web/lists/getbyid(guid'bff2e690-c1f7-43c9-956d-139d68ec7c94')/InformationRightsManagementSettings","type":"SP.InformationRightsManagementSettings"},"AllowPrint":false,"AllowScript":false,"AllowWriteCopy":false,"DisableDocumentBrowserView":false,"DocumentAccessExpireDays":90,"DocumentLibraryProtectionExpireDate":"2021-03-21T04:32:23-07:00","EnableDocumentAccessExpire":false,"EnableDocumentBrowserPublishingView":false,"EnableGroupProtection":false,"EnableLicenseCacheExpire":false,"GroupName":"","LicenseCacheExpireDays":30,"PolicyDescription":"","PolicyTitle":"","TemplateId":""}}
---batchresponse_86975376-99a8-458d-89c9-3d91b6af0ca8--
+
+--batchresponse_b775fd7a-5e68-4e5b-a270-cf4a289c7b9f--

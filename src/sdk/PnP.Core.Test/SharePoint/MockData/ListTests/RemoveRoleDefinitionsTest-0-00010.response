@@ -1,9 +1,17 @@
---batchresponse_d50a53d6-296b-4ba2-a3e1-4fb9a22466f9
+--batchresponse_f1ac515b-e855-48f4-b3fa-caf178bfcd7b
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{"d":{"RemoveRoleAssignment":null}}
---batchresponse_d50a53d6-296b-4ba2-a3e1-4fb9a22466f9--
+{"d":{"results":[{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/RoleDefinitions(1073741825)","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/RoleDefinitions(1073741825)","type":"SP.RoleDefinition"},"BasePermissions":{"__metadata":{"type":"SP.BasePermissions"},"High":"48","Low":"134287360"},"Description":"Can view specific lists, document libraries, list items, folders, or documents when given permissions.","Hidden":true,"Id":1073741825,"Name":"Limited Access","Order":160,"RoleTypeKind":1}]}}
+--batchresponse_f1ac515b-e855-48f4-b3fa-caf178bfcd7b
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+HTTP/1.1 200 OK
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+
+{"d":{"results":[{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'ba428ddc-7197-4cef-9df3-3b8d20f8449e')/RoleAssignments/GetByPrincipalId(6)","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'ba428ddc-7197-4cef-9df3-3b8d20f8449e')/RoleAssignments/GetByPrincipalId(6)","type":"SP.RoleAssignment"},"RoleDefinitionBindings":{"results":[{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/RoleDefinitions(1073741932)","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/RoleDefinitions(1073741932)","type":"SP.RoleDefinition"},"BasePermissions":{"__metadata":{"type":"SP.BasePermissions"},"High":"0","Low":"262144"},"Description":null,"Hidden":false,"Id":1073741932,"Name":"PNP_SDK_TEST_RemoveRoleDefinitionsTest","Order":0,"RoleTypeKind":0},{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/RoleDefinitions(1073741829)","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/RoleDefinitions(1073741829)","type":"SP.RoleDefinition"},"BasePermissions":{"__metadata":{"type":"SP.BasePermissions"},"High":"2147483647","Low":"4294967295"},"Description":"Has full control.","Hidden":false,"Id":1073741829,"Name":"Full Control","Order":1,"RoleTypeKind":5}]},"PrincipalId":6}]}}
+--batchresponse_f1ac515b-e855-48f4-b3fa-caf178bfcd7b--

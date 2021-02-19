@@ -1497,6 +1497,7 @@ namespace PnP.Core.Test.SharePoint
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, id, testName))
             {
                 var myList = context.Web.Lists.GetByTitle(listTitle, p => p.Title, p => p.Items, p => p.Fields.QueryProperties(p => p.InternalName, p => p.FieldTypeKind, p => p.TypeAsString, p => p.Title));
+                //var myList = context.Web.Lists.GetByTitle(listTitle, p => p.Title, p => p.Items, p => p.Fields);
                 var addedItem = myList.Items.AsEnumerable().FirstOrDefault(p => p.Title == "Item1");
 
                 AssertRegularListItemProperties(fieldData, addedItem);

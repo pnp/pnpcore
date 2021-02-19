@@ -1,9 +1,9 @@
---batchresponse_6552ea4c-8821-4e7e-98a0-0a1c87159c59
+--batchresponse_61d0974f-6a30-4eea-94e9-33e9e49af137
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{"d":{"results":[{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/RoleDefinitions(1073741926)","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/RoleDefinitions(1073741926)","type":"SP.RoleDefinition"},"BasePermissions":{"__metadata":{"type":"SP.BasePermissions"},"High":"0","Low":"262144"},"Description":null,"Hidden":false,"Id":1073741926,"Name":"PNP_SDK_TEST_AddRoleDefinitionsTest","Order":0,"RoleTypeKind":0}]}}
---batchresponse_6552ea4c-8821-4e7e-98a0-0a1c87159c59--
+{"d":{"results":[{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/RoleDefinitions(1073741929)","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/RoleDefinitions(1073741929)","type":"SP.RoleDefinition"},"BasePermissions":{"__metadata":{"type":"SP.BasePermissions"},"High":"0","Low":"262144"},"Description":null,"Hidden":false,"Id":1073741929,"Name":"PNP_SDK_TEST_AddRoleDefinitionsTest","Order":0,"RoleTypeKind":0}]}}
+--batchresponse_61d0974f-6a30-4eea-94e9-33e9e49af137--
