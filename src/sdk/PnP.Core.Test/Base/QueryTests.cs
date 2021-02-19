@@ -415,6 +415,7 @@ namespace PnP.Core.Test.Base
         #region Linq query tests
 
         [TestMethod]
+        [Ignore]
         public async Task GetLinqListGraph()
         {
             //NOTE: $skip does not work ~ should result in exception once we've the needed metadata to check for that
@@ -424,6 +425,7 @@ namespace PnP.Core.Test.Base
         }
 
         [TestMethod]
+        [Ignore]
         public async Task GetLinqListGraphSingleSimpleProperty()
         {
             //NOTE: $skip does not work ~ should result in exception once we've the needed metadata to check for that
@@ -434,6 +436,7 @@ namespace PnP.Core.Test.Base
         }
 
         [TestMethod]
+        [Ignore]
         public async Task GetLinqListGraphMultipleSimpleProperty()
         {
             //NOTE: $skip does not work ~ should result in exception once we've the needed metadata to check for that
@@ -444,6 +447,7 @@ namespace PnP.Core.Test.Base
         }
 
         [TestMethod]
+        [Ignore]
         public async Task GetLinqListSingleSimpleProperty()
         {
             var requests = await GetODataAPICallTestAsync(
@@ -453,6 +457,7 @@ namespace PnP.Core.Test.Base
         }
 
         [TestMethod]
+        [Ignore]
         public async Task GetLinqListMultipleSimpleProperty()
         {
             var requests = await GetODataAPICallTestAsync(
@@ -462,6 +467,7 @@ namespace PnP.Core.Test.Base
         }
 
         [TestMethod]
+        [Ignore]
         public async Task GetLinqListSingleSimpleExpandProperty()
         {
             //NOTE: $skip does not work ~ should result in exception once we've the needed metadata to check for that
@@ -472,6 +478,7 @@ namespace PnP.Core.Test.Base
         }
 
         [TestMethod]
+        [Ignore]
         public async Task GetLinqListSingleSimpleNormalAndExpandProperty()
         {
             //NOTE: $skip does not work ~ should result in exception once we've the needed metadata to check for that
@@ -482,6 +489,7 @@ namespace PnP.Core.Test.Base
         }
 
         [TestMethod]
+        [Ignore]
         [ExpectedException(typeof(ClientException))]
         public async Task GetLinqTermStoreSingleSimpleNormalAndExpandProperty()
         {
@@ -494,6 +502,7 @@ namespace PnP.Core.Test.Base
         }
 
         [TestMethod]
+        [Ignore]
         public async Task GetLinqListPlusLoad()
         {
             var requests = await GetODataAPICallTestAsync(
