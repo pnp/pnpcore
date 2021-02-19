@@ -1,0 +1,9 @@
+--batchresponse_df992051-d6a5-4e95-9158-d0aaf91e6347
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+HTTP/1.1 200 OK
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+
+{"d":{"results":[{"__metadata":{"id":"https://piasysdev.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'779dec77-7823-4aa5-b186-aea18107aed7')","uri":"https://piasysdev.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'779dec77-7823-4aa5-b186-aea18107aed7')","etag":"\"2\"","type":"SP.List"},"Description":"","Id":"779dec77-7823-4aa5-b186-aea18107aed7","Title":"TestQueryListsUpdateConsistency - Updated"}]}}
+--batchresponse_df992051-d6a5-4e95-9158-d0aaf91e6347--

@@ -1,9 +1,9 @@
---batchresponse_a8939ead-40e0-46b1-a6af-e9bf7333ea48
+--batchresponse_9f1f47ae-49d6-4a70-b4bc-b0af87fb998e
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{"d":{"results":[{"__metadata":{"id":"https://erwinmcm.sharepoint.com/sites/demo1/_api/Web/SiteGroups/GetById(59)","uri":"https://erwinmcm.sharepoint.com/sites/demo1/_api/Web/SiteGroups/GetById(59)","type":"SP.Group"},"Owner":{"__deferred":{"uri":"https://erwinmcm.sharepoint.com/sites/demo1/_api/Web/SiteGroups/GetById(59)/Owner"}},"Users":{"__deferred":{"uri":"https://erwinmcm.sharepoint.com/sites/demo1/_api/Web/SiteGroups/GetById(59)/Users"}},"Id":59,"IsHiddenInUI":false,"LoginName":"PNP_SDK_TEST_TestGroup-Renamed","Title":"PNP_SDK_TEST_TestGroup-Renamed","PrincipalType":8,"AllowMembersEditMembership":false,"AllowRequestToJoinLeave":false,"AutoAcceptRequestToJoinLeave":false,"Description":null,"OnlyAllowMembersViewMembership":true,"OwnerTitle":"Erwin van Hunen","RequestToJoinLeaveEmailSetting":null}]}}
---batchresponse_a8939ead-40e0-46b1-a6af-e9bf7333ea48--
+{"d":{"results":[{"__metadata":{"id":"https://piasysdev.sharepoint.com/sites/prov-1/_api/Web/SiteGroups/GetById(33)","uri":"https://piasysdev.sharepoint.com/sites/prov-1/_api/Web/SiteGroups/GetById(33)","type":"SP.Group"},"Owner":{"__deferred":{"uri":"https://piasysdev.sharepoint.com/sites/prov-1/_api/Web/SiteGroups/GetById(33)/Owner"}},"Users":{"__deferred":{"uri":"https://piasysdev.sharepoint.com/sites/prov-1/_api/Web/SiteGroups/GetById(33)/Users"}},"Id":33,"IsHiddenInUI":false,"LoginName":"PNP_SDK_TEST_TestGroup-Renamed","Title":"PNP_SDK_TEST_TestGroup-Renamed","PrincipalType":8,"AllowMembersEditMembership":false,"AllowRequestToJoinLeave":false,"AutoAcceptRequestToJoinLeave":false,"Description":null,"OnlyAllowMembersViewMembership":true,"OwnerTitle":"Paolo Pialorsi","RequestToJoinLeaveEmailSetting":null}]}}
+--batchresponse_9f1f47ae-49d6-4a70-b4bc-b0af87fb998e--

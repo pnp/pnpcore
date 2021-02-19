@@ -1,4 +1,4 @@
---batchresponse_25cdfaeb-0457-48f9-b778-e3cb2e69d27a
+--batchresponse_18400f46-e1a3-47ec-8645-a71df791808f
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
@@ -7,19 +7,19 @@ CONTENT-TYPE: application/json; charset=utf-8
 
 { "Row" : 
 [{
-"ID": "341",
+"ID": "4",
 "PermMask": "0x7ffffffffffbffff",
 "FSObjType": "0",
 "HTML_x0020_File_x0020_Type": "",
-"UniqueId": "{3F47C1A5-0BD3-4B52-8860-1577C3DDE530}",
+"UniqueId": "{8DA7C641-6E3C-4C7F-9A40-70F6BA6A0442}",
 "ProgId": "",
 "NoExecute": "0",
-"ContentTypeId": "0x0101009D1CB255DA76424F860D91F20E6C41180044C66AD09592964583DFF5030205BD34",
-"FileRef": "\u002fsites\u002fpnpcoresdktest\u002fSitePages\u002fPNP_SDK_TEST_PageSectionsWithEmphasisAndControlCreateTest.aspx",
-"FileRef.urlencode": "%2Fsites%2Fpnpcoresdktest%2FSitePages%2FPNP%5FSDK%5FTEST%5FPageSectionsWithEmphasisAndControlCreateTest%2Easpx",
-"FileRef.urlencodeasurl": "\u002fsites\u002fpnpcoresdktest\u002fSitePages\u002fPNP_SDK_TEST_PageSectionsWithEmphasisAndControlCreateTest.aspx",
-"FileRef.urlencoding": "\u002fsites\u002fpnpcoresdktest\u002fSitePages\u002fPNP_SDK_TEST_PageSectionsWithEmphasisAndControlCreateTest.aspx",
-"FileRef.scriptencodeasurl": "\\u002fsites\\u002fpnpcoresdktest\\u002fSitePages\\u002fPNP_SDK_TEST_PageSectionsWithEmphasisAndControlCreateTest.aspx",
+"ContentTypeId": "0x0101009D1CB255DA76424F860D91F20E6C411800F47BF4FB5F0AD344ACC87322915810AD",
+"FileRef": "\u002fsites\u002fmodern-pnp-sdk\u002fSitePages\u002fPNP_SDK_TEST_PageSectionsWithEmphasisAndControlCreateTest.aspx",
+"FileRef.urlencode": "%2Fsites%2Fmodern%2Dpnp%2Dsdk%2FSitePages%2FPNP%5FSDK%5FTEST%5FPageSectionsWithEmphasisAndControlCreateTest%2Easpx",
+"FileRef.urlencodeasurl": "\u002fsites\u002fmodern-pnp-sdk\u002fSitePages\u002fPNP_SDK_TEST_PageSectionsWithEmphasisAndControlCreateTest.aspx",
+"FileRef.urlencoding": "\u002fsites\u002fmodern-pnp-sdk\u002fSitePages\u002fPNP_SDK_TEST_PageSectionsWithEmphasisAndControlCreateTest.aspx",
+"FileRef.scriptencodeasurl": "\\u002fsites\\u002fmodern-pnp-sdk\\u002fSitePages\\u002fPNP_SDK_TEST_PageSectionsWithEmphasisAndControlCreateTest.aspx",
 "_UIVersion": "1",
 "SMTotalSize": "932",
 "File_x0020_Size": "780",
@@ -35,7 +35,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "FileLeafRef": "PNP_SDK_TEST_PageSectionsWithEmphasisAndControlCreateTest.aspx",
 "FileLeafRef.Name": "PNP_SDK_TEST_PageSectionsWithEmphasisAndControlCreateTest",
 "FileLeafRef.Suffix": "aspx",
-"FileDirRef": "\u002fsites\u002fpnpcoresdktest\u002fSitePages",
+"FileDirRef": "\u002fsites\u002fmodern-pnp-sdk\u002fSitePages",
 "Description": "",
 "Title": "",
 "ClientSideApplicationId": "",
@@ -63,8 +63,8 @@ CONTENT-TYPE: application/json; charset=utf-8
 "ItemChildCount": "0",
 "FolderChildCount": "0",
 "A2ODMountCount": "",
+"_ComplianceTag": "",
 "owshiddenversion": "1",
-"_SPTranslatedLanguages": "",
 "_SPSitePageFlags": "",
 "ContentVersion": "0",
 "DocConcurrencyNumber": "1",
@@ -82,4 +82,4 @@ CONTENT-TYPE: application/json; charset=utf-8
 ,"CurrentFolderSpItemUrl" : ""
 
 }
---batchresponse_25cdfaeb-0457-48f9-b778-e3cb2e69d27a--
+--batchresponse_18400f46-e1a3-47ec-8645-a71df791808f--

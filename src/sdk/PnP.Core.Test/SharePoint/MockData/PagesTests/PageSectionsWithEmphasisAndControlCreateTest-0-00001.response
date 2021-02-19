@@ -1,9 +1,9 @@
---batchresponse_3d8faa31-4c8c-471c-b839-178d05382f68
+--batchresponse_42402f16-8853-408f-8481-86df551b1d53
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{"d":{"__metadata":{"id":"https://piasysdev.sharepoint.com/sites/modern/_api/Site","uri":"https://piasysdev.sharepoint.com/sites/modern/_api/Site","type":"SP.Site"},"GroupId":"00000000-0000-0000-0000-000000000000","Id":"6528696b-bfef-4488-a7fc-a2728cb25521"}}
---batchresponse_3d8faa31-4c8c-471c-b839-178d05382f68--
+{"d":{"__metadata":{"id":"https://piasysdev.sharepoint.com/sites/modern-pnp-sdk/_api/Site","uri":"https://piasysdev.sharepoint.com/sites/modern-pnp-sdk/_api/Site","type":"SP.Site"},"GroupId":"00000000-0000-0000-0000-000000000000","Id":"d11e4aff-6acd-4188-a066-5ce2f2096e4a"}}
+--batchresponse_42402f16-8853-408f-8481-86df551b1d53--

@@ -1,10 +1,10 @@
---batchresponse_2a3cf7e0-682a-4f76-b32f-8042b430eb10
+--batchresponse_f9210125-086f-4da8-814b-b064846cf64e
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 201 Created
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
-LOCATION: https://erwinmcm.sharepoint.com/sites/demo1/_api/Web/SiteGroups/GetById(48)
+LOCATION: https://piasysdev.sharepoint.com/sites/prov-1/_api/Web/SiteGroups/GetById(31)
 
-{"d":{"__metadata":{"id":"https://erwinmcm.sharepoint.com/sites/demo1/_api/Web/SiteGroups/GetById(48)","uri":"https://erwinmcm.sharepoint.com/sites/demo1/_api/Web/SiteGroups/GetById(48)","type":"SP.Group"},"Owner":{"__deferred":{"uri":"https://erwinmcm.sharepoint.com/sites/demo1/_api/Web/SiteGroups/GetById(48)/Owner"}},"Users":{"__deferred":{"uri":"https://erwinmcm.sharepoint.com/sites/demo1/_api/Web/SiteGroups/GetById(48)/Users"}},"Id":48,"IsHiddenInUI":false,"LoginName":"PNP_SDK_TEST_TestGroup","Title":"PNP_SDK_TEST_TestGroup","PrincipalType":8,"AllowMembersEditMembership":false,"AllowRequestToJoinLeave":false,"AutoAcceptRequestToJoinLeave":false,"Description":null,"OnlyAllowMembersViewMembership":true,"OwnerTitle":"Erwin van Hunen","RequestToJoinLeaveEmailSetting":null}}
---batchresponse_2a3cf7e0-682a-4f76-b32f-8042b430eb10--
+{"d":{"__metadata":{"id":"https://piasysdev.sharepoint.com/sites/prov-1/_api/Web/SiteGroups/GetById(31)","uri":"https://piasysdev.sharepoint.com/sites/prov-1/_api/Web/SiteGroups/GetById(31)","type":"SP.Group"},"Owner":{"__deferred":{"uri":"https://piasysdev.sharepoint.com/sites/prov-1/_api/Web/SiteGroups/GetById(31)/Owner"}},"Users":{"__deferred":{"uri":"https://piasysdev.sharepoint.com/sites/prov-1/_api/Web/SiteGroups/GetById(31)/Users"}},"Id":31,"IsHiddenInUI":false,"LoginName":"PNP_SDK_TEST_TestGroup","Title":"PNP_SDK_TEST_TestGroup","PrincipalType":8,"AllowMembersEditMembership":false,"AllowRequestToJoinLeave":false,"AutoAcceptRequestToJoinLeave":false,"Description":null,"OnlyAllowMembersViewMembership":true,"OwnerTitle":"Paolo Pialorsi","RequestToJoinLeaveEmailSetting":null}}
+--batchresponse_f9210125-086f-4da8-814b-b064846cf64e--
