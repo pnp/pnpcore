@@ -1,4 +1,4 @@
---batchresponse_e174ad91-83a0-4dd8-82b2-9eb7b1c5f2f1
+--batchresponse_ce9f9510-5da8-4091-961c-49af217586b0
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
@@ -7,14 +7,14 @@ CONTENT-TYPE: application/json; charset=utf-8
 
 { "Row" : 
 [{
-"ID": "956",
+"ID": "51",
 "PermMask": "0x7ffffffffffbffff",
 "FSObjType": "0",
 "HTML_x0020_File_x0020_Type": "",
-"UniqueId": "{E4B6E508-2215-486C-BF33-69302386D586}",
+"UniqueId": "{9220C959-0147-4ABC-9571-C4EC7B2258AC}",
 "ProgId": "",
 "NoExecute": "0",
-"ContentTypeId": "0x01010800B3B2A1451E70B6458A757AC0CBA6DAEF",
+"ContentTypeId": "0x01010800FB74799233AF364397CCAD2384D3944F",
 "FileRef": "\u002fsites\u002fprov-1\u002fSitePages\u002fPNP_SDK_TEST_AddFormattedText.aspx",
 "FileRef.urlencode": "%2Fsites%2Fprov%2D1%2FSitePages%2FPNP%5FSDK%5FTEST%5FAddFormattedText%2Easpx",
 "FileRef.urlencodeasurl": "\u002fsites\u002fprov-1\u002fSitePages\u002fPNP_SDK_TEST_AddFormattedText.aspx",
@@ -63,8 +63,8 @@ CONTENT-TYPE: application/json; charset=utf-8
 "ItemChildCount": "0",
 "FolderChildCount": "0",
 "A2ODMountCount": "",
+"_ComplianceTag": "",
 "owshiddenversion": "1",
-"_SPTranslatedLanguages": "",
 "_SPSitePageFlags": "",
 "ContentVersion": "0",
 "DocConcurrencyNumber": "1",
@@ -82,4 +82,4 @@ CONTENT-TYPE: application/json; charset=utf-8
 ,"CurrentFolderSpItemUrl" : ""
 
 }
---batchresponse_e174ad91-83a0-4dd8-82b2-9eb7b1c5f2f1--
+--batchresponse_ce9f9510-5da8-4091-961c-49af217586b0--

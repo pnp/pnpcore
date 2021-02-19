@@ -1,9 +1,9 @@
---batchresponse_4c91bf32-4c1b-42a5-bc5a-05e2d1804a47
+--batchresponse_780800ff-5a44-480c-b9bc-53e9805153df
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{"d":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/pnpcoresdktest/_api/sitepages/pages(336)/translations","uri":"https://bertonline.sharepoint.com/sites/pnpcoresdktest/_api/sitepages/pages(336)/translations","type":"SP.TranslationStatusCollection"},"UntranslatedLanguages":{"__metadata":{"type":"Collection(Edm.String)"},"results":["nl-nl","fr-fr"]},"Items":{"__metadata":{"type":"Collection(SP.TranslationStatus)"},"results":[]}}}
---batchresponse_4c91bf32-4c1b-42a5-bc5a-05e2d1804a47--
+{"d":{"__metadata":{"id":"https://piasysdev.sharepoint.com/sites/modern/_api/sitepages/pages(2)/translations","uri":"https://piasysdev.sharepoint.com/sites/modern/_api/sitepages/pages(2)/translations","type":"SP.TranslationStatusCollection"},"UntranslatedLanguages":{"__metadata":{"type":"Collection(Edm.String)"},"results":["de-de","ga-ie","id-id","nb-no","ru-ru","zh-cn","zh-tw","hi-in","ms-my","sl-si","da-dk","eu-es","fi-fi","sk-sk","az-latn-az","bg-bg","gl-es","tr-tr","cy-gb","hr-hr","hu-hu","ko-kr","lt-lt","mk-mk","ar-sa","ja-jp","lv-lv","prs-af","pt-br","pt-pt","sr-latn-rs","th-th","bs-latn-ba","cs-cz","es-es","he-il","pl-pl","sr-cyrl-rs","sr-latn-cs","uk-ua","el-gr","et-ee","it-it","kk-kz","sv-se","vi-vn","ca-es","ro-ro","nl-nl","fr-fr"]},"Items":{"__metadata":{"type":"Collection(SP.TranslationStatus)"},"results":[]}}}
+--batchresponse_780800ff-5a44-480c-b9bc-53e9805153df--

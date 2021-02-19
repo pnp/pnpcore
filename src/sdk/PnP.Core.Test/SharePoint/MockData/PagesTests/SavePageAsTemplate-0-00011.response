@@ -1,4 +1,4 @@
---batchresponse_60b4c29c-7f33-484b-a635-c429776485ce
+--batchresponse_d67acdc4-a03d-4f00-b917-615ba7dbdf3d
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
@@ -7,14 +7,14 @@ CONTENT-TYPE: application/json; charset=utf-8
 
 { "Row" : 
 [{
-"ID": "986",
+"ID": "78",
 "PermMask": "0x7ffffffffffbffff",
 "FSObjType": "0",
 "HTML_x0020_File_x0020_Type": "",
-"UniqueId": "{C0B6D597-C3E4-4500-B2B4-8AC56E3786E3}",
+"UniqueId": "{48AD341E-4B79-4A73-B651-B87827EB0425}",
 "ProgId": "",
 "NoExecute": "0",
-"ContentTypeId": "0x01010800B3B2A1451E70B6458A757AC0CBA6DAEF",
+"ContentTypeId": "0x01010800FB74799233AF364397CCAD2384D3944F",
 "FileRef": "\u002fsites\u002fprov-1\u002fSitePages\u002fTemplates\u002fPNP_SDK_TEST_SavePageAsTemplate.aspx",
 "FileRef.urlencode": "%2Fsites%2Fprov%2D1%2FSitePages%2FTemplates%2FPNP%5FSDK%5FTEST%5FSavePageAsTemplate%2Easpx",
 "FileRef.urlencodeasurl": "\u002fsites\u002fprov-1\u002fSitePages\u002fTemplates\u002fPNP_SDK_TEST_SavePageAsTemplate.aspx",
@@ -63,8 +63,8 @@ CONTENT-TYPE: application/json; charset=utf-8
 "ItemChildCount": "0",
 "FolderChildCount": "0",
 "A2ODMountCount": "",
+"_ComplianceTag": "",
 "owshiddenversion": "1",
-"_SPTranslatedLanguages": "",
 "_SPSitePageFlags": "",
 "ContentVersion": "0",
 "DocConcurrencyNumber": "1",
@@ -82,4 +82,4 @@ CONTENT-TYPE: application/json; charset=utf-8
 ,"CurrentFolderSpItemUrl" : ""
 
 }
---batchresponse_60b4c29c-7f33-484b-a635-c429776485ce--
+--batchresponse_d67acdc4-a03d-4f00-b917-615ba7dbdf3d--

@@ -1,4 +1,4 @@
---batchresponse_8b6cdbc6-fd2f-4080-9b8c-0ba0cb1732e7
+--batchresponse_d221c899-7c5c-48a2-ab3b-07407d10d43a
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
@@ -6,4 +6,4 @@ HTTP/1.1 500 Internal Server Error
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
 {"error":{"code":"-2130575293, Microsoft.SharePoint.SPException","message":{"lang":"en-US","value":"The specified name is already in use.\n\nPlease try again with a new name."}}}
---batchresponse_8b6cdbc6-fd2f-4080-9b8c-0ba0cb1732e7--
+--batchresponse_d221c899-7c5c-48a2-ab3b-07407d10d43a--
