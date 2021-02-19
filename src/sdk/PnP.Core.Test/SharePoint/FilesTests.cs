@@ -1688,11 +1688,13 @@ namespace PnP.Core.Test.SharePoint
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
+                var fileName = $"test_added_{DateTime.Now.ToString("YYYYMMDDhhmmss")}.docx";
+
                 IFolder folder = await context.Web.Lists.GetByTitle("Documents").RootFolder.GetAsync();
-                IFile addedFile = await folder.Files.AddAsync("test_added.docx", System.IO.File.OpenRead($".{Path.DirectorySeparatorChar}TestAssets{Path.DirectorySeparatorChar}test.docx"));
+                IFile addedFile = await folder.Files.AddAsync(fileName, System.IO.File.OpenRead($".{Path.DirectorySeparatorChar}TestAssets{Path.DirectorySeparatorChar}test.docx"));
 
                 Assert.IsNotNull(addedFile);
-                Assert.AreEqual("test_added.docx", addedFile.Name);
+                Assert.AreEqual(fileName, addedFile.Name);
                 Assert.AreNotEqual(default, addedFile.UniqueId);
 
                 await addedFile.DeleteAsync();
