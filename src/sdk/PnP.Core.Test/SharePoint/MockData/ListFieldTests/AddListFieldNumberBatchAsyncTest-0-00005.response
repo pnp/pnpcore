@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 --batchresponse_babd80a6-f3d4-4594-9e91-cdac22883221
+=======
+--batchresponse_410e6d2d-d5ad-406b-892a-c9deac8768cb
+>>>>>>> 50db8650cd9597e1f27e8fbdab181d348053210e
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
@@ -6,4 +10,8 @@ HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
 
+<<<<<<< HEAD
 --batchresponse_babd80a6-f3d4-4594-9e91-cdac22883221--
+=======
+--batchresponse_410e6d2d-d5ad-406b-892a-c9deac8768cb--
+>>>>>>> 50db8650cd9597e1f27e8fbdab181d348053210e
