@@ -443,10 +443,6 @@ namespace PnP.Core.Model
             }
             else if (expression.Body is MethodCallExpression)
             {
-                // x PAOLO: Here we have a problem. This could be a single property
-                // where we want to QueryProperties or a collection, but in this code
-                // we always assume that it is a collection
-
                 if ((expression.Body as MethodCallExpression).Method.Name == nameof(DataModelLoadExtensions.QueryProperties))
                 {
                     fieldToLoad = ParseQueryProperties(entityInfo, expression, null);
@@ -458,9 +454,6 @@ namespace PnP.Core.Model
 
         private static string ParseQueryProperties(EntityInfo entityInfo, LambdaExpression expression, EntityFieldExpandInfo entityFieldExpandInfo)
         {
-            // x BERT: Here we need to slightly change the behavior
-            // in fact the target can be a collection or a single item
-
             var collectionPublicType = ((expression).Body as MethodCallExpression).Type.GenericTypeArguments[0];
             var fieldToLoad = ((expression.Body as MethodCallExpression).Arguments[0] as MemberExpression).Member.Name;
             var collectionEntityInfo = EntityManager.Instance.GetStaticClassInfo(collectionPublicType);
