@@ -1,4 +1,4 @@
---batchresponse_8ab79338-6c17-4e9b-b508-0599b232ed6f
+--batchresponse_2debfa50-5145-40c1-b54f-201276db4b9a
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
@@ -6,4 +6,4 @@ HTTP/1.1 500 Internal Server Error
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
 {"error":{"code":"-2147024713, Microsoft.SharePoint.SPException","message":{"lang":"en-US","value":"The Web site address \"/sites/prov-1/AddWebInBatchWithDefaults\" is already in use."}}}
---batchresponse_8ab79338-6c17-4e9b-b508-0599b232ed6f--
+--batchresponse_2debfa50-5145-40c1-b54f-201276db4b9a--
