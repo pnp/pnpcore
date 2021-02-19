@@ -46,7 +46,7 @@ namespace PnP.Core.Test.SharePoint
                     var result = await newList.GetListDataAsStreamAsync(new RenderListDataOptions() { ViewXml = "<View><ViewFields><FieldRef Name='Title' /><FieldRef Name='FileDirRef' /></ViewFields><RowLimit>1</RowLimit></View>", RenderOptions = RenderListDataOptionsFlags.ListData, FolderServerRelativeUrl = $"{newList.RootFolder.ServerRelativeUrl}/Test" });
 
 
-                    Assert.IsTrue(newList.Items.FirstOrDefault() != null);
+                    Assert.IsTrue(newList.Items.AsEnumerable().FirstOrDefault() != null);
 
                 }
                 await list.DeleteAsync();
@@ -301,14 +301,9 @@ namespace PnP.Core.Test.SharePoint
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 // Create a new list
-                var web = await context.Web.GetAsync(p => p.Lists);
-
-                int listCount = web.Lists.Count();
+                var myList = context.Web.Lists.FirstOrDefault(p => p.Title == listTitle);
 
                 #region Test Setup
-
-                var myList = web.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
-
                 if (!TestCommon.Instance.Mocking && myList != null)
                 {
                     // Cleanup the created list possibly from a previous run
@@ -317,7 +312,7 @@ namespace PnP.Core.Test.SharePoint
 
                 if (myList == null)
                 {
-                    myList = await web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
+                    myList = await context.Web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
                     // Enable versioning
                     myList.EnableVersioning = true;
                     await myList.UpdateAsync();
@@ -338,7 +333,7 @@ namespace PnP.Core.Test.SharePoint
                 #endregion
 
                 // get first item and do a system update
-                var first = myList.Items.First();
+                var first = myList.Items.AsEnumerable().First();
 
                 first.Title = "blabla";
 
@@ -350,11 +345,9 @@ namespace PnP.Core.Test.SharePoint
             {
                 context2.BatchClient.EnsureBatch();
 
-                var web2 = await context2.Web.GetAsync(p => p.Lists);
-                var myList2 = web2.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
-                await myList2.GetAsync(p => p.Items);
-
-                var first2 = myList2.Items.First();
+                var myList2 = context2.Web.Lists.FirstOrDefault(p => p.Title == listTitle);
+                await myList2.LoadAsync(p => p.Items);
+                var first2 = myList2.Items.AsEnumerable().First();
 
                 // verify the list item was updated and that we're still at version 1.0
                 Assert.IsTrue(first2.Title == "blabla");
@@ -367,11 +360,9 @@ namespace PnP.Core.Test.SharePoint
 
             using (var context3 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))
             {
-                var web3 = await context3.Web.GetAsync(p => p.Lists);
-                var myList3 = web3.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
-                await myList3.GetAsync(p => p.Items);
-
-                var first3 = myList3.Items.First();
+                var myList3 = context3.Web.Lists.FirstOrDefault(p => p.Title == listTitle);
+                await myList3.LoadAsync(p => p.Items);
+                var first3 = myList3.Items.AsEnumerable().First();
 
                 // verify the list item was updated and that we're still at version 2.0
                 Assert.IsTrue(first3.Title == "blabla2");
@@ -385,11 +376,9 @@ namespace PnP.Core.Test.SharePoint
 
             using (var context4 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 3))
             {
-                var web4 = await context4.Web.GetAsync(p => p.Lists);
-                var myList4 = web4.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
-                await myList4.GetAsync(p => p.Items);
-
-                var first4 = myList4.Items.First();
+                var myList4 = context4.Web.Lists.FirstOrDefault(p => p.Title == listTitle); 
+                await myList4.LoadAsync(p => p.Items);
+                var first4 = myList4.Items.AsEnumerable().First();
 
                 // verify the list item was updated and that we're still at version 2.0
                 Assert.IsTrue(first4.Title == "blabla3");
@@ -404,11 +393,9 @@ namespace PnP.Core.Test.SharePoint
 
             using (var context5 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 4))
             {
-                var web5 = await context5.Web.GetAsync(p => p.Lists);
-                var myList5 = web5.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
-                myList5.Get(p => p.Items);
-
-                var first5 = myList5.Items.First();
+                var myList5 = context5.Web.Lists.FirstOrDefault(p => p.Title == listTitle); 
+                myList5.Load(p => p.Items);
+                var first5 = myList5.Items.AsEnumerable().First();
 
                 // verify the list item was updated and that we're still at version 2.0
                 Assert.IsTrue(first5.Title == "blabla4");
@@ -423,11 +410,9 @@ namespace PnP.Core.Test.SharePoint
 
             using (var context6 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 5))
             {
-                var web6 = await context6.Web.GetAsync(p => p.Lists);
-                var myList6 = web6.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
-                myList6.Get(p => p.Items);
-
-                var first6 = myList6.Items.First();
+                var myList6 = context6.Web.Lists.FirstOrDefault(p => p.Title == listTitle); 
+                myList6.Load(p => p.Items);
+                var first6 = myList6.Items.AsEnumerable().First();
 
                 // verify the list item was updated and that we're still at version 2.0
                 Assert.IsTrue(first6.Title == "blabla5");
@@ -437,7 +422,7 @@ namespace PnP.Core.Test.SharePoint
             using (var contextFinal = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 6))
             {
                 var web = await contextFinal.Web.GetAsync(p => p.Lists);
-                var myList = web.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
+                var myList = web.Lists.AsEnumerable().FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
 
                 // Cleanup the created list
                 await myList.DeleteAsync();
@@ -576,12 +561,7 @@ namespace PnP.Core.Test.SharePoint
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 // Create a new list
-                var web = await context.Web.GetAsync(p => p.Lists.QueryProperties(p => p.Title, p => p.Items));
-
-                int listCount = web.Lists.Count();
-
-                var myList = web.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
-
+                var myList = context.Web.Lists.FirstOrDefault(p => p.Title == listTitle);
                 if (TestCommon.Instance.Mocking && myList != null)
                 {
                     Assert.Inconclusive("Test data set should be setup to not have the list available.");
@@ -589,7 +569,7 @@ namespace PnP.Core.Test.SharePoint
 
                 if (myList == null)
                 {
-                    myList = await web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
+                    myList = await context.Web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
                     // Enable versioning
                     myList.EnableVersioning = true;
                     await myList.UpdateAsync();
@@ -608,7 +588,7 @@ namespace PnP.Core.Test.SharePoint
                 await context.ExecuteAsync();
 
                 // get first item and do a system update
-                var first = myList.Items.First();
+                var first = myList.Items.AsEnumerable().First();
 
                 first.Title = "blabla";
 
@@ -619,11 +599,10 @@ namespace PnP.Core.Test.SharePoint
             }
             using (var context2 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
             {
-                var web2 = await context2.Web.GetAsync(p => p.Lists.QueryProperties(p => p.Title, p => p.Items));
-                var myList2 = web2.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
-                await myList2.GetAsync(p => p.Items);
+                var myList2 = context2.Web.Lists.FirstOrDefault(p => p.Title == listTitle);
+                await myList2.LoadAsync(p => p.Items);
 
-                var first2 = myList2.Items.First();
+                var first2 = myList2.Items.AsEnumerable().First();
 
                 // verify the list item was updated and that we're still at version 1.0
                 Assert.IsTrue(first2.Title == "blabla");
@@ -631,9 +610,8 @@ namespace PnP.Core.Test.SharePoint
             }
             using (var contextFinal = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))
             {
-                var web = await contextFinal.Web.GetAsync(p => p.Lists.QueryProperties(p => p.Title, p => p.Items));
-                var myList = web.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
-
+                var myList = contextFinal.Web.Lists.FirstOrDefault(p => p.Title == listTitle);
+                
                 // Cleanup the created list
                 await myList.DeleteAsync();
             }
@@ -648,14 +626,10 @@ namespace PnP.Core.Test.SharePoint
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                // Create a new list
-                var web = await context.Web.GetAsync(p => p.Lists.QueryProperties(p => p.Title, p => p.Items));
-
-                int listCount = web.Lists.Count();
-
                 #region Test Setup
 
-                var myList = web.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
+                // Create a new list
+                var myList = await context.Web.Lists.FirstOrDefaultAsync(p => p.Title == listTitle);
 
                 if (!TestCommon.Instance.Mocking && myList != null)
                 {
@@ -664,7 +638,7 @@ namespace PnP.Core.Test.SharePoint
 
                 if (myList == null)
                 {
-                    myList = await web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
+                    myList = await context.Web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
                     // Enable versioning
                     myList.EnableVersioning = true;
                     await myList.UpdateAsync();
@@ -685,7 +659,7 @@ namespace PnP.Core.Test.SharePoint
                 #endregion
 
                 // get first item and do a system update
-                var first = myList.Items.First();
+                var first = myList.Items.AsEnumerable().First();
 
                 first.Title = "blabla";
 
@@ -697,11 +671,10 @@ namespace PnP.Core.Test.SharePoint
 
             using (var context2 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
             {
-                var web2 = await context2.Web.GetAsync(p => p.Lists.QueryProperties(p => p.Title, p => p.Items));
-                var myList2 = web2.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
-                await myList2.GetAsync(p => p.Items);
+                var myList2 = await context2.Web.Lists.FirstOrDefaultAsync(p => p.Title == listTitle);
+                await myList2.LoadAsync(p => p.Items);
 
-                var first2 = myList2.Items.First();
+                var first2 = myList2.Items.AsEnumerable().First();
 
                 // verify the list item was updated and that we're still at version 1.0
                 Assert.IsTrue(first2.Title == "blabla");
@@ -713,11 +686,10 @@ namespace PnP.Core.Test.SharePoint
 
             using (var context3 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))
             {
-                var web3 = await context3.Web.GetAsync(p => p.Lists.QueryProperties(p => p.Title, p => p.Items));
-                var myList3 = web3.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
-                await myList3.GetAsync(p => p.Items);
+                var myList3 = await context3.Web.Lists.FirstOrDefaultAsync(p => p.Title == listTitle);
+                await myList3.LoadAsync(p => p.Items);
 
-                var first3 = myList3.Items.First();
+                var first3 = myList3.Items.AsEnumerable().First();
 
                 // verify the list item was updated and that we're still at version 1.0
                 Assert.IsTrue(first3.Title == "blabla2");
@@ -731,11 +703,10 @@ namespace PnP.Core.Test.SharePoint
 
             using (var context4 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 3))
             {
-                var web4 = await context4.Web.GetAsync(p => p.Lists.QueryProperties(p => p.Title, p => p.Items));
-                var myList4 = web4.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
-                await myList4.GetAsync(p => p.Items);
+                var myList4 = await context4.Web.Lists.FirstOrDefaultAsync(p => p.Title == listTitle);
+                await myList4.LoadAsync(p => p.Items);
 
-                var first4 = myList4.Items.First();
+                var first4 = myList4.Items.AsEnumerable().First();
 
                 // verify the list item was updated and that we're still at version 1.0
                 Assert.IsTrue(first4.Title == "blabla3");
@@ -748,11 +719,10 @@ namespace PnP.Core.Test.SharePoint
 
             using (var context5 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 4))
             {
-                var web5 = await context5.Web.GetAsync(p => p.Lists.QueryProperties(p => p.Title, p => p.Items));
-                var myList5 = web5.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
-                await myList5.GetAsync(p => p.Items);
+                var myList5 = await context5.Web.Lists.FirstOrDefaultAsync(p => p.Title == listTitle);
+                await myList5.LoadAsync(p => p.Items);
 
-                var first5 = myList5.Items.First();
+                var first5 = myList5.Items.AsEnumerable().First();
 
                 // verify the list item was updated and that we're still at version 1.0
                 Assert.IsTrue(first5.Title == "blabla4");
@@ -761,8 +731,7 @@ namespace PnP.Core.Test.SharePoint
 
             using (var contextFinal = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 5))
             {
-                var web = await contextFinal.Web.GetAsync(p => p.Lists.QueryProperties(p => p.Title, p => p.Items));
-                var myList = web.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
+                var myList = await contextFinal.Web.Lists.FirstOrDefaultAsync(p => p.Title == listTitle);
 
                 // Cleanup the created list
                 await myList.DeleteAsync();
@@ -777,14 +746,9 @@ namespace PnP.Core.Test.SharePoint
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                // Create a new list
-                var web = await context.Web.GetAsync(p => p.Lists.QueryProperties(p => p.Title, p => p.Items));
-
-                int listCount = web.Lists.Length;
-
                 #region Test Setup
 
-                var myList = web.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
+                var myList = await context.Web.Lists.FirstOrDefaultAsync(p => p.Title == listTitle);
 
                 if (!TestCommon.Instance.Mocking && myList != null)
                 {
@@ -793,7 +757,7 @@ namespace PnP.Core.Test.SharePoint
 
                 if (myList == null)
                 {
-                    myList = await web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
+                    myList = await context.Web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
                     // Enable versioning
                     myList.EnableVersioning = true;
                     await myList.UpdateAsync();
@@ -814,7 +778,7 @@ namespace PnP.Core.Test.SharePoint
                 #endregion
 
                 // get first item and do a system update
-                var first = myList.Items.First();
+                var first = myList.Items.AsEnumerable().First();
 
                 first.Title = "blabla";
 
@@ -826,11 +790,10 @@ namespace PnP.Core.Test.SharePoint
 
             using (var context2 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
             {
-                var web2 = await context2.Web.GetAsync(p => p.Lists.QueryProperties(p => p.Title, p => p.Items));
-                var myList2 = web2.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
-                await myList2.GetAsync(p => p.Items);
+                var myList2 = await context2.Web.Lists.FirstOrDefaultAsync(p => p.Title == listTitle);
+                await myList2.LoadAsync(p => p.Items);
 
-                var first2 = myList2.Items.First();
+                var first2 = myList2.Items.AsEnumerable().First();
 
                 // verify the list item was updated and that we're still at version 1.0
                 Assert.IsTrue(first2.Title == "blabla");
@@ -841,11 +804,10 @@ namespace PnP.Core.Test.SharePoint
 
             using (var context3 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))
             {
-                var web3 = await context3.Web.GetAsync(p => p.Lists.QueryProperties(p => p.Title, p => p.Items));
-                var myList3 = web3.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
-                await myList3.GetAsync(p => p.Items);
+                var myList3 = await context3.Web.Lists.FirstOrDefaultAsync(p => p.Title == listTitle);
+                await myList3.LoadAsync(p => p.Items);
 
-                var first3 = myList3.Items.First();
+                var first3 = myList3.Items.AsEnumerable().First();
 
                 // verify the list item was updated and that we're still at version 1.0
                 Assert.IsTrue(first3.Title == "blabla");
@@ -857,11 +819,10 @@ namespace PnP.Core.Test.SharePoint
 
             using (var context4 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 3))
             {
-                var web4 = await context4.Web.GetAsync(p => p.Lists.QueryProperties(p => p.Title, p => p.Items));
-                var myList4 = web4.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
-                await myList4.GetAsync(p => p.Items);
+                var myList4 = await context4.Web.Lists.FirstOrDefaultAsync(p => p.Title == listTitle);
+                await myList4.LoadAsync(p => p.Items);
 
-                var first4 = myList4.Items.First();
+                var first4 = myList4.Items.AsEnumerable().First();
 
                 // verify the list item was updated and that we're still at version 1.0
                 Assert.IsTrue(first4.Title == "blabla");
@@ -871,8 +832,7 @@ namespace PnP.Core.Test.SharePoint
             using (var contextFinal = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 4))
             {
                 // Create a new list
-                var web = await contextFinal.Web.GetAsync(p => p.Lists.QueryProperties(p => p.Title, p => p.Items));
-                var myList = web.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
+                var myList = await contextFinal.Web.Lists.FirstOrDefaultAsync(p => p.Title == listTitle);
 
                 // Cleanup the created list
                 await myList.DeleteAsync();
@@ -1470,7 +1430,7 @@ namespace PnP.Core.Test.SharePoint
                 listDataOptions.SetViewXmlFromFields(fieldsToLoad);
 
                 await myList.GetListDataAsStreamAsync(listDataOptions).ConfigureAwait(false);
-                var addedItem = myList.Items.First();
+                var addedItem = myList.Items.AsEnumerable().First();
 
                 AssertRegularListItemProperties(fieldData, addedItem);
 
@@ -1483,7 +1443,7 @@ namespace PnP.Core.Test.SharePoint
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, id, testName))
             {
                 var myList = context.Web.Lists.GetByTitle(listTitle, p => p.Title, p => p.Items, p => p.Fields.QueryProperties(p => p.InternalName, p => p.FieldTypeKind, p => p.TypeAsString, p => p.Title));
-                var addedItem = myList.Items.FirstOrDefault(p => p.Title == "Item1");
+                var addedItem = myList.Items.AsEnumerable().FirstOrDefault(p => p.Title == "Item1");
 
                 AssertRegularListItemProperties(fieldData, addedItem);
 
@@ -2483,7 +2443,7 @@ namespace PnP.Core.Test.SharePoint
                 listDataOptions.SetViewXmlFromFields(fieldsToLoad);
 
                 await myList.GetListDataAsStreamAsync(listDataOptions).ConfigureAwait(false);
-                var addedItem = myList.Items.First();
+                var addedItem = myList.Items.AsEnumerable().First();
 
                 AssertListItemProperties(fieldData, addedItem);
 
@@ -2496,7 +2456,7 @@ namespace PnP.Core.Test.SharePoint
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, id, testName))
             {
                 var myList = context.Web.Lists.GetByTitle(listTitle, p => p.Title, p => p.Items, p => p.Fields.QueryProperties(p => p.InternalName, p => p.FieldTypeKind, p => p.TypeAsString, p => p.Title));
-                var addedItem = myList.Items.FirstOrDefault(p => p.Title == "Item1");
+                var addedItem = myList.Items.AsEnumerable().FirstOrDefault(p => p.Title == "Item1");
 
                 AssertListItemProperties(fieldData, addedItem);
 

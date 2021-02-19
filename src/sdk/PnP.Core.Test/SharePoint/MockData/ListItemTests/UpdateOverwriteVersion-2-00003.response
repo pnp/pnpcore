@@ -1,9 +1,1 @@
---batchresponse_194c6def-bcaf-4bb1-aedb-8c5da21a20fc
-Content-Type: application/http
-Content-Transfer-Encoding: binary
-
-HTTP/1.1 200 OK
-CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
-
-
---batchresponse_194c6def-bcaf-4bb1-aedb-8c5da21a20fc--
+{"responses": [{"id": "1","status":200,"headers" : {"Cache-Control":"no-cache","OData-Version":"4.0","Content-Type":"application/json;odata.metadata=minimal;odata.streaming=true;IEEE754Compatible=false;charset=utf-8"},"body":{"@odata.context":"https://graph.microsoft.com/v1.0/$metadata#sites('bertonline.sharepoint.com%2Cb56adf79-ff6a-4964-a63a-ff1fa23be9f8%2C8c8e101c-1b0d-4253-85e7-c30039bf46e2')/lists","value":[{"@odata.etag":"\"6b07bda6-6ffb-41c0-8ecf-e312119737fc,2\"","createdDateTime":"2021-02-19T08:49:10Z","description":"","eTag":"\"6b07bda6-6ffb-41c0-8ecf-e312119737fc,2\"","id":"6b07bda6-6ffb-41c0-8ecf-e312119737fc","lastModifiedDateTime":"2021-02-19T08:49:11Z","name":"UpdateOverwriteVersion","webUrl":"https://bertonline.sharepoint.com/sites/prov-1/Lists/UpdateOverwriteVersion","displayName":"UpdateOverwriteVersion","createdBy":{"user":{"email":"bert.jansen@bertonline.onmicrosoft.com","id":"33aca310-a489-4121-b853-663d0327fe08","displayName":"Bert Jansen (Cloud)"}},"lastModifiedBy":{"user":{"email":"bert.jansen@bertonline.onmicrosoft.com","id":"33aca310-a489-4121-b853-663d0327fe08","displayName":"Bert Jansen (Cloud)"}},"parentReference":{"siteId":"bertonline.sharepoint.com,b56adf79-ff6a-4964-a63a-ff1fa23be9f8,8c8e101c-1b0d-4253-85e7-c30039bf46e2"},"list":{"contentTypesEnabled":false,"hidden":false,"template":"genericList"}}]}}]}
