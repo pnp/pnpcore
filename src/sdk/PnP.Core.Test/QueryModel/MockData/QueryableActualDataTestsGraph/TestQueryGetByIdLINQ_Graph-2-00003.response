@@ -1,1 +1,9 @@
-{"responses": [{"id": "1","status":200,"headers" : {"Cache-Control":"no-cache","OData-Version":"4.0","Content-Type":"application/json;odata.metadata=minimal;odata.streaming=true;IEEE754Compatible=false;charset=utf-8"},"body":{"@odata.context":"https://graph.microsoft.com/v1.0/$metadata#sites('piasysdev.sharepoint.com%2C409403da-217e-4c1b-b400-6dd624fe15d4%2C5f51ff75-e0e1-4063-a78d-7d5fef4be508')/lists","value":[{"@odata.etag":"\"80016704-3bb9-4227-9828-787af29b594d,2\"","createdDateTime":"2021-02-17T16:56:52Z","description":"","eTag":"\"80016704-3bb9-4227-9828-787af29b594d,2\"","id":"80016704-3bb9-4227-9828-787af29b594d","lastModifiedDateTime":"2021-02-17T16:56:52Z","name":"PNP_SDK_TEST_TestQueryGetByIdLINQ_Graph","webUrl":"https://piasysdev.sharepoint.com/sites/prov-1/Lists/PNP_SDK_TEST_TestQueryGetByIdLINQ_Graph","displayName":"PNP_SDK_TEST_TestQueryGetByIdLINQ_Graph","createdBy":{"user":{"email":"paolo@PiaSysDev.onmicrosoft.com","id":"bea7a848-0459-4bee-9034-5513ee7f66e0","displayName":"Paolo Pialorsi"}},"lastModifiedBy":{"user":{"email":"paolo@PiaSysDev.onmicrosoft.com","id":"bea7a848-0459-4bee-9034-5513ee7f66e0","displayName":"Paolo Pialorsi"}},"parentReference":{"siteId":"piasysdev.sharepoint.com,409403da-217e-4c1b-b400-6dd624fe15d4,5f51ff75-e0e1-4063-a78d-7d5fef4be508"},"list":{"contentTypesEnabled":false,"hidden":false,"template":"genericList"}}]}}]}
+--batchresponse_27c4e9dd-e456-424e-bd0c-27a511fbe010
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+HTTP/1.1 200 OK
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+
+
+--batchresponse_27c4e9dd-e456-424e-bd0c-27a511fbe010--

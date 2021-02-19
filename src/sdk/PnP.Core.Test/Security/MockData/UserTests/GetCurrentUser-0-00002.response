@@ -1,4 +1,4 @@
---batchresponse_34651bfa-41a4-4518-ada2-e4f757561c8e
+--batchresponse_0dc9b9c2-8cec-46a8-81f6-0e84f1422cfc
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
@@ -6,4 +6,4 @@ HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
 {"d":{"__metadata":{"id":"https://piasysdev.sharepoint.com/sites/prov-1/_api/Web","uri":"https://piasysdev.sharepoint.com/sites/prov-1/_api/Web","type":"SP.Web"},"CurrentUser":{"__metadata":{"id":"https://piasysdev.sharepoint.com/sites/prov-1/_api/Web/CurrentUser","uri":"https://piasysdev.sharepoint.com/sites/prov-1/_api/Web/CurrentUser","type":"SP.User"},"Alerts":{"__deferred":{"uri":"https://piasysdev.sharepoint.com/sites/prov-1/_api/Web/CurrentUser/Alerts"}},"Groups":{"__deferred":{"uri":"https://piasysdev.sharepoint.com/sites/prov-1/_api/Web/CurrentUser/Groups"}},"Id":6,"IsHiddenInUI":false,"LoginName":"i:0#.f|membership|paolo@piasysdev.onmicrosoft.com","Title":"Paolo Pialorsi","PrincipalType":1,"Email":"paolo@PiaSysDev.onmicrosoft.com","Expiration":"","IsEmailAuthenticationGuestUser":false,"IsShareByEmailGuestUser":false,"IsSiteAdmin":true,"UserId":{"__metadata":{"type":"SP.UserIdInfo"},"NameId":"1003bffd860fad69","NameIdIssuer":"urn:federation:microsoftonline"},"UserPrincipalName":"paolo@piasysdev.onmicrosoft.com"},"Id":"5f51ff75-e0e1-4063-a78d-7d5fef4be508"}}
---batchresponse_34651bfa-41a4-4518-ada2-e4f757561c8e--
+--batchresponse_0dc9b9c2-8cec-46a8-81f6-0e84f1422cfc--

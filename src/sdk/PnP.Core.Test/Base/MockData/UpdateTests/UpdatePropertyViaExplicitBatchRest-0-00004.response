@@ -1,10 +1,1 @@
---batchresponse_6d32a37e-6cc1-4e46-ac85-fb36bb07795a
-Content-Type: application/http
-Content-Transfer-Encoding: binary
-
-HTTP/1.1 204 No Content
-CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
-ETAG: "504"
-
-
---batchresponse_6d32a37e-6cc1-4e46-ac85-fb36bb07795a--
+{"responses": [{"id": "1","status":200,"headers" : {"Cache-Control":"no-cache","OData-Version":"4.0","Content-Type":"application/json;odata.metadata=minimal;odata.streaming=true;IEEE754Compatible=false;charset=utf-8","ETag":"\"f623a809-eb28-404b-b4d3-00db80239ee9,1062\""},"body":{"@odata.context":"https://graph.microsoft.com/v1.0/$metadata#sites('piasysdev.sharepoint.com%2C409403da-217e-4c1b-b400-6dd624fe15d4%2C5f51ff75-e0e1-4063-a78d-7d5fef4be508')/lists(id,description)/$entity","@odata.etag":"\"f623a809-eb28-404b-b4d3-00db80239ee9,1062\"","description":"Updated on UTC 2/19/2021 9:31:25 AM","id":"f623a809-eb28-404b-b4d3-00db80239ee9"}}]}

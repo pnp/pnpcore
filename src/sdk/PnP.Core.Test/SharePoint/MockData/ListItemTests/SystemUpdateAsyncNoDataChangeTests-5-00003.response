@@ -1,1 +1,9 @@
-{"responses": [{"id": "1","status":200,"headers" : {"Cache-Control":"no-cache","OData-Version":"4.0","Content-Type":"application/json;odata.metadata=minimal;odata.streaming=true;IEEE754Compatible=false;charset=utf-8"},"body":{"@odata.context":"https://graph.microsoft.com/v1.0/$metadata#sites('bertonline.sharepoint.com%2Cb56adf79-ff6a-4964-a63a-ff1fa23be9f8%2C8c8e101c-1b0d-4253-85e7-c30039bf46e2')/lists","value":[{"@odata.etag":"\"129ca989-ac43-4096-bc29-5ecedae9735b,2\"","createdDateTime":"2021-02-19T08:40:17Z","description":"","eTag":"\"129ca989-ac43-4096-bc29-5ecedae9735b,2\"","id":"129ca989-ac43-4096-bc29-5ecedae9735b","lastModifiedDateTime":"2021-02-19T08:40:19Z","name":"SystemUpdateAsyncNoDataChangeTests","webUrl":"https://bertonline.sharepoint.com/sites/prov-1/Lists/SystemUpdateAsyncNoDataChangeTests","displayName":"SystemUpdateAsyncNoDataChangeTests","createdBy":{"user":{"email":"bert.jansen@bertonline.onmicrosoft.com","id":"33aca310-a489-4121-b853-663d0327fe08","displayName":"Bert Jansen (Cloud)"}},"lastModifiedBy":{"user":{"email":"bert.jansen@bertonline.onmicrosoft.com","id":"33aca310-a489-4121-b853-663d0327fe08","displayName":"Bert Jansen (Cloud)"}},"parentReference":{"siteId":"bertonline.sharepoint.com,b56adf79-ff6a-4964-a63a-ff1fa23be9f8,8c8e101c-1b0d-4253-85e7-c30039bf46e2"},"list":{"contentTypesEnabled":false,"hidden":false,"template":"genericList"}}]}}]}
+--batchresponse_6681711c-f172-4468-8026-95adcff4aef4
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+HTTP/1.1 200 OK
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+
+
+--batchresponse_6681711c-f172-4468-8026-95adcff4aef4--

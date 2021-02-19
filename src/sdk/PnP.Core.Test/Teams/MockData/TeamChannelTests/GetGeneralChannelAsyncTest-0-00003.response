@@ -1,11 +1,1 @@
-{"responses": [{"id": "1","status":400,"headers" : {"Content-Type":"application/json"},"body":{
-  "error": {
-    "code": "BadRequest",
-    "message": "",
-    "innerError": {
-      "date": "2021-02-12T15:56:46",
-      "request-id": "a9947043-a038-488a-aa2c-8478bce8c67d",
-      "client-request-id": "a9947043-a038-488a-aa2c-8478bce8c67d"
-    }
-  }
-}}]}
+{"responses": [{"id": "1","status":200,"headers" : {"OData-Version":"4.0","Content-Type":"application/json;odata.metadata=minimal;odata.streaming=true;IEEE754Compatible=false;charset=utf-8"},"body":{"@odata.context":"https://graph.microsoft.com/v1.0/$metadata#teams('a7ea7e26-5a76-4b72-ad99-1465b74857c8')/channels","@odata.count":103,"value":[{"id":"19:0673013ad4ab4f41ba49af95d6da3461@thread.tacv2","displayName":"General","description":"prov-1","isFavoriteByDefault":null,"email":"","webUrl":"https://teams.microsoft.com/l/channel/19%3a0673013ad4ab4f41ba49af95d6da3461%40thread.tacv2/General?groupId=a7ea7e26-5a76-4b72-ad99-1465b74857c8&tenantId=6c94075a-da0a-4c6a-8411-badf652e8b53","membershipType":"standard"}]}}]}

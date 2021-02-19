@@ -1,8 +1,4 @@
-<<<<<<< HEAD
---batchresponse_e91bf475-6904-43ee-8d45-696fbe7fac93
-=======
---batchresponse_1d698182-0683-4d24-badf-b799ae9d58b0
->>>>>>> dev
+--batchresponse_ffc314d7-6e6a-42c6-a78a-bac326b4a52e
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
@@ -11,8 +7,4 @@ CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 ETAG: "2"
 
 
-<<<<<<< HEAD
---batchresponse_e91bf475-6904-43ee-8d45-696fbe7fac93--
-=======
---batchresponse_1d698182-0683-4d24-badf-b799ae9d58b0--
->>>>>>> dev
+--batchresponse_ffc314d7-6e6a-42c6-a78a-bac326b4a52e--

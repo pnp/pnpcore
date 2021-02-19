@@ -1,9 +1,9 @@
---batchresponse_42703b3f-815e-4ee1-9b09-9508229d8e15
+--batchresponse_a7a78b7c-699b-40d1-bce6-17a907f85eea
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-
---batchresponse_42703b3f-815e-4ee1-9b09-9508229d8e15--
+{"d":{"__metadata":{"id":"https://piasysdev.sharepoint.com/sites/prov-1/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/prov-1/SitePages/sub1')","uri":"https://piasysdev.sharepoint.com/sites/prov-1/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/prov-1/SitePages/sub1')","type":"SP.Folder"},"Files":{"__deferred":{"uri":"https://piasysdev.sharepoint.com/sites/prov-1/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/prov-1/SitePages/sub1')/Files"}},"ListItemAllFields":{"__deferred":{"uri":"https://piasysdev.sharepoint.com/sites/prov-1/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/prov-1/SitePages/sub1')/ListItemAllFields"}},"ParentFolder":{"__deferred":{"uri":"https://piasysdev.sharepoint.com/sites/prov-1/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/prov-1/SitePages/sub1')/ParentFolder"}},"Properties":{"__deferred":{"uri":"https://piasysdev.sharepoint.com/sites/prov-1/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/prov-1/SitePages/sub1')/Properties"}},"StorageMetrics":{"__deferred":{"uri":"https://piasysdev.sharepoint.com/sites/prov-1/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/prov-1/SitePages/sub1')/StorageMetrics"}},"Folders":{"__deferred":{"uri":"https://piasysdev.sharepoint.com/sites/prov-1/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/prov-1/SitePages/sub1')/Folders"}},"Exists":true,"IsWOPIEnabled":false,"ItemCount":0,"Name":"sub1","ProgID":null,"ServerRelativeUrl":"/sites/prov-1/SitePages/sub1","TimeCreated":"2021-02-19T09:36:18Z","TimeLastModified":"2021-02-19T09:36:18Z","UniqueId":"548ba242-3404-498e-8428-84227c23954c","WelcomePage":""}}
+--batchresponse_a7a78b7c-699b-40d1-bce6-17a907f85eea--

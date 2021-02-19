@@ -1,18 +1,9 @@
-<<<<<<< HEAD
---batchresponse_7e02b9b7-1590-4b95-8439-f8864f2076c1
-=======
---batchresponse_b323177f-4a4d-4323-9c97-67b76c204b21
->>>>>>> dev
+--batchresponse_f942329c-55bb-4160-9737-8ab7e7ff1aa7
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-<<<<<<< HEAD
-{"d":{"AddValidateUpdateItemUsingPath":{"__metadata":{"type":"Collection(SP.ListItemFormUpdateValue)"},"results":[{"ErrorCode":0,"ErrorMessage":null,"FieldName":"Title","FieldValue":"Test","HasException":false,"ItemId":0},{"ErrorCode":0,"ErrorMessage":null,"FieldName":"FileLeafRef","FieldValue":"Test","HasException":false,"ItemId":0},{"ErrorCode":0,"ErrorMessage":null,"FieldName":"ContentTypeId","FieldValue":"0x0120","HasException":false,"ItemId":0},{"ErrorCode":0,"ErrorMessage":null,"FieldName":"Id","FieldValue":"1","HasException":false,"ItemId":0}]}}}
---batchresponse_7e02b9b7-1590-4b95-8439-f8864f2076c1--
-=======
 {"d":{"AddValidateUpdateItemUsingPath":{"__metadata":{"type":"Collection(SP.ListItemFormUpdateValue)"},"results":[{"ErrorCode":0,"ErrorMessage":null,"FieldName":"Title","FieldValue":"root","HasException":false,"ItemId":0},{"ErrorCode":0,"ErrorMessage":null,"FieldName":"Id","FieldValue":"1","HasException":false,"ItemId":0}]}}}
---batchresponse_b323177f-4a4d-4323-9c97-67b76c204b21--
->>>>>>> dev
+--batchresponse_f942329c-55bb-4160-9737-8ab7e7ff1aa7--

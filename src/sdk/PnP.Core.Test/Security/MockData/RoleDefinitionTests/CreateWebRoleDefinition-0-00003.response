@@ -1,10 +1,10 @@
---batchresponse_071c211a-fa70-49c6-a837-ae337aea440e
+--batchresponse_46d6837d-ab3c-48cb-a66b-77b3749a88ca
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 201 Created
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
-LOCATION: https://piasysdev.sharepoint.com/sites/prov-1/_api/Web/RoleDefinitions(1073741924)
+LOCATION: https://piasysdev.sharepoint.com/sites/prov-1/_api/Web/RoleDefinitions(1073741958)
 
-{"d":{"__metadata":{"id":"https://piasysdev.sharepoint.com/sites/prov-1/_api/Web/RoleDefinitions(1073741924)","uri":"https://piasysdev.sharepoint.com/sites/prov-1/_api/Web/RoleDefinitions(1073741924)","type":"SP.RoleDefinition"},"BasePermissions":{"__metadata":{"type":"SP.BasePermissions"},"High":"0","Low":"262144"},"Description":"","Hidden":false,"Id":1073741924,"Name":"Test RoleDef 2","Order":0,"RoleTypeKind":0}}
---batchresponse_071c211a-fa70-49c6-a837-ae337aea440e--
+{"d":{"__metadata":{"id":"https://piasysdev.sharepoint.com/sites/prov-1/_api/Web/RoleDefinitions(1073741958)","uri":"https://piasysdev.sharepoint.com/sites/prov-1/_api/Web/RoleDefinitions(1073741958)","type":"SP.RoleDefinition"},"BasePermissions":{"__metadata":{"type":"SP.BasePermissions"},"High":"0","Low":"262144"},"Description":"","Hidden":false,"Id":1073741958,"Name":"Test RoleDef 2","Order":0,"RoleTypeKind":0}}
+--batchresponse_46d6837d-ab3c-48cb-a66b-77b3749a88ca--

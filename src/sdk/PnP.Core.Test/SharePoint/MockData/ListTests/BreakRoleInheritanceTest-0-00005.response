@@ -1,4 +1,4 @@
---batchresponse_004d2263-c6aa-4674-8341-18bf617ce27c
+--batchresponse_7c66ce3e-e54a-4d97-bb14-fdbe4959dc06
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
@@ -6,5 +6,5 @@ HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 ETAG: "1"
 
-{"d":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'da63ce49-d635-4a81-806c-55f50b14c694')","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'da63ce49-d635-4a81-806c-55f50b14c694')","etag":"\"1\"","type":"SP.List"},"HasUniqueRoleAssignments":true,"Id":"da63ce49-d635-4a81-806c-55f50b14c694"}}
---batchresponse_004d2263-c6aa-4674-8341-18bf617ce27c--
+{"d":{"__metadata":{"id":"https://piasysdev.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'6ecd152a-f21e-4208-b842-3ae4428feb86')","uri":"https://piasysdev.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'6ecd152a-f21e-4208-b842-3ae4428feb86')","etag":"\"1\"","type":"SP.List"},"HasUniqueRoleAssignments":true,"Id":"6ecd152a-f21e-4208-b842-3ae4428feb86"}}
+--batchresponse_7c66ce3e-e54a-4d97-bb14-fdbe4959dc06--

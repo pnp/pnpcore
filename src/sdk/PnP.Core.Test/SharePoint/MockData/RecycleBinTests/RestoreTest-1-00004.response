@@ -1,9 +1,9 @@
---batchresponse_b07e93a3-91bb-42eb-9ca4-e9d4dfbc32ab
+--batchresponse_9360ffd8-e07f-4a16-bc70-c07aa6a783c9
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{"d":{"Restore":null}}
---batchresponse_b07e93a3-91bb-42eb-9ca4-e9d4dfbc32ab--
+{"d":{"__metadata":{"id":"https://piasysdev.sharepoint.com/sites/prov-1/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/prov-1/Shared Documents')","uri":"https://piasysdev.sharepoint.com/sites/prov-1/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/prov-1/Shared%20Documents')","type":"SP.Folder"},"Files":{"__deferred":{"uri":"https://piasysdev.sharepoint.com/sites/prov-1/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/prov-1/Shared%20Documents')/Files"}},"ListItemAllFields":{"__deferred":{"uri":"https://piasysdev.sharepoint.com/sites/prov-1/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/prov-1/Shared%20Documents')/ListItemAllFields"}},"ParentFolder":{"__deferred":{"uri":"https://piasysdev.sharepoint.com/sites/prov-1/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/prov-1/Shared%20Documents')/ParentFolder"}},"Properties":{"__deferred":{"uri":"https://piasysdev.sharepoint.com/sites/prov-1/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/prov-1/Shared%20Documents')/Properties"}},"StorageMetrics":{"__deferred":{"uri":"https://piasysdev.sharepoint.com/sites/prov-1/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/prov-1/Shared%20Documents')/StorageMetrics"}},"Folders":{"__deferred":{"uri":"https://piasysdev.sharepoint.com/sites/prov-1/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/prov-1/Shared%20Documents')/Folders"}},"Exists":true,"IsWOPIEnabled":false,"ItemCount":208,"Name":"Shared Documents","ProgID":null,"ServerRelativeUrl":"/sites/prov-1/Shared Documents","TimeCreated":"2020-04-05T15:08:09Z","TimeLastModified":"2021-02-19T09:41:07Z","UniqueId":"6d449477-7edc-4427-a1cf-a6bd3d5f4880","WelcomePage":""}}
+--batchresponse_9360ffd8-e07f-4a16-bc70-c07aa6a783c9--

@@ -1,9 +1,9 @@
---batchresponse_d50184d0-ac5e-4a14-8699-f3f16eba7788
+--batchresponse_207e49bb-41b7-4586-b7e3-f8f620b7bfdf
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-
---batchresponse_d50184d0-ac5e-4a14-8699-f3f16eba7788--
+{"d":{"__metadata":{"id":"https://piasysdev.sharepoint.com/sites/prov-1/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/prov-1/SitePages/sub1/sub2/sub3b')","uri":"https://piasysdev.sharepoint.com/sites/prov-1/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/prov-1/SitePages/sub1/sub2/sub3b')","type":"SP.Folder"},"Files":{"__deferred":{"uri":"https://piasysdev.sharepoint.com/sites/prov-1/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/prov-1/SitePages/sub1/sub2/sub3b')/Files"}},"ListItemAllFields":{"__deferred":{"uri":"https://piasysdev.sharepoint.com/sites/prov-1/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/prov-1/SitePages/sub1/sub2/sub3b')/ListItemAllFields"}},"ParentFolder":{"__deferred":{"uri":"https://piasysdev.sharepoint.com/sites/prov-1/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/prov-1/SitePages/sub1/sub2/sub3b')/ParentFolder"}},"Properties":{"__deferred":{"uri":"https://piasysdev.sharepoint.com/sites/prov-1/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/prov-1/SitePages/sub1/sub2/sub3b')/Properties"}},"StorageMetrics":{"__deferred":{"uri":"https://piasysdev.sharepoint.com/sites/prov-1/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/prov-1/SitePages/sub1/sub2/sub3b')/StorageMetrics"}},"Folders":{"__deferred":{"uri":"https://piasysdev.sharepoint.com/sites/prov-1/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/prov-1/SitePages/sub1/sub2/sub3b')/Folders"}},"Exists":true,"IsWOPIEnabled":false,"ItemCount":0,"Name":"sub3b","ProgID":null,"ServerRelativeUrl":"/sites/prov-1/SitePages/sub1/sub2/sub3b","TimeCreated":"2021-02-19T09:36:17Z","TimeLastModified":"2021-02-19T09:36:17Z","UniqueId":"0b198784-3c02-4de2-a7db-cedee18cf7d0","WelcomePage":""}}
+--batchresponse_207e49bb-41b7-4586-b7e3-f8f620b7bfdf--
