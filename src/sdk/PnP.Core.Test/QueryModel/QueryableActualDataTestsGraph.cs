@@ -74,9 +74,6 @@ namespace PnP.Core.Test.QueryModel
 
                     var queryResult = query.ToList();
 
-                    // Ensure that we have 1 list in the collection of lists
-                    Assert.AreEqual(1, context.Web.Lists.Length);
-
                     // Ensure that we have 1 item in the result and that its title is the expected one
                     Assert.IsNotNull(queryResult);
                     Assert.AreEqual(1, queryResult.Count);
