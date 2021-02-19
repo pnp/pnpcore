@@ -1,4 +1,4 @@
---batchresponse_c7e3d726-af41-480b-a755-be5fca5ab9f4
+--batchresponse_4641a565-29ae-4b35-bf9e-2e79b7494a6d
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
@@ -6,4 +6,4 @@ HTTP/1.1 500 Internal Server Error
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
 {"error":{"code":"-2147024713, Microsoft.SharePoint.SPException","message":{"lang":"en-US","value":"Het websiteadres /sites/prov-1/DutchWeb wordt al gebruikt."}}}
---batchresponse_c7e3d726-af41-480b-a755-be5fca5ab9f4--
+--batchresponse_4641a565-29ae-4b35-bf9e-2e79b7494a6d--

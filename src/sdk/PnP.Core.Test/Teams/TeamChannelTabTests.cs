@@ -80,7 +80,7 @@ namespace PnP.Core.Test.Teams
                 var channel = team.Channels.FirstOrDefault(i => i.DisplayName == "General");
                 Assert.IsNotNull(channel);
 
-                channel = await channel.GetAsync(o => o.Tabs);
+                await channel.LoadAsync(o => o.Tabs);
                 var testSiteLib = $"{context.Uri.OriginalString}/Shared%20Documents";
                 var testTabName = "DocLibTab";
                 var result = await channel.Tabs.AddDocumentLibraryTabAsync(testTabName, new Uri(testSiteLib));
@@ -105,7 +105,7 @@ namespace PnP.Core.Test.Teams
                 var channel = team.Channels.FirstOrDefault(i => i.DisplayName == "General");
                 Assert.IsNotNull(channel);
 
-                channel = channel.Get(o => o.Tabs);
+                channel.Load(o => o.Tabs);
                 var testSiteLib = $"{context.Uri.OriginalString}/Shared%20Documents";
                 var testTabName = "DocLibTab";
                 var result = channel.Tabs.AddDocumentLibraryTab(testTabName, new Uri(testSiteLib));
@@ -129,7 +129,6 @@ namespace PnP.Core.Test.Teams
                 Assert.IsTrue(team.Result.Channels.Length > 0);
 
                 var channelQuery = team.Result.Channels.FirstOrDefault(i => i.DisplayName == "General");
-                context.Execute();
                 Assert.IsNotNull(channelQuery);
 
                 var channel = channelQuery.GetBatch(o => o.Tabs);

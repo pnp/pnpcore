@@ -41,13 +41,13 @@ namespace PnP.Core.Test.Teams
                 // assume as if there are no chat messages
                 // There appears to be no remove option yet in this feature - so add a recognisable message
                 var body = "Hello, this is a unit test (GetChatMessageAsyncTest) posting a message - PnP Rocks!";
-                if(!chatMessages.Any(o=> o.Body.Content == body))
+                if(!chatMessages.AsEnumerable().Any(o=> o.Body.Content == body))
                 {
                     await chatMessages.AddAsync(body);
                 }
 
                 channel = await channel.GetAsync(o => o.Messages);
-                var updateMessages = channel.Messages;
+                var updateMessages = channel.Messages.AsEnumerable();
 
                 var message = updateMessages.First(o => o.Body.Content == body);
                 Assert.IsNotNull(message.CreatedDateTime);
@@ -66,7 +66,6 @@ namespace PnP.Core.Test.Teams
                 Assert.IsNull(message.Subject);
                 Assert.IsTrue(message.IsPropertyAvailable(o => o.Summary));
                 Assert.IsNull(message.Summary);
-                
             }
         }
 
@@ -83,7 +82,7 @@ namespace PnP.Core.Test.Teams
                 var channel = team.Channels.FirstOrDefault(i => i.DisplayName == "General");
                 Assert.IsNotNull(channel);
 
-                channel = channel.Get(o => o.Messages);
+                channel.Load(o => o.Messages);
                 var chatMessages = channel.Messages;
 
                 Assert.IsNotNull(chatMessages);
@@ -91,13 +90,13 @@ namespace PnP.Core.Test.Teams
                 // assume as if there are no chat messages
                 // There appears to be no remove option yet in this feature - so add a recognisable message
                 var body = $"Hello, this is a unit test (AddChatMessageTest) posting a message - PnP Rocks! - Woah...";
-                if (!chatMessages.Any(o => o.Body.Content == body))
+                if (!chatMessages.AsEnumerable().Any(o => o.Body.Content == body))
                 {
                     chatMessages.Add(body);
                 }
 
                 channel = channel.Get(o => o.Messages);
-                var updateMessages = channel.Messages;
+                var updateMessages = channel.Messages.AsEnumerable();
 
                 var message = updateMessages.First(o => o.Body.Content == body);
                 Assert.IsNotNull(message.CreatedDateTime);
@@ -341,7 +340,7 @@ namespace PnP.Core.Test.Teams
 
                 channel = channel.Result.GetBatch(batch2, o => o.Messages);
                 context.Execute(batch2);
-                var updateMessages = channel.Result.Messages;
+                var updateMessages = channel.Result.Messages.AsEnumerable();
 
                 var message = updateMessages.Last();
                 Assert.IsNotNull(message.CreatedDateTime);
@@ -361,7 +360,6 @@ namespace PnP.Core.Test.Teams
                 Assert.IsNull(message.Subject);
                 Assert.IsTrue(message.IsPropertyAvailable(o => o.Summary));
                 Assert.IsNull(message.Summary);
-
             }
         }
 
@@ -376,7 +374,7 @@ namespace PnP.Core.Test.Teams
                 var channel = team.PrimaryChannel;
                 Assert.IsNotNull(channel);
 
-                channel = await channel.GetAsync(o => o.Messages);
+                await channel.LoadAsync(o => o.Messages);
                 var chatMessages = channel.Messages;
 
                 Assert.IsNotNull(chatMessages);
@@ -420,7 +418,7 @@ namespace PnP.Core.Test.Teams
                 var channel = team.PrimaryChannel;
                 Assert.IsNotNull(channel);
 
-                channel = await channel.GetAsync(o => o.Messages);
+                await channel.LoadAsync(o => o.Messages);
                 var chatMessages = channel.Messages;
 
                 Assert.IsNotNull(chatMessages);
@@ -447,7 +445,7 @@ namespace PnP.Core.Test.Teams
                 await chatMessages.AddAsync(body, ChatMessageContentType.Html, coll);
                 
                 channel = await channel.GetAsync(o => o.Messages);
-                var updateMessages = channel.Messages;
+                var updateMessages = channel.Messages.AsEnumerable();
 
                 var message = updateMessages.Last();
                 Assert.IsNotNull(message.CreatedDateTime);
@@ -466,7 +464,6 @@ namespace PnP.Core.Test.Teams
                 Assert.IsNull(message.Subject);
                 Assert.IsTrue(message.IsPropertyAvailable(o => o.Summary));
                 Assert.IsNull(message.Summary);
-
             }
         }
 
@@ -554,7 +551,7 @@ namespace PnP.Core.Test.Teams
                 // assume as if there are no chat messages
                 // There appears to be no remove option yet in this feature - so add a recognisable message
                 var body = $"Hello, this is a unit test (AddChatMessageBatchTest) posting a message - PnP Rocks! - Woah...";
-                if (!chatMessages.Any(o => o.Body.Content == body))
+                if (!chatMessages.AsEnumerable().Any(o => o.Body.Content == body))
                 {
                     chatMessages.AddBatch(body);
                     context.Execute();
@@ -564,7 +561,7 @@ namespace PnP.Core.Test.Teams
                 context.Execute();
                 var updateMessages = channel.Result.Messages;
 
-                var message = updateMessages.FirstOrDefault(o => o.Body.Content == body);
+                var message = updateMessages.AsEnumerable().FirstOrDefault(o => o.Body.Content == body);
 
                 Assert.IsFalse(message == default);
                 Assert.IsNotNull(message.CreatedDateTime);
@@ -610,7 +607,7 @@ namespace PnP.Core.Test.Teams
                 // assume as if there are no chat messages
                 // There appears to be no remove option yet in this feature - so add a recognisable message
                 var body = $"Hello, this is a unit test (AddChatMessageSpecificBatchTest) posting a message - PnP Rocks! - Woah...";
-                if (!chatMessages.Any(o => o.Body.Content == body))
+                if (!chatMessages.AsEnumerable().Any(o => o.Body.Content == body))
                 {
                     chatMessages.AddBatch(batch, body);
                     context.Execute(batch);
@@ -619,7 +616,7 @@ namespace PnP.Core.Test.Teams
                 var batch2 = context.NewBatch();
                 channel = channelQuery.GetBatch(batch2, o => o.Messages);
                 context.Execute(batch2);
-                var updateMessages = channel.Result.Messages;
+                var updateMessages = channel.Result.Messages.AsEnumerable();
 
                 var message = updateMessages.First(o => o.Body.Content == body);
                 Assert.IsNotNull(message.CreatedDateTime);
@@ -639,7 +636,6 @@ namespace PnP.Core.Test.Teams
                 Assert.IsNull(message.Subject);
                 Assert.IsTrue(message.IsPropertyAvailable(o => o.Summary));
                 Assert.IsNull(message.Summary);
-
             }
         }
 

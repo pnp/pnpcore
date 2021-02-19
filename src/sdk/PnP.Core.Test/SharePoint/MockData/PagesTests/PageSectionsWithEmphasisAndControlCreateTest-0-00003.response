@@ -1,4 +1,4 @@
---batchresponse_3f030d29-bdb4-4d08-b0f6-a2d9c74bede1
+--batchresponse_afb1323c-052a-4c13-bf53-9c8998b2a03b
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
@@ -6,4 +6,4 @@ HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
 {"d":{"__metadata":{"id":"https://piasysdev.sharepoint.com/sites/modern/_api/Web","uri":"https://piasysdev.sharepoint.com/sites/modern/_api/Web","type":"SP.Web"},"Id":"5808b690-d09b-468c-9049-59fe4ef1f7c3","WebTemplate":"STS"}}
---batchresponse_3f030d29-bdb4-4d08-b0f6-a2d9c74bede1--
+--batchresponse_afb1323c-052a-4c13-bf53-9c8998b2a03b--

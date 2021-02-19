@@ -228,7 +228,7 @@ namespace PnP.Core.Test.SharePoint
                 var availableComponents = await pages.AsEnumerable().First().AvailablePageComponentsAsync();
                 Assert.IsTrue(availableComponents.Count() > 0);
 
-                var imageWebPartId = pages.First().DefaultWebPartToWebPartId(DefaultWebPart.Image);
+                var imageWebPartId = pages.AsEnumerable().First().DefaultWebPartToWebPartId(DefaultWebPart.Image);
                 var imageWebPart = availableComponents.FirstOrDefault(p => p.Id == imageWebPartId);
                 Assert.IsTrue(imageWebPart != null);
             }
