@@ -83,6 +83,7 @@ Remove-PnPList -Identity TestQueryListsUpdateConsistency -Force
 Remove-PnPList -Identity RESTListItemPaging -Force
 Remove-PnPList -Identity RESTListItemGetPagedAsyncPaging -Force
 Remove-PnPList -Identity GetItemsByCAMLQuery -Force
+Remove-PnPList -Identity GetListIRMSettingsBatchTest -Force
 Remove-PnPList -Identity ListLinqGetMethods -Force
 Remove-PnPList -Identity SystemUpdate -Force
 Remove-PnPList -Identity InteractivePostRequest -Force
