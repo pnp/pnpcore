@@ -42,7 +42,6 @@ namespace PnP.Core.Test.Teams
 
 
         [TestMethod]
-        [ExpectedException(typeof(MicrosoftGraphServiceException))]
         public async Task GetGeneralChannelAsyncTest()
         {
             //TestCommon.Instance.Mocking = false;
@@ -55,7 +54,6 @@ namespace PnP.Core.Test.Teams
 
                 Assert.AreEqual(channel.MembershipType, TeamChannelMembershipType.Standard);
                 Assert.IsNotNull(channel.WebUrl);
-
             }
         }
 
