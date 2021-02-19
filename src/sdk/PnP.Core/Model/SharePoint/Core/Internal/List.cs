@@ -230,7 +230,7 @@ namespace PnP.Core.Model.SharePoint
 
         internal Task<IBatchSingleResult<IList>> BatchGetByTitleAsync(Batch batch, string title, params Expression<Func<IList, object>>[] expressions)
         {
-            return GetBatchAsync(batch, apiOverride: GetByTitleApiCall(title), expressions: expressions);
+            return GetBatchAsync(batch, apiOverride: GetByTitleApiCall(title), selectors: expressions);
         }
         #endregion
 

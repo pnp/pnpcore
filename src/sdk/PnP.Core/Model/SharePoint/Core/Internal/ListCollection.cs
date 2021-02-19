@@ -157,29 +157,5 @@ namespace PnP.Core.Model.SharePoint
         }
 
         #endregion
-
-#if DEBUG
-        #region Only used for test purposes, hence marked as internal
-
-        internal Task<IBatchSingleResult<IList>> BatchGetByTitleAsync(Batch batch, string title, params Expression<Func<IList, object>>[] expressions)
-        {
-            // Was this list previously loaded?
-            if (!(items.FirstOrDefault(p => p.IsPropertyAvailable(p => p.Title) && p.Title == title) is List listToLoad))
-            {
-                // List was not loaded before, so add it the current set of loaded lists
-                listToLoad = CreateNewAndAdd() as List;
-            }
-
-            return listToLoad.BatchGetByTitleAsync(batch, title, expressions);
-        }
-
-        internal Task<IBatchSingleResult<IList>> BatchGetByTitleAsync(string title, params Expression<Func<IList, object>>[] expressions)
-        {
-            return BatchGetByTitleAsync(PnPContext.CurrentBatch, title, expressions);
-        }
-
-        #endregion
-#endif
-
     }
 }
