@@ -1,4 +1,4 @@
---batchresponse_b35354ee-24cd-494e-834d-4061ad34f4d3
+--batchresponse_dad88695-4952-47c4-a283-928eaf9b6c9a
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
@@ -7,14 +7,14 @@ CONTENT-TYPE: application/json; charset=utf-8
 
 { "Row" : 
 [{
-"ID": "962",
+"ID": "82",
 "PermMask": "0x7ffffffffffbffff",
 "FSObjType": "0",
 "HTML_x0020_File_x0020_Type": "",
-"UniqueId": "{8AD8436C-E463-4DC4-B4C6-0FCD51DF7BE3}",
+"UniqueId": "{97DFB6A5-6AD6-483F-A0FA-AEC79B01E80B}",
 "ProgId": "",
 "NoExecute": "0",
-"ContentTypeId": "0x01010800B3B2A1451E70B6458A757AC0CBA6DAEF",
+"ContentTypeId": "0x01010800FB74799233AF364397CCAD2384D3944F",
 "FileRef": "\u002fsites\u002fprov-1\u002fSitePages\u002fPNP_SDK_TEST_CustomPageHeaderWithSiteRelativeImageFocalPointsTest.aspx",
 "FileRef.urlencode": "%2Fsites%2Fprov%2D1%2FSitePages%2FPNP%5FSDK%5FTEST%5FCustomPageHeaderWithSiteRelativeImageFocalPointsTest%2Easpx",
 "FileRef.urlencodeasurl": "\u002fsites\u002fprov-1\u002fSitePages\u002fPNP_SDK_TEST_CustomPageHeaderWithSiteRelativeImageFocalPointsTest.aspx",
@@ -63,8 +63,8 @@ CONTENT-TYPE: application/json; charset=utf-8
 "ItemChildCount": "0",
 "FolderChildCount": "0",
 "A2ODMountCount": "",
+"_ComplianceTag": "",
 "owshiddenversion": "1",
-"_SPTranslatedLanguages": "",
 "_SPSitePageFlags": "",
 "ContentVersion": "0",
 "DocConcurrencyNumber": "1",
@@ -82,4 +82,4 @@ CONTENT-TYPE: application/json; charset=utf-8
 ,"CurrentFolderSpItemUrl" : ""
 
 }
---batchresponse_b35354ee-24cd-494e-834d-4061ad34f4d3--
+--batchresponse_dad88695-4952-47c4-a283-928eaf9b6c9a--
