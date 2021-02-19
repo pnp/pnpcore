@@ -8,6 +8,7 @@ using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
 using PnP.Core.Model;
+using System.Collections.Generic;
 
 namespace PnP.Core.Test.Base
 {
