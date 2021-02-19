@@ -73,6 +73,7 @@ Remove-PnPList -Identity GetListPropertiesAndListItemViaRest -Force
 Remove-PnPList -Identity ContentTypesOnListAddTest -Force
 Remove-PnPList -Identity ContentTypesOnListAddAvailableTest -Force
 Remove-PnPList -Identity ContentTypesOnListDeleteTest -Force
+Remove-PnPList -Identity TestQueryListsDeleteConsistency -Force
 Remove-PnPList -Identity TestQueryListItemsAddConsistency -Force
 Remove-PnPList -Identity TestQueryListItemsDeleteConsistency -Force
 Remove-PnPList -Identity TestQueryListItemsUpdateConsistency -Force
@@ -106,9 +107,8 @@ foreach($list in $lists)
 $app = Get-PnPApp pnpcoresdk-test-app-client-side-solution
 Uninstall-PnPApp -Identity $app.Id
 
-
 Disable-PnPFeature -Identity 3bae86a2-776d-499d-9db8-fa4cdc7884f8 -Scope Site
 Disable-PnPFeature -Identity fa6a1bcc-fb4b-446b-8460-f4de5f7411d5 -Scope Web
-
+Disable-PnPFeature -Identity 24611c05-ee19-45da-955f-6602264abaf8 -Scope Site # Multilingual
 
 Disconnect-PnPOnline
