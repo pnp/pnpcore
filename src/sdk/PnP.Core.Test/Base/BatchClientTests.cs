@@ -219,22 +219,20 @@ namespace PnP.Core.Test.Base
             {
                 context.GraphFirst = false;
 
-                var list1 = await (context.Web.Lists as ListCollection).BatchGetByTitleAsync("Site Assets", p => p.Title, p => p.NoCrawl);
-                var list1Again = await (context.Web.Lists as ListCollection).BatchGetByTitleAsync("Site Assets", p => p.Title, p => p.EnableVersioning, p => p.Items);
+                var list = await context.Web.Lists.GetByTitleAsync("Site Assets");
+                await list.LoadBatchAsync(p => p.Title, p => p.NoCrawl);
+                await list.LoadBatchAsync(p => p.Title, p => p.EnableVersioning, p => p.Items);
                 await context.ExecuteAsync();
 
-                var siteAssetsCount = context.Web.Lists.Where(p => p.Title == "Site Assets");
-
-                // The 2 individual loads should have been merged to a single loaded list
-                Assert.IsTrue(siteAssetsCount.Count() == 1);
                 // The properties from both loads should available on the first loaded model
-                Assert.IsTrue(list1.Result.IsPropertyAvailable(p => p.Title));
-                Assert.IsTrue(list1.Result.IsPropertyAvailable(p => p.NoCrawl));
+                Assert.IsTrue(list.IsPropertyAvailable(p => p.Title));
+                Assert.IsTrue(list.IsPropertyAvailable(p => p.NoCrawl));
 
-                Assert.IsTrue(list1.Result.IsPropertyAvailable(p => p.EnableVersioning));
-                Assert.IsTrue(list1.Result.IsPropertyAvailable(p => p.Items));
+                Assert.IsTrue(list.IsPropertyAvailable(p => p.EnableVersioning));
+                Assert.IsTrue(list.IsPropertyAvailable(p => p.Items));
+
                 // Site Assets should have items
-                Assert.IsTrue(list1.Result.Items.Count() > 0);
+                Assert.IsTrue(list.Items.Length > 0);
             }
         }
 
