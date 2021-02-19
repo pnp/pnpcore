@@ -269,7 +269,7 @@ namespace PnP.Core.Model.SharePoint
             {
                 // Strip folder from the provided file name + path
                 (var folderName, var pageNameWithoutFolder) = PageToPageNameAndFolder(pageName);
-                var pages = pagesLibrary.Items.Where(p => p.Values[PageConstants.FileLeafRef].ToString().StartsWith(pageNameWithoutFolder, StringComparison.InvariantCultureIgnoreCase));
+                var pages = pagesLibrary.Items.AsEnumerable().Where(p => p.Values[PageConstants.FileLeafRef].ToString().StartsWith(pageNameWithoutFolder, StringComparison.InvariantCultureIgnoreCase));
                 if (pages.Any())
                 {
                     pagesToLoad = pages.ToList();
