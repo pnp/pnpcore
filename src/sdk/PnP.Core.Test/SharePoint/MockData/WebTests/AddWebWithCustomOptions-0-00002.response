@@ -1,4 +1,4 @@
---batchresponse_5d486453-cb80-4704-b423-bc4cb9693fa2
+--batchresponse_d7e0c289-54b2-4cc3-ba7c-30653cad04b5
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
@@ -6,4 +6,4 @@ HTTP/1.1 500 Internal Server Error
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
 {"error":{"code":"-2147024713, Microsoft.SharePoint.SPException","message":{"lang":"en-US","value":"Het websiteadres /sites/prov-1/AddWebWithCustomOptions wordt al gebruikt."}}}
---batchresponse_5d486453-cb80-4704-b423-bc4cb9693fa2--
+--batchresponse_d7e0c289-54b2-4cc3-ba7c-30653cad04b5--
