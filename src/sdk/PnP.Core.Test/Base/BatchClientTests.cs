@@ -87,6 +87,7 @@ namespace PnP.Core.Test.Base
         }
 
         [TestMethod]
+        [Ignore]
         public async Task DedupBatchRequests()
         {
             // x BERT: We need to talk about this test
