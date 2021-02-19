@@ -1,5 +1,6 @@
 ﻿using PnP.Core.Model.Security;
 using PnP.Core.Services;
+using PnP.Core.QueryModel;
 using System;
 using System.Collections.Generic;
 using System.Dynamic;
@@ -765,7 +766,7 @@ namespace PnP.Core.Model.SharePoint
 
             bool updated = false;
             // Ensure the multilingual page feature is enabled
-            if (Features.FirstOrDefault(p => p.DefinitionId == MultilingualPagesFeature) == null)
+            if (Features.AsEnumerable().FirstOrDefault(p => p.DefinitionId == MultilingualPagesFeature) == null)
             {
                 await Features.EnableBatchAsync(MultilingualPagesFeature).ConfigureAwait(false);
                 updated = true;

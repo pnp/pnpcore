@@ -269,7 +269,7 @@ namespace PnP.Core.Model.SharePoint
             {
                 // Strip folder from the provided file name + path
                 (var folderName, var pageNameWithoutFolder) = PageToPageNameAndFolder(pageName);
-                var pages = pagesLibrary.Items.Where(p => p.Values[PageConstants.FileLeafRef].ToString().StartsWith(pageNameWithoutFolder, StringComparison.InvariantCultureIgnoreCase));
+                var pages = pagesLibrary.Items.AsEnumerable().Where(p => p.Values[PageConstants.FileLeafRef].ToString().StartsWith(pageNameWithoutFolder, StringComparison.InvariantCultureIgnoreCase));
                 if (pages.Any())
                 {
                     pagesToLoad = pages.ToList();
@@ -277,7 +277,7 @@ namespace PnP.Core.Model.SharePoint
             }
             else
             {
-                pagesToLoad = pagesLibrary.Items.ToList();
+                pagesToLoad = pagesLibrary.Items.AsEnumerable().ToList();
             }
 
             if (pagesToLoad != null)
@@ -1742,7 +1742,7 @@ namespace PnP.Core.Model.SharePoint
             PageListItem = null;
 
             // Get the relevant list item
-            foreach (var page in PagesLibrary.Items)
+            foreach (var page in PagesLibrary.Items.AsEnumerable())
             {
                 var fileDirRef = PagesLibrary.RootFolder.ServerRelativeUrl + (!string.IsNullOrEmpty(folderName) ? $"/{folderName}" : "");
                 if (page[PageConstants.FileLeafRef].ToString().Equals(pageNameWithoutFolder, StringComparison.InvariantCultureIgnoreCase) && page[PageConstants.FileDirRef].ToString().Equals(fileDirRef, StringComparison.InvariantCultureIgnoreCase))
