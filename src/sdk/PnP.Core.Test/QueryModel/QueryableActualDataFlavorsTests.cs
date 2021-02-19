@@ -20,7 +20,7 @@ namespace PnP.Core.Test.QueryModel
         }
 
         [TestMethod]
-        public async Task REMOVE_TestQueryPropertiesBehavior()
+        public async Task TestQueryPropertiesMultipleBehaviors()
         {
             // TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
