@@ -148,8 +148,21 @@ namespace PnP.Core.Model
             ApiCall apiOverride,
             params Expression<Func<TModel, object>>[] expressions)
         {
-            // Create a new object without a parent
-            var newDataModel = (BaseDataModel<TModel>)EntityManager.GetEntityConcreteInstance(this.GetType(), null, this.PnPContext);
+            IDataModelParent replicatedParent = null;
+
+            // Create a replicated parent
+            if (this.Parent != null)
+            {
+                // Replicate the parent object in order to keep original collection as is
+                replicatedParent = EntityManager.ReplicateParentHierarchy(this.Parent, this.PnPContext);
+            }
+            // Create a new object with a replicated parent
+            var newDataModel = (BaseDataModel<TModel>)EntityManager.GetEntityConcreteInstance(this.GetType(), replicatedParent, this.PnPContext);
+
+            // Replicate metadata and key between the objects
+            EntityManager.ReplicateKeyAndMetadata(this, newDataModel);
+
+            // Make the actual request
             var batchResult = await newDataModel.BaseBatchRetrieveAsync(batch, fromJsonCasting: MappingHandler, postMappingJson: PostMappingHandler, expressions: expressions).ConfigureAwait(false);
 
             return batchResult;

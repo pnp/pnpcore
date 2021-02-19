@@ -632,7 +632,40 @@ namespace PnP.Core.Model
 
         #endregion
 
-        #region Parent handling logic
+        #region Replication logic
+
+        /// <summary>
+        /// Replicates Key and metadata between two domain model objects
+        /// </summary>
+        /// <param name="sourceObject">The source domain model object</param>
+        /// <param name="destinationObject">The destination domain model object</param>
+        internal static void ReplicateKeyAndMetadata(IDataModelParent sourceObject, IDataModelParent destinationObject)
+        {
+            // Copy the Key of the original parent into the replicated parent
+            if (sourceObject is IDataModelWithKey keySource &&
+                destinationObject is IDataModelWithKey keyDestination)
+            {
+                try
+                {
+                    keyDestination.Key = keySource.Key;
+                }
+                catch (ClientException)
+                {
+                    // We intentionally ignore any exception 
+                    // in case the source key is missing 
+                }
+            }
+
+            // Copy original parent metadata to the replicated parent metadata, if any
+            if (sourceObject is IMetadataExtensible metadataSource &&
+                destinationObject is IMetadataExtensible metadataDestination)
+            {
+                foreach (var md in metadataSource.Metadata)
+                {
+                    metadataDestination.Metadata[md.Key] = md.Value;
+                }
+            }
+        }
 
         internal static IDataModelParent ReplicateParentHierarchy(IDataModelParent parent, PnPContext context)
         {
@@ -646,15 +679,28 @@ namespace PnP.Core.Model
                 throw new ArgumentNullException(nameof(context));
             }
 
-            var result = ReplicateParent(parent, context);
-            if (parent.Parent != null)
+            IDataModelParent result = null;
+
+            // If the parent is a collection
+            if (parent is IManageableCollection collectionParent)
             {
-                if (parent.Parent is IManageableCollection collectionParent)
+                IDataModelParent collectionSuperParent = null;
+
+                // Being the parent a collection, I need to replicate its parent, if any, too
+                if (parent.Parent != null)
                 {
-                    // We need to process the parent as a collection of items
-                    result.Parent = (IDataModelParent)EntityManager.GetEntityCollectionInstance(parent.Parent.GetType(), context, result, "");
+                    collectionSuperParent = ReplicateParentHierarchy(parent.Parent, context);
                 }
-                else
+
+                // We create a new parent collection, replicating all the properties from the other
+                result = ReplicateParentCollection(parent, collectionSuperParent, context);
+            }
+            else
+            {
+                // Otherwise we just replicate the parent
+                result = ReplicateParent(parent, context);
+
+                if (parent.Parent != null)
                 {
                     result.Parent = ReplicateParentHierarchy(parent.Parent, context);
                 }
@@ -680,26 +726,33 @@ namespace PnP.Core.Model
             // Create a new instance of Parent with the same data type as the original parent
             var replicatedParent = (IDataModelParent)EntityManager.GetEntityConcreteInstance(parentType, null, context);
 
-            // Copy the Key of the original parent into the replicated parent
-            if (parent is IDataModelWithKey keyParent &&
-                replicatedParent is IDataModelWithKey keyReplicatedParent)
-            {
-                keyReplicatedParent.Key = keyParent.Key;
-            }
-
-            // Copy original parent metadata to the replicated parent metadata, if any
-            if (parent is IMetadataExtensible mdParent &&
-                replicatedParent is IMetadataExtensible mdReplicatedParent)
-            {
-                foreach (var md in mdParent.Metadata)
-                {
-                    mdReplicatedParent.Metadata[md.Key] = md.Value;
-                }
-            }
+            ReplicateKeyAndMetadata(parent, replicatedParent);
 
             return replicatedParent;
         }
 
+        internal static IDataModelParent ReplicateParentCollection(IDataModelParent parent, IDataModelParent superParent, PnPContext context)
+        {
+            if (parent == null)
+            {
+                throw new ArgumentNullException(nameof(parent));
+            }
+
+            if (context == null)
+            {
+                throw new ArgumentNullException(nameof(context));
+            }
+
+            // TODO: This is a bit risky ... we should fine something better ...
+            var collectionPropertyName = parent.GetType().Name.Replace("Collection", "s");
+
+            // We create a new parent collection, but replicating all the properties from the other
+            var replicatedParentCollection = (IDataModelParent)EntityManager.GetEntityCollectionInstance(parent.GetType(), context, superParent, collectionPropertyName);
+
+            ReplicateKeyAndMetadata(parent, replicatedParentCollection);
+
+            return replicatedParentCollection;
+        }
 
         #endregion
     }
