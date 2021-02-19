@@ -507,6 +507,8 @@ namespace PnP.Core.Test.Base
         [ExpectedException(typeof(ClientException))]
         public async Task GetLinqTermStoreSingleSimpleNormalAndExpandProperty()
         {
+            // x BERT: Should we review/remove this test?
+
             // Throws exception since expand via a separate query (like for loading the Terms) is not possible
             var requests = await GetODataAPICallTestAsync(
                 BuildModel<TermSet, ITermSet>(new Expression<Func<ITermSet, object>>[] { p => p.Id, p => p.Terms }),
