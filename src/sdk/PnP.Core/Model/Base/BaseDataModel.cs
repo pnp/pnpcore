@@ -1152,7 +1152,7 @@ namespace PnP.Core.Model
         {
             if (!HasValue(propertyName))
             {
-                var collection = EntityManager.GetEntityCollectionConcreteInstance<T>(typeof(T), PnPContext, this, propertyName);
+                var collection = EntityManager.GetEntityCollectionConcreteInstance(typeof(T), PnPContext, this, propertyName);
                 SetValue(collection, propertyName);
             }
             return GetValue<T>(propertyName);

@@ -16,6 +16,8 @@ namespace PnP.Core.QueryModel
 
         public string MemberName { get; }
 
+        internal EntityInfo EntityInfo { get; set; }
+
         /// <summary>
         /// Protected default constructor, to force creation using
         /// the PnPContext instance
@@ -37,8 +39,6 @@ namespace PnP.Core.QueryModel
             MemberName = memberName;
         }
 
-        internal EntityInfo EntityInfo { get; set; }
-
         public async Task<BatchRequest> AddToCurrentBatchAsync(ODataQuery<TModel> query)
         {
             // Get the entity info, depending on how we access this method, EntityInfo 
@@ -54,19 +54,9 @@ namespace PnP.Core.QueryModel
             // it's required to let the entity know this context so that it can provide the correct information when requested
             if (batchParent != null)
             {
+                // Replicate the parent object in order to keep original collection as is
+                batchParent = EntityManager.ReplicateParentHierarchy(batchParent, PnPContext);
                 EntityInfo.Target = batchParent.GetType();
-                // Clone parent object in order to keep original collection as is
-                batchParent = (IDataModelParent)EntityManager.GetEntityConcreteInstance(batchParent.GetType(), null, PnPContext);
-
-                // Copy parent metadata, if any
-                if (Parent is IMetadataExtensible mdParent &&
-                    batchParent is IMetadataExtensible mdBatchParent)
-                {
-                    foreach (var md in mdParent.Metadata)
-                    {
-                        mdBatchParent.Metadata[md.Key] = md.Value;
-                    }
-                }
             }
 
             // and its concrete instance

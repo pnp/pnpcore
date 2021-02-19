@@ -35,7 +35,7 @@ namespace PnP.Core.QueryModel
                         VisitSelect(m);
                         return m;
                     case nameof(QueryableExtensions.QueryProperties):
-                        VisitQuery(m);
+                        VisitQueryProperties(m);
                         return m;
                     case "OrderBy":
                     case "ThenBy":
@@ -83,7 +83,7 @@ namespace PnP.Core.QueryModel
             }
         }
 
-        private void VisitQuery(MethodCallExpression m)
+        private void VisitQueryProperties(MethodCallExpression m)
         {
             Visit(m.Arguments[0]);
             if (m.Arguments[1] is UnaryExpression propertySelector)
@@ -97,6 +97,24 @@ namespace PnP.Core.QueryModel
                     query.Fields.AddRange(lambdas);
                 }
             }
+            else if (m.Arguments[1] is NewArrayExpression arrayExpression)
+            {
+                foreach (var expression in arrayExpression.Expressions)
+                {
+                    if (expression is UnaryExpression expressionPropertySelector)
+                    {
+                        if (expressionPropertySelector.Operand is Expression<Func<TModel, object>> lambda)
+                        {
+                            query.Fields.Add(lambda);
+                        }
+                        else if (expressionPropertySelector.Operand is Expression<Func<TModel, object>>[] lambdas)
+                        {
+                            query.Fields.AddRange(lambdas);
+                        }
+                    }
+                }
+            }
+            
         }
 
         private void VisitOrderBy(MethodCallExpression m, bool ascending = true)

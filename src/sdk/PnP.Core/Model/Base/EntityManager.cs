@@ -271,24 +271,17 @@ namespace PnP.Core.Model
             return result;
         }
 
-        internal static object GetEntityCollectionConcreteInstance<TModel>(Type type, PnPContext context, IDataModelParent parent, string propertyName)
+        internal static object GetEntityCollectionInstance(Type collectionType, PnPContext context, IDataModelParent parent, string propertyName)
         {
-            if (type is null)
-            {
-                throw new ArgumentNullException(nameof(type));
-            }
-
-            type = GetEntityConcreteType(type);
-
             object result;
 
-            if (type.ImplementsInterface(typeof(IQueryable<>)))
+            if (collectionType.ImplementsInterface(typeof(IQueryable<>)))
             {
-                result = Activator.CreateInstance(type, context, parent, propertyName);
+                result = Activator.CreateInstance(collectionType, context, parent, propertyName);
             }
             else
             {
-                result = Activator.CreateInstance(type);
+                result = Activator.CreateInstance(collectionType);
                 if (result is IDataModelParent modelWithParent)
                 {
                     modelWithParent.Parent = parent;
@@ -299,6 +292,20 @@ namespace PnP.Core.Model
                     modelWithContext.PnPContext = context;
                 }
             }
+
+            return result;
+        }
+
+        internal static object GetEntityCollectionConcreteInstance(Type type, PnPContext context, IDataModelParent parent, string propertyName)
+        {
+            if (type is null)
+            {
+                throw new ArgumentNullException(nameof(type));
+            }
+
+            type = GetEntityConcreteType(type);
+
+            object result = GetEntityCollectionInstance(type, context, parent, propertyName);
 
             return result;
         }
@@ -622,6 +629,77 @@ namespace PnP.Core.Model
             }
             return str;
         }
+
+        #endregion
+
+        #region Parent handling logic
+
+        internal static IDataModelParent ReplicateParentHierarchy(IDataModelParent parent, PnPContext context)
+        {
+            if (parent == null)
+            {
+                throw new ArgumentNullException(nameof(parent));
+            }
+
+            if (context == null)
+            {
+                throw new ArgumentNullException(nameof(context));
+            }
+
+            var result = ReplicateParent(parent, context);
+            if (parent.Parent != null)
+            {
+                if (parent.Parent is IManageableCollection collectionParent)
+                {
+                    // We need to process the parent as a collection of items
+                    result.Parent = (IDataModelParent)EntityManager.GetEntityCollectionInstance(parent.Parent.GetType(), context, result, "");
+                }
+                else
+                {
+                    result.Parent = ReplicateParentHierarchy(parent.Parent, context);
+                }
+            }
+
+            return result;
+        }
+
+        internal static IDataModelParent ReplicateParent(IDataModelParent parent, PnPContext context)
+        {
+            if (parent == null)
+            {
+                throw new ArgumentNullException(nameof(parent));
+            }
+
+            if (context == null)
+            {
+                throw new ArgumentNullException(nameof(context));
+            }
+
+            var parentType = parent.GetType();
+
+            // Create a new instance of Parent with the same data type as the original parent
+            var replicatedParent = (IDataModelParent)EntityManager.GetEntityConcreteInstance(parentType, null, context);
+
+            // Copy the Key of the original parent into the replicated parent
+            if (parent is IDataModelWithKey keyParent &&
+                replicatedParent is IDataModelWithKey keyReplicatedParent)
+            {
+                keyReplicatedParent.Key = keyParent.Key;
+            }
+
+            // Copy original parent metadata to the replicated parent metadata, if any
+            if (parent is IMetadataExtensible mdParent &&
+                replicatedParent is IMetadataExtensible mdReplicatedParent)
+            {
+                foreach (var md in mdParent.Metadata)
+                {
+                    mdReplicatedParent.Metadata[md.Key] = md.Value;
+                }
+            }
+
+            return replicatedParent;
+        }
+
 
         #endregion
     }
