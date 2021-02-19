@@ -844,12 +844,16 @@ namespace PnP.Core.Test.SharePoint
                 Assert.IsTrue(list.Requested);
                 Assert.AreEqual(list.Title, "documents", true);
                 Assert.IsTrue(list.ContentTypes.Requested);
-                Assert.IsTrue(list.ContentTypes.AsEnumerable().First().IsPropertyAvailable(p => p.Id));
-                Assert.IsTrue(list.ContentTypes.AsEnumerable().First().IsPropertyAvailable(p => p.Name));
-                Assert.IsTrue(list.ContentTypes.AsEnumerable().First().FieldLinks.Requested);
-                Assert.IsTrue(list.ContentTypes.AsEnumerable().First().FieldLinks.First().IsPropertyAvailable(p => p.Id));
-                Assert.IsTrue(list.ContentTypes.AsEnumerable().First().FieldLinks.AsEnumerable().First().IsPropertyAvailable(p => p.Name));
-                Assert.IsTrue(!string.IsNullOrEmpty(list.ContentTypes.AsEnumerable().First().FieldLinks.AsEnumerable().First().Name));
+
+                var firstContentType = list.ContentTypes.AsEnumerable().First();
+                Assert.IsTrue(firstContentType.IsPropertyAvailable(p => p.Id));
+                Assert.IsTrue(firstContentType.IsPropertyAvailable(p => p.Name));
+                Assert.IsTrue(firstContentType.FieldLinks.Requested);
+
+                var firstFieldLink = firstContentType.FieldLinks.AsEnumerable().First();
+                Assert.IsTrue(firstFieldLink.IsPropertyAvailable(p => p.Id));
+                Assert.IsTrue(firstFieldLink.IsPropertyAvailable(p => p.Name));
+                Assert.IsTrue(!string.IsNullOrEmpty(firstFieldLink.Name));
             }
         }
 
