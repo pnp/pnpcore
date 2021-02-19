@@ -157,8 +157,8 @@ namespace PnP.Core.Test.SharePoint
                 // Get the page with a folder in the path
                 var pages = await context.Web.GetPagesAsync(pageName);
                 Assert.IsTrue(pages.Count == 1);
-                Assert.IsTrue(pages.First().Folder == $"{TestCommon.GetPnPSdkTestAssetName("folder1")}/{TestCommon.GetPnPSdkTestAssetName("folder2")}/{TestCommon.GetPnPSdkTestAssetName("folder3")}");
-                Assert.IsTrue(pages.First().PageId.Value > 0);
+                Assert.IsTrue(pages.AsEnumerable().First().Folder == $"{TestCommon.GetPnPSdkTestAssetName("folder1")}/{TestCommon.GetPnPSdkTestAssetName("folder2")}/{TestCommon.GetPnPSdkTestAssetName("folder3")}");
+                Assert.IsTrue(pages.AsEnumerable().First().PageId.Value > 0);
 
                 // delete folder with page
                 var folderToDelete = await newPage.PagesLibrary.RootFolder.EnsureFolderAsync(TestCommon.GetPnPSdkTestAssetName("folder1"));
@@ -183,9 +183,9 @@ namespace PnP.Core.Test.SharePoint
                     string pageName = "Home.aspx";
                     var pages = await context2.Web.GetPagesAsync(pageName);
 
-                    Assert.IsTrue(pages.First() != null);
-                    Assert.IsTrue(pages.First().PagesLibrary != null);
-                    Assert.IsTrue(pages.First().PagesLibrary.Title == "Sitepagina's");
+                    Assert.IsTrue(pages.AsEnumerable().First() != null);
+                    Assert.IsTrue(pages.AsEnumerable().First().PagesLibrary != null);
+                    Assert.IsTrue(pages.AsEnumerable().First().PagesLibrary.Title == "Sitepagina's");
                 }
 
                 // Delete the web to cleanup the test artefacts
@@ -206,10 +206,10 @@ namespace PnP.Core.Test.SharePoint
                 // Save the page
                 await newPage1.SaveAsync(pageName1);
 
-                var pages = await context.Web.GetPagesAsync("AD");
+                var pages = await context.Web.GetPagesAsync(TestCommon.GetPnPSdkTestAssetName("AD"));
 
                 Assert.IsTrue(pages.Count == 1);
-                Assert.IsTrue(pages.FirstOrDefault(p => p.Name == "ADS.aspx") != null);
+                Assert.IsTrue(pages.AsEnumerable().FirstOrDefault(p => p.Name == TestCommon.GetPnPSdkTestAssetName("ADS.aspx")) != null);
 
                 // Delete the created pages again
                 await newPage1.DeleteAsync();
@@ -241,8 +241,8 @@ namespace PnP.Core.Test.SharePoint
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 var pages = await context.Web.GetPagesAsync("Ho");
-                var imageWebPartId = pages.First().DefaultWebPartToWebPartId(DefaultWebPart.Image);
-                var availableComponents = await pages.First().AvailablePageComponentsAsync(imageWebPartId);
+                var imageWebPartId = pages.AsEnumerable().First().DefaultWebPartToWebPartId(DefaultWebPart.Image);
+                var availableComponents = await pages.AsEnumerable().First().AvailablePageComponentsAsync(imageWebPartId);
                 Assert.IsTrue(availableComponents.Count() == 1);
                 Assert.IsTrue(availableComponents.First().Id == imageWebPartId);
             }
@@ -265,8 +265,8 @@ namespace PnP.Core.Test.SharePoint
                     await context2.Web.EnsurePropertiesAsync(p => p.Features, p => p.IsMultilingual, p => p.SupportedUILanguageIds);
 
                     Assert.IsTrue(context2.Web.Features.AsEnumerable().FirstOrDefault(p => p.DefinitionId == new Guid("24611c05-ee19-45da-955f-6602264abaf8")) != null);
-                    Assert.IsTrue(context2.Web.SupportedUILanguageIds.AsEnumerable().Contains(1043));
-                    Assert.IsTrue(context2.Web.SupportedUILanguageIds.AsEnumerable().Contains(1036));
+                    Assert.IsTrue(context2.Web.SupportedUILanguageIds.Contains(1043));
+                    Assert.IsTrue(context2.Web.SupportedUILanguageIds.Contains(1036));
 
                     // Run ensure again on a site that was ensured previously to see also test that code path
                     await context2.Web.EnsureMultilingualAsync(new List<int>() { 1043, 1036 });
@@ -280,7 +280,7 @@ namespace PnP.Core.Test.SharePoint
                     // Verify everything was turned off again
                     await context3.Web.EnsurePropertiesAsync(p => p.Features, p => p.SupportedUILanguageIds);
 
-                    Assert.IsTrue(context3.Web.Features.FirstOrDefault(p => p.DefinitionId == new Guid("24611c05-ee19-45da-955f-6602264abaf8")) == null);
+                    Assert.IsTrue(context3.Web.Features.AsEnumerable().FirstOrDefault(p => p.DefinitionId == new Guid("24611c05-ee19-45da-955f-6602264abaf8")) == null);
                     Assert.IsFalse(context3.Web.SupportedUILanguageIds.Contains(1043));
                     Assert.IsFalse(context3.Web.SupportedUILanguageIds.Contains(1036));
                 }
@@ -318,24 +318,24 @@ namespace PnP.Core.Test.SharePoint
 
                 CultureInfo culture1043 = new CultureInfo(1043);
                 CultureInfo culture1036 = new CultureInfo(1036);
-                Assert.IsTrue(pageTranslations.TranslatedLanguages.FirstOrDefault(p => p.Culture == culture1043.Name) == null);
-                Assert.IsTrue(pageTranslations.TranslatedLanguages.FirstOrDefault(p => p.Culture == culture1036.Name) == null);
+                Assert.IsTrue(pageTranslations.TranslatedLanguages.FirstOrDefault(p => p.Culture.Equals(culture1043.Name, StringComparison.InvariantCultureIgnoreCase)) == null);
+                Assert.IsTrue(pageTranslations.TranslatedLanguages.FirstOrDefault(p => p.Culture.Equals(culture1036.Name, StringComparison.InvariantCultureIgnoreCase)) == null);
 
                 // generate translation for the page
                 pageTranslations = await newPage.TranslatePagesAsync();
-                Assert.IsTrue(pageTranslations.TranslatedLanguages.FirstOrDefault(p => p.Culture == culture1043.Name) != null);
-                Assert.IsTrue(pageTranslations.TranslatedLanguages.FirstOrDefault(p => p.Culture == culture1036.Name) != null);
+                Assert.IsTrue(pageTranslations.TranslatedLanguages.FirstOrDefault(p => p.Culture.Equals(culture1043.Name, StringComparison.InvariantCultureIgnoreCase)) != null);
+                Assert.IsTrue(pageTranslations.TranslatedLanguages.FirstOrDefault(p => p.Culture.Equals(culture1036.Name, StringComparison.InvariantCultureIgnoreCase)) != null);
 
                 // Delete the created page and it's translations
                 foreach (var translation in pageTranslations.TranslatedLanguages)
                 {
                     var folder = translation.Culture.Split('-')[0].ToLower();
                     var pagesToDelete = await context.Web.GetPagesAsync($"{folder}/{pageName}");
-                    await pagesToDelete.First().DeleteAsync();
+                    await pagesToDelete.AsEnumerable().First().DeleteAsync();
                 }
 
                 var pages = await context.Web.GetPagesAsync(pageName);
-                await pages.First().DeleteAsync();
+                await pages.AsEnumerable().First().DeleteAsync();
                 
                 // turn off multilingual again
                 await DisableMultilingual(context);
@@ -357,7 +357,7 @@ namespace PnP.Core.Test.SharePoint
                 // Verify the page exists
                 var pages = await context.Web.GetPagesAsync(pageName);
                 Assert.IsTrue(pages.Count == 1);
-                Assert.IsTrue(pages.First().PageTitle == pageName.Replace(".aspx", ""));
+                Assert.IsTrue(pages.AsEnumerable().First().PageTitle == pageName.Replace(".aspx", ""));
                 // Delete the page
                 await newPage.DeleteAsync();
                 // Verify the page exists
@@ -394,7 +394,7 @@ namespace PnP.Core.Test.SharePoint
 
                 Assert.IsTrue(pages.Count == 1);
 
-                page = pages.First();
+                page = pages.AsEnumerable().First();
 
                 Assert.IsTrue(page.Sections.Count == 6);
                 Assert.IsTrue(page.Sections[0].Type == CanvasSectionTemplate.OneColumnFullWidth);
@@ -436,7 +436,7 @@ namespace PnP.Core.Test.SharePoint
 
                 Assert.IsTrue(pages.Count == 1);
 
-                page = pages.First();
+                page = pages.AsEnumerable().First();
 
                 Assert.IsTrue(page.Sections.Count == 6);
                 Assert.IsTrue(page.Sections[0].Type == CanvasSectionTemplate.OneColumnFullWidth);
@@ -498,7 +498,7 @@ namespace PnP.Core.Test.SharePoint
 
                 Assert.IsTrue(pages.Count == 1);
 
-                page = pages.First();
+                page = pages.AsEnumerable().First();
 
                 Assert.IsTrue(page.Sections.Count == 6);
                 Assert.IsTrue(page.Sections[0].Type == CanvasSectionTemplate.OneColumnFullWidth);
@@ -579,7 +579,7 @@ namespace PnP.Core.Test.SharePoint
 
                 Assert.IsTrue(pages.Count == 1);
 
-                page = pages.First();
+                page = pages.AsEnumerable().First();
 
                 Assert.IsTrue(page.Sections.Count == 6);
                 Assert.IsTrue(page.Sections[0].Type == CanvasSectionTemplate.OneColumnFullWidth);
@@ -663,7 +663,7 @@ namespace PnP.Core.Test.SharePoint
 
                 Assert.IsTrue(pages.Count == 1);
 
-                page = pages.First();
+                page = pages.AsEnumerable().First();
 
                 Assert.IsTrue(page.Sections.Count == 1);
                 Assert.IsTrue(page.Sections[0].Type == CanvasSectionTemplate.OneColumnFullWidth);
@@ -701,7 +701,7 @@ namespace PnP.Core.Test.SharePoint
 
                 Assert.IsTrue(pages.Count == 1);
 
-                page = pages.First();
+                page = pages.AsEnumerable().First();
 
                 Assert.IsTrue(page.Sections.Count == 2);
                 Assert.IsTrue(page.Sections[0].Type == sectionType);
@@ -743,7 +743,7 @@ namespace PnP.Core.Test.SharePoint
 
                 Assert.IsTrue(pages.Count == 1);
 
-                page = pages.First();
+                page = pages.AsEnumerable().First();
 
                 Assert.IsTrue(page.Sections.Count == 2);
                 Assert.IsTrue(page.Sections[0].Type == CanvasSectionTemplate.TwoColumnVerticalSection);
@@ -876,7 +876,7 @@ namespace PnP.Core.Test.SharePoint
 
                 Assert.IsTrue(pages.Count == 1);
 
-                page = pages.First();
+                page = pages.AsEnumerable().First();
 
                 Assert.IsTrue(page.PageTitle == pageName.Replace(".aspx", ""));
 
@@ -911,7 +911,7 @@ namespace PnP.Core.Test.SharePoint
 
                 Assert.IsTrue(pages.Count == 1);
 
-                page = pages.First();
+                page = pages.AsEnumerable().First();
 
                 Assert.IsTrue(page.PageTitle == pageTitle);
 
@@ -951,7 +951,7 @@ namespace PnP.Core.Test.SharePoint
 
                 Assert.IsTrue(pages.Count == 1);
 
-                page = pages.First();
+                page = pages.AsEnumerable().First();
 
                 Assert.IsTrue(page.PageHeader.LayoutType == PageHeaderLayoutType.NoImage);
                 Assert.IsTrue(page.PageHeader.TextAlignment == PageHeaderTitleAlignment.Left);
@@ -992,7 +992,7 @@ namespace PnP.Core.Test.SharePoint
 
                 Assert.IsTrue(pages.Count == 1);
 
-                page = pages.First();
+                page = pages.AsEnumerable().First();
 
                 Assert.IsTrue(page.PageHeader.LayoutType == PageHeaderLayoutType.FullWidthImage);
                 Assert.IsTrue(page.PageHeader.TextAlignment == PageHeaderTitleAlignment.Left);
@@ -1033,7 +1033,7 @@ namespace PnP.Core.Test.SharePoint
 
                 Assert.IsTrue(pages.Count == 1);
 
-                page = pages.First();
+                page = pages.AsEnumerable().First();
 
                 Assert.IsTrue(page.PageHeader.LayoutType == PageHeaderLayoutType.CutInShape);
                 Assert.IsTrue(page.PageHeader.ShowTopicHeader == true);
@@ -1079,7 +1079,7 @@ namespace PnP.Core.Test.SharePoint
 
                 Assert.IsTrue(pages.Count == 1);
 
-                page = pages.First();
+                page = pages.AsEnumerable().First();
 
                 Assert.IsTrue(page.PageHeader.LayoutType == PageHeaderLayoutType.CutInShape);
                 Assert.IsTrue(page.PageHeader.ShowTopicHeader == true);
@@ -1127,7 +1127,7 @@ namespace PnP.Core.Test.SharePoint
 
                 Assert.IsTrue(pages.Count == 1);
 
-                page = pages.First();
+                page = pages.AsEnumerable().First();
 
                 Assert.IsTrue(page.PageHeader.ImageServerRelativeUrl == headerImage.ServerRelativeUrl);
                 Assert.IsTrue(page.PageHeader.TranslateX.HasValue == false);
@@ -1180,7 +1180,7 @@ namespace PnP.Core.Test.SharePoint
 
                 Assert.IsTrue(pages.Count == 1);
 
-                page = pages.First();
+                page = pages.AsEnumerable().First();
 
                 Assert.IsTrue(page.PageHeader.ImageServerRelativeUrl == headerImage.ServerRelativeUrl);
                 Assert.IsTrue(page.PageHeader.TranslateX.HasValue == true);
@@ -1223,7 +1223,7 @@ namespace PnP.Core.Test.SharePoint
                 // load page again
                 var pages = await context.Web.GetPagesAsync(pageName);
                 Assert.IsTrue(pages.Count == 1);
-                page = pages.First();
+                page = pages.AsEnumerable().First();
 
                 Assert.IsTrue((page.Controls[0] as IPageText).Text == "PnP <span class=\"fontSizeXLargePlus\"><span class=\"fontColorRed\"><strong>rocks!</strong></span></span>");
 
@@ -1252,7 +1252,7 @@ namespace PnP.Core.Test.SharePoint
                     // Read the current home page
                     string pageName = "Home.aspx";
                     var pages = await context2.Web.GetPagesAsync(pageName);
-                    var homePage = pages.First();
+                    var homePage = pages.AsEnumerable().First();
 
                     // Update the home page
                     homePage.ClearPage();
@@ -1266,7 +1266,7 @@ namespace PnP.Core.Test.SharePoint
 
                     // Load the page again
                     pages = await context2.Web.GetPagesAsync(pageName);
-                    var updatedHomePage = pages.First();
+                    var updatedHomePage = pages.AsEnumerable().First();
 
                     // Verify the home page was updated
                     Assert.IsTrue(updatedHomePage.Sections.Count == 1);
@@ -1301,7 +1301,7 @@ namespace PnP.Core.Test.SharePoint
 
                 // Load the page again
                 var pages = await context.Web.GetPagesAsync(pageName);
-                var updatedPage = pages.First();
+                var updatedPage = pages.AsEnumerable().First();
 
                 Assert.IsTrue(updatedPage.Sections.Count == 1);
                 Assert.IsTrue(updatedPage.Sections[0].Columns.Count == 3);
@@ -1341,7 +1341,7 @@ namespace PnP.Core.Test.SharePoint
 
                     // Load the page again
                     var pages = await context2.Web.GetPagesAsync(pageName);
-                    var updatedPage = pages.First();
+                    var updatedPage = pages.AsEnumerable().First();
 
                     Assert.IsTrue(updatedPage.Sections.Count == 1);
                     Assert.IsTrue(updatedPage.Sections[0].Columns.Count == 3);
@@ -1386,7 +1386,7 @@ namespace PnP.Core.Test.SharePoint
 
                     // Load the page again
                     var pages = await context2.Web.GetPagesAsync(pageName);
-                    var updatedPage = pages.First();
+                    var updatedPage = pages.AsEnumerable().First();
 
                     Assert.IsTrue(updatedPage.Sections.Count == 1);
                     Assert.IsTrue(updatedPage.Sections[0].Columns.Count == 3);
@@ -1427,7 +1427,7 @@ namespace PnP.Core.Test.SharePoint
 
                 // Load the page again
                 var pages = await context.Web.GetPagesAsync(pageName);
-                var updatedPage = pages.First();
+                var updatedPage = pages.AsEnumerable().First();
 
                 Assert.IsTrue(updatedPage.Sections.Count == 1);
                 Assert.IsTrue(updatedPage.Sections[0].Columns.Count == 3);
@@ -1452,7 +1452,7 @@ namespace PnP.Core.Test.SharePoint
 
                 // Load the template page again as regular page
                 var pages = await context.Web.GetPagesAsync(pageName);
-                var templatePage = pages.First();
+                var templatePage = pages.AsEnumerable().First();
 
                 var templateFolder = await templatePage.GetTemplatesFolderAsync();
                 var pageFolder = templatePage.Folder;
@@ -1481,7 +1481,7 @@ namespace PnP.Core.Test.SharePoint
 
                 // Load the template page again as regular page
                 var pages = await context.Web.GetPagesAsync(templatePageName);
-                var templatePage = pages.First();
+                var templatePage = pages.AsEnumerable().First();
 
                 // Create new page from this template
                 string pageName = TestCommon.GetPnPSdkTestAssetName("FromTemplate.aspx");
@@ -1489,8 +1489,8 @@ namespace PnP.Core.Test.SharePoint
                 await templatePage.SaveAsync(pageName);                
 
                 pages = await context.Web.GetPagesAsync(TestCommon.GetPnPSdkTestAssetName(""));
-                var fromTemplatePage = pages.FirstOrDefault(p => p.Name == pageName);
-                templatePage = pages.FirstOrDefault(p => p.Name == templatePageName);
+                var fromTemplatePage = pages.AsEnumerable().FirstOrDefault(p => p.Name == pageName);
+                templatePage = pages.AsEnumerable().FirstOrDefault(p => p.Name == templatePageName);
 
                 Assert.IsTrue((fromTemplatePage as Page).PageListItem["Description"].ToString() == "Updated content");
 
@@ -1527,7 +1527,7 @@ namespace PnP.Core.Test.SharePoint
                 // load page again
                 var pages = await context.Web.GetPagesAsync(pageName);
                 Assert.IsTrue(pages.Count == 1);
-                page = pages.First();
+                page = pages.AsEnumerable().First();
 
                 pageFile = await page.GetPageFileAsync(p => p.Level);
                 Assert.IsTrue(pageFile.Level == PublishedStatus.Published);
@@ -1564,7 +1564,7 @@ namespace PnP.Core.Test.SharePoint
                 {
                     var pages = await context2.Web.GetPagesAsync(pageName);
                     Assert.IsTrue(pages.Count == 1);
-                    page = pages.First();
+                    page = pages.AsEnumerable().First();
 
                     Assert.IsTrue(((page as Page).PageListItem[PageConstants.PromotedStateField]).ToString() == ((int)PromotedState.Promoted).ToString());
 
@@ -1604,7 +1604,7 @@ namespace PnP.Core.Test.SharePoint
                 // load page again
                 var pages = await context.Web.GetPagesAsync(pageName);
                 Assert.IsTrue(pages.Count == 1);
-                page = pages.First();
+                page = pages.AsEnumerable().First();
 
                 Assert.IsTrue(((page as Page).PageListItem[PageConstants.PromotedStateField]).ToString() == ((int)PromotedState.Promoted).ToString());
 
@@ -1682,7 +1682,7 @@ namespace PnP.Core.Test.SharePoint
                 // Load the page again
                 var pages = await context.Web.GetPagesAsync(pageName);
                 Assert.IsTrue(pages.Count == 1);
-                newPage = pages.First();
+                newPage = pages.AsEnumerable().First();
 
                 var commentsDisabled2 = await newPage.AreCommentsDisabledAsync();
                 Assert.IsTrue(commentsDisabled2);
@@ -1724,7 +1724,7 @@ namespace PnP.Core.Test.SharePoint
                 // Load the page again
                 var pages = await context.Web.GetPagesAsync(pageName);
                 Assert.IsTrue(pages.Count == 1);
-                newPage = pages.First();
+                newPage = pages.AsEnumerable().First();
 
                 Assert.IsTrue(newPage.LayoutType == PageLayoutType.RepostPage);
                 Assert.IsTrue(newPage.RepostSourceUrl == repostUrl);
@@ -1781,7 +1781,7 @@ namespace PnP.Core.Test.SharePoint
                 // Load the page again
                 var pages = await context.Web.GetPagesAsync(pageName);
                 Assert.IsTrue(pages.Count == 1);
-                newPage = pages.First();
+                newPage = pages.AsEnumerable().First();
 
                 Assert.IsTrue(newPage.LayoutType == PageLayoutType.RepostPage);
                 Assert.IsTrue(newPage.RepostSourceUrl == fileServerRelativeUrl);
@@ -1807,8 +1807,8 @@ namespace PnP.Core.Test.SharePoint
                 // Check current site home page is recognized
                 var pages = await context.Web.GetPagesAsync("home.aspx");
                 Assert.IsTrue(pages.Count == 1);
-                Assert.IsTrue(pages.First().LayoutType == PageLayoutType.Home);
-                Assert.IsTrue(pages.First().KeepDefaultWebParts);
+                Assert.IsTrue(pages.AsEnumerable().First().LayoutType == PageLayoutType.Home);
+                Assert.IsTrue(pages.AsEnumerable().First().KeepDefaultWebParts);
 
                 // Create new "home" page
                 var newPage = await context.Web.NewPageAsync(PageLayoutType.Home);
@@ -1823,7 +1823,7 @@ namespace PnP.Core.Test.SharePoint
                 // Load the page again
                 pages = await context.Web.GetPagesAsync(pageName);
                 Assert.IsTrue(pages.Count == 1);
-                newPage = pages.First();
+                newPage = pages.AsEnumerable().First();
 
                 Assert.IsTrue(newPage.LayoutType == PageLayoutType.Home);
 
@@ -1854,7 +1854,7 @@ namespace PnP.Core.Test.SharePoint
                 // Load the page again
                 var pages = await context.Web.GetPagesAsync(pageName);
                 Assert.IsTrue(pages.Count == 1);
-                newPage = pages.First();
+                newPage = pages.AsEnumerable().First();
 
                 Assert.IsTrue(newPage.LayoutType == PageLayoutType.Spaces);
 

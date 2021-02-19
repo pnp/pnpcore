@@ -1,9 +1,10 @@
---batchresponse_b58e3692-d226-471b-89d8-c90018fdc140
+--batchresponse_b0132946-4914-41a9-8ce9-40031b373262
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
-HTTP/1.1 500 Internal Server Error
+HTTP/1.1 201 Created
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+LOCATION: https://bertonline.sharepoint.com/sites/prov-1/_api/Web/RoleDefinitions(1073741932)
 
-{"error":{"code":"-2130575293, Microsoft.SharePoint.SPException","message":{"lang":"en-US","value":"The specified name is already in use.\n\nPlease try again with a new name."}}}
---batchresponse_b58e3692-d226-471b-89d8-c90018fdc140--
+{"d":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/RoleDefinitions(1073741932)","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/RoleDefinitions(1073741932)","type":"SP.RoleDefinition"},"BasePermissions":{"__metadata":{"type":"SP.BasePermissions"},"High":"0","Low":"262144"},"Description":null,"Hidden":false,"Id":1073741932,"Name":"PNP_SDK_TEST_RemoveRoleDefinitionsTest","Order":0,"RoleTypeKind":0}}
+--batchresponse_b0132946-4914-41a9-8ce9-40031b373262--

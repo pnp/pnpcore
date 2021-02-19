@@ -1,9 +1,9 @@
---batchresponse_ca6ff5d1-bf49-4a9b-9588-36229a9fecf0
+--batchresponse_5b735205-fa1a-4ca7-9bac-becafde0225e
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{"d":{"__metadata":{"id":"https://piasysdev.sharepoint.com/sites/prov-1/_api/Web","uri":"https://piasysdev.sharepoint.com/sites/prov-1/_api/Web","type":"SP.Web"},"Id":"5f51ff75-e0e1-4063-a78d-7d5fef4be508","NavAudienceTargetingEnabled":false,"NextStepsFirstRunEnabled":false,"NotificationsInOneDriveForBusinessEnabled":true,"NotificationsInSharePointEnabled":true,"ObjectCacheEnabled":false,"PreviewFeaturesEnabled":true,"PrimaryColor":"#986f0b","RecycleBinEnabled":true,"SaveSiteAsTemplateEnabled":true,"SearchBoxPlaceholderText":null,"ServerRelativeUrl":"/sites/prov-1","SiteLogoDescription":"","SiteLogoUrl":"/sites/prov-1/_api/GroupService/GetGroupImage?id='c8a8fceb-de82-4819-8559-0c56d5d763dd'&hash=637493216979471716","SyndicationEnabled":true}}
---batchresponse_ca6ff5d1-bf49-4a9b-9588-36229a9fecf0--
+{"d":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web","type":"SP.Web"},"Id":"8c8e101c-1b0d-4253-85e7-c30039bf46e2","NavAudienceTargetingEnabled":false,"NextStepsFirstRunEnabled":false,"NotificationsInOneDriveForBusinessEnabled":true,"NotificationsInSharePointEnabled":true,"ObjectCacheEnabled":false,"PreviewFeaturesEnabled":true,"PrimaryColor":"#4F6BED","RecycleBinEnabled":true,"SaveSiteAsTemplateEnabled":true,"SearchBoxPlaceholderText":null,"ServerRelativeUrl":"/sites/prov-1","SiteLogoDescription":"","SiteLogoUrl":"/sites/prov-1/_api/GroupService/GetGroupImage?id='93952182-398f-420a-bc16-16e29567cbdb'&hash=637493328683122020","SyndicationEnabled":true}}
+--batchresponse_5b735205-fa1a-4ca7-9bac-becafde0225e--
