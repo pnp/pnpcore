@@ -303,7 +303,6 @@ namespace PnP.Core.Test.SharePoint
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.NoGroupTestSite))
             {
-                
                 // Enable this site for multilingual pages
                 await context.Web.EnsureMultilingualAsync(new List<int>() { 1043, 1036 });
 
@@ -331,7 +330,10 @@ namespace PnP.Core.Test.SharePoint
                 {
                     var folder = translation.Culture.Split('-')[0].ToLower();
                     var pagesToDelete = await context.Web.GetPagesAsync($"{folder}/{pageName}");
-                    await pagesToDelete.AsEnumerable().First().DeleteAsync();
+                    if (pagesToDelete.Count > 0)
+                    {
+                        await pagesToDelete.AsEnumerable().FirstOrDefault()?.DeleteAsync();
+                    }
                 }
 
                 var pages = await context.Web.GetPagesAsync(pageName);
