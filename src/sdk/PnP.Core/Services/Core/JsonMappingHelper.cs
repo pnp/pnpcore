@@ -1098,10 +1098,11 @@ namespace PnP.Core.Services
                         }
                     }
                 }
-                else if (element.TryGetProperty(part, out JsonElement nextElement))
+                else if (element.ValueKind != JsonValueKind.Null && 
+                    element.TryGetProperty(part, out JsonElement nextElement))
                 {
                     element = nextElement;
-                }
+                }                
             }
 
             return element;
