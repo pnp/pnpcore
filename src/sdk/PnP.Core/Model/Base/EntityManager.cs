@@ -454,9 +454,17 @@ namespace PnP.Core.Model
 
         private static string ParseQueryProperties(EntityInfo entityInfo, LambdaExpression expression, EntityFieldExpandInfo entityFieldExpandInfo)
         {
-            var collectionPublicType = ((expression).Body as MethodCallExpression).Type.GenericTypeArguments[0];
+            var resultType = ((expression).Body as MethodCallExpression).Type;
+
+            // If the resulting type is a requestable collection
+            if (resultType.Name == typeof(IQueryable<>).Name)
+            {
+                // We get the result type from the generic argument of the collection
+                resultType = resultType.GenericTypeArguments[0];
+            }
+
             var fieldToLoad = ((expression.Body as MethodCallExpression).Arguments[0] as MemberExpression).Member.Name;
-            var collectionEntityInfo = EntityManager.Instance.GetStaticClassInfo(collectionPublicType);
+            var resultTypeInfo = EntityManager.Instance.GetStaticClassInfo(resultType);
 
             bool first = false;
             if (entityFieldExpandInfo == null)
@@ -465,7 +473,7 @@ namespace PnP.Core.Model
                 entityFieldExpandInfo = new EntityFieldExpandInfo()
                 {
                     Name = fieldToLoad,
-                    Type = collectionPublicType
+                    Type = resultType
                 };
             }
 
@@ -481,7 +489,7 @@ namespace PnP.Core.Model
                     {
                         expandFieldToLoad = (fieldExpressionBody as MemberExpression).Member.Name;
 
-                        var expandField = collectionEntityInfo.Fields.First(p => p.Name == expandFieldToLoad);
+                        var expandField = resultTypeInfo.Fields.First(p => p.Name == expandFieldToLoad);
 
                         entityFieldExpandInfo.Fields.Add(new EntityFieldExpandInfo() { Name = expandFieldToLoad, Expandable = expandField.SharePointExpandable || expandField.GraphExpandable });
                     }
@@ -489,7 +497,7 @@ namespace PnP.Core.Model
                     {
                         expandFieldToLoad = ((fieldExpressionBody as UnaryExpression).Operand as MemberExpression).Member.Name;
 
-                        var expandField = collectionEntityInfo.Fields.First(p => p.Name == expandFieldToLoad);
+                        var expandField = resultTypeInfo.Fields.First(p => p.Name == expandFieldToLoad);
 
                         entityFieldExpandInfo.Fields.Add(new EntityFieldExpandInfo() { Name = expandFieldToLoad, Expandable = expandField.SharePointExpandable || expandField.GraphExpandable });
                     }
@@ -520,10 +528,10 @@ namespace PnP.Core.Model
             if (first)
             {
                 // Add key field if needed
-                var keyFieldNonRecursive = entityFieldExpandInfo.Fields.FirstOrDefault(p => p.Name == collectionEntityInfo.ActualKeyFieldName);
+                var keyFieldNonRecursive = entityFieldExpandInfo.Fields.FirstOrDefault(p => p.Name == resultTypeInfo.ActualKeyFieldName);
                 if (keyFieldNonRecursive == null)
                 {
-                    entityFieldExpandInfo.Fields.Add(new EntityFieldExpandInfo() { Name = collectionEntityInfo.ActualKeyFieldName });
+                    entityFieldExpandInfo.Fields.Add(new EntityFieldExpandInfo() { Name = resultTypeInfo.ActualKeyFieldName });
                 }
 
                 var fieldToUpdate = entityInfo.Fields.FirstOrDefault(p => p.Name == fieldToLoad);
