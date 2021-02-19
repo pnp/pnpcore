@@ -1,9 +1,9 @@
---batchresponse_e70cced8-b483-438b-82cd-2588fc9eda5d
+--batchresponse_421a0b11-445c-4f61-a537-b4d82a6232d8
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{"d":{"results":[{"__metadata":{"id":"https://piasysdev.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'aaef37b3-161e-4918-806d-3802d9c978e5')","uri":"https://piasysdev.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'aaef37b3-161e-4918-806d-3802d9c978e5')","etag":"\"1\"","type":"SP.List"},"Description":"","Id":"aaef37b3-161e-4918-806d-3802d9c978e5","Title":"TestQueryListsDeleteConsistency"}]}}
---batchresponse_e70cced8-b483-438b-82cd-2588fc9eda5d--
+{"d":{"results":[]}}
+--batchresponse_421a0b11-445c-4f61-a537-b4d82a6232d8--
