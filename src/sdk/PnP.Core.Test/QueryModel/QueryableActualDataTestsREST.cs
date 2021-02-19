@@ -5,6 +5,7 @@ using PnP.Core.Test.Utilities;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
+using PnP.Core.Model;
 
 namespace PnP.Core.Test.QueryModel
 {
@@ -337,6 +338,11 @@ namespace PnP.Core.Test.QueryModel
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
+                await context.Web.LoadAsync(w => w.Title);
+                var newWeb = await context.Web.GetAsync(w => w.Title);
+
+                var list = await context.Web.Lists.FirstOrDefaultAsync(l => l.Title == "Something");
+
                 context.GraphFirst = false;
 
                 var library = context.Web.Lists.GetByTitle(targetListTitle);

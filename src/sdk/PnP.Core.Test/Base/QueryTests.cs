@@ -36,7 +36,7 @@ namespace PnP.Core.Test.Base
                 var model = new TModel();
                 (model as IDataModelWithContext).PnPContext = context;
 
-                var entityInfo = EntityManager.GetClassInfo(model.GetType(), (model as BaseDataModel<TModelInterface>), expression);
+                var entityInfo = EntityManager.GetClassInfo(model.GetType(), (model as BaseDataModel<TModelInterface>), expressions: expression);
 
                 return new Tuple<TModel, EntityInfo, Expression<Func<TModelInterface, object>>[]>(model, entityInfo, expression);
             }

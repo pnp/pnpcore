@@ -57,7 +57,7 @@ namespace PnP.Core.Test.SharePoint
                 Assert.AreNotEqual(0, site.AuditLogTrimmingRetention);
                 Assert.IsFalse(site.CanSyncHubSitePermissions);
                 Assert.AreEqual(default, site.ChannelGroupId);
-                Assert.AreEqual("", site.Classification);
+                Assert.IsNotNull(site.Classification);
                 Assert.IsFalse(site.CommentsOnSitePagesDisabled);
                 Assert.IsFalse(site.DisableAppViews);
                 Assert.IsFalse(site.DisableCompanyWideSharingLinks);

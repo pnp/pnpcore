@@ -699,7 +699,7 @@ namespace PnP.Core.Model
             }
 
             // Get class info for the given concrete entity
-            var concreteEntityClassInfo = EntityManager.GetClassInfo(typeof(TModel), concreteEntity as BaseDataModel<TModel>, null);
+            var concreteEntityClassInfo = EntityManager.GetClassInfo(typeof(TModel), concreteEntity as BaseDataModel<TModel>);
 
             // Build the delete call
             var query = await QueryClient.BuildDeleteAPICallAsync(concreteEntity as BaseDataModel<TModel>, concreteEntityClassInfo).ConfigureAwait(false);
