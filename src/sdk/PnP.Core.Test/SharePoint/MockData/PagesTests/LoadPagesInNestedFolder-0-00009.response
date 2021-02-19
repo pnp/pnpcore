@@ -1,73 +1,9 @@
---batchresponse_1213ad19-38b5-455e-90a5-17ade4625e38
+--batchresponse_e1f3d50a-052e-48e7-8f3b-5ad9ea7b109c
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 200 OK
-CONTENT-TYPE: application/json; charset=utf-8
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{ "Row" : 
-[{
-"ID": "865",
-"PermMask": "0x7ffffffffffbffff",
-"FSObjType": "0",
-"HTML_x0020_File_x0020_Type": "",
-"UniqueId": "{4196A147-068A-45D3-BA58-461707B942F5}",
-"ProgId": "",
-"NoExecute": "0",
-"ContentType": "Wiki Page",
-"WelcomeViewId": "",
-"WelcomePageCustomized": "",
-"ContentTypeId": "0x01010800B3B2A1451E70B6458A757AC0CBA6DAEF",
-"FileRef": "\u002fsites\u002fprov-1\u002fSitePages\u002fPNP_SDK_TEST_folder1\u002fPNP_SDK_TEST_folder2\u002fPNP_SDK_TEST_folder3\u002fPNP_SDK_TEST_LoadPagesInNestedFolder.aspx",
-"_UIVersion": "1",
-"SMTotalSize": "932",
-"File_x0020_Size": "780",
-"_CommentFlags": "",
-"File_x0020_Type": "aspx",
-"File_x0020_Type.mapapp": "",
-"HTML_x0020_File_x0020_Type.File_x0020_Type.mapcon": "SharePoint.OpenDocuments",
-"HTML_x0020_File_x0020_Type.File_x0020_Type.mapico": "ichtm.gif",
-"serverurl.progid": "",
-"ServerRedirectedEmbedUrl": "",
-"File_x0020_Type.progid": "",
-"File_x0020_Type.url": "FALSE",
-"FileLeafRef": "PNP_SDK_TEST_LoadPagesInNestedFolder.aspx",
-"FileDirRef": "\u002fsites\u002fprov-1\u002fSitePages\u002fPNP_SDK_TEST_folder1\u002fPNP_SDK_TEST_folder2\u002fPNP_SDK_TEST_folder3",
-"Description": "",
-"Title": "",
-"ClientSideApplicationId": "",
-"PageLayoutType": "",
-"CanvasContent1": "<div dir=\"\" class=\"ms-rtestate-field\"><\u002fdiv>",
-"_AuthorByline": "",
-"LayoutWebpartsContent": "<div dir=\"\" class=\"ms-rtestate-field\"><\u002fdiv>",
-"BannerImageUrl": "",
-"BannerImageUrl.desc": "",
-"PromotedState": "",
-"PromotedState.": "",
-"_OriginalSourceUrl": "",
-"_OriginalSourceSiteId": "",
-"_OriginalSourceWebId": "",
-"_OriginalSourceListId": "",
-"_OriginalSourceItemId": "",
-"ItemChildCount": "0",
-"FolderChildCount": "0",
-"A2ODMountCount": "",
-"owshiddenversion": "1",
-"_SPTranslatedLanguages": "",
-"_SPSitePageFlags": "",
-"ContentVersion": "0",
-"DocConcurrencyNumber": "1",
-"_VirusStatus": "",
-"Restricted": ""
-}
-],"FirstRow" : 1,
-"FolderPermissions" : "0x7ffffffffffbffff"
-,"LastRow" : 1,
-"RowLimit" : 30
-,"FilterLink" : "?"
-,"ForceNoHierarchy" : "1"
-,"HierarchyHasIndention" : ""
-,"CurrentFolderSpItemUrl" : ""
-
-}
---batchresponse_1213ad19-38b5-455e-90a5-17ade4625e38--
+{"d":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/prov-1/SitePages/PNP_SDK_TEST_folder1/PNP_SDK_TEST_folder2/PNP_SDK_TEST_folder3/PNP_SDK_TEST_LoadPagesInNestedFolder.aspx')","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/prov-1/SitePages/PNP_SDK_TEST_folder1/PNP_SDK_TEST_folder2/PNP_SDK_TEST_folder3/PNP_SDK_TEST_LoadPagesInNestedFolder.aspx')","type":"SP.File"},"Author":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/prov-1/SitePages/PNP_SDK_TEST_folder1/PNP_SDK_TEST_folder2/PNP_SDK_TEST_folder3/PNP_SDK_TEST_LoadPagesInNestedFolder.aspx')/Author"}},"CheckedOutByUser":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/prov-1/SitePages/PNP_SDK_TEST_folder1/PNP_SDK_TEST_folder2/PNP_SDK_TEST_folder3/PNP_SDK_TEST_LoadPagesInNestedFolder.aspx')/CheckedOutByUser"}},"EffectiveInformationRightsManagementSettings":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/prov-1/SitePages/PNP_SDK_TEST_folder1/PNP_SDK_TEST_folder2/PNP_SDK_TEST_folder3/PNP_SDK_TEST_LoadPagesInNestedFolder.aspx')/EffectiveInformationRightsManagementSettings"}},"InformationRightsManagementSettings":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/prov-1/SitePages/PNP_SDK_TEST_folder1/PNP_SDK_TEST_folder2/PNP_SDK_TEST_folder3/PNP_SDK_TEST_LoadPagesInNestedFolder.aspx')/InformationRightsManagementSettings"}},"ListItemAllFields":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/prov-1/SitePages/PNP_SDK_TEST_folder1/PNP_SDK_TEST_folder2/PNP_SDK_TEST_folder3/PNP_SDK_TEST_LoadPagesInNestedFolder.aspx')/ListItemAllFields"}},"LockedByUser":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/prov-1/SitePages/PNP_SDK_TEST_folder1/PNP_SDK_TEST_folder2/PNP_SDK_TEST_folder3/PNP_SDK_TEST_LoadPagesInNestedFolder.aspx')/LockedByUser"}},"ModifiedBy":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/prov-1/SitePages/PNP_SDK_TEST_folder1/PNP_SDK_TEST_folder2/PNP_SDK_TEST_folder3/PNP_SDK_TEST_LoadPagesInNestedFolder.aspx')/ModifiedBy"}},"Properties":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/prov-1/SitePages/PNP_SDK_TEST_folder1/PNP_SDK_TEST_folder2/PNP_SDK_TEST_folder3/PNP_SDK_TEST_LoadPagesInNestedFolder.aspx')/Properties"}},"VersionEvents":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/prov-1/SitePages/PNP_SDK_TEST_folder1/PNP_SDK_TEST_folder2/PNP_SDK_TEST_folder3/PNP_SDK_TEST_LoadPagesInNestedFolder.aspx')/VersionEvents"}},"Versions":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/prov-1/SitePages/PNP_SDK_TEST_folder1/PNP_SDK_TEST_folder2/PNP_SDK_TEST_folder3/PNP_SDK_TEST_LoadPagesInNestedFolder.aspx')/Versions"}},"CheckInComment":"","CheckOutType":2,"ContentTag":"{0AD9DD41-B129-409A-9392-A008AC712BA7},1,0","CustomizedPageStatus":1,"ETag":"\"{0AD9DD41-B129-409A-9392-A008AC712BA7},1\"","Exists":true,"IrmEnabled":false,"Length":"780","Level":2,"LinkingUri":null,"LinkingUrl":"","MajorVersion":0,"MinorVersion":1,"Name":"PNP_SDK_TEST_LoadPagesInNestedFolder.aspx","ServerRelativeUrl":"/sites/prov-1/SitePages/PNP_SDK_TEST_folder1/PNP_SDK_TEST_folder2/PNP_SDK_TEST_folder3/PNP_SDK_TEST_LoadPagesInNestedFolder.aspx","TimeCreated":"2021-02-19T12:34:50Z","TimeLastModified":"2021-02-19T12:34:50Z","Title":null,"UIVersion":1,"UIVersionLabel":"0.1","UniqueId":"0ad9dd41-b129-409a-9392-a008ac712ba7"}}
+--batchresponse_e1f3d50a-052e-48e7-8f3b-5ad9ea7b109c--
