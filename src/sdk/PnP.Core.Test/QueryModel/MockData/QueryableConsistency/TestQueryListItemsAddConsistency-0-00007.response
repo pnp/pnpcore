@@ -1,9 +1,9 @@
---batchresponse_36a82a7c-47cb-42ed-a1ea-3d4f69df23e1
+--batchresponse_4a76ffe0-8831-4b0c-9322-8b5d490e7b72
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{"d":{"results":[{"__metadata":{"id":"512e2a62-b929-42c4-89f6-7b698b477154","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'346a9dd5-d3ff-469d-b854-9128d80ae452')/Items(1)","etag":"\"1\"","type":"SP.Data.TestQueryListItemsAddConsistencyListItem"},"Id":1,"ID":1,"Title":"New Item"}]}}
---batchresponse_36a82a7c-47cb-42ed-a1ea-3d4f69df23e1--
+{"d":{"results":[{"__metadata":{"id":"ee8e3b97-4a95-473d-8248-0dee673b25a2","uri":"https://piasysdev.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'3471761d-a9ec-4232-984a-32eaa4e78ed0')/Items(1)","etag":"\"1\"","type":"SP.Data.TestQueryListItemsAddConsistencyListItem"},"Id":1,"ID":1,"Title":"New Item"}]}}
+--batchresponse_4a76ffe0-8831-4b0c-9322-8b5d490e7b72--

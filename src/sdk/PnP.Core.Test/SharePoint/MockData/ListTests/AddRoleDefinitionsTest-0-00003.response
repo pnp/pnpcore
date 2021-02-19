@@ -1,9 +1,10 @@
---batchresponse_ace2ecaa-ae47-45ef-bef4-52ff924daf95
+--batchresponse_8cc67e23-45bb-42cd-a877-ddb4112cedaf
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
-HTTP/1.1 500 Internal Server Error
+HTTP/1.1 201 Created
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+LOCATION: https://piasysdev.sharepoint.com/sites/prov-1/_api/Web/RoleDefinitions(1073741980)
 
-{"error":{"code":"-2130575293, Microsoft.SharePoint.SPException","message":{"lang":"en-US","value":"The specified name is already in use.\n\nPlease try again with a new name."}}}
---batchresponse_ace2ecaa-ae47-45ef-bef4-52ff924daf95--
+{"d":{"__metadata":{"id":"https://piasysdev.sharepoint.com/sites/prov-1/_api/Web/RoleDefinitions(1073741980)","uri":"https://piasysdev.sharepoint.com/sites/prov-1/_api/Web/RoleDefinitions(1073741980)","type":"SP.RoleDefinition"},"BasePermissions":{"__metadata":{"type":"SP.BasePermissions"},"High":"0","Low":"262144"},"Description":null,"Hidden":false,"Id":1073741980,"Name":"PNP_SDK_TEST_AddRoleDefinitionsTest","Order":0,"RoleTypeKind":0}}
+--batchresponse_8cc67e23-45bb-42cd-a877-ddb4112cedaf--
