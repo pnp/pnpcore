@@ -61,6 +61,7 @@ Remove-PnPList -Identity AddListViaRestAsync -Force
 Remove-PnPList -Identity AddListViaBatchRest -Force
 Remove-PnPList -Identity AddListViaExplicitBatchRest -Force
 Remove-PnPList -Identity AddListViaRest -Force
+Remove-PnPList -Identity CamlListItemGetPagedAsyncPaging -Force
 Remove-PnPList -Identity DeleteListItemViaBatchRest -Force
 Remove-PnPList -Identity DeleteListItemViaRest -Force
 Remove-PnPList -Identity UpdateValuesPropertyViaBatchRest -Force
