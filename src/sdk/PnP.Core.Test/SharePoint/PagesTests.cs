@@ -1111,7 +1111,7 @@ namespace PnP.Core.Test.SharePoint
 
                 // Upload image to site assets library
                 IFolder parentFolder = await context.Web.Folders.FirstOrDefaultAsync(f => f.Name == "SiteAssets");
-                IFile headerImage = await parentFolder.Files.AddAsync("pageheader.jpg", System.IO.File.OpenRead($".{Path.DirectorySeparatorChar}TestAssets{Path.DirectorySeparatorChar}pageheader.jpg"));
+                IFile headerImage = await parentFolder.Files.AddAsync("pageheader.jpg", System.IO.File.OpenRead($".{Path.DirectorySeparatorChar}TestAssets{Path.DirectorySeparatorChar}pageheader.jpg"), overwrite: true);
 
                 // Configure the page header
                 page.SetCustomPageHeader(headerImage.ServerRelativeUrl);
@@ -1163,7 +1163,7 @@ namespace PnP.Core.Test.SharePoint
 
                 // Upload image to site assets library
                 IFolder parentFolder = await context.Web.Folders.FirstOrDefaultAsync(f => f.Name == "SiteAssets");
-                IFile headerImage = await parentFolder.Files.AddAsync("pageheader.jpg", System.IO.File.OpenRead($".{Path.DirectorySeparatorChar}TestAssets{Path.DirectorySeparatorChar}pageheader.jpg"));
+                IFile headerImage = await parentFolder.Files.AddAsync("pageheader.jpg", System.IO.File.OpenRead($".{Path.DirectorySeparatorChar}TestAssets{Path.DirectorySeparatorChar}pageheader.jpg"), overwrite: true);
 
                 // Configure the page header
                 page.SetCustomPageHeader(headerImage.ServerRelativeUrl, 5.3, 6.2);
