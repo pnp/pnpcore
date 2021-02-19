@@ -1,0 +1,11 @@
+{"responses": [{"id": "1","status":400,"headers" : {"Content-Type":"application/json"},"body":{
+  "error": {
+    "code": "BadRequest",
+    "message": "Invalid filter clause",
+    "innerError": {
+      "date": "2021-02-18T18:05:14",
+      "request-id": "317359e4-e350-4813-854d-636cddbb1db6",
+      "client-request-id": "317359e4-e350-4813-854d-636cddbb1db6"
+    }
+  }
+}}]}

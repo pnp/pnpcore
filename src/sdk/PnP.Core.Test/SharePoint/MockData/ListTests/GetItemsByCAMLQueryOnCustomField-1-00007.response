@@ -1,0 +1,15 @@
+{"responses": [{"id": "1","status":429,"headers" : {"Retry-After":"329","Cache-Control":"private","Content-Type":"application/json"},"body":{
+  "error": {
+    "code": "activityLimitReached",
+    "message": "The request has been throttled",
+    "innerError": {
+      "code": "throttledRequest",
+      "innerError": {
+        "code": "quota"
+      },
+      "date": "2021-02-19T09:07:58",
+      "request-id": "4bb6dd15-d38c-477d-942a-88422979b6b8",
+      "client-request-id": "4bb6dd15-d38c-477d-942a-88422979b6b8"
+    }
+  }
+}}]}
