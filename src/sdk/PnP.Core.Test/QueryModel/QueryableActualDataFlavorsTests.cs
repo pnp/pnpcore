@@ -20,6 +20,52 @@ namespace PnP.Core.Test.QueryModel
         }
 
         [TestMethod]
+        public async Task REMOVE_TestQueryPropertiesBehavior()
+        {
+            // TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                context.GraphFirst = true;
+
+                await context.Web.LoadAsync(w => w.Title, 
+                    w => w.Description, 
+                    w => w.Lists.QueryProperties(l => l.Id, l => l.Title));
+
+                var web1 = await context.Web.GetAsync(w => w.Title,
+                    w => w.Description,
+                    w => w.Lists.QueryProperties(l => l.Id, l => l.Title));
+
+                var lists1 = context.Web.Lists.QueryProperties(l => l.Id,
+                        l => l.Title,
+                        l => l.ContentTypes.QueryProperties(ct => ct.Id, ct => ct.Description)
+                    );
+
+                foreach (var l in lists1)
+                {
+                    Assert.IsNotNull(l);
+                }
+
+                var lists2 = context.Web.Lists.Where(l => l.Title == "Documents")
+                    .QueryProperties(l => l.Id,
+                        l => l.Title,
+                        l => l.ContentTypes.QueryProperties(ct => ct.Id, ct => ct.Description));
+
+                foreach (var l in lists2)
+                {
+                    Assert.IsNotNull(l);
+                }
+
+                var list = context.Web.Lists.QueryProperties(l => l.Id,
+                    l => l.Title,
+                    l => l.ContentTypes.QueryProperties(ct => ct.Id, ct => ct.Description)
+                    ).FirstOrDefault(l => l.Title == "Documents");
+
+                Assert.IsNotNull(list);
+            }
+        }
+
+
+        [TestMethod]
         public async Task TestLoadViaGraph()
         {
             // TestCommon.Instance.Mocking = false;
