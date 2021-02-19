@@ -3,6 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PnP.Core.Auth.Test.Utilities;
 using System;
 using System.Configuration;
+using System.IO;
 using System.Net.Http;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
@@ -20,7 +21,15 @@ namespace PnP.Core.Auth.Test.Providers
         [ClassInitialize]
         public static void TestFixtureSetup(TestContext context)
         {
-            // NOOP so far
+            // Install the debug cert in the certstore ~ this works on Linux as well
+            string path = $"TestAssets{Path.DirectorySeparatorChar}pnp.pfx";
+            using (X509Certificate2 certificate = new X509Certificate2(path, "PnPRocks!"))
+            {
+                X509Store xstore = new X509Store(StoreName.My, StoreLocation.CurrentUser);
+                xstore.Open(OpenFlags.ReadWrite);
+                xstore.Add(certificate);
+                xstore.Close();
+            }
         }
 
         [TestMethod]
@@ -50,6 +59,8 @@ namespace PnP.Core.Auth.Test.Providers
         public async Task TestX509CertificateConstructorNoDI()
 #pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
         {
+            //if (TestCommon.RunningInGitHubWorkflow()) Assert.Inconclusive("Skipping test because we're running inside a GitHub action and we don't have access to the certificate store");
+
             var provider = PrepareX509CertificateAuthenticationProvider();
 
             Assert.IsNotNull(provider);
@@ -63,7 +74,7 @@ namespace PnP.Core.Auth.Test.Providers
         public async Task TestX509CertificateConstructorNoDI_NullClientId_NullTenantId()
 #pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
         {
-            if (TestCommon.RunningInGitHubWorkflow()) Assert.Inconclusive("Skipping test because we're running inside a GitHub action and we don't have access to the certificate store");
+            //if (TestCommon.RunningInGitHubWorkflow()) Assert.Inconclusive("Skipping test because we're running inside a GitHub action and we don't have access to the certificate store");
 
             var configuration = TestCommon.GetConfigurationSettings();
             var storeName = configuration.GetValue<StoreName>($"{TestGlobals.CredentialsConfigurationBasePath}:{x509CertificateConfigurationPath}:X509Certificate:StoreName");
@@ -122,6 +133,8 @@ namespace PnP.Core.Auth.Test.Providers
         [TestMethod]
         public async Task TestX509CertificateAuthenticateRequestAsyncCorrect()
         {
+            if (TestCommon.RunningInGitHubWorkflow()) Assert.Inconclusive("Skipping test because we're running inside a GitHub action and we don't have access to the certificate store");
+
             var provider = PrepareX509CertificateAuthenticationProvider();
 
             var request = new HttpRequestMessage(HttpMethod.Get, TestGlobals.GraphMeRequest);
@@ -161,6 +174,8 @@ namespace PnP.Core.Auth.Test.Providers
         [TestMethod]
         public async Task TestX509CertificateGetAccessTokenAsyncCorrect()
         {
+            if (TestCommon.RunningInGitHubWorkflow()) Assert.Inconclusive("Skipping test because we're running inside a GitHub action and we don't have access to the certificate store");
+
             var provider = PrepareX509CertificateAuthenticationProvider();
 
             var accessToken = await provider.GetAccessTokenAsync(TestGlobals.GraphResource);
@@ -171,7 +186,7 @@ namespace PnP.Core.Auth.Test.Providers
 
         private static X509CertificateAuthenticationProvider PrepareX509CertificateAuthenticationProvider()
         {
-            if (TestCommon.RunningInGitHubWorkflow()) Assert.Inconclusive("Skipping test because we're running inside a GitHub action and we don't have access to the certificate store");
+            //if (TestCommon.RunningInGitHubWorkflow()) Assert.Inconclusive("Skipping test because we're running inside a GitHub action and we don't have access to the certificate store");
 
             var configuration = TestCommon.GetConfigurationSettings();
             var clientId = configuration.GetValue<string>($"{TestGlobals.CredentialsConfigurationBasePath}:{x509CertificateConfigurationPath}:ClientId");

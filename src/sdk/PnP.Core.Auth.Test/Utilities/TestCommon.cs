@@ -220,8 +220,10 @@ namespace PnP.Core.Auth.Test.Utilities
 
         internal static string GetX509CertificateThumbprint()
         {
-            var configuration = GetConfigurationSettings();
-            return configuration.GetValue<string>($"{TestGlobals.CredentialsConfigurationBasePath}:x509Certificate:X509Certificate:Thumbprint");
+            return "DF5450F6FB23838465128BBFC95C86091504B16B";
+
+            //var configuration = GetConfigurationSettings();
+            //return configuration.GetValue<string>($"{TestGlobals.CredentialsConfigurationBasePath}:x509Certificate:X509Certificate:Thumbprint");
         }
 
         private static string LoadTestEnvironment()

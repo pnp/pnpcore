@@ -113,18 +113,23 @@ namespace PnP.Core.Model.SharePoint
 
         internal override object ToValidateUpdateItemJson()
         {
-            if (Principal == null)
+            if (HasValue("Principal"))
             {
-                //throw new ClientException(ErrorType.Unsupported, PnPCoreResources.Exception_Unsupported_MissingSharePointPrincipal);
-                return JsonSerializer.Serialize(new List<object>());
+                if (Principal == null)
+                {
+                    //throw new ClientException(ErrorType.Unsupported, PnPCoreResources.Exception_Unsupported_MissingSharePointPrincipal);
+                    return JsonSerializer.Serialize(new List<object>());
+                }
+
+                var users = new List<object>
+                {
+                    new { Key = Principal.LoginName }
+                };
+
+                return JsonSerializer.Serialize(users.ToArray());
             }
 
-            var users = new List<object>
-            {
-                new { Key = Principal.LoginName }
-            };
-
-            return JsonSerializer.Serialize(users.ToArray());
+            return JsonSerializer.Serialize(new List<object>());
         }
 
         internal override string ToCsomXml()

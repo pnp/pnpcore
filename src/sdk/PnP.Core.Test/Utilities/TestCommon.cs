@@ -1,6 +1,8 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using PnP.Core.Auth;
 using PnP.Core.Auth.Services.Builder.Configuration;
 using PnP.Core.Services;
 using PnP.Core.Services.Builder.Configuration;
@@ -8,6 +10,7 @@ using PnP.Core.Test.Services;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -16,6 +19,9 @@ namespace PnP.Core.Test.Utilities
     public sealed class TestCommon
     {
         private const string AsyncSuffix = "_Async";
+        private const string PnPCoreSDKTestSite = "pnpcoresdktestsite";
+        private const string PnPCoreSDKTestUser = "pnpcoresdktestuser";
+        private const string PnPCoreSDKTestUserPassword = "pnpcoresdktestuserpassword";
         private static readonly Lazy<TestCommon> _lazyInstance = new Lazy<TestCommon>(() => new TestCommon(), true);
         private IPnPTestContextFactory pnpContextFactoryCache;
         private static readonly SemaphoreSlim semaphoreSlimFactory = new SemaphoreSlim(1);
@@ -188,6 +194,22 @@ namespace PnP.Core.Test.Utilities
             return await factory.CreateAsync(groupId).ConfigureAwait(false);
         }
 
+        internal async Task<PnPContext> GetLiveContextAsync()
+        {
+            // Obtain factory (cached)
+            var factory = BuildContextFactory();
+
+            var pnpCoreSDKTestUserPassword = Environment.GetEnvironmentVariable(PnPCoreSDKTestUserPassword);
+            var pnpCoreSDKTestUser = Environment.GetEnvironmentVariable(PnPCoreSDKTestUser);
+            var pnpCoreSDKTestSite = Environment.GetEnvironmentVariable(PnPCoreSDKTestSite);
+
+            var pwd = new NetworkCredential(null, pnpCoreSDKTestUserPassword).SecurePassword;
+
+            var context = await factory.CreateLiveAsync(new Uri(pnpCoreSDKTestSite), new UsernamePasswordAuthenticationProvider(null, null, pnpCoreSDKTestUser, pwd));
+
+            return context;
+        }
+
         public async Task<PnPContext> CloneAsync(PnPContext source, int id)
         {
             return await source.CloneForTestingAsync(source, null, null, id);
@@ -341,6 +363,17 @@ namespace PnP.Core.Test.Utilities
             else
             {
                 return false;
+            }
+        }
+
+        internal static void PnPCoreSDKTestUserSetup()
+        {
+            var pnpCoreSDKTestUserPassword = Environment.GetEnvironmentVariable(PnPCoreSDKTestUserPassword);
+            var pnpCoreSDKTestUser = Environment.GetEnvironmentVariable(PnPCoreSDKTestUser);
+            var pnpCoreSDKTestSite = Environment.GetEnvironmentVariable(PnPCoreSDKTestSite);
+            if (string.IsNullOrEmpty(pnpCoreSDKTestUser) || string.IsNullOrEmpty(pnpCoreSDKTestUserPassword) || string.IsNullOrEmpty(pnpCoreSDKTestSite))
+            {
+                Assert.Inconclusive("Skipping test because 'live' tests are not configured. Add pnpcoresdktestsite, pnpcoresdktestuser and pnpcoresdktestuserpassword environment variables");
             }
         }
 

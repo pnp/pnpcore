@@ -193,6 +193,28 @@ namespace PnP.Core.Test.SharePoint
             }
         }
 
+
+        [TestMethod]
+        public async Task LoadPagesWithSimilarNames()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var newPage1 = await context.Web.NewPageAsync();
+                string pageName1 = $"{TestCommon.GetPnPSdkTestAssetName("ADS.aspx")}";
+
+                // Save the page
+                await newPage1.SaveAsync(pageName1);
+
+                var pages = await context.Web.GetPagesAsync("AD");
+
+                Assert.IsTrue(pages.Count == 1);
+                Assert.IsTrue(pages.FirstOrDefault(p => p.Name == "ADS.aspx") != null);
+
+                // Delete the created pages again
+                await newPage1.DeleteAsync();
+            }
+        }
         #endregion
 
         #region Available web parts tests

@@ -79,7 +79,7 @@ namespace PnP.Core.Model.SharePoint
             {
                 if (item is FieldUserValue fieldUserValue)
                 {
-                    if (fieldUserValue.Principal == null)
+                    if (!fieldUserValue.HasValue("Principal") || fieldUserValue.Principal == null)
                     {
                         throw new ClientException(ErrorType.Unsupported, PnPCoreResources.Exception_Unsupported_MissingSharePointPrincipal);
                     }

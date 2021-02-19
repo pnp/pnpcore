@@ -206,42 +206,7 @@ namespace PnP.Core.Model.SharePoint
             {
                 if (!string.IsNullOrEmpty(NameToConstructEntityType))
                 {
-                    string entityName = NameToConstructEntityType.Replace("_", "_x005f_").Replace(" ", "_x0020_");
-
-                    bool isList = true;
-                    if (TemplateType == ListTemplateType.DocumentLibrary ||
-                        TemplateType == ListTemplateType.WebPageLibrary ||
-                        TemplateType == ListTemplateType.XMLForm ||
-                        TemplateType == ListTemplateType.PictureLibrary ||
-                        TemplateType == ListTemplateType.WebPageLibrary ||
-                        TemplateType == ListTemplateType.DataConnectionLibrary ||
-                        TemplateType == ListTemplateType.HelpLibrary ||
-                        TemplateType == ListTemplateType.HomePageLibrary ||
-                        TemplateType == ListTemplateType.MySiteDocumentLibrary ||
-                        TemplateType == ListTemplateType.SharingLinks ||
-                        // IWConvertedForms
-                        TemplateType == (ListTemplateType)10102)
-                    {
-                        isList = false;
-                    }
-
-                    if (TemplateType.ToString().EndsWith("Catalog") ||
-                        TemplateType == ListTemplateType.MaintenanceLogs)
-                    {
-                        entityName = $"OData__x005f_catalogs_x002f_{entityName}";
-                        isList = false;
-                    }
-
-                    if (TemplateType == ListTemplateType.UserInformation)
-                    {
-                        Metadata.Add(PnPConstants.MetaDataRestEntityTypeName, $"UserInfo");
-                    }
-                    else
-                    {
-                        string entityNameToUse = $"{entityName.ToString().Replace(" ", "")}{(isList ? "List" : "")}";
-                        entityNameToUse = entityNameToUse.First().ToString().ToUpper() + entityNameToUse.Substring(1);
-                        Metadata.Add(PnPConstants.MetaDataRestEntityTypeName, entityNameToUse);
-                    }
+                    Metadata.Add(PnPConstants.MetaDataRestEntityTypeName, ListMetaDataMapper.MicrosoftGraphNameToRestEntityTypeName(NameToConstructEntityType, TemplateType));
                 }
             }
         }

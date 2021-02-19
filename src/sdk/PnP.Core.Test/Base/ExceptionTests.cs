@@ -8,6 +8,7 @@ using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
 using PnP.Core.Model;
+using System.Collections.Generic;
 
 namespace PnP.Core.Test.Base
 {
@@ -103,7 +104,14 @@ namespace PnP.Core.Test.Base
             SharePointRestError error = null;
             try
             {
-                throw new SharePointRestServiceException(ErrorType.SharePointRestServiceError, 400, sampleRestSimpleError);
+                SharePointRestServiceException restException = new SharePointRestServiceException(ErrorType.SharePointRestServiceError, 400, sampleRestSimpleError);
+                restException.Error.AdditionalData = new Dictionary<string, object>
+                {
+                    { "Extra1", "extra error data" },
+                    { "Extra2", true }
+                };
+
+                throw restException;
             }
             catch (ServiceException ex)
             {
@@ -120,6 +128,8 @@ namespace PnP.Core.Test.Base
             Assert.IsTrue(restErrorString.Contains("Code:"));
             Assert.IsTrue(restErrorString.Contains("Message:"));
             Assert.IsTrue(restErrorString.Contains("ClientRequestId:"));
+            Assert.IsTrue(restErrorString.Contains("Extra1: extra error data"));
+            Assert.IsTrue(restErrorString.Contains("Extra2: True"));
 
             Assert.IsTrue(sharePointRestServiceExceptionThrown);
             Assert.IsTrue(string.IsNullOrEmpty(error.Code));
