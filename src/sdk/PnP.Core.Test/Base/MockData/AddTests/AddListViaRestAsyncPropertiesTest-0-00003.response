@@ -1,1 +1,9 @@
-{"responses": [{"id": "1","status":200,"headers" : {"Cache-Control":"no-cache","OData-Version":"4.0","Content-Type":"application/json;odata.metadata=minimal;odata.streaming=true;IEEE754Compatible=false;charset=utf-8"},"body":{"@odata.context":"https://graph.microsoft.com/v1.0/$metadata#sites('piasysdev.sharepoint.com%2C409403da-217e-4c1b-b400-6dd624fe15d4%2C5f51ff75-e0e1-4063-a78d-7d5fef4be508')/lists","value":[{"@odata.etag":"\"01069a3a-3e29-4a84-9082-0511898ecea2,2\"","createdDateTime":"2021-02-19T14:46:29Z","description":"TEST DESCRIPTION","eTag":"\"01069a3a-3e29-4a84-9082-0511898ecea2,2\"","id":"01069a3a-3e29-4a84-9082-0511898ecea2","lastModifiedDateTime":"2021-02-19T14:46:30Z","name":"AddListViaRestAsyncPropertiesTest","webUrl":"https://piasysdev.sharepoint.com/sites/prov-1/Lists/AddListViaRestAsyncPropertiesTest","displayName":"AddListViaRestAsyncPropertiesTest","createdBy":{"user":{"email":"paolo@PiaSysDev.onmicrosoft.com","id":"bea7a848-0459-4bee-9034-5513ee7f66e0","displayName":"Paolo Pialorsi"}},"lastModifiedBy":{"user":{"email":"paolo@PiaSysDev.onmicrosoft.com","id":"bea7a848-0459-4bee-9034-5513ee7f66e0","displayName":"Paolo Pialorsi"}},"parentReference":{"siteId":"piasysdev.sharepoint.com,409403da-217e-4c1b-b400-6dd624fe15d4,5f51ff75-e0e1-4063-a78d-7d5fef4be508"},"list":{"contentTypesEnabled":false,"hidden":false,"template":"genericList"}}]}}]}
+--batchresponse_20e79897-7f96-4edb-95d5-f9e4ea794685
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+HTTP/1.1 200 OK
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+
+
+--batchresponse_20e79897-7f96-4edb-95d5-f9e4ea794685--
