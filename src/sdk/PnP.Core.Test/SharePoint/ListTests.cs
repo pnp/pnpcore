@@ -133,6 +133,8 @@ namespace PnP.Core.Test.SharePoint
                 // BERT - filtering on Id does not work for SharePoint Lists with Graph - will be fixed with the new 2.1 VROOM backend
                 using (var context4 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 3))
                 {
+                    context4.GraphFirst = false;
+
                     var list4 = context4.Web.Lists.GetByTitle(listTitle);
                     if (list4 != null)
                     {
@@ -894,6 +896,9 @@ namespace PnP.Core.Test.SharePoint
 
                 using (var context2 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))
                 {
+                    // Filtering lists by Id is not yet supported by Microsoft Graph
+                    context2.GraphFirst = false;
+
                     // Get list without root folder - will trigger rootfolder load
                     var list = await context2.Web.Lists.GetByIdAsync(listId,
                         l => l.Fields.QueryProperties(f => f.Id, f => f.Title, f => f.InternalName, f => f.TypeAsString));
@@ -914,6 +919,8 @@ namespace PnP.Core.Test.SharePoint
 
                     using (var context3 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 3))
                     {
+                        context3.GraphFirst = false;
+
                         // We should have 2 list items
                         var list3 = await context3.Web.Lists.GetByIdAsync(listId, p => p.Items);
 
