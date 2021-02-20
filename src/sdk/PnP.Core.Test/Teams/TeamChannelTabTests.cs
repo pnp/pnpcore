@@ -32,7 +32,7 @@ namespace PnP.Core.Test.Teams
                 channel = await channel.GetAsync(o => o.Tabs);
                 var tabs = channel.Tabs;
                 var firstTab = tabs.First();
-                await firstTab.GetAsync(o => o.WebUrl, o => o.SortOrderIndex);
+                await firstTab.LoadAsync(o => o.WebUrl, o => o.SortOrderIndex);
 
                 Assert.IsNotNull(firstTab.WebUrl);
                 Assert.IsNotNull(firstTab.SortOrderIndex); //This is not found on the graph V1.0
