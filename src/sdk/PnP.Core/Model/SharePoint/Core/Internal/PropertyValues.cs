@@ -1,4 +1,8 @@
 using PnP.Core.Services;
+using PnP.Core.Services.Core.CSOM.Requests;
+using PnP.Core.Services.Core.CSOM.Requests.Factories;
+using PnP.Core.Services.Core.CSOM.Requests.Web;
+using PnP.Core.Services.Core.CSOM.Utils.Model;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -79,59 +83,27 @@ namespace PnP.Core.Model.SharePoint
 
         public async new Task UpdateAsync()
         {
-            var xmlPayload = BuildXmlPayload();
-            if (!string.IsNullOrEmpty(xmlPayload))
+            UpdatePropertyBagRequest request = GetUpdatePropertyBag();
+            if (request.FieldsToUpdate.Count > 0)
             {
-                var apiCall = new ApiCall(xmlPayload)
+                ApiCall updatePropertiesCall = PnPContext.GetCSOMCallForRequests(new List<IRequest<object>>()
                 {
-                    Commit = true
-                };
-                await RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
+                    request
+                });
+                await RawRequestAsync(updatePropertiesCall, HttpMethod.Post).ConfigureAwait(false);
             }
         }
         #endregion
 
         #region Methods
-        private string BuildXmlPayload()
+        internal virtual UpdatePropertyBagRequest GetUpdatePropertyBag()
         {
-            string xml = CsomHelper.PropertyBagUpdate;
-
-            if ((this as IDataModelParent).Parent is IFolder)
-            {
-                xml = xml.Replace(CsomHelper.ObjectId, CsomHelper.PropertyBagFolderObjectId);
-                xml = xml.Replace(CsomHelper.PropertyName, CsomHelper.PropertyBagFileFolderPropertyName);
-            }
-            else if ((this as IDataModelParent).Parent is IFile)
-            {
-                xml = xml.Replace(CsomHelper.PropertyName, CsomHelper.PropertyBagFileFolderPropertyName);
-
-                var fileObjectId = CsomHelper.PropertyBagFileObjectId;
-                if (((this as IDataModelParent).Parent as IFile).IsPropertyAvailable(p => p.ServerRelativeUrl))
-                {
-                    fileObjectId = fileObjectId.Replace("{Parent.Id}", ((this as IDataModelParent).Parent as IFile).ServerRelativeUrl);
-                    xml = xml.Replace(CsomHelper.ObjectId, fileObjectId);
-                }
-                else
-                {
-                    throw new ClientException(ErrorType.Unsupported, PnPCoreResources.Exception_Unsupported_FileServerRelativeUrlNotLoaded);
-                }
-            }
-            else
-            {
-                xml = xml.Replace(CsomHelper.ObjectId, "");
-                xml = xml.Replace(CsomHelper.PropertyName, CsomHelper.PropertyBagWebPropertyName);
-            }
-
-            int counter = 1;
-            StringBuilder fieldValues = new StringBuilder();
+            UpdatePropertyBagRequest request = UpdatePropertyBagRequestFactory.GetUpdatePropertyBagRequest(this);
 
             var entity = EntityManager.GetClassInfo(GetType(), this);
             IEnumerable<EntityFieldInfo> fields = entity.Fields;
-
-            bool changeFound = false;
             foreach (PropertyDescriptor cp in ChangedProperties)
             {
-                changeFound = true;
                 // Look for the corresponding property in the type
                 var changedField = fields.FirstOrDefault(f => f.Name == cp.Name);
 
@@ -145,53 +117,26 @@ namespace PnP.Core.Model.SharePoint
                         foreach (KeyValuePair<string, object> changedProp in dictionaryObject.ChangedProperties)
                         {
                             // Let's set its value into the update message
-                            fieldValues.AppendLine(SetFieldValueXml(changedProp.Key, changedProp.Value, changedProp.Value?.GetType().Name, ref counter));
+                            request.FieldsToUpdate.Add(new CSOMItemField()
+                            {
+                                FieldName = changedProp.Key,
+                                FieldValue = changedProp.Value,
+                                FieldType = changedProp.Value?.GetType().Name
+                            });
                         }
                     }
                     else
                     {
-                        // Let's set its value into the update message
-                        fieldValues.AppendLine(SetFieldValueXml(changedField.SharePointName, GetValue(changedField.Name), changedField.DataType.Name, ref counter));
+                        request.FieldsToUpdate.Add(new CSOMItemField()
+                        {
+                            FieldName = changedField.SharePointName,
+                            FieldValue = GetValue(changedField.Name),
+                            FieldType = changedField.DataType.Name
+                        });
                     }
                 }
             }
-
-            // No changes, so bail out
-            if (!changeFound)
-            {
-                return null;
-            }
-
-            // update field values
-            xml = xml.Replace("{FieldValues}", fieldValues.ToString());
-
-            // update counter
-            xml = xml.Replace("{Counter}", counter.ToString());
-
-            return xml;
-        }
-
-        private static string SetFieldValueXml(string fieldName, object fieldValue, string fieldType, ref int counter)
-        {
-            string xml = CsomHelper.ListItemSystemUpdateSetFieldValue;
-
-            xml = xml.Replace("{Counter}", counter.ToString());
-            xml = xml.Replace("{FieldName}", fieldName);
-            xml = xml.Replace("{FieldValue}", fieldValue == null ? "" : CsomHelper.XmlString(TypeSpecificHandling(fieldValue.ToString(), fieldType), false));
-            xml = xml.Replace("{FieldType}", fieldType ?? "Null");
-
-            counter++;
-            return xml;
-        }
-
-        private static string TypeSpecificHandling(string value, string fieldType)
-        {
-            if (!string.IsNullOrEmpty(value) && !string.IsNullOrEmpty(fieldType) && fieldType.Equals("Boolean"))
-            {
-                return value.ToLowerInvariant();
-            }
-
-            return value;
+            return request;
         }
         #endregion
 

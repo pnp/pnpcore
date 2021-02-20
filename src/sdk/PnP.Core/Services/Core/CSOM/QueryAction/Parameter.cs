@@ -9,7 +9,7 @@ namespace PnP.Core.Services.Core.CSOM.QueryAction
     {
         internal string Type { get; set; }
         internal string Name { get; set; }
-        internal string Value { get; set; }
+        internal object Value { get; set; }
     }
     class SelectQuery
     {

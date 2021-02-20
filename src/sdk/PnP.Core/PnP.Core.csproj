@@ -103,4 +103,8 @@
 		</EmbeddedResource>
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Folder Include="Services\Core\CSOM\Requests\Factories\" />
+	</ItemGroup>
+
 </Project>
