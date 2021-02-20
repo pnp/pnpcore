@@ -1,18 +1,10 @@
-<<<<<<< HEAD
---batchresponse_2320ac18-a2af-4999-9e0e-3e3e09994f23
-=======
---batchresponse_ca0baad5-dc8e-4c26-9287-cdbab7442e53
->>>>>>> 6da5f73e4318b0c14f383e8b41c06563917990c6
+--batchresponse_2e084f1a-fc42-43be-af5a-eabc3eee0933
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
-HTTP/1.1 200 OK
+HTTP/1.1 204 No Content
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+ETAG: "4"
 
-<<<<<<< HEAD
-{"d":{"__metadata":{"id":"https://piasysdev.sharepoint.com/sites/prov-1/_api/web/lists/getbyid(guid'90be55d5-404b-424d-8eee-675569de9533')/InformationRightsManagementSettings","uri":"https://piasysdev.sharepoint.com/sites/prov-1/_api/web/lists/getbyid(guid'90be55d5-404b-424d-8eee-675569de9533')/InformationRightsManagementSettings","type":"SP.InformationRightsManagementSettings"},"AllowPrint":false,"AllowScript":false,"AllowWriteCopy":false,"DisableDocumentBrowserView":false,"DocumentAccessExpireDays":90,"DocumentLibraryProtectionExpireDate":"2021-03-22T02:30:06-07:00","EnableDocumentAccessExpire":false,"EnableDocumentBrowserPublishingView":false,"EnableGroupProtection":false,"EnableLicenseCacheExpire":false,"GroupName":"","LicenseCacheExpireDays":30,"PolicyDescription":"","PolicyTitle":"","TemplateId":""}}
---batchresponse_2320ac18-a2af-4999-9e0e-3e3e09994f23--
-=======
-{"d":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/web/lists/getbyid(guid'9040c299-52fd-4f1b-a839-3fd310d3cd1e')/InformationRightsManagementSettings","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/web/lists/getbyid(guid'9040c299-52fd-4f1b-a839-3fd310d3cd1e')/InformationRightsManagementSettings","type":"SP.InformationRightsManagementSettings"},"AllowPrint":false,"AllowScript":false,"AllowWriteCopy":false,"DisableDocumentBrowserView":false,"DocumentAccessExpireDays":90,"DocumentLibraryProtectionExpireDate":"2021-03-22T02:28:48-07:00","EnableDocumentAccessExpire":false,"EnableDocumentBrowserPublishingView":false,"EnableGroupProtection":false,"EnableLicenseCacheExpire":false,"GroupName":"","LicenseCacheExpireDays":30,"PolicyDescription":"","PolicyTitle":"","TemplateId":""}}
---batchresponse_ca0baad5-dc8e-4c26-9287-cdbab7442e53--
->>>>>>> 6da5f73e4318b0c14f383e8b41c06563917990c6
+
+--batchresponse_2e084f1a-fc42-43be-af5a-eabc3eee0933--

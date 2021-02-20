@@ -1,18 +1,9 @@
-<<<<<<< HEAD
---batchresponse_daaea5ce-e3c5-42fe-b80c-6808144650c7
-=======
---batchresponse_c695fe8c-5772-4c2e-8cd7-8eccf80a0913
->>>>>>> 6da5f73e4318b0c14f383e8b41c06563917990c6
+--batchresponse_0358b4d7-4bcf-4b65-abe4-62e2a0c7dbb9
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
-HTTP/1.1 204 No Content
+HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
-ETAG: "2"
 
-
-<<<<<<< HEAD
---batchresponse_daaea5ce-e3c5-42fe-b80c-6808144650c7--
-=======
---batchresponse_c695fe8c-5772-4c2e-8cd7-8eccf80a0913--
->>>>>>> 6da5f73e4318b0c14f383e8b41c06563917990c6
+{"d":{"__metadata":{"id":"https://piasysdev.sharepoint.com/sites/prov-1/_api/web/lists/getbyid(guid'90be55d5-404b-424d-8eee-675569de9533')/InformationRightsManagementSettings","uri":"https://piasysdev.sharepoint.com/sites/prov-1/_api/web/lists/getbyid(guid'90be55d5-404b-424d-8eee-675569de9533')/InformationRightsManagementSettings","type":"SP.InformationRightsManagementSettings"},"AllowPrint":false,"AllowScript":false,"AllowWriteCopy":false,"DisableDocumentBrowserView":false,"DocumentAccessExpireDays":90,"DocumentLibraryProtectionExpireDate":"2021-03-22T02:49:27-07:00","EnableDocumentAccessExpire":false,"EnableDocumentBrowserPublishingView":false,"EnableGroupProtection":false,"EnableLicenseCacheExpire":false,"GroupName":"","LicenseCacheExpireDays":30,"PolicyDescription":"","PolicyTitle":"","TemplateId":""}}
+--batchresponse_0358b4d7-4bcf-4b65-abe4-62e2a0c7dbb9--

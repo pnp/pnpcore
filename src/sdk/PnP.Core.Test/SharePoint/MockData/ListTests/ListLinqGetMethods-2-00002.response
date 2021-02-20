@@ -1,4 +1,4 @@
---batchresponse_ec236b5f-8c60-48f0-b7d7-66212c156216
+--batchresponse_b3a985a8-823d-42a1-a8ca-83350409e975
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
@@ -6,4 +6,4 @@ HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
 {"d":{"results":[{"__metadata":{"id":"https://piasysdev.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'd965d2e6-f065-437e-ae1f-903b2aa385f0')","uri":"https://piasysdev.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'd965d2e6-f065-437e-ae1f-903b2aa385f0')","etag":"\"1\"","type":"SP.List"},"BaseTemplate":100,"Id":"d965d2e6-f065-437e-ae1f-903b2aa385f0","Title":"ListLinqGetMethods"}]}}
---batchresponse_ec236b5f-8c60-48f0-b7d7-66212c156216--
+--batchresponse_b3a985a8-823d-42a1-a8ca-83350409e975--
