@@ -1,9 +1,9 @@
---batchresponse_37d0df8e-131b-4993-8674-66f4d5868754
+--batchresponse_9fbf9126-02b1-4d29-aca1-cb1bdba84c6f
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{"d":{"__metadata":{"id":"https://piasysdev.sharepoint.com/sites/prov-1/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/prov-1/SitePages/PNP_SDK_TEST_PromoteAsHomePage.aspx')","uri":"https://piasysdev.sharepoint.com/sites/prov-1/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/prov-1/SitePages/PNP_SDK_TEST_PromoteAsHomePage.aspx')","type":"SP.File"},"ServerRelativeUrl":"/sites/prov-1/SitePages/PNP_SDK_TEST_PromoteAsHomePage.aspx","UniqueId":"54678c80-3a87-4a86-bfd6-ac5e55401181"}}
---batchresponse_37d0df8e-131b-4993-8674-66f4d5868754--
+{"d":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web","type":"SP.Web"},"Id":"8c8e101c-1b0d-4253-85e7-c30039bf46e2","WelcomePage":"sitepages/PNP_SDK_TEST_PromoteAsHomePage.aspx"}}
+--batchresponse_9fbf9126-02b1-4d29-aca1-cb1bdba84c6f--

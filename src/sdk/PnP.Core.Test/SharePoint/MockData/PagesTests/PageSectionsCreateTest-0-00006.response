@@ -1,4 +1,4 @@
---batchresponse_9d9c66ac-3638-4f47-ae1e-ed92539d492b
+--batchresponse_ea85c116-8335-4df3-a669-c2997949ca29
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
@@ -7,19 +7,19 @@ CONTENT-TYPE: application/json; charset=utf-8
 
 { "Row" : 
 [{
-"ID": "3",
+"ID": "354",
 "PermMask": "0x7ffffffffffbffff",
 "FSObjType": "0",
 "HTML_x0020_File_x0020_Type": "",
-"UniqueId": "{301FC1A3-1E8E-4ED8-B7F2-ECDB557FCBA8}",
+"UniqueId": "{844F7A30-F6E5-46C3-81D4-BAA329443315}",
 "ProgId": "",
 "NoExecute": "0",
-"ContentTypeId": "0x0101009D1CB255DA76424F860D91F20E6C411800F47BF4FB5F0AD344ACC87322915810AD",
-"FileRef": "\u002fsites\u002fmodern-pnp-sdk\u002fSitePages\u002fPNP_SDK_TEST_PageSectionsCreateTest.aspx",
-"FileRef.urlencode": "%2Fsites%2Fmodern%2Dpnp%2Dsdk%2FSitePages%2FPNP%5FSDK%5FTEST%5FPageSectionsCreateTest%2Easpx",
-"FileRef.urlencodeasurl": "\u002fsites\u002fmodern-pnp-sdk\u002fSitePages\u002fPNP_SDK_TEST_PageSectionsCreateTest.aspx",
-"FileRef.urlencoding": "\u002fsites\u002fmodern-pnp-sdk\u002fSitePages\u002fPNP_SDK_TEST_PageSectionsCreateTest.aspx",
-"FileRef.scriptencodeasurl": "\\u002fsites\\u002fmodern-pnp-sdk\\u002fSitePages\\u002fPNP_SDK_TEST_PageSectionsCreateTest.aspx",
+"ContentTypeId": "0x0101009D1CB255DA76424F860D91F20E6C41180044C66AD09592964583DFF5030205BD34",
+"FileRef": "\u002fsites\u002fpnpcoresdktest\u002fSitePages\u002fPNP_SDK_TEST_PageSectionsCreateTest.aspx",
+"FileRef.urlencode": "%2Fsites%2Fpnpcoresdktest%2FSitePages%2FPNP%5FSDK%5FTEST%5FPageSectionsCreateTest%2Easpx",
+"FileRef.urlencodeasurl": "\u002fsites\u002fpnpcoresdktest\u002fSitePages\u002fPNP_SDK_TEST_PageSectionsCreateTest.aspx",
+"FileRef.urlencoding": "\u002fsites\u002fpnpcoresdktest\u002fSitePages\u002fPNP_SDK_TEST_PageSectionsCreateTest.aspx",
+"FileRef.scriptencodeasurl": "\\u002fsites\\u002fpnpcoresdktest\\u002fSitePages\\u002fPNP_SDK_TEST_PageSectionsCreateTest.aspx",
 "_UIVersion": "1",
 "SMTotalSize": "932",
 "File_x0020_Size": "780",
@@ -35,7 +35,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "FileLeafRef": "PNP_SDK_TEST_PageSectionsCreateTest.aspx",
 "FileLeafRef.Name": "PNP_SDK_TEST_PageSectionsCreateTest",
 "FileLeafRef.Suffix": "aspx",
-"FileDirRef": "\u002fsites\u002fmodern-pnp-sdk\u002fSitePages",
+"FileDirRef": "\u002fsites\u002fpnpcoresdktest\u002fSitePages",
 "Description": "",
 "Title": "",
 "ClientSideApplicationId": "",
@@ -63,8 +63,8 @@ CONTENT-TYPE: application/json; charset=utf-8
 "ItemChildCount": "0",
 "FolderChildCount": "0",
 "A2ODMountCount": "",
-"_ComplianceTag": "",
 "owshiddenversion": "1",
+"_SPTranslatedLanguages": "",
 "_SPSitePageFlags": "",
 "ContentVersion": "0",
 "DocConcurrencyNumber": "1",
@@ -82,4 +82,4 @@ CONTENT-TYPE: application/json; charset=utf-8
 ,"CurrentFolderSpItemUrl" : ""
 
 }
---batchresponse_9d9c66ac-3638-4f47-ae1e-ed92539d492b--
+--batchresponse_ea85c116-8335-4df3-a669-c2997949ca29--

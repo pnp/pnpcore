@@ -1,4 +1,4 @@
---batchresponse_bda55554-fa81-42e2-851f-dc3dd8783359
+--batchresponse_d03e5ff2-8eff-4ce9-9f29-307cb1bd9f63
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
@@ -7,14 +7,14 @@ CONTENT-TYPE: application/json; charset=utf-8
 
 { "Row" : 
 [{
-"ID": "54",
+"ID": "1012",
 "PermMask": "0x7ffffffffffbffff",
 "FSObjType": "0",
 "HTML_x0020_File_x0020_Type": "",
-"UniqueId": "{92232A1D-8D07-443F-83B9-21C0BAFB7B59}",
+"UniqueId": "{8CA68BC3-975A-4794-B94B-7B192ABF10F3}",
 "ProgId": "",
 "NoExecute": "0",
-"ContentTypeId": "0x01010800FB74799233AF364397CCAD2384D3944F",
+"ContentTypeId": "0x01010800B3B2A1451E70B6458A757AC0CBA6DAEF",
 "FileRef": "\u002fsites\u002fprov-1\u002fSitePages\u002fPNP_SDK_TEST_CreateAndUpdatePageViaPageFile.aspx",
 "FileRef.urlencode": "%2Fsites%2Fprov%2D1%2FSitePages%2FPNP%5FSDK%5FTEST%5FCreateAndUpdatePageViaPageFile%2Easpx",
 "FileRef.urlencodeasurl": "\u002fsites\u002fprov-1\u002fSitePages\u002fPNP_SDK_TEST_CreateAndUpdatePageViaPageFile.aspx",
@@ -63,8 +63,8 @@ CONTENT-TYPE: application/json; charset=utf-8
 "ItemChildCount": "0",
 "FolderChildCount": "0",
 "A2ODMountCount": "",
-"_ComplianceTag": "",
 "owshiddenversion": "1",
+"_SPTranslatedLanguages": "",
 "_SPSitePageFlags": "",
 "ContentVersion": "0",
 "DocConcurrencyNumber": "1",
@@ -82,4 +82,4 @@ CONTENT-TYPE: application/json; charset=utf-8
 ,"CurrentFolderSpItemUrl" : ""
 
 }
---batchresponse_bda55554-fa81-42e2-851f-dc3dd8783359--
+--batchresponse_d03e5ff2-8eff-4ce9-9f29-307cb1bd9f63--

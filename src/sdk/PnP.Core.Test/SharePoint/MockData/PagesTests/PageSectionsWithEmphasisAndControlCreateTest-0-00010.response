@@ -1,9 +1,9 @@
---batchresponse_87c6d636-f8d1-44a4-b27f-2d6e7c4e2c7e
+--batchresponse_2b13c163-73e2-4b9a-aa83-dc1a22f755c2
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{"d":{"results":[{"__metadata":{"id":"https://piasysdev.sharepoint.com/sites/modern-pnp-sdk/_api/Web/Lists(guid'26c5c7ba-d5fe-4cbd-87d5-040ab369d524')","uri":"https://piasysdev.sharepoint.com/sites/modern-pnp-sdk/_api/Web/Lists(guid'26c5c7ba-d5fe-4cbd-87d5-040ab369d524')","etag":"\"24\"","type":"SP.List"},"RootFolder":{"__metadata":{"id":"https://piasysdev.sharepoint.com/sites/modern-pnp-sdk/_api/Web/Lists(guid'26c5c7ba-d5fe-4cbd-87d5-040ab369d524')/RootFolder","uri":"https://piasysdev.sharepoint.com/sites/modern-pnp-sdk/_api/Web/Lists(guid'26c5c7ba-d5fe-4cbd-87d5-040ab369d524')/RootFolder","type":"SP.Folder"},"Files":{"__deferred":{"uri":"https://piasysdev.sharepoint.com/sites/modern-pnp-sdk/_api/Web/Lists(guid'26c5c7ba-d5fe-4cbd-87d5-040ab369d524')/RootFolder/Files"}},"ListItemAllFields":{"__deferred":{"uri":"https://piasysdev.sharepoint.com/sites/modern-pnp-sdk/_api/Web/Lists(guid'26c5c7ba-d5fe-4cbd-87d5-040ab369d524')/RootFolder/ListItemAllFields"}},"ParentFolder":{"__deferred":{"uri":"https://piasysdev.sharepoint.com/sites/modern-pnp-sdk/_api/Web/Lists(guid'26c5c7ba-d5fe-4cbd-87d5-040ab369d524')/RootFolder/ParentFolder"}},"Properties":{"__deferred":{"uri":"https://piasysdev.sharepoint.com/sites/modern-pnp-sdk/_api/Web/Lists(guid'26c5c7ba-d5fe-4cbd-87d5-040ab369d524')/RootFolder/Properties"}},"StorageMetrics":{"__deferred":{"uri":"https://piasysdev.sharepoint.com/sites/modern-pnp-sdk/_api/Web/Lists(guid'26c5c7ba-d5fe-4cbd-87d5-040ab369d524')/RootFolder/StorageMetrics"}},"Folders":{"__deferred":{"uri":"https://piasysdev.sharepoint.com/sites/modern-pnp-sdk/_api/Web/Lists(guid'26c5c7ba-d5fe-4cbd-87d5-040ab369d524')/RootFolder/Folders"}},"Exists":true,"IsWOPIEnabled":false,"ItemCount":2,"Name":"SitePages","ProgID":null,"ServerRelativeUrl":"/sites/modern-pnp-sdk/SitePages","TimeCreated":"2021-02-07T00:27:32Z","TimeLastModified":"2021-02-19T18:09:25Z","UniqueId":"35723820-5155-48a4-bbfe-b88521d78887","WelcomePage":""},"BaseTemplate":119,"EnableFolderCreation":false,"EnableMinorVersions":true,"EnableModeration":false,"EnableVersioning":true,"Id":"26c5c7ba-d5fe-4cbd-87d5-040ab369d524","ListItemEntityTypeFullName":"SP.Data.SitePagesItem","Title":"Site Pages"}]}}
---batchresponse_87c6d636-f8d1-44a4-b27f-2d6e7c4e2c7e--
+
+--batchresponse_2b13c163-73e2-4b9a-aa83-dc1a22f755c2--

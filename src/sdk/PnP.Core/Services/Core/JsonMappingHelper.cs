@@ -1,5 +1,6 @@
 ﻿using PnP.Core.Model;
 using PnP.Core.Model.SharePoint;
+using PnP.Core.QueryModel;
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
@@ -647,7 +648,7 @@ namespace PnP.Core.Services
             {
                 if (parentList.ArePropertiesAvailable(List.LoadFieldsExpression))
                 {
-                    return parentList.Fields.FirstOrDefault(p => p.InternalName == fieldName);
+                    return parentList.Fields.AsEnumerable().FirstOrDefault(p => p.InternalName == fieldName);
                 }
             }
             return null;

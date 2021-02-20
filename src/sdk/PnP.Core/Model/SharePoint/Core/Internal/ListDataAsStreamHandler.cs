@@ -83,6 +83,7 @@ namespace PnP.Core.Model.SharePoint
                         if (itemToUpdate == null)
                         {
                             itemToUpdate = (list.Items as ListItemCollection).CreateNewAndAdd();
+                            itemToUpdate.Requested = true;
                         }
 
                         itemToUpdate = itemToUpdate as ListItem;
