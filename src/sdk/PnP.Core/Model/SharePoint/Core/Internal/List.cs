@@ -633,7 +633,7 @@ namespace PnP.Core.Model.SharePoint
             {
                 var roleDefinitions = await GetRoleDefinitionsAsync(principalId).ConfigureAwait(false);
 
-                var roleDefinition = roleDefinitions.FirstOrDefault(r => r.Name == name);
+                var roleDefinition = roleDefinitions.AsEnumerable().FirstOrDefault(r => r.Name == name);
                 if (roleDefinition != null)
                 {
                     var apiCall = new ApiCall($"_api/web/lists(guid'{Id}')/roleassignments/removeroleassignment(principalid={principalId},roledefid={roleDefinition.Id})", ApiType.SPORest);

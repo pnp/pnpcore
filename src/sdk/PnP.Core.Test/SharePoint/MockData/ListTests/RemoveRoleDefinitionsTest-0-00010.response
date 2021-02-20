@@ -1,9 +1,9 @@
---batchresponse_d0b697bb-ecc7-4694-ab11-d3db60bcd912
+--batchresponse_cffe6f90-ad18-463d-a376-518337e40251
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{"d":{"results":[]}}
---batchresponse_d0b697bb-ecc7-4694-ab11-d3db60bcd912--
+{"d":{"RemoveRoleAssignment":null}}
+--batchresponse_cffe6f90-ad18-463d-a376-518337e40251--
