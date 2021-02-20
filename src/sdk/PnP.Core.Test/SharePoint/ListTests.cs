@@ -713,7 +713,7 @@ namespace PnP.Core.Test.SharePoint
                 await myList.UpdateAsync();
 
                 // Load IRM settings
-                await myList.InformationRightsManagementSettings.GetBatchAsync();
+                await myList.InformationRightsManagementSettings.LoadBatchAsync();
                 await context.ExecuteAsync();
 
                 // Verify default IRM list settings are returned
