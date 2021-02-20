@@ -67,17 +67,18 @@ namespace PnP.Core.Test.Base
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                var web = await context.Web.GetAsync(p => p.Lists);
-
                 string listTitle = "AddListViaRestAsyncPropertiesTest";
-                var myList = web.Lists.FirstOrDefault(p => p.Title == listTitle);
+                var myList = context.Web.Lists.FirstOrDefault(p => p.Title == listTitle);
 
                 if (myList != null)
                 {
                     await myList.DeleteAsync();
                 }
 
+                // Refresh the lists
+                var web = await context.Web.GetAsync(w => w.Lists);
                 var listCount = web.Lists.Length;
+
                 // Add a new list with opposite to defaults.
                 myList = await web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
                 myList.Description = "TEST DESCRIPTION";
@@ -92,7 +93,7 @@ namespace PnP.Core.Test.Base
                 myList.ListExperience = ListExperience.ClassicExperience; //Eek
                 await myList.UpdateAsync();
 
-                var myListToCheck = web.Lists.QueryProperties(
+                var myListToCheck = await web.Lists.QueryProperties(
                     l => l.Id,
                     l => l.ContentTypesEnabled,
                     l => l.Direction,
@@ -114,7 +115,7 @@ namespace PnP.Core.Test.Base
                     l => l.MinorVersionLimit,
                     l => l.MaxVersionLimit,
                     l => l.TemplateFeatureId)
-                    .FirstOrDefault(p => p.Title == listTitle);
+                    .FirstOrDefaultAsync(p => p.Title == listTitle);
 
                 // Was the list added?
                 Assert.IsTrue(myListToCheck.Requested);
