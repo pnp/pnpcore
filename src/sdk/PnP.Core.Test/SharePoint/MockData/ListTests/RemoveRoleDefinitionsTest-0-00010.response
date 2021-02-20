@@ -1,4 +1,4 @@
---batchresponse_cffe6f90-ad18-463d-a376-518337e40251
+--batchresponse_9f2bdf80-c4c9-4b6a-8a8d-44ba76a399ad
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
@@ -6,4 +6,4 @@ HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
 {"d":{"RemoveRoleAssignment":null}}
---batchresponse_cffe6f90-ad18-463d-a376-518337e40251--
+--batchresponse_9f2bdf80-c4c9-4b6a-8a8d-44ba76a399ad--

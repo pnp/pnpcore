@@ -967,7 +967,7 @@ namespace PnP.Core.Test.Base
                 var team = await context.Team.GetAsync(
                     p => p.Channels.QueryProperties(p => p.DisplayName));
 
-                foreach (var channel in team.Channels)
+                foreach (var channel in team.Channels.AsEnumerable())
                 {
                     Assert.IsTrue(channel.IsPropertyAvailable(p => p.DisplayName));
                     Assert.IsTrue(!string.IsNullOrEmpty(channel.DisplayName));
@@ -978,7 +978,7 @@ namespace PnP.Core.Test.Base
                 // Url for loading installed apps is teams/{Site.GroupId}/installedapps?$expand=TeamsApp
                 team = await context.Team.GetAsync(p => p.InstalledApps.QueryProperties(p => p.DistributionMethod));
                 
-                foreach (var installedApp in team.InstalledApps)
+                foreach (var installedApp in team.InstalledApps.AsEnumerable())
                 {
                     Assert.IsTrue(installedApp.IsPropertyAvailable(p => p.DistributionMethod));
                     Assert.IsFalse(installedApp.IsPropertyAvailable(p => p.DisplayName));

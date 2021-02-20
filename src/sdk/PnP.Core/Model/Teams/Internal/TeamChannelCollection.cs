@@ -148,7 +148,5 @@ namespace PnP.Core.Model.Teams
         }
 
         #endregion
-
-
     }
 }
