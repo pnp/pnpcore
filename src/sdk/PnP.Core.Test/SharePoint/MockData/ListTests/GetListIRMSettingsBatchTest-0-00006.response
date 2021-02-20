@@ -1,9 +1,9 @@
---batchresponse_323f4a0e-93c6-43a2-b206-841e23707c47
+--batchresponse_ca0baad5-dc8e-4c26-9287-cdbab7442e53
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{"d":{"__metadata":{"id":"https://piasysdev.sharepoint.com/sites/prov-1/_api/web/lists/getbyid(guid'2571e1d9-9b98-46d2-9085-7e053b6f5a1a')/InformationRightsManagementSettings","uri":"https://piasysdev.sharepoint.com/sites/prov-1/_api/web/lists/getbyid(guid'2571e1d9-9b98-46d2-9085-7e053b6f5a1a')/InformationRightsManagementSettings","type":"SP.InformationRightsManagementSettings"},"AllowPrint":false,"AllowScript":false,"AllowWriteCopy":false,"DisableDocumentBrowserView":false,"DocumentAccessExpireDays":90,"DocumentLibraryProtectionExpireDate":"2021-03-21T10:58:49-07:00","EnableDocumentAccessExpire":false,"EnableDocumentBrowserPublishingView":false,"EnableGroupProtection":false,"EnableLicenseCacheExpire":false,"GroupName":"","LicenseCacheExpireDays":30,"PolicyDescription":"","PolicyTitle":"","TemplateId":""}}
---batchresponse_323f4a0e-93c6-43a2-b206-841e23707c47--
+{"d":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/web/lists/getbyid(guid'9040c299-52fd-4f1b-a839-3fd310d3cd1e')/InformationRightsManagementSettings","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/web/lists/getbyid(guid'9040c299-52fd-4f1b-a839-3fd310d3cd1e')/InformationRightsManagementSettings","type":"SP.InformationRightsManagementSettings"},"AllowPrint":false,"AllowScript":false,"AllowWriteCopy":false,"DisableDocumentBrowserView":false,"DocumentAccessExpireDays":90,"DocumentLibraryProtectionExpireDate":"2021-03-22T02:28:48-07:00","EnableDocumentAccessExpire":false,"EnableDocumentBrowserPublishingView":false,"EnableGroupProtection":false,"EnableLicenseCacheExpire":false,"GroupName":"","LicenseCacheExpireDays":30,"PolicyDescription":"","PolicyTitle":"","TemplateId":""}}
+--batchresponse_ca0baad5-dc8e-4c26-9287-cdbab7442e53--
