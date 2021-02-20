@@ -787,6 +787,19 @@ namespace PnP.Core.Test.SharePoint
         }
 
         [TestMethod]
+        public async Task GetListByTitleWithQueryPropertiesSync()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var list = context.Web.Lists.GetByTitle("Documents", p => p.Title, p => p.Items, p => p.Fields.QueryProperties(p => p.InternalName, p => p.FieldTypeKind, p => p.TypeAsString, p => p.Title));
+
+                Assert.IsTrue(list.Requested);
+                Assert.AreEqual(list.Title, "documents", true);
+            }
+        }
+
+        [TestMethod]
         public async Task GetListByTitleSync()
         {
             //TestCommon.Instance.Mocking = false;

@@ -1,4 +1,4 @@
---batchresponse_2911b57a-933d-42cd-9fbb-95a6e26bfc8a
+--batchresponse_12e6305e-1197-4b31-8937-ba6ea2e1f944
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
@@ -7,22 +7,22 @@ CONTENT-TYPE: application/json; charset=utf-8
 
 { "Row" : 
 [{
-"ID": "55",
+"ID": "1013",
 "PermMask": "0x7ffffffffffbffff",
 "FSObjType": "0",
 "HTML_x0020_File_x0020_Type": "",
-"UniqueId": "{D88EF3A4-D946-4DA1-B862-17D335E5BE05}",
+"UniqueId": "{E631349D-A1E0-4BA5-8CEF-5EF08B3971BB}",
 "ProgId": "",
 "NoExecute": "0",
-"ContentTypeId": "0x0101009D1CB255DA76424F860D91F20E6C4118008E5621B4C5292C489805B6D98FF8C523",
+"ContentTypeId": "0x0101009D1CB255DA76424F860D91F20E6C411800BC66A1F7CEC63943B700A35FCBCF0164",
 "FileRef": "\u002fsites\u002fprov-1\u002fSitePages\u002fPNP_SDK_TEST_CreateAndUpdatePageWithReload.aspx",
 "FileRef.urlencode": "%2Fsites%2Fprov%2D1%2FSitePages%2FPNP%5FSDK%5FTEST%5FCreateAndUpdatePageWithReload%2Easpx",
 "FileRef.urlencodeasurl": "\u002fsites\u002fprov-1\u002fSitePages\u002fPNP_SDK_TEST_CreateAndUpdatePageWithReload.aspx",
 "FileRef.urlencoding": "\u002fsites\u002fprov-1\u002fSitePages\u002fPNP_SDK_TEST_CreateAndUpdatePageWithReload.aspx",
 "FileRef.scriptencodeasurl": "\\u002fsites\\u002fprov-1\\u002fSitePages\\u002fPNP_SDK_TEST_CreateAndUpdatePageWithReload.aspx",
 "_UIVersion": "1",
-"SMTotalSize": "4540",
-"File_x0020_Size": "3435",
+"SMTotalSize": "4638",
+"File_x0020_Size": "3526",
 "_CommentFlags": "",
 "File_x0020_Type": "aspx",
 "HTML_x0020_File_x0020_Type.File_x0020_Type.mapall": "ichtm.gif|Microsoft SharePoint Designer|SharePoint.OpenDocuments|",
@@ -63,8 +63,8 @@ CONTENT-TYPE: application/json; charset=utf-8
 "ItemChildCount": "0",
 "FolderChildCount": "0",
 "A2ODMountCount": "",
-"_ComplianceTag": "",
 "owshiddenversion": "2",
+"_SPTranslatedLanguages": "",
 "_SPSitePageFlags": "",
 "ContentVersion": "1",
 "DocConcurrencyNumber": "2",
@@ -82,4 +82,4 @@ CONTENT-TYPE: application/json; charset=utf-8
 ,"CurrentFolderSpItemUrl" : ""
 
 }
---batchresponse_2911b57a-933d-42cd-9fbb-95a6e26bfc8a--
+--batchresponse_12e6305e-1197-4b31-8937-ba6ea2e1f944--

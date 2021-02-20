@@ -1616,7 +1616,7 @@ namespace PnP.Core.Model.SharePoint
                 PageListItem[PageConstants.PageLayoutContentField] = pageHeaderHtml;
 
                 // AuthorByline depends on a field holding the author values
-                var authorByLineIdField = PagesLibrary.Fields.FirstOrDefault(p => p.InternalName == PageConstants._AuthorByline);
+                var authorByLineIdField = PagesLibrary.Fields.AsEnumerable().FirstOrDefault(p => p.InternalName == PageConstants._AuthorByline);
                 if (pageHeader.AuthorByLineId > -1)
                 {
                     var fieldUsers = PageListItem.NewFieldValueCollection(authorByLineIdField);
@@ -1726,7 +1726,7 @@ namespace PnP.Core.Model.SharePoint
 
         private void SetBannerImageUrlField(string bannerImageUrl)
         {
-            var bannerImageField = PagesLibrary.Fields.FirstOrDefault(p => p.InternalName == PageConstants.BannerImageUrlField);
+            var bannerImageField = PagesLibrary.Fields.AsEnumerable().FirstOrDefault(p => p.InternalName == PageConstants.BannerImageUrlField);
             if (bannerImageField != null)
             {
                 PageListItem[PageConstants.BannerImageUrlField] = bannerImageField.NewFieldUrlValue(bannerImageUrl);
