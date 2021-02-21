@@ -40,10 +40,10 @@ namespace Consumer
                 //                customSettings.TenantId,
                 //                customSettings.CredentialManager);
 
-                var authenticationProvider = new InteractiveAuthenticationProvider(
-                                customSettings.ClientId,
-                                customSettings.TenantId,
-                                customSettings.RedirectUri);
+                //var authenticationProvider = new InteractiveAuthenticationProvider(
+                //                customSettings.ClientId,
+                //                customSettings.TenantId,
+                //                customSettings.RedirectUri);
 
                 // Add the PnP Core SDK services
                 services.AddPnPCore(options => {
@@ -71,15 +71,43 @@ namespace Consumer
                     //    UseIncrementalDelay = true,
                     //};
 
-                    options.DefaultAuthenticationProvider = authenticationProvider;
+                    //options.DefaultAuthenticationProvider = authenticationProvider;
 
                     options.Sites.Add("DemoSite",
                         new PnP.Core.Services.Builder.Configuration.PnPCoreSiteOptions
                         {
-                            SiteUrl = customSettings.DemoSiteUrl,
-                            AuthenticationProvider = authenticationProvider
+                            SiteUrl = customSettings.DemoSiteUrl
+                            //AuthenticationProvider = authenticationProvider,
+                           
                         });
                 });
+
+                // PnP Core Authentication
+                services.AddPnPCoreAuthentication(
+                    options =>
+                    {
+                        options.Credentials.Configurations.Add("interactive",
+                            new PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationCredentialConfigurationOptions
+                            {
+                                ClientId = customSettings.ClientId,
+                                TenantId = customSettings.TenantId,
+                                Interactive = new PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationInteractiveOptions
+                                {
+                                    RedirectUri = customSettings.RedirectUri
+                                }
+                            });
+
+                        // Configure the default authentication provider
+                        options.Credentials.DefaultConfiguration = "interactive";
+
+                        // Map the site defined in AddPnPCore with the 
+                        // Authentication Provider configured in this action
+                        options.Sites.Add("DemoSite",
+                            new PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationSiteOptions
+                            {
+                                AuthenticationProviderName = "interactive"
+                            });
+                    });
             })
             // Let the builder know we're running in a console
             .UseConsoleLifetime()
@@ -154,11 +182,9 @@ namespace Consumer
 
                     // We can retrieve the whole list of lists 
                     // and their items in the context web
-                    var listsQuery = (from l in context.Web.Lists
+                    var listsQuery = (from l in context.Web.Lists.QueryProperties(l => l.Id, l => l.Title, l => l.Description)
                                       orderby l.Title descending
-                                      select l)
-                                    .Load(l => l.Id, l => l.Title, l => l.Description)
-                                    .Include(l => l.Items);
+                                      select l);
 
                     Console.ForegroundColor = ConsoleColor.Yellow;
                     Console.WriteLine("===LINQ: Retrieve list and list items===");
@@ -211,9 +237,9 @@ namespace Consumer
                 {
                     // Or we can retrieve a specific document from a library
                     var document = context.Web.Lists.GetByTitle("Site Assets").Items
-                            .Where(i => i.Title == "__siteIcon__.png")
-                            .Load(i => i.Id, i => i.Title)
-                            .FirstOrDefault();
+                        .QueryProperties(i => i.Id, i => i.Title)
+                        .Where(i => i.Title == "__siteIcon__.png")
+                        .FirstOrDefault();
 
                     if (document != null)
                     {
@@ -250,7 +276,7 @@ namespace Consumer
 
                         await newList.Items.AddBatchAsync(listItem);
                     }
-                    await newList.GetBatchAsync(p => p.Items, p => p.NoCrawl);
+                    await newList.LoadBatchAsync(context.CurrentBatch, p => p.Items, p => p.NoCrawl);
 
                     // Send 20 adds + reload as a single operation (=batch) to server
                     await context.ExecuteAsync();
