@@ -51,7 +51,7 @@ namespace Consumer
                     // You can explicitly configure all the settings, or you can
                     // simply use the default values
 
-                    //options.PnPContext.GraphFirst = true;
+                    options.PnPContext.GraphFirst = true;
                     //options.PnPContext.GraphCanUseBeta = true;
                     //options.PnPContext.GraphAlwaysUseBeta = false;
 
