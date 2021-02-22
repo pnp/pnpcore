@@ -74,7 +74,7 @@ namespace PnP.Core.Test.Base
 
             return requests;
         }
-
+/*
         private async Task<List<string>> GetODataAPICallTestAsync<TModel, TModelInterface>(Tuple<TModel, EntityInfo, Expression<Func<TModelInterface, object>>[]> input,
                                                                                            ODataQuery<TModelInterface> query,
                                                                                            bool? collectionMode = false, Expression<Func<TModelInterface, bool>>[] filter = null, bool firstOrDefaultMode = false)
@@ -150,7 +150,7 @@ namespace PnP.Core.Test.Base
 
             return requests;
         }
-
+*/
         private static string CleanRequestUrl(PnPContext context, string query)
         {
             query = query.Replace($"/{context.Uri.DnsSafeHost}", "/{hostname}");
@@ -411,7 +411,7 @@ namespace PnP.Core.Test.Base
             }));
         }
         #endregion
-
+/*
         #region Linq query tests
 
         [TestMethod]
@@ -669,6 +669,6 @@ namespace PnP.Core.Test.Base
             Assert.AreEqual(requests[0], "_api/web/lists?$select=id,title&$filter=Title+eq+%27bla%27", true);
         }
         #endregion
-
+*/
     }
 }
