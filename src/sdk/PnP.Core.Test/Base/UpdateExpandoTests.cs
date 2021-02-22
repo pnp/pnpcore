@@ -60,7 +60,7 @@ namespace PnP.Core.Test.Base
                         await myList.LoadAsync(p => p.Items);
 
                         // grab first item
-                        var firstItem = myList.Items.AsEnumerable().FirstOrDefault();
+                        var firstItem = myList.Items.AsRequested().FirstOrDefault();
                         if (firstItem != null)
                         {
                             firstItem.Values["Title"] = "No";
@@ -73,7 +73,7 @@ namespace PnP.Core.Test.Base
 
                             // get items again from the list
                             await myList.LoadAsync(p => p.Items);
-                            firstItem = myList.Items.AsEnumerable().FirstOrDefault();
+                            firstItem = myList.Items.AsRequested().FirstOrDefault();
 
                             Assert.IsTrue(firstItem.Values["Title"].ToString() == "No");
                             Assert.IsFalse(firstItem.HasChanged("Values"));
@@ -131,7 +131,7 @@ namespace PnP.Core.Test.Base
                         await context.ExecuteAsync();
 
                         // grab first item
-                        var firstItem = myList.Items.AsEnumerable().FirstOrDefault();
+                        var firstItem = myList.Items.AsRequested().FirstOrDefault();
                         if (firstItem != null)
                         {
                             firstItem.Values["Title"] = "No";
@@ -147,7 +147,7 @@ namespace PnP.Core.Test.Base
                             await myList.LoadBatchAsync(p => p.Items);
                             await context.ExecuteAsync();
 
-                            firstItem = myList.Items.AsEnumerable().FirstOrDefault();
+                            firstItem = myList.Items.AsRequested().FirstOrDefault();
                             Assert.IsTrue(firstItem.Values["Title"].ToString() == "No");
                             Assert.IsFalse(firstItem.HasChanged("Values"));
                             Assert.IsFalse(firstItem.Values.HasChanges);

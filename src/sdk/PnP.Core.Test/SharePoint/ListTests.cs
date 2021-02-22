@@ -542,7 +542,7 @@ namespace PnP.Core.Test.SharePoint
                             DatesInUtc = true
                         });
                         Assert.IsTrue(list2.Items.Length == 1);
-                        Assert.IsTrue(list2.Items.AsEnumerable().First()["CustomField"].ToString() == "Field6");
+                        Assert.IsTrue(list2.Items.AsRequested().First()["CustomField"].ToString() == "Field6");
                     }
                 }
 
@@ -566,7 +566,7 @@ namespace PnP.Core.Test.SharePoint
                 int listCount = web.Lists.Length;
 
                 string listTitle = "RecycleList";
-                var myList = web.Lists.AsEnumerable().FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
+                var myList = web.Lists.AsRequested().FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
 
                 if (TestCommon.Instance.Mocking && myList != null)
                 {
@@ -605,7 +605,7 @@ namespace PnP.Core.Test.SharePoint
                 int listCount = web.Lists.Length;
 
                 string listTitle = TestCommon.GetPnPSdkTestAssetName("RecycleListBatch");
-                var myList = web.Lists.AsEnumerable().FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
+                var myList = web.Lists.AsRequested().FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
 
                 if (TestCommon.Instance.Mocking && myList != null)
                 {
@@ -825,8 +825,8 @@ namespace PnP.Core.Test.SharePoint
                 Assert.IsTrue(list.Requested);
                 Assert.AreEqual(list.Title, "documents", true);
                 Assert.IsTrue(list.ContentTypes.Requested);
-                Assert.IsTrue(list.ContentTypes.AsEnumerable().First().IsPropertyAvailable(p => p.Id));
-                Assert.IsTrue(list.ContentTypes.AsEnumerable().First().IsPropertyAvailable(p => p.Description));
+                Assert.IsTrue(list.ContentTypes.AsRequested().First().IsPropertyAvailable(p => p.Id));
+                Assert.IsTrue(list.ContentTypes.AsRequested().First().IsPropertyAvailable(p => p.Description));
             }
         }
 
@@ -841,8 +841,8 @@ namespace PnP.Core.Test.SharePoint
                 Assert.IsTrue(list.Requested);
                 Assert.AreEqual(list.Title, "documents", true);
                 Assert.IsTrue(list.ContentTypes.Requested);
-                Assert.IsTrue(list.ContentTypes.AsEnumerable().First().IsPropertyAvailable(p => p.Id));
-                Assert.IsTrue(list.ContentTypes.AsEnumerable().First().IsPropertyAvailable(p => p.Name));
+                Assert.IsTrue(list.ContentTypes.AsRequested().First().IsPropertyAvailable(p => p.Id));
+                Assert.IsTrue(list.ContentTypes.AsRequested().First().IsPropertyAvailable(p => p.Name));
             }
         }
 
@@ -860,12 +860,12 @@ namespace PnP.Core.Test.SharePoint
                 Assert.AreEqual(list.Title, "documents", true);
                 Assert.IsTrue(list.ContentTypes.Requested);
 
-                var firstContentType = list.ContentTypes.AsEnumerable().First();
+                var firstContentType = list.ContentTypes.AsRequested().First();
                 Assert.IsTrue(firstContentType.IsPropertyAvailable(p => p.Id));
                 Assert.IsTrue(firstContentType.IsPropertyAvailable(p => p.Name));
                 Assert.IsTrue(firstContentType.FieldLinks.Requested);
 
-                var firstFieldLink = firstContentType.FieldLinks.AsEnumerable().First();
+                var firstFieldLink = firstContentType.FieldLinks.AsRequested().First();
                 Assert.IsTrue(firstFieldLink.IsPropertyAvailable(p => p.Id));
                 Assert.IsTrue(firstFieldLink.IsPropertyAvailable(p => p.Name));
                 Assert.IsTrue(!string.IsNullOrEmpty(firstFieldLink.Name));
@@ -945,7 +945,7 @@ namespace PnP.Core.Test.SharePoint
                 var web = context.Web;
 
                 string listTitle = TestCommon.GetPnPSdkTestAssetName("BreakRoleInheritanceTest");
-                var myList = web.Lists.AsEnumerable().FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
+                var myList = web.Lists.AsRequested().FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
 
                 if (myList != null)
                 {
@@ -976,7 +976,7 @@ namespace PnP.Core.Test.SharePoint
                 var web = context.Web;
 
                 string listTitle = TestCommon.GetPnPSdkTestAssetName("ResetRoleInheritanceTest");
-                var myList = web.Lists.AsEnumerable().FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
+                var myList = web.Lists.AsRequested().FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
 
                 if (myList != null)
                 {
@@ -1009,7 +1009,7 @@ namespace PnP.Core.Test.SharePoint
                 var web = context.Web;
 
                 string listTitle = TestCommon.GetPnPSdkTestAssetName("GetRoleDefinitionsTest");
-                var myList = web.Lists.AsEnumerable().FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
+                var myList = web.Lists.AsRequested().FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
 
                 if (myList != null)
                 {
@@ -1044,7 +1044,7 @@ namespace PnP.Core.Test.SharePoint
 
                 var roleDefinition = web.RoleDefinitions.Add(roleDefName, RoleType.Administrator, new PermissionKind[] { PermissionKind.AddAndCustomizePages });
                                 
-                var myList = web.Lists.AsEnumerable().FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
+                var myList = web.Lists.AsRequested().FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
 
                 if (myList != null)
                 {
@@ -1059,7 +1059,7 @@ namespace PnP.Core.Test.SharePoint
 
                 var roleDefinitions = await myList.GetRoleDefinitionsAsync(web.CurrentUser.Id);
 
-                Assert.IsTrue(roleDefinitions.Length > 1 && roleDefinitions.AsEnumerable().FirstOrDefault(r => r.Name == roleDefName) != null);
+                Assert.IsTrue(roleDefinitions.Length > 1 && roleDefinitions.AsRequested().FirstOrDefault(r => r.Name == roleDefName) != null);
 
                 await myList.DeleteAsync();
 
@@ -1083,7 +1083,7 @@ namespace PnP.Core.Test.SharePoint
 
                 var roleDefinition = web.RoleDefinitions.Add(roleDefName, RoleType.Administrator, new PermissionKind[] { PermissionKind.AddAndCustomizePages });
 
-                var myList = web.Lists.AsEnumerable().FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
+                var myList = web.Lists.AsRequested().FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
 
                 if (myList != null)
                 {
@@ -1098,13 +1098,13 @@ namespace PnP.Core.Test.SharePoint
 
                 var roleDefinitionsBefore = await myList.GetRoleDefinitionsAsync(web.CurrentUser.Id);
 
-                Assert.IsTrue(roleDefinitionsBefore.Length > 0 && roleDefinitionsBefore.AsEnumerable().FirstOrDefault(r => r.Name == roleDefName) != null);
+                Assert.IsTrue(roleDefinitionsBefore.Length > 0 && roleDefinitionsBefore.AsRequested().FirstOrDefault(r => r.Name == roleDefName) != null);
 
                 myList.RemoveRoleDefinitions(web.CurrentUser.Id, roleDefName);
 
                 var roleDefinitionsAfter = await myList.GetRoleDefinitionsAsync(web.CurrentUser.Id);
 
-                Assert.IsTrue(roleDefinitionsAfter.Length != roleDefinitionsBefore.Length && roleDefinitionsAfter.AsEnumerable().FirstOrDefault(r => r.Name == roleDefName) == null);
+                Assert.IsTrue(roleDefinitionsAfter.Length != roleDefinitionsBefore.Length && roleDefinitionsAfter.AsRequested().FirstOrDefault(r => r.Name == roleDefName) == null);
 
                 await myList.DeleteAsync();
 

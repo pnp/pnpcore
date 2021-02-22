@@ -59,7 +59,7 @@ namespace PnP.Core.Test.Base
                 try
                 {
                     // grab first item
-                    var firstItem = myList.Items.AsEnumerable().FirstOrDefault();
+                    var firstItem = myList.Items.AsRequested().FirstOrDefault();
                     if (firstItem != null)
                     {
                         // get original item count
@@ -140,7 +140,7 @@ namespace PnP.Core.Test.Base
                 try
                 {
                     // grab first item
-                    var firstItem = myList.Items.AsEnumerable().FirstOrDefault();
+                    var firstItem = myList.Items.AsRequested().FirstOrDefault();
                     if (firstItem != null)
                     {
                         // get original item count

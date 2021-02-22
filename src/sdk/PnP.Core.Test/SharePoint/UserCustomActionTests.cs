@@ -33,7 +33,7 @@ namespace PnP.Core.Test.SharePoint
                 Assert.IsNotNull(web.UserCustomActions);
                 Assert.IsTrue(web.UserCustomActions.Length > 0);
 
-                IUserCustomAction foundCustomAction = web.UserCustomActions.AsEnumerable().FirstOrDefault(uca => uca.Id == customActionId);
+                IUserCustomAction foundCustomAction = web.UserCustomActions.AsRequested().FirstOrDefault(uca => uca.Id == customActionId);
 
                 Assert.IsNotNull(foundCustomAction);
                 Assert.AreEqual(customActionId, foundCustomAction.Id);
@@ -60,7 +60,7 @@ namespace PnP.Core.Test.SharePoint
                 Assert.IsNotNull(site.UserCustomActions);
                 Assert.IsTrue(site.UserCustomActions.Length > 0);
 
-                IUserCustomAction foundCustomAction = site.UserCustomActions.AsEnumerable().FirstOrDefault(uca => uca.Id == customActionId);
+                IUserCustomAction foundCustomAction = site.UserCustomActions.AsRequested().FirstOrDefault(uca => uca.Id == customActionId);
 
                 Assert.IsNotNull(foundCustomAction);
                 Assert.AreEqual(customActionId, foundCustomAction.Id);
@@ -455,7 +455,7 @@ namespace PnP.Core.Test.SharePoint
                 Assert.IsNotNull(web.UserCustomActions);
                 Assert.IsTrue(web.UserCustomActions.Length > 0);
 
-                IUserCustomAction foundCustomAction = web.UserCustomActions.AsEnumerable().FirstOrDefault(uca => uca.Id == customActionId);
+                IUserCustomAction foundCustomAction = web.UserCustomActions.AsRequested().FirstOrDefault(uca => uca.Id == customActionId);
 
                 Assert.IsNotNull(foundCustomAction);
                 Assert.AreEqual(customActionId, foundCustomAction.Id);
@@ -472,7 +472,7 @@ namespace PnP.Core.Test.SharePoint
                 Assert.IsNotNull(web.UserCustomActions);
                 Assert.IsTrue(web.UserCustomActions.Length > 0);
 
-                foundCustomAction = web.UserCustomActions.AsEnumerable().FirstOrDefault(uca => uca.Id == customActionId);
+                foundCustomAction = web.UserCustomActions.AsRequested().FirstOrDefault(uca => uca.Id == customActionId);
 
                 Assert.AreEqual($"{customActionName}_UPDATED", foundCustomAction.Name);
                 Assert.AreEqual($"{customActionName}_UPDATED", foundCustomAction.Title);
@@ -497,14 +497,14 @@ namespace PnP.Core.Test.SharePoint
                 Assert.IsNotNull(web.UserCustomActions);
                 Assert.IsTrue(web.UserCustomActions.Length > 0);
 
-                IUserCustomAction foundCustomAction = web.UserCustomActions.AsEnumerable().FirstOrDefault(uca => uca.Id == customActionId);
+                IUserCustomAction foundCustomAction = web.UserCustomActions.AsRequested().FirstOrDefault(uca => uca.Id == customActionId);
                 Assert.IsNotNull(foundCustomAction);
 
                 await foundCustomAction.DeleteAsync();
 
                 web = await context.Web.GetAsync(p => p.UserCustomActions);
 
-                foundCustomAction = web.UserCustomActions.AsEnumerable().FirstOrDefault(uca => uca.Id == customActionId);
+                foundCustomAction = web.UserCustomActions.AsRequested().FirstOrDefault(uca => uca.Id == customActionId);
                 Assert.IsNull(foundCustomAction);
             }
         }

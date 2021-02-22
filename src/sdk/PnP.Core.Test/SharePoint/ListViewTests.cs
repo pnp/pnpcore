@@ -257,7 +257,7 @@ namespace PnP.Core.Test.SharePoint
                 Assert.AreEqual(viewTitle, result.Title);
 
                 var list2 = await context.Web.Lists.GetByTitleAsync("Documents", p => p.Title, p => p.Views);
-                var newView = list2.Views.AsEnumerable().FirstOrDefault(o=>o.Title == viewTitle);
+                var newView = list2.Views.AsRequested().FirstOrDefault(o=>o.Title == viewTitle);
                 Assert.IsNotNull(newView);
                 Assert.IsTrue(newView.ViewType2 == ViewType2.COMPACTLIST);
 

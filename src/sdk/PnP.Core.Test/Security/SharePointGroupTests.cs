@@ -83,7 +83,7 @@ namespace PnP.Core.Test.Security
                 {
                     var roleDefinitions = await siteGroup.GetRoleDefinitionsAsync();
 
-                    var foundRole = roleDefinitions.AsEnumerable().FirstOrDefault(d => d.Name == roleDefName);
+                    var foundRole = roleDefinitions.AsRequested().FirstOrDefault(d => d.Name == roleDefName);
                     Assert.IsNotNull(foundRole);
                 }
                 finally

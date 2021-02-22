@@ -119,7 +119,7 @@ namespace PnP.Core.Test.QueryModel
                 await context.Web.LoadAsync(w => w.Lists);
 
                 Assert.IsTrue(context.Web.Lists.Length >= 5);
-                Assert.IsTrue(context.Web.Lists.AsEnumerable().Any(l => l.Title == "Site Pages"));
+                Assert.IsTrue(context.Web.Lists.AsRequested().Any(l => l.Title == "Site Pages"));
             }
         }
 

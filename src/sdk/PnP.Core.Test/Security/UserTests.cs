@@ -57,7 +57,7 @@ namespace PnP.Core.Test.Security
                 Assert.IsTrue(web.SiteUsers.Length > 0);
 
                 // get the first real user
-                var testUser = web.SiteUsers.AsEnumerable().FirstOrDefault(p => p.PrincipalType == PrincipalType.User);
+                var testUser = web.SiteUsers.AsRequested().FirstOrDefault(p => p.PrincipalType == PrincipalType.User);
                 Assert.IsTrue(testUser != null);
 
                 // Get that user as a Graph user
@@ -86,7 +86,7 @@ namespace PnP.Core.Test.Security
                 Assert.IsTrue(team.Members.Length > 0);
 
                 // Get the first owner
-                var graphUser = team.Owners.AsEnumerable().FirstOrDefault();
+                var graphUser = team.Owners.AsRequested().FirstOrDefault();
 
                 Assert.IsTrue(graphUser != null);
                 Assert.IsTrue(!string.IsNullOrEmpty(graphUser.UserPrincipalName));

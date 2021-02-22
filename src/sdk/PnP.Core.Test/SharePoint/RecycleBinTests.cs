@@ -33,7 +33,7 @@ namespace PnP.Core.Test.SharePoint
                 await context.Web.LoadAsync(w => w.RecycleBin);
 
                 // Still convinced the FirstOrDefaultAsync should load the RecycleBin without the need to load it previously...
-                IRecycleBinItem recycleBinItem = context.Web.RecycleBin.AsEnumerable().FirstOrDefault(item => item.Id == recycleBinItemId);
+                IRecycleBinItem recycleBinItem = context.Web.RecycleBin.AsRequested().FirstOrDefault(item => item.Id == recycleBinItemId);
 
                 Assert.IsNotNull(recycleBinItem);
                 Assert.AreEqual(recycleBinItemId, recycleBinItem.Id);
@@ -65,7 +65,7 @@ namespace PnP.Core.Test.SharePoint
             {
                 // Load the recycle bin
                 await context.Web.LoadAsync(w => w.RecycleBin.QueryProperties(p => p.Author, p => p.Id, p => p.Title));
-                IRecycleBinItem recycleBinItem = context.Web.RecycleBin.AsEnumerable().FirstOrDefault(item => item.Id == recycleBinItemId);
+                IRecycleBinItem recycleBinItem = context.Web.RecycleBin.AsRequested().FirstOrDefault(item => item.Id == recycleBinItemId);
 
                 // Still convinced the FirstOrDefaultAsync should load the RecycleBin without the need to load it previously...
                 //IRecycleBinItem recycleBinItem = await context.Web.RecycleBin.QueryProperties(p => p.Author, p => p.Id, p => p.Title).FirstOrDefaultAsync(item => item.Id == recycleBinItemId);
@@ -271,7 +271,7 @@ namespace PnP.Core.Test.SharePoint
             {
                 // Load the site collection recycle bin
                 await context.Site.LoadAsync(w => w.RecycleBin.QueryProperties(p => p.Id, p => p.DeletedBy, p => p.ItemState));
-                IRecycleBinItem recycleBinItem = context.Site.RecycleBin.AsEnumerable().FirstOrDefault(item => item.Id == recycleBinItemId);
+                IRecycleBinItem recycleBinItem = context.Site.RecycleBin.AsRequested().FirstOrDefault(item => item.Id == recycleBinItemId);
 
                 Assert.AreEqual(RecycleBinItemState.SecondStageRecycleBin, recycleBinItem.ItemState);
                 Assert.IsTrue(recycleBinItem.DeletedBy.Requested);
@@ -302,7 +302,7 @@ namespace PnP.Core.Test.SharePoint
             {
                 // Load the site collection recycle bin
                 await context.Site.LoadAsync(w => w.RecycleBin);
-                IRecycleBinItem recycleBinItem = context.Site.RecycleBin.AsEnumerable().FirstOrDefault(item => item.Id == recycleBinItemId);
+                IRecycleBinItem recycleBinItem = context.Site.RecycleBin.AsRequested().FirstOrDefault(item => item.Id == recycleBinItemId);
 
                 Assert.AreEqual(RecycleBinItemState.SecondStageRecycleBin, recycleBinItem.ItemState);
             }
@@ -333,7 +333,7 @@ namespace PnP.Core.Test.SharePoint
             {
                 // Load the site collection recycle bin
                 await context.Site.LoadAsync(w => w.RecycleBin);
-                IRecycleBinItem recycleBinItem = context.Site.RecycleBin.AsEnumerable().FirstOrDefault(item => item.Id == recycleBinItemId);
+                IRecycleBinItem recycleBinItem = context.Site.RecycleBin.AsRequested().FirstOrDefault(item => item.Id == recycleBinItemId);
 
                 Assert.AreEqual(RecycleBinItemState.SecondStageRecycleBin, recycleBinItem.ItemState);
             }
@@ -364,7 +364,7 @@ namespace PnP.Core.Test.SharePoint
             {
                 // Load the site collection recycle bin
                 await context.Site.LoadAsync(w => w.RecycleBin);
-                IRecycleBinItem recycleBinItem = context.Site.RecycleBin.AsEnumerable().FirstOrDefault(item => item.Id == recycleBinItemId);
+                IRecycleBinItem recycleBinItem = context.Site.RecycleBin.AsRequested().FirstOrDefault(item => item.Id == recycleBinItemId);
 
                 Assert.AreEqual(RecycleBinItemState.SecondStageRecycleBin, recycleBinItem.ItemState);
             }
@@ -394,7 +394,7 @@ namespace PnP.Core.Test.SharePoint
             {
                 // Load the site collection recycle bin
                 await context.Site.LoadAsync(w => w.RecycleBin);
-                IRecycleBinItem recycleBinItem = context.Site.RecycleBin.AsEnumerable().FirstOrDefault(item => item.Id == recycleBinItemId);
+                IRecycleBinItem recycleBinItem = context.Site.RecycleBin.AsRequested().FirstOrDefault(item => item.Id == recycleBinItemId);
 
                 Assert.AreEqual(RecycleBinItemState.SecondStageRecycleBin, recycleBinItem.ItemState);
             }
@@ -424,7 +424,7 @@ namespace PnP.Core.Test.SharePoint
             {
                 // Load the site collection recycle bin
                 await context.Site.LoadAsync(w => w.RecycleBin);
-                IRecycleBinItem recycleBinItem = context.Site.RecycleBin.AsEnumerable().FirstOrDefault(item => item.Id == recycleBinItemId);
+                IRecycleBinItem recycleBinItem = context.Site.RecycleBin.AsRequested().FirstOrDefault(item => item.Id == recycleBinItemId);
 
                 Assert.AreEqual(RecycleBinItemState.SecondStageRecycleBin, recycleBinItem.ItemState);
             }
@@ -587,7 +587,7 @@ namespace PnP.Core.Test.SharePoint
                 // There is at least 1 item in second stage recycle bin
                 // CAUTION, The second stage recycle bin is at the SITE COLLECTION LEVEL
                 await context.Site.LoadAsync(w => w.RecycleBin);
-                Assert.IsTrue(context.Site.RecycleBin.AsEnumerable().Count(r => r.ItemState == RecycleBinItemState.SecondStageRecycleBin) > 0);
+                Assert.IsTrue(context.Site.RecycleBin.AsRequested().Count(r => r.ItemState == RecycleBinItemState.SecondStageRecycleBin) > 0);
 
                 await context.Site.RecycleBin.DeleteAllSecondStageItemsAsync();
             }
@@ -597,7 +597,7 @@ namespace PnP.Core.Test.SharePoint
                 // There is no more second stage recycle bin items
                 // CAUTION, The second stage recycle bin is at the SITE COLLECTION LEVEL
                 await context.Site.LoadAsync(w => w.RecycleBin);
-                Assert.AreEqual(0, context.Site.RecycleBin.AsEnumerable().Count(r => r.ItemState == RecycleBinItemState.SecondStageRecycleBin));
+                Assert.AreEqual(0, context.Site.RecycleBin.AsRequested().Count(r => r.ItemState == RecycleBinItemState.SecondStageRecycleBin));
             }
         }
 
@@ -613,7 +613,7 @@ namespace PnP.Core.Test.SharePoint
                 // There is at least 1 item in second stage recycle bin
                 // CAUTION, The second stage recycle bin is at the SITE COLLECTION LEVEL
                 await context.Site.LoadAsync(w => w.RecycleBin);
-                Assert.IsTrue(context.Site.RecycleBin.AsEnumerable().Count(r => r.ItemState == RecycleBinItemState.SecondStageRecycleBin) > 0);
+                Assert.IsTrue(context.Site.RecycleBin.AsRequested().Count(r => r.ItemState == RecycleBinItemState.SecondStageRecycleBin) > 0);
 
                 context.Site.RecycleBin.DeleteAllSecondStageItems();
             }
@@ -623,7 +623,7 @@ namespace PnP.Core.Test.SharePoint
                 // There is no more second stage recycle bin items
                 // CAUTION, The second stage recycle bin is at the SITE COLLECTION LEVEL
                 await context.Site.LoadAsync(w => w.RecycleBin);
-                Assert.AreEqual(0, context.Site.RecycleBin.AsEnumerable().Count(r => r.ItemState == RecycleBinItemState.SecondStageRecycleBin));
+                Assert.AreEqual(0, context.Site.RecycleBin.AsRequested().Count(r => r.ItemState == RecycleBinItemState.SecondStageRecycleBin));
             }
         }
 
@@ -639,7 +639,7 @@ namespace PnP.Core.Test.SharePoint
                 // There is at least 1 item in second stage recycle bin
                 // CAUTION, The second stage recycle bin is at the SITE COLLECTION LEVEL
                 await context.Site.LoadAsync(w => w.RecycleBin);
-                Assert.IsTrue(context.Site.RecycleBin.AsEnumerable().Count(r => r.ItemState == RecycleBinItemState.SecondStageRecycleBin) > 0);
+                Assert.IsTrue(context.Site.RecycleBin.AsRequested().Count(r => r.ItemState == RecycleBinItemState.SecondStageRecycleBin) > 0);
 
                 var batch = context.NewBatch();
                 await context.Site.RecycleBin.DeleteAllSecondStageItemsBatchAsync(batch);
@@ -651,7 +651,7 @@ namespace PnP.Core.Test.SharePoint
                 // There is no more second stage recycle bin items
                 // CAUTION, The second stage recycle bin is at the SITE COLLECTION LEVEL
                 await context.Site.LoadAsync(w => w.RecycleBin);
-                Assert.AreEqual(0, context.Site.RecycleBin.AsEnumerable().Count(r => r.ItemState == RecycleBinItemState.SecondStageRecycleBin));
+                Assert.AreEqual(0, context.Site.RecycleBin.AsRequested().Count(r => r.ItemState == RecycleBinItemState.SecondStageRecycleBin));
             }
         }
 
@@ -667,7 +667,7 @@ namespace PnP.Core.Test.SharePoint
                 // There is at least 1 item in second stage recycle bin
                 // CAUTION, The second stage recycle bin is at the SITE COLLECTION LEVEL
                 await context.Site.LoadAsync(w => w.RecycleBin);
-                Assert.IsTrue(context.Site.RecycleBin.AsEnumerable().Count(r => r.ItemState == RecycleBinItemState.SecondStageRecycleBin) > 0);
+                Assert.IsTrue(context.Site.RecycleBin.AsRequested().Count(r => r.ItemState == RecycleBinItemState.SecondStageRecycleBin) > 0);
 
                 var batch = context.NewBatch();
                 context.Site.RecycleBin.DeleteAllSecondStageItemsBatch(batch);
@@ -679,7 +679,7 @@ namespace PnP.Core.Test.SharePoint
                 // There is no more second stage recycle bin items
                 // CAUTION, The second stage recycle bin is at the SITE COLLECTION LEVEL
                 await context.Site.LoadAsync(w => w.RecycleBin);
-                Assert.AreEqual(0, context.Site.RecycleBin.AsEnumerable().Count(r => r.ItemState == RecycleBinItemState.SecondStageRecycleBin));
+                Assert.AreEqual(0, context.Site.RecycleBin.AsRequested().Count(r => r.ItemState == RecycleBinItemState.SecondStageRecycleBin));
             }
         }
 
@@ -695,7 +695,7 @@ namespace PnP.Core.Test.SharePoint
                 // There is at least 1 item in second stage recycle bin
                 // CAUTION, The second stage recycle bin is at the SITE COLLECTION LEVEL
                 await context.Site.LoadAsync(w => w.RecycleBin);
-                Assert.IsTrue(context.Site.RecycleBin.AsEnumerable().Count(r => r.ItemState == RecycleBinItemState.SecondStageRecycleBin) > 0);
+                Assert.IsTrue(context.Site.RecycleBin.AsRequested().Count(r => r.ItemState == RecycleBinItemState.SecondStageRecycleBin) > 0);
 
                 await context.Site.RecycleBin.DeleteAllSecondStageItemsBatchAsync();
                 await context.ExecuteAsync();
@@ -706,7 +706,7 @@ namespace PnP.Core.Test.SharePoint
                 // There is no more second stage recycle bin items
                 // CAUTION, The second stage recycle bin is at the SITE COLLECTION LEVEL
                 await context.Site.LoadAsync(w => w.RecycleBin);
-                Assert.AreEqual(0, context.Site.RecycleBin.AsEnumerable().Count(r => r.ItemState == RecycleBinItemState.SecondStageRecycleBin));
+                Assert.AreEqual(0, context.Site.RecycleBin.AsRequested().Count(r => r.ItemState == RecycleBinItemState.SecondStageRecycleBin));
             }
         }
 
@@ -722,7 +722,7 @@ namespace PnP.Core.Test.SharePoint
                 // There is at least 1 item in second stage recycle bin
                 // CAUTION, The second stage recycle bin is at the SITE COLLECTION LEVEL
                 await context.Site.LoadAsync(w => w.RecycleBin);
-                Assert.IsTrue(context.Site.RecycleBin.AsEnumerable().Count(r => r.ItemState == RecycleBinItemState.SecondStageRecycleBin) > 0);
+                Assert.IsTrue(context.Site.RecycleBin.AsRequested().Count(r => r.ItemState == RecycleBinItemState.SecondStageRecycleBin) > 0);
 
                 context.Site.RecycleBin.DeleteAllSecondStageItemsBatch();
                 await context.ExecuteAsync();
@@ -733,7 +733,7 @@ namespace PnP.Core.Test.SharePoint
                 // There is no more second stage recycle bin items
                 // CAUTION, The second stage recycle bin is at the SITE COLLECTION LEVEL
                 await context.Site.LoadAsync(w => w.RecycleBin);
-                Assert.AreEqual(0, context.Site.RecycleBin.AsEnumerable().Count(r => r.ItemState == RecycleBinItemState.SecondStageRecycleBin));
+                Assert.AreEqual(0, context.Site.RecycleBin.AsRequested().Count(r => r.ItemState == RecycleBinItemState.SecondStageRecycleBin));
             }
         }
         #endregion
@@ -751,7 +751,7 @@ namespace PnP.Core.Test.SharePoint
             {
                 // There is at least 1 item in first stage recycle bin
                 await context.Web.LoadAsync(w => w.RecycleBin);
-                Assert.IsTrue(context.Web.RecycleBin.AsEnumerable().Count(r => r.ItemState == RecycleBinItemState.FirstStageRecycleBin) > 0);
+                Assert.IsTrue(context.Web.RecycleBin.AsRequested().Count(r => r.ItemState == RecycleBinItemState.FirstStageRecycleBin) > 0);
 
                 await context.Web.RecycleBin.MoveAllToSecondStageAsync();
             }
@@ -760,12 +760,12 @@ namespace PnP.Core.Test.SharePoint
             {
                 // There is no more first stage recycle bin items
                 await context.Web.LoadAsync(w => w.RecycleBin);
-                Assert.AreEqual(0, context.Web.RecycleBin.AsEnumerable().Count(r => r.ItemState == RecycleBinItemState.FirstStageRecycleBin));
+                Assert.AreEqual(0, context.Web.RecycleBin.AsRequested().Count(r => r.ItemState == RecycleBinItemState.FirstStageRecycleBin));
 
                 // CAUTION, The second stage recycle bin is at the SITE COLLECTION LEVEL
                 // The second stage recycle bin now contains items
                 await context.Site.LoadAsync(w => w.RecycleBin);
-                Assert.IsTrue(context.Site.RecycleBin.AsEnumerable().Count(r => r.ItemState == RecycleBinItemState.SecondStageRecycleBin) > 0);
+                Assert.IsTrue(context.Site.RecycleBin.AsRequested().Count(r => r.ItemState == RecycleBinItemState.SecondStageRecycleBin) > 0);
             }
 
             await CleanupSiteRecycleBinItem(3, recycleBinItemId);
@@ -782,7 +782,7 @@ namespace PnP.Core.Test.SharePoint
             {
                 // There is at least 1 item in first stage recycle bin
                 await context.Web.LoadAsync(w => w.RecycleBin);
-                Assert.IsTrue(context.Web.RecycleBin.AsEnumerable().Count(r => r.ItemState == RecycleBinItemState.FirstStageRecycleBin) > 0);
+                Assert.IsTrue(context.Web.RecycleBin.AsRequested().Count(r => r.ItemState == RecycleBinItemState.FirstStageRecycleBin) > 0);
 
                 context.Web.RecycleBin.MoveAllToSecondStage();
             }
@@ -791,12 +791,12 @@ namespace PnP.Core.Test.SharePoint
             {
                 // There is no more first stage recycle bin items
                 await context.Web.LoadAsync(w => w.RecycleBin);
-                Assert.AreEqual(0, context.Web.RecycleBin.AsEnumerable().Count(r => r.ItemState == RecycleBinItemState.FirstStageRecycleBin));
+                Assert.AreEqual(0, context.Web.RecycleBin.AsRequested().Count(r => r.ItemState == RecycleBinItemState.FirstStageRecycleBin));
 
                 // CAUTION, The second stage recycle bin is at the SITE COLLECTION LEVEL
                 // The second stage recycle bin now contains items
                 await context.Site.LoadAsync(w => w.RecycleBin);
-                Assert.IsTrue(context.Site.RecycleBin.AsEnumerable().Count(r => r.ItemState == RecycleBinItemState.SecondStageRecycleBin) > 0);
+                Assert.IsTrue(context.Site.RecycleBin.AsRequested().Count(r => r.ItemState == RecycleBinItemState.SecondStageRecycleBin) > 0);
             }
 
             await CleanupSiteRecycleBinItem(3, recycleBinItemId);
@@ -813,7 +813,7 @@ namespace PnP.Core.Test.SharePoint
             {
                 // There is at least 1 item in first stage recycle bin
                 await context.Web.LoadAsync(w => w.RecycleBin);
-                Assert.IsTrue(context.Web.RecycleBin.AsEnumerable().Count(r => r.ItemState == RecycleBinItemState.FirstStageRecycleBin) > 0);
+                Assert.IsTrue(context.Web.RecycleBin.AsRequested().Count(r => r.ItemState == RecycleBinItemState.FirstStageRecycleBin) > 0);
 
                 var batch = context.NewBatch();
                 await context.Web.RecycleBin.MoveAllToSecondStageBatchAsync(batch);
@@ -824,12 +824,12 @@ namespace PnP.Core.Test.SharePoint
             {
                 // There is no more first stage recycle bin items
                 await context.Web.LoadAsync(w => w.RecycleBin);
-                Assert.AreEqual(0, context.Web.RecycleBin.AsEnumerable().Count(r => r.ItemState == RecycleBinItemState.FirstStageRecycleBin));
+                Assert.AreEqual(0, context.Web.RecycleBin.AsRequested().Count(r => r.ItemState == RecycleBinItemState.FirstStageRecycleBin));
 
                 // CAUTION, The second stage recycle bin is at the SITE COLLECTION LEVEL
                 // The second stage recycle bin now contains items
                 await context.Site.LoadAsync(w => w.RecycleBin);
-                Assert.IsTrue(context.Site.RecycleBin.AsEnumerable().Count(r => r.ItemState == RecycleBinItemState.SecondStageRecycleBin) > 0);
+                Assert.IsTrue(context.Site.RecycleBin.AsRequested().Count(r => r.ItemState == RecycleBinItemState.SecondStageRecycleBin) > 0);
             }
 
             await CleanupSiteRecycleBinItem(3, recycleBinItemId);
@@ -846,7 +846,7 @@ namespace PnP.Core.Test.SharePoint
             {
                 // There is at least 1 item in first stage recycle bin
                 await context.Web.LoadAsync(w => w.RecycleBin);
-                Assert.IsTrue(context.Web.RecycleBin.AsEnumerable().Count(r => r.ItemState == RecycleBinItemState.FirstStageRecycleBin) > 0);
+                Assert.IsTrue(context.Web.RecycleBin.AsRequested().Count(r => r.ItemState == RecycleBinItemState.FirstStageRecycleBin) > 0);
 
                 var batch = context.NewBatch();
                 context.Web.RecycleBin.MoveAllToSecondStageBatch(batch);
@@ -857,12 +857,12 @@ namespace PnP.Core.Test.SharePoint
             {
                 // There is no more first stage recycle bin items
                 await context.Web.LoadAsync(w => w.RecycleBin);
-                Assert.AreEqual(0, context.Web.RecycleBin.AsEnumerable().Count(r => r.ItemState == RecycleBinItemState.FirstStageRecycleBin));
+                Assert.AreEqual(0, context.Web.RecycleBin.AsRequested().Count(r => r.ItemState == RecycleBinItemState.FirstStageRecycleBin));
 
                 // CAUTION, The second stage recycle bin is at the SITE COLLECTION LEVEL
                 // The second stage recycle bin now contains items
                 await context.Site.LoadAsync(w => w.RecycleBin);
-                Assert.IsTrue(context.Site.RecycleBin.AsEnumerable().Count(r => r.ItemState == RecycleBinItemState.SecondStageRecycleBin) > 0);
+                Assert.IsTrue(context.Site.RecycleBin.AsRequested().Count(r => r.ItemState == RecycleBinItemState.SecondStageRecycleBin) > 0);
             }
 
             await CleanupSiteRecycleBinItem(3, recycleBinItemId);
@@ -879,7 +879,7 @@ namespace PnP.Core.Test.SharePoint
             {
                 // There is at least 1 item in first stage recycle bin
                 await context.Web.LoadAsync(w => w.RecycleBin);
-                Assert.IsTrue(context.Web.RecycleBin.AsEnumerable().Count(r => r.ItemState == RecycleBinItemState.FirstStageRecycleBin) > 0);
+                Assert.IsTrue(context.Web.RecycleBin.AsRequested().Count(r => r.ItemState == RecycleBinItemState.FirstStageRecycleBin) > 0);
 
                 await context.Web.RecycleBin.MoveAllToSecondStageBatchAsync();
                 await context.ExecuteAsync();
@@ -889,12 +889,12 @@ namespace PnP.Core.Test.SharePoint
             {
                 // There is no more first stage recycle bin items
                 await context.Web.LoadAsync(w => w.RecycleBin);
-                Assert.AreEqual(0, context.Web.RecycleBin.AsEnumerable().Count(r => r.ItemState == RecycleBinItemState.FirstStageRecycleBin));
+                Assert.AreEqual(0, context.Web.RecycleBin.AsRequested().Count(r => r.ItemState == RecycleBinItemState.FirstStageRecycleBin));
 
                 // CAUTION, The second stage recycle bin is at the SITE COLLECTION LEVEL
                 // The second stage recycle bin now contains items
                 await context.Site.LoadAsync(w => w.RecycleBin);
-                Assert.IsTrue(context.Site.RecycleBin.AsEnumerable().Count(r => r.ItemState == RecycleBinItemState.SecondStageRecycleBin) > 0);
+                Assert.IsTrue(context.Site.RecycleBin.AsRequested().Count(r => r.ItemState == RecycleBinItemState.SecondStageRecycleBin) > 0);
             }
 
             await CleanupSiteRecycleBinItem(3, recycleBinItemId);
@@ -911,7 +911,7 @@ namespace PnP.Core.Test.SharePoint
             {
                 // There is at least 1 item in first stage recycle bin
                 await context.Web.LoadAsync(w => w.RecycleBin);
-                Assert.IsTrue(context.Web.RecycleBin.AsEnumerable().Count(r => r.ItemState == RecycleBinItemState.FirstStageRecycleBin) > 0);
+                Assert.IsTrue(context.Web.RecycleBin.AsRequested().Count(r => r.ItemState == RecycleBinItemState.FirstStageRecycleBin) > 0);
 
                 context.Web.RecycleBin.MoveAllToSecondStageBatch();
                 await context.ExecuteAsync();
@@ -921,12 +921,12 @@ namespace PnP.Core.Test.SharePoint
             {
                 // There is no more first stage recycle bin items
                 await context.Web.LoadAsync(w => w.RecycleBin);
-                Assert.AreEqual(0, context.Web.RecycleBin.AsEnumerable().Count(r => r.ItemState == RecycleBinItemState.FirstStageRecycleBin));
+                Assert.AreEqual(0, context.Web.RecycleBin.AsRequested().Count(r => r.ItemState == RecycleBinItemState.FirstStageRecycleBin));
 
                 // CAUTION, The second stage recycle bin is at the SITE COLLECTION LEVEL
                 // The second stage recycle bin now contains items
                 await context.Site.LoadAsync(w => w.RecycleBin);
-                Assert.IsTrue(context.Site.RecycleBin.AsEnumerable().Count(r => r.ItemState == RecycleBinItemState.SecondStageRecycleBin) > 0);
+                Assert.IsTrue(context.Site.RecycleBin.AsRequested().Count(r => r.ItemState == RecycleBinItemState.SecondStageRecycleBin) > 0);
             }
 
             await CleanupSiteRecycleBinItem(3, recycleBinItemId);

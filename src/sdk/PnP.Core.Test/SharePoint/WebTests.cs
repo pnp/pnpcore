@@ -452,8 +452,8 @@ namespace PnP.Core.Test.SharePoint
 
                 Assert.IsTrue(timeZones.Requested);
                 Assert.IsTrue(timeZones.Length > 0);
-                var firstTimeZone = timeZones.AsEnumerable().First();
-                var listTimeZone = timeZones.AsEnumerable().Last();
+                var firstTimeZone = timeZones.AsRequested().First();
+                var listTimeZone = timeZones.AsRequested().Last();
                 Assert.IsTrue(!string.IsNullOrEmpty(firstTimeZone.Description));
                 Assert.IsTrue(firstTimeZone.IsPropertyAvailable(p => p.Bias));
                 Assert.IsTrue(firstTimeZone.IsPropertyAvailable(p => p.DaylightBias));
@@ -627,7 +627,7 @@ namespace PnP.Core.Test.SharePoint
                 using (var context2 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
                 {
                     await context2.Web.LoadAsync(p => p.Webs);
-                    var createdWeb = context2.Web.Webs.AsEnumerable().FirstOrDefault(p => p.Title == webTitle);
+                    var createdWeb = context2.Web.Webs.AsRequested().FirstOrDefault(p => p.Title == webTitle);
                     Assert.IsTrue(createdWeb != null);
                     Assert.AreEqual(createdWeb.Title, webTitle);
                     Assert.AreEqual(createdWeb.Url, new Uri($"{context.Uri}/{webTitle}"));
@@ -656,7 +656,7 @@ namespace PnP.Core.Test.SharePoint
                 using (var context2 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
                 {
                     await context2.Web.LoadAsync(p => p.Webs);
-                    var createdWeb = context2.Web.Webs.AsEnumerable().FirstOrDefault(p => p.Title == webTitle);
+                    var createdWeb = context2.Web.Webs.AsRequested().FirstOrDefault(p => p.Title == webTitle);
                     Assert.IsTrue(createdWeb != null);
                     Assert.AreEqual(createdWeb.Title, webTitle);
                     Assert.AreEqual(createdWeb.Url, new Uri($"{context.Uri}/{webTitle}"));
@@ -694,7 +694,7 @@ namespace PnP.Core.Test.SharePoint
                 using (var context2 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
                 {
                     await context2.Web.LoadAsync(p => p.Webs);
-                    var createdWeb = context2.Web.Webs.AsEnumerable().FirstOrDefault(p => p.Title == webTitle);
+                    var createdWeb = context2.Web.Webs.AsRequested().FirstOrDefault(p => p.Title == webTitle);
                     Assert.IsTrue(createdWeb != null);
 
                     Assert.AreEqual(createdWeb.Title, webTitle);
@@ -723,7 +723,7 @@ namespace PnP.Core.Test.SharePoint
                 using (var context2 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
                 {
                     await context2.Web.LoadAsync(p => p.Webs);
-                    var createdWeb = context2.Web.Webs.AsEnumerable().FirstOrDefault(p => p.Title == webTitle);
+                    var createdWeb = context2.Web.Webs.AsRequested().FirstOrDefault(p => p.Title == webTitle);
                     Assert.IsTrue(createdWeb != null);
 
                     await Assert.ThrowsExceptionAsync<ClientException>(async () =>

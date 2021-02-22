@@ -268,7 +268,7 @@ namespace PnP.Core.Test.SharePoint
                     // Verify everything went well
                     await context2.Web.EnsurePropertiesAsync(p => p.Features, p => p.IsMultilingual, p => p.SupportedUILanguageIds);
 
-                    Assert.IsTrue(context2.Web.Features.AsEnumerable().FirstOrDefault(p => p.DefinitionId == new Guid("24611c05-ee19-45da-955f-6602264abaf8")) != null);
+                    Assert.IsTrue(context2.Web.Features.AsRequested().FirstOrDefault(p => p.DefinitionId == new Guid("24611c05-ee19-45da-955f-6602264abaf8")) != null);
                     Assert.IsTrue(context2.Web.SupportedUILanguageIds.Contains(1043));
                     Assert.IsTrue(context2.Web.SupportedUILanguageIds.Contains(1036));
 
@@ -284,7 +284,7 @@ namespace PnP.Core.Test.SharePoint
                     // Verify everything was turned off again
                     await context3.Web.EnsurePropertiesAsync(p => p.Features, p => p.SupportedUILanguageIds);
 
-                    Assert.IsTrue(context3.Web.Features.AsEnumerable().FirstOrDefault(p => p.DefinitionId == new Guid("24611c05-ee19-45da-955f-6602264abaf8")) == null);
+                    Assert.IsTrue(context3.Web.Features.AsRequested().FirstOrDefault(p => p.DefinitionId == new Guid("24611c05-ee19-45da-955f-6602264abaf8")) == null);
                     Assert.IsFalse(context3.Web.SupportedUILanguageIds.Contains(1043));
                     Assert.IsFalse(context3.Web.SupportedUILanguageIds.Contains(1036));
                 }

@@ -197,12 +197,12 @@ namespace PnP.Core.Test.Base
                 var web = context.Web;
 
                 // Are the property populated
-                var firstList = web.Lists.AsEnumerable().First();
+                var firstList = web.Lists.AsRequested().First();
                 Assert.IsTrue(firstList.IsPropertyAvailable(p => p.Title));
                 Assert.IsTrue(firstList.IsPropertyAvailable(p => p.Description));
                 Assert.IsTrue(firstList.Fields.Requested);
 
-                var firstField = firstList.Fields.AsEnumerable().First();
+                var firstField = firstList.Fields.AsRequested().First();
                 Assert.IsTrue(firstField.IsPropertyAvailable(p => p.StaticName));
 
                 // Are other properties still not available
@@ -224,12 +224,12 @@ namespace PnP.Core.Test.Base
                 var web = context.Web;
 
                 // Are the property populated
-                var firstList = web.Lists.AsEnumerable().First();
+                var firstList = web.Lists.AsRequested().First();
                 Assert.IsTrue(firstList.IsPropertyAvailable(p => p.Title));
                 Assert.IsTrue(firstList.IsPropertyAvailable(p => p.Description));
                 Assert.IsTrue(firstList.Fields.Requested);
 
-                var firstField = firstList.Fields.AsEnumerable().First();
+                var firstField = firstList.Fields.AsRequested().First();
                 Assert.IsTrue(firstField.IsPropertyAvailable(p => p.StaticName));
 
                 // Are other properties still not available
@@ -251,12 +251,12 @@ namespace PnP.Core.Test.Base
                 var web = context.Web;
 
                 // Are the property populated
-                var firstList = web.Lists.AsEnumerable().First();
+                var firstList = web.Lists.AsRequested().First();
                 Assert.IsTrue(firstList.IsPropertyAvailable(p => p.Title));
                 Assert.IsTrue(firstList.IsPropertyAvailable(p => p.Description));
                 Assert.IsTrue(firstList.Fields.Requested);
 
-                var firstField = firstList.Fields.AsEnumerable().First();
+                var firstField = firstList.Fields.AsRequested().First();
                 Assert.IsTrue(firstField.IsPropertyAvailable(p => p.StaticName));
 
                 // Are other properties still not available

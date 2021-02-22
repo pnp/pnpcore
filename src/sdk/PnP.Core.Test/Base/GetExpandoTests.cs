@@ -57,7 +57,7 @@ namespace PnP.Core.Test.Base
                         // There should be 3 items in the list
                         Assert.IsTrue(myList.Items.Length == 3);
                         // Can we get the value of list item field
-                        var firstItem = myList.Items.AsEnumerable().First();
+                        var firstItem = myList.Items.AsRequested().First();
                         Assert.IsNotNull(firstItem.Title);
                         Assert.AreEqual(ItemTitleValue, firstItem.Title);
                         // Test the dynamic list item data reading
@@ -105,7 +105,7 @@ namespace PnP.Core.Test.Base
                         // There should be 3 items in the list
                         Assert.IsTrue(myList.Items.Length == 3);
                         // Can we get the value of list item field
-                        var firstItem = myList.Items.AsEnumerable().First();
+                        var firstItem = myList.Items.AsRequested().First();
                         Assert.IsNotNull(firstItem.Title);
                         Assert.AreEqual(ItemTitleValue, firstItem.Title);
                         // Test the dynamic list item data reading
@@ -158,7 +158,7 @@ namespace PnP.Core.Test.Base
                         // There should be 3 items in the list
                         Assert.IsTrue(myList.Items.Length == 3);
                         // Can we get the value of list item field
-                        var firstItem = myList.Items.AsEnumerable().First();
+                        var firstItem = myList.Items.AsRequested().First();
                         Assert.IsNotNull(firstItem.Title);
                         Assert.AreEqual(ItemTitleValue, firstItem.Title);
                         // Test the dynamic list item data reading
@@ -203,7 +203,7 @@ namespace PnP.Core.Test.Base
                         // There should be 3 items in the list
                         Assert.IsTrue(myList.Items.Length == 3);
                         // Can we get the value of list item field
-                        var firstItem = myList.Items.AsEnumerable().First();
+                        var firstItem = myList.Items.AsRequested().First();
                         Assert.IsNotNull(firstItem.Title);
                         Assert.AreEqual(ItemTitleValue, firstItem.Title);
                         // Test the dynamic list item data reading
