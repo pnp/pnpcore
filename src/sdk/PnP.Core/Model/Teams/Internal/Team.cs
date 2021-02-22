@@ -61,7 +61,7 @@ namespace PnP.Core.Model.Teams
 
         public ITeamClassSettings ClassSettings { get => GetModelValue<ITeamClassSettings>(); }
 
-        [GraphProperty("primaryChannel", Expandable = true)]
+        [GraphProperty("primaryChannel", Get = "teams/{Site.GroupId}/primarychannel")]
         public ITeamChannel PrimaryChannel { get => GetModelValue<ITeamChannel>(); }
 
         [GraphProperty("channels", Get = "teams/{Site.GroupId}/channels")]

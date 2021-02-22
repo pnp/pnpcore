@@ -1,4 +1,5 @@
-﻿namespace PnP.Core.Model.SharePoint
+﻿/*
+namespace PnP.Core.Model.SharePoint
 {
     /// <summary>
     /// Represents the localized label used in the term store, which identifies the name in the localized language.
@@ -23,3 +24,4 @@
 
     }
 }
+*/

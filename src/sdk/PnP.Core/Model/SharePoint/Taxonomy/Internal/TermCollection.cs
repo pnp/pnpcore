@@ -1,4 +1,5 @@
-﻿using PnP.Core.Services;
+﻿/*
+using PnP.Core.Services;
 using System;
 using System.Threading.Tasks;
 
@@ -87,3 +88,4 @@ namespace PnP.Core.Model.SharePoint
         }
     }
 }
+*/

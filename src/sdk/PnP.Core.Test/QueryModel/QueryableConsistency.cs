@@ -62,6 +62,8 @@ namespace PnP.Core.Test.QueryModel
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
+                //context.GraphFirst = false;
+
                 // this will use Graph under the covers!
                 var sitePages = context.Web.Lists.GetByTitle("Site Pages", p => p.Title, p => p.Description, p => p.Items);
                 Assert.IsTrue(sitePages.Requested);

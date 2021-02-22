@@ -61,6 +61,13 @@ namespace PnP.Core.Test.QueryModel
                     ).FirstOrDefault(l => l.Title == "Documents");
 
                 Assert.IsNotNull(list);
+
+                var lists = context.Web.Lists.QueryProperties(l => l.Id,
+                    l => l.Title,
+                    l => l.ContentTypes.QueryProperties(ct => ct.Id, ct => ct.Description)
+                    ).Take(2).ToArray();
+
+                Assert.IsNotNull(lists);
             }
         }
 
