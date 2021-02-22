@@ -14,8 +14,6 @@ using System.Threading.Tasks;
 
 namespace PnP.Core.Test.Base
 {
-
-
     [TestClass]
     public class QueryTests
     {
