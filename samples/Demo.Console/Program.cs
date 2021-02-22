@@ -34,17 +34,6 @@ namespace Consumer
                 var customSettings = new CustomSettings();
                 hostingContext.Configuration.Bind("CustomSettings", customSettings);
 
-                // Create an instance of the Authentication Provider that uses Credential Manager
-                //var authenticationProvider = new CredentialManagerAuthenticationProvider(
-                //                customSettings.ClientId,
-                //                customSettings.TenantId,
-                //                customSettings.CredentialManager);
-
-                //var authenticationProvider = new InteractiveAuthenticationProvider(
-                //                customSettings.ClientId,
-                //                customSettings.TenantId,
-                //                customSettings.RedirectUri);
-
                 // Add the PnP Core SDK services
                 services.AddPnPCore(options => {
 
@@ -77,7 +66,6 @@ namespace Consumer
                         new PnP.Core.Services.Builder.Configuration.PnPCoreSiteOptions
                         {
                             SiteUrl = customSettings.DemoSiteUrl
-                            //AuthenticationProvider = authenticationProvider,
                            
                         });
                 });
@@ -97,6 +85,23 @@ namespace Consumer
                                 {
                                     RedirectUri = customSettings.RedirectUri
                                 }
+                            });
+
+                        options.Credentials.Configurations.Add("credentials",
+                            new PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationCredentialConfigurationOptions
+                            {
+                                ClientId = customSettings.ClientId,
+                                TenantId = customSettings.TenantId,
+                                Interactive = new PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationInteractiveOptions
+                                {
+                                    RedirectUri = customSettings.RedirectUri
+                                }
+                                //},
+                                //CredentialManager = new PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationCredentialManagerOptions
+                                //{
+                                //    CredentialManagerName = customSettings.CredentialManager
+                                //}
+                                
                             });
 
                         // Configure the default authentication provider
