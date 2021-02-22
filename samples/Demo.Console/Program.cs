@@ -135,7 +135,7 @@ namespace Consumer
                     Console.ForegroundColor = ConsoleColor.Yellow;
                     Console.WriteLine("===Web (REST)===");
                     Console.WriteLine($"Title: {web.Title}");
-                    Console.WriteLine($"# Lists: {web.Lists.Count()}");
+                    Console.WriteLine($"# Lists: {web.Lists.Length}");
                     Console.WriteLine($"Master page url: {web.MasterUrl}");
                     Console.ResetColor();
 
@@ -159,7 +159,7 @@ namespace Consumer
                         Console.ForegroundColor = ConsoleColor.Yellow;
                         Console.WriteLine("===List (Graph v1)===");
                         Console.WriteLine($"Title: {demo1List.Title}");
-                        Console.WriteLine($"# Items: {demo1List.Items.Count()}");
+                        Console.WriteLine($"# Items: {demo1List.Items.Length}");
                         Console.ResetColor();
                     }
 
@@ -170,7 +170,7 @@ namespace Consumer
                     Console.ForegroundColor = ConsoleColor.Yellow;
                     Console.WriteLine("===Team channel messages (Graph beta)===");
                     Console.WriteLine($"Title: {team.PrimaryChannel.DisplayName}");
-                    Console.WriteLine($"# Messages: {team.PrimaryChannel.Messages.Count()}");
+                    Console.WriteLine($"# Messages: {team.PrimaryChannel.Messages.Length}");
                     Console.ResetColor();
                 }
                 #endregion
