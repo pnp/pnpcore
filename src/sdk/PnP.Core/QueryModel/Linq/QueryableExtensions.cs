@@ -524,7 +524,7 @@ namespace PnP.Core.QueryModel
         /// <returns> The query results. </returns>
         /// <exception cref="InvalidOperationException"> <paramref name="source" /> is <see langword="null" />. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="source" /> is not a <see cref="IAsyncEnumerable{T}" />. </exception>
-        public static IEnumerable<TSource> AsEnumerable<TSource>(
+        public static IEnumerable<TSource> AsRequested<TSource>(
             this IDataModelCollection<TSource> source)
         {
             if (source == null)

@@ -269,7 +269,7 @@ namespace PnP.Core.Model.SharePoint
             {
                 // Strip folder from the provided file name + path
                 (var folderName, var pageNameWithoutFolder) = PageToPageNameAndFolder(pageName);
-                var pages = pagesLibrary.Items.AsEnumerable().Where(p => p.Values[PageConstants.FileLeafRef].ToString().StartsWith(pageNameWithoutFolder, StringComparison.InvariantCultureIgnoreCase));
+                var pages = pagesLibrary.Items.AsRequested().Where(p => p.Values[PageConstants.FileLeafRef].ToString().StartsWith(pageNameWithoutFolder, StringComparison.InvariantCultureIgnoreCase));
                 if (pages.Any())
                 {
                     pagesToLoad = pages.ToList();
@@ -277,7 +277,7 @@ namespace PnP.Core.Model.SharePoint
             }
             else
             {
-                pagesToLoad = pagesLibrary.Items.AsEnumerable().ToList();
+                pagesToLoad = pagesLibrary.Items.AsRequested().ToList();
             }
 
             if (pagesToLoad != null)
@@ -379,7 +379,7 @@ namespace PnP.Core.Model.SharePoint
         private static async Task<IList> EnsurePagesLibraryAsync(PnPContext context)
         {
             IList pagesLibrary = null;
-            var lists = context.Web.Lists.AsEnumerable();
+            var lists = context.Web.Lists.AsRequested();
             if (context.Web.IsPropertyAvailable(p => p.Lists) && lists.Any())
             {
                 foreach (var list in lists)
@@ -1616,7 +1616,7 @@ namespace PnP.Core.Model.SharePoint
                 PageListItem[PageConstants.PageLayoutContentField] = pageHeaderHtml;
 
                 // AuthorByline depends on a field holding the author values
-                var authorByLineIdField = PagesLibrary.Fields.AsEnumerable().FirstOrDefault(p => p.InternalName == PageConstants._AuthorByline);
+                var authorByLineIdField = PagesLibrary.Fields.AsRequested().FirstOrDefault(p => p.InternalName == PageConstants._AuthorByline);
                 if (pageHeader.AuthorByLineId > -1)
                 {
                     var fieldUsers = PageListItem.NewFieldValueCollection(authorByLineIdField);
@@ -1726,7 +1726,7 @@ namespace PnP.Core.Model.SharePoint
 
         private void SetBannerImageUrlField(string bannerImageUrl)
         {
-            var bannerImageField = PagesLibrary.Fields.AsEnumerable().FirstOrDefault(p => p.InternalName == PageConstants.BannerImageUrlField);
+            var bannerImageField = PagesLibrary.Fields.AsRequested().FirstOrDefault(p => p.InternalName == PageConstants.BannerImageUrlField);
             if (bannerImageField != null)
             {
                 PageListItem[PageConstants.BannerImageUrlField] = bannerImageField.NewFieldUrlValue(bannerImageUrl);
@@ -1742,7 +1742,7 @@ namespace PnP.Core.Model.SharePoint
             PageListItem = null;
 
             // Get the relevant list item
-            foreach (var page in PagesLibrary.Items.AsEnumerable())
+            foreach (var page in PagesLibrary.Items.AsRequested())
             {
                 var fileDirRef = PagesLibrary.RootFolder.ServerRelativeUrl + (!string.IsNullOrEmpty(folderName) ? $"/{folderName}" : "");
                 if (page[PageConstants.FileLeafRef].ToString().Equals(pageNameWithoutFolder, StringComparison.InvariantCultureIgnoreCase) && page[PageConstants.FileDirRef].ToString().Equals(fileDirRef, StringComparison.InvariantCultureIgnoreCase))

@@ -6,7 +6,6 @@ namespace PnP.Core.Model.Teams
     /// Public interface to define a collection of TeamApp objects of Microsoft Teams
     /// </summary>
     [ConcreteType(typeof(TeamAppCollection))]
-    public interface ITeamAppCollection : IQueryable<ITeamApp>, IDataModelCollection<ITeamApp>, IDataModelCollectionLoad<ITeamApp>, ISupportPaging<ITeamApp>
-    {
+    public interface ITeamAppCollection : IQueryable<ITeamApp>, IDataModelCollection<ITeamApp>, IDataModelCollectionLoad<ITeamApp> {
     }
 }

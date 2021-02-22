@@ -7,7 +7,7 @@ namespace PnP.Core.Model.SharePoint
     /// Collection of terms
     /// </summary>
     [ConcreteType(typeof(TermCollection))]
-    public interface ITermCollection : IDataModelCollection<ITerm>, ISupportPaging<ITerm>, IDataModelCollectionDeleteByStringId, ISupportQuery<ITerm>
+    public interface ITermCollection : IDataModelCollection<ITerm>, IDataModelCollectionDeleteByStringId, ISupportQuery<ITerm>
     {
         /// <summary>
         /// Adds a new term 

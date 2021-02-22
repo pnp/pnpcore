@@ -10,7 +10,7 @@ namespace PnP.Core.Model.SharePoint
     /// Collection of term groups
     /// </summary>
     [ConcreteType(typeof(TermGroupCollection))]
-    public interface ITermGroupCollection : IQueryable<ITermGroup>, IDataModelCollection<ITermGroup>, ISupportPaging<ITermGroup>, IDataModelCollectionDeleteByStringId
+    public interface ITermGroupCollection : IQueryable<ITermGroup>, IDataModelCollection<ITermGroup>, IDataModelCollectionDeleteByStringId
     {
         #region Add methods
 

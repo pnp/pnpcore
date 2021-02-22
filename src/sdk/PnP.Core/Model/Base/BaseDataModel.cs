@@ -189,7 +189,7 @@ namespace PnP.Core.Model
         /// </summary>
         /// <param name="selectors">The properties to select</param>
         /// <returns>The Domain Model object</returns>
-        public virtual Task LoadAsync(params Expression<Func<object, object>>[] selectors)
+        public virtual Task LoadAsync(params LambdaExpression[] selectors)
         {
             // Cast expressions
             var newExpressions = selectors.CastExpressions<TModel>();
@@ -212,7 +212,7 @@ namespace PnP.Core.Model
         /// <param name="batch">Batch to use for the current request</param>
         /// <param name="selectors">The properties to select</param>
         /// <returns>The Domain Model object</returns>
-        public virtual async Task<IBatchResult> LoadBatchAsync(Batch batch, params Expression<Func<object, object>>[] selectors)
+        public virtual async Task<IBatchResult> LoadBatchAsync(Batch batch, params LambdaExpression[] selectors)
         {
             var newSelectors = selectors.CastExpressions<TModel>();
 

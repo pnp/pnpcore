@@ -371,7 +371,7 @@ namespace PnP.Core.Services
             if (apiResponse.ApiCall.Request.Contains("$top", StringComparison.InvariantCultureIgnoreCase))
             {
                 var parent = (pnpObject as IDataModelParent).Parent;
-                if (parent != null && parent is IManageableCollection && parent is IMetadataExtensible && parent.GetType().ImplementsInterface(typeof(ISupportPaging<>)))
+                if (parent != null && parent is IManageableCollection && parent is IMetadataExtensible && parent.GetType().ImplementsInterface(typeof(ISupportPaging)))
                 {
                     TrackAndUpdateMetaData(parent as IMetadataExtensible, "__next", BuildNextPageRestUrl(apiResponse.ApiCall.Request));
                 }
@@ -648,7 +648,7 @@ namespace PnP.Core.Services
             {
                 if (parentList.ArePropertiesAvailable(List.LoadFieldsExpression))
                 {
-                    return parentList.Fields.AsEnumerable().FirstOrDefault(p => p.InternalName == fieldName);
+                    return parentList.Fields.AsRequested().FirstOrDefault(p => p.InternalName == fieldName);
                 }
             }
             return null;

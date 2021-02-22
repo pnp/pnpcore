@@ -148,6 +148,9 @@ namespace PnP.Core.QueryModel
 
         private async IAsyncEnumerable<TModel> GetAsyncEnumerable(IRequestableCollection collection, ODataQuery<TModel> query, BatchRequest originalBatchRequest, CancellationToken token)
         {
+            // Due some Graph limitations, ODataQuery can choose to implement skip on client side
+            bool applySkip = !originalBatchRequest.ApiCall.Request.Contains("$skip");
+
             int count = 0;
             while (true)
             {
@@ -159,8 +162,9 @@ namespace PnP.Core.QueryModel
                     token.ThrowIfCancellationRequested();
 
                     count++;
+
                     // Skip items
-                    if (query.Skip.HasValue && query.Skip > count) continue;
+                    if (applySkip && query.Skip.HasValue && query.Skip > count) continue;
 
                     // Stop to enumerate or load other pages
                     if (query.Top.HasValue && count > query.Top) yield break;
@@ -171,7 +175,7 @@ namespace PnP.Core.QueryModel
 
                 // Check if collection supports pagination
                 var typedCollection = collection as ISupportPaging;
-                if (typedCollection == null || !typedCollection.CanPage) yield break;
+                if (typedCollection == null || !typedCollection.CanPage || (query.Top.HasValue && count >= query.Top)) yield break;
 
                 // Prepare api call
                 IMetadataExtensible metadataExtensible = (IMetadataExtensible)typedCollection;
