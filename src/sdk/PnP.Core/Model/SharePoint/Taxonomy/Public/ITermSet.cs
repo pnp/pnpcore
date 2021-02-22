@@ -1,4 +1,5 @@
-﻿using System;
+﻿/*
+using System;
 
 namespace PnP.Core.Model.SharePoint
 {
@@ -57,3 +58,4 @@ namespace PnP.Core.Model.SharePoint
 
     }
 }
+*/

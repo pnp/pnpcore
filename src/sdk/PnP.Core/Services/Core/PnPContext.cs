@@ -45,10 +45,10 @@ namespace PnP.Core.Services
             return new GraphGroup();
         }, true);
 
-        private readonly Lazy<ITermStore> termStore = new Lazy<ITermStore>(() =>
-        {
-            return new TermStore();
-        }, true);
+        //private readonly Lazy<ITermStore> termStore = new Lazy<ITermStore>(() =>
+        //{
+        //    return new TermStore();
+        //}, true);
         #endregion
 
         #region Private properties
@@ -310,14 +310,14 @@ namespace PnP.Core.Services
         /// <summary>
         /// Entry point for the Microsoft 365 TermStore
         /// </summary>
-        public ITermStore TermStore
-        {
-            get
-            {
-                (termStore.Value as TermStore).PnPContext = this;
-                return termStore.Value;
-            }
-        }
+        //public ITermStore TermStore
+        //{
+        //    get
+        //    {
+        //        (termStore.Value as TermStore).PnPContext = this;
+        //        return termStore.Value;
+        //    }
+        //}
         #endregion
 
         #region Public Methods   

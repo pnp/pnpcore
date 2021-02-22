@@ -1,4 +1,5 @@
-﻿using System;
+﻿/*
+using System;
 
 namespace PnP.Core.Model.SharePoint
 {
@@ -71,3 +72,4 @@ namespace PnP.Core.Model.SharePoint
         public void AddLabelAndDescription(string label, string languageTag, bool isDefault = false, string description = null);
     }
 }
+*/

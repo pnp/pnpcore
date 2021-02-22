@@ -1,4 +1,5 @@
-﻿using PnP.Core.Services;
+﻿/*
+using PnP.Core.Services;
 using System;
 using System.Collections.Generic;
 using System.Dynamic;
@@ -244,3 +245,4 @@ namespace PnP.Core.Model.SharePoint
         #endregion
     }
 }
+*/
