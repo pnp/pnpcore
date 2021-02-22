@@ -34,24 +34,13 @@ namespace Consumer
                 var customSettings = new CustomSettings();
                 hostingContext.Configuration.Bind("CustomSettings", customSettings);
 
-                // Create an instance of the Authentication Provider that uses Credential Manager
-                //var authenticationProvider = new CredentialManagerAuthenticationProvider(
-                //                customSettings.ClientId,
-                //                customSettings.TenantId,
-                //                customSettings.CredentialManager);
-
-                //var authenticationProvider = new InteractiveAuthenticationProvider(
-                //                customSettings.ClientId,
-                //                customSettings.TenantId,
-                //                customSettings.RedirectUri);
-
                 // Add the PnP Core SDK services
                 services.AddPnPCore(options => {
 
                     // You can explicitly configure all the settings, or you can
                     // simply use the default values
 
-                    //options.PnPContext.GraphFirst = true;
+                    options.PnPContext.GraphFirst = true;
                     //options.PnPContext.GraphCanUseBeta = true;
                     //options.PnPContext.GraphAlwaysUseBeta = false;
 
@@ -77,12 +66,13 @@ namespace Consumer
                         new PnP.Core.Services.Builder.Configuration.PnPCoreSiteOptions
                         {
                             SiteUrl = customSettings.DemoSiteUrl
-                            //AuthenticationProvider = authenticationProvider,
                            
                         });
                 });
 
                 // PnP Core Authentication
+                // To check out more authentication options check out the documentation for more information:
+                //  https://pnp.github.io/pnpcore/using-the-sdk/configuring%20authentication.html
                 services.AddPnPCoreAuthentication(
                     options =>
                     {
@@ -95,6 +85,23 @@ namespace Consumer
                                 {
                                     RedirectUri = customSettings.RedirectUri
                                 }
+                            });
+
+                        options.Credentials.Configurations.Add("credentials",
+                            new PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationCredentialConfigurationOptions
+                            {
+                                ClientId = customSettings.ClientId,
+                                TenantId = customSettings.TenantId,
+                                Interactive = new PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationInteractiveOptions
+                                {
+                                    RedirectUri = customSettings.RedirectUri
+                                }
+                                //},
+                                //CredentialManager = new PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationCredentialManagerOptions
+                                //{
+                                //    CredentialManagerName = customSettings.CredentialManager
+                                //}
+                                
                             });
 
                         // Configure the default authentication provider
@@ -135,7 +142,7 @@ namespace Consumer
                     Console.ForegroundColor = ConsoleColor.Yellow;
                     Console.WriteLine("===Web (REST)===");
                     Console.WriteLine($"Title: {web.Title}");
-                    Console.WriteLine($"# Lists: {web.Lists.Count()}");
+                    Console.WriteLine($"# Lists: {web.Lists.Length}");
                     Console.WriteLine($"Master page url: {web.MasterUrl}");
                     Console.ResetColor();
 
@@ -159,7 +166,7 @@ namespace Consumer
                         Console.ForegroundColor = ConsoleColor.Yellow;
                         Console.WriteLine("===List (Graph v1)===");
                         Console.WriteLine($"Title: {demo1List.Title}");
-                        Console.WriteLine($"# Items: {demo1List.Items.Count()}");
+                        Console.WriteLine($"# Items: {demo1List.Items.Length}");
                         Console.ResetColor();
                     }
 
@@ -170,7 +177,7 @@ namespace Consumer
                     Console.ForegroundColor = ConsoleColor.Yellow;
                     Console.WriteLine("===Team channel messages (Graph beta)===");
                     Console.WriteLine($"Title: {team.PrimaryChannel.DisplayName}");
-                    Console.WriteLine($"# Messages: {team.PrimaryChannel.Messages.Count()}");
+                    Console.WriteLine($"# Messages: {team.PrimaryChannel.Messages.Length}");
                     Console.ResetColor();
                 }
                 #endregion

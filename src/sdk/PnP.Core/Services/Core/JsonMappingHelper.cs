@@ -741,9 +741,11 @@ namespace PnP.Core.Services
                     EntityFieldInfo entityField = LookupEntityField(entity, apiResponse, property);
 
                     // Do we need to re-parent this json mapping to a non expandable collection in the current model?
-                    if (!string.IsNullOrEmpty(apiResponse.ApiCall.ReceivingProperty) && property.NameEquals("value"))
+                    bool modelReparented = false;
+                    if (!string.IsNullOrEmpty(apiResponse.ApiCall.ReceivingProperty) && (property.NameEquals("value") || apiResponse.ApiCall.ReceivingProperty == "primaryChannel"))
                     {
                         entityField = entity.Fields.FirstOrDefault(p => !string.IsNullOrEmpty(p.GraphName) && p.GraphName.Equals(apiResponse.ApiCall.ReceivingProperty, StringComparison.InvariantCultureIgnoreCase));
+                        modelReparented = true;
                     }
 
                     // Entity field should be populate for the actual fields we've requested
@@ -758,6 +760,13 @@ namespace PnP.Core.Services
                             var typedCollection = propertyToSetValue as IManageableCollection;
                             // Cast object to handle metadata on the collection
                             var typedMetaDataCollection = propertyToSetValue as IMetadataExtensible;
+
+                            // x BERT: Is it ok for you to do this?
+                            // Clear the content of the collection to refresh it with query data
+                            if (typedCollection is IRequestableCollection requestable)
+                            {
+                                requestable.Clear();
+                            }
 
                             // copy over collected metadata to collection
                             if (metadata.Count > 0)
@@ -845,7 +854,28 @@ namespace PnP.Core.Services
                             // Set the batch request id property
                             SetBatchRequestId(propertyToSetValue as TransientObject, apiResponse.BatchRequestId);
 
-                            await ((IDataModelProcess)propertyToSetValue).ProcessResponseAsync(new ApiResponse(apiResponse.ApiCall, property.Value, apiResponse.BatchRequestId)).ConfigureAwait(false);
+                            ApiResponse modelResponse;
+                            if (modelReparented)
+                            {
+                                // Clone the original API call so we can blank out the ReceivingProperty to avoid getting into an endless loop
+                                var newApiCall = new ApiCall(apiResponse.ApiCall.Request, apiResponse.ApiCall.JsonBody)
+                                {
+                                    Type  = apiResponse.ApiCall.Type,                                    
+                                };
+                                modelResponse = new ApiResponse(newApiCall, apiResponse.JsonElement, apiResponse.BatchRequestId);
+                            }
+                            else
+                            {
+                                modelResponse = new ApiResponse(apiResponse.ApiCall, property.Value, apiResponse.BatchRequestId);
+                            }
+
+                            await ((IDataModelProcess)propertyToSetValue).ProcessResponseAsync(modelResponse).ConfigureAwait(false);
+                            
+                            if (modelReparented)
+                            {
+                                // The full model was processed, no point in continueing as that would 
+                                break;
+                            }
                         }
                         else
                         {
