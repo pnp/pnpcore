@@ -116,9 +116,27 @@ namespace PnP.Core.QueryModel
                 // the whole collection of results
                 if (expressionType.ImplementsInterface(typeof(IQueryable)))
                 {
-                    // With the new querying model, where we always create a new container
-                    // as such, we simply return the whole set of results
-                    return resultValue;
+                    if (query.Top > 0 && !query.Skip.HasValue)
+                    {
+                        // Here will suffice to return the first N items
+                        return resultValue.Take(query.Top.Value);
+                    }
+                    else if (query.Top > 0 && query.Skip > 0)
+                    {
+                        // Here will return the first N items, skipping the Z items
+                        return resultValue.Skip(query.Skip.Value).Take(query.Top.Value);
+                    }
+                    if (!query.Top.HasValue && query.Skip > 0)
+                    {
+                        // Here will suffice to return the N items from Skip offeset
+                        return resultValue.Skip(query.Skip.Value);
+                    }
+                    else
+                    {
+                        // With the new querying model, where we always create a new container
+                        // as such, we simply return the whole set of results
+                        return resultValue;
+                    }
                 }
                 // Otherwise if the expression type is the type of TModel, we need
                 // to return a single item
