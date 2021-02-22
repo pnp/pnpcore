@@ -176,7 +176,8 @@ namespace PnP.Core.Model.SharePoint
 
         public IInformationRightsManagementSettings InformationRightsManagementSettings { get => GetModelValue<IInformationRightsManagementSettings>(); }
 
-        [GraphProperty("items", Get = "/sites/{Web.GraphId}/lists/{GraphId}/items?expand=fields")]
+        // BERT/PAOLO: not possible at this moment after refactoring, somethign to reassess later on
+        //[GraphProperty("items", Get = "/sites/{Web.GraphId}/lists/{GraphId}/items?expand=fields")]
         public IListItemCollection Items { get => GetModelCollectionValue<IListItemCollection>(); }
 
         public IContentTypeCollection ContentTypes { get => GetModelCollectionValue<IContentTypeCollection>(); }
