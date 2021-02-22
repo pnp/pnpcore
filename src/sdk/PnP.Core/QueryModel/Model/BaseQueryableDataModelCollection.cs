@@ -45,7 +45,22 @@ namespace PnP.Core.QueryModel
         {
             if (provider != null && Expression != null)
             {
-                return ((IEnumerable<TModel>)provider.Execute(Expression)).GetEnumerator();
+                var asyncEnumerable = ((IAsyncEnumerable<TModel>)provider.Execute(Expression));
+
+                // Transform IAsyncEnumerable to IEnumerable
+                // We need to prepare the list with all the items
+                return ToList().GetAwaiter().GetResult().GetEnumerator();
+
+                async Task<IEnumerable<TModel>> ToList()
+                {
+                    var result = new List<TModel>();
+                    await foreach (var item in asyncEnumerable)
+                    {
+                        result.Add(item);
+                    }
+
+                    return result;
+                }
             }
             else
             {

@@ -94,7 +94,7 @@ namespace PnP.Core.QueryModel
             if (!isEnumerable)
             {
                 // Normal execution which prepares the result asynchronously
-                Task<object> task = ExecuteObjectAsync(expression);
+                Task<object> task = ExecuteObjectAsync(expression, cancellationToken);
                 cancellationToken.ThrowIfCancellationRequested();
 
                 // Cast Task<object> to Task<TResult>
@@ -121,7 +121,7 @@ namespace PnP.Core.QueryModel
 
             // If the query has not been already requested
             // just execute it using our query service
-            return (TResult)ExecuteObjectAsync(expression).GetAwaiter().GetResult();
+            return (TResult)ExecuteObjectAsync(expression, CancellationToken.None).GetAwaiter().GetResult();
         }
 
         /// <summary>
@@ -130,7 +130,7 @@ namespace PnP.Core.QueryModel
         /// <param name="expression">Expression to execute</param>
         public object Execute(Expression expression)
         {
-            return ExecuteObjectAsync(expression).GetAwaiter().GetResult();
+            return ExecuteObjectAsync(expression, CancellationToken.None).GetAwaiter().GetResult();
         }
 
         /// <summary>
@@ -143,7 +143,8 @@ namespace PnP.Core.QueryModel
         /// Executes the provided expression
         /// </summary>
         /// <param name="expression">Expression to execute</param>
-        public abstract Task<object> ExecuteObjectAsync(Expression expression);
+        /// <param name="token">Token for cancellation</param>
+        public abstract Task<object> ExecuteObjectAsync(Expression expression, CancellationToken token);
 
         #endregion
 
@@ -154,12 +155,11 @@ namespace PnP.Core.QueryModel
             return (TResult)result;
         }
 
-        private async IAsyncEnumerable<TResult> GetAsyncEnumerable<TResult>(Expression expression, [EnumeratorCancellation] CancellationToken token)
+        private async IAsyncEnumerable<TResult> GetAsyncEnumerable<TResult>(Expression expression, [EnumeratorCancellation]CancellationToken token)
         {
-            IEnumerable<TResult> results = (IEnumerable<TResult>)await ExecuteObjectAsync(expression).ConfigureAwait(false);
-            foreach (TResult result in results)
+            IAsyncEnumerable<TResult> results = (IAsyncEnumerable<TResult>)await ExecuteObjectAsync(expression, token).ConfigureAwait(false);
+            await foreach (TResult result in results.WithCancellation(token))
             {
-                token.ThrowIfCancellationRequested();
                 yield return result;
             }
         }

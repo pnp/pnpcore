@@ -24,12 +24,12 @@ namespace PnP.Core.Services
 
         #region Model data get
 
-        internal static Task<ApiCallRequest> BuildGetAPICallAsync<TModel>(BaseDataModel<TModel> model, EntityInfo entity, ApiCall apiOverride, bool forceSPORest = false, bool useLinqGet = false)
+        internal static Task<ApiCallRequest> BuildGetAPICallAsync<TModel>(BaseDataModel<TModel> model, EntityInfo entity, ApiCall apiOverride, bool forceSPORest = false, bool useLinqGet = false, bool loadPages = false)
         {
-            return BuildGetAPICallAsync(model, entity, new ODataQuery<TModel>(), apiOverride, forceSPORest, useLinqGet);
+            return BuildGetAPICallAsync(model, entity, new ODataQuery<TModel>(), apiOverride, forceSPORest, useLinqGet, loadPages);
         }
 
-        internal static async Task<ApiCallRequest> BuildGetAPICallAsync<TModel>(BaseDataModel<TModel> model, EntityInfo entity, ODataQuery<TModel> oDataQuery, ApiCall apiOverride, bool forceSPORest = false, bool useLinqGet = false)
+        internal static async Task<ApiCallRequest> BuildGetAPICallAsync<TModel>(BaseDataModel<TModel> model, EntityInfo entity, ODataQuery<TModel> oDataQuery, ApiCall apiOverride, bool forceSPORest = false, bool useLinqGet = false, bool loadPages = false)
         {
             // Can we use Microsoft Graph for this GET request?
             bool useGraph = model.PnPContext.GraphFirst &&    // See if Graph First is enabled/configured
@@ -49,15 +49,15 @@ namespace PnP.Core.Services
 
             if (useGraph)
             {
-                return await BuildGetAPICallGraphAsync(model, entity, oDataQuery, apiOverride, useLinqGet).ConfigureAwait(false);
+                return await BuildGetAPICallGraphAsync(model, entity, oDataQuery, apiOverride, useLinqGet, loadPages).ConfigureAwait(false);
             }
             else
             {
-                return await BuildGetAPICallRestAsync(model, entity, oDataQuery, apiOverride, useLinqGet).ConfigureAwait(false);
+                return await BuildGetAPICallRestAsync(model, entity, oDataQuery, apiOverride, useLinqGet, loadPages).ConfigureAwait(false);
             }
         }
 
-        private static async Task<ApiCallRequest> BuildGetAPICallRestAsync<TModel>(BaseDataModel<TModel> model, EntityInfo entity, ODataQuery<TModel> oDataQuery, ApiCall apiOverride, bool useLinqGet)
+        private static async Task<ApiCallRequest> BuildGetAPICallRestAsync<TModel>(BaseDataModel<TModel> model, EntityInfo entity, ODataQuery<TModel> oDataQuery, ApiCall apiOverride, bool useLinqGet, bool loadPages)
         {
             string getApi = useLinqGet ? entity.SharePointLinqGet : entity.SharePointGet;
 
@@ -147,7 +147,7 @@ namespace PnP.Core.Services
             }
 
             // Create ApiCall instance and call the override option if needed
-            var call = new ApiCallRequest(new ApiCall(sb.ToString(), ApiType.SPORest));
+            var call = new ApiCallRequest(new ApiCall(sb.ToString(), ApiType.SPORest, loadPages: loadPages));
             if (model.GetApiCallOverrideHandler != null)
             {
                 call = await model.GetApiCallOverrideHandler.Invoke(call).ConfigureAwait(false);
@@ -220,7 +220,7 @@ namespace PnP.Core.Services
             }
         }
 
-        private static async Task<ApiCallRequest> BuildGetAPICallGraphAsync<TModel>(BaseDataModel<TModel> model, EntityInfo entity, ODataQuery<TModel> oDataQuery, ApiCall apiOverride, bool useLinqGet)
+        private static async Task<ApiCallRequest> BuildGetAPICallGraphAsync<TModel>(BaseDataModel<TModel> model, EntityInfo entity, ODataQuery<TModel> oDataQuery, ApiCall apiOverride, bool useLinqGet, bool loadPages)
         {
             string getApi = useLinqGet ? entity.GraphLinqGet : entity.GraphGet;
 
@@ -404,7 +404,7 @@ namespace PnP.Core.Services
             }
 
             // Create ApiCall instance and call the override option if needed
-            var call = new ApiCallRequest(new ApiCall(sb.ToString(), apiType));
+            var call = new ApiCallRequest(new ApiCall(sb.ToString(), apiType, loadPages: loadPages));
             if (model.GetApiCallOverrideHandler != null)
             {
                 call = await model.GetApiCallOverrideHandler.Invoke(call).ConfigureAwait(false);
@@ -658,7 +658,7 @@ namespace PnP.Core.Services
             return null;
         }
 
-        internal static Tuple<string, ApiType> BuildNextPageLink<TModel>(BaseDataModelCollection<TModel> collection)
+        internal static Tuple<string, ApiType> BuildNextPageLink(IMetadataExtensible collection)
         {
             string nextLink;
             ApiType nextLinkApiType;

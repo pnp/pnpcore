@@ -5,7 +5,7 @@
     /// </summary>
     internal struct ApiCall
     {
-        internal ApiCall(string request, ApiType apiType, string jsonBody = null, string receivingProperty = null)
+        internal ApiCall(string request, ApiType apiType, string jsonBody = null, string receivingProperty = null, bool loadPages = false)
         {
             Type = apiType;
             Request = request;
@@ -19,6 +19,7 @@
             ExpectBinaryResponse = false;
             StreamResponse = false;
             RemoveFromModel = false;
+            LoadPages = loadPages;
         }
 
         internal ApiCall(string xmlBody, string receivingProperty = null)
@@ -35,6 +36,7 @@
             ExpectBinaryResponse = false;
             StreamResponse = false;
             RemoveFromModel = false;
+            LoadPages = false;
         }
 
         /// <summary>
@@ -100,5 +102,10 @@
         /// Indicates if the model instance linked to this request needs to be removed from it's model collection after successful execution of this API call
         /// </summary>
         internal bool RemoveFromModel { get; set; }
+
+        /// <summary>
+        /// Indicates if batch should support pagination and make multiple calls
+        /// </summary>
+        internal bool LoadPages { get; set; }
     }
 }

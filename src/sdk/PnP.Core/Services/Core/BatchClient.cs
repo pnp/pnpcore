@@ -230,85 +230,145 @@ namespace PnP.Core.Services
         /// <returns></returns>
         internal async Task<List<BatchResult>> ExecuteBatch(Batch batch)
         {
-            // Before we start running this new batch let's 
-            // clean previous batch execution data
-            RemoveProcessedBatches();
-
-            // Batch can be empty, so bail out
-            if (batch.Requests.Count == 0)
-            {
-                return batch.Results;
-            }
+            bool anyPageToLoad;
 
             // Clear batch result collection
             batch.Results.Clear();
 
-            // Remove duplicate batch requests
-            DedupBatchRequests(batch);
+            // Before we start running this new batch let's 
+            // clean previous batch execution data
+            RemoveProcessedBatches();
 
-            // Verify batch requests do not contain unresolved tokens
-            CheckForUnresolvedTokens(batch);
-
-            if (batch.HasInteractiveRequest)
+            var doneRequests = new List<BatchRequest>();
+            do
             {
-                if (batch.Requests.Count > 1)
-                {
-                    throw new ClientException(ErrorType.Unsupported,
-                        PnPCoreResources.Exception_Unsupported_InteractiveRequestBatch);
-                }
+                // Remove duplicate batch requests
+                DedupBatchRequests(batch);
 
-                if (batch.Requests.First().Value.ApiCall.Type == ApiType.SPORest)
+                // Verify batch requests do not contain unresolved tokens
+                CheckForUnresolvedTokens(batch);
+
+                if (batch.HasInteractiveRequest)
                 {
-                    await ExecuteSharePointRestInteractiveAsync(batch).ConfigureAwait(false);
-                }
-            }
-            else
-            {
-                if (batch.HasMixedApiTypes)
-                {
-                    if (batch.CanFallBackToSPORest)
+                    if (batch.Requests.Count > 1)
                     {
-                        // set the backup api call to be the actual api call for the api calls marked as graph
-                        batch.MakeSPORestOnlyBatch();
-                        await ExecuteSharePointRestBatchAsync(batch).ConfigureAwait(false);
+                        throw new ClientException(ErrorType.Unsupported,
+                            PnPCoreResources.Exception_Unsupported_InteractiveRequestBatch);
                     }
-                    else
-                    {
-                        // implement logic to split batch in a rest batch and a graph batch
-                        (Batch spoRestBatch, Batch graphBatch, Batch csomBatch) = SplitIntoBatchesPerApiType(batch);
-                        // execute the 3 batches
-                        await ExecuteSharePointRestBatchAsync(spoRestBatch).ConfigureAwait(false);
-                        await ExecuteMicrosoftGraphBatchAsync(graphBatch).ConfigureAwait(false);
-                        await ExecuteCsomBatchAsync(csomBatch).ConfigureAwait(false);
 
-                        // Aggregate batch results from the executed batches
-                        batch.Results.AddRange(spoRestBatch.Results);
-                        batch.Results.AddRange(graphBatch.Results);
-                        batch.Results.AddRange(csomBatch.Results);
+                    if (batch.Requests.First().Value.ApiCall.Type == ApiType.SPORest)
+                    {
+                        await ExecuteSharePointRestInteractiveAsync(batch).ConfigureAwait(false);
                     }
                 }
                 else
                 {
-                    if (batch.UseGraphBatch)
+                    if (batch.HasMixedApiTypes)
                     {
-                        await ExecuteMicrosoftGraphBatchAsync(batch).ConfigureAwait(false);
-                    }
-                    else if (batch.UseCsomBatch)
-                    {
-                        await ExecuteCsomBatchAsync(batch).ConfigureAwait(false);
+                        if (batch.CanFallBackToSPORest)
+                        {
+                            // set the backup api call to be the actual api call for the api calls marked as graph
+                            batch.MakeSPORestOnlyBatch();
+                            await ExecuteSharePointRestBatchAsync(batch).ConfigureAwait(false);
+                        }
+                        else
+                        {
+                            // implement logic to split batch in a rest batch and a graph batch
+                            (Batch spoRestBatch, Batch graphBatch, Batch csomBatch) = SplitIntoBatchesPerApiType(batch);
+                            // execute the 3 batches
+                            await ExecuteSharePointRestBatchAsync(spoRestBatch).ConfigureAwait(false);
+                            await ExecuteMicrosoftGraphBatchAsync(graphBatch).ConfigureAwait(false);
+                            await ExecuteCsomBatchAsync(csomBatch).ConfigureAwait(false);
+
+                            // Aggregate batch results from the executed batches
+                            batch.Results.AddRange(spoRestBatch.Results);
+                            batch.Results.AddRange(graphBatch.Results);
+                            batch.Results.AddRange(csomBatch.Results);
+                        }
                     }
                     else
                     {
-                        await ExecuteSharePointRestBatchAsync(batch).ConfigureAwait(false);
+                        if (batch.UseGraphBatch)
+                        {
+                            await ExecuteMicrosoftGraphBatchAsync(batch).ConfigureAwait(false);
+                        }
+                        else if (batch.UseCsomBatch)
+                        {
+                            await ExecuteCsomBatchAsync(batch).ConfigureAwait(false);
+                        }
+                        else
+                        {
+                            await ExecuteSharePointRestBatchAsync(batch).ConfigureAwait(false);
+                        }
                     }
+
+                    // Executing a batch might have resulted in a mismatch between the model and the data in SharePoint:
+                    // Getting entities can result in duplicate entities (e.g. 2 lists when getting the same list twice in a single batch)
+                    // Adding entities can result in an entity in the model that does not have the proper key value set (as that value is only retrievable after the add in SharePoint)
+                    // Deleting entities can result in an entity in the model that also should have been deleted
+                    MergeBatchResultsWithModel(batch);
                 }
 
-                // Executing a batch might have resulted in a mismatch between the model and the data in SharePoint:
-                // Getting entities can result in duplicate entities (e.g. 2 lists when getting the same list twice in a single batch)
-                // Adding entities can result in an entity in the model that does not have the proper key value set (as that value is only retrievable after the add in SharePoint)
-                // Deleting entities can result in an entity in the model that also should have been deleted
-                MergeBatchResultsWithModel(batch);                
-            }
+                // Reset flag
+                anyPageToLoad = false;
+
+                // Make a copy of requests which need to load also other pages
+                var requestWithLoadPages = batch.Requests.Values.Where(r => r.ApiCall.LoadPages).ToArray();
+
+                // Temporary keep requests into a final list
+                doneRequests.AddRange(batch.Requests.Values);
+                // Remove current requests in order to create another set
+                batch.Requests.Clear();
+
+                foreach (var requestWithPages in requestWithLoadPages)
+                {
+                    foreach (var fieldInfo in requestWithPages.EntityInfo.Fields.Where(f => f.Load && requestWithPages.Model.HasValue(f.Name)))
+                    {
+                        var property = fieldInfo.PropertyInfo.GetValue(requestWithPages.Model);
+                        // Check if collection supports pagination
+                        var typedCollection = property as ISupportPaging;
+                        if (typedCollection == null || !typedCollection.CanPage) continue;
+
+                        // Prepare api call
+                        IMetadataExtensible metadataExtensible = (IMetadataExtensible)typedCollection;
+                        (var nextLink, var nextLinkApiType) =
+                            QueryClient.BuildNextPageLink(metadataExtensible);
+
+                        // Clear the MetaData paging links to avoid loading the collection again via paging
+                        metadataExtensible.Metadata.Remove(PnPConstants.GraphNextLink);
+                        metadataExtensible.Metadata.Remove(PnPConstants.SharePointRestListItemNextLink);
+
+                        // Create a request for the next page
+                        batch.Add(
+                            requestWithPages.Model,
+                            requestWithPages.EntityInfo,
+                            HttpMethod.Get,
+                            new ApiCall
+                            {
+                                Type = nextLinkApiType,
+                                ReceivingProperty = fieldInfo.Name,
+                                Request = nextLink,
+                                LoadPages = true
+                            },
+                            default,
+                            requestWithPages.FromJsonCasting,
+                            requestWithPages.PostMappingJson,
+                            "GetNextPage"
+                        );
+                        anyPageToLoad = true;
+                    }
+                } 
+                // Loop until there is no other pages to load
+            } while (anyPageToLoad);
+
+            // Restore all requests done
+            batch.Requests.Clear();
+            // Rearrange order sequence
+            doneRequests.ForEach(r =>
+            {
+                r.Order = batch.Requests.Count;
+                batch.Requests.Add(r.Order, r);
+            });
 
             return batch.Results;
         }

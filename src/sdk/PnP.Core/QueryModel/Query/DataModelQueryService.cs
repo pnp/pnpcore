@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace PnP.Core.QueryModel
@@ -88,7 +89,7 @@ namespace PnP.Core.QueryModel
             return PnPContext.CurrentBatch.GetRequest(batchRequestId);
         }
 
-        public async Task<object> ExecuteQueryAsync(Type expressionType, ODataQuery<TModel> query)
+        public async Task<object> ExecuteQueryAsync(Type expressionType, ODataQuery<TModel> query, CancellationToken token)
         {
             if (string.IsNullOrEmpty(MemberName))
             {
@@ -101,6 +102,7 @@ namespace PnP.Core.QueryModel
             {
                 // Prepare request and add to the current batch
                 BatchRequest batchRequest = await AddToCurrentBatchAsync(query).ConfigureAwait(false);
+                token.ThrowIfCancellationRequested();
 
                 // Cleanup the collection of results, before loading the new results
                 var collection = batchRequest.Model.GetPublicInstancePropertyValue(MemberName) as IRequestableCollection;
@@ -108,35 +110,13 @@ namespace PnP.Core.QueryModel
 
                 // and execute the request
                 await PnPContext.ExecuteAsync().ConfigureAwait(false);
-
-                // Get the resulting property from the parent object
-                var resultValue = (IEnumerable<TModel>)collection.RequestedItems;
+                token.ThrowIfCancellationRequested();
 
                 // If the expression type implements IQueryable, we need to return
                 // the whole collection of results
                 if (expressionType.ImplementsInterface(typeof(IQueryable)))
                 {
-                    if (query.Top > 0 && !query.Skip.HasValue)
-                    {
-                        // Here will suffice to return the first N items
-                        return resultValue.Take(query.Top.Value);
-                    }
-                    else if (query.Top > 0 && query.Skip > 0)
-                    {
-                        // Here will return the first N items, skipping the Z items
-                        return resultValue.Skip(query.Skip.Value).Take(query.Top.Value);
-                    }
-                    if (!query.Top.HasValue && query.Skip > 0)
-                    {
-                        // Here will suffice to return the N items from Skip offeset
-                        return resultValue.Skip(query.Skip.Value);
-                    }
-                    else
-                    {
-                        // With the new querying model, where we always create a new container
-                        // as such, we simply return the whole set of results
-                        return resultValue;
-                    }
+                    return GetAsyncEnumerable(collection, query, batchRequest, token);
                 }
                 // Otherwise if the expression type is the type of TModel, we need
                 // to return a single item
@@ -146,6 +126,9 @@ namespace PnP.Core.QueryModel
                     // sure that the result will be just one item
                     if (query.Top == 1)
                     {
+                        // Get the resulting property from the parent object
+                        var resultValue = (IEnumerable<TModel>)collection.RequestedItems;
+
                         // Here as well it will suffice to return FirstOrDefault without 
                         // any specific predicate
                         return resultValue.FirstOrDefault();
@@ -160,6 +143,68 @@ namespace PnP.Core.QueryModel
             else
             {
                 return Enumerable.Empty<TModel>();
+            }
+        }
+
+        private async IAsyncEnumerable<TModel> GetAsyncEnumerable(IRequestableCollection collection, ODataQuery<TModel> query, BatchRequest originalBatchRequest, CancellationToken token)
+        {
+            int count = 0;
+            while (true)
+            {
+                // Get the resulting property from the parent object
+                var requestedItems = (IEnumerable<TModel>)collection.RequestedItems;
+
+                foreach (var item in requestedItems)
+                {
+                    token.ThrowIfCancellationRequested();
+
+                    count++;
+                    // Skip items
+                    if (query.Skip.HasValue && query.Skip > count) continue;
+
+                    // Stop to enumerate or load other pages
+                    if (query.Top.HasValue && count > query.Top) yield break;
+
+                    // Return current item
+                    yield return item;
+                }
+
+                // Check if collection supports pagination
+                var typedCollection = collection as ISupportPaging;
+                if (typedCollection == null || !typedCollection.CanPage) yield break;
+
+                // Prepare api call
+                IMetadataExtensible metadataExtensible = (IMetadataExtensible)typedCollection;
+                (var nextLink, var nextLinkApiType) = QueryClient.BuildNextPageLink(metadataExtensible);
+
+                // Clear the MetaData paging links to avoid loading the collection again via paging
+                metadataExtensible.Metadata.Remove(PnPConstants.GraphNextLink);
+                metadataExtensible.Metadata.Remove(PnPConstants.SharePointRestListItemNextLink);
+
+                // Create a request for the next page
+                PnPContext.CurrentBatch.Add(
+                    originalBatchRequest.Model,
+                    originalBatchRequest.EntityInfo,
+                    HttpMethod.Get,
+                    new ApiCall
+                    {
+                        Type = nextLinkApiType,
+                        ReceivingProperty = originalBatchRequest.ApiCall.ReceivingProperty,
+                        Request = nextLink,
+                        LoadPages = true
+                    },
+                    default,
+                    originalBatchRequest.FromJsonCasting,
+                    originalBatchRequest.PostMappingJson,
+                    "GetNextPage"
+                );
+
+                // Clear collection, in order to not fill it
+                collection.Clear();
+
+                // and execute the request
+                await PnPContext.ExecuteAsync().ConfigureAwait(false);
+                token.ThrowIfCancellationRequested();
             }
         }
     }

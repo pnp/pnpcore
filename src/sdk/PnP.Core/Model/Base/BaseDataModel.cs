@@ -507,7 +507,7 @@ namespace PnP.Core.Model
             // Get entity information for the entity to load
             var entityInfo = GetClassInfo(expressions);
             // Construct the API call to make
-            var api = await QueryClient.BuildGetAPICallAsync(this, entityInfo, apiOverride).ConfigureAwait(false);
+            var api = await QueryClient.BuildGetAPICallAsync(this, entityInfo, apiOverride, loadPages: true).ConfigureAwait(false);
 
             if (api.Cancelled)
             {
@@ -550,7 +550,7 @@ namespace PnP.Core.Model
             // Get entity information for the entity to load
             var entityInfo = GetClassInfo(selectors);
             // Construct the API call to make
-            var api = await QueryClient.BuildGetAPICallAsync(this, entityInfo, apiOverride).ConfigureAwait(false);
+            var api = await QueryClient.BuildGetAPICallAsync(this, entityInfo, apiOverride, loadPages: true).ConfigureAwait(false);
 
             if (api.Cancelled)
             {
@@ -564,7 +564,7 @@ namespace PnP.Core.Model
             if ((api.ApiCall.Type == ApiType.Graph || api.ApiCall.Type == ApiType.GraphBeta) && !string.IsNullOrEmpty(entityInfo.SharePointType))
             {
                 // Try to get the API call, but this time using rest
-                apiRestBackup = await QueryClient.BuildGetAPICallAsync(this, entityInfo, apiOverride, true).ConfigureAwait(false);
+                apiRestBackup = await QueryClient.BuildGetAPICallAsync(this, entityInfo, apiOverride, true, loadPages: true).ConfigureAwait(false);
             }
 
             Guid batchRequestId = batch.Add(this, entityInfo, HttpMethod.Get, api.ApiCall, apiRestBackup.ApiCall, fromJsonCasting, postMappingJson, "GetBatch");

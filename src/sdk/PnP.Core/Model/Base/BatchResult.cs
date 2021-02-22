@@ -48,9 +48,9 @@ namespace PnP.Core.Model
 
     internal class BatchEnumerableBatchResult<T> : BatchResult, IEnumerableBatchResult<T>
     {
-        private readonly IEnumerable<T> result;
+        private readonly IReadOnlyList<T> result;
 
-        public BatchEnumerableBatchResult(Batch batch, Guid batchRequestId, IEnumerable<T> result) : base(batch, batchRequestId)
+        public BatchEnumerableBatchResult(Batch batch, Guid batchRequestId, IReadOnlyList<T> result) : base(batch, batchRequestId)
         {
             this.result = result;
         }
@@ -70,5 +70,9 @@ namespace PnP.Core.Model
         {
             return GetEnumerator();
         }
+
+        public int Count => this.result.Count;
+
+        public T this[int index] => this.result[index];
     }
 }

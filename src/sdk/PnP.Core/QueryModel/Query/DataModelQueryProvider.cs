@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace PnP.Core.QueryModel
@@ -62,18 +63,18 @@ namespace PnP.Core.QueryModel
 
             // Get the resulting property from the parent object
             var collection = batchRequest.Model.GetPublicInstancePropertyValue(queryService.MemberName) as IRequestableCollection;
-            var resultValue = (IEnumerable<TResult>)collection.RequestedItems;
+            var resultValue = (IReadOnlyList<TResult>)collection.RequestedItems;
 
             return new BatchEnumerableBatchResult<TResult>(queryService.PnPContext.CurrentBatch, batchRequest.Id, resultValue);
         }
 
-        public override Task<object> ExecuteObjectAsync(Expression expression)
+        public override Task<object> ExecuteObjectAsync(Expression expression, CancellationToken token)
         {
             // Translate the query expression into an actual query text for the target Query Service
             var query = Translate(expression);
 
             // Execute the query via the target Query Service
-            return queryService.ExecuteQueryAsync(expression.Type, query);
+            return queryService.ExecuteQueryAsync(expression.Type, query, token);
         }
 
         public override IQueryable CreateQuery(Expression expression)

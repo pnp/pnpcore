@@ -50,7 +50,7 @@ namespace PnP.Core.Model
     /// Provides the result of a batch when is executed
     /// </summary>
     /// <typeparam name="T">The type of the result</typeparam>
-    public interface IEnumerableBatchResult<out T> : IEnumerableBatchResult, IEnumerable<T>
+    public interface IEnumerableBatchResult<out T> : IEnumerableBatchResult, IReadOnlyList<T>
     {
     }
 }

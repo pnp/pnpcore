@@ -8,7 +8,7 @@ namespace PnP.Core.Model
     /// <summary>
     /// Paged data retrieval can be done using the methods provided via this interface
     /// </summary>
-    public interface ISupportPaging<TModel>
+    public interface ISupportPaging
     {
         /// <summary>
         /// Determines whether paging is possible
@@ -17,6 +17,13 @@ namespace PnP.Core.Model
         {
             get;
         }
+    }
+
+    /// <summary>
+    /// Paged data retrieval can be done using the methods provided via this interface
+    /// </summary>
+    public interface ISupportPaging<TModel> : ISupportPaging
+    {
 
         /// <summary>
         /// Gets the first page with a given size
