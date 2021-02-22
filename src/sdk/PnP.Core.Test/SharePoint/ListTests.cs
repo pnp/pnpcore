@@ -919,7 +919,7 @@ namespace PnP.Core.Test.SharePoint
 
                     using (var context3 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 3))
                     {
-                        context3.GraphFirst = false;
+                        //context3.GraphFirst = false;
 
                         // We should have 2 list items
                         var list3 = await context3.Web.Lists.GetByIdAsync(listId, p => p.Items);

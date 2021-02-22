@@ -325,7 +325,7 @@ namespace PnP.Core.Test.Base
         }
 
         #endregion
-
+/*
         #region Graph only tests using the Taxonomy model
 
         [TestMethod]
@@ -409,6 +409,8 @@ namespace PnP.Core.Test.Base
             }));
         }
         #endregion
+*/
+
 /*
         #region Linq query tests
 

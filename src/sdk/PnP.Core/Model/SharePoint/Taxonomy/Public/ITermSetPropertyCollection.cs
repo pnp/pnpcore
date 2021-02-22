@@ -1,4 +1,5 @@
-﻿namespace PnP.Core.Model.SharePoint
+﻿/*
+namespace PnP.Core.Model.SharePoint
 {
     /// <summary>
     /// Collection of localized termset labels
@@ -8,3 +9,4 @@
     {
     }
 }
+*/

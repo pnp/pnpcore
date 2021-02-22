@@ -74,7 +74,7 @@ namespace PnP.Core.Test.Base
                 Assert.IsTrue(team.PrimaryChannel.IsPropertyAvailable(p => p.IsFavoriteByDefault));
 
                 // get the primary channel again, but now explicitely request the beta properties MembershipType and IsFavoriteByDefault
-                await team.PrimaryChannel.GetAsync(p => p.MembershipType, p => p.DisplayName, p => p.IsFavoriteByDefault);
+                await team.PrimaryChannel.LoadAsync(p => p.MembershipType, p => p.DisplayName, p => p.IsFavoriteByDefault);
                 Assert.IsTrue(team.IsPropertyAvailable(p => p.PrimaryChannel));
                 Assert.IsTrue(team.PrimaryChannel.IsPropertyAvailable(p => p.MembershipType));
                 Assert.IsTrue(team.PrimaryChannel.IsPropertyAvailable(p => p.DisplayName));
@@ -124,7 +124,7 @@ namespace PnP.Core.Test.Base
                 Assert.IsTrue(team.PrimaryChannel.IsPropertyAvailable(p => p.IsFavoriteByDefault));
 
                 // get the primary channel again, but now explicitely request the beta property IsFavoriteByDefault
-                await team.PrimaryChannel.GetAsync(p => p.MembershipType, p => p.DisplayName, p => p.IsFavoriteByDefault);
+                await team.PrimaryChannel.LoadAsync(p => p.MembershipType, p => p.DisplayName, p => p.IsFavoriteByDefault);
                 Assert.IsTrue(team.IsPropertyAvailable(p => p.PrimaryChannel));
 
                 // Beta property should still be unavailable as we're not allowed to use the beta endpoint
@@ -151,7 +151,7 @@ namespace PnP.Core.Test.Base
                 Assert.IsTrue(team.PrimaryChannel.IsPropertyAvailable(p => p.Id));
 
                 // Get the beta property messages
-                await team.PrimaryChannel.GetAsync(p => p.Messages);
+                await team.PrimaryChannel.LoadAsync(p => p.Messages);
 
                 // messages collection should be available and loaded
                 Assert.IsTrue(team.PrimaryChannel.IsPropertyAvailable(p => p.Messages));
@@ -183,7 +183,7 @@ namespace PnP.Core.Test.Base
                 Assert.IsTrue(team.PrimaryChannel.IsPropertyAvailable(p => p.Id));
 
                 // Try to get the beta property messages, this is a collection
-                await team.PrimaryChannel.GetAsync(p => p.Messages);
+                await team.PrimaryChannel.LoadAsync(p => p.Messages);
 
                 // collection should not be available
                 Assert.IsFalse(team.PrimaryChannel.IsPropertyAvailable(p => p.Messages));
