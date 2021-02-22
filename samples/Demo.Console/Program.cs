@@ -83,6 +83,8 @@ namespace Consumer
                 });
 
                 // PnP Core Authentication
+                // To check out more authentication options check out the documentation for more information:
+                //  https://pnp.github.io/pnpcore/using-the-sdk/configuring%20authentication.html
                 services.AddPnPCoreAuthentication(
                     options =>
                     {
