@@ -299,7 +299,7 @@ namespace PnP.Core.Test.SharePoint
 
                     // verify the list item was updated and that we're still at version 1.0
                     Assert.IsTrue(first2.Title == "blabla");
-                    Assert.IsTrue(first2.Values["_UIVersionString"].ToString() == "1.0");
+                    Assert.IsTrue(first2.Values["OData__UIVersionString"].ToString() == "1.0");
 
                     // do a regular update to bump the version again
                     first2.Title = "blabla2";
@@ -315,7 +315,7 @@ namespace PnP.Core.Test.SharePoint
 
                     // verify the list item was updated and that we're still at version 1.0
                     Assert.IsTrue(first3.Title == "blabla2");
-                    Assert.IsTrue(first3.Values["_UIVersionString"].ToString() == "2.0");
+                    Assert.IsTrue(first3.Values["OData__UIVersionString"].ToString() == "2.0");
 
                     // do a regular update to bump the version again
                     first3.Title = "blabla3";
@@ -331,7 +331,7 @@ namespace PnP.Core.Test.SharePoint
 
                     // verify the list item was updated and that we're still at version 2.0
                     Assert.IsTrue(first4.Title == "blabla3");
-                    Assert.IsTrue(first4.Values["_UIVersionString"].ToString() == "2.0");
+                    Assert.IsTrue(first4.Values["OData__UIVersionString"].ToString() == "2.0");
                 }
             }
             finally
@@ -405,7 +405,7 @@ namespace PnP.Core.Test.SharePoint
 
                 // verify the list item was updated and that we're still at version 1.0
                 Assert.IsTrue(first2.Title == "blabla");
-                Assert.IsTrue(first2.Values["_UIVersionString"].ToString() == "1.0");
+                Assert.IsTrue(first2.Values["OData__UIVersionString"].ToString() == "1.0");
 
                 // do a regular update to bump the version again
                 first2.Title = "blabla2";
@@ -420,7 +420,7 @@ namespace PnP.Core.Test.SharePoint
 
                 // verify the list item was updated and that we're still at version 2.0
                 Assert.IsTrue(first3.Title == "blabla2");
-                Assert.IsTrue(first3.Values["_UIVersionString"].ToString() == "2.0");
+                Assert.IsTrue(first3.Values["OData__UIVersionString"].ToString() == "2.0");
 
                 // do a regular update to bump the version again
                 first3.Title = "blabla3";
@@ -436,7 +436,7 @@ namespace PnP.Core.Test.SharePoint
 
                 // verify the list item was updated and that we're still at version 2.0
                 Assert.IsTrue(first4.Title == "blabla3");
-                Assert.IsTrue(first4.Values["_UIVersionString"].ToString() == "2.0");
+                Assert.IsTrue(first4.Values["OData__UIVersionString"].ToString() == "2.0");
 
                 // do a regular update to bump the version again
                 first4.Title = "blabla4";
@@ -453,7 +453,7 @@ namespace PnP.Core.Test.SharePoint
 
                 // verify the list item was updated and that we're still at version 2.0
                 Assert.IsTrue(first5.Title == "blabla4");
-                Assert.IsTrue(first5.Values["_UIVersionString"].ToString() == "2.0");
+                Assert.IsTrue(first5.Values["OData__UIVersionString"].ToString() == "2.0");
 
                 // do a regular update to bump the version again
                 first5.Title = "blabla5";
@@ -470,7 +470,7 @@ namespace PnP.Core.Test.SharePoint
 
                 // verify the list item was updated and that we're still at version 2.0
                 Assert.IsTrue(first6.Title == "blabla5");
-                Assert.IsTrue(first6.Values["_UIVersionString"].ToString() == "2.0");
+                Assert.IsTrue(first6.Values["OData__UIVersionString"].ToString() == "2.0");
             }
 
             using (var contextFinal = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 6))
@@ -544,7 +544,7 @@ namespace PnP.Core.Test.SharePoint
 
                     // verify the list item was updated and that we're still at version 1.0
                     Assert.IsTrue(first2.Title == "blabla");
-                    Assert.IsTrue(first2.Values["_UIVersionString"].ToString() == "1.0");
+                    Assert.IsTrue(first2.Values["OData__UIVersionString"].ToString() == "1.0");
 
                     // do a regular update to bump the version again
                     first2.Title = "blabla2";
@@ -560,7 +560,7 @@ namespace PnP.Core.Test.SharePoint
 
                     // verify the list item was updated and that we're still at version 2.0
                     Assert.IsTrue(first3.Title == "blabla2");
-                    Assert.IsTrue(first3.Values["_UIVersionString"].ToString() == "2.0");
+                    Assert.IsTrue(first3.Values["OData__UIVersionString"].ToString() == "2.0");
 
                     // do a regular update to bump the version again
                     await first3.SystemUpdateAsync();
@@ -575,7 +575,7 @@ namespace PnP.Core.Test.SharePoint
 
                     // verify the list item was updated and that we're still at version 2.0
                     Assert.IsTrue(first4.Title == "blabla2");
-                    Assert.IsTrue(first4.Values["_UIVersionString"].ToString() == "2.0");
+                    Assert.IsTrue(first4.Values["OData__UIVersionString"].ToString() == "2.0");
 
                     // do a regular update to bump the version again
                     await first4.SystemUpdateBatchAsync();
@@ -592,7 +592,7 @@ namespace PnP.Core.Test.SharePoint
 
                     // verify the list item was updated and that we're still at version 2.0
                     Assert.IsTrue(first5.Title == "blabla2");
-                    Assert.IsTrue(first5.Values["_UIVersionString"].ToString() == "2.0");
+                    Assert.IsTrue(first5.Values["OData__UIVersionString"].ToString() == "2.0");
                 }
             }
             finally
@@ -660,7 +660,7 @@ namespace PnP.Core.Test.SharePoint
 
                 // verify the list item was updated and that we're still at version 1.0
                 Assert.IsTrue(first2.Title == "blabla");
-                Assert.IsTrue(first2.Values["_UIVersionString"].ToString() == "1.0");
+                Assert.IsTrue(first2.Values["OData__UIVersionString"].ToString() == "1.0");
             }
             using (var contextFinal = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))
             {
@@ -732,7 +732,7 @@ namespace PnP.Core.Test.SharePoint
 
                 // verify the list item was updated and that we're still at version 1.0
                 Assert.IsTrue(first2.Title == "blabla");
-                Assert.IsTrue(first2.Values["_UIVersionString"].ToString() == "1.0");
+                Assert.IsTrue(first2.Values["OData__UIVersionString"].ToString() == "1.0");
 
                 first2.Title = "blabla2";
                 first2.UpdateOverwriteVersion();
@@ -747,7 +747,7 @@ namespace PnP.Core.Test.SharePoint
 
                 // verify the list item was updated and that we're still at version 1.0
                 Assert.IsTrue(first3.Title == "blabla2");
-                Assert.IsTrue(first3.Values["_UIVersionString"].ToString() == "1.0");
+                Assert.IsTrue(first3.Values["OData__UIVersionString"].ToString() == "1.0");
 
                 var batch3 = context3.NewBatch();
                 first3.Title = "blabla3";
@@ -764,7 +764,7 @@ namespace PnP.Core.Test.SharePoint
 
                 // verify the list item was updated and that we're still at version 1.0
                 Assert.IsTrue(first4.Title == "blabla3");
-                Assert.IsTrue(first4.Values["_UIVersionString"].ToString() == "1.0");
+                Assert.IsTrue(first4.Values["OData__UIVersionString"].ToString() == "1.0");
 
                 first4.Title = "blabla4";
                 first4.UpdateOverwriteVersionBatch();
@@ -780,7 +780,7 @@ namespace PnP.Core.Test.SharePoint
 
                 // verify the list item was updated and that we're still at version 1.0
                 Assert.IsTrue(first5.Title == "blabla4");
-                Assert.IsTrue(first5.Values["_UIVersionString"].ToString() == "1.0");
+                Assert.IsTrue(first5.Values["OData__UIVersionString"].ToString() == "1.0");
             }
 
             using (var contextFinal = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 5))
@@ -851,7 +851,7 @@ namespace PnP.Core.Test.SharePoint
 
                 // verify the list item was updated and that we're still at version 1.0
                 Assert.IsTrue(first2.Title == "blabla");
-                Assert.IsTrue(first2.Values["_UIVersionString"].ToString() == "1.0");
+                Assert.IsTrue(first2.Values["OData__UIVersionString"].ToString() == "1.0");
 
                 await first2.UpdateOverwriteVersionAsync();
             }
@@ -865,7 +865,7 @@ namespace PnP.Core.Test.SharePoint
 
                 // verify the list item was updated and that we're still at version 1.0
                 Assert.IsTrue(first3.Title == "blabla");
-                Assert.IsTrue(first3.Values["_UIVersionString"].ToString() == "1.0");
+                Assert.IsTrue(first3.Values["OData__UIVersionString"].ToString() == "1.0");
 
                 await first3.UpdateOverwriteVersionBatchAsync();
                 await context3.ExecuteAsync();
@@ -880,7 +880,7 @@ namespace PnP.Core.Test.SharePoint
 
                 // verify the list item was updated and that we're still at version 1.0
                 Assert.IsTrue(first4.Title == "blabla");
-                Assert.IsTrue(first4.Values["_UIVersionString"].ToString() == "1.0");
+                Assert.IsTrue(first4.Values["OData__UIVersionString"].ToString() == "1.0");
             }
 
             using (var contextFinal = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 4))

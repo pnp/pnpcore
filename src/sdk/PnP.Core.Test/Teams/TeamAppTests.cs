@@ -25,7 +25,7 @@ namespace PnP.Core.Test.Teams
                 var team = await context.Team.GetAsync(x => x.InstalledApps);
                 Assert.IsNotNull(team.InstalledApps);
 
-                var app = team.InstalledApps.AsEnumerable().First();
+                var app = team.InstalledApps.AsRequested().First();
                 Assert.IsNotNull(app.DisplayName);
                 Assert.IsNotNull(app.DistributionMethod);
                 Assert.IsNotNull(app.ExternalId);

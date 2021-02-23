@@ -27,11 +27,11 @@ namespace PnP.Core.Test.Teams
                 var team = await context.Team.GetAsync(o => o.Channels);
                 Assert.IsTrue(team.Channels.Length > 0);
 
-                var channel = team.Channels.AsEnumerable().FirstOrDefault(i => i.DisplayName == "General");
+                var channel = team.Channels.AsRequested().FirstOrDefault(i => i.DisplayName == "General");
                 Assert.IsNotNull(channel);
 
                 channel = await channel.GetAsync(o => o.Tabs);
-                var tabs = channel.Tabs.AsEnumerable();
+                var tabs = channel.Tabs.AsRequested();
                 var firstTab = tabs.First();
                 await firstTab.LoadAsync(o => o.WebUrl, o => o.SortOrderIndex);
 
@@ -49,11 +49,11 @@ namespace PnP.Core.Test.Teams
                 var team = await context.Team.GetAsync(o => o.Channels);
                 Assert.IsTrue(team.Channels.Length > 0);
 
-                var channel = team.Channels.AsEnumerable().FirstOrDefault(i => i.DisplayName == "General");
+                var channel = team.Channels.AsRequested().FirstOrDefault(i => i.DisplayName == "General");
                 Assert.IsNotNull(channel);
 
                 channel = await channel.GetAsync(o => o.Tabs);
-                var tabs = channel.Tabs.AsEnumerable();
+                var tabs = channel.Tabs.AsRequested();
                 var firstTab = tabs.First();
                 await firstTab.LoadAsync(o => o.Configuration);
                 var config = firstTab.Configuration;
@@ -159,7 +159,7 @@ namespace PnP.Core.Test.Teams
                 var team = context.Team.Get(o => o.Channels);
 
                 // Get the Channel "General" 
-                var channel = team.Channels.AsEnumerable().FirstOrDefault(i => i.DisplayName == "General");
+                var channel = team.Channels.AsRequested().FirstOrDefault(i => i.DisplayName == "General");
 
                 // Load the channel tab collection
                 channel = channel.Get(o => o.Tabs);
@@ -169,7 +169,7 @@ namespace PnP.Core.Test.Teams
                 var newDocTab = channel.Tabs.AddDocumentLibraryTab(tabName, new Uri(siteDocLib));
 
                 channel = channel.Get(o => o.Tabs);
-                var tab = channel.Tabs.AsEnumerable().FirstOrDefault(i => i.DisplayName == tabName);
+                var tab = channel.Tabs.AsRequested().FirstOrDefault(i => i.DisplayName == tabName);
                 tab.DisplayName = "Most Important Documents";
                 tab.Update();
 

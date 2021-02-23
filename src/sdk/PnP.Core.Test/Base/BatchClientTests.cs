@@ -87,57 +87,6 @@ namespace PnP.Core.Test.Base
         }
 
         [TestMethod]
-        [Ignore]
-        public async Task DedupBatchRequests()
-        {
-            // x BERT: We need to talk about this test
-
-            //TestCommon.Instance.Mocking = false;
-            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
-            {
-                // first get, check on Lists as web is loaded by default + force REST call by adding a REST specific property
-                var web1 = await context.Web.GetBatchAsync(p => p.Lists, p => p.AlternateCssUrl);
-                // second get
-                var web2 = await context.Web.GetBatchAsync(p => p.Lists, p => p.AlternateCssUrl);
-                // third get
-                var web3 = await context.Web.GetBatchAsync(p => p.Lists, p => p.AlternateCssUrl);
-
-                // Grab the id of the current batch so we can later on find it back
-                Guid currentBatchId = context.CurrentBatch.Id;
-
-                // We added three requests to the the current batch
-                Assert.IsTrue(context.CurrentBatch.Requests.Count == 3);
-
-                // The model was not yet requested
-                Assert.IsFalse(web1.IsAvailable);
-                Assert.IsFalse(web2.IsAvailable);
-                Assert.IsFalse(web3.IsAvailable);
-
-                await context.ExecuteAsync();
-
-                // all variables should now be available
-                Assert.IsTrue(web1.IsAvailable);
-                Assert.IsTrue(web2.IsAvailable);
-                Assert.IsTrue(web3.IsAvailable);
-                Assert.IsTrue(web1.Result.Lists.Requested);
-                Assert.IsTrue(web2.Result.Lists.Requested);
-                Assert.IsTrue(web3.Result.Lists.Requested);
-
-                // and the 3 results should represent 3 different objects
-                Assert.AreNotEqual(web1.Result, web2.Result);
-                Assert.AreNotEqual(web1.Result, web3.Result);
-                Assert.AreNotEqual(web2.Result, web3.Result);
-
-                var executedBatch = context.BatchClient.GetBatchById(currentBatchId);
-                // Batch should be marked as executed
-                Assert.IsTrue(executedBatch.Executed);
-                // The 2 duplicate requests should have been removed
-                Assert.IsTrue(executedBatch.Requests.Count == 1);
-
-            }
-        }
-
-        [TestMethod]
         public async Task MixedGraphSharePointBatchRunsAsSharePointBatch()
         {
             //TestCommon.Instance.Mocking = false;

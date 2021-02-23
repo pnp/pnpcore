@@ -1,4 +1,4 @@
---batchresponse_2047a1f7-9e8d-4c35-bef9-e342fca469f2
+--batchresponse_7cc2b295-af1f-464d-9179-3af1b5115d53
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
@@ -6,4 +6,4 @@ HTTP/1.1 404 Not Found
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
 {"error":{"code":"-2130575338, Microsoft.SharePoint.SPException","message":{"lang":"en-US","value":"The file /sites/prov-1/Shared Documents/PNP_SDK_TEST_DeleteFileCurrentBatchAsyncTest.docx does not exist."}}}
---batchresponse_2047a1f7-9e8d-4c35-bef9-e342fca469f2--
+--batchresponse_7cc2b295-af1f-464d-9179-3af1b5115d53--

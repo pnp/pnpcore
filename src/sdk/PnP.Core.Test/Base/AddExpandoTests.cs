@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using PnP.Core.Model;
+using PnP.Core.QueryModel;
 
 namespace PnP.Core.Test.Base
 {
@@ -67,10 +68,8 @@ namespace PnP.Core.Test.Base
                 // Should still have the same amount of items
                 Assert.IsTrue(myList.Items.Length == listItemCount + 1);
                 // Additional list item fields should be available
-                Assert.IsTrue(item.Values["ContentType"].ToString() == "Item");
                 dynamic dynamicItem = item;
-                Assert.IsTrue(dynamicItem.ContentType == "Item");
-                Assert.IsTrue(dynamicItem["ContentType"] == "Item");
+                Assert.IsTrue(dynamicItem.Title == "Yes");
 
                 // Cleanup
                 await myList.DeleteAsync();
@@ -123,10 +122,8 @@ namespace PnP.Core.Test.Base
                 // Should still have the same amount of items
                 Assert.IsTrue(myList.Items.Length == listItemCount + 1);
                 // Additional list item fields should be available
-                Assert.IsTrue(item.Values["ContentType"].ToString() == "Item");
                 dynamic dynamicItem = item;
-                Assert.IsTrue(dynamicItem.ContentType == "Item");
-                Assert.IsTrue(dynamicItem["ContentType"] == "Item");
+                Assert.IsTrue(dynamicItem.Title == "Yes");
 
                 // Cleanup
                 await myList.DeleteAsync();
@@ -188,10 +185,8 @@ namespace PnP.Core.Test.Base
                 // Should still have the same amount of items
                 Assert.IsTrue(myList.Items.Length == listItemCount + 1);
                 // Additional list item fields should be available
-                Assert.IsTrue(item.Values["ContentType"].ToString() == "Item");
                 dynamic dynamicItem = item;
-                Assert.IsTrue(dynamicItem.ContentType == "Item");
-                Assert.IsTrue(dynamicItem["ContentType"] == "Item");
+                Assert.IsTrue(dynamicItem.Title == ItemTitleValue);
 
                 // Cleanup
                 await myList.DeleteAsync();
@@ -253,10 +248,8 @@ namespace PnP.Core.Test.Base
                 // Should still have the same amount of items
                 Assert.IsTrue(myList.Items.Length == listItemCount + 1);
                 // Additional list item fields should be available
-                Assert.IsTrue(item.Values["ContentType"].ToString() == "Item");
                 dynamic dynamicItem = item;
-                Assert.IsTrue(dynamicItem.ContentType == "Item");
-                Assert.IsTrue(dynamicItem["ContentType"] == "Item");
+                Assert.IsTrue(dynamicItem.Title == ItemTitleValue);
 
                 // Cleanup
                 await myList.DeleteAsync();
