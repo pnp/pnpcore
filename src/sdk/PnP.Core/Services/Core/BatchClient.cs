@@ -232,6 +232,18 @@ namespace PnP.Core.Services
         {
             bool anyPageToLoad;
 
+            // Clear all collections
+            foreach (var request in batch.Requests.Values)
+            {
+                foreach (var fieldInfo in request.EntityInfo.Fields.Where(f => f.Load && request.Model.HasValue(f.Name)))
+                {
+                    // Get the collection
+                    var property = fieldInfo.PropertyInfo.GetValue(request.Model);
+                    var requestableCollection = property as IRequestableCollection;
+                    requestableCollection?.Clear();
+                }
+            }
+
             // Clear batch result collection
             batch.Results.Clear();
 

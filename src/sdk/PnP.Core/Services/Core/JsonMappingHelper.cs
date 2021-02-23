@@ -139,13 +139,6 @@ namespace PnP.Core.Services
                         // Cast object to call the needed methods on it (e.g. ListCollection)
                         var typedCollection = propertyToSetValue as IManageableCollection;
 
-                        // x BERT: Is it ok for you to do this?
-                        // Clear the content of the collection to refresh it with query data
-                        if (typedCollection is IRequestableCollection requestable)
-                        {
-                            requestable.Clear();
-                        }
-
                         // Try to get the results property, start with a default value
                         JsonElement resultsProperty = default;
 
@@ -760,13 +753,6 @@ namespace PnP.Core.Services
                             var typedCollection = propertyToSetValue as IManageableCollection;
                             // Cast object to handle metadata on the collection
                             var typedMetaDataCollection = propertyToSetValue as IMetadataExtensible;
-
-                            // x BERT: Is it ok for you to do this?
-                            // Clear the content of the collection to refresh it with query data
-                            if (typedCollection is IRequestableCollection requestable)
-                            {
-                                requestable.Clear();
-                            }
 
                             // copy over collected metadata to collection
                             if (metadata.Count > 0)
