@@ -1026,7 +1026,7 @@ namespace PnP.Core.Test.Base
                 // Special case since the listed url is teams/{Site.GroupId}/channels/{GraphId}/tabs?$expand=teamsApp
                 await context.Team.PrimaryChannel.LoadAsync(p => p.Tabs.QueryProperties(p => p.WebUrl));
 
-                foreach (var tab in context.Team.PrimaryChannel.Tabs)
+                foreach (var tab in context.Team.PrimaryChannel.Tabs.AsRequested())
                 {
                     Assert.IsTrue(tab.IsPropertyAvailable(p => p.WebUrl));
                     Assert.IsFalse(tab.IsPropertyAvailable(p => p.DisplayName));

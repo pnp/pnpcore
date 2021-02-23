@@ -1,4 +1,4 @@
---batchresponse_92513a67-d82f-4c0d-aad2-94e87ed27c22
+--batchresponse_c6a4ad12-f65a-416c-ac81-63005cee2c1f
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
@@ -6,4 +6,4 @@ HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
 {"d":{"ValidateUpdateListItem":{"__metadata":{"type":"Collection(SP.ListItemFormUpdateValue)"},"results":[{"ErrorCode":0,"ErrorMessage":null,"FieldName":"Title","FieldValue":"Updated","HasException":false,"ItemId":1}]}}}
---batchresponse_92513a67-d82f-4c0d-aad2-94e87ed27c22--
+--batchresponse_c6a4ad12-f65a-416c-ac81-63005cee2c1f--

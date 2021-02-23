@@ -1,1 +1,11 @@
-{"responses": [{"id": "1","status":201,"headers" : {"Location":"https://teamsgraph.teams.microsoft.com/beta/teams('a7ea7e26-5a76-4b72-ad99-1465b74857c8')/channels('19:97a0c507e24d421aba8ab78efa427445@thread.tacv2')/messages('1613734473317')","OData-Version":"4.0","Content-Type":"application/json;odata.metadata=minimal;odata.streaming=true;IEEE754Compatible=false;charset=utf-8"},"body":{"@odata.context":"https://graph.microsoft.com/beta/$metadata#teams('a7ea7e26-5a76-4b72-ad99-1465b74857c8')/channels('19%3A97a0c507e24d421aba8ab78efa427445%40thread.tacv2')/messages/$entity","id":"1613734473317","replyToId":null,"etag":"1613734473317","messageType":"message","createdDateTime":"2021-02-19T11:34:33.317Z","lastModifiedDateTime":"2021-02-19T11:34:33.317Z","lastEditedDateTime":null,"deletedDateTime":null,"subject":null,"summary":null,"chatId":null,"importance":"normal","locale":"en-us","webUrl":"https://teams.microsoft.com/l/message/19%3A97a0c507e24d421aba8ab78efa427445%40thread.tacv2/1613734473317?groupId=a7ea7e26-5a76-4b72-ad99-1465b74857c8&tenantId=6c94075a-da0a-4c6a-8411-badf652e8b53&createdTime=1613734473317&parentMessageId=1613734473317","policyViolation":null,"from":{"application":null,"device":null,"conversation":null,"user":{"id":"bea7a848-0459-4bee-9034-5513ee7f66e0","displayName":"Paolo Pialorsi","userIdentityType":"aadUser"}},"body":{"contentType":"text","content":"Test message31"},"channelIdentity":{"teamId":"a7ea7e26-5a76-4b72-ad99-1465b74857c8","channelId":"19:97a0c507e24d421aba8ab78efa427445@thread.tacv2"},"attachments":[],"mentions":[],"reactions":[]}}]}
+{"responses": [{"id": "1","status":429,"headers" : {"Content-Type":"application/json"},"body":{
+  "error": {
+    "code": "TooManyRequests",
+    "message": "Too Many Requests",
+    "innerError": {
+      "date": "2021-02-23T17:21:01",
+      "request-id": "484cc80b-ee30-46e6-bd4a-0366c0340850",
+      "client-request-id": "484cc80b-ee30-46e6-bd4a-0366c0340850"
+    }
+  }
+}}]}

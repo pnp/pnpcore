@@ -242,9 +242,6 @@ namespace PnP.Core.Services
             var doneRequests = new List<BatchRequest>();
             do
             {
-                // Remove duplicate batch requests
-                DedupBatchRequests(batch);
-
                 // Verify batch requests do not contain unresolved tokens
                 CheckForUnresolvedTokens(batch);
 
@@ -1678,35 +1675,6 @@ namespace PnP.Core.Services
             }
 
             return new Tuple<Batch, Batch, Batch>(restBatch, graphBatch, csomBatch);
-        }
-
-        /// <summary>
-        /// Deduplicates GET requests in a batch...if for some reason the same request for the same model instance is there twice then it will be removed
-        /// </summary>
-        /// <param name="batch">Batch to deduplicate</param>
-        private static void DedupBatchRequests(Batch batch)
-        {
-            List<Tuple<TransientObject, ApiCall>> queries = new List<Tuple<TransientObject, ApiCall>>();
-
-            // Only dedup get requests, a batch can contain multiple identical add requests
-            var requestsToDedup = batch.Requests.Where(p => p.Value.Method == HttpMethod.Get && p.Value.ApiCall.Type != ApiType.CSOM);
-
-            if (requestsToDedup.Any())
-            {
-                foreach (var request in requestsToDedup.ToList())
-                {
-                    var query = new Tuple<TransientObject, ApiCall>(request.Value.Model, request.Value.ApiCall);
-                    if (!queries.Contains(query))
-                    {
-                        queries.Add(query);
-                    }
-                    else
-                    {
-                        // duplicate request, let's drop it
-                        batch.Requests.Remove(request.Key);
-                    }
-                }
-            }
         }
 
         /// <summary>
