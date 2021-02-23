@@ -120,7 +120,7 @@ namespace Demo.ASPNetCore.Controllers
 
                 model.DisplayName = team.DisplayName;
                 model.Description = team.Description;
-                model.Channels = new List<ChannelViewModel>(from c in team.Channels
+                model.Channels = new List<ChannelViewModel>(from c in team.Channels.ToList()
                                                             select new ChannelViewModel
                                                             {
                                                                 DisplayName = c.DisplayName,
