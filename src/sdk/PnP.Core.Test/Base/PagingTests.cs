@@ -216,14 +216,14 @@ namespace PnP.Core.Test.Base
 
                         var list2 = context2.Web.Lists.Where(p => p.Id == list.Id).FirstOrDefault();
 
-                        await list2.GetItemsByCamlQueryAsync(new CamlQueryOptions()
+                        await list2.LoadItemsByCamlQueryAsync(new CamlQueryOptions()
                         {
                             ViewXml = "<View><ViewFields><FieldRef Name='Title' /></ViewFields><RowLimit>20</RowLimit></View>"
                         });
 
                         Assert.IsTrue(list2.Items.Length == 20);
 
-                        await list2.GetItemsByCamlQueryAsync(new CamlQueryOptions()
+                        await list2.LoadItemsByCamlQueryAsync(new CamlQueryOptions()
                         {
                             ViewXml = "<View><ViewFields><FieldRef Name='Title' /></ViewFields><RowLimit>20</RowLimit></View>",
                             PagingInfo = $"Paged=TRUE&p_ID={list2.Items.AsRequested().Last().Id}"
@@ -280,7 +280,7 @@ namespace PnP.Core.Test.Base
 
                         var list2 = context.Web.Lists.Where(p => p.Id == list.Id).FirstOrDefault();
 
-                        var result = await list2.GetListDataAsStreamAsync(new RenderListDataOptions()
+                        var result = await list2.LoadListDataAsStreamAsync(new RenderListDataOptions()
                         {
                             ViewXml = "<View><ViewFields><FieldRef Name='Title' /></ViewFields><RowLimit Paged='TRUE'>20</RowLimit></View>",
                             RenderOptions = RenderListDataOptionsFlags.ListData
@@ -288,7 +288,7 @@ namespace PnP.Core.Test.Base
 
                         Assert.IsTrue(list2.Items.Length == 20);
 
-                        result = await list2.GetListDataAsStreamAsync(new RenderListDataOptions()
+                        result = await list2.LoadListDataAsStreamAsync(new RenderListDataOptions()
                         {
                             ViewXml = "<View><ViewFields><FieldRef Name='Title' /></ViewFields><RowLimit Paged='TRUE'>20</RowLimit></View>",
                             RenderOptions = RenderListDataOptionsFlags.ListData,

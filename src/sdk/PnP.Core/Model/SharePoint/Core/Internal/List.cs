@@ -295,70 +295,70 @@ namespace PnP.Core.Model.SharePoint
         #endregion
 
         #region GetItemsByCamlQuery
-        public async Task GetItemsByCamlQueryAsync(string query)
+        public async Task LoadItemsByCamlQueryAsync(string query)
         {
-            await GetItemsByCamlQueryAsync(new CamlQueryOptions() { ViewXml = query }).ConfigureAwait(false);
+            await LoadItemsByCamlQueryAsync(new CamlQueryOptions() { ViewXml = query }).ConfigureAwait(false);
         }
 
-        public void GetItemsByCamlQuery(string query)
+        public void LoadItemsByCamlQuery(string query)
         {
-            GetItemsByCamlQueryAsync(query).GetAwaiter().GetResult();
+            LoadItemsByCamlQueryAsync(query).GetAwaiter().GetResult();
         }
 
-        public async Task GetItemsByCamlQueryAsync(CamlQueryOptions queryOptions)
+        public async Task LoadItemsByCamlQueryAsync(CamlQueryOptions queryOptions)
         {
             ApiCall apiCall = BuildGetItemsByCamlQueryApiCall(queryOptions);
 
             await RequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
         }
 
-        public void GetItemsByCamlQuery(CamlQueryOptions queryOptions)
+        public void LoadItemsByCamlQuery(CamlQueryOptions queryOptions)
         {
-            GetItemsByCamlQueryAsync(queryOptions).GetAwaiter().GetResult();
+            LoadItemsByCamlQueryAsync(queryOptions).GetAwaiter().GetResult();
         }
 
-        public async Task GetItemsByCamlQueryBatchAsync(string query)
+        public async Task LoadItemsByCamlQueryBatchAsync(string query)
         {
-            await GetItemsByCamlQueryBatchAsync(new CamlQueryOptions() { ViewXml = query }).ConfigureAwait(false);
+            await LoadItemsByCamlQueryBatchAsync(new CamlQueryOptions() { ViewXml = query }).ConfigureAwait(false);
         }
 
-        public void GetItemsByCamlQueryBatch(string query)
+        public void LoadItemsByCamlQueryBatch(string query)
         {
-            GetItemsByCamlQueryBatchAsync(query).GetAwaiter().GetResult();
+            LoadItemsByCamlQueryBatchAsync(query).GetAwaiter().GetResult();
         }
 
-        public async Task GetItemsByCamlQueryBatchAsync(CamlQueryOptions queryOptions)
+        public async Task LoadItemsByCamlQueryBatchAsync(CamlQueryOptions queryOptions)
         {
             ApiCall apiCall = BuildGetItemsByCamlQueryApiCall(queryOptions);
 
             await RequestBatchAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
         }
 
-        public void GetItemsByCamlQueryBatch(CamlQueryOptions queryOptions)
+        public void LoadItemsByCamlQueryBatch(CamlQueryOptions queryOptions)
         {
-            GetItemsByCamlQueryBatchAsync(queryOptions).GetAwaiter().GetResult();
+            LoadItemsByCamlQueryBatchAsync(queryOptions).GetAwaiter().GetResult();
         }
 
-        public async Task GetItemsByCamlQueryBatchAsync(Batch batch, string query)
+        public async Task LoadItemsByCamlQueryBatchAsync(Batch batch, string query)
         {
-            await GetItemsByCamlQueryBatchAsync(batch, new CamlQueryOptions() { ViewXml = query }).ConfigureAwait(false);
+            await LoadItemsByCamlQueryBatchAsync(batch, new CamlQueryOptions() { ViewXml = query }).ConfigureAwait(false);
         }
 
-        public void GetItemsByCamlQueryBatch(Batch batch, string query)
+        public void LoadItemsByCamlQueryBatch(Batch batch, string query)
         {
-            GetItemsByCamlQueryBatchAsync(batch, query).GetAwaiter().GetResult();
+            LoadItemsByCamlQueryBatchAsync(batch, query).GetAwaiter().GetResult();
         }
 
-        public async Task GetItemsByCamlQueryBatchAsync(Batch batch, CamlQueryOptions queryOptions)
+        public async Task LoadItemsByCamlQueryBatchAsync(Batch batch, CamlQueryOptions queryOptions)
         {
             ApiCall apiCall = BuildGetItemsByCamlQueryApiCall(queryOptions);
 
             await RequestBatchAsync(batch, apiCall, HttpMethod.Post).ConfigureAwait(false);
         }
 
-        public void GetItemsByCamlQueryBatch(Batch batch, CamlQueryOptions queryOptions)
+        public void LoadItemsByCamlQueryBatch(Batch batch, CamlQueryOptions queryOptions)
         {
-            GetItemsByCamlQueryBatchAsync(batch, queryOptions).GetAwaiter().GetResult();
+            LoadItemsByCamlQueryBatchAsync(batch, queryOptions).GetAwaiter().GetResult();
         }
 
         private ApiCall BuildGetItemsByCamlQueryApiCall(CamlQueryOptions queryOptions)
@@ -400,13 +400,16 @@ namespace PnP.Core.Model.SharePoint
             }
             string body = JsonSerializer.Serialize(camlQuery, typeof(ExpandoObject), new JsonSerializerOptions() { IgnoreNullValues = true });
 
-            var apiCall = new ApiCall($"_api/Web/Lists(guid'{Id}')/GetItems", ApiType.SPORest, body, "Items");
+            var apiCall = new ApiCall($"_api/Web/Lists(guid'{Id}')/GetItems", ApiType.SPORest, body, "Items")
+            {
+                SkipCollectionClearing = true
+            };
             return apiCall;
         }
         #endregion
 
         #region GetListDataAsStream
-        public async Task<Dictionary<string, object>> GetListDataAsStreamAsync(RenderListDataOptions renderOptions)
+        public async Task<Dictionary<string, object>> LoadListDataAsStreamAsync(RenderListDataOptions renderOptions)
         {
             ApiCall apiCall = BuildGetListDataAsStreamApiCall(renderOptions);
 
@@ -439,9 +442,9 @@ namespace PnP.Core.Model.SharePoint
             return null;
         }
 
-        public Dictionary<string, object> GetListDataAsStream(RenderListDataOptions renderOptions)
+        public Dictionary<string, object> LoadListDataAsStream(RenderListDataOptions renderOptions)
         {
-            return GetListDataAsStreamAsync(renderOptions).GetAwaiter().GetResult();
+            return LoadListDataAsStreamAsync(renderOptions).GetAwaiter().GetResult();
         }
 
         private ApiCall BuildGetListDataAsStreamApiCall(RenderListDataOptions renderOptions)

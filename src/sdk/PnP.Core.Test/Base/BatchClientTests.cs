@@ -297,7 +297,7 @@ namespace PnP.Core.Test.Base
                     var list2 = context2.Web.Lists.GetByTitle(listTitle);
                     if (list2 != null)
                     {
-                        var result = await list2.GetListDataAsStreamAsync(new RenderListDataOptions() { ViewXml = "<View><ViewFields><FieldRef Name='Title' /></ViewFields></View>", RenderOptions = RenderListDataOptionsFlags.ListData });
+                        var result = await list2.LoadListDataAsStreamAsync(new RenderListDataOptions() { ViewXml = "<View><ViewFields><FieldRef Name='Title' /></ViewFields></View>", RenderOptions = RenderListDataOptionsFlags.ListData });
                         Assert.IsTrue(list2.Items.Length == 150);
                     }
                 }

@@ -1,11 +1,1 @@
-{"responses": [{"id": "1","status":429,"headers" : {"Content-Type":"application/json"},"body":{
-  "error": {
-    "code": "TooManyRequests",
-    "message": "Too Many Requests",
-    "innerError": {
-      "date": "2021-02-23T17:21:01",
-      "request-id": "484cc80b-ee30-46e6-bd4a-0366c0340850",
-      "client-request-id": "484cc80b-ee30-46e6-bd4a-0366c0340850"
-    }
-  }
-}}]}
+{"responses": [{"id": "1","status":201,"headers" : {"Location":"https://teamsgraph.teams.microsoft.com/beta/teams('b32780e9-df70-4548-a735-4e7f055415a1')/channels('19:f0ced4efad2f44ae83496ef6b2840dba@thread.tacv2')/messages('1614103364929')","OData-Version":"4.0","Content-Type":"application/json;odata.metadata=minimal;odata.streaming=true;IEEE754Compatible=false;charset=utf-8"},"body":{"@odata.context":"https://graph.microsoft.com/beta/$metadata#teams('b32780e9-df70-4548-a735-4e7f055415a1')/channels('19%3Af0ced4efad2f44ae83496ef6b2840dba%40thread.tacv2')/messages/$entity","id":"1614103364929","replyToId":null,"etag":"1614103364929","messageType":"message","createdDateTime":"2021-02-23T18:02:44.929Z","lastModifiedDateTime":"2021-02-23T18:02:44.929Z","lastEditedDateTime":null,"deletedDateTime":null,"subject":null,"summary":null,"chatId":null,"importance":"normal","locale":"en-us","webUrl":"https://teams.microsoft.com/l/message/19%3Af0ced4efad2f44ae83496ef6b2840dba%40thread.tacv2/1614103364929?groupId=b32780e9-df70-4548-a735-4e7f055415a1&tenantId=d8623c9e-30c7-473a-83bc-d907df44a26e&createdTime=1614103364929&parentMessageId=1614103364929","policyViolation":null,"from":{"application":null,"device":null,"conversation":null,"user":{"id":"33aca310-a489-4121-b853-663d0327fe08","displayName":"Bert Jansen (Cloud)","userIdentityType":"aadUser"}},"body":{"contentType":"text","content":"Test message31"},"channelIdentity":{"teamId":"b32780e9-df70-4548-a735-4e7f055415a1","channelId":"19:f0ced4efad2f44ae83496ef6b2840dba@thread.tacv2"},"attachments":[],"mentions":[],"reactions":[]}}]}

@@ -55,7 +55,7 @@ namespace PnP.Core.Test.SharePoint
                 {
                     var newList = await context.Web.Lists.GetByTitleAsync(listTitle, l => l.RootFolder);
 
-                    var result = await newList.GetListDataAsStreamAsync(new RenderListDataOptions() { ViewXml = "<View><ViewFields><FieldRef Name='Title' /><FieldRef Name='FileDirRef' /></ViewFields><RowLimit>1</RowLimit></View>", RenderOptions = RenderListDataOptionsFlags.ListData, FolderServerRelativeUrl = $"{newList.RootFolder.ServerRelativeUrl}/Test" });
+                    var result = await newList.LoadListDataAsStreamAsync(new RenderListDataOptions() { ViewXml = "<View><ViewFields><FieldRef Name='Title' /><FieldRef Name='FileDirRef' /></ViewFields><RowLimit>1</RowLimit></View>", RenderOptions = RenderListDataOptionsFlags.ListData, FolderServerRelativeUrl = $"{newList.RootFolder.ServerRelativeUrl}/Test" });
 
 
                     Assert.IsTrue(newList.Items.AsRequested().FirstOrDefault() != null);
@@ -1482,7 +1482,7 @@ namespace PnP.Core.Test.SharePoint
 
                 listDataOptions.SetViewXmlFromFields(fieldsToLoad);
 
-                await myList.GetListDataAsStreamAsync(listDataOptions).ConfigureAwait(false);
+                await myList.LoadListDataAsStreamAsync(listDataOptions).ConfigureAwait(false);
                 var addedItem = myList.Items.AsRequested().First();
 
                 AssertRegularListItemProperties(fieldData, addedItem);
@@ -2510,7 +2510,7 @@ namespace PnP.Core.Test.SharePoint
 
                 listDataOptions.SetViewXmlFromFields(fieldsToLoad);
 
-                await myList.GetListDataAsStreamAsync(listDataOptions).ConfigureAwait(false);
+                await myList.LoadListDataAsStreamAsync(listDataOptions).ConfigureAwait(false);
                 var addedItem = myList.Items.AsRequested().First();
 
                 AssertListItemProperties(fieldData, addedItem);

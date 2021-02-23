@@ -361,7 +361,7 @@ namespace PnP.Core.Model.SharePoint
             // Remove unneeded cariage returns
             pageQuery = pageQuery.Replace("\r\n", "");
 
-            await pagesLibrary.GetListDataAsStreamAsync(new RenderListDataOptions()
+            await pagesLibrary.LoadListDataAsStreamAsync(new RenderListDataOptions()
             {
                 ViewXml = pageQuery,
                 RenderOptions = RenderListDataOptionsFlags.ListData,

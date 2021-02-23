@@ -20,6 +20,7 @@
             StreamResponse = false;
             RemoveFromModel = false;
             LoadPages = loadPages;
+            SkipCollectionClearing = false;
         }
 
         internal ApiCall(string xmlBody, string receivingProperty = null)
@@ -37,6 +38,7 @@
             StreamResponse = false;
             RemoveFromModel = false;
             LoadPages = false;
+            SkipCollectionClearing = false;
         }
 
         /// <summary>
@@ -107,5 +109,10 @@
         /// Indicates if batch should support pagination and make multiple calls
         /// </summary>
         internal bool LoadPages { get; set; }
+
+        /// <summary>
+        /// Don't clear the current collection when data is loaded
+        /// </summary>
+        internal bool SkipCollectionClearing { get; set; }
     }
 }

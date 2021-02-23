@@ -235,6 +235,12 @@ namespace PnP.Core.Services
             // Clear all collections
             foreach (var request in batch.Requests.Values)
             {
+
+                if (request.ApiCall.SkipCollectionClearing)
+                {
+                    continue;
+                }
+
                 foreach (var fieldInfo in request.EntityInfo.Fields.Where(f => f.Load && request.Model.HasValue(f.Name)))
                 {
                     // Get the collection

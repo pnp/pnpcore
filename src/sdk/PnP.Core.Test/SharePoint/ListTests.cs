@@ -57,7 +57,7 @@ namespace PnP.Core.Test.SharePoint
                     var list2 = context2.Web.Lists.GetByTitle(listTitle);
                     if (list2 != null)
                     {
-                        var result = await list2.GetListDataAsStreamAsync(new RenderListDataOptions() { ViewXml = "<View><ViewFields><FieldRef Name='Title' /></ViewFields><RowLimit>5</RowLimit></View>", RenderOptions = RenderListDataOptionsFlags.ListData });
+                        var result = await list2.LoadListDataAsStreamAsync(new RenderListDataOptions() { ViewXml = "<View><ViewFields><FieldRef Name='Title' /></ViewFields><RowLimit>5</RowLimit></View>", RenderOptions = RenderListDataOptionsFlags.ListData });
                         Assert.IsTrue(list2.Items.Length == 5);
                         Assert.IsTrue(result.ContainsKey("FirstRow"));
                         Assert.IsTrue(result.ContainsKey("LastRow"));
@@ -71,7 +71,7 @@ namespace PnP.Core.Test.SharePoint
                     var list3 = context3.Web.Lists.GetByTitle(listTitle);
                     if (list3 != null)
                     {
-                        var result = list3.GetListDataAsStream(new RenderListDataOptions() { ViewXml = "<View><ViewFields><FieldRef Name='Title' /></ViewFields><RowLimit>5</RowLimit></View>", RenderOptions = RenderListDataOptionsFlags.ListData });
+                        var result = list3.LoadListDataAsStream(new RenderListDataOptions() { ViewXml = "<View><ViewFields><FieldRef Name='Title' /></ViewFields><RowLimit>5</RowLimit></View>", RenderOptions = RenderListDataOptionsFlags.ListData });
                         Assert.IsTrue(list3.Items.Length == 5);
                         Assert.IsTrue(result.ContainsKey("FirstRow"));
                         Assert.IsTrue(result.ContainsKey("LastRow"));
@@ -317,7 +317,7 @@ namespace PnP.Core.Test.SharePoint
                     var list2 = context2.Web.Lists.GetByTitle(listTitle);
                     if (list2 != null)
                     {
-                        await list2.GetItemsByCamlQueryAsync("<View><ViewFields><FieldRef Name='Title' /></ViewFields><RowLimit>5</RowLimit></View>");
+                        await list2.LoadItemsByCamlQueryAsync("<View><ViewFields><FieldRef Name='Title' /></ViewFields><RowLimit>5</RowLimit></View>");
                         Assert.IsTrue(list2.Items.Length == 5);
                     }
                 }
@@ -327,7 +327,7 @@ namespace PnP.Core.Test.SharePoint
                     var list3 = context3.Web.Lists.GetByTitle(listTitle);
                     if (list3 != null)
                     {
-                        await list3.GetItemsByCamlQueryAsync(new CamlQueryOptions()
+                        await list3.LoadItemsByCamlQueryAsync(new CamlQueryOptions()
                         {
                             ViewXml = "<View><ViewFields><FieldRef Name='Title' /></ViewFields></View>",
                             DatesInUtc = true
@@ -343,11 +343,11 @@ namespace PnP.Core.Test.SharePoint
                     if (list4 != null)
                     {
                         // Perform 2 queries, the first one limited to 5 items, the second one without limits. Total should be 10 items
-                        await list4.GetItemsByCamlQueryBatchAsync(new CamlQueryOptions()
+                        await list4.LoadItemsByCamlQueryBatchAsync(new CamlQueryOptions()
                         {
                             ViewXml = "<View><ViewFields><FieldRef Name='Title' /></ViewFields><RowLimit>5</RowLimit></View>",
                         });
-                        await list4.GetItemsByCamlQueryBatchAsync(new CamlQueryOptions()
+                        await list4.LoadItemsByCamlQueryBatchAsync(new CamlQueryOptions()
                         {
                             ViewXml = "<View><ViewFields><FieldRef Name='Title' /></ViewFields></View>",
                         });
@@ -399,7 +399,7 @@ namespace PnP.Core.Test.SharePoint
                     var list2 = context2.Web.Lists.GetByTitle(listTitle);
                     if (list2 != null)
                     {
-                        list2.GetItemsByCamlQuery("<View><ViewFields><FieldRef Name='Title' /></ViewFields><RowLimit>5</RowLimit></View>");
+                        list2.LoadItemsByCamlQuery("<View><ViewFields><FieldRef Name='Title' /></ViewFields><RowLimit>5</RowLimit></View>");
                         Assert.IsTrue(list2.Items.Length == 5);
                     }
                 }
@@ -409,7 +409,7 @@ namespace PnP.Core.Test.SharePoint
                     var list3 = context3.Web.Lists.GetByTitle(listTitle);
                     if (list3 != null)
                     {
-                        list3.GetItemsByCamlQuery(new CamlQueryOptions()
+                        list3.LoadItemsByCamlQuery(new CamlQueryOptions()
                         {
                             ViewXml = "<View><ViewFields><FieldRef Name='Title' /></ViewFields></View>",
                             DatesInUtc = true
@@ -425,11 +425,11 @@ namespace PnP.Core.Test.SharePoint
                     if (list4 != null)
                     {
                         // Perform 2 queries, the first one limited to 5 items, the second one without limits. Total should be 10 items
-                        list4.GetItemsByCamlQueryBatch(new CamlQueryOptions()
+                        list4.LoadItemsByCamlQueryBatch(new CamlQueryOptions()
                         {
                             ViewXml = "<View><ViewFields><FieldRef Name='Title' /></ViewFields><RowLimit>5</RowLimit></View>",
                         });
-                        list4.GetItemsByCamlQueryBatch("<View><ViewFields><FieldRef Name='Title' /></ViewFields></View>");
+                        list4.LoadItemsByCamlQueryBatch("<View><ViewFields><FieldRef Name='Title' /></ViewFields></View>");
                         await context4.ExecuteAsync();
 
                         Assert.IsTrue(list4.Items.Length == 10);
@@ -444,11 +444,11 @@ namespace PnP.Core.Test.SharePoint
                     {
                         var newBatch = context5.NewBatch();
                         // Perform 2 queries, the first one limited to 5 items, the second one without limits. Total should be 10 items
-                        list5.GetItemsByCamlQueryBatch(newBatch, new CamlQueryOptions()
+                        list5.LoadItemsByCamlQueryBatch(newBatch, new CamlQueryOptions()
                         {
                             ViewXml = "<View><ViewFields><FieldRef Name='Title' /></ViewFields><RowLimit>5</RowLimit></View>",
                         });
-                        list5.GetItemsByCamlQueryBatch(newBatch, new CamlQueryOptions()
+                        list5.LoadItemsByCamlQueryBatch(newBatch, new CamlQueryOptions()
                         {
                             ViewXml = "<View><ViewFields><FieldRef Name='Title' /></ViewFields></View>",
                         });
@@ -465,7 +465,7 @@ namespace PnP.Core.Test.SharePoint
                     {
                         var newBatch = context6.NewBatch();
                         // Perform 2 queries, the first one limited to 5 items, the second one without limits. Total should be 10 items
-                        list6.GetItemsByCamlQueryBatch(newBatch, "<View><ViewFields><FieldRef Name='Title' /></ViewFields><RowLimit>5</RowLimit></View>");
+                        list6.LoadItemsByCamlQueryBatch(newBatch, "<View><ViewFields><FieldRef Name='Title' /></ViewFields><RowLimit>5</RowLimit></View>");
                         context6.ExecuteAsync(newBatch).GetAwaiter().GetResult();
 
                         Assert.IsTrue(list6.Items.Length == 5);
@@ -536,7 +536,7 @@ namespace PnP.Core.Test.SharePoint
                                           </Query>
                                         </View>";
 
-                        await list2.GetItemsByCamlQueryAsync(new CamlQueryOptions()
+                        await list2.LoadItemsByCamlQueryAsync(new CamlQueryOptions()
                         {
                             ViewXml = query,
                             DatesInUtc = true
