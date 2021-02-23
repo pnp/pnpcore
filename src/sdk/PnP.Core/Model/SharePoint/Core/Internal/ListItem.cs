@@ -187,6 +187,9 @@ namespace PnP.Core.Model.SharePoint
 
         [KeyProperty(nameof(Id))]
         public override object Key { get => Id; set => Id = (int)value; }
+
+        public IRoleAssignmentCollection RoleAssignments { get => GetModelCollectionValue<IRoleAssignmentCollection>(); }
+
         #endregion
 
         #region Methods

@@ -22,6 +22,11 @@ namespace PnP.Core.Model.SharePoint
         /// </summary>
         public string Title { get; set; }
 
+        /// <summary>
+        /// Role assignments of the list item
+        /// </summary>
+        public IRoleAssignmentCollection RoleAssignments { get; }
+
         #region Extension methods
 
         #region Folder
