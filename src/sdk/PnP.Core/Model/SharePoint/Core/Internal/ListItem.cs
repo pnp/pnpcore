@@ -1246,6 +1246,32 @@ namespace PnP.Core.Model.SharePoint
         }
         #endregion
 
+        #region Permissions
+
+        public void BreakRoleInheritance(bool copyRoleAssignments, bool clearSubscopes)
+        {
+            BreakRoleInheritanceAsync(copyRoleAssignments, clearSubscopes).GetAwaiter().GetResult();
+        }
+
+        public async Task BreakRoleInheritanceAsync(bool copyRoleAssignments, bool clearSubscopes)
+        {
+            var apiCall = new ApiCall("_api/Web/Lists(guid'{Parent.Id}')/items({Id})/BreakRoleInheritance(copyRoleAssignments=" + copyRoleAssignments.ToString().ToLower() + ",clearSubscopes=" + clearSubscopes.ToString().ToLower() + ")", ApiType.SPORest);
+            var response = await RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
+        }
+
+        public void ResetRoleInheritance()
+        {
+            ResetRoleInheritanceAsync().GetAwaiter().GetResult();
+        }
+
+        public async Task ResetRoleInheritanceAsync()
+        {
+            var apiCall = new ApiCall("_api/Web/Lists(guid'{Parent.Id}')/items({Id})/ResetRoleInheritance", ApiType.SPORest);
+            var response = await RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
+        }
+
+        #endregion
+
         #endregion
     }
 }

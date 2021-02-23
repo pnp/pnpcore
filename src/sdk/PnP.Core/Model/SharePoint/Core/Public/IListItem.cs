@@ -319,6 +319,38 @@ namespace PnP.Core.Model.SharePoint
         public Task RecycleBatchAsync(Batch batch);
         #endregion
 
+        #region Permissions
+
+        /// <summary>
+        /// Break role inheritance on the current item
+        /// </summary>
+        /// <param name="copyRoleAssignments"></param>
+        /// <param name="clearSubscopes"></param>
+        /// <returns></returns>
+        public void BreakRoleInheritance(bool copyRoleAssignments, bool clearSubscopes);
+
+        /// <summary>
+        /// Break role inheritance on the current item
+        /// </summary>
+        /// <param name="copyRoleAssignments"></param>
+        /// <param name="clearSubscopes"></param>
+        /// <returns></returns>
+        public Task BreakRoleInheritanceAsync(bool copyRoleAssignments, bool clearSubscopes);
+
+        /// <summary>
+        /// Reset role inheritance on the current item
+        /// </summary>
+        /// <returns></returns>
+        public void ResetRoleInheritance();
+
+        /// <summary>
+        /// Reset role inheritance on the current item
+        /// </summary>
+        /// <returns></returns>
+        public Task ResetRoleInheritanceAsync();
+
+        #endregion
+
         #endregion
 
     }

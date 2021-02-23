@@ -2578,6 +2578,110 @@ namespace PnP.Core.Test.SharePoint
         }
         #endregion
 
+        #region Permissions Tests
+
+        [TestMethod]
+        public async Task ResetRoleInheritanceTest()
+        {
+            TestCommon.Instance.Mocking = false;
+            string listTitle = "ResetRoleInheritanceTest";
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                // Create a new list
+                var web = await context.Web.GetAsync(p => p.Lists.LoadProperties(p => p.Title, p => p.Items));
+
+                int listCount = web.Lists.Count();
+
+                #region Test Setup
+
+                var myList = web.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
+
+
+                if (myList == null)
+                {
+                    myList = await web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
+                    // Enable versioning
+                    myList.EnableVersioning = true;
+                    await myList.UpdateAsync();
+                }
+
+                var items = await myList.Items.GetAsync();
+                if (items.Count() > 0)
+                {
+                    // Add items to the list
+                    for (int i = 0; i < 10; i++)
+                    {
+                        Dictionary<string, object> values = new Dictionary<string, object>
+                        {
+                            { "Title", $"Item {i}" }
+                        };
+
+                        await myList.Items.AddBatchAsync(values);
+                    }
+                    await context.ExecuteAsync();
+                }
+
+                #endregion
+
+                // get first item and do a reset role inheritance
+                var first = myList.Items.First();
+
+                await first.ResetRoleInheritanceAsync();
+            }
+        }
+
+        [TestMethod]
+        public async Task BreakRoleInheritanceTestNoCopyAssignmentsNoClearSubscopes()
+        {
+            TestCommon.Instance.Mocking = false;
+            string listTitle = "ResetRoleInheritanceTest";
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                // Create a new list
+                var web = await context.Web.GetAsync(p => p.Lists.LoadProperties(p => p.Title, p => p.Items));
+
+                int listCount = web.Lists.Count();
+
+                #region Test Setup
+
+                var myList = web.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
+
+
+                if (myList == null)
+                {
+                    myList = await web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
+                    // Enable versioning
+                    myList.EnableVersioning = true;
+                    await myList.UpdateAsync();
+                }
+
+                var items = await myList.Items.GetAsync();
+                if (items.Count() > 0)
+                {
+                    // Add items to the list
+                    for (int i = 0; i < 10; i++)
+                    {
+                        Dictionary<string, object> values = new Dictionary<string, object>
+                        {
+                            { "Title", $"Item {i}" }
+                        };
+
+                        await myList.Items.AddBatchAsync(values);
+                    }
+                    await context.ExecuteAsync();
+                }
+
+                #endregion
+
+                // get first item and do a break role inheritance
+                var first = myList.Items.First();
+
+                await first.BreakRoleInheritanceAsync(false, false);
+            }
+        }
+        #endregion
 
         //[TestMethod]
         //public async Task FieldTypeReadUrl()
