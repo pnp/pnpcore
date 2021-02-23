@@ -349,24 +349,10 @@ if (myList != null)
 If you like, you can also leverage a fluent syntax enriched with LINQ (Language Integrated Query). For example, in the following code excerpt you can see how to write a query for the items of a list.
 
 ```csharp
-var document = await((await context.Web.Lists.GetByTitleAsync("Documents")).Items
-                            .Where(i => i.Title == "Sample Document")
-                            .Load(i => i.Id,
-                                  i => i.Title))
-                            .ToListAsync();
-
-if (document != null)
-{
-    Console.WriteLine($"Document Title: {document.Title}");
-}
-```
-
-The same query can also be written using the collection Get methods (both examples will result in 2 queries being sent to Microsoft 365):
-
-```csharp
-
 var list = await context.Web.Lists.GetByTitleAsync("Documents");
-var document = await list.Items.GetAsync(i => i.Title == "Sample Document", i => i.Id, i => i.Title);
+var document = await list.Items.Where(i => i.Title == "Sample Document")
+                               .QueryProperties(i => i.Id, i => i.Title)
+                               .FirstOrDefaultAsync();
 
 if (document != null)
 {
@@ -374,28 +360,27 @@ if (document != null)
 }
 ```
 
-Another approach to mainly limit the data that's being pulled from Microsoft 365 is using the `LoadProperties()` method on the properties specified in the lambda expression(s), below example shows using `LoadProperties()` in a recursive manner: next to the Title property of the Web this request also loads the Lists for the Web and for each List it loads the Id, Title, DocumentTemplate and ContentTypes property. Given List ContentTypes is a collection, the Name and FieldLinks properties of each content type are loaded and, in turn, for ContentType FieldLinks, the Name property is loaded.
+Another approach to mainly limit the data that's being pulled from Microsoft 365 is using the `QueryProperties()` method on the properties specified in the lambda expression(s), below example shows using `QueryProperties()` in a recursive manner: next to the Title property of the Web this request also loads the Lists for the Web and for each List it loads the Id, Title, DocumentTemplate and ContentTypes property. Given List ContentTypes is a collection, the Name and FieldLinks properties of each content type are loaded and, in turn, for ContentType FieldLinks, the Name property is loaded.
 
 ```csharp
-await context.Web.GetAsync(p => p.Title,
-                           p => p.ContentTypes.LoadProperties(p => p.Name),
-                           p => p.Lists.LoadProperties(p => p.Id,
-                                                       p => p.Title,
-                                                       p => p.DocumentTemplate,
-                               p => p.ContentTypes.LoadProperties(p => p.Name,
-                                    p => p.FieldLinks.LoadProperties(p => p.Name)))
-                          );
+await context.Web.LoadAsync(p => p.Title,
+                            p => p.ContentTypes.LoadProperties(p => p.Name),
+                            p => p.Lists.QueryProperties(p => p.Id,
+                                                         p => p.Title,
+                                                         p => p.DocumentTemplate,
+                                p => p.ContentTypes.QueryProperties(p => p.Name,
+                                     p => p.FieldLinks.QueryProperties(p => p.Name)))
+                           );
 ```
 
-The `LoadProperties()` method can also be combined with the various `GetBy` methods: below call will load the list with as title "Documents" and for that list all `ContentTypes` are loaded with all their respective `FieldLinks`.
+The `QueryProperties()` method can also be combined with the various `GetBy` methods: below call will load the list with as title "Documents" and for that list all `ContentTypes` are loaded with all their respective `FieldLinks`.
 
 ```csharp
 var web = context.Web;
-var list = web.Lists.GetByTitleAsync("Documents",
-                                    p => p.Title,
-                                    p => p.ListExperience,
-                                    p => p.ContentTypes.LoadProperties(p => p.Id,
-                                                                      p => p.Name,
-                                                                      p=>p.FieldLinks.LoadProperties(p=>p.Id,
-                                                                                                      p=>p.Name)));
+var list = await web.Lists.GetByTitleAsync("Documents",
+                            p => p.Title,
+                            p => p.ListExperience,
+                            p => p.ContentTypes.QueryProperties(p => p.Id,
+                                   p => p.Name,
+                                   p=>p.FieldLinks.QueryProperties(p=>p.Id, p=>p.Name)));
 ```
