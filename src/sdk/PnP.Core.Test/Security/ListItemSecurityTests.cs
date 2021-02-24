@@ -110,8 +110,8 @@ namespace PnP.Core.Test.Security
                 // fetch a role definition
                 var roleDefs = await context.Web.RoleDefinitions.GetAsync();
                 var roleDef = roleDefs.FirstOrDefault(r => r.Name == "Full Control");
-                
-                await first.RoleAssignments.AddAsync(firstUser.Id, roleDef.Id);
+
+                await first.AddRoleAssignmentAsync(firstUser.Id, roleDef.Id);
             }
         }
 
@@ -136,7 +136,7 @@ namespace PnP.Core.Test.Security
                 var roleDefs = await context.Web.RoleDefinitions.GetAsync();
                 var roleDef = roleDefs.FirstOrDefault(r => r.Name == "Full Control");
 
-                await first.RoleAssignments.RemoveAsync(firstUser.Id, roleDef.Id);
+                await first.RemoveRoleAssignmentAsync(firstUser.Id, roleDef.Id);
             }
         }
 
