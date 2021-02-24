@@ -1688,7 +1688,7 @@ namespace PnP.Core.Test.SharePoint
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                var fileName = $"test_added_{DateTime.Now.ToString("YYYYMMDDhhmmss")}.docx";
+                var fileName = TestCommon.GetPnPSdkTestAssetName("test_added.docx");
 
                 IFolder folder = await context.Web.Lists.GetByTitle("Documents").RootFolder.GetAsync();
                 IFile addedFile = await folder.Files.AddAsync(fileName, System.IO.File.OpenRead($".{Path.DirectorySeparatorChar}TestAssets{Path.DirectorySeparatorChar}test.docx"));

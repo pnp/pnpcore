@@ -5,6 +5,8 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 using PnP.Core.Model;
+using PnP.Core.Services;
+using System.Collections.Generic;
 
 namespace PnP.Core.Test.Base
 {
@@ -77,7 +79,23 @@ namespace PnP.Core.Test.Base
                 if (myList != null)
                 {
                     var currentDescription = myList.Description;
-                    var newDescription = $"Updated on UTC {DateTime.UtcNow}";
+
+                    // Create a new channel and add enough messages to it
+                    string newDescription = $"Updated on {DateTime.UtcNow}";
+
+                    if (TestCommon.Instance.Mocking)
+                    {
+                        var properties = TestManager.GetProperties(context);
+                        newDescription = properties["Description"];
+                    }
+                    else
+                    {
+                        Dictionary<string, string> properties = new Dictionary<string, string>
+                        {
+                            { "Description", newDescription }
+                        };
+                        TestManager.SaveProperties(context, properties);
+                    }
 
                     myList.Description = newDescription;
                     Assert.IsTrue(myList.HasChanged("Description"));
@@ -121,7 +139,23 @@ namespace PnP.Core.Test.Base
                 if (myList != null)
                 {
                     var currentDescription = myList.Description;
-                    var newDescription = $"Updated on UTC {DateTime.UtcNow}";
+
+                    // Create a new channel and add enough messages to it
+                    string newDescription = $"Updated on {DateTime.UtcNow}";
+
+                    if (TestCommon.Instance.Mocking)
+                    {
+                        var properties = TestManager.GetProperties(context);
+                        newDescription = properties["Description"];
+                    }
+                    else
+                    {
+                        Dictionary<string, string> properties = new Dictionary<string, string>
+                        {
+                            { "Description", newDescription }
+                        };
+                        TestManager.SaveProperties(context, properties);
+                    }
 
                     myList.Description = newDescription;
                     Assert.IsTrue(myList.HasChanged("Description"));
@@ -212,7 +246,22 @@ namespace PnP.Core.Test.Base
                     channelToUpdate = await context.Team.Channels.AddAsync($"Channel test {new Random().Next()}", "Test channel, will be deleted in 21 days");
                 }
 
+                // Create a new channel and add enough messages to it
                 string newChannelDescription = $"Updated on {DateTime.UtcNow}";
+
+                if (TestCommon.Instance.Mocking)
+                {
+                    var properties = TestManager.GetProperties(context);
+                    newChannelDescription = properties["ChannelDescription"];
+                }
+                else
+                {
+                    Dictionary<string, string> properties = new Dictionary<string, string>
+                        {
+                            { "ChannelDescription", newChannelDescription }
+                        };
+                    TestManager.SaveProperties(context, properties);
+                }
                 channelToUpdate.Description = newChannelDescription;
 
                 Assert.IsTrue(channelToUpdate.HasChanged("Description"));
@@ -248,7 +297,23 @@ namespace PnP.Core.Test.Base
                     await context.ExecuteAsync();
                 }
 
+                // Create a new channel and add enough messages to it
                 string newChannelDescription = $"Updated on {DateTime.UtcNow}";
+
+                if (TestCommon.Instance.Mocking)
+                {
+                    var properties = TestManager.GetProperties(context);
+                    newChannelDescription = properties["ChannelDescription"];
+                }
+                else
+                {
+                    Dictionary<string, string> properties = new Dictionary<string, string>
+                        {
+                            { "ChannelDescription", newChannelDescription }
+                        };
+                    TestManager.SaveProperties(context, properties);
+                }
+
                 channelToUpdate.Description = newChannelDescription;
 
                 Assert.IsTrue(channelToUpdate.HasChanged("Description"));
@@ -287,7 +352,23 @@ namespace PnP.Core.Test.Base
                     await context.ExecuteAsync(batch1);
                 }
 
+                // Create a new channel and add enough messages to it
                 string newChannelDescription = $"Updated on {DateTime.UtcNow}";
+
+                if (TestCommon.Instance.Mocking)
+                {
+                    var properties = TestManager.GetProperties(context);
+                    newChannelDescription = properties["ChannelDescription"];
+                }
+                else
+                {
+                    Dictionary<string, string> properties = new Dictionary<string, string>
+                        {
+                            { "ChannelDescription", newChannelDescription }
+                        };
+                    TestManager.SaveProperties(context, properties);
+                }
+
                 channelToUpdate.Description = newChannelDescription;
 
                 Assert.IsTrue(channelToUpdate.HasChanged("Description"));

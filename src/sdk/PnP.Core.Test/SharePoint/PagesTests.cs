@@ -293,7 +293,7 @@ namespace PnP.Core.Test.SharePoint
 
         private static async Task DisableMultilingual(Core.Services.PnPContext context)
         {
-            await context.Web.EnsurePropertiesAsync(p => p.Features, p => p.SupportedUILanguageIds);
+            await context.Web.LoadAsync(p => p.Features, p => p.SupportedUILanguageIds);            
             await context.Web.Features.DisableBatchAsync(new Guid("24611c05-ee19-45da-955f-6602264abaf8"));
             context.Web.SupportedUILanguageIds.Remove(1043);
             context.Web.SupportedUILanguageIds.Remove(1036);
