@@ -5,7 +5,7 @@
 		<LangVersion>8.0</LangVersion>
 		<RootNamespace>PnP.Core</RootNamespace>
 		<AssemblyName>PnP.Core</AssemblyName>
-		<InformationalVersion>Beta 2 package</InformationalVersion>
+		<InformationalVersion>Beta 3 package</InformationalVersion>
 		<GeneratePackageOnBuild>false</GeneratePackageOnBuild>
 		<Copyright>PnP 2020</Copyright>
 		<Company>PnP</Company>
