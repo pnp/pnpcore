@@ -5,10 +5,10 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Enum TermRelationType
+    <title>Interface IEnumerableBatchResult&lt;T&gt;
    | PnP Core SDK </title>
     <meta name="viewport" content="width=device-width">
-    <meta name="title" content="Enum TermRelationType
+    <meta name="title" content="Interface IEnumerableBatchResult&lt;T&gt;
    | PnP Core SDK ">
     <meta name="generator" content="docfx 2.56.5.0">
     <meta name="description" content="The PnP Core SDK is an SDK designed to work against Microsoft 365. Its aim is to provide a unified object model to work with the whole Microsoft 365 ecosystem. ">
@@ -78,47 +78,49 @@
         </div>
         <div class="article row grid-right">
           <div class="col-md-10">
-            <article class="content wrap" id="_content" data-uid="PnP.Core.Model.SharePoint.TermRelationType">
+            <article class="content wrap" id="_content" data-uid="PnP.Core.Model.IEnumerableBatchResult`1">
                   <div class="contribution-panel mobile-hide pull-right">
-                      <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Taxonomy/Public/Enums/TermRelationType.cs/#L6" title="View Source" class="view-source-lg"><i class="fa fa-code"></i></a>
-                      <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_TermRelationType.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.TermRelationType%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc" class="improve-doc-lg"><i class="glyphicon glyphicon-pencil"></i></a>
+                      <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Base/IEnumerableBatchResult.cs/#L53" title="View Source" class="view-source-lg"><i class="fa fa-code"></i></a>
+                      <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_IEnumerableBatchResult_1.md&amp;value=---%0Auid%3A%20PnP.Core.Model.IEnumerableBatchResult%601%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc" class="improve-doc-lg"><i class="glyphicon glyphicon-pencil"></i></a>
                   </div>
-                      <h1 id="PnP_Core_Model_SharePoint_TermRelationType" data-uid="PnP.Core.Model.SharePoint.TermRelationType">Enum TermRelationType
+                      <h1 id="PnP_Core_Model_IEnumerableBatchResult_1" data-uid="PnP.Core.Model.IEnumerableBatchResult`1">Interface IEnumerableBatchResult&lt;T&gt;
   </h1>
-  <div class="markdown level0 summary"><p>Type of relationship between two terms</p>
+  <div class="markdown level0 summary"><p>Provides the result of a batch when is executed</p>
 </div>
   <div class="markdown level0 conceptual"></div>
 
   
   
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="PnP.Core.Model.IBatchResult.html#PnP_Core_Model_IBatchResult_IsAvailable">IBatchResult.IsAvailable</a>
+    </div>
+  </div>
   
-  <h6><strong>Namespace</strong>: <a class="xref" href="PnP.Core.Model.SharePoint.html">PnP.Core.Model.SharePoint</a></h6>
+  <h6><strong>Namespace</strong>: <a class="xref" href="PnP.Core.Model.html">PnP.Core.Model</a></h6>
   <h6><strong>Assembly</strong>: PnP.Core.dll</h6>
   
-  <h5 id="PnP_Core_Model_SharePoint_TermRelationType_syntax">Syntax</h5>
+  <h5 id="PnP_Core_Model_IEnumerableBatchResult_1_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public enum TermRelationType : int</code></pre>
+    <pre><code class="lang-csharp hljs">public interface IEnumerableBatchResult&lt;out T&gt; : IEnumerableBatchResult, IEnumerable, IBatchResult, IReadOnlyList&lt;T&gt;</code></pre>
   </div>
 
   
   
-  
-  
-      <h4 id="PnP_Core_Model_SharePoint_TermRelationType_Pin"><a href="#collapsible-PnP_Core_Model_SharePoint_TermRelationType_Pin" class="expander" data-toggle="collapse">Pin</a></h4>
-  
-      <div id="collapsible-PnP_Core_Model_SharePoint_TermRelationType_Pin" class="collapse in">
-        <p><p>In a pin relationship, a term can be pinned under a different term in a different term set.
-In a pinned relationship, new children to the term can only be added in the term set in which the term was created.
-Any change in the hierarchy under the term is reflected across the sets in which the term was pinned.</p>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="parametername">T</span>
+        <p><p>The type of the result</p>
 </p>
-      </div>
-      <h4 id="PnP_Core_Model_SharePoint_TermRelationType_Reuse"><a href="#collapsible-PnP_Core_Model_SharePoint_TermRelationType_Reuse" class="expander" data-toggle="collapse">Reuse</a></h4>
+      </td>
+    </tr>
+  </table>
   
-      <div id="collapsible-PnP_Core_Model_SharePoint_TermRelationType_Reuse" class="collapse in">
-        <p><p>The reuse relationship is similar to the pinned relationship except that changes to the reused term can be made from any hierarchy in which the term is reused.
-Also, a change in hierarchy made to the reused term does not get reflected in the other term sets in which the term is reused.</p>
-</p>
-      </div>
+  
+  
   
 </article>
           </div>

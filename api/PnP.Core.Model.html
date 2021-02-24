@@ -91,6 +91,27 @@
     <table>
       <tr>
         <td>
+          <p><a class="xref" href="PnP.Core.Model.DataModelCollectionLoadExtensions.html">DataModelCollectionLoadExtensions</a></p>
+          <p><p>Extension methods for <a class="xref" href="PnP.Core.Model.IDataModelCollectionLoad-1.html">IDataModelCollectionLoad&lt;TModel&gt;</a></p>
+</p>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <p><a class="xref" href="PnP.Core.Model.DataModelGetExtensions.html">DataModelGetExtensions</a></p>
+          <p><p>Extension methods for <span class="xref">PnP.Core.Model.IDataModelProcess</span></p>
+</p>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <p><a class="xref" href="PnP.Core.Model.DataModelLoadExtensions.html">DataModelLoadExtensions</a></p>
+          <p><p>Extension methods for <span class="xref">PnP.Core.Model.IDataModelLoad</span></p>
+</p>
+        </td>
+      </tr>
+      <tr>
+        <td>
           <p><a class="xref" href="PnP.Core.Model.TransientDictionary.html">TransientDictionary</a></p>
           <p><p>Class for tracking Dictionary changes</p>
 </p>
@@ -100,6 +121,27 @@
     <h3 id="interfaces">Interfaces
   </h3>
     <table>
+      <tr>
+        <td>
+          <p><a class="xref" href="PnP.Core.Model.IBatchResult.html">IBatchResult</a></p>
+          <p><p>Defines the result of a batch when it is executed</p>
+</p>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <p><a class="xref" href="PnP.Core.Model.IBatchSingleResult.html">IBatchSingleResult</a></p>
+          <p><p>Defines a single result of a batch request</p>
+</p>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <p><a class="xref" href="PnP.Core.Model.IBatchSingleResult-1.html">IBatchSingleResult&lt;T&gt;</a></p>
+          <p><p>Defines the result of a batch when it is executed</p>
+</p>
+        </td>
+      </tr>
       <tr>
         <td>
           <p><a class="xref" href="PnP.Core.Model.IDataModel-1.html">IDataModel&lt;TModel&gt;</a></p>
@@ -138,6 +180,13 @@ Add methods are implemented in their respective model interfaces</p>
       </tr>
       <tr>
         <td>
+          <p><a class="xref" href="PnP.Core.Model.IDataModelCollectionLoad-1.html">IDataModelCollectionLoad&lt;TModel&gt;</a></p>
+          <p><p>Defines the very basic interface for every collection of Domain Model objects which supports explicit load</p>
+</p>
+        </td>
+      </tr>
+      <tr>
+        <td>
           <p><a class="xref" href="PnP.Core.Model.IDataModelDelete.html">IDataModelDelete</a></p>
           <p><p>Defines the delete interface for Domain Model objects that need delete.</p>
 </p>
@@ -147,6 +196,13 @@ Add methods are implemented in their respective model interfaces</p>
         <td>
           <p><a class="xref" href="PnP.Core.Model.IDataModelGet-1.html">IDataModelGet&lt;TModel&gt;</a></p>
           <p><p>Defines the read interface for Domain Model objects that can be read.</p>
+</p>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <p><a class="xref" href="PnP.Core.Model.IDataModelLoad-1.html">IDataModelLoad&lt;TModel&gt;</a></p>
+          <p><p>Defines the read interface for Domain Model objects that can be loaded.</p>
 </p>
         </td>
       </tr>
@@ -183,6 +239,20 @@ that can be mapped from a JSON response coming out of a REST request</p>
         <td>
           <p><a class="xref" href="PnP.Core.Model.IDataModelWithKey.html">IDataModelWithKey</a></p>
           <p><p>Defines the basic behavior for a Domain Model object with an identifying key</p>
+</p>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <p><a class="xref" href="PnP.Core.Model.IEnumerableBatchResult.html">IEnumerableBatchResult</a></p>
+          <p><p>Provides the result of a batch when is executed</p>
+</p>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <p><a class="xref" href="PnP.Core.Model.IEnumerableBatchResult-1.html">IEnumerableBatchResult&lt;T&gt;</a></p>
+          <p><p>Provides the result of a batch when is executed</p>
 </p>
         </td>
       </tr>
@@ -242,8 +312,15 @@ through an external querying system</p>
       </tr>
       <tr>
         <td>
-          <p><a class="xref" href="PnP.Core.Model.ISupportPaging-1.html">ISupportPaging&lt;TModel&gt;</a></p>
+          <p><a class="xref" href="PnP.Core.Model.ISupportPaging.html">ISupportPaging</a></p>
           <p><p>Paged data retrieval can be done using the methods provided via this interface</p>
+</p>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <p><a class="xref" href="PnP.Core.Model.ISupportQuery-1.html">ISupportQuery&lt;TResult&gt;</a></p>
+          <p><p>Object supports explicit Query</p>
 </p>
         </td>
       </tr>

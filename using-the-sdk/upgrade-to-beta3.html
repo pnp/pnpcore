@@ -5,11 +5,9 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Interface IGraphGroupCollection
-   | PnP Core SDK </title>
+    <title>Upgrade to Beta3 | PnP Core SDK </title>
     <meta name="viewport" content="width=device-width">
-    <meta name="title" content="Interface IGraphGroupCollection
-   | PnP Core SDK ">
+    <meta name="title" content="Upgrade to Beta3 | PnP Core SDK ">
     <meta name="generator" content="docfx 2.56.5.0">
     <meta name="description" content="The PnP Core SDK is an SDK designed to work against Microsoft 365. Its aim is to provide a unified object model to work with the whole Microsoft 365 ecosystem. ">
     <link rel="shortcut icon" href="https://c.s-microsoft.com/favicon.ico?v2">
@@ -78,59 +76,130 @@
         </div>
         <div class="article row grid-right">
           <div class="col-md-10">
-            <article class="content wrap" id="_content" data-uid="PnP.Core.Model.Security.IGraphGroupCollection">
+            <article class="content wrap" id="_content" data-uid="">
                   <div class="contribution-panel mobile-hide pull-right">
-                      <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Security/Public/IGraphGroupCollection.cs/#L8" title="View Source" class="view-source-lg"><i class="fa fa-code"></i></a>
-                      <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_Security_IGraphGroupCollection.md&amp;value=---%0Auid%3A%20PnP.Core.Model.Security.IGraphGroupCollection%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc" class="improve-doc-lg"><i class="glyphicon glyphicon-pencil"></i></a>
+                      <a href="https://github.com/pnp/pnpcore/blob/dev/docs/using-the-sdk/upgrade-to-beta3.md/#L1" title="Improve this Doc" class="improve-doc-lg"><i class="glyphicon glyphicon-pencil"></i></a>
                   </div>
-                      <h1 id="PnP_Core_Model_Security_IGraphGroupCollection" data-uid="PnP.Core.Model.Security.IGraphGroupCollection">Interface IGraphGroupCollection
-  </h1>
-  <div class="markdown level0 summary"><p>Public interface to define a collection of Microsoft 365 Groups</p>
+                    <h1 id="upgrade-to-beta3">Upgrade to Beta3</h1>
+
+<p>Beta3 introduces some fundamental changes which will require minor updates in your code base. These changes are done to provide a more consistent experience while also doing internal refactoring to centralize to a common query engine regardless of the entry point. In the remainder of this article you'll see a lot of <code>context</code> use: in this case this is a <code>PnPContext</code> which was obtained via the <code>PnPContextFactory</code> as explained in the <a href="readme.html">overview article</a> and show below:</p>
+<pre><code class="lang-csharp">using (var context = await pnpContextFactory.CreateAsync(&quot;SiteToWorkWith&quot;))
+{
+    
+}
+</code></pre>
+<h2 id="getting-data">Getting data</h2>
+<p>Working with PnP Core SDK starts from a <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Services.PnPContext.html">PnPContext</a> which provides you with access to the connected Site, Web and Team but which also acts as an in memory domain model. Before Beta 3 all data you requested got loaded into that into the <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Services.PnPContext.html">PnPContext</a>. Any <code>Get</code> call on either a model (e.g. doing <code>context.Web.GetAsync(p =&gt; p.Title)</code>) or a collection (e.g. doing <code>context.Web.Lists.GetAsync(p =&gt; p.Title, p =&gt; p.TemplateType)</code>) loaded data into the <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Services.PnPContext.html">PnPContext</a> whereas now the default behavior for <code>Get</code> calls is to load the data into a variable. Loading data into the <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Services.PnPContext.html">PnPContext</a> is still possible using the new <code>Load</code> calls.</p>
+<h3 id="requesting-a-single-model-eg-a-web-list">Requesting a single model (e.g. a Web, List,...)</h3>
+<p>When requesting a model you can choose whether data is loaded into the <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Services.PnPContext.html">PnPContext</a> or not:</p>
+<table>
+<thead>
+<tr>
+<th>Pre Beta3</th>
+<th>Beta3 and later</th>
+<th>Loads data into PnPContext</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GetAsync()</td>
+<td>LoadAsync()</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Get()</td>
+<td>Load()</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>GetBatchAsync()</td>
+<td>LoadBatchAsync()</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>GetBatch()</td>
+<td>LoadBatch()</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>N/A</td>
+<td>GetAsync()</td>
+<td>No</td>
+</tr>
+<tr>
+<td>N/A</td>
+<td>Get()</td>
+<td>No</td>
+</tr>
+<tr>
+<td>N/A</td>
+<td>GetBatchAsync()</td>
+<td>No</td>
+</tr>
+<tr>
+<td>N/A</td>
+<td>GetBatch()</td>
+<td>No</td>
+</tr>
+</tbody>
+</table>
+<div class="NOTE">
+<h5>Note</h5>
+<p>When doing a <code>Load</code> specifying a model collection (e.g. <code>context.Web.LoadAsync(p =&gt; p.Lists)</code>) then all the data is loaded into the <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Services.PnPContext.html">PnPContext</a>. This approach is the only option to load a collection into the <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Services.PnPContext.html">PnPContext</a>.</p>
 </div>
-  <div class="markdown level0 conceptual"></div>
-
-  
-  
-  <div class="inheritedMembers">
-    <h5>Inherited Members</h5>
-    <div>
-      <a class="xref" href="PnP.Core.Model.IDataModelParent.html#PnP_Core_Model_IDataModelParent_Parent">IDataModelParent.Parent</a>
-    </div>
-    <div>
-      <a class="xref" href="PnP.Core.Model.IDataModelWithContext.html#PnP_Core_Model_IDataModelWithContext_PnPContext">IDataModelWithContext.PnPContext</a>
-    </div>
-    <div>
-      <a class="xref" href="PnP.Core.Model.IRequestableCollection.html#PnP_Core_Model_IRequestableCollection_Requested">IRequestableCollection.Requested</a>
-    </div>
-    <div>
-      <a class="xref" href="PnP.Core.Model.IRequestableCollection.html#PnP_Core_Model_IRequestableCollection_Length">IRequestableCollection.Length</a>
-    </div>
-    <div>
-      <a class="xref" href="PnP.Core.Model.IRequestableCollection.html#PnP_Core_Model_IRequestableCollection_RequestedItems">IRequestableCollection.RequestedItems</a>
-    </div>
-    <div>
-      <a class="xref" href="PnP.Core.Model.IRequestableCollection.html#PnP_Core_Model_IRequestableCollection_Clear">IRequestableCollection.Clear()</a>
-    </div>
-  </div>
-  
-  <h6><strong>Namespace</strong>: <a class="xref" href="PnP.Core.Model.Security.html">PnP.Core.Model.Security</a></h6>
-  <h6><strong>Assembly</strong>: PnP.Core.dll</h6>
-  
-  <h5 id="PnP_Core_Model_Security_IGraphGroupCollection_syntax">Syntax</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public interface IGraphGroupCollection : IQueryable&lt;IGraphGroup&gt;, IDataModelCollection&lt;IGraphGroup&gt;, IEnumerable&lt;IGraphGroup&gt;, IDataModelParent, IDataModelWithContext, IRequestableCollection</code></pre>
-  </div>
-
-  
-  
-  
-  
-  
-  <h3 id="extensionmethods">Extension Methods</h3>
-  <div>
-      <a class="xref" href="PnP.Core.QueryModel.QueryableExtensions.html#PnP_Core_QueryModel_QueryableExtensions_AsRequested__1_PnP_Core_Model_IDataModelCollection___0__">QueryableExtensions.AsRequested&lt;TSource&gt;(IDataModelCollection&lt;TSource&gt;)</a>
-  </div>
-  
+<h3 id="requesting-a-collection-of-models">Requesting a collection of models</h3>
+<p>Loads initiated from a collection always return data into a variable and never into the <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Services.PnPContext.html">PnPContext</a> because using this approach you can also apply a filter (using <code>Where</code>) which would result in an incomplete dataset in the <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Services.PnPContext.html">PnPContext</a>.</p>
+<table>
+<thead>
+<tr>
+<th>Pre Beta3</th>
+<th>Beta3 and later</th>
+<th>Loads data into PnPContext</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GetAsync()</td>
+<td>ToListAsync()</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Get()</td>
+<td>ToList()</td>
+<td>No</td>
+</tr>
+<tr>
+<td>GetBatchAsync()</td>
+<td>AsBatchAsync()</td>
+<td>No</td>
+</tr>
+<tr>
+<td>GetBatch()</td>
+<td>AsBatch()</td>
+<td>No</td>
+</tr>
+<tr>
+<td>GetFirstOrDefaultAsync()</td>
+<td>FirstOrDefaultAsync()</td>
+<td>No</td>
+</tr>
+<tr>
+<td>GetFirstOrDefault()</td>
+<td>FirstOrDefault()</td>
+<td>No</td>
+</tr>
+<tr>
+<td>GetFirstOrDefaultBatchAsync()</td>
+<td>AsBatchAsync()</td>
+<td>No</td>
+</tr>
+<tr>
+<td>GetFirstOrDefaultBatch()</td>
+<td>AsBatch()</td>
+<td>No</td>
+</tr>
+</tbody>
+</table>
 </article>
           </div>
           <div class="hidden-sm col-md-2" role="complementary">

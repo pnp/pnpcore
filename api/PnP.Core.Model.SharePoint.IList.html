@@ -124,28 +124,13 @@
       <a class="xref" href="PnP.Core.Model.IDataModelGet-1.html#PnP_Core_Model_IDataModelGet_1_GetBatchAsync_PnP_Core_Services_Batch_Expression_Func__0_System_Object_____">IDataModelGet&lt;IList&gt;.GetBatchAsync(Batch, Expression&lt;Func&lt;IList, Object&gt;&gt;[])</a>
     </div>
     <div>
-      <a class="xref" href="PnP.Core.Model.IDataModelGet-1.html#PnP_Core_Model_IDataModelGet_1_GetBatchAsync_Expression_Func__0_System_Object_____">IDataModelGet&lt;IList&gt;.GetBatchAsync(Expression&lt;Func&lt;IList, Object&gt;&gt;[])</a>
-    </div>
-    <div>
-      <a class="xref" href="PnP.Core.Model.IDataModelGet-1.html#PnP_Core_Model_IDataModelGet_1_GetBatch_PnP_Core_Services_Batch_Expression_Func__0_System_Object_____">IDataModelGet&lt;IList&gt;.GetBatch(Batch, Expression&lt;Func&lt;IList, Object&gt;&gt;[])</a>
-    </div>
-    <div>
-      <a class="xref" href="PnP.Core.Model.IDataModelGet-1.html#PnP_Core_Model_IDataModelGet_1_GetBatch_Expression_Func__0_System_Object_____">IDataModelGet&lt;IList&gt;.GetBatch(Expression&lt;Func&lt;IList, Object&gt;&gt;[])</a>
-    </div>
-    <div>
       <a class="xref" href="PnP.Core.Model.IDataModelGet-1.html#PnP_Core_Model_IDataModelGet_1_GetAsync_Expression_Func__0_System_Object_____">IDataModelGet&lt;IList&gt;.GetAsync(Expression&lt;Func&lt;IList, Object&gt;&gt;[])</a>
     </div>
     <div>
-      <a class="xref" href="PnP.Core.Model.IDataModelGet-1.html#PnP_Core_Model_IDataModelGet_1_GetAsync_PnP_Core_Services_ApiResponse_Expression_Func__0_System_Object_____">IDataModelGet&lt;IList&gt;.GetAsync(ApiResponse, Expression&lt;Func&lt;IList, Object&gt;&gt;[])</a>
+      <a class="xref" href="PnP.Core.Model.IDataModelLoad-1.html#PnP_Core_Model_IDataModelLoad_1_LoadBatchAsync_PnP_Core_Services_Batch_Expression_Func__0_System_Object_____">IDataModelLoad&lt;IList&gt;.LoadBatchAsync(Batch, Expression&lt;Func&lt;IList, Object&gt;&gt;[])</a>
     </div>
     <div>
-      <a class="xref" href="PnP.Core.Model.IDataModelGet-1.html#PnP_Core_Model_IDataModelGet_1_Get_Expression_Func__0_System_Object_____">IDataModelGet&lt;IList&gt;.Get(Expression&lt;Func&lt;IList, Object&gt;&gt;[])</a>
-    </div>
-    <div>
-      <a class="xref" href="PnP.Core.Model.IDataModelGet-1.html#PnP_Core_Model_IDataModelGet_1_Get_PnP_Core_Services_ApiResponse_Expression_Func__0_System_Object_____">IDataModelGet&lt;IList&gt;.Get(ApiResponse, Expression&lt;Func&lt;IList, Object&gt;&gt;[])</a>
-    </div>
-    <div>
-      <a class="xref" href="PnP.Core.Model.IDataModelGet-1.html#PnP_Core_Model_IDataModelGet_1_LoadProperties_Expression_Func__0_System_Object_____">IDataModelGet&lt;IList&gt;.LoadProperties(Expression&lt;Func&lt;IList, Object&gt;&gt;[])</a>
+      <a class="xref" href="PnP.Core.Model.IDataModelLoad-1.html#PnP_Core_Model_IDataModelLoad_1_LoadAsync_Expression_Func__0_System_Object_____">IDataModelLoad&lt;IList&gt;.LoadAsync(Expression&lt;Func&lt;IList, Object&gt;&gt;[])</a>
     </div>
     <div>
       <a class="xref" href="PnP.Core.Model.IDataModelUpdate.html#PnP_Core_Model_IDataModelUpdate_UpdateBatchAsync">IDataModelUpdate.UpdateBatchAsync()</a>
@@ -190,7 +175,7 @@
   
   <h5 id="PnP_Core_Model_SharePoint_IList_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public interface IList : IDataModel&lt;IList&gt;, IDataModelParent, IDataModelWithContext, IDataModelGet&lt;IList&gt;, IDataModelUpdate, IDataModelDelete, IQueryableDataModel</code></pre>
+    <pre><code class="lang-csharp hljs">public interface IList : IDataModel&lt;IList&gt;, IDataModelParent, IDataModelWithContext, IDataModelGet&lt;IList&gt;, IDataModelLoad&lt;IList&gt;, IDataModelUpdate, IDataModelDelete, IQueryableDataModel</code></pre>
   </div>
 
   
@@ -2604,754 +2589,6 @@
   
   <span class="small pull-right mobile-hide">
     <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IList_GetItemsByCamlQuery_PnP_Core_Model_SharePoint_CamlQueryOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IList.GetItemsByCamlQuery(PnP.Core.Model.SharePoint.CamlQueryOptions)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IList.cs/#L301" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-  
-  <a id="PnP_Core_Model_SharePoint_IList_GetItemsByCamlQuery_" data-uid="PnP.Core.Model.SharePoint.IList.GetItemsByCamlQuery*"></a>
-  
-  <h4 id="PnP_Core_Model_SharePoint_IList_GetItemsByCamlQuery_PnP_Core_Model_SharePoint_CamlQueryOptions_" data-uid="PnP.Core.Model.SharePoint.IList.GetItemsByCamlQuery(PnP.Core.Model.SharePoint.CamlQueryOptions)"><a href="#collapsible-PnP_Core_Model_SharePoint_IList_GetItemsByCamlQuery_PnP_Core_Model_SharePoint_CamlQueryOptions_" class="expander" data-toggle="collapse">GetItemsByCamlQuery(CamlQueryOptions)</a></h4>
-  
-  <div id="collapsible-PnP_Core_Model_SharePoint_IList_GetItemsByCamlQuery_PnP_Core_Model_SharePoint_CamlQueryOptions_" class="collapse in">
-  <div class="markdown level1 summary"><p>Loads list items based up on a CAML query</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">void GetItemsByCamlQuery(CamlQueryOptions queryOptions)</code></pre>
-  </div>
-
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Model.SharePoint.CamlQueryOptions.html">CamlQueryOptions</a></span>
-        <span class="parametername">queryOptions</span>
-        <p><p><a class="xref" href="PnP.Core.Model.SharePoint.CamlQueryOptions.html">CamlQueryOptions</a> defining the query to execute</p>
-</p>
-      </td>
-    </tr>
-  </table>
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  </div>
-  
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IList_GetItemsByCamlQuery_System_String_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IList.GetItemsByCamlQuery(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IList.cs/#L287" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-  
-  <a id="PnP_Core_Model_SharePoint_IList_GetItemsByCamlQuery_" data-uid="PnP.Core.Model.SharePoint.IList.GetItemsByCamlQuery*"></a>
-  
-  <h4 id="PnP_Core_Model_SharePoint_IList_GetItemsByCamlQuery_System_String_" data-uid="PnP.Core.Model.SharePoint.IList.GetItemsByCamlQuery(System.String)"><a href="#collapsible-PnP_Core_Model_SharePoint_IList_GetItemsByCamlQuery_System_String_" class="expander" data-toggle="collapse">GetItemsByCamlQuery(String)</a></h4>
-  
-  <div id="collapsible-PnP_Core_Model_SharePoint_IList_GetItemsByCamlQuery_System_String_" class="collapse in">
-  <div class="markdown level1 summary"><p>Loads list items based up on a CAML query</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">void GetItemsByCamlQuery(string query)</code></pre>
-  </div>
-
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></span>
-        <span class="parametername">query</span>
-        <p><p>query to execute</p>
-</p>
-      </td>
-    </tr>
-  </table>
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  </div>
-  
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IList_GetItemsByCamlQueryAsync_PnP_Core_Model_SharePoint_CamlQueryOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IList.GetItemsByCamlQueryAsync(PnP.Core.Model.SharePoint.CamlQueryOptions)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IList.cs/#L294" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-  
-  <a id="PnP_Core_Model_SharePoint_IList_GetItemsByCamlQueryAsync_" data-uid="PnP.Core.Model.SharePoint.IList.GetItemsByCamlQueryAsync*"></a>
-  
-  <h4 id="PnP_Core_Model_SharePoint_IList_GetItemsByCamlQueryAsync_PnP_Core_Model_SharePoint_CamlQueryOptions_" data-uid="PnP.Core.Model.SharePoint.IList.GetItemsByCamlQueryAsync(PnP.Core.Model.SharePoint.CamlQueryOptions)"><a href="#collapsible-PnP_Core_Model_SharePoint_IList_GetItemsByCamlQueryAsync_PnP_Core_Model_SharePoint_CamlQueryOptions_" class="expander" data-toggle="collapse">GetItemsByCamlQueryAsync(CamlQueryOptions)</a></h4>
-  
-  <div id="collapsible-PnP_Core_Model_SharePoint_IList_GetItemsByCamlQueryAsync_PnP_Core_Model_SharePoint_CamlQueryOptions_" class="collapse in">
-  <div class="markdown level1 summary"><p>Loads list items based up on a CAML query</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">Task GetItemsByCamlQueryAsync(CamlQueryOptions queryOptions)</code></pre>
-  </div>
-
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Model.SharePoint.CamlQueryOptions.html">CamlQueryOptions</a></span>
-        <span class="parametername">queryOptions</span>
-        <p><p><a class="xref" href="PnP.Core.Model.SharePoint.CamlQueryOptions.html">CamlQueryOptions</a> defining the query to execute</p>
-</p>
-      </td>
-    </tr>
-  </table>
-  
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="xref">Task</span>
-        <p>
-      </td>
-    </tr>
-  </table>
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  </div>
-  
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IList_GetItemsByCamlQueryAsync_System_String_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IList.GetItemsByCamlQueryAsync(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IList.cs/#L280" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-  
-  <a id="PnP_Core_Model_SharePoint_IList_GetItemsByCamlQueryAsync_" data-uid="PnP.Core.Model.SharePoint.IList.GetItemsByCamlQueryAsync*"></a>
-  
-  <h4 id="PnP_Core_Model_SharePoint_IList_GetItemsByCamlQueryAsync_System_String_" data-uid="PnP.Core.Model.SharePoint.IList.GetItemsByCamlQueryAsync(System.String)"><a href="#collapsible-PnP_Core_Model_SharePoint_IList_GetItemsByCamlQueryAsync_System_String_" class="expander" data-toggle="collapse">GetItemsByCamlQueryAsync(String)</a></h4>
-  
-  <div id="collapsible-PnP_Core_Model_SharePoint_IList_GetItemsByCamlQueryAsync_System_String_" class="collapse in">
-  <div class="markdown level1 summary"><p>Loads list items based up on a CAML query</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">Task GetItemsByCamlQueryAsync(string query)</code></pre>
-  </div>
-
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></span>
-        <span class="parametername">query</span>
-        <p><p>query to execute</p>
-</p>
-      </td>
-    </tr>
-  </table>
-  
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="xref">Task</span>
-        <p>
-      </td>
-    </tr>
-  </table>
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  </div>
-  
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IList_GetItemsByCamlQueryBatch_PnP_Core_Model_SharePoint_CamlQueryOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IList.GetItemsByCamlQueryBatch(PnP.Core.Model.SharePoint.CamlQueryOptions)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IList.cs/#L329" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-  
-  <a id="PnP_Core_Model_SharePoint_IList_GetItemsByCamlQueryBatch_" data-uid="PnP.Core.Model.SharePoint.IList.GetItemsByCamlQueryBatch*"></a>
-  
-  <h4 id="PnP_Core_Model_SharePoint_IList_GetItemsByCamlQueryBatch_PnP_Core_Model_SharePoint_CamlQueryOptions_" data-uid="PnP.Core.Model.SharePoint.IList.GetItemsByCamlQueryBatch(PnP.Core.Model.SharePoint.CamlQueryOptions)"><a href="#collapsible-PnP_Core_Model_SharePoint_IList_GetItemsByCamlQueryBatch_PnP_Core_Model_SharePoint_CamlQueryOptions_" class="expander" data-toggle="collapse">GetItemsByCamlQueryBatch(CamlQueryOptions)</a></h4>
-  
-  <div id="collapsible-PnP_Core_Model_SharePoint_IList_GetItemsByCamlQueryBatch_PnP_Core_Model_SharePoint_CamlQueryOptions_" class="collapse in">
-  <div class="markdown level1 summary"><p>Loads list items based up on a CAML query</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">void GetItemsByCamlQueryBatch(CamlQueryOptions queryOptions)</code></pre>
-  </div>
-
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Model.SharePoint.CamlQueryOptions.html">CamlQueryOptions</a></span>
-        <span class="parametername">queryOptions</span>
-        <p><p><a class="xref" href="PnP.Core.Model.SharePoint.CamlQueryOptions.html">CamlQueryOptions</a> defining the query to execute</p>
-</p>
-      </td>
-    </tr>
-  </table>
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  </div>
-  
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IList_GetItemsByCamlQueryBatch_PnP_Core_Services_Batch_PnP_Core_Model_SharePoint_CamlQueryOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IList.GetItemsByCamlQueryBatch(PnP.Core.Services.Batch%2CPnP.Core.Model.SharePoint.CamlQueryOptions)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IList.cs/#L361" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-  
-  <a id="PnP_Core_Model_SharePoint_IList_GetItemsByCamlQueryBatch_" data-uid="PnP.Core.Model.SharePoint.IList.GetItemsByCamlQueryBatch*"></a>
-  
-  <h4 id="PnP_Core_Model_SharePoint_IList_GetItemsByCamlQueryBatch_PnP_Core_Services_Batch_PnP_Core_Model_SharePoint_CamlQueryOptions_" data-uid="PnP.Core.Model.SharePoint.IList.GetItemsByCamlQueryBatch(PnP.Core.Services.Batch,PnP.Core.Model.SharePoint.CamlQueryOptions)"><a href="#collapsible-PnP_Core_Model_SharePoint_IList_GetItemsByCamlQueryBatch_PnP_Core_Services_Batch_PnP_Core_Model_SharePoint_CamlQueryOptions_" class="expander" data-toggle="collapse">GetItemsByCamlQueryBatch(Batch, CamlQueryOptions)</a></h4>
-  
-  <div id="collapsible-PnP_Core_Model_SharePoint_IList_GetItemsByCamlQueryBatch_PnP_Core_Services_Batch_PnP_Core_Model_SharePoint_CamlQueryOptions_" class="collapse in">
-  <div class="markdown level1 summary"><p>Loads list items based up on a CAML query</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">void GetItemsByCamlQueryBatch(Batch batch, CamlQueryOptions queryOptions)</code></pre>
-  </div>
-
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></span>
-        <span class="parametername">batch</span>
-        <p><p>Batch to add this request to</p>
-</p>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Model.SharePoint.CamlQueryOptions.html">CamlQueryOptions</a></span>
-        <span class="parametername">queryOptions</span>
-        <p><p><a class="xref" href="PnP.Core.Model.SharePoint.CamlQueryOptions.html">CamlQueryOptions</a> defining the query to execute</p>
-</p>
-      </td>
-    </tr>
-  </table>
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  </div>
-  
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IList_GetItemsByCamlQueryBatch_PnP_Core_Services_Batch_System_String_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IList.GetItemsByCamlQueryBatch(PnP.Core.Services.Batch%2CSystem.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IList.cs/#L345" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-  
-  <a id="PnP_Core_Model_SharePoint_IList_GetItemsByCamlQueryBatch_" data-uid="PnP.Core.Model.SharePoint.IList.GetItemsByCamlQueryBatch*"></a>
-  
-  <h4 id="PnP_Core_Model_SharePoint_IList_GetItemsByCamlQueryBatch_PnP_Core_Services_Batch_System_String_" data-uid="PnP.Core.Model.SharePoint.IList.GetItemsByCamlQueryBatch(PnP.Core.Services.Batch,System.String)"><a href="#collapsible-PnP_Core_Model_SharePoint_IList_GetItemsByCamlQueryBatch_PnP_Core_Services_Batch_System_String_" class="expander" data-toggle="collapse">GetItemsByCamlQueryBatch(Batch, String)</a></h4>
-  
-  <div id="collapsible-PnP_Core_Model_SharePoint_IList_GetItemsByCamlQueryBatch_PnP_Core_Services_Batch_System_String_" class="collapse in">
-  <div class="markdown level1 summary"><p>Loads list items based up on a CAML query</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">void GetItemsByCamlQueryBatch(Batch batch, string query)</code></pre>
-  </div>
-
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></span>
-        <span class="parametername">batch</span>
-        <p><p>Batch to add this request to</p>
-</p>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></span>
-        <span class="parametername">query</span>
-        <p><p>query to execute</p>
-</p>
-      </td>
-    </tr>
-  </table>
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  </div>
-  
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IList_GetItemsByCamlQueryBatch_System_String_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IList.GetItemsByCamlQueryBatch(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IList.cs/#L315" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-  
-  <a id="PnP_Core_Model_SharePoint_IList_GetItemsByCamlQueryBatch_" data-uid="PnP.Core.Model.SharePoint.IList.GetItemsByCamlQueryBatch*"></a>
-  
-  <h4 id="PnP_Core_Model_SharePoint_IList_GetItemsByCamlQueryBatch_System_String_" data-uid="PnP.Core.Model.SharePoint.IList.GetItemsByCamlQueryBatch(System.String)"><a href="#collapsible-PnP_Core_Model_SharePoint_IList_GetItemsByCamlQueryBatch_System_String_" class="expander" data-toggle="collapse">GetItemsByCamlQueryBatch(String)</a></h4>
-  
-  <div id="collapsible-PnP_Core_Model_SharePoint_IList_GetItemsByCamlQueryBatch_System_String_" class="collapse in">
-  <div class="markdown level1 summary"><p>Loads list items based up on a CAML query</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">void GetItemsByCamlQueryBatch(string query)</code></pre>
-  </div>
-
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></span>
-        <span class="parametername">query</span>
-        <p><p>query to execute</p>
-</p>
-      </td>
-    </tr>
-  </table>
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  </div>
-  
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IList_GetItemsByCamlQueryBatchAsync_PnP_Core_Model_SharePoint_CamlQueryOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IList.GetItemsByCamlQueryBatchAsync(PnP.Core.Model.SharePoint.CamlQueryOptions)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IList.cs/#L322" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-  
-  <a id="PnP_Core_Model_SharePoint_IList_GetItemsByCamlQueryBatchAsync_" data-uid="PnP.Core.Model.SharePoint.IList.GetItemsByCamlQueryBatchAsync*"></a>
-  
-  <h4 id="PnP_Core_Model_SharePoint_IList_GetItemsByCamlQueryBatchAsync_PnP_Core_Model_SharePoint_CamlQueryOptions_" data-uid="PnP.Core.Model.SharePoint.IList.GetItemsByCamlQueryBatchAsync(PnP.Core.Model.SharePoint.CamlQueryOptions)"><a href="#collapsible-PnP_Core_Model_SharePoint_IList_GetItemsByCamlQueryBatchAsync_PnP_Core_Model_SharePoint_CamlQueryOptions_" class="expander" data-toggle="collapse">GetItemsByCamlQueryBatchAsync(CamlQueryOptions)</a></h4>
-  
-  <div id="collapsible-PnP_Core_Model_SharePoint_IList_GetItemsByCamlQueryBatchAsync_PnP_Core_Model_SharePoint_CamlQueryOptions_" class="collapse in">
-  <div class="markdown level1 summary"><p>Loads list items based up on a CAML query</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">Task GetItemsByCamlQueryBatchAsync(CamlQueryOptions queryOptions)</code></pre>
-  </div>
-
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Model.SharePoint.CamlQueryOptions.html">CamlQueryOptions</a></span>
-        <span class="parametername">queryOptions</span>
-        <p><p><a class="xref" href="PnP.Core.Model.SharePoint.CamlQueryOptions.html">CamlQueryOptions</a> defining the query to execute</p>
-</p>
-      </td>
-    </tr>
-  </table>
-  
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="xref">Task</span>
-        <p>
-      </td>
-    </tr>
-  </table>
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  </div>
-  
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IList_GetItemsByCamlQueryBatchAsync_PnP_Core_Services_Batch_PnP_Core_Model_SharePoint_CamlQueryOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IList.GetItemsByCamlQueryBatchAsync(PnP.Core.Services.Batch%2CPnP.Core.Model.SharePoint.CamlQueryOptions)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IList.cs/#L353" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-  
-  <a id="PnP_Core_Model_SharePoint_IList_GetItemsByCamlQueryBatchAsync_" data-uid="PnP.Core.Model.SharePoint.IList.GetItemsByCamlQueryBatchAsync*"></a>
-  
-  <h4 id="PnP_Core_Model_SharePoint_IList_GetItemsByCamlQueryBatchAsync_PnP_Core_Services_Batch_PnP_Core_Model_SharePoint_CamlQueryOptions_" data-uid="PnP.Core.Model.SharePoint.IList.GetItemsByCamlQueryBatchAsync(PnP.Core.Services.Batch,PnP.Core.Model.SharePoint.CamlQueryOptions)"><a href="#collapsible-PnP_Core_Model_SharePoint_IList_GetItemsByCamlQueryBatchAsync_PnP_Core_Services_Batch_PnP_Core_Model_SharePoint_CamlQueryOptions_" class="expander" data-toggle="collapse">GetItemsByCamlQueryBatchAsync(Batch, CamlQueryOptions)</a></h4>
-  
-  <div id="collapsible-PnP_Core_Model_SharePoint_IList_GetItemsByCamlQueryBatchAsync_PnP_Core_Services_Batch_PnP_Core_Model_SharePoint_CamlQueryOptions_" class="collapse in">
-  <div class="markdown level1 summary"><p>Loads list items based up on a CAML query</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">Task GetItemsByCamlQueryBatchAsync(Batch batch, CamlQueryOptions queryOptions)</code></pre>
-  </div>
-
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></span>
-        <span class="parametername">batch</span>
-        <p><p>Batch to add this request to</p>
-</p>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Model.SharePoint.CamlQueryOptions.html">CamlQueryOptions</a></span>
-        <span class="parametername">queryOptions</span>
-        <p><p><a class="xref" href="PnP.Core.Model.SharePoint.CamlQueryOptions.html">CamlQueryOptions</a> defining the query to execute</p>
-</p>
-      </td>
-    </tr>
-  </table>
-  
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="xref">Task</span>
-        <p>
-      </td>
-    </tr>
-  </table>
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  </div>
-  
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IList_GetItemsByCamlQueryBatchAsync_PnP_Core_Services_Batch_System_String_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IList.GetItemsByCamlQueryBatchAsync(PnP.Core.Services.Batch%2CSystem.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IList.cs/#L337" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-  
-  <a id="PnP_Core_Model_SharePoint_IList_GetItemsByCamlQueryBatchAsync_" data-uid="PnP.Core.Model.SharePoint.IList.GetItemsByCamlQueryBatchAsync*"></a>
-  
-  <h4 id="PnP_Core_Model_SharePoint_IList_GetItemsByCamlQueryBatchAsync_PnP_Core_Services_Batch_System_String_" data-uid="PnP.Core.Model.SharePoint.IList.GetItemsByCamlQueryBatchAsync(PnP.Core.Services.Batch,System.String)"><a href="#collapsible-PnP_Core_Model_SharePoint_IList_GetItemsByCamlQueryBatchAsync_PnP_Core_Services_Batch_System_String_" class="expander" data-toggle="collapse">GetItemsByCamlQueryBatchAsync(Batch, String)</a></h4>
-  
-  <div id="collapsible-PnP_Core_Model_SharePoint_IList_GetItemsByCamlQueryBatchAsync_PnP_Core_Services_Batch_System_String_" class="collapse in">
-  <div class="markdown level1 summary"><p>Loads list items based up on a CAML query</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">Task GetItemsByCamlQueryBatchAsync(Batch batch, string query)</code></pre>
-  </div>
-
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></span>
-        <span class="parametername">batch</span>
-        <p><p>Batch to add this request to</p>
-</p>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></span>
-        <span class="parametername">query</span>
-        <p><p>query to execute</p>
-</p>
-      </td>
-    </tr>
-  </table>
-  
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="xref">Task</span>
-        <p>
-      </td>
-    </tr>
-  </table>
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  </div>
-  
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IList_GetItemsByCamlQueryBatchAsync_System_String_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IList.GetItemsByCamlQueryBatchAsync(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IList.cs/#L308" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-  
-  <a id="PnP_Core_Model_SharePoint_IList_GetItemsByCamlQueryBatchAsync_" data-uid="PnP.Core.Model.SharePoint.IList.GetItemsByCamlQueryBatchAsync*"></a>
-  
-  <h4 id="PnP_Core_Model_SharePoint_IList_GetItemsByCamlQueryBatchAsync_System_String_" data-uid="PnP.Core.Model.SharePoint.IList.GetItemsByCamlQueryBatchAsync(System.String)"><a href="#collapsible-PnP_Core_Model_SharePoint_IList_GetItemsByCamlQueryBatchAsync_System_String_" class="expander" data-toggle="collapse">GetItemsByCamlQueryBatchAsync(String)</a></h4>
-  
-  <div id="collapsible-PnP_Core_Model_SharePoint_IList_GetItemsByCamlQueryBatchAsync_System_String_" class="collapse in">
-  <div class="markdown level1 summary"><p>Loads list items based up on a CAML query</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">Task GetItemsByCamlQueryBatchAsync(string query)</code></pre>
-  </div>
-
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></span>
-        <span class="parametername">query</span>
-        <p><p>query to execute</p>
-</p>
-      </td>
-    </tr>
-  </table>
-  
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="xref">Task</span>
-        <p>
-      </td>
-    </tr>
-  </table>
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  </div>
-  
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IList_GetListDataAsStream_PnP_Core_Model_SharePoint_RenderListDataOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IList.GetListDataAsStream(PnP.Core.Model.SharePoint.RenderListDataOptions)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IList.cs/#L375" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-  
-  <a id="PnP_Core_Model_SharePoint_IList_GetListDataAsStream_" data-uid="PnP.Core.Model.SharePoint.IList.GetListDataAsStream*"></a>
-  
-  <h4 id="PnP_Core_Model_SharePoint_IList_GetListDataAsStream_PnP_Core_Model_SharePoint_RenderListDataOptions_" data-uid="PnP.Core.Model.SharePoint.IList.GetListDataAsStream(PnP.Core.Model.SharePoint.RenderListDataOptions)"><a href="#collapsible-PnP_Core_Model_SharePoint_IList_GetListDataAsStream_PnP_Core_Model_SharePoint_RenderListDataOptions_" class="expander" data-toggle="collapse">GetListDataAsStream(RenderListDataOptions)</a></h4>
-  
-  <div id="collapsible-PnP_Core_Model_SharePoint_IList_GetListDataAsStream_PnP_Core_Model_SharePoint_RenderListDataOptions_" class="collapse in">
-  <div class="markdown level1 summary"><p>Loads list items based up on a CAML query and the RenderListDataAsStream API</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">Dictionary&lt;string, object&gt; GetListDataAsStream(RenderListDataOptions renderOptions)</code></pre>
-  </div>
-
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Model.SharePoint.RenderListDataOptions.html">RenderListDataOptions</a></span>
-        <span class="parametername">renderOptions</span>
-        <p><p><a class="xref" href="PnP.Core.Model.SharePoint.RenderListDataOptions.html">RenderListDataOptions</a> defining the query to execute</p>
-</p>
-      </td>
-    </tr>
-  </table>
-  
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="xref">Dictionary</span>&lt;<a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a>, <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object">Object</a>&gt;
-        <p>
-      </td>
-    </tr>
-  </table>
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  </div>
-  
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IList_GetListDataAsStreamAsync_PnP_Core_Model_SharePoint_RenderListDataOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IList.GetListDataAsStreamAsync(PnP.Core.Model.SharePoint.RenderListDataOptions)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IList.cs/#L368" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-  
-  <a id="PnP_Core_Model_SharePoint_IList_GetListDataAsStreamAsync_" data-uid="PnP.Core.Model.SharePoint.IList.GetListDataAsStreamAsync*"></a>
-  
-  <h4 id="PnP_Core_Model_SharePoint_IList_GetListDataAsStreamAsync_PnP_Core_Model_SharePoint_RenderListDataOptions_" data-uid="PnP.Core.Model.SharePoint.IList.GetListDataAsStreamAsync(PnP.Core.Model.SharePoint.RenderListDataOptions)"><a href="#collapsible-PnP_Core_Model_SharePoint_IList_GetListDataAsStreamAsync_PnP_Core_Model_SharePoint_RenderListDataOptions_" class="expander" data-toggle="collapse">GetListDataAsStreamAsync(RenderListDataOptions)</a></h4>
-  
-  <div id="collapsible-PnP_Core_Model_SharePoint_IList_GetListDataAsStreamAsync_PnP_Core_Model_SharePoint_RenderListDataOptions_" class="collapse in">
-  <div class="markdown level1 summary"><p>Loads list items based up on a CAML query and the RenderListDataAsStream API</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">Task&lt;Dictionary&lt;string, object&gt;&gt; GetListDataAsStreamAsync(RenderListDataOptions renderOptions)</code></pre>
-  </div>
-
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Model.SharePoint.RenderListDataOptions.html">RenderListDataOptions</a></span>
-        <span class="parametername">renderOptions</span>
-        <p><p><a class="xref" href="PnP.Core.Model.SharePoint.RenderListDataOptions.html">RenderListDataOptions</a> defining the query to execute</p>
-</p>
-      </td>
-    </tr>
-  </table>
-  
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="xref">Task</span>&lt;<span class="xref">Dictionary</span>&lt;<a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a>, <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object">Object</a>&gt;&gt;
-        <p>
-      </td>
-    </tr>
-  </table>
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  </div>
-  
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IList_GetRoleDefinitions_System_Int32_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IList.GetRoleDefinitions(System.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
@@ -3442,6 +2679,754 @@
     <tr>
       <td>
         <span class="xref">Task</span>&lt;<a class="xref" href="PnP.Core.Model.Security.IRoleDefinitionCollection.html">IRoleDefinitionCollection</a>&gt;
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IList_LoadItemsByCamlQuery_PnP_Core_Model_SharePoint_CamlQueryOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IList.LoadItemsByCamlQuery(PnP.Core.Model.SharePoint.CamlQueryOptions)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IList.cs/#L301" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IList_LoadItemsByCamlQuery_" data-uid="PnP.Core.Model.SharePoint.IList.LoadItemsByCamlQuery*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IList_LoadItemsByCamlQuery_PnP_Core_Model_SharePoint_CamlQueryOptions_" data-uid="PnP.Core.Model.SharePoint.IList.LoadItemsByCamlQuery(PnP.Core.Model.SharePoint.CamlQueryOptions)"><a href="#collapsible-PnP_Core_Model_SharePoint_IList_LoadItemsByCamlQuery_PnP_Core_Model_SharePoint_CamlQueryOptions_" class="expander" data-toggle="collapse">LoadItemsByCamlQuery(CamlQueryOptions)</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IList_LoadItemsByCamlQuery_PnP_Core_Model_SharePoint_CamlQueryOptions_" class="collapse in">
+  <div class="markdown level1 summary"><p>Loads list items based up on a CAML query</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void LoadItemsByCamlQuery(CamlQueryOptions queryOptions)</code></pre>
+  </div>
+
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="PnP.Core.Model.SharePoint.CamlQueryOptions.html">CamlQueryOptions</a></span>
+        <span class="parametername">queryOptions</span>
+        <p><p><a class="xref" href="PnP.Core.Model.SharePoint.CamlQueryOptions.html">CamlQueryOptions</a> defining the query to execute</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IList_LoadItemsByCamlQuery_System_String_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IList.LoadItemsByCamlQuery(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IList.cs/#L287" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IList_LoadItemsByCamlQuery_" data-uid="PnP.Core.Model.SharePoint.IList.LoadItemsByCamlQuery*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IList_LoadItemsByCamlQuery_System_String_" data-uid="PnP.Core.Model.SharePoint.IList.LoadItemsByCamlQuery(System.String)"><a href="#collapsible-PnP_Core_Model_SharePoint_IList_LoadItemsByCamlQuery_System_String_" class="expander" data-toggle="collapse">LoadItemsByCamlQuery(String)</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IList_LoadItemsByCamlQuery_System_String_" class="collapse in">
+  <div class="markdown level1 summary"><p>Loads list items based up on a CAML query</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void LoadItemsByCamlQuery(string query)</code></pre>
+  </div>
+
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></span>
+        <span class="parametername">query</span>
+        <p><p>query to execute</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IList_LoadItemsByCamlQueryAsync_PnP_Core_Model_SharePoint_CamlQueryOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IList.LoadItemsByCamlQueryAsync(PnP.Core.Model.SharePoint.CamlQueryOptions)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IList.cs/#L294" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IList_LoadItemsByCamlQueryAsync_" data-uid="PnP.Core.Model.SharePoint.IList.LoadItemsByCamlQueryAsync*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IList_LoadItemsByCamlQueryAsync_PnP_Core_Model_SharePoint_CamlQueryOptions_" data-uid="PnP.Core.Model.SharePoint.IList.LoadItemsByCamlQueryAsync(PnP.Core.Model.SharePoint.CamlQueryOptions)"><a href="#collapsible-PnP_Core_Model_SharePoint_IList_LoadItemsByCamlQueryAsync_PnP_Core_Model_SharePoint_CamlQueryOptions_" class="expander" data-toggle="collapse">LoadItemsByCamlQueryAsync(CamlQueryOptions)</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IList_LoadItemsByCamlQueryAsync_PnP_Core_Model_SharePoint_CamlQueryOptions_" class="collapse in">
+  <div class="markdown level1 summary"><p>Loads list items based up on a CAML query</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task LoadItemsByCamlQueryAsync(CamlQueryOptions queryOptions)</code></pre>
+  </div>
+
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="PnP.Core.Model.SharePoint.CamlQueryOptions.html">CamlQueryOptions</a></span>
+        <span class="parametername">queryOptions</span>
+        <p><p><a class="xref" href="PnP.Core.Model.SharePoint.CamlQueryOptions.html">CamlQueryOptions</a> defining the query to execute</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="xref">Task</span>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IList_LoadItemsByCamlQueryAsync_System_String_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IList.LoadItemsByCamlQueryAsync(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IList.cs/#L280" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IList_LoadItemsByCamlQueryAsync_" data-uid="PnP.Core.Model.SharePoint.IList.LoadItemsByCamlQueryAsync*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IList_LoadItemsByCamlQueryAsync_System_String_" data-uid="PnP.Core.Model.SharePoint.IList.LoadItemsByCamlQueryAsync(System.String)"><a href="#collapsible-PnP_Core_Model_SharePoint_IList_LoadItemsByCamlQueryAsync_System_String_" class="expander" data-toggle="collapse">LoadItemsByCamlQueryAsync(String)</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IList_LoadItemsByCamlQueryAsync_System_String_" class="collapse in">
+  <div class="markdown level1 summary"><p>Loads list items based up on a CAML query</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task LoadItemsByCamlQueryAsync(string query)</code></pre>
+  </div>
+
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></span>
+        <span class="parametername">query</span>
+        <p><p>query to execute</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="xref">Task</span>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IList_LoadItemsByCamlQueryBatch_PnP_Core_Model_SharePoint_CamlQueryOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IList.LoadItemsByCamlQueryBatch(PnP.Core.Model.SharePoint.CamlQueryOptions)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IList.cs/#L329" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IList_LoadItemsByCamlQueryBatch_" data-uid="PnP.Core.Model.SharePoint.IList.LoadItemsByCamlQueryBatch*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IList_LoadItemsByCamlQueryBatch_PnP_Core_Model_SharePoint_CamlQueryOptions_" data-uid="PnP.Core.Model.SharePoint.IList.LoadItemsByCamlQueryBatch(PnP.Core.Model.SharePoint.CamlQueryOptions)"><a href="#collapsible-PnP_Core_Model_SharePoint_IList_LoadItemsByCamlQueryBatch_PnP_Core_Model_SharePoint_CamlQueryOptions_" class="expander" data-toggle="collapse">LoadItemsByCamlQueryBatch(CamlQueryOptions)</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IList_LoadItemsByCamlQueryBatch_PnP_Core_Model_SharePoint_CamlQueryOptions_" class="collapse in">
+  <div class="markdown level1 summary"><p>Loads list items based up on a CAML query</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void LoadItemsByCamlQueryBatch(CamlQueryOptions queryOptions)</code></pre>
+  </div>
+
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="PnP.Core.Model.SharePoint.CamlQueryOptions.html">CamlQueryOptions</a></span>
+        <span class="parametername">queryOptions</span>
+        <p><p><a class="xref" href="PnP.Core.Model.SharePoint.CamlQueryOptions.html">CamlQueryOptions</a> defining the query to execute</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IList_LoadItemsByCamlQueryBatch_PnP_Core_Services_Batch_PnP_Core_Model_SharePoint_CamlQueryOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IList.LoadItemsByCamlQueryBatch(PnP.Core.Services.Batch%2CPnP.Core.Model.SharePoint.CamlQueryOptions)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IList.cs/#L361" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IList_LoadItemsByCamlQueryBatch_" data-uid="PnP.Core.Model.SharePoint.IList.LoadItemsByCamlQueryBatch*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IList_LoadItemsByCamlQueryBatch_PnP_Core_Services_Batch_PnP_Core_Model_SharePoint_CamlQueryOptions_" data-uid="PnP.Core.Model.SharePoint.IList.LoadItemsByCamlQueryBatch(PnP.Core.Services.Batch,PnP.Core.Model.SharePoint.CamlQueryOptions)"><a href="#collapsible-PnP_Core_Model_SharePoint_IList_LoadItemsByCamlQueryBatch_PnP_Core_Services_Batch_PnP_Core_Model_SharePoint_CamlQueryOptions_" class="expander" data-toggle="collapse">LoadItemsByCamlQueryBatch(Batch, CamlQueryOptions)</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IList_LoadItemsByCamlQueryBatch_PnP_Core_Services_Batch_PnP_Core_Model_SharePoint_CamlQueryOptions_" class="collapse in">
+  <div class="markdown level1 summary"><p>Loads list items based up on a CAML query</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void LoadItemsByCamlQueryBatch(Batch batch, CamlQueryOptions queryOptions)</code></pre>
+  </div>
+
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></span>
+        <span class="parametername">batch</span>
+        <p><p>Batch to add this request to</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="PnP.Core.Model.SharePoint.CamlQueryOptions.html">CamlQueryOptions</a></span>
+        <span class="parametername">queryOptions</span>
+        <p><p><a class="xref" href="PnP.Core.Model.SharePoint.CamlQueryOptions.html">CamlQueryOptions</a> defining the query to execute</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IList_LoadItemsByCamlQueryBatch_PnP_Core_Services_Batch_System_String_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IList.LoadItemsByCamlQueryBatch(PnP.Core.Services.Batch%2CSystem.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IList.cs/#L345" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IList_LoadItemsByCamlQueryBatch_" data-uid="PnP.Core.Model.SharePoint.IList.LoadItemsByCamlQueryBatch*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IList_LoadItemsByCamlQueryBatch_PnP_Core_Services_Batch_System_String_" data-uid="PnP.Core.Model.SharePoint.IList.LoadItemsByCamlQueryBatch(PnP.Core.Services.Batch,System.String)"><a href="#collapsible-PnP_Core_Model_SharePoint_IList_LoadItemsByCamlQueryBatch_PnP_Core_Services_Batch_System_String_" class="expander" data-toggle="collapse">LoadItemsByCamlQueryBatch(Batch, String)</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IList_LoadItemsByCamlQueryBatch_PnP_Core_Services_Batch_System_String_" class="collapse in">
+  <div class="markdown level1 summary"><p>Loads list items based up on a CAML query</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void LoadItemsByCamlQueryBatch(Batch batch, string query)</code></pre>
+  </div>
+
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></span>
+        <span class="parametername">batch</span>
+        <p><p>Batch to add this request to</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></span>
+        <span class="parametername">query</span>
+        <p><p>query to execute</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IList_LoadItemsByCamlQueryBatch_System_String_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IList.LoadItemsByCamlQueryBatch(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IList.cs/#L315" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IList_LoadItemsByCamlQueryBatch_" data-uid="PnP.Core.Model.SharePoint.IList.LoadItemsByCamlQueryBatch*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IList_LoadItemsByCamlQueryBatch_System_String_" data-uid="PnP.Core.Model.SharePoint.IList.LoadItemsByCamlQueryBatch(System.String)"><a href="#collapsible-PnP_Core_Model_SharePoint_IList_LoadItemsByCamlQueryBatch_System_String_" class="expander" data-toggle="collapse">LoadItemsByCamlQueryBatch(String)</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IList_LoadItemsByCamlQueryBatch_System_String_" class="collapse in">
+  <div class="markdown level1 summary"><p>Loads list items based up on a CAML query</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void LoadItemsByCamlQueryBatch(string query)</code></pre>
+  </div>
+
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></span>
+        <span class="parametername">query</span>
+        <p><p>query to execute</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IList_LoadItemsByCamlQueryBatchAsync_PnP_Core_Model_SharePoint_CamlQueryOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IList.LoadItemsByCamlQueryBatchAsync(PnP.Core.Model.SharePoint.CamlQueryOptions)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IList.cs/#L322" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IList_LoadItemsByCamlQueryBatchAsync_" data-uid="PnP.Core.Model.SharePoint.IList.LoadItemsByCamlQueryBatchAsync*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IList_LoadItemsByCamlQueryBatchAsync_PnP_Core_Model_SharePoint_CamlQueryOptions_" data-uid="PnP.Core.Model.SharePoint.IList.LoadItemsByCamlQueryBatchAsync(PnP.Core.Model.SharePoint.CamlQueryOptions)"><a href="#collapsible-PnP_Core_Model_SharePoint_IList_LoadItemsByCamlQueryBatchAsync_PnP_Core_Model_SharePoint_CamlQueryOptions_" class="expander" data-toggle="collapse">LoadItemsByCamlQueryBatchAsync(CamlQueryOptions)</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IList_LoadItemsByCamlQueryBatchAsync_PnP_Core_Model_SharePoint_CamlQueryOptions_" class="collapse in">
+  <div class="markdown level1 summary"><p>Loads list items based up on a CAML query</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task LoadItemsByCamlQueryBatchAsync(CamlQueryOptions queryOptions)</code></pre>
+  </div>
+
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="PnP.Core.Model.SharePoint.CamlQueryOptions.html">CamlQueryOptions</a></span>
+        <span class="parametername">queryOptions</span>
+        <p><p><a class="xref" href="PnP.Core.Model.SharePoint.CamlQueryOptions.html">CamlQueryOptions</a> defining the query to execute</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="xref">Task</span>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IList_LoadItemsByCamlQueryBatchAsync_PnP_Core_Services_Batch_PnP_Core_Model_SharePoint_CamlQueryOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IList.LoadItemsByCamlQueryBatchAsync(PnP.Core.Services.Batch%2CPnP.Core.Model.SharePoint.CamlQueryOptions)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IList.cs/#L353" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IList_LoadItemsByCamlQueryBatchAsync_" data-uid="PnP.Core.Model.SharePoint.IList.LoadItemsByCamlQueryBatchAsync*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IList_LoadItemsByCamlQueryBatchAsync_PnP_Core_Services_Batch_PnP_Core_Model_SharePoint_CamlQueryOptions_" data-uid="PnP.Core.Model.SharePoint.IList.LoadItemsByCamlQueryBatchAsync(PnP.Core.Services.Batch,PnP.Core.Model.SharePoint.CamlQueryOptions)"><a href="#collapsible-PnP_Core_Model_SharePoint_IList_LoadItemsByCamlQueryBatchAsync_PnP_Core_Services_Batch_PnP_Core_Model_SharePoint_CamlQueryOptions_" class="expander" data-toggle="collapse">LoadItemsByCamlQueryBatchAsync(Batch, CamlQueryOptions)</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IList_LoadItemsByCamlQueryBatchAsync_PnP_Core_Services_Batch_PnP_Core_Model_SharePoint_CamlQueryOptions_" class="collapse in">
+  <div class="markdown level1 summary"><p>Loads list items based up on a CAML query</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task LoadItemsByCamlQueryBatchAsync(Batch batch, CamlQueryOptions queryOptions)</code></pre>
+  </div>
+
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></span>
+        <span class="parametername">batch</span>
+        <p><p>Batch to add this request to</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="PnP.Core.Model.SharePoint.CamlQueryOptions.html">CamlQueryOptions</a></span>
+        <span class="parametername">queryOptions</span>
+        <p><p><a class="xref" href="PnP.Core.Model.SharePoint.CamlQueryOptions.html">CamlQueryOptions</a> defining the query to execute</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="xref">Task</span>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IList_LoadItemsByCamlQueryBatchAsync_PnP_Core_Services_Batch_System_String_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IList.LoadItemsByCamlQueryBatchAsync(PnP.Core.Services.Batch%2CSystem.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IList.cs/#L337" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IList_LoadItemsByCamlQueryBatchAsync_" data-uid="PnP.Core.Model.SharePoint.IList.LoadItemsByCamlQueryBatchAsync*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IList_LoadItemsByCamlQueryBatchAsync_PnP_Core_Services_Batch_System_String_" data-uid="PnP.Core.Model.SharePoint.IList.LoadItemsByCamlQueryBatchAsync(PnP.Core.Services.Batch,System.String)"><a href="#collapsible-PnP_Core_Model_SharePoint_IList_LoadItemsByCamlQueryBatchAsync_PnP_Core_Services_Batch_System_String_" class="expander" data-toggle="collapse">LoadItemsByCamlQueryBatchAsync(Batch, String)</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IList_LoadItemsByCamlQueryBatchAsync_PnP_Core_Services_Batch_System_String_" class="collapse in">
+  <div class="markdown level1 summary"><p>Loads list items based up on a CAML query</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task LoadItemsByCamlQueryBatchAsync(Batch batch, string query)</code></pre>
+  </div>
+
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></span>
+        <span class="parametername">batch</span>
+        <p><p>Batch to add this request to</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></span>
+        <span class="parametername">query</span>
+        <p><p>query to execute</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="xref">Task</span>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IList_LoadItemsByCamlQueryBatchAsync_System_String_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IList.LoadItemsByCamlQueryBatchAsync(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IList.cs/#L308" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IList_LoadItemsByCamlQueryBatchAsync_" data-uid="PnP.Core.Model.SharePoint.IList.LoadItemsByCamlQueryBatchAsync*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IList_LoadItemsByCamlQueryBatchAsync_System_String_" data-uid="PnP.Core.Model.SharePoint.IList.LoadItemsByCamlQueryBatchAsync(System.String)"><a href="#collapsible-PnP_Core_Model_SharePoint_IList_LoadItemsByCamlQueryBatchAsync_System_String_" class="expander" data-toggle="collapse">LoadItemsByCamlQueryBatchAsync(String)</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IList_LoadItemsByCamlQueryBatchAsync_System_String_" class="collapse in">
+  <div class="markdown level1 summary"><p>Loads list items based up on a CAML query</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task LoadItemsByCamlQueryBatchAsync(string query)</code></pre>
+  </div>
+
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></span>
+        <span class="parametername">query</span>
+        <p><p>query to execute</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="xref">Task</span>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IList_LoadListDataAsStream_PnP_Core_Model_SharePoint_RenderListDataOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IList.LoadListDataAsStream(PnP.Core.Model.SharePoint.RenderListDataOptions)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IList.cs/#L375" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IList_LoadListDataAsStream_" data-uid="PnP.Core.Model.SharePoint.IList.LoadListDataAsStream*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IList_LoadListDataAsStream_PnP_Core_Model_SharePoint_RenderListDataOptions_" data-uid="PnP.Core.Model.SharePoint.IList.LoadListDataAsStream(PnP.Core.Model.SharePoint.RenderListDataOptions)"><a href="#collapsible-PnP_Core_Model_SharePoint_IList_LoadListDataAsStream_PnP_Core_Model_SharePoint_RenderListDataOptions_" class="expander" data-toggle="collapse">LoadListDataAsStream(RenderListDataOptions)</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IList_LoadListDataAsStream_PnP_Core_Model_SharePoint_RenderListDataOptions_" class="collapse in">
+  <div class="markdown level1 summary"><p>Loads list items based up on a CAML query and the RenderListDataAsStream API</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Dictionary&lt;string, object&gt; LoadListDataAsStream(RenderListDataOptions renderOptions)</code></pre>
+  </div>
+
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="PnP.Core.Model.SharePoint.RenderListDataOptions.html">RenderListDataOptions</a></span>
+        <span class="parametername">renderOptions</span>
+        <p><p><a class="xref" href="PnP.Core.Model.SharePoint.RenderListDataOptions.html">RenderListDataOptions</a> defining the query to execute</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="xref">Dictionary</span>&lt;<a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a>, <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object">Object</a>&gt;
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IList_LoadListDataAsStreamAsync_PnP_Core_Model_SharePoint_RenderListDataOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IList.LoadListDataAsStreamAsync(PnP.Core.Model.SharePoint.RenderListDataOptions)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IList.cs/#L368" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IList_LoadListDataAsStreamAsync_" data-uid="PnP.Core.Model.SharePoint.IList.LoadListDataAsStreamAsync*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IList_LoadListDataAsStreamAsync_PnP_Core_Model_SharePoint_RenderListDataOptions_" data-uid="PnP.Core.Model.SharePoint.IList.LoadListDataAsStreamAsync(PnP.Core.Model.SharePoint.RenderListDataOptions)"><a href="#collapsible-PnP_Core_Model_SharePoint_IList_LoadListDataAsStreamAsync_PnP_Core_Model_SharePoint_RenderListDataOptions_" class="expander" data-toggle="collapse">LoadListDataAsStreamAsync(RenderListDataOptions)</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IList_LoadListDataAsStreamAsync_PnP_Core_Model_SharePoint_RenderListDataOptions_" class="collapse in">
+  <div class="markdown level1 summary"><p>Loads list items based up on a CAML query and the RenderListDataAsStream API</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task&lt;Dictionary&lt;string, object&gt;&gt; LoadListDataAsStreamAsync(RenderListDataOptions renderOptions)</code></pre>
+  </div>
+
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="PnP.Core.Model.SharePoint.RenderListDataOptions.html">RenderListDataOptions</a></span>
+        <span class="parametername">renderOptions</span>
+        <p><p><a class="xref" href="PnP.Core.Model.SharePoint.RenderListDataOptions.html">RenderListDataOptions</a> defining the query to execute</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="xref">Task</span>&lt;<span class="xref">Dictionary</span>&lt;<a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a>, <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object">Object</a>&gt;&gt;
         <p>
       </td>
     </tr>
@@ -4394,6 +4379,34 @@
   
   </div>
   
+  <h3 id="extensionmethods">Extension Methods</h3>
+  <div>
+      <a class="xref" href="PnP.Core.Model.DataModelGetExtensions.html#PnP_Core_Model_DataModelGetExtensions_GetBatchAsync__1_PnP_Core_Model_IDataModelGet___0__Expression_Func___0_System_Object_____">DataModelGetExtensions.GetBatchAsync&lt;TModel&gt;(IDataModelGet&lt;TModel&gt;, Expression&lt;Func&lt;TModel, Object&gt;&gt;[])</a>
+  </div>
+  <div>
+      <a class="xref" href="PnP.Core.Model.DataModelGetExtensions.html#PnP_Core_Model_DataModelGetExtensions_GetBatch__1_PnP_Core_Model_IDataModelGet___0__PnP_Core_Services_Batch_Expression_Func___0_System_Object_____">DataModelGetExtensions.GetBatch&lt;TModel&gt;(IDataModelGet&lt;TModel&gt;, Batch, Expression&lt;Func&lt;TModel, Object&gt;&gt;[])</a>
+  </div>
+  <div>
+      <a class="xref" href="PnP.Core.Model.DataModelGetExtensions.html#PnP_Core_Model_DataModelGetExtensions_GetBatch__1_PnP_Core_Model_IDataModelGet___0__Expression_Func___0_System_Object_____">DataModelGetExtensions.GetBatch&lt;TModel&gt;(IDataModelGet&lt;TModel&gt;, Expression&lt;Func&lt;TModel, Object&gt;&gt;[])</a>
+  </div>
+  <div>
+      <a class="xref" href="PnP.Core.Model.DataModelGetExtensions.html#PnP_Core_Model_DataModelGetExtensions_Get__1_PnP_Core_Model_IDataModelGet___0__Expression_Func___0_System_Object_____">DataModelGetExtensions.Get&lt;TModel&gt;(IDataModelGet&lt;TModel&gt;, Expression&lt;Func&lt;TModel, Object&gt;&gt;[])</a>
+  </div>
+  <div>
+      <a class="xref" href="PnP.Core.Model.DataModelLoadExtensions.html#PnP_Core_Model_DataModelLoadExtensions_LoadBatchAsync__1_PnP_Core_Model_IDataModelLoad___0__Expression_Func___0_System_Object_____">DataModelLoadExtensions.LoadBatchAsync&lt;TModel&gt;(IDataModelLoad&lt;TModel&gt;, Expression&lt;Func&lt;TModel, Object&gt;&gt;[])</a>
+  </div>
+  <div>
+      <a class="xref" href="PnP.Core.Model.DataModelLoadExtensions.html#PnP_Core_Model_DataModelLoadExtensions_LoadBatch__1_PnP_Core_Model_IDataModelLoad___0__PnP_Core_Services_Batch_Expression_Func___0_System_Object_____">DataModelLoadExtensions.LoadBatch&lt;TModel&gt;(IDataModelLoad&lt;TModel&gt;, Batch, Expression&lt;Func&lt;TModel, Object&gt;&gt;[])</a>
+  </div>
+  <div>
+      <a class="xref" href="PnP.Core.Model.DataModelLoadExtensions.html#PnP_Core_Model_DataModelLoadExtensions_LoadBatch__1_PnP_Core_Model_IDataModelLoad___0__Expression_Func___0_System_Object_____">DataModelLoadExtensions.LoadBatch&lt;TModel&gt;(IDataModelLoad&lt;TModel&gt;, Expression&lt;Func&lt;TModel, Object&gt;&gt;[])</a>
+  </div>
+  <div>
+      <a class="xref" href="PnP.Core.Model.DataModelLoadExtensions.html#PnP_Core_Model_DataModelLoadExtensions_Load__1_PnP_Core_Model_IDataModelLoad___0__Expression_Func___0_System_Object_____">DataModelLoadExtensions.Load&lt;TModel&gt;(IDataModelLoad&lt;TModel&gt;, Expression&lt;Func&lt;TModel, Object&gt;&gt;[])</a>
+  </div>
+  <div>
+      <a class="xref" href="PnP.Core.Model.DataModelLoadExtensions.html#PnP_Core_Model_DataModelLoadExtensions_QueryProperties__1_PnP_Core_Model_IDataModelLoad___0__Expression_Func___0_System_Object_____">DataModelLoadExtensions.QueryProperties&lt;TModel&gt;(IDataModelLoad&lt;TModel&gt;, Expression&lt;Func&lt;TModel, Object&gt;&gt;[])</a>
+  </div>
   
 </article>
           </div>
