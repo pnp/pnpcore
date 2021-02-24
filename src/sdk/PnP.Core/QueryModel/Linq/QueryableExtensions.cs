@@ -17,7 +17,7 @@ namespace PnP.Core.QueryModel
     public static class QueryableExtensions
     {
 
-        #region AsBatchAsync
+        #region AsBatch
 
         /// <summary>
         /// Adds the query to the current batch
@@ -36,6 +36,28 @@ namespace PnP.Core.QueryModel
             if (source.Provider is IAsyncQueryProvider provider)
             {
                 return provider.AddToCurrentBatchAsync<TSource>(source.Expression);
+            }
+
+            throw new InvalidOperationException(PnPCoreResources.Exception_InvalidOperation_NotAsyncQueryableSource);
+        }
+
+        /// <summary>
+        /// Adds the query to the current batch
+        /// </summary>
+        /// <typeparam name="TSource"></typeparam>
+        /// <param name="source"></param>
+        /// <returns></returns>
+        public static IEnumerableBatchResult<TSource> AsBatch<TSource>(
+            this IQueryable<TSource> source)
+        {
+            if (source == null)
+            {
+                throw new ArgumentNullException(nameof(source));
+            }
+
+            if (source.Provider is IAsyncQueryProvider provider)
+            {
+                return provider.AddToCurrentBatchAsync<TSource>(source.Expression).GetAwaiter().GetResult();
             }
 
             throw new InvalidOperationException(PnPCoreResources.Exception_InvalidOperation_NotAsyncQueryableSource);

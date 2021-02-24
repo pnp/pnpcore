@@ -27,14 +27,23 @@ namespace PnP.Core.Test.QueryModel
             {
                 context.GraphFirst = true;
 
+                // QueryProperties with LoadAsync
                 await context.Web.LoadAsync(w => w.Title, 
                     w => w.Description, 
                     w => w.Lists.QueryProperties(l => l.Id, l => l.Title));
 
+                Assert.IsNotNull(context.Web.Lists);
+                Assert.IsTrue(context.Web.Lists.Length > 0);
+
+                // QueryProperties with GetAsync
                 var web1 = await context.Web.GetAsync(w => w.Title,
                     w => w.Description,
                     w => w.Lists.QueryProperties(l => l.Id, l => l.Title));
 
+                Assert.IsNotNull(web1.Lists);
+                Assert.IsTrue(web1.Lists.Length > 0);
+
+                // Nested QueryProperties
                 var lists1 = context.Web.Lists.QueryProperties(l => l.Id,
                         l => l.Title,
                         l => l.ContentTypes.QueryProperties(ct => ct.Id, ct => ct.Description)
@@ -45,6 +54,7 @@ namespace PnP.Core.Test.QueryModel
                     Assert.IsNotNull(l);
                 }
 
+                // Nested QueryProperties with Where
                 var lists2 = context.Web.Lists.Where(l => l.Title == "Documents")
                     .QueryProperties(l => l.Id,
                         l => l.Title,
@@ -55,6 +65,7 @@ namespace PnP.Core.Test.QueryModel
                     Assert.IsNotNull(l);
                 }
 
+                // Nested QueryProperties with FirstOrDefault
                 var list = context.Web.Lists.QueryProperties(l => l.Id,
                     l => l.Title,
                     l => l.ContentTypes.QueryProperties(ct => ct.Id, ct => ct.Description)
@@ -62,12 +73,45 @@ namespace PnP.Core.Test.QueryModel
 
                 Assert.IsNotNull(list);
 
+                // Nested QueryProperties with Take
                 var lists = context.Web.Lists.QueryProperties(l => l.Id,
                     l => l.Title,
                     l => l.ContentTypes.QueryProperties(ct => ct.Id, ct => ct.Description)
                     ).Take(2).ToArray();
 
                 Assert.IsNotNull(lists);
+
+                // AsBatchAsync
+                var queryBatchAsync = await context.Web.Lists
+                    .Where(l => l.Title == "Documents")
+                    .QueryProperties(l => l.Title, l => l.TemplateType)
+                    .AsBatchAsync();
+                Assert.IsFalse(queryBatchAsync.IsAvailable);
+
+                await context.ExecuteAsync();
+                Assert.IsTrue(queryBatchAsync.IsAvailable);
+                foreach (var l in queryBatchAsync)
+                {
+                    Assert.IsNotNull(l);
+                    Assert.IsTrue(l.IsPropertyAvailable(l => l.Title));
+                    Assert.IsTrue(l.IsPropertyAvailable(l => l.TemplateType));
+                }
+
+                // AsBatch
+                var queryBatch = context.Web.Lists
+                    .Where(l => l.Title == "Documents")
+                    .QueryProperties(l => l.Title, l => l.TemplateType)
+                    .AsBatch();
+                Assert.IsFalse(queryBatch.IsAvailable);
+
+                context.Execute();
+                Assert.IsTrue(queryBatch.IsAvailable);
+                foreach (var l in queryBatch)
+                {
+                    Assert.IsNotNull(l);
+                    Assert.IsTrue(l.IsPropertyAvailable(l => l.Title));
+                    Assert.IsTrue(l.IsPropertyAvailable(l => l.TemplateType));
+                }
             }
         }
 
