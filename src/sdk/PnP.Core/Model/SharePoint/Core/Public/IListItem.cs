@@ -354,6 +354,22 @@ namespace PnP.Core.Model.SharePoint
         /// <returns></returns>
         public Task ResetRoleInheritanceAsync();
 
+        /// <summary>
+        /// Adds a role assignment
+        /// </summary>
+        /// <param name="principalId"></param>
+        /// <param name="roleDefId"></param>
+        /// <returns></returns>
+        public Task AddRoleAssignmentAsync(int principalId, int roleDefId);
+
+        /// <summary>
+        /// Removes a role assignment
+        /// </summary>
+        /// <param name="principalId"></param>
+        /// <param name="roleDefId"></param>
+        /// <returns></returns>
+        public Task RemoveRoleAssignmentAsync(int principalId, int roleDefId);
+
         #endregion
 
         #endregion

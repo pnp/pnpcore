@@ -1273,6 +1273,18 @@ namespace PnP.Core.Model.SharePoint
             var response = await RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
         }
 
+        public async Task AddRoleAssignmentAsync(int principalId, int roleDefId)
+        {
+            var apiCall = new ApiCall("_api/Web/Lists(guid'{Parent.Id}')/items({Id})/roleassignments/addroleassignment(principalId=" + principalId + ",roleDefId=" + roleDefId + ")", ApiType.SPORest);
+            var response = await RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
+        }
+
+        public async Task RemoveRoleAssignmentAsync(int principalId, int roleDefId)
+        {
+            var apiCall = new ApiCall("_api/Web/Lists(guid'{Parent.Id}')/items({Id})/roleassignments/removeroleassignment(principalId=" + principalId + ",roleDefId=" + roleDefId + ")", ApiType.SPORest);
+            var response = await RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
+        }
+
         #endregion
 
         #endregion
