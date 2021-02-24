@@ -312,6 +312,7 @@ namespace PnP.Core.Test.Teams
                 var primaryChannel = team.Result.PrimaryChannel;
                 Assert.IsNotNull(primaryChannel);
 
+                batch = context.NewBatch();
                 var channel = primaryChannel.GetBatch(batch, o => o.Messages);
                 context.Execute(batch);
 
@@ -333,6 +334,7 @@ namespace PnP.Core.Test.Teams
                     }
                 };
 
+                batch = context.NewBatch();
                 chatMessages.AddBatch(batch,body, ChatMessageContentType.Html, hostedContents: coll);
                 context.Execute(batch);
                                 
