@@ -1,0 +1,10 @@
+--batchresponse_8b852e23-ba54-4afa-bb43-cb77c7b3646e
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+HTTP/1.1 200 OK
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+ETAG: "52250b44-fca6-4bf7-aa6f-c708d59b88ba,1"
+
+{"d":{"__metadata":{"id":"352930db-b033-4656-b158-f46c558c9019","uri":"https://jimmywim.sharepoint.com/sites/PnPCoreTest/_api/Web/Lists(guid'a9437971-bb7e-4cc5-9932-20faa78f71d8')/Items(1)","etag":"\"1\"","type":"SP.Data.ResetRoleInheritanceTestListItem"},"RoleAssignments":{"results":[{"__metadata":{"id":"https://jimmywim.sharepoint.com/sites/PnPCoreTest/_api/Web/Lists(guid'a9437971-bb7e-4cc5-9932-20faa78f71d8')/Items(1)/RoleAssignments/GetByPrincipalId(7)","uri":"https://jimmywim.sharepoint.com/sites/PnPCoreTest/_api/Web/Lists(guid'a9437971-bb7e-4cc5-9932-20faa78f71d8')/Items(1)/RoleAssignments/GetByPrincipalId(7)","type":"SP.RoleAssignment"},"Member":{"__deferred":{"uri":"https://jimmywim.sharepoint.com/sites/PnPCoreTest/_api/Web/Lists(guid'a9437971-bb7e-4cc5-9932-20faa78f71d8')/Items(1)/RoleAssignments/GetByPrincipalId(7)/Member"}},"RoleDefinitionBindings":{"__deferred":{"uri":"https://jimmywim.sharepoint.com/sites/PnPCoreTest/_api/Web/Lists(guid'a9437971-bb7e-4cc5-9932-20faa78f71d8')/Items(1)/RoleAssignments/GetByPrincipalId(7)/RoleDefinitionBindings"}},"PrincipalId":7}]},"Id":1,"ID":1}}
+--batchresponse_8b852e23-ba54-4afa-bb43-cb77c7b3646e--
