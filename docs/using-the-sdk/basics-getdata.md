@@ -1,24 +1,28 @@
-# Getting data from Microsoft 365
+# Requesting data from Microsoft 365
 
-Loading data (e.g. a SharePoint list or a Teams channel) is usually needed when you write applications using the PnP Core SDK. There are different methods to load data, ones that data for a given model instance (e.g. an [IList](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IList.html)), but also ones that populate a collection of model instances (e.g. an [IListCollection](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IListCollection.html))
+Requesting data (e.g. a SharePoint list or a Teams channel) is usually needed when you write applications using the PnP Core SDK. There are different methods to request data, ones that request data for a given model instance (e.g. an [IList](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IList.html)), but also ones that populate a collection of model instances (e.g. an [IListCollection](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IListCollection.html))
 
 In the remainder of this article you'll see a lot of `context` use: in this case this is a `PnPContext` which was obtained via the `PnPContextFactory` as explained in the [overview article](readme.md) and show below:
 
 ```csharp
 using (var context = await pnpContextFactory.CreateAsync("SiteToWorkWith"))
 {
-    // See next chapter on how to use the PnPContext for getting data
+    // See next chapter on how to use the PnPContext for requesting data
 }
 ```
 
-## Model load basics
+## Requesting model data
 
-To load model data you need to use one of the Load methods on the model. The following Load methods exist on each model, allowing you to perform a direct query or add a query to a batch for a grouped execution (see the [batch article](basics-batching.md)).
+The [PnPContext](https://pnp.github.io/pnpcore/api/PnP.Core.Services.PnPContext.html) is an entry point to the connected Site, Web, Team and more...but it's also an in-memory domain model. When you're requesting data you do have a choice: you can load the data into the domain model so it stays available as long as you keep your [PnPContext](https://pnp.github.io/pnpcore/api/PnP.Core.Services.PnPContext.html) or you can load the data into a variable which stays available for lifetime of the variable.
 
-- [LoadAsync](https://pnp.github.io/pnpcore/api/PnP.Core.Model.IDataModelGet-1.html#PnP_Core_Model_IDataModelGet_1_GetAsync_Expression_Func__0_System_Object_____)
-- [Load](https://pnp.github.io/pnpcore/api/PnP.Core.Model.IDataModelGet-1.html#collapsible-PnP_Core_Model_IDataModelGet_1_Get_Expression_Func__0_System_Object_____)
-- [LoadBatchAsync](https://pnp.github.io/pnpcore/api/PnP.Core.Model.IDataModelGet-1.html#collapsible-PnP_Core_Model_IDataModelGet_1_GetBatchAsync_Expression_Func__0_System_Object_____)
-- [LoadBatch](https://pnp.github.io/pnpcore/api/PnP.Core.Model.IDataModelGet-1.html#collapsible-PnP_Core_Model_IDataModelGet_1_GetBatch_PnP_Core_Services_Batch_Expression_Func__0_System_Object_____)
+### I want to load data into the PnPContext
+
+To load model data into the [PnPContext](https://pnp.github.io/pnpcore/api/PnP.Core.Services.PnPContext.html) you need to use one of the Load methods. The following Load methods exist on each model, allowing you to perform a direct query or add a query to a batch for a grouped execution (see the [batch article](basics-batching.md)).
+
+- [LoadAsync](https://pnp.github.io/pnpcore)
+- [Load](https://pnp.github.io/pnpcore/)
+- [LoadBatchAsync](https://pnp.github.io/pnpcore/)
+- [LoadBatch](https://pnp.github.io/pnpcore/)
 
 These methods allow you to perform a default load or a controlled load in which you specify which properties you want to get loaded. Doing a controlled load allows you to only retrieve what your applications needs and typically is faster compared to doing a default load.
 
@@ -36,12 +40,15 @@ using (var context = await pnpContextFactory.CreateAsync("SiteToWorkWith"))
     var webId = context.Web.Id;
 
     // Do a default load of the IWeb
+    // Data is loaded into the context
     await context.Web.LoadAsync();
 
     // Do a controlled load of the IWeb, only the web title is loaded
+    // Data is loaded into the context
     await context.Web.LoadAsync(p => p.Title);
 
     // Do a controlled load of the IWeb, only the web title and all the lists in the web are loaded
+    // Data is loaded into the context
     await context.Web.LoadAsync(p => p.Title, p => p.Lists);
 
     foreach (var list in context.Web.Lists)
@@ -51,27 +58,19 @@ using (var context = await pnpContextFactory.CreateAsync("SiteToWorkWith"))
 }
 ```
 
-The Load methods do load data into the domain model and that's not always what you might need: doing a Get method will be equivalent to the Load method but instead of populating the data in the domain model you just get a set of data. The following Get methods exist on each:
+### I want to load data into a variable
+
+The `Load` methods do load data into the [PnPContext](https://pnp.github.io/pnpcore/api/PnP.Core.Services.PnPContext.html) and that's not always what you might need: doing a `Get` method will be equivalent to the `Load` method but instead of populating the data in the [PnPContext](https://pnp.github.io/pnpcore/api/PnP.Core.Services.PnPContext.html) the data is loaded into a variable. The following `Get` methods exist on each:
 
 - [GetAsync](https://pnp.github.io/pnpcore)
 - [Get](https://pnp.github.io/pnpcore)
 - [GetBatchAsync](https://pnp.github.io/pnpcore)
 - [GetBatch](https://pnp.github.io/pnpcore)
 
-When you're loading data then the domain model is populated with the loaded data, but you'll also get a reference back to the domain model instance effectively giving you two ways to work with the loaded data:
-
 ```csharp
 using (var context = await pnpContextFactory.CreateAsync("SiteToWorkWith"))
 {
-    // Option A: use the domain model
-    await context.Web.LoadAsync(p => p.Title, p => p.Lists);
-
-    foreach (var list in context.Web.Lists)
-    {
-        // do something with the list
-    }
-
-    // Option B: load the data into variable without populating the domain model
+    // Load the data into variable
     var web = await context.Web.GetAsync(p => p.Title, p => p.Lists);
 
     foreach (var list in web.Lists)
@@ -81,15 +80,15 @@ using (var context = await pnpContextFactory.CreateAsync("SiteToWorkWith"))
 }
 ```
 
-## Model collection load basics
+## Requesting model collections
 
-Previous chapter showed how to load data starting from a single model (e.g. loading the [Title](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IWeb.html#collapsible-PnP_Core_Model_SharePoint_IWeb_Title) property of [IWeb](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IWeb.html)), but what if you need to load the lists of a web? One approach for loading a model collection is loading the full collection via loading the relevant parent domain model property (e.g. loading the [Lists](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IWeb.html#collapsible-PnP_Core_Model_SharePoint_IWeb_Lists) property on the [IWeb](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IWeb.html)) as shown in previous chapter. Using this approach you can either load the data in the domain model (when using a Load method) or into a variable (when using a Get method), but this approach however does not allow you to apply a filter to reduce the data being returned. Writing queries against collections is possible via the PnP Core SDK LINQ provider as shown in below sample. Note that LINQ queries always result in data loaded into a variable and not into the domain model.
+Previous chapter showed how to load data starting from a single model (e.g. loading the [Title](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IWeb.html#collapsible-PnP_Core_Model_SharePoint_IWeb_Title) property of [IWeb](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IWeb.html)), but what if you need to load the lists of a web? One approach for loading a model collection is loading the full collection via loading the relevant parent domain model property (e.g. loading the [Lists](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IWeb.html#collapsible-PnP_Core_Model_SharePoint_IWeb_Lists) property on the [IWeb](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IWeb.html)) as shown in previous chapter. Using this approach you can either load the data in the [PnPContext](https://pnp.github.io/pnpcore/api/PnP.Core.Services.PnPContext.html) (when using a `Load` method) or into a variable (when using a `Get` method), but this approach however does not allow you to apply a filter to reduce the data being returned. Writing queries against collections is possible via the PnP Core SDK LINQ provider as shown in below sample. Note that LINQ queries always result in data loaded into a variable and not into the [PnPContext](https://pnp.github.io/pnpcore/api/PnP.Core.Services.PnPContext.html).
 
 ```csharp
 using (var context = await pnpContextFactory.CreateAsync("SiteToWorkWith"))
 {
     // Option A: Load the Lists using a model load => no filtering option
-    await context.Web.GetAsync(p => p.Title, p => p.Lists);
+    var lists = await context.Web.GetAsync(p => p.Title, p => p.Lists);
 
     // Option B: Load the Lists using a LINQ query ==> filtering is possible,
     // only lists with title "Site Pages" are returned
@@ -100,15 +99,12 @@ using (var context = await pnpContextFactory.CreateAsync("SiteToWorkWith"))
 }
 ```
 
-Like with loading the model in the previous chapter you've two ways of using the data, although that for model collection loads there are some differences:
-
-- Only regular data loads have a return value, batch methods don't
-- When a collection is returned (GetAsync, Get, GetBatchAsync and GetBatch) the collection is an IEnumerable
+Like with loading the model in the previous chapter you've two ways of using the data: query the data that was loaded in the context or query the data loaded into a variable:
 
 ```csharp
 using (var context = await pnpContextFactory.CreateAsync("SiteToWorkWith"))
 {
-    // Option A: Use the lists loaded into the domain model
+    // Option A: Use the lists loaded into the context
     await context.Web.LoadAsync(p => p.Lists);
 
     foreach(var list in context.Web.Lists)
@@ -118,7 +114,7 @@ using (var context = await pnpContextFactory.CreateAsync("SiteToWorkWith"))
 
     // Option B: Use the lists from the returned collection, you're 
     // only working with the effectively returned lists. These lists
-    // are not loaded into the domain model
+    // are not loaded into the context
     var lists = await context.Web.Lists.Where(p => p.Title == "Site Pages").ToListAsync();
 
     foreach(var list in lists)
@@ -133,10 +129,10 @@ If you want to run a LINQ query on an already loaded collection of model objects
 ```csharp
 using (var context = await pnpContextFactory.CreateAsync("SiteToWorkWith"))
 {
-    // All lists loaded into the domain model
+    // All lists loaded into the context
     await context.Web.LoadAsync(p => p.Lists);
 
-    // Query the lists in the domain model
+    // Query the lists in the context using LINQ
     var sitePagesList = context.Web.Lists.AsRequested().FirstOrDefault(p => p.Title == "Site Pages"); 
 }
 ```
