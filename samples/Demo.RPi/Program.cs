@@ -74,7 +74,7 @@ namespace Demo.RPi
                     Console.ForegroundColor = ConsoleColor.Yellow;
                     Console.WriteLine("===Web (REST)===");
                     Console.WriteLine($"Title: {web.Title}");
-                    Console.WriteLine($"# Lists: {web.Lists.Count()}");
+                    Console.WriteLine($"# Lists: {web.Lists.Length}");
                     Console.ResetColor();                    
                 }
                 #endregion
