@@ -92,8 +92,8 @@
 <h2 id="getting-content-types">Getting content types</h2>
 <p>To get the existing content types you need to load the <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_ContentTypes">site's ContentTypes collection</a> or the <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IWeb.html#collapsible-PnP_Core_Model_SharePoint_IWeb_ContentTypes">list's content type collection</a>.</p>
 <pre><code class="lang-csharp">// Get site content types, also load the content types field links in one go
-await context.Web.GetAsync(p =&gt; p.ContentTypes.LoadProperties(p =&gt; p.Name, p =&gt; p.Description,
-                                                p =&gt; p.FieldLinks.LoadProperties(p =&gt; p.Name)));
+await context.Web.LoadAsync(p =&gt; p.ContentTypes.QueryProperties(p =&gt; p.Name, p =&gt; p.Description,
+                                                p =&gt; p.FieldLinks.QueryProperties(p =&gt; p.Name)));
 var contentTypes = context.Web.ContentTypes;                                                
 
 // Get list content types
@@ -126,24 +126,24 @@ await list.ContentTypes.AddAsync(&quot;0x0100302EF0D1F1DB4C4EBF58251BCCF5968F&qu
 <h3 id="adding-fields-to-the-content-type">Adding fields to the content type</h3>
 <p>Once the content type is added you typically also want to add fields to it, this is done by adding the needed fields in the <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IContentType.html#collapsible-PnP_Core_Model_SharePoint_IContentType_FieldLinks">content type's IFieldLinkCollection</a> via the <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IFieldLinkCollection.html#collapsible-PnP_Core_Model_SharePoint_IFieldLinkCollection_Add_System_String_System_String_System_Boolean_System_Boolean_System_Boolean_System_Boolean_">AddAsync method</a>.</p>
 <pre><code class="lang-csharp">// Get site content types, also load the content types field links in one go
-await context.Web.GetAsync(p =&gt; p.ContentTypes.LoadProperties(p =&gt; p.Name, p =&gt; p.Description,
-                                    p =&gt; p.FieldLinks.LoadProperties(p =&gt; p.Name)));
+await context.Web.LoadAsync(p =&gt; p.ContentTypes.QueryProperties(p =&gt; p.Name, p =&gt; p.Description,
+                                    p =&gt; p.FieldLinks.QueryProperties(p =&gt; p.Name)));
 var contentTypes = context.Web.ContentTypes;
 
 // Get the content type to update
-var contentType = contentTypes.FirstOrDefault(p =&gt; p.Name == &quot;MyContentType&quot;);
+var contentType = contentTypes.AsRequested().FirstOrDefault(p =&gt; p.Name == &quot;MyContentType&quot;);
 
 // Add existing field with internal name &quot;MyField&quot; to the content type's field link collection
 await contentType.FieldLinks.AddAsync(&quot;MyField&quot;);
 </code></pre>
 <h2 id="updating-content-types">Updating content types</h2>
 <p>Updating a content type comes down to getting a reference to the content type to update, update the needed properties and call the UpdateAsync method.</p>
-<pre><code class="lang-csharp">await context.Web.GetAsync(p =&gt; p.ContentTypes.LoadProperties(p =&gt; p.Name, p =&gt; p.Description,
-                                    p =&gt; p.FieldLinks.LoadProperties(p =&gt; p.Name)));
+<pre><code class="lang-csharp">await context.Web.LoadAsync(p =&gt; p.ContentTypes.QueryProperties(p =&gt; p.Name, p =&gt; p.Description,
+                                    p =&gt; p.FieldLinks.QueryProperties(p =&gt; p.Name)));
 var contentTypes = context.Web.ContentTypes;
 
 // Get the content type to update
-var contentType = contentTypes.FirstOrDefault(p =&gt; p.Name == &quot;MyContentType&quot;);
+var contentType = contentTypes.AsRequested().FirstOrDefault(p =&gt; p.Name == &quot;MyContentType&quot;);
 
 // Update the content type
 contentType.Description = &quot;PnP Rocks!&quot;;
@@ -154,12 +154,12 @@ await contentType.FieldLinks.AddAsync(&quot;MyRequiredField&quot;, required: tru
 </code></pre>
 <h2 id="deleting-content-types">Deleting content types</h2>
 <p>To delete a content type you need to get a reference to the content type to delete followed by calling one of the Delete methods.</p>
-<pre><code class="lang-csharp">await context.Web.GetAsync(p =&gt; p.ContentTypes.LoadProperties(p =&gt; p.Name, p =&gt; p.Description,
-                                    p =&gt; p.FieldLinks.LoadProperties(p =&gt; p.Name)));
+<pre><code class="lang-csharp">await context.Web.LoadAsync(p =&gt; p.ContentTypes.QueryProperties(p =&gt; p.Name, p =&gt; p.Description,
+                                    p =&gt; p.FieldLinks.QueryProperties(p =&gt; p.Name)));
 var contentTypes = context.Web.ContentTypes;
 
 // Get the content type to update
-var contentType = contentTypes.FirstOrDefault(p =&gt; p.Name == &quot;MyContentType&quot;);
+var contentType = contentTypes.AsRequested().FirstOrDefault(p =&gt; p.Name == &quot;MyContentType&quot;);
 
 // Delete the content type
 await contentType.DeleteAsync();

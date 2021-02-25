@@ -130,7 +130,7 @@ foreach(var field in documents.Fields)
 </code></pre>
 <p>Above samples do load all the default Field properties, but what if you are only interested in a few properties or the property you need is not loaded by default? For that purpose the best approach is using the <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.DataModelExtensions.html#collapsible-PnP_Core_Model_DataModelExtensions_LoadProperties__1_PnP_Core_Model_IDataModelCollection___0__Expression_Func___0_System_Object_____">LoadProperties method</a> as that allows for getting the needed field data in a single roundtrip to the server. Below code snippets show this method in action for loading specific field properties</p>
 <pre><code class="lang-csharp">//  Get site fields
-var web = await context.Web.GetAsync(l =&gt; l.Fields.LoadProperties(l =&gt; l.Id, l =&gt; l.InternalName, l =&gt; l.FieldTypeKind));
+var web = await context.Web.GetAsync(l =&gt; l.Fields.QueryProperties(l =&gt; l.Id, l =&gt; l.InternalName, l =&gt; l.FieldTypeKind));
 
 foreach(var field in web.Fields)
 {
@@ -138,7 +138,7 @@ foreach(var field in web.Fields)
 }
 </code></pre>
 <pre><code class="lang-csharp">//  Get documents library with fields loaded
-var documents = await context.Web.Lists.GetByTitleAsync(&quot;Documents&quot;, l =&gt; l.Fields.LoadProperties(l =&gt; l.Id, l =&gt; l.InternalName, l =&gt; l.FieldTypeKind));
+var documents = await context.Web.Lists.GetByTitleAsync(&quot;Documents&quot;, l =&gt; l.Fields.QueryProperties(l =&gt; l.Id, l =&gt; l.InternalName, l =&gt; l.FieldTypeKind));
 
 foreach(var field in documents.Fields)
 {
@@ -151,7 +151,7 @@ foreach(var field in documents.Fields)
 <p>To update a field you simply update it's value and call the Update or UpdateAsync methods:</p>
 <pre><code class="lang-csharp">// Find a field with a given id
 Guid titleFieldId = new Guid(&quot;fa564e0f-0c70-4ab9-b863-0177e6ddd247&quot;);
-IField field = await context.Web.Fields.GetFirstOrDefaultAsync(f =&gt; f.Id == titleFieldId);
+IField field = await context.Web.Fields.Where(f =&gt; f.Id == titleFieldId).FirstOrDefaultAsync();
 
 if (field != null)
 {
@@ -163,7 +163,7 @@ if (field != null)
 <p>Deleting a field can be done using the Delete or DeleteAsync methods:</p>
 <pre><code class="lang-csharp">// Find a field with a given id
 Guid titleFieldId = new Guid(&quot;fa564e0f-0c70-4ab9-b863-0177e6ddd247&quot;);
-IField field = await context.Web.Fields.GetFirstOrDefaultAsync(f =&gt; f.Id == titleFieldId);
+IField field = await context.Web.Fields.Where(f =&gt; f.Id == titleFieldId).FirstOrDefaultAsync();
 
 if (field != null)
 {

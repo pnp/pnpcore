@@ -96,7 +96,7 @@
 var team = await context.Team.GetAsync(o =&gt; o.Channels);
 
 // Get the channel               
-var channel = team.Channels.FirstOrDefault(i =&gt; i.DisplayName == &quot;General&quot;);
+var channel = team.Channels.AsRequested().FirstOrDefault(i =&gt; i.DisplayName == &quot;General&quot;);
 
 channel = await channel.GetAsync(o =&gt; o.Messages);
 var chatMessages = channel.Messages;
@@ -108,7 +108,7 @@ var chatMessages = channel.Messages;
 var team = await context.Team.GetAsync(o =&gt; o.Channels);
 
 // Get the channel
-var channel = team.Channels.FirstOrDefault(i =&gt; i.DisplayName == &quot;General&quot;);
+var channel = team.Channels.AsRequested().FirstOrDefault(i =&gt; i.DisplayName == &quot;General&quot;);
 
 channel = await channel.GetAsync(o =&gt; o.Messages);
 var chatMessages = channel.Messages;
@@ -125,7 +125,7 @@ await chatMessages.AddAsync(body);
 var team = await context.Team.GetAsync(o =&gt; o.Channels);
 
 // Get the channel
-var channel = team.Channels.FirstOrDefault(i =&gt; i.DisplayName == &quot;General&quot;);
+var channel = team.Channels.AsRequested().FirstOrDefault(i =&gt; i.DisplayName == &quot;General&quot;);
 
 channel = await channel.GetAsync(o =&gt; o.Messages);
 var chatMessages = channel.Messages;
@@ -143,7 +143,7 @@ await chatMessages.AddAsync(body, ChatMessageContentType.Html);
 var team = await context.Team.GetAsync(o =&gt; o.Channels);
 
 // Get the channel
-var channel = team.Channels.FirstOrDefault(i =&gt; i.DisplayName == &quot;General&quot;);
+var channel = team.Channels.AsRequested().FirstOrDefault(i =&gt; i.DisplayName == &quot;General&quot;);
 
 channel = await channel.GetAsync(o =&gt; o.Messages);
 var chatMessages = channel.Messages;
@@ -196,7 +196,7 @@ await chatMessages.AddAsync(body, ChatMessageContentType.Html, coll);
 var team = await context.Team.GetAsync(o =&gt; o.Channels);
 
 // Get the channel
-var channel = team.Channels.FirstOrDefault(i =&gt; i.DisplayName == &quot;General&quot;);
+var channel = team.Channels.AsRequested().FirstOrDefault(i =&gt; i.DisplayName == &quot;General&quot;);
 
 channel = await channel.GetAsync(o =&gt; o.Messages);
 var chatMessages = channel.Messages;
@@ -232,7 +232,7 @@ For information about the different types of cards, visit: <a href="https://docs
 var team = await context.Team.GetAsync(o =&gt; o.Channels);
 
 // Get the channel
-var channel = team.Channels.FirstOrDefault(i =&gt; i.DisplayName == &quot;General&quot;);
+var channel = team.Channels.AsRequested().FirstOrDefault(i =&gt; i.DisplayName == &quot;General&quot;);
 
 channel = await channel.GetAsync(o =&gt; o.Messages);
 var chatMessages = channel.Messages;

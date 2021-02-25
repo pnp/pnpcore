@@ -102,7 +102,7 @@
 <p>When you want to load the Team and Channels with specific properties populated, you can specify which properties to include by:</p>
 <pre><code class="lang-csharp">// Get the Team
  var team = await context.Team.GetAsync(
-    p =&gt; p.Channels.LoadProperties(p =&gt; p.DisplayName));
+    p =&gt; p.Channels.QueryProperties(p =&gt; p.DisplayName));
 </code></pre>
 <h3 id="getting-a-specific-channel">Getting a specific Channel</h3>
 <p>If you would like to get a specific channel you can use the extension method GetByDisplayNameAsync to get the channel by name.</p>
@@ -128,7 +128,7 @@ var primaryChannel = await team.PrimaryChannel;
 string channelName = $&quot;My Cool New Channel&quot;;
 
 // Check if the channel exists
-var channelFound = team.Channels.FirstOrDefault(p =&gt; p.DisplayName == channelName);
+var channelFound = team.Channels.Where(p =&gt; p.DisplayName == channelName).FirstOrDefault();
 if (channelFound == null)
 {
     // Add a new channel
@@ -152,7 +152,7 @@ var team = await context.Team.GetAsync(p =&gt; p.Channels);
 string channelName = $&quot;My Cool New Channel&quot;;
 
 // Get the channel you wish to update
-var channelToUpdate = team.Channels.FirstOrDefault(p =&gt; p.DisplayName == channelName);
+var channelToUpdate = team.Channels.Where(p =&gt; p.DisplayName == channelName).FirstOrDefault();
 
 if(channelToUpdate != default){
 
@@ -170,7 +170,7 @@ if(channelToUpdate != default){
 string channelName = $&quot;My Cool New Channel&quot;;
 
 // Get the channel you wish to delete
-var channelToDelete = team.Channels.FirstOrDefault(p =&gt; p.DisplayName == channelName);
+var channelToDelete = team.Channels.Where(p =&gt; p.DisplayName == channelName).FirstOrDefault();
 
 if(channelToDelete != default){
     

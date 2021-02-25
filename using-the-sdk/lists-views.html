@@ -119,7 +119,7 @@ var myView = myList.Views.Add(new ViewOptions()
 var myList = await context.Web.Lists.GetByTitleAsync(&quot;Documents&quot;, p =&gt; p.Views);
 
 // Get the view to update
-var viewToUpdate = myList.Views.FirstOrDefault(p =&gt; p.Title == &quot;All Documents&quot;);
+var viewToUpdate = myList.Views.AsRequested().FirstOrDefault(p =&gt; p.Title == &quot;All Documents&quot;);
 
 // Update the view
 viewToUpdate.Title = &quot;All&quot;;
@@ -131,7 +131,7 @@ await viewToUpdate.UpdateAsync();
 var myList = await context.Web.Lists.GetByTitleAsync(&quot;Documents&quot;, p =&gt; p.Views);
 
 // Get the view to update
-var viewToDelete = myList.Views.FirstOrDefault(p =&gt; p.Title == &quot;View to delete&quot;);
+var viewToDelete = myList.Views.AsRequested().FirstOrDefault(p =&gt; p.Title == &quot;View to delete&quot;);
 
 await viewToDelete.DeleteAsync();
 </code></pre>

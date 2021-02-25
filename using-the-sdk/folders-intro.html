@@ -101,13 +101,13 @@ var folder = await context.Web.GetFolderByIdAsync(new Guid(&quot;d50ec969-cb27-4
 var folder = (await context.Web.Lists.GetByTitleAsync(&quot;Documents&quot;, p =&gt; p.RootFolder)).RootFolder;
 
 // Get root folder of a library
-IFolder folder = await context.Web.Folders.GetFirstOrDefaultAsync(f =&gt; f.Name == &quot;SiteAssets&quot;);
+IFolder folder = await context.Web.Folders.Where(f =&gt; f.Name == &quot;SiteAssets&quot;).FirstOrDefaultAsync();
 
 // Get root folder of the web (for files living outside of a document library)
 IFolder folder = (await context.Web.GetAsync(p =&gt; p.RootFolder)).RootFolder;
 
 // Get folder collection of a web and pick the SiteAssets folder
-await context.Web.GetAsync(p =&gt; p.Folders);
+await context.Web.LoadAsync(p =&gt; p.Folders);
 var folder = context.Web.Folders.FirstOrDefault(p=&gt;p.Name == &quot;SiteAssets&quot;);
 </code></pre>
 <h3 id="the-folder-property-bag">The Folder property bag</h3>

@@ -96,10 +96,11 @@ var id = site.Id;
 </code></pre>
 <p>If you want to load additional site properties you can do that via using one of the Get methods:</p>
 <pre><code class="lang-csharp">// Load the root folder 
-await context.Web.GetAsync(p =&gt; p.RootFolder);
+await context.Web.LoadAsync(p =&gt; p.RootFolder);
 
 // Load the hub site id
-await context.Web.GetAsync(p =&gt; p.HubSiteId);
+var web = await context.Web.GetAsync(p =&gt; p.HubSiteId);
+Console.WriteLine(web.HubSiteId);
 </code></pre>
 </article>
           </div>

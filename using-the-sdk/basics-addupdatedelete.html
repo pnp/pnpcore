@@ -102,7 +102,7 @@ var addedItem = await myList.Items.AddAsync(item);
 </code></pre>
 <p>Another add example is adding (= uploading) a file to a document library:</p>
 <pre><code class="lang-csharp">// Get a reference to a folder
-IFolder siteAssetsFolder = await context.Web.Folders.GetFirstOrDefaultAsync(f =&gt; f.Name == &quot;SiteAssets&quot;);
+IFolder siteAssetsFolder = await context.Web.Folders.Where(f =&gt; f.Name == &quot;SiteAssets&quot;).FirstOrDefaultAsync();
 
 // Upload a file by adding it to the folder's files collection
 IFile addedFile = await siteAssetsFolder.Files.AddAsync(&quot;test.docx&quot;, 
@@ -127,7 +127,7 @@ await myList.UpdateAsync();
 <pre><code class="lang-csharp">// Assume the fields where not yet loaded, so loading them with the list
 var myList = await context.Web.Lists.GetByTitleAsync(&quot;My List&quot;, 
                                                     p =&gt; p.Title, p =&gt; p.Items, 
-                                                    p =&gt; p.Fields.LoadProperties(p =&gt; p.InternalName, 
+                                                    p =&gt; p.Fields.QueryProperties(p =&gt; p.InternalName, 
                                                         p =&gt; p.FieldTypeKind,
                                                         p =&gt; p.TypeAsString, 
                                                         p =&gt; p.Title));

@@ -110,11 +110,11 @@ IFolder folder = await context.Web.Folders.GetFirstOrDefaultAsync(f =&gt; f.Name
 IFolder folder = (await context.Web.GetAsync(p =&gt; p.RootFolder)).RootFolder;
 
 // Get folder collection of a web and pick the SiteAssets folder
-await context.Web.GetAsync(p =&gt; p.Folders);
-var folder = context.Web.Folders.FirstOrDefault(p=&gt;p.Name == &quot;SiteAssets&quot;);
+await context.Web.LoadAsync(p =&gt; p.Folders);
+var folder = context.Web.Folders.AsRequested().FirstOrDefault(p=&gt;p.Name == &quot;SiteAssets&quot;);
 
 // Load files property of the folder
-await folder.GetAsync(p =&gt; p.Files);
+await folder.LoadAsync(p =&gt; p.Files);
 
 foreach(var file in folder.Files)
 {
@@ -133,7 +133,7 @@ IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentU
 
 // Sample 3: Get files by loading it's folder and the containing files with their selected properties
 var folder = await context.Web.GetFolderByServerRelativeUrlAsync($&quot;{context.Uri.PathAndQuery}/SiteAssets&quot;, 
-                    p =&gt; p.Name, p =&gt; p.Files.LoadProperties(p =&gt; p.Name, p =&gt; p.Author, p =&gt; p.ModifiedBy));
+                    p =&gt; p.Name, p =&gt; p.Files.QueryProperties(p =&gt; p.Name, p =&gt; p.Author, p =&gt; p.ModifiedBy));
 foreach(var file in folder.Files)
 {
     // Do something with the file, properties Name, Author and ModifiedBy are loaded
@@ -220,7 +220,7 @@ await testDocument.DeleteAsync();
 <p>See the <a href="files-large.html">working with large files</a> page for some more complete file upload/download samples.</p>
 </div>
 <pre><code class="lang-csharp">// Get a reference to a folder
-IFolder siteAssetsFolder = await context.Web.Folders.GetFirstOrDefaultAsync(f =&gt; f.Name == &quot;SiteAssets&quot;);
+IFolder siteAssetsFolder = await context.Web.Folders.Where(f =&gt; f.Name == &quot;SiteAssets&quot;).FirstOrDefaultAsync();
 
 // Upload a file by adding it to the folder's files collection
 IFile addedFile = await siteAssetsFolder.Files.AddAsync(&quot;test.docx&quot;, 

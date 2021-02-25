@@ -96,10 +96,10 @@
 <pre><code class="lang-csharp">using (var context = await pnpContextFactory.CreateAsync(&quot;SiteToWorkWith&quot;))
 {
     // Uses a Graph API call
-    await context.Web.GetAsync(p =&gt; p.Title);
+    await context.Web.LoadAsync(p =&gt; p.Title);
 
     // Uses a SharePoint REST API call as the NoCrawl web property is not available in Graph
-    await context.Web.GetAsync(p =&gt; p.NoCrawl);
+    await context.Web.LoadAsync(p =&gt; p.NoCrawl);
 }
 </code></pre>
 <p>If you prefer a more consistent SharePoint experience you can configure the SDK to use SharePoint REST for everything that can be realized using SharePoint REST. You do this by setting the <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Services.PnPContext.html#collapsible-PnP_Core_Services_PnPContext_GraphFirst">GraphFirst property</a> on the <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Services.PnPContext.html">PnPContext</a> to false:</p>
@@ -109,10 +109,10 @@
     context.GraphFirst = false;
 
     // Uses a Graph API call
-    await context.Web.GetAsync(p =&gt; p.Title);
+    await context.Web.LoadAsync(p =&gt; p.Title);
 
     // Uses a SharePoint REST API call as the NoCrawl web property is not available in Graph
-    await context.Web.GetAsync(p =&gt; p.NoCrawl);
+    await context.Web.LoadAsync(p =&gt; p.NoCrawl);
 }
 </code></pre>
 <p>Above code snippet showed how to turn off GraphFirst for a single PnPContext, but you can also turn off GraphFirst for all contexts being created via the configuration system, see <a href="basics-settings.html">Configuring the PnP Core SDK</a> for more information.</p>

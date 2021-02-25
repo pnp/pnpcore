@@ -96,14 +96,13 @@
 var team = await context.Team.GetAsync(o =&gt; o.Channels);
 
 // Get the channel
-var channel = team.Channels.FirstOrDefault(i =&gt; i.DisplayName == &quot;General&quot;);
+var channel = team.Channels.Where(i =&gt; i.DisplayName == &quot;General&quot;).FirstOrDefault();
 
 // Load the tabs in the channel
 channel = await channel.GetAsync(o =&gt; o.Tabs);
 
 // Collection of Tabs
 var tabs = channel.Tabs;
-
 </code></pre>
 <h2 id="creating-channel-tabs">Creating Channel Tabs</h2>
 <p>The following code is an example of creating a channel tab that links to a document library:</p>
@@ -111,7 +110,7 @@ var tabs = channel.Tabs;
 var team = await context.Team.GetAsync(o =&gt; o.Channels);
                
 // Get the Channel &quot;General&quot; 
-var channel = team.Channels.FirstOrDefault(i =&gt; i.DisplayName == &quot;General&quot;);
+var channel = await team.Channels.Where(i =&gt; i.DisplayName == &quot;General&quot;).FirstOrDefaultAsync();
 
 // Load the channel tab collection
 channel = await channel.GetAsync(o =&gt; o.Tabs);
@@ -121,7 +120,6 @@ var tabName = &quot;Important Documents&quot;;
 
 // Perform the add tab operation 
 var newDocTab = channel.Tabs.AddDocumentLibraryTabAsync(tabName, new Uri(siteDocLib));
-
 </code></pre>
 <h2 id="updating-channel-tabs">Updating Channel Tabs</h2>
 <p>Channel Tabs can be updated using the standard Update() method, see code example:</p>
@@ -129,18 +127,17 @@ var newDocTab = channel.Tabs.AddDocumentLibraryTabAsync(tabName, new Uri(siteDoc
 var team = await context.Team.GetAsync(o =&gt; o.Channels);
                
 // Get the Channel &quot;General&quot; 
-var channel = team.Channels.FirstOrDefault(i =&gt; i.DisplayName == &quot;General&quot;);
+var channel = await team.Channels.Where(i =&gt; i.DisplayName == &quot;General&quot;).FirstOrDefaultAsync();
 channel = await channel.GetAsync(o =&gt; o.Tabs);
 
 var tabName = &quot;Important Documents&quot;;
-var tab = channel.Tabs.FirstOrDefault(i =&gt; i.DisplayName == tabName);
+var tab = channel.Tabs.AsRequested().FirstOrDefault(i =&gt; i.DisplayName == tabName);
 
 // Update the display name of the tab
 tab.DisplayName = &quot;Most Important Documents&quot;;
 
 // Perform the update operation
 await tab.Update();
-
 </code></pre>
 <h2 id="deleting-channel-tabs">Deleting Channel Tabs</h2>
 <p>You can delete the channel tab by getting a reference to the channel tab and running the standard delete operation in the code example below:</p>
@@ -148,13 +145,13 @@ await tab.Update();
 var team = await context.Team.GetAsync(o =&gt; o.Channels);
 
 // Get the Channel &quot;General&quot;                
-var channel = team.Channels.FirstOrDefault(i =&gt; i.DisplayName == &quot;General&quot;);
+var channel = await team.Channels.Where(i =&gt; i.DisplayName == &quot;General&quot;).FirstOrDefaultAsync();
 
 // Get the Tabs
 channel = await channel.GetAsync(o =&gt; o.Tabs);
-var tab = channel.FirstOfDefault(i=&gt;i.DisplayName == &quot;Important Documents&quot;);
-if (tab != default){
-
+var tab = channel.Tabs.AsRequested().FirstOfDefault(i =&gt; i.DisplayName == &quot;Important Documents&quot;);
+if (tab != default)
+{
     // Perform the delete operation
     await tab.DeleteAsync();
 }
