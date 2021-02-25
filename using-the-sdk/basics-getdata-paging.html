@@ -82,68 +82,28 @@
                   </div>
                     <h1 id="using-paging">Using paging</h1>
 
-<p>Being able to retrieve data in a paged manner is important when you want to use the first data rows while you're loading still additional data, but also when you're loading large data sets. When you page data you can start from either a <code>GetPagedAsync()</code> method call or from a LINQ query that uses the <code>Take()</code> method. Once you've done one of these calls to Microsoft 365 you can use the paging methods to get additional pages.</p>
+<p>Being able to retrieve data in a paged manner is important when you want to use the first data rows while you're loading still additional data, but also when you're loading large data sets. When you page data you can start from from a LINQ query that uses the <code>Take()</code> method and from that point on PnP Core SDK will handle paging for you. Sometimes a query if paged by default (e.g. loading Teams channel messages) and then the paging will happen automatically behind the scenes.</p>
 <p>In the remainder of this article you'll see a lot of <code>context</code> use: in this case this is a <code>PnPContext</code> which was obtained via the <code>PnPContextFactory</code> as explained in the <a href="readme.html">overview article</a> and show below:</p>
 <pre><code class="lang-csharp">using (var context = await pnpContextFactory.CreateAsync(&quot;SiteToWorkWith&quot;))
 {
     // See next chapter on how to use the PnPContext for getting paged data
 }
 </code></pre>
-<h2 id="supported-paging-attributes-and-methods">Supported paging attributes and methods</h2>
-<table>
-<thead>
-<tr>
-<th>Method/Attribute</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>GetPagedAsync(filter, pageSize, expression)</code></td>
-<td>Loads the first page of a given size with a filter scoping down the pages to request. Optionally an expression can be specified to only return the properties you need</td>
-</tr>
-<tr>
-<td><code>GetPagedAsync(pageSize, expression)</code></td>
-<td>Loads the first page of a given size. Optionally an expression can be specified to only return the properties you need</td>
-</tr>
-<tr>
-<td><code>CanPage</code></td>
-<td>This attribute indicates whether you can use the paging APIs to request a next page or to request all remaining pages</td>
-</tr>
-<tr>
-<td><code>GetNextPageAsync()</code></td>
-<td>Gets the next page, this method assumes you've already loaded a first page using either the <code>GetPagedAsync()</code> method or via a LINQ query that included the <code>Take()</code> method</td>
-</tr>
-<tr>
-<td><code>GetAllPagesAsync()</code></td>
-<td>Loads all the pages in a collection until there's no new data returned anymore. This method assumes you've already loaded a first page using either the <code>GetPagedAsync()</code> method or via a LINQ query that included the <code>Take()</code> method</td>
-</tr>
-</tbody>
-</table>
-<div class="NOTE">
-<h5>Note</h5>
-<p>For all these methods there's also a synchronous equivalent (just drop <code>Async</code> from the method name).</p>
-</div>
-<h2 id="examples">Examples</h2>
-<h3 id="starting-via-the-getpagedasync-method">Starting via the GetPagedAsync() method</h3>
+<h2 id="starting-via-the-take-linq-method">Starting via the Take() LINQ method</h2>
 <p>This example shows how to use paging to load lists, in the sample only the <code>Title</code> property of the list is requested, if you do not provide the expression then list default properties are loaded.</p>
 <pre><code class="lang-csharp">using (var context = await pnpContextFactory.CreateAsync(&quot;SiteToWorkWith&quot;))
 {
+    // Force rest
+    context.GraphFirst = false;
+
     // Get a first page of lists of size 2
-    await context.Web.Lists.GetPagedAsync(2, p =&gt; p.Title);
+    var lists = await context.Web.Lists.Take(2).QueryProperties(p =&gt; p.Title).ToListAsync();
 
-    // Do we have a pointer to a next page?
-    if (context.Web.Lists.CanPage)
-    {
-        // Load the next page
-        await context.Web.Lists.GetNextPageAsync();
-
-        // Load all pages
-        await context.Web.Lists.GetAllPagesAsync();
-    }
+    // Get the next page
+    lists = await context.Web.Lists.Take(2).Skip(2).QueryProperties(p =&gt; p.Title).ToListAsync();    
 }
 </code></pre>
-<h3 id="starting-via-the-getpagedasync-method-with-a-filter-and-complex-data-load-expression">Starting via the GetPagedAsync() method with a filter and complex data load expression</h3>
+<h3 id="starting-via-the-take-linq-method-with-a-filter-and-complex-data-load-expression">Starting via the Take() LINQ method with a filter and complex data load expression</h3>
 <p>This example builds on top of the previous but shows some additional capabilities:</p>
 <ul>
 <li>A complex expression is used to define which List properties to load</li>
@@ -160,40 +120,35 @@
     //     returning list properties
     //     - Title and TemplateType
     //     - ContentTypes with for each content type the FieldLinks loaded
-    var lists = await context.Web.Lists.GetPagedAsync(p =&gt; p.TemplateType == ListTemplateType.GenericList, 
-                                                      2,
-                                                      p =&gt; p.Title, p =&gt; p.TemplateType,
-                                                        p =&gt; p.ContentTypes.LoadProperties(
-                                                            p =&gt; p.Name, p =&gt; p.FieldLinks.LoadProperties(p =&gt; p.Name)));
+    var lists = await context.Web.Lists.Take(2)
+                                        .Where(p =&gt; p.TemplateType == ListTemplateType.GenericList)
+                                        .QueryProperties(p =&gt; p.Title, p =&gt; p.TemplateType,
+                                                        p =&gt; p.ContentTypes.QueryProperties(
+                                                        p =&gt; p.Name, p =&gt; p.FieldLinks.QueryProperties(p =&gt; p.Name)))
+                                        .ToListAsync();
 
-    // Do we have a pointer to a next page?
-    if (context.Web.Lists.CanPage)
-    {
-        // Load the next page
-        var nextLists = await context.Web.Lists.GetNextPageAsync();
+    // // Do we have a pointer to a next page?
+    // if (context.Web.Lists.CanPage)
+    // {
+    //     // Load the next page
+    //     var nextLists = await context.Web.Lists.GetNextPageAsync();
 
-        // Load all pages
-        await context.Web.Lists.GetAllPagesAsync();
-    }
+    //     // Load all pages
+    //     await context.Web.Lists.GetAllPagesAsync();
+    // }
 }
 </code></pre>
-<h3 id="starting-via-a-linq-query-with-take">Starting via a LINQ query with Take()</h3>
-<p>In this example a LINQ query is executed first using the <code>Take()</code> method. Once the linq query was execution was triggered (in this case by calling <code>ToListAsync()</code>), you can using the paging methods to get additional pages of data.</p>
+<h3 id="implicit-paging">Implicit paging</h3>
+<p>In this example the messages in a Team channel are queried. When doing so the underlying Graph API call will return a &quot;next page link&quot; automatically and if so this will be used to get the next messages.</p>
 <pre><code class="lang-csharp">using (var context = await pnpContextFactory.CreateAsync(&quot;SiteToWorkWith&quot;))
 {
-    // Issue a LINQ query
-    var lists = context.Web.Lists.Take(2);
-    var queryResult = await lists.ToListAsync();
+    // Retrieve the already created channel
+    var channelForPaging2 = context.Team.Channels.FirstOrDefault(p =&gt; p.DisplayName == &quot;My Channel&quot;);
 
-    // Do we have a pointer to a next page?
-    if (context.Web.Lists.CanPage)
-    {
-        // Load the next page
-        await context.Web.Lists.GetNextPageAsync();
+    // Option A: Load the messages, this will load all messages via paged requests
+    await channelForPaging2.LoadAsync(p =&gt; p.Messages);
 
-        // Load all pages
-        await context.Web.Lists.GetAllPagesAsync();
-    }
+    // Option B: 
 }
 </code></pre>
 </article>
