@@ -238,5 +238,15 @@ namespace PnP.Core.Test.Base
                 Assert.IsFalse(context.Web.Lists.First().IsPropertyAvailable(p => p.DefaultEditFormUrl));
             }
         }
+        [TestMethod]
+        public async Task CSOMUpdateWebPropertyBag()
+        {
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                context.Web.AllProperties["TestPnPProperty"] = "TestPropertyValue";
+                context.Web.AllProperties.Update();
+                Assert.AreEqual("TestPropertyValue", context.Web.AllProperties.GetString("TestPnPProperty", ""));
+            }
+        }
     }
 }
