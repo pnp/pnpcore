@@ -102,7 +102,7 @@ wget https://dotnet.microsoft.com/download/dotnet-core/scripts/v1/dotnet-install
 chmod +x dotnet-install.sh
 
 # Ignore warnings
-./dotnet-install.sh --channel LTS --architecture arm --install-dir ~/cli
+./dotnet-install.sh --channel Current --architecture arm --install-dir ~/cli
 
 # Allows running dotnet anywhere - thanks to 
 # this article https://edi.wang/post/2019/9/29/setup-net-core-30-runtime-and-sdk-on-raspberry-pi-4
@@ -111,31 +111,8 @@ export DOTNET_ROOT=$HOME/cli
 export PATH=$PATH:$HOME/cli
 </code></pre>
 <h2 id="running-the-app">Running the app</h2>
-<h3 id="register-and-configure-an-aad-app">Register and configure an AAD app</h3>
-<p>In order for the user to authenticate on the App, A new app registration should be created on Azure Portal</p>
-<ul>
-<li><p>Go to <a href="https://aad.portal.azure.com">Azure Active Directory Portal</a></p>
-</li>
-<li><p>In App registrations, click <strong>New registration</strong></p>
-</li>
-<li><p>Enter a name for your new app, make sure <em>Accounts in this organizational directory only</em> is selected</p>
-</li>
-<li><p>Under <strong>Implicit grant</strong> section, check <strong>ID tokens</strong></p>
-</li>
-<li><p>Go to <strong>API permissions</strong> section , click <strong>Add a permission</strong>
--- Select <strong>Azure Active Directory Graph</strong> &gt; <strong>Delegated permissions</strong> &gt; select <strong>Directory.Read.All</strong>
--- Select <strong>Azure Active Directory Graph</strong> &gt; <strong>Delegated permissions</strong> &gt; select <strong>User.Read</strong></p>
-</li>
-<li><p>Click <strong>Grand admin consent for {tenant}</strong></p>
-</li>
-<li><p>Change <strong>Default client type</strong> to <strong>Treat application as public client</strong> and hit Save</p>
-</li>
-<li><p>From <strong>Overview</strong>,
--- copy the value of <strong>Directory (tenant) ID</strong>
--- copy the value of <strong>Application (client) ID</strong></p>
-</li>
-</ul>
 <h3 id="configure-your-application">Configure your application</h3>
+<p>Go to GitHub and clone the repoitory in a local folder</p>
 <p>Update <strong>appsettings.json</strong> with the connection details to a demo SharePoint site:</p>
 <ul>
 <li>Configure the user name to use as the value of <code>CustomSettings:UserPrincipalName</code> in appsettings.json setting</li>
