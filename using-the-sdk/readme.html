@@ -398,7 +398,7 @@ if (document != null)
 </code></pre>
 <p>Another approach to mainly limit the data that's being pulled from Microsoft 365 is using the <code>QueryProperties()</code> method on the properties specified in the lambda expression(s), below example shows using <code>QueryProperties()</code> in a recursive manner: next to the Title property of the Web this request also loads the Lists for the Web and for each List it loads the Id, Title, DocumentTemplate and ContentTypes property. Given List ContentTypes is a collection, the Name and FieldLinks properties of each content type are loaded and, in turn, for ContentType FieldLinks, the Name property is loaded.</p>
 <pre><code class="lang-csharp">await context.Web.LoadAsync(p =&gt; p.Title,
-                            p =&gt; p.ContentTypes.LoadProperties(p =&gt; p.Name),
+                            p =&gt; p.ContentTypes.QueryProperties(p =&gt; p.Name),
                             p =&gt; p.Lists.QueryProperties(p =&gt; p.Id,
                                                          p =&gt; p.Title,
                                                          p =&gt; p.DocumentTemplate,

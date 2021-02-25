@@ -159,7 +159,7 @@ await context.Web.GetAsync(p =&gt; p.Lists);
 
 // Sample 2: Load the web content types + all lists with their content types and the content type field links
 await context.Web.GetAsync(p =&gt; p.Title,
-                           p =&gt; p.ContentTypes.LoadProperties(p =&gt; p.Name),
+                           p =&gt; p.ContentTypes.QueryProperties(p =&gt; p.Name),
                            p =&gt; p.Lists.QueryProperties(p =&gt; p.Id,
                                                         p =&gt; p.TemplateType,
                                                         p =&gt; p.Title,
