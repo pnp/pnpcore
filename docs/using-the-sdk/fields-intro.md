@@ -57,7 +57,7 @@ foreach(var field in documents.Fields)
 }
 ```
 
-Above samples do load all the default Field properties, but what if you are only interested in a few properties or the property you need is not loaded by default? For that purpose the best approach is using the [LoadProperties method](https://pnp.github.io/pnpcore/api/PnP.Core.Model.DataModelExtensions.html#collapsible-PnP_Core_Model_DataModelExtensions_LoadProperties__1_PnP_Core_Model_IDataModelCollection___0__Expression_Func___0_System_Object_____) as that allows for getting the needed field data in a single roundtrip to the server. Below code snippets show this method in action for loading specific field properties
+Above samples do load all the default Field properties, but what if you are only interested in a few properties or the property you need is not loaded by default? For that purpose the best approach is using the QueryProperties method as that allows for getting the needed field data in a single roundtrip to the server. Below code snippets show this method in action for loading specific field properties
 
 ```csharp
 //  Get site fields
