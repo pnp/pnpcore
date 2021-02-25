@@ -61,7 +61,7 @@ Above samples do load all the default Field properties, but what if you are only
 
 ```csharp
 //  Get site fields
-var web = await context.Web.GetAsync(l => l.Fields.LoadProperties(l => l.Id, l => l.InternalName, l => l.FieldTypeKind));
+var web = await context.Web.GetAsync(l => l.Fields.QueryProperties(l => l.Id, l => l.InternalName, l => l.FieldTypeKind));
 
 foreach(var field in web.Fields)
 {
@@ -71,7 +71,7 @@ foreach(var field in web.Fields)
 
 ```csharp
 //  Get documents library with fields loaded
-var documents = await context.Web.Lists.GetByTitleAsync("Documents", l => l.Fields.LoadProperties(l => l.Id, l => l.InternalName, l => l.FieldTypeKind));
+var documents = await context.Web.Lists.GetByTitleAsync("Documents", l => l.Fields.QueryProperties(l => l.Id, l => l.InternalName, l => l.FieldTypeKind));
 
 foreach(var field in documents.Fields)
 {
@@ -90,7 +90,7 @@ To update a field you simply update it's value and call the Update or UpdateAsyn
 ```csharp
 // Find a field with a given id
 Guid titleFieldId = new Guid("fa564e0f-0c70-4ab9-b863-0177e6ddd247");
-IField field = await context.Web.Fields.GetFirstOrDefaultAsync(f => f.Id == titleFieldId);
+IField field = await context.Web.Fields.Where(f => f.Id == titleFieldId).FirstOrDefaultAsync();
 
 if (field != null)
 {
@@ -106,7 +106,7 @@ Deleting a field can be done using the Delete or DeleteAsync methods:
 ```csharp
 // Find a field with a given id
 Guid titleFieldId = new Guid("fa564e0f-0c70-4ab9-b863-0177e6ddd247");
-IField field = await context.Web.Fields.GetFirstOrDefaultAsync(f => f.Id == titleFieldId);
+IField field = await context.Web.Fields.Where(f => f.Id == titleFieldId).FirstOrDefaultAsync();
 
 if (field != null)
 {

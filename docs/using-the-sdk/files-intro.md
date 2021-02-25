@@ -41,11 +41,11 @@ IFolder folder = await context.Web.Folders.GetFirstOrDefaultAsync(f => f.Name ==
 IFolder folder = (await context.Web.GetAsync(p => p.RootFolder)).RootFolder;
 
 // Get folder collection of a web and pick the SiteAssets folder
-await context.Web.GetAsync(p => p.Folders);
-var folder = context.Web.Folders.FirstOrDefault(p=>p.Name == "SiteAssets");
+await context.Web.LoadAsync(p => p.Folders);
+var folder = context.Web.Folders.AsRequested().FirstOrDefault(p=>p.Name == "SiteAssets");
 
 // Load files property of the folder
-await folder.GetAsync(p => p.Files);
+await folder.LoadAsync(p => p.Files);
 
 foreach(var file in folder.Files)
 {
@@ -68,7 +68,7 @@ IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentU
 
 // Sample 3: Get files by loading it's folder and the containing files with their selected properties
 var folder = await context.Web.GetFolderByServerRelativeUrlAsync($"{context.Uri.PathAndQuery}/SiteAssets", 
-                    p => p.Name, p => p.Files.LoadProperties(p => p.Name, p => p.Author, p => p.ModifiedBy));
+                    p => p.Name, p => p.Files.QueryProperties(p => p.Name, p => p.Author, p => p.ModifiedBy));
 foreach(var file in folder.Files)
 {
     // Do something with the file, properties Name, Author and ModifiedBy are loaded
@@ -175,7 +175,7 @@ Adding a file comes down to create a file reference and uploading the file's byt
 
 ```csharp
 // Get a reference to a folder
-IFolder siteAssetsFolder = await context.Web.Folders.GetFirstOrDefaultAsync(f => f.Name == "SiteAssets");
+IFolder siteAssetsFolder = await context.Web.Folders.Where(f => f.Name == "SiteAssets").FirstOrDefaultAsync();
 
 // Upload a file by adding it to the folder's files collection
 IFile addedFile = await siteAssetsFolder.Files.AddAsync("test.docx", 

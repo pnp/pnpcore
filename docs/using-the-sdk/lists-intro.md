@@ -42,7 +42,7 @@ var myList = await context.Web.Lists.GetByServerRelativeUrlAsync($"{context.Uri.
 var myList = await context.Web.Lists.GetByIdAsync(new Guid("d50ec969-cb27-4a49-839f-3c25d1d607d5"), p => p.TemplateType, p => p.Title);
 
 // Query on the collection
-var myList = await context.Web.Lists.GetFirstOrDefaultAsync(p=>p.Title == "Documents");
+var myList = await context.Web.Lists.Where(p=>p.Title == "Documents").FirstOrDefaultAsync();
 ```
 
 ### Enumerating lists
@@ -56,16 +56,16 @@ await context.Web.GetAsync(p => p.Lists);
 // Sample 2: Load the web content types + all lists with their content types and the content type field links
 await context.Web.GetAsync(p => p.Title,
                            p => p.ContentTypes.LoadProperties(p => p.Name),
-                           p => p.Lists.LoadProperties(p => p.Id,
-                                                       p => p.TemplateType,
-                                                       p => p.Title,
-                                                       p => p.DocumentTemplate,
-                               p => p.ContentTypes.LoadProperties(p => p.Name,
-                                    p => p.FieldLinks.LoadProperties(p => p.Name)))
+                           p => p.Lists.QueryProperties(p => p.Id,
+                                                        p => p.TemplateType,
+                                                        p => p.Title,
+                                                        p => p.DocumentTemplate,
+                               p => p.ContentTypes.QueryProperties(p => p.Name,
+                                    p => p.FieldLinks.QueryProperties(p => p.Name)))
                           );
 
 // Process the document libraries
-foreach(var list in context.Web.Lists.Where(p => TemplateType == ListTemplateType.DocumentLibrary))
+foreach(var list in context.Web.Lists.AsRequested().Where(p => TemplateType == ListTemplateType.DocumentLibrary))
 {
     // Use the list
 }
@@ -84,7 +84,7 @@ var query = (from i in context.Web.Lists
 
 // Option 2 to write the LINQ query
 var query = context.Web.Lists.Where(p => p.TemplateType == ListTemplateType.DocumentLibrary)
-                             .Load(p => p.Title, p => p.Id);
+                             .QueryProperties(p => p.Title, p => p.Id);
 
 // Execute the LINQ query                
 var lists = await query.ToListAsync();
