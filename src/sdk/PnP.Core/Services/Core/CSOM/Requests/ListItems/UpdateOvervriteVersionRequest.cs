@@ -1,9 +1,4 @@
-﻿using PnP.Core.Model.SharePoint;
-using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace PnP.Core.Services.Core.CSOM.Requests.ListItems
+﻿namespace PnP.Core.Services.Core.CSOM.Requests.ListItems
 {
     class UpdateOvervriteVersionRequest : UpdateListItemRequest
     {

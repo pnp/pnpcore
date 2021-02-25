@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace PnP.Core.Services.Core.CSOM.Utils
 {
-    interface IBodySerializer
+    internal interface IBodySerializer
     {
         string SerializeRequestBody(List<ActionObjectPath> requests);
     }

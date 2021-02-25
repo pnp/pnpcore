@@ -1,15 +1,14 @@
 ﻿using PnP.Core.Services.Core.CSOM.Utils.DateHelpers;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace PnP.Core.Services.Core.CSOM.Utils.CustomConverters
 {
-    class DateTimeConverter : JsonConverter<DateTime>
+    internal class DateTimeConverter : JsonConverter<DateTime>
     {
-        public CSOMDateConverter DateConverter = new CSOMDateConverter();
+        internal CSOMDateConverter DateConverter = new CSOMDateConverter();
+
         public override DateTime Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
             string value = reader.GetString();

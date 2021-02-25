@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace PnP.Core.Services.Core.CSOM.QueryIdentities
+﻿namespace PnP.Core.Services.Core.CSOM.QueryIdentities
 {
-    class Identity
+    internal class Identity
     {
         internal int Id { get; set; }
         internal string Name { get; set; }

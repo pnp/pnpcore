@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace PnP.Core.Services.Core.CSOM.QueryIdentities
+﻿namespace PnP.Core.Services.Core.CSOM.QueryIdentities
 {
-    class StaticProperty : Identity
+    internal class StaticProperty : Identity
     {
         internal string TypeId { get; set; }
         public override string ToString()

@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace PnP.Core.Services.Core.CSOM.Utils.Model
+﻿namespace PnP.Core.Services.Core.CSOM.Utils.Model
 {
-    class CSOMItemField<T>
+    internal class CSOMItemField<T>
     {
         public string FieldName { get; set; }
         public string FieldType { get; set; }
@@ -14,7 +10,7 @@ namespace PnP.Core.Services.Core.CSOM.Utils.Model
         {
             if(FieldValue == null)
             {
-                return String.Empty;
+                return string.Empty;
             }
             return CsomHelper.XmlString(TypeSpecificHandling(FieldValue.ToString(), FieldType), false);
         }
@@ -29,7 +25,7 @@ namespace PnP.Core.Services.Core.CSOM.Utils.Model
             return value;
         }
     }
-    class CSOMItemField : CSOMItemField<object>
+    internal class CSOMItemField : CSOMItemField<object>
     {
 
     }

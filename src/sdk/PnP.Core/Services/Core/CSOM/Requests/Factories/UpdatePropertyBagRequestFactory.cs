@@ -2,27 +2,17 @@
 using PnP.Core.Model.SharePoint;
 using PnP.Core.Services.Core.CSOM.Requests.ListItems;
 using PnP.Core.Services.Core.CSOM.Requests.Web;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace PnP.Core.Services.Core.CSOM.Requests.Factories
 {
-    class UpdatePropertyBagRequestFactory
+    internal class UpdatePropertyBagRequestFactory
     {
-        public static UpdatePropertyBagRequest GetUpdatePropertyBagRequest<T>(T propertyValueContainer) where T : IDataModelWithContext
+        internal static UpdatePropertyBagRequest GetUpdatePropertyBagRequest<T>(T propertyValueContainer) where T : IDataModelWithContext
         {
             UpdatePropertyBagRequest result = new UpdatePropertyBagRequest();
             if ((propertyValueContainer as IDataModelParent).Parent is IFolder)
             {
-                if (((propertyValueContainer as IDataModelParent).Parent as IFolder).IsPropertyAvailable(p => p.ServerRelativeUrl))
-                {
-                    result = new FolderPropertyBagUpdateRequest(((propertyValueContainer as IDataModelParent).Parent as IFolder).ServerRelativeUrl);
-                }
-                else
-                {
-                    throw new ClientException(ErrorType.Unsupported, PnPCoreResources.Exception_Unsupported_FileServerRelativeUrlNotLoaded);
-                }
+                result = new FolderPropertyBagUpdateRequest(((propertyValueContainer as IDataModelParent).Parent as IFolder).UniqueId.ToString());
             }
             else if ((propertyValueContainer as IDataModelParent).Parent is IFile)
             {

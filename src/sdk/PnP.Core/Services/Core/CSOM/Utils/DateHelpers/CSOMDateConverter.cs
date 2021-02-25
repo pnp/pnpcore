@@ -1,16 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace PnP.Core.Services.Core.CSOM.Utils.DateHelpers
 {
-    class CSOMDateConverter : IDateConversionStrategy
+    internal class CSOMDateConverter : IDateConversionStrategy
     {
-        public List<IDateConversionStrategy> AvailableConverters { get; set; } = new List<IDateConversionStrategy>()
+        internal List<IDateConversionStrategy> AvailableConverters { get; set; } = new List<IDateConversionStrategy>()
         {
             new DateConstuctorStrategy(),
             new FromMilisecondsConversionStrategy()
         };
+
         public DateTime? ConverDate(string dateValue)
         {
             DateTime? result = null;

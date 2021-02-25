@@ -1,23 +1,21 @@
 ﻿using PnP.Core.Services.Core.CSOM.Requests;
 using PnP.Core.Services.Core.CSOM.Utils;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace PnP.Core.Services.Core.CSOM
 {
-    class CSOMApiCallBuilder
+    internal class CSOMApiCallBuilder
     {
-        public IIdProvider IdProvider { get; set; } = new IteratorIdProvider();
-        public IBodySerializer RequestBodySerializer { get; set; } = new CSOMBodySerializer();
+        internal IIdProvider IdProvider { get; set; } = new IteratorIdProvider();
+        internal IBodySerializer RequestBodySerializer { get; set; } = new CSOMBodySerializer();
         protected ICollection<IRequest<object>> Requests { get; set; } = new List<IRequest<object>>();
 
-        public void AddRequest<T>(IRequest<T> request)
+        internal void AddRequest<T>(IRequest<T> request)
         {
             Requests.Add((IRequest<object>)request);
         }
 
-        public ApiCall BuildApiCall()
+        internal ApiCall BuildApiCall()
         {
 
             var requests = new List<ActionObjectPath>();
@@ -28,12 +26,15 @@ namespace PnP.Core.Services.Core.CSOM
                 requests.AddRange(actionRequests);
             }
 
-
             string requestBody = RequestBodySerializer.SerializeRequestBody(requests);
+
+            // Clear requests now that we've built the body
+            Requests.Clear();
 
             return new ApiCall(requestBody);
         }
-        public void ProcessRawResponse(string rawResponse)
+
+        internal void ProcessRawResponse(string rawResponse)
         {
             foreach (var csomRequest in Requests)
             {

@@ -1,18 +1,15 @@
-﻿using PnP.Core.Model;
-using PnP.Core.Services.Core.CSOM.QueryAction;
+﻿using PnP.Core.Services.Core.CSOM.QueryAction;
 using PnP.Core.Services.Core.CSOM.QueryIdentities;
 using PnP.Core.Services.Core.CSOM.Utils;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace PnP.Core.Services.Core.CSOM.Requests.Web
 {
-    class GetWebRequest : IRequest<Model.SharePoint.IWeb>
+    internal class GetWebRequest : IRequest<Model.SharePoint.IWeb>
     {
         public Model.SharePoint.IWeb Result { get; protected set; }
-        public int WebPropertyPath { get; protected set; }
-        public CSOMResponseHelper ResponseHelper { get; set; } = new CSOMResponseHelper();
+        internal int WebPropertyPath { get; set; }
+        internal CSOMResponseHelper ResponseHelper { get; set; } = new CSOMResponseHelper();
 
         public List<ActionObjectPath> GetRequest(IIdProvider idProvider)
         {

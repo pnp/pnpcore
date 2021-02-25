@@ -1,20 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using System.Threading.Tasks;
 
 namespace PnP.Core.Test.Services.Core.CSOM.Utils.CustomConverters
 {
-    class SPGuidConverter : JsonConverter<Guid>
+    internal class SPGuidConverter : JsonConverter<Guid>
     {
         public override Guid Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
             string value = reader.GetString();
-            Guid result;
-            if (Guid.TryParse(value.Replace("/Guid(", "").Replace(")/", ""), out result))
+            if (Guid.TryParse(value.Replace("/Guid(", "").Replace(")/", ""), out Guid result))
             {
                 return result;
             }

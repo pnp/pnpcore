@@ -2,21 +2,20 @@
 using PnP.Core.Services.Core.CSOM.QueryIdentities;
 using PnP.Core.Services.Core.CSOM.Utils;
 using PnP.Core.Services.Core.CSOM.Utils.Model;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace PnP.Core.Services.Core.CSOM.Requests.Web
 {
-    class UpdatePropertyBagRequest : IRequest<object>
+    internal class UpdatePropertyBagRequest : IRequest<object>
     {
         public object Result { get; set; }
-        public string ObjectId { get; set; } = "";
-        public string SiteId { get; set; }
-        public string WebId { get; set; }
-        public string PropertyName { get; set; } = "AllProperties";
-        public List<CSOMItemField> FieldsToUpdate { get; set; } = new List<CSOMItemField>();
-        public int IdentityPath { get; private set; }
+        internal string ObjectId { get; set; } = "";
+        internal string SiteId { get; set; }
+        internal string WebId { get; set; }
+        internal string PropertyName { get; set; } = "AllProperties";
+        internal List<CSOMItemField> FieldsToUpdate { get; set; } = new List<CSOMItemField>();
+        internal int IdentityPath { get; private set; }
+
         public List<ActionObjectPath> GetRequest(IIdProvider idProvider)
         {
             int updateActionId = idProvider.GetActionId();

@@ -3,24 +3,21 @@ using PnP.Core.Services.Core.CSOM.QueryAction;
 using PnP.Core.Services.Core.CSOM.QueryIdentities;
 using PnP.Core.Services.Core.CSOM.Utils;
 using PnP.Core.Services.Core.CSOM.Utils.Model;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace PnP.Core.Services.Core.CSOM.Requests.ListItems
 {
-    class UpdateListItemRequest : IRequest<ListItem>
+    internal class UpdateListItemRequest : IRequest<ListItem>
     {
         public ListItem Result { get; private set; }
-        public string ListId { get; set; }
-        public string SiteId { get; set; }
-        public string WebId { get; set; }
-        public int ItemId { get; set; }
-        public List<CSOMItemField> FieldsToUpdate { get; set; } = new List<CSOMItemField>();
-        public CSOMResponseHelper ResponseHelper { get; set; } = new CSOMResponseHelper();
-        public int IdentityPath { get; private set; }
-        public virtual string UpdateMethodName { get; protected set; } = "Update";
+        internal string ListId { get; set; }
+        internal string SiteId { get; set; }
+        internal string WebId { get; set; }
+        internal int ItemId { get; set; }
+        internal List<CSOMItemField> FieldsToUpdate { get; set; } = new List<CSOMItemField>();
+        internal CSOMResponseHelper ResponseHelper { get; set; } = new CSOMResponseHelper();
+        internal int IdentityPath { get; private set; }
+        internal virtual string UpdateMethodName { get; set; } = "Update";
 
         internal UpdateListItemRequest(string siteId, string webId, string listId, int itemId)
         {

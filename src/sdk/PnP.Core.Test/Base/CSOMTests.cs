@@ -241,7 +241,8 @@ namespace PnP.Core.Test.Base
         [TestMethod]
         public async Task CSOMUpdateWebPropertyBag()
         {
-            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.ClassicSTS0TestSite))
             {
                 context.Web.AllProperties["TestPnPProperty"] = "TestPropertyValue";
                 context.Web.AllProperties.Update();
