@@ -1,14 +1,13 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net5.0</TargetFramework>
     <UserSecretsId>aspnet-Demo.ASPNetCore-b1d1e506-df7c-44e8-a481-387318235e2f</UserSecretsId>
     <WebProject_DirectoryAccessLevelKey>1</WebProject_DirectoryAccessLevelKey>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Authentication.AzureAD.UI" Version="3.1.8" />
-    <PackageReference Include="Microsoft.Extensions.Options" Version="3.1.8" />
     <PackageReference Include="Microsoft.Identity.Client" Version="4.21.0" />
     <PackageReference Include="Microsoft.Identity.Web.UI" Version="1.0.0" />
     <PackageReference Include="PnP.Core.Auth" Version="0.6.1-beta3" />
