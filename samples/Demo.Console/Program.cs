@@ -318,15 +318,14 @@ namespace Consumer
                     await team.PrimaryChannel.EnsurePropertiesAsync(p => p.DisplayName, p => p.Tabs, p => p.Messages);
 
                     // Add/Delete a new tab in the primary channel
-                    // TODO: Investigate 
-                    //var pnpTab = team.PrimaryChannel.Tabs.FirstOrDefault(p => p.DisplayName == "PnPTab");
-                    //if (pnpTab != null)
-                    //{
-                    //    await pnpTab.DeleteAsync();
-                    //    Console.ForegroundColor = ConsoleColor.Yellow;
-                    //    Console.WriteLine("Deleted tab PnPTab");
-                    //    Console.ResetColor();
-                    //}
+                    var pnpTab = team.PrimaryChannel.Tabs.AsRequested().FirstOrDefault(p => p.DisplayName == "PnPTab");
+                    if (pnpTab != null)
+                    {
+                        await pnpTab.DeleteAsync();
+                        Console.ForegroundColor = ConsoleColor.Yellow;
+                        Console.WriteLine("Deleted tab PnPTab");
+                        Console.ResetColor();
+                    }
 
                     await team.PrimaryChannel.Tabs.AddDocumentLibraryTabAsync("PnPTab", new Uri($"{context.Uri}/Shared Documents"));
 
