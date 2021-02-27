@@ -97,7 +97,7 @@
 <h3 id="setup">Setup</h3>
 <div class="NOTE">
 <h5>Note</h5>
-<p>For the quickstart setup, you will need to have a recent version (&gt; 3.24) of PnP PowerShell installed on your machine.</p>
+<p>For the quickstart setup, you will need to have a recent version (&gt; 1.2.0) of PnP.PowerShell installed on your machine.</p>
 </div>
 <p>From the solution folder execute the following PowerShell.
 (Make sure you set the values of the variables according to your environment and preferences)</p>
@@ -108,6 +108,7 @@ $pwd = &quot;pwd&quot;
 </code></pre>
 <p>This script will:</p>
 <ul>
+<li>uses DeviceLogin method to connect to Azure AD</li>
 <li>register a new Azure AD application</li>
 <li>grant it the permissions to allow the use of all PnP Core SDK features</li>
 <li>Create a self signed certificate, save it to your local store and export it as .cer and .pfx files</li>
@@ -162,7 +163,7 @@ $pwd = &quot;pwd&quot;
 </table>
 <div class="NOTE">
 <h5>Note</h5>
-<p>For more information about configuring authentication, please visit <a href="https://github.com/pnp/pnpcore/blob/dev/docs/articles/consumer/configuring%20authentication.md#application-permissions-acting-as-an-app-account-with-app-only-permissions">https://github.com/pnp/pnpcore/blob/dev/docs/articles/consumer/configuring%20authentication.md#application-permissions-acting-as-an-app-account-with-app-only-permissions</a></p>
+<p>For more information about configuring authentication, please visit <a href="https://pnp.github.io/pnpcore/using-the-sdk/configuring%20authentication.html#application-permissions-acting-as-an-app-account-with-app-only-permissions">PnPCoreSDK Documentation: Using the SDK - Authentication</a></p>
 </div>
 <h3 id="try-it-locally">Try it locally</h3>
 <p>Open the solution in Visual Studio and hit F5 to launch the Azure Function emulator</p>
