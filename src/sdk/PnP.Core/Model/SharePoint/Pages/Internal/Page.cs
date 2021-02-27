@@ -19,7 +19,7 @@ namespace PnP.Core.Model.SharePoint
         private string pageTitle;
         private string pageName;
         private static readonly Expression<Func<IList, object>>[] getPagesLibraryExpression = new Expression<Func<IList, object>>[] {p => p.Title, p => p.TemplateType, p => p.EnableFolderCreation,
-            p => p.EnableMinorVersions, p => p.EnableModeration, p => p.EnableVersioning, p => p.RootFolder, p=>p.ListItemEntityTypeFullName };
+            p => p.EnableMinorVersions, p => p.EnableModeration, p => p.EnableVersioning, p => p.RootFolder, p => p.ListItemEntityTypeFullName, p => p.Fields };
 
         #region Construction
 
@@ -386,11 +386,15 @@ namespace PnP.Core.Model.SharePoint
                 {
                     if (list.IsPropertyAvailable(p => p.TemplateType) && list.TemplateType == ListTemplateType.WebPageLibrary)
                     {
-                        if (list.ArePropertiesAvailable(getPagesLibraryExpression))
+                        // The site pages library has the CanvasContent1 column, using that to distinguish between Site Pages and other wiki page libraries
+                        if (list.IsPropertyAvailable(p => p.Fields) && list.Fields.AsRequested().FirstOrDefault(p => p.InternalName == "CanvasContent1") != null)
                         {
-                            pagesLibrary = list;
+                            if (list.ArePropertiesAvailable(getPagesLibraryExpression))
+                            {
+                                pagesLibrary = list;
+                            }
+                            break;
                         }
-                        break;
                     }
                 }
             }
@@ -398,10 +402,25 @@ namespace PnP.Core.Model.SharePoint
             // No pages library found, so reload it
             if (pagesLibrary == null)
             {
-                pagesLibrary = await context.Web.Lists
-                    .QueryProperties(getPagesLibraryExpression)
-                    .FirstOrDefaultAsync(p => p.TemplateType == ListTemplateType.WebPageLibrary)
-                    .ConfigureAwait(false);
+                var libraries = await context.Web.Lists.QueryProperties(getPagesLibraryExpression)
+                                                       .Where(p => p.TemplateType == ListTemplateType.WebPageLibrary)
+                                                       .ToListAsync()
+                                                       .ConfigureAwait(false);
+                if (libraries.Count == 1)
+                {
+                    return libraries.First();
+                }
+                else
+                {
+                    foreach (var list in libraries)
+                    {
+                        if (list.IsPropertyAvailable(p => p.Fields) && list.Fields.AsRequested().FirstOrDefault(p => p.InternalName == "CanvasContent1") != null)
+                        {
+                            pagesLibrary = list;
+                            break;
+                        }
+                    }
+                }
             }
 
             return pagesLibrary;

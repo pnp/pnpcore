@@ -1,5 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PnP.Core.Model.SharePoint;
+using PnP.Core.QueryModel;
 using PnP.Core.Test.Utilities;
 using System;
 using System.Collections.Generic;
@@ -7,8 +8,6 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using PnP.Core.QueryModel;
-using PnP.Core.Model;
 
 namespace PnP.Core.Test.SharePoint
 {
@@ -189,7 +188,7 @@ namespace PnP.Core.Test.SharePoint
                     // x BERT: This still gives me back the name in English, most likely because of my user's profile
                     // I would change the test inner logic forcing the language of the request (if possible)
 
-                    // Assert.IsTrue(pages.AsEnumerable().First().PagesLibrary.Title == "Sitepagina's");
+                    Assert.IsTrue(pages.AsEnumerable().First().PagesLibrary.Title == "Sitepagina's");
                 }
 
                 // Delete the web to cleanup the test artefacts
@@ -197,6 +196,35 @@ namespace PnP.Core.Test.SharePoint
             }
         }
 
+        [TestMethod]
+        public async Task LoadPagesWhenThereAreMultiplePagesLibraries()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                // Create a new sub site to test as we don't want to break the main site home page
+                string webTitle = "PageTestSubWeb";
+                var addedWeb = await context.Web.Webs.AddAsync(new WebOptions { Title = webTitle, Url = webTitle, Language = 1033 });
+
+                // Create a context for the newly created web
+                using (var context2 = await TestCommon.Instance.CloneAsync(context, addedWeb.Url, 1))
+                {
+                    // Create a wiki page library with a name that alphabetically comes before the site pages library name
+                    await context2.Web.Lists.AddAsync("AWiki", ListTemplateType.WebPageLibrary);
+
+                    // Read the current home page
+                    string pageName = "Home.aspx";
+                    var pages = await context2.Web.GetPagesAsync(pageName);
+
+                    Assert.IsTrue(pages.AsEnumerable().First() != null);
+                    Assert.IsTrue(pages.AsEnumerable().First().PagesLibrary != null);
+                    Assert.IsTrue(pages.AsEnumerable().First().PagesLibrary.Title == "Site Pages");
+                }
+
+                // Delete the web to cleanup the test artefacts
+                await addedWeb.DeleteAsync();
+            }
+        }
 
         [TestMethod]
         public async Task LoadPagesWithSimilarNames()
