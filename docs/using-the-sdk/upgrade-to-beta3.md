@@ -45,3 +45,15 @@ GetFirstOrDefaultAsync() | FirstOrDefaultAsync() | No
 GetFirstOrDefault() | FirstOrDefault() | No
 GetFirstOrDefaultBatchAsync() | AsBatchAsync() | No
 GetFirstOrDefaultBatch() | AsBatch() | No
+
+## Querying loaded collections using LINQ
+
+Once you've loaded data you might want to query the loaded data via LINQ, previously you could simply use the LINQ extension methods like FirstOrDefault on the model collection. Since as of Beta3 we've a custom LINQ implementation and calling `FirstOrDefault` or `Where` will result in a new query. You can however cast the collection to an IEnumerable via the `AsRequested()` method and then use an OOB LINQ query.
+
+```csharp
+// Load all lists in the PnPContext
+await context.Web.LoadAsync(p => p.Lists);
+
+// Query the loaded lists via OOB LINQ
+var documentLibraries = context.Web.Lists.AsRequested().Where(p => p.TemplateType == ListTemplateType.DocumentLibrary);
+```
