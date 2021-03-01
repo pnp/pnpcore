@@ -1,4 +1,4 @@
---batchresponse_ac7dd679-b394-4806-b6b9-039cfc8b608c
+--batchresponse_15a0194f-c129-4def-bae7-b7aaf2ed86d3
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
@@ -6,4 +6,4 @@ HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
 {"d":{"results":[{"__metadata":{"id":"https://piasysdev.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'3117f749-df9d-442e-b823-8bc17b95cd59')","uri":"https://piasysdev.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'3117f749-df9d-442e-b823-8bc17b95cd59')","etag":"\"0\"","type":"SP.List"},"ContentTypes":{"results":[{"__metadata":{"id":"https://piasysdev.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'3117f749-df9d-442e-b823-8bc17b95cd59')/ContentTypes('0x0049F717319DDF2E44B8238BC17B95CD59')","uri":"https://piasysdev.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'3117f749-df9d-442e-b823-8bc17b95cd59')/ContentTypes('0x0049F717319DDF2E44B8238BC17B95CD59')","type":"SP.ContentType"},"Description":"","Id":{"__metadata":{"type":"SP.ContentTypeId"},"StringValue":"0x0049F717319DDF2E44B8238BC17B95CD59"},"StringId":"0x0049F717319DDF2E44B8238BC17B95CD59"}]},"Id":"3117f749-df9d-442e-b823-8bc17b95cd59","Title":"appdata"},{"__metadata":{"id":"https://piasysdev.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'b1734a4b-f527-49f3-aa51-84a3b4e55ae7')","uri":"https://piasysdev.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'b1734a4b-f527-49f3-aa51-84a3b4e55ae7')","etag":"\"0\"","type":"SP.List"},"ContentTypes":{"results":[{"__metadata":{"id":"https://piasysdev.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'b1734a4b-f527-49f3-aa51-84a3b4e55ae7')/ContentTypes('0x004B4A73B127F5F349AA5184A3B4E55AE7')","uri":"https://piasysdev.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'b1734a4b-f527-49f3-aa51-84a3b4e55ae7')/ContentTypes('0x004B4A73B127F5F349AA5184A3B4E55AE7')","type":"SP.ContentType"},"Description":"","Id":{"__metadata":{"type":"SP.ContentTypeId"},"StringValue":"0x004B4A73B127F5F349AA5184A3B4E55AE7"},"StringId":"0x004B4A73B127F5F349AA5184A3B4E55AE7"}]},"Id":"b1734a4b-f527-49f3-aa51-84a3b4e55ae7","Title":"appfiles"}]}}
---batchresponse_ac7dd679-b394-4806-b6b9-039cfc8b608c--
+--batchresponse_15a0194f-c129-4def-bae7-b7aaf2ed86d3--
