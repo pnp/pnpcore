@@ -90,6 +90,10 @@ namespace PnP.Core.Services.Builder.Configuration
         /// </summary>
         public bool UseIncrementalDelay { get; set; } = true;
 
+        /// <summary>
+        /// Defines the default page size for querying items in SharePoint REST
+        /// </summary>
+        public int DefaultPageSize { get; set; } = 100;
     }
 
     /// <summary>

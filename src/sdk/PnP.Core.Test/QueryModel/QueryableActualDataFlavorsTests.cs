@@ -22,7 +22,7 @@ namespace PnP.Core.Test.QueryModel
         [TestMethod]
         public async Task TestQueryPropertiesMultipleBehaviors()
         {
-            // TestCommon.Instance.Mocking = false;
+            TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 context.GraphFirst = true;
@@ -111,6 +111,14 @@ namespace PnP.Core.Test.QueryModel
                     Assert.IsNotNull(l);
                     Assert.IsTrue(l.IsPropertyAvailable(l => l.Title));
                     Assert.IsTrue(l.IsPropertyAvailable(l => l.TemplateType));
+                }
+
+                //var item = context.Web.Lists.GetByTitle("Site Pages").Items.GetById(1);
+
+                var pnpTab = context.Team.PrimaryChannel.Tabs.FirstOrDefault(p => p.DisplayName == "PnPTab");
+                if (pnpTab != null)
+                {
+                    var t = pnpTab.DisplayName;
                 }
             }
         }
