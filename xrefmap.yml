@@ -27112,6 +27112,19 @@ references:
   commentId: T:PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsSharePointRestOptions
   fullName: PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsSharePointRestOptions
   nameWithType: PnPCoreHttpRequestsSharePointRestOptions
+- uid: PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsSharePointRestOptions.DefaultPageSize
+  name: DefaultPageSize
+  href: api/PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsSharePointRestOptions.html#PnP_Core_Services_Builder_Configuration_PnPCoreHttpRequestsSharePointRestOptions_DefaultPageSize
+  commentId: P:PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsSharePointRestOptions.DefaultPageSize
+  fullName: PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsSharePointRestOptions.DefaultPageSize
+  nameWithType: PnPCoreHttpRequestsSharePointRestOptions.DefaultPageSize
+- uid: PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsSharePointRestOptions.DefaultPageSize*
+  name: DefaultPageSize
+  href: api/PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsSharePointRestOptions.html#PnP_Core_Services_Builder_Configuration_PnPCoreHttpRequestsSharePointRestOptions_DefaultPageSize_
+  commentId: Overload:PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsSharePointRestOptions.DefaultPageSize
+  isSpec: "True"
+  fullName: PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsSharePointRestOptions.DefaultPageSize
+  nameWithType: PnPCoreHttpRequestsSharePointRestOptions.DefaultPageSize
 - uid: PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsSharePointRestOptions.DelayInSeconds
   name: DelayInSeconds
   href: api/PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsSharePointRestOptions.html#PnP_Core_Services_Builder_Configuration_PnPCoreHttpRequestsSharePointRestOptions_DelayInSeconds
