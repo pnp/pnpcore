@@ -94,9 +94,169 @@ namespace PnP.Core.Test.Base
             }
         }
 
+        [Ignore]
+        [TestMethod]
+        public async Task GraphCollectionPages()
+        {
+            TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                // This rest requires beta APIs, so bail out if that's not enabled
+                if (!context.GraphCanUseBeta)
+                {
+                    Assert.Inconclusive("This test requires Graph beta to be allowed.");
+                }
+
+                // Create a new channel and add enough messages to it
+                string channelName = $"Paging test {new Random().Next()}";
+
+                if (TestCommon.Instance.Mocking)
+                {
+                    var properties = TestManager.GetProperties(context);
+                    channelName = properties["ChannelName"];
+                }
+
+                var channelForPaging = context.Team.Channels.FirstOrDefault(p => p.DisplayName == channelName);
+                if (channelForPaging == null)
+                {
+                    // Persist the created channel name as we need to have the same name when we run an offline test
+                    if (!TestCommon.Instance.Mocking)
+                    {
+                        Dictionary<string, string> properties = new Dictionary<string, string>
+                        {
+                            { "ChannelName", channelName }
+                        };
+                        TestManager.SaveProperties(context, properties);
+                    }
+
+                    channelForPaging = await context.Team.Channels.AddAsync(channelName, "Test channel, will be deleted in 21 days");
+                }
+                else
+                {
+                    Assert.Inconclusive("Test data set should be setup to not have the channel available.");
+                }
+
+                // Add messages, not using batching to ensure reliability
+                for (int i = 1; i <= 45; i++)
+                {
+                    await channelForPaging.Messages.AddAsync($"Test message{i}");
+                }
+
+                // Manual paging with Skip and Take
+                int pageCount = 0;
+                int pageSize = 10;
+
+                while (true)
+                {
+                    // Load page
+                    // TODO: check why $skip is not supported even without any $fitlers
+                    var page = context.Web.Lists.Skip(pageSize * pageCount).Take(pageSize).ToArray();
+
+                    // Check number of items returned
+                    if (pageCount != 4)
+                    {
+                        Assert.AreEqual(pageSize, page.Length);
+                    }
+                    else
+                    {
+                        Assert.AreEqual(4, page.Length);
+                    }
+
+                    pageCount++;
+
+                    if (page.Length < pageSize)
+                    {
+                        break;
+                    }
+                }
+                Assert.AreEqual(4, pageCount);
+
+                // Cleanup by deleting the channel
+                await channelForPaging.DeleteAsync();
+            }
+        }
+
         #endregion
 
         #region REST paging
+
+        [Ignore]
+        [TestMethod]
+        public async Task RESTListItemPages()
+        {
+            TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                // Force rest
+                context.GraphFirst = false;
+
+                var web = await context.Web.GetAsync(p => p.Lists);
+
+                string listTitle = "RESTListItemPaging";
+                var list = web.Lists.FirstOrDefault(p => p.Title == listTitle);
+
+                if (list != null)
+                {
+                    Assert.Inconclusive("Test data set should be setup to not have the list available.");
+                }
+                else
+                {
+                    list = await web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
+                }
+
+                if (list != null)
+                {
+                    try
+                    {
+                        // Add items
+                        for (int i = 0; i < 10; i++)
+                        {
+                            Dictionary<string, object> values = new Dictionary<string, object>
+                        {
+                            { "Title", $"Item {i}" }
+                        };
+
+                            await list.Items.AddBatchAsync(values);
+                        }
+                        await context.ExecuteAsync();
+
+                        // Manual paging with Skip and Take
+                        int pageCount = 0;
+                        int pageSize = 3;
+
+                        while (true)
+                        {
+                            // Load page
+                            // TODO: $skip is always ignored
+                            var page = list.Items.Skip(pageSize * pageCount).Take(pageSize).ToArray();
+
+                            // Check number of items returned
+                            if (pageCount != 3)
+                            {
+                                Assert.AreEqual(pageSize, page.Length);
+                            }
+                            else
+                            {
+                                Assert.AreEqual(4, page.Length);
+                            }
+
+                            pageCount++;
+
+                            if (page.Length < pageSize)
+                            {
+                                break;
+                            }
+                        }
+                        Assert.AreEqual(4, pageCount);
+                    }
+                    finally
+                    {
+                        // Clean up
+                        await list.DeleteAsync();
+                    }
+                }
+            }
+        }
 
         [TestMethod]
         public async Task RESTListItemPaging()
@@ -169,6 +329,7 @@ namespace PnP.Core.Test.Base
                 }
             }
         }
+
 
         [TestMethod]
         public async Task CamlListItemGetPagedAsyncPaging()

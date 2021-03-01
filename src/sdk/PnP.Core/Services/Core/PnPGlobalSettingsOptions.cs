@@ -56,6 +56,11 @@ namespace PnP.Core.Services
         public bool HttpSharePointRestUseRetryAfterHeader { get; set; }
 
         /// <summary>
+        /// Defines the default page size for querying items in SharePoint REST
+        /// </summary>
+        public int HttpSharePointRestDefaultPageSize { get; set; } = 100;
+
+        /// <summary>
         /// When not using retry-after, how many times can a retry be made. Defaults to 10
         /// </summary>
         public int HttpSharePointRestMaxRetries { get; set; } = 10;
