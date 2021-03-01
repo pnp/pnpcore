@@ -249,6 +249,8 @@ namespace PnP.Core.Model.SharePoint
             // Get a reference to the pages library, reuse the existing one if the correct properties were loaded
             IList pagesLibrary = await EnsurePagesLibraryAsync(context).ConfigureAwait(false);
 
+            pageName = NormalizePageName(pageName);
+
             // drop .aspx from the page name as page title is without extension
             if (!string.IsNullOrEmpty(pageName))
             {
@@ -1439,6 +1441,8 @@ namespace PnP.Core.Model.SharePoint
                 }
             }
 
+            pageName = NormalizePageName(pageName);
+
             // Validate we're not using "wrong" layouts for the given site type
             await ValidateOneColumnFullWidthSectionUsageAsync().ConfigureAwait(false);
 
@@ -1788,6 +1792,17 @@ namespace PnP.Core.Model.SharePoint
             }
 
             return new Tuple<string, string>(folderName, pageNameWithoutFolder);
+        }
+
+        private static string NormalizePageName(string pageName)
+        {
+            if (string.IsNullOrEmpty(pageName))
+            {
+                return pageName;
+            }
+
+            // if a page name contains spaces then let's replace them with dashes, just like the UI does
+            return pageName.Replace(" ", "-");
         }
 
         private async Task ValidateOneColumnFullWidthSectionUsageAsync()
