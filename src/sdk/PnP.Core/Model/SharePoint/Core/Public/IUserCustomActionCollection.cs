@@ -1,4 +1,5 @@
 using PnP.Core.Services;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -8,7 +9,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a collection of UserCustomAction objects
     /// </summary>
     [ConcreteType(typeof(UserCustomActionCollection))]
-    public interface IUserCustomActionCollection : IQueryable<IUserCustomAction>, IDataModelCollection<IUserCustomAction>, IDataModelCollectionLoad<IUserCustomAction>, IDataModelCollectionDeleteByGuidId
+    public interface IUserCustomActionCollection : IQueryable<IUserCustomAction>, IAsyncEnumerable<IUserCustomAction>, IDataModelCollection<IUserCustomAction>, IDataModelCollectionLoad<IUserCustomAction>, IDataModelCollectionDeleteByGuidId
     {
         #region Add
         /// <summary>

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 
 namespace PnP.Core.Model.SharePoint
@@ -6,7 +7,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a collection of TimeZone objects
     /// </summary>
     [ConcreteType(typeof(TimeZoneCollection))]
-    public interface ITimeZoneCollection : IQueryable<ITimeZone>, IDataModelCollection<ITimeZone>, IDataModelCollectionLoad<ITimeZone>
+    public interface ITimeZoneCollection : IQueryable<ITimeZone>, IAsyncEnumerable<ITimeZone>, IDataModelCollection<ITimeZone>, IDataModelCollectionLoad<ITimeZone>
     {
     }
 }
