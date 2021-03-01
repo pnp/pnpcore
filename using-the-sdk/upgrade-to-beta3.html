@@ -200,6 +200,14 @@
 </tr>
 </tbody>
 </table>
+<h2 id="querying-loaded-collections-using-linq">Querying loaded collections using LINQ</h2>
+<p>Once you've loaded data you might want to query the loaded data via LINQ, previously you could simply use the LINQ extension methods like FirstOrDefault on the model collection. Since as of Beta3 we've a custom LINQ implementation and calling <code>FirstOrDefault</code> or <code>Where</code> will result in a new query. You can however cast the collection to an IEnumerable via the <code>AsRequested()</code> method and then use an OOB LINQ query.</p>
+<pre><code class="lang-csharp">// Load all lists in the PnPContext
+await context.Web.LoadAsync(p =&gt; p.Lists);
+
+// Query the loaded lists via OOB LINQ
+var documentLibraries = context.Web.Lists.AsRequested().Where(p =&gt; p.TemplateType == ListTemplateType.DocumentLibrary);
+</code></pre>
 </article>
           </div>
           <div class="hidden-sm col-md-2" role="complementary">
