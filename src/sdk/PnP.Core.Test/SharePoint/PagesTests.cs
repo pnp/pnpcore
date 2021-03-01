@@ -1350,6 +1350,42 @@ namespace PnP.Core.Test.SharePoint
         }
 
         [TestMethod]
+        public async Task CreateAndUpdatePageWithSpaceInName()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var newPage = await context.Web.NewPageAsync();
+                string pageName = TestCommon.GetPnPSdkTestAssetName("CreateAndUpdatePageWith Space InName.aspx");
+                // Save the page
+                await newPage.SaveAsync(pageName);
+
+                // Update the page
+                newPage.AddSection(CanvasSectionTemplate.ThreeColumn, 1, VariantThemeType.Soft, VariantThemeType.Strong);
+                newPage.AddControl(newPage.NewTextPart("I"), newPage.Sections[0].Columns[0]);
+                newPage.AddControl(newPage.NewTextPart("like"), newPage.Sections[0].Columns[1]);
+                newPage.AddControl(newPage.NewTextPart("PnP"), newPage.Sections[0].Columns[2]);
+
+                // Update the page
+                await newPage.SaveAsync(pageName);
+
+                // Load the page again
+                var pages = await context.Web.GetPagesAsync(pageName);
+                var updatedPage = pages.AsEnumerable().First();
+
+                Assert.IsTrue(updatedPage.Sections.Count == 1);
+                Assert.IsTrue(updatedPage.Sections[0].Columns.Count == 3);
+                Assert.IsTrue(updatedPage.Sections[0].Controls.Count == 3);
+
+                // Delete the page
+                await updatedPage.DeleteAsync();
+                // Verify the page exists
+                var pages2 = await context.Web.GetPagesAsync(pageName);
+                Assert.IsTrue(pages2.Count == 0);
+            }
+        }
+
+        [TestMethod]
         public async Task CreateAndUpdatePageWithReload()
         {
             //TestCommon.Instance.Mocking = false;
