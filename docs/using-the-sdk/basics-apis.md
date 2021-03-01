@@ -19,10 +19,10 @@ The PnP Core SDK by default is configured to favor the Microsoft Graph API when 
 using (var context = await pnpContextFactory.CreateAsync("SiteToWorkWith"))
 {
     // Uses a Graph API call
-    await context.Web.GetAsync(p => p.Title);
+    await context.Web.LoadAsync(p => p.Title);
 
     // Uses a SharePoint REST API call as the NoCrawl web property is not available in Graph
-    await context.Web.GetAsync(p => p.NoCrawl);
+    await context.Web.LoadAsync(p => p.NoCrawl);
 }
 ```
 
@@ -35,10 +35,10 @@ using (var context = await pnpContextFactory.CreateAsync("SiteToWorkWith"))
     context.GraphFirst = false;
 
     // Uses a Graph API call
-    await context.Web.GetAsync(p => p.Title);
+    await context.Web.LoadAsync(p => p.Title);
 
     // Uses a SharePoint REST API call as the NoCrawl web property is not available in Graph
-    await context.Web.GetAsync(p => p.NoCrawl);
+    await context.Web.LoadAsync(p => p.NoCrawl);
 }
 ```
 

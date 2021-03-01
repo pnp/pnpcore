@@ -17,7 +17,7 @@ You can find the sample source code here: [/samples/Demo.AzureFunction](https://
 ### Setup
 
 > [!Note]
-> For the quickstart setup, you will need to have a recent version (> 3.24) of PnP PowerShell installed on your machine.
+> For the quickstart setup, you will need to have a recent version (> 1.2.0) of PnP.PowerShell installed on your machine.
 
 From the solution folder execute the following PowerShell.
 (Make sure you set the values of the variables according to your environment and preferences)
@@ -31,6 +31,7 @@ $pwd = "pwd"
 
 This script will:
 
+ - uses DeviceLogin method to connect to Azure AD
  - register a new Azure AD application
  - grant it the permissions to allow the use of all PnP Core SDK features
  - Create a self signed certificate, save it to your local store and export it as .cer and .pfx files
@@ -67,7 +68,7 @@ The settings above are mostly necessary for authentication.
 | WEBSITE_LOAD_CERTIFICATES | The Thumbprint of the certificate. Indicates the Azure Function runtime to load the certificate from its registered certificates.
 
 > [!Note]
-> For more information about configuring authentication, please visit https://github.com/pnp/pnpcore/blob/dev/docs/articles/consumer/configuring%20authentication.md#application-permissions-acting-as-an-app-account-with-app-only-permissions
+> For more information about configuring authentication, please visit [PnPCoreSDK Documentation: Using the SDK - Authentication](https://pnp.github.io/pnpcore/using-the-sdk/configuring%20authentication.html#application-permissions-acting-as-an-app-account-with-app-only-permissions)
 
 ### Try it locally
 

@@ -13,7 +13,7 @@ The following example will show you how to retrieve all the messages within a ch
 var team = await context.Team.GetAsync(o => o.Channels);
 
 // Get the channel               
-var channel = team.Channels.FirstOrDefault(i => i.DisplayName == "General");
+var channel = team.Channels.AsRequested().FirstOrDefault(i => i.DisplayName == "General");
 
 channel = await channel.GetAsync(o => o.Messages);
 var chatMessages = channel.Messages;
@@ -29,7 +29,7 @@ You can post messages to the chat within a channel, the following code demonstra
 var team = await context.Team.GetAsync(o => o.Channels);
 
 // Get the channel
-var channel = team.Channels.FirstOrDefault(i => i.DisplayName == "General");
+var channel = team.Channels.AsRequested().FirstOrDefault(i => i.DisplayName == "General");
 
 channel = await channel.GetAsync(o => o.Messages);
 var chatMessages = channel.Messages;
@@ -50,7 +50,7 @@ You can add chat messages that contain a HTML body, the following code sample wi
 var team = await context.Team.GetAsync(o => o.Channels);
 
 // Get the channel
-var channel = team.Channels.FirstOrDefault(i => i.DisplayName == "General");
+var channel = team.Channels.AsRequested().FirstOrDefault(i => i.DisplayName == "General");
 
 channel = await channel.GetAsync(o => o.Messages);
 var chatMessages = channel.Messages;
@@ -74,7 +74,7 @@ The following code shows an example of how an attachment is done:
 var team = await context.Team.GetAsync(o => o.Channels);
 
 // Get the channel
-var channel = team.Channels.FirstOrDefault(i => i.DisplayName == "General");
+var channel = team.Channels.AsRequested().FirstOrDefault(i => i.DisplayName == "General");
 
 channel = await channel.GetAsync(o => o.Messages);
 var chatMessages = channel.Messages;
@@ -129,7 +129,7 @@ Adding a chat message can be done using a Card, see below adaptive card example:
 var team = await context.Team.GetAsync(o => o.Channels);
 
 // Get the channel
-var channel = team.Channels.FirstOrDefault(i => i.DisplayName == "General");
+var channel = team.Channels.AsRequested().FirstOrDefault(i => i.DisplayName == "General");
 
 channel = await channel.GetAsync(o => o.Messages);
 var chatMessages = channel.Messages;
@@ -172,7 +172,7 @@ Chat messages can also include inline images. The following example demonstrates
 var team = await context.Team.GetAsync(o => o.Channels);
 
 // Get the channel
-var channel = team.Channels.FirstOrDefault(i => i.DisplayName == "General");
+var channel = team.Channels.AsRequested().FirstOrDefault(i => i.DisplayName == "General");
 
 channel = await channel.GetAsync(o => o.Messages);
 var chatMessages = channel.Messages;

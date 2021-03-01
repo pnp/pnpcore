@@ -20,16 +20,16 @@ var web = context.Web;
 var id = web.Id;
 ```
 
-If you want to load additional web properties you can do that via using one of the Get methods:
+If you want to load additional web properties you can do that via using one of the `Load`/`Get` methods:
 
 ```csharp
 // Load the root folder 
-await context.Web.GetAsync(p => p.RootFolder);
+await context.Web.LoadAsync(p => p.RootFolder);
 
 // Load the title and content types and lists. For content types ans lists load additional properties
-await context.Web.GetAsync(p => p.Title,
-                           p => p.ContentTypes.LoadProperties(p => p.Name),
-                           p => p.Lists.LoadProperties(p => p.Id, p => p.Title, p => p.DocumentTemplate));
+var web = await context.Web.GetAsync(p => p.Title,
+                           p => p.ContentTypes.QueryProperties(p => p.Name),
+                           p => p.Lists.QueryProperties(p => p.Id, p => p.Title, p => p.DocumentTemplate));
 ```
 
 ### Getting sub webs

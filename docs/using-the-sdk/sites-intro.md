@@ -24,8 +24,9 @@ If you want to load additional site properties you can do that via using one of 
 
 ```csharp
 // Load the root folder 
-await context.Web.GetAsync(p => p.RootFolder);
+await context.Web.LoadAsync(p => p.RootFolder);
 
 // Load the hub site id
-await context.Web.GetAsync(p => p.HubSiteId);
+var web = await context.Web.GetAsync(p => p.HubSiteId);
+Console.WriteLine(web.HubSiteId);
 ```

@@ -171,8 +171,8 @@ namespace Consumer
                     }
 
                     // Getting the messages in the default team channel, first ensure 
-                    await team.EnsurePropertiesAsync(p => p.PrimaryChannel);
-                    await team.PrimaryChannel.GetAsync(p => p.Messages);
+                    await team.LoadAsync(p => p.PrimaryChannel);
+                    await team.PrimaryChannel.LoadAsync(p => p.Messages);
 
                     Console.ForegroundColor = ConsoleColor.Yellow;
                     Console.WriteLine("===Team channel messages (Graph beta)===");
@@ -232,12 +232,13 @@ namespace Consumer
                 using (var context = pnpContextFactory.Create("DemoSite"))
                 {
                     // Or we can retrieve a specific item
-                    var listItem = context.Web.Lists.GetByTitle("Site Assets").Items.GetById(1);
+                    // TODO: Issue with Cascading sychronous loads
+                    //var listItem = context.Web.Lists.GetByTitle("Site Assets").Items.GetById(1);
 
-                    Console.ForegroundColor = ConsoleColor.Yellow;
-                    Console.WriteLine("===LINQ: Retrieve list item by id===");
-                    Console.WriteLine($"Item with title '{listItem.Title}' has ID: {listItem.Id}");
-                    Console.ResetColor();
+                    //Console.ForegroundColor = ConsoleColor.Yellow;
+                    //Console.WriteLine("===LINQ: Retrieve list item by id===");
+                    //Console.WriteLine($"Item with title '{listItem.Title}' has ID: {listItem.Id}");
+                    //Console.ResetColor();
                 }
 
                 using (var context = pnpContextFactory.Create("DemoSite"))
@@ -288,7 +289,7 @@ namespace Consumer
                     // Send 20 adds + reload as a single operation (=batch) to server
                     await context.ExecuteAsync();
                     Console.ForegroundColor = ConsoleColor.Yellow;
-                    Console.WriteLine($"List with title '{newList.Title}' has {newList.Items.Count()} items");
+                    Console.WriteLine($"List with title '{newList.Title}' has {newList.Items.Length} items");
                     Console.ResetColor();
 
                     // Update item
@@ -310,12 +311,14 @@ namespace Consumer
                     Console.ResetColor();
 
                     // Get team channels and primary channel
-                    var team = await context.Team.GetAsync(p => p.Channels, p => p.PrimaryChannel, p => p.FunSettings);
+                    var team = await context.Team.GetAsync(p => p.Channels, 
+                        p => p.PrimaryChannel, p => p.FunSettings);
+
                     // Ensure the needed properties were loaded
                     await team.PrimaryChannel.EnsurePropertiesAsync(p => p.DisplayName, p => p.Tabs, p => p.Messages);
 
                     // Add/Delete a new tab in the primary channel
-                    var pnpTab = team.PrimaryChannel.Tabs.FirstOrDefault(p => p.DisplayName == "PnPTab");
+                    var pnpTab = team.PrimaryChannel.Tabs.AsRequested().FirstOrDefault(p => p.DisplayName == "PnPTab");
                     if (pnpTab != null)
                     {
                         await pnpTab.DeleteAsync();
@@ -357,25 +360,26 @@ namespace Consumer
 
                     // Get team channels and primary channel
                     var team = await context.Team.GetAsync(p => p.PrimaryChannel);
-                    // Load the first set of messages
-                    await team.PrimaryChannel.GetAsync(p => p.Messages);
+                    await team.PrimaryChannel.EnsurePropertiesAsync(p => p.Messages);
 
                     Console.ForegroundColor = ConsoleColor.Yellow;
-                    Console.WriteLine($"Current number of messages: {team.PrimaryChannel.Messages.Count()}");
+                    Console.WriteLine($"Current number of messages: {team.PrimaryChannel.Messages.Length}");
                     Console.ResetColor();
 
-                    if (team.PrimaryChannel.Messages.CanPage)
+                    if (team.PrimaryChannel.Messages.Length > 0)
                     {
-                        await team.PrimaryChannel.Messages.GetNextPageAsync();
+                        Console.ForegroundColor = ConsoleColor.Yellow;
+                        Console.WriteLine("===Next page loaded==");
+                        Console.WriteLine($"Current number of messages: {team.PrimaryChannel.Messages.Take(2).AsEnumerable().Count()}");
+                        Console.ResetColor();
 
                         Console.ForegroundColor = ConsoleColor.Yellow;
                         Console.WriteLine("===Next page loaded==");
-                        Console.WriteLine($"Current number of messages: {team.PrimaryChannel.Messages.Count()}");
+                        Console.WriteLine($"Current number of messages: {team.PrimaryChannel.Messages.Take(2).Skip(2).AsEnumerable().Count()}");
                         Console.ResetColor();
 
-                        await team.PrimaryChannel.Messages.GetAllPagesAsync();
                         Console.WriteLine("===All pages loaded==");
-                        Console.WriteLine($"Current number of messages: {team.PrimaryChannel.Messages.Count()}");
+                        Console.WriteLine($"Current number of messages: {team.PrimaryChannel.Messages.Length}");
                         Console.ResetColor();
                     }
                 }

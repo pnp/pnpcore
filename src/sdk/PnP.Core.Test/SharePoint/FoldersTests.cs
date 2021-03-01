@@ -170,9 +170,8 @@ namespace PnP.Core.Test.SharePoint
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                var list = context.Web.Lists.GetByTitle("Site Pages", p => p.Title, p => p.RootFolder);
-
-                var properties = (await list.RootFolder.GetAsync(p => p.Properties)).Properties;
+                var list = context.Web.Lists.GetByTitle("Site Pages", p => p.Title, p => p.RootFolder.QueryProperties(p => p.Properties));
+                var properties = list.RootFolder.Properties;
 
                 var propertyKey = "ListPropertiesTest123";
                 var myProperty = properties.GetString(propertyKey, null);

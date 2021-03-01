@@ -32,7 +32,7 @@ namespace Demo.AzureFunction
                 IList sharedDocuments = await pnpContext.Web.Lists.GetByTitleAsync("Documents", l => l.RootFolder);
                 var sharedDocumentsFolder = await sharedDocuments.RootFolder.GetAsync(f => f.Files);
 
-                var documents = (from d in sharedDocumentsFolder.Files
+                var documents = (from d in sharedDocumentsFolder.Files.AsEnumerable()
                                  select new
                                  {
                                      d.Name,

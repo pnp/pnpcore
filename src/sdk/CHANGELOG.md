@@ -61,6 +61,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Rewrite of the auth model, fixes #43 [PaoloPia - Paolo Pialorsi]
 - LoadProperties now also supports Graph #145 [jansenbe - Bert Jansen]
 - Authentication enhancements #302 [sebastianmattar - Sebastian Mattar]
+- CSOM Light client - first step implementation for PropertyBag updates #334 [mgwojciech - Marcin Wojciechowski]
 
 ### Changed
 

@@ -362,6 +362,78 @@ namespace PnP.Core.Test.SharePoint
         }
 
         [TestMethod]
+        public async Task SetWebPropertiesBooleanTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.ClassicSTS0TestSite))
+            {
+                // Test safety - sites typically are noscript sites
+                bool isNoScript = await context.Web.IsNoScriptSiteAsync();
+
+                if (!isNoScript)
+                {
+                    var web = await context.Web.GetAsync(p => p.AllProperties);
+
+                    var propertyKey = "SetWebPropertiesBooleanTest";
+                    var myProperty = web.AllProperties.GetBoolean(propertyKey, false);
+                    if (myProperty == false)
+                    {
+                        web.AllProperties[propertyKey] = true;
+                        await web.AllProperties.UpdateAsync();
+                    }
+
+                    web = await context.Web.GetAsync(p => p.AllProperties);
+                    myProperty = web.AllProperties.GetBoolean(propertyKey, false);
+                    Assert.IsTrue(myProperty == true);
+
+                    web.AllProperties[propertyKey] = null;
+                    await web.AllProperties.UpdateAsync();
+
+                    web = await context.Web.GetAsync(p => p.AllProperties);
+                    myProperty = web.AllProperties.GetBoolean(propertyKey, false);
+                    Assert.IsTrue(myProperty == false);
+                }
+            }
+        }
+
+        [TestMethod]
+        public async Task SetWebPropertiesSpecialCharsTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.ClassicSTS0TestSite))
+            {
+                // Test safety - sites typically are noscript sites
+                bool isNoScript = await context.Web.IsNoScriptSiteAsync();
+
+                if (!isNoScript)
+                {
+                    var web = await context.Web.GetAsync(p => p.AllProperties);
+
+                    string specialChars = "<this & is a \n \t > a special \" ' string";
+
+                    var propertyKey = "SetWebPropertiesSpecialCharsTest";
+                    var myProperty = web.AllProperties.GetString(propertyKey, null);
+                    if (myProperty == null)
+                    {
+                        web.AllProperties[propertyKey] = specialChars;
+                        await web.AllProperties.UpdateAsync();
+                    }
+
+                    web = await context.Web.GetAsync(p => p.AllProperties);
+                    myProperty = web.AllProperties.GetString(propertyKey, null);
+                    Assert.IsTrue(myProperty == specialChars);
+
+                    web.AllProperties[propertyKey] = null;
+                    await web.AllProperties.UpdateAsync();
+
+                    web = await context.Web.GetAsync(p => p.AllProperties);
+                    myProperty = web.AllProperties.GetString(propertyKey, null);
+                    Assert.IsTrue(myProperty == null);
+                }
+            }
+        }
+
+        [TestMethod]
         public async Task GetSiteLanguagesTest()
         {
             //TestCommon.Instance.Mocking = false;

@@ -31,14 +31,6 @@ namespace PnP.Core.Services
         internal static string ListItemTaxonomyMultiValueFieldObjectPath = "<Constructor Id=\"{TaxFieldObjectId}\" TypeId=\"{c3dfae10-f3bf-4894-9012-bb60665b6d91}\"><Parameters><Parameter Type=\"Null\" /><Parameter ObjectPathId=\"{TaxFieldIdentityObjectId}\" /></Parameters></Constructor>";
         internal static string ListItemTaxonomyMultiValueFieldIdentity = "<Identity Id=\"{TaxFieldIdentityObjectId}\" Name=\"86e78d9f-90e2-2000-915f-217ff0ac791d|740c6a0b-85e2-48a0-a494-e0f1759d4aa7:site:{Site.Id}:web:{Web.Id}:list:{Parent.Id}:field:{TaxonomyFieldId}\" />";
 
-        // Property bag update XML payload
-        internal static string PropertyBagUpdate = "<Request AddExpandoFieldTypeSuffix=\"true\" SchemaVersion=\"15.0.0.0\" LibraryVersion=\"16.0.0.0\" ApplicationName=\"pnp core sdk\" xmlns=\"http://schemas.microsoft.com/sharepoint/clientquery/2009\"><Actions>{FieldValues}<Method Name=\"Update\" Id=\"{Counter}\" ObjectPathId=\"11\" /></Actions><ObjectPaths><Property Id=\"7\" ParentId=\"11\" Name=\"{PropertyName}\" /><Identity Id=\"11\" Name=\"121a659f-e03e-2000-4281-1212829d67dd|740c6a0b-85e2-48a0-a494-e0f1759d4aa7:site:{Site.Id}:web:{Web.Id}{ObjectId}\" /></ObjectPaths></Request>";
-        // Support for updating web, file and folder property bags
-        internal static string PropertyBagFileFolderPropertyName = "Properties";
-        internal static string PropertyBagWebPropertyName = "AllProperties";
-        internal static string PropertyBagFolderObjectId = ":folder:{Parent.Id}";
-        internal static string PropertyBagFileObjectId = ":file:{Parent.Id}";
-
         // Taxonomy field creation
         internal static string TaxonomyFieldUpdate = "<Request AddExpandoFieldTypeSuffix=\"true\" SchemaVersion=\"15.0.0.0\" LibraryVersion=\"16.0.0.0\" ApplicationName=\"pnp core sdk\" xmlns=\"http://schemas.microsoft.com/sharepoint/clientquery/2009\"><Actions><SetProperty Id=\"{Counter}\" ObjectPathId=\"15\" Name=\"SspId\"><Parameter Type=\"Guid\">{TermStoreId}</Parameter></SetProperty><SetProperty Id=\"{Counter2}\" ObjectPathId=\"15\" Name=\"TermSetId\"><Parameter Type=\"Guid\">{TermSetId}</Parameter></SetProperty><SetProperty Id=\"{Counter3}\" ObjectPathId=\"15\" Name=\"TargetTemplate\"><Parameter Type=\"String\"></Parameter></SetProperty><SetProperty Id=\"{Counter4}\" ObjectPathId=\"15\" Name=\"AnchorId\"><Parameter Type=\"Guid\">{00000000-0000-0000-0000-000000000000}</Parameter></SetProperty><Method Name=\"Update\" Id=\"{Counter5}\" ObjectPathId=\"15\" /></Actions><ObjectPaths><Identity Id=\"15\" Name=\"1e1a939f-60b2-2000-98a6-d25d3d400a3a|740c6a0b-85e2-48a0-a494-e0f1759d4aa7:site:{Site.Id}:web:{Web.Id}{ListFieldId}:field:{Id}\" /></ObjectPaths></Request>";
         internal static string TaxonomyFieldListObjectId = ":list:{Parent.Id}";

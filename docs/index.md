@@ -5,7 +5,9 @@
 The PnP Core SDK is an SDK designed to work for Microsoft 365. It provides a unified object model for working with SharePoint Online and Teams which is agnostic to the underlying APIs being called. Currently the library is in **beta**, see our roadmap for more details. The initial goal for this library will be to cover the needs of developers working with either SharePoint Online or Teams, but we're also open to extend this library further towards other Microsoft 365 workloads if there's community demand for doing so.
 
 > [!Important]
-> The PnP Core SDK is in beta: it's ready for developers to start using in real life scenarios. Between now and GA there might be small breaking changes, but we try to minimize those as much as possible, focus will be on finalizing our GA scope, stabilizing and documenting it.
+>
+> - The PnP Core SDK is in beta: it's ready for developers to start using in real life scenarios. Between now and GA there might be small breaking changes, but we try to minimize those as much as possible, focus will be on finalizing our GA scope, stabilizing and documenting it.
+> - If you've used PnP Core SDK in a version before Beta3 then please check [these instructions](https://pnp.github.io/pnpcore/using-the-sdk/upgrade-to-beta3.html) on how to upgrade your code.
 
 ## Roadmap
 
@@ -14,6 +16,7 @@ This is a community effort, hence we cannot guarantee below roadmap but rest ass
 - Preview 3: September 2020 (shipped)
 - Beta 1: November 2020 (shipped)
 - Beta 2: January 2021 (shipped)
+- Beta 3: February 2021 (shipped)
 - V1: February 2021
 
 ## Getting started using this library
