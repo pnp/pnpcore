@@ -1,4 +1,4 @@
---batchresponse_8c83c7be-65ac-490c-9d30-cb2fec86cc3c
+--batchresponse_ab9093f9-3b3a-41c6-a45f-19255ac6d5e9
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
@@ -6,4 +6,4 @@ HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
 {"d":{"results":[{"__metadata":{"id":"https://piasysdev.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'f623a809-eb28-404b-b4d3-00db80239ee9')","uri":"https://piasysdev.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'f623a809-eb28-404b-b4d3-00db80239ee9')","etag":"\"1243\"","type":"SP.List"},"ContentTypes":{"results":[{"__metadata":{"id":"https://piasysdev.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'f623a809-eb28-404b-b4d3-00db80239ee9')/ContentTypes('0x01010051F4A5B0E241444DAA59E1A55444FEF2')","uri":"https://piasysdev.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'f623a809-eb28-404b-b4d3-00db80239ee9')/ContentTypes('0x01010051F4A5B0E241444DAA59E1A55444FEF2')","type":"SP.ContentType"},"Description":"Create a new document.","Id":{"__metadata":{"type":"SP.ContentTypeId"},"StringValue":"0x01010051F4A5B0E241444DAA59E1A55444FEF2"},"StringId":"0x01010051F4A5B0E241444DAA59E1A55444FEF2"},{"__metadata":{"id":"https://piasysdev.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'f623a809-eb28-404b-b4d3-00db80239ee9')/ContentTypes('0x0120003E828F8D5E7E9149A29B8D47A6F1E6D2')","uri":"https://piasysdev.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'f623a809-eb28-404b-b4d3-00db80239ee9')/ContentTypes('0x0120003E828F8D5E7E9149A29B8D47A6F1E6D2')","type":"SP.ContentType"},"Description":"Create a new folder.","Id":{"__metadata":{"type":"SP.ContentTypeId"},"StringValue":"0x0120003E828F8D5E7E9149A29B8D47A6F1E6D2"},"StringId":"0x0120003E828F8D5E7E9149A29B8D47A6F1E6D2"}]},"Id":"f623a809-eb28-404b-b4d3-00db80239ee9","Title":"Documents"}]}}
---batchresponse_8c83c7be-65ac-490c-9d30-cb2fec86cc3c--
+--batchresponse_ab9093f9-3b3a-41c6-a45f-19255ac6d5e9--
