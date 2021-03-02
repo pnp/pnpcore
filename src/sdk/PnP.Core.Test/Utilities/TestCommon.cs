@@ -58,6 +58,11 @@ namespace PnP.Core.Test.Utilities
         internal static string ClassicSTS0TestSite { get { return "ClassicSTS0TestSite"; } }
 
         /// <summary>
+        /// Name of the default Syntex Content Center test site confguration
+        /// </summary>
+        internal static string SyntexContentCenterTestSite { get { return "SyntexContentCenterTestSite"; } }
+
+        /// <summary>
         /// Name of the default test site confguration when using an access token to authenticate
         /// </summary>
         internal static string TestSiteAccessToken { get { return "TestSiteAccessToken"; } }
@@ -267,6 +272,7 @@ namespace PnP.Core.Test.Utilities
                 string targetSubSiteUrl = configuration.GetValue<string>("PnPCore:Sites:TestSubSite:SiteUrl");
                 string noGroupSiteUrl = configuration.GetValue<string>("PnPCore:Sites:NoGroupTestSite:SiteUrl");
                 string classicSTS0SiteUrl = configuration.GetValue<string>("PnPCore:Sites:ClassicSTS0TestSite:SiteUrl");
+                string syntexContentCenterSiteUrl = configuration.GetValue<string>("PnPCore:Sites:SyntexContentCenterTestSite:SiteUrl");
 
                 if (RunningInGitHubWorkflow())
                 {
@@ -274,6 +280,7 @@ namespace PnP.Core.Test.Utilities
                     targetSubSiteUrl = "https://bertonline.sharepoint.com/sites/prov-1/testsub1";
                     noGroupSiteUrl = "https://bertonline.sharepoint.com/sites/modern";
                     classicSTS0SiteUrl = "https://bertonline.sharepoint.com/sites/sts0";
+                    syntexContentCenterSiteUrl = "https://bertonline.sharepoint.com/sites/syntextcc";
                 }
 
                 var serviceProvider = new ServiceCollection()
@@ -296,22 +303,50 @@ namespace PnP.Core.Test.Utilities
 
                 if (!string.IsNullOrEmpty(classicSTS0SiteUrl))
                 {
-                    TestUris = new Dictionary<string, Uri>
+                    if (!string.IsNullOrEmpty(syntexContentCenterSiteUrl))
                     {
-                        { TestSite, new Uri(targetSiteUrl) },
-                        { TestSubSite, new Uri(targetSubSiteUrl) },
-                        { NoGroupTestSite, new Uri(noGroupSiteUrl) },
-                        { ClassicSTS0TestSite, new Uri(classicSTS0SiteUrl) }
-                    };
+                        TestUris = new Dictionary<string, Uri>
+                        {
+                            { TestSite, new Uri(targetSiteUrl) },
+                            { TestSubSite, new Uri(targetSubSiteUrl) },
+                            { NoGroupTestSite, new Uri(noGroupSiteUrl) },
+                            { ClassicSTS0TestSite, new Uri(classicSTS0SiteUrl) },
+                            { SyntexContentCenterTestSite, new Uri(syntexContentCenterSiteUrl)}
+                        };
+
+                    }
+                    else
+                    {
+                        TestUris = new Dictionary<string, Uri>
+                        {
+                            { TestSite, new Uri(targetSiteUrl) },
+                            { TestSubSite, new Uri(targetSubSiteUrl) },
+                            { NoGroupTestSite, new Uri(noGroupSiteUrl) },
+                            { ClassicSTS0TestSite, new Uri(classicSTS0SiteUrl) }
+                        };
+                    }
                 }
                 else
                 {
-                    TestUris = new Dictionary<string, Uri>
+                    if (!string.IsNullOrEmpty(syntexContentCenterSiteUrl))
                     {
-                        { TestSite, new Uri(targetSiteUrl) },
-                        { TestSubSite, new Uri(targetSubSiteUrl) },
-                        { NoGroupTestSite, new Uri(noGroupSiteUrl) }
-                    };
+                        TestUris = new Dictionary<string, Uri>
+                        {
+                            { TestSite, new Uri(targetSiteUrl) },
+                            { TestSubSite, new Uri(targetSubSiteUrl) },
+                            { NoGroupTestSite, new Uri(noGroupSiteUrl) },
+                            { SyntexContentCenterTestSite, new Uri(syntexContentCenterSiteUrl)}
+                        };
+                    }
+                    else
+                    {
+                        TestUris = new Dictionary<string, Uri>
+                        {
+                            { TestSite, new Uri(targetSiteUrl) },
+                            { TestSubSite, new Uri(targetSubSiteUrl) },
+                            { NoGroupTestSite, new Uri(noGroupSiteUrl) }
+                        };
+                    }
                 }
 
                 var pnpContextFactory = serviceProvider.GetRequiredService<IPnPTestContextFactory>();

@@ -798,6 +798,51 @@ namespace PnP.Core.Model.SharePoint
 
         #endregion
 
+        #region Syntex support
+        public async Task<bool> IsSyntexContentCenterAsync()
+        {
+            await EnsurePropertiesAsync(p => p.WebTemplate).ConfigureAwait(false);
+
+            // Syntex Content Center sites use a specific template
+            if (WebTemplate == "CONTENTCTR")
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        public bool IsSyntexContentCenter()
+        {
+            return IsSyntexContentCenterAsync().GetAwaiter().GetResult();
+        }
+
+        public async Task<ISyntexContentCenter> AsSyntexContentCenterAsync()
+        {
+            if (await IsSyntexContentCenterAsync().ConfigureAwait(false))
+            {
+                //return this as ISyntexContentCenter;
+                SyntexContentCenter syntexContentCenter = new SyntexContentCenter()
+                {
+                    PnPContext = this.PnPContext,
+                    Parent = null
+                };
+
+                await syntexContentCenter.LoadAsync(p => p.Title, p => p.WebTemplate, p => p.Lists).ConfigureAwait(false);
+                return syntexContentCenter;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public ISyntexContentCenter AsSyntexContentCenter()
+        {
+            return AsSyntexContentCenterAsync().GetAwaiter().GetResult();
+        }
+        #endregion
+
         #endregion
     }
 }
