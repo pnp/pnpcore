@@ -90,8 +90,7 @@ namespace PnP.Core.Model
 #pragma warning restore IDE0060 // Remove unused parameter
 #pragma warning restore CA1801 // Review unused parameters
         {
-            // TODO: message from resources
-            throw new InvalidOperationException("This function can be called from a LINQ query only");
+            throw new InvalidOperationException(PnPCoreResources.Exception_Unsupported_QueryPropertiesUse);
         }
     }
 }

@@ -286,7 +286,7 @@ namespace PnP.Core {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Please ensure your list Fields are loaded before getting list data. E.g. await list.GetAsync(p =&gt; p.Fields.LoadProperties(p =&gt; p.InternalName, p =&gt; p.FieldTypeKind, p =&gt; p.TypeAsString, p =&gt; p.Title)).
+        ///   Looks up a localized string similar to Please ensure your list Fields are loaded before getting list data. E.g. await list.LoadAsync(p =&gt; p.Fields.QueryProperties(p =&gt; p.InternalName, p =&gt; p.FieldTypeKind, p =&gt; p.TypeAsString, p =&gt; p.Title)).
         /// </summary>
         internal static string Exception_ListItemUpdate_NoFieldsLoaded {
             get {
@@ -529,7 +529,7 @@ namespace PnP.Core {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Loading nested properties (e.g. RootFolder.ServerRelativeUrl) is not supported, instead you can use RootFolder.LoadProperties(p =&gt; p.ServerRelativeUrl)..
+        ///   Looks up a localized string similar to Loading nested properties (e.g. RootFolder.ServerRelativeUrl) is not supported, instead you can use RootFolder.QueryProperties(p =&gt; p.ServerRelativeUrl)..
         /// </summary>
         internal static string Exception_PropertyNotLoaded_NestedProperties {
             get {
@@ -727,7 +727,7 @@ namespace PnP.Core {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Loading the {0} property requires an extra GET request ({1}) which is not supported when using nested LoadProperties methods.
+        ///   Looks up a localized string similar to Loading the {0} property requires an extra GET request ({1}) which is not supported when using nested QueryProperties methods.
         /// </summary>
         internal static string Exception_Unsupported_ExtraGet {
             get {
@@ -781,20 +781,20 @@ namespace PnP.Core {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You can&apos;t use the LoadProperties method for Microsoft Graph queries.
-        /// </summary>
-        internal static string Exception_Unsupported_LinqExpandOfPropertyWithLoadProperties {
-            get {
-                return ResourceManager.GetString("Exception_Unsupported_LinqExpandOfPropertyWithLoadProperties", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to The property &apos;{0}&apos; cannot be included here because it&apos;s underlying depending on a separate query.
         /// </summary>
         internal static string Exception_Unsupported_LinqExpandOfPropertyWithOwnGet {
             get {
                 return ResourceManager.GetString("Exception_Unsupported_LinqExpandOfPropertyWithOwnGet", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You can&apos;t use the QueryProperties method for Microsoft Graph queries.
+        /// </summary>
+        internal static string Exception_Unsupported_LinqExpandOfPropertyWithQueryProperties {
+            get {
+                return ResourceManager.GetString("Exception_Unsupported_LinqExpandOfPropertyWithQueryProperties", resourceCulture);
             }
         }
         
@@ -840,6 +840,15 @@ namespace PnP.Core {
         internal static string Exception_Unsupported_Projection {
             get {
                 return ResourceManager.GetString("Exception_Unsupported_Projection", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This function can be called from a LINQ query only.
+        /// </summary>
+        internal static string Exception_Unsupported_QueryPropertiesUse {
+            get {
+                return ResourceManager.GetString("Exception_Unsupported_QueryPropertiesUse", resourceCulture);
             }
         }
         

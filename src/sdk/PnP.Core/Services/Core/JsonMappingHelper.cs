@@ -269,7 +269,7 @@ namespace PnP.Core.Services
                                 {
                                     var jsonElement = GetJsonElementFromPath(property.Value, jsonPathField.SharePointJsonPath);
 
-                                    // Don't assume that the requested json path was also loaded. When using the LoadProperties model there can be 
+                                    // Don't assume that the requested json path was also loaded. When using the QueryProperties model there can be 
                                     // a json object returned that does have all properties loaded 
                                     if (!jsonElement.Equals(property.Value))
                                     {
@@ -913,7 +913,7 @@ namespace PnP.Core.Services
                                         {
                                             var jsonElement = GetJsonElementFromPath(property.Value, jsonPathField.GraphJsonPath);
 
-                                            // Don't assume that the requested json path was also loaded. When using the LoadProperties model there can be 
+                                            // Don't assume that the requested json path was also loaded. When using the QueryProperties model there can be 
                                             // a json object returned that does have all properties loaded (e.g. a TeamsApp object with only id and distributionMethod loaded)
                                             if (!jsonElement.Equals(property.Value))
                                             {

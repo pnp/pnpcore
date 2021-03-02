@@ -81,8 +81,7 @@ namespace PnP.Core.QueryModel
 #pragma warning restore CA1801 // Review unused parameters
 #pragma warning restore IDE0060 // Remove unused parameter
         {
-            // TODO: localize message
-            throw new InvalidOperationException();
+            throw new InvalidOperationException(PnPCoreResources.Exception_Unsupported_QueryPropertiesUse);
         }
 
         /// <summary>

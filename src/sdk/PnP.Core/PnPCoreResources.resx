@@ -193,7 +193,7 @@
     <value>Missing value for {0} in {1}</value>
   </data>
   <data name="Exception_ListItemUpdate_NoFieldsLoaded" xml:space="preserve">
-    <value>Please ensure your list Fields are loaded before getting list data. E.g. await list.GetAsync(p =&gt; p.Fields.LoadProperties(p =&gt; p.InternalName, p =&gt; p.FieldTypeKind, p =&gt; p.TypeAsString, p =&gt; p.Title))</value>
+    <value>Please ensure your list Fields are loaded before getting list data. E.g. await list.LoadAsync(p =&gt; p.Fields.QueryProperties(p =&gt; p.InternalName, p =&gt; p.FieldTypeKind, p =&gt; p.TypeAsString, p =&gt; p.Title))</value>
   </data>
   <data name="Exception_ListItemUpdate_NoTaxonomyNoteField" xml:space="preserve">
     <value>Could not locate hidden taxonomy multivalue note field</value>
@@ -274,7 +274,7 @@
     <value>Please first fetch this list from SharePoint before doing operations on it</value>
   </data>
   <data name="Exception_PropertyNotLoaded_NestedProperties" xml:space="preserve">
-    <value>Loading nested properties (e.g. RootFolder.ServerRelativeUrl) is not supported, instead you can use RootFolder.LoadProperties(p =&gt; p.ServerRelativeUrl).</value>
+    <value>Loading nested properties (e.g. RootFolder.ServerRelativeUrl) is not supported, instead you can use RootFolder.QueryProperties(p =&gt; p.ServerRelativeUrl).</value>
   </data>
   <data name="Exception_PropertyNotLoaded_OnlyQueryPropertiesSupported" xml:space="preserve">
     <value>Only the 'QueryProperties' method is supported</value>
@@ -340,7 +340,7 @@
     <value>Expression {0} is not supported. Only {1} and {2} are supported</value>
   </data>
   <data name="Exception_Unsupported_ExtraGet" xml:space="preserve">
-    <value>Loading the {0} property requires an extra GET request ({1}) which is not supported when using nested LoadProperties methods</value>
+    <value>Loading the {0} property requires an extra GET request ({1}) which is not supported when using nested QueryProperties methods</value>
   </data>
   <data name="Exception_Unsupported_FailedAddingTermRelation" xml:space="preserve">
     <value>Adding a relationship can only be done starting from a term</value>
@@ -357,11 +357,11 @@
   <data name="Exception_Unsupported_InteractiveRequestBatch" xml:space="preserve">
     <value>Interactive requests cannot be grouped together, execute them one by one</value>
   </data>
-  <data name="Exception_Unsupported_LinqExpandOfPropertyWithLoadProperties" xml:space="preserve">
-    <value>You can't use the LoadProperties method for Microsoft Graph queries</value>
-  </data>
   <data name="Exception_Unsupported_LinqExpandOfPropertyWithOwnGet" xml:space="preserve">
     <value>The property '{0}' cannot be included here because it's underlying depending on a separate query</value>
+  </data>
+  <data name="Exception_Unsupported_LinqExpandOfPropertyWithQueryProperties" xml:space="preserve">
+    <value>You can't use the QueryProperties method for Microsoft Graph queries</value>
   </data>
   <data name="Exception_Unsupported_MemberType" xml:space="preserve">
     <value>Member of type {0} is not supported</value>
@@ -377,6 +377,9 @@
   </data>
   <data name="Exception_Unsupported_Projection" xml:space="preserve">
     <value>The projection is not supported</value>
+  </data>
+  <data name="Exception_Unsupported_QueryPropertiesUse" xml:space="preserve">
+    <value>This function can be called from a LINQ query only</value>
   </data>
   <data name="Exception_Unsupported_SharePointUserOnGraph" xml:space="preserve">
     <value>You can't call AsSharePointUserAsync on a Graph user without the UserPrincipalProperty requested and populated</value>

@@ -235,5 +235,18 @@ namespace PnP.Core.Test.QueryModel
                 Assert.IsNotNull(list);
             }
         }
+
+        [TestMethod]
+        public async Task TestLINQQueryPropertiesExceptionViaSPORest()
+        {
+            // TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                Assert.ThrowsException<InvalidOperationException>(() =>
+                {
+                    var query = context.Web.AssociatedOwnerGroup.QueryProperties(p => p.Title);
+                });                               
+            }
+        }
     }
 }
