@@ -151,33 +151,6 @@ namespace PnP.Core {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0} is invalid.
-        /// </summary>
-        internal static string Exception_Invalid_FieldType {
-            get {
-                return ResourceManager.GetString("Exception_Invalid_FieldType", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to {0} is invalid for field type {1}.
-        /// </summary>
-        internal static string Exception_Invalid_ForFieldType {
-            get {
-                return ResourceManager.GetString("Exception_Invalid_ForFieldType", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Specified field parameters are not valid for lookup type fields.
-        /// </summary>
-        internal static string Exception_Invalid_LookupFields {
-            get {
-                return ResourceManager.GetString("Exception_Invalid_LookupFields", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Invalid arguments number.
         /// </summary>
         internal static string Exception_InvalidArgumentsNumber {
@@ -210,15 +183,6 @@ namespace PnP.Core {
         internal static string Exception_InvalidOperation_NotAsyncQueryableSource {
             get {
                 return ResourceManager.GetString("Exception_InvalidOperation_NotAsyncQueryableSource", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Page size has to be equal or greater than 1.
-        /// </summary>
-        internal static string Exception_InvalidPageSize {
-            get {
-                return ResourceManager.GetString("Exception_InvalidPageSize", resourceCulture);
             }
         }
         
@@ -345,33 +309,6 @@ namespace PnP.Core {
         internal static string Exception_ModelMetadataIncorrect_MissingGraphName {
             get {
                 return ResourceManager.GetString("Exception_ModelMetadataIncorrect_MissingGraphName", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to This model entity does not have a SharePointLinqGet or GraphLinqGet value set.
-        /// </summary>
-        internal static string Exception_ModelMetadataIncorrect_MissingLinqGet {
-            get {
-                return ResourceManager.GetString("Exception_ModelMetadataIncorrect_MissingLinqGet", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Receiving property could not be determined, most likely the internal implemenation is not aligned with the interface naming.
-        /// </summary>
-        internal static string Exception_ModelMetadataIncorrect_ModelOutOfSync {
-            get {
-                return ResourceManager.GetString("Exception_ModelMetadataIncorrect_ModelOutOfSync", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to You can only promote home pages as site home page.
-        /// </summary>
-        internal static string Exception_Page_CanOnlyPromoteHomePagesAsSiteHomePage {
-            get {
-                return ResourceManager.GetString("Exception_Page_CanOnlyPromoteHomePagesAsSiteHomePage", resourceCulture);
             }
         }
         
@@ -601,15 +538,6 @@ namespace PnP.Core {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The property {0} is expected to be an array but is of type {0} instead.
-        /// </summary>
-        internal static string Exception_UnexpectedMappingType_NotArray {
-            get {
-                return ResourceManager.GetString("Exception_UnexpectedMappingType_NotArray", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Unresolved tokens found in API call {0}.
         /// </summary>
         internal static string Exception_UnresolvedTokens {
@@ -781,24 +709,6 @@ namespace PnP.Core {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The property &apos;{0}&apos; cannot be included here because it&apos;s underlying depending on a separate query.
-        /// </summary>
-        internal static string Exception_Unsupported_LinqExpandOfPropertyWithOwnGet {
-            get {
-                return ResourceManager.GetString("Exception_Unsupported_LinqExpandOfPropertyWithOwnGet", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to You can&apos;t use the QueryProperties method for Microsoft Graph queries.
-        /// </summary>
-        internal static string Exception_Unsupported_LinqExpandOfPropertyWithQueryProperties {
-            get {
-                return ResourceManager.GetString("Exception_Unsupported_LinqExpandOfPropertyWithQueryProperties", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Member of type {0} is not supported.
         /// </summary>
         internal static string Exception_Unsupported_MemberType {
@@ -889,15 +799,6 @@ namespace PnP.Core {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The view cannot be be found in the collection.
-        /// </summary>
-        internal static string Exception_View_ViewNotFoundInCollection {
-            get {
-                return ResourceManager.GetString("Exception_View_ViewNotFoundInCollection", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Invalid character in Xml String. Chr {0} is illegal.
         /// </summary>
         internal static string Exception_Xml_InvalidXmlCharacter {
@@ -957,33 +858,6 @@ namespace PnP.Core {
         internal static string Log_Information_OperationNotReady {
             get {
                 return ResourceManager.GetString("Log_Information_OperationNotReady", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Using default user-agent value {0}.
-        /// </summary>
-        internal static string Log_Information_UsingDefaultUserAgent {
-            get {
-                return ResourceManager.GetString("Log_Information_UsingDefaultUserAgent", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Using user-agent value {0} provided by configuration.
-        /// </summary>
-        internal static string Log_Information_UsingUserAgent {
-            get {
-                return ResourceManager.GetString("Log_Information_UsingUserAgent", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Using version tag value {0}.
-        /// </summary>
-        internal static string Log_Information_VersionTag {
-            get {
-                return ResourceManager.GetString("Log_Information_VersionTag", resourceCulture);
             }
         }
     }
