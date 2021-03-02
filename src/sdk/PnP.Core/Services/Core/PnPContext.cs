@@ -310,9 +310,9 @@ namespace PnP.Core.Services
             }
         }
 
-        /// <summary>
-        /// Entry point for the Microsoft 365 TermStore
-        /// </summary>
+        ///// <summary>
+        ///// Entry point for the Microsoft 365 TermStore
+        ///// </summary>
         //public ITermStore TermStore
         //{
         //    get

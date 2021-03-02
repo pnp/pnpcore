@@ -383,7 +383,9 @@ namespace PnP.Core.Test.Base
                     }
                     catch (ClientException ex) when (ex.Error.Type == ErrorType.UnresolvedTokens)
                     {
+#pragma warning disable CA2200 // Rethrow to preserve stack details
                         throw ex;
+#pragma warning restore CA2200 // Rethrow to preserve stack details
                     }
                     catch
                     {

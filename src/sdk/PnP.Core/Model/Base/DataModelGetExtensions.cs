@@ -8,7 +8,7 @@ namespace PnP.Core.Model
     /// <summary>
     /// Extension methods for <see cref="IDataModelProcess"/>
     /// </summary>
-    public static class DataModelGetExtensions
+    internal static class DataModelGetExtensions
     {
        /// <summary>
         /// Batches the retrieval of a Domain Model object from the remote data source, eventually selecting custom properties or using a default set of properties
@@ -16,7 +16,7 @@ namespace PnP.Core.Model
         /// <param name="dataModelGet"></param>
         /// <param name="expressions">The properties to select</param>
         /// <returns>The Domain Model object</returns>
-        public static Task<IBatchSingleResult<TModel>> GetBatchAsync<TModel>(this IDataModelGet<TModel> dataModelGet, params Expression<Func<TModel, object>>[] expressions)
+        internal static Task<IBatchSingleResult<TModel>> GetBatchAsync<TModel>(this IDataModelGet<TModel> dataModelGet, params Expression<Func<TModel, object>>[] expressions)
         {
             if (dataModelGet == null)
             {
@@ -33,7 +33,7 @@ namespace PnP.Core.Model
         /// <param name="batch">Batch add this request to</param>
         /// <param name="expressions">The properties to select</param>
         /// <returns>The Domain Model object</returns>
-        public static IBatchSingleResult<TModel> GetBatch<TModel>(this IDataModelGet<TModel> dataModelGet, Batch batch, params Expression<Func<TModel, object>>[] expressions)
+        internal static IBatchSingleResult<TModel> GetBatch<TModel>(this IDataModelGet<TModel> dataModelGet, Batch batch, params Expression<Func<TModel, object>>[] expressions)
         {
             if (dataModelGet == null)
             {
@@ -49,7 +49,7 @@ namespace PnP.Core.Model
         /// <param name="dataModelGet"></param>
         /// <param name="expressions">The properties to select</param>
         /// <returns>The Domain Model object</returns>
-        public static IBatchSingleResult<TModel> GetBatch<TModel>(this IDataModelGet<TModel> dataModelGet, params Expression<Func<TModel, object>>[] expressions)
+        internal static IBatchSingleResult<TModel> GetBatch<TModel>(this IDataModelGet<TModel> dataModelGet, params Expression<Func<TModel, object>>[] expressions)
         {
             if (dataModelGet == null)
             {
@@ -65,7 +65,7 @@ namespace PnP.Core.Model
         /// <param name="dataModelGet"></param>
         /// <param name="expressions">The properties to select</param>
         /// <returns>The Domain Model object</returns>
-        public static TModel Get<TModel>(this IDataModelGet<TModel> dataModelGet, params Expression<Func<TModel, object>>[] expressions)
+        internal static TModel Get<TModel>(this IDataModelGet<TModel> dataModelGet, params Expression<Func<TModel, object>>[] expressions)
         {
             if (dataModelGet == null)
             {

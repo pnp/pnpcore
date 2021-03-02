@@ -8,7 +8,7 @@ namespace PnP.Core.Model
     /// <summary>
     /// Extension methods for <see cref="IDataModelCollectionLoad{TModel}"/>
     /// </summary>
-    public static class DataModelCollectionLoadExtensions
+    internal static class DataModelCollectionLoadExtensions
     {
 
         /// <summary>
@@ -17,7 +17,7 @@ namespace PnP.Core.Model
         /// <param name="dataModelLoad"></param>
         /// <param name="expressions">The properties to select</param>
         /// <returns>The Domain Model object</returns>
-        public static Task<IBatchResult> LoadBatchAsync<TModel>(this IDataModelCollectionLoad<TModel> dataModelLoad, params Expression<Func<TModel, object>>[] expressions)
+        internal static Task<IBatchResult> LoadBatchAsync<TModel>(this IDataModelCollectionLoad<TModel> dataModelLoad, params Expression<Func<TModel, object>>[] expressions)
         {
             if (dataModelLoad == null)
             {
@@ -34,7 +34,7 @@ namespace PnP.Core.Model
         /// <param name="batch">Batch add this request to</param>
         /// <param name="expressions">The properties to select</param>
         /// <returns>The Domain Model object</returns>
-        public static IBatchResult LoadBatch<TModel>(this IDataModelCollectionLoad<TModel> dataModelLoad, Batch batch, params Expression<Func<TModel, object>>[] expressions)
+        internal static IBatchResult LoadBatch<TModel>(this IDataModelCollectionLoad<TModel> dataModelLoad, Batch batch, params Expression<Func<TModel, object>>[] expressions)
         {
             if (dataModelLoad == null)
             {
@@ -50,7 +50,7 @@ namespace PnP.Core.Model
         /// <param name="dataModelLoad"></param>
         /// <param name="expressions">The properties to select</param>
         /// <returns>The Domain Model object</returns>
-        public static IBatchResult LoadBatch<TModel>(this IDataModelCollectionLoad<TModel> dataModelLoad, params Expression<Func<TModel, object>>[] expressions)
+        internal static IBatchResult LoadBatch<TModel>(this IDataModelCollectionLoad<TModel> dataModelLoad, params Expression<Func<TModel, object>>[] expressions)
         {
             if (dataModelLoad == null)
             {
@@ -67,7 +67,7 @@ namespace PnP.Core.Model
         /// <param name="dataModelLoad"></param>
         /// <param name="expressions">The properties to select</param>
         /// <returns>The Domain Model object</returns>
-        public static void Load<TModel>(this IDataModelCollectionLoad<TModel> dataModelLoad, params Expression<Func<TModel, object>>[] expressions)
+        internal static void Load<TModel>(this IDataModelCollectionLoad<TModel> dataModelLoad, params Expression<Func<TModel, object>>[] expressions)
         {
             if (dataModelLoad == null)
             {
