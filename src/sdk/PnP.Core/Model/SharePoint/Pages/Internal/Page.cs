@@ -308,7 +308,7 @@ namespace PnP.Core.Model.SharePoint
             string pageNameFilter = $@"
                         <BeginsWith>
                           <FieldRef Name='{PageConstants.FileLeafRef}'/>
-                          <Value Type='text'>{pageNameWithoutFolder}</Value>
+                          <Value Type='text'><![CDATA[{pageNameWithoutFolder}]]></Value>
                         </BeginsWith>";
 
             // This is the main query, it can be complemented with above page name filter bij replacing the variables
@@ -1802,7 +1802,7 @@ namespace PnP.Core.Model.SharePoint
             }
 
             // if a page name contains spaces then let's replace them with dashes, just like the UI does
-            return pageName.Replace(" ", "-");
+            return pageName.Replace(" ", "-").Replace("#", "-");
         }
 
         private async Task ValidateOneColumnFullWidthSectionUsageAsync()
