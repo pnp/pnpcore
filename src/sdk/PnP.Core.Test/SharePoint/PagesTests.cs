@@ -1425,6 +1425,26 @@ namespace PnP.Core.Test.SharePoint
         }
 
         [TestMethod]
+        public async Task CreateAndUpdatePageWithSpecialCharsInName()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var newPage = await context.Web.NewPageAsync();
+                string pageName = TestCommon.GetPnPSdkTestAssetName("A&B#C.aspx");
+                // Save the page
+                await newPage.SaveAsync(pageName);
+
+                // Delete the page
+                await newPage.DeleteAsync();
+
+                // Verify the page exists
+                var pages2 = await context.Web.GetPagesAsync(pageName);
+                Assert.IsTrue(pages2.Count == 0);
+            }
+        }
+
+        [TestMethod]
         public async Task CreateAndUpdatePageWithReload()
         {
             //TestCommon.Instance.Mocking = false;
