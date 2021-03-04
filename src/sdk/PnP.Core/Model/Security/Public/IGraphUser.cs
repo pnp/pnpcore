@@ -6,7 +6,7 @@ namespace PnP.Core.Model.Security
     /// Public interface to define a Microsoft 365 user
     /// </summary>
     [ConcreteType(typeof(GraphUser))]
-    public interface IGraphUser : IDataModel<IGraphUser>, IDataModelGet<IGraphUser>, IGraphPrincipal, IQueryableDataModel
+    public interface IGraphUser : IDataModel<IGraphUser>, IDataModelGet<IGraphUser>, IDataModelLoad<IGraphUser>, IGraphPrincipal, IQueryableDataModel
     {
         /// <summary>
         /// User principle name (UPN) of the user

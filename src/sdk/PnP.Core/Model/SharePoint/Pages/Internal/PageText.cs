@@ -90,7 +90,7 @@ namespace PnP.Core.Model.SharePoint
                 },
                 Emphasis = new SectionEmphasis()
                 {
-                    ZoneEmphasis = Column.VerticalSectionEmphasis.HasValue ? Column.VerticalSectionEmphasis.Value : Section.ZoneEmphasis,
+                    ZoneEmphasis = Column.VerticalSectionEmphasis ?? Section.ZoneEmphasis,
                 },
                 EditorType = "CKEditor"
             };
@@ -118,7 +118,14 @@ namespace PnP.Core.Model.SharePoint
             StringBuilder html = new StringBuilder(100);
             html.Append($@"<div {CanvasControlAttribute}=""{CanvasControlData}"" {CanvasDataVersionAttribute}=""{ DataVersion}""  {ControlDataAttribute}=""{jsonControlData.Replace("\"", "&quot;")}"">");
             html.Append($@"<div {TextRteAttribute}=""{Rte}"">");
-            if (Text.Trim().StartsWith("<p>", StringComparison.InvariantCultureIgnoreCase))
+            if (Text.Trim().StartsWith("<p>", StringComparison.InvariantCultureIgnoreCase) ||
+                Text.Trim().StartsWith("<h1>", StringComparison.InvariantCultureIgnoreCase) ||
+                Text.Trim().StartsWith("<h2>", StringComparison.InvariantCultureIgnoreCase) ||
+                Text.Trim().StartsWith("<h3>", StringComparison.InvariantCultureIgnoreCase) ||
+                Text.Trim().StartsWith("<h4>", StringComparison.InvariantCultureIgnoreCase) ||
+                Text.Trim().StartsWith("<ul>", StringComparison.InvariantCultureIgnoreCase) ||
+                Text.Trim().StartsWith("<blockquote>", StringComparison.InvariantCultureIgnoreCase) ||
+                Text.Trim().StartsWith("<pre>", StringComparison.InvariantCultureIgnoreCase))
             {
                 html.Append(Text);
             }

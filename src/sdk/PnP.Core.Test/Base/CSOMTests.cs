@@ -5,6 +5,8 @@ using PnP.Core.Test.Utilities;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
+using PnP.Core.Model;
+using PnP.Core.QueryModel;
 
 namespace PnP.Core.Test.Base
 {
@@ -82,15 +84,15 @@ namespace PnP.Core.Test.Base
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 // Subsequent loads of the same model will "enrich" the loaded model
-                var web = await context.Web.GetAsync(p => p.Title);
-                Assert.IsTrue(web.IsPropertyAvailable(p => p.Title));
-                Assert.IsFalse(web.IsPropertyAvailable(p => p.MasterUrl));
+                await context.Web.LoadAsync(p => p.Title);
+                Assert.IsTrue(context.Web.IsPropertyAvailable(p => p.Title));
+                Assert.IsFalse(context.Web.IsPropertyAvailable(p => p.MasterUrl));
 
-                await web.GetAsync(p => p.MasterUrl, p => p.AlternateCssUrl);
-                Assert.IsTrue(web.IsPropertyAvailable(p => p.Title));
-                Assert.IsTrue(web.IsPropertyAvailable(p => p.MasterUrl));
-                Assert.IsTrue(web.IsPropertyAvailable(p => p.AlternateCssUrl));
-                Assert.IsFalse(web.IsPropertyAvailable(p => p.CustomMasterUrl));
+                await context.Web.LoadAsync(p => p.MasterUrl, p => p.AlternateCssUrl);
+                Assert.IsTrue(context.Web.IsPropertyAvailable(p => p.Title));
+                Assert.IsTrue(context.Web.IsPropertyAvailable(p => p.MasterUrl));
+                Assert.IsTrue(context.Web.IsPropertyAvailable(p => p.AlternateCssUrl));
+                Assert.IsFalse(context.Web.IsPropertyAvailable(p => p.CustomMasterUrl));
             }
         }
 
@@ -102,18 +104,18 @@ namespace PnP.Core.Test.Base
             {
                 // Subsequent loads of the same model will "enrich" the loaded model:
                 // Loading another child model with default properties
-                var web = await context.Web.GetAsync(p => p.Title);
-                Assert.IsTrue(web.IsPropertyAvailable(p => p.Title));
-                Assert.IsFalse(web.IsPropertyAvailable(p => p.MasterUrl));
+                await context.Web.LoadAsync(p => p.Title);
+                Assert.IsTrue(context.Web.IsPropertyAvailable(p => p.Title));
+                Assert.IsFalse(context.Web.IsPropertyAvailable(p => p.MasterUrl));
 
-                await web.GetAsync(p => p.AssociatedOwnerGroup, p => p.AlternateCssUrl);
-                Assert.IsTrue(web.IsPropertyAvailable(p => p.Title));
-                Assert.IsTrue(web.IsPropertyAvailable(p => p.AssociatedOwnerGroup));
-                Assert.IsTrue(web.IsPropertyAvailable(p => p.AlternateCssUrl));
-                Assert.IsFalse(web.IsPropertyAvailable(p => p.CustomMasterUrl));
+                await context.Web.LoadAsync(p => p.AssociatedOwnerGroup, p => p.AlternateCssUrl);
+                Assert.IsTrue(context.Web.IsPropertyAvailable(p => p.Title));
+                Assert.IsTrue(context.Web.IsPropertyAvailable(p => p.AssociatedOwnerGroup));
+                Assert.IsTrue(context.Web.IsPropertyAvailable(p => p.AlternateCssUrl));
+                Assert.IsFalse(context.Web.IsPropertyAvailable(p => p.CustomMasterUrl));
 
-                Assert.IsTrue(web.AssociatedOwnerGroup.Requested);
-                Assert.IsTrue(web.AssociatedOwnerGroup.IsPropertyAvailable(p => p.Title));
+                Assert.IsTrue(context.Web.AssociatedOwnerGroup.Requested);
+                Assert.IsTrue(context.Web.AssociatedOwnerGroup.IsPropertyAvailable(p => p.Title));
             }
         }
 
@@ -127,30 +129,29 @@ namespace PnP.Core.Test.Base
                 // Loading another child model via subsequent loads ==> CSOM does
                 // not support this capability for child model loads, but it makes 
                 // sense to behave identical to regular subsequent model loads
-                var web = await context.Web.GetAsync(p => p.Title);
-                Assert.IsTrue(web.IsPropertyAvailable(p => p.Title));
-                Assert.IsFalse(web.IsPropertyAvailable(p => p.MasterUrl));
+                await context.Web.LoadAsync(p => p.Title);
+                Assert.IsTrue(context.Web.IsPropertyAvailable(p => p.Title));
+                Assert.IsFalse(context.Web.IsPropertyAvailable(p => p.MasterUrl));
 
-                await web.GetAsync(p => p.AssociatedOwnerGroup.LoadProperties(p=>p.Title), p => p.AlternateCssUrl);
-                Assert.IsTrue(web.IsPropertyAvailable(p => p.Title));
-                Assert.IsTrue(web.IsPropertyAvailable(p => p.AssociatedOwnerGroup));
-                Assert.IsTrue(web.IsPropertyAvailable(p => p.AlternateCssUrl));
-                Assert.IsFalse(web.IsPropertyAvailable(p => p.CustomMasterUrl));
-                Assert.IsTrue(web.AssociatedOwnerGroup.Requested);
-                Assert.IsTrue(web.AssociatedOwnerGroup.IsPropertyAvailable(p => p.Title));
-                Assert.IsFalse(web.AssociatedOwnerGroup.IsPropertyAvailable(p => p.Description));
+                await context.Web.LoadAsync(p => p.AssociatedOwnerGroup.QueryProperties(p => p.Title), p => p.AlternateCssUrl);
+                Assert.IsTrue(context.Web.IsPropertyAvailable(p => p.Title));
+                Assert.IsTrue(context.Web.IsPropertyAvailable(p => p.AssociatedOwnerGroup));
+                Assert.IsTrue(context.Web.IsPropertyAvailable(p => p.AlternateCssUrl));
+                Assert.IsFalse(context.Web.IsPropertyAvailable(p => p.CustomMasterUrl));
+                Assert.IsTrue(context.Web.AssociatedOwnerGroup.Requested);
+                Assert.IsTrue(context.Web.AssociatedOwnerGroup.IsPropertyAvailable(p => p.Title));
+                Assert.IsFalse(context.Web.AssociatedOwnerGroup.IsPropertyAvailable(p => p.Description));
 
-                await web.GetAsync(p => p.AssociatedOwnerGroup.LoadProperties(p => p.Description, p=>p.LoginName), p => p.AlternateCssUrl);
-                Assert.IsTrue(web.IsPropertyAvailable(p => p.Title));
-                Assert.IsTrue(web.IsPropertyAvailable(p => p.AssociatedOwnerGroup));
-                Assert.IsTrue(web.IsPropertyAvailable(p => p.AlternateCssUrl));
-                Assert.IsFalse(web.IsPropertyAvailable(p => p.CustomMasterUrl));
-                Assert.IsTrue(web.AssociatedOwnerGroup.Requested);
-                Assert.IsTrue(web.AssociatedOwnerGroup.IsPropertyAvailable(p => p.Title));
-                Assert.IsTrue(web.AssociatedOwnerGroup.IsPropertyAvailable(p => p.Description));
-                Assert.IsTrue(web.AssociatedOwnerGroup.IsPropertyAvailable(p => p.LoginName));
-                Assert.IsFalse(web.AssociatedOwnerGroup.IsPropertyAvailable(p => p.AllowMembersEditMembership));
-
+                await context.Web.LoadAsync(p => p.AssociatedOwnerGroup.QueryProperties(p => p.Description, p => p.LoginName), p => p.AlternateCssUrl);
+                Assert.IsTrue(context.Web.IsPropertyAvailable(p => p.Title));
+                Assert.IsTrue(context.Web.IsPropertyAvailable(p => p.AssociatedOwnerGroup));
+                Assert.IsTrue(context.Web.IsPropertyAvailable(p => p.AlternateCssUrl));
+                Assert.IsFalse(context.Web.IsPropertyAvailable(p => p.CustomMasterUrl));
+                Assert.IsTrue(context.Web.AssociatedOwnerGroup.Requested);
+                Assert.IsTrue(context.Web.AssociatedOwnerGroup.IsPropertyAvailable(p => p.Title));
+                Assert.IsTrue(context.Web.AssociatedOwnerGroup.IsPropertyAvailable(p => p.Description));
+                Assert.IsTrue(context.Web.AssociatedOwnerGroup.IsPropertyAvailable(p => p.LoginName));
+                Assert.IsFalse(context.Web.AssociatedOwnerGroup.IsPropertyAvailable(p => p.AllowMembersEditMembership));
             }
         }
 
@@ -162,18 +163,18 @@ namespace PnP.Core.Test.Base
             {
                 // Subsequent loads of the same model will "enrich" the loaded model:
                 // Loading another model collection with default properties
-                var web = await context.Web.GetAsync(p => p.Title);
-                Assert.IsTrue(web.IsPropertyAvailable(p => p.Title));
-                Assert.IsFalse(web.IsPropertyAvailable(p => p.MasterUrl));
+                await context.Web.LoadAsync(p => p.Title);
+                Assert.IsTrue(context.Web.IsPropertyAvailable(p => p.Title));
+                Assert.IsFalse(context.Web.IsPropertyAvailable(p => p.MasterUrl));
 
-                await web.GetAsync(p => p.Lists, p => p.AlternateCssUrl);
-                Assert.IsTrue(web.IsPropertyAvailable(p => p.Title));
-                Assert.IsTrue(web.IsPropertyAvailable(p => p.Lists));
-                Assert.IsTrue(web.IsPropertyAvailable(p => p.AlternateCssUrl));
-                Assert.IsFalse(web.IsPropertyAvailable(p => p.CustomMasterUrl));
+                await context.Web.LoadAsync(p => p.Lists, p => p.AlternateCssUrl);
+                Assert.IsTrue(context.Web.IsPropertyAvailable(p => p.Title));
+                Assert.IsTrue(context.Web.IsPropertyAvailable(p => p.Lists));
+                Assert.IsTrue(context.Web.IsPropertyAvailable(p => p.AlternateCssUrl));
+                Assert.IsFalse(context.Web.IsPropertyAvailable(p => p.CustomMasterUrl));
 
-                Assert.IsTrue(web.Lists.Requested);
-                Assert.IsTrue(web.Lists.First().IsPropertyAvailable(p => p.Title));
+                Assert.IsTrue(context.Web.Lists.Requested);
+                Assert.IsTrue(context.Web.Lists.First().IsPropertyAvailable(p => p.Title));
             }
         }
 
@@ -185,19 +186,19 @@ namespace PnP.Core.Test.Base
             {
                 // Subsequent loads of the same model will "enrich" the loaded model:
                 // Loading another model collection with specific properties
-                var web = await context.Web.GetAsync(p => p.Title);
-                Assert.IsTrue(web.IsPropertyAvailable(p => p.Title));
-                Assert.IsFalse(web.IsPropertyAvailable(p => p.MasterUrl));
+                await context.Web.LoadAsync(p => p.Title);
+                Assert.IsTrue(context.Web.IsPropertyAvailable(p => p.Title));
+                Assert.IsFalse(context.Web.IsPropertyAvailable(p => p.MasterUrl));
 
-                await web.GetAsync(p => p.Lists.LoadProperties(p=>p.Title), p => p.AlternateCssUrl);
-                Assert.IsTrue(web.IsPropertyAvailable(p => p.Title));
-                Assert.IsTrue(web.IsPropertyAvailable(p => p.Lists));
-                Assert.IsTrue(web.IsPropertyAvailable(p => p.AlternateCssUrl));
-                Assert.IsFalse(web.IsPropertyAvailable(p => p.CustomMasterUrl));
+                await context.Web.LoadAsync(p => p.Lists.QueryProperties(p => p.Title), p => p.AlternateCssUrl);
+                Assert.IsTrue(context.Web.IsPropertyAvailable(p => p.Title));
+                Assert.IsTrue(context.Web.IsPropertyAvailable(p => p.Lists));
+                Assert.IsTrue(context.Web.IsPropertyAvailable(p => p.AlternateCssUrl));
+                Assert.IsFalse(context.Web.IsPropertyAvailable(p => p.CustomMasterUrl));
 
-                Assert.IsTrue(web.Lists.Requested);
-                Assert.IsTrue(web.Lists.First().IsPropertyAvailable(p => p.Title));
-                Assert.IsFalse(web.Lists.First().IsPropertyAvailable(p => p.Description));
+                Assert.IsTrue(context.Web.Lists.Requested);
+                Assert.IsTrue(context.Web.Lists.First().IsPropertyAvailable(p => p.Title));
+                Assert.IsFalse(context.Web.Lists.First().IsPropertyAvailable(p => p.DefaultEditFormUrl));
             }
         }
 
@@ -211,60 +212,41 @@ namespace PnP.Core.Test.Base
                 // Loading another model collection with specific properties followed by
                 // a subsequent load requesting other properties ==> in this case the initially loaded collection model 
                 // is replaced with the freshly loaded one, using the properties coming with the new one
-                var web = await context.Web.GetAsync(p => p.Title);
-                Assert.IsTrue(web.IsPropertyAvailable(p => p.Title));
-                Assert.IsFalse(web.IsPropertyAvailable(p => p.MasterUrl));
+                await context.Web.LoadAsync(p => p.Title);
+                Assert.IsTrue(context.Web.IsPropertyAvailable(p => p.Title));
+                Assert.IsFalse(context.Web.IsPropertyAvailable(p => p.MasterUrl));
 
-                await web.GetAsync(p => p.Lists.LoadProperties(p => p.Title), p => p.AlternateCssUrl);
-                Assert.IsTrue(web.IsPropertyAvailable(p => p.Title));
-                Assert.IsTrue(web.IsPropertyAvailable(p => p.Lists));
-                Assert.IsTrue(web.IsPropertyAvailable(p => p.AlternateCssUrl));
-                Assert.IsFalse(web.IsPropertyAvailable(p => p.CustomMasterUrl));
+                await context.Web.LoadAsync(p => p.Lists.QueryProperties(p => p.Title), p => p.AlternateCssUrl);
+                Assert.IsTrue(context.Web.IsPropertyAvailable(p => p.Title));
+                Assert.IsTrue(context.Web.IsPropertyAvailable(p => p.Lists));
+                Assert.IsTrue(context.Web.IsPropertyAvailable(p => p.AlternateCssUrl));
+                Assert.IsFalse(context.Web.IsPropertyAvailable(p => p.CustomMasterUrl));
 
-                Assert.IsTrue(web.Lists.Requested);
-                Assert.IsTrue(web.Lists.First().IsPropertyAvailable(p => p.Title));
-                Assert.IsFalse(web.Lists.First().IsPropertyAvailable(p => p.Description));
+                Assert.IsTrue(context.Web.Lists.Requested);
+                Assert.IsTrue(context.Web.Lists.First().IsPropertyAvailable(p => p.Title));
+                Assert.IsFalse(context.Web.Lists.First().IsPropertyAvailable(p => p.DefaultEditFormUrl));
 
-                await web.GetAsync(p => p.Lists.LoadProperties(p => p.Description), p => p.MasterUrl);
-                Assert.IsTrue(web.IsPropertyAvailable(p => p.Title));
-                Assert.IsTrue(web.IsPropertyAvailable(p => p.Lists));
-                Assert.IsTrue(web.IsPropertyAvailable(p => p.AlternateCssUrl));
-                Assert.IsTrue(web.IsPropertyAvailable(p => p.MasterUrl));
-                Assert.IsFalse(web.IsPropertyAvailable(p => p.CustomMasterUrl));
+                await context.Web.LoadAsync(p => p.Lists.QueryProperties(p => p.Description), p => p.MasterUrl);
+                Assert.IsTrue(context.Web.IsPropertyAvailable(p => p.Title));
+                Assert.IsTrue(context.Web.IsPropertyAvailable(p => p.Lists));
+                Assert.IsTrue(context.Web.IsPropertyAvailable(p => p.AlternateCssUrl));
+                Assert.IsTrue(context.Web.IsPropertyAvailable(p => p.MasterUrl));
+                Assert.IsFalse(context.Web.IsPropertyAvailable(p => p.CustomMasterUrl));
 
-                Assert.IsTrue(web.Lists.Requested);
-                Assert.IsTrue(web.Lists.First().IsPropertyAvailable(p => p.Description));
-                Assert.IsFalse(web.Lists.First().IsPropertyAvailable(p => p.Title));
+                Assert.IsTrue(context.Web.Lists.Requested);
+                Assert.IsTrue(context.Web.Lists.First().IsPropertyAvailable(p => p.Description));
+                Assert.IsFalse(context.Web.Lists.First().IsPropertyAvailable(p => p.DefaultEditFormUrl));
             }
         }
-
         [TestMethod]
-        public async Task CSOMPartitySubSequentModelLoads7()
+        public async Task CSOMUpdateWebPropertyBag()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.ClassicSTS0TestSite))
             {
-                // This works different than CSOM, the requested list gets loaded into the model whereas with CSOM this is not the case
-                var listA = await context.Web.Lists.GetByTitleAsync("Site Assets");
-                var listB = await context.Web.Lists.GetByTitleAsync("Site Pages");
-
-                Assert.IsTrue(listA.Requested);
-                Assert.IsTrue(listB.Requested);
-                Assert.IsTrue(context.Web.Lists.Length == 2);
-
-                var listC = await context.Web.Lists.GetByTitleAsync("Documents");
-                Assert.IsTrue(listC.Requested);
-                Assert.IsTrue(context.Web.Lists.Length == 3);
-
-                // Clear the collection so we can do a fresh load
-                context.Web.Lists.Clear();
-                Assert.IsFalse(context.Web.Lists.Requested);
-                Assert.IsTrue(context.Web.Lists.Length == 0);
-
-                // Populate the collection again
-                await context.Web.Lists.GetAsync(p => p.TemplateType == ListTemplateType.DocumentLibrary);
-                Assert.IsTrue(context.Web.Lists.Requested);
-                Assert.IsTrue(context.Web.Lists.Length >= 3);
+                context.Web.AllProperties["TestPnPProperty"] = "TestPropertyValue";
+                context.Web.AllProperties.Update();
+                Assert.AreEqual("TestPropertyValue", context.Web.AllProperties.GetString("TestPnPProperty", ""));
             }
         }
     }

@@ -4,6 +4,7 @@ using PnP.Core.Test.Utilities;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
+using PnP.Core.QueryModel;
 
 namespace PnP.Core.Test.SharePoint
 {
@@ -24,7 +25,7 @@ namespace PnP.Core.Test.SharePoint
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 IWeb web = await context.Web.GetAsync(p => p.Fields);
-                Assert.IsTrue(web.Fields.Count() > 0);
+                Assert.IsTrue(web.Fields.Length > 0);
 
                 IField field = web.Fields.FirstOrDefault(p => p.InternalName == "Title");
                 // Test a string property

@@ -1,9 +1,9 @@
---batchresponse_b0020e04-d948-4da3-b63b-e94d159b6738
+--batchresponse_34ecbfe3-1a4b-4cb6-baa8-160585691403
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{"d":{"ValidateUpdateListItem":{"__metadata":{"type":"Collection(SP.ListItemFormUpdateValue)"},"results":[{"ErrorCode":0,"ErrorMessage":null,"FieldName":"Title","FieldValue":"NewTitle","HasException":false,"ItemId":2370}]}}}
---batchresponse_b0020e04-d948-4da3-b63b-e94d159b6738--
+{"d":{"ValidateUpdateListItem":{"__metadata":{"type":"Collection(SP.ListItemFormUpdateValue)"},"results":[{"ErrorCode":0,"ErrorMessage":null,"FieldName":"Title","FieldValue":"NewTitle","HasException":false,"ItemId":2739}]}}}
+--batchresponse_34ecbfe3-1a4b-4cb6-baa8-160585691403--

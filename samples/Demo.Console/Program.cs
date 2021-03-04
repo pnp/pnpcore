@@ -34,24 +34,13 @@ namespace Consumer
                 var customSettings = new CustomSettings();
                 hostingContext.Configuration.Bind("CustomSettings", customSettings);
 
-                // Create an instance of the Authentication Provider that uses Credential Manager
-                //var authenticationProvider = new CredentialManagerAuthenticationProvider(
-                //                customSettings.ClientId,
-                //                customSettings.TenantId,
-                //                customSettings.CredentialManager);
-
-                var authenticationProvider = new InteractiveAuthenticationProvider(
-                                customSettings.ClientId,
-                                customSettings.TenantId,
-                                customSettings.RedirectUri);
-
                 // Add the PnP Core SDK services
                 services.AddPnPCore(options => {
 
                     // You can explicitly configure all the settings, or you can
                     // simply use the default values
 
-                    //options.PnPContext.GraphFirst = true;
+                    options.PnPContext.GraphFirst = true;
                     //options.PnPContext.GraphCanUseBeta = true;
                     //options.PnPContext.GraphAlwaysUseBeta = false;
 
@@ -71,15 +60,61 @@ namespace Consumer
                     //    UseIncrementalDelay = true,
                     //};
 
-                    options.DefaultAuthenticationProvider = authenticationProvider;
+                    //options.DefaultAuthenticationProvider = authenticationProvider;
 
                     options.Sites.Add("DemoSite",
                         new PnP.Core.Services.Builder.Configuration.PnPCoreSiteOptions
                         {
-                            SiteUrl = customSettings.DemoSiteUrl,
-                            AuthenticationProvider = authenticationProvider
+                            SiteUrl = customSettings.DemoSiteUrl
+                           
                         });
                 });
+
+                // PnP Core Authentication
+                // To check out more authentication options check out the documentation for more information:
+                //  https://pnp.github.io/pnpcore/using-the-sdk/configuring%20authentication.html
+                services.AddPnPCoreAuthentication(
+                    options =>
+                    {
+                        options.Credentials.Configurations.Add("interactive",
+                            new PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationCredentialConfigurationOptions
+                            {
+                                ClientId = customSettings.ClientId,
+                                TenantId = customSettings.TenantId,
+                                Interactive = new PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationInteractiveOptions
+                                {
+                                    RedirectUri = customSettings.RedirectUri
+                                }
+                            });
+
+                        options.Credentials.Configurations.Add("credentials",
+                            new PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationCredentialConfigurationOptions
+                            {
+                                ClientId = customSettings.ClientId,
+                                TenantId = customSettings.TenantId,
+                                Interactive = new PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationInteractiveOptions
+                                {
+                                    RedirectUri = customSettings.RedirectUri
+                                }
+                                //},
+                                //CredentialManager = new PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationCredentialManagerOptions
+                                //{
+                                //    CredentialManagerName = customSettings.CredentialManager
+                                //}
+                                
+                            });
+
+                        // Configure the default authentication provider
+                        options.Credentials.DefaultConfiguration = "interactive";
+
+                        // Map the site defined in AddPnPCore with the 
+                        // Authentication Provider configured in this action
+                        options.Sites.Add("DemoSite",
+                            new PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationSiteOptions
+                            {
+                                AuthenticationProviderName = "interactive"
+                            });
+                    });
             })
             // Let the builder know we're running in a console
             .UseConsoleLifetime()
@@ -107,7 +142,7 @@ namespace Consumer
                     Console.ForegroundColor = ConsoleColor.Yellow;
                     Console.WriteLine("===Web (REST)===");
                     Console.WriteLine($"Title: {web.Title}");
-                    Console.WriteLine($"# Lists: {web.Lists.Count()}");
+                    Console.WriteLine($"# Lists: {web.Lists.Length}");
                     Console.WriteLine($"Master page url: {web.MasterUrl}");
                     Console.ResetColor();
 
@@ -131,18 +166,18 @@ namespace Consumer
                         Console.ForegroundColor = ConsoleColor.Yellow;
                         Console.WriteLine("===List (Graph v1)===");
                         Console.WriteLine($"Title: {demo1List.Title}");
-                        Console.WriteLine($"# Items: {demo1List.Items.Count()}");
+                        Console.WriteLine($"# Items: {demo1List.Items.Length}");
                         Console.ResetColor();
                     }
 
                     // Getting the messages in the default team channel, first ensure 
-                    await team.EnsurePropertiesAsync(p => p.PrimaryChannel);
-                    await team.PrimaryChannel.GetAsync(p => p.Messages);
+                    await team.LoadAsync(p => p.PrimaryChannel);
+                    await team.PrimaryChannel.LoadAsync(p => p.Messages);
 
                     Console.ForegroundColor = ConsoleColor.Yellow;
                     Console.WriteLine("===Team channel messages (Graph beta)===");
                     Console.WriteLine($"Title: {team.PrimaryChannel.DisplayName}");
-                    Console.WriteLine($"# Messages: {team.PrimaryChannel.Messages.Count()}");
+                    Console.WriteLine($"# Messages: {team.PrimaryChannel.Messages.Length}");
                     Console.ResetColor();
                 }
                 #endregion
@@ -154,11 +189,9 @@ namespace Consumer
 
                     // We can retrieve the whole list of lists 
                     // and their items in the context web
-                    var listsQuery = (from l in context.Web.Lists
+                    var listsQuery = (from l in context.Web.Lists.QueryProperties(l => l.Id, l => l.Title, l => l.Description)
                                       orderby l.Title descending
-                                      select l)
-                                    .Load(l => l.Id, l => l.Title, l => l.Description)
-                                    .Include(l => l.Items);
+                                      select l);
 
                     Console.ForegroundColor = ConsoleColor.Yellow;
                     Console.WriteLine("===LINQ: Retrieve list and list items===");
@@ -199,21 +232,22 @@ namespace Consumer
                 using (var context = pnpContextFactory.Create("DemoSite"))
                 {
                     // Or we can retrieve a specific item
-                    var listItem = context.Web.Lists.GetByTitle("Site Assets").Items.GetById(1);
+                    // TODO: Issue with Cascading sychronous loads
+                    //var listItem = context.Web.Lists.GetByTitle("Site Assets").Items.GetById(1);
 
-                    Console.ForegroundColor = ConsoleColor.Yellow;
-                    Console.WriteLine("===LINQ: Retrieve list item by id===");
-                    Console.WriteLine($"Item with title '{listItem.Title}' has ID: {listItem.Id}");
-                    Console.ResetColor();
+                    //Console.ForegroundColor = ConsoleColor.Yellow;
+                    //Console.WriteLine("===LINQ: Retrieve list item by id===");
+                    //Console.WriteLine($"Item with title '{listItem.Title}' has ID: {listItem.Id}");
+                    //Console.ResetColor();
                 }
 
                 using (var context = pnpContextFactory.Create("DemoSite"))
                 {
                     // Or we can retrieve a specific document from a library
                     var document = context.Web.Lists.GetByTitle("Site Assets").Items
-                            .Where(i => i.Title == "__siteIcon__.png")
-                            .Load(i => i.Id, i => i.Title)
-                            .FirstOrDefault();
+                        .QueryProperties(i => i.Id, i => i.Title)
+                        .Where(i => i.Title == "__siteIcon__.png")
+                        .FirstOrDefault();
 
                     if (document != null)
                     {
@@ -250,12 +284,12 @@ namespace Consumer
 
                         await newList.Items.AddBatchAsync(listItem);
                     }
-                    await newList.GetBatchAsync(p => p.Items, p => p.NoCrawl);
+                    await newList.LoadBatchAsync(context.CurrentBatch, p => p.Items, p => p.NoCrawl);
 
                     // Send 20 adds + reload as a single operation (=batch) to server
                     await context.ExecuteAsync();
                     Console.ForegroundColor = ConsoleColor.Yellow;
-                    Console.WriteLine($"List with title '{newList.Title}' has {newList.Items.Count()} items");
+                    Console.WriteLine($"List with title '{newList.Title}' has {newList.Items.Length} items");
                     Console.ResetColor();
 
                     // Update item
@@ -277,12 +311,14 @@ namespace Consumer
                     Console.ResetColor();
 
                     // Get team channels and primary channel
-                    var team = await context.Team.GetAsync(p => p.Channels, p => p.PrimaryChannel, p => p.FunSettings);
+                    var team = await context.Team.GetAsync(p => p.Channels, 
+                        p => p.PrimaryChannel, p => p.FunSettings);
+
                     // Ensure the needed properties were loaded
                     await team.PrimaryChannel.EnsurePropertiesAsync(p => p.DisplayName, p => p.Tabs, p => p.Messages);
 
                     // Add/Delete a new tab in the primary channel
-                    var pnpTab = team.PrimaryChannel.Tabs.FirstOrDefault(p => p.DisplayName == "PnPTab");
+                    var pnpTab = team.PrimaryChannel.Tabs.AsRequested().FirstOrDefault(p => p.DisplayName == "PnPTab");
                     if (pnpTab != null)
                     {
                         await pnpTab.DeleteAsync();
@@ -324,25 +360,26 @@ namespace Consumer
 
                     // Get team channels and primary channel
                     var team = await context.Team.GetAsync(p => p.PrimaryChannel);
-                    // Load the first set of messages
-                    await team.PrimaryChannel.GetAsync(p => p.Messages);
+                    await team.PrimaryChannel.EnsurePropertiesAsync(p => p.Messages);
 
                     Console.ForegroundColor = ConsoleColor.Yellow;
-                    Console.WriteLine($"Current number of messages: {team.PrimaryChannel.Messages.Count()}");
+                    Console.WriteLine($"Current number of messages: {team.PrimaryChannel.Messages.Length}");
                     Console.ResetColor();
 
-                    if (team.PrimaryChannel.Messages.CanPage)
+                    if (team.PrimaryChannel.Messages.Length > 0)
                     {
-                        await team.PrimaryChannel.Messages.GetNextPageAsync();
+                        Console.ForegroundColor = ConsoleColor.Yellow;
+                        Console.WriteLine("===Next page loaded==");
+                        Console.WriteLine($"Current number of messages: {team.PrimaryChannel.Messages.Take(2).AsEnumerable().Count()}");
+                        Console.ResetColor();
 
                         Console.ForegroundColor = ConsoleColor.Yellow;
                         Console.WriteLine("===Next page loaded==");
-                        Console.WriteLine($"Current number of messages: {team.PrimaryChannel.Messages.Count()}");
+                        Console.WriteLine($"Current number of messages: {team.PrimaryChannel.Messages.Take(2).Skip(2).AsEnumerable().Count()}");
                         Console.ResetColor();
 
-                        await team.PrimaryChannel.Messages.GetAllPagesAsync();
                         Console.WriteLine("===All pages loaded==");
-                        Console.WriteLine($"Current number of messages: {team.PrimaryChannel.Messages.Count()}");
+                        Console.WriteLine($"Current number of messages: {team.PrimaryChannel.Messages.Length}");
                         Console.ResetColor();
                     }
                 }

@@ -1,4 +1,5 @@
 ﻿using PnP.Core.Model.SharePoint;
+using PnP.Core.QueryModel;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -295,27 +296,21 @@ namespace PnP.Core.Test.Utilities
 
             using (var context = await TestCommon.Instance.GetContextAsync(contextConfig, contextId, testName, sourceFilePath))
             {
-                IQueryable<IUserCustomAction> query = null;
                 if (fromSiteCollection)
                 {
-                    var site = await context.Site.GetAsync(w => w.UserCustomActions);
-                    query = from uca in site.UserCustomActions
-                            where uca.Name == customActionName
-                            select uca;
+                    var foundUserCustomAction = await context.Site.UserCustomActions.Where(p => p.Name == customActionName).FirstOrDefaultAsync();
+                    await foundUserCustomAction.DeleteAsync();
                 }
                 else
                 {
-
+                    // Just to show a different syntex doing the same
                     var web = await context.Web.GetAsync(w => w.UserCustomActions);
-                    query = from uca in web.UserCustomActions
+                    var query = from uca in web.UserCustomActions
                             where uca.Name == customActionName
                             select uca;
+                    IUserCustomAction foundUserCustomAction = query.FirstOrDefault();
+                    await foundUserCustomAction.DeleteAsync();
                 }
-                IUserCustomAction foundUserCustomAction = query.FirstOrDefault();
-                if (null == foundUserCustomAction)
-                    throw new Exception($"A User Custom Action could not be found with name {customActionName}");
-
-                await foundUserCustomAction.DeleteAsync();
             }
         }
         #endregion

@@ -35,7 +35,7 @@ namespace PnP.Core.Model
 
                 // Let's try to get the parent object as an IRequestable and IDataModelGet instance
                 var requestableParent = (IRequestable)parent;
-                var gettableParent = (IDataModelGet)parent;
+                var gettableParent = (IDataModelLoad)parent;
                 var contextAwareParent = (IDataModelWithContext)parent;
                 // and if successfull, see if it has been already requested
                 if (requestableParent != null &&
@@ -57,7 +57,7 @@ namespace PnP.Core.Model
                         var expressions = EntityManager.Instance.GetEntityKeyExpressions(parent);
 
                         // Enqueue the actual request in the dedicated batch
-                        await gettableParent.GetBatchAsync(ensureParentBatch, expressions).ConfigureAwait(false);
+                        await gettableParent.LoadBatchAsync(ensureParentBatch, expressions).ConfigureAwait(false);
 
                         // Make the actual request
                         await contextAwareParent.PnPContext.BatchClient.ExecuteBatch(ensureParentBatch).ConfigureAwait(true);

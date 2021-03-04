@@ -1,5 +1,6 @@
 ﻿using PnP.Core.Model.Security;
 using PnP.Core.Services;
+using PnP.Core.QueryModel;
 using System;
 using System.Collections.Generic;
 using System.Dynamic;
@@ -316,7 +317,7 @@ namespace PnP.Core.Model.SharePoint
 
         #region Delete
 
-        internal override Task BaseBatchDeleteAsync(Batch batch, Func<FromJson, object> fromJsonCasting = null, Action<string> postMappingJson = null)
+        internal override Task BaseDeleteBatchAsync(Batch batch, Func<FromJson, object> fromJsonCasting = null, Action<string> postMappingJson = null)
         {
             // Throw an exception to clarify that batch web delete is not supported
             throw new ClientException(ErrorType.Unsupported, PnPCoreResources.Exception_Unsupported_WebDeleteIsInteractive);
@@ -358,7 +359,7 @@ namespace PnP.Core.Model.SharePoint
                 Parent = this
             };
 
-            await folder.BaseGet(apiOverride: BuildGetFolderByRelativeUrlApiCall(serverRelativeUrl), fromJsonCasting: folder.MappingHandler, postMappingJson: folder.PostMappingHandler, expressions: expressions).ConfigureAwait(false);
+            await folder.BaseRetrieveAsync(apiOverride: BuildGetFolderByRelativeUrlApiCall(serverRelativeUrl), fromJsonCasting: folder.MappingHandler, postMappingJson: folder.PostMappingHandler, expressions: expressions).ConfigureAwait(false);
 
             return folder;
         }
@@ -377,7 +378,7 @@ namespace PnP.Core.Model.SharePoint
                 Parent = this
             };
 
-            await folder.BaseBatchGetAsync(batch, apiOverride: BuildGetFolderByRelativeUrlApiCall(serverRelativeUrl), fromJsonCasting: folder.MappingHandler, postMappingJson: folder.PostMappingHandler, expressions: expressions).ConfigureAwait(false);
+            await folder.BaseBatchRetrieveAsync(batch, apiOverride: BuildGetFolderByRelativeUrlApiCall(serverRelativeUrl), fromJsonCasting: folder.MappingHandler, postMappingJson: folder.PostMappingHandler, selectors: expressions).ConfigureAwait(false);
 
             return folder;
         }
@@ -416,7 +417,7 @@ namespace PnP.Core.Model.SharePoint
                 Parent = this
             };
 
-            await folder.BaseGet(apiOverride: BuildGetFolderByIdApiCall(folderId), fromJsonCasting: folder.MappingHandler, postMappingJson: folder.PostMappingHandler, expressions: expressions).ConfigureAwait(false);
+            await folder.BaseRetrieveAsync(apiOverride: BuildGetFolderByIdApiCall(folderId), fromJsonCasting: folder.MappingHandler, postMappingJson: folder.PostMappingHandler, expressions: expressions).ConfigureAwait(false);
 
             return folder;
         }
@@ -435,7 +436,7 @@ namespace PnP.Core.Model.SharePoint
                 Parent = this
             };
 
-            await folder.BaseBatchGetAsync(batch, apiOverride: BuildGetFolderByIdApiCall(folderId), fromJsonCasting: folder.MappingHandler, postMappingJson: folder.PostMappingHandler, expressions: expressions).ConfigureAwait(false);
+            await folder.BaseBatchRetrieveAsync(batch, apiOverride: BuildGetFolderByIdApiCall(folderId), fromJsonCasting: folder.MappingHandler, postMappingJson: folder.PostMappingHandler, selectors: expressions).ConfigureAwait(false);
 
             return folder;
         }
@@ -479,7 +480,7 @@ namespace PnP.Core.Model.SharePoint
                 Parent = this
             };
 
-            await file.BaseGet(apiOverride: BuildGetFileByRelativeUrlApiCall(serverRelativeUrl), fromJsonCasting: file.MappingHandler, postMappingJson: file.PostMappingHandler, expressions: expressions).ConfigureAwait(false);
+            await file.BaseRetrieveAsync(apiOverride: BuildGetFileByRelativeUrlApiCall(serverRelativeUrl), fromJsonCasting: file.MappingHandler, postMappingJson: file.PostMappingHandler, expressions: expressions).ConfigureAwait(false);
             return file;
         }
 
@@ -502,7 +503,7 @@ namespace PnP.Core.Model.SharePoint
                 Parent = this
             };
 
-            await file.BaseBatchGetAsync(batch, apiOverride: BuildGetFileByRelativeUrlApiCall(serverRelativeUrl), fromJsonCasting: file.MappingHandler, postMappingJson: file.PostMappingHandler, expressions: expressions).ConfigureAwait(false);
+            await file.BaseBatchRetrieveAsync(batch, apiOverride: BuildGetFileByRelativeUrlApiCall(serverRelativeUrl), fromJsonCasting: file.MappingHandler, postMappingJson: file.PostMappingHandler, selectors: expressions).ConfigureAwait(false);
             return file;
         }
 
@@ -765,7 +766,7 @@ namespace PnP.Core.Model.SharePoint
 
             bool updated = false;
             // Ensure the multilingual page feature is enabled
-            if (Features.FirstOrDefault(p => p.DefinitionId == MultilingualPagesFeature) == null)
+            if (Features.AsRequested().FirstOrDefault(p => p.DefinitionId == MultilingualPagesFeature) == null)
             {
                 await Features.EnableBatchAsync(MultilingualPagesFeature).ConfigureAwait(false);
                 updated = true;
@@ -790,7 +791,7 @@ namespace PnP.Core.Model.SharePoint
             if (updated)
             {
                 await UpdateBatchAsync().ConfigureAwait(false);
-                await GetBatchAsync(p => p.SupportedUILanguageIds).ConfigureAwait(false);
+                await this.GetBatchAsync(p => p.SupportedUILanguageIds).ConfigureAwait(false);
                 await PnPContext.ExecuteAsync().ConfigureAwait(false);
             }
         }

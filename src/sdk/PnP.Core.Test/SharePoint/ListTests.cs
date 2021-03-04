@@ -5,6 +5,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using PnP.Core.QueryModel;
+using PnP.Core.Model;
 
 namespace PnP.Core.Test.SharePoint
 {
@@ -55,8 +57,8 @@ namespace PnP.Core.Test.SharePoint
                     var list2 = context2.Web.Lists.GetByTitle(listTitle);
                     if (list2 != null)
                     {
-                        var result = await list2.GetListDataAsStreamAsync(new RenderListDataOptions() { ViewXml = "<View><ViewFields><FieldRef Name='Title' /></ViewFields><RowLimit>5</RowLimit></View>", RenderOptions = RenderListDataOptionsFlags.ListData });
-                        Assert.IsTrue(list2.Items.Count() == 5);
+                        var result = await list2.LoadListDataAsStreamAsync(new RenderListDataOptions() { ViewXml = "<View><ViewFields><FieldRef Name='Title' /></ViewFields><RowLimit>5</RowLimit></View>", RenderOptions = RenderListDataOptionsFlags.ListData });
+                        Assert.IsTrue(list2.Items.Length == 5);
                         Assert.IsTrue(result.ContainsKey("FirstRow"));
                         Assert.IsTrue(result.ContainsKey("LastRow"));
                         Assert.IsTrue(result.ContainsKey("RowLimit"));
@@ -69,8 +71,8 @@ namespace PnP.Core.Test.SharePoint
                     var list3 = context3.Web.Lists.GetByTitle(listTitle);
                     if (list3 != null)
                     {
-                        var result = list3.GetListDataAsStream(new RenderListDataOptions() { ViewXml = "<View><ViewFields><FieldRef Name='Title' /></ViewFields><RowLimit>5</RowLimit></View>", RenderOptions = RenderListDataOptionsFlags.ListData });
-                        Assert.IsTrue(list3.Items.Count() == 5);
+                        var result = list3.LoadListDataAsStream(new RenderListDataOptions() { ViewXml = "<View><ViewFields><FieldRef Name='Title' /></ViewFields><RowLimit>5</RowLimit></View>", RenderOptions = RenderListDataOptionsFlags.ListData });
+                        Assert.IsTrue(list3.Items.Length == 5);
                         Assert.IsTrue(result.ContainsKey("FirstRow"));
                         Assert.IsTrue(result.ContainsKey("LastRow"));
                         Assert.IsTrue(result.ContainsKey("RowLimit"));
@@ -128,8 +130,11 @@ namespace PnP.Core.Test.SharePoint
                     }
                 }
 
+                // BERT - filtering on Id does not work for SharePoint Lists with Graph - will be fixed with the new 2.1 VROOM backend
                 using (var context4 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 3))
                 {
+                    context4.GraphFirst = false;
+
                     var list4 = context4.Web.Lists.GetByTitle(listTitle);
                     if (list4 != null)
                     {
@@ -312,8 +317,8 @@ namespace PnP.Core.Test.SharePoint
                     var list2 = context2.Web.Lists.GetByTitle(listTitle);
                     if (list2 != null)
                     {
-                        await list2.GetItemsByCamlQueryAsync("<View><ViewFields><FieldRef Name='Title' /></ViewFields><RowLimit>5</RowLimit></View>");
-                        Assert.IsTrue(list2.Items.Count() == 5);
+                        await list2.LoadItemsByCamlQueryAsync("<View><ViewFields><FieldRef Name='Title' /></ViewFields><RowLimit>5</RowLimit></View>");
+                        Assert.IsTrue(list2.Items.Length == 5);
                     }
                 }
 
@@ -322,12 +327,12 @@ namespace PnP.Core.Test.SharePoint
                     var list3 = context3.Web.Lists.GetByTitle(listTitle);
                     if (list3 != null)
                     {
-                        await list3.GetItemsByCamlQueryAsync(new CamlQueryOptions()
+                        await list3.LoadItemsByCamlQueryAsync(new CamlQueryOptions()
                         {
                             ViewXml = "<View><ViewFields><FieldRef Name='Title' /></ViewFields></View>",
                             DatesInUtc = true
                         });
-                        Assert.IsTrue(list3.Items.Count() == 10);
+                        Assert.IsTrue(list3.Items.Length == 10);
                     }
                 }
 
@@ -338,17 +343,17 @@ namespace PnP.Core.Test.SharePoint
                     if (list4 != null)
                     {
                         // Perform 2 queries, the first one limited to 5 items, the second one without limits. Total should be 10 items
-                        await list4.GetItemsByCamlQueryBatchAsync(new CamlQueryOptions()
+                        await list4.LoadItemsByCamlQueryBatchAsync(new CamlQueryOptions()
                         {
                             ViewXml = "<View><ViewFields><FieldRef Name='Title' /></ViewFields><RowLimit>5</RowLimit></View>",
                         });
-                        await list4.GetItemsByCamlQueryBatchAsync(new CamlQueryOptions()
+                        await list4.LoadItemsByCamlQueryBatchAsync(new CamlQueryOptions()
                         {
                             ViewXml = "<View><ViewFields><FieldRef Name='Title' /></ViewFields></View>",
                         });
                         await context4.ExecuteAsync();
 
-                        Assert.IsTrue(list4.Items.Count() == 10);
+                        Assert.IsTrue(list4.Items.Length == 10);
                     }
                 }
 
@@ -394,8 +399,8 @@ namespace PnP.Core.Test.SharePoint
                     var list2 = context2.Web.Lists.GetByTitle(listTitle);
                     if (list2 != null)
                     {
-                        list2.GetItemsByCamlQuery("<View><ViewFields><FieldRef Name='Title' /></ViewFields><RowLimit>5</RowLimit></View>");
-                        Assert.IsTrue(list2.Items.Count() == 5);
+                        list2.LoadItemsByCamlQuery("<View><ViewFields><FieldRef Name='Title' /></ViewFields><RowLimit>5</RowLimit></View>");
+                        Assert.IsTrue(list2.Items.Length == 5);
                     }
                 }
 
@@ -404,12 +409,12 @@ namespace PnP.Core.Test.SharePoint
                     var list3 = context3.Web.Lists.GetByTitle(listTitle);
                     if (list3 != null)
                     {
-                        list3.GetItemsByCamlQuery(new CamlQueryOptions()
+                        list3.LoadItemsByCamlQuery(new CamlQueryOptions()
                         {
                             ViewXml = "<View><ViewFields><FieldRef Name='Title' /></ViewFields></View>",
                             DatesInUtc = true
                         });
-                        Assert.IsTrue(list3.Items.Count() == 10);
+                        Assert.IsTrue(list3.Items.Length == 10);
                     }
                 }
 
@@ -420,14 +425,14 @@ namespace PnP.Core.Test.SharePoint
                     if (list4 != null)
                     {
                         // Perform 2 queries, the first one limited to 5 items, the second one without limits. Total should be 10 items
-                        list4.GetItemsByCamlQueryBatch(new CamlQueryOptions()
+                        list4.LoadItemsByCamlQueryBatch(new CamlQueryOptions()
                         {
                             ViewXml = "<View><ViewFields><FieldRef Name='Title' /></ViewFields><RowLimit>5</RowLimit></View>",
                         });
-                        list4.GetItemsByCamlQueryBatch("<View><ViewFields><FieldRef Name='Title' /></ViewFields></View>");
+                        list4.LoadItemsByCamlQueryBatch("<View><ViewFields><FieldRef Name='Title' /></ViewFields></View>");
                         await context4.ExecuteAsync();
 
-                        Assert.IsTrue(list4.Items.Count() == 10);
+                        Assert.IsTrue(list4.Items.Length == 10);
                     }
                 }
 
@@ -439,17 +444,17 @@ namespace PnP.Core.Test.SharePoint
                     {
                         var newBatch = context5.NewBatch();
                         // Perform 2 queries, the first one limited to 5 items, the second one without limits. Total should be 10 items
-                        list5.GetItemsByCamlQueryBatch(newBatch, new CamlQueryOptions()
+                        list5.LoadItemsByCamlQueryBatch(newBatch, new CamlQueryOptions()
                         {
                             ViewXml = "<View><ViewFields><FieldRef Name='Title' /></ViewFields><RowLimit>5</RowLimit></View>",
                         });
-                        list5.GetItemsByCamlQueryBatch(newBatch, new CamlQueryOptions()
+                        list5.LoadItemsByCamlQueryBatch(newBatch, new CamlQueryOptions()
                         {
                             ViewXml = "<View><ViewFields><FieldRef Name='Title' /></ViewFields></View>",
                         });
                         context5.ExecuteAsync(newBatch).GetAwaiter().GetResult();
 
-                        Assert.IsTrue(list5.Items.Count() == 10);
+                        Assert.IsTrue(list5.Items.Length == 10);
                     }
                 }
 
@@ -460,10 +465,10 @@ namespace PnP.Core.Test.SharePoint
                     {
                         var newBatch = context6.NewBatch();
                         // Perform 2 queries, the first one limited to 5 items, the second one without limits. Total should be 10 items
-                        list6.GetItemsByCamlQueryBatch(newBatch, "<View><ViewFields><FieldRef Name='Title' /></ViewFields><RowLimit>5</RowLimit></View>");
+                        list6.LoadItemsByCamlQueryBatch(newBatch, "<View><ViewFields><FieldRef Name='Title' /></ViewFields><RowLimit>5</RowLimit></View>");
                         context6.ExecuteAsync(newBatch).GetAwaiter().GetResult();
 
-                        Assert.IsTrue(list6.Items.Count() == 5);
+                        Assert.IsTrue(list6.Items.Length == 5);
                     }
                 }
 
@@ -531,13 +536,13 @@ namespace PnP.Core.Test.SharePoint
                                           </Query>
                                         </View>";
 
-                        await list2.GetItemsByCamlQueryAsync(new CamlQueryOptions()
+                        await list2.LoadItemsByCamlQueryAsync(new CamlQueryOptions()
                         {
                             ViewXml = query,
                             DatesInUtc = true
                         });
-                        Assert.IsTrue(list2.Items.Count() == 1);
-                        Assert.IsTrue(list2.Items.First()["CustomField"].ToString() == "Field6");
+                        Assert.IsTrue(list2.Items.Length == 1);
+                        Assert.IsTrue(list2.Items.AsRequested().First()["CustomField"].ToString() == "Field6");
                     }
                 }
 
@@ -554,12 +559,14 @@ namespace PnP.Core.Test.SharePoint
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 // Create a new list
-                var web = await context.Web.GetAsync(p => p.Lists);
+                await context.Web.LoadAsync(p => p.Lists);
 
-                int listCount = web.Lists.Count();
+                var web = context.Web;
+
+                int listCount = web.Lists.Length;
 
                 string listTitle = "RecycleList";
-                var myList = web.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
+                var myList = web.Lists.AsRequested().FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
 
                 if (TestCommon.Instance.Mocking && myList != null)
                 {
@@ -576,10 +583,10 @@ namespace PnP.Core.Test.SharePoint
                 // A valid recycle returns a recuycle bin item id
                 Assert.IsTrue(recycleBinItemId != Guid.Empty);
                 // The recycled list should have been deleted from the lists collection
-                Assert.IsTrue(web.Lists.Count() == listCount);
+                Assert.IsTrue(web.Lists.Length == listCount);
                 // Loading lists again should still result in the same original list count as the added list is in the recycle bin
-                await context.Web.GetAsync(p => p.Lists);
-                Assert.IsTrue(web.Lists.Count() == listCount);
+                await context.Web.LoadAsync(p => p.Lists);
+                Assert.IsTrue(web.Lists.Length == listCount);
 
             }
         }
@@ -591,12 +598,14 @@ namespace PnP.Core.Test.SharePoint
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 // Create a new list
-                var web = await context.Web.GetAsync(p => p.Lists);
+                await context.Web.LoadAsync(p => p.Lists);
 
-                int listCount = web.Lists.Count();
+                var web = context.Web;
+                
+                int listCount = web.Lists.Length;
 
                 string listTitle = TestCommon.GetPnPSdkTestAssetName("RecycleListBatch");
-                var myList = web.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
+                var myList = web.Lists.AsRequested().FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
 
                 if (TestCommon.Instance.Mocking && myList != null)
                 {
@@ -614,10 +623,10 @@ namespace PnP.Core.Test.SharePoint
                 await context.ExecuteAsync();
 
                 // The recycled list should have been deleted from the lists collection
-                Assert.IsTrue(web.Lists.Count() == listCount);
+                Assert.IsTrue(web.Lists.Length == listCount);
                 // Loading lists again should still result in the same original list count as the added list is in the recycle bin
                 await context.Web.GetAsync(p => p.Lists);
-                Assert.IsTrue(web.Lists.Count() == listCount);
+                Assert.IsTrue(web.Lists.Length == listCount);
 
             }
         }
@@ -644,12 +653,12 @@ namespace PnP.Core.Test.SharePoint
                 }
 
                 // Enable IRM on the library
-                await myList.GetAsync();
+                await myList.LoadAsync();
                 myList.IrmEnabled = true;
                 await myList.UpdateAsync();
 
                 // Load IRM settings
-                await myList.InformationRightsManagementSettings.GetAsync();
+                await myList.InformationRightsManagementSettings.LoadAsync();
 
                 // Verify default IRM list settings are returned
                 Assert.IsTrue(myList.InformationRightsManagementSettings.Requested);
@@ -701,12 +710,12 @@ namespace PnP.Core.Test.SharePoint
                 }
 
                 // Enable IRM on the library
-                await myList.GetAsync();
+                await myList.LoadAsync();
                 myList.IrmEnabled = true;
                 await myList.UpdateAsync();
 
                 // Load IRM settings
-                await myList.InformationRightsManagementSettings.GetBatchAsync();
+                await myList.InformationRightsManagementSettings.LoadBatchAsync();
                 await context.ExecuteAsync();
 
                 // Verify default IRM list settings are returned
@@ -780,6 +789,19 @@ namespace PnP.Core.Test.SharePoint
         }
 
         [TestMethod]
+        public async Task GetListByTitleWithQueryPropertiesSync()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var list = context.Web.Lists.GetByTitle("Documents", p => p.Title, p => p.Items, p => p.Fields.QueryProperties(p => p.InternalName, p => p.FieldTypeKind, p => p.TypeAsString, p => p.Title));
+
+                Assert.IsTrue(list.Requested);
+                Assert.AreEqual(list.Title, "documents", true);
+            }
+        }
+
+        [TestMethod]
         public async Task GetListByTitleSync()
         {
             //TestCommon.Instance.Mocking = false;
@@ -803,46 +825,50 @@ namespace PnP.Core.Test.SharePoint
                 Assert.IsTrue(list.Requested);
                 Assert.AreEqual(list.Title, "documents", true);
                 Assert.IsTrue(list.ContentTypes.Requested);
-                Assert.IsTrue(list.ContentTypes.First().IsPropertyAvailable(p => p.Id));
-                Assert.IsTrue(list.ContentTypes.First().IsPropertyAvailable(p => p.Description));
+                Assert.IsTrue(list.ContentTypes.AsRequested().First().IsPropertyAvailable(p => p.Id));
+                Assert.IsTrue(list.ContentTypes.AsRequested().First().IsPropertyAvailable(p => p.Description));
             }
         }
 
         [TestMethod]
-        public async Task GetListByTitleWithLoadProperties()
+        public async Task GetListByTitleWithLoad()
         {
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                var list = await context.Web.Lists.GetByTitleAsync("Documents", p => p.Title, p => p.ListExperience, p => p.ContentTypes.LoadProperties(p => p.Id, p => p.Name));
+                var list = await context.Web.Lists.GetByTitleAsync("Documents", p => p.Title, p => p.ListExperience, p => p.ContentTypes.QueryProperties(p => p.Id, p => p.Name));
 
                 Assert.IsTrue(list.Requested);
                 Assert.AreEqual(list.Title, "documents", true);
                 Assert.IsTrue(list.ContentTypes.Requested);
-                Assert.IsTrue(list.ContentTypes.First().IsPropertyAvailable(p => p.Id));
-                Assert.IsTrue(list.ContentTypes.First().IsPropertyAvailable(p => p.Name));
+                Assert.IsTrue(list.ContentTypes.AsRequested().First().IsPropertyAvailable(p => p.Id));
+                Assert.IsTrue(list.ContentTypes.AsRequested().First().IsPropertyAvailable(p => p.Name));
             }
         }
 
         [TestMethod]
-        public async Task GetListByTitleWithLoadPropertiesRecursive()
+        public async Task GetListByTitleWithLoadRecursive()
         {
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 var list = await context.Web.Lists.GetByTitleAsync("Documents", p => p.Title, p => p.ListExperience,
-                    p => p.ContentTypes.LoadProperties(p => p.Id, p => p.Name,
-                        p => p.FieldLinks.LoadProperties(p => p.Id, p => p.Name)));
+                    p => p.ContentTypes.QueryProperties(p => p.Id, p => p.Name,
+                        p => p.FieldLinks.QueryProperties(p => p.Id, p => p.Name)));
 
                 Assert.IsTrue(list.Requested);
                 Assert.AreEqual(list.Title, "documents", true);
                 Assert.IsTrue(list.ContentTypes.Requested);
-                Assert.IsTrue(list.ContentTypes.First().IsPropertyAvailable(p => p.Id));
-                Assert.IsTrue(list.ContentTypes.First().IsPropertyAvailable(p => p.Name));
-                Assert.IsTrue(list.ContentTypes.First().FieldLinks.Requested);
-                Assert.IsTrue(list.ContentTypes.First().FieldLinks.First().IsPropertyAvailable(p => p.Id));
-                Assert.IsTrue(list.ContentTypes.First().FieldLinks.First().IsPropertyAvailable(p => p.Name));
-                Assert.IsTrue(!string.IsNullOrEmpty(list.ContentTypes.First().FieldLinks.First().Name));
+
+                var firstContentType = list.ContentTypes.AsRequested().First();
+                Assert.IsTrue(firstContentType.IsPropertyAvailable(p => p.Id));
+                Assert.IsTrue(firstContentType.IsPropertyAvailable(p => p.Name));
+                Assert.IsTrue(firstContentType.FieldLinks.Requested);
+
+                var firstFieldLink = firstContentType.FieldLinks.AsRequested().First();
+                Assert.IsTrue(firstFieldLink.IsPropertyAvailable(p => p.Id));
+                Assert.IsTrue(firstFieldLink.IsPropertyAvailable(p => p.Name));
+                Assert.IsTrue(!string.IsNullOrEmpty(firstFieldLink.Name));
             }
         }
 
@@ -870,9 +896,12 @@ namespace PnP.Core.Test.SharePoint
 
                 using (var context2 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))
                 {
+                    // Filtering lists by Id is not yet supported by Microsoft Graph
+                    context2.GraphFirst = false;
+
                     // Get list without root folder - will trigger rootfolder load
                     var list = await context2.Web.Lists.GetByIdAsync(listId,
-                        l => l.Fields.LoadProperties(f => f.Id, f => f.Title, f => f.InternalName, f => f.TypeAsString));
+                        l => l.Fields.QueryProperties(f => f.Id, f => f.Title, f => f.InternalName, f => f.TypeAsString));
 
                     // Add a list item
                     Dictionary<string, object> values = new Dictionary<string, object>
@@ -884,16 +913,18 @@ namespace PnP.Core.Test.SharePoint
 
                     // Get list with roorfolder, more optimized
                     list = await context2.Web.Lists.GetByIdAsync(listId,
-                        l => l.RootFolder, l => l.Fields.LoadProperties(f => f.Id, f => f.Title, f => f.InternalName, f => f.TypeAsString));
+                        l => l.RootFolder, l => l.Fields.QueryProperties(f => f.Id, f => f.Title, f => f.InternalName, f => f.TypeAsString));
 
                     await list.Items.AddAsync(values);
 
                     using (var context3 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 3))
                     {
-                        // We should have 2 list items
-                        var list3 = await context2.Web.Lists.GetByIdAsync(listId, p => p.Items);
+                        //context3.GraphFirst = false;
 
-                        Assert.IsTrue(list3.Items.Count() == 2);
+                        // We should have 2 list items
+                        var list3 = await context3.Web.Lists.GetByIdAsync(listId, p => p.Items);
+
+                        Assert.IsTrue(list3.Items.Length == 2);
                     }
 
                     // delete the list again
@@ -909,10 +940,12 @@ namespace PnP.Core.Test.SharePoint
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                var web = context.Web.Get(p => p.Lists);
+                context.Web.Load(p => p.Lists);
+
+                var web = context.Web;
 
                 string listTitle = TestCommon.GetPnPSdkTestAssetName("BreakRoleInheritanceTest");
-                var myList = web.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
+                var myList = web.Lists.AsRequested().FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
 
                 if (myList != null)
                 {
@@ -938,10 +971,12 @@ namespace PnP.Core.Test.SharePoint
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                var web = context.Web.Get(p => p.Lists);
+                context.Web.Load(p => p.Lists);
+
+                var web = context.Web;
 
                 string listTitle = TestCommon.GetPnPSdkTestAssetName("ResetRoleInheritanceTest");
-                var myList = web.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
+                var myList = web.Lists.AsRequested().FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
 
                 if (myList != null)
                 {
@@ -969,10 +1004,12 @@ namespace PnP.Core.Test.SharePoint
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                var web = context.Web.Get(p => p.Lists, p => p.CurrentUser);
+                context.Web.Load(p => p.Lists, p => p.CurrentUser);
+
+                var web = context.Web;
 
                 string listTitle = TestCommon.GetPnPSdkTestAssetName("GetRoleDefinitionsTest");
-                var myList = web.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
+                var myList = web.Lists.AsRequested().FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
 
                 if (myList != null)
                 {
@@ -1001,11 +1038,13 @@ namespace PnP.Core.Test.SharePoint
                 string listTitle = TestCommon.GetPnPSdkTestAssetName("AddRoleDefinitionsTest");
                 string roleDefName = TestCommon.GetPnPSdkTestAssetName("AddRoleDefinitionsTest");
 
-                var web = context.Web.Get(p => p.Lists, p => p.CurrentUser);
+                context.Web.Load(p => p.Lists, p => p.CurrentUser);
+
+                var web = context.Web;
 
                 var roleDefinition = web.RoleDefinitions.Add(roleDefName, RoleType.Administrator, new PermissionKind[] { PermissionKind.AddAndCustomizePages });
                                 
-                var myList = web.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
+                var myList = web.Lists.AsRequested().FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
 
                 if (myList != null)
                 {
@@ -1020,7 +1059,7 @@ namespace PnP.Core.Test.SharePoint
 
                 var roleDefinitions = await myList.GetRoleDefinitionsAsync(web.CurrentUser.Id);
 
-                Assert.IsTrue(roleDefinitions.Length > 1 && roleDefinitions.FirstOrDefault(r => r.Name == roleDefName) != null);
+                Assert.IsTrue(roleDefinitions.Length > 1 && roleDefinitions.AsRequested().FirstOrDefault(r => r.Name == roleDefName) != null);
 
                 await myList.DeleteAsync();
 
@@ -1038,11 +1077,13 @@ namespace PnP.Core.Test.SharePoint
                 string listTitle = TestCommon.GetPnPSdkTestAssetName("RemoveRoleDefinitionsTest");
                 string roleDefName = TestCommon.GetPnPSdkTestAssetName("RemoveRoleDefinitionsTest");
 
-                var web = context.Web.Get(p => p.Lists, p => p.CurrentUser);
+                context.Web.Load(p => p.Lists, p => p.CurrentUser);
+
+                var web = context.Web;
 
                 var roleDefinition = web.RoleDefinitions.Add(roleDefName, RoleType.Administrator, new PermissionKind[] { PermissionKind.AddAndCustomizePages });
 
-                var myList = web.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
+                var myList = web.Lists.AsRequested().FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
 
                 if (myList != null)
                 {
@@ -1057,13 +1098,13 @@ namespace PnP.Core.Test.SharePoint
 
                 var roleDefinitionsBefore = await myList.GetRoleDefinitionsAsync(web.CurrentUser.Id);
 
-                Assert.IsTrue(roleDefinitionsBefore.Length > 0 && roleDefinitionsBefore.FirstOrDefault(r => r.Name == roleDefName) != null);
+                Assert.IsTrue(roleDefinitionsBefore.Length > 0 && roleDefinitionsBefore.AsRequested().FirstOrDefault(r => r.Name == roleDefName) != null);
 
                 myList.RemoveRoleDefinitions(web.CurrentUser.Id, roleDefName);
 
                 var roleDefinitionsAfter = await myList.GetRoleDefinitionsAsync(web.CurrentUser.Id);
 
-                Assert.IsTrue(roleDefinitionsAfter.Length != roleDefinitionsBefore.Length && roleDefinitionsAfter.FirstOrDefault(r => r.Name == roleDefName) == null);
+                Assert.IsTrue(roleDefinitionsAfter.Length != roleDefinitionsBefore.Length && roleDefinitionsAfter.AsRequested().FirstOrDefault(r => r.Name == roleDefName) == null);
 
                 await myList.DeleteAsync();
 

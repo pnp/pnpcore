@@ -1,0 +1,9 @@
+--batchresponse_fa51c9c9-a79b-4285-bae8-9e433ed69252
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+HTTP/1.1 200 OK
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+
+{"d":{"results":[{"__metadata":{"id":"https://piasysdev.sharepoint.com/sites/prov-1/_api/Site/RecycleBin(guid'598b6c4d-67fe-4a41-9955-8c9b5643d742')","uri":"https://piasysdev.sharepoint.com/sites/prov-1/_api/Site/RecycleBin(guid'598b6c4d-67fe-4a41-9955-8c9b5643d742')","type":"SP.RecycleBinItem"},"Author":{"__deferred":{"uri":"https://piasysdev.sharepoint.com/sites/prov-1/_api/Site/RecycleBin(guid'598b6c4d-67fe-4a41-9955-8c9b5643d742')/Author"}},"DeletedBy":{"__deferred":{"uri":"https://piasysdev.sharepoint.com/sites/prov-1/_api/Site/RecycleBin(guid'598b6c4d-67fe-4a41-9955-8c9b5643d742')/DeletedBy"}},"AuthorEmail":"paolo@PiaSysDev.onmicrosoft.com","AuthorName":"Paolo Pialorsi","DeletedByEmail":"paolo@PiaSysDev.onmicrosoft.com","DeletedByName":"Paolo Pialorsi","DeletedDate":"2021-02-12T15:53:43Z","DeletedDateLocalFormatted":"2/12/2021 7:53 AM","DirName":"sites/prov-1/Shared Documents","DirNamePath":{"__metadata":{"type":"SP.ResourcePath"},"DecodedUrl":"sites/prov-1/Shared Documents"},"Id":"598b6c4d-67fe-4a41-9955-8c9b5643d742","ItemState":2,"ItemType":1,"LeafName":"PNP_SDK_TEST_MoveToSecondStageAsyncTest.docx","LeafNamePath":{"__metadata":{"type":"SP.ResourcePath"},"DecodedUrl":"PNP_SDK_TEST_MoveToSecondStageAsyncTest.docx"},"Size":"18411","Title":"PNP_SDK_TEST_MoveToSecondStageAsyncTest.docx"}]}}
+--batchresponse_fa51c9c9-a79b-4285-bae8-9e433ed69252--

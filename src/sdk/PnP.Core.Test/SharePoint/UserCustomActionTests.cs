@@ -1,6 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PnP.Core.Model.SharePoint;
 using PnP.Core.Test.Utilities;
+using PnP.Core.QueryModel;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -25,12 +26,14 @@ namespace PnP.Core.Test.SharePoint
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
             {
-                IWeb web = await context.Web.GetAsync(p => p.UserCustomActions);
+                await context.Web.LoadAsync(p => p.UserCustomActions);
+
+                var web = context.Web;
 
                 Assert.IsNotNull(web.UserCustomActions);
-                Assert.IsTrue(web.UserCustomActions.Count() > 0);
+                Assert.IsTrue(web.UserCustomActions.Length > 0);
 
-                IUserCustomAction foundCustomAction = web.UserCustomActions.FirstOrDefault(uca => uca.Id == customActionId);
+                IUserCustomAction foundCustomAction = web.UserCustomActions.AsRequested().FirstOrDefault(uca => uca.Id == customActionId);
 
                 Assert.IsNotNull(foundCustomAction);
                 Assert.AreEqual(customActionId, foundCustomAction.Id);
@@ -55,9 +58,9 @@ namespace PnP.Core.Test.SharePoint
                 ISite site = await context.Site.GetAsync(p => p.UserCustomActions);
 
                 Assert.IsNotNull(site.UserCustomActions);
-                Assert.IsTrue(site.UserCustomActions.Count() > 0);
+                Assert.IsTrue(site.UserCustomActions.Length > 0);
 
-                IUserCustomAction foundCustomAction = site.UserCustomActions.FirstOrDefault(uca => uca.Id == customActionId);
+                IUserCustomAction foundCustomAction = site.UserCustomActions.AsRequested().FirstOrDefault(uca => uca.Id == customActionId);
 
                 Assert.IsNotNull(foundCustomAction);
                 Assert.AreEqual(customActionId, foundCustomAction.Id);
@@ -450,9 +453,9 @@ namespace PnP.Core.Test.SharePoint
                 IWeb web = await context.Web.GetAsync(p => p.UserCustomActions);
 
                 Assert.IsNotNull(web.UserCustomActions);
-                Assert.IsTrue(web.UserCustomActions.Count() > 0);
+                Assert.IsTrue(web.UserCustomActions.Length > 0);
 
-                IUserCustomAction foundCustomAction = web.UserCustomActions.FirstOrDefault(uca => uca.Id == customActionId);
+                IUserCustomAction foundCustomAction = web.UserCustomActions.AsRequested().FirstOrDefault(uca => uca.Id == customActionId);
 
                 Assert.IsNotNull(foundCustomAction);
                 Assert.AreEqual(customActionId, foundCustomAction.Id);
@@ -463,16 +466,13 @@ namespace PnP.Core.Test.SharePoint
                 foundCustomAction.Description = "UPDATED DESCRIPTION";
                 foundCustomAction.Rights.Set(PermissionKind.ApproveItems); // not in the default set which has been added during the creation of the actions
                 await foundCustomAction.UpdateAsync();
-            }
-
-            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))
-            {
-                IWeb web = await context.Web.GetAsync(p => p.UserCustomActions);
+ 
+                web = await context.Web.GetAsync(p => p.UserCustomActions);
 
                 Assert.IsNotNull(web.UserCustomActions);
-                Assert.IsTrue(web.UserCustomActions.Count() > 0);
+                Assert.IsTrue(web.UserCustomActions.Length > 0);
 
-                IUserCustomAction foundCustomAction = web.UserCustomActions.FirstOrDefault(uca => uca.Id == customActionId);
+                foundCustomAction = web.UserCustomActions.AsRequested().FirstOrDefault(uca => uca.Id == customActionId);
 
                 Assert.AreEqual($"{customActionName}_UPDATED", foundCustomAction.Name);
                 Assert.AreEqual($"{customActionName}_UPDATED", foundCustomAction.Title);
@@ -495,19 +495,16 @@ namespace PnP.Core.Test.SharePoint
                 IWeb web = await context.Web.GetAsync(p => p.UserCustomActions);
 
                 Assert.IsNotNull(web.UserCustomActions);
-                Assert.IsTrue(web.UserCustomActions.Count() > 0);
+                Assert.IsTrue(web.UserCustomActions.Length > 0);
 
-                IUserCustomAction foundCustomAction = web.UserCustomActions.FirstOrDefault(uca => uca.Id == customActionId);
+                IUserCustomAction foundCustomAction = web.UserCustomActions.AsRequested().FirstOrDefault(uca => uca.Id == customActionId);
                 Assert.IsNotNull(foundCustomAction);
 
                 await foundCustomAction.DeleteAsync();
-            }
 
-            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))
-            {
-                IWeb web = await context.Web.GetAsync(p => p.UserCustomActions);
+                web = await context.Web.GetAsync(p => p.UserCustomActions);
 
-                IUserCustomAction foundCustomAction = web.UserCustomActions.FirstOrDefault(uca => uca.Id == customActionId);
+                foundCustomAction = web.UserCustomActions.AsRequested().FirstOrDefault(uca => uca.Id == customActionId);
                 Assert.IsNull(foundCustomAction);
             }
         }

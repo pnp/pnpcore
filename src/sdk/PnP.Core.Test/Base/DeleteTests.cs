@@ -4,6 +4,7 @@ using PnP.Core.Test.Utilities;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
+using PnP.Core.Model;
 
 namespace PnP.Core.Test.Base
 {
@@ -29,26 +30,27 @@ namespace PnP.Core.Test.Base
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                var web = await context.Web.GetAsync(p => p.Lists);
+                // Get the lists
+                await context.Web.LoadAsync(p => p.Lists);
 
                 string listTitle = "DeleteListViaRest";
-                var myList = web.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
+                var myList = context.Web.Lists.FirstOrDefault(p => p.Title == listTitle);
 
                 if (myList == null)
                 {
-                    myList = await web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
+                    myList = await context.Web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
                 }
                 else
                 {
                     Assert.Inconclusive("Test data set should be setup to not have the list available.");
                 }
 
-                var listCount = web.Lists.Count();
+                var listCount = context.Web.Lists.Length;
 
                 // Delete the list
                 await myList.DeleteAsync();
                 // Verify that the list was removed from the model collection as well
-                Assert.IsTrue(web.Lists.Count() == listCount - 1);
+                Assert.IsTrue(context.Web.Lists.Length == listCount - 1);
 
                 // Was the list added
                 bool exceptionThrown = false;
@@ -63,9 +65,9 @@ namespace PnP.Core.Test.Base
                 Assert.IsTrue(exceptionThrown);
 
                 // Get the lists again
-                await context.Web.GetAsync(p => p.Lists);
+                await context.Web.LoadAsync(p => p.Lists);
 
-                Assert.IsTrue(web.Lists.Count() == listCount - 1);
+                Assert.IsTrue(context.Web.Lists.Length == listCount - 1);
             }
         }
 
@@ -75,15 +77,15 @@ namespace PnP.Core.Test.Base
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                var web = await context.Web.GetBatchAsync(p => p.Lists);
-                await context.ExecuteAsync();
+                // Get the lists
+                await context.Web.LoadAsync(p => p.Lists);
 
                 string listTitle = "DeleteListViaBatchRest";
-                var myList = web.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
+                var myList = context.Web.Lists.FirstOrDefault(p => p.Title == listTitle);
 
                 if (myList == null)
                 {
-                    myList = await web.Lists.AddBatchAsync(listTitle, ListTemplateType.GenericList);
+                    myList = await context.Web.Lists.AddBatchAsync(listTitle, ListTemplateType.GenericList);
                     await context.ExecuteAsync();
                 }
                 else
@@ -91,7 +93,7 @@ namespace PnP.Core.Test.Base
                     Assert.Inconclusive("Test data set should be setup to not have the list available.");
                 }
 
-                var listCount = web.Lists.Count();
+                var listCount = context.Web.Lists.Length;
 
                 // Delete the list
                 await myList.DeleteBatchAsync();
@@ -110,10 +112,10 @@ namespace PnP.Core.Test.Base
                 Assert.IsTrue(exceptionThrown);
 
                 // Get the lists again
-                await context.Web.GetBatchAsync(p => p.Lists);
+                await context.Web.LoadBatchAsync(p => p.Lists);
                 await context.ExecuteAsync();
 
-                Assert.IsTrue(web.Lists.Count() == listCount - 1);
+                Assert.IsTrue(context.Web.Lists.Length == listCount - 1);
             }
         }
 
@@ -123,17 +125,17 @@ namespace PnP.Core.Test.Base
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                var batch = context.BatchClient.EnsureBatch();
-                var web = await context.Web.GetBatchAsync(batch, p => p.Lists);
-                await context.ExecuteAsync(batch);
+                // Get the lists
+                await context.Web.LoadAsync(p => p.Lists);
 
+                Core.Services.Batch batch = null;
                 string listTitle = "DeleteListViaExplicitBatchRest";
-                var myList = web.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
+                var myList = context.Web.Lists.FirstOrDefault(p => p.Title == listTitle);
 
                 if (myList == null)
                 {
                     batch = context.BatchClient.EnsureBatch();
-                    myList = await web.Lists.AddBatchAsync(batch, listTitle, ListTemplateType.GenericList);
+                    myList = await context.Web.Lists.AddBatchAsync(batch, listTitle, ListTemplateType.GenericList);
                     await context.ExecuteAsync(batch);
                 }
                 else
@@ -141,7 +143,7 @@ namespace PnP.Core.Test.Base
                     Assert.Inconclusive("Test data set should be setup to not have the list available.");
                 }
 
-                var listCount = web.Lists.Count();
+                var listCount = context.Web.Lists.Length;
 
                 // Delete the list
                 batch = context.BatchClient.EnsureBatch();
@@ -162,10 +164,10 @@ namespace PnP.Core.Test.Base
 
                 // Get the lists again
                 batch = context.BatchClient.EnsureBatch();
-                await context.Web.GetBatchAsync(batch, p => p.Lists);
+                await context.Web.LoadBatchAsync(batch, p => p.Lists);
                 await context.ExecuteAsync(batch);
 
-                Assert.IsTrue(web.Lists.Count() == listCount - 1);
+                Assert.IsTrue(context.Web.Lists.Length == listCount - 1);
             }
         }
 
@@ -175,30 +177,31 @@ namespace PnP.Core.Test.Base
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                var web = await context.Web.GetAsync(p => p.Lists);
+                // Get the lists
+                await context.Web.LoadAsync(p => p.Lists);
 
                 string listTitle = TestCommon.GetPnPSdkTestAssetName("DeleteListViaRestId");
-                var myList = web.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
+                var myList = context.Web.Lists.FirstOrDefault(p => p.Title == listTitle);
 
                 if (myList == null)
                 {
-                    myList = await web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
+                    myList = await context.Web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
                 }
                 else
                 {
                     Assert.Inconclusive("Test data set should be setup to not have the list available.");
                 }
 
-                var listCount = web.Lists.Count();
+                var listCount = context.Web.Lists.Length;
 
                 using (var context2 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
                 {
                     await context2.Web.Lists.DeleteByIdAsync(myList.Id);
 
                     // Get the lists again
-                    await context2.Web.GetAsync(p => p.Lists);
+                    await context2.Web.LoadAsync(p => p.Lists);
 
-                    Assert.IsTrue(context2.Web.Lists.Count() == listCount - 1);
+                    Assert.IsTrue(context2.Web.Lists.Length == listCount - 1);
                 }
             }
         }
@@ -209,27 +212,28 @@ namespace PnP.Core.Test.Base
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                var web = await context.Web.GetAsync(p => p.Lists);
+                // Get the lists
+                await context.Web.LoadAsync(p => p.Lists);
 
                 string listTitle = TestCommon.GetPnPSdkTestAssetName("DeleteListViaRestIdExistsInModel");
-                var myList = web.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
+                var myList = context.Web.Lists.FirstOrDefault(p => p.Title == listTitle);
 
                 if (myList == null)
                 {
-                    myList = await web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
+                    myList = await context.Web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
                 }
                 else
                 {
                     Assert.Inconclusive("Test data set should be setup to not have the list available.");
                 }
 
-                var listCount = web.Lists.Count();
+                var listCount = context.Web.Lists.Length;
 
                 // Delete the list
                 await context.Web.Lists.DeleteByIdAsync(myList.Id);
 
                 // Verify the list was removed from the model collection
-                Assert.IsTrue(web.Lists.Count() == listCount - 1);
+                Assert.IsTrue(context.Web.Lists.Length == listCount - 1);
 
                 // Using a reference to a removed list should result in a exception
                 bool exceptionThrown = false;
@@ -243,14 +247,11 @@ namespace PnP.Core.Test.Base
                 }
                 Assert.IsTrue(exceptionThrown);
 
-                using (var context2 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
-                {
-                    // Get the lists again
-                    await context2.Web.GetAsync(p => p.Lists);
+                // Get the lists again
+                await context.Web.LoadAsync(p => p.Lists);
 
-                    // and check if the list was deleted
-                    Assert.IsTrue(context2.Web.Lists.Count() == listCount - 1);
-                }
+                // and check if the list was deleted
+                Assert.IsTrue(context.Web.Lists.Length == listCount - 1);
             }
         }
 
@@ -260,21 +261,22 @@ namespace PnP.Core.Test.Base
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                var web = await context.Web.GetAsync(p => p.Lists);
+                // Get the lists
+                await context.Web.LoadAsync(p => p.Lists);
 
                 string listTitle = TestCommon.GetPnPSdkTestAssetName("DeleteListViaRestIdBatch");
-                var myList = web.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
+                var myList = context.Web.Lists.FirstOrDefault(p => p.Title == listTitle);
 
                 if (myList == null)
                 {
-                    myList = await web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
+                    myList = await context.Web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
                 }
                 else
                 {
                     Assert.Inconclusive("Test data set should be setup to not have the list available.");
                 }
 
-                var listCount = web.Lists.Count();
+                var listCount = context.Web.Lists.Length;
 
                 using (var context2 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
                 {
@@ -285,9 +287,9 @@ namespace PnP.Core.Test.Base
                     await context2.ExecuteAsync();
 
                     // Get the lists again
-                    await context2.Web.GetAsync(p => p.Lists);
+                    await context2.Web.LoadAsync(p => p.Lists);
 
-                    Assert.IsTrue(context2.Web.Lists.Count() == listCount - 1);
+                    Assert.IsTrue(context2.Web.Lists.Length == listCount - 1);
                 }
             }
         }
@@ -301,44 +303,38 @@ namespace PnP.Core.Test.Base
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                var team = await context.Team.GetAsync(p => p.Channels);
+                // Initial load of channels
+                await context.Team.LoadAsync(p => p.Channels);
 
                 string channelName = $"Channel test {new Random().Next()}";
 
                 // Find first updatable channel
-                var channelToDelete = team.Channels.FirstOrDefault(p => p.DisplayName == channelName);
+                var channelToDelete = context.Team.Channels.FirstOrDefault(p => p.DisplayName == channelName);
 
                 if (channelToDelete == null)
                 {
-                    channelToDelete = await team.Channels.AddAsync(channelName, "Test channel, will be deleted in 21 days");
+                    channelToDelete = await context.Team.Channels.AddAsync(channelName, "Test channel, will be deleted in 21 days");
                 }
                 else
                 {
                     Assert.Inconclusive("Test data set should be setup to not have the channel available.");
                 }
 
-                var channelCount = team.Channels.Count();
+                var channelCount = context.Team.Channels.Length;
 
                 // Delete channel
                 await channelToDelete.DeleteAsync();
 
-                // Was the channel added
-                bool exceptionThrown = false;
-                try
-                {
+                // Was the channel deleted?
+                Assert.ThrowsException<ClientException>(() => {
                     var deletedChannelDescription = channelToDelete.Description;
-                }
-                catch (Exception)
-                {
-                    exceptionThrown = true;
-                }
-                Assert.IsTrue(exceptionThrown);
+                });
 
                 // Get the channel again
-                await context.Team.GetAsync(p => p.Channels);
+                await context.Team.LoadAsync(p => p.Channels);
 
                 // We should have one channel less
-                Assert.IsTrue(team.Channels.Count() == channelCount - 1);
+                Assert.IsTrue(context.Team.Channels.Length == channelCount - 1);
             }
         }
 
@@ -348,17 +344,18 @@ namespace PnP.Core.Test.Base
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                var team = await context.Team.GetBatchAsync(p => p.Channels);
+                // Initial load of channels
+                await context.Team.LoadBatchAsync(p => p.Channels);
                 await context.ExecuteAsync();
 
                 string channelName = $"Channel test {new Random().Next()}";
 
                 // Find first updatable channel
-                var channelToDelete = team.Channels.FirstOrDefault(p => p.DisplayName == channelName);
+                var channelToDelete = context.Team.Channels.FirstOrDefault(p => p.DisplayName == channelName);
 
                 if (channelToDelete == null)
                 {
-                    channelToDelete = await team.Channels.AddBatchAsync(channelName, "Test channel, will be deleted in 21 days");
+                    channelToDelete = await context.Team.Channels.AddBatchAsync(channelName, "Test channel, will be deleted in 21 days");
                     await context.ExecuteAsync();
                 }
                 else
@@ -366,30 +363,23 @@ namespace PnP.Core.Test.Base
                     Assert.Inconclusive("Test data set should be setup to not have the channel available.");
                 }
 
-                var channelCount = team.Channels.Count();
+                var channelCount = context.Team.Channels.Length;
 
                 // Delete channel
                 await channelToDelete.DeleteBatchAsync();
                 await context.ExecuteAsync();
 
-                // Was the channel added
-                bool exceptionThrown = false;
-                try
-                {
+                // Was the channel deleted?
+                Assert.ThrowsException<ClientException>(() => {
                     var deletedChannelDescription = channelToDelete.Description;
-                }
-                catch (Exception)
-                {
-                    exceptionThrown = true;
-                }
-                Assert.IsTrue(exceptionThrown);
+                });
 
                 // Get the channel again
-                await context.Team.GetBatchAsync(p => p.Channels);
+                await context.Team.LoadBatchAsync(p => p.Channels);
                 await context.ExecuteAsync();
 
                 // We should have one channel less
-                Assert.IsTrue(team.Channels.Count() == channelCount - 1);
+                Assert.IsTrue(context.Team.Channels.Length == channelCount - 1);
             }
         }
 
@@ -399,19 +389,20 @@ namespace PnP.Core.Test.Base
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                var batch = context.BatchClient.EnsureBatch();
-                var team = await context.Team.GetBatchAsync(batch, p => p.Channels);
-                await context.ExecuteAsync(batch);
+                // Initial load of channels
+                await context.Team.LoadBatchAsync(p => p.Channels);
+                await context.ExecuteAsync();
 
+                Core.Services.Batch batch = null;
                 string channelName = $"Channel test {new Random().Next()}";
 
                 // Find first updatable channel
-                var channelToDelete = team.Channels.FirstOrDefault(p => p.DisplayName == channelName);
+                var channelToDelete = context.Team.Channels.FirstOrDefault(p => p.DisplayName == channelName);
 
                 if (channelToDelete == null)
                 {
                     batch = context.BatchClient.EnsureBatch();
-                    channelToDelete = await team.Channels.AddBatchAsync(batch, channelName, "Test channel, will be deleted in 21 days");
+                    channelToDelete = await context.Team.Channels.AddBatchAsync(batch, channelName, "Test channel, will be deleted in 21 days");
                     await context.ExecuteAsync(batch);
                 }
                 else
@@ -419,35 +410,27 @@ namespace PnP.Core.Test.Base
                     Assert.Inconclusive("Test data set should be setup to not have the channel available.");
                 }
 
-                var channelCount = team.Channels.Count();
+                var channelCount = context.Team.Channels.Length;
 
                 // Delete channel
                 batch = context.BatchClient.EnsureBatch();
                 await channelToDelete.DeleteBatchAsync(batch);
                 await context.ExecuteAsync(batch);
 
-                // Was the channel added
-                bool exceptionThrown = false;
-                try
-                {
+                // Was the channel deleted?
+                Assert.ThrowsException<ClientException>(() => {
                     var deletedChannelDescription = channelToDelete.Description;
-                }
-                catch (Exception)
-                {
-                    exceptionThrown = true;
-                }
-                Assert.IsTrue(exceptionThrown);
+                });
 
                 // Get the channel again
                 batch = context.BatchClient.EnsureBatch();
-                await context.Team.GetBatchAsync(batch, p => p.Channels);
+                await context.Team.LoadBatchAsync(batch, p => p.Channels);
                 await context.ExecuteAsync(batch);
 
                 // We should have one channel less
-                Assert.IsTrue(team.Channels.Count() == channelCount - 1);
+                Assert.IsTrue(context.Team.Channels.Length == channelCount - 1);
             }
         }
         #endregion
-
     }
 }

@@ -1,9 +1,9 @@
---batchresponse_cd0fae1d-1cba-46c7-8608-cb214c6874cb
+--batchresponse_4ffbc283-82ca-4880-8531-f387cedd0579
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{"d":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web","type":"SP.Web"},"Id":"8c8e101c-1b0d-4253-85e7-c30039bf46e2","TenantAdminMembersCanShare":0,"TenantTagPolicyEnabled":false,"ThemedCssFolderUrl":"/sites/prov-1/_catalogs/theme/Themed/CF5832D7","ThirdPartyMdmEnabled":false,"TreeViewEnabled":false,"UIVersion":15,"UIVersionConfigurationEnabled":false,"UseAccessRequestDefault":true,"WebTemplate":"GROUP","WebTemplateConfiguration":"GROUP#0","WebTemplatesGalleryFirstRunEnabled":false}}
---batchresponse_cd0fae1d-1cba-46c7-8608-cb214c6874cb--
+{"d":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web","type":"SP.Web"},"Id":"8c8e101c-1b0d-4253-85e7-c30039bf46e2","TenantAdminMembersCanShare":0,"ThirdPartyMdmEnabled":false,"TreeViewEnabled":false,"UseAccessRequestDefault":true,"WebTemplate":"GROUP","WebTemplateConfiguration":"GROUP#0"}}
+--batchresponse_4ffbc283-82ca-4880-8531-f387cedd0579--

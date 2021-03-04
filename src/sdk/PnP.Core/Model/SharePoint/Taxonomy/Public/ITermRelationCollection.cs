@@ -1,4 +1,5 @@
-﻿using PnP.Core.Services;
+﻿/*
+using PnP.Core.Services;
 using System.Threading.Tasks;
 
 namespace PnP.Core.Model.SharePoint
@@ -7,7 +8,7 @@ namespace PnP.Core.Model.SharePoint
     /// Collection of terms
     /// </summary>
     [ConcreteType(typeof(TermRelationCollection))]
-    public interface ITermRelationCollection : IDataModelCollection<ITermRelation>, ISupportPaging<ITermRelation>
+    public interface ITermRelationCollection : IDataModelCollection<ITermRelation>, ISupportQuery<ITermRelation>
     {
         /// <summary>
         /// Adds a new term relation
@@ -68,3 +69,4 @@ namespace PnP.Core.Model.SharePoint
 
     }
 }
+*/

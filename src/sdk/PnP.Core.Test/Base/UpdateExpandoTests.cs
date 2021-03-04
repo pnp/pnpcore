@@ -5,7 +5,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-
+using PnP.Core.Model;
+using PnP.Core.QueryModel;
 
 namespace PnP.Core.Test.Base
 {
@@ -31,15 +32,13 @@ namespace PnP.Core.Test.Base
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                var web = await context.Web.GetAsync(p => p.Lists);
-
                 string listTitle = "UpdateValuesPropertyViaRest";
-                var myList = web.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
+                var myList = context.Web.Lists.FirstOrDefault(p => p.Title == listTitle);
 
                 if (myList == null)
                 {
                     // Create the list
-                    myList = await web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
+                    myList = await context.Web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
                     // Add a list item to this list
                     // Add a list item
                     Dictionary<string, object> values = new Dictionary<string, object>
@@ -53,33 +52,44 @@ namespace PnP.Core.Test.Base
                     Assert.Inconclusive("Test data set should be setup to not have the list available.");
                 }
 
-                // get items from the list
-                await myList.GetAsync(p => p.Items);
+                if (myList != null)
+                { 
+                    try
+                    {
+                        // get items from the list
+                        await myList.LoadAsync(p => p.Items);
 
-                // grab first item
-                var firstItem = myList.Items.FirstOrDefault();
-                if (firstItem != null)
-                {
-                    firstItem.Values["Title"] = "No";
-                    // The values property should have changed
-                    Assert.IsTrue(firstItem.HasChanged("Values"));
-                    // Did the transientdictionary list changes
-                    Assert.IsTrue(firstItem.Values.HasChanges);
+                        // grab first item
+                        var firstItem = myList.Items.AsRequested().FirstOrDefault();
+                        if (firstItem != null)
+                        {
+                            firstItem.Values["Title"] = "No";
+                            // The values property should have changed
+                            Assert.IsTrue(firstItem.HasChanged("Values"));
+                            // Did the transientdictionary list changes
+                            Assert.IsTrue(firstItem.Values.HasChanges);
 
-                    await firstItem.UpdateAsync();
+                            await firstItem.UpdateAsync();
 
-                    // get items again from the list
-                    await myList.GetAsync(p => p.Items);
-                    firstItem = myList.Items.FirstOrDefault();
+                            // get items again from the list
+                            await myList.LoadAsync(p => p.Items);
+                            firstItem = myList.Items.AsRequested().FirstOrDefault();
 
-                    Assert.IsTrue(firstItem.Values["Title"].ToString() == "No");
-                    Assert.IsFalse(firstItem.HasChanged("Values"));
-                    Assert.IsFalse(firstItem.Values.HasChanges);
+                            Assert.IsTrue(firstItem.Values["Title"].ToString() == "No");
+                            Assert.IsFalse(firstItem.HasChanged("Values"));
+                            Assert.IsFalse(firstItem.Values.HasChanges);
 
-                    // reset the item for the next test run via the expando syntax
-                    dynamic dynamicFirstItem = firstItem;
-                    dynamicFirstItem.Title = "Yes";
-                    await dynamicFirstItem.UpdateAsync();
+                            // reset the item for the next test run via the expando syntax
+                            dynamic dynamicFirstItem = firstItem;
+                            dynamicFirstItem.Title = "Yes";
+                            await dynamicFirstItem.UpdateAsync();
+                        }
+                    }
+                    finally
+                    {
+                        // Clean up
+                        await myList.DeleteAsync();
+                    }
                 }
             }
         }
@@ -90,16 +100,13 @@ namespace PnP.Core.Test.Base
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                var web = await context.Web.GetBatchAsync(p => p.Lists);
-                await context.ExecuteAsync();
-
                 string listTitle = "UpdateValuesPropertyViaBatchRest";
-                var myList = web.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
+                var myList = context.Web.Lists.FirstOrDefault(p => p.Title == listTitle);
 
                 if (myList == null)
                 {
                     // Create the list
-                    myList = await web.Lists.AddBatchAsync(listTitle, ListTemplateType.GenericList);
+                    myList = await context.Web.Lists.AddBatchAsync(listTitle, ListTemplateType.GenericList);
                     await context.ExecuteAsync();
                     // Add a list item to this list
                     // Add a list item
@@ -115,36 +122,47 @@ namespace PnP.Core.Test.Base
                     Assert.Inconclusive("Test data set should be setup to not have the list available.");
                 }
 
-                // get items from the list
-                await myList.GetBatchAsync(p => p.Items);
-                await context.ExecuteAsync();
-
-                // grab first item
-                var firstItem = myList.Items.FirstOrDefault();
-                if (firstItem != null)
+                if (myList != null)
                 {
-                    firstItem.Values["Title"] = "No";
-                    // The values property should have changed
-                    Assert.IsTrue(firstItem.HasChanged("Values"));
-                    // Did the transientdictionary list changes
-                    Assert.IsTrue(firstItem.Values.HasChanges);
+                    try
+                    {
+                        // get items from the list
+                        await myList.LoadBatchAsync(p => p.Items);
+                        await context.ExecuteAsync();
 
-                    await firstItem.UpdateBatchAsync();
-                    await context.ExecuteAsync();
+                        // grab first item
+                        var firstItem = myList.Items.AsRequested().FirstOrDefault();
+                        if (firstItem != null)
+                        {
+                            firstItem.Values["Title"] = "No";
+                            // The values property should have changed
+                            Assert.IsTrue(firstItem.HasChanged("Values"));
+                            // Did the transientdictionary list changes
+                            Assert.IsTrue(firstItem.Values.HasChanges);
 
-                    // get items again from the list
-                    await myList.GetBatchAsync(p => p.Items);
-                    await context.ExecuteAsync();
-                    firstItem = myList.Items.FirstOrDefault();
+                            await firstItem.UpdateBatchAsync();
+                            await context.ExecuteAsync();
 
-                    Assert.IsTrue(firstItem.Values["Title"].ToString() == "No");
-                    Assert.IsFalse(firstItem.HasChanged("Values"));
-                    Assert.IsFalse(firstItem.Values.HasChanges);
+                            // get items again from the list
+                            await myList.LoadBatchAsync(p => p.Items);
+                            await context.ExecuteAsync();
 
-                    // reset the item for the next test run via the expando syntax
-                    dynamic dynamicFirstItem = firstItem;
-                    dynamicFirstItem.Title = "Yes";
-                    await dynamicFirstItem.UpdateAsync();
+                            firstItem = myList.Items.AsRequested().FirstOrDefault();
+                            Assert.IsTrue(firstItem.Values["Title"].ToString() == "No");
+                            Assert.IsFalse(firstItem.HasChanged("Values"));
+                            Assert.IsFalse(firstItem.Values.HasChanges);
+
+                            // reset the item for the next test run via the expando syntax
+                            dynamic dynamicFirstItem = firstItem;
+                            dynamicFirstItem.Title = "Yes";
+                            await dynamicFirstItem.UpdateAsync();
+                        }
+                    }
+                    finally
+                    {
+                        // Clean up
+                        await myList.DeleteAsync();
+                    }
                 }
             }
         }

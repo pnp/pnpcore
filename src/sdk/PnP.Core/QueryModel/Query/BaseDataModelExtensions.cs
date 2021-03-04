@@ -15,6 +15,7 @@ namespace PnP.Core.QueryModel
     public static class BaseDataModelExtensions
     {
         #region Utility extension to make it easier to chain multiple async calls
+
         /// <summary>
         /// Chains async calls. See https://stackoverflow.com/a/52739551 for more information
         /// </summary>
@@ -37,6 +38,7 @@ namespace PnP.Core.QueryModel
             var input = await inputTask.ConfigureAwait(false);
             return (await mapping(input).ConfigureAwait(false));
         }
+
         #endregion
 
         #region Helper methods to obtain MethodInfo in a safe way
@@ -76,129 +78,11 @@ namespace PnP.Core.QueryModel
 #pragma warning restore CA1801 // Review unused parameters
 #pragma warning restore IDE0051 // Remove unused private members
 #pragma warning restore IDE0060 // Remove unused parameter
-        #endregion
-
-        #region Include implementation
-
-        /// <summary>
-        /// Extension method to declare the collection properties to expand while querying the REST service
-        /// </summary>
-        /// <typeparam name="TResult">The type of the target entity</typeparam>
-        /// <param name="source">The collection of items to expand properties from</param>
-        /// <param name="selector">A selector for the expandable properties</param>
-        /// <returns>The resulting collection</returns>
-        public static IQueryable<TResult> Include<TResult>(
-            this IQueryable<TResult> source, Expression<Func<TResult, object>> selector)
-        {
-            if (source is null)
-            {
-                throw new ArgumentNullException(nameof(source));
-            }
-            if (selector is null)
-            {
-                throw new ArgumentNullException(nameof(selector));
-            }
-
-            return source.Provider.CreateQuery<TResult>(
-                Expression.Call(
-                    null,
-                    GetMethodInfo(Include, source, selector),
-                    new Expression[] { source.Expression, Expression.Quote(selector) }
-                    ));
-        }
-
-        /// <summary>
-        /// Extension method to declare the collection properties to expand while querying the REST service
-        /// </summary>
-        /// <typeparam name="TResult">The type of the target entity</typeparam>
-        /// <param name="source">The collection of items to expand properties from</param>
-        /// <param name="selectors">An array of selectors for the expandable properties</param>
-        /// <returns>The resulting collection</returns>
-        public static IQueryable<TResult> Include<TResult>(
-            this IQueryable<TResult> source, params Expression<Func<TResult, object>>[] selectors)
-        {
-            if (source is null)
-            {
-                throw new ArgumentNullException(nameof(source));
-            }
-            if (selectors is null)
-            {
-                throw new ArgumentNullException(nameof(selectors));
-            }
-
-            IQueryable<TResult> result = source;
-
-            foreach (var s in selectors)
-            {
-                result = result.Include(s);
-            }
-
-            return result;
-        }
-
-        #endregion
-
-        #region Load implementation
-
-        /// <summary>
-        /// Extension method to declare a field/metadata property to load while executing the REST query
-        /// </summary>
-        /// <typeparam name="TResult">The type of the target entity</typeparam>
-        /// <param name="source">The collection of items to load the field/metadata from</param>
-        /// <param name="selector">A selector for a field/metadata</param>
-        /// <returns>The resulting collection</returns>
-        public static IQueryable<TResult> Load<TResult>(
-            this IQueryable<TResult> source, Expression<Func<TResult, object>> selector)
-        {
-            if (source is null)
-            {
-                throw new ArgumentNullException(nameof(source));
-            }
-            if (selector is null)
-            {
-                throw new ArgumentNullException(nameof(selector));
-            }
-
-            return source.Provider.CreateQuery<TResult>(
-                Expression.Call(
-                    null,
-                    GetMethodInfo(Load, source, selector),
-                    new Expression[] { source.Expression, Expression.Quote(selector) }
-                    ));
-        }
-
-        /// <summary>
-        /// Extension method to declare the fields/metadata properties to load while executing the REST query
-        /// </summary>
-        /// <typeparam name="TResult">The type of the target entity</typeparam>
-        /// <param name="source">The collection of items to load fields/metadata from</param>
-        /// <param name="selectors">An array of selectors for the fields/metadata</param>
-        /// <returns>The resulting collection</returns>
-        public static IQueryable<TResult> Load<TResult>(
-            this IQueryable<TResult> source, params Expression<Func<TResult, object>>[] selectors)
-        {
-            if (source is null)
-            {
-                throw new ArgumentNullException(nameof(source));
-            }
-            if (selectors is null)
-            {
-                throw new ArgumentNullException(nameof(selectors));
-            }
-
-            IQueryable<TResult> result = source;
-
-            foreach (var s in selectors)
-            {
-                result = result.Load(s);
-            }
-
-            return result;
-        }
 
         #endregion
 
         #region Internal base methods for model specific extension methods
+
         internal static async Task<T> BaseGetAsync<T>(
                     IQueryable<T> source,
                     ApiCall apiCall,
@@ -208,7 +92,7 @@ namespace PnP.Core.QueryModel
             var concreteEntity = (source as IManageableCollection<T>).CreateNew();
 
             // Grab entity information using the provided selectors
-            var entityInfo = EntityManager.GetClassInfo(concreteEntity.GetType(), (concreteEntity as BaseDataModel<T>), selectors);
+            var entityInfo = EntityManager.GetClassInfo(concreteEntity.GetType(), (concreteEntity as BaseDataModel<T>), expressions: selectors);
 
             // Build the default get query but pass in our given API call as override
             var query = await QueryClient.BuildGetAPICallAsync(concreteEntity as BaseDataModel<T>, entityInfo, apiCall).ConfigureAwait(false);
@@ -221,7 +105,7 @@ namespace PnP.Core.QueryModel
 
             return concreteEntity;
         }
-        #endregion
 
+        #endregion
     }
 }

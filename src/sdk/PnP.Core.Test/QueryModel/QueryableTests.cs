@@ -18,38 +18,6 @@ namespace PnP.Core.Test.QueryModel
         }
 
         [TestMethod]
-        public async Task TestQueryLoadExtensionMethod()
-        {
-            var expected = "$select=sharepointIds,displayName,description";
-
-            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
-            {
-                var query = context.Site.AllWebs
-                    .Load(w => w.Id, w => w.Title, w => w.Description);
-
-                var actual = query.ToString();
-                Assert.IsNotNull(actual);
-                Assert.AreEqual(expected, actual);
-            }
-        }
-
-        [TestMethod]
-        public async Task TestQueryIncludeExtensionMethod()
-        {
-            var expected = "$expand=lists,lists";
-
-            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
-            {
-                var query = context.Site.AllWebs
-                    .Include(w => w.Lists, w => w.Lists);
-
-                var actual = query.ToString();
-                Assert.IsNotNull(actual);
-                Assert.AreEqual(expected, actual);
-            }
-        }
-
-        [TestMethod]
         public async Task TestQueryTake()
         {
             var expected = "$top=10";
@@ -184,19 +152,15 @@ namespace PnP.Core.Test.QueryModel
         }
 
         [TestMethod]
-        public async Task TestQueryComplex()
+        public async Task TestQueryComplexGraph()
         {
-            var expected = "$select=sharepointIds,displayName,description&$filter=displayName eq 'Test'&$top=10&$skip=5&$expand=lists";
+            var expected = "$filter=displayName eq 'Test'";
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 var query = (from w in context.Site.AllWebs
                              where w.Title == "Test"
-                             select w)
-                             .Load(w => w.Id, w => w.Title, w => w.Description)
-                             .Include(w => w.Lists)
-                             .Take(10)
-                             .Skip(5);
+                             select w);
 
                 var actual = query.ToString();
                 Assert.IsNotNull(actual);
@@ -207,7 +171,7 @@ namespace PnP.Core.Test.QueryModel
         [TestMethod]
         public async Task TestQueryComplexMultiWhere()
         {
-            var expected = "$select=sharepointIds,displayName,description&$filter=((displayName eq 'Test' and description eq 'Description') and sharepointIds eq (guid'69e8b219-d7af-4ac9-bc23-d382b7de985e'))&$top=10&$skip=5&$expand=lists";
+            var expected = "$filter=((displayName eq 'Test' and description eq 'Description') and sharepointIds eq (guid'69e8b219-d7af-4ac9-bc23-d382b7de985e'))";
             var filteredId = new Guid("69e8b219-d7af-4ac9-bc23-d382b7de985e");
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
@@ -216,11 +180,7 @@ namespace PnP.Core.Test.QueryModel
                              where w.Title == "Test" &&
                                 w.Description == "Description" &&
                                 w.Id == filteredId
-                             select w)
-                             .Load(w => w.Id, w => w.Title, w => w.Description)
-                             .Include(w => w.Lists)
-                             .Take(10)
-                             .Skip(5);
+                             select w);
 
                 var actual = query.ToString();
                 Assert.IsNotNull(actual);

@@ -39,7 +39,7 @@ namespace PnP.Core.Model.Teams
             ValidateUpdateHandler = (PropertyUpdateRequest propertyUpdateRequest) =>
             {
                 // Prevent setting all values on the general channel
-                if (DisplayName == "General")
+                if (IsPropertyAvailable(t => t.DisplayName) && DisplayName == "General")
                 {
                     propertyUpdateRequest.CancelUpdate("Updating the general channel is not allowed.");
                 }

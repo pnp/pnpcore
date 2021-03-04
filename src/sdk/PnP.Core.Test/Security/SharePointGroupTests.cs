@@ -2,6 +2,9 @@
 using PnP.Core.Test.Utilities;
 using System.Linq;
 using System.Threading.Tasks;
+using PnP.Core.QueryModel;
+using PnP.Core.Model;
+using PnP.Core.Model.Security;
 
 namespace PnP.Core.Test.Security
 {
@@ -43,15 +46,20 @@ namespace PnP.Core.Test.Security
 
                 await siteGroup.AddRoleDefinitionsAsync(roleDefName);
 
-                var roleDefinitions = await siteGroup.GetRoleDefinitionsAsync();
+                try
+                {
+                    var roleDefinitions = await siteGroup.GetRoleDefinitionsAsync();
 
-                Assert.IsTrue(roleDefinitions.Length > 0);
+                    Assert.IsTrue(roleDefinitions.Length > 0);
+                }
+                finally
+                {
+                    // delete role def
+                    await roleDefinition.DeleteAsync();
 
-                // delete role def
-                await roleDefinition.DeleteAsync();
-
-                // delete group
-                await siteGroup.DeleteAsync();
+                    // delete group
+                    await siteGroup.DeleteAsync();
+                }
             }
         }
 
@@ -71,17 +79,21 @@ namespace PnP.Core.Test.Security
 
                 await siteGroup.AddRoleDefinitionsAsync(roleDefName);
 
-                var roleDefinitions = await siteGroup.GetRoleDefinitionsAsync();
+                try
+                {
+                    var roleDefinitions = await siteGroup.GetRoleDefinitionsAsync();
 
-                Assert.IsNotNull(roleDefinitions.FirstOrDefault(d => d.Name == roleDefName));
+                    var foundRole = roleDefinitions.AsRequested().FirstOrDefault(d => d.Name == roleDefName);
+                    Assert.IsNotNull(foundRole);
+                }
+                finally
+                {
+                    await siteGroup.RemoveRoleDefinitionsAsync(roleDefName);
 
-                await siteGroup.RemoveRoleDefinitionsAsync(roleDefName);
+                    await siteGroup.DeleteAsync();
 
-                await siteGroup.DeleteAsync();
-
-                await roleDefinition.DeleteAsync();
-
-
+                    await roleDefinition.DeleteAsync();
+                }
             }
         }
 
@@ -100,19 +112,22 @@ namespace PnP.Core.Test.Security
 
                 var siteGroup = await context.Web.SiteGroups.AddAsync(groupName);
 
-                await siteGroup.AddRoleDefinitionsAsync(roleDefName);
+                try
+                {
+                    await siteGroup.AddRoleDefinitionsAsync(roleDefName);
 
-                await siteGroup.RemoveRoleDefinitionsAsync(roleDefName);
+                    await siteGroup.RemoveRoleDefinitionsAsync(roleDefName);
 
-                var roleDefinitions = await siteGroup.GetRoleDefinitionsAsync();
+                    var roleDefinitions = await siteGroup.GetRoleDefinitionsAsync();
 
-                Assert.IsNull(roleDefinitions);
+                    Assert.IsNull(roleDefinitions);
+                }
+                finally
+                {
+                    await siteGroup.DeleteAsync();
 
-                await siteGroup.DeleteAsync();
-
-                await roleDefinition.DeleteAsync();
-
-
+                    await roleDefinition.DeleteAsync();
+                }
             }
         }
 
@@ -123,14 +138,24 @@ namespace PnP.Core.Test.Security
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 var groupName = TestCommon.GetPnPSdkTestAssetName("TestGroup");
+                ISharePointGroup siteGroup = null;
 
-                await context.Web.SiteGroups.AddAsync(groupName);
+                try
+                {
+                    await context.Web.SiteGroups.AddAsync(groupName);
 
-                var siteGroup = await context.Web.SiteGroups.GetFirstOrDefaultAsync(g => g.Title == groupName);
+                    siteGroup = await context.Web.SiteGroups.FirstOrDefaultAsync(g => g.Title == groupName);
 
-                Assert.IsTrue(siteGroup.Requested);
-
-                await siteGroup.DeleteAsync();
+                    Assert.IsTrue(siteGroup.Requested);
+                    Assert.AreEqual(siteGroup.Title, groupName);
+                }
+                finally
+                {
+                    if (siteGroup != null)
+                    {
+                        await siteGroup.DeleteAsync();
+                    }
+                }
             }
         }
 
@@ -142,20 +167,29 @@ namespace PnP.Core.Test.Security
             {
                 var groupName = TestCommon.GetPnPSdkTestAssetName("TestGroup");
                 var groupNameRenamed = TestCommon.GetPnPSdkTestAssetName("TestGroup-Renamed");
+                ISharePointGroup updatedSiteGroup = null;
 
-                await context.Web.SiteGroups.AddAsync(groupName);
+                try
+                {
+                    await context.Web.SiteGroups.AddAsync(groupName);
 
-                var siteGroup = await context.Web.SiteGroups.GetFirstOrDefaultAsync(g => g.Title == groupName);
+                    var siteGroup = await context.Web.SiteGroups.FirstOrDefaultAsync(g => g.Title == groupName);
 
-                siteGroup.Title = groupNameRenamed;
+                    siteGroup.Title = groupNameRenamed;
 
-                await siteGroup.UpdateAsync();
+                    await siteGroup.UpdateAsync();
 
-                var updatedSiteGroup = await context.Web.SiteGroups.GetFirstOrDefaultAsync(g => g.Title == groupNameRenamed);
+                    updatedSiteGroup = await context.Web.SiteGroups.FirstOrDefaultAsync(g => g.Title == groupNameRenamed);
 
-                Assert.IsTrue(updatedSiteGroup.Requested);
-
-                await updatedSiteGroup.DeleteAsync();
+                    Assert.IsTrue(updatedSiteGroup.Requested);
+                }
+                finally
+                {
+                    if (updatedSiteGroup != null)
+                    {
+                        await updatedSiteGroup.DeleteAsync();
+                    }
+                }
             }
         }
 

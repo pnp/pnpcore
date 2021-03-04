@@ -330,6 +330,7 @@ namespace PnP.Core.Model
         /// <returns>Dynamic object</returns>
         public static dynamic AsDynamic(dynamic source)
         {
+            // TODO: Evaluate if we really need this method
             return source;
         }
     }

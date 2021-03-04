@@ -1,5 +1,6 @@
 ﻿using PnP.Core.Services;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace PnP.Core.Model.Teams
@@ -8,7 +9,7 @@ namespace PnP.Core.Model.Teams
     /// Public interface to define a collection of Tabs for a Team Channel
     /// </summary>
     [ConcreteType(typeof(TeamChannelTabCollection))]
-    public interface ITeamChannelTabCollection : IDataModelCollection<ITeamChannelTab>, ISupportPaging<ITeamChannelTab>, IDataModelCollectionDeleteByGuidId
+    public interface ITeamChannelTabCollection : IQueryable<ITeamChannelTab>, IDataModelCollection<ITeamChannelTab>, IDataModelCollectionLoad<ITeamChannelTab>, IDataModelCollectionDeleteByGuidId
     {
         /// <summary>
         /// Adds a new wiki channel tab

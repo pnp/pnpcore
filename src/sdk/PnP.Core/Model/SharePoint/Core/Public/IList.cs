@@ -10,7 +10,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a List object of SharePoint Online
     /// </summary>
     [ConcreteType(typeof(List))]
-    public interface IList : IDataModel<IList>, IDataModelGet<IList>, IDataModelUpdate, IDataModelDelete, IQueryableDataModel
+    public interface IList : IDataModel<IList>, IDataModelGet<IList>, IDataModelLoad<IList>, IDataModelUpdate, IDataModelDelete, IQueryableDataModel
     {
         /// <summary>
         /// The Unique ID of the List object
@@ -277,56 +277,56 @@ namespace PnP.Core.Model.SharePoint
         /// </summary>
         /// <param name="query">query to execute</param>
         /// <returns></returns>
-        public Task GetItemsByCamlQueryAsync(string query);
+        public Task LoadItemsByCamlQueryAsync(string query);
 
         /// <summary>
         /// Loads list items based up on a CAML query
         /// </summary>
         /// <param name="query">query to execute</param>
         /// <returns></returns>
-        public void GetItemsByCamlQuery(string query);
+        public void LoadItemsByCamlQuery(string query);
 
         /// <summary>
         /// Loads list items based up on a CAML query
         /// </summary>
         /// <param name="queryOptions"><see cref="CamlQueryOptions"/> defining the query to execute</param>
         /// <returns></returns>
-        public Task GetItemsByCamlQueryAsync(CamlQueryOptions queryOptions);
+        public Task LoadItemsByCamlQueryAsync(CamlQueryOptions queryOptions);
 
         /// <summary>
         /// Loads list items based up on a CAML query
         /// </summary>
         /// <param name="queryOptions"><see cref="CamlQueryOptions"/> defining the query to execute</param>
         /// <returns></returns>
-        public void GetItemsByCamlQuery(CamlQueryOptions queryOptions);
+        public void LoadItemsByCamlQuery(CamlQueryOptions queryOptions);
 
         /// <summary>
         /// Loads list items based up on a CAML query
         /// </summary>
         /// <param name="query">query to execute</param>
         /// <returns></returns>
-        public Task GetItemsByCamlQueryBatchAsync(string query);
+        public Task LoadItemsByCamlQueryBatchAsync(string query);
 
         /// <summary>
         /// Loads list items based up on a CAML query
         /// </summary>
         /// <param name="query">query to execute</param>
         /// <returns></returns>
-        public void GetItemsByCamlQueryBatch(string query);
+        public void LoadItemsByCamlQueryBatch(string query);
 
         /// <summary>
         /// Loads list items based up on a CAML query
         /// </summary>
         /// <param name="queryOptions"><see cref="CamlQueryOptions"/> defining the query to execute</param>
         /// <returns></returns>
-        public Task GetItemsByCamlQueryBatchAsync(CamlQueryOptions queryOptions);
+        public Task LoadItemsByCamlQueryBatchAsync(CamlQueryOptions queryOptions);
 
         /// <summary>
         /// Loads list items based up on a CAML query
         /// </summary>
         /// <param name="queryOptions"><see cref="CamlQueryOptions"/> defining the query to execute</param>
         /// <returns></returns>
-        public void GetItemsByCamlQueryBatch(CamlQueryOptions queryOptions);
+        public void LoadItemsByCamlQueryBatch(CamlQueryOptions queryOptions);
 
         /// <summary>
         /// Loads list items based up on a CAML query
@@ -334,7 +334,7 @@ namespace PnP.Core.Model.SharePoint
         /// <param name="batch">Batch to add this request to </param>
         /// <param name="query">query to execute</param>
         /// <returns></returns>
-        public Task GetItemsByCamlQueryBatchAsync(Batch batch, string query);
+        public Task LoadItemsByCamlQueryBatchAsync(Batch batch, string query);
 
         /// <summary>
         /// Loads list items based up on a CAML query
@@ -342,7 +342,7 @@ namespace PnP.Core.Model.SharePoint
         /// <param name="batch">Batch to add this request to </param>
         /// <param name="query">query to execute</param>
         /// <returns></returns>
-        public void GetItemsByCamlQueryBatch(Batch batch, string query);
+        public void LoadItemsByCamlQueryBatch(Batch batch, string query);
 
         /// <summary>
         /// Loads list items based up on a CAML query
@@ -350,7 +350,7 @@ namespace PnP.Core.Model.SharePoint
         /// <param name="batch">Batch to add this request to </param>
         /// <param name="queryOptions"><see cref="CamlQueryOptions"/> defining the query to execute</param>
         /// <returns></returns>
-        public Task GetItemsByCamlQueryBatchAsync(Batch batch, CamlQueryOptions queryOptions);
+        public Task LoadItemsByCamlQueryBatchAsync(Batch batch, CamlQueryOptions queryOptions);
 
         /// <summary>
         /// Loads list items based up on a CAML query
@@ -358,21 +358,21 @@ namespace PnP.Core.Model.SharePoint
         /// <param name="batch">Batch to add this request to </param>
         /// <param name="queryOptions"><see cref="CamlQueryOptions"/> defining the query to execute</param>
         /// <returns></returns>
-        public void GetItemsByCamlQueryBatch(Batch batch, CamlQueryOptions queryOptions);
+        public void LoadItemsByCamlQueryBatch(Batch batch, CamlQueryOptions queryOptions);
 
         /// <summary>
         /// Loads list items based up on a CAML query and the RenderListDataAsStream API
         /// </summary>
         /// <param name="renderOptions"><see cref="RenderListDataOptions"/> defining the query to execute</param>
         /// <returns></returns>
-        public Task<Dictionary<string, object>> GetListDataAsStreamAsync(RenderListDataOptions renderOptions);
+        public Task<Dictionary<string, object>> LoadListDataAsStreamAsync(RenderListDataOptions renderOptions);
 
         /// <summary>
         /// Loads list items based up on a CAML query and the RenderListDataAsStream API
         /// </summary>
         /// <param name="renderOptions"><see cref="RenderListDataOptions"/> defining the query to execute</param>
         /// <returns></returns>
-        public Dictionary<string, object> GetListDataAsStream(RenderListDataOptions renderOptions);
+        public Dictionary<string, object> LoadListDataAsStream(RenderListDataOptions renderOptions);
 
         /// <summary>
         /// Retrieves the compliance tag / retention label for this list

@@ -2,6 +2,8 @@
 using PnP.Core.Test.Utilities;
 using System.Linq;
 using System.Threading.Tasks;
+using PnP.Core.QueryModel;
+using PnP.Core.Model;
 
 namespace PnP.Core.Test.Base
 {
@@ -43,7 +45,7 @@ namespace PnP.Core.Test.Base
                 // Is the property populated
                 Assert.IsFalse(context.Web.IsPropertyAvailable(p => p.Lists));
 
-                var web = await context.Web.GetAsync(p => p.Lists.LoadProperties(p => p.Title));
+                var web = await context.Web.GetAsync(p => p.Lists.QueryProperties(p => p.Title));
 
                 Assert.IsTrue(web.IsPropertyAvailable(p => p.Lists));
             }
@@ -118,7 +120,7 @@ namespace PnP.Core.Test.Base
                 Assert.IsTrue(web.IsPropertyAvailable(p => p.WelcomePage));
                 Assert.IsTrue(!string.IsNullOrEmpty(web.WelcomePage));
                 Assert.IsTrue(web.IsPropertyAvailable(p => p.Lists));
-                Assert.IsTrue(web.Lists.Count() > 0);
+                Assert.IsTrue(web.Lists.Length > 0);
 
                 // Are other properties still not available
                 Assert.IsFalse(web.IsPropertyAvailable(p => p.AlternateCssUrl));
@@ -134,14 +136,14 @@ namespace PnP.Core.Test.Base
                 Assert.IsFalse(context.Web.IsPropertyAvailable(p => p.Lists));
                 Assert.IsFalse(context.Web.IsPropertyAvailable(p => p.WelcomePage));
 
-                await context.Web.EnsurePropertiesAsync(p => p.Lists.LoadProperties(p => p.Title, p => p.TemplateType), p => p.WelcomePage);
+                await context.Web.EnsurePropertiesAsync(p => p.Lists.QueryProperties(p => p.Title, p => p.TemplateType), p => p.WelcomePage);
                 var web = context.Web;
 
                 // Are the property populated
                 Assert.IsTrue(web.IsPropertyAvailable(p => p.WelcomePage));
                 Assert.IsTrue(!string.IsNullOrEmpty(web.WelcomePage));
                 Assert.IsTrue(web.IsPropertyAvailable(p => p.Lists));
-                Assert.IsTrue(web.Lists.Count() > 0);
+                Assert.IsTrue(web.Lists.Length > 0);
                 Assert.IsTrue(web.Lists.First().IsPropertyAvailable(p => p.Title));
                 Assert.IsTrue(web.Lists.First().IsPropertyAvailable(p => p.TemplateType));
 
@@ -157,19 +159,19 @@ namespace PnP.Core.Test.Base
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                await context.Web.GetAsync(p => p.Lists.LoadProperties(p => p.Title));
+                await context.Web.LoadAsync(p => p.Lists.QueryProperties(p => p.Title));
 
                 Assert.IsTrue(context.Web.IsPropertyAvailable(p => p.Lists));
                 Assert.IsFalse(context.Web.IsPropertyAvailable(p => p.WelcomePage));
 
-                await context.Web.EnsurePropertiesAsync(p => p.Lists.LoadProperties(p => p.Title, p => p.TemplateType), p => p.WelcomePage);
+                await context.Web.EnsurePropertiesAsync(p => p.Lists.QueryProperties(p => p.Title, p => p.TemplateType), p => p.WelcomePage);
                 var web = context.Web;
 
                 // Are the property populated
                 Assert.IsTrue(web.IsPropertyAvailable(p => p.WelcomePage));
                 Assert.IsTrue(!string.IsNullOrEmpty(web.WelcomePage));
                 Assert.IsTrue(web.IsPropertyAvailable(p => p.Lists));
-                Assert.IsTrue(web.Lists.Count() > 0);
+                Assert.IsTrue(web.Lists.Length > 0);
                 Assert.IsTrue(web.Lists.First().IsPropertyAvailable(p => p.Title));
                 Assert.IsTrue(web.Lists.First().IsPropertyAvailable(p => p.TemplateType));
 
@@ -185,76 +187,84 @@ namespace PnP.Core.Test.Base
             //TestCommon.Instance.Mocking = false;            
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                await context.Web.GetAsync(p => p.WelcomePage, p => p.Lists.LoadProperties(p => p.Title, p => p.Description, p => p.Fields.LoadProperties(p => p.Title)));
+                await context.Web.LoadAsync(p => p.WelcomePage, p => p.Lists.QueryProperties(p => p.Title, p => p.Description, p => p.Fields.QueryProperties(p => p.Title)));
 
                 Assert.IsTrue(context.Web.IsPropertyAvailable(p => p.Lists));
                 Assert.IsTrue(context.Web.IsPropertyAvailable(p => p.WelcomePage));
 
                 // The StaticName field property was not loaded, the query will be executed again
-                await context.Web.EnsurePropertiesAsync(p => p.Lists.LoadProperties(p => p.Title, p => p.Description, p => p.Fields.LoadProperties(p => p.StaticName)), p => p.WelcomePage);
+                await context.Web.EnsurePropertiesAsync(p => p.Lists.QueryProperties(p => p.Title, p => p.Description, p => p.Fields.QueryProperties(p => p.StaticName)), p => p.WelcomePage);
                 var web = context.Web;
 
                 // Are the property populated
-                Assert.IsTrue(web.Lists.First().IsPropertyAvailable(p => p.Title));
-                Assert.IsTrue(web.Lists.First().IsPropertyAvailable(p => p.Description));
-                Assert.IsTrue(web.Lists.First().Fields.Requested);
-                Assert.IsTrue(web.Lists.First().Fields.First().IsPropertyAvailable(p => p.StaticName));
+                var firstList = web.Lists.AsRequested().First();
+                Assert.IsTrue(firstList.IsPropertyAvailable(p => p.Title));
+                Assert.IsTrue(firstList.IsPropertyAvailable(p => p.Description));
+                Assert.IsTrue(firstList.Fields.Requested);
+
+                var firstField = firstList.Fields.AsRequested().First();
+                Assert.IsTrue(firstField.IsPropertyAvailable(p => p.StaticName));
 
                 // Are other properties still not available
                 Assert.IsFalse(web.IsPropertyAvailable(p => p.AlternateCssUrl));
-                Assert.IsFalse(web.Lists.First().IsPropertyAvailable(p => p.TemplateFeatureId));
-                Assert.IsFalse(web.Lists.First().Fields.First().IsPropertyAvailable(p => p.Title));
-                Assert.IsFalse(web.Lists.First().Fields.First().IsPropertyAvailable(p => p.SchemaXml));
+                Assert.IsFalse(firstList.IsPropertyAvailable(p => p.TemplateFeatureId));
+                Assert.IsFalse(firstField.IsPropertyAvailable(p => p.Title));
+                Assert.IsFalse(firstField.IsPropertyAvailable(p => p.SchemaXml));
             }
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))
             {
-                await context.Web.GetAsync(p => p.Lists.LoadProperties(p => p.Title, p => p.Description, p => p.Fields.LoadProperties(p => p.StaticName)), p => p.WelcomePage);
+                await context.Web.LoadAsync(p => p.Lists.QueryProperties(p => p.Title, p => p.Description, p => p.Fields.QueryProperties(p => p.StaticName)), p => p.WelcomePage);
 
                 Assert.IsTrue(context.Web.IsPropertyAvailable(p => p.Lists));
                 Assert.IsTrue(context.Web.IsPropertyAvailable(p => p.WelcomePage));
 
                 // All properties were loaded, so we're not going back to server
-                await context.Web.EnsurePropertiesAsync(p => p.Lists.LoadProperties(p => p.Title, p => p.Description, p => p.Fields.LoadProperties(p => p.StaticName)), p => p.WelcomePage);
+                await context.Web.EnsurePropertiesAsync(p => p.Lists.QueryProperties(p => p.Title, p => p.Description, p => p.Fields.QueryProperties(p => p.StaticName)), p => p.WelcomePage);
                 var web = context.Web;
 
                 // Are the property populated
-                Assert.IsTrue(web.Lists.First().IsPropertyAvailable(p => p.Title));
-                Assert.IsTrue(web.Lists.First().IsPropertyAvailable(p => p.Description));
-                Assert.IsTrue(web.Lists.First().Fields.Requested);
-                Assert.IsTrue(web.Lists.First().Fields.First().IsPropertyAvailable(p => p.StaticName));
+                var firstList = web.Lists.AsRequested().First();
+                Assert.IsTrue(firstList.IsPropertyAvailable(p => p.Title));
+                Assert.IsTrue(firstList.IsPropertyAvailable(p => p.Description));
+                Assert.IsTrue(firstList.Fields.Requested);
+
+                var firstField = firstList.Fields.AsRequested().First();
+                Assert.IsTrue(firstField.IsPropertyAvailable(p => p.StaticName));
 
                 // Are other properties still not available
                 Assert.IsFalse(web.IsPropertyAvailable(p => p.AlternateCssUrl));
-                Assert.IsFalse(web.Lists.First().IsPropertyAvailable(p => p.TemplateFeatureId));
-                Assert.IsFalse(web.Lists.First().Fields.First().IsPropertyAvailable(p => p.Title));
-                Assert.IsFalse(web.Lists.First().Fields.First().IsPropertyAvailable(p => p.SchemaXml));
+                Assert.IsFalse(firstList.IsPropertyAvailable(p => p.TemplateFeatureId));
+                Assert.IsFalse(firstField.IsPropertyAvailable(p => p.Title));
+                Assert.IsFalse(firstField.IsPropertyAvailable(p => p.SchemaXml));
             }
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 3))
             {
-                await context.Web.GetAsync(p => p.Lists.LoadProperties(p => p.Title, p => p.Description), p => p.WelcomePage);
+                await context.Web.LoadAsync(p => p.Lists.QueryProperties(p => p.Title, p => p.Description), p => p.WelcomePage);
 
                 Assert.IsTrue(context.Web.IsPropertyAvailable(p => p.Lists));
                 Assert.IsTrue(context.Web.IsPropertyAvailable(p => p.WelcomePage));
 
                 // The fields collection was not previously requested, so we're going back to server
-                await context.Web.EnsurePropertiesAsync(p => p.Lists.LoadProperties(p => p.Title, p => p.Description, p => p.Fields.LoadProperties(p => p.StaticName)), p => p.WelcomePage);
+                await context.Web.EnsurePropertiesAsync(p => p.Lists.QueryProperties(p => p.Title, p => p.Description, p => p.Fields.QueryProperties(p => p.StaticName)), p => p.WelcomePage);
                 var web = context.Web;
 
                 // Are the property populated
-                Assert.IsTrue(web.Lists.First().IsPropertyAvailable(p => p.Title));
-                Assert.IsTrue(web.Lists.First().IsPropertyAvailable(p => p.Description));
-                Assert.IsTrue(web.Lists.First().Fields.Requested);
-                Assert.IsTrue(web.Lists.First().Fields.First().IsPropertyAvailable(p => p.StaticName));
+                var firstList = web.Lists.AsRequested().First();
+                Assert.IsTrue(firstList.IsPropertyAvailable(p => p.Title));
+                Assert.IsTrue(firstList.IsPropertyAvailable(p => p.Description));
+                Assert.IsTrue(firstList.Fields.Requested);
+
+                var firstField = firstList.Fields.AsRequested().First();
+                Assert.IsTrue(firstField.IsPropertyAvailable(p => p.StaticName));
 
                 // Are other properties still not available
                 Assert.IsFalse(web.IsPropertyAvailable(p => p.AlternateCssUrl));
-                Assert.IsFalse(web.Lists.First().IsPropertyAvailable(p => p.TemplateFeatureId));
-                Assert.IsFalse(web.Lists.First().Fields.First().IsPropertyAvailable(p => p.Title));
-                Assert.IsFalse(web.Lists.First().Fields.First().IsPropertyAvailable(p => p.SchemaXml));
+                Assert.IsFalse(firstList.IsPropertyAvailable(p => p.TemplateFeatureId));
+                Assert.IsFalse(firstField.IsPropertyAvailable(p => p.Title));
+                Assert.IsFalse(firstField.IsPropertyAvailable(p => p.SchemaXml));
             }
         }
-
     }
 }

@@ -11,6 +11,9 @@
 - When you query for list items with filters against non-indexed fields you need to provide a custom HTTP header (Prefer: HonorNonIndexedQueriesWarningMayFailRandomly)
 - The fields/* construct is a bit weird from a developer point of view
 - There is no support in the Taxonomy API for local custom properties on terms in the store
+- When you search for lists/libraries with Title not equal (ne) to a specific value, the API replies back "not supported"
+- When you mix a $filter and $top the API replies back with "not supported", forcing client-side paging when filtering results
+
 
 ## SharePoint Graph details
 

@@ -1,9 +1,9 @@
---batchresponse_3f0a58fa-c97e-49b5-97f6-d06989b48061
+--batchresponse_1dd1375e-d648-47ad-8e7c-8230420e8bac
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-
---batchresponse_3f0a58fa-c97e-49b5-97f6-d06989b48061--
+{"d":{"results":[{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'6b7d97ad-ca9b-4d40-9ffe-34890af70999')","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'6b7d97ad-ca9b-4d40-9ffe-34890af70999')","etag":"\"2\"","type":"SP.List"},"ContentTypesEnabled":false,"Description":"TEST DESCRIPTION","Direction":"none","DocumentTemplateUrl":null,"DraftVersionVisibility":0,"EnableAttachments":false,"EnableFolderCreation":true,"EnableMinorVersions":false,"EnableModeration":true,"EnableVersioning":true,"ForceCheckout":false,"Hidden":false,"Id":"6b7d97ad-ca9b-4d40-9ffe-34890af70999","ImageUrl":"/_layouts/15/images/itgen.png?rev=47","IrmExpire":false,"IrmReject":false,"IsApplicationList":false,"ListExperienceOptions":1,"MajorVersionLimit":400,"MajorWithMinorVersionsLimit":20,"TemplateFeatureId":"00bfea71-de22-43b2-a848-c05709900100"}]}}
+--batchresponse_1dd1375e-d648-47ad-8e7c-8230420e8bac--

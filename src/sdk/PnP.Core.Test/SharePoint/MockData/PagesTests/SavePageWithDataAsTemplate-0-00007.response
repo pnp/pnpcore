@@ -1,9 +1,19 @@
---batchresponse_c9bbac64-f590-4424-a9af-b8a1b3fa1ecb
+--batchresponse_81acd659-d0e1-4a3e-87ba-863caba029c4
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 200 OK
-CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+CONTENT-TYPE: application/json; charset=utf-8
 
-{"d":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/prov-1/SitePages/Templates/PNP_SDK_TEST_SavePageWithDataAsTemplate.aspx')","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/prov-1/SitePages/Templates/PNP_SDK_TEST_SavePageWithDataAsTemplate.aspx')","type":"SP.File"},"Author":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/prov-1/SitePages/Templates/PNP_SDK_TEST_SavePageWithDataAsTemplate.aspx')/Author"}},"CheckedOutByUser":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/prov-1/SitePages/Templates/PNP_SDK_TEST_SavePageWithDataAsTemplate.aspx')/CheckedOutByUser"}},"EffectiveInformationRightsManagementSettings":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/prov-1/SitePages/Templates/PNP_SDK_TEST_SavePageWithDataAsTemplate.aspx')/EffectiveInformationRightsManagementSettings"}},"InformationRightsManagementSettings":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/prov-1/SitePages/Templates/PNP_SDK_TEST_SavePageWithDataAsTemplate.aspx')/InformationRightsManagementSettings"}},"ListItemAllFields":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/prov-1/SitePages/Templates/PNP_SDK_TEST_SavePageWithDataAsTemplate.aspx')/ListItemAllFields"}},"LockedByUser":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/prov-1/SitePages/Templates/PNP_SDK_TEST_SavePageWithDataAsTemplate.aspx')/LockedByUser"}},"ModifiedBy":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/prov-1/SitePages/Templates/PNP_SDK_TEST_SavePageWithDataAsTemplate.aspx')/ModifiedBy"}},"Properties":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/prov-1/SitePages/Templates/PNP_SDK_TEST_SavePageWithDataAsTemplate.aspx')/Properties"}},"VersionEvents":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/prov-1/SitePages/Templates/PNP_SDK_TEST_SavePageWithDataAsTemplate.aspx')/VersionEvents"}},"Versions":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/prov-1/SitePages/Templates/PNP_SDK_TEST_SavePageWithDataAsTemplate.aspx')/Versions"}},"CheckInComment":"","CheckOutType":2,"ContentTag":"{02E57977-9B7F-4E4A-BEED-5E10076B55A3},1,0","CustomizedPageStatus":1,"ETag":"\"{02E57977-9B7F-4E4A-BEED-5E10076B55A3},1\"","Exists":true,"IrmEnabled":false,"Length":"780","Level":2,"LinkingUri":null,"LinkingUrl":"","MajorVersion":0,"MinorVersion":1,"Name":"PNP_SDK_TEST_SavePageWithDataAsTemplate.aspx","ServerRelativeUrl":"/sites/prov-1/SitePages/Templates/PNP_SDK_TEST_SavePageWithDataAsTemplate.aspx","TimeCreated":"2021-01-25T09:33:14Z","TimeLastModified":"2021-01-25T09:33:14Z","Title":null,"UIVersion":1,"UIVersionLabel":"0.1","UniqueId":"02e57977-9b7f-4e4a-beed-5e10076b55a3"}}
---batchresponse_c9bbac64-f590-4424-a9af-b8a1b3fa1ecb--
+{ "Row" : 
+[],"FirstRow" : 1,
+"FolderPermissions" : "0x7ffffffffffbffff"
+,"LastRow" : 0,
+"RowLimit" : 30
+,"FilterLink" : "?"
+,"ForceNoHierarchy" : "1"
+,"HierarchyHasIndention" : ""
+,"CurrentFolderSpItemUrl" : ""
+
+}
+--batchresponse_81acd659-d0e1-4a3e-87ba-863caba029c4--

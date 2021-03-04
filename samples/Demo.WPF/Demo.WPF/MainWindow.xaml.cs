@@ -39,10 +39,9 @@ namespace Demo.WPF
                 // Retrieving lists of the target web using Microsoft Graph
                 var web = await context.Web.GetAsync(w => w.Title);
 
-                var lists = (from l in context.Web.Lists
+                var lists = (from l in context.Web.Lists.QueryProperties(l => l.Id, l => l.Title, l => l.Description)
                              orderby l.Title descending
-                             select l)
-                            .Load(l => l.Id, l => l.Title, l => l.Description);
+                             select l);
 
                 StringBuilder sb = new StringBuilder();
                 // Need to use Async here to avoid getting deadlocked

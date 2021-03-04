@@ -242,44 +242,46 @@ namespace PnP.Core.Model
         /// </summary>
         /// <param name="type">The reference model type, can be an interface or a class</param>
         /// <param name="parent">Parent of the domain model object, optional</param>
+        /// <param name="context">The PnPContext to attach to the newly created item</param>
         /// <returns>Entity model class describing this model instance</returns>
-        internal static object GetEntityConcreteInstance<TModel>(Type type, IDataModelParent parent = null)
+        internal static object GetEntityConcreteInstance(Type type, IDataModelParent parent = null, PnPContext context = null)
         {
             if (type is null)
             {
                 throw new ArgumentNullException(nameof(type));
             }
 
+            // Create the object instance
             type = GetEntityConcreteType(type);
+            var result = Activator.CreateInstance(type);
 
-            var result = (TModel)Activator.CreateInstance(type);
-
-            if (result is IDataModelParent modelWithParent)
+            // Set the parent, if any
+            if (parent != null && result is IDataModelParent modelWithParent)
             {
+                // Plug the parent into the concrete instance
                 modelWithParent.Parent = parent;
+            }
+
+            // Set the PnPContext, if any
+            if (context != null && result is IDataModelWithContext modelWithContext)
+            {
+                modelWithContext.PnPContext = context;
             }
 
             return result;
         }
 
-        internal static object GetEntityCollectionConcreteInstance<TModel>(Type type, PnPContext context, IDataModelParent parent, string propertyName)
+        internal static object GetEntityCollectionInstance(Type collectionType, PnPContext context, IDataModelParent parent, string propertyName)
         {
-            if (type is null)
+            object result;
+
+            if (collectionType.ImplementsInterface(typeof(IQueryable<>)))
             {
-                throw new ArgumentNullException(nameof(type));
-            }
-
-            type = GetEntityConcreteType(type);
-
-            TModel result;
-
-            if (type.ImplementsInterface(typeof(IQueryable<>)))
-            {
-                result = (TModel)Activator.CreateInstance(type, context, parent, propertyName);
+                result = Activator.CreateInstance(collectionType, context, parent, propertyName);
             }
             else
             {
-                result = (TModel)Activator.CreateInstance(type);
+                result = Activator.CreateInstance(collectionType);
                 if (result is IDataModelParent modelWithParent)
                 {
                     modelWithParent.Parent = parent;
@@ -294,14 +296,29 @@ namespace PnP.Core.Model
             return result;
         }
 
+        internal static object GetEntityCollectionConcreteInstance(Type type, PnPContext context, IDataModelParent parent, string propertyName)
+        {
+            if (type is null)
+            {
+                throw new ArgumentNullException(nameof(type));
+            }
+
+            type = GetEntityConcreteType(type);
+
+            object result = GetEntityCollectionInstance(type, context, parent, propertyName);
+
+            return result;
+        }
+
         /// <summary>
         /// Translates model into a set of classes that are used to drive CRUD operations, this takes into account the passed expressions
         /// </summary>
         /// <param name="modelType">The Type of the model object to process</param>
         /// <param name="target">Model instance we're working on</param>
-        /// <param name="expressions">Data load expressions</param>
+        /// <param name="parent">Model instance's parent object, optional</param>
+        /// <param name="expressions">Data load expressions, optional</param>
         /// <returns>Entity model class describing this model instance</returns>
-        internal static EntityInfo GetClassInfo<TModel>(Type modelType, BaseDataModel<TModel> target, params Expression<Func<TModel, object>>[] expressions)
+        internal static EntityInfo GetClassInfo<TModel>(Type modelType, BaseDataModel<TModel> target, IDataModelParent parent = null, params Expression<Func<TModel, object>>[] expressions)
         {
             // Get static information about the fields to work with and how to handle CRUD operations
             var staticClassInfo = EntityManager.Instance.GetStaticClassInfo(modelType);
@@ -374,21 +391,30 @@ namespace PnP.Core.Model
                 field.Load = true;
             }
 
-            if (target != null)
+            if (target != null && parent == null)
             {
                 // In case a model can be used from different contexts (e.g. ContentType can be used from Web, but also from List)
                 // it's required to let the entity know this context so that it can provide the correct information when requested
-                var parent = (target as IDataModelParent).Parent;
+                parent = (target as IDataModelParent).Parent;
                 if (parent is IManageableCollection)
                 {
                     // Parent is a collection, so jump one level up
                     parent = (target as IDataModelParent).Parent.Parent;
                 }
-
-                if (parent != null)
+            }
+            else if (target == null && parent != null)
+            {
+                // Otherwise fallback to the provided parent, if any
+                if (parent is IManageableCollection)
                 {
-                    entityInfo.Target = parent.GetType();
+                    // Parent is a collection, so jump one level up
+                    parent = parent.Parent;
                 }
+            }
+
+            if (parent != null)
+            {
+                entityInfo.Target = parent.GetType();
             }
 
             return entityInfo;
@@ -417,20 +443,28 @@ namespace PnP.Core.Model
             }
             else if (expression.Body is MethodCallExpression)
             {
-                if ((expression.Body as MethodCallExpression).Method.Name == "LoadProperties")
+                if ((expression.Body as MethodCallExpression).Method.Name == nameof(DataModelLoadExtensions.QueryProperties))
                 {
-                    fieldToLoad = ParseInclude(entityInfo, expression, null);
+                    fieldToLoad = ParseQueryProperties(entityInfo, expression, null);
                 }
             }
 
             return fieldToLoad;
         }
 
-        private static string ParseInclude(EntityInfo entityInfo, LambdaExpression expression, EntityFieldExpandInfo entityFieldExpandInfo)
+        private static string ParseQueryProperties(EntityInfo entityInfo, LambdaExpression expression, EntityFieldExpandInfo entityFieldExpandInfo)
         {
-            var collectionPublicType = ((expression).Body as MethodCallExpression).Type.GenericTypeArguments[0];
-            var fieldToLoad = ((expression.Body as MethodCallExpression).Object as MemberExpression).Member.Name;
-            var collectionEntityInfo = EntityManager.Instance.GetStaticClassInfo(collectionPublicType);
+            var resultType = ((expression).Body as MethodCallExpression).Type;
+
+            // If the resulting type is a requestable collection
+            if (resultType.Name == typeof(IQueryable<>).Name)
+            {
+                // We get the result type from the generic argument of the collection
+                resultType = resultType.GenericTypeArguments[0];
+            }
+
+            var fieldToLoad = ((expression.Body as MethodCallExpression).Arguments[0] as MemberExpression).Member.Name;
+            var resultTypeInfo = EntityManager.Instance.GetStaticClassInfo(resultType);
 
             bool first = false;
             if (entityFieldExpandInfo == null)
@@ -439,13 +473,13 @@ namespace PnP.Core.Model
                 entityFieldExpandInfo = new EntityFieldExpandInfo()
                 {
                     Name = fieldToLoad,
-                    Type = collectionPublicType
+                    Type = resultType
                 };
             }
 
             List<string> expandFieldsToLoad = new List<string>();
 
-            foreach (var includeFieldExpression in ((expression.Body as MethodCallExpression).Arguments[0] as NewArrayExpression).Expressions)
+            foreach (var includeFieldExpression in ((expression.Body as MethodCallExpression).Arguments[1] as NewArrayExpression).Expressions)
             {
                 string expandFieldToLoad = null;
                 if (includeFieldExpression is UnaryExpression)
@@ -455,7 +489,7 @@ namespace PnP.Core.Model
                     {
                         expandFieldToLoad = (fieldExpressionBody as MemberExpression).Member.Name;
 
-                        var expandField = collectionEntityInfo.Fields.First(p => p.Name == expandFieldToLoad);
+                        var expandField = resultTypeInfo.Fields.First(p => p.Name == expandFieldToLoad);
 
                         entityFieldExpandInfo.Fields.Add(new EntityFieldExpandInfo() { Name = expandFieldToLoad, Expandable = expandField.SharePointExpandable || expandField.GraphExpandable });
                     }
@@ -463,20 +497,20 @@ namespace PnP.Core.Model
                     {
                         expandFieldToLoad = ((fieldExpressionBody as UnaryExpression).Operand as MemberExpression).Member.Name;
 
-                        var expandField = collectionEntityInfo.Fields.First(p => p.Name == expandFieldToLoad);
+                        var expandField = resultTypeInfo.Fields.First(p => p.Name == expandFieldToLoad);
 
                         entityFieldExpandInfo.Fields.Add(new EntityFieldExpandInfo() { Name = expandFieldToLoad, Expandable = expandField.SharePointExpandable || expandField.GraphExpandable });
                     }
                     else if (fieldExpressionBody is MethodCallExpression)
                     {
-                        if ((fieldExpressionBody as MethodCallExpression).Method.Name == "LoadProperties")
+                        if ((fieldExpressionBody as MethodCallExpression).Method.Name == nameof(DataModelLoadExtensions.QueryProperties))
                         {
-                            var fld = ((fieldExpressionBody as MethodCallExpression).Object as MemberExpression).Member.Name;
+                            var fld = ((fieldExpressionBody as MethodCallExpression).Arguments[0] as MemberExpression).Member.Name;
                             var publicTypeRecursive = (fieldExpressionBody as MethodCallExpression).Type.GenericTypeArguments[0];
                             var entityInfoRecursive = EntityManager.Instance.GetStaticClassInfo(publicTypeRecursive);
 
                             var expandedEntityField = new EntityFieldExpandInfo() { Name = fld, Type = publicTypeRecursive, Expandable = true };
-                            ParseInclude(entityInfo, (includeFieldExpression as UnaryExpression).Operand as LambdaExpression, expandedEntityField);
+                            ParseQueryProperties(entityInfo, (includeFieldExpression as UnaryExpression).Operand as LambdaExpression, expandedEntityField);
 
                             // Add key field if needed
                             var keyFieldRecursive = expandedEntityField.Fields.FirstOrDefault(p => p.Name == entityInfoRecursive.ActualKeyFieldName);
@@ -494,10 +528,10 @@ namespace PnP.Core.Model
             if (first)
             {
                 // Add key field if needed
-                var keyFieldNonRecursive = entityFieldExpandInfo.Fields.FirstOrDefault(p => p.Name == collectionEntityInfo.ActualKeyFieldName);
+                var keyFieldNonRecursive = entityFieldExpandInfo.Fields.FirstOrDefault(p => p.Name == resultTypeInfo.ActualKeyFieldName);
                 if (keyFieldNonRecursive == null)
                 {
-                    entityFieldExpandInfo.Fields.Add(new EntityFieldExpandInfo() { Name = collectionEntityInfo.ActualKeyFieldName });
+                    entityFieldExpandInfo.Fields.Add(new EntityFieldExpandInfo() { Name = resultTypeInfo.ActualKeyFieldName });
                 }
 
                 var fieldToUpdate = entityInfo.Fields.FirstOrDefault(p => p.Name == fieldToLoad);
@@ -595,6 +629,130 @@ namespace PnP.Core.Model
                 return char.ToLowerInvariant(str[0]) + str.Substring(1);
             }
             return str;
+        }
+
+        #endregion
+
+        #region Replication logic
+
+        /// <summary>
+        /// Replicates Key and metadata between two domain model objects
+        /// </summary>
+        /// <param name="sourceObject">The source domain model object</param>
+        /// <param name="destinationObject">The destination domain model object</param>
+        internal static void ReplicateKeyAndMetadata(IDataModelParent sourceObject, IDataModelParent destinationObject)
+        {
+            // Copy the Key of the original parent into the replicated parent
+            if (sourceObject is IDataModelWithKey keySource &&
+                destinationObject is IDataModelWithKey keyDestination)
+            {
+                try
+                {
+                    keyDestination.Key = keySource.Key;
+                }
+                catch (ClientException)
+                {
+                    // We intentionally ignore any exception 
+                    // in case the source key is missing 
+                }
+            }
+
+            // Copy original parent metadata to the replicated parent metadata, if any
+            if (sourceObject is IMetadataExtensible metadataSource &&
+                destinationObject is IMetadataExtensible metadataDestination)
+            {
+                foreach (var md in metadataSource.Metadata)
+                {
+                    metadataDestination.Metadata[md.Key] = md.Value;
+                }
+            }
+        }
+
+        internal static IDataModelParent ReplicateParentHierarchy(IDataModelParent parent, PnPContext context)
+        {
+            if (parent == null)
+            {
+                throw new ArgumentNullException(nameof(parent));
+            }
+
+            if (context == null)
+            {
+                throw new ArgumentNullException(nameof(context));
+            }
+
+            IDataModelParent result = null;
+
+            // If the parent is a collection
+            if (parent is IManageableCollection collectionParent)
+            {
+                IDataModelParent collectionSuperParent = null;
+
+                // Being the parent a collection, I need to replicate its parent, if any, too
+                if (parent.Parent != null)
+                {
+                    collectionSuperParent = ReplicateParentHierarchy(parent.Parent, context);
+                }
+
+                // We create a new parent collection, replicating all the properties from the other
+                result = ReplicateParentCollection(parent, collectionSuperParent, context);
+            }
+            else
+            {
+                // Otherwise we just replicate the parent
+                result = ReplicateParent(parent, context);
+
+                if (parent.Parent != null)
+                {
+                    result.Parent = ReplicateParentHierarchy(parent.Parent, context);
+                }
+            }
+
+            return result;
+        }
+
+        internal static IDataModelParent ReplicateParent(IDataModelParent parent, PnPContext context)
+        {
+            if (parent == null)
+            {
+                throw new ArgumentNullException(nameof(parent));
+            }
+
+            if (context == null)
+            {
+                throw new ArgumentNullException(nameof(context));
+            }
+
+            var parentType = parent.GetType();
+
+            // Create a new instance of Parent with the same data type as the original parent
+            var replicatedParent = (IDataModelParent)EntityManager.GetEntityConcreteInstance(parentType, null, context);
+
+            ReplicateKeyAndMetadata(parent, replicatedParent);
+
+            return replicatedParent;
+        }
+
+        internal static IDataModelParent ReplicateParentCollection(IDataModelParent parent, IDataModelParent superParent, PnPContext context)
+        {
+            if (parent == null)
+            {
+                throw new ArgumentNullException(nameof(parent));
+            }
+
+            if (context == null)
+            {
+                throw new ArgumentNullException(nameof(context));
+            }
+
+            // TODO: This is a bit risky ... we should fine something better ...
+            var collectionPropertyName = parent.GetType().Name.Replace("Collection", "s");
+
+            // We create a new parent collection, but replicating all the properties from the other
+            var replicatedParentCollection = (IDataModelParent)EntityManager.GetEntityCollectionInstance(parent.GetType(), context, superParent, collectionPropertyName);
+
+            ReplicateKeyAndMetadata(parent, replicatedParentCollection);
+
+            return replicatedParentCollection;
         }
 
         #endregion

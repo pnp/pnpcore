@@ -43,7 +43,7 @@ The public model is built via public interfaces. Below sample shows the public m
 /// Public interface to define a List object of SharePoint Online
 /// </summary>
 [ConcreteType(typeof(List))]
-public interface IList : IDataModel<IList>, IDataModelGet<IList>, IDataModelUpdate, IDataModelDelete, IQueryableDataModel
+public interface IList : IDataModel<IList>, IDataModelGet<IList>, IDataModelLoad<IList>, IDataModelUpdate, IDataModelDelete, IQueryableDataModel
 {
     /// <summary>
     /// The Unique ID of the List object
@@ -70,6 +70,7 @@ Each public model:
 - Uses the `ConcreteType` attribute to define the implementation type that belongs to this interface
 - Has inline documentation on the model class and fields
 - Always implements the `IDataModel<TModel>` interface where `TModel` is the actual interface (e.g. `IList` in above sample)
+- Optionally implements the `IDataModelLoad<TModel>` interface whenever **load** functionality is needed on this model class (most of the models have this)
 - Optionally implements the `IDataModelGet<TModel>` interface whenever **get** functionality is needed on this model class (most of the models have this)
 - Optionally implements the `IDataModelUpdate` interface whenever **update** functionality in needed on this model class
 - Optionally implements the `IDataModelDelete` interface whenever **delete** functionality is needed on this model class
@@ -177,7 +178,7 @@ The public model is built via public interfaces. Below sample shows the public m
 /// Public interface to define a collection of List objects of SharePoint Online
 /// </summary>
 [ConcreteType(typeof(ListCollection))]
-public interface IListCollection : IDataModelCollection<IList>, IQueryable<IList>, ISupportPaging<IList>, IDataModelCollectionDeleteByGuidId
+public interface IListCollection : IDataModelCollection<IList>, IDataModelCollectionLoad<IList>, IQueryable<IList>, IDataModelCollectionDeleteByGuidId, IAsyncEnumerable<IList>
 {
     /// <summary>
     /// Adds a new list
@@ -206,8 +207,9 @@ Each public model interface for a Collection class:
 - Contains the implementation of the methods defined in the public interface
 - Has inline documentation on the model class and methods
 - Always implements the `IDataModelCollection<TModel>` interface where `TModel` is the actual interface (e.g. `IList` in above sample)
+- Optionally implements the `IDataModelCollectionLoad<TModel>` interface where `TModel` is the actual interface (e.g. `IList` in above sample) whenever the collection can loaded
 - Optionally implements the `IQueryable<TModel>` interface where `TModel` is the actual interface (e.g. `IList` in above sample) whenever the model can be queried using linq queries
-- Optionally implements the `ISupportPaging<TModel>` interface whenever the data in the collection can be retrieved from the server via paging
+- Optionally implements the `IAsyncEnumerable<TModel>` interface whenever the data in the collection can be asynchronously enumerated
 - Optionally implements either the `IDataModelCollectionDeleteByGuidId`, `IDataModelCollectionDeleteByIntegerId` or `IDataModelCollectionDeleteByStringId` interface matching the data type of the collection model's key if you want to offer a `DeleteById` method on the model collection. You should only do this if you've also implemented the `IDataModelDelete` on the collection's model
 
 Optionally a collection interface defines methods which add behavior to the collection.

@@ -1,12 +1,19 @@
-﻿using PnP.Core.Services;
+﻿using PnP.Core.QueryModel;
+using PnP.Core.Services;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace PnP.Core.Model.Teams
 {
-    internal partial class TeamChannelTabCollection : BaseDataModelCollection<ITeamChannelTab>, ITeamChannelTabCollection
+    internal partial class TeamChannelTabCollection : QueryableDataModelCollection<ITeamChannelTab>, ITeamChannelTabCollection
     {
+        public TeamChannelTabCollection(PnPContext context, IDataModelParent parent, string memberName = null)
+            : base(context, parent, memberName)
+        {
+            PnPContext = context;
+            Parent = parent;
+        }
 
         #region Wiki tab
         /// <summary>

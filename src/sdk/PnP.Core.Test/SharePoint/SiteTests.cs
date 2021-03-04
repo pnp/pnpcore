@@ -2,6 +2,7 @@
 using PnP.Core.Model.SharePoint;
 using PnP.Core.Test.Utilities;
 using System.Threading.Tasks;
+using PnP.Core.Model;
 
 namespace PnP.Core.Test.SharePoint
 {
@@ -21,7 +22,7 @@ namespace PnP.Core.Test.SharePoint
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                ISite site = await context.Site.GetAsync(
+                await context.Site.LoadAsync(
                     p => p.AllowCreateDeclarativeWorkflow,
                     p => p.AllowDesigner,
                     p => p.AllowExternalEmbeddingWrapper,
@@ -43,6 +44,8 @@ namespace PnP.Core.Test.SharePoint
                     p => p.GroupId
                     );
 
+                var site = context.Site;
+
                 Assert.IsNotNull(site);
                 Assert.IsTrue(site.AllowCreateDeclarativeWorkflow);
                 Assert.IsTrue(site.AllowDesigner);
@@ -54,7 +57,7 @@ namespace PnP.Core.Test.SharePoint
                 Assert.AreNotEqual(0, site.AuditLogTrimmingRetention);
                 Assert.IsFalse(site.CanSyncHubSitePermissions);
                 Assert.AreEqual(default, site.ChannelGroupId);
-                Assert.AreEqual("", site.Classification);
+                Assert.IsNotNull(site.Classification);
                 Assert.IsFalse(site.CommentsOnSitePagesDisabled);
                 Assert.IsFalse(site.DisableAppViews);
                 Assert.IsFalse(site.DisableCompanyWideSharingLinks);
@@ -72,7 +75,7 @@ namespace PnP.Core.Test.SharePoint
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                ISite site = await context.Site.GetAsync(
+                await context.Site.LoadAsync(
                     p => p.HubSiteId,
                     p => p.IsHubSite,
                     p => p.LockIssue,
@@ -80,6 +83,8 @@ namespace PnP.Core.Test.SharePoint
                     p => p.ReadOnly,
                     p => p.RelatedGroupId
                     );
+
+                var site = context.Site;
 
                 Assert.IsNotNull(site);
                 Assert.AreEqual(default, site.HubSiteId);
@@ -97,7 +102,7 @@ namespace PnP.Core.Test.SharePoint
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                ISite site = await context.Site.GetAsync(
+                await context.Site.LoadAsync(
                     p => p.SearchBoxInNavBar,
                     p => p.SearchBoxPlaceholderText,
                     p => p.SensitivityLabelId,
@@ -112,6 +117,8 @@ namespace PnP.Core.Test.SharePoint
                     p => p.ThicketSupportDisabled,
                     p => p.TrimAuditLog
                     );
+
+                var site = context.Site;
 
                 Assert.IsNotNull(site);
                 Assert.AreEqual(SearchBoxInNavBar.Inherit, site.SearchBoxInNavBar);

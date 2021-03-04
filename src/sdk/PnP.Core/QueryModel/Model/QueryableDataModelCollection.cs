@@ -1,14 +1,15 @@
 ﻿using PnP.Core.Model;
 using PnP.Core.Services;
 using System;
+using System.Linq;
 using System.Linq.Expressions;
 
 namespace PnP.Core.QueryModel
 {
     /// <summary>
     /// Base type for any LINQ IQueryable collection of the Domain Model
-    /// In the real model, could inherit from  BaseDataModelCollection&lt;TModel&gt;
-    /// and implement IQueryable&lt;TModel&gt; 
+    /// In the real model, could inherit from <see cref="BaseDataModelCollection{TModel}"/>
+    /// and implement <see cref="IQueryable{TModel}"/>
     /// </summary>
     /// <typeparam name="TModel">The Type of the collection</typeparam>
     internal class QueryableDataModelCollection<TModel> : BaseQueryableDataModelCollection<TModel>

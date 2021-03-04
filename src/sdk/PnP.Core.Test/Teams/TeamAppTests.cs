@@ -2,6 +2,7 @@
 using PnP.Core.Test.Utilities;
 using System.Linq;
 using System.Threading.Tasks;
+using PnP.Core.QueryModel;
 
 namespace PnP.Core.Test.Teams
 {
@@ -24,7 +25,7 @@ namespace PnP.Core.Test.Teams
                 var team = await context.Team.GetAsync(x => x.InstalledApps);
                 Assert.IsNotNull(team.InstalledApps);
 
-                var app = team.InstalledApps.First();
+                var app = team.InstalledApps.AsRequested().First();
                 Assert.IsNotNull(app.DisplayName);
                 Assert.IsNotNull(app.DistributionMethod);
                 Assert.IsNotNull(app.ExternalId);

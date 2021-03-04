@@ -3,6 +3,9 @@ using Microsoft.Extensions.Options;
 using PnP.Core.Model.Security;
 using PnP.Core.Model.SharePoint;
 using PnP.Core.Model.Teams;
+using PnP.Core.Services.Core.CSOM;
+using PnP.Core.Services.Core.CSOM.Requests;
+using PnP.Core.Services.Core.CSOM.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -45,10 +48,10 @@ namespace PnP.Core.Services
             return new GraphGroup();
         }, true);
 
-        private readonly Lazy<ITermStore> termStore = new Lazy<ITermStore>(() =>
-        {
-            return new TermStore();
-        }, true);
+        //private readonly Lazy<ITermStore> termStore = new Lazy<ITermStore>(() =>
+        //{
+        //    return new TermStore();
+        //}, true);
         #endregion
 
         #region Private properties
@@ -307,17 +310,17 @@ namespace PnP.Core.Services
             }
         }
 
-        /// <summary>
-        /// Entry point for the Microsoft 365 TermStore
-        /// </summary>
-        public ITermStore TermStore
-        {
-            get
-            {
-                (termStore.Value as TermStore).PnPContext = this;
-                return termStore.Value;
-            }
-        }
+        ///// <summary>
+        ///// Entry point for the Microsoft 365 TermStore
+        ///// </summary>
+        //public ITermStore TermStore
+        //{
+        //    get
+        //    {
+        //        (termStore.Value as TermStore).PnPContext = this;
+        //        return termStore.Value;
+        //    }
+        //}
         #endregion
 
         #region Public Methods   
@@ -642,6 +645,29 @@ namespace PnP.Core.Services
 
             return false;
         }
+
+        /// <summary>
+        /// Builds and executes provided requests
+        /// </summary>
+        /// <param name="requests">Collection of CSOM requests You want to execute.</param>
+        /// <returns>CSOM ApiCall</returns>
+        internal ApiCall GetCSOMCallForRequests(List<IRequest<object>> requests)
+        {
+            foreach (IRequest<object> request in requests)
+            {
+                CSOMApiBuilder.AddRequest(request);
+            }
+
+            return CSOMApiBuilder.BuildApiCall();
+        }
+
+        #endregion
+
+        #region Internal dependencies
+        /// <summary>
+        /// Encapsulates logic to build CSOM Api call
+        /// </summary>
+        internal CSOMApiCallBuilder CSOMApiBuilder { get; set; } = new CSOMApiCallBuilder();
 
         #endregion
     }

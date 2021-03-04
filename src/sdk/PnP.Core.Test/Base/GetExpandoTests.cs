@@ -6,6 +6,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using PnP.Core.Model;
+using PnP.Core.QueryModel;
 
 namespace PnP.Core.Test.Base
 {
@@ -44,25 +46,33 @@ namespace PnP.Core.Test.Base
                 {
                     Assert.Inconclusive("Test data set should be setup to not have the list available.");
                 }
-                var myList = web.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
+                var myList = web.Result.Lists.FirstOrDefault(p => p.Title == listTitle);
 
                 if (myList != null)
                 {
-                    // Get items from the list
-                    await myList.GetAsync(p => p.Items);
-                    // There should be 3 items in the list
-                    Assert.IsTrue(myList.Items.Count() == 3);
-                    // Can we get the value of list item field
-                    var firstItem = myList.Items.First();
-                    Assert.IsNotNull(firstItem.Title);
-                    Assert.AreEqual(ItemTitleValue, firstItem.Title);
-                    // Test the dynamic list item data reading
-                    var dynamicFirstItem = firstItem.AsDynamic();
-                    Assert.AreEqual(ItemTitleValue, dynamicFirstItem.Title);
-                    Assert.AreEqual(ItemTitleValue, dynamicFirstItem["Title"]);
-                    // handling of standard field in the list item
-                    Assert.AreEqual(firstItem.Id, dynamicFirstItem.Id);
-                    Assert.AreEqual(firstItem.Id, dynamicFirstItem["Id"]);
+                    try
+                    {
+                        // Get items from the list
+                        await myList.LoadAsync(p => p.Items);
+                        // There should be 3 items in the list
+                        Assert.IsTrue(myList.Items.Length == 3);
+                        // Can we get the value of list item field
+                        var firstItem = myList.Items.AsRequested().First();
+                        Assert.IsNotNull(firstItem.Title);
+                        Assert.AreEqual(ItemTitleValue, firstItem.Title);
+                        // Test the dynamic list item data reading
+                        var dynamicFirstItem = firstItem.AsDynamic();
+                        Assert.AreEqual(ItemTitleValue, dynamicFirstItem.Title);
+                        Assert.AreEqual(ItemTitleValue, dynamicFirstItem["Title"]);
+                        // handling of standard field in the list item
+                        Assert.AreEqual(firstItem.Id, dynamicFirstItem.Id);
+                        Assert.AreEqual(firstItem.Id, dynamicFirstItem["Id"]);
+                    }
+                    finally
+                    {
+                        // Clean up
+                        await myList.DeleteAsync();
+                    }
                 }
             }
         }
@@ -84,29 +94,37 @@ namespace PnP.Core.Test.Base
                 {
                     Assert.Inconclusive("Test data set should be setup to not have the list available.");
                 }
-                var myList = web.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
+                var myList = web.Result.Lists.FirstOrDefault(p => p.Title == listTitle);
 
                 if (myList != null)
                 {
-                    // Get items from the list + custom properties
-                    await myList.GetAsync(p => p.Items, p => p.Title, p => p.NoCrawl);
-                    // There should be 3 items in the list
-                    Assert.IsTrue(myList.Items.Count() == 3);
-                    // Can we get the value of list item field
-                    var firstItem = myList.Items.First();
-                    Assert.IsNotNull(firstItem.Title);
-                    Assert.AreEqual(ItemTitleValue, firstItem.Title);
-                    // Test the dynamic list item data reading
-                    var dynamicFirstItem = firstItem.AsDynamic();
-                    Assert.AreEqual(ItemTitleValue, dynamicFirstItem.Title);
-                    Assert.AreEqual(ItemTitleValue, dynamicFirstItem["Title"]);
-                    // handling of standard field in the list item
-                    Assert.AreEqual(firstItem.Id, dynamicFirstItem.Id);
-                    Assert.AreEqual(firstItem.Id, dynamicFirstItem["Id"]);
-                    // Check if the custom list properties where also loaded
-                    Assert.IsTrue(myList.IsPropertyAvailable(p => p.Title));
-                    Assert.IsTrue(!string.IsNullOrEmpty(myList.Title));
-                    Assert.IsTrue(myList.IsPropertyAvailable(p => p.NoCrawl));
+                    try
+                    {
+                        // Get items from the list + custom properties
+                        await myList.LoadAsync(p => p.Items, p => p.Title, p => p.NoCrawl);
+                        // There should be 3 items in the list
+                        Assert.IsTrue(myList.Items.Length == 3);
+                        // Can we get the value of list item field
+                        var firstItem = myList.Items.AsRequested().First();
+                        Assert.IsNotNull(firstItem.Title);
+                        Assert.AreEqual(ItemTitleValue, firstItem.Title);
+                        // Test the dynamic list item data reading
+                        var dynamicFirstItem = firstItem.AsDynamic();
+                        Assert.AreEqual(ItemTitleValue, dynamicFirstItem.Title);
+                        Assert.AreEqual(ItemTitleValue, dynamicFirstItem["Title"]);
+                        // handling of standard field in the list item
+                        Assert.AreEqual(firstItem.Id, dynamicFirstItem.Id);
+                        Assert.AreEqual(firstItem.Id, dynamicFirstItem["Id"]);
+                        // Check if the custom list properties where also loaded
+                        Assert.IsTrue(myList.IsPropertyAvailable(p => p.Title));
+                        Assert.IsTrue(!string.IsNullOrEmpty(myList.Title));
+                        Assert.IsTrue(myList.IsPropertyAvailable(p => p.NoCrawl));
+                    }
+                    finally
+                    {
+                        // Clean up
+                        await myList.DeleteAsync();
+                    }
                 }
             }
         }
@@ -121,7 +139,7 @@ namespace PnP.Core.Test.Base
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                var web = await context.Web.GetBatchAsync(p => p.Lists);
+                await context.Web.LoadBatchAsync(p => p.Lists);
                 await context.ExecuteAsync();
 
                 string listTitle = "GetListAndListItemViaGraph";
@@ -129,25 +147,33 @@ namespace PnP.Core.Test.Base
                 {
                     Assert.Inconclusive("Test data set should be setup to not have the list available.");
                 }
-                var myList = web.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
+                var myList = context.Web.Lists.FirstOrDefault(p => p.Title == listTitle);
 
                 if (myList != null)
                 {
-                    // Get items from the list, load NoCrawl to ensure retrieval via REST
-                    await myList.GetAsync(p => p.Items);
-                    // There should be 3 items in the list
-                    Assert.IsTrue(myList.Items.Count() == 3);
-                    // Can we get the value of list item field
-                    var firstItem = myList.Items.First();
-                    Assert.IsNotNull(firstItem.Title);
-                    Assert.AreEqual(ItemTitleValue, firstItem.Title);
-                    // Test the dynamic list item data reading
-                    dynamic dynamicFirstItem = firstItem;
-                    Assert.AreEqual(ItemTitleValue, dynamicFirstItem.Title);
-                    Assert.AreEqual(ItemTitleValue, dynamicFirstItem["Title"]);
-                    // handling of standard field in the list item
-                    Assert.AreEqual(firstItem.Id, dynamicFirstItem.Id);
-                    Assert.AreEqual(firstItem.Id, dynamicFirstItem["Id"]);
+                    try
+                    {
+                        // Get items from the list, load NoCrawl to ensure retrieval via REST
+                        await myList.LoadAsync(p => p.Items);
+                        // There should be 3 items in the list
+                        Assert.IsTrue(myList.Items.Length == 3);
+                        // Can we get the value of list item field
+                        var firstItem = myList.Items.AsRequested().First();
+                        Assert.IsNotNull(firstItem.Title);
+                        Assert.AreEqual(ItemTitleValue, firstItem.Title);
+                        // Test the dynamic list item data reading
+                        dynamic dynamicFirstItem = firstItem;
+                        Assert.AreEqual(ItemTitleValue, dynamicFirstItem.Title);
+                        Assert.AreEqual(ItemTitleValue, dynamicFirstItem["Title"]);
+                        // handling of standard field in the list item
+                        Assert.AreEqual(firstItem.Id, dynamicFirstItem.Id);
+                        Assert.AreEqual(firstItem.Id, dynamicFirstItem["Id"]);
+                    }
+                    finally
+                    {
+                        // Clean up
+                        await myList.DeleteAsync();
+                    }
                 }
             }
         }
@@ -166,28 +192,36 @@ namespace PnP.Core.Test.Base
                 {
                     Assert.Inconclusive("Test data set should be setup to not have the list available.");
                 }
-                var myList = web.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
+                var myList = web.Result.Lists.FirstOrDefault(p => p.Title == listTitle);
 
                 if (myList != null)
                 {
-                    // Get items from the list + custom properties
-                    await myList.GetAsync(p => p.Items, p => p.ContentTypesEnabled, p => p.Hidden);
-                    // There should be 3 items in the list
-                    Assert.IsTrue(myList.Items.Count() == 3);
-                    // Can we get the value of list item field
-                    var firstItem = myList.Items.First();
-                    Assert.IsNotNull(firstItem.Title);
-                    Assert.AreEqual(ItemTitleValue, firstItem.Title);
-                    // Test the dynamic list item data reading
-                    dynamic dynamicFirstItem = firstItem;
-                    Assert.AreEqual(ItemTitleValue, dynamicFirstItem.Title);
-                    Assert.AreEqual(ItemTitleValue, dynamicFirstItem["Title"]);
-                    // handling of standard field in the list item
-                    Assert.AreEqual(firstItem.Id, dynamicFirstItem.Id);
-                    Assert.AreEqual(firstItem.Id, dynamicFirstItem["Id"]);
-                    // Check if the custom list properties where also loaded
-                    Assert.IsTrue(myList.IsPropertyAvailable(p => p.Hidden));
-                    Assert.IsTrue(myList.IsPropertyAvailable(p => p.ContentTypesEnabled));
+                    try
+                    {
+                        // Get items from the list + custom properties
+                        await myList.LoadAsync(p => p.Items, p => p.ContentTypesEnabled, p => p.Hidden);
+                        // There should be 3 items in the list
+                        Assert.IsTrue(myList.Items.Length == 3);
+                        // Can we get the value of list item field
+                        var firstItem = myList.Items.AsRequested().First();
+                        Assert.IsNotNull(firstItem.Title);
+                        Assert.AreEqual(ItemTitleValue, firstItem.Title);
+                        // Test the dynamic list item data reading
+                        dynamic dynamicFirstItem = firstItem;
+                        Assert.AreEqual(ItemTitleValue, dynamicFirstItem.Title);
+                        Assert.AreEqual(ItemTitleValue, dynamicFirstItem["Title"]);
+                        // handling of standard field in the list item
+                        Assert.AreEqual(firstItem.Id, dynamicFirstItem.Id);
+                        Assert.AreEqual(firstItem.Id, dynamicFirstItem["Id"]);
+                        // Check if the custom list properties where also loaded
+                        Assert.IsTrue(myList.IsPropertyAvailable(p => p.Hidden));
+                        Assert.IsTrue(myList.IsPropertyAvailable(p => p.ContentTypesEnabled));
+                    }
+                    finally
+                    {
+                        // Clean up
+                        await myList.DeleteAsync();
+                    }
                 }
             }
         }
@@ -198,15 +232,15 @@ namespace PnP.Core.Test.Base
             // Disable graph first as we're testing the REST path here
             context.GraphFirst = false;
 
-            var web = await context.Web.GetBatchAsync(p => p.Lists);
+            await context.Web.LoadBatchAsync(p => p.Lists);
             context.ExecuteAsync().Wait();
 
-            var myList = web.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
+            var myList = context.Web.Lists.FirstOrDefault(p => p.Title == listTitle);
 
             if (myList == null)
             {
                 // Add a new list
-                myList = await web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
+                myList = await context.Web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
 
                 // Add a number of list items and fetch them again in a single server call
                 Dictionary<string, object> values = new Dictionary<string, object>

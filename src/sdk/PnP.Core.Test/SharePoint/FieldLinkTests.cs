@@ -29,13 +29,13 @@ namespace PnP.Core.Test.SharePoint
                 IContentType contentType = (from ct in context.Web.ContentTypes
                                             where ct.Name == "Document"
                                             select ct)
-                                            .Include(ct => ct.FieldLinks)
+                                            .QueryProperties(ct => ct.FieldLinks)
                                             .FirstOrDefault();
 
-                Assert.IsTrue(contentType.FieldLinks.Count() > 0);
+                Assert.IsTrue(contentType.FieldLinks.Length > 0);
                 Assert.IsNotNull(contentType);
 
-                IFieldLink titleFieldLink = contentType.FieldLinks.FirstOrDefault(fl => fl.Name == "Title");
+                IFieldLink titleFieldLink = contentType.FieldLinks.AsRequested().FirstOrDefault(fl => fl.Name == "Title");
 
                 Assert.IsNotNull(titleFieldLink);
                 Assert.AreEqual("Title", titleFieldLink.Name);
@@ -51,19 +51,16 @@ namespace PnP.Core.Test.SharePoint
             {
                 // Get existing content type
 
-                //var list = await context.Web.Lists.GetByTitleAsync("Documents", p => p.ContentTypes.LoadProperties(p=>p.Name, p => p.FieldLinks));
-                //var contentType = list.ContentTypes.FirstOrDefault(p => p.Name == "Document");
-
                 IContentType contentType = (from ct in context.Web.Lists.GetByTitle("Documents").ContentTypes
                                             where ct.Name == "Document"
                                             select ct)
-                                            .Include(ct => ct.FieldLinks)
+                                            .QueryProperties(ct => ct.FieldLinks)
                                             .FirstOrDefault();
 
-                Assert.IsTrue(contentType.FieldLinks.Count() > 0);
+                Assert.IsTrue(contentType.FieldLinks.Length > 0);
                 Assert.IsNotNull(contentType);
 
-                IFieldLink titleFieldLink = contentType.FieldLinks.FirstOrDefault(fl => fl.Name == "Title");
+                IFieldLink titleFieldLink = contentType.FieldLinks.AsRequested().FirstOrDefault(fl => fl.Name == "Title");
 
                 Assert.IsNotNull(titleFieldLink);
                 Assert.AreEqual("Title", titleFieldLink.Name);

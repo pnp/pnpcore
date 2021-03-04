@@ -4,7 +4,7 @@
     /// Collection of file version events
     /// </summary>
     [ConcreteType(typeof(FileVersionEventCollection))]
-    public interface IFileVersionEventCollection : IDataModelCollection<IFileVersionEvent>
+    public interface IFileVersionEventCollection : IDataModelCollection<IFileVersionEvent>, IDataModelCollectionLoad<IFileVersionEvent>
     {
 
     }

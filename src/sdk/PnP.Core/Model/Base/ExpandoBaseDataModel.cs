@@ -288,6 +288,7 @@ namespace PnP.Core.Model
         /// <returns>The dynamic object from current strongly typed object</returns>
         public dynamic AsDynamic()
         {
+            // TODO: Evaluate if we really need this method
             return TransientObject.AsDynamic(this);
         }
     }

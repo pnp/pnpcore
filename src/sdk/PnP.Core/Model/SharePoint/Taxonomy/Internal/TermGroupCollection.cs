@@ -1,4 +1,5 @@
-﻿using PnP.Core.QueryModel;
+﻿/*
+using PnP.Core.QueryModel;
 using PnP.Core.Services;
 using System;
 using System.Linq.Expressions;
@@ -108,7 +109,7 @@ namespace PnP.Core.Model.SharePoint
                 throw new ArgumentNullException(nameof(id));
             }
 
-            return await GetFirstOrDefaultAsync(l => l.Id == id, selectors).ConfigureAwait(false);
+            return await this.QueryProperties(selectors).FirstOrDefaultAsync(l => l.Id == id).ConfigureAwait(false);
         }
 
         #endregion
@@ -132,7 +133,7 @@ namespace PnP.Core.Model.SharePoint
                 throw new ArgumentNullException(nameof(name));
             }
 
-            return await GetFirstOrDefaultAsync(l => l.Name == name, selectors).ConfigureAwait(false);
+            return await this.QueryProperties(selectors).FirstOrDefaultAsync(l => l.Name == name).ConfigureAwait(false);
         }
 
         #endregion
@@ -140,3 +141,4 @@ namespace PnP.Core.Model.SharePoint
 
     }
 }
+*/
