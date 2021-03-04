@@ -1,0 +1,9 @@
+--batchresponse_bde5eec1-8bac-40fb-b3a0-caa6922f1af3
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+HTTP/1.1 200 OK
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+
+{"d":{"__metadata":{"id":"https://jimmywim.sharepoint.com/sites/PnPCoreTest/_api/Site","uri":"https://jimmywim.sharepoint.com/sites/PnPCoreTest/_api/Site","type":"SP.Site"},"GroupId":"00000000-0000-0000-0000-000000000000","Id":"5e86ce42-5a13-43ce-a004-1445a45c9a9a"}}
+--batchresponse_bde5eec1-8bac-40fb-b3a0-caa6922f1af3--
