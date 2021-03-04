@@ -1,5 +1,7 @@
 using PnP.Core.QueryModel;
 using PnP.Core.Services;
+using System.Threading.Tasks;
+using System.Linq;
 
 namespace PnP.Core.Model.Security
 {
