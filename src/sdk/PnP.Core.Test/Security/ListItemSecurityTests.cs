@@ -17,7 +17,7 @@ namespace PnP.Core.Test.Security
         public static void TestFixtureSetup(TestContext context)
         {
             // Configure mocking default for all tests in this class, unless override by a specific test
-            //TestCommon.Instance.Mocking = false;            
+            // TestCommon.Instance.Mocking = false;            
         }
 
         [TestInitialize]
@@ -29,7 +29,7 @@ namespace PnP.Core.Test.Security
         [TestMethod]
         public async Task ResetRoleInheritanceTest()
         {
-           // TestCommon.Instance.Mocking = false;
+            // TestCommon.Instance.Mocking = false;
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
@@ -47,7 +47,7 @@ namespace PnP.Core.Test.Security
         [TestMethod]
         public async Task BreakRoleInheritanceTestNoCopyAssignmentsNoClearSubscopes()
         {
-           // TestCommon.Instance.Mocking = false;
+            // TestCommon.Instance.Mocking = false;
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
@@ -107,11 +107,7 @@ namespace PnP.Core.Test.Security
                 // The below query sometimes brings back "Everyone"
                 var firstUser = await context.Web.SiteUsers.GetFirstOrDefaultAsync(u => u.IsSiteAdmin);
 
-                // fetch a role definition
-                var roleDefs = await context.Web.RoleDefinitions.GetAsync();
-                var roleDef = roleDefs.FirstOrDefault(r => r.Name == "Full Control");
-
-                await first.AddRoleAssignmentAsync(firstUser.Id, roleDef.Id);
+                await first.AddRoleDefinitionsAsync(firstUser.Id, new string[] { "Full Control" });
             }
         }
 
@@ -134,11 +130,10 @@ namespace PnP.Core.Test.Security
                 // The below query sometimes brings back "Everyone"
                 var firstUser = await context.Web.SiteUsers.GetFirstOrDefaultAsync(u => u.IsSiteAdmin);
 
-                // fetch a role definition
-                var roleDefs = await context.Web.RoleDefinitions.GetAsync();
-                var roleDef = roleDefs.FirstOrDefault(r => r.Name == "Full Control");
+                // First add a Role Assignment so we can delete it
+                await first.AddRoleDefinitionsAsync(firstUser.Id, new string[] { "Full Control" });
 
-                await first.RemoveRoleAssignmentAsync(firstUser.Id, roleDef.Id);
+                await first.RemoveRoleDefinitionsAsync(firstUser.Id, new string[] { "Full Control" });
             }
         }
 

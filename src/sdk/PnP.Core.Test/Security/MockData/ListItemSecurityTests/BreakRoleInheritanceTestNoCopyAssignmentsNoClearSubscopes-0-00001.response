@@ -1,4 +1,4 @@
---batchresponse_53b748f0-6743-46df-9092-fece3bd511a0
+--batchresponse_d60452e9-bfad-4b5e-906b-448188714b09
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
@@ -6,4 +6,4 @@ HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
 {"d":{"__metadata":{"id":"https://jimmywim.sharepoint.com/sites/PnPCoreTest/_api/Site","uri":"https://jimmywim.sharepoint.com/sites/PnPCoreTest/_api/Site","type":"SP.Site"},"GroupId":"00000000-0000-0000-0000-000000000000","Id":"5e86ce42-5a13-43ce-a004-1445a45c9a9a"}}
---batchresponse_53b748f0-6743-46df-9092-fece3bd511a0--
+--batchresponse_d60452e9-bfad-4b5e-906b-448188714b09--

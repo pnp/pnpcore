@@ -1273,16 +1273,70 @@ namespace PnP.Core.Model.SharePoint
             var response = await RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
         }
 
-        public async Task AddRoleAssignmentAsync(int principalId, int roleDefId)
+        public IRoleDefinitionCollection GetRoleDefinitions(int principalId)
         {
-            var apiCall = new ApiCall("_api/Web/Lists(guid'{Parent.Id}')/items({Id})/roleassignments/addroleassignment(principalId=" + principalId + ",roleDefId=" + roleDefId + ")", ApiType.SPORest);
-            var response = await RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
+            return GetRoleDefinitionsAsync(principalId).GetAwaiter().GetResult();
         }
 
-        public async Task RemoveRoleAssignmentAsync(int principalId, int roleDefId)
+        public async Task<IRoleDefinitionCollection> GetRoleDefinitionsAsync(int principalId)
         {
-            var apiCall = new ApiCall("_api/Web/Lists(guid'{Parent.Id}')/items({Id})/roleassignments/removeroleassignment(principalId=" + principalId + ",roleDefId=" + roleDefId + ")", ApiType.SPORest);
-            var response = await RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
+            await EnsurePropertiesAsync(l => l.RoleAssignments).ConfigureAwait(false);
+            var roleAssignment = await RoleAssignments.GetFirstOrDefaultAsync(p => p.PrincipalId == principalId, r => r.RoleDefinitions).ConfigureAwait(false);
+            return roleAssignment?.RoleDefinitions;
+        }
+
+        public bool AddRoleDefinitions(int principalId, params string[] names)
+        {
+            return AddRoleDefinitionsAsync(principalId, names).GetAwaiter().GetResult();
+        }
+
+        public async Task<bool> AddRoleDefinitionsAsync(int principalId, params string[] names)
+        {
+            var parentList = Parent.Parent as List;
+            var result = false;
+            foreach (var name in names)
+            {
+                var roleDefinition = await PnPContext.Web.RoleDefinitions.GetFirstOrDefaultAsync(d => d.Name == name).ConfigureAwait(false);
+                if (roleDefinition != null)
+                {
+                    var apiCall = new ApiCall($"_api/web/lists(guid'{parentList.Id}')/Items({Id})/roleassignments/addroleassignment(principalid={principalId},roledefid={roleDefinition.Id})", ApiType.SPORest);
+                    var response = await RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
+                    result = response.StatusCode == System.Net.HttpStatusCode.OK;
+                }
+                else
+                {
+                    throw new ArgumentException($"Role definition '{name}' not found.");
+                }
+            }
+            return result;
+        }
+
+        public bool RemoveRoleDefinitions(int principalId, params string[] names)
+        {
+            return RemoveRoleDefinitionsAsync(principalId, names).GetAwaiter().GetResult();
+        }
+
+        public async Task<bool> RemoveRoleDefinitionsAsync(int principalId, params string[] names)
+        {
+            var parentList = Parent.Parent as List;
+            var result = false;
+            foreach (var name in names)
+            {
+                var roleDefinitions = await GetRoleDefinitionsAsync(principalId).ConfigureAwait(false);
+
+                var roleDefinition = roleDefinitions.FirstOrDefault(r => r.Name == name);
+                if (roleDefinition != null)
+                {
+                    var apiCall = new ApiCall($"_api/web/lists(guid'{parentList.Id}')/Items({Id})/roleassignments/removeroleassignment(principalid={principalId},roledefid={roleDefinition.Id})", ApiType.SPORest);
+                    var response = await RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
+                    result = response.StatusCode == System.Net.HttpStatusCode.OK;
+                }
+                else
+                {
+                    throw new ArgumentException($"Role definition '{name}' not found for this group.");
+                }
+            }
+            return result;
         }
 
         #endregion

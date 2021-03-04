@@ -355,20 +355,50 @@ namespace PnP.Core.Model.SharePoint
         public Task ResetRoleInheritanceAsync();
 
         /// <summary>
-        /// Adds a role assignment
+        /// Returns the role definitions for a specific principal id (IUser.Id or ISharePointGroup.Id)
         /// </summary>
         /// <param name="principalId"></param>
-        /// <param name="roleDefId"></param>
         /// <returns></returns>
-        public Task AddRoleAssignmentAsync(int principalId, int roleDefId);
+        public IRoleDefinitionCollection GetRoleDefinitions(int principalId);
 
         /// <summary>
-        /// Removes a role assignment
+        /// Returns the role definitions for a specific principal id (IUser.Id or ISharePointGroup.Id)
         /// </summary>
         /// <param name="principalId"></param>
-        /// <param name="roleDefId"></param>
         /// <returns></returns>
-        public Task RemoveRoleAssignmentAsync(int principalId, int roleDefId);
+        public Task<IRoleDefinitionCollection> GetRoleDefinitionsAsync(int principalId);
+
+        /// <summary>
+        /// Add role definitions for a specific principal id (IUser.Id or ISharePointGroup.Id)
+        /// </summary>
+        /// <param name="principalId"></param>
+        /// <param name="names"></param>
+        /// <returns></returns>
+        public bool AddRoleDefinitions(int principalId, params string[] names);
+
+        /// <summary>
+        /// Adds role definitions for a specific principal id (IUser.Id or ISharePointGroup.Id)
+        /// </summary>
+        /// <param name="principalId"></param>
+        /// <param name="names"></param>
+        /// <returns></returns>
+        public Task<bool> AddRoleDefinitionsAsync(int principalId, params string[] names);
+
+        /// <summary>
+        /// Adds role definitions for a specific principal id (IUser.Id or ISharePointGroup.Id)
+        /// </summary>
+        /// <param name="principalId"></param>
+        /// <param name="names"></param>
+        /// <returns></returns>
+        public bool RemoveRoleDefinitions(int principalId, params string[] names);
+
+        /// <summary>
+        /// adds role definitions for a specific principal id (IUser.Id or ISharePointGroup.Id)
+        /// </summary>
+        /// <param name="principalId"></param>
+        /// <param name="names"></param>
+        /// <returns></returns>
+        public Task<bool> RemoveRoleDefinitionsAsync(int principalId, params string[] names);
 
         #endregion
 

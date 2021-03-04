@@ -9,35 +9,5 @@ namespace PnP.Core.Model.Security
     [ConcreteType(typeof(RoleAssignmentCollection))]
     public interface IRoleAssignmentCollection : IQueryable<IRoleAssignment>, IDataModelCollection<IRoleAssignment>
     {
-        /// <summary>
-        /// Adds a role assignment
-        /// </summary>
-        /// <param name="principalId"></param>
-        /// <param name="roleDefId"></param>
-        /// <returns></returns>
-        IRoleAssignment Add(int principalId, int roleDefId);
-
-        /// <summary>
-        /// Adds a role assignment
-        /// </summary>
-        /// <param name="principalId"></param>
-        /// <param name="roleDefId"></param>
-        /// <returns></returns>
-        Task<IRoleAssignment> AddAsync(int principalId, int roleDefId);
-
-        /// <summary>
-        /// Removes a role assignment
-        /// </summary>
-        /// <param name="principalId"></param>
-        /// <param name="roleDefId"></param>
-        void Remove(int principalId, int roleDefId);
-
-        /// <summary>
-        /// Removes a role assignment
-        /// </summary>
-        /// <param name="principalId"></param>
-        /// <param name="roleDefIf"></param>
-        /// <returns></returns>
-        Task RemoveAsync(int principalId, int roleDefIf);
     }
 }
