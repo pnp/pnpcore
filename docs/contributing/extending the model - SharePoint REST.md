@@ -11,7 +11,7 @@ All model classes need to link their concrete type (so the implementation) to th
 
 ```csharp
 [ConcreteType(typeof(List))]
-public interface IList : IDataModel<IList>, IDataModelGet<IList>, IDataModelUpdate, IDataModelDelete
+public interface IList : IDataModel<IList>, IDataModelGet<IList>, IDataModelLoad<IList>,IDataModelUpdate, IDataModelDelete
 {
     // Omitted for brevity
 }
@@ -88,7 +88,7 @@ All model collection classes need to link their concrete type (so the implementa
 
 ```csharp
 [ConcreteType(typeof(ListCollection))]
-public interface IListCollection : IDataModelCollection<IList>, IQueryable<IList>, ISupportPaging<IList>, IDataModelCollectionDeleteByGuidId
+public interface IListCollection : IDataModelCollection<IList>, IDataModelCollectionLoad<IList>, IQueryable<IList>, IDataModelCollectionDeleteByGuidId, IAsyncEnumerable<IList>
 {
     // Omitted for brevity
 }
@@ -117,7 +117,7 @@ Below code snippets show the above three concepts. First one shows the collectio
 /// Public interface to define a collection of List objects of SharePoint Online
 /// </summary>
 [ConcreteType(typeof(ListCollection))]
-public interface IListCollection : IQueryable<IList>, IDataModelCollection<IList>, ISupportPaging<IList>, IDataModelCollectionDeleteByGuidId
+public interface IListCollection : IQueryable<IList>, IDataModelCollection<IList>, IDataModelCollectionDeleteByGuidId, IAsyncEnumerable<IList>
 {
     /// <summary>
     /// Adds a new list
