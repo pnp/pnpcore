@@ -111,7 +111,7 @@
 /// Public interface to define a List object of SharePoint Online
 /// &lt;/summary&gt;
 [ConcreteType(typeof(List))]
-public interface IList : IDataModel&lt;IList&gt;, IDataModelGet&lt;IList&gt;, IDataModelUpdate, IDataModelDelete, IQueryableDataModel
+public interface IList : IDataModel&lt;IList&gt;, IDataModelGet&lt;IList&gt;, IDataModelLoad&lt;IList&gt;, IDataModelUpdate, IDataModelDelete, IQueryableDataModel
 {
     /// &lt;summary&gt;
     /// The Unique ID of the List object
@@ -137,6 +137,7 @@ public interface IList : IDataModel&lt;IList&gt;, IDataModelGet&lt;IList&gt;, ID
 <li>Uses the <code>ConcreteType</code> attribute to define the implementation type that belongs to this interface</li>
 <li>Has inline documentation on the model class and fields</li>
 <li>Always implements the <code>IDataModel&lt;TModel&gt;</code> interface where <code>TModel</code> is the actual interface (e.g. <code>IList</code> in above sample)</li>
+<li>Optionally implements the <code>IDataModelLoad&lt;TModel&gt;</code> interface whenever <strong>load</strong> functionality is needed on this model class (most of the models have this)</li>
 <li>Optionally implements the <code>IDataModelGet&lt;TModel&gt;</code> interface whenever <strong>get</strong> functionality is needed on this model class (most of the models have this)</li>
 <li>Optionally implements the <code>IDataModelUpdate</code> interface whenever <strong>update</strong> functionality in needed on this model class</li>
 <li>Optionally implements the <code>IDataModelDelete</code> interface whenever <strong>delete</strong> functionality is needed on this model class</li>
@@ -242,7 +243,7 @@ internal partial class List : BaseDataModel&lt;IList&gt;, IList
 /// Public interface to define a collection of List objects of SharePoint Online
 /// &lt;/summary&gt;
 [ConcreteType(typeof(ListCollection))]
-public interface IListCollection : IDataModelCollection&lt;IList&gt;, IQueryable&lt;IList&gt;, ISupportPaging&lt;IList&gt;, IDataModelCollectionDeleteByGuidId
+public interface IListCollection : IDataModelCollection&lt;IList&gt;, IDataModelCollectionLoad&lt;IList&gt;, IQueryable&lt;IList&gt;, IDataModelCollectionDeleteByGuidId, IAsyncEnumerable&lt;IList&gt;
 {
     /// &lt;summary&gt;
     /// Adds a new list
@@ -270,8 +271,9 @@ public interface IListCollection : IDataModelCollection&lt;IList&gt;, IQueryable
 <li>Contains the implementation of the methods defined in the public interface</li>
 <li>Has inline documentation on the model class and methods</li>
 <li>Always implements the <code>IDataModelCollection&lt;TModel&gt;</code> interface where <code>TModel</code> is the actual interface (e.g. <code>IList</code> in above sample)</li>
+<li>Optionally implements the <code>IDataModelCollectionLoad&lt;TModel&gt;</code> interface where <code>TModel</code> is the actual interface (e.g. <code>IList</code> in above sample) whenever the collection can loaded</li>
 <li>Optionally implements the <code>IQueryable&lt;TModel&gt;</code> interface where <code>TModel</code> is the actual interface (e.g. <code>IList</code> in above sample) whenever the model can be queried using linq queries</li>
-<li>Optionally implements the <code>ISupportPaging&lt;TModel&gt;</code> interface whenever the data in the collection can be retrieved from the server via paging</li>
+<li>Optionally implements the <code>IAsyncEnumerable&lt;TModel&gt;</code> interface whenever the data in the collection can be asynchronously enumerated</li>
 <li>Optionally implements either the <code>IDataModelCollectionDeleteByGuidId</code>, <code>IDataModelCollectionDeleteByIntegerId</code> or <code>IDataModelCollectionDeleteByStringId</code> interface matching the data type of the collection model's key if you want to offer a <code>DeleteById</code> method on the model collection. You should only do this if you've also implemented the <code>IDataModelDelete</code> on the collection's model</li>
 </ul>
 <p>Optionally a collection interface defines methods which add behavior to the collection.</p>
