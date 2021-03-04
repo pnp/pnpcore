@@ -954,7 +954,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.Security.IRoleAssignmentCollection.html",
-          "hash": "mi43r9Zj3VYY66t8ZBfm1g=="
+          "hash": "DKSqJ/88J1af3UbhDZsU3A=="
         }
       },
       "is_incremental": false,
@@ -1878,7 +1878,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.IListItem.html",
-          "hash": "Of4KY62kcHJoWnDNLOwRXg=="
+          "hash": "D90wZTGJdHufv44Xxgt3sA=="
         }
       },
       "is_incremental": false,

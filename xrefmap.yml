@@ -14163,6 +14163,38 @@ references:
   commentId: T:PnP.Core.Model.SharePoint.IListItem
   fullName: PnP.Core.Model.SharePoint.IListItem
   nameWithType: IListItem
+- uid: PnP.Core.Model.SharePoint.IListItem.AddRoleDefinitions(System.Int32,System.String[])
+  name: AddRoleDefinitions(Int32, String[])
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_AddRoleDefinitions_System_Int32_System_String___
+  commentId: M:PnP.Core.Model.SharePoint.IListItem.AddRoleDefinitions(System.Int32,System.String[])
+  name.vb: AddRoleDefinitions(Int32, String())
+  fullName: PnP.Core.Model.SharePoint.IListItem.AddRoleDefinitions(System.Int32, System.String[])
+  fullName.vb: PnP.Core.Model.SharePoint.IListItem.AddRoleDefinitions(System.Int32, System.String())
+  nameWithType: IListItem.AddRoleDefinitions(Int32, String[])
+  nameWithType.vb: IListItem.AddRoleDefinitions(Int32, String())
+- uid: PnP.Core.Model.SharePoint.IListItem.AddRoleDefinitions*
+  name: AddRoleDefinitions
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_AddRoleDefinitions_
+  commentId: Overload:PnP.Core.Model.SharePoint.IListItem.AddRoleDefinitions
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IListItem.AddRoleDefinitions
+  nameWithType: IListItem.AddRoleDefinitions
+- uid: PnP.Core.Model.SharePoint.IListItem.AddRoleDefinitionsAsync(System.Int32,System.String[])
+  name: AddRoleDefinitionsAsync(Int32, String[])
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_AddRoleDefinitionsAsync_System_Int32_System_String___
+  commentId: M:PnP.Core.Model.SharePoint.IListItem.AddRoleDefinitionsAsync(System.Int32,System.String[])
+  name.vb: AddRoleDefinitionsAsync(Int32, String())
+  fullName: PnP.Core.Model.SharePoint.IListItem.AddRoleDefinitionsAsync(System.Int32, System.String[])
+  fullName.vb: PnP.Core.Model.SharePoint.IListItem.AddRoleDefinitionsAsync(System.Int32, System.String())
+  nameWithType: IListItem.AddRoleDefinitionsAsync(Int32, String[])
+  nameWithType.vb: IListItem.AddRoleDefinitionsAsync(Int32, String())
+- uid: PnP.Core.Model.SharePoint.IListItem.AddRoleDefinitionsAsync*
+  name: AddRoleDefinitionsAsync
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_AddRoleDefinitionsAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.IListItem.AddRoleDefinitionsAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IListItem.AddRoleDefinitionsAsync
+  nameWithType: IListItem.AddRoleDefinitionsAsync
 - uid: PnP.Core.Model.SharePoint.IListItem.AreCommentsDisabled
   name: AreCommentsDisabled()
   href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_AreCommentsDisabled
@@ -14189,6 +14221,32 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IListItem.AreCommentsDisabledAsync
   nameWithType: IListItem.AreCommentsDisabledAsync
+- uid: PnP.Core.Model.SharePoint.IListItem.BreakRoleInheritance(System.Boolean,System.Boolean)
+  name: BreakRoleInheritance(Boolean, Boolean)
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_BreakRoleInheritance_System_Boolean_System_Boolean_
+  commentId: M:PnP.Core.Model.SharePoint.IListItem.BreakRoleInheritance(System.Boolean,System.Boolean)
+  fullName: PnP.Core.Model.SharePoint.IListItem.BreakRoleInheritance(System.Boolean, System.Boolean)
+  nameWithType: IListItem.BreakRoleInheritance(Boolean, Boolean)
+- uid: PnP.Core.Model.SharePoint.IListItem.BreakRoleInheritance*
+  name: BreakRoleInheritance
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_BreakRoleInheritance_
+  commentId: Overload:PnP.Core.Model.SharePoint.IListItem.BreakRoleInheritance
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IListItem.BreakRoleInheritance
+  nameWithType: IListItem.BreakRoleInheritance
+- uid: PnP.Core.Model.SharePoint.IListItem.BreakRoleInheritanceAsync(System.Boolean,System.Boolean)
+  name: BreakRoleInheritanceAsync(Boolean, Boolean)
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_BreakRoleInheritanceAsync_System_Boolean_System_Boolean_
+  commentId: M:PnP.Core.Model.SharePoint.IListItem.BreakRoleInheritanceAsync(System.Boolean,System.Boolean)
+  fullName: PnP.Core.Model.SharePoint.IListItem.BreakRoleInheritanceAsync(System.Boolean, System.Boolean)
+  nameWithType: IListItem.BreakRoleInheritanceAsync(Boolean, Boolean)
+- uid: PnP.Core.Model.SharePoint.IListItem.BreakRoleInheritanceAsync*
+  name: BreakRoleInheritanceAsync
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_BreakRoleInheritanceAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.IListItem.BreakRoleInheritanceAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IListItem.BreakRoleInheritanceAsync
+  nameWithType: IListItem.BreakRoleInheritanceAsync
 - uid: PnP.Core.Model.SharePoint.IListItem.GetFolder
   name: GetFolder()
   href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_GetFolder
@@ -14215,6 +14273,32 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IListItem.GetFolderAsync
   nameWithType: IListItem.GetFolderAsync
+- uid: PnP.Core.Model.SharePoint.IListItem.GetRoleDefinitions(System.Int32)
+  name: GetRoleDefinitions(Int32)
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_GetRoleDefinitions_System_Int32_
+  commentId: M:PnP.Core.Model.SharePoint.IListItem.GetRoleDefinitions(System.Int32)
+  fullName: PnP.Core.Model.SharePoint.IListItem.GetRoleDefinitions(System.Int32)
+  nameWithType: IListItem.GetRoleDefinitions(Int32)
+- uid: PnP.Core.Model.SharePoint.IListItem.GetRoleDefinitions*
+  name: GetRoleDefinitions
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_GetRoleDefinitions_
+  commentId: Overload:PnP.Core.Model.SharePoint.IListItem.GetRoleDefinitions
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IListItem.GetRoleDefinitions
+  nameWithType: IListItem.GetRoleDefinitions
+- uid: PnP.Core.Model.SharePoint.IListItem.GetRoleDefinitionsAsync(System.Int32)
+  name: GetRoleDefinitionsAsync(Int32)
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_GetRoleDefinitionsAsync_System_Int32_
+  commentId: M:PnP.Core.Model.SharePoint.IListItem.GetRoleDefinitionsAsync(System.Int32)
+  fullName: PnP.Core.Model.SharePoint.IListItem.GetRoleDefinitionsAsync(System.Int32)
+  nameWithType: IListItem.GetRoleDefinitionsAsync(Int32)
+- uid: PnP.Core.Model.SharePoint.IListItem.GetRoleDefinitionsAsync*
+  name: GetRoleDefinitionsAsync
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_GetRoleDefinitionsAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.IListItem.GetRoleDefinitionsAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IListItem.GetRoleDefinitionsAsync
+  nameWithType: IListItem.GetRoleDefinitionsAsync
 - uid: PnP.Core.Model.SharePoint.IListItem.Id
   name: Id
   href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_Id
@@ -14389,6 +14473,77 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IListItem.RecycleBatchAsync
   nameWithType: IListItem.RecycleBatchAsync
+- uid: PnP.Core.Model.SharePoint.IListItem.RemoveRoleDefinitions(System.Int32,System.String[])
+  name: RemoveRoleDefinitions(Int32, String[])
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_RemoveRoleDefinitions_System_Int32_System_String___
+  commentId: M:PnP.Core.Model.SharePoint.IListItem.RemoveRoleDefinitions(System.Int32,System.String[])
+  name.vb: RemoveRoleDefinitions(Int32, String())
+  fullName: PnP.Core.Model.SharePoint.IListItem.RemoveRoleDefinitions(System.Int32, System.String[])
+  fullName.vb: PnP.Core.Model.SharePoint.IListItem.RemoveRoleDefinitions(System.Int32, System.String())
+  nameWithType: IListItem.RemoveRoleDefinitions(Int32, String[])
+  nameWithType.vb: IListItem.RemoveRoleDefinitions(Int32, String())
+- uid: PnP.Core.Model.SharePoint.IListItem.RemoveRoleDefinitions*
+  name: RemoveRoleDefinitions
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_RemoveRoleDefinitions_
+  commentId: Overload:PnP.Core.Model.SharePoint.IListItem.RemoveRoleDefinitions
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IListItem.RemoveRoleDefinitions
+  nameWithType: IListItem.RemoveRoleDefinitions
+- uid: PnP.Core.Model.SharePoint.IListItem.RemoveRoleDefinitionsAsync(System.Int32,System.String[])
+  name: RemoveRoleDefinitionsAsync(Int32, String[])
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_RemoveRoleDefinitionsAsync_System_Int32_System_String___
+  commentId: M:PnP.Core.Model.SharePoint.IListItem.RemoveRoleDefinitionsAsync(System.Int32,System.String[])
+  name.vb: RemoveRoleDefinitionsAsync(Int32, String())
+  fullName: PnP.Core.Model.SharePoint.IListItem.RemoveRoleDefinitionsAsync(System.Int32, System.String[])
+  fullName.vb: PnP.Core.Model.SharePoint.IListItem.RemoveRoleDefinitionsAsync(System.Int32, System.String())
+  nameWithType: IListItem.RemoveRoleDefinitionsAsync(Int32, String[])
+  nameWithType.vb: IListItem.RemoveRoleDefinitionsAsync(Int32, String())
+- uid: PnP.Core.Model.SharePoint.IListItem.RemoveRoleDefinitionsAsync*
+  name: RemoveRoleDefinitionsAsync
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_RemoveRoleDefinitionsAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.IListItem.RemoveRoleDefinitionsAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IListItem.RemoveRoleDefinitionsAsync
+  nameWithType: IListItem.RemoveRoleDefinitionsAsync
+- uid: PnP.Core.Model.SharePoint.IListItem.ResetRoleInheritance
+  name: ResetRoleInheritance()
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_ResetRoleInheritance
+  commentId: M:PnP.Core.Model.SharePoint.IListItem.ResetRoleInheritance
+  fullName: PnP.Core.Model.SharePoint.IListItem.ResetRoleInheritance()
+  nameWithType: IListItem.ResetRoleInheritance()
+- uid: PnP.Core.Model.SharePoint.IListItem.ResetRoleInheritance*
+  name: ResetRoleInheritance
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_ResetRoleInheritance_
+  commentId: Overload:PnP.Core.Model.SharePoint.IListItem.ResetRoleInheritance
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IListItem.ResetRoleInheritance
+  nameWithType: IListItem.ResetRoleInheritance
+- uid: PnP.Core.Model.SharePoint.IListItem.ResetRoleInheritanceAsync
+  name: ResetRoleInheritanceAsync()
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_ResetRoleInheritanceAsync
+  commentId: M:PnP.Core.Model.SharePoint.IListItem.ResetRoleInheritanceAsync
+  fullName: PnP.Core.Model.SharePoint.IListItem.ResetRoleInheritanceAsync()
+  nameWithType: IListItem.ResetRoleInheritanceAsync()
+- uid: PnP.Core.Model.SharePoint.IListItem.ResetRoleInheritanceAsync*
+  name: ResetRoleInheritanceAsync
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_ResetRoleInheritanceAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.IListItem.ResetRoleInheritanceAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IListItem.ResetRoleInheritanceAsync
+  nameWithType: IListItem.ResetRoleInheritanceAsync
+- uid: PnP.Core.Model.SharePoint.IListItem.RoleAssignments
+  name: RoleAssignments
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_RoleAssignments
+  commentId: P:PnP.Core.Model.SharePoint.IListItem.RoleAssignments
+  fullName: PnP.Core.Model.SharePoint.IListItem.RoleAssignments
+  nameWithType: IListItem.RoleAssignments
+- uid: PnP.Core.Model.SharePoint.IListItem.RoleAssignments*
+  name: RoleAssignments
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_RoleAssignments_
+  commentId: Overload:PnP.Core.Model.SharePoint.IListItem.RoleAssignments
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IListItem.RoleAssignments
+  nameWithType: IListItem.RoleAssignments
 - uid: PnP.Core.Model.SharePoint.IListItem.SetCommentsDisabled(System.Boolean)
   name: SetCommentsDisabled(Boolean)
   href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_SetCommentsDisabled_System_Boolean_

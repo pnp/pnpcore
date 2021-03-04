@@ -243,6 +243,50 @@
   
   <span class="small pull-right mobile-hide">
     <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IListItem_RoleAssignments.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IListItem.RoleAssignments%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IListItem.cs/#L28" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IListItem_RoleAssignments_" data-uid="PnP.Core.Model.SharePoint.IListItem.RoleAssignments*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IListItem_RoleAssignments" data-uid="PnP.Core.Model.SharePoint.IListItem.RoleAssignments"><a href="#collapsible-PnP_Core_Model_SharePoint_IListItem_RoleAssignments" class="expander" data-toggle="collapse">RoleAssignments</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IListItem_RoleAssignments" class="collapse in">
+  <div class="markdown level1 summary"><p>Role assignments of the list item</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">IRoleAssignmentCollection RoleAssignments { get; }</code></pre>
+  </div>
+
+  
+  
+  
+  
+  <h5 class="propertyValue">Property Value</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="PnP.Core.Model.Security.IRoleAssignmentCollection.html">IRoleAssignmentCollection</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IListItem_Title.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IListItem.Title%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
@@ -289,10 +333,132 @@
   
   <span class="small pull-right mobile-hide">
     <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IListItem_AddRoleDefinitions_System_Int32_System_String___.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IListItem.AddRoleDefinitions(System.Int32%2CSystem.String%5B%5D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IListItem.cs/#L377" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IListItem_AddRoleDefinitions_" data-uid="PnP.Core.Model.SharePoint.IListItem.AddRoleDefinitions*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IListItem_AddRoleDefinitions_System_Int32_System_String___" data-uid="PnP.Core.Model.SharePoint.IListItem.AddRoleDefinitions(System.Int32,System.String[])"><a href="#collapsible-PnP_Core_Model_SharePoint_IListItem_AddRoleDefinitions_System_Int32_System_String___" class="expander" data-toggle="collapse">AddRoleDefinitions(Int32, String[])</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IListItem_AddRoleDefinitions_System_Int32_System_String___" class="collapse in">
+  <div class="markdown level1 summary"><p>Add role definitions for a specific principal id (IUser.Id or ISharePointGroup.Id)</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">bool AddRoleDefinitions(int principalId, params string[] names)</code></pre>
+  </div>
+
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.int32">Int32</a></span>
+        <span class="parametername">principalId</span>
+        <p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a>[]</span>
+        <span class="parametername">names</span>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IListItem_AddRoleDefinitionsAsync_System_Int32_System_String___.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IListItem.AddRoleDefinitionsAsync(System.Int32%2CSystem.String%5B%5D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IListItem.cs/#L385" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IListItem_AddRoleDefinitionsAsync_" data-uid="PnP.Core.Model.SharePoint.IListItem.AddRoleDefinitionsAsync*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IListItem_AddRoleDefinitionsAsync_System_Int32_System_String___" data-uid="PnP.Core.Model.SharePoint.IListItem.AddRoleDefinitionsAsync(System.Int32,System.String[])"><a href="#collapsible-PnP_Core_Model_SharePoint_IListItem_AddRoleDefinitionsAsync_System_Int32_System_String___" class="expander" data-toggle="collapse">AddRoleDefinitionsAsync(Int32, String[])</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IListItem_AddRoleDefinitionsAsync_System_Int32_System_String___" class="collapse in">
+  <div class="markdown level1 summary"><p>Adds role definitions for a specific principal id (IUser.Id or ISharePointGroup.Id)</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task&lt;bool&gt; AddRoleDefinitionsAsync(int principalId, params string[] names)</code></pre>
+  </div>
+
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.int32">Int32</a></span>
+        <span class="parametername">principalId</span>
+        <p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a>[]</span>
+        <span class="parametername">names</span>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="xref">Task</span>&lt;<a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a>&gt;
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IListItem_AreCommentsDisabled.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IListItem.AreCommentsDisabled%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IListItem.cs/#L137" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IListItem.cs/#L142" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Model_SharePoint_IListItem_AreCommentsDisabled_" data-uid="PnP.Core.Model.SharePoint.IListItem.AreCommentsDisabled*"></a>
@@ -337,7 +503,7 @@
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IListItem_AreCommentsDisabledAsync.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IListItem.AreCommentsDisabledAsync%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IListItem.cs/#L131" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IListItem.cs/#L136" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Model_SharePoint_IListItem_AreCommentsDisabledAsync_" data-uid="PnP.Core.Model.SharePoint.IListItem.AreCommentsDisabledAsync*"></a>
@@ -379,10 +545,123 @@
   
   <span class="small pull-right mobile-hide">
     <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IListItem_BreakRoleInheritance_System_Boolean_System_Boolean_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IListItem.BreakRoleInheritance(System.Boolean%2CSystem.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IListItem.cs/#L335" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IListItem_BreakRoleInheritance_" data-uid="PnP.Core.Model.SharePoint.IListItem.BreakRoleInheritance*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IListItem_BreakRoleInheritance_System_Boolean_System_Boolean_" data-uid="PnP.Core.Model.SharePoint.IListItem.BreakRoleInheritance(System.Boolean,System.Boolean)"><a href="#collapsible-PnP_Core_Model_SharePoint_IListItem_BreakRoleInheritance_System_Boolean_System_Boolean_" class="expander" data-toggle="collapse">BreakRoleInheritance(Boolean, Boolean)</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IListItem_BreakRoleInheritance_System_Boolean_System_Boolean_" class="collapse in">
+  <div class="markdown level1 summary"><p>Break role inheritance on the current item</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void BreakRoleInheritance(bool copyRoleAssignments, bool clearSubscopes)</code></pre>
+  </div>
+
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></span>
+        <span class="parametername">copyRoleAssignments</span>
+        <p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></span>
+        <span class="parametername">clearSubscopes</span>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IListItem_BreakRoleInheritanceAsync_System_Boolean_System_Boolean_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IListItem.BreakRoleInheritanceAsync(System.Boolean%2CSystem.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IListItem.cs/#L343" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IListItem_BreakRoleInheritanceAsync_" data-uid="PnP.Core.Model.SharePoint.IListItem.BreakRoleInheritanceAsync*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IListItem_BreakRoleInheritanceAsync_System_Boolean_System_Boolean_" data-uid="PnP.Core.Model.SharePoint.IListItem.BreakRoleInheritanceAsync(System.Boolean,System.Boolean)"><a href="#collapsible-PnP_Core_Model_SharePoint_IListItem_BreakRoleInheritanceAsync_System_Boolean_System_Boolean_" class="expander" data-toggle="collapse">BreakRoleInheritanceAsync(Boolean, Boolean)</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IListItem_BreakRoleInheritanceAsync_System_Boolean_System_Boolean_" class="collapse in">
+  <div class="markdown level1 summary"><p>Break role inheritance on the current item</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task BreakRoleInheritanceAsync(bool copyRoleAssignments, bool clearSubscopes)</code></pre>
+  </div>
+
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></span>
+        <span class="parametername">copyRoleAssignments</span>
+        <p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></span>
+        <span class="parametername">clearSubscopes</span>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="xref">Task</span>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IListItem_GetFolder.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IListItem.GetFolder%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IListItem.cs/#L51" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IListItem.cs/#L56" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Model_SharePoint_IListItem_GetFolder_" data-uid="PnP.Core.Model.SharePoint.IListItem.GetFolder*"></a>
@@ -427,7 +706,7 @@
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IListItem_GetFolderAsync.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IListItem.GetFolderAsync%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IListItem.cs/#L45" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IListItem.cs/#L50" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Model_SharePoint_IListItem_GetFolderAsync_" data-uid="PnP.Core.Model.SharePoint.IListItem.GetFolderAsync*"></a>
@@ -469,10 +748,118 @@
   
   <span class="small pull-right mobile-hide">
     <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IListItem_GetRoleDefinitions_System_Int32_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IListItem.GetRoleDefinitions(System.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IListItem.cs/#L362" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IListItem_GetRoleDefinitions_" data-uid="PnP.Core.Model.SharePoint.IListItem.GetRoleDefinitions*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IListItem_GetRoleDefinitions_System_Int32_" data-uid="PnP.Core.Model.SharePoint.IListItem.GetRoleDefinitions(System.Int32)"><a href="#collapsible-PnP_Core_Model_SharePoint_IListItem_GetRoleDefinitions_System_Int32_" class="expander" data-toggle="collapse">GetRoleDefinitions(Int32)</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IListItem_GetRoleDefinitions_System_Int32_" class="collapse in">
+  <div class="markdown level1 summary"><p>Returns the role definitions for a specific principal id (IUser.Id or ISharePointGroup.Id)</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">IRoleDefinitionCollection GetRoleDefinitions(int principalId)</code></pre>
+  </div>
+
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.int32">Int32</a></span>
+        <span class="parametername">principalId</span>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="PnP.Core.Model.Security.IRoleDefinitionCollection.html">IRoleDefinitionCollection</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IListItem_GetRoleDefinitionsAsync_System_Int32_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IListItem.GetRoleDefinitionsAsync(System.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IListItem.cs/#L369" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IListItem_GetRoleDefinitionsAsync_" data-uid="PnP.Core.Model.SharePoint.IListItem.GetRoleDefinitionsAsync*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IListItem_GetRoleDefinitionsAsync_System_Int32_" data-uid="PnP.Core.Model.SharePoint.IListItem.GetRoleDefinitionsAsync(System.Int32)"><a href="#collapsible-PnP_Core_Model_SharePoint_IListItem_GetRoleDefinitionsAsync_System_Int32_" class="expander" data-toggle="collapse">GetRoleDefinitionsAsync(Int32)</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IListItem_GetRoleDefinitionsAsync_System_Int32_" class="collapse in">
+  <div class="markdown level1 summary"><p>Returns the role definitions for a specific principal id (IUser.Id or ISharePointGroup.Id)</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task&lt;IRoleDefinitionCollection&gt; GetRoleDefinitionsAsync(int principalId)</code></pre>
+  </div>
+
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.int32">Int32</a></span>
+        <span class="parametername">principalId</span>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="xref">Task</span>&lt;<a class="xref" href="PnP.Core.Model.Security.IRoleDefinitionCollection.html">IRoleDefinitionCollection</a>&gt;
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IListItem_IsFolder.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IListItem.IsFolder%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IListItem.cs/#L39" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IListItem.cs/#L44" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Model_SharePoint_IListItem_IsFolder_" data-uid="PnP.Core.Model.SharePoint.IListItem.IsFolder*"></a>
@@ -517,7 +904,7 @@
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IListItem_IsFolderAsync.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IListItem.IsFolderAsync%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IListItem.cs/#L33" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IListItem.cs/#L38" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Model_SharePoint_IListItem_IsFolderAsync_" data-uid="PnP.Core.Model.SharePoint.IListItem.IsFolderAsync*"></a>
@@ -562,7 +949,7 @@
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IListItem_NewFieldLookupValue_PnP_Core_Model_SharePoint_IField_System_Int32_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IListItem.NewFieldLookupValue(PnP.Core.Model.SharePoint.IField%2CSystem.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IListItem.cs/#L244" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IListItem.cs/#L249" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Model_SharePoint_IListItem_NewFieldLookupValue_" data-uid="PnP.Core.Model.SharePoint.IListItem.NewFieldLookupValue*"></a>
@@ -626,7 +1013,7 @@
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IListItem_NewFieldTaxonomyValue_PnP_Core_Model_SharePoint_IField_Guid_System_String_System_Int32_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IListItem.NewFieldTaxonomyValue(PnP.Core.Model.SharePoint.IField%2CGuid%2CSystem.String%2CSystem.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IListItem.cs/#L270" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IListItem.cs/#L275" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Model_SharePoint_IListItem_NewFieldTaxonomyValue_" data-uid="PnP.Core.Model.SharePoint.IListItem.NewFieldTaxonomyValue*"></a>
@@ -706,7 +1093,7 @@
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IListItem_NewFieldUrlValue_PnP_Core_Model_SharePoint_IField_System_String_System_String_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IListItem.NewFieldUrlValue(PnP.Core.Model.SharePoint.IField%2CSystem.String%2CSystem.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IListItem.cs/#L236" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IListItem.cs/#L241" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Model_SharePoint_IListItem_NewFieldUrlValue_" data-uid="PnP.Core.Model.SharePoint.IListItem.NewFieldUrlValue*"></a>
@@ -778,7 +1165,7 @@
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IListItem_NewFieldUserValue_PnP_Core_Model_SharePoint_IField_PnP_Core_Model_Security_ISharePointPrincipal_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IListItem.NewFieldUserValue(PnP.Core.Model.SharePoint.IField%2CPnP.Core.Model.Security.ISharePointPrincipal)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IListItem.cs/#L260" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IListItem.cs/#L265" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Model_SharePoint_IListItem_NewFieldUserValue_" data-uid="PnP.Core.Model.SharePoint.IListItem.NewFieldUserValue*"></a>
@@ -842,7 +1229,7 @@
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IListItem_NewFieldUserValue_PnP_Core_Model_SharePoint_IField_System_Int32_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IListItem.NewFieldUserValue(PnP.Core.Model.SharePoint.IField%2CSystem.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IListItem.cs/#L252" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IListItem.cs/#L257" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Model_SharePoint_IListItem_NewFieldUserValue_" data-uid="PnP.Core.Model.SharePoint.IListItem.NewFieldUserValue*"></a>
@@ -906,7 +1293,7 @@
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IListItem_NewFieldValueCollection_PnP_Core_Model_SharePoint_IField_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IListItem.NewFieldValueCollection(PnP.Core.Model.SharePoint.IField)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IListItem.cs/#L277" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IListItem.cs/#L282" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Model_SharePoint_IListItem_NewFieldValueCollection_" data-uid="PnP.Core.Model.SharePoint.IListItem.NewFieldValueCollection*"></a>
@@ -961,7 +1348,7 @@
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IListItem_Recycle.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IListItem.Recycle%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IListItem.cs/#L287" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IListItem.cs/#L292" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Model_SharePoint_IListItem_Recycle_" data-uid="PnP.Core.Model.SharePoint.IListItem.Recycle*"></a>
@@ -1005,7 +1392,7 @@
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IListItem_RecycleAsync.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IListItem.RecycleAsync%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IListItem.cs/#L293" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IListItem.cs/#L298" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Model_SharePoint_IListItem_RecycleAsync_" data-uid="PnP.Core.Model.SharePoint.IListItem.RecycleAsync*"></a>
@@ -1049,7 +1436,7 @@
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IListItem_RecycleBatch.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IListItem.RecycleBatch%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IListItem.cs/#L299" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IListItem.cs/#L304" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Model_SharePoint_IListItem_RecycleBatch_" data-uid="PnP.Core.Model.SharePoint.IListItem.RecycleBatch*"></a>
@@ -1084,7 +1471,7 @@
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IListItem_RecycleBatch_PnP_Core_Services_Batch_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IListItem.RecycleBatch(PnP.Core.Services.Batch)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IListItem.cs/#L312" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IListItem.cs/#L317" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Model_SharePoint_IListItem_RecycleBatch_" data-uid="PnP.Core.Model.SharePoint.IListItem.RecycleBatch*"></a>
@@ -1130,7 +1517,7 @@
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IListItem_RecycleBatchAsync.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IListItem.RecycleBatchAsync%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IListItem.cs/#L305" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IListItem.cs/#L310" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Model_SharePoint_IListItem_RecycleBatchAsync_" data-uid="PnP.Core.Model.SharePoint.IListItem.RecycleBatchAsync*"></a>
@@ -1174,7 +1561,7 @@
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IListItem_RecycleBatchAsync_PnP_Core_Services_Batch_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IListItem.RecycleBatchAsync(PnP.Core.Services.Batch)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IListItem.cs/#L319" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IListItem.cs/#L324" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Model_SharePoint_IListItem_RecycleBatchAsync_" data-uid="PnP.Core.Model.SharePoint.IListItem.RecycleBatchAsync*"></a>
@@ -1226,10 +1613,211 @@
   
   <span class="small pull-right mobile-hide">
     <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IListItem_RemoveRoleDefinitions_System_Int32_System_String___.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IListItem.RemoveRoleDefinitions(System.Int32%2CSystem.String%5B%5D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IListItem.cs/#L393" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IListItem_RemoveRoleDefinitions_" data-uid="PnP.Core.Model.SharePoint.IListItem.RemoveRoleDefinitions*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IListItem_RemoveRoleDefinitions_System_Int32_System_String___" data-uid="PnP.Core.Model.SharePoint.IListItem.RemoveRoleDefinitions(System.Int32,System.String[])"><a href="#collapsible-PnP_Core_Model_SharePoint_IListItem_RemoveRoleDefinitions_System_Int32_System_String___" class="expander" data-toggle="collapse">RemoveRoleDefinitions(Int32, String[])</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IListItem_RemoveRoleDefinitions_System_Int32_System_String___" class="collapse in">
+  <div class="markdown level1 summary"><p>Adds role definitions for a specific principal id (IUser.Id or ISharePointGroup.Id)</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">bool RemoveRoleDefinitions(int principalId, params string[] names)</code></pre>
+  </div>
+
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.int32">Int32</a></span>
+        <span class="parametername">principalId</span>
+        <p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a>[]</span>
+        <span class="parametername">names</span>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IListItem_RemoveRoleDefinitionsAsync_System_Int32_System_String___.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IListItem.RemoveRoleDefinitionsAsync(System.Int32%2CSystem.String%5B%5D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IListItem.cs/#L401" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IListItem_RemoveRoleDefinitionsAsync_" data-uid="PnP.Core.Model.SharePoint.IListItem.RemoveRoleDefinitionsAsync*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IListItem_RemoveRoleDefinitionsAsync_System_Int32_System_String___" data-uid="PnP.Core.Model.SharePoint.IListItem.RemoveRoleDefinitionsAsync(System.Int32,System.String[])"><a href="#collapsible-PnP_Core_Model_SharePoint_IListItem_RemoveRoleDefinitionsAsync_System_Int32_System_String___" class="expander" data-toggle="collapse">RemoveRoleDefinitionsAsync(Int32, String[])</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IListItem_RemoveRoleDefinitionsAsync_System_Int32_System_String___" class="collapse in">
+  <div class="markdown level1 summary"><p>adds role definitions for a specific principal id (IUser.Id or ISharePointGroup.Id)</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task&lt;bool&gt; RemoveRoleDefinitionsAsync(int principalId, params string[] names)</code></pre>
+  </div>
+
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.int32">Int32</a></span>
+        <span class="parametername">principalId</span>
+        <p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a>[]</span>
+        <span class="parametername">names</span>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="xref">Task</span>&lt;<a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a>&gt;
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IListItem_ResetRoleInheritance.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IListItem.ResetRoleInheritance%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IListItem.cs/#L349" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IListItem_ResetRoleInheritance_" data-uid="PnP.Core.Model.SharePoint.IListItem.ResetRoleInheritance*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IListItem_ResetRoleInheritance" data-uid="PnP.Core.Model.SharePoint.IListItem.ResetRoleInheritance"><a href="#collapsible-PnP_Core_Model_SharePoint_IListItem_ResetRoleInheritance" class="expander" data-toggle="collapse">ResetRoleInheritance()</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IListItem_ResetRoleInheritance" class="collapse in">
+  <div class="markdown level1 summary"><p>Reset role inheritance on the current item</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void ResetRoleInheritance()</code></pre>
+  </div>
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IListItem_ResetRoleInheritanceAsync.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IListItem.ResetRoleInheritanceAsync%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IListItem.cs/#L355" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IListItem_ResetRoleInheritanceAsync_" data-uid="PnP.Core.Model.SharePoint.IListItem.ResetRoleInheritanceAsync*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IListItem_ResetRoleInheritanceAsync" data-uid="PnP.Core.Model.SharePoint.IListItem.ResetRoleInheritanceAsync"><a href="#collapsible-PnP_Core_Model_SharePoint_IListItem_ResetRoleInheritanceAsync" class="expander" data-toggle="collapse">ResetRoleInheritanceAsync()</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IListItem_ResetRoleInheritanceAsync" class="collapse in">
+  <div class="markdown level1 summary"><p>Reset role inheritance on the current item</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task ResetRoleInheritanceAsync()</code></pre>
+  </div>
+
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="xref">Task</span>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IListItem_SetCommentsDisabled_System_Boolean_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IListItem.SetCommentsDisabled(System.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IListItem.cs/#L151" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IListItem.cs/#L156" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Model_SharePoint_IListItem_SetCommentsDisabled_" data-uid="PnP.Core.Model.SharePoint.IListItem.SetCommentsDisabled*"></a>
@@ -1275,7 +1863,7 @@
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IListItem_SetCommentsDisabledAsync_System_Boolean_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IListItem.SetCommentsDisabledAsync(System.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IListItem.cs/#L144" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IListItem.cs/#L149" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Model_SharePoint_IListItem_SetCommentsDisabledAsync_" data-uid="PnP.Core.Model.SharePoint.IListItem.SetCommentsDisabledAsync*"></a>
@@ -1330,7 +1918,7 @@
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IListItem_SetComplianceTag_System_String_System_Boolean_System_Boolean_System_Boolean_System_Boolean_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IListItem.SetComplianceTag(System.String%2CSystem.Boolean%2CSystem.Boolean%2CSystem.Boolean%2CSystem.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IListItem.cs/#L166" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IListItem.cs/#L171" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Model_SharePoint_IListItem_SetComplianceTag_" data-uid="PnP.Core.Model.SharePoint.IListItem.SetComplianceTag*"></a>
@@ -1408,7 +1996,7 @@
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IListItem_SetComplianceTagAsync_System_String_System_Boolean_System_Boolean_System_Boolean_System_Boolean_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IListItem.SetComplianceTagAsync(System.String%2CSystem.Boolean%2CSystem.Boolean%2CSystem.Boolean%2CSystem.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IListItem.cs/#L177" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IListItem.cs/#L182" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Model_SharePoint_IListItem_SetComplianceTagAsync_" data-uid="PnP.Core.Model.SharePoint.IListItem.SetComplianceTagAsync*"></a>
@@ -1495,7 +2083,7 @@
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IListItem_SetComplianceTagBatch_PnP_Core_Services_Batch_System_String_System_Boolean_System_Boolean_System_Boolean_System_Boolean_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IListItem.SetComplianceTagBatch(PnP.Core.Services.Batch%2CSystem.String%2CSystem.Boolean%2CSystem.Boolean%2CSystem.Boolean%2CSystem.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IListItem.cs/#L211" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IListItem.cs/#L216" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Model_SharePoint_IListItem_SetComplianceTagBatch_" data-uid="PnP.Core.Model.SharePoint.IListItem.SetComplianceTagBatch*"></a>
@@ -1581,7 +2169,7 @@
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IListItem_SetComplianceTagBatch_System_String_System_Boolean_System_Boolean_System_Boolean_System_Boolean_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IListItem.SetComplianceTagBatch(System.String%2CSystem.Boolean%2CSystem.Boolean%2CSystem.Boolean%2CSystem.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IListItem.cs/#L188" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IListItem.cs/#L193" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Model_SharePoint_IListItem_SetComplianceTagBatch_" data-uid="PnP.Core.Model.SharePoint.IListItem.SetComplianceTagBatch*"></a>
@@ -1659,7 +2247,7 @@
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IListItem_SetComplianceTagBatchAsync_PnP_Core_Services_Batch_System_String_System_Boolean_System_Boolean_System_Boolean_System_Boolean_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IListItem.SetComplianceTagBatchAsync(PnP.Core.Services.Batch%2CSystem.String%2CSystem.Boolean%2CSystem.Boolean%2CSystem.Boolean%2CSystem.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IListItem.cs/#L223" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IListItem.cs/#L228" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Model_SharePoint_IListItem_SetComplianceTagBatchAsync_" data-uid="PnP.Core.Model.SharePoint.IListItem.SetComplianceTagBatchAsync*"></a>
@@ -1754,7 +2342,7 @@
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IListItem_SetComplianceTagBatchAsync_System_String_System_Boolean_System_Boolean_System_Boolean_System_Boolean_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IListItem.SetComplianceTagBatchAsync(System.String%2CSystem.Boolean%2CSystem.Boolean%2CSystem.Boolean%2CSystem.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IListItem.cs/#L199" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IListItem.cs/#L204" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Model_SharePoint_IListItem_SetComplianceTagBatchAsync_" data-uid="PnP.Core.Model.SharePoint.IListItem.SetComplianceTagBatchAsync*"></a>
@@ -1841,7 +2429,7 @@
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IListItem_SystemUpdate.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IListItem.SystemUpdate%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IListItem.cs/#L64" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IListItem.cs/#L69" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Model_SharePoint_IListItem_SystemUpdate_" data-uid="PnP.Core.Model.SharePoint.IListItem.SystemUpdate*"></a>
@@ -1876,7 +2464,7 @@
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IListItem_SystemUpdateAsync.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IListItem.SystemUpdateAsync%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IListItem.cs/#L59" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IListItem.cs/#L64" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Model_SharePoint_IListItem_SystemUpdateAsync_" data-uid="PnP.Core.Model.SharePoint.IListItem.SystemUpdateAsync*"></a>
@@ -1920,7 +2508,7 @@
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IListItem_SystemUpdateBatch.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IListItem.SystemUpdateBatch%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IListItem.cs/#L74" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IListItem.cs/#L79" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Model_SharePoint_IListItem_SystemUpdateBatch_" data-uid="PnP.Core.Model.SharePoint.IListItem.SystemUpdateBatch*"></a>
@@ -1955,7 +2543,7 @@
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IListItem_SystemUpdateBatch_PnP_Core_Services_Batch_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IListItem.SystemUpdateBatch(PnP.Core.Services.Batch)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IListItem.cs/#L86" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IListItem.cs/#L91" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Model_SharePoint_IListItem_SystemUpdateBatch_" data-uid="PnP.Core.Model.SharePoint.IListItem.SystemUpdateBatch*"></a>
@@ -2001,7 +2589,7 @@
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IListItem_SystemUpdateBatchAsync.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IListItem.SystemUpdateBatchAsync%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IListItem.cs/#L69" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IListItem.cs/#L74" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Model_SharePoint_IListItem_SystemUpdateBatchAsync_" data-uid="PnP.Core.Model.SharePoint.IListItem.SystemUpdateBatchAsync*"></a>
@@ -2045,7 +2633,7 @@
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IListItem_SystemUpdateBatchAsync_PnP_Core_Services_Batch_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IListItem.SystemUpdateBatchAsync(PnP.Core.Services.Batch)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IListItem.cs/#L80" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IListItem.cs/#L85" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Model_SharePoint_IListItem_SystemUpdateBatchAsync_" data-uid="PnP.Core.Model.SharePoint.IListItem.SystemUpdateBatchAsync*"></a>
@@ -2100,7 +2688,7 @@
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IListItem_UpdateOverwriteVersion.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IListItem.UpdateOverwriteVersion%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IListItem.cs/#L100" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IListItem.cs/#L105" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Model_SharePoint_IListItem_UpdateOverwriteVersion_" data-uid="PnP.Core.Model.SharePoint.IListItem.UpdateOverwriteVersion*"></a>
@@ -2135,7 +2723,7 @@
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IListItem_UpdateOverwriteVersionAsync.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IListItem.UpdateOverwriteVersionAsync%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IListItem.cs/#L95" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IListItem.cs/#L100" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Model_SharePoint_IListItem_UpdateOverwriteVersionAsync_" data-uid="PnP.Core.Model.SharePoint.IListItem.UpdateOverwriteVersionAsync*"></a>
@@ -2179,7 +2767,7 @@
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IListItem_UpdateOverwriteVersionBatch.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IListItem.UpdateOverwriteVersionBatch%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IListItem.cs/#L110" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IListItem.cs/#L115" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Model_SharePoint_IListItem_UpdateOverwriteVersionBatch_" data-uid="PnP.Core.Model.SharePoint.IListItem.UpdateOverwriteVersionBatch*"></a>
@@ -2214,7 +2802,7 @@
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IListItem_UpdateOverwriteVersionBatch_PnP_Core_Services_Batch_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IListItem.UpdateOverwriteVersionBatch(PnP.Core.Services.Batch)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IListItem.cs/#L122" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IListItem.cs/#L127" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Model_SharePoint_IListItem_UpdateOverwriteVersionBatch_" data-uid="PnP.Core.Model.SharePoint.IListItem.UpdateOverwriteVersionBatch*"></a>
@@ -2260,7 +2848,7 @@
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IListItem_UpdateOverwriteVersionBatchAsync.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IListItem.UpdateOverwriteVersionBatchAsync%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IListItem.cs/#L105" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IListItem.cs/#L110" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Model_SharePoint_IListItem_UpdateOverwriteVersionBatchAsync_" data-uid="PnP.Core.Model.SharePoint.IListItem.UpdateOverwriteVersionBatchAsync*"></a>
@@ -2304,7 +2892,7 @@
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IListItem_UpdateOverwriteVersionBatchAsync_PnP_Core_Services_Batch_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IListItem.UpdateOverwriteVersionBatchAsync(PnP.Core.Services.Batch)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IListItem.cs/#L116" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IListItem.cs/#L121" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Model_SharePoint_IListItem_UpdateOverwriteVersionBatchAsync_" data-uid="PnP.Core.Model.SharePoint.IListItem.UpdateOverwriteVersionBatchAsync*"></a>
