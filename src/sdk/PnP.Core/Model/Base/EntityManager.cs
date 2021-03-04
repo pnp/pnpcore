@@ -198,7 +198,7 @@ namespace PnP.Core.Model
 
                             keyProperty.IsGraphKey = true;
                             // If a property is defined as graph key then ensure the GraphName is correctly set
-                            if (string.IsNullOrEmpty(keyProperty.GraphName))
+                            if (string.IsNullOrEmpty(keyProperty.GraphName) && classInfo.GraphTargets.Any())
                             {
                                 keyProperty.GraphName = ToCamelCase(keyProperty.Name);
                             }

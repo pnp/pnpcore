@@ -20,8 +20,7 @@ namespace PnP.Core.Model.SharePoint
     /// </summary>
     [SharePointType("SP.ListItem", Target = typeof(List), Uri = "_api/web/lists/getbyid(guid'{Parent.Id}')/items({Id})", LinqGet = "_api/web/lists(guid'{Parent.Id}')/items")]
     [SharePointType("SP.ListItem", Target = typeof(File), Uri = "_api/web/getFileById('{Parent.Id}')/listitemallfields")]
-    [GraphType(OverflowProperty = "fields")]
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Usage", "CA2243:Attribute string literals should parse correctly", Justification = "<Pending>")]
+    //[GraphType(OverflowProperty = "fields")]
     internal partial class ListItem : ExpandoBaseDataModel<IListItem>, IListItem
     {
         internal const string FolderPath = "folderPath";

@@ -5,6 +5,7 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 using PnP.Core.Model;
+using PnP.Core.QueryModel;
 
 namespace PnP.Core.Test.Base
 {
@@ -34,7 +35,7 @@ namespace PnP.Core.Test.Base
                 await context.Web.LoadAsync(p => p.Lists);
 
                 string listTitle = "DeleteListViaRest";
-                var myList = context.Web.Lists.FirstOrDefault(p => p.Title == listTitle);
+                var myList = context.Web.Lists.AsRequested().FirstOrDefault(p => p.Title == listTitle);
 
                 if (myList == null)
                 {
@@ -81,7 +82,7 @@ namespace PnP.Core.Test.Base
                 await context.Web.LoadAsync(p => p.Lists);
 
                 string listTitle = "DeleteListViaBatchRest";
-                var myList = context.Web.Lists.FirstOrDefault(p => p.Title == listTitle);
+                var myList = context.Web.Lists.AsRequested().FirstOrDefault(p => p.Title == listTitle);
 
                 if (myList == null)
                 {
@@ -130,7 +131,7 @@ namespace PnP.Core.Test.Base
 
                 Core.Services.Batch batch = null;
                 string listTitle = "DeleteListViaExplicitBatchRest";
-                var myList = context.Web.Lists.FirstOrDefault(p => p.Title == listTitle);
+                var myList = context.Web.Lists.AsRequested().FirstOrDefault(p => p.Title == listTitle);
 
                 if (myList == null)
                 {
@@ -181,7 +182,7 @@ namespace PnP.Core.Test.Base
                 await context.Web.LoadAsync(p => p.Lists);
 
                 string listTitle = TestCommon.GetPnPSdkTestAssetName("DeleteListViaRestId");
-                var myList = context.Web.Lists.FirstOrDefault(p => p.Title == listTitle);
+                var myList = context.Web.Lists.AsRequested().FirstOrDefault(p => p.Title == listTitle);
 
                 if (myList == null)
                 {
@@ -216,7 +217,7 @@ namespace PnP.Core.Test.Base
                 await context.Web.LoadAsync(p => p.Lists);
 
                 string listTitle = TestCommon.GetPnPSdkTestAssetName("DeleteListViaRestIdExistsInModel");
-                var myList = context.Web.Lists.FirstOrDefault(p => p.Title == listTitle);
+                var myList = context.Web.Lists.AsRequested().FirstOrDefault(p => p.Title == listTitle);
 
                 if (myList == null)
                 {
@@ -265,7 +266,7 @@ namespace PnP.Core.Test.Base
                 await context.Web.LoadAsync(p => p.Lists);
 
                 string listTitle = TestCommon.GetPnPSdkTestAssetName("DeleteListViaRestIdBatch");
-                var myList = context.Web.Lists.FirstOrDefault(p => p.Title == listTitle);
+                var myList = context.Web.Lists.AsRequested().FirstOrDefault(p => p.Title == listTitle);
 
                 if (myList == null)
                 {
@@ -309,7 +310,7 @@ namespace PnP.Core.Test.Base
                 string channelName = $"Channel test {new Random().Next()}";
 
                 // Find first updatable channel
-                var channelToDelete = context.Team.Channels.FirstOrDefault(p => p.DisplayName == channelName);
+                var channelToDelete = context.Team.Channels.AsRequested().FirstOrDefault(p => p.DisplayName == channelName);
 
                 if (channelToDelete == null)
                 {
@@ -351,7 +352,7 @@ namespace PnP.Core.Test.Base
                 string channelName = $"Channel test {new Random().Next()}";
 
                 // Find first updatable channel
-                var channelToDelete = context.Team.Channels.FirstOrDefault(p => p.DisplayName == channelName);
+                var channelToDelete = context.Team.Channels.AsRequested().FirstOrDefault(p => p.DisplayName == channelName);
 
                 if (channelToDelete == null)
                 {
@@ -397,7 +398,7 @@ namespace PnP.Core.Test.Base
                 string channelName = $"Channel test {new Random().Next()}";
 
                 // Find first updatable channel
-                var channelToDelete = context.Team.Channels.FirstOrDefault(p => p.DisplayName == channelName);
+                var channelToDelete = context.Team.Channels.AsRequested().FirstOrDefault(p => p.DisplayName == channelName);
 
                 if (channelToDelete == null)
                 {

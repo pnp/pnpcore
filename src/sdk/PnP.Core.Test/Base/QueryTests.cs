@@ -250,9 +250,8 @@ namespace PnP.Core.Test.Base
         public async Task GetWebGraphFirstExpressionExpandableProperty()
         {
             var requests = await GetAPICallTestAsync(BuildModel<Web, IWeb>(new Expression<Func<IWeb, object>>[] { p => p.Lists }));
-            Assert.IsTrue(requests.Count == 2);
-            Assert.AreEqual(requests[0], "sites/{hostname}:{serverrelativepath}?$select=sharepointIds%2clists%2cid", true);
-            Assert.AreEqual(requests[1], "sites/{hostname}:{serverrelativepath}:/lists?$select=system,createdDateTime,description,eTag,id,lastModifiedDateTime,name,webUrl,displayName,createdBy,lastModifiedBy,parentReference,list", true);
+            Assert.IsTrue(requests.Count == 1);
+            Assert.AreEqual(requests[0], "_api/web?$select=Id%2cLists&$expand=Lists", true);
         }
 
         [TestMethod]
@@ -267,9 +266,8 @@ namespace PnP.Core.Test.Base
         public async Task GetWebGraphFirstExpressionExpandablePlusSimpleProperties()
         {
             var requests = await GetAPICallTestAsync(BuildModel<Web, IWeb>(new Expression<Func<IWeb, object>>[] { p => p.Title, p => p.Description, p => p.Lists }));
-            Assert.IsTrue(requests.Count == 2);
-            Assert.AreEqual(requests[0], "sites/{hostname}:{serverrelativepath}?$select=sharepointIds%2cdisplayName%2cdescription%2clists%2cid", true);
-            Assert.AreEqual(requests[1], "sites/{hostname}:{serverrelativepath}:/lists?$select=system,createdDateTime,description,eTag,id,lastModifiedDateTime,name,webUrl,displayName,createdBy,lastModifiedBy,parentReference,list", true);
+            Assert.IsTrue(requests.Count == 1);
+            Assert.AreEqual(requests[0], "_api/web?$select=Id%2cTitle%2cDescription%2cLists&$expand=Lists", true);
         }
 
         [TestMethod]

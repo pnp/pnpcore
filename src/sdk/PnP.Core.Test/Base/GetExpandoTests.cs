@@ -46,7 +46,7 @@ namespace PnP.Core.Test.Base
                 {
                     Assert.Inconclusive("Test data set should be setup to not have the list available.");
                 }
-                var myList = web.Result.Lists.FirstOrDefault(p => p.Title == listTitle);
+                var myList = web.Result.Lists.AsRequested().FirstOrDefault(p => p.Title == listTitle);
 
                 if (myList != null)
                 {
@@ -94,7 +94,7 @@ namespace PnP.Core.Test.Base
                 {
                     Assert.Inconclusive("Test data set should be setup to not have the list available.");
                 }
-                var myList = web.Result.Lists.FirstOrDefault(p => p.Title == listTitle);
+                var myList = web.Result.Lists.AsRequested().FirstOrDefault(p => p.Title == listTitle);
 
                 if (myList != null)
                 {
@@ -147,7 +147,7 @@ namespace PnP.Core.Test.Base
                 {
                     Assert.Inconclusive("Test data set should be setup to not have the list available.");
                 }
-                var myList = context.Web.Lists.FirstOrDefault(p => p.Title == listTitle);
+                var myList = context.Web.Lists.AsRequested().FirstOrDefault(p => p.Title == listTitle);
 
                 if (myList != null)
                 {
@@ -192,7 +192,7 @@ namespace PnP.Core.Test.Base
                 {
                     Assert.Inconclusive("Test data set should be setup to not have the list available.");
                 }
-                var myList = web.Result.Lists.FirstOrDefault(p => p.Title == listTitle);
+                var myList = web.Result.Lists.AsRequested().FirstOrDefault(p => p.Title == listTitle);
 
                 if (myList != null)
                 {
@@ -235,7 +235,7 @@ namespace PnP.Core.Test.Base
             await context.Web.LoadBatchAsync(p => p.Lists);
             context.ExecuteAsync().Wait();
 
-            var myList = context.Web.Lists.FirstOrDefault(p => p.Title == listTitle);
+            var myList = context.Web.Lists.AsRequested().FirstOrDefault(p => p.Title == listTitle);
 
             if (myList == null)
             {
