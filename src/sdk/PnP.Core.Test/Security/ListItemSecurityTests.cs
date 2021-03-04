@@ -1,5 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PnP.Core.Model.SharePoint;
+using PnP.Core.QueryModel;
 using PnP.Core.Test.Utilities;
 using System;
 using System.Collections.Generic;
@@ -34,8 +35,8 @@ namespace PnP.Core.Test.Security
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 // Create a new list
-                var web = await context.Web.GetAsync(p => p.Lists.LoadProperties(p => p.Title, p => p.Items));
-                var myList = web.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
+                var web = await context.Web.GetAsync(p => p.Lists.QueryProperties(p => p.Title, p => p.Items));
+                var myList = web.Lists.AsRequested().FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
 
                 // get first item and do a reset role inheritance
                 var first = myList.Items.First();
@@ -52,8 +53,8 @@ namespace PnP.Core.Test.Security
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 // Create a new list
-                var web = await context.Web.GetAsync(p => p.Lists.LoadProperties(p => p.Title, p => p.Items));
-                var myList = web.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
+                var web = await context.Web.GetAsync(p => p.Lists.QueryProperties(p => p.Title, p => p.Items));
+                var myList = web.Lists.AsRequested().FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
 
 
                 // get first item and do a break role inheritance
@@ -71,14 +72,23 @@ namespace PnP.Core.Test.Security
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 // Create a new list
-                var web = await context.Web.GetAsync(p => p.Lists.LoadProperties(p => p.Title, p => p.Items));
-                var myList = web.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
+                var web = await context.Web.GetAsync(p => p.Lists.QueryProperties(p => p.Title, p => p.Items));
+                var myList = web.Lists.AsRequested().FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
 
-                // get first item and fetch the role assignments
+                // get first item
                 var first = myList.Items.First();
-                await first.GetAsync(i => i.RoleAssignments);
 
-                Assert.IsTrue(first.RoleAssignments.Count() > 0);
+                // Break role inheritance, add a role assignment
+                var firstUser = web.SiteUsers.FirstOrDefault(u => u.IsSiteAdmin);
+
+                await first.ResetRoleInheritanceAsync();
+                await first.BreakRoleInheritanceAsync(false, false);
+
+                // fetch the roleassignment collection
+                await first.LoadAsync(i => i.RoleAssignments);
+
+                // Check role assignment. Should be 1, because breaking the inheritence added the current user
+                Assert.AreEqual(1, first.RoleAssignments.Length);
             }
         }
 
@@ -90,8 +100,8 @@ namespace PnP.Core.Test.Security
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 // Create a new list
-                var web = await context.Web.GetAsync(p => p.Lists.LoadProperties(p => p.Title, p => p.Items));
-                var myList = web.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
+                var web = await context.Web.GetAsync(p => p.Lists.QueryProperties(p => p.Title, p => p.Items), p => p.SiteUsers);
+                var myList = web.Lists.AsRequested().FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
 
                 // get first item and fetch the role assignments
                 var first = myList.Items.First();
@@ -105,9 +115,15 @@ namespace PnP.Core.Test.Security
 
                 // Fetch a user
                 // The below query sometimes brings back "Everyone"
-                var firstUser = await context.Web.SiteUsers.GetFirstOrDefaultAsync(u => u.IsSiteAdmin);
+                var firstUser = web.SiteUsers.FirstOrDefault(u => u.IsSiteAdmin);
 
                 await first.AddRoleDefinitionsAsync(firstUser.Id, new string[] { "Full Control" });
+
+                // re-fetch the roleassignment collection
+                await first.LoadAsync(i => i.RoleAssignments);
+
+                // Check role assignment. Should be 2, because breaking the inheritence added the current user, and the user we added above
+                Assert.AreEqual(2, first.RoleAssignments.Length);
             }
         }
 
@@ -119,8 +135,8 @@ namespace PnP.Core.Test.Security
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 // Create a new list
-                var web = await context.Web.GetAsync(p => p.Lists.LoadProperties(p => p.Title, p => p.Items));
-                var myList = web.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
+                var web = await context.Web.GetAsync(p => p.Lists.QueryProperties(p => p.Title, p => p.Items), w => w.SiteUsers);
+                var myList = web.Lists.AsRequested().FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
 
                 // get first item and fetch the role assignments
                 var first = myList.Items.First();
@@ -128,12 +144,21 @@ namespace PnP.Core.Test.Security
 
                 // Fetch a user
                 // The below query sometimes brings back "Everyone"
-                var firstUser = await context.Web.SiteUsers.GetFirstOrDefaultAsync(u => u.IsSiteAdmin);
+                var firstUser = web.SiteUsers.FirstOrDefault(u => u.IsSiteAdmin);
+
+                // Clean out any existing permissions from other tests.
+                await first.ResetRoleInheritanceAsync();
+                await first.BreakRoleInheritanceAsync(false, false);
 
                 // First add a Role Assignment so we can delete it
                 await first.AddRoleDefinitionsAsync(firstUser.Id, new string[] { "Full Control" });
 
                 await first.RemoveRoleDefinitionsAsync(firstUser.Id, new string[] { "Full Control" });
+
+                await first.LoadAsync(f => f.RoleAssignments);
+
+                // We should only have one role assignment left
+                Assert.AreEqual(1, first.RoleAssignments.Length);
             }
         }
 
@@ -144,8 +169,8 @@ namespace PnP.Core.Test.Security
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 // Create a new list
-                var web = await context.Web.GetAsync(p => p.Lists.LoadProperties(p => p.Title, p => p.Items));
-                var myList = web.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
+                var web = await context.Web.GetAsync(p => p.Lists.QueryProperties(p => p.Title, p => p.Items));
+                var myList = web.Lists.AsRequested().FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
                 if (myList == null)
                 {
                     myList = await web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
@@ -154,8 +179,9 @@ namespace PnP.Core.Test.Security
                     await myList.UpdateAsync();
                 }
 
-                var items = await myList.Items.GetAsync();
-                if (items.Count() == 0)
+                await myList.LoadItemsByCamlQueryAsync("<View></View>");
+
+                if (myList.Items.Length == 0)
                 {
                     // Add items to the list
                     for (int i = 0; i < 10; i++)

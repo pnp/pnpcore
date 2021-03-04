@@ -1,4 +1,4 @@
---batchresponse_f6deff3d-dc3d-4228-9bfa-b3c30b6d6583
+--batchresponse_72cbd12a-add5-4206-8b7e-d353fab9d561
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
@@ -6,4 +6,4 @@ HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
 {"d":{"results":[{"__metadata":{"id":"https://jimmywim.sharepoint.com/sites/PnPCoreTest/_api/Web/GetUserById(8)","uri":"https://jimmywim.sharepoint.com/sites/PnPCoreTest/_api/Web/GetUserById(8)","type":"SP.User"},"Alerts":{"__deferred":{"uri":"https://jimmywim.sharepoint.com/sites/PnPCoreTest/_api/Web/GetUserById(8)/Alerts"}},"Groups":{"__deferred":{"uri":"https://jimmywim.sharepoint.com/sites/PnPCoreTest/_api/Web/GetUserById(8)/Groups"}},"Id":8,"IsHiddenInUI":false,"LoginName":"c:0(.s|true","Title":"Everyone","PrincipalType":4,"Email":"","Expiration":"","IsEmailAuthenticationGuestUser":false,"IsShareByEmailGuestUser":false,"IsSiteAdmin":false,"UserId":null,"UserPrincipalName":null}]}}
---batchresponse_f6deff3d-dc3d-4228-9bfa-b3c30b6d6583--
+--batchresponse_72cbd12a-add5-4206-8b7e-d353fab9d561--
