@@ -222,7 +222,7 @@ var output = await myList.GetListDataAsStreamAsync(new RenderListDataOptions()
 // If needed do something with the output, e.g. (int)result[&quot;LastRow&quot;] tells you the last loaded row
 
 // Iterate over the retrieved list items
-foreach (var listItem in myList.Items)
+foreach (var listItem in myList.Items.AsRequested())
 {
     // Do something with the list item
 }
@@ -264,7 +264,7 @@ output = await myList.GetListDataAsStreamAsync(new RenderListDataOptions()
 });
 
 // Iterate over the retrieved list items
-foreach (var listItem in myList.Items)
+foreach (var listItem in myList.Items.AsRequested())
 {
     // Do something with the list item
 }
@@ -355,7 +355,7 @@ await addedItem.UpdateAsync();
 var myList = context.Web.Lists.GetByTitle(&quot;My List&quot;, p =&gt; p.Title, p =&gt; p.Items, 
                                                      p =&gt; p.Fields.QueryProperties(p =&gt; p.InternalName, p =&gt; p.FieldTypeKind, p =&gt; p.TypeAsString, p =&gt; p.Title));
 // Iterate over the retrieved list items
-foreach (var listItem in myList.Items)
+foreach (var listItem in myList.Items.AsRequested())
 {
     // Delete all the items in &quot;My List&quot; by adding them to a batch
     await listItem.DeleteBatchAsync();

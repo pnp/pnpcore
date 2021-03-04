@@ -200,14 +200,24 @@
 </tr>
 </tbody>
 </table>
-<h2 id="querying-loaded-collections-using-linq">Querying loaded collections using LINQ</h2>
-<p>Once you've loaded data you might want to query the loaded data via LINQ, previously you could simply use the LINQ extension methods like FirstOrDefault on the model collection. Since as of Beta3 we've a custom LINQ implementation and calling <code>FirstOrDefault</code> or <code>Where</code> will result in a new query. You can however cast the collection to an IEnumerable via the <code>AsRequested()</code> method and then use an OOB LINQ query.</p>
+<h2 id="querying-loaded-collections-using-a-foreach-or-linq-extension-method">Querying loaded collections using a foreach or LINQ extension method</h2>
+<p>Once you've loaded data you might want to query the loaded data via a foreach or LINQ extension method, previously you could simply use the foreach or LINQ extension methods like FirstOrDefault on the model collection. Since as of Beta3 we've a custom LINQ implementation and doing a <code>foreach</code> or calling <code>FirstOrDefault</code> or <code>Where</code> will result in a new query. You can however cast the collection to an IEnumerable via the <code>AsRequested()</code> method and then use an OOB LINQ query.</p>
 <pre><code class="lang-csharp">// Load all lists in the PnPContext
 await context.Web.LoadAsync(p =&gt; p.Lists);
 
 // Query the loaded lists via OOB LINQ
 var documentLibraries = context.Web.Lists.AsRequested().Where(p =&gt; p.TemplateType == ListTemplateType.DocumentLibrary);
+
+// Iterate over the loaded lists
+foreach(var list in context.Web.Lists.AsRequested())
+{
+    // do something with the list
+}
 </code></pre>
+<div class="NOTE">
+<h5>Note</h5>
+<p>As of beta3 you need to use <code>QueryProperties</code> instead of <code>LoadProperties</code> when you want to specify the properties of a model.</p>
+</div>
 </article>
           </div>
           <div class="hidden-sm col-md-2" role="complementary">

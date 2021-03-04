@@ -4183,7 +4183,7 @@
       "output": {
         ".html": {
           "relative_path": "using-the-sdk/basics-addupdatedelete.html",
-          "hash": "ea9OI4n6FNi0dd+KNpINbA=="
+          "hash": "v+foKq9ya0VawgimEIbK2Q=="
         }
       },
       "is_incremental": false,
@@ -4243,7 +4243,7 @@
       "output": {
         ".html": {
           "relative_path": "using-the-sdk/basics-getdata-paging.html",
-          "hash": "KEdpazwfayCBvWRcs3sVZw=="
+          "hash": "rVJ6u1wTSvRHplZ+YfeE3g=="
         }
       },
       "is_incremental": false,
@@ -4255,7 +4255,7 @@
       "output": {
         ".html": {
           "relative_path": "using-the-sdk/basics-getdata.html",
-          "hash": "/AIi7QG+ZGPwyizNUCfa8g=="
+          "hash": "8aLmrq57Dy/lvPg1g+QB5Q=="
         }
       },
       "is_incremental": false,
@@ -4291,7 +4291,7 @@
       "output": {
         ".html": {
           "relative_path": "using-the-sdk/contenttypes-intro.html",
-          "hash": "JeLKYP8FNVVKrjBDRMz7GA=="
+          "hash": "4sEchcNvRomcLGUjO/aGHg=="
         }
       },
       "is_incremental": false,
@@ -4327,7 +4327,7 @@
       "output": {
         ".html": {
           "relative_path": "using-the-sdk/fields-intro.html",
-          "hash": "7O8TycDRLqVs3lyx7oGdnw=="
+          "hash": "nTRNtzHzOnRZGRO93fjo/w=="
         }
       },
       "is_incremental": false,
@@ -4339,7 +4339,7 @@
       "output": {
         ".html": {
           "relative_path": "using-the-sdk/files-intro.html",
-          "hash": "0EcWM71m6KIw4725AdbbAQ=="
+          "hash": "IHhYowSheRaVb44HLxVU5Q=="
         }
       },
       "is_incremental": false,
@@ -4363,7 +4363,7 @@
       "output": {
         ".html": {
           "relative_path": "using-the-sdk/folders-intro.html",
-          "hash": "BUlDcSGCdaz4YlCc7mrtrQ=="
+          "hash": "OVRi3fwr45tubPGH2NV/6Q=="
         }
       },
       "is_incremental": false,
@@ -4399,7 +4399,7 @@
       "output": {
         ".html": {
           "relative_path": "using-the-sdk/listitems-intro.html",
-          "hash": "Ii+og1jv7TRGO480Fpvj5w=="
+          "hash": "rFRmKi38Wo1Z0GNFR/2rgA=="
         }
       },
       "is_incremental": false,
@@ -4423,7 +4423,7 @@
       "output": {
         ".html": {
           "relative_path": "using-the-sdk/lists-views.html",
-          "hash": "3anW0siW7YIYlAXGa9gmpw=="
+          "hash": "T6Xy0+KdCmB6wVdohisvkw=="
         }
       },
       "is_incremental": false,
@@ -4603,7 +4603,7 @@
       "output": {
         ".html": {
           "relative_path": "using-the-sdk/upgrade-to-beta3.html",
-          "hash": "AUVG0n4aOfQ7xAE0QNk3KA=="
+          "hash": "TpxDpiBZmJXbZJRz5RZCcg=="
         }
       },
       "is_incremental": false,

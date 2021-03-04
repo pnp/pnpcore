@@ -114,7 +114,7 @@
 <pre><code class="lang-csharp">//  Get site fields
 var web = await context.Web.GetAsync(l =&gt; l.Fields);
 
-foreach(var field in web.Fields)
+foreach(var field in web.Fields.AsRequested())
 {
     // do something with the field
 }
@@ -123,7 +123,7 @@ foreach(var field in web.Fields)
 <pre><code class="lang-csharp">//  Get documents library with fields loaded
 var documents = await context.Web.Lists.GetByTitleAsync(&quot;Documents&quot;, l =&gt; l.Fields);
 
-foreach(var field in documents.Fields)
+foreach(var field in documents.Fields.AsRequested())
 {
     // do something with the field
 }
@@ -132,7 +132,7 @@ foreach(var field in documents.Fields)
 <pre><code class="lang-csharp">//  Get site fields
 var web = await context.Web.GetAsync(l =&gt; l.Fields.QueryProperties(l =&gt; l.Id, l =&gt; l.InternalName, l =&gt; l.FieldTypeKind));
 
-foreach(var field in web.Fields)
+foreach(var field in web.Fields.AsRequested())
 {
     // do something with the field
 }
@@ -140,7 +140,7 @@ foreach(var field in web.Fields)
 <pre><code class="lang-csharp">//  Get documents library with fields loaded
 var documents = await context.Web.Lists.GetByTitleAsync(&quot;Documents&quot;, l =&gt; l.Fields.QueryProperties(l =&gt; l.Id, l =&gt; l.InternalName, l =&gt; l.FieldTypeKind));
 
-foreach(var field in documents.Fields)
+foreach(var field in documents.Fields.AsRequested())
 {
     // do something with the field
 }

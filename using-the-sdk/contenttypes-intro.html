@@ -99,7 +99,7 @@ var contentTypes = context.Web.ContentTypes;
 // Get list content types
 var contentTypes = (await context.Web.Lists.GetByTitleAsync(&quot;Documents&quot;, p =&gt; p.ContentTypes)).ContentTypes;
 
-foreach (var contentType in contentTypes)
+foreach (var contentType in contentTypes.AsRequested())
 {
     // do something
 }

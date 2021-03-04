@@ -108,7 +108,7 @@ IFolder folder = (await context.Web.GetAsync(p =&gt; p.RootFolder)).RootFolder;
 
 // Get folder collection of a web and pick the SiteAssets folder
 await context.Web.LoadAsync(p =&gt; p.Folders);
-var folder = context.Web.Folders.FirstOrDefault(p=&gt;p.Name == &quot;SiteAssets&quot;);
+var folder = context.Web.Folders.AsRequested().FirstOrDefault(p=&gt;p.Name == &quot;SiteAssets&quot;);
 </code></pre>
 <h3 id="the-folder-property-bag">The Folder property bag</h3>
 <p>Each folder also has a so called property bag, a list key/value pairs providing more information about the folder. You can read this property bag, provided via the <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IFolder.html#PnP_Core_Model_SharePoint_IFolder_Properties">IFolder Properties property</a>, and add new key/value pairs to it.</p>

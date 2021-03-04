@@ -132,7 +132,7 @@ var myList = await context.Web.Lists.GetByTitleAsync(&quot;My List&quot;,
                                                         p =&gt; p.TypeAsString, 
                                                         p =&gt; p.Title));
 // Iterate over the retrieved list items
-foreach (var listItem in myList.Items)
+foreach (var listItem in myList.Items.AsRequested())
 {
     // Delete all the items in &quot;My List&quot; by adding them to a batch
     await listItem.DeleteBatchAsync();

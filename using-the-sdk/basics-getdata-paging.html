@@ -93,9 +93,6 @@
 <p>This example shows how to use paging to load lists, in the sample only the <code>Title</code> property of the list is requested, if you do not provide the expression then list default properties are loaded.</p>
 <pre><code class="lang-csharp">using (var context = await pnpContextFactory.CreateAsync(&quot;SiteToWorkWith&quot;))
 {
-    // Force rest
-    context.GraphFirst = false;
-
     // Get a first page of lists of size 2
     var lists = await context.Web.Lists.Take(2).QueryProperties(p =&gt; p.Title).ToListAsync();
 
@@ -112,9 +109,6 @@
 </ul>
 <pre><code class="lang-csharp">using (var context = await pnpContextFactory.CreateAsync(&quot;SiteToWorkWith&quot;))
 {
-    // Force rest
-    context.GraphFirst = false;
-
     // Get a first page of lists of size 2 
     //   filtered to generic lists
     //     returning list properties
@@ -126,16 +120,6 @@
                                                         p =&gt; p.ContentTypes.QueryProperties(
                                                         p =&gt; p.Name, p =&gt; p.FieldLinks.QueryProperties(p =&gt; p.Name)))
                                         .ToListAsync();
-
-    // // Do we have a pointer to a next page?
-    // if (context.Web.Lists.CanPage)
-    // {
-    //     // Load the next page
-    //     var nextLists = await context.Web.Lists.GetNextPageAsync();
-
-    //     // Load all pages
-    //     await context.Web.Lists.GetAllPagesAsync();
-    // }
 }
 </code></pre>
 <h3 id="implicit-paging">Implicit paging</h3>
@@ -149,6 +133,17 @@
     await channelForPaging2.LoadAsync(p =&gt; p.Messages);
 
     // Option B: 
+    await foreach(var message in channelForPaging2.Messages)
+    {
+        // do something with the message
+    }
+
+    //or
+
+    await foreach(var list in context.Web.Lists)
+    {
+        // do something with the list
+    }
 }
 </code></pre>
 </article>
