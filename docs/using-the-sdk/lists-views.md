@@ -17,7 +17,7 @@ var myList = await context.Web.Lists.GetByServerRelativeUrlAsync($"{context.Uri.
 var myList = await context.Web.Lists.GetByIdAsync(new Guid("d50ec969-cb27-4a49-839f-3c25d1d607d5"), p => p.Views);
 
 // Do something with the views
-foreach(var view in myList.Views)
+foreach(var view in myList.Views.AsRequested())
 {
     // Do something
 }

@@ -159,7 +159,7 @@ var output = await myList.GetListDataAsStreamAsync(new RenderListDataOptions()
 // If needed do something with the output, e.g. (int)result["LastRow"] tells you the last loaded row
 
 // Iterate over the retrieved list items
-foreach (var listItem in myList.Items)
+foreach (var listItem in myList.Items.AsRequested())
 {
     // Do something with the list item
 }
@@ -204,7 +204,7 @@ output = await myList.GetListDataAsStreamAsync(new RenderListDataOptions()
 });
 
 // Iterate over the retrieved list items
-foreach (var listItem in myList.Items)
+foreach (var listItem in myList.Items.AsRequested())
 {
     // Do something with the list item
 }
@@ -291,7 +291,7 @@ Using the Delete methods like DeleteAsync or DeleteBatchAsync you can delete one
 var myList = context.Web.Lists.GetByTitle("My List", p => p.Title, p => p.Items, 
                                                      p => p.Fields.QueryProperties(p => p.InternalName, p => p.FieldTypeKind, p => p.TypeAsString, p => p.Title));
 // Iterate over the retrieved list items
-foreach (var listItem in myList.Items)
+foreach (var listItem in myList.Items.AsRequested())
 {
     // Delete all the items in "My List" by adding them to a batch
     await listItem.DeleteBatchAsync();

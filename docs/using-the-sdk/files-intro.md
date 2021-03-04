@@ -47,7 +47,7 @@ var folder = context.Web.Folders.AsRequested().FirstOrDefault(p=>p.Name == "Site
 // Load files property of the folder
 await folder.LoadAsync(p => p.Files);
 
-foreach(var file in folder.Files)
+foreach(var file in folder.Files.AsRequested())
 {
     // Do something with the file
 }
@@ -69,7 +69,7 @@ IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentU
 // Sample 3: Get files by loading it's folder and the containing files with their selected properties
 var folder = await context.Web.GetFolderByServerRelativeUrlAsync($"{context.Uri.PathAndQuery}/SiteAssets", 
                     p => p.Name, p => p.Files.QueryProperties(p => p.Name, p => p.Author, p => p.ModifiedBy));
-foreach(var file in folder.Files)
+foreach(var file in folder.Files.AsRequested())
 {
     // Do something with the file, properties Name, Author and ModifiedBy are loaded
 }

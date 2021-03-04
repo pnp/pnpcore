@@ -39,7 +39,7 @@ Getting the currently defined fields on a web can be done by loading the [Fields
 //  Get site fields
 var web = await context.Web.GetAsync(l => l.Fields);
 
-foreach(var field in web.Fields)
+foreach(var field in web.Fields.AsRequested())
 {
     // do something with the field
 }
@@ -51,7 +51,7 @@ For a list similar logic applies, you can load the [Fields](https://pnp.github.i
 //  Get documents library with fields loaded
 var documents = await context.Web.Lists.GetByTitleAsync("Documents", l => l.Fields);
 
-foreach(var field in documents.Fields)
+foreach(var field in documents.Fields.AsRequested())
 {
     // do something with the field
 }
@@ -63,7 +63,7 @@ Above samples do load all the default Field properties, but what if you are only
 //  Get site fields
 var web = await context.Web.GetAsync(l => l.Fields.QueryProperties(l => l.Id, l => l.InternalName, l => l.FieldTypeKind));
 
-foreach(var field in web.Fields)
+foreach(var field in web.Fields.AsRequested())
 {
     // do something with the field
 }
@@ -73,7 +73,7 @@ foreach(var field in web.Fields)
 //  Get documents library with fields loaded
 var documents = await context.Web.Lists.GetByTitleAsync("Documents", l => l.Fields.QueryProperties(l => l.Id, l => l.InternalName, l => l.FieldTypeKind));
 
-foreach(var field in documents.Fields)
+foreach(var field in documents.Fields.AsRequested())
 {
     // do something with the field
 }
