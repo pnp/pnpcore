@@ -132,7 +132,7 @@ namespace PnP.Core.Services
                 if (entityField != null)
                 {
                     // Are we loading a collection (e.g. Web.Lists)?
-                    if (!useOverflowField && IsModelCollection(entityField.PropertyInfo.PropertyType))
+                    if ((!useOverflowField && IsModelCollection(entityField.PropertyInfo.PropertyType)) || pnpObjectType.ImplementsInterface(typeof(IListItem)) && IsModelCollection(entityField.PropertyInfo.PropertyType))
                     {
                         // Get the actual current value of the property we're setting...as that allows to detect it's type
                         var propertyToSetValue = entityField.PropertyInfo.GetValue(pnpObject);
