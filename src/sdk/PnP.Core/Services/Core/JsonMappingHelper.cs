@@ -108,12 +108,6 @@ namespace PnP.Core.Services
                 // Get the dictionary property that will hold the overflow data
                 dictionaryPropertyToAddValueTo = pnpObjectType.GetProperty(ExpandoBaseDataModel<IExpandoDataModel>.OverflowFieldName).GetValue(pnpObject) as TransientDictionary;
 
-                // hack - skip using overflow for IListItem
-                //if (!pnpObjectType.ImplementsInterface(typeof(IListItem)))
-                //{
-                //    useOverflowField = true;
-                //}      
-
                 useOverflowField = true;
             }
 

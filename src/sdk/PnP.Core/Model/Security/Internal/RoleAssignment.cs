@@ -24,7 +24,7 @@ namespace PnP.Core.Model.Security
                 var parentType = Parent.Parent.GetType();
                 if (parentType == typeof(ListItemCollection))
                 {
-                    // If this is a List ITem's role assignment, we need to grab the parent list item's ID and swap out the token
+                    // If this is a List Item's role assignment, we need to grab the parent list item's ID and swap out the token
                     // Go up 3 levels to get the List (?)
                     var containingList = Parent.Parent.Parent as IList;
                     if (containingList != null)
@@ -36,46 +36,6 @@ namespace PnP.Core.Model.Security
 
                 return api;
             };
-
-            //AddApiCallHandler = async (additionalInfo) =>
-            //{
-            //    var principalId = additionalInfo["principalId"];
-            //    var roleDefId = additionalInfo["roleDefId"];
-
-            //    // get the API stub url to make sure we're adding a role assignment onto the right securable object
-            //    string stubUrl = "";
-
-            //    var attrs = this.GetType().GetCustomAttributes(true)
-            //        .Where(c => c.GetType() == typeof(SharePointTypeAttribute));
-
-            //    // RoleAssignment Parents are the collection, so skip a parent when looking for the securable object
-            //    var parentType = Parent.Parent.GetType();
-            //    foreach (var attr in attrs)
-            //    {
-            //        if (attr is SharePointTypeAttribute)
-            //        {
-            //            var spTypeAttribute = attr as SharePointTypeAttribute;
-            //            if (spTypeAttribute.Target == parentType)
-            //            {
-            //                stubUrl = spTypeAttribute.Get;
-            //                break;
-            //            }
-            //        }
-            //    }
-
-            //    // If this is a list item having it's permissions set, we need to set the ListID of the API call
-            //    if (parentType == typeof(ListItem))
-            //    {
-            //        // Go up 4 levels to get the List (?)
-            //        var containingList = Parent.Parent.Parent.Parent as IList;
-            //        if (containingList != null)
-            //        {
-            //            stubUrl = stubUrl.Replace("{List.Id}", containingList.Id.ToString());
-            //        }
-            //    }
-
-            //    return new ApiCall($"{stubUrl}/addroleassignment(principalId={principalId},roleDefId={roleDefId})", ApiType.SPORest);
-            //};
         }
     }
 }
