@@ -1259,7 +1259,7 @@ namespace PnP.Core.Model.SharePoint
         public async Task BreakRoleInheritanceAsync(bool copyRoleAssignments, bool clearSubscopes)
         {
             var apiCall = new ApiCall("_api/Web/Lists(guid'{Parent.Id}')/items({Id})/BreakRoleInheritance(copyRoleAssignments=" + copyRoleAssignments.ToString().ToLower() + ",clearSubscopes=" + clearSubscopes.ToString().ToLower() + ")", ApiType.SPORest);
-            var response = await RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
+            await RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
         }
 
         public void ResetRoleInheritance()
@@ -1270,7 +1270,7 @@ namespace PnP.Core.Model.SharePoint
         public async Task ResetRoleInheritanceAsync()
         {
             var apiCall = new ApiCall("_api/Web/Lists(guid'{Parent.Id}')/items({Id})/ResetRoleInheritance", ApiType.SPORest);
-            var response = await RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
+            await RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
         }
 
         public IRoleDefinitionCollection GetRoleDefinitions(int principalId)
@@ -1303,8 +1303,8 @@ namespace PnP.Core.Model.SharePoint
                 if (roleDefinition != null)
                 {
                     var apiCall = new ApiCall($"_api/web/lists(guid'{parentList.Id}')/Items({Id})/roleassignments/addroleassignment(principalid={principalId},roledefid={roleDefinition.Id})", ApiType.SPORest);
-                    var response = await RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
-                    result = response.StatusCode == System.Net.HttpStatusCode.OK;
+                    await RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
+                    return true;
                 }
                 else
                 {
@@ -1331,8 +1331,8 @@ namespace PnP.Core.Model.SharePoint
                 if (roleDefinition != null)
                 {
                     var apiCall = new ApiCall($"_api/web/lists(guid'{parentList.Id}')/Items({Id})/roleassignments/removeroleassignment(principalid={principalId},roledefid={roleDefinition.Id})", ApiType.SPORest);
-                    var response = await RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
-                    result = response.StatusCode == System.Net.HttpStatusCode.OK;
+                    await RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
+                    return true;
                 }
                 else
                 {

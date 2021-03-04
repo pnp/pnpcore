@@ -24,7 +24,7 @@ namespace PnP.Core.Test.Base
         public static void TestFixtureSetup(TestContext testContext)
         {
             // Configure mocking default for all tests in this class, unless override by a specific test
-            // TestCommon.Instance.Mocking = false;
+            //TestCommon.Instance.Mocking = false;
         }
 
         #region Tests that use REST to hit SharePoint
@@ -46,7 +46,7 @@ namespace PnP.Core.Test.Base
                 {
                     Assert.Inconclusive("Test data set should be setup to not have the list available.");
                 }
-                var myList = web.Result.Lists.AsRequested().FirstOrDefault(p => p.Title == listTitle);
+                var myList = web.Result.Lists.FirstOrDefault(p => p.Title == listTitle);
 
                 if (myList != null)
                 {
@@ -94,7 +94,7 @@ namespace PnP.Core.Test.Base
                 {
                     Assert.Inconclusive("Test data set should be setup to not have the list available.");
                 }
-                var myList = web.Result.Lists.AsRequested().FirstOrDefault(p => p.Title == listTitle);
+                var myList = web.Result.Lists.FirstOrDefault(p => p.Title == listTitle);
 
                 if (myList != null)
                 {
@@ -147,7 +147,7 @@ namespace PnP.Core.Test.Base
                 {
                     Assert.Inconclusive("Test data set should be setup to not have the list available.");
                 }
-                var myList = context.Web.Lists.AsRequested().FirstOrDefault(p => p.Title == listTitle);
+                var myList = context.Web.Lists.FirstOrDefault(p => p.Title == listTitle);
 
                 if (myList != null)
                 {
@@ -192,7 +192,7 @@ namespace PnP.Core.Test.Base
                 {
                     Assert.Inconclusive("Test data set should be setup to not have the list available.");
                 }
-                var myList = web.Result.Lists.AsRequested().FirstOrDefault(p => p.Title == listTitle);
+                var myList = web.Result.Lists.FirstOrDefault(p => p.Title == listTitle);
 
                 if (myList != null)
                 {

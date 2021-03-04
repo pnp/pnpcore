@@ -1,9 +1,9 @@
---batchresponse_f005cb1e-71ad-46b1-8159-eb79675600c7
+--batchresponse_60de700c-9f5c-4d6a-8275-3eaf9f53d755
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{"d":{"results":[{"__metadata":{"id":"https://jimmywim.sharepoint.com/sites/PnPCoreTest/_api/Web/Lists(guid'a8cd3d7e-4ac3-43d6-859c-dc7b02b8995e')/Items(1)/RoleAssignments/GetByPrincipalId(8)","uri":"https://jimmywim.sharepoint.com/sites/PnPCoreTest/_api/Web/Lists(guid'a8cd3d7e-4ac3-43d6-859c-dc7b02b8995e')/Items(1)/RoleAssignments/GetByPrincipalId(8)","type":"SP.RoleAssignment"},"RoleDefinitionBindings":{"results":[{"__metadata":{"id":"https://jimmywim.sharepoint.com/sites/PnPCoreTest/_api/Web/RoleDefinitions(1073741829)","uri":"https://jimmywim.sharepoint.com/sites/PnPCoreTest/_api/Web/RoleDefinitions(1073741829)","type":"SP.RoleDefinition"},"BasePermissions":{"__metadata":{"type":"SP.BasePermissions"},"High":"2147483647","Low":"4294967295"},"Description":"Has full control.","Hidden":false,"Id":1073741829,"Name":"Full Control","Order":1,"RoleTypeKind":5}]},"PrincipalId":8}]}}
---batchresponse_f005cb1e-71ad-46b1-8159-eb79675600c7--
+{"d":{"results":[{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'f3876767-4712-49c6-ae1f-225327cd2256')/Items(1)/RoleAssignments/GetByPrincipalId(16)","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'f3876767-4712-49c6-ae1f-225327cd2256')/Items(1)/RoleAssignments/GetByPrincipalId(16)","type":"SP.RoleAssignment"},"RoleDefinitionBindings":{"results":[{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/RoleDefinitions(1073741829)","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/RoleDefinitions(1073741829)","type":"SP.RoleDefinition"},"BasePermissions":{"__metadata":{"type":"SP.BasePermissions"},"High":"2147483647","Low":"4294967295"},"Description":"Has full control.","Hidden":false,"Id":1073741829,"Name":"Full Control","Order":1,"RoleTypeKind":5}]},"PrincipalId":16}]}}
+--batchresponse_60de700c-9f5c-4d6a-8275-3eaf9f53d755--

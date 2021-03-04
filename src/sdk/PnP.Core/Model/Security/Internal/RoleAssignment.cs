@@ -19,21 +19,28 @@ namespace PnP.Core.Model.Security
 
         public RoleAssignment()
         {
+#pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
             GetApiCallOverrideHandler = async (ApiCallRequest api) =>
+#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
             {
-                var parentType = Parent.Parent.GetType();
-                if (parentType == typeof(ListItemCollection))
+                if (Parent != null && Parent.Parent != null)
                 {
-                    // If this is a List Item's role assignment, we need to grab the parent list item's ID and swap out the token
-                    // Go up 3 levels to get the List (?)
-                    var containingList = Parent.Parent.Parent as IList;
-                    if (containingList != null)
+                    var parentType = Parent.Parent.GetType();
+                    if (parentType == typeof(ListItemCollection))
                     {
-                        var request = api.ApiCall.Request.Replace("{List.Id}", containingList.Id.ToString());
-                        api.ApiCall = new ApiCall(request, api.ApiCall.Type, api.ApiCall.JsonBody, api.ApiCall.ReceivingProperty);
-                    }   
+                        // If this is a List Item's role assignment, we need to grab the parent list item's ID and swap out the token
+                        // Go up 3 levels to get the List (?)
+                        if (Parent != null && Parent.Parent != null && Parent.Parent.Parent != null)
+                        {
+                            var containingList = Parent.Parent.Parent as IList;
+                            if (containingList != null)
+                            {
+                                var request = api.ApiCall.Request.Replace("{List.Id}", containingList.Id.ToString());
+                                api.ApiCall = new ApiCall(request, api.ApiCall.Type, api.ApiCall.JsonBody, api.ApiCall.ReceivingProperty);
+                            }
+                        }
+                    }
                 }
-
                 return api;
             };
         }
