@@ -821,14 +821,11 @@ namespace PnP.Core.Model.SharePoint
         {
             if (await IsSyntexContentCenterAsync().ConfigureAwait(false))
             {
-                //return this as ISyntexContentCenter;
                 SyntexContentCenter syntexContentCenter = new SyntexContentCenter()
                 {
-                    PnPContext = this.PnPContext,
-                    Parent = null
+                    Web = this
                 };
 
-                await syntexContentCenter.LoadAsync(p => p.Title, p => p.WebTemplate, p => p.Lists).ConfigureAwait(false);
                 return syntexContentCenter;
             }
             else

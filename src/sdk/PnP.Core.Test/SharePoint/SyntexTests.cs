@@ -1,5 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PnP.Core.Test.Utilities;
+using System;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace PnP.Core.Test.SharePoint
@@ -59,8 +61,56 @@ namespace PnP.Core.Test.SharePoint
             {
                 var cc = await context.Web.AsSyntexContentCenterAsync();
                 Assert.IsTrue(cc != null);
-                Assert.IsTrue(cc.Id == context.Web.Id);
+                Assert.IsTrue(cc.Web.Id == context.Web.Id);
                 Assert.IsTrue(context.Web.AsSyntexContentCenter() != null);
+            }
+        }
+
+        [TestMethod]
+        public async Task GetSyntexModels()
+        {
+            TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.SyntexContentCenterTestSite))
+            {
+                var cc = await context.Web.AsSyntexContentCenterAsync();
+                var models = await cc.GetSyntexModelsAsync();
+                Assert.IsTrue(models.Any());
+                Assert.IsTrue(!string.IsNullOrEmpty(models.First().Name));
+                Assert.IsTrue(models.First().ModelLastTrained != DateTime.MinValue);
+            }
+        }
+
+        [TestMethod]
+        public async Task GetSyntexModelsViaFilter()
+        {
+            TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.SyntexContentCenterTestSite))
+            {
+                var cc = context.Web.AsSyntexContentCenter();
+                var models = cc.GetSyntexModels("XYZ");
+                Assert.IsFalse(models.Any());
+            }
+        }
+
+        [TestMethod]
+        public async Task RegisterModelToList()
+        {
+            TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.SyntexContentCenterTestSite))
+            {
+                var cc = await context.Web.AsSyntexContentCenterAsync();
+                var models = await cc.GetSyntexModelsAsync();
+                var modelToRegister = models.First();
+
+                // Add library to site
+                var libraryName = TestCommon.GetPnPSdkTestAssetName("RegisterModelToList");
+                var testLibrary = await context.Web.Lists.AddAsync(libraryName, Model.SharePoint.ListTemplateType.DocumentLibrary);
+
+                // register model to library
+                await modelToRegister.RegisterModelAsync(testLibrary);
+
+                // cleanup the library
+                await testLibrary.DeleteAsync();
             }
         }
     }
