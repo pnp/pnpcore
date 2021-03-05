@@ -1,9 +1,9 @@
---batchresponse_c2333266-18d4-4374-bff6-7a31ef13645c
+--batchresponse_06cdfaca-c55c-49bd-a116-c463b4bbf9d4
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{"d":{"results":[{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'f90d07e0-bbea-4464-9611-f695d0b7b3e4')","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'f90d07e0-bbea-4464-9611-f695d0b7b3e4')","etag":"\"5665\"","type":"SP.List"},"BaseTemplate":101,"Id":"f90d07e0-bbea-4464-9611-f695d0b7b3e4","Title":"Documents"}]}}
---batchresponse_c2333266-18d4-4374-bff6-7a31ef13645c--
+{"d":{"results":[{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'f90d07e0-bbea-4464-9611-f695d0b7b3e4')","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'f90d07e0-bbea-4464-9611-f695d0b7b3e4')","etag":"\"5843\"","type":"SP.List"},"ContentTypes":{"results":[{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'f90d07e0-bbea-4464-9611-f695d0b7b3e4')/ContentTypes('0x010100137CD579E5FC6448A1871653DFBA4814')","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'f90d07e0-bbea-4464-9611-f695d0b7b3e4')/ContentTypes('0x010100137CD579E5FC6448A1871653DFBA4814')","type":"SP.ContentType"},"Description":"Create a new document.","Id":{"__metadata":{"type":"SP.ContentTypeId"},"StringValue":"0x010100137CD579E5FC6448A1871653DFBA4814"},"StringId":"0x010100137CD579E5FC6448A1871653DFBA4814"},{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'f90d07e0-bbea-4464-9611-f695d0b7b3e4')/ContentTypes('0x012000058C743E62270D4399C61A018FED13E7')","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'f90d07e0-bbea-4464-9611-f695d0b7b3e4')/ContentTypes('0x012000058C743E62270D4399C61A018FED13E7')","type":"SP.ContentType"},"Description":"Create a new folder.","Id":{"__metadata":{"type":"SP.ContentTypeId"},"StringValue":"0x012000058C743E62270D4399C61A018FED13E7"},"StringId":"0x012000058C743E62270D4399C61A018FED13E7"}]},"Id":"f90d07e0-bbea-4464-9611-f695d0b7b3e4","Title":"Documents"}]}}
+--batchresponse_06cdfaca-c55c-49bd-a116-c463b4bbf9d4--

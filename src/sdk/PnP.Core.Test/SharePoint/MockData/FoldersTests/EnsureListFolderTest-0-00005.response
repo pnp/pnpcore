@@ -1,9 +1,9 @@
---batchresponse_e9e0d015-5104-4deb-b1f1-4055d046666c
+--batchresponse_2886ebe9-0a6b-494f-95bc-25226588da2b
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{"d":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/prov-1/SitePages/sub1')","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/prov-1/SitePages/sub1')","type":"SP.Folder"},"Files":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/prov-1/SitePages/sub1')/Files"}},"ListItemAllFields":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/prov-1/SitePages/sub1')/ListItemAllFields"}},"ParentFolder":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/prov-1/SitePages/sub1')/ParentFolder"}},"Properties":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/prov-1/SitePages/sub1')/Properties"}},"StorageMetrics":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/prov-1/SitePages/sub1')/StorageMetrics"}},"Folders":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/prov-1/SitePages/sub1')/Folders"}},"Exists":true,"IsWOPIEnabled":false,"ItemCount":0,"Name":"sub1","ProgID":null,"ServerRelativeUrl":"/sites/prov-1/SitePages/sub1","TimeCreated":"2021-03-04T14:45:31Z","TimeLastModified":"2021-03-04T14:45:31Z","UniqueId":"e6ecdc0c-c6aa-4bee-9ad3-8211c7196a01","WelcomePage":""}}
---batchresponse_e9e0d015-5104-4deb-b1f1-4055d046666c--
+{"d":{"results":[]}}
+--batchresponse_2886ebe9-0a6b-494f-95bc-25226588da2b--

@@ -55,6 +55,7 @@ namespace PnP.Core.Test.QueryModel
         }
 
         [TestMethod]
+        [Ignore]
         public async Task TestQueryItems_Graph()
         {
             //TestCommon.Instance.Mocking = false;

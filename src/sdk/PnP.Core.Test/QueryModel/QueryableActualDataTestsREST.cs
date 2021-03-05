@@ -94,6 +94,7 @@ namespace PnP.Core.Test.QueryModel
         }
 
         [TestMethod]
+        [Ignore]
         public async Task TestQueryItems_REST()
         {
             var expectedListItemTitle = "Home";
@@ -118,6 +119,7 @@ namespace PnP.Core.Test.QueryModel
         }
 
         [TestMethod]
+        [Ignore]
         public async Task TestQueryItemsAsync_REST()
         {
             var expectedListItemTitle = "Home";

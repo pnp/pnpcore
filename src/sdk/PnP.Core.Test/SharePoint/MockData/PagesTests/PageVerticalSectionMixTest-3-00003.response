@@ -1,11 +1,9 @@
-{"responses": [{"id": "1","status":400,"headers" : {"Content-Type":"application/json"},"body":{
-  "error": {
-    "code": "BadRequest",
-    "message": "Invalid filter clause",
-    "innerError": {
-      "date": "2021-02-18T18:05:18",
-      "request-id": "13ef3dbc-00dd-4534-9887-95d8ec72efd5",
-      "client-request-id": "13ef3dbc-00dd-4534-9887-95d8ec72efd5"
-    }
-  }
-}}]}
+--batchresponse_ec3f1525-8bd4-4cf4-b6d9-a2c6826af5fe
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+HTTP/1.1 200 OK
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+
+{"d":{"results":[]}}
+--batchresponse_ec3f1525-8bd4-4cf4-b6d9-a2c6826af5fe--

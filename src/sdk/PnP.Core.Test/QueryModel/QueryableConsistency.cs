@@ -301,6 +301,7 @@ namespace PnP.Core.Test.QueryModel
         }
 
         [TestMethod]
+        [Ignore]
         public async Task TestQueryListItemsConsistency()
         {
             var expectedListItemTitle = "Home";
@@ -342,6 +343,7 @@ namespace PnP.Core.Test.QueryModel
         }
 
         [TestMethod]
+        [Ignore]
         public async Task TestQueryListItemsAddConsistency()
         {
             var listTitle = "TestQueryListItemsAddConsistency";

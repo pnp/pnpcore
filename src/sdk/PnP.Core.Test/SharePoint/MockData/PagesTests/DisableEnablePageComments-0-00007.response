@@ -1,9 +1,1 @@
---batchresponse_04b80999-01c8-4c06-b533-6950c0fc2e1f
-Content-Type: application/http
-Content-Transfer-Encoding: binary
-
-HTTP/1.1 200 OK
-CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
-
-{"d":{"CommentsDisabled":false}}
---batchresponse_04b80999-01c8-4c06-b533-6950c0fc2e1f--
+[{"SchemaVersion":"15.0.0.0","LibraryVersion":"16.0.21024.12002","ErrorInfo":null,"TraceCorrelationId":"045eb19f-90a3-2000-9566-0558ff490dbd"}]

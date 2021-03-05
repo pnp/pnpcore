@@ -1,1 +1,85 @@
-[{"SchemaVersion":"15.0.0.0","LibraryVersion":"16.0.21017.12000","ErrorInfo":null,"TraceCorrelationId":"d207b19f-c021-2000-9566-03d403fe6df9"}]
+--batchresponse_77b7bf8d-f0d9-4ab6-9a9b-d633b14ef95e
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+HTTP/1.1 200 OK
+CONTENT-TYPE: application/json; charset=utf-8
+
+{ "Row" : 
+[{
+"ID": "442",
+"PermMask": "0x7ffffffffffbffff",
+"FSObjType": "0",
+"HTML_x0020_File_x0020_Type": "",
+"UniqueId": "{E31A9A84-44BA-4AE3-94CC-48D77D6074F1}",
+"ProgId": "",
+"NoExecute": "0",
+"ContentTypeId": "0x0101009D1CB255DA76424F860D91F20E6C41180044C66AD09592964583DFF5030205BD34",
+"FileRef": "\u002fsites\u002fpnpcoresdktest\u002fSitePages\u002fPNP_SDK_TEST_VerticalPageSectionsWithEmphasisCreateTest.aspx",
+"FileRef.urlencode": "%2Fsites%2Fpnpcoresdktest%2FSitePages%2FPNP%5FSDK%5FTEST%5FVerticalPageSectionsWithEmphasisCreateTest%2Easpx",
+"FileRef.urlencodeasurl": "\u002fsites\u002fpnpcoresdktest\u002fSitePages\u002fPNP_SDK_TEST_VerticalPageSectionsWithEmphasisCreateTest.aspx",
+"FileRef.urlencoding": "\u002fsites\u002fpnpcoresdktest\u002fSitePages\u002fPNP_SDK_TEST_VerticalPageSectionsWithEmphasisCreateTest.aspx",
+"FileRef.scriptencodeasurl": "\\u002fsites\\u002fpnpcoresdktest\\u002fSitePages\\u002fPNP_SDK_TEST_VerticalPageSectionsWithEmphasisCreateTest.aspx",
+"_UIVersion": "1",
+"SMTotalSize": "932",
+"File_x0020_Size": "780",
+"_CommentFlags": "",
+"File_x0020_Type": "aspx",
+"HTML_x0020_File_x0020_Type.File_x0020_Type.mapall": "ichtm.gif|Microsoft SharePoint Designer|SharePoint.OpenDocuments|",
+"HTML_x0020_File_x0020_Type.File_x0020_Type.mapcon": "SharePoint.OpenDocuments",
+"HTML_x0020_File_x0020_Type.File_x0020_Type.mapico": "ichtm.gif",
+"serverurl.progid": "",
+"ServerRedirectedEmbedUrl": "",
+"File_x0020_Type.progid": "",
+"File_x0020_Type.url": "FALSE",
+"FileLeafRef": "PNP_SDK_TEST_VerticalPageSectionsWithEmphasisCreateTest.aspx",
+"FileLeafRef.Name": "PNP_SDK_TEST_VerticalPageSectionsWithEmphasisCreateTest",
+"FileLeafRef.Suffix": "aspx",
+"FileDirRef": "\u002fsites\u002fpnpcoresdktest\u002fSitePages",
+"Description": "",
+"Title": "",
+"ClientSideApplicationId": "",
+"PageLayoutType": "",
+"CanvasContent1": "<div dir=\"\" class=\"ms-rtestate-field\"><\u002fdiv>",
+"_AuthorByline": "",
+"_AuthorByline.id": "",
+"_AuthorByline.title": "",
+"_AuthorByline.span": "",
+"_AuthorByline.email": "",
+"_AuthorByline.sip": "",
+"_AuthorByline.jobTitle": "",
+"_AuthorByline.department": "",
+"_AuthorByline.picture": "0",
+"LayoutWebpartsContent": "<div dir=\"\" class=\"ms-rtestate-field\"><\u002fdiv>",
+"BannerImageUrl": "",
+"BannerImageUrl.desc": "",
+"PromotedState": "0",
+"PromotedState.": "0",
+"_OriginalSourceUrl": "",
+"_OriginalSourceSiteId": "",
+"_OriginalSourceWebId": "",
+"_OriginalSourceListId": "",
+"_OriginalSourceItemId": "",
+"ItemChildCount": "0",
+"FolderChildCount": "0",
+"A2ODMountCount": "",
+"owshiddenversion": "1",
+"_SPTranslatedLanguages": "",
+"_SPSitePageFlags": "",
+"ContentVersion": "0",
+"DocConcurrencyNumber": "1",
+"_VirusStatus": "",
+"Restricted": "",
+"ecb.dispex": "return DispEx(this,event,'TRUE','FALSE','FALSE','','1','SharePoint.OpenDocuments','','','','6','0','','0x7ffffffffffbffff','','')"
+}
+],"FirstRow" : 1,
+"FolderPermissions" : "0x7ffffffffffbffff"
+,"LastRow" : 1,
+"RowLimit" : 30
+,"FilterLink" : "?"
+,"ForceNoHierarchy" : "1"
+,"HierarchyHasIndention" : ""
+,"CurrentFolderSpItemUrl" : ""
+
+}
+--batchresponse_77b7bf8d-f0d9-4ab6-9a9b-d633b14ef95e--

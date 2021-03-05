@@ -1,19 +1,9 @@
---batchresponse_0dad6425-f2a5-40fe-b242-175fa64d49a7
+--batchresponse_60686835-e517-4e72-90f4-8fc6e3ba5f36
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 200 OK
-CONTENT-TYPE: application/json; charset=utf-8
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{ "Row" : 
-[],"FirstRow" : 1,
-"FolderPermissions" : "0x7ffffffffffbffff"
-,"LastRow" : 0,
-"RowLimit" : 30
-,"FilterLink" : "?"
-,"ForceNoHierarchy" : "1"
-,"HierarchyHasIndention" : ""
-,"CurrentFolderSpItemUrl" : ""
-
-}
---batchresponse_0dad6425-f2a5-40fe-b242-175fa64d49a7--
+{"d":{"results":[]}}
+--batchresponse_60686835-e517-4e72-90f4-8fc6e3ba5f36--
