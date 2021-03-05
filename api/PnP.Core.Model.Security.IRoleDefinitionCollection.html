@@ -80,7 +80,7 @@
           <div class="col-md-10">
             <article class="content wrap" id="_content" data-uid="PnP.Core.Model.Security.IRoleDefinitionCollection">
                   <div class="contribution-panel mobile-hide pull-right">
-                      <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Security/Public/IRoleDefinitionCollection.cs/#L11" title="View Source" class="view-source-lg"><i class="fa fa-code"></i></a>
+                      <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Security/Public/IRoleDefinitionCollection.cs/#L12" title="View Source" class="view-source-lg"><i class="fa fa-code"></i></a>
                       <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_Security_IRoleDefinitionCollection.md&amp;value=---%0Auid%3A%20PnP.Core.Model.Security.IRoleDefinitionCollection%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc" class="improve-doc-lg"><i class="glyphicon glyphicon-pencil"></i></a>
                   </div>
                       <h1 id="PnP_Core_Model_Security_IRoleDefinitionCollection" data-uid="PnP.Core.Model.Security.IRoleDefinitionCollection">Interface IRoleDefinitionCollection
@@ -111,6 +111,12 @@
     <div>
       <a class="xref" href="PnP.Core.Model.IRequestableCollection.html#PnP_Core_Model_IRequestableCollection_Clear">IRequestableCollection.Clear()</a>
     </div>
+    <div>
+      <a class="xref" href="PnP.Core.Model.IDataModelCollectionLoad-1.html#PnP_Core_Model_IDataModelCollectionLoad_1_LoadAsync_Expression_Func__0_System_Object_____">IDataModelCollectionLoad&lt;IRoleDefinition&gt;.LoadAsync(Expression&lt;Func&lt;IRoleDefinition, Object&gt;&gt;[])</a>
+    </div>
+    <div>
+      <a class="xref" href="PnP.Core.Model.IDataModelCollectionLoad-1.html#PnP_Core_Model_IDataModelCollectionLoad_1_LoadBatchAsync_PnP_Core_Services_Batch_Expression_Func__0_System_Object_____">IDataModelCollectionLoad&lt;IRoleDefinition&gt;.LoadBatchAsync(Batch, Expression&lt;Func&lt;IRoleDefinition, Object&gt;&gt;[])</a>
+    </div>
   </div>
   
   <h6><strong>Namespace</strong>: <a class="xref" href="PnP.Core.Model.Security.html">PnP.Core.Model.Security</a></h6>
@@ -118,7 +124,7 @@
   
   <h5 id="PnP_Core_Model_Security_IRoleDefinitionCollection_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public interface IRoleDefinitionCollection : IQueryable&lt;IRoleDefinition&gt;, IDataModelCollection&lt;IRoleDefinition&gt;, IEnumerable&lt;IRoleDefinition&gt;, IDataModelParent, IDataModelWithContext, IRequestableCollection</code></pre>
+    <pre><code class="lang-csharp hljs">public interface IRoleDefinitionCollection : IQueryable&lt;IRoleDefinition&gt;, IAsyncEnumerable&lt;IRoleDefinition&gt;, IDataModelCollection&lt;IRoleDefinition&gt;, IEnumerable&lt;IRoleDefinition&gt;, IDataModelParent, IDataModelWithContext, IRequestableCollection, IDataModelCollectionLoad&lt;IRoleDefinition&gt;</code></pre>
   </div>
 
   
@@ -133,7 +139,7 @@
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_Security_IRoleDefinitionCollection_Add_System_String_PnP_Core_Model_SharePoint_RoleType_PnP_Core_Model_SharePoint_PermissionKind___System_String_System_Boolean_System_Int32_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.Security.IRoleDefinitionCollection.Add(System.String%2CPnP.Core.Model.SharePoint.RoleType%2CPnP.Core.Model.SharePoint.PermissionKind%5B%5D%2CSystem.String%2CSystem.Boolean%2CSystem.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Security/Public/IRoleDefinitionCollection.cs/#L24" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Security/Public/IRoleDefinitionCollection.cs/#L25" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Model_Security_IRoleDefinitionCollection_Add_" data-uid="PnP.Core.Model.Security.IRoleDefinitionCollection.Add*"></a>
@@ -222,7 +228,7 @@
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_Security_IRoleDefinitionCollection_AddAsync_System_String_PnP_Core_Model_SharePoint_RoleType_PnP_Core_Model_SharePoint_PermissionKind___System_String_System_Boolean_System_Int32_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.Security.IRoleDefinitionCollection.AddAsync(System.String%2CPnP.Core.Model.SharePoint.RoleType%2CPnP.Core.Model.SharePoint.PermissionKind%5B%5D%2CSystem.String%2CSystem.Boolean%2CSystem.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Security/Public/IRoleDefinitionCollection.cs/#L61" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Security/Public/IRoleDefinitionCollection.cs/#L62" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Model_Security_IRoleDefinitionCollection_AddAsync_" data-uid="PnP.Core.Model.Security.IRoleDefinitionCollection.AddAsync*"></a>
@@ -311,7 +317,7 @@
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_Security_IRoleDefinitionCollection_AddBatch_PnP_Core_Services_Batch_System_String_PnP_Core_Model_SharePoint_RoleType_PnP_Core_Model_SharePoint_PermissionKind___System_String_System_Boolean_System_Int32_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.Security.IRoleDefinitionCollection.AddBatch(PnP.Core.Services.Batch%2CSystem.String%2CPnP.Core.Model.SharePoint.RoleType%2CPnP.Core.Model.SharePoint.PermissionKind%5B%5D%2CSystem.String%2CSystem.Boolean%2CSystem.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Security/Public/IRoleDefinitionCollection.cs/#L49" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Security/Public/IRoleDefinitionCollection.cs/#L50" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Model_Security_IRoleDefinitionCollection_AddBatch_" data-uid="PnP.Core.Model.Security.IRoleDefinitionCollection.AddBatch*"></a>
@@ -407,7 +413,7 @@
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_Security_IRoleDefinitionCollection_AddBatch_System_String_PnP_Core_Model_SharePoint_RoleType_PnP_Core_Model_SharePoint_PermissionKind___System_String_System_Boolean_System_Int32_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.Security.IRoleDefinitionCollection.AddBatch(System.String%2CPnP.Core.Model.SharePoint.RoleType%2CPnP.Core.Model.SharePoint.PermissionKind%5B%5D%2CSystem.String%2CSystem.Boolean%2CSystem.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Security/Public/IRoleDefinitionCollection.cs/#L36" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Security/Public/IRoleDefinitionCollection.cs/#L37" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Model_Security_IRoleDefinitionCollection_AddBatch_" data-uid="PnP.Core.Model.Security.IRoleDefinitionCollection.AddBatch*"></a>
@@ -496,7 +502,7 @@
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_Security_IRoleDefinitionCollection_AddBatchAsync_PnP_Core_Services_Batch_System_String_PnP_Core_Model_SharePoint_RoleType_PnP_Core_Model_SharePoint_PermissionKind___System_String_System_Boolean_System_Int32_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.Security.IRoleDefinitionCollection.AddBatchAsync(PnP.Core.Services.Batch%2CSystem.String%2CPnP.Core.Model.SharePoint.RoleType%2CPnP.Core.Model.SharePoint.PermissionKind%5B%5D%2CSystem.String%2CSystem.Boolean%2CSystem.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Security/Public/IRoleDefinitionCollection.cs/#L86" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Security/Public/IRoleDefinitionCollection.cs/#L87" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Model_Security_IRoleDefinitionCollection_AddBatchAsync_" data-uid="PnP.Core.Model.Security.IRoleDefinitionCollection.AddBatchAsync*"></a>
@@ -592,7 +598,7 @@
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_Security_IRoleDefinitionCollection_AddBatchAsync_System_String_PnP_Core_Model_SharePoint_RoleType_PnP_Core_Model_SharePoint_PermissionKind___System_String_System_Boolean_System_Int32_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.Security.IRoleDefinitionCollection.AddBatchAsync(System.String%2CPnP.Core.Model.SharePoint.RoleType%2CPnP.Core.Model.SharePoint.PermissionKind%5B%5D%2CSystem.String%2CSystem.Boolean%2CSystem.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Security/Public/IRoleDefinitionCollection.cs/#L73" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Security/Public/IRoleDefinitionCollection.cs/#L74" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Model_Security_IRoleDefinitionCollection_AddBatchAsync_" data-uid="PnP.Core.Model.Security.IRoleDefinitionCollection.AddBatchAsync*"></a>

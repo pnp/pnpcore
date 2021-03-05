@@ -3202,25 +3202,6 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.IRequestableCollection.RequestedItems
   nameWithType: IRequestableCollection.RequestedItems
-- uid: PnP.Core.Model.ISupportPaging
-  name: ISupportPaging
-  href: api/PnP.Core.Model.ISupportPaging.html
-  commentId: T:PnP.Core.Model.ISupportPaging
-  fullName: PnP.Core.Model.ISupportPaging
-  nameWithType: ISupportPaging
-- uid: PnP.Core.Model.ISupportPaging.CanPage
-  name: CanPage
-  href: api/PnP.Core.Model.ISupportPaging.html#PnP_Core_Model_ISupportPaging_CanPage
-  commentId: P:PnP.Core.Model.ISupportPaging.CanPage
-  fullName: PnP.Core.Model.ISupportPaging.CanPage
-  nameWithType: ISupportPaging.CanPage
-- uid: PnP.Core.Model.ISupportPaging.CanPage*
-  name: CanPage
-  href: api/PnP.Core.Model.ISupportPaging.html#PnP_Core_Model_ISupportPaging_CanPage_
-  commentId: Overload:PnP.Core.Model.ISupportPaging.CanPage
-  isSpec: "True"
-  fullName: PnP.Core.Model.ISupportPaging.CanPage
-  nameWithType: ISupportPaging.CanPage
 - uid: PnP.Core.Model.ISupportQuery`1
   name: ISupportQuery<TResult>
   href: api/PnP.Core.Model.ISupportQuery-1.html
@@ -28662,6 +28643,19 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Services.PnPGlobalSettingsOptions.HttpMicrosoftGraphUseRetryAfterHeader
   nameWithType: PnPGlobalSettingsOptions.HttpMicrosoftGraphUseRetryAfterHeader
+- uid: PnP.Core.Services.PnPGlobalSettingsOptions.HttpSharePointRestDefaultPageSize
+  name: HttpSharePointRestDefaultPageSize
+  href: api/PnP.Core.Services.PnPGlobalSettingsOptions.html#PnP_Core_Services_PnPGlobalSettingsOptions_HttpSharePointRestDefaultPageSize
+  commentId: P:PnP.Core.Services.PnPGlobalSettingsOptions.HttpSharePointRestDefaultPageSize
+  fullName: PnP.Core.Services.PnPGlobalSettingsOptions.HttpSharePointRestDefaultPageSize
+  nameWithType: PnPGlobalSettingsOptions.HttpSharePointRestDefaultPageSize
+- uid: PnP.Core.Services.PnPGlobalSettingsOptions.HttpSharePointRestDefaultPageSize*
+  name: HttpSharePointRestDefaultPageSize
+  href: api/PnP.Core.Services.PnPGlobalSettingsOptions.html#PnP_Core_Services_PnPGlobalSettingsOptions_HttpSharePointRestDefaultPageSize_
+  commentId: Overload:PnP.Core.Services.PnPGlobalSettingsOptions.HttpSharePointRestDefaultPageSize
+  isSpec: "True"
+  fullName: PnP.Core.Services.PnPGlobalSettingsOptions.HttpSharePointRestDefaultPageSize
+  nameWithType: PnPGlobalSettingsOptions.HttpSharePointRestDefaultPageSize
 - uid: PnP.Core.Services.PnPGlobalSettingsOptions.HttpSharePointRestDelayInSeconds
   name: HttpSharePointRestDelayInSeconds
   href: api/PnP.Core.Services.PnPGlobalSettingsOptions.html#PnP_Core_Services_PnPGlobalSettingsOptions_HttpSharePointRestDelayInSeconds

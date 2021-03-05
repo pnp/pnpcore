@@ -89,7 +89,7 @@
 }
 </code></pre>
 <h2 id="getting-data">Getting data</h2>
-<p>Working with PnP Core SDK starts from a <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Services.PnPContext.html">PnPContext</a> which provides you with access to the connected Site, Web and Team but which also acts as an in memory domain model. Before Beta 3 all data you requested got loaded into that into the <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Services.PnPContext.html">PnPContext</a>. Any <code>Get</code> call on either a model (e.g. doing <code>context.Web.GetAsync(p =&gt; p.Title)</code>) or a collection (e.g. doing <code>context.Web.Lists.GetAsync(p =&gt; p.Title, p =&gt; p.TemplateType)</code>) loaded data into the <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Services.PnPContext.html">PnPContext</a> whereas now the default behavior for <code>Get</code> calls is to load the data into a variable. Loading data into the <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Services.PnPContext.html">PnPContext</a> is still possible using the new <code>Load</code> calls.</p>
+<p>Working with PnP Core SDK starts from a <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Services.PnPContext.html">PnPContext</a> which provides you with access to the connected Site, Web and Team but which also acts as an in memory domain model. Before Beta 3 all data you requested got loaded into the <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Services.PnPContext.html">PnPContext</a>. Any <code>Get</code> call on either a model (e.g. doing <code>context.Web.GetAsync(p =&gt; p.Title)</code>) or a collection (e.g. doing <code>context.Web.Lists.GetAsync(p =&gt; p.Title, p =&gt; p.TemplateType)</code>) loaded data into the <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Services.PnPContext.html">PnPContext</a> whereas now the default behavior for <code>Get</code> calls is to load the data into a variable. Loading data into the <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Services.PnPContext.html">PnPContext</a> is still possible using the new <code>Load</code> calls.</p>
 <h3 id="requesting-a-single-model-eg-a-web-list">Requesting a single model (e.g. a Web, List,...)</h3>
 <p>When requesting a model you can choose whether data is loaded into the <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Services.PnPContext.html">PnPContext</a> or not:</p>
 <table>
@@ -145,10 +145,10 @@
 </table>
 <div class="NOTE">
 <h5>Note</h5>
-<p>When doing a <code>Load</code> specifying a model collection (e.g. <code>context.Web.LoadAsync(p =&gt; p.Lists)</code>) then all the data is loaded into the <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Services.PnPContext.html">PnPContext</a>. This approach is the only option to load a collection into the <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Services.PnPContext.html">PnPContext</a>.</p>
+<p>When doing a <code>Load</code> specifying a model collection (e.g. <code>context.Web.LoadAsync(p =&gt; p.Lists)</code>) then all the data is loaded into the <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Services.PnPContext.html">PnPContext</a>. This approach is the only option to load a collection into the <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Services.PnPContext.html">PnPContext</a>, and unless it is really needed, you should avoid this technique and rather use paging.</p>
 </div>
 <h3 id="requesting-a-collection-of-models">Requesting a collection of models</h3>
-<p>Loads initiated from a collection always return data into a variable and never into the <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Services.PnPContext.html">PnPContext</a> because using this approach you can also apply a filter (using <code>Where</code>) which would result in an incomplete dataset in the <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Services.PnPContext.html">PnPContext</a>.</p>
+<p>Loads initiated from a collection always return data into a variable and never into the <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Services.PnPContext.html">PnPContext</a> because using this approach you can also apply filters (using <code>Where</code>), or other query methods, which would result in an incomplete dataset in the <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Services.PnPContext.html">PnPContext</a>. You can now chain methods (<code>Where</code>, <code>QueryProperties</code>, etc.) with a fluent syntax and trigger the collection query execution once you are ready, using methods like <code>ToList</code> or <code>ToListAsync</code>, or enumerating the result of the query.</p>
 <table>
 <thead>
 <tr>
@@ -190,22 +190,50 @@
 </tr>
 <tr>
 <td>GetFirstOrDefaultBatchAsync()</td>
-<td>AsBatchAsync()</td>
+<td>FirstOrDefault().AsBatchAsync()</td>
 <td>No</td>
 </tr>
 <tr>
 <td>GetFirstOrDefaultBatch()</td>
-<td>AsBatch()</td>
+<td>FirstOrDefault().AsBatch()</td>
 <td>No</td>
 </tr>
 </tbody>
 </table>
-<h2 id="querying-loaded-collections-using-a-foreach-or-linq-extension-method">Querying loaded collections using a foreach or LINQ extension method</h2>
-<p>Once you've loaded data you might want to query the loaded data via a foreach or LINQ extension method, previously you could simply use the foreach or LINQ extension methods like FirstOrDefault on the model collection. Since as of Beta3 we've a custom LINQ implementation and doing a <code>foreach</code> or calling <code>FirstOrDefault</code> or <code>Where</code> will result in a new query. You can however cast the collection to an IEnumerable via the <code>AsRequested()</code> method and then use an OOB LINQ query.</p>
+<h2 id="querying-collections-of-models">Querying collections of models</h2>
+<p>Starting from Beta3 you can easily leverage a <a href="https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/linq/">LINQ</a> custom query provider that translates your LINQ queries into actual REST queries for Microsoft Graph or for Microsoft SharePoint REST APIs.</p>
+<p>For example, to get the items of a SharePoint list, filtered by title and just loading their Id and Title fields, you can write a query like the following one:</p>
+<pre><code class="lang-csharp">var query = (from i in context.Web.Lists.GetByTitle(listName).Items
+                where i.Title == itemTitle
+                select i)
+                .QueryProperties(l =&gt; l.Id, l =&gt; l.Title);
+</code></pre>
+<p>You will then be able to consume the collection either using an enumeration constructor or a method like <code>ToList</code>.
+Here you can see an example using an enumeration:</p>
+<pre><code class="lang-csharp">foreach (var item in query)
+{
+    Console.WriteLine($&quot;{item.Id} - {item.Title}&quot;);
+}
+</code></pre>
+<p>While here you can see how to use the <code>ToList</code> method.</p>
+<pre><code class="lang-csharp">var queryResult = query.ToList();
+</code></pre>
+<p>The above query can also be written just using the LINQ Extension Methods, rather than the LINQ query syntax, like it is illustrated in the following code excerpt:</p>
+<pre><code class="lang-csharp">var query = context.Web.Lists.GetByTitle(listName).Items
+        .Where(i =&gt; i.Title == itemTitle)
+        .QueryProperties(l =&gt; l.Id, l =&gt; l.Title);
+</code></pre>
+<p>Under the cover, there will be exactly the same query model, regardless the syntax you like to use.</p>
+<div class="IMPORTANT">
+<h5>Important</h5>
+<p>Since Beta3, whenever you enumerate a query or whenever you define a new query, the query provider will execute the query online targeting the back-end APIs, and you will always get fresh data.</p>
+</div>
+<h3 id="querying-loaded-collections-using-a-foreach-or-linq-to-objects">Querying loaded collections using a foreach or LINQ to Objects</h3>
+<p>If you don't want to execute an online query targeting the back-end APIs, and you rather want to use data that you already loaded in memory executing a previous query, you can use the <code>AsRequested()</code> method applied to a pre-loaded collection. As such, you will be able to enumerate the already in-memory data, eventually using LINQ to Objects or any other object browsing technique of your choice. In fact, the <code>AsRequested()</code> method casts the collection to an <code>IEnumerable</code> and gives you access to the in-memory copy of data.</p>
 <pre><code class="lang-csharp">// Load all lists in the PnPContext
 await context.Web.LoadAsync(p =&gt; p.Lists);
 
-// Query the loaded lists via OOB LINQ
+// Query the loaded lists via LINQ to Objects, in memory with no additional query on the backend APIs
 var documentLibraries = context.Web.Lists.AsRequested().Where(p =&gt; p.TemplateType == ListTemplateType.DocumentLibrary);
 
 // Iterate over the loaded lists
@@ -216,7 +244,7 @@ foreach(var list in context.Web.Lists.AsRequested())
 </code></pre>
 <div class="NOTE">
 <h5>Note</h5>
-<p>As of beta3 you need to use <code>QueryProperties</code> instead of <code>LoadProperties</code> when you want to specify the properties of a model.</p>
+<p>As of beta3 you need to use <code>QueryProperties</code> instead of <code>LoadProperties</code> when you want to specify the properties to load into the model.</p>
 </div>
 </article>
           </div>
