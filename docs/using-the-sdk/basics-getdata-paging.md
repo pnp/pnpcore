@@ -91,7 +91,7 @@ using (var context = await pnpContextFactory.CreateAsync("SiteToWorkWith"))
 
 The `AsRequested` method will browse the already in-memory items. The items will be loaded just once by the `Load` method.
 
-## Paging via the Take()/Skip() LINQ methods
+## Paging via the Take()/Skip() extension methods
 
 If you want to have full control on paging data, you can rely on the `Take`/`Skip` extension methods. In the following example you can see how to use manual paging to load lists.
 
@@ -130,7 +130,7 @@ while (true)
 
 Notice that the above sample relies on you for requesting the pages. As such, unless you really need to manually control paging, you should avoid this approach and rather use the continous paging with asynchronous code.
 
-### Starting via the Take() LINQ method with a filter and complex data load expression
+### Using Take() extension method with a filter and complex data load expression
 
 This example builds on top of the previous but shows some additional capabilities:
 
