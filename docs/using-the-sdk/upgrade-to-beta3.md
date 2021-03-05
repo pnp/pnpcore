@@ -29,11 +29,11 @@ N/A | GetBatchAsync() | No
 N/A | GetBatch() | No
 
 > [!Note]
-> When doing a `Load` specifying a model collection (e.g. `context.Web.LoadAsync(p => p.Lists)`) then all the data is loaded into the [PnPContext](https://pnp.github.io/pnpcore/api/PnP.Core.Services.PnPContext.html). This approach is the only option to load a collection into the [PnPContext](https://pnp.github.io/pnpcore/api/PnP.Core.Services.PnPContext.html), and unless it is really needed, you should avoid this technique and rather use paging to avoid overloading the server-side APIs.
+> When doing a `Load` specifying a model collection (e.g. `context.Web.LoadAsync(p => p.Lists)`) then all the data is loaded into the [PnPContext](https://pnp.github.io/pnpcore/api/PnP.Core.Services.PnPContext.html). This approach is the only option to load a collection into the [PnPContext](https://pnp.github.io/pnpcore/api/PnP.Core.Services.PnPContext.html), and unless it is really needed, you should avoid this technique and rather use paging.
 
 ### Requesting a collection of models
 
-Loads initiated from a collection always return data into a variable and never into the [PnPContext](https://pnp.github.io/pnpcore/api/PnP.Core.Services.PnPContext.html) because using this approach you can also apply a filter (using `Where`) which would result in an incomplete dataset in the [PnPContext](https://pnp.github.io/pnpcore/api/PnP.Core.Services.PnPContext.html).
+Loads initiated from a collection always return data into a variable and never into the [PnPContext](https://pnp.github.io/pnpcore/api/PnP.Core.Services.PnPContext.html) because using this approach you can also apply filters (using `Where`), or other query methods, which would result in an incomplete dataset in the [PnPContext](https://pnp.github.io/pnpcore/api/PnP.Core.Services.PnPContext.html). You can now chain methods (`Where`, `QueryProperties`, etc.) with a fluent syntax and trigger the collection query execution once you are ready, using methods like `ToList` or `ToListAsync`, or enumerating the result of the query.
 
 Pre Beta3 | Beta3 and later | Loads data into PnPContext
 ----------|-----------------|-------------------------
@@ -43,18 +43,60 @@ GetBatchAsync() | AsBatchAsync() | No
 GetBatch() | AsBatch() | No
 GetFirstOrDefaultAsync() | FirstOrDefaultAsync() | No
 GetFirstOrDefault() | FirstOrDefault() | No
-GetFirstOrDefaultBatchAsync() | AsBatchAsync() | No
-GetFirstOrDefaultBatch() | AsBatch() | No
+GetFirstOrDefaultBatchAsync() | FirstOrDefault().AsBatchAsync() | No
+GetFirstOrDefaultBatch() | FirstOrDefault().AsBatch() | No
 
-## Querying loaded collections using a foreach or LINQ extension method
+## Querying collections of models
 
-Once you've loaded data you might want to query the loaded data via a foreach or LINQ extension method, previously you could simply use the foreach or LINQ extension methods like FirstOrDefault on the model collection. Since as of Beta3 we've a custom LINQ implementation and doing a `foreach` or calling `FirstOrDefault` or `Where` will result in a new query. You can however cast the collection to an IEnumerable via the `AsRequested()` method and then use an OOB LINQ query.
+Starting from Beta3 you can easily leverage a [LINQ](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/linq/) custom query provider that translates your LINQ queries into actual REST queries for Microsoft Graph or for Microsoft SharePoint REST APIs.
+
+For example, to get the items of a SharePoint list, filtered by title and just loading their Id and Title fields, you can write a query like the following one:
+
+```csharp
+var query = (from i in context.Web.Lists.GetByTitle(listName).Items
+                where i.Title == itemTitle
+                select i)
+                .QueryProperties(l => l.Id, l => l.Title);
+```
+
+You will then be able to consume the collection either using an enumeration constructor or a method like `ToList`.
+Here you can see an example using an enumeration:
+
+```csharp
+foreach (var item in query)
+{
+    Console.WriteLine($"{item.Id} - {item.Title}");
+}
+```
+
+While here you can see how to use the `ToList` method.
+
+```csharp
+var queryResult = query.ToList();
+```
+
+The above query can also be written just using the LINQ Extension Methods, rather than the LINQ query syntax, like it is illustrated in the following code excerpt:
+
+```csharp
+var query = context.Web.Lists.GetByTitle(listName).Items
+        .Where(i => i.Title == itemTitle)
+        .QueryProperties(l => l.Id, l => l.Title);
+```
+
+Under the cover, there will be exactly the same query model, regardless the syntax you like to use.
+
+> [!Important]
+> Since Beta3, whenever you enumerate a query or whenever you define a new query, the query provider will execute the query online targeting the back-end APIs, and you will always get fresh data. 
+
+### Querying loaded collections using a foreach or LINQ to Objects
+
+If you don't want to execute an online query targeting the back-end APIs, and you rather want to use data that you already loaded in memory with a previous query, you can use the `AsRequested()` method applied to a pre-loaded collection. As such, you will be able to enumerate the already in-memory data, eventually using LINQ to Objects or any other object browsing technique of your choice. In fact, the `AsRequested()` method casts the collection to an `IEnumerable` and gives you access to the in-memory copy of data.
 
 ```csharp
 // Load all lists in the PnPContext
 await context.Web.LoadAsync(p => p.Lists);
 
-// Query the loaded lists via OOB LINQ
+// Query the loaded lists via LINQ to Objects
 var documentLibraries = context.Web.Lists.AsRequested().Where(p => p.TemplateType == ListTemplateType.DocumentLibrary);
 
 // Iterate over the loaded lists
@@ -65,4 +107,4 @@ foreach(var list in context.Web.Lists.AsRequested())
 ```
 
 > [!Note]
-> As of beta3 you need to use `QueryProperties` instead of `LoadProperties` when you want to specify the properties of a model.
+> As of beta3 you need to use `QueryProperties` instead of `LoadProperties` when you want to specify the properties to load into the model.

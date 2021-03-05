@@ -1,9 +1,10 @@
 # Using paging
 
-Being able to retrieve data in a paged manner is important when you want to use the first data rows while you're loading still additional data, but also when you're loading large data sets. When you page data you can start from from a LINQ query that uses the `Take()` method and from that point on PnP Core SDK will handle paging for you. Sometimes a query if paged by default (e.g. loading Teams channel messages) and then the paging will happen automatically behind the scenes.
+Being able to retrieve data in a paged manner is important when you want to use the first data rows while you're loading still additional data, but also when you're loading large data sets. When you page data you can start from a LINQ query or from a whole collection of items. Either way, PnP Core SDK provides you "implicit paging", meaning that when you browse (for example with a `foreach` constructor) the items in the collection, under the cover PnP Core SDK will retrieve data page by page, giving you back data like it was already in memory (continous querying with implicit paging).
+If you rather want to have full control on paging data, you can use the `Take()` method and from that point on PnP Core SDK will handle paging for you.
 
-In the remainder of this article you'll see a lot of `context` use: in this case this is a `PnPContext` which was obtained via the `PnPContextFactory` as explained in the [overview article](readme.md) and show below:
-
+> [!Note]
+> In the remainder of this article you'll see a lot of `context` use: in this case this is a `PnPContext` which was obtained via the `PnPContextFactory` as explained in the [overview article](readme.md) and show below:
 ```csharp
 using (var context = await pnpContextFactory.CreateAsync("SiteToWorkWith"))
 {
@@ -11,9 +12,75 @@ using (var context = await pnpContextFactory.CreateAsync("SiteToWorkWith"))
 }
 ```
 
-## Starting via the Take() LINQ method
+## Implicit paging
 
-This example shows how to use paging to load lists, in the sample only the `Title` property of the list is requested, if you do not provide the expression then list default properties are loaded.
+In this example the messages in a Team channel are queried continously, using implicit paging. When doing so the underlying Graph API call will return a "next page link" automatically and if so this will be used to get the next messages. The paging dynamics will be completely transparent to you, and you will simply get back the data that you are looking for, with an optimized and paged querying approach.
+
+```csharp
+using (var context = await pnpContextFactory.CreateAsync("SiteToWorkWith"))
+{
+    // Retrieve the already created channel
+    var channelForPaging2 = context.Team.Channels.FirstOrDefault(p => p.DisplayName == "My Channel");
+
+    // Retrieve the messages page by page and asynchronously in a trasparent way 
+    await foreach(var message in channelForPaging2.Messages)
+    {
+        // do something with the message
+    }
+}
+```
+
+As you can see, you can just focus on consuming data, while under the cover PnP Core SDK will retrieve the items for you, page by page, optimizing bandwith and requests. Notice the `await` keyword just before the `foreach` constructor, in order to make the continous query fully asynchronous and highly optimized. This is the suggested pattern for consuming large collections of items. 
+
+If your code is not asynchronous, and as such you cannot rely on the `await` keyword just before the `foreach` constructor, you can still use the synchronous enumeration of items, like it is illustrated in the following sample.
+
+```csharp
+using (var context = await pnpContextFactory.CreateAsync("SiteToWorkWith"))
+{
+    // Retrieve the already created channel
+    var channelForPaging2 = context.Team.Channels.FirstOrDefault(p => p.DisplayName == "My Channel");
+
+    // Retrieve the messages page by page and asynchronously in a trasparent way 
+    foreach(var message in channelForPaging2.Messages)
+    {
+        // do something with the message
+    }
+}
+```
+
+You will still get the whole set of items (message in the previous example) with multiple REST queries page by page. However, the querying of all the items will be synchronous and your code will be blocked while waiting for the whole set of items to be queried. This a sub-optimal scenario, that you should try to avoid, preferring the asynchronous model. 
+
+## Full load of items
+
+Another option that you have is to load in memory the whole set of items, using any of the `Load` methods available in PnP Core SDK.
+
+> [!Note]
+> You can find further details about the `Load` methods in the article [Upgrade to Beta3](upgrade-to-beta3.md).
+
+In the following sample, you can see how to load in memory the whole set of messages of a Teams channel.
+
+```csharp
+using (var context = await pnpContextFactory.CreateAsync("SiteToWorkWith"))
+{
+    // Retrieve the already created channel
+    var channelForPaging2 = context.Team.Channels.FirstOrDefault(p => p.DisplayName == "My Channel");
+
+    // Option A: Load the messages, this will load all messages via paged requests
+    await channelForPaging2.LoadAsync(p => p.Messages);
+
+    // Option B: 
+    foreach(var message in channelForPaging2.Messages.AsRequested())
+    {
+        // do something with the message
+    }
+}
+```
+
+The `AsRequested` will browse the already in-memory items. The items will be loaded by the `Load` method.
+
+## Paging via the Take()/Skip() LINQ methods
+
+If you want to have full control on paging data, you can rely on the `Take`/`Skip` extension methods. In the following example you can see how to use manual paging to load lists.
 
 ```csharp
 using (var context = await pnpContextFactory.CreateAsync("SiteToWorkWith"))
@@ -25,6 +92,8 @@ using (var context = await pnpContextFactory.CreateAsync("SiteToWorkWith"))
     lists = await context.Web.Lists.Take(2).Skip(2).QueryProperties(p => p.Title).ToListAsync();    
 }
 ```
+
+In the above sample only the `Title` property of the lists is requested, if you do not provide the expression then the list default properties are loaded.
 
 ### Starting via the Take() LINQ method with a filter and complex data load expression
 
@@ -41,40 +110,14 @@ using (var context = await pnpContextFactory.CreateAsync("SiteToWorkWith"))
     //   filtered to generic lists
     //     returning list properties
     //     - Title and TemplateType
-    //     - ContentTypes with for each content type the FieldLinks loaded
+    //     - ContentTypes
+    //          - For each content type the FieldLinks loaded
+    //               - For each FieldLink the Name property
     var lists = await context.Web.Lists.Take(2)
                                         .Where(p => p.TemplateType == ListTemplateType.GenericList)
                                         .QueryProperties(p => p.Title, p => p.TemplateType,
                                                         p => p.ContentTypes.QueryProperties(
                                                         p => p.Name, p => p.FieldLinks.QueryProperties(p => p.Name)))
                                         .ToListAsync();
-}
-```
-
-### Implicit paging
-
-In this example the messages in a Team channel are queried. When doing so the underlying Graph API call will return a "next page link" automatically and if so this will be used to get the next messages.
-
-```csharp
-using (var context = await pnpContextFactory.CreateAsync("SiteToWorkWith"))
-{
-    // Retrieve the already created channel
-    var channelForPaging2 = context.Team.Channels.FirstOrDefault(p => p.DisplayName == "My Channel");
-
-    // Option A: Load the messages, this will load all messages via paged requests
-    await channelForPaging2.LoadAsync(p => p.Messages);
-
-    // Option B: 
-    await foreach(var message in channelForPaging2.Messages)
-    {
-        // do something with the message
-    }
-
-    //or
-
-    await foreach(var list in context.Web.Lists)
-    {
-        // do something with the list
-    }
 }
 ```
