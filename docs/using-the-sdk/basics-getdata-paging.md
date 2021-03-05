@@ -53,7 +53,7 @@ using (var context = await pnpContextFactory.CreateAsync("SiteToWorkWith"))
     // Retrieve the already created channel
     var channelForPaging2 = context.Team.Channels.FirstOrDefault(p => p.DisplayName == "My Channel");
 
-    // Retrieve the messages page by page and asynchronously in a trasparent way 
+    // Retrieve the messages page by page, synchronously in a trasparent way 
     foreach(var message in channelForPaging2.Messages)
     {
         // do something with the message
