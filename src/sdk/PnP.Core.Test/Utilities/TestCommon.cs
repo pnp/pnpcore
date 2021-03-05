@@ -301,52 +301,21 @@ namespace PnP.Core.Test.Utilities
                     .Configure<PnPCoreAuthenticationOptions>(configuration.GetSection("PnPCore"))
                 .BuildServiceProvider();
 
+                TestUris = new Dictionary<string, Uri>
+                {
+                    { TestSite, new Uri(targetSiteUrl) },
+                    { TestSubSite, new Uri(targetSubSiteUrl) },
+                    { NoGroupTestSite, new Uri(noGroupSiteUrl) }
+                };
+
                 if (!string.IsNullOrEmpty(classicSTS0SiteUrl))
                 {
-                    if (!string.IsNullOrEmpty(syntexContentCenterSiteUrl))
-                    {
-                        TestUris = new Dictionary<string, Uri>
-                        {
-                            { TestSite, new Uri(targetSiteUrl) },
-                            { TestSubSite, new Uri(targetSubSiteUrl) },
-                            { NoGroupTestSite, new Uri(noGroupSiteUrl) },
-                            { ClassicSTS0TestSite, new Uri(classicSTS0SiteUrl) },
-                            { SyntexContentCenterTestSite, new Uri(syntexContentCenterSiteUrl)}
-                        };
-
-                    }
-                    else
-                    {
-                        TestUris = new Dictionary<string, Uri>
-                        {
-                            { TestSite, new Uri(targetSiteUrl) },
-                            { TestSubSite, new Uri(targetSubSiteUrl) },
-                            { NoGroupTestSite, new Uri(noGroupSiteUrl) },
-                            { ClassicSTS0TestSite, new Uri(classicSTS0SiteUrl) }
-                        };
-                    }
+                    TestUris.Add("ClassicSTS0TestSite", new Uri(classicSTS0SiteUrl));
                 }
-                else
+
+                if (!string.IsNullOrEmpty(syntexContentCenterSiteUrl))
                 {
-                    if (!string.IsNullOrEmpty(syntexContentCenterSiteUrl))
-                    {
-                        TestUris = new Dictionary<string, Uri>
-                        {
-                            { TestSite, new Uri(targetSiteUrl) },
-                            { TestSubSite, new Uri(targetSubSiteUrl) },
-                            { NoGroupTestSite, new Uri(noGroupSiteUrl) },
-                            { SyntexContentCenterTestSite, new Uri(syntexContentCenterSiteUrl)}
-                        };
-                    }
-                    else
-                    {
-                        TestUris = new Dictionary<string, Uri>
-                        {
-                            { TestSite, new Uri(targetSiteUrl) },
-                            { TestSubSite, new Uri(targetSubSiteUrl) },
-                            { NoGroupTestSite, new Uri(noGroupSiteUrl) }
-                        };
-                    }
+                    TestUris.Add("SyntexContentCenterTestSite", new Uri(syntexContentCenterSiteUrl));
                 }
 
                 var pnpContextFactory = serviceProvider.GetRequiredService<IPnPTestContextFactory>();
