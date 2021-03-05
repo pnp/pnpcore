@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using PnP.Core.Model.SharePoint;
 using PnP.Core.Test.Utilities;
 using System;
 using System.Linq;
@@ -69,7 +70,7 @@ namespace PnP.Core.Test.SharePoint
         [TestMethod]
         public async Task GetSyntexModels()
         {
-            TestCommon.Instance.Mocking = false;
+            //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.SyntexContentCenterTestSite))
             {
                 var cc = await context.Web.AsSyntexContentCenterAsync();
@@ -83,7 +84,7 @@ namespace PnP.Core.Test.SharePoint
         [TestMethod]
         public async Task GetSyntexModelsViaFilter()
         {
-            TestCommon.Instance.Mocking = false;
+            //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.SyntexContentCenterTestSite))
             {
                 var cc = context.Web.AsSyntexContentCenter();
@@ -93,9 +94,9 @@ namespace PnP.Core.Test.SharePoint
         }
 
         [TestMethod]
-        public async Task RegisterModelToList()
+        public async Task PublishUnPublishModelToList()
         {
-            TestCommon.Instance.Mocking = false;
+            //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.SyntexContentCenterTestSite))
             {
                 var cc = await context.Web.AsSyntexContentCenterAsync();
@@ -103,15 +104,62 @@ namespace PnP.Core.Test.SharePoint
                 var modelToRegister = models.First();
 
                 // Add library to site
-                var libraryName = TestCommon.GetPnPSdkTestAssetName("RegisterModelToList");
-                var testLibrary = await context.Web.Lists.AddAsync(libraryName, Model.SharePoint.ListTemplateType.DocumentLibrary);
+                var libraryName = TestCommon.GetPnPSdkTestAssetName("PublishUnPublishModelToList");
+                var testLibrary = await context.Web.Lists.AddAsync(libraryName, ListTemplateType.DocumentLibrary);
 
-                // register model to library
-                await modelToRegister.RegisterModelAsync(testLibrary);
+                // publish model to library
+                var result = await modelToRegister.PublishModelAsync(testLibrary);
+                Assert.IsTrue(result != null);
+                Assert.IsTrue(result.ErrorMessage == null);
+                Assert.IsTrue(result.StatusCode == 201);
+                Assert.IsTrue(result.Succeeded);
+
+                // unpublish model from library
+                var unpublishResult = await modelToRegister.UnPublishModelAsync(testLibrary);
+                Assert.IsTrue(unpublishResult != null);
+                Assert.IsTrue(unpublishResult.ErrorMessage == null);
+                Assert.IsTrue(unpublishResult.StatusCode == 200);
+                Assert.IsTrue(unpublishResult.Succeeded);
 
                 // cleanup the library
                 await testLibrary.DeleteAsync();
             }
         }
+
+        [TestMethod]
+        public async Task PublishUnPublishModelToList2()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.SyntexContentCenterTestSite))
+            {
+                var cc = await context.Web.AsSyntexContentCenterAsync();
+                var models = await cc.GetSyntexModelsAsync();
+                var modelToRegister = models.First();
+
+                // Add library to site
+                var libraryName = TestCommon.GetPnPSdkTestAssetName("PublishUnPublishModelToList2");
+                var testLibrary = await context.Web.Lists.AddAsync(libraryName, ListTemplateType.DocumentLibrary);
+
+                await context.Web.EnsurePropertiesAsync(p => p.ServerRelativeUrl).ConfigureAwait(false);
+
+                // publish model to library
+                var result = await modelToRegister.PublishModelAsync($"{context.Web.ServerRelativeUrl}/{libraryName}", context.Uri.ToString(), context.Web.ServerRelativeUrl);
+                Assert.IsTrue(result != null);
+                Assert.IsTrue(result.ErrorMessage == null);
+                Assert.IsTrue(result.StatusCode == 201);
+                Assert.IsTrue(result.Succeeded);
+
+                // unpublish model from library
+                var unpublishResult = await modelToRegister.UnPublishModelAsync($"{context.Web.ServerRelativeUrl}/{libraryName}", context.Uri.ToString(), context.Web.ServerRelativeUrl);
+                Assert.IsTrue(unpublishResult != null);
+                Assert.IsTrue(unpublishResult.ErrorMessage == null);
+                Assert.IsTrue(unpublishResult.StatusCode == 200);
+                Assert.IsTrue(unpublishResult.Succeeded);
+
+                // cleanup the library
+                await testLibrary.DeleteAsync();
+            }
+        }
+
     }
 }
