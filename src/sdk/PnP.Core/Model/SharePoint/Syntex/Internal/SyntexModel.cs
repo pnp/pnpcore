@@ -89,45 +89,90 @@ namespace PnP.Core.Model.SharePoint
         #endregion
 
         #region Methods
-        public ISyntexModelPublicationResult PublishModel(IList list, MachineLearningPublicationViewOption viewOption = MachineLearningPublicationViewOption.NewViewAsDefault)
+        public ISyntexModelPublicationResult PublishModel(IList library, MachineLearningPublicationViewOption viewOption = MachineLearningPublicationViewOption.NewViewAsDefault)
         {
-            return PublishModelAsync(list, viewOption).GetAwaiter().GetResult();
+            return PublishModelAsync(library, viewOption).GetAwaiter().GetResult();
         }
 
-        public async Task<ISyntexModelPublicationResult> PublishModelAsync(IList list, MachineLearningPublicationViewOption viewOption = MachineLearningPublicationViewOption.NewViewAsDefault)
+        public async Task<ISyntexModelPublicationResult> PublishModelAsync(IList library, MachineLearningPublicationViewOption viewOption = MachineLearningPublicationViewOption.NewViewAsDefault)
         {
             // Ensure we have the needed data loaded
-            await (list as List).EnsurePropertiesAsync(p => p.RootFolder).ConfigureAwait(false);
-            await list.PnPContext.Web.EnsurePropertiesAsync(p => p.ServerRelativeUrl).ConfigureAwait(false);
+            await (library as List).EnsurePropertiesAsync(p => p.RootFolder).ConfigureAwait(false);
+            await library.PnPContext.Web.EnsurePropertiesAsync(p => p.ServerRelativeUrl).ConfigureAwait(false);
 
-            return ProcessModelPublishResponse(await PublishModelApiCallAsync(UniqueId,
-                                                                      list.PnPContext.Uri.ToString(),
-                                                                      list.PnPContext.Web.ServerRelativeUrl,
-                                                                      list.RootFolder.ServerRelativeUrl,
+            return ProcessModelPublishResponse(await PublishModelApiRequestAsync(UniqueId,
+                                                                      library.PnPContext.Uri.ToString(),
+                                                                      library.PnPContext.Web.ServerRelativeUrl,
+                                                                      library.RootFolder.ServerRelativeUrl,
                                                                       viewOption).ConfigureAwait(false));
         }
 
-        public ISyntexModelPublicationResult PublishModel(string targetLibraryServerRelativeUrl, string targetSiteUrl, string targetWebServerRelativeUrl, MachineLearningPublicationViewOption viewOption = MachineLearningPublicationViewOption.NewViewAsDefault)
+        public List<ISyntexModelPublicationResult> PublishModel(List<IList> libraries, MachineLearningPublicationViewOption viewOption = MachineLearningPublicationViewOption.NewViewAsDefault)
         {
-            return PublishModelAsync(targetLibraryServerRelativeUrl, targetSiteUrl, targetWebServerRelativeUrl, viewOption).GetAwaiter().GetResult();
+            return PublishModelAsync(libraries, viewOption).GetAwaiter().GetResult();
         }
 
-        public async Task<ISyntexModelPublicationResult> PublishModelAsync(string targetLibraryServerRelativeUrl, string targetSiteUrl, string targetWebServerRelativeUrl, MachineLearningPublicationViewOption viewOption = MachineLearningPublicationViewOption.NewViewAsDefault)
+        public async Task<List<ISyntexModelPublicationResult>> PublishModelAsync(List<IList> libraries, MachineLearningPublicationViewOption viewOption = MachineLearningPublicationViewOption.NewViewAsDefault)
         {
-            return ProcessModelPublishResponse(await PublishModelApiCallAsync(UniqueId,
-                                                                      targetSiteUrl,
-                                                                      targetWebServerRelativeUrl,
-                                                                      targetLibraryServerRelativeUrl,
-                                                                      viewOption).ConfigureAwait(false));
+            List<SyntexModelPublication> modelPublications = new List<SyntexModelPublication>();
+            foreach (var library in libraries)
+            {
+                await (library as List).EnsurePropertiesAsync(p => p.RootFolder).ConfigureAwait(false);
+                await library.PnPContext.Web.EnsurePropertiesAsync(p => p.ServerRelativeUrl).ConfigureAwait(false);
+
+                modelPublications.Add(new SyntexModelPublication()
+                {
+                    ModelUniqueId = UniqueId,
+                    TargetSiteUrl = library.PnPContext.Uri.ToString(),
+                    TargetWebServerRelativeUrl = library.PnPContext.Web.ServerRelativeUrl,
+                    TargetLibraryServerRelativeUrl = library.RootFolder.ServerRelativeUrl,
+                    ViewOption = viewOption
+                });
+            }
+            return ProcessModelPublishResponseMultiple(await PublishModelApiRequestAsync(modelPublications).ConfigureAwait(false));
+        }
+
+        public ISyntexModelPublicationResult PublishModel(SyntexModelPublicationOptions publicationOptions)
+        {
+            return PublishModelAsync(publicationOptions).GetAwaiter().GetResult();
+        }
+
+        public async Task<ISyntexModelPublicationResult> PublishModelAsync(SyntexModelPublicationOptions publicationOptions)
+        {
+            return ProcessModelPublishResponse(await PublishModelApiRequestAsync(UniqueId,
+                                                        publicationOptions.TargetSiteUrl,
+                                                        publicationOptions.TargetWebServerRelativeUrl,
+                                                        publicationOptions.TargetLibraryServerRelativeUrl,
+                                                        publicationOptions.ViewOption).ConfigureAwait(false));
+        }
+
+        public async Task<List<ISyntexModelPublicationResult>> PublishModelAsync(List<SyntexModelPublicationOptions> publicationOptions)
+        {
+            List<SyntexModelPublication> modelPublications = new List<SyntexModelPublication>();
+            foreach (var publication in publicationOptions)
+            {
+                modelPublications.Add(new SyntexModelPublication()
+                {
+                    ModelUniqueId = UniqueId,
+                    TargetSiteUrl = publication.TargetSiteUrl,
+                    TargetWebServerRelativeUrl = publication.TargetWebServerRelativeUrl,
+                    TargetLibraryServerRelativeUrl = publication.TargetLibraryServerRelativeUrl,
+                    ViewOption = publication.ViewOption
+                });
+            }
+            return ProcessModelPublishResponseMultiple(await PublishModelApiRequestAsync(modelPublications).ConfigureAwait(false));
+        }
+
+        public List<ISyntexModelPublicationResult> PublishModel(List<SyntexModelPublicationOptions> publicationOptions)
+        {
+            return PublishModelAsync(publicationOptions).GetAwaiter().GetResult();
         }
 
         private static ISyntexModelPublicationResult ProcessModelPublishResponse(ApiCallResponse response)
         {
             if (!string.IsNullOrEmpty(response.Json))
             {
-                var root = JsonDocument.Parse(response.Json).RootElement.GetProperty("d").GetProperty("Details").GetProperty("results");
-
-                var modelPublicationResults = DeserializeModelPublishResult(root.ToString());
+                List<SyntexModelPublicationResult> modelPublicationResults = ParseModelPublishResponse(response);
 
                 var modelPublicationResult = modelPublicationResults.FirstOrDefault();
                 if (modelPublicationResult is ISyntexModelPublicationResult syntexModelPublicationResult)
@@ -139,37 +184,99 @@ namespace PnP.Core.Model.SharePoint
             return null;
         }
 
-        public async Task<ISyntexModelPublicationResult> UnPublishModelAsync(IList list)
+        private static List<ISyntexModelPublicationResult> ProcessModelPublishResponseMultiple(ApiCallResponse response)
+        {
+            if (!string.IsNullOrEmpty(response.Json))
+            {
+                return ParseModelPublishResponse(response).Cast<ISyntexModelPublicationResult>().ToList();
+            }
+
+            return null;
+        }
+
+        private static List<SyntexModelPublicationResult> ParseModelPublishResponse(ApiCallResponse response)
+        {
+            var root = JsonDocument.Parse(response.Json).RootElement.GetProperty("d").GetProperty("Details").GetProperty("results");
+            var modelPublicationResults = DeserializeModelPublishResult(root.ToString());
+            return modelPublicationResults;
+        }
+
+        public async Task<ISyntexModelPublicationResult> UnPublishModelAsync(IList library)
         {
             // Ensure we have the needed data loaded
-            await (list as List).EnsurePropertiesAsync(p => p.RootFolder).ConfigureAwait(false);
-            await list.PnPContext.Web.EnsurePropertiesAsync(p => p.ServerRelativeUrl).ConfigureAwait(false);
+            await (library as List).EnsurePropertiesAsync(p => p.RootFolder).ConfigureAwait(false);
+            await library.PnPContext.Web.EnsurePropertiesAsync(p => p.ServerRelativeUrl).ConfigureAwait(false);
 
-            return ProcessModelPublishResponse(await UnPublishModelApiCallAsync(UniqueId,
-                                                                      list.PnPContext.Uri.ToString(),
-                                                                      list.PnPContext.Web.ServerRelativeUrl,
-                                                                      list.RootFolder.ServerRelativeUrl).ConfigureAwait(false));
+            return ProcessModelPublishResponse(await UnPublishModelApiRequestAsync(UniqueId,
+                                                                      library.PnPContext.Uri.ToString(),
+                                                                      library.PnPContext.Web.ServerRelativeUrl,
+                                                                      library.RootFolder.ServerRelativeUrl).ConfigureAwait(false));
         }
 
-        public ISyntexModelPublicationResult UnPublishModel(IList list)
+        public ISyntexModelPublicationResult UnPublishModel(IList library)
         {
-            return UnPublishModelAsync(list).GetAwaiter().GetResult();
+            return UnPublishModelAsync(library).GetAwaiter().GetResult();
         }
 
-        public async Task<ISyntexModelPublicationResult> UnPublishModelAsync(string targetLibraryServerRelativeUrl, string targetSiteUrl, string targetWebServerRelativeUrl)
+        public async Task<List<ISyntexModelPublicationResult>> UnPublishModelAsync(List<IList> libraries)
         {
-            return ProcessModelPublishResponse(await UnPublishModelApiCallAsync(UniqueId,
-                                                                      targetSiteUrl,
-                                                                      targetWebServerRelativeUrl,
-                                                                      targetLibraryServerRelativeUrl).ConfigureAwait(false));
+            List<SyntexModelPublication> modelPublications = new List<SyntexModelPublication>();
+            foreach (var library in libraries)
+            {
+                await (library as List).EnsurePropertiesAsync(p => p.RootFolder).ConfigureAwait(false);
+                await library.PnPContext.Web.EnsurePropertiesAsync(p => p.ServerRelativeUrl).ConfigureAwait(false);
+
+                modelPublications.Add(new SyntexModelPublication()
+                {
+                    ModelUniqueId = UniqueId,
+                    TargetSiteUrl = library.PnPContext.Uri.ToString(),
+                    TargetWebServerRelativeUrl = library.PnPContext.Web.ServerRelativeUrl,
+                    TargetLibraryServerRelativeUrl = library.RootFolder.ServerRelativeUrl
+                });
+            }
+            return ProcessModelPublishResponseMultiple(await UnPublishModelApiRequestAsync(modelPublications).ConfigureAwait(false));
         }
 
-        public ISyntexModelPublicationResult UnPublishModel(string targetLibraryServerRelativeUrl, string targetSiteUrl, string targetWebServerRelativeUrl)
+        public List<ISyntexModelPublicationResult> UnPublishModel(List<IList> libraries)
         {
-            return UnPublishModelAsync(targetLibraryServerRelativeUrl, targetSiteUrl, targetWebServerRelativeUrl).GetAwaiter().GetResult();
+            return UnPublishModelAsync(libraries).GetAwaiter().GetResult();
         }
 
-        private async Task<ApiCallResponse> UnPublishModelApiCallAsync(Guid uniqueId, string targetSiteUrl, string targetWebServerRelativeUrl,
+        public async Task<ISyntexModelPublicationResult> UnPublishModelAsync(SyntexModelUnPublicationOptions unPublicationOptions)
+        {
+            return ProcessModelPublishResponse(await UnPublishModelApiRequestAsync(UniqueId,
+                                                        unPublicationOptions.TargetSiteUrl,
+                                                        unPublicationOptions.TargetWebServerRelativeUrl,
+                                                        unPublicationOptions.TargetLibraryServerRelativeUrl).ConfigureAwait(false));
+        }
+
+        public ISyntexModelPublicationResult UnPublishModel(SyntexModelUnPublicationOptions unPublicationOptions)
+        {
+            return UnPublishModelAsync(unPublicationOptions).GetAwaiter().GetResult();
+        }
+
+        public async Task<List<ISyntexModelPublicationResult>> UnPublishModelAsync(List<SyntexModelUnPublicationOptions> unPublicationOptions)
+        {
+            List<SyntexModelPublication> modelPublications = new List<SyntexModelPublication>();
+            foreach (var publication in unPublicationOptions)
+            {
+                modelPublications.Add(new SyntexModelPublication()
+                {
+                    ModelUniqueId = UniqueId,
+                    TargetSiteUrl = publication.TargetSiteUrl,
+                    TargetWebServerRelativeUrl = publication.TargetWebServerRelativeUrl,
+                    TargetLibraryServerRelativeUrl = publication.TargetLibraryServerRelativeUrl,
+                });
+            }
+            return ProcessModelPublishResponseMultiple(await UnPublishModelApiRequestAsync(modelPublications).ConfigureAwait(false));
+        }
+
+        public List<ISyntexModelPublicationResult> UnPublishModel(List<SyntexModelUnPublicationOptions> unPublicationOptions)
+        {
+            return UnPublishModelAsync(unPublicationOptions).GetAwaiter().GetResult();
+        }
+
+        private async Task<ApiCallResponse> UnPublishModelApiRequestAsync(Guid uniqueId, string targetSiteUrl, string targetWebServerRelativeUrl,
             string targetLibraryServerRelativeUrl)
         {
             /*
@@ -199,6 +306,21 @@ namespace PnP.Core.Model.SharePoint
                 }
             }.AsExpando();
 
+            return await UnPublishModelApiCallAsync(unPublishInfo).ConfigureAwait(false);
+        }
+
+        private async Task<ApiCallResponse> UnPublishModelApiRequestAsync(List<SyntexModelPublication> modelUnPublications)
+        {
+            var unPublishInfo = new
+            {
+                publications = modelUnPublications
+            }.AsExpando();
+
+            return await UnPublishModelApiCallAsync(unPublishInfo).ConfigureAwait(false);
+        }
+
+        private async Task<ApiCallResponse> UnPublishModelApiCallAsync(System.Dynamic.ExpandoObject unPublishInfo)
+        {
             string body = JsonSerializer.Serialize(unPublishInfo, new JsonSerializerOptions()
             {
                 IgnoreNullValues = true,
@@ -212,7 +334,7 @@ namespace PnP.Core.Model.SharePoint
             return await (ListItem as ListItem).RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
         }
 
-        private async Task<ApiCallResponse> PublishModelApiCallAsync(Guid uniqueId, string targetSiteUrl, string targetWebServerRelativeUrl, 
+        private async Task<ApiCallResponse> PublishModelApiRequestAsync(Guid uniqueId, string targetSiteUrl, string targetWebServerRelativeUrl, 
             string targetLibraryServerRelativeUrl, MachineLearningPublicationViewOption viewOption)
         {
             /*
@@ -255,6 +377,26 @@ namespace PnP.Core.Model.SharePoint
                 Comment = ""
             }.AsExpando();
 
+            return await PublishModelApiCallAsync(registerInfo).ConfigureAwait(false);
+        }
+
+        private async Task<ApiCallResponse> PublishModelApiRequestAsync(List<SyntexModelPublication> modelPublications)
+        {
+            var registerInfo = new
+            {
+                __metadata = new { type = "Microsoft.Office.Server.ContentCenter.SPMachineLearningPublicationsEntityData" },
+                Publications = new
+                {
+                    results = modelPublications
+                },
+                Comment = ""
+            }.AsExpando();
+
+            return await PublishModelApiCallAsync(registerInfo).ConfigureAwait(false);
+        }
+
+        private async Task<ApiCallResponse> PublishModelApiCallAsync(System.Dynamic.ExpandoObject registerInfo)
+        {
             string body = JsonSerializer.Serialize(registerInfo, new JsonSerializerOptions()
             {
                 IgnoreNullValues = true,
@@ -267,6 +409,7 @@ namespace PnP.Core.Model.SharePoint
             var apiCall = new ApiCall("_api/machinelearning/publications", ApiType.SPORest, body);
             return await (ListItem as ListItem).RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
         }
+
 
         private static List<SyntexModelPublicationResult> DeserializeModelPublishResult(string jsonString)
         {
