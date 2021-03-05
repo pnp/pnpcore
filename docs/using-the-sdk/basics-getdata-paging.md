@@ -32,6 +32,19 @@ using (var context = await pnpContextFactory.CreateAsync("SiteToWorkWith"))
 
 As you can see, you can just focus on consuming data, while under the cover PnP Core SDK will retrieve the items for you, page by page, optimizing bandwith and requests. Notice the `await` keyword just before the `foreach` constructor, in order to make the continous query fully asynchronous and highly optimized. This is the suggested pattern for consuming large collections of items. 
 
+If your query needs to apply filters or properties selection on the queried data, you can leverage the `AsAsyncEnumerable` method to keep the query asynchronous and paged with continous implicit paging. Here is an example.
+
+```csharp
+using (var context = await pnpContextFactory.CreateAsync("SiteToWorkWith"))
+{
+    // Efficient, dynamic and asynchronous with whatever LINQ query you like
+    await foreach(var list in context.Web.Lists.Where(l => l.Title == "Documents").AsAsyncEnumerable())
+    {
+        // do something with the list
+    }
+}
+```
+
 If your code is not asynchronous, and as such you cannot rely on the `await` keyword just before the `foreach` constructor, you can still use the synchronous enumeration of items, like it is illustrated in the following sample.
 
 ```csharp
@@ -48,7 +61,7 @@ using (var context = await pnpContextFactory.CreateAsync("SiteToWorkWith"))
 }
 ```
 
-You will still get the whole set of items (message in the previous example) with multiple REST queries page by page. However, the querying of all the items will be synchronous and your code will be blocked while waiting for the whole set of items to be queried. This a sub-optimal scenario, that you should try to avoid, preferring the asynchronous model. 
+You will still get the whole set of items (messages in the previous example) with multiple REST queries page by page. However, the querying of all the items will be synchronous and your code will be blocked while waiting for the whole set of items to be queried. This a sub-optimal scenario, that you should try to avoid, preferring the asynchronous model. 
 
 ## Full load of items
 
@@ -65,10 +78,10 @@ using (var context = await pnpContextFactory.CreateAsync("SiteToWorkWith"))
     // Retrieve the already created channel
     var channelForPaging2 = context.Team.Channels.FirstOrDefault(p => p.DisplayName == "My Channel");
 
-    // Option A: Load the messages, this will load all messages via paged requests
+    // Load the messages, this will load all messages via paged requests
     await channelForPaging2.LoadAsync(p => p.Messages);
 
-    // Option B: 
+    // Consume the in-memory items 
     foreach(var message in channelForPaging2.Messages.AsRequested())
     {
         // do something with the message
@@ -76,7 +89,7 @@ using (var context = await pnpContextFactory.CreateAsync("SiteToWorkWith"))
 }
 ```
 
-The `AsRequested` will browse the already in-memory items. The items will be loaded by the `Load` method.
+The `AsRequested` method will browse the already in-memory items. The items will be loaded just once by the `Load` method.
 
 ## Paging via the Take()/Skip() LINQ methods
 
@@ -94,6 +107,28 @@ using (var context = await pnpContextFactory.CreateAsync("SiteToWorkWith"))
 ```
 
 In the above sample only the `Title` property of the lists is requested, if you do not provide the expression then the list default properties are loaded.
+
+In the following code excerpt you can see a complete logic to manually page items in a collection using `Take`/`Skip` extension methods.
+
+```csharp
+int pageCount = 0;
+int pageSize = 10;
+
+while (true)
+{
+    var page = context.Web.Lists.Skip(pageSize * pageCount).Take(pageSize).ToArray();
+    
+    // Use the current page ...
+
+    pageCount++;
+    if (page.Length < pageSize)
+    {
+        break;
+    }
+}
+```
+
+Notice that the above sample relies on you for requesting the pages. As such, unless you really need to manually control paging, you should avoid this approach and rather use the continous paging with asynchronous code.
 
 ### Starting via the Take() LINQ method with a filter and complex data load expression
 

@@ -90,13 +90,13 @@ Under the cover, there will be exactly the same query model, regardless the synt
 
 ### Querying loaded collections using a foreach or LINQ to Objects
 
-If you don't want to execute an online query targeting the back-end APIs, and you rather want to use data that you already loaded in memory with a previous query, you can use the `AsRequested()` method applied to a pre-loaded collection. As such, you will be able to enumerate the already in-memory data, eventually using LINQ to Objects or any other object browsing technique of your choice. In fact, the `AsRequested()` method casts the collection to an `IEnumerable` and gives you access to the in-memory copy of data.
+If you don't want to execute an online query targeting the back-end APIs, and you rather want to use data that you already loaded in memory executing a previous query, you can use the `AsRequested()` method applied to a pre-loaded collection. As such, you will be able to enumerate the already in-memory data, eventually using LINQ to Objects or any other object browsing technique of your choice. In fact, the `AsRequested()` method casts the collection to an `IEnumerable` and gives you access to the in-memory copy of data.
 
 ```csharp
 // Load all lists in the PnPContext
 await context.Web.LoadAsync(p => p.Lists);
 
-// Query the loaded lists via LINQ to Objects
+// Query the loaded lists via LINQ to Objects, in memory with no additional query on the backend APIs
 var documentLibraries = context.Web.Lists.AsRequested().Where(p => p.TemplateType == ListTemplateType.DocumentLibrary);
 
 // Iterate over the loaded lists
