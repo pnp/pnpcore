@@ -18197,6 +18197,412 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IStorageMetrics.TotalSize
   nameWithType: IStorageMetrics.TotalSize
+- uid: PnP.Core.Model.SharePoint.ISyntexContentCenter
+  name: ISyntexContentCenter
+  href: api/PnP.Core.Model.SharePoint.ISyntexContentCenter.html
+  commentId: T:PnP.Core.Model.SharePoint.ISyntexContentCenter
+  fullName: PnP.Core.Model.SharePoint.ISyntexContentCenter
+  nameWithType: ISyntexContentCenter
+- uid: PnP.Core.Model.SharePoint.ISyntexContentCenter.GetSyntexModels(System.String)
+  name: GetSyntexModels(String)
+  href: api/PnP.Core.Model.SharePoint.ISyntexContentCenter.html#PnP_Core_Model_SharePoint_ISyntexContentCenter_GetSyntexModels_System_String_
+  commentId: M:PnP.Core.Model.SharePoint.ISyntexContentCenter.GetSyntexModels(System.String)
+  fullName: PnP.Core.Model.SharePoint.ISyntexContentCenter.GetSyntexModels(System.String)
+  nameWithType: ISyntexContentCenter.GetSyntexModels(String)
+- uid: PnP.Core.Model.SharePoint.ISyntexContentCenter.GetSyntexModels*
+  name: GetSyntexModels
+  href: api/PnP.Core.Model.SharePoint.ISyntexContentCenter.html#PnP_Core_Model_SharePoint_ISyntexContentCenter_GetSyntexModels_
+  commentId: Overload:PnP.Core.Model.SharePoint.ISyntexContentCenter.GetSyntexModels
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.ISyntexContentCenter.GetSyntexModels
+  nameWithType: ISyntexContentCenter.GetSyntexModels
+- uid: PnP.Core.Model.SharePoint.ISyntexContentCenter.GetSyntexModelsAsync(System.String)
+  name: GetSyntexModelsAsync(String)
+  href: api/PnP.Core.Model.SharePoint.ISyntexContentCenter.html#PnP_Core_Model_SharePoint_ISyntexContentCenter_GetSyntexModelsAsync_System_String_
+  commentId: M:PnP.Core.Model.SharePoint.ISyntexContentCenter.GetSyntexModelsAsync(System.String)
+  fullName: PnP.Core.Model.SharePoint.ISyntexContentCenter.GetSyntexModelsAsync(System.String)
+  nameWithType: ISyntexContentCenter.GetSyntexModelsAsync(String)
+- uid: PnP.Core.Model.SharePoint.ISyntexContentCenter.GetSyntexModelsAsync*
+  name: GetSyntexModelsAsync
+  href: api/PnP.Core.Model.SharePoint.ISyntexContentCenter.html#PnP_Core_Model_SharePoint_ISyntexContentCenter_GetSyntexModelsAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.ISyntexContentCenter.GetSyntexModelsAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.ISyntexContentCenter.GetSyntexModelsAsync
+  nameWithType: ISyntexContentCenter.GetSyntexModelsAsync
+- uid: PnP.Core.Model.SharePoint.ISyntexContentCenter.Web
+  name: Web
+  href: api/PnP.Core.Model.SharePoint.ISyntexContentCenter.html#PnP_Core_Model_SharePoint_ISyntexContentCenter_Web
+  commentId: P:PnP.Core.Model.SharePoint.ISyntexContentCenter.Web
+  fullName: PnP.Core.Model.SharePoint.ISyntexContentCenter.Web
+  nameWithType: ISyntexContentCenter.Web
+- uid: PnP.Core.Model.SharePoint.ISyntexContentCenter.Web*
+  name: Web
+  href: api/PnP.Core.Model.SharePoint.ISyntexContentCenter.html#PnP_Core_Model_SharePoint_ISyntexContentCenter_Web_
+  commentId: Overload:PnP.Core.Model.SharePoint.ISyntexContentCenter.Web
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.ISyntexContentCenter.Web
+  nameWithType: ISyntexContentCenter.Web
+- uid: PnP.Core.Model.SharePoint.ISyntexModel
+  name: ISyntexModel
+  href: api/PnP.Core.Model.SharePoint.ISyntexModel.html
+  commentId: T:PnP.Core.Model.SharePoint.ISyntexModel
+  fullName: PnP.Core.Model.SharePoint.ISyntexModel
+  nameWithType: ISyntexModel
+- uid: PnP.Core.Model.SharePoint.ISyntexModel.Description
+  name: Description
+  href: api/PnP.Core.Model.SharePoint.ISyntexModel.html#PnP_Core_Model_SharePoint_ISyntexModel_Description
+  commentId: P:PnP.Core.Model.SharePoint.ISyntexModel.Description
+  fullName: PnP.Core.Model.SharePoint.ISyntexModel.Description
+  nameWithType: ISyntexModel.Description
+- uid: PnP.Core.Model.SharePoint.ISyntexModel.Description*
+  name: Description
+  href: api/PnP.Core.Model.SharePoint.ISyntexModel.html#PnP_Core_Model_SharePoint_ISyntexModel_Description_
+  commentId: Overload:PnP.Core.Model.SharePoint.ISyntexModel.Description
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.ISyntexModel.Description
+  nameWithType: ISyntexModel.Description
+- uid: PnP.Core.Model.SharePoint.ISyntexModel.Id
+  name: Id
+  href: api/PnP.Core.Model.SharePoint.ISyntexModel.html#PnP_Core_Model_SharePoint_ISyntexModel_Id
+  commentId: P:PnP.Core.Model.SharePoint.ISyntexModel.Id
+  fullName: PnP.Core.Model.SharePoint.ISyntexModel.Id
+  nameWithType: ISyntexModel.Id
+- uid: PnP.Core.Model.SharePoint.ISyntexModel.Id*
+  name: Id
+  href: api/PnP.Core.Model.SharePoint.ISyntexModel.html#PnP_Core_Model_SharePoint_ISyntexModel_Id_
+  commentId: Overload:PnP.Core.Model.SharePoint.ISyntexModel.Id
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.ISyntexModel.Id
+  nameWithType: ISyntexModel.Id
+- uid: PnP.Core.Model.SharePoint.ISyntexModel.ListItem
+  name: ListItem
+  href: api/PnP.Core.Model.SharePoint.ISyntexModel.html#PnP_Core_Model_SharePoint_ISyntexModel_ListItem
+  commentId: P:PnP.Core.Model.SharePoint.ISyntexModel.ListItem
+  fullName: PnP.Core.Model.SharePoint.ISyntexModel.ListItem
+  nameWithType: ISyntexModel.ListItem
+- uid: PnP.Core.Model.SharePoint.ISyntexModel.ListItem*
+  name: ListItem
+  href: api/PnP.Core.Model.SharePoint.ISyntexModel.html#PnP_Core_Model_SharePoint_ISyntexModel_ListItem_
+  commentId: Overload:PnP.Core.Model.SharePoint.ISyntexModel.ListItem
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.ISyntexModel.ListItem
+  nameWithType: ISyntexModel.ListItem
+- uid: PnP.Core.Model.SharePoint.ISyntexModel.ModelLastTrained
+  name: ModelLastTrained
+  href: api/PnP.Core.Model.SharePoint.ISyntexModel.html#PnP_Core_Model_SharePoint_ISyntexModel_ModelLastTrained
+  commentId: P:PnP.Core.Model.SharePoint.ISyntexModel.ModelLastTrained
+  fullName: PnP.Core.Model.SharePoint.ISyntexModel.ModelLastTrained
+  nameWithType: ISyntexModel.ModelLastTrained
+- uid: PnP.Core.Model.SharePoint.ISyntexModel.ModelLastTrained*
+  name: ModelLastTrained
+  href: api/PnP.Core.Model.SharePoint.ISyntexModel.html#PnP_Core_Model_SharePoint_ISyntexModel_ModelLastTrained_
+  commentId: Overload:PnP.Core.Model.SharePoint.ISyntexModel.ModelLastTrained
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.ISyntexModel.ModelLastTrained
+  nameWithType: ISyntexModel.ModelLastTrained
+- uid: PnP.Core.Model.SharePoint.ISyntexModel.Name
+  name: Name
+  href: api/PnP.Core.Model.SharePoint.ISyntexModel.html#PnP_Core_Model_SharePoint_ISyntexModel_Name
+  commentId: P:PnP.Core.Model.SharePoint.ISyntexModel.Name
+  fullName: PnP.Core.Model.SharePoint.ISyntexModel.Name
+  nameWithType: ISyntexModel.Name
+- uid: PnP.Core.Model.SharePoint.ISyntexModel.Name*
+  name: Name
+  href: api/PnP.Core.Model.SharePoint.ISyntexModel.html#PnP_Core_Model_SharePoint_ISyntexModel_Name_
+  commentId: Overload:PnP.Core.Model.SharePoint.ISyntexModel.Name
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.ISyntexModel.Name
+  nameWithType: ISyntexModel.Name
+- uid: PnP.Core.Model.SharePoint.ISyntexModel.PublishModel(PnP.Core.Model.SharePoint.IList,PnP.Core.Model.SharePoint.MachineLearningPublicationViewOption)
+  name: PublishModel(IList, MachineLearningPublicationViewOption)
+  href: api/PnP.Core.Model.SharePoint.ISyntexModel.html#PnP_Core_Model_SharePoint_ISyntexModel_PublishModel_PnP_Core_Model_SharePoint_IList_PnP_Core_Model_SharePoint_MachineLearningPublicationViewOption_
+  commentId: M:PnP.Core.Model.SharePoint.ISyntexModel.PublishModel(PnP.Core.Model.SharePoint.IList,PnP.Core.Model.SharePoint.MachineLearningPublicationViewOption)
+  fullName: PnP.Core.Model.SharePoint.ISyntexModel.PublishModel(PnP.Core.Model.SharePoint.IList, PnP.Core.Model.SharePoint.MachineLearningPublicationViewOption)
+  nameWithType: ISyntexModel.PublishModel(IList, MachineLearningPublicationViewOption)
+- uid: PnP.Core.Model.SharePoint.ISyntexModel.PublishModel(PnP.Core.Model.SharePoint.List{PnP.Core.Model.SharePoint.IList},PnP.Core.Model.SharePoint.MachineLearningPublicationViewOption)
+  name: PublishModel(List<IList>, MachineLearningPublicationViewOption)
+  href: api/PnP.Core.Model.SharePoint.ISyntexModel.html#PnP_Core_Model_SharePoint_ISyntexModel_PublishModel_PnP_Core_Model_SharePoint_List_PnP_Core_Model_SharePoint_IList__PnP_Core_Model_SharePoint_MachineLearningPublicationViewOption_
+  commentId: M:PnP.Core.Model.SharePoint.ISyntexModel.PublishModel(PnP.Core.Model.SharePoint.List{PnP.Core.Model.SharePoint.IList},PnP.Core.Model.SharePoint.MachineLearningPublicationViewOption)
+  name.vb: PublishModel(List(Of IList), MachineLearningPublicationViewOption)
+  fullName: PnP.Core.Model.SharePoint.ISyntexModel.PublishModel(PnP.Core.Model.SharePoint.List<PnP.Core.Model.SharePoint.IList>, PnP.Core.Model.SharePoint.MachineLearningPublicationViewOption)
+  fullName.vb: PnP.Core.Model.SharePoint.ISyntexModel.PublishModel(PnP.Core.Model.SharePoint.List(Of PnP.Core.Model.SharePoint.IList), PnP.Core.Model.SharePoint.MachineLearningPublicationViewOption)
+  nameWithType: ISyntexModel.PublishModel(List<IList>, MachineLearningPublicationViewOption)
+  nameWithType.vb: ISyntexModel.PublishModel(List(Of IList), MachineLearningPublicationViewOption)
+- uid: PnP.Core.Model.SharePoint.ISyntexModel.PublishModel(PnP.Core.Model.SharePoint.List{PnP.Core.Model.SharePoint.SyntexModelPublicationOptions})
+  name: PublishModel(List<SyntexModelPublicationOptions>)
+  href: api/PnP.Core.Model.SharePoint.ISyntexModel.html#PnP_Core_Model_SharePoint_ISyntexModel_PublishModel_PnP_Core_Model_SharePoint_List_PnP_Core_Model_SharePoint_SyntexModelPublicationOptions__
+  commentId: M:PnP.Core.Model.SharePoint.ISyntexModel.PublishModel(PnP.Core.Model.SharePoint.List{PnP.Core.Model.SharePoint.SyntexModelPublicationOptions})
+  name.vb: PublishModel(List(Of SyntexModelPublicationOptions))
+  fullName: PnP.Core.Model.SharePoint.ISyntexModel.PublishModel(PnP.Core.Model.SharePoint.List<PnP.Core.Model.SharePoint.SyntexModelPublicationOptions>)
+  fullName.vb: PnP.Core.Model.SharePoint.ISyntexModel.PublishModel(PnP.Core.Model.SharePoint.List(Of PnP.Core.Model.SharePoint.SyntexModelPublicationOptions))
+  nameWithType: ISyntexModel.PublishModel(List<SyntexModelPublicationOptions>)
+  nameWithType.vb: ISyntexModel.PublishModel(List(Of SyntexModelPublicationOptions))
+- uid: PnP.Core.Model.SharePoint.ISyntexModel.PublishModel(PnP.Core.Model.SharePoint.SyntexModelPublicationOptions)
+  name: PublishModel(SyntexModelPublicationOptions)
+  href: api/PnP.Core.Model.SharePoint.ISyntexModel.html#PnP_Core_Model_SharePoint_ISyntexModel_PublishModel_PnP_Core_Model_SharePoint_SyntexModelPublicationOptions_
+  commentId: M:PnP.Core.Model.SharePoint.ISyntexModel.PublishModel(PnP.Core.Model.SharePoint.SyntexModelPublicationOptions)
+  fullName: PnP.Core.Model.SharePoint.ISyntexModel.PublishModel(PnP.Core.Model.SharePoint.SyntexModelPublicationOptions)
+  nameWithType: ISyntexModel.PublishModel(SyntexModelPublicationOptions)
+- uid: PnP.Core.Model.SharePoint.ISyntexModel.PublishModel*
+  name: PublishModel
+  href: api/PnP.Core.Model.SharePoint.ISyntexModel.html#PnP_Core_Model_SharePoint_ISyntexModel_PublishModel_
+  commentId: Overload:PnP.Core.Model.SharePoint.ISyntexModel.PublishModel
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.ISyntexModel.PublishModel
+  nameWithType: ISyntexModel.PublishModel
+- uid: PnP.Core.Model.SharePoint.ISyntexModel.PublishModelAsync(PnP.Core.Model.SharePoint.IList,PnP.Core.Model.SharePoint.MachineLearningPublicationViewOption)
+  name: PublishModelAsync(IList, MachineLearningPublicationViewOption)
+  href: api/PnP.Core.Model.SharePoint.ISyntexModel.html#PnP_Core_Model_SharePoint_ISyntexModel_PublishModelAsync_PnP_Core_Model_SharePoint_IList_PnP_Core_Model_SharePoint_MachineLearningPublicationViewOption_
+  commentId: M:PnP.Core.Model.SharePoint.ISyntexModel.PublishModelAsync(PnP.Core.Model.SharePoint.IList,PnP.Core.Model.SharePoint.MachineLearningPublicationViewOption)
+  fullName: PnP.Core.Model.SharePoint.ISyntexModel.PublishModelAsync(PnP.Core.Model.SharePoint.IList, PnP.Core.Model.SharePoint.MachineLearningPublicationViewOption)
+  nameWithType: ISyntexModel.PublishModelAsync(IList, MachineLearningPublicationViewOption)
+- uid: PnP.Core.Model.SharePoint.ISyntexModel.PublishModelAsync(PnP.Core.Model.SharePoint.List{PnP.Core.Model.SharePoint.IList},PnP.Core.Model.SharePoint.MachineLearningPublicationViewOption)
+  name: PublishModelAsync(List<IList>, MachineLearningPublicationViewOption)
+  href: api/PnP.Core.Model.SharePoint.ISyntexModel.html#PnP_Core_Model_SharePoint_ISyntexModel_PublishModelAsync_PnP_Core_Model_SharePoint_List_PnP_Core_Model_SharePoint_IList__PnP_Core_Model_SharePoint_MachineLearningPublicationViewOption_
+  commentId: M:PnP.Core.Model.SharePoint.ISyntexModel.PublishModelAsync(PnP.Core.Model.SharePoint.List{PnP.Core.Model.SharePoint.IList},PnP.Core.Model.SharePoint.MachineLearningPublicationViewOption)
+  name.vb: PublishModelAsync(List(Of IList), MachineLearningPublicationViewOption)
+  fullName: PnP.Core.Model.SharePoint.ISyntexModel.PublishModelAsync(PnP.Core.Model.SharePoint.List<PnP.Core.Model.SharePoint.IList>, PnP.Core.Model.SharePoint.MachineLearningPublicationViewOption)
+  fullName.vb: PnP.Core.Model.SharePoint.ISyntexModel.PublishModelAsync(PnP.Core.Model.SharePoint.List(Of PnP.Core.Model.SharePoint.IList), PnP.Core.Model.SharePoint.MachineLearningPublicationViewOption)
+  nameWithType: ISyntexModel.PublishModelAsync(List<IList>, MachineLearningPublicationViewOption)
+  nameWithType.vb: ISyntexModel.PublishModelAsync(List(Of IList), MachineLearningPublicationViewOption)
+- uid: PnP.Core.Model.SharePoint.ISyntexModel.PublishModelAsync(PnP.Core.Model.SharePoint.List{PnP.Core.Model.SharePoint.SyntexModelPublicationOptions})
+  name: PublishModelAsync(List<SyntexModelPublicationOptions>)
+  href: api/PnP.Core.Model.SharePoint.ISyntexModel.html#PnP_Core_Model_SharePoint_ISyntexModel_PublishModelAsync_PnP_Core_Model_SharePoint_List_PnP_Core_Model_SharePoint_SyntexModelPublicationOptions__
+  commentId: M:PnP.Core.Model.SharePoint.ISyntexModel.PublishModelAsync(PnP.Core.Model.SharePoint.List{PnP.Core.Model.SharePoint.SyntexModelPublicationOptions})
+  name.vb: PublishModelAsync(List(Of SyntexModelPublicationOptions))
+  fullName: PnP.Core.Model.SharePoint.ISyntexModel.PublishModelAsync(PnP.Core.Model.SharePoint.List<PnP.Core.Model.SharePoint.SyntexModelPublicationOptions>)
+  fullName.vb: PnP.Core.Model.SharePoint.ISyntexModel.PublishModelAsync(PnP.Core.Model.SharePoint.List(Of PnP.Core.Model.SharePoint.SyntexModelPublicationOptions))
+  nameWithType: ISyntexModel.PublishModelAsync(List<SyntexModelPublicationOptions>)
+  nameWithType.vb: ISyntexModel.PublishModelAsync(List(Of SyntexModelPublicationOptions))
+- uid: PnP.Core.Model.SharePoint.ISyntexModel.PublishModelAsync(PnP.Core.Model.SharePoint.SyntexModelPublicationOptions)
+  name: PublishModelAsync(SyntexModelPublicationOptions)
+  href: api/PnP.Core.Model.SharePoint.ISyntexModel.html#PnP_Core_Model_SharePoint_ISyntexModel_PublishModelAsync_PnP_Core_Model_SharePoint_SyntexModelPublicationOptions_
+  commentId: M:PnP.Core.Model.SharePoint.ISyntexModel.PublishModelAsync(PnP.Core.Model.SharePoint.SyntexModelPublicationOptions)
+  fullName: PnP.Core.Model.SharePoint.ISyntexModel.PublishModelAsync(PnP.Core.Model.SharePoint.SyntexModelPublicationOptions)
+  nameWithType: ISyntexModel.PublishModelAsync(SyntexModelPublicationOptions)
+- uid: PnP.Core.Model.SharePoint.ISyntexModel.PublishModelAsync*
+  name: PublishModelAsync
+  href: api/PnP.Core.Model.SharePoint.ISyntexModel.html#PnP_Core_Model_SharePoint_ISyntexModel_PublishModelAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.ISyntexModel.PublishModelAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.ISyntexModel.PublishModelAsync
+  nameWithType: ISyntexModel.PublishModelAsync
+- uid: PnP.Core.Model.SharePoint.ISyntexModel.UniqueId
+  name: UniqueId
+  href: api/PnP.Core.Model.SharePoint.ISyntexModel.html#PnP_Core_Model_SharePoint_ISyntexModel_UniqueId
+  commentId: P:PnP.Core.Model.SharePoint.ISyntexModel.UniqueId
+  fullName: PnP.Core.Model.SharePoint.ISyntexModel.UniqueId
+  nameWithType: ISyntexModel.UniqueId
+- uid: PnP.Core.Model.SharePoint.ISyntexModel.UniqueId*
+  name: UniqueId
+  href: api/PnP.Core.Model.SharePoint.ISyntexModel.html#PnP_Core_Model_SharePoint_ISyntexModel_UniqueId_
+  commentId: Overload:PnP.Core.Model.SharePoint.ISyntexModel.UniqueId
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.ISyntexModel.UniqueId
+  nameWithType: ISyntexModel.UniqueId
+- uid: PnP.Core.Model.SharePoint.ISyntexModel.UnPublishModel(PnP.Core.Model.SharePoint.IList)
+  name: UnPublishModel(IList)
+  href: api/PnP.Core.Model.SharePoint.ISyntexModel.html#PnP_Core_Model_SharePoint_ISyntexModel_UnPublishModel_PnP_Core_Model_SharePoint_IList_
+  commentId: M:PnP.Core.Model.SharePoint.ISyntexModel.UnPublishModel(PnP.Core.Model.SharePoint.IList)
+  fullName: PnP.Core.Model.SharePoint.ISyntexModel.UnPublishModel(PnP.Core.Model.SharePoint.IList)
+  nameWithType: ISyntexModel.UnPublishModel(IList)
+- uid: PnP.Core.Model.SharePoint.ISyntexModel.UnPublishModel(PnP.Core.Model.SharePoint.List{PnP.Core.Model.SharePoint.IList})
+  name: UnPublishModel(List<IList>)
+  href: api/PnP.Core.Model.SharePoint.ISyntexModel.html#PnP_Core_Model_SharePoint_ISyntexModel_UnPublishModel_PnP_Core_Model_SharePoint_List_PnP_Core_Model_SharePoint_IList__
+  commentId: M:PnP.Core.Model.SharePoint.ISyntexModel.UnPublishModel(PnP.Core.Model.SharePoint.List{PnP.Core.Model.SharePoint.IList})
+  name.vb: UnPublishModel(List(Of IList))
+  fullName: PnP.Core.Model.SharePoint.ISyntexModel.UnPublishModel(PnP.Core.Model.SharePoint.List<PnP.Core.Model.SharePoint.IList>)
+  fullName.vb: PnP.Core.Model.SharePoint.ISyntexModel.UnPublishModel(PnP.Core.Model.SharePoint.List(Of PnP.Core.Model.SharePoint.IList))
+  nameWithType: ISyntexModel.UnPublishModel(List<IList>)
+  nameWithType.vb: ISyntexModel.UnPublishModel(List(Of IList))
+- uid: PnP.Core.Model.SharePoint.ISyntexModel.UnPublishModel(PnP.Core.Model.SharePoint.List{PnP.Core.Model.SharePoint.SyntexModelUnPublicationOptions})
+  name: UnPublishModel(List<SyntexModelUnPublicationOptions>)
+  href: api/PnP.Core.Model.SharePoint.ISyntexModel.html#PnP_Core_Model_SharePoint_ISyntexModel_UnPublishModel_PnP_Core_Model_SharePoint_List_PnP_Core_Model_SharePoint_SyntexModelUnPublicationOptions__
+  commentId: M:PnP.Core.Model.SharePoint.ISyntexModel.UnPublishModel(PnP.Core.Model.SharePoint.List{PnP.Core.Model.SharePoint.SyntexModelUnPublicationOptions})
+  name.vb: UnPublishModel(List(Of SyntexModelUnPublicationOptions))
+  fullName: PnP.Core.Model.SharePoint.ISyntexModel.UnPublishModel(PnP.Core.Model.SharePoint.List<PnP.Core.Model.SharePoint.SyntexModelUnPublicationOptions>)
+  fullName.vb: PnP.Core.Model.SharePoint.ISyntexModel.UnPublishModel(PnP.Core.Model.SharePoint.List(Of PnP.Core.Model.SharePoint.SyntexModelUnPublicationOptions))
+  nameWithType: ISyntexModel.UnPublishModel(List<SyntexModelUnPublicationOptions>)
+  nameWithType.vb: ISyntexModel.UnPublishModel(List(Of SyntexModelUnPublicationOptions))
+- uid: PnP.Core.Model.SharePoint.ISyntexModel.UnPublishModel(PnP.Core.Model.SharePoint.SyntexModelUnPublicationOptions)
+  name: UnPublishModel(SyntexModelUnPublicationOptions)
+  href: api/PnP.Core.Model.SharePoint.ISyntexModel.html#PnP_Core_Model_SharePoint_ISyntexModel_UnPublishModel_PnP_Core_Model_SharePoint_SyntexModelUnPublicationOptions_
+  commentId: M:PnP.Core.Model.SharePoint.ISyntexModel.UnPublishModel(PnP.Core.Model.SharePoint.SyntexModelUnPublicationOptions)
+  fullName: PnP.Core.Model.SharePoint.ISyntexModel.UnPublishModel(PnP.Core.Model.SharePoint.SyntexModelUnPublicationOptions)
+  nameWithType: ISyntexModel.UnPublishModel(SyntexModelUnPublicationOptions)
+- uid: PnP.Core.Model.SharePoint.ISyntexModel.UnPublishModel*
+  name: UnPublishModel
+  href: api/PnP.Core.Model.SharePoint.ISyntexModel.html#PnP_Core_Model_SharePoint_ISyntexModel_UnPublishModel_
+  commentId: Overload:PnP.Core.Model.SharePoint.ISyntexModel.UnPublishModel
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.ISyntexModel.UnPublishModel
+  nameWithType: ISyntexModel.UnPublishModel
+- uid: PnP.Core.Model.SharePoint.ISyntexModel.UnPublishModelAsync(PnP.Core.Model.SharePoint.IList)
+  name: UnPublishModelAsync(IList)
+  href: api/PnP.Core.Model.SharePoint.ISyntexModel.html#PnP_Core_Model_SharePoint_ISyntexModel_UnPublishModelAsync_PnP_Core_Model_SharePoint_IList_
+  commentId: M:PnP.Core.Model.SharePoint.ISyntexModel.UnPublishModelAsync(PnP.Core.Model.SharePoint.IList)
+  fullName: PnP.Core.Model.SharePoint.ISyntexModel.UnPublishModelAsync(PnP.Core.Model.SharePoint.IList)
+  nameWithType: ISyntexModel.UnPublishModelAsync(IList)
+- uid: PnP.Core.Model.SharePoint.ISyntexModel.UnPublishModelAsync(PnP.Core.Model.SharePoint.List{PnP.Core.Model.SharePoint.IList})
+  name: UnPublishModelAsync(List<IList>)
+  href: api/PnP.Core.Model.SharePoint.ISyntexModel.html#PnP_Core_Model_SharePoint_ISyntexModel_UnPublishModelAsync_PnP_Core_Model_SharePoint_List_PnP_Core_Model_SharePoint_IList__
+  commentId: M:PnP.Core.Model.SharePoint.ISyntexModel.UnPublishModelAsync(PnP.Core.Model.SharePoint.List{PnP.Core.Model.SharePoint.IList})
+  name.vb: UnPublishModelAsync(List(Of IList))
+  fullName: PnP.Core.Model.SharePoint.ISyntexModel.UnPublishModelAsync(PnP.Core.Model.SharePoint.List<PnP.Core.Model.SharePoint.IList>)
+  fullName.vb: PnP.Core.Model.SharePoint.ISyntexModel.UnPublishModelAsync(PnP.Core.Model.SharePoint.List(Of PnP.Core.Model.SharePoint.IList))
+  nameWithType: ISyntexModel.UnPublishModelAsync(List<IList>)
+  nameWithType.vb: ISyntexModel.UnPublishModelAsync(List(Of IList))
+- uid: PnP.Core.Model.SharePoint.ISyntexModel.UnPublishModelAsync(PnP.Core.Model.SharePoint.List{PnP.Core.Model.SharePoint.SyntexModelUnPublicationOptions})
+  name: UnPublishModelAsync(List<SyntexModelUnPublicationOptions>)
+  href: api/PnP.Core.Model.SharePoint.ISyntexModel.html#PnP_Core_Model_SharePoint_ISyntexModel_UnPublishModelAsync_PnP_Core_Model_SharePoint_List_PnP_Core_Model_SharePoint_SyntexModelUnPublicationOptions__
+  commentId: M:PnP.Core.Model.SharePoint.ISyntexModel.UnPublishModelAsync(PnP.Core.Model.SharePoint.List{PnP.Core.Model.SharePoint.SyntexModelUnPublicationOptions})
+  name.vb: UnPublishModelAsync(List(Of SyntexModelUnPublicationOptions))
+  fullName: PnP.Core.Model.SharePoint.ISyntexModel.UnPublishModelAsync(PnP.Core.Model.SharePoint.List<PnP.Core.Model.SharePoint.SyntexModelUnPublicationOptions>)
+  fullName.vb: PnP.Core.Model.SharePoint.ISyntexModel.UnPublishModelAsync(PnP.Core.Model.SharePoint.List(Of PnP.Core.Model.SharePoint.SyntexModelUnPublicationOptions))
+  nameWithType: ISyntexModel.UnPublishModelAsync(List<SyntexModelUnPublicationOptions>)
+  nameWithType.vb: ISyntexModel.UnPublishModelAsync(List(Of SyntexModelUnPublicationOptions))
+- uid: PnP.Core.Model.SharePoint.ISyntexModel.UnPublishModelAsync(PnP.Core.Model.SharePoint.SyntexModelUnPublicationOptions)
+  name: UnPublishModelAsync(SyntexModelUnPublicationOptions)
+  href: api/PnP.Core.Model.SharePoint.ISyntexModel.html#PnP_Core_Model_SharePoint_ISyntexModel_UnPublishModelAsync_PnP_Core_Model_SharePoint_SyntexModelUnPublicationOptions_
+  commentId: M:PnP.Core.Model.SharePoint.ISyntexModel.UnPublishModelAsync(PnP.Core.Model.SharePoint.SyntexModelUnPublicationOptions)
+  fullName: PnP.Core.Model.SharePoint.ISyntexModel.UnPublishModelAsync(PnP.Core.Model.SharePoint.SyntexModelUnPublicationOptions)
+  nameWithType: ISyntexModel.UnPublishModelAsync(SyntexModelUnPublicationOptions)
+- uid: PnP.Core.Model.SharePoint.ISyntexModel.UnPublishModelAsync*
+  name: UnPublishModelAsync
+  href: api/PnP.Core.Model.SharePoint.ISyntexModel.html#PnP_Core_Model_SharePoint_ISyntexModel_UnPublishModelAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.ISyntexModel.UnPublishModelAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.ISyntexModel.UnPublishModelAsync
+  nameWithType: ISyntexModel.UnPublishModelAsync
+- uid: PnP.Core.Model.SharePoint.ISyntexModelPublication
+  name: ISyntexModelPublication
+  href: api/PnP.Core.Model.SharePoint.ISyntexModelPublication.html
+  commentId: T:PnP.Core.Model.SharePoint.ISyntexModelPublication
+  fullName: PnP.Core.Model.SharePoint.ISyntexModelPublication
+  nameWithType: ISyntexModelPublication
+- uid: PnP.Core.Model.SharePoint.ISyntexModelPublication.ModelUniqueId
+  name: ModelUniqueId
+  href: api/PnP.Core.Model.SharePoint.ISyntexModelPublication.html#PnP_Core_Model_SharePoint_ISyntexModelPublication_ModelUniqueId
+  commentId: P:PnP.Core.Model.SharePoint.ISyntexModelPublication.ModelUniqueId
+  fullName: PnP.Core.Model.SharePoint.ISyntexModelPublication.ModelUniqueId
+  nameWithType: ISyntexModelPublication.ModelUniqueId
+- uid: PnP.Core.Model.SharePoint.ISyntexModelPublication.ModelUniqueId*
+  name: ModelUniqueId
+  href: api/PnP.Core.Model.SharePoint.ISyntexModelPublication.html#PnP_Core_Model_SharePoint_ISyntexModelPublication_ModelUniqueId_
+  commentId: Overload:PnP.Core.Model.SharePoint.ISyntexModelPublication.ModelUniqueId
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.ISyntexModelPublication.ModelUniqueId
+  nameWithType: ISyntexModelPublication.ModelUniqueId
+- uid: PnP.Core.Model.SharePoint.ISyntexModelPublication.TargetLibraryServerRelativeUrl
+  name: TargetLibraryServerRelativeUrl
+  href: api/PnP.Core.Model.SharePoint.ISyntexModelPublication.html#PnP_Core_Model_SharePoint_ISyntexModelPublication_TargetLibraryServerRelativeUrl
+  commentId: P:PnP.Core.Model.SharePoint.ISyntexModelPublication.TargetLibraryServerRelativeUrl
+  fullName: PnP.Core.Model.SharePoint.ISyntexModelPublication.TargetLibraryServerRelativeUrl
+  nameWithType: ISyntexModelPublication.TargetLibraryServerRelativeUrl
+- uid: PnP.Core.Model.SharePoint.ISyntexModelPublication.TargetLibraryServerRelativeUrl*
+  name: TargetLibraryServerRelativeUrl
+  href: api/PnP.Core.Model.SharePoint.ISyntexModelPublication.html#PnP_Core_Model_SharePoint_ISyntexModelPublication_TargetLibraryServerRelativeUrl_
+  commentId: Overload:PnP.Core.Model.SharePoint.ISyntexModelPublication.TargetLibraryServerRelativeUrl
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.ISyntexModelPublication.TargetLibraryServerRelativeUrl
+  nameWithType: ISyntexModelPublication.TargetLibraryServerRelativeUrl
+- uid: PnP.Core.Model.SharePoint.ISyntexModelPublication.TargetSiteUrl
+  name: TargetSiteUrl
+  href: api/PnP.Core.Model.SharePoint.ISyntexModelPublication.html#PnP_Core_Model_SharePoint_ISyntexModelPublication_TargetSiteUrl
+  commentId: P:PnP.Core.Model.SharePoint.ISyntexModelPublication.TargetSiteUrl
+  fullName: PnP.Core.Model.SharePoint.ISyntexModelPublication.TargetSiteUrl
+  nameWithType: ISyntexModelPublication.TargetSiteUrl
+- uid: PnP.Core.Model.SharePoint.ISyntexModelPublication.TargetSiteUrl*
+  name: TargetSiteUrl
+  href: api/PnP.Core.Model.SharePoint.ISyntexModelPublication.html#PnP_Core_Model_SharePoint_ISyntexModelPublication_TargetSiteUrl_
+  commentId: Overload:PnP.Core.Model.SharePoint.ISyntexModelPublication.TargetSiteUrl
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.ISyntexModelPublication.TargetSiteUrl
+  nameWithType: ISyntexModelPublication.TargetSiteUrl
+- uid: PnP.Core.Model.SharePoint.ISyntexModelPublication.TargetWebServerRelativeUrl
+  name: TargetWebServerRelativeUrl
+  href: api/PnP.Core.Model.SharePoint.ISyntexModelPublication.html#PnP_Core_Model_SharePoint_ISyntexModelPublication_TargetWebServerRelativeUrl
+  commentId: P:PnP.Core.Model.SharePoint.ISyntexModelPublication.TargetWebServerRelativeUrl
+  fullName: PnP.Core.Model.SharePoint.ISyntexModelPublication.TargetWebServerRelativeUrl
+  nameWithType: ISyntexModelPublication.TargetWebServerRelativeUrl
+- uid: PnP.Core.Model.SharePoint.ISyntexModelPublication.TargetWebServerRelativeUrl*
+  name: TargetWebServerRelativeUrl
+  href: api/PnP.Core.Model.SharePoint.ISyntexModelPublication.html#PnP_Core_Model_SharePoint_ISyntexModelPublication_TargetWebServerRelativeUrl_
+  commentId: Overload:PnP.Core.Model.SharePoint.ISyntexModelPublication.TargetWebServerRelativeUrl
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.ISyntexModelPublication.TargetWebServerRelativeUrl
+  nameWithType: ISyntexModelPublication.TargetWebServerRelativeUrl
+- uid: PnP.Core.Model.SharePoint.ISyntexModelPublication.ViewOption
+  name: ViewOption
+  href: api/PnP.Core.Model.SharePoint.ISyntexModelPublication.html#PnP_Core_Model_SharePoint_ISyntexModelPublication_ViewOption
+  commentId: P:PnP.Core.Model.SharePoint.ISyntexModelPublication.ViewOption
+  fullName: PnP.Core.Model.SharePoint.ISyntexModelPublication.ViewOption
+  nameWithType: ISyntexModelPublication.ViewOption
+- uid: PnP.Core.Model.SharePoint.ISyntexModelPublication.ViewOption*
+  name: ViewOption
+  href: api/PnP.Core.Model.SharePoint.ISyntexModelPublication.html#PnP_Core_Model_SharePoint_ISyntexModelPublication_ViewOption_
+  commentId: Overload:PnP.Core.Model.SharePoint.ISyntexModelPublication.ViewOption
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.ISyntexModelPublication.ViewOption
+  nameWithType: ISyntexModelPublication.ViewOption
+- uid: PnP.Core.Model.SharePoint.ISyntexModelPublicationResult
+  name: ISyntexModelPublicationResult
+  href: api/PnP.Core.Model.SharePoint.ISyntexModelPublicationResult.html
+  commentId: T:PnP.Core.Model.SharePoint.ISyntexModelPublicationResult
+  fullName: PnP.Core.Model.SharePoint.ISyntexModelPublicationResult
+  nameWithType: ISyntexModelPublicationResult
+- uid: PnP.Core.Model.SharePoint.ISyntexModelPublicationResult.ErrorMessage
+  name: ErrorMessage
+  href: api/PnP.Core.Model.SharePoint.ISyntexModelPublicationResult.html#PnP_Core_Model_SharePoint_ISyntexModelPublicationResult_ErrorMessage
+  commentId: P:PnP.Core.Model.SharePoint.ISyntexModelPublicationResult.ErrorMessage
+  fullName: PnP.Core.Model.SharePoint.ISyntexModelPublicationResult.ErrorMessage
+  nameWithType: ISyntexModelPublicationResult.ErrorMessage
+- uid: PnP.Core.Model.SharePoint.ISyntexModelPublicationResult.ErrorMessage*
+  name: ErrorMessage
+  href: api/PnP.Core.Model.SharePoint.ISyntexModelPublicationResult.html#PnP_Core_Model_SharePoint_ISyntexModelPublicationResult_ErrorMessage_
+  commentId: Overload:PnP.Core.Model.SharePoint.ISyntexModelPublicationResult.ErrorMessage
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.ISyntexModelPublicationResult.ErrorMessage
+  nameWithType: ISyntexModelPublicationResult.ErrorMessage
+- uid: PnP.Core.Model.SharePoint.ISyntexModelPublicationResult.Publication
+  name: Publication
+  href: api/PnP.Core.Model.SharePoint.ISyntexModelPublicationResult.html#PnP_Core_Model_SharePoint_ISyntexModelPublicationResult_Publication
+  commentId: P:PnP.Core.Model.SharePoint.ISyntexModelPublicationResult.Publication
+  fullName: PnP.Core.Model.SharePoint.ISyntexModelPublicationResult.Publication
+  nameWithType: ISyntexModelPublicationResult.Publication
+- uid: PnP.Core.Model.SharePoint.ISyntexModelPublicationResult.Publication*
+  name: Publication
+  href: api/PnP.Core.Model.SharePoint.ISyntexModelPublicationResult.html#PnP_Core_Model_SharePoint_ISyntexModelPublicationResult_Publication_
+  commentId: Overload:PnP.Core.Model.SharePoint.ISyntexModelPublicationResult.Publication
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.ISyntexModelPublicationResult.Publication
+  nameWithType: ISyntexModelPublicationResult.Publication
+- uid: PnP.Core.Model.SharePoint.ISyntexModelPublicationResult.StatusCode
+  name: StatusCode
+  href: api/PnP.Core.Model.SharePoint.ISyntexModelPublicationResult.html#PnP_Core_Model_SharePoint_ISyntexModelPublicationResult_StatusCode
+  commentId: P:PnP.Core.Model.SharePoint.ISyntexModelPublicationResult.StatusCode
+  fullName: PnP.Core.Model.SharePoint.ISyntexModelPublicationResult.StatusCode
+  nameWithType: ISyntexModelPublicationResult.StatusCode
+- uid: PnP.Core.Model.SharePoint.ISyntexModelPublicationResult.StatusCode*
+  name: StatusCode
+  href: api/PnP.Core.Model.SharePoint.ISyntexModelPublicationResult.html#PnP_Core_Model_SharePoint_ISyntexModelPublicationResult_StatusCode_
+  commentId: Overload:PnP.Core.Model.SharePoint.ISyntexModelPublicationResult.StatusCode
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.ISyntexModelPublicationResult.StatusCode
+  nameWithType: ISyntexModelPublicationResult.StatusCode
+- uid: PnP.Core.Model.SharePoint.ISyntexModelPublicationResult.Succeeded
+  name: Succeeded
+  href: api/PnP.Core.Model.SharePoint.ISyntexModelPublicationResult.html#PnP_Core_Model_SharePoint_ISyntexModelPublicationResult_Succeeded
+  commentId: P:PnP.Core.Model.SharePoint.ISyntexModelPublicationResult.Succeeded
+  fullName: PnP.Core.Model.SharePoint.ISyntexModelPublicationResult.Succeeded
+  nameWithType: ISyntexModelPublicationResult.Succeeded
+- uid: PnP.Core.Model.SharePoint.ISyntexModelPublicationResult.Succeeded*
+  name: Succeeded
+  href: api/PnP.Core.Model.SharePoint.ISyntexModelPublicationResult.html#PnP_Core_Model_SharePoint_ISyntexModelPublicationResult_Succeeded_
+  commentId: Overload:PnP.Core.Model.SharePoint.ISyntexModelPublicationResult.Succeeded
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.ISyntexModelPublicationResult.Succeeded
+  nameWithType: ISyntexModelPublicationResult.Succeeded
 - uid: PnP.Core.Model.SharePoint.ITimeZone
   name: ITimeZone
   href: api/PnP.Core.Model.SharePoint.ITimeZone.html
@@ -19517,6 +19923,32 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IWeb.AssociatedVisitorGroup
   nameWithType: IWeb.AssociatedVisitorGroup
+- uid: PnP.Core.Model.SharePoint.IWeb.AsSyntexContentCenter
+  name: AsSyntexContentCenter()
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_AsSyntexContentCenter
+  commentId: M:PnP.Core.Model.SharePoint.IWeb.AsSyntexContentCenter
+  fullName: PnP.Core.Model.SharePoint.IWeb.AsSyntexContentCenter()
+  nameWithType: IWeb.AsSyntexContentCenter()
+- uid: PnP.Core.Model.SharePoint.IWeb.AsSyntexContentCenter*
+  name: AsSyntexContentCenter
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_AsSyntexContentCenter_
+  commentId: Overload:PnP.Core.Model.SharePoint.IWeb.AsSyntexContentCenter
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IWeb.AsSyntexContentCenter
+  nameWithType: IWeb.AsSyntexContentCenter
+- uid: PnP.Core.Model.SharePoint.IWeb.AsSyntexContentCenterAsync
+  name: AsSyntexContentCenterAsync()
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_AsSyntexContentCenterAsync
+  commentId: M:PnP.Core.Model.SharePoint.IWeb.AsSyntexContentCenterAsync
+  fullName: PnP.Core.Model.SharePoint.IWeb.AsSyntexContentCenterAsync()
+  nameWithType: IWeb.AsSyntexContentCenterAsync()
+- uid: PnP.Core.Model.SharePoint.IWeb.AsSyntexContentCenterAsync*
+  name: AsSyntexContentCenterAsync
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_AsSyntexContentCenterAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.IWeb.AsSyntexContentCenterAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IWeb.AsSyntexContentCenterAsync
+  nameWithType: IWeb.AsSyntexContentCenterAsync
 - uid: PnP.Core.Model.SharePoint.IWeb.AvailableContentTypes
   name: AvailableContentTypes
   href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_AvailableContentTypes
@@ -20468,6 +20900,32 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IWeb.IsRevertHomepageLinkHidden
   nameWithType: IWeb.IsRevertHomepageLinkHidden
+- uid: PnP.Core.Model.SharePoint.IWeb.IsSyntexContentCenter
+  name: IsSyntexContentCenter()
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_IsSyntexContentCenter
+  commentId: M:PnP.Core.Model.SharePoint.IWeb.IsSyntexContentCenter
+  fullName: PnP.Core.Model.SharePoint.IWeb.IsSyntexContentCenter()
+  nameWithType: IWeb.IsSyntexContentCenter()
+- uid: PnP.Core.Model.SharePoint.IWeb.IsSyntexContentCenter*
+  name: IsSyntexContentCenter
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_IsSyntexContentCenter_
+  commentId: Overload:PnP.Core.Model.SharePoint.IWeb.IsSyntexContentCenter
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IWeb.IsSyntexContentCenter
+  nameWithType: IWeb.IsSyntexContentCenter
+- uid: PnP.Core.Model.SharePoint.IWeb.IsSyntexContentCenterAsync
+  name: IsSyntexContentCenterAsync()
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_IsSyntexContentCenterAsync
+  commentId: M:PnP.Core.Model.SharePoint.IWeb.IsSyntexContentCenterAsync
+  fullName: PnP.Core.Model.SharePoint.IWeb.IsSyntexContentCenterAsync()
+  nameWithType: IWeb.IsSyntexContentCenterAsync()
+- uid: PnP.Core.Model.SharePoint.IWeb.IsSyntexContentCenterAsync*
+  name: IsSyntexContentCenterAsync
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_IsSyntexContentCenterAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.IWeb.IsSyntexContentCenterAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IWeb.IsSyntexContentCenterAsync
+  nameWithType: IWeb.IsSyntexContentCenterAsync
 - uid: PnP.Core.Model.SharePoint.IWeb.Language
   name: Language
   href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_Language
@@ -21903,6 +22361,30 @@ references:
   commentId: F:PnP.Core.Model.SharePoint.LogoAlignment.Right
   fullName: PnP.Core.Model.SharePoint.LogoAlignment.Right
   nameWithType: LogoAlignment.Right
+- uid: PnP.Core.Model.SharePoint.MachineLearningPublicationViewOption
+  name: MachineLearningPublicationViewOption
+  href: api/PnP.Core.Model.SharePoint.MachineLearningPublicationViewOption.html
+  commentId: T:PnP.Core.Model.SharePoint.MachineLearningPublicationViewOption
+  fullName: PnP.Core.Model.SharePoint.MachineLearningPublicationViewOption
+  nameWithType: MachineLearningPublicationViewOption
+- uid: PnP.Core.Model.SharePoint.MachineLearningPublicationViewOption.NewView
+  name: NewView
+  href: api/PnP.Core.Model.SharePoint.MachineLearningPublicationViewOption.html#PnP_Core_Model_SharePoint_MachineLearningPublicationViewOption_NewView
+  commentId: F:PnP.Core.Model.SharePoint.MachineLearningPublicationViewOption.NewView
+  fullName: PnP.Core.Model.SharePoint.MachineLearningPublicationViewOption.NewView
+  nameWithType: MachineLearningPublicationViewOption.NewView
+- uid: PnP.Core.Model.SharePoint.MachineLearningPublicationViewOption.NewViewAsDefault
+  name: NewViewAsDefault
+  href: api/PnP.Core.Model.SharePoint.MachineLearningPublicationViewOption.html#PnP_Core_Model_SharePoint_MachineLearningPublicationViewOption_NewViewAsDefault
+  commentId: F:PnP.Core.Model.SharePoint.MachineLearningPublicationViewOption.NewViewAsDefault
+  fullName: PnP.Core.Model.SharePoint.MachineLearningPublicationViewOption.NewViewAsDefault
+  nameWithType: MachineLearningPublicationViewOption.NewViewAsDefault
+- uid: PnP.Core.Model.SharePoint.MachineLearningPublicationViewOption.NoNewView
+  name: NoNewView
+  href: api/PnP.Core.Model.SharePoint.MachineLearningPublicationViewOption.html#PnP_Core_Model_SharePoint_MachineLearningPublicationViewOption_NoNewView
+  commentId: F:PnP.Core.Model.SharePoint.MachineLearningPublicationViewOption.NoNewView
+  fullName: PnP.Core.Model.SharePoint.MachineLearningPublicationViewOption.NoNewView
+  nameWithType: MachineLearningPublicationViewOption.NoNewView
 - uid: PnP.Core.Model.SharePoint.MoveCopyOptions
   name: MoveCopyOptions
   href: api/PnP.Core.Model.SharePoint.MoveCopyOptions.html
@@ -23074,6 +23556,96 @@ references:
   commentId: F:PnP.Core.Model.SharePoint.SPEffectiveInformationRightsManagementSettingsSource.Rule
   fullName: PnP.Core.Model.SharePoint.SPEffectiveInformationRightsManagementSettingsSource.Rule
   nameWithType: SPEffectiveInformationRightsManagementSettingsSource.Rule
+- uid: PnP.Core.Model.SharePoint.SyntexModelPublicationOptions
+  name: SyntexModelPublicationOptions
+  href: api/PnP.Core.Model.SharePoint.SyntexModelPublicationOptions.html
+  commentId: T:PnP.Core.Model.SharePoint.SyntexModelPublicationOptions
+  fullName: PnP.Core.Model.SharePoint.SyntexModelPublicationOptions
+  nameWithType: SyntexModelPublicationOptions
+- uid: PnP.Core.Model.SharePoint.SyntexModelPublicationOptions.#ctor
+  name: SyntexModelPublicationOptions()
+  href: api/PnP.Core.Model.SharePoint.SyntexModelPublicationOptions.html#PnP_Core_Model_SharePoint_SyntexModelPublicationOptions__ctor
+  commentId: M:PnP.Core.Model.SharePoint.SyntexModelPublicationOptions.#ctor
+  fullName: PnP.Core.Model.SharePoint.SyntexModelPublicationOptions.SyntexModelPublicationOptions()
+  nameWithType: SyntexModelPublicationOptions.SyntexModelPublicationOptions()
+- uid: PnP.Core.Model.SharePoint.SyntexModelPublicationOptions.#ctor*
+  name: SyntexModelPublicationOptions
+  href: api/PnP.Core.Model.SharePoint.SyntexModelPublicationOptions.html#PnP_Core_Model_SharePoint_SyntexModelPublicationOptions__ctor_
+  commentId: Overload:PnP.Core.Model.SharePoint.SyntexModelPublicationOptions.#ctor
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.SyntexModelPublicationOptions.SyntexModelPublicationOptions
+  nameWithType: SyntexModelPublicationOptions.SyntexModelPublicationOptions
+- uid: PnP.Core.Model.SharePoint.SyntexModelPublicationOptions.ViewOption
+  name: ViewOption
+  href: api/PnP.Core.Model.SharePoint.SyntexModelPublicationOptions.html#PnP_Core_Model_SharePoint_SyntexModelPublicationOptions_ViewOption
+  commentId: P:PnP.Core.Model.SharePoint.SyntexModelPublicationOptions.ViewOption
+  fullName: PnP.Core.Model.SharePoint.SyntexModelPublicationOptions.ViewOption
+  nameWithType: SyntexModelPublicationOptions.ViewOption
+- uid: PnP.Core.Model.SharePoint.SyntexModelPublicationOptions.ViewOption*
+  name: ViewOption
+  href: api/PnP.Core.Model.SharePoint.SyntexModelPublicationOptions.html#PnP_Core_Model_SharePoint_SyntexModelPublicationOptions_ViewOption_
+  commentId: Overload:PnP.Core.Model.SharePoint.SyntexModelPublicationOptions.ViewOption
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.SyntexModelPublicationOptions.ViewOption
+  nameWithType: SyntexModelPublicationOptions.ViewOption
+- uid: PnP.Core.Model.SharePoint.SyntexModelUnPublicationOptions
+  name: SyntexModelUnPublicationOptions
+  href: api/PnP.Core.Model.SharePoint.SyntexModelUnPublicationOptions.html
+  commentId: T:PnP.Core.Model.SharePoint.SyntexModelUnPublicationOptions
+  fullName: PnP.Core.Model.SharePoint.SyntexModelUnPublicationOptions
+  nameWithType: SyntexModelUnPublicationOptions
+- uid: PnP.Core.Model.SharePoint.SyntexModelUnPublicationOptions.#ctor
+  name: SyntexModelUnPublicationOptions()
+  href: api/PnP.Core.Model.SharePoint.SyntexModelUnPublicationOptions.html#PnP_Core_Model_SharePoint_SyntexModelUnPublicationOptions__ctor
+  commentId: M:PnP.Core.Model.SharePoint.SyntexModelUnPublicationOptions.#ctor
+  fullName: PnP.Core.Model.SharePoint.SyntexModelUnPublicationOptions.SyntexModelUnPublicationOptions()
+  nameWithType: SyntexModelUnPublicationOptions.SyntexModelUnPublicationOptions()
+- uid: PnP.Core.Model.SharePoint.SyntexModelUnPublicationOptions.#ctor*
+  name: SyntexModelUnPublicationOptions
+  href: api/PnP.Core.Model.SharePoint.SyntexModelUnPublicationOptions.html#PnP_Core_Model_SharePoint_SyntexModelUnPublicationOptions__ctor_
+  commentId: Overload:PnP.Core.Model.SharePoint.SyntexModelUnPublicationOptions.#ctor
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.SyntexModelUnPublicationOptions.SyntexModelUnPublicationOptions
+  nameWithType: SyntexModelUnPublicationOptions.SyntexModelUnPublicationOptions
+- uid: PnP.Core.Model.SharePoint.SyntexModelUnPublicationOptions.TargetLibraryServerRelativeUrl
+  name: TargetLibraryServerRelativeUrl
+  href: api/PnP.Core.Model.SharePoint.SyntexModelUnPublicationOptions.html#PnP_Core_Model_SharePoint_SyntexModelUnPublicationOptions_TargetLibraryServerRelativeUrl
+  commentId: P:PnP.Core.Model.SharePoint.SyntexModelUnPublicationOptions.TargetLibraryServerRelativeUrl
+  fullName: PnP.Core.Model.SharePoint.SyntexModelUnPublicationOptions.TargetLibraryServerRelativeUrl
+  nameWithType: SyntexModelUnPublicationOptions.TargetLibraryServerRelativeUrl
+- uid: PnP.Core.Model.SharePoint.SyntexModelUnPublicationOptions.TargetLibraryServerRelativeUrl*
+  name: TargetLibraryServerRelativeUrl
+  href: api/PnP.Core.Model.SharePoint.SyntexModelUnPublicationOptions.html#PnP_Core_Model_SharePoint_SyntexModelUnPublicationOptions_TargetLibraryServerRelativeUrl_
+  commentId: Overload:PnP.Core.Model.SharePoint.SyntexModelUnPublicationOptions.TargetLibraryServerRelativeUrl
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.SyntexModelUnPublicationOptions.TargetLibraryServerRelativeUrl
+  nameWithType: SyntexModelUnPublicationOptions.TargetLibraryServerRelativeUrl
+- uid: PnP.Core.Model.SharePoint.SyntexModelUnPublicationOptions.TargetSiteUrl
+  name: TargetSiteUrl
+  href: api/PnP.Core.Model.SharePoint.SyntexModelUnPublicationOptions.html#PnP_Core_Model_SharePoint_SyntexModelUnPublicationOptions_TargetSiteUrl
+  commentId: P:PnP.Core.Model.SharePoint.SyntexModelUnPublicationOptions.TargetSiteUrl
+  fullName: PnP.Core.Model.SharePoint.SyntexModelUnPublicationOptions.TargetSiteUrl
+  nameWithType: SyntexModelUnPublicationOptions.TargetSiteUrl
+- uid: PnP.Core.Model.SharePoint.SyntexModelUnPublicationOptions.TargetSiteUrl*
+  name: TargetSiteUrl
+  href: api/PnP.Core.Model.SharePoint.SyntexModelUnPublicationOptions.html#PnP_Core_Model_SharePoint_SyntexModelUnPublicationOptions_TargetSiteUrl_
+  commentId: Overload:PnP.Core.Model.SharePoint.SyntexModelUnPublicationOptions.TargetSiteUrl
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.SyntexModelUnPublicationOptions.TargetSiteUrl
+  nameWithType: SyntexModelUnPublicationOptions.TargetSiteUrl
+- uid: PnP.Core.Model.SharePoint.SyntexModelUnPublicationOptions.TargetWebServerRelativeUrl
+  name: TargetWebServerRelativeUrl
+  href: api/PnP.Core.Model.SharePoint.SyntexModelUnPublicationOptions.html#PnP_Core_Model_SharePoint_SyntexModelUnPublicationOptions_TargetWebServerRelativeUrl
+  commentId: P:PnP.Core.Model.SharePoint.SyntexModelUnPublicationOptions.TargetWebServerRelativeUrl
+  fullName: PnP.Core.Model.SharePoint.SyntexModelUnPublicationOptions.TargetWebServerRelativeUrl
+  nameWithType: SyntexModelUnPublicationOptions.TargetWebServerRelativeUrl
+- uid: PnP.Core.Model.SharePoint.SyntexModelUnPublicationOptions.TargetWebServerRelativeUrl*
+  name: TargetWebServerRelativeUrl
+  href: api/PnP.Core.Model.SharePoint.SyntexModelUnPublicationOptions.html#PnP_Core_Model_SharePoint_SyntexModelUnPublicationOptions_TargetWebServerRelativeUrl_
+  commentId: Overload:PnP.Core.Model.SharePoint.SyntexModelUnPublicationOptions.TargetWebServerRelativeUrl
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.SyntexModelUnPublicationOptions.TargetWebServerRelativeUrl
+  nameWithType: SyntexModelUnPublicationOptions.TargetWebServerRelativeUrl
 - uid: PnP.Core.Model.SharePoint.TemplateFileType
   name: TemplateFileType
   href: api/PnP.Core.Model.SharePoint.TemplateFileType.html
