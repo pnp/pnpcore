@@ -114,6 +114,14 @@ namespace PnP.Core.Services
 
             oDataQuery.AddODataToUrlParameters(urlParameters, ODataTargetPlatform.SPORest);
 
+            // REST apis do not apply a default top
+            // In order to not receive all items in one request, we apply a default top
+            // We don't change the original ODataQuery to avoid side effects
+            if (useLinqGet && !urlParameters.ContainsKey(ODataQuery<TModel>.TopKey))
+            {
+                urlParameters.Add(ODataQuery<TModel>.TopKey, model.PnPContext.GlobalOptions.HttpSharePointRestDefaultPageSize.ToString());
+            }
+
             sb.Clear();
 
             // Build the API call

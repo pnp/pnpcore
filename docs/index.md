@@ -17,7 +17,7 @@ This is a community effort, hence we cannot guarantee below roadmap but rest ass
 - Beta 1: November 2020 (shipped)
 - Beta 2: January 2021 (shipped)
 - Beta 3: February 2021 (shipped)
-- V1: February 2021
+- V1: March 2021
 
 ## Getting started using this library
 

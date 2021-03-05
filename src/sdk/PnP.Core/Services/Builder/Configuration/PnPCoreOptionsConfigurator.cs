@@ -56,6 +56,7 @@ namespace PnP.Core.Services.Builder.Configuration
                     options.HttpSharePointRestMaxRetries = pnpCoreOptions.Value.HttpRequests.SharePointRest.MaxRetries;
                     options.HttpSharePointRestUseIncrementalDelay = pnpCoreOptions.Value.HttpRequests.SharePointRest.UseIncrementalDelay;
                     options.HttpSharePointRestUseRetryAfterHeader = pnpCoreOptions.Value.HttpRequests.SharePointRest.UseRetryAfterHeader;
+                    options.HttpSharePointRestDefaultPageSize = pnpCoreOptions.Value.HttpRequests.SharePointRest.DefaultPageSize;
                 }
                 options.HttpUserAgent = pnpCoreOptions.Value.HttpRequests.UserAgent;
                 options.HttpTimeout = pnpCoreOptions.Value.HttpRequests.Timeout;

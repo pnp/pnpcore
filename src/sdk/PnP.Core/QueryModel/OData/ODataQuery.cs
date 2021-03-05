@@ -23,6 +23,11 @@ namespace PnP.Core.QueryModel
         private const string EncodedSpace = "%20";
         private readonly CultureInfo FormatProvider = CultureInfo.InvariantCulture;
 
+        internal const string TopKey = "$top";
+        internal const string FilterKey = "$filter";
+        internal const string SkipKey = "$skip";
+        internal const string OrderByKey = "$orderby";
+
         /// <summary>
         /// Property corresponding to the $top OData query option
         /// </summary>
@@ -115,27 +120,27 @@ namespace PnP.Core.QueryModel
             // Process the $filter items
             if (Filters.Count > 0)
             {
-                urlParameters.Add("$filter", GetFilters(targetPlatform, false));
+                urlParameters.Add(FilterKey, GetFilters(targetPlatform, false));
             }
 
             // Process any $top restriction if and only if the target platform is not Graph
             // or if the target platform is Graph, but there are no filters
             if (Top.HasValue && (Filters.Count == 0 || targetPlatform != ODataTargetPlatform.Graph))
             {
-                urlParameters.Add("$top", Top.ToString());
+                urlParameters.Add(TopKey, Top.ToString());
             }
 
             // Process any $skip restriction if and only if the target platform is not Graph
             // or if the target platform is Graph, but there are no filters
             if (Skip.HasValue && (Filters.Count == 0 || targetPlatform != ODataTargetPlatform.Graph))
             {
-                urlParameters.Add("$skip", Skip.ToString());
+                urlParameters.Add(SkipKey, Skip.ToString());
             }
 
             // Process the $orderby items
             if (OrderBy.Count > 0)
             {
-                urlParameters.Add("$orderby", GetOrderBy(targetPlatform, false));
+                urlParameters.Add(OrderByKey, GetOrderBy(targetPlatform, false));
             }
         }
 

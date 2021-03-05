@@ -3,7 +3,7 @@
     /// <summary>
     /// Paged data retrieval can be done using the methods provided via this interface
     /// </summary>
-    public interface ISupportPaging
+    internal interface ISupportPaging
     {
         /// <summary>
         /// Determines whether paging is possible
