@@ -1,4 +1,4 @@
---batchresponse_7a16f7c6-d983-4fce-81ef-bd0181675500
+--batchresponse_17051653-43e2-4c0c-8cb1-ad10dadd4131
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
@@ -6,4 +6,4 @@ HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
 {"d":{"ValidateUpdateListItem":{"__metadata":{"type":"Collection(SP.ListItemFormUpdateValue)"},"results":[{"ErrorCode":0,"ErrorMessage":null,"FieldName":"Text1","FieldValue":"","HasException":false,"ItemId":1},{"ErrorCode":0,"ErrorMessage":null,"FieldName":"MultilineText1","FieldValue":"","HasException":false,"ItemId":1},{"ErrorCode":0,"ErrorMessage":null,"FieldName":"Number1","FieldValue":"0","HasException":false,"ItemId":1},{"ErrorCode":0,"ErrorMessage":null,"FieldName":"DateTime1","FieldValue":null,"HasException":false,"ItemId":1},{"ErrorCode":0,"ErrorMessage":null,"FieldName":"Currency1","FieldValue":"0","HasException":false,"ItemId":1},{"ErrorCode":0,"ErrorMessage":null,"FieldName":"ChoiceSingle1","FieldValue":"","HasException":false,"ItemId":1},{"ErrorCode":0,"ErrorMessage":null,"FieldName":"ChoiceMulti1","FieldValue":"","HasException":false,"ItemId":1}]}}}
---batchresponse_7a16f7c6-d983-4fce-81ef-bd0181675500--
+--batchresponse_17051653-43e2-4c0c-8cb1-ad10dadd4131--

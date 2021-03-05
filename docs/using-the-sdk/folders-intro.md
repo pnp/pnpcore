@@ -33,7 +33,7 @@ IFolder folder = (await context.Web.GetAsync(p => p.RootFolder)).RootFolder;
 
 // Get folder collection of a web and pick the SiteAssets folder
 await context.Web.LoadAsync(p => p.Folders);
-var folder = context.Web.Folders.FirstOrDefault(p=>p.Name == "SiteAssets");
+var folder = context.Web.Folders.AsRequested().FirstOrDefault(p=>p.Name == "SiteAssets");
 ```
 
 ### The Folder property bag

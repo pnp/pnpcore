@@ -1,4 +1,4 @@
---batchresponse_60ed2975-5ff2-47db-b7f2-63be71fa3438
+--batchresponse_899a266c-033a-4a65-9659-cdc7699289d5
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
@@ -6,4 +6,4 @@ HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
 {"d":{"ValidateUpdateListItem":{"__metadata":{"type":"Collection(SP.ListItemFormUpdateValue)"},"results":[{"ErrorCode":0,"ErrorMessage":null,"FieldName":"URLField1","FieldValue":"","HasException":false,"ItemId":1},{"ErrorCode":0,"ErrorMessage":null,"FieldName":"URLField2","FieldValue":"","HasException":false,"ItemId":1},{"ErrorCode":0,"ErrorMessage":null,"FieldName":"UserSingleField1","FieldValue":"[]","HasException":false,"ItemId":1},{"ErrorCode":0,"ErrorMessage":null,"FieldName":"UserMultiField1","FieldValue":"[]","HasException":false,"ItemId":1},{"ErrorCode":0,"ErrorMessage":null,"FieldName":"TaxonomyField1","FieldValue":null,"HasException":false,"ItemId":1},{"ErrorCode":0,"ErrorMessage":null,"FieldName":"TaxonomyMultiField1","FieldValue":"","HasException":false,"ItemId":1},{"ErrorCode":0,"ErrorMessage":null,"FieldName":"LookupSingleField1","FieldValue":null,"HasException":false,"ItemId":1},{"ErrorCode":0,"ErrorMessage":null,"FieldName":"LookupMultiField1","FieldValue":"","HasException":false,"ItemId":1}]}}}
---batchresponse_60ed2975-5ff2-47db-b7f2-63be71fa3438--
+--batchresponse_899a266c-033a-4a65-9659-cdc7699289d5--

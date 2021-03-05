@@ -78,7 +78,7 @@ namespace PnP.Core.Test.Teams
                 var team = await context.Team.GetAsync(o => o.Channels);
                 Assert.IsTrue(team.Channels.Length > 0);
 
-                var channel = team.Channels.FirstOrDefault(i => i.DisplayName == "General");
+                var channel = team.Channels.AsRequested().FirstOrDefault(i => i.DisplayName == "General");
                 Assert.IsNotNull(channel);
 
                 await channel.LoadAsync(o => o.Tabs);
@@ -103,7 +103,7 @@ namespace PnP.Core.Test.Teams
                 var team = context.Team.Get(o => o.Channels);
                 Assert.IsTrue(team.Channels.Length > 0);
 
-                var channel = team.Channels.FirstOrDefault(i => i.DisplayName == "General");
+                var channel = team.Channels.AsRequested().FirstOrDefault(i => i.DisplayName == "General");
                 Assert.IsNotNull(channel);
 
                 channel.Load(o => o.Tabs);
@@ -129,7 +129,7 @@ namespace PnP.Core.Test.Teams
                 context.Execute();
                 Assert.IsTrue(team.Result.Channels.Length > 0);
 
-                var channelQuery = team.Result.Channels.FirstOrDefault(i => i.DisplayName == "General");
+                var channelQuery = team.Result.Channels.AsRequested().FirstOrDefault(i => i.DisplayName == "General");
                 Assert.IsNotNull(channelQuery);
 
                 var channel = channelQuery.GetBatch(o => o.Tabs);
@@ -188,7 +188,7 @@ namespace PnP.Core.Test.Teams
                 var team = context.Team.GetBatch(batch, o => o.Channels);
                 context.Execute(batch);
 
-                var channelQuery = team.Result.Channels.FirstOrDefault(i => i.DisplayName == "General");
+                var channelQuery = team.Result.Channels.AsRequested().FirstOrDefault(i => i.DisplayName == "General");
                 var channel = channelQuery.GetBatch(batch, o => o.Tabs);
 
                 context.Execute(batch);
@@ -219,7 +219,7 @@ namespace PnP.Core.Test.Teams
                 var team = await context.Team.GetAsync(o => o.Channels);
                 Assert.IsTrue(team.Channels.Length > 0);
 
-                var channel = team.Channels.FirstOrDefault(i => i.DisplayName == "General");
+                var channel = team.Channels.AsRequested().FirstOrDefault(i => i.DisplayName == "General");
                 Assert.IsNotNull(channel);
 
                 channel = await channel.GetAsync(o => o.Tabs);
@@ -244,7 +244,7 @@ namespace PnP.Core.Test.Teams
                 var team = context.Team.Get(o => o.Channels);
                 Assert.IsTrue(team.Channels.Length > 0);
 
-                var channel = team.Channels.FirstOrDefault(i => i.DisplayName == "General");
+                var channel = team.Channels.AsRequested().FirstOrDefault(i => i.DisplayName == "General");
                 Assert.IsNotNull(channel);
 
                 channel = channel.Get(o => o.Tabs);
@@ -270,7 +270,7 @@ namespace PnP.Core.Test.Teams
                 context.Execute();
                 Assert.IsTrue(team.Result.Channels.Length > 0);
 
-                var channelQuery = team.Result.Channels.FirstOrDefault(i => i.DisplayName == "General");
+                var channelQuery = team.Result.Channels.AsRequested().FirstOrDefault(i => i.DisplayName == "General");
                 Assert.IsNotNull(channelQuery);
 
                 var channel = channelQuery.GetBatch(o => o.Tabs);
@@ -300,7 +300,7 @@ namespace PnP.Core.Test.Teams
                 context.Execute(batch);
                 Assert.IsTrue(team.Result.Channels.Length > 0);
 
-                var firstChannel = team.Result.Channels.FirstOrDefault(i => i.DisplayName == "General");
+                var firstChannel = team.Result.Channels.AsRequested().FirstOrDefault(i => i.DisplayName == "General");
                 Assert.IsNotNull(firstChannel);
 
                 var channel = firstChannel.GetBatch(batch, o => o.Tabs);
@@ -329,7 +329,7 @@ namespace PnP.Core.Test.Teams
                 var team = context.Team.Get(o => o.Channels);
                 Assert.IsTrue(team.Channels.Length > 0);
 
-                var channel = team.Channels.FirstOrDefault(i => i.DisplayName == "General");
+                var channel = team.Channels.AsRequested().FirstOrDefault(i => i.DisplayName == "General");
                 Assert.IsNotNull(channel);
                 
                 channel = channel.Get(o => o.Tabs);
@@ -349,7 +349,7 @@ namespace PnP.Core.Test.Teams
                 var team = context.Team.Get(o => o.Channels);
                 Assert.IsTrue(team.Channels.Length > 0);
 
-                var channel = team.Channels.FirstOrDefault(i => i.DisplayName == "General");
+                var channel = team.Channels.AsRequested().FirstOrDefault(i => i.DisplayName == "General");
                 Assert.IsNotNull(channel);
 
                 channel = channel.Get(o => o.Tabs);
@@ -369,7 +369,7 @@ namespace PnP.Core.Test.Teams
                 var team = context.Team.Get(o => o.Channels);
                 Assert.IsTrue(team.Channels.Length > 0);
 
-                var channel = team.Channels.FirstOrDefault(i => i.DisplayName == "General");
+                var channel = team.Channels.AsRequested().FirstOrDefault(i => i.DisplayName == "General");
                 Assert.IsNotNull(channel);
 
                 channel = channel.Get(o => o.Tabs);
@@ -389,7 +389,7 @@ namespace PnP.Core.Test.Teams
                 var team = context.Team.Get(o => o.Channels);
                 Assert.IsTrue(team.Channels.Length > 0);
 
-                var channel = team.Channels.FirstOrDefault(i => i.DisplayName == "General");
+                var channel = team.Channels.AsRequested().FirstOrDefault(i => i.DisplayName == "General");
                 Assert.IsNotNull(channel);
 
                 channel = channel.Get(o => o.Tabs);
@@ -409,7 +409,7 @@ namespace PnP.Core.Test.Teams
                 var team = context.Team.Get(o => o.Channels);
                 Assert.IsTrue(team.Channels.Length > 0);
 
-                var channel = team.Channels.FirstOrDefault(i => i.DisplayName == "General");
+                var channel = team.Channels.AsRequested().FirstOrDefault(i => i.DisplayName == "General");
                 Assert.IsNotNull(channel);
 
                 channel = channel.Get(o => o.Tabs);
@@ -429,7 +429,7 @@ namespace PnP.Core.Test.Teams
                 var team = context.Team.Get(o => o.Channels);
                 Assert.IsTrue(team.Channels.Length > 0);
 
-                var channel = team.Channels.FirstOrDefault(i => i.DisplayName == "General");
+                var channel = team.Channels.AsRequested().FirstOrDefault(i => i.DisplayName == "General");
                 Assert.IsNotNull(channel);
 
                 channel = channel.Get(o => o.Tabs);

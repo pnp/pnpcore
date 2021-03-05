@@ -426,7 +426,7 @@ namespace PnP.Core.Test.Base
                 var web = await context.Web.GetAsync(p => p.Lists);
 
                 string listTitle = "InteractivePostRequest";
-                var myList = web.Lists.FirstOrDefault(p => p.Title == listTitle);
+                var myList = web.Lists.AsRequested().FirstOrDefault(p => p.Title == listTitle);
 
                 if (myList != null)
                 {
@@ -459,7 +459,7 @@ namespace PnP.Core.Test.Base
                 finally
                 {
                     // Cleanup
-                    myList = web.Lists.FirstOrDefault(p => p.Title == listTitle);
+                    myList = web.Lists.AsRequested().FirstOrDefault(p => p.Title == listTitle);
 
                     if (myList != null)
                     {

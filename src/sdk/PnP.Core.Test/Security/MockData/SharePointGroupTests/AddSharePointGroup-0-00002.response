@@ -1,10 +1,10 @@
---batchresponse_d95df10c-b37a-4404-8341-8a81e96d225d
+--batchresponse_60e15da7-0ac9-47bb-9522-6a119f4fba39
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 201 Created
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
-LOCATION: https://bertonline.sharepoint.com/sites/prov-1/_api/Web/SiteGroups/GetById(18)
+LOCATION: https://bertonline.sharepoint.com/sites/prov-1/_api/Web/SiteGroups/GetById(28)
 
-{"d":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/SiteGroups/GetById(18)","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/SiteGroups/GetById(18)","type":"SP.Group"},"Owner":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/SiteGroups/GetById(18)/Owner"}},"Users":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/SiteGroups/GetById(18)/Users"}},"Id":18,"IsHiddenInUI":false,"LoginName":"PNP_SDK_TEST_TestGroup","Title":"PNP_SDK_TEST_TestGroup","PrincipalType":8,"AllowMembersEditMembership":false,"AllowRequestToJoinLeave":false,"AutoAcceptRequestToJoinLeave":false,"Description":null,"OnlyAllowMembersViewMembership":true,"OwnerTitle":"Bert Jansen (Cloud)","RequestToJoinLeaveEmailSetting":null}}
---batchresponse_d95df10c-b37a-4404-8341-8a81e96d225d--
+{"d":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/SiteGroups/GetById(28)","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/SiteGroups/GetById(28)","type":"SP.Group"},"Owner":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/SiteGroups/GetById(28)/Owner"}},"Users":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/SiteGroups/GetById(28)/Users"}},"Id":28,"IsHiddenInUI":false,"LoginName":"PNP_SDK_TEST_TestGroup","Title":"PNP_SDK_TEST_TestGroup","PrincipalType":8,"AllowMembersEditMembership":false,"AllowRequestToJoinLeave":false,"AutoAcceptRequestToJoinLeave":false,"Description":null,"OnlyAllowMembersViewMembership":true,"OwnerTitle":"Bert Jansen (Cloud)","RequestToJoinLeaveEmailSetting":null}}
+--batchresponse_60e15da7-0ac9-47bb-9522-6a119f4fba39--
