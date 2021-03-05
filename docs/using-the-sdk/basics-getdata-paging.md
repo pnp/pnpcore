@@ -61,7 +61,7 @@ using (var context = await pnpContextFactory.CreateAsync("SiteToWorkWith"))
 }
 ```
 
-You will still get the whole set of items (messages in the previous example) with multiple REST queries page by page. However, the querying of all the items will be synchronous and your code will be blocked while waiting for the whole set of items to be queried. This a sub-optimal scenario, that you should try to avoid, preferring the asynchronous model. 
+You will still get the whole set of items (messages in the previous example) with multiple REST queries page by page. However, the querying of all the items will be synchronous and your code will be blocked while waiting for the whole set of items to be queried. This is a sub-optimal scenario, that you should try to avoid, preferring the asynchronous model. 
 
 ## Full load of items
 
