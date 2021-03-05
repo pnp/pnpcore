@@ -383,7 +383,9 @@ namespace PnP.Core.Test.Base
                     }
                     catch (ClientException ex) when (ex.Error.Type == ErrorType.UnresolvedTokens)
                     {
+#pragma warning disable CA2200 // Rethrow to preserve stack details
                         throw ex;
+#pragma warning restore CA2200 // Rethrow to preserve stack details
                     }
                     catch
                     {
@@ -424,7 +426,7 @@ namespace PnP.Core.Test.Base
                 var web = await context.Web.GetAsync(p => p.Lists);
 
                 string listTitle = "InteractivePostRequest";
-                var myList = web.Lists.FirstOrDefault(p => p.Title == listTitle);
+                var myList = web.Lists.AsRequested().FirstOrDefault(p => p.Title == listTitle);
 
                 if (myList != null)
                 {
@@ -457,7 +459,7 @@ namespace PnP.Core.Test.Base
                 finally
                 {
                     // Cleanup
-                    myList = web.Lists.FirstOrDefault(p => p.Title == listTitle);
+                    myList = web.Lists.AsRequested().FirstOrDefault(p => p.Title == listTitle);
 
                     if (myList != null)
                     {

@@ -268,8 +268,10 @@ namespace PnP.Core.Model.SharePoint
 
         public IFieldCollection AvailableFields { get => GetModelCollectionValue<IFieldCollection>(); }
 
+        // BERT/PAOLO: not possible at this moment after refactoring, somethign to reassess later on
         // A special approach is needed to load all lists, comes down to adding the "system" facet to the select
-        [GraphProperty("lists", Get = "sites/{hostname}:{serverrelativepath}:/lists?$select=" + List.DefaultGraphFieldsToLoad, Expandable = true)]
+        //[GraphProperty("lists", Get = "sites/{hostname}:{serverrelativepath}:/lists?$select=" + List.DefaultGraphFieldsToLoad, Expandable = true)]
+        //[GraphProperty("lists", Expandable = true)]
         public IListCollection Lists { get => GetModelCollectionValue<IListCollection>(); }
 
         public IContentTypeCollection ContentTypes { get => GetModelCollectionValue<IContentTypeCollection>(); }

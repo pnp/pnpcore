@@ -107,6 +107,7 @@ namespace PnP.Core.Services
             {
                 // Get the dictionary property that will hold the overflow data
                 dictionaryPropertyToAddValueTo = pnpObjectType.GetProperty(ExpandoBaseDataModel<IExpandoDataModel>.OverflowFieldName).GetValue(pnpObject) as TransientDictionary;
+
                 useOverflowField = true;
             }
 
@@ -132,7 +133,7 @@ namespace PnP.Core.Services
                 if (entityField != null)
                 {
                     // Are we loading a collection (e.g. Web.Lists)?
-                    if (!useOverflowField && IsModelCollection(entityField.PropertyInfo.PropertyType))
+                    if (IsModelCollection(entityField.PropertyInfo.PropertyType))
                     {
                         // Get the actual current value of the property we're setting...as that allows to detect it's type
                         var propertyToSetValue = entityField.PropertyInfo.GetValue(pnpObject);
@@ -269,7 +270,7 @@ namespace PnP.Core.Services
                                 {
                                     var jsonElement = GetJsonElementFromPath(property.Value, jsonPathField.SharePointJsonPath);
 
-                                    // Don't assume that the requested json path was also loaded. When using the LoadProperties model there can be 
+                                    // Don't assume that the requested json path was also loaded. When using the QueryProperties model there can be 
                                     // a json object returned that does have all properties loaded 
                                     if (!jsonElement.Equals(property.Value))
                                     {
@@ -913,7 +914,7 @@ namespace PnP.Core.Services
                                         {
                                             var jsonElement = GetJsonElementFromPath(property.Value, jsonPathField.GraphJsonPath);
 
-                                            // Don't assume that the requested json path was also loaded. When using the LoadProperties model there can be 
+                                            // Don't assume that the requested json path was also loaded. When using the QueryProperties model there can be 
                                             // a json object returned that does have all properties loaded (e.g. a TeamsApp object with only id and distributionMethod loaded)
                                             if (!jsonElement.Equals(property.Value))
                                             {

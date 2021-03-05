@@ -1,4 +1,4 @@
---batchresponse_a484f292-875a-418a-a932-2602669be757
+--batchresponse_57cc847c-f688-4ff4-addd-ab0c614d1850
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
@@ -6,4 +6,4 @@ HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
 {"d":{"BreakRoleInheritance":null}}
---batchresponse_a484f292-875a-418a-a932-2602669be757--
+--batchresponse_57cc847c-f688-4ff4-addd-ab0c614d1850--

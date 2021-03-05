@@ -1,4 +1,4 @@
---batchresponse_cc30c64e-0c49-4806-99ee-f32e20690f1b
+--batchresponse_3238e5f0-75c0-494c-9e57-ff44de5d20b3
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
@@ -11,10 +11,10 @@ CONTENT-TYPE: application/json; charset=utf-8
 "PermMask": "0x7ffffffffffbffff",
 "FSObjType": "0",
 "HTML_x0020_File_x0020_Type": "",
-"UniqueId": "{4708F8BB-F3E3-4B67-8758-EDA5CB163634}",
+"UniqueId": "{6ABC4868-7FFD-44E1-9835-063F2CAE0265}",
 "ProgId": "",
 "NoExecute": "0",
-"ContentTypeId": "0x0101009D1CB255DA76424F860D91F20E6C411800F467CB9DF78D024F9068B11036DAE25A",
+"ContentTypeId": "0x0101009D1CB255DA76424F860D91F20E6C4118005CC35604D1568540BB252836D5EBE91B",
 "FileRef": "\u002fsites\u002fprov-1\u002fDutchWeb\u002fSitePages\u002fHome.aspx",
 "FileRef.urlencode": "%2Fsites%2Fprov%2D1%2FDutchWeb%2FSitePages%2FHome%2Easpx",
 "FileRef.urlencodeasurl": "\u002fsites\u002fprov-1\u002fDutchWeb\u002fSitePages\u002fHome.aspx",
@@ -82,4 +82,4 @@ CONTENT-TYPE: application/json; charset=utf-8
 ,"CurrentFolderSpItemUrl" : ""
 
 }
---batchresponse_cc30c64e-0c49-4806-99ee-f32e20690f1b--
+--batchresponse_3238e5f0-75c0-494c-9e57-ff44de5d20b3--

@@ -18,9 +18,6 @@ This example shows how to use paging to load lists, in the sample only the `Titl
 ```csharp
 using (var context = await pnpContextFactory.CreateAsync("SiteToWorkWith"))
 {
-    // Force rest
-    context.GraphFirst = false;
-
     // Get a first page of lists of size 2
     var lists = await context.Web.Lists.Take(2).QueryProperties(p => p.Title).ToListAsync();
 
@@ -40,9 +37,6 @@ This example builds on top of the previous but shows some additional capabilitie
 ```csharp
 using (var context = await pnpContextFactory.CreateAsync("SiteToWorkWith"))
 {
-    // Force rest
-    context.GraphFirst = false;
-
     // Get a first page of lists of size 2 
     //   filtered to generic lists
     //     returning list properties
@@ -54,16 +48,6 @@ using (var context = await pnpContextFactory.CreateAsync("SiteToWorkWith"))
                                                         p => p.ContentTypes.QueryProperties(
                                                         p => p.Name, p => p.FieldLinks.QueryProperties(p => p.Name)))
                                         .ToListAsync();
-
-    // // Do we have a pointer to a next page?
-    // if (context.Web.Lists.CanPage)
-    // {
-    //     // Load the next page
-    //     var nextLists = await context.Web.Lists.GetNextPageAsync();
-
-    //     // Load all pages
-    //     await context.Web.Lists.GetAllPagesAsync();
-    // }
 }
 ```
 
@@ -81,5 +65,16 @@ using (var context = await pnpContextFactory.CreateAsync("SiteToWorkWith"))
     await channelForPaging2.LoadAsync(p => p.Messages);
 
     // Option B: 
+    await foreach(var message in channelForPaging2.Messages)
+    {
+        // do something with the message
+    }
+
+    //or
+
+    await foreach(var list in context.Web.Lists)
+    {
+        // do something with the list
+    }
 }
 ```

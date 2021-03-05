@@ -270,7 +270,7 @@ namespace PnP.Core.Test.Base
                 var web = await context.Web.GetAsync(p => p.Lists);
 
                 string listTitle = "RESTListItemPaging";
-                var list = web.Lists.FirstOrDefault(p => p.Title == listTitle);
+                var list = web.Lists.AsRequested().FirstOrDefault(p => p.Title == listTitle);
 
                 if (list != null)
                 {
@@ -412,7 +412,7 @@ namespace PnP.Core.Test.Base
                 var web = await context.Web.GetAsync(p => p.Lists);
 
                 string listTitle = "ListDataAsStreamListItemGetPagedAsyncPaging";
-                var list = web.Lists.FirstOrDefault(p => p.Title == listTitle);
+                var list = web.Lists.AsRequested().FirstOrDefault(p => p.Title == listTitle);
 
                 if (list != null)
                 {

@@ -75,10 +75,13 @@ namespace PnP.Core.QueryModel
         /// <param name="selectors">A selector for a field/metadata</param>
         /// <returns>The resulting collection</returns>
         public static ISupportQuery<TResult> QueryProperties<TResult>(
+#pragma warning disable IDE0060 // Remove unused parameter
+#pragma warning disable CA1801 // Review unused parameters
             this ISupportQuery<TResult> source, params Expression<Func<TResult, object>>[] selectors)
+#pragma warning restore CA1801 // Review unused parameters
+#pragma warning restore IDE0060 // Remove unused parameter
         {
-            // TODO: localize message
-            throw new InvalidOperationException();
+            throw new InvalidOperationException(PnPCoreResources.Exception_Unsupported_QueryPropertiesUse);
         }
 
         /// <summary>
@@ -619,7 +622,9 @@ namespace PnP.Core.QueryModel
             IQueryable<TSource> source,
             CancellationToken cancellationToken = default)
             => ExecuteAsync<TSource, TResult>(
+#nullable enable
                 operatorMethodInfo, source, (Expression?)null, cancellationToken);
+#nullable disable
 
         #endregion
     }

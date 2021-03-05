@@ -30,7 +30,7 @@ namespace PnP.Core.Test.Teams
                 var team = await context.Team.GetAsync(o => o.Channels);
                 Assert.IsTrue(team.Channels.Length > 0);
 
-                var channel = team.Channels.FirstOrDefault(i => i.DisplayName == "General");
+                var channel = team.Channels.AsRequested().FirstOrDefault(i => i.DisplayName == "General");
                 Assert.IsNotNull(channel);
 
                 channel = await channel.GetAsync(o => o.Messages);
@@ -79,7 +79,7 @@ namespace PnP.Core.Test.Teams
                 var team = context.Team.Get(o => o.Channels);
                 Assert.IsTrue(team.Channels.Length > 0);
 
-                var channel = team.Channels.FirstOrDefault(i => i.DisplayName == "General");
+                var channel = team.Channels.AsRequested().FirstOrDefault(i => i.DisplayName == "General");
                 Assert.IsNotNull(channel);
 
                 channel.Load(o => o.Messages);

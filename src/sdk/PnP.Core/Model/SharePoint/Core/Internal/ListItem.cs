@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 using PnP.Core.Model.Security;
+using PnP.Core.QueryModel;
 using PnP.Core.Services;
 using System;
 using System.Collections;
@@ -20,8 +21,7 @@ namespace PnP.Core.Model.SharePoint
     /// </summary>
     [SharePointType("SP.ListItem", Target = typeof(List), Uri = "_api/web/lists/getbyid(guid'{Parent.Id}')/items({Id})", LinqGet = "_api/web/lists(guid'{Parent.Id}')/items")]
     [SharePointType("SP.ListItem", Target = typeof(File), Uri = "_api/web/getFileById('{Parent.Id}')/listitemallfields")]
-    [GraphType(OverflowProperty = "fields")]
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Usage", "CA2243:Attribute string literals should parse correctly", Justification = "<Pending>")]
+    //[GraphType(OverflowProperty = "fields")]
     internal partial class ListItem : ExpandoBaseDataModel<IListItem>, IListItem
     {
         internal const string FolderPath = "folderPath";
@@ -187,6 +187,9 @@ namespace PnP.Core.Model.SharePoint
 
         [KeyProperty(nameof(Id))]
         public override object Key { get => Id; set => Id = (int)value; }
+
+        public IRoleAssignmentCollection RoleAssignments { get => GetModelCollectionValue<IRoleAssignmentCollection>(); }
+
         #endregion
 
         #region Methods
@@ -1244,6 +1247,101 @@ namespace PnP.Core.Model.SharePoint
         {
             return new FieldValueCollection(fieldToUpdate, fieldToUpdate.InternalName);
         }
+        #endregion
+
+        #region Permissions
+
+        public void BreakRoleInheritance(bool copyRoleAssignments, bool clearSubscopes)
+        {
+            BreakRoleInheritanceAsync(copyRoleAssignments, clearSubscopes).GetAwaiter().GetResult();
+        }
+
+        public async Task BreakRoleInheritanceAsync(bool copyRoleAssignments, bool clearSubscopes)
+        {
+            var apiCall = new ApiCall("_api/Web/Lists(guid'{Parent.Id}')/items({Id})/BreakRoleInheritance(copyRoleAssignments=" + copyRoleAssignments.ToString().ToLower() + ",clearSubscopes=" + clearSubscopes.ToString().ToLower() + ")", ApiType.SPORest);
+            await RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
+        }
+
+        public void ResetRoleInheritance()
+        {
+            ResetRoleInheritanceAsync().GetAwaiter().GetResult();
+        }
+
+        public async Task ResetRoleInheritanceAsync()
+        {
+            var apiCall = new ApiCall("_api/Web/Lists(guid'{Parent.Id}')/items({Id})/ResetRoleInheritance", ApiType.SPORest);
+            await RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
+        }
+
+        public IRoleDefinitionCollection GetRoleDefinitions(int principalId)
+        {
+            return GetRoleDefinitionsAsync(principalId).GetAwaiter().GetResult();
+        }
+
+        public async Task<IRoleDefinitionCollection> GetRoleDefinitionsAsync(int principalId)
+        {
+            await EnsurePropertiesAsync(l => l.RoleAssignments).ConfigureAwait(false);
+            var roleAssignment = await RoleAssignments
+                .QueryProperties(r => r.RoleDefinitions)
+                .FirstOrDefaultAsync(p => p.PrincipalId == principalId)
+                .ConfigureAwait(false);
+            return roleAssignment?.RoleDefinitions;
+        }
+
+        public bool AddRoleDefinitions(int principalId, params string[] names)
+        {
+            return AddRoleDefinitionsAsync(principalId, names).GetAwaiter().GetResult();
+        }
+
+        public async Task<bool> AddRoleDefinitionsAsync(int principalId, params string[] names)
+        {
+            var parentList = Parent.Parent as List;
+            var result = false;
+            foreach (var name in names)
+            {
+                var roleDefinition = await PnPContext.Web.RoleDefinitions.FirstOrDefaultAsync(d => d.Name == name).ConfigureAwait(false);
+                if (roleDefinition != null)
+                {
+                    var apiCall = new ApiCall($"_api/web/lists(guid'{parentList.Id}')/Items({Id})/roleassignments/addroleassignment(principalid={principalId},roledefid={roleDefinition.Id})", ApiType.SPORest);
+                    await RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
+                    return true;
+                }
+                else
+                {
+                    throw new ArgumentException($"Role definition '{name}' not found.");
+                }
+            }
+            return result;
+        }
+
+        public bool RemoveRoleDefinitions(int principalId, params string[] names)
+        {
+            return RemoveRoleDefinitionsAsync(principalId, names).GetAwaiter().GetResult();
+        }
+
+        public async Task<bool> RemoveRoleDefinitionsAsync(int principalId, params string[] names)
+        {
+            var parentList = Parent.Parent as List;
+            var result = false;
+            foreach (var name in names)
+            {
+                var roleDefinitions = await GetRoleDefinitionsAsync(principalId).ConfigureAwait(false);
+
+                var roleDefinition = roleDefinitions.AsRequested().FirstOrDefault(r => r.Name == name);
+                if (roleDefinition != null)
+                {
+                    var apiCall = new ApiCall($"_api/web/lists(guid'{parentList.Id}')/Items({Id})/roleassignments/removeroleassignment(principalid={principalId},roledefid={roleDefinition.Id})", ApiType.SPORest);
+                    await RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
+                    return true;
+                }
+                else
+                {
+                    throw new ArgumentException($"Role definition '{name}' not found for this group.");
+                }
+            }
+            return result;
+        }
+
         #endregion
 
         #endregion

@@ -45,3 +45,24 @@ GetFirstOrDefaultAsync() | FirstOrDefaultAsync() | No
 GetFirstOrDefault() | FirstOrDefault() | No
 GetFirstOrDefaultBatchAsync() | AsBatchAsync() | No
 GetFirstOrDefaultBatch() | AsBatch() | No
+
+## Querying loaded collections using a foreach or LINQ extension method
+
+Once you've loaded data you might want to query the loaded data via a foreach or LINQ extension method, previously you could simply use the foreach or LINQ extension methods like FirstOrDefault on the model collection. Since as of Beta3 we've a custom LINQ implementation and doing a `foreach` or calling `FirstOrDefault` or `Where` will result in a new query. You can however cast the collection to an IEnumerable via the `AsRequested()` method and then use an OOB LINQ query.
+
+```csharp
+// Load all lists in the PnPContext
+await context.Web.LoadAsync(p => p.Lists);
+
+// Query the loaded lists via OOB LINQ
+var documentLibraries = context.Web.Lists.AsRequested().Where(p => p.TemplateType == ListTemplateType.DocumentLibrary);
+
+// Iterate over the loaded lists
+foreach(var list in context.Web.Lists.AsRequested())
+{
+    // do something with the list
+}
+```
+
+> [!Note]
+> As of beta3 you need to use `QueryProperties` instead of `LoadProperties` when you want to specify the properties of a model.

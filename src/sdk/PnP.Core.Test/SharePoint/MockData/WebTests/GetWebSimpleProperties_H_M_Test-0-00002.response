@@ -1,9 +1,9 @@
---batchresponse_4ba865b4-e6eb-49ea-8513-4458cddd9385
+--batchresponse_b85559b1-5c64-4275-9fc4-2f0339beaa47
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{"d":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web","type":"SP.Web"},"HeaderEmphasis":3,"HeaderLayout":0,"HideTitleInHeader":false,"Id":"8c8e101c-1b0d-4253-85e7-c30039bf46e2","IsHomepageModernized":false,"IsProvisioningComplete":true,"IsRevertHomepageLinkHidden":false,"Language":1033,"LastItemModifiedDate":"2021-02-23T16:17:22Z","LastItemUserModifiedDate":"2021-02-23T16:17:22Z","LogoAlignment":0,"MasterUrl":"/sites/prov-1/_catalogs/masterpage/seattle.master","MegaMenuEnabled":false}}
---batchresponse_4ba865b4-e6eb-49ea-8513-4458cddd9385--
+{"d":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web","type":"SP.Web"},"HeaderEmphasis":3,"HeaderLayout":0,"HideTitleInHeader":false,"Id":"8c8e101c-1b0d-4253-85e7-c30039bf46e2","IsHomepageModernized":false,"IsProvisioningComplete":true,"IsRevertHomepageLinkHidden":false,"Language":1033,"LastItemModifiedDate":"2021-03-04T14:54:27Z","LastItemUserModifiedDate":"2021-03-04T14:54:27Z","LogoAlignment":0,"MasterUrl":"/sites/prov-1/_catalogs/masterpage/seattle.master","MegaMenuEnabled":false}}
+--batchresponse_b85559b1-5c64-4275-9fc4-2f0339beaa47--

@@ -405,6 +405,45 @@ namespace PnP.Core.Test.SharePoint
         #region Page content tests
 
         [TestMethod]
+        public async Task PageTextTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var page = await context.Web.NewPageAsync();
+                string pageName = TestCommon.GetPnPSdkTestAssetName("PageTextTest.aspx");
+
+                page.AddSection(CanvasSectionTemplate.OneColumn, 1);
+                // 
+                page.AddControl(page.NewTextPart("Normal"), page.Sections[0].Columns[0]);
+                page.AddControl(page.NewTextPart("<p>Normal</p><p>Normal</p>"), page.Sections[0].Columns[0]);
+                page.AddControl(page.NewTextPart("<h2>Heading1</h2><p>Normal</p>"), page.Sections[0].Columns[0]);
+                page.AddControl(page.NewTextPart("<h3>Heading2</h3><p>Normal</p>"), page.Sections[0].Columns[0]);
+                page.AddControl(page.NewTextPart("<h4>Heading 3</h4><p>Normal</p>"), page.Sections[0].Columns[0]);
+                page.AddControl(page.NewTextPart("<pre>fixed</pre><p>Normal</p>"), page.Sections[0].Columns[0]);
+                page.AddControl(page.NewTextPart("<blockquote>quote</blockquote><p>Normal</p>"), page.Sections[0].Columns[0]);
+                page.AddControl(page.NewTextPart("<ul><li>fixed</li></ul><p>Normal</p>"), page.Sections[0].Columns[0]);
+
+                await page.SaveAsync(pageName);
+
+                // Load the page again
+                var pages = await context.Web.GetPagesAsync(pageName);
+                var createdPage = pages.First();
+
+                Assert.IsTrue((createdPage.Sections[0].Columns[0].Controls[0] as PageText).Text == "Normal");
+                Assert.IsTrue((createdPage.Sections[0].Columns[0].Controls[1] as PageText).Text == "<p>Normal</p><p>Normal</p>");
+                Assert.IsTrue((createdPage.Sections[0].Columns[0].Controls[2] as PageText).Text == "<h2>Heading1</h2><p>Normal</p>");
+                Assert.IsTrue((createdPage.Sections[0].Columns[0].Controls[3] as PageText).Text == "<h3>Heading2</h3><p>Normal</p>");
+                Assert.IsTrue((createdPage.Sections[0].Columns[0].Controls[4] as PageText).Text == "<h4>Heading 3</h4><p>Normal</p>");
+                Assert.IsTrue((createdPage.Sections[0].Columns[0].Controls[5] as PageText).Text == "<pre>fixed</pre><p>Normal</p>");
+                Assert.IsTrue((createdPage.Sections[0].Columns[0].Controls[6] as PageText).Text == "<blockquote>quote</blockquote><p>Normal</p>");
+                Assert.IsTrue((createdPage.Sections[0].Columns[0].Controls[7] as PageText).Text == "<ul><li>fixed</li></ul><p>Normal</p>");
+
+                await page.DeleteAsync();
+            }
+        }
+
+        [TestMethod]
         public async Task PageSectionsCreateTest()
         {
             //TestCommon.Instance.Mocking = false;
@@ -1379,6 +1418,26 @@ namespace PnP.Core.Test.SharePoint
 
                 // Delete the page
                 await updatedPage.DeleteAsync();
+                // Verify the page exists
+                var pages2 = await context.Web.GetPagesAsync(pageName);
+                Assert.IsTrue(pages2.Count == 0);
+            }
+        }
+
+        [TestMethod]
+        public async Task CreateAndUpdatePageWithSpecialCharsInName()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var newPage = await context.Web.NewPageAsync();
+                string pageName = TestCommon.GetPnPSdkTestAssetName("A&B#C.aspx");
+                // Save the page
+                await newPage.SaveAsync(pageName);
+
+                // Delete the page
+                await newPage.DeleteAsync();
+
                 // Verify the page exists
                 var pages2 = await context.Web.GetPagesAsync(pageName);
                 Assert.IsTrue(pages2.Count == 0);

@@ -506,7 +506,7 @@ namespace PnP.Core.Test.SharePoint
             {
                 IWeb currentWeb = await context.Web.GetAsync();
                 IList documents = currentWeb.Lists.GetByTitle("Documents", l => l.Id);
-                IField addedField = await context.Web.Fields.AddLookupAsync("ADDED FIELD16", new FieldLookupOptions()
+                IField addedField = await currentWeb.Fields.AddLookupAsync("ADDED FIELD16", new FieldLookupOptions()
                 {
                     Required = true,
                     LookupFieldName = "Title",

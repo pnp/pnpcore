@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -146,7 +147,7 @@ namespace PnP.Core.QueryModel
             }
         }
 
-        private async IAsyncEnumerable<TModel> GetAsyncEnumerable(IRequestableCollection collection, ODataQuery<TModel> query, BatchRequest originalBatchRequest, CancellationToken token)
+        private async IAsyncEnumerable<TModel> GetAsyncEnumerable(IRequestableCollection collection, ODataQuery<TModel> query, BatchRequest originalBatchRequest, [EnumeratorCancellation] CancellationToken token)
         {
             // Due some Graph limitations, ODataQuery can choose to implement skip on client side
             bool applySkip = !originalBatchRequest.ApiCall.Request.Contains("$skip");

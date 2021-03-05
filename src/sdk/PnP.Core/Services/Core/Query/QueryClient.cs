@@ -73,7 +73,7 @@ namespace PnP.Core.Services
                 // $select
                 foreach (var field in fields)
                 {
-                    // If there was a selection on which fields to include in an expand (via the LoadProperties() option) then add those fields
+                    // If there was a selection on which fields to include in an expand (via the QueryProperties() option) then add those fields
                     if (field.SharePointExpandable && field.ExpandFieldInfo != null)
                     {
                         AddExpandableSelectRest(sb, field, null, "");
