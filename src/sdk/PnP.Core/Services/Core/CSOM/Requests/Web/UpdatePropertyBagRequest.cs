@@ -13,7 +13,7 @@ namespace PnP.Core.Services.Core.CSOM.Requests.Web
         internal string SiteId { get; set; }
         internal string WebId { get; set; }
         internal string PropertyName { get; set; } = "AllProperties";
-        internal List<CSOMItemField> FieldsToUpdate { get; set; } = new List<CSOMItemField>();
+        internal List<CSOMItemField> FieldsToUpdate { get; } = new List<CSOMItemField>();
         internal int IdentityPath { get; private set; }
 
         public List<ActionObjectPath> GetRequest(IIdProvider idProvider)
@@ -24,16 +24,7 @@ namespace PnP.Core.Services.Core.CSOM.Requests.Web
             List<Parameter> parameters = new List<Parameter>();
             foreach (CSOMItemField field in FieldsToUpdate)
             {
-                parameters.Add(new Parameter()
-                {
-                    Type = "String",
-                    Value = field.FieldName
-                });
-                parameters.Add(new Parameter()
-                {
-                    Type = field.FieldType,
-                    Value = field.SerializeFieldValue()
-                });
+                parameters.AddRange(field.GetRequestParameters());
             }
             return new List<ActionObjectPath>()
             {
