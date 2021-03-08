@@ -18242,6 +18242,32 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.ISyntexModel.Description
   nameWithType: ISyntexModel.Description
+- uid: PnP.Core.Model.SharePoint.ISyntexModel.GetModelPublications
+  name: GetModelPublications()
+  href: api/PnP.Core.Model.SharePoint.ISyntexModel.html#PnP_Core_Model_SharePoint_ISyntexModel_GetModelPublications
+  commentId: M:PnP.Core.Model.SharePoint.ISyntexModel.GetModelPublications
+  fullName: PnP.Core.Model.SharePoint.ISyntexModel.GetModelPublications()
+  nameWithType: ISyntexModel.GetModelPublications()
+- uid: PnP.Core.Model.SharePoint.ISyntexModel.GetModelPublications*
+  name: GetModelPublications
+  href: api/PnP.Core.Model.SharePoint.ISyntexModel.html#PnP_Core_Model_SharePoint_ISyntexModel_GetModelPublications_
+  commentId: Overload:PnP.Core.Model.SharePoint.ISyntexModel.GetModelPublications
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.ISyntexModel.GetModelPublications
+  nameWithType: ISyntexModel.GetModelPublications
+- uid: PnP.Core.Model.SharePoint.ISyntexModel.GetModelPublicationsAsync
+  name: GetModelPublicationsAsync()
+  href: api/PnP.Core.Model.SharePoint.ISyntexModel.html#PnP_Core_Model_SharePoint_ISyntexModel_GetModelPublicationsAsync
+  commentId: M:PnP.Core.Model.SharePoint.ISyntexModel.GetModelPublicationsAsync
+  fullName: PnP.Core.Model.SharePoint.ISyntexModel.GetModelPublicationsAsync()
+  nameWithType: ISyntexModel.GetModelPublicationsAsync()
+- uid: PnP.Core.Model.SharePoint.ISyntexModel.GetModelPublicationsAsync*
+  name: GetModelPublicationsAsync
+  href: api/PnP.Core.Model.SharePoint.ISyntexModel.html#PnP_Core_Model_SharePoint_ISyntexModel_GetModelPublicationsAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.ISyntexModel.GetModelPublicationsAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.ISyntexModel.GetModelPublicationsAsync
+  nameWithType: ISyntexModel.GetModelPublicationsAsync
 - uid: PnP.Core.Model.SharePoint.ISyntexModel.Id
   name: Id
   href: api/PnP.Core.Model.SharePoint.ISyntexModel.html#PnP_Core_Model_SharePoint_ISyntexModel_Id
