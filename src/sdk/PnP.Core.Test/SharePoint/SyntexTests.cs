@@ -84,6 +84,8 @@ namespace PnP.Core.Test.SharePoint
                 Assert.IsTrue(models.Any());
                 Assert.IsTrue(!string.IsNullOrEmpty(models.First().Name));
                 Assert.IsTrue(models.First().ModelLastTrained != DateTime.MinValue);
+                Assert.IsTrue(models.First().Id > 0);
+                string description = models.First().Description;                
             }
         }
 
@@ -322,6 +324,16 @@ namespace PnP.Core.Test.SharePoint
                 Assert.IsTrue(results.Any());
 
                 var modelPublication = results.FirstOrDefault(p => p.TargetLibraryServerRelativeUrl == $"{context.Web.ServerRelativeUrl}/{libraryName}");
+                Assert.IsTrue(modelPublication != null);
+                Assert.IsTrue(modelPublication.TargetLibraryServerRelativeUrl == $"{context.Web.ServerRelativeUrl}/{libraryName}");
+                Assert.IsTrue(modelPublication.TargetSiteUrl == context.Uri.ToString());
+                Assert.IsTrue(modelPublication.TargetWebServerRelativeUrl == context.Web.ServerRelativeUrl);
+                Assert.IsTrue(modelPublication.ViewOption == MachineLearningPublicationViewOption.NewViewAsDefault);
+
+                results = modelToRegister.GetModelPublications();
+                Assert.IsTrue(results.Any());
+
+                modelPublication = results.FirstOrDefault(p => p.TargetLibraryServerRelativeUrl == $"{context.Web.ServerRelativeUrl}/{libraryName}");
                 Assert.IsTrue(modelPublication != null);
                 Assert.IsTrue(modelPublication.TargetLibraryServerRelativeUrl == $"{context.Web.ServerRelativeUrl}/{libraryName}");
                 Assert.IsTrue(modelPublication.TargetSiteUrl == context.Uri.ToString());

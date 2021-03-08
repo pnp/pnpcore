@@ -80,7 +80,7 @@ namespace PnP.Core.Model.SharePoint
             {
                 if (ListItem != null)
                 {
-                    return ListItem.Values[PageConstants.ModelDescription].ToString();
+                    return ListItem.Values[PageConstants.ModelDescription]?.ToString();
                 }
                 return null;
             }
