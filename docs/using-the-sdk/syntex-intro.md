@@ -141,14 +141,12 @@ publications.Add(new SyntexModelUnPublishOptions()
     TargetLibraryServerRelativeUrl = $"/sites/contosoHR/documents",
     TargetSiteUrl = "https://contoso-sharepoint.com/sites/contosoHR",
     TargetWebServerRelativeUrl = "/sites/contosoHR",
-    ViewOption = MachineLearningPublicationViewOption.NewViewAsDefault
 });
 publications.Add(new SyntexModelUnPublishOptions()
 {
     TargetLibraryServerRelativeUrl = $"/sites/contosoHR/invoices",
     TargetSiteUrl = "https://contoso-sharepoint.com/sites/contosoHR",
     TargetWebServerRelativeUrl = "/sites/contosoHR",
-    ViewOption = MachineLearningPublicationViewOption.NoNewView
 });
 var result = await modelToRegister.UnPublishModelAsync(publications);
 ```
