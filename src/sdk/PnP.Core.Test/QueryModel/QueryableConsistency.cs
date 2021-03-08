@@ -301,12 +301,12 @@ namespace PnP.Core.Test.QueryModel
         }
 
         [TestMethod]
-        [Ignore]
         public async Task TestQueryListItemsConsistency()
         {
+            // TestCommon.Instance.Mocking = false;
+
             var expectedListItemTitle = "Home";
 
-            // TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 context.GraphFirst = false;
@@ -343,13 +343,13 @@ namespace PnP.Core.Test.QueryModel
         }
 
         [TestMethod]
-        [Ignore]
         public async Task TestQueryListItemsAddConsistency()
         {
+            // TestCommon.Instance.Mocking = false;
+
             var listTitle = "TestQueryListItemsAddConsistency";
             var expectedNewListItemTitle = "New Item";
 
-            //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 context.GraphFirst = false;
