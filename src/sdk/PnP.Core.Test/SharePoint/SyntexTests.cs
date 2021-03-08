@@ -291,5 +291,54 @@ namespace PnP.Core.Test.SharePoint
             }
         }
 
+        [TestMethod]
+        public async Task GetModelPublicationsTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            if (!TestCommon.Instance.Mocking && string.IsNullOrEmpty(TestCommon.SyntexContentCenterTestSite)) Assert.Inconclusive("No Syntex Content Center setup for live testing");
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.SyntexContentCenterTestSite))
+            {
+                var cc = context.Web.AsSyntexContentCenter();
+                var models = await cc.GetSyntexModelsAsync();
+                var modelToRegister = models.First();
+
+                // Add library to site
+                var libraryName = TestCommon.GetPnPSdkTestAssetName("GetModelPublicationsTest");
+                var testLibrary = await context.Web.Lists.AddAsync(libraryName, ListTemplateType.DocumentLibrary);
+
+                await context.Web.EnsurePropertiesAsync(p => p.ServerRelativeUrl).ConfigureAwait(false);
+
+                // publish model to library
+                var result = await modelToRegister.PublishModelAsync(new SyntexModelPublicationOptions()
+                {
+                    TargetLibraryServerRelativeUrl = $"{context.Web.ServerRelativeUrl}/{libraryName}",
+                    TargetSiteUrl = context.Uri.ToString(),
+                    TargetWebServerRelativeUrl = context.Web.ServerRelativeUrl,
+                });
+
+                // Get the model publication results
+                var results = await modelToRegister.GetModelPublicationsAsync();
+                Assert.IsTrue(results.Any());
+
+                var modelPublication = results.FirstOrDefault(p => p.TargetLibraryServerRelativeUrl == $"{context.Web.ServerRelativeUrl}/{libraryName}");
+                Assert.IsTrue(modelPublication != null);
+                Assert.IsTrue(modelPublication.TargetLibraryServerRelativeUrl == $"{context.Web.ServerRelativeUrl}/{libraryName}");
+                Assert.IsTrue(modelPublication.TargetSiteUrl == context.Uri.ToString());
+                Assert.IsTrue(modelPublication.TargetWebServerRelativeUrl == context.Web.ServerRelativeUrl);
+                Assert.IsTrue(modelPublication.ViewOption == MachineLearningPublicationViewOption.NewViewAsDefault);
+
+                // unpublish model
+                var unpublishResult = await modelToRegister.UnPublishModelAsync(new SyntexModelUnPublicationOptions()
+                {
+                    TargetLibraryServerRelativeUrl = $"{context.Web.ServerRelativeUrl}/{libraryName}",
+                    TargetSiteUrl = context.Uri.ToString(),
+                    TargetWebServerRelativeUrl = context.Web.ServerRelativeUrl,
+                });
+
+                // cleanup the library
+                await testLibrary.DeleteAsync();
+            }
+        }
     }
 }

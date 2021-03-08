@@ -42,6 +42,24 @@ namespace PnP.Core.Model.SharePoint
         #endregion
 
         #region Methods
+
+        #region Get model publications
+
+        /// <summary>
+        /// Gets a list of libraries to which this model is published
+        /// </summary>
+        /// <returns>The list of libraries to which this model is published</returns>
+        public Task<List<ISyntexModelPublication>> GetModelPublicationsAsync();
+
+        /// <summary>
+        /// Gets a list of libraries to which this model is published
+        /// </summary>
+        /// <returns>The list of libraries to which this model is published</returns>
+        public List<ISyntexModelPublication> GetModelPublications();
+
+        #endregion
+
+        #region Publish model
         /// <summary>
         /// Publish this model to a library
         /// </summary>
@@ -102,6 +120,10 @@ namespace PnP.Core.Model.SharePoint
         /// <returns>Information about the model publications</returns>
         public List<ISyntexModelPublicationResult> PublishModel(List<SyntexModelPublicationOptions> publicationOptions);
 
+        #endregion
+
+        #region Unpublish model
+
         /// <summary>
         /// Unpublish this model from the library
         /// </summary>
@@ -157,6 +179,9 @@ namespace PnP.Core.Model.SharePoint
         /// <param name="unPublicationOptions">Information defining the model unpublications</param>
         /// <returns>Information about the model unpublications</returns>
         public List<ISyntexModelPublicationResult> UnPublishModel(List<SyntexModelUnPublicationOptions> unPublicationOptions);
+
+        #endregion
+
         #endregion
     }
 }

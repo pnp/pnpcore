@@ -89,6 +89,49 @@ namespace PnP.Core.Model.SharePoint
         #endregion
 
         #region Methods
+
+        #region Get published models
+
+        public async Task<List<ISyntexModelPublication>> GetModelPublicationsAsync()
+        {
+            var apiCall = new ApiCall($"_api/machinelearning/publications/getbymodeluniqueid('{UniqueId}')", ApiType.SPORest);
+            var publications = await (ListItem as ListItem).RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
+
+            List<SyntexModelPublication> results = new List<SyntexModelPublication>();
+
+            if (!string.IsNullOrEmpty(publications.Json))
+            {
+                var root = JsonDocument.Parse(publications.Json).RootElement.GetProperty("d").GetProperty("results");
+                if (root.ValueKind == JsonValueKind.Array)
+                {
+                    foreach (var publicationResultJson in root.EnumerateArray())
+                    {
+                        var modelPublication = new SyntexModelPublication
+                        {
+                            ModelUniqueId = publicationResultJson.GetProperty("ModelUniqueId").GetGuid(),
+                            TargetLibraryServerRelativeUrl = publicationResultJson.GetProperty("TargetLibraryServerRelativeUrl").GetString(),
+                            TargetWebServerRelativeUrl = publicationResultJson.GetProperty("TargetWebServerRelativeUrl").GetString(),
+                            TargetSiteUrl = publicationResultJson.GetProperty("TargetSiteUrl").ToString(),
+                            ViewOption = (MachineLearningPublicationViewOption)Enum.Parse(typeof(MachineLearningPublicationViewOption), publicationResultJson.GetProperty("ViewOption").ToString())
+                        };
+
+                        results.Add(modelPublication);
+                    }
+                }
+            }
+
+            return results.Cast<ISyntexModelPublication>().ToList();
+        }
+
+        public List<ISyntexModelPublication> GetModelPublications()
+        {
+            return GetModelPublicationsAsync().GetAwaiter().GetResult();
+        }
+
+        #endregion
+
+        #region Model Publication
+
         public ISyntexModelPublicationResult PublishModel(IList library, MachineLearningPublicationViewOption viewOption = MachineLearningPublicationViewOption.NewViewAsDefault)
         {
             return PublishModelAsync(library, viewOption).GetAwaiter().GetResult();
@@ -200,6 +243,86 @@ namespace PnP.Core.Model.SharePoint
             var modelPublicationResults = DeserializeModelPublishResult(root.ToString());
             return modelPublicationResults;
         }
+
+        private async Task<ApiCallResponse> PublishModelApiRequestAsync(Guid uniqueId, string targetSiteUrl, string targetWebServerRelativeUrl,
+    string targetLibraryServerRelativeUrl, MachineLearningPublicationViewOption viewOption)
+        {
+            /*
+            {
+                "__metadata": {
+                    "type": "Microsoft.Office.Server.ContentCenter.SPMachineLearningPublicationsEntityData"
+                },
+                "Publications": {
+                    "results": [
+                        {
+                            "ModelUniqueId": "bb25a5be-aeed-436d-90e7-add975ac766e",
+                            "TargetSiteUrl": "https://m365x215748.sharepoint.com/sites/Mark8ProjectTeam",
+                            "TargetWebServerRelativeUrl": "/sites/Mark8ProjectTeam",
+                            "TargetLibraryServerRelativeUrl": "/sites/Mark8ProjectTeam/Shared Documents",
+                            "ViewOption": "NewViewAsDefault"
+                        }
+                    ]
+                },
+                "Comment": ""
+            }
+            */
+
+            var registerInfo = new
+            {
+                __metadata = new { type = "Microsoft.Office.Server.ContentCenter.SPMachineLearningPublicationsEntityData" },
+                Publications = new
+                {
+                    results = new List<SyntexModelPublication>()
+                    {
+                        new SyntexModelPublication()
+                        {
+                            ModelUniqueId = uniqueId,
+                            TargetSiteUrl = targetSiteUrl,
+                            TargetWebServerRelativeUrl = targetWebServerRelativeUrl,
+                            TargetLibraryServerRelativeUrl = targetLibraryServerRelativeUrl,
+                            ViewOption = viewOption
+                        }
+                    }
+                },
+                Comment = ""
+            }.AsExpando();
+
+            return await PublishModelApiCallAsync(registerInfo).ConfigureAwait(false);
+        }
+
+        private async Task<ApiCallResponse> PublishModelApiRequestAsync(List<SyntexModelPublication> modelPublications)
+        {
+            var registerInfo = new
+            {
+                __metadata = new { type = "Microsoft.Office.Server.ContentCenter.SPMachineLearningPublicationsEntityData" },
+                Publications = new
+                {
+                    results = modelPublications
+                },
+                Comment = ""
+            }.AsExpando();
+
+            return await PublishModelApiCallAsync(registerInfo).ConfigureAwait(false);
+        }
+
+        private async Task<ApiCallResponse> PublishModelApiCallAsync(System.Dynamic.ExpandoObject registerInfo)
+        {
+            string body = JsonSerializer.Serialize(registerInfo, new JsonSerializerOptions()
+            {
+                IgnoreNullValues = true,
+                Converters =
+                {
+                    new JsonStringEnumConverter()
+                }
+            });
+
+            var apiCall = new ApiCall("_api/machinelearning/publications", ApiType.SPORest, body);
+            return await (ListItem as ListItem).RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
+        }
+
+        #endregion
+
+        #region Model unpublication
 
         public async Task<ISyntexModelPublicationResult> UnPublishModelAsync(IList library)
         {
@@ -334,83 +457,6 @@ namespace PnP.Core.Model.SharePoint
             return await (ListItem as ListItem).RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
         }
 
-        private async Task<ApiCallResponse> PublishModelApiRequestAsync(Guid uniqueId, string targetSiteUrl, string targetWebServerRelativeUrl, 
-            string targetLibraryServerRelativeUrl, MachineLearningPublicationViewOption viewOption)
-        {
-            /*
-            {
-                "__metadata": {
-                    "type": "Microsoft.Office.Server.ContentCenter.SPMachineLearningPublicationsEntityData"
-                },
-                "Publications": {
-                    "results": [
-                        {
-                            "ModelUniqueId": "bb25a5be-aeed-436d-90e7-add975ac766e",
-                            "TargetSiteUrl": "https://m365x215748.sharepoint.com/sites/Mark8ProjectTeam",
-                            "TargetWebServerRelativeUrl": "/sites/Mark8ProjectTeam",
-                            "TargetLibraryServerRelativeUrl": "/sites/Mark8ProjectTeam/Shared Documents",
-                            "ViewOption": "NewViewAsDefault"
-                        }
-                    ]
-                },
-                "Comment": ""
-            }
-            */
-
-            var registerInfo = new
-            {
-                __metadata = new { type = "Microsoft.Office.Server.ContentCenter.SPMachineLearningPublicationsEntityData" },
-                Publications = new
-                {
-                    results = new List<SyntexModelPublication>()
-                    {
-                        new SyntexModelPublication()
-                        {
-                            ModelUniqueId = uniqueId,
-                            TargetSiteUrl = targetSiteUrl,
-                            TargetWebServerRelativeUrl = targetWebServerRelativeUrl,
-                            TargetLibraryServerRelativeUrl = targetLibraryServerRelativeUrl,
-                            ViewOption = viewOption
-                        }
-                    }
-                },
-                Comment = ""
-            }.AsExpando();
-
-            return await PublishModelApiCallAsync(registerInfo).ConfigureAwait(false);
-        }
-
-        private async Task<ApiCallResponse> PublishModelApiRequestAsync(List<SyntexModelPublication> modelPublications)
-        {
-            var registerInfo = new
-            {
-                __metadata = new { type = "Microsoft.Office.Server.ContentCenter.SPMachineLearningPublicationsEntityData" },
-                Publications = new
-                {
-                    results = modelPublications
-                },
-                Comment = ""
-            }.AsExpando();
-
-            return await PublishModelApiCallAsync(registerInfo).ConfigureAwait(false);
-        }
-
-        private async Task<ApiCallResponse> PublishModelApiCallAsync(System.Dynamic.ExpandoObject registerInfo)
-        {
-            string body = JsonSerializer.Serialize(registerInfo, new JsonSerializerOptions()
-            {
-                IgnoreNullValues = true,
-                Converters =
-                {
-                    new JsonStringEnumConverter()
-                }
-            });
-
-            var apiCall = new ApiCall("_api/machinelearning/publications", ApiType.SPORest, body);
-            return await (ListItem as ListItem).RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
-        }
-
-
         private static List<SyntexModelPublicationResult> DeserializeModelPublishResult(string jsonString)
         {
             /* Response:
@@ -478,6 +524,9 @@ namespace PnP.Core.Model.SharePoint
             }
             return results;
         }
+
+        #endregion
+
         #endregion
     }
 }
