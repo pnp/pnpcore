@@ -150,7 +150,13 @@ namespace PnP.Core.QueryModel
         private async IAsyncEnumerable<TModel> GetAsyncEnumerable(IRequestableCollection collection, ODataQuery<TModel> query, BatchRequest originalBatchRequest, [EnumeratorCancellation] CancellationToken token)
         {
             // Due some Graph limitations, ODataQuery can choose to implement skip on client side
-            bool applySkip = !originalBatchRequest.ApiCall.Request.Contains("$skip");
+            bool applyClientSkip = !originalBatchRequest.ApiCall.Request.Contains("$skip");
+
+            // Special case for items of the list which does't support skip
+            if (!applyClientSkip && query.Skip.HasValue && collection is Model.SharePoint.IListItemCollection)
+            {
+                throw new InvalidOperationException(PnPCoreResources.Exception_Unsupported_SkipOnItems);
+            }
 
             int count = 0;
             while (true)
@@ -165,7 +171,7 @@ namespace PnP.Core.QueryModel
                     count++;
 
                     // Skip items
-                    if (applySkip && query.Skip.HasValue && query.Skip > count) continue;
+                    if (applyClientSkip && query.Skip.HasValue && query.Skip > count) continue;
 
                     // Stop to enumerate or load other pages
                     if (query.Top.HasValue && count > query.Top) yield break;

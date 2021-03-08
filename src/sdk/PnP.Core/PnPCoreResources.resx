@@ -354,6 +354,9 @@
   <data name="Exception_Unsupported_SharePointUserOnGraph" xml:space="preserve">
     <value>You can't call AsSharePointUserAsync on a Graph user without the UserPrincipalProperty requested and populated</value>
   </data>
+  <data name="Exception_Unsupported_SkipOnItems" xml:space="preserve">
+    <value>Skip on items's list is not supported. Please consider the usage of CAML query</value>
+  </data>
   <data name="Exception_Unsupported_UnaryOperator" xml:space="preserve">
     <value>The unary operator '{0}' is not supported</value>
   </data>

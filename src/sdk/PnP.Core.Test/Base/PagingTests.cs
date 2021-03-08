@@ -94,11 +94,10 @@ namespace PnP.Core.Test.Base
             }
         }
 
-        [Ignore]
         [TestMethod]
         public async Task GraphCollectionPages()
         {
-            TestCommon.Instance.Mocking = false;
+            // TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 // This rest requires beta APIs, so bail out if that's not enabled
@@ -149,17 +148,16 @@ namespace PnP.Core.Test.Base
                 while (true)
                 {
                     // Load page
-                    // TODO: check why $skip is not supported even without any $fitlers
                     var page = context.Web.Lists.Skip(pageSize * pageCount).Take(pageSize).ToArray();
 
                     // Check number of items returned
-                    if (pageCount != 4)
+                    if (pageCount != 3)
                     {
                         Assert.AreEqual(pageSize, page.Length);
                     }
                     else
                     {
-                        Assert.AreEqual(4, page.Length);
+                        Assert.AreEqual(5, page.Length);
                     }
 
                     pageCount++;
@@ -180,11 +178,10 @@ namespace PnP.Core.Test.Base
 
         #region REST paging
 
-        [Ignore]
         [TestMethod]
-        public async Task RESTListItemPages()
+        public async Task RESTListItemsNotSupported()
         {
-            TestCommon.Instance.Mocking = false;
+            // TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 // Force rest
@@ -208,46 +205,12 @@ namespace PnP.Core.Test.Base
                 {
                     try
                     {
-                        // Add items
-                        for (int i = 0; i < 10; i++)
+                        // Skip is not supported for items of a list
+                        Assert.ThrowsException<InvalidOperationException>(() =>
                         {
-                            Dictionary<string, object> values = new Dictionary<string, object>
-                        {
-                            { "Title", $"Item {i}" }
-                        };
+                            list.Items.Skip(1).Take(2).ToArray();
+                        });
 
-                            await list.Items.AddBatchAsync(values);
-                        }
-                        await context.ExecuteAsync();
-
-                        // Manual paging with Skip and Take
-                        int pageCount = 0;
-                        int pageSize = 3;
-
-                        while (true)
-                        {
-                            // Load page
-                            // TODO: $skip is always ignored
-                            var page = list.Items.Skip(pageSize * pageCount).Take(pageSize).ToArray();
-
-                            // Check number of items returned
-                            if (pageCount != 3)
-                            {
-                                Assert.AreEqual(pageSize, page.Length);
-                            }
-                            else
-                            {
-                                Assert.AreEqual(4, page.Length);
-                            }
-
-                            pageCount++;
-
-                            if (page.Length < pageSize)
-                            {
-                                break;
-                            }
-                        }
-                        Assert.AreEqual(4, pageCount);
                     }
                     finally
                     {

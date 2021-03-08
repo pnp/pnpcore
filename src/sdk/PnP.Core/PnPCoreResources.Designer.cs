@@ -772,6 +772,15 @@ namespace PnP.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Skip on items&apos;s list is not supported. Please consider the usage of CAML query.
+        /// </summary>
+        internal static string Exception_Unsupported_SkipOnItems {
+            get {
+                return ResourceManager.GetString("Exception_Unsupported_SkipOnItems", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The unary operator &apos;{0}&apos; is not supported.
         /// </summary>
         internal static string Exception_Unsupported_UnaryOperator {
