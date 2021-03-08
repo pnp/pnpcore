@@ -97,28 +97,28 @@ namespace PnP.Core.Model.SharePoint
         /// </summary>
         /// <param name="publicationOptions">Information defining the model publication</param>
         /// <returns>Information about the model publication</returns>
-        public Task<ISyntexModelPublicationResult> PublishModelAsync(SyntexModelPublicationOptions publicationOptions);
+        public Task<ISyntexModelPublicationResult> PublishModelAsync(SyntexModelPublishOptions publicationOptions);
 
         /// <summary>
         /// Publish this model to a library
         /// </summary>
         /// <param name="publicationOptions">Information defining the model publication</param>
         /// <returns>Information about the model publication</returns>
-        public ISyntexModelPublicationResult PublishModel(SyntexModelPublicationOptions publicationOptions);
+        public ISyntexModelPublicationResult PublishModel(SyntexModelPublishOptions publicationOptions);
 
         /// <summary>
         /// Publish this model to a list of libraries
         /// </summary>
         /// <param name="publicationOptions">Information defining the model publications</param>
         /// <returns>Information about the model publications</returns>
-        public Task<List<ISyntexModelPublicationResult>> PublishModelAsync(List<SyntexModelPublicationOptions> publicationOptions);
+        public Task<List<ISyntexModelPublicationResult>> PublishModelAsync(List<SyntexModelPublishOptions> publicationOptions);
 
         /// <summary>
         /// Publish this model to a list of libraries
         /// </summary>
         /// <param name="publicationOptions">Information defining the model publications</param>
         /// <returns>Information about the model publications</returns>
-        public List<ISyntexModelPublicationResult> PublishModel(List<SyntexModelPublicationOptions> publicationOptions);
+        public List<ISyntexModelPublicationResult> PublishModel(List<SyntexModelPublishOptions> publicationOptions);
 
         #endregion
 
@@ -157,28 +157,28 @@ namespace PnP.Core.Model.SharePoint
         /// </summary>
         /// <param name="unPublicationOptions">Information defining the model unpublication</param>
         /// <returns>Information about the model unpublication</returns>
-        public Task<ISyntexModelPublicationResult> UnPublishModelAsync(SyntexModelUnPublicationOptions unPublicationOptions);
+        public Task<ISyntexModelPublicationResult> UnPublishModelAsync(SyntexModelUnPublishOptions unPublicationOptions);
 
         /// <summary>
         /// Unpublish this model from the library
         /// </summary>
         /// <param name="unPublicationOptions">Information defining the model unpublication</param>
         /// <returns>Information about the model unpublication</returns>
-        public ISyntexModelPublicationResult UnPublishModel(SyntexModelUnPublicationOptions unPublicationOptions);
+        public ISyntexModelPublicationResult UnPublishModel(SyntexModelUnPublishOptions unPublicationOptions);
 
         /// <summary>
         /// Unpublish this model from a list of libraries
         /// </summary>
         /// <param name="unPublicationOptions">Information defining the model unpublications</param>
         /// <returns>Information about the model unpublications</returns>
-        public Task<List<ISyntexModelPublicationResult>> UnPublishModelAsync(List<SyntexModelUnPublicationOptions> unPublicationOptions);
+        public Task<List<ISyntexModelPublicationResult>> UnPublishModelAsync(List<SyntexModelUnPublishOptions> unPublicationOptions);
 
         /// <summary>
         /// Unpublish this model from a list of libraries
         /// </summary>
         /// <param name="unPublicationOptions">Information defining the model unpublications</param>
         /// <returns>Information about the model unpublications</returns>
-        public List<ISyntexModelPublicationResult> UnPublishModel(List<SyntexModelUnPublicationOptions> unPublicationOptions);
+        public List<ISyntexModelPublicationResult> UnPublishModel(List<SyntexModelUnPublishOptions> unPublicationOptions);
 
         #endregion
 

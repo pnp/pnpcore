@@ -157,7 +157,7 @@ namespace PnP.Core.Test.SharePoint
                 await context.Web.EnsurePropertiesAsync(p => p.ServerRelativeUrl).ConfigureAwait(false);
 
                 // publish model to library
-                var result = await modelToRegister.PublishModelAsync(new SyntexModelPublicationOptions()
+                var result = await modelToRegister.PublishModelAsync(new SyntexModelPublishOptions()
                 {
                     TargetLibraryServerRelativeUrl = $"{context.Web.ServerRelativeUrl}/{libraryName}",
                     TargetSiteUrl = context.Uri.ToString(),
@@ -169,7 +169,7 @@ namespace PnP.Core.Test.SharePoint
                 Assert.IsTrue(result.Succeeded);
 
                 // unpublish model from library
-                var unpublishResult = await modelToRegister.UnPublishModelAsync(new SyntexModelUnPublicationOptions()
+                var unpublishResult = await modelToRegister.UnPublishModelAsync(new SyntexModelUnPublishOptions()
                 {
                     TargetLibraryServerRelativeUrl = $"{context.Web.ServerRelativeUrl}/{libraryName}",
                     TargetSiteUrl = context.Uri.ToString(),
@@ -253,14 +253,14 @@ namespace PnP.Core.Test.SharePoint
                 var library1 = await context.Web.Lists.AddAsync(libraryName1, ListTemplateType.DocumentLibrary);
                 var library2 = await context.Web.Lists.AddAsync(libraryName2, ListTemplateType.DocumentLibrary);
 
-                List<SyntexModelPublicationOptions> publications = new();
-                publications.Add(new SyntexModelPublicationOptions()
+                List<SyntexModelPublishOptions> publications = new();
+                publications.Add(new SyntexModelPublishOptions()
                 {
                     TargetLibraryServerRelativeUrl = $"{context.Web.ServerRelativeUrl}/{libraryName1}",
                     TargetSiteUrl = context.Uri.ToString(),
                     TargetWebServerRelativeUrl = context.Web.ServerRelativeUrl,
                 });
-                publications.Add(new SyntexModelPublicationOptions()
+                publications.Add(new SyntexModelPublishOptions()
                 {
                     TargetLibraryServerRelativeUrl = $"{context.Web.ServerRelativeUrl}/{libraryName2}",
                     TargetSiteUrl = context.Uri.ToString(),
@@ -278,7 +278,7 @@ namespace PnP.Core.Test.SharePoint
                 }
 
                 // unpublish model from library
-                var unpublishResults = await modelToRegister.UnPublishModelAsync(publications.Cast<SyntexModelUnPublicationOptions>().ToList());
+                var unpublishResults = await modelToRegister.UnPublishModelAsync(publications.Cast<SyntexModelUnPublishOptions>().ToList());
                 Assert.IsTrue(unpublishResults != null);
                 foreach (var unpublishResult in unpublishResults)
                 {
@@ -312,7 +312,7 @@ namespace PnP.Core.Test.SharePoint
                 await context.Web.EnsurePropertiesAsync(p => p.ServerRelativeUrl).ConfigureAwait(false);
 
                 // publish model to library
-                var result = await modelToRegister.PublishModelAsync(new SyntexModelPublicationOptions()
+                var result = await modelToRegister.PublishModelAsync(new SyntexModelPublishOptions()
                 {
                     TargetLibraryServerRelativeUrl = $"{context.Web.ServerRelativeUrl}/{libraryName}",
                     TargetSiteUrl = context.Uri.ToString(),
@@ -341,7 +341,7 @@ namespace PnP.Core.Test.SharePoint
                 Assert.IsTrue(modelPublication.ViewOption == MachineLearningPublicationViewOption.NewViewAsDefault);
 
                 // unpublish model
-                var unpublishResult = await modelToRegister.UnPublishModelAsync(new SyntexModelUnPublicationOptions()
+                var unpublishResult = await modelToRegister.UnPublishModelAsync(new SyntexModelUnPublishOptions()
                 {
                     TargetLibraryServerRelativeUrl = $"{context.Web.ServerRelativeUrl}/{libraryName}",
                     TargetSiteUrl = context.Uri.ToString(),

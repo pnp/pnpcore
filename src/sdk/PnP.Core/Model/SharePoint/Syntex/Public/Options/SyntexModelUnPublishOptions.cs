@@ -3,12 +3,12 @@
     /// <summary>
     /// Information about the library to unpublish a Syntex model from
     /// </summary>
-    public class SyntexModelUnPublicationOptions
+    public class SyntexModelUnPublishOptions
     {
         /// <summary>
         /// Default constructor
         /// </summary>
-        public SyntexModelUnPublicationOptions()
+        public SyntexModelUnPublishOptions()
         {
         }
 

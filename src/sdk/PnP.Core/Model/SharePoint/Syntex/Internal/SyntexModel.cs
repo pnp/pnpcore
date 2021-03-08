@@ -175,12 +175,12 @@ namespace PnP.Core.Model.SharePoint
             return ProcessModelPublishResponseMultiple(await PublishModelApiRequestAsync(modelPublications).ConfigureAwait(false));
         }
 
-        public ISyntexModelPublicationResult PublishModel(SyntexModelPublicationOptions publicationOptions)
+        public ISyntexModelPublicationResult PublishModel(SyntexModelPublishOptions publicationOptions)
         {
             return PublishModelAsync(publicationOptions).GetAwaiter().GetResult();
         }
 
-        public async Task<ISyntexModelPublicationResult> PublishModelAsync(SyntexModelPublicationOptions publicationOptions)
+        public async Task<ISyntexModelPublicationResult> PublishModelAsync(SyntexModelPublishOptions publicationOptions)
         {
             return ProcessModelPublishResponse(await PublishModelApiRequestAsync(UniqueId,
                                                         publicationOptions.TargetSiteUrl,
@@ -189,7 +189,7 @@ namespace PnP.Core.Model.SharePoint
                                                         publicationOptions.ViewOption).ConfigureAwait(false));
         }
 
-        public async Task<List<ISyntexModelPublicationResult>> PublishModelAsync(List<SyntexModelPublicationOptions> publicationOptions)
+        public async Task<List<ISyntexModelPublicationResult>> PublishModelAsync(List<SyntexModelPublishOptions> publicationOptions)
         {
             List<SyntexModelPublication> modelPublications = new List<SyntexModelPublication>();
             foreach (var publication in publicationOptions)
@@ -206,7 +206,7 @@ namespace PnP.Core.Model.SharePoint
             return ProcessModelPublishResponseMultiple(await PublishModelApiRequestAsync(modelPublications).ConfigureAwait(false));
         }
 
-        public List<ISyntexModelPublicationResult> PublishModel(List<SyntexModelPublicationOptions> publicationOptions)
+        public List<ISyntexModelPublicationResult> PublishModel(List<SyntexModelPublishOptions> publicationOptions)
         {
             return PublishModelAsync(publicationOptions).GetAwaiter().GetResult();
         }
@@ -365,7 +365,7 @@ namespace PnP.Core.Model.SharePoint
             return UnPublishModelAsync(libraries).GetAwaiter().GetResult();
         }
 
-        public async Task<ISyntexModelPublicationResult> UnPublishModelAsync(SyntexModelUnPublicationOptions unPublicationOptions)
+        public async Task<ISyntexModelPublicationResult> UnPublishModelAsync(SyntexModelUnPublishOptions unPublicationOptions)
         {
             return ProcessModelPublishResponse(await UnPublishModelApiRequestAsync(UniqueId,
                                                         unPublicationOptions.TargetSiteUrl,
@@ -373,12 +373,12 @@ namespace PnP.Core.Model.SharePoint
                                                         unPublicationOptions.TargetLibraryServerRelativeUrl).ConfigureAwait(false));
         }
 
-        public ISyntexModelPublicationResult UnPublishModel(SyntexModelUnPublicationOptions unPublicationOptions)
+        public ISyntexModelPublicationResult UnPublishModel(SyntexModelUnPublishOptions unPublicationOptions)
         {
             return UnPublishModelAsync(unPublicationOptions).GetAwaiter().GetResult();
         }
 
-        public async Task<List<ISyntexModelPublicationResult>> UnPublishModelAsync(List<SyntexModelUnPublicationOptions> unPublicationOptions)
+        public async Task<List<ISyntexModelPublicationResult>> UnPublishModelAsync(List<SyntexModelUnPublishOptions> unPublicationOptions)
         {
             List<SyntexModelPublication> modelPublications = new List<SyntexModelPublication>();
             foreach (var publication in unPublicationOptions)
@@ -394,7 +394,7 @@ namespace PnP.Core.Model.SharePoint
             return ProcessModelPublishResponseMultiple(await UnPublishModelApiRequestAsync(modelPublications).ConfigureAwait(false));
         }
 
-        public List<ISyntexModelPublicationResult> UnPublishModel(List<SyntexModelUnPublicationOptions> unPublicationOptions)
+        public List<ISyntexModelPublicationResult> UnPublishModel(List<SyntexModelUnPublishOptions> unPublicationOptions)
         {
             return UnPublishModelAsync(unPublicationOptions).GetAwaiter().GetResult();
         }

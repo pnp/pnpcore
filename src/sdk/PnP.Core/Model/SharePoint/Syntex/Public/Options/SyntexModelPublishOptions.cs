@@ -3,12 +3,12 @@
     /// <summary>
     /// Information about the library to publish a Syntex model to
     /// </summary>
-    public class SyntexModelPublicationOptions: SyntexModelUnPublicationOptions
+    public class SyntexModelPublishOptions: SyntexModelUnPublishOptions
     {
         /// <summary>
         /// Default constructor
         /// </summary>
-        public SyntexModelPublicationOptions()
+        public SyntexModelPublishOptions()
         {
             ViewOption = MachineLearningPublicationViewOption.NewViewAsDefault;
         }
