@@ -13,7 +13,7 @@ using (var context = await pnpContextFactory.CreateAsync("SiteToWorkWith"))
 
 ## Connecting to a Syntex Content Center site
 
-Connecting to a SharePoint Syntex Content Center site is an essential step when you're using the PnP Core SDK Syntex support. The SharePoint Syntex Content Center site is special type of site that contains content models: via a content model you teach SharePoint Syntex to read your content the way you would using machine teaching to build AI models with no code. SharePoint Syntex can automatically suggest or create metadata, invoke custom Power Automate workflows, and attach compliance labels to enforce retention or record management policies.
+Connecting to a SharePoint Syntex Content Center site is an essential step when you're using the PnP Core SDK Syntex support. The SharePoint Syntex Content Center site is special type of site that contains content understanding models: via a content understanding model you teach SharePoint Syntex to read your content the way you would using machine teaching to build AI models with no code. SharePoint Syntex can automatically suggest or create metadata, invoke custom Power Automate workflows, and attach compliance labels to enforce retention or record management policies.
 
 To verify if a site is a Syntex Content Center site you can use the [IsSyntexContentCenterAsync](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IWeb.html?q=IsSyntexContentCenterAsync) method on your web. When you want to work with a SharePoint Syntex Content Center site you need to first load it, this can be done using the [AsSyntexContentCenterAsync](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IWeb.html#collapsible-PnP_Core_Model_SharePoint_IWeb_AsSyntexContentCenterAsync) method:
 
@@ -28,6 +28,20 @@ var contentCenter = await context.Web.AsSyntexContentCenterAsync();
 if (contentCenter != null)
 {
   // Use the content center site
+}
+```
+
+## Listing the available models
+
+To list the available content understanding models in a Syntex Content Center you can use the [GetSyntexModelsAsync](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.ISyntexContentCenter.html#collapsible-PnP_Core_Model_SharePoint_ISyntexContentCenter_GetSyntexModelsAsync_System_String_) call that will result in a list of [ISyntexModel](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.ISyntexModel.html) instances.
+
+```csharp
+var cc = await context.Web.AsSyntexContentCenterAsync();
+var models = await cc.GetSyntexModelsAsync();
+
+foreach(var model in models)
+{
+    // do something with the Syntex model
 }
 ```
 
