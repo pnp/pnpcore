@@ -37,7 +37,7 @@ Once you've loaded a Syntex Content Center site you can work with the content un
 
 ### Publishing a model to a library
 
-Syntex content understanding models extract metadata from unstructured content (documents) and therefore to use them you need to publish a model to a document library. Once the model is published to a document library and a new document is added to the library the model will process the added document and will populate the defined metadata. To publish a model via PnP Core SDK you do have several option you can chose to publish to a single library or to multiple libraries in one go. For both publish options you have the choice to provide either an [IList](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IList.html) or to define [SyntexModelPublicationOptions](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.SyntexModelPublicationOptions.html) as shown in below code snippet.
+Syntex content understanding models extract metadata from unstructured content (documents) and therefore to use them you need to publish a model to a document library. Once the model is published to a document library and a new document is added to the library the model will process the added document and will populate the defined metadata. To publish a model via PnP Core SDK you do have several option you can chose to publish to a single library or to multiple libraries in one go. For both publish options you have the choice to provide either an [IList](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IList.html) or to define [SyntexModelPublishOptions](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.SyntexModelPublishOptions.html) as shown in below code snippet.
 
 ```csharp
 var cc = await context.Web.AsSyntexContentCenterAsync();
@@ -59,18 +59,18 @@ libraries.Add(invoices);
 
 var result = await modelToRegister.PublishModelAsync(libraries);
 
-// Option C: publish to a single library via SyntexModelPublicationOptions
+// Option C: publish to a single library via SyntexModelPublishOptions
 var result = await modelToRegister.PublishModelAsync(
-                new SyntexModelPublicationOptions()
+                new SyntexModelPublishOptions()
                 {
                     TargetLibraryServerRelativeUrl = $"/sites/contosoHR/documents",
                     TargetSiteUrl = "https://contoso-sharepoint.com/sites/contosoHR",
                     TargetWebServerRelativeUrl = "/sites/contosoHR",
                 });
 
-// Option D: publish a model to multiple libraries via SyntexModelPublicationOptions
-List<SyntexModelPublicationOptions> publications = new();
-publications.Add(new SyntexModelPublicationOptions()
+// Option D: publish a model to multiple libraries via SyntexModelPublishOptions
+List<SyntexModelPublishOptions> publications = new();
+publications.Add(new SyntexModelPublishOptions()
 {
     TargetLibraryServerRelativeUrl = $"/sites/contosoHR/documents",
     TargetSiteUrl = "https://contoso-sharepoint.com/sites/contosoHR",
@@ -89,7 +89,7 @@ var result = await modelToRegister.PublishModelAsync(publications);
 
 ### Unpublish a model from a library
 
-Unpushing models from a library follows the same pattern as publishing them: you can either use an [IList](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IList.html) or define [SyntexModelUnPublicationOptions](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.SyntexModelUnPublicationOptions.html) and then unpublish a model from a single library or from multiple.
+Unpushing models from a library follows the same pattern as publishing them: you can either use an [IList](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IList.html) or define [SyntexModelUnPublishOptions](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.SyntexModelUnPublishOptions.html) and then unpublish a model from a single library or from multiple.
 
 ```csharp
 var cc = await context.Web.AsSyntexContentCenterAsync();
@@ -111,9 +111,9 @@ libraries.Add(invoices);
 
 var result = await modelToRegister.UnPublishModelAsync(libraries);
 
-// Option C: unpublish from a single library via SyntexModelUnPublicationOptions
-var result = await modelToRegister.PublishModelAsync(
-                new SyntexModelUnPublicationOptions()
+// Option C: unpublish from a single library via SyntexModelUnPublishOptions
+var result = await modelToRegister.UnPublishModelAsync(
+                new SyntexModelUnPublishOptions()
                 {
                     TargetLibraryServerRelativeUrl = $"/sites/contosoHR/documents",
                     TargetSiteUrl = "https://contoso-sharepoint.com/sites/contosoHR",
@@ -121,23 +121,40 @@ var result = await modelToRegister.PublishModelAsync(
                 });
 
 // Option D: unpublish a model from multiple libraries via SyntexModelUnPublicationOptions
-List<SyntexModelPublicationOptions> publications = new();
-publications.Add(new SyntexModelUnPublicationOptions()
+List<SyntexModelUnPublishOptions> publications = new();
+publications.Add(new SyntexModelUnPublishOptions()
 {
     TargetLibraryServerRelativeUrl = $"/sites/contosoHR/documents",
     TargetSiteUrl = "https://contoso-sharepoint.com/sites/contosoHR",
     TargetWebServerRelativeUrl = "/sites/contosoHR",
     ViewOption = MachineLearningPublicationViewOption.NewViewAsDefault
 });
-publications.Add(new SyntexModelUnPublicationOptions()
+publications.Add(new SyntexModelUnPublishOptions()
 {
     TargetLibraryServerRelativeUrl = $"/sites/contosoHR/invoices",
     TargetSiteUrl = "https://contoso-sharepoint.com/sites/contosoHR",
     TargetWebServerRelativeUrl = "/sites/contosoHR",
     ViewOption = MachineLearningPublicationViewOption.NoNewView
 });
-var result = await modelToRegister.PublishModelAsync(publications);
+var result = await modelToRegister.UnPublishModelAsync(publications);
 ```
 
 ### List the libraries to which a model was published
 
+If you want to know to which libraries a Syntex model was deployed then you can use the [GetModelPublicationsAsync](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.ISyntexModel.html#collapsible-PnP_Core_Model_SharePoint_ISyntexModel_GetModelPublicationsAsync) method to get a list of libraries to which the model was published.
+
+```csharp
+var cc = await context.Web.AsSyntexContentCenterAsync();
+var models = await cc.GetSyntexModelsAsync();
+// let's work with the first Syntex model
+var modelToRegister = models.First();
+
+
+// Get libraries to which this model was published
+var libraries = await modelToRegister.GetModelPublicationsAsync();
+
+foreach(var library in libraries)
+{
+    // Do something with the library publication
+}
+```
