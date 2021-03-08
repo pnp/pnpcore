@@ -120,7 +120,7 @@ namespace PnP.Core.Test.QueryModel
         [TestMethod]
         public async Task TestQueryItemsAsync_REST()
         {
-            TestCommon.Instance.Mocking = false;
+            // TestCommon.Instance.Mocking = false;
 
             var expectedListItemTitle = "Home";
 

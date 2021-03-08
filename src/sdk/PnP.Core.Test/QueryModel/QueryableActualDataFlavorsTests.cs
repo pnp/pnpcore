@@ -148,6 +148,7 @@ namespace PnP.Core.Test.QueryModel
 
         private static async Task TestLoadImplementation(Core.Services.PnPContext context)
         {
+            // TestCommon.Instance.Mocking = false;
             await context.Web.LoadAsync(w => w.Title, w => w.Description, w => w.Lists);
 
             Assert.IsNotNull(context.Web);
