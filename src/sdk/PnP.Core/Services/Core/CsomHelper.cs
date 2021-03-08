@@ -7,28 +7,8 @@ namespace PnP.Core.Services
 {
     internal static class CsomHelper
     {
-        // SystemUpdate and SystemUpdateOverwriteVersion base XML payloads
-        internal static string ListItemSystemUpdate = "<Request AddExpandoFieldTypeSuffix=\"true\" SchemaVersion=\"15.0.0.0\" LibraryVersion=\"16.0.0.0\" ApplicationName=\"pnp core sdk\" xmlns=\"http://schemas.microsoft.com/sharepoint/clientquery/2009\"><Actions>{FieldValues}<Method Name=\"SystemUpdate\" Id=\"{Counter}\" ObjectPathId=\"7\" /></Actions><ObjectPaths>{TaxonomyMultiValueObjectPaths}<Identity Id=\"7\" Name=\"121a659f-e03e-2000-4281-1212829d67dd|740c6a0b-85e2-48a0-a494-e0f1759d4aa7:site:{Site.Id}:web:{Web.Id}:list:{Parent.Id}:item:{Id},1\" />{TaxonomyMultiValueIdentities}</ObjectPaths></Request>";
-        internal static string ListItemUpdateOverwriteVersion = "<Request AddExpandoFieldTypeSuffix=\"true\" SchemaVersion=\"15.0.0.0\" LibraryVersion=\"16.0.0.0\" ApplicationName=\"pnp core sdk\" xmlns=\"http://schemas.microsoft.com/sharepoint/clientquery/2009\"><Actions>{FieldValues}<Method Name=\"UpdateOverwriteVersion\" Id=\"{Counter}\" ObjectPathId=\"7\"/></Actions><ObjectPaths>{TaxonomyMultiValueObjectPaths}<Identity Id=\"7\" Name=\"121a659f-e03e-2000-4281-1212829d67dd|740c6a0b-85e2-48a0-a494-e0f1759d4aa7:site:{Site.Id}:web:{Web.Id}:list:{Parent.Id}:item:{Id},1\" />{TaxonomyMultiValueIdentities}</ObjectPaths></Request>";
-
-        // SystemUpdate/SystemUpdateOverwriteVersion field value handling
-        // Standard field
-        internal static string ListItemSystemUpdateSetFieldValue = "<Method Name=\"SetFieldValue\" Id=\"{Counter}\" ObjectPathId=\"7\"><Parameters><Parameter Type=\"String\">{FieldName}</Parameter><Parameter Type=\"{FieldType}\">{FieldValue}</Parameter></Parameters></Method>";
-        // Standard field = null
-        internal static string ListItemSystemUpdateSetFieldValueToNull = "<Method Name=\"SetFieldValue\" Id=\"{Counter}\" ObjectPathId=\"7\"><Parameters><Parameter Type=\"String\">{FieldName}</Parameter><Parameter Type=\"Null\" /></Parameters></Method>";
-        // Standard array field
-        internal static string ListItemSystemUpdateSetArrayFieldValue = "<Method Name=\"SetFieldValue\" Id=\"{Counter}\" ObjectPathId=\"7\"><Parameters><Parameter Type=\"String\">{FieldName}</Parameter><Parameter Type=\"Array\">{ArrayValues}</Parameter></Parameters></Method>";
-        // Special field (url, user, lookup, taxonomy)
-        internal static string ListItemSpecialField = "<Method Name=\"SetFieldValue\" Id=\"{Counter}\" ObjectPathId=\"7\"><Parameters><Parameter Type=\"String\">{FieldName}</Parameter><Parameter TypeId=\"{ObjectId}\">{FieldValues}</Parameter></Parameters></Method>";
         internal static string ListItemSpecialFieldProperty = "<Property Name=\"{FieldName}\" Type=\"{FieldType}\">{FieldValue}</Property>";
         internal static string ListItemSpecialFieldPropertyEmpty = "<Property Name=\"{FieldName}\" Type=\"{FieldType}\" />";
-        // Special array field (url, user, lookup)
-        internal static string ListItemSpecialArrayField = "<Method Name=\"SetFieldValue\" Id=\"{Counter}\" ObjectPathId=\"7\"><Parameters><Parameter Type=\"String\">{FieldName}</Parameter><Parameter Type=\"Array\">{ArrayValues}</Parameter></Parameters></Method>";
-        internal static string ListItemSpecialArrayObject = "<Object TypeId=\"{ObjectId}\">{FieldValue}</Object>";
-        internal static string ListItemArrayFieldProperty = "<Object Type=\"{FieldType}\">{FieldValue}</Object>";
-        // Taxonomy multivalue array field
-        internal static string ListItemTaxonomyMultiValueFieldAction = "<ObjectPath Id=\"{Counter2}\" ObjectPathId=\"{TaxFieldObjectId}\" /><Method Name=\"PopulateFromLabelGuidPairs\" Id=\"{Counter3}\" ObjectPathId=\"{TaxFieldObjectId}\"><Parameters><Parameter Type=\"String\">{FieldValue}</Parameter></Parameters></Method><Method Name=\"SetFieldValue\" Id=\"{Counter}\" ObjectPathId=\"7\"><Parameters><Parameter Type=\"String\">{FieldName}</Parameter><Parameter ObjectPathId=\"{TaxFieldObjectId}\" /></Parameters></Method>";
-        internal static string ListItemTaxonomyMultiValueFieldObjectPath = "<Constructor Id=\"{TaxFieldObjectId}\" TypeId=\"{c3dfae10-f3bf-4894-9012-bb60665b6d91}\"><Parameters><Parameter Type=\"Null\" /><Parameter ObjectPathId=\"{TaxFieldIdentityObjectId}\" /></Parameters></Constructor>";
         internal static string ListItemTaxonomyMultiValueFieldIdentity = "<Identity Id=\"{TaxFieldIdentityObjectId}\" Name=\"86e78d9f-90e2-2000-915f-217ff0ac791d|740c6a0b-85e2-48a0-a494-e0f1759d4aa7:site:{Site.Id}:web:{Web.Id}:list:{Parent.Id}:field:{TaxonomyFieldId}\" />";
 
         // Taxonomy field creation

@@ -10,11 +10,14 @@ namespace PnP.Core.Services.Core.CSOM.QueryAction
 
         public override string ToString()
         {
-            List<string> parameters = Parameters.Select(p => $"<Parameter Type=\"{p.Type ?? "Null"}\">{p.Value ?? ""}</Parameter>").ToList();
             string parametersPart = "";
-            if (parameters.Count > 0)
+            if (Parameters != null)
             {
-                parametersPart = $"<Parameters>{string.Join("", parameters)}</Parameters>";
+                List<string> parameters = Parameters.Select(p => p.SerializeParameter()).ToList();
+                if (parameters.Count > 0)
+                {
+                    parametersPart = $"<Parameters>{string.Join("", parameters)}</Parameters>";
+                }
             }
             return $"<Method Name=\"{Name}\" Id=\"{Id}\" ObjectPathId=\"{ObjectPathId}\">{parametersPart}</Method>";
         }
