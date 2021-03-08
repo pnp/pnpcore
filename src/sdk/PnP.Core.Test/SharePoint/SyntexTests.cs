@@ -34,7 +34,7 @@ namespace PnP.Core.Test.SharePoint
         public async Task IsSyntexContentCenterPositive()
         {
             //TestCommon.Instance.Mocking = false;            
-            if (!TestCommon.Instance.Mocking && string.IsNullOrEmpty(TestCommon.SyntexContentCenterTestSite)) Assert.Inconclusive("No Syntex Content Center setup for live testing");
+            TestCommon.SharePointSyntexTestSetup();
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.SyntexContentCenterTestSite))
             {
@@ -47,7 +47,7 @@ namespace PnP.Core.Test.SharePoint
         public async Task AsSyntexContentCenterNegative()
         {
             //TestCommon.Instance.Mocking = false;
-            if (!TestCommon.Instance.Mocking && string.IsNullOrEmpty(TestCommon.SyntexContentCenterTestSite)) Assert.Inconclusive("No Syntex Content Center setup for live testing");
+            TestCommon.SharePointSyntexTestSetup();
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
@@ -60,7 +60,7 @@ namespace PnP.Core.Test.SharePoint
         public async Task AsSyntexContentCenterPositive()
         {
             //TestCommon.Instance.Mocking = false;
-            if (!TestCommon.Instance.Mocking && string.IsNullOrEmpty(TestCommon.SyntexContentCenterTestSite)) Assert.Inconclusive("No Syntex Content Center setup for live testing");
+            TestCommon.SharePointSyntexTestSetup();
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.SyntexContentCenterTestSite))
             {
@@ -75,7 +75,7 @@ namespace PnP.Core.Test.SharePoint
         public async Task GetSyntexModels()
         {
             //TestCommon.Instance.Mocking = false;
-            if (!TestCommon.Instance.Mocking && string.IsNullOrEmpty(TestCommon.SyntexContentCenterTestSite)) Assert.Inconclusive("No Syntex Content Center setup for live testing");
+            TestCommon.SharePointSyntexTestSetup();
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.SyntexContentCenterTestSite))
             {
@@ -91,7 +91,7 @@ namespace PnP.Core.Test.SharePoint
         public async Task GetSyntexModelsViaFilter()
         {
             //TestCommon.Instance.Mocking = false;
-            if (!TestCommon.Instance.Mocking && string.IsNullOrEmpty(TestCommon.SyntexContentCenterTestSite)) Assert.Inconclusive("No Syntex Content Center setup for live testing");
+            TestCommon.SharePointSyntexTestSetup();
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.SyntexContentCenterTestSite))
             {
@@ -105,7 +105,7 @@ namespace PnP.Core.Test.SharePoint
         public async Task PublishUnPublishModelToList()
         {
             //TestCommon.Instance.Mocking = false;
-            if (!TestCommon.Instance.Mocking && string.IsNullOrEmpty(TestCommon.SyntexContentCenterTestSite)) Assert.Inconclusive("No Syntex Content Center setup for live testing");
+            TestCommon.SharePointSyntexTestSetup();
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.SyntexContentCenterTestSite))
             {
@@ -140,7 +140,7 @@ namespace PnP.Core.Test.SharePoint
         public async Task PublishUnPublishModelToList2()
         {
             //TestCommon.Instance.Mocking = false;
-            if (!TestCommon.Instance.Mocking && string.IsNullOrEmpty(TestCommon.SyntexContentCenterTestSite)) Assert.Inconclusive("No Syntex Content Center setup for live testing");
+            TestCommon.SharePointSyntexTestSetup();
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.SyntexContentCenterTestSite))
             {
@@ -187,7 +187,7 @@ namespace PnP.Core.Test.SharePoint
         public async Task PublishUnPublishModelsToList()
         {
             //TestCommon.Instance.Mocking = false;
-            if (!TestCommon.Instance.Mocking && string.IsNullOrEmpty(TestCommon.SyntexContentCenterTestSite)) Assert.Inconclusive("No Syntex Content Center setup for live testing");
+            TestCommon.SharePointSyntexTestSetup();
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.SyntexContentCenterTestSite))
             {
@@ -235,7 +235,7 @@ namespace PnP.Core.Test.SharePoint
         public async Task PublishUnPublishModelsToList2()
         {
             //TestCommon.Instance.Mocking = false;
-            if (!TestCommon.Instance.Mocking && string.IsNullOrEmpty(TestCommon.SyntexContentCenterTestSite)) Assert.Inconclusive("No Syntex Content Center setup for live testing");
+            TestCommon.SharePointSyntexTestSetup();
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.SyntexContentCenterTestSite))
             {
@@ -295,7 +295,7 @@ namespace PnP.Core.Test.SharePoint
         public async Task GetModelPublicationsTest()
         {
             //TestCommon.Instance.Mocking = false;
-            if (!TestCommon.Instance.Mocking && string.IsNullOrEmpty(TestCommon.SyntexContentCenterTestSite)) Assert.Inconclusive("No Syntex Content Center setup for live testing");
+            TestCommon.SharePointSyntexTestSetup();
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.SyntexContentCenterTestSite))
             {
