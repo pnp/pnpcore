@@ -2058,7 +2058,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.ISyntexModel.html",
-          "hash": "WpnXYZE2zQfAYgps9Glb4w=="
+          "hash": "jUrcm52GvZZEl6CIjyj05w=="
         }
       },
       "is_incremental": false,
@@ -2522,11 +2522,11 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/PnP.Core.Model.SharePoint.SyntexModelPublicationOptions.yml",
+      "source_relative_path": "api/PnP.Core.Model.SharePoint.SyntexModelPublishOptions.yml",
       "output": {
         ".html": {
-          "relative_path": "api/PnP.Core.Model.SharePoint.SyntexModelPublicationOptions.html",
-          "hash": "eHQe/YpJyIPQ+E36MWrkJw=="
+          "relative_path": "api/PnP.Core.Model.SharePoint.SyntexModelPublishOptions.html",
+          "hash": "TDz7q3Edw50qPlisKH94fQ=="
         }
       },
       "is_incremental": false,
@@ -2534,11 +2534,11 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/PnP.Core.Model.SharePoint.SyntexModelUnPublicationOptions.yml",
+      "source_relative_path": "api/PnP.Core.Model.SharePoint.SyntexModelUnPublishOptions.yml",
       "output": {
         ".html": {
-          "relative_path": "api/PnP.Core.Model.SharePoint.SyntexModelUnPublicationOptions.html",
-          "hash": "MmUQQ6VjVuKunVzizJf3Ug=="
+          "relative_path": "api/PnP.Core.Model.SharePoint.SyntexModelUnPublishOptions.html",
+          "hash": "VpXzq0SelZM57vDEZH2Efw=="
         }
       },
       "is_incremental": false,
@@ -2682,7 +2682,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.html",
-          "hash": "CzAeb/5KAbDv1ZmVdKIYiQ=="
+          "hash": "xQMnwKmilf3mYFTz5TG1pQ=="
         }
       },
       "is_incremental": false,
@@ -3714,7 +3714,7 @@
       "output": {
         ".html": {
           "relative_path": "api/toc.html",
-          "hash": "Vih7wcqK6VQbbG6aSKNGhw=="
+          "hash": "aRjzbDqTVGZTqRDlSEx9oQ=="
         }
       },
       "is_incremental": false,
@@ -4599,6 +4599,18 @@
     },
     {
       "type": "Conceptual",
+      "source_relative_path": "using-the-sdk/syntex-intro.md",
+      "output": {
+        ".html": {
+          "relative_path": "using-the-sdk/syntex-intro.html",
+          "hash": "eHPL5ttNWE1lm7f4sZrp3w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
       "source_relative_path": "using-the-sdk/teams-archiving.md",
       "output": {
         ".html": {
@@ -4708,7 +4720,7 @@
         "ConceptualDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build",
-          "total_file_count": 57,
+          "total_file_count": 58,
           "skipped_file_count": 0
         },
         "ManagedReferenceDocumentProcessor": {
