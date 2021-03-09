@@ -1,11 +1,9 @@
 ﻿using PnP.Core.Model;
 using PnP.Core.Model.SharePoint;
 using PnP.Core.Services.Core.CSOM.Utils.Model;
-using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using System.Text;
 
 namespace PnP.Core.Services.Core.CSOM.Utils
 {

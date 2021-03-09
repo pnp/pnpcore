@@ -423,7 +423,7 @@ namespace PnP.Core.Model.SharePoint
 
         public async Task UpdateOverwriteVersionAsync()
         {
-            UpdateListItemRequest request = new UpdateOvervriteVersionRequest(PnPContext.Site.Id.ToString(), PnPContext.Web.Id.ToString(), "", Id);
+            UpdateListItemRequest request = new UpdateOverwriteVersionRequest(PnPContext.Site.Id.ToString(), PnPContext.Web.Id.ToString(), "", Id);
             await PrepareUpdateCall(request).ConfigureAwait(false);
             if (request.FieldsToUpdate.Count > 0)
             {
@@ -475,9 +475,10 @@ namespace PnP.Core.Model.SharePoint
             List<CSOMItemField> fieldsToUpdate = GetFieldsToUpdate();
             request.FieldsToUpdate.AddRange(fieldsToUpdate);
         }
+
         public async Task UpdateOverwriteVersionBatchAsync(Batch batch)
         {
-            UpdateListItemRequest request = new UpdateOvervriteVersionRequest(PnPContext.Site.Id.ToString(), PnPContext.Web.Id.ToString(), "", Id);
+            UpdateListItemRequest request = new UpdateOverwriteVersionRequest(PnPContext.Site.Id.ToString(), PnPContext.Web.Id.ToString(), "", Id);
             await PrepareUpdateCall(request).ConfigureAwait(false);
             if (request.FieldsToUpdate.Count > 0)
             {

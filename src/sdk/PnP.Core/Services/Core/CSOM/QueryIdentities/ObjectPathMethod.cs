@@ -11,7 +11,7 @@ namespace PnP.Core.Services.Core.CSOM.QueryIdentities
         public override string ToString()
         {
             string parameters = string.Join("", Parameters.Properties.Select(p => p.SerializeParameter()));
-            return $"<Method Id=\"{Id}\" ParentId=\"{ParentId}\" Name=\"{Name}\"><Parameters>${parameters}</Parameters></Method>";
+            return $"<Method Id=\"{Id}\" ParentId=\"{ParentId}\" Name=\"{Name}\"><Parameters>{parameters}</Parameters></Method>";
         }
     }
     internal class ConstructorPath : ObjectPathMethod
@@ -20,7 +20,7 @@ namespace PnP.Core.Services.Core.CSOM.QueryIdentities
         public override string ToString()
         {
             string parameters = string.Join("", Parameters.Properties.Select(p => p.SerializeParameter()));
-            return $"<Constructor Id=\"{Id}\" TypeId=\"{TypeId}\"><Parameters>${parameters}</Parameters></Constructor>";
+            return $"<Constructor Id=\"{Id}\" TypeId=\"{TypeId}\"><Parameters>{parameters}</Parameters></Constructor>";
         }
     }
 

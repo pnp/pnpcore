@@ -10,10 +10,12 @@ namespace PnP.Core.Services.Core.CSOM.QueryAction
     internal class ArrayParameter : Parameter
     {
         IFieldValueCollection FieldValueCollection { get; set; }
+
         internal ArrayParameter(IFieldValueCollection fieldValueCollection)
         {
             FieldValueCollection = fieldValueCollection;
         }
+
         internal override string SerializeParameter()
         {
             List<Parameter> childParameter = new List<Parameter>();

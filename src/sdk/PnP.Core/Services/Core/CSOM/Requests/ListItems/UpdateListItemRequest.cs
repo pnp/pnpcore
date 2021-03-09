@@ -12,13 +12,21 @@ namespace PnP.Core.Services.Core.CSOM.Requests.ListItems
     internal class UpdateListItemRequest : IRequest<ListItem>
     {
         public ListItem Result { get; private set; }
+
         internal string ListId { get; set; }
+
         internal string SiteId { get; set; }
+
         internal string WebId { get; set; }
+
         internal int ItemId { get; set; }
+
         internal List<CSOMItemField> FieldsToUpdate { get; } = new List<CSOMItemField>();
+
         internal CSOMResponseHelper ResponseHelper { get; set; } = new CSOMResponseHelper();
+
         internal int IdentityPath { get; private set; }
+
         internal virtual string UpdateMethodName { get; set; } = "Update";
 
         internal UpdateListItemRequest(string siteId, string webId, string listId, int itemId)
@@ -61,6 +69,7 @@ namespace PnP.Core.Services.Core.CSOM.Requests.ListItems
                     result.AddRange(defaultStrategy.GetFieldUpdateAction(fld, listItemIdentity));
                 }
             }
+
             if(FieldsToUpdate.Any(fld=>fld.FieldType == "TaxonomyFieldType" || fld.FieldType == "TaxonomyFieldTypeMulti"))
             {
                 result.Add(new ActionObjectPath()
@@ -73,6 +82,7 @@ namespace PnP.Core.Services.Core.CSOM.Requests.ListItems
                     ObjectPath = fieldsProperty
                 });
             }
+
             result.Add(new ActionObjectPath()
             {
                 Action = new MethodAction()
@@ -89,9 +99,11 @@ namespace PnP.Core.Services.Core.CSOM.Requests.ListItems
 
         private static Dictionary<string, IFieldUpdateStrategy> ConstructCustomUpdateStrategies(IIdProvider idProvider, Identity listIdentity, Property fieldsProperty)
         {
-            Dictionary<string, IFieldUpdateStrategy> fieldUpdateStrategies = new Dictionary<string, IFieldUpdateStrategy>();
-            fieldUpdateStrategies.Add("FieldTaxonomyValue", new TaxonomyFieldUpdateStrategy(idProvider, listIdentity, fieldsProperty));
-            fieldUpdateStrategies.Add("TaxonomyFieldTypeMulti", new TaxonomyMultiFieldUpdateStrategy(idProvider, listIdentity, fieldsProperty));
+            Dictionary<string, IFieldUpdateStrategy> fieldUpdateStrategies = new Dictionary<string, IFieldUpdateStrategy>
+            {
+                { "FieldTaxonomyValue", new TaxonomyFieldUpdateStrategy(idProvider, listIdentity, fieldsProperty) },
+                { "TaxonomyFieldTypeMulti", new TaxonomyMultiFieldUpdateStrategy(idProvider, listIdentity, fieldsProperty) }
+            };
             return fieldUpdateStrategies;
         }
 
@@ -99,18 +111,22 @@ namespace PnP.Core.Services.Core.CSOM.Requests.ListItems
         {
 
             //Get fields
-            Property fieldsProperty = new Property();
-            fieldsProperty.Id = idProvider.GetActionId();
-            fieldsProperty.Name = "Fields";
-            fieldsProperty.ParentId = listIdentity.Id;
+            Property fieldsProperty = new Property
+            {
+                Id = idProvider.GetActionId(),
+                Name = "Fields",
+                ParentId = listIdentity.Id
+            };
             return fieldsProperty;
         }
 
         private Identity GetListIdentity(IIdProvider idProvider)
         {
-            Identity listIdentity = new Identity();
-            listIdentity.Id = idProvider.GetActionId();
-            listIdentity.Name = $"121a659f-e03e-2000-4281-1212829d67dd|740c6a0b-85e2-48a0-a494-e0f1759d4aa7:site:{SiteId}:web:{WebId}:list:{ListId}";
+            Identity listIdentity = new Identity
+            {
+                Id = idProvider.GetActionId(),
+                Name = $"121a659f-e03e-2000-4281-1212829d67dd|740c6a0b-85e2-48a0-a494-e0f1759d4aa7:site:{SiteId}:web:{WebId}:list:{ListId}"
+            };
             return listIdentity;
         }
 

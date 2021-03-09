@@ -59,7 +59,7 @@ namespace PnP.Core.Test.Services.Core.CSOM.Requests
         [TestMethod]
         public void UpdateOvervriteVersionRequest_Test_GetRequest()
         {
-            UpdateListItemRequest request = new UpdateOvervriteVersionRequest("test-site-id", "test-web-id", "test-list-id", 1);
+            UpdateListItemRequest request = new UpdateOverwriteVersionRequest("test-site-id", "test-web-id", "test-list-id", 1);
             request.FieldsToUpdate.Add(new CSOMItemField()
             {
                 FieldName = "Test Field",
@@ -79,7 +79,7 @@ namespace PnP.Core.Test.Services.Core.CSOM.Requests
         [TestMethod]
         public void UpdateOvervriteVersionRequest_Test_ProcessRequest()
         {
-            UpdateListItemRequest request = new UpdateOvervriteVersionRequest("test-site-id", "test-web-id", "test-list-id", 1);
+            UpdateListItemRequest request = new UpdateOverwriteVersionRequest("test-site-id", "test-web-id", "test-list-id", 1);
             request.FieldsToUpdate.Add(new CSOMItemField()
             {
                 FieldName = "Title",
