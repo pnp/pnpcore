@@ -1,4 +1,4 @@
---batchresponse_25a8ee6b-21d8-4f37-9f7b-fc1ac6e54a01
+--batchresponse_29302f1f-2111-4b85-8dac-620169c48f37
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
@@ -6,4 +6,4 @@ HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
 {"d":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web","type":"SP.Web"},"Id":"8c8e101c-1b0d-4253-85e7-c30039bf46e2","TenantAdminMembersCanShare":0,"ThirdPartyMdmEnabled":false,"TreeViewEnabled":false,"UseAccessRequestDefault":true,"WebTemplate":"GROUP","WebTemplateConfiguration":"GROUP#0"}}
---batchresponse_25a8ee6b-21d8-4f37-9f7b-fc1ac6e54a01--
+--batchresponse_29302f1f-2111-4b85-8dac-620169c48f37--

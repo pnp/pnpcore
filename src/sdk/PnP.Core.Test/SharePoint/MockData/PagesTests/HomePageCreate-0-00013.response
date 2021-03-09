@@ -1,4 +1,4 @@
---batchresponse_156c756d-7be5-448c-b1a6-69fc0e527a84
+--batchresponse_1552f64c-1a5e-4648-9599-4b288723a263
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
@@ -7,11 +7,11 @@ CONTENT-TYPE: application/json; charset=utf-8
 
 { "Row" : 
 [{
-"ID": "1258",
+"ID": "1338",
 "PermMask": "0x7ffffffffffbffff",
 "FSObjType": "0",
 "HTML_x0020_File_x0020_Type": "",
-"UniqueId": "{26C341D2-44AF-4EB8-945A-E2F25563BF46}",
+"UniqueId": "{E1B52161-4AC8-4551-A2E0-34DE45A12718}",
 "ProgId": "",
 "NoExecute": "0",
 "ContentTypeId": "0x0101009D1CB255DA76424F860D91F20E6C411800BC66A1F7CEC63943B700A35FCBCF0164",
@@ -21,7 +21,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "FileRef.urlencoding": "\u002fsites\u002fprov-1\u002fSitePages\u002fPNP_SDK_TEST_HomePageCreate.aspx",
 "FileRef.scriptencodeasurl": "\\u002fsites\\u002fprov-1\\u002fSitePages\\u002fPNP_SDK_TEST_HomePageCreate.aspx",
 "_UIVersion": "1",
-"SMTotalSize": "5728",
+"SMTotalSize": "5726",
 "File_x0020_Size": "4511",
 "_CommentFlags": "",
 "File_x0020_Type": "aspx",
@@ -40,7 +40,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "Title": "PNP_SDK_TEST_HomePageCreate",
 "ClientSideApplicationId": "{B6917CB1-93A0-4B97-A84D-7CF49975D4EC}",
 "PageLayoutType": "Home",
-"CanvasContent1": "<div dir=\"\" class=\"ms-rtestate-field\"><div><div data-sp-canvascontrol=\"\" data-sp-canvasdataversion=\"1.0\" data-sp-controldata=\"&#123;&quot;editorType&quot;&#58;&quot;CKEditor&quot;,&quot;controlType&quot;&#58;4,&quot;id&quot;&#58;&quot;d47875ec-37f5-4ae8-b3bd-217c3ec2d02f&quot;,&quot;position&quot;&#58;&#123;&quot;controlIndex&quot;&#58;1,&quot;zoneIndex&quot;&#58;1,&quot;sectionIndex&quot;&#58;1,&quot;sectionFactor&quot;&#58;12,&quot;layoutIndex&quot;&#58;1&#125;,&quot;emphasis&quot;&#58;&#123;&quot;zoneEmphasis&quot;&#58;0&#125;&#125;\"><div data-sp-rte=\"\"><p>PnP<\u002fp><\u002fdiv><\u002fdiv><div data-sp-canvascontrol=\"\" data-sp-canvasdataversion=\"1.0\" data-sp-controldata=\"&#123;&quot;controlType&quot;&#58;0,&quot;pageSettingsSlice&quot;&#58;&#123;&quot;isDefaultDescription&quot;&#58;false,&quot;isDefaultThumbnail&quot;&#58;true&#125;&#125;\"><\u002fdiv><\u002fdiv><\u002fdiv>",
+"CanvasContent1": "<div dir=\"\" class=\"ms-rtestate-field\"><div><div data-sp-canvascontrol=\"\" data-sp-canvasdataversion=\"1.0\" data-sp-controldata=\"&#123;&quot;editorType&quot;&#58;&quot;CKEditor&quot;,&quot;controlType&quot;&#58;4,&quot;id&quot;&#58;&quot;7d79d5ed-edb6-4398-bc93-d4bbd1223ab5&quot;,&quot;position&quot;&#58;&#123;&quot;controlIndex&quot;&#58;1,&quot;zoneIndex&quot;&#58;1,&quot;sectionIndex&quot;&#58;1,&quot;sectionFactor&quot;&#58;12,&quot;layoutIndex&quot;&#58;1&#125;,&quot;emphasis&quot;&#58;&#123;&quot;zoneEmphasis&quot;&#58;0&#125;&#125;\"><div data-sp-rte=\"\"><p>PnP<\u002fp><\u002fdiv><\u002fdiv><div data-sp-canvascontrol=\"\" data-sp-canvasdataversion=\"1.0\" data-sp-controldata=\"&#123;&quot;controlType&quot;&#58;0,&quot;pageSettingsSlice&quot;&#58;&#123;&quot;isDefaultDescription&quot;&#58;false,&quot;isDefaultThumbnail&quot;&#58;true&#125;&#125;\"><\u002fdiv><\u002fdiv><\u002fdiv>",
 "_AuthorByline": "",
 "_AuthorByline.id": "",
 "_AuthorByline.title": "",
@@ -82,4 +82,4 @@ CONTENT-TYPE: application/json; charset=utf-8
 ,"CurrentFolderSpItemUrl" : ""
 
 }
---batchresponse_156c756d-7be5-448c-b1a6-69fc0e527a84--
+--batchresponse_1552f64c-1a5e-4648-9599-4b288723a263--

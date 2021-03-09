@@ -468,6 +468,7 @@ namespace PnP.Core.Model.SharePoint
                 // When it's a file then we need to resolve the {Parent.Id} token manually as otherwise this 
                 // will point to the File id while we need to list Id here
                 await file.EnsurePropertiesAsync(p => p.ListId).ConfigureAwait(false);
+                listId = file.ListId.ToString();
             }
 
             if ((this as IDataModelParent).Parent.Parent is IList)

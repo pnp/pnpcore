@@ -1,4 +1,4 @@
---batchresponse_29e8729c-fe32-47f3-964b-7c1145856114
+--batchresponse_1bc62ac0-8ce5-46f6-bd92-729a4c08b8f1
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
@@ -6,4 +6,4 @@ HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
 {"d":{"results":[{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'5c73d6b2-ac03-4058-8233-af21df6ed8de')","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'5c73d6b2-ac03-4058-8233-af21df6ed8de')","etag":"\"35\"","type":"SP.List"},"EnableModeration":false,"EnableVersioning":true,"Id":"5c73d6b2-ac03-4058-8233-af21df6ed8de"}]}}
---batchresponse_29e8729c-fe32-47f3-964b-7c1145856114--
+--batchresponse_1bc62ac0-8ce5-46f6-bd92-729a4c08b8f1--

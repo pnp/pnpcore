@@ -43,6 +43,10 @@ namespace PnP.Core.Services.Core.CSOM.QueryAction
                 {
                     return $"<{ParameterTagName} Type=\"{type}\">{valueAsBool.ToString().ToLowerInvariant()}</{ParameterTagName}>";
                 }
+                else if (Value == null)
+                {
+                    return $"<{ParameterTagName} Type=\"Null\" />";
+                }
 
                 return $"<{ParameterTagName} Type=\"{type}\">{stringValue}</{ParameterTagName}>";
             }

@@ -1,4 +1,4 @@
---batchresponse_5c8ade5b-b214-4ba2-af5e-0151e98e0825
+--batchresponse_b8e060ba-5cc8-4a85-b7e8-e2618acf954a
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
@@ -6,4 +6,4 @@ HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
 {"d":{"results":[{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/RoleDefinitions(1073741829)","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/RoleDefinitions(1073741829)","type":"SP.RoleDefinition"},"BasePermissions":{"__metadata":{"type":"SP.BasePermissions"},"High":"2147483647","Low":"4294967295"},"Description":"Has full control.","Hidden":false,"Id":1073741829,"Name":"Full Control","Order":1,"RoleTypeKind":5}]}}
---batchresponse_5c8ade5b-b214-4ba2-af5e-0151e98e0825--
+--batchresponse_b8e060ba-5cc8-4a85-b7e8-e2618acf954a--
