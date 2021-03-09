@@ -7,7 +7,9 @@ namespace PnP.Core.Services.Core.CSOM
     internal class CSOMApiCallBuilder
     {
         internal IIdProvider IdProvider { get; set; } = new IteratorIdProvider();
+
         internal IBodySerializer RequestBodySerializer { get; set; } = new CSOMBodySerializer();
+
         protected ICollection<IRequest<object>> Requests { get; set; } = new List<IRequest<object>>();
 
         internal void AddRequest<T>(IRequest<T> request)

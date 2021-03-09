@@ -36,6 +36,10 @@ namespace PnP.Core.Services.Core.CSOM.Requests.FieldUpdateStrategy
                     new ObjectReferenceParameter()
                     {
                         ObjectPathId=identity.Id
+                    },
+                    new ObjectReferenceParameter()
+                    {
+                        ObjectPathId=taxonomyParameterConstructorId
                     }
                 }
             };
@@ -59,13 +63,16 @@ namespace PnP.Core.Services.Core.CSOM.Requests.FieldUpdateStrategy
             };
 
             //Create taxonomy collection
+            List<Parameter> parameters = fld.GetRequestParameters(/*identity.Id*/ getByInternalNameOrTitleId);
+            parameters.Reverse();
+
             ConstructorPath taxonomyCollectionConstructor = new ConstructorPath
             {
                 Id = taxonomyParameterConstructorId,
                 TypeId = "{c3dfae10-f3bf-4894-9012-bb60665b6d91}",
                 Parameters = new MethodParameter()
                 {
-                    Properties = fld.GetRequestParameters(identity.Id)
+                    Properties = parameters
                 }
             };
 

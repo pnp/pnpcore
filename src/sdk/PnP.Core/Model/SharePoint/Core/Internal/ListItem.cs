@@ -424,7 +424,9 @@ namespace PnP.Core.Model.SharePoint
         public async Task UpdateOverwriteVersionAsync()
         {
             UpdateListItemRequest request = new UpdateOverwriteVersionRequest(PnPContext.Site.Id.ToString(), PnPContext.Web.Id.ToString(), "", Id);
+
             await PrepareUpdateCall(request).ConfigureAwait(false);
+
             if (request.FieldsToUpdate.Count > 0)
             {
                 ApiCall updateCall = PnPContext.GetCSOMCallForRequests(new List<Services.Core.CSOM.Requests.IRequest<object>>() { request });
@@ -467,10 +469,12 @@ namespace PnP.Core.Model.SharePoint
                 // will point to the File id while we need to list Id here
                 await file.EnsurePropertiesAsync(p => p.ListId).ConfigureAwait(false);
             }
+
             if ((this as IDataModelParent).Parent.Parent is IList)
             {
                 listId = ((this as IDataModelParent).Parent.Parent as IList).Id.ToString();
             }
+
             request.ListId = listId;
             List<CSOMItemField> fieldsToUpdate = GetFieldsToUpdate();
             request.FieldsToUpdate.AddRange(fieldsToUpdate);

@@ -1,7 +1,6 @@
 ﻿using PnP.Core.Model.SharePoint;
 using PnP.Core.Model.SharePoint.Core.Internal;
 using PnP.Core.Services.Core.CSOM.QueryAction;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -9,8 +8,10 @@ namespace PnP.Core.Services.Core.CSOM.Utils.Model
 {
     internal class CSOMItemField
     {
-        public string FieldName { get; set; }
         private string fieldType;
+
+        public string FieldName { get; set; }
+        
         public string FieldType
         {
             get
@@ -51,6 +52,7 @@ namespace PnP.Core.Services.Core.CSOM.Utils.Model
         }
 
         public object FieldValue { get; set; }
+
         public List<Parameter> GetRequestParameters(int referenceObjectPathId = 0)
         {
             List<Parameter> parameters = new List<Parameter>();
@@ -73,16 +75,19 @@ namespace PnP.Core.Services.Core.CSOM.Utils.Model
 
             return parameters;
         }
+        
         internal Parameter GetFieldValueParameter()
         {
-            string fieldType = FieldType != null ? FieldType : FieldValue?.GetType().Name;
+            string fieldType = FieldType ?? (FieldValue?.GetType().Name);
             if (FieldValue is IFieldValueCollection)
             {
                 IFieldValueCollection collection = FieldValue as IFieldValueCollection;
+
                 if(collection.Values.FirstOrDefault() is FieldTaxonomyValue)
                 {
                     return new TaxonomyMultiParameter(collection);
                 }
+
                 return new ArrayParameter(collection)
                 {
                     Type = fieldType,

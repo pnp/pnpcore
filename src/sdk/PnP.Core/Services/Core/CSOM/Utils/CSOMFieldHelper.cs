@@ -10,10 +10,12 @@ namespace PnP.Core.Services.Core.CSOM.Utils
     internal class CSOMFieldHelper
     {
         public ListItem Component { get; private set; }
+
         public CSOMFieldHelper(ListItem component)
         {
             Component = component;
         }
+
         internal List<CSOMItemField> GetUpdatedFieldValues(PropertyDescriptorCollection entityProperties)
         {
             List<CSOMItemField> result = new List<CSOMItemField>();
@@ -31,11 +33,85 @@ namespace PnP.Core.Services.Core.CSOM.Utils
                         var dictionaryObject = (TransientDictionary)cp.GetValue(Component);
                         foreach (KeyValuePair<string, object> changedProp in dictionaryObject.ChangedProperties)
                         {
-                            result.Add(new CSOMItemField()
+                            // Only include FieldValue properties when they signal they've changed
+                            if (changedProp.Value is FieldValue changedPropAsFieldValue && changedPropAsFieldValue.HasChanges)
                             {
-                                FieldValue = changedProp.Value,
-                                FieldName = changedProp.Key
-                            });
+                                if (changedProp.Value is FieldLookupValue && (changedProp.Value as FieldLookupValue).LookupId == -1)
+                                {
+                                    result.Add(new CSOMItemField()
+                                    {
+                                        FieldValue = null,
+                                        FieldName = changedProp.Key,
+                                    });
+                                }
+                                else
+                                {
+                                    result.Add(new CSOMItemField()
+                                    {
+                                        FieldValue = changedProp.Value,
+                                        FieldName = changedProp.Key,
+                                    });
+                                }
+                            }
+                            else if (changedProp.Value == null)
+                            {
+                                result.Add(new CSOMItemField()
+                                {
+                                    FieldValue = null,
+                                    FieldName = changedProp.Key,
+                                });
+                            }
+                            else if (changedProp.Value is FieldValueCollection)
+                            {
+                                var collection = changedProp.Value as FieldValueCollection;
+
+                                // Only persist these fields if there was a change detected in the FieldValueCollection
+                                if (collection.HasChanges)
+                                {
+                                    string typeAsString = collection.TypeAsString;
+                                    if (string.IsNullOrEmpty(typeAsString))
+                                    {
+                                        var firstElement = collection.Values.FirstOrDefault();
+                                        if (firstElement is FieldLookupValue)
+                                        {
+                                            typeAsString = "LookupMulti";
+                                        }
+                                        else if (firstElement is FieldTaxonomyValue)
+                                        {
+                                            typeAsString = "TaxonomyFieldTypeMulti";
+                                        }
+                                    }
+
+                                    if (typeAsString == "LookupMulti" || typeAsString == "Lookup" || typeAsString == "UserMulti")
+                                    {
+                                        result.Add(new CSOMItemField()
+                                        {
+                                            FieldValue = changedProp.Value,
+                                            FieldName = changedProp.Key,
+                                            FieldType = typeAsString
+                                        });
+                                    }
+                                    else if (typeAsString == "TaxonomyFieldTypeMulti")
+                                    {
+                                        result.Add(new CSOMItemField()
+                                        {
+                                            FieldValue = changedProp.Value,
+                                            FieldName = changedProp.Key,
+                                            FieldType = typeAsString
+                                        });
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                // Let's set its value into the update message
+                                result.Add(new CSOMItemField()
+                                {
+                                    FieldValue = changedProp.Value,
+                                    FieldName = changedProp.Key,
+                                    FieldType = changedProp.Value?.GetType().Name
+                                });
+                            }
                         }
                     }
                     else

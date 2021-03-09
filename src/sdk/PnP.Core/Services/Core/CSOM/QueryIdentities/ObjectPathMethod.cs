@@ -14,9 +14,11 @@ namespace PnP.Core.Services.Core.CSOM.QueryIdentities
             return $"<Method Id=\"{Id}\" ParentId=\"{ParentId}\" Name=\"{Name}\"><Parameters>{parameters}</Parameters></Method>";
         }
     }
+
     internal class ConstructorPath : ObjectPathMethod
     {
         internal string TypeId { get; set; }
+
         public override string ToString()
         {
             string parameters = string.Join("", Parameters.Properties.Select(p => p.SerializeParameter()));
@@ -27,7 +29,9 @@ namespace PnP.Core.Services.Core.CSOM.QueryIdentities
     internal class MethodParameter
     {
         internal string TypeId { get; set; }
+
         internal List<Parameter> Properties { get; set; }
+
         internal string Value { get; set; }
     }
 }

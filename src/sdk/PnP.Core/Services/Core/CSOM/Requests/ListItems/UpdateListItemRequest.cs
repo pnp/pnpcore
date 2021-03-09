@@ -70,7 +70,7 @@ namespace PnP.Core.Services.Core.CSOM.Requests.ListItems
                 }
             }
 
-            if(FieldsToUpdate.Any(fld=>fld.FieldType == "TaxonomyFieldType" || fld.FieldType == "TaxonomyFieldTypeMulti"))
+            if(FieldsToUpdate.Any(fld => fld.FieldType == "TaxonomyFieldType" || fld.FieldType == "FieldTaxonomyValue" ||  fld.FieldType == "TaxonomyFieldTypeMulti"))
             {
                 result.Add(new ActionObjectPath()
                 {

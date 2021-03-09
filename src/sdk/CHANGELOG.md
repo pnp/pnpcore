@@ -63,6 +63,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Authentication enhancements #302 [sebastianmattar - Sebastian Mattar]
 - CSOM Light client - first step implementation for PropertyBag updates #334 [mgwojciech - Marcin Wojciechowski]
 - Support for ListItem permission management #343 [jimmywim - Jim Love]
+- CSOM Light client - List item update logic #345 [mgwojciech - Marcin Wojciechowski]
 
 ### Changed
 
