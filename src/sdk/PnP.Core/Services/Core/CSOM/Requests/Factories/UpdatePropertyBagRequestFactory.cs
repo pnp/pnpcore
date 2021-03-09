@@ -25,6 +25,7 @@ namespace PnP.Core.Services.Core.CSOM.Requests.Factories
                     throw new ClientException(ErrorType.Unsupported, PnPCoreResources.Exception_Unsupported_FileServerRelativeUrlNotLoaded);
                 }
             }
+
             result.SiteId = propertyValueContainer.PnPContext.Site.Id.ToString();
             result.WebId = propertyValueContainer.PnPContext.Web.Id.ToString();
 

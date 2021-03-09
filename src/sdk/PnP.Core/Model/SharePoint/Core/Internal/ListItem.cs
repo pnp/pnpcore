@@ -2,6 +2,9 @@
 using PnP.Core.Model.Security;
 using PnP.Core.QueryModel;
 using PnP.Core.Services;
+using PnP.Core.Services.Core.CSOM.Requests.ListItems;
+using PnP.Core.Services.Core.CSOM.Utils;
+using PnP.Core.Services.Core.CSOM.Utils.Model;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -82,7 +85,8 @@ namespace PnP.Core.Model.SharePoint
             {
                 // Extra processing of returned json
             };
-            AddApiCallHandler = async (keyValuePairs) => {
+            AddApiCallHandler = async (keyValuePairs) =>
+            {
 
                 var parentList = Parent.Parent as List;
                 // sample parent list uri: https://bertonline.sharepoint.com/sites/modern/_api/Web/Lists(guid'b2d52a36-52f1-48a4-b499-629063c6a38c')
@@ -419,19 +423,26 @@ namespace PnP.Core.Model.SharePoint
 
         public async Task UpdateOverwriteVersionAsync()
         {
-            var xmlPayload = await BuildXmlPayloadAsync(true).ConfigureAwait(false);
-            if (!string.IsNullOrEmpty(xmlPayload))
+            UpdateListItemRequest request = new UpdateOverwriteVersionRequest(PnPContext.Site.Id.ToString(), PnPContext.Web.Id.ToString(), "", Id);
+
+            await PrepareUpdateCall(request).ConfigureAwait(false);
+
+            if (request.FieldsToUpdate.Count > 0)
             {
-                var apiCall = new ApiCall(xmlPayload)
-                {
-                    Commit = true
-                };
-                await RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
+                ApiCall updateCall = PnPContext.GetCSOMCallForRequests(new List<Services.Core.CSOM.Requests.IRequest<object>>() { request });
+                await RawRequestAsync(updateCall, HttpMethod.Post).ConfigureAwait(false);
             }
             else
             {
                 PnPContext.Logger.LogInformation(PnPCoreResources.Log_Information_NoChangesSkipSystemUpdate);
             }
+        }
+
+        private List<CSOMItemField> GetFieldsToUpdate()
+        {
+            CSOMFieldHelper helper = new CSOMFieldHelper(this);
+
+            return helper.GetUpdatedFieldValues(ChangedProperties);
         }
 
         public void UpdateOverwriteVersion()
@@ -449,16 +460,34 @@ namespace PnP.Core.Model.SharePoint
             UpdateOverwriteVersionBatchAsync().GetAwaiter().GetResult();
         }
 
+        protected async Task PrepareUpdateCall(UpdateListItemRequest request)
+        {
+            string listId = "";
+            if ((this as IDataModelParent).Parent is IFile file)
+            {
+                // When it's a file then we need to resolve the {Parent.Id} token manually as otherwise this 
+                // will point to the File id while we need to list Id here
+                await file.EnsurePropertiesAsync(p => p.ListId).ConfigureAwait(false);
+            }
+
+            if ((this as IDataModelParent).Parent.Parent is IList)
+            {
+                listId = ((this as IDataModelParent).Parent.Parent as IList).Id.ToString();
+            }
+
+            request.ListId = listId;
+            List<CSOMItemField> fieldsToUpdate = GetFieldsToUpdate();
+            request.FieldsToUpdate.AddRange(fieldsToUpdate);
+        }
+
         public async Task UpdateOverwriteVersionBatchAsync(Batch batch)
         {
-            var xmlPayload = await BuildXmlPayloadAsync(true).ConfigureAwait(false);
-            if (!string.IsNullOrEmpty(xmlPayload))
+            UpdateListItemRequest request = new UpdateOverwriteVersionRequest(PnPContext.Site.Id.ToString(), PnPContext.Web.Id.ToString(), "", Id);
+            await PrepareUpdateCall(request).ConfigureAwait(false);
+            if (request.FieldsToUpdate.Count > 0)
             {
-                var apiCall = new ApiCall(xmlPayload)
-                {
-                    Commit = true
-                };
-                await RawRequestBatchAsync(batch, apiCall, HttpMethod.Post).ConfigureAwait(false);
+                ApiCall updateCall = PnPContext.GetCSOMCallForRequests(new List<Services.Core.CSOM.Requests.IRequest<object>>() { request });
+                await RawRequestBatchAsync(batch, updateCall, HttpMethod.Post).ConfigureAwait(false);
             }
             else
             {
@@ -477,14 +506,12 @@ namespace PnP.Core.Model.SharePoint
 
         public async Task SystemUpdateAsync()
         {
-            var xmlPayload = await BuildXmlPayloadAsync(false).ConfigureAwait(false);
-            if (!string.IsNullOrEmpty(xmlPayload))
+            UpdateListItemRequest request = new SystemUpdateListItemRequest(PnPContext.Site.Id.ToString(), PnPContext.Web.Id.ToString(), "", Id);
+            await PrepareUpdateCall(request).ConfigureAwait(false);
+            if (request.FieldsToUpdate.Count > 0)
             {
-                var apiCall = new ApiCall(xmlPayload)
-                {
-                    Commit = true
-                };
-                await RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
+                ApiCall updateCall = PnPContext.GetCSOMCallForRequests(new List<Services.Core.CSOM.Requests.IRequest<object>>() { request });
+                await RawRequestAsync(updateCall, HttpMethod.Post).ConfigureAwait(false);
             }
             else
             {
@@ -509,14 +536,12 @@ namespace PnP.Core.Model.SharePoint
 
         public async Task SystemUpdateBatchAsync(Batch batch)
         {
-            var xmlPayload = await BuildXmlPayloadAsync(false).ConfigureAwait(false);
-            if (!string.IsNullOrEmpty(xmlPayload))
+            UpdateListItemRequest request = new SystemUpdateListItemRequest(PnPContext.Site.Id.ToString(), PnPContext.Web.Id.ToString(), "", Id);
+            await PrepareUpdateCall(request).ConfigureAwait(false);
+            if (request.FieldsToUpdate.Count > 0)
             {
-                var apiCall = new ApiCall(xmlPayload)
-                {
-                    Commit = true
-                };
-                await RawRequestBatchAsync(batch, apiCall, HttpMethod.Post).ConfigureAwait(false);
+                ApiCall updateCall = PnPContext.GetCSOMCallForRequests(new List<Services.Core.CSOM.Requests.IRequest<object>>() { request });
+                await RawRequestBatchAsync(batch, updateCall, HttpMethod.Post).ConfigureAwait(false);
             }
             else
             {
@@ -527,411 +552,6 @@ namespace PnP.Core.Model.SharePoint
         public void SystemUpdateBatch(Batch batch)
         {
             SystemUpdateBatchAsync(batch).GetAwaiter().GetResult();
-        }
-
-        private async Task<string> BuildXmlPayloadAsync(bool updateOverwriteVersion)
-        {
-            string xml;
-
-            if (updateOverwriteVersion)
-            {
-                xml = CsomHelper.ListItemUpdateOverwriteVersion;
-            }
-            else
-            {
-                xml = CsomHelper.ListItemSystemUpdate;
-            }
-
-            if ((this as IDataModelParent).Parent is IFile file)
-            {
-                // When it's a file then we need to resolve the {Parent.Id} token manually as otherwise this 
-                // will point to the File id while we need to list Id here
-                await file.EnsurePropertiesAsync(p => p.ListId).ConfigureAwait(false);
-                xml = xml.Replace("{Parent.Id}", file.ListId.ToString());
-            }
-
-            int counter = 1;
-            StringBuilder fieldValues = new StringBuilder();
-
-            int taxFieldObjectId = 100;
-            int taxFieldIdentityObjectId = 200;
-            StringBuilder taxonomyMultiValueObjectPaths = new StringBuilder();
-            StringBuilder taxonomyMultiValueIdentities = new StringBuilder();
-
-            var entity = EntityManager.GetClassInfo(GetType(), this);
-            IEnumerable<EntityFieldInfo> fields = entity.Fields;
-
-            bool changeFound = false;
-            foreach (PropertyDescriptor cp in ChangedProperties)
-            {
-                changeFound = true;
-                // Look for the corresponding property in the type
-                var changedField = fields.FirstOrDefault(f => f.Name == cp.Name);
-
-                // If we found a field 
-                if (changedField != null)
-                {
-                    if (changedField.DataType.FullName == typeof(TransientDictionary).FullName)
-                    {
-                        // Get the changed properties in the dictionary
-                        var dictionaryObject = (TransientDictionary)cp.GetValue(this);
-                        foreach (KeyValuePair<string, object> changedProp in dictionaryObject.ChangedProperties)
-                        {
-                            // Only include FieldValue properties when they signal they've changed
-                            if (changedProp.Value is FieldValue changedPropAsFieldValue && changedPropAsFieldValue.HasChanges)
-                            {
-                                if (changedProp.Value is FieldLookupValue && (changedProp.Value as FieldLookupValue).LookupId == -1)
-                                {
-                                    fieldValues.Append(SetFieldValueAsNullXml(changedProp.Key, ref counter));
-                                }
-                                else
-                                {
-                                    fieldValues.Append(SetSpecialFieldValueXml(changedProp.Key, changedProp.Value as FieldValue, ref counter));
-                                }
-                            }
-                            else if (changedProp.Value == null)
-                            {
-                                fieldValues.Append(SetFieldValueAsNullXml(changedProp.Key, ref counter));
-                            }
-                            else if (changedProp.Value is FieldValueCollection)
-                            {
-                                var collection = changedProp.Value as FieldValueCollection;
-                                
-                                // Only persist these fields if there was a change detected in the FieldValueCollection
-                                if (collection.HasChanges)
-                                {
-                                    string typeAsString = collection.TypeAsString;
-                                    if (string.IsNullOrEmpty(typeAsString))
-                                    {
-                                        var firstElement = collection.Values.FirstOrDefault();
-                                        if (firstElement is FieldLookupValue)
-                                        {
-                                            typeAsString = "LookupMulti";
-                                        }
-                                        else if (firstElement is FieldTaxonomyValue)
-                                        {
-                                            typeAsString = "TaxonomyFieldTypeMulti";
-                                        }
-                                    }
-
-                                    if (typeAsString == "LookupMulti" || typeAsString == "Lookup" || typeAsString == "UserMulti")
-                                    {
-                                        fieldValues.Append(SetArraySpecialFieldValueXml(changedProp.Key, changedProp.Value as FieldValueCollection, ref counter));
-                                    }
-                                    else if (typeAsString == "TaxonomyFieldTypeMulti")
-                                    {
-                                        fieldValues.Append(SetManagedMetadataMultiValueXml(changedProp.Key, changedProp.Value as FieldValueCollection,
-                                            taxonomyMultiValueObjectPaths, taxonomyMultiValueIdentities, ref counter, ref taxFieldObjectId, ref taxFieldIdentityObjectId));
-                                    }
-                                }
-                            }
-                            else if (changedProp.Value is List<string>)
-                            {
-                                // multi value choice field
-                                fieldValues.Append(SetArrayFieldValueXml(changedProp.Key, changedProp.Value as List<string>, ref counter));
-                            }
-                            else
-                            {
-                                // Let's set its value into the update message
-                                fieldValues.Append(SetFieldValueXml(changedProp.Key, changedProp.Value, changedProp.Value?.GetType().Name, ref counter));
-                            }
-                        }
-                    }
-                    else
-                    {
-                        // Let's set its value into the update message
-                        fieldValues.Append(SetFieldValueXml(changedField.SharePointName, GetValue(changedField.Name), changedField.DataType.Name, ref counter));
-                    }
-                }
-            }
-
-            // No changes, so bail out
-            if (!changeFound)
-            {
-                return null;
-            }
-
-            // update field values
-            xml = xml.Replace(CsomHelper.FieldValues, fieldValues.ToString());
-
-            // update counter
-            xml = xml.Replace(CsomHelper.Counter, counter.ToString());
-
-            // replace the default taxonomy multi value field update placeholders
-            xml = xml.Replace(CsomHelper.TaxonomyMultiValueIdentities, taxonomyMultiValueIdentities.ToString()); ;
-            xml = xml.Replace(CsomHelper.TaxonomyMultiValueObjectPaths, taxonomyMultiValueObjectPaths.ToString());
-
-            return xml;
-        }
-
-        private static string SetFieldValueAsNullXml(string fieldName, ref int counter)
-        {
-            string xml = CsomHelper.ListItemSystemUpdateSetFieldValueToNull;
-            xml = xml.Replace(CsomHelper.Counter, counter.ToString());
-            xml = xml.Replace(CsomHelper.FieldName, fieldName);
-
-            counter++;
-            return xml;
-        }
-
-        private static string SetManagedMetadataMultiValueXml(string fieldName, FieldValueCollection fieldValueCollection,
-            StringBuilder taxonomyMultiValueObjectPaths, StringBuilder taxonomyMultiValueIdentities,
-            ref int counter, ref int taxFieldObjectId, ref int taxFieldIdentityObjectId)
-        {
-            #region Sample XML snippets
-            /*
-            <Request AddExpandoFieldTypeSuffix="true" SchemaVersion="15.0.0.0" LibraryVersion="16.0.0.0" ApplicationName=".NET Library"
-                xmlns="http://schemas.microsoft.com/sharepoint/clientquery/2009">
-                <Actions>
-                    <ObjectPath Id="24" ObjectPathId="23" />
-                    <Method Name="PopulateFromLabelGuidPairs" Id="25" ObjectPathId="23">
-                        <Parameters>
-                            <Parameter Type="String">MBI|1824510b-00e1-40ac-8294-528b1c9421e0;LBI|ed5449ec-4a4f-4102-8f07-5a207c438571</Parameter>
-                        </Parameters>
-                    </Method>
-                    <Method Name="SetFieldValue" Id="26" ObjectPathId="13" Version="50">
-                        <Parameters>
-                            <Parameter Type="String">MMMultiple</Parameter>
-                            <Parameter ObjectPathId="23" />
-                        </Parameters>
-                    </Method>
-                    <Method Name="UpdateOverwriteVersion" Id="27" ObjectPathId="13" Version="50" />
-                </Actions>
-                <ObjectPaths>
-                    <Constructor Id="23" TypeId="{c3dfae10-f3bf-4894-9012-bb60665b6d91}">
-                        <Parameters>
-                            <Parameter Type="Null" />
-                            <Parameter ObjectPathId="19" />
-                        </Parameters>
-                    </Constructor>
-                    <Identity Id="13" Name="86e78d9f-e06b-2000-915f-2825d672e6ac|740c6a0b-85e2-48a0-a494-e0f1759d4aa7:site:b56adf79-ff6a-4964-a63a-ff1fa23be9f8:web:8c8e101c-1b0d-4253-85e7-c30039bf46e2:list:7d644d41-d86e-4594-99de-479594a68fd9:item:1,1" />
-                    <Identity Id="19" Name="86e78d9f-90e2-2000-915f-217ff0ac791d|740c6a0b-85e2-48a0-a494-e0f1759d4aa7:site:b56adf79-ff6a-4964-a63a-ff1fa23be9f8:web:8c8e101c-1b0d-4253-85e7-c30039bf46e2:list:7d644d41-d86e-4594-99de-479594a68fd9:field:9295d18b-0742-47f8-b3af-ee73c8b2692e" />
-                </ObjectPaths>
-            </Request>
-            */
-            #endregion
-
-            // <Actions> content
-            string xml = CsomHelper.ListItemTaxonomyMultiValueFieldAction;
-            xml = xml.Replace(CsomHelper.Counter, counter.ToString());
-            counter++;
-            xml = xml.Replace(CsomHelper.Counter2, counter.ToString());
-            counter++;
-            xml = xml.Replace(CsomHelper.Counter3, counter.ToString());
-            xml = xml.Replace(CsomHelper.TaxFieldObjectId, taxFieldObjectId.ToString());
-            xml = xml.Replace(CsomHelper.FieldName, fieldName);
-
-            StringBuilder sb = new StringBuilder();
-            foreach (var fieldValue in fieldValueCollection.Values)
-            {
-                sb.Append($"{(fieldValue as FieldTaxonomyValue).Label}|{(fieldValue as FieldTaxonomyValue).TermId};");
-            }
-            xml = xml.Replace(CsomHelper.FieldValue, sb.ToString().TrimEnd(';'));
-
-            // <ObjectPath> constructors
-            taxonomyMultiValueObjectPaths.Append(CsomHelper.ListItemTaxonomyMultiValueFieldObjectPath
-                .Replace(CsomHelper.TaxFieldObjectId, taxFieldObjectId.ToString())
-                .Replace(CsomHelper.TaxFieldIdentityObjectId, taxFieldIdentityObjectId.ToString())
-                );
-
-            // <Identity> nodes
-            taxonomyMultiValueIdentities.Append(CsomHelper.ListItemTaxonomyMultiValueFieldIdentity
-                .Replace(CsomHelper.TaxFieldIdentityObjectId, taxFieldIdentityObjectId.ToString())
-                .Replace(CsomHelper.TaxonomyFieldId, fieldValueCollection.Field.Id.ToString())
-                );
-
-            // update counters and return
-            counter++;
-            taxFieldObjectId++;
-            taxFieldIdentityObjectId++;
-            return xml;
-        }
-
-        private static string SetSpecialFieldValueXml(string fieldName, FieldValue fieldValue, ref int counter)
-        {
-            #region Sample XML snippets
-            /* Sample XML snippet for Url field
-            <Method Name="SetFieldValue" Id="17" ObjectPathId="13" Version="8">
-                <Parameters>
-                    <Parameter Type="String">Url</Parameter>
-                    <Parameter TypeId="{fa8b44af-7b43-43f2-904a-bd319497011e}">
-                        <Property Name="Description" Type="String">fdmslkfqmsl</Property>
-                        <Property Name="Url" Type="String">https://bla1</Property>
-                    </Parameter>
-                </Parameters>
-            </Method>
-
-            Sample snippet for a user field
-            <Method Name="SetFieldValue" Id="17" ObjectPathId="13" Version="11">
-                <Parameters>
-                    <Parameter Type="String">PersonSingle</Parameter>
-                    <Parameter TypeId="{c956ab54-16bd-4c18-89d2-996f57282a6f}">
-                        <Property Name="Email" Type="Null" />
-                        <Property Name="LookupId" Type="Int32">6</Property>
-                        <Property Name="LookupValue" Type="Null" />
-                    </Parameter>
-                </Parameters>
-            </Method>
-
-            Taxonomy field
-            <Method Name="SetFieldValue" Id="17" ObjectPathId="13" Version="40">
-                <Parameters>
-                    <Parameter Type="String">MMSingle</Parameter>
-                    <Parameter TypeId="{19e70ed0-4177-456b-8156-015e4d163ff8}">
-                        <Property Name="Label" Type="String">MBI</Property>
-                        <Property Name="TermGuid" Type="String">1824510b-00e1-40ac-8294-528b1c9421e0</Property>
-                        <Property Name="WssId" Type="Int32">-1</Property>
-                    </Parameter>
-                </Parameters>
-            </Method>
-            */
-            #endregion
-
-            string xml = CsomHelper.ListItemSpecialField;
-
-            xml = xml.Replace(CsomHelper.Counter, counter.ToString());
-            xml = xml.Replace(CsomHelper.ObjectId, $"{{{fieldValue.CsomType}}}");
-            xml = xml.Replace(CsomHelper.FieldName, fieldName);
-            xml = xml.Replace(CsomHelper.FieldValues, fieldValue.ToCsomXml());
-            xml = xml.Replace(CsomHelper.FieldType, "String");
-
-            counter++;
-            return xml;
-        }
-
-        private static string SetArraySpecialFieldValueXml(string fieldName, FieldValueCollection fieldValueCollection, ref int counter)
-        {
-            #region Sample XML snippets
-            /* 
-            Sample snippet for an array of User fields    
-            <Method Name="SetFieldValue" Id="18" ObjectPathId="13" Version="28">
-                <Parameters>
-                    <Parameter Type="String">PersonMultiple</Parameter>
-                    <Parameter Type="Array">
-                        <Object TypeId="{c956ab54-16bd-4c18-89d2-996f57282a6f}">
-                            <Property Name="Email" Type="Null" />
-                            <Property Name="LookupId" Type="Int32">15</Property>
-                            <Property Name="LookupValue" Type="Null" />
-                        </Object>
-                        <Object TypeId="{c956ab54-16bd-4c18-89d2-996f57282a6f}">
-                            <Property Name="Email" Type="Null" />
-                            <Property Name="LookupId" Type="Int32">6</Property>
-                            <Property Name="LookupValue" Type="Null" />
-                        </Object>
-                    </Parameter>
-                </Parameters>
-            </Method>
-            */
-            #endregion
-
-            string xml = CsomHelper.ListItemSpecialArrayField;
-
-            xml = xml.Replace(CsomHelper.Counter, counter.ToString());
-            xml = xml.Replace(CsomHelper.FieldName, fieldName);
-
-            StringBuilder sb = new StringBuilder();
-            foreach (var fieldValue in fieldValueCollection.Values)
-            {
-                sb.Append(CsomHelper.ListItemSpecialArrayObject
-                    .Replace(CsomHelper.ObjectId, $"{{{(fieldValue as FieldValue).CsomType}}}")
-                    .Replace(CsomHelper.FieldValue, (fieldValue as FieldValue).ToCsomXml())
-                    );
-            }
-            xml = xml.Replace(CsomHelper.ArrayValues, sb.ToString());
-
-            counter++;
-            return xml;
-
-
-        }
-
-        private static string SetArrayFieldValueXml(string fieldName, IEnumerable fieldValue, ref int counter)
-        {
-            #region Sample XML snippets
-            /*
-            <Method Name="SetFieldValue" Id="18" ObjectPathId="13" Version="26">
-                <Parameters>
-                    <Parameter Type="String">ChoiceMultiple</Parameter>
-                    <Parameter Type="Array">
-                        <Object Type="String">Choice 2</Object>
-                        <Object Type="String">Choice 3</Object>
-                    </Parameter>
-                </Parameters>
-            </Method>              
-             */
-            #endregion
-
-            string xml = CsomHelper.ListItemSystemUpdateSetArrayFieldValue;
-            xml = xml.Replace(CsomHelper.Counter, counter.ToString());
-            xml = xml.Replace(CsomHelper.FieldName, fieldName);
-
-            StringBuilder sb = new StringBuilder();
-            foreach (var item in fieldValue)
-            {
-                sb.Append(CsomHelper.ListItemArrayFieldProperty
-                    .Replace(CsomHelper.FieldType, item.GetType().Name))
-                    .Replace(CsomHelper.FieldValue, CsomHelper.XmlString(item.ToString())
-                    );
-            }
-            xml = xml.Replace(CsomHelper.ArrayValues, sb.ToString());
-
-            counter++;
-            return xml;
-        }
-
-        private static string SetFieldValueXml(string fieldName, object fieldValue, string fieldType, ref int counter)
-        {
-            #region Sample XML snippets
-            /*
-            <Method Name="SetFieldValue" Id="17" ObjectPathId="13" Version="26">
-                <Parameters>
-                    <Parameter Type="String">ChoiceSingle</Parameter>
-                    <Parameter Type="String">Choice 2</Parameter>
-                </Parameters>
-            </Method>
-             */
-            #endregion
-
-            string xml = CsomHelper.ListItemSystemUpdateSetFieldValue;
-
-            xml = xml.Replace(CsomHelper.Counter, counter.ToString());
-            xml = xml.Replace(CsomHelper.FieldName, fieldName);
-            xml = xml.Replace(CsomHelper.FieldValue, fieldValue == null ? "" : CsomHelper.XmlString(TypeSpecificHandling(fieldValue, fieldType), false));
-            xml = xml.Replace(CsomHelper.FieldType, fieldType ?? "Null");
-
-            counter++;
-            return xml;
-        }
-
-        private static string TypeSpecificHandling(object value, string fieldType)
-        {
-            if (!string.IsNullOrEmpty(fieldType))
-            {
-                if (fieldType.Equals("Boolean"))
-                {
-                    return value.ToString().ToLowerInvariant();
-                }
-                else if (fieldType.Equals("DateTime"))
-                {
-                    if (value is DateTime time)
-                    {
-                        return time.ToUniversalTime().ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fffzzz");
-                    }
-                }
-                else if (fieldType.Equals("Double"))
-                {
-                    if (value is double doubleValue)
-                    {
-                        return doubleValue.ToString("G", CultureInfo.InvariantCulture);
-                    }
-                }
-                else
-                {
-                    return value.ToString();
-                }
-            }
-
-            return value.ToString();
         }
         #endregion
 
