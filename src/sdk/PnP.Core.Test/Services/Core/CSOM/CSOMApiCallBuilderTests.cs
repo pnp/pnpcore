@@ -2,6 +2,7 @@
 using PnP.Core.Services;
 using PnP.Core.Services.Core.CSOM;
 using PnP.Core.Services.Core.CSOM.Requests.ListItems;
+using PnP.Core.Services.Core.CSOM.Requests.Web;
 using PnP.Core.Services.Core.CSOM.Utils.Model;
 using System;
 using System.Collections.Generic;
@@ -31,7 +32,6 @@ namespace PnP.Core.Test.Services.Core.CSOM
             Assert.AreEqual("<Request AddExpandoFieldTypeSuffix=\"true\" SchemaVersion=\"15.0.0.0\" LibraryVersion=\"16.0.0.0\" ApplicationName=\"pnp core sdk\" xmlns=\"http://schemas.microsoft.com/sharepoint/clientquery/2009\"><Actions><Method Name=\"SetFieldValue\" Id=\"4\" ObjectPathId=\"1\"><Parameters><Parameter Type=\"String\">Test Field</Parameter><Parameter Type=\"String\">Test field value</Parameter></Parameters></Method><Method Name=\"Update\" Id=\"5\" ObjectPathId=\"1\"></Method></Actions><ObjectPaths><Identity Id=\"1\" Name=\"121a659f-e03e-2000-4281-1212829d67dd|740c6a0b-85e2-48a0-a494-e0f1759d4aa7:site:test-site-id:web:test-web-id:list:test-list-id:item:1,1\" /></ObjectPaths></Request>", call.XmlBody);
 
             Assert.AreEqual(ApiType.CSOM, call.Type);
-
         }
     }
 }

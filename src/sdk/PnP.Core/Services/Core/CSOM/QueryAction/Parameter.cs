@@ -47,6 +47,10 @@ namespace PnP.Core.Services.Core.CSOM.QueryAction
                 {
                     return $"<{ParameterTagName} Type=\"Null\" />";
                 }
+                else if (Value is Guid)
+                {
+                    return $"<{ParameterTagName} Type=\"Guid\">{{{stringValue}}}</{ParameterTagName}>";
+                }
 
                 return $"<{ParameterTagName} Type=\"{type}\">{stringValue}</{ParameterTagName}>";
             }
@@ -59,7 +63,7 @@ namespace PnP.Core.Services.Core.CSOM.QueryAction
             return CsomHelper.XmlString(TypeSpecificHandling(Value.ToString(), Type), false);
         }
 
-        protected static string TypeSpecificHandling(string value, string fieldType)
+        internal static string TypeSpecificHandling(string value, string fieldType)
         {
             if (!string.IsNullOrEmpty(value) && !string.IsNullOrEmpty(fieldType) && fieldType.Equals("Boolean"))
             {

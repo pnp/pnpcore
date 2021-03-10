@@ -10,29 +10,10 @@ namespace PnP.Core.Services
         internal static string ListItemSpecialFieldProperty = "<Property Name=\"{FieldName}\" Type=\"{FieldType}\">{FieldValue}</Property>";
         internal static string ListItemSpecialFieldPropertyEmpty = "<Property Name=\"{FieldName}\" Type=\"{FieldType}\" />";
 
-        // Taxonomy field creation
-        internal static string TaxonomyFieldUpdate = "<Request AddExpandoFieldTypeSuffix=\"true\" SchemaVersion=\"15.0.0.0\" LibraryVersion=\"16.0.0.0\" ApplicationName=\"pnp core sdk\" xmlns=\"http://schemas.microsoft.com/sharepoint/clientquery/2009\"><Actions><SetProperty Id=\"{Counter}\" ObjectPathId=\"15\" Name=\"SspId\"><Parameter Type=\"Guid\">{TermStoreId}</Parameter></SetProperty><SetProperty Id=\"{Counter2}\" ObjectPathId=\"15\" Name=\"TermSetId\"><Parameter Type=\"Guid\">{TermSetId}</Parameter></SetProperty><SetProperty Id=\"{Counter3}\" ObjectPathId=\"15\" Name=\"TargetTemplate\"><Parameter Type=\"String\"></Parameter></SetProperty><SetProperty Id=\"{Counter4}\" ObjectPathId=\"15\" Name=\"AnchorId\"><Parameter Type=\"Guid\">{00000000-0000-0000-0000-000000000000}</Parameter></SetProperty><Method Name=\"Update\" Id=\"{Counter5}\" ObjectPathId=\"15\" /></Actions><ObjectPaths><Identity Id=\"15\" Name=\"1e1a939f-60b2-2000-98a6-d25d3d400a3a|740c6a0b-85e2-48a0-a494-e0f1759d4aa7:site:{Site.Id}:web:{Web.Id}{ListFieldId}:field:{Id}\" /></ObjectPaths></Request>";
-        internal static string TaxonomyFieldListObjectId = ":list:{Parent.Id}";
-
-        // ContentType creation
-        internal static string ContentTypeCreate = "<Request xmlns=\"http://schemas.microsoft.com/sharepoint/clientquery/2009\" AddExpandoFieldTypeSuffix=\"true\" SchemaVersion=\"15.0.0.0\" LibraryVersion=\"16.0.0.0\" ApplicationName=\"pnp core sdk\"><Actions><ObjectPath Id=\"40\" ObjectPathId=\"39\" /><ObjectIdentityQuery Id=\"41\" ObjectPathId=\"39\" /></Actions><ObjectPaths><Method Id=\"39\" ParentId=\"5\" Name=\"Add\"><Parameters><Parameter TypeId=\"{168f3091-4554-4f14-8866-b20d48e45b54}\">{ContentTypeActualDescription}{ContentTypeActualGroup}<Property Name=\"Id\" Type=\"String\">{ContentTypeStringId}</Property><Property Name=\"Name\" Type=\"String\">{ContentTypeName}</Property><Property Name=\"ParentContentType\" Type=\"Null\" /></Parameter></Parameters></Method><Property Id=\"5\" ParentId=\"3\" Name=\"ContentTypes\" /><Property Id=\"3\" ParentId=\"1\" Name=\"Web\" /><StaticProperty Id=\"1\" TypeId=\"{3747adcd-a3c3-41b9-bfab-4a64dd2f1e0a}\" Name=\"Current\" /></ObjectPaths></Request>";
-
         // Properties to replace in above XML snippets
-        internal static string Counter = "{Counter}";
-        internal static string Counter2 = "{Counter2}";
-        internal static string Counter3 = "{Counter3}";
-        internal static string Counter4 = "{Counter4}";
-        internal static string Counter5 = "{Counter5}";
         internal static string FieldName = "{FieldName}";
         internal static string FieldType = "{FieldType}";
         internal static string FieldValue = "{FieldValue}";
-        internal static string TermStoreId = "{TermStoreId}";
-        internal static string TermSetId = "{TermSetId}";
-        internal static string ListFieldId = "{ListFieldId}";
-        internal static string ContentTypeActualDescription = "{ContentTypeActualDescription}";
-        internal static string ContentTypeActualGroup = "{ContentTypeActualGroup}";
-        internal static string ContentTypeStringId = "{ContentTypeStringId}";
-        internal static string ContentTypeName = "{ContentTypeName}";
 
         internal static Dictionary<int, JsonElement> ParseResponse(string jsonResponse)
         {
