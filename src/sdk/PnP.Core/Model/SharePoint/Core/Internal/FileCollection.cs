@@ -54,7 +54,7 @@ namespace PnP.Core.Model.SharePoint
             {
                 throw new ArgumentNullException(nameof(serverRelativePageName));
             }
-            var encodedServerRelativePageName = WebUtility.UrlEncode(serverRelativePageName);
+            var encodedServerRelativePageName = WebUtility.UrlEncode(serverRelativePageName.Replace("'", "''"));
             var newFile = CreateNewAndAdd() as File;
             string fileCreateRequest = $"_api/web/getFolderById('{{Parent.Id}}')/files/AddTemplateFile(urlOfFile='{encodedServerRelativePageName}',templateFileType={(int)templateFileType})";
             var api = new ApiCall(fileCreateRequest, ApiType.SPORest);
