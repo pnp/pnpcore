@@ -1,85 +1,9 @@
---batchresponse_c77af517-0331-40fc-aa47-cef7627c4214
+--batchresponse_2ab91f79-158e-4007-9c8d-4cf8405c647e
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 200 OK
-CONTENT-TYPE: application/json; charset=utf-8
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{ "Row" : 
-[{
-"ID": "1109",
-"PermMask": "0x7ffffffffffbffff",
-"FSObjType": "0",
-"HTML_x0020_File_x0020_Type": "",
-"UniqueId": "{9DD59A81-C0E3-4360-A046-763375D6FF08}",
-"ProgId": "",
-"NoExecute": "0",
-"ContentTypeId": "0x01010800B3B2A1451E70B6458A757AC0CBA6DAEF",
-"FileRef": "\u002fsites\u002fprov-1\u002fSitePages\u002fPNP_SDK_TEST_DisableEnablePageComments.aspx",
-"FileRef.urlencode": "%2Fsites%2Fprov%2D1%2FSitePages%2FPNP%5FSDK%5FTEST%5FDisableEnablePageComments%2Easpx",
-"FileRef.urlencodeasurl": "\u002fsites\u002fprov-1\u002fSitePages\u002fPNP_SDK_TEST_DisableEnablePageComments.aspx",
-"FileRef.urlencoding": "\u002fsites\u002fprov-1\u002fSitePages\u002fPNP_SDK_TEST_DisableEnablePageComments.aspx",
-"FileRef.scriptencodeasurl": "\\u002fsites\\u002fprov-1\\u002fSitePages\\u002fPNP_SDK_TEST_DisableEnablePageComments.aspx",
-"_UIVersion": "1",
-"SMTotalSize": "932",
-"File_x0020_Size": "780",
-"_CommentFlags": "",
-"File_x0020_Type": "aspx",
-"HTML_x0020_File_x0020_Type.File_x0020_Type.mapall": "ichtm.gif|Microsoft SharePoint Designer|SharePoint.OpenDocuments|",
-"HTML_x0020_File_x0020_Type.File_x0020_Type.mapcon": "SharePoint.OpenDocuments",
-"HTML_x0020_File_x0020_Type.File_x0020_Type.mapico": "ichtm.gif",
-"serverurl.progid": "",
-"ServerRedirectedEmbedUrl": "",
-"File_x0020_Type.progid": "",
-"File_x0020_Type.url": "FALSE",
-"FileLeafRef": "PNP_SDK_TEST_DisableEnablePageComments.aspx",
-"FileLeafRef.Name": "PNP_SDK_TEST_DisableEnablePageComments",
-"FileLeafRef.Suffix": "aspx",
-"FileDirRef": "\u002fsites\u002fprov-1\u002fSitePages",
-"Description": "",
-"Title": "",
-"ClientSideApplicationId": "",
-"PageLayoutType": "",
-"CanvasContent1": "<div dir=\"\" class=\"ms-rtestate-field\"><\u002fdiv>",
-"_AuthorByline": "",
-"_AuthorByline.id": "",
-"_AuthorByline.title": "",
-"_AuthorByline.span": "",
-"_AuthorByline.email": "",
-"_AuthorByline.sip": "",
-"_AuthorByline.jobTitle": "",
-"_AuthorByline.department": "",
-"_AuthorByline.picture": "",
-"LayoutWebpartsContent": "<div dir=\"\" class=\"ms-rtestate-field\"><\u002fdiv>",
-"BannerImageUrl": "",
-"BannerImageUrl.desc": "",
-"PromotedState": "",
-"PromotedState.": "",
-"_OriginalSourceUrl": "",
-"_OriginalSourceSiteId": "",
-"_OriginalSourceWebId": "",
-"_OriginalSourceListId": "",
-"_OriginalSourceItemId": "",
-"ItemChildCount": "0",
-"FolderChildCount": "0",
-"A2ODMountCount": "",
-"owshiddenversion": "1",
-"_SPTranslatedLanguages": "",
-"_SPSitePageFlags": "",
-"ContentVersion": "0",
-"DocConcurrencyNumber": "1",
-"_VirusStatus": "",
-"Restricted": "",
-"ecb.dispex": "return DispEx(this,event,'TRUE','FALSE','FALSE','','1','SharePoint.OpenDocuments','','','','6','0','','0x7ffffffffffbffff','','')"
-}
-],"FirstRow" : 1,
-"FolderPermissions" : "0x7ffffffffffbffff"
-,"LastRow" : 1,
-"RowLimit" : 30
-,"FilterLink" : "?"
-,"ForceNoHierarchy" : "1"
-,"HierarchyHasIndention" : ""
-,"CurrentFolderSpItemUrl" : ""
-
-}
---batchresponse_c77af517-0331-40fc-aa47-cef7627c4214--
+{"d":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/prov-1/SitePages/PNP_SDK_TEST_DisableEnablePageComments.aspx')","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/prov-1/SitePages/PNP_SDK_TEST_DisableEnablePageComments.aspx')","type":"SP.File"},"Author":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/prov-1/SitePages/PNP_SDK_TEST_DisableEnablePageComments.aspx')/Author"}},"CheckedOutByUser":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/prov-1/SitePages/PNP_SDK_TEST_DisableEnablePageComments.aspx')/CheckedOutByUser"}},"EffectiveInformationRightsManagementSettings":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/prov-1/SitePages/PNP_SDK_TEST_DisableEnablePageComments.aspx')/EffectiveInformationRightsManagementSettings"}},"InformationRightsManagementSettings":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/prov-1/SitePages/PNP_SDK_TEST_DisableEnablePageComments.aspx')/InformationRightsManagementSettings"}},"ListItemAllFields":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/prov-1/SitePages/PNP_SDK_TEST_DisableEnablePageComments.aspx')/ListItemAllFields"}},"LockedByUser":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/prov-1/SitePages/PNP_SDK_TEST_DisableEnablePageComments.aspx')/LockedByUser"}},"ModifiedBy":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/prov-1/SitePages/PNP_SDK_TEST_DisableEnablePageComments.aspx')/ModifiedBy"}},"Properties":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/prov-1/SitePages/PNP_SDK_TEST_DisableEnablePageComments.aspx')/Properties"}},"VersionEvents":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/prov-1/SitePages/PNP_SDK_TEST_DisableEnablePageComments.aspx')/VersionEvents"}},"Versions":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/prov-1/SitePages/PNP_SDK_TEST_DisableEnablePageComments.aspx')/Versions"}},"CheckInComment":"","CheckOutType":2,"ContentTag":"{CF255BE2-1248-4944-A9C7-AF5955E4392A},1,0","CustomizedPageStatus":1,"ETag":"\"{CF255BE2-1248-4944-A9C7-AF5955E4392A},1\"","Exists":true,"IrmEnabled":false,"Length":"780","Level":2,"LinkingUri":null,"LinkingUrl":"","MajorVersion":0,"MinorVersion":1,"Name":"PNP_SDK_TEST_DisableEnablePageComments.aspx","ServerRelativeUrl":"/sites/prov-1/SitePages/PNP_SDK_TEST_DisableEnablePageComments.aspx","TimeCreated":"2021-03-09T17:50:50Z","TimeLastModified":"2021-03-09T17:50:50Z","Title":null,"UIVersion":1,"UIVersionLabel":"0.1","UniqueId":"cf255be2-1248-4944-a9c7-af5955e4392a"}}
+--batchresponse_2ab91f79-158e-4007-9c8d-4cf8405c647e--

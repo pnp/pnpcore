@@ -268,8 +268,10 @@ namespace PnP.Core.Model.SharePoint
 
         public IFieldCollection AvailableFields { get => GetModelCollectionValue<IFieldCollection>(); }
 
+        // BERT/PAOLO: not possible at this moment after refactoring, somethign to reassess later on
         // A special approach is needed to load all lists, comes down to adding the "system" facet to the select
-        [GraphProperty("lists", Get = "sites/{hostname}:{serverrelativepath}:/lists?$select=" + List.DefaultGraphFieldsToLoad, Expandable = true)]
+        //[GraphProperty("lists", Get = "sites/{hostname}:{serverrelativepath}:/lists?$select=" + List.DefaultGraphFieldsToLoad, Expandable = true)]
+        //[GraphProperty("lists", Expandable = true)]
         public IListCollection Lists { get => GetModelCollectionValue<IListCollection>(); }
 
         public IContentTypeCollection ContentTypes { get => GetModelCollectionValue<IContentTypeCollection>(); }
@@ -796,6 +798,48 @@ namespace PnP.Core.Model.SharePoint
             }
         }
 
+        #endregion
+
+        #region Syntex support
+        public async Task<bool> IsSyntexContentCenterAsync()
+        {
+            await EnsurePropertiesAsync(p => p.WebTemplate).ConfigureAwait(false);
+
+            // Syntex Content Center sites use a specific template
+            if (WebTemplate == "CONTENTCTR")
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        public bool IsSyntexContentCenter()
+        {
+            return IsSyntexContentCenterAsync().GetAwaiter().GetResult();
+        }
+
+        public async Task<ISyntexContentCenter> AsSyntexContentCenterAsync()
+        {
+            if (await IsSyntexContentCenterAsync().ConfigureAwait(false))
+            {
+                SyntexContentCenter syntexContentCenter = new SyntexContentCenter()
+                {
+                    Web = this
+                };
+
+                return syntexContentCenter;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public ISyntexContentCenter AsSyntexContentCenter()
+        {
+            return AsSyntexContentCenterAsync().GetAwaiter().GetResult();
+        }
         #endregion
 
         #endregion

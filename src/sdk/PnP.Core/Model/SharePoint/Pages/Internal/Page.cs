@@ -19,7 +19,7 @@ namespace PnP.Core.Model.SharePoint
         private string pageTitle;
         private string pageName;
         private static readonly Expression<Func<IList, object>>[] getPagesLibraryExpression = new Expression<Func<IList, object>>[] {p => p.Title, p => p.TemplateType, p => p.EnableFolderCreation,
-            p => p.EnableMinorVersions, p => p.EnableModeration, p => p.EnableVersioning, p => p.RootFolder, p=>p.ListItemEntityTypeFullName };
+            p => p.EnableMinorVersions, p => p.EnableModeration, p => p.EnableVersioning, p => p.RootFolder, p => p.ListItemEntityTypeFullName, p => p.Fields };
 
         #region Construction
 
@@ -306,7 +306,7 @@ namespace PnP.Core.Model.SharePoint
             string pageNameFilter = $@"
                         <BeginsWith>
                           <FieldRef Name='{PageConstants.FileLeafRef}'/>
-                          <Value Type='text'>{pageNameWithoutFolder}</Value>
+                          <Value Type='text'><![CDATA[{pageNameWithoutFolder}]]></Value>
                         </BeginsWith>";
 
             // This is the main query, it can be complemented with above page name filter bij replacing the variables
@@ -386,11 +386,15 @@ namespace PnP.Core.Model.SharePoint
                 {
                     if (list.IsPropertyAvailable(p => p.TemplateType) && list.TemplateType == ListTemplateType.WebPageLibrary)
                     {
-                        if (list.ArePropertiesAvailable(getPagesLibraryExpression))
+                        // The site pages library has the CanvasContent1 column, using that to distinguish between Site Pages and other wiki page libraries
+                        if (list.IsPropertyAvailable(p => p.Fields) && list.Fields.AsRequested().FirstOrDefault(p => p.InternalName == "CanvasContent1") != null)
                         {
-                            pagesLibrary = list;
+                            if (list.ArePropertiesAvailable(getPagesLibraryExpression))
+                            {
+                                pagesLibrary = list;
+                            }
+                            break;
                         }
-                        break;
                     }
                 }
             }
@@ -398,10 +402,25 @@ namespace PnP.Core.Model.SharePoint
             // No pages library found, so reload it
             if (pagesLibrary == null)
             {
-                pagesLibrary = await context.Web.Lists
-                    .QueryProperties(getPagesLibraryExpression)
-                    .FirstOrDefaultAsync(p => p.TemplateType == ListTemplateType.WebPageLibrary)
-                    .ConfigureAwait(false);
+                var libraries = await context.Web.Lists.QueryProperties(getPagesLibraryExpression)
+                                                       .Where(p => p.TemplateType == ListTemplateType.WebPageLibrary)
+                                                       .ToListAsync()
+                                                       .ConfigureAwait(false);
+                if (libraries.Count == 1)
+                {
+                    return libraries.First();
+                }
+                else
+                {
+                    foreach (var list in libraries)
+                    {
+                        if (list.IsPropertyAvailable(p => p.Fields) && list.Fields.AsRequested().FirstOrDefault(p => p.InternalName == "CanvasContent1") != null)
+                        {
+                            pagesLibrary = list;
+                            break;
+                        }
+                    }
+                }
             }
 
             return pagesLibrary;
@@ -1365,7 +1384,7 @@ namespace PnP.Core.Model.SharePoint
         #endregion
 
         #region Create and Save page
-        public void SaveAsTemplate(string pageName = null)
+        public string SaveAsTemplate(string pageName = null)
         {
             if (string.IsNullOrEmpty(pageName))
             {
@@ -1379,10 +1398,10 @@ namespace PnP.Core.Model.SharePoint
                 }
             }
 
-            SaveAsTemplateAsync(pageName).GetAwaiter().GetResult();
+            return SaveAsTemplateAsync(pageName).GetAwaiter().GetResult();
         }
 
-        public async Task SaveAsTemplateAsync(string pageName = null)
+        public async Task<string> SaveAsTemplateAsync(string pageName = null)
         {
             string pageUrl = $"{(await GetTemplatesFolderAsync().ConfigureAwait(false))}/{pageName}";
 
@@ -1391,15 +1410,15 @@ namespace PnP.Core.Model.SharePoint
             isDefaultDescription = true;
 
             // Save the page as template
-            await SaveAsync(pageUrl).ConfigureAwait(false);
+            return await SaveAsync(pageUrl).ConfigureAwait(false);
         }
 
-        public void Save(string pageName = null)
+        public string Save(string pageName = null)
         {
-            SaveAsync(pageName).GetAwaiter().GetResult();
+            return SaveAsync(pageName).GetAwaiter().GetResult();
         }
 
-        public async Task SaveAsync(string pageName = null)
+        public async Task<string> SaveAsync(string pageName = null)
         {
             if (string.IsNullOrEmpty(pageName))
             {
@@ -1419,6 +1438,8 @@ namespace PnP.Core.Model.SharePoint
                     throw new ArgumentNullException(nameof(pageName));
                 }
             }
+
+            pageName = NormalizePageName(pageName);
 
             // Validate we're not using "wrong" layouts for the given site type
             await ValidateOneColumnFullWidthSectionUsageAsync().ConfigureAwait(false);
@@ -1578,7 +1599,7 @@ namespace PnP.Core.Model.SharePoint
                     await PageListItem.UpdateOverwriteVersionAsync().ConfigureAwait(false);
                 }
 
-                return;
+                return this.pageName;
             }
             else
             {
@@ -1722,6 +1743,8 @@ namespace PnP.Core.Model.SharePoint
             {
                 await PageListItem.UpdateOverwriteVersionAsync().ConfigureAwait(false);
             }
+
+            return this.pageName;
         }
 
         private void SetBannerImageUrlField(string bannerImageUrl)
@@ -1769,6 +1792,17 @@ namespace PnP.Core.Model.SharePoint
             }
 
             return new Tuple<string, string>(folderName, pageNameWithoutFolder);
+        }
+
+        private static string NormalizePageName(string pageName)
+        {
+            if (string.IsNullOrEmpty(pageName))
+            {
+                return pageName;
+            }
+
+            // if a page name contains spaces then let's replace them with dashes, just like the UI does
+            return pageName.Replace(" ", "-").Replace("#", "-");
         }
 
         private async Task ValidateOneColumnFullWidthSectionUsageAsync()

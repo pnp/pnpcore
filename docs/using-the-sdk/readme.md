@@ -364,7 +364,7 @@ Another approach to mainly limit the data that's being pulled from Microsoft 365
 
 ```csharp
 await context.Web.LoadAsync(p => p.Title,
-                            p => p.ContentTypes.LoadProperties(p => p.Name),
+                            p => p.ContentTypes.QueryProperties(p => p.Name),
                             p => p.Lists.QueryProperties(p => p.Id,
                                                          p => p.Title,
                                                          p => p.DocumentTemplate,

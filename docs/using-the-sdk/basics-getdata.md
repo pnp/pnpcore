@@ -51,7 +51,9 @@ using (var context = await pnpContextFactory.CreateAsync("SiteToWorkWith"))
     // Data is loaded into the context
     await context.Web.LoadAsync(p => p.Title, p => p.Lists);
 
-    foreach (var list in context.Web.Lists)
+    // We're using AsRequested() to query the already loaded domain models, if not a new query would 
+    // issued to load the lists
+    foreach (var list in context.Web.Lists.AsRequested())
     {
         // do something with the list
     }
@@ -73,7 +75,9 @@ using (var context = await pnpContextFactory.CreateAsync("SiteToWorkWith"))
     // Load the data into variable
     var web = await context.Web.GetAsync(p => p.Title, p => p.Lists);
 
-    foreach (var list in web.Lists)
+    // We're using AsRequested() to query the already loaded domain models, if not a new query would 
+    // issued to load the lists
+    foreach (var list in web.Lists.AsRequested())
     {
         // do something with the list
     }
@@ -107,7 +111,7 @@ using (var context = await pnpContextFactory.CreateAsync("SiteToWorkWith"))
     // Option A: Use the lists loaded into the context
     await context.Web.LoadAsync(p => p.Lists);
 
-    foreach(var list in context.Web.Lists)
+    foreach(var list in context.Web.Lists.AsRequested())
     {
         // Use list
     }
@@ -117,9 +121,15 @@ using (var context = await pnpContextFactory.CreateAsync("SiteToWorkWith"))
     // are not loaded into the context
     var lists = await context.Web.Lists.Where(p => p.Title == "Site Pages").ToListAsync();
 
-    foreach(var list in lists)
+    foreach(var list in lists.AsRequested())
     {
         // Use list
+    }
+
+    // Option C: directly enumerate the lists
+    await foreach(var list in context.Web.Lists)
+    {
+        // Use List
     }
 }
 ```

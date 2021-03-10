@@ -35,7 +35,7 @@ namespace PnP.Core.Test.Base
                 var web = await context.Web.GetAsync(p => p.Lists);
 
                 string listTitle = "AddListViaRestAsync";
-                var myList = web.Lists.FirstOrDefault(p => p.Title == listTitle);
+                var myList = web.Lists.AsRequested().FirstOrDefault(p => p.Title == listTitle);
 
                 if (myList != null)
                 {
@@ -161,7 +161,7 @@ namespace PnP.Core.Test.Base
                 var web = context.Web.Get(p => p.Lists);
 
                 string listTitle = "AddListViaRest";
-                var myList = web.Lists.FirstOrDefault(p => p.Title == listTitle);
+                var myList = web.Lists.AsRequested().FirstOrDefault(p => p.Title == listTitle);
 
                 if (myList != null)
                 {
@@ -196,7 +196,7 @@ namespace PnP.Core.Test.Base
                 var web = context.Web.Get(p => p.Lists);
 
                 string listTitle = "AddListViaRestException";
-                var myList = web.Lists.FirstOrDefault(p => p.Title == listTitle);
+                var myList = web.Lists.AsRequested().FirstOrDefault(p => p.Title == listTitle);
 
                 if (myList != null)
                 {
@@ -226,7 +226,7 @@ namespace PnP.Core.Test.Base
                 var web = context.Web.Get(p => p.Lists);
 
                 string listTitle = "AddListViaRestException";
-                var myList = web.Lists.FirstOrDefault(p => p.Title == listTitle);
+                var myList = web.Lists.AsRequested().FirstOrDefault(p => p.Title == listTitle);
 
                 if (myList != null)
                 {
@@ -261,7 +261,7 @@ namespace PnP.Core.Test.Base
                 var listCount = context.Web.Lists.Length;
 
                 string listTitle = "AddListViaBatchAsyncRest";
-                var myList = context.Web.Lists.FirstOrDefault(p => p.Title == listTitle);
+                var myList = context.Web.Lists.AsRequested().FirstOrDefault(p => p.Title == listTitle);
 
                 if (myList != null)
                 {
@@ -307,7 +307,7 @@ namespace PnP.Core.Test.Base
                 Assert.IsTrue(web.IsAvailable);
 
                 string listTitle = "AddListViaBatchRest";
-                var myList = web.Result.Lists.FirstOrDefault(p => p.Title == listTitle);
+                var myList = web.Result.Lists.AsRequested().FirstOrDefault(p => p.Title == listTitle);
 
                 if (myList != null)
                 {
@@ -353,7 +353,7 @@ namespace PnP.Core.Test.Base
                 Assert.IsTrue(web.IsAvailable);
 
                 string listTitle = "AddListViaExplicitBatchAsyncRest";
-                var myList = web.Result.Lists.FirstOrDefault(p => p.Title == listTitle);
+                var myList = web.Result.Lists.AsRequested().FirstOrDefault(p => p.Title == listTitle);
 
                 if (myList != null)
                 {
@@ -401,7 +401,7 @@ namespace PnP.Core.Test.Base
                 Assert.IsTrue(web.IsAvailable);
 
                 string listTitle = "AddListViaExplicitBatchRest";
-                var myList = web.Result.Lists.FirstOrDefault(p => p.Title == listTitle);
+                var myList = web.Result.Lists.AsRequested().FirstOrDefault(p => p.Title == listTitle);
 
                 if (myList != null)
                 {
@@ -450,7 +450,7 @@ namespace PnP.Core.Test.Base
                 // Channel names have to be unique
                 string channelName = $"Channel test {new Random().Next()}";
                 // Check if the channel exists
-                var channelFound = team.Channels.FirstOrDefault(p => p.DisplayName == channelName);
+                var channelFound = team.Channels.AsRequested().FirstOrDefault(p => p.DisplayName == channelName);
                 if (channelFound == null)
                 {
                     int channelCount = team.Channels.Length;
@@ -481,7 +481,7 @@ namespace PnP.Core.Test.Base
                 // Channel names have to be unique
                 string channelName = $"Channel test {new Random().Next()}";
                 // Check if the channel exists
-                var channelFound = team.Channels.FirstOrDefault(p => p.DisplayName == channelName);
+                var channelFound = team.Channels.AsRequested().FirstOrDefault(p => p.DisplayName == channelName);
                 if (channelFound == null)
                 {
                     int channelCount = team.Channels.Length;
@@ -517,7 +517,7 @@ namespace PnP.Core.Test.Base
                 // Channel names have to be unique
                 string channelName = $"Channel test {new Random().Next()}";
                 // Check if the channel exists
-                var channelFound = team.Result.Channels.FirstOrDefault(p => p.DisplayName == channelName);
+                var channelFound = team.Result.Channels.AsRequested().FirstOrDefault(p => p.DisplayName == channelName);
                 if (channelFound == null)
                 {
                     int channelCount = team.Result.Channels.Length;
@@ -553,7 +553,7 @@ namespace PnP.Core.Test.Base
                 // Channel names have to be unique
                 string channelName = $"Channel test {new Random().Next()}";
                 // Check if the channel exists
-                var channelFound = team.Result.Channels.FirstOrDefault(p => p.DisplayName == channelName);
+                var channelFound = team.Result.Channels.AsRequested().FirstOrDefault(p => p.DisplayName == channelName);
                 if (channelFound == null)
                 {
                     int channelCount = team.Result.Channels.Length;
@@ -590,7 +590,7 @@ namespace PnP.Core.Test.Base
                 // Channel names have to be unique
                 string channelName = $"Channel test {new Random().Next()}";
                 // Check if the channel exists
-                var channelFound = team.Result.Channels.FirstOrDefault(p => p.DisplayName == channelName);
+                var channelFound = team.Result.Channels.AsRequested().FirstOrDefault(p => p.DisplayName == channelName);
                 if (channelFound == null)
                 {
                     int channelCount = team.Result.Channels.Length;
@@ -627,7 +627,7 @@ namespace PnP.Core.Test.Base
                 // Channel names have to be unique
                 string channelName = $"Channel test {new Random().Next()}";
                 // Check if the channel exists
-                var channelFound = team.Result.Channels.FirstOrDefault(p => p.DisplayName == channelName);
+                var channelFound = team.Result.Channels.AsRequested().FirstOrDefault(p => p.DisplayName == channelName);
                 if (channelFound == null)
                 {
                     int channelCount = team.Result.Channels.Length;

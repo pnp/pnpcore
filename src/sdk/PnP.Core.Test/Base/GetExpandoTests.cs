@@ -24,7 +24,7 @@ namespace PnP.Core.Test.Base
         public static void TestFixtureSetup(TestContext testContext)
         {
             // Configure mocking default for all tests in this class, unless override by a specific test
-            // TestCommon.Instance.Mocking = false;
+            //TestCommon.Instance.Mocking = false;
         }
 
         #region Tests that use REST to hit SharePoint
@@ -235,7 +235,7 @@ namespace PnP.Core.Test.Base
             await context.Web.LoadBatchAsync(p => p.Lists);
             context.ExecuteAsync().Wait();
 
-            var myList = context.Web.Lists.FirstOrDefault(p => p.Title == listTitle);
+            var myList = context.Web.Lists.AsRequested().FirstOrDefault(p => p.Title == listTitle);
 
             if (myList == null)
             {

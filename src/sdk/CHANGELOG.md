@@ -6,7 +6,15 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
-## [Unreleased]
+## [unreleased]
+
+### Added
+
+### Changed
+
+- Fix for older SharePoint UI created image web parts where links is set to null #347 [Sarah4x - Sarah Wilson]
+
+## [1.0.0]
 
 ### Added
 
@@ -62,6 +70,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - LoadProperties now also supports Graph #145 [jansenbe - Bert Jansen]
 - Authentication enhancements #302 [sebastianmattar - Sebastian Mattar]
 - CSOM Light client - first step implementation for PropertyBag updates #334 [mgwojciech - Marcin Wojciechowski]
+- Support for ListItem permission management #343 [jimmywim - Jim Love]
+- CSOM Light client - List item update logic #345 [mgwojciech - Marcin Wojciechowski]
 
 ### Changed
 

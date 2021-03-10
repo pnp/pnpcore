@@ -1,9 +1,19 @@
---batchresponse_845c9871-dac6-4b7e-998f-17cf128d5d6d
+--batchresponse_08541ae8-306b-491f-9acf-0471ee62c160
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 200 OK
-CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+CONTENT-TYPE: application/json; charset=utf-8
 
-{"d":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/pnpcoresdktest/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/pnpcoresdktest/SitePages/PNP_SDK_TEST_VerticalPageSectionsWithEmphasisCreateTest.aspx')","uri":"https://bertonline.sharepoint.com/sites/pnpcoresdktest/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/pnpcoresdktest/SitePages/PNP_SDK_TEST_VerticalPageSectionsWithEmphasisCreateTest.aspx')","type":"SP.File"},"Author":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/pnpcoresdktest/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/pnpcoresdktest/SitePages/PNP_SDK_TEST_VerticalPageSectionsWithEmphasisCreateTest.aspx')/Author"}},"CheckedOutByUser":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/pnpcoresdktest/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/pnpcoresdktest/SitePages/PNP_SDK_TEST_VerticalPageSectionsWithEmphasisCreateTest.aspx')/CheckedOutByUser"}},"EffectiveInformationRightsManagementSettings":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/pnpcoresdktest/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/pnpcoresdktest/SitePages/PNP_SDK_TEST_VerticalPageSectionsWithEmphasisCreateTest.aspx')/EffectiveInformationRightsManagementSettings"}},"InformationRightsManagementSettings":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/pnpcoresdktest/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/pnpcoresdktest/SitePages/PNP_SDK_TEST_VerticalPageSectionsWithEmphasisCreateTest.aspx')/InformationRightsManagementSettings"}},"ListItemAllFields":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/pnpcoresdktest/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/pnpcoresdktest/SitePages/PNP_SDK_TEST_VerticalPageSectionsWithEmphasisCreateTest.aspx')/ListItemAllFields"}},"LockedByUser":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/pnpcoresdktest/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/pnpcoresdktest/SitePages/PNP_SDK_TEST_VerticalPageSectionsWithEmphasisCreateTest.aspx')/LockedByUser"}},"ModifiedBy":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/pnpcoresdktest/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/pnpcoresdktest/SitePages/PNP_SDK_TEST_VerticalPageSectionsWithEmphasisCreateTest.aspx')/ModifiedBy"}},"Properties":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/pnpcoresdktest/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/pnpcoresdktest/SitePages/PNP_SDK_TEST_VerticalPageSectionsWithEmphasisCreateTest.aspx')/Properties"}},"VersionEvents":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/pnpcoresdktest/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/pnpcoresdktest/SitePages/PNP_SDK_TEST_VerticalPageSectionsWithEmphasisCreateTest.aspx')/VersionEvents"}},"Versions":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/pnpcoresdktest/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/pnpcoresdktest/SitePages/PNP_SDK_TEST_VerticalPageSectionsWithEmphasisCreateTest.aspx')/Versions"}},"CheckInComment":"","CheckOutType":2,"ContentTag":"{A32EF459-AFE5-43D7-9879-95F843A1BF5A},1,0","CustomizedPageStatus":1,"ETag":"\"{A32EF459-AFE5-43D7-9879-95F843A1BF5A},1\"","Exists":true,"IrmEnabled":false,"Length":"780","Level":2,"LinkingUri":null,"LinkingUrl":"","MajorVersion":0,"MinorVersion":1,"Name":"PNP_SDK_TEST_VerticalPageSectionsWithEmphasisCreateTest.aspx","ServerRelativeUrl":"/sites/pnpcoresdktest/SitePages/PNP_SDK_TEST_VerticalPageSectionsWithEmphasisCreateTest.aspx","TimeCreated":"2021-02-23T19:09:09Z","TimeLastModified":"2021-02-23T19:09:09Z","Title":null,"UIVersion":1,"UIVersionLabel":"0.1","UniqueId":"a32ef459-afe5-43d7-9879-95f843a1bf5a"}}
---batchresponse_845c9871-dac6-4b7e-998f-17cf128d5d6d--
+{ "Row" : 
+[],"FirstRow" : 1,
+"FolderPermissions" : "0x7ffffffffffbffff"
+,"LastRow" : 0,
+"RowLimit" : 30
+,"FilterLink" : "?"
+,"ForceNoHierarchy" : "1"
+,"HierarchyHasIndention" : ""
+,"CurrentFolderSpItemUrl" : ""
+
+}
+--batchresponse_08541ae8-306b-491f-9acf-0471ee62c160--

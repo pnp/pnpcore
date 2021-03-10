@@ -1,5 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PnP.Core.Model.SharePoint;
+using PnP.Core.QueryModel;
 using PnP.Core.Test.Utilities;
 using System;
 using System.Collections.Generic;
@@ -7,8 +8,6 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using PnP.Core.QueryModel;
-using PnP.Core.Model;
 
 namespace PnP.Core.Test.SharePoint
 {
@@ -189,7 +188,7 @@ namespace PnP.Core.Test.SharePoint
                     // x BERT: This still gives me back the name in English, most likely because of my user's profile
                     // I would change the test inner logic forcing the language of the request (if possible)
 
-                    // Assert.IsTrue(pages.AsEnumerable().First().PagesLibrary.Title == "Sitepagina's");
+                    Assert.IsTrue(pages.AsEnumerable().First().PagesLibrary.Title == "Sitepagina's");
                 }
 
                 // Delete the web to cleanup the test artefacts
@@ -197,6 +196,35 @@ namespace PnP.Core.Test.SharePoint
             }
         }
 
+        [TestMethod]
+        public async Task LoadPagesWhenThereAreMultiplePagesLibraries()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                // Create a new sub site to test as we don't want to break the main site home page
+                string webTitle = "PageTestSubWeb";
+                var addedWeb = await context.Web.Webs.AddAsync(new WebOptions { Title = webTitle, Url = webTitle, Language = 1033 });
+
+                // Create a context for the newly created web
+                using (var context2 = await TestCommon.Instance.CloneAsync(context, addedWeb.Url, 1))
+                {
+                    // Create a wiki page library with a name that alphabetically comes before the site pages library name
+                    await context2.Web.Lists.AddAsync("AWiki", ListTemplateType.WebPageLibrary);
+
+                    // Read the current home page
+                    string pageName = "Home.aspx";
+                    var pages = await context2.Web.GetPagesAsync(pageName);
+
+                    Assert.IsTrue(pages.AsEnumerable().First() != null);
+                    Assert.IsTrue(pages.AsEnumerable().First().PagesLibrary != null);
+                    Assert.IsTrue(pages.AsEnumerable().First().PagesLibrary.Title == "Site Pages");
+                }
+
+                // Delete the web to cleanup the test artefacts
+                await addedWeb.DeleteAsync();
+            }
+        }
 
         [TestMethod]
         public async Task LoadPagesWithSimilarNames()
@@ -375,6 +403,45 @@ namespace PnP.Core.Test.SharePoint
         #endregion
 
         #region Page content tests
+
+        [TestMethod]
+        public async Task PageTextTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var page = await context.Web.NewPageAsync();
+                string pageName = TestCommon.GetPnPSdkTestAssetName("PageTextTest.aspx");
+
+                page.AddSection(CanvasSectionTemplate.OneColumn, 1);
+                // 
+                page.AddControl(page.NewTextPart("Normal"), page.Sections[0].Columns[0]);
+                page.AddControl(page.NewTextPart("<p>Normal</p><p>Normal</p>"), page.Sections[0].Columns[0]);
+                page.AddControl(page.NewTextPart("<h2>Heading1</h2><p>Normal</p>"), page.Sections[0].Columns[0]);
+                page.AddControl(page.NewTextPart("<h3>Heading2</h3><p>Normal</p>"), page.Sections[0].Columns[0]);
+                page.AddControl(page.NewTextPart("<h4>Heading 3</h4><p>Normal</p>"), page.Sections[0].Columns[0]);
+                page.AddControl(page.NewTextPart("<pre>fixed</pre><p>Normal</p>"), page.Sections[0].Columns[0]);
+                page.AddControl(page.NewTextPart("<blockquote>quote</blockquote><p>Normal</p>"), page.Sections[0].Columns[0]);
+                page.AddControl(page.NewTextPart("<ul><li>fixed</li></ul><p>Normal</p>"), page.Sections[0].Columns[0]);
+
+                await page.SaveAsync(pageName);
+
+                // Load the page again
+                var pages = await context.Web.GetPagesAsync(pageName);
+                var createdPage = pages.First();
+
+                Assert.IsTrue((createdPage.Sections[0].Columns[0].Controls[0] as PageText).Text == "Normal");
+                Assert.IsTrue((createdPage.Sections[0].Columns[0].Controls[1] as PageText).Text == "<p>Normal</p><p>Normal</p>");
+                Assert.IsTrue((createdPage.Sections[0].Columns[0].Controls[2] as PageText).Text == "<h2>Heading1</h2><p>Normal</p>");
+                Assert.IsTrue((createdPage.Sections[0].Columns[0].Controls[3] as PageText).Text == "<h3>Heading2</h3><p>Normal</p>");
+                Assert.IsTrue((createdPage.Sections[0].Columns[0].Controls[4] as PageText).Text == "<h4>Heading 3</h4><p>Normal</p>");
+                Assert.IsTrue((createdPage.Sections[0].Columns[0].Controls[5] as PageText).Text == "<pre>fixed</pre><p>Normal</p>");
+                Assert.IsTrue((createdPage.Sections[0].Columns[0].Controls[6] as PageText).Text == "<blockquote>quote</blockquote><p>Normal</p>");
+                Assert.IsTrue((createdPage.Sections[0].Columns[0].Controls[7] as PageText).Text == "<ul><li>fixed</li></ul><p>Normal</p>");
+
+                await page.DeleteAsync();
+            }
+        }
 
         [TestMethod]
         public async Task PageSectionsCreateTest()
@@ -676,6 +743,45 @@ namespace PnP.Core.Test.SharePoint
                 Assert.IsTrue(page.Sections[0].Columns[0].Controls.Count == 1);
                 Assert.IsTrue(page.Sections[0].Columns[0].Controls[0] is IPageWebPart);
                 Assert.IsTrue((page.Sections[0].Columns[0].Controls[0] as IPageWebPart).WebPartId == page.DefaultWebPartToWebPartId(DefaultWebPart.Image));
+
+                // delete the page
+                await page.DeleteAsync();
+            }
+        }
+
+        [TestMethod]
+        public async Task VideoEmbedUsingStreamTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var page = await context.Web.NewPageAsync();
+                string pageName = TestCommon.GetPnPSdkTestAssetName("VideoEmbedUsingStreamTest.aspx");
+
+                // Add all the possible sections 
+                page.AddSection(CanvasSectionTemplate.OneColumn, 1);
+
+                // Instantiate a default web part ==> this will result in the 
+                var videoWebPart = await page.InstantiateDefaultWebPartAsync(DefaultWebPart.VideoEmbed);
+                videoWebPart.PropertiesJson = "{\"controlType\":3,\"id\":\"ebf408b9-aeaf-4dd9-8616-41af322085e9\",\"position\":{\"zoneIndex\":1,\"sectionIndex\":1,\"controlIndex\":1,\"layoutIndex\":1},\"webPartId\":\"275c0095-a77e-4f6d-a2a0-6a7626911518\",\"webPartData\":{\"id\":\"275c0095-a77e-4f6d-a2a0-6a7626911518\",\"instanceId\":\"ebf408b9-aeaf-4dd9-8616-41af322085e9\",\"title\":\"Stream\",\"description\":\"Display a Stream video or channel\",\"audiences\":[],\"serverProcessedContent\":{\"htmlStrings\":{},\"searchablePlainTexts\":{},\"imageSources\":{},\"links\":{\"videoSource\":\"https://web.microsoftstream.com/embed/browse\"}},\"dataVersion\":\"1.4\",\"properties\":{\"showInfo\":false,\"captionText\":\"\",\"embedCode\":\"<iframe width='640' height='475' src='https://web.microsoftstream.com/embed/browse?app=SPO&displayMode=buttons&showDescription=true&sort=trending' frameborder='0' allowfullscreen></iframe>\",\"isStream\":true,\"showvideoStart\":false,\"videoStartAt\":\"\",\"channelSortBy\":\"trending\",\"sourceType\":\"BROWSE\",\"thumbnailUrl\":\"\",\"browseSortBy\":\"trending\"}},\"emphasis\":{},\"reservedHeight\":683,\"reservedWidth\":649,\"addedFromPersistedData\":true}";
+
+                // Add a text control in each section
+                page.AddControl(videoWebPart, page.Sections[0].Columns[0]);
+
+                await page.SaveAsync(pageName);
+
+                // load page again
+                var pages = await context.Web.GetPagesAsync(pageName);
+
+                Assert.IsTrue(pages.Count == 1);
+
+                page = pages.AsEnumerable().First();
+
+                Assert.IsTrue(page.Sections.Count == 1);
+                Assert.IsTrue(page.Sections[0].Type == CanvasSectionTemplate.OneColumn);
+                Assert.IsTrue(page.Sections[0].Columns[0].Controls.Count == 1);
+                Assert.IsTrue(page.Sections[0].Columns[0].Controls[0] is IPageWebPart);
+                Assert.IsTrue((page.Sections[0].Columns[0].Controls[0] as IPageWebPart).WebPartId == page.DefaultWebPartToWebPartId(DefaultWebPart.VideoEmbed));
 
                 // delete the page
                 await page.DeleteAsync();
@@ -1317,6 +1423,62 @@ namespace PnP.Core.Test.SharePoint
                 await updatedPage.DeleteAsync();
                 // Verify the page exists
                 var pages2 = await context.Web.GetPagesAsync(pageName);
+                Assert.IsTrue(pages2.Count == 0);
+            }
+        }
+
+        [TestMethod]
+        public async Task CreateAndUpdatePageWithSpaceInName()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var newPage = await context.Web.NewPageAsync();
+                string pageName = TestCommon.GetPnPSdkTestAssetName("CreateAndUpdatePageWith Space InName.aspx");
+                // Save the page
+                var createdPage = await newPage.SaveAsync(pageName);
+
+                // Update the page
+                newPage.AddSection(CanvasSectionTemplate.ThreeColumn, 1, VariantThemeType.Soft, VariantThemeType.Strong);
+                newPage.AddControl(newPage.NewTextPart("I"), newPage.Sections[0].Columns[0]);
+                newPage.AddControl(newPage.NewTextPart("like"), newPage.Sections[0].Columns[1]);
+                newPage.AddControl(newPage.NewTextPart("PnP"), newPage.Sections[0].Columns[2]);
+
+                // Update the page
+                await newPage.SaveAsync(createdPage);
+
+                // Load the page again
+                var pages = await context.Web.GetPagesAsync(createdPage);
+                var updatedPage = pages.AsEnumerable().First();
+
+                Assert.IsTrue(updatedPage.Sections.Count == 1);
+                Assert.IsTrue(updatedPage.Sections[0].Columns.Count == 3);
+                Assert.IsTrue(updatedPage.Sections[0].Controls.Count == 3);
+
+                // Delete the page
+                await updatedPage.DeleteAsync();
+                // Verify the page exists
+                var pages2 = await context.Web.GetPagesAsync(pageName);
+                Assert.IsTrue(pages2.Count == 0);
+            }
+        }
+
+        [TestMethod]
+        public async Task CreateAndUpdatePageWithSpecialCharsInName()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var newPage = await context.Web.NewPageAsync();
+                string pageName = TestCommon.GetPnPSdkTestAssetName("A&B#C.aspx");
+                // Save the page
+                var createdPage = await newPage.SaveAsync(pageName);
+
+                // Delete the page
+                await newPage.DeleteAsync();
+
+                // Verify the page exists
+                var pages2 = await context.Web.GetPagesAsync(createdPage);
                 Assert.IsTrue(pages2.Count == 0);
             }
         }

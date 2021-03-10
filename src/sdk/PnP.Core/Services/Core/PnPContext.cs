@@ -54,10 +54,15 @@ namespace PnP.Core.Services
         //}, true);
         #endregion
 
+        #region Internal properties
+
+        internal readonly PnPGlobalSettingsOptions GlobalOptions;
+        internal readonly PnPContextFactoryOptions ContextOptions;
+
+        #endregion
+
         #region Private properties
 
-        private readonly PnPGlobalSettingsOptions globalOptions;
-        private readonly PnPContextFactoryOptions contextOptions;
         private readonly TelemetryManager telemetry;
         private Batch currentBatch;
 
@@ -98,18 +103,18 @@ namespace PnP.Core.Services
             AuthenticationProvider = authenticationProvider;
             RestClient = sharePointRestClient;
             GraphClient = microsoftGraphClient;
-            this.globalOptions = globalOptions;
-            this.contextOptions = contextOptions;
+            this.GlobalOptions = globalOptions;
+            this.ContextOptions = contextOptions;
             telemetry = telemetryManager;
 
-            if (this.contextOptions != null)
+            if (this.ContextOptions != null)
             {
-                GraphFirst = this.contextOptions.GraphFirst;
-                GraphAlwaysUseBeta = this.contextOptions.GraphAlwaysUseBeta;
-                GraphCanUseBeta = this.contextOptions.GraphCanUseBeta;
+                GraphFirst = this.ContextOptions.GraphFirst;
+                GraphAlwaysUseBeta = this.ContextOptions.GraphAlwaysUseBeta;
+                GraphCanUseBeta = this.ContextOptions.GraphCanUseBeta;
             }
 
-            BatchClient = new BatchClient(this, this.globalOptions, telemetryManager);
+            BatchClient = new BatchClient(this, this.GlobalOptions, telemetryManager);
         }
         #endregion
 
@@ -310,9 +315,9 @@ namespace PnP.Core.Services
             }
         }
 
-        /// <summary>
-        /// Entry point for the Microsoft 365 TermStore
-        /// </summary>
+        ///// <summary>
+        ///// Entry point for the Microsoft 365 TermStore
+        ///// </summary>
         //public ITermStore TermStore
         //{
         //    get
@@ -427,7 +432,7 @@ namespace PnP.Core.Services
                 throw new ArgumentException(string.Format(PnPCoreResources.Exception_PnPContext_EmptyConfiguration, nameof(name)));
             }
 
-            var configuration = contextOptions.Configurations.FirstOrDefault(c => c.Name == name);
+            var configuration = ContextOptions.Configurations.FirstOrDefault(c => c.Name == name);
             if (configuration == null)
             {
                 throw new ArgumentException(string.Format(PnPCoreResources.Exception_PnPContext_InvalidConfiguration, name));
@@ -479,7 +484,7 @@ namespace PnP.Core.Services
                 throw new ArgumentNullException(nameof(uri));
             }
 
-            PnPContext clonedContext = new PnPContext(Logger, AuthenticationProvider, RestClient, GraphClient, contextOptions, globalOptions, telemetry)
+            PnPContext clonedContext = new PnPContext(Logger, AuthenticationProvider, RestClient, GraphClient, ContextOptions, GlobalOptions, telemetry)
             {
                 // Take over graph settings
                 GraphCanUseBeta = graphCanUseBeta,
@@ -508,7 +513,7 @@ namespace PnP.Core.Services
                         throw new ArgumentException(string.Format(PnPCoreResources.Exception_PnPContext_EmptyConfiguration, nameof(name)));
                     }
 
-                    var configuration = contextOptions.Configurations.FirstOrDefault(c => c.Name == name);
+                    var configuration = ContextOptions.Configurations.FirstOrDefault(c => c.Name == name);
                     if (configuration == null)
                     {
                         throw new ArgumentException(string.Format(PnPCoreResources.Exception_PnPContext_InvalidConfiguration, name));
@@ -602,7 +607,7 @@ namespace PnP.Core.Services
         /// </summary>
         internal async Task SetAADTenantId()
         {
-            if (globalOptions.AADTenantId == Guid.Empty && Uri != null)
+            if (GlobalOptions.AADTenantId == Guid.Empty && Uri != null)
             {
                 using (var request = new HttpRequestMessage(HttpMethod.Get, $"{Uri}/_vti_bin/client.svc"))
                 {
@@ -622,7 +627,7 @@ namespace PnP.Core.Services
 
                         if (Guid.TryParse(targetRealm, out Guid realmGuid))
                         {
-                            globalOptions.AADTenantId = realmGuid;
+                            GlobalOptions.AADTenantId = realmGuid;
                         }
                     }
                 }

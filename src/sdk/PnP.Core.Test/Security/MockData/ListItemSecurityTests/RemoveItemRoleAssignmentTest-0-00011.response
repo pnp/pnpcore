@@ -1,0 +1,9 @@
+--batchresponse_fa71e35d-bd90-4e6f-93fa-9fc2aab13775
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+HTTP/1.1 200 OK
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+
+{"d":{"RemoveRoleAssignment":null}}
+--batchresponse_fa71e35d-bd90-4e6f-93fa-9fc2aab13775--

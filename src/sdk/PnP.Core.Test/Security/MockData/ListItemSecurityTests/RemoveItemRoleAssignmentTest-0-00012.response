@@ -1,0 +1,10 @@
+--batchresponse_ff3d98ac-cfdb-4413-94f9-713e2af2370b
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+HTTP/1.1 200 OK
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+ETAG: "879fbd95-db30-484d-a6e3-2244de06a00f,1"
+
+{"d":{"__metadata":{"id":"a8061ba9-d797-4f49-8f39-0554f9909e66","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'bf354dbc-982d-4d5f-b0a6-8cab6252b7d0')/Items(1)","etag":"\"1\"","type":"SP.Data.PNP_x005f_SDK_x005f_TEST_x005f_ItemSecurityTestsListItem"},"RoleAssignments":{"results":[{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'bf354dbc-982d-4d5f-b0a6-8cab6252b7d0')/Items(1)/RoleAssignments/GetByPrincipalId(6)","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'bf354dbc-982d-4d5f-b0a6-8cab6252b7d0')/Items(1)/RoleAssignments/GetByPrincipalId(6)","type":"SP.RoleAssignment"},"Member":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'bf354dbc-982d-4d5f-b0a6-8cab6252b7d0')/Items(1)/RoleAssignments/GetByPrincipalId(6)/Member"}},"RoleDefinitionBindings":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'bf354dbc-982d-4d5f-b0a6-8cab6252b7d0')/Items(1)/RoleAssignments/GetByPrincipalId(6)/RoleDefinitionBindings"}},"PrincipalId":6}]},"Id":1,"ID":1}}
+--batchresponse_ff3d98ac-cfdb-4413-94f9-713e2af2370b--

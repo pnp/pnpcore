@@ -872,6 +872,32 @@ namespace PnP.Core.Model.SharePoint
 
         #endregion
 
+        #region Syntex support
+        /// <summary>
+        /// Is this web a Syntex Content Center
+        /// </summary>
+        /// <returns>True if this web is a Syntex Content Center, false otherwise</returns>
+        Task<bool> IsSyntexContentCenterAsync();
+
+        /// <summary>
+        /// Is this web a Syntex Content Center
+        /// </summary>
+        /// <returns>True if this web is a Syntex Content Center, false otherwise</returns>
+        bool IsSyntexContentCenter();
+
+        /// <summary>
+        /// Returns the current web as <see cref="ISyntexContentCenter"/> if the web is a Syntex Content Center, null is returned otherwise
+        /// </summary>
+        /// <returns>The current web as <see cref="ISyntexContentCenter"/></returns>
+        Task<ISyntexContentCenter> AsSyntexContentCenterAsync();
+
+        /// <summary>
+        /// Returns the current web as <see cref="ISyntexContentCenter"/> if the web is a Syntex Content Center, null is returned otherwise
+        /// </summary>
+        /// <returns>The current web as <see cref="ISyntexContentCenter"/></returns>
+        ISyntexContentCenter AsSyntexContentCenter();
+        #endregion
+
         #endregion
 
         #region TO IMPLEMENT

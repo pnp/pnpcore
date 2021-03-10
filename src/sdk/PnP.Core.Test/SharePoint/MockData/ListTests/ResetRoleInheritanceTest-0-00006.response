@@ -1,4 +1,4 @@
---batchresponse_4b8189ca-71ab-440b-a3da-ef70262b0255
+--batchresponse_c055d61e-5e57-42ab-82b6-340ff04fd973
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
@@ -6,5 +6,5 @@ HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 ETAG: "1"
 
-{"d":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'9c3df240-4e37-4747-b4fa-9f6466dd3283')","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'9c3df240-4e37-4747-b4fa-9f6466dd3283')","etag":"\"1\"","type":"SP.List"},"HasUniqueRoleAssignments":false,"Id":"9c3df240-4e37-4747-b4fa-9f6466dd3283"}}
---batchresponse_4b8189ca-71ab-440b-a3da-ef70262b0255--
+{"d":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'e5842821-d622-4986-8b22-9db4cc5cb11a')","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'e5842821-d622-4986-8b22-9db4cc5cb11a')","etag":"\"1\"","type":"SP.List"},"HasUniqueRoleAssignments":false,"Id":"e5842821-d622-4986-8b22-9db4cc5cb11a"}}
+--batchresponse_c055d61e-5e57-42ab-82b6-340ff04fd973--

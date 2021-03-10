@@ -47,12 +47,24 @@
         internal const string TopicEntityRelations = "_EntityRelations";
         internal const string TopicEntityType = "_EntityType";
 
+        // Syntex models
+        internal const string ModelExplanations = "ModelExplanations";
+        internal const string ModelDescription = "ModelDescription";
+        internal const string ModelSchemas = "ModelSchemas";
+        internal const string ModelMappedClassifierName = "ModelMappedClassifierName";
+        internal const string ModelLastTrained = "ModelLastTrained";
+        internal const string ModelSettings = "ModelSettings";
+        internal const string ModelConfidenceScore = "ModelConfidenceScore";
+        internal const string ModelAccuracy = "ModelAccuracy";
+        internal const string ModelClassifiedItemCount = "ModelClassifiedItemCount";
+        internal const string ModelMismatchedItemCount = "ModelMismatchedItemCount";
+
         /// <summary>
         /// Contains the content identifier (ID) for content types used in the modern page infrastructure
         /// </summary>
-        public const string ModernArticlePage = "0x0101009D1CB255DA76424F860D91F20E6C4118";
-        public const string RepostPage = "0x0101009D1CB255DA76424F860D91F20E6C4118002A50BFCFB7614729B56886FADA02339B";
-        public const string SpacesPage = "0x0101009D1CB255DA76424F860D91F20E6C41180043153F945E98468297E67C3EEE43AB70";
+        internal const string ModernArticlePage = "0x0101009D1CB255DA76424F860D91F20E6C4118";
+        internal const string RepostPage = "0x0101009D1CB255DA76424F860D91F20E6C4118002A50BFCFB7614729B56886FADA02339B";
+        internal const string SpacesPage = "0x0101009D1CB255DA76424F860D91F20E6C41180043153F945E98468297E67C3EEE43AB70";
         #endregion
     }
 }

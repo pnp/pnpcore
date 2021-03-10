@@ -1,85 +1,9 @@
---batchresponse_937ce0e5-aa51-4b29-919f-d70dd25f7b78
+--batchresponse_53336227-4693-4ebe-843f-f5d44fb35725
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 200 OK
-CONTENT-TYPE: application/json; charset=utf-8
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{ "Row" : 
-[{
-"ID": "1108",
-"PermMask": "0x7ffffffffffbffff",
-"FSObjType": "0",
-"HTML_x0020_File_x0020_Type": "",
-"UniqueId": "{6B7F5B5F-9BC0-46E5-9FB7-E6C2B62A9600}",
-"ProgId": "",
-"NoExecute": "0",
-"ContentTypeId": "0x01010800B3B2A1451E70B6458A757AC0CBA6DAEF",
-"FileRef": "\u002fsites\u002fprov-1\u002fSitePages\u002fPNP_SDK_TEST_DemoteAsNewsArticle.aspx",
-"FileRef.urlencode": "%2Fsites%2Fprov%2D1%2FSitePages%2FPNP%5FSDK%5FTEST%5FDemoteAsNewsArticle%2Easpx",
-"FileRef.urlencodeasurl": "\u002fsites\u002fprov-1\u002fSitePages\u002fPNP_SDK_TEST_DemoteAsNewsArticle.aspx",
-"FileRef.urlencoding": "\u002fsites\u002fprov-1\u002fSitePages\u002fPNP_SDK_TEST_DemoteAsNewsArticle.aspx",
-"FileRef.scriptencodeasurl": "\\u002fsites\\u002fprov-1\\u002fSitePages\\u002fPNP_SDK_TEST_DemoteAsNewsArticle.aspx",
-"_UIVersion": "1",
-"SMTotalSize": "932",
-"File_x0020_Size": "780",
-"_CommentFlags": "",
-"File_x0020_Type": "aspx",
-"HTML_x0020_File_x0020_Type.File_x0020_Type.mapall": "ichtm.gif|Microsoft SharePoint Designer|SharePoint.OpenDocuments|",
-"HTML_x0020_File_x0020_Type.File_x0020_Type.mapcon": "SharePoint.OpenDocuments",
-"HTML_x0020_File_x0020_Type.File_x0020_Type.mapico": "ichtm.gif",
-"serverurl.progid": "",
-"ServerRedirectedEmbedUrl": "",
-"File_x0020_Type.progid": "",
-"File_x0020_Type.url": "FALSE",
-"FileLeafRef": "PNP_SDK_TEST_DemoteAsNewsArticle.aspx",
-"FileLeafRef.Name": "PNP_SDK_TEST_DemoteAsNewsArticle",
-"FileLeafRef.Suffix": "aspx",
-"FileDirRef": "\u002fsites\u002fprov-1\u002fSitePages",
-"Description": "",
-"Title": "",
-"ClientSideApplicationId": "",
-"PageLayoutType": "",
-"CanvasContent1": "<div dir=\"\" class=\"ms-rtestate-field\"><\u002fdiv>",
-"_AuthorByline": "",
-"_AuthorByline.id": "",
-"_AuthorByline.title": "",
-"_AuthorByline.span": "",
-"_AuthorByline.email": "",
-"_AuthorByline.sip": "",
-"_AuthorByline.jobTitle": "",
-"_AuthorByline.department": "",
-"_AuthorByline.picture": "",
-"LayoutWebpartsContent": "<div dir=\"\" class=\"ms-rtestate-field\"><\u002fdiv>",
-"BannerImageUrl": "",
-"BannerImageUrl.desc": "",
-"PromotedState": "",
-"PromotedState.": "",
-"_OriginalSourceUrl": "",
-"_OriginalSourceSiteId": "",
-"_OriginalSourceWebId": "",
-"_OriginalSourceListId": "",
-"_OriginalSourceItemId": "",
-"ItemChildCount": "0",
-"FolderChildCount": "0",
-"A2ODMountCount": "",
-"owshiddenversion": "1",
-"_SPTranslatedLanguages": "",
-"_SPSitePageFlags": "",
-"ContentVersion": "0",
-"DocConcurrencyNumber": "1",
-"_VirusStatus": "",
-"Restricted": "",
-"ecb.dispex": "return DispEx(this,event,'TRUE','FALSE','FALSE','','1','SharePoint.OpenDocuments','','','','6','0','','0x7ffffffffffbffff','','')"
-}
-],"FirstRow" : 1,
-"FolderPermissions" : "0x7ffffffffffbffff"
-,"LastRow" : 1,
-"RowLimit" : 30
-,"FilterLink" : "?"
-,"ForceNoHierarchy" : "1"
-,"HierarchyHasIndention" : ""
-,"CurrentFolderSpItemUrl" : ""
-
-}
---batchresponse_937ce0e5-aa51-4b29-919f-d70dd25f7b78--
+{"d":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/prov-1/SitePages/PNP_SDK_TEST_DemoteAsNewsArticle.aspx')","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/prov-1/SitePages/PNP_SDK_TEST_DemoteAsNewsArticle.aspx')","type":"SP.File"},"Author":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/prov-1/SitePages/PNP_SDK_TEST_DemoteAsNewsArticle.aspx')/Author"}},"CheckedOutByUser":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/prov-1/SitePages/PNP_SDK_TEST_DemoteAsNewsArticle.aspx')/CheckedOutByUser"}},"EffectiveInformationRightsManagementSettings":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/prov-1/SitePages/PNP_SDK_TEST_DemoteAsNewsArticle.aspx')/EffectiveInformationRightsManagementSettings"}},"InformationRightsManagementSettings":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/prov-1/SitePages/PNP_SDK_TEST_DemoteAsNewsArticle.aspx')/InformationRightsManagementSettings"}},"ListItemAllFields":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/prov-1/SitePages/PNP_SDK_TEST_DemoteAsNewsArticle.aspx')/ListItemAllFields"}},"LockedByUser":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/prov-1/SitePages/PNP_SDK_TEST_DemoteAsNewsArticle.aspx')/LockedByUser"}},"ModifiedBy":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/prov-1/SitePages/PNP_SDK_TEST_DemoteAsNewsArticle.aspx')/ModifiedBy"}},"Properties":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/prov-1/SitePages/PNP_SDK_TEST_DemoteAsNewsArticle.aspx')/Properties"}},"VersionEvents":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/prov-1/SitePages/PNP_SDK_TEST_DemoteAsNewsArticle.aspx')/VersionEvents"}},"Versions":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/prov-1/SitePages/PNP_SDK_TEST_DemoteAsNewsArticle.aspx')/Versions"}},"CheckInComment":"","CheckOutType":2,"ContentTag":"{7F997035-4E73-4169-AD72-CA8178701EC7},1,0","CustomizedPageStatus":1,"ETag":"\"{7F997035-4E73-4169-AD72-CA8178701EC7},1\"","Exists":true,"IrmEnabled":false,"Length":"780","Level":2,"LinkingUri":null,"LinkingUrl":"","MajorVersion":0,"MinorVersion":1,"Name":"PNP_SDK_TEST_DemoteAsNewsArticle.aspx","ServerRelativeUrl":"/sites/prov-1/SitePages/PNP_SDK_TEST_DemoteAsNewsArticle.aspx","TimeCreated":"2021-03-09T17:50:46Z","TimeLastModified":"2021-03-09T17:50:46Z","Title":null,"UIVersion":1,"UIVersionLabel":"0.1","UniqueId":"7f997035-4e73-4169-ad72-ca8178701ec7"}}
+--batchresponse_53336227-4693-4ebe-843f-f5d44fb35725--

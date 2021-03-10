@@ -1,17 +1,9 @@
---batchresponse_e33878b3-6815-46ce-8be3-b463c3708343
+--batchresponse_f31b0401-a0b5-4fd7-b2cd-f899c4b54bb6
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{"d":{"Remove":null}}
---batchresponse_e33878b3-6815-46ce-8be3-b463c3708343
-Content-Type: application/http
-Content-Transfer-Encoding: binary
-
-HTTP/1.1 204 No Content
-CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
-
-
---batchresponse_e33878b3-6815-46ce-8be3-b463c3708343--
+{"d":{"results":[]}}
+--batchresponse_f31b0401-a0b5-4fd7-b2cd-f899c4b54bb6--

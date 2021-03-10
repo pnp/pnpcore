@@ -1,5 +1,6 @@
 using PnP.Core.Model.SharePoint;
 using PnP.Core.Services;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -9,7 +10,7 @@ namespace PnP.Core.Model.Security
     /// Public interface to define a collection of SharePoint RoleDefinitions
     /// </summary>
     [ConcreteType(typeof(RoleDefinitionCollection))]
-    public interface IRoleDefinitionCollection : IQueryable<IRoleDefinition>, IDataModelCollection<IRoleDefinition>
+    public interface IRoleDefinitionCollection : IQueryable<IRoleDefinition>, IAsyncEnumerable<IRoleDefinition>, IDataModelCollection<IRoleDefinition>, IDataModelCollectionLoad<IRoleDefinition>
     {
         /// <summary>
         /// Adds a new role definition

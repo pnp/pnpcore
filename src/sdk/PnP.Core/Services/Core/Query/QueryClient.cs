@@ -73,7 +73,7 @@ namespace PnP.Core.Services
                 // $select
                 foreach (var field in fields)
                 {
-                    // If there was a selection on which fields to include in an expand (via the LoadProperties() option) then add those fields
+                    // If there was a selection on which fields to include in an expand (via the QueryProperties() option) then add those fields
                     if (field.SharePointExpandable && field.ExpandFieldInfo != null)
                     {
                         AddExpandableSelectRest(sb, field, null, "");
@@ -113,6 +113,14 @@ namespace PnP.Core.Services
             urlParameters.Add("$expand", sb.ToString().TrimEnd(new char[] { ',' }));
 
             oDataQuery.AddODataToUrlParameters(urlParameters, ODataTargetPlatform.SPORest);
+
+            // REST apis do not apply a default top
+            // In order to not receive all items in one request, we apply a default top
+            // We don't change the original ODataQuery to avoid side effects
+            if (useLinqGet && !urlParameters.ContainsKey(ODataQuery<TModel>.TopKey))
+            {
+                urlParameters.Add(ODataQuery<TModel>.TopKey, model.PnPContext.GlobalOptions.HttpSharePointRestDefaultPageSize.ToString());
+            }
 
             sb.Clear();
 

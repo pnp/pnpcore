@@ -10,7 +10,7 @@ namespace PnP.Core
     /// <summary>
     /// Static methods to modify URL paths.
     /// </summary>
-    public static class UrlUtility
+    internal static class UrlUtility
     {
         const char PATH_DELIMITER = '/';
 
@@ -20,7 +20,7 @@ namespace PnP.Core
         /// <param name="path">A SharePoint URL</param>
         /// <param name="relativePaths">SharePoint relative URLs</param>
         /// <returns>Returns combined path with a relative paths</returns>
-        public static Uri Combine(Uri path, params string[] relativePaths)
+        internal static Uri Combine(Uri path, params string[] relativePaths)
         {
             return Combine(path?.ToString(), relativePaths);
         }
@@ -31,7 +31,7 @@ namespace PnP.Core
         /// <param name="path">A SharePoint URL</param>
         /// <param name="relativePaths">SharePoint relative URLs</param>
         /// <returns>Returns combined path with a relative paths</returns>
-        public static Uri Combine(string path, params string[] relativePaths)
+        internal static Uri Combine(string path, params string[] relativePaths)
         {
             string pathBuilder = path ?? string.Empty;
 
@@ -51,7 +51,7 @@ namespace PnP.Core
         /// <param name="path">A SharePoint URL</param>
         /// <param name="relative">SharePoint relative URL</param>
         /// <returns>Returns comibed path with a relative path</returns>
-        public static Uri Combine(string path, string relative)
+        internal static Uri Combine(string path, string relative)
         {
             return new Uri(CombineInternal(path, relative));
         }
@@ -85,7 +85,7 @@ namespace PnP.Core
         /// <param name="webUrl">The URL of a SharePoint site (Web).</param>
         /// <param name="serverRelativeUrl">Any server relative URL of a resource.</param>
         /// <returns></returns>
-        public static Uri MakeAbsoluteUrl(Uri webUrl, string serverRelativeUrl)
+        internal static Uri MakeAbsoluteUrl(Uri webUrl, string serverRelativeUrl)
         {
             if (null == webUrl) return null;
 
@@ -100,7 +100,7 @@ namespace PnP.Core
         /// <param name="resourceUrl">The absolute or server relative URL of a resource.</param>
         /// <param name="checkIfWebContainedResource">Indicates if the resource URL must belong to the specified web (default = false)</param>
         /// <returns>The absolute URL of the specified resource.</returns>
-        public static Uri EnsureAbsoluteUrl(Uri webUrl, string resourceUrl, bool checkIfWebContainedResource = false)
+        internal static Uri EnsureAbsoluteUrl(Uri webUrl, string resourceUrl, bool checkIfWebContainedResource = false)
         {
             if (null == resourceUrl) throw new ArgumentNullException(nameof(resourceUrl));
             if (null == webUrl) throw new ArgumentNullException(nameof(webUrl));
@@ -122,7 +122,7 @@ namespace PnP.Core
         /// <param name="webUrl">The URL of the SharePoint site (Web).</param>
         /// <param name="resourceUrl">The absolute or relative URL of a resource.</param>
         /// <returns><c>true</c> if the resource is in the same site, <c>false</c> otherwise</returns>
-        public static bool IsSameSite(Uri webUrl, string resourceUrl)
+        internal static bool IsSameSite(Uri webUrl, string resourceUrl)
         {
             if (null == webUrl) throw new ArgumentNullException(nameof(webUrl));
             if (string.IsNullOrEmpty(resourceUrl)) throw new ArgumentNullException(nameof(resourceUrl));
@@ -137,7 +137,7 @@ namespace PnP.Core
         /// </summary>
         /// <param name="urlToProcess">The URL to ensure to have a trailing slash.</param>
         /// <returns>The ensured trailing slash URL.</returns>
-        public static string EnsureTrailingSlash(string urlToProcess)
+        internal static string EnsureTrailingSlash(string urlToProcess)
         {
             if (null != urlToProcess && !urlToProcess.EndsWith("/"))
             {
@@ -152,7 +152,7 @@ namespace PnP.Core
         /// </summary>
         /// <param name="uri">The URL to ensure to have a trailing slash.</param>
         /// <returns>The ensured trailing slash URI.</returns>
-        public static Uri EnsureTrailingSlash(this Uri uri)
+        internal static Uri EnsureTrailingSlash(this Uri uri)
         {
             return new Uri(EnsureTrailingSlash(uri?.ToString()));
         }

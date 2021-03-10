@@ -16,14 +16,14 @@ namespace PnP.Core.Model.SharePoint
     /// List class, write your custom code here
     /// </summary>
     [SharePointType("SP.List", Uri = "_api/Web/Lists(guid'{Id}')", Update = "_api/web/lists/getbyid(guid'{Id}')", LinqGet = "_api/web/lists")]
-    [GraphType(Get = "sites/{Parent.GraphId}/lists/{GraphId}", LinqGet = "sites/{Parent.GraphId}/lists")]
+    //[GraphType(Get = "sites/{Parent.GraphId}/lists/{GraphId}", LinqGet = "sites/{Parent.GraphId}/lists")]
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Usage", "CA2243:Attribute string literals should parse correctly", Justification = "<Pending>")]
     internal partial class List : BaseDataModel<IList>, IList
     {
         // List of fields that loaded when the Lists collection is requested. This approach is needed as 
         // Graph requires the "system" field to be loaded as trigger to return all lists 
         internal const string SystemFacet = "system";
-        internal const string DefaultGraphFieldsToLoad = "system,createdDateTime,description,eTag,id,lastModifiedDateTime,name,webUrl,displayName,createdBy,lastModifiedBy,parentReference,list";
+        //internal const string DefaultGraphFieldsToLoad = "system,createdDateTime,description,eTag,id,lastModifiedDateTime,name,webUrl,displayName,createdBy,lastModifiedBy,parentReference,list";
         internal static Expression<Func<IList, object>>[] LoadFieldsExpression = new Expression<Func<IList, object>>[] { p => p.Fields.QueryProperties(p => p.InternalName, p => p.FieldTypeKind, p => p.TypeAsString, p => p.Title) };
 
         #region Construction
@@ -88,10 +88,10 @@ namespace PnP.Core.Model.SharePoint
         #region Properties
         public Guid Id { get => GetValue<Guid>(); set => SetValue(value); }
 
-        [GraphProperty("displayName")]
+        //[GraphProperty("displayName")]
         public string Title { get => GetValue<string>(); set => SetValue(value); }
 
-        [GraphProperty("description")]
+        //[GraphProperty("description")]
         public string Description { get => GetValue<string>(); set => SetValue(value); }
 
         [SharePointProperty("DocumentTemplateUrl")]
@@ -100,7 +100,7 @@ namespace PnP.Core.Model.SharePoint
         public bool OnQuickLaunch { get => GetValue<bool>(); set => SetValue(value); }
 
         [SharePointProperty("BaseTemplate")]
-        [GraphProperty("list", JsonPath = "template")]
+        //[GraphProperty("list", JsonPath = "template")]
         public ListTemplateType TemplateType { get => GetValue<ListTemplateType>(); set => SetValue(value); }
 
         public string Url { get => GetValue<string>(); set => SetValue(value); }
@@ -119,10 +119,10 @@ namespace PnP.Core.Model.SharePoint
         [SharePointProperty("MajorVersionLimit")]
         public int MaxVersionLimit { get => GetValue<int>(); set => SetValue(value); }
 
-        [GraphProperty("list", JsonPath = "contentTypesEnabled")]
+        //[GraphProperty("list", JsonPath = "contentTypesEnabled")]
         public bool ContentTypesEnabled { get => GetValue<bool>(); set => SetValue(value); }
 
-        [GraphProperty("list", JsonPath = "hidden")]
+        //[GraphProperty("list", JsonPath = "hidden")]
         public bool Hidden { get => GetValue<bool>(); set => SetValue(value); }
 
         public bool ForceCheckout { get => GetValue<bool>(); set => SetValue(value); }
@@ -167,7 +167,7 @@ namespace PnP.Core.Model.SharePoint
         public string ValidationMessage { get => GetValue<string>(); set => SetValue(value); }
 
         // Internal property, not visible to the library users
-        [GraphProperty("name", UseCustomMapping = false)]
+        //[GraphProperty("name", UseCustomMapping = false)]
         public string NameToConstructEntityType { get => GetValue<string>(); set => SetValue(value); }
 
         public string ListItemEntityTypeFullName { get => GetValue<string>(); set => SetValue(value); }

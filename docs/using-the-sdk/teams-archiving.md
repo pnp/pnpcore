@@ -19,7 +19,7 @@ var archiveOperation = await team.ArchiveAsync();
 await archiveOperation.WaitForCompletionAsync();
 
 // reload from the server
-await context.Team.GetAsync();
+team = await context.Team.GetAsync();
 
 // Server side should be archived as well now
 var archiveStatus = team.IsArchived;
@@ -41,7 +41,7 @@ var unarchiveOperation = await team.UnarchiveAsync();
 await unarchiveOperation.WaitForCompletion();
 
 // reload from the server
-context.Team.GetAsync();
+team = context.Team.GetAsync();
 
 // Server side should be archived as well now
 var archiveStatus = team.IsArchived;

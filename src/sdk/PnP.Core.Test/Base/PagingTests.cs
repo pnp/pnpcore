@@ -94,9 +94,133 @@ namespace PnP.Core.Test.Base
             }
         }
 
+        [TestMethod]
+        public async Task GraphCollectionPages()
+        {
+            // TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                // This rest requires beta APIs, so bail out if that's not enabled
+                if (!context.GraphCanUseBeta)
+                {
+                    Assert.Inconclusive("This test requires Graph beta to be allowed.");
+                }
+
+                // Create a new channel and add enough messages to it
+                string channelName = $"Paging test {new Random().Next()}";
+
+                if (TestCommon.Instance.Mocking)
+                {
+                    var properties = TestManager.GetProperties(context);
+                    channelName = properties["ChannelName"];
+                }
+
+                var channelForPaging = context.Team.Channels.FirstOrDefault(p => p.DisplayName == channelName);
+                if (channelForPaging == null)
+                {
+                    // Persist the created channel name as we need to have the same name when we run an offline test
+                    if (!TestCommon.Instance.Mocking)
+                    {
+                        Dictionary<string, string> properties = new Dictionary<string, string>
+                        {
+                            { "ChannelName", channelName }
+                        };
+                        TestManager.SaveProperties(context, properties);
+                    }
+
+                    channelForPaging = await context.Team.Channels.AddAsync(channelName, "Test channel, will be deleted in 21 days");
+                }
+                else
+                {
+                    Assert.Inconclusive("Test data set should be setup to not have the channel available.");
+                }
+
+                // Add messages, not using batching to ensure reliability
+                for (int i = 1; i <= 45; i++)
+                {
+                    await channelForPaging.Messages.AddAsync($"Test message{i}");
+                }
+
+                // Manual paging with Skip and Take
+                int pageCount = 0;
+                int pageSize = 10;
+
+                while (true)
+                {
+                    // Load page
+                    var page = context.Web.Lists.Skip(pageSize * pageCount).Take(pageSize).ToArray();
+
+                    // Check number of items returned
+                    if (pageCount != 3)
+                    {
+                        Assert.AreEqual(pageSize, page.Length);
+                    }
+                    else
+                    {                  
+                        // The Teams Graph is not always consistently giving back messages...comment out this check for now.
+                        //Assert.AreEqual(5, page.Length);
+                    }
+
+                    pageCount++;
+
+                    if (page.Length < pageSize)
+                    {
+                        break;
+                    }
+                }
+                Assert.AreEqual(4, pageCount);
+
+                // Cleanup by deleting the channel
+                await channelForPaging.DeleteAsync();
+            }
+        }
+
         #endregion
 
         #region REST paging
+
+        [TestMethod]
+        public async Task RESTListItemsNotSupported()
+        {
+            // TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                // Force rest
+                context.GraphFirst = false;
+
+                var web = await context.Web.GetAsync(p => p.Lists);
+
+                string listTitle = "RESTListItemPaging";
+                var list = web.Lists.FirstOrDefault(p => p.Title == listTitle);
+
+                if (list != null)
+                {
+                    Assert.Inconclusive("Test data set should be setup to not have the list available.");
+                }
+                else
+                {
+                    list = await web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
+                }
+
+                if (list != null)
+                {
+                    try
+                    {
+                        // Skip is not supported for items of a list
+                        Assert.ThrowsException<InvalidOperationException>(() =>
+                        {
+                            list.Items.Skip(1).Take(2).ToArray();
+                        });
+
+                    }
+                    finally
+                    {
+                        // Clean up
+                        await list.DeleteAsync();
+                    }
+                }
+            }
+        }
 
         [TestMethod]
         public async Task RESTListItemPaging()
@@ -110,7 +234,7 @@ namespace PnP.Core.Test.Base
                 var web = await context.Web.GetAsync(p => p.Lists);
 
                 string listTitle = "RESTListItemPaging";
-                var list = web.Lists.FirstOrDefault(p => p.Title == listTitle);
+                var list = web.Lists.AsRequested().FirstOrDefault(p => p.Title == listTitle);
 
                 if (list != null)
                 {
@@ -152,10 +276,13 @@ namespace PnP.Core.Test.Base
                         // has both the skiptoken and skip parameters, an invalid combination. Paging logic will handle this
                         var list3 = context.Web.Lists.Where(p => p.Id == list.Id).FirstOrDefault();
 
-                        var queryResult3 = list3.Items.Skip(4).Take(2).ToList();
+                        await Assert.ThrowsExceptionAsync<InvalidOperationException>(async () =>
+                        {
+                            var queryResult3 = list3.Items.Skip(4).Take(2).ToList();
 
-                        // We should have loaded 1 list item
-                        Assert.IsTrue(queryResult3.Count == 2);
+                            // We should have loaded 1 list item
+                            Assert.IsTrue(queryResult3.Count == 2);
+                        });                        
 
                         await list3.Items.LoadAsync();
                         // Do we have all items?
@@ -169,6 +296,7 @@ namespace PnP.Core.Test.Base
                 }
             }
         }
+
 
         [TestMethod]
         public async Task CamlListItemGetPagedAsyncPaging()
@@ -251,7 +379,7 @@ namespace PnP.Core.Test.Base
                 var web = await context.Web.GetAsync(p => p.Lists);
 
                 string listTitle = "ListDataAsStreamListItemGetPagedAsyncPaging";
-                var list = web.Lists.FirstOrDefault(p => p.Title == listTitle);
+                var list = web.Lists.AsRequested().FirstOrDefault(p => p.Title == listTitle);
 
                 if (list != null)
                 {

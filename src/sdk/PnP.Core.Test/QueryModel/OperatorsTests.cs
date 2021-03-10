@@ -89,7 +89,7 @@ namespace PnP.Core.Test.QueryModel
                 .Where(i => i.Id == 1 || i.Title == "title");
 
             var actual = query.ToString();
-            Assert.AreEqual(expected, actual);
+            Assert.AreEqual(expected, actual, true);
         }
 
         [TestMethod]
@@ -101,7 +101,7 @@ namespace PnP.Core.Test.QueryModel
                 .Where(i => i.Id == 1 && i.Title == "title");
 
             var actual = query.ToString();
-            Assert.AreEqual(expected, actual);
+            Assert.AreEqual(expected, actual, true);
         }
 
 
@@ -114,7 +114,7 @@ namespace PnP.Core.Test.QueryModel
                 .Where(i => i.Id == 1 || i.Title == "title" || (int)i.Values["Number"] == 0);
 
             var actual = query.ToString();
-            Assert.AreEqual(expected, actual);
+            Assert.AreEqual(expected, actual, true);
         }
 
         [TestMethod]
@@ -126,7 +126,7 @@ namespace PnP.Core.Test.QueryModel
                 .Where(i => i.Id == 1 || i.Title == "title" || (int)i.Values["Number"] == 0 || (int)i.Values["Number2"] == 1);
 
             var actual = query.ToString();
-            Assert.AreEqual(expected, actual);
+            Assert.AreEqual(expected, actual, true);
         }
     }
 }

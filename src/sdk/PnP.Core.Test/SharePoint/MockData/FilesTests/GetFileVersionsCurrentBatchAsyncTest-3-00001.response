@@ -1,4 +1,4 @@
---batchresponse_3e48741c-2193-4d58-bac5-05d883c8acae
+--batchresponse_8bb209b1-9b3e-4f50-97b8-da083d1c3fd6
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
@@ -6,4 +6,4 @@ HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
 {"d":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Site","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Site","type":"SP.Site"},"GroupId":"b32780e9-df70-4548-a735-4e7f055415a1","Id":"b56adf79-ff6a-4964-a63a-ff1fa23be9f8"}}
---batchresponse_3e48741c-2193-4d58-bac5-05d883c8acae--
+--batchresponse_8bb209b1-9b3e-4f50-97b8-da083d1c3fd6--

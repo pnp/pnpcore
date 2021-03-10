@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Threading.Tasks;
-
-namespace PnP.Core.Model
+﻿namespace PnP.Core.Model
 {
     /// <summary>
     /// Paged data retrieval can be done using the methods provided via this interface
     /// </summary>
-    public interface ISupportPaging
+    internal interface ISupportPaging
     {
         /// <summary>
         /// Determines whether paging is possible

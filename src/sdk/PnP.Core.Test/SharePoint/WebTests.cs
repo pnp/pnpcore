@@ -330,6 +330,8 @@ namespace PnP.Core.Test.SharePoint
         public async Task SetWebPropertiesTest()
         {
             //TestCommon.Instance.Mocking = false;
+            TestCommon.ClassicSTS0TestSetup();
+
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.ClassicSTS0TestSite))
             {
                 // Test safety - sites typically are noscript sites
@@ -365,6 +367,8 @@ namespace PnP.Core.Test.SharePoint
         public async Task SetWebPropertiesBooleanTest()
         {
             //TestCommon.Instance.Mocking = false;
+            TestCommon.ClassicSTS0TestSetup();
+
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.ClassicSTS0TestSite))
             {
                 // Test safety - sites typically are noscript sites
@@ -400,6 +404,8 @@ namespace PnP.Core.Test.SharePoint
         public async Task SetWebPropertiesSpecialCharsTest()
         {
             //TestCommon.Instance.Mocking = false;
+            TestCommon.ClassicSTS0TestSetup();
+
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.ClassicSTS0TestSite))
             {
                 // Test safety - sites typically are noscript sites

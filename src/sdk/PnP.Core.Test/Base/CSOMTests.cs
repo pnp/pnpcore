@@ -174,7 +174,7 @@ namespace PnP.Core.Test.Base
                 Assert.IsFalse(context.Web.IsPropertyAvailable(p => p.CustomMasterUrl));
 
                 Assert.IsTrue(context.Web.Lists.Requested);
-                Assert.IsTrue(context.Web.Lists.First().IsPropertyAvailable(p => p.Title));
+                Assert.IsTrue(context.Web.Lists.AsRequested().First().IsPropertyAvailable(p => p.Title));
             }
         }
 
@@ -197,8 +197,8 @@ namespace PnP.Core.Test.Base
                 Assert.IsFalse(context.Web.IsPropertyAvailable(p => p.CustomMasterUrl));
 
                 Assert.IsTrue(context.Web.Lists.Requested);
-                Assert.IsTrue(context.Web.Lists.First().IsPropertyAvailable(p => p.Title));
-                Assert.IsFalse(context.Web.Lists.First().IsPropertyAvailable(p => p.DefaultEditFormUrl));
+                Assert.IsTrue(context.Web.Lists.AsRequested().First().IsPropertyAvailable(p => p.Title));
+                Assert.IsFalse(context.Web.Lists.AsRequested().First().IsPropertyAvailable(p => p.DefaultEditFormUrl));
             }
         }
 
@@ -223,8 +223,8 @@ namespace PnP.Core.Test.Base
                 Assert.IsFalse(context.Web.IsPropertyAvailable(p => p.CustomMasterUrl));
 
                 Assert.IsTrue(context.Web.Lists.Requested);
-                Assert.IsTrue(context.Web.Lists.First().IsPropertyAvailable(p => p.Title));
-                Assert.IsFalse(context.Web.Lists.First().IsPropertyAvailable(p => p.DefaultEditFormUrl));
+                Assert.IsTrue(context.Web.Lists.AsRequested().First().IsPropertyAvailable(p => p.Title));
+                Assert.IsFalse(context.Web.Lists.AsRequested().First().IsPropertyAvailable(p => p.DefaultEditFormUrl));
 
                 await context.Web.LoadAsync(p => p.Lists.QueryProperties(p => p.Description), p => p.MasterUrl);
                 Assert.IsTrue(context.Web.IsPropertyAvailable(p => p.Title));
@@ -234,14 +234,16 @@ namespace PnP.Core.Test.Base
                 Assert.IsFalse(context.Web.IsPropertyAvailable(p => p.CustomMasterUrl));
 
                 Assert.IsTrue(context.Web.Lists.Requested);
-                Assert.IsTrue(context.Web.Lists.First().IsPropertyAvailable(p => p.Description));
-                Assert.IsFalse(context.Web.Lists.First().IsPropertyAvailable(p => p.DefaultEditFormUrl));
+                Assert.IsTrue(context.Web.Lists.AsRequested().First().IsPropertyAvailable(p => p.Description));
+                Assert.IsFalse(context.Web.Lists.AsRequested().First().IsPropertyAvailable(p => p.DefaultEditFormUrl));
             }
         }
         [TestMethod]
         public async Task CSOMUpdateWebPropertyBag()
         {
             //TestCommon.Instance.Mocking = false;
+            TestCommon.ClassicSTS0TestSetup();
+
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.ClassicSTS0TestSite))
             {
                 context.Web.AllProperties["TestPnPProperty"] = "TestPropertyValue";

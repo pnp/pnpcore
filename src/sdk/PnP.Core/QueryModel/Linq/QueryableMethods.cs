@@ -31,7 +31,7 @@ namespace PnP.Core.QueryModel
         public static MethodInfo FirstOrDefaultWithPredicate { get; }
 
         /// <summary>
-        /// The <see cref="MethodInfo" /> for <see cref="QueryableExtensions.QueryProperties{TResult}(System.Linq.IQueryable{TResult},System.Linq.Expressions.Expression{System.Func{TResult,object}})" />
+        /// The <see cref="MethodInfo" /> for <see cref="QueryableExtensions.QueryProperties{TResult}(IQueryable{TResult}, Expression{Func{TResult, object}}[])" />
         /// </summary>
         public static MethodInfo QueryProperties { get; }
 
@@ -62,13 +62,15 @@ namespace PnP.Core.QueryModel
                     && type.GetGenericTypeDefinition() == typeof(Expression<>)
                     && type.GetGenericArguments()[0].IsGenericType
                     && type.GetGenericArguments()[0].GetGenericArguments().Length == funcGenericArgs;
-
+            
+            /* Not used, so commenting it
             static bool IsSelector<T>(Type type)
                 => type.IsGenericType
                     && type.GetGenericTypeDefinition() == typeof(Expression<>)
                     && type.GetGenericArguments()[0].IsGenericType
                     && type.GetGenericArguments()[0].GetGenericArguments().Length == 2
                     && type.GetGenericArguments()[0].GetGenericArguments()[1] == typeof(T);
+            */
         }
     }
 }
