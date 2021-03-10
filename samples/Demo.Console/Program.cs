@@ -217,16 +217,19 @@ namespace Consumer
                 {
                     // We can retrieve items of a specific list 
                     // eventually partitioning the results
-                    var itemsQuery = (from i in context.Web.Lists.GetByTitle("Site Assets").Items
-                                      select i).Take(2).Skip(1);
 
-                    Console.ForegroundColor = ConsoleColor.Yellow;
-                    Console.WriteLine("===LINQ: Retrieve specific list with partitioned items===");
-                    foreach (var item in itemsQuery)
-                    {
-                        Console.WriteLine($"Item with title '{item.Title}' has ID: {item.Id}");
-                    }
-                    Console.ResetColor();
+                    //TODO: Disabled pending issue with paging.
+
+                    //var itemsQuery = (from i in context.Web.Lists.GetByTitle("Site Assets").Items
+                    //                  select i).Take(2).Skip(1);
+
+                    //Console.ForegroundColor = ConsoleColor.Yellow;
+                    //Console.WriteLine("===LINQ: Retrieve specific list with partitioned items===");
+                    //foreach (var item in itemsQuery)
+                    //{
+                    //    Console.WriteLine($"Item with title '{item.Title}' has ID: {item.Id}");
+                    //}
+                    //Console.ResetColor();
                 }
 
                 using (var context = pnpContextFactory.Create("DemoSite"))
