@@ -12,6 +12,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
 ### Changed
 
+- Fix for older SharePoint UI created image web parts where links is set to null #347 [Sarah4x - Sarah Wilson]
+
 ## [1.0.0]
 
 ### Added
