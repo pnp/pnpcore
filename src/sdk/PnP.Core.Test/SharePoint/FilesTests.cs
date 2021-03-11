@@ -1946,6 +1946,16 @@ namespace PnP.Core.Test.SharePoint
                 Assert.AreNotEqual(default, addedFile.UniqueId);
 
                 await addedFile.DeleteAsync();
+
+                fileName = TestCommon.GetPnPSdkTestAssetName("Hi'there is &ok.aspx");
+                addedFile = await parentFolder.Files.AddTemplateFileAsync($"{parentFolder.ServerRelativeUrl}/{fileName}", TemplateFileType.ClientSidePage);
+
+                // Test the created object
+                Assert.IsNotNull(addedFile);
+                Assert.AreEqual(fileName, addedFile.Name);
+                Assert.AreNotEqual(default, addedFile.UniqueId);
+
+                await addedFile.DeleteAsync();
             }
         }
         #endregion
