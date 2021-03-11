@@ -403,8 +403,8 @@ namespace PnP.Core.Model.SharePoint
         private static ApiCall BuildGetFolderByRelativeUrlApiCall(string serverRelativeUrl)
         {
             // NOTE WebUtility encode spaces to "+" instead of %20
-            string encodedServerRelativeUrl = WebUtility.UrlEncode(serverRelativeUrl).Replace("+", "%20");
-            var apiCall = new ApiCall($"_api/Web/getFolderByServerRelativeUrl('{encodedServerRelativeUrl}')", ApiType.SPORest);
+            string encodedServerRelativeUrl = WebUtility.UrlEncode(serverRelativeUrl.Replace("'", "''")).Replace("+", "%20");
+            var apiCall = new ApiCall($"_api/Web/getFolderByServerRelativePath(decodedUrl='{encodedServerRelativeUrl}')", ApiType.SPORest);
             return apiCall;
         }
         #endregion
@@ -518,7 +518,7 @@ namespace PnP.Core.Model.SharePoint
         {
             // NOTE WebUtility encode spaces to "+" instead of %20
             string encodedServerRelativeUrl = WebUtility.UrlEncode(serverRelativeUrl).Replace("+", "%20");
-            var apiCall = new ApiCall($"_api/Web/getFileByServerRelativeUrl('{encodedServerRelativeUrl}')", ApiType.SPORest);
+            var apiCall = new ApiCall($"_api/Web/getFileByServerRelativePath(decodedUrl='{encodedServerRelativeUrl}')", ApiType.SPORest);
             return apiCall;
         }
         #endregion
