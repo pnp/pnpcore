@@ -17,7 +17,7 @@ namespace PnP.Core.Services.Core.CSOM
             Requests.Add((IRequest<object>)request);
         }
 
-        internal ApiCall BuildApiCall()
+        internal ApiCall BuildApiCall(bool commit = false)
         {
 
             var requests = new List<ActionObjectPath>();
@@ -33,7 +33,10 @@ namespace PnP.Core.Services.Core.CSOM
             // Clear requests now that we've built the body
             Requests.Clear();
 
-            return new ApiCall(requestBody);
+            return new ApiCall(requestBody)
+            {
+                Commit = commit
+            };
         }
 
         internal void ProcessRawResponse(string rawResponse)

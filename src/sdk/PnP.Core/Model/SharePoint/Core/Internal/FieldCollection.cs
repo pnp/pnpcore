@@ -568,7 +568,7 @@ namespace PnP.Core.Model.SharePoint
                 options.TermStoreId,
                 options.TermSetId);
 
-            ApiCall updateCall = PnPContext.GetCSOMCallForRequests(new List<Services.Core.CSOM.Requests.IRequest<object>>() { request });
+            ApiCall updateCall = PnPContext.GetCSOMCallForRequests(new List<Services.Core.CSOM.Requests.IRequest<object>>() { request }, commit: true);
             if (!string.IsNullOrEmpty(updateCall.XmlBody))
             {
                 await field.RawRequestAsync(updateCall, HttpMethod.Post).ConfigureAwait(false);

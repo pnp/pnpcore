@@ -3,21 +3,25 @@ using PnP.Core.Services.Core.CSOM.QueryIdentities;
 using PnP.Core.Services.Core.CSOM.Utils;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace PnP.Core.Services.Core.CSOM.Requests.Fields
 {
     internal class ProvisionTaxonomyFieldRequest : IRequest<object>
     {
-
-
         public object Result { get; set; }
+
         public string ParentId { get; set; }
+
         public string SiteId { get; set; }
+
         public string FieldId { get; set; }
+
         public string WebId { get; set; }
+
         public Guid TermStoreId { get; set; }
+
         public Guid TermSetId { get; set; }
+
         public ProvisionTaxonomyFieldRequest(string siteId, string webId, string fieldId, string parentId, Guid termStoreId, Guid termSetId)
         {
             SiteId = siteId;
@@ -27,6 +31,7 @@ namespace PnP.Core.Services.Core.CSOM.Requests.Fields
             TermStoreId = termStoreId;
             TermSetId = termSetId;
         }
+
         public List<ActionObjectPath> GetRequest(IIdProvider idProvider)
         {
             string identityObjectName = GenerateIdentityName();
@@ -35,6 +40,7 @@ namespace PnP.Core.Services.Core.CSOM.Requests.Fields
                 Name = identityObjectName,
                 Id = idProvider.GetActionId()
             };
+
             List<ActionObjectPath> result = new List<ActionObjectPath>();
             //Set term store id
             ActionObjectPath setTermStoreId = new ActionObjectPath()
@@ -52,6 +58,7 @@ namespace PnP.Core.Services.Core.CSOM.Requests.Fields
                 }
             };
             result.Add(setTermStoreId);
+
             //Set term set id
             ActionObjectPath setTermSetId = new ActionObjectPath()
             {
@@ -68,6 +75,7 @@ namespace PnP.Core.Services.Core.CSOM.Requests.Fields
                 }
             };
             result.Add(setTermSetId);
+
             //Set target template
             ActionObjectPath setTargetTemplate = new ActionObjectPath()
             {
@@ -84,6 +92,7 @@ namespace PnP.Core.Services.Core.CSOM.Requests.Fields
                 }
             };
             result.Add(setTargetTemplate);
+
             //Set AnchorId
             ActionObjectPath setAnchorId = new ActionObjectPath()
             {
@@ -100,6 +109,7 @@ namespace PnP.Core.Services.Core.CSOM.Requests.Fields
                 }
             };
             result.Add(setAnchorId);
+
             //Call update method
             ActionObjectPath updateMethod = new ActionObjectPath()
             {

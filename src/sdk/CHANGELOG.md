@@ -12,6 +12,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
 ### Changed
 
+- Improved CSOM support for content type creation and taxonomy field creation #349 [mgwojciech - Marcin Wojciechowski]
 - Uplifted samples to GA v1.0.0 #350 [pkbullock - Paul Bullock]
 - Fix for older SharePoint UI created image web parts where links is set to null #347 [Sarah4x - Sarah Wilson]
 

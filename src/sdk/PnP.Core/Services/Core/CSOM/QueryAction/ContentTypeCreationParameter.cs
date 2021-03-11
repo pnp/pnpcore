@@ -1,18 +1,17 @@
 ﻿using PnP.Core.Services.Core.CSOM.QueryIdentities;
 using PnP.Core.Services.Core.CSOM.Utils.Model;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace PnP.Core.Services.Core.CSOM.QueryAction
 {
     internal class ContentTypeCreationParameter : Parameter
     {
         internal new ContentTypeCreationInfo Value { get; set; }
+
         internal ContentTypeCreationParameter()
         {
             TypeId = "{168f3091-4554-4f14-8866-b20d48e45b54}";
         }
+
         internal override string SerializeParameter()
         {
             NamedProperty descriptionProperty = new NamedProperty()

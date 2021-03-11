@@ -2,9 +2,7 @@
 using PnP.Core.Services.Core.CSOM.QueryIdentities;
 using PnP.Core.Services.Core.CSOM.Utils;
 using PnP.Core.Services.Core.CSOM.Utils.Model;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace PnP.Core.Services.Core.CSOM.Requests.Web
 {
@@ -27,18 +25,21 @@ namespace PnP.Core.Services.Core.CSOM.Requests.Web
                 TypeId = "{3747adcd-a3c3-41b9-bfab-4a64dd2f1e0a}",
                 Id = idProvider.GetActionId()
             };
+
             Property web = new Property()
             {
                 Id = idProvider.GetActionId(),
                 ParentId = siteProperty.Id,
                 Name = "Web"
             };
+
             Property contentTypes = new Property()
             {
                 Id = idProvider.GetActionId(),
                 Name = "ContentTypes",
                 ParentId = web.Id
             };
+
             ObjectPathMethod addCtMethod = new ObjectPathMethod()
             {
                 Id = idProvider.GetActionId(),
@@ -47,7 +48,7 @@ namespace PnP.Core.Services.Core.CSOM.Requests.Web
                 Parameters = new MethodParameter()
                 {
                     TypeId = "{168f3091-4554-4f14-8866-b20d48e45b54}",
-                    Properties = new List<QueryAction.Parameter>()
+                    Properties = new List<Parameter>()
                     {
                         new ContentTypeCreationParameter()
                         {
@@ -56,6 +57,7 @@ namespace PnP.Core.Services.Core.CSOM.Requests.Web
                     }
                 }
             };
+
             List<ActionObjectPath> result = new List<ActionObjectPath>();
 
             ActionObjectPath path = new ActionObjectPath()
@@ -68,6 +70,7 @@ namespace PnP.Core.Services.Core.CSOM.Requests.Web
                 ObjectPath = addCtMethod,
             };
             result.Add(path);
+
             ActionObjectPath identityQuery = new ActionObjectPath()
             {
                 Action = new IdentityQueryAction()
@@ -84,6 +87,7 @@ namespace PnP.Core.Services.Core.CSOM.Requests.Web
                 ObjectPath = web
             };
             result.Add(webIdentity);
+
             ActionObjectPath siteIdentity = new ActionObjectPath()
             {
                 ObjectPath = siteProperty
