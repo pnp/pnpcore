@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.Json;
 
-namespace PnP.Core.Services
+namespace PnP.Core.Services.Core.CSOM
 {
     internal static class CsomHelper
     {

@@ -89,7 +89,7 @@ namespace PnP.Core.Model.SharePoint
                 ApiCall updatePropertiesCall = PnPContext.GetCSOMCallForRequests(new List<IRequest<object>>()
                 {
                     request
-                });
+                }, commit: true);
                 await RawRequestAsync(updatePropertiesCall, HttpMethod.Post).ConfigureAwait(false);
             }
         }

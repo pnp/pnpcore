@@ -1,5 +1,6 @@
 ﻿using PnP.Core.QueryModel;
 using PnP.Core.Services;
+using PnP.Core.Services.Core.CSOM;
 using PnP.Core.Services.Core.CSOM.Requests.Fields;
 using System;
 using System.Collections.Generic;

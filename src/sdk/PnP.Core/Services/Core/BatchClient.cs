@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 using PnP.Core.Model;
+using PnP.Core.Services.Core.CSOM;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
