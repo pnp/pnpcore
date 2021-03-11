@@ -517,7 +517,7 @@ namespace PnP.Core.Model.SharePoint
         private static ApiCall BuildGetFileByRelativeUrlApiCall(string serverRelativeUrl)
         {
             // NOTE WebUtility encode spaces to "+" instead of %20
-            string encodedServerRelativeUrl = WebUtility.UrlEncode(serverRelativeUrl).Replace("+", "%20");
+            string encodedServerRelativeUrl = WebUtility.UrlEncode(serverRelativeUrl.Replace("'", "''")).Replace("+", "%20");
             var apiCall = new ApiCall($"_api/Web/getFileByServerRelativeUrl('{encodedServerRelativeUrl}')", ApiType.SPORest);
             return apiCall;
         }
