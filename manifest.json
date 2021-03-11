@@ -522,7 +522,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.IBatchResult.html",
-          "hash": "5Jvv3MVPXv52ZC1VpWefSg=="
+          "hash": "ZeRaWZxLbSrpofTkQDw3mA=="
         }
       },
       "is_incremental": false,
@@ -534,7 +534,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.IBatchSingleResult-1.html",
-          "hash": "sR+KVCOUC3TQw+hEd4u3kg=="
+          "hash": "LSDa1UYluY6CEv/96QIDBg=="
         }
       },
       "is_incremental": false,
@@ -546,7 +546,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.IBatchSingleResult.html",
-          "hash": "d4zrSKzL9FsomuhlCNfxPQ=="
+          "hash": "3QV3+AsBmu6aOaeVNcIjHg=="
         }
       },
       "is_incremental": false,
@@ -726,7 +726,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.IEnumerableBatchResult-1.html",
-          "hash": "O1jrxRpoepvt4KSb0QirYw=="
+          "hash": "Xq4Vz/7J7Y+w7yyWffxoCA=="
         }
       },
       "is_incremental": false,
