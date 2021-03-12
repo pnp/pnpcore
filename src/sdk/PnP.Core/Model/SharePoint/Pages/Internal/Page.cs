@@ -1439,8 +1439,6 @@ namespace PnP.Core.Model.SharePoint
                 }
             }
 
-            pageName = NormalizePageName(pageName);
-
             // Validate we're not using "wrong" layouts for the given site type
             await ValidateOneColumnFullWidthSectionUsageAsync().ConfigureAwait(false);
 
@@ -1792,17 +1790,6 @@ namespace PnP.Core.Model.SharePoint
             }
 
             return new Tuple<string, string>(folderName, pageNameWithoutFolder);
-        }
-
-        private static string NormalizePageName(string pageName)
-        {
-            if (string.IsNullOrEmpty(pageName))
-            {
-                return pageName;
-            }
-
-            // if a page name contains spaces then let's replace them with dashes, just like the UI does
-            return pageName.Replace(" ", "-").Replace("#", "-");
         }
 
         private async Task ValidateOneColumnFullWidthSectionUsageAsync()
