@@ -6,7 +6,6 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Net.Http;
 using System.Runtime.CompilerServices;
-using System.Threading;
 using System.Threading.Tasks;
 
 namespace PnP.Core.Model
@@ -116,6 +115,16 @@ namespace PnP.Core.Model
         /// </summary>
         /// <param name="expressions">The properties to select</param>
         /// <returns>The Domain Model object</returns>
+        public virtual TModel Get(params Expression<Func<TModel, object>>[] expressions)
+        {
+            return GetAsync(expressions).GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        /// Retrieves a Domain Model object from the remote data source, eventually selecting custom properties or using a default set of properties
+        /// </summary>
+        /// <param name="expressions">The properties to select</param>
+        /// <returns>The Domain Model object</returns>
         public virtual async Task<TModel> GetAsync(params Expression<Func<TModel, object>>[] expressions)
         {
             IDataModelParent replicatedParent = null;
@@ -137,14 +146,25 @@ namespace PnP.Core.Model
             return (TModel)(object)newDataModel;
         }
 
+
         /// <summary>
         /// Batches the retrieval of a Domain Model object from the remote data source, eventually selecting custom properties or using a default set of properties
         /// </summary>
         /// <param name="batch">Batch add this request to</param>
         /// <param name="selectors">The properties to select</param>
         /// <returns>The Domain Model object</returns>
-        public virtual Task<IBatchSingleResult<TModel>> GetBatchAsync(Batch batch,
-            params Expression<Func<TModel, object>>[] selectors)
+        public virtual IBatchSingleResult<TModel> GetBatch(Batch batch, params Expression<Func<TModel, object>>[] selectors)
+        {
+            return GetBatchAsync(batch, selectors).GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        /// Batches the retrieval of a Domain Model object from the remote data source, eventually selecting custom properties or using a default set of properties
+        /// </summary>
+        /// <param name="batch">Batch add this request to</param>
+        /// <param name="selectors">The properties to select</param>
+        /// <returns>The Domain Model object</returns>
+        public virtual Task<IBatchSingleResult<TModel>> GetBatchAsync(Batch batch, params Expression<Func<TModel, object>>[] selectors)
         {
             return GetBatchAsync(batch, default, selectors);
         }
@@ -180,10 +200,28 @@ namespace PnP.Core.Model
             return batchResult;
         }
 
+        /// <summary>
+        /// Batches the retrieval of a Domain Model object from the remote data source, eventually selecting custom properties or using a default set of properties
+        /// </summary>
+        /// <param name="expressions">The properties to select</param>
+        /// <returns>The Domain Model object</returns>
+        public virtual async Task<IBatchSingleResult<TModel>> GetBatchAsync(params Expression<Func<TModel, object>>[] expressions)
+        {
+            return await GetBatchAsync(PnPContext.CurrentBatch, expressions).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Batches the retrieval of a Domain Model object from the remote data source, eventually selecting custom properties or using a default set of properties
+        /// </summary>
+        /// <param name="expressions">The properties to select</param>
+        /// <returns>The Domain Model object</returns>
+        public virtual IBatchSingleResult<TModel> GetBatch(params Expression<Func<TModel, object>>[] expressions)
+        {
+            return GetBatchAsync(PnPContext.CurrentBatch, expressions).GetAwaiter().GetResult();
+        }
         #endregion
 
         #region Load
-
         /// <summary>
         /// Loads a Domain Model object from the remote data source, eventually selecting custom properties or using a default set of properties
         /// </summary>
@@ -194,6 +232,16 @@ namespace PnP.Core.Model
             // Cast expressions
             var newExpressions = selectors.CastExpressions<TModel>();
             return BaseRetrieveAsync(expressions: newExpressions);
+        }
+
+        /// <summary>
+        /// Loads a Domain Model object from the remote data source, eventually selecting custom properties or using a default set of properties
+        /// </summary>
+        /// <param name="selectors">The properties to select</param>
+        /// <returns>The Domain Model object</returns>
+        public virtual void Load(params Expression<Func<TModel, object>>[] selectors)
+        {
+            LoadAsync(selectors).GetAwaiter().GetResult();
         }
 
         /// <summary>
@@ -228,6 +276,37 @@ namespace PnP.Core.Model
         public virtual async Task<IBatchResult> LoadBatchAsync(Batch batch, params Expression<Func<TModel, object>>[] selectors)
         {
             return await BaseBatchRetrieveAsync(batch, default, MappingHandler, PostMappingHandler, selectors).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Batches the load of a Domain Model object from the remote data source, eventually selecting custom properties or using a default set of properties
+        /// </summary>
+        /// <param name="batch">Batch to use for the current request</param>
+        /// <param name="selectors">The properties to select</param>
+        /// <returns>The Domain Model object</returns>
+        public virtual IBatchResult LoadBatch(Batch batch, params Expression<Func<TModel, object>>[] selectors)
+        {
+            return LoadBatchAsync(batch, selectors).GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        /// Batches the load of a Domain Model object from the remote data source, eventually selecting custom properties or using a default set of properties
+        /// </summary>
+        /// <param name="expressions">The properties to select</param>
+        /// <returns>The Domain Model object</returns>
+        public virtual async Task<IBatchResult> LoadBatchAsync(params Expression<Func<TModel, object>>[] expressions)
+        {
+            return await LoadBatchAsync(PnPContext.CurrentBatch, expressions).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Batches the load of a Domain Model object from the remote data source, eventually selecting custom properties or using a default set of properties
+        /// </summary>
+        /// <param name="expressions">The properties to select</param>
+        /// <returns>The Domain Model object</returns>
+        public virtual IBatchResult LoadBatch(params Expression<Func<TModel, object>>[] expressions)
+        {
+            return LoadBatchAsync(expressions).GetAwaiter().GetResult();
         }
 
         #endregion
@@ -440,35 +519,6 @@ namespace PnP.Core.Model
         }
 
         #endregion
-
-        /*
-        
-        TODO: Suggested changes
-
-        Why the Add* are internal and the Update* and Delete* methods are public?
-
-        internal async virtual Task<BaseDataModel<TModel>> AddBatchAsync(Dictionary<string, object> keyValuePairs = null)
-        internal async virtual Task<BaseDataModel<TModel>> AddBatchAsync(Batch batch, Dictionary<string, object> keyValuePairs = null)
-        internal virtual async Task<BaseDataModel<TModel>> AddAsync(Dictionary<string, object> keyValuePairs = null)
-        internal virtual BaseDataModel<TModel> AddBatch(Dictionary<string, object> keyValuePairs = null)
-        internal virtual BaseDataModel<TModel> AddBatch(Batch batch, Dictionary<string, object> keyValuePairs = null)
-        internal virtual BaseDataModel<TModel> Add(Dictionary<string, object> keyValuePairs = null)
-
-        public async virtual Task UpdateBatchAsync()
-        public async virtual Task UpdateBatchAsync(Batch batch)
-        public virtual async Task UpdateAsync()
-        public virtual void UpdateBatch()
-        public virtual void UpdateBatch(Batch batch)
-        public virtual void Update()
-
-        public async virtual Task DeleteBatchAsync()
-        public async virtual Task DeleteBatchAsync(Batch batch)
-        public virtual async Task DeleteAsync()
-        public virtual void DeleteBatch()
-        public virtual void DeleteBatch(Batch batch)
-        public virtual void Delete()
- 
-         */
 
         #endregion
 
