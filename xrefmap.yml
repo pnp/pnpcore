@@ -2585,6 +2585,24 @@ references:
   fullName.vb: PnP.Core.Model.IDataModelGet(Of TModel)
   nameWithType: IDataModelGet<TModel>
   nameWithType.vb: IDataModelGet(Of TModel)
+- uid: PnP.Core.Model.IDataModelGet`1.Get(Expression{Func{`0,System.Object}}[])
+  name: Get(Expression<Func<TModel, Object>>[])
+  href: api/PnP.Core.Model.IDataModelGet-1.html#PnP_Core_Model_IDataModelGet_1_Get_Expression_Func__0_System_Object_____
+  commentId: M:PnP.Core.Model.IDataModelGet`1.Get(Expression{Func{`0,System.Object}}[])
+  name.vb: Get(Expression(Of Func(Of TModel, Object))())
+  fullName: PnP.Core.Model.IDataModelGet<TModel>.Get(Expression<Func<TModel, System.Object>>[])
+  fullName.vb: PnP.Core.Model.IDataModelGet(Of TModel).Get(Expression(Of Func(Of TModel, System.Object))())
+  nameWithType: IDataModelGet<TModel>.Get(Expression<Func<TModel, Object>>[])
+  nameWithType.vb: IDataModelGet(Of TModel).Get(Expression(Of Func(Of TModel, Object))())
+- uid: PnP.Core.Model.IDataModelGet`1.Get*
+  name: Get
+  href: api/PnP.Core.Model.IDataModelGet-1.html#PnP_Core_Model_IDataModelGet_1_Get_
+  commentId: Overload:PnP.Core.Model.IDataModelGet`1.Get
+  isSpec: "True"
+  fullName: PnP.Core.Model.IDataModelGet<TModel>.Get
+  fullName.vb: PnP.Core.Model.IDataModelGet(Of TModel).Get
+  nameWithType: IDataModelGet<TModel>.Get
+  nameWithType.vb: IDataModelGet(Of TModel).Get
 - uid: PnP.Core.Model.IDataModelGet`1.GetAsync(Expression{Func{`0,System.Object}}[])
   name: GetAsync(Expression<Func<TModel, Object>>[])
   href: api/PnP.Core.Model.IDataModelGet-1.html#PnP_Core_Model_IDataModelGet_1_GetAsync_Expression_Func__0_System_Object_____
@@ -2603,6 +2621,42 @@ references:
   fullName.vb: PnP.Core.Model.IDataModelGet(Of TModel).GetAsync
   nameWithType: IDataModelGet<TModel>.GetAsync
   nameWithType.vb: IDataModelGet(Of TModel).GetAsync
+- uid: PnP.Core.Model.IDataModelGet`1.GetBatch(Expression{Func{`0,System.Object}}[])
+  name: GetBatch(Expression<Func<TModel, Object>>[])
+  href: api/PnP.Core.Model.IDataModelGet-1.html#PnP_Core_Model_IDataModelGet_1_GetBatch_Expression_Func__0_System_Object_____
+  commentId: M:PnP.Core.Model.IDataModelGet`1.GetBatch(Expression{Func{`0,System.Object}}[])
+  name.vb: GetBatch(Expression(Of Func(Of TModel, Object))())
+  fullName: PnP.Core.Model.IDataModelGet<TModel>.GetBatch(Expression<Func<TModel, System.Object>>[])
+  fullName.vb: PnP.Core.Model.IDataModelGet(Of TModel).GetBatch(Expression(Of Func(Of TModel, System.Object))())
+  nameWithType: IDataModelGet<TModel>.GetBatch(Expression<Func<TModel, Object>>[])
+  nameWithType.vb: IDataModelGet(Of TModel).GetBatch(Expression(Of Func(Of TModel, Object))())
+- uid: PnP.Core.Model.IDataModelGet`1.GetBatch(PnP.Core.Services.Batch,Expression{Func{`0,System.Object}}[])
+  name: GetBatch(Batch, Expression<Func<TModel, Object>>[])
+  href: api/PnP.Core.Model.IDataModelGet-1.html#PnP_Core_Model_IDataModelGet_1_GetBatch_PnP_Core_Services_Batch_Expression_Func__0_System_Object_____
+  commentId: M:PnP.Core.Model.IDataModelGet`1.GetBatch(PnP.Core.Services.Batch,Expression{Func{`0,System.Object}}[])
+  name.vb: GetBatch(Batch, Expression(Of Func(Of TModel, Object))())
+  fullName: PnP.Core.Model.IDataModelGet<TModel>.GetBatch(PnP.Core.Services.Batch, Expression<Func<TModel, System.Object>>[])
+  fullName.vb: PnP.Core.Model.IDataModelGet(Of TModel).GetBatch(PnP.Core.Services.Batch, Expression(Of Func(Of TModel, System.Object))())
+  nameWithType: IDataModelGet<TModel>.GetBatch(Batch, Expression<Func<TModel, Object>>[])
+  nameWithType.vb: IDataModelGet(Of TModel).GetBatch(Batch, Expression(Of Func(Of TModel, Object))())
+- uid: PnP.Core.Model.IDataModelGet`1.GetBatch*
+  name: GetBatch
+  href: api/PnP.Core.Model.IDataModelGet-1.html#PnP_Core_Model_IDataModelGet_1_GetBatch_
+  commentId: Overload:PnP.Core.Model.IDataModelGet`1.GetBatch
+  isSpec: "True"
+  fullName: PnP.Core.Model.IDataModelGet<TModel>.GetBatch
+  fullName.vb: PnP.Core.Model.IDataModelGet(Of TModel).GetBatch
+  nameWithType: IDataModelGet<TModel>.GetBatch
+  nameWithType.vb: IDataModelGet(Of TModel).GetBatch
+- uid: PnP.Core.Model.IDataModelGet`1.GetBatchAsync(Expression{Func{`0,System.Object}}[])
+  name: GetBatchAsync(Expression<Func<TModel, Object>>[])
+  href: api/PnP.Core.Model.IDataModelGet-1.html#PnP_Core_Model_IDataModelGet_1_GetBatchAsync_Expression_Func__0_System_Object_____
+  commentId: M:PnP.Core.Model.IDataModelGet`1.GetBatchAsync(Expression{Func{`0,System.Object}}[])
+  name.vb: GetBatchAsync(Expression(Of Func(Of TModel, Object))())
+  fullName: PnP.Core.Model.IDataModelGet<TModel>.GetBatchAsync(Expression<Func<TModel, System.Object>>[])
+  fullName.vb: PnP.Core.Model.IDataModelGet(Of TModel).GetBatchAsync(Expression(Of Func(Of TModel, System.Object))())
+  nameWithType: IDataModelGet<TModel>.GetBatchAsync(Expression<Func<TModel, Object>>[])
+  nameWithType.vb: IDataModelGet(Of TModel).GetBatchAsync(Expression(Of Func(Of TModel, Object))())
 - uid: PnP.Core.Model.IDataModelGet`1.GetBatchAsync(PnP.Core.Services.Batch,Expression{Func{`0,System.Object}}[])
   name: GetBatchAsync(Batch, Expression<Func<TModel, Object>>[])
   href: api/PnP.Core.Model.IDataModelGet-1.html#PnP_Core_Model_IDataModelGet_1_GetBatchAsync_PnP_Core_Services_Batch_Expression_Func__0_System_Object_____
@@ -2630,6 +2684,24 @@ references:
   fullName.vb: PnP.Core.Model.IDataModelLoad(Of TModel)
   nameWithType: IDataModelLoad<TModel>
   nameWithType.vb: IDataModelLoad(Of TModel)
+- uid: PnP.Core.Model.IDataModelLoad`1.Load(Expression{Func{`0,System.Object}}[])
+  name: Load(Expression<Func<TModel, Object>>[])
+  href: api/PnP.Core.Model.IDataModelLoad-1.html#PnP_Core_Model_IDataModelLoad_1_Load_Expression_Func__0_System_Object_____
+  commentId: M:PnP.Core.Model.IDataModelLoad`1.Load(Expression{Func{`0,System.Object}}[])
+  name.vb: Load(Expression(Of Func(Of TModel, Object))())
+  fullName: PnP.Core.Model.IDataModelLoad<TModel>.Load(Expression<Func<TModel, System.Object>>[])
+  fullName.vb: PnP.Core.Model.IDataModelLoad(Of TModel).Load(Expression(Of Func(Of TModel, System.Object))())
+  nameWithType: IDataModelLoad<TModel>.Load(Expression<Func<TModel, Object>>[])
+  nameWithType.vb: IDataModelLoad(Of TModel).Load(Expression(Of Func(Of TModel, Object))())
+- uid: PnP.Core.Model.IDataModelLoad`1.Load*
+  name: Load
+  href: api/PnP.Core.Model.IDataModelLoad-1.html#PnP_Core_Model_IDataModelLoad_1_Load_
+  commentId: Overload:PnP.Core.Model.IDataModelLoad`1.Load
+  isSpec: "True"
+  fullName: PnP.Core.Model.IDataModelLoad<TModel>.Load
+  fullName.vb: PnP.Core.Model.IDataModelLoad(Of TModel).Load
+  nameWithType: IDataModelLoad<TModel>.Load
+  nameWithType.vb: IDataModelLoad(Of TModel).Load
 - uid: PnP.Core.Model.IDataModelLoad`1.LoadAsync(Expression{Func{`0,System.Object}}[])
   name: LoadAsync(Expression<Func<TModel, Object>>[])
   href: api/PnP.Core.Model.IDataModelLoad-1.html#PnP_Core_Model_IDataModelLoad_1_LoadAsync_Expression_Func__0_System_Object_____
@@ -2648,6 +2720,42 @@ references:
   fullName.vb: PnP.Core.Model.IDataModelLoad(Of TModel).LoadAsync
   nameWithType: IDataModelLoad<TModel>.LoadAsync
   nameWithType.vb: IDataModelLoad(Of TModel).LoadAsync
+- uid: PnP.Core.Model.IDataModelLoad`1.LoadBatch(Expression{Func{`0,System.Object}}[])
+  name: LoadBatch(Expression<Func<TModel, Object>>[])
+  href: api/PnP.Core.Model.IDataModelLoad-1.html#PnP_Core_Model_IDataModelLoad_1_LoadBatch_Expression_Func__0_System_Object_____
+  commentId: M:PnP.Core.Model.IDataModelLoad`1.LoadBatch(Expression{Func{`0,System.Object}}[])
+  name.vb: LoadBatch(Expression(Of Func(Of TModel, Object))())
+  fullName: PnP.Core.Model.IDataModelLoad<TModel>.LoadBatch(Expression<Func<TModel, System.Object>>[])
+  fullName.vb: PnP.Core.Model.IDataModelLoad(Of TModel).LoadBatch(Expression(Of Func(Of TModel, System.Object))())
+  nameWithType: IDataModelLoad<TModel>.LoadBatch(Expression<Func<TModel, Object>>[])
+  nameWithType.vb: IDataModelLoad(Of TModel).LoadBatch(Expression(Of Func(Of TModel, Object))())
+- uid: PnP.Core.Model.IDataModelLoad`1.LoadBatch(PnP.Core.Services.Batch,Expression{Func{`0,System.Object}}[])
+  name: LoadBatch(Batch, Expression<Func<TModel, Object>>[])
+  href: api/PnP.Core.Model.IDataModelLoad-1.html#PnP_Core_Model_IDataModelLoad_1_LoadBatch_PnP_Core_Services_Batch_Expression_Func__0_System_Object_____
+  commentId: M:PnP.Core.Model.IDataModelLoad`1.LoadBatch(PnP.Core.Services.Batch,Expression{Func{`0,System.Object}}[])
+  name.vb: LoadBatch(Batch, Expression(Of Func(Of TModel, Object))())
+  fullName: PnP.Core.Model.IDataModelLoad<TModel>.LoadBatch(PnP.Core.Services.Batch, Expression<Func<TModel, System.Object>>[])
+  fullName.vb: PnP.Core.Model.IDataModelLoad(Of TModel).LoadBatch(PnP.Core.Services.Batch, Expression(Of Func(Of TModel, System.Object))())
+  nameWithType: IDataModelLoad<TModel>.LoadBatch(Batch, Expression<Func<TModel, Object>>[])
+  nameWithType.vb: IDataModelLoad(Of TModel).LoadBatch(Batch, Expression(Of Func(Of TModel, Object))())
+- uid: PnP.Core.Model.IDataModelLoad`1.LoadBatch*
+  name: LoadBatch
+  href: api/PnP.Core.Model.IDataModelLoad-1.html#PnP_Core_Model_IDataModelLoad_1_LoadBatch_
+  commentId: Overload:PnP.Core.Model.IDataModelLoad`1.LoadBatch
+  isSpec: "True"
+  fullName: PnP.Core.Model.IDataModelLoad<TModel>.LoadBatch
+  fullName.vb: PnP.Core.Model.IDataModelLoad(Of TModel).LoadBatch
+  nameWithType: IDataModelLoad<TModel>.LoadBatch
+  nameWithType.vb: IDataModelLoad(Of TModel).LoadBatch
+- uid: PnP.Core.Model.IDataModelLoad`1.LoadBatchAsync(Expression{Func{`0,System.Object}}[])
+  name: LoadBatchAsync(Expression<Func<TModel, Object>>[])
+  href: api/PnP.Core.Model.IDataModelLoad-1.html#PnP_Core_Model_IDataModelLoad_1_LoadBatchAsync_Expression_Func__0_System_Object_____
+  commentId: M:PnP.Core.Model.IDataModelLoad`1.LoadBatchAsync(Expression{Func{`0,System.Object}}[])
+  name.vb: LoadBatchAsync(Expression(Of Func(Of TModel, Object))())
+  fullName: PnP.Core.Model.IDataModelLoad<TModel>.LoadBatchAsync(Expression<Func<TModel, System.Object>>[])
+  fullName.vb: PnP.Core.Model.IDataModelLoad(Of TModel).LoadBatchAsync(Expression(Of Func(Of TModel, System.Object))())
+  nameWithType: IDataModelLoad<TModel>.LoadBatchAsync(Expression<Func<TModel, Object>>[])
+  nameWithType.vb: IDataModelLoad(Of TModel).LoadBatchAsync(Expression(Of Func(Of TModel, Object))())
 - uid: PnP.Core.Model.IDataModelLoad`1.LoadBatchAsync(PnP.Core.Services.Batch,Expression{Func{`0,System.Object}}[])
   name: LoadBatchAsync(Batch, Expression<Func<TModel, Object>>[])
   href: api/PnP.Core.Model.IDataModelLoad-1.html#PnP_Core_Model_IDataModelLoad_1_LoadBatchAsync_PnP_Core_Services_Batch_Expression_Func__0_System_Object_____
