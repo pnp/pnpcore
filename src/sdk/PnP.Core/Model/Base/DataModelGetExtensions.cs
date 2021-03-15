@@ -33,6 +33,23 @@ namespace PnP.Core.Model
         /// <param name="batch">Batch add this request to</param>
         /// <param name="expressions">The properties to select</param>
         /// <returns>The Domain Model object</returns>
+        public static Task<IBatchSingleResult<TModel>> GetBatchAsync<TModel>(this IDataModelGet<TModel> dataModelGet, Batch batch, params Expression<Func<TModel, object>>[] expressions)
+        {
+            if (dataModelGet == null)
+            {
+                throw new ArgumentNullException(nameof(dataModelGet));
+            }
+
+            return dataModelGet.GetBatchAsync(batch, expressions);
+        }
+
+        /// <summary>
+        /// Batches the retrieval of a Domain Model object from the remote data source, eventually selecting custom properties or using a default set of properties
+        /// </summary>
+        /// <param name="dataModelGet"></param>
+        /// <param name="batch">Batch add this request to</param>
+        /// <param name="expressions">The properties to select</param>
+        /// <returns>The Domain Model object</returns>
         public static IBatchSingleResult<TModel> GetBatch<TModel>(this IDataModelGet<TModel> dataModelGet, Batch batch, params Expression<Func<TModel, object>>[] expressions)
         {
             if (dataModelGet == null)

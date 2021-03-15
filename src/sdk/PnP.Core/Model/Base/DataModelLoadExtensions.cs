@@ -33,6 +33,23 @@ namespace PnP.Core.Model
         /// <param name="batch">Batch add this request to</param>
         /// <param name="expressions">The properties to select</param>
         /// <returns>The Domain Model object</returns>
+        public static Task<IBatchResult> LoadBatchAsync<TModel>(this IDataModelLoad<TModel> dataModelLoad, Batch batch, params Expression<Func<TModel, object>>[] expressions)
+        {
+            if (dataModelLoad == null)
+            {
+                throw new ArgumentNullException(nameof(dataModelLoad));
+            }
+
+            return dataModelLoad.LoadBatchAsync(batch, expressions);
+        }
+
+        /// <summary>
+        /// Batches the load of a Domain Model object from the remote data source, eventually selecting custom properties or using a default set of properties
+        /// </summary>
+        /// <param name="dataModelLoad"></param>
+        /// <param name="batch">Batch add this request to</param>
+        /// <param name="expressions">The properties to select</param>
+        /// <returns>The Domain Model object</returns>
         public static IBatchResult LoadBatch<TModel>(this IDataModelLoad<TModel> dataModelLoad, Batch batch, params Expression<Func<TModel, object>>[] expressions)
         {
             if (dataModelLoad == null)
