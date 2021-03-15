@@ -1,0 +1,19 @@
+--batchresponse_e2bfa1bf-2dd4-4746-bc20-e9a32dfb7f5b
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+HTTP/1.1 201 Created
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+LOCATION: https://m365x215748.sharepoint.com/sites/AdminContentCenter/_api/machinelearning/workitems/getbyidentifier('/sites/AdminContentCenter,2a94de1e-8ffe-42fb-bada-e35791d27620')
+
+{"d":{"__metadata":{"id":"https://m365x215748.sharepoint.com/sites/AdminContentCenter/_api/machinelearning/workitems/getbyidentifier('/sites/AdminContentCenter,2a94de1e-8ffe-42fb-bada-e35791d27620')","uri":"https://m365x215748.sharepoint.com/sites/AdminContentCenter/_api/machinelearning/workitems/getbyidentifier('/sites/AdminContentCenter,2a94de1e-8ffe-42fb-bada-e35791d27620')","type":"Microsoft.Office.Server.ContentCenter.SPMachineLearningWorkItem"},"Created":"2021-03-15T12:21:12","DeliverDate":"2021-03-15T12:21:12","ErrorMessage":null,"ID":"2a94de1e-8ffe-42fb-bada-e35791d27620","Status":"ExponentialBackoff","StatusCode":0,"TargetServerRelativeUrl":"/sites/AdminContentCenter/PNP_SDK_TEST_ClassifyAndExtractFile/ClassifyAndExtractFile2.docx","TargetSiteId":null,"TargetSiteUrl":"https://m365x215748.sharepoint.com/sites/AdminContentCenter","TargetUniqueId":null,"TargetWebId":null,"TargetWebServerRelativeUrl":"/sites/AdminContentCenter","Type":"ae9d4f24-ee84-4c0c-a972-a74cffe939a1"}}
+--batchresponse_e2bfa1bf-2dd4-4746-bc20-e9a32dfb7f5b
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+HTTP/1.1 201 Created
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+LOCATION: https://m365x215748.sharepoint.com/sites/AdminContentCenter/_api/machinelearning/workitems/getbyidentifier('/sites/AdminContentCenter,1313c3f3-2203-4333-bd1a-94b9b8e52fea')
+
+{"d":{"__metadata":{"id":"https://m365x215748.sharepoint.com/sites/AdminContentCenter/_api/machinelearning/workitems/getbyidentifier('/sites/AdminContentCenter,1313c3f3-2203-4333-bd1a-94b9b8e52fea')","uri":"https://m365x215748.sharepoint.com/sites/AdminContentCenter/_api/machinelearning/workitems/getbyidentifier('/sites/AdminContentCenter,1313c3f3-2203-4333-bd1a-94b9b8e52fea')","type":"Microsoft.Office.Server.ContentCenter.SPMachineLearningWorkItem"},"Created":"2021-03-15T12:21:13","DeliverDate":"2021-03-15T12:21:12","ErrorMessage":null,"ID":"1313c3f3-2203-4333-bd1a-94b9b8e52fea","Status":"ExponentialBackoff","StatusCode":0,"TargetServerRelativeUrl":"/sites/AdminContentCenter/PNP_SDK_TEST_ClassifyAndExtractFile/ClassifyAndExtractFile3.docx","TargetSiteId":null,"TargetSiteUrl":"https://m365x215748.sharepoint.com/sites/AdminContentCenter","TargetUniqueId":null,"TargetWebId":null,"TargetWebServerRelativeUrl":"/sites/AdminContentCenter","Type":"ae9d4f24-ee84-4c0c-a972-a74cffe939a1"}}
+--batchresponse_e2bfa1bf-2dd4-4746-bc20-e9a32dfb7f5b--

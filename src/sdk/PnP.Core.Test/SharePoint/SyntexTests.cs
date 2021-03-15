@@ -3,6 +3,7 @@ using PnP.Core.Model.SharePoint;
 using PnP.Core.Test.Utilities;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -347,6 +348,64 @@ namespace PnP.Core.Test.SharePoint
                     TargetSiteUrl = context.Uri.ToString(),
                     TargetWebServerRelativeUrl = context.Web.ServerRelativeUrl,
                 });
+
+                // cleanup the library
+                await testLibrary.DeleteAsync();
+            }
+        }
+
+        [TestMethod]
+        public async Task ClassifyAndExtractFile()
+        {
+            //TestCommon.Instance.Mocking = false;
+            TestCommon.SharePointSyntexTestSetup();
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.SyntexContentCenterTestSite))
+            {
+                await context.Web.EnsurePropertiesAsync(p => p.ServerRelativeUrl);
+
+                var cc = await context.Web.AsSyntexContentCenterAsync();
+                var models = await cc.GetSyntexModelsAsync();
+                var modelToRegister = models.First();
+
+                // Add library with file to site
+                var libraryName = TestCommon.GetPnPSdkTestAssetName("ClassifyAndExtractFile");
+                var testLibrary = await context.Web.Lists.AddAsync(libraryName, ListTemplateType.DocumentLibrary);
+                await testLibrary.EnsurePropertiesAsync(p => p.RootFolder);
+                IFile testDocument = await testLibrary.RootFolder.Files.AddAsync("ClassifyAndExtractFile.docx", System.IO.File.OpenRead($".{Path.DirectorySeparatorChar}TestAssets{Path.DirectorySeparatorChar}test.docx"), true);
+                IFile testDocument2 = await testLibrary.RootFolder.Files.AddAsync("ClassifyAndExtractFile2.docx", System.IO.File.OpenRead($".{Path.DirectorySeparatorChar}TestAssets{Path.DirectorySeparatorChar}test.docx"), true);
+                IFile testDocument3 = await testLibrary.RootFolder.Files.AddAsync("ClassifyAndExtractFile3.docx", System.IO.File.OpenRead($".{Path.DirectorySeparatorChar}TestAssets{Path.DirectorySeparatorChar}test.docx"), true);
+
+                // publish model to library
+                var result = await modelToRegister.PublishModelAsync(testLibrary);
+                Assert.IsTrue(result != null);
+                Assert.IsTrue(result.ErrorMessage == null);
+                Assert.IsTrue(result.StatusCode == 201);
+                Assert.IsTrue(result.Succeeded);
+
+                // Classify and extract existing content for one file
+                var classifyInformation = await testDocument.ClassifyAndExtractFileAsync();
+                Assert.IsTrue(classifyInformation != null);
+                Assert.IsTrue(classifyInformation.Created != DateTime.MinValue);
+                Assert.IsTrue(classifyInformation.DeliverDate != DateTime.MinValue);
+                Assert.IsTrue(classifyInformation.ErrorMessage == null);
+                Assert.IsTrue(classifyInformation.StatusCode == 0);
+                Assert.IsTrue(classifyInformation.Status == "ExponentialBackoff");
+                Assert.IsTrue(classifyInformation.TargetSiteUrl == context.Uri.ToString());
+                Assert.IsTrue(classifyInformation.TargetWebServerRelativeUrl == context.Web.ServerRelativeUrl);
+                Assert.IsTrue(classifyInformation.TargetServerRelativeUrl == testDocument.ServerRelativeUrl);
+
+                // Classify and extract via batch request
+                await testDocument2.ClassifyAndExtractFileBatchAsync();
+                await testDocument3.ClassifyAndExtractFileBatchAsync();
+                var results = await context.ExecuteAsync();
+
+                // unpublish model from library
+                var unpublishResult = await modelToRegister.UnPublishModelAsync(testLibrary);
+                Assert.IsTrue(unpublishResult != null);
+                Assert.IsTrue(unpublishResult.ErrorMessage == null);
+                Assert.IsTrue(unpublishResult.StatusCode == 200);
+                Assert.IsTrue(unpublishResult.Succeeded);
 
                 // cleanup the library
                 await testLibrary.DeleteAsync();

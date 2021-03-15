@@ -546,5 +546,46 @@ namespace PnP.Core.Model.SharePoint
         /// <param name="batch">The batch instance to use.</param>
         void RecycleBatch(Batch batch);
         #endregion
+
+        #region Syntex
+
+        /// <summary>
+        /// Requests Syntex AI models to classify and extract information from this file 
+        /// </summary>
+        /// <returns>Information about the classify and extract request</returns>
+        Task<ISyntexClassifyAndExtractResult> ClassifyAndExtractFileAsync();
+
+        /// <summary>
+        /// Requests Syntex AI models to classify and extract information from this file 
+        /// </summary>
+        /// <returns>Information about the classify and extract request</returns>
+        ISyntexClassifyAndExtractResult ClassifyAndExtractFile();
+
+        /// <summary>
+        /// Requests Syntex AI models to classify and extract information from this file 
+        /// </summary>
+        /// <param name="batch">Batch to add this request to</param>
+        /// <returns>Information about the classify and extract request</returns>
+        Task ClassifyAndExtractFileBatchAsync(Batch batch);
+
+        /// <summary>
+        /// Requests Syntex AI models to classify and extract information from this file 
+        /// </summary>
+        /// <param name="batch">Batch to add this request to</param>
+        /// <returns>Information about the classify and extract request</returns>
+        void ClassifyAndExtractFileBatch(Batch batch);
+
+        /// <summary>
+        /// Requests Syntex AI models to classify and extract information from this file 
+        /// </summary>
+        /// <returns>Information about the classify and extract request</returns>
+        Task ClassifyAndExtractFileBatchAsync();
+
+        /// <summary>
+        /// Requests Syntex AI models to classify and extract information from this file 
+        /// </summary>
+        /// <returns>Information about the classify and extract request</returns>
+        void ClassifyAndExtractFileBatch();
+        #endregion
     }
 }
