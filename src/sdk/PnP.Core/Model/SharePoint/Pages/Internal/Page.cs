@@ -1499,7 +1499,11 @@ namespace PnP.Core.Model.SharePoint
                     folderHostingThePage = PagesLibrary.RootFolder;
                 }
 
-                await folderHostingThePage.Files.AddTemplateFileAsync(serverRelativePageName, TemplateFileType.ClientSidePage).ConfigureAwait(false);
+                var addedFile = await folderHostingThePage.Files.AddTemplateFileAsync(serverRelativePageName, TemplateFileType.ClientSidePage).ConfigureAwait(false);
+
+                // Since the AddTemplateFile method can alter the page name (# is replaced by -) we need to take that in account
+                pageName = addedFile.ServerRelativeUrl.Replace($"{PagesLibrary.RootFolder.ServerRelativeUrl}/", "");
+                this.pageName = pageName;
 
                 // Get the list item data for the added page
                 await EnsurePageListItemAsync(pageName).ConfigureAwait(false);
@@ -1769,7 +1773,7 @@ namespace PnP.Core.Model.SharePoint
                 if (page[PageConstants.FileLeafRef].ToString().Equals(pageNameWithoutFolder, StringComparison.InvariantCultureIgnoreCase) && page[PageConstants.FileDirRef].ToString().Equals(fileDirRef, StringComparison.InvariantCultureIgnoreCase))
                 {
                     PageListItem = page;
-                    continue;
+                    break;
                 }
             }
         }

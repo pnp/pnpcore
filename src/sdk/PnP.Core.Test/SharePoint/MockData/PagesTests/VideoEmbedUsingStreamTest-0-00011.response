@@ -1,4 +1,4 @@
---batchresponse_854873a7-9866-4a05-9208-6951b7f7923c
+--batchresponse_e0a830cc-9168-4a71-8984-9caed81b7d1c
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
@@ -7,11 +7,11 @@ CONTENT-TYPE: application/json; charset=utf-8
 
 { "Row" : 
 [{
-"ID": "1407",
+"ID": "1466",
 "PermMask": "0x7ffffffffffbffff",
 "FSObjType": "0",
 "HTML_x0020_File_x0020_Type": "",
-"UniqueId": "{C28C4AA1-07B9-42CF-9385-A5D893AC88D2}",
+"UniqueId": "{E97100A8-2940-4360-A35B-6831DEF7E0A1}",
 "ProgId": "",
 "NoExecute": "0",
 "ContentTypeId": "0x0101009D1CB255DA76424F860D91F20E6C411800BC66A1F7CEC63943B700A35FCBCF0164",
@@ -21,7 +21,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "FileRef.urlencoding": "\u002fsites\u002fprov-1\u002fSitePages\u002fPNP_SDK_TEST_VideoEmbedUsingStreamTest.aspx",
 "FileRef.scriptencodeasurl": "\\u002fsites\\u002fprov-1\\u002fSitePages\\u002fPNP_SDK_TEST_VideoEmbedUsingStreamTest.aspx",
 "_UIVersion": "1",
-"SMTotalSize": "8677",
+"SMTotalSize": "8679",
 "File_x0020_Size": "6994",
 "_CommentFlags": "",
 "File_x0020_Type": "aspx",
@@ -40,7 +40,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "Title": "PNP_SDK_TEST_VideoEmbedUsingStreamTest",
 "ClientSideApplicationId": "{B6917CB1-93A0-4B97-A84D-7CF49975D4EC}",
 "PageLayoutType": "Article",
-"CanvasContent1": "<div dir=\"\" class=\"ms-rtestate-field\"><div><div data-sp-canvascontrol=\"\" data-sp-canvasdataversion=\"1.4\" data-sp-controldata=\"&#123;&quot;webPartId&quot;&#58;&quot;275c0095-a77e-4f6d-a2a0-6a7626911518&quot;,&quot;controlType&quot;&#58;3,&quot;id&quot;&#58;&quot;74076cac-0cd8-4eca-be93-176992b5293b&quot;,&quot;position&quot;&#58;&#123;&quot;controlIndex&quot;&#58;1,&quot;zoneIndex&quot;&#58;1,&quot;sectionIndex&quot;&#58;1,&quot;sectionFactor&quot;&#58;12,&quot;layoutIndex&quot;&#58;1&#125;,&quot;emphasis&quot;&#58;&#123;&quot;zoneEmphasis&quot;&#58;0&#125;&#125;\"><div data-sp-webpart=\"\" data-sp-webpartdataversion=\"1.4\" data-sp-webpartdata=\"&#123;&quot;id&quot;&#58;&quot;275c0095-a77e-4f6d-a2a0-6a7626911518&quot;,&quot;instanceId&quot;&#58;&quot;74076cac-0cd8-4eca-be93-176992b5293b&quot;,&quot;title&quot;&#58;&quot;Office 365 video (retiring)&quot;,&quot;description&quot;&#58;&quot;Office 365 video (retiring)&quot;,&quot;dataVersion&quot;&#58;&quot;1.4&quot;,&quot;properties&quot;&#58;&#123;&quot;showInfo&quot;&#58;false,&quot;captionText&quot;&#58;&quot;&quot;,&quot;embedCode&quot;&#58;&quot;&lt;iframe width='640' height='475' src='https&#58;\u002f\u002fweb.microsoftstream.com\u002fembed\u002fbrowse?app=SPO&amp;displayMode=buttons&amp;showDescription=true&amp;sort=trending' frameborder='0' allowfullscreen&gt;&lt;\u002fiframe&gt;&quot;,&quot;isStream&quot;&#58;true,&quot;showvideoStart&quot;&#58;false,&quot;videoStartAt&quot;&#58;&quot;&quot;,&quot;channelSortBy&quot;&#58;&quot;trending&quot;,&quot;sourceType&quot;&#58;&quot;BROWSE&quot;,&quot;thumbnailUrl&quot;&#58;&quot;&quot;,&quot;browseSortBy&quot;&#58;&quot;trending&quot;&#125;,&quot;dynamicDataPaths&quot;&#58;&#123;&#125;,&quot;dynamicDataValues&quot;&#58;&#123;&#125;,&quot;serverProcessedContent&quot;&#58;&#123;&quot;htmlStrings&quot;&#58;&#123;&#125;,&quot;searchablePlainTexts&quot;&#58;&#123;&#125;,&quot;imageSources&quot;&#58;&#123;&#125;,&quot;links&quot;&#58;&#123;&quot;videoSource&quot;&#58;&quot;https&#58;\u002f\u002fweb.microsoftstream.com\u002fembed\u002fbrowse&quot;&#125;&#125;&#125;\"><div data-sp-componentid=\"\">275c0095-a77e-4f6d-a2a0-6a7626911518<\u002fdiv><div data-sp-htmlproperties=\"\"><a data-sp-prop-name=\"videoSource\" href=\"https&#58;\u002f\u002fweb.microsoftstream.com\u002fembed\u002fbrowse\"><\u002fa><\u002fdiv><\u002fdiv><\u002fdiv><div data-sp-canvascontrol=\"\" data-sp-canvasdataversion=\"1.0\" data-sp-controldata=\"&#123;&quot;controlType&quot;&#58;0,&quot;pageSettingsSlice&quot;&#58;&#123;&quot;isDefaultDescription&quot;&#58;false,&quot;isDefaultThumbnail&quot;&#58;true&#125;&#125;\"><\u002fdiv><\u002fdiv><\u002fdiv>",
+"CanvasContent1": "<div dir=\"\" class=\"ms-rtestate-field\"><div><div data-sp-canvascontrol=\"\" data-sp-canvasdataversion=\"1.4\" data-sp-controldata=\"&#123;&quot;webPartId&quot;&#58;&quot;275c0095-a77e-4f6d-a2a0-6a7626911518&quot;,&quot;controlType&quot;&#58;3,&quot;id&quot;&#58;&quot;7b2f26d4-d2d6-40de-bb28-85cc394baf7c&quot;,&quot;position&quot;&#58;&#123;&quot;controlIndex&quot;&#58;1,&quot;zoneIndex&quot;&#58;1,&quot;sectionIndex&quot;&#58;1,&quot;sectionFactor&quot;&#58;12,&quot;layoutIndex&quot;&#58;1&#125;,&quot;emphasis&quot;&#58;&#123;&quot;zoneEmphasis&quot;&#58;0&#125;&#125;\"><div data-sp-webpart=\"\" data-sp-webpartdataversion=\"1.4\" data-sp-webpartdata=\"&#123;&quot;id&quot;&#58;&quot;275c0095-a77e-4f6d-a2a0-6a7626911518&quot;,&quot;instanceId&quot;&#58;&quot;7b2f26d4-d2d6-40de-bb28-85cc394baf7c&quot;,&quot;title&quot;&#58;&quot;Office 365 video (retiring)&quot;,&quot;description&quot;&#58;&quot;Office 365 video (retiring)&quot;,&quot;dataVersion&quot;&#58;&quot;1.4&quot;,&quot;properties&quot;&#58;&#123;&quot;showInfo&quot;&#58;false,&quot;captionText&quot;&#58;&quot;&quot;,&quot;embedCode&quot;&#58;&quot;&lt;iframe width='640' height='475' src='https&#58;\u002f\u002fweb.microsoftstream.com\u002fembed\u002fbrowse?app=SPO&amp;displayMode=buttons&amp;showDescription=true&amp;sort=trending' frameborder='0' allowfullscreen&gt;&lt;\u002fiframe&gt;&quot;,&quot;isStream&quot;&#58;true,&quot;showvideoStart&quot;&#58;false,&quot;videoStartAt&quot;&#58;&quot;&quot;,&quot;channelSortBy&quot;&#58;&quot;trending&quot;,&quot;sourceType&quot;&#58;&quot;BROWSE&quot;,&quot;thumbnailUrl&quot;&#58;&quot;&quot;,&quot;browseSortBy&quot;&#58;&quot;trending&quot;&#125;,&quot;dynamicDataPaths&quot;&#58;&#123;&#125;,&quot;dynamicDataValues&quot;&#58;&#123;&#125;,&quot;serverProcessedContent&quot;&#58;&#123;&quot;htmlStrings&quot;&#58;&#123;&#125;,&quot;searchablePlainTexts&quot;&#58;&#123;&#125;,&quot;imageSources&quot;&#58;&#123;&#125;,&quot;links&quot;&#58;&#123;&quot;videoSource&quot;&#58;&quot;https&#58;\u002f\u002fweb.microsoftstream.com\u002fembed\u002fbrowse&quot;&#125;&#125;&#125;\"><div data-sp-componentid=\"\">275c0095-a77e-4f6d-a2a0-6a7626911518<\u002fdiv><div data-sp-htmlproperties=\"\"><a data-sp-prop-name=\"videoSource\" href=\"https&#58;\u002f\u002fweb.microsoftstream.com\u002fembed\u002fbrowse\"><\u002fa><\u002fdiv><\u002fdiv><\u002fdiv><div data-sp-canvascontrol=\"\" data-sp-canvasdataversion=\"1.0\" data-sp-controldata=\"&#123;&quot;controlType&quot;&#58;0,&quot;pageSettingsSlice&quot;&#58;&#123;&quot;isDefaultDescription&quot;&#58;false,&quot;isDefaultThumbnail&quot;&#58;true&#125;&#125;\"><\u002fdiv><\u002fdiv><\u002fdiv>",
 "_AuthorByline": "",
 "_AuthorByline.id": "",
 "_AuthorByline.title": "\u002f_layouts\u002f15\u002fimages\u002fsitepagethumbnail.png",
@@ -63,11 +63,12 @@ CONTENT-TYPE: application/json; charset=utf-8
 "ItemChildCount": "0",
 "FolderChildCount": "0",
 "A2ODMountCount": "",
+"_ComplianceTag": "",
 "owshiddenversion": "2",
 "_SPTranslatedLanguages": "",
 "_SPSitePageFlags": "",
 "ContentVersion": "1",
-"DocConcurrencyNumber": "4",
+"DocConcurrencyNumber": "2",
 "_VirusStatus": "",
 "Restricted": "",
 "ecb.dispex": "return DispEx(this,event,'TRUE','FALSE','FALSE','','1','SharePoint.OpenDocuments','','','','6','0','','0x7ffffffffffbffff','','')"
@@ -82,4 +83,4 @@ CONTENT-TYPE: application/json; charset=utf-8
 ,"CurrentFolderSpItemUrl" : ""
 
 }
---batchresponse_854873a7-9866-4a05-9208-6951b7f7923c--
+--batchresponse_e0a830cc-9168-4a71-8984-9caed81b7d1c--

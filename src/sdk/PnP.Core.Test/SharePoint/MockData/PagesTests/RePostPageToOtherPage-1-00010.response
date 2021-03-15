@@ -1,4 +1,4 @@
---batchresponse_bcf6294d-9d3e-4a97-aff7-e9a2564bb678
+--batchresponse_b887df52-4aa4-4c92-9559-b4b2a263d6b2
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
@@ -7,11 +7,11 @@ CONTENT-TYPE: application/json; charset=utf-8
 
 { "Row" : 
 [{
-"ID": "1399",
+"ID": "1460",
 "PermMask": "0x7ffffffffffbffff",
 "FSObjType": "0",
 "HTML_x0020_File_x0020_Type": "",
-"UniqueId": "{ACBAF7BF-9237-4835-866A-4485184C5938}",
+"UniqueId": "{048BD25F-6FDC-438D-B147-FC5E91FA0A02}",
 "ProgId": "",
 "NoExecute": "0",
 "ContentTypeId": "0x0101009D1CB255DA76424F860D91F20E6C4118002A50BFCFB7614729B56886FADA02339B00F0F4E89AC972FF45B8C2A814246E5545",
@@ -21,7 +21,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "FileRef.urlencoding": "\u002fsites\u002fprov-1\u002fSitePages\u002fPNP_SDK_TEST_RePostPageToOtherPage.aspx",
 "FileRef.scriptencodeasurl": "\\u002fsites\\u002fprov-1\\u002fSitePages\\u002fPNP_SDK_TEST_RePostPageToOtherPage.aspx",
 "_UIVersion": "1",
-"SMTotalSize": "3523",
+"SMTotalSize": "3522",
 "File_x0020_Size": "2592",
 "_CommentFlags": "",
 "File_x0020_Type": "aspx",
@@ -63,6 +63,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "ItemChildCount": "0",
 "FolderChildCount": "0",
 "A2ODMountCount": "",
+"_ComplianceTag": "",
 "owshiddenversion": "2",
 "_SPTranslatedLanguages": "",
 "_SPSitePageFlags": "",
@@ -82,4 +83,4 @@ CONTENT-TYPE: application/json; charset=utf-8
 ,"CurrentFolderSpItemUrl" : ""
 
 }
---batchresponse_bcf6294d-9d3e-4a97-aff7-e9a2564bb678--
+--batchresponse_b887df52-4aa4-4c92-9559-b4b2a263d6b2--
