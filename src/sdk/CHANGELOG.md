@@ -10,6 +10,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
 ### Added
 
+- Support to request for classifying and extracting of a file via the connected Syntex models [jansenbe - Bert Jansen]
 - Exposed additional Get/Load synchronous and asynchronous extension methods #354 [PaoloPia - Paolo Pialorsi]
 
 ### Changed
