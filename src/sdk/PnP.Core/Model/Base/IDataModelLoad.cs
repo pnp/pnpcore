@@ -1,5 +1,6 @@
 ﻿using PnP.Core.Services;
 using System;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
@@ -11,19 +12,19 @@ namespace PnP.Core.Model
     internal interface IDataModelLoad
     {
         /// <summary>
-        /// Loads a Domain Model object from the remote data source, eventually selecting custom properties or using a default set of properties
-        /// </summary>
-        /// <param name="expressions">The properties to select</param>
-        /// <returns>The Domain Model object</returns>
-        Task LoadAsync(params LambdaExpression[] expressions);
-
-        /// <summary>
         /// Batches the load of a Domain Model object from the remote data source, eventually selecting custom properties or using a default set of properties
         /// </summary>
         /// <param name="batch">Batch add this request to</param>
         /// <param name="expressions">The properties to select</param>
         /// <returns>The Domain Model object</returns>
         Task<IBatchResult> LoadBatchAsync(Batch batch, params LambdaExpression[] expressions);
+
+        /// <summary>
+        /// Loads a Domain Model object from the remote data source, eventually selecting custom properties or using a default set of properties
+        /// </summary>
+        /// <param name="expressions">The properties to select</param>
+        /// <returns>The Domain Model object</returns>
+        Task LoadAsync(params LambdaExpression[] expressions);
     }
 
     /// <summary>
@@ -31,20 +32,6 @@ namespace PnP.Core.Model
     /// </summary>
     public interface IDataModelLoad<TModel>
     {
-        /// <summary>
-        /// Loads a Domain Model object from the remote data source, eventually selecting custom properties or using a default set of properties
-        /// </summary>
-        /// <param name="expressions">The properties to select</param>
-        /// <returns>The Domain Model object</returns>
-        Task LoadAsync(params Expression<Func<TModel, object>>[] expressions);
-
-        /// <summary>
-        /// Loads a Domain Model object from the remote data source, eventually selecting custom properties or using a default set of properties
-        /// </summary>
-        /// <param name="expressions">The properties to select</param>
-        /// <returns>The Domain Model object</returns>
-        void Load(params Expression<Func<TModel, object>>[] expressions);
-    
         /// <summary>
         /// Batches the load of a Domain Model object from the remote data source, eventually selecting custom properties or using a default set of properties
         /// </summary>
@@ -54,25 +41,10 @@ namespace PnP.Core.Model
         Task<IBatchResult> LoadBatchAsync(Batch batch, params Expression<Func<TModel, object>>[] expressions);
 
         /// <summary>
-        /// Batches the load of a Domain Model object from the remote data source, eventually selecting custom properties or using a default set of properties
-        /// </summary>
-        /// <param name="batch">Batch add this request to</param>
-        /// <param name="expressions">The properties to select</param>
-        /// <returns>The Domain Model object</returns>
-        IBatchResult LoadBatch(Batch batch, params Expression<Func<TModel, object>>[] expressions);
-
-        /// <summary>
-        /// Batches the load of a Domain Model object from the remote data source, eventually selecting custom properties or using a default set of properties
+        /// Loads a Domain Model object from the remote data source, eventually selecting custom properties or using a default set of properties
         /// </summary>
         /// <param name="expressions">The properties to select</param>
         /// <returns>The Domain Model object</returns>
-        Task<IBatchResult> LoadBatchAsync(params Expression<Func<TModel, object>>[] expressions);
-
-        /// <summary>
-        /// Batches the load of a Domain Model object from the remote data source, eventually selecting custom properties or using a default set of properties
-        /// </summary>
-        /// <param name="expressions">The properties to select</param>
-        /// <returns>The Domain Model object</returns>
-        IBatchResult LoadBatch(params Expression<Func<TModel, object>>[] expressions);
+        Task LoadAsync(params Expression<Func<TModel, object>>[] expressions);
     }
 }
