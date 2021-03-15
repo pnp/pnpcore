@@ -170,3 +170,17 @@ foreach(var library in libraries)
     // Do something with the library publication
 }
 ```
+
+### Classify and extract files
+
+When there are one or more models published to a library any newly added document is processed via these models automatically. Existing content however is not, but using the ClassifyAndExtractFileAsync method you can request an existing file to be classified and extracted.
+
+```csharp
+string documentUrl = $"{context.Uri.PathAndQuery}/Shared Documents/document.docx";
+
+// Get a reference to the file
+IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl);
+
+// Classify and extract the file
+var classifyAndExtractResult = await testDocument.ClassifyAndExtractFileAsync();
+```
