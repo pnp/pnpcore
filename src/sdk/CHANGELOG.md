@@ -14,6 +14,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
 - Improved page name normalization (only # are not allowed in modern page names) #353 [Sarah4x - Sarah Wilson]
 - Uplifted samples to GA v1.0.0 #350 [pkbullock - Paul Bullock]
+- Bug fix for issue #351 - Teams Chat Messages not working [pkbullock - Paul Bullock]
 - Improved handling of special characters ('#& ) for files and folders [jansenbe - Bert Jansen]
 - Fix for single quote in client side page name #348 [Sarah4x - Sarah Wilson]
 - Improved CSOM support for content type creation and taxonomy field creation #349 [mgwojciech - Marcin Wojciechowski]
