@@ -136,65 +136,33 @@
   
   <span class="small pull-right mobile-hide">
     <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_Teams_ITeamChatMessageCollection_Add_System_String_PnP_Core_Model_Teams_ChatMessageContentType_PnP_Core_Model_Teams_ITeamChatMessageAttachmentCollection_System_String_PnP_Core_Model_Teams_ITeamChatMessageHostedContentCollection_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.Teams.ITeamChatMessageCollection.Add(System.String%2CPnP.Core.Model.Teams.ChatMessageContentType%2CPnP.Core.Model.Teams.ITeamChatMessageAttachmentCollection%2CSystem.String%2CPnP.Core.Model.Teams.ITeamChatMessageHostedContentCollection)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_Teams_ITeamChatMessageCollection_Add_PnP_Core_Model_Teams_ChatMessageOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.Teams.ITeamChatMessageCollection.Add(PnP.Core.Model.Teams.ChatMessageOptions)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Teams/Public/ITeamChatMessageCollection.cs/#L34" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Teams/Public/ITeamChatMessageCollection.cs/#L91" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Model_Teams_ITeamChatMessageCollection_Add_" data-uid="PnP.Core.Model.Teams.ITeamChatMessageCollection.Add*"></a>
   
-  <h4 id="PnP_Core_Model_Teams_ITeamChatMessageCollection_Add_System_String_PnP_Core_Model_Teams_ChatMessageContentType_PnP_Core_Model_Teams_ITeamChatMessageAttachmentCollection_System_String_PnP_Core_Model_Teams_ITeamChatMessageHostedContentCollection_" data-uid="PnP.Core.Model.Teams.ITeamChatMessageCollection.Add(System.String,PnP.Core.Model.Teams.ChatMessageContentType,PnP.Core.Model.Teams.ITeamChatMessageAttachmentCollection,System.String,PnP.Core.Model.Teams.ITeamChatMessageHostedContentCollection)"><a href="#collapsible-PnP_Core_Model_Teams_ITeamChatMessageCollection_Add_System_String_PnP_Core_Model_Teams_ChatMessageContentType_PnP_Core_Model_Teams_ITeamChatMessageAttachmentCollection_System_String_PnP_Core_Model_Teams_ITeamChatMessageHostedContentCollection_" class="expander" data-toggle="collapse">Add(String, ChatMessageContentType, ITeamChatMessageAttachmentCollection, String, ITeamChatMessageHostedContentCollection)</a></h4>
+  <h4 id="PnP_Core_Model_Teams_ITeamChatMessageCollection_Add_PnP_Core_Model_Teams_ChatMessageOptions_" data-uid="PnP.Core.Model.Teams.ITeamChatMessageCollection.Add(PnP.Core.Model.Teams.ChatMessageOptions)"><a href="#collapsible-PnP_Core_Model_Teams_ITeamChatMessageCollection_Add_PnP_Core_Model_Teams_ChatMessageOptions_" class="expander" data-toggle="collapse">Add(ChatMessageOptions)</a></h4>
   
-  <div id="collapsible-PnP_Core_Model_Teams_ITeamChatMessageCollection_Add_System_String_PnP_Core_Model_Teams_ChatMessageContentType_PnP_Core_Model_Teams_ITeamChatMessageAttachmentCollection_System_String_PnP_Core_Model_Teams_ITeamChatMessageHostedContentCollection_" class="collapse in">
+  <div id="collapsible-PnP_Core_Model_Teams_ITeamChatMessageCollection_Add_PnP_Core_Model_Teams_ChatMessageOptions_" class="collapse in">
   <div class="markdown level1 summary"><p>Adds a new channel chat</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">ITeamChatMessage Add(string content, ChatMessageContentType contentType = ChatMessageContentType.Text, ITeamChatMessageAttachmentCollection attachments = null, string subject = null, ITeamChatMessageHostedContentCollection hostedContents = null)</code></pre>
+    <pre><code class="lang-csharp hljs">ITeamChatMessage Add(ChatMessageOptions options)</code></pre>
   </div>
 
   <h5 class="parameters">Parameters</h5>
   <table>
     <tr>
       <td>
-        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></span>
-        <span class="parametername">content</span>
-        <p><p>Content of the message</p>
-</p>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Model.Teams.ChatMessageContentType.html">ChatMessageContentType</a></span>
-        <span class="parametername">contentType</span>
-        <p><p>Message content type e.g. Text, Html</p>
-</p>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Model.Teams.ITeamChatMessageAttachmentCollection.html">ITeamChatMessageAttachmentCollection</a></span>
-        <span class="parametername">attachments</span>
-        <p><p>Attachments within the message</p>
-</p>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></span>
-        <span class="parametername">subject</span>
-        <p><p>Message subject</p>
-</p>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Model.Teams.ITeamChatMessageHostedContentCollection.html">ITeamChatMessageHostedContentCollection</a></span>
-        <span class="parametername">hostedContents</span>
-        <p><p>Hosted contents for inline content</p>
+        <span class="pull-right"><a class="xref" href="PnP.Core.Model.Teams.ChatMessageOptions.html">ChatMessageOptions</a></span>
+        <span class="parametername">options</span>
+        <p><p>Full chat message options</p>
 </p>
       </td>
     </tr>
@@ -223,65 +191,104 @@
   
   <span class="small pull-right mobile-hide">
     <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_Teams_ITeamChatMessageCollection_AddAsync_System_String_PnP_Core_Model_Teams_ChatMessageContentType_PnP_Core_Model_Teams_ITeamChatMessageAttachmentCollection_System_String_PnP_Core_Model_Teams_ITeamChatMessageHostedContentCollection_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.Teams.ITeamChatMessageCollection.AddAsync(System.String%2CPnP.Core.Model.Teams.ChatMessageContentType%2CPnP.Core.Model.Teams.ITeamChatMessageAttachmentCollection%2CSystem.String%2CPnP.Core.Model.Teams.ITeamChatMessageHostedContentCollection)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_Teams_ITeamChatMessageCollection_Add_System_String_PnP_Core_Model_Teams_ChatMessageContentType_System_String_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.Teams.ITeamChatMessageCollection.Add(System.String%2CPnP.Core.Model.Teams.ChatMessageContentType%2CSystem.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Teams/Public/ITeamChatMessageCollection.cs/#L23" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Teams/Public/ITeamChatMessageCollection.cs/#L33" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_Teams_ITeamChatMessageCollection_Add_" data-uid="PnP.Core.Model.Teams.ITeamChatMessageCollection.Add*"></a>
+  
+  <h4 id="PnP_Core_Model_Teams_ITeamChatMessageCollection_Add_System_String_PnP_Core_Model_Teams_ChatMessageContentType_System_String_" data-uid="PnP.Core.Model.Teams.ITeamChatMessageCollection.Add(System.String,PnP.Core.Model.Teams.ChatMessageContentType,System.String)"><a href="#collapsible-PnP_Core_Model_Teams_ITeamChatMessageCollection_Add_System_String_PnP_Core_Model_Teams_ChatMessageContentType_System_String_" class="expander" data-toggle="collapse">Add(String, ChatMessageContentType, String)</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_Teams_ITeamChatMessageCollection_Add_System_String_PnP_Core_Model_Teams_ChatMessageContentType_System_String_" class="collapse in">
+  <div class="markdown level1 summary"><p>Adds a new channel chat</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">ITeamChatMessage Add(string content, ChatMessageContentType contentType = ChatMessageContentType.Text, string subject = null)</code></pre>
+  </div>
+
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></span>
+        <span class="parametername">content</span>
+        <p><p>Content of the message</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="PnP.Core.Model.Teams.ChatMessageContentType.html">ChatMessageContentType</a></span>
+        <span class="parametername">contentType</span>
+        <p><p>Message content type e.g. Text, Html</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></span>
+        <span class="parametername">subject</span>
+        <p><p>Message Subject</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="PnP.Core.Model.Teams.ITeamChatMessage.html">ITeamChatMessage</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_Teams_ITeamChatMessageCollection_AddAsync_PnP_Core_Model_Teams_ChatMessageOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.Teams.ITeamChatMessageCollection.AddAsync(PnP.Core.Model.Teams.ChatMessageOptions)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Teams/Public/ITeamChatMessageCollection.cs/#L84" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Model_Teams_ITeamChatMessageCollection_AddAsync_" data-uid="PnP.Core.Model.Teams.ITeamChatMessageCollection.AddAsync*"></a>
   
-  <h4 id="PnP_Core_Model_Teams_ITeamChatMessageCollection_AddAsync_System_String_PnP_Core_Model_Teams_ChatMessageContentType_PnP_Core_Model_Teams_ITeamChatMessageAttachmentCollection_System_String_PnP_Core_Model_Teams_ITeamChatMessageHostedContentCollection_" data-uid="PnP.Core.Model.Teams.ITeamChatMessageCollection.AddAsync(System.String,PnP.Core.Model.Teams.ChatMessageContentType,PnP.Core.Model.Teams.ITeamChatMessageAttachmentCollection,System.String,PnP.Core.Model.Teams.ITeamChatMessageHostedContentCollection)"><a href="#collapsible-PnP_Core_Model_Teams_ITeamChatMessageCollection_AddAsync_System_String_PnP_Core_Model_Teams_ChatMessageContentType_PnP_Core_Model_Teams_ITeamChatMessageAttachmentCollection_System_String_PnP_Core_Model_Teams_ITeamChatMessageHostedContentCollection_" class="expander" data-toggle="collapse">AddAsync(String, ChatMessageContentType, ITeamChatMessageAttachmentCollection, String, ITeamChatMessageHostedContentCollection)</a></h4>
+  <h4 id="PnP_Core_Model_Teams_ITeamChatMessageCollection_AddAsync_PnP_Core_Model_Teams_ChatMessageOptions_" data-uid="PnP.Core.Model.Teams.ITeamChatMessageCollection.AddAsync(PnP.Core.Model.Teams.ChatMessageOptions)"><a href="#collapsible-PnP_Core_Model_Teams_ITeamChatMessageCollection_AddAsync_PnP_Core_Model_Teams_ChatMessageOptions_" class="expander" data-toggle="collapse">AddAsync(ChatMessageOptions)</a></h4>
   
-  <div id="collapsible-PnP_Core_Model_Teams_ITeamChatMessageCollection_AddAsync_System_String_PnP_Core_Model_Teams_ChatMessageContentType_PnP_Core_Model_Teams_ITeamChatMessageAttachmentCollection_System_String_PnP_Core_Model_Teams_ITeamChatMessageHostedContentCollection_" class="collapse in">
+  <div id="collapsible-PnP_Core_Model_Teams_ITeamChatMessageCollection_AddAsync_PnP_Core_Model_Teams_ChatMessageOptions_" class="collapse in">
   <div class="markdown level1 summary"><p>Adds a new channel chat message</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">Task&lt;ITeamChatMessage&gt; AddAsync(string content, ChatMessageContentType contentType = ChatMessageContentType.Text, ITeamChatMessageAttachmentCollection attachments = null, string subject = null, ITeamChatMessageHostedContentCollection hostedContents = null)</code></pre>
+    <pre><code class="lang-csharp hljs">Task&lt;ITeamChatMessage&gt; AddAsync(ChatMessageOptions options)</code></pre>
   </div>
 
   <h5 class="parameters">Parameters</h5>
   <table>
     <tr>
       <td>
-        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></span>
-        <span class="parametername">content</span>
-        <p><p>Content of the message</p>
-</p>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Model.Teams.ChatMessageContentType.html">ChatMessageContentType</a></span>
-        <span class="parametername">contentType</span>
-        <p><p>Message content type e.g. Text, Html</p>
-</p>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Model.Teams.ITeamChatMessageAttachmentCollection.html">ITeamChatMessageAttachmentCollection</a></span>
-        <span class="parametername">attachments</span>
-        <p><p>Attachments within the message</p>
-</p>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></span>
-        <span class="parametername">subject</span>
-        <p><p>Message subject</p>
-</p>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Model.Teams.ITeamChatMessageHostedContentCollection.html">ITeamChatMessageHostedContentCollection</a></span>
-        <span class="parametername">hostedContents</span>
-        <p><p>Hosted contents for inline content</p>
+        <span class="pull-right"><a class="xref" href="PnP.Core.Model.Teams.ChatMessageOptions.html">ChatMessageOptions</a></span>
+        <span class="parametername">options</span>
+        <p><p>Full chat message options</p>
 </p>
       </td>
     </tr>
@@ -310,24 +317,215 @@
   
   <span class="small pull-right mobile-hide">
     <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_Teams_ITeamChatMessageCollection_AddBatch_PnP_Core_Services_Batch_System_String_PnP_Core_Model_Teams_ChatMessageContentType_PnP_Core_Model_Teams_ITeamChatMessageAttachmentCollection_System_String_PnP_Core_Model_Teams_ITeamChatMessageHostedContentCollection_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.Teams.ITeamChatMessageCollection.AddBatch(PnP.Core.Services.Batch%2CSystem.String%2CPnP.Core.Model.Teams.ChatMessageContentType%2CPnP.Core.Model.Teams.ITeamChatMessageAttachmentCollection%2CSystem.String%2CPnP.Core.Model.Teams.ITeamChatMessageHostedContentCollection)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_Teams_ITeamChatMessageCollection_AddAsync_System_String_PnP_Core_Model_Teams_ChatMessageContentType_System_String_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.Teams.ITeamChatMessageCollection.AddAsync(System.String%2CPnP.Core.Model.Teams.ChatMessageContentType%2CSystem.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Teams/Public/ITeamChatMessageCollection.cs/#L58" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Teams/Public/ITeamChatMessageCollection.cs/#L24" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
-  <a id="PnP_Core_Model_Teams_ITeamChatMessageCollection_AddBatch_" data-uid="PnP.Core.Model.Teams.ITeamChatMessageCollection.AddBatch*"></a>
+  <a id="PnP_Core_Model_Teams_ITeamChatMessageCollection_AddAsync_" data-uid="PnP.Core.Model.Teams.ITeamChatMessageCollection.AddAsync*"></a>
   
-  <h4 id="PnP_Core_Model_Teams_ITeamChatMessageCollection_AddBatch_PnP_Core_Services_Batch_System_String_PnP_Core_Model_Teams_ChatMessageContentType_PnP_Core_Model_Teams_ITeamChatMessageAttachmentCollection_System_String_PnP_Core_Model_Teams_ITeamChatMessageHostedContentCollection_" data-uid="PnP.Core.Model.Teams.ITeamChatMessageCollection.AddBatch(PnP.Core.Services.Batch,System.String,PnP.Core.Model.Teams.ChatMessageContentType,PnP.Core.Model.Teams.ITeamChatMessageAttachmentCollection,System.String,PnP.Core.Model.Teams.ITeamChatMessageHostedContentCollection)"><a href="#collapsible-PnP_Core_Model_Teams_ITeamChatMessageCollection_AddBatch_PnP_Core_Services_Batch_System_String_PnP_Core_Model_Teams_ChatMessageContentType_PnP_Core_Model_Teams_ITeamChatMessageAttachmentCollection_System_String_PnP_Core_Model_Teams_ITeamChatMessageHostedContentCollection_" class="expander" data-toggle="collapse">AddBatch(Batch, String, ChatMessageContentType, ITeamChatMessageAttachmentCollection, String, ITeamChatMessageHostedContentCollection)</a></h4>
+  <h4 id="PnP_Core_Model_Teams_ITeamChatMessageCollection_AddAsync_System_String_PnP_Core_Model_Teams_ChatMessageContentType_System_String_" data-uid="PnP.Core.Model.Teams.ITeamChatMessageCollection.AddAsync(System.String,PnP.Core.Model.Teams.ChatMessageContentType,System.String)"><a href="#collapsible-PnP_Core_Model_Teams_ITeamChatMessageCollection_AddAsync_System_String_PnP_Core_Model_Teams_ChatMessageContentType_System_String_" class="expander" data-toggle="collapse">AddAsync(String, ChatMessageContentType, String)</a></h4>
   
-  <div id="collapsible-PnP_Core_Model_Teams_ITeamChatMessageCollection_AddBatch_PnP_Core_Services_Batch_System_String_PnP_Core_Model_Teams_ChatMessageContentType_PnP_Core_Model_Teams_ITeamChatMessageAttachmentCollection_System_String_PnP_Core_Model_Teams_ITeamChatMessageHostedContentCollection_" class="collapse in">
+  <div id="collapsible-PnP_Core_Model_Teams_ITeamChatMessageCollection_AddAsync_System_String_PnP_Core_Model_Teams_ChatMessageContentType_System_String_" class="collapse in">
   <div class="markdown level1 summary"><p>Adds a new channel chat message</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">ITeamChatMessage AddBatch(Batch batch, string content, ChatMessageContentType contentType = ChatMessageContentType.Text, ITeamChatMessageAttachmentCollection attachments = null, string subject = null, ITeamChatMessageHostedContentCollection hostedContents = null)</code></pre>
+    <pre><code class="lang-csharp hljs">Task&lt;ITeamChatMessage&gt; AddAsync(string content, ChatMessageContentType contentType = ChatMessageContentType.Text, string subject = null)</code></pre>
+  </div>
+
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></span>
+        <span class="parametername">content</span>
+        <p><p>Content of the message</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="PnP.Core.Model.Teams.ChatMessageContentType.html">ChatMessageContentType</a></span>
+        <span class="parametername">contentType</span>
+        <p><p>Message content type e.g. Text, Html</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></span>
+        <span class="parametername">subject</span>
+        <p><p>Message Subject</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="xref">Task</span>&lt;<a class="xref" href="PnP.Core.Model.Teams.ITeamChatMessage.html">ITeamChatMessage</a>&gt;
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_Teams_ITeamChatMessageCollection_AddBatch_PnP_Core_Model_Teams_ChatMessageOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.Teams.ITeamChatMessageCollection.AddBatch(PnP.Core.Model.Teams.ChatMessageOptions)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Teams/Public/ITeamChatMessageCollection.cs/#L121" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_Teams_ITeamChatMessageCollection_AddBatch_" data-uid="PnP.Core.Model.Teams.ITeamChatMessageCollection.AddBatch*"></a>
+  
+  <h4 id="PnP_Core_Model_Teams_ITeamChatMessageCollection_AddBatch_PnP_Core_Model_Teams_ChatMessageOptions_" data-uid="PnP.Core.Model.Teams.ITeamChatMessageCollection.AddBatch(PnP.Core.Model.Teams.ChatMessageOptions)"><a href="#collapsible-PnP_Core_Model_Teams_ITeamChatMessageCollection_AddBatch_PnP_Core_Model_Teams_ChatMessageOptions_" class="expander" data-toggle="collapse">AddBatch(ChatMessageOptions)</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_Teams_ITeamChatMessageCollection_AddBatch_PnP_Core_Model_Teams_ChatMessageOptions_" class="collapse in">
+  <div class="markdown level1 summary"><p>Adds a new channel chat message</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">ITeamChatMessage AddBatch(ChatMessageOptions options)</code></pre>
+  </div>
+
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="PnP.Core.Model.Teams.ChatMessageOptions.html">ChatMessageOptions</a></span>
+        <span class="parametername">options</span>
+        <p><p>Full chat message options</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="PnP.Core.Model.Teams.ITeamChatMessage.html">ITeamChatMessage</a>
+        <p><p>Newly added channel chat message</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_Teams_ITeamChatMessageCollection_AddBatch_PnP_Core_Services_Batch_PnP_Core_Model_Teams_ChatMessageOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.Teams.ITeamChatMessageCollection.AddBatch(PnP.Core.Services.Batch%2CPnP.Core.Model.Teams.ChatMessageOptions)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Teams/Public/ITeamChatMessageCollection.cs/#L107" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_Teams_ITeamChatMessageCollection_AddBatch_" data-uid="PnP.Core.Model.Teams.ITeamChatMessageCollection.AddBatch*"></a>
+  
+  <h4 id="PnP_Core_Model_Teams_ITeamChatMessageCollection_AddBatch_PnP_Core_Services_Batch_PnP_Core_Model_Teams_ChatMessageOptions_" data-uid="PnP.Core.Model.Teams.ITeamChatMessageCollection.AddBatch(PnP.Core.Services.Batch,PnP.Core.Model.Teams.ChatMessageOptions)"><a href="#collapsible-PnP_Core_Model_Teams_ITeamChatMessageCollection_AddBatch_PnP_Core_Services_Batch_PnP_Core_Model_Teams_ChatMessageOptions_" class="expander" data-toggle="collapse">AddBatch(Batch, ChatMessageOptions)</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_Teams_ITeamChatMessageCollection_AddBatch_PnP_Core_Services_Batch_PnP_Core_Model_Teams_ChatMessageOptions_" class="collapse in">
+  <div class="markdown level1 summary"><p>Adds a new channel chat message</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">ITeamChatMessage AddBatch(Batch batch, ChatMessageOptions options)</code></pre>
+  </div>
+
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></span>
+        <span class="parametername">batch</span>
+        <p><p>Batch the message is associated with</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="PnP.Core.Model.Teams.ChatMessageOptions.html">ChatMessageOptions</a></span>
+        <span class="parametername">options</span>
+        <p><p>Full chat message options</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="PnP.Core.Model.Teams.ITeamChatMessage.html">ITeamChatMessage</a>
+        <p><p>Newly added channel chat message</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_Teams_ITeamChatMessageCollection_AddBatch_PnP_Core_Services_Batch_System_String_PnP_Core_Model_Teams_ChatMessageContentType_System_String_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.Teams.ITeamChatMessageCollection.AddBatch(PnP.Core.Services.Batch%2CSystem.String%2CPnP.Core.Model.Teams.ChatMessageContentType%2CSystem.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Teams/Public/ITeamChatMessageCollection.cs/#L53" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_Teams_ITeamChatMessageCollection_AddBatch_" data-uid="PnP.Core.Model.Teams.ITeamChatMessageCollection.AddBatch*"></a>
+  
+  <h4 id="PnP_Core_Model_Teams_ITeamChatMessageCollection_AddBatch_PnP_Core_Services_Batch_System_String_PnP_Core_Model_Teams_ChatMessageContentType_System_String_" data-uid="PnP.Core.Model.Teams.ITeamChatMessageCollection.AddBatch(PnP.Core.Services.Batch,System.String,PnP.Core.Model.Teams.ChatMessageContentType,System.String)"><a href="#collapsible-PnP_Core_Model_Teams_ITeamChatMessageCollection_AddBatch_PnP_Core_Services_Batch_System_String_PnP_Core_Model_Teams_ChatMessageContentType_System_String_" class="expander" data-toggle="collapse">AddBatch(Batch, String, ChatMessageContentType, String)</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_Teams_ITeamChatMessageCollection_AddBatch_PnP_Core_Services_Batch_System_String_PnP_Core_Model_Teams_ChatMessageContentType_System_String_" class="collapse in">
+  <div class="markdown level1 summary"><p>Adds a new channel chat message</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">ITeamChatMessage AddBatch(Batch batch, string content, ChatMessageContentType contentType = ChatMessageContentType.Text, string subject = null)</code></pre>
   </div>
 
   <h5 class="parameters">Parameters</h5>
@@ -358,25 +556,9 @@
     </tr>
     <tr>
       <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Model.Teams.ITeamChatMessageAttachmentCollection.html">ITeamChatMessageAttachmentCollection</a></span>
-        <span class="parametername">attachments</span>
-        <p><p>Attachments within the message</p>
-</p>
-      </td>
-    </tr>
-    <tr>
-      <td>
         <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></span>
         <span class="parametername">subject</span>
-        <p><p>Message subject</p>
-</p>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Model.Teams.ITeamChatMessageHostedContentCollection.html">ITeamChatMessageHostedContentCollection</a></span>
-        <span class="parametername">hostedContents</span>
-        <p><p>Hosted contents for inline content</p>
+        <p><p>Message Subject</p>
 </p>
       </td>
     </tr>
@@ -406,24 +588,24 @@
   
   <span class="small pull-right mobile-hide">
     <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_Teams_ITeamChatMessageCollection_AddBatch_System_String_PnP_Core_Model_Teams_ChatMessageContentType_PnP_Core_Model_Teams_ITeamChatMessageAttachmentCollection_System_String_PnP_Core_Model_Teams_ITeamChatMessageHostedContentCollection_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.Teams.ITeamChatMessageCollection.AddBatch(System.String%2CPnP.Core.Model.Teams.ChatMessageContentType%2CPnP.Core.Model.Teams.ITeamChatMessageAttachmentCollection%2CSystem.String%2CPnP.Core.Model.Teams.ITeamChatMessageHostedContentCollection)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_Teams_ITeamChatMessageCollection_AddBatch_System_String_PnP_Core_Model_Teams_ChatMessageContentType_System_String_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.Teams.ITeamChatMessageCollection.AddBatch(System.String%2CPnP.Core.Model.Teams.ChatMessageContentType%2CSystem.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Teams/Public/ITeamChatMessageCollection.cs/#L80" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Teams/Public/ITeamChatMessageCollection.cs/#L71" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Model_Teams_ITeamChatMessageCollection_AddBatch_" data-uid="PnP.Core.Model.Teams.ITeamChatMessageCollection.AddBatch*"></a>
   
-  <h4 id="PnP_Core_Model_Teams_ITeamChatMessageCollection_AddBatch_System_String_PnP_Core_Model_Teams_ChatMessageContentType_PnP_Core_Model_Teams_ITeamChatMessageAttachmentCollection_System_String_PnP_Core_Model_Teams_ITeamChatMessageHostedContentCollection_" data-uid="PnP.Core.Model.Teams.ITeamChatMessageCollection.AddBatch(System.String,PnP.Core.Model.Teams.ChatMessageContentType,PnP.Core.Model.Teams.ITeamChatMessageAttachmentCollection,System.String,PnP.Core.Model.Teams.ITeamChatMessageHostedContentCollection)"><a href="#collapsible-PnP_Core_Model_Teams_ITeamChatMessageCollection_AddBatch_System_String_PnP_Core_Model_Teams_ChatMessageContentType_PnP_Core_Model_Teams_ITeamChatMessageAttachmentCollection_System_String_PnP_Core_Model_Teams_ITeamChatMessageHostedContentCollection_" class="expander" data-toggle="collapse">AddBatch(String, ChatMessageContentType, ITeamChatMessageAttachmentCollection, String, ITeamChatMessageHostedContentCollection)</a></h4>
+  <h4 id="PnP_Core_Model_Teams_ITeamChatMessageCollection_AddBatch_System_String_PnP_Core_Model_Teams_ChatMessageContentType_System_String_" data-uid="PnP.Core.Model.Teams.ITeamChatMessageCollection.AddBatch(System.String,PnP.Core.Model.Teams.ChatMessageContentType,System.String)"><a href="#collapsible-PnP_Core_Model_Teams_ITeamChatMessageCollection_AddBatch_System_String_PnP_Core_Model_Teams_ChatMessageContentType_System_String_" class="expander" data-toggle="collapse">AddBatch(String, ChatMessageContentType, String)</a></h4>
   
-  <div id="collapsible-PnP_Core_Model_Teams_ITeamChatMessageCollection_AddBatch_System_String_PnP_Core_Model_Teams_ChatMessageContentType_PnP_Core_Model_Teams_ITeamChatMessageAttachmentCollection_System_String_PnP_Core_Model_Teams_ITeamChatMessageHostedContentCollection_" class="collapse in">
+  <div id="collapsible-PnP_Core_Model_Teams_ITeamChatMessageCollection_AddBatch_System_String_PnP_Core_Model_Teams_ChatMessageContentType_System_String_" class="collapse in">
   <div class="markdown level1 summary"><p>Adds a new channel chat message</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">ITeamChatMessage AddBatch(string content, ChatMessageContentType contentType = ChatMessageContentType.Text, ITeamChatMessageAttachmentCollection attachments = null, string subject = null, ITeamChatMessageHostedContentCollection hostedContents = null)</code></pre>
+    <pre><code class="lang-csharp hljs">ITeamChatMessage AddBatch(string content, ChatMessageContentType contentType = ChatMessageContentType.Text, string subject = null)</code></pre>
   </div>
 
   <h5 class="parameters">Parameters</h5>
@@ -446,25 +628,9 @@
     </tr>
     <tr>
       <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Model.Teams.ITeamChatMessageAttachmentCollection.html">ITeamChatMessageAttachmentCollection</a></span>
-        <span class="parametername">attachments</span>
-        <p><p>Attachments within the message</p>
-</p>
-      </td>
-    </tr>
-    <tr>
-      <td>
         <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></span>
         <span class="parametername">subject</span>
-        <p><p>Message subject</p>
-</p>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Model.Teams.ITeamChatMessageHostedContentCollection.html">ITeamChatMessageHostedContentCollection</a></span>
-        <span class="parametername">hostedContents</span>
-        <p><p>Hosted contents for inline content</p>
+        <p><p>Message Subject</p>
 </p>
       </td>
     </tr>
@@ -494,73 +660,33 @@
   
   <span class="small pull-right mobile-hide">
     <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_Teams_ITeamChatMessageCollection_AddBatchAsync_PnP_Core_Services_Batch_System_String_PnP_Core_Model_Teams_ChatMessageContentType_PnP_Core_Model_Teams_ITeamChatMessageAttachmentCollection_System_String_PnP_Core_Model_Teams_ITeamChatMessageHostedContentCollection_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.Teams.ITeamChatMessageCollection.AddBatchAsync(PnP.Core.Services.Batch%2CSystem.String%2CPnP.Core.Model.Teams.ChatMessageContentType%2CPnP.Core.Model.Teams.ITeamChatMessageAttachmentCollection%2CSystem.String%2CPnP.Core.Model.Teams.ITeamChatMessageHostedContentCollection)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_Teams_ITeamChatMessageCollection_AddBatchAsync_PnP_Core_Model_Teams_ChatMessageOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.Teams.ITeamChatMessageCollection.AddBatchAsync(PnP.Core.Model.Teams.ChatMessageOptions)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Teams/Public/ITeamChatMessageCollection.cs/#L46" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Teams/Public/ITeamChatMessageCollection.cs/#L114" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Model_Teams_ITeamChatMessageCollection_AddBatchAsync_" data-uid="PnP.Core.Model.Teams.ITeamChatMessageCollection.AddBatchAsync*"></a>
   
-  <h4 id="PnP_Core_Model_Teams_ITeamChatMessageCollection_AddBatchAsync_PnP_Core_Services_Batch_System_String_PnP_Core_Model_Teams_ChatMessageContentType_PnP_Core_Model_Teams_ITeamChatMessageAttachmentCollection_System_String_PnP_Core_Model_Teams_ITeamChatMessageHostedContentCollection_" data-uid="PnP.Core.Model.Teams.ITeamChatMessageCollection.AddBatchAsync(PnP.Core.Services.Batch,System.String,PnP.Core.Model.Teams.ChatMessageContentType,PnP.Core.Model.Teams.ITeamChatMessageAttachmentCollection,System.String,PnP.Core.Model.Teams.ITeamChatMessageHostedContentCollection)"><a href="#collapsible-PnP_Core_Model_Teams_ITeamChatMessageCollection_AddBatchAsync_PnP_Core_Services_Batch_System_String_PnP_Core_Model_Teams_ChatMessageContentType_PnP_Core_Model_Teams_ITeamChatMessageAttachmentCollection_System_String_PnP_Core_Model_Teams_ITeamChatMessageHostedContentCollection_" class="expander" data-toggle="collapse">AddBatchAsync(Batch, String, ChatMessageContentType, ITeamChatMessageAttachmentCollection, String, ITeamChatMessageHostedContentCollection)</a></h4>
+  <h4 id="PnP_Core_Model_Teams_ITeamChatMessageCollection_AddBatchAsync_PnP_Core_Model_Teams_ChatMessageOptions_" data-uid="PnP.Core.Model.Teams.ITeamChatMessageCollection.AddBatchAsync(PnP.Core.Model.Teams.ChatMessageOptions)"><a href="#collapsible-PnP_Core_Model_Teams_ITeamChatMessageCollection_AddBatchAsync_PnP_Core_Model_Teams_ChatMessageOptions_" class="expander" data-toggle="collapse">AddBatchAsync(ChatMessageOptions)</a></h4>
   
-  <div id="collapsible-PnP_Core_Model_Teams_ITeamChatMessageCollection_AddBatchAsync_PnP_Core_Services_Batch_System_String_PnP_Core_Model_Teams_ChatMessageContentType_PnP_Core_Model_Teams_ITeamChatMessageAttachmentCollection_System_String_PnP_Core_Model_Teams_ITeamChatMessageHostedContentCollection_" class="collapse in">
+  <div id="collapsible-PnP_Core_Model_Teams_ITeamChatMessageCollection_AddBatchAsync_PnP_Core_Model_Teams_ChatMessageOptions_" class="collapse in">
   <div class="markdown level1 summary"><p>Adds a new channel chat message</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">Task&lt;ITeamChatMessage&gt; AddBatchAsync(Batch batch, string content, ChatMessageContentType contentType = ChatMessageContentType.Text, ITeamChatMessageAttachmentCollection attachments = null, string subject = null, ITeamChatMessageHostedContentCollection hostedContents = null)</code></pre>
+    <pre><code class="lang-csharp hljs">Task&lt;ITeamChatMessage&gt; AddBatchAsync(ChatMessageOptions options)</code></pre>
   </div>
 
   <h5 class="parameters">Parameters</h5>
   <table>
     <tr>
       <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></span>
-        <span class="parametername">batch</span>
-        <p><p>Batch the message is associated with</p>
-</p>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></span>
-        <span class="parametername">content</span>
-        <p><p>Content of the message</p>
-</p>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Model.Teams.ChatMessageContentType.html">ChatMessageContentType</a></span>
-        <span class="parametername">contentType</span>
-        <p><p>Message content type e.g. Text, Html</p>
-</p>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Model.Teams.ITeamChatMessageAttachmentCollection.html">ITeamChatMessageAttachmentCollection</a></span>
-        <span class="parametername">attachments</span>
-        <p><p>Attachments within the message</p>
-</p>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></span>
-        <span class="parametername">subject</span>
-        <p><p>Message subject</p>
-</p>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Model.Teams.ITeamChatMessageHostedContentCollection.html">ITeamChatMessageHostedContentCollection</a></span>
-        <span class="parametername">hostedContents</span>
-        <p><p>Hosted contents for inline content</p>
+        <span class="pull-right"><a class="xref" href="PnP.Core.Model.Teams.ChatMessageOptions.html">ChatMessageOptions</a></span>
+        <span class="parametername">options</span>
+        <p><p>Full chat message options</p>
 </p>
       </td>
     </tr>
@@ -590,24 +716,168 @@
   
   <span class="small pull-right mobile-hide">
     <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_Teams_ITeamChatMessageCollection_AddBatchAsync_System_String_PnP_Core_Model_Teams_ChatMessageContentType_PnP_Core_Model_Teams_ITeamChatMessageAttachmentCollection_System_String_PnP_Core_Model_Teams_ITeamChatMessageHostedContentCollection_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.Teams.ITeamChatMessageCollection.AddBatchAsync(System.String%2CPnP.Core.Model.Teams.ChatMessageContentType%2CPnP.Core.Model.Teams.ITeamChatMessageAttachmentCollection%2CSystem.String%2CPnP.Core.Model.Teams.ITeamChatMessageHostedContentCollection)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_Teams_ITeamChatMessageCollection_AddBatchAsync_PnP_Core_Services_Batch_PnP_Core_Model_Teams_ChatMessageOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.Teams.ITeamChatMessageCollection.AddBatchAsync(PnP.Core.Services.Batch%2CPnP.Core.Model.Teams.ChatMessageOptions)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Teams/Public/ITeamChatMessageCollection.cs/#L69" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Teams/Public/ITeamChatMessageCollection.cs/#L99" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Model_Teams_ITeamChatMessageCollection_AddBatchAsync_" data-uid="PnP.Core.Model.Teams.ITeamChatMessageCollection.AddBatchAsync*"></a>
   
-  <h4 id="PnP_Core_Model_Teams_ITeamChatMessageCollection_AddBatchAsync_System_String_PnP_Core_Model_Teams_ChatMessageContentType_PnP_Core_Model_Teams_ITeamChatMessageAttachmentCollection_System_String_PnP_Core_Model_Teams_ITeamChatMessageHostedContentCollection_" data-uid="PnP.Core.Model.Teams.ITeamChatMessageCollection.AddBatchAsync(System.String,PnP.Core.Model.Teams.ChatMessageContentType,PnP.Core.Model.Teams.ITeamChatMessageAttachmentCollection,System.String,PnP.Core.Model.Teams.ITeamChatMessageHostedContentCollection)"><a href="#collapsible-PnP_Core_Model_Teams_ITeamChatMessageCollection_AddBatchAsync_System_String_PnP_Core_Model_Teams_ChatMessageContentType_PnP_Core_Model_Teams_ITeamChatMessageAttachmentCollection_System_String_PnP_Core_Model_Teams_ITeamChatMessageHostedContentCollection_" class="expander" data-toggle="collapse">AddBatchAsync(String, ChatMessageContentType, ITeamChatMessageAttachmentCollection, String, ITeamChatMessageHostedContentCollection)</a></h4>
+  <h4 id="PnP_Core_Model_Teams_ITeamChatMessageCollection_AddBatchAsync_PnP_Core_Services_Batch_PnP_Core_Model_Teams_ChatMessageOptions_" data-uid="PnP.Core.Model.Teams.ITeamChatMessageCollection.AddBatchAsync(PnP.Core.Services.Batch,PnP.Core.Model.Teams.ChatMessageOptions)"><a href="#collapsible-PnP_Core_Model_Teams_ITeamChatMessageCollection_AddBatchAsync_PnP_Core_Services_Batch_PnP_Core_Model_Teams_ChatMessageOptions_" class="expander" data-toggle="collapse">AddBatchAsync(Batch, ChatMessageOptions)</a></h4>
   
-  <div id="collapsible-PnP_Core_Model_Teams_ITeamChatMessageCollection_AddBatchAsync_System_String_PnP_Core_Model_Teams_ChatMessageContentType_PnP_Core_Model_Teams_ITeamChatMessageAttachmentCollection_System_String_PnP_Core_Model_Teams_ITeamChatMessageHostedContentCollection_" class="collapse in">
+  <div id="collapsible-PnP_Core_Model_Teams_ITeamChatMessageCollection_AddBatchAsync_PnP_Core_Services_Batch_PnP_Core_Model_Teams_ChatMessageOptions_" class="collapse in">
   <div class="markdown level1 summary"><p>Adds a new channel chat message</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">Task&lt;ITeamChatMessage&gt; AddBatchAsync(string content, ChatMessageContentType contentType = ChatMessageContentType.Text, ITeamChatMessageAttachmentCollection attachments = null, string subject = null, ITeamChatMessageHostedContentCollection hostedContents = null)</code></pre>
+    <pre><code class="lang-csharp hljs">Task&lt;ITeamChatMessage&gt; AddBatchAsync(Batch batch, ChatMessageOptions options)</code></pre>
+  </div>
+
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></span>
+        <span class="parametername">batch</span>
+        <p><p>Batch the message is associated with</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="PnP.Core.Model.Teams.ChatMessageOptions.html">ChatMessageOptions</a></span>
+        <span class="parametername">options</span>
+        <p><p>Full chat message options</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="xref">Task</span>&lt;<a class="xref" href="PnP.Core.Model.Teams.ITeamChatMessage.html">ITeamChatMessage</a>&gt;
+        <p><p>Newly added channel chat message</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_Teams_ITeamChatMessageCollection_AddBatchAsync_PnP_Core_Services_Batch_System_String_PnP_Core_Model_Teams_ChatMessageContentType_System_String_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.Teams.ITeamChatMessageCollection.AddBatchAsync(PnP.Core.Services.Batch%2CSystem.String%2CPnP.Core.Model.Teams.ChatMessageContentType%2CSystem.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Teams/Public/ITeamChatMessageCollection.cs/#L43" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_Teams_ITeamChatMessageCollection_AddBatchAsync_" data-uid="PnP.Core.Model.Teams.ITeamChatMessageCollection.AddBatchAsync*"></a>
+  
+  <h4 id="PnP_Core_Model_Teams_ITeamChatMessageCollection_AddBatchAsync_PnP_Core_Services_Batch_System_String_PnP_Core_Model_Teams_ChatMessageContentType_System_String_" data-uid="PnP.Core.Model.Teams.ITeamChatMessageCollection.AddBatchAsync(PnP.Core.Services.Batch,System.String,PnP.Core.Model.Teams.ChatMessageContentType,System.String)"><a href="#collapsible-PnP_Core_Model_Teams_ITeamChatMessageCollection_AddBatchAsync_PnP_Core_Services_Batch_System_String_PnP_Core_Model_Teams_ChatMessageContentType_System_String_" class="expander" data-toggle="collapse">AddBatchAsync(Batch, String, ChatMessageContentType, String)</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_Teams_ITeamChatMessageCollection_AddBatchAsync_PnP_Core_Services_Batch_System_String_PnP_Core_Model_Teams_ChatMessageContentType_System_String_" class="collapse in">
+  <div class="markdown level1 summary"><p>Adds a new channel chat message</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task&lt;ITeamChatMessage&gt; AddBatchAsync(Batch batch, string content, ChatMessageContentType contentType = ChatMessageContentType.Text, string subject = null)</code></pre>
+  </div>
+
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></span>
+        <span class="parametername">batch</span>
+        <p><p>Batch the message is associated with</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></span>
+        <span class="parametername">content</span>
+        <p><p>Content of the message</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="PnP.Core.Model.Teams.ChatMessageContentType.html">ChatMessageContentType</a></span>
+        <span class="parametername">contentType</span>
+        <p><p>Message content type e.g. Text, Html</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></span>
+        <span class="parametername">subject</span>
+        <p><p>Message Subject</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="xref">Task</span>&lt;<a class="xref" href="PnP.Core.Model.Teams.ITeamChatMessage.html">ITeamChatMessage</a>&gt;
+        <p><p>Newly added channel chat message</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_Teams_ITeamChatMessageCollection_AddBatchAsync_System_String_PnP_Core_Model_Teams_ChatMessageContentType_System_String_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.Teams.ITeamChatMessageCollection.AddBatchAsync(System.String%2CPnP.Core.Model.Teams.ChatMessageContentType%2CSystem.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Teams/Public/ITeamChatMessageCollection.cs/#L62" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_Teams_ITeamChatMessageCollection_AddBatchAsync_" data-uid="PnP.Core.Model.Teams.ITeamChatMessageCollection.AddBatchAsync*"></a>
+  
+  <h4 id="PnP_Core_Model_Teams_ITeamChatMessageCollection_AddBatchAsync_System_String_PnP_Core_Model_Teams_ChatMessageContentType_System_String_" data-uid="PnP.Core.Model.Teams.ITeamChatMessageCollection.AddBatchAsync(System.String,PnP.Core.Model.Teams.ChatMessageContentType,System.String)"><a href="#collapsible-PnP_Core_Model_Teams_ITeamChatMessageCollection_AddBatchAsync_System_String_PnP_Core_Model_Teams_ChatMessageContentType_System_String_" class="expander" data-toggle="collapse">AddBatchAsync(String, ChatMessageContentType, String)</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_Teams_ITeamChatMessageCollection_AddBatchAsync_System_String_PnP_Core_Model_Teams_ChatMessageContentType_System_String_" class="collapse in">
+  <div class="markdown level1 summary"><p>Adds a new channel chat message</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task&lt;ITeamChatMessage&gt; AddBatchAsync(string content, ChatMessageContentType contentType = ChatMessageContentType.Text, string subject = null)</code></pre>
   </div>
 
   <h5 class="parameters">Parameters</h5>
@@ -630,25 +900,9 @@
     </tr>
     <tr>
       <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Model.Teams.ITeamChatMessageAttachmentCollection.html">ITeamChatMessageAttachmentCollection</a></span>
-        <span class="parametername">attachments</span>
-        <p><p>Attachments within the message</p>
-</p>
-      </td>
-    </tr>
-    <tr>
-      <td>
         <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></span>
         <span class="parametername">subject</span>
-        <p><p>Message subject</p>
-</p>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Model.Teams.ITeamChatMessageHostedContentCollection.html">ITeamChatMessageHostedContentCollection</a></span>
-        <span class="parametername">hostedContents</span>
-        <p><p>Hosted contents for inline content</p>
+        <p><p>Message Subject</p>
 </p>
       </td>
     </tr>

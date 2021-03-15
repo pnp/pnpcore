@@ -2690,6 +2690,18 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.Teams.ChatMessageAttachmentOptions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.Teams.ChatMessageAttachmentOptions.html",
+          "hash": "rhW4VyYZB4+FBOZDwuSnDQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/PnP.Core.Model.Teams.ChatMessageContentType.yml",
       "output": {
         ".html": {
@@ -2702,11 +2714,35 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.Teams.ChatMessageHostedContentOptions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.Teams.ChatMessageHostedContentOptions.html",
+          "hash": "Ziw24dDFjyM3aIdvEvxm1g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/PnP.Core.Model.Teams.ChatMessageImportance.yml",
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.Teams.ChatMessageImportance.html",
           "hash": "fK+/m/Dq8kN9yNmiswKwhg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.Teams.ChatMessageOptions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.Teams.ChatMessageOptions.html",
+          "hash": "1ahf5Y00WRa+4CXRuDnIcA=="
         }
       },
       "is_incremental": false,
@@ -2886,7 +2922,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.Teams.ITeamChatMessageCollection.html",
-          "hash": "VPqyl8/imuTqu2xrQFf83w=="
+          "hash": "fVk7wphdBV/O/qX3lzzz8g=="
         }
       },
       "is_incremental": false,
@@ -3126,7 +3162,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.Teams.html",
-          "hash": "3Q7NMq51bwN3oCbvwnjpUg=="
+          "hash": "1n0c+bSsPjnKoqIuptV+fA=="
         }
       },
       "is_incremental": false,
@@ -3714,7 +3750,7 @@
       "output": {
         ".html": {
           "relative_path": "api/toc.html",
-          "hash": "aRjzbDqTVGZTqRDlSEx9oQ=="
+          "hash": "q8NmpPZ/vYRuGOlerhaxdg=="
         }
       },
       "is_incremental": false,
@@ -4627,7 +4663,7 @@
       "output": {
         ".html": {
           "relative_path": "using-the-sdk/teams-channel-chat.html",
-          "hash": "RyKdqTlPqPAr+fzyX/XbSQ=="
+          "hash": "DoSBhQ6yva4t+VUS3SVfFQ=="
         }
       },
       "is_incremental": false,
@@ -4726,7 +4762,7 @@
         "ManagedReferenceDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build",
-          "total_file_count": 307,
+          "total_file_count": 310,
           "skipped_file_count": 0
         },
         "ResourceDocumentProcessor": {

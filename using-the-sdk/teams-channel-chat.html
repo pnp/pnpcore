@@ -163,22 +163,22 @@ var body = $&quot;&lt;h1&gt;Hello&lt;/h1&gt;&lt;br /&gt;Example posting a messag
 
 var fileUri = new Uri(existingFile.LinkingUrl);
 
-ITeamChatMessageAttachmentCollection coll = new TeamChatMessageAttachmentCollection
-{
-    new TeamChatMessageAttachment
-    {
-        Id = attachmentId,
-        ContentType = &quot;reference&quot;,
-        // Cannot have the extension with a query graph doesn't recognise and think its part of file extension - include in docs.
-        ContentUrl = new Uri(fileUri.ToString().Replace(fileUri.Query, &quot;&quot;)),
-        Name = existingFile.Name,
-        ThumbnailUrl = null,
-        Content = null
+await chatMessages.AddAsync(new ChatMessageOptions{
+    Content = body,
+    ContentType = ChatMessageContentType.Html,
+    Attachments = {
+        new ChatMessageAttachmentOptions
+        {
+            Id = attachmentId,
+            ContentType = &quot;reference&quot;,
+            // Cannot have the extension with a query graph doesn't recognise and think its part of file extension - include in docs.
+            ContentUrl = new Uri(fileUri.ToString().Replace(fileUri.Query, &quot;&quot;)),
+            Name = $&quot;{existingFile.Name}&quot;,
+            ThumbnailUrl = null,
+            Content = null
+        }
     }
-};
-
-// Add Message to the Chat
-await chatMessages.AddAsync(body, ChatMessageContentType.Html, coll);
+});
 </code></pre>
 <p>For advanced information about the specific area of the Graph that handles sending messages with attachments visit:
 <a href="https://docs.microsoft.com/en-us/graph/api/chatmessage-post?view=graph-rest-beta&amp;tabs=http#example-4-file-attachments">https://docs.microsoft.com/en-us/graph/api/chatmessage-post?view=graph-rest-beta&amp;tabs=http#example-4-file-attachments</a></p>
@@ -205,21 +205,23 @@ var chatMessages = channel.Messages;
 var attachmentId = &quot;74d20c7f34aa4a7fb74e2b30004247c5&quot;;
 var body = $&quot;&lt;attachment id=\&quot;{attachmentId}\&quot;&gt;&lt;/attachment&gt;&quot;;
 
-ITeamChatMessageAttachmentCollection coll = new TeamChatMessageAttachmentCollection
+await chatMessages.AddAsync(new ChatMessageOptions
 {
-    new TeamChatMessageAttachment
-    {
-        Id = attachmentId,
-        ContentType = &quot;application/vnd.microsoft.card.adaptive&quot;,
-        // Adaptive Card
-        Content = &quot;{\&quot;$schema\&quot;:\&quot;http://adaptivecards.io/schemas/adaptive-card.json\&quot;,\&quot;type\&quot;:\&quot;AdaptiveCard\&quot;,\&quot;version\&quot;:\&quot;1.0\&quot;,\&quot;body\&quot;:[{\&quot;type\&quot;:\&quot;Container\&quot;,\&quot;items\&quot;:[{\&quot;type\&quot;:\&quot;TextBlock\&quot;,\&quot;text\&quot;:\&quot;Adaptive Card Example\&quot;,\&quot;weight\&quot;:\&quot;bolder\&quot;,\&quot;size\&quot;:\&quot;medium\&quot;},{\&quot;type\&quot;:\&quot;ColumnSet\&quot;,\&quot;columns\&quot;:[{\&quot;type\&quot;:\&quot;Column\&quot;,\&quot;width\&quot;:\&quot;auto\&quot;,\&quot;items\&quot;:[{\&quot;type\&quot;:\&quot;Image\&quot;,\&quot;url\&quot;:\&quot;https://pbs.twimg.com/profile_images/3647943215/d7f12830b3c17a5a9e4afcc370e3a37e_400x400.jpeg\&quot;,\&quot;size\&quot;:\&quot;small\&quot;,\&quot;style\&quot;:\&quot;person\&quot;}]},{\&quot;type\&quot;:\&quot;Column\&quot;,\&quot;width\&quot;:\&quot;stretch\&quot;,\&quot;items\&quot;:[{\&quot;type\&quot;:\&quot;TextBlock\&quot;,\&quot;text\&quot;:\&quot;Matt Hidinger\&quot;,\&quot;weight\&quot;:\&quot;bolder\&quot;,\&quot;wrap\&quot;:true},{\&quot;type\&quot;:\&quot;TextBlock\&quot;,\&quot;spacing\&quot;:\&quot;none\&quot;,\&quot;text\&quot;:\&quot;Created {{DATE(2017-02-14T06:08:39Z,SHORT)}}\&quot;,\&quot;isSubtle\&quot;:true,\&quot;wrap\&quot;:true}]}]}]},{\&quot;type\&quot;:\&quot;Container\&quot;,\&quot;items\&quot;:[{\&quot;type\&quot;:\&quot;TextBlock\&quot;,\&quot;text\&quot;:\&quot;Now that we have defined the main rule sand features of the format ,we need to produce a schema and publish it to GitHub.The schema will be the starting point of our reference documentation.\&quot;,\&quot;wrap\&quot;:true},{\&quot;type\&quot;:\&quot;FactSet\&quot;,\&quot;facts\&quot;:[{\&quot;title\&quot;:\&quot;Board:\&quot;,\&quot;value\&quot;:\&quot;Adaptive Card\&quot;},{\&quot;title\&quot;:\&quot;List:\&quot;,\&quot;value\&quot;:\&quot;Backlog\&quot;},{\&quot;title\&quot;:\&quot;Assigned to:\&quot;,\&quot;value\&quot;:\&quot;Matt Hidinger\&quot;},{\&quot;title\&quot;:\&quot;Duedate:\&quot;,\&quot;value\&quot;:\&quot;Not set\&quot;}]}]}],\&quot;actions\&quot;:[{\&quot;type\&quot;:\&quot;Action.ShowCard\&quot;,\&quot;title\&quot;:\&quot;Set due date\&quot;,\&quot;card\&quot;:{\&quot;type\&quot;:\&quot;AdaptiveCard\&quot;,\&quot;body\&quot;:[{\&quot;type\&quot;:\&quot;Input.Date\&quot;,\&quot;id\&quot;:\&quot;dueDate\&quot;}],\&quot;actions\&quot;:[{\&quot;type\&quot;:\&quot;Action.Submit\&quot;,\&quot;title\&quot;:\&quot;OK\&quot;}]}},{\&quot;type\&quot;:\&quot;Action.ShowCard\&quot;,\&quot;title\&quot;:\&quot;Comment\&quot;,\&quot;card\&quot;:{\&quot;type\&quot;:\&quot;AdaptiveCard\&quot;,\&quot;body\&quot;:[{\&quot;type\&quot;:\&quot;Input.Text\&quot;,\&quot;id\&quot;:\&quot;comment\&quot;,\&quot;isMultiline\&quot;:true,\&quot;placeholder\&quot;:\&quot;Enter your comment\&quot;}],\&quot;actions\&quot;:[{\&quot;type\&quot;:\&quot;Action.Submit\&quot;,\&quot;title\&quot;:\&quot;OK\&quot;}]}}]}&quot;,
-        ContentUrl = null,
-        Name = null,
-        ThumbnailUrl = null
+    Content = body,
+    ContentType = ChatMessageContentType.Html,
+    Attachments = {
+        new ChatMessageAttachmentOptions
+        {
+            Id = attachmentId,
+            ContentType = &quot;application/vnd.microsoft.card.adaptive&quot;,
+            // Adaptive Card
+            Content = &quot;{\&quot;$schema\&quot;:\&quot;http://adaptivecards.io/schemas/adaptive-card.json\&quot;,\&quot;type\&quot;:\&quot;AdaptiveCard\&quot;,\&quot;version\&quot;:\&quot;1.0\&quot;,\&quot;body\&quot;:[{\&quot;type\&quot;:\&quot;Container\&quot;,\&quot;items\&quot;:[{\&quot;type\&quot;:\&quot;TextBlock\&quot;,\&quot;text\&quot;:\&quot;Adaptive Card Unit Test\&quot;,\&quot;weight\&quot;:\&quot;bolder\&quot;,\&quot;size\&quot;:\&quot;medium\&quot;},{\&quot;type\&quot;:\&quot;ColumnSet\&quot;,\&quot;columns\&quot;:[{\&quot;type\&quot;:\&quot;Column\&quot;,\&quot;width\&quot;:\&quot;auto\&quot;,\&quot;items\&quot;:[{\&quot;type\&quot;:\&quot;Image\&quot;,\&quot;url\&quot;:\&quot;https://pbs.twimg.com/profile_images/3647943215/d7f12830b3c17a5a9e4afcc370e3a37e_400x400.jpeg\&quot;,\&quot;size\&quot;:\&quot;small\&quot;,\&quot;style\&quot;:\&quot;person\&quot;}]},{\&quot;type\&quot;:\&quot;Column\&quot;,\&quot;width\&quot;:\&quot;stretch\&quot;,\&quot;items\&quot;:[{\&quot;type\&quot;:\&quot;TextBlock\&quot;,\&quot;text\&quot;:\&quot;Matt Hidinger\&quot;,\&quot;weight\&quot;:\&quot;bolder\&quot;,\&quot;wrap\&quot;:true},{\&quot;type\&quot;:\&quot;TextBlock\&quot;,\&quot;spacing\&quot;:\&quot;none\&quot;,\&quot;text\&quot;:\&quot;Created {{DATE(2017-02-14T06:08:39Z,SHORT)}}\&quot;,\&quot;isSubtle\&quot;:true,\&quot;wrap\&quot;:true}]}]}]},{\&quot;type\&quot;:\&quot;Container\&quot;,\&quot;items\&quot;:[{\&quot;type\&quot;:\&quot;TextBlock\&quot;,\&quot;text\&quot;:\&quot;Now that we have defined the main rule sand features of the format ,we need to produce a schema and publish it to GitHub.The schema will be the starting point of our reference documentation.\&quot;,\&quot;wrap\&quot;:true},{\&quot;type\&quot;:\&quot;FactSet\&quot;,\&quot;facts\&quot;:[{\&quot;title\&quot;:\&quot;Board:\&quot;,\&quot;value\&quot;:\&quot;Adaptive Card\&quot;},{\&quot;title\&quot;:\&quot;List:\&quot;,\&quot;value\&quot;:\&quot;Backlog\&quot;},{\&quot;title\&quot;:\&quot;Assigned to:\&quot;,\&quot;value\&quot;:\&quot;Matt Hidinger\&quot;},{\&quot;title\&quot;:\&quot;Duedate:\&quot;,\&quot;value\&quot;:\&quot;Not set\&quot;}]}]}],\&quot;actions\&quot;:[{\&quot;type\&quot;:\&quot;Action.ShowCard\&quot;,\&quot;title\&quot;:\&quot;Set due date\&quot;,\&quot;card\&quot;:{\&quot;type\&quot;:\&quot;AdaptiveCard\&quot;,\&quot;body\&quot;:[{\&quot;type\&quot;:\&quot;Input.Date\&quot;,\&quot;id\&quot;:\&quot;dueDate\&quot;}],\&quot;actions\&quot;:[{\&quot;type\&quot;:\&quot;Action.Submit\&quot;,\&quot;title\&quot;:\&quot;OK\&quot;}]}},{\&quot;type\&quot;:\&quot;Action.ShowCard\&quot;,\&quot;title\&quot;:\&quot;Comment\&quot;,\&quot;card\&quot;:{\&quot;type\&quot;:\&quot;AdaptiveCard\&quot;,\&quot;body\&quot;:[{\&quot;type\&quot;:\&quot;Input.Text\&quot;,\&quot;id\&quot;:\&quot;comment\&quot;,\&quot;isMultiline\&quot;:true,\&quot;placeholder\&quot;:\&quot;Enter your comment\&quot;}],\&quot;actions\&quot;:[{\&quot;type\&quot;:\&quot;Action.Submit\&quot;,\&quot;title\&quot;:\&quot;OK\&quot;}]}}]}&quot;,
+            ContentUrl = null,
+            Name = null,
+            ThumbnailUrl = null
+        }
     }
-};
-
-await chatMessages.AddAsync(body, ChatMessageContentType.Html, coll);
+});
 
 </code></pre>
 <p>For advanced information about the specific area of the Graph that handles sending messages with cards visit:
@@ -239,17 +241,20 @@ var chatMessages = channel.Messages;
 
 var body = $&quot;&lt;div&gt;&lt;div&gt;&lt;h1&gt;Hello&lt;/h1&gt;&lt;p&gt;Example posting a message with inline image&lt;/p&gt;&lt;div&gt;&lt;span&gt;&lt;img height=\&quot;392\&quot; src=\&quot;../hostedContents/1/$value\&quot; width=\&quot;300\&quot; style=\&quot;vertical-align:bottom; width:300px; height:392px\&quot;&gt;&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&quot;;
                                 
-ITeamChatMessageHostedContentCollection coll = new TeamChatMessageHostedContentCollection
+await chatMessages.AddAsync(new ChatMessageOptions
 {
-    new TeamChatMessageHostedContent
+    Content = body,
+    ContentType = ChatMessageContentType.Html,
+    HostedContents =
     {
-        Id = &quot;1&quot;,
-        ContentBytes = &quot;&lt;base64-encoded bytes&gt;&quot;,
-        ContentType = &quot;image/png&quot;
+        new ChatMessageHostedContentOptions
+        {
+            Id = &quot;1&quot;,
+            ContentBytes = &quot;&lt;base64-encoded bytes&gt;&quot;,
+            ContentType = &quot;image/png&quot;
+        }
     }
-};
-
-await chatMessages.AddAsync(body, ChatMessageContentType.Html, hostedContents: coll);
+});
 </code></pre>
 <p>For advanced information about the specific area of the Graph that handles sending messages with inline images visit:
 <a href="https://docs.microsoft.com/en-us/graph/api/chatmessage-post?view=graph-rest-beta&amp;tabs=http#example-5-sending-inline-images-along-with-the-message">https://docs.microsoft.com/en-us/graph/api/chatmessage-post?view=graph-rest-beta&amp;tabs=http#example-5-sending-inline-images-along-with-the-message</a></p>
