@@ -10,6 +10,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
 ### Added
 
+- Exposed additional Get/Load synchronous and asynchronous extension methods #354 [PaoloPia - Paolo Pialorsi]
+
 ### Changed
 
 - Improved page name normalization (only # are not allowed in modern page names) #353 [Sarah4x - Sarah Wilson]
