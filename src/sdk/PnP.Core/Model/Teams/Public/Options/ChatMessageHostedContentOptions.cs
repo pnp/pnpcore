@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace PnP.Core.Model.Teams
+﻿namespace PnP.Core.Model.Teams
 {
     /// <summary>
     /// Chat Message Hosted Content options
