@@ -541,9 +541,33 @@ namespace PnP.Core.Test.SharePoint
                 Assert.IsTrue(classifyInformation.TargetServerRelativeUrl == testDocument.ServerRelativeUrl);
 
                 // Classify and extract via batch request
-                await testDocument2.ClassifyAndExtractFileBatchAsync();
-                await testDocument3.ClassifyAndExtractFileBatchAsync();
+                var file1BatchResult = await testDocument2.ClassifyAndExtractFileBatchAsync();
+                var file2BatchResult = await testDocument3.ClassifyAndExtractFileBatchAsync();
+                Assert.IsFalse(file1BatchResult.IsAvailable);
+                Assert.IsFalse(file2BatchResult.IsAvailable);
                 var results = await context.ExecuteAsync();
+                Assert.IsTrue(file1BatchResult.IsAvailable);
+                Assert.IsTrue(file2BatchResult.IsAvailable);
+
+                Assert.IsTrue(file1BatchResult.Result.Created != DateTime.MinValue);
+                Assert.IsTrue(file1BatchResult.Result.DeliverDate != DateTime.MinValue);
+                Assert.IsTrue(file1BatchResult.Result.ErrorMessage == null);
+                Assert.IsTrue(file1BatchResult.Result.StatusCode == 0);
+                Assert.IsTrue(file1BatchResult.Result.Status == "ExponentialBackoff");
+                Assert.IsTrue(file1BatchResult.Result.TargetSiteUrl == context.Uri.ToString());
+                Assert.IsTrue(file1BatchResult.Result.TargetWebServerRelativeUrl == context.Web.ServerRelativeUrl);
+                Assert.IsTrue(file1BatchResult.Result.TargetServerRelativeUrl == testDocument2.ServerRelativeUrl);
+
+                Assert.IsTrue(file2BatchResult.Result.Created != DateTime.MinValue);
+                Assert.IsTrue(file2BatchResult.Result.DeliverDate != DateTime.MinValue);
+                Assert.IsTrue(file2BatchResult.Result.ErrorMessage == null);
+                Assert.IsTrue(file2BatchResult.Result.StatusCode == 0);
+                Assert.IsTrue(file2BatchResult.Result.Status == "ExponentialBackoff");
+                Assert.IsTrue(file2BatchResult.Result.TargetSiteUrl == context.Uri.ToString());
+                Assert.IsTrue(file2BatchResult.Result.TargetWebServerRelativeUrl == context.Web.ServerRelativeUrl);
+                Assert.IsTrue(file2BatchResult.Result.TargetServerRelativeUrl == testDocument3.ServerRelativeUrl);
+
+                // Review the batch results
 
                 // unpublish model from library
                 var unpublishResult = await modelToRegister.UnPublishModelAsync(testLibrary);

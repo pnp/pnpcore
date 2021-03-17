@@ -12,6 +12,8 @@ namespace PnP.Core.Model.SharePoint
     [ConcreteType(typeof(File))]
     public interface IFile : IDataModel<IFile>, IDataModelGet<IFile>, IDataModelLoad<IFile>, IDataModelUpdate, IDataModelDelete, IQueryableDataModel
     {
+        #region Properties
+
         /// <summary>
         /// Returns the comment that was specified when the document was checked into the document library
         /// </summary>
@@ -181,6 +183,8 @@ namespace PnP.Core.Model.SharePoint
         /// Gets a value that returns the last user who has modified the file.
         /// </summary>
         public ISharePointUser ModifiedBy { get; }
+
+        #endregion
 
         #region GetContent
         /// <summary>
@@ -566,26 +570,26 @@ namespace PnP.Core.Model.SharePoint
         /// </summary>
         /// <param name="batch">Batch to add this request to</param>
         /// <returns>Information about the classify and extract request</returns>
-        Task ClassifyAndExtractFileBatchAsync(Batch batch);
+        Task<IBatchSingleResult<ISyntexClassifyAndExtractResult>> ClassifyAndExtractFileBatchAsync(Batch batch);
 
         /// <summary>
         /// Requests Syntex AI models to classify and extract information from this file 
         /// </summary>
         /// <param name="batch">Batch to add this request to</param>
         /// <returns>Information about the classify and extract request</returns>
-        void ClassifyAndExtractFileBatch(Batch batch);
+        IBatchSingleResult<ISyntexClassifyAndExtractResult> ClassifyAndExtractFileBatch(Batch batch);
 
         /// <summary>
         /// Requests Syntex AI models to classify and extract information from this file 
         /// </summary>
         /// <returns>Information about the classify and extract request</returns>
-        Task ClassifyAndExtractFileBatchAsync();
+        Task<IBatchSingleResult<ISyntexClassifyAndExtractResult>> ClassifyAndExtractFileBatchAsync();
 
         /// <summary>
         /// Requests Syntex AI models to classify and extract information from this file 
         /// </summary>
         /// <returns>Information about the classify and extract request</returns>
-        void ClassifyAndExtractFileBatch();
+        IBatchSingleResult<ISyntexClassifyAndExtractResult> ClassifyAndExtractFileBatch();
         #endregion
     }
 }
