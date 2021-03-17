@@ -618,9 +618,12 @@ namespace PnP.Core.Test.SharePoint
                 }
 
                 // recycle the list
-                await myList.RecycleBatchAsync();
+                var recycleBatchResult = await myList.RecycleBatchAsync();
+                Assert.IsFalse(recycleBatchResult.IsAvailable);
                 // Execute the batch
                 await context.ExecuteAsync();
+                Assert.IsTrue(recycleBatchResult.IsAvailable);
+                Assert.AreNotEqual(Guid.Empty, recycleBatchResult.Result.Value);
 
                 // The recycled list should have been deleted from the lists collection
                 Assert.IsTrue(web.Lists.Length == listCount);

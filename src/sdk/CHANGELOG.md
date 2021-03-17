@@ -18,7 +18,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
 ### Changed
 
-- Added output for RecycleBatch methods [jansenbe - Bert Jansen]
+- Added output for RecycleBatch methods on List, ListItem and File [jansenbe - Bert Jansen]
 - Fix bug in EnsureFolder: running this method when the folder structure existed tried to create the folder again [jansenbe - Bert Jansen]
 - Improved page name normalization (only # are not allowed in modern page names) #353 [Sarah4x - Sarah Wilson]
 - Uplifted samples to GA v1.0.0 #350 [pkbullock - Paul Bullock]

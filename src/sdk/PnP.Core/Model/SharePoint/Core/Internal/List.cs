@@ -249,40 +249,52 @@ namespace PnP.Core.Model.SharePoint
 
             if (!string.IsNullOrEmpty(response.Json))
             {
-                var document = JsonSerializer.Deserialize<JsonElement>(response.Json);
-                if (document.TryGetProperty("d", out JsonElement root))
-                {
-                    if (root.TryGetProperty("Recycle", out JsonElement recycleBinItemId))
-                    {
-                        // return the recyclebin item id
-                        return recycleBinItemId.GetGuid();
-                    }
-                }
+                return ParseRecycleResponse(response.Json);
             }
 
             return Guid.Empty;
         }
 
-        public void RecycleBatch()
+        private static Guid ParseRecycleResponse(string json)
         {
-            RecycleBatchAsync().GetAwaiter().GetResult();
+            var document = JsonSerializer.Deserialize<JsonElement>(json);
+            if (document.TryGetProperty("d", out JsonElement root))
+            {
+                if (root.TryGetProperty("Recycle", out JsonElement recycleBinItemId))
+                {
+                    // return the recyclebin item id
+                    return recycleBinItemId.GetGuid();
+                }
+            }
+            return Guid.Empty;
         }
 
-        public async Task RecycleBatchAsync()
+        public IBatchSingleResult<BatchResultValue<Guid>> RecycleBatch()
         {
-            await RecycleBatchAsync(PnPContext.CurrentBatch).ConfigureAwait(false);
+            return RecycleBatchAsync().GetAwaiter().GetResult();
         }
 
-        public void RecycleBatch(Batch batch)
+        public async Task<IBatchSingleResult<BatchResultValue<Guid>>> RecycleBatchAsync()
         {
-            RecycleBatchAsync(batch).GetAwaiter().GetResult();
+            return await RecycleBatchAsync(PnPContext.CurrentBatch).ConfigureAwait(false);
         }
 
-        public async Task RecycleBatchAsync(Batch batch)
+        public IBatchSingleResult<BatchResultValue<Guid>> RecycleBatch(Batch batch)
+        {
+            return RecycleBatchAsync(batch).GetAwaiter().GetResult();
+        }
+
+        public async Task<IBatchSingleResult<BatchResultValue<Guid>>> RecycleBatchAsync(Batch batch)
         {
             ApiCall apiCall = GetRecycleApiCall();
+            apiCall.RawSingleResult = new BatchResultValue<Guid>(Guid.Empty);
+            apiCall.RawResultsHandler = (json, apiCall) =>
+            {
+                (apiCall.RawSingleResult as BatchResultValue<Guid>).Value = ParseRecycleResponse(json);
+            };
 
-            await RawRequestBatchAsync(batch, apiCall, HttpMethod.Post).ConfigureAwait(false);
+            var batchRequest = await RawRequestBatchAsync(batch, apiCall, HttpMethod.Post).ConfigureAwait(false);
+            return new BatchSingleResult<BatchResultValue<Guid>>(batch, batchRequest.Id, apiCall.RawSingleResult as BatchResultValue<Guid>);
         }
 
         private ApiCall GetRecycleApiCall()

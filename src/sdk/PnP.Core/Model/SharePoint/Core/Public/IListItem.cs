@@ -301,27 +301,27 @@ namespace PnP.Core.Model.SharePoint
         /// Recycle the current item
         /// </summary>
         /// <returns></returns>
-        public void RecycleBatch();
+        public IBatchSingleResult<BatchResultValue<Guid>> RecycleBatch();
 
         /// <summary>
         /// Recycle the current item
         /// </summary>
         /// <returns></returns>
-        public Task RecycleBatchAsync();
-
-        /// <summary>
-        /// Recycle the current item
-        /// </summary>
-        /// <param name="batch">Batch to add the request to</param>
-        /// <returns></returns>
-        public void RecycleBatch(Batch batch);
+        public Task<IBatchSingleResult<BatchResultValue<Guid>>> RecycleBatchAsync();
 
         /// <summary>
         /// Recycle the current item
         /// </summary>
         /// <param name="batch">Batch to add the request to</param>
         /// <returns></returns>
-        public Task RecycleBatchAsync(Batch batch);
+        public IBatchSingleResult<BatchResultValue<Guid>> RecycleBatch(Batch batch);
+
+        /// <summary>
+        /// Recycle the current item
+        /// </summary>
+        /// <param name="batch">Batch to add the request to</param>
+        /// <returns></returns>
+        public Task<IBatchSingleResult<BatchResultValue<Guid>>> RecycleBatchAsync(Batch batch);
         #endregion
 
         #region Permissions
