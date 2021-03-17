@@ -18,6 +18,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
 ### Changed
 
+- Fix bug in EnsureFolder: running this method when the folder structure existed tried to create the folder again [jansenbe - Bert Jansen]
 - Improved page name normalization (only # are not allowed in modern page names) #353 [Sarah4x - Sarah Wilson]
 - Uplifted samples to GA v1.0.0 #350 [pkbullock - Paul Bullock]
 - Bug fix for issue #351 - Teams Chat Messages not working [pkbullock - Paul Bullock]
