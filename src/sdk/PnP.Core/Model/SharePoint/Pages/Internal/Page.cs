@@ -1967,8 +1967,28 @@ namespace PnP.Core.Model.SharePoint
         {
             if (PageListItem != null)
             {
-                var pageFile = await PnPContext.Web.GetFileByServerRelativeUrlAsync($"{PageListItem[PageConstants.FileDirRef]}/{PageListItem[PageConstants.FileLeafRef]}").ConfigureAwait(false);
-                await pageFile.PublishAsync().ConfigureAwait(false);
+                var pageFile = await PnPContext.Web.GetFileByServerRelativeUrlAsync($"{PageListItem[PageConstants.FileDirRef]}/{PageListItem[PageConstants.FileLeafRef]}", f => f.ListId, f => f.Exists, f => f.CheckOutType).ConfigureAwait(false);
+                if (pageFile.Exists)
+                {
+                    var sitePagesLibrary = await PnPContext.Web.Lists.GetByIdAsync(pageFile.ListId,
+                        l => l.EnableMinorVersions,
+                        l => l.EnableModeration,
+                        l => l.ForceCheckout).ConfigureAwait(false);
+
+                    if (pageFile.CheckOutType != CheckOutType.None)
+                    { //needs checkin
+                        await pageFile.CheckinAsync("Checked in by provisioning", sitePagesLibrary.EnableMinorVersions ? CheckinType.MinorCheckIn : CheckinType.MajorCheckIn).ConfigureAwait(false);
+                    }
+                    if (sitePagesLibrary.EnableMinorVersions)
+                    { //Publishing
+                        await pageFile.PublishAsync().ConfigureAwait(false);
+                    }
+
+                    if (sitePagesLibrary.EnableModeration)
+                    { //Approval - missing since i know only the uggly way with ListItem Update OData__ModerationStatus=0
+                      //pageFile.Approve("Approved by provisioning").ConfigureAwait(false);
+                    }
+                }
             }
             else
             {
