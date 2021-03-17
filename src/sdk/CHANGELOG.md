@@ -10,6 +10,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
 ### Added
 
+- Added Batch methods for SyntexModel.GetModelPublications, SyntexModel.SyntexModel.PublishModel and SyntexModel.UnPublishModel [jansenbe - Bert Jansen]
+- Support for processing result(s) when using one of the RawRequestBatch methods (see SyntexModel.GetModelPublicationsBatchAsync and SyntexModel.PublishModelBatchAsync as examples) [jansenbe - Bert Jansen]
 - Support to request for classifying and extracting of a file via the connected Syntex models [jansenbe - Bert Jansen]
 - Exposed additional Get/Load synchronous and asynchronous extension methods #354 [PaoloPia - Paolo Pialorsi]
 

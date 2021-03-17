@@ -6,7 +6,6 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Net.Http;
 using System.Runtime.CompilerServices;
-using System.Threading;
 using System.Threading.Tasks;
 
 namespace PnP.Core.Model
@@ -921,7 +920,7 @@ namespace PnP.Core.Model
         /// <param name="apiCall">Api call to execute</param>
         /// <param name="method"><see cref="HttpMethod"/> to use for this request</param>
         /// <param name="operationName">Name of the operation, used for telemetry purposes</param>
-        internal Task RawRequestBatchAsync(ApiCall apiCall, HttpMethod method, [CallerMemberName] string operationName = null)
+        internal Task<BatchRequest> RawRequestBatchAsync(ApiCall apiCall, HttpMethod method, [CallerMemberName] string operationName = null)
         {
             // TODO: Can we consolidate this one with the next one?
 
@@ -935,7 +934,7 @@ namespace PnP.Core.Model
         /// <param name="apiCall">Api call to execute</param>
         /// <param name="method"><see cref="HttpMethod"/> to use for this request</param>
         /// <param name="operationName">Name of the operation, used for telemetry purposes</param>
-        internal async Task RawRequestBatchAsync(Batch batch, ApiCall apiCall, HttpMethod method, [CallerMemberName] string operationName = null)
+        internal async Task<BatchRequest> RawRequestBatchAsync(Batch batch, ApiCall apiCall, HttpMethod method, [CallerMemberName] string operationName = null)
         {
             // TODO: Can we consolidate this one with the previous one?
 
@@ -951,7 +950,7 @@ namespace PnP.Core.Model
             // Ensure there's no Graph beta endpoint being used when that was not allowed
             if (!CanUseGraphBetaForRequest(apiCall, entityInfo))
             {
-                return;
+                return null;
             }
 
             // Ensure token replacement is done
@@ -965,7 +964,8 @@ namespace PnP.Core.Model
             }
 
             // Add the request to the batch
-            batch.Add(this, entityInfo, method, apiCall, default, fromJsonCasting: MappingHandler, postMappingJson: PostMappingHandler, CleanupOperationName(operationName));
+            Guid batchRequestId = batch.Add(this, entityInfo, method, apiCall, default, fromJsonCasting: MappingHandler, postMappingJson: PostMappingHandler, CleanupOperationName(operationName));
+            return batch.GetRequest(batchRequestId);
         }
 
         /// <summary>
