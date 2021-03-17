@@ -18700,6 +18700,44 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.ISyntexModel.GetModelPublicationsAsync
   nameWithType: ISyntexModel.GetModelPublicationsAsync
+- uid: PnP.Core.Model.SharePoint.ISyntexModel.GetModelPublicationsBatch
+  name: GetModelPublicationsBatch()
+  href: api/PnP.Core.Model.SharePoint.ISyntexModel.html#PnP_Core_Model_SharePoint_ISyntexModel_GetModelPublicationsBatch
+  commentId: M:PnP.Core.Model.SharePoint.ISyntexModel.GetModelPublicationsBatch
+  fullName: PnP.Core.Model.SharePoint.ISyntexModel.GetModelPublicationsBatch()
+  nameWithType: ISyntexModel.GetModelPublicationsBatch()
+- uid: PnP.Core.Model.SharePoint.ISyntexModel.GetModelPublicationsBatch(PnP.Core.Services.Batch)
+  name: GetModelPublicationsBatch(Batch)
+  href: api/PnP.Core.Model.SharePoint.ISyntexModel.html#PnP_Core_Model_SharePoint_ISyntexModel_GetModelPublicationsBatch_PnP_Core_Services_Batch_
+  commentId: M:PnP.Core.Model.SharePoint.ISyntexModel.GetModelPublicationsBatch(PnP.Core.Services.Batch)
+  fullName: PnP.Core.Model.SharePoint.ISyntexModel.GetModelPublicationsBatch(PnP.Core.Services.Batch)
+  nameWithType: ISyntexModel.GetModelPublicationsBatch(Batch)
+- uid: PnP.Core.Model.SharePoint.ISyntexModel.GetModelPublicationsBatch*
+  name: GetModelPublicationsBatch
+  href: api/PnP.Core.Model.SharePoint.ISyntexModel.html#PnP_Core_Model_SharePoint_ISyntexModel_GetModelPublicationsBatch_
+  commentId: Overload:PnP.Core.Model.SharePoint.ISyntexModel.GetModelPublicationsBatch
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.ISyntexModel.GetModelPublicationsBatch
+  nameWithType: ISyntexModel.GetModelPublicationsBatch
+- uid: PnP.Core.Model.SharePoint.ISyntexModel.GetModelPublicationsBatchAsync
+  name: GetModelPublicationsBatchAsync()
+  href: api/PnP.Core.Model.SharePoint.ISyntexModel.html#PnP_Core_Model_SharePoint_ISyntexModel_GetModelPublicationsBatchAsync
+  commentId: M:PnP.Core.Model.SharePoint.ISyntexModel.GetModelPublicationsBatchAsync
+  fullName: PnP.Core.Model.SharePoint.ISyntexModel.GetModelPublicationsBatchAsync()
+  nameWithType: ISyntexModel.GetModelPublicationsBatchAsync()
+- uid: PnP.Core.Model.SharePoint.ISyntexModel.GetModelPublicationsBatchAsync(PnP.Core.Services.Batch)
+  name: GetModelPublicationsBatchAsync(Batch)
+  href: api/PnP.Core.Model.SharePoint.ISyntexModel.html#PnP_Core_Model_SharePoint_ISyntexModel_GetModelPublicationsBatchAsync_PnP_Core_Services_Batch_
+  commentId: M:PnP.Core.Model.SharePoint.ISyntexModel.GetModelPublicationsBatchAsync(PnP.Core.Services.Batch)
+  fullName: PnP.Core.Model.SharePoint.ISyntexModel.GetModelPublicationsBatchAsync(PnP.Core.Services.Batch)
+  nameWithType: ISyntexModel.GetModelPublicationsBatchAsync(Batch)
+- uid: PnP.Core.Model.SharePoint.ISyntexModel.GetModelPublicationsBatchAsync*
+  name: GetModelPublicationsBatchAsync
+  href: api/PnP.Core.Model.SharePoint.ISyntexModel.html#PnP_Core_Model_SharePoint_ISyntexModel_GetModelPublicationsBatchAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.ISyntexModel.GetModelPublicationsBatchAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.ISyntexModel.GetModelPublicationsBatchAsync
+  nameWithType: ISyntexModel.GetModelPublicationsBatchAsync
 - uid: PnP.Core.Model.SharePoint.ISyntexModel.Id
   name: Id
   href: api/PnP.Core.Model.SharePoint.ISyntexModel.html#PnP_Core_Model_SharePoint_ISyntexModel_Id
@@ -18826,6 +18864,140 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.ISyntexModel.PublishModelAsync
   nameWithType: ISyntexModel.PublishModelAsync
+- uid: PnP.Core.Model.SharePoint.ISyntexModel.PublishModelBatch(PnP.Core.Model.SharePoint.IList,PnP.Core.Model.SharePoint.MachineLearningPublicationViewOption)
+  name: PublishModelBatch(IList, MachineLearningPublicationViewOption)
+  href: api/PnP.Core.Model.SharePoint.ISyntexModel.html#PnP_Core_Model_SharePoint_ISyntexModel_PublishModelBatch_PnP_Core_Model_SharePoint_IList_PnP_Core_Model_SharePoint_MachineLearningPublicationViewOption_
+  commentId: M:PnP.Core.Model.SharePoint.ISyntexModel.PublishModelBatch(PnP.Core.Model.SharePoint.IList,PnP.Core.Model.SharePoint.MachineLearningPublicationViewOption)
+  fullName: PnP.Core.Model.SharePoint.ISyntexModel.PublishModelBatch(PnP.Core.Model.SharePoint.IList, PnP.Core.Model.SharePoint.MachineLearningPublicationViewOption)
+  nameWithType: ISyntexModel.PublishModelBatch(IList, MachineLearningPublicationViewOption)
+- uid: PnP.Core.Model.SharePoint.ISyntexModel.PublishModelBatch(PnP.Core.Model.SharePoint.List{PnP.Core.Model.SharePoint.IList},PnP.Core.Model.SharePoint.MachineLearningPublicationViewOption)
+  name: PublishModelBatch(List<IList>, MachineLearningPublicationViewOption)
+  href: api/PnP.Core.Model.SharePoint.ISyntexModel.html#PnP_Core_Model_SharePoint_ISyntexModel_PublishModelBatch_PnP_Core_Model_SharePoint_List_PnP_Core_Model_SharePoint_IList__PnP_Core_Model_SharePoint_MachineLearningPublicationViewOption_
+  commentId: M:PnP.Core.Model.SharePoint.ISyntexModel.PublishModelBatch(PnP.Core.Model.SharePoint.List{PnP.Core.Model.SharePoint.IList},PnP.Core.Model.SharePoint.MachineLearningPublicationViewOption)
+  name.vb: PublishModelBatch(List(Of IList), MachineLearningPublicationViewOption)
+  fullName: PnP.Core.Model.SharePoint.ISyntexModel.PublishModelBatch(PnP.Core.Model.SharePoint.List<PnP.Core.Model.SharePoint.IList>, PnP.Core.Model.SharePoint.MachineLearningPublicationViewOption)
+  fullName.vb: PnP.Core.Model.SharePoint.ISyntexModel.PublishModelBatch(PnP.Core.Model.SharePoint.List(Of PnP.Core.Model.SharePoint.IList), PnP.Core.Model.SharePoint.MachineLearningPublicationViewOption)
+  nameWithType: ISyntexModel.PublishModelBatch(List<IList>, MachineLearningPublicationViewOption)
+  nameWithType.vb: ISyntexModel.PublishModelBatch(List(Of IList), MachineLearningPublicationViewOption)
+- uid: PnP.Core.Model.SharePoint.ISyntexModel.PublishModelBatch(PnP.Core.Model.SharePoint.List{PnP.Core.Model.SharePoint.SyntexModelPublishOptions})
+  name: PublishModelBatch(List<SyntexModelPublishOptions>)
+  href: api/PnP.Core.Model.SharePoint.ISyntexModel.html#PnP_Core_Model_SharePoint_ISyntexModel_PublishModelBatch_PnP_Core_Model_SharePoint_List_PnP_Core_Model_SharePoint_SyntexModelPublishOptions__
+  commentId: M:PnP.Core.Model.SharePoint.ISyntexModel.PublishModelBatch(PnP.Core.Model.SharePoint.List{PnP.Core.Model.SharePoint.SyntexModelPublishOptions})
+  name.vb: PublishModelBatch(List(Of SyntexModelPublishOptions))
+  fullName: PnP.Core.Model.SharePoint.ISyntexModel.PublishModelBatch(PnP.Core.Model.SharePoint.List<PnP.Core.Model.SharePoint.SyntexModelPublishOptions>)
+  fullName.vb: PnP.Core.Model.SharePoint.ISyntexModel.PublishModelBatch(PnP.Core.Model.SharePoint.List(Of PnP.Core.Model.SharePoint.SyntexModelPublishOptions))
+  nameWithType: ISyntexModel.PublishModelBatch(List<SyntexModelPublishOptions>)
+  nameWithType.vb: ISyntexModel.PublishModelBatch(List(Of SyntexModelPublishOptions))
+- uid: PnP.Core.Model.SharePoint.ISyntexModel.PublishModelBatch(PnP.Core.Model.SharePoint.SyntexModelPublishOptions)
+  name: PublishModelBatch(SyntexModelPublishOptions)
+  href: api/PnP.Core.Model.SharePoint.ISyntexModel.html#PnP_Core_Model_SharePoint_ISyntexModel_PublishModelBatch_PnP_Core_Model_SharePoint_SyntexModelPublishOptions_
+  commentId: M:PnP.Core.Model.SharePoint.ISyntexModel.PublishModelBatch(PnP.Core.Model.SharePoint.SyntexModelPublishOptions)
+  fullName: PnP.Core.Model.SharePoint.ISyntexModel.PublishModelBatch(PnP.Core.Model.SharePoint.SyntexModelPublishOptions)
+  nameWithType: ISyntexModel.PublishModelBatch(SyntexModelPublishOptions)
+- uid: PnP.Core.Model.SharePoint.ISyntexModel.PublishModelBatch(PnP.Core.Services.Batch,PnP.Core.Model.SharePoint.IList,PnP.Core.Model.SharePoint.MachineLearningPublicationViewOption)
+  name: PublishModelBatch(Batch, IList, MachineLearningPublicationViewOption)
+  href: api/PnP.Core.Model.SharePoint.ISyntexModel.html#PnP_Core_Model_SharePoint_ISyntexModel_PublishModelBatch_PnP_Core_Services_Batch_PnP_Core_Model_SharePoint_IList_PnP_Core_Model_SharePoint_MachineLearningPublicationViewOption_
+  commentId: M:PnP.Core.Model.SharePoint.ISyntexModel.PublishModelBatch(PnP.Core.Services.Batch,PnP.Core.Model.SharePoint.IList,PnP.Core.Model.SharePoint.MachineLearningPublicationViewOption)
+  fullName: PnP.Core.Model.SharePoint.ISyntexModel.PublishModelBatch(PnP.Core.Services.Batch, PnP.Core.Model.SharePoint.IList, PnP.Core.Model.SharePoint.MachineLearningPublicationViewOption)
+  nameWithType: ISyntexModel.PublishModelBatch(Batch, IList, MachineLearningPublicationViewOption)
+- uid: PnP.Core.Model.SharePoint.ISyntexModel.PublishModelBatch(PnP.Core.Services.Batch,PnP.Core.Model.SharePoint.List{PnP.Core.Model.SharePoint.IList},PnP.Core.Model.SharePoint.MachineLearningPublicationViewOption)
+  name: PublishModelBatch(Batch, List<IList>, MachineLearningPublicationViewOption)
+  href: api/PnP.Core.Model.SharePoint.ISyntexModel.html#PnP_Core_Model_SharePoint_ISyntexModel_PublishModelBatch_PnP_Core_Services_Batch_PnP_Core_Model_SharePoint_List_PnP_Core_Model_SharePoint_IList__PnP_Core_Model_SharePoint_MachineLearningPublicationViewOption_
+  commentId: M:PnP.Core.Model.SharePoint.ISyntexModel.PublishModelBatch(PnP.Core.Services.Batch,PnP.Core.Model.SharePoint.List{PnP.Core.Model.SharePoint.IList},PnP.Core.Model.SharePoint.MachineLearningPublicationViewOption)
+  name.vb: PublishModelBatch(Batch, List(Of IList), MachineLearningPublicationViewOption)
+  fullName: PnP.Core.Model.SharePoint.ISyntexModel.PublishModelBatch(PnP.Core.Services.Batch, PnP.Core.Model.SharePoint.List<PnP.Core.Model.SharePoint.IList>, PnP.Core.Model.SharePoint.MachineLearningPublicationViewOption)
+  fullName.vb: PnP.Core.Model.SharePoint.ISyntexModel.PublishModelBatch(PnP.Core.Services.Batch, PnP.Core.Model.SharePoint.List(Of PnP.Core.Model.SharePoint.IList), PnP.Core.Model.SharePoint.MachineLearningPublicationViewOption)
+  nameWithType: ISyntexModel.PublishModelBatch(Batch, List<IList>, MachineLearningPublicationViewOption)
+  nameWithType.vb: ISyntexModel.PublishModelBatch(Batch, List(Of IList), MachineLearningPublicationViewOption)
+- uid: PnP.Core.Model.SharePoint.ISyntexModel.PublishModelBatch(PnP.Core.Services.Batch,PnP.Core.Model.SharePoint.List{PnP.Core.Model.SharePoint.SyntexModelPublishOptions})
+  name: PublishModelBatch(Batch, List<SyntexModelPublishOptions>)
+  href: api/PnP.Core.Model.SharePoint.ISyntexModel.html#PnP_Core_Model_SharePoint_ISyntexModel_PublishModelBatch_PnP_Core_Services_Batch_PnP_Core_Model_SharePoint_List_PnP_Core_Model_SharePoint_SyntexModelPublishOptions__
+  commentId: M:PnP.Core.Model.SharePoint.ISyntexModel.PublishModelBatch(PnP.Core.Services.Batch,PnP.Core.Model.SharePoint.List{PnP.Core.Model.SharePoint.SyntexModelPublishOptions})
+  name.vb: PublishModelBatch(Batch, List(Of SyntexModelPublishOptions))
+  fullName: PnP.Core.Model.SharePoint.ISyntexModel.PublishModelBatch(PnP.Core.Services.Batch, PnP.Core.Model.SharePoint.List<PnP.Core.Model.SharePoint.SyntexModelPublishOptions>)
+  fullName.vb: PnP.Core.Model.SharePoint.ISyntexModel.PublishModelBatch(PnP.Core.Services.Batch, PnP.Core.Model.SharePoint.List(Of PnP.Core.Model.SharePoint.SyntexModelPublishOptions))
+  nameWithType: ISyntexModel.PublishModelBatch(Batch, List<SyntexModelPublishOptions>)
+  nameWithType.vb: ISyntexModel.PublishModelBatch(Batch, List(Of SyntexModelPublishOptions))
+- uid: PnP.Core.Model.SharePoint.ISyntexModel.PublishModelBatch(PnP.Core.Services.Batch,PnP.Core.Model.SharePoint.SyntexModelPublishOptions)
+  name: PublishModelBatch(Batch, SyntexModelPublishOptions)
+  href: api/PnP.Core.Model.SharePoint.ISyntexModel.html#PnP_Core_Model_SharePoint_ISyntexModel_PublishModelBatch_PnP_Core_Services_Batch_PnP_Core_Model_SharePoint_SyntexModelPublishOptions_
+  commentId: M:PnP.Core.Model.SharePoint.ISyntexModel.PublishModelBatch(PnP.Core.Services.Batch,PnP.Core.Model.SharePoint.SyntexModelPublishOptions)
+  fullName: PnP.Core.Model.SharePoint.ISyntexModel.PublishModelBatch(PnP.Core.Services.Batch, PnP.Core.Model.SharePoint.SyntexModelPublishOptions)
+  nameWithType: ISyntexModel.PublishModelBatch(Batch, SyntexModelPublishOptions)
+- uid: PnP.Core.Model.SharePoint.ISyntexModel.PublishModelBatch*
+  name: PublishModelBatch
+  href: api/PnP.Core.Model.SharePoint.ISyntexModel.html#PnP_Core_Model_SharePoint_ISyntexModel_PublishModelBatch_
+  commentId: Overload:PnP.Core.Model.SharePoint.ISyntexModel.PublishModelBatch
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.ISyntexModel.PublishModelBatch
+  nameWithType: ISyntexModel.PublishModelBatch
+- uid: PnP.Core.Model.SharePoint.ISyntexModel.PublishModelBatchAsync(PnP.Core.Model.SharePoint.IList,PnP.Core.Model.SharePoint.MachineLearningPublicationViewOption)
+  name: PublishModelBatchAsync(IList, MachineLearningPublicationViewOption)
+  href: api/PnP.Core.Model.SharePoint.ISyntexModel.html#PnP_Core_Model_SharePoint_ISyntexModel_PublishModelBatchAsync_PnP_Core_Model_SharePoint_IList_PnP_Core_Model_SharePoint_MachineLearningPublicationViewOption_
+  commentId: M:PnP.Core.Model.SharePoint.ISyntexModel.PublishModelBatchAsync(PnP.Core.Model.SharePoint.IList,PnP.Core.Model.SharePoint.MachineLearningPublicationViewOption)
+  fullName: PnP.Core.Model.SharePoint.ISyntexModel.PublishModelBatchAsync(PnP.Core.Model.SharePoint.IList, PnP.Core.Model.SharePoint.MachineLearningPublicationViewOption)
+  nameWithType: ISyntexModel.PublishModelBatchAsync(IList, MachineLearningPublicationViewOption)
+- uid: PnP.Core.Model.SharePoint.ISyntexModel.PublishModelBatchAsync(PnP.Core.Model.SharePoint.List{PnP.Core.Model.SharePoint.IList},PnP.Core.Model.SharePoint.MachineLearningPublicationViewOption)
+  name: PublishModelBatchAsync(List<IList>, MachineLearningPublicationViewOption)
+  href: api/PnP.Core.Model.SharePoint.ISyntexModel.html#PnP_Core_Model_SharePoint_ISyntexModel_PublishModelBatchAsync_PnP_Core_Model_SharePoint_List_PnP_Core_Model_SharePoint_IList__PnP_Core_Model_SharePoint_MachineLearningPublicationViewOption_
+  commentId: M:PnP.Core.Model.SharePoint.ISyntexModel.PublishModelBatchAsync(PnP.Core.Model.SharePoint.List{PnP.Core.Model.SharePoint.IList},PnP.Core.Model.SharePoint.MachineLearningPublicationViewOption)
+  name.vb: PublishModelBatchAsync(List(Of IList), MachineLearningPublicationViewOption)
+  fullName: PnP.Core.Model.SharePoint.ISyntexModel.PublishModelBatchAsync(PnP.Core.Model.SharePoint.List<PnP.Core.Model.SharePoint.IList>, PnP.Core.Model.SharePoint.MachineLearningPublicationViewOption)
+  fullName.vb: PnP.Core.Model.SharePoint.ISyntexModel.PublishModelBatchAsync(PnP.Core.Model.SharePoint.List(Of PnP.Core.Model.SharePoint.IList), PnP.Core.Model.SharePoint.MachineLearningPublicationViewOption)
+  nameWithType: ISyntexModel.PublishModelBatchAsync(List<IList>, MachineLearningPublicationViewOption)
+  nameWithType.vb: ISyntexModel.PublishModelBatchAsync(List(Of IList), MachineLearningPublicationViewOption)
+- uid: PnP.Core.Model.SharePoint.ISyntexModel.PublishModelBatchAsync(PnP.Core.Model.SharePoint.List{PnP.Core.Model.SharePoint.SyntexModelPublishOptions})
+  name: PublishModelBatchAsync(List<SyntexModelPublishOptions>)
+  href: api/PnP.Core.Model.SharePoint.ISyntexModel.html#PnP_Core_Model_SharePoint_ISyntexModel_PublishModelBatchAsync_PnP_Core_Model_SharePoint_List_PnP_Core_Model_SharePoint_SyntexModelPublishOptions__
+  commentId: M:PnP.Core.Model.SharePoint.ISyntexModel.PublishModelBatchAsync(PnP.Core.Model.SharePoint.List{PnP.Core.Model.SharePoint.SyntexModelPublishOptions})
+  name.vb: PublishModelBatchAsync(List(Of SyntexModelPublishOptions))
+  fullName: PnP.Core.Model.SharePoint.ISyntexModel.PublishModelBatchAsync(PnP.Core.Model.SharePoint.List<PnP.Core.Model.SharePoint.SyntexModelPublishOptions>)
+  fullName.vb: PnP.Core.Model.SharePoint.ISyntexModel.PublishModelBatchAsync(PnP.Core.Model.SharePoint.List(Of PnP.Core.Model.SharePoint.SyntexModelPublishOptions))
+  nameWithType: ISyntexModel.PublishModelBatchAsync(List<SyntexModelPublishOptions>)
+  nameWithType.vb: ISyntexModel.PublishModelBatchAsync(List(Of SyntexModelPublishOptions))
+- uid: PnP.Core.Model.SharePoint.ISyntexModel.PublishModelBatchAsync(PnP.Core.Model.SharePoint.SyntexModelPublishOptions)
+  name: PublishModelBatchAsync(SyntexModelPublishOptions)
+  href: api/PnP.Core.Model.SharePoint.ISyntexModel.html#PnP_Core_Model_SharePoint_ISyntexModel_PublishModelBatchAsync_PnP_Core_Model_SharePoint_SyntexModelPublishOptions_
+  commentId: M:PnP.Core.Model.SharePoint.ISyntexModel.PublishModelBatchAsync(PnP.Core.Model.SharePoint.SyntexModelPublishOptions)
+  fullName: PnP.Core.Model.SharePoint.ISyntexModel.PublishModelBatchAsync(PnP.Core.Model.SharePoint.SyntexModelPublishOptions)
+  nameWithType: ISyntexModel.PublishModelBatchAsync(SyntexModelPublishOptions)
+- uid: PnP.Core.Model.SharePoint.ISyntexModel.PublishModelBatchAsync(PnP.Core.Services.Batch,PnP.Core.Model.SharePoint.IList,PnP.Core.Model.SharePoint.MachineLearningPublicationViewOption)
+  name: PublishModelBatchAsync(Batch, IList, MachineLearningPublicationViewOption)
+  href: api/PnP.Core.Model.SharePoint.ISyntexModel.html#PnP_Core_Model_SharePoint_ISyntexModel_PublishModelBatchAsync_PnP_Core_Services_Batch_PnP_Core_Model_SharePoint_IList_PnP_Core_Model_SharePoint_MachineLearningPublicationViewOption_
+  commentId: M:PnP.Core.Model.SharePoint.ISyntexModel.PublishModelBatchAsync(PnP.Core.Services.Batch,PnP.Core.Model.SharePoint.IList,PnP.Core.Model.SharePoint.MachineLearningPublicationViewOption)
+  fullName: PnP.Core.Model.SharePoint.ISyntexModel.PublishModelBatchAsync(PnP.Core.Services.Batch, PnP.Core.Model.SharePoint.IList, PnP.Core.Model.SharePoint.MachineLearningPublicationViewOption)
+  nameWithType: ISyntexModel.PublishModelBatchAsync(Batch, IList, MachineLearningPublicationViewOption)
+- uid: PnP.Core.Model.SharePoint.ISyntexModel.PublishModelBatchAsync(PnP.Core.Services.Batch,PnP.Core.Model.SharePoint.List{PnP.Core.Model.SharePoint.IList},PnP.Core.Model.SharePoint.MachineLearningPublicationViewOption)
+  name: PublishModelBatchAsync(Batch, List<IList>, MachineLearningPublicationViewOption)
+  href: api/PnP.Core.Model.SharePoint.ISyntexModel.html#PnP_Core_Model_SharePoint_ISyntexModel_PublishModelBatchAsync_PnP_Core_Services_Batch_PnP_Core_Model_SharePoint_List_PnP_Core_Model_SharePoint_IList__PnP_Core_Model_SharePoint_MachineLearningPublicationViewOption_
+  commentId: M:PnP.Core.Model.SharePoint.ISyntexModel.PublishModelBatchAsync(PnP.Core.Services.Batch,PnP.Core.Model.SharePoint.List{PnP.Core.Model.SharePoint.IList},PnP.Core.Model.SharePoint.MachineLearningPublicationViewOption)
+  name.vb: PublishModelBatchAsync(Batch, List(Of IList), MachineLearningPublicationViewOption)
+  fullName: PnP.Core.Model.SharePoint.ISyntexModel.PublishModelBatchAsync(PnP.Core.Services.Batch, PnP.Core.Model.SharePoint.List<PnP.Core.Model.SharePoint.IList>, PnP.Core.Model.SharePoint.MachineLearningPublicationViewOption)
+  fullName.vb: PnP.Core.Model.SharePoint.ISyntexModel.PublishModelBatchAsync(PnP.Core.Services.Batch, PnP.Core.Model.SharePoint.List(Of PnP.Core.Model.SharePoint.IList), PnP.Core.Model.SharePoint.MachineLearningPublicationViewOption)
+  nameWithType: ISyntexModel.PublishModelBatchAsync(Batch, List<IList>, MachineLearningPublicationViewOption)
+  nameWithType.vb: ISyntexModel.PublishModelBatchAsync(Batch, List(Of IList), MachineLearningPublicationViewOption)
+- uid: PnP.Core.Model.SharePoint.ISyntexModel.PublishModelBatchAsync(PnP.Core.Services.Batch,PnP.Core.Model.SharePoint.List{PnP.Core.Model.SharePoint.SyntexModelPublishOptions})
+  name: PublishModelBatchAsync(Batch, List<SyntexModelPublishOptions>)
+  href: api/PnP.Core.Model.SharePoint.ISyntexModel.html#PnP_Core_Model_SharePoint_ISyntexModel_PublishModelBatchAsync_PnP_Core_Services_Batch_PnP_Core_Model_SharePoint_List_PnP_Core_Model_SharePoint_SyntexModelPublishOptions__
+  commentId: M:PnP.Core.Model.SharePoint.ISyntexModel.PublishModelBatchAsync(PnP.Core.Services.Batch,PnP.Core.Model.SharePoint.List{PnP.Core.Model.SharePoint.SyntexModelPublishOptions})
+  name.vb: PublishModelBatchAsync(Batch, List(Of SyntexModelPublishOptions))
+  fullName: PnP.Core.Model.SharePoint.ISyntexModel.PublishModelBatchAsync(PnP.Core.Services.Batch, PnP.Core.Model.SharePoint.List<PnP.Core.Model.SharePoint.SyntexModelPublishOptions>)
+  fullName.vb: PnP.Core.Model.SharePoint.ISyntexModel.PublishModelBatchAsync(PnP.Core.Services.Batch, PnP.Core.Model.SharePoint.List(Of PnP.Core.Model.SharePoint.SyntexModelPublishOptions))
+  nameWithType: ISyntexModel.PublishModelBatchAsync(Batch, List<SyntexModelPublishOptions>)
+  nameWithType.vb: ISyntexModel.PublishModelBatchAsync(Batch, List(Of SyntexModelPublishOptions))
+- uid: PnP.Core.Model.SharePoint.ISyntexModel.PublishModelBatchAsync(PnP.Core.Services.Batch,PnP.Core.Model.SharePoint.SyntexModelPublishOptions)
+  name: PublishModelBatchAsync(Batch, SyntexModelPublishOptions)
+  href: api/PnP.Core.Model.SharePoint.ISyntexModel.html#PnP_Core_Model_SharePoint_ISyntexModel_PublishModelBatchAsync_PnP_Core_Services_Batch_PnP_Core_Model_SharePoint_SyntexModelPublishOptions_
+  commentId: M:PnP.Core.Model.SharePoint.ISyntexModel.PublishModelBatchAsync(PnP.Core.Services.Batch,PnP.Core.Model.SharePoint.SyntexModelPublishOptions)
+  fullName: PnP.Core.Model.SharePoint.ISyntexModel.PublishModelBatchAsync(PnP.Core.Services.Batch, PnP.Core.Model.SharePoint.SyntexModelPublishOptions)
+  nameWithType: ISyntexModel.PublishModelBatchAsync(Batch, SyntexModelPublishOptions)
+- uid: PnP.Core.Model.SharePoint.ISyntexModel.PublishModelBatchAsync*
+  name: PublishModelBatchAsync
+  href: api/PnP.Core.Model.SharePoint.ISyntexModel.html#PnP_Core_Model_SharePoint_ISyntexModel_PublishModelBatchAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.ISyntexModel.PublishModelBatchAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.ISyntexModel.PublishModelBatchAsync
+  nameWithType: ISyntexModel.PublishModelBatchAsync
 - uid: PnP.Core.Model.SharePoint.ISyntexModel.UniqueId
   name: UniqueId
   href: api/PnP.Core.Model.SharePoint.ISyntexModel.html#PnP_Core_Model_SharePoint_ISyntexModel_UniqueId
@@ -18913,6 +19085,140 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.ISyntexModel.UnPublishModelAsync
   nameWithType: ISyntexModel.UnPublishModelAsync
+- uid: PnP.Core.Model.SharePoint.ISyntexModel.UnPublishModelBatch(PnP.Core.Model.SharePoint.IList)
+  name: UnPublishModelBatch(IList)
+  href: api/PnP.Core.Model.SharePoint.ISyntexModel.html#PnP_Core_Model_SharePoint_ISyntexModel_UnPublishModelBatch_PnP_Core_Model_SharePoint_IList_
+  commentId: M:PnP.Core.Model.SharePoint.ISyntexModel.UnPublishModelBatch(PnP.Core.Model.SharePoint.IList)
+  fullName: PnP.Core.Model.SharePoint.ISyntexModel.UnPublishModelBatch(PnP.Core.Model.SharePoint.IList)
+  nameWithType: ISyntexModel.UnPublishModelBatch(IList)
+- uid: PnP.Core.Model.SharePoint.ISyntexModel.UnPublishModelBatch(PnP.Core.Model.SharePoint.List{PnP.Core.Model.SharePoint.IList})
+  name: UnPublishModelBatch(List<IList>)
+  href: api/PnP.Core.Model.SharePoint.ISyntexModel.html#PnP_Core_Model_SharePoint_ISyntexModel_UnPublishModelBatch_PnP_Core_Model_SharePoint_List_PnP_Core_Model_SharePoint_IList__
+  commentId: M:PnP.Core.Model.SharePoint.ISyntexModel.UnPublishModelBatch(PnP.Core.Model.SharePoint.List{PnP.Core.Model.SharePoint.IList})
+  name.vb: UnPublishModelBatch(List(Of IList))
+  fullName: PnP.Core.Model.SharePoint.ISyntexModel.UnPublishModelBatch(PnP.Core.Model.SharePoint.List<PnP.Core.Model.SharePoint.IList>)
+  fullName.vb: PnP.Core.Model.SharePoint.ISyntexModel.UnPublishModelBatch(PnP.Core.Model.SharePoint.List(Of PnP.Core.Model.SharePoint.IList))
+  nameWithType: ISyntexModel.UnPublishModelBatch(List<IList>)
+  nameWithType.vb: ISyntexModel.UnPublishModelBatch(List(Of IList))
+- uid: PnP.Core.Model.SharePoint.ISyntexModel.UnPublishModelBatch(PnP.Core.Model.SharePoint.List{PnP.Core.Model.SharePoint.SyntexModelUnPublishOptions})
+  name: UnPublishModelBatch(List<SyntexModelUnPublishOptions>)
+  href: api/PnP.Core.Model.SharePoint.ISyntexModel.html#PnP_Core_Model_SharePoint_ISyntexModel_UnPublishModelBatch_PnP_Core_Model_SharePoint_List_PnP_Core_Model_SharePoint_SyntexModelUnPublishOptions__
+  commentId: M:PnP.Core.Model.SharePoint.ISyntexModel.UnPublishModelBatch(PnP.Core.Model.SharePoint.List{PnP.Core.Model.SharePoint.SyntexModelUnPublishOptions})
+  name.vb: UnPublishModelBatch(List(Of SyntexModelUnPublishOptions))
+  fullName: PnP.Core.Model.SharePoint.ISyntexModel.UnPublishModelBatch(PnP.Core.Model.SharePoint.List<PnP.Core.Model.SharePoint.SyntexModelUnPublishOptions>)
+  fullName.vb: PnP.Core.Model.SharePoint.ISyntexModel.UnPublishModelBatch(PnP.Core.Model.SharePoint.List(Of PnP.Core.Model.SharePoint.SyntexModelUnPublishOptions))
+  nameWithType: ISyntexModel.UnPublishModelBatch(List<SyntexModelUnPublishOptions>)
+  nameWithType.vb: ISyntexModel.UnPublishModelBatch(List(Of SyntexModelUnPublishOptions))
+- uid: PnP.Core.Model.SharePoint.ISyntexModel.UnPublishModelBatch(PnP.Core.Model.SharePoint.SyntexModelUnPublishOptions)
+  name: UnPublishModelBatch(SyntexModelUnPublishOptions)
+  href: api/PnP.Core.Model.SharePoint.ISyntexModel.html#PnP_Core_Model_SharePoint_ISyntexModel_UnPublishModelBatch_PnP_Core_Model_SharePoint_SyntexModelUnPublishOptions_
+  commentId: M:PnP.Core.Model.SharePoint.ISyntexModel.UnPublishModelBatch(PnP.Core.Model.SharePoint.SyntexModelUnPublishOptions)
+  fullName: PnP.Core.Model.SharePoint.ISyntexModel.UnPublishModelBatch(PnP.Core.Model.SharePoint.SyntexModelUnPublishOptions)
+  nameWithType: ISyntexModel.UnPublishModelBatch(SyntexModelUnPublishOptions)
+- uid: PnP.Core.Model.SharePoint.ISyntexModel.UnPublishModelBatch(PnP.Core.Services.Batch,PnP.Core.Model.SharePoint.IList)
+  name: UnPublishModelBatch(Batch, IList)
+  href: api/PnP.Core.Model.SharePoint.ISyntexModel.html#PnP_Core_Model_SharePoint_ISyntexModel_UnPublishModelBatch_PnP_Core_Services_Batch_PnP_Core_Model_SharePoint_IList_
+  commentId: M:PnP.Core.Model.SharePoint.ISyntexModel.UnPublishModelBatch(PnP.Core.Services.Batch,PnP.Core.Model.SharePoint.IList)
+  fullName: PnP.Core.Model.SharePoint.ISyntexModel.UnPublishModelBatch(PnP.Core.Services.Batch, PnP.Core.Model.SharePoint.IList)
+  nameWithType: ISyntexModel.UnPublishModelBatch(Batch, IList)
+- uid: PnP.Core.Model.SharePoint.ISyntexModel.UnPublishModelBatch(PnP.Core.Services.Batch,PnP.Core.Model.SharePoint.List{PnP.Core.Model.SharePoint.IList})
+  name: UnPublishModelBatch(Batch, List<IList>)
+  href: api/PnP.Core.Model.SharePoint.ISyntexModel.html#PnP_Core_Model_SharePoint_ISyntexModel_UnPublishModelBatch_PnP_Core_Services_Batch_PnP_Core_Model_SharePoint_List_PnP_Core_Model_SharePoint_IList__
+  commentId: M:PnP.Core.Model.SharePoint.ISyntexModel.UnPublishModelBatch(PnP.Core.Services.Batch,PnP.Core.Model.SharePoint.List{PnP.Core.Model.SharePoint.IList})
+  name.vb: UnPublishModelBatch(Batch, List(Of IList))
+  fullName: PnP.Core.Model.SharePoint.ISyntexModel.UnPublishModelBatch(PnP.Core.Services.Batch, PnP.Core.Model.SharePoint.List<PnP.Core.Model.SharePoint.IList>)
+  fullName.vb: PnP.Core.Model.SharePoint.ISyntexModel.UnPublishModelBatch(PnP.Core.Services.Batch, PnP.Core.Model.SharePoint.List(Of PnP.Core.Model.SharePoint.IList))
+  nameWithType: ISyntexModel.UnPublishModelBatch(Batch, List<IList>)
+  nameWithType.vb: ISyntexModel.UnPublishModelBatch(Batch, List(Of IList))
+- uid: PnP.Core.Model.SharePoint.ISyntexModel.UnPublishModelBatch(PnP.Core.Services.Batch,PnP.Core.Model.SharePoint.List{PnP.Core.Model.SharePoint.SyntexModelUnPublishOptions})
+  name: UnPublishModelBatch(Batch, List<SyntexModelUnPublishOptions>)
+  href: api/PnP.Core.Model.SharePoint.ISyntexModel.html#PnP_Core_Model_SharePoint_ISyntexModel_UnPublishModelBatch_PnP_Core_Services_Batch_PnP_Core_Model_SharePoint_List_PnP_Core_Model_SharePoint_SyntexModelUnPublishOptions__
+  commentId: M:PnP.Core.Model.SharePoint.ISyntexModel.UnPublishModelBatch(PnP.Core.Services.Batch,PnP.Core.Model.SharePoint.List{PnP.Core.Model.SharePoint.SyntexModelUnPublishOptions})
+  name.vb: UnPublishModelBatch(Batch, List(Of SyntexModelUnPublishOptions))
+  fullName: PnP.Core.Model.SharePoint.ISyntexModel.UnPublishModelBatch(PnP.Core.Services.Batch, PnP.Core.Model.SharePoint.List<PnP.Core.Model.SharePoint.SyntexModelUnPublishOptions>)
+  fullName.vb: PnP.Core.Model.SharePoint.ISyntexModel.UnPublishModelBatch(PnP.Core.Services.Batch, PnP.Core.Model.SharePoint.List(Of PnP.Core.Model.SharePoint.SyntexModelUnPublishOptions))
+  nameWithType: ISyntexModel.UnPublishModelBatch(Batch, List<SyntexModelUnPublishOptions>)
+  nameWithType.vb: ISyntexModel.UnPublishModelBatch(Batch, List(Of SyntexModelUnPublishOptions))
+- uid: PnP.Core.Model.SharePoint.ISyntexModel.UnPublishModelBatch(PnP.Core.Services.Batch,PnP.Core.Model.SharePoint.SyntexModelUnPublishOptions)
+  name: UnPublishModelBatch(Batch, SyntexModelUnPublishOptions)
+  href: api/PnP.Core.Model.SharePoint.ISyntexModel.html#PnP_Core_Model_SharePoint_ISyntexModel_UnPublishModelBatch_PnP_Core_Services_Batch_PnP_Core_Model_SharePoint_SyntexModelUnPublishOptions_
+  commentId: M:PnP.Core.Model.SharePoint.ISyntexModel.UnPublishModelBatch(PnP.Core.Services.Batch,PnP.Core.Model.SharePoint.SyntexModelUnPublishOptions)
+  fullName: PnP.Core.Model.SharePoint.ISyntexModel.UnPublishModelBatch(PnP.Core.Services.Batch, PnP.Core.Model.SharePoint.SyntexModelUnPublishOptions)
+  nameWithType: ISyntexModel.UnPublishModelBatch(Batch, SyntexModelUnPublishOptions)
+- uid: PnP.Core.Model.SharePoint.ISyntexModel.UnPublishModelBatch*
+  name: UnPublishModelBatch
+  href: api/PnP.Core.Model.SharePoint.ISyntexModel.html#PnP_Core_Model_SharePoint_ISyntexModel_UnPublishModelBatch_
+  commentId: Overload:PnP.Core.Model.SharePoint.ISyntexModel.UnPublishModelBatch
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.ISyntexModel.UnPublishModelBatch
+  nameWithType: ISyntexModel.UnPublishModelBatch
+- uid: PnP.Core.Model.SharePoint.ISyntexModel.UnPublishModelBatchAsync(PnP.Core.Model.SharePoint.IList)
+  name: UnPublishModelBatchAsync(IList)
+  href: api/PnP.Core.Model.SharePoint.ISyntexModel.html#PnP_Core_Model_SharePoint_ISyntexModel_UnPublishModelBatchAsync_PnP_Core_Model_SharePoint_IList_
+  commentId: M:PnP.Core.Model.SharePoint.ISyntexModel.UnPublishModelBatchAsync(PnP.Core.Model.SharePoint.IList)
+  fullName: PnP.Core.Model.SharePoint.ISyntexModel.UnPublishModelBatchAsync(PnP.Core.Model.SharePoint.IList)
+  nameWithType: ISyntexModel.UnPublishModelBatchAsync(IList)
+- uid: PnP.Core.Model.SharePoint.ISyntexModel.UnPublishModelBatchAsync(PnP.Core.Model.SharePoint.List{PnP.Core.Model.SharePoint.IList})
+  name: UnPublishModelBatchAsync(List<IList>)
+  href: api/PnP.Core.Model.SharePoint.ISyntexModel.html#PnP_Core_Model_SharePoint_ISyntexModel_UnPublishModelBatchAsync_PnP_Core_Model_SharePoint_List_PnP_Core_Model_SharePoint_IList__
+  commentId: M:PnP.Core.Model.SharePoint.ISyntexModel.UnPublishModelBatchAsync(PnP.Core.Model.SharePoint.List{PnP.Core.Model.SharePoint.IList})
+  name.vb: UnPublishModelBatchAsync(List(Of IList))
+  fullName: PnP.Core.Model.SharePoint.ISyntexModel.UnPublishModelBatchAsync(PnP.Core.Model.SharePoint.List<PnP.Core.Model.SharePoint.IList>)
+  fullName.vb: PnP.Core.Model.SharePoint.ISyntexModel.UnPublishModelBatchAsync(PnP.Core.Model.SharePoint.List(Of PnP.Core.Model.SharePoint.IList))
+  nameWithType: ISyntexModel.UnPublishModelBatchAsync(List<IList>)
+  nameWithType.vb: ISyntexModel.UnPublishModelBatchAsync(List(Of IList))
+- uid: PnP.Core.Model.SharePoint.ISyntexModel.UnPublishModelBatchAsync(PnP.Core.Model.SharePoint.List{PnP.Core.Model.SharePoint.SyntexModelUnPublishOptions})
+  name: UnPublishModelBatchAsync(List<SyntexModelUnPublishOptions>)
+  href: api/PnP.Core.Model.SharePoint.ISyntexModel.html#PnP_Core_Model_SharePoint_ISyntexModel_UnPublishModelBatchAsync_PnP_Core_Model_SharePoint_List_PnP_Core_Model_SharePoint_SyntexModelUnPublishOptions__
+  commentId: M:PnP.Core.Model.SharePoint.ISyntexModel.UnPublishModelBatchAsync(PnP.Core.Model.SharePoint.List{PnP.Core.Model.SharePoint.SyntexModelUnPublishOptions})
+  name.vb: UnPublishModelBatchAsync(List(Of SyntexModelUnPublishOptions))
+  fullName: PnP.Core.Model.SharePoint.ISyntexModel.UnPublishModelBatchAsync(PnP.Core.Model.SharePoint.List<PnP.Core.Model.SharePoint.SyntexModelUnPublishOptions>)
+  fullName.vb: PnP.Core.Model.SharePoint.ISyntexModel.UnPublishModelBatchAsync(PnP.Core.Model.SharePoint.List(Of PnP.Core.Model.SharePoint.SyntexModelUnPublishOptions))
+  nameWithType: ISyntexModel.UnPublishModelBatchAsync(List<SyntexModelUnPublishOptions>)
+  nameWithType.vb: ISyntexModel.UnPublishModelBatchAsync(List(Of SyntexModelUnPublishOptions))
+- uid: PnP.Core.Model.SharePoint.ISyntexModel.UnPublishModelBatchAsync(PnP.Core.Model.SharePoint.SyntexModelUnPublishOptions)
+  name: UnPublishModelBatchAsync(SyntexModelUnPublishOptions)
+  href: api/PnP.Core.Model.SharePoint.ISyntexModel.html#PnP_Core_Model_SharePoint_ISyntexModel_UnPublishModelBatchAsync_PnP_Core_Model_SharePoint_SyntexModelUnPublishOptions_
+  commentId: M:PnP.Core.Model.SharePoint.ISyntexModel.UnPublishModelBatchAsync(PnP.Core.Model.SharePoint.SyntexModelUnPublishOptions)
+  fullName: PnP.Core.Model.SharePoint.ISyntexModel.UnPublishModelBatchAsync(PnP.Core.Model.SharePoint.SyntexModelUnPublishOptions)
+  nameWithType: ISyntexModel.UnPublishModelBatchAsync(SyntexModelUnPublishOptions)
+- uid: PnP.Core.Model.SharePoint.ISyntexModel.UnPublishModelBatchAsync(PnP.Core.Services.Batch,PnP.Core.Model.SharePoint.IList)
+  name: UnPublishModelBatchAsync(Batch, IList)
+  href: api/PnP.Core.Model.SharePoint.ISyntexModel.html#PnP_Core_Model_SharePoint_ISyntexModel_UnPublishModelBatchAsync_PnP_Core_Services_Batch_PnP_Core_Model_SharePoint_IList_
+  commentId: M:PnP.Core.Model.SharePoint.ISyntexModel.UnPublishModelBatchAsync(PnP.Core.Services.Batch,PnP.Core.Model.SharePoint.IList)
+  fullName: PnP.Core.Model.SharePoint.ISyntexModel.UnPublishModelBatchAsync(PnP.Core.Services.Batch, PnP.Core.Model.SharePoint.IList)
+  nameWithType: ISyntexModel.UnPublishModelBatchAsync(Batch, IList)
+- uid: PnP.Core.Model.SharePoint.ISyntexModel.UnPublishModelBatchAsync(PnP.Core.Services.Batch,PnP.Core.Model.SharePoint.List{PnP.Core.Model.SharePoint.IList})
+  name: UnPublishModelBatchAsync(Batch, List<IList>)
+  href: api/PnP.Core.Model.SharePoint.ISyntexModel.html#PnP_Core_Model_SharePoint_ISyntexModel_UnPublishModelBatchAsync_PnP_Core_Services_Batch_PnP_Core_Model_SharePoint_List_PnP_Core_Model_SharePoint_IList__
+  commentId: M:PnP.Core.Model.SharePoint.ISyntexModel.UnPublishModelBatchAsync(PnP.Core.Services.Batch,PnP.Core.Model.SharePoint.List{PnP.Core.Model.SharePoint.IList})
+  name.vb: UnPublishModelBatchAsync(Batch, List(Of IList))
+  fullName: PnP.Core.Model.SharePoint.ISyntexModel.UnPublishModelBatchAsync(PnP.Core.Services.Batch, PnP.Core.Model.SharePoint.List<PnP.Core.Model.SharePoint.IList>)
+  fullName.vb: PnP.Core.Model.SharePoint.ISyntexModel.UnPublishModelBatchAsync(PnP.Core.Services.Batch, PnP.Core.Model.SharePoint.List(Of PnP.Core.Model.SharePoint.IList))
+  nameWithType: ISyntexModel.UnPublishModelBatchAsync(Batch, List<IList>)
+  nameWithType.vb: ISyntexModel.UnPublishModelBatchAsync(Batch, List(Of IList))
+- uid: PnP.Core.Model.SharePoint.ISyntexModel.UnPublishModelBatchAsync(PnP.Core.Services.Batch,PnP.Core.Model.SharePoint.List{PnP.Core.Model.SharePoint.SyntexModelUnPublishOptions})
+  name: UnPublishModelBatchAsync(Batch, List<SyntexModelUnPublishOptions>)
+  href: api/PnP.Core.Model.SharePoint.ISyntexModel.html#PnP_Core_Model_SharePoint_ISyntexModel_UnPublishModelBatchAsync_PnP_Core_Services_Batch_PnP_Core_Model_SharePoint_List_PnP_Core_Model_SharePoint_SyntexModelUnPublishOptions__
+  commentId: M:PnP.Core.Model.SharePoint.ISyntexModel.UnPublishModelBatchAsync(PnP.Core.Services.Batch,PnP.Core.Model.SharePoint.List{PnP.Core.Model.SharePoint.SyntexModelUnPublishOptions})
+  name.vb: UnPublishModelBatchAsync(Batch, List(Of SyntexModelUnPublishOptions))
+  fullName: PnP.Core.Model.SharePoint.ISyntexModel.UnPublishModelBatchAsync(PnP.Core.Services.Batch, PnP.Core.Model.SharePoint.List<PnP.Core.Model.SharePoint.SyntexModelUnPublishOptions>)
+  fullName.vb: PnP.Core.Model.SharePoint.ISyntexModel.UnPublishModelBatchAsync(PnP.Core.Services.Batch, PnP.Core.Model.SharePoint.List(Of PnP.Core.Model.SharePoint.SyntexModelUnPublishOptions))
+  nameWithType: ISyntexModel.UnPublishModelBatchAsync(Batch, List<SyntexModelUnPublishOptions>)
+  nameWithType.vb: ISyntexModel.UnPublishModelBatchAsync(Batch, List(Of SyntexModelUnPublishOptions))
+- uid: PnP.Core.Model.SharePoint.ISyntexModel.UnPublishModelBatchAsync(PnP.Core.Services.Batch,PnP.Core.Model.SharePoint.SyntexModelUnPublishOptions)
+  name: UnPublishModelBatchAsync(Batch, SyntexModelUnPublishOptions)
+  href: api/PnP.Core.Model.SharePoint.ISyntexModel.html#PnP_Core_Model_SharePoint_ISyntexModel_UnPublishModelBatchAsync_PnP_Core_Services_Batch_PnP_Core_Model_SharePoint_SyntexModelUnPublishOptions_
+  commentId: M:PnP.Core.Model.SharePoint.ISyntexModel.UnPublishModelBatchAsync(PnP.Core.Services.Batch,PnP.Core.Model.SharePoint.SyntexModelUnPublishOptions)
+  fullName: PnP.Core.Model.SharePoint.ISyntexModel.UnPublishModelBatchAsync(PnP.Core.Services.Batch, PnP.Core.Model.SharePoint.SyntexModelUnPublishOptions)
+  nameWithType: ISyntexModel.UnPublishModelBatchAsync(Batch, SyntexModelUnPublishOptions)
+- uid: PnP.Core.Model.SharePoint.ISyntexModel.UnPublishModelBatchAsync*
+  name: UnPublishModelBatchAsync
+  href: api/PnP.Core.Model.SharePoint.ISyntexModel.html#PnP_Core_Model_SharePoint_ISyntexModel_UnPublishModelBatchAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.ISyntexModel.UnPublishModelBatchAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.ISyntexModel.UnPublishModelBatchAsync
+  nameWithType: ISyntexModel.UnPublishModelBatchAsync
 - uid: PnP.Core.Model.SharePoint.ISyntexModelPublication
   name: ISyntexModelPublication
   href: api/PnP.Core.Model.SharePoint.ISyntexModelPublication.html
