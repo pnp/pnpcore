@@ -1985,8 +1985,16 @@ namespace PnP.Core.Model.SharePoint
                     }
 
                     if (sitePagesLibrary.EnableModeration)
-                    { //Approval - missing since i know only the uggly way with ListItem Update OData__ModerationStatus=0
-                      //pageFile.Approve("Approved by provisioning").ConfigureAwait(false);
+                    { //Approval - i know only the ugly way with ListItem Update _ModerationStatus=0
+                        //save all pending changes 
+                        await PageListItem.UpdateAsync().ConfigureAwait(false);
+
+                        await PageListItem.LoadAsync(p => p.Id,p => p["_ModerationStatus"]).ConfigureAwait(false);
+                        if(PageListItem.Values.ContainsKey("_ModerationStatus"))
+                        {
+                            PageListItem["_ModerationStatus"] = 0;
+                            await PageListItem.UpdateAsync().ConfigureAwait(false);
+                        }
                     }
                 }
             }
