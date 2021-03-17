@@ -28309,6 +28309,32 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Services.BatchResult.StatusCode
   nameWithType: BatchResult.StatusCode
+- uid: PnP.Core.Services.BatchResultValue`1
+  name: BatchResultValue<T>
+  href: api/PnP.Core.Services.BatchResultValue-1.html
+  commentId: T:PnP.Core.Services.BatchResultValue`1
+  name.vb: BatchResultValue(Of T)
+  fullName: PnP.Core.Services.BatchResultValue<T>
+  fullName.vb: PnP.Core.Services.BatchResultValue(Of T)
+  nameWithType: BatchResultValue<T>
+  nameWithType.vb: BatchResultValue(Of T)
+- uid: PnP.Core.Services.BatchResultValue`1.Value
+  name: Value
+  href: api/PnP.Core.Services.BatchResultValue-1.html#PnP_Core_Services_BatchResultValue_1_Value
+  commentId: P:PnP.Core.Services.BatchResultValue`1.Value
+  fullName: PnP.Core.Services.BatchResultValue<T>.Value
+  fullName.vb: PnP.Core.Services.BatchResultValue(Of T).Value
+  nameWithType: BatchResultValue<T>.Value
+  nameWithType.vb: BatchResultValue(Of T).Value
+- uid: PnP.Core.Services.BatchResultValue`1.Value*
+  name: Value
+  href: api/PnP.Core.Services.BatchResultValue-1.html#PnP_Core_Services_BatchResultValue_1_Value_
+  commentId: Overload:PnP.Core.Services.BatchResultValue`1.Value
+  isSpec: "True"
+  fullName: PnP.Core.Services.BatchResultValue<T>.Value
+  fullName.vb: PnP.Core.Services.BatchResultValue(Of T).Value
+  nameWithType: BatchResultValue<T>.Value
+  nameWithType.vb: BatchResultValue(Of T).Value
 - uid: PnP.Core.Services.Builder
   name: PnP.Core.Services.Builder
   href: api/PnP.Core.Services.Builder.html

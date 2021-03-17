@@ -5,10 +5,10 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Namespace PnP.Core.Services
+    <title>Class BatchResultValue&lt;T&gt;
    | PnP Core SDK </title>
     <meta name="viewport" content="width=device-width">
-    <meta name="title" content="Namespace PnP.Core.Services
+    <meta name="title" content="Class BatchResultValue&lt;T&gt;
    | PnP Core SDK ">
     <meta name="generator" content="docfx 2.56.5.0">
     <meta name="description" content="The PnP Core SDK is an SDK designed to work against Microsoft 365. Its aim is to provide a unified object model to work with the whole Microsoft 365 ecosystem. ">
@@ -78,131 +78,95 @@
         </div>
         <div class="article row grid-right">
           <div class="col-md-10">
-            <article class="content wrap" id="_content" data-uid="PnP.Core.Services">
+            <article class="content wrap" id="_content" data-uid="PnP.Core.Services.BatchResultValue`1">
                   <div class="contribution-panel mobile-hide pull-right">
+                      <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/BatchResultValue.cs/#L7" title="View Source" class="view-source-lg"><i class="fa fa-code"></i></a>
+                      <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Services_BatchResultValue_1.md&amp;value=---%0Auid%3A%20PnP.Core.Services.BatchResultValue%601%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc" class="improve-doc-lg"><i class="glyphicon glyphicon-pencil"></i></a>
                   </div>
-                      <h1 id="PnP_Core_Services" data-uid="PnP.Core.Services">Namespace PnP.Core.Services
+                      <h1 id="PnP_Core_Services_BatchResultValue_1" data-uid="PnP.Core.Services.BatchResultValue`1">Class BatchResultValue&lt;T&gt;
   </h1>
-  <div class="markdown level0 summary"></div>
+  <div class="markdown level0 summary"><p>Wraps a reference or value type in an object</p>
+</div>
   <div class="markdown level0 conceptual"></div>
-  <div class="markdown level0 remarks"></div>
-    <h3 id="classes">Classes
+
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object">Object</a></div>
+    <div class="level1"><span class="xref">BatchResultValue&lt;T&gt;</span></div>
+  </div>
+  
+  
+  
+  <h6><strong>Namespace</strong>: <a class="xref" href="PnP.Core.Services.html">PnP.Core.Services</a></h6>
+  <h6><strong>Assembly</strong>: PnP.Core.dll</h6>
+  
+  <h5 id="PnP_Core_Services_BatchResultValue_1_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class BatchResultValue&lt;T&gt; : object</code></pre>
+  </div>
+
+  
+  
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="parametername">T</span>
+        <p><p>Type of the value/reference type to wrap</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  <h3 id="properties">Properties
   </h3>
-    <table>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></p>
-          <p><p>Defines a <a class="xref" href="PnP.Core.Services.Batch.html">Batch</a> of requests to execute</p>
-</p>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Services.BatchResult.html">BatchResult</a></p>
-          <p><p>Holds information about the outcome of each batch request</p>
-</p>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Services.BatchResultValue-1.html">BatchResultValue&lt;T&gt;</a></p>
-          <p><p>Wraps a reference or value type in an object</p>
-</p>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Services.FromJson.html">FromJson</a></p>
-          <p><p>Class that represents the JSON context that's being used during call outs when parsing JSON responses</p>
-</p>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Services.MicrosoftGraphClient.html">MicrosoftGraphClient</a></p>
-          <p><p>Client that handles all Microsoft Graph requests</p>
-</p>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Services.PnPContext.html">PnPContext</a></p>
-          <p><p>PnP Context class...the glue between the model and the data stores</p>
-</p>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Services.PnPContextFactory.html">PnPContextFactory</a></p>
-          <p><p>Public factory service to create PnPContext object instances</p>
-</p>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Services.PnPContextFactoryCollectionExtensions.html">PnPContextFactoryCollectionExtensions</a></p>
-          <p><p>Extension class for the IServiceCollection type to provide supporting methods for the PnPContextFactory service</p>
-</p>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Services.PnPContextFactoryOptions.html">PnPContextFactoryOptions</a></p>
-          <p><p>Defines the options to configure the PnPContextFactory object</p>
-</p>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Services.PnPContextFactoryOptionsConfiguration.html">PnPContextFactoryOptionsConfiguration</a></p>
-          <p><p>PnPContext configuration options</p>
-</p>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Services.PnPGlobalSettingsOptions.html">PnPGlobalSettingsOptions</a></p>
-          <p><p>PnP Core SDK settings class</p>
-</p>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Services.SharePointRestClient.html">SharePointRestClient</a></p>
-          <p><p>Client that handles all SharePoint REST requests</p>
-</p>
-        </td>
-      </tr>
-    </table>
-    <h3 id="structs">Structs
-  </h3>
-    <table>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Services.ApiResponse.html">ApiResponse</a></p>
-          <p><p>Defines the response of an executed API call</p>
-</p>
-        </td>
-      </tr>
-    </table>
-    <h3 id="interfaces">Interfaces
-  </h3>
-    <table>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Services.IAuthenticationProvider.html">IAuthenticationProvider</a></p>
-          <p><p>Defines the public interface that any Authentication Provider must implement</p>
-</p>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p><a class="xref" href="PnP.Core.Services.IPnPContextFactory.html">IPnPContextFactory</a></p>
-          <p><p>Public interface for the injectable service to create an PnPContext</p>
-</p>
-        </td>
-      </tr>
-    </table>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Services_BatchResultValue_1_Value.md&amp;value=---%0Auid%3A%20PnP.Core.Services.BatchResultValue%601.Value%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/BatchResultValue.cs/#L17" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Services_BatchResultValue_1_Value_" data-uid="PnP.Core.Services.BatchResultValue`1.Value*"></a>
+  
+  <h4 id="PnP_Core_Services_BatchResultValue_1_Value" data-uid="PnP.Core.Services.BatchResultValue`1.Value"><a href="#collapsible-PnP_Core_Services_BatchResultValue_1_Value" class="expander" data-toggle="collapse">Value</a></h4>
+  
+  <div id="collapsible-PnP_Core_Services_BatchResultValue_1_Value" class="collapse in">
+  <div class="markdown level1 summary"><p>The wrapped reference/value type</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public T Value { get; }</code></pre>
+  </div>
+
+  
+  
+  
+  
+  <h5 class="propertyValue">Property Value</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="xref">T</span>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  
 </article>
           </div>
           <div class="hidden-sm col-md-2" role="complementary">
