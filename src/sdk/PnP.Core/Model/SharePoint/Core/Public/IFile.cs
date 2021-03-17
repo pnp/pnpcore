@@ -531,24 +531,24 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// Send the file to recycle bin.
         /// </summary>
-        Task RecycleBatchAsync();
+        Task<IBatchSingleResult<BatchResultValue<Guid>>> RecycleBatchAsync();
 
         /// <summary>
         /// Send the file to recycle bin.
         /// </summary>
-        void RecycleBatch();
+        IBatchSingleResult<BatchResultValue<Guid>> RecycleBatch();
 
         /// <summary>
         /// Send the file to recycle bin.
         /// </summary>
         /// <param name="batch">The batch instance to use.</param>
-        Task RecycleBatchAsync(Batch batch);
+        Task<IBatchSingleResult<BatchResultValue<Guid>>> RecycleBatchAsync(Batch batch);
 
         /// <summary>
         /// Send the file to recycle bin
         /// </summary>
         /// <param name="batch">The batch instance to use.</param>
-        void RecycleBatch(Batch batch);
+        IBatchSingleResult<BatchResultValue<Guid>> RecycleBatch(Batch batch);
         #endregion
 
         #region Syntex
