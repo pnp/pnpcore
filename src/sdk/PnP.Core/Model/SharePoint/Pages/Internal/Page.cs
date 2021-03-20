@@ -1985,16 +1985,8 @@ namespace PnP.Core.Model.SharePoint
                     }
 
                     if (sitePagesLibrary.EnableModeration)
-                    { //Approval - i know only the ugly way with ListItem Update _ModerationStatus=0
-                        //save all pending changes 
-                        await PageListItem.UpdateAsync().ConfigureAwait(false);
-
-                        await PageListItem.LoadAsync(p => p.Id,p => p["_ModerationStatus"]).ConfigureAwait(false);
-                        if(PageListItem.Values.ContainsKey("_ModerationStatus"))
-                        {
-                            PageListItem["_ModerationStatus"] = 0;
-                            await PageListItem.UpdateAsync().ConfigureAwait(false);
-                        }
+                    { //Approval 
+                        await pageFile.ApproveAsync().ConfigureAwait(false);
                     }
                 }
             }

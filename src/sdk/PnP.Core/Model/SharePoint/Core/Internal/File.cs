@@ -348,6 +348,50 @@ namespace PnP.Core.Model.SharePoint
         }
         #endregion
 
+        #region approve
+
+        public async Task ApproveAsync(string comment = null)
+        {
+            var entity = EntityManager.GetClassInfo(GetType(), this);
+            string checkinEndpointUrl = $"{entity.SharePointUri}/approve(comment='{comment ?? string.Empty}')";
+
+            var apiCall = new ApiCall(checkinEndpointUrl, ApiType.SPORest);
+
+            await RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
+        }
+
+        public void Approve(string comment = null)
+        {
+            CheckinAsync(comment).GetAwaiter().GetResult();
+        }
+
+        public void ApproveBatch(string comment = null)
+        {
+            ApproveBatchAsync(comment).GetAwaiter().GetResult();
+        }
+
+        public void ApproveBatch(Batch batch, string comment = null)
+        {
+            ApproveBatchAsync(batch, comment).GetAwaiter().GetResult();
+        }
+
+        public async Task ApproveBatchAsync(string comment = null)
+        {
+            await ApproveBatchAsync(PnPContext.CurrentBatch, comment).ConfigureAwait(false);
+        }
+
+        public async Task ApproveBatchAsync(Batch batch, string comment = null)
+        {
+            var entity = EntityManager.GetClassInfo(GetType(), this);
+            string approveEndpointUrl = $"{entity.SharePointUri}/approve(comment='{comment ?? string.Empty}')";
+
+            var apiCall = new ApiCall(approveEndpointUrl, ApiType.SPORest);
+
+            await RawRequestBatchAsync(batch, apiCall, HttpMethod.Post).ConfigureAwait(false);
+        }
+
+        #endregion
+
         #region Recycle
 
         public Guid Recycle()
