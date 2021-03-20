@@ -1,4 +1,4 @@
---batchresponse_bd4452d6-80ec-45d0-9a7a-0c11b6f6c6c3
+--batchresponse_3125c52d-d8e0-4ffb-b154-94264149c71d
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
@@ -7,4 +7,4 @@ CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 LOCATION: https://m365x215748.sharepoint.com/sites/AdminContentCenter/_api/machinelearning/publications
 
 {"d":{"__metadata":{"id":"https://m365x215748.sharepoint.com/sites/AdminContentCenter/_api/machinelearning/publications","uri":"https://m365x215748.sharepoint.com/sites/AdminContentCenter/_api/machinelearning/publications","type":"Microsoft.Office.Server.ContentCenter.SPMachineLearningPublicationsResult"},"Details":{"__metadata":{"type":"Collection(Microsoft.Office.Server.ContentCenter.SPMachineLearningPublicationResult)"},"results":[{"ErrorMessage":null,"Publication":{"__metadata":{"type":"Microsoft.Office.Server.ContentCenter.SPMachineLearningPublicationEntityData"},"ModelUniqueId":"bb25a5be-aeed-436d-90e7-add975ac766e","TargetLibraryServerRelativeUrl":"/sites/AdminContentCenter/PNP_SDK_TEST_PublishUnPublishModelsToList21","TargetSiteUrl":"https://m365x215748.sharepoint.com/sites/AdminContentCenter","TargetWebServerRelativeUrl":"/sites/AdminContentCenter","ViewOption":"NewViewAsDefault"},"StatusCode":201},{"ErrorMessage":null,"Publication":{"__metadata":{"type":"Microsoft.Office.Server.ContentCenter.SPMachineLearningPublicationEntityData"},"ModelUniqueId":"bb25a5be-aeed-436d-90e7-add975ac766e","TargetLibraryServerRelativeUrl":"/sites/AdminContentCenter/PNP_SDK_TEST_PublishUnPublishModelsToList22","TargetSiteUrl":"https://m365x215748.sharepoint.com/sites/AdminContentCenter","TargetWebServerRelativeUrl":"/sites/AdminContentCenter","ViewOption":"NewViewAsDefault"},"StatusCode":201}]},"TotalFailures":0,"TotalSuccesses":2}}
---batchresponse_bd4452d6-80ec-45d0-9a7a-0c11b6f6c6c3--
+--batchresponse_3125c52d-d8e0-4ffb-b154-94264149c71d--

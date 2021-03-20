@@ -159,8 +159,11 @@ namespace PnP.Core.Test.SharePoint
                 var list = await context.Web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
                 var item = await list.Items.AddAsync(new Dictionary<string, object> { { "Title", "Recycle me" } });
                 
-                await item.RecycleBatchAsync();
+                var recycleBatchResponse = await item.RecycleBatchAsync();
+                Assert.IsFalse(recycleBatchResponse.IsAvailable);
                 await context.ExecuteAsync();
+                Assert.IsTrue(recycleBatchResponse.IsAvailable);
+                Assert.AreNotEqual(Guid.Empty, recycleBatchResponse.Result.Value);
 
                 // Verify the item was removed from the list item collection
                 Assert.IsTrue((item as ListItem).Deleted);

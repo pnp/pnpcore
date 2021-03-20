@@ -1117,9 +1117,12 @@ namespace PnP.Core.Test.SharePoint
             {
                 IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl);
 
-                await testDocument.RecycleBatchAsync();
+                var batchRecycle = await testDocument.RecycleBatchAsync();
+                Assert.IsFalse(batchRecycle.IsAvailable);
                 await context.ExecuteAsync();
-            
+                Assert.IsTrue(batchRecycle.IsAvailable);
+                Assert.AreNotEqual(Guid.Empty, batchRecycle.Result.Value);
+
                 try
                 {
                     testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl);

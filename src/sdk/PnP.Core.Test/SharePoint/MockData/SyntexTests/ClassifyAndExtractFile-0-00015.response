@@ -1,4 +1,4 @@
---batchresponse_f5554952-b06b-49dc-9091-a6053f745dde
+--batchresponse_99a3d935-e8e1-4277-aac9-819de15403ab
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
@@ -6,4 +6,4 @@ HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
 {"d":{"__metadata":{"id":"https://m365x215748.sharepoint.com/sites/AdminContentCenter/_api/machinelearning/publications/batchdelete","uri":"https://m365x215748.sharepoint.com/sites/AdminContentCenter/_api/machinelearning/publications/batchdelete","type":"Microsoft.Office.Server.ContentCenter.SPMachineLearningPublicationsResult"},"Details":{"__metadata":{"type":"Collection(Microsoft.Office.Server.ContentCenter.SPMachineLearningPublicationResult)"},"results":[{"ErrorMessage":null,"Publication":{"__metadata":{"type":"Microsoft.Office.Server.ContentCenter.SPMachineLearningPublicationEntityData"},"ModelUniqueId":"bb25a5be-aeed-436d-90e7-add975ac766e","TargetLibraryServerRelativeUrl":"/sites/AdminContentCenter/PNP_SDK_TEST_ClassifyAndExtractFile","TargetSiteUrl":"https://m365x215748.sharepoint.com/sites/AdminContentCenter","TargetWebServerRelativeUrl":"/sites/AdminContentCenter","ViewOption":"NewView"},"StatusCode":200}]},"TotalFailures":0,"TotalSuccesses":1}}
---batchresponse_f5554952-b06b-49dc-9091-a6053f745dde--
+--batchresponse_99a3d935-e8e1-4277-aac9-819de15403ab--

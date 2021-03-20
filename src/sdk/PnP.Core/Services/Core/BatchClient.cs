@@ -708,6 +708,11 @@ namespace PnP.Core.Services
                     {
                         await JsonMappingHelper.MapJsonToModel(batchRequest).ConfigureAwait(false);
                     }
+                    else
+                    {
+                        // Invoke a delegate (if defined) to trigger processing of raw batch requests
+                        batchRequest.ApiCall.RawResultsHandler?.Invoke(batchRequest.ResponseJson, batchRequest.ApiCall);
+                    }
                 }
             }
 
@@ -1106,6 +1111,11 @@ namespace PnP.Core.Services
                         if (!batchRequest.ApiCall.RawRequest)
                         {
                             await JsonMappingHelper.MapJsonToModel(batchRequest).ConfigureAwait(false);
+                        }
+                        else
+                        {
+                            // Invoke a delegate (if defined) to trigger processing of raw batch requests
+                            batchRequest.ApiCall.RawResultsHandler?.Invoke(batchRequest.ResponseJson, batchRequest.ApiCall);
                         }
                     }
                 }

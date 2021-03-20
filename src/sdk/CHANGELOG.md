@@ -10,11 +10,16 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
 ### Added
 
+- Added output for ClassifyAndExtractFileBatch methods [jansenbe - Bert Jansen]
+- Added Batch methods for SyntexModel.GetModelPublications, SyntexModel.SyntexModel.PublishModel and SyntexModel.UnPublishModel [jansenbe - Bert Jansen]
+- Support for processing result(s) when using one of the RawRequestBatch methods (see SyntexModel.GetModelPublicationsBatchAsync and SyntexModel.PublishModelBatchAsync as examples) [jansenbe - Bert Jansen]
 - Support to request for classifying and extracting of a file via the connected Syntex models [jansenbe - Bert Jansen]
 - Exposed additional Get/Load synchronous and asynchronous extension methods #354 [PaoloPia - Paolo Pialorsi]
 
 ### Changed
 
+- Added output for RecycleBatch methods on List, ListItem and File [jansenbe - Bert Jansen]
+- Fix bug in EnsureFolder: running this method when the folder structure existed tried to create the folder again [jansenbe - Bert Jansen]
 - Improved page name normalization (only # are not allowed in modern page names) #353 [Sarah4x - Sarah Wilson]
 - Uplifted samples to GA v1.0.0 #350 [pkbullock - Paul Bullock]
 - Bug fix for issue #351 - Teams Chat Messages not working [pkbullock - Paul Bullock]

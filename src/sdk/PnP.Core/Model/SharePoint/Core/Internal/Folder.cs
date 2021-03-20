@@ -312,9 +312,9 @@ namespace PnP.Core.Model.SharePoint
                 // Find next part of the path
                 if (!currentFolderWasCreated)
                 {
-                    await currentFolder.GetAsync(p => p.Folders).ConfigureAwait(false);
+                    await currentFolder.LoadAsync(p => p.Folders).ConfigureAwait(false);
 
-                    var folderCollection = Folders;
+                    var folderCollection = currentFolder.Folders;
 
                     foreach (Folder existingFolder in folderCollection)
                     {

@@ -2,8 +2,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace PnP.Core.Model
 {
@@ -24,12 +22,19 @@ namespace PnP.Core.Model
     
     internal class BatchSingleResult<T> : BatchResult, IBatchSingleResult<T>
     {
+        private readonly T result;
+
         public static IBatchSingleResult<T> None { get; } = new BatchSingleResult<T>(null, Guid.Empty);
 
         public BatchSingleResult(Batch batch, Guid batchRequestId) : base(batch, batchRequestId)
         {
         }
-        
+
+        public BatchSingleResult(Batch batch, Guid batchRequestId, T resultObject) : base(batch, batchRequestId)
+        {
+            result = resultObject;
+        }
+
         public object ObjectResult => Result;
 
         public T Result
@@ -41,7 +46,15 @@ namespace PnP.Core.Model
                     // TODO: use resources
                     throw new InvalidOperationException("Cannot access the result since batch is not available yet");
                 }
-                return (T)(object)BatchRequest.Model;
+
+                if (BatchRequest.ApiCall.RawRequest)
+                {
+                    return result;
+                }
+                else
+                {
+                    return (T)(object)BatchRequest.Model;
+                }
             }
         }
     }
