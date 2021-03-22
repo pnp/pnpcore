@@ -226,16 +226,28 @@ foreach(var library in libraries)
     // Do something with the library publication
 }
 </code></pre>
-<h3 id="classify-and-extract-files">Classify and extract files</h3>
-<p>When there are one or more models published to a library any newly added document is processed via these models automatically. Existing content however is not, but using the ClassifyAndExtractFileAsync method you can request an existing file to be classified and extracted.</p>
+<h3 id="classify-and-extract-individual-files">Classify and extract individual files</h3>
+<p>When there are one or more models published to a library any newly added document is processed via these models automatically. Existing content however is not, but using the <code>ClassifyAndExtractAsync</code> method you can request an existing <code>IFile</code> to be classified and extracted.</p>
 <pre><code class="lang-csharp">string documentUrl = $&quot;{context.Uri.PathAndQuery}/Shared Documents/document.docx&quot;;
 
 // Get a reference to the file
 IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl);
 
 // Classify and extract the file
-var classifyAndExtractResult = await testDocument.ClassifyAndExtractFileAsync();
+var classifyAndExtractResult = await testDocument.ClassifyAndExtractAsync();
 </code></pre>
+<h3 id="classify-and-extract-all-files-in-a-library">Classify and extract all files in a library</h3>
+<p>When you've published a Syntex model to an existing library the files in that library are not automatically classified and extracted by that model, only newly added files will be classified and extracted. Previous chapter showed how you can trigger this for a single file, but you can also classify and extract all files in a library using the <code>ClassifyAndExtractAsync</code> method on the <code>IList</code>:</p>
+<pre><code class="lang-csharp">// Get a reference to the list to be classified and extracted
+var invoices = await context.Web.Lists.GetByTitleAsync(&quot;Invoices&quot;);
+
+// Request classification and extraction for all files that were never classified and extracted
+var classifyAndExtractResults = await invoices.ClassifyAndExtractAsync();
+</code></pre>
+<div class="NOTE">
+<h5>Note</h5>
+<p>You can set the optional ClassifyAndExtractAsync parameter <code>force</code> to true to have all files in the library (again) classified and extracted.</p>
+</div>
 </article>
           </div>
           <div class="hidden-sm col-md-2" role="complementary">
