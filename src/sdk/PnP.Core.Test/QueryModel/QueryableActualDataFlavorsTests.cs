@@ -22,7 +22,7 @@ namespace PnP.Core.Test.QueryModel
         [TestMethod]
         public async Task TestQueryPropertiesMultipleBehaviors()
         {
-            TestCommon.Instance.Mocking = false;
+            // TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 context.GraphFirst = true;
