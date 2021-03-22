@@ -1,4 +1,5 @@
 ﻿using PnP.Core.Model;
+using PnP.Core.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -43,6 +44,14 @@ namespace PnP.Core.QueryModel
 
             return (IQueryable<TResult>)CreateQuery(expression);
         }
+
+        /// <summary>
+        /// Adds the expression to the batch specified
+        /// </summary>
+        /// <typeparam name="TResult"></typeparam>
+        /// <param name="expression"></param>
+        /// <param name="batch"></param>
+        public abstract Task<IEnumerableBatchResult<TResult>> AddToBatchAsync<TResult>(Expression expression, Batch batch);
 
         /// <summary>
         /// Adds the expression to the current batch
