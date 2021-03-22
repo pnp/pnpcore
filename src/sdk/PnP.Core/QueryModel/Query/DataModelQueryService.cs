@@ -41,7 +41,7 @@ namespace PnP.Core.QueryModel
             MemberName = memberName;
         }
 
-        public async Task<BatchRequest> AddToCurrentBatchAsync(ODataQuery<TModel> query)
+        public async Task<BatchRequest> AddToBatchAsync(ODataQuery<TModel> query, Batch batch)
         {
             // We always refresh the EntityInfo object accordingly to the current query
             EntityInfo = EntityManager.GetClassInfo<TModel>(typeof(TModel), null, this.Parent, query.Fields.ToArray());
@@ -76,7 +76,7 @@ namespace PnP.Core.QueryModel
             apiCall.ReceivingProperty = MemberName;
 
             // Add the request to the current batch
-            Guid batchRequestId = PnPContext.CurrentBatch.Add(
+            Guid batchRequestId = batch.Add(
                 batchParent as TransientObject,
                 parentEntityInfo,
                 HttpMethod.Get,
@@ -87,7 +87,7 @@ namespace PnP.Core.QueryModel
                 "Linq"
                 );
 
-            return PnPContext.CurrentBatch.GetRequest(batchRequestId);
+            return batch.GetRequest(batchRequestId);
         }
 
         public async Task<object> ExecuteQueryAsync(Type expressionType, ODataQuery<TModel> query, CancellationToken token)
@@ -102,7 +102,7 @@ namespace PnP.Core.QueryModel
             if (typeof(TModel).ImplementsInterface(typeof(IQueryableDataModel)))
             {
                 // Prepare request and add to the current batch
-                BatchRequest batchRequest = await AddToCurrentBatchAsync(query).ConfigureAwait(false);
+                BatchRequest batchRequest = await AddToBatchAsync(query, PnPContext.CurrentBatch).ConfigureAwait(false);
                 token.ThrowIfCancellationRequested();
 
                 // Cleanup the collection of results, before loading the new results

@@ -63,6 +63,54 @@ namespace PnP.Core.QueryModel
             throw new InvalidOperationException(PnPCoreResources.Exception_InvalidOperation_NotAsyncQueryableSource);
         }
 
+        /// <summary>
+        /// Adds the query to the specified batch
+        /// </summary>
+        /// <typeparam name="TSource"></typeparam>
+        /// <param name="source"></param>
+        /// <param name="batch"></param>
+        /// <returns></returns>
+        public static Task<IEnumerableBatchResult<TSource>> AsBatchAsync<TSource>(
+            this IQueryable<TSource> source,
+            Batch batch)
+        {
+            if (source == null)
+            {
+                throw new ArgumentNullException(nameof(source));
+            }
+
+            if (source.Provider is IAsyncQueryProvider provider)
+            {
+                return provider.AddToBatchAsync<TSource>(source.Expression, batch);
+            }
+
+            throw new InvalidOperationException(PnPCoreResources.Exception_InvalidOperation_NotAsyncQueryableSource);
+        }
+
+        /// <summary>
+        /// Adds the query to the specified batch
+        /// </summary>
+        /// <typeparam name="TSource"></typeparam>
+        /// <param name="source"></param>
+        /// <param name="batch"></param>
+        /// <returns></returns>
+        public static IEnumerableBatchResult<TSource> AsBatch<TSource>(
+            this IQueryable<TSource> source,
+            Batch batch)
+        {
+            if (source == null)
+            {
+                throw new ArgumentNullException(nameof(source));
+            }
+
+            if (source.Provider is IAsyncQueryProvider provider)
+            {
+                return provider.AddToBatchAsync<TSource>(source.Expression, batch).GetAwaiter().GetResult();
+            }
+
+            throw new InvalidOperationException(PnPCoreResources.Exception_InvalidOperation_NotAsyncQueryableSource);
+        }
+
         #endregion
 
         #region QueryProperties
