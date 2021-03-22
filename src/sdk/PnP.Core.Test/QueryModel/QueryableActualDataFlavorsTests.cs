@@ -113,6 +113,41 @@ namespace PnP.Core.Test.QueryModel
                     Assert.IsTrue(l.IsPropertyAvailable(l => l.TemplateType));
                 }
 
+                // With a specified batch
+                var batch = context.NewBatch();
+
+                // AsBatchAsync
+                queryBatchAsync = await context.Web.Lists
+                    .Where(l => l.Title == "Documents")
+                    .QueryProperties(l => l.Title, l => l.TemplateType)
+                    .AsBatchAsync(batch);
+                Assert.IsFalse(queryBatchAsync.IsAvailable);
+
+                await context.ExecuteAsync(batch);
+                Assert.IsTrue(queryBatchAsync.IsAvailable);
+                foreach (var l in queryBatchAsync)
+                {
+                    Assert.IsNotNull(l);
+                    Assert.IsTrue(l.IsPropertyAvailable(l => l.Title));
+                    Assert.IsTrue(l.IsPropertyAvailable(l => l.TemplateType));
+                }
+
+                // AsBatch
+                queryBatch = context.Web.Lists
+                    .Where(l => l.Title == "Documents")
+                    .QueryProperties(l => l.Title, l => l.TemplateType)
+                    .AsBatch(batch);
+                Assert.IsFalse(queryBatch.IsAvailable);
+
+                context.Execute(batch);
+                Assert.IsTrue(queryBatch.IsAvailable);
+                foreach (var l in queryBatch)
+                {
+                    Assert.IsNotNull(l);
+                    Assert.IsTrue(l.IsPropertyAvailable(l => l.Title));
+                    Assert.IsTrue(l.IsPropertyAvailable(l => l.TemplateType));
+                }
+
                 //var item = context.Web.Lists.GetByTitle("Site Pages").Items.GetById(1);
 
                 //var pnpTab = context.Team.PrimaryChannel.Tabs.FirstOrDefault(p => p.DisplayName == "PnPTab");
