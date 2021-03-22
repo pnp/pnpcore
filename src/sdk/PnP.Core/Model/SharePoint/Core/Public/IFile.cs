@@ -557,39 +557,39 @@ namespace PnP.Core.Model.SharePoint
         /// Requests Syntex AI models to classify and extract information from this file 
         /// </summary>
         /// <returns>Information about the classify and extract request</returns>
-        Task<ISyntexClassifyAndExtractResult> ClassifyAndExtractFileAsync();
+        Task<ISyntexClassifyAndExtractResult> ClassifyAndExtractAsync();
 
         /// <summary>
         /// Requests Syntex AI models to classify and extract information from this file 
         /// </summary>
         /// <returns>Information about the classify and extract request</returns>
-        ISyntexClassifyAndExtractResult ClassifyAndExtractFile();
-
-        /// <summary>
-        /// Requests Syntex AI models to classify and extract information from this file 
-        /// </summary>
-        /// <param name="batch">Batch to add this request to</param>
-        /// <returns>Information about the classify and extract request</returns>
-        Task<IBatchSingleResult<ISyntexClassifyAndExtractResult>> ClassifyAndExtractFileBatchAsync(Batch batch);
+        ISyntexClassifyAndExtractResult ClassifyAndExtract();
 
         /// <summary>
         /// Requests Syntex AI models to classify and extract information from this file 
         /// </summary>
         /// <param name="batch">Batch to add this request to</param>
         /// <returns>Information about the classify and extract request</returns>
-        IBatchSingleResult<ISyntexClassifyAndExtractResult> ClassifyAndExtractFileBatch(Batch batch);
+        Task<IBatchSingleResult<ISyntexClassifyAndExtractResult>> ClassifyAndExtractBatchAsync(Batch batch);
+
+        /// <summary>
+        /// Requests Syntex AI models to classify and extract information from this file 
+        /// </summary>
+        /// <param name="batch">Batch to add this request to</param>
+        /// <returns>Information about the classify and extract request</returns>
+        IBatchSingleResult<ISyntexClassifyAndExtractResult> ClassifyAndExtractBatch(Batch batch);
 
         /// <summary>
         /// Requests Syntex AI models to classify and extract information from this file 
         /// </summary>
         /// <returns>Information about the classify and extract request</returns>
-        Task<IBatchSingleResult<ISyntexClassifyAndExtractResult>> ClassifyAndExtractFileBatchAsync();
+        Task<IBatchSingleResult<ISyntexClassifyAndExtractResult>> ClassifyAndExtractBatchAsync();
 
         /// <summary>
         /// Requests Syntex AI models to classify and extract information from this file 
         /// </summary>
         /// <returns>Information about the classify and extract request</returns>
-        IBatchSingleResult<ISyntexClassifyAndExtractResult> ClassifyAndExtractFileBatch();
+        IBatchSingleResult<ISyntexClassifyAndExtractResult> ClassifyAndExtractBatch();
         #endregion
     }
 }

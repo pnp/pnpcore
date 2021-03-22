@@ -613,7 +613,7 @@ namespace PnP.Core.Model.SharePoint
         #endregion
 
         #region Syntex
-        public async Task<ISyntexClassifyAndExtractResult> ClassifyAndExtractFileAsync()
+        public async Task<ISyntexClassifyAndExtractResult> ClassifyAndExtractAsync()
         {
             ApiCall apiCall = CreateClassifyAndExtractApiCall();
             var apiResult = await RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
@@ -622,12 +622,12 @@ namespace PnP.Core.Model.SharePoint
             return ProcessClassifyAndExtractResponse(apiResult.Json);
         }
 
-        public ISyntexClassifyAndExtractResult ClassifyAndExtractFile()
+        public ISyntexClassifyAndExtractResult ClassifyAndExtract()
         {
-            return ClassifyAndExtractFileAsync().GetAwaiter().GetResult();
+            return ClassifyAndExtractAsync().GetAwaiter().GetResult();
         }
 
-        public async Task<IBatchSingleResult<ISyntexClassifyAndExtractResult>> ClassifyAndExtractFileBatchAsync(Batch batch)
+        public async Task<IBatchSingleResult<ISyntexClassifyAndExtractResult>> ClassifyAndExtractBatchAsync(Batch batch)
         {
             ApiCall apiCall = CreateClassifyAndExtractApiCall();
             apiCall.RawSingleResult = new SyntexClassifyAndExtractResult();
@@ -651,19 +651,19 @@ namespace PnP.Core.Model.SharePoint
             return new BatchSingleResult<ISyntexClassifyAndExtractResult>(batch, batchRequest.Id, apiCall.RawSingleResult as ISyntexClassifyAndExtractResult);
         }
 
-        public IBatchSingleResult<ISyntexClassifyAndExtractResult> ClassifyAndExtractFileBatch(Batch batch)
+        public IBatchSingleResult<ISyntexClassifyAndExtractResult> ClassifyAndExtractBatch(Batch batch)
         {
-            return ClassifyAndExtractFileBatchAsync(batch).GetAwaiter().GetResult();
+            return ClassifyAndExtractBatchAsync(batch).GetAwaiter().GetResult();
         }
 
-        public async Task<IBatchSingleResult<ISyntexClassifyAndExtractResult>> ClassifyAndExtractFileBatchAsync()
+        public async Task<IBatchSingleResult<ISyntexClassifyAndExtractResult>> ClassifyAndExtractBatchAsync()
         {
-            return await ClassifyAndExtractFileBatchAsync(PnPContext.CurrentBatch).ConfigureAwait(false);
+            return await ClassifyAndExtractBatchAsync(PnPContext.CurrentBatch).ConfigureAwait(false);
         }
 
-        public IBatchSingleResult<ISyntexClassifyAndExtractResult> ClassifyAndExtractFileBatch()
+        public IBatchSingleResult<ISyntexClassifyAndExtractResult> ClassifyAndExtractBatch()
         {
-            return ClassifyAndExtractFileBatchAsync().GetAwaiter().GetResult();
+            return ClassifyAndExtractBatchAsync().GetAwaiter().GetResult();
         }
 
         private static ISyntexClassifyAndExtractResult ProcessClassifyAndExtractResponse(string json)

@@ -529,7 +529,7 @@ namespace PnP.Core.Test.SharePoint
                 Assert.IsTrue(result.Succeeded);
 
                 // Classify and extract existing content for one file
-                var classifyInformation = await testDocument.ClassifyAndExtractFileAsync();
+                var classifyInformation = await testDocument.ClassifyAndExtractAsync();
                 Assert.IsTrue(classifyInformation != null);
                 Assert.IsTrue(classifyInformation.Created != DateTime.MinValue);
                 Assert.IsTrue(classifyInformation.DeliverDate != DateTime.MinValue);
@@ -541,8 +541,8 @@ namespace PnP.Core.Test.SharePoint
                 Assert.IsTrue(classifyInformation.TargetServerRelativeUrl == testDocument.ServerRelativeUrl);
 
                 // Classify and extract via batch request
-                var file1BatchResult = await testDocument2.ClassifyAndExtractFileBatchAsync();
-                var file2BatchResult = await testDocument3.ClassifyAndExtractFileBatchAsync();
+                var file1BatchResult = await testDocument2.ClassifyAndExtractBatchAsync();
+                var file2BatchResult = await testDocument3.ClassifyAndExtractBatchAsync();
                 Assert.IsFalse(file1BatchResult.IsAvailable);
                 Assert.IsFalse(file2BatchResult.IsAvailable);
                 var results = await context.ExecuteAsync();
