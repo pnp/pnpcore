@@ -198,4 +198,4 @@ var classifyAndExtractResults = await invoices.ClassifyAndExtractAsync();
 ```
 
 > [!Note]
-> You can set the optional ClassifyAndExtractAsync parameter `force` to true to have all files in the library (again) classified and extracted.
+> You can set the optional `ClassifyAndExtractAsync` method parameter `force` to true to have all files in the library (again) classified and extracted.
