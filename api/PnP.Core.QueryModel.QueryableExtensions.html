@@ -117,7 +117,7 @@
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_QueryModel_QueryableExtensions_AsAsyncEnumerable__1_IQueryable___0__.md&amp;value=---%0Auid%3A%20PnP.Core.QueryModel.QueryableExtensions.AsAsyncEnumerable%60%601(IQueryable%7B%60%600%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/QueryModel/Linq/QueryableExtensions.cs/#L524" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/QueryModel/Linq/QueryableExtensions.cs/#L572" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_QueryModel_QueryableExtensions_AsAsyncEnumerable_" data-uid="PnP.Core.QueryModel.QueryableExtensions.AsAsyncEnumerable*"></a>
@@ -247,6 +247,76 @@ that any asynchronous operations have completed before calling another method on
   
   <span class="small pull-right mobile-hide">
     <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_QueryModel_QueryableExtensions_AsBatch__1_IQueryable___0__PnP_Core_Services_Batch_.md&amp;value=---%0Auid%3A%20PnP.Core.QueryModel.QueryableExtensions.AsBatch%60%601(IQueryable%7B%60%600%7D%2CPnP.Core.Services.Batch)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/QueryModel/Linq/QueryableExtensions.cs/#L97" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_QueryModel_QueryableExtensions_AsBatch_" data-uid="PnP.Core.QueryModel.QueryableExtensions.AsBatch*"></a>
+  
+  <h4 id="PnP_Core_QueryModel_QueryableExtensions_AsBatch__1_IQueryable___0__PnP_Core_Services_Batch_" data-uid="PnP.Core.QueryModel.QueryableExtensions.AsBatch``1(IQueryable{``0},PnP.Core.Services.Batch)"><a href="#collapsible-PnP_Core_QueryModel_QueryableExtensions_AsBatch__1_IQueryable___0__PnP_Core_Services_Batch_" class="expander" data-toggle="collapse">AsBatch&lt;TSource&gt;(IQueryable&lt;TSource&gt;, Batch)</a></h4>
+  
+  <div id="collapsible-PnP_Core_QueryModel_QueryableExtensions_AsBatch__1_IQueryable___0__PnP_Core_Services_Batch_" class="collapse in">
+  <div class="markdown level1 summary"><p>Adds the query to the specified batch</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static IEnumerableBatchResult&lt;TSource&gt; AsBatch&lt;TSource&gt;(this IQueryable&lt;TSource&gt; source, Batch batch)</code></pre>
+  </div>
+
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><span class="xref">IQueryable</span>&lt;TSource&gt;</span>
+        <span class="parametername">source</span>
+        <p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></span>
+        <span class="parametername">batch</span>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="PnP.Core.Model.IEnumerableBatchResult-1.html">IEnumerableBatchResult</a>&lt;TSource&gt;
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="parametername">TSource</span>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_QueryModel_QueryableExtensions_AsBatchAsync__1_IQueryable___0__.md&amp;value=---%0Auid%3A%20PnP.Core.QueryModel.QueryableExtensions.AsBatchAsync%60%601(IQueryable%7B%60%600%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
@@ -310,10 +380,80 @@ that any asynchronous operations have completed before calling another method on
   
   <span class="small pull-right mobile-hide">
     <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_QueryModel_QueryableExtensions_AsBatchAsync__1_IQueryable___0__PnP_Core_Services_Batch_.md&amp;value=---%0Auid%3A%20PnP.Core.QueryModel.QueryableExtensions.AsBatchAsync%60%601(IQueryable%7B%60%600%7D%2CPnP.Core.Services.Batch)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/QueryModel/Linq/QueryableExtensions.cs/#L73" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_QueryModel_QueryableExtensions_AsBatchAsync_" data-uid="PnP.Core.QueryModel.QueryableExtensions.AsBatchAsync*"></a>
+  
+  <h4 id="PnP_Core_QueryModel_QueryableExtensions_AsBatchAsync__1_IQueryable___0__PnP_Core_Services_Batch_" data-uid="PnP.Core.QueryModel.QueryableExtensions.AsBatchAsync``1(IQueryable{``0},PnP.Core.Services.Batch)"><a href="#collapsible-PnP_Core_QueryModel_QueryableExtensions_AsBatchAsync__1_IQueryable___0__PnP_Core_Services_Batch_" class="expander" data-toggle="collapse">AsBatchAsync&lt;TSource&gt;(IQueryable&lt;TSource&gt;, Batch)</a></h4>
+  
+  <div id="collapsible-PnP_Core_QueryModel_QueryableExtensions_AsBatchAsync__1_IQueryable___0__PnP_Core_Services_Batch_" class="collapse in">
+  <div class="markdown level1 summary"><p>Adds the query to the specified batch</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Task&lt;IEnumerableBatchResult&lt;TSource&gt;&gt; AsBatchAsync&lt;TSource&gt;(this IQueryable&lt;TSource&gt; source, Batch batch)</code></pre>
+  </div>
+
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><span class="xref">IQueryable</span>&lt;TSource&gt;</span>
+        <span class="parametername">source</span>
+        <p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></span>
+        <span class="parametername">batch</span>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="xref">Task</span>&lt;<a class="xref" href="PnP.Core.Model.IEnumerableBatchResult-1.html">IEnumerableBatchResult</a>&lt;TSource&gt;&gt;
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="parametername">TSource</span>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_QueryModel_QueryableExtensions_AsRequested__1_PnP_Core_Model_IDataModelCollection___0__.md&amp;value=---%0Auid%3A%20PnP.Core.QueryModel.QueryableExtensions.AsRequested%60%601(PnP.Core.Model.IDataModelCollection%7B%60%600%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/QueryModel/Linq/QueryableExtensions.cs/#L552" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/QueryModel/Linq/QueryableExtensions.cs/#L600" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_QueryModel_QueryableExtensions_AsRequested_" data-uid="PnP.Core.QueryModel.QueryableExtensions.AsRequested*"></a>
@@ -379,7 +519,7 @@ that any asynchronous operations have completed before calling another method on
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_QueryModel_QueryableExtensions_FirstAsync__1_IQueryable___0__CancellationToken_.md&amp;value=---%0Auid%3A%20PnP.Core.QueryModel.QueryableExtensions.FirstAsync%60%601(IQueryable%7B%60%600%7D%2CCancellationToken)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/QueryModel/Linq/QueryableExtensions.cs/#L135" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/QueryModel/Linq/QueryableExtensions.cs/#L183" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_QueryModel_QueryableExtensions_FirstAsync_" data-uid="PnP.Core.QueryModel.QueryableExtensions.FirstAsync*"></a>
@@ -458,7 +598,7 @@ that any asynchronous operations have completed before calling another method on
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_QueryModel_QueryableExtensions_FirstAsync__1_IQueryable___0__Expression_Func___0_System_Boolean___CancellationToken_.md&amp;value=---%0Auid%3A%20PnP.Core.QueryModel.QueryableExtensions.FirstAsync%60%601(IQueryable%7B%60%600%7D%2CExpression%7BFunc%7B%60%600%2CSystem.Boolean%7D%7D%2CCancellationToken)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/QueryModel/Linq/QueryableExtensions.cs/#L178" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/QueryModel/Linq/QueryableExtensions.cs/#L226" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_QueryModel_QueryableExtensions_FirstAsync_" data-uid="PnP.Core.QueryModel.QueryableExtensions.FirstAsync*"></a>
@@ -546,7 +686,7 @@ that any asynchronous operations have completed before calling another method on
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_QueryModel_QueryableExtensions_FirstOrDefaultAsync__1_IQueryable___0__CancellationToken_.md&amp;value=---%0Auid%3A%20PnP.Core.QueryModel.QueryableExtensions.FirstOrDefaultAsync%60%601(IQueryable%7B%60%600%7D%2CCancellationToken)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/QueryModel/Linq/QueryableExtensions.cs/#L213" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/QueryModel/Linq/QueryableExtensions.cs/#L261" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_QueryModel_QueryableExtensions_FirstOrDefaultAsync_" data-uid="PnP.Core.QueryModel.QueryableExtensions.FirstOrDefaultAsync*"></a>
@@ -626,7 +766,7 @@ that any asynchronous operations have completed before calling another method on
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_QueryModel_QueryableExtensions_FirstOrDefaultAsync__1_IQueryable___0__Expression_Func___0_System_Boolean___CancellationToken_.md&amp;value=---%0Auid%3A%20PnP.Core.QueryModel.QueryableExtensions.FirstOrDefaultAsync%60%601(IQueryable%7B%60%600%7D%2CExpression%7BFunc%7B%60%600%2CSystem.Boolean%7D%7D%2CCancellationToken)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/QueryModel/Linq/QueryableExtensions.cs/#L242" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/QueryModel/Linq/QueryableExtensions.cs/#L290" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_QueryModel_QueryableExtensions_FirstOrDefaultAsync_" data-uid="PnP.Core.QueryModel.QueryableExtensions.FirstOrDefaultAsync*"></a>
@@ -716,7 +856,7 @@ that any asynchronous operations have completed before calling another method on
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_QueryModel_QueryableExtensions_ForEachAsync__1_IQueryable___0__Action___0__CancellationToken_.md&amp;value=---%0Auid%3A%20PnP.Core.QueryModel.QueryableExtensions.ForEachAsync%60%601(IQueryable%7B%60%600%7D%2CAction%7B%60%600%7D%2CCancellationToken)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/QueryModel/Linq/QueryableExtensions.cs/#L433" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/QueryModel/Linq/QueryableExtensions.cs/#L481" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_QueryModel_QueryableExtensions_ForEachAsync_" data-uid="PnP.Core.QueryModel.QueryableExtensions.ForEachAsync*"></a>
@@ -802,7 +942,7 @@ that any asynchronous operations have completed before calling another method on
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_QueryModel_QueryableExtensions_QueryProperties__1_IQueryable___0__Expression_Func___0_System_Object_____.md&amp;value=---%0Auid%3A%20PnP.Core.QueryModel.QueryableExtensions.QueryProperties%60%601(IQueryable%7B%60%600%7D%2CExpression%7BFunc%7B%60%600%2CSystem.Object%7D%7D%5B%5D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/QueryModel/Linq/QueryableExtensions.cs/#L94" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/QueryModel/Linq/QueryableExtensions.cs/#L142" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_QueryModel_QueryableExtensions_QueryProperties_" data-uid="PnP.Core.QueryModel.QueryableExtensions.QueryProperties*"></a>
@@ -876,7 +1016,7 @@ that any asynchronous operations have completed before calling another method on
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_QueryModel_QueryableExtensions_QueryProperties__1_PnP_Core_Model_ISupportQuery___0__Expression_Func___0_System_Object_____.md&amp;value=---%0Auid%3A%20PnP.Core.QueryModel.QueryableExtensions.QueryProperties%60%601(PnP.Core.Model.ISupportQuery%7B%60%600%7D%2CExpression%7BFunc%7B%60%600%2CSystem.Object%7D%7D%5B%5D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/QueryModel/Linq/QueryableExtensions.cs/#L77" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/QueryModel/Linq/QueryableExtensions.cs/#L125" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_QueryModel_QueryableExtensions_QueryProperties_" data-uid="PnP.Core.QueryModel.QueryableExtensions.QueryProperties*"></a>
@@ -950,7 +1090,7 @@ that any asynchronous operations have completed before calling another method on
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_QueryModel_QueryableExtensions_ToArrayAsync__1_IQueryable___0__CancellationToken_.md&amp;value=---%0Auid%3A%20PnP.Core.QueryModel.QueryableExtensions.ToArrayAsync%60%601(IQueryable%7B%60%600%7D%2CCancellationToken)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/QueryModel/Linq/QueryableExtensions.cs/#L503" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/QueryModel/Linq/QueryableExtensions.cs/#L551" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_QueryModel_QueryableExtensions_ToArrayAsync_" data-uid="PnP.Core.QueryModel.QueryableExtensions.ToArrayAsync*"></a>
@@ -1029,7 +1169,7 @@ that any asynchronous operations have completed before calling another method on
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_QueryModel_QueryableExtensions_ToDictionaryAsync__2_IQueryable___0__Func___0___1__CancellationToken_.md&amp;value=---%0Auid%3A%20PnP.Core.QueryModel.QueryableExtensions.ToDictionaryAsync%60%602(IQueryable%7B%60%600%7D%2CFunc%7B%60%600%2C%60%601%7D%2CCancellationToken)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/QueryModel/Linq/QueryableExtensions.cs/#L286" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/QueryModel/Linq/QueryableExtensions.cs/#L334" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_QueryModel_QueryableExtensions_ToDictionaryAsync_" data-uid="PnP.Core.QueryModel.QueryableExtensions.ToDictionaryAsync*"></a>
@@ -1125,7 +1265,7 @@ that any asynchronous operations have completed before calling another method on
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_QueryModel_QueryableExtensions_ToDictionaryAsync__2_IQueryable___0__Func___0___1__IEqualityComparer___1__CancellationToken_.md&amp;value=---%0Auid%3A%20PnP.Core.QueryModel.QueryableExtensions.ToDictionaryAsync%60%602(IQueryable%7B%60%600%7D%2CFunc%7B%60%600%2C%60%601%7D%2CIEqualityComparer%7B%60%601%7D%2CCancellationToken)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/QueryModel/Linq/QueryableExtensions.cs/#L316" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/QueryModel/Linq/QueryableExtensions.cs/#L364" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_QueryModel_QueryableExtensions_ToDictionaryAsync_" data-uid="PnP.Core.QueryModel.QueryableExtensions.ToDictionaryAsync*"></a>
@@ -1229,7 +1369,7 @@ that any asynchronous operations have completed before calling another method on
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_QueryModel_QueryableExtensions_ToDictionaryAsync__3_IQueryable___0__Func___0___1__Func___0___2__CancellationToken_.md&amp;value=---%0Auid%3A%20PnP.Core.QueryModel.QueryableExtensions.ToDictionaryAsync%60%603(IQueryable%7B%60%600%7D%2CFunc%7B%60%600%2C%60%601%7D%2CFunc%7B%60%600%2C%60%602%7D%2CCancellationToken)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/QueryModel/Linq/QueryableExtensions.cs/#L349" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/QueryModel/Linq/QueryableExtensions.cs/#L397" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_QueryModel_QueryableExtensions_ToDictionaryAsync_" data-uid="PnP.Core.QueryModel.QueryableExtensions.ToDictionaryAsync*"></a>
@@ -1341,7 +1481,7 @@ that any asynchronous operations have completed before calling another method on
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_QueryModel_QueryableExtensions_ToDictionaryAsync__3_IQueryable___0__Func___0___1__Func___0___2__IEqualityComparer___1__CancellationToken_.md&amp;value=---%0Auid%3A%20PnP.Core.QueryModel.QueryableExtensions.ToDictionaryAsync%60%603(IQueryable%7B%60%600%7D%2CFunc%7B%60%600%2C%60%601%7D%2CFunc%7B%60%600%2C%60%602%7D%2CIEqualityComparer%7B%60%601%7D%2CCancellationToken)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/QueryModel/Linq/QueryableExtensions.cs/#L383" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/QueryModel/Linq/QueryableExtensions.cs/#L431" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_QueryModel_QueryableExtensions_ToDictionaryAsync_" data-uid="PnP.Core.QueryModel.QueryableExtensions.ToDictionaryAsync*"></a>
@@ -1461,7 +1601,7 @@ that any asynchronous operations have completed before calling another method on
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_QueryModel_QueryableExtensions_ToListAsync__1_IQueryable___0__CancellationToken_.md&amp;value=---%0Auid%3A%20PnP.Core.QueryModel.QueryableExtensions.ToListAsync%60%601(IQueryable%7B%60%600%7D%2CCancellationToken)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/QueryModel/Linq/QueryableExtensions.cs/#L474" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/QueryModel/Linq/QueryableExtensions.cs/#L522" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_QueryModel_QueryableExtensions_ToListAsync_" data-uid="PnP.Core.QueryModel.QueryableExtensions.ToListAsync*"></a>

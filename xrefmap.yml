@@ -27471,6 +27471,22 @@ references:
   commentId: T:PnP.Core.QueryModel.BaseQueryProvider
   fullName: PnP.Core.QueryModel.BaseQueryProvider
   nameWithType: BaseQueryProvider
+- uid: PnP.Core.QueryModel.BaseQueryProvider.AddToBatchAsync*
+  name: AddToBatchAsync
+  href: api/PnP.Core.QueryModel.BaseQueryProvider.html#PnP_Core_QueryModel_BaseQueryProvider_AddToBatchAsync_
+  commentId: Overload:PnP.Core.QueryModel.BaseQueryProvider.AddToBatchAsync
+  isSpec: "True"
+  fullName: PnP.Core.QueryModel.BaseQueryProvider.AddToBatchAsync
+  nameWithType: BaseQueryProvider.AddToBatchAsync
+- uid: PnP.Core.QueryModel.BaseQueryProvider.AddToBatchAsync``1(Expression,PnP.Core.Services.Batch)
+  name: AddToBatchAsync<TResult>(Expression, Batch)
+  href: api/PnP.Core.QueryModel.BaseQueryProvider.html#PnP_Core_QueryModel_BaseQueryProvider_AddToBatchAsync__1_Expression_PnP_Core_Services_Batch_
+  commentId: M:PnP.Core.QueryModel.BaseQueryProvider.AddToBatchAsync``1(Expression,PnP.Core.Services.Batch)
+  name.vb: AddToBatchAsync(Of TResult)(Expression, Batch)
+  fullName: PnP.Core.QueryModel.BaseQueryProvider.AddToBatchAsync<TResult>(Expression, PnP.Core.Services.Batch)
+  fullName.vb: PnP.Core.QueryModel.BaseQueryProvider.AddToBatchAsync(Of TResult)(Expression, PnP.Core.Services.Batch)
+  nameWithType: BaseQueryProvider.AddToBatchAsync<TResult>(Expression, Batch)
+  nameWithType.vb: BaseQueryProvider.AddToBatchAsync(Of TResult)(Expression, Batch)
 - uid: PnP.Core.QueryModel.BaseQueryProvider.AddToCurrentBatchAsync*
   name: AddToCurrentBatchAsync
   href: api/PnP.Core.QueryModel.BaseQueryProvider.html#PnP_Core_QueryModel_BaseQueryProvider_AddToCurrentBatchAsync_
@@ -27718,6 +27734,22 @@ references:
   commentId: T:PnP.Core.QueryModel.IAsyncQueryProvider
   fullName: PnP.Core.QueryModel.IAsyncQueryProvider
   nameWithType: IAsyncQueryProvider
+- uid: PnP.Core.QueryModel.IAsyncQueryProvider.AddToBatchAsync*
+  name: AddToBatchAsync
+  href: api/PnP.Core.QueryModel.IAsyncQueryProvider.html#PnP_Core_QueryModel_IAsyncQueryProvider_AddToBatchAsync_
+  commentId: Overload:PnP.Core.QueryModel.IAsyncQueryProvider.AddToBatchAsync
+  isSpec: "True"
+  fullName: PnP.Core.QueryModel.IAsyncQueryProvider.AddToBatchAsync
+  nameWithType: IAsyncQueryProvider.AddToBatchAsync
+- uid: PnP.Core.QueryModel.IAsyncQueryProvider.AddToBatchAsync``1(Expression,PnP.Core.Services.Batch)
+  name: AddToBatchAsync<TResult>(Expression, Batch)
+  href: api/PnP.Core.QueryModel.IAsyncQueryProvider.html#PnP_Core_QueryModel_IAsyncQueryProvider_AddToBatchAsync__1_Expression_PnP_Core_Services_Batch_
+  commentId: M:PnP.Core.QueryModel.IAsyncQueryProvider.AddToBatchAsync``1(Expression,PnP.Core.Services.Batch)
+  name.vb: AddToBatchAsync(Of TResult)(Expression, Batch)
+  fullName: PnP.Core.QueryModel.IAsyncQueryProvider.AddToBatchAsync<TResult>(Expression, PnP.Core.Services.Batch)
+  fullName.vb: PnP.Core.QueryModel.IAsyncQueryProvider.AddToBatchAsync(Of TResult)(Expression, PnP.Core.Services.Batch)
+  nameWithType: IAsyncQueryProvider.AddToBatchAsync<TResult>(Expression, Batch)
+  nameWithType.vb: IAsyncQueryProvider.AddToBatchAsync(Of TResult)(Expression, Batch)
 - uid: PnP.Core.QueryModel.IAsyncQueryProvider.AddToCurrentBatchAsync*
   name: AddToCurrentBatchAsync
   href: api/PnP.Core.QueryModel.IAsyncQueryProvider.html#PnP_Core_QueryModel_IAsyncQueryProvider_AddToCurrentBatchAsync_
@@ -27875,6 +27907,15 @@ references:
   fullName.vb: PnP.Core.QueryModel.QueryableExtensions.AsBatch(Of TSource)(IQueryable(Of TSource))
   nameWithType: QueryableExtensions.AsBatch<TSource>(IQueryable<TSource>)
   nameWithType.vb: QueryableExtensions.AsBatch(Of TSource)(IQueryable(Of TSource))
+- uid: PnP.Core.QueryModel.QueryableExtensions.AsBatch``1(IQueryable{``0},PnP.Core.Services.Batch)
+  name: AsBatch<TSource>(IQueryable<TSource>, Batch)
+  href: api/PnP.Core.QueryModel.QueryableExtensions.html#PnP_Core_QueryModel_QueryableExtensions_AsBatch__1_IQueryable___0__PnP_Core_Services_Batch_
+  commentId: M:PnP.Core.QueryModel.QueryableExtensions.AsBatch``1(IQueryable{``0},PnP.Core.Services.Batch)
+  name.vb: AsBatch(Of TSource)(IQueryable(Of TSource), Batch)
+  fullName: PnP.Core.QueryModel.QueryableExtensions.AsBatch<TSource>(IQueryable<TSource>, PnP.Core.Services.Batch)
+  fullName.vb: PnP.Core.QueryModel.QueryableExtensions.AsBatch(Of TSource)(IQueryable(Of TSource), PnP.Core.Services.Batch)
+  nameWithType: QueryableExtensions.AsBatch<TSource>(IQueryable<TSource>, Batch)
+  nameWithType.vb: QueryableExtensions.AsBatch(Of TSource)(IQueryable(Of TSource), Batch)
 - uid: PnP.Core.QueryModel.QueryableExtensions.AsBatchAsync*
   name: AsBatchAsync
   href: api/PnP.Core.QueryModel.QueryableExtensions.html#PnP_Core_QueryModel_QueryableExtensions_AsBatchAsync_
@@ -27891,6 +27932,15 @@ references:
   fullName.vb: PnP.Core.QueryModel.QueryableExtensions.AsBatchAsync(Of TSource)(IQueryable(Of TSource))
   nameWithType: QueryableExtensions.AsBatchAsync<TSource>(IQueryable<TSource>)
   nameWithType.vb: QueryableExtensions.AsBatchAsync(Of TSource)(IQueryable(Of TSource))
+- uid: PnP.Core.QueryModel.QueryableExtensions.AsBatchAsync``1(IQueryable{``0},PnP.Core.Services.Batch)
+  name: AsBatchAsync<TSource>(IQueryable<TSource>, Batch)
+  href: api/PnP.Core.QueryModel.QueryableExtensions.html#PnP_Core_QueryModel_QueryableExtensions_AsBatchAsync__1_IQueryable___0__PnP_Core_Services_Batch_
+  commentId: M:PnP.Core.QueryModel.QueryableExtensions.AsBatchAsync``1(IQueryable{``0},PnP.Core.Services.Batch)
+  name.vb: AsBatchAsync(Of TSource)(IQueryable(Of TSource), Batch)
+  fullName: PnP.Core.QueryModel.QueryableExtensions.AsBatchAsync<TSource>(IQueryable<TSource>, PnP.Core.Services.Batch)
+  fullName.vb: PnP.Core.QueryModel.QueryableExtensions.AsBatchAsync(Of TSource)(IQueryable(Of TSource), PnP.Core.Services.Batch)
+  nameWithType: QueryableExtensions.AsBatchAsync<TSource>(IQueryable<TSource>, Batch)
+  nameWithType.vb: QueryableExtensions.AsBatchAsync(Of TSource)(IQueryable(Of TSource), Batch)
 - uid: PnP.Core.QueryModel.QueryableExtensions.AsRequested*
   name: AsRequested
   href: api/PnP.Core.QueryModel.QueryableExtensions.html#PnP_Core_QueryModel_QueryableExtensions_AsRequested_
