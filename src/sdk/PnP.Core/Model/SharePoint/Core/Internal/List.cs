@@ -691,6 +691,154 @@ namespace PnP.Core.Model.SharePoint
             }, parentFolder, FileSystemObjectType.Folder).ConfigureAwait(false);
         }
         #endregion
+
+        #region Syntex
+        public async Task<List<ISyntexClassifyAndExtractResult>> ClassifyAndExtractAsync(bool force = false, int pageSize = 500)
+        {
+            // load required fields in this list
+            string viewXml = @"<View>
+                    <ViewFields>
+                      <FieldRef Name='FileDirRef' />
+                      <FieldRef Name='FileLeafRef' />
+                      <FieldRef Name='UniqueId' />
+                      <FieldRef Name='PrimeLastClassified' />
+                    </ViewFields>   
+                    {1}
+                    <RowLimit Paged='TRUE'>{0}</RowLimit>
+                   </View>";
+
+            bool paging = true;
+            string nextPageInfo = null;
+            string filter;
+
+            if (!force)
+            {
+                filter = @"<Query>
+                      <Where>
+                        <IsNull>
+                          <FieldRef Name='PrimeLastClassified'/>                          
+                        </IsNull>
+                      </Where>
+                    </Query>";
+            }
+            else
+            {
+                filter = "";
+            }
+
+            while (paging)
+            {
+                var queryOptions = new RenderListDataOptions()
+                {
+                    ViewXml = string.Format(viewXml, pageSize, filter),
+                    RenderOptions = RenderListDataOptionsFlags.ListData
+                };
+
+                if (nextPageInfo != null)
+                {
+                    queryOptions.Paging = nextPageInfo;
+                }
+
+                // Execute the query for the requested page
+                var output = await LoadListDataAsStreamAsync(queryOptions).ConfigureAwait(false);
+
+                if (output.ContainsKey("NextHref"))
+                {
+                    nextPageInfo = output["NextHref"].ToString()?.Substring(1);
+                    if (string.IsNullOrEmpty(nextPageInfo))
+                    {
+                        paging = false;
+                    }
+                }
+                else
+                {
+                    paging = false;
+                }
+            }
+
+            // Iterate over the results and request Syntex classification and extraction
+            List<ISyntexClassifyAndExtractResult> classifyResults = new List<ISyntexClassifyAndExtractResult>();
+            List<BatchSingleResult<ISyntexClassifyAndExtractResult>> classifyBatchRequests = new List<BatchSingleResult<ISyntexClassifyAndExtractResult>>();
+            var batch = PnPContext.NewBatch();
+            foreach (var file in Items.AsRequested())
+            {
+                var apiCall = CreateClassifyAndExtractApiCall(Guid.Parse(file.Values["UniqueId"].ToString()));
+                apiCall.RawSingleResult = new SyntexClassifyAndExtractResult();
+                apiCall.RawResultsHandler = (json, apiCall) =>
+                {
+                    var result = ProcessClassifyAndExtractResponse(json);
+                    (apiCall.RawSingleResult as SyntexClassifyAndExtractResult).Created = result.Created;
+                    (apiCall.RawSingleResult as SyntexClassifyAndExtractResult).DeliverDate = result.DeliverDate;
+                    (apiCall.RawSingleResult as SyntexClassifyAndExtractResult).ErrorMessage = result.ErrorMessage;
+                    (apiCall.RawSingleResult as SyntexClassifyAndExtractResult).Id = result.Id;
+                    (apiCall.RawSingleResult as SyntexClassifyAndExtractResult).Status = result.Status;
+                    (apiCall.RawSingleResult as SyntexClassifyAndExtractResult).StatusCode = result.StatusCode;
+                    (apiCall.RawSingleResult as SyntexClassifyAndExtractResult).TargetServerRelativeUrl = result.TargetServerRelativeUrl;
+                    (apiCall.RawSingleResult as SyntexClassifyAndExtractResult).TargetSiteUrl = result.TargetSiteUrl;
+                    (apiCall.RawSingleResult as SyntexClassifyAndExtractResult).TargetWebServerRelativeUrl = result.TargetWebServerRelativeUrl;
+                    (apiCall.RawSingleResult as SyntexClassifyAndExtractResult).WorkItemType = result.WorkItemType;
+                };
+
+                var batchRequest = await RawRequestBatchAsync(batch, apiCall, HttpMethod.Post).ConfigureAwait(false);
+                classifyBatchRequests.Add(new BatchSingleResult<ISyntexClassifyAndExtractResult>(batch, batchRequest.Id, apiCall.RawSingleResult as ISyntexClassifyAndExtractResult));
+            }
+
+            // Execute the batch
+            await PnPContext.ExecuteAsync(batch, false).ConfigureAwait(false);
+
+            // Translate the batch results to the needed set of results
+            foreach (var classifyBatchRequest in classifyBatchRequests)
+            {
+                classifyResults.Add(classifyBatchRequest.Result);
+            }
+
+            return classifyResults;
+        }
+
+        public List<ISyntexClassifyAndExtractResult> ClassifyAndExtract(bool force = false, int pageSize = 500)
+        {
+            return ClassifyAndExtractAsync(force, pageSize).GetAwaiter().GetResult();
+        }
+
+        private static ISyntexClassifyAndExtractResult ProcessClassifyAndExtractResponse(string json)
+        {
+            var root = JsonDocument.Parse(json).RootElement.GetProperty("d");
+            return new SyntexClassifyAndExtractResult
+            {
+                Created = root.GetProperty("Created").GetDateTime(),
+                DeliverDate = root.GetProperty("DeliverDate").GetDateTime(),
+                ErrorMessage = root.GetProperty("ErrorMessage").GetString(),
+                StatusCode = root.GetProperty("StatusCode").GetInt32(),
+                Id = root.GetProperty("ID").GetGuid(),
+                Status = root.GetProperty("Status").GetString(),
+                WorkItemType = root.GetProperty("Type").GetGuid(),
+                TargetServerRelativeUrl = root.GetProperty("TargetServerRelativeUrl").GetString(),
+                TargetSiteUrl = root.GetProperty("TargetSiteUrl").GetString(),
+                TargetWebServerRelativeUrl = root.GetProperty("TargetWebServerRelativeUrl").GetString()
+            };
+        }
+
+        private ApiCall CreateClassifyAndExtractApiCall(Guid fileUniqueId)
+        {
+            var classifyAndExtractFile = new
+            {
+                __metadata = new { type = "Microsoft.Office.Server.ContentCenter.SPMachineLearningWorkItemEntityData" },
+                Type = "AE9D4F24-EE84-4C0C-A972-A74CFFE939A1",
+                TargetSiteId = PnPContext.Site.Id,
+                TargetWebId = PnPContext.Web.Id,
+                TargetUniqueId = fileUniqueId
+            }.AsExpando();
+
+            string body = JsonSerializer.Serialize(classifyAndExtractFile, new JsonSerializerOptions()
+            {
+                IgnoreNullValues = true
+            });
+
+            var apiCall = new ApiCall("_api/machinelearning/workitems", ApiType.SPORest, body);
+            return apiCall;
+        }
+        #endregion
+
         #endregion
     }
 }

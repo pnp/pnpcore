@@ -1,0 +1,91 @@
+--batchresponse_1236bba3-676d-4e97-8a07-394183d41448
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+HTTP/1.1 201 Created
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+LOCATION: https://m365x215748.sharepoint.com/sites/AdminContentCenter/_api/machinelearning/workitems/getbyidentifier('/sites/AdminContentCenter,cbc31c67-94c7-45de-9b14-e8e85134a966')
+
+{"d":{"__metadata":{"id":"https://m365x215748.sharepoint.com/sites/AdminContentCenter/_api/machinelearning/workitems/getbyidentifier('/sites/AdminContentCenter,cbc31c67-94c7-45de-9b14-e8e85134a966')","uri":"https://m365x215748.sharepoint.com/sites/AdminContentCenter/_api/machinelearning/workitems/getbyidentifier('/sites/AdminContentCenter,cbc31c67-94c7-45de-9b14-e8e85134a966')","type":"Microsoft.Office.Server.ContentCenter.SPMachineLearningWorkItem"},"Created":"2021-03-22T17:48:49","DeliverDate":"2021-03-22T17:48:49","ErrorMessage":null,"ID":"cbc31c67-94c7-45de-9b14-e8e85134a966","Status":"ExponentialBackoff","StatusCode":0,"TargetServerRelativeUrl":"/sites/AdminContentCenter/PNP_SDK_TEST_ClassifyAndExtractList/ClassifyAndExtractFile.docx","TargetSiteId":null,"TargetSiteUrl":"https://m365x215748.sharepoint.com/sites/AdminContentCenter","TargetUniqueId":null,"TargetWebId":null,"TargetWebServerRelativeUrl":"/sites/AdminContentCenter","Type":"ae9d4f24-ee84-4c0c-a972-a74cffe939a1"}}
+--batchresponse_1236bba3-676d-4e97-8a07-394183d41448
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+HTTP/1.1 201 Created
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+LOCATION: https://m365x215748.sharepoint.com/sites/AdminContentCenter/_api/machinelearning/workitems/getbyidentifier('/sites/AdminContentCenter,f5658776-75ac-4648-ae0c-a4fde75edfa4')
+
+{"d":{"__metadata":{"id":"https://m365x215748.sharepoint.com/sites/AdminContentCenter/_api/machinelearning/workitems/getbyidentifier('/sites/AdminContentCenter,f5658776-75ac-4648-ae0c-a4fde75edfa4')","uri":"https://m365x215748.sharepoint.com/sites/AdminContentCenter/_api/machinelearning/workitems/getbyidentifier('/sites/AdminContentCenter,f5658776-75ac-4648-ae0c-a4fde75edfa4')","type":"Microsoft.Office.Server.ContentCenter.SPMachineLearningWorkItem"},"Created":"2021-03-22T17:48:50","DeliverDate":"2021-03-22T17:48:49","ErrorMessage":null,"ID":"f5658776-75ac-4648-ae0c-a4fde75edfa4","Status":"ExponentialBackoff","StatusCode":0,"TargetServerRelativeUrl":"/sites/AdminContentCenter/PNP_SDK_TEST_ClassifyAndExtractList/ClassifyAndExtractFile2.docx","TargetSiteId":null,"TargetSiteUrl":"https://m365x215748.sharepoint.com/sites/AdminContentCenter","TargetUniqueId":null,"TargetWebId":null,"TargetWebServerRelativeUrl":"/sites/AdminContentCenter","Type":"ae9d4f24-ee84-4c0c-a972-a74cffe939a1"}}
+--batchresponse_1236bba3-676d-4e97-8a07-394183d41448
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+HTTP/1.1 201 Created
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+LOCATION: https://m365x215748.sharepoint.com/sites/AdminContentCenter/_api/machinelearning/workitems/getbyidentifier('/sites/AdminContentCenter,dc9421bf-0c22-47d7-9934-d06721d387f3')
+
+{"d":{"__metadata":{"id":"https://m365x215748.sharepoint.com/sites/AdminContentCenter/_api/machinelearning/workitems/getbyidentifier('/sites/AdminContentCenter,dc9421bf-0c22-47d7-9934-d06721d387f3')","uri":"https://m365x215748.sharepoint.com/sites/AdminContentCenter/_api/machinelearning/workitems/getbyidentifier('/sites/AdminContentCenter,dc9421bf-0c22-47d7-9934-d06721d387f3')","type":"Microsoft.Office.Server.ContentCenter.SPMachineLearningWorkItem"},"Created":"2021-03-22T17:48:50","DeliverDate":"2021-03-22T17:48:50","ErrorMessage":null,"ID":"dc9421bf-0c22-47d7-9934-d06721d387f3","Status":"ExponentialBackoff","StatusCode":0,"TargetServerRelativeUrl":"/sites/AdminContentCenter/PNP_SDK_TEST_ClassifyAndExtractList/ClassifyAndExtractFile3.docx","TargetSiteId":null,"TargetSiteUrl":"https://m365x215748.sharepoint.com/sites/AdminContentCenter","TargetUniqueId":null,"TargetWebId":null,"TargetWebServerRelativeUrl":"/sites/AdminContentCenter","Type":"ae9d4f24-ee84-4c0c-a972-a74cffe939a1"}}
+--batchresponse_1236bba3-676d-4e97-8a07-394183d41448
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+HTTP/1.1 201 Created
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+LOCATION: https://m365x215748.sharepoint.com/sites/AdminContentCenter/_api/machinelearning/workitems/getbyidentifier('/sites/AdminContentCenter,876a43f3-8383-42da-bca6-ca288bbc6c75')
+
+{"d":{"__metadata":{"id":"https://m365x215748.sharepoint.com/sites/AdminContentCenter/_api/machinelearning/workitems/getbyidentifier('/sites/AdminContentCenter,876a43f3-8383-42da-bca6-ca288bbc6c75')","uri":"https://m365x215748.sharepoint.com/sites/AdminContentCenter/_api/machinelearning/workitems/getbyidentifier('/sites/AdminContentCenter,876a43f3-8383-42da-bca6-ca288bbc6c75')","type":"Microsoft.Office.Server.ContentCenter.SPMachineLearningWorkItem"},"Created":"2021-03-22T17:48:50","DeliverDate":"2021-03-22T17:48:50","ErrorMessage":null,"ID":"876a43f3-8383-42da-bca6-ca288bbc6c75","Status":"ExponentialBackoff","StatusCode":0,"TargetServerRelativeUrl":"/sites/AdminContentCenter/PNP_SDK_TEST_ClassifyAndExtractList/ClassifyAndExtractFile4.docx","TargetSiteId":null,"TargetSiteUrl":"https://m365x215748.sharepoint.com/sites/AdminContentCenter","TargetUniqueId":null,"TargetWebId":null,"TargetWebServerRelativeUrl":"/sites/AdminContentCenter","Type":"ae9d4f24-ee84-4c0c-a972-a74cffe939a1"}}
+--batchresponse_1236bba3-676d-4e97-8a07-394183d41448
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+HTTP/1.1 201 Created
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+LOCATION: https://m365x215748.sharepoint.com/sites/AdminContentCenter/_api/machinelearning/workitems/getbyidentifier('/sites/AdminContentCenter,a0f38a8b-b6e2-4e5b-88d1-26ebc09e5810')
+
+{"d":{"__metadata":{"id":"https://m365x215748.sharepoint.com/sites/AdminContentCenter/_api/machinelearning/workitems/getbyidentifier('/sites/AdminContentCenter,a0f38a8b-b6e2-4e5b-88d1-26ebc09e5810')","uri":"https://m365x215748.sharepoint.com/sites/AdminContentCenter/_api/machinelearning/workitems/getbyidentifier('/sites/AdminContentCenter,a0f38a8b-b6e2-4e5b-88d1-26ebc09e5810')","type":"Microsoft.Office.Server.ContentCenter.SPMachineLearningWorkItem"},"Created":"2021-03-22T17:48:50","DeliverDate":"2021-03-22T17:48:50","ErrorMessage":null,"ID":"a0f38a8b-b6e2-4e5b-88d1-26ebc09e5810","Status":"ExponentialBackoff","StatusCode":0,"TargetServerRelativeUrl":"/sites/AdminContentCenter/PNP_SDK_TEST_ClassifyAndExtractList/ClassifyAndExtractFile5.docx","TargetSiteId":null,"TargetSiteUrl":"https://m365x215748.sharepoint.com/sites/AdminContentCenter","TargetUniqueId":null,"TargetWebId":null,"TargetWebServerRelativeUrl":"/sites/AdminContentCenter","Type":"ae9d4f24-ee84-4c0c-a972-a74cffe939a1"}}
+--batchresponse_1236bba3-676d-4e97-8a07-394183d41448
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+HTTP/1.1 201 Created
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+LOCATION: https://m365x215748.sharepoint.com/sites/AdminContentCenter/_api/machinelearning/workitems/getbyidentifier('/sites/AdminContentCenter,72938908-0006-4cee-ab77-24b014ebabe7')
+
+{"d":{"__metadata":{"id":"https://m365x215748.sharepoint.com/sites/AdminContentCenter/_api/machinelearning/workitems/getbyidentifier('/sites/AdminContentCenter,72938908-0006-4cee-ab77-24b014ebabe7')","uri":"https://m365x215748.sharepoint.com/sites/AdminContentCenter/_api/machinelearning/workitems/getbyidentifier('/sites/AdminContentCenter,72938908-0006-4cee-ab77-24b014ebabe7')","type":"Microsoft.Office.Server.ContentCenter.SPMachineLearningWorkItem"},"Created":"2021-03-22T17:48:50","DeliverDate":"2021-03-22T17:48:50","ErrorMessage":null,"ID":"72938908-0006-4cee-ab77-24b014ebabe7","Status":"ExponentialBackoff","StatusCode":0,"TargetServerRelativeUrl":"/sites/AdminContentCenter/PNP_SDK_TEST_ClassifyAndExtractList/ClassifyAndExtractFile6.docx","TargetSiteId":null,"TargetSiteUrl":"https://m365x215748.sharepoint.com/sites/AdminContentCenter","TargetUniqueId":null,"TargetWebId":null,"TargetWebServerRelativeUrl":"/sites/AdminContentCenter","Type":"ae9d4f24-ee84-4c0c-a972-a74cffe939a1"}}
+--batchresponse_1236bba3-676d-4e97-8a07-394183d41448
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+HTTP/1.1 201 Created
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+LOCATION: https://m365x215748.sharepoint.com/sites/AdminContentCenter/_api/machinelearning/workitems/getbyidentifier('/sites/AdminContentCenter,38adbf5c-29f2-481f-a508-3f41fbf6a396')
+
+{"d":{"__metadata":{"id":"https://m365x215748.sharepoint.com/sites/AdminContentCenter/_api/machinelearning/workitems/getbyidentifier('/sites/AdminContentCenter,38adbf5c-29f2-481f-a508-3f41fbf6a396')","uri":"https://m365x215748.sharepoint.com/sites/AdminContentCenter/_api/machinelearning/workitems/getbyidentifier('/sites/AdminContentCenter,38adbf5c-29f2-481f-a508-3f41fbf6a396')","type":"Microsoft.Office.Server.ContentCenter.SPMachineLearningWorkItem"},"Created":"2021-03-22T17:48:50","DeliverDate":"2021-03-22T17:48:50","ErrorMessage":null,"ID":"38adbf5c-29f2-481f-a508-3f41fbf6a396","Status":"ExponentialBackoff","StatusCode":0,"TargetServerRelativeUrl":"/sites/AdminContentCenter/PNP_SDK_TEST_ClassifyAndExtractList/ClassifyAndExtractFile7.docx","TargetSiteId":null,"TargetSiteUrl":"https://m365x215748.sharepoint.com/sites/AdminContentCenter","TargetUniqueId":null,"TargetWebId":null,"TargetWebServerRelativeUrl":"/sites/AdminContentCenter","Type":"ae9d4f24-ee84-4c0c-a972-a74cffe939a1"}}
+--batchresponse_1236bba3-676d-4e97-8a07-394183d41448
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+HTTP/1.1 201 Created
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+LOCATION: https://m365x215748.sharepoint.com/sites/AdminContentCenter/_api/machinelearning/workitems/getbyidentifier('/sites/AdminContentCenter,d23ab6d0-514d-4ed0-8dce-bdc5df1b99a7')
+
+{"d":{"__metadata":{"id":"https://m365x215748.sharepoint.com/sites/AdminContentCenter/_api/machinelearning/workitems/getbyidentifier('/sites/AdminContentCenter,d23ab6d0-514d-4ed0-8dce-bdc5df1b99a7')","uri":"https://m365x215748.sharepoint.com/sites/AdminContentCenter/_api/machinelearning/workitems/getbyidentifier('/sites/AdminContentCenter,d23ab6d0-514d-4ed0-8dce-bdc5df1b99a7')","type":"Microsoft.Office.Server.ContentCenter.SPMachineLearningWorkItem"},"Created":"2021-03-22T17:48:50","DeliverDate":"2021-03-22T17:48:50","ErrorMessage":null,"ID":"d23ab6d0-514d-4ed0-8dce-bdc5df1b99a7","Status":"ExponentialBackoff","StatusCode":0,"TargetServerRelativeUrl":"/sites/AdminContentCenter/PNP_SDK_TEST_ClassifyAndExtractList/ClassifyAndExtractFile8.docx","TargetSiteId":null,"TargetSiteUrl":"https://m365x215748.sharepoint.com/sites/AdminContentCenter","TargetUniqueId":null,"TargetWebId":null,"TargetWebServerRelativeUrl":"/sites/AdminContentCenter","Type":"ae9d4f24-ee84-4c0c-a972-a74cffe939a1"}}
+--batchresponse_1236bba3-676d-4e97-8a07-394183d41448
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+HTTP/1.1 201 Created
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+LOCATION: https://m365x215748.sharepoint.com/sites/AdminContentCenter/_api/machinelearning/workitems/getbyidentifier('/sites/AdminContentCenter,ebb16579-6fb4-4ca9-baa5-4c4639b69a0f')
+
+{"d":{"__metadata":{"id":"https://m365x215748.sharepoint.com/sites/AdminContentCenter/_api/machinelearning/workitems/getbyidentifier('/sites/AdminContentCenter,ebb16579-6fb4-4ca9-baa5-4c4639b69a0f')","uri":"https://m365x215748.sharepoint.com/sites/AdminContentCenter/_api/machinelearning/workitems/getbyidentifier('/sites/AdminContentCenter,ebb16579-6fb4-4ca9-baa5-4c4639b69a0f')","type":"Microsoft.Office.Server.ContentCenter.SPMachineLearningWorkItem"},"Created":"2021-03-22T17:48:50","DeliverDate":"2021-03-22T17:48:50","ErrorMessage":null,"ID":"ebb16579-6fb4-4ca9-baa5-4c4639b69a0f","Status":"ExponentialBackoff","StatusCode":0,"TargetServerRelativeUrl":"/sites/AdminContentCenter/PNP_SDK_TEST_ClassifyAndExtractList/ClassifyAndExtractFile9.docx","TargetSiteId":null,"TargetSiteUrl":"https://m365x215748.sharepoint.com/sites/AdminContentCenter","TargetUniqueId":null,"TargetWebId":null,"TargetWebServerRelativeUrl":"/sites/AdminContentCenter","Type":"ae9d4f24-ee84-4c0c-a972-a74cffe939a1"}}
+--batchresponse_1236bba3-676d-4e97-8a07-394183d41448
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+HTTP/1.1 201 Created
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+LOCATION: https://m365x215748.sharepoint.com/sites/AdminContentCenter/_api/machinelearning/workitems/getbyidentifier('/sites/AdminContentCenter,3b9cbc53-9c05-4724-964f-f8857e0b8f0d')
+
+{"d":{"__metadata":{"id":"https://m365x215748.sharepoint.com/sites/AdminContentCenter/_api/machinelearning/workitems/getbyidentifier('/sites/AdminContentCenter,3b9cbc53-9c05-4724-964f-f8857e0b8f0d')","uri":"https://m365x215748.sharepoint.com/sites/AdminContentCenter/_api/machinelearning/workitems/getbyidentifier('/sites/AdminContentCenter,3b9cbc53-9c05-4724-964f-f8857e0b8f0d')","type":"Microsoft.Office.Server.ContentCenter.SPMachineLearningWorkItem"},"Created":"2021-03-22T17:48:50","DeliverDate":"2021-03-22T17:48:50","ErrorMessage":null,"ID":"3b9cbc53-9c05-4724-964f-f8857e0b8f0d","Status":"ExponentialBackoff","StatusCode":0,"TargetServerRelativeUrl":"/sites/AdminContentCenter/PNP_SDK_TEST_ClassifyAndExtractList/ClassifyAndExtractFile10.docx","TargetSiteId":null,"TargetSiteUrl":"https://m365x215748.sharepoint.com/sites/AdminContentCenter","TargetUniqueId":null,"TargetWebId":null,"TargetWebServerRelativeUrl":"/sites/AdminContentCenter","Type":"ae9d4f24-ee84-4c0c-a972-a74cffe939a1"}}
+--batchresponse_1236bba3-676d-4e97-8a07-394183d41448--

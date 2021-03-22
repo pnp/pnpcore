@@ -1,0 +1,89 @@
+--batchresponse_8246762f-2a31-4279-9360-0dbe10cc4b25
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+HTTP/1.1 200 OK
+CONTENT-TYPE: application/json; charset=utf-8
+
+{ "Row" : 
+[{
+"ID": "9",
+"PermMask": "0x7ffffffffffbffff",
+"FSObjType": "0",
+"HTML_x0020_File_x0020_Type": "",
+"UniqueId": "{369F6572-9DB4-44D4-B0D9-6B7B5CEB8858}",
+"ProgId": "",
+"NoExecute": "1",
+"ContentTypeId": "0x010100A750205F8F353F4399180B059639CA3E",
+"FileRef": "\u002fsites\u002fAdminContentCenter\u002fPNP_SDK_TEST_ClassifyAndExtractList\u002fClassifyAndExtractFile9.docx",
+"FileRef.urlencode": "%2Fsites%2FAdminContentCenter%2FPNP%5FSDK%5FTEST%5FClassifyAndExtractList%2FClassifyAndExtractFile9%2Edocx",
+"FileRef.urlencodeasurl": "\u002fsites\u002fAdminContentCenter\u002fPNP_SDK_TEST_ClassifyAndExtractList\u002fClassifyAndExtractFile9.docx",
+"FileRef.urlencoding": "\u002fsites\u002fAdminContentCenter\u002fPNP_SDK_TEST_ClassifyAndExtractList\u002fClassifyAndExtractFile9.docx",
+"FileRef.scriptencodeasurl": "\\u002fsites\\u002fAdminContentCenter\\u002fPNP_SDK_TEST_ClassifyAndExtractList\\u002fClassifyAndExtractFile9.docx",
+"SMTotalSize": "18417",
+"File_x0020_Size": "17816",
+"_CommentFlags": "",
+"FileDirRef": "\u002fsites\u002fAdminContentCenter\u002fPNP_SDK_TEST_ClassifyAndExtractList",
+"FileLeafRef": "ClassifyAndExtractFile9.docx",
+"FileLeafRef.Name": "ClassifyAndExtractFile9",
+"FileLeafRef.Suffix": "docx",
+"PrimeLastClassified": "",
+"PrimeLastClassified.": "",
+"ItemChildCount": "0",
+"FolderChildCount": "0",
+"A2ODMountCount": "",
+"_StubFile": "0",
+"_ComplianceTag": "",
+"owshiddenversion": "1",
+"ContentVersion": "2",
+"DocConcurrencyNumber": "1",
+"_VirusStatus": "",
+"Restricted": "",
+"ecb.dispex": "return DispEx(this,event,'TRUE','FALSE','','','1','','','','','9','0','','0x7ffffffffffbffff','','')"
+}
+,{
+"ID": "10",
+"PermMask": "0x7ffffffffffbffff",
+"FSObjType": "0",
+"HTML_x0020_File_x0020_Type": "",
+"UniqueId": "{26C7C86D-A7A8-4EFA-A394-5F7564BFC848}",
+"ProgId": "",
+"NoExecute": "1",
+"ContentTypeId": "0x010100A750205F8F353F4399180B059639CA3E",
+"FileRef": "\u002fsites\u002fAdminContentCenter\u002fPNP_SDK_TEST_ClassifyAndExtractList\u002fClassifyAndExtractFile10.docx",
+"FileRef.urlencode": "%2Fsites%2FAdminContentCenter%2FPNP%5FSDK%5FTEST%5FClassifyAndExtractList%2FClassifyAndExtractFile10%2Edocx",
+"FileRef.urlencodeasurl": "\u002fsites\u002fAdminContentCenter\u002fPNP_SDK_TEST_ClassifyAndExtractList\u002fClassifyAndExtractFile10.docx",
+"FileRef.urlencoding": "\u002fsites\u002fAdminContentCenter\u002fPNP_SDK_TEST_ClassifyAndExtractList\u002fClassifyAndExtractFile10.docx",
+"FileRef.scriptencodeasurl": "\\u002fsites\\u002fAdminContentCenter\\u002fPNP_SDK_TEST_ClassifyAndExtractList\\u002fClassifyAndExtractFile10.docx",
+"SMTotalSize": "18418",
+"File_x0020_Size": "17817",
+"_CommentFlags": "",
+"FileDirRef": "\u002fsites\u002fAdminContentCenter\u002fPNP_SDK_TEST_ClassifyAndExtractList",
+"FileLeafRef": "ClassifyAndExtractFile10.docx",
+"FileLeafRef.Name": "ClassifyAndExtractFile10",
+"FileLeafRef.Suffix": "docx",
+"PrimeLastClassified": "",
+"PrimeLastClassified.": "",
+"ItemChildCount": "0",
+"FolderChildCount": "0",
+"A2ODMountCount": "",
+"_StubFile": "0",
+"_ComplianceTag": "",
+"owshiddenversion": "1",
+"ContentVersion": "2",
+"DocConcurrencyNumber": "1",
+"_VirusStatus": "",
+"Restricted": "",
+"ecb.dispex": "return DispEx(this,event,'TRUE','FALSE','','','1','','','','','9','0','','0x7ffffffffffbffff','','')"
+}
+],"FirstRow" : 1,
+"FolderPermissions" : "0x7ffffffffffbffff"
+,"LastRow" : 2,
+"RowLimit" : 4
+,"FilterLink" : "?"
+,"ForceNoHierarchy" : "1"
+,"HierarchyHasIndention" : ""
+,"CurrentFolderSpItemUrl" : ""
+
+}
+--batchresponse_8246762f-2a31-4279-9360-0dbe10cc4b25--

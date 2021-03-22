@@ -12,6 +12,8 @@ namespace PnP.Core.Model.SharePoint
     [ConcreteType(typeof(List))]
     public interface IList : IDataModel<IList>, IDataModelGet<IList>, IDataModelLoad<IList>, IDataModelUpdate, IDataModelDelete, IQueryableDataModel
     {
+        #region Properties
+
         /// <summary>
         /// The Unique ID of the List object
         /// </summary>
@@ -234,6 +236,9 @@ namespace PnP.Core.Model.SharePoint
         /// </summary>
         public bool HasUniqueRoleAssignments { get; }
 
+        #endregion
+
+        #region Methods
         /// <summary>
         /// Moves this list into the site collection recycle bin, returns the recyle bin item id
         /// </summary>
@@ -528,5 +533,21 @@ namespace PnP.Core.Model.SharePoint
         /// <returns></returns>
         public Task<IListItem> AddListFolderAsync(string path, string parentFolder = null, string contentTypeId = "0x0120");
 
+        /// <summary>
+        /// Classifies and extracts all unprocessed files in the list
+        /// </summary>
+        /// <param name="force">Also classify and extract files that were processed before</param>
+        /// <param name="pageSize">Page size used when loading the files in this library</param>
+        /// <returns>Information about the created classify and extract requests</returns>
+        Task<List<ISyntexClassifyAndExtractResult>> ClassifyAndExtractAsync(bool force = false, int pageSize = 500);
+
+        /// <summary>
+        /// Classifies and extracts all unprocessed files in the list
+        /// </summary>
+        /// <param name="force">Also classify and extract files that were processed before</param>
+        /// <param name="pageSize">Page size used when loading the files in this library</param>
+        /// <returns>Information about the created classify and extract requests</returns>
+        List<ISyntexClassifyAndExtractResult> ClassifyAndExtract(bool force = false, int pageSize = 500);
+        #endregion
     }
 }

@@ -171,9 +171,9 @@ foreach(var library in libraries)
 }
 ```
 
-### Classify and extract files
+### Classify and extract individual files
 
-When there are one or more models published to a library any newly added document is processed via these models automatically. Existing content however is not, but using the ClassifyAndExtractFileAsync method you can request an existing file to be classified and extracted.
+When there are one or more models published to a library any newly added document is processed via these models automatically. Existing content however is not, but using the `ClassifyAndExtractAsync` method you can request an existing `IFile` to be classified and extracted.
 
 ```csharp
 string documentUrl = $"{context.Uri.PathAndQuery}/Shared Documents/document.docx";
@@ -182,5 +182,20 @@ string documentUrl = $"{context.Uri.PathAndQuery}/Shared Documents/document.docx
 IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl);
 
 // Classify and extract the file
-var classifyAndExtractResult = await testDocument.ClassifyAndExtractFileAsync();
+var classifyAndExtractResult = await testDocument.ClassifyAndExtractAsync();
 ```
+
+### Classify and extract all files in a library
+
+When you've published a Syntex model to an existing library the files in that library are not automatically classified and extracted by that model, only newly added files will be classified and extracted. Previous chapter showed how you can trigger this for a single file, but you can also classify and extract all files in a library using the `ClassifyAndExtractAsync` method on the `IList`:
+
+```csharp
+// Get a reference to the list to be classified and extracted
+var invoices = await context.Web.Lists.GetByTitleAsync("Invoices");
+
+// Request classification and extraction for all files that were never classified and extracted
+var classifyAndExtractResults = await invoices.ClassifyAndExtractAsync();
+```
+
+> [!Note]
+> You can set the optional ClassifyAndExtractAsync parameter `force` to true to have all files in the library (again) classified and extracted.
