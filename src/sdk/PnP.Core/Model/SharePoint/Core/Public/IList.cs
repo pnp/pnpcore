@@ -250,27 +250,27 @@ namespace PnP.Core.Model.SharePoint
         /// Moves this list into the site collection recycle bin, returns the recyle bin item id
         /// </summary>
         /// <returns>Id of the recycle bin item</returns>
-        public void RecycleBatch();
+        public IBatchSingleResult<BatchResultValue<Guid>> RecycleBatch();
 
         /// <summary>
         /// Moves this list into the site collection recycle bin, returns the recyle bin item id
         /// </summary>
         /// <returns>Id of the recycle bin item</returns>
-        public Task RecycleBatchAsync();
-
-        /// <summary>
-        /// Moves this list into the site collection recycle bin, returns the recyle bin item id
-        /// </summary>
-        /// <param name="batch">Batch to add the request to</param>
-        /// <returns>Id of the recycle bin item</returns>
-        public void RecycleBatch(Batch batch);
+        public Task<IBatchSingleResult<BatchResultValue<Guid>>> RecycleBatchAsync();
 
         /// <summary>
         /// Moves this list into the site collection recycle bin, returns the recyle bin item id
         /// </summary>
         /// <param name="batch">Batch to add the request to</param>
         /// <returns>Id of the recycle bin item</returns>
-        public Task RecycleBatchAsync(Batch batch);
+        public IBatchSingleResult<BatchResultValue<Guid>> RecycleBatch(Batch batch);
+
+        /// <summary>
+        /// Moves this list into the site collection recycle bin, returns the recyle bin item id
+        /// </summary>
+        /// <param name="batch">Batch to add the request to</param>
+        /// <returns>Id of the recycle bin item</returns>
+        public Task<IBatchSingleResult<BatchResultValue<Guid>>> RecycleBatchAsync(Batch batch);
 
         /// <summary>
         /// Loads list items based up on a CAML query

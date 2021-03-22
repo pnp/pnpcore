@@ -54,7 +54,9 @@ namespace PnP.Core.Model.SharePoint
             {
                 throw new ArgumentNullException(nameof(serverRelativePageName));
             }
-            var encodedServerRelativePageName = WebUtility.UrlEncode(serverRelativePageName);
+
+            // Replace # with - as AddTemplateFile cannot handle an # in the name. This replacement is the same behavior than the SharePoint UI does
+            var encodedServerRelativePageName = WebUtility.UrlEncode(serverRelativePageName.Replace("'", "''").Replace("#","-")).Replace("+", "%20");
             var newFile = CreateNewAndAdd() as File;
             string fileCreateRequest = $"_api/web/getFolderById('{{Parent.Id}}')/files/AddTemplateFile(urlOfFile='{encodedServerRelativePageName}',templateFileType={(int)templateFileType})";
             var api = new ApiCall(fileCreateRequest, ApiType.SPORest);
@@ -71,7 +73,8 @@ namespace PnP.Core.Model.SharePoint
         #region File upload
         private static async Task<File> FileUpload(File newFile, Stream content, bool overwrite)
         {
-            string fileCreateRequest = $"_api/web/getFolderById('{{Parent.Id}}')/files/add(url='{newFile.Name}',overwrite={overwrite.ToString().ToLowerInvariant()})";
+            var encodedServerFileName = WebUtility.UrlEncode(newFile.Name.Replace("'", "''")).Replace("+", "%20");
+            string fileCreateRequest = $"_api/web/getFolderById('{{Parent.Id}}')/files/addusingpath(decodedUrl='{encodedServerFileName}',overwrite={overwrite.ToString().ToLowerInvariant()})";
             var api = new ApiCall(fileCreateRequest, ApiType.SPORest)
             {
                 Interactive = true,

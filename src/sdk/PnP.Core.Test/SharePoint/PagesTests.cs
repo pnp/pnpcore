@@ -750,6 +750,45 @@ namespace PnP.Core.Test.SharePoint
         }
 
         [TestMethod]
+        public async Task VideoEmbedUsingStreamTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var page = await context.Web.NewPageAsync();
+                string pageName = TestCommon.GetPnPSdkTestAssetName("VideoEmbedUsingStreamTest.aspx");
+
+                // Add all the possible sections 
+                page.AddSection(CanvasSectionTemplate.OneColumn, 1);
+
+                // Instantiate a default web part ==> this will result in the 
+                var videoWebPart = await page.InstantiateDefaultWebPartAsync(DefaultWebPart.VideoEmbed);
+                videoWebPart.PropertiesJson = "{\"controlType\":3,\"id\":\"ebf408b9-aeaf-4dd9-8616-41af322085e9\",\"position\":{\"zoneIndex\":1,\"sectionIndex\":1,\"controlIndex\":1,\"layoutIndex\":1},\"webPartId\":\"275c0095-a77e-4f6d-a2a0-6a7626911518\",\"webPartData\":{\"id\":\"275c0095-a77e-4f6d-a2a0-6a7626911518\",\"instanceId\":\"ebf408b9-aeaf-4dd9-8616-41af322085e9\",\"title\":\"Stream\",\"description\":\"Display a Stream video or channel\",\"audiences\":[],\"serverProcessedContent\":{\"htmlStrings\":{},\"searchablePlainTexts\":{},\"imageSources\":{},\"links\":{\"videoSource\":\"https://web.microsoftstream.com/embed/browse\"}},\"dataVersion\":\"1.4\",\"properties\":{\"showInfo\":false,\"captionText\":\"\",\"embedCode\":\"<iframe width='640' height='475' src='https://web.microsoftstream.com/embed/browse?app=SPO&displayMode=buttons&showDescription=true&sort=trending' frameborder='0' allowfullscreen></iframe>\",\"isStream\":true,\"showvideoStart\":false,\"videoStartAt\":\"\",\"channelSortBy\":\"trending\",\"sourceType\":\"BROWSE\",\"thumbnailUrl\":\"\",\"browseSortBy\":\"trending\"}},\"emphasis\":{},\"reservedHeight\":683,\"reservedWidth\":649,\"addedFromPersistedData\":true}";
+
+                // Add a text control in each section
+                page.AddControl(videoWebPart, page.Sections[0].Columns[0]);
+
+                await page.SaveAsync(pageName);
+
+                // load page again
+                var pages = await context.Web.GetPagesAsync(pageName);
+
+                Assert.IsTrue(pages.Count == 1);
+
+                page = pages.AsEnumerable().First();
+
+                Assert.IsTrue(page.Sections.Count == 1);
+                Assert.IsTrue(page.Sections[0].Type == CanvasSectionTemplate.OneColumn);
+                Assert.IsTrue(page.Sections[0].Columns[0].Controls.Count == 1);
+                Assert.IsTrue(page.Sections[0].Columns[0].Controls[0] is IPageWebPart);
+                Assert.IsTrue((page.Sections[0].Columns[0].Controls[0] as IPageWebPart).WebPartId == page.DefaultWebPartToWebPartId(DefaultWebPart.VideoEmbed));
+
+                // delete the page
+                await page.DeleteAsync();
+            }
+        }
+
+        [TestMethod]
         [DataRow(CanvasSectionTemplate.OneColumnVerticalSection, 1)]
         [DataRow(CanvasSectionTemplate.TwoColumnVerticalSection, 2)]
         [DataRow(CanvasSectionTemplate.TwoColumnLeftVerticalSection, 3)]
@@ -1397,7 +1436,7 @@ namespace PnP.Core.Test.SharePoint
                 var newPage = await context.Web.NewPageAsync();
                 string pageName = TestCommon.GetPnPSdkTestAssetName("CreateAndUpdatePageWith Space InName.aspx");
                 // Save the page
-                await newPage.SaveAsync(pageName);
+                var createdPage = await newPage.SaveAsync(pageName);
 
                 // Update the page
                 newPage.AddSection(CanvasSectionTemplate.ThreeColumn, 1, VariantThemeType.Soft, VariantThemeType.Strong);
@@ -1406,10 +1445,10 @@ namespace PnP.Core.Test.SharePoint
                 newPage.AddControl(newPage.NewTextPart("PnP"), newPage.Sections[0].Columns[2]);
 
                 // Update the page
-                await newPage.SaveAsync(pageName);
+                await newPage.SaveAsync(createdPage);
 
                 // Load the page again
-                var pages = await context.Web.GetPagesAsync(pageName);
+                var pages = await context.Web.GetPagesAsync(createdPage);
                 var updatedPage = pages.AsEnumerable().First();
 
                 Assert.IsTrue(updatedPage.Sections.Count == 1);
@@ -1433,13 +1472,13 @@ namespace PnP.Core.Test.SharePoint
                 var newPage = await context.Web.NewPageAsync();
                 string pageName = TestCommon.GetPnPSdkTestAssetName("A&B#C.aspx");
                 // Save the page
-                await newPage.SaveAsync(pageName);
+                var createdPage = await newPage.SaveAsync(pageName);
 
                 // Delete the page
                 await newPage.DeleteAsync();
 
                 // Verify the page exists
-                var pages2 = await context.Web.GetPagesAsync(pageName);
+                var pages2 = await context.Web.GetPagesAsync(createdPage);
                 Assert.IsTrue(pages2.Count == 0);
             }
         }

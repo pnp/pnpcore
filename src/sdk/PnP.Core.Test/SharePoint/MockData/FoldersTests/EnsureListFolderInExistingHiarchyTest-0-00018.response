@@ -1,9 +1,9 @@
---batchresponse_5c929dba-4ce7-4fd5-98ed-88f4ae16305f
+--batchresponse_c48ec81e-3212-4aa5-965e-6370bef08a37
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{"d":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/prov-1/SitePages/sub1/sub2/sub3b/sub4b')","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/prov-1/SitePages/sub1/sub2/sub3b/sub4b')","type":"SP.Folder"},"Files":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/prov-1/SitePages/sub1/sub2/sub3b/sub4b')/Files"}},"ListItemAllFields":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/prov-1/SitePages/sub1/sub2/sub3b/sub4b')/ListItemAllFields"}},"ParentFolder":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/prov-1/SitePages/sub1/sub2/sub3b/sub4b')/ParentFolder"}},"Properties":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/prov-1/SitePages/sub1/sub2/sub3b/sub4b')/Properties"}},"StorageMetrics":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/prov-1/SitePages/sub1/sub2/sub3b/sub4b')/StorageMetrics"}},"Folders":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/prov-1/SitePages/sub1/sub2/sub3b/sub4b')/Folders"}},"Exists":true,"IsWOPIEnabled":false,"ItemCount":0,"Name":"sub4b","ProgID":null,"ServerRelativeUrl":"/sites/prov-1/SitePages/sub1/sub2/sub3b/sub4b","TimeCreated":"2021-03-05T18:55:24Z","TimeLastModified":"2021-03-05T18:55:24Z","UniqueId":"08ef5e1a-2c3a-40e0-ae5d-5af43591a230","WelcomePage":""}}
---batchresponse_5c929dba-4ce7-4fd5-98ed-88f4ae16305f--
+
+--batchresponse_c48ec81e-3212-4aa5-965e-6370bef08a37--

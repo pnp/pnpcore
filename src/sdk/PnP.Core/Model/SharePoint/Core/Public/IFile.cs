@@ -12,6 +12,8 @@ namespace PnP.Core.Model.SharePoint
     [ConcreteType(typeof(File))]
     public interface IFile : IDataModel<IFile>, IDataModelGet<IFile>, IDataModelLoad<IFile>, IDataModelUpdate, IDataModelDelete, IQueryableDataModel
     {
+        #region Properties
+
         /// <summary>
         /// Returns the comment that was specified when the document was checked into the document library
         /// </summary>
@@ -181,6 +183,8 @@ namespace PnP.Core.Model.SharePoint
         /// Gets a value that returns the last user who has modified the file.
         /// </summary>
         public ISharePointUser ModifiedBy { get; }
+
+        #endregion
 
         #region GetContent
         /// <summary>
@@ -527,24 +531,65 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// Send the file to recycle bin.
         /// </summary>
-        Task RecycleBatchAsync();
+        Task<IBatchSingleResult<BatchResultValue<Guid>>> RecycleBatchAsync();
 
         /// <summary>
         /// Send the file to recycle bin.
         /// </summary>
-        void RecycleBatch();
+        IBatchSingleResult<BatchResultValue<Guid>> RecycleBatch();
 
         /// <summary>
         /// Send the file to recycle bin.
         /// </summary>
         /// <param name="batch">The batch instance to use.</param>
-        Task RecycleBatchAsync(Batch batch);
+        Task<IBatchSingleResult<BatchResultValue<Guid>>> RecycleBatchAsync(Batch batch);
 
         /// <summary>
         /// Send the file to recycle bin
         /// </summary>
         /// <param name="batch">The batch instance to use.</param>
-        void RecycleBatch(Batch batch);
+        IBatchSingleResult<BatchResultValue<Guid>> RecycleBatch(Batch batch);
+        #endregion
+
+        #region Syntex
+
+        /// <summary>
+        /// Requests Syntex AI models to classify and extract information from this file 
+        /// </summary>
+        /// <returns>Information about the classify and extract request</returns>
+        Task<ISyntexClassifyAndExtractResult> ClassifyAndExtractFileAsync();
+
+        /// <summary>
+        /// Requests Syntex AI models to classify and extract information from this file 
+        /// </summary>
+        /// <returns>Information about the classify and extract request</returns>
+        ISyntexClassifyAndExtractResult ClassifyAndExtractFile();
+
+        /// <summary>
+        /// Requests Syntex AI models to classify and extract information from this file 
+        /// </summary>
+        /// <param name="batch">Batch to add this request to</param>
+        /// <returns>Information about the classify and extract request</returns>
+        Task<IBatchSingleResult<ISyntexClassifyAndExtractResult>> ClassifyAndExtractFileBatchAsync(Batch batch);
+
+        /// <summary>
+        /// Requests Syntex AI models to classify and extract information from this file 
+        /// </summary>
+        /// <param name="batch">Batch to add this request to</param>
+        /// <returns>Information about the classify and extract request</returns>
+        IBatchSingleResult<ISyntexClassifyAndExtractResult> ClassifyAndExtractFileBatch(Batch batch);
+
+        /// <summary>
+        /// Requests Syntex AI models to classify and extract information from this file 
+        /// </summary>
+        /// <returns>Information about the classify and extract request</returns>
+        Task<IBatchSingleResult<ISyntexClassifyAndExtractResult>> ClassifyAndExtractFileBatchAsync();
+
+        /// <summary>
+        /// Requests Syntex AI models to classify and extract information from this file 
+        /// </summary>
+        /// <returns>Information about the classify and extract request</returns>
+        IBatchSingleResult<ISyntexClassifyAndExtractResult> ClassifyAndExtractFileBatch();
         #endregion
     }
 }

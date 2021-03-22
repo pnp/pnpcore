@@ -1117,9 +1117,12 @@ namespace PnP.Core.Test.SharePoint
             {
                 IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl);
 
-                await testDocument.RecycleBatchAsync();
+                var batchRecycle = await testDocument.RecycleBatchAsync();
+                Assert.IsFalse(batchRecycle.IsAvailable);
                 await context.ExecuteAsync();
-            
+                Assert.IsTrue(batchRecycle.IsAvailable);
+                Assert.AreNotEqual(Guid.Empty, batchRecycle.Result.Value);
+
                 try
                 {
                     testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl);
@@ -1939,6 +1942,16 @@ namespace PnP.Core.Test.SharePoint
 
                 string fileName = TestCommon.GetPnPSdkTestAssetName("page1.aspx");
                 IFile addedFile = await parentFolder.Files.AddTemplateFileAsync($"{parentFolder.ServerRelativeUrl}/{fileName}", TemplateFileType.ClientSidePage);
+
+                // Test the created object
+                Assert.IsNotNull(addedFile);
+                Assert.AreEqual(fileName, addedFile.Name);
+                Assert.AreNotEqual(default, addedFile.UniqueId);
+
+                await addedFile.DeleteAsync();
+
+                fileName = TestCommon.GetPnPSdkTestAssetName("Hi'there is &ok.aspx");
+                addedFile = await parentFolder.Files.AddTemplateFileAsync($"{parentFolder.ServerRelativeUrl}/{fileName}", TemplateFileType.ClientSidePage);
 
                 // Test the created object
                 Assert.IsNotNull(addedFile);

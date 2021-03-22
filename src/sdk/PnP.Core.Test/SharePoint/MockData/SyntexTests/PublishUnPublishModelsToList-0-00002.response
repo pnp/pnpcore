@@ -1,4 +1,4 @@
---batchresponse_507e678c-890a-4ab7-8d3f-419985bed8e5
+--batchresponse_eb707d3f-2bd5-4614-977c-dd2d3c7c10e4
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
@@ -6,4 +6,4 @@ HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
 {"d":{"__metadata":{"id":"https://m365x215748.sharepoint.com/sites/AdminContentCenter/_api/Web","uri":"https://m365x215748.sharepoint.com/sites/AdminContentCenter/_api/Web","type":"SP.Web"},"Id":"f6dcd4e5-2d7e-47ff-8397-177c364f363b","WebTemplate":"CONTENTCTR"}}
---batchresponse_507e678c-890a-4ab7-8d3f-419985bed8e5--
+--batchresponse_eb707d3f-2bd5-4614-977c-dd2d3c7c10e4--

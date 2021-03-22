@@ -3,6 +3,7 @@ using PnP.Core.Model.SharePoint;
 using PnP.Core.Test.Utilities;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -34,7 +35,7 @@ namespace PnP.Core.Test.SharePoint
         public async Task IsSyntexContentCenterPositive()
         {
             //TestCommon.Instance.Mocking = false;            
-            if (!TestCommon.Instance.Mocking && string.IsNullOrEmpty(TestCommon.SyntexContentCenterTestSite)) Assert.Inconclusive("No Syntex Content Center setup for live testing");
+            TestCommon.SharePointSyntexTestSetup();
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.SyntexContentCenterTestSite))
             {
@@ -47,7 +48,7 @@ namespace PnP.Core.Test.SharePoint
         public async Task AsSyntexContentCenterNegative()
         {
             //TestCommon.Instance.Mocking = false;
-            if (!TestCommon.Instance.Mocking && string.IsNullOrEmpty(TestCommon.SyntexContentCenterTestSite)) Assert.Inconclusive("No Syntex Content Center setup for live testing");
+            TestCommon.SharePointSyntexTestSetup();
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
@@ -60,7 +61,7 @@ namespace PnP.Core.Test.SharePoint
         public async Task AsSyntexContentCenterPositive()
         {
             //TestCommon.Instance.Mocking = false;
-            if (!TestCommon.Instance.Mocking && string.IsNullOrEmpty(TestCommon.SyntexContentCenterTestSite)) Assert.Inconclusive("No Syntex Content Center setup for live testing");
+            TestCommon.SharePointSyntexTestSetup();
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.SyntexContentCenterTestSite))
             {
@@ -75,7 +76,7 @@ namespace PnP.Core.Test.SharePoint
         public async Task GetSyntexModels()
         {
             //TestCommon.Instance.Mocking = false;
-            if (!TestCommon.Instance.Mocking && string.IsNullOrEmpty(TestCommon.SyntexContentCenterTestSite)) Assert.Inconclusive("No Syntex Content Center setup for live testing");
+            TestCommon.SharePointSyntexTestSetup();
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.SyntexContentCenterTestSite))
             {
@@ -84,6 +85,8 @@ namespace PnP.Core.Test.SharePoint
                 Assert.IsTrue(models.Any());
                 Assert.IsTrue(!string.IsNullOrEmpty(models.First().Name));
                 Assert.IsTrue(models.First().ModelLastTrained != DateTime.MinValue);
+                Assert.IsTrue(models.First().Id > 0);
+                string description = models.First().Description;                
             }
         }
 
@@ -91,7 +94,7 @@ namespace PnP.Core.Test.SharePoint
         public async Task GetSyntexModelsViaFilter()
         {
             //TestCommon.Instance.Mocking = false;
-            if (!TestCommon.Instance.Mocking && string.IsNullOrEmpty(TestCommon.SyntexContentCenterTestSite)) Assert.Inconclusive("No Syntex Content Center setup for live testing");
+            TestCommon.SharePointSyntexTestSetup();
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.SyntexContentCenterTestSite))
             {
@@ -105,7 +108,7 @@ namespace PnP.Core.Test.SharePoint
         public async Task PublishUnPublishModelToList()
         {
             //TestCommon.Instance.Mocking = false;
-            if (!TestCommon.Instance.Mocking && string.IsNullOrEmpty(TestCommon.SyntexContentCenterTestSite)) Assert.Inconclusive("No Syntex Content Center setup for live testing");
+            TestCommon.SharePointSyntexTestSetup();
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.SyntexContentCenterTestSite))
             {
@@ -131,6 +134,24 @@ namespace PnP.Core.Test.SharePoint
                 Assert.IsTrue(unpublishResult.StatusCode == 200);
                 Assert.IsTrue(unpublishResult.Succeeded);
 
+                // Publish model again via batch request
+                var batchPublishResult = await modelToRegister.PublishModelBatchAsync(testLibrary);
+                Assert.IsFalse(batchPublishResult.IsAvailable);
+                await context.ExecuteAsync();
+                Assert.IsTrue(batchPublishResult.IsAvailable);
+                Assert.IsTrue(batchPublishResult.Result.ErrorMessage == null);
+                Assert.IsTrue(batchPublishResult.Result.StatusCode == 201);
+                Assert.IsTrue(batchPublishResult.Result.Succeeded);
+
+                // Unpublish model via implicit batch request
+                var unpublishBatchResult = await modelToRegister.UnPublishModelBatchAsync(testLibrary);
+                Assert.IsFalse(unpublishBatchResult.IsAvailable);
+                await context.ExecuteAsync();
+                Assert.IsTrue(unpublishBatchResult.IsAvailable);
+                Assert.IsTrue(unpublishBatchResult.Result.ErrorMessage == null);
+                Assert.IsTrue(unpublishBatchResult.Result.StatusCode == 200);
+                Assert.IsTrue(unpublishBatchResult.Result.Succeeded);
+
                 // cleanup the library
                 await testLibrary.DeleteAsync();
             }
@@ -140,7 +161,7 @@ namespace PnP.Core.Test.SharePoint
         public async Task PublishUnPublishModelToList2()
         {
             //TestCommon.Instance.Mocking = false;
-            if (!TestCommon.Instance.Mocking && string.IsNullOrEmpty(TestCommon.SyntexContentCenterTestSite)) Assert.Inconclusive("No Syntex Content Center setup for live testing");
+            TestCommon.SharePointSyntexTestSetup();
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.SyntexContentCenterTestSite))
             {
@@ -155,7 +176,7 @@ namespace PnP.Core.Test.SharePoint
                 await context.Web.EnsurePropertiesAsync(p => p.ServerRelativeUrl).ConfigureAwait(false);
 
                 // publish model to library
-                var result = await modelToRegister.PublishModelAsync(new SyntexModelPublicationOptions()
+                var result = await modelToRegister.PublishModelAsync(new SyntexModelPublishOptions()
                 {
                     TargetLibraryServerRelativeUrl = $"{context.Web.ServerRelativeUrl}/{libraryName}",
                     TargetSiteUrl = context.Uri.ToString(),
@@ -167,7 +188,7 @@ namespace PnP.Core.Test.SharePoint
                 Assert.IsTrue(result.Succeeded);
 
                 // unpublish model from library
-                var unpublishResult = await modelToRegister.UnPublishModelAsync(new SyntexModelUnPublicationOptions()
+                var unpublishResult = await modelToRegister.UnPublishModelAsync(new SyntexModelUnPublishOptions()
                 {
                     TargetLibraryServerRelativeUrl = $"{context.Web.ServerRelativeUrl}/{libraryName}",
                     TargetSiteUrl = context.Uri.ToString(),
@@ -178,6 +199,34 @@ namespace PnP.Core.Test.SharePoint
                 Assert.IsTrue(unpublishResult.StatusCode == 200);
                 Assert.IsTrue(unpublishResult.Succeeded);
 
+                // Publish via batch request
+                var batchPublishResult = await modelToRegister.PublishModelBatchAsync(new SyntexModelPublishOptions()
+                {
+                    TargetLibraryServerRelativeUrl = $"{context.Web.ServerRelativeUrl}/{libraryName}",
+                    TargetSiteUrl = context.Uri.ToString(),
+                    TargetWebServerRelativeUrl = context.Web.ServerRelativeUrl,
+                });
+                Assert.IsFalse(batchPublishResult.IsAvailable);
+                await context.ExecuteAsync();
+                Assert.IsTrue(batchPublishResult.IsAvailable);
+                Assert.IsTrue(batchPublishResult.Result.ErrorMessage == null);
+                Assert.IsTrue(batchPublishResult.Result.StatusCode == 201);
+                Assert.IsTrue(batchPublishResult.Result.Succeeded);
+
+                // unpublish model from library
+                var unpublishBatchResult = await modelToRegister.UnPublishModelBatchAsync(new SyntexModelUnPublishOptions()
+                {
+                    TargetLibraryServerRelativeUrl = $"{context.Web.ServerRelativeUrl}/{libraryName}",
+                    TargetSiteUrl = context.Uri.ToString(),
+                    TargetWebServerRelativeUrl = context.Web.ServerRelativeUrl,
+                });
+                Assert.IsFalse(unpublishBatchResult.IsAvailable);
+                context.Execute();
+                Assert.IsTrue(unpublishBatchResult.IsAvailable);
+                Assert.IsTrue(unpublishBatchResult.Result.ErrorMessage == null);
+                Assert.IsTrue(unpublishBatchResult.Result.StatusCode == 200);
+                Assert.IsTrue(unpublishBatchResult.Result.Succeeded);
+
                 // cleanup the library
                 await testLibrary.DeleteAsync();
             }
@@ -187,7 +236,7 @@ namespace PnP.Core.Test.SharePoint
         public async Task PublishUnPublishModelsToList()
         {
             //TestCommon.Instance.Mocking = false;
-            if (!TestCommon.Instance.Mocking && string.IsNullOrEmpty(TestCommon.SyntexContentCenterTestSite)) Assert.Inconclusive("No Syntex Content Center setup for live testing");
+            TestCommon.SharePointSyntexTestSetup();
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.SyntexContentCenterTestSite))
             {
@@ -225,6 +274,31 @@ namespace PnP.Core.Test.SharePoint
                     Assert.IsTrue(unpublishResult.Succeeded);
                 }
 
+                // Publish model again via batch request
+                var batchPublishResult = await modelToRegister.PublishModelBatchAsync(libraries);
+                Assert.IsFalse(batchPublishResult.IsAvailable);
+                await context.ExecuteAsync();
+
+                foreach(var result in batchPublishResult)
+                {
+                    Assert.IsTrue(result.ErrorMessage == null);
+                    Assert.IsTrue(result.StatusCode == 201);
+                    Assert.IsTrue(result.Succeeded);
+                }
+
+                // unpublish model from library via batch
+                var unpublishBatchResults = await modelToRegister.UnPublishModelBatchAsync(libraries);
+                Assert.IsFalse(unpublishBatchResults.IsAvailable);
+                await context.ExecuteAsync();
+                Assert.IsTrue(unpublishBatchResults.IsAvailable);
+
+                foreach (var unpublishResult in unpublishBatchResults)
+                {
+                    Assert.IsTrue(unpublishResult.ErrorMessage == null);
+                    Assert.IsTrue(unpublishResult.StatusCode == 200);
+                    Assert.IsTrue(unpublishResult.Succeeded);
+                }
+
                 // cleanup the libraries
                 await library1.DeleteAsync();
                 await library2.DeleteAsync();
@@ -235,7 +309,7 @@ namespace PnP.Core.Test.SharePoint
         public async Task PublishUnPublishModelsToList2()
         {
             //TestCommon.Instance.Mocking = false;
-            if (!TestCommon.Instance.Mocking && string.IsNullOrEmpty(TestCommon.SyntexContentCenterTestSite)) Assert.Inconclusive("No Syntex Content Center setup for live testing");
+            TestCommon.SharePointSyntexTestSetup();
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.SyntexContentCenterTestSite))
             {
@@ -251,14 +325,14 @@ namespace PnP.Core.Test.SharePoint
                 var library1 = await context.Web.Lists.AddAsync(libraryName1, ListTemplateType.DocumentLibrary);
                 var library2 = await context.Web.Lists.AddAsync(libraryName2, ListTemplateType.DocumentLibrary);
 
-                List<SyntexModelPublicationOptions> publications = new();
-                publications.Add(new SyntexModelPublicationOptions()
+                List<SyntexModelPublishOptions> publications = new();
+                publications.Add(new SyntexModelPublishOptions()
                 {
                     TargetLibraryServerRelativeUrl = $"{context.Web.ServerRelativeUrl}/{libraryName1}",
                     TargetSiteUrl = context.Uri.ToString(),
                     TargetWebServerRelativeUrl = context.Web.ServerRelativeUrl,
                 });
-                publications.Add(new SyntexModelPublicationOptions()
+                publications.Add(new SyntexModelPublishOptions()
                 {
                     TargetLibraryServerRelativeUrl = $"{context.Web.ServerRelativeUrl}/{libraryName2}",
                     TargetSiteUrl = context.Uri.ToString(),
@@ -276,9 +350,33 @@ namespace PnP.Core.Test.SharePoint
                 }
 
                 // unpublish model from library
-                var unpublishResults = await modelToRegister.UnPublishModelAsync(publications.Cast<SyntexModelUnPublicationOptions>().ToList());
+                var unpublishResults = await modelToRegister.UnPublishModelAsync(publications.Cast<SyntexModelUnPublishOptions>().ToList());
                 Assert.IsTrue(unpublishResults != null);
                 foreach (var unpublishResult in unpublishResults)
+                {
+                    Assert.IsTrue(unpublishResult.ErrorMessage == null);
+                    Assert.IsTrue(unpublishResult.StatusCode == 200);
+                    Assert.IsTrue(unpublishResult.Succeeded);
+                }
+
+                // Publish model again via batch request
+                var batchPublishResult = await modelToRegister.PublishModelBatchAsync(publications);
+                Assert.IsFalse(batchPublishResult.IsAvailable);
+                await context.ExecuteAsync();
+
+                foreach (var result in batchPublishResult)
+                {
+                    Assert.IsTrue(result.ErrorMessage == null);
+                    Assert.IsTrue(result.StatusCode == 201);
+                    Assert.IsTrue(result.Succeeded);
+                }
+
+                // unpublish model from library via batch request
+                var unpublishBatchResults = await modelToRegister.UnPublishModelBatchAsync(publications.Cast<SyntexModelUnPublishOptions>().ToList());
+                Assert.IsFalse(unpublishBatchResults.IsAvailable);
+                context.Execute();
+                Assert.IsTrue(unpublishBatchResults.IsAvailable);
+                foreach (var unpublishResult in unpublishBatchResults)
                 {
                     Assert.IsTrue(unpublishResult.ErrorMessage == null);
                     Assert.IsTrue(unpublishResult.StatusCode == 200);
@@ -291,5 +389,196 @@ namespace PnP.Core.Test.SharePoint
             }
         }
 
+        [TestMethod]
+        public async Task GetModelPublicationsTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            TestCommon.SharePointSyntexTestSetup();
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.SyntexContentCenterTestSite))
+            {
+                var cc = context.Web.AsSyntexContentCenter();
+                var models = await cc.GetSyntexModelsAsync();
+                var modelToRegister = models.First();
+
+                // Add library to site
+                var libraryName = TestCommon.GetPnPSdkTestAssetName("GetModelPublicationsTest");
+                var testLibrary = await context.Web.Lists.AddAsync(libraryName, ListTemplateType.DocumentLibrary);
+
+                await context.Web.EnsurePropertiesAsync(p => p.ServerRelativeUrl).ConfigureAwait(false);
+
+                // publish model to library
+                var result = await modelToRegister.PublishModelAsync(new SyntexModelPublishOptions()
+                {
+                    TargetLibraryServerRelativeUrl = $"{context.Web.ServerRelativeUrl}/{libraryName}",
+                    TargetSiteUrl = context.Uri.ToString(),
+                    TargetWebServerRelativeUrl = context.Web.ServerRelativeUrl,
+                });
+
+                // Get the model publication results
+                var results = await modelToRegister.GetModelPublicationsAsync();
+                Assert.IsTrue(results.Any());
+
+                var modelPublication = results.FirstOrDefault(p => p.TargetLibraryServerRelativeUrl == $"{context.Web.ServerRelativeUrl}/{libraryName}");
+                Assert.IsTrue(modelPublication != null);
+                Assert.IsTrue(modelPublication.TargetLibraryServerRelativeUrl == $"{context.Web.ServerRelativeUrl}/{libraryName}");
+                Assert.IsTrue(modelPublication.TargetSiteUrl == context.Uri.ToString());
+                Assert.IsTrue(modelPublication.TargetWebServerRelativeUrl == context.Web.ServerRelativeUrl);
+                Assert.IsTrue(modelPublication.ViewOption == MachineLearningPublicationViewOption.NewViewAsDefault);
+
+                results = modelToRegister.GetModelPublications();
+                Assert.IsTrue(results.Any());
+
+                modelPublication = results.FirstOrDefault(p => p.TargetLibraryServerRelativeUrl == $"{context.Web.ServerRelativeUrl}/{libraryName}");
+                Assert.IsTrue(modelPublication != null);
+                Assert.IsTrue(modelPublication.TargetLibraryServerRelativeUrl == $"{context.Web.ServerRelativeUrl}/{libraryName}");
+                Assert.IsTrue(modelPublication.TargetSiteUrl == context.Uri.ToString());
+                Assert.IsTrue(modelPublication.TargetWebServerRelativeUrl == context.Web.ServerRelativeUrl);
+                Assert.IsTrue(modelPublication.ViewOption == MachineLearningPublicationViewOption.NewViewAsDefault);
+
+                var batch = context.NewBatch();
+                var batchResult = await modelToRegister.GetModelPublicationsBatchAsync(batch);
+                Assert.IsFalse(batchResult.IsAvailable);                
+                await context.ExecuteAsync(batch);
+                Assert.IsTrue(batchResult.IsAvailable);
+
+                modelPublication = batchResult.FirstOrDefault(p => p.TargetLibraryServerRelativeUrl == $"{context.Web.ServerRelativeUrl}/{libraryName}");
+                Assert.IsTrue(modelPublication != null);
+                Assert.IsTrue(modelPublication.TargetLibraryServerRelativeUrl == $"{context.Web.ServerRelativeUrl}/{libraryName}");
+                Assert.IsTrue(modelPublication.TargetSiteUrl == context.Uri.ToString());
+                Assert.IsTrue(modelPublication.TargetWebServerRelativeUrl == context.Web.ServerRelativeUrl);
+                Assert.IsTrue(modelPublication.ViewOption == MachineLearningPublicationViewOption.NewViewAsDefault);
+
+                batch = context.NewBatch();
+                batchResult = modelToRegister.GetModelPublicationsBatch(batch);
+                Assert.IsFalse(batchResult.IsAvailable);
+                await context.ExecuteAsync(batch);
+                Assert.IsTrue(batchResult.IsAvailable);
+
+                modelPublication = batchResult.FirstOrDefault(p => p.TargetLibraryServerRelativeUrl == $"{context.Web.ServerRelativeUrl}/{libraryName}");
+                Assert.IsTrue(modelPublication != null);
+                Assert.IsTrue(modelPublication.TargetLibraryServerRelativeUrl == $"{context.Web.ServerRelativeUrl}/{libraryName}");
+                Assert.IsTrue(modelPublication.TargetSiteUrl == context.Uri.ToString());
+                Assert.IsTrue(modelPublication.TargetWebServerRelativeUrl == context.Web.ServerRelativeUrl);
+                Assert.IsTrue(modelPublication.ViewOption == MachineLearningPublicationViewOption.NewViewAsDefault);
+
+                batchResult = await modelToRegister.GetModelPublicationsBatchAsync();
+                Assert.IsFalse(batchResult.IsAvailable);
+                await context.ExecuteAsync();
+                Assert.IsTrue(batchResult.IsAvailable);
+
+                modelPublication = batchResult.FirstOrDefault(p => p.TargetLibraryServerRelativeUrl == $"{context.Web.ServerRelativeUrl}/{libraryName}");
+                Assert.IsTrue(modelPublication != null);
+                Assert.IsTrue(modelPublication.TargetLibraryServerRelativeUrl == $"{context.Web.ServerRelativeUrl}/{libraryName}");
+                Assert.IsTrue(modelPublication.TargetSiteUrl == context.Uri.ToString());
+                Assert.IsTrue(modelPublication.TargetWebServerRelativeUrl == context.Web.ServerRelativeUrl);
+                Assert.IsTrue(modelPublication.ViewOption == MachineLearningPublicationViewOption.NewViewAsDefault);
+
+                batchResult = modelToRegister.GetModelPublicationsBatch();
+                Assert.IsFalse(batchResult.IsAvailable);
+                await context.ExecuteAsync();
+                Assert.IsTrue(batchResult.IsAvailable);
+
+                modelPublication = batchResult.FirstOrDefault(p => p.TargetLibraryServerRelativeUrl == $"{context.Web.ServerRelativeUrl}/{libraryName}");
+                Assert.IsTrue(modelPublication != null);
+                Assert.IsTrue(modelPublication.TargetLibraryServerRelativeUrl == $"{context.Web.ServerRelativeUrl}/{libraryName}");
+                Assert.IsTrue(modelPublication.TargetSiteUrl == context.Uri.ToString());
+                Assert.IsTrue(modelPublication.TargetWebServerRelativeUrl == context.Web.ServerRelativeUrl);
+                Assert.IsTrue(modelPublication.ViewOption == MachineLearningPublicationViewOption.NewViewAsDefault);
+
+                // unpublish model
+                var unpublishResult = await modelToRegister.UnPublishModelAsync(new SyntexModelUnPublishOptions()
+                {
+                    TargetLibraryServerRelativeUrl = $"{context.Web.ServerRelativeUrl}/{libraryName}",
+                    TargetSiteUrl = context.Uri.ToString(),
+                    TargetWebServerRelativeUrl = context.Web.ServerRelativeUrl,
+                });
+
+                // cleanup the library
+                await testLibrary.DeleteAsync();
+            }
+        }
+
+        [TestMethod]
+        public async Task ClassifyAndExtractFile()
+        {
+            //TestCommon.Instance.Mocking = false;
+            TestCommon.SharePointSyntexTestSetup();
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.SyntexContentCenterTestSite))
+            {
+                await context.Web.EnsurePropertiesAsync(p => p.ServerRelativeUrl);
+
+                var cc = await context.Web.AsSyntexContentCenterAsync();
+                var models = await cc.GetSyntexModelsAsync();
+                var modelToRegister = models.First();
+
+                // Add library with file to site
+                var libraryName = TestCommon.GetPnPSdkTestAssetName("ClassifyAndExtractFile");
+                var testLibrary = await context.Web.Lists.AddAsync(libraryName, ListTemplateType.DocumentLibrary);
+                await testLibrary.EnsurePropertiesAsync(p => p.RootFolder);
+                IFile testDocument = await testLibrary.RootFolder.Files.AddAsync("ClassifyAndExtractFile.docx", System.IO.File.OpenRead($".{Path.DirectorySeparatorChar}TestAssets{Path.DirectorySeparatorChar}test.docx"), true);
+                IFile testDocument2 = await testLibrary.RootFolder.Files.AddAsync("ClassifyAndExtractFile2.docx", System.IO.File.OpenRead($".{Path.DirectorySeparatorChar}TestAssets{Path.DirectorySeparatorChar}test.docx"), true);
+                IFile testDocument3 = await testLibrary.RootFolder.Files.AddAsync("ClassifyAndExtractFile3.docx", System.IO.File.OpenRead($".{Path.DirectorySeparatorChar}TestAssets{Path.DirectorySeparatorChar}test.docx"), true);
+
+                // publish model to library
+                var result = await modelToRegister.PublishModelAsync(testLibrary);
+                Assert.IsTrue(result != null);
+                Assert.IsTrue(result.ErrorMessage == null);
+                Assert.IsTrue(result.StatusCode == 201);
+                Assert.IsTrue(result.Succeeded);
+
+                // Classify and extract existing content for one file
+                var classifyInformation = await testDocument.ClassifyAndExtractFileAsync();
+                Assert.IsTrue(classifyInformation != null);
+                Assert.IsTrue(classifyInformation.Created != DateTime.MinValue);
+                Assert.IsTrue(classifyInformation.DeliverDate != DateTime.MinValue);
+                Assert.IsTrue(classifyInformation.ErrorMessage == null);
+                Assert.IsTrue(classifyInformation.StatusCode == 0);
+                Assert.IsTrue(classifyInformation.Status == "ExponentialBackoff");
+                Assert.IsTrue(classifyInformation.TargetSiteUrl == context.Uri.ToString());
+                Assert.IsTrue(classifyInformation.TargetWebServerRelativeUrl == context.Web.ServerRelativeUrl);
+                Assert.IsTrue(classifyInformation.TargetServerRelativeUrl == testDocument.ServerRelativeUrl);
+
+                // Classify and extract via batch request
+                var file1BatchResult = await testDocument2.ClassifyAndExtractFileBatchAsync();
+                var file2BatchResult = await testDocument3.ClassifyAndExtractFileBatchAsync();
+                Assert.IsFalse(file1BatchResult.IsAvailable);
+                Assert.IsFalse(file2BatchResult.IsAvailable);
+                var results = await context.ExecuteAsync();
+                Assert.IsTrue(file1BatchResult.IsAvailable);
+                Assert.IsTrue(file2BatchResult.IsAvailable);
+
+                Assert.IsTrue(file1BatchResult.Result.Created != DateTime.MinValue);
+                Assert.IsTrue(file1BatchResult.Result.DeliverDate != DateTime.MinValue);
+                Assert.IsTrue(file1BatchResult.Result.ErrorMessage == null);
+                Assert.IsTrue(file1BatchResult.Result.StatusCode == 0);
+                Assert.IsTrue(file1BatchResult.Result.Status == "ExponentialBackoff");
+                Assert.IsTrue(file1BatchResult.Result.TargetSiteUrl == context.Uri.ToString());
+                Assert.IsTrue(file1BatchResult.Result.TargetWebServerRelativeUrl == context.Web.ServerRelativeUrl);
+                Assert.IsTrue(file1BatchResult.Result.TargetServerRelativeUrl == testDocument2.ServerRelativeUrl);
+
+                Assert.IsTrue(file2BatchResult.Result.Created != DateTime.MinValue);
+                Assert.IsTrue(file2BatchResult.Result.DeliverDate != DateTime.MinValue);
+                Assert.IsTrue(file2BatchResult.Result.ErrorMessage == null);
+                Assert.IsTrue(file2BatchResult.Result.StatusCode == 0);
+                Assert.IsTrue(file2BatchResult.Result.Status == "ExponentialBackoff");
+                Assert.IsTrue(file2BatchResult.Result.TargetSiteUrl == context.Uri.ToString());
+                Assert.IsTrue(file2BatchResult.Result.TargetWebServerRelativeUrl == context.Web.ServerRelativeUrl);
+                Assert.IsTrue(file2BatchResult.Result.TargetServerRelativeUrl == testDocument3.ServerRelativeUrl);
+
+                // Review the batch results
+
+                // unpublish model from library
+                var unpublishResult = await modelToRegister.UnPublishModelAsync(testLibrary);
+                Assert.IsTrue(unpublishResult != null);
+                Assert.IsTrue(unpublishResult.ErrorMessage == null);
+                Assert.IsTrue(unpublishResult.StatusCode == 200);
+                Assert.IsTrue(unpublishResult.Succeeded);
+
+                // cleanup the library
+                await testLibrary.DeleteAsync();
+            }
+        }
     }
 }

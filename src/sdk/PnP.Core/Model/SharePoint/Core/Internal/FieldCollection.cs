@@ -1,5 +1,7 @@
 ﻿using PnP.Core.QueryModel;
 using PnP.Core.Services;
+using PnP.Core.Services.Core.CSOM;
+using PnP.Core.Services.Core.CSOM.Requests.Fields;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -140,7 +142,7 @@ namespace PnP.Core.Model.SharePoint
             return creationOptions;
         }
         #endregion
-        
+
         #region Number fields
         public async Task<IField> AddNumberBatchAsync(string title, FieldNumberOptions options)
         {
@@ -556,38 +558,21 @@ namespace PnP.Core.Model.SharePoint
         #endregion
 
         #region Taxonomy fields
-        private static string BuildTaxonomyFieldUpdateXmlPayload(TaxonomyFieldCreationOptions options, IDataModelParent parent)
-        {
-            string xml = CsomHelper.TaxonomyFieldUpdate;
-
-            xml = xml.Replace(CsomHelper.ListFieldId, (parent is IList) ? CsomHelper.TaxonomyFieldListObjectId : "");
-            xml = xml.Replace(CsomHelper.TermStoreId, $"{{{options.TermStoreId}}}");
-            xml = xml.Replace(CsomHelper.TermSetId, $"{{{options.TermSetId}}}");
-
-            int counter = 10;
-            xml = xml.Replace(CsomHelper.Counter, counter.ToString());
-            counter++;
-            xml = xml.Replace(CsomHelper.Counter2, counter.ToString());
-            counter++;
-            xml = xml.Replace(CsomHelper.Counter3, counter.ToString());
-            counter++;
-            xml = xml.Replace(CsomHelper.Counter4, counter.ToString());
-            counter++;
-            xml = xml.Replace(CsomHelper.Counter5, counter.ToString());
-
-            return xml;
-        }
 
         private async Task WireUpTaxonomyFieldAsync(Field field, TaxonomyFieldCreationOptions options)
         {
-            var xmlPayload = BuildTaxonomyFieldUpdateXmlPayload(options, (this as IDataModelParent).Parent);
-            if (!string.IsNullOrEmpty(xmlPayload))
+            string parentId = (this.Parent is IList) ? (this.Parent as IList).Id.ToString() : "";
+            ProvisionTaxonomyFieldRequest request = new ProvisionTaxonomyFieldRequest(PnPContext.Site.Id.ToString(),
+                PnPContext.Web.Id.ToString(),
+                field.Id.ToString(),
+                parentId,
+                options.TermStoreId,
+                options.TermSetId);
+
+            ApiCall updateCall = PnPContext.GetCSOMCallForRequests(new List<Services.Core.CSOM.Requests.IRequest<object>>() { request }, commit: true);
+            if (!string.IsNullOrEmpty(updateCall.XmlBody))
             {
-                var apiCall = new ApiCall(xmlPayload)
-                {
-                    Commit = true
-                };
-                await field.RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
+                await field.RawRequestAsync(updateCall, HttpMethod.Post).ConfigureAwait(false);
             }
         }
 

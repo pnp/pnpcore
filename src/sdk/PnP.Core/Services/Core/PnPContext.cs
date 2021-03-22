@@ -655,15 +655,16 @@ namespace PnP.Core.Services
         /// Builds and executes provided requests
         /// </summary>
         /// <param name="requests">Collection of CSOM requests You want to execute.</param>
+        /// <param name="commit">If processing this CSOM requests needs to result into a commit into the model</param>
         /// <returns>CSOM ApiCall</returns>
-        internal ApiCall GetCSOMCallForRequests(List<IRequest<object>> requests)
+        internal ApiCall GetCSOMCallForRequests(List<IRequest<object>> requests, bool commit = false)
         {
             foreach (IRequest<object> request in requests)
             {
                 CSOMApiBuilder.AddRequest(request);
             }
 
-            return CSOMApiBuilder.BuildApiCall();
+            return CSOMApiBuilder.BuildApiCall(commit);
         }
 
         #endregion

@@ -1,4 +1,4 @@
---batchresponse_30b384ec-ce8e-4451-b0a4-8a1a068170af
+--batchresponse_424fc26a-6f70-4da3-a379-f7d4927b4184
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
@@ -63,6 +63,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "ItemChildCount": "0",
 "FolderChildCount": "0",
 "A2ODMountCount": "",
+"_ComplianceTag": "",
 "owshiddenversion": "4",
 "_SPTranslatedLanguages": "",
 "_SPSitePageFlags": "",
@@ -82,4 +83,4 @@ CONTENT-TYPE: application/json; charset=utf-8
 ,"CurrentFolderSpItemUrl" : ""
 
 }
---batchresponse_30b384ec-ce8e-4451-b0a4-8a1a068170af--
+--batchresponse_424fc26a-6f70-4da3-a379-f7d4927b4184--

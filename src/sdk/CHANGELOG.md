@@ -6,7 +6,29 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
-## [Unreleased]
+## [unreleased]
+
+### Added
+
+- Added output for ClassifyAndExtractFileBatch methods [jansenbe - Bert Jansen]
+- Added Batch methods for SyntexModel.GetModelPublications, SyntexModel.SyntexModel.PublishModel and SyntexModel.UnPublishModel [jansenbe - Bert Jansen]
+- Support for processing result(s) when using one of the RawRequestBatch methods (see SyntexModel.GetModelPublicationsBatchAsync and SyntexModel.PublishModelBatchAsync as examples) [jansenbe - Bert Jansen]
+- Support to request for classifying and extracting of a file via the connected Syntex models [jansenbe - Bert Jansen]
+- Exposed additional Get/Load synchronous and asynchronous extension methods #354 [PaoloPia - Paolo Pialorsi]
+
+### Changed
+
+- Added output for RecycleBatch methods on List, ListItem and File [jansenbe - Bert Jansen]
+- Fix bug in EnsureFolder: running this method when the folder structure existed tried to create the folder again [jansenbe - Bert Jansen]
+- Improved page name normalization (only # are not allowed in modern page names) #353 [Sarah4x - Sarah Wilson]
+- Uplifted samples to GA v1.0.0 #350 [pkbullock - Paul Bullock]
+- Bug fix for issue #351 - Teams Chat Messages not working [pkbullock - Paul Bullock]
+- Improved handling of special characters ('#& ) for files and folders [jansenbe - Bert Jansen]
+- Fix for single quote in client side page name #348 [Sarah4x - Sarah Wilson]
+- Improved CSOM support for content type creation and taxonomy field creation #349 [mgwojciech - Marcin Wojciechowski]
+- Fix for older SharePoint UI created image web parts where links is set to null #347 [Sarah4x - Sarah Wilson]
+
+## [1.0.0]
 
 ### Added
 
@@ -63,6 +85,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Authentication enhancements #302 [sebastianmattar - Sebastian Mattar]
 - CSOM Light client - first step implementation for PropertyBag updates #334 [mgwojciech - Marcin Wojciechowski]
 - Support for ListItem permission management #343 [jimmywim - Jim Love]
+- CSOM Light client - List item update logic #345 [mgwojciech - Marcin Wojciechowski]
 
 ### Changed
 

@@ -1,4 +1,4 @@
---batchresponse_c42ee273-0061-4660-833d-26de91911806
+--batchresponse_fe8db695-ef1b-465e-a13a-89730079487e
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
@@ -7,19 +7,19 @@ CONTENT-TYPE: application/json; charset=utf-8
 
 { "Row" : 
 [{
-"ID": "1246",
+"ID": "1434",
 "PermMask": "0x7ffffffffffbffff",
 "FSObjType": "0",
 "HTML_x0020_File_x0020_Type": "",
-"UniqueId": "{637CD5E9-90FD-41EF-B184-01F8C4FFD6AD}",
+"UniqueId": "{A83B1111-3A5E-4D20-BA53-A823607623F4}",
 "ProgId": "",
 "NoExecute": "0",
 "ContentTypeId": "0x01010800B3B2A1451E70B6458A757AC0CBA6DAEF",
-"FileRef": "\u002fsites\u002fprov-1\u002fSitePages\u002fPNP_SDK_TEST_CreateAndUpdatePageWith-Space-InName.aspx",
-"FileRef.urlencode": "%2Fsites%2Fprov%2D1%2FSitePages%2FPNP%5FSDK%5FTEST%5FCreateAndUpdatePageWith%2DSpace%2DInName%2Easpx",
-"FileRef.urlencodeasurl": "\u002fsites\u002fprov-1\u002fSitePages\u002fPNP_SDK_TEST_CreateAndUpdatePageWith-Space-InName.aspx",
-"FileRef.urlencoding": "\u002fsites\u002fprov-1\u002fSitePages\u002fPNP_SDK_TEST_CreateAndUpdatePageWith-Space-InName.aspx",
-"FileRef.scriptencodeasurl": "\\u002fsites\\u002fprov-1\\u002fSitePages\\u002fPNP_SDK_TEST_CreateAndUpdatePageWith-Space-InName.aspx",
+"FileRef": "\u002fsites\u002fprov-1\u002fSitePages\u002fPNP_SDK_TEST_CreateAndUpdatePageWith Space InName.aspx",
+"FileRef.urlencode": "%2Fsites%2Fprov%2D1%2FSitePages%2FPNP%5FSDK%5FTEST%5FCreateAndUpdatePageWith%20Space%20InName%2Easpx",
+"FileRef.urlencodeasurl": "\u002fsites\u002fprov-1\u002fSitePages\u002fPNP_SDK_TEST_CreateAndUpdatePageWith%20Space%20InName.aspx",
+"FileRef.urlencoding": "\u002fsites\u002fprov-1\u002fSitePages\u002fPNP_SDK_TEST_CreateAndUpdatePageWith%20Space%20InName.aspx",
+"FileRef.scriptencodeasurl": "\\u002fsites\\u002fprov-1\\u002fSitePages\\u002fPNP_SDK_TEST_CreateAndUpdatePageWith Space InName.aspx",
 "_UIVersion": "1",
 "SMTotalSize": "932",
 "File_x0020_Size": "780",
@@ -32,8 +32,8 @@ CONTENT-TYPE: application/json; charset=utf-8
 "ServerRedirectedEmbedUrl": "",
 "File_x0020_Type.progid": "",
 "File_x0020_Type.url": "FALSE",
-"FileLeafRef": "PNP_SDK_TEST_CreateAndUpdatePageWith-Space-InName.aspx",
-"FileLeafRef.Name": "PNP_SDK_TEST_CreateAndUpdatePageWith-Space-InName",
+"FileLeafRef": "PNP_SDK_TEST_CreateAndUpdatePageWith Space InName.aspx",
+"FileLeafRef.Name": "PNP_SDK_TEST_CreateAndUpdatePageWith Space InName",
 "FileLeafRef.Suffix": "aspx",
 "FileDirRef": "\u002fsites\u002fprov-1\u002fSitePages",
 "Description": "",
@@ -63,6 +63,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "ItemChildCount": "0",
 "FolderChildCount": "0",
 "A2ODMountCount": "",
+"_ComplianceTag": "",
 "owshiddenversion": "1",
 "_SPTranslatedLanguages": "",
 "_SPSitePageFlags": "",
@@ -82,4 +83,4 @@ CONTENT-TYPE: application/json; charset=utf-8
 ,"CurrentFolderSpItemUrl" : ""
 
 }
---batchresponse_c42ee273-0061-4660-833d-26de91911806--
+--batchresponse_fe8db695-ef1b-465e-a13a-89730079487e--

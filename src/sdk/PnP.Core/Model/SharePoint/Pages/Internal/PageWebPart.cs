@@ -388,9 +388,12 @@ namespace PnP.Core.Model.SharePoint
 
                 if (ServerProcessedContent.TryGetProperty("links", out JsonElement links))
                 {
-                    foreach (var property in links.EnumerateObject())
+                    if (links.ValueKind != JsonValueKind.Null)
                     {
-                        htmlWriter.Append($@"<a data-sp-prop-name=""{property.Name}"" href=""{property.Value.GetString()}""></a>");
+                        foreach (var property in links.EnumerateObject())
+                        {
+                            htmlWriter.Append($@"<a data-sp-prop-name=""{property.Name}"" href=""{property.Value.GetString()}""></a>");
+                        }
                     }
                 }
 

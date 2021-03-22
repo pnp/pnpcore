@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 using PnP.Core.Model;
+using PnP.Core.Services.Core.CSOM;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -707,6 +708,11 @@ namespace PnP.Core.Services
                     {
                         await JsonMappingHelper.MapJsonToModel(batchRequest).ConfigureAwait(false);
                     }
+                    else
+                    {
+                        // Invoke a delegate (if defined) to trigger processing of raw batch requests
+                        batchRequest.ApiCall.RawResultsHandler?.Invoke(batchRequest.ResponseJson, batchRequest.ApiCall);
+                    }
                 }
             }
 
@@ -1105,6 +1111,11 @@ namespace PnP.Core.Services
                         if (!batchRequest.ApiCall.RawRequest)
                         {
                             await JsonMappingHelper.MapJsonToModel(batchRequest).ConfigureAwait(false);
+                        }
+                        else
+                        {
+                            // Invoke a delegate (if defined) to trigger processing of raw batch requests
+                            batchRequest.ApiCall.RawResultsHandler?.Invoke(batchRequest.ResponseJson, batchRequest.ApiCall);
                         }
                     }
                 }

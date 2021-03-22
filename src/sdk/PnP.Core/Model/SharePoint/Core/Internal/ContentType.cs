@@ -1,4 +1,8 @@
 ﻿using PnP.Core.Services;
+using PnP.Core.Services.Core.CSOM.Requests;
+using PnP.Core.Services.Core.CSOM.Requests.Web;
+using PnP.Core.Services.Core.CSOM.Utils.Model;
+using System.Collections.Generic;
 using System.Dynamic;
 using System.Net.Http;
 using System.Text.Json;
@@ -48,19 +52,15 @@ namespace PnP.Core.Model.SharePoint
                 }
 
                 // Fallback to CSOM call
-                string actualDescription = !string.IsNullOrEmpty(Description)
-                    ? $@"<Property Name=""Description"" Type=""String"">{CsomHelper.XmlString(Description)}</Property>"
-                    : $@"<Property Name=""Description"" Type=""Null"" />";
-                string actualGroup = !string.IsNullOrEmpty(Group)
-                    ? $@"<Property Name=""Group"" Type=""String"">{CsomHelper.XmlString(Group)}</Property>"
-                    : @"<Property Name=""Group"" Type=""Null"" />";
+                CreateContentTypeRequest request = new CreateContentTypeRequest(new ContentTypeCreationInfo()
+                {
+                    Id = StringId,
+                    Description = Description,
+                    Group = Group,
+                    Name = Name
+                });
 
-                string xml = CsomHelper.ContentTypeCreate.Replace(CsomHelper.ContentTypeActualDescription, actualDescription)
-                                                         .Replace(CsomHelper.ContentTypeActualGroup, actualGroup)
-                                                         .Replace(CsomHelper.ContentTypeStringId, CsomHelper.XmlString(StringId))
-                                                         .Replace(CsomHelper.ContentTypeName, CsomHelper.XmlString(Name));
-
-                return new ApiCall(xml);
+               return PnPContext.GetCSOMCallForRequests(new List<IRequest<object>>() { request });
             };
         }
         #endregion

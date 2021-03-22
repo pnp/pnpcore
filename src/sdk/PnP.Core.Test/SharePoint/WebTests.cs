@@ -5,6 +5,7 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 using PnP.Core.QueryModel;
+using System.IO;
 
 namespace PnP.Core.Test.SharePoint
 {
@@ -330,6 +331,8 @@ namespace PnP.Core.Test.SharePoint
         public async Task SetWebPropertiesTest()
         {
             //TestCommon.Instance.Mocking = false;
+            TestCommon.ClassicSTS0TestSetup();
+
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.ClassicSTS0TestSite))
             {
                 // Test safety - sites typically are noscript sites
@@ -365,6 +368,8 @@ namespace PnP.Core.Test.SharePoint
         public async Task SetWebPropertiesBooleanTest()
         {
             //TestCommon.Instance.Mocking = false;
+            TestCommon.ClassicSTS0TestSetup();
+
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.ClassicSTS0TestSite))
             {
                 // Test safety - sites typically are noscript sites
@@ -400,6 +405,8 @@ namespace PnP.Core.Test.SharePoint
         public async Task SetWebPropertiesSpecialCharsTest()
         {
             //TestCommon.Instance.Mocking = false;
+            TestCommon.ClassicSTS0TestSetup();
+
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.ClassicSTS0TestSite))
             {
                 // Test safety - sites typically are noscript sites
@@ -830,7 +837,32 @@ namespace PnP.Core.Test.SharePoint
             }
         }
 
+        [TestMethod]
+        public async Task GetByServerRelativeSpecialChars()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                // Get the default document library root folder
+                string sharedDocumentsFolderUrl = $"{context.Uri.PathAndQuery}/Shared Documents";
+                IFolder sharedDocumentsFolder = await context.Web.GetFolderByServerRelativeUrlAsync(sharedDocumentsFolderUrl);
+                Assert.IsNotNull(sharedDocumentsFolder);
 
+                string lib2Name = TestCommon.GetPnPSdkTestAssetName("GetByServerRelativeSpecialChars");
+                var lib2 = await context.Web.Lists.AddAsync(lib2Name, ListTemplateType.DocumentLibrary);
+
+                await lib2.EnsurePropertiesAsync(p => p.RootFolder);
+                await lib2.RootFolder.EnsureFolderAsync("Hi'there# is &ok");
+                IFolder specialNameFolder2 = await context.Web.GetFolderByServerRelativeUrlAsync(lib2.RootFolder.ServerRelativeUrl + "/" + "Hi'there# is &ok");
+                Assert.IsNotNull(specialNameFolder2);
+
+                // Upload a file with a special name
+                var file2 = await specialNameFolder2.Files.AddAsync("Hi'there# is &ok.docx", System.IO.File.OpenRead($".{Path.DirectorySeparatorChar}TestAssets{Path.DirectorySeparatorChar}test.docx"));
+                IFile specialFile2 = await context.Web.GetFileByServerRelativeUrlAsync(lib2.RootFolder.ServerRelativeUrl + "/Hi'there# is &ok/Hi'there# is &ok.docx");
+
+                await lib2.DeleteAsync();
+            }
+        }
 
     }
 }

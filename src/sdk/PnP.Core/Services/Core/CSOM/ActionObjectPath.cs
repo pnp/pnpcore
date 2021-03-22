@@ -6,6 +6,7 @@ namespace PnP.Core.Services.Core.CSOM
     internal class ActionObjectPath
     {
         internal BaseAction Action { get; set; }
+
         internal Identity ObjectPath { get; set; }
     }
 }

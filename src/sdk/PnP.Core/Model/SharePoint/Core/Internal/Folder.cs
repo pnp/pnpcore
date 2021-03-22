@@ -34,7 +34,8 @@ namespace PnP.Core.Model.SharePoint
                 //throw new ClientException(ErrorType.Unsupported, OnPCoreResources.Exception_Unsupported_AddingContentTypeToList);
                 //}
 
-                return new ApiCall($"{entity.SharePointGet}/Add('{Name}')", ApiType.SPORest);
+                string encodedPath = WebUtility.UrlEncode(Name.Replace("'", "''")).Replace("+", "%20");
+                return new ApiCall($"{entity.SharePointGet}/AddUsingPath(decodedurl='{encodedPath}')", ApiType.SPORest);
             };
         }
         #endregion
@@ -311,9 +312,9 @@ namespace PnP.Core.Model.SharePoint
                 // Find next part of the path
                 if (!currentFolderWasCreated)
                 {
-                    await currentFolder.GetAsync(p => p.Folders).ConfigureAwait(false);
+                    await currentFolder.LoadAsync(p => p.Folders).ConfigureAwait(false);
 
-                    var folderCollection = Folders;
+                    var folderCollection = currentFolder.Folders;
 
                     foreach (Folder existingFolder in folderCollection)
                     {

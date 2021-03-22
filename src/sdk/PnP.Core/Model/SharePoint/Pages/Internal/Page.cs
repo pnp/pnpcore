@@ -249,8 +249,6 @@ namespace PnP.Core.Model.SharePoint
             // Get a reference to the pages library, reuse the existing one if the correct properties were loaded
             IList pagesLibrary = await EnsurePagesLibraryAsync(context).ConfigureAwait(false);
 
-            pageName = NormalizePageName(pageName);
-
             // drop .aspx from the page name as page title is without extension
             if (!string.IsNullOrEmpty(pageName))
             {
@@ -1386,7 +1384,7 @@ namespace PnP.Core.Model.SharePoint
         #endregion
 
         #region Create and Save page
-        public void SaveAsTemplate(string pageName = null)
+        public string SaveAsTemplate(string pageName = null)
         {
             if (string.IsNullOrEmpty(pageName))
             {
@@ -1400,10 +1398,10 @@ namespace PnP.Core.Model.SharePoint
                 }
             }
 
-            SaveAsTemplateAsync(pageName).GetAwaiter().GetResult();
+            return SaveAsTemplateAsync(pageName).GetAwaiter().GetResult();
         }
 
-        public async Task SaveAsTemplateAsync(string pageName = null)
+        public async Task<string> SaveAsTemplateAsync(string pageName = null)
         {
             string pageUrl = $"{(await GetTemplatesFolderAsync().ConfigureAwait(false))}/{pageName}";
 
@@ -1412,15 +1410,15 @@ namespace PnP.Core.Model.SharePoint
             isDefaultDescription = true;
 
             // Save the page as template
-            await SaveAsync(pageUrl).ConfigureAwait(false);
+            return await SaveAsync(pageUrl).ConfigureAwait(false);
         }
 
-        public void Save(string pageName = null)
+        public string Save(string pageName = null)
         {
-            SaveAsync(pageName).GetAwaiter().GetResult();
+            return SaveAsync(pageName).GetAwaiter().GetResult();
         }
 
-        public async Task SaveAsync(string pageName = null)
+        public async Task<string> SaveAsync(string pageName = null)
         {
             if (string.IsNullOrEmpty(pageName))
             {
@@ -1440,8 +1438,6 @@ namespace PnP.Core.Model.SharePoint
                     throw new ArgumentNullException(nameof(pageName));
                 }
             }
-
-            pageName = NormalizePageName(pageName);
 
             // Validate we're not using "wrong" layouts for the given site type
             await ValidateOneColumnFullWidthSectionUsageAsync().ConfigureAwait(false);
@@ -1503,7 +1499,11 @@ namespace PnP.Core.Model.SharePoint
                     folderHostingThePage = PagesLibrary.RootFolder;
                 }
 
-                await folderHostingThePage.Files.AddTemplateFileAsync(serverRelativePageName, TemplateFileType.ClientSidePage).ConfigureAwait(false);
+                var addedFile = await folderHostingThePage.Files.AddTemplateFileAsync(serverRelativePageName, TemplateFileType.ClientSidePage).ConfigureAwait(false);
+
+                // Since the AddTemplateFile method can alter the page name (# is replaced by -) we need to take that in account
+                pageName = addedFile.ServerRelativeUrl.Replace($"{PagesLibrary.RootFolder.ServerRelativeUrl}/", "");
+                this.pageName = pageName;
 
                 // Get the list item data for the added page
                 await EnsurePageListItemAsync(pageName).ConfigureAwait(false);
@@ -1601,7 +1601,7 @@ namespace PnP.Core.Model.SharePoint
                     await PageListItem.UpdateOverwriteVersionAsync().ConfigureAwait(false);
                 }
 
-                return;
+                return this.pageName;
             }
             else
             {
@@ -1745,6 +1745,8 @@ namespace PnP.Core.Model.SharePoint
             {
                 await PageListItem.UpdateOverwriteVersionAsync().ConfigureAwait(false);
             }
+
+            return this.pageName;
         }
 
         private void SetBannerImageUrlField(string bannerImageUrl)
@@ -1771,7 +1773,7 @@ namespace PnP.Core.Model.SharePoint
                 if (page[PageConstants.FileLeafRef].ToString().Equals(pageNameWithoutFolder, StringComparison.InvariantCultureIgnoreCase) && page[PageConstants.FileDirRef].ToString().Equals(fileDirRef, StringComparison.InvariantCultureIgnoreCase))
                 {
                     PageListItem = page;
-                    continue;
+                    break;
                 }
             }
         }
@@ -1792,17 +1794,6 @@ namespace PnP.Core.Model.SharePoint
             }
 
             return new Tuple<string, string>(folderName, pageNameWithoutFolder);
-        }
-
-        private static string NormalizePageName(string pageName)
-        {
-            if (string.IsNullOrEmpty(pageName))
-            {
-                return pageName;
-            }
-
-            // if a page name contains spaces then let's replace them with dashes, just like the UI does
-            return pageName.Replace(" ", "-").Replace("#", "-");
         }
 
         private async Task ValidateOneColumnFullWidthSectionUsageAsync()

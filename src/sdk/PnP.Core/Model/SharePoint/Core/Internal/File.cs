@@ -369,46 +369,59 @@ namespace PnP.Core.Model.SharePoint
 
             if (!string.IsNullOrEmpty(response.Json))
             {
-                var document = JsonSerializer.Deserialize<JsonElement>(response.Json);
-                if (document.TryGetProperty("d", out JsonElement root))
+                return ProcessRecycleResponse(response.Json);
+            }
+
+            return Guid.Empty;
+        }
+
+        private static Guid ProcessRecycleResponse(string json)
+        {
+            var document = JsonSerializer.Deserialize<JsonElement>(json);
+            if (document.TryGetProperty("d", out JsonElement root))
+            {
+                if (root.TryGetProperty("Recycle", out JsonElement recycleBinItemId))
                 {
-                    if (root.TryGetProperty("Recycle", out JsonElement recycleBinItemId))
-                    {
-                        // return the recyclebin item id
-                        return recycleBinItemId.GetGuid();
-                    }
+                    // return the recyclebin item id
+                    return recycleBinItemId.GetGuid();
                 }
             }
 
             return Guid.Empty;
         }
 
-        public void RecycleBatch()
+        public IBatchSingleResult<BatchResultValue<Guid>> RecycleBatch()
         {
-            RecycleBatchAsync().GetAwaiter().GetResult();
+            return RecycleBatchAsync().GetAwaiter().GetResult();
         }
 
-        public void RecycleBatch(Batch batch)
+        public IBatchSingleResult<BatchResultValue<Guid>> RecycleBatch(Batch batch)
         {
-            RecycleBatchAsync(batch).GetAwaiter().GetResult();
+            return RecycleBatchAsync(batch).GetAwaiter().GetResult();
         }
 
-        public async Task RecycleBatchAsync()
+        public async Task<IBatchSingleResult<BatchResultValue<Guid>>> RecycleBatchAsync()
         {
-            await RecycleBatchAsync(PnPContext.CurrentBatch).ConfigureAwait(false);
+            return await RecycleBatchAsync(PnPContext.CurrentBatch).ConfigureAwait(false);
         }
 
-        public async Task RecycleBatchAsync(Batch batch)
+        public async Task<IBatchSingleResult<BatchResultValue<Guid>>> RecycleBatchAsync(Batch batch)
         {
             var entity = EntityManager.GetClassInfo(GetType(), this);
             string recycleEndpointUrl = $"{entity.SharePointUri}/recycle";
 
             var apiCall = new ApiCall(recycleEndpointUrl, ApiType.SPORest)
             {
-                RemoveFromModel = true
+                RemoveFromModel = true,
+                RawSingleResult = new BatchResultValue<Guid>(Guid.Empty),
+                RawResultsHandler = (json, apiCall) =>
+                {
+                    (apiCall.RawSingleResult as BatchResultValue<Guid>).Value = ProcessRecycleResponse(json);
+                }
             };
 
-            await RawRequestBatchAsync(batch, apiCall, HttpMethod.Post).ConfigureAwait(false);
+            var batchRequest = await RawRequestBatchAsync(batch, apiCall, HttpMethod.Post).ConfigureAwait(false);
+            return new BatchSingleResult<BatchResultValue<Guid>>(batch, batchRequest.Id, apiCall.RawSingleResult as BatchResultValue<Guid>);
         }
         #endregion
 
@@ -596,6 +609,99 @@ namespace PnP.Core.Model.SharePoint
         public void MoveToBatch(string destinationUrl, MoveOperations moveOperations = MoveOperations.None, MoveCopyOptions options = null)
         {
             MoveToBatchAsync(destinationUrl, moveOperations, options).GetAwaiter().GetResult();
+        }
+        #endregion
+
+        #region Syntex
+        public async Task<ISyntexClassifyAndExtractResult> ClassifyAndExtractFileAsync()
+        {
+            ApiCall apiCall = CreateClassifyAndExtractApiCall();
+            var apiResult = await RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
+
+            // Process response
+            return ProcessClassifyAndExtractResponse(apiResult.Json);
+        }
+
+        public ISyntexClassifyAndExtractResult ClassifyAndExtractFile()
+        {
+            return ClassifyAndExtractFileAsync().GetAwaiter().GetResult();
+        }
+
+        public async Task<IBatchSingleResult<ISyntexClassifyAndExtractResult>> ClassifyAndExtractFileBatchAsync(Batch batch)
+        {
+            ApiCall apiCall = CreateClassifyAndExtractApiCall();
+            apiCall.RawSingleResult = new SyntexClassifyAndExtractResult();
+            apiCall.RawResultsHandler = (json, apiCall) =>
+            {
+                var result = ProcessClassifyAndExtractResponse(json);
+                (apiCall.RawSingleResult as SyntexClassifyAndExtractResult).Created = result.Created;
+                (apiCall.RawSingleResult as SyntexClassifyAndExtractResult).DeliverDate = result.DeliverDate;
+                (apiCall.RawSingleResult as SyntexClassifyAndExtractResult).ErrorMessage = result.ErrorMessage;
+                (apiCall.RawSingleResult as SyntexClassifyAndExtractResult).Id = result.Id;
+                (apiCall.RawSingleResult as SyntexClassifyAndExtractResult).Status = result.Status;
+                (apiCall.RawSingleResult as SyntexClassifyAndExtractResult).StatusCode = result.StatusCode;
+                (apiCall.RawSingleResult as SyntexClassifyAndExtractResult).TargetServerRelativeUrl = result.TargetServerRelativeUrl;
+                (apiCall.RawSingleResult as SyntexClassifyAndExtractResult).TargetSiteUrl = result.TargetSiteUrl;
+                (apiCall.RawSingleResult as SyntexClassifyAndExtractResult).TargetWebServerRelativeUrl = result.TargetWebServerRelativeUrl;
+                (apiCall.RawSingleResult as SyntexClassifyAndExtractResult).WorkItemType = result.WorkItemType;
+            };
+
+            var batchRequest = await RawRequestBatchAsync(batch, apiCall, HttpMethod.Post).ConfigureAwait(false);
+            
+            return new BatchSingleResult<ISyntexClassifyAndExtractResult>(batch, batchRequest.Id, apiCall.RawSingleResult as ISyntexClassifyAndExtractResult);
+        }
+
+        public IBatchSingleResult<ISyntexClassifyAndExtractResult> ClassifyAndExtractFileBatch(Batch batch)
+        {
+            return ClassifyAndExtractFileBatchAsync(batch).GetAwaiter().GetResult();
+        }
+
+        public async Task<IBatchSingleResult<ISyntexClassifyAndExtractResult>> ClassifyAndExtractFileBatchAsync()
+        {
+            return await ClassifyAndExtractFileBatchAsync(PnPContext.CurrentBatch).ConfigureAwait(false);
+        }
+
+        public IBatchSingleResult<ISyntexClassifyAndExtractResult> ClassifyAndExtractFileBatch()
+        {
+            return ClassifyAndExtractFileBatchAsync().GetAwaiter().GetResult();
+        }
+
+        private static ISyntexClassifyAndExtractResult ProcessClassifyAndExtractResponse(string json)
+        {
+            var root = JsonDocument.Parse(json).RootElement.GetProperty("d");
+            return new SyntexClassifyAndExtractResult
+            {
+                Created = root.GetProperty("Created").GetDateTime(),
+                DeliverDate = root.GetProperty("DeliverDate").GetDateTime(),
+                ErrorMessage = root.GetProperty("ErrorMessage").GetString(),
+                StatusCode = root.GetProperty("StatusCode").GetInt32(),
+                Id = root.GetProperty("ID").GetGuid(),
+                Status = root.GetProperty("Status").GetString(),
+                WorkItemType = root.GetProperty("Type").GetGuid(),
+                TargetServerRelativeUrl = root.GetProperty("TargetServerRelativeUrl").GetString(),
+                TargetSiteUrl = root.GetProperty("TargetSiteUrl").GetString(),
+                TargetWebServerRelativeUrl = root.GetProperty("TargetWebServerRelativeUrl").GetString()
+            };
+        }
+
+        private ApiCall CreateClassifyAndExtractApiCall()
+        {
+            var classifyAndExtractFile = new
+            {
+                __metadata = new { type = "Microsoft.Office.Server.ContentCenter.SPMachineLearningWorkItemEntityData" },
+                Type = "AE9D4F24-EE84-4C0C-A972-A74CFFE939A1",
+                TargetSiteId = PnPContext.Site.Id,
+                TargetWebId = PnPContext.Web.Id,
+                TargetUniqueId = UniqueId
+            }.AsExpando();
+
+            string body = JsonSerializer.Serialize(classifyAndExtractFile, new JsonSerializerOptions()
+            {
+                IgnoreNullValues = true
+            });
+
+            var apiCall = new ApiCall("_api/machinelearning/workitems", ApiType.SPORest, body);
+            return apiCall;
         }
         #endregion
 

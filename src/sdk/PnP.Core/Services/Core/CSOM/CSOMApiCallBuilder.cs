@@ -7,7 +7,9 @@ namespace PnP.Core.Services.Core.CSOM
     internal class CSOMApiCallBuilder
     {
         internal IIdProvider IdProvider { get; set; } = new IteratorIdProvider();
+
         internal IBodySerializer RequestBodySerializer { get; set; } = new CSOMBodySerializer();
+
         protected ICollection<IRequest<object>> Requests { get; set; } = new List<IRequest<object>>();
 
         internal void AddRequest<T>(IRequest<T> request)
@@ -15,7 +17,7 @@ namespace PnP.Core.Services.Core.CSOM
             Requests.Add((IRequest<object>)request);
         }
 
-        internal ApiCall BuildApiCall()
+        internal ApiCall BuildApiCall(bool commit = false)
         {
 
             var requests = new List<ActionObjectPath>();
@@ -31,7 +33,10 @@ namespace PnP.Core.Services.Core.CSOM
             // Clear requests now that we've built the body
             Requests.Clear();
 
-            return new ApiCall(requestBody);
+            return new ApiCall(requestBody)
+            {
+                Commit = commit
+            };
         }
 
         internal void ProcessRawResponse(string rawResponse)

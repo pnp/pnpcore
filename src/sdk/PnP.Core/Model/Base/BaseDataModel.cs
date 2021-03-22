@@ -6,12 +6,10 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Net.Http;
 using System.Runtime.CompilerServices;
-using System.Threading;
 using System.Threading.Tasks;
 
 namespace PnP.Core.Model
 {
-
     /// <summary>
     /// Delegate for requesting the Api call for doing an ADD operation
     /// </summary>
@@ -45,7 +43,6 @@ namespace PnP.Core.Model
     /// <typeparam name="TModel">Model class</typeparam>
     internal class BaseDataModel<TModel> : TransientObject, IDataModel<TModel>, IDataModelProcess, IDataModelLoad, IRequestable, IMetadataExtensible, IDataModelWithKey, IDataModelMappingHandler
     {
-
         #region Core properties
 
         /// <summary>
@@ -440,35 +437,6 @@ namespace PnP.Core.Model
         }
 
         #endregion
-
-        /*
-        
-        TODO: Suggested changes
-
-        Why the Add* are internal and the Update* and Delete* methods are public?
-
-        internal async virtual Task<BaseDataModel<TModel>> AddBatchAsync(Dictionary<string, object> keyValuePairs = null)
-        internal async virtual Task<BaseDataModel<TModel>> AddBatchAsync(Batch batch, Dictionary<string, object> keyValuePairs = null)
-        internal virtual async Task<BaseDataModel<TModel>> AddAsync(Dictionary<string, object> keyValuePairs = null)
-        internal virtual BaseDataModel<TModel> AddBatch(Dictionary<string, object> keyValuePairs = null)
-        internal virtual BaseDataModel<TModel> AddBatch(Batch batch, Dictionary<string, object> keyValuePairs = null)
-        internal virtual BaseDataModel<TModel> Add(Dictionary<string, object> keyValuePairs = null)
-
-        public async virtual Task UpdateBatchAsync()
-        public async virtual Task UpdateBatchAsync(Batch batch)
-        public virtual async Task UpdateAsync()
-        public virtual void UpdateBatch()
-        public virtual void UpdateBatch(Batch batch)
-        public virtual void Update()
-
-        public async virtual Task DeleteBatchAsync()
-        public async virtual Task DeleteBatchAsync(Batch batch)
-        public virtual async Task DeleteAsync()
-        public virtual void DeleteBatch()
-        public virtual void DeleteBatch(Batch batch)
-        public virtual void Delete()
- 
-         */
 
         #endregion
 
@@ -952,7 +920,7 @@ namespace PnP.Core.Model
         /// <param name="apiCall">Api call to execute</param>
         /// <param name="method"><see cref="HttpMethod"/> to use for this request</param>
         /// <param name="operationName">Name of the operation, used for telemetry purposes</param>
-        internal Task RawRequestBatchAsync(ApiCall apiCall, HttpMethod method, [CallerMemberName] string operationName = null)
+        internal Task<BatchRequest> RawRequestBatchAsync(ApiCall apiCall, HttpMethod method, [CallerMemberName] string operationName = null)
         {
             // TODO: Can we consolidate this one with the next one?
 
@@ -966,7 +934,7 @@ namespace PnP.Core.Model
         /// <param name="apiCall">Api call to execute</param>
         /// <param name="method"><see cref="HttpMethod"/> to use for this request</param>
         /// <param name="operationName">Name of the operation, used for telemetry purposes</param>
-        internal async Task RawRequestBatchAsync(Batch batch, ApiCall apiCall, HttpMethod method, [CallerMemberName] string operationName = null)
+        internal async Task<BatchRequest> RawRequestBatchAsync(Batch batch, ApiCall apiCall, HttpMethod method, [CallerMemberName] string operationName = null)
         {
             // TODO: Can we consolidate this one with the previous one?
 
@@ -982,7 +950,7 @@ namespace PnP.Core.Model
             // Ensure there's no Graph beta endpoint being used when that was not allowed
             if (!CanUseGraphBetaForRequest(apiCall, entityInfo))
             {
-                return;
+                return null;
             }
 
             // Ensure token replacement is done
@@ -996,7 +964,8 @@ namespace PnP.Core.Model
             }
 
             // Add the request to the batch
-            batch.Add(this, entityInfo, method, apiCall, default, fromJsonCasting: MappingHandler, postMappingJson: PostMappingHandler, CleanupOperationName(operationName));
+            Guid batchRequestId = batch.Add(this, entityInfo, method, apiCall, default, fromJsonCasting: MappingHandler, postMappingJson: PostMappingHandler, CleanupOperationName(operationName));
+            return batch.GetRequest(batchRequestId);
         }
 
         /// <summary>
