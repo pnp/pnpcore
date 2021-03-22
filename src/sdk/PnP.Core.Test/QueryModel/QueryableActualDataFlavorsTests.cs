@@ -22,7 +22,7 @@ namespace PnP.Core.Test.QueryModel
         [TestMethod]
         public async Task TestQueryPropertiesMultipleBehaviors()
         {
-            //TestCommon.Instance.Mocking = false;
+            TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 context.GraphFirst = true;
@@ -113,7 +113,7 @@ namespace PnP.Core.Test.QueryModel
                     Assert.IsTrue(l.IsPropertyAvailable(l => l.TemplateType));
                 }
 
-                // With a specified batch
+                // With a specified batch, create a new batch
                 var batch = context.NewBatch();
 
                 // AsBatchAsync
@@ -131,6 +131,9 @@ namespace PnP.Core.Test.QueryModel
                     Assert.IsTrue(l.IsPropertyAvailable(l => l.Title));
                     Assert.IsTrue(l.IsPropertyAvailable(l => l.TemplateType));
                 }
+
+                // With a specified batch, create a new batch
+                batch = context.NewBatch();
 
                 // AsBatch
                 queryBatch = context.Web.Lists
