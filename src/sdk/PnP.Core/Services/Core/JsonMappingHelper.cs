@@ -851,7 +851,7 @@ namespace PnP.Core.Services
                             if (modelReparented)
                             {
                                 // Clone the original API call so we can blank out the ReceivingProperty to avoid getting into an endless loop
-                                var newApiCall = new ApiCall(apiResponse.ApiCall.Request, apiResponse.ApiCall.JsonBody)
+                                var newApiCall = new ApiCall(apiResponse.ApiCall.Request, apiResponse.ApiCall.Type, apiResponse.ApiCall.JsonBody)
                                 {
                                     Type  = apiResponse.ApiCall.Type,                                    
                                 };

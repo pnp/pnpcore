@@ -8,6 +8,8 @@ using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
 using System.Collections.Generic;
+using PnP.Core.Services.Core.CSOM.Requests;
+using PnP.Core.Test.Services.Core.CSOM.Requests;
 
 namespace PnP.Core.Test.Base
 {
@@ -35,7 +37,6 @@ namespace PnP.Core.Test.Base
         private static readonly string sampleRestError = "{\"error\":{\"code\":\"-2130575342, Microsoft.SharePoint.SPException\",\"message\":{\"lang\":\"en-US\",\"value\":\"A list, survey, discussion board, or document library with the specified title already exists in this Web site.  Please choose another title.\"}}}";
         private static readonly string sampleRestSimpleError = "Plain simple error string";
         private static readonly string sampleClientError = "This is a sample client error";
-        private static readonly string WebTitleErrorCsom = "<Request AddExpandoFieldTypeSuffix=\"true\" SchemaVersion=\"15.0.0.0\" LibraryVersion=\"16.0.0.0\" ApplicationName=\".NET Library\" xmlns=\"http://schemas.microsoft.com/sharepoint/clientquery/2009\"><Actions><ObjectPath Id=\"2\" ObjectPathId=\"1\" /><ObjectPath Id=\"4\" ObjectPathId=\"3\" /><Query Id=\"5\" ObjectPathId=\"3\"><Query SelectAllProperties=\"false\"><Properties><Property Name=\"Bla\" ScalarProperty=\"true\" /></Properties></Query></Query></Actions><ObjectPaths><StaticProperty Id=\"1\" TypeId=\"{3747adcd-a3c3-41b9-bfab-4a64dd2f1e0a}\" Name=\"Current\" /><Property Id=\"3\" ParentId=\"1\" Name=\"Web\" /></ObjectPaths></Request>";
 
 
         [ClassInitialize]
@@ -678,7 +679,7 @@ namespace PnP.Core.Test.Base
             {
                 var web = context.Web as Web;
 
-                var apiCall = new ApiCall(WebTitleErrorCsom);
+                var apiCall = new ApiCall(new List<IRequest<object>>() { new GetTitleErrorRequest() });
 
                 bool exceptionThrown = false;
                 try
@@ -702,7 +703,7 @@ namespace PnP.Core.Test.Base
             {
                 var web = context.Web as Web;
 
-                var apiCall = new ApiCall(WebTitleErrorCsom);
+                var apiCall = new ApiCall(new List<IRequest<object>>() { new GetTitleErrorRequest() });
 
                 bool exceptionThrown = false;
                 string stringRepresentation = null;

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 
 namespace PnP.Core.Services
 {
@@ -13,7 +14,7 @@ namespace PnP.Core.Services
             Type = apiType;
             Request = request;
             JsonBody = jsonBody;
-            XmlBody = null;
+            CSOMRequests = new List<Core.CSOM.Requests.IRequest<object>>();
             ReceivingProperty = receivingProperty;
             RawRequest = false;
             RawSingleResult = null;
@@ -29,12 +30,12 @@ namespace PnP.Core.Services
             SkipCollectionClearing = false;
         }
 
-        internal ApiCall(string xmlBody, string receivingProperty = null)
+        internal ApiCall(List<Core.CSOM.Requests.IRequest<object>> csomRequests, string receivingProperty = null)
         {
             Request = null;
             Type = ApiType.CSOM;
             JsonBody = null;
-            XmlBody = xmlBody;
+            CSOMRequests = csomRequests;
             ReceivingProperty = receivingProperty;
             RawRequest = false;
             RawSingleResult = null;
@@ -66,9 +67,9 @@ namespace PnP.Core.Services
         internal string JsonBody { get; set; }
 
         /// <summary>
-        /// Defines the XML body of the request, if any
+        /// List of CSOM requests for this API call
         /// </summary>
-        internal string XmlBody { get; set; }
+        internal List<Core.CSOM.Requests.IRequest<object>> CSOMRequests { get; set; }
 
         /// <summary>
         /// Typically the JSON response will be mapped to the current model object, but sometimes a call 

@@ -1,20 +1,20 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PnP.Core.Model.SharePoint;
 using PnP.Core.Services;
+using PnP.Core.Services.Core.CSOM.Requests;
 using PnP.Core.Test.Services;
+using PnP.Core.Test.Services.Core.CSOM.Requests;
 using PnP.Core.Test.Utilities;
 using System;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
-using PnP.Core.Model;
 
 namespace PnP.Core.Test.Base
 {
     [TestClass]
     public class TelemetryTests
     {
-        private static readonly string WebTitleCsom = "<Request AddExpandoFieldTypeSuffix=\"true\" SchemaVersion=\"15.0.0.0\" LibraryVersion=\"16.0.0.0\" ApplicationName=\".NET Library\" xmlns=\"http://schemas.microsoft.com/sharepoint/clientquery/2009\"><Actions><ObjectPath Id=\"2\" ObjectPathId=\"1\" /><ObjectPath Id=\"4\" ObjectPathId=\"3\" /><Query Id=\"5\" ObjectPathId=\"3\"><Query SelectAllProperties=\"false\"><Properties><Property Name=\"Title\" ScalarProperty=\"true\" /></Properties></Query></Query></Actions><ObjectPaths><StaticProperty Id=\"1\" TypeId=\"{3747adcd-a3c3-41b9-bfab-4a64dd2f1e0a}\" Name=\"Current\" /><Property Id=\"3\" ParentId=\"1\" Name=\"Web\" /></ObjectPaths></Request>";
-
         [ClassInitialize]
         public static void TestFixtureSetup(TestContext context)
         {
@@ -189,7 +189,7 @@ namespace PnP.Core.Test.Base
             using (var context = await TestCommon.Instance.GetContextWithTelemetryManagerAsync(TestCommon.TestSite, telemetryManager))
             {
                 // Perform a get that will be resolved via CSOM
-                var apiCall = new ApiCall(WebTitleCsom);
+                var apiCall = new ApiCall(new List<IRequest<object>>() { new GetTitleRequest() });
                 await (context.Web as Web).RawRequestAsync(apiCall, HttpMethod.Post, "Get");
 
                 // Verify the telemetry events did fire

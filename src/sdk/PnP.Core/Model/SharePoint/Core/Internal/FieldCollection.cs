@@ -569,11 +569,12 @@ namespace PnP.Core.Model.SharePoint
                 options.TermStoreId,
                 options.TermSetId);
 
-            ApiCall updateCall = PnPContext.GetCSOMCallForRequests(new List<Services.Core.CSOM.Requests.IRequest<object>>() { request }, commit: true);
-            if (!string.IsNullOrEmpty(updateCall.XmlBody))
+            ApiCall updateCall = new ApiCall(new List<Services.Core.CSOM.Requests.IRequest<object>>() { request })
             {
-                await field.RawRequestAsync(updateCall, HttpMethod.Post).ConfigureAwait(false);
-            }
+                Commit = true,
+            };
+
+            await field.RawRequestAsync(updateCall, HttpMethod.Post).ConfigureAwait(false);
         }
 
         public async Task<IField> AddTaxonomyAsync(string title, FieldTaxonomyOptions options)

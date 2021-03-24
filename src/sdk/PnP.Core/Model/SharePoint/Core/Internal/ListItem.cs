@@ -6,9 +6,7 @@ using PnP.Core.Services.Core.CSOM.Requests.ListItems;
 using PnP.Core.Services.Core.CSOM.Utils;
 using PnP.Core.Services.Core.CSOM.Utils.Model;
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Dynamic;
 using System.Globalization;
 using System.Linq;
@@ -429,7 +427,10 @@ namespace PnP.Core.Model.SharePoint
 
             if (request.FieldsToUpdate.Count > 0)
             {
-                ApiCall updateCall = PnPContext.GetCSOMCallForRequests(new List<Services.Core.CSOM.Requests.IRequest<object>>() { request }, commit: true);
+                ApiCall updateCall = new ApiCall(new List<Services.Core.CSOM.Requests.IRequest<object>>() { request })
+                {
+                    Commit = true,
+                };
                 await RawRequestAsync(updateCall, HttpMethod.Post).ConfigureAwait(false);
             }
             else
@@ -487,7 +488,11 @@ namespace PnP.Core.Model.SharePoint
             await PrepareUpdateCall(request).ConfigureAwait(false);
             if (request.FieldsToUpdate.Count > 0)
             {
-                ApiCall updateCall = PnPContext.GetCSOMCallForRequests(new List<Services.Core.CSOM.Requests.IRequest<object>>() { request }, commit: true);
+                ApiCall updateCall = new ApiCall(new List<Services.Core.CSOM.Requests.IRequest<object>>() { request })
+                {
+                    Commit = true,
+                };
+
                 await RawRequestBatchAsync(batch, updateCall, HttpMethod.Post).ConfigureAwait(false);
             }
             else
@@ -511,7 +516,11 @@ namespace PnP.Core.Model.SharePoint
             await PrepareUpdateCall(request).ConfigureAwait(false);
             if (request.FieldsToUpdate.Count > 0)
             {
-                ApiCall updateCall = PnPContext.GetCSOMCallForRequests(new List<Services.Core.CSOM.Requests.IRequest<object>>() { request }, commit: true);
+                ApiCall updateCall = new ApiCall(new List<Services.Core.CSOM.Requests.IRequest<object>>() { request })
+                {
+                    Commit = true,
+                };
+
                 await RawRequestAsync(updateCall, HttpMethod.Post).ConfigureAwait(false);
             }
             else
@@ -541,7 +550,11 @@ namespace PnP.Core.Model.SharePoint
             await PrepareUpdateCall(request).ConfigureAwait(false);
             if (request.FieldsToUpdate.Count > 0)
             {
-                ApiCall updateCall = PnPContext.GetCSOMCallForRequests(new List<Services.Core.CSOM.Requests.IRequest<object>>() { request }, commit: true);
+                ApiCall updateCall = new ApiCall(new List<Services.Core.CSOM.Requests.IRequest<object>>() { request })
+                {
+                    Commit = true,
+                };
+
                 await RawRequestBatchAsync(batch, updateCall, HttpMethod.Post).ConfigureAwait(false);
             }
             else

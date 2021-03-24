@@ -185,7 +185,7 @@ namespace PnP.Core.Services
                 request.ApiCall.Type.ToString(),
                 request.ApiCall.Request,
                 request.Method,
-                !string.IsNullOrEmpty(request.ApiCall.JsonBody) ? request.ApiCall.JsonBody : request.ApiCall.XmlBody)); 
+                !string.IsNullOrEmpty(request.ApiCall.JsonBody) ? request.ApiCall.JsonBody : "")); 
         }
 
         /// <summary>

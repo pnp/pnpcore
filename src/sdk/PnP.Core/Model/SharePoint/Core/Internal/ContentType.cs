@@ -14,7 +14,6 @@ namespace PnP.Core.Model.SharePoint
         Uri = "_api/Web/ContentTypes('{Id}')", Get = "_api/web/ContentTypes", LinqGet = "_api/web/ContentTypes")]
     [SharePointType("SP.ContentType", Target = typeof(List), Uri = "_api/Web/Lists(guid'{Parent.Id}')/ContentTypes('{Id}')",
         Get = "_api/Web/Lists(guid'{Parent.Id}')/ContentTypes", LinqGet = "_api/Web/Lists(guid'{Parent.Id}')/ContentTypes")]
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Usage", "CA2243:Attribute string literals should parse correctly", Justification = "<Pending>")]
     internal partial class ContentType : BaseDataModel<IContentType>, IContentType
     {
         #region Construction
@@ -60,7 +59,7 @@ namespace PnP.Core.Model.SharePoint
                     Name = Name
                 });
 
-               return PnPContext.GetCSOMCallForRequests(new List<IRequest<object>>() { request });
+                return new ApiCall(new List<IRequest<object>>() { request });
             };
         }
         #endregion

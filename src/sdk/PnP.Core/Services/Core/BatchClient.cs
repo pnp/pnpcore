@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using PnP.Core.Model;
 using PnP.Core.Services.Core.CSOM;
+using PnP.Core.Services.Core.CSOM.Requests;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -1468,7 +1469,19 @@ namespace PnP.Core.Services
             foreach (var csomBatch in csomBatches)
             {
                 // Each csom batch only contains one request
-                string requestBody = csomBatch.Batch.Requests.First().Value.ApiCall.XmlBody;
+                CSOMApiCallBuilder csomAPICallBuilder = new CSOMApiCallBuilder();
+                string requestBody = "";
+                foreach (var csomAPICall in csomBatch.Batch.Requests.Values)
+                {
+                    foreach (IRequest<object> request in csomAPICall.ApiCall.CSOMRequests)
+                    {
+                        csomAPICallBuilder.AddRequest(request);
+                    }
+
+                    telemetryManager?.LogServiceRequest(csomAPICall, PnPContext);
+                }               
+                requestBody = csomAPICallBuilder.SerializeCSOMRequests();
+
 #if DEBUG
                 string requestKey = "";
                 if (PnPContext.Mode != TestMode.Default)
@@ -1477,8 +1490,6 @@ namespace PnP.Core.Services
                     testUseCounter++;
                 }
 #endif
-
-                telemetryManager?.LogServiceRequest(csomBatch.Batch.Requests.First().Value, PnPContext);
 
                 PnPContext.Logger.LogDebug(requestBody);
 
@@ -1593,28 +1604,40 @@ namespace PnP.Core.Services
                             }
                             else
                             {
-                                csomBatch.Batch.AddBatchResult(csomBatch.Batch.Requests.First().Value,
-                                                              statusCode, firstElement.ToString(),
-                                                              new CsomError(ErrorType.CsomServiceError, (int)statusCode, firstElement));
+                                // Link the returned error to all the requests
+                                // TODO: this will be require a better mapping in case we're getting data back via CSOM
+                                foreach (var request in csomBatch.Batch.Requests)
+                                {
+                                    csomBatch.Batch.AddBatchResult(request.Value,
+                                                                  statusCode, firstElement.ToString(),
+                                                                  new CsomError(ErrorType.CsomServiceError, (int)statusCode, firstElement));
+                                }
                             }
                         }
                     }
 
                     // No error, so let's return the results
-                    var firstRequest = csomBatch.Batch.Requests.First().Value;
-                    firstRequest.AddResponse(responses, statusCode);
 
-                    // Commit succesful updates in our model
-                    if (firstRequest.ApiCall.Commit)
+                    // TODO: this will be require a better mapping in case we're getting data back via CSOM
+                    foreach (var request in csomBatch.Batch.Requests)
                     {
-                        if (firstRequest.Model is TransientObject)
-                        {
-                            firstRequest.Model.Commit();
-                        }
-                    }
+                        // Call the logic that processes the csom response
+                        request.Value.ApiCall.CSOMRequests[0].ProcessResponse(batchResponse);
 
-                    // Execute post mapping handler (even though, there is no actual mapping in this case)
-                    firstRequest.PostMappingJson?.Invoke(batchResponse);
+                        //request.Value.AddResponse(responses, statusCode);
+
+                        // Commit succesful updates in our model
+                        if (request.Value.ApiCall.Commit)
+                        {
+                            if (request.Value.Model is TransientObject)
+                            {
+                                request.Value.Model.Commit();
+                            }
+                        }
+
+                        // Execute post mapping handler (even though, there is no actual mapping in this case)
+                        request.Value.PostMappingJson?.Invoke(batchResponse);
+                    }
                 }
             }
         }
@@ -1628,16 +1651,20 @@ namespace PnP.Core.Services
                 // Each request is a single batch
                 Uri site = new Uri(request.Value.ApiCall.Request);
 
-                // Create a new batch
-                var csomBatch = new CsomBatch(site)
+                var csomBatch = batches.FirstOrDefault(b => b.Site == site);
+                if (csomBatch == null)
                 {
-                    Batch = new Batch()
+                    // Create a new batch
+                    csomBatch = new CsomBatch(site)
                     {
-                        ThrowOnError = batch.ThrowOnError
-                    }
-                };
+                        Batch = new Batch()
+                        {
+                            ThrowOnError = batch.ThrowOnError
+                        }
+                    };
 
-                batches.Add(csomBatch);
+                    batches.Add(csomBatch);
+                }
 
                 // Add request to existing batch, we're adding the original request which ensures that once 
                 // we update the new batch with results these results are also part of the original batch

@@ -3,9 +3,6 @@ using Microsoft.Extensions.Options;
 using PnP.Core.Model.Security;
 using PnP.Core.Model.SharePoint;
 using PnP.Core.Model.Teams;
-using PnP.Core.Services.Core.CSOM;
-using PnP.Core.Services.Core.CSOM.Requests;
-using PnP.Core.Services.Core.CSOM.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -650,30 +647,6 @@ namespace PnP.Core.Services
 
             return false;
         }
-
-        /// <summary>
-        /// Builds and executes provided requests
-        /// </summary>
-        /// <param name="requests">Collection of CSOM requests You want to execute.</param>
-        /// <param name="commit">If processing this CSOM requests needs to result into a commit into the model</param>
-        /// <returns>CSOM ApiCall</returns>
-        internal ApiCall GetCSOMCallForRequests(List<IRequest<object>> requests, bool commit = false)
-        {
-            foreach (IRequest<object> request in requests)
-            {
-                CSOMApiBuilder.AddRequest(request);
-            }
-
-            return CSOMApiBuilder.BuildApiCall(commit);
-        }
-
-        #endregion
-
-        #region Internal dependencies
-        /// <summary>
-        /// Encapsulates logic to build CSOM Api call
-        /// </summary>
-        internal CSOMApiCallBuilder CSOMApiBuilder { get; set; } = new CSOMApiCallBuilder();
 
         #endregion
     }
