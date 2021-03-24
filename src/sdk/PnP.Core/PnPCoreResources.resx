@@ -159,9 +159,6 @@
   <data name="Exception_InvalidOperation_NotAsyncQueryableSource" xml:space="preserve">
     <value>Queryable source does not support async</value>
   </data>
-  <data name="Exception_InvalidPageSize" xml:space="preserve">
-    <value>Page size has to be equal or greater than 1</value>
-  </data>
   <data name="Exception_InvalidSPOResource" xml:space="preserve">
     <value>The {0} is not a resource from the SharePoint site {1}</value>
   </data>
@@ -174,15 +171,6 @@
   <data name="Exception_InvalidTypeForFilter" xml:space="preserve">
     <value>Invalid type for the filter object</value>
   </data>
-  <data name="Exception_Invalid_FieldType" xml:space="preserve">
-    <value>{0} is invalid</value>
-  </data>
-  <data name="Exception_Invalid_ForFieldType" xml:space="preserve">
-    <value>{0} is invalid for field type {1}</value>
-  </data>
-  <data name="Exception_Invalid_LookupFields" xml:space="preserve">
-    <value>Specified field parameters are not valid for lookup type fields</value>
-  </data>
   <data name="Exception_Json_ArrayOutOfBoundaries" xml:space="preserve">
     <value>The requested index is out of the JSON array boundaries</value>
   </data>
@@ -193,7 +181,7 @@
     <value>Missing value for {0} in {1}</value>
   </data>
   <data name="Exception_ListItemUpdate_NoFieldsLoaded" xml:space="preserve">
-    <value>Please ensure your list Fields are loaded before getting list data. E.g. await list.GetAsync(p =&gt; p.Fields.LoadProperties(p =&gt; p.InternalName, p =&gt; p.FieldTypeKind, p =&gt; p.TypeAsString, p =&gt; p.Title))</value>
+    <value>Please ensure your list Fields are loaded before getting list data. E.g. await list.LoadAsync(p =&gt; p.Fields.QueryProperties(p =&gt; p.InternalName, p =&gt; p.FieldTypeKind, p =&gt; p.TypeAsString, p =&gt; p.Title))</value>
   </data>
   <data name="Exception_ListItemUpdate_NoTaxonomyNoteField" xml:space="preserve">
     <value>Could not locate hidden taxonomy multivalue note field</value>
@@ -212,15 +200,6 @@
   </data>
   <data name="Exception_ModelMetadataIncorrect_MissingGraphName" xml:space="preserve">
     <value>GraphName was not set</value>
-  </data>
-  <data name="Exception_ModelMetadataIncorrect_MissingLinqGet" xml:space="preserve">
-    <value>This model entity does not have a SharePointLinqGet or GraphLinqGet value set</value>
-  </data>
-  <data name="Exception_ModelMetadataIncorrect_ModelOutOfSync" xml:space="preserve">
-    <value>Receiving property could not be determined, most likely the internal implemenation is not aligned with the interface naming</value>
-  </data>
-  <data name="Exception_Page_CanOnlyPromoteHomePagesAsSiteHomePage" xml:space="preserve">
-    <value>You can only promote home pages as site home page</value>
   </data>
   <data name="Exception_Page_CantPromoteHomePageAsNews" xml:space="preserve">
     <value>You can't promote a home page as news article</value>
@@ -274,10 +253,10 @@
     <value>Please first fetch this list from SharePoint before doing operations on it</value>
   </data>
   <data name="Exception_PropertyNotLoaded_NestedProperties" xml:space="preserve">
-    <value>Loading nested properties (e.g. RootFolder.ServerRelativeUrl) is not supported, instead you can use RootFolder.LoadProperties(p =&gt; p.ServerRelativeUrl).</value>
+    <value>Loading nested properties (e.g. RootFolder.ServerRelativeUrl) is not supported, instead you can use RootFolder.QueryProperties(p =&gt; p.ServerRelativeUrl).</value>
   </data>
-  <data name="Exception_PropertyNotLoaded_OnlyLoadPropertiesSupported" xml:space="preserve">
-    <value>Only the 'LoadProperties' method is supported</value>
+  <data name="Exception_PropertyNotLoaded_OnlyQueryPropertiesSupported" xml:space="preserve">
+    <value>Only the 'QueryProperties' method is supported</value>
   </data>
   <data name="Exception_ServiceException_BatchMaxRetries" xml:space="preserve">
     <value>Requests inside a batch reached their max retry count of {0}</value>
@@ -296,9 +275,6 @@
   </data>
   <data name="Exception_Test_MissingResponseFile" xml:space="preserve">
     <value>Test [{0}] is missing response file {1}. Request key was {2}</value>
-  </data>
-  <data name="Exception_UnexpectedMappingType_NotArray" xml:space="preserve">
-    <value>The property {0} is expected to be an array but is of type {0} instead</value>
   </data>
   <data name="Exception_UnresolvedTokens" xml:space="preserve">
     <value>Unresolved tokens found in API call {0}</value>
@@ -340,7 +316,7 @@
     <value>Expression {0} is not supported. Only {1} and {2} are supported</value>
   </data>
   <data name="Exception_Unsupported_ExtraGet" xml:space="preserve">
-    <value>Loading the {0} property requires an extra GET request ({1}) which is not supported when using nested LoadProperties methods</value>
+    <value>Loading the {0} property requires an extra GET request ({1}) which is not supported when using nested QueryProperties methods</value>
   </data>
   <data name="Exception_Unsupported_FailedAddingTermRelation" xml:space="preserve">
     <value>Adding a relationship can only be done starting from a term</value>
@@ -357,12 +333,6 @@
   <data name="Exception_Unsupported_InteractiveRequestBatch" xml:space="preserve">
     <value>Interactive requests cannot be grouped together, execute them one by one</value>
   </data>
-  <data name="Exception_Unsupported_LinqExpandOfPropertyWithLoadProperties" xml:space="preserve">
-    <value>You can't use the LoadProperties method for Microsoft Graph queries</value>
-  </data>
-  <data name="Exception_Unsupported_LinqExpandOfPropertyWithOwnGet" xml:space="preserve">
-    <value>The property '{0}' cannot be included here because it's underlying depending on a separate query</value>
-  </data>
   <data name="Exception_Unsupported_MemberType" xml:space="preserve">
     <value>Member of type {0} is not supported</value>
   </data>
@@ -378,8 +348,14 @@
   <data name="Exception_Unsupported_Projection" xml:space="preserve">
     <value>The projection is not supported</value>
   </data>
+  <data name="Exception_Unsupported_QueryPropertiesUse" xml:space="preserve">
+    <value>This function can be called from a LINQ query only</value>
+  </data>
   <data name="Exception_Unsupported_SharePointUserOnGraph" xml:space="preserve">
     <value>You can't call AsSharePointUserAsync on a Graph user without the UserPrincipalProperty requested and populated</value>
+  </data>
+  <data name="Exception_Unsupported_SkipOnItems" xml:space="preserve">
+    <value>Skip on items's list is not supported. Please consider the usage of CAML query</value>
   </data>
   <data name="Exception_Unsupported_UnaryOperator" xml:space="preserve">
     <value>The unary operator '{0}' is not supported</value>
@@ -389,9 +365,6 @@
   </data>
   <data name="Exception_Unsupported_WebDeleteIsInteractive" xml:space="preserve">
     <value>You can't delete webs in batch, use the DeleteAsync() or Delete() methods</value>
-  </data>
-  <data name="Exception_View_ViewNotFoundInCollection" xml:space="preserve">
-    <value>The view cannot be be found in the collection</value>
   </data>
   <data name="Exception_Xml_InvalidXmlCharacter" xml:space="preserve">
     <value>Invalid character in Xml String. Chr {0} is illegal</value>
@@ -413,14 +386,5 @@
   </data>
   <data name="Log_Information_OperationNotReady" xml:space="preserve">
     <value>Operation {0} not ready yet. Status = {1}. Waiting for {2} seconds, attempt number {3}</value>
-  </data>
-  <data name="Log_Information_UsingDefaultUserAgent" xml:space="preserve">
-    <value>Using default user-agent value {0}</value>
-  </data>
-  <data name="Log_Information_UsingUserAgent" xml:space="preserve">
-    <value>Using user-agent value {0} provided by configuration</value>
-  </data>
-  <data name="Log_Information_VersionTag" xml:space="preserve">
-    <value>Using version tag value {0}</value>
   </data>
 </root>

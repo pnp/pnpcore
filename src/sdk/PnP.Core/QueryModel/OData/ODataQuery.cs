@@ -1,8 +1,10 @@
 ﻿using PnP.Core.Model;
 using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Globalization;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Web;
 
@@ -21,6 +23,11 @@ namespace PnP.Core.QueryModel
         private const string EncodedSpace = "%20";
         private readonly CultureInfo FormatProvider = CultureInfo.InvariantCulture;
 
+        internal const string TopKey = "$top";
+        internal const string FilterKey = "$filter";
+        internal const string SkipKey = "$skip";
+        internal const string OrderByKey = "$orderby";
+
         /// <summary>
         /// Property corresponding to the $top OData query option
         /// </summary>
@@ -34,120 +41,107 @@ namespace PnP.Core.QueryModel
         /// <summary>
         /// Property corresponding to the $filter OData query option
         /// </summary>
-        public List<ODataFilter> Filters { get; private set; } = new List<ODataFilter>();
+        public List<ODataFilter> Filters { get; } = new List<ODataFilter>();
 
         /// <summary>
         /// Property corresponding to the $orderby OData query option
         /// </summary>
-        public List<OrderByItem> OrderBy { get; private set; } = new List<OrderByItem>();
+        public List<OrderByItem> OrderBy { get; } = new List<OrderByItem>();
 
         /// <summary>
-        /// Property corresponding to the $select OData query option
+        /// Returns the list of fields to load
         /// </summary>
-        public List<string> Select { get; private set; } = new List<string>();
-
-        /// <summary>
-        /// Property corresponding to the $expand OData query option
-        /// </summary>
-        public List<string> Expand { get; private set; } = new List<string>();
+        public List<Expression<Func<TModel, object>>> Fields { get; } = new List<Expression<Func<TModel, object>>>();
 
         public override string ToString()
         {
             // By default provide a Graph query without URL encoding
-            return ToQueryString(ODataTargetPlatform.Graph, false);
+            return ToQueryString(ODataTargetPlatform.Graph);
         }
 
         /// <summary>
         /// Converts the in-memory OData query representation into an actual set of querystring OData options
         /// </summary>
         /// <param name="targetPlatform">Defines the target platform for the OData query</param>
-        /// <param name="urlEncode">Declares whether to encode URL strings or not</param>
         /// <returns>The OData querystring for the current query</returns>
-        public string ToQueryString(ODataTargetPlatform targetPlatform, bool urlEncode = true)
+        public string ToQueryString(ODataTargetPlatform targetPlatform)
         {
-            var queryText = new StringBuilder();
+            var urlParameters = new Dictionary<string, string>();
+            AddODataToUrlParameters(urlParameters, targetPlatform);
+
+            // Exclude empty items
+            IEnumerable<string> items = urlParameters
+                .Where(i => !string.IsNullOrEmpty(i.Value))
+                .Select(p => $"{p.Key}={p.Value}");
+            return String.Join("&", items);
+        }
+
+        /// <summary>
+        /// Returns the OData $orderby clause
+        /// </summary>
+        /// <param name="targetPlatform"></param>
+        /// <param name="urlEncode"></param>
+        /// <returns></returns>
+        internal string GetOrderBy(ODataTargetPlatform targetPlatform, bool urlEncode = true)
+        {
             var spacer = urlEncode ? EncodedSpace : " ";
-            // var argumentTrailer = targetPlatform == ODataTargetPlatform.SPORest ? "$" : string.Empty;
-            var argumentTrailer = "$";
 
-            // Process the $select items
-            if (Select.Count > 0)
+            var sb = new StringBuilder();
+            foreach (var o in OrderBy)
             {
-                queryText.Append($"{argumentTrailer}select=");
-                foreach (var s in Select)
-                {
-                    queryText.AppendFormat(
-                        FormatProvider,
-                        "{0},",
-                        HttpUtility.UrlEncode(TranslateFieldName(s, targetPlatform)));
-                }
-
-                // Remove the last ,
-                queryText.Remove(queryText.Length - 1, 1);
+                sb.AppendFormat(
+                    FormatProvider, "{0}{1},",
+                    HttpUtility.UrlEncode(TranslateFieldName(o.Field, targetPlatform)),
+                    o.Direction == OrderByDirection.Desc ? $"{spacer}desc" : null
+                );
             }
 
+            // Remove the last ,
+            sb.Remove(sb.Length - 1, 1);
+
+            return sb.ToString();
+        }
+
+        /// <summary>
+        /// Returns the OData $filter clause
+        /// </summary>
+        /// <param name="targetPlatform"></param>
+        /// <param name="urlEncode"></param>
+        /// <returns></returns>
+        internal string GetFilters(ODataTargetPlatform targetPlatform, bool urlEncode = true)
+        {
+            var sb = new StringBuilder();
+            ProcessFilters(Filters, sb, targetPlatform,0, urlEncode);
+            return sb.ToString();
+        }
+
+        internal void AddODataToUrlParameters(Dictionary<string, string> urlParameters, ODataTargetPlatform targetPlatform)
+        {
             // Process the $filter items
             if (Filters.Count > 0)
             {
-                EnsureQueryStringConcat(queryText);
-                queryText.Append($"{argumentTrailer}filter=");
-                ProcessFilters(Filters, queryText, targetPlatform, depth: 0, urlEncode);
+                urlParameters.Add(FilterKey, GetFilters(targetPlatform, false));
             }
 
-            // Process any $top restriction
-            if (Top.HasValue)
+            // Process any $top restriction if and only if the target platform is not Graph
+            // or if the target platform is Graph, but there are no filters
+            if (Top.HasValue && (Filters.Count == 0 || targetPlatform != ODataTargetPlatform.Graph))
             {
-                EnsureQueryStringConcat(queryText);
-                queryText.AppendFormat(
-                        FormatProvider,
-                        $"{argumentTrailer}top={Top.Value}");
+                urlParameters.Add(TopKey, Top.ToString());
             }
 
-            // Process any $skip restriction
-            if (Skip.HasValue)
+            // Process any $skip restriction if and only if the target platform is not Graph
+            // or if the target platform is Graph, but there are no filters
+            if (Skip.HasValue && (Filters.Count == 0 || targetPlatform != ODataTargetPlatform.Graph))
             {
-                EnsureQueryStringConcat(queryText);
-                queryText.AppendFormat(
-                        FormatProvider,
-                        $"{argumentTrailer}skip={Skip.Value}");
+                urlParameters.Add(SkipKey, Skip.ToString());
             }
 
             // Process the $orderby items
             if (OrderBy.Count > 0)
             {
-                EnsureQueryStringConcat(queryText);
-                queryText.Append($"{argumentTrailer}orderby=");
-                foreach (var o in OrderBy)
-                {
-                    queryText.AppendFormat(
-                        FormatProvider, "{0}{1},",
-                        HttpUtility.UrlEncode(TranslateFieldName(o.Field, targetPlatform)),
-                        o.Direction == OrderByDirection.Desc ? $"{spacer}desc" : null
-                        );
-                }
-
-                // Remove the last ,
-                queryText.Remove(queryText.Length - 1, 1);
+                urlParameters.Add(OrderByKey, GetOrderBy(targetPlatform, false));
             }
-
-            // Process the $expand items
-            if (Expand.Count > 0)
-            {
-                EnsureQueryStringConcat(queryText);
-                queryText.Append($"{argumentTrailer}expand=");
-                foreach (var e in Expand)
-                {
-                    queryText.AppendFormat(
-                        FormatProvider,
-                        "{0},",
-                        HttpUtility.UrlEncode(TranslateFieldName(e, targetPlatform)));
-                }
-
-                // Remove the last ,
-                queryText.Remove(queryText.Length - 1, 1);
-            }
-
-            return queryText.ToString();
         }
 
         private void ProcessFilters(List<ODataFilter> filters, StringBuilder queryText, ODataTargetPlatform targetPlatform, int depth = 0, bool urlEncode = true)
@@ -227,14 +221,6 @@ namespace PnP.Core.QueryModel
                     return "not";
                 default:
                     throw new NotSupportedException(string.Format(PnPCoreResources.Exception_Unsupported_Criteria, criteria));
-            }
-        }
-
-        private static void EnsureQueryStringConcat(StringBuilder queryText)
-        {
-            if (queryText.Length > 0)
-            {
-                queryText.Append('&');
             }
         }
 

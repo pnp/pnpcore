@@ -250,28 +250,30 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// Saves the page to the pages library
         /// </summary>
-        /// <param name="pageName">Page name to use</param>
-        /// <returns></returns>
-        Task SaveAsync(string pageName = null);
+        /// <param name="pageName">Page name to use</param>        
+        /// <returns>The name of the saved page</returns>
+        Task<string> SaveAsync(string pageName = null);
 
         /// <summary>
         /// Saves the page to the pages library
         /// </summary>
         /// <param name="pageName">Page name to use</param>
-        /// <returns></returns>
-        void Save(string pageName = null);
+        /// <returns>The name of the saved page</returns>
+        string Save(string pageName = null);
 
         /// <summary>
         /// Saves the page as a template page
         /// </summary>
         /// <param name="pageName">Page name to use</param>
-        public void SaveAsTemplate(string pageName = null);
+        /// <returns>The name of the saved page</returns>
+        public string SaveAsTemplate(string pageName = null);
 
         /// <summary>
         /// Saves the page as a template page
         /// </summary>
         /// <param name="pageName">Page name to use</param>
-        public Task SaveAsTemplateAsync(string pageName = null);
+        /// <returns>The name of the saved page</returns>
+        public Task<string> SaveAsTemplateAsync(string pageName = null);
 
         /// <summary>
         /// Deletes the created page

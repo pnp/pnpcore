@@ -1,4 +1,4 @@
-﻿using PnP.Core.Services;
+﻿using PnP.Core.Services.Core.CSOM;
 using System;
 using System.Collections.Generic;
 using System.Linq;

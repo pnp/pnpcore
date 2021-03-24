@@ -2,6 +2,7 @@
 @attribute [Authorize]
 @using PnP.Core.Model.SharePoint;
 @using PnP.Core.Model;
+@using PnP.Core.QueryModel;
 @inject IMyPnPContextFactory pnpContextFactory
 
 <h1>SharePoint Lists info</h1>
@@ -39,8 +40,8 @@ else
     {
         using (var ctx = await pnpContextFactory.GetContextAsync())
         {
-            var web = await ctx.Web.GetAsync(w => w.Lists.LoadProperties(p => p.Title, p => p.Id));
-            lists = web.Lists.ToList();
+            var web = await ctx.Web.GetAsync(w => w.Lists, w => w.Lists.QueryProperties(p => p.Title, p => p.Id));
+            lists = await web.Lists.ToListAsync();
             isLoading = false;
         }
     }

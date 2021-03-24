@@ -4,6 +4,9 @@ using PnP.Core.Test.Utilities;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
+using PnP.Core.Model;
+using PnP.Core.Services;
+using System.Collections.Generic;
 
 namespace PnP.Core.Test.Base
 {
@@ -29,10 +32,8 @@ namespace PnP.Core.Test.Base
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                var web = await context.Web.GetAsync(p => p.Lists);
-
                 string listTitle = "Documents";
-                var myList = web.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
+                var myList = context.Web.Lists.FirstOrDefault(p => p.Title == listTitle);
 
                 if (myList != null)
                 {
@@ -49,7 +50,7 @@ namespace PnP.Core.Test.Base
                     Assert.IsFalse(myList.HasChanged("Description"));
 
                     // load again from server
-                    await context.Web.GetAsync(p => p.Lists);
+                    await context.Web.LoadAsync(p => p.Description);
 
                     // and verify again
                     Assert.IsTrue(myList.Description == newDescription);
@@ -72,16 +73,29 @@ namespace PnP.Core.Test.Base
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                var web = await context.Web.GetBatchAsync(p => p.Lists);
-                await context.ExecuteAsync();
-
                 string listTitle = "Documents";
-                var myList = web.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
+                var myList = context.Web.Lists.FirstOrDefault(p => p.Title == listTitle);
 
                 if (myList != null)
                 {
                     var currentDescription = myList.Description;
-                    var newDescription = $"Updated on UTC {DateTime.UtcNow}";
+
+                    // Create a new channel and add enough messages to it
+                    string newDescription = $"Updated on {DateTime.UtcNow}";
+
+                    if (TestCommon.Instance.Mocking)
+                    {
+                        var properties = TestManager.GetProperties(context);
+                        newDescription = properties["Description"];
+                    }
+                    else
+                    {
+                        Dictionary<string, string> properties = new Dictionary<string, string>
+                        {
+                            { "Description", newDescription }
+                        };
+                        TestManager.SaveProperties(context, properties);
+                    }
 
                     myList.Description = newDescription;
                     Assert.IsTrue(myList.HasChanged("Description"));
@@ -94,7 +108,7 @@ namespace PnP.Core.Test.Base
                     Assert.IsFalse(myList.HasChanged("Description"));
 
                     // load again from server
-                    await context.Web.GetBatchAsync(p => p.Lists);
+                    await myList.LoadBatchAsync(p => p.Description);
                     await context.ExecuteAsync();
 
                     // and verify again
@@ -119,33 +133,45 @@ namespace PnP.Core.Test.Base
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                var batch = context.BatchClient.EnsureBatch();
-                var web = await context.Web.GetBatchAsync(batch, p => p.Lists);
-                await context.ExecuteAsync(batch);
-
                 string listTitle = "Documents";
-                var myList = web.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
+                var myList = context.Web.Lists.FirstOrDefault(p => p.Title == listTitle);
 
                 if (myList != null)
                 {
                     var currentDescription = myList.Description;
-                    var newDescription = $"Updated on UTC {DateTime.UtcNow}";
+
+                    // Create a new channel and add enough messages to it
+                    string newDescription = $"Updated on {DateTime.UtcNow}";
+
+                    if (TestCommon.Instance.Mocking)
+                    {
+                        var properties = TestManager.GetProperties(context);
+                        newDescription = properties["Description"];
+                    }
+                    else
+                    {
+                        Dictionary<string, string> properties = new Dictionary<string, string>
+                        {
+                            { "Description", newDescription }
+                        };
+                        TestManager.SaveProperties(context, properties);
+                    }
 
                     myList.Description = newDescription;
                     Assert.IsTrue(myList.HasChanged("Description"));
 
-                    batch = context.BatchClient.EnsureBatch();
-                    await myList.UpdateBatchAsync(batch);
-                    await context.ExecuteAsync(batch);
+                    var batch1 = context.BatchClient.EnsureBatch();
+                    await myList.UpdateBatchAsync(batch1);
+                    await context.ExecuteAsync(batch1);
 
                     // Verify model status after update
                     Assert.IsTrue(myList.Description == newDescription);
                     Assert.IsFalse(myList.HasChanged("Description"));
 
                     // load again from server
-                    batch = context.BatchClient.EnsureBatch();
-                    await context.Web.GetBatchAsync(batch, p => p.Lists);
-                    await context.ExecuteAsync(batch);
+                    var batch2 = context.BatchClient.EnsureBatch();
+                    await myList.LoadBatchAsync(batch2, p => p.Description);
+                    await context.ExecuteAsync(batch2);
 
                     // and verify again
                     Assert.IsTrue(myList.Description == newDescription);
@@ -153,9 +179,9 @@ namespace PnP.Core.Test.Base
 
                     // reset description back to original value
                     myList.Description = currentDescription;
-                    batch = context.BatchClient.EnsureBatch();
-                    await myList.UpdateBatchAsync(batch);
-                    await context.ExecuteAsync(batch);
+                    var batch3 = context.BatchClient.EnsureBatch();
+                    await myList.UpdateBatchAsync(batch3);
+                    await context.ExecuteAsync(batch3);
                 }
                 else
                 {
@@ -190,17 +216,12 @@ namespace PnP.Core.Test.Base
 
                 await web.UpdateAsync();
 
-                using (var context2 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
-                {
-                    context2.GraphFirst = false;
+                // load the web again with both properties
+                var web2 = await context.Web.GetAsync(p => p.Title, p => p.Description);
 
-                    // load the web again with both properties
-                    var web2 = await context.Web.GetAsync(p => p.Title, p => p.Description);
-
-                    // description update should have happened
-                    Assert.IsTrue(web2.Title == web.Title);
-                    Assert.IsTrue(web2.Description == updatedDescription);
-                }
+                // description update should have happened
+                Assert.IsTrue(web2.Title == web.Title);
+                Assert.IsTrue(web2.Description == updatedDescription);
 
                 // set description back as empty
                 web.Description = "";
@@ -217,17 +238,30 @@ namespace PnP.Core.Test.Base
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                var team = await context.Team.GetAsync(p => p.Channels);
-
                 // Find first updatable channel
-                var channelToUpdate = team.Channels.FirstOrDefault(p => p.DisplayName != "General");
+                var channelToUpdate = context.Team.Channels.FirstOrDefault(p => p.DisplayName != "General");
 
                 if (channelToUpdate == null)
                 {
-                    channelToUpdate = await team.Channels.AddAsync($"Channel test {new Random().Next()}", "Test channel, will be deleted in 21 days");
+                    channelToUpdate = await context.Team.Channels.AddAsync($"Channel test {new Random().Next()}", "Test channel, will be deleted in 21 days");
                 }
 
+                // Create a new channel and add enough messages to it
                 string newChannelDescription = $"Updated on {DateTime.UtcNow}";
+
+                if (TestCommon.Instance.Mocking)
+                {
+                    var properties = TestManager.GetProperties(context);
+                    newChannelDescription = properties["ChannelDescription"];
+                }
+                else
+                {
+                    Dictionary<string, string> properties = new Dictionary<string, string>
+                        {
+                            { "ChannelDescription", newChannelDescription }
+                        };
+                    TestManager.SaveProperties(context, properties);
+                }
                 channelToUpdate.Description = newChannelDescription;
 
                 Assert.IsTrue(channelToUpdate.HasChanged("Description"));
@@ -239,7 +273,7 @@ namespace PnP.Core.Test.Base
                 Assert.IsFalse(channelToUpdate.HasChanged("Description"));
 
                 // load again from server
-                await context.Team.GetAsync(p => p.Channels);
+                await channelToUpdate.LoadAsync(p => p.Description);
 
                 // and verify again
                 Assert.IsTrue(channelToUpdate.Description == newChannelDescription);
@@ -254,19 +288,32 @@ namespace PnP.Core.Test.Base
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                var team = await context.Team.GetBatchAsync(p => p.Channels);
-                await context.ExecuteAsync();
-
                 // Find first updatable channel
-                var channelToUpdate = team.Channels.FirstOrDefault(p => p.DisplayName != "General");
+                var channelToUpdate = context.Team.Channels.FirstOrDefault(p => p.DisplayName != "General");
 
                 if (channelToUpdate == null)
                 {
-                    channelToUpdate = await team.Channels.AddBatchAsync($"Channel test {new Random().Next()}", "Test channel, will be deleted in 21 days");
+                    channelToUpdate = await context.Team.Channels.AddBatchAsync($"Channel test {new Random().Next()}", "Test channel, will be deleted in 21 days");
                     await context.ExecuteAsync();
                 }
 
+                // Create a new channel and add enough messages to it
                 string newChannelDescription = $"Updated on {DateTime.UtcNow}";
+
+                if (TestCommon.Instance.Mocking)
+                {
+                    var properties = TestManager.GetProperties(context);
+                    newChannelDescription = properties["ChannelDescription"];
+                }
+                else
+                {
+                    Dictionary<string, string> properties = new Dictionary<string, string>
+                        {
+                            { "ChannelDescription", newChannelDescription }
+                        };
+                    TestManager.SaveProperties(context, properties);
+                }
+
                 channelToUpdate.Description = newChannelDescription;
 
                 Assert.IsTrue(channelToUpdate.HasChanged("Description"));
@@ -279,7 +326,7 @@ namespace PnP.Core.Test.Base
                 Assert.IsFalse(channelToUpdate.HasChanged("Description"));
 
                 // load again from server
-                await context.Team.GetBatchAsync(p => p.Channels);
+                await channelToUpdate.LoadBatchAsync(p => p.Description);
                 await context.ExecuteAsync();
 
                 // and verify again
@@ -295,42 +342,53 @@ namespace PnP.Core.Test.Base
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                var batch = context.BatchClient.EnsureBatch();
-                var team = await context.Team.GetBatchAsync(batch, p => p.Channels);
-                await context.ExecuteAsync(batch);
-
                 // Find first updatable channel
-                var channelToUpdate = team.Channels.FirstOrDefault(p => p.DisplayName != "General");
+                var channelToUpdate = context.Team.Channels.FirstOrDefault(p => p.DisplayName != "General");
 
                 if (channelToUpdate == null)
                 {
-                    batch = context.BatchClient.EnsureBatch();
-                    channelToUpdate = await team.Channels.AddBatchAsync(batch, $"Channel test {new Random().Next()}", "Test channel, will be deleted in 21 days");
-                    await context.ExecuteAsync(batch);
+                    var batch1 = context.BatchClient.EnsureBatch();
+                    channelToUpdate = await context.Team.Channels.AddBatchAsync(batch1, $"Channel test {new Random().Next()}", "Test channel, will be deleted in 21 days");
+                    await context.ExecuteAsync(batch1);
                 }
 
+                // Create a new channel and add enough messages to it
                 string newChannelDescription = $"Updated on {DateTime.UtcNow}";
+
+                if (TestCommon.Instance.Mocking)
+                {
+                    var properties = TestManager.GetProperties(context);
+                    newChannelDescription = properties["ChannelDescription"];
+                }
+                else
+                {
+                    Dictionary<string, string> properties = new Dictionary<string, string>
+                        {
+                            { "ChannelDescription", newChannelDescription }
+                        };
+                    TestManager.SaveProperties(context, properties);
+                }
+
                 channelToUpdate.Description = newChannelDescription;
 
                 Assert.IsTrue(channelToUpdate.HasChanged("Description"));
 
-                batch = context.BatchClient.EnsureBatch();
-                await channelToUpdate.UpdateBatchAsync(batch);
-                await context.ExecuteAsync(batch);
+                var batch2 = context.BatchClient.EnsureBatch();
+                await channelToUpdate.UpdateBatchAsync(batch2);
+                await context.ExecuteAsync(batch2);
 
                 // Verify model status after update
                 Assert.IsTrue(channelToUpdate.Description == newChannelDescription);
                 Assert.IsFalse(channelToUpdate.HasChanged("Description"));
 
                 // load again from server
-                batch = context.BatchClient.EnsureBatch();
-                await context.Team.GetBatchAsync(batch, p => p.Channels);
-                await context.ExecuteAsync(batch);
+                var batch3 = context.BatchClient.EnsureBatch();
+                await channelToUpdate.LoadBatchAsync(batch3, p => p.Description);
+                await context.ExecuteAsync(batch3);
 
                 // and verify again
                 Assert.IsTrue(channelToUpdate.Description == newChannelDescription);
                 Assert.IsFalse(channelToUpdate.HasChanged("Description"));
-
             }
         }
 
@@ -365,7 +423,7 @@ namespace PnP.Core.Test.Base
                 Assert.IsFalse(team.HasChanged("FunSettings"));
                 Assert.IsFalse(team.HasChanged("GuestSettings"));
 
-                await context.Team.GetAsync();
+                await context.Team.LoadAsync();
 
                 Assert.IsTrue(team.FunSettings.AllowGiphy == newAllowGiphy);
                 Assert.IsTrue(team.FunSettings.GiphyContentRating == newGiphyRating);
@@ -382,10 +440,8 @@ namespace PnP.Core.Test.Base
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                var team = await context.Team.GetAsync(p => p.Channels);
-
                 // Find first updatable channel
-                var channelToUpdate = team.Channels.FirstOrDefault(p => p.DisplayName == "General");
+                var channelToUpdate = context.Team.Channels.FirstOrDefault(p => p.DisplayName == "General");
 
                 string newChannelDescription = $"Updated on {DateTime.UtcNow}";
                 channelToUpdate.Description = newChannelDescription;
@@ -397,7 +453,7 @@ namespace PnP.Core.Test.Base
                 Assert.IsFalse(channelToUpdate.HasChanged("Description"));
 
                 // load again from server
-                await context.Team.GetAsync(p => p.Channels);
+                await channelToUpdate.LoadAsync(p => p.Description);
 
                 // and verify again
                 Assert.IsTrue(channelToUpdate.Description != newChannelDescription);

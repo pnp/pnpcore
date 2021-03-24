@@ -1,5 +1,6 @@
 using PnP.Core.Services;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
@@ -10,7 +11,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a collection of RecycleBinItem objects
     /// </summary>
     [ConcreteType(typeof(RecycleBinItemCollection))]
-    public interface IRecycleBinItemCollection : IQueryable<IRecycleBinItem>, IDataModelCollection<IRecycleBinItem>, IDataModelCollectionDeleteByGuidId
+    public interface IRecycleBinItemCollection : IQueryable<IRecycleBinItem>, IAsyncEnumerable<IRecycleBinItem>, IDataModelCollection<IRecycleBinItem>, IDataModelCollectionLoad<IRecycleBinItem>, IDataModelCollectionDeleteByGuidId
     {
         #region Methods
 

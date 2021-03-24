@@ -17,14 +17,14 @@ To get the existing content types you need to load the [site's ContentTypes coll
 
 ```csharp
 // Get site content types, also load the content types field links in one go
-await context.Web.GetAsync(p => p.ContentTypes.LoadProperties(p => p.Name, p => p.Description,
-                                                p => p.FieldLinks.LoadProperties(p => p.Name)));
+await context.Web.LoadAsync(p => p.ContentTypes.QueryProperties(p => p.Name, p => p.Description,
+                                                p => p.FieldLinks.QueryProperties(p => p.Name)));
 var contentTypes = context.Web.ContentTypes;                                                
 
 // Get list content types
 var contentTypes = (await context.Web.Lists.GetByTitleAsync("Documents", p => p.ContentTypes)).ContentTypes;
 
-foreach (var contentType in contentTypes)
+foreach (var contentType in contentTypes.AsRequested())
 {
     // do something
 }
@@ -58,12 +58,12 @@ Once the content type is added you typically also want to add fields to it, this
 
 ```csharp
 // Get site content types, also load the content types field links in one go
-await context.Web.GetAsync(p => p.ContentTypes.LoadProperties(p => p.Name, p => p.Description,
-                                    p => p.FieldLinks.LoadProperties(p => p.Name)));
+await context.Web.LoadAsync(p => p.ContentTypes.QueryProperties(p => p.Name, p => p.Description,
+                                    p => p.FieldLinks.QueryProperties(p => p.Name)));
 var contentTypes = context.Web.ContentTypes;
 
 // Get the content type to update
-var contentType = contentTypes.FirstOrDefault(p => p.Name == "MyContentType");
+var contentType = contentTypes.AsRequested().FirstOrDefault(p => p.Name == "MyContentType");
 
 // Add existing field with internal name "MyField" to the content type's field link collection
 await contentType.FieldLinks.AddAsync("MyField");
@@ -74,12 +74,12 @@ await contentType.FieldLinks.AddAsync("MyField");
 Updating a content type comes down to getting a reference to the content type to update, update the needed properties and call the UpdateAsync method.
 
 ```csharp
-await context.Web.GetAsync(p => p.ContentTypes.LoadProperties(p => p.Name, p => p.Description,
-                                    p => p.FieldLinks.LoadProperties(p => p.Name)));
+await context.Web.LoadAsync(p => p.ContentTypes.QueryProperties(p => p.Name, p => p.Description,
+                                    p => p.FieldLinks.QueryProperties(p => p.Name)));
 var contentTypes = context.Web.ContentTypes;
 
 // Get the content type to update
-var contentType = contentTypes.FirstOrDefault(p => p.Name == "MyContentType");
+var contentType = contentTypes.AsRequested().FirstOrDefault(p => p.Name == "MyContentType");
 
 // Update the content type
 contentType.Description = "PnP Rocks!";
@@ -94,12 +94,12 @@ await contentType.FieldLinks.AddAsync("MyRequiredField", required: true);
 To delete a content type you need to get a reference to the content type to delete followed by calling one of the Delete methods.
 
 ```csharp
-await context.Web.GetAsync(p => p.ContentTypes.LoadProperties(p => p.Name, p => p.Description,
-                                    p => p.FieldLinks.LoadProperties(p => p.Name)));
+await context.Web.LoadAsync(p => p.ContentTypes.QueryProperties(p => p.Name, p => p.Description,
+                                    p => p.FieldLinks.QueryProperties(p => p.Name)));
 var contentTypes = context.Web.ContentTypes;
 
 // Get the content type to update
-var contentType = contentTypes.FirstOrDefault(p => p.Name == "MyContentType");
+var contentType = contentTypes.AsRequested().FirstOrDefault(p => p.Name == "MyContentType");
 
 // Delete the content type
 await contentType.DeleteAsync();

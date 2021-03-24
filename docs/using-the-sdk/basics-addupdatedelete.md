@@ -30,7 +30,7 @@ Another add example is adding (= uploading) a file to a document library:
 
 ```csharp
 // Get a reference to a folder
-IFolder siteAssetsFolder = await context.Web.Folders.GetFirstOrDefaultAsync(f => f.Name == "SiteAssets");
+IFolder siteAssetsFolder = await context.Web.Folders.Where(f => f.Name == "SiteAssets").FirstOrDefaultAsync();
 
 // Upload a file by adding it to the folder's files collection
 IFile addedFile = await siteAssetsFolder.Files.AddAsync("test.docx", 
@@ -63,12 +63,12 @@ To delete data you do have two options, the first one is deleting the loaded mod
 // Assume the fields where not yet loaded, so loading them with the list
 var myList = await context.Web.Lists.GetByTitleAsync("My List", 
                                                     p => p.Title, p => p.Items, 
-                                                    p => p.Fields.LoadProperties(p => p.InternalName, 
+                                                    p => p.Fields.QueryProperties(p => p.InternalName, 
                                                         p => p.FieldTypeKind,
                                                         p => p.TypeAsString, 
                                                         p => p.Title));
 // Iterate over the retrieved list items
-foreach (var listItem in myList.Items)
+foreach (var listItem in myList.Items.AsRequested())
 {
     // Delete all the items in "My List" by adding them to a batch
     await listItem.DeleteBatchAsync();

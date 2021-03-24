@@ -1,0 +1,17 @@
+<<<<<<< HEAD
+--batchresponse_0ac6ec98-e283-474a-afc6-436d3774b3e6
+=======
+--batchresponse_b0a2b0e6-18d4-4414-ab70-ec9805671f43
+>>>>>>> 50db8650cd9597e1f27e8fbdab181d348053210e
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+HTTP/1.1 200 OK
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+
+
+<<<<<<< HEAD
+--batchresponse_0ac6ec98-e283-474a-afc6-436d3774b3e6--
+=======
+--batchresponse_b0a2b0e6-18d4-4414-ab70-ec9805671f43--
+>>>>>>> 50db8650cd9597e1f27e8fbdab181d348053210e

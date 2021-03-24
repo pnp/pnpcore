@@ -1,5 +1,6 @@
 ﻿using PnP.Core.Services;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
@@ -10,7 +11,7 @@ namespace PnP.Core.Model.Teams
     /// Public interface to define a collection of Team Channels
     /// </summary>
     [ConcreteType(typeof(TeamChannelCollection))]
-    public interface ITeamChannelCollection : IQueryable<ITeamChannel>, IDataModelCollection<ITeamChannel>, ISupportPaging<ITeamChannel>, IDataModelCollectionDeleteByStringId
+    public interface ITeamChannelCollection : IQueryable<ITeamChannel>, IAsyncEnumerable<ITeamChannel>, IDataModelCollection<ITeamChannel>, IDataModelCollectionLoad<ITeamChannel>, IDataModelCollectionDeleteByStringId
     {
         #region Add methods
 

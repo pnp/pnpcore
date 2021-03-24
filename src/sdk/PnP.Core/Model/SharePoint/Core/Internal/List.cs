@@ -1,4 +1,5 @@
 ﻿using PnP.Core.Model.Security;
+using PnP.Core.QueryModel;
 using PnP.Core.Services;
 using System;
 using System.Collections.Generic;
@@ -15,15 +16,15 @@ namespace PnP.Core.Model.SharePoint
     /// List class, write your custom code here
     /// </summary>
     [SharePointType("SP.List", Uri = "_api/Web/Lists(guid'{Id}')", Update = "_api/web/lists/getbyid(guid'{Id}')", LinqGet = "_api/web/lists")]
-    [GraphType(Get = "sites/{Parent.GraphId}/lists/{GraphId}", LinqGet = "sites/{Parent.GraphId}/lists")]
+    //[GraphType(Get = "sites/{Parent.GraphId}/lists/{GraphId}", LinqGet = "sites/{Parent.GraphId}/lists")]
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Usage", "CA2243:Attribute string literals should parse correctly", Justification = "<Pending>")]
     internal partial class List : BaseDataModel<IList>, IList
     {
         // List of fields that loaded when the Lists collection is requested. This approach is needed as 
         // Graph requires the "system" field to be loaded as trigger to return all lists 
         internal const string SystemFacet = "system";
-        internal const string DefaultGraphFieldsToLoad = "system,createdDateTime,description,eTag,id,lastModifiedDateTime,name,webUrl,displayName,createdBy,lastModifiedBy,parentReference,list";
-        internal static Expression<Func<IList, object>>[] LoadFieldsExpression = new Expression<Func<IList, object>>[] { p => p.Fields.LoadProperties(p => p.InternalName, p => p.FieldTypeKind, p => p.TypeAsString, p => p.Title) };
+        //internal const string DefaultGraphFieldsToLoad = "system,createdDateTime,description,eTag,id,lastModifiedDateTime,name,webUrl,displayName,createdBy,lastModifiedBy,parentReference,list";
+        internal static Expression<Func<IList, object>>[] LoadFieldsExpression = new Expression<Func<IList, object>>[] { p => p.Fields.QueryProperties(p => p.InternalName, p => p.FieldTypeKind, p => p.TypeAsString, p => p.Title) };
 
         #region Construction
         public List()
@@ -87,10 +88,10 @@ namespace PnP.Core.Model.SharePoint
         #region Properties
         public Guid Id { get => GetValue<Guid>(); set => SetValue(value); }
 
-        [GraphProperty("displayName")]
+        //[GraphProperty("displayName")]
         public string Title { get => GetValue<string>(); set => SetValue(value); }
 
-        [GraphProperty("description")]
+        //[GraphProperty("description")]
         public string Description { get => GetValue<string>(); set => SetValue(value); }
 
         [SharePointProperty("DocumentTemplateUrl")]
@@ -99,7 +100,7 @@ namespace PnP.Core.Model.SharePoint
         public bool OnQuickLaunch { get => GetValue<bool>(); set => SetValue(value); }
 
         [SharePointProperty("BaseTemplate")]
-        [GraphProperty("list", JsonPath = "template")]
+        //[GraphProperty("list", JsonPath = "template")]
         public ListTemplateType TemplateType { get => GetValue<ListTemplateType>(); set => SetValue(value); }
 
         public string Url { get => GetValue<string>(); set => SetValue(value); }
@@ -118,10 +119,10 @@ namespace PnP.Core.Model.SharePoint
         [SharePointProperty("MajorVersionLimit")]
         public int MaxVersionLimit { get => GetValue<int>(); set => SetValue(value); }
 
-        [GraphProperty("list", JsonPath = "contentTypesEnabled")]
+        //[GraphProperty("list", JsonPath = "contentTypesEnabled")]
         public bool ContentTypesEnabled { get => GetValue<bool>(); set => SetValue(value); }
 
-        [GraphProperty("list", JsonPath = "hidden")]
+        //[GraphProperty("list", JsonPath = "hidden")]
         public bool Hidden { get => GetValue<bool>(); set => SetValue(value); }
 
         public bool ForceCheckout { get => GetValue<bool>(); set => SetValue(value); }
@@ -166,7 +167,7 @@ namespace PnP.Core.Model.SharePoint
         public string ValidationMessage { get => GetValue<string>(); set => SetValue(value); }
 
         // Internal property, not visible to the library users
-        [GraphProperty("name", UseCustomMapping = false)]
+        //[GraphProperty("name", UseCustomMapping = false)]
         public string NameToConstructEntityType { get => GetValue<string>(); set => SetValue(value); }
 
         public string ListItemEntityTypeFullName { get => GetValue<string>(); set => SetValue(value); }
@@ -175,7 +176,8 @@ namespace PnP.Core.Model.SharePoint
 
         public IInformationRightsManagementSettings InformationRightsManagementSettings { get => GetModelValue<IInformationRightsManagementSettings>(); }
 
-        [GraphProperty("items", Get = "/sites/{Web.GraphId}/lists/{GraphId}/items?expand=fields")]
+        // BERT/PAOLO: not possible at this moment after refactoring, somethign to reassess later on
+        //[GraphProperty("items", Get = "/sites/{Web.GraphId}/lists/{GraphId}/items?expand=fields")]
         public IListItemCollection Items { get => GetModelCollectionValue<IListItemCollection>(); }
 
         public IContentTypeCollection ContentTypes { get => GetModelCollectionValue<IContentTypeCollection>(); }
@@ -227,10 +229,9 @@ namespace PnP.Core.Model.SharePoint
             return new ApiCall($"_api/web/lists/getbytitle('{title}')", ApiType.SPORest);
         }
 
-        internal async Task<IList> BatchGetByTitleAsync(Batch batch, string title, params Expression<Func<IList, object>>[] expressions)
+        internal Task<IBatchSingleResult<IList>> BatchGetByTitleAsync(Batch batch, string title, params Expression<Func<IList, object>>[] expressions)
         {
-            await BaseBatchGetAsync(batch, apiOverride: GetByTitleApiCall(title), fromJsonCasting: MappingHandler, postMappingJson: PostMappingHandler, expressions: expressions).ConfigureAwait(false);
-            return this;
+            return GetBatchAsync(batch, apiOverride: GetByTitleApiCall(title), selectors: expressions);
         }
         #endregion
 
@@ -248,40 +249,52 @@ namespace PnP.Core.Model.SharePoint
 
             if (!string.IsNullOrEmpty(response.Json))
             {
-                var document = JsonSerializer.Deserialize<JsonElement>(response.Json);
-                if (document.TryGetProperty("d", out JsonElement root))
-                {
-                    if (root.TryGetProperty("Recycle", out JsonElement recycleBinItemId))
-                    {
-                        // return the recyclebin item id
-                        return recycleBinItemId.GetGuid();
-                    }
-                }
+                return ParseRecycleResponse(response.Json);
             }
 
             return Guid.Empty;
         }
 
-        public void RecycleBatch()
+        private static Guid ParseRecycleResponse(string json)
         {
-            RecycleBatchAsync().GetAwaiter().GetResult();
+            var document = JsonSerializer.Deserialize<JsonElement>(json);
+            if (document.TryGetProperty("d", out JsonElement root))
+            {
+                if (root.TryGetProperty("Recycle", out JsonElement recycleBinItemId))
+                {
+                    // return the recyclebin item id
+                    return recycleBinItemId.GetGuid();
+                }
+            }
+            return Guid.Empty;
         }
 
-        public async Task RecycleBatchAsync()
+        public IBatchSingleResult<BatchResultValue<Guid>> RecycleBatch()
         {
-            await RecycleBatchAsync(PnPContext.CurrentBatch).ConfigureAwait(false);
+            return RecycleBatchAsync().GetAwaiter().GetResult();
         }
 
-        public void RecycleBatch(Batch batch)
+        public async Task<IBatchSingleResult<BatchResultValue<Guid>>> RecycleBatchAsync()
         {
-            RecycleBatchAsync(batch).GetAwaiter().GetResult();
+            return await RecycleBatchAsync(PnPContext.CurrentBatch).ConfigureAwait(false);
         }
 
-        public async Task RecycleBatchAsync(Batch batch)
+        public IBatchSingleResult<BatchResultValue<Guid>> RecycleBatch(Batch batch)
+        {
+            return RecycleBatchAsync(batch).GetAwaiter().GetResult();
+        }
+
+        public async Task<IBatchSingleResult<BatchResultValue<Guid>>> RecycleBatchAsync(Batch batch)
         {
             ApiCall apiCall = GetRecycleApiCall();
+            apiCall.RawSingleResult = new BatchResultValue<Guid>(Guid.Empty);
+            apiCall.RawResultsHandler = (json, apiCall) =>
+            {
+                (apiCall.RawSingleResult as BatchResultValue<Guid>).Value = ParseRecycleResponse(json);
+            };
 
-            await RawRequestBatchAsync(batch, apiCall, HttpMethod.Post).ConfigureAwait(false);
+            var batchRequest = await RawRequestBatchAsync(batch, apiCall, HttpMethod.Post).ConfigureAwait(false);
+            return new BatchSingleResult<BatchResultValue<Guid>>(batch, batchRequest.Id, apiCall.RawSingleResult as BatchResultValue<Guid>);
         }
 
         private ApiCall GetRecycleApiCall()
@@ -294,70 +307,70 @@ namespace PnP.Core.Model.SharePoint
         #endregion
 
         #region GetItemsByCamlQuery
-        public async Task GetItemsByCamlQueryAsync(string query)
+        public async Task LoadItemsByCamlQueryAsync(string query)
         {
-            await GetItemsByCamlQueryAsync(new CamlQueryOptions() { ViewXml = query }).ConfigureAwait(false);
+            await LoadItemsByCamlQueryAsync(new CamlQueryOptions() { ViewXml = query }).ConfigureAwait(false);
         }
 
-        public void GetItemsByCamlQuery(string query)
+        public void LoadItemsByCamlQuery(string query)
         {
-            GetItemsByCamlQueryAsync(query).GetAwaiter().GetResult();
+            LoadItemsByCamlQueryAsync(query).GetAwaiter().GetResult();
         }
 
-        public async Task GetItemsByCamlQueryAsync(CamlQueryOptions queryOptions)
+        public async Task LoadItemsByCamlQueryAsync(CamlQueryOptions queryOptions)
         {
             ApiCall apiCall = BuildGetItemsByCamlQueryApiCall(queryOptions);
 
             await RequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
         }
 
-        public void GetItemsByCamlQuery(CamlQueryOptions queryOptions)
+        public void LoadItemsByCamlQuery(CamlQueryOptions queryOptions)
         {
-            GetItemsByCamlQueryAsync(queryOptions).GetAwaiter().GetResult();
+            LoadItemsByCamlQueryAsync(queryOptions).GetAwaiter().GetResult();
         }
 
-        public async Task GetItemsByCamlQueryBatchAsync(string query)
+        public async Task LoadItemsByCamlQueryBatchAsync(string query)
         {
-            await GetItemsByCamlQueryBatchAsync(new CamlQueryOptions() { ViewXml = query }).ConfigureAwait(false);
+            await LoadItemsByCamlQueryBatchAsync(new CamlQueryOptions() { ViewXml = query }).ConfigureAwait(false);
         }
 
-        public void GetItemsByCamlQueryBatch(string query)
+        public void LoadItemsByCamlQueryBatch(string query)
         {
-            GetItemsByCamlQueryBatchAsync(query).GetAwaiter().GetResult();
+            LoadItemsByCamlQueryBatchAsync(query).GetAwaiter().GetResult();
         }
 
-        public async Task GetItemsByCamlQueryBatchAsync(CamlQueryOptions queryOptions)
+        public async Task LoadItemsByCamlQueryBatchAsync(CamlQueryOptions queryOptions)
         {
             ApiCall apiCall = BuildGetItemsByCamlQueryApiCall(queryOptions);
 
             await RequestBatchAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
         }
 
-        public void GetItemsByCamlQueryBatch(CamlQueryOptions queryOptions)
+        public void LoadItemsByCamlQueryBatch(CamlQueryOptions queryOptions)
         {
-            GetItemsByCamlQueryBatchAsync(queryOptions).GetAwaiter().GetResult();
+            LoadItemsByCamlQueryBatchAsync(queryOptions).GetAwaiter().GetResult();
         }
 
-        public async Task GetItemsByCamlQueryBatchAsync(Batch batch, string query)
+        public async Task LoadItemsByCamlQueryBatchAsync(Batch batch, string query)
         {
-            await GetItemsByCamlQueryBatchAsync(batch, new CamlQueryOptions() { ViewXml = query }).ConfigureAwait(false);
+            await LoadItemsByCamlQueryBatchAsync(batch, new CamlQueryOptions() { ViewXml = query }).ConfigureAwait(false);
         }
 
-        public void GetItemsByCamlQueryBatch(Batch batch, string query)
+        public void LoadItemsByCamlQueryBatch(Batch batch, string query)
         {
-            GetItemsByCamlQueryBatchAsync(batch, query).GetAwaiter().GetResult();
+            LoadItemsByCamlQueryBatchAsync(batch, query).GetAwaiter().GetResult();
         }
 
-        public async Task GetItemsByCamlQueryBatchAsync(Batch batch, CamlQueryOptions queryOptions)
+        public async Task LoadItemsByCamlQueryBatchAsync(Batch batch, CamlQueryOptions queryOptions)
         {
             ApiCall apiCall = BuildGetItemsByCamlQueryApiCall(queryOptions);
 
             await RequestBatchAsync(batch, apiCall, HttpMethod.Post).ConfigureAwait(false);
         }
 
-        public void GetItemsByCamlQueryBatch(Batch batch, CamlQueryOptions queryOptions)
+        public void LoadItemsByCamlQueryBatch(Batch batch, CamlQueryOptions queryOptions)
         {
-            GetItemsByCamlQueryBatchAsync(batch, queryOptions).GetAwaiter().GetResult();
+            LoadItemsByCamlQueryBatchAsync(batch, queryOptions).GetAwaiter().GetResult();
         }
 
         private ApiCall BuildGetItemsByCamlQueryApiCall(CamlQueryOptions queryOptions)
@@ -399,13 +412,16 @@ namespace PnP.Core.Model.SharePoint
             }
             string body = JsonSerializer.Serialize(camlQuery, typeof(ExpandoObject), new JsonSerializerOptions() { IgnoreNullValues = true });
 
-            var apiCall = new ApiCall($"_api/Web/Lists(guid'{Id}')/GetItems", ApiType.SPORest, body, "Items");
+            var apiCall = new ApiCall($"_api/Web/Lists(guid'{Id}')/GetItems", ApiType.SPORest, body, "Items")
+            {
+                SkipCollectionClearing = true
+            };
             return apiCall;
         }
         #endregion
 
         #region GetListDataAsStream
-        public async Task<Dictionary<string, object>> GetListDataAsStreamAsync(RenderListDataOptions renderOptions)
+        public async Task<Dictionary<string, object>> LoadListDataAsStreamAsync(RenderListDataOptions renderOptions)
         {
             ApiCall apiCall = BuildGetListDataAsStreamApiCall(renderOptions);
 
@@ -417,7 +433,7 @@ namespace PnP.Core.Model.SharePoint
             if (!ArePropertiesAvailable(LoadFieldsExpression))
             {
                 // Get field information via batch
-                await GetBatchAsync(batch, LoadFieldsExpression).ConfigureAwait(false);
+                await LoadBatchAsync(batch, LoadFieldsExpression).ConfigureAwait(false);
                 requestToUse++;
             }
             // GetListDataAsStream request via batch
@@ -438,9 +454,9 @@ namespace PnP.Core.Model.SharePoint
             return null;
         }
 
-        public Dictionary<string, object> GetListDataAsStream(RenderListDataOptions renderOptions)
+        public Dictionary<string, object> LoadListDataAsStream(RenderListDataOptions renderOptions)
         {
-            return GetListDataAsStreamAsync(renderOptions).GetAwaiter().GetResult();
+            return LoadListDataAsStreamAsync(renderOptions).GetAwaiter().GetResult();
         }
 
         private ApiCall BuildGetListDataAsStreamApiCall(RenderListDataOptions renderOptions)
@@ -471,7 +487,10 @@ namespace PnP.Core.Model.SharePoint
             }.AsExpando();
             string body = JsonSerializer.Serialize(renderListDataParameters, typeof(ExpandoObject), new JsonSerializerOptions() { IgnoreNullValues = true });
 
-            var apiCall = new ApiCall($"_api/Web/Lists(guid'{Id}')/RenderListDataAsStream", ApiType.SPORest, body);
+            var apiCall = new ApiCall($"_api/Web/Lists(guid'{Id}')/RenderListDataAsStream", ApiType.SPORest, body)
+            {
+                SkipCollectionClearing = true
+            };
             return apiCall;
         }
         #endregion
@@ -589,7 +608,10 @@ namespace PnP.Core.Model.SharePoint
         public async Task<IRoleDefinitionCollection> GetRoleDefinitionsAsync(int principalId)
         {
             await EnsurePropertiesAsync(l => l.RoleAssignments).ConfigureAwait(false);
-            var roleAssignment = await RoleAssignments.GetFirstOrDefaultAsync(p => p.PrincipalId == principalId, r => r.RoleDefinitions).ConfigureAwait(false);
+            var roleAssignment = await RoleAssignments
+                .QueryProperties(r => r.RoleDefinitions)
+                .FirstOrDefaultAsync(p => p.PrincipalId == principalId)
+                .ConfigureAwait(false);
             return roleAssignment?.RoleDefinitions;
         }
 
@@ -603,7 +625,7 @@ namespace PnP.Core.Model.SharePoint
             var result = false;
             foreach (var name in names)
             {
-                var roleDefinition = await PnPContext.Web.RoleDefinitions.GetFirstOrDefaultAsync(d => d.Name == name).ConfigureAwait(false);
+                var roleDefinition = await PnPContext.Web.RoleDefinitions.FirstOrDefaultAsync(d => d.Name == name).ConfigureAwait(false);
                 if (roleDefinition != null)
                 {
                     var apiCall = new ApiCall($"_api/web/lists(guid'{Id}')/roleassignments/addroleassignment(principalid={principalId},roledefid={roleDefinition.Id})", ApiType.SPORest);
@@ -630,7 +652,7 @@ namespace PnP.Core.Model.SharePoint
             {
                 var roleDefinitions = await GetRoleDefinitionsAsync(principalId).ConfigureAwait(false);
 
-                var roleDefinition = roleDefinitions.FirstOrDefault(r => r.Name == name);
+                var roleDefinition = roleDefinitions.AsRequested().FirstOrDefault(r => r.Name == name);
                 if (roleDefinition != null)
                 {
                     var apiCall = new ApiCall($"_api/web/lists(guid'{Id}')/roleassignments/removeroleassignment(principalid={principalId},roledefid={roleDefinition.Id})", ApiType.SPORest);
@@ -669,6 +691,154 @@ namespace PnP.Core.Model.SharePoint
             }, parentFolder, FileSystemObjectType.Folder).ConfigureAwait(false);
         }
         #endregion
+
+        #region Syntex
+        public async Task<List<ISyntexClassifyAndExtractResult>> ClassifyAndExtractAsync(bool force = false, int pageSize = 500)
+        {
+            // load required fields in this list
+            string viewXml = @"<View>
+                    <ViewFields>
+                      <FieldRef Name='FileDirRef' />
+                      <FieldRef Name='FileLeafRef' />
+                      <FieldRef Name='UniqueId' />
+                      <FieldRef Name='PrimeLastClassified' />
+                    </ViewFields>   
+                    {1}
+                    <RowLimit Paged='TRUE'>{0}</RowLimit>
+                   </View>";
+
+            bool paging = true;
+            string nextPageInfo = null;
+            string filter;
+
+            if (!force)
+            {
+                filter = @"<Query>
+                      <Where>
+                        <IsNull>
+                          <FieldRef Name='PrimeLastClassified'/>                          
+                        </IsNull>
+                      </Where>
+                    </Query>";
+            }
+            else
+            {
+                filter = "";
+            }
+
+            while (paging)
+            {
+                var queryOptions = new RenderListDataOptions()
+                {
+                    ViewXml = string.Format(viewXml, pageSize, filter),
+                    RenderOptions = RenderListDataOptionsFlags.ListData
+                };
+
+                if (nextPageInfo != null)
+                {
+                    queryOptions.Paging = nextPageInfo;
+                }
+
+                // Execute the query for the requested page
+                var output = await LoadListDataAsStreamAsync(queryOptions).ConfigureAwait(false);
+
+                if (output.ContainsKey("NextHref"))
+                {
+                    nextPageInfo = output["NextHref"].ToString()?.Substring(1);
+                    if (string.IsNullOrEmpty(nextPageInfo))
+                    {
+                        paging = false;
+                    }
+                }
+                else
+                {
+                    paging = false;
+                }
+            }
+
+            // Iterate over the results and request Syntex classification and extraction
+            List<ISyntexClassifyAndExtractResult> classifyResults = new List<ISyntexClassifyAndExtractResult>();
+            List<BatchSingleResult<ISyntexClassifyAndExtractResult>> classifyBatchRequests = new List<BatchSingleResult<ISyntexClassifyAndExtractResult>>();
+            var batch = PnPContext.NewBatch();
+            foreach (var file in Items.AsRequested())
+            {
+                var apiCall = CreateClassifyAndExtractApiCall(Guid.Parse(file.Values["UniqueId"].ToString()));
+                apiCall.RawSingleResult = new SyntexClassifyAndExtractResult();
+                apiCall.RawResultsHandler = (json, apiCall) =>
+                {
+                    var result = ProcessClassifyAndExtractResponse(json);
+                    (apiCall.RawSingleResult as SyntexClassifyAndExtractResult).Created = result.Created;
+                    (apiCall.RawSingleResult as SyntexClassifyAndExtractResult).DeliverDate = result.DeliverDate;
+                    (apiCall.RawSingleResult as SyntexClassifyAndExtractResult).ErrorMessage = result.ErrorMessage;
+                    (apiCall.RawSingleResult as SyntexClassifyAndExtractResult).Id = result.Id;
+                    (apiCall.RawSingleResult as SyntexClassifyAndExtractResult).Status = result.Status;
+                    (apiCall.RawSingleResult as SyntexClassifyAndExtractResult).StatusCode = result.StatusCode;
+                    (apiCall.RawSingleResult as SyntexClassifyAndExtractResult).TargetServerRelativeUrl = result.TargetServerRelativeUrl;
+                    (apiCall.RawSingleResult as SyntexClassifyAndExtractResult).TargetSiteUrl = result.TargetSiteUrl;
+                    (apiCall.RawSingleResult as SyntexClassifyAndExtractResult).TargetWebServerRelativeUrl = result.TargetWebServerRelativeUrl;
+                    (apiCall.RawSingleResult as SyntexClassifyAndExtractResult).WorkItemType = result.WorkItemType;
+                };
+
+                var batchRequest = await RawRequestBatchAsync(batch, apiCall, HttpMethod.Post).ConfigureAwait(false);
+                classifyBatchRequests.Add(new BatchSingleResult<ISyntexClassifyAndExtractResult>(batch, batchRequest.Id, apiCall.RawSingleResult as ISyntexClassifyAndExtractResult));
+            }
+
+            // Execute the batch
+            await PnPContext.ExecuteAsync(batch, false).ConfigureAwait(false);
+
+            // Translate the batch results to the needed set of results
+            foreach (var classifyBatchRequest in classifyBatchRequests)
+            {
+                classifyResults.Add(classifyBatchRequest.Result);
+            }
+
+            return classifyResults;
+        }
+
+        public List<ISyntexClassifyAndExtractResult> ClassifyAndExtract(bool force = false, int pageSize = 500)
+        {
+            return ClassifyAndExtractAsync(force, pageSize).GetAwaiter().GetResult();
+        }
+
+        private static ISyntexClassifyAndExtractResult ProcessClassifyAndExtractResponse(string json)
+        {
+            var root = JsonDocument.Parse(json).RootElement.GetProperty("d");
+            return new SyntexClassifyAndExtractResult
+            {
+                Created = root.GetProperty("Created").GetDateTime(),
+                DeliverDate = root.GetProperty("DeliverDate").GetDateTime(),
+                ErrorMessage = root.GetProperty("ErrorMessage").GetString(),
+                StatusCode = root.GetProperty("StatusCode").GetInt32(),
+                Id = root.GetProperty("ID").GetGuid(),
+                Status = root.GetProperty("Status").GetString(),
+                WorkItemType = root.GetProperty("Type").GetGuid(),
+                TargetServerRelativeUrl = root.GetProperty("TargetServerRelativeUrl").GetString(),
+                TargetSiteUrl = root.GetProperty("TargetSiteUrl").GetString(),
+                TargetWebServerRelativeUrl = root.GetProperty("TargetWebServerRelativeUrl").GetString()
+            };
+        }
+
+        private ApiCall CreateClassifyAndExtractApiCall(Guid fileUniqueId)
+        {
+            var classifyAndExtractFile = new
+            {
+                __metadata = new { type = "Microsoft.Office.Server.ContentCenter.SPMachineLearningWorkItemEntityData" },
+                Type = "AE9D4F24-EE84-4C0C-A972-A74CFFE939A1",
+                TargetSiteId = PnPContext.Site.Id,
+                TargetWebId = PnPContext.Web.Id,
+                TargetUniqueId = fileUniqueId
+            }.AsExpando();
+
+            string body = JsonSerializer.Serialize(classifyAndExtractFile, new JsonSerializerOptions()
+            {
+                IgnoreNullValues = true
+            });
+
+            var apiCall = new ApiCall("_api/machinelearning/workitems", ApiType.SPORest, body);
+            return apiCall;
+        }
+        #endregion
+
         #endregion
     }
 }

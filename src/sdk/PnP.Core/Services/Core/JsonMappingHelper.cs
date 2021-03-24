@@ -1,5 +1,6 @@
 ﻿using PnP.Core.Model;
 using PnP.Core.Model.SharePoint;
+using PnP.Core.QueryModel;
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
@@ -44,6 +45,9 @@ namespace PnP.Core.Services
                 {
                     root = document.RootElement;
                 }
+
+                // TODO: The below method's signature is quite complex and reuses the same object
+                // multiple times. Can we try to simplify it?
 
                 // Map the returned JSON to the respective entities
                 await FromJson(batchRequest.Model, batchRequest.EntityInfo, new ApiResponse(batchRequest.ApiCall, root, batchRequest.Id), batchRequest.FromJsonCasting).ConfigureAwait(false);
@@ -103,11 +107,14 @@ namespace PnP.Core.Services
             {
                 // Get the dictionary property that will hold the overflow data
                 dictionaryPropertyToAddValueTo = pnpObjectType.GetProperty(ExpandoBaseDataModel<IExpandoDataModel>.OverflowFieldName).GetValue(pnpObject) as TransientDictionary;
+
                 useOverflowField = true;
             }
 
             // variable to capture the id value
             string idFieldValue = null;
+
+            bool hasResults = false;
 
             // collect metadata
             Dictionary<string, string> metadata = new Dictionary<string, string>();
@@ -128,7 +135,7 @@ namespace PnP.Core.Services
                 if (entityField != null)
                 {
                     // Are we loading a collection (e.g. Web.Lists)?
-                    if (!useOverflowField && IsModelCollection(entityField.PropertyInfo.PropertyType))
+                    if (IsModelCollection(entityField.PropertyInfo.PropertyType))
                     {
                         // Get the actual current value of the property we're setting...as that allows to detect it's type
                         var propertyToSetValue = entityField.PropertyInfo.GetValue(pnpObject);
@@ -156,6 +163,9 @@ namespace PnP.Core.Services
                             PropertyInfo pnpChildIdProperty = null;
                             foreach (var childJson in resultsProperty.EnumerateArray())
                             {
+                                // Keep track in order to know if proceed to next page
+                                hasResults = true;
+
                                 // Create a new model instance to add to the collection
                                 var pnpChild = typedCollection.CreateNew();
 
@@ -164,11 +174,14 @@ namespace PnP.Core.Services
 
                                 var contextAwarePnPChild = pnpChild as IDataModelWithContext;
 
+                                // TODO: In CreateNew (line 163) we already configure the PnPContext
+                                // Do we really need code in line 174?
+
                                 // Set PnPContext via a dynamic property
                                 contextAwarePnPChild.PnPContext = contextAwareObject.PnPContext;
 
                                 // Recursively map properties, call the method from the actual object as the object could have overriden it
-                                await ((IDataModelGet)pnpChild).GetAsync(new ApiResponse(apiResponse.ApiCall, childJson, apiResponse.BatchRequestId)).ConfigureAwait(false);
+                                await ((IDataModelProcess)pnpChild).ProcessResponseAsync(new ApiResponse(apiResponse.ApiCall, childJson, apiResponse.BatchRequestId)).ConfigureAwait(false);
 
                                 // Check if we've marked a field to be the key field for the entities in this collection
                                 if (pnpChildIdProperty == null)
@@ -243,7 +256,7 @@ namespace PnP.Core.Services
                         // Set parent
                         ((IDataModelParent)propertyToSetValue).Parent = (IDataModelParent)pnpObject;
 
-                        await ((IDataModelGet)propertyToSetValue).GetAsync(new ApiResponse(apiResponse.ApiCall, property.Value, apiResponse.BatchRequestId)).ConfigureAwait(false);
+                        await ((IDataModelProcess)propertyToSetValue).ProcessResponseAsync(new ApiResponse(apiResponse.ApiCall, property.Value, apiResponse.BatchRequestId)).ConfigureAwait(false);
                     }
                     else // Simple property mapping
                     {
@@ -262,7 +275,7 @@ namespace PnP.Core.Services
                                 {
                                     var jsonElement = GetJsonElementFromPath(property.Value, jsonPathField.SharePointJsonPath);
 
-                                    // Don't assume that the requested json path was also loaded. When using the LoadProperties model there can be 
+                                    // Don't assume that the requested json path was also loaded. When using the QueryProperties model there can be 
                                     // a json object returned that does have all properties loaded 
                                     if (!jsonElement.Equals(property.Value))
                                     {
@@ -357,7 +370,8 @@ namespace PnP.Core.Services
             if (apiResponse.ApiCall.Request.Contains("$top", StringComparison.InvariantCultureIgnoreCase))
             {
                 var parent = (pnpObject as IDataModelParent).Parent;
-                if (parent != null && parent is IManageableCollection && parent is IMetadataExtensible && parent.GetType().ImplementsInterface(typeof(ISupportPaging<>)))
+                // Go to next page if previous one contains any item
+                if (parent != null && hasResults && parent is IManageableCollection && parent is IMetadataExtensible && parent.GetType().ImplementsInterface(typeof(ISupportPaging)))
                 {
                     TrackAndUpdateMetaData(parent as IMetadataExtensible, "__next", BuildNextPageRestUrl(apiResponse.ApiCall.Request));
                 }
@@ -634,7 +648,7 @@ namespace PnP.Core.Services
             {
                 if (parentList.ArePropertiesAvailable(List.LoadFieldsExpression))
                 {
-                    return parentList.Fields.FirstOrDefault(p => p.InternalName == fieldName);
+                    return parentList.Fields.AsRequested().FirstOrDefault(p => p.InternalName == fieldName);
                 }
             }
             return null;
@@ -727,9 +741,11 @@ namespace PnP.Core.Services
                     EntityFieldInfo entityField = LookupEntityField(entity, apiResponse, property);
 
                     // Do we need to re-parent this json mapping to a non expandable collection in the current model?
-                    if (!string.IsNullOrEmpty(apiResponse.ApiCall.ReceivingProperty) && property.NameEquals("value"))
+                    bool modelReparented = false;
+                    if (!string.IsNullOrEmpty(apiResponse.ApiCall.ReceivingProperty) && (property.NameEquals("value") || apiResponse.ApiCall.ReceivingProperty == "primaryChannel"))
                     {
                         entityField = entity.Fields.FirstOrDefault(p => !string.IsNullOrEmpty(p.GraphName) && p.GraphName.Equals(apiResponse.ApiCall.ReceivingProperty, StringComparison.InvariantCultureIgnoreCase));
+                        modelReparented = true;
                     }
 
                     // Entity field should be populate for the actual fields we've requested
@@ -777,7 +793,7 @@ namespace PnP.Core.Services
                                 contextAwarePnPChild.PnPContext = contextAwareObject.PnPContext;
 
                                 // Recursively map properties, call the method from the actual object as the object could have overriden it
-                                await ((IDataModelGet)pnpChild).GetAsync(new ApiResponse(apiResponse.ApiCall, childJson, apiResponse.BatchRequestId)).ConfigureAwait(false);
+                                await ((IDataModelProcess)pnpChild).ProcessResponseAsync(new ApiResponse(apiResponse.ApiCall, childJson, apiResponse.BatchRequestId)).ConfigureAwait(false);
 
                                 // Check if we've marked a field to be the key field for the entities in this collection
                                 if (pnpChildIdProperty == null)
@@ -831,7 +847,28 @@ namespace PnP.Core.Services
                             // Set the batch request id property
                             SetBatchRequestId(propertyToSetValue as TransientObject, apiResponse.BatchRequestId);
 
-                            await ((IDataModelGet)propertyToSetValue).GetAsync(new ApiResponse(apiResponse.ApiCall, property.Value, apiResponse.BatchRequestId)).ConfigureAwait(false);
+                            ApiResponse modelResponse;
+                            if (modelReparented)
+                            {
+                                // Clone the original API call so we can blank out the ReceivingProperty to avoid getting into an endless loop
+                                var newApiCall = new ApiCall(apiResponse.ApiCall.Request, apiResponse.ApiCall.JsonBody)
+                                {
+                                    Type  = apiResponse.ApiCall.Type,                                    
+                                };
+                                modelResponse = new ApiResponse(newApiCall, apiResponse.JsonElement, apiResponse.BatchRequestId);
+                            }
+                            else
+                            {
+                                modelResponse = new ApiResponse(apiResponse.ApiCall, property.Value, apiResponse.BatchRequestId);
+                            }
+
+                            await ((IDataModelProcess)propertyToSetValue).ProcessResponseAsync(modelResponse).ConfigureAwait(false);
+                            
+                            if (modelReparented)
+                            {
+                                // The full model was processed, no point in continueing as that would 
+                                break;
+                            }
                         }
                         else
                         {
@@ -883,7 +920,7 @@ namespace PnP.Core.Services
                                         {
                                             var jsonElement = GetJsonElementFromPath(property.Value, jsonPathField.GraphJsonPath);
 
-                                            // Don't assume that the requested json path was also loaded. When using the LoadProperties model there can be 
+                                            // Don't assume that the requested json path was also loaded. When using the QueryProperties model there can be 
                                             // a json object returned that does have all properties loaded (e.g. a TeamsApp object with only id and distributionMethod loaded)
                                             if (!jsonElement.Equals(property.Value))
                                             {
@@ -1092,10 +1129,11 @@ namespace PnP.Core.Services
                         }
                     }
                 }
-                else if (element.TryGetProperty(part, out JsonElement nextElement))
+                else if (element.ValueKind != JsonValueKind.Null && 
+                    element.TryGetProperty(part, out JsonElement nextElement))
                 {
                     element = nextElement;
-                }
+                }                
             }
 
             return element;

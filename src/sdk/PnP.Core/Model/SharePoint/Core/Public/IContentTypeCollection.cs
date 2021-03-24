@@ -1,4 +1,5 @@
 ﻿using PnP.Core.Services;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -8,7 +9,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a collection of ContentType objects of SharePoint Online
     /// </summary>
     [ConcreteType(typeof(ContentTypeCollection))]
-    public interface IContentTypeCollection : IQueryable<IContentType>, IDataModelCollection<IContentType>
+    public interface IContentTypeCollection : IQueryable<IContentType>, IAsyncEnumerable<IContentType>, IDataModelCollection<IContentType>, IDataModelCollectionLoad<IContentType>
     {
         #region Extension Methods
 

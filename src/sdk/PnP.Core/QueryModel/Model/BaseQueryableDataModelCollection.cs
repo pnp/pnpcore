@@ -1,17 +1,19 @@
 ﻿using PnP.Core.Model;
+using PnP.Core.Services;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading;
+using System.Threading.Tasks;
 
 namespace PnP.Core.QueryModel
 {
     /// <summary>
     /// Base abstract type for any LINQ IQueryable collection of the Domain Model
-    /// In the real model, could inherit from BaseDataModelCollection&lt;TModel&gt;
-    /// and implement IQueryable&lt;TModel&gt;
+    /// In the real model, could inherit from <see cref="BaseDataModelCollection{TModel}"/>
+    /// and implement <see cref="IQueryable{TModel}"/>
     /// </summary>
     /// <typeparam name="TModel">The Type of the collection</typeparam>
     internal abstract class BaseQueryableDataModelCollection<TModel> : BaseDataModelCollection<TModel>, IOrderedQueryable<TModel>, IAsyncEnumerable<TModel>
@@ -41,9 +43,24 @@ namespace PnP.Core.QueryModel
         // Provides the IEnumerable<T> implementation
         public override IEnumerator<TModel> GetEnumerator()
         {
-            if (provider != null && Expression != null && !Requested)
+            if (provider != null && Expression != null)
             {
-                return ((IEnumerable<TModel>)provider.Execute(Expression)).GetEnumerator();
+                var asyncEnumerable = ((IAsyncEnumerable<TModel>)provider.Execute(Expression));
+
+                // Transform IAsyncEnumerable to IEnumerable
+                // We need to prepare the list with all the items
+                return ToList().GetAwaiter().GetResult().GetEnumerator();
+
+                async Task<IEnumerable<TModel>> ToList()
+                {
+                    var result = new List<TModel>();
+                    await foreach (var item in asyncEnumerable)
+                    {
+                        result.Add(item);
+                    }
+
+                    return result;
+                }
             }
             else
             {
@@ -58,14 +75,7 @@ namespace PnP.Core.QueryModel
         // Provides the IEnumerable implementation
         IEnumerator IEnumerable.GetEnumerator()
         {
-            if (provider != null & Expression != null && !Requested)
-            {
-                return ((IEnumerable)provider.Execute(Expression)).GetEnumerator();
-            }
-            else
-            {
-                return ((IEnumerable)items).GetEnumerator();
-            }
+            return GetEnumerator();
         }
 
         #endregion
@@ -74,7 +84,7 @@ namespace PnP.Core.QueryModel
 
         public IAsyncEnumerator<TModel> GetAsyncEnumerator(CancellationToken cancellationToken = default)
         {
-            if (provider != null & Expression != null && !Requested)
+            if (provider != null & Expression != null)
             {
                 return provider.ExecuteAsync<IAsyncEnumerable<TModel>>(Expression, cancellationToken).GetAsyncEnumerator(cancellationToken);
             }
@@ -95,5 +105,6 @@ namespace PnP.Core.QueryModel
         }
 
         #endregion
+
     }
 }

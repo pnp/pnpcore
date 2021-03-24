@@ -67,12 +67,12 @@ namespace Demo.ASPNetCore.Controllers
             using (var context = await createSiteContext())
             {
                 // Retrieving lists of the target web using Microsoft Graph
-                var web = await context.Web.GetAsync(w => w.Title);
+                var web = await context.Web.GetAsync(w => w.Title, 
+                    w => w.Lists.QueryProperties(l => l.Id, l => l.Title, l => l.Description));
 
                 var lists = (from l in context.Web.Lists
                              orderby l.Title descending
-                             select l)
-                            .Load(l => l.Id, l => l.Title, l => l.Description);
+                             select l);
 
                 // Retrieving lists of the target web using SPO REST
                 // var web = await context.Web.GetAsync(w => w.Title, w => w.Lists.Include(l => l.Title, l => l.Id));
@@ -92,8 +92,8 @@ namespace Demo.ASPNetCore.Controllers
             using (var context = await createSiteContext())
             {
                 // Retrieving lists of the target web
-                var items = (from i in context.Web.Lists.GetByTitle(listTitle).Items
-                             select i).Load(i => i.Id, i => i.Title);
+                var items = (from i in context.Web.Lists.GetByTitle(listTitle).Items.QueryProperties(i => i.Id, i => i.Title)
+                             select i);
 
                 model.ListTitle = listTitle;
                 model.Items = new List<ListItemViewModel>(from i in items.ToList()
@@ -116,11 +116,11 @@ namespace Demo.ASPNetCore.Controllers
             {
                 // Retrieving lists of the target web
                 var team = await context.Team.GetAsync(t => t.DisplayName, t => t.Description, 
-                    t => t.Channels.LoadProperties(p => p.Id, p => p.DisplayName));
+                    t => t.Channels.QueryProperties(p => p.Id, p => p.DisplayName));
 
                 model.DisplayName = team.DisplayName;
                 model.Description = team.Description;
-                model.Channels = new List<ChannelViewModel>(from c in team.Channels
+                model.Channels = new List<ChannelViewModel>(from c in team.Channels.ToList()
                                                             select new ChannelViewModel
                                                             {
                                                                 DisplayName = c.DisplayName,

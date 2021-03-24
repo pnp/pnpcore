@@ -1,4 +1,5 @@
-﻿namespace PnP.Core.Model.SharePoint
+﻿/*
+namespace PnP.Core.Model.SharePoint
 {
     /// <summary>
     /// Type of relationship between two terms
@@ -19,3 +20,4 @@
         Reuse
     }
 }
+*/

@@ -10,7 +10,6 @@ using System.Threading.Tasks;
 
 namespace PnP.Core.Model
 {
-
     /// <summary>
     /// Delegate for requesting the Api call for doing an ADD operation
     /// </summary>
@@ -42,7 +41,7 @@ namespace PnP.Core.Model
     /// Base class for all model classes
     /// </summary>
     /// <typeparam name="TModel">Model class</typeparam>
-    internal class BaseDataModel<TModel> : TransientObject, IDataModel<TModel>, IDataModelGet, IRequestable, IMetadataExtensible, IDataModelWithKey, IDataModelMappingHandler
+    internal class BaseDataModel<TModel> : TransientObject, IDataModel<TModel>, IDataModelProcess, IDataModelLoad, IRequestable, IMetadataExtensible, IDataModelWithKey, IDataModelMappingHandler
     {
         #region Core properties
 
@@ -86,99 +85,28 @@ namespace PnP.Core.Model
 
         #region Core data access methods
 
+        #region Process
+
+        /// <summary>
+        /// This method processes an API response to populate the current domain model object
+        /// </summary>
+        /// <param name="apiResponse">The API response to process</param>
+        /// <param name="expressions">List of expressions to define the fields to retrieve during deserialization of the API response</param>
+        /// <returns>The deserialized domain model object</returns>
+        public async Task ProcessResponseAsync(ApiResponse apiResponse, Expression<Func<object, object>>[] expressions)
+        {
+            var newExpressions = expressions.CastExpressions<TModel>();
+
+            // Get entity information for the entity to load
+            var entityInfo = GetClassInfo(newExpressions);
+
+            await JsonMappingHelper.FromJson(this, entityInfo, apiResponse, MappingHandler).ConfigureAwait(false);
+            PostMappingHandler?.Invoke(apiResponse.JsonElement.ToString());
+        }
+
+        #endregion
+
         #region Get
-
-        public async Task<object> GetBatchAsync(Batch batch, params Expression<Func<object, object>>[] expressions)
-        {
-            var newExpressions = expressions.Select(e => Expression.Lambda<Func<TModel, object>>(e.Body, e.Parameters)).ToArray();
-            return await GetInternalBatchAsync(batch, newExpressions).ConfigureAwait(false);
-        }
-
-        public async Task<object> GetBatchAsync(params Expression<Func<object, object>>[] expressions)
-        {
-            var newExpressions = expressions.Select(e => Expression.Lambda<Func<TModel, object>>(e.Body, e.Parameters)).ToArray();
-            return await GetInternalBatchAsync(PnPContext.CurrentBatch, newExpressions).ConfigureAwait(false);
-        }
-
-        public object GetBatch(Batch batch, params Expression<Func<object, object>>[] expressions)
-        {
-            return GetBatchAsync(batch, expressions).GetAwaiter().GetResult();
-        }
-
-        public object GetBatch(params Expression<Func<object, object>>[] expressions)
-        {
-            return GetBatchAsync(expressions).GetAwaiter().GetResult();
-        }
-
-        public async Task<object> GetAsync(params Expression<Func<object, object>>[] expressions)
-        {
-            var newExpressions = expressions.Select(e => Expression.Lambda<Func<TModel, object>>(e.Body, e.Parameters)).ToArray();
-            return await GetAsyncInternal(default, newExpressions).ConfigureAwait(true);
-        }
-
-        public async Task<object> GetAsync(ApiResponse apiResponse, params Expression<Func<object, object>>[] expressions)
-        {
-            var newExpressions = expressions.Select(e => Expression.Lambda<Func<TModel, object>>(e.Body, e.Parameters)).ToArray();
-            return await GetAsyncInternal(apiResponse, newExpressions).ConfigureAwait(true);
-        }
-
-        public object Get(params Expression<Func<object, object>>[] expressions)
-        {
-            return GetAsync(expressions).GetAwaiter().GetResult();
-        }
-
-        public object Get(ApiResponse apiResponse, params Expression<Func<object, object>>[] expressions)
-        {
-            return GetAsync(apiResponse, expressions).GetAwaiter().GetResult();
-        }
-
-        /// <summary>
-        /// Batches the retrieval of a Domain Model object from the remote data source, eventually selecting custom properties or using a default set of properties
-        /// </summary>
-        /// <param name="batch">Batch add this request to</param>
-        /// <param name="expressions">The properties to select</param>
-        /// <returns>The Domain Model object</returns>
-        public async virtual Task<TModel> GetBatchAsync(Batch batch, params Expression<Func<TModel, object>>[] expressions)
-        {
-            return await GetInternalBatchAsync(batch, expressions).ConfigureAwait(false);
-        }
-
-        /// <summary>
-        /// Batches the retrieval of a Domain Model object from the remote data source, eventually selecting custom properties or using a default set of properties
-        /// </summary>
-        /// <param name="expressions">The properties to select</param>
-        /// <returns>The Domain Model object</returns>
-        public async virtual Task<TModel> GetBatchAsync(params Expression<Func<TModel, object>>[] expressions)
-        {
-            return await GetInternalBatchAsync(PnPContext.CurrentBatch, expressions).ConfigureAwait(false);
-        }
-
-        /// <summary>
-        /// Batches the retrieval of a Domain Model object from the remote data source, eventually selecting custom properties or using a default set of properties
-        /// </summary>
-        /// <param name="batch">Batch add this request to</param>
-        /// <param name="expressions">The properties to select</param>
-        /// <returns>The Domain Model object</returns>
-        public virtual TModel GetBatch(Batch batch, params Expression<Func<TModel, object>>[] expressions)
-        {
-            return GetBatchAsync(batch, expressions).GetAwaiter().GetResult();
-        }
-
-        /// <summary>
-        /// Batches the retrieval of a Domain Model object from the remote data source, eventually selecting custom properties or using a default set of properties
-        /// </summary>
-        /// <param name="expressions">The properties to select</param>
-        /// <returns>The Domain Model object</returns>
-        public virtual TModel GetBatch(params Expression<Func<TModel, object>>[] expressions)
-        {
-            return GetBatchAsync(expressions).GetAwaiter().GetResult();
-        }
-
-        private async Task<TModel> GetInternalBatchAsync(Batch batch, params Expression<Func<TModel, object>>[] expressions)
-        {
-            await BaseBatchGetAsync(batch, fromJsonCasting: MappingHandler, postMappingJson: PostMappingHandler, expressions: expressions).ConfigureAwait(false);
-            return AsDynamic(this);
-        }
 
         /// <summary>
         /// Retrieves a Domain Model object from the remote data source, eventually selecting custom properties or using a default set of properties
@@ -187,47 +115,116 @@ namespace PnP.Core.Model
         /// <returns>The Domain Model object</returns>
         public virtual async Task<TModel> GetAsync(params Expression<Func<TModel, object>>[] expressions)
         {
-            return await GetAsyncInternal(default, expressions).ConfigureAwait(true);
+            IDataModelParent replicatedParent = null;
+
+            // Create a replicated parent
+            if (this.Parent != null)
+            {
+                // Replicate the parent object in order to keep original collection as is
+                replicatedParent = EntityManager.ReplicateParentHierarchy(this.Parent, this.PnPContext);
+            }
+            // Create a new object with a replicated parent
+            var newDataModel = (BaseDataModel<TModel>)EntityManager.GetEntityConcreteInstance(this.GetType(), replicatedParent, this.PnPContext);
+
+            // Replicate metadata and key between the objects
+            EntityManager.ReplicateKeyAndMetadata(this, newDataModel);
+
+            await newDataModel.BaseRetrieveAsync(expressions: expressions).ConfigureAwait(false);
+
+            return (TModel)(object)newDataModel;
         }
 
         /// <summary>
-        /// Special override the load child model classes ==> if apiResponse != default then 
-        /// no get will be done but the system will handle the mapping from json to model
+        /// Batches the retrieval of a Domain Model object from the remote data source, eventually selecting custom properties or using a default set of properties
         /// </summary>
-        /// <param name="apiResponse">Json response (when in recursive mapping of json to model), default otherwise</param>
-        /// <param name="expressions">The properties to select</param>
+        /// <param name="batch">Batch add this request to</param>
+        /// <param name="selectors">The properties to select</param>
         /// <returns>The Domain Model object</returns>
-        public virtual async Task<TModel> GetAsync(ApiResponse apiResponse, params Expression<Func<TModel, object>>[] expressions)
+        public virtual Task<IBatchSingleResult<TModel>> GetBatchAsync(Batch batch,
+            params Expression<Func<TModel, object>>[] selectors)
         {
-            return await GetAsyncInternal(apiResponse, expressions).ConfigureAwait(true);
+            return GetBatchAsync(batch, default, selectors);
         }
 
         /// <summary>
-        /// Retrieves a Domain Model object from the remote data source, eventually selecting custom properties or using a default set of properties
+        /// Batches the retrieval of a Domain Model object from the remote data source, eventually selecting custom properties or using a default set of properties
         /// </summary>
-        /// <param name="expressions">The properties to select</param>
+        /// <param name="batch">Batch add this request to</param>
+        /// <param name="apiOverride"></param>
+        /// <param name="selectors">The properties to select</param>
         /// <returns>The Domain Model object</returns>
-        public virtual TModel Get(params Expression<Func<TModel, object>>[] expressions)
+        internal virtual async Task<IBatchSingleResult<TModel>> GetBatchAsync(Batch batch,
+            ApiCall apiOverride,
+            params Expression<Func<TModel, object>>[] selectors)
         {
-            return GetAsync(expressions).GetAwaiter().GetResult();
+            IDataModelParent replicatedParent = null;
+
+            // Create a replicated parent
+            if (this.Parent != null)
+            {
+                // Replicate the parent object in order to keep original collection as is
+                replicatedParent = EntityManager.ReplicateParentHierarchy(this.Parent, this.PnPContext);
+            }
+            // Create a new object with a replicated parent
+            var newDataModel = (BaseDataModel<TModel>)EntityManager.GetEntityConcreteInstance(this.GetType(), replicatedParent, this.PnPContext);
+
+            // Replicate metadata and key between the objects
+            EntityManager.ReplicateKeyAndMetadata(this, newDataModel);
+
+            // Make the actual request
+            var batchResult = await newDataModel.BaseBatchRetrieveAsync(batch, fromJsonCasting: MappingHandler, postMappingJson: PostMappingHandler, selectors: selectors).ConfigureAwait(false);
+
+            return batchResult;
+        }
+
+        #endregion
+
+        #region Load
+
+        /// <summary>
+        /// Loads a Domain Model object from the remote data source, eventually selecting custom properties or using a default set of properties
+        /// </summary>
+        /// <param name="selectors">The properties to select</param>
+        /// <returns>The Domain Model object</returns>
+        public virtual Task LoadAsync(params LambdaExpression[] selectors)
+        {
+            // Cast expressions
+            var newExpressions = selectors.CastExpressions<TModel>();
+            return BaseRetrieveAsync(expressions: newExpressions);
         }
 
         /// <summary>
-        /// Special override the load child model classes ==> if apiResponse != default then 
-        /// no get will be done but the system will handle the mapping from json to model
+        /// Loads a Domain Model object from the remote data source, eventually selecting custom properties or using a default set of properties
         /// </summary>
-        /// <param name="apiResponse">Json response (when in recursive mapping of json to model), default otherwise</param>
-        /// <param name="expressions">The properties to select</param>
+        /// <param name="selectors">The properties to select</param>
         /// <returns>The Domain Model object</returns>
-        public virtual TModel Get(ApiResponse apiResponse, params Expression<Func<TModel, object>>[] expressions)
+        public virtual Task LoadAsync(params Expression<Func<TModel, object>>[] selectors)
         {
-            return GetAsync(apiResponse, expressions).GetAwaiter().GetResult();
+            return BaseRetrieveAsync(expressions: selectors);
         }
 
-        private async Task<TModel> GetAsyncInternal(ApiResponse apiResponse, params Expression<Func<TModel, object>>[] expressions)
+        /// <summary>
+        /// Batches the load of a Domain Model object from the remote data source, eventually selecting custom properties or using a default set of properties
+        /// </summary>
+        /// <param name="batch">Batch to use for the current request</param>
+        /// <param name="selectors">The properties to select</param>
+        /// <returns>The Domain Model object</returns>
+        public virtual async Task<IBatchResult> LoadBatchAsync(Batch batch, params LambdaExpression[] selectors)
         {
-            await BaseGet(apiResponse, fromJsonCasting: MappingHandler, postMappingJson: PostMappingHandler, expressions: expressions).ConfigureAwait(false);
-            return AsDynamic(this);
+            var newSelectors = selectors.CastExpressions<TModel>();
+
+            return await BaseBatchRetrieveAsync(batch, selectors: newSelectors).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Batches the load of a Domain Model object from the remote data source, eventually selecting custom properties or using a default set of properties
+        /// </summary>
+        /// <param name="batch">Batch to use for the current request</param>
+        /// <param name="selectors">The properties to select</param>
+        /// <returns>The Domain Model object</returns>
+        public virtual async Task<IBatchResult> LoadBatchAsync(Batch batch, params Expression<Func<TModel, object>>[] selectors)
+        {
+            return await BaseBatchRetrieveAsync(batch, default, MappingHandler, PostMappingHandler, selectors).ConfigureAwait(false);
         }
 
         #endregion
@@ -238,12 +235,15 @@ namespace PnP.Core.Model
         /// Adds a domain model instance
         /// </summary>
         /// <returns>The added domain model</returns>
-        internal async virtual Task<BaseDataModel<TModel>> AddBatchAsync(Dictionary<string, object> keyValuePairs = null)
+        internal virtual async Task<BaseDataModel<TModel>> AddBatchAsync(Dictionary<string, object> keyValuePairs = null)
         {
+            // TODO: Can we consolidate this method with the next one
+            // setting a default value of null for the Batch input argument?
+
             if (AddApiCallHandler != null)
             {
                 var call = await AddApiCallHandler.Invoke(keyValuePairs).ConfigureAwait(false);
-                await BaseBatchAddAsync(call, fromJsonCasting: MappingHandler, postMappingJson: PostMappingHandler).ConfigureAwait(false);
+                await BaseAddBatchAsync(call, fromJsonCasting: MappingHandler, postMappingJson: PostMappingHandler).ConfigureAwait(false);
                 return this;
             }
             else
@@ -259,12 +259,14 @@ namespace PnP.Core.Model
         /// <param name="batch">Batch add this request to</param>
         /// <param name="keyValuePairs">Properties to control add</param>
         /// <returns>The added domain model</returns>
-        internal async virtual Task<BaseDataModel<TModel>> AddBatchAsync(Batch batch, Dictionary<string, object> keyValuePairs = null)
+        internal virtual async Task<BaseDataModel<TModel>> AddBatchAsync(Batch batch, Dictionary<string, object> keyValuePairs = null)
         {
+            // TODO: Can we consolidate this method with the previous one?
+
             if (AddApiCallHandler != null)
             {
                 var call = await AddApiCallHandler.Invoke(keyValuePairs).ConfigureAwait(false);
-                await BaseBatchAddAsync(batch, call, fromJsonCasting: MappingHandler, postMappingJson: PostMappingHandler).ConfigureAwait(false);
+                await BaseAddBatchAsync(batch, call, fromJsonCasting: MappingHandler, postMappingJson: PostMappingHandler).ConfigureAwait(false);
                 return this;
             }
             else
@@ -299,6 +301,8 @@ namespace PnP.Core.Model
         /// <returns>The added domain model</returns>
         internal virtual BaseDataModel<TModel> AddBatch(Dictionary<string, object> keyValuePairs = null)
         {
+            // TODO: Can we consolidate this method with the next one?
+
             return AddBatchAsync(keyValuePairs).GetAwaiter().GetResult();
         }
 
@@ -310,6 +314,8 @@ namespace PnP.Core.Model
         /// <returns>The added domain model</returns>
         internal virtual BaseDataModel<TModel> AddBatch(Batch batch, Dictionary<string, object> keyValuePairs = null)
         {
+            // TODO: Can we consolidate this method with the previous one?
+
             return AddBatchAsync(batch, keyValuePairs).GetAwaiter().GetResult();
         }
 
@@ -321,6 +327,7 @@ namespace PnP.Core.Model
         {
             return AddAsync(keyValuePairs).GetAwaiter().GetResult();
         }
+
         #endregion
 
         #region Update
@@ -328,7 +335,7 @@ namespace PnP.Core.Model
         /// <summary>
         /// Updates a domain model
         /// </summary>
-        public async virtual Task UpdateBatchAsync()
+        public virtual async Task UpdateBatchAsync()
         {
             await UpdateBatchAsync(PnPContext.CurrentBatch).ConfigureAwait(false);
         }
@@ -337,7 +344,7 @@ namespace PnP.Core.Model
         /// Updates a domain model
         /// </summary>
         /// <param name="batch">Batch add this request to</param>
-        public async virtual Task UpdateBatchAsync(Batch batch)
+        public virtual async Task UpdateBatchAsync(Batch batch)
         {
             await BaseBatchUpdateAsync(batch, MappingHandler, PostMappingHandler).ConfigureAwait(false);
         }
@@ -382,7 +389,7 @@ namespace PnP.Core.Model
         /// <summary>
         /// Deletes a domain model
         /// </summary>
-        public async virtual Task DeleteBatchAsync()
+        public virtual async Task DeleteBatchAsync()
         {
             await DeleteBatchAsync(PnPContext.CurrentBatch).ConfigureAwait(false);
         }
@@ -391,9 +398,9 @@ namespace PnP.Core.Model
         /// Deletes a domain model
         /// </summary>
         /// <param name="batch">Batch add this request to</param>
-        public async virtual Task DeleteBatchAsync(Batch batch)
+        public virtual async Task DeleteBatchAsync(Batch batch)
         {
-            await BaseBatchDeleteAsync(batch).ConfigureAwait(false);
+            await BaseDeleteBatchAsync(batch).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -455,47 +462,38 @@ namespace PnP.Core.Model
         [SystemProperty]
         public Action<string> PostMappingHandler { get; set; } = null;
 
-        internal virtual async Task BaseGet(ApiCall apiOverride = default, Func<FromJson, object> fromJsonCasting = null, Action<string> postMappingJson = null, params Expression<Func<TModel, object>>[] expressions)
+        internal virtual async Task BaseRetrieveAsync(ApiCall apiOverride = default, Func<FromJson, object> fromJsonCasting = null, Action<string> postMappingJson = null, params Expression<Func<TModel, object>>[] expressions)
         {
-            await BaseGet(default, apiOverride, fromJsonCasting, postMappingJson, expressions).ConfigureAwait(false);
-        }
+            // DONE: Accordingly to the suggested above refactoring,
+            // I would rename this method into BaseRequest/BaseRetrieve/???
+            // to avoid a reference to the Get concept, which is something else
+            // ApiCall is structure and we always create a new type
 
-        internal virtual async Task BaseGet(ApiResponse apiResponse, ApiCall apiOverride = default, Func<FromJson, object> fromJsonCasting = null, Action<string> postMappingJson = null, params Expression<Func<TModel, object>>[] expressions)
-        {
+            fromJsonCasting ??= MappingHandler;
+            postMappingJson ??= PostMappingHandler;
+
             // Get entity information for the entity to load
             var entityInfo = GetClassInfo(expressions);
+            // Construct the API call to make
+            var api = await QueryClient.BuildGetAPICallAsync(this, entityInfo, apiOverride, loadPages: true).ConfigureAwait(false);
 
-            // This method was invoked from loading another entity object 
-            // e.g. Loading Site.RootWeb will handle the load via the Site entity Get method but will call 
-            //      into the Web entity Get method to load the RootWeb property
-            if (!apiResponse.Equals(default(ApiResponse)))
+            if (api.Cancelled)
             {
-                await JsonMappingHelper.FromJson(this, entityInfo, apiResponse, fromJsonCasting).ConfigureAwait(false);
-                postMappingJson?.Invoke(apiResponse.JsonElement.ToString());
+                ApiCancellationMessage(api);
+                return;
             }
-            else
+
+            var batch = PnPContext.BatchClient.EnsureBatch();
+            batch.Add(this, entityInfo, HttpMethod.Get, api.ApiCall, default, fromJsonCasting, postMappingJson, "Get");
+
+            // The domain model for Graph can have non expandable collections, hence these require an additional API call to populate. 
+            // Let's ensure these additional API calls's are included in a single batch
+            if (api.ApiCall.Type == ApiType.Graph || api.ApiCall.Type == ApiType.GraphBeta)
             {
-                // Construct the API call to make
-                var api = await QueryClient.BuildGetAPICallAsync(this, entityInfo, apiOverride).ConfigureAwait(false);
-
-                if (api.Cancelled)
-                {
-                    ApiCancellationMessage(api);
-                    return;
-                }
-
-                var batch = PnPContext.BatchClient.EnsureBatch();
-                batch.Add(this, entityInfo, HttpMethod.Get, api.ApiCall, default, fromJsonCasting, postMappingJson, "Get");
-
-                // The domain model for Graph can have non expandable collections, hence these require an additional API call to populate. 
-                // Let's ensure these additional API calls's are included in a single batch
-                if (api.ApiCall.Type == ApiType.Graph || api.ApiCall.Type == ApiType.GraphBeta)
-                {
-                    await QueryClient.AddGraphBatchRequestsForNonExpandableCollectionsAsync(this, batch, entityInfo, expressions, fromJsonCasting, postMappingJson).ConfigureAwait(false);
-                }
-
-                await PnPContext.BatchClient.ExecuteBatch(batch).ConfigureAwait(false);
+                await QueryClient.AddGraphBatchRequestsForNonExpandableCollectionsAsync(this, batch, entityInfo, expressions, fromJsonCasting, postMappingJson).ConfigureAwait(false);
             }
+
+            await PnPContext.BatchClient.ExecuteBatch(batch).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -503,20 +501,29 @@ namespace PnP.Core.Model
         /// </summary>
         /// <param name="batch">Batch to add the request to</param>
         /// <param name="apiOverride">Override for the API call</param>
-        /// <param name="expressions">Expressions needed to create the request</param>
+        /// <param name="selectors">Expressions needed to create the request</param>
         /// <param name="fromJsonCasting">Delegate for type mapping when the request is executed</param>
         /// <param name="postMappingJson">Delegate for post mapping</param>
-        internal async virtual Task BaseBatchGetAsync(Batch batch, ApiCall apiOverride = default, Func<FromJson, object> fromJsonCasting = null, Action<string> postMappingJson = null, params Expression<Func<TModel, object>>[] expressions)
+        internal virtual async Task<IBatchSingleResult<TModel>> BaseBatchRetrieveAsync(Batch batch, ApiCall apiOverride = default, Func<FromJson, object> fromJsonCasting = null, Action<string> postMappingJson = null, params Expression<Func<TModel, object>>[] selectors)
         {
+            // DONE: Accordingly to the suggested above refactoring,
+            // I would rename this method into BaseRequest/BaseRetrieve/???
+            // to avoid a reference to the Get concept, which is something else
+            // ApiCall is structure and we always create a new type
+
+            fromJsonCasting ??= MappingHandler;
+            postMappingJson ??= PostMappingHandler;
+            batch ??= PnPContext.CurrentBatch;
+
             // Get entity information for the entity to load
-            var entityInfo = GetClassInfo(expressions);
+            var entityInfo = GetClassInfo(selectors);
             // Construct the API call to make
-            var api = await QueryClient.BuildGetAPICallAsync(this, entityInfo, apiOverride).ConfigureAwait(false);
+            var api = await QueryClient.BuildGetAPICallAsync(this, entityInfo, apiOverride, loadPages: true).ConfigureAwait(false);
 
             if (api.Cancelled)
             {
                 ApiCancellationMessage(api);
-                return;
+                return BatchSingleResult<TModel>.None;
             }
 
             // Also try to build the rest equivalent, this will be used in case we encounter mixed rest/graph batches
@@ -525,17 +532,19 @@ namespace PnP.Core.Model
             if ((api.ApiCall.Type == ApiType.Graph || api.ApiCall.Type == ApiType.GraphBeta) && !string.IsNullOrEmpty(entityInfo.SharePointType))
             {
                 // Try to get the API call, but this time using rest
-                apiRestBackup = await QueryClient.BuildGetAPICallAsync(this, entityInfo, apiOverride, true).ConfigureAwait(false);
+                apiRestBackup = await QueryClient.BuildGetAPICallAsync(this, entityInfo, apiOverride, true, loadPages: true).ConfigureAwait(false);
             }
 
-            batch.Add(this, entityInfo, HttpMethod.Get, api.ApiCall, apiRestBackup.ApiCall, fromJsonCasting, postMappingJson, "GetBatch");
+            Guid batchRequestId = batch.Add(this, entityInfo, HttpMethod.Get, api.ApiCall, apiRestBackup.ApiCall, fromJsonCasting, postMappingJson, "GetBatch");
 
             // The domain model for Graph can have non expandable collections, hence these require an additional API call to populate. 
             // Let's ensure these additional API calls's are included in a single batch
             if (api.ApiCall.Type == ApiType.Graph || api.ApiCall.Type == ApiType.GraphBeta)
             {
-                await QueryClient.AddGraphBatchRequestsForNonExpandableCollectionsAsync(this, batch, entityInfo, expressions, fromJsonCasting, postMappingJson).ConfigureAwait(false);
+                await QueryClient.AddGraphBatchRequestsForNonExpandableCollectionsAsync(this, batch, entityInfo, selectors, fromJsonCasting, postMappingJson).ConfigureAwait(false);
             }
+
+            return new BatchSingleResult<TModel>(batch, batchRequestId);
         }
 
         private void ApiCancellationMessage(ApiCallRequest api)
@@ -566,6 +575,7 @@ namespace PnP.Core.Model
         {
             // No default logic, needs to be implemented in the actual model class by overriding this method
         }
+
         #endregion
 
         #region Add
@@ -581,9 +591,12 @@ namespace PnP.Core.Model
         /// <param name="postApiCall">Api call to execute</param>
         /// <param name="fromJsonCasting">Delegate for type mapping when the request is executed</param>
         /// <param name="postMappingJson">Delegate for post mapping</param>
-        internal async virtual Task BaseBatchAddAsync(ApiCall postApiCall, Func<FromJson, object> fromJsonCasting = null, Action<string> postMappingJson = null)
+        internal virtual Task BaseAddBatchAsync(ApiCall postApiCall, Func<FromJson, object> fromJsonCasting = null, Action<string> postMappingJson = null)
         {
-            await BaseBatchAddAsync(PnPContext.CurrentBatch, postApiCall, fromJsonCasting, postMappingJson).ConfigureAwait(false);
+            // TODO: Can we consolidate this method with the next one, using the batch argument
+            // as an optional one with a default in the inner logic?
+
+            return BaseAddBatchAsync(PnPContext.CurrentBatch, postApiCall, fromJsonCasting, postMappingJson);
         }
 
         /// <summary>
@@ -593,7 +606,7 @@ namespace PnP.Core.Model
         /// <param name="postApiCall">Api call to execute</param>
         /// <param name="fromJsonCasting">Delegate for type mapping when the request is executed</param>
         /// <param name="postMappingJson">Delegate for post mapping</param>
-        internal async virtual Task BaseBatchAddAsync(Batch batch, ApiCall postApiCall, Func<FromJson, object> fromJsonCasting = null, Action<string> postMappingJson = null)
+        internal virtual async Task BaseAddBatchAsync(Batch batch, ApiCall postApiCall, Func<FromJson, object> fromJsonCasting = null, Action<string> postMappingJson = null)
         {
             var parent = TokenHandler.GetParentDataModel(this);
 
@@ -693,9 +706,11 @@ namespace PnP.Core.Model
         /// </summary>
         /// <param name="fromJsonCasting">Delegate for type mapping when the request is executed</param>
         /// <param name="postMappingJson">Delegate for post mapping</param>
-        internal async virtual Task BaseBatchUpdateAsync(Func<FromJson, object> fromJsonCasting = null, Action<string> postMappingJson = null)
+        internal virtual Task BaseUpdateBatchAsync(Func<FromJson, object> fromJsonCasting = null, Action<string> postMappingJson = null)
         {
-            await BaseBatchUpdateAsync(PnPContext.CurrentBatch, fromJsonCasting, postMappingJson).ConfigureAwait(false);
+            // TODO: Can we consolidate this one with the next one?
+
+            return BaseBatchUpdateAsync(PnPContext.CurrentBatch, fromJsonCasting, postMappingJson);
         }
 
         /// <summary>
@@ -704,7 +719,7 @@ namespace PnP.Core.Model
         /// <param name="batch">Batch to add the request to</param>
         /// <param name="fromJsonCasting">Delegate for type mapping when the request is executed</param>
         /// <param name="postMappingJson">Delegate for post mapping</param>
-        internal async virtual Task BaseBatchUpdateAsync(Batch batch, Func<FromJson, object> fromJsonCasting = null, Action<string> postMappingJson = null)
+        internal virtual async Task BaseBatchUpdateAsync(Batch batch, Func<FromJson, object> fromJsonCasting = null, Action<string> postMappingJson = null)
         {
             // Get entity information for the entity to update
             var entityInfo = GetClassInfo();
@@ -743,6 +758,7 @@ namespace PnP.Core.Model
             batch.Add(this, entityInfo, new HttpMethod("PATCH"), api.ApiCall, default, fromJsonCasting, postMappingJson, "Update");
             await PnPContext.BatchClient.ExecuteBatch(batch).ConfigureAwait(false);
         }
+
         #endregion
 
         #region Delete
@@ -758,9 +774,11 @@ namespace PnP.Core.Model
         /// </summary>
         /// <param name="fromJsonCasting">Delegate for type mapping when the request is executed</param>
         /// <param name="postMappingJson">Delegate for post mapping</param>
-        internal async virtual void BaseBatchDeleteAsync(Func<FromJson, object> fromJsonCasting = null, Action<string> postMappingJson = null)
+        internal virtual Task BaseDeleteBatchAsync(Func<FromJson, object> fromJsonCasting = null, Action<string> postMappingJson = null)
         {
-            await BaseBatchDeleteAsync(PnPContext.CurrentBatch, fromJsonCasting, postMappingJson).ConfigureAwait(false);
+            // TODO: Can we consolidate this one with the next one?
+
+            return BaseDeleteBatchAsync(PnPContext.CurrentBatch, fromJsonCasting, postMappingJson);
         }
 
         /// <summary>
@@ -769,7 +787,7 @@ namespace PnP.Core.Model
         /// <param name="batch">Batch to add the request to</param>
         /// <param name="fromJsonCasting">Delegate for type mapping when the request is executed</param>
         /// <param name="postMappingJson">Delegate for post mapping</param>
-        internal async virtual Task BaseBatchDeleteAsync(Batch batch, Func<FromJson, object> fromJsonCasting = null, Action<string> postMappingJson = null)
+        internal virtual async Task BaseDeleteBatchAsync(Batch batch, Func<FromJson, object> fromJsonCasting = null, Action<string> postMappingJson = null)
         {
             // Get entity information for the entity to update
             var entityInfo = GetClassInfo();
@@ -810,18 +828,22 @@ namespace PnP.Core.Model
             batch.Add(this, entityInfo, HttpMethod.Delete, api.ApiCall, default, fromJsonCasting, postMappingJson, "Delete");
             await PnPContext.BatchClient.ExecuteBatch(batch).ConfigureAwait(false);
         }
+
         #endregion
 
         #region Generic
+
         /// <summary>
         /// Adds a request to the given batch
         /// </summary>
         /// <param name="apiCall">Api call to execute</param>
         /// <param name="method"><see cref="HttpMethod"/> to use for this request</param>
         /// <param name="operationName">Name of the operation, used for telemetry purposes</param>
-        internal async Task RequestBatchAsync(ApiCall apiCall, HttpMethod method, [CallerMemberName] string operationName = null)
+        internal Task RequestBatchAsync(ApiCall apiCall, HttpMethod method, [CallerMemberName] string operationName = null)
         {
-            await RequestBatchAsync(PnPContext.CurrentBatch, apiCall, method, operationName).ConfigureAwait(false);
+            // TODO: Can we consolidate this one with the next one?
+
+            return RequestBatchAsync(PnPContext.CurrentBatch, apiCall, method, operationName);
         }
 
         /// <summary>
@@ -833,6 +855,8 @@ namespace PnP.Core.Model
         /// <param name="operationName">Name of the operation, used for telemetry purposes</param>
         internal async Task RequestBatchAsync(Batch batch, ApiCall apiCall, HttpMethod method, [CallerMemberName] string operationName = null)
         {
+            // TODO: Can we consolidate this one with the previous one?
+
             // Get entity information for the entity to update
             var entityInfo = GetClassInfo();
 
@@ -896,9 +920,11 @@ namespace PnP.Core.Model
         /// <param name="apiCall">Api call to execute</param>
         /// <param name="method"><see cref="HttpMethod"/> to use for this request</param>
         /// <param name="operationName">Name of the operation, used for telemetry purposes</param>
-        internal async Task RawRequestBatchAsync(ApiCall apiCall, HttpMethod method, [CallerMemberName] string operationName = null)
+        internal Task<BatchRequest> RawRequestBatchAsync(ApiCall apiCall, HttpMethod method, [CallerMemberName] string operationName = null)
         {
-            await RawRequestBatchAsync(PnPContext.CurrentBatch, apiCall, method, operationName).ConfigureAwait(false);
+            // TODO: Can we consolidate this one with the next one?
+
+            return RawRequestBatchAsync(PnPContext.CurrentBatch, apiCall, method, operationName);
         }
 
         /// <summary>
@@ -908,8 +934,10 @@ namespace PnP.Core.Model
         /// <param name="apiCall">Api call to execute</param>
         /// <param name="method"><see cref="HttpMethod"/> to use for this request</param>
         /// <param name="operationName">Name of the operation, used for telemetry purposes</param>
-        internal async Task RawRequestBatchAsync(Batch batch, ApiCall apiCall, HttpMethod method, [CallerMemberName] string operationName = null)
+        internal async Task<BatchRequest> RawRequestBatchAsync(Batch batch, ApiCall apiCall, HttpMethod method, [CallerMemberName] string operationName = null)
         {
+            // TODO: Can we consolidate this one with the previous one?
+
             // Mark request as raw
             apiCall.RawRequest = true;
 
@@ -922,7 +950,7 @@ namespace PnP.Core.Model
             // Ensure there's no Graph beta endpoint being used when that was not allowed
             if (!CanUseGraphBetaForRequest(apiCall, entityInfo))
             {
-                return;
+                return null;
             }
 
             // Ensure token replacement is done
@@ -936,7 +964,8 @@ namespace PnP.Core.Model
             }
 
             // Add the request to the batch
-            batch.Add(this, entityInfo, method, apiCall, default, fromJsonCasting: MappingHandler, postMappingJson: PostMappingHandler, CleanupOperationName(operationName));
+            Guid batchRequestId = batch.Add(this, entityInfo, method, apiCall, default, fromJsonCasting: MappingHandler, postMappingJson: PostMappingHandler, CleanupOperationName(operationName));
+            return batch.GetRequest(batchRequestId);
         }
 
         /// <summary>
@@ -1009,6 +1038,7 @@ namespace PnP.Core.Model
                 return true;
             }
         }
+
         #endregion
 
         #region Metadata handling
@@ -1042,7 +1072,8 @@ namespace PnP.Core.Model
         /// <returns>Entity model class describing this model instance</returns>
         internal EntityInfo GetClassInfo(params Expression<Func<TModel, object>>[] expressions)
         {
-            return EntityManager.GetClassInfo(GetType(), this, expressions);
+            // TODO: Do we really need this method? Can't we just use EntityManager?
+            return EntityManager.GetClassInfo(GetType(), this, expressions: expressions);
         }
 
         #endregion
@@ -1067,9 +1098,10 @@ namespace PnP.Core.Model
         #endregion
 
         #region Implementation of Navigation property instantiation check
+
         private readonly Dictionary<string, bool> navigationPropertyInstantiated = new Dictionary<string, bool>();
 
-        internal protected bool NavigationPropertyInstantiated([CallerMemberName] string propertyName = "")
+        protected internal bool NavigationPropertyInstantiated([CallerMemberName] string propertyName = "")
         {
             if (navigationPropertyInstantiated.ContainsKey(propertyName))
             {
@@ -1079,7 +1111,7 @@ namespace PnP.Core.Model
             return false;
         }
 
-        internal protected void InstantiateNavigationProperty([CallerMemberName] string propertyName = "")
+        protected internal void InstantiateNavigationProperty([CallerMemberName] string propertyName = "")
         {
             if (navigationPropertyInstantiated.ContainsKey(propertyName))
             {
@@ -1091,11 +1123,11 @@ namespace PnP.Core.Model
             }
         }
 
-        internal protected T GetModelValue<T>([CallerMemberName] string propertyName = "")
+        protected internal T GetModelValue<T>([CallerMemberName] string propertyName = "")
         {
             if (!NavigationPropertyInstantiated(propertyName))
             {
-                var propertyValue = EntityManager.GetEntityConcreteInstance<T>(typeof(T), this);
+                var propertyValue = EntityManager.GetEntityConcreteInstance(typeof(T), this);
                 (propertyValue as IDataModelWithContext).PnPContext = PnPContext;
 
                 SetValue(propertyValue, propertyName);
@@ -1104,17 +1136,17 @@ namespace PnP.Core.Model
             return GetValue<T>(propertyName);
         }
 
-        internal protected void SetModelValue<T>(T value, [CallerMemberName] string propertyName = "")
+        protected internal void SetModelValue<T>(T value, [CallerMemberName] string propertyName = "")
         {
             InstantiateNavigationProperty(propertyName);
             SetValue(value, propertyName);
         }
 
-        internal protected T GetModelCollectionValue<T>([CallerMemberName] string propertyName = "")
+        protected internal T GetModelCollectionValue<T>([CallerMemberName] string propertyName = "")
         {
             if (!HasValue(propertyName))
             {
-                var collection = EntityManager.GetEntityCollectionConcreteInstance<T>(typeof(T), PnPContext, this, propertyName);
+                var collection = EntityManager.GetEntityCollectionConcreteInstance(typeof(T), PnPContext, this, propertyName);
                 SetValue(collection, propertyName);
             }
             return GetValue<T>(propertyName);
@@ -1153,25 +1185,11 @@ namespace PnP.Core.Model
                 return null;
             }
         }
-        #endregion
 
-        #region LoadProperties
-        /// <summary>
-        /// Enables using the .LoadProperties lambda expression syntax on a model
-        /// </summary>
-        /// <param name="expressions">Expression</param>
-        /// <returns>Null...return value is not needed</returns>
-#pragma warning disable CA1822 // Mark members as static
-#pragma warning disable CA1801 // Review unused parameters
-        public IQueryable<TModel> LoadProperties(params Expression<Func<TModel, object>>[] expressions)
-#pragma warning restore CA1801 // Review unused parameters
-#pragma warning restore CA1822 // Mark members as static
-        {
-            return null;
-        }
         #endregion
 
         #region Check properties logic
+
         public bool IsPropertyAvailable(Expression<Func<TModel, object>> expression)
         {
             if (expression == null)
@@ -1216,7 +1234,7 @@ namespace PnP.Core.Model
 
             if (dirty)
             {
-                await GetAsync(default, expressionsToLoad.ToArray()).ConfigureAwait(false);
+                await BaseRetrieveAsync(expressions: expressionsToLoad.ToArray()).ConfigureAwait(false);
             }
         }
 
@@ -1237,17 +1255,17 @@ namespace PnP.Core.Model
                 {
                     // Future use? (includes)
                     var body = (MethodCallExpression)expression.Body;
-                    if (body.Method.Name == "LoadProperties")
+                    if (body.Method.Name == "QueryProperties")
                     {
-                        if (body.Arguments.Count != 1)
+                        if (body.Arguments.Count != 2)
                         {
                             throw new Exception(PnPCoreResources.Exception_InvalidArgumentsNumber);
                         }
 
                         // Parse the expressions and get the relevant entity information
-                        var entityInfo = EntityManager.GetClassInfo(model.GetType(), (model as BaseDataModel<TModel>), expressions);
+                        var entityInfo = EntityManager.GetClassInfo(model.GetType(), (model as BaseDataModel<TModel>), expressions: expressions);
 
-                        string fieldToLoad = ((expression.Body as MethodCallExpression).Object as MemberExpression).Member.Name;
+                        string fieldToLoad = ((expression.Body as MethodCallExpression).Arguments[0] as MemberExpression).Member.Name;
 
                         var collectionToCheck = entityInfo.Fields.FirstOrDefault(p => p.Name == fieldToLoad);
                         if (collectionToCheck != null)
@@ -1289,7 +1307,7 @@ namespace PnP.Core.Model
                     else
                     {
                         throw new ClientException(ErrorType.PropertyNotLoaded,
-                            PnPCoreResources.Exception_PropertyNotLoaded_OnlyLoadPropertiesSupported);
+                            PnPCoreResources.Exception_PropertyNotLoaded_OnlyQueryPropertiesSupported);
                     }
                 }
                 else if (!model.IsPropertyAvailable(expression))
@@ -1340,6 +1358,7 @@ namespace PnP.Core.Model
 
             return true;
         }
+
         #endregion
     }
 }

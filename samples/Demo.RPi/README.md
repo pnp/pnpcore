@@ -30,7 +30,7 @@ wget https://dotnet.microsoft.com/download/dotnet-core/scripts/v1/dotnet-install
 chmod +x dotnet-install.sh
 
 # Ignore warnings
-./dotnet-install.sh --channel LTS --architecture arm --install-dir ~/cli
+./dotnet-install.sh --channel Current --architecture arm --install-dir ~/cli
 
 # Allows running dotnet anywhere - thanks to 
 # this article https://edi.wang/post/2019/9/29/setup-net-core-30-runtime-and-sdk-on-raspberry-pi-4
@@ -41,31 +41,9 @@ export PATH=$PATH:$HOME/cli
 
 ## Running the app
 
-### Register and configure an AAD app
-
-In order for the user to authenticate on the App, A new app registration should be created on Azure Portal
-
-- Go to [Azure Active Directory Portal](https://aad.portal.azure.com)
-
-- In App registrations, click __New registration__
-
-- Enter a name for your new app, make sure *Accounts in this organizational directory only* is selected
-
-- Under __Implicit grant__ section, check __ID tokens__
-
-- Go to __API permissions__ section , click __Add a permission__
--- Select __Azure Active Directory Graph__ > __Delegated permissions__ > select __Directory.Read.All__
--- Select __Azure Active Directory Graph__ > __Delegated permissions__ > select __User.Read__
-
-- Click __Grand admin consent for {tenant}__
-
-- Change __Default client type__ to __Treat application as public client__ and hit Save 
-
-- From __Overview__,
--- copy the value of __Directory (tenant) ID__
--- copy the value of __Application (client) ID__
-
 ### Configure your application
+
+Go to GitHub and clone the repoitory in a local folder
 
 Update **appsettings.json** with the connection details to a demo SharePoint site:
 

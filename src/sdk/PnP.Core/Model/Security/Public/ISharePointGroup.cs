@@ -7,7 +7,7 @@ namespace PnP.Core.Model.Security
     /// Public interface to define a SharePoint Group
     /// </summary>
     [ConcreteType(typeof(SharePointGroup))]
-    public interface ISharePointGroup : IDataModel<ISharePointGroup>, IDataModelGet<ISharePointGroup>, IDataModelUpdate, IDataModelDelete, ISharePointPrincipal, IQueryableDataModel
+    public interface ISharePointGroup : IDataModel<ISharePointGroup>, IDataModelGet<ISharePointGroup>, IDataModelLoad<ISharePointGroup>, IDataModelUpdate, IDataModelDelete, ISharePointPrincipal, IQueryableDataModel
     {
         /// <summary>
         /// Allow members to edit the group members

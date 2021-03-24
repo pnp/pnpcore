@@ -17,7 +17,7 @@ var myList = await context.Web.Lists.GetByServerRelativeUrlAsync($"{context.Uri.
 var myList = await context.Web.Lists.GetByIdAsync(new Guid("d50ec969-cb27-4a49-839f-3c25d1d607d5"), p => p.Views);
 
 // Do something with the views
-foreach(var view in myList.Views)
+foreach(var view in myList.Views.AsRequested())
 {
     // Do something
 }
@@ -49,7 +49,7 @@ To update a view you set the view properties you need and then call UpdateAsync.
 var myList = await context.Web.Lists.GetByTitleAsync("Documents", p => p.Views);
 
 // Get the view to update
-var viewToUpdate = myList.Views.FirstOrDefault(p => p.Title == "All Documents");
+var viewToUpdate = myList.Views.AsRequested().FirstOrDefault(p => p.Title == "All Documents");
 
 // Update the view
 viewToUpdate.Title = "All";
@@ -65,7 +65,7 @@ Deleting a view can be done using the regular Delete methods.
 var myList = await context.Web.Lists.GetByTitleAsync("Documents", p => p.Views);
 
 // Get the view to update
-var viewToDelete = myList.Views.FirstOrDefault(p => p.Title == "View to delete");
+var viewToDelete = myList.Views.AsRequested().FirstOrDefault(p => p.Title == "View to delete");
 
 await viewToDelete.DeleteAsync();
 ```

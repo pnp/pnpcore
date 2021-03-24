@@ -27,15 +27,15 @@ namespace PnP.Core.QueryModel
         protected override Expression VisitMethodCall(MethodCallExpression m)
         {
             if (m.Method.DeclaringType == typeof(Queryable) ||
-                m.Method.DeclaringType == typeof(BaseDataModelExtensions))
+                m.Method.DeclaringType == typeof(QueryableExtensions))
             {
                 switch (m.Method.Name)
                 {
                     case "Select":
                         VisitSelect(m);
                         return m;
-                    case "Load":
-                        VisitLoad(m);
+                    case nameof(QueryableExtensions.QueryProperties):
+                        VisitQueryProperties(m);
                         return m;
                     case "OrderBy":
                     case "ThenBy":
@@ -48,6 +48,7 @@ namespace PnP.Core.QueryModel
                     case "Where":
                         VisitWhere(m);
                         return m;
+                    case "First":
                     case "FirstOrDefault":
                         VisitFirstOrDefault(m);
                         return m;
@@ -56,9 +57,6 @@ namespace PnP.Core.QueryModel
                         return m;
                     case "Skip":
                         VisitSkip(m);
-                        return m;
-                    case "Include":
-                        VisitInclude(m);
                         return m;
                 }
             }
@@ -85,30 +83,38 @@ namespace PnP.Core.QueryModel
             }
         }
 
-        private void VisitLoad(MethodCallExpression m)
+        private void VisitQueryProperties(MethodCallExpression m)
         {
             Visit(m.Arguments[0]);
-            var propertySelector = m.Arguments[1] as UnaryExpression;
-            if (propertySelector != null)
+            if (m.Arguments[1] is UnaryExpression propertySelector)
             {
-                var lambda = propertySelector.Operand as LambdaExpression;
-                if (lambda != null)
+                if (propertySelector.Operand is Expression<Func<TModel, object>> lambda)
                 {
-                    switch (lambda.Body)
+                    query.Fields.Add(lambda);
+                }
+                else if (propertySelector.Operand is Expression<Func<TModel, object>>[] lambdas)
+                {
+                    query.Fields.AddRange(lambdas);
+                }
+            }
+            else if (m.Arguments[1] is NewArrayExpression arrayExpression)
+            {
+                foreach (var expression in arrayExpression.Expressions)
+                {
+                    if (expression is UnaryExpression expressionPropertySelector)
                     {
-                        case UnaryExpression unary:
-                            var unaryMember = unary.Operand as MemberExpression;
-                            if (unaryMember != null)
-                            {
-                                query.Select.Add(unaryMember.Member.Name);
-                            }
-                            break;
-                        case MemberExpression member:
-                            query.Select.Add(member.Member.Name);
-                            break;
+                        if (expressionPropertySelector.Operand is Expression<Func<TModel, object>> lambda)
+                        {
+                            query.Fields.Add(lambda);
+                        }
+                        else if (expressionPropertySelector.Operand is Expression<Func<TModel, object>>[] lambdas)
+                        {
+                            query.Fields.AddRange(lambdas);
+                        }
                     }
                 }
             }
+            
         }
 
         private void VisitOrderBy(MethodCallExpression m, bool ascending = true)
@@ -233,32 +239,6 @@ namespace PnP.Core.QueryModel
         {
             Visit(m.Arguments[0]);
             query.Skip = GetConstantValue<int>(m.Arguments[1]);
-        }
-
-        private void VisitInclude(MethodCallExpression m)
-        {
-            Visit(m.Arguments[0]);
-            var propertySelector = m.Arguments[1] as UnaryExpression;
-            if (propertySelector != null)
-            {
-                var lambda = propertySelector.Operand as LambdaExpression;
-                if (lambda != null)
-                {
-                    switch (lambda.Body)
-                    {
-                        case UnaryExpression unary:
-                            var unaryMember = unary.Operand as MemberExpression;
-                            if (unaryMember != null)
-                            {
-                                query.Expand.Add(unaryMember.Member.Name);
-                            }
-                            break;
-                        case MemberExpression member:
-                            query.Expand.Add(member.Member.Name);
-                            break;
-                    }
-                }
-            }
         }
 
         private void AddFilter(BinaryExpression expression)

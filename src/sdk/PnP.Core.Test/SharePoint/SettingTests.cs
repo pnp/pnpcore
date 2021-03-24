@@ -4,6 +4,7 @@ using PnP.Core.Services;
 using PnP.Core.Test.Utilities;
 using System;
 using System.Linq;
+using PnP.Core.QueryModel;
 using System.Threading.Tasks;
 
 namespace PnP.Core.Test.SharePoint
@@ -78,7 +79,7 @@ namespace PnP.Core.Test.SharePoint
 
                 var id = new Guid("fa6a1bcc-fb4b-446b-8460-f4de5f7411d5"); // SharePoint Viewers - Web Scoped
 
-                if (web.Features.Any(o => o.DefinitionId == id))
+                if (web.Features.AsRequested().Any(o => o.DefinitionId == id))
                 {
                     // Ensure disabled
                     web.Features.Disable(id);
@@ -94,7 +95,7 @@ namespace PnP.Core.Test.SharePoint
                 await web.Features.DisableBatchAsync(id);
                 await context.ExecuteAsync(); //Trigger Batch
 
-                Assert.IsTrue(!web.Features.Any(o => o.DefinitionId == id));
+                Assert.IsTrue(!web.Features.AsRequested().Any(o => o.DefinitionId == id));
             }
         }
 
@@ -108,7 +109,7 @@ namespace PnP.Core.Test.SharePoint
 
                 var id = new Guid("fa6a1bcc-fb4b-446b-8460-f4de5f7411d5"); // SharePoint Viewers - Web Scoped
 
-                if (web.Features.Any(o => o.DefinitionId == id))
+                if (web.Features.AsRequested().Any(o => o.DefinitionId == id))
                 {
                     // Ensure disabled
                     web.Features.Disable(id);
@@ -124,7 +125,7 @@ namespace PnP.Core.Test.SharePoint
                 web.Features.DisableBatch(id);
                 await context.ExecuteAsync(); //Trigger Batch
 
-                Assert.IsTrue(!web.Features.Any(o => o.DefinitionId == id));
+                Assert.IsTrue(!web.Features.AsRequested().Any(o => o.DefinitionId == id));
             }
         }
 
@@ -138,7 +139,7 @@ namespace PnP.Core.Test.SharePoint
 
                 var id = new Guid("fa6a1bcc-fb4b-446b-8460-f4de5f7411d5"); // SharePoint Viewers - Web Scoped
 
-                if (web.Features.Any(o => o.DefinitionId == id))
+                if (web.Features.AsRequested().Any(o => o.DefinitionId == id))
                 {
                     // Ensure disabled
                     web.Features.Disable(id);
@@ -156,7 +157,7 @@ namespace PnP.Core.Test.SharePoint
                 web.Features.DisableBatch(newBatch, id);
                 await context.ExecuteAsync(); //Trigger Batch
 
-                Assert.IsTrue(!web.Features.Any(o => o.DefinitionId == id));
+                Assert.IsTrue(!web.Features.AsRequested().Any(o => o.DefinitionId == id));
             }
         }
 
@@ -191,7 +192,7 @@ namespace PnP.Core.Test.SharePoint
 
                 var id = new Guid("fa6a1bcc-fb4b-446b-8460-f4de5f7411d5"); // SharePoint Viewers - Web Scoped
 
-                if (web.Features.Any(o => o.DefinitionId == id))
+                if (web.Features.AsRequested().Any(o => o.DefinitionId == id))
                 {
                     // Already Activated
                 }
@@ -252,7 +253,7 @@ namespace PnP.Core.Test.SharePoint
 
                 web.Features.Disable(id);
 
-                Assert.IsTrue(!web.Features.Any(o => o.DefinitionId == id));
+                Assert.IsTrue(!web.Features.AsRequested().Any(o => o.DefinitionId == id));
             }
         }
 
@@ -272,7 +273,7 @@ namespace PnP.Core.Test.SharePoint
 
                 await web.Features.DisableAsync(id);
 
-                Assert.IsTrue(!web.Features.Any(o => o.DefinitionId == id));
+                Assert.IsTrue(!web.Features.AsRequested().Any(o => o.DefinitionId == id));
             }
         }
 
@@ -311,7 +312,7 @@ namespace PnP.Core.Test.SharePoint
 
                 await site.Features.DisableAsync(id);
 
-                Assert.IsTrue(!site.Features.Any(o => o.DefinitionId == id));
+                Assert.IsTrue(!site.Features.AsRequested().Any(o => o.DefinitionId == id));
             }
         }
 

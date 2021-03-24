@@ -1,5 +1,7 @@
 - name: SDK basics
   items:
+  - name: Upgrade to beta3
+    href: upgrade-to-beta3.md
   - name: Getting started
     href: readme.md
   - name: Get data
@@ -90,3 +92,7 @@
     href: teams-channel-chat.md
   - name: Archiving
     href: teams-archiving.md
+- name: SharePoint Syntex
+  items:
+  - name: Overview
+    href: syntex-intro.md

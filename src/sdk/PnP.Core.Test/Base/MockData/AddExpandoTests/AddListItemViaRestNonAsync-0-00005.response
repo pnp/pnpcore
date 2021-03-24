@@ -1,9 +1,10 @@
---batchresponse_61ceba91-0dc8-40ce-a22d-e56f461b6d1e
+--batchresponse_0843b61c-5f91-4de1-b773-da5100f48334
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+ETAG: "1"
 
-{"d":{"AddValidateUpdateItemUsingPath":{"__metadata":{"type":"Collection(SP.ListItemFormUpdateValue)"},"results":[{"ErrorCode":0,"ErrorMessage":null,"FieldName":"Title","FieldValue":"Yes","HasException":false,"ItemId":0},{"ErrorCode":0,"ErrorMessage":null,"FieldName":"Id","FieldValue":"1","HasException":false,"ItemId":0}]}}}
---batchresponse_61ceba91-0dc8-40ce-a22d-e56f461b6d1e--
+{"d":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'41b2cb79-d13b-43a4-8897-56aa2937c4c1')","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'41b2cb79-d13b-43a4-8897-56aa2937c4c1')","etag":"\"1\"","type":"SP.List"},"Items":{"results":[]},"Id":"41b2cb79-d13b-43a4-8897-56aa2937c4c1"}}
+--batchresponse_0843b61c-5f91-4de1-b773-da5100f48334--

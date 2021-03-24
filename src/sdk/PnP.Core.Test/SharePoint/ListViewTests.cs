@@ -1,6 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PnP.Core.Model.SharePoint;
 using PnP.Core.Test.Utilities;
+using PnP.Core.QueryModel;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -24,7 +25,7 @@ namespace PnP.Core.Test.SharePoint
             {
                 var list = await context.Web.Lists.GetByTitleAsync("Documents", p => p.Title, p => p.ListExperience, p => p.Views);
                 Assert.IsNotNull(list.Views);
-                Assert.IsTrue(list.Views.Count() > 0);
+                Assert.IsTrue(list.Views.Length > 0);
             }
         }
 
@@ -256,7 +257,7 @@ namespace PnP.Core.Test.SharePoint
                 Assert.AreEqual(viewTitle, result.Title);
 
                 var list2 = await context.Web.Lists.GetByTitleAsync("Documents", p => p.Title, p => p.Views);
-                var newView = list2.Views.FirstOrDefault(o=>o.Title == viewTitle);
+                var newView = list2.Views.AsRequested().FirstOrDefault(o=>o.Title == viewTitle);
                 Assert.IsNotNull(newView);
                 Assert.IsTrue(newView.ViewType2 == ViewType2.COMPACTLIST);
 

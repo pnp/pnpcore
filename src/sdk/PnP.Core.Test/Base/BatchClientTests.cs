@@ -7,6 +7,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
+using PnP.Core.Model;
+using PnP.Core.QueryModel;
 
 namespace PnP.Core.Test.Base
 {
@@ -43,7 +45,7 @@ namespace PnP.Core.Test.Base
             {
                 var batch = context.BatchClient.EnsureBatch();
 
-                await context.Web.GetBatchAsync(batch);
+                await context.Web.LoadBatchAsync(batch);
 
                 Assert.IsFalse(batch.Executed);
                 Assert.IsTrue(context.BatchClient.ContainsBatch(batch.Id));
@@ -53,7 +55,7 @@ namespace PnP.Core.Test.Base
                 Assert.IsTrue(batch.Executed);
 
                 // Trigger a second call into the batch client, this should have removed the previous batch
-                await context.Web.GetAsync();
+                await context.Web.LoadAsync();
 
                 Assert.IsFalse(context.BatchClient.ContainsBatch(batch.Id));
             }
@@ -65,7 +67,7 @@ namespace PnP.Core.Test.Base
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                await context.Web.GetBatchAsync();
+                await context.Web.LoadBatchAsync();
 
                 Assert.IsFalse(context.CurrentBatch.Executed);
                 var implicitBatchId = context.CurrentBatch.Id;
@@ -78,49 +80,9 @@ namespace PnP.Core.Test.Base
                 Assert.IsTrue(context.CurrentBatch.Id != implicitBatchId);
 
                 // Trigger a second call into the batch client, this should have removed the previous batch
-                await context.Web.GetAsync();
+                await context.Web.LoadAsync();
 
                 Assert.IsFalse(context.BatchClient.ContainsBatch(implicitBatchId));
-            }
-        }
-
-        [TestMethod]
-        public async Task DedupBatchRequests()
-        {
-            //TestCommon.Instance.Mocking = false;
-            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
-            {
-                // first get, check on Lists as web is loaded by default + force REST call by adding a REST specific property
-                var web = await context.Web.GetBatchAsync(p => p.Lists, p => p.AlternateCssUrl);
-                // second get
-                var web2 = await context.Web.GetBatchAsync(p => p.Lists, p => p.AlternateCssUrl);
-                // third get
-                var web3 = await context.Web.GetBatchAsync(p => p.Lists, p => p.AlternateCssUrl);
-
-                // Grab the id of the current batch so we can later on find it back
-                Guid currentBatchId = context.CurrentBatch.Id;
-
-                // We added three requests to the the current batch
-                Assert.IsTrue(context.CurrentBatch.Requests.Count == 3);
-
-                // The model was not yet requested
-                Assert.IsFalse(web.Lists.Requested);
-                Assert.IsFalse(web2.Lists.Requested);
-                Assert.IsFalse(web3.Lists.Requested);
-
-                await context.ExecuteAsync();
-
-                // all variables should point to the same model, so all should be requested
-                Assert.IsTrue(web.Lists.Requested);
-                Assert.IsTrue(web2.Lists.Requested);
-                Assert.IsTrue(web3.Lists.Requested);
-
-                var executedBatch = context.BatchClient.GetBatchById(currentBatchId);
-                // Batch should be marked as executed
-                Assert.IsTrue(executedBatch.Executed);
-                // The 2 duplicate requests should have been removed
-                Assert.IsTrue(executedBatch.Requests.Count == 1);
-
             }
         }
 
@@ -133,9 +95,9 @@ namespace PnP.Core.Test.Base
                 if (context.GraphFirst)
                 {
                     // Get web title : this can be done using rest and graph and since we're graphfirst this 
-                    await context.Web.GetBatchAsync(p => p.Title);
+                    await context.Web.LoadBatchAsync(p => p.Title);
                     // Get the web searchscope: this will require a rest call
-                    await context.Web.GetBatchAsync(p => p.SearchScope);
+                    await context.Web.LoadBatchAsync(p => p.SearchScope);
 
                     // Grab the id of the current batch so we can later on find it back
                     Guid currentBatchId = context.CurrentBatch.Id;
@@ -172,9 +134,9 @@ namespace PnP.Core.Test.Base
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 // Graph only request (there's no option to fallback to a SharePoint REST call)
-                await context.Team.GetBatchAsync();
+                await context.Team.LoadBatchAsync();
                 // SharePoint REST request
-                await context.Web.GetBatchAsync(p => p.SearchScope, p => p.Title);
+                await context.Web.LoadBatchAsync(p => p.SearchScope, p => p.Title);
 
                 // Grab the id of the current batch so we can later on find it back
                 Guid currentBatchId = context.CurrentBatch.Id;
@@ -207,22 +169,20 @@ namespace PnP.Core.Test.Base
             {
                 context.GraphFirst = false;
 
-                var list1 = await (context.Web.Lists as ListCollection).BatchGetByTitleAsync("Site Assets", p => p.Title, p => p.NoCrawl);
-                var list1Again = await (context.Web.Lists as ListCollection).BatchGetByTitleAsync("Site Assets", p => p.Title, p => p.EnableVersioning, p => p.Items);
+                var list = await context.Web.Lists.GetByTitleAsync("Site Assets");
+                await list.LoadBatchAsync(p => p.Title, p => p.NoCrawl);
+                await list.LoadBatchAsync(p => p.Title, p => p.EnableVersioning, p => p.Items);
                 await context.ExecuteAsync();
 
-                var siteAssetsCount = context.Web.Lists.Where(p => p.Title == "Site Assets");
-
-                // The 2 individual loads should have been merged to a single loaded list
-                Assert.IsTrue(siteAssetsCount.Count() == 1);
                 // The properties from both loads should available on the first loaded model
-                Assert.IsTrue(list1.IsPropertyAvailable(p => p.Title));
-                Assert.IsTrue(list1.IsPropertyAvailable(p => p.NoCrawl));
+                Assert.IsTrue(list.IsPropertyAvailable(p => p.Title));
+                Assert.IsTrue(list.IsPropertyAvailable(p => p.NoCrawl));
 
-                Assert.IsTrue(list1.IsPropertyAvailable(p => p.EnableVersioning));
-                Assert.IsTrue(list1.IsPropertyAvailable(p => p.Items));
+                Assert.IsTrue(list.IsPropertyAvailable(p => p.EnableVersioning));
+                Assert.IsTrue(list.IsPropertyAvailable(p => p.Items));
+
                 // Site Assets should have items
-                Assert.IsTrue(list1.Items.Count() > 0);
+                Assert.IsTrue(list.Items.Length > 0);
             }
         }
 
@@ -233,14 +193,14 @@ namespace PnP.Core.Test.Base
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 // Get web title : this can be done using rest and graph and since we're graphfirst this will go via Graph
-                await context.Web.GetAsync(p => p.Title);
+                await context.Web.LoadAsync(p => p.Title);
 
                 // The batch request id should be populated
                 Guid batchRequestId = (context.Web as Web).BatchRequestId;
                 Assert.IsTrue(batchRequestId != Guid.Empty);
 
                 // Get the web searchscope: this will require a rest call and update the loaded web object
-                await context.Web.GetAsync(p => p.SearchScope);
+                await context.Web.LoadAsync(p => p.SearchScope);
 
                 // Since the web object was reloaded, the batch request must have changed
                 Assert.IsTrue((context.Web as Web).BatchRequestId != Guid.Empty);
@@ -337,8 +297,8 @@ namespace PnP.Core.Test.Base
                     var list2 = context2.Web.Lists.GetByTitle(listTitle);
                     if (list2 != null)
                     {
-                        var result = await list2.GetListDataAsStreamAsync(new RenderListDataOptions() { ViewXml = "<View><ViewFields><FieldRef Name='Title' /></ViewFields></View>", RenderOptions = RenderListDataOptionsFlags.ListData });
-                        Assert.IsTrue(list2.Items.Count() == 150);
+                        var result = await list2.LoadListDataAsStreamAsync(new RenderListDataOptions() { ViewXml = "<View><ViewFields><FieldRef Name='Title' /></ViewFields></View>", RenderOptions = RenderListDataOptionsFlags.ListData });
+                        Assert.IsTrue(list2.Items.Length == 150);
                     }
                 }
 
@@ -415,20 +375,23 @@ namespace PnP.Core.Test.Base
                     Interactive = true
                 };
 
-                bool exceptionThrown = false;
-                try
+                await Assert.ThrowsExceptionAsync<ClientException>(async () =>
                 {
-                    var apiResponse = await (context.Web as Web).RequestAsync(api, HttpMethod.Get);
-                }
-                catch (Exception ex)
-                {
-                    if (ex is ClientException && (ex as ClientException).Error.Type == ErrorType.UnresolvedTokens)
+                    try
                     {
-                        exceptionThrown = true;
+                        var apiResponse = await (context.Web as Web).RequestAsync(api, HttpMethod.Get);
                     }
-                }
-
-                Assert.IsTrue(exceptionThrown);
+                    catch (ClientException ex) when (ex.Error.Type == ErrorType.UnresolvedTokens)
+                    {
+#pragma warning disable CA2200 // Rethrow to preserve stack details
+                        throw ex;
+#pragma warning restore CA2200 // Rethrow to preserve stack details
+                    }
+                    catch
+                    {
+                        throw new ApplicationException("Invalid exception");
+                    }
+                });
             }
         }
 
@@ -463,34 +426,46 @@ namespace PnP.Core.Test.Base
                 var web = await context.Web.GetAsync(p => p.Lists);
 
                 string listTitle = "InteractivePostRequest";
-                var myList = web.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
+                var myList = web.Lists.AsRequested().FirstOrDefault(p => p.Title == listTitle);
 
                 if (myList != null)
                 {
                     Assert.Inconclusive("Test data set should be setup to not have the list available.");
                 }
 
-                var listCount = web.Lists.Count();
-
-                // Add a new list via interactive request
-                string body = $"{{\"__metadata\":{{\"type\":\"SP.List\"}},\"BaseTemplate\":100,\"Title\":\"{listTitle}\"}}";
-
-                var api = new ApiCall($"_api/web/lists", ApiType.SPORest, body)
+                try
                 {
-                    Interactive = true
-                };
+                    var listCount = web.Lists.Length;
 
-                var apiResponse = await (context.Web as Web).RequestAsync(api, HttpMethod.Post);
+                    // Add a new list via interactive request
+                    string body = $"{{\"__metadata\":{{\"type\":\"SP.List\"}},\"BaseTemplate\":100,\"Title\":\"{listTitle}\"}}";
 
-                Assert.IsTrue(apiResponse.Executed);
-                Assert.IsTrue((int)apiResponse.Requests.First().Value.ResponseHttpStatusCode < 400);
+                    var api = new ApiCall($"_api/web/lists", ApiType.SPORest, body)
+                    {
+                        Interactive = true
+                    };
 
-                // Load the list again
-                await context.Web.GetAsync(p => p.Lists);
+                    var apiResponse = await (context.Web as Web).RequestAsync(api, HttpMethod.Post);
 
-                // Check if we still have the same amount of lists
-                Assert.IsTrue(web.Lists.Count() == listCount + 1);
+                    Assert.IsTrue(apiResponse.Executed);
+                    Assert.IsTrue((int)apiResponse.Requests.First().Value.ResponseHttpStatusCode < 400);
 
+                    // Load the list again
+                    await context.Web.LoadAsync(p => p.Lists);
+
+                    // Check if we still have the same amount of lists
+                    Assert.IsTrue(context.Web.Lists.Length == listCount + 1);
+                }
+                finally
+                {
+                    // Cleanup
+                    myList = web.Lists.AsRequested().FirstOrDefault(p => p.Title == listTitle);
+
+                    if (myList != null)
+                    {
+                        await myList.DeleteAsync();
+                    }
+                }
             }
         }
 

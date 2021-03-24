@@ -9,7 +9,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a SharePoint Online list item
     /// </summary>
     [ConcreteType(typeof(ListItem))]
-    public interface IListItem : IDataModel<IListItem>, IDataModelGet<IListItem>, IDataModelUpdate, IDataModelDelete, IExpandoDataModel, IQueryableDataModel
+    public interface IListItem : IDataModel<IListItem>, IDataModelGet<IListItem>, IDataModelLoad<IListItem>, IDataModelUpdate, IDataModelDelete, IExpandoDataModel, IQueryableDataModel
     {
 
         /// <summary>
@@ -21,6 +21,11 @@ namespace PnP.Core.Model.SharePoint
         /// Title value of the list item
         /// </summary>
         public string Title { get; set; }
+
+        /// <summary>
+        /// Role assignments of the list item
+        /// </summary>
+        public IRoleAssignmentCollection RoleAssignments { get; }
 
         #region Extension methods
 
@@ -296,27 +301,105 @@ namespace PnP.Core.Model.SharePoint
         /// Recycle the current item
         /// </summary>
         /// <returns></returns>
-        public void RecycleBatch();
+        public IBatchSingleResult<BatchResultValue<Guid>> RecycleBatch();
 
         /// <summary>
         /// Recycle the current item
         /// </summary>
         /// <returns></returns>
-        public Task RecycleBatchAsync();
-
-        /// <summary>
-        /// Recycle the current item
-        /// </summary>
-        /// <param name="batch">Batch to add the request to</param>
-        /// <returns></returns>
-        public void RecycleBatch(Batch batch);
+        public Task<IBatchSingleResult<BatchResultValue<Guid>>> RecycleBatchAsync();
 
         /// <summary>
         /// Recycle the current item
         /// </summary>
         /// <param name="batch">Batch to add the request to</param>
         /// <returns></returns>
-        public Task RecycleBatchAsync(Batch batch);
+        public IBatchSingleResult<BatchResultValue<Guid>> RecycleBatch(Batch batch);
+
+        /// <summary>
+        /// Recycle the current item
+        /// </summary>
+        /// <param name="batch">Batch to add the request to</param>
+        /// <returns></returns>
+        public Task<IBatchSingleResult<BatchResultValue<Guid>>> RecycleBatchAsync(Batch batch);
+        #endregion
+
+        #region Permissions
+
+        /// <summary>
+        /// Break role inheritance on the current item
+        /// </summary>
+        /// <param name="copyRoleAssignments"></param>
+        /// <param name="clearSubscopes"></param>
+        /// <returns></returns>
+        public void BreakRoleInheritance(bool copyRoleAssignments, bool clearSubscopes);
+
+        /// <summary>
+        /// Break role inheritance on the current item
+        /// </summary>
+        /// <param name="copyRoleAssignments"></param>
+        /// <param name="clearSubscopes"></param>
+        /// <returns></returns>
+        public Task BreakRoleInheritanceAsync(bool copyRoleAssignments, bool clearSubscopes);
+
+        /// <summary>
+        /// Reset role inheritance on the current item
+        /// </summary>
+        /// <returns></returns>
+        public void ResetRoleInheritance();
+
+        /// <summary>
+        /// Reset role inheritance on the current item
+        /// </summary>
+        /// <returns></returns>
+        public Task ResetRoleInheritanceAsync();
+
+        /// <summary>
+        /// Returns the role definitions for a specific principal id (IUser.Id or ISharePointGroup.Id)
+        /// </summary>
+        /// <param name="principalId"></param>
+        /// <returns></returns>
+        public IRoleDefinitionCollection GetRoleDefinitions(int principalId);
+
+        /// <summary>
+        /// Returns the role definitions for a specific principal id (IUser.Id or ISharePointGroup.Id)
+        /// </summary>
+        /// <param name="principalId"></param>
+        /// <returns></returns>
+        public Task<IRoleDefinitionCollection> GetRoleDefinitionsAsync(int principalId);
+
+        /// <summary>
+        /// Add role definitions for a specific principal id (IUser.Id or ISharePointGroup.Id)
+        /// </summary>
+        /// <param name="principalId"></param>
+        /// <param name="names"></param>
+        /// <returns></returns>
+        public bool AddRoleDefinitions(int principalId, params string[] names);
+
+        /// <summary>
+        /// Adds role definitions for a specific principal id (IUser.Id or ISharePointGroup.Id)
+        /// </summary>
+        /// <param name="principalId"></param>
+        /// <param name="names"></param>
+        /// <returns></returns>
+        public Task<bool> AddRoleDefinitionsAsync(int principalId, params string[] names);
+
+        /// <summary>
+        /// Adds role definitions for a specific principal id (IUser.Id or ISharePointGroup.Id)
+        /// </summary>
+        /// <param name="principalId"></param>
+        /// <param name="names"></param>
+        /// <returns></returns>
+        public bool RemoveRoleDefinitions(int principalId, params string[] names);
+
+        /// <summary>
+        /// adds role definitions for a specific principal id (IUser.Id or ISharePointGroup.Id)
+        /// </summary>
+        /// <param name="principalId"></param>
+        /// <param name="names"></param>
+        /// <returns></returns>
+        public Task<bool> RemoveRoleDefinitionsAsync(int principalId, params string[] names);
+
         #endregion
 
         #endregion

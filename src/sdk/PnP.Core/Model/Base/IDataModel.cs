@@ -12,9 +12,10 @@ namespace PnP.Core.Model
     public interface IDataModel<TModel> : IDataModelParent, IDataModelWithContext
     {
         /// <summary>
-        /// Was this model requested from the back-end
+        /// Defines whether this model object was requested from the back-end
         /// </summary>
         bool Requested { get; set; }
+
         /// <summary>
         /// Checks if a property on this model object has a value set
         /// </summary>
@@ -44,7 +45,7 @@ namespace PnP.Core.Model
         bool ArePropertiesAvailable(params Expression<Func<TModel, object>>[] expressions);
 
         /// <summary>
-        /// Checks if the requested properties are loaded for the given model, if not they're loaded via a GetAsync call
+        /// Checks if the requested properties are loaded for the given model, if not they're loaded right now
         /// </summary>
         /// <param name="expressions">Expressions listing the properties to load</param>
         /// <returns></returns>

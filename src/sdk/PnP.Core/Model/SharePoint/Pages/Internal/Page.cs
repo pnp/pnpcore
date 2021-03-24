@@ -1,4 +1,5 @@
 ﻿using AngleSharp.Html.Parser;
+using PnP.Core.QueryModel;
 using PnP.Core.Services;
 using System;
 using System.Collections.Generic;
@@ -18,7 +19,7 @@ namespace PnP.Core.Model.SharePoint
         private string pageTitle;
         private string pageName;
         private static readonly Expression<Func<IList, object>>[] getPagesLibraryExpression = new Expression<Func<IList, object>>[] {p => p.Title, p => p.TemplateType, p => p.EnableFolderCreation,
-            p => p.EnableMinorVersions, p => p.EnableModeration, p => p.EnableVersioning, p => p.RootFolder, p=>p.ListItemEntityTypeFullName };
+            p => p.EnableMinorVersions, p => p.EnableModeration, p => p.EnableVersioning, p => p.RootFolder, p => p.ListItemEntityTypeFullName, p => p.Fields };
 
         #region Construction
 
@@ -268,7 +269,7 @@ namespace PnP.Core.Model.SharePoint
             {
                 // Strip folder from the provided file name + path
                 (var folderName, var pageNameWithoutFolder) = PageToPageNameAndFolder(pageName);
-                var pages = pagesLibrary.Items.Where(p => p.Values[PageConstants.FileLeafRef].ToString().StartsWith(pageNameWithoutFolder, StringComparison.InvariantCultureIgnoreCase));
+                var pages = pagesLibrary.Items.AsRequested().Where(p => p.Values[PageConstants.FileLeafRef].ToString().StartsWith(pageNameWithoutFolder, StringComparison.InvariantCultureIgnoreCase));
                 if (pages.Any())
                 {
                     pagesToLoad = pages.ToList();
@@ -276,7 +277,7 @@ namespace PnP.Core.Model.SharePoint
             }
             else
             {
-                pagesToLoad = pagesLibrary.Items.ToList();
+                pagesToLoad = pagesLibrary.Items.AsRequested().ToList();
             }
 
             if (pagesToLoad != null)
@@ -305,7 +306,7 @@ namespace PnP.Core.Model.SharePoint
             string pageNameFilter = $@"
                         <BeginsWith>
                           <FieldRef Name='{PageConstants.FileLeafRef}'/>
-                          <Value Type='text'>{pageNameWithoutFolder}</Value>
+                          <Value Type='text'><![CDATA[{pageNameWithoutFolder}]]></Value>
                         </BeginsWith>";
 
             // This is the main query, it can be complemented with above page name filter bij replacing the variables
@@ -360,7 +361,7 @@ namespace PnP.Core.Model.SharePoint
             // Remove unneeded cariage returns
             pageQuery = pageQuery.Replace("\r\n", "");
 
-            await pagesLibrary.GetListDataAsStreamAsync(new RenderListDataOptions()
+            await pagesLibrary.LoadListDataAsStreamAsync(new RenderListDataOptions()
             {
                 ViewXml = pageQuery,
                 RenderOptions = RenderListDataOptionsFlags.ListData,
@@ -378,17 +379,22 @@ namespace PnP.Core.Model.SharePoint
         private static async Task<IList> EnsurePagesLibraryAsync(PnPContext context)
         {
             IList pagesLibrary = null;
-            if (context.Web.IsPropertyAvailable(p => p.Lists) && context.Web.Lists.Any())
+            var lists = context.Web.Lists.AsRequested();
+            if (context.Web.IsPropertyAvailable(p => p.Lists) && lists.Any())
             {
-                foreach (var list in context.Web.Lists)
+                foreach (var list in lists)
                 {
                     if (list.IsPropertyAvailable(p => p.TemplateType) && list.TemplateType == ListTemplateType.WebPageLibrary)
                     {
-                        if (list.ArePropertiesAvailable(getPagesLibraryExpression))
+                        // The site pages library has the CanvasContent1 column, using that to distinguish between Site Pages and other wiki page libraries
+                        if (list.IsPropertyAvailable(p => p.Fields) && list.Fields.AsRequested().FirstOrDefault(p => p.InternalName == "CanvasContent1") != null)
                         {
-                            pagesLibrary = list;
+                            if (list.ArePropertiesAvailable(getPagesLibraryExpression))
+                            {
+                                pagesLibrary = list;
+                            }
+                            break;
                         }
-                        break;
                     }
                 }
             }
@@ -396,7 +402,25 @@ namespace PnP.Core.Model.SharePoint
             // No pages library found, so reload it
             if (pagesLibrary == null)
             {
-                pagesLibrary = await context.Web.Lists.GetFirstOrDefaultAsync(p => p.TemplateType == ListTemplateType.WebPageLibrary, getPagesLibraryExpression).ConfigureAwait(false);
+                var libraries = await context.Web.Lists.QueryProperties(getPagesLibraryExpression)
+                                                       .Where(p => p.TemplateType == ListTemplateType.WebPageLibrary)
+                                                       .ToListAsync()
+                                                       .ConfigureAwait(false);
+                if (libraries.Count == 1)
+                {
+                    return libraries.First();
+                }
+                else
+                {
+                    foreach (var list in libraries)
+                    {
+                        if (list.IsPropertyAvailable(p => p.Fields) && list.Fields.AsRequested().FirstOrDefault(p => p.InternalName == "CanvasContent1") != null)
+                        {
+                            pagesLibrary = list;
+                            break;
+                        }
+                    }
+                }
             }
 
             return pagesLibrary;
@@ -1360,7 +1384,7 @@ namespace PnP.Core.Model.SharePoint
         #endregion
 
         #region Create and Save page
-        public void SaveAsTemplate(string pageName = null)
+        public string SaveAsTemplate(string pageName = null)
         {
             if (string.IsNullOrEmpty(pageName))
             {
@@ -1374,10 +1398,10 @@ namespace PnP.Core.Model.SharePoint
                 }
             }
 
-            SaveAsTemplateAsync(pageName).GetAwaiter().GetResult();
+            return SaveAsTemplateAsync(pageName).GetAwaiter().GetResult();
         }
 
-        public async Task SaveAsTemplateAsync(string pageName = null)
+        public async Task<string> SaveAsTemplateAsync(string pageName = null)
         {
             string pageUrl = $"{(await GetTemplatesFolderAsync().ConfigureAwait(false))}/{pageName}";
 
@@ -1386,15 +1410,15 @@ namespace PnP.Core.Model.SharePoint
             isDefaultDescription = true;
 
             // Save the page as template
-            await SaveAsync(pageUrl).ConfigureAwait(false);
+            return await SaveAsync(pageUrl).ConfigureAwait(false);
         }
 
-        public void Save(string pageName = null)
+        public string Save(string pageName = null)
         {
-            SaveAsync(pageName).GetAwaiter().GetResult();
+            return SaveAsync(pageName).GetAwaiter().GetResult();
         }
 
-        public async Task SaveAsync(string pageName = null)
+        public async Task<string> SaveAsync(string pageName = null)
         {
             if (string.IsNullOrEmpty(pageName))
             {
@@ -1475,7 +1499,11 @@ namespace PnP.Core.Model.SharePoint
                     folderHostingThePage = PagesLibrary.RootFolder;
                 }
 
-                await folderHostingThePage.Files.AddTemplateFileAsync(serverRelativePageName, TemplateFileType.ClientSidePage).ConfigureAwait(false);
+                var addedFile = await folderHostingThePage.Files.AddTemplateFileAsync(serverRelativePageName, TemplateFileType.ClientSidePage).ConfigureAwait(false);
+
+                // Since the AddTemplateFile method can alter the page name (# is replaced by -) we need to take that in account
+                pageName = addedFile.ServerRelativeUrl.Replace($"{PagesLibrary.RootFolder.ServerRelativeUrl}/", "");
+                this.pageName = pageName;
 
                 // Get the list item data for the added page
                 await EnsurePageListItemAsync(pageName).ConfigureAwait(false);
@@ -1573,7 +1601,7 @@ namespace PnP.Core.Model.SharePoint
                     await PageListItem.UpdateOverwriteVersionAsync().ConfigureAwait(false);
                 }
 
-                return;
+                return this.pageName;
             }
             else
             {
@@ -1611,7 +1639,7 @@ namespace PnP.Core.Model.SharePoint
                 PageListItem[PageConstants.PageLayoutContentField] = pageHeaderHtml;
 
                 // AuthorByline depends on a field holding the author values
-                var authorByLineIdField = PagesLibrary.Fields.FirstOrDefault(p => p.InternalName == PageConstants._AuthorByline);
+                var authorByLineIdField = PagesLibrary.Fields.AsRequested().FirstOrDefault(p => p.InternalName == PageConstants._AuthorByline);
                 if (pageHeader.AuthorByLineId > -1)
                 {
                     var fieldUsers = PageListItem.NewFieldValueCollection(authorByLineIdField);
@@ -1717,11 +1745,13 @@ namespace PnP.Core.Model.SharePoint
             {
                 await PageListItem.UpdateOverwriteVersionAsync().ConfigureAwait(false);
             }
+
+            return this.pageName;
         }
 
         private void SetBannerImageUrlField(string bannerImageUrl)
         {
-            var bannerImageField = PagesLibrary.Fields.FirstOrDefault(p => p.InternalName == PageConstants.BannerImageUrlField);
+            var bannerImageField = PagesLibrary.Fields.AsRequested().FirstOrDefault(p => p.InternalName == PageConstants.BannerImageUrlField);
             if (bannerImageField != null)
             {
                 PageListItem[PageConstants.BannerImageUrlField] = bannerImageField.NewFieldUrlValue(bannerImageUrl);
@@ -1737,13 +1767,13 @@ namespace PnP.Core.Model.SharePoint
             PageListItem = null;
 
             // Get the relevant list item
-            foreach (var page in PagesLibrary.Items)
+            foreach (var page in PagesLibrary.Items.AsRequested())
             {
                 var fileDirRef = PagesLibrary.RootFolder.ServerRelativeUrl + (!string.IsNullOrEmpty(folderName) ? $"/{folderName}" : "");
                 if (page[PageConstants.FileLeafRef].ToString().Equals(pageNameWithoutFolder, StringComparison.InvariantCultureIgnoreCase) && page[PageConstants.FileDirRef].ToString().Equals(fileDirRef, StringComparison.InvariantCultureIgnoreCase))
                 {
                     PageListItem = page;
-                    continue;
+                    break;
                 }
             }
         }

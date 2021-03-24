@@ -15,6 +15,7 @@ Channels is a collection part of the ITeam interface, so when you get a team, yo
 // Get the Channels
  var channels = team.Channels;
 ```
+
 ## Getting Channels with specific properties
 
 When you want to load the Team and Channels with specific properties populated, you can specify which properties to include by:
@@ -22,8 +23,9 @@ When you want to load the Team and Channels with specific properties populated, 
 ```csharp
 // Get the Team
  var team = await context.Team.GetAsync(
-    p => p.Channels.LoadProperties(p => p.DisplayName));
+    p => p.Channels.QueryProperties(p => p.DisplayName));
 ```
+
 ### Getting a specific Channel
 
 If you would like to get a specific channel you can use the extension method GetByDisplayNameAsync to get the channel by name.
@@ -59,7 +61,7 @@ var team = await context.Team.GetAsync(p => p.Channels);
 string channelName = $"My Cool New Channel";
 
 // Check if the channel exists
-var channelFound = team.Channels.FirstOrDefault(p => p.DisplayName == channelName);
+var channelFound = team.Channels.Where(p => p.DisplayName == channelName).FirstOrDefault();
 if (channelFound == null)
 {
     // Add a new channel
@@ -85,7 +87,7 @@ var team = await context.Team.GetAsync(p => p.Channels);
 string channelName = $"My Cool New Channel";
 
 // Get the channel you wish to update
-var channelToUpdate = team.Channels.FirstOrDefault(p => p.DisplayName == channelName);
+var channelToUpdate = team.Channels.Where(p => p.DisplayName == channelName).FirstOrDefault();
 
 if(channelToUpdate != default){
 
@@ -107,7 +109,7 @@ var team = await context.Team.GetAsync(p => p.Channels);
 string channelName = $"My Cool New Channel";
 
 // Get the channel you wish to delete
-var channelToDelete = team.Channels.FirstOrDefault(p => p.DisplayName == channelName);
+var channelToDelete = team.Channels.Where(p => p.DisplayName == channelName).FirstOrDefault();
 
 if(channelToDelete != default){
     

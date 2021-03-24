@@ -11,7 +11,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a Web object of SharePoint Online
     /// </summary>
     [ConcreteType(typeof(Web))]
-    public interface IWeb : IDataModel<IWeb>, IDataModelGet<IWeb>, IDataModelUpdate, IDataModelDelete, IQueryableDataModel
+    public interface IWeb : IDataModel<IWeb>, IDataModelGet<IWeb>, IDataModelLoad<IWeb>, IDataModelUpdate, IDataModelDelete, IQueryableDataModel
     {
         #region Properties
         /// <summary>
@@ -870,6 +870,32 @@ namespace PnP.Core.Model.SharePoint
         /// <returns></returns>
         void EnsureMultilingual(List<int> requiredLanguageIds);
 
+        #endregion
+
+        #region Syntex support
+        /// <summary>
+        /// Is this web a Syntex Content Center
+        /// </summary>
+        /// <returns>True if this web is a Syntex Content Center, false otherwise</returns>
+        Task<bool> IsSyntexContentCenterAsync();
+
+        /// <summary>
+        /// Is this web a Syntex Content Center
+        /// </summary>
+        /// <returns>True if this web is a Syntex Content Center, false otherwise</returns>
+        bool IsSyntexContentCenter();
+
+        /// <summary>
+        /// Returns the current web as <see cref="ISyntexContentCenter"/> if the web is a Syntex Content Center, null is returned otherwise
+        /// </summary>
+        /// <returns>The current web as <see cref="ISyntexContentCenter"/></returns>
+        Task<ISyntexContentCenter> AsSyntexContentCenterAsync();
+
+        /// <summary>
+        /// Returns the current web as <see cref="ISyntexContentCenter"/> if the web is a Syntex Content Center, null is returned otherwise
+        /// </summary>
+        /// <returns>The current web as <see cref="ISyntexContentCenter"/></returns>
+        ISyntexContentCenter AsSyntexContentCenter();
         #endregion
 
         #region Hub Site

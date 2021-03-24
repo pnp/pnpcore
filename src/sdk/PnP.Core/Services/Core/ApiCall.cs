@@ -1,11 +1,14 @@
-﻿namespace PnP.Core.Services
+﻿using System;
+using System.Collections;
+
+namespace PnP.Core.Services
 {
     /// <summary>
     /// Struct that defines the API call to make
     /// </summary>
     internal struct ApiCall
     {
-        internal ApiCall(string request, ApiType apiType, string jsonBody = null, string receivingProperty = null)
+        internal ApiCall(string request, ApiType apiType, string jsonBody = null, string receivingProperty = null, bool loadPages = false)
         {
             Type = apiType;
             Request = request;
@@ -13,12 +16,17 @@
             XmlBody = null;
             ReceivingProperty = receivingProperty;
             RawRequest = false;
+            RawSingleResult = null;
+            RawEnumerableResult = null;
+            RawResultsHandler = null;
             Commit = false;
             Interactive = false;
             BinaryBody = null;
             ExpectBinaryResponse = false;
             StreamResponse = false;
             RemoveFromModel = false;
+            LoadPages = loadPages;
+            SkipCollectionClearing = false;
         }
 
         internal ApiCall(string xmlBody, string receivingProperty = null)
@@ -29,12 +37,17 @@
             XmlBody = xmlBody;
             ReceivingProperty = receivingProperty;
             RawRequest = false;
+            RawSingleResult = null;
+            RawEnumerableResult = null;
+            RawResultsHandler = null;
             Commit = false;
             Interactive = false;
             BinaryBody = null;
             ExpectBinaryResponse = false;
             StreamResponse = false;
             RemoveFromModel = false;
+            LoadPages = false;
+            SkipCollectionClearing = false;
         }
 
         /// <summary>
@@ -72,6 +85,21 @@
         internal bool RawRequest { get; set; }
 
         /// <summary>
+        /// List containing the parsed Raw results (if a collection is returned)
+        /// </summary>
+        internal IEnumerable RawEnumerableResult { get; set; }
+
+        /// <summary>
+        /// Result object from this API call (if a single result is returned)
+        /// </summary>
+        internal object RawSingleResult { get; set; }
+
+        /// <summary>
+        /// Event handler triggered to parse raw results
+        /// </summary>
+        internal Action<string, ApiCall> RawResultsHandler { get; set; }
+
+        /// <summary>
         /// When set to true the current model item will be committed as changes are synced with the server
         /// </summary>
         internal bool Commit { get; set; }
@@ -100,5 +128,15 @@
         /// Indicates if the model instance linked to this request needs to be removed from it's model collection after successful execution of this API call
         /// </summary>
         internal bool RemoveFromModel { get; set; }
+
+        /// <summary>
+        /// Indicates if batch should support pagination and make multiple calls
+        /// </summary>
+        internal bool LoadPages { get; set; }
+
+        /// <summary>
+        /// Don't clear the current collection when data is loaded
+        /// </summary>
+        internal bool SkipCollectionClearing { get; set; }
     }
 }

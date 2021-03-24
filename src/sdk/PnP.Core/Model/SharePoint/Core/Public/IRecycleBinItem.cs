@@ -9,7 +9,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a RecycleBinItem object
     /// </summary>
     [ConcreteType(typeof(RecycleBinItem))]
-    public interface IRecycleBinItem : IDataModel<IRecycleBinItem>, IDataModelGet<IRecycleBinItem>, IDataModelUpdate, IDataModelDelete, IQueryableDataModel
+    public interface IRecycleBinItem : IDataModel<IRecycleBinItem>, IDataModelGet<IRecycleBinItem>, IDataModelLoad<IRecycleBinItem>, IDataModelUpdate, IDataModelDelete, IQueryableDataModel
     {
         /// <summary>
         /// Gets the e-mail address of the user who created the recycle bin item.

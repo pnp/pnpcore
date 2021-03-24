@@ -1,5 +1,6 @@
 ﻿using PnP.Core.Services;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
@@ -10,7 +11,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a collection of List objects of SharePoint Online
     /// </summary>
     [ConcreteType(typeof(ListCollection))]
-    public interface IListCollection : IQueryable<IList>, IDataModelCollection<IList>, ISupportPaging<IList>, IDataModelCollectionDeleteByGuidId
+    public interface IListCollection : IQueryable<IList>, IAsyncEnumerable<IList>, IDataModelCollection<IList>, IDataModelCollectionLoad<IList>, IDataModelCollectionDeleteByGuidId
     {
         #region Add Methods
         /// <summary>

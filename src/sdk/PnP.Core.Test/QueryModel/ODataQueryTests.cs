@@ -9,10 +9,21 @@ namespace PnP.Core.Test.QueryModel
     public class ODataQueryTests
     {
         [TestMethod]
-        public void TestFlatFilters()
+        public void TestFlatFiltersGraph()
         {
-            var expected = "$filter=displayName eq 'Test 01' and description ne 'Test 02'&$top=10&$skip=5";
+            var expected = "$filter=displayName eq 'Test 01' and description ne 'Test 02'";
+            TestFlatFilterByPlatform(expected, ODataTargetPlatform.Graph);
+        }
 
+        [TestMethod]
+        public void TestFlatFiltersSPORest()
+        {
+            var expected = "$filter=Title eq 'Test 01' and Description ne 'Test 02'&$top=10&$skip=5";
+            TestFlatFilterByPlatform(expected, ODataTargetPlatform.SPORest);
+        }
+
+        private static void TestFlatFilterByPlatform(string expected, ODataTargetPlatform platform)
+        {
             ODataQuery<IWeb> query = new ODataQuery<IWeb>
             {
                 Top = 10,
@@ -36,16 +47,27 @@ namespace PnP.Core.Test.QueryModel
                 ConcatOperator = FilteringConcatOperator.AND
             });
 
-            var actual = query.ToString();
+            var actual = query.ToQueryString(platform);
             Assert.IsNotNull(actual);
             Assert.AreEqual(expected, actual);
         }
 
         [TestMethod]
-        public void TestInDepthFilters()
+        public void TestInDepthFiltersGraph()
         {
-            var expected = "$filter=displayName eq 'Test 01' or (sharepointIds eq 7 or AuthorID eq 15 and ModifiedBy eq 'paolo@piasysdev.onmicrosoft.com') and description ne 'Test 02'&$top=10&$skip=5";
+            var expected = "$filter=displayName eq 'Test 01' or (sharepointIds eq 7 or AuthorID eq 15 and ModifiedBy eq 'paolo@piasysdev.onmicrosoft.com') and description ne 'Test 02'";
+            TestInDepthFiltersByPlatform(expected, ODataTargetPlatform.Graph);
+        }
 
+        [TestMethod]
+        public void TestInDepthFiltersSPORest()
+        {
+            var expected = "$filter=Title eq 'Test 01' or (Id eq 7 or AuthorID eq 15 and ModifiedBy eq 'paolo@piasysdev.onmicrosoft.com') and Description ne 'Test 02'&$top=10&$skip=5";
+            TestInDepthFiltersByPlatform(expected, ODataTargetPlatform.SPORest);
+        }
+
+        private static void TestInDepthFiltersByPlatform(string expected, ODataTargetPlatform platform)
+        {
             ODataQuery<IWeb> query = new ODataQuery<IWeb>
             {
                 Top = 10,
@@ -99,16 +121,29 @@ namespace PnP.Core.Test.QueryModel
                 ConcatOperator = FilteringConcatOperator.AND
             });
 
-            var actual = query.ToString();
+            var actual = query.ToQueryString(platform);
             Assert.IsNotNull(actual);
             Assert.AreEqual(expected, actual);
         }
 
         [TestMethod]
-        public void TestInDepthFiltersSingleGroup()
+        public void TestInDepthFiltersSingleGroupGraph()
         {
             var expected = "$filter=(sharepointIds eq 1 or AuthorID eq 2)";
 
+            TestInDepthFiltersSingleGroupByPlatform(expected, ODataTargetPlatform.Graph);
+        }
+
+        [TestMethod]
+        public void TestInDepthFiltersSingleGroupSPORest()
+        {
+            var expected = "$filter=(Id eq 1 or AuthorID eq 2)";
+
+            TestInDepthFiltersSingleGroupByPlatform(expected, ODataTargetPlatform.SPORest);
+        }
+
+        private static void TestInDepthFiltersSingleGroupByPlatform(string expected, ODataTargetPlatform platform)
+        {
             ODataQuery<IWeb> query = new ODataQuery<IWeb>();
 
             // Add a group filter
@@ -134,7 +169,7 @@ namespace PnP.Core.Test.QueryModel
                 ConcatOperator = FilteringConcatOperator.OR,
             });
 
-            var actual = query.ToString();
+            var actual = query.ToQueryString(platform);
             Assert.IsNotNull(actual);
             Assert.AreEqual(expected, actual);
         }

@@ -53,6 +53,16 @@ namespace PnP.Core.Test.Utilities
         internal static string NoGroupTestSite { get { return "NoGroupTestSite"; } }
 
         /// <summary>
+        /// Name of the default no group test site configuration
+        /// </summary>
+        internal static string ClassicSTS0TestSite { get { return "ClassicSTS0TestSite"; } }
+
+        /// <summary>
+        /// Name of the default Syntex Content Center test site confguration
+        /// </summary>
+        internal static string SyntexContentCenterTestSite { get { return "SyntexContentCenterTestSite"; } }
+
+        /// <summary>
         /// Name of the default test site confguration when using an access token to authenticate
         /// </summary>
         internal static string TestSiteAccessToken { get { return "TestSiteAccessToken"; } }
@@ -110,7 +120,28 @@ namespace PnP.Core.Test.Utilities
             testPnPContextFactory.GenerateTestMockingDebugFiles = GenerateMockingDebugFiles;
             testPnPContextFactory.TestUris = TestUris;
 
+            // rewrite configuration for special cases
+            configurationName = RewriteConfigurationNameForOptionalOfflineTestConfigurations(configurationName);
+
             return await factory.CreateAsync(configurationName).ConfigureAwait(false);
+        }
+
+        private string RewriteConfigurationNameForOptionalOfflineTestConfigurations(string configurationName)
+        {
+            if (Mocking && configurationName == ClassicSTS0TestSite || configurationName == SyntexContentCenterTestSite)
+            {
+                var configuration = GetConfigurationSettings();
+                if (configurationName == SyntexContentCenterTestSite && string.IsNullOrEmpty(configuration.GetValue<string>("PnPCore:Sites:SyntexContentCenterTestSite:SiteUrl")))
+                {
+                    configurationName = TestSite;
+                }
+                else if (configurationName == ClassicSTS0TestSite && string.IsNullOrEmpty(configuration.GetValue<string>("PnPCore:Sites:ClassicSTS0TestSite:SiteUrl")))
+                {
+                    configurationName = TestSite;
+                }
+            }
+
+            return configurationName;
         }
 
         internal async Task<PnPContext> GetContextWithTelemetryManagerAsync(string configurationName, TelemetryManager telemetryManager, int id = 0,
@@ -134,6 +165,9 @@ namespace PnP.Core.Test.Utilities
             testPnPContextFactory.SourceFilePath = sourceFilePath;
             testPnPContextFactory.GenerateTestMockingDebugFiles = GenerateMockingDebugFiles;
             testPnPContextFactory.TestUris = TestUris;
+
+            // rewrite configuration for special cases
+            configurationName = RewriteConfigurationNameForOptionalOfflineTestConfigurations(configurationName);
 
             return await (factory as TestPnPContextFactory).CreateWithTelemetryManagerAsync(configurationName, telemetryManager).ConfigureAwait(false);
         }
@@ -159,6 +193,9 @@ namespace PnP.Core.Test.Utilities
             testPnPContextFactory.SourceFilePath = sourceFilePath;
             testPnPContextFactory.GenerateTestMockingDebugFiles = GenerateMockingDebugFiles;
             testPnPContextFactory.TestUris = TestUris;
+
+            // rewrite configuration for special cases
+            configurationName = RewriteConfigurationNameForOptionalOfflineTestConfigurations(configurationName);
 
             return await factory.CreateWithoutInitializationAsync(configurationName).ConfigureAwait(false);
         }
@@ -261,12 +298,16 @@ namespace PnP.Core.Test.Utilities
                 string targetSiteUrl = configuration.GetValue<string>("PnPCore:Sites:TestSite:SiteUrl");
                 string targetSubSiteUrl = configuration.GetValue<string>("PnPCore:Sites:TestSubSite:SiteUrl");
                 string noGroupSiteUrl = configuration.GetValue<string>("PnPCore:Sites:NoGroupTestSite:SiteUrl");
+                string classicSTS0SiteUrl = configuration.GetValue<string>("PnPCore:Sites:ClassicSTS0TestSite:SiteUrl");
+                string syntexContentCenterSiteUrl = configuration.GetValue<string>("PnPCore:Sites:SyntexContentCenterTestSite:SiteUrl");
 
                 if (RunningInGitHubWorkflow())
                 {
                     targetSiteUrl = "https://bertonline.sharepoint.com/sites/prov-1";
                     targetSubSiteUrl = "https://bertonline.sharepoint.com/sites/prov-1/testsub1";
                     noGroupSiteUrl = "https://bertonline.sharepoint.com/sites/modern";
+                    classicSTS0SiteUrl = "https://bertonline.sharepoint.com/sites/sts0";
+                    syntexContentCenterSiteUrl = "https://bertonline.sharepoint.com/sites/syntextcc";
                 }
 
                 var serviceProvider = new ServiceCollection()
@@ -293,6 +334,16 @@ namespace PnP.Core.Test.Utilities
                     { TestSubSite, new Uri(targetSubSiteUrl) },
                     { NoGroupTestSite, new Uri(noGroupSiteUrl) }
                 };
+
+                if (!string.IsNullOrEmpty(classicSTS0SiteUrl))
+                {
+                    TestUris.Add("ClassicSTS0TestSite", new Uri(classicSTS0SiteUrl));
+                }
+
+                if (!string.IsNullOrEmpty(syntexContentCenterSiteUrl))
+                {
+                    TestUris.Add("SyntexContentCenterTestSite", new Uri(syntexContentCenterSiteUrl));
+                }
 
                 var pnpContextFactory = serviceProvider.GetRequiredService<IPnPTestContextFactory>();
 
@@ -354,6 +405,24 @@ namespace PnP.Core.Test.Utilities
             if (string.IsNullOrEmpty(pnpCoreSDKTestUser) || string.IsNullOrEmpty(pnpCoreSDKTestUserPassword) || string.IsNullOrEmpty(pnpCoreSDKTestSite))
             {
                 Assert.Inconclusive("Skipping test because 'live' tests are not configured. Add pnpcoresdktestsite, pnpcoresdktestuser and pnpcoresdktestuserpassword environment variables");
+            }
+        }
+
+        internal static void SharePointSyntexTestSetup()
+        {
+            var configuration = GetConfigurationSettings();
+            if (!Instance.Mocking && string.IsNullOrEmpty(configuration.GetValue<string>("PnPCore:Sites:SyntexContentCenterTestSite:SiteUrl")))
+            {
+                Assert.Inconclusive("No Syntex Content Center setup for live testing");
+            }
+        }
+
+        internal static void ClassicSTS0TestSetup()
+        {
+            var configuration = GetConfigurationSettings();
+            if (!Instance.Mocking && string.IsNullOrEmpty(configuration.GetValue<string>("PnPCore:Sites:ClassicSTS0TestSite:SiteUrl")))
+            {
+                Assert.Inconclusive("No classic STS#0 site setup for live testing");
             }
         }
 

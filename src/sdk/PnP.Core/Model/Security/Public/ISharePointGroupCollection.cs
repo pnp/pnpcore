@@ -1,4 +1,5 @@
 ﻿using PnP.Core.Services;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -8,7 +9,7 @@ namespace PnP.Core.Model.Security
     /// Public interface to define a collection of SharePoint groups
     /// </summary>
     [ConcreteType(typeof(SharePointGroupCollection))]
-    public interface ISharePointGroupCollection : IQueryable<ISharePointGroup>, IDataModelCollection<ISharePointGroup>
+    public interface ISharePointGroupCollection : IQueryable<ISharePointGroup>, IAsyncEnumerable<ISharePointGroup>, IDataModelCollection<ISharePointGroup>, IDataModelCollectionLoad<ISharePointGroup>
     {
         /// <summary>
         /// Adds a new group

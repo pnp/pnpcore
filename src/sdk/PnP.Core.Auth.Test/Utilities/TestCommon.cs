@@ -212,10 +212,10 @@ namespace PnP.Core.Auth.Test.Utilities
         internal static async Task CheckAccessToTargetResource(PnPContext context, bool graphFirst = true)
         {
             context.GraphFirst = graphFirst;
-            var web = await context.Web.GetAsync(w => w.Title);
+            await context.Web.EnsurePropertiesAsync(w => w.Title);
 
-            Assert.IsNotNull(web.Title);
-            Assert.IsTrue(web.IsPropertyAvailable(p => p.Title));
+            Assert.IsNotNull(context.Web.Title);
+            Assert.IsTrue(context.Web.IsPropertyAvailable(p => p.Title));
         }
 
         internal static string GetX509CertificateThumbprint()

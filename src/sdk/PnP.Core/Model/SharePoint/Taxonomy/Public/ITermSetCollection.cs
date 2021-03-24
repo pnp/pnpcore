@@ -1,4 +1,5 @@
-﻿using PnP.Core.Services;
+﻿/*
+using PnP.Core.Services;
 using System;
 using System.Linq;
 using System.Linq.Expressions;
@@ -10,7 +11,7 @@ namespace PnP.Core.Model.SharePoint
     /// Collection of term sets
     /// </summary>
     [ConcreteType(typeof(TermSetCollection))]
-    public interface ITermSetCollection : IQueryable<ITermSet>, IDataModelCollection<ITermSet>, ISupportPaging<ITermSet>, IDataModelCollectionDeleteByStringId
+    public interface ITermSetCollection : IQueryable<ITermSet>, IDataModelCollection<ITermSet>, IDataModelCollectionDeleteByStringId
     {
 
         #region Add methods
@@ -91,3 +92,4 @@ namespace PnP.Core.Model.SharePoint
 
     }
 }
+*/

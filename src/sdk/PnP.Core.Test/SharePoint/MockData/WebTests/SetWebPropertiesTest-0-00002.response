@@ -1,9 +1,9 @@
---batchresponse_54d48288-0dc3-41b9-b3a8-35695f646e83
+--batchresponse_d2ba8622-30ac-4dc3-8f6a-6a343fd046f6
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{"d":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/pnpcoresdktest/_api/Web","uri":"https://bertonline.sharepoint.com/sites/pnpcoresdktest/_api/Web","type":"SP.Web"},"EffectiveBasePermissions":{"__metadata":{"type":"SP.BasePermissions"},"High":"2147483647","Low":"4294705151"},"Id":"bc3f47bc-6313-43a4-b21d-ffe6200c0436"}}
---batchresponse_54d48288-0dc3-41b9-b3a8-35695f646e83--
+{"d":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/sts0/_api/Web","uri":"https://bertonline.sharepoint.com/sites/sts0/_api/Web","type":"SP.Web"},"EffectiveBasePermissions":{"__metadata":{"type":"SP.BasePermissions"},"High":"2147483647","Low":"4294967295"},"Id":"7109c7c3-e99f-40c9-aca7-732d470d1c41"}}
+--batchresponse_d2ba8622-30ac-4dc3-8f6a-6a343fd046f6--

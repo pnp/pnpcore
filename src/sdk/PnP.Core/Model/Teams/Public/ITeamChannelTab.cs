@@ -6,7 +6,7 @@ namespace PnP.Core.Model.Teams
     /// Defines the tab in a Team channel
     /// </summary>
     [ConcreteType(typeof(TeamChannelTab))]
-    public interface ITeamChannelTab : IDataModel<ITeamChannelTab>, IDataModelGet<ITeamChannelTab>, IDataModelDelete, IDataModelUpdate
+    public interface ITeamChannelTab : IDataModel<ITeamChannelTab>, IDataModelGet<ITeamChannelTab>, IDataModelLoad<ITeamChannelTab>, IDataModelDelete, IDataModelUpdate, IQueryableDataModel
     {
         /// <summary>
         /// Identifier that uniquely identifies a specific instance of a channel tab. Read only.

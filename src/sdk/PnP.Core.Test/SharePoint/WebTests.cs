@@ -4,6 +4,8 @@ using PnP.Core.Test.Utilities;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
+using PnP.Core.QueryModel;
+using System.IO;
 
 namespace PnP.Core.Test.SharePoint
 {
@@ -23,7 +25,7 @@ namespace PnP.Core.Test.SharePoint
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                IWeb web = await context.Web.GetAsync(
+                await context.Web.LoadAsync(
                     p => p.AccessRequestListUrl,
                     p => p.AccessRequestSiteDescription,
                     p => p.AllowCreateDeclarativeWorkflowForCurrentUser,
@@ -47,6 +49,8 @@ namespace PnP.Core.Test.SharePoint
                     p => p.FooterEnabled,
                     p => p.FooterLayout
                     );
+
+                var web = context.Web;
 
                 Assert.IsNotNull(web);
                 Assert.IsNull(web.AccessRequestListUrl);
@@ -101,7 +105,7 @@ namespace PnP.Core.Test.SharePoint
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                IWeb web = await context.Web.GetAsync(
+                await context.Web.LoadAsync(
                     p => p.HeaderEmphasis,
                     p => p.HeaderLayout,
                     p => p.HideTitleInHeader,
@@ -115,6 +119,8 @@ namespace PnP.Core.Test.SharePoint
                     p => p.MasterUrl,
                     p => p.MegaMenuEnabled
                     );
+                
+                var web = context.Web;
 
                 Assert.IsNotNull(web);
                 Assert.IsFalse(web.IsHomepageModernized);
@@ -135,7 +141,7 @@ namespace PnP.Core.Test.SharePoint
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                IWeb web = await context.Web.GetAsync(
+                await context.Web.LoadAsync(
                     p => p.NavAudienceTargetingEnabled,
                     p => p.NextStepsFirstRunEnabled,
                     p => p.NotificationsInOneDriveForBusinessEnabled,
@@ -151,6 +157,8 @@ namespace PnP.Core.Test.SharePoint
                     p => p.SiteLogoUrl,
                     p => p.SyndicationEnabled
                     );
+
+                var web = context.Web;
 
                 Assert.IsNotNull(web);
                 Assert.IsFalse(web.NavAudienceTargetingEnabled);
@@ -176,7 +184,7 @@ namespace PnP.Core.Test.SharePoint
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                IWeb web = await context.Web.GetAsync(
+                await context.Web.LoadAsync(
                     p => p.TenantAdminMembersCanShare,
                     // TODO Review this one, it causes SP REST to return an error
                     //p => p.ThemeData,
@@ -186,6 +194,8 @@ namespace PnP.Core.Test.SharePoint
                     p => p.WebTemplate,
                     p => p.WebTemplateConfiguration
                     );
+
+                var web = context.Web;
 
                 Assert.IsNotNull(web);
                 Assert.AreEqual(SharingState.Unspecified, web.TenantAdminMembersCanShare);
@@ -208,8 +218,9 @@ namespace PnP.Core.Test.SharePoint
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                IWeb webWithAllProperties = await context.Web.GetAsync(p => p.AllProperties);
+                await context.Web.LoadAsync(p => p.AllProperties);
 
+                var webWithAllProperties = context.Web;
                 Assert.IsNotNull(webWithAllProperties);
                 Assert.IsTrue(webWithAllProperties.AllProperties.Count > 0);
                 Assert.IsTrue((string)webWithAllProperties.AllProperties["GroupType"] == "Private" || (string)webWithAllProperties.AllProperties["GroupType"] == "Public");
@@ -223,7 +234,9 @@ namespace PnP.Core.Test.SharePoint
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                IWeb webWithRootFolder = await context.Web.GetAsync(p => p.RootFolder);
+                await context.Web.LoadAsync(p => p.RootFolder);
+
+                IWeb webWithRootFolder = context.Web;
 
                 Assert.IsNotNull(webWithRootFolder);
                 Assert.IsNotNull(webWithRootFolder.RootFolder);
@@ -241,7 +254,9 @@ namespace PnP.Core.Test.SharePoint
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                IWeb webWithSiteInfoUserList = await context.Web.GetAsync(p => p.SiteUserInfoList);
+                await context.Web.LoadAsync(p => p.SiteUserInfoList);
+
+                IWeb webWithSiteInfoUserList = context.Web;
 
                 Assert.IsNotNull(webWithSiteInfoUserList);
                 Assert.IsNotNull(webWithSiteInfoUserList.SiteUserInfoList);
@@ -255,8 +270,9 @@ namespace PnP.Core.Test.SharePoint
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                IWeb web = await context.Web.GetAsync(p => p.AvailableContentTypes);
+                await context.Web.LoadAsync(p => p.AvailableContentTypes);
 
+                IWeb web = context.Web;
                 Assert.IsNotNull(web);
                 Assert.IsTrue(web.AvailableContentTypes.Requested);
                 Assert.IsTrue(web.AvailableContentTypes.Length > 0);
@@ -269,7 +285,9 @@ namespace PnP.Core.Test.SharePoint
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                IWeb web = await context.Web.GetAsync(p => p.AvailableFields);
+                await context.Web.LoadAsync(p => p.AvailableFields);
+
+                IWeb web = context.Web;
 
                 Assert.IsNotNull(web);
                 Assert.IsTrue(web.AvailableFields.Requested);
@@ -283,7 +301,9 @@ namespace PnP.Core.Test.SharePoint
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                IWeb web = await context.Web.GetAsync(p => p.EffectiveBasePermissions);
+                await context.Web.LoadAsync(p => p.EffectiveBasePermissions);
+
+                IWeb web = context.Web;
 
                 Assert.IsNotNull(web);
                 Assert.IsTrue(web.EffectiveBasePermissions.Requested);
@@ -311,7 +331,9 @@ namespace PnP.Core.Test.SharePoint
         public async Task SetWebPropertiesTest()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.NoGroupTestSite))
+            TestCommon.ClassicSTS0TestSetup();
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.ClassicSTS0TestSite))
             {
                 // Test safety - sites typically are noscript sites
                 bool isNoScript = await context.Web.IsNoScriptSiteAsync();
@@ -328,22 +350,92 @@ namespace PnP.Core.Test.SharePoint
                         await web.AllProperties.UpdateAsync();
                     }
 
-                    using (var context2 = await TestCommon.Instance.GetContextAsync(TestCommon.NoGroupTestSite, 2))
-                    {
-                        web = await context2.Web.GetAsync(p => p.AllProperties);
-                        myProperty = web.AllProperties.GetInteger(propertyKey, 0);
-                        Assert.IsTrue(myProperty == 55);
+                    web = await context.Web.GetAsync(p => p.AllProperties);
+                    myProperty = web.AllProperties.GetInteger(propertyKey, 0);
+                    Assert.IsTrue(myProperty == 55);
 
-                        web.AllProperties[propertyKey] = null;
+                    web.AllProperties[propertyKey] = null;
+                    await web.AllProperties.UpdateAsync();
+
+                    web = await context.Web.GetAsync(p => p.AllProperties);
+                    myProperty = web.AllProperties.GetInteger(propertyKey, 0);
+                    Assert.IsTrue(myProperty == 0);
+                }
+            }
+        }
+
+        [TestMethod]
+        public async Task SetWebPropertiesBooleanTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            TestCommon.ClassicSTS0TestSetup();
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.ClassicSTS0TestSite))
+            {
+                // Test safety - sites typically are noscript sites
+                bool isNoScript = await context.Web.IsNoScriptSiteAsync();
+
+                if (!isNoScript)
+                {
+                    var web = await context.Web.GetAsync(p => p.AllProperties);
+
+                    var propertyKey = "SetWebPropertiesBooleanTest";
+                    var myProperty = web.AllProperties.GetBoolean(propertyKey, false);
+                    if (myProperty == false)
+                    {
+                        web.AllProperties[propertyKey] = true;
                         await web.AllProperties.UpdateAsync();
                     }
 
-                    using (var context3 = await TestCommon.Instance.GetContextAsync(TestCommon.NoGroupTestSite, 3))
+                    web = await context.Web.GetAsync(p => p.AllProperties);
+                    myProperty = web.AllProperties.GetBoolean(propertyKey, false);
+                    Assert.IsTrue(myProperty == true);
+
+                    web.AllProperties[propertyKey] = null;
+                    await web.AllProperties.UpdateAsync();
+
+                    web = await context.Web.GetAsync(p => p.AllProperties);
+                    myProperty = web.AllProperties.GetBoolean(propertyKey, false);
+                    Assert.IsTrue(myProperty == false);
+                }
+            }
+        }
+
+        [TestMethod]
+        public async Task SetWebPropertiesSpecialCharsTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            TestCommon.ClassicSTS0TestSetup();
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.ClassicSTS0TestSite))
+            {
+                // Test safety - sites typically are noscript sites
+                bool isNoScript = await context.Web.IsNoScriptSiteAsync();
+
+                if (!isNoScript)
+                {
+                    var web = await context.Web.GetAsync(p => p.AllProperties);
+
+                    string specialChars = "<this & is a \n \t > a special \" ' string";
+
+                    var propertyKey = "SetWebPropertiesSpecialCharsTest";
+                    var myProperty = web.AllProperties.GetString(propertyKey, null);
+                    if (myProperty == null)
                     {
-                        web = await context3.Web.GetAsync(p => p.AllProperties);
-                        myProperty = web.AllProperties.GetInteger(propertyKey, 0);
-                        Assert.IsTrue(myProperty == 0);
+                        web.AllProperties[propertyKey] = specialChars;
+                        await web.AllProperties.UpdateAsync();
                     }
+
+                    web = await context.Web.GetAsync(p => p.AllProperties);
+                    myProperty = web.AllProperties.GetString(propertyKey, null);
+                    Assert.IsTrue(myProperty == specialChars);
+
+                    web.AllProperties[propertyKey] = null;
+                    await web.AllProperties.UpdateAsync();
+
+                    web = await context.Web.GetAsync(p => p.AllProperties);
+                    myProperty = web.AllProperties.GetString(propertyKey, null);
+                    Assert.IsTrue(myProperty == null);
                 }
             }
         }
@@ -354,7 +446,9 @@ namespace PnP.Core.Test.SharePoint
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSubSite))
             {
-                var web = await context.Web.GetAsync(p => p.SupportedUILanguageIds);
+                await context.Web.LoadAsync(p => p.SupportedUILanguageIds);
+
+                var web = context.Web;
 
                 Assert.IsTrue(web.SupportedUILanguageIds != null);
                 Assert.IsTrue(web.SupportedUILanguageIds.Any());
@@ -375,23 +469,16 @@ namespace PnP.Core.Test.SharePoint
                 web.SupportedUILanguageIds.Remove(lastLanguage);
                 await web.UpdateAsync();
 
-                using (var context2 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSubSite, 2))
-                {
-                    // Verify the language was actually removed
-                    var web2 = await context2.Web.GetAsync(p => p.SupportedUILanguageIds);
-                    Assert.IsFalse(web2.SupportedUILanguageIds.Contains(lastLanguage));
+                // Verify the language was actually removed
+                var web2 = await context.Web.GetAsync(p => p.SupportedUILanguageIds);
+                Assert.IsFalse(web2.SupportedUILanguageIds.Contains(lastLanguage));
 
-                    // Add the language again
-                    web2.SupportedUILanguageIds.Add(lastLanguage);
-                    await web2.UpdateAsync();
-                }
-
-                using (var context3 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSubSite, 3))
-                {
-                    // Verify the language was added removed
-                    var web3 = await context3.Web.GetAsync(p => p.SupportedUILanguageIds);
-                    Assert.IsTrue(web3.SupportedUILanguageIds.Contains(lastLanguage));
-                }
+                // Add the language again
+                web2.SupportedUILanguageIds.Add(lastLanguage);
+                await web2.UpdateAsync();
+                // Verify the language was added removed
+                var web3 = await context.Web.GetAsync(p => p.SupportedUILanguageIds);
+                Assert.IsTrue(web3.SupportedUILanguageIds.Contains(lastLanguage));
             }
         }
 
@@ -401,7 +488,9 @@ namespace PnP.Core.Test.SharePoint
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSubSite))
             {
-                var web = await context.Web.GetAsync(p => p.RegionalSettings);
+                await context.Web.LoadAsync(p => p.RegionalSettings);
+
+                var web = context.Web;
 
                 Assert.IsTrue(web.RegionalSettings.Requested);
                 Assert.IsTrue(!string.IsNullOrEmpty(web.RegionalSettings.DateSeparator));
@@ -415,8 +504,10 @@ namespace PnP.Core.Test.SharePoint
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSubSite))
             {
-                var web = await context.Web.GetAsync(p => p.RegionalSettings);
-                var timeZone = await web.RegionalSettings.TimeZone.GetAsync();
+                await context.Web.LoadAsync(p => p.RegionalSettings);
+                await context.Web.RegionalSettings.TimeZone.LoadAsync();
+
+                var timeZone = context.Web.RegionalSettings.TimeZone;
 
                 Assert.IsTrue(timeZone.Requested);
                 Assert.IsTrue(!string.IsNullOrEmpty(timeZone.Description));
@@ -433,19 +524,23 @@ namespace PnP.Core.Test.SharePoint
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSubSite))
             {
-                var web = await context.Web.GetAsync(p => p.RegionalSettings);
-                var timeZones = (await web.RegionalSettings.GetAsync(p=>p.TimeZones)).TimeZones;
+                await context.Web.LoadAsync(p => p.RegionalSettings);
+                await context.Web.RegionalSettings.LoadAsync(p=>p.TimeZones);
+
+                var timeZones = context.Web.RegionalSettings.TimeZones;
 
                 Assert.IsTrue(timeZones.Requested);
-                Assert.IsTrue(timeZones.Any());
-                Assert.IsTrue(!string.IsNullOrEmpty(timeZones.First().Description));
-                Assert.IsTrue(timeZones.First().IsPropertyAvailable(p => p.Bias));
-                Assert.IsTrue(timeZones.First().IsPropertyAvailable(p => p.DaylightBias));
-                Assert.IsTrue(timeZones.First().IsPropertyAvailable(p => p.StandardBias));
-                Assert.IsTrue(!string.IsNullOrEmpty(timeZones.Last().Description));
-                Assert.IsTrue(timeZones.Last().IsPropertyAvailable(p => p.Bias));
-                Assert.IsTrue(timeZones.Last().IsPropertyAvailable(p => p.DaylightBias));
-                Assert.IsTrue(timeZones.Last().IsPropertyAvailable(p => p.StandardBias));
+                Assert.IsTrue(timeZones.Length > 0);
+                var firstTimeZone = timeZones.AsRequested().First();
+                var listTimeZone = timeZones.AsRequested().Last();
+                Assert.IsTrue(!string.IsNullOrEmpty(firstTimeZone.Description));
+                Assert.IsTrue(firstTimeZone.IsPropertyAvailable(p => p.Bias));
+                Assert.IsTrue(firstTimeZone.IsPropertyAvailable(p => p.DaylightBias));
+                Assert.IsTrue(firstTimeZone.IsPropertyAvailable(p => p.StandardBias));
+                Assert.IsTrue(!string.IsNullOrEmpty(listTimeZone.Description));
+                Assert.IsTrue(listTimeZone.IsPropertyAvailable(p => p.Bias));
+                Assert.IsTrue(listTimeZone.IsPropertyAvailable(p => p.DaylightBias));
+                Assert.IsTrue(listTimeZone.IsPropertyAvailable(p => p.StandardBias));
             }
         }
 
@@ -455,7 +550,7 @@ namespace PnP.Core.Test.SharePoint
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSubSite))
             {
-                await context.Web.RegionalSettings.GetAsync(p=>p.DecimalSeparator, p => p.TimeZone);
+                await context.Web.RegionalSettings.LoadAsync(p=>p.DecimalSeparator, p => p.TimeZone);
 
                 Assert.IsTrue(context.Web.RegionalSettings.Requested);
                 Assert.IsTrue(context.Web.RegionalSettings.IsPropertyAvailable(p => p.DecimalSeparator));
@@ -584,7 +679,8 @@ namespace PnP.Core.Test.SharePoint
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                var web = await context.Web.GetAsync(p => p.AssociatedMemberGroup, p => p.AssociatedOwnerGroup, p => p.AssociatedVisitorGroup);
+                await context.Web.LoadAsync(p => p.AssociatedMemberGroup, p => p.AssociatedOwnerGroup, p => p.AssociatedVisitorGroup);
+                var web = context.Web;
                 Assert.IsTrue(web.IsPropertyAvailable(p => p.AssociatedMemberGroup));
                 Assert.IsTrue(web.IsPropertyAvailable(p => p.AssociatedOwnerGroup));
                 Assert.IsTrue(web.IsPropertyAvailable(p => p.AssociatedVisitorGroup));
@@ -609,8 +705,8 @@ namespace PnP.Core.Test.SharePoint
 
                 using (var context2 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
                 {
-                    await context2.Web.GetAsync(p => p.Webs);
-                    var createdWeb = context2.Web.Webs.FirstOrDefault(p => p.Title == webTitle);
+                    await context2.Web.LoadAsync(p => p.Webs);
+                    var createdWeb = context2.Web.Webs.AsRequested().FirstOrDefault(p => p.Title == webTitle);
                     Assert.IsTrue(createdWeb != null);
                     Assert.AreEqual(createdWeb.Title, webTitle);
                     Assert.AreEqual(createdWeb.Url, new Uri($"{context.Uri}/{webTitle}"));
@@ -638,8 +734,8 @@ namespace PnP.Core.Test.SharePoint
 
                 using (var context2 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
                 {
-                    await context2.Web.GetAsync(p => p.Webs);
-                    var createdWeb = context2.Web.Webs.FirstOrDefault(p => p.Title == webTitle);
+                    await context2.Web.LoadAsync(p => p.Webs);
+                    var createdWeb = context2.Web.Webs.AsRequested().FirstOrDefault(p => p.Title == webTitle);
                     Assert.IsTrue(createdWeb != null);
                     Assert.AreEqual(createdWeb.Title, webTitle);
                     Assert.AreEqual(createdWeb.Url, new Uri($"{context.Uri}/{webTitle}"));
@@ -676,8 +772,8 @@ namespace PnP.Core.Test.SharePoint
 
                 using (var context2 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
                 {
-                    await context2.Web.GetAsync(p => p.Webs);
-                    var createdWeb = context2.Web.Webs.FirstOrDefault(p => p.Title == webTitle);
+                    await context2.Web.LoadAsync(p => p.Webs);
+                    var createdWeb = context2.Web.Webs.AsRequested().FirstOrDefault(p => p.Title == webTitle);
                     Assert.IsTrue(createdWeb != null);
 
                     Assert.AreEqual(createdWeb.Title, webTitle);
@@ -705,8 +801,8 @@ namespace PnP.Core.Test.SharePoint
 
                 using (var context2 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
                 {
-                    await context2.Web.GetAsync(p => p.Webs);
-                    var createdWeb = context2.Web.Webs.FirstOrDefault(p => p.Title == webTitle);
+                    await context2.Web.LoadAsync(p => p.Webs);
+                    var createdWeb = context2.Web.Webs.AsRequested().FirstOrDefault(p => p.Title == webTitle);
                     Assert.IsTrue(createdWeb != null);
 
                     await Assert.ThrowsExceptionAsync<ClientException>(async () =>
@@ -741,7 +837,32 @@ namespace PnP.Core.Test.SharePoint
             }
         }
 
+        [TestMethod]
+        public async Task GetByServerRelativeSpecialChars()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                // Get the default document library root folder
+                string sharedDocumentsFolderUrl = $"{context.Uri.PathAndQuery}/Shared Documents";
+                IFolder sharedDocumentsFolder = await context.Web.GetFolderByServerRelativeUrlAsync(sharedDocumentsFolderUrl);
+                Assert.IsNotNull(sharedDocumentsFolder);
 
+                string lib2Name = TestCommon.GetPnPSdkTestAssetName("GetByServerRelativeSpecialChars");
+                var lib2 = await context.Web.Lists.AddAsync(lib2Name, ListTemplateType.DocumentLibrary);
+
+                await lib2.EnsurePropertiesAsync(p => p.RootFolder);
+                await lib2.RootFolder.EnsureFolderAsync("Hi'there# is &ok");
+                IFolder specialNameFolder2 = await context.Web.GetFolderByServerRelativeUrlAsync(lib2.RootFolder.ServerRelativeUrl + "/" + "Hi'there# is &ok");
+                Assert.IsNotNull(specialNameFolder2);
+
+                // Upload a file with a special name
+                var file2 = await specialNameFolder2.Files.AddAsync("Hi'there# is &ok.docx", System.IO.File.OpenRead($".{Path.DirectorySeparatorChar}TestAssets{Path.DirectorySeparatorChar}test.docx"));
+                IFile specialFile2 = await context.Web.GetFileByServerRelativeUrlAsync(lib2.RootFolder.ServerRelativeUrl + "/Hi'there# is &ok/Hi'there# is &ok.docx");
+
+                await lib2.DeleteAsync();
+            }
+        }
 
     }
 }

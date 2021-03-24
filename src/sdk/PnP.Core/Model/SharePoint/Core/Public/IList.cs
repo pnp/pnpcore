@@ -10,8 +10,10 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a List object of SharePoint Online
     /// </summary>
     [ConcreteType(typeof(List))]
-    public interface IList : IDataModel<IList>, IDataModelGet<IList>, IDataModelUpdate, IDataModelDelete, IQueryableDataModel
+    public interface IList : IDataModel<IList>, IDataModelGet<IList>, IDataModelLoad<IList>, IDataModelUpdate, IDataModelDelete, IQueryableDataModel
     {
+        #region Properties
+
         /// <summary>
         /// The Unique ID of the List object
         /// </summary>
@@ -234,6 +236,9 @@ namespace PnP.Core.Model.SharePoint
         /// </summary>
         public bool HasUniqueRoleAssignments { get; }
 
+        #endregion
+
+        #region Methods
         /// <summary>
         /// Moves this list into the site collection recycle bin, returns the recyle bin item id
         /// </summary>
@@ -250,83 +255,83 @@ namespace PnP.Core.Model.SharePoint
         /// Moves this list into the site collection recycle bin, returns the recyle bin item id
         /// </summary>
         /// <returns>Id of the recycle bin item</returns>
-        public void RecycleBatch();
+        public IBatchSingleResult<BatchResultValue<Guid>> RecycleBatch();
 
         /// <summary>
         /// Moves this list into the site collection recycle bin, returns the recyle bin item id
         /// </summary>
         /// <returns>Id of the recycle bin item</returns>
-        public Task RecycleBatchAsync();
-
-        /// <summary>
-        /// Moves this list into the site collection recycle bin, returns the recyle bin item id
-        /// </summary>
-        /// <param name="batch">Batch to add the request to</param>
-        /// <returns>Id of the recycle bin item</returns>
-        public void RecycleBatch(Batch batch);
+        public Task<IBatchSingleResult<BatchResultValue<Guid>>> RecycleBatchAsync();
 
         /// <summary>
         /// Moves this list into the site collection recycle bin, returns the recyle bin item id
         /// </summary>
         /// <param name="batch">Batch to add the request to</param>
         /// <returns>Id of the recycle bin item</returns>
-        public Task RecycleBatchAsync(Batch batch);
+        public IBatchSingleResult<BatchResultValue<Guid>> RecycleBatch(Batch batch);
+
+        /// <summary>
+        /// Moves this list into the site collection recycle bin, returns the recyle bin item id
+        /// </summary>
+        /// <param name="batch">Batch to add the request to</param>
+        /// <returns>Id of the recycle bin item</returns>
+        public Task<IBatchSingleResult<BatchResultValue<Guid>>> RecycleBatchAsync(Batch batch);
 
         /// <summary>
         /// Loads list items based up on a CAML query
         /// </summary>
         /// <param name="query">query to execute</param>
         /// <returns></returns>
-        public Task GetItemsByCamlQueryAsync(string query);
+        public Task LoadItemsByCamlQueryAsync(string query);
 
         /// <summary>
         /// Loads list items based up on a CAML query
         /// </summary>
         /// <param name="query">query to execute</param>
         /// <returns></returns>
-        public void GetItemsByCamlQuery(string query);
+        public void LoadItemsByCamlQuery(string query);
 
         /// <summary>
         /// Loads list items based up on a CAML query
         /// </summary>
         /// <param name="queryOptions"><see cref="CamlQueryOptions"/> defining the query to execute</param>
         /// <returns></returns>
-        public Task GetItemsByCamlQueryAsync(CamlQueryOptions queryOptions);
+        public Task LoadItemsByCamlQueryAsync(CamlQueryOptions queryOptions);
 
         /// <summary>
         /// Loads list items based up on a CAML query
         /// </summary>
         /// <param name="queryOptions"><see cref="CamlQueryOptions"/> defining the query to execute</param>
         /// <returns></returns>
-        public void GetItemsByCamlQuery(CamlQueryOptions queryOptions);
+        public void LoadItemsByCamlQuery(CamlQueryOptions queryOptions);
 
         /// <summary>
         /// Loads list items based up on a CAML query
         /// </summary>
         /// <param name="query">query to execute</param>
         /// <returns></returns>
-        public Task GetItemsByCamlQueryBatchAsync(string query);
+        public Task LoadItemsByCamlQueryBatchAsync(string query);
 
         /// <summary>
         /// Loads list items based up on a CAML query
         /// </summary>
         /// <param name="query">query to execute</param>
         /// <returns></returns>
-        public void GetItemsByCamlQueryBatch(string query);
+        public void LoadItemsByCamlQueryBatch(string query);
 
         /// <summary>
         /// Loads list items based up on a CAML query
         /// </summary>
         /// <param name="queryOptions"><see cref="CamlQueryOptions"/> defining the query to execute</param>
         /// <returns></returns>
-        public Task GetItemsByCamlQueryBatchAsync(CamlQueryOptions queryOptions);
+        public Task LoadItemsByCamlQueryBatchAsync(CamlQueryOptions queryOptions);
 
         /// <summary>
         /// Loads list items based up on a CAML query
         /// </summary>
         /// <param name="queryOptions"><see cref="CamlQueryOptions"/> defining the query to execute</param>
         /// <returns></returns>
-        public void GetItemsByCamlQueryBatch(CamlQueryOptions queryOptions);
+        public void LoadItemsByCamlQueryBatch(CamlQueryOptions queryOptions);
 
         /// <summary>
         /// Loads list items based up on a CAML query
@@ -334,7 +339,7 @@ namespace PnP.Core.Model.SharePoint
         /// <param name="batch">Batch to add this request to </param>
         /// <param name="query">query to execute</param>
         /// <returns></returns>
-        public Task GetItemsByCamlQueryBatchAsync(Batch batch, string query);
+        public Task LoadItemsByCamlQueryBatchAsync(Batch batch, string query);
 
         /// <summary>
         /// Loads list items based up on a CAML query
@@ -342,7 +347,7 @@ namespace PnP.Core.Model.SharePoint
         /// <param name="batch">Batch to add this request to </param>
         /// <param name="query">query to execute</param>
         /// <returns></returns>
-        public void GetItemsByCamlQueryBatch(Batch batch, string query);
+        public void LoadItemsByCamlQueryBatch(Batch batch, string query);
 
         /// <summary>
         /// Loads list items based up on a CAML query
@@ -350,7 +355,7 @@ namespace PnP.Core.Model.SharePoint
         /// <param name="batch">Batch to add this request to </param>
         /// <param name="queryOptions"><see cref="CamlQueryOptions"/> defining the query to execute</param>
         /// <returns></returns>
-        public Task GetItemsByCamlQueryBatchAsync(Batch batch, CamlQueryOptions queryOptions);
+        public Task LoadItemsByCamlQueryBatchAsync(Batch batch, CamlQueryOptions queryOptions);
 
         /// <summary>
         /// Loads list items based up on a CAML query
@@ -358,21 +363,21 @@ namespace PnP.Core.Model.SharePoint
         /// <param name="batch">Batch to add this request to </param>
         /// <param name="queryOptions"><see cref="CamlQueryOptions"/> defining the query to execute</param>
         /// <returns></returns>
-        public void GetItemsByCamlQueryBatch(Batch batch, CamlQueryOptions queryOptions);
+        public void LoadItemsByCamlQueryBatch(Batch batch, CamlQueryOptions queryOptions);
 
         /// <summary>
         /// Loads list items based up on a CAML query and the RenderListDataAsStream API
         /// </summary>
         /// <param name="renderOptions"><see cref="RenderListDataOptions"/> defining the query to execute</param>
         /// <returns></returns>
-        public Task<Dictionary<string, object>> GetListDataAsStreamAsync(RenderListDataOptions renderOptions);
+        public Task<Dictionary<string, object>> LoadListDataAsStreamAsync(RenderListDataOptions renderOptions);
 
         /// <summary>
         /// Loads list items based up on a CAML query and the RenderListDataAsStream API
         /// </summary>
         /// <param name="renderOptions"><see cref="RenderListDataOptions"/> defining the query to execute</param>
         /// <returns></returns>
-        public Dictionary<string, object> GetListDataAsStream(RenderListDataOptions renderOptions);
+        public Dictionary<string, object> LoadListDataAsStream(RenderListDataOptions renderOptions);
 
         /// <summary>
         /// Retrieves the compliance tag / retention label for this list
@@ -528,5 +533,21 @@ namespace PnP.Core.Model.SharePoint
         /// <returns></returns>
         public Task<IListItem> AddListFolderAsync(string path, string parentFolder = null, string contentTypeId = "0x0120");
 
+        /// <summary>
+        /// Classifies and extracts all unprocessed files in the list
+        /// </summary>
+        /// <param name="force">Also classify and extract files that were processed before</param>
+        /// <param name="pageSize">Page size used when loading the files in this library</param>
+        /// <returns>Information about the created classify and extract requests</returns>
+        Task<List<ISyntexClassifyAndExtractResult>> ClassifyAndExtractAsync(bool force = false, int pageSize = 500);
+
+        /// <summary>
+        /// Classifies and extracts all unprocessed files in the list
+        /// </summary>
+        /// <param name="force">Also classify and extract files that were processed before</param>
+        /// <param name="pageSize">Page size used when loading the files in this library</param>
+        /// <returns>Information about the created classify and extract requests</returns>
+        List<ISyntexClassifyAndExtractResult> ClassifyAndExtract(bool force = false, int pageSize = 500);
+        #endregion
     }
 }

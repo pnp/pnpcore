@@ -1,7 +1,6 @@
 ﻿using PnP.Core.QueryModel;
 using PnP.Core.Services;
 using System;
-using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
@@ -99,7 +98,7 @@ namespace PnP.Core.Model.SharePoint
                 throw new ArgumentNullException(nameof(title));
             }
 
-            return await GetFirstOrDefaultAsync(l => l.Title == title, selectors).ConfigureAwait(false);
+            return await this.QueryProperties(selectors).FirstOrDefaultAsync(l => l.Title == title).ConfigureAwait(false);
         }
 
         #endregion
@@ -124,12 +123,13 @@ namespace PnP.Core.Model.SharePoint
                 throw new ArgumentNullException(nameof(id));
             }
 
-            return await GetFirstOrDefaultAsync(l => l.Id == id, selectors).ConfigureAwait(false);
+            return await this.QueryProperties(selectors).FirstOrDefaultAsync(l => l.Id == id).ConfigureAwait(false);
         }
 
         #endregion
 
         #region GetByServerRelativeUrl methods
+
         public async Task<IList> GetByServerRelativeUrlAsync(string serverRelativeUrl, params Expression<Func<IList, object>>[] selectors)
         {
             if (serverRelativeUrl == null)
@@ -154,29 +154,7 @@ namespace PnP.Core.Model.SharePoint
 
             return GetByServerRelativeUrlAsync(serverRelativeUrl, selectors).GetAwaiter().GetResult();
         }
+
         #endregion
-
-
-#if DEBUG
-        #region Only used for test purposes, hence marked as internal
-        internal async Task<IList> BatchGetByTitleAsync(Batch batch, string title, params Expression<Func<IList, object>>[] expressions)
-        {
-            // Was this list previously loaded?
-            if (!(items.FirstOrDefault(p => p.IsPropertyAvailable(p => p.Title) && p.Title.Equals(title, StringComparison.InvariantCultureIgnoreCase)) is List listToLoad))
-            {
-                // List was not loaded before, so add it the current set of loaded lists
-                listToLoad = CreateNewAndAdd() as List;
-            }
-
-            return await listToLoad.BatchGetByTitleAsync(batch, title, expressions).ConfigureAwait(false);
-        }
-
-        internal async Task<IList> BatchGetByTitleAsync(string title, params Expression<Func<IList, object>>[] expressions)
-        {
-            return await BatchGetByTitleAsync(PnPContext.CurrentBatch, title, expressions).ConfigureAwait(false);
-        }
-        #endregion
-#endif
-
     }
 }

@@ -7,6 +7,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using PnP.Core.QueryModel;
+using PnP.Core.Model;
 
 namespace PnP.Core.Test.SharePoint
 {
@@ -53,9 +55,11 @@ namespace PnP.Core.Test.SharePoint
                 {
                     var newList = await context.Web.Lists.GetByTitleAsync(listTitle, l => l.RootFolder);
 
-                    var result = await newList.GetListDataAsStreamAsync(new RenderListDataOptions() { ViewXml = "<View><ViewFields><FieldRef Name='Title' /><FieldRef Name='FileDirRef' /></ViewFields><RowLimit>1</RowLimit></View>", RenderOptions = RenderListDataOptionsFlags.ListData, FolderServerRelativeUrl = $"{newList.RootFolder.ServerRelativeUrl}/Test" });
+                    var result = await newList.LoadListDataAsStreamAsync(new RenderListDataOptions() { ViewXml = "<View><ViewFields><FieldRef Name='Title' /><FieldRef Name='FileDirRef' /></ViewFields><RowLimit>1</RowLimit></View>", RenderOptions = RenderListDataOptionsFlags.ListData, FolderServerRelativeUrl = $"{newList.RootFolder.ServerRelativeUrl}/Test" });
 
-                    Assert.IsTrue(newList.Items.FirstOrDefault() != null);
+
+                    Assert.IsTrue(newList.Items.AsRequested().FirstOrDefault() != null);
+
                 }
                 await list.DeleteAsync();
             }
@@ -155,8 +159,11 @@ namespace PnP.Core.Test.SharePoint
                 var list = await context.Web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
                 var item = await list.Items.AddAsync(new Dictionary<string, object> { { "Title", "Recycle me" } });
                 
-                await item.RecycleBatchAsync();
+                var recycleBatchResponse = await item.RecycleBatchAsync();
+                Assert.IsFalse(recycleBatchResponse.IsAvailable);
                 await context.ExecuteAsync();
+                Assert.IsTrue(recycleBatchResponse.IsAvailable);
+                Assert.AreNotEqual(Guid.Empty, recycleBatchResponse.Result.Value);
 
                 // Verify the item was removed from the list item collection
                 Assert.IsTrue((item as ListItem).Deleted);
@@ -246,102 +253,99 @@ namespace PnP.Core.Test.SharePoint
             //TestCommon.Instance.Mocking = false;
             string listTitle = "SystemUpdate";
 
-            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            try
             {
-                // Create a new list
-                var web = await context.Web.GetAsync(p => p.Lists);
-
-                int listCount = web.Lists.Count();
-
-                var myList = web.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
-
-                if (TestCommon.Instance.Mocking && myList != null)
+                using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
                 {
-                    Assert.Inconclusive("Test data set should be setup to not have the list available.");
-                }
+                    // Create a new list
+                    var myList = context.Web.Lists.FirstOrDefault(p => p.Title == listTitle);
 
-                if (myList == null)
-                {
-                    myList = await web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
-                    // Enable versioning
-                    myList.EnableVersioning = true;
-                    await myList.UpdateAsync();
-                }
+                    if (TestCommon.Instance.Mocking && myList != null)
+                    {
+                        Assert.Inconclusive("Test data set should be setup to not have the list available.");
+                    }
 
-                // Add items to the list
-                for (int i = 0; i < 10; i++)
-                {
-                    Dictionary<string, object> values = new Dictionary<string, object>
+                    if (myList == null)
+                    {
+                        myList = await context.Web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
+                        // Enable versioning
+                        myList.EnableVersioning = true;
+                        await myList.UpdateAsync();
+                    }
+
+                    // Add items to the list
+                    for (int i = 0; i < 10; i++)
+                    {
+                        Dictionary<string, object> values = new Dictionary<string, object>
                         {
                             { "Title", $"Item {i}" }
                         };
 
-                    await myList.Items.AddBatchAsync(values);
+                        await myList.Items.AddBatchAsync(values);
+                    }
+                    await context.ExecuteAsync();
+
+                    // get first item and do a system update
+                    var first = myList.Items.AsRequested().First();
+
+                    first.Title = "blabla";
+
+                    await first.SystemUpdateAsync();
                 }
-                await context.ExecuteAsync();
 
-                // get first item and do a system update
-                var first = myList.Items.First();
+                using (var context2 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+                {
+                    var myList2 = context2.Web.Lists.FirstOrDefault(p => p.Title == listTitle);
+                    await myList2.LoadAsync(p => p.Items);
 
-                first.Title = "blabla";
+                    var first2 = myList2.Items.AsRequested().First();
 
-                await first.SystemUpdateAsync();
+                    // verify the list item was updated and that we're still at version 1.0
+                    Assert.IsTrue(first2.Title == "blabla");
+                    Assert.IsTrue(first2.Values["OData__UIVersionString"].ToString() == "1.0");
+
+                    // do a regular update to bump the version again
+                    first2.Title = "blabla2";
+                    await first2.UpdateAsync();
+                }
+
+                using (var context3 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))
+                {
+                    var myList3 = context3.Web.Lists.FirstOrDefault(p => p.Title == listTitle);
+                    await myList3.LoadAsync(p => p.Items);
+
+                    var first3 = myList3.Items.AsRequested().First();
+
+                    // verify the list item was updated and that we're still at version 1.0
+                    Assert.IsTrue(first3.Title == "blabla2");
+                    Assert.IsTrue(first3.Values["OData__UIVersionString"].ToString() == "2.0");
+
+                    // do a regular update to bump the version again
+                    first3.Title = "blabla3";
+                    await first3.SystemUpdateAsync();
+                }
+
+                using (var context4 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 3))
+                {
+                    var myList4 = context4.Web.Lists.FirstOrDefault(p => p.Title == listTitle);
+                    await myList4.LoadAsync(p => p.Items);
+
+                    var first4 = myList4.Items.AsRequested().First();
+
+                    // verify the list item was updated and that we're still at version 2.0
+                    Assert.IsTrue(first4.Title == "blabla3");
+                    Assert.IsTrue(first4.Values["OData__UIVersionString"].ToString() == "2.0");
+                }
             }
-
-            using (var context2 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+            finally
             {
-                var web2 = await context2.Web.GetAsync(p => p.Lists);
-                var myList2 = web2.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
-                await myList2.GetAsync(p => p.Items);
+                using (var contextFinal = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 4))
+                {
+                    var myList = contextFinal.Web.Lists.FirstOrDefault(p => p.Title == listTitle);
 
-                var first2 = myList2.Items.First();
-
-                // verify the list item was updated and that we're still at version 1.0
-                Assert.IsTrue(first2.Title == "blabla");
-                Assert.IsTrue(first2.Values["_UIVersionString"].ToString() == "1.0");
-
-                // do a regular update to bump the version again
-                first2.Title = "blabla2";
-                await first2.UpdateAsync();
-            }
-
-            using (var context3 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))
-            {
-                var web3 = await context3.Web.GetAsync(p => p.Lists);
-                var myList3 = web3.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
-                await myList3.GetAsync(p => p.Items);
-
-                var first3 = myList3.Items.First();
-
-                // verify the list item was updated and that we're still at version 1.0
-                Assert.IsTrue(first3.Title == "blabla2");
-                Assert.IsTrue(first3.Values["_UIVersionString"].ToString() == "2.0");
-
-                // do a regular update to bump the version again
-                first3.Title = "blabla3";
-                await first3.SystemUpdateAsync();
-            }
-
-            using (var context4 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 3))
-            {
-                var web4 = await context4.Web.GetAsync(p => p.Lists);
-                var myList4 = web4.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
-                await myList4.GetAsync(p => p.Items);
-
-                var first4 = myList4.Items.First();
-
-                // verify the list item was updated and that we're still at version 2.0
-                Assert.IsTrue(first4.Title == "blabla3");
-                Assert.IsTrue(first4.Values["_UIVersionString"].ToString() == "2.0");
-            }
-
-            using (var contextFinal = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 4))
-            {
-                var web = await contextFinal.Web.GetAsync(p => p.Lists);
-                var myList = web.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
-
-                // Cleanup the created list
-                await myList.DeleteAsync();
+                    // Cleanup the created list
+                    await myList.DeleteAsync();
+                }
             }
         }
 
@@ -354,14 +358,9 @@ namespace PnP.Core.Test.SharePoint
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 // Create a new list
-                var web = await context.Web.GetAsync(p => p.Lists);
-
-                int listCount = web.Lists.Count();
+                var myList = context.Web.Lists.FirstOrDefault(p => p.Title == listTitle);
 
                 #region Test Setup
-
-                var myList = web.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
-
                 if (!TestCommon.Instance.Mocking && myList != null)
                 {
                     // Cleanup the created list possibly from a previous run
@@ -370,7 +369,7 @@ namespace PnP.Core.Test.SharePoint
 
                 if (myList == null)
                 {
-                    myList = await web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
+                    myList = await context.Web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
                     // Enable versioning
                     myList.EnableVersioning = true;
                     await myList.UpdateAsync();
@@ -391,7 +390,7 @@ namespace PnP.Core.Test.SharePoint
                 #endregion
 
                 // get first item and do a system update
-                var first = myList.Items.First();
+                var first = myList.Items.AsRequested().First();
 
                 first.Title = "blabla";
 
@@ -403,15 +402,13 @@ namespace PnP.Core.Test.SharePoint
             {
                 context2.BatchClient.EnsureBatch();
 
-                var web2 = await context2.Web.GetAsync(p => p.Lists);
-                var myList2 = web2.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
-                await myList2.GetAsync(p => p.Items);
-
-                var first2 = myList2.Items.First();
+                var myList2 = context2.Web.Lists.FirstOrDefault(p => p.Title == listTitle);
+                await myList2.LoadAsync(p => p.Items);
+                var first2 = myList2.Items.AsRequested().First();
 
                 // verify the list item was updated and that we're still at version 1.0
                 Assert.IsTrue(first2.Title == "blabla");
-                Assert.IsTrue(first2.Values["_UIVersionString"].ToString() == "1.0");
+                Assert.IsTrue(first2.Values["OData__UIVersionString"].ToString() == "1.0");
 
                 // do a regular update to bump the version again
                 first2.Title = "blabla2";
@@ -420,15 +417,13 @@ namespace PnP.Core.Test.SharePoint
 
             using (var context3 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))
             {
-                var web3 = await context3.Web.GetAsync(p => p.Lists);
-                var myList3 = web3.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
-                await myList3.GetAsync(p => p.Items);
-
-                var first3 = myList3.Items.First();
+                var myList3 = context3.Web.Lists.FirstOrDefault(p => p.Title == listTitle);
+                await myList3.LoadAsync(p => p.Items);
+                var first3 = myList3.Items.AsRequested().First();
 
                 // verify the list item was updated and that we're still at version 2.0
                 Assert.IsTrue(first3.Title == "blabla2");
-                Assert.IsTrue(first3.Values["_UIVersionString"].ToString() == "2.0");
+                Assert.IsTrue(first3.Values["OData__UIVersionString"].ToString() == "2.0");
 
                 // do a regular update to bump the version again
                 first3.Title = "blabla3";
@@ -438,15 +433,13 @@ namespace PnP.Core.Test.SharePoint
 
             using (var context4 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 3))
             {
-                var web4 = await context4.Web.GetAsync(p => p.Lists);
-                var myList4 = web4.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
-                await myList4.GetAsync(p => p.Items);
-
-                var first4 = myList4.Items.First();
+                var myList4 = context4.Web.Lists.FirstOrDefault(p => p.Title == listTitle); 
+                await myList4.LoadAsync(p => p.Items);
+                var first4 = myList4.Items.AsRequested().First();
 
                 // verify the list item was updated and that we're still at version 2.0
                 Assert.IsTrue(first4.Title == "blabla3");
-                Assert.IsTrue(first4.Values["_UIVersionString"].ToString() == "2.0");
+                Assert.IsTrue(first4.Values["OData__UIVersionString"].ToString() == "2.0");
 
                 // do a regular update to bump the version again
                 first4.Title = "blabla4";
@@ -457,15 +450,13 @@ namespace PnP.Core.Test.SharePoint
 
             using (var context5 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 4))
             {
-                var web5 = await context5.Web.GetAsync(p => p.Lists);
-                var myList5 = web5.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
-                myList5.Get(p => p.Items);
-
-                var first5 = myList5.Items.First();
+                var myList5 = context5.Web.Lists.FirstOrDefault(p => p.Title == listTitle); 
+                myList5.Load(p => p.Items);
+                var first5 = myList5.Items.AsRequested().First();
 
                 // verify the list item was updated and that we're still at version 2.0
                 Assert.IsTrue(first5.Title == "blabla4");
-                Assert.IsTrue(first5.Values["_UIVersionString"].ToString() == "2.0");
+                Assert.IsTrue(first5.Values["OData__UIVersionString"].ToString() == "2.0");
 
                 // do a regular update to bump the version again
                 first5.Title = "blabla5";
@@ -476,21 +467,19 @@ namespace PnP.Core.Test.SharePoint
 
             using (var context6 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 5))
             {
-                var web6 = await context6.Web.GetAsync(p => p.Lists);
-                var myList6 = web6.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
-                myList6.Get(p => p.Items);
-
-                var first6 = myList6.Items.First();
+                var myList6 = context6.Web.Lists.FirstOrDefault(p => p.Title == listTitle); 
+                myList6.Load(p => p.Items);
+                var first6 = myList6.Items.AsRequested().First();
 
                 // verify the list item was updated and that we're still at version 2.0
                 Assert.IsTrue(first6.Title == "blabla5");
-                Assert.IsTrue(first6.Values["_UIVersionString"].ToString() == "2.0");
+                Assert.IsTrue(first6.Values["OData__UIVersionString"].ToString() == "2.0");
             }
 
             using (var contextFinal = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 6))
             {
                 var web = await contextFinal.Web.GetAsync(p => p.Lists);
-                var myList = web.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
+                var myList = web.Lists.AsRequested().FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
 
                 // Cleanup the created list
                 await myList.DeleteAsync();
@@ -503,126 +492,120 @@ namespace PnP.Core.Test.SharePoint
             //TestCommon.Instance.Mocking = false;
             string listTitle = "SystemUpdateAsyncNoDataChangeTests";
 
-            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            try
             {
-                // Create a new list
-                var web = await context.Web.GetAsync(p => p.Lists);
-
-                int listCount = web.Lists.Count();
-
-                #region Test Setup
-
-
-                var myList = web.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
-
-                if (!TestCommon.Instance.Mocking && myList != null)
+                using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
                 {
-                    // Cleanup the created list possibly from a previous run
-                    Assert.Inconclusive("Test data set should be setup to not have the list available.");
-                }
+                    #region Test Setup
 
-                if (myList == null)
-                {
-                    myList = await web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
-                    // Enable versioning
-                    myList.EnableVersioning = true;
-                    await myList.UpdateAsync();
-                }
+                    var myList = context.Web.Lists.FirstOrDefault(p => p.Title == listTitle);
 
-                // Add items to the list
-                for (int i = 0; i < 10; i++)
-                {
-                    Dictionary<string, object> values = new Dictionary<string, object>
+                    if (!TestCommon.Instance.Mocking && myList != null)
+                    {
+                        // Cleanup the created list possibly from a previous run
+                        Assert.Inconclusive("Test data set should be setup to not have the list available.");
+                    }
+
+                    if (myList == null)
+                    {
+                        myList = await context.Web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
+                        // Enable versioning
+                        myList.EnableVersioning = true;
+                        await myList.UpdateAsync();
+                    }
+
+                    // Add items to the list
+                    for (int i = 0; i < 10; i++)
+                    {
+                        Dictionary<string, object> values = new Dictionary<string, object>
                         {
                             { "Title", $"Item {i}" }
                         };
 
-                    await myList.Items.AddBatchAsync(values);
+                        await myList.Items.AddBatchAsync(values);
+                    }
+                    await context.ExecuteAsync();
+
+                    #endregion
+
+                    // get first item and do a system update
+                    var first = myList.Items.AsRequested().First();
+
+                    first.Title = "blabla";
+
+                    await first.SystemUpdateBatchAsync();
+                    await context.ExecuteAsync();
+
                 }
-                await context.ExecuteAsync();
 
-                #endregion
+                using (var context2 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+                {
+                    var myList2 = context2.Web.Lists.FirstOrDefault(p => p.Title == listTitle);
+                    await myList2.LoadAsync(p => p.Items);
 
-                // get first item and do a system update
-                var first = myList.Items.First();
+                    var first2 = myList2.Items.AsRequested().First();
 
-                first.Title = "blabla";
+                    // verify the list item was updated and that we're still at version 1.0
+                    Assert.IsTrue(first2.Title == "blabla");
+                    Assert.IsTrue(first2.Values["OData__UIVersionString"].ToString() == "1.0");
 
-                await first.SystemUpdateBatchAsync();
-                await context.ExecuteAsync();
+                    // do a regular update to bump the version again
+                    first2.Title = "blabla2";
+                    await first2.UpdateAsync();
+                }
 
+                using (var context3 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))
+                {
+                    var myList3 = context3.Web.Lists.FirstOrDefault(p => p.Title == listTitle);
+                    await myList3.LoadAsync(p => p.Items);
+
+                    var first3 = myList3.Items.AsRequested().First();
+
+                    // verify the list item was updated and that we're still at version 2.0
+                    Assert.IsTrue(first3.Title == "blabla2");
+                    Assert.IsTrue(first3.Values["OData__UIVersionString"].ToString() == "2.0");
+
+                    // do a regular update to bump the version again
+                    await first3.SystemUpdateAsync();
+                }
+
+                using (var context4 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 3))
+                {
+                    var myList4 = context4.Web.Lists.FirstOrDefault(p => p.Title == listTitle);
+                    await myList4.LoadAsync(p => p.Items);
+
+                    var first4 = myList4.Items.AsRequested().First();
+
+                    // verify the list item was updated and that we're still at version 2.0
+                    Assert.IsTrue(first4.Title == "blabla2");
+                    Assert.IsTrue(first4.Values["OData__UIVersionString"].ToString() == "2.0");
+
+                    // do a regular update to bump the version again
+                    await first4.SystemUpdateBatchAsync();
+                    await context4.ExecuteAsync();
+
+                }
+
+                using (var context5 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 4))
+                {
+                    var myList5 = context5.Web.Lists.FirstOrDefault(p => p.Title == listTitle);
+                    await myList5.LoadAsync(p => p.Items);
+
+                    var first5 = myList5.Items.AsRequested().First();
+
+                    // verify the list item was updated and that we're still at version 2.0
+                    Assert.IsTrue(first5.Title == "blabla2");
+                    Assert.IsTrue(first5.Values["OData__UIVersionString"].ToString() == "2.0");
+                }
             }
-
-            using (var context2 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+            finally
             {
-                var web2 = await context2.Web.GetAsync(p => p.Lists);
-                var myList2 = web2.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
-                await myList2.GetAsync(p => p.Items);
-
-                var first2 = myList2.Items.First();
-
-                // verify the list item was updated and that we're still at version 1.0
-                Assert.IsTrue(first2.Title == "blabla");
-                Assert.IsTrue(first2.Values["_UIVersionString"].ToString() == "1.0");
-
-                // do a regular update to bump the version again
-                first2.Title = "blabla2";
-                await first2.UpdateAsync();
-            }
-
-            using (var context3 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))
-            {
-                var web3 = await context3.Web.GetAsync(p => p.Lists);
-                var myList3 = web3.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
-                await myList3.GetAsync(p => p.Items);
-
-                var first3 = myList3.Items.First();
-
-                // verify the list item was updated and that we're still at version 2.0
-                Assert.IsTrue(first3.Title == "blabla2");
-                Assert.IsTrue(first3.Values["_UIVersionString"].ToString() == "2.0");
-
-                // do a regular update to bump the version again
-                await first3.SystemUpdateAsync();
-            }
-
-            using (var context4 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 3))
-            {
-                var web4 = await context4.Web.GetAsync(p => p.Lists);
-                var myList4 = web4.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
-                await myList4.GetAsync(p => p.Items);
-
-                var first4 = myList4.Items.First();
-
-                // verify the list item was updated and that we're still at version 2.0
-                Assert.IsTrue(first4.Title == "blabla2");
-                Assert.IsTrue(first4.Values["_UIVersionString"].ToString() == "2.0");
-
-                // do a regular update to bump the version again
-                await first4.SystemUpdateBatchAsync();
-                await context4.ExecuteAsync();
-
-            }
-
-            using (var context5 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 4))
-            {
-                var web5 = await context5.Web.GetAsync(p => p.Lists);
-                var myList5 = web5.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
-                await myList5.GetAsync(p => p.Items);
-
-                var first5 = myList5.Items.First();
-
-                // verify the list item was updated and that we're still at version 2.0
-                Assert.IsTrue(first5.Title == "blabla2");
-                Assert.IsTrue(first5.Values["_UIVersionString"].ToString() == "2.0");
-            }
-
-            using (var contextFinal = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 5))
-            {
-                var web = await contextFinal.Web.GetAsync(p => p.Lists);
-                var myList = web.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
-                // Cleanup the created list
-                await myList.DeleteAsync();
+                using (var contextFinal = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 5))
+                {
+                    var myList = contextFinal.Web.Lists.FirstOrDefault(p => p.Title == listTitle);
+                    // Cleanup the created list
+                    await myList.DeleteAsync();
+                }
             }
         }
 
@@ -635,12 +618,7 @@ namespace PnP.Core.Test.SharePoint
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 // Create a new list
-                var web = await context.Web.GetAsync(p => p.Lists.LoadProperties(p => p.Title, p => p.Items));
-
-                int listCount = web.Lists.Count();
-
-                var myList = web.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
-
+                var myList = context.Web.Lists.FirstOrDefault(p => p.Title == listTitle);
                 if (TestCommon.Instance.Mocking && myList != null)
                 {
                     Assert.Inconclusive("Test data set should be setup to not have the list available.");
@@ -648,7 +626,7 @@ namespace PnP.Core.Test.SharePoint
 
                 if (myList == null)
                 {
-                    myList = await web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
+                    myList = await context.Web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
                     // Enable versioning
                     myList.EnableVersioning = true;
                     await myList.UpdateAsync();
@@ -667,7 +645,7 @@ namespace PnP.Core.Test.SharePoint
                 await context.ExecuteAsync();
 
                 // get first item and do a system update
-                var first = myList.Items.First();
+                var first = myList.Items.AsRequested().First();
 
                 first.Title = "blabla";
 
@@ -678,21 +656,19 @@ namespace PnP.Core.Test.SharePoint
             }
             using (var context2 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
             {
-                var web2 = await context2.Web.GetAsync(p => p.Lists.LoadProperties(p => p.Title, p => p.Items));
-                var myList2 = web2.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
-                await myList2.GetAsync(p => p.Items);
+                var myList2 = context2.Web.Lists.FirstOrDefault(p => p.Title == listTitle);
+                await myList2.LoadAsync(p => p.Items);
 
-                var first2 = myList2.Items.First();
+                var first2 = myList2.Items.AsRequested().First();
 
                 // verify the list item was updated and that we're still at version 1.0
                 Assert.IsTrue(first2.Title == "blabla");
-                Assert.IsTrue(first2.Values["_UIVersionString"].ToString() == "1.0");
+                Assert.IsTrue(first2.Values["OData__UIVersionString"].ToString() == "1.0");
             }
             using (var contextFinal = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))
             {
-                var web = await contextFinal.Web.GetAsync(p => p.Lists.LoadProperties(p => p.Title, p => p.Items));
-                var myList = web.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
-
+                var myList = contextFinal.Web.Lists.FirstOrDefault(p => p.Title == listTitle);
+                
                 // Cleanup the created list
                 await myList.DeleteAsync();
             }
@@ -707,14 +683,10 @@ namespace PnP.Core.Test.SharePoint
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                // Create a new list
-                var web = await context.Web.GetAsync(p => p.Lists.LoadProperties(p => p.Title, p => p.Items));
-
-                int listCount = web.Lists.Count();
-
                 #region Test Setup
 
-                var myList = web.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
+                // Create a new list
+                var myList = await context.Web.Lists.FirstOrDefaultAsync(p => p.Title == listTitle);
 
                 if (!TestCommon.Instance.Mocking && myList != null)
                 {
@@ -723,7 +695,7 @@ namespace PnP.Core.Test.SharePoint
 
                 if (myList == null)
                 {
-                    myList = await web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
+                    myList = await context.Web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
                     // Enable versioning
                     myList.EnableVersioning = true;
                     await myList.UpdateAsync();
@@ -744,7 +716,7 @@ namespace PnP.Core.Test.SharePoint
                 #endregion
 
                 // get first item and do a system update
-                var first = myList.Items.First();
+                var first = myList.Items.AsRequested().First();
 
                 first.Title = "blabla";
 
@@ -756,15 +728,14 @@ namespace PnP.Core.Test.SharePoint
 
             using (var context2 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
             {
-                var web2 = await context2.Web.GetAsync(p => p.Lists.LoadProperties(p => p.Title, p => p.Items));
-                var myList2 = web2.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
-                await myList2.GetAsync(p => p.Items);
+                var myList2 = await context2.Web.Lists.FirstOrDefaultAsync(p => p.Title == listTitle);
+                await myList2.LoadAsync(p => p.Items);
 
-                var first2 = myList2.Items.First();
+                var first2 = myList2.Items.AsRequested().First();
 
                 // verify the list item was updated and that we're still at version 1.0
                 Assert.IsTrue(first2.Title == "blabla");
-                Assert.IsTrue(first2.Values["_UIVersionString"].ToString() == "1.0");
+                Assert.IsTrue(first2.Values["OData__UIVersionString"].ToString() == "1.0");
 
                 first2.Title = "blabla2";
                 first2.UpdateOverwriteVersion();
@@ -772,15 +743,14 @@ namespace PnP.Core.Test.SharePoint
 
             using (var context3 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))
             {
-                var web3 = await context3.Web.GetAsync(p => p.Lists.LoadProperties(p => p.Title, p => p.Items));
-                var myList3 = web3.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
-                await myList3.GetAsync(p => p.Items);
+                var myList3 = await context3.Web.Lists.FirstOrDefaultAsync(p => p.Title == listTitle);
+                await myList3.LoadAsync(p => p.Items);
 
-                var first3 = myList3.Items.First();
+                var first3 = myList3.Items.AsRequested().First();
 
                 // verify the list item was updated and that we're still at version 1.0
                 Assert.IsTrue(first3.Title == "blabla2");
-                Assert.IsTrue(first3.Values["_UIVersionString"].ToString() == "1.0");
+                Assert.IsTrue(first3.Values["OData__UIVersionString"].ToString() == "1.0");
 
                 var batch3 = context3.NewBatch();
                 first3.Title = "blabla3";
@@ -790,15 +760,14 @@ namespace PnP.Core.Test.SharePoint
 
             using (var context4 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 3))
             {
-                var web4 = await context4.Web.GetAsync(p => p.Lists.LoadProperties(p => p.Title, p => p.Items));
-                var myList4 = web4.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
-                await myList4.GetAsync(p => p.Items);
+                var myList4 = await context4.Web.Lists.FirstOrDefaultAsync(p => p.Title == listTitle);
+                await myList4.LoadAsync(p => p.Items);
 
-                var first4 = myList4.Items.First();
+                var first4 = myList4.Items.AsRequested().First();
 
                 // verify the list item was updated and that we're still at version 1.0
                 Assert.IsTrue(first4.Title == "blabla3");
-                Assert.IsTrue(first4.Values["_UIVersionString"].ToString() == "1.0");
+                Assert.IsTrue(first4.Values["OData__UIVersionString"].ToString() == "1.0");
 
                 first4.Title = "blabla4";
                 first4.UpdateOverwriteVersionBatch();
@@ -807,21 +776,19 @@ namespace PnP.Core.Test.SharePoint
 
             using (var context5 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 4))
             {
-                var web5 = await context5.Web.GetAsync(p => p.Lists.LoadProperties(p => p.Title, p => p.Items));
-                var myList5 = web5.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
-                await myList5.GetAsync(p => p.Items);
+                var myList5 = await context5.Web.Lists.FirstOrDefaultAsync(p => p.Title == listTitle);
+                await myList5.LoadAsync(p => p.Items);
 
-                var first5 = myList5.Items.First();
+                var first5 = myList5.Items.AsRequested().First();
 
                 // verify the list item was updated and that we're still at version 1.0
                 Assert.IsTrue(first5.Title == "blabla4");
-                Assert.IsTrue(first5.Values["_UIVersionString"].ToString() == "1.0");
+                Assert.IsTrue(first5.Values["OData__UIVersionString"].ToString() == "1.0");
             }
 
             using (var contextFinal = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 5))
             {
-                var web = await contextFinal.Web.GetAsync(p => p.Lists.LoadProperties(p => p.Title, p => p.Items));
-                var myList = web.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
+                var myList = await contextFinal.Web.Lists.FirstOrDefaultAsync(p => p.Title == listTitle);
 
                 // Cleanup the created list
                 await myList.DeleteAsync();
@@ -836,14 +803,9 @@ namespace PnP.Core.Test.SharePoint
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                // Create a new list
-                var web = await context.Web.GetAsync(p => p.Lists.LoadProperties(p => p.Title, p => p.Items));
-
-                int listCount = web.Lists.Count();
-
                 #region Test Setup
 
-                var myList = web.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
+                var myList = await context.Web.Lists.FirstOrDefaultAsync(p => p.Title == listTitle);
 
                 if (!TestCommon.Instance.Mocking && myList != null)
                 {
@@ -852,7 +814,7 @@ namespace PnP.Core.Test.SharePoint
 
                 if (myList == null)
                 {
-                    myList = await web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
+                    myList = await context.Web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
                     // Enable versioning
                     myList.EnableVersioning = true;
                     await myList.UpdateAsync();
@@ -873,7 +835,7 @@ namespace PnP.Core.Test.SharePoint
                 #endregion
 
                 // get first item and do a system update
-                var first = myList.Items.First();
+                var first = myList.Items.AsRequested().First();
 
                 first.Title = "blabla";
 
@@ -885,30 +847,28 @@ namespace PnP.Core.Test.SharePoint
 
             using (var context2 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
             {
-                var web2 = await context2.Web.GetAsync(p => p.Lists.LoadProperties(p => p.Title, p => p.Items));
-                var myList2 = web2.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
-                await myList2.GetAsync(p => p.Items);
+                var myList2 = await context2.Web.Lists.FirstOrDefaultAsync(p => p.Title == listTitle);
+                await myList2.LoadAsync(p => p.Items);
 
-                var first2 = myList2.Items.First();
+                var first2 = myList2.Items.AsRequested().First();
 
                 // verify the list item was updated and that we're still at version 1.0
                 Assert.IsTrue(first2.Title == "blabla");
-                Assert.IsTrue(first2.Values["_UIVersionString"].ToString() == "1.0");
+                Assert.IsTrue(first2.Values["OData__UIVersionString"].ToString() == "1.0");
 
                 await first2.UpdateOverwriteVersionAsync();
             }
 
             using (var context3 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))
             {
-                var web3 = await context3.Web.GetAsync(p => p.Lists.LoadProperties(p => p.Title, p => p.Items));
-                var myList3 = web3.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
-                await myList3.GetAsync(p => p.Items);
+                var myList3 = await context3.Web.Lists.FirstOrDefaultAsync(p => p.Title == listTitle);
+                await myList3.LoadAsync(p => p.Items);
 
-                var first3 = myList3.Items.First();
+                var first3 = myList3.Items.AsRequested().First();
 
                 // verify the list item was updated and that we're still at version 1.0
                 Assert.IsTrue(first3.Title == "blabla");
-                Assert.IsTrue(first3.Values["_UIVersionString"].ToString() == "1.0");
+                Assert.IsTrue(first3.Values["OData__UIVersionString"].ToString() == "1.0");
 
                 await first3.UpdateOverwriteVersionBatchAsync();
                 await context3.ExecuteAsync();
@@ -916,22 +876,20 @@ namespace PnP.Core.Test.SharePoint
 
             using (var context4 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 3))
             {
-                var web4 = await context4.Web.GetAsync(p => p.Lists.LoadProperties(p => p.Title, p => p.Items));
-                var myList4 = web4.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
-                await myList4.GetAsync(p => p.Items);
+                var myList4 = await context4.Web.Lists.FirstOrDefaultAsync(p => p.Title == listTitle);
+                await myList4.LoadAsync(p => p.Items);
 
-                var first4 = myList4.Items.First();
+                var first4 = myList4.Items.AsRequested().First();
 
                 // verify the list item was updated and that we're still at version 1.0
                 Assert.IsTrue(first4.Title == "blabla");
-                Assert.IsTrue(first4.Values["_UIVersionString"].ToString() == "1.0");
+                Assert.IsTrue(first4.Values["OData__UIVersionString"].ToString() == "1.0");
             }
 
             using (var contextFinal = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 4))
             {
                 // Create a new list
-                var web = await contextFinal.Web.GetAsync(p => p.Lists.LoadProperties(p => p.Title, p => p.Items));
-                var myList = web.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
+                var myList = await contextFinal.Web.Lists.FirstOrDefaultAsync(p => p.Title == listTitle);
 
                 // Cleanup the created list
                 await myList.DeleteAsync();
@@ -1512,8 +1470,7 @@ namespace PnP.Core.Test.SharePoint
         {
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, id, testName))
             {
-                var myList = context.Web.Lists.GetByTitle(listTitle);
-                var itemViaGetAsync = myList.Items.FirstOrDefault(p => p.Title == "Item1");
+                var myList = context.Web.Lists.GetByTitle(listTitle);                
 
                 var listDataOptions = new RenderListDataOptions()
                 {
@@ -1528,8 +1485,8 @@ namespace PnP.Core.Test.SharePoint
 
                 listDataOptions.SetViewXmlFromFields(fieldsToLoad);
 
-                await myList.GetListDataAsStreamAsync(listDataOptions).ConfigureAwait(false);
-                var addedItem = myList.Items.First();
+                await myList.LoadListDataAsStreamAsync(listDataOptions).ConfigureAwait(false);
+                var addedItem = myList.Items.AsRequested().First();
 
                 AssertRegularListItemProperties(fieldData, addedItem);
 
@@ -1541,8 +1498,9 @@ namespace PnP.Core.Test.SharePoint
         {
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, id, testName))
             {
-                var myList = context.Web.Lists.GetByTitle(listTitle, p => p.Title, p => p.Items, p => p.Fields.LoadProperties(p => p.InternalName, p => p.FieldTypeKind, p => p.TypeAsString, p => p.Title));
-                var addedItem = myList.Items.FirstOrDefault(p => p.Title == "Item1");
+                context.GraphFirst = false;
+                var myList = context.Web.Lists.GetByTitle(listTitle, p => p.Title, p => p.Items, p => p.Fields.QueryProperties(p => p.InternalName, p => p.FieldTypeKind, p => p.TypeAsString, p => p.Title));
+                var addedItem = myList.Items.AsRequested().FirstOrDefault(p => p.Title == "Item1");
 
                 AssertRegularListItemProperties(fieldData, addedItem);
 
@@ -2555,8 +2513,8 @@ namespace PnP.Core.Test.SharePoint
 
                 listDataOptions.SetViewXmlFromFields(fieldsToLoad);
 
-                await myList.GetListDataAsStreamAsync(listDataOptions).ConfigureAwait(false);
-                var addedItem = myList.Items.First();
+                await myList.LoadListDataAsStreamAsync(listDataOptions).ConfigureAwait(false);
+                var addedItem = myList.Items.AsRequested().First();
 
                 AssertListItemProperties(fieldData, addedItem);
 
@@ -2568,8 +2526,8 @@ namespace PnP.Core.Test.SharePoint
         {
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, id, testName))
             {
-                var myList = context.Web.Lists.GetByTitle(listTitle, p => p.Title, p => p.Items, p => p.Fields.LoadProperties(p => p.InternalName, p => p.FieldTypeKind, p => p.TypeAsString, p => p.Title));
-                var addedItem = myList.Items.FirstOrDefault(p => p.Title == "Item1");
+                var myList = context.Web.Lists.GetByTitle(listTitle, p => p.Title, p => p.Items, p => p.Fields.QueryProperties(p => p.InternalName, p => p.FieldTypeKind, p => p.TypeAsString, p => p.Title));
+                var addedItem = myList.Items.AsRequested().FirstOrDefault(p => p.Title == "Item1");
 
                 AssertListItemProperties(fieldData, addedItem);
 
@@ -2603,7 +2561,7 @@ namespace PnP.Core.Test.SharePoint
         //        */
 
 
-        //        var list = await context.Web.Lists.GetByTitleAsync("FieldTypes", p => p.Title, p => p.Items, p => p.Fields.LoadProperties(p => p.InternalName, p => p.FieldTypeKind, p => p.TypeAsString, p => p.Title));
+        //        var list = await context.Web.Lists.GetByTitleAsync("FieldTypes", p => p.Title, p => p.Items, p => p.Fields.Load(p => p.InternalName, p => p.FieldTypeKind, p => p.TypeAsString, p => p.Title));
 
         //        var item = list.Items.FirstOrDefault(p => p.Title == "Item1");
 

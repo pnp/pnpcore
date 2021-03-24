@@ -5,6 +5,8 @@ using System;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using PnP.Core.QueryModel;
+using PnP.Core.Model;
 
 namespace PnP.Core.Test.SharePoint
 {
@@ -28,10 +30,10 @@ namespace PnP.Core.Test.SharePoint
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
             {
                 // Load the recycle bin
-                await context.Web.GetAsync(w => w.RecycleBin);
+                await context.Web.LoadAsync(w => w.RecycleBin);
 
                 // Still convinced the FirstOrDefaultAsync should load the RecycleBin without the need to load it previously...
-                IRecycleBinItem recycleBinItem = context.Web.RecycleBin.FirstOrDefault(item => item.Id == recycleBinItemId);
+                IRecycleBinItem recycleBinItem = context.Web.RecycleBin.AsRequested().FirstOrDefault(item => item.Id == recycleBinItemId);
 
                 Assert.IsNotNull(recycleBinItem);
                 Assert.AreEqual(recycleBinItemId, recycleBinItem.Id);
@@ -62,10 +64,11 @@ namespace PnP.Core.Test.SharePoint
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
             {
                 // Load the recycle bin
-                await context.Web.GetAsync(w => w.RecycleBin.LoadProperties(p => p.Author, p => p.Id, p => p.Title));
+                await context.Web.LoadAsync(w => w.RecycleBin.QueryProperties(p => p.Author, p => p.Id, p => p.Title));
+                IRecycleBinItem recycleBinItem = context.Web.RecycleBin.AsRequested().FirstOrDefault(item => item.Id == recycleBinItemId);
 
                 // Still convinced the FirstOrDefaultAsync should load the RecycleBin without the need to load it previously...
-                IRecycleBinItem recycleBinItem = context.Web.RecycleBin.FirstOrDefault(item => item.Id == recycleBinItemId);
+                //IRecycleBinItem recycleBinItem = await context.Web.RecycleBin.QueryProperties(p => p.Author, p => p.Id, p => p.Title).FirstOrDefaultAsync(item => item.Id == recycleBinItemId);
 
                 Assert.IsNotNull(recycleBinItem);
                 Assert.AreEqual(recycleBinItemId, recycleBinItem.Id);
@@ -104,17 +107,13 @@ namespace PnP.Core.Test.SharePoint
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
             {
-                // Load the recycle bin
-                await context.Web.GetAsync(w => w.RecycleBin);
-
-                // Still convinced the FirstOrDefaultAsync should load the RecycleBin without the need to load it previously...
-                IRecycleBinItem recycleBinItem = context.Web.RecycleBin.FirstOrDefault(item => item.Id == recycleBinItemId);
+                IRecycleBinItem recycleBinItem = await context.Web.RecycleBin.FirstOrDefaultAsync(item => item.Id == recycleBinItemId);
 
                 await recycleBinItem.RestoreAsync();
 
                 string sharedDocumentsFolderUrl = $"{context.Uri.PathAndQuery}/Shared Documents";
                 IFolder sharedDocumentsFolder = await context.Web.GetFolderByServerRelativeUrlAsync(sharedDocumentsFolderUrl);
-                IFile documentToFind = await sharedDocumentsFolder.Files.GetFirstOrDefaultAsync(f => f.Name == fileName);
+                IFile documentToFind = await sharedDocumentsFolder.Files.FirstOrDefaultAsync(f => f.Name == fileName);
 
                 Assert.IsNotNull(documentToFind);
                 Assert.AreEqual(fileName, documentToFind.Name);
@@ -132,17 +131,13 @@ namespace PnP.Core.Test.SharePoint
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
             {
-                // Load the recycle bin
-                await context.Web.GetAsync(w => w.RecycleBin);
-
-                // Still convinced the FirstOrDefaultAsync should load the RecycleBin without the need to load it previously...
-                IRecycleBinItem recycleBinItem = context.Web.RecycleBin.FirstOrDefault(item => item.Id == recycleBinItemId);
+                IRecycleBinItem recycleBinItem = await context.Web.RecycleBin.FirstOrDefaultAsync(item => item.Id == recycleBinItemId);
 
                 recycleBinItem.Restore();
 
                 string sharedDocumentsFolderUrl = $"{context.Uri.PathAndQuery}/Shared Documents";
                 IFolder sharedDocumentsFolder = await context.Web.GetFolderByServerRelativeUrlAsync(sharedDocumentsFolderUrl);
-                IFile documentToFind = await sharedDocumentsFolder.Files.GetFirstOrDefaultAsync(f => f.Name == fileName);
+                IFile documentToFind = await sharedDocumentsFolder.Files.FirstOrDefaultAsync(f => f.Name == fileName);
 
                 Assert.IsNotNull(documentToFind);
                 Assert.AreEqual(fileName, documentToFind.Name);
@@ -160,11 +155,7 @@ namespace PnP.Core.Test.SharePoint
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
             {
-                // Load the recycle bin
-                await context.Web.GetAsync(w => w.RecycleBin);
-
-                // Still convinced the FirstOrDefaultAsync should load the RecycleBin without the need to load it previously...
-                IRecycleBinItem recycleBinItem = context.Web.RecycleBin.FirstOrDefault(item => item.Id == recycleBinItemId);
+                IRecycleBinItem recycleBinItem = await context.Web.RecycleBin.FirstOrDefaultAsync(item => item.Id == recycleBinItemId);
 
                 var batch = context.NewBatch();
                 await recycleBinItem.RestoreBatchAsync(batch);
@@ -172,7 +163,7 @@ namespace PnP.Core.Test.SharePoint
 
                 string sharedDocumentsFolderUrl = $"{context.Uri.PathAndQuery}/Shared Documents";
                 IFolder sharedDocumentsFolder = await context.Web.GetFolderByServerRelativeUrlAsync(sharedDocumentsFolderUrl);
-                IFile documentToFind = await sharedDocumentsFolder.Files.GetFirstOrDefaultAsync(f => f.Name == fileName);
+                IFile documentToFind = await sharedDocumentsFolder.Files.FirstOrDefaultAsync(f => f.Name == fileName);
 
                 Assert.IsNotNull(documentToFind);
                 Assert.AreEqual(fileName, documentToFind.Name);
@@ -190,11 +181,7 @@ namespace PnP.Core.Test.SharePoint
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
             {
-                // Load the recycle bin
-                await context.Web.GetAsync(w => w.RecycleBin);
-
-                // Still convinced the FirstOrDefaultAsync should load the RecycleBin without the need to load it previously...
-                IRecycleBinItem recycleBinItem = context.Web.RecycleBin.FirstOrDefault(item => item.Id == recycleBinItemId);
+                IRecycleBinItem recycleBinItem = await context.Web.RecycleBin.FirstOrDefaultAsync(item => item.Id == recycleBinItemId);
 
                 var batch = context.NewBatch();
                 recycleBinItem.RestoreBatch(batch);
@@ -202,7 +189,7 @@ namespace PnP.Core.Test.SharePoint
 
                 string sharedDocumentsFolderUrl = $"{context.Uri.PathAndQuery}/Shared Documents";
                 IFolder sharedDocumentsFolder = await context.Web.GetFolderByServerRelativeUrlAsync(sharedDocumentsFolderUrl);
-                IFile documentToFind = await sharedDocumentsFolder.Files.GetFirstOrDefaultAsync(f => f.Name == fileName);
+                IFile documentToFind = await sharedDocumentsFolder.Files.FirstOrDefaultAsync(f => f.Name == fileName);
 
                 Assert.IsNotNull(documentToFind);
                 Assert.AreEqual(fileName, documentToFind.Name);
@@ -220,18 +207,14 @@ namespace PnP.Core.Test.SharePoint
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
             {
-                // Load the recycle bin
-                await context.Web.GetAsync(w => w.RecycleBin);
-
-                // Still convinced the FirstOrDefaultAsync should load the RecycleBin without the need to load it previously...
-                IRecycleBinItem recycleBinItem = context.Web.RecycleBin.FirstOrDefault(item => item.Id == recycleBinItemId);
+                IRecycleBinItem recycleBinItem = await context.Web.RecycleBin.FirstOrDefaultAsync(item => item.Id == recycleBinItemId);
 
                 await recycleBinItem.RestoreBatchAsync();
                 await context.ExecuteAsync();
 
                 string sharedDocumentsFolderUrl = $"{context.Uri.PathAndQuery}/Shared Documents";
                 IFolder sharedDocumentsFolder = await context.Web.GetFolderByServerRelativeUrlAsync(sharedDocumentsFolderUrl);
-                IFile documentToFind = await sharedDocumentsFolder.Files.GetFirstOrDefaultAsync(f => f.Name == fileName);
+                IFile documentToFind = await sharedDocumentsFolder.Files.FirstOrDefaultAsync(f => f.Name == fileName);
 
                 Assert.IsNotNull(documentToFind);
                 Assert.AreEqual(fileName, documentToFind.Name);
@@ -249,18 +232,14 @@ namespace PnP.Core.Test.SharePoint
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
             {
-                // Load the recycle bin
-                await context.Web.GetAsync(w => w.RecycleBin);
-
-                // Still convinced the FirstOrDefaultAsync should load the RecycleBin without the need to load it previously...
-                IRecycleBinItem recycleBinItem = context.Web.RecycleBin.FirstOrDefault(item => item.Id == recycleBinItemId);
+                IRecycleBinItem recycleBinItem = await context.Web.RecycleBin.FirstOrDefaultAsync(item => item.Id == recycleBinItemId);
 
                 recycleBinItem.RestoreBatch();
                 await context.ExecuteAsync();
 
                 string sharedDocumentsFolderUrl = $"{context.Uri.PathAndQuery}/Shared Documents";
                 IFolder sharedDocumentsFolder = await context.Web.GetFolderByServerRelativeUrlAsync(sharedDocumentsFolderUrl);
-                IFile documentToFind = await sharedDocumentsFolder.Files.GetFirstOrDefaultAsync(f => f.Name == fileName);
+                IFile documentToFind = await sharedDocumentsFolder.Files.FirstOrDefaultAsync(f => f.Name == fileName);
 
                 Assert.IsNotNull(documentToFind);
                 Assert.AreEqual(fileName, documentToFind.Name);
@@ -280,11 +259,7 @@ namespace PnP.Core.Test.SharePoint
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
             {
-                // Load the recycle bin
-                await context.Web.GetAsync(w => w.RecycleBin);
-
-                // Still convinced the FirstOrDefaultAsync should load the RecycleBin without the need to load it previously...
-                IRecycleBinItem recycleBinItem = context.Web.RecycleBin.FirstOrDefault(item => item.Id == recycleBinItemId);
+                IRecycleBinItem recycleBinItem = await context.Web.RecycleBin.FirstOrDefaultAsync(item => item.Id == recycleBinItemId);
 
                 Assert.AreEqual(RecycleBinItemState.FirstStageRecycleBin, recycleBinItem.ItemState);
 
@@ -295,8 +270,8 @@ namespace PnP.Core.Test.SharePoint
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))
             {
                 // Load the site collection recycle bin
-                await context.Site.GetAsync(w => w.RecycleBin.LoadProperties(p => p.Id, p => p.DeletedBy, p => p.ItemState));
-                IRecycleBinItem recycleBinItem = context.Site.RecycleBin.FirstOrDefault(item => item.Id == recycleBinItemId);
+                await context.Site.LoadAsync(w => w.RecycleBin.QueryProperties(p => p.Id, p => p.DeletedBy, p => p.ItemState));
+                IRecycleBinItem recycleBinItem = context.Site.RecycleBin.AsRequested().FirstOrDefault(item => item.Id == recycleBinItemId);
 
                 Assert.AreEqual(RecycleBinItemState.SecondStageRecycleBin, recycleBinItem.ItemState);
                 Assert.IsTrue(recycleBinItem.DeletedBy.Requested);
@@ -315,11 +290,7 @@ namespace PnP.Core.Test.SharePoint
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
             {
-                // Load the recycle bin
-                await context.Web.GetAsync(w => w.RecycleBin);
-
-                // Still convinced the FirstOrDefaultAsync should load the RecycleBin without the need to load it previously...
-                IRecycleBinItem recycleBinItem = context.Web.RecycleBin.FirstOrDefault(item => item.Id == recycleBinItemId);
+                IRecycleBinItem recycleBinItem = await context.Web.RecycleBin.FirstOrDefaultAsync(item => item.Id == recycleBinItemId);
 
                 Assert.AreEqual(RecycleBinItemState.FirstStageRecycleBin, recycleBinItem.ItemState);
 
@@ -330,8 +301,8 @@ namespace PnP.Core.Test.SharePoint
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))
             {
                 // Load the site collection recycle bin
-                await context.Site.GetAsync(w => w.RecycleBin);
-                IRecycleBinItem recycleBinItem = context.Site.RecycleBin.FirstOrDefault(item => item.Id == recycleBinItemId);
+                await context.Site.LoadAsync(w => w.RecycleBin);
+                IRecycleBinItem recycleBinItem = context.Site.RecycleBin.AsRequested().FirstOrDefault(item => item.Id == recycleBinItemId);
 
                 Assert.AreEqual(RecycleBinItemState.SecondStageRecycleBin, recycleBinItem.ItemState);
             }
@@ -348,11 +319,7 @@ namespace PnP.Core.Test.SharePoint
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
             {
-                // Load the recycle bin
-                await context.Web.GetAsync(w => w.RecycleBin);
-
-                // Still convinced the FirstOrDefaultAsync should load the RecycleBin without the need to load it previously...
-                IRecycleBinItem recycleBinItem = context.Web.RecycleBin.FirstOrDefault(item => item.Id == recycleBinItemId);
+                IRecycleBinItem recycleBinItem = await context.Web.RecycleBin.FirstOrDefaultAsync(item => item.Id == recycleBinItemId);
 
                 Assert.AreEqual(RecycleBinItemState.FirstStageRecycleBin, recycleBinItem.ItemState);
 
@@ -365,8 +332,8 @@ namespace PnP.Core.Test.SharePoint
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))
             {
                 // Load the site collection recycle bin
-                await context.Site.GetAsync(w => w.RecycleBin);
-                IRecycleBinItem recycleBinItem = context.Site.RecycleBin.FirstOrDefault(item => item.Id == recycleBinItemId);
+                await context.Site.LoadAsync(w => w.RecycleBin);
+                IRecycleBinItem recycleBinItem = context.Site.RecycleBin.AsRequested().FirstOrDefault(item => item.Id == recycleBinItemId);
 
                 Assert.AreEqual(RecycleBinItemState.SecondStageRecycleBin, recycleBinItem.ItemState);
             }
@@ -383,11 +350,7 @@ namespace PnP.Core.Test.SharePoint
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
             {
-                // Load the recycle bin
-                await context.Web.GetAsync(w => w.RecycleBin);
-
-                // Still convinced the FirstOrDefaultAsync should load the RecycleBin without the need to load it previously...
-                IRecycleBinItem recycleBinItem = context.Web.RecycleBin.FirstOrDefault(item => item.Id == recycleBinItemId);
+                IRecycleBinItem recycleBinItem = await context.Web.RecycleBin.FirstOrDefaultAsync(item => item.Id == recycleBinItemId);
 
                 Assert.AreEqual(RecycleBinItemState.FirstStageRecycleBin, recycleBinItem.ItemState);
 
@@ -400,8 +363,8 @@ namespace PnP.Core.Test.SharePoint
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))
             {
                 // Load the site collection recycle bin
-                await context.Site.GetAsync(w => w.RecycleBin);
-                IRecycleBinItem recycleBinItem = context.Site.RecycleBin.FirstOrDefault(item => item.Id == recycleBinItemId);
+                await context.Site.LoadAsync(w => w.RecycleBin);
+                IRecycleBinItem recycleBinItem = context.Site.RecycleBin.AsRequested().FirstOrDefault(item => item.Id == recycleBinItemId);
 
                 Assert.AreEqual(RecycleBinItemState.SecondStageRecycleBin, recycleBinItem.ItemState);
             }
@@ -418,11 +381,7 @@ namespace PnP.Core.Test.SharePoint
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
             {
-                // Load the recycle bin
-                await context.Web.GetAsync(w => w.RecycleBin);
-
-                // Still convinced the FirstOrDefaultAsync should load the RecycleBin without the need to load it previously...
-                IRecycleBinItem recycleBinItem = context.Web.RecycleBin.FirstOrDefault(item => item.Id == recycleBinItemId);
+                IRecycleBinItem recycleBinItem = await context.Web.RecycleBin.FirstOrDefaultAsync(item => item.Id == recycleBinItemId);
 
                 Assert.AreEqual(RecycleBinItemState.FirstStageRecycleBin, recycleBinItem.ItemState);
 
@@ -434,8 +393,8 @@ namespace PnP.Core.Test.SharePoint
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))
             {
                 // Load the site collection recycle bin
-                await context.Site.GetAsync(w => w.RecycleBin);
-                IRecycleBinItem recycleBinItem = context.Site.RecycleBin.FirstOrDefault(item => item.Id == recycleBinItemId);
+                await context.Site.LoadAsync(w => w.RecycleBin);
+                IRecycleBinItem recycleBinItem = context.Site.RecycleBin.AsRequested().FirstOrDefault(item => item.Id == recycleBinItemId);
 
                 Assert.AreEqual(RecycleBinItemState.SecondStageRecycleBin, recycleBinItem.ItemState);
             }
@@ -452,11 +411,7 @@ namespace PnP.Core.Test.SharePoint
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
             {
-                // Load the recycle bin
-                await context.Web.GetAsync(w => w.RecycleBin);
-
-                // Still convinced the FirstOrDefaultAsync should load the RecycleBin without the need to load it previously...
-                IRecycleBinItem recycleBinItem = context.Web.RecycleBin.FirstOrDefault(item => item.Id == recycleBinItemId);
+                IRecycleBinItem recycleBinItem = await context.Web.RecycleBin.FirstOrDefaultAsync(item => item.Id == recycleBinItemId);
 
                 Assert.AreEqual(RecycleBinItemState.FirstStageRecycleBin, recycleBinItem.ItemState);
 
@@ -468,8 +423,8 @@ namespace PnP.Core.Test.SharePoint
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))
             {
                 // Load the site collection recycle bin
-                await context.Site.GetAsync(w => w.RecycleBin);
-                IRecycleBinItem recycleBinItem = context.Site.RecycleBin.FirstOrDefault(item => item.Id == recycleBinItemId);
+                await context.Site.LoadAsync(w => w.RecycleBin);
+                IRecycleBinItem recycleBinItem = context.Site.RecycleBin.AsRequested().FirstOrDefault(item => item.Id == recycleBinItemId);
 
                 Assert.AreEqual(RecycleBinItemState.SecondStageRecycleBin, recycleBinItem.ItemState);
             }
@@ -488,16 +443,16 @@ namespace PnP.Core.Test.SharePoint
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
             {
-                await context.Web.GetAsync(w => w.RecycleBin);
-                Assert.IsTrue(context.Web.RecycleBin.Count() > 0);
+                await context.Web.LoadAsync(w => w.RecycleBin);
+                Assert.IsTrue(context.Web.RecycleBin.Length > 0);
 
                 await context.Web.RecycleBin.DeleteAllAsync();
             }
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))
             {
-                await context.Web.GetAsync(w => w.RecycleBin);
-                Assert.AreEqual(0, context.Web.RecycleBin.Count());
+                await context.Web.LoadAsync(w => w.RecycleBin);
+                Assert.AreEqual(0, context.Web.RecycleBin.Length);
             }
         }
 
@@ -510,16 +465,16 @@ namespace PnP.Core.Test.SharePoint
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
             {
-                await context.Web.GetAsync(w => w.RecycleBin);
-                Assert.IsTrue(context.Web.RecycleBin.Count() > 0);
+                await context.Web.LoadAsync(w => w.RecycleBin);
+                Assert.IsTrue(context.Web.RecycleBin.Length > 0);
 
                 context.Web.RecycleBin.DeleteAll();
             }
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))
             {
-                await context.Web.GetAsync(w => w.RecycleBin);
-                Assert.AreEqual(0, context.Web.RecycleBin.Count());
+                await context.Web.LoadAsync(w => w.RecycleBin);
+                Assert.AreEqual(0, context.Web.RecycleBin.Length);
             }
         }
 
@@ -532,8 +487,8 @@ namespace PnP.Core.Test.SharePoint
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
             {
-                await context.Web.GetAsync(w => w.RecycleBin);
-                Assert.IsTrue(context.Web.RecycleBin.Count() > 0);
+                await context.Web.LoadAsync(w => w.RecycleBin);
+                Assert.IsTrue(context.Web.RecycleBin.Length > 0);
 
                 var batch = context.NewBatch();
                 await context.Web.RecycleBin.DeleteAllBatchAsync(batch);
@@ -542,8 +497,8 @@ namespace PnP.Core.Test.SharePoint
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))
             {
-                await context.Web.GetAsync(w => w.RecycleBin);
-                Assert.AreEqual(0, context.Web.RecycleBin.Count());
+                await context.Web.LoadAsync(w => w.RecycleBin);
+                Assert.AreEqual(0, context.Web.RecycleBin.Length);
             }
         }
 
@@ -556,8 +511,8 @@ namespace PnP.Core.Test.SharePoint
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
             {
-                await context.Web.GetAsync(w => w.RecycleBin);
-                Assert.IsTrue(context.Web.RecycleBin.Count() > 0);
+                await context.Web.LoadAsync(w => w.RecycleBin);
+                Assert.IsTrue(context.Web.RecycleBin.Length > 0);
 
                 var batch = context.NewBatch();
                 context.Web.RecycleBin.DeleteAllBatch(batch);
@@ -566,8 +521,8 @@ namespace PnP.Core.Test.SharePoint
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))
             {
-                await context.Web.GetAsync(w => w.RecycleBin);
-                Assert.AreEqual(0, context.Web.RecycleBin.Count());
+                await context.Web.LoadAsync(w => w.RecycleBin);
+                Assert.AreEqual(0, context.Web.RecycleBin.Length);
             }
         }
 
@@ -580,8 +535,8 @@ namespace PnP.Core.Test.SharePoint
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
             {
-                await context.Web.GetAsync(w => w.RecycleBin);
-                Assert.IsTrue(context.Web.RecycleBin.Count() > 0);
+                await context.Web.LoadAsync(w => w.RecycleBin);
+                Assert.IsTrue(context.Web.RecycleBin.Length > 0);
 
                 await context.Web.RecycleBin.DeleteAllBatchAsync();
                 await context.ExecuteAsync();
@@ -589,8 +544,8 @@ namespace PnP.Core.Test.SharePoint
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))
             {
-                await context.Web.GetAsync(w => w.RecycleBin);
-                Assert.AreEqual(0, context.Web.RecycleBin.Count());
+                await context.Web.LoadAsync(w => w.RecycleBin);
+                Assert.AreEqual(0, context.Web.RecycleBin.Length);
             }
         }
 
@@ -603,8 +558,8 @@ namespace PnP.Core.Test.SharePoint
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
             {
-                await context.Web.GetAsync(w => w.RecycleBin);
-                Assert.IsTrue(context.Web.RecycleBin.Count() > 0);
+                await context.Web.LoadAsync(w => w.RecycleBin);
+                Assert.IsTrue(context.Web.RecycleBin.Length > 0);
 
                 var batch = context.NewBatch();
                 context.Web.RecycleBin.DeleteAllBatch(batch);
@@ -613,8 +568,8 @@ namespace PnP.Core.Test.SharePoint
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))
             {
-                await context.Web.GetAsync(w => w.RecycleBin);
-                Assert.AreEqual(0, context.Web.RecycleBin.Count());
+                await context.Web.LoadAsync(w => w.RecycleBin);
+                Assert.AreEqual(0, context.Web.RecycleBin.Length);
             }
         }
         #endregion
@@ -631,8 +586,8 @@ namespace PnP.Core.Test.SharePoint
             {
                 // There is at least 1 item in second stage recycle bin
                 // CAUTION, The second stage recycle bin is at the SITE COLLECTION LEVEL
-                await context.Site.GetAsync(w => w.RecycleBin);
-                Assert.IsTrue(context.Site.RecycleBin.Count(r => r.ItemState == RecycleBinItemState.SecondStageRecycleBin) > 0);
+                await context.Site.LoadAsync(w => w.RecycleBin);
+                Assert.IsTrue(context.Site.RecycleBin.AsRequested().Count(r => r.ItemState == RecycleBinItemState.SecondStageRecycleBin) > 0);
 
                 await context.Site.RecycleBin.DeleteAllSecondStageItemsAsync();
             }
@@ -641,8 +596,8 @@ namespace PnP.Core.Test.SharePoint
             {
                 // There is no more second stage recycle bin items
                 // CAUTION, The second stage recycle bin is at the SITE COLLECTION LEVEL
-                await context.Site.GetAsync(w => w.RecycleBin);
-                Assert.AreEqual(0, context.Site.RecycleBin.Count(r => r.ItemState == RecycleBinItemState.SecondStageRecycleBin));
+                await context.Site.LoadAsync(w => w.RecycleBin);
+                Assert.AreEqual(0, context.Site.RecycleBin.AsRequested().Count(r => r.ItemState == RecycleBinItemState.SecondStageRecycleBin));
             }
         }
 
@@ -657,8 +612,8 @@ namespace PnP.Core.Test.SharePoint
             {
                 // There is at least 1 item in second stage recycle bin
                 // CAUTION, The second stage recycle bin is at the SITE COLLECTION LEVEL
-                await context.Site.GetAsync(w => w.RecycleBin);
-                Assert.IsTrue(context.Site.RecycleBin.Count(r => r.ItemState == RecycleBinItemState.SecondStageRecycleBin) > 0);
+                await context.Site.LoadAsync(w => w.RecycleBin);
+                Assert.IsTrue(context.Site.RecycleBin.AsRequested().Count(r => r.ItemState == RecycleBinItemState.SecondStageRecycleBin) > 0);
 
                 context.Site.RecycleBin.DeleteAllSecondStageItems();
             }
@@ -667,8 +622,8 @@ namespace PnP.Core.Test.SharePoint
             {
                 // There is no more second stage recycle bin items
                 // CAUTION, The second stage recycle bin is at the SITE COLLECTION LEVEL
-                await context.Site.GetAsync(w => w.RecycleBin);
-                Assert.AreEqual(0, context.Site.RecycleBin.Count(r => r.ItemState == RecycleBinItemState.SecondStageRecycleBin));
+                await context.Site.LoadAsync(w => w.RecycleBin);
+                Assert.AreEqual(0, context.Site.RecycleBin.AsRequested().Count(r => r.ItemState == RecycleBinItemState.SecondStageRecycleBin));
             }
         }
 
@@ -683,8 +638,8 @@ namespace PnP.Core.Test.SharePoint
             {
                 // There is at least 1 item in second stage recycle bin
                 // CAUTION, The second stage recycle bin is at the SITE COLLECTION LEVEL
-                await context.Site.GetAsync(w => w.RecycleBin);
-                Assert.IsTrue(context.Site.RecycleBin.Count(r => r.ItemState == RecycleBinItemState.SecondStageRecycleBin) > 0);
+                await context.Site.LoadAsync(w => w.RecycleBin);
+                Assert.IsTrue(context.Site.RecycleBin.AsRequested().Count(r => r.ItemState == RecycleBinItemState.SecondStageRecycleBin) > 0);
 
                 var batch = context.NewBatch();
                 await context.Site.RecycleBin.DeleteAllSecondStageItemsBatchAsync(batch);
@@ -695,8 +650,8 @@ namespace PnP.Core.Test.SharePoint
             {
                 // There is no more second stage recycle bin items
                 // CAUTION, The second stage recycle bin is at the SITE COLLECTION LEVEL
-                await context.Site.GetAsync(w => w.RecycleBin);
-                Assert.AreEqual(0, context.Site.RecycleBin.Count(r => r.ItemState == RecycleBinItemState.SecondStageRecycleBin));
+                await context.Site.LoadAsync(w => w.RecycleBin);
+                Assert.AreEqual(0, context.Site.RecycleBin.AsRequested().Count(r => r.ItemState == RecycleBinItemState.SecondStageRecycleBin));
             }
         }
 
@@ -711,8 +666,8 @@ namespace PnP.Core.Test.SharePoint
             {
                 // There is at least 1 item in second stage recycle bin
                 // CAUTION, The second stage recycle bin is at the SITE COLLECTION LEVEL
-                await context.Site.GetAsync(w => w.RecycleBin);
-                Assert.IsTrue(context.Site.RecycleBin.Count(r => r.ItemState == RecycleBinItemState.SecondStageRecycleBin) > 0);
+                await context.Site.LoadAsync(w => w.RecycleBin);
+                Assert.IsTrue(context.Site.RecycleBin.AsRequested().Count(r => r.ItemState == RecycleBinItemState.SecondStageRecycleBin) > 0);
 
                 var batch = context.NewBatch();
                 context.Site.RecycleBin.DeleteAllSecondStageItemsBatch(batch);
@@ -723,8 +678,8 @@ namespace PnP.Core.Test.SharePoint
             {
                 // There is no more second stage recycle bin items
                 // CAUTION, The second stage recycle bin is at the SITE COLLECTION LEVEL
-                await context.Site.GetAsync(w => w.RecycleBin);
-                Assert.AreEqual(0, context.Site.RecycleBin.Count(r => r.ItemState == RecycleBinItemState.SecondStageRecycleBin));
+                await context.Site.LoadAsync(w => w.RecycleBin);
+                Assert.AreEqual(0, context.Site.RecycleBin.AsRequested().Count(r => r.ItemState == RecycleBinItemState.SecondStageRecycleBin));
             }
         }
 
@@ -739,8 +694,8 @@ namespace PnP.Core.Test.SharePoint
             {
                 // There is at least 1 item in second stage recycle bin
                 // CAUTION, The second stage recycle bin is at the SITE COLLECTION LEVEL
-                await context.Site.GetAsync(w => w.RecycleBin);
-                Assert.IsTrue(context.Site.RecycleBin.Count(r => r.ItemState == RecycleBinItemState.SecondStageRecycleBin) > 0);
+                await context.Site.LoadAsync(w => w.RecycleBin);
+                Assert.IsTrue(context.Site.RecycleBin.AsRequested().Count(r => r.ItemState == RecycleBinItemState.SecondStageRecycleBin) > 0);
 
                 await context.Site.RecycleBin.DeleteAllSecondStageItemsBatchAsync();
                 await context.ExecuteAsync();
@@ -750,8 +705,8 @@ namespace PnP.Core.Test.SharePoint
             {
                 // There is no more second stage recycle bin items
                 // CAUTION, The second stage recycle bin is at the SITE COLLECTION LEVEL
-                await context.Site.GetAsync(w => w.RecycleBin);
-                Assert.AreEqual(0, context.Site.RecycleBin.Count(r => r.ItemState == RecycleBinItemState.SecondStageRecycleBin));
+                await context.Site.LoadAsync(w => w.RecycleBin);
+                Assert.AreEqual(0, context.Site.RecycleBin.AsRequested().Count(r => r.ItemState == RecycleBinItemState.SecondStageRecycleBin));
             }
         }
 
@@ -766,8 +721,8 @@ namespace PnP.Core.Test.SharePoint
             {
                 // There is at least 1 item in second stage recycle bin
                 // CAUTION, The second stage recycle bin is at the SITE COLLECTION LEVEL
-                await context.Site.GetAsync(w => w.RecycleBin);
-                Assert.IsTrue(context.Site.RecycleBin.Count(r => r.ItemState == RecycleBinItemState.SecondStageRecycleBin) > 0);
+                await context.Site.LoadAsync(w => w.RecycleBin);
+                Assert.IsTrue(context.Site.RecycleBin.AsRequested().Count(r => r.ItemState == RecycleBinItemState.SecondStageRecycleBin) > 0);
 
                 context.Site.RecycleBin.DeleteAllSecondStageItemsBatch();
                 await context.ExecuteAsync();
@@ -777,8 +732,8 @@ namespace PnP.Core.Test.SharePoint
             {
                 // There is no more second stage recycle bin items
                 // CAUTION, The second stage recycle bin is at the SITE COLLECTION LEVEL
-                await context.Site.GetAsync(w => w.RecycleBin);
-                Assert.AreEqual(0, context.Site.RecycleBin.Count(r => r.ItemState == RecycleBinItemState.SecondStageRecycleBin));
+                await context.Site.LoadAsync(w => w.RecycleBin);
+                Assert.AreEqual(0, context.Site.RecycleBin.AsRequested().Count(r => r.ItemState == RecycleBinItemState.SecondStageRecycleBin));
             }
         }
         #endregion
@@ -795,8 +750,8 @@ namespace PnP.Core.Test.SharePoint
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
             {
                 // There is at least 1 item in first stage recycle bin
-                await context.Web.GetAsync(w => w.RecycleBin);
-                Assert.IsTrue(context.Web.RecycleBin.Count(r => r.ItemState == RecycleBinItemState.FirstStageRecycleBin) > 0);
+                await context.Web.LoadAsync(w => w.RecycleBin);
+                Assert.IsTrue(context.Web.RecycleBin.AsRequested().Count(r => r.ItemState == RecycleBinItemState.FirstStageRecycleBin) > 0);
 
                 await context.Web.RecycleBin.MoveAllToSecondStageAsync();
             }
@@ -804,13 +759,13 @@ namespace PnP.Core.Test.SharePoint
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))
             {
                 // There is no more first stage recycle bin items
-                await context.Web.GetAsync(w => w.RecycleBin);
-                Assert.AreEqual(0, context.Web.RecycleBin.Count(r => r.ItemState == RecycleBinItemState.FirstStageRecycleBin));
+                await context.Web.LoadAsync(w => w.RecycleBin);
+                Assert.AreEqual(0, context.Web.RecycleBin.AsRequested().Count(r => r.ItemState == RecycleBinItemState.FirstStageRecycleBin));
 
                 // CAUTION, The second stage recycle bin is at the SITE COLLECTION LEVEL
                 // The second stage recycle bin now contains items
-                await context.Site.GetAsync(w => w.RecycleBin);
-                Assert.IsTrue(context.Site.RecycleBin.Count(r => r.ItemState == RecycleBinItemState.SecondStageRecycleBin) > 0);
+                await context.Site.LoadAsync(w => w.RecycleBin);
+                Assert.IsTrue(context.Site.RecycleBin.AsRequested().Count(r => r.ItemState == RecycleBinItemState.SecondStageRecycleBin) > 0);
             }
 
             await CleanupSiteRecycleBinItem(3, recycleBinItemId);
@@ -826,8 +781,8 @@ namespace PnP.Core.Test.SharePoint
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
             {
                 // There is at least 1 item in first stage recycle bin
-                await context.Web.GetAsync(w => w.RecycleBin);
-                Assert.IsTrue(context.Web.RecycleBin.Count(r => r.ItemState == RecycleBinItemState.FirstStageRecycleBin) > 0);
+                await context.Web.LoadAsync(w => w.RecycleBin);
+                Assert.IsTrue(context.Web.RecycleBin.AsRequested().Count(r => r.ItemState == RecycleBinItemState.FirstStageRecycleBin) > 0);
 
                 context.Web.RecycleBin.MoveAllToSecondStage();
             }
@@ -835,13 +790,13 @@ namespace PnP.Core.Test.SharePoint
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))
             {
                 // There is no more first stage recycle bin items
-                await context.Web.GetAsync(w => w.RecycleBin);
-                Assert.AreEqual(0, context.Web.RecycleBin.Count(r => r.ItemState == RecycleBinItemState.FirstStageRecycleBin));
+                await context.Web.LoadAsync(w => w.RecycleBin);
+                Assert.AreEqual(0, context.Web.RecycleBin.AsRequested().Count(r => r.ItemState == RecycleBinItemState.FirstStageRecycleBin));
 
                 // CAUTION, The second stage recycle bin is at the SITE COLLECTION LEVEL
                 // The second stage recycle bin now contains items
-                await context.Site.GetAsync(w => w.RecycleBin);
-                Assert.IsTrue(context.Site.RecycleBin.Count(r => r.ItemState == RecycleBinItemState.SecondStageRecycleBin) > 0);
+                await context.Site.LoadAsync(w => w.RecycleBin);
+                Assert.IsTrue(context.Site.RecycleBin.AsRequested().Count(r => r.ItemState == RecycleBinItemState.SecondStageRecycleBin) > 0);
             }
 
             await CleanupSiteRecycleBinItem(3, recycleBinItemId);
@@ -857,8 +812,8 @@ namespace PnP.Core.Test.SharePoint
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
             {
                 // There is at least 1 item in first stage recycle bin
-                await context.Web.GetAsync(w => w.RecycleBin);
-                Assert.IsTrue(context.Web.RecycleBin.Count(r => r.ItemState == RecycleBinItemState.FirstStageRecycleBin) > 0);
+                await context.Web.LoadAsync(w => w.RecycleBin);
+                Assert.IsTrue(context.Web.RecycleBin.AsRequested().Count(r => r.ItemState == RecycleBinItemState.FirstStageRecycleBin) > 0);
 
                 var batch = context.NewBatch();
                 await context.Web.RecycleBin.MoveAllToSecondStageBatchAsync(batch);
@@ -868,13 +823,13 @@ namespace PnP.Core.Test.SharePoint
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))
             {
                 // There is no more first stage recycle bin items
-                await context.Web.GetAsync(w => w.RecycleBin);
-                Assert.AreEqual(0, context.Web.RecycleBin.Count(r => r.ItemState == RecycleBinItemState.FirstStageRecycleBin));
+                await context.Web.LoadAsync(w => w.RecycleBin);
+                Assert.AreEqual(0, context.Web.RecycleBin.AsRequested().Count(r => r.ItemState == RecycleBinItemState.FirstStageRecycleBin));
 
                 // CAUTION, The second stage recycle bin is at the SITE COLLECTION LEVEL
                 // The second stage recycle bin now contains items
-                await context.Site.GetAsync(w => w.RecycleBin);
-                Assert.IsTrue(context.Site.RecycleBin.Count(r => r.ItemState == RecycleBinItemState.SecondStageRecycleBin) > 0);
+                await context.Site.LoadAsync(w => w.RecycleBin);
+                Assert.IsTrue(context.Site.RecycleBin.AsRequested().Count(r => r.ItemState == RecycleBinItemState.SecondStageRecycleBin) > 0);
             }
 
             await CleanupSiteRecycleBinItem(3, recycleBinItemId);
@@ -890,8 +845,8 @@ namespace PnP.Core.Test.SharePoint
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
             {
                 // There is at least 1 item in first stage recycle bin
-                await context.Web.GetAsync(w => w.RecycleBin);
-                Assert.IsTrue(context.Web.RecycleBin.Count(r => r.ItemState == RecycleBinItemState.FirstStageRecycleBin) > 0);
+                await context.Web.LoadAsync(w => w.RecycleBin);
+                Assert.IsTrue(context.Web.RecycleBin.AsRequested().Count(r => r.ItemState == RecycleBinItemState.FirstStageRecycleBin) > 0);
 
                 var batch = context.NewBatch();
                 context.Web.RecycleBin.MoveAllToSecondStageBatch(batch);
@@ -901,13 +856,13 @@ namespace PnP.Core.Test.SharePoint
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))
             {
                 // There is no more first stage recycle bin items
-                await context.Web.GetAsync(w => w.RecycleBin);
-                Assert.AreEqual(0, context.Web.RecycleBin.Count(r => r.ItemState == RecycleBinItemState.FirstStageRecycleBin));
+                await context.Web.LoadAsync(w => w.RecycleBin);
+                Assert.AreEqual(0, context.Web.RecycleBin.AsRequested().Count(r => r.ItemState == RecycleBinItemState.FirstStageRecycleBin));
 
                 // CAUTION, The second stage recycle bin is at the SITE COLLECTION LEVEL
                 // The second stage recycle bin now contains items
-                await context.Site.GetAsync(w => w.RecycleBin);
-                Assert.IsTrue(context.Site.RecycleBin.Count(r => r.ItemState == RecycleBinItemState.SecondStageRecycleBin) > 0);
+                await context.Site.LoadAsync(w => w.RecycleBin);
+                Assert.IsTrue(context.Site.RecycleBin.AsRequested().Count(r => r.ItemState == RecycleBinItemState.SecondStageRecycleBin) > 0);
             }
 
             await CleanupSiteRecycleBinItem(3, recycleBinItemId);
@@ -923,8 +878,8 @@ namespace PnP.Core.Test.SharePoint
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
             {
                 // There is at least 1 item in first stage recycle bin
-                await context.Web.GetAsync(w => w.RecycleBin);
-                Assert.IsTrue(context.Web.RecycleBin.Count(r => r.ItemState == RecycleBinItemState.FirstStageRecycleBin) > 0);
+                await context.Web.LoadAsync(w => w.RecycleBin);
+                Assert.IsTrue(context.Web.RecycleBin.AsRequested().Count(r => r.ItemState == RecycleBinItemState.FirstStageRecycleBin) > 0);
 
                 await context.Web.RecycleBin.MoveAllToSecondStageBatchAsync();
                 await context.ExecuteAsync();
@@ -933,13 +888,13 @@ namespace PnP.Core.Test.SharePoint
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))
             {
                 // There is no more first stage recycle bin items
-                await context.Web.GetAsync(w => w.RecycleBin);
-                Assert.AreEqual(0, context.Web.RecycleBin.Count(r => r.ItemState == RecycleBinItemState.FirstStageRecycleBin));
+                await context.Web.LoadAsync(w => w.RecycleBin);
+                Assert.AreEqual(0, context.Web.RecycleBin.AsRequested().Count(r => r.ItemState == RecycleBinItemState.FirstStageRecycleBin));
 
                 // CAUTION, The second stage recycle bin is at the SITE COLLECTION LEVEL
                 // The second stage recycle bin now contains items
-                await context.Site.GetAsync(w => w.RecycleBin);
-                Assert.IsTrue(context.Site.RecycleBin.Count(r => r.ItemState == RecycleBinItemState.SecondStageRecycleBin) > 0);
+                await context.Site.LoadAsync(w => w.RecycleBin);
+                Assert.IsTrue(context.Site.RecycleBin.AsRequested().Count(r => r.ItemState == RecycleBinItemState.SecondStageRecycleBin) > 0);
             }
 
             await CleanupSiteRecycleBinItem(3, recycleBinItemId);
@@ -955,8 +910,8 @@ namespace PnP.Core.Test.SharePoint
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
             {
                 // There is at least 1 item in first stage recycle bin
-                await context.Web.GetAsync(w => w.RecycleBin);
-                Assert.IsTrue(context.Web.RecycleBin.Count(r => r.ItemState == RecycleBinItemState.FirstStageRecycleBin) > 0);
+                await context.Web.LoadAsync(w => w.RecycleBin);
+                Assert.IsTrue(context.Web.RecycleBin.AsRequested().Count(r => r.ItemState == RecycleBinItemState.FirstStageRecycleBin) > 0);
 
                 context.Web.RecycleBin.MoveAllToSecondStageBatch();
                 await context.ExecuteAsync();
@@ -965,13 +920,13 @@ namespace PnP.Core.Test.SharePoint
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))
             {
                 // There is no more first stage recycle bin items
-                await context.Web.GetAsync(w => w.RecycleBin);
-                Assert.AreEqual(0, context.Web.RecycleBin.Count(r => r.ItemState == RecycleBinItemState.FirstStageRecycleBin));
+                await context.Web.LoadAsync(w => w.RecycleBin);
+                Assert.AreEqual(0, context.Web.RecycleBin.AsRequested().Count(r => r.ItemState == RecycleBinItemState.FirstStageRecycleBin));
 
                 // CAUTION, The second stage recycle bin is at the SITE COLLECTION LEVEL
                 // The second stage recycle bin now contains items
-                await context.Site.GetAsync(w => w.RecycleBin);
-                Assert.IsTrue(context.Site.RecycleBin.Count(r => r.ItemState == RecycleBinItemState.SecondStageRecycleBin) > 0);
+                await context.Site.LoadAsync(w => w.RecycleBin);
+                Assert.IsTrue(context.Site.RecycleBin.AsRequested().Count(r => r.ItemState == RecycleBinItemState.SecondStageRecycleBin) > 0);
             }
 
             await CleanupSiteRecycleBinItem(3, recycleBinItemId);
@@ -993,14 +948,14 @@ namespace PnP.Core.Test.SharePoint
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))
             {
-                await context.Web.GetAsync(w => w.RecycleBin);
+                await context.Web.LoadAsync(w => w.RecycleBin);
                 // The recycle bin is empty
-                Assert.AreEqual(0, context.Web.RecycleBin.Count());
+                Assert.AreEqual(0, context.Web.RecycleBin.Length);
 
                 // The mock file has been restored
                 string sharedDocumentsFolderUrl = $"{context.Uri.PathAndQuery}/Shared Documents";
                 IFolder sharedDocumentsFolder = await context.Web.GetFolderByServerRelativeUrlAsync(sharedDocumentsFolderUrl);
-                IFile documentToFind = await sharedDocumentsFolder.Files.GetFirstOrDefaultAsync(f => f.Name == fileName);
+                IFile documentToFind = await sharedDocumentsFolder.Files.FirstOrDefaultAsync(f => f.Name == fileName);
 
                 Assert.IsNotNull(documentToFind);
                 Assert.AreEqual(fileName, documentToFind.Name);
@@ -1023,14 +978,14 @@ namespace PnP.Core.Test.SharePoint
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))
             {
-                await context.Web.GetAsync(w => w.RecycleBin);
+                await context.Web.LoadAsync(w => w.RecycleBin);
                 // The recycle bin is empty
-                Assert.AreEqual(0, context.Web.RecycleBin.Count());
+                Assert.AreEqual(0, context.Web.RecycleBin.Length);
 
                 // The mock file has been restored
                 string sharedDocumentsFolderUrl = $"{context.Uri.PathAndQuery}/Shared Documents";
                 IFolder sharedDocumentsFolder = await context.Web.GetFolderByServerRelativeUrlAsync(sharedDocumentsFolderUrl);
-                IFile documentToFind = await sharedDocumentsFolder.Files.GetFirstOrDefaultAsync(f => f.Name == fileName);
+                IFile documentToFind = await sharedDocumentsFolder.Files.FirstOrDefaultAsync(f => f.Name == fileName);
 
                 Assert.IsNotNull(documentToFind);
                 Assert.AreEqual(fileName, documentToFind.Name);
@@ -1055,14 +1010,14 @@ namespace PnP.Core.Test.SharePoint
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))
             {
-                await context.Web.GetAsync(w => w.RecycleBin);
+                await context.Web.LoadAsync(w => w.RecycleBin);
                 // The recycle bin is empty
-                Assert.AreEqual(0, context.Web.RecycleBin.Count());
+                Assert.AreEqual(0, context.Web.RecycleBin.Length);
 
                 // The mock file has been restored
                 string sharedDocumentsFolderUrl = $"{context.Uri.PathAndQuery}/Shared Documents";
                 IFolder sharedDocumentsFolder = await context.Web.GetFolderByServerRelativeUrlAsync(sharedDocumentsFolderUrl);
-                IFile documentToFind = await sharedDocumentsFolder.Files.GetFirstOrDefaultAsync(f => f.Name == fileName);
+                IFile documentToFind = await sharedDocumentsFolder.Files.FirstOrDefaultAsync(f => f.Name == fileName);
 
                 Assert.IsNotNull(documentToFind);
                 Assert.AreEqual(fileName, documentToFind.Name);
@@ -1087,14 +1042,14 @@ namespace PnP.Core.Test.SharePoint
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))
             {
-                await context.Web.GetAsync(w => w.RecycleBin);
+                await context.Web.LoadAsync(w => w.RecycleBin);
                 // The recycle bin is empty
-                Assert.AreEqual(0, context.Web.RecycleBin.Count());
+                Assert.AreEqual(0, context.Web.RecycleBin.Length);
 
                 // The mock file has been restored
                 string sharedDocumentsFolderUrl = $"{context.Uri.PathAndQuery}/Shared Documents";
                 IFolder sharedDocumentsFolder = await context.Web.GetFolderByServerRelativeUrlAsync(sharedDocumentsFolderUrl);
-                IFile documentToFind = await sharedDocumentsFolder.Files.GetFirstOrDefaultAsync(f => f.Name == fileName);
+                IFile documentToFind = await sharedDocumentsFolder.Files.FirstOrDefaultAsync(f => f.Name == fileName);
 
                 Assert.IsNotNull(documentToFind);
                 Assert.AreEqual(fileName, documentToFind.Name);
@@ -1118,14 +1073,14 @@ namespace PnP.Core.Test.SharePoint
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))
             {
-                await context.Web.GetAsync(w => w.RecycleBin);
+                await context.Web.LoadAsync(w => w.RecycleBin);
                 // The recycle bin is empty
-                Assert.AreEqual(0, context.Web.RecycleBin.Count());
+                Assert.AreEqual(0, context.Web.RecycleBin.Length);
 
                 // The mock file has been restored
                 string sharedDocumentsFolderUrl = $"{context.Uri.PathAndQuery}/Shared Documents";
                 IFolder sharedDocumentsFolder = await context.Web.GetFolderByServerRelativeUrlAsync(sharedDocumentsFolderUrl);
-                IFile documentToFind = await sharedDocumentsFolder.Files.GetFirstOrDefaultAsync(f => f.Name == fileName);
+                IFile documentToFind = await sharedDocumentsFolder.Files.FirstOrDefaultAsync(f => f.Name == fileName);
 
                 Assert.IsNotNull(documentToFind);
                 Assert.AreEqual(fileName, documentToFind.Name);
@@ -1149,14 +1104,14 @@ namespace PnP.Core.Test.SharePoint
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))
             {
-                await context.Web.GetAsync(w => w.RecycleBin);
+                await context.Web.LoadAsync(w => w.RecycleBin);
                 // The recycle bin is empty
-                Assert.AreEqual(0, context.Web.RecycleBin.Count());
+                Assert.AreEqual(0, context.Web.RecycleBin.Length);
 
                 // The mock file has been restored
                 string sharedDocumentsFolderUrl = $"{context.Uri.PathAndQuery}/Shared Documents";
                 IFolder sharedDocumentsFolder = await context.Web.GetFolderByServerRelativeUrlAsync(sharedDocumentsFolderUrl);
-                IFile documentToFind = await sharedDocumentsFolder.Files.GetFirstOrDefaultAsync(f => f.Name == fileName);
+                IFile documentToFind = await sharedDocumentsFolder.Files.FirstOrDefaultAsync(f => f.Name == fileName);
 
                 Assert.IsNotNull(documentToFind);
                 Assert.AreEqual(fileName, documentToFind.Name);
@@ -1175,6 +1130,8 @@ namespace PnP.Core.Test.SharePoint
         {
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, contextId, testName))
             {
+                context.GraphFirst = false;
+
                 if (clearFirst)
                 {
                     await context.Web.RecycleBin.DeleteAllAsync();
@@ -1182,6 +1139,10 @@ namespace PnP.Core.Test.SharePoint
 
                 string fileName = $"{TestCommon.PnPCoreSDKTestPrefix}{testName}.docx";
                 IFolder folder = await context.Web.Lists.GetByTitle("Documents").RootFolder.GetAsync();
+
+                //var list = await context.Web.Lists.GetByTitleAsync("Documents");
+                //IFolder folder = await list.RootFolder.GetAsync();
+
                 IFile mockDocument = await folder.Files.AddAsync(fileName, System.IO.File.OpenRead($".{Path.DirectorySeparatorChar}TestAssets{Path.DirectorySeparatorChar}test.docx"), true);
                 Guid id = await mockDocument.RecycleAsync();
 
@@ -1211,11 +1172,7 @@ namespace PnP.Core.Test.SharePoint
         {
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, contextId, testName))
             {
-                // Load the recycle bin
-                await context.Web.GetAsync(w => w.RecycleBin);
-
-                // Still convinced the FirstOrDefaultAsync should load the RecycleBin without the need to load it previously...
-                IRecycleBinItem recycleBinItem = context.Web.RecycleBin.FirstOrDefault(item => item.Id == recycleBinItemId);
+                IRecycleBinItem recycleBinItem = await context.Web.RecycleBin.FirstOrDefaultAsync(item => item.Id == recycleBinItemId);
                 await recycleBinItem.DeleteAsync();
             }
         }
@@ -1224,11 +1181,7 @@ namespace PnP.Core.Test.SharePoint
         {
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, contextId, testName))
             {
-                // Load the recycle bin
-                await context.Site.GetAsync(w => w.RecycleBin);
-
-                // Still convinced the FirstOrDefaultAsync should load the RecycleBin without the need to load it previously...
-                IRecycleBinItem recycleBinItem = context.Site.RecycleBin.FirstOrDefault(item => item.Id == recycleBinItemId);
+                IRecycleBinItem recycleBinItem = await context.Site.RecycleBin.FirstOrDefaultAsync(item => item.Id == recycleBinItemId);
                 await recycleBinItem.DeleteAsync();
             }
         }

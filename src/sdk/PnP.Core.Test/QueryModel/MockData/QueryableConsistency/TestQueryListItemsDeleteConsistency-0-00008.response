@@ -1,0 +1,10 @@
+--batchresponse_2dd7f04d-05f0-4916-8274-bf31dc8a5491
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+HTTP/1.1 200 OK
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+ETAG: "1"
+
+{"d":{"__metadata":{"id":"https://piasysdev.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'f5211951-377b-41b7-acc8-2b28122886a5')","uri":"https://piasysdev.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'f5211951-377b-41b7-acc8-2b28122886a5')","etag":"\"1\"","type":"SP.List"},"Id":"f5211951-377b-41b7-acc8-2b28122886a5"}}
+--batchresponse_2dd7f04d-05f0-4916-8274-bf31dc8a5491--

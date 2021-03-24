@@ -1,4 +1,5 @@
-﻿using PnP.Core.Services;
+﻿/*
+using PnP.Core.Services;
 using System;
 using System.Linq;
 using System.Linq.Expressions;
@@ -10,7 +11,7 @@ namespace PnP.Core.Model.SharePoint
     /// Collection of term groups
     /// </summary>
     [ConcreteType(typeof(TermGroupCollection))]
-    public interface ITermGroupCollection : IQueryable<ITermGroup>, IDataModelCollection<ITermGroup>, ISupportPaging<ITermGroup>, IDataModelCollectionDeleteByStringId
+    public interface ITermGroupCollection : IQueryable<ITermGroup>, IDataModelCollection<ITermGroup>, IDataModelCollectionDeleteByStringId
     {
         #region Add methods
 
@@ -114,3 +115,4 @@ namespace PnP.Core.Model.SharePoint
 
     }
 }
+*/

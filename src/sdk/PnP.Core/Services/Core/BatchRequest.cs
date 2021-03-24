@@ -88,7 +88,7 @@ namespace PnP.Core.Services
         /// <summary>
         /// Order of the request in the list of requests
         /// </summary>
-        internal int Order { get; private set; }
+        internal int Order { get; set; }
 
         /// <summary>
         /// Json response for this request (only populated when the <see cref="Batch"/> was executed)

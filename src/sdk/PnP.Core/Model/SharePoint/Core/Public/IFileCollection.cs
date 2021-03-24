@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -8,7 +9,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a collection of File objects
     /// </summary>
     [ConcreteType(typeof(FileCollection))]
-    public interface IFileCollection : IQueryable<IFile>, IDataModelCollection<IFile>, IDataModelCollectionDeleteByGuidId
+    public interface IFileCollection : IQueryable<IFile>, IAsyncEnumerable<IFile>, IDataModelCollection<IFile>, IDataModelCollectionLoad<IFile>, IDataModelCollectionDeleteByGuidId
     {
         #region Add
         /// <summary>

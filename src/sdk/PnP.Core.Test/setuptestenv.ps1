@@ -69,6 +69,11 @@ Add-PnPTeamsTeam
 Add-PnPFile -Path .\TestAssets\test.docx -Folder "Shared Documents"  
 # Add sub site 
 New-PnPWeb -Title "Sub site" -Url "subsite" -Locale 1033 -Template "STS#3"
+
+# Create the classic team site
+New-PnPTenantSite -Title "Classic Team site" -Url "https://$tenantName.sharepoint.com/sites/sts0" -Lcid 1033 -Template "STS#0" -Owner $UPN -TimeZone 4
+
+
 # TODO: When ALM support is implemented, remove this from here and move to TestAssets helper
 # Install the client side app to the site
 Install-PnPApp -Identity $app.Id 

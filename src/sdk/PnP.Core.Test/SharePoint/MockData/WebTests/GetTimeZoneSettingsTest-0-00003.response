@@ -1,4 +1,4 @@
---batchresponse_b756b9cd-69f2-4d2b-bd10-49242b9e2fbb
+--batchresponse_d39b4af3-f88d-48fe-862f-6dafe087c692
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
@@ -6,4 +6,4 @@ HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
 {"d":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/testsub1/_api/web/regionalsettings/timezone","uri":"https://bertonline.sharepoint.com/sites/prov-1/testsub1/_api/web/regionalsettings/timezone","type":"SP.TimeZone"},"Description":"(UTC-08:00) Pacific Time (US and Canada)","Id":13,"Information":{"__metadata":{"type":"SP.TimeZoneInformation"},"Bias":480,"DaylightBias":-60,"StandardBias":0}}}
---batchresponse_b756b9cd-69f2-4d2b-bd10-49242b9e2fbb--
+--batchresponse_d39b4af3-f88d-48fe-862f-6dafe087c692--

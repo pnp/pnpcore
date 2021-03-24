@@ -1,1 +1,10 @@
-{"responses": [{"id": "1","status":200,"headers" : {"Cache-Control":"no-cache","OData-Version":"4.0","Content-Type":"application/json;odata.metadata=minimal;odata.streaming=true;IEEE754Compatible=false;charset=utf-8","ETag":"\"d86656dd-ba3b-4cff-a631-c840bbc73a40,1\""},"body":{"@odata.context":"https://graph.microsoft.com/v1.0/$metadata#sites('bertonline.sharepoint.com%2Cb56adf79-ff6a-4964-a63a-ff1fa23be9f8%2C8c8e101c-1b0d-4253-85e7-c30039bf46e2')/lists(id,items)/$entity","@odata.etag":"\"d86656dd-ba3b-4cff-a631-c840bbc73a40,1\"","id":"d86656dd-ba3b-4cff-a631-c840bbc73a40"}},{"id": "2","status":200,"headers" : {"Cache-Control":"no-cache","OData-Version":"4.0","Content-Type":"application/json;odata.metadata=minimal;odata.streaming=true;IEEE754Compatible=false;charset=utf-8"},"body":{"@odata.context":"https://graph.microsoft.com/v1.0/$metadata#sites('bertonline.sharepoint.com%2Cb56adf79-ff6a-4964-a63a-ff1fa23be9f8%2C8c8e101c-1b0d-4253-85e7-c30039bf46e2')/lists('d86656dd-ba3b-4cff-a631-c840bbc73a40')/items","value":[]}}]}
+--batchresponse_ea7e0b2d-da5a-4991-a6db-b153f940e259
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+HTTP/1.1 200 OK
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+ETAG: "1"
+
+{"d":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'0b363b15-098c-431f-a912-1e1674fa5c72')","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'0b363b15-098c-431f-a912-1e1674fa5c72')","etag":"\"1\"","type":"SP.List"},"Items":{"results":[]},"Id":"0b363b15-098c-431f-a912-1e1674fa5c72"}}
+--batchresponse_ea7e0b2d-da5a-4991-a6db-b153f940e259--

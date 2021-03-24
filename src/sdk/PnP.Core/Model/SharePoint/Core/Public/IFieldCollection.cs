@@ -1,4 +1,5 @@
 ﻿using PnP.Core.Services;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -8,7 +9,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a collection of Field objects of SharePoint Online
     /// </summary>
     [ConcreteType(typeof(FieldCollection))]
-    public interface IFieldCollection : IQueryable<IField>, IDataModelCollection<IField>, IDataModelCollectionDeleteByGuidId
+    public interface IFieldCollection : IQueryable<IField>, IAsyncEnumerable<IField>, IDataModelCollectionLoad<IField>, IDataModelCollection<IField>, IDataModelCollectionDeleteByGuidId
     {
         // For FieldType
         // https://docs.microsoft.com/en-us/previous-versions/office/sharepoint-server/ee540543%28v%3doffice.15%29

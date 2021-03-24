@@ -10,6 +10,7 @@ using System.Net.Http;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
+using PnP.Core.Model;
 
 namespace PnP.Core.Test.Base
 {
@@ -210,7 +211,7 @@ namespace PnP.Core.Test.Base
 
                 Assert.IsTrue(team.Requested);
                 Assert.IsTrue(!string.IsNullOrEmpty(team.DisplayName));
-                Assert.IsTrue(team.Channels.Any());
+                Assert.IsTrue(team.Channels.Length > 0);
             }
         }
 
@@ -272,7 +273,7 @@ namespace PnP.Core.Test.Base
 
                 Assert.IsTrue(team.Requested);
                 Assert.IsTrue(!string.IsNullOrEmpty(team.DisplayName));
-                Assert.IsTrue(team.Channels.Any());
+                Assert.IsTrue(team.Channels.Length > 0);
             }
         }
 
@@ -332,7 +333,7 @@ namespace PnP.Core.Test.Base
 
                 Assert.IsTrue(team.Requested);
                 Assert.IsTrue(!string.IsNullOrEmpty(team.DisplayName));
-                Assert.IsTrue(team.Channels.Any());
+                Assert.IsTrue(team.Channels.Length > 0);
             }
         }
 

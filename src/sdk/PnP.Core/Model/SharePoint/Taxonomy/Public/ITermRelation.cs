@@ -1,4 +1,5 @@
-﻿namespace PnP.Core.Model.SharePoint
+﻿/*
+namespace PnP.Core.Model.SharePoint
 {
     /// <summary>
     /// Represents the relationship between terms in a term store.Currently two types of relationships are supported: pin and reuse.
@@ -37,3 +38,4 @@
         public ITerm ToTerm { get; }
     }
 }
+*/

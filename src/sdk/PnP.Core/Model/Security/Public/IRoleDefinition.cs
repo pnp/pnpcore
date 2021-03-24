@@ -8,7 +8,7 @@ namespace PnP.Core.Model.Security
     /// Defines a single role definition, including a name, description, and set of rights.
     /// </summary>
     [ConcreteType(typeof(RoleDefinition))]
-    public interface IRoleDefinition : IDataModel<IRoleDefinition>, IDataModelGet<IRoleDefinition>, IDataModelUpdate, IDataModelDelete, IQueryableDataModel
+    public interface IRoleDefinition : IDataModel<IRoleDefinition>, IDataModelGet<IRoleDefinition>, IDataModelLoad<IRoleDefinition>, IDataModelUpdate, IDataModelDelete, IQueryableDataModel
     {
         /// <summary>
         /// Gets or sets a value that specifies the base permissions for the role definition.

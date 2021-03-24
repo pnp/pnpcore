@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using PnP.Core.Model;
 
 namespace PnP.Core.Test.QueryModel
 {
@@ -61,13 +62,15 @@ namespace PnP.Core.Test.QueryModel
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
+                //context.GraphFirst = false;
+
                 // this will use Graph under the covers!
                 var sitePages = context.Web.Lists.GetByTitle("Site Pages", p => p.Title, p => p.Description, p => p.Items);
                 Assert.IsTrue(sitePages.Requested);
                 Assert.IsTrue(sitePages.Title == "Site Pages");
                 Assert.IsTrue(sitePages.IsPropertyAvailable(p => p.Description));
                 Assert.IsTrue(sitePages.Items.Requested == true);
-                Assert.IsTrue(sitePages.Items.Count() > 0);
+                Assert.IsTrue(sitePages.Items.Length > 0);
                 // Since no select was provided all properties should have been loaded
                 Assert.IsFalse(sitePages.IsPropertyAvailable(p => p.TemplateType));
             }
@@ -79,18 +82,18 @@ namespace PnP.Core.Test.QueryModel
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
+                context.GraphFirst = false;
+
                 // Get the whole set of lists via LINQ - shoudl use Graph and should contain the "Site Pages" system list
                 var query = (from l in context.Web.Lists
                              select l)
-                            .Load(l => l.Id, l => l.Title, l => l.Description);
+                            .QueryProperties(l => l.Id, l => l.Title, l => l.Description);
 
                 // Save the count of retrieved lists
                 var queryResult = query.ToList();
 
                 Assert.IsTrue(queryResult.Count >= 5);
                 Assert.IsTrue(queryResult.Count(l => l.Title == "Site Pages") == 1);
-                Assert.IsTrue(context.Web.Lists.Length >= 5);
-                Assert.IsTrue(context.Web.Lists.Count(l => l.Title == "Site Pages") == 1);
             }
         }
 
@@ -105,20 +108,18 @@ namespace PnP.Core.Test.QueryModel
 
                 var query = (from l in context.Web.Lists
                              select l)
-                            .Load(l => l.Id, l => l.Title, l => l.Description);
+                            .QueryProperties(l => l.Id, l => l.Title, l => l.Description);
 
                 var queryResult = query.ToList();
 
                 Assert.IsNotNull(queryResult);
                 Assert.IsTrue(queryResult.Count >= 5);
                 Assert.IsTrue(queryResult.Count(l => l.Title == "Site Pages") == 1);
-                Assert.IsTrue(context.Web.Lists.Length >= 5);
-                Assert.IsTrue(context.Web.Lists.Count(l => l.Title == "Site Pages") == 1);
 
-                var web = context.Web.GetAsync(w => w.Lists);
+                await context.Web.LoadAsync(w => w.Lists);
 
                 Assert.IsTrue(context.Web.Lists.Length >= 5);
-                Assert.IsTrue(context.Web.Lists.Count(l => l.Title == "Site Pages") == 1);
+                Assert.IsTrue(context.Web.Lists.AsRequested().Any(l => l.Title == "Site Pages"));
             }
         }
 
@@ -133,7 +134,7 @@ namespace PnP.Core.Test.QueryModel
                 // Get the whole set of lists via LINQ
                 var query = (from l in context.Web.Lists
                              select l)
-                            .Load(l => l.Id, l => l.Title, l => l.Description);
+                            .QueryProperties(l => l.Id, l => l.Title, l => l.Description);
 
                 // Save the count of retrieved lists
                 var queryResult = query.ToList();
@@ -147,7 +148,7 @@ namespace PnP.Core.Test.QueryModel
 
                 // Now add a new list
                 string listTitle = "TestQueryListsConsistency";
-                var newList = context.Web.Lists.FirstOrDefault(l => l.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
+                var newList = await context.Web.Lists.FirstOrDefaultAsync(l => l.Title == listTitle);
 
                 if (newList != null)
                 {
@@ -159,7 +160,8 @@ namespace PnP.Core.Test.QueryModel
                 }
 
                 // Double-check that the number of lists is now increased by 1
-                var newListsCount = context.Web.Lists.Length;
+                var web = await context.Web.GetAsync(w => w.Lists);
+                var newListsCount = web.Lists.Length;
                 Assert.AreEqual(listsCount + 1, newListsCount);
 
                 // Now execute again the LINQ query
@@ -183,7 +185,7 @@ namespace PnP.Core.Test.QueryModel
                 // Get the whole set of lists via LINQ
                 var query = (from l in context.Web.Lists
                              select l)
-                            .Load(l => l.Id, l => l.Title, l => l.Description);
+                            .QueryProperties(l => l.Id, l => l.Title, l => l.Description);
 
                 // Save the count of retrieved lists
                 var queryResult = query.ToList();
@@ -197,7 +199,7 @@ namespace PnP.Core.Test.QueryModel
 
                 // Now add a new list
                 string listTitle = "TestQueryListsDeleteConsistency";
-                var newList = context.Web.Lists.FirstOrDefault(l => l.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
+                var newList = context.Web.Lists.FirstOrDefault(l => l.Title == listTitle);
 
                 if (newList != null)
                 {
@@ -209,6 +211,7 @@ namespace PnP.Core.Test.QueryModel
                 }
 
                 // Double-check that the number of lists is now increased by 1
+                await context.Web.LoadAsync(w => w.Lists);
                 var newListsCount = context.Web.Lists.Length;
                 Assert.AreEqual(listsCount + 1, newListsCount);
 
@@ -216,6 +219,7 @@ namespace PnP.Core.Test.QueryModel
                 await newList.DeleteAsync();
 
                 // And double-check that the number of lists is now decreased by 1
+                await context.Web.LoadAsync(w => w.Lists);
                 newListsCount = context.Web.Lists.Length;
                 Assert.AreEqual(listsCount, newListsCount);
 
@@ -240,7 +244,7 @@ namespace PnP.Core.Test.QueryModel
                 // Get the whole set of lists via LINQ
                 var query = (from l in context.Web.Lists
                              select l)
-                            .Load(l => l.Id, l => l.Title, l => l.Description);
+                            .QueryProperties(l => l.Id, l => l.Title, l => l.Description);
 
                 // Save the count of retrieved lists
                 var queryResult = query.ToList();
@@ -254,7 +258,7 @@ namespace PnP.Core.Test.QueryModel
 
                 // Now add a new list
                 string listTitle = "TestQueryListsUpdateConsistency";
-                var newList = context.Web.Lists.FirstOrDefault(l => l.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
+                var newList = context.Web.Lists.FirstOrDefault(l => l.Title == listTitle);
 
                 if (newList != null)
                 {
@@ -266,6 +270,7 @@ namespace PnP.Core.Test.QueryModel
                 }
 
                 // Double-check that the number of lists is now increased by 1
+                await context.Web.LoadAsync(w => w.Lists);
                 var newListsCount = context.Web.Lists.Length;
                 Assert.AreEqual(listsCount + 1, newListsCount);
 
@@ -275,6 +280,7 @@ namespace PnP.Core.Test.QueryModel
                 await newList.UpdateAsync();
 
                 // Now double-check that the number of lists is still the same
+                await context.Web.LoadAsync(w => w.Lists);
                 newListsCount = context.Web.Lists.Length;
                 Assert.AreEqual(listsCount + 1, newListsCount);
 
@@ -297,9 +303,10 @@ namespace PnP.Core.Test.QueryModel
         [TestMethod]
         public async Task TestQueryListItemsConsistency()
         {
+            // TestCommon.Instance.Mocking = false;
+
             var expectedListItemTitle = "Home";
 
-            // TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 context.GraphFirst = false;
@@ -310,7 +317,7 @@ namespace PnP.Core.Test.QueryModel
                 var query = (from i in sitePages.Items
                              where i.Title == expectedListItemTitle
                              select i)
-                             .Load(l => l.Id, l => l.Title);
+                             .QueryProperties(l => l.Id, l => l.Title);
 
                 var queryResult = query.ToList();
 
@@ -338,10 +345,11 @@ namespace PnP.Core.Test.QueryModel
         [TestMethod]
         public async Task TestQueryListItemsAddConsistency()
         {
+            // TestCommon.Instance.Mocking = false;
+
             var listTitle = "TestQueryListItemsAddConsistency";
             var expectedNewListItemTitle = "New Item";
 
-            //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 context.GraphFirst = false;
@@ -360,7 +368,7 @@ namespace PnP.Core.Test.QueryModel
                 // Retrieve all the list items via LINQ query
                 var query = (from i in myList.Items
                              select i)
-                             .Load(l => l.Id, l => l.Title);
+                             .QueryProperties(l => l.Id, l => l.Title);
 
                 var queryResult = query.ToList();
 
@@ -418,7 +426,7 @@ namespace PnP.Core.Test.QueryModel
                 // Retrieve all the list items via LINQ query
                 var query = (from i in myList.Items
                              select i)
-                             .Load(l => l.Id, l => l.Title);
+                             .QueryProperties(l => l.Id, l => l.Title);
 
                 var queryResult = query.ToList();
 
@@ -480,7 +488,7 @@ namespace PnP.Core.Test.QueryModel
                 // Retrieve all the list items via LINQ query
                 var query = (from i in myList.Items
                              select i)
-                             .Load(l => l.Id, l => l.Title);
+                             .QueryProperties(l => l.Id, l => l.Title);
 
                 var queryResult = query.ToList();
 
@@ -528,7 +536,7 @@ namespace PnP.Core.Test.QueryModel
                 var list = context.Web.Lists.GetByTitle("Site Pages", l => l.Id, l => l.Title, l => l.Description);
 
                 // Get the list items -- will happen via Graph
-                await list.GetAsync(p => p.Items);
+                await list.LoadAsync(p => p.Items);
 
                 Assert.IsNotNull(list);
                 // It's hard to enforce only one page in the test site (especially now that we have page tests)...making the check more reliable
@@ -569,14 +577,14 @@ namespace PnP.Core.Test.QueryModel
                 context.GraphFirst = false;
 
                 // Get all the lists first
-                var listsQuery = context.Web.Lists.Load(l => l.Id, l => l.Title);
+                var listsQuery = context.Web.Lists.QueryProperties(l => l.Id, l => l.Title);
                 var listsQueryResult = listsQuery.ToList();
 
                 // Then try to get a specific list by title
-                var list = context.Web.Lists.GetByTitle(listTitle, l => l.Id, l => l.Title, l => l.Description);
+                var list = context.Web.Lists.GetByTitle(listTitle, l => l.Id, l => l.Title);
 
                 // Then get the list items
-                await list.GetAsync(l => l.Items);
+                await list.LoadAsync(l => l.Items);
 
                 Assert.IsNotNull(listsQueryResult);
                 Assert.IsTrue(listsQueryResult.Count > 5);

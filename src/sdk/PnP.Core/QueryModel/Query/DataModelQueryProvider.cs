@@ -1,7 +1,10 @@
 ﻿using PnP.Core.Model;
+using PnP.Core.Services;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace PnP.Core.QueryModel
@@ -18,6 +21,7 @@ namespace PnP.Core.QueryModel
         private readonly DataModelQueryService<TModel> queryService;
 
         private EntityInfo entityInfo;
+
         internal EntityInfo EntityInfo
         {
             get
@@ -49,13 +53,33 @@ namespace PnP.Core.QueryModel
 
         #region BaseQueryProvider abstract methods implementation
 
-        public override Task<object> ExecuteObjectAsync(Expression expression)
+        public override Task<IEnumerableBatchResult<TResult>> AddToCurrentBatchAsync<TResult>(Expression expression)
+        {
+            return AddToBatchAsync<TResult>(expression, queryService.PnPContext.CurrentBatch);
+        }
+
+        public override async Task<IEnumerableBatchResult<TResult>> AddToBatchAsync<TResult>(Expression expression, Batch batch)
         {
             // Translate the query expression into an actual query text for the target Query Service
             var query = Translate(expression);
 
             // Execute the query via the target Query Service
-            return queryService.ExecuteQueryAsync(expression.Type, query);
+            BatchRequest batchRequest= await queryService.AddToBatchAsync(query, batch).ConfigureAwait(false);
+
+            // Get the resulting property from the parent object
+            var collection = batchRequest.Model.GetPublicInstancePropertyValue(queryService.MemberName) as IRequestableCollection;
+            var resultValue = (IReadOnlyList<TResult>)collection.RequestedItems;
+
+            return new BatchEnumerableBatchResult<TResult>(batch, batchRequest.Id, resultValue);
+        }
+
+        public override Task<object> ExecuteObjectAsync(Expression expression, CancellationToken token)
+        {
+            // Translate the query expression into an actual query text for the target Query Service
+            var query = Translate(expression);
+
+            // Execute the query via the target Query Service
+            return queryService.ExecuteQueryAsync(expression.Type, query, token);
         }
 
         public override IQueryable CreateQuery(Expression expression)

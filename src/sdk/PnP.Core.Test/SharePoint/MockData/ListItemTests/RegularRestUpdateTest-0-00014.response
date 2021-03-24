@@ -1,4 +1,4 @@
---batchresponse_fdc3251f-201c-4c21-95e7-4865196850e0
+--batchresponse_104d441e-485e-4d1e-8762-4962d9186bcb
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
@@ -6,4 +6,4 @@ HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
 {"d":{"ValidateUpdateListItem":{"__metadata":{"type":"Collection(SP.ListItemFormUpdateValue)"},"results":[{"ErrorCode":0,"ErrorMessage":null,"FieldName":"Text1","FieldValue":"22 PnP Rocks","HasException":false,"ItemId":1},{"ErrorCode":0,"ErrorMessage":null,"FieldName":"MultilineText1","FieldValue":"2222 PnP Rocks...PnP Rocks...PnP Rocks...PnP Rocks...PnP Rocks...PnP Rocks...PnP Rocks","HasException":false,"ItemId":1},{"ErrorCode":0,"ErrorMessage":null,"FieldName":"Number1","FieldValue":"22222","HasException":false,"ItemId":1},{"ErrorCode":0,"ErrorMessage":null,"FieldName":"Bool1","FieldValue":"0","HasException":false,"ItemId":1},{"ErrorCode":0,"ErrorMessage":null,"FieldName":"DateTime1","FieldValue":"2020-11-26 03:25:47","HasException":false,"ItemId":1},{"ErrorCode":0,"ErrorMessage":null,"FieldName":"Currency1","FieldValue":"22,22","HasException":false,"ItemId":1},{"ErrorCode":0,"ErrorMessage":null,"FieldName":"ChoiceSingle1","FieldValue":"Option B","HasException":false,"ItemId":1},{"ErrorCode":0,"ErrorMessage":null,"FieldName":"ChoiceMulti1","FieldValue":"Option A;#Option B;#Option C;#","HasException":false,"ItemId":1}]}}}
---batchresponse_fdc3251f-201c-4c21-95e7-4865196850e0--
+--batchresponse_104d441e-485e-4d1e-8762-4962d9186bcb--

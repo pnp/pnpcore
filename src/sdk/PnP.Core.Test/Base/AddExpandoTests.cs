@@ -5,6 +5,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using PnP.Core.Model;
+using PnP.Core.QueryModel;
 
 namespace PnP.Core.Test.Base
 {
@@ -32,10 +34,8 @@ namespace PnP.Core.Test.Base
             // TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                var web = await context.Web.GetAsync(p => p.Lists);
-
                 string listTitle = "AddListItemViaRest";
-                var myList = web.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
+                var myList = context.Web.Lists.FirstOrDefault(p => p.Title == listTitle);
 
                 if (myList != null)
                 {
@@ -43,13 +43,13 @@ namespace PnP.Core.Test.Base
                 }
                 else
                 {
-                    myList = await web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
+                    myList = await context.Web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
                 }
 
                 // get items from the list
-                await myList.GetAsync(p => p.Items);
+                await myList.LoadAsync(p => p.Items);
 
-                int listItemCount = myList.Items.Count();
+                int listItemCount = myList.Items.Length;
 
                 // Add a list item
                 Dictionary<string, object> values = new Dictionary<string, object>
@@ -60,18 +60,19 @@ namespace PnP.Core.Test.Base
 
                 Assert.IsTrue(item.Requested);
                 Assert.IsTrue(item.Id >= 0);
-                Assert.IsTrue(myList.Items.Count() == listItemCount + 1);
+                Assert.IsTrue(myList.Items.Length == listItemCount + 1);
 
                 // Load the list again, include extra list property
-                await myList.GetAsync(p => p.Items);
+                await myList.LoadAsync(p => p.Items);
 
                 // Should still have the same amount of items
-                Assert.IsTrue(myList.Items.Count() == listItemCount + 1);
+                Assert.IsTrue(myList.Items.Length == listItemCount + 1);
                 // Additional list item fields should be available
-                Assert.IsTrue(item.Values["ContentType"].ToString() == "Item");
                 dynamic dynamicItem = item;
-                Assert.IsTrue(dynamicItem.ContentType == "Item");
-                Assert.IsTrue(dynamicItem["ContentType"] == "Item");
+                Assert.IsTrue(dynamicItem.Title == "Yes");
+
+                // Cleanup
+                await myList.DeleteAsync();
             }
         }
 
@@ -84,7 +85,7 @@ namespace PnP.Core.Test.Base
                 var web = context.Web.Get(p => p.Lists);
 
                 string listTitle = "AddListItemViaRestNonAsync";
-                var myList = web.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
+                var myList = web.Lists.FirstOrDefault(p => p.Title == listTitle);
 
                 if (myList != null)
                 {
@@ -96,9 +97,9 @@ namespace PnP.Core.Test.Base
                 }
 
                 // get items from the list
-                myList.Get(p => p.Items);
+                myList.Load(p => p.Items);
 
-                int listItemCount = myList.Items.Count();
+                int listItemCount = myList.Items.Length;
 
                 // Add a list item
                 Dictionary<string, object> values = new Dictionary<string, object>
@@ -113,18 +114,19 @@ namespace PnP.Core.Test.Base
                 Assert.IsTrue(myList.Items.Contains(item.Id));
                 Assert.IsFalse(myList.Items.Contains(item.Id + 1));
 
-                Assert.IsTrue(myList.Items.Count() == listItemCount + 1);
+                Assert.IsTrue(myList.Items.Length == listItemCount + 1);
 
                 // Load the list again, include extra list property
-                myList.Get(p => p.Items);
+                myList.Load(p => p.Items);
 
                 // Should still have the same amount of items
-                Assert.IsTrue(myList.Items.Count() == listItemCount + 1);
+                Assert.IsTrue(myList.Items.Length == listItemCount + 1);
                 // Additional list item fields should be available
-                Assert.IsTrue(item.Values["ContentType"].ToString() == "Item");
                 dynamic dynamicItem = item;
-                Assert.IsTrue(dynamicItem.ContentType == "Item");
-                Assert.IsTrue(dynamicItem["ContentType"] == "Item");
+                Assert.IsTrue(dynamicItem.Title == "Yes");
+
+                // Cleanup
+                await myList.DeleteAsync();
             }
         }
 
@@ -138,8 +140,11 @@ namespace PnP.Core.Test.Base
                 var web = await context.Web.GetBatchAsync(batch, p => p.Lists);
                 await context.ExecuteAsync(batch);
 
+                // Check that the result of the batch async request is now available
+                Assert.IsTrue(web.IsAvailable);
+
                 string listTitle = "AddListItemViaBatchRest";
-                var myList = web.Lists.FirstOrDefault(l => l.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
+                var myList = web.Result.Lists.FirstOrDefault(l => l.Title == listTitle);
 
                 if (myList != null)
                 {
@@ -148,16 +153,16 @@ namespace PnP.Core.Test.Base
                 else
                 {
                     batch = context.BatchClient.EnsureBatch();
-                    myList = await web.Lists.AddBatchAsync(batch, listTitle, ListTemplateType.GenericList);
+                    myList = await web.Result.Lists.AddBatchAsync(batch, listTitle, ListTemplateType.GenericList);
                     await context.ExecuteAsync(batch);
                 }
 
                 // get items from the list
                 batch = context.BatchClient.EnsureBatch();
-                await myList.GetBatchAsync(batch, p => p.Items);
+                await myList.LoadBatchAsync(batch, p => p.Items);
                 await context.ExecuteAsync(batch);
 
-                int listItemCount = myList.Items.Count();
+                int listItemCount = myList.Items.Length;
 
                 // Add a list item
                 Dictionary<string, object> values = new Dictionary<string, object>
@@ -170,20 +175,21 @@ namespace PnP.Core.Test.Base
 
                 Assert.IsTrue(item.Requested);
                 Assert.IsTrue(item.Id >= 0);
-                Assert.IsTrue(myList.Items.Count() == listItemCount + 1);
+                Assert.IsTrue(myList.Items.Length == listItemCount + 1);
 
                 // Load the list again, include extra list property
                 batch = context.BatchClient.EnsureBatch();
-                await myList.GetBatchAsync(batch, p => p.Items);
+                await myList.LoadBatchAsync(batch, p => p.Items);
                 await context.ExecuteAsync(batch);
 
                 // Should still have the same amount of items
-                Assert.IsTrue(myList.Items.Count() == listItemCount + 1);
+                Assert.IsTrue(myList.Items.Length == listItemCount + 1);
                 // Additional list item fields should be available
-                Assert.IsTrue(item.Values["ContentType"].ToString() == "Item");
                 dynamic dynamicItem = item;
-                Assert.IsTrue(dynamicItem.ContentType == "Item");
-                Assert.IsTrue(dynamicItem["ContentType"] == "Item");
+                Assert.IsTrue(dynamicItem.Title == ItemTitleValue);
+
+                // Cleanup
+                await myList.DeleteAsync();
             }
         }
 
@@ -197,8 +203,11 @@ namespace PnP.Core.Test.Base
                 var web = context.Web.GetBatch(batch, p => p.Lists);
                 await context.ExecuteAsync(batch);
 
+                // Check that the result of the batch request is now available
+                Assert.IsTrue(web.IsAvailable);
+
                 string listTitle = "AddListItemViaSpecificBatchNonAsyncTest";
-                var myList = web.Lists.FirstOrDefault(l => l.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
+                var myList = web.Result.Lists.FirstOrDefault(l => l.Title == listTitle);
 
                 if (myList != null)
                 {
@@ -207,16 +216,16 @@ namespace PnP.Core.Test.Base
                 else
                 {
                     batch = context.BatchClient.EnsureBatch();
-                    myList = await web.Lists.AddBatchAsync(batch, listTitle, ListTemplateType.GenericList);
+                    myList = await web.Result.Lists.AddBatchAsync(batch, listTitle, ListTemplateType.GenericList);
                     await context.ExecuteAsync(batch);
                 }
 
                 // get items from the list
                 batch = context.BatchClient.EnsureBatch();
-                myList.GetBatch(batch, p => p.Items);
+                myList.LoadBatch(batch, p => p.Items);
                 await context.ExecuteAsync(batch);
 
-                int listItemCount = myList.Items.Count();
+                int listItemCount = myList.Items.Length;
 
                 // Add a list item
                 Dictionary<string, object> values = new Dictionary<string, object>
@@ -229,20 +238,21 @@ namespace PnP.Core.Test.Base
 
                 Assert.IsTrue(item.Requested);
                 Assert.IsTrue(item.Id >= 0);
-                Assert.IsTrue(myList.Items.Count() == listItemCount + 1);
+                Assert.IsTrue(myList.Items.Length == listItemCount + 1);
 
                 // Load the list again, include extra list property
                 batch = context.BatchClient.EnsureBatch();
-                await myList.GetBatchAsync(batch, p => p.Items);
+                await myList.LoadBatchAsync(batch, p => p.Items);
                 await context.ExecuteAsync(batch);
 
                 // Should still have the same amount of items
-                Assert.IsTrue(myList.Items.Count() == listItemCount + 1);
+                Assert.IsTrue(myList.Items.Length == listItemCount + 1);
                 // Additional list item fields should be available
-                Assert.IsTrue(item.Values["ContentType"].ToString() == "Item");
                 dynamic dynamicItem = item;
-                Assert.IsTrue(dynamicItem.ContentType == "Item");
-                Assert.IsTrue(dynamicItem["ContentType"] == "Item");
+                Assert.IsTrue(dynamicItem.Title == ItemTitleValue);
+
+                // Cleanup
+                await myList.DeleteAsync();
             }
         }
 
@@ -256,8 +266,11 @@ namespace PnP.Core.Test.Base
                 var web = context.Web.GetBatch(batch, p => p.Lists);
                 await context.ExecuteAsync(batch);
 
+                // Check that the result of the batch request is now available
+                Assert.IsTrue(web.IsAvailable);
+
                 string listTitle = "AddListItemViaRestExceptionTest";
-                var myList = web.Lists.FirstOrDefault(l => l.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
+                var myList = web.Result.Lists.FirstOrDefault(l => l.Title == listTitle);
 
                 if (myList != null)
                 {
@@ -266,16 +279,16 @@ namespace PnP.Core.Test.Base
                 else
                 {
                     batch = context.BatchClient.EnsureBatch();
-                    myList = await web.Lists.AddBatchAsync(batch, listTitle, ListTemplateType.GenericList);
+                    myList = await web.Result.Lists.AddBatchAsync(batch, listTitle, ListTemplateType.GenericList);
                     await context.ExecuteAsync(batch);
                 }
 
                 // get items from the list
                 batch = context.BatchClient.EnsureBatch();
-                myList.GetBatch(batch, p => p.Items);
+                myList.LoadBatch(batch, p => p.Items);
                 await context.ExecuteAsync(batch);
 
-                int listItemCount = myList.Items.Count();
+                int listItemCount = myList.Items.Length;
 
                 // Add a list item
                 Dictionary<string, object> values = new Dictionary<string, object>
@@ -295,6 +308,8 @@ namespace PnP.Core.Test.Base
                     var item = await myList.Items.AddAsync(null);
                 });
 
+                // Cleanup
+                await myList.DeleteAsync();
             }
         }
         #endregion

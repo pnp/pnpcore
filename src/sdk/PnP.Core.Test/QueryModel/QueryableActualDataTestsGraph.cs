@@ -26,12 +26,12 @@ namespace PnP.Core.Test.QueryModel
                 context.GraphFirst = true;
 
                 var query = context.Site.AllWebs
-                            .Load(w => w.Id, w => w.Title, w => w.Description);
+                            .QueryProperties(w => w.Id, w => w.Title, w => w.Description);
 
-                var queryResult = query.ToList();
-
-                Assert.IsNotNull(queryResult);
-                Assert.IsTrue(queryResult.Count > 0);
+                Assert.ThrowsException<ClientException>(() =>
+                {
+                    var queryResult = query.ToList();
+                });
             }
         }
 
@@ -45,7 +45,7 @@ namespace PnP.Core.Test.QueryModel
 
                 var query = (from l in context.Web.Lists
                              select l)
-                            .Load(l => l.Id, l => l.Title, l => l.Description);
+                            .QueryProperties(l => l.Id, l => l.Title, l => l.Description);
 
                 var queryResult = query.ToList();
 
@@ -59,29 +59,31 @@ namespace PnP.Core.Test.QueryModel
         {
             //TestCommon.Instance.Mocking = false;
 
-            (string listName, int id, string itemTitle) = await TestAssets.CreateTestListItemAsync(0);
-
-            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+            try
             {
-                context.GraphFirst = true;
+                (string listName, int id, string itemTitle) = await TestAssets.CreateTestListItemAsync(0);
 
-                var query = (from i in context.Web.Lists.GetByTitle(listName).Items
-                             where i.Title == itemTitle
-                             select i)
-                             .Load(l => l.Id, l => l.Title);
+                using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+                {
+                    context.GraphFirst = true;
 
-                var queryResult = query.ToList();
+                    var query = (from i in context.Web.Lists.GetByTitle(listName).Items
+                                 where i.Title == itemTitle
+                                 select i)
+                                 .QueryProperties(l => l.Id, l => l.Title);
 
-                // Ensure that we have 1 list in the collection of lists
-                Assert.AreEqual(1, context.Web.Lists.Length);
+                    var queryResult = query.ToList();
 
-                // Ensure that we have 1 item in the result and that its title is the expected one
-                Assert.IsNotNull(queryResult);
-                Assert.AreEqual(1, queryResult.Count);
-                Assert.AreEqual(itemTitle, queryResult[0].Title);
+                    // Ensure that we have 1 item in the result and that its title is the expected one
+                    Assert.IsNotNull(queryResult);
+                    Assert.AreEqual(1, queryResult.Count);
+                    Assert.AreEqual(itemTitle, queryResult[0].Title);
+                }
             }
-
-            await TestAssets.CleanupTestDedicatedListAsync(2);
+            finally
+            {
+                await TestAssets.CleanupTestDedicatedListAsync(2);
+            }
         }
 
         [TestMethod]
@@ -110,7 +112,7 @@ namespace PnP.Core.Test.QueryModel
 
                 var actual = (from l in context.Web.Lists
                               select l)
-                             .Load(l => l.Id, l => l.Title)
+                             .QueryProperties(l => l.Id, l => l.Title)
                              .FirstOrDefault(l => l.Title == expected);
 
                 Assert.IsNotNull(actual);
@@ -180,21 +182,26 @@ namespace PnP.Core.Test.QueryModel
         {
             //TestCommon.Instance.Mocking = false;
 
-            (string listName, int id, string itemTitle) = await TestAssets.CreateTestListItemAsync();
-
-            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+            try
             {
-                context.GraphFirst = true;
+                (string listName, int id, string itemTitle) = await TestAssets.CreateTestListItemAsync();
 
-                var library = context.Web.Lists.GetByTitle(listName);
-                var firstItem = library.Items.GetById(1);
+                using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+                {
+                    context.GraphFirst = true;
 
-                Assert.IsNotNull(firstItem);
-                Assert.AreEqual(id, firstItem.Id);
-                Assert.AreEqual(firstItem.Title, itemTitle);
+                    var library = context.Web.Lists.GetByTitle(listName);
+                    var firstItem = library.Items.GetById(1);
+
+                    Assert.IsNotNull(firstItem);
+                    Assert.AreEqual(id, firstItem.Id);
+                    Assert.AreEqual(firstItem.Title, itemTitle);
+                }
             }
-
-            await TestAssets.CleanupTestDedicatedListAsync(2);
+            finally
+            {
+                await TestAssets.CleanupTestDedicatedListAsync(2);
+            }
         }
     }
 }

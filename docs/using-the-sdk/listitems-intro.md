@@ -16,7 +16,7 @@ using (var context = await pnpContextFactory.CreateAsync("SiteToWorkWith"))
 The PnP Core SDK supports multiple ways to read list items and what approach to use depends on your list size and your use case. For a large list you want to consider [using paging](basics-getdata-paging.md) and it's also recommended to write a query that only returns the items you really need versus loading all list items. When writing custom queries you also should consider only returning the list fields you need in your application, the lesser rows and fields to return the faster the response will come from the server.
 
 > [!Important]
-> When processing list item responses from the server the SDK will translate the server response into a easy to use field value classes in case of complex field types. This feature depends on the List field information being present, you can load your list field information once when you get load your list like (`var myList = context.Web.Lists.GetByTitle("My List", p => p.Title, p => p.Items, p => p.Fields.LoadProperties(p => p.InternalName, p => p.FieldTypeKind, p => p.TypeAsString, p => p.Title));`). The minimal required field properties are `InternalName`, `FieldTypeKind`, `TypeAsString` and `Title`.
+> When processing list item responses from the server the SDK will translate the server response into a easy to use field value classes in case of complex field types. This feature depends on the List field information being present, you can load your list field information once when you get load your list like (`var myList = context.Web.Lists.GetByTitle("My List", p => p.Title, p => p.Items, p => p.Fields.QueryProperties(p => p.InternalName, p => p.FieldTypeKind, p => p.TypeAsString, p => p.Title));`). The minimal required field properties are `InternalName`, `FieldTypeKind`, `TypeAsString` and `Title`.
 
 ### Getting all list items
 
@@ -25,9 +25,9 @@ If you simply want to load all list items and your list is not containing a lot 
 ```csharp
 // Assume the fields where not yet loaded, so loading them with the list
 var myList = context.Web.Lists.GetByTitle("My List", p => p.Title, p => p.Items, 
-                                                     p => p.Fields.LoadProperties(p => p.InternalName, p => p.FieldTypeKind, p => p.TypeAsString, p => p.Title));
+                                                     p => p.Fields.QueryProperties(p => p.InternalName, p => p.FieldTypeKind, p => p.TypeAsString, p => p.Title));
 // Get the item with title "Item1"
-var addedItem = myList.Items.FirstOrDefault(p => p.Title == "Item1");
+var addedItem = myList.Items.AsRequested().FirstOrDefault(p => p.Title == "Item1");
 
 // Iterate over the retrieved list items
 foreach (var listItem in myList.Items)
@@ -38,12 +38,12 @@ foreach (var listItem in myList.Items)
 
 ### Getting list items via a CAML query
 
-SharePoint [CAML](https://docs.microsoft.com/en-us/sharepoint/dev/schema/query-schema) queries allow you to express a filter when loading list item data and scope down the loaded fields to the ones you need. You can use call the [GetItemsByCamlQueryAsync method](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_GetItemsByCamlQueryAsync_PnP_Core_Model_SharePoint_CamlQueryOptions_) on an [IList](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IList.html) for this purpose. When using this method you can either provide the CAML query directly or use the [CamlQueryOptions](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.CamlQueryOptions.html) class for more fine-grained control. If you use this class you typically would use the [ViewXml property](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.CamlQueryOptions.html#collapsible-PnP_Core_Model_SharePoint_CamlQueryOptions_ViewXml), but also [FolderServerRelativeUrl](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.CamlQueryOptions.html#collapsible-PnP_Core_Model_SharePoint_CamlQueryOptions_FolderServerRelativeUrl) is used a lot to scope the query to given folder in the list.
+SharePoint [CAML](https://docs.microsoft.com/en-us/sharepoint/dev/schema/query-schema) queries allow you to express a filter when loading list item data and scope down the loaded fields to the ones you need. You can use call the [LoadItemsByCamlQueryAsync method](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IList.html#collapsible-PnP_Core_Model_SharePoint_IList_LoadItemsByCamlQueryAsync_PnP_Core_Model_SharePoint_CamlQueryOptions_) on an [IList](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IList.html) for this purpose. When using this method you can either provide the CAML query directly or use the [CamlQueryOptions](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.CamlQueryOptions.html) class for more fine-grained control. If you use this class you typically would use the [ViewXml property](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.CamlQueryOptions.html#collapsible-PnP_Core_Model_SharePoint_CamlQueryOptions_ViewXml), but also [FolderServerRelativeUrl](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.CamlQueryOptions.html#collapsible-PnP_Core_Model_SharePoint_CamlQueryOptions_FolderServerRelativeUrl) is used a lot to scope the query to given folder in the list.
 
 ```csharp
 // Assume the fields where not yet loaded, so loading them with the list
 var myList = context.Web.Lists.GetByTitle("My List", p => p.Title, p => p.Items, 
-                                                     p => p.Fields.LoadProperties(p => p.InternalName, p => p.FieldTypeKind, p => p.TypeAsString, p => p.Title));
+                                                     p => p.Fields.QueryProperties(p => p.InternalName, p => p.FieldTypeKind, p => p.TypeAsString, p => p.Title));
 
 // Build a query that only returns the Title field for items where the Title field starts with "Item1"
 string viewXml = @"<View>
@@ -61,7 +61,7 @@ string viewXml = @"<View>
                    </View>";
 
 // Execute the query
-await myList.GetItemsByCamlQueryAsync(new CamlQueryOptions()
+await myList.LoadItemsByCamlQueryAsync(new CamlQueryOptions()
 {
     ViewXml = viewXml,
     DatesInUtc = true
@@ -81,7 +81,7 @@ By setting a row limit in the CAML query combined with using the the PagingInfo 
 ```csharp
 // Assume the fields where not yet loaded, so loading them with the list
 var myList = context.Web.Lists.GetByTitle("My List", p => p.Title, p => p.Items, 
-                                                     p => p.Fields.LoadProperties(p => p.InternalName, p => p.FieldTypeKind, p => p.TypeAsString, p => p.Title));
+                                                     p => p.Fields.QueryProperties(p => p.InternalName, p => p.FieldTypeKind, p => p.TypeAsString, p => p.Title));
 
 // Build a query that only returns the first 20 rows where the Title field starts with "Item1"
 string viewXml = @"<View>
@@ -100,14 +100,14 @@ string viewXml = @"<View>
                    </View>";
 
 // Execute the query loading the first 20
-await myList.GetItemsByCamlQueryAsync(new CamlQueryOptions()
+await myList.LoadItemsByCamlQueryAsync(new CamlQueryOptions()
 {
     ViewXml = viewXml,
     DatesInUtc = true
 });
 
 // Execute the query loading the next 20
-await myList.GetItemsByCamlQueryAsync(new CamlQueryOptions()
+await myList.LoadItemsByCamlQueryAsync(new CamlQueryOptions()
 {
     ViewXml = viewXml,
     DatesInUtc = true,
@@ -126,12 +126,12 @@ foreach (var listItem in myList.Items)
 
 ### Using the ListDataAsStream approach
 
-Using the [GetListDataAsStreamAsync method](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_GetListDataAsStreamAsync_PnP_Core_Model_SharePoint_RenderListDataOptions_) gives you the most control over how to query the list and what data to return. Using this method is similar to the above described [GetItemsByCamlQueryAsync method](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_GetItemsByCamlQueryAsync_PnP_Core_Model_SharePoint_CamlQueryOptions_) as you typically specify a [CAML](https://docs.microsoft.com/en-us/sharepoint/dev/schema/query-schema) query when using this method. To configure the input of this method you need to use the [RenderListDataOptions class](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.RenderListDataOptions.html). Defining the CAML query to run can be done via the ViewXml property and telling what type of data to return can be done via the [RenderOptions](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.RenderListDataOptions.html#PnP_Core_Model_SharePoint_RenderListDataOptions_RenderOptions) property.
+Using the [LoadListDataAsStreamAsync method](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_LoadListDataAsStreamAsync_PnP_Core_Model_SharePoint_RenderListDataOptions_) gives you the most control over how to query the list and what data to return. Using this method is similar to the above described [LoadItemsByCamlQueryAsync method](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IList.html#collapsible-PnP_Core_Model_SharePoint_IList_LoadItemsByCamlQueryAsync_System_String_) as you typically specify a [CAML](https://docs.microsoft.com/en-us/sharepoint/dev/schema/query-schema) query when using this method. To configure the input of this method you need to use the [RenderListDataOptions class](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.RenderListDataOptions.html). Defining the CAML query to run can be done via the ViewXml property and telling what type of data to return can be done via the [RenderOptions](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.RenderListDataOptions.html#PnP_Core_Model_SharePoint_RenderListDataOptions_RenderOptions) property.
 
 ```csharp
 // Assume the fields where not yet loaded, so loading them with the list
 var myList = context.Web.Lists.GetByTitle("My List", p => p.Title, p => p.Items, 
-                                                     p => p.Fields.LoadProperties(p => p.InternalName, p => p.FieldTypeKind, p => p.TypeAsString, p => p.Title));
+                                                     p => p.Fields.QueryProperties(p => p.InternalName, p => p.FieldTypeKind, p => p.TypeAsString, p => p.Title));
 
 // Build a query that only returns the Title field for the top 5 items where the Title field starts with "Item1"
 string viewXml = @"<View>
@@ -150,7 +150,7 @@ string viewXml = @"<View>
                    </View>";
 
 // Execute the query
-var output = await myList.GetListDataAsStreamAsync(new RenderListDataOptions()
+var output = await myList.LoadListDataAsStreamAsync(new RenderListDataOptions()
 {
     ViewXml = viewXml,
     RenderOptions = RenderListDataOptionsFlags.ListData
@@ -159,7 +159,7 @@ var output = await myList.GetListDataAsStreamAsync(new RenderListDataOptions()
 // If needed do something with the output, e.g. (int)result["LastRow"] tells you the last loaded row
 
 // Iterate over the retrieved list items
-foreach (var listItem in myList.Items)
+foreach (var listItem in myList.Items.AsRequested())
 {
     // Do something with the list item
 }
@@ -170,7 +170,7 @@ foreach (var listItem in myList.Items)
 ```csharp
 // Assume the fields where not yet loaded, so loading them with the list
 var myList = context.Web.Lists.GetByTitle("My List", p => p.Title, p => p.Items, 
-                                                     p => p.Fields.LoadProperties(p => p.InternalName, p => p.FieldTypeKind, p => p.TypeAsString, p => p.Title));
+                                                     p => p.Fields.QueryProperties(p => p.InternalName, p => p.FieldTypeKind, p => p.TypeAsString, p => p.Title));
 
 // Build a query that only returns the Title field for the first 20 items where the Title field starts with "Item1"
 string viewXml = @"<View>
@@ -189,14 +189,14 @@ string viewXml = @"<View>
                    </View>";
 
 // Execute the query for the first page
-var output = await myList.GetListDataAsStreamAsync(new RenderListDataOptions()
+var output = await myList.LoadListDataAsStreamAsync(new RenderListDataOptions()
 {
     ViewXml = viewXml,
     RenderOptions = RenderListDataOptionsFlags.ListData
 });
 
 // Execute the query for the next page
-output = await myList.GetListDataAsStreamAsync(new RenderListDataOptions()
+output = await myList.LoadListDataAsStreamAsync(new RenderListDataOptions()
 {
     ViewXml = viewXml,
     RenderOptions = RenderListDataOptionsFlags.ListData,
@@ -204,7 +204,7 @@ output = await myList.GetListDataAsStreamAsync(new RenderListDataOptions()
 });
 
 // Iterate over the retrieved list items
-foreach (var listItem in myList.Items)
+foreach (var listItem in myList.Items.AsRequested())
 {
     // Do something with the list item
 }
@@ -289,9 +289,9 @@ Using the Delete methods like DeleteAsync or DeleteBatchAsync you can delete one
 ```csharp
 // Assume the fields where not yet loaded, so loading them with the list
 var myList = context.Web.Lists.GetByTitle("My List", p => p.Title, p => p.Items, 
-                                                     p => p.Fields.LoadProperties(p => p.InternalName, p => p.FieldTypeKind, p => p.TypeAsString, p => p.Title));
+                                                     p => p.Fields.QueryProperties(p => p.InternalName, p => p.FieldTypeKind, p => p.TypeAsString, p => p.Title));
 // Iterate over the retrieved list items
-foreach (var listItem in myList.Items)
+foreach (var listItem in myList.Items.AsRequested())
 {
     // Delete all the items in "My List" by adding them to a batch
     await listItem.DeleteBatchAsync();
@@ -310,9 +310,9 @@ List items can have comments in SharePoint and using the [SetCommentsDisabledAsy
 ```csharp
 // Assume the fields where not yet loaded, so loading them with the list
 var myList = context.Web.Lists.GetByTitle("My List", p => p.Title, p => p.Items, 
-                                                     p => p.Fields.LoadProperties(p => p.InternalName, p => p.FieldTypeKind, p => p.TypeAsString, p => p.Title));
+                                                     p => p.Fields.QueryProperties(p => p.InternalName, p => p.FieldTypeKind, p => p.TypeAsString, p => p.Title));
 // Get the item with title "Item1"
-var addedItem = myList.Items.FirstOrDefault(p => p.Title == "Item1");
+var addedItem = myList.Items.AsRequested().FirstOrDefault(p => p.Title == "Item1");
 
 // Check if commenting was turned off
 if (!(await addedItem.AreCommentsDisabledAsync()))

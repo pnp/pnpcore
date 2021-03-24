@@ -1,4 +1,5 @@
-﻿using PnP.Core.Services;
+﻿/*
+using PnP.Core.Services;
 using System.Threading.Tasks;
 
 namespace PnP.Core.Model.SharePoint
@@ -7,7 +8,7 @@ namespace PnP.Core.Model.SharePoint
     /// Collection of terms
     /// </summary>
     [ConcreteType(typeof(TermCollection))]
-    public interface ITermCollection : IDataModelCollection<ITerm>, ISupportPaging<ITerm>, IDataModelCollectionDeleteByStringId
+    public interface ITermCollection : IDataModelCollection<ITerm>, IDataModelCollectionDeleteByStringId, ISupportQuery<ITerm>
     {
         /// <summary>
         /// Adds a new term 
@@ -75,3 +76,4 @@ namespace PnP.Core.Model.SharePoint
         public ITerm GetById(string id);
     }
 }
+*/

@@ -1,5 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PnP.Core.Model.SharePoint;
+using PnP.Core.QueryModel;
 using PnP.Core.Services;
 using PnP.Core.Test.Utilities;
 using System;
@@ -25,9 +26,9 @@ namespace PnP.Core.Test.SharePoint
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 var documents = context.Web.Lists.GetByTitle("Documents", l => l.Fields);
-                Assert.IsTrue(documents.Fields.Count() > 0);
+                Assert.IsTrue(documents.Fields.Length > 0);
 
-                IField field = documents.Fields.FirstOrDefault(p => p.InternalName == "Title");
+                IField field = documents.Fields.AsEnumerable().FirstOrDefault(p => p.InternalName == "Title");
                 // Test a string property
                 Assert.AreEqual("Title", field.InternalName);
                 // Test a boolean property
@@ -2057,8 +2058,8 @@ namespace PnP.Core.Test.SharePoint
             {
                 context.GraphFirst = false;
                 IWeb currentWeb = await context.Web.GetAsync(w => w.Id, w => w.Lists);
-                IList sitePages = context.Web.Lists.FirstOrDefault(p => p.Title == "Site Pages");
-                IList documents = context.Web.Lists.FirstOrDefault(p => p.Title == "Documents");
+                IList sitePages = currentWeb.Lists.AsRequested().FirstOrDefault(p => p.Title == "Site Pages");
+                IList documents = currentWeb.Lists.AsRequested().FirstOrDefault(p => p.Title == "Documents");
                 IField addedField = await documents.Fields.AddLookupAsync("ADDED FIELD", new FieldLookupOptions()
                 {
                     Required = true,
@@ -2088,8 +2089,8 @@ namespace PnP.Core.Test.SharePoint
             {
                 context.GraphFirst = false;
                 IWeb currentWeb = await context.Web.GetAsync(w => w.Id, w => w.Lists);
-                IList sitePages = context.Web.Lists.FirstOrDefault(p => p.Title == "Site Pages");
-                IList documents = context.Web.Lists.FirstOrDefault(p => p.Title == "Documents");
+                IList sitePages = currentWeb.Lists.AsRequested().FirstOrDefault(p => p.Title == "Site Pages");
+                IList documents = currentWeb.Lists.AsRequested().FirstOrDefault(p => p.Title == "Documents");
                 IField addedField = documents.Fields.AddLookup("ADDED FIELD", new FieldLookupOptions()
                 {
                     Required = true,
@@ -2119,8 +2120,8 @@ namespace PnP.Core.Test.SharePoint
             {
                 context.GraphFirst = false;
                 IWeb currentWeb = await context.Web.GetAsync(w => w.Id, w => w.Lists);
-                IList sitePages = context.Web.Lists.FirstOrDefault(p => p.Title == "Site Pages");
-                IList documents = context.Web.Lists.FirstOrDefault(p => p.Title == "Documents");
+                IList sitePages = currentWeb.Lists.AsRequested().FirstOrDefault(p => p.Title == "Site Pages");
+                IList documents = currentWeb.Lists.AsRequested().FirstOrDefault(p => p.Title == "Documents");
                 IField addedField = await documents.Fields.AddLookupBatchAsync("ADDED FIELD", new FieldLookupOptions()
                 {
                     Required = true,
@@ -2151,8 +2152,8 @@ namespace PnP.Core.Test.SharePoint
             {
                 context.GraphFirst = false;
                 IWeb currentWeb = await context.Web.GetAsync(w => w.Id, w => w.Lists);
-                IList sitePages = context.Web.Lists.FirstOrDefault(p => p.Title == "Site Pages");
-                IList documents = context.Web.Lists.FirstOrDefault(p => p.Title == "Documents");
+                IList sitePages = currentWeb.Lists.AsRequested().FirstOrDefault(p => p.Title == "Site Pages");
+                IList documents = currentWeb.Lists.AsRequested().FirstOrDefault(p => p.Title == "Documents");
                 IField addedField = documents.Fields.AddLookupBatch("ADDED FIELD", new FieldLookupOptions()
                 {
                     Required = true,
@@ -2184,8 +2185,8 @@ namespace PnP.Core.Test.SharePoint
                 context.GraphFirst = false;
                 var newBatch = context.NewBatch();
                 IWeb currentWeb = await context.Web.GetAsync(w => w.Id, w => w.Lists);
-                IList sitePages = context.Web.Lists.FirstOrDefault(p => p.Title == "Site Pages");
-                IList documents = context.Web.Lists.FirstOrDefault(p => p.Title == "Documents");
+                IList sitePages = currentWeb.Lists.AsRequested().FirstOrDefault(p => p.Title == "Site Pages");
+                IList documents = currentWeb.Lists.AsRequested().FirstOrDefault(p => p.Title == "Documents");
                 IField addedField = await documents.Fields.AddLookupBatchAsync(newBatch, "ADDED FIELD", new FieldLookupOptions()
                 {
                     Required = true,
@@ -2217,8 +2218,8 @@ namespace PnP.Core.Test.SharePoint
                 context.GraphFirst = false;
                 var newBatch = context.NewBatch();
                 IWeb currentWeb = await context.Web.GetAsync(w => w.Id, w => w.Lists);
-                IList sitePages = context.Web.Lists.FirstOrDefault(p => p.Title == "Site Pages");
-                IList documents = context.Web.Lists.FirstOrDefault(p => p.Title == "Documents");
+                IList sitePages = currentWeb.Lists.AsRequested().FirstOrDefault(p => p.Title == "Site Pages");
+                IList documents = currentWeb.Lists.AsRequested().FirstOrDefault(p => p.Title == "Documents");
                 IField addedField = documents.Fields.AddLookupBatch(newBatch, "ADDED FIELD", new FieldLookupOptions()
                 {
                     Required = true,

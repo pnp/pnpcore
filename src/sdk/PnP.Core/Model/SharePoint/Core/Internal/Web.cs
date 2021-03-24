@@ -1,5 +1,6 @@
 ﻿using PnP.Core.Model.Security;
 using PnP.Core.Services;
+using PnP.Core.QueryModel;
 using System;
 using System.Collections.Generic;
 using System.Dynamic;
@@ -267,8 +268,10 @@ namespace PnP.Core.Model.SharePoint
 
         public IFieldCollection AvailableFields { get => GetModelCollectionValue<IFieldCollection>(); }
 
+        // BERT/PAOLO: not possible at this moment after refactoring, somethign to reassess later on
         // A special approach is needed to load all lists, comes down to adding the "system" facet to the select
-        [GraphProperty("lists", Get = "sites/{hostname}:{serverrelativepath}:/lists?$select=" + List.DefaultGraphFieldsToLoad, Expandable = true)]
+        //[GraphProperty("lists", Get = "sites/{hostname}:{serverrelativepath}:/lists?$select=" + List.DefaultGraphFieldsToLoad, Expandable = true)]
+        //[GraphProperty("lists", Expandable = true)]
         public IListCollection Lists { get => GetModelCollectionValue<IListCollection>(); }
 
         public IContentTypeCollection ContentTypes { get => GetModelCollectionValue<IContentTypeCollection>(); }
@@ -316,7 +319,7 @@ namespace PnP.Core.Model.SharePoint
 
         #region Delete
 
-        internal override Task BaseBatchDeleteAsync(Batch batch, Func<FromJson, object> fromJsonCasting = null, Action<string> postMappingJson = null)
+        internal override Task BaseDeleteBatchAsync(Batch batch, Func<FromJson, object> fromJsonCasting = null, Action<string> postMappingJson = null)
         {
             // Throw an exception to clarify that batch web delete is not supported
             throw new ClientException(ErrorType.Unsupported, PnPCoreResources.Exception_Unsupported_WebDeleteIsInteractive);
@@ -358,7 +361,7 @@ namespace PnP.Core.Model.SharePoint
                 Parent = this
             };
 
-            await folder.BaseGet(apiOverride: BuildGetFolderByRelativeUrlApiCall(serverRelativeUrl), fromJsonCasting: folder.MappingHandler, postMappingJson: folder.PostMappingHandler, expressions: expressions).ConfigureAwait(false);
+            await folder.BaseRetrieveAsync(apiOverride: BuildGetFolderByRelativeUrlApiCall(serverRelativeUrl), fromJsonCasting: folder.MappingHandler, postMappingJson: folder.PostMappingHandler, expressions: expressions).ConfigureAwait(false);
 
             return folder;
         }
@@ -377,7 +380,7 @@ namespace PnP.Core.Model.SharePoint
                 Parent = this
             };
 
-            await folder.BaseBatchGetAsync(batch, apiOverride: BuildGetFolderByRelativeUrlApiCall(serverRelativeUrl), fromJsonCasting: folder.MappingHandler, postMappingJson: folder.PostMappingHandler, expressions: expressions).ConfigureAwait(false);
+            await folder.BaseBatchRetrieveAsync(batch, apiOverride: BuildGetFolderByRelativeUrlApiCall(serverRelativeUrl), fromJsonCasting: folder.MappingHandler, postMappingJson: folder.PostMappingHandler, selectors: expressions).ConfigureAwait(false);
 
             return folder;
         }
@@ -400,8 +403,8 @@ namespace PnP.Core.Model.SharePoint
         private static ApiCall BuildGetFolderByRelativeUrlApiCall(string serverRelativeUrl)
         {
             // NOTE WebUtility encode spaces to "+" instead of %20
-            string encodedServerRelativeUrl = WebUtility.UrlEncode(serverRelativeUrl).Replace("+", "%20");
-            var apiCall = new ApiCall($"_api/Web/getFolderByServerRelativeUrl('{encodedServerRelativeUrl}')", ApiType.SPORest);
+            string encodedServerRelativeUrl = WebUtility.UrlEncode(serverRelativeUrl.Replace("'", "''")).Replace("+", "%20");
+            var apiCall = new ApiCall($"_api/Web/getFolderByServerRelativePath(decodedUrl='{encodedServerRelativeUrl}')", ApiType.SPORest);
             return apiCall;
         }
         #endregion
@@ -416,7 +419,7 @@ namespace PnP.Core.Model.SharePoint
                 Parent = this
             };
 
-            await folder.BaseGet(apiOverride: BuildGetFolderByIdApiCall(folderId), fromJsonCasting: folder.MappingHandler, postMappingJson: folder.PostMappingHandler, expressions: expressions).ConfigureAwait(false);
+            await folder.BaseRetrieveAsync(apiOverride: BuildGetFolderByIdApiCall(folderId), fromJsonCasting: folder.MappingHandler, postMappingJson: folder.PostMappingHandler, expressions: expressions).ConfigureAwait(false);
 
             return folder;
         }
@@ -435,7 +438,7 @@ namespace PnP.Core.Model.SharePoint
                 Parent = this
             };
 
-            await folder.BaseBatchGetAsync(batch, apiOverride: BuildGetFolderByIdApiCall(folderId), fromJsonCasting: folder.MappingHandler, postMappingJson: folder.PostMappingHandler, expressions: expressions).ConfigureAwait(false);
+            await folder.BaseBatchRetrieveAsync(batch, apiOverride: BuildGetFolderByIdApiCall(folderId), fromJsonCasting: folder.MappingHandler, postMappingJson: folder.PostMappingHandler, selectors: expressions).ConfigureAwait(false);
 
             return folder;
         }
@@ -479,7 +482,7 @@ namespace PnP.Core.Model.SharePoint
                 Parent = this
             };
 
-            await file.BaseGet(apiOverride: BuildGetFileByRelativeUrlApiCall(serverRelativeUrl), fromJsonCasting: file.MappingHandler, postMappingJson: file.PostMappingHandler, expressions: expressions).ConfigureAwait(false);
+            await file.BaseRetrieveAsync(apiOverride: BuildGetFileByRelativeUrlApiCall(serverRelativeUrl), fromJsonCasting: file.MappingHandler, postMappingJson: file.PostMappingHandler, expressions: expressions).ConfigureAwait(false);
             return file;
         }
 
@@ -502,7 +505,7 @@ namespace PnP.Core.Model.SharePoint
                 Parent = this
             };
 
-            await file.BaseBatchGetAsync(batch, apiOverride: BuildGetFileByRelativeUrlApiCall(serverRelativeUrl), fromJsonCasting: file.MappingHandler, postMappingJson: file.PostMappingHandler, expressions: expressions).ConfigureAwait(false);
+            await file.BaseBatchRetrieveAsync(batch, apiOverride: BuildGetFileByRelativeUrlApiCall(serverRelativeUrl), fromJsonCasting: file.MappingHandler, postMappingJson: file.PostMappingHandler, selectors: expressions).ConfigureAwait(false);
             return file;
         }
 
@@ -514,8 +517,8 @@ namespace PnP.Core.Model.SharePoint
         private static ApiCall BuildGetFileByRelativeUrlApiCall(string serverRelativeUrl)
         {
             // NOTE WebUtility encode spaces to "+" instead of %20
-            string encodedServerRelativeUrl = WebUtility.UrlEncode(serverRelativeUrl).Replace("+", "%20");
-            var apiCall = new ApiCall($"_api/Web/getFileByServerRelativeUrl('{encodedServerRelativeUrl}')", ApiType.SPORest);
+            string encodedServerRelativeUrl = WebUtility.UrlEncode(serverRelativeUrl.Replace("'", "''")).Replace("+", "%20");
+            var apiCall = new ApiCall($"_api/Web/getFileByServerRelativePath(decodedUrl='{encodedServerRelativeUrl}')", ApiType.SPORest);
             return apiCall;
         }
         #endregion
@@ -765,7 +768,7 @@ namespace PnP.Core.Model.SharePoint
 
             bool updated = false;
             // Ensure the multilingual page feature is enabled
-            if (Features.FirstOrDefault(p => p.DefinitionId == MultilingualPagesFeature) == null)
+            if (Features.AsRequested().FirstOrDefault(p => p.DefinitionId == MultilingualPagesFeature) == null)
             {
                 await Features.EnableBatchAsync(MultilingualPagesFeature).ConfigureAwait(false);
                 updated = true;
@@ -790,11 +793,53 @@ namespace PnP.Core.Model.SharePoint
             if (updated)
             {
                 await UpdateBatchAsync().ConfigureAwait(false);
-                await GetBatchAsync(p => p.SupportedUILanguageIds).ConfigureAwait(false);
+                await this.GetBatchAsync(p => p.SupportedUILanguageIds).ConfigureAwait(false);
                 await PnPContext.ExecuteAsync().ConfigureAwait(false);
             }
         }
 
+        #endregion
+
+        #region Syntex support
+        public async Task<bool> IsSyntexContentCenterAsync()
+        {
+            await EnsurePropertiesAsync(p => p.WebTemplate).ConfigureAwait(false);
+
+            // Syntex Content Center sites use a specific template
+            if (WebTemplate == "CONTENTCTR")
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        public bool IsSyntexContentCenter()
+        {
+            return IsSyntexContentCenterAsync().GetAwaiter().GetResult();
+        }
+
+        public async Task<ISyntexContentCenter> AsSyntexContentCenterAsync()
+        {
+            if (await IsSyntexContentCenterAsync().ConfigureAwait(false))
+            {
+                SyntexContentCenter syntexContentCenter = new SyntexContentCenter()
+                {
+                    Web = this
+                };
+
+                return syntexContentCenter;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public ISyntexContentCenter AsSyntexContentCenter()
+        {
+            return AsSyntexContentCenterAsync().GetAwaiter().GetResult();
+        }
         #endregion
 
         #region Hub Sites

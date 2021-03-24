@@ -1,0 +1,9 @@
+--batchresponse_d414ba52-fb90-4b67-bf78-64d7082a3ecf
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+HTTP/1.1 200 OK
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+
+{"d":{"__metadata":{"id":"https://mercuryintranetdev.sharepoint.com/sites/ModernMercuryJL/_api/Site","uri":"https://mercuryintranetdev.sharepoint.com/sites/ModernMercuryJL/_api/Site","type":"SP.Site"},"GroupId":"00000000-0000-0000-0000-000000000000","Id":"ad828fb3-72cc-40b1-ab7a-6764d62dcac6"}}
+--batchresponse_d414ba52-fb90-4b67-bf78-64d7082a3ecf--

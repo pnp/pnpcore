@@ -157,6 +157,15 @@ namespace PnP.Core.Services
         }
 
         /// <summary>
+        /// Gets the request by id
+        /// </summary>
+        /// <returns>The request at the given order</returns>
+        internal BatchRequest GetRequest(Guid id)
+        {
+            return Requests.First(r => r.Value.Id == id).Value;
+        }
+
+        /// <summary>
         /// Promotes a backup rest call to be the actual api call
         /// </summary>
         internal void MakeSPORestOnlyBatch()
