@@ -289,7 +289,7 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// Associates the current site to a primary hub site
         /// </summary>
-        public Task<bool> JoinHubSiteAsync();
+        public Task<bool> JoinHubSiteAsync(Guid hubSiteId);
 
     }
 }
