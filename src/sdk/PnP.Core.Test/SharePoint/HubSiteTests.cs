@@ -40,7 +40,7 @@ namespace PnP.Core.Test.SharePoint
         [TestMethod]
         public async Task GetDirectHubSiteTest()
         {
-            TestCommon.Instance.Mocking = false;
+            //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 ISite site = await context.Site.GetAsync(
@@ -55,6 +55,8 @@ namespace PnP.Core.Test.SharePoint
                     Assert.IsNotNull(hub);
                 }
 
+                site = await context.Site.GetAsync(p => p.HubSiteId); // refresh the hubsite id
+
                 // Seperate Get Operation
                 IHubSite hubSite = new HubSite()
                 {
@@ -63,13 +65,12 @@ namespace PnP.Core.Test.SharePoint
                    
                 };
 
-                var result = await hubSite.GetAsync();
+                await hubSite.LoadAsync();
 
-                Assert.IsNotNull(result);
                 Assert.AreEqual(hubSite.Id, site.HubSiteId);
                 Assert.IsTrue(!string.IsNullOrEmpty(hubSite.Title));
 
-                // Refresh
+                // Refresh and clean up
                 site = await context.Site.GetAsync(
                     p => p.HubSiteId,
                     p => p.IsHubSite);

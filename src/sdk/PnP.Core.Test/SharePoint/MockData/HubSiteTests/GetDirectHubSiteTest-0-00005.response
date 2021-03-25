@@ -1,9 +1,9 @@
---batchresponse_d197abfe-8888-4e7a-9243-e111b04dd806
+--batchresponse_afc19310-b77e-4d18-9293-5816b70708cd
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{"d":{"UnregisterHubSite":null}}
---batchresponse_d197abfe-8888-4e7a-9243-e111b04dd806--
+{"d":{"__metadata":{"id":"https://capadevtest.sharepoint.com/sites/pnpcoresdktestgroup/_api/Site","uri":"https://capadevtest.sharepoint.com/sites/pnpcoresdktestgroup/_api/Site","type":"SP.Site"},"HubSiteId":"a24405b9-c457-4548-875c-09c5b23339d5","Id":"a24405b9-c457-4548-875c-09c5b23339d5"}}
+--batchresponse_afc19310-b77e-4d18-9293-5816b70708cd--
