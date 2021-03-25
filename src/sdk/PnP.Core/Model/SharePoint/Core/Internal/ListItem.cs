@@ -1014,8 +1014,6 @@ namespace PnP.Core.Model.SharePoint
 
         public async Task<bool> AddRoleDefinitionsAsync(int principalId, params string[] names)
         {
-            var parentList = Parent.Parent as List;
-            var result = false;
             foreach (var name in names)
             {
                 var roleDefinition = await PnPContext.Web.RoleDefinitions.FirstOrDefaultAsync(d => d.Name == name).ConfigureAwait(false);
@@ -1030,7 +1028,7 @@ namespace PnP.Core.Model.SharePoint
                     throw new ArgumentException($"Role definition '{name}' not found.");
                 }
             }
-            return result;
+            return false;
         }
 
         public bool RemoveRoleDefinitions(int principalId, params string[] names)
@@ -1040,8 +1038,6 @@ namespace PnP.Core.Model.SharePoint
 
         public async Task<bool> RemoveRoleDefinitionsAsync(int principalId, params string[] names)
         {
-            var parentList = Parent.Parent as List;
-            var result = false;
             foreach (var name in names)
             {
                 var roleDefinitions = await GetRoleDefinitionsAsync(principalId).ConfigureAwait(false);
@@ -1058,7 +1054,7 @@ namespace PnP.Core.Model.SharePoint
                     throw new ArgumentException($"Role definition '{name}' not found for this group.");
                 }
             }
-            return result;
+            return false;
         }
 
         #endregion
