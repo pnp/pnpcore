@@ -1,9 +1,9 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PnP.Core.Model.SharePoint;
-using PnP.Core.QueryModel;
+using PnP.Core.Services;
 using PnP.Core.Test.Utilities;
-using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -12,55 +12,82 @@ namespace PnP.Core.Test.Security
     [TestClass]
     public class ListItemSecurityTests
     {
-        private string listTitle = "PNP_SDK_TEST_ItemSecurityTests";
-
         [ClassInitialize]
         public static void TestFixtureSetup(TestContext context)
         {
             // Configure mocking default for all tests in this class, unless override by a specific test
-            // TestCommon.Instance.Mocking = false;            
-        }
-
-        [TestInitialize]
-        public void Init()
-        {
-            this.InitializeTestListAsync().Wait();
+            //TestCommon.Instance.Mocking = false;            
         }
 
         [TestMethod]
         public async Task ResetRoleInheritanceTest()
         {
-            // TestCommon.Instance.Mocking = false;
+            //TestCommon.Instance.Mocking = false;
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 // Create a new list
-                var web = await context.Web.GetAsync(p => p.Lists.QueryProperties(p => p.Title, p => p.Items));
-                var myList = web.Lists.AsRequested().FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
+                string listName = TestCommon.GetPnPSdkTestAssetName("ResetRoleInheritanceTest");
+                await InitializeTestListAsync(context, listName);
+                var myList = await context.Web.Lists.GetByTitleAsync(listName, p => p.Title, p => p.Items);
 
                 // get first item and do a reset role inheritance
                 var first = myList.Items.First();
 
-                await first.ResetRoleInheritanceAsync();
+                await first.ResetRoleInheritanceBatchAsync();
+                await context.ExecuteAsync();
+
+                // Delete the list
+                await myList.DeleteAsync();
             }
         }
 
         [TestMethod]
         public async Task BreakRoleInheritanceTestNoCopyAssignmentsNoClearSubscopes()
         {
-            // TestCommon.Instance.Mocking = false;
+            //TestCommon.Instance.Mocking = false;
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 // Create a new list
-                var web = await context.Web.GetAsync(p => p.Lists.QueryProperties(p => p.Title, p => p.Items));
-                var myList = web.Lists.AsRequested().FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
+                string listName = TestCommon.GetPnPSdkTestAssetName("BreakRoleInheritanceTestNoCopyAssignmentsNoClearSubscopes");
+                await InitializeTestListAsync(context, listName);
+                var myList = await context.Web.Lists.GetByTitleAsync(listName, p => p.Title, p => p.Items);
 
 
                 // get first item and do a break role inheritance
                 var first = myList.Items.First();
 
-                await first.BreakRoleInheritanceAsync(false, false);
+                await first.BreakRoleInheritanceBatchAsync(false, false);
+                await context.ExecuteAsync();
+
+                // Delete the list
+                await myList.DeleteAsync();
+            }
+        }
+
+        [TestMethod]
+        public async Task BreakRoleInheritanceOnFolder()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                // Add library with file to site
+                var libraryName = TestCommon.GetPnPSdkTestAssetName("BreakRoleInheritanceOnFolder");
+                var testLibrary = await context.Web.Lists.AddAsync(libraryName, ListTemplateType.DocumentLibrary);
+                await testLibrary.EnsurePropertiesAsync(p => p.RootFolder);
+                IFile testDocument = await testLibrary.RootFolder.Files.AddAsync("ClassifyAndExtractFile.docx", System.IO.File.OpenRead($".{Path.DirectorySeparatorChar}TestAssets{Path.DirectorySeparatorChar}test.docx"), true);
+                IFolder folder = await testLibrary.RootFolder.AddFolderAsync("folder");
+                var fileInFolder = await folder.Files.AddAsync("ClassifyAndExtractFile1.docx", System.IO.File.OpenRead($".{Path.DirectorySeparatorChar}TestAssets{Path.DirectorySeparatorChar}test.docx"), true);
+
+                var source = await context.Web.GetFolderByServerRelativeUrlAsync(folder.ServerRelativeUrl, x => x.ItemCount, x => x.Folders, x => x.Files, x => x.ListItemAllFields);
+
+                await source.ListItemAllFields.BreakRoleInheritanceAsync(false, true);
+
+                // Delete the list
+                await testLibrary.DeleteAsync();
+
             }
         }
 
@@ -72,14 +99,15 @@ namespace PnP.Core.Test.Security
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 // Create a new list
-                var web = await context.Web.GetAsync(p => p.Lists.QueryProperties(p => p.Title, p => p.Items));
-                var myList = web.Lists.AsRequested().FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
+                string listName = TestCommon.GetPnPSdkTestAssetName("GetRoleAssignmentsTest");
+                await InitializeTestListAsync(context, listName);
+                var myList = await context.Web.Lists.GetByTitleAsync(listName, p => p.Title, p => p.Items);
 
                 // get first item
                 var first = myList.Items.First();
 
                 // Break role inheritance, add a role assignment
-                var firstUser = web.SiteUsers.FirstOrDefault(u => u.IsSiteAdmin);
+                var firstUser = context.Web.SiteUsers.FirstOrDefault(u => u.IsSiteAdmin);
 
                 await first.ResetRoleInheritanceAsync();
                 await first.BreakRoleInheritanceAsync(false, false);
@@ -89,6 +117,9 @@ namespace PnP.Core.Test.Security
 
                 // Check role assignment. Should be 1, because breaking the inheritence added the current user
                 Assert.AreEqual(1, first.RoleAssignments.Length);
+
+                // Delete the list
+                await myList.DeleteAsync();
             }
         }
 
@@ -100,8 +131,9 @@ namespace PnP.Core.Test.Security
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 // Create a new list
-                var web = await context.Web.GetAsync(p => p.Lists.QueryProperties(p => p.Title, p => p.Items), p => p.SiteUsers);
-                var myList = web.Lists.AsRequested().FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
+                string listName = TestCommon.GetPnPSdkTestAssetName("AddItemRoleAssignmentTest");
+                await InitializeTestListAsync(context, listName);
+                var myList = await context.Web.Lists.GetByTitleAsync(listName, p => p.Title, p => p.Items);
 
                 // get first item and fetch the role assignments
                 var first = myList.Items.First();
@@ -115,7 +147,7 @@ namespace PnP.Core.Test.Security
 
                 // Fetch a user
                 // The below query sometimes brings back "Everyone"
-                var firstUser = web.SiteUsers.FirstOrDefault(u => u.IsSiteAdmin);
+                var firstUser = context.Web.SiteUsers.FirstOrDefault(u => u.IsSiteAdmin);
 
                 await first.AddRoleDefinitionsAsync(firstUser.Id, new string[] { "Full Control" });
 
@@ -124,6 +156,9 @@ namespace PnP.Core.Test.Security
 
                 // Check role assignment. Should be 2, because breaking the inheritence added the current user, and the user we added above
                 Assert.AreEqual(2, first.RoleAssignments.Length);
+
+                // Delete the list
+                await myList.DeleteAsync();
             }
         }
 
@@ -135,8 +170,9 @@ namespace PnP.Core.Test.Security
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 // Create a new list
-                var web = await context.Web.GetAsync(p => p.Lists.QueryProperties(p => p.Title, p => p.Items), w => w.SiteUsers);
-                var myList = web.Lists.AsRequested().FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
+                string listName = TestCommon.GetPnPSdkTestAssetName("RemoveItemRoleAssignmentTest");
+                await InitializeTestListAsync(context, listName);
+                var myList = await context.Web.Lists.GetByTitleAsync(listName, p => p.Title, p => p.Items);
 
                 // get first item and fetch the role assignments
                 var first = myList.Items.First();
@@ -144,7 +180,7 @@ namespace PnP.Core.Test.Security
 
                 // Fetch a user
                 // The below query sometimes brings back "Everyone"
-                var firstUser = web.SiteUsers.FirstOrDefault(u => u.IsSiteAdmin);
+                var firstUser = context.Web.SiteUsers.FirstOrDefault(u => u.IsSiteAdmin);
 
                 // Clean out any existing permissions from other tests.
                 await first.ResetRoleInheritanceAsync();
@@ -159,43 +195,32 @@ namespace PnP.Core.Test.Security
 
                 // We should only have one role assignment left
                 Assert.AreEqual(1, first.RoleAssignments.Length);
+
+                // Delete the list
+                await myList.DeleteAsync();
             }
         }
 
-        private async Task InitializeTestListAsync()
+        private async Task InitializeTestListAsync(PnPContext context, string listName)
         {
-            //TestCommon.Instance.Mocking = false;
+            // Create a new list
+            var myList = await context.Web.Lists.AddAsync(listName, ListTemplateType.GenericList);
+            // Enable versioning
+            myList.EnableVersioning = true;
+            await myList.UpdateAsync();
 
-            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            // Add items to the list
+            for (int i = 0; i < 10; i++)
             {
-                // Create a new list
-                var web = await context.Web.GetAsync(p => p.Lists.QueryProperties(p => p.Title, p => p.Items));
-                var myList = web.Lists.AsRequested().FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
-                if (myList == null)
-                {
-                    myList = await web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
-                    // Enable versioning
-                    myList.EnableVersioning = true;
-                    await myList.UpdateAsync();
-                }
-
-                await myList.LoadItemsByCamlQueryAsync("<View></View>");
-
-                if (myList.Items.Length == 0)
-                {
-                    // Add items to the list
-                    for (int i = 0; i < 10; i++)
-                    {
-                        Dictionary<string, object> values = new Dictionary<string, object>
+                Dictionary<string, object> values = new Dictionary<string, object>
                         {
                             { "Title", $"Item {i}" }
                         };
 
-                        await myList.Items.AddBatchAsync(values);
-                    }
-                    await context.ExecuteAsync();
-                }
+                await myList.Items.AddBatchAsync(values);
             }
+            await context.ExecuteAsync();
+
         }
     }
 }

@@ -343,6 +343,40 @@ namespace PnP.Core.Model.SharePoint
         public Task BreakRoleInheritanceAsync(bool copyRoleAssignments, bool clearSubscopes);
 
         /// <summary>
+        /// Break role inheritance on the current item
+        /// </summary>
+        /// <param name="batch">The batch to add this request to</param>
+        /// <param name="copyRoleAssignments"></param>
+        /// <param name="clearSubscopes"></param>
+        /// <returns></returns>
+        public void BreakRoleInheritanceBatch(Batch batch, bool copyRoleAssignments, bool clearSubscopes);
+
+        /// <summary>
+        /// Break role inheritance on the current item
+        /// </summary>
+        /// <param name="batch">The batch to add this request to</param>
+        /// <param name="copyRoleAssignments"></param>
+        /// <param name="clearSubscopes"></param>
+        /// <returns></returns>
+        public Task BreakRoleInheritanceBatchAsync(Batch batch, bool copyRoleAssignments, bool clearSubscopes);
+
+        /// <summary>
+        /// Break role inheritance on the current item
+        /// </summary>
+        /// <param name="copyRoleAssignments"></param>
+        /// <param name="clearSubscopes"></param>
+        /// <returns></returns>
+        public void BreakRoleInheritanceBatch(bool copyRoleAssignments, bool clearSubscopes);
+
+        /// <summary>
+        /// Break role inheritance on the current item
+        /// </summary>
+        /// <param name="copyRoleAssignments"></param>
+        /// <param name="clearSubscopes"></param>
+        /// <returns></returns>
+        public Task BreakRoleInheritanceBatchAsync(bool copyRoleAssignments, bool clearSubscopes);
+
+        /// <summary>
         /// Reset role inheritance on the current item
         /// </summary>
         /// <returns></returns>
@@ -353,6 +387,32 @@ namespace PnP.Core.Model.SharePoint
         /// </summary>
         /// <returns></returns>
         public Task ResetRoleInheritanceAsync();
+
+        /// <summary>
+        /// Reset role inheritance on the current item
+        /// </summary>
+        /// <param name="batch">The batch to add this request to</param>
+        /// <returns></returns>
+        public void ResetRoleInheritanceBatch(Batch batch);
+
+        /// <summary>
+        /// Reset role inheritance on the current item
+        /// </summary>
+        /// <param name="batch">The batch to add this request to</param>
+        /// <returns></returns>
+        public Task ResetRoleInheritanceBatchAsync(Batch batch);
+
+        /// <summary>
+        /// Reset role inheritance on the current item
+        /// </summary>
+        /// <returns></returns>
+        public void ResetRoleInheritanceBatch();
+
+        /// <summary>
+        /// Reset role inheritance on the current item
+        /// </summary>
+        /// <returns></returns>
+        public Task ResetRoleInheritanceBatchAsync();
 
         /// <summary>
         /// Returns the role definitions for a specific principal id (IUser.Id or ISharePointGroup.Id)

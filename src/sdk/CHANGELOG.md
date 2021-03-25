@@ -20,6 +20,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
 ### Changed
 
+- Improved handling of ListItem operations when list item was fetch via Folder or File (ListItemAllFields property) [jansenbe - Bert Jansen]
+- Additional batch method for BreakRoleInheritance and ResetRoleInheritance [jansenbe - Bert Jansen]
 - CSOM batches are now split on size (when needed) [jansenbe - Bert Jansen]
 - Added CSOM batching support to ensure a multiple CSOM requests are grouped into a single server call + integrated CSOM response handling [jansenbe - Bert Jansen]
 - Added output for RecycleBatch methods on List, ListItem and File [jansenbe - Bert Jansen]

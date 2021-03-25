@@ -1,0 +1,9 @@
+--batchresponse_26d1f596-567e-43a0-b62f-8d3853e464ab
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+HTTP/1.1 200 OK
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+
+{"d":{"ResetRoleInheritance":null}}
+--batchresponse_26d1f596-567e-43a0-b62f-8d3853e464ab--
