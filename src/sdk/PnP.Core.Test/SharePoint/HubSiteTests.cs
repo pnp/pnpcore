@@ -161,24 +161,52 @@ namespace PnP.Core.Test.SharePoint
             }
         }
 
-        //[TestMethod]
-        //public async Task JoinHubSiteTest()
-        //{
-        //    throw new NotImplementedException();
+        [TestMethod]
+        public async Task JoinUnJoinHubSiteTest()
+        {
+            TestCommon.Instance.Mocking = false;
+            using (var contextPrimaryHub = await TestCommon.Instance.GetContextAsync(TestCommon.NoGroupTestSite, 1))
+            {
+                ISite site = await contextPrimaryHub.Site.GetAsync(
+                    p => p.HubSiteId,
+                    p => p.IsHubSite);
 
-        //    //TestCommon.Instance.Mocking = false;
-        //    //using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
-        //    //{
-        //    //    ISite site = await context.Site.GetAsync(
-        //    //        p => p.HubSiteId,
-        //    //        p => p.IsHubSite);
+                Assert.IsNotNull(site);
+                Assert.AreEqual(default, site.HubSiteId);
+                Assert.IsFalse(site.IsHubSite);
 
-        //    //    Assert.IsNotNull(site);
-        //    //    Assert.AreEqual(default, site.HubSiteId);
-        //    //    Assert.IsFalse(site.IsHubSite);
+                var result = await site.RegisterHubSiteAsync();
+                Assert.IsNotNull(result);
 
-        //    //}
-        //}
+                // Refresh
+                site = await contextPrimaryHub.Site.GetAsync(
+                    p => p.HubSiteId,
+                    p => p.IsHubSite);
+
+                // Associate group site to the hub
+                using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))
+                {
+                    ISite assocSite = await context.Site.GetAsync(
+                        p => p.HubSiteId,
+                        p => p.IsHubSite);
+
+                    Assert.IsNotNull(assocSite);
+                    Assert.AreEqual(default, assocSite.HubSiteId);
+                    Assert.IsFalse(assocSite.IsHubSite);
+
+                    Assert.AreNotEqual(default, site.HubSiteId);
+
+                    var resultJoin = await assocSite.JoinHubSiteAsync(site.HubSiteId);
+                    Assert.IsTrue(resultJoin);
+
+                    var resultUnJoin = await assocSite.UnJoinHubSiteAsync();
+                    Assert.IsTrue(resultUnJoin);
+                }
+
+                // Clean up
+                await site.UnregisterHubSiteAsync();
+            }
+        }
 
 
     }

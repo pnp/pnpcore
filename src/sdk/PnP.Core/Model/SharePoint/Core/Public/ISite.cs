@@ -291,5 +291,10 @@ namespace PnP.Core.Model.SharePoint
         /// </summary>
         public Task<bool> JoinHubSiteAsync(Guid hubSiteId);
 
+        /// <summary>
+        /// Disassociates current site from primary hub site
+        /// </summary>
+        /// <returns></returns>
+        public Task<bool> UnJoinHubSiteAsync();
     }
 }

@@ -233,16 +233,13 @@ namespace PnP.Core.Model.SharePoint
         /// </summary>
         public async Task<bool> JoinHubSiteAsync(Guid hubSiteId)
         {
-            //throw new NotImplementedException();
-
             var result = false;
 
             await EnsurePropertiesAsync(p => p.IsHubSite).ConfigureAwait(false);
 
             if (!IsHubSite)
             {
-                //TODO: Finish
-                var apiCall = new ApiCall($"_api/Site/JoinHubSite", ApiType.SPORest);
+                var apiCall = new ApiCall($"_api/Site/JoinHubSite('{hubSiteId}')", ApiType.SPORest);
                 var response = await RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
                 result = response.StatusCode == System.Net.HttpStatusCode.OK;
             }
@@ -252,6 +249,15 @@ namespace PnP.Core.Model.SharePoint
             }
 
             return result;
+        }
+
+
+        /// <summary>
+        /// Disassociates the current site to a primary hub site
+        /// </summary>
+        public async Task<bool> UnJoinHubSiteAsync()
+        {
+            return await JoinHubSiteAsync(Guid.Empty).ConfigureAwait(false);
         }
 
         #endregion
