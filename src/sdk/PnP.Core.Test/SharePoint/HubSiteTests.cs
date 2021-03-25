@@ -164,7 +164,7 @@ namespace PnP.Core.Test.SharePoint
         [TestMethod]
         public async Task JoinUnJoinHubSiteTest()
         {
-            TestCommon.Instance.Mocking = false;
+            //TestCommon.Instance.Mocking = false;
             using (var contextPrimaryHub = await TestCommon.Instance.GetContextAsync(TestCommon.NoGroupTestSite, 1))
             {
                 ISite site = await contextPrimaryHub.Site.GetAsync(
