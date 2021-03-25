@@ -146,6 +146,11 @@ namespace PnP.Core.Services
         internal static int MaxRequestsInSharePointRestBatch => 100;
 
         /// <summary>
+        /// Max requests in a single Csom batch
+        /// </summary>
+        internal static int MaxRequestsInCsomBatch => 50;
+
+        /// <summary>
         /// Max requests in a single Microsoft Graph batch
         /// </summary>
         internal static int MaxRequestsInGraphBatch => 20;
@@ -1466,109 +1471,121 @@ namespace PnP.Core.Services
             var csomBatches = CsomBatchSplitting(batch);
 
             // Execute the batches
-            foreach (var csomBatch in csomBatches)
+            foreach (var csomBatchBeforeSplit in csomBatches)
             {
-                // Each csom batch only contains one request
-                CSOMApiCallBuilder csomAPICallBuilder = new CSOMApiCallBuilder();
-                string requestBody = "";
-                foreach (var csomAPICall in csomBatch.Batch.Requests.Values)
+                // A batch can contain more than the maximum number of items in a Csom batch, so if needed breakup a batch in multiple batches
+                var splitCsomBatches = CsomBatchSplittingBySize(csomBatchBeforeSplit);
+
+                foreach (var csomBatch in splitCsomBatches)
                 {
-                    foreach (IRequest<object> request in csomAPICall.ApiCall.CSOMRequests)
+                    // Each csom batch only contains one request
+                    CSOMApiCallBuilder csomAPICallBuilder = new CSOMApiCallBuilder();
+                    string requestBody = "";
+                    foreach (var csomAPICall in csomBatch.Batch.Requests.Values)
                     {
-                        csomAPICallBuilder.AddRequest(request);
+                        foreach (IRequest<object> request in csomAPICall.ApiCall.CSOMRequests)
+                        {
+                            csomAPICallBuilder.AddRequest(request);
+                        }
+
+                        telemetryManager?.LogServiceRequest(csomAPICall, PnPContext);
                     }
-
-                    telemetryManager?.LogServiceRequest(csomAPICall, PnPContext);
-                }               
-                requestBody = csomAPICallBuilder.SerializeCSOMRequests();
+                    requestBody = csomAPICallBuilder.SerializeCSOMRequests();
 
 #if DEBUG
-                string requestKey = "";
-                if (PnPContext.Mode != TestMode.Default)
-                {
-                    requestKey = $"{testUseCounter}@@GET|dummy";
-                    testUseCounter++;
-                }
-#endif
-
-                PnPContext.Logger.LogDebug(requestBody);
-
-                // Make the batch call
-                using (StringContent content = new StringContent(requestBody))
-                {
-                    using (var request = new HttpRequestMessage(HttpMethod.Post, $"{csomBatch.Site.ToString().TrimEnd(new char[] { '/' })}/_vti_bin/client.svc/ProcessQuery"))
+                    string requestKey = "";
+                    if (PnPContext.Mode != TestMode.Default)
                     {
-                        // Remove the default Content-Type content header
-                        if (content.Headers.Contains("Content-Type"))
-                        {
-                            content.Headers.Remove("Content-Type");
-                        }
-                        // Add the batch Content-Type header
-                        content.Headers.Add($"Content-Type", $"text/xml");
-
-                        // Connect content to request
-                        request.Content = content;
-
-#if DEBUG
-                        // Test recording
-                        if (PnPContext.Mode == TestMode.Record && PnPContext.GenerateTestMockingDebugFiles)
-                        {
-                            // Write request
-                            TestManager.RecordRequest(PnPContext, requestKey, content.ReadAsStringAsync().Result);
-                        }
-
-                        // If we are not mocking or if there is no mock data
-                        if (PnPContext.Mode != TestMode.Mock)
-                        {
+                        requestKey = $"{testUseCounter}@@GET|dummy";
+                        testUseCounter++;
+                    }
 #endif
-                            // Process the authentication headers using the currently
-                            // configured instance of IAuthenticationProvider
-                            await ProcessSharePointRestAuthentication(csomBatch.Site, request).ConfigureAwait(false);
 
-                            // Send the request
-                            HttpResponseMessage response = await PnPContext.RestClient.Client.SendAsync(request).ConfigureAwait(false);
+                    PnPContext.Logger.LogDebug(requestBody);
 
-                            // Process the request response
-                            if (response.IsSuccessStatusCode)
+                    // Make the batch call
+                    using (StringContent content = new StringContent(requestBody))
+                    {
+                        using (var request = new HttpRequestMessage(HttpMethod.Post, $"{csomBatch.Site.ToString().TrimEnd(new char[] { '/' })}/_vti_bin/client.svc/ProcessQuery"))
+                        {
+                            // Remove the default Content-Type content header
+                            if (content.Headers.Contains("Content-Type"))
                             {
-                                // Get the response string
-                                string batchResponse = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+                                content.Headers.Remove("Content-Type");
+                            }
+                            // Add the batch Content-Type header
+                            content.Headers.Add($"Content-Type", $"text/xml");
+
+                            // Connect content to request
+                            request.Content = content;
 
 #if DEBUG
-                                if (PnPContext.Mode == TestMode.Record)
-                                {
-                                    // Call out to the rewrite handler if that one is connected
-                                    if (MockingFileRewriteHandler != null)
-                                    {
-                                        batchResponse = MockingFileRewriteHandler(batchResponse);
-                                    }
+                            // Test recording
+                            if (PnPContext.Mode == TestMode.Record && PnPContext.GenerateTestMockingDebugFiles)
+                            {
+                                // Write request
+                                TestManager.RecordRequest(PnPContext, requestKey, content.ReadAsStringAsync().Result);
+                            }
 
-                                    // Write response
-                                    TestManager.RecordResponse(PnPContext, requestKey, batchResponse);
-                                }
+                            // If we are not mocking or if there is no mock data
+                            if (PnPContext.Mode != TestMode.Mock)
+                            {
+#endif
+                                // Process the authentication headers using the currently
+                                // configured instance of IAuthenticationProvider
+                                await ProcessSharePointRestAuthentication(csomBatch.Site, request).ConfigureAwait(false);
+
+                                // Send the request
+                                HttpResponseMessage response = await PnPContext.RestClient.Client.SendAsync(request).ConfigureAwait(false);
+
+                                // Process the request response
+                                if (response.IsSuccessStatusCode)
+                                {
+                                    // Get the response string
+                                    string batchResponse = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+
+#if DEBUG
+                                    if (PnPContext.Mode == TestMode.Record)
+                                    {
+                                        // Call out to the rewrite handler if that one is connected
+                                        if (MockingFileRewriteHandler != null)
+                                        {
+                                            batchResponse = MockingFileRewriteHandler(batchResponse);
+                                        }
+
+                                        // Write response
+                                        TestManager.RecordResponse(PnPContext, requestKey, batchResponse);
+                                    }
 #endif
 
-                                ProcessCsomBatchResponse(csomBatch, batchResponse, response.StatusCode);
+                                    ProcessCsomBatchResponse(csomBatch, batchResponse, response.StatusCode);
+                                }
+                                else
+                                {
+                                    // Something went wrong...
+                                    throw new SharePointRestServiceException(ErrorType.SharePointRestServiceError, (int)response.StatusCode, await response.Content.ReadAsStringAsync().ConfigureAwait(false));
+                                }
+#if DEBUG
                             }
                             else
                             {
-                                // Something went wrong...
-                                throw new SharePointRestServiceException(ErrorType.SharePointRestServiceError, (int)response.StatusCode, await response.Content.ReadAsStringAsync().ConfigureAwait(false));
+                                string batchResponse = TestManager.MockResponse(PnPContext, requestKey);
+
+                                ProcessCsomBatchResponse(csomBatch, batchResponse, HttpStatusCode.OK);
                             }
-#if DEBUG
-                        }
-                        else
-                        {
-                            string batchResponse = TestManager.MockResponse(PnPContext, requestKey);
-
-                            ProcessCsomBatchResponse(csomBatch, batchResponse, HttpStatusCode.OK);
-                        }
-
-                        // Mark batch as executed
-                        csomBatch.Batch.Executed = true;
 #endif
+
+                            // Mark batch as executed
+                            csomBatch.Batch.Executed = true;
+
+                            // Copy the results collection to the upper batch
+                            csomBatchBeforeSplit.Batch.Results.AddRange(csomBatch.Batch.Results);
+                        }
                     }
                 }
+
+                // Copy the results collection to the upper batch
+                batch.Results.AddRange(csomBatchBeforeSplit.Batch.Results);
             }
 
             // Mark the original (non split) batch as complete
@@ -1605,7 +1622,6 @@ namespace PnP.Core.Services
                             else
                             {
                                 // Link the returned error to all the requests
-                                // TODO: this will be require a better mapping in case we're getting data back via CSOM
                                 foreach (var request in csomBatch.Batch.Requests)
                                 {
                                     csomBatch.Batch.AddBatchResult(request.Value,
@@ -1617,14 +1633,10 @@ namespace PnP.Core.Services
                     }
 
                     // No error, so let's return the results
-
-                    // TODO: this will be require a better mapping in case we're getting data back via CSOM
                     foreach (var request in csomBatch.Batch.Requests)
                     {
                         // Call the logic that processes the csom response
                         request.Value.ApiCall.CSOMRequests[0].ProcessResponse(batchResponse);
-
-                        //request.Value.AddResponse(responses, statusCode);
 
                         // Commit succesful updates in our model
                         if (request.Value.ApiCall.Commit)
@@ -1674,6 +1686,56 @@ namespace PnP.Core.Services
             return batches;
         }
 
+        private static List<CsomBatch> CsomBatchSplittingBySize(CsomBatch batch)
+        {
+            List<CsomBatch> batches = new List<CsomBatch>();
+
+            // No need to split
+            if (batch.Batch.Requests.Count < MaxRequestsInCsomBatch)
+            {
+                batches.Add(batch);
+                return batches;
+            }
+
+            // Split in multiple batches
+            int counter = 0;
+            int order = 0;
+            CsomBatch currentBatch = new CsomBatch(batch.Site)
+            {
+                Batch = new Batch()
+                {
+                    ThrowOnError = batch.Batch.ThrowOnError
+                }
+            };
+
+            foreach (var request in batch.Batch.Requests.OrderBy(p => p.Value.Order))
+            {
+                currentBatch.Batch.Requests.Add(order, request.Value);
+                order++;
+
+                counter++;
+                if (counter % MaxRequestsInCsomBatch == 0)
+                {
+                    order = 0;
+                    batches.Add(currentBatch);
+                    currentBatch = new CsomBatch(batch.Site)
+                    {
+                        Batch = new Batch()
+                        {
+                            ThrowOnError = batch.Batch.ThrowOnError
+                        }
+                    };
+                }
+            }
+
+            // Add the last part
+            if (currentBatch.Batch.Requests.Count > 0)
+            {
+                batches.Add(currentBatch);
+            }
+
+            return batches;
+        }
         #endregion
 
         /// <summary>

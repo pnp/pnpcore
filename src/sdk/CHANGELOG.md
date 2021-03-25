@@ -20,6 +20,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
 ### Changed
 
+- CSOM batches are now split on size (when needed) [jansenbe - Bert Jansen]
 - Added CSOM batching support to ensure a multiple CSOM requests are grouped into a single server call + integrated CSOM response handling [jansenbe - Bert Jansen]
 - Added output for RecycleBatch methods on List, ListItem and File [jansenbe - Bert Jansen]
 - Fix bug in EnsureFolder: running this method when the folder structure existed tried to create the folder again [jansenbe - Bert Jansen]
