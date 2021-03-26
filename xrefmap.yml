@@ -14466,6 +14466,70 @@ references:
   commentId: T:PnP.Core.Model.SharePoint.IListItem
   fullName: PnP.Core.Model.SharePoint.IListItem
   nameWithType: IListItem
+- uid: PnP.Core.Model.SharePoint.IListItem.AddRoleDefinition(System.Int32,PnP.Core.Model.Security.IRoleDefinition)
+  name: AddRoleDefinition(Int32, IRoleDefinition)
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_AddRoleDefinition_System_Int32_PnP_Core_Model_Security_IRoleDefinition_
+  commentId: M:PnP.Core.Model.SharePoint.IListItem.AddRoleDefinition(System.Int32,PnP.Core.Model.Security.IRoleDefinition)
+  fullName: PnP.Core.Model.SharePoint.IListItem.AddRoleDefinition(System.Int32, PnP.Core.Model.Security.IRoleDefinition)
+  nameWithType: IListItem.AddRoleDefinition(Int32, IRoleDefinition)
+- uid: PnP.Core.Model.SharePoint.IListItem.AddRoleDefinition*
+  name: AddRoleDefinition
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_AddRoleDefinition_
+  commentId: Overload:PnP.Core.Model.SharePoint.IListItem.AddRoleDefinition
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IListItem.AddRoleDefinition
+  nameWithType: IListItem.AddRoleDefinition
+- uid: PnP.Core.Model.SharePoint.IListItem.AddRoleDefinitionAsync(System.Int32,PnP.Core.Model.Security.IRoleDefinition)
+  name: AddRoleDefinitionAsync(Int32, IRoleDefinition)
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_AddRoleDefinitionAsync_System_Int32_PnP_Core_Model_Security_IRoleDefinition_
+  commentId: M:PnP.Core.Model.SharePoint.IListItem.AddRoleDefinitionAsync(System.Int32,PnP.Core.Model.Security.IRoleDefinition)
+  fullName: PnP.Core.Model.SharePoint.IListItem.AddRoleDefinitionAsync(System.Int32, PnP.Core.Model.Security.IRoleDefinition)
+  nameWithType: IListItem.AddRoleDefinitionAsync(Int32, IRoleDefinition)
+- uid: PnP.Core.Model.SharePoint.IListItem.AddRoleDefinitionAsync*
+  name: AddRoleDefinitionAsync
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_AddRoleDefinitionAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.IListItem.AddRoleDefinitionAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IListItem.AddRoleDefinitionAsync
+  nameWithType: IListItem.AddRoleDefinitionAsync
+- uid: PnP.Core.Model.SharePoint.IListItem.AddRoleDefinitionBatch(PnP.Core.Services.Batch,System.Int32,PnP.Core.Model.Security.IRoleDefinition)
+  name: AddRoleDefinitionBatch(Batch, Int32, IRoleDefinition)
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_AddRoleDefinitionBatch_PnP_Core_Services_Batch_System_Int32_PnP_Core_Model_Security_IRoleDefinition_
+  commentId: M:PnP.Core.Model.SharePoint.IListItem.AddRoleDefinitionBatch(PnP.Core.Services.Batch,System.Int32,PnP.Core.Model.Security.IRoleDefinition)
+  fullName: PnP.Core.Model.SharePoint.IListItem.AddRoleDefinitionBatch(PnP.Core.Services.Batch, System.Int32, PnP.Core.Model.Security.IRoleDefinition)
+  nameWithType: IListItem.AddRoleDefinitionBatch(Batch, Int32, IRoleDefinition)
+- uid: PnP.Core.Model.SharePoint.IListItem.AddRoleDefinitionBatch(System.Int32,PnP.Core.Model.Security.IRoleDefinition)
+  name: AddRoleDefinitionBatch(Int32, IRoleDefinition)
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_AddRoleDefinitionBatch_System_Int32_PnP_Core_Model_Security_IRoleDefinition_
+  commentId: M:PnP.Core.Model.SharePoint.IListItem.AddRoleDefinitionBatch(System.Int32,PnP.Core.Model.Security.IRoleDefinition)
+  fullName: PnP.Core.Model.SharePoint.IListItem.AddRoleDefinitionBatch(System.Int32, PnP.Core.Model.Security.IRoleDefinition)
+  nameWithType: IListItem.AddRoleDefinitionBatch(Int32, IRoleDefinition)
+- uid: PnP.Core.Model.SharePoint.IListItem.AddRoleDefinitionBatch*
+  name: AddRoleDefinitionBatch
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_AddRoleDefinitionBatch_
+  commentId: Overload:PnP.Core.Model.SharePoint.IListItem.AddRoleDefinitionBatch
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IListItem.AddRoleDefinitionBatch
+  nameWithType: IListItem.AddRoleDefinitionBatch
+- uid: PnP.Core.Model.SharePoint.IListItem.AddRoleDefinitionBatchAsync(PnP.Core.Services.Batch,System.Int32,PnP.Core.Model.Security.IRoleDefinition)
+  name: AddRoleDefinitionBatchAsync(Batch, Int32, IRoleDefinition)
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_AddRoleDefinitionBatchAsync_PnP_Core_Services_Batch_System_Int32_PnP_Core_Model_Security_IRoleDefinition_
+  commentId: M:PnP.Core.Model.SharePoint.IListItem.AddRoleDefinitionBatchAsync(PnP.Core.Services.Batch,System.Int32,PnP.Core.Model.Security.IRoleDefinition)
+  fullName: PnP.Core.Model.SharePoint.IListItem.AddRoleDefinitionBatchAsync(PnP.Core.Services.Batch, System.Int32, PnP.Core.Model.Security.IRoleDefinition)
+  nameWithType: IListItem.AddRoleDefinitionBatchAsync(Batch, Int32, IRoleDefinition)
+- uid: PnP.Core.Model.SharePoint.IListItem.AddRoleDefinitionBatchAsync(System.Int32,PnP.Core.Model.Security.IRoleDefinition)
+  name: AddRoleDefinitionBatchAsync(Int32, IRoleDefinition)
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_AddRoleDefinitionBatchAsync_System_Int32_PnP_Core_Model_Security_IRoleDefinition_
+  commentId: M:PnP.Core.Model.SharePoint.IListItem.AddRoleDefinitionBatchAsync(System.Int32,PnP.Core.Model.Security.IRoleDefinition)
+  fullName: PnP.Core.Model.SharePoint.IListItem.AddRoleDefinitionBatchAsync(System.Int32, PnP.Core.Model.Security.IRoleDefinition)
+  nameWithType: IListItem.AddRoleDefinitionBatchAsync(Int32, IRoleDefinition)
+- uid: PnP.Core.Model.SharePoint.IListItem.AddRoleDefinitionBatchAsync*
+  name: AddRoleDefinitionBatchAsync
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_AddRoleDefinitionBatchAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.IListItem.AddRoleDefinitionBatchAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IListItem.AddRoleDefinitionBatchAsync
+  nameWithType: IListItem.AddRoleDefinitionBatchAsync
 - uid: PnP.Core.Model.SharePoint.IListItem.AddRoleDefinitions(System.Int32,System.String[])
   name: AddRoleDefinitions(Int32, String[])
   href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_AddRoleDefinitions_System_Int32_System_String___
@@ -14814,6 +14878,70 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IListItem.RecycleBatchAsync
   nameWithType: IListItem.RecycleBatchAsync
+- uid: PnP.Core.Model.SharePoint.IListItem.RemoveRoleDefinition(System.Int32,PnP.Core.Model.Security.IRoleDefinition)
+  name: RemoveRoleDefinition(Int32, IRoleDefinition)
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_RemoveRoleDefinition_System_Int32_PnP_Core_Model_Security_IRoleDefinition_
+  commentId: M:PnP.Core.Model.SharePoint.IListItem.RemoveRoleDefinition(System.Int32,PnP.Core.Model.Security.IRoleDefinition)
+  fullName: PnP.Core.Model.SharePoint.IListItem.RemoveRoleDefinition(System.Int32, PnP.Core.Model.Security.IRoleDefinition)
+  nameWithType: IListItem.RemoveRoleDefinition(Int32, IRoleDefinition)
+- uid: PnP.Core.Model.SharePoint.IListItem.RemoveRoleDefinition*
+  name: RemoveRoleDefinition
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_RemoveRoleDefinition_
+  commentId: Overload:PnP.Core.Model.SharePoint.IListItem.RemoveRoleDefinition
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IListItem.RemoveRoleDefinition
+  nameWithType: IListItem.RemoveRoleDefinition
+- uid: PnP.Core.Model.SharePoint.IListItem.RemoveRoleDefinitionAsync(System.Int32,PnP.Core.Model.Security.IRoleDefinition)
+  name: RemoveRoleDefinitionAsync(Int32, IRoleDefinition)
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_RemoveRoleDefinitionAsync_System_Int32_PnP_Core_Model_Security_IRoleDefinition_
+  commentId: M:PnP.Core.Model.SharePoint.IListItem.RemoveRoleDefinitionAsync(System.Int32,PnP.Core.Model.Security.IRoleDefinition)
+  fullName: PnP.Core.Model.SharePoint.IListItem.RemoveRoleDefinitionAsync(System.Int32, PnP.Core.Model.Security.IRoleDefinition)
+  nameWithType: IListItem.RemoveRoleDefinitionAsync(Int32, IRoleDefinition)
+- uid: PnP.Core.Model.SharePoint.IListItem.RemoveRoleDefinitionAsync*
+  name: RemoveRoleDefinitionAsync
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_RemoveRoleDefinitionAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.IListItem.RemoveRoleDefinitionAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IListItem.RemoveRoleDefinitionAsync
+  nameWithType: IListItem.RemoveRoleDefinitionAsync
+- uid: PnP.Core.Model.SharePoint.IListItem.RemoveRoleDefinitionBatch(PnP.Core.Services.Batch,System.Int32,PnP.Core.Model.Security.IRoleDefinition)
+  name: RemoveRoleDefinitionBatch(Batch, Int32, IRoleDefinition)
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_RemoveRoleDefinitionBatch_PnP_Core_Services_Batch_System_Int32_PnP_Core_Model_Security_IRoleDefinition_
+  commentId: M:PnP.Core.Model.SharePoint.IListItem.RemoveRoleDefinitionBatch(PnP.Core.Services.Batch,System.Int32,PnP.Core.Model.Security.IRoleDefinition)
+  fullName: PnP.Core.Model.SharePoint.IListItem.RemoveRoleDefinitionBatch(PnP.Core.Services.Batch, System.Int32, PnP.Core.Model.Security.IRoleDefinition)
+  nameWithType: IListItem.RemoveRoleDefinitionBatch(Batch, Int32, IRoleDefinition)
+- uid: PnP.Core.Model.SharePoint.IListItem.RemoveRoleDefinitionBatch(System.Int32,PnP.Core.Model.Security.IRoleDefinition)
+  name: RemoveRoleDefinitionBatch(Int32, IRoleDefinition)
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_RemoveRoleDefinitionBatch_System_Int32_PnP_Core_Model_Security_IRoleDefinition_
+  commentId: M:PnP.Core.Model.SharePoint.IListItem.RemoveRoleDefinitionBatch(System.Int32,PnP.Core.Model.Security.IRoleDefinition)
+  fullName: PnP.Core.Model.SharePoint.IListItem.RemoveRoleDefinitionBatch(System.Int32, PnP.Core.Model.Security.IRoleDefinition)
+  nameWithType: IListItem.RemoveRoleDefinitionBatch(Int32, IRoleDefinition)
+- uid: PnP.Core.Model.SharePoint.IListItem.RemoveRoleDefinitionBatch*
+  name: RemoveRoleDefinitionBatch
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_RemoveRoleDefinitionBatch_
+  commentId: Overload:PnP.Core.Model.SharePoint.IListItem.RemoveRoleDefinitionBatch
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IListItem.RemoveRoleDefinitionBatch
+  nameWithType: IListItem.RemoveRoleDefinitionBatch
+- uid: PnP.Core.Model.SharePoint.IListItem.RemoveRoleDefinitionBatchAsync(PnP.Core.Services.Batch,System.Int32,PnP.Core.Model.Security.IRoleDefinition)
+  name: RemoveRoleDefinitionBatchAsync(Batch, Int32, IRoleDefinition)
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_RemoveRoleDefinitionBatchAsync_PnP_Core_Services_Batch_System_Int32_PnP_Core_Model_Security_IRoleDefinition_
+  commentId: M:PnP.Core.Model.SharePoint.IListItem.RemoveRoleDefinitionBatchAsync(PnP.Core.Services.Batch,System.Int32,PnP.Core.Model.Security.IRoleDefinition)
+  fullName: PnP.Core.Model.SharePoint.IListItem.RemoveRoleDefinitionBatchAsync(PnP.Core.Services.Batch, System.Int32, PnP.Core.Model.Security.IRoleDefinition)
+  nameWithType: IListItem.RemoveRoleDefinitionBatchAsync(Batch, Int32, IRoleDefinition)
+- uid: PnP.Core.Model.SharePoint.IListItem.RemoveRoleDefinitionBatchAsync(System.Int32,PnP.Core.Model.Security.IRoleDefinition)
+  name: RemoveRoleDefinitionBatchAsync(Int32, IRoleDefinition)
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_RemoveRoleDefinitionBatchAsync_System_Int32_PnP_Core_Model_Security_IRoleDefinition_
+  commentId: M:PnP.Core.Model.SharePoint.IListItem.RemoveRoleDefinitionBatchAsync(System.Int32,PnP.Core.Model.Security.IRoleDefinition)
+  fullName: PnP.Core.Model.SharePoint.IListItem.RemoveRoleDefinitionBatchAsync(System.Int32, PnP.Core.Model.Security.IRoleDefinition)
+  nameWithType: IListItem.RemoveRoleDefinitionBatchAsync(Int32, IRoleDefinition)
+- uid: PnP.Core.Model.SharePoint.IListItem.RemoveRoleDefinitionBatchAsync*
+  name: RemoveRoleDefinitionBatchAsync
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_RemoveRoleDefinitionBatchAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.IListItem.RemoveRoleDefinitionBatchAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IListItem.RemoveRoleDefinitionBatchAsync
+  nameWithType: IListItem.RemoveRoleDefinitionBatchAsync
 - uid: PnP.Core.Model.SharePoint.IListItem.RemoveRoleDefinitions(System.Int32,System.String[])
   name: RemoveRoleDefinitions(Int32, String[])
   href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_RemoveRoleDefinitions_System_Int32_System_String___
