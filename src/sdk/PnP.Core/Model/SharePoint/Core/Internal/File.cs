@@ -348,7 +348,7 @@ namespace PnP.Core.Model.SharePoint
         }
         #endregion
 
-        #region approve
+        #region Approve
 
         public async Task ApproveAsync(string comment = null)
         {

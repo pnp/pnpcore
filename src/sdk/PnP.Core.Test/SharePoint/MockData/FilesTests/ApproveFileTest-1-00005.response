@@ -1,0 +1,9 @@
+--batchresponse_68084059-c902-48f2-b766-d9f0b41cb330
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+HTTP/1.1 200 OK
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+
+{"d":{"Approve":null}}
+--batchresponse_68084059-c902-48f2-b766-d9f0b41cb330--

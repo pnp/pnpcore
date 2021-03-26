@@ -935,6 +935,39 @@ namespace PnP.Core.Test.SharePoint
         }
         #endregion
 
+        #region Approve() variants
+        [TestMethod]
+        public async Task ApproveFileTest()
+        {
+            (_, _, string documentUrl) = await TestAssets.CreateTestDocumentInDedicatedLibraryAsync(0, parentLibraryEnableVersioning: true, parentLibraryEnableMinorVersions: true, parentLibraryApprove: true);
+
+            int initialMajorVersion;
+            int initialMinorVersion;
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+            {
+                IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl);
+                initialMajorVersion = testDocument.MajorVersion;
+                initialMinorVersion = testDocument.MinorVersion;
+                await testDocument.CheckoutAsync();
+                await testDocument.CheckinAsync("TEST CHECK IN", CheckinType.MajorCheckIn);
+                await testDocument.ApproveAsync("TEST APPROVE");
+
+                testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl, f=>f.CheckOutType, f => f.CheckInComment, f => f.MajorVersion, f => f.MinorVersion, p => p.ListItemAllFields);
+                Assert.AreEqual(CheckOutType.None, testDocument.CheckOutType);
+                Assert.AreEqual("TEST CHECK IN", testDocument.CheckInComment);
+                
+                Assert.AreEqual("0", testDocument.ListItemAllFields["OData__ModerationStatus"].ToString());
+                Assert.AreEqual("TEST APPROVE", testDocument.ListItemAllFields["OData__ModerationComments"].ToString());
+                Assert.IsTrue(testDocument.MajorVersion == initialMajorVersion + 1);
+                Assert.AreEqual(0, testDocument.MinorVersion);
+            }
+
+            await TestAssets.CleanupTestDedicatedListAsync(3);
+        }
+
+        #endregion
+
         #region Checkin() variants
         [TestMethod]
         public async Task CheckinFileMajorVersionTest()

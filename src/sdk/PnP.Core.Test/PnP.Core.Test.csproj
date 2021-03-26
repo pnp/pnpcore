@@ -42,6 +42,12 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<None Update="appsettings.devzuc.json">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+		<None Update="env.txt">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
 		<None Update="TestAssets\pageheader.jpg">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</None>
