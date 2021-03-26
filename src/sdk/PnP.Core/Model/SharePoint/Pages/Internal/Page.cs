@@ -1955,15 +1955,17 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// Publishes a client side page
         /// </summary>
-        public void Publish()
+        /// <param name="comment"></param>
+        public void Publish(string comment=null)
         {
-            PublishAsync().GetAwaiter().GetResult();
+            PublishAsync(comment).GetAwaiter().GetResult();
         }
 
         /// <summary>
         /// Publishes a client side page
         /// </summary>
-        public async Task PublishAsync()
+        /// /// <param name="comment"></param>
+        public async Task PublishAsync(string comment = null)
         {
             if (PageListItem != null)
             {
@@ -1977,7 +1979,7 @@ namespace PnP.Core.Model.SharePoint
 
                     if (pageFile.CheckOutType != CheckOutType.None)
                     { //needs checkin
-                        await pageFile.CheckinAsync("Checked in by provisioning", sitePagesLibrary.EnableMinorVersions ? CheckinType.MinorCheckIn : CheckinType.MajorCheckIn).ConfigureAwait(false);
+                        await pageFile.CheckinAsync(comment, sitePagesLibrary.EnableMinorVersions ? CheckinType.MinorCheckIn : CheckinType.MajorCheckIn).ConfigureAwait(false);
                     }
                     if (sitePagesLibrary.EnableMinorVersions)
                     { //Publishing
@@ -1986,7 +1988,7 @@ namespace PnP.Core.Model.SharePoint
 
                     if (sitePagesLibrary.EnableModeration)
                     { //Approval 
-                        await pageFile.ApproveAsync().ConfigureAwait(false);
+                        await pageFile.ApproveAsync(comment).ConfigureAwait(false);
                     }
                 }
             }

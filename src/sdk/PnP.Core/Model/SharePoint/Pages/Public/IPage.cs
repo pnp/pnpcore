@@ -304,12 +304,12 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// Publishes a client side page
         /// </summary>
-        public void Publish();
+        public void Publish(string comment = null);
 
         /// <summary>
         /// Publishes a client side page
         /// </summary>
-        public Task PublishAsync();
+        public Task PublishAsync(string comment = null);
 
         /// <summary>
         /// Demotes an client side <see cref="PageLayoutType.Article"/> news page as a regular client side page
