@@ -1,5 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PnP.Core.Model.SharePoint;
+using PnP.Core.QueryModel;
 using PnP.Core.Services;
 using PnP.Core.Test.Utilities;
 using System.Collections.Generic;
@@ -156,6 +157,28 @@ namespace PnP.Core.Test.Security
 
                 // Check role assignment. Should be 2, because breaking the inheritence added the current user, and the user we added above
                 Assert.AreEqual(2, first.RoleAssignments.Length);
+
+                var last = myList.Items.AsRequested().Last();
+                await last.GetAsync(i => i.RoleAssignments);
+                
+                // Get the current user
+                var currentUser = await context.Web.GetCurrentUserAsync();
+
+                // Get role definition to add
+                var roleDefinition = await context.Web.RoleDefinitions.FirstOrDefaultAsync(d => d.Name == "Full Control");
+
+                // Batching approach to break role inheritance and apply custom roles for given users
+                await last.BreakRoleInheritanceBatchAsync(false, false);
+                await last.AddRoleDefinitionBatchAsync(currentUser.Id, roleDefinition);
+
+                // Fire batch that breaks role inheritance and adds role
+                await context.ExecuteAsync();
+
+                // re-fetch the roleassignment collection
+                await last.LoadAsync(i => i.RoleAssignments);
+
+                // Check role assignment. Should be 2, because breaking the inheritence added the current user, and the user we added above
+                Assert.AreEqual(1, last.RoleAssignments.Length);
 
                 // Delete the list
                 await myList.DeleteAsync();

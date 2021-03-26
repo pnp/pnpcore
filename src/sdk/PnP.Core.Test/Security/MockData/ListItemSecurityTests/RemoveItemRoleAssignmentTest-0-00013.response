@@ -1,9 +1,9 @@
---batchresponse_59e75438-8382-497e-8ed9-6a1e5b4af3e2
+--batchresponse_858f7a1e-2fd5-4a44-9043-dd1afa15349a
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{"d":{"results":[{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'29d6839d-d403-4415-b81c-0cdafe28d97f')/Items(1)/RoleAssignments/GetByPrincipalId(16)","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'29d6839d-d403-4415-b81c-0cdafe28d97f')/Items(1)/RoleAssignments/GetByPrincipalId(16)","type":"SP.RoleAssignment"},"RoleDefinitionBindings":{"results":[{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/RoleDefinitions(1073741829)","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/RoleDefinitions(1073741829)","type":"SP.RoleDefinition"},"BasePermissions":{"__metadata":{"type":"SP.BasePermissions"},"High":"2147483647","Low":"4294967295"},"Description":"Has full control.","Hidden":false,"Id":1073741829,"Name":"Full Control","Order":1,"RoleTypeKind":5}]},"PrincipalId":16}]}}
---batchresponse_59e75438-8382-497e-8ed9-6a1e5b4af3e2--
+{"d":{"results":[{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'4ef0486d-6129-4368-8f01-55a15e89e818')/Items(1)/RoleAssignments/GetByPrincipalId(16)","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'4ef0486d-6129-4368-8f01-55a15e89e818')/Items(1)/RoleAssignments/GetByPrincipalId(16)","type":"SP.RoleAssignment"},"RoleDefinitionBindings":{"results":[{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/RoleDefinitions(1073741829)","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/RoleDefinitions(1073741829)","type":"SP.RoleDefinition"},"BasePermissions":{"__metadata":{"type":"SP.BasePermissions"},"High":"2147483647","Low":"4294967295"},"Description":"Has full control.","Hidden":false,"Id":1073741829,"Name":"Full Control","Order":1,"RoleTypeKind":5}]},"PrincipalId":16}]}}
+--batchresponse_858f7a1e-2fd5-4a44-9043-dd1afa15349a--

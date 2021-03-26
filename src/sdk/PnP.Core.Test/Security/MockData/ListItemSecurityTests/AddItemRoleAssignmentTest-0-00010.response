@@ -1,4 +1,4 @@
---batchresponse_3fd82dd1-a482-4200-998b-cde24c01be8b
+--batchresponse_3a4d8c11-961c-4a52-bb1f-158a528130f3
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
@@ -6,4 +6,4 @@ HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
 {"d":{"results":[{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetUserById(16)","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetUserById(16)","type":"SP.User"},"Alerts":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetUserById(16)/Alerts"}},"Groups":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetUserById(16)/Groups"}},"Id":16,"IsHiddenInUI":false,"LoginName":"c:0!.s|windows","Title":"All Users (windows)","PrincipalType":4,"Email":"","Expiration":"","IsEmailAuthenticationGuestUser":false,"IsShareByEmailGuestUser":false,"IsSiteAdmin":false,"UserId":null,"UserPrincipalName":null}]}}
---batchresponse_3fd82dd1-a482-4200-998b-cde24c01be8b--
+--batchresponse_3a4d8c11-961c-4a52-bb1f-158a528130f3--
