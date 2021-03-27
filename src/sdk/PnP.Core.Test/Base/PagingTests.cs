@@ -276,7 +276,9 @@ namespace PnP.Core.Test.Base
                         // has both the skiptoken and skip parameters, an invalid combination. Paging logic will handle this
                         var list3 = context.Web.Lists.Where(p => p.Id == list.Id).FirstOrDefault();
 
+#pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
                         await Assert.ThrowsExceptionAsync<InvalidOperationException>(async () =>
+#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
                         {
                             var queryResult3 = list3.Items.Skip(4).Take(2).ToList();
 

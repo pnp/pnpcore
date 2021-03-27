@@ -898,14 +898,7 @@ namespace PnP.Core.Model
             }
 
             // Ensure token replacement is done
-            if (apiCall.Type == ApiType.CSOM)
-            {
-                apiCall.XmlBody = await TokenHandler.ResolveTokensAsync(this, apiCall.XmlBody, PnPContext).ConfigureAwait(false);
-            }
-            else
-            {
-                apiCall.Request = await TokenHandler.ResolveTokensAsync(this, apiCall.Request, PnPContext).ConfigureAwait(false);
-            }
+            apiCall.Request = await TokenHandler.ResolveTokensAsync(this, apiCall.Request, PnPContext).ConfigureAwait(false);
 
             // Add the request to the batch
             var batch = PnPContext.BatchClient.EnsureBatch();
@@ -954,14 +947,7 @@ namespace PnP.Core.Model
             }
 
             // Ensure token replacement is done
-            if (apiCall.Type == ApiType.CSOM)
-            {
-                apiCall.XmlBody = await TokenHandler.ResolveTokensAsync(this, apiCall.XmlBody, PnPContext).ConfigureAwait(false);
-            }
-            else
-            {
-                apiCall.Request = await TokenHandler.ResolveTokensAsync(this, apiCall.Request, PnPContext).ConfigureAwait(false);
-            }
+            apiCall.Request = await TokenHandler.ResolveTokensAsync(this, apiCall.Request, PnPContext).ConfigureAwait(false);
 
             // Add the request to the batch
             Guid batchRequestId = batch.Add(this, entityInfo, method, apiCall, default, fromJsonCasting: MappingHandler, postMappingJson: PostMappingHandler, CleanupOperationName(operationName));
@@ -986,7 +972,6 @@ namespace PnP.Core.Model
                                        batchFirstRequest.ResponseHttpStatusCode,
                                        batch.Id,
                                        batchFirstRequest.ResponseHeaders,
-                                       csomResponseJson: apiCall.ExpectBinaryResponse ? null : batchFirstRequest.CsomResponseJson,
                                        binaryContent: apiCall.ExpectBinaryResponse ? batchFirstRequest.ResponseBinaryContent : null);
         }
 

@@ -306,7 +306,72 @@ namespace PnP.Core.Test.Base
                 await myList.DeleteAsync();
             }
         }
-        
+
+        [TestMethod]
+        public async Task HandleMaxRequestsInCsomBatch()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                // Create a new list
+                string listTitle = TestCommon.GetPnPSdkTestAssetName("HandleMaxRequestsInCsomBatch");
+                var myList = context.Web.Lists.GetByTitle(listTitle);
+
+                if (TestCommon.Instance.Mocking && myList != null)
+                {
+                    Assert.Inconclusive("Test data set should be setup to not have the list available.");
+                }
+
+                if (myList == null)
+                {
+                    myList = await context.Web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
+                }
+
+                // Add items to the list
+                for (int i = 0; i < 105; i++)
+                {
+                    Dictionary<string, object> values = new Dictionary<string, object>
+                        {
+                            { "Title", $"Item {i}" }
+                        };
+
+                    await myList.Items.AddBatchAsync(values);
+                }
+                await context.ExecuteAsync();
+
+                using (var context2 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+                {
+                    var list2 = context2.Web.Lists.GetByTitle(listTitle);
+                    if (list2 != null)
+                    {
+                        var result = await list2.LoadListDataAsStreamAsync(new RenderListDataOptions() { ViewXml = "<View><ViewFields><FieldRef Name='Title' /></ViewFields></View>", RenderOptions = RenderListDataOptionsFlags.ListData });
+                        Assert.IsTrue(list2.Items.Length == 105);
+
+                        foreach(var item in list2.Items.AsRequested())
+                        {
+                            item.Title = "Updated";
+                            // System update uses CSOM call
+                            await item.SystemUpdateBatchAsync();
+                        }
+
+                        // Execute the batch with 105 CSOM requests, this will trigger the CSOM batch to be split
+                        await context2.ExecuteAsync();
+
+                        // Load the data back to see the update did succeed
+                        var list3 = context2.Web.Lists.GetByTitle(listTitle);
+                        result = await list3.LoadListDataAsStreamAsync(new RenderListDataOptions() { ViewXml = "<View><ViewFields><FieldRef Name='Title' /></ViewFields></View>", RenderOptions = RenderListDataOptionsFlags.ListData });
+                        foreach (var item in list3.Items.AsRequested())
+                        {
+                            Assert.AreEqual(item.Title, "Updated");
+                        }
+                    }
+                }
+
+                // Cleanup the created list
+                await myList.DeleteAsync();
+            }
+        }
+
         [TestMethod]
         public async Task HandleBatchErrorsForLargeBatch()
         {

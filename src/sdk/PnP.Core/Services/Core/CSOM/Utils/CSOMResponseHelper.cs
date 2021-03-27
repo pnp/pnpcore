@@ -28,7 +28,7 @@ namespace PnP.Core.Services.Core.CSOM.Utils
             return default;
         }
 
-        internal static bool CompareIdElement(JsonElement element, long id)
+        private static bool CompareIdElement(JsonElement element, long id)
         {
             if (element.ValueKind == JsonValueKind.Number && element.TryGetInt64(out long elementId))
             {

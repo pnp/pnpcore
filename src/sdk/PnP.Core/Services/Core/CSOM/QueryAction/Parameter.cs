@@ -92,7 +92,15 @@ namespace PnP.Core.Services.Core.CSOM.QueryAction
 
         public override string ToString()
         {
-            return $"<Query SelectAllProperties=\"{SelectAllProperties.ToString().ToLower()}\"><Properties /></Query>";
+            if (SelectAllProperties)
+            {
+                return $"<Query SelectAllProperties=\"{SelectAllProperties.ToString().ToLower()}\"><Properties /></Query>";
+            }
+            else
+            {
+                string properties = string.Join("", Properties.Select(value => $"<Property Name=\"{value.Name}\" ScalarProperty=\"true\" />"));
+                return $"<Query SelectAllProperties=\"{SelectAllProperties.ToString().ToLower()}\"><Properties>{properties}</Properties></Query>";
+            }
         }
     }
 }
