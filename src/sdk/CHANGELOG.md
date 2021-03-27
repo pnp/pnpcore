@@ -10,6 +10,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
 ### Added
 
+- Added HubSite methods [pkbullock - Paul Bullock]
 - Added ClassifyAndExtract methods for a IList [jansenbe - Bert Jansen]
 - Added AsBatchAsync overloads to allow specifying the batch to use [PaoloPia - Paolo Pialorsi]
 - Added output for ClassifyAndExtractBatch methods [jansenbe - Bert Jansen]
