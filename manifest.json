@@ -1850,6 +1850,18 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.SharePoint.IHubSite.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.SharePoint.IHubSite.html",
+          "hash": "ec+H2HYOCH9OpK5CFL4Qsw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/PnP.Core.Model.SharePoint.IInformationRightsManagementFileSettings.yml",
       "output": {
         ".html": {
@@ -2058,7 +2070,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.ISite.html",
-          "hash": "tCq3YJfU1tDimAF+vlLgLg=="
+          "hash": "x6w/R4eeNfS3t8nG4SmQSg=="
         }
       },
       "is_incremental": false,
@@ -2226,7 +2238,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.IWeb.html",
-          "hash": "mZ+xzYsT4R5X5UABl2joOQ=="
+          "hash": "/LoBA9Gj9I9+CKmYd8owRg=="
         }
       },
       "is_incremental": false,
@@ -2730,7 +2742,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.html",
-          "hash": "/5nE7Ft6iqCHcVegASc7Mw=="
+          "hash": "1gEyAVcS5HqgJ1Qyh56hqw=="
         }
       },
       "is_incremental": false,
@@ -3810,7 +3822,7 @@
       "output": {
         ".html": {
           "relative_path": "api/toc.html",
-          "hash": "uGCRBhk5HAhOfnBQZVLR+g=="
+          "hash": "zjRbni8mUKO7El8bsb5SXg=="
         }
       },
       "is_incremental": false,
@@ -4683,6 +4695,18 @@
     },
     {
       "type": "Conceptual",
+      "source_relative_path": "using-the-sdk/sites-hubsites.md",
+      "output": {
+        ".html": {
+          "relative_path": "using-the-sdk/sites-hubsites.html",
+          "hash": "Rai9G+XfIiy8zN9/xFTbBw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
       "source_relative_path": "using-the-sdk/sites-intro.md",
       "output": {
         ".html": {
@@ -4771,7 +4795,7 @@
       "output": {
         ".html": {
           "relative_path": "using-the-sdk/toc.html",
-          "hash": "eoxScJSmvKDhQMb/6+vLng=="
+          "hash": "612l37VtSs+YQHpzjNLBhw=="
         }
       },
       "is_incremental": false,
@@ -4816,13 +4840,13 @@
         "ConceptualDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build",
-          "total_file_count": 58,
+          "total_file_count": 59,
           "skipped_file_count": 0
         },
         "ManagedReferenceDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build",
-          "total_file_count": 315,
+          "total_file_count": 316,
           "skipped_file_count": 0
         },
         "ResourceDocumentProcessor": {
