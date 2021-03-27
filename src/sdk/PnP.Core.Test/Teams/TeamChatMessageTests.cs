@@ -418,6 +418,90 @@ namespace PnP.Core.Test.Teams
             }
         }
 
+        [TestMethod]
+        public async Task AddChatMessageFileAttachmentOptionsAsyncTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var team = await context.Team.GetAsync(o => o.PrimaryChannel);
+                
+                var channel = team.PrimaryChannel;
+                Assert.IsNotNull(channel);
+
+                channel = await channel.GetAsync(o => o.Messages);
+                var chatMessages = channel.Messages;
+
+                Assert.IsNotNull(chatMessages);
+
+                // Upload File to SharePoint Library - it will have to remain i guess as onetime upload.
+                IFolder folder = await context.Web.Lists.GetByTitle("Documents").RootFolder.GetAsync();
+                IFile existingFile = await folder.Files.FirstOrDefaultAsync(o => o.Name == "test_added.docx");
+                if (existingFile == default)
+                {
+                    existingFile = await folder.Files.AddAsync("test_added.docx", System.IO.File.OpenRead($".{Path.DirectorySeparatorChar}TestAssets{Path.DirectorySeparatorChar}test.docx"));
+                }
+
+                Assert.IsNotNull(existingFile);
+                Assert.AreEqual("test_added.docx", existingFile.Name);
+
+                // Useful reference - https://docs.microsoft.com/en-us/graph/api/chatmessage-post?view=graph-rest-beta&tabs=http#example-4-file-attachments
+                // assume as if there are no chat messages
+                var attachmentId = existingFile.ETag.AsGraphEtag(); // Needs to be the documents eTag - just the GUID part
+                var body = $"<h1>Hello</h1><br />This is a unit test with a file attachment (AddChatMessageHtmlAsyncTest) posting a message - <attachment id=\"{attachmentId}\"></attachment>";
+                var subject = "Chat Message File Attachment Options Async Test";
+                var fileUri = new Uri(existingFile.LinkingUrl);
+                await context.ExecuteAsync();
+
+                var batch = context.NewBatch();
+
+                await chatMessages.AddBatchAsync(batch, new ChatMessageOptions
+                {
+                    Subject = subject,
+                    Content = body,
+                    ContentType = ChatMessageContentType.Html,
+                    Attachments = {
+                        new ChatMessageAttachmentOptions
+                        {
+                            Id = attachmentId,
+                            ContentType = "reference",
+                            // Cannot have the extension with a query graph doesnt recognise and think its part of file extension - include in docs.
+                            ContentUrl = new Uri(fileUri.ToString().Replace(fileUri.Query, "")),
+                            Name = $"{existingFile.Name}",
+                            ThumbnailUrl = null,
+                            Content = null
+                        }
+                    }
+                });
+
+                await context.ExecuteAsync(batch);
+
+                channel = await channel.GetAsync(o => o.Messages);
+                var updateMessages = channel.Messages;
+
+                var message = updateMessages.AsEnumerable().OrderByDescending(o=>o.Subject = subject).Last();
+                Assert.IsNotNull(message.CreatedDateTime);
+                // Depending on regional settings this check might fail
+                //Assert.AreEqual(message.DeletedDateTime, DateTime.MinValue);
+                Assert.IsNotNull(message.Etag);
+                Assert.IsNotNull(message.Importance);
+                Assert.IsNotNull(message.LastModifiedDateTime);
+                Assert.IsNotNull(message.Locale);
+                Assert.IsNotNull(message.MessageType);
+                Assert.IsNotNull(message.WebUrl);
+
+                Assert.IsTrue(message.IsPropertyAvailable(o => o.ReplyToId));
+                Assert.IsNull(message.ReplyToId);
+                Assert.IsTrue(message.IsPropertyAvailable(o => o.Subject));
+                Assert.IsNotNull(message.Subject);
+                Assert.IsTrue(message.IsPropertyAvailable(o => o.Summary));
+                Assert.IsNull(message.Summary);
+
+                //delete file
+                await existingFile.DeleteAsync(); //Note this will break the link in the Teams chat.
+
+            }
+        }
 
         [TestMethod]    
         public async Task AddChatMessageSubjectAsyncTest()
@@ -911,6 +995,36 @@ namespace PnP.Core.Test.Teams
                 Assert.IsNotNull(message.Subject);
                 Assert.IsTrue(message.IsPropertyAvailable(o => o.Summary));
                 Assert.IsNull(message.Summary);
+            }
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void AddChatMessageBatchOptionsExceptionTest()
+        {
+            TestCommon.Instance.Mocking = false;
+            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            {
+                var batch = context.NewBatch();
+                var team = context.Team.GetBatch(batch, o => o.Channels);
+                context.Execute(batch);
+                Assert.IsTrue(team.Result.Channels.Length > 0);
+
+                var channelQuery = team.Result.Channels.FirstOrDefault(i => i.DisplayName == "General");
+                Assert.IsNotNull(channelQuery);
+
+                var channel = channelQuery.GetBatch(batch, o => o.Messages);
+                context.Execute(batch);
+                var chatMessages = channel.Result.Messages;
+
+                Assert.IsNotNull(chatMessages);
+
+                // assume as if there are no chat messages
+                // There appears to be no remove option yet in this feature - so add a recognisable message
+                var body = string.Empty;
+                chatMessages.AddBatch(batch, options: null);
+                context.Execute(batch);
+
             }
         }
 
