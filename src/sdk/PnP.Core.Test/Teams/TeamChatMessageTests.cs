@@ -42,11 +42,8 @@ namespace PnP.Core.Test.Teams
                 // assume as if there are no chat messages
                 // There appears to be no remove option yet in this feature - so add a recognisable message
                 var body = "Hello, this is a unit test (GetChatMessageAsyncTest) posting a message - PnP Rocks!";
-                if(!chatMessages.AsRequested().Any(o=> o.Body.Content == body))
-                {
-                    await chatMessages.AddAsync(body);
-                }
-
+                await chatMessages.AddAsync(body);
+                
                 channel = await channel.GetAsync(o => o.Messages);
                 var updateMessages = channel.Messages.AsRequested();
 
@@ -209,7 +206,6 @@ namespace PnP.Core.Test.Teams
             }
         }
 
-
         [TestMethod]
         public async Task AddChatMessageFileAttachmentAsyncTest()
         {
@@ -286,7 +282,6 @@ namespace PnP.Core.Test.Teams
 
             }
         }
-
 
         [TestMethod]
         public async Task AddChatMessageInlineImagesAsyncTest()
@@ -616,11 +611,10 @@ namespace PnP.Core.Test.Teams
                 // assume as if there are no chat messages
                 // There appears to be no remove option yet in this feature - so add a recognisable message
                 var body = $"Hello, this is a unit test (AddChatMessageBatchTest) posting a message - PnP Rocks! - Woah...";
-                if (!chatMessages.AsRequested().Any(o => o.Body.Content == body))
-                {
-                    chatMessages.AddBatch(body, ChatMessageContentType.Text, "Batch Test");
-                    context.Execute();
-                }
+                
+                chatMessages.AddBatch(body, ChatMessageContentType.Text, "Batch Test");
+                context.Execute();
+                
 
                 channel = channelQuery.GetBatch(o => o.Messages);
                 context.Execute();
@@ -671,12 +665,9 @@ namespace PnP.Core.Test.Teams
                 // assume as if there are no chat messages
                 // There appears to be no remove option yet in this feature - so add a recognisable message
                 var body = $"Hello, this is a unit test (AddChatMessageBatchTest) posting a message - PnP Rocks! - Woah...";
-                if (!chatMessages.AsRequested().Any(o => o.Body.Content == body))
-                {
-                    await chatMessages.AddBatchAsync(body, ChatMessageContentType.Text, "Batch Test");
-                    await context.ExecuteAsync();
-                }
-
+                await chatMessages.AddBatchAsync(body, ChatMessageContentType.Text, "Batch Test");
+                await context.ExecuteAsync();
+            
                 channel = channelQuery.GetBatch(o => o.Messages);
                 await context.ExecuteAsync();
                 var updateMessages = channel.Result.Messages;
@@ -727,12 +718,9 @@ namespace PnP.Core.Test.Teams
                 // assume as if there are no chat messages
                 // There appears to be no remove option yet in this feature - so add a recognisable message
                 var body = $"Hello, this is a unit test (AddChatMessageSpecificBatchTest) posting a message - PnP Rocks! - Woah...";
-                if (!chatMessages.AsRequested().Any(o => o.Body.Content == body))
-                {
-                    chatMessages.AddBatch(batch, body);
-                    context.Execute(batch);
-                }
-
+                chatMessages.AddBatch(batch, body);
+                context.Execute(batch);
+                
                 var batch2 = context.NewBatch();
                 channel = channelQuery.GetBatch(batch2, o => o.Messages);
                 context.Execute(batch2);
