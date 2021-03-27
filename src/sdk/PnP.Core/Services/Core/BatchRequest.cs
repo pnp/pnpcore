@@ -101,11 +101,6 @@ namespace PnP.Core.Services
         internal Stream ResponseBinaryContent { get; private set; }
 
         /// <summary>
-        /// Dictionary with the json responses for the requests defined in the CSOM XML
-        /// </summary>
-        internal Dictionary<int, JsonElement> CsomResponseJson { get; private set; }
-
-        /// <summary>
         /// Http response code for this request (only populated when the <see cref="Batch"/> was executed)
         /// </summary>
         internal HttpStatusCode ResponseHttpStatusCode { get; private set; }
@@ -172,17 +167,6 @@ namespace PnP.Core.Services
             {
                 ResponseHeaders = responseHeaders;
             }
-        }
-
-        /// <summary>
-        /// Records the response of a CSOM request (fired as part of the execution of a <see cref="Batch"/>)
-        /// </summary>
-        /// <param name="csomJsonResponse">Dictionary holding the json response of each action in the CSOM XML/></param>
-        /// <param name="responseHttpStatusCode">Http response status code for this request</param>
-        internal void AddResponse(Dictionary<int, JsonElement> csomJsonResponse, HttpStatusCode responseHttpStatusCode)
-        {
-            CsomResponseJson = csomJsonResponse;
-            ResponseHttpStatusCode = responseHttpStatusCode;
         }
 
         /// <summary>

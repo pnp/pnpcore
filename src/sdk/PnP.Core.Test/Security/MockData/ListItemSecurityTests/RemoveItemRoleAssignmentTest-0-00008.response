@@ -1,9 +1,9 @@
---batchresponse_c2ab6a26-ceda-4564-801d-ea5aacb02bc1
+--batchresponse_da9908e6-11b6-49d8-bcf7-b91488c790f7
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{"d":{"results":[{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/RoleDefinitions(1073741829)","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/RoleDefinitions(1073741829)","type":"SP.RoleDefinition"},"BasePermissions":{"__metadata":{"type":"SP.BasePermissions"},"High":"2147483647","Low":"4294967295"},"Description":"Has full control.","Hidden":false,"Id":1073741829,"Name":"Full Control","Order":1,"RoleTypeKind":5}]}}
---batchresponse_c2ab6a26-ceda-4564-801d-ea5aacb02bc1--
+{"d":{"results":[{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetUserById(16)","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetUserById(16)","type":"SP.User"},"Alerts":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetUserById(16)/Alerts"}},"Groups":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetUserById(16)/Groups"}},"Id":16,"IsHiddenInUI":false,"LoginName":"c:0!.s|windows","Title":"All Users (windows)","PrincipalType":4,"Email":"","Expiration":"","IsEmailAuthenticationGuestUser":false,"IsShareByEmailGuestUser":false,"IsSiteAdmin":false,"UserId":null,"UserPrincipalName":null}]}}
+--batchresponse_da9908e6-11b6-49d8-bcf7-b91488c790f7--

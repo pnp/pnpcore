@@ -33,6 +33,7 @@
 	<ItemGroup>
 		<Folder Include="Base\MockData\GraphRestTransitionTests\" />
 		<Folder Include="QueryModel\MockData\" />
+		<Folder Include="Security\MockData\ListItemSecurityTests\" />
 		<Folder Include="Security\MockData\UserTests\" />
 		<Folder Include="SharePoint\MockData\FilesTests\" />
 		<Folder Include="SharePoint\MockData\SettingTests\" />

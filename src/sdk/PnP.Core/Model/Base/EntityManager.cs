@@ -321,7 +321,7 @@ namespace PnP.Core.Model
         internal static EntityInfo GetClassInfo<TModel>(Type modelType, BaseDataModel<TModel> target, IDataModelParent parent = null, params Expression<Func<TModel, object>>[] expressions)
         {
             // Get static information about the fields to work with and how to handle CRUD operations
-            var staticClassInfo = EntityManager.Instance.GetStaticClassInfo(modelType);
+            var staticClassInfo = Instance.GetStaticClassInfo(modelType);
 
             // Copy static info in dynamic model to allow instance specific updates
             EntityInfo entityInfo = new EntityInfo(staticClassInfo);

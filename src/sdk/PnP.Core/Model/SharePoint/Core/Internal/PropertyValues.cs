@@ -17,7 +17,6 @@ namespace PnP.Core.Model.SharePoint
     /// PropertyValues class
     /// </summary>
     [SharePointType("SP.PropertyValues")]
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Usage", "CA2243:Attribute string literals should parse correctly", Justification = "<Pending>")]
     internal partial class PropertyValues : ExpandoBaseDataModel<IPropertyValues>, IPropertyValues
     {
         #region Construction
@@ -86,10 +85,11 @@ namespace PnP.Core.Model.SharePoint
             UpdatePropertyBagRequest request = GetUpdatePropertyBag();
             if (request.FieldsToUpdate.Count > 0)
             {
-                ApiCall updatePropertiesCall = PnPContext.GetCSOMCallForRequests(new List<IRequest<object>>()
+                ApiCall updatePropertiesCall = new ApiCall(new List<IRequest<object>>() { request })
                 {
-                    request
-                }, commit: true);
+                    Commit = true,
+                };
+
                 await RawRequestAsync(updatePropertiesCall, HttpMethod.Post).ConfigureAwait(false);
             }
         }
