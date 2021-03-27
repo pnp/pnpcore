@@ -30,6 +30,9 @@
   items:
   - name: Overview
     href: sites-intro.md
+  - name: Hub Site
+    href: sites-hubsites.md
+    
 - name: Webs
   items:
   - name: Overview

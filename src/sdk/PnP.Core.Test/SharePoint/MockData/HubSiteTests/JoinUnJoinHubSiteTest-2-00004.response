@@ -1,0 +1,9 @@
+--batchresponse_2222cd76-2ee2-4421-bf41-2a3295ad57aa
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+HTTP/1.1 200 OK
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+
+{"d":{"JoinHubSite":null}}
+--batchresponse_2222cd76-2ee2-4421-bf41-2a3295ad57aa--

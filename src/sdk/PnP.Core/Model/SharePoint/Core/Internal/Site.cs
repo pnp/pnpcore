@@ -176,6 +176,91 @@ namespace PnP.Core.Model.SharePoint
         }
 
         #endregion
+        
+        #region Hub Site
+
+        /// <summary>
+        /// Registers the current site as a primary hub site
+        /// </summary>
+        public async Task<IHubSite> RegisterHubSiteAsync()
+        {
+
+            await EnsurePropertiesAsync(p => p.IsHubSite).ConfigureAwait(false);
+
+            HubSite hubSite = new HubSite()
+            {
+                PnPContext = PnPContext
+            };
+
+            if (!IsHubSite)
+            {
+                var apiCall = new ApiCall($"_api/site/RegisterHubSite", ApiType.SPORest);
+                await hubSite.RequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
+            }
+            else
+            {
+                throw new ArgumentException($"Site is already registered as a hub site");
+            }
+
+            return hubSite;
+        }
+
+        /// <summary>
+        /// Unregisters the current site as a primary hub site
+        /// </summary>
+        public async Task<bool> UnregisterHubSiteAsync()
+        {
+            var result = false;
+
+            await EnsurePropertiesAsync(p=>p.IsHubSite).ConfigureAwait(false);
+
+            if (IsHubSite)
+            {
+                var apiCall = new ApiCall($"_api/Site/UnRegisterHubSite", ApiType.SPORest);
+                var response = await RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
+                result = response.StatusCode == System.Net.HttpStatusCode.OK;
+            }
+            else
+            {
+                throw new ArgumentException($"Site is not a hub site");
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// Associates the current site to a primary hub site
+        /// </summary>
+        public async Task<bool> JoinHubSiteAsync(Guid hubSiteId)
+        {
+            var result = false;
+
+            await EnsurePropertiesAsync(p => p.IsHubSite).ConfigureAwait(false);
+
+            if (!IsHubSite)
+            {
+                var apiCall = new ApiCall($"_api/Site/JoinHubSite('{hubSiteId}')", ApiType.SPORest);
+                var response = await RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
+                result = response.StatusCode == System.Net.HttpStatusCode.OK;
+            }
+            else
+            {
+                throw new ArgumentException($"Site already part of a hub site");
+            }
+
+            return result;
+        }
+
+
+        /// <summary>
+        /// Disassociates the current site to a primary hub site
+        /// </summary>
+        public async Task<bool> UnJoinHubSiteAsync()
+        {
+            return await JoinHubSiteAsync(Guid.Empty).ConfigureAwait(false);
+        }
+
+        #endregion
 
         #endregion
     }

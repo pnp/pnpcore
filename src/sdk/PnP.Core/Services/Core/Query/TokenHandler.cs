@@ -139,6 +139,16 @@ namespace PnP.Core.Services
                                 }
                                 break;
                         }
+
+                        case "HubSiteId":
+                        {
+                            await context.Site.EnsurePropertiesAsync(p => p.HubSiteId).ConfigureAwait(false);
+                            if (context.Site.HasValue(propertyToLoad))
+                            {
+                                result = result.Replace(match.Value, context.Site.HubSiteId.ToString());
+                            }
+                            break;
+                        }
                     }
                 }
                 // Replace tokens coming from the Web object connected to the current PnPContext

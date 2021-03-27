@@ -274,5 +274,27 @@ namespace PnP.Core.Model.SharePoint
         /// Retrieves the available compliance tags / retention labels for this site
         /// </summary>
         public Task<IEnumerable<IComplianceTag>> GetAvailableComplianceTagsAsync();
+
+
+        /// <summary>
+        /// Registers the current site as a primary hub site
+        /// </summary>
+        public Task<IHubSite> RegisterHubSiteAsync();
+
+        /// <summary>
+        /// Unregisters the current site as a primary hub site
+        /// </summary>
+        public Task<bool> UnregisterHubSiteAsync();
+
+        /// <summary>
+        /// Associates the current site to a primary hub site
+        /// </summary>
+        public Task<bool> JoinHubSiteAsync(Guid hubSiteId);
+
+        /// <summary>
+        /// Disassociates current site from primary hub site
+        /// </summary>
+        /// <returns></returns>
+        public Task<bool> UnJoinHubSiteAsync();
     }
 }

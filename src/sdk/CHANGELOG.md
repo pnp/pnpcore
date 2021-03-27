@@ -10,6 +10,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
 ### Added
 
+- Added HubSite methods [pkbullock - Paul Bullock]
 - Added AddRoleDefinition and RemoveRoleDefinition methods on ListItem [jansenbe - Bert Jansen]
 - Additional batch method for BreakRoleInheritance and ResetRoleInheritance [jansenbe - Bert Jansen]
 - Added ClassifyAndExtract methods for a IList [jansenbe - Bert Jansen]
