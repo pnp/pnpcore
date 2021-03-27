@@ -1002,7 +1002,7 @@ namespace PnP.Core.Test.Teams
         [ExpectedException(typeof(ArgumentNullException))]
         public void AddChatMessageBatchOptionsExceptionTest()
         {
-            TestCommon.Instance.Mocking = false;
+            //TestCommon.Instance.Mocking = false;
             using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
             {
                 var batch = context.NewBatch();
