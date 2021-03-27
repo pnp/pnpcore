@@ -91,11 +91,8 @@ namespace PnP.Core.Test.Teams
                 // assume as if there are no chat messages
                 // There appears to be no remove option yet in this feature - so add a recognisable message
                 var body = $"Hello, this is a unit test (AddChatMessageTest) posting a message - PnP Rocks! - Woah...";
-                if (!chatMessages.AsRequested().Any(o => o.Body.Content == body))
-                {
-                    chatMessages.Add(body);
-                }
-
+                chatMessages.Add(body);
+                
                 channel = channel.Get(o => o.Messages);
                 var updateMessages = channel.Messages.AsRequested();
 
@@ -114,6 +111,56 @@ namespace PnP.Core.Test.Teams
                 Assert.IsNull(message.ReplyToId);
                 Assert.IsTrue(message.IsPropertyAvailable(o => o.Subject));
                 Assert.IsNull(message.Subject);
+                Assert.IsTrue(message.IsPropertyAvailable(o => o.Summary));
+                Assert.IsNull(message.Summary);
+            }
+        }
+
+        [TestMethod]
+        public void AddChatMessageOptionsTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            {
+                var team = context.Team.Get(o => o.Channels);
+                Assert.IsTrue(team.Channels.Length > 0);
+
+                var channel = team.Channels.AsRequested().FirstOrDefault(i => i.DisplayName == "General");
+                Assert.IsNotNull(channel);
+
+                channel.Load(o => o.Messages);
+                var chatMessages = channel.Messages;
+
+                Assert.IsNotNull(chatMessages);
+
+                // assume as if there are no chat messages
+                // There appears to be no remove option yet in this feature - so add a recognisable message
+                var body = $"Hello, this is a unit test (AddChatMessageOptionsTest) posting a message - PnP Rocks! - Woah...";
+                var subject = "Options";
+                chatMessages.Add(new ChatMessageOptions()
+                {
+                    Content = body,
+                    Subject = subject
+                });
+
+                channel = channel.Get(o => o.Messages);
+                var updateMessages = channel.Messages.AsRequested();
+
+                var message = updateMessages.First(o => o.Body.Content == body);
+                Assert.IsNotNull(message.CreatedDateTime);
+                // Depending on regional settings this check might fail
+                //Assert.AreEqual(message.DeletedDateTime, DateTime.MinValue);
+                Assert.IsNotNull(message.Etag);
+                Assert.IsNotNull(message.Importance);
+                Assert.IsNotNull(message.LastModifiedDateTime);
+                Assert.IsNotNull(message.Locale);
+                Assert.IsNotNull(message.MessageType);
+                Assert.IsNotNull(message.WebUrl);
+
+                Assert.IsTrue(message.IsPropertyAvailable(o => o.ReplyToId));
+                Assert.IsNull(message.ReplyToId);
+                Assert.IsTrue(message.IsPropertyAvailable(o => o.Subject));
+                Assert.IsNotNull(message.Subject);
                 Assert.IsTrue(message.IsPropertyAvailable(o => o.Summary));
                 Assert.IsNull(message.Summary);
             }
