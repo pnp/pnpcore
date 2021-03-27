@@ -781,12 +781,10 @@ namespace PnP.Core.Test.Teams
 
                 // assume as if there are no chat messages
                 // There appears to be no remove option yet in this feature - so add a recognisable message
-                var body = $"Hello, this is a unit test (AddChatMessageSpecificBatchTest) posting a message - PnP Rocks! - Woah...";
-                if (!chatMessages.AsRequested().Any(o => o.Body.Content == body))
-                {
-                    await chatMessages.AddBatchAsync(batch, body, ChatMessageContentType.Text, "Batch Async Test");
-                    await context.ExecuteAsync(batch);
-                }
+                var body = $"Hello, this is a unit test (AddChatMessageSpecificBatchAsyncTest) posting a message - PnP Rocks! - Woah...";
+                await chatMessages.AddBatchAsync(batch, body, ChatMessageContentType.Text, "Batch Async Test");
+                await context.ExecuteAsync(batch);
+                
 
                 var batch2 = context.NewBatch();
                 channel = await channelQuery.GetBatchAsync(batch2, o => o.Messages);
@@ -808,7 +806,7 @@ namespace PnP.Core.Test.Teams
                 Assert.IsTrue(message.IsPropertyAvailable(o => o.ReplyToId));
                 Assert.IsNull(message.ReplyToId);
                 Assert.IsTrue(message.IsPropertyAvailable(o => o.Subject));
-                Assert.IsNull(message.Subject);
+                Assert.IsNotNull(message.Subject);
                 Assert.IsTrue(message.IsPropertyAvailable(o => o.Summary));
                 Assert.IsNull(message.Summary);
             }
