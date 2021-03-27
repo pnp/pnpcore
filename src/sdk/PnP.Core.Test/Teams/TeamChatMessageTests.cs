@@ -696,6 +696,120 @@ namespace PnP.Core.Test.Teams
         }
 
         [TestMethod]
+        public void AddChatMessageBatchOptionsTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            {
+                var team = context.Team.GetBatch(o => o.Channels);
+                context.Execute();
+                Assert.IsTrue(team.Result.Channels.Length > 0);
+
+                var channelQuery = team.Result.Channels.FirstOrDefault(i => i.DisplayName == "General");
+                Assert.IsNotNull(channelQuery);
+
+                var channel = channelQuery.GetBatch(o => o.Messages);
+                context.Execute();
+                var chatMessages = channel.Result.Messages;
+
+                Assert.IsNotNull(chatMessages);
+
+                // assume as if there are no chat messages
+                // There appears to be no remove option yet in this feature - so add a recognisable message
+                var body = $"Hello, this is a unit test (AddChatMessageBatchTest) posting a message - PnP Rocks! - Woah...";
+
+                chatMessages.AddBatch(new ChatMessageOptions()
+                {
+                    Content = body,
+                    Subject = "ChatMessageBatchOptionsTest"
+                });
+                context.Execute();
+
+
+                channel = channelQuery.GetBatch(o => o.Messages);
+                context.Execute();
+                var updateMessages = channel.Result.Messages;
+
+                var message = updateMessages.AsRequested().FirstOrDefault(o => o.Body.Content == body);
+
+                Assert.IsFalse(message == default);
+                Assert.IsNotNull(message.CreatedDateTime);
+                // Depending on regional settings this check might fail
+                //Assert.AreEqual(message.DeletedDateTime, DateTime.MinValue);
+                Assert.IsNotNull(message.Etag);
+                Assert.IsNotNull(message.Importance);
+                Assert.IsNotNull(message.LastModifiedDateTime);
+                Assert.IsNotNull(message.Locale);
+                Assert.IsNotNull(message.MessageType);
+                Assert.IsNotNull(message.WebUrl);
+
+                Assert.IsTrue(message.IsPropertyAvailable(o => o.ReplyToId));
+                Assert.IsNull(message.ReplyToId);
+                Assert.IsTrue(message.IsPropertyAvailable(o => o.Subject));
+                Assert.IsNotNull(message.Subject);
+                Assert.IsTrue(message.IsPropertyAvailable(o => o.Summary));
+                Assert.IsNull(message.Summary);
+
+            }
+        }
+
+        [TestMethod]
+        public async Task AddChatMessageBatchOptionsAsyncTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            {
+                var team = await context.Team.GetBatchAsync(o => o.Channels);
+                await context.ExecuteAsync();
+                Assert.IsTrue(team.Result.Channels.Length > 0);
+
+                var channelQuery = team.Result.Channels.FirstOrDefault(i => i.DisplayName == "General");
+                Assert.IsNotNull(channelQuery);
+
+                var channel = await channelQuery.GetBatchAsync(o => o.Messages);
+                await context.ExecuteAsync();
+                var chatMessages = channel.Result.Messages;
+
+                Assert.IsNotNull(chatMessages);
+
+                // assume as if there are no chat messages
+                // There appears to be no remove option yet in this feature - so add a recognisable message
+                var body = $"Hello, this is a unit test (AddChatMessageBatchTest) posting a message - PnP Rocks! - Woah...";
+                await chatMessages.AddBatchAsync(new ChatMessageOptions()
+                {
+                    Content = body,
+                    Subject = "AddChatMessageBatchOptionsAsyncTest"
+                });
+                await context.ExecuteAsync();
+
+                channel = channelQuery.GetBatch(o => o.Messages);
+                await context.ExecuteAsync();
+                var updateMessages = channel.Result.Messages;
+
+                var message = updateMessages.AsRequested().FirstOrDefault(o => o.Body.Content == body);
+
+                Assert.IsFalse(message == default);
+                Assert.IsNotNull(message.CreatedDateTime);
+                // Depending on regional settings this check might fail
+                //Assert.AreEqual(message.DeletedDateTime, DateTime.MinValue);
+                Assert.IsNotNull(message.Etag);
+                Assert.IsNotNull(message.Importance);
+                Assert.IsNotNull(message.LastModifiedDateTime);
+                Assert.IsNotNull(message.Locale);
+                Assert.IsNotNull(message.MessageType);
+                Assert.IsNotNull(message.WebUrl);
+
+                Assert.IsTrue(message.IsPropertyAvailable(o => o.ReplyToId));
+                Assert.IsNull(message.ReplyToId);
+                Assert.IsTrue(message.IsPropertyAvailable(o => o.Subject));
+                Assert.IsNotNull(message.Subject);
+                Assert.IsTrue(message.IsPropertyAvailable(o => o.Summary));
+                Assert.IsNull(message.Summary);
+
+            }
+        }
+
+        [TestMethod]
         public void AddChatMessageSpecificBatchTest()
         {
             //TestCommon.Instance.Mocking = false;
