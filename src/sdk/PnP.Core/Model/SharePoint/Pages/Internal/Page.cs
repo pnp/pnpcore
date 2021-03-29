@@ -19,7 +19,7 @@ namespace PnP.Core.Model.SharePoint
         private string pageTitle;
         private string pageName;
         private static readonly Expression<Func<IList, object>>[] getPagesLibraryExpression = new Expression<Func<IList, object>>[] {p => p.Title, p => p.TemplateType, p => p.EnableFolderCreation,
-            p => p.EnableMinorVersions, p => p.EnableModeration, p => p.EnableVersioning, p => p.RootFolder, p => p.ListItemEntityTypeFullName, p => p.Fields };
+            p => p.EnableMinorVersions, p => p.EnableModeration, p => p.EnableVersioning, p => p.ForceCheckout, p => p.RootFolder, p => p.ListItemEntityTypeFullName, p => p.Fields };
 
         #region Construction
 
@@ -1952,19 +1952,11 @@ namespace PnP.Core.Model.SharePoint
             }
         }
 
-        /// <summary>
-        /// Publishes a client side page
-        /// </summary>
-        /// <param name="comment"></param>
         public void Publish(string comment=null)
         {
             PublishAsync(comment).GetAwaiter().GetResult();
         }
 
-        /// <summary>
-        /// Publishes a client side page
-        /// </summary>
-        /// /// <param name="comment"></param>
         public async Task PublishAsync(string comment = null)
         {
             if (PageListItem != null)
@@ -1972,22 +1964,27 @@ namespace PnP.Core.Model.SharePoint
                 var pageFile = await PnPContext.Web.GetFileByServerRelativeUrlAsync($"{PageListItem[PageConstants.FileDirRef]}/{PageListItem[PageConstants.FileLeafRef]}", f => f.ListId, f => f.Exists, f => f.CheckOutType).ConfigureAwait(false);
                 if (pageFile.Exists)
                 {
-                    var sitePagesLibrary = await PnPContext.Web.Lists.GetByIdAsync(pageFile.ListId,
-                        l => l.EnableMinorVersions,
-                        l => l.EnableModeration,
-                        l => l.ForceCheckout).ConfigureAwait(false);
+                    //var sitePagesLibrary = await PnPContext.Web.Lists.GetByIdAsync(pageFile.ListId,
+                    //    l => l.EnableMinorVersions,
+                    //    l => l.EnableModeration,
+                    //    l => l.ForceCheckout).ConfigureAwait(false);
+                    var sitePagesLibrary = await EnsurePagesLibraryAsync(PnPContext).ConfigureAwait(false);
 
                     if (pageFile.CheckOutType != CheckOutType.None)
-                    { //needs checkin
+                    { 
+                        // Needs checkin
                         await pageFile.CheckinAsync(comment, sitePagesLibrary.EnableMinorVersions ? CheckinType.MinorCheckIn : CheckinType.MajorCheckIn).ConfigureAwait(false);
                     }
+
                     if (sitePagesLibrary.EnableMinorVersions)
-                    { //Publishing
-                        await pageFile.PublishAsync().ConfigureAwait(false);
+                    { 
+                        // Publishing
+                        await pageFile.PublishAsync(comment).ConfigureAwait(false);
                     }
 
                     if (sitePagesLibrary.EnableModeration)
-                    { //Approval 
+                    { 
+                        // Approval 
                         await pageFile.ApproveAsync(comment).ConfigureAwait(false);
                     }
                 }

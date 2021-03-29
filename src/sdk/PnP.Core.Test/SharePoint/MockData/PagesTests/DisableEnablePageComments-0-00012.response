@@ -1,4 +1,4 @@
---batchresponse_110f5c8e-f97c-4a2a-b1f3-0297ea013c0d
+--batchresponse_2442dbe8-a784-4eb0-897d-f371aeeb0020
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
@@ -7,11 +7,11 @@ CONTENT-TYPE: application/json; charset=utf-8
 
 { "Row" : 
 [{
-"ID": "1445",
+"ID": "1485",
 "PermMask": "0x7ffffffffffbffff",
 "FSObjType": "0",
 "HTML_x0020_File_x0020_Type": "",
-"UniqueId": "{F52C5892-E970-488C-9262-FF7D06CDE00F}",
+"UniqueId": "{0AF6B3BD-50E6-4F3B-A7E6-93CAF8279AAD}",
 "ProgId": "",
 "NoExecute": "0",
 "ContentTypeId": "0x0101009D1CB255DA76424F860D91F20E6C411800BC66A1F7CEC63943B700A35FCBCF0164",
@@ -21,7 +21,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "FileRef.urlencoding": "\u002fsites\u002fprov-1\u002fSitePages\u002fPNP_SDK_TEST_DisableEnablePageComments.aspx",
 "FileRef.scriptencodeasurl": "\\u002fsites\\u002fprov-1\\u002fSitePages\\u002fPNP_SDK_TEST_DisableEnablePageComments.aspx",
 "_UIVersion": "1",
-"SMTotalSize": "4626",
+"SMTotalSize": "4627",
 "File_x0020_Size": "3522",
 "_CommentFlags": "1",
 "File_x0020_Type": "aspx",
@@ -63,6 +63,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "ItemChildCount": "0",
 "FolderChildCount": "0",
 "A2ODMountCount": "",
+"_StubFile": "0",
 "_ComplianceTag": "",
 "owshiddenversion": "2",
 "_SPTranslatedLanguages": "",
@@ -83,4 +84,4 @@ CONTENT-TYPE: application/json; charset=utf-8
 ,"CurrentFolderSpItemUrl" : ""
 
 }
---batchresponse_110f5c8e-f97c-4a2a-b1f3-0297ea013c0d--
+--batchresponse_2442dbe8-a784-4eb0-897d-f371aeeb0020--

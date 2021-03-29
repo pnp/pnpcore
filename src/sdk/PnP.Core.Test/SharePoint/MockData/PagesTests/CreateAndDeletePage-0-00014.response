@@ -1,4 +1,4 @@
---batchresponse_aad5a4b5-07ca-418f-be52-4226c3f4c932
+--batchresponse_9e6a7ef1-caad-48c1-9254-b099cf7c1d0c
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
@@ -16,4 +16,4 @@ CONTENT-TYPE: application/json; charset=utf-8
 ,"CurrentFolderSpItemUrl" : ""
 
 }
---batchresponse_aad5a4b5-07ca-418f-be52-4226c3f4c932--
+--batchresponse_9e6a7ef1-caad-48c1-9254-b099cf7c1d0c--

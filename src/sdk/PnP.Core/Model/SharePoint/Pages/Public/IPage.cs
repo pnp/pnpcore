@@ -304,11 +304,13 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// Publishes a client side page
         /// </summary>
+        /// <param name="comment">Publishing comment</param>
         public void Publish(string comment = null);
 
         /// <summary>
         /// Publishes a client side page
         /// </summary>
+        /// <param name="comment">Publishing comment</param>
         public Task PublishAsync(string comment = null);
 
         /// <summary>

@@ -1,9 +1,1 @@
---batchresponse_bed5c20a-d777-4a6c-a0f6-8f8cfeb2783f
-Content-Type: application/http
-Content-Transfer-Encoding: binary
-
-HTTP/1.1 200 OK
-CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
-
-{"d":{"results":[]}}
---batchresponse_bed5c20a-d777-4a6c-a0f6-8f8cfeb2783f--
+[{"SchemaVersion":"15.0.0.0","LibraryVersion":"16.0.21117.12005","ErrorInfo":null,"TraceCorrelationId":"4ef4b89f-9016-2000-9566-053b50ac4656"}]

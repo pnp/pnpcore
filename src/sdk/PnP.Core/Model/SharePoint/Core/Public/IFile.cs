@@ -413,38 +413,38 @@ namespace PnP.Core.Model.SharePoint
         #region Approve
 
         /// <summary>
-        /// Approves File
+        /// Approves the file.
         /// <param name="comment">The approval comment</param>
         /// </summary>
         Task ApproveAsync(string comment = null);
 
         /// <summary>
-        /// Approves File
+        /// Approves the file.
         /// <param name="comment">The approval comment</param>
         /// </summary>
         void Approve(string comment = null);
 
         /// <summary>
-        /// Approves File
+        /// Approves the file.
         /// <param name="comment">The approval comment</param>
         /// </summary>
         void ApproveBatch(string comment = null);
 
         /// <summary>
-        /// Approves File
+        /// Approves the file.
         /// <param name="comment">The approval comment</param>
         /// <param name="batch">The batch instance to use.</param>
         /// </summary>
         void ApproveBatch(Batch batch, string comment = null);
 
         /// <summary>
-        /// Approves File
+        /// Approves the file.
         /// <param name="comment">The approval comment</param>
         /// </summary>
         Task ApproveBatchAsync(string comment = null);
 
         /// <summary>
-        /// Approves File
+        /// Approves the file.
         /// <param name="comment">The approval comment</param>
         /// <param name="batch">The batch instance to use.</param>
         /// </summary>

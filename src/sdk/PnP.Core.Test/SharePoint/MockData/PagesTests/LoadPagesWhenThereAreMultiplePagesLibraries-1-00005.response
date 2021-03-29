@@ -1,4 +1,4 @@
---batchresponse_59a2be11-e48f-4ea5-810e-2c2549f2fdc1
+--batchresponse_53a0afac-25d2-4ee7-920b-64193bf273a6
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
@@ -11,17 +11,17 @@ CONTENT-TYPE: application/json; charset=utf-8
 "PermMask": "0x7ffffffffffbffff",
 "FSObjType": "0",
 "HTML_x0020_File_x0020_Type": "",
-"UniqueId": "{A9809A0C-25FD-4A09-92DF-BBD058EA4FDF}",
+"UniqueId": "{434689B0-3AC5-4D23-9B7E-6EC939D3C6AB}",
 "ProgId": "",
 "NoExecute": "0",
-"ContentTypeId": "0x0101009D1CB255DA76424F860D91F20E6C4118009EE2E214B38A1947BAD7989783A0D234",
+"ContentTypeId": "0x0101009D1CB255DA76424F860D91F20E6C41180037E7F7D730963E4B945F6DCFA4ACE4E3",
 "FileRef": "\u002fsites\u002fprov-1\u002fPageTestSubWeb\u002fSitePages\u002fHome.aspx",
 "FileRef.urlencode": "%2Fsites%2Fprov%2D1%2FPageTestSubWeb%2FSitePages%2FHome%2Easpx",
 "FileRef.urlencodeasurl": "\u002fsites\u002fprov-1\u002fPageTestSubWeb\u002fSitePages\u002fHome.aspx",
 "FileRef.urlencoding": "\u002fsites\u002fprov-1\u002fPageTestSubWeb\u002fSitePages\u002fHome.aspx",
 "FileRef.scriptencodeasurl": "\\u002fsites\\u002fprov-1\\u002fPageTestSubWeb\\u002fSitePages\\u002fHome.aspx",
 "_UIVersion": "512",
-"SMTotalSize": "1434",
+"SMTotalSize": "1437",
 "File_x0020_Size": "805",
 "_CommentFlags": "1",
 "File_x0020_Type": "aspx",
@@ -63,6 +63,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "ItemChildCount": "0",
 "FolderChildCount": "0",
 "A2ODMountCount": "",
+"_StubFile": "0",
 "_ComplianceTag": "",
 "owshiddenversion": "3",
 "_SPTranslatedLanguages": "",
@@ -83,4 +84,4 @@ CONTENT-TYPE: application/json; charset=utf-8
 ,"CurrentFolderSpItemUrl" : ""
 
 }
---batchresponse_59a2be11-e48f-4ea5-810e-2c2549f2fdc1--
+--batchresponse_53a0afac-25d2-4ee7-920b-64193bf273a6--
