@@ -772,6 +772,33 @@ namespace PnP.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Site is already registered as a hub site..
+        /// </summary>
+        internal static string Exception_Unsupported_SiteIsAlreadyHubSite {
+            get {
+                return ResourceManager.GetString("Exception_Unsupported_SiteIsAlreadyHubSite", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Site is already part of a hub site..
+        /// </summary>
+        internal static string Exception_Unsupported_SiteIsAlreadyPartOfAHubSite {
+            get {
+                return ResourceManager.GetString("Exception_Unsupported_SiteIsAlreadyPartOfAHubSite", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Site is not a hub site..
+        /// </summary>
+        internal static string Exception_Unsupported_SiteIsNotAHubSite {
+            get {
+                return ResourceManager.GetString("Exception_Unsupported_SiteIsNotAHubSite", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Skip on items&apos;s list is not supported. Please consider the usage of CAML query.
         /// </summary>
         internal static string Exception_Unsupported_SkipOnItems {

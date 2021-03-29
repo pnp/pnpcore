@@ -354,6 +354,15 @@
   <data name="Exception_Unsupported_SharePointUserOnGraph" xml:space="preserve">
     <value>You can't call AsSharePointUserAsync on a Graph user without the UserPrincipalProperty requested and populated</value>
   </data>
+  <data name="Exception_Unsupported_SiteIsAlreadyHubSite" xml:space="preserve">
+    <value>Site is already registered as a hub site.</value>
+  </data>
+  <data name="Exception_Unsupported_SiteIsAlreadyPartOfAHubSite" xml:space="preserve">
+    <value>Site is already part of a hub site.</value>
+  </data>
+  <data name="Exception_Unsupported_SiteIsNotAHubSite" xml:space="preserve">
+    <value>Site is not a hub site.</value>
+  </data>
   <data name="Exception_Unsupported_SkipOnItems" xml:space="preserve">
     <value>Skip on items's list is not supported. Please consider the usage of CAML query</value>
   </data>

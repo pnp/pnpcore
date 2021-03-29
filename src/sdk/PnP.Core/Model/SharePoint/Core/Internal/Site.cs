@@ -13,7 +13,6 @@ namespace PnP.Core.Model.SharePoint
     /// </summary>
     [SharePointType("SP.Site", Uri = "_api/Site")]
     [GraphType(Get = "sites/{hostname}:{serverrelativepath}")]
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Usage", "CA2243:Attribute string literals should parse correctly", Justification = "<Pending>")]
     internal partial class Site : BaseDataModel<ISite>, ISite
     {
         #region Construction
@@ -199,7 +198,7 @@ namespace PnP.Core.Model.SharePoint
             }
             else
             {
-                throw new ArgumentException($"Site is already registered as a hub site");
+                throw new ClientException(ErrorType.Unsupported, PnPCoreResources.Exception_Unsupported_SiteIsAlreadyHubSite);
             }
 
             return hubSite;
@@ -222,7 +221,7 @@ namespace PnP.Core.Model.SharePoint
             }
             else
             {
-                throw new ArgumentException($"Site is not a hub site");
+                throw new ClientException(ErrorType.Unsupported, PnPCoreResources.Exception_Unsupported_SiteIsNotAHubSite);
             }
 
             return result;
@@ -245,7 +244,7 @@ namespace PnP.Core.Model.SharePoint
             }
             else
             {
-                throw new ArgumentException($"Site already part of a hub site");
+                throw new ClientException(ErrorType.Unsupported, PnPCoreResources.Exception_Unsupported_SiteIsAlreadyPartOfAHubSite);
             }
 
             return result;

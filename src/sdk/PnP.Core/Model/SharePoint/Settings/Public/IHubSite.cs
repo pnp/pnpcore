@@ -12,82 +12,84 @@ namespace PnP.Core.Model.SharePoint
         #region New properties
 
         /// <summary>
-        /// To update...
+        /// The description of the HubSite.
         /// </summary>
         public string Description { get; set; }
 
         /// <summary>
-        /// To update...
+        /// Gets or sets if permission sync to associated sites is enabled or not.
         /// </summary>
         public bool EnablePermissionsSync { get; set; }
 
         /// <summary>
-        /// To update...
+        /// Gets or sets the list of Enforced ECTs on the HubSite
         /// </summary>
         public string EnforcedECTs { get; set; }
 
         /// <summary>
-        /// TBC
+        /// Gets or sets EnforcedECTs version
         /// </summary>
         public int EnforcedECTsVersion { get; set; }
 
         /// <summary>
-        /// To update...
+        /// Gets or sets if the HubSite nav includes the name as well as the logo.
         /// </summary>
         public bool HideNameInNavigation { get; set; }
 
         /// <summary>
-        /// To update...
+        /// The HubSite ID
         /// </summary>
         public Guid Id { get; set; }
 
         /// <summary>
-        /// To update...
+        /// The logo URL of the HubSite
         /// </summary>
         public string LogoUrl { get; set; }
 
         /// <summary>
-        /// To update...
+        /// The parent hub site id to which this hub connects
         /// </summary>
         public Guid ParentHubSiteId { get; set; }
 
         /// <summary>
-        /// Permissions Sync
+        /// Hub permissions sync tag
         /// </summary>
         public int PermissionsSyncTag { get; set; }
 
         /// <summary>
-        /// To update...
+        /// Gets or sets if the HubSite Join requires approval.
         /// </summary>
         public bool RequiresJoinApproval { get; set; }
 
         /// <summary>
-        /// To update...
+        /// The site design to be executed when the hub is joined.
         /// </summary>
         public Guid SiteDesignId { get; set; }
 
         /// <summary>
-        /// To update...
+        /// The Site Collection ID of the HubSite
         /// </summary>
         public Guid SiteId { get; set; }
 
         /// <summary>
-        /// To update...
+        /// The URL of the HubSite
         /// </summary>
         public string SiteUrl { get; set; }
 
         /// <summary>
-        /// To update...
+        /// List of security groups with access to join the HubSite.
+        /// Null if everyone has permission.
         /// </summary>
         public string Targets { get; set; }
 
         /// <summary>
-        /// To update...
+        /// The tenant instance ID in which the site hub is located.
+        /// Use empty guid for the default tenant instance.
         /// </summary>
         public Guid TenantInstanceId { get; set; }
 
         /// <summary>
-        /// To update...
+        /// Specifies the name of the HubSite.
         /// </summary>
         public string Title { get; set; }
 

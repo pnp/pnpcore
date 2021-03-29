@@ -14,9 +14,9 @@ namespace PnP.Core.Model.SharePoint
         #region Construction
         public HubSite()
         {
-            GetApiCallOverrideHandler = async (ApiCallRequest api) =>
+#pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
+            GetApiCallOverrideHandler = async (ApiCallRequest api) => {
 #pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
-            {
                 if (!PnPContext.Site.IsPropertyAvailable(p => p.HubSiteId) || PnPContext.Site.HubSiteId == Guid.Empty)
                 {
                     api.CancelRequest("There is no hubsite associated with this site");
@@ -28,7 +28,6 @@ namespace PnP.Core.Model.SharePoint
         #endregion
 
         #region Properties
-       
 
         public string Description { get => GetValue<string>(); set => SetValue(value); }
 

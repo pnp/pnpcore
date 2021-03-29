@@ -1,10 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PnP.Core.Model.SharePoint;
 using PnP.Core.Test.Utilities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace PnP.Core.Test.SharePoint
@@ -107,7 +103,7 @@ namespace PnP.Core.Test.SharePoint
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
+        [ExpectedException(typeof(ClientException))]
         public async Task UnRegisterHubSiteExceptionTest()
         {
             //TestCommon.Instance.Mocking = false;
@@ -142,7 +138,7 @@ namespace PnP.Core.Test.SharePoint
                 var result = await site.RegisterHubSiteAsync();
                 Assert.IsNotNull(result);
 
-                await Assert.ThrowsExceptionAsync<ArgumentException>( async () => {
+                await Assert.ThrowsExceptionAsync<ClientException>( async () => {
 
                     // Check this is updated
                     site = await context.Site.GetAsync(
