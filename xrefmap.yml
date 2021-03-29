@@ -10978,6 +10978,70 @@ references:
   commentId: T:PnP.Core.Model.SharePoint.IFile
   fullName: PnP.Core.Model.SharePoint.IFile
   nameWithType: IFile
+- uid: PnP.Core.Model.SharePoint.IFile.Approve(System.String)
+  name: Approve(String)
+  href: api/PnP.Core.Model.SharePoint.IFile.html#PnP_Core_Model_SharePoint_IFile_Approve_System_String_
+  commentId: M:PnP.Core.Model.SharePoint.IFile.Approve(System.String)
+  fullName: PnP.Core.Model.SharePoint.IFile.Approve(System.String)
+  nameWithType: IFile.Approve(String)
+- uid: PnP.Core.Model.SharePoint.IFile.Approve*
+  name: Approve
+  href: api/PnP.Core.Model.SharePoint.IFile.html#PnP_Core_Model_SharePoint_IFile_Approve_
+  commentId: Overload:PnP.Core.Model.SharePoint.IFile.Approve
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IFile.Approve
+  nameWithType: IFile.Approve
+- uid: PnP.Core.Model.SharePoint.IFile.ApproveAsync(System.String)
+  name: ApproveAsync(String)
+  href: api/PnP.Core.Model.SharePoint.IFile.html#PnP_Core_Model_SharePoint_IFile_ApproveAsync_System_String_
+  commentId: M:PnP.Core.Model.SharePoint.IFile.ApproveAsync(System.String)
+  fullName: PnP.Core.Model.SharePoint.IFile.ApproveAsync(System.String)
+  nameWithType: IFile.ApproveAsync(String)
+- uid: PnP.Core.Model.SharePoint.IFile.ApproveAsync*
+  name: ApproveAsync
+  href: api/PnP.Core.Model.SharePoint.IFile.html#PnP_Core_Model_SharePoint_IFile_ApproveAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.IFile.ApproveAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IFile.ApproveAsync
+  nameWithType: IFile.ApproveAsync
+- uid: PnP.Core.Model.SharePoint.IFile.ApproveBatch(PnP.Core.Services.Batch,System.String)
+  name: ApproveBatch(Batch, String)
+  href: api/PnP.Core.Model.SharePoint.IFile.html#PnP_Core_Model_SharePoint_IFile_ApproveBatch_PnP_Core_Services_Batch_System_String_
+  commentId: M:PnP.Core.Model.SharePoint.IFile.ApproveBatch(PnP.Core.Services.Batch,System.String)
+  fullName: PnP.Core.Model.SharePoint.IFile.ApproveBatch(PnP.Core.Services.Batch, System.String)
+  nameWithType: IFile.ApproveBatch(Batch, String)
+- uid: PnP.Core.Model.SharePoint.IFile.ApproveBatch(System.String)
+  name: ApproveBatch(String)
+  href: api/PnP.Core.Model.SharePoint.IFile.html#PnP_Core_Model_SharePoint_IFile_ApproveBatch_System_String_
+  commentId: M:PnP.Core.Model.SharePoint.IFile.ApproveBatch(System.String)
+  fullName: PnP.Core.Model.SharePoint.IFile.ApproveBatch(System.String)
+  nameWithType: IFile.ApproveBatch(String)
+- uid: PnP.Core.Model.SharePoint.IFile.ApproveBatch*
+  name: ApproveBatch
+  href: api/PnP.Core.Model.SharePoint.IFile.html#PnP_Core_Model_SharePoint_IFile_ApproveBatch_
+  commentId: Overload:PnP.Core.Model.SharePoint.IFile.ApproveBatch
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IFile.ApproveBatch
+  nameWithType: IFile.ApproveBatch
+- uid: PnP.Core.Model.SharePoint.IFile.ApproveBatchAsync(PnP.Core.Services.Batch,System.String)
+  name: ApproveBatchAsync(Batch, String)
+  href: api/PnP.Core.Model.SharePoint.IFile.html#PnP_Core_Model_SharePoint_IFile_ApproveBatchAsync_PnP_Core_Services_Batch_System_String_
+  commentId: M:PnP.Core.Model.SharePoint.IFile.ApproveBatchAsync(PnP.Core.Services.Batch,System.String)
+  fullName: PnP.Core.Model.SharePoint.IFile.ApproveBatchAsync(PnP.Core.Services.Batch, System.String)
+  nameWithType: IFile.ApproveBatchAsync(Batch, String)
+- uid: PnP.Core.Model.SharePoint.IFile.ApproveBatchAsync(System.String)
+  name: ApproveBatchAsync(String)
+  href: api/PnP.Core.Model.SharePoint.IFile.html#PnP_Core_Model_SharePoint_IFile_ApproveBatchAsync_System_String_
+  commentId: M:PnP.Core.Model.SharePoint.IFile.ApproveBatchAsync(System.String)
+  fullName: PnP.Core.Model.SharePoint.IFile.ApproveBatchAsync(System.String)
+  nameWithType: IFile.ApproveBatchAsync(String)
+- uid: PnP.Core.Model.SharePoint.IFile.ApproveBatchAsync*
+  name: ApproveBatchAsync
+  href: api/PnP.Core.Model.SharePoint.IFile.html#PnP_Core_Model_SharePoint_IFile_ApproveBatchAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.IFile.ApproveBatchAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IFile.ApproveBatchAsync
+  nameWithType: IFile.ApproveBatchAsync
 - uid: PnP.Core.Model.SharePoint.IFile.Author
   name: Author
   href: api/PnP.Core.Model.SharePoint.IFile.html#PnP_Core_Model_SharePoint_IFile_Author
@@ -16322,12 +16386,12 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IPage.PromoteAsNewsArticleAsync
   nameWithType: IPage.PromoteAsNewsArticleAsync
-- uid: PnP.Core.Model.SharePoint.IPage.Publish
-  name: Publish()
-  href: api/PnP.Core.Model.SharePoint.IPage.html#PnP_Core_Model_SharePoint_IPage_Publish
-  commentId: M:PnP.Core.Model.SharePoint.IPage.Publish
-  fullName: PnP.Core.Model.SharePoint.IPage.Publish()
-  nameWithType: IPage.Publish()
+- uid: PnP.Core.Model.SharePoint.IPage.Publish(System.String)
+  name: Publish(String)
+  href: api/PnP.Core.Model.SharePoint.IPage.html#PnP_Core_Model_SharePoint_IPage_Publish_System_String_
+  commentId: M:PnP.Core.Model.SharePoint.IPage.Publish(System.String)
+  fullName: PnP.Core.Model.SharePoint.IPage.Publish(System.String)
+  nameWithType: IPage.Publish(String)
 - uid: PnP.Core.Model.SharePoint.IPage.Publish*
   name: Publish
   href: api/PnP.Core.Model.SharePoint.IPage.html#PnP_Core_Model_SharePoint_IPage_Publish_
@@ -16335,12 +16399,12 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IPage.Publish
   nameWithType: IPage.Publish
-- uid: PnP.Core.Model.SharePoint.IPage.PublishAsync
-  name: PublishAsync()
-  href: api/PnP.Core.Model.SharePoint.IPage.html#PnP_Core_Model_SharePoint_IPage_PublishAsync
-  commentId: M:PnP.Core.Model.SharePoint.IPage.PublishAsync
-  fullName: PnP.Core.Model.SharePoint.IPage.PublishAsync()
-  nameWithType: IPage.PublishAsync()
+- uid: PnP.Core.Model.SharePoint.IPage.PublishAsync(System.String)
+  name: PublishAsync(String)
+  href: api/PnP.Core.Model.SharePoint.IPage.html#PnP_Core_Model_SharePoint_IPage_PublishAsync_System_String_
+  commentId: M:PnP.Core.Model.SharePoint.IPage.PublishAsync(System.String)
+  fullName: PnP.Core.Model.SharePoint.IPage.PublishAsync(System.String)
+  nameWithType: IPage.PublishAsync(String)
 - uid: PnP.Core.Model.SharePoint.IPage.PublishAsync*
   name: PublishAsync
   href: api/PnP.Core.Model.SharePoint.IPage.html#PnP_Core_Model_SharePoint_IPage_PublishAsync_
