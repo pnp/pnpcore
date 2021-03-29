@@ -1,0 +1,9 @@
+--batchresponse_6276c541-f9fc-486e-827b-62687c94dcf5
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+HTTP/1.1 200 OK
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+
+{"d":{"results":[{"__metadata":{"id":"https://devzuc.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/Lists(guid'94ee6e2b-2a88-406a-8530-9afcac37e688')","uri":"https://devzuc.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/Lists(guid'94ee6e2b-2a88-406a-8530-9afcac37e688')","etag":"\"44\"","type":"SP.List"},"BaseTemplate":119,"EnableFolderCreation":false,"EnableMinorVersions":true,"EnableModeration":true,"EnableVersioning":true,"ForceCheckout":true,"Id":"94ee6e2b-2a88-406a-8530-9afcac37e688","MajorVersionLimit":500,"MajorWithMinorVersionsLimit":0,"Title":"Site Pages"}]}}
+--batchresponse_6276c541-f9fc-486e-827b-62687c94dcf5--

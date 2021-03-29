@@ -410,6 +410,48 @@ namespace PnP.Core.Model.SharePoint
         void CheckinBatch(Batch batch, string comment = null, CheckinType checkinType = CheckinType.MinorCheckIn);
         #endregion
 
+        #region Approve
+
+        /// <summary>
+        /// Approves File
+        /// <param name="comment">The approval comment</param>
+        /// </summary>
+        Task ApproveAsync(string comment = null);
+
+        /// <summary>
+        /// Approves File
+        /// <param name="comment">The approval comment</param>
+        /// </summary>
+        void Approve(string comment = null);
+
+        /// <summary>
+        /// Approves File
+        /// <param name="comment">The approval comment</param>
+        /// </summary>
+        void ApproveBatch(string comment = null);
+
+        /// <summary>
+        /// Approves File
+        /// <param name="comment">The approval comment</param>
+        /// <param name="batch">The batch instance to use.</param>
+        /// </summary>
+        void ApproveBatch(Batch batch, string comment = null);
+
+        /// <summary>
+        /// Approves File
+        /// <param name="comment">The approval comment</param>
+        /// </summary>
+        Task ApproveBatchAsync(string comment = null);
+
+        /// <summary>
+        /// Approves File
+        /// <param name="comment">The approval comment</param>
+        /// <param name="batch">The batch instance to use.</param>
+        /// </summary>
+        Task ApproveBatchAsync(Batch batch, string comment = null);
+
+        #endregion
+
         #region CopyTo
         /// <summary>
         /// Copies a file to the destination URL.

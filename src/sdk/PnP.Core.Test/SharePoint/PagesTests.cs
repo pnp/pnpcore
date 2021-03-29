@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace PnP.Core.Test.SharePoint
@@ -1702,6 +1703,305 @@ namespace PnP.Core.Test.SharePoint
 
                 // delete the page
                 await page.DeleteAsync();
+            }
+        }
+
+        [TestMethod]
+        public async Task PublishPage_NoMinorVersion()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var libraries = await context.Web.Lists.QueryProperties(new Expression<Func<IList, object>>[] { p => p.Title, p => p.TemplateType, p => p.EnableFolderCreation,
+                        p => p.EnableMinorVersions, p => p.EnableModeration, p => p.EnableVersioning,p=>p.ForceCheckout, p => p.MaxVersionLimit, p => p.MinorVersionLimit })
+                                                       .Where(p => p.TemplateType == ListTemplateType.WebPageLibrary)
+                                                       .ToListAsync()
+                                                       .ConfigureAwait(false);
+                if(libraries.Count == 1)
+                {
+                    //configure PAges Library for Testcase
+                    IList pagesLibrary = libraries.First();
+                    bool initialEnableVersioning = pagesLibrary.EnableVersioning;
+                    bool initialEnableMinorVersions = pagesLibrary.EnableMinorVersions;
+                    bool initialEnableModeration = pagesLibrary.EnableModeration;
+                    bool initialForceCheckout = pagesLibrary.ForceCheckout;
+                    int initialMaxVersionLimit = pagesLibrary.MaxVersionLimit;
+                    int initialMinorVersionLimit = pagesLibrary.MinorVersionLimit;
+                    pagesLibrary.EnableVersioning = true;
+                    pagesLibrary.EnableMinorVersions = false;
+                    pagesLibrary.EnableModeration = false;
+                    pagesLibrary.ForceCheckout = false;
+                    await pagesLibrary.UpdateAsync();
+
+                    var page = await context.Web.NewPageAsync();
+                    string pageName = TestCommon.GetPnPSdkTestAssetName("PublishPage.aspx");
+
+                    // A simple section and text control to the page                
+                    page.AddSection(CanvasSectionTemplate.OneColumn, 1);
+                    page.AddControl(page.NewTextPart("PnP"), page.Sections[0].Columns[0]);
+
+                    // Save the page
+                    await page.SaveAsync(pageName);
+
+                    var pageFile = await page.GetPageFileAsync(p => p.Level);
+                    //as we have no MinorVersions it should be Published
+                    Assert.IsTrue(pageFile.Level == PublishedStatus.Published);
+                    
+                    //call publish again should not fail
+                    await page.PublishAsync();
+
+                    // load page again
+                    var pages = await context.Web.GetPagesAsync(pageName);
+                    Assert.IsTrue(pages.Count == 1);
+                    page = pages.AsEnumerable().First();
+
+                    pageFile = await page.GetPageFileAsync(p => p.Level);
+                    Assert.IsTrue(pageFile.Level == PublishedStatus.Published);
+
+                    // delete the page
+                    await page.DeleteAsync();
+
+                    //revert SitePages Library settings
+                    if (initialEnableVersioning)
+                        pagesLibrary.MaxVersionLimit = initialMaxVersionLimit;
+                    if (initialEnableMinorVersions)
+                        pagesLibrary.MinorVersionLimit = initialMinorVersionLimit;
+                    pagesLibrary.EnableVersioning = initialEnableVersioning;
+                    pagesLibrary.EnableMinorVersions = initialEnableMinorVersions;
+                    pagesLibrary.EnableModeration = initialEnableModeration;
+                    pagesLibrary.ForceCheckout = initialForceCheckout;
+                    await pagesLibrary.UpdateAsync();
+                }
+
+            }
+        }
+
+        [TestMethod]
+        public async Task PublishPage_ForceCheckout_NoMinorVersion()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var libraries = await context.Web.Lists.QueryProperties(new Expression<Func<IList, object>>[] { p => p.Title, p => p.TemplateType, p => p.EnableFolderCreation,
+                        p => p.EnableMinorVersions, p => p.EnableModeration, p => p.EnableVersioning,p=>p.ForceCheckout, p => p.MaxVersionLimit, p => p.MinorVersionLimit })
+                                                       .Where(p => p.TemplateType == ListTemplateType.WebPageLibrary)
+                                                       .ToListAsync()
+                                                       .ConfigureAwait(false);
+                if (libraries.Count == 1)
+                {
+                    //configure PAges Library for Testcase
+                    IList pagesLibrary = libraries.First();
+                    bool initialEnableVersioning = pagesLibrary.EnableVersioning;
+                    bool initialEnableMinorVersions = pagesLibrary.EnableMinorVersions;
+                    bool initialEnableModeration = pagesLibrary.EnableModeration;
+                    bool initialForceCheckout = pagesLibrary.ForceCheckout;
+                    int initialMaxVersionLimit = pagesLibrary.MaxVersionLimit;
+                    int initialMinorVersionLimit = pagesLibrary.MinorVersionLimit;
+                    pagesLibrary.EnableVersioning = true;
+                    pagesLibrary.EnableMinorVersions = false;
+                    pagesLibrary.EnableModeration = false;
+                    pagesLibrary.ForceCheckout = true;
+                    await pagesLibrary.UpdateAsync();
+
+                    var page = await context.Web.NewPageAsync();
+                    string pageName = TestCommon.GetPnPSdkTestAssetName("PublishPage.aspx");
+
+                    // A simple section and text control to the page                
+                    page.AddSection(CanvasSectionTemplate.OneColumn, 1);
+                    page.AddControl(page.NewTextPart("PnP"), page.Sections[0].Columns[0]);
+
+                    // Save the page
+                    await page.SaveAsync(pageName);
+
+                    var pageFile = await page.GetPageFileAsync(p => p.Level, p=>p.CheckOutType);
+                    Assert.AreNotEqual(CheckOutType.None, pageFile.CheckOutType);
+                    //as we have no MinorVersions but ForceCheckout it should not be Published
+                    Assert.IsTrue(pageFile.Level != PublishedStatus.Published);
+
+                    //call publish again should not fail
+                    await page.PublishAsync("TEST CHECK IN");
+
+                    // load page again
+                    var pages = await context.Web.GetPagesAsync(pageName);
+                    Assert.IsTrue(pages.Count == 1);
+                    page = pages.AsEnumerable().First();
+
+                    pageFile = await page.GetPageFileAsync(p => p.Level, p => p.CheckOutType, p => p.CheckInComment);
+                    Assert.AreEqual(CheckOutType.None, pageFile.CheckOutType);
+                    Assert.IsTrue(pageFile.Level == PublishedStatus.Published);
+                    Assert.AreEqual("TEST CHECK IN", pageFile.CheckInComment);
+
+                    // delete the page
+                    await page.DeleteAsync();
+
+                    //revert SitePages Library settings
+                    if (initialEnableVersioning)
+                        pagesLibrary.MaxVersionLimit = initialMaxVersionLimit;
+                    if (initialEnableMinorVersions)
+                        pagesLibrary.MinorVersionLimit = initialMinorVersionLimit;
+                    pagesLibrary.EnableVersioning = initialEnableVersioning;
+                    pagesLibrary.EnableMinorVersions = initialEnableMinorVersions;
+                    pagesLibrary.EnableModeration = initialEnableModeration;
+                    pagesLibrary.ForceCheckout = initialForceCheckout;
+                    await pagesLibrary.UpdateAsync();
+                }
+
+            }
+        }
+
+        [TestMethod]
+        public async Task PublishPage_ForceCheckout_EnabledModeration_NoMinorVersion()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var libraries = await context.Web.Lists.QueryProperties(new Expression<Func<IList, object>>[] { p => p.Title, p => p.TemplateType, p => p.EnableFolderCreation,
+                        p => p.EnableMinorVersions, p => p.EnableModeration, p => p.EnableVersioning,p=>p.ForceCheckout, p => p.MaxVersionLimit, p => p.MinorVersionLimit })
+                                                       .Where(p => p.TemplateType == ListTemplateType.WebPageLibrary)
+                                                       .ToListAsync()
+                                                       .ConfigureAwait(false);
+                if (libraries.Count == 1)
+                {
+                    //configure PAges Library for Testcase
+                    IList pagesLibrary = libraries.First();
+                    bool initialEnableVersioning = pagesLibrary.EnableVersioning;
+                    bool initialEnableMinorVersions = pagesLibrary.EnableMinorVersions;
+                    bool initialEnableModeration = pagesLibrary.EnableModeration;
+                    bool initialForceCheckout = pagesLibrary.ForceCheckout;
+                    int initialMaxVersionLimit = pagesLibrary.MaxVersionLimit;
+                    int initialMinorVersionLimit = pagesLibrary.MinorVersionLimit;
+                    pagesLibrary.EnableVersioning = true;
+                    pagesLibrary.EnableMinorVersions = false;
+                    pagesLibrary.EnableModeration = true;
+                    pagesLibrary.ForceCheckout = true;
+                    await pagesLibrary.UpdateAsync();
+
+                    var page = await context.Web.NewPageAsync();
+                    string pageName = TestCommon.GetPnPSdkTestAssetName("PublishPage.aspx");
+
+                    // A simple section and text control to the page                
+                    page.AddSection(CanvasSectionTemplate.OneColumn, 1);
+                    page.AddControl(page.NewTextPart("PnP"), page.Sections[0].Columns[0]);
+
+                    // Save the page
+                    await page.SaveAsync(pageName);
+
+                    var pageFile = await page.GetPageFileAsync(p => p.Level, p => p.CheckOutType, p => p.ListItemAllFields);
+                    Assert.AreNotEqual(CheckOutType.None, pageFile.CheckOutType);
+                    //as we have no MinorVersions but ForceCheckout it should not be Published
+                    Assert.IsTrue(pageFile.Level != PublishedStatus.Published);
+                    //should not be approved
+                    Assert.AreNotEqual("0", pageFile.ListItemAllFields["OData__ModerationStatus"].ToString());
+
+                    //call publish again should not fail
+                    await page.PublishAsync("TEST CHECK IN AND APPROVE");
+
+                    // load page again
+                    var pages = await context.Web.GetPagesAsync(pageName);
+                    Assert.IsTrue(pages.Count == 1);
+                    page = pages.AsEnumerable().First();
+
+                    pageFile = await page.GetPageFileAsync(p => p.Level, p => p.CheckOutType, p => p.CheckInComment, p => p.ListItemAllFields);
+                    Assert.AreEqual(CheckOutType.None, pageFile.CheckOutType);
+                    Assert.IsTrue(pageFile.Level == PublishedStatus.Published);
+                    Assert.AreEqual("TEST CHECK IN AND APPROVE", pageFile.CheckInComment);
+                    Assert.AreEqual("0", pageFile.ListItemAllFields["OData__ModerationStatus"].ToString());
+                    Assert.AreEqual("TEST CHECK IN AND APPROVE", pageFile.ListItemAllFields["OData__ModerationComments"].ToString());
+
+                    // delete the page
+                    await page.DeleteAsync();
+
+                    //revert SitePages Library settings
+                    if (initialEnableVersioning)
+                        pagesLibrary.MaxVersionLimit = initialMaxVersionLimit;
+                    if (initialEnableMinorVersions)
+                        pagesLibrary.MinorVersionLimit = initialMinorVersionLimit;
+                    pagesLibrary.EnableVersioning = initialEnableVersioning;
+                    pagesLibrary.EnableMinorVersions = initialEnableMinorVersions;
+                    pagesLibrary.EnableModeration = initialEnableModeration;
+                    pagesLibrary.ForceCheckout = initialForceCheckout;
+                    await pagesLibrary.UpdateAsync();
+                }
+
+            }
+        }
+
+        [TestMethod]
+        public async Task PublishPage_MajorAndMinorVersion_ForceCheckout_EnabledModeration()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var libraries = await context.Web.Lists.QueryProperties(new Expression<Func<IList, object>>[] { p => p.Title, p => p.TemplateType, p => p.EnableFolderCreation,
+                        p => p.EnableMinorVersions, p => p.EnableModeration, p => p.EnableVersioning,p=>p.ForceCheckout, p => p.MaxVersionLimit, p => p.MinorVersionLimit })
+                                                       .Where(p => p.TemplateType == ListTemplateType.WebPageLibrary)
+                                                       .ToListAsync()
+                                                       .ConfigureAwait(false);
+                if (libraries.Count == 1)
+                {
+                    //configure PAges Library for Testcase
+                    IList pagesLibrary = libraries.First();
+                    bool initialEnableVersioning = pagesLibrary.EnableVersioning;
+                    bool initialEnableMinorVersions = pagesLibrary.EnableMinorVersions;
+                    bool initialEnableModeration = pagesLibrary.EnableModeration;
+                    bool initialForceCheckout = pagesLibrary.ForceCheckout;
+                    int initialMaxVersionLimit = pagesLibrary.MaxVersionLimit;
+                    int initialMinorVersionLimit = pagesLibrary.MinorVersionLimit;
+                    pagesLibrary.EnableVersioning = true;
+                    pagesLibrary.MaxVersionLimit = 500;
+                    pagesLibrary.EnableMinorVersions = true;
+                    pagesLibrary.MinorVersionLimit = 0;
+                    pagesLibrary.EnableModeration = true;
+                    pagesLibrary.ForceCheckout = true;
+                    await pagesLibrary.UpdateAsync();
+
+                    var page = await context.Web.NewPageAsync();
+                    string pageName = TestCommon.GetPnPSdkTestAssetName("PublishPage.aspx");
+
+                    // A simple section and text control to the page                
+                    page.AddSection(CanvasSectionTemplate.OneColumn, 1);
+                    page.AddControl(page.NewTextPart("PnP"), page.Sections[0].Columns[0]);
+
+                    // Save the page
+                    await page.SaveAsync(pageName);
+
+                    var pageFile = await page.GetPageFileAsync(p => p.Level, p => p.CheckOutType, p => p.ListItemAllFields);
+
+                    Assert.AreNotEqual(CheckOutType.None, pageFile.CheckOutType);
+                    //as we have no MinorVersions but ForceCheckout it should not be Published
+                    Assert.IsTrue(pageFile.Level != PublishedStatus.Published);
+                    //should not be approved
+                    Assert.AreNotEqual("0", pageFile.ListItemAllFields["OData__ModerationStatus"].ToString());
+
+                    //call publish again should not fail
+                    await page.PublishAsync("TEST CHECK IN AND APPROVE");
+
+                    // load page again
+                    var pages = await context.Web.GetPagesAsync(pageName);
+                    Assert.IsTrue(pages.Count == 1);
+                    page = pages.AsEnumerable().First();
+
+                    pageFile = await page.GetPageFileAsync(p => p.Level, p => p.CheckOutType, p => p.CheckInComment, p => p.ListItemAllFields);
+                    Assert.AreEqual(CheckOutType.None, pageFile.CheckOutType);
+                    Assert.IsTrue(pageFile.Level == PublishedStatus.Published);
+                    Assert.AreEqual("0", pageFile.ListItemAllFields["OData__ModerationStatus"].ToString());
+                    Assert.AreEqual("TEST CHECK IN AND APPROVE", pageFile.ListItemAllFields["OData__ModerationComments"].ToString());
+
+                    // delete the page
+                    await page.DeleteAsync();
+
+                    //revert SitePages Library settings
+                    if (initialEnableVersioning)
+                        pagesLibrary.MaxVersionLimit = initialMaxVersionLimit;
+                    if (initialEnableMinorVersions)
+                        pagesLibrary.MinorVersionLimit = initialMinorVersionLimit;
+                    pagesLibrary.EnableVersioning = initialEnableVersioning;
+                    pagesLibrary.EnableMinorVersions = initialEnableMinorVersions;
+                    pagesLibrary.EnableModeration = initialEnableModeration;
+                    pagesLibrary.ForceCheckout = initialForceCheckout;
+                    await pagesLibrary.UpdateAsync();
+                }
+
             }
         }
 

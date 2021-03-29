@@ -1955,20 +1955,42 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// Publishes a client side page
         /// </summary>
-        public void Publish()
+        /// <param name="comment"></param>
+        public void Publish(string comment=null)
         {
-            PublishAsync().GetAwaiter().GetResult();
+            PublishAsync(comment).GetAwaiter().GetResult();
         }
 
         /// <summary>
         /// Publishes a client side page
         /// </summary>
-        public async Task PublishAsync()
+        /// /// <param name="comment"></param>
+        public async Task PublishAsync(string comment = null)
         {
             if (PageListItem != null)
             {
-                var pageFile = await PnPContext.Web.GetFileByServerRelativeUrlAsync($"{PageListItem[PageConstants.FileDirRef]}/{PageListItem[PageConstants.FileLeafRef]}").ConfigureAwait(false);
-                await pageFile.PublishAsync().ConfigureAwait(false);
+                var pageFile = await PnPContext.Web.GetFileByServerRelativeUrlAsync($"{PageListItem[PageConstants.FileDirRef]}/{PageListItem[PageConstants.FileLeafRef]}", f => f.ListId, f => f.Exists, f => f.CheckOutType).ConfigureAwait(false);
+                if (pageFile.Exists)
+                {
+                    var sitePagesLibrary = await PnPContext.Web.Lists.GetByIdAsync(pageFile.ListId,
+                        l => l.EnableMinorVersions,
+                        l => l.EnableModeration,
+                        l => l.ForceCheckout).ConfigureAwait(false);
+
+                    if (pageFile.CheckOutType != CheckOutType.None)
+                    { //needs checkin
+                        await pageFile.CheckinAsync(comment, sitePagesLibrary.EnableMinorVersions ? CheckinType.MinorCheckIn : CheckinType.MajorCheckIn).ConfigureAwait(false);
+                    }
+                    if (sitePagesLibrary.EnableMinorVersions)
+                    { //Publishing
+                        await pageFile.PublishAsync().ConfigureAwait(false);
+                    }
+
+                    if (sitePagesLibrary.EnableModeration)
+                    { //Approval 
+                        await pageFile.ApproveAsync(comment).ConfigureAwait(false);
+                    }
+                }
             }
             else
             {

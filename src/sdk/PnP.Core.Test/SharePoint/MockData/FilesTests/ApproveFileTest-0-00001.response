@@ -1,0 +1,9 @@
+--batchresponse_d72d7db1-732f-4904-b867-a107b10ddc46
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+HTTP/1.1 200 OK
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+
+{"d":{"__metadata":{"id":"https://devzuc.sharepoint.com/sites/pnpcoresdktestgroup/_api/Site","uri":"https://devzuc.sharepoint.com/sites/pnpcoresdktestgroup/_api/Site","type":"SP.Site"},"GroupId":"833da5b0-b748-40aa-bb1d-ad5335222d44","Id":"4fa07814-3058-43cb-9118-3f90c5523c1a"}}
+--batchresponse_d72d7db1-732f-4904-b867-a107b10ddc46--

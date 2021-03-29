@@ -1,0 +1,9 @@
+--batchresponse_05da998e-58a6-4600-bb45-ec042ca43e8d
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+HTTP/1.1 200 OK
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+
+{"d":{"Approve":null}}
+--batchresponse_05da998e-58a6-4600-bb45-ec042ca43e8d--

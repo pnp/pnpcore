@@ -1,0 +1,10 @@
+--batchresponse_fc478490-e10e-466c-85c5-cccabc58402d
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+HTTP/1.1 204 No Content
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+ETAG: "45"
+
+
+--batchresponse_fc478490-e10e-466c-85c5-cccabc58402d--

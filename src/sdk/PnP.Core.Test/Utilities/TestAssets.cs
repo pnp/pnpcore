@@ -92,6 +92,7 @@ namespace PnP.Core.Test.Utilities
               [System.Runtime.CompilerServices.CallerMemberName] string testName = null,
               bool parentLibraryEnableVersioning = false,
               bool parentLibraryEnableMinorVersions = false,
+              bool parentLibraryApprove = false,
               Dictionary<string, object> documentMetadata = null,
               string contextConfig = null,
               [System.Runtime.CompilerServices.CallerFilePath] string sourceFilePath = null)
@@ -115,6 +116,7 @@ namespace PnP.Core.Test.Utilities
                     IList documentLibrary = await context.Web.Lists.AddAsync(parentLibraryName, ListTemplateType.DocumentLibrary);
                     documentLibrary.EnableVersioning = parentLibraryEnableVersioning;
                     documentLibrary.EnableMinorVersions = parentLibraryEnableMinorVersions;
+                    documentLibrary.EnableModeration = parentLibraryApprove;
                     await documentLibrary.UpdateAsync();
                     folder = await documentLibrary.RootFolder.GetAsync();
                 }
@@ -156,12 +158,13 @@ namespace PnP.Core.Test.Utilities
               [System.Runtime.CompilerServices.CallerMemberName] string testName = null,
               bool parentLibraryEnableVersioning = false,
               bool parentLibraryEnableMinorVersions = false,
+              bool parentLibraryApprove = false,
               Dictionary<string, object> documentMetadata = null,
               string contextConfig = null,
               [System.Runtime.CompilerServices.CallerFilePath] string sourceFilePath = null)
         {
             return await CreateTestDocumentAsync(contextId, parentLibraryName, fileName, testName,
-                parentLibraryEnableVersioning, parentLibraryEnableMinorVersions,
+                parentLibraryEnableVersioning, parentLibraryEnableMinorVersions, parentLibraryApprove,
                 documentMetadata, contextConfig, sourceFilePath).ConfigureAwait(false);
         }
 
