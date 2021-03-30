@@ -637,6 +637,141 @@ add it on a <a class="xref" href="PnP.Core.Model.SharePoint.IPage.html">IPage</a
       </tr>
       <tr>
         <td>
+          <p><a class="xref" href="PnP.Core.Model.SharePoint.ITerm.html">ITerm</a></p>
+          <p><p>Represents a term used in a term store. A term can be used to represent an object which can then be used as a metadata to tag conent. Multiple terms can be organized in a hierarchical manner within a set.</p>
+</p>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <p><a class="xref" href="PnP.Core.Model.SharePoint.ITermCollection.html">ITermCollection</a></p>
+          <p><p>Collection of terms</p>
+</p>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <p><a class="xref" href="PnP.Core.Model.SharePoint.ITermGroup.html">ITermGroup</a></p>
+          <p><p>Microsoft 365 Term group</p>
+</p>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <p><a class="xref" href="PnP.Core.Model.SharePoint.ITermGroupCollection.html">ITermGroupCollection</a></p>
+          <p><p>Collection of term groups</p>
+</p>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <p><a class="xref" href="PnP.Core.Model.SharePoint.ITermLocalizedDescription.html">ITermLocalizedDescription</a></p>
+          <p><p>Represents the localized name used in the term store, which identifies the name in the localized language.</p>
+</p>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <p><a class="xref" href="PnP.Core.Model.SharePoint.ITermLocalizedDescriptionCollection.html">ITermLocalizedDescriptionCollection</a></p>
+          <p><p>Collection of localized termset labels</p>
+</p>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <p><a class="xref" href="PnP.Core.Model.SharePoint.ITermLocalizedLabel.html">ITermLocalizedLabel</a></p>
+          <p><p>Represents the localized label used in the term store, which identifies the name in the localized language.</p>
+</p>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <p><a class="xref" href="PnP.Core.Model.SharePoint.ITermLocalizedLabelCollection.html">ITermLocalizedLabelCollection</a></p>
+          <p><p>Collection of localized termset labels</p>
+</p>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <p><a class="xref" href="PnP.Core.Model.SharePoint.ITermProperty.html">ITermProperty</a></p>
+          <p><p>Key/Value term property</p>
+</p>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <p><a class="xref" href="PnP.Core.Model.SharePoint.ITermPropertyCollection.html">ITermPropertyCollection</a></p>
+          <p><p>Collection of localized termset labels</p>
+</p>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <p><a class="xref" href="PnP.Core.Model.SharePoint.ITermRelation.html">ITermRelation</a></p>
+          <p><p>Represents the relationship between terms in a term store.Currently two types of relationships are supported: pin and reuse.</p>
+<p>In a pin relationship, a term can be pinned under a different term in a different term set.In a pinned relationship, new children to the term can only be added in the term set in which the term was created.Any change in the hierarchy under the term is reflected across the sets in which the term was pinned.</p>
+<p>The reuse relationship is similar to the pinned relationship except that changes to the reused term can be made from any hierarchy in which the term is reused.Also, a change in hierarchy made to the reused term does not get reflected in the other term sets in which the term is reused.</p>
+</p>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <p><a class="xref" href="PnP.Core.Model.SharePoint.ITermRelationCollection.html">ITermRelationCollection</a></p>
+          <p><p>Collection of terms</p>
+</p>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <p><a class="xref" href="PnP.Core.Model.SharePoint.ITermSet.html">ITermSet</a></p>
+          <p><p>Represents the set used in a term store. The set represents a unit which contains a collection of hierarchical terms. A group can contain multiple sets.</p>
+</p>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <p><a class="xref" href="PnP.Core.Model.SharePoint.ITermSetCollection.html">ITermSetCollection</a></p>
+          <p><p>Collection of term sets</p>
+</p>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <p><a class="xref" href="PnP.Core.Model.SharePoint.ITermSetLocalizedName.html">ITermSetLocalizedName</a></p>
+          <p><p>Represents the localized name used in the term store, which identifies the name in the localized language.</p>
+</p>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <p><a class="xref" href="PnP.Core.Model.SharePoint.ITermSetLocalizedNameCollection.html">ITermSetLocalizedNameCollection</a></p>
+          <p><p>Collection of localized termset labels</p>
+</p>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <p><a class="xref" href="PnP.Core.Model.SharePoint.ITermSetProperty.html">ITermSetProperty</a></p>
+          <p><p>Key/Value term set property</p>
+</p>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <p><a class="xref" href="PnP.Core.Model.SharePoint.ITermSetPropertyCollection.html">ITermSetPropertyCollection</a></p>
+          <p><p>Collection of localized termset labels</p>
+</p>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <p><a class="xref" href="PnP.Core.Model.SharePoint.ITermStore.html">ITermStore</a></p>
+          <p><p>Microsoft 365 Term store</p>
+</p>
+        </td>
+      </tr>
+      <tr>
+        <td>
           <p><a class="xref" href="PnP.Core.Model.SharePoint.ITimeZone.html">ITimeZone</a></p>
           <p><p>Public interface to define a TimeZone object</p>
 </p>
@@ -1018,6 +1153,20 @@ See <a href="https://docs.microsoft.com/en-us/sharepoint/dev/sp-add-ins/working-
         <td>
           <p><a class="xref" href="PnP.Core.Model.SharePoint.TemplateFileType.html">TemplateFileType</a></p>
           <p><p>Types of pages that can be created using the AddTemplateFile method</p>
+</p>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <p><a class="xref" href="PnP.Core.Model.SharePoint.TermGroupScope.html">TermGroupScope</a></p>
+          <p><p>Returns type of group. Possible values are 'global', 'system' and 'siteCollection'.</p>
+</p>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <p><a class="xref" href="PnP.Core.Model.SharePoint.TermRelationType.html">TermRelationType</a></p>
+          <p><p>Type of relationship between two terms</p>
 </p>
         </td>
       </tr>
