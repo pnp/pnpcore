@@ -1,5 +1,4 @@
-﻿/*
-namespace PnP.Core.Model.SharePoint
+﻿namespace PnP.Core.Model.SharePoint
 {
     /// <summary>
     /// Represents the relationship between terms in a term store.Currently two types of relationships are supported: pin and reuse.
@@ -9,7 +8,7 @@ namespace PnP.Core.Model.SharePoint
     /// The reuse relationship is similar to the pinned relationship except that changes to the reused term can be made from any hierarchy in which the term is reused.Also, a change in hierarchy made to the reused term does not get reflected in the other term sets in which the term is reused.
     /// </summary>
     [ConcreteType(typeof(TermRelation))]
-    public interface ITermRelation : IDataModel<ITermRelation>, IDataModelGet<ITermRelation>
+    public interface ITermRelation : IDataModel<ITermRelation>, IDataModelGet<ITermRelation>, IDataModelLoad<ITermRelation>, IQueryableDataModel
     {
         /// <summary>
         /// The Unique ID of the term relation.
@@ -38,4 +37,3 @@ namespace PnP.Core.Model.SharePoint
         public ITerm ToTerm { get; }
     }
 }
-*/

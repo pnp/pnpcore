@@ -1,5 +1,4 @@
-﻿/*
-namespace PnP.Core.Model.SharePoint
+﻿namespace PnP.Core.Model.SharePoint
 {
     /// <summary>
     /// Key/Value term set property
@@ -19,4 +18,3 @@ namespace PnP.Core.Model.SharePoint
 
     }
 }
-*/

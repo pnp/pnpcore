@@ -680,10 +680,10 @@ namespace PnP.Core.Model
                 throw new ArgumentNullException(nameof(context));
             }
 
-            IDataModelParent result = null;
+            IDataModelParent result;
 
             // If the parent is a collection
-            if (parent is IManageableCollection collectionParent)
+            if (parent is IManageableCollection)
             {
                 IDataModelParent collectionSuperParent = null;
 
@@ -725,7 +725,7 @@ namespace PnP.Core.Model
             var parentType = parent.GetType();
 
             // Create a new instance of Parent with the same data type as the original parent
-            var replicatedParent = (IDataModelParent)EntityManager.GetEntityConcreteInstance(parentType, null, context);
+            var replicatedParent = (IDataModelParent)GetEntityConcreteInstance(parentType, null, context);
 
             ReplicateKeyAndMetadata(parent, replicatedParent);
 
@@ -748,7 +748,7 @@ namespace PnP.Core.Model
             var collectionPropertyName = parent.GetType().Name.Replace("Collection", "s");
 
             // We create a new parent collection, but replicating all the properties from the other
-            var replicatedParentCollection = (IDataModelParent)EntityManager.GetEntityCollectionInstance(parent.GetType(), context, superParent, collectionPropertyName);
+            var replicatedParentCollection = (IDataModelParent)GetEntityCollectionInstance(parent.GetType(), context, superParent, collectionPropertyName);
 
             ReplicateKeyAndMetadata(parent, replicatedParentCollection);
 

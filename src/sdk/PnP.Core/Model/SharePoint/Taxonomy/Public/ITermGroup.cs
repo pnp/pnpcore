@@ -1,5 +1,4 @@
-﻿/*
-using System;
+﻿using System;
 
 namespace PnP.Core.Model.SharePoint
 {
@@ -7,7 +6,7 @@ namespace PnP.Core.Model.SharePoint
     /// Microsoft 365 Term group
     /// </summary>
     [ConcreteType(typeof(TermGroup))]
-    public interface ITermGroup : IDataModel<ITermGroup>, IDataModelGet<ITermGroup>, IDataModelUpdate, IDataModelDelete, IQueryableDataModel
+    public interface ITermGroup : IDataModel<ITermGroup>, IDataModelGet<ITermGroup>, IDataModelLoad<ITermGroup>, IDataModelUpdate, IDataModelDelete, IQueryableDataModel
     {
         /// <summary>
         /// The Unique ID of the Group.
@@ -40,4 +39,3 @@ namespace PnP.Core.Model.SharePoint
         public ITermSetCollection Sets { get; }
     }
 }
-*/

@@ -1,5 +1,5 @@
-﻿/*
-using System;
+﻿using System;
+using System.Threading.Tasks;
 
 namespace PnP.Core.Model.SharePoint
 {
@@ -7,7 +7,7 @@ namespace PnP.Core.Model.SharePoint
     /// Represents the set used in a term store. The set represents a unit which contains a collection of hierarchical terms. A group can contain multiple sets.
     /// </summary>
     [ConcreteType(typeof(TermSet))]
-    public interface ITermSet : IDataModel<ITermSet>, IDataModelGet<ITermSet>, IDataModelUpdate, IDataModelDelete, IQueryableDataModel
+    public interface ITermSet : IDataModel<ITermSet>, IDataModelGet<ITermSet>, IDataModelLoad<ITermSet>, IDataModelUpdate, IDataModelDelete, IQueryableDataModel
     {
         /// <summary>
         /// The Unique ID of the term set.
@@ -54,8 +54,14 @@ namespace PnP.Core.Model.SharePoint
         /// </summary>
         /// <param name="key">Property key</param>
         /// <param name="value">Property value</param>
+        public Task AddPropertyAsync(string key, string value);
+
+        /// <summary>
+        /// Adds a property to the term set's property collection. Call update to persist this change.
+        /// </summary>
+        /// <param name="key">Property key</param>
+        /// <param name="value">Property value</param>
         public void AddProperty(string key, string value);
 
     }
 }
-*/

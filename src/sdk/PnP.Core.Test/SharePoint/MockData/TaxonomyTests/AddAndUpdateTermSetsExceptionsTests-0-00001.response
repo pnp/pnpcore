@@ -1,1 +1,9 @@
-{"responses": [{"id": "1","status":201,"headers" : {"Location":"https://capadevtest.sharepoint.com/_api/v2.0/termStores('root')/groups('bafa3a46-31ab-4335-a7a1-3d54b4bed197')","Cache-Control":"no-cache","OData-Version":"4.0","Content-Type":"application/json;odata.metadata=minimal;odata.streaming=true;IEEE754Compatible=false;charset=utf-8"},"body":{"@odata.context":"https://graph.microsoft.com/beta/$metadata#termStore/groups/$entity","id":"bafa3a46-31ab-4335-a7a1-3d54b4bed197","description":"","displayName":"PnP-fd75f6a3-7b2a-4f76-9672-9f8a0f566c7a","createdDateTime":"2020-09-13T21:05:21.313Z","scope":"global"}}]}
+--batchresponse_a59dc831-9032-4aa9-84a3-a56f11497c41
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+HTTP/1.1 200 OK
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+
+{"d":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Site","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Site","type":"SP.Site"},"GroupId":"b32780e9-df70-4548-a735-4e7f055415a1","Id":"b56adf79-ff6a-4964-a63a-ff1fa23be9f8"}}
+--batchresponse_a59dc831-9032-4aa9-84a3-a56f11497c41--

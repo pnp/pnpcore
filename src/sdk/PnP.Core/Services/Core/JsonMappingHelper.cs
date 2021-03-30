@@ -793,7 +793,22 @@ namespace PnP.Core.Services
                                 contextAwarePnPChild.PnPContext = contextAwareObject.PnPContext;
 
                                 // Recursively map properties, call the method from the actual object as the object could have overriden it
-                                await ((IDataModelProcess)pnpChild).ProcessResponseAsync(new ApiResponse(apiResponse.ApiCall, childJson, apiResponse.BatchRequestId)).ConfigureAwait(false);
+                                ApiResponse modelResponse;
+                                if (modelReparented)
+                                {
+                                    // Clone the original API call so we can blank out the ReceivingProperty to avoid getting into an endless loop
+                                    var newApiCall = new ApiCall(apiResponse.ApiCall.Request, apiResponse.ApiCall.Type, apiResponse.ApiCall.JsonBody)
+                                    {
+                                        Type = apiResponse.ApiCall.Type,
+                                    };
+                                    modelResponse = new ApiResponse(newApiCall, childJson, apiResponse.BatchRequestId);
+                                }
+                                else
+                                {
+                                    modelResponse = new ApiResponse(apiResponse.ApiCall, childJson, apiResponse.BatchRequestId);
+                                }
+
+                                await ((IDataModelProcess)pnpChild).ProcessResponseAsync(/*new ApiResponse(apiResponse.ApiCall, childJson, apiResponse.BatchRequestId)*/ modelResponse).ConfigureAwait(false);
 
                                 // Check if we've marked a field to be the key field for the entities in this collection
                                 if (pnpChildIdProperty == null)
@@ -1289,7 +1304,7 @@ namespace PnP.Core.Services
                             //
                             // If so see if there's a results property and use that
 
-                            if (jsonElement.TryGetProperty("results", out JsonElement results))
+                            if (jsonElement.ValueKind == JsonValueKind.Object && jsonElement.TryGetProperty("results", out JsonElement results))
                             {
                                 jsonElement = results;
                             }

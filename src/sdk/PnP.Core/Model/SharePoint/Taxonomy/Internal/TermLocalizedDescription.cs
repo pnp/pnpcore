@@ -1,5 +1,4 @@
-﻿/*
-namespace PnP.Core.Model.SharePoint
+﻿namespace PnP.Core.Model.SharePoint
 {
     [GraphType]
     internal partial class TermLocalizedDescription : BaseDataModel<ITermLocalizedDescription>, ITermLocalizedDescription
@@ -14,4 +13,3 @@ namespace PnP.Core.Model.SharePoint
         #endregion
     }
 }
-*/

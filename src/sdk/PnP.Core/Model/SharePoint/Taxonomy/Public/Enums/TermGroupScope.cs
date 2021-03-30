@@ -1,5 +1,4 @@
-﻿/*
-namespace PnP.Core.Model.SharePoint
+﻿namespace PnP.Core.Model.SharePoint
 {
     /// <summary>
     /// Returns type of group. Possible values are 'global', 'system' and 'siteCollection'.
@@ -22,4 +21,3 @@ namespace PnP.Core.Model.SharePoint
         SiteCollection
     }
 }
-*/

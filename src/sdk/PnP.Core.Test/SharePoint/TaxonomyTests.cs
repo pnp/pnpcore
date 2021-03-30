@@ -1,5 +1,4 @@
-﻿/** IN COMMENTS WHILE THE ID PROP ON TERMSTORE IS MISSING IN GRAPH
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PnP.Core.Model;
 using PnP.Core.Model.SharePoint;
 using PnP.Core.QueryModel;
@@ -8,7 +7,6 @@ using PnP.Core.Test.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
 
 namespace PnP.Core.Test.SharePoint
@@ -23,10 +21,10 @@ namespace PnP.Core.Test.SharePoint
             if (!TestCommon.Instance.Mocking)
             {
                 newGroupName = $"PnP-{Guid.NewGuid()}";
-                Dictionary<string, string> properties = new Dictionary<string, string>
-                        {
-                            { "GroupName", newGroupName }
-                        };
+                Dictionary<string, string> properties = new()
+                {
+                    { "GroupName", newGroupName }
+                };
                 TestManager.SaveProperties(context, properties);
             }
             else
@@ -95,6 +93,18 @@ namespace PnP.Core.Test.SharePoint
                 var termStore = await context.TermStore.GetAsync(p => p.Groups);
                 Assert.IsTrue(termStore.Requested);
                 Assert.IsTrue(termStore.Groups.Length > 0);
+            }
+        }
+
+        [TestMethod]
+        public async Task LoadTermGroups()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                await context.TermStore.LoadAsync(p => p.Groups);
+                Assert.IsTrue(context.TermStore.Requested);
+                Assert.IsTrue(context.TermStore.Groups.Length > 0);
             }
         }
 
@@ -189,7 +199,7 @@ namespace PnP.Core.Test.SharePoint
                 // Extensions
 
                 Assert.ThrowsException<ArgumentNullException>(() => {
-                   termStoreUpdated.Groups.GetByName(string.Empty);
+                    termStoreUpdated.Groups.GetByName(string.Empty);
                 });
 
                 Assert.ThrowsException<ArgumentNullException>(() => {
@@ -199,26 +209,6 @@ namespace PnP.Core.Test.SharePoint
                 Assert.ThrowsException<ArgumentNullException>(() => {
                     termStoreUpdated.Groups.GetById(string.Empty);
                 });
-
-                //Assert.ThrowsException<ArgumentNullException>(() => {
-                //    ITermGroupCollection groups = null;
-                //    groups.GetByName(string.Empty);
-                //});
-
-                //Assert.ThrowsException<ArgumentNullException>(() => {
-                //    ITermGroupCollection groups = null;
-                //    groups.GetByName(null);
-                //});
-
-                //Assert.ThrowsException<ArgumentNullException>(() => {
-                //    ITermGroupCollection groups = null;
-                //    groups.GetById(string.Empty);
-                //});
-
-                //Assert.ThrowsException<ArgumentNullException>(() => {
-                //    ITermGroupCollection groups = null;
-                //    groups.GetById(null);
-                //});
 
                 // Delete the group again
                 await newGroup.DeleteAsync();
@@ -321,14 +311,14 @@ namespace PnP.Core.Test.SharePoint
                 {
                     var termStore2 = await context2.TermStore.GetAsync(p => p.Groups);
 
-                    var updatedGroup = termStore2.Groups.FirstOrDefault(p => p.Name == $"{newGroupName}2");
+                    var updatedGroup = termStore2.Groups.AsRequested().FirstOrDefault(p => p.Name == $"{newGroupName}2");
                     Assert.IsNotNull(updatedGroup);
                     Assert.IsTrue(updatedGroup.Id == newGroup.Id);
 
                     // Delete the updated group
                     await updatedGroup.DeleteAsync();
                 }
-                
+
             }
         }
 
@@ -346,7 +336,7 @@ namespace PnP.Core.Test.SharePoint
 
                 // Add new group
                 var newGroup = await termStore.Groups.AddAsync(newGroupName);
-                
+
                 using (var context2 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))
                 {
                     var groupLoadedViaLinq = await context2.TermStore.Groups.GetByIdAsync(newGroup.Id, p => p.Name);
@@ -380,34 +370,22 @@ namespace PnP.Core.Test.SharePoint
                     var pnpSet3 = await group.Sets.AddBatchAsync("PnPSet3", "Set description");
                     await context.ExecuteAsync();
 
-                    if (!TestCommon.Instance.Mocking)
-                    {
-                        Thread.Sleep(2000);
-                    }
-
                     using (var context2 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
                     {
-                        await context2.TermStore.GetAsync(p => p.Groups);
-                        var group2 = context2.TermStore.Groups.FirstOrDefault(p => p.Name == newGroupName);
+                        await context2.TermStore.LoadAsync(p => p.Groups);
+                        var group2 = context2.TermStore.Groups.AsRequested().FirstOrDefault(p => p.Name == newGroupName);
 
-                        await group2.GetAsync(p => p.Sets);
+                        await group2.LoadAsync(p => p.Sets);
 
                         Assert.IsTrue(group2.Sets.Requested);
-                        Assert.IsTrue(group2.Sets.Length == 3);                        
+                        Assert.IsTrue(group2.Sets.Length == 3);
 
                         // Delete termsets and term group in batch
-                        foreach(var set in group2.Sets)
+                        foreach (var set in group2.Sets.AsRequested())
                         {
                             await set.DeleteBatchAsync();
                         }
                         await context2.ExecuteAsync();
-
-                        // Add a delay for live testing...seems that immediately deleting the group after the termsets are deleted does 
-                        // not always work (getting error about deleting non empty term group)
-                        if (!TestCommon.Instance.Mocking)
-                        {
-                            Thread.Sleep(4000);
-                        }
 
                         // Note: deleting termsets and group together in a single batch is not guaranteed to work as 
                         // the order in which graph batch requests are executed in not guaranteed
@@ -445,11 +423,6 @@ namespace PnP.Core.Test.SharePoint
                 // Delete the termset
                 await termSet.DeleteAsync();
 
-                if (!TestCommon.Instance.Mocking)
-                {
-                    Thread.Sleep(4000);
-                }
-
                 // Delete the group again
                 await newGroup.DeleteAsync();
             }
@@ -477,30 +450,13 @@ namespace PnP.Core.Test.SharePoint
                 // Add term set
                 var termSet = await newGroup.Sets.AddAsync("PnPSet1", "Set description");
 
-                if (!TestCommon.Instance.Mocking)
-                {
-                    Thread.Sleep(2000);
-                }
-
                 // Update termset 
                 termSet.Description = "updated description";
                 (termSet.LocalizedNames as TermSetLocalizedNameCollection).Add(new TermSetLocalizedName() { LanguageTag = "nl-NL", Name = "Dutch name" });
                 await termSet.UpdateAsync();
 
-                if (!TestCommon.Instance.Mocking)
-                {
-                    Thread.Sleep(2000);
-                }
-
                 // Delete term set 
                 await termSet.DeleteAsync();
-
-                // Add a delay for live testing...seems that immediately deleting the group after the termsets are deleted does 
-                // not always work (getting error about deleting non empty term group)
-                if (!TestCommon.Instance.Mocking)
-                {
-                    Thread.Sleep(4000);
-                }
 
                 // Delete the group again
                 await newGroup.DeleteAsync();
@@ -530,49 +486,22 @@ namespace PnP.Core.Test.SharePoint
                 var termSet = await newGroup.Sets.AddBatchAsync("PnPSet1", "Set description");
                 await context.ExecuteAsync();
 
-                if (!TestCommon.Instance.Mocking)
-                {
-                    Thread.Sleep(2000);
-                }
-
                 var newBatch = context.NewBatch();
                 var termSet2 = await newGroup.Sets.AddBatchAsync(newBatch, "PnPSet2", "Set description");
                 await context.ExecuteAsync(newBatch);
 
-                if (!TestCommon.Instance.Mocking)
-                {
-                    Thread.Sleep(2000);
-                }
-
                 var termSet3 = newGroup.Sets.AddBatch("PnPSet3", "Set description");
                 await context.ExecuteAsync();
-
-                if (!TestCommon.Instance.Mocking)
-                {
-                    Thread.Sleep(2000);
-                }
 
                 var newBatch2 = context.NewBatch();
                 var termSet4 = await newGroup.Sets.AddBatchAsync(newBatch2, "PnPSet4", "Set description");
                 await context.ExecuteAsync(newBatch2);
-
-                if (!TestCommon.Instance.Mocking)
-                {
-                    Thread.Sleep(2000);
-                }
 
                 // Delete term set 
                 await termSet.DeleteAsync();
                 await termSet2.DeleteAsync();
                 await termSet3.DeleteAsync();
                 await termSet4.DeleteAsync();
-
-                // Add a delay for live testing...seems that immediately deleting the group after the termsets are deleted does 
-                // not always work (getting error about deleting non empty term group)
-                if (!TestCommon.Instance.Mocking)
-                {
-                    Thread.Sleep(10000);
-                }
 
                 // Delete the group again
                 await newGroup.DeleteAsync();
@@ -614,7 +543,6 @@ namespace PnP.Core.Test.SharePoint
             }
         }
 
-
         [TestMethod]
         public async Task AddAndUpdateTermSetProperties()
         {
@@ -633,19 +561,9 @@ namespace PnP.Core.Test.SharePoint
                 // Add term set
                 var termSet = await newGroup.Sets.AddAsync("PnPSet1", "Set description");
 
-                if (!TestCommon.Instance.Mocking)
-                {
-                    Thread.Sleep(2000);
-                }
-
                 // Update termset 
                 termSet.AddProperty("property1", "value1");
                 await termSet.UpdateAsync();
-
-                if (!TestCommon.Instance.Mocking)
-                {
-                    Thread.Sleep(2000);
-                }
 
                 using (var context2 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))
                 {
@@ -660,40 +578,17 @@ namespace PnP.Core.Test.SharePoint
                     Assert.IsTrue(termsetLoadedViaLinq2.IsPropertyAvailable(p => p.Properties));
                     Assert.IsTrue(termsetLoadedViaLinq2.Properties.FirstOrDefault(p => p.KeyField == "property1") != null);
                     
-                    if (!TestCommon.Instance.Mocking)
-                    {
-                        Thread.Sleep(10000);
-                    }
-                    
                     // test property update
                     termsetLoadedViaLinq2.AddProperty("property1", "value1-updated");
                     await termsetLoadedViaLinq2.UpdateAsync();
 
-                    if (!TestCommon.Instance.Mocking)
-                    {
-                        Thread.Sleep(10000);
-                    }
-
                     // test property delete
                     (termsetLoadedViaLinq2.Properties as TermSetPropertyCollection).Clear();
                     await termsetLoadedViaLinq2.UpdateAsync();
-
-                }
-
-                if (!TestCommon.Instance.Mocking)
-                {
-                    Thread.Sleep(2000);
                 }
 
                 // Delete term set 
                 await termSet.DeleteAsync();
-
-                // Add a delay for live testing...seems that immediately deleting the group after the termsets are deleted does 
-                // not always work (getting error about deleting non empty term group)
-                if (!TestCommon.Instance.Mocking)
-                {
-                    Thread.Sleep(4000);
-                }
 
                 // Delete the group again
                 await newGroup.DeleteAsync();
@@ -733,30 +628,30 @@ namespace PnP.Core.Test.SharePoint
                 using (var context2 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
                 {
                     // Use linq provider to get a group by name
-                    var group2 = await context2.TermStore.Groups.GetFirstOrDefaultAsync(p => p.Name == newGroupName);
+                    var group2 = await context2.TermStore.Groups.Where(p => p.Name == newGroupName).FirstOrDefaultAsync();
                     if (group2 != null)
                     {
                         var groupWithSets = await group2.GetAsync(p => p.Sets);
 
-                        var termSet2 = groupWithSets.Sets.FirstOrDefault(p => p.LocalizedNames.FirstOrDefault(p => p.Name == "PnPSet1") != null);
+                        var termSet2 = groupWithSets.Sets.AsRequested().FirstOrDefault(p => p.LocalizedNames.FirstOrDefault(p => p.Name == "PnPSet1") != null);
                         if (termSet2 != null)
                         {
                             // Load terms and parent group
-                            await termSet2.GetAsync(p => p.Terms);
+                            await termSet2.LoadAsync(p => p.Terms);
                             Assert.IsTrue(termSet2.Terms.Length > 0);
 
                             // Group is automatically assigned if the group was loaded before
                             Assert.IsTrue(termSet2.Group != null);
 
-                            foreach (var term in termSet2.Terms)
+                            foreach (var term in termSet2.Terms.AsRequested())
                             {
                                 // Term set is automatically assigned if the termset was loaded before
                                 Assert.IsTrue(term.Set != null);
 
                                 // Load the children of this term and set
-                                await term.GetAsync(p => p.Terms);
+                                await term.LoadAsync(p => p.Terms);
 
-                                foreach (var child in term.Terms)
+                                foreach (var child in term.Terms.AsRequested())
                                 {
                                     Assert.IsTrue(child.Requested);
                                     Assert.IsTrue((child.Labels as TermLocalizedLabelCollection).Count > 0);
@@ -777,13 +672,6 @@ namespace PnP.Core.Test.SharePoint
 
                 // Delete term set 
                 await termSet.DeleteAsync();
-
-                // Add a delay for live testing...seems that immediately deleting the group after the termsets are deleted does 
-                // not always work (getting error about deleting non empty term group)
-                if (!TestCommon.Instance.Mocking)
-                {
-                    Thread.Sleep(10000);
-                }
 
                 // Delete the group again
                 await group.DeleteAsync();
@@ -828,25 +716,25 @@ namespace PnP.Core.Test.SharePoint
                     {
                         var groupWithSets = group2.Get(p => p.Sets);
 
-                        var termSet2 = groupWithSets.Sets.FirstOrDefault(p => p.LocalizedNames.FirstOrDefault(p => p.Name == "PnPSet1") != null);
+                        var termSet2 = groupWithSets.Sets.AsRequested().FirstOrDefault(p => p.LocalizedNames.FirstOrDefault(p => p.Name == "PnPSet1") != null);
                         if (termSet2 != null)
                         {
                             // Load terms and parent group
-                            termSet2.Get(p => p.Terms);
+                            termSet2.Load(p => p.Terms);
                             Assert.IsTrue(termSet2.Terms.Length > 0);
 
                             // Group is automatically assigned if the group was loaded before
                             Assert.IsTrue(termSet2.Group != null);
 
-                            foreach (var term in termSet2.Terms)
+                            foreach (var term in termSet2.Terms.AsRequested())
                             {
                                 // Term set is automatically assigned if the termset was loaded before
                                 Assert.IsTrue(term.Set != null);
 
                                 // Load the children of this term and set
-                                term.Get(p => p.Terms);
+                                term.Load(p => p.Terms);
 
-                                foreach (var child in term.Terms)
+                                foreach (var child in term.Terms.AsRequested())
                                 {
                                     Assert.IsTrue(child.Requested);
                                     Assert.IsTrue((child.Labels as TermLocalizedLabelCollection).Count > 0);
@@ -867,13 +755,6 @@ namespace PnP.Core.Test.SharePoint
 
                 // Delete term set 
                 termSet.Delete();
-
-                // Add a delay for live testing...seems that immediately deleting the group after the termsets are deleted does 
-                // not always work (getting error about deleting non empty term group)
-                if (!TestCommon.Instance.Mocking)
-                {
-                    Thread.Sleep(4000);
-                }
 
                 // Delete the group again
                 group.Delete();
@@ -906,9 +787,7 @@ namespace PnP.Core.Test.SharePoint
                 newTerm.Update();
 
                 var newTerm2 = termSet.Terms.AddBatch( "T2", "Description in English");
-
                 await context.ExecuteAsync();
-
 
                 // add child term
                 var newChildTerm = newTerm.Terms.Add("T1.1", "English T1.1");
@@ -926,11 +805,11 @@ namespace PnP.Core.Test.SharePoint
                     {
                         var groupWithSets = group2.Get(p => p.Sets);
 
-                        var termSet2 = groupWithSets.Sets.FirstOrDefault(p => p.LocalizedNames.FirstOrDefault(p => p.Name == "PnPSet1") != null);
+                        var termSet2 = groupWithSets.Sets.AsRequested().FirstOrDefault(p => p.LocalizedNames.FirstOrDefault(p => p.Name == "PnPSet1") != null);
                         if (termSet2 != null)
                         {
                             // Load terms and parent group
-                            termSet2.Get(p => p.Terms, o=>o.Id);
+                            termSet2.Load(p => p.Terms, o=>o.Id);
                             Assert.IsTrue(termSet2.Terms.Length > 0);
 
                             // Group is automatically assigned if the group was loaded before
@@ -954,13 +833,6 @@ namespace PnP.Core.Test.SharePoint
 
                 // Delete term set 
                 termSet.Delete();
-
-                // Add a delay for live testing...seems that immediately deleting the group after the termsets are deleted does 
-                // not always work (getting error about deleting non empty term group)
-                if (!TestCommon.Instance.Mocking)
-                {
-                    Thread.Sleep(4000);
-                }
 
                 // Delete the group again
                 group.Delete();
@@ -995,13 +867,6 @@ namespace PnP.Core.Test.SharePoint
                 
                 // Delete term set 
                 termSet.Delete();
-
-                // Add a delay for live testing...seems that immediately deleting the group after the termsets are deleted does 
-                // not always work (getting error about deleting non empty term group)
-                if (!TestCommon.Instance.Mocking)
-                {
-                    Thread.Sleep(10000);
-                }
 
                 // Delete the group again
                 group.Delete();
@@ -1046,13 +911,6 @@ namespace PnP.Core.Test.SharePoint
                 // Delete term set 
                 await termSet.DeleteAsync();
 
-                // Add a delay for live testing...seems that immediately deleting the group after the termsets are deleted does 
-                // not always work (getting error about deleting non empty term group)
-                if (!TestCommon.Instance.Mocking)
-                {
-                    Thread.Sleep(4000);
-                }
-
                 // Delete the group again
                 await group.DeleteAsync();
 
@@ -1087,11 +945,6 @@ namespace PnP.Core.Test.SharePoint
                 newChildTerm.AddProperty("property2", "value2");
                 await newChildTerm.UpdateAsync();
 
-                if (!TestCommon.Instance.Mocking)
-                {
-                    Thread.Sleep(2000);
-                }
-
                 using (var context2 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
                 {
                     var groupLoadedViaLinq2 = await context2.TermStore.Groups.GetByNameAsync(newGroupName);
@@ -1125,22 +978,12 @@ namespace PnP.Core.Test.SharePoint
                     await childTermLoadedViaLinq2.UpdateBatchAsync();
                     await context2.ExecuteAsync();
 
-                    if (!TestCommon.Instance.Mocking)
-                    {
-                        Thread.Sleep(10000);
-                    }
-
                     // delete term properties
                     (termLoadedViaLinq2.Properties as TermPropertyCollection).Clear();
                     await termLoadedViaLinq2.UpdateBatchAsync();
                     (childTermLoadedViaLinq2.Properties as TermPropertyCollection).Clear();
                     await childTermLoadedViaLinq2.UpdateBatchAsync();
                     await context2.ExecuteAsync();
-
-                    if (!TestCommon.Instance.Mocking)
-                    {
-                        Thread.Sleep(10000);
-                    }
                 }
 
                 // delete term
@@ -1151,13 +994,6 @@ namespace PnP.Core.Test.SharePoint
 
                 // Delete term set 
                 await termSet.DeleteAsync();
-
-                // Add a delay for live testing...seems that immediately deleting the group after the termsets are deleted does 
-                // not always work (getting error about deleting non empty term group)
-                if (!TestCommon.Instance.Mocking)
-                {
-                    Thread.Sleep(6000);
-                }
 
                 // Delete the group again
                 await group.DeleteAsync();
@@ -1200,14 +1036,14 @@ namespace PnP.Core.Test.SharePoint
                     var groupLoadedViaLinq2 = await context2.TermStore.Groups.GetByNameAsync(newGroupName);
                     Assert.IsTrue(groupLoadedViaLinq2.Requested);
 
-                    await groupLoadedViaLinq2.GetAsync(p => p.Sets);
+                    await groupLoadedViaLinq2.LoadAsync(p => p.Sets);
 
-                    var termSet1Loaded = groupLoadedViaLinq2.Sets.FirstOrDefault(p => p.Id == termSet1.Id);
-                    var termSet2Loaded = groupLoadedViaLinq2.Sets.FirstOrDefault(p => p.Id == termSet2.Id);
+                    var termSet1Loaded = groupLoadedViaLinq2.Sets.AsRequested().FirstOrDefault(p => p.Id == termSet1.Id);
+                    var termSet2Loaded = groupLoadedViaLinq2.Sets.AsRequested().FirstOrDefault(p => p.Id == termSet2.Id);
 
                     // Load relations via termset
-                    await termSet1Loaded.GetBatchAsync(p => p.Relations, p => p.Terms);
-                    await termSet2Loaded.GetBatchAsync(p => p.Relations, p => p.Terms);
+                    await termSet1Loaded.LoadBatchAsync(p => p.Relations, p => p.Terms);
+                    await termSet2Loaded.LoadBatchAsync(p => p.Relations, p => p.Terms);
                     await context2.ExecuteAsync();
 
                     // termset1 does not have any relations
@@ -1219,63 +1055,51 @@ namespace PnP.Core.Test.SharePoint
                     Assert.IsTrue(termSet2Loaded.Requested);
                     Assert.IsTrue(termSet2Loaded.Relations.Requested);
                     Assert.IsTrue(termSet2Loaded.Relations.Length > 0);
-                    Assert.IsTrue(termSet2Loaded.Relations.First().Relationship == TermRelationType.Reuse);
-                    Assert.IsTrue(termSet2Loaded.Relations.First().ToTerm.Id == termAA.Id);
-                    Assert.IsTrue(termSet2Loaded.Relations.First().Set.Id == termSet2.Id);
+                    Assert.IsTrue(termSet2Loaded.Relations.AsRequested().First().Relationship == TermRelationType.Reuse);
+                    Assert.IsTrue(termSet2Loaded.Relations.AsRequested().First().ToTerm.Id == termAA.Id);
+                    Assert.IsTrue(termSet2Loaded.Relations.AsRequested().First().Set.Id == termSet2.Id);
 
-                    var termALoaded = termSet1Loaded.Terms.FirstOrDefault(p => p.Id == termA.Id);
-                    var termAALoaded = termSet1Loaded.Terms.FirstOrDefault(p => p.Id == termAA.Id);
-                    var termBLoaded = termSet2Loaded.Terms.FirstOrDefault(p => p.Id == termB.Id);
+                    var termALoaded = termSet1Loaded.Terms.AsRequested().FirstOrDefault(p => p.Id == termA.Id);
+                    var termAALoaded = termSet1Loaded.Terms.AsRequested().FirstOrDefault(p => p.Id == termAA.Id);
+                    var termBLoaded = termSet2Loaded.Terms.AsRequested().FirstOrDefault(p => p.Id == termB.Id);
 
                     // Load relations via term
-                    await termALoaded.GetBatchAsync(p => p.Relations);
-                    await termAALoaded.GetBatchAsync(p => p.Relations);
-                    await termBLoaded.GetBatchAsync(p => p.Relations);
+                    await termALoaded.LoadBatchAsync(p => p.Relations);
+                    await termAALoaded.LoadBatchAsync(p => p.Relations);
+                    await termBLoaded.LoadBatchAsync(p => p.Relations);
                     await context2.ExecuteAsync();
 
                     // termA was pinned to termB
                     Assert.IsTrue(termALoaded.Requested);
                     Assert.IsTrue(termALoaded.Relations.Requested);
                     Assert.IsTrue(termALoaded.Relations.Length > 0);
-                    Assert.IsTrue(termALoaded.Relations.First().Relationship == TermRelationType.Pin);
-                    Assert.IsTrue(termALoaded.Relations.First().ToTerm.Id == termA.Id);
-                    Assert.IsTrue(termALoaded.Relations.First().Set.Id == termSet2.Id);
-                    Assert.IsTrue(termALoaded.Relations.First().FromTerm.Id == termB.Id);
+                    Assert.IsTrue(termALoaded.Relations.AsRequested().First().Relationship == TermRelationType.Pin);
+                    Assert.IsTrue(termALoaded.Relations.AsRequested().First().ToTerm.Id == termA.Id);
+                    Assert.IsTrue(termALoaded.Relations.AsRequested().First().Set.Id == termSet2.Id);
+                    Assert.IsTrue(termALoaded.Relations.AsRequested().First().FromTerm.Id == termB.Id);
 
                     // TermAA was reused to termset2
                     Assert.IsTrue(termAALoaded.Requested);
                     Assert.IsTrue(termAALoaded.Relations.Requested);
                     Assert.IsTrue(termAALoaded.Relations.Length > 0);
-                    Assert.IsTrue(termAALoaded.Relations.First().Relationship == TermRelationType.Reuse);
-                    Assert.IsTrue(termAALoaded.Relations.First().ToTerm.Id == termAA.Id);
-                    Assert.IsTrue(termAALoaded.Relations.First().Set.Id == termSet2.Id);
+                    Assert.IsTrue(termAALoaded.Relations.AsRequested().First().Relationship == TermRelationType.Reuse);
+                    Assert.IsTrue(termAALoaded.Relations.AsRequested().First().ToTerm.Id == termAA.Id);
+                    Assert.IsTrue(termAALoaded.Relations.AsRequested().First().Set.Id == termSet2.Id);
 
                     // termB received termA as a pinned term
                     Assert.IsTrue(termBLoaded.Requested);
                     Assert.IsTrue(termBLoaded.Relations.Requested);
                     Assert.IsTrue(termBLoaded.Relations.Length > 0);
-                    Assert.IsTrue(termBLoaded.Relations.First().Relationship == TermRelationType.Pin);
-                    Assert.IsTrue(termBLoaded.Relations.First().ToTerm.Id == termA.Id);
-                    Assert.IsTrue(termBLoaded.Relations.First().Set.Id == termSet2.Id);
-                    Assert.IsTrue(termBLoaded.Relations.First().FromTerm.Id == termB.Id);
+                    Assert.IsTrue(termBLoaded.Relations.AsRequested().First().Relationship == TermRelationType.Pin);
+                    Assert.IsTrue(termBLoaded.Relations.AsRequested().First().ToTerm.Id == termA.Id);
+                    Assert.IsTrue(termBLoaded.Relations.AsRequested().First().Set.Id == termSet2.Id);
+                    Assert.IsTrue(termBLoaded.Relations.AsRequested().First().FromTerm.Id == termB.Id);
                 }
 
                 // Delete term sets, delete the term set reusing terms first to prevent deletion errors 
                 await termSet2.DeleteAsync();
 
-                if (!TestCommon.Instance.Mocking)
-                {
-                    Thread.Sleep(5000);
-                }
-
                 await termSet1.DeleteAsync();
-
-                // Add a delay for live testing...seems that immediately deleting the group after the termsets are deleted does 
-                // not always work (getting error about deleting non empty term group)
-                if (!TestCommon.Instance.Mocking)
-                {
-                    Thread.Sleep(10000);
-                }
 
                 // Delete the group again
                 await group.DeleteAsync();
@@ -1285,4 +1109,3 @@ namespace PnP.Core.Test.SharePoint
 
     }
 }
-*/

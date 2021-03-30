@@ -1,10 +1,10 @@
-﻿/*
-using PnP.Core.Services;
+﻿using PnP.Core.Services;
 using System;
 using System.Collections.Generic;
 using System.Dynamic;
 using System.Linq;
 using System.Text.Json;
+using System.Threading.Tasks;
 
 namespace PnP.Core.Model.SharePoint
 {
@@ -50,6 +50,29 @@ namespace PnP.Core.Model.SharePoint
 
                 return new ApiCall(apiCall, ApiType.GraphBeta, bodyContent);
             };
+
+            ExpandUpdatePayLoad = (payload) =>
+            {
+                List<ExpandoObject> propertiesToAdd = new List<ExpandoObject>();
+                foreach(var property in Properties)
+                {
+                    ExpandoObject propertyToAdd = new ExpandoObject();
+                    propertyToAdd.SetProperty("key", property.KeyField);
+                    propertyToAdd.SetProperty("value", property.Value);
+                    propertiesToAdd.Add(propertyToAdd);
+                }
+                payload.SetProperty("properties", propertiesToAdd.ToArray());
+
+                List<ExpandoObject> localizedNamesToAdd = new List<ExpandoObject>();
+                foreach (var property in LocalizedNames)
+                {
+                    ExpandoObject propertyToAdd = new ExpandoObject();
+                    propertyToAdd.SetProperty("name", property.Name);
+                    propertyToAdd.SetProperty("languageTag", property.LanguageTag);
+                    localizedNamesToAdd.Add(propertyToAdd);
+                }
+                payload.SetProperty("localizedNames", localizedNamesToAdd.ToArray());
+            };
         }
         #endregion
 
@@ -80,27 +103,7 @@ namespace PnP.Core.Model.SharePoint
 
                 // Seems there was no group available, so process the loaded group and assign it
                 return GetModelValue<ITermGroup>();
-                //if (!NavigationPropertyInstantiated())
-                //{
-                //    var termGroup = new TermGroup
-                //    {
-                //        PnPContext = this.PnPContext,
-                //        Parent = this,
-                //    };
-                //    SetValue(termGroup);
-                //    InstantiateNavigationProperty();
-                //}
-                //return GetValue<ITermGroup>();
             }
-            //set
-            //{
-            //    // Only set if there was no proper parent 
-            //    if (Parent == null || Parent.Parent != null)
-            //    {
-            //        InstantiateNavigationProperty();
-            //        SetValue(value);
-            //    }
-            //}
         }
 
         public ITermSetPropertyCollection Properties { get => GetModelCollectionValue<ITermSetPropertyCollection>(); }
@@ -113,6 +116,23 @@ namespace PnP.Core.Model.SharePoint
         #endregion
 
         #region Methods
+        public async Task AddPropertyAsync(string key, string value)
+        {
+            if (string.IsNullOrEmpty(key))
+            {
+                throw new ArgumentNullException(nameof(key));
+            }
+
+            if (value == null)
+            {
+                throw new ArgumentNullException(nameof(value));
+            }
+
+            await EnsurePropertiesAsync(p => p.Properties).ConfigureAwait(false);
+
+            CheckIfPropertyExistsAndAdd(key, value);
+        }
+
         public void AddProperty(string key, string value)
         {
             if (string.IsNullOrEmpty(key))
@@ -125,6 +145,13 @@ namespace PnP.Core.Model.SharePoint
                 throw new ArgumentNullException(nameof(value));
             }
 
+            EnsureProperties(p => p.Properties);
+
+            CheckIfPropertyExistsAndAdd(key, value);
+        }
+
+        private void CheckIfPropertyExistsAndAdd(string key, string value)
+        {
             var property = Properties.FirstOrDefault(p => p.KeyField == key);
             if (property != null)
             {
@@ -140,4 +167,3 @@ namespace PnP.Core.Model.SharePoint
         #endregion
     }
 }
-*/

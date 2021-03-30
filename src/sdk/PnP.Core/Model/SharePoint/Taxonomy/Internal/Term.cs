@@ -1,5 +1,4 @@
-﻿/*
-using PnP.Core.Services;
+﻿using PnP.Core.Services;
 using System;
 using System.Collections.Generic;
 using System.Dynamic;
@@ -69,6 +68,44 @@ namespace PnP.Core.Model.SharePoint
                 var apiCall = await ApiHelper.ParseApiRequestAsync(this, termApi).ConfigureAwait(false);
 
                 return new ApiCall(apiCall, ApiType.GraphBeta, bodyContent);
+            };
+
+            ExpandUpdatePayLoad = (payload) =>
+            {
+                List<ExpandoObject> propertiesToAdd = new List<ExpandoObject>();
+                foreach (var property in Properties)
+                {
+                    ExpandoObject propertyToAdd = new ExpandoObject();
+                    propertyToAdd.SetProperty("key", property.KeyField);
+                    propertyToAdd.SetProperty("value", property.Value);
+                    propertiesToAdd.Add(propertyToAdd);
+                }
+                payload.SetProperty("properties", propertiesToAdd.ToArray());
+
+                List<ExpandoObject> localizedLabelsToAdd = new List<ExpandoObject>();
+                foreach (var label in Labels)
+                {
+                    ExpandoObject labelToAdd = new ExpandoObject();
+                    labelToAdd.SetProperty("name", label.Name);
+                    labelToAdd.SetProperty("languageTag", label.LanguageTag);
+                    labelToAdd.SetProperty("isDefault", label.IsDefault);
+                    localizedLabelsToAdd.Add(labelToAdd);
+                }
+                payload.SetProperty("labels", localizedLabelsToAdd.ToArray());
+
+                if (IsPropertyAvailable(p => p.Descriptions) && (Descriptions as TermLocalizedDescriptionCollection).Count > 0)
+                {
+                    List<ExpandoObject> localizedDescriptionsToAdd = new List<ExpandoObject>();
+                    foreach (var localizedDescription in Descriptions)
+                    {
+                        ExpandoObject descriptionToAdd = new ExpandoObject();
+                        descriptionToAdd.SetProperty("description", localizedDescription.Description);
+                        descriptionToAdd.SetProperty("languageTag", localizedDescription.LanguageTag);
+                        localizedDescriptionsToAdd.Add(descriptionToAdd);
+                    }
+
+                    payload.SetProperty("descriptions", localizedDescriptionsToAdd.ToArray());
+                }
             };
 
             // Override update and delete calls to handle the flexible parent issue 
@@ -245,4 +282,3 @@ namespace PnP.Core.Model.SharePoint
         #endregion
     }
 }
-*/

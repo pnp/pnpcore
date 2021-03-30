@@ -1,11 +1,10 @@
-﻿/*
-using PnP.Core.Services;
+﻿using PnP.Core.Services;
 using System.Dynamic;
 using System.Text.Json;
 
 namespace PnP.Core.Model.SharePoint
 {
-    [GraphType(Uri = V, Beta = true)]
+    [GraphType(Uri = V, Beta = true, LinqGet = baseUri)]
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Usage", "CA2243:Attribute string literals should parse correctly", Justification = "<Pending>")]
     internal partial class TermRelation : BaseDataModel<ITermRelation>, ITermRelation
     {
@@ -75,4 +74,3 @@ namespace PnP.Core.Model.SharePoint
         #endregion
     }
 }
-*/

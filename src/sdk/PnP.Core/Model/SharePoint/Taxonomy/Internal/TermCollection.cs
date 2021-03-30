@@ -1,12 +1,19 @@
-﻿/*
+﻿using PnP.Core.QueryModel;
 using PnP.Core.Services;
 using System;
 using System.Threading.Tasks;
 
 namespace PnP.Core.Model.SharePoint
 {
-    internal partial class TermCollection : BaseDataModelCollection<ITerm>, ITermCollection
+    internal partial class TermCollection : QueryableDataModelCollection<ITerm>, ITermCollection
     {
+        public TermCollection(PnPContext context, IDataModelParent parent, string memberName = null)
+            : base(context, parent, memberName)
+        {
+            PnPContext = context;
+            Parent = parent;
+        }
+
         public async Task<ITerm> AddAsync(string name, string description = null)
         {
             if (string.IsNullOrEmpty(name))
@@ -74,12 +81,12 @@ namespace PnP.Core.Model.SharePoint
             // Create new term, but not yet add it to collection
             var term = CreateNew();
             // Request term from server and load it to the model
-            await (term as Term).GetByIdAsync(id, p => p.CreatedDateTime, p => p.Descriptions, p => p.Id,
+            return await (term as Term).GetByIdAsync(id, p => p.CreatedDateTime, p => p.Descriptions, p => p.Id,
                                                   p => p.Labels, p => p.LastModifiedDateTime, p => p.Properties).ConfigureAwait(false);
             // Add to collection or update collection if needed
-            AddOrUpdate(term, i => ((IDataModelWithKey)i).Key.Equals(term.Id));
+            // AddOrUpdate(term, i => ((IDataModelWithKey)i).Key.Equals(term.Id));
 
-            return term;
+            //return term;
         }
 
         public ITerm GetById(string id)
@@ -88,4 +95,3 @@ namespace PnP.Core.Model.SharePoint
         }
     }
 }
-*/
