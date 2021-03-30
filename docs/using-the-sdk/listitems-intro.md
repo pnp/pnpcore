@@ -68,7 +68,7 @@ await myList.LoadItemsByCamlQueryAsync(new CamlQueryOptions()
 });
 
 // Iterate over the retrieved list items
-foreach (var listItem in myList.Items)
+foreach (var listItem in myList.Items.AsRequested())
 {
     // Do something with the list item
 }
@@ -115,7 +115,7 @@ await myList.LoadItemsByCamlQueryAsync(new CamlQueryOptions()
 });
 
 // Iterate over the retrieved list items
-foreach (var listItem in myList.Items)
+foreach (var listItem in myList.Items.AsRequested())
 {
     // Do something with the list item
 }
