@@ -1,12 +1,19 @@
-﻿/*
+﻿using PnP.Core.QueryModel;
 using PnP.Core.Services;
 using System;
 using System.Threading.Tasks;
 
 namespace PnP.Core.Model.SharePoint
 {
-    internal partial class TermRelationCollection : BaseDataModelCollection<ITermRelation>, ITermRelationCollection
+    internal partial class TermRelationCollection : QueryableDataModelCollection<ITermRelation>, ITermRelationCollection
     {
+        public TermRelationCollection(PnPContext context, IDataModelParent parent, string memberName = null)
+            : base(context, parent, memberName)
+        {
+            PnPContext = context;
+            Parent = parent;
+        }
+
         public async Task<ITermRelation> AddAsync(TermRelationType relationship, ITermSet targetSet, ITerm fromTerm = null)
         {
             if (targetSet == null)
@@ -65,4 +72,3 @@ namespace PnP.Core.Model.SharePoint
 
     }
 }
-*/

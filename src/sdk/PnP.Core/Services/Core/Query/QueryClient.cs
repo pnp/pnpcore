@@ -865,6 +865,9 @@ namespace PnP.Core.Services
                 }
             }
 
+            // If defined, call the Action to expand the update payload
+            model?.ExpandUpdatePayLoad?.Invoke((ExpandoObject)updateMessage);
+
             // Get the corresponding JSON text content
             var jsonUpdateMessage = JsonSerializer.Serialize(updateMessage,
                 typeof(ExpandoObject),

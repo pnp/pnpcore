@@ -1,5 +1,4 @@
-﻿/*
-namespace PnP.Core.Model.SharePoint
+﻿namespace PnP.Core.Model.SharePoint
 {
     [GraphType]
     internal partial class TermSetProperty : BaseDataModel<ITermSetProperty>, ITermSetProperty
@@ -15,4 +14,3 @@ namespace PnP.Core.Model.SharePoint
         #endregion
     }
 }
-*/

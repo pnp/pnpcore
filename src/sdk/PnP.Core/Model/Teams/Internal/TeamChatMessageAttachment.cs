@@ -1,7 +1,4 @@
-﻿using PnP.Core.Services;
-using System;
-using System.Dynamic;
-using System.Text.Json;
+﻿using System;
 
 namespace PnP.Core.Model.Teams
 {

@@ -1,5 +1,4 @@
-﻿/*
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace PnP.Core.Model.SharePoint
 {
@@ -23,4 +22,3 @@ namespace PnP.Core.Model.SharePoint
         #endregion
     }
 }
-*/

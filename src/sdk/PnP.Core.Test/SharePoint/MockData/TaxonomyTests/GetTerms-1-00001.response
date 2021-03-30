@@ -1,1 +1,9 @@
-{"responses": [{"id": "1","status":200,"headers" : {"Cache-Control":"no-cache","OData-Version":"4.0","Content-Type":"application/json;odata.metadata=minimal;odata.streaming=true;IEEE754Compatible=false;charset=utf-8"},"body":{"@odata.context":"https://graph.microsoft.com/beta/$metadata#termStore/groups/$entity","id":"e8c02c21-9043-430e-8b24-7bbaced77502","description":"","displayName":"PnP-c4713a6d-8eb2-4ad7-b06f-4a3e06a29c1d","createdDateTime":"2020-08-24T11:50:32.41Z","scope":"global"}},{"id": "2","status":200,"headers" : {"Cache-Control":"no-cache","OData-Version":"4.0","Content-Type":"application/json;odata.metadata=minimal;odata.streaming=true;IEEE754Compatible=false;charset=utf-8"},"body":{"@odata.context":"https://graph.microsoft.com/beta/$metadata#termStore/groups('e8c02c21-9043-430e-8b24-7bbaced77502')/sets","value":[{"id":"75d0e103-626a-4e45-b048-26eedda33de5","description":"Set description","createdDateTime":"2020-08-24T11:50:39.043Z","localizedNames":[{"name":"PnPSet1","languageTag":"en-US"}]}]}}]}
+--batchresponse_cc5c05af-8445-4e97-93a3-5aa87993d24f
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+HTTP/1.1 200 OK
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+
+{"d":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Site","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Site","type":"SP.Site"},"GroupId":"b32780e9-df70-4548-a735-4e7f055415a1","Id":"b56adf79-ff6a-4964-a63a-ff1fa23be9f8"}}
+--batchresponse_cc5c05af-8445-4e97-93a3-5aa87993d24f--

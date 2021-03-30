@@ -2,6 +2,7 @@
 using PnP.Core.Services;
 using System;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Net.Http;
@@ -700,6 +701,9 @@ namespace PnP.Core.Model
         /// </summary>
         [SystemProperty]
         internal UpdateApiCallOverride UpdateApiCallOverrideHandler { get; set; } = null;
+
+        [SystemProperty]
+        internal Action<ExpandoObject> ExpandUpdatePayLoad { get; set; } = null;
 
         /// <summary>
         /// Creates and adds an Update request to the given batch
