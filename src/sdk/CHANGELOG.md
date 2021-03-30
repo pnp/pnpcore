@@ -24,6 +24,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
 ### Changed
 
+- List documentation updates #375 [dgtheninja - David Gent]
 - Make Page Publish respect Version Settings and Checkout Status on publish #361 [czullu - Christian Zuellig]
 - Improved handling of ListItem operations when list item was fetch via Folder or File (ListItemAllFields property) [jansenbe - Bert Jansen]
 - CSOM batches are now split on size (when needed) [jansenbe - Bert Jansen]
