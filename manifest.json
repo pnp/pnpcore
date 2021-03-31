@@ -2166,7 +2166,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.ITermCollection.html",
-          "hash": "QAFZZhQ9BDOE3n0K6lc5Pg=="
+          "hash": "O1QlFhI/iGpEoBQsb47t/A=="
         }
       },
       "is_incremental": false,
@@ -2190,7 +2190,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.ITermGroupCollection.html",
-          "hash": "EkCNyZX/2a7Pm4IRRK7kNQ=="
+          "hash": "x2LUBOZKxzQNpfP3DuigXQ=="
         }
       },
       "is_incremental": false,
@@ -2310,7 +2310,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.ITermSetCollection.html",
-          "hash": "EfEjMo8yi6Ctb8S1Z6zK8g=="
+          "hash": "qEg5125c+Vb49xFfPgX5dw=="
         }
       },
       "is_incremental": false,
