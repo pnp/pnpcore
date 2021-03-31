@@ -3,7 +3,6 @@ using Microsoft.Identity.Client;
 using PnP.Core.Auth.Services.Builder.Configuration;
 using PnP.Core.Auth.Utilities;
 using System;
-using System.Configuration;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -52,6 +51,20 @@ namespace PnP.Core.Auth
                 ClientId = clientId,
                 TenantId = tenantId,
                 Interactive = options
+            });
+        }
+
+        /// <summary>
+        /// Public constructor for external consumers of the library
+        /// </summary>
+        public InteractiveAuthenticationProvider()
+            : this(null)
+        {
+            Init(new PnPCoreAuthenticationCredentialConfigurationOptions
+            {
+                ClientId = "",
+                TenantId = "",
+                Interactive = new PnPCoreAuthenticationInteractiveOptions()
             });
         }
 

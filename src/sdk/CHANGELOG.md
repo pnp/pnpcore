@@ -10,6 +10,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
 ### Added
 
+- Parameterless constructor for InteractiveAuthenticationProvider [jansenbe - Bert Jansen]
 - Taxonomy support [jansenbe - Bert Jansen]
 - Added HubSite methods [pkbullock - Paul Bullock]
 - Added AddRoleDefinition and RemoveRoleDefinition methods on ListItem [jansenbe - Bert Jansen]

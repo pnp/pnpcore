@@ -99,6 +99,21 @@ namespace PnP.Core.Auth.Test.Providers
         }
 
         [TestMethod]
+#pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
+        public async Task TestInteractiveConstructorNoDI_DefaultValues()
+#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
+        {
+            
+            var provider = new InteractiveAuthenticationProvider();
+
+            Assert.IsNotNull(provider);
+            Assert.IsNotNull(provider.ClientId);
+            Assert.IsNotNull(provider.TenantId);
+            Assert.IsNotNull(provider.RedirectUri);
+        }
+
+
+        [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
         public async Task TestInteractiveAuthenticateRequestAsyncNoResource()
         {
