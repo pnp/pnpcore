@@ -388,6 +388,12 @@ references:
   commentId: T:PnP.Core.Auth.InteractiveAuthenticationProvider
   fullName: PnP.Core.Auth.InteractiveAuthenticationProvider
   nameWithType: InteractiveAuthenticationProvider
+- uid: PnP.Core.Auth.InteractiveAuthenticationProvider.#ctor
+  name: InteractiveAuthenticationProvider()
+  href: api/PnP.Core.Auth.InteractiveAuthenticationProvider.html#PnP_Core_Auth_InteractiveAuthenticationProvider__ctor
+  commentId: M:PnP.Core.Auth.InteractiveAuthenticationProvider.#ctor
+  fullName: PnP.Core.Auth.InteractiveAuthenticationProvider.InteractiveAuthenticationProvider()
+  nameWithType: InteractiveAuthenticationProvider.InteractiveAuthenticationProvider()
 - uid: PnP.Core.Auth.InteractiveAuthenticationProvider.#ctor(ILogger{PnP.Core.Auth.OAuthAuthenticationProvider})
   name: InteractiveAuthenticationProvider(ILogger<OAuthAuthenticationProvider>)
   href: api/PnP.Core.Auth.InteractiveAuthenticationProvider.html#PnP_Core_Auth_InteractiveAuthenticationProvider__ctor_ILogger_PnP_Core_Auth_OAuthAuthenticationProvider__
