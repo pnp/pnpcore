@@ -109,6 +109,42 @@ namespace PnP.Core.Test.SharePoint
         }
 
         [TestMethod]
+        public async Task GetTermGroupsAsyncEnumeration()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                bool groupFound = false;
+
+                await foreach(var group in context.TermStore.Groups)
+                {
+                    groupFound = true;
+                }
+
+                Assert.IsTrue(groupFound);
+            }
+        }
+
+        [TestMethod]
+        public async Task GetTermGroupViaLinqFilter()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                string newGroupName = GetGroupName(context);
+                // Add new group
+                await context.TermStore.Groups.AddAsync(newGroupName, "pnp group description");
+
+                // Get group via Linq filter
+                var addedGroup = await context.TermStore.Groups.Where(p => p.Name == newGroupName).FirstOrDefaultAsync();
+                Assert.IsTrue(addedGroup.Name == newGroupName);
+
+                // Delete the created group
+                await addedGroup.DeleteAsync();
+            }
+        }
+
+        [TestMethod]
         public async Task AddTermGroups()
         {
             //TestCommon.Instance.Mocking = false;            
@@ -425,6 +461,55 @@ namespace PnP.Core.Test.SharePoint
 
                 // Delete the group again
                 await newGroup.DeleteAsync();
+            }
+        }
+
+        [TestMethod]
+        public async Task GetTermSetsAndTermsViaAsyncEnumeration()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                string newGroupName = GetGroupName(context);
+
+                // Add new group
+                var group = await context.TermStore.Groups.AddAsync(newGroupName);
+
+                if (group != null)
+                {
+                    // Add some term sets in batch
+                    var pnpSet1 = await group.Sets.AddBatchAsync("PnPSet1", "Set description");
+                    var pnpSet2 = await group.Sets.AddBatchAsync("PnPSet2", "Set description");
+                    var pnpSet3 = await group.Sets.AddBatchAsync("PnPSet3", "Set description");
+                    await context.ExecuteAsync();
+
+                    // Add some terms
+                    await pnpSet1.Terms.AddBatchAsync("One");
+                    await pnpSet1.Terms.AddBatchAsync("Two");
+                    await pnpSet2.Terms.AddBatchAsync("Three");
+                    await pnpSet3.Terms.AddBatchAsync("Four");
+                    await pnpSet3.Terms.AddBatchAsync("Five");
+                    await pnpSet3.Terms.AddBatchAsync("Six");
+                    await context.ExecuteAsync();
+
+                    bool termsetFound = false;
+                    await foreach (var termset in group.Sets)
+                    {
+                        termsetFound = true;
+                        bool termFound = false;
+                        await foreach (var term in termset.Terms)
+                        {
+                            termFound = true;
+                        }
+                        Assert.IsTrue(termFound);
+                    }
+                    Assert.IsTrue(termsetFound);
+
+                    await pnpSet1.DeleteAsync();
+                    await pnpSet2.DeleteAsync();
+                    await pnpSet3.DeleteAsync();
+                    await group.DeleteAsync();
+                }
             }
         }
 

@@ -1,5 +1,6 @@
 ﻿using PnP.Core.Services;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
@@ -10,7 +11,7 @@ namespace PnP.Core.Model.SharePoint
     /// Collection of term sets
     /// </summary>
     [ConcreteType(typeof(TermSetCollection))]
-    public interface ITermSetCollection : IQueryable<ITermSet>, IDataModelCollection<ITermSet>, IDataModelCollectionDeleteByStringId
+    public interface ITermSetCollection : IQueryable<ITermSet>, IAsyncEnumerable<ITermSet>, IDataModelCollection<ITermSet>, IDataModelCollectionDeleteByStringId
     {
 
         #region Add methods

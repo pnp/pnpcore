@@ -1,4 +1,5 @@
 ﻿using PnP.Core.Services;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -8,7 +9,7 @@ namespace PnP.Core.Model.SharePoint
     /// Collection of terms
     /// </summary>
     [ConcreteType(typeof(TermCollection))]
-    public interface ITermCollection : IQueryable<ITerm>, IDataModelCollection<ITerm>, IDataModelCollectionDeleteByStringId
+    public interface ITermCollection : IQueryable<ITerm>, IAsyncEnumerable<ITerm>, IDataModelCollection<ITerm>, IDataModelCollectionDeleteByStringId
     {
         /// <summary>
         /// Adds a new term 
