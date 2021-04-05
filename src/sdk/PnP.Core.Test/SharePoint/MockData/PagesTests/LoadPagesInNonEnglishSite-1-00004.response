@@ -1,4 +1,4 @@
---batchresponse_9364c57b-27eb-44ea-aa9c-dc37adaf97da
+--batchresponse_d713e0d1-fe32-43ed-8bd3-75e8e9dffc13
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
@@ -11,17 +11,17 @@ CONTENT-TYPE: application/json; charset=utf-8
 "PermMask": "0x7ffffffffffbffff",
 "FSObjType": "0",
 "HTML_x0020_File_x0020_Type": "",
-"UniqueId": "{6588C1DB-27F3-4ADD-82B4-7D026FFF960F}",
+"UniqueId": "{0D141591-4B6A-48C2-AC8E-129A4FDBC91F}",
 "ProgId": "",
 "NoExecute": "0",
-"ContentTypeId": "0x0101009D1CB255DA76424F860D91F20E6C411800307CAEF8E3B82A42A497DCFA8BB9969F",
+"ContentTypeId": "0x0101009D1CB255DA76424F860D91F20E6C411800217657B84BF54541BC691E9467976B2A",
 "FileRef": "\u002fsites\u002fprov-1\u002fDutchWeb\u002fSitePages\u002fHome.aspx",
 "FileRef.urlencode": "%2Fsites%2Fprov%2D1%2FDutchWeb%2FSitePages%2FHome%2Easpx",
 "FileRef.urlencodeasurl": "\u002fsites\u002fprov-1\u002fDutchWeb\u002fSitePages\u002fHome.aspx",
 "FileRef.urlencoding": "\u002fsites\u002fprov-1\u002fDutchWeb\u002fSitePages\u002fHome.aspx",
 "FileRef.scriptencodeasurl": "\\u002fsites\\u002fprov-1\\u002fDutchWeb\\u002fSitePages\\u002fHome.aspx",
 "_UIVersion": "512",
-"SMTotalSize": "1447",
+"SMTotalSize": "1446",
 "File_x0020_Size": "805",
 "_CommentFlags": "1",
 "File_x0020_Type": "aspx",
@@ -84,4 +84,4 @@ CONTENT-TYPE: application/json; charset=utf-8
 ,"CurrentFolderSpItemUrl" : ""
 
 }
---batchresponse_9364c57b-27eb-44ea-aa9c-dc37adaf97da--
+--batchresponse_d713e0d1-fe32-43ed-8bd3-75e8e9dffc13--

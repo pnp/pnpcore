@@ -12,6 +12,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
 ### Changed
 
+- Implement the EnsurePageListItemAsync method via GetFileByServerRelativeUrlAsync instead of using a CAML query to load the item to prevent 5000 item limit issues [jansenbe - Bert Jansen]
+
 ## [1.1.0]
 
 ### Added

@@ -1,4 +1,4 @@
---batchresponse_d70fba25-9232-494a-9c24-b5a058896d11
+--batchresponse_918be78d-7e35-4008-a719-ed42cd400d06
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
@@ -6,4 +6,4 @@ HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
 {"d":{"results":[]}}
---batchresponse_d70fba25-9232-494a-9c24-b5a058896d11--
+--batchresponse_918be78d-7e35-4008-a719-ed42cd400d06--

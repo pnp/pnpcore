@@ -1,19 +1,9 @@
---batchresponse_887f1f70-ddfa-4846-af23-ab9316b2b980
+--batchresponse_49357803-6098-4dd8-b655-58ff5a8f552b
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
-HTTP/1.1 200 OK
-CONTENT-TYPE: application/json; charset=utf-8
+HTTP/1.1 404 Not Found
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{ "Row" : 
-[],"FirstRow" : 1,
-"FolderPermissions" : "0x7ffffffffffbffff"
-,"LastRow" : 0,
-"RowLimit" : 30
-,"FilterLink" : "?"
-,"ForceNoHierarchy" : "1"
-,"HierarchyHasIndention" : ""
-,"CurrentFolderSpItemUrl" : ""
-
-}
---batchresponse_887f1f70-ddfa-4846-af23-ab9316b2b980--
+{"error":{"code":"-2130575338, Microsoft.SharePoint.SPException","message":{"lang":"en-US","value":"The file /sites/prov-1/SitePages/PNP_SDK_TEST_NoPageHeaderTest.aspx does not exist."}}}
+--batchresponse_49357803-6098-4dd8-b655-58ff5a8f552b--

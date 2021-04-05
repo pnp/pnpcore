@@ -104,7 +104,7 @@ namespace PnP.Core.Test.SharePoint
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                var pages = await context.Web.GetPagesAsync("Ho");
+                var pages = await context.Web.GetPagesAsync("Hom");
                 Assert.IsTrue(pages.Count == 1);
             }
         }

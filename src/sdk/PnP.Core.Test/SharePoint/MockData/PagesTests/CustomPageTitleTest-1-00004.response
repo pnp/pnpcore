@@ -1,19 +1,9 @@
---batchresponse_075a19ee-2165-4fc1-97f8-7336fc0866ea
+--batchresponse_58056112-7e1d-4027-a21a-709f8b63df6f
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
-HTTP/1.1 200 OK
-CONTENT-TYPE: application/json; charset=utf-8
+HTTP/1.1 404 Not Found
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{ "Row" : 
-[],"FirstRow" : 1,
-"FolderPermissions" : "0x7ffffffffffbffff"
-,"LastRow" : 0,
-"RowLimit" : 30
-,"FilterLink" : "?"
-,"ForceNoHierarchy" : "1"
-,"HierarchyHasIndention" : ""
-,"CurrentFolderSpItemUrl" : ""
-
-}
---batchresponse_075a19ee-2165-4fc1-97f8-7336fc0866ea--
+{"error":{"code":"-2130575338, Microsoft.SharePoint.SPException","message":{"lang":"en-US","value":"The file /sites/prov-1/SitePages/PNP_SDK_TEST_CustomPageTitleTest.aspx does not exist."}}}
+--batchresponse_58056112-7e1d-4027-a21a-709f8b63df6f--

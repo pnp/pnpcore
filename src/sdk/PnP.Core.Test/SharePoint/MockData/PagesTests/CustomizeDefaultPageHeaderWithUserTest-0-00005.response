@@ -1,19 +1,9 @@
---batchresponse_7866c66c-861c-4542-9659-d7e24035849c
+--batchresponse_dfd280f5-beaa-4154-99a3-c9ca041f8715
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
-HTTP/1.1 200 OK
-CONTENT-TYPE: application/json; charset=utf-8
+HTTP/1.1 404 Not Found
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{ "Row" : 
-[],"FirstRow" : 1,
-"FolderPermissions" : "0x7ffffffffffbffff"
-,"LastRow" : 0,
-"RowLimit" : 30
-,"FilterLink" : "?"
-,"ForceNoHierarchy" : "1"
-,"HierarchyHasIndention" : ""
-,"CurrentFolderSpItemUrl" : ""
-
-}
---batchresponse_7866c66c-861c-4542-9659-d7e24035849c--
+{"error":{"code":"-2130575338, Microsoft.SharePoint.SPException","message":{"lang":"en-US","value":"The file /sites/prov-1/SitePages/PNP_SDK_TEST_CustomizeDefaultPageHeaderWithUserTest.aspx does not exist."}}}
+--batchresponse_dfd280f5-beaa-4154-99a3-c9ca041f8715--

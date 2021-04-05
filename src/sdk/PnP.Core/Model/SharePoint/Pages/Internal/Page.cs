@@ -284,7 +284,7 @@ namespace PnP.Core.Model.SharePoint
             {
                 foreach (var page in pagesToLoad)
                 {
-                    var loadedPage = await Page.LoadPageAsync(pagesLibrary, page).ConfigureAwait(false);
+                    var loadedPage = await LoadPageAsync(pagesLibrary, page).ConfigureAwait(false);
                     if (loadedPage != null)
                     {
                         loadedPages.Add(loadedPage);
@@ -1707,10 +1707,7 @@ namespace PnP.Core.Model.SharePoint
 
             if (LayoutType != PageLayoutType.Spaces)
             {
-                if (PageListItem[PageConstants.PageLayoutType] as string != layoutType.ToString())
-                {
                     PageListItem[PageConstants.PageLayoutType] = layoutType.ToString();
-                }
             }
 
             // Try to set the page description if not yet set
@@ -1762,19 +1759,42 @@ namespace PnP.Core.Model.SharePoint
         {
             (var folderName, var pageNameWithoutFolder) = PageToPageNameAndFolder(pageName);
 
-            await GetPagesListData(pageName, PagesLibrary).ConfigureAwait(false);
+            IFile pageFile = null;
 
-            PageListItem = null;
-
-            // Get the relevant list item
-            foreach (var page in PagesLibrary.Items.AsRequested())
+            try
             {
-                var fileDirRef = PagesLibrary.RootFolder.ServerRelativeUrl + (!string.IsNullOrEmpty(folderName) ? $"/{folderName}" : "");
-                if (page[PageConstants.FileLeafRef].ToString().Equals(pageNameWithoutFolder, StringComparison.InvariantCultureIgnoreCase) && page[PageConstants.FileDirRef].ToString().Equals(fileDirRef, StringComparison.InvariantCultureIgnoreCase))
+                pageFile = await PnPContext.Web.GetFileByServerRelativeUrlAsync($"{PagesLibrary.RootFolder.ServerRelativeUrl}/{pageName}", p => p.ListItemAllFields, p => p.ServerRelativeUrl).ConfigureAwait(false);
+            }
+            catch(SharePointRestServiceException ex)
+            {
+                // The file /sites/prov-1/SitePages/PNP_SDK_TEST_CreateAndUpdatePage.aspx does not exist.
+                if ((ex.Error as SharePointRestError).ServerErrorCode == -2130575338)
                 {
-                    PageListItem = page;
-                    break;
+                    // ignore this error
                 }
+                else
+                {
+                    throw ex;
+                }
+            }
+
+            if (pageFile != null)
+            {
+                PageListItem = pageFile.ListItemAllFields;
+
+                if (!PageListItem.Values.ContainsKey(PageConstants.FileDirRef))
+                {
+                    PageListItem.Values.SystemAdd(PageConstants.FileDirRef, string.IsNullOrEmpty(folderName) ? $"{PagesLibrary.RootFolder.ServerRelativeUrl}" : $"{PagesLibrary.RootFolder.ServerRelativeUrl}/{folderName}");
+                }
+
+                if (!PageListItem.Values.ContainsKey(PageConstants.FileLeafRef))
+                {
+                    PageListItem.Values.SystemAdd(PageConstants.FileLeafRef, pageNameWithoutFolder);
+                }
+            }
+            else
+            {
+                PageListItem = null;
             }
         }
 
@@ -1944,7 +1964,7 @@ namespace PnP.Core.Model.SharePoint
         {
             if (PageListItem != null)
             {
-                return await PnPContext.Web.GetFileByServerRelativeUrlAsync($"{PageListItem[PageConstants.FileDirRef]}/{PageListItem[PageConstants.FileLeafRef]}", expressions).ConfigureAwait(false);
+                return await PnPContext.Web.GetFileByServerRelativeUrlAsync($"{PageListItem[PageConstants.FileDirRef]}/{PageListItem[PageConstants.FileLeafRef]}", expressions).ConfigureAwait(false);                
             }
             else
             {

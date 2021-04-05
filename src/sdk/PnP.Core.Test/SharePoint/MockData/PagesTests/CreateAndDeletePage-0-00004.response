@@ -1,19 +1,9 @@
---batchresponse_266aa657-1ea0-4b20-8ff4-063a8e54e885
+--batchresponse_fe116b84-be58-42c1-b095-0babae82b816
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
-HTTP/1.1 200 OK
-CONTENT-TYPE: application/json; charset=utf-8
+HTTP/1.1 404 Not Found
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{ "Row" : 
-[],"FirstRow" : 1,
-"FolderPermissions" : "0x7ffffffffffbffff"
-,"LastRow" : 0,
-"RowLimit" : 30
-,"FilterLink" : "?"
-,"ForceNoHierarchy" : "1"
-,"HierarchyHasIndention" : ""
-,"CurrentFolderSpItemUrl" : ""
-
-}
---batchresponse_266aa657-1ea0-4b20-8ff4-063a8e54e885--
+{"error":{"code":"-2130575338, Microsoft.SharePoint.SPException","message":{"lang":"en-US","value":"The file /sites/prov-1/SitePages/PNP_SDK_TEST_CreateAndDeletePage.aspx does not exist."}}}
+--batchresponse_fe116b84-be58-42c1-b095-0babae82b816--

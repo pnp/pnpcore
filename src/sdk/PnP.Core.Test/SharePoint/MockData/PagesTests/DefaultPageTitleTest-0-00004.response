@@ -1,19 +1,9 @@
---batchresponse_22269d74-2b42-49fe-a5f8-9d8bebaa56b8
+--batchresponse_d3a80066-479a-4bff-9f04-8a8a26bc3b41
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
-HTTP/1.1 200 OK
-CONTENT-TYPE: application/json; charset=utf-8
+HTTP/1.1 404 Not Found
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{ "Row" : 
-[],"FirstRow" : 1,
-"FolderPermissions" : "0x7ffffffffffbffff"
-,"LastRow" : 0,
-"RowLimit" : 30
-,"FilterLink" : "?"
-,"ForceNoHierarchy" : "1"
-,"HierarchyHasIndention" : ""
-,"CurrentFolderSpItemUrl" : ""
-
-}
---batchresponse_22269d74-2b42-49fe-a5f8-9d8bebaa56b8--
+{"error":{"code":"-2130575338, Microsoft.SharePoint.SPException","message":{"lang":"en-US","value":"The file /sites/prov-1/SitePages/PNP_SDK_TEST_DefaultPageTitleTest.aspx does not exist."}}}
+--batchresponse_d3a80066-479a-4bff-9f04-8a8a26bc3b41--

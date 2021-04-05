@@ -1,19 +1,9 @@
---batchresponse_50b9eda5-d8a5-4d2f-b21a-bb5faca8d36b
+--batchresponse_d7283114-43b2-46d4-8c33-0cf669f895a9
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
-HTTP/1.1 200 OK
-CONTENT-TYPE: application/json; charset=utf-8
+HTTP/1.1 404 Not Found
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{ "Row" : 
-[],"FirstRow" : 1,
-"FolderPermissions" : "0x7ffffffffffbffff"
-,"LastRow" : 0,
-"RowLimit" : 30
-,"FilterLink" : "?"
-,"ForceNoHierarchy" : "1"
-,"HierarchyHasIndention" : ""
-,"CurrentFolderSpItemUrl" : ""
-
-}
---batchresponse_50b9eda5-d8a5-4d2f-b21a-bb5faca8d36b--
+{"error":{"code":"-2130575338, Microsoft.SharePoint.SPException","message":{"lang":"en-US","value":"The file /sites/pnpcoresdktest/SitePages/PNP_SDK_TEST_PageToTranslate.aspx does not exist."}}}
+--batchresponse_d7283114-43b2-46d4-8c33-0cf669f895a9--

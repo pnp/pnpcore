@@ -1,19 +1,9 @@
---batchresponse_d8c9ace5-941a-4725-80f3-b6e607a8d808
+--batchresponse_0d5cb444-79c7-4824-964f-7ea9ad5cbfc6
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
-HTTP/1.1 200 OK
-CONTENT-TYPE: application/json; charset=utf-8
+HTTP/1.1 404 Not Found
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{ "Row" : 
-[],"FirstRow" : 1,
-"FolderPermissions" : "0x7ffffffffffbffff"
-,"LastRow" : 0,
-"RowLimit" : 30
-,"FilterLink" : "?"
-,"ForceNoHierarchy" : "1"
-,"HierarchyHasIndention" : ""
-,"CurrentFolderSpItemUrl" : ""
-
-}
---batchresponse_d8c9ace5-941a-4725-80f3-b6e607a8d808--
+{"error":{"code":"-2130575338, Microsoft.SharePoint.SPException","message":{"lang":"en-US","value":"The file /sites/prov-1/SitePages/PNP_SDK_TEST_AddFormattedText.aspx does not exist."}}}
+--batchresponse_0d5cb444-79c7-4824-964f-7ea9ad5cbfc6--

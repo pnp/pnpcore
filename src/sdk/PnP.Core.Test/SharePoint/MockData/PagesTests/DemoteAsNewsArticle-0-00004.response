@@ -1,19 +1,9 @@
---batchresponse_04774266-6813-455d-ba89-6df7daf60afe
+--batchresponse_501ff84a-1570-46fd-8721-d6a2c924c807
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
-HTTP/1.1 200 OK
-CONTENT-TYPE: application/json; charset=utf-8
+HTTP/1.1 404 Not Found
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{ "Row" : 
-[],"FirstRow" : 1,
-"FolderPermissions" : "0x7ffffffffffbffff"
-,"LastRow" : 0,
-"RowLimit" : 30
-,"FilterLink" : "?"
-,"ForceNoHierarchy" : "1"
-,"HierarchyHasIndention" : ""
-,"CurrentFolderSpItemUrl" : ""
-
-}
---batchresponse_04774266-6813-455d-ba89-6df7daf60afe--
+{"error":{"code":"-2130575338, Microsoft.SharePoint.SPException","message":{"lang":"en-US","value":"The file /sites/prov-1/SitePages/PNP_SDK_TEST_DemoteAsNewsArticle.aspx does not exist."}}}
+--batchresponse_501ff84a-1570-46fd-8721-d6a2c924c807--

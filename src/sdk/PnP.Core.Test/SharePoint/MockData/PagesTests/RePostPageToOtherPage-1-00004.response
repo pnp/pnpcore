@@ -1,19 +1,9 @@
---batchresponse_86d3440c-1029-4fd4-81f0-4c7ba4f4694f
+--batchresponse_34277a45-a228-4708-a207-6c8ea472e9a3
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
-HTTP/1.1 200 OK
-CONTENT-TYPE: application/json; charset=utf-8
+HTTP/1.1 404 Not Found
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{ "Row" : 
-[],"FirstRow" : 1,
-"FolderPermissions" : "0x7ffffffffffbffff"
-,"LastRow" : 0,
-"RowLimit" : 30
-,"FilterLink" : "?"
-,"ForceNoHierarchy" : "1"
-,"HierarchyHasIndention" : ""
-,"CurrentFolderSpItemUrl" : ""
-
-}
---batchresponse_86d3440c-1029-4fd4-81f0-4c7ba4f4694f--
+{"error":{"code":"-2130575338, Microsoft.SharePoint.SPException","message":{"lang":"en-US","value":"The file /sites/prov-1/SitePages/PNP_SDK_TEST_RePostPageToOtherPage.aspx does not exist."}}}
+--batchresponse_34277a45-a228-4708-a207-6c8ea472e9a3--

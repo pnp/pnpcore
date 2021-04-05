@@ -1,9 +1,9 @@
---batchresponse_24a71c62-3cd1-419f-9726-69793f81096c
+--batchresponse_f5ee7415-e991-4bdf-b25a-0d14a4eb8485
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
-HTTP/1.1 204 No Content
+HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-
---batchresponse_24a71c62-3cd1-419f-9726-69793f81096c--
+{"d":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web","type":"SP.Web"},"Id":"8c8e101c-1b0d-4253-85e7-c30039bf46e2","WelcomePage":"sitepages/PNP_SDK_TEST_PromoteAsHomePage.aspx"}}
+--batchresponse_f5ee7415-e991-4bdf-b25a-0d14a4eb8485--
