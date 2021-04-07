@@ -303,12 +303,6 @@ namespace PnP.Core.Model.SharePoint
                 folderName = $"{pagesLibrary.RootFolder.ServerRelativeUrl}/{folderName}";
             }
 
-            string pageNameFilter = $@"
-                        <BeginsWith>
-                          <FieldRef Name='{PageConstants.FileLeafRef}'/>
-                          <Value Type='text'><![CDATA[{pageNameWithoutFolder}]]></Value>
-                        </BeginsWith>";
-
             // This is the main query, it can be complemented with above page name filter bij replacing the variables
             string pageQuery = $@"
                 <View Scope='Recursive'>
@@ -351,7 +345,20 @@ namespace PnP.Core.Model.SharePoint
 
             if (!string.IsNullOrEmpty(pageNameWithoutFolder))
             {
-                pageQuery = string.Format(pageQuery, pageNameFilter, "<And>", "</And>");
+                // With big lists, we cannot query for a page by it's pageName because this might not be indexed yet.
+                // GetFileByServerRelativeUrl works on a big list, so we use that to fetch the file and the List Item ID
+                // In turn, we use the List Item ID in the CAML Query instead of the pageName
+                IFile pageFile = await GetPageFile(pageName, pagesLibrary).ConfigureAwait(false);
+
+                if (pageFile != null)
+                {
+                    string pageNameFilter = $@"
+                        <Eq>
+                          <FieldRef Name='{PageConstants.IdField}'/>
+                          <Value Type='Number'>{pageFile.ListItemAllFields.Id}</Value>
+                        </Eq>";
+                    pageQuery = string.Format(pageQuery, pageNameFilter, "<And>", "</And>");
+                }
             }
             else
             {
@@ -1755,17 +1762,21 @@ namespace PnP.Core.Model.SharePoint
             }
         }
 
-        private async Task EnsurePageListItemAsync(string pageName)
+        private static async Task<IFile> GetPageFile(string pageName, IList pagesLibrary)
         {
-            (var folderName, var pageNameWithoutFolder) = PageToPageNameAndFolder(pageName);
+            // validate the page name
+            if (!pageName.EndsWith(".aspx", StringComparison.InvariantCultureIgnoreCase))
+            {
+                pageName += ".aspx";
+            }
 
             IFile pageFile = null;
 
             try
             {
-                pageFile = await PnPContext.Web.GetFileByServerRelativeUrlAsync($"{PagesLibrary.RootFolder.ServerRelativeUrl}/{pageName}", p => p.ListItemAllFields, p => p.ServerRelativeUrl).ConfigureAwait(false);
+                pageFile = await pagesLibrary.PnPContext.Web.GetFileByServerRelativeUrlAsync($"{pagesLibrary.RootFolder.ServerRelativeUrl}/{pageName}", p => p.ListItemAllFields, p => p.ServerRelativeUrl).ConfigureAwait(false);
             }
-            catch(SharePointRestServiceException ex)
+            catch (SharePointRestServiceException ex)
             {
                 // The file /sites/prov-1/SitePages/PNP_SDK_TEST_CreateAndUpdatePage.aspx does not exist.
                 if ((ex.Error as SharePointRestError).ServerErrorCode == -2130575338)
@@ -1778,8 +1789,17 @@ namespace PnP.Core.Model.SharePoint
                 }
             }
 
+            return pageFile;
+        }
+
+        private async Task EnsurePageListItemAsync(string pageName)
+        {
+            IFile pageFile = await GetPageFile(pageName, PagesLibrary).ConfigureAwait(false);
+
             if (pageFile != null)
             {
+                (var folderName, var pageNameWithoutFolder) = PageToPageNameAndFolder(pageName);
+
                 PageListItem = pageFile.ListItemAllFields;
 
                 if (!PageListItem.Values.ContainsKey(PageConstants.FileDirRef))
