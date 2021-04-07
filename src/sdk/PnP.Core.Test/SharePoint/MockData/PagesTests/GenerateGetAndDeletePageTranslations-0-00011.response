@@ -1,9 +1,9 @@
---batchresponse_dc0e9372-8d73-444c-9180-5f737cd85f84
+--batchresponse_eacc9499-9007-496f-b5be-8301294189ce
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{"d":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/pnpcoresdktest/_api/sitepages/pages(531)/translations","uri":"https://bertonline.sharepoint.com/sites/pnpcoresdktest/_api/sitepages/pages(531)/translations","type":"SP.TranslationStatusCollection"},"UntranslatedLanguages":{"__metadata":{"type":"Collection(Edm.String)"},"results":["nl-nl","fr-fr"]},"Items":{"__metadata":{"type":"Collection(SP.TranslationStatus)"},"results":[]}}}
---batchresponse_dc0e9372-8d73-444c-9180-5f737cd85f84--
+{"d":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/pnpcoresdktest/_api/sitepages/pages(545)/translations","uri":"https://bertonline.sharepoint.com/sites/pnpcoresdktest/_api/sitepages/pages(545)/translations","type":"SP.TranslationStatusCollection"},"UntranslatedLanguages":{"__metadata":{"type":"Collection(Edm.String)"},"results":["nl-nl","fr-fr"]},"Items":{"__metadata":{"type":"Collection(SP.TranslationStatus)"},"results":[]}}}
+--batchresponse_eacc9499-9007-496f-b5be-8301294189ce--

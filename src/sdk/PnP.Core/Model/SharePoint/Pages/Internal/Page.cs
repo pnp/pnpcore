@@ -330,13 +330,14 @@ namespace PnP.Core.Model.SharePoint
                     <FieldRef Name='{PageConstants._OriginalSourceListId}' />
                     <FieldRef Name='{PageConstants._OriginalSourceItemId}' />
                   </ViewFields>
+                  <RowLimit Paged='TRUE'>500</RowLimit>
                   <Query>
                     <Where>
                       {{1}}
-                        <Contains>
+                        <Eq>
                           <FieldRef Name='File_x0020_Type'/>
                           <Value Type='text'>aspx</Value>
-                        </Contains>
+                        </Eq>
                         {{0}}
                       {{2}}
                     </Where>
@@ -345,20 +346,33 @@ namespace PnP.Core.Model.SharePoint
 
             if (!string.IsNullOrEmpty(pageNameWithoutFolder))
             {
-                // With big lists, we cannot query for a page by it's pageName because this might not be indexed yet.
-                // GetFileByServerRelativeUrl works on a big list, so we use that to fetch the file and the List Item ID
-                // In turn, we use the List Item ID in the CAML Query instead of the pageName
-                IFile pageFile = await GetPageFile(pageName, pagesLibrary).ConfigureAwait(false);
+                IFile pageFile = null;
+                if (pageName.EndsWith(".aspx", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    // With big lists, we cannot query for a page by it's pageName because this might not be indexed yet.
+                    // GetFileByServerRelativeUrl works on a big list, so we use that to fetch the file and the List Item ID
+                    // In turn, we use the List Item ID in the CAML Query instead of the pageName
+                    pageFile = await GetPageFileAsync(pageName, pagesLibrary).ConfigureAwait(false);
+                }
 
+                string pageNameFilter;
                 if (pageFile != null)
                 {
-                    string pageNameFilter = $@"
+                    pageNameFilter = $@"
                         <Eq>
                           <FieldRef Name='{PageConstants.IdField}'/>
                           <Value Type='Number'>{pageFile.ListItemAllFields.Id}</Value>
                         </Eq>";
-                    pageQuery = string.Format(pageQuery, pageNameFilter, "<And>", "</And>");
                 }
+                else
+                {
+                    pageNameFilter = $@"
+                        <BeginsWith>
+                          <FieldRef Name='{PageConstants.FileLeafRef}'/>
+                          <Value Type='text'><![CDATA[{pageNameWithoutFolder}]]></Value>
+                        </BeginsWith>";
+                }
+                pageQuery = string.Format(pageQuery, pageNameFilter, "<And>", "</And>");
             }
             else
             {
@@ -1762,7 +1776,7 @@ namespace PnP.Core.Model.SharePoint
             }
         }
 
-        private static async Task<IFile> GetPageFile(string pageName, IList pagesLibrary)
+        private static async Task<IFile> GetPageFileAsync(string pageName, IList pagesLibrary)
         {
             // validate the page name
             if (!pageName.EndsWith(".aspx", StringComparison.InvariantCultureIgnoreCase))
@@ -1794,7 +1808,7 @@ namespace PnP.Core.Model.SharePoint
 
         private async Task EnsurePageListItemAsync(string pageName)
         {
-            IFile pageFile = await GetPageFile(pageName, PagesLibrary).ConfigureAwait(false);
+            IFile pageFile = await GetPageFileAsync(pageName, PagesLibrary).ConfigureAwait(false);
 
             if (pageFile != null)
             {
