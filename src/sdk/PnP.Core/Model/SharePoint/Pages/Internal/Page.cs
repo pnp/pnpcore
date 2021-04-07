@@ -3,6 +3,7 @@ using PnP.Core.QueryModel;
 using PnP.Core.Services;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
@@ -382,12 +383,27 @@ namespace PnP.Core.Model.SharePoint
             // Remove unneeded cariage returns
             pageQuery = pageQuery.Replace("\r\n", "");
 
-            await pagesLibrary.LoadListDataAsStreamAsync(new RenderListDataOptions()
+            bool paging = true;
+            string nextPage = null;
+            while (paging)
             {
-                ViewXml = pageQuery,
-                RenderOptions = RenderListDataOptionsFlags.ListData,
-                FolderServerRelativeUrl = !string.IsNullOrEmpty(folderName) ? folderName : null
-            }).ConfigureAwait(false);
+                var output = await pagesLibrary.LoadListDataAsStreamAsync(new RenderListDataOptions()
+                {
+                    ViewXml = pageQuery,
+                    RenderOptions = RenderListDataOptionsFlags.ListData,
+                    FolderServerRelativeUrl = !string.IsNullOrEmpty(folderName) ? folderName : null,
+                    Paging = nextPage ?? null,
+                }).ConfigureAwait(false);
+
+                if (output.ContainsKey("NextHref"))
+                {
+                    nextPage = output["NextHref"].ToString().Substring(1);
+                }
+                else
+                {
+                    paging = false;
+                }
+            }
         }
 
         internal async static Task<IPage> NewPageAsync(PnPContext context, PageLayoutType pageLayoutType = PageLayoutType.Article)
