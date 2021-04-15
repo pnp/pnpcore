@@ -25297,6 +25297,12 @@ references:
   commentId: T:PnP.Core.Model.SharePoint.PublishedStatus
   fullName: PnP.Core.Model.SharePoint.PublishedStatus
   nameWithType: PublishedStatus
+- uid: PnP.Core.Model.SharePoint.PublishedStatus.Checkout
+  name: Checkout
+  href: api/PnP.Core.Model.SharePoint.PublishedStatus.html#PnP_Core_Model_SharePoint_PublishedStatus_Checkout
+  commentId: F:PnP.Core.Model.SharePoint.PublishedStatus.Checkout
+  fullName: PnP.Core.Model.SharePoint.PublishedStatus.Checkout
+  nameWithType: PublishedStatus.Checkout
 - uid: PnP.Core.Model.SharePoint.PublishedStatus.Draft
   name: Draft
   href: api/PnP.Core.Model.SharePoint.PublishedStatus.html#PnP_Core_Model_SharePoint_PublishedStatus_Draft
