@@ -1,7 +1,7 @@
 ﻿namespace PnP.Core.Model.SharePoint
 {
     /// <summary>
-    /// Indicates if a file was published or not
+    /// Indicates if a file was published, draft or checked out
     /// </summary>
     public enum PublishedStatus
     {
@@ -14,5 +14,10 @@
         /// File is in draft
         /// </summary>
         Draft = 2,
+
+        /// <summary>
+        /// File is checked out
+        /// </summary>
+        Checkout = byte.MaxValue
     }
 }

@@ -1,9 +1,9 @@
---batchresponse_f82ce041-45bf-45bc-b95d-7d5894f739a7
+--batchresponse_eb21841d-548b-48f2-b93d-3d68c551f312
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{"d":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/pnpcoresdktest/_api/sitepages/pages(545)/translations/create","uri":"https://bertonline.sharepoint.com/sites/pnpcoresdktest/_api/sitepages/pages(545)/translations/create","type":"SP.TranslationStatusCollection"},"UntranslatedLanguages":{"__metadata":{"type":"Collection(Edm.String)"},"results":[]},"Items":{"__metadata":{"type":"Collection(SP.TranslationStatus)"},"results":[{"Culture":"nl-nl","FileStatus":2,"HasPublishedVersion":false,"LastModified":"2021-04-07T18:06:44Z","Path":{"__metadata":{"type":"SP.ResourcePath"},"DecodedUrl":"SitePages/nl/PNP_SDK_TEST_PageToTranslate.aspx"},"Title":"Translate into Dutch: PNP_SDK_TEST_PageToTranslate"},{"Culture":"fr-fr","FileStatus":2,"HasPublishedVersion":false,"LastModified":"2021-04-07T18:06:44Z","Path":{"__metadata":{"type":"SP.ResourcePath"},"DecodedUrl":"SitePages/fr/PNP_SDK_TEST_PageToTranslate.aspx"},"Title":"Translate into French: PNP_SDK_TEST_PageToTranslate"}]}}}
---batchresponse_f82ce041-45bf-45bc-b95d-7d5894f739a7--
+{"d":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/pnpcoresdktest/_api/sitepages/pages(573)/translations/create","uri":"https://bertonline.sharepoint.com/sites/pnpcoresdktest/_api/sitepages/pages(573)/translations/create","type":"SP.TranslationStatusCollection"},"UntranslatedLanguages":{"__metadata":{"type":"Collection(Edm.String)"},"results":[]},"Items":{"__metadata":{"type":"Collection(SP.TranslationStatus)"},"results":[{"Culture":"nl-nl","FileStatus":2,"HasPublishedVersion":false,"LastModified":"2021-04-15T13:34:22Z","Path":{"__metadata":{"type":"SP.ResourcePath"},"DecodedUrl":"SitePages/nl/PNP_SDK_TEST_PageToTranslate.aspx"},"Title":"Translate into Dutch: PNP_SDK_TEST_PageToTranslate"},{"Culture":"fr-fr","FileStatus":2,"HasPublishedVersion":false,"LastModified":"2021-04-15T13:34:22Z","Path":{"__metadata":{"type":"SP.ResourcePath"},"DecodedUrl":"SitePages/fr/PNP_SDK_TEST_PageToTranslate.aspx"},"Title":"Translate into French: PNP_SDK_TEST_PageToTranslate"}]}}}
+--batchresponse_eb21841d-548b-48f2-b93d-3d68c551f312--

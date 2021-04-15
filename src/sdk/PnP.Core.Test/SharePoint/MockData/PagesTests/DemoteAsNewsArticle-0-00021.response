@@ -1,1 +1,9 @@
-[{"SchemaVersion":"15.0.0.0","LibraryVersion":"16.0.21124.12007","ErrorInfo":null,"TraceCorrelationId":"09fbbb9f-502f-2000-cd61-63af499ce53b"}]
+--batchresponse_6379a8bc-868a-4930-a406-ea395c3b88f8
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+HTTP/1.1 200 OK
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+
+{"d":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/prov-1/SitePages/PNP_SDK_TEST_DemoteAsNewsArticle.aspx')","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/prov-1/SitePages/PNP_SDK_TEST_DemoteAsNewsArticle.aspx')","type":"SP.File"},"ListId":"5c73d6b2-ac03-4058-8233-af21df6ed8de","UniqueId":"a49cc35b-2402-4c67-8491-980736358e23"}}
+--batchresponse_6379a8bc-868a-4930-a406-ea395c3b88f8--

@@ -1,9 +1,9 @@
---batchresponse_38c4ef68-fe7b-420e-a376-068447ea6883
+--batchresponse_245ba0c6-3c44-4715-81b8-1bfa102e6cf8
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
-HTTP/1.1 404 Not Found
+HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{"error":{"code":"-2130575338, Microsoft.SharePoint.SPException","message":{"lang":"en-US","value":"The file /sites/prov-1/SitePages/PNP_SDK_TEST_HomePageCreate.aspx does not exist."}}}
---batchresponse_38c4ef68-fe7b-420e-a376-068447ea6883--
+{"d":{"results":[]}}
+--batchresponse_245ba0c6-3c44-4715-81b8-1bfa102e6cf8--

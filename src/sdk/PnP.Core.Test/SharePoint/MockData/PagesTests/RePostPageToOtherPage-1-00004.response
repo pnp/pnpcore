@@ -1,4 +1,4 @@
---batchresponse_9c7f2b30-eaa5-49ff-9a17-f439fa776845
+--batchresponse_351eafa7-b0bd-4549-a4f6-1e89f17dbe3d
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
@@ -6,4 +6,4 @@ HTTP/1.1 404 Not Found
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
 {"error":{"code":"-2130575338, Microsoft.SharePoint.SPException","message":{"lang":"en-US","value":"The file /sites/prov-1/SitePages/PNP_SDK_TEST_RePostPageToOtherPage.aspx does not exist."}}}
---batchresponse_9c7f2b30-eaa5-49ff-9a17-f439fa776845--
+--batchresponse_351eafa7-b0bd-4549-a4f6-1e89f17dbe3d--

@@ -1707,6 +1707,7 @@ namespace PnP.Core.Test.SharePoint
         }
 
         [TestMethod]
+        [DoNotParallelize()]
         public async Task PublishPage_NoMinorVersion()
         {
             //TestCommon.Instance.Mocking = false;
@@ -1777,6 +1778,7 @@ namespace PnP.Core.Test.SharePoint
         }
 
         [TestMethod]
+        [DoNotParallelize()]
         public async Task PublishPage_ForceCheckout_NoMinorVersion()
         {
             //TestCommon.Instance.Mocking = false;
@@ -1850,6 +1852,7 @@ namespace PnP.Core.Test.SharePoint
         }
 
         [TestMethod]
+        [DoNotParallelize()]
         public async Task PublishPage_ForceCheckout_EnabledModeration_NoMinorVersion()
         {
             //TestCommon.Instance.Mocking = false;
@@ -1927,6 +1930,7 @@ namespace PnP.Core.Test.SharePoint
         }
 
         [TestMethod]
+        [DoNotParallelize()]
         public async Task PublishPage_MajorAndMinorVersion_ForceCheckout_EnabledModeration()
         {
             //TestCommon.Instance.Mocking = false;
@@ -2331,5 +2335,37 @@ namespace PnP.Core.Test.SharePoint
             }
         }
         #endregion
+
+        #region Other page types: Topic page
+        [TestMethod]
+        public async Task TopicPageClone()
+        {
+            //TestCommon.Instance.Mocking = false;
+            TestCommon.SharePointVivaTopicsTestSetup();
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.VivaTopicCenterTestSite))
+            {
+                // We assume this page exists for now, once there's support to create new topic pages this can be updated
+                var pages = await context.Web.GetPagesAsync("topicA");
+                var topicPage = pages.AsEnumerable().First();
+                string pageName = TestCommon.GetPnPSdkTestAssetName("TopicPageClone.aspx");
+
+                // Save the page under a new name
+                topicPage.PageTitle = "TopicPageClone";
+                await topicPage.SaveAsync(pageName);
+
+                // Load the page again
+                pages = await context.Web.GetPagesAsync(pageName);
+                Assert.IsTrue(pages.Count == 1);
+                topicPage = pages.AsEnumerable().First();
+
+                Assert.IsTrue(topicPage.LayoutType == PageLayoutType.Topic);
+
+                // Delete the page
+                await topicPage.DeleteAsync();
+            }
+        }
+        #endregion
+
     }
 }

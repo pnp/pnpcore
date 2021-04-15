@@ -63,6 +63,11 @@ namespace PnP.Core.Test.Utilities
         internal static string SyntexContentCenterTestSite { get { return "SyntexContentCenterTestSite"; } }
 
         /// <summary>
+        /// Name of the default Syntex Content Center test site confguration
+        /// </summary>
+        internal static string VivaTopicCenterTestSite { get { return "VivaTopicCenterTestSite"; } }
+
+        /// <summary>
         /// Name of the default test site confguration when using an access token to authenticate
         /// </summary>
         internal static string TestSiteAccessToken { get { return "TestSiteAccessToken"; } }
@@ -128,10 +133,15 @@ namespace PnP.Core.Test.Utilities
 
         private string RewriteConfigurationNameForOptionalOfflineTestConfigurations(string configurationName)
         {
-            if (Mocking && configurationName == ClassicSTS0TestSite || configurationName == SyntexContentCenterTestSite)
+            if (Mocking && 
+                configurationName == ClassicSTS0TestSite || configurationName == SyntexContentCenterTestSite || configurationName == VivaTopicCenterTestSite)
             {
                 var configuration = GetConfigurationSettings();
                 if (configurationName == SyntexContentCenterTestSite && string.IsNullOrEmpty(configuration.GetValue<string>("PnPCore:Sites:SyntexContentCenterTestSite:SiteUrl")))
+                {
+                    configurationName = TestSite;
+                }
+                else if (configurationName == VivaTopicCenterTestSite && string.IsNullOrEmpty(configuration.GetValue<string>("PnPCore:Sites:VivaTopicCenterTestSite:SiteUrl")))
                 {
                     configurationName = TestSite;
                 }
@@ -300,6 +310,7 @@ namespace PnP.Core.Test.Utilities
                 string noGroupSiteUrl = configuration.GetValue<string>("PnPCore:Sites:NoGroupTestSite:SiteUrl");
                 string classicSTS0SiteUrl = configuration.GetValue<string>("PnPCore:Sites:ClassicSTS0TestSite:SiteUrl");
                 string syntexContentCenterSiteUrl = configuration.GetValue<string>("PnPCore:Sites:SyntexContentCenterTestSite:SiteUrl");
+                string vivaTopicCenterSiteUrl = configuration.GetValue<string>("PnPCore:Sites:VivaTopicCenterTestSite:SiteUrl");
 
                 if (RunningInGitHubWorkflow())
                 {
@@ -343,6 +354,11 @@ namespace PnP.Core.Test.Utilities
                 if (!string.IsNullOrEmpty(syntexContentCenterSiteUrl))
                 {
                     TestUris.Add("SyntexContentCenterTestSite", new Uri(syntexContentCenterSiteUrl));
+                }
+
+                if (!string.IsNullOrEmpty(vivaTopicCenterSiteUrl))
+                {
+                    TestUris.Add("VivaTopicCenterTestSite", new Uri(vivaTopicCenterSiteUrl));
                 }
 
                 var pnpContextFactory = serviceProvider.GetRequiredService<IPnPTestContextFactory>();
@@ -414,6 +430,15 @@ namespace PnP.Core.Test.Utilities
             if (!Instance.Mocking && string.IsNullOrEmpty(configuration.GetValue<string>("PnPCore:Sites:SyntexContentCenterTestSite:SiteUrl")))
             {
                 Assert.Inconclusive("No Syntex Content Center setup for live testing");
+            }
+        }
+
+        internal static void SharePointVivaTopicsTestSetup()
+        {
+            var configuration = GetConfigurationSettings();
+            if (!Instance.Mocking && string.IsNullOrEmpty(configuration.GetValue<string>("PnPCore:Sites:VivaTopicCenterTestSite:SiteUrl")))
+            {
+                Assert.Inconclusive("No Viva Topic Center setup for live testing");
             }
         }
 

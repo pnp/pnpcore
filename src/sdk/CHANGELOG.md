@@ -12,6 +12,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
 ### Changed
 
+- Added support for reading/saving Viva Topic pages [jansenbe - Bert Jansen]
 - Implement paging in loadPagesAsync [jansenbe - Bert Jansen]
 - Make loadPagesAsync work when querying for a specific page in a big list #383 [YannickRe - Yannick Reekmans]
 - Implement the EnsurePageListItemAsync method via GetFileByServerRelativeUrlAsync instead of using a CAML query to load the item to prevent 5000 item limit issues [jansenbe - Bert Jansen]

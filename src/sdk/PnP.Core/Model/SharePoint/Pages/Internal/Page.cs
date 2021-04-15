@@ -3,11 +3,13 @@ using PnP.Core.QueryModel;
 using PnP.Core.Services;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Net;
 using System.Net.Http;
+using System.Security.Cryptography;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -21,6 +23,9 @@ namespace PnP.Core.Model.SharePoint
         private string pageName;
         private static readonly Expression<Func<IList, object>>[] getPagesLibraryExpression = new Expression<Func<IList, object>>[] {p => p.Title, p => p.TemplateType, p => p.EnableFolderCreation,
             p => p.EnableMinorVersions, p => p.EnableModeration, p => p.EnableVersioning, p => p.ForceCheckout, p => p.RootFolder, p => p.ListItemEntityTypeFullName, p => p.Fields };
+#pragma warning disable CA5351 // Do Not Use Broken Cryptographic Algorithms
+        private static readonly MD5 md5 = MD5.Create();
+#pragma warning restore CA5351 // Do Not Use Broken Cryptographic Algorithms
 
         #region Construction
 
@@ -248,7 +253,10 @@ namespace PnP.Core.Model.SharePoint
             List<IPage> loadedPages = new List<IPage>();
 
             // Get a reference to the pages library, reuse the existing one if the correct properties were loaded
-            IList pagesLibrary = await EnsurePagesLibraryAsync(context).ConfigureAwait(false);
+            IList pagesLibrary = await EnsurePagesLibraryAsync(context).ConfigureAwait(false);            
+
+            // Prepare CAML query to load the list items
+            await GetPagesListData(pageName, pagesLibrary).ConfigureAwait(false);
 
             // drop .aspx from the page name as page title is without extension
             if (!string.IsNullOrEmpty(pageName))
@@ -259,9 +267,6 @@ namespace PnP.Core.Model.SharePoint
                     pageName = pageName.Replace(".aspx", "");
                 }
             }
-
-            // Prepare CAML query to load the list items
-            await GetPagesListData(pageName, pagesLibrary).ConfigureAwait(false);
 
             // There can be multiple list items from previous loads, even though we just requested pages for the filter so 
             // ensure only pages mapping the requested filter are returned
@@ -1569,7 +1574,8 @@ namespace PnP.Core.Model.SharePoint
                 else if (LayoutType == PageLayoutType.Topic)
                 {
                     PageListItem[PageConstants.PageLayoutType] = PageConstants.TopicLayoutType;
-                    PageListItem[PageConstants.TopicEntityId] = EntityId;
+                    // Each page needs to have a unique topic Entity ID, so generate a new one
+                    PageListItem[PageConstants.TopicEntityId] = GenerateTopicPageEntityId(PnPContext.Site.Id, PnPContext.Web.Id, addedFile.UniqueId);
                     PageListItem[PageConstants.TopicEntityRelations] = EntityRelations;
                     PageListItem[PageConstants.TopicEntityType] = EntityType;
 
@@ -1650,6 +1656,12 @@ namespace PnP.Core.Model.SharePoint
                 else
                 {
                     PageListItem[PageConstants.CanvasField] = ToHtml();
+                }
+
+
+                if (layoutType == PageLayoutType.Topic && string.IsNullOrEmpty(PageListItem[PageConstants.CanvasField]?.ToString()))
+                {
+                    PageListItem[PageConstants.CanvasField] = "<div></div>";
                 }
 
                 if (!string.IsNullOrEmpty(ThumbnailUrl))
@@ -1744,7 +1756,7 @@ namespace PnP.Core.Model.SharePoint
 
             if (LayoutType != PageLayoutType.Spaces)
             {
-                    PageListItem[PageConstants.PageLayoutType] = layoutType.ToString();
+                PageListItem[PageConstants.PageLayoutType] = layoutType.ToString();
             }
 
             // Try to set the page description if not yet set
@@ -2389,6 +2401,36 @@ namespace PnP.Core.Model.SharePoint
                 DefaultWebPart.Button => "0f087d7f-520e-42b7-89c0-496aaf979d58",
                 _ => "",
             };
+        }
+        #endregion
+
+        #region Viva Topic pages
+        /// <summary>
+        /// Generate topic page entity id based on current sharepoint page ids
+        /// </summary>
+        /// <param name="siteId">Site collection id</param>
+        /// <param name="webId">Web id</param>
+        /// <param name="uniqueId">Unique id of the page file</param>
+        /// <returns>Generated topic page entity id</returns>
+        internal static string GenerateTopicPageEntityId(Guid siteId, Guid webId, Guid uniqueId)
+        {
+            return string.Format(CultureInfo.InvariantCulture, "CRKB_{0}", GenerateUrlHash(string.Format(CultureInfo.InvariantCulture, "{0}_{1}_{2}", siteId, webId, uniqueId)));
+        }
+
+        private static string GenerateUrlHash(string value)
+        {
+            return WebUtility.UrlEncode(Base64Encode(MD5Hash(value)));
+        }
+
+        private static byte[] MD5Hash(string stringToHash)
+        {
+            return md5.ComputeHash(Encoding.UTF8.GetBytes(stringToHash));
+        }
+
+        private static string Base64Encode(byte[] input)
+        {
+            string str = Convert.ToBase64String(input).Split(new char[] { '=' })[0];
+            return str.Replace('+', '-').Replace('/', '_');
         }
         #endregion
 
