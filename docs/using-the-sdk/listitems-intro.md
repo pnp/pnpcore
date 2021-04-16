@@ -122,7 +122,9 @@ foreach (var listItem in myList.Items.AsRequested())
 ```
 
 > [!Note]
-> If you're query is ordered by one or more fields these fields also have to specified in the PagingInfo, e.g. if ordered on Title the PagingInfo would be `$"Paged=TRUE&p_ID={list2.Items.Last().Id}&p_Title=${list2.Items.Last().Title}"`. If you want to load the previous page you also need to add `&PagedPrev=TRUE`.
+>
+> - If you're query is ordered by one or more fields these fields also have to specified in the PagingInfo, e.g. if ordered on Title the PagingInfo would be `$"Paged=TRUE&p_ID={list2.Items.Last().Id}&p_Title=${list2.Items.Last().Title}"`. If you want to load the previous page you also need to add `&PagedPrev=TRUE`. When using the `LoadListDataAsStream` methods the paging info is automatically returned.
+> - If you want to load 'system properties' like FileLeafRef, FileDirRef etc then these are not returned when doing a CAML query using the `LoadItemsByCamlQuery` methods, the `LoadListDataAsStream` methods however do support a CAML query that specifies a system property in the `ViewFields`
 
 ### Using the ListDataAsStream approach
 
@@ -137,6 +139,7 @@ var myList = context.Web.Lists.GetByTitle("My List", p => p.Title, p => p.Items,
 string viewXml = @"<View>
                     <ViewFields>
                       <FieldRef Name='Title' />
+                      <FieldRef Name='FileLeafRef' />
                     </ViewFields>
                     <Query>
                       <Where>
@@ -176,6 +179,7 @@ var myList = context.Web.Lists.GetByTitle("My List", p => p.Title, p => p.Items,
 string viewXml = @"<View>
                     <ViewFields>
                       <FieldRef Name='Title' />
+                      <FieldRef Name='FileLeafRef' />
                     </ViewFields>
                     <Query>
                       <Where>
@@ -188,20 +192,27 @@ string viewXml = @"<View>
                     <RowLimit Paged='TRUE'>20</RowLimit>
                    </View>";
 
-// Execute the query for the first page
-var output = await myList.LoadListDataAsStreamAsync(new RenderListDataOptions()
+// Load all the needed data using paged requests
+bool paging = true;
+string nextPage = null;
+while (paging)
 {
-    ViewXml = viewXml,
-    RenderOptions = RenderListDataOptionsFlags.ListData
-});
+    var output = await pagesLibrary.LoadListDataAsStreamAsync(new RenderListDataOptions()
+    {
+        ViewXml = viewXml,
+        RenderOptions = RenderListDataOptionsFlags.ListData,
+        Paging = nextPage ?? null,
+    }).ConfigureAwait(false);
 
-// Execute the query for the next page
-output = await myList.LoadListDataAsStreamAsync(new RenderListDataOptions()
-{
-    ViewXml = viewXml,
-    RenderOptions = RenderListDataOptionsFlags.ListData,
-    Paging = output["NextHref"].ToString().Substring(1)
-});
+    if (output.ContainsKey("NextHref"))
+    {
+        nextPage = output["NextHref"].ToString().Substring(1);
+    }
+    else
+    {
+        paging = false;
+    }
+}
 
 // Iterate over the retrieved list items
 foreach (var listItem in myList.Items.AsRequested())
