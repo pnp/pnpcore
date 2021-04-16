@@ -27,6 +27,6 @@ If you want to load additional site properties you can do that via using one of 
 await context.Web.LoadAsync(p => p.RootFolder);
 
 // Load the hub site id
-var web = await context.Web.GetAsync(p => p.HubSiteId);
-Console.WriteLine(web.HubSiteId);
+var site = await context.Site.GetAsync(p => p.HubSiteId);
+Console.WriteLine(site.HubSiteId);
 ```
