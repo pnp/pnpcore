@@ -117,7 +117,7 @@ namespace PnP.Core.Model.SharePoint
         /// <param name="cc">ClientContext of the site hosting the image</param>
         /// <param name="pageHeaderType">Type of page header</param>
         /// <param name="imageServerRelativeUrl">Server relative image url</param>
-        public PageHeader(PnPContext cc, PageHeaderType pageHeaderType, string imageServerRelativeUrl)
+        internal PageHeader(PnPContext cc, PageHeaderType pageHeaderType, string imageServerRelativeUrl)
         {
             this.imageServerRelativeUrl = imageServerRelativeUrl;
             clientContext = cc;
@@ -130,20 +130,6 @@ namespace PnP.Core.Model.SharePoint
             AlternativeText = "";
             ShowPublishDate = false;
             AuthorByLineId = -1;
-        }
-
-        /// <summary>
-        /// Creates a custom header with a custom image + custom image offset
-        /// </summary>
-        /// <param name="cc">ClientContext of the site hosting the image</param>
-        /// <param name="pageHeaderType">Type of page header</param>
-        /// <param name="imageServerRelativeUrl">Server relative image url</param>
-        /// <param name="translateX">X offset coordinate</param>
-        /// <param name="translateY">Y offset coordinate</param>
-        public PageHeader(PnPContext cc, PageHeaderType pageHeaderType, string imageServerRelativeUrl, double translateX, double translateY) : this(cc, pageHeaderType, imageServerRelativeUrl)
-        {
-            TranslateX = translateX;
-            TranslateY = translateY;
         }
         #endregion
 

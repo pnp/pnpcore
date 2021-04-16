@@ -20,53 +20,26 @@ namespace PnP.Core.Model.SharePoint
         #region construction
         internal CanvasColumn(CanvasSection section)
         {
-            if (section == null)
-            {
-                throw new ArgumentNullException(nameof(section));
-            }
-
-            Section = section;
+            Section = section ?? throw new ArgumentNullException(nameof(section));
             ColumnFactor = 12;
             Order = 0;
             LayoutIndex = 1;
         }
 
-        internal CanvasColumn(CanvasSection section, int order)
-        {
-            if (section == null)
-            {
-                throw new ArgumentNullException(nameof(section));
-            }
-
-            Section = section;
-            Order = order;
-            LayoutIndex = 1;
-        }
-
         internal CanvasColumn(CanvasSection section, int order, int? sectionFactor)
         {
-            if (section == null)
-            {
-                throw new ArgumentNullException(nameof(section));
-            }
-
-            Section = section;
+            Section = section ?? throw new ArgumentNullException(nameof(section));
             Order = order;
-            ColumnFactor = sectionFactor.HasValue ? sectionFactor.Value : 12;
+            ColumnFactor = sectionFactor ?? 12;
             LayoutIndex = 1;
         }
 
         internal CanvasColumn(CanvasSection section, int order, int? sectionFactor, int? layoutIndex)
         {
-            if (section == null)
-            {
-                throw new ArgumentNullException(nameof(section));
-            }
-
-            Section = section;
+            Section = section ?? throw new ArgumentNullException(nameof(section));
             Order = order;
-            ColumnFactor = sectionFactor.HasValue ? sectionFactor.Value : 12;
-            LayoutIndex = layoutIndex.HasValue ? layoutIndex.Value : 1;
+            ColumnFactor = sectionFactor ?? 12;
+            LayoutIndex = layoutIndex ?? 1;
         }
         #endregion
 
@@ -174,7 +147,7 @@ namespace PnP.Core.Model.SharePoint
 
                     Emphasis = new SectionEmphasis()
                     {
-                        ZoneEmphasis = VerticalSectionEmphasis.HasValue ? VerticalSectionEmphasis.Value : Section.ZoneEmphasis,
+                        ZoneEmphasis = VerticalSectionEmphasis ?? Section.ZoneEmphasis,
                     }
                 };
 
