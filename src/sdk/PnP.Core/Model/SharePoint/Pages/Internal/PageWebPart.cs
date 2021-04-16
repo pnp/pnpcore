@@ -157,7 +157,7 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// Indicates that this control is persisted/read using the data-sp-controldata attribute only
         /// </summary>
-        public bool UsingSpControlDataOnly { get; set; }
+        internal bool UsingSpControlDataOnly { get; set; }
 
         /// <summary>
         /// This control lives in the page header (not removable control)
@@ -172,7 +172,7 @@ namespace PnP.Core.Model.SharePoint
         /// </summary>
         /// <param name="component"><see cref="PageComponent"/> to import</param>
         /// <param name="clientSideWebPartPropertiesUpdater">Function callback that allows you to manipulate the client side web part properties after import</param>
-        public void Import(PageComponent component, Func<String, String> clientSideWebPartPropertiesUpdater = null)
+        public void Import(PageComponent component, Func<string, string> clientSideWebPartPropertiesUpdater = null)
         {
             // Sometimes the id guid is encoded with curly brackets, so let's drop those
             WebPartId = new Guid(component.Id).ToString("D");
@@ -252,7 +252,7 @@ namespace PnP.Core.Model.SharePoint
 
                 controlData.Emphasis = new SectionEmphasis()
                 {
-                    ZoneEmphasis = Column.VerticalSectionEmphasis.HasValue ? Column.VerticalSectionEmphasis.Value : Section.ZoneEmphasis,
+                    ZoneEmphasis = Column.VerticalSectionEmphasis ?? Section.ZoneEmphasis,
                 };
 
                 // Set the control's data version to the latest version...default was 1.0, but some controls use a higher version
@@ -263,27 +263,27 @@ namespace PnP.Core.Model.SharePoint
                 {
                     if (webPartType == DefaultWebPart.Image)
                     {
-                        dataVersion = "1.8";
+                        dataVersion = "1.9";
                     }
                     else if (webPartType == DefaultWebPart.ImageGallery)
                     {
-                        dataVersion = "1.6";
+                        dataVersion = "1.8";
                     }
                     else if (webPartType == DefaultWebPart.People)
                     {
-                        dataVersion = "1.2";
+                        dataVersion = "1.3";
                     }
                     else if (webPartType == DefaultWebPart.DocumentEmbed)
                     {
-                        dataVersion = "1.1";
+                        dataVersion = "1.2";
                     }
                     else if (webPartType == DefaultWebPart.ContentRollup)
                     {
-                        dataVersion = "2.1";
+                        dataVersion = "2.5";
                     }
                     else if (webPartType == DefaultWebPart.QuickLinks)
                     {
-                        dataVersion = "2.0";
+                        dataVersion = "2.2";
                     }
                 }
 

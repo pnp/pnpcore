@@ -213,6 +213,81 @@
         /// <summary>
         /// Button web part
         /// </summary>
-        Button
+        Button,
+
+        /// <summary>
+        /// Kindle preview web part
+        /// </summary>
+        Kindle,
+
+        /// <summary>
+        /// My Feed web part
+        /// </summary>
+        MyFeed,
+
+        /// <summary>
+        /// Organization chart web part
+        /// </summary>
+        OrgChart,
+
+        /// <summary>
+        /// Saved for later web part
+        /// </summary>
+        SavedForLater,
+
+        /// <summary>
+        /// Twitter web part
+        /// </summary>
+        Twitter,
+
+        /// <summary>
+        /// World clock web part
+        /// </summary>
+        WorldClock,
+
+        /// <summary>
+        /// Spaces document library web part
+        /// </summary>
+        SpacesDocLib,
+
+        /// <summary>
+        /// Spaces file viewer web part
+        /// </summary>
+        SpacesFileViewer,
+
+        /// <summary>
+        /// Spaces image viewer web part
+        /// </summary>
+        SpacesImageViewer,
+
+        /// <summary>
+        /// Spaces 3D model viewer
+        /// </summary>
+        SpacesModelViewer,
+
+        /// <summary>
+        /// Spaces Image 360° viewer
+        /// </summary>
+        SpacesImageThreeSixty,
+
+        /// <summary>
+        /// Spaces Video 360° viewer
+        /// </summary>
+        SpacesVideoThreeSixty,
+
+        /// <summary>
+        /// Spaces text
+        /// </summary>
+        SpacesText2D,
+
+        /// <summary>
+        /// Spaces video player
+        /// </summary>
+        SpacesVideoPlayer,
+
+        /// <summary>
+        /// Spaces People web part
+        /// </summary>
+        SpacesPeople
     }
 }
