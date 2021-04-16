@@ -1032,6 +1032,64 @@ namespace PnP.Core.Test.SharePoint
                 await page.DeleteAsync();
             }
         }
+
+        [TestMethod]
+        public async Task MoveControlsTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.NoGroupTestSite))
+            {
+                var page = await context.Web.NewPageAsync();
+                string pageName = TestCommon.GetPnPSdkTestAssetName("MoveControlsTest.aspx");
+
+                // Add all the possible sections 
+                page.AddSection(CanvasSectionTemplate.OneColumnFullWidth, 1);
+                page.AddSection(CanvasSectionTemplate.TwoColumn, 2);
+                page.AddSection(CanvasSectionTemplate.ThreeColumn, 3);
+
+                var availableComponents = await page.AvailablePageComponentsAsync();
+                var imageWebPartComponent = availableComponents.FirstOrDefault(p => p.Id == page.DefaultWebPartToWebPartId(DefaultWebPart.Image));
+
+                // Add a text control in each section
+                page.AddControl(page.NewWebPart(imageWebPartComponent), page.Sections[0].Columns[0]);
+                page.AddControl(page.NewWebPart(imageWebPartComponent), page.Sections[0].Columns[0]);
+                page.AddControl(page.NewWebPart(imageWebPartComponent), page.Sections[1].Columns[1]);
+                page.AddControl(page.NewWebPart(imageWebPartComponent), page.Sections[1].Columns[1]);
+                page.AddControl(page.NewWebPart(imageWebPartComponent), page.Sections[2].Columns[2]);
+                page.AddControl(page.NewWebPart(imageWebPartComponent), page.Sections[2].Columns[2]);
+                page.AddControl(page.NewWebPart(imageWebPartComponent), page.Sections[2].Columns[2]);
+
+                await page.SaveAsync(pageName);
+
+                // load page again
+                var pages = await context.Web.GetPagesAsync(pageName);
+
+                Assert.IsTrue(pages.Count == 1);
+
+                page = pages.AsEnumerable().First();
+
+                Assert.IsTrue(page.Sections.Count == 3);
+                Assert.IsTrue(page.Sections[0].Type == CanvasSectionTemplate.OneColumnFullWidth);
+                Assert.IsTrue(page.Sections[0].Columns[0].Controls.Count == 2);
+                Assert.IsTrue(page.Sections[0].Columns[0].Controls[0] is IPageWebPart);
+                Assert.IsTrue((page.Sections[0].Columns[0].Controls[0] as IPageWebPart).WebPartId == page.DefaultWebPartToWebPartId(DefaultWebPart.Image));
+
+                // Move the image web part
+                page.Sections[0].Columns[0].Controls[0].Move(page.Sections[1].Columns[0], 1);
+                page.Sections[0].Columns[0].Controls[0].Move(page.Sections[1], 2);
+
+                Assert.IsTrue(page.Sections[0].Controls.Count == 0);
+                Assert.IsTrue(page.Sections[1].Columns[0].Controls.Count == 2);
+
+                // Move the image web part, setting position as last control in the column
+                page.Sections[1].Columns[1].Controls[0].MovePosition(page.Sections[2].Columns[2], 100);
+
+                Assert.IsTrue(page.Sections[2].Columns[2].Controls.Count == 4);
+
+                // delete the page
+                await page.DeleteAsync();
+            }
+        }
         #endregion
 
         #region Page Header handling
