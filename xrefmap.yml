@@ -5645,6 +5645,12 @@ references:
   commentId: F:PnP.Core.Model.SharePoint.DefaultWebPart.ImageGallery
   fullName: PnP.Core.Model.SharePoint.DefaultWebPart.ImageGallery
   nameWithType: DefaultWebPart.ImageGallery
+- uid: PnP.Core.Model.SharePoint.DefaultWebPart.Kindle
+  name: Kindle
+  href: api/PnP.Core.Model.SharePoint.DefaultWebPart.html#PnP_Core_Model_SharePoint_DefaultWebPart_Kindle
+  commentId: F:PnP.Core.Model.SharePoint.DefaultWebPart.Kindle
+  fullName: PnP.Core.Model.SharePoint.DefaultWebPart.Kindle
+  nameWithType: DefaultWebPart.Kindle
 - uid: PnP.Core.Model.SharePoint.DefaultWebPart.LinkPreview
   name: LinkPreview
   href: api/PnP.Core.Model.SharePoint.DefaultWebPart.html#PnP_Core_Model_SharePoint_DefaultWebPart_LinkPreview
@@ -5681,6 +5687,12 @@ references:
   commentId: F:PnP.Core.Model.SharePoint.DefaultWebPart.MyDocuments
   fullName: PnP.Core.Model.SharePoint.DefaultWebPart.MyDocuments
   nameWithType: DefaultWebPart.MyDocuments
+- uid: PnP.Core.Model.SharePoint.DefaultWebPart.MyFeed
+  name: MyFeed
+  href: api/PnP.Core.Model.SharePoint.DefaultWebPart.html#PnP_Core_Model_SharePoint_DefaultWebPart_MyFeed
+  commentId: F:PnP.Core.Model.SharePoint.DefaultWebPart.MyFeed
+  fullName: PnP.Core.Model.SharePoint.DefaultWebPart.MyFeed
+  nameWithType: DefaultWebPart.MyFeed
 - uid: PnP.Core.Model.SharePoint.DefaultWebPart.News
   name: News
   href: api/PnP.Core.Model.SharePoint.DefaultWebPart.html#PnP_Core_Model_SharePoint_DefaultWebPart_News
@@ -5699,6 +5711,12 @@ references:
   commentId: F:PnP.Core.Model.SharePoint.DefaultWebPart.NewsReel
   fullName: PnP.Core.Model.SharePoint.DefaultWebPart.NewsReel
   nameWithType: DefaultWebPart.NewsReel
+- uid: PnP.Core.Model.SharePoint.DefaultWebPart.OrgChart
+  name: OrgChart
+  href: api/PnP.Core.Model.SharePoint.DefaultWebPart.html#PnP_Core_Model_SharePoint_DefaultWebPart_OrgChart
+  commentId: F:PnP.Core.Model.SharePoint.DefaultWebPart.OrgChart
+  fullName: PnP.Core.Model.SharePoint.DefaultWebPart.OrgChart
+  nameWithType: DefaultWebPart.OrgChart
 - uid: PnP.Core.Model.SharePoint.DefaultWebPart.PageFields
   name: PageFields
   href: api/PnP.Core.Model.SharePoint.DefaultWebPart.html#PnP_Core_Model_SharePoint_DefaultWebPart_PageFields
@@ -5747,6 +5765,12 @@ references:
   commentId: F:PnP.Core.Model.SharePoint.DefaultWebPart.QuickLinks
   fullName: PnP.Core.Model.SharePoint.DefaultWebPart.QuickLinks
   nameWithType: DefaultWebPart.QuickLinks
+- uid: PnP.Core.Model.SharePoint.DefaultWebPart.SavedForLater
+  name: SavedForLater
+  href: api/PnP.Core.Model.SharePoint.DefaultWebPart.html#PnP_Core_Model_SharePoint_DefaultWebPart_SavedForLater
+  commentId: F:PnP.Core.Model.SharePoint.DefaultWebPart.SavedForLater
+  fullName: PnP.Core.Model.SharePoint.DefaultWebPart.SavedForLater
+  nameWithType: DefaultWebPart.SavedForLater
 - uid: PnP.Core.Model.SharePoint.DefaultWebPart.SiteActivity
   name: SiteActivity
   href: api/PnP.Core.Model.SharePoint.DefaultWebPart.html#PnP_Core_Model_SharePoint_DefaultWebPart_SiteActivity
@@ -5765,12 +5789,72 @@ references:
   commentId: F:PnP.Core.Model.SharePoint.DefaultWebPart.Spacer
   fullName: PnP.Core.Model.SharePoint.DefaultWebPart.Spacer
   nameWithType: DefaultWebPart.Spacer
+- uid: PnP.Core.Model.SharePoint.DefaultWebPart.SpacesDocLib
+  name: SpacesDocLib
+  href: api/PnP.Core.Model.SharePoint.DefaultWebPart.html#PnP_Core_Model_SharePoint_DefaultWebPart_SpacesDocLib
+  commentId: F:PnP.Core.Model.SharePoint.DefaultWebPart.SpacesDocLib
+  fullName: PnP.Core.Model.SharePoint.DefaultWebPart.SpacesDocLib
+  nameWithType: DefaultWebPart.SpacesDocLib
+- uid: PnP.Core.Model.SharePoint.DefaultWebPart.SpacesFileViewer
+  name: SpacesFileViewer
+  href: api/PnP.Core.Model.SharePoint.DefaultWebPart.html#PnP_Core_Model_SharePoint_DefaultWebPart_SpacesFileViewer
+  commentId: F:PnP.Core.Model.SharePoint.DefaultWebPart.SpacesFileViewer
+  fullName: PnP.Core.Model.SharePoint.DefaultWebPart.SpacesFileViewer
+  nameWithType: DefaultWebPart.SpacesFileViewer
+- uid: PnP.Core.Model.SharePoint.DefaultWebPart.SpacesImageThreeSixty
+  name: SpacesImageThreeSixty
+  href: api/PnP.Core.Model.SharePoint.DefaultWebPart.html#PnP_Core_Model_SharePoint_DefaultWebPart_SpacesImageThreeSixty
+  commentId: F:PnP.Core.Model.SharePoint.DefaultWebPart.SpacesImageThreeSixty
+  fullName: PnP.Core.Model.SharePoint.DefaultWebPart.SpacesImageThreeSixty
+  nameWithType: DefaultWebPart.SpacesImageThreeSixty
+- uid: PnP.Core.Model.SharePoint.DefaultWebPart.SpacesImageViewer
+  name: SpacesImageViewer
+  href: api/PnP.Core.Model.SharePoint.DefaultWebPart.html#PnP_Core_Model_SharePoint_DefaultWebPart_SpacesImageViewer
+  commentId: F:PnP.Core.Model.SharePoint.DefaultWebPart.SpacesImageViewer
+  fullName: PnP.Core.Model.SharePoint.DefaultWebPart.SpacesImageViewer
+  nameWithType: DefaultWebPart.SpacesImageViewer
+- uid: PnP.Core.Model.SharePoint.DefaultWebPart.SpacesModelViewer
+  name: SpacesModelViewer
+  href: api/PnP.Core.Model.SharePoint.DefaultWebPart.html#PnP_Core_Model_SharePoint_DefaultWebPart_SpacesModelViewer
+  commentId: F:PnP.Core.Model.SharePoint.DefaultWebPart.SpacesModelViewer
+  fullName: PnP.Core.Model.SharePoint.DefaultWebPart.SpacesModelViewer
+  nameWithType: DefaultWebPart.SpacesModelViewer
+- uid: PnP.Core.Model.SharePoint.DefaultWebPart.SpacesPeople
+  name: SpacesPeople
+  href: api/PnP.Core.Model.SharePoint.DefaultWebPart.html#PnP_Core_Model_SharePoint_DefaultWebPart_SpacesPeople
+  commentId: F:PnP.Core.Model.SharePoint.DefaultWebPart.SpacesPeople
+  fullName: PnP.Core.Model.SharePoint.DefaultWebPart.SpacesPeople
+  nameWithType: DefaultWebPart.SpacesPeople
+- uid: PnP.Core.Model.SharePoint.DefaultWebPart.SpacesText2D
+  name: SpacesText2D
+  href: api/PnP.Core.Model.SharePoint.DefaultWebPart.html#PnP_Core_Model_SharePoint_DefaultWebPart_SpacesText2D
+  commentId: F:PnP.Core.Model.SharePoint.DefaultWebPart.SpacesText2D
+  fullName: PnP.Core.Model.SharePoint.DefaultWebPart.SpacesText2D
+  nameWithType: DefaultWebPart.SpacesText2D
+- uid: PnP.Core.Model.SharePoint.DefaultWebPart.SpacesVideoPlayer
+  name: SpacesVideoPlayer
+  href: api/PnP.Core.Model.SharePoint.DefaultWebPart.html#PnP_Core_Model_SharePoint_DefaultWebPart_SpacesVideoPlayer
+  commentId: F:PnP.Core.Model.SharePoint.DefaultWebPart.SpacesVideoPlayer
+  fullName: PnP.Core.Model.SharePoint.DefaultWebPart.SpacesVideoPlayer
+  nameWithType: DefaultWebPart.SpacesVideoPlayer
+- uid: PnP.Core.Model.SharePoint.DefaultWebPart.SpacesVideoThreeSixty
+  name: SpacesVideoThreeSixty
+  href: api/PnP.Core.Model.SharePoint.DefaultWebPart.html#PnP_Core_Model_SharePoint_DefaultWebPart_SpacesVideoThreeSixty
+  commentId: F:PnP.Core.Model.SharePoint.DefaultWebPart.SpacesVideoThreeSixty
+  fullName: PnP.Core.Model.SharePoint.DefaultWebPart.SpacesVideoThreeSixty
+  nameWithType: DefaultWebPart.SpacesVideoThreeSixty
 - uid: PnP.Core.Model.SharePoint.DefaultWebPart.ThirdParty
   name: ThirdParty
   href: api/PnP.Core.Model.SharePoint.DefaultWebPart.html#PnP_Core_Model_SharePoint_DefaultWebPart_ThirdParty
   commentId: F:PnP.Core.Model.SharePoint.DefaultWebPart.ThirdParty
   fullName: PnP.Core.Model.SharePoint.DefaultWebPart.ThirdParty
   nameWithType: DefaultWebPart.ThirdParty
+- uid: PnP.Core.Model.SharePoint.DefaultWebPart.Twitter
+  name: Twitter
+  href: api/PnP.Core.Model.SharePoint.DefaultWebPart.html#PnP_Core_Model_SharePoint_DefaultWebPart_Twitter
+  commentId: F:PnP.Core.Model.SharePoint.DefaultWebPart.Twitter
+  fullName: PnP.Core.Model.SharePoint.DefaultWebPart.Twitter
+  nameWithType: DefaultWebPart.Twitter
 - uid: PnP.Core.Model.SharePoint.DefaultWebPart.VideoEmbed
   name: VideoEmbed
   href: api/PnP.Core.Model.SharePoint.DefaultWebPart.html#PnP_Core_Model_SharePoint_DefaultWebPart_VideoEmbed
@@ -5783,6 +5867,12 @@ references:
   commentId: F:PnP.Core.Model.SharePoint.DefaultWebPart.Weather
   fullName: PnP.Core.Model.SharePoint.DefaultWebPart.Weather
   nameWithType: DefaultWebPart.Weather
+- uid: PnP.Core.Model.SharePoint.DefaultWebPart.WorldClock
+  name: WorldClock
+  href: api/PnP.Core.Model.SharePoint.DefaultWebPart.html#PnP_Core_Model_SharePoint_DefaultWebPart_WorldClock
+  commentId: F:PnP.Core.Model.SharePoint.DefaultWebPart.WorldClock
+  fullName: PnP.Core.Model.SharePoint.DefaultWebPart.WorldClock
+  nameWithType: DefaultWebPart.WorldClock
 - uid: PnP.Core.Model.SharePoint.DefaultWebPart.YammerEmbed
   name: YammerEmbed
   href: api/PnP.Core.Model.SharePoint.DefaultWebPart.html#PnP_Core_Model_SharePoint_DefaultWebPart_YammerEmbed
