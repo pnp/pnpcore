@@ -99,8 +99,8 @@ var id = site.Id;
 await context.Web.LoadAsync(p =&gt; p.RootFolder);
 
 // Load the hub site id
-var web = await context.Web.GetAsync(p =&gt; p.HubSiteId);
-Console.WriteLine(web.HubSiteId);
+var site = await context.Site.GetAsync(p =&gt; p.HubSiteId);
+Console.WriteLine(site.HubSiteId);
 </code></pre>
 </article>
           </div>
