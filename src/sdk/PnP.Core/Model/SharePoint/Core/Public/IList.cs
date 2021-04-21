@@ -46,7 +46,7 @@ namespace PnP.Core.Model.SharePoint
         public ListTemplateType TemplateType { get; }
 
         /// <summary>
-        /// Gets or sets a value that specifies whether the new list is displayed on the Quick Launch of the site.
+        /// Gets the value of list absolute URL
         /// </summary>
         public string Url { get; }
 
