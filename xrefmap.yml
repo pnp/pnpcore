@@ -18682,6 +18682,22 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.ISite.GetAvailableComplianceTagsAsync
   nameWithType: ISite.GetAvailableComplianceTagsAsync
+- uid: PnP.Core.Model.SharePoint.ISite.GetHubSiteData(System.Nullable{Guid})
+  name: GetHubSiteData(Nullable<Guid>)
+  href: api/PnP.Core.Model.SharePoint.ISite.html#PnP_Core_Model_SharePoint_ISite_GetHubSiteData_System_Nullable_Guid__
+  commentId: M:PnP.Core.Model.SharePoint.ISite.GetHubSiteData(System.Nullable{Guid})
+  name.vb: GetHubSiteData(Nullable(Of Guid))
+  fullName: PnP.Core.Model.SharePoint.ISite.GetHubSiteData(System.Nullable<Guid>)
+  fullName.vb: PnP.Core.Model.SharePoint.ISite.GetHubSiteData(System.Nullable(Of Guid))
+  nameWithType: ISite.GetHubSiteData(Nullable<Guid>)
+  nameWithType.vb: ISite.GetHubSiteData(Nullable(Of Guid))
+- uid: PnP.Core.Model.SharePoint.ISite.GetHubSiteData*
+  name: GetHubSiteData
+  href: api/PnP.Core.Model.SharePoint.ISite.html#PnP_Core_Model_SharePoint_ISite_GetHubSiteData_
+  commentId: Overload:PnP.Core.Model.SharePoint.ISite.GetHubSiteData
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.ISite.GetHubSiteData
+  nameWithType: ISite.GetHubSiteData
 - uid: PnP.Core.Model.SharePoint.ISite.GroupId
   name: GroupId
   href: api/PnP.Core.Model.SharePoint.ISite.html#PnP_Core_Model_SharePoint_ISite_GroupId

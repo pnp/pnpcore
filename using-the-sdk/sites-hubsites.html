@@ -93,6 +93,14 @@
 </code></pre>
 
 <p>A <code>PnPContext</code> always has a reference to the <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.ISite.html">ISite</a> of the underlying site collection. Using the site object the following operations can be called when working with hub sites:</p>
+<h2 id="get-hub-site-data">Get Hub Site Data</h2>
+<p>Firstly, you will need a connection to a site, then you can either call a method to get the current Site Hub data OR specify an Id for another HubSite ID, to get the details. This is shown in the example below:</p>
+<pre><code class="lang-csharp">
+var hubResult = await context.Site.GetHubSiteData(site.HubSiteId);
+var title = hubResult.Title;
+var siteUrl = hubResult.SiteUrl;
+
+</code></pre>
 <h2 id="register-a-hub-site">Register a hub site</h2>
 <p>This registers a site as the primary hub site, using this code to apply this to a site:</p>
 <pre><code class="lang-csharp">
