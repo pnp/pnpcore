@@ -1,0 +1,9 @@
+--batchresponse_81232223-de9d-4cdd-80d9-c73e29acc282
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+HTTP/1.1 200 OK
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+
+{"d":{"__metadata":{"id":"https://capadevtest.sharepoint.com/sites/pnpcoresdktest/_api/Site","uri":"https://capadevtest.sharepoint.com/sites/pnpcoresdktest/_api/Site","type":"SP.Site"},"HubSiteId":"00000000-0000-0000-0000-000000000000","Id":"3587329c-bd89-47b1-a880-99899b1d1885","IsHubSite":false}}
+--batchresponse_81232223-de9d-4cdd-80d9-c73e29acc282--

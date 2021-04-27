@@ -7,7 +7,7 @@ namespace PnP.Core.Model.SharePoint
     /// HubSite class, write your custom code here
     /// </summary>
 #pragma warning disable CA2243 // Attribute string literals should parse correctly
-    [SharePointType("SP.HubSite", Uri = "_api/HubSites/GetById?hubSiteId='{Site.HubSiteId}'", Get = "_api/HubSites/GetById?hubSiteId='{Site.HubSiteId}'")]
+    [SharePointType("SP.HubSite", Uri = "_api/HubSites/GetById?hubSiteId='{Site.HubSiteId}'", Get = "_api/HubSites/GetById?hubSiteId='{Site.HubSiteId}'", LinqGet= "_api/HubSites")]
 #pragma warning restore CA2243 // Attribute string literals should parse correctly
     internal partial class HubSite : BaseDataModel<IHubSite>, IHubSite
     {
@@ -17,11 +17,16 @@ namespace PnP.Core.Model.SharePoint
 #pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
             GetApiCallOverrideHandler = async (ApiCallRequest api) => {
 #pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
-                if (!PnPContext.Site.IsPropertyAvailable(p => p.HubSiteId) || PnPContext.Site.HubSiteId == Guid.Empty)
+                if (Id == Guid.Empty && (!PnPContext.Site.IsPropertyAvailable(p => p.HubSiteId) || PnPContext.Site.HubSiteId == Guid.Empty))
                 {
                     api.CancelRequest("There is no hubsite associated with this site");
                 }
-                                           
+                else if(Id != Guid.Empty)
+                {
+                    var request = api.ApiCall.Request.Replace(Guid.Empty.ToString(), Id.ToString());
+                    api.ApiCall = new ApiCall(request, api.ApiCall.Type, api.ApiCall.JsonBody, api.ApiCall.ReceivingProperty);
+                }
+                                                           
                 return api;
             };
         }
