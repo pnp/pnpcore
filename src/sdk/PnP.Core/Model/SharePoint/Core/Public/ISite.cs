@@ -296,5 +296,13 @@ namespace PnP.Core.Model.SharePoint
         /// </summary>
         /// <returns></returns>
         public Task<bool> UnJoinHubSiteAsync();
+
+        /// <summary>
+        /// Gets hubsite data from the current site OR another specified hub site ID
+        /// </summary>
+        /// <param name="Id">Hub Site Guid</param>
+        /// <returns></returns>
+        public Task<IHubSite> GetHubSiteData(Guid? Id);
+
     }
 }

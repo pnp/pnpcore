@@ -76,6 +76,99 @@ namespace PnP.Core.Test.SharePoint
         }
 
         [TestMethod]
+        public async Task GetAnyHubSiteTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                // This tests retrieving another hubsite not associated with the current context
+                using (var context2 = await TestCommon.Instance.GetContextAsync(TestCommon.NoGroupTestSite, id: 1))
+                {
+
+                    ISite site = await context2.Site.GetAsync(
+                        p => p.HubSiteId,
+                        p => p.IsHubSite);
+
+                    Assert.IsNotNull(site);
+                    Assert.IsTrue(site.IsPropertyAvailable(s => s.IsHubSite));
+
+                    if (!site.IsHubSite)
+                    {
+                        var hub = await site.RegisterHubSiteAsync();
+                        Assert.IsNotNull(hub);
+                    }
+
+                    site = await context2.Site.GetAsync(p => p.HubSiteId); // refresh the hubsite id
+
+                    // Seperate Get Operation
+                    IHubSite hubSite = new HubSite()
+                    {
+                        PnPContext = context,
+                        Id = site.HubSiteId
+
+                    };
+
+                    var hubResult = await hubSite.GetAsync();
+
+                    Assert.AreEqual(hubResult.Id, site.HubSiteId);
+                    Assert.IsTrue(!string.IsNullOrEmpty(hubResult.Title));
+                    Assert.IsTrue(!string.IsNullOrEmpty(hubResult.SiteUrl));
+
+                    //// Refresh and clean up
+                    site = await context2.Site.GetAsync(
+                        p => p.HubSiteId,
+                        p => p.IsHubSite);
+
+                    await site.UnregisterHubSiteAsync();
+
+                }
+            }
+        }
+
+        [TestMethod]
+        public async Task GetAnyHubSiteFromSiteTest()
+        {
+            TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                // This tests retrieving another hubsite not associated with the current context
+                using (var context2 = await TestCommon.Instance.GetContextAsync(TestCommon.NoGroupTestSite, id: 1))
+                {
+
+                    ISite site = await context2.Site.GetAsync(
+                        p => p.HubSiteId,
+                        p => p.IsHubSite);
+
+                    Assert.IsNotNull(site);
+                    Assert.IsTrue(site.IsPropertyAvailable(s => s.IsHubSite));
+
+                    if (!site.IsHubSite)
+                    {
+                        var hub = await site.RegisterHubSiteAsync();
+                        Assert.IsNotNull(hub);
+                    }
+
+                    site = await context2.Site.GetAsync(p => p.HubSiteId); // refresh the hubsite id
+
+                    // Using another site/context get a hub site ID that is NOT part of the current context.
+                    var hubResult = await context.Site.GetHubSiteData(site.HubSiteId);
+
+                    Assert.AreEqual(hubResult.Id, site.HubSiteId);
+                    Assert.IsTrue(!string.IsNullOrEmpty(hubResult.Title));
+                    Assert.IsTrue(!string.IsNullOrEmpty(hubResult.SiteUrl));
+
+                    //// Refresh and clean up
+                    site = await context2.Site.GetAsync(
+                        p => p.HubSiteId,
+                        p => p.IsHubSite);
+
+                    await site.UnregisterHubSiteAsync();
+
+                }
+            }
+        }
+
+        [TestMethod]
         public async Task RegisterHubSiteTest()
         {
             //TestCommon.Instance.Mocking = false;

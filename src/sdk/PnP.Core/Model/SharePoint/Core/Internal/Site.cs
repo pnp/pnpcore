@@ -259,6 +259,25 @@ namespace PnP.Core.Model.SharePoint
             return await JoinHubSiteAsync(Guid.Empty).ConfigureAwait(false);
         }
 
+
+        /// <summary>
+        /// Gets hubsite data from the current site OR another specified hub site ID
+        /// </summary>
+        /// <param name="Id">Hub Site Guid</param>
+        /// <returns></returns>
+        public async Task<IHubSite> GetHubSiteData(Guid? Id)
+        {
+            IHubSite hubSite = new HubSite()
+            {
+                PnPContext = this.PnPContext,
+                Id = Id ?? this.HubSiteId
+            };
+
+            var hubResult = await hubSite.GetAsync().ConfigureAwait(false);
+
+            return hubResult;
+        }
+
         #endregion
 
         #endregion

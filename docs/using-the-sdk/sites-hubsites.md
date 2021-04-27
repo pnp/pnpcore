@@ -10,6 +10,18 @@ In SharePoint, site collections support hub sites, that allow you to create logi
 
 A `PnPContext` always has a reference to the [ISite](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.ISite.html) of the underlying site collection. Using the site object the following operations can be called when working with hub sites:
 
+## Get Hub Site Data
+
+Firstly, you will need a connection to a site, then you can either call a method to get the current Site Hub data OR specify an Id for another HubSite ID, to get the details. This is shown in the example below:
+
+```csharp
+
+var hubResult = await context.Site.GetHubSiteData(site.HubSiteId);
+var title = hubResult.Title;
+var siteUrl = hubResult.SiteUrl;
+
+```
+
 ## Register a hub site
 
 This registers a site as the primary hub site, using this code to apply this to a site:
