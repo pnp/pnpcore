@@ -128,11 +128,11 @@ namespace PnP.Core.Services
             string baseApiCall = "";
             if (apiOverride.Equals(default(ApiCall)))
             {
-                baseApiCall = $"{model.PnPContext.Uri.ToString().TrimEnd(new char[] { '/' })}/{getApi}";
+                baseApiCall = $"{model.PnPContext.Uri.AbsoluteUri.TrimEnd(new char[] { '/' })}/{getApi}";
             }
             else
             {
-                baseApiCall = $"{model.PnPContext.Uri.ToString().TrimEnd(new char[] { '/' })}/{apiOverride.Request}";
+                baseApiCall = $"{model.PnPContext.Uri.AbsoluteUri.TrimEnd(new char[] { '/' })}/{apiOverride.Request}";
             }
 
             // Parse tokens in the base api call
