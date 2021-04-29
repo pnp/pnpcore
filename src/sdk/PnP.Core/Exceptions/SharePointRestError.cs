@@ -62,32 +62,38 @@ namespace PnP.Core
 
         private void ParseError(JsonElement error)
         {
-            var errorData = error.GetProperty("error");
-
-            // enumerate the properties in the error 
-            foreach (var errorField in errorData.EnumerateObject())
+            if (error.TryGetProperty("error", out JsonElement errorData))
             {
-                if (errorField.Name == "code")
+                // enumerate the properties in the error 
+                foreach (var errorField in errorData.EnumerateObject())
                 {
-                    var errorString = errorField.Value.GetString();
-                    if (errorString.Contains(","))
+                    if (errorField.Name == "code")
                     {
-                        var splitErrorMessage = errorString.Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries);
-                        Code = splitErrorMessage[1].Trim();
-                        if (long.TryParse(splitErrorMessage[0], out long errorCode))
+                        var errorString = errorField.Value.GetString();
+                        if (errorString.Contains(","))
                         {
-                            ServerErrorCode = errorCode;
+                            var splitErrorMessage = errorString.Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries);
+                            Code = splitErrorMessage[1].Trim();
+                            if (long.TryParse(splitErrorMessage[0], out long errorCode))
+                            {
+                                ServerErrorCode = errorCode;
+                            }
+                        }
+                        else
+                        {
+                            Code = errorString;
                         }
                     }
-                    else
+                    else if (errorField.Name == "message")
                     {
-                        Code = errorString;
+                        Message = errorField.Value.GetProperty("value").ToString();
                     }
                 }
-                else if (errorField.Name == "message")
-                {
-                    Message = errorField.Value.GetProperty("value").ToString();
-                }
+            }
+            else
+            {
+                // If for some reason to received error payload is not what we expect just return the whole payload as error message
+                Message = error.ToString();
             }
         }
 
