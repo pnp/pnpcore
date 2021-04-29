@@ -14603,19 +14603,6 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IList.Title
   nameWithType: IList.Title
-- uid: PnP.Core.Model.SharePoint.IList.Url
-  name: Url
-  href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_Url
-  commentId: P:PnP.Core.Model.SharePoint.IList.Url
-  fullName: PnP.Core.Model.SharePoint.IList.Url
-  nameWithType: IList.Url
-- uid: PnP.Core.Model.SharePoint.IList.Url*
-  name: Url
-  href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_Url_
-  commentId: Overload:PnP.Core.Model.SharePoint.IList.Url
-  isSpec: "True"
-  fullName: PnP.Core.Model.SharePoint.IList.Url
-  nameWithType: IList.Url
 - uid: PnP.Core.Model.SharePoint.IList.ValidationFormula
   name: ValidationFormula
   href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_ValidationFormula
