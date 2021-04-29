@@ -12,6 +12,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
 ### Changed
 
+- Removed List.Url property as it does not exist on the SP.List object [wonderplayer - Rolands Strakis]
 - Refreshed list of OOB web parts, now includes Spaces (mixed reality) web parts [jansenbe - Bert Jansen]
 - Update sites documentation #397 [wonderplayer - Rolands Strakis]
 - Added support for reading/saving Viva Topic pages [jansenbe - Bert Jansen]
