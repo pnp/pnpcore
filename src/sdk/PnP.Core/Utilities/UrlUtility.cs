@@ -218,7 +218,7 @@ namespace PnP.Core
                 queryString.Add(parameterKey, string.Join(",", originalValues));
             }
 
-            return $"{uriBuilder.Host}{(uriBuilder.Path.Replace("%7B", "{").Replace("%7D", "}"))}{(queryString.Count > 0 ? "?" : "")}{queryString.ToString().Replace("%2c", ",")}";
+            return $"{uriBuilder.Host}{(uriBuilder.Path.Replace("%7B", "{").Replace("%7D", "}"))}{(queryString.Count > 0 ? "?" : "")}{queryString.ToEncodedString().Replace("%2c", ",")}";
         }
 
         #region NOT USED NOW

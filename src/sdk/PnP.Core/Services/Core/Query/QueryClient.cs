@@ -151,7 +151,10 @@ namespace PnP.Core.Services
             // Build the whole URL
             if (queryString.AllKeys.Length > 0)
             {
-                sb.Append($"?{queryString}");
+                // In .NET Framework to ToString() of a NameValueCollection will use HttpUtility.UrlEncodeUnicode under
+                // the covers resulting in issues. So we decode and encode again as a workaround. This code produces the 
+                // same result when used under .NET5/Core versus .NET Framework
+                sb.Append($"?{queryString.ToEncodedString()}");
             }
 
             // Create ApiCall instance and call the override option if needed
@@ -408,7 +411,7 @@ namespace PnP.Core.Services
             // Build the whole URL
             if (queryString.AllKeys.Length > 0)
             {
-                sb.Append($"?{queryString}");
+                sb.Append($"?{queryString.ToEncodedString()}");
             }
 
             // Create ApiCall instance and call the override option if needed
@@ -483,9 +486,9 @@ namespace PnP.Core.Services
             }
         }
 
-        #endregion
+#endregion
 
-        #region API Calls for non expandable collections
+#region API Calls for non expandable collections
 
         internal static async Task AddGraphBatchRequestsForNonExpandableCollectionsAsync<TModel>(BaseDataModel<TModel> model, Batch batch, EntityInfo entityInfo, Expression<Func<TModel, object>>[] expressions, Func<FromJson, object> fromJsonCasting, Action<string> postMappingJson)
         {
@@ -629,9 +632,9 @@ namespace PnP.Core.Services
             return false;
         }
 
-        #endregion
+#endregion
 
-        #region Paging 
+#region Paging 
 
         internal static string EnsureTopUrlParameter(string url, ApiType nextLinkApiType, int pageSize)
         {
@@ -653,7 +656,7 @@ namespace PnP.Core.Services
                     queryString.Add("$top", pageSize.ToString(CultureInfo.CurrentCulture));
                 }
 
-                var updatedUrl = $"{uri.Scheme}://{uri.DnsSafeHost}{uri.AbsolutePath}?{queryString}";
+                var updatedUrl = $"{uri.Scheme}://{uri.DnsSafeHost}{uri.AbsolutePath}?{queryString.ToEncodedString()}";
 
                 if (nextLinkApiType == ApiType.Graph || nextLinkApiType == ApiType.GraphBeta)
                 {
@@ -700,21 +703,21 @@ namespace PnP.Core.Services
         {
             if (Uri.TryCreate(url, UriKind.RelativeOrAbsolute, out Uri uri))
             {
-                NameValueCollection queryString = System.Web.HttpUtility.ParseQueryString(uri.Query);
+                NameValueCollection queryString = HttpUtility.ParseQueryString(uri.Query);
                 if (queryString["$skiptoken"] != null && queryString["$skip"] != null)
                 {
                     // $skiptoken and $skip cannot be combined, removing $skip in this case
                     queryString.Remove("$skip");
-                    return $"{uri.Scheme}://{uri.DnsSafeHost}{uri.AbsolutePath}?{queryString}";
+                    return $"{uri.Scheme}://{uri.DnsSafeHost}{uri.AbsolutePath}?{queryString.ToEncodedString()}";
                 }
             }
 
             return url;
         }
 
-        #endregion
+#endregion
 
-        #region LINQ data get
+#region LINQ data get
 
         internal static IQueryable<TModel> ProcessExpression<TModel>(IQueryable<TModel> source, EntityInfo entityInfo, params Expression<Func<TModel, object>>[] selectors)
         {
@@ -747,11 +750,11 @@ namespace PnP.Core.Services
             return selectionTarget;
         }
 
-        #endregion
+#endregion
 
-        #endregion
+#endregion
 
-        #region UPDATE
+#region UPDATE
         internal static async Task<ApiCallRequest> BuildUpdateAPICallAsync<TModel>(BaseDataModel<TModel> model, EntityInfo entity)
         {
             bool useGraph = false;
@@ -1010,9 +1013,9 @@ namespace PnP.Core.Services
             return call;
         }
 
-        #endregion
+#endregion
 
-        #region DELETE
+#region DELETE
         internal static async Task<ApiCallRequest> BuildDeleteAPICallAsync<TModel>(BaseDataModel<TModel> model, EntityInfo entity)
         {
             bool useGraph = false;
@@ -1080,9 +1083,9 @@ namespace PnP.Core.Services
             return call;
         }
 
-        #endregion
+#endregion
 
-        #region Helper methods
+#region Helper methods
 
         private static bool CanUseGraphBeta<TModel>(BaseDataModel<TModel> model, EntityFieldInfo field)
         {
@@ -1094,7 +1097,7 @@ namespace PnP.Core.Services
             return model.PnPContext.GraphCanUseBeta && entity.GraphBeta;
         }
 
-        #endregion
+#endregion
 
     }
 }

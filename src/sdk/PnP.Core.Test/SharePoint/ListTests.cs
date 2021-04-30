@@ -1071,6 +1071,45 @@ namespace PnP.Core.Test.SharePoint
         }
 
         [TestMethod]
+        public async Task AddRoleDefinitionsSpecialCharsTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                string listTitle = TestCommon.GetPnPSdkTestAssetName("AddRoleDefinitionsSpecialCharsTest");
+                string roleDefName = "Fullständig Behörighet";
+
+                context.Web.Load(p => p.Lists, p => p.CurrentUser);
+
+                var web = context.Web;
+
+                var roleDefinition = web.RoleDefinitions.Add(roleDefName, RoleType.Administrator, new PermissionKind[] { PermissionKind.AddAndCustomizePages });
+
+                var myList = web.Lists.AsRequested().FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
+
+                if (myList != null)
+                {
+                    Assert.Inconclusive("Test data set should be setup to not have the list available.");
+                }
+
+                myList = web.Lists.Add(listTitle, ListTemplateType.GenericList);
+
+                await myList.BreakRoleInheritanceAsync(false, false);
+
+                myList.AddRoleDefinitions(web.CurrentUser.Id, roleDefName);
+
+                var roleDefinitions = await myList.GetRoleDefinitionsAsync(web.CurrentUser.Id);
+
+                Assert.IsTrue(roleDefinitions.Length > 1 && roleDefinitions.AsRequested().FirstOrDefault(r => r.Name == roleDefName) != null);
+
+                await myList.DeleteAsync();
+
+                await roleDefinition.DeleteAsync();
+            }
+        }
+
+        [TestMethod]
         public async Task RemoveRoleDefinitionsTest()
         {
             //TestCommon.Instance.Mocking = false;

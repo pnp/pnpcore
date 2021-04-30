@@ -1711,7 +1711,7 @@ namespace PnP.Core.Services
                     queryString.Add("$skip", queryString["$top"]);
                 }
 
-                return $"{uri.Scheme}://{uri.DnsSafeHost}{uri.AbsolutePath}?{queryString}";
+                return $"{uri.Scheme}://{uri.DnsSafeHost}{uri.AbsolutePath}?{queryString.ToEncodedString()}";
             }
 
             return null;
