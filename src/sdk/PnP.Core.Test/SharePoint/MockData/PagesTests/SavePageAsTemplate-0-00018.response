@@ -1,4 +1,4 @@
---batchresponse_dcf2699d-8da8-4d26-b6cb-8aea814960c3
+--batchresponse_4d53184f-9155-46d9-a09f-7272207c65b2
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
@@ -6,4 +6,4 @@ HTTP/1.1 404 Not Found
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
 {"error":{"code":"-2130575338, Microsoft.SharePoint.SPException","message":{"lang":"en-US","value":"The file /sites/prov-1/SitePages/PNP_SDK_TEST_SavePageAsTemplate.aspx does not exist."}}}
---batchresponse_dcf2699d-8da8-4d26-b6cb-8aea814960c3--
+--batchresponse_4d53184f-9155-46d9-a09f-7272207c65b2--

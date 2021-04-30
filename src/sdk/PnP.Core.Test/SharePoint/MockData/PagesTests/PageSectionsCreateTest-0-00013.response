@@ -1,4 +1,4 @@
---batchresponse_ec47ecf5-5f4b-439d-8747-39a14e702a26
+--batchresponse_0db89a16-4f3e-43c7-803a-42ecd9ebaded
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
@@ -7,11 +7,11 @@ CONTENT-TYPE: application/json; charset=utf-8
 
 { "Row" : 
 [{
-"ID": "577",
+"ID": "593",
 "PermMask": "0x7ffffffffffbffff",
 "FSObjType": "0",
 "HTML_x0020_File_x0020_Type": "",
-"UniqueId": "{D78D2061-65F8-48E3-BACF-CE612D430D91}",
+"UniqueId": "{E077B63B-8FAC-4DF1-ACA3-A4E2378D7715}",
 "ProgId": "",
 "NoExecute": "0",
 "ContentTypeId": "0x0101009D1CB255DA76424F860D91F20E6C41180044C66AD09592964583DFF5030205BD34",
@@ -21,7 +21,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "FileRef.urlencoding": "\u002fsites\u002fpnpcoresdktest\u002fSitePages\u002fPNP_SDK_TEST_PageSectionsCreateTest.aspx",
 "FileRef.scriptencodeasurl": "\\u002fsites\\u002fpnpcoresdktest\\u002fSitePages\\u002fPNP_SDK_TEST_PageSectionsCreateTest.aspx",
 "_UIVersion": "1",
-"SMTotalSize": "10962",
+"SMTotalSize": "10963",
 "File_x0020_Size": "9670",
 "_CommentFlags": "",
 "File_x0020_Type": "aspx",
@@ -84,4 +84,4 @@ CONTENT-TYPE: application/json; charset=utf-8
 ,"CurrentFolderSpItemUrl" : ""
 
 }
---batchresponse_ec47ecf5-5f4b-439d-8747-39a14e702a26--
+--batchresponse_0db89a16-4f3e-43c7-803a-42ecd9ebaded--

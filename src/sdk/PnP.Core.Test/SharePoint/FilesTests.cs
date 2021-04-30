@@ -958,8 +958,8 @@ namespace PnP.Core.Test.SharePoint
                 Assert.AreEqual(CheckOutType.None, testDocument.CheckOutType);
                 Assert.AreEqual("TEST CHECK IN", testDocument.CheckInComment);
                 
-                Assert.AreEqual("0", testDocument.ListItemAllFields["OData__ModerationStatus"].ToString());
-                Assert.AreEqual("TEST APPROVE", testDocument.ListItemAllFields["OData__ModerationComments"].ToString());
+                Assert.AreEqual("0", testDocument.ListItemAllFields["_ModerationStatus"].ToString());
+                Assert.AreEqual("TEST APPROVE", testDocument.ListItemAllFields["_ModerationComments"].ToString());
                 Assert.IsTrue(testDocument.MajorVersion == initialMajorVersion + 1);
                 Assert.AreEqual(0, testDocument.MinorVersion);
             }
@@ -991,8 +991,8 @@ namespace PnP.Core.Test.SharePoint
                 Assert.AreEqual(CheckOutType.None, testDocument.CheckOutType);
                 Assert.AreEqual("TEST CHECK IN", testDocument.CheckInComment);
 
-                Assert.AreEqual("0", testDocument.ListItemAllFields["OData__ModerationStatus"].ToString());
-                Assert.AreEqual("TEST APPROVE", testDocument.ListItemAllFields["OData__ModerationComments"].ToString());
+                Assert.AreEqual("0", testDocument.ListItemAllFields["_ModerationStatus"].ToString());
+                Assert.AreEqual("TEST APPROVE", testDocument.ListItemAllFields["_ModerationComments"].ToString());
 
                 Assert.IsTrue(testDocument.MajorVersion > initialMajorVersion);
                 Assert.AreEqual(0, testDocument.MinorVersion);

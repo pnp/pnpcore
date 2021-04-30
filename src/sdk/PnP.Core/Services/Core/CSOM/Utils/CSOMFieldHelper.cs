@@ -82,16 +82,7 @@ namespace PnP.Core.Services.Core.CSOM.Utils
                                         }
                                     }
 
-                                    if (typeAsString == "LookupMulti" || typeAsString == "Lookup" || typeAsString == "UserMulti")
-                                    {
-                                        result.Add(new CSOMItemField()
-                                        {
-                                            FieldValue = changedProp.Value,
-                                            FieldName = changedProp.Key,
-                                            FieldType = typeAsString
-                                        });
-                                    }
-                                    else if (typeAsString == "TaxonomyFieldTypeMulti")
+                                    if (typeAsString == "LookupMulti" || typeAsString == "Lookup" || typeAsString == "UserMulti" || typeAsString == "TaxonomyFieldTypeMulti")
                                     {
                                         result.Add(new CSOMItemField()
                                         {

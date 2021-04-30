@@ -1185,6 +1185,15 @@ namespace PnP.Core.Services
 
         private static void AddToDictionary(TransientDictionary dictionary, string key, object value)
         {
+            // Handle the OData__ case: SPO REST will replace the _ in field names that start with an _ by OData__
+            // This will pose compatability issues as other data retrieval methods don't do this, hence
+            // we're normalizing the fieldnames again 
+
+            if (key.StartsWith("OData__"))
+            {
+                key = key.Replace("OData__", "_");
+            }
+
             if (!dictionary.ContainsKey(key))
             {
                 dictionary.SystemAdd(key, value);

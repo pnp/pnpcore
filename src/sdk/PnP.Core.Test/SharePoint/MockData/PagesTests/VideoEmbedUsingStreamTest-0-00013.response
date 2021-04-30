@@ -1,4 +1,4 @@
---batchresponse_f6e1dc65-e451-48ea-bc32-662458a98a14
+--batchresponse_2d814f3b-2496-4ba3-b39a-fe3b079143a9
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
@@ -7,11 +7,11 @@ CONTENT-TYPE: application/json; charset=utf-8
 
 { "Row" : 
 [{
-"ID": "1816",
+"ID": "1885",
 "PermMask": "0x7ffffffffffbffff",
 "FSObjType": "0",
 "HTML_x0020_File_x0020_Type": "",
-"UniqueId": "{AE44D5EC-B1C5-409B-9FE4-7EC4D01207B0}",
+"UniqueId": "{C9F18394-8A71-48E9-AC7D-71E8C5627760}",
 "ProgId": "",
 "NoExecute": "0",
 "ContentTypeId": "0x0101009D1CB255DA76424F860D91F20E6C411800BC66A1F7CEC63943B700A35FCBCF0164",
@@ -20,8 +20,8 @@ CONTENT-TYPE: application/json; charset=utf-8
 "FileRef.urlencodeasurl": "\u002fsites\u002fprov-1\u002fSitePages\u002fPNP_SDK_TEST_VideoEmbedUsingStreamTest.aspx",
 "FileRef.urlencoding": "\u002fsites\u002fprov-1\u002fSitePages\u002fPNP_SDK_TEST_VideoEmbedUsingStreamTest.aspx",
 "FileRef.scriptencodeasurl": "\\u002fsites\\u002fprov-1\\u002fSitePages\\u002fPNP_SDK_TEST_VideoEmbedUsingStreamTest.aspx",
-"_UIVersion": "1",
-"SMTotalSize": "8621",
+"_UIVersion": "512",
+"SMTotalSize": "8620",
 "File_x0020_Size": "6952",
 "_CommentFlags": "",
 "File_x0020_Type": "aspx",
@@ -40,7 +40,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "Title": "PNP_SDK_TEST_VideoEmbedUsingStreamTest",
 "ClientSideApplicationId": "{B6917CB1-93A0-4B97-A84D-7CF49975D4EC}",
 "PageLayoutType": "Article",
-"CanvasContent1": "<div dir=\"\" class=\"ms-rtestate-field\"><div><div data-sp-canvascontrol=\"\" data-sp-canvasdataversion=\"1.4\" data-sp-controldata=\"&#123;&quot;webPartId&quot;&#58;&quot;275c0095-a77e-4f6d-a2a0-6a7626911518&quot;,&quot;controlType&quot;&#58;3,&quot;id&quot;&#58;&quot;5b1d95d9-2fc7-4d2c-a107-f28284334c22&quot;,&quot;position&quot;&#58;&#123;&quot;controlIndex&quot;&#58;1,&quot;zoneIndex&quot;&#58;1,&quot;sectionIndex&quot;&#58;1,&quot;sectionFactor&quot;&#58;12,&quot;layoutIndex&quot;&#58;1&#125;,&quot;emphasis&quot;&#58;&#123;&quot;zoneEmphasis&quot;&#58;0&#125;&#125;\"><div data-sp-webpart=\"\" data-sp-webpartdataversion=\"1.4\" data-sp-webpartdata=\"&#123;&quot;id&quot;&#58;&quot;275c0095-a77e-4f6d-a2a0-6a7626911518&quot;,&quot;instanceId&quot;&#58;&quot;5b1d95d9-2fc7-4d2c-a107-f28284334c22&quot;,&quot;title&quot;&#58;&quot;Stream&quot;,&quot;description&quot;&#58;&quot;Stream&quot;,&quot;dataVersion&quot;&#58;&quot;1.4&quot;,&quot;properties&quot;&#58;&#123;&quot;showInfo&quot;&#58;false,&quot;captionText&quot;&#58;&quot;&quot;,&quot;embedCode&quot;&#58;&quot;&lt;iframe width='640' height='475' src='https&#58;\u002f\u002fweb.microsoftstream.com\u002fembed\u002fbrowse?app=SPO&amp;displayMode=buttons&amp;showDescription=true&amp;sort=trending' frameborder='0' allowfullscreen&gt;&lt;\u002fiframe&gt;&quot;,&quot;isStream&quot;&#58;true,&quot;showvideoStart&quot;&#58;false,&quot;videoStartAt&quot;&#58;&quot;&quot;,&quot;channelSortBy&quot;&#58;&quot;trending&quot;,&quot;sourceType&quot;&#58;&quot;BROWSE&quot;,&quot;thumbnailUrl&quot;&#58;&quot;&quot;,&quot;browseSortBy&quot;&#58;&quot;trending&quot;&#125;,&quot;dynamicDataPaths&quot;&#58;&#123;&#125;,&quot;dynamicDataValues&quot;&#58;&#123;&#125;,&quot;serverProcessedContent&quot;&#58;&#123;&quot;htmlStrings&quot;&#58;&#123;&#125;,&quot;searchablePlainTexts&quot;&#58;&#123;&#125;,&quot;imageSources&quot;&#58;&#123;&#125;,&quot;links&quot;&#58;&#123;&quot;videoSource&quot;&#58;&quot;https&#58;\u002f\u002fweb.microsoftstream.com\u002fembed\u002fbrowse&quot;&#125;&#125;&#125;\"><div data-sp-componentid=\"\">275c0095-a77e-4f6d-a2a0-6a7626911518<\u002fdiv><div data-sp-htmlproperties=\"\"><a data-sp-prop-name=\"videoSource\" href=\"https&#58;\u002f\u002fweb.microsoftstream.com\u002fembed\u002fbrowse\"><\u002fa><\u002fdiv><\u002fdiv><\u002fdiv><div data-sp-canvascontrol=\"\" data-sp-canvasdataversion=\"1.0\" data-sp-controldata=\"&#123;&quot;controlType&quot;&#58;0,&quot;pageSettingsSlice&quot;&#58;&#123;&quot;isDefaultDescription&quot;&#58;false,&quot;isDefaultThumbnail&quot;&#58;true&#125;&#125;\"><\u002fdiv><\u002fdiv><\u002fdiv>",
+"CanvasContent1": "<div dir=\"\" class=\"ms-rtestate-field\"><div><div data-sp-canvascontrol=\"\" data-sp-canvasdataversion=\"1.4\" data-sp-controldata=\"&#123;&quot;webPartId&quot;&#58;&quot;275c0095-a77e-4f6d-a2a0-6a7626911518&quot;,&quot;controlType&quot;&#58;3,&quot;id&quot;&#58;&quot;e1fd9321-b37e-44e2-8a76-18a49993ac3d&quot;,&quot;position&quot;&#58;&#123;&quot;controlIndex&quot;&#58;1,&quot;zoneIndex&quot;&#58;1,&quot;sectionIndex&quot;&#58;1,&quot;sectionFactor&quot;&#58;12,&quot;layoutIndex&quot;&#58;1&#125;,&quot;emphasis&quot;&#58;&#123;&quot;zoneEmphasis&quot;&#58;0&#125;&#125;\"><div data-sp-webpart=\"\" data-sp-webpartdataversion=\"1.4\" data-sp-webpartdata=\"&#123;&quot;id&quot;&#58;&quot;275c0095-a77e-4f6d-a2a0-6a7626911518&quot;,&quot;instanceId&quot;&#58;&quot;e1fd9321-b37e-44e2-8a76-18a49993ac3d&quot;,&quot;title&quot;&#58;&quot;Stream&quot;,&quot;description&quot;&#58;&quot;Stream&quot;,&quot;dataVersion&quot;&#58;&quot;1.4&quot;,&quot;properties&quot;&#58;&#123;&quot;showInfo&quot;&#58;false,&quot;captionText&quot;&#58;&quot;&quot;,&quot;embedCode&quot;&#58;&quot;&lt;iframe width='640' height='475' src='https&#58;\u002f\u002fweb.microsoftstream.com\u002fembed\u002fbrowse?app=SPO&amp;displayMode=buttons&amp;showDescription=true&amp;sort=trending' frameborder='0' allowfullscreen&gt;&lt;\u002fiframe&gt;&quot;,&quot;isStream&quot;&#58;true,&quot;showvideoStart&quot;&#58;false,&quot;videoStartAt&quot;&#58;&quot;&quot;,&quot;channelSortBy&quot;&#58;&quot;trending&quot;,&quot;sourceType&quot;&#58;&quot;BROWSE&quot;,&quot;thumbnailUrl&quot;&#58;&quot;&quot;,&quot;browseSortBy&quot;&#58;&quot;trending&quot;&#125;,&quot;dynamicDataPaths&quot;&#58;&#123;&#125;,&quot;dynamicDataValues&quot;&#58;&#123;&#125;,&quot;serverProcessedContent&quot;&#58;&#123;&quot;htmlStrings&quot;&#58;&#123;&#125;,&quot;searchablePlainTexts&quot;&#58;&#123;&#125;,&quot;imageSources&quot;&#58;&#123;&#125;,&quot;links&quot;&#58;&#123;&quot;videoSource&quot;&#58;&quot;https&#58;\u002f\u002fweb.microsoftstream.com\u002fembed\u002fbrowse&quot;&#125;&#125;&#125;\"><div data-sp-componentid=\"\">275c0095-a77e-4f6d-a2a0-6a7626911518<\u002fdiv><div data-sp-htmlproperties=\"\"><a data-sp-prop-name=\"videoSource\" href=\"https&#58;\u002f\u002fweb.microsoftstream.com\u002fembed\u002fbrowse\"><\u002fa><\u002fdiv><\u002fdiv><\u002fdiv><div data-sp-canvascontrol=\"\" data-sp-canvasdataversion=\"1.0\" data-sp-controldata=\"&#123;&quot;controlType&quot;&#58;0,&quot;pageSettingsSlice&quot;&#58;&#123;&quot;isDefaultDescription&quot;&#58;false,&quot;isDefaultThumbnail&quot;&#58;true&#125;&#125;\"><\u002fdiv><\u002fdiv><\u002fdiv>",
 "_AuthorByline": "",
 "_AuthorByline.id": "",
 "_AuthorByline.title": "\u002f_layouts\u002f15\u002fimages\u002fsitepagethumbnail.png",
@@ -84,4 +84,4 @@ CONTENT-TYPE: application/json; charset=utf-8
 ,"CurrentFolderSpItemUrl" : ""
 
 }
---batchresponse_f6e1dc65-e451-48ea-bc32-662458a98a14--
+--batchresponse_2d814f3b-2496-4ba3-b39a-fe3b079143a9--

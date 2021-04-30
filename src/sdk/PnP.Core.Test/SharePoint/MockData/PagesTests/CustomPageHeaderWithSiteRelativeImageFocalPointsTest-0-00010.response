@@ -1,9 +1,9 @@
---batchresponse_bcd1650e-b98f-41f2-a499-f3e36cca1e42
+--batchresponse_26d3f708-0c1a-4a1e-92c5-5ae06f3b8d2c
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{"d":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/prov-1/SitePages/PNP_SDK_TEST_CustomPageHeaderWithSiteRelativeImageFocalPointsTest.aspx')","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/prov-1/SitePages/PNP_SDK_TEST_CustomPageHeaderWithSiteRelativeImageFocalPointsTest.aspx')","type":"SP.File"},"ListId":"5c73d6b2-ac03-4058-8233-af21df6ed8de","UniqueId":"9d8475f4-d07f-49e6-a45d-f974b95e605c"}}
---batchresponse_bcd1650e-b98f-41f2-a499-f3e36cca1e42--
+{"d":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/prov-1/SitePages/PNP_SDK_TEST_CustomPageHeaderWithSiteRelativeImageFocalPointsTest.aspx')","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/prov-1/SitePages/PNP_SDK_TEST_CustomPageHeaderWithSiteRelativeImageFocalPointsTest.aspx')","type":"SP.File"},"ListId":"5c73d6b2-ac03-4058-8233-af21df6ed8de","UniqueId":"7c1a7ba4-5f83-429b-ab98-d7f3a768962f"}}
+--batchresponse_26d3f708-0c1a-4a1e-92c5-5ae06f3b8d2c--

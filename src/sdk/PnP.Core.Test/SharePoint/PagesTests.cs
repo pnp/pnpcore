@@ -1952,7 +1952,7 @@ namespace PnP.Core.Test.SharePoint
                     //as we have no MinorVersions but ForceCheckout it should not be Published
                     Assert.IsTrue(pageFile.Level != PublishedStatus.Published);
                     //should not be approved
-                    Assert.AreNotEqual("0", pageFile.ListItemAllFields["OData__ModerationStatus"].ToString());
+                    Assert.AreNotEqual("0", pageFile.ListItemAllFields["_ModerationStatus"].ToString());
 
                     //call publish again should not fail
                     await page.PublishAsync("TEST CHECK IN AND APPROVE");
@@ -1966,8 +1966,8 @@ namespace PnP.Core.Test.SharePoint
                     Assert.AreEqual(CheckOutType.None, pageFile.CheckOutType);
                     Assert.IsTrue(pageFile.Level == PublishedStatus.Published);
                     Assert.AreEqual("TEST CHECK IN AND APPROVE", pageFile.CheckInComment);
-                    Assert.AreEqual("0", pageFile.ListItemAllFields["OData__ModerationStatus"].ToString());
-                    Assert.AreEqual("TEST CHECK IN AND APPROVE", pageFile.ListItemAllFields["OData__ModerationComments"].ToString());
+                    Assert.AreEqual("0", pageFile.ListItemAllFields["_ModerationStatus"].ToString());
+                    Assert.AreEqual("TEST CHECK IN AND APPROVE", pageFile.ListItemAllFields["_ModerationComments"].ToString());
 
                     // delete the page
                     await page.DeleteAsync();
@@ -2033,7 +2033,7 @@ namespace PnP.Core.Test.SharePoint
                     //as we have no MinorVersions but ForceCheckout it should not be Published
                     Assert.IsTrue(pageFile.Level != PublishedStatus.Published);
                     //should not be approved
-                    Assert.AreNotEqual("0", pageFile.ListItemAllFields["OData__ModerationStatus"].ToString());
+                    Assert.AreNotEqual("0", pageFile.ListItemAllFields["_ModerationStatus"].ToString());
 
                     //call publish again should not fail
                     await page.PublishAsync("TEST CHECK IN AND APPROVE");
@@ -2046,8 +2046,8 @@ namespace PnP.Core.Test.SharePoint
                     pageFile = await page.GetPageFileAsync(p => p.Level, p => p.CheckOutType, p => p.CheckInComment, p => p.ListItemAllFields);
                     Assert.AreEqual(CheckOutType.None, pageFile.CheckOutType);
                     Assert.IsTrue(pageFile.Level == PublishedStatus.Published);
-                    Assert.AreEqual("0", pageFile.ListItemAllFields["OData__ModerationStatus"].ToString());
-                    Assert.AreEqual("TEST CHECK IN AND APPROVE", pageFile.ListItemAllFields["OData__ModerationComments"].ToString());
+                    Assert.AreEqual("0", pageFile.ListItemAllFields["_ModerationStatus"].ToString());
+                    Assert.AreEqual("TEST CHECK IN AND APPROVE", pageFile.ListItemAllFields["_ModerationComments"].ToString());
 
                     // delete the page
                     await page.DeleteAsync();

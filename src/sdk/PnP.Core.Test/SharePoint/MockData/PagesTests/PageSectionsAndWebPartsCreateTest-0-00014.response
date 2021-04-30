@@ -1,4 +1,4 @@
---batchresponse_d9172ffb-9ca4-482b-84e8-9f56fe647f8e
+--batchresponse_569f9589-13b5-47ab-8ccc-729262ad3254
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
@@ -7,11 +7,11 @@ CONTENT-TYPE: application/json; charset=utf-8
 
 { "Row" : 
 [{
-"ID": "576",
+"ID": "592",
 "PermMask": "0x7ffffffffffbffff",
 "FSObjType": "0",
 "HTML_x0020_File_x0020_Type": "",
-"UniqueId": "{BD7E6B8B-F70D-4202-B930-4BF589E282E8}",
+"UniqueId": "{329957AA-4A63-4435-9A8F-6A303DC0F8D6}",
 "ProgId": "",
 "NoExecute": "0",
 "ContentTypeId": "0x0101009D1CB255DA76424F860D91F20E6C41180044C66AD09592964583DFF5030205BD34",
@@ -21,7 +21,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "FileRef.urlencoding": "\u002fsites\u002fpnpcoresdktest\u002fSitePages\u002fPNP_SDK_TEST_PageSectionsAndWebPartsCreateTest.aspx",
 "FileRef.scriptencodeasurl": "\\u002fsites\\u002fpnpcoresdktest\\u002fSitePages\\u002fPNP_SDK_TEST_PageSectionsAndWebPartsCreateTest.aspx",
 "_UIVersion": "1",
-"SMTotalSize": "7754",
+"SMTotalSize": "7755",
 "File_x0020_Size": "6286",
 "_CommentFlags": "",
 "File_x0020_Type": "aspx",
@@ -40,7 +40,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "Title": "PNP_SDK_TEST_PageSectionsAndWebPartsCreateTest",
 "ClientSideApplicationId": "{B6917CB1-93A0-4B97-A84D-7CF49975D4EC}",
 "PageLayoutType": "Article",
-"CanvasContent1": "<div dir=\"\" class=\"ms-rtestate-field\"><div><div data-sp-canvascontrol=\"\" data-sp-canvasdataversion=\"1.8\" data-sp-controldata=\"&#123;&quot;webPartId&quot;&#58;&quot;d1d91016-032f-456d-98a4-721247c305e8&quot;,&quot;controlType&quot;&#58;3,&quot;id&quot;&#58;&quot;3d1e3bcc-2995-420a-9161-b4810e94565d&quot;,&quot;position&quot;&#58;&#123;&quot;controlIndex&quot;&#58;1,&quot;zoneIndex&quot;&#58;1,&quot;sectionIndex&quot;&#58;1,&quot;sectionFactor&quot;&#58;0,&quot;layoutIndex&quot;&#58;1&#125;,&quot;emphasis&quot;&#58;&#123;&quot;zoneEmphasis&quot;&#58;0&#125;&#125;\"><div data-sp-webpart=\"\" data-sp-webpartdataversion=\"1.8\" data-sp-webpartdata=\"&#123;&quot;id&quot;&#58;&quot;d1d91016-032f-456d-98a4-721247c305e8&quot;,&quot;instanceId&quot;&#58;&quot;3d1e3bcc-2995-420a-9161-b4810e94565d&quot;,&quot;title&quot;&#58;&quot;Image&quot;,&quot;description&quot;&#58;&quot;Image&quot;,&quot;dataVersion&quot;&#58;&quot;1.8&quot;,&quot;properties&quot;&#58;&#123;&quot;imageSourceType&quot;&#58;0,&quot;imageSource&quot;&#58;&quot;&quot;,&quot;captionText&quot;&#58;&quot;&quot;,&quot;altText&quot;&#58;&quot;&quot;,&quot;linkUrl&quot;&#58;&quot;&quot;,&quot;overlayText&quot;&#58;&quot;&quot;,&quot;fileName&quot;&#58;&quot;&quot;,&quot;siteId&quot;&#58;&quot;&quot;,&quot;webId&quot;&#58;&quot;&quot;,&quot;listId&quot;&#58;&quot;&quot;,&quot;uniqueId&quot;&#58;&quot;&quot;,&quot;imgWidth&quot;&#58;&quot;&quot;,&quot;imgHeight&quot;&#58;&quot;&quot;&#125;,&quot;dynamicDataPaths&quot;&#58;&#123;&#125;,&quot;dynamicDataValues&quot;&#58;&#123;&#125;,&quot;serverProcessedContent&quot;&#58;&#123;&#125;&#125;\"><div data-sp-componentid=\"\">d1d91016-032f-456d-98a4-721247c305e8<\u002fdiv><div data-sp-htmlproperties=\"\"><\u002fdiv><\u002fdiv><\u002fdiv><div data-sp-canvascontrol=\"\" data-sp-canvasdataversion=\"1.0\" data-sp-controldata=\"&#123;&quot;controlType&quot;&#58;0,&quot;pageSettingsSlice&quot;&#58;&#123;&quot;isDefaultDescription&quot;&#58;false,&quot;isDefaultThumbnail&quot;&#58;true&#125;&#125;\"><\u002fdiv><\u002fdiv><\u002fdiv>",
+"CanvasContent1": "<div dir=\"\" class=\"ms-rtestate-field\"><div><div data-sp-canvascontrol=\"\" data-sp-canvasdataversion=\"1.9\" data-sp-controldata=\"&#123;&quot;webPartId&quot;&#58;&quot;d1d91016-032f-456d-98a4-721247c305e8&quot;,&quot;controlType&quot;&#58;3,&quot;id&quot;&#58;&quot;1b5ec3d1-a484-453b-87df-cc04a0ad9923&quot;,&quot;position&quot;&#58;&#123;&quot;controlIndex&quot;&#58;1,&quot;zoneIndex&quot;&#58;1,&quot;sectionIndex&quot;&#58;1,&quot;sectionFactor&quot;&#58;0,&quot;layoutIndex&quot;&#58;1&#125;,&quot;emphasis&quot;&#58;&#123;&quot;zoneEmphasis&quot;&#58;0&#125;&#125;\"><div data-sp-webpart=\"\" data-sp-webpartdataversion=\"1.9\" data-sp-webpartdata=\"&#123;&quot;id&quot;&#58;&quot;d1d91016-032f-456d-98a4-721247c305e8&quot;,&quot;instanceId&quot;&#58;&quot;1b5ec3d1-a484-453b-87df-cc04a0ad9923&quot;,&quot;title&quot;&#58;&quot;Image&quot;,&quot;description&quot;&#58;&quot;Image&quot;,&quot;dataVersion&quot;&#58;&quot;1.9&quot;,&quot;properties&quot;&#58;&#123;&quot;imageSourceType&quot;&#58;0,&quot;imageSource&quot;&#58;&quot;&quot;,&quot;captionText&quot;&#58;&quot;&quot;,&quot;altText&quot;&#58;&quot;&quot;,&quot;linkUrl&quot;&#58;&quot;&quot;,&quot;overlayText&quot;&#58;&quot;&quot;,&quot;fileName&quot;&#58;&quot;&quot;,&quot;siteId&quot;&#58;&quot;&quot;,&quot;webId&quot;&#58;&quot;&quot;,&quot;listId&quot;&#58;&quot;&quot;,&quot;uniqueId&quot;&#58;&quot;&quot;,&quot;imgWidth&quot;&#58;&quot;&quot;,&quot;imgHeight&quot;&#58;&quot;&quot;&#125;,&quot;dynamicDataPaths&quot;&#58;&#123;&#125;,&quot;dynamicDataValues&quot;&#58;&#123;&#125;,&quot;serverProcessedContent&quot;&#58;&#123;&#125;&#125;\"><div data-sp-componentid=\"\">d1d91016-032f-456d-98a4-721247c305e8<\u002fdiv><div data-sp-htmlproperties=\"\"><\u002fdiv><\u002fdiv><\u002fdiv><div data-sp-canvascontrol=\"\" data-sp-canvasdataversion=\"1.0\" data-sp-controldata=\"&#123;&quot;controlType&quot;&#58;0,&quot;pageSettingsSlice&quot;&#58;&#123;&quot;isDefaultDescription&quot;&#58;false,&quot;isDefaultThumbnail&quot;&#58;true&#125;&#125;\"><\u002fdiv><\u002fdiv><\u002fdiv>",
 "_AuthorByline": "",
 "_AuthorByline.id": "",
 "_AuthorByline.title": "\u002f_layouts\u002f15\u002fimages\u002fsitepagethumbnail.png",
@@ -84,4 +84,4 @@ CONTENT-TYPE: application/json; charset=utf-8
 ,"CurrentFolderSpItemUrl" : ""
 
 }
---batchresponse_d9172ffb-9ca4-482b-84e8-9f56fe647f8e--
+--batchresponse_569f9589-13b5-47ab-8ccc-729262ad3254--
