@@ -133,7 +133,7 @@ if(!site.IsHubSite){
             p =&gt; p.HubSiteId,
             p =&gt; p.IsHubSite);
 
-        if(!assocSite.IsHubSite){
+        if(assocSite.HubSiteId == Guid.Empty){
 
             var resultJoin = await assocSite.JoinHubSiteAsync(primarySite.HubSiteId);
 
@@ -149,7 +149,7 @@ ISite site = await context.Site.GetAsync(
         p =&gt; p.HubSiteId,
         p =&gt; p.IsHubSite);
 
-if(site.IsHubSite){
+if(assocSite.HubSiteId != Guid.Empty){
     var result = await site.UnJoinHubSiteAsync();
 }
 
