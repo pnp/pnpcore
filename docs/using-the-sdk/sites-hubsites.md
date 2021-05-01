@@ -60,7 +60,7 @@ using (var contextPrimaryHub = await pnpContextFactory.CreateAsync("PrimaryHubSi
             p => p.HubSiteId,
             p => p.IsHubSite);
 
-        if(!assocSite.IsHubSite){
+        if(assocSite.HubSiteId == Guid.Empty){
 
             var resultJoin = await assocSite.JoinHubSiteAsync(primarySite.HubSiteId);
 
@@ -81,7 +81,7 @@ ISite site = await context.Site.GetAsync(
         p => p.HubSiteId,
         p => p.IsHubSite);
 
-if(site.IsHubSite){
+if(assocSite.HubSiteId != Guid.Empty){
     var result = await site.UnJoinHubSiteAsync();
 }
 
