@@ -16,6 +16,8 @@
     href: basics-async.md
   - name: PnP Framework interop
     href: basics-pnpframework.md
+  - name: Microsoft Graph SDK interop
+    href: basics-graphsdk.md
   - name: Debugging
     href: basics-debug.md
   - name: General configuration
