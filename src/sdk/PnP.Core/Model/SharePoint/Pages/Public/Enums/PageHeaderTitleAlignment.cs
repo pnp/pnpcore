@@ -6,13 +6,13 @@
     public enum PageHeaderTitleAlignment
     {
         /// <summary>
-        /// Page title is centered
-        /// </summary>
-        Center,
-
-        /// <summary>
         /// Page title is left aligned
         /// </summary>
-        Left
+        Left,
+
+        /// <summary>
+        /// Page title is centered
+        /// </summary>
+        Center
     }
 }

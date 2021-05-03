@@ -12,6 +12,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
 ### Changed
 
+- Alignment of PageHeaderTitleAlignment enum with what's used in PnP Framework [jansenbe - Bert Jansen]
 - Hubsite joining/unjoining documention update #416 [plamber - Patrick Lamber]
 - Fixed url encoding issue when the .NET Standard 2.0 build was used in a .NET Framework application [jansenbe - Bert Jansen]
 - Correctly handle list item data for fields starting with an _ (replace OData__ with _ when parsing the response) [jansenbe - Bert Jansen]
