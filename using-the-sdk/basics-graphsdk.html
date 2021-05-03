@@ -148,7 +148,8 @@ namespace HelloGraph
                 msGraphURL,
                 new DelegateAuthenticationProvider(async (requestMessage) =&gt;
                 {
-                    requestMessage.Headers.Authorization = new AuthenticationHeaderValue(&quot;bearer&quot;, await SignInUserAndGetTokenUsingMSAL(scopes));
+                    requestMessage.Headers.Authorization = 
+                      new AuthenticationHeaderValue(&quot;bearer&quot;, await SignInUserAndGetTokenUsingMSAL(scopes));
                 }));
 
             // Call the /me endpoint of Graph
@@ -159,7 +160,7 @@ namespace HelloGraph
             var pnpContextFactory = host.Services.GetRequiredService&lt;IPnPContextFactory&gt;();
 
             using (var pnpContext = await pnpContextFactory.CreateAsync(
-                        new Uri(&quot;https://bertonline.sharepoint.com/sites/prov-1&quot;),
+                        new Uri(&quot;https://contoso.sharepoint.com/sites/teamB&quot;),
                         new ExternalAuthenticationProvider((resourceUri, scopes) =&gt;
                         {
                             return SignInUserAndGetTokenUsingMSAL(scopes).GetAwaiter().GetResult();
