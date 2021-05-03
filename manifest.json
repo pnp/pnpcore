@@ -4695,11 +4695,23 @@
     },
     {
       "type": "Conceptual",
+      "source_relative_path": "using-the-sdk/basics-graphsdk.md",
+      "output": {
+        ".html": {
+          "relative_path": "using-the-sdk/basics-graphsdk.html",
+          "hash": "2+FD3hWT7MFFSPZLcWYs3g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
       "source_relative_path": "using-the-sdk/basics-pnpframework.md",
       "output": {
         ".html": {
           "relative_path": "using-the-sdk/basics-pnpframework.html",
-          "hash": "GW+YGUe1Zaxaa/r5Mgd0+Q=="
+          "hash": "51Cuk8VJ9e25zicFsMS2IQ=="
         }
       },
       "is_incremental": false,
@@ -5059,7 +5071,7 @@
       "output": {
         ".html": {
           "relative_path": "using-the-sdk/toc.html",
-          "hash": "vDlKYbZFPJTbA5mjEabPRw=="
+          "hash": "9Xfgdott3YBSh5O/vi+IVg=="
         }
       },
       "is_incremental": false,
@@ -5104,7 +5116,7 @@
         "ConceptualDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build",
-          "total_file_count": 60,
+          "total_file_count": 61,
           "skipped_file_count": 0
         },
         "ManagedReferenceDocumentProcessor": {

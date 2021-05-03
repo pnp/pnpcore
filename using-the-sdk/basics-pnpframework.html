@@ -5,9 +5,9 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Interoperability with PnP Framework | PnP Core SDK </title>
+    <title>Interop with PnP Framework | PnP Core SDK </title>
     <meta name="viewport" content="width=device-width">
-    <meta name="title" content="Interoperability with PnP Framework | PnP Core SDK ">
+    <meta name="title" content="Interop with PnP Framework | PnP Core SDK ">
     <meta name="generator" content="docfx 2.56.5.0">
     <meta name="description" content="The PnP Core SDK is an SDK designed to work against Microsoft 365. Its aim is to provide a unified object model to work with the whole Microsoft 365 ecosystem. ">
     <link rel="shortcut icon" href="https://c.s-microsoft.com/favicon.ico?v2">
@@ -80,10 +80,10 @@
                   <div class="contribution-panel mobile-hide pull-right">
                       <a href="https://github.com/pnp/pnpcore/blob/dev/docs/using-the-sdk/basics-pnpframework.md/#L1" title="Improve this Doc" class="improve-doc-lg"><i class="glyphicon glyphicon-pencil"></i></a>
                   </div>
-                    <h1 id="interoperability-with-pnp-framework">Interoperability with PnP Framework</h1>
+                    <h1 id="interop-with-pnp-framework">Interop with PnP Framework</h1>
 
 <p>The PnP Core SDK is always used when PnP Framework is used as it's a dependency of PnP Framework, e.g. the Pages API implementation of PnP Core SDK is used in PnP Framework. When you're code is using PnP Framework you might also want to use additional PnP Core SDK features, or vice versa when you're using PnP Core SDK you might want to use SharePoint CSOM. Both options are discussed in this article.</p>
-<h2 id="using-pnp-core-sdk-from-pnp-framework">Using PnP Core SDK from PnP Framework</h2>
+<h2 id="using-pnp-core-sdk-when-pnp-framework-was-already-configured">Using PnP Core SDK when PnP Framework was already configured</h2>
 <p>In PnP Core SDK a PnPContext is used while in PnP Framework a CSOM context is used. When you have a CSOM context you can create a PnPContext using the <code>PnPCoreSDK.Instance.GetPnPContext()</code> method.</p>
 <pre><code class="lang-csharp">var authManager = new AuthenticationManager(&quot;&lt;Azure AD client id&gt;&quot;, &quot;joe@contoso.onmicrosoft.com&quot;, &quot;Pwd as SecureString&quot;);
 
@@ -100,7 +100,7 @@ using (var csomContext = authManager.GetContext(&quot;https://contoso.sharepoint
     }
 }
 </code></pre>
-<h2 id="using-pnp-framework-via-a-csom-clientcontext-from-pnp-core-sdk">Using PnP Framework, via a CSOM ClientContext, from PnP Core SDK</h2>
+<h2 id="using-pnp-framework-when-the-pnp-core-sdk-was-already-configured">Using PnP Framework when the PnP Core SDK was already configured</h2>
 <p>If you already have a PnP Core SDK context and you want also use PnP Framework and/or SharePoint CSOM then you can create a CSOM ClientContext from your PnP Context via the <code>PnPCoreSDK.Instance.GetContext()</code> method.</p>
 <pre><code class="lang-csharp">using (var pnpCoreContext = await pnpContextFactory.CreateAsync(&quot;SiteToWorkWith&quot;))
 {

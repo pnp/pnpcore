@@ -1,0 +1,236 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html lang="en">
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Interop with the Microsoft Graph SDK | PnP Core SDK </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Interop with the Microsoft Graph SDK | PnP Core SDK ">
+    <meta name="generator" content="docfx 2.56.5.0">
+    <meta name="description" content="The PnP Core SDK is an SDK designed to work against Microsoft 365. Its aim is to provide a unified object model to work with the whole Microsoft 365 ecosystem. ">
+    <link rel="shortcut icon" href="https://c.s-microsoft.com/favicon.ico?v2">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    <meta property="docfx:newtab" content="true">
+  </head>  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../images/logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <label class="glyphicon glyphicon-search" for="search-query"></label>
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first="First" data-prev="Previous" data-next="Next" data-last="Last"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+                  <div class="contribution-panel mobile-hide pull-right">
+                      <a href="https://github.com/pnp/pnpcore/blob/dev/docs/using-the-sdk/basics-graphsdk.md/#L1" title="Improve this Doc" class="improve-doc-lg"><i class="glyphicon glyphicon-pencil"></i></a>
+                  </div>
+                    <h1 id="interop-with-the-microsoft-graph-sdk">Interop with the Microsoft Graph SDK</h1>
+
+<p>While the focus of PnP Core SDK is mainly on SharePoint and Teams features, using a mix of Microsoft Graph, SharePoint REST and SharePoint CSOM API's, you might also want to perform additional Microsoft Graph calls. A convenient way to do so is by using the <a href="https://www.nuget.org/packages/Microsoft.Graph">Microsoft Graph SDK</a> as explained in this article.</p>
+<h2 id="using-the-microsoft-graph-sdk-when-the-pnp-core-sdk-was-already-configured">Using the Microsoft Graph SDK when the PnP Core SDK was already configured</h2>
+<p>In PnP Core SDK a PnPContext is used while in the Microsoft Graph SDK a GraphServiceClient is used. Below sample shows how create a GraphServiceClient for a given PnPContext.</p>
+<pre><code class="lang-csharp">using (var pnpCoreContext = await pnpContextFactory.CreateAsync(&quot;SiteToWorkWith&quot;))
+{
+    // Use PnP Core SDK (Microsoft Graph / SPO Rest) to load the web title
+    var web = pnpCoreContext.Web.Get(p =&gt; p.Title);
+
+    // Create a Graph Service client and perform a Graph call using the Microsoft Graph .NET SDK
+    var graphServiceClient = new GraphServiceClient(new DelegateAuthenticationProvider((requestMessage) =&gt;
+    {
+        return pnpCoreContext.AuthenticationProvider.AuthenticateRequestAsync(new Uri(&quot;https://graph.microsoft.com&quot;), requestMessage);
+    }));
+
+    var me = await graphServiceClient.Me.Request().GetAsync();
+}
+</code></pre>
+<h2 id="using-the-pnp-core-sdk-when-the-microsoft-graph-sdk-was-already-configured">Using the PnP Core SDK when the Microsoft Graph SDK was already configured</h2>
+<p>When you configure the Microsoft Graph SDK using MSAL you typically have code that gets an access token. This access token is then used via the <code>DelegateAuthenticationProvider</code> Microsoft Graph authentication provider, but the same approach can be taken using the PnP Core SDK <code>ExternalAuthenticationProvider</code>. Below console application shows Microsoft Graph and PnP Core SDK sharing the same code to get access tokens:</p>
+<pre><code class="lang-csharp">using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Graph;
+using Microsoft.Identity.Client;
+using PnP.Core.Auth;
+using PnP.Core.Services;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net.Http.Headers;
+using System.Threading.Tasks;
+
+namespace HelloGraph
+{
+    class Program
+    {
+        private static readonly string[] scopes = new string[] { &quot;user.read&quot;, &quot;sites.fullcontrol.all&quot; };
+        private const string clientId = &quot;&lt;Azure AD application id&gt;&quot;;
+        private const string tenant = &quot;organizations&quot;; // Alternatively tenant name, e.g. contoso.onmicrosoft.com&quot;
+        private const string authority = &quot;https://login.microsoftonline.com/&quot; + tenant;
+        private static IPublicClientApplication publicClientApp;
+        private static string msGraphURL = &quot;https://graph.microsoft.com/v1.0/&quot;;
+        private static AuthenticationResult authResult;
+
+        public static async Task Main(string[] args)
+        {
+
+            var host = Host.CreateDefaultBuilder()
+            // Configure PnP services
+            .ConfigureServices((hostingContext, services) =&gt;
+            {
+                services.AddPnPCore();
+            })
+
+            // Let the builder know we're running in a console
+            .UseConsoleLifetime()
+            // Add services to the container
+            .Build();
+
+            // Build the host
+            await host.StartAsync();
+
+            // Sign-in user using MSAL and obtain an access token for MS Graph
+            GraphServiceClient graphClient = new GraphServiceClient(
+                msGraphURL,
+                new DelegateAuthenticationProvider(async (requestMessage) =&gt;
+                {
+                    requestMessage.Headers.Authorization = new AuthenticationHeaderValue(&quot;bearer&quot;, await SignInUserAndGetTokenUsingMSAL(scopes));
+                }));
+
+            // Call the /me endpoint of Graph
+            User graphUser = await graphClient.Me.Request().GetAsync();
+            Console.WriteLine($&quot;User UPN: {graphUser.UserPrincipalName}&quot;);
+
+            // Create a PnP Core SDK context
+            var pnpContextFactory = host.Services.GetRequiredService&lt;IPnPContextFactory&gt;();
+
+            using (var pnpContext = await pnpContextFactory.CreateAsync(
+                        new Uri(&quot;https://bertonline.sharepoint.com/sites/prov-1&quot;),
+                        new ExternalAuthenticationProvider((resourceUri, scopes) =&gt;
+                        {
+                            return SignInUserAndGetTokenUsingMSAL(scopes).GetAwaiter().GetResult();
+                        }))
+                )
+            {
+                var web = await pnpContext.Web.GetAsync(p =&gt; p.Title);
+                Console.WriteLine($&quot;Web title: {web.Title}&quot;);
+            }
+
+            host.Dispose();
+        }
+
+        private static async Task&lt;string&gt; SignInUserAndGetTokenUsingMSAL(string[] scopes)
+        {
+            if (publicClientApp == null)
+            {
+                // Initialize the MSAL library by building a public client application
+                publicClientApp = PublicClientApplicationBuilder.Create(clientId)
+                    .WithAuthority(authority)
+                    .WithRedirectUri(&quot;http://localhost&quot;)
+                    .Build();
+            }
+
+            // It's good practice to not do work on the UI thread, so use ConfigureAwait(false) whenever possible.
+            IEnumerable&lt;IAccount&gt; accounts = await publicClientApp.GetAccountsAsync().ConfigureAwait(false);
+            try
+            {
+                authResult = await publicClientApp.AcquireTokenSilent(scopes, accounts.FirstOrDefault())
+                                                  .ExecuteAsync();
+            }
+            catch (MsalUiRequiredException)
+            {
+                // A MsalUiRequiredException happened on AcquireTokenSilentAsync. 
+                // This indicates you need to call AcquireTokenAsync to acquire a token
+                authResult = await publicClientApp.AcquireTokenInteractive(scopes)
+                                                  .ExecuteAsync()
+                                                  .ConfigureAwait(false);
+            }
+
+            return authResult.AccessToken;
+        }
+
+    }
+}
+</code></pre>
+</article>
+          </div>
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              </nav>
+            </div>
+          </div>        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            <span>PnP Core SDK<br>Generated by <strong><a href='https://dotnet.github.io/docfx' alt='Doc FX Website'>DocFX</a></strong> with <strong><a href='https://ovasquez.github.io/docfx-material' alt='DocFx Material Theme'>Material UI</a></strong></span>
+            
+            <img src="https://telemetry.sharepointpnp.com/@pnp.github.io/index/" alt="spacer">
+          </div>
+        </div>
+      </footer>    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>  </body>
+</html>
