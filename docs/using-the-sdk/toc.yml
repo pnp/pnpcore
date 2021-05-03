@@ -15,7 +15,7 @@
   - name: Async or not
     href: basics-async.md
   - name: PnP Framework interop
-    href: basic-pnpframework.md
+    href: basics-pnpframework.md
   - name: Debugging
     href: basics-debug.md
   - name: General configuration
