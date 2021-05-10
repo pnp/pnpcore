@@ -18,7 +18,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PnP.Core.Auth.Test", "PnP.C
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PnP.Core.Modernization", "PnP.Core.Modernization\PnP.Core.Modernization.csproj", "{F9C46372-AD8A-4D71-BA10-839DCF5B94C9}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PnP.Core.Modernization.Test", "PnP.Core.Modernization.Test\PnP.Core.Modernization.Test.csproj", "{F1FAE349-6FE7-4263-83FB-8EFA74790F72}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PnP.Core.Modernization.Test", "PnP.Core.Modernization.Test\PnP.Core.Modernization.Test.csproj", "{5F617F14-4968-4E02-8481-4A97452108C9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -46,10 +46,10 @@ Global
 		{F9C46372-AD8A-4D71-BA10-839DCF5B94C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F9C46372-AD8A-4D71-BA10-839DCF5B94C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F9C46372-AD8A-4D71-BA10-839DCF5B94C9}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F1FAE349-6FE7-4263-83FB-8EFA74790F72}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F1FAE349-6FE7-4263-83FB-8EFA74790F72}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F1FAE349-6FE7-4263-83FB-8EFA74790F72}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F1FAE349-6FE7-4263-83FB-8EFA74790F72}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5F617F14-4968-4E02-8481-4A97452108C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5F617F14-4968-4E02-8481-4A97452108C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5F617F14-4968-4E02-8481-4A97452108C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5F617F14-4968-4E02-8481-4A97452108C9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
