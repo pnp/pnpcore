@@ -15,13 +15,64 @@ namespace PnP.Core.Modernization.Services.Builder
         /// Constructor
         /// </summary>
         /// <param name="services">The services being configured.</param>
-        public PnPModernizationBuilder(IServiceCollection services)
-            => Services = services;
+        public PnPModernizationBuilder(IServiceCollection services) => Services = services;
 
         /// <summary>
         /// The services being configured
         /// </summary>
         public virtual IServiceCollection Services { get; }
+
+        /// <summary>
+        /// Set a custom <see cref="ITransformationStateManager" /> to use to handle the state of a transformation process
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
+        public IPnPModernizationBuilder WithTransformationStateManager<T>()
+            where T : class, ITransformationStateManager
+        {
+            Services.RemoveAll<ITransformationStateManager>();
+            Services.AddTransient<ITransformationStateManager, T>();
+            return this;
+        }
+
+        /// <summary>
+        /// Set a custom <see cref="ITransformationDistiller" /> to defines a list of pages to transform
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
+        public IPnPModernizationBuilder WithTransformationDistiller<T>()
+            where T : class, ITransformationDistiller
+        {
+            Services.RemoveAll<ITransformationDistiller>();
+            Services.AddTransient<ITransformationDistiller, T>();
+            return this;
+        }
+
+        /// <summary>
+        /// Set a custom <see cref="IPageTransformator" /> to use to transform pages
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
+        public IPnPModernizationBuilder WithPageTransformator<T>()
+            where T : class, IPageTransformator
+        {
+            Services.RemoveAll<IPageTransformator>();
+            Services.AddTransient<IPageTransformator, T>();
+            return this;
+        }
+
+        /// <summary>
+        /// Set a custom <see cref="ITransformationExecutor" /> that manages the transformation of one or more pages
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
+        public IPnPModernizationBuilder WithTransformationExecutor<T>()
+            where T : class, ITransformationExecutor
+        {
+            Services.RemoveAll<ITransformationExecutor>();
+            Services.AddTransient<ITransformationExecutor, T>();
+            return this;
+        }
 
         /// <summary>
         /// Customize the default transformation options for the pages
@@ -102,7 +153,8 @@ namespace PnP.Core.Modernization.Services.Builder
         private IPnPModernizationBuilder WithProvider<T>(Action<PageTransformationOptions, T> setAction)
             where T : class
         {
-            Services.TryAddTransient<T>();
+            Services.RemoveAll<T>();
+            Services.AddTransient<T>();
             Services.AddOptions<PageTransformationOptions>().Configure(setAction);
 
             return this;

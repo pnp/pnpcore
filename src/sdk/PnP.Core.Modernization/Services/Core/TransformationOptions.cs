@@ -1,6 +1,7 @@
 ﻿using PnP.Core.Modernization.Services.MappingProviders;
 using System;
 using System.Collections.Generic;
+using System.Reflection.Emit;
 using System.Text;
 
 namespace PnP.Core.Modernization.Services.Core
@@ -10,6 +11,35 @@ namespace PnP.Core.Modernization.Services.Core
     /// </summary>
     public abstract class TransformationOptions
     {
+        #region Ctor
+
+        protected TransformationOptions()
+        {
+
+        }
+
+        protected TransformationOptions(TransformationOptions options)
+        {
+            Overwrite = options.Overwrite;
+            KeepPermissions = options.KeepPermissions;
+            KeepPageCreationModificationInformation = options.KeepPageCreationModificationInformation;
+            RemoveEmptySectionsAndColumns = options.RemoveEmptySectionsAndColumns;
+            SkipHiddenWebParts = options.SkipHiddenWebParts;
+            PublishPage = options.PublishPage;
+            DisablePageComments = options.DisablePageComments;
+            PostAsNews = options.PostAsNews;
+            HandleWikiImagesAndVideos = options.HandleWikiImagesAndVideos;
+            AddTableListImageAsImageWebPart = options.AddTableListImageAsImageWebPart;
+            WebPartMappingProvider = options.WebPartMappingProvider;
+            PageLayoutMappingProvider = options.PageLayoutMappingProvider;
+            TaxonomyMappingProvider = options.TaxonomyMappingProvider;
+            MetadataMappingProvider = options.MetadataMappingProvider;
+            UrlMappingProvider = options.UrlMappingProvider;
+            UserMappingProvider = options.UserMappingProvider;
+        }
+
+        #endregion
+
         #region Generic transformation properties
 
         /// <summary>
@@ -98,5 +128,7 @@ namespace PnP.Core.Modernization.Services.Core
         public IUserMappingProvider UserMappingProvider { get; set; }
 
         #endregion
+
+
     }
 }

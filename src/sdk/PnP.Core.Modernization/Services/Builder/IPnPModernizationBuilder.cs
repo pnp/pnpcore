@@ -16,6 +16,38 @@ namespace PnP.Core.Modernization.Services.Builder
         IServiceCollection Services { get; }
 
         /// <summary>
+        /// Set a custom <see cref="ITransformationStateManager" /> to use to handle the state of a transformation process
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
+        IPnPModernizationBuilder WithTransformationStateManager<T>()
+            where T : class, ITransformationStateManager;
+
+        /// <summary>
+        /// Set a custom <see cref="ITransformationDistiller" /> to defines a list of pages to transform
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
+        IPnPModernizationBuilder WithTransformationDistiller<T>()
+            where T : class, ITransformationDistiller;
+
+        /// <summary>
+        /// Set a custom <see cref="IPageTransformator" /> to use to transform pages
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
+        IPnPModernizationBuilder WithPageTransformator<T>()
+            where T : class, IPageTransformator;
+
+        /// <summary>
+        /// Set a custom <see cref="ITransformationExecutor" /> that manages the transformation of one or more pages
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
+        IPnPModernizationBuilder WithTransformationExecutor<T>()
+            where T : class, ITransformationExecutor;
+
+        /// <summary>
         /// Customize the default transformation options for the pages
         /// </summary>
         /// <param name="options"></param>

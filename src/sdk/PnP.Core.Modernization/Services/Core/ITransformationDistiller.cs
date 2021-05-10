@@ -14,9 +14,9 @@ namespace PnP.Core.Modernization.Services.Core
         /// <summary>
         /// Defines a list of Page Transformation Tasks
         /// </summary>
-        /// <param name="SourceContext">The PnPContext of the source site</param>
-        /// <param name="TargetContext">The PnPContext of the target site</param>
+        /// <param name="sourceContext">The PnPContext of the source site</param>
+        /// <param name="targetContext">The PnPContext of the target site</param>
         /// <returns>A list of PageTransformationTask to transform</returns>
-        Task<IAsyncEnumerable<PageTransformationTask>> GetTransformationTasks(PnPContext SourceContext, PnPContext TargetContext);
+        Task<IAsyncEnumerable<PageTransformationTask>> GetTransformationTasks(PnPContext sourceContext, PnPContext targetContext);
     }
 }

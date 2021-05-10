@@ -2,6 +2,8 @@
 using PnP.Core.Modernization.Services.Builder;
 using PnP.Core.Modernization.Services.Builder.Configuration;
 using System;
+using Microsoft.Extensions.DependencyInjection.Extensions;
+using PnP.Core.Modernization.Services.Core;
 
 namespace Microsoft.Extensions.DependencyInjection
 {
@@ -39,9 +41,26 @@ namespace Microsoft.Extensions.DependencyInjection
                 services.Configure(options);
             }
 
-            // TODO: Add services
+            var builder = new PnPModernizationBuilder(services);
+            // Set default implementations
+            builder.AddDefaults();
 
-            return new PnPModernizationBuilder(services);
+            return builder;
+        }
+
+        /// <summary>
+        /// Adds default implementations provided by the modernization framework
+        /// </summary>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        public static IPnPModernizationBuilder AddDefaults(this IPnPModernizationBuilder builder)
+        {
+            if (builder == null) throw new ArgumentNullException(nameof(builder));
+
+            builder.Services.TryAddTransient<ITransformationStateManager, InMemoryTransformationStateManager>();
+            builder.Services.TryAddTransient<ITransformationExecutor, SimpleTransformationExecutor>();
+
+            return builder;
         }
     }
 }
