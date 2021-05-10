@@ -9,6 +9,18 @@ namespace PnP.Core.Modernization.Services.Core
     /// </summary>
     public class TransformationExecutionStatus
     {
-        public Guid ProcessId { get; set; }
+        /// <summary>
+        /// Creates an instance for the process
+        /// </summary>
+        /// <param name="processId"></param>
+        public TransformationExecutionStatus(Guid processId)
+        {
+            ProcessId = processId;
+        }
+
+        /// <summary>
+        /// The ID of the process
+        /// </summary>
+        public Guid ProcessId { get;  }
     }
 }

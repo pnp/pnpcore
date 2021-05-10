@@ -26,7 +26,7 @@ namespace PnP.Core.Modernization.Test
             //Assert.IsInstanceOfType(provider.GetRequiredService<IPageTransformator>(), typeof(Mock));
             //Assert.IsInstanceOfType(provider.GetRequiredService<ITransformationDistiller>(), typeof(Mock));
             Assert.IsInstanceOfType(provider.GetRequiredService<ITransformationStateManager>(), typeof(InMemoryTransformationStateManager));
-            Assert.IsInstanceOfType(provider.GetRequiredService<ITransformationExecutor>(), typeof(SimpleTransformationExecutor));
+            Assert.IsInstanceOfType(provider.GetRequiredService<ITransformationExecutor>(), typeof(InProcessTransformationExecutor));
         }
 
         [TestMethod]
@@ -118,7 +118,7 @@ namespace PnP.Core.Modernization.Test
                 throw new NotImplementedException();
             }
 
-            Task<IAsyncEnumerable<PageTransformationTask>> ITransformationDistiller.GetTransformationTasks(PnPContext sourceContext, PnPContext targetContext)
+            IAsyncEnumerable<PageTransformationTask> ITransformationDistiller.GetTransformationTasks(PnPContext sourceContext, PnPContext targetContext)
             {
                 throw new NotImplementedException();
             }
@@ -133,7 +133,7 @@ namespace PnP.Core.Modernization.Test
                 throw new NotImplementedException();
             }
 
-            Action<TransformationExecutionStatus> ITransformationExecutor.Progress { get; set; }
+            Func<TransformationExecutionStatus, Task> ITransformationExecutor.Progress { get; set; }
 
             Task<TransformationExecutionStatus> ITransformationExecutor.GetStatusAsync(Guid processId)
             {

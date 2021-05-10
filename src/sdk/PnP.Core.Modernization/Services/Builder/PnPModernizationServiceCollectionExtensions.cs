@@ -58,7 +58,7 @@ namespace Microsoft.Extensions.DependencyInjection
             if (builder == null) throw new ArgumentNullException(nameof(builder));
 
             builder.Services.TryAddTransient<ITransformationStateManager, InMemoryTransformationStateManager>();
-            builder.Services.TryAddTransient<ITransformationExecutor, SimpleTransformationExecutor>();
+            builder.Services.TryAddTransient<ITransformationExecutor, InProcessTransformationExecutor>();
 
             return builder;
         }

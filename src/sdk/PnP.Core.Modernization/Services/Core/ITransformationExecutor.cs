@@ -14,7 +14,7 @@ namespace PnP.Core.Modernization.Services.Core
         /// <summary>
         /// Allows monitoring (and cancel) the progress of a transformation process
         /// </summary>
-        public Action<TransformationExecutionStatus> Progress { get; set; }
+        public Func<TransformationExecutionStatus, Task> Progress { get; set; }
 
         /// <summary>
         /// Allows to retrieve the status of a transformation process
@@ -26,10 +26,10 @@ namespace PnP.Core.Modernization.Services.Core
         /// <summary>
         /// Starts a Page Transformation process
         /// </summary>
-        /// <param name="SourceContext">The PnPContext of the source site</param>
-        /// <param name="TargetContext">The PnPContext of the target site</param>
+        /// <param name="sourceContext">The PnPContext of the source site</param>
+        /// <param name="targetContext">The PnPContext of the target site</param>
         /// <returns>The ID of the transformation process</returns>
-        Task<Guid> StartTransformAsync(PnPContext SourceContext, PnPContext TargetContext);
+        Task<Guid> StartTransformAsync(PnPContext sourceContext, PnPContext targetContext);
 
         /// <summary>
         /// Stops a Page Transformation process
