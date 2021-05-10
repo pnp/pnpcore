@@ -15078,6 +15078,32 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IListItem.Id
   nameWithType: IListItem.Id
+- uid: PnP.Core.Model.SharePoint.IListItem.IsFile
+  name: IsFile()
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_IsFile
+  commentId: M:PnP.Core.Model.SharePoint.IListItem.IsFile
+  fullName: PnP.Core.Model.SharePoint.IListItem.IsFile()
+  nameWithType: IListItem.IsFile()
+- uid: PnP.Core.Model.SharePoint.IListItem.IsFile*
+  name: IsFile
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_IsFile_
+  commentId: Overload:PnP.Core.Model.SharePoint.IListItem.IsFile
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IListItem.IsFile
+  nameWithType: IListItem.IsFile
+- uid: PnP.Core.Model.SharePoint.IListItem.IsFileAsync
+  name: IsFileAsync()
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_IsFileAsync
+  commentId: M:PnP.Core.Model.SharePoint.IListItem.IsFileAsync
+  fullName: PnP.Core.Model.SharePoint.IListItem.IsFileAsync()
+  nameWithType: IListItem.IsFileAsync()
+- uid: PnP.Core.Model.SharePoint.IListItem.IsFileAsync*
+  name: IsFileAsync
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_IsFileAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.IListItem.IsFileAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IListItem.IsFileAsync
+  nameWithType: IListItem.IsFileAsync
 - uid: PnP.Core.Model.SharePoint.IListItem.IsFolder
   name: IsFolder()
   href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_IsFolder
