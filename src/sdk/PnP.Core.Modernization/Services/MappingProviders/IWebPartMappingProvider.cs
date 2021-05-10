@@ -15,8 +15,8 @@ namespace PnP.Core.Modernization.Services.MappingProviders
         /// <summary>
         /// Maps a classic Web Part into a modern Web Part
         /// </summary>
-        /// <param name="source">The classic Web Part to modernize</param>
-        /// <returns>The modern Web Part mapping to the source classic one</returns>
-        Task<ClientSideWebPart> MapWebPartAsync(WebPart source);
+        /// <param name="input">The input for the mapping activity</param>
+        /// <returns>The output of the mapping activity</returns>
+        Task<WebPartMappingProviderOutput> MapWebPartAsync(WebPartMappingProviderInput input);
     }
 }

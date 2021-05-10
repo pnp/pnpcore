@@ -13,8 +13,8 @@ namespace PnP.Core.Modernization.Services.MappingProviders
         /// <summary>
         /// Maps a user UPN from the source platform to the target platform
         /// </summary>
-        /// <param name="source">The UPN of the user in the source platform</param>
-        /// <returns>The UPN of the user in the target platform</returns>
-        Task<string> MapUserAsync(string source);
+        /// <param name="input">The input for the mapping activity</param>
+        /// <returns>The output of the mapping activity</returns>
+        Task<UserMappingProviderOutput> MapUserAsync(UserMappingProviderInput input);
     }
 }

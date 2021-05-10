@@ -13,8 +13,8 @@ namespace PnP.Core.Modernization.Services.MappingProviders
         /// <summary>
         /// Maps a URL from classic to modern
         /// </summary>
-        /// <param name="source">The URL in the source platform</param>
-        /// <returns>The URL in the target platform</returns>
-        Task<Uri> MapUrlAsync(Uri source);
+        /// <param name="input">The input for the mapping activity</param>
+        /// <returns>The output of the mapping activity</returns>
+        Task<UrlMappingProviderOutput> MapUrlAsync(UrlMappingProviderInput input);
     }
 }

@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
-using Modern = PnP.Core.Modernization.Model.Modern;
-using Classic = PnP.Core.Modernization.Model.Classic;
+
 
 namespace PnP.Core.Modernization.Services.MappingProviders
 {
@@ -15,8 +14,8 @@ namespace PnP.Core.Modernization.Services.MappingProviders
         /// <summary>
         /// Maps a classic Page Layout into a modern Page Layout
         /// </summary>
-        /// <param name="source">The classic Page Layout to modernize</param>
-        /// <returns>The modern Page Layout</returns>
-        Task<Modern.PageLayout> MapPageLayoutAsync(Classic.PageLayout source);
+        /// <param name="input">The input for the mapping activity</param>
+        /// <returns>The output of the mapping activity</returns>
+        Task<PageLayoutMappingProviderOutput> MapPageLayoutAsync(PageLayoutMappingProviderInput input);
     }
 }

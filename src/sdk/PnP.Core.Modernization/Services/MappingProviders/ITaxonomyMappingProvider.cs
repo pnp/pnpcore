@@ -13,8 +13,8 @@ namespace PnP.Core.Modernization.Services.MappingProviders
         /// <summary>
         /// Maps a Taxonomy Term from the source platform to the target platform
         /// </summary>
-        /// <param name="source">The Taxonomy Term ID in the source platform</param>
-        /// <returns>The Taxonomy Term ID in the target platform</returns>
-        Task<string> MapTermAsync(string source);
+        /// <param name="input">The input for the mapping activity</param>
+        /// <returns>The output of the mapping activity</returns>
+        Task<TaxonomyMappingProviderOutput> MapTermAsync(TaxonomyMappingProviderInput input);
     }
 }
