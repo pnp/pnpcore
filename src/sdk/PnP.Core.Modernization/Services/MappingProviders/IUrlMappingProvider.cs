@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PnP.Core.Modernization.Services.Providers
+namespace PnP.Core.Modernization.Services.MappingProviders
 {
     /// <summary>
     /// Provides the basic interface for a URL mapping provider

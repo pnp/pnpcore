@@ -14,20 +14,28 @@ namespace PnP.Core.Modernization.Services.Core
         /// <summary>
         /// Allows monitoring (and cancel) the progress of a transformation process
         /// </summary>
-        public Func<TransformationExecutionStatus, Boolean> Progress { get; set; }
+        public Action<TransformationExecutionStatus> Progress { get; set; }
 
         /// <summary>
         /// Allows to retrieve the status of a transformation process
         /// </summary>
+        /// <param name="processId">The ID of the transformation process</param>
         /// <returns>The status of a transformation process</returns>
-        public TransformationExecutionStatus GetStatus();
+        public Task<TransformationExecutionStatus> GetStatusAsync(Guid processId);
 
         /// <summary>
-        /// Defines a list of Page Transformation Tasks
+        /// Starts a Page Transformation process
         /// </summary>
         /// <param name="SourceContext">The PnPContext of the source site</param>
         /// <param name="TargetContext">The PnPContext of the target site</param>
-        /// <returns>A dictionary of URLs of the transformed pages mapped to the URLs of the source pages</returns>
-        Task<Dictionary<Uri, Uri>> Transform(PnPContext SourceContext, PnPContext TargetContext);
+        /// <returns>The ID of the transformation process</returns>
+        Task<Guid> StartTransformAsync(PnPContext SourceContext, PnPContext TargetContext);
+
+        /// <summary>
+        /// Stops a Page Transformation process
+        /// </summary>
+        /// <param name="processId">The ID of the transformation process</param>
+        /// <returns></returns>
+        Task StopTransformAsync(Guid processId);
     }
 }

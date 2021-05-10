@@ -1,4 +1,4 @@
-﻿using PnP.Core.Modernization.Services.Providers;
+﻿using PnP.Core.Modernization.Services.MappingProviders;
 using System;
 using System.Collections.Generic;
 using System.Text;

@@ -9,5 +9,6 @@ namespace PnP.Core.Modernization.Services.Core
     /// </summary>
     public class TransformationExecutionStatus
     {
+        public Guid ProcessId { get; set; }
     }
 }

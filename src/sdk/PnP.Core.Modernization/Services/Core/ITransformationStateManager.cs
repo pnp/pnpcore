@@ -11,22 +11,20 @@ namespace PnP.Core.Modernization.Services.Core
     public interface ITransformationStateManager
     {
         /// <summary>
-        /// Allows to write a state variable for a specific Transformation Task
+        /// Allows to write a state variable for a specific Transformation process
         /// </summary>
         /// <typeparam name="T">The Type of the state variable</typeparam>
-        /// <param name="taskId">The ID of the Transformation Task</param>
         /// <param name="name">The name of the state variable</param>
         /// <param name="state">The value of the state variable</param>
         /// <returns></returns>
-        Task WriteState<T>(Guid taskId, string name, T state);
+        Task WriteStateAsync<T>(string name, T state);
 
         /// <summary>
-        /// Allows to read a state variable for a specific Transformation Task
+        /// Allows to read a state variable for a specific Transformation process
         /// </summary>
         /// <typeparam name="T">The Type of the state variable</typeparam>
-        /// <param name="taskId">The ID of the Transformation Task</param>
         /// <param name="name">The name of the state variable</param>
         /// <returns>The value of the state variable</returns>
-        Task<T> ReadState<T>(Guid taskId, string name);
+        Task<T> ReadStateAsync<T>(string name);
     }
 }

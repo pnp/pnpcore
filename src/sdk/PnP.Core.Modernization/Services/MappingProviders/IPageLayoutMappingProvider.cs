@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Modern = PnP.Core.Modernization.Model.Modern;
 using Classic = PnP.Core.Modernization.Model.Classic;
 
-namespace PnP.Core.Modernization.Services.Providers
+namespace PnP.Core.Modernization.Services.MappingProviders
 {
     /// <summary>
     /// Provides the basic interface for a Page Layout mapping provider
