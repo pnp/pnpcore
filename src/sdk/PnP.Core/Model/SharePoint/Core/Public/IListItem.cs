@@ -29,6 +29,22 @@ namespace PnP.Core.Model.SharePoint
 
         #region Extension methods
 
+        #region File
+
+        /// <summary>
+        /// Checks if this <see cref="IListItem"/> is a file
+        /// </summary>
+        /// <returns>Returns true if this <see cref="IListItem"/> is a file.</returns>
+        public Task<bool> IsFileAsync();
+
+        /// <summary>
+        /// Checks if this <see cref="IListItem"/> is a file
+        /// </summary>
+        /// <returns>Returns true if this <see cref="IListItem"/> is a file.</returns>
+        public bool IsFile();
+
+        #endregion
+
         #region Folder
 
         /// <summary>

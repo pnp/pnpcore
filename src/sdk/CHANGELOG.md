@@ -10,6 +10,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
 ### Added
 
+- IsFile() method on IListItem [jansenbe - Bert Jansen]
+
 ### Changed
 
 - Alignment of PageHeaderTitleAlignment enum with what's used in PnP Framework [jansenbe - Bert Jansen]
