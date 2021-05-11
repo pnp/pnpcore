@@ -12,30 +12,18 @@ namespace PnP.Core.Modernization.Services.Core
     public interface ITransformationExecutor
     {
         /// <summary>
-        /// Allows monitoring (and cancel) the progress of a transformation process
-        /// </summary>
-        public Func<TransformationExecutionStatus, Task> Progress { get; set; }
-
-        /// <summary>
-        /// Allows to retrieve the status of a transformation process
-        /// </summary>
-        /// <param name="processId">The ID of the transformation process</param>
-        /// <returns>The status of a transformation process</returns>
-        public Task<TransformationExecutionStatus> GetStatusAsync(Guid processId);
-
-        /// <summary>
-        /// Starts a Page Transformation process
+        /// Creates a Page Transformation process
         /// </summary>
         /// <param name="sourceContext">The PnPContext of the source site</param>
         /// <param name="targetContext">The PnPContext of the target site</param>
-        /// <returns>The ID of the transformation process</returns>
-        Task<Guid> StartTransformAsync(PnPContext sourceContext, PnPContext targetContext);
+        /// <returns>The transformation process</returns>
+        Task<TransformationProcess> CreateTransformationProcessAsync(PnPContext sourceContext, PnPContext targetContext);
 
         /// <summary>
-        /// Stops a Page Transformation process
+        /// Loads a Page Transformation process
         /// </summary>
-        /// <param name="processId">The ID of the transformation process</param>
-        /// <returns></returns>
-        Task StopTransformAsync(Guid processId);
+        /// <param name="processId">The ID of the process to load</param>
+        /// <returns>The transformation process</returns>
+        Task<TransformationProcess> LoadTransformationProcessAsync(Guid processId);
     }
 }

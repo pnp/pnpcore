@@ -11,36 +11,21 @@ namespace PnP.Core.Modernization.Services.Core
     /// </summary>
     public class InProcessTransformationExecutor : LongRunningTransformationExecutorBase
     {
+        private readonly IPageTransformator _pageTransformator;
 
+        /// <summary>
+        /// Constructor with Dependency Injection
+        /// </summary>
+        /// <param name="transformationDistiller">The Transformation Distiller</param>
+        /// <param name="transformationStateManager">The State Manager</param>
+        /// <param name="transformator">The Page Transformator</param>
         public InProcessTransformationExecutor(
             ITransformationDistiller transformationDistiller,
             ITransformationStateManager transformationStateManager,
             IPageTransformator transformator
             ) : base(transformationDistiller, transformationStateManager)
         {
-            this.PageTransformator = transformator ?? throw new ArgumentNullException(nameof(transformator));
-        }
-
-        public IPageTransformator PageTransformator { get; }
-
-        public override async Task<Guid> StartTransformAsync(PnPContext sourceContext, PnPContext targetContext)
-        {
-            var processId = await base.StartTransformAsync(sourceContext, targetContext);
-
-            // Start into another thread
-            _ = Task.Run(ProcessTasksAsync);
-
-            return processId;
-        }
-
-        protected virtual async Task ProcessTasksAsync()
-        {
-            // TODO: iterate through state keys
-            var tasks = new PageTransformationTask[0];
-            foreach (var pageTransformationTask in tasks)
-            {
-                await PageTransformator.TransformAsync(pageTransformationTask);
-            }
+            this._pageTransformator = transformator ?? throw new ArgumentNullException(nameof(transformator));
         }
     }
 }

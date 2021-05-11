@@ -2,13 +2,11 @@
 - implement all the native providers with file-based approach (both XML and JSON)
 - add With* methods to the builder
 	- builder.WithName("MyConfiguration).WithWebPartMappingProvider<MyCustomWebPartMappingProvider>().With*().Build();
-- or wath about having also named options?
+- or what about having also named options?
 	- https://docs.microsoft.com/en-us/aspnet/core/fundamentals/configuration/options?view=aspnetcore-5.0#named-options-support-using-iconfigurenamedoptions
 - abstract the "executor" of a transformation request
 - implement PageTransformator through interface IPageTransformator
 - all asynchronous
-- add page/site information to the Transform methods of IPageTransformator and ISiteTransformator
-	- or should we just use the options?
 - add support for external executor
 	- provide default in-memory executor
 - implement a Metadata Mapping provider with support for an in-memory dictionary of fields to add to the target
@@ -24,9 +22,11 @@
 
 - TransformationDistiller: defines the list of items (pages) to process
 - TransformationExecutor:
-	- Events to notify status
-	- GetStatus
-	- flavors:
+	- Creates/Loads a TransformationProcess
+		- Start/Stop
+		- Events to notify status
+		- GetStatus
+	- Flavors:
 		- Synchronous
 		- Parallel
 		- Background
@@ -35,7 +35,8 @@
 - TransformationStateManager: handles state management for the Executor
 
 Things to think about:
-- Do we want all the mapping interfaces as asynchronous or not?
+- How do we pass configuration settings (like file path) to mapping provider instances in With* methods?
+	- We need an "open" configuration model, because we don't simply need file path, but also other kind of settings (like db connection string, etc.)
 
 Questions for Bert:
 - What is the whole Observer thing? Can't we simply use logging?
@@ -50,4 +51,4 @@ Questions for Bert:
 - What's the purpose of the "internal fields"? (Folder, IsCrossFarmTransformation, etc.)
 - Is the ModernizationCenter gone, right?
 - Do we really neew TargetPageTakesSourcePageName? Can't we simply rely on TargetPageName and if blank it will take source page name?
-- PnPContext is online only. How do we manage on-prem sources?
+- PnPContext is online only. How do we manage on-prem sources in the new Modernization Framework based on PnP.Core?

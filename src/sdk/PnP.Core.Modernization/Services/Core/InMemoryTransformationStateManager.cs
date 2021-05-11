@@ -18,13 +18,14 @@ namespace PnP.Core.Modernization.Services.Core
         /// Allows to write a state variable for a specific Transformation process
         /// </summary>
         /// <typeparam name="T">The Type of the state variable</typeparam>
-        /// <param name="name">The name of the state variable</param>
+        /// <param name="key">The name of the state variable</param>
         /// <param name="state">The value of the state variable</param>
         /// <returns></returns>
-        public Task WriteStateAsync<T>(string name, T state)
+        public Task WriteStateAsync<T>(object key, T state)
         {
-            var key = Tuple.Create(typeof(T), name);
-            states.AddOrUpdate(key, state, (k, o) => state);
+            var serializedKey = GetSerializedKey(key);
+            var itemKey = Tuple.Create(typeof(T), serializedKey);
+            states.AddOrUpdate(itemKey, state, (k, o) => state);
 
             return Task.CompletedTask;
         }
@@ -33,17 +34,28 @@ namespace PnP.Core.Modernization.Services.Core
         /// Allows to read a state variable for a specific Transformation process
         /// </summary>
         /// <typeparam name="T">The Type of the state variable</typeparam>
-        /// <param name="name">The name of the state variable</param>
+        /// <param name="key">The name of the state variable</param>
         /// <returns>The value of the state variable</returns>
-        public Task<T> ReadStateAsync<T>(string name)
+        public Task<T> ReadStateAsync<T>(object key)
         {
-            var key = Tuple.Create(typeof(T), name);
-            if (states.TryGetValue(key, out var value) && value is T v)
+            var serializedKey = GetSerializedKey(key);
+            var itemKey = Tuple.Create(typeof(T), serializedKey);
+            if (states.TryGetValue(itemKey, out var value) && value is T v)
             {
                 return Task.FromResult(v);
             }
 
             return default;
+        }
+
+        /// <summary>
+        /// Prepares the serialized key from the key object
+        /// </summary>
+        /// <param name="key">The input key object</param>
+        /// <returns>The serialized key</returns>
+        private static string GetSerializedKey(object key)
+        {
+            return System.Text.Json.JsonSerializer.Serialize(key);
         }
     }
 }

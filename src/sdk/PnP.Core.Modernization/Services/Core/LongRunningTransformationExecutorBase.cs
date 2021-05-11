@@ -7,10 +7,25 @@ using PnP.Core.Services;
 namespace PnP.Core.Modernization.Services.Core
 {
     /// <summary>
-    /// Implementation of <see cref="ITransformationExecutor"/> which persists state for a long running operation
+    /// Implementation of <see cref="ITransformationExecutor"/> that persists state for a long running operation
     /// </summary>
     public abstract class LongRunningTransformationExecutorBase : TransformationExecutorBase
     {
+        /// <summary>
+        /// Instance of the Transformation Distiller
+        /// </summary>
+        protected ITransformationDistiller TransformationDistiller { get; }
+
+        /// <summary>
+        /// Instance of the Transformation State Manager
+        /// </summary>
+        protected ITransformationStateManager TransformationStateManager { get; }
+
+        /// <summary>
+        /// Constructor with Dependency Injection
+        /// </summary>
+        /// <param name="transformationDistiller">The Transformation Distiller</param>
+        /// <param name="transformationStateManager">The State Manager</param>
         protected LongRunningTransformationExecutorBase(
             ITransformationDistiller transformationDistiller,
             ITransformationStateManager transformationStateManager)
@@ -19,63 +34,25 @@ namespace PnP.Core.Modernization.Services.Core
             TransformationStateManager = transformationStateManager ?? throw new ArgumentNullException(nameof(transformationStateManager));
         }
 
-        protected ITransformationDistiller TransformationDistiller { get; }
-
-        protected ITransformationStateManager TransformationStateManager { get; }
-
-        public override async Task<TransformationExecutionStatus> GetStatusAsync(Guid processId)
+        /// <summary>
+        /// Creates a Page Transformation process
+        /// </summary>
+        /// <param name="sourceContext">The PnPContext of the source site</param>
+        /// <param name="targetContext">The PnPContext of the target site</param>
+        /// <returns>The transformation process</returns>
+        public override Task<TransformationProcess> CreateTransformationProcessAsync(PnPContext sourceContext, PnPContext targetContext)
         {
-            string name = $"{processId}";
-            var state = await TransformationStateManager.ReadStateAsync<TransformationExecutionStatus>(name);
-
-            return state ?? new TransformationExecutionStatus(processId);
+            return base.CreateTransformationProcessAsync(sourceContext, targetContext);
         }
 
-        public override async Task<Guid> StartTransformAsync(PnPContext sourceContext, PnPContext targetContext)
+        /// <summary>
+        /// Loads a Page Transformation process
+        /// </summary>
+        /// <param name="processId">The ID of the process to load</param>
+        /// <returns>The transformation process</returns>
+        public override Task<TransformationProcess> LoadTransformationProcessAsync(Guid processId)
         {
-            // TODO: evaluate the usage of a Process instance
-            var processId = Guid.NewGuid();
-
-            // TODO: set status
-            var status = new TransformationExecutionStatus(processId);
-            await SetStatusAsync(status);
-            await RaiseProgressAsync(status);
-
-            var tasks = TransformationDistiller.GetTransformationTasks(sourceContext, targetContext);
-            await foreach (var task in tasks)
-            {
-                await OnNewTaskAsync(processId, task);
-
-                // TODO: set status
-                status = new TransformationExecutionStatus(processId);
-                await SetStatusAsync(status);
-                await RaiseProgressAsync(status);
-            }
-
-            return processId;
+            return base.LoadTransformationProcessAsync(processId);
         }
-
-        public override async Task StopTransformAsync(Guid processId)
-        {
-            // TODO: change the state
-            await SetStatusAsync(new TransformationExecutionStatus(processId));
-        }
-
-        protected virtual async Task SetStatusAsync(TransformationExecutionStatus status)
-        {
-            // TODO: evaluate the usage of object instead of string
-            // and delegate the serialization to the state manager
-            string name = $"{status.ProcessId}";
-            await TransformationStateManager.WriteStateAsync(name, status);
-        }
-
-        protected virtual async Task OnNewTaskAsync(Guid processId, PageTransformationTask task)
-        {
-            // TODO: evaluate the usage of object instead of string
-            // and delegate the serialization to the state manager
-            string name = $"{processId}:{task.Id}";
-            await TransformationStateManager.WriteStateAsync(name, task);
-        }
-        
     }
 }

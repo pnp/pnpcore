@@ -43,7 +43,7 @@ namespace PnP.Core.Modernization.Test
                 .WithUserMappingProvider<Mock>()
                 .WithWebPartMappingProvider<Mock>()
 
-                .WithPageTransformator<Mock>()
+                .WithPageTransformator<PageTransformator>()
                 .WithTransformationDistiller<Mock>()
                 .WithTransformationStateManager<Mock>()
                 .WithTransformationExecutor<Mock>();
@@ -123,29 +123,22 @@ namespace PnP.Core.Modernization.Test
                 throw new NotImplementedException();
             }
 
-            Task ITransformationStateManager.WriteStateAsync<T>(string name, T state)
+            Task<TransformationProcess> ITransformationExecutor.CreateTransformationProcessAsync(PnPContext sourceContext, PnPContext targetContext)
             {
                 throw new NotImplementedException();
             }
 
-            Task<T> ITransformationStateManager.ReadStateAsync<T>(string name)
+            Task<TransformationProcess> ITransformationExecutor.LoadTransformationProcessAsync(Guid processId)
             {
                 throw new NotImplementedException();
             }
 
-            Func<TransformationExecutionStatus, Task> ITransformationExecutor.Progress { get; set; }
-
-            Task<TransformationExecutionStatus> ITransformationExecutor.GetStatusAsync(Guid processId)
+            Task ITransformationStateManager.WriteStateAsync<T>(object key, T state)
             {
                 throw new NotImplementedException();
             }
 
-            Task<Guid> ITransformationExecutor.StartTransformAsync(PnPContext sourceContext, PnPContext targetContext)
-            {
-                throw new NotImplementedException();
-            }
-
-            Task ITransformationExecutor.StopTransformAsync(Guid processId)
+            Task<T> ITransformationStateManager.ReadStateAsync<T>(object key)
             {
                 throw new NotImplementedException();
             }
