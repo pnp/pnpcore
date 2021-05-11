@@ -3,6 +3,7 @@ using PnP.Core.Model;
 using PnP.Core.Services.Core.CSOM;
 using PnP.Core.Services.Core.CSOM.Requests;
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
@@ -29,8 +30,8 @@ namespace PnP.Core.Services
         // Handles sending telemetry events
         private readonly TelemetryManager telemetryManager;
 
-        // Collection of current batches
-        private readonly Dictionary<Guid, Batch> batches = new Dictionary<Guid, Batch>();
+        // Collection of current batches, ensure thread safety via a concurrent dictionary
+        private readonly ConcurrentDictionary<Guid, Batch> batches = new ConcurrentDictionary<Guid, Batch>();
 
         #region Embedded classes
 
@@ -200,8 +201,14 @@ namespace PnP.Core.Services
             else
             {
                 var batch = new Batch(id);
-                batches.Add(id, batch);
-                return batch;
+                if (batches.TryAdd(id, batch))
+                {
+                    return batch;
+                }
+                else
+                {
+                    throw new Exception("TODO");
+                }
             }
         }
 
@@ -1890,7 +1897,7 @@ namespace PnP.Core.Services
             // And remove them from the current collection
             foreach (var key in keysToRemove)
             {
-                batches.Remove(key);
+                batches.TryRemove(key, out Batch _);
             }
         }
 
