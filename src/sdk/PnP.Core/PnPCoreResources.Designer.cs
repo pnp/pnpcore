@@ -556,6 +556,15 @@ namespace PnP.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Batch could not be added to list of batches.
+        /// </summary>
+        internal static string Exception_Unsupported_CannotAddBatch {
+            get {
+                return ResourceManager.GetString("Exception_Unsupported_CannotAddBatch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The model in the queried collection does not implement the IQueryableDataModel interface.
         /// </summary>
         internal static string Exception_Unsupported_CollectionModelIsNotQueryable {

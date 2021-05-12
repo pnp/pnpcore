@@ -207,7 +207,7 @@ namespace PnP.Core.Services
                 }
                 else
                 {
-                    throw new Exception("TODO");
+                    throw new ClientException(ErrorType.Unsupported, PnPCoreResources.Exception_Unsupported_CannotAddBatch);
                 }
             }
         }
