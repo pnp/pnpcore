@@ -6,6 +6,7 @@ using PnP.Core.QueryModel;
 using PnP.Core.Test.Utilities;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -117,6 +118,7 @@ namespace PnP.Core.Test.SharePoint
                 var rootItem = list.Items.Add(new Dictionary<string, object> { { "Title", "root" } });
                 var folderForRootItem = await rootItem.GetFolderAsync().ConfigureAwait(false);
                 Assert.IsFalse(await rootItem.IsFolderAsync());
+                Assert.IsFalse(await rootItem.IsFileAsync());
 
                 var folderItem = await list.AddListFolderAsync("Test");
                 var folderForFolderItem = await folderItem.GetFolderAsync().ConfigureAwait(false);
@@ -125,6 +127,7 @@ namespace PnP.Core.Test.SharePoint
                 var item = list.Items.Add(new Dictionary<string, object> { { "Title", "blabla" } }, "Test");
                 var newFolderItem = await list.Items.GetByIdAsync(folderItem.Id);
                 Assert.IsTrue(newFolderItem.IsFolder());
+                Assert.IsFalse(newFolderItem.IsFile());
 
                 var folder = await item.GetFolderAsync().ConfigureAwait(false);
                 Assert.IsTrue(folder.Name == "Test");
@@ -201,6 +204,15 @@ namespace PnP.Core.Test.SharePoint
                 var folderItem = await list.AddListFolderAsync("Test");
                 var newFolderItem = await list.Items.GetByIdAsync(folderItem.Id);
                 Assert.IsTrue(newFolderItem["ContentTypeId"].ToString().StartsWith("0x0120"));
+                Assert.IsTrue(newFolderItem.IsFolder());
+
+                var folder = await context.Web.GetFolderByServerRelativeUrlAsync($"{context.Uri.PathAndQuery}/{listTitle}/Test");
+
+                // Add file into folder
+                IFile testDocument = folder.Files.Add("test.docx", System.IO.File.OpenRead($".{Path.DirectorySeparatorChar}TestAssets{Path.DirectorySeparatorChar}test.docx"), true);
+                // Load the connected listitem
+                testDocument.Load(p => p.ListItemAllFields);
+                Assert.IsTrue(testDocument.ListItemAllFields.IsFile());
 
                 await list.DeleteAsync();
             }

@@ -215,6 +215,23 @@ namespace PnP.Core.Model.SharePoint
 
         #endregion
 
+        #region File
+        public async Task<bool> IsFileAsync()
+        {
+            if (!Values.ContainsKey("ContentTypeId"))
+            {
+                await LoadKeyListItemProperties().ConfigureAwait(false);
+            }
+
+            return Values["ContentTypeId"].ToString().StartsWith("0x0101", StringComparison.InvariantCultureIgnoreCase);
+        }
+
+        public bool IsFile()
+        {
+            return IsFileAsync().GetAwaiter().GetResult();
+        }
+        #endregion
+
         #region Folder
         public async Task<bool> IsFolderAsync()
         {

@@ -10,8 +10,12 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
 ### Added
 
+- IsFile() method on IListItem [jansenbe - Bert Jansen]
+
 ### Changed
 
+- Use ConcurrentDictionary to track batches in the BatchClient class [jansenbe - Bert Jansen]
+- Fix BannerImageUrl to use sphost only since siteid, webid are given as parameter #439 [czullu - Christian Zuellig]
 - Alignment of PageHeaderTitleAlignment enum with what's used in PnP Framework [jansenbe - Bert Jansen]
 - Hubsite joining/unjoining documention update #416 [plamber - Patrick Lamber]
 - Fixed url encoding issue when the .NET Standard 2.0 build was used in a .NET Framework application [jansenbe - Bert Jansen]
