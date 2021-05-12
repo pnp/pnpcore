@@ -493,6 +493,15 @@ namespace PnP.Core.Services
             return clonedContext;
         }
 
+        /// <summary>
+        /// Set GroupId for Context
+        /// </summary>
+        /// <param name="groupId"></param>
+        public void SetGroupId(Guid groupId)
+        {
+            (this.Group as GraphGroup).Metadata.Add(PnPConstants.MetaDataGraphId, groupId.ToString());
+        }
+
         #endregion
 
 #if DEBUG
