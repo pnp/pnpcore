@@ -267,12 +267,12 @@ namespace PnP.Core.Services
                 Interactive = true
             };
             await (context.Web as Web).RequestAsync(api, HttpMethod.Get, "Get").ConfigureAwait(false);
-            
+
             // Replace the context URI with the value using the correct casing
             context.Uri = context.Web.Url;
 
             // Request the Site Id
-            await context.Site.LoadAsync(p => p.Id, p=>p.GroupId).ConfigureAwait(false);
+            await context.Site.LoadAsync(p => p.Id, p => p.GroupId).ConfigureAwait(false);
 
             // Ensure the Graph ID is set once and only once
             if (context.Web is IMetadataExtensible me)
@@ -282,6 +282,20 @@ namespace PnP.Core.Services
                     me.Metadata.Add(PnPConstants.MetaDataGraphId, $"{context.Uri.DnsSafeHost},{context.Site.Id},{context.Web.Id}");
                 }
             }
+
+            // If the GroupId is available ensure it's also correctly set on the Group metadata so that calls via that
+            // model can work
+            if (context.Site.IsPropertyAvailable(p => p.GroupId) && context.Site.GroupId != Guid.Empty)
+            {
+                if (context.Group is IMetadataExtensible groupMetaData)
+                {
+                    if (!groupMetaData.Metadata.ContainsKey(PnPConstants.MetaDataGraphId))
+                    {
+                        groupMetaData.Metadata.Add(PnPConstants.MetaDataGraphId, context.Site.GroupId.ToString());
+                    }
+                }
+            }
+
         }
 
         internal static async Task CopyContextInitializationAsync(PnPContext source, PnPContext target)

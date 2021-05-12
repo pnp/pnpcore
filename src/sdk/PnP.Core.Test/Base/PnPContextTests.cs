@@ -173,6 +173,21 @@ namespace PnP.Core.Test.Base
         }
 
         [TestMethod]
+        public async Task UseGroupMethodsFromRegularContext()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                // Ensure the metadata on the group is populated
+                Assert.IsTrue((context.Group as IMetadataExtensible).Metadata.ContainsKey(PnPConstants.MetaDataGraphId));
+
+                // Perform a Graph call via the group
+                await context.Group.EnsurePropertiesAsync(g => g.Visibility);
+                Assert.IsTrue(context.Group.IsPropertyAvailable(p => p.Visibility));
+            }
+        }
+
+        [TestMethod]
         public async Task ContextCloningForSameSite()
         {
             //TestCommon.Instance.Mocking = false;
