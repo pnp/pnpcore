@@ -2411,6 +2411,40 @@ references:
   fullName.vb: PnP.Core.Model.IDataModel(Of TModel).EnsurePropertiesAsync
   nameWithType: IDataModel<TModel>.EnsurePropertiesAsync
   nameWithType.vb: IDataModel(Of TModel).EnsurePropertiesAsync
+- uid: PnP.Core.Model.IDataModel`1.ExecuteRequest(PnP.Core.Services.ApiRequest)
+  name: ExecuteRequest(ApiRequest)
+  href: api/PnP.Core.Model.IDataModel-1.html#PnP_Core_Model_IDataModel_1_ExecuteRequest_PnP_Core_Services_ApiRequest_
+  commentId: M:PnP.Core.Model.IDataModel`1.ExecuteRequest(PnP.Core.Services.ApiRequest)
+  fullName: PnP.Core.Model.IDataModel<TModel>.ExecuteRequest(PnP.Core.Services.ApiRequest)
+  fullName.vb: PnP.Core.Model.IDataModel(Of TModel).ExecuteRequest(PnP.Core.Services.ApiRequest)
+  nameWithType: IDataModel<TModel>.ExecuteRequest(ApiRequest)
+  nameWithType.vb: IDataModel(Of TModel).ExecuteRequest(ApiRequest)
+- uid: PnP.Core.Model.IDataModel`1.ExecuteRequest*
+  name: ExecuteRequest
+  href: api/PnP.Core.Model.IDataModel-1.html#PnP_Core_Model_IDataModel_1_ExecuteRequest_
+  commentId: Overload:PnP.Core.Model.IDataModel`1.ExecuteRequest
+  isSpec: "True"
+  fullName: PnP.Core.Model.IDataModel<TModel>.ExecuteRequest
+  fullName.vb: PnP.Core.Model.IDataModel(Of TModel).ExecuteRequest
+  nameWithType: IDataModel<TModel>.ExecuteRequest
+  nameWithType.vb: IDataModel(Of TModel).ExecuteRequest
+- uid: PnP.Core.Model.IDataModel`1.ExecuteRequestAsync(PnP.Core.Services.ApiRequest)
+  name: ExecuteRequestAsync(ApiRequest)
+  href: api/PnP.Core.Model.IDataModel-1.html#PnP_Core_Model_IDataModel_1_ExecuteRequestAsync_PnP_Core_Services_ApiRequest_
+  commentId: M:PnP.Core.Model.IDataModel`1.ExecuteRequestAsync(PnP.Core.Services.ApiRequest)
+  fullName: PnP.Core.Model.IDataModel<TModel>.ExecuteRequestAsync(PnP.Core.Services.ApiRequest)
+  fullName.vb: PnP.Core.Model.IDataModel(Of TModel).ExecuteRequestAsync(PnP.Core.Services.ApiRequest)
+  nameWithType: IDataModel<TModel>.ExecuteRequestAsync(ApiRequest)
+  nameWithType.vb: IDataModel(Of TModel).ExecuteRequestAsync(ApiRequest)
+- uid: PnP.Core.Model.IDataModel`1.ExecuteRequestAsync*
+  name: ExecuteRequestAsync
+  href: api/PnP.Core.Model.IDataModel-1.html#PnP_Core_Model_IDataModel_1_ExecuteRequestAsync_
+  commentId: Overload:PnP.Core.Model.IDataModel`1.ExecuteRequestAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.IDataModel<TModel>.ExecuteRequestAsync
+  fullName.vb: PnP.Core.Model.IDataModel(Of TModel).ExecuteRequestAsync
+  nameWithType: IDataModel<TModel>.ExecuteRequestAsync
+  nameWithType.vb: IDataModel(Of TModel).ExecuteRequestAsync
 - uid: PnP.Core.Model.IDataModel`1.HasChanged(System.String)
   name: HasChanged(String)
   href: api/PnP.Core.Model.IDataModel-1.html#PnP_Core_Model_IDataModel_1_HasChanged_System_String_
@@ -30086,6 +30120,165 @@ references:
   commentId: N:PnP.Core.Services
   fullName: PnP.Core.Services
   nameWithType: PnP.Core.Services
+- uid: PnP.Core.Services.ApiRequest
+  name: ApiRequest
+  href: api/PnP.Core.Services.ApiRequest.html
+  commentId: T:PnP.Core.Services.ApiRequest
+  fullName: PnP.Core.Services.ApiRequest
+  nameWithType: ApiRequest
+- uid: PnP.Core.Services.ApiRequest.#ctor(HttpMethod,PnP.Core.Services.ApiRequestType,System.String,System.String)
+  name: ApiRequest(HttpMethod, ApiRequestType, String, String)
+  href: api/PnP.Core.Services.ApiRequest.html#PnP_Core_Services_ApiRequest__ctor_HttpMethod_PnP_Core_Services_ApiRequestType_System_String_System_String_
+  commentId: M:PnP.Core.Services.ApiRequest.#ctor(HttpMethod,PnP.Core.Services.ApiRequestType,System.String,System.String)
+  fullName: PnP.Core.Services.ApiRequest.ApiRequest(HttpMethod, PnP.Core.Services.ApiRequestType, System.String, System.String)
+  nameWithType: ApiRequest.ApiRequest(HttpMethod, ApiRequestType, String, String)
+- uid: PnP.Core.Services.ApiRequest.#ctor(PnP.Core.Services.ApiRequestType,System.String)
+  name: ApiRequest(ApiRequestType, String)
+  href: api/PnP.Core.Services.ApiRequest.html#PnP_Core_Services_ApiRequest__ctor_PnP_Core_Services_ApiRequestType_System_String_
+  commentId: M:PnP.Core.Services.ApiRequest.#ctor(PnP.Core.Services.ApiRequestType,System.String)
+  fullName: PnP.Core.Services.ApiRequest.ApiRequest(PnP.Core.Services.ApiRequestType, System.String)
+  nameWithType: ApiRequest.ApiRequest(ApiRequestType, String)
+- uid: PnP.Core.Services.ApiRequest.#ctor*
+  name: ApiRequest
+  href: api/PnP.Core.Services.ApiRequest.html#PnP_Core_Services_ApiRequest__ctor_
+  commentId: Overload:PnP.Core.Services.ApiRequest.#ctor
+  isSpec: "True"
+  fullName: PnP.Core.Services.ApiRequest.ApiRequest
+  nameWithType: ApiRequest.ApiRequest
+- uid: PnP.Core.Services.ApiRequest.Body
+  name: Body
+  href: api/PnP.Core.Services.ApiRequest.html#PnP_Core_Services_ApiRequest_Body
+  commentId: P:PnP.Core.Services.ApiRequest.Body
+  fullName: PnP.Core.Services.ApiRequest.Body
+  nameWithType: ApiRequest.Body
+- uid: PnP.Core.Services.ApiRequest.Body*
+  name: Body
+  href: api/PnP.Core.Services.ApiRequest.html#PnP_Core_Services_ApiRequest_Body_
+  commentId: Overload:PnP.Core.Services.ApiRequest.Body
+  isSpec: "True"
+  fullName: PnP.Core.Services.ApiRequest.Body
+  nameWithType: ApiRequest.Body
+- uid: PnP.Core.Services.ApiRequest.HttpMethod
+  name: HttpMethod
+  href: api/PnP.Core.Services.ApiRequest.html#PnP_Core_Services_ApiRequest_HttpMethod
+  commentId: P:PnP.Core.Services.ApiRequest.HttpMethod
+  fullName: PnP.Core.Services.ApiRequest.HttpMethod
+  nameWithType: ApiRequest.HttpMethod
+- uid: PnP.Core.Services.ApiRequest.HttpMethod*
+  name: HttpMethod
+  href: api/PnP.Core.Services.ApiRequest.html#PnP_Core_Services_ApiRequest_HttpMethod_
+  commentId: Overload:PnP.Core.Services.ApiRequest.HttpMethod
+  isSpec: "True"
+  fullName: PnP.Core.Services.ApiRequest.HttpMethod
+  nameWithType: ApiRequest.HttpMethod
+- uid: PnP.Core.Services.ApiRequest.Request
+  name: Request
+  href: api/PnP.Core.Services.ApiRequest.html#PnP_Core_Services_ApiRequest_Request
+  commentId: P:PnP.Core.Services.ApiRequest.Request
+  fullName: PnP.Core.Services.ApiRequest.Request
+  nameWithType: ApiRequest.Request
+- uid: PnP.Core.Services.ApiRequest.Request*
+  name: Request
+  href: api/PnP.Core.Services.ApiRequest.html#PnP_Core_Services_ApiRequest_Request_
+  commentId: Overload:PnP.Core.Services.ApiRequest.Request
+  isSpec: "True"
+  fullName: PnP.Core.Services.ApiRequest.Request
+  nameWithType: ApiRequest.Request
+- uid: PnP.Core.Services.ApiRequest.Type
+  name: Type
+  href: api/PnP.Core.Services.ApiRequest.html#PnP_Core_Services_ApiRequest_Type
+  commentId: P:PnP.Core.Services.ApiRequest.Type
+  fullName: PnP.Core.Services.ApiRequest.Type
+  nameWithType: ApiRequest.Type
+- uid: PnP.Core.Services.ApiRequest.Type*
+  name: Type
+  href: api/PnP.Core.Services.ApiRequest.html#PnP_Core_Services_ApiRequest_Type_
+  commentId: Overload:PnP.Core.Services.ApiRequest.Type
+  isSpec: "True"
+  fullName: PnP.Core.Services.ApiRequest.Type
+  nameWithType: ApiRequest.Type
+- uid: PnP.Core.Services.ApiRequestResponse
+  name: ApiRequestResponse
+  href: api/PnP.Core.Services.ApiRequestResponse.html
+  commentId: T:PnP.Core.Services.ApiRequestResponse
+  fullName: PnP.Core.Services.ApiRequestResponse
+  nameWithType: ApiRequestResponse
+- uid: PnP.Core.Services.ApiRequestResponse.ApiRequest
+  name: ApiRequest
+  href: api/PnP.Core.Services.ApiRequestResponse.html#PnP_Core_Services_ApiRequestResponse_ApiRequest
+  commentId: P:PnP.Core.Services.ApiRequestResponse.ApiRequest
+  fullName: PnP.Core.Services.ApiRequestResponse.ApiRequest
+  nameWithType: ApiRequestResponse.ApiRequest
+- uid: PnP.Core.Services.ApiRequestResponse.ApiRequest*
+  name: ApiRequest
+  href: api/PnP.Core.Services.ApiRequestResponse.html#PnP_Core_Services_ApiRequestResponse_ApiRequest_
+  commentId: Overload:PnP.Core.Services.ApiRequestResponse.ApiRequest
+  isSpec: "True"
+  fullName: PnP.Core.Services.ApiRequestResponse.ApiRequest
+  nameWithType: ApiRequestResponse.ApiRequest
+- uid: PnP.Core.Services.ApiRequestResponse.Headers
+  name: Headers
+  href: api/PnP.Core.Services.ApiRequestResponse.html#PnP_Core_Services_ApiRequestResponse_Headers
+  commentId: P:PnP.Core.Services.ApiRequestResponse.Headers
+  fullName: PnP.Core.Services.ApiRequestResponse.Headers
+  nameWithType: ApiRequestResponse.Headers
+- uid: PnP.Core.Services.ApiRequestResponse.Headers*
+  name: Headers
+  href: api/PnP.Core.Services.ApiRequestResponse.html#PnP_Core_Services_ApiRequestResponse_Headers_
+  commentId: Overload:PnP.Core.Services.ApiRequestResponse.Headers
+  isSpec: "True"
+  fullName: PnP.Core.Services.ApiRequestResponse.Headers
+  nameWithType: ApiRequestResponse.Headers
+- uid: PnP.Core.Services.ApiRequestResponse.Response
+  name: Response
+  href: api/PnP.Core.Services.ApiRequestResponse.html#PnP_Core_Services_ApiRequestResponse_Response
+  commentId: P:PnP.Core.Services.ApiRequestResponse.Response
+  fullName: PnP.Core.Services.ApiRequestResponse.Response
+  nameWithType: ApiRequestResponse.Response
+- uid: PnP.Core.Services.ApiRequestResponse.Response*
+  name: Response
+  href: api/PnP.Core.Services.ApiRequestResponse.html#PnP_Core_Services_ApiRequestResponse_Response_
+  commentId: Overload:PnP.Core.Services.ApiRequestResponse.Response
+  isSpec: "True"
+  fullName: PnP.Core.Services.ApiRequestResponse.Response
+  nameWithType: ApiRequestResponse.Response
+- uid: PnP.Core.Services.ApiRequestResponse.StatusCode
+  name: StatusCode
+  href: api/PnP.Core.Services.ApiRequestResponse.html#PnP_Core_Services_ApiRequestResponse_StatusCode
+  commentId: P:PnP.Core.Services.ApiRequestResponse.StatusCode
+  fullName: PnP.Core.Services.ApiRequestResponse.StatusCode
+  nameWithType: ApiRequestResponse.StatusCode
+- uid: PnP.Core.Services.ApiRequestResponse.StatusCode*
+  name: StatusCode
+  href: api/PnP.Core.Services.ApiRequestResponse.html#PnP_Core_Services_ApiRequestResponse_StatusCode_
+  commentId: Overload:PnP.Core.Services.ApiRequestResponse.StatusCode
+  isSpec: "True"
+  fullName: PnP.Core.Services.ApiRequestResponse.StatusCode
+  nameWithType: ApiRequestResponse.StatusCode
+- uid: PnP.Core.Services.ApiRequestType
+  name: ApiRequestType
+  href: api/PnP.Core.Services.ApiRequestType.html
+  commentId: T:PnP.Core.Services.ApiRequestType
+  fullName: PnP.Core.Services.ApiRequestType
+  nameWithType: ApiRequestType
+- uid: PnP.Core.Services.ApiRequestType.Graph
+  name: Graph
+  href: api/PnP.Core.Services.ApiRequestType.html#PnP_Core_Services_ApiRequestType_Graph
+  commentId: F:PnP.Core.Services.ApiRequestType.Graph
+  fullName: PnP.Core.Services.ApiRequestType.Graph
+  nameWithType: ApiRequestType.Graph
+- uid: PnP.Core.Services.ApiRequestType.GraphBeta
+  name: GraphBeta
+  href: api/PnP.Core.Services.ApiRequestType.html#PnP_Core_Services_ApiRequestType_GraphBeta
+  commentId: F:PnP.Core.Services.ApiRequestType.GraphBeta
+  fullName: PnP.Core.Services.ApiRequestType.GraphBeta
+  nameWithType: ApiRequestType.GraphBeta
+- uid: PnP.Core.Services.ApiRequestType.SPORest
+  name: SPORest
+  href: api/PnP.Core.Services.ApiRequestType.html#PnP_Core_Services_ApiRequestType_SPORest
+  commentId: F:PnP.Core.Services.ApiRequestType.SPORest
+  fullName: PnP.Core.Services.ApiRequestType.SPORest
+  nameWithType: ApiRequestType.SPORest
 - uid: PnP.Core.Services.ApiResponse
   name: ApiResponse
   href: api/PnP.Core.Services.ApiResponse.html
