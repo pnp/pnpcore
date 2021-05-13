@@ -4639,7 +4639,7 @@
       "output": {
         ".html": {
           "relative_path": "toc.html",
-          "hash": "SRUYSwwbQiqBQY0GRZdYAA=="
+          "hash": "o9PNSQ63xfQgEf4Y87V0oA=="
         }
       },
       "is_incremental": false,
@@ -4688,6 +4688,18 @@
         ".html": {
           "relative_path": "using-the-sdk/basics-batching.html",
           "hash": "ncqEkRglUaS4zfltY2J2zQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "using-the-sdk/basics-customapirequests.md",
+      "output": {
+        ".html": {
+          "relative_path": "using-the-sdk/basics-customapirequests.html",
+          "hash": "J1vGPyrLNA2nNDIgB9hFaQ=="
         }
       },
       "is_incremental": false,
@@ -5107,7 +5119,7 @@
       "output": {
         ".html": {
           "relative_path": "using-the-sdk/toc.html",
-          "hash": "9Xfgdott3YBSh5O/vi+IVg=="
+          "hash": "RRQ35L+c4RWsIKZ4yLd4Cg=="
         }
       },
       "is_incremental": false,
@@ -5152,7 +5164,7 @@
         "ConceptualDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build",
-          "total_file_count": 61,
+          "total_file_count": 62,
           "skipped_file_count": 0
         },
         "ManagedReferenceDocumentProcessor": {
