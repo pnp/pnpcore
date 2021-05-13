@@ -28,6 +28,7 @@ namespace PnP.Core.Services
             RemoveFromModel = false;
             LoadPages = loadPages;
             SkipCollectionClearing = false;
+            ExecuteRequestApiCall = false;
         }
 
         internal ApiCall(List<Core.CSOM.Requests.IRequest<object>> csomRequests, string receivingProperty = null)
@@ -49,6 +50,7 @@ namespace PnP.Core.Services
             RemoveFromModel = false;
             LoadPages = false;
             SkipCollectionClearing = false;
+            ExecuteRequestApiCall = false;
         }
 
         /// <summary>
@@ -139,5 +141,10 @@ namespace PnP.Core.Services
         /// Don't clear the current collection when data is loaded
         /// </summary>
         internal bool SkipCollectionClearing { get; set; }
+
+        /// <summary>
+        /// Flag that indicates this ApiCall was issued from an ExecuteRequest method
+        /// </summary>
+        internal bool ExecuteRequestApiCall { get; set; }
     }
 }
