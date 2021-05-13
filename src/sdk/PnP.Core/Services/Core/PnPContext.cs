@@ -589,7 +589,7 @@ namespace PnP.Core.Services
             if (disposing)
             {
                 // Future, lightweight, custom logic comes here
-                // Note: flushing telemetry does not belong here since apps potentially can create/dispose a log of contexts
+                // Note: flushing telemetry does not belong here since apps potentially can create/dispose a lot of contexts
             }
 
             disposed = true;

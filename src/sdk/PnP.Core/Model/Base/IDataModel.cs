@@ -1,5 +1,7 @@
-﻿using System;
+﻿using PnP.Core.Services;
+using System;
 using System.Linq.Expressions;
+using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace PnP.Core.Model
@@ -57,5 +59,19 @@ namespace PnP.Core.Model
         /// <param name="expressions">Expressions listing the properties to load</param>
         /// <returns></returns>
         Task EnsurePropertiesAsync(params Expression<Func<TModel, object>>[] expressions);
+
+        /// <summary>
+        /// Executes a given API call 
+        /// </summary>
+        /// <param name="request">API call to execute</param>
+        /// <returns>The response of the API call</returns>
+        Task<ApiRequestResponse> ExecuteRequestAsync(ApiRequest request);
+
+        /// <summary>
+        /// Executes a given API call 
+        /// </summary>
+        /// <param name="request">API call to execute</param>
+        /// <returns>The response of the API call</returns>
+        ApiRequestResponse ExecuteRequest(ApiRequest request);
     }
 }

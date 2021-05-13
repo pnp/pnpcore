@@ -10,6 +10,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
 ### Added
 
+- Support for making custom SPO REST / Microsoft Graph calls [jansenbe - Bert Jansen]
 - IsFile() method on IListItem [jansenbe - Bert Jansen]
 
 ### Changed

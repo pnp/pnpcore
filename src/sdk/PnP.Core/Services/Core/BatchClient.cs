@@ -250,7 +250,7 @@ namespace PnP.Core.Services
             foreach (var request in batch.Requests.Values)
             {
 
-                if (request.ApiCall.SkipCollectionClearing)
+                if (request.ApiCall.SkipCollectionClearing || request.ApiCall.ExecuteRequestApiCall)
                 {
                     continue;
                 }
@@ -1819,6 +1819,12 @@ namespace PnP.Core.Services
             // Step 1: group the requests that have values with the same id (=keyfield) value
             foreach (var request in batch.Requests.Values.Where(p => p.Method == HttpMethod.Get))
             {
+                // ExecuteRequest requests are never impacting the domain model
+                if (request.ApiCall.ExecuteRequestApiCall)
+                {
+                    continue;
+                }
+
                 EntityFieldInfo keyField = useGraphBatch ? request.EntityInfo.GraphKeyField : request.EntityInfo.SharePointKeyField;
 
                 // Consolidation can only happen when there's a keyfield set in the model
@@ -1872,6 +1878,12 @@ namespace PnP.Core.Services
             // Mark deleted objects as deleted and remove from their respective parent collection
             foreach (var request in batch.Requests.Values.Where(p => p.Method == HttpMethod.Delete || p.ApiCall.RemoveFromModel))
             {
+                // ExecuteRequest requests are never impacting the domain model
+                if (request.ApiCall.ExecuteRequestApiCall)
+                {
+                    continue;
+                }
+
                 request.Model.RemoveFromParentCollection();
             }
         }

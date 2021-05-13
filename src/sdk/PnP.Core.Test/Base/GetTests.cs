@@ -689,6 +689,39 @@ namespace PnP.Core.Test.Base
                 Assert.IsTrue(firstFieldLink.IsPropertyAvailable(p => p.Name));
             }
         }
+
+        [TestMethod]
+        public async Task ExecuteRestRequest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                // Relative url for current site
+                var apiRequest = new ApiRequest(ApiRequestType.SPORest, "_api/web");
+                var response = context.Web.ExecuteRequest(apiRequest);
+
+                Assert.IsTrue(response.ApiRequest == apiRequest);
+                Assert.IsTrue(!string.IsNullOrEmpty(response.Response));
+                Assert.IsTrue(response.StatusCode == System.Net.HttpStatusCode.OK);
+
+                // fully qualified url for current site
+                apiRequest = new ApiRequest(ApiRequestType.SPORest, $"{context.Uri}/_api/web");
+                response = context.Web.ExecuteRequest(apiRequest);
+
+                Assert.IsTrue(response.ApiRequest == apiRequest);
+                Assert.IsTrue(!string.IsNullOrEmpty(response.Response));
+                Assert.IsTrue(response.StatusCode == System.Net.HttpStatusCode.OK);
+
+                // fully qualified url for other site
+                Uri testUrl = TestCommon.Instance.TestUris[TestCommon.NoGroupTestSite];
+                apiRequest = new ApiRequest(ApiRequestType.SPORest, $"{testUrl}/_api/web");
+                response = context.Web.ExecuteRequest(apiRequest);
+
+                Assert.IsTrue(response.ApiRequest == apiRequest);
+                Assert.IsTrue(!string.IsNullOrEmpty(response.Response));
+                Assert.IsTrue(response.StatusCode == System.Net.HttpStatusCode.OK);
+            }
+        }
         #endregion
 
         #region Tests that use Graph to hit SharePoint
@@ -1063,6 +1096,27 @@ namespace PnP.Core.Test.Base
             return new Tuple<string, string>(newQuery, query);
         }
 
+        [TestMethod]
+        public async Task ExecuteGraphRequest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var apiRequest = new ApiRequest(ApiRequestType.Graph, "me");
+                var response = context.Team.ExecuteRequest(apiRequest);
+
+                Assert.IsTrue(response.ApiRequest == apiRequest);
+                Assert.IsTrue(!string.IsNullOrEmpty(response.Response));
+                Assert.IsTrue(response.StatusCode == System.Net.HttpStatusCode.OK);
+
+                apiRequest = new ApiRequest(ApiRequestType.Graph, "/me");
+                response = context.Team.ExecuteRequest(apiRequest);
+
+                Assert.IsTrue(response.ApiRequest == apiRequest);
+                Assert.IsTrue(!string.IsNullOrEmpty(response.Response));
+                Assert.IsTrue(response.StatusCode == System.Net.HttpStatusCode.OK);
+            }
+        }
 
         #endregion
     }

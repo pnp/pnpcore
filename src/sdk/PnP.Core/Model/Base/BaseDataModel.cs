@@ -180,6 +180,56 @@ namespace PnP.Core.Model
 
         #endregion
 
+        #region ExecuteRequest
+        public async Task<ApiRequestResponse> ExecuteRequestAsync(ApiRequest request)
+        {
+            ApiType apiType = ApiType.SPORest;
+            string apiRequest = request.Request;
+            switch (request.Type)
+            {
+                case ApiRequestType.SPORest:
+                    {
+                        if (apiRequest != null && !apiRequest.StartsWith("https://", StringComparison.InvariantCultureIgnoreCase))
+                        {
+                            apiRequest = $"{PnPContext.Uri.ToString().TrimEnd(new char[] { '/' })}/{apiRequest}";
+                        }
+                        break;
+                    }
+                case ApiRequestType.Graph: 
+                    {
+                        apiType = ApiType.Graph; 
+                        break; 
+                    }
+                case ApiRequestType.GraphBeta: 
+                    {
+                        apiType = ApiType.GraphBeta; 
+                        break; 
+                    }                    
+            }
+
+            var apiResponse = await RawRequestAsync(new ApiCall(apiRequest, apiType, request.Body)
+                                                                {
+                                                                    ExecuteRequestApiCall = true,
+                                                                    SkipCollectionClearing = true,
+                                                                    RawRequest = true
+                                                                }
+                                                    , request.HttpMethod).ConfigureAwait(false);
+
+            return new ApiRequestResponse()
+            {
+                ApiRequest = request,
+                Response = apiResponse.Json,
+                StatusCode = apiResponse.StatusCode,
+                Headers = apiResponse.Headers
+            };
+        }
+
+        public ApiRequestResponse ExecuteRequest(ApiRequest request)
+        {
+            return ExecuteRequestAsync(request).GetAwaiter().GetResult();
+        }
+        #endregion
+
         #region Load
 
         /// <summary>
@@ -888,17 +938,23 @@ namespace PnP.Core.Model
         /// <param name="operationName">Name of the operation, used for telemetry purposes</param>
         internal async Task<Batch> RequestAsync(ApiCall apiCall, HttpMethod method, [CallerMemberName] string operationName = null)
         {
-            // Get entity information for the entity to update
-            var entityInfo = GetClassInfo();
+            EntityInfo entityInfo = null;
 
-            // Prefix API request with context url if needed
-            apiCall = PrefixApiCall(apiCall, entityInfo);
-
-            // Ensure there's no Graph beta endpoint being used when that was not allowed
-            if (!CanUseGraphBetaForRequest(apiCall, entityInfo))
+            if (!apiCall.ExecuteRequestApiCall)
             {
-                throw new ClientException(ErrorType.GraphBetaNotAllowed,
-                    PnPCoreResources.Exception_GraphBetaNotAllowed);
+                // Get entity information for the entity to update
+                entityInfo = GetClassInfo();
+
+
+                // Prefix API request with context url if needed
+                apiCall = PrefixApiCall(apiCall, entityInfo);
+
+                // Ensure there's no Graph beta endpoint being used when that was not allowed
+                if (!CanUseGraphBetaForRequest(apiCall, entityInfo))
+                {
+                    throw new ClientException(ErrorType.GraphBetaNotAllowed,
+                        PnPCoreResources.Exception_GraphBetaNotAllowed);
+                }
             }
 
             // Ensure token replacement is done
