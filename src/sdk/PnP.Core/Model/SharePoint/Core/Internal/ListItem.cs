@@ -188,10 +188,45 @@ namespace PnP.Core.Model.SharePoint
 
         public string Title { get => (string)Values["Title"]; set => Values["Title"] = value; }
 
+        public bool CommentsDisabled { get => GetValue<bool>(); set => SetValue(value); }
+
+        public CommentsDisabledScope CommentsDisabledScope { get => GetValue<CommentsDisabledScope>(); set => SetValue(value); }
+
+        public IContentType ContentType { get => GetModelValue<IContentType>(); }
+
+        public IPropertyValues FieldValuesAsHtml { get => GetModelValue<IPropertyValues>(); }
+
+        public IPropertyValues FieldValuesAsText { get => GetModelValue<IPropertyValues>(); }
+
+        public IPropertyValues FieldValuesForEdit { get => GetModelValue<IPropertyValues>(); }
+
+        public IFile File { get => GetModelValue<IFile>(); }
+
+        public FileSystemObjectType FileSystemObjectType
+        {
+            get => HasValue("FSObjType") ? GetValue<FileSystemObjectType>("FSObjType") : GetValue<FileSystemObjectType>();
+            set => SetValue(value);
+        }
+
+        public IFolder Folder { get => GetModelValue<IFolder>(); }
+
+        public IList ParentList { get => GetModelValue<IList>(); }
+
+        public IPropertyValues Properties { get => GetModelValue<IPropertyValues>(); }
+
+        public string ServerRedirectedEmbedUri { get => GetValue<string>(); set => SetValue(value); }
+
+        public string ServerRedirectedEmbedUrl { get => GetValue<string>(); set => SetValue(value); }
+
+        public Guid UniqueId { get => GetValue<Guid>(); set => SetValue(value); }
+
         [KeyProperty(nameof(Id))]
         public override object Key { get => Id; set => Id = (int)value; }
 
         public IRoleAssignmentCollection RoleAssignments { get => GetModelCollectionValue<IRoleAssignmentCollection>(); }
+
+        [SharePointProperty("*")]
+        public object AllColumns { get => null; }
 
         #endregion
 
@@ -211,6 +246,34 @@ namespace PnP.Core.Model.SharePoint
             }
 
             return "_api/Web/lists/getbyid(guid'{Parent.Id}')/items({Id})";
+        }
+
+        #endregion
+
+        #region Display Name
+
+        public async Task<string> GetDisplayNameAsync()
+        {
+            var apiCall = new ApiCall($"{GetItemUri()}/DisplayName", ApiType.SPORest);
+
+            var response = await RawRequestAsync(apiCall, HttpMethod.Get).ConfigureAwait(false);
+
+            if (!string.IsNullOrEmpty(response.Json))
+            {
+                var json = JsonDocument.Parse(response.Json).RootElement.GetProperty("d");
+
+                if (json.TryGetProperty("DisplayName", out JsonElement displayName))
+                {
+                    return displayName.GetString();
+                }
+            }
+
+            return null;
+        }
+
+        public string GetDisplayName()
+        {
+            return GetDisplayNameAsync().GetAwaiter().GetResult();
         }
 
         #endregion

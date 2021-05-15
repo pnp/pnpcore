@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace PnP.Core.Model.SharePoint
@@ -17,7 +18,7 @@ namespace PnP.Core.Model.SharePoint
         /// Adds a new list item
         /// </summary>
         /// <param name="values">Values to add to list item</param>
-        /// <param name="folderPath">Optional folder path to add the item too.</param>
+        /// <param name="folderPath">Optional folder path to add the item to.</param>
         /// <param name="underlyingObjectType">Type of object to create. Defaults to File/ListItem</param>
         /// <returns>Newly added list item</returns>
         public Task<IListItem> AddAsync(Dictionary<string, object> values, string folderPath = null, FileSystemObjectType underlyingObjectType = FileSystemObjectType.File);
@@ -26,7 +27,7 @@ namespace PnP.Core.Model.SharePoint
         /// Adds a new list item
         /// </summary>
         /// <param name="values">Values to add to list item</param>
-        /// <param name="folderPath">Optional folder path to add the item too.</param>
+        /// <param name="folderPath">Optional folder path to add the item to.</param>
         /// <param name="underlyingObjectType">Type of object to create. Defaults to File/ListItem</param>
         /// <returns>Newly added list item</returns>
         public IListItem Add(Dictionary<string, object> values, string folderPath = null, FileSystemObjectType underlyingObjectType = FileSystemObjectType.File);
@@ -36,7 +37,7 @@ namespace PnP.Core.Model.SharePoint
         /// </summary>
         /// <param name="batch">Batch to use</param>
         /// <param name="values">Values to add to list item</param>
-        /// <param name="folderPath">Optional folder path to add the item too.</param>
+        /// <param name="folderPath">Optional folder path to add the item to.</param>
         /// <param name="underlyingObjectType">Type of object to create. Defaults to File/ListItem</param>
         /// <returns>Newly added list item</returns>
         public Task<IListItem> AddBatchAsync(Batch batch, Dictionary<string, object> values, string folderPath = null, FileSystemObjectType underlyingObjectType = FileSystemObjectType.File);
@@ -46,7 +47,7 @@ namespace PnP.Core.Model.SharePoint
         /// </summary>
         /// <param name="batch">Batch to use</param>
         /// <param name="values">Values to add to list item</param>
-        /// <param name="folderPath">Optional folder path to add the item too.</param>
+        /// <param name="folderPath">Optional folder path to add the item to.</param>
         /// <param name="underlyingObjectType">Type of object to create. Defaults to File/ListItem</param>
         /// <returns>Newly added list item</returns>
         public IListItem AddBatch(Batch batch, Dictionary<string, object> values, string folderPath = null, FileSystemObjectType underlyingObjectType = FileSystemObjectType.File);
@@ -55,7 +56,7 @@ namespace PnP.Core.Model.SharePoint
         /// Adds a new list item
         /// </summary>
         /// <param name="values">Values to add to list item</param>
-        /// <param name="folderPath">Optional folder path to add the item too.</param>
+        /// <param name="folderPath">Optional folder path to add the item to.</param>
         /// <param name="underlyingObjectType">Type of object to create. Defaults to File/ListItem</param>
         /// <returns>Newly added list item</returns>
         public Task<IListItem> AddBatchAsync(Dictionary<string, object> values, string folderPath = null, FileSystemObjectType underlyingObjectType = FileSystemObjectType.File);
@@ -64,7 +65,7 @@ namespace PnP.Core.Model.SharePoint
         /// Adds a new list item
         /// </summary>
         /// <param name="values">Values to add to list item</param>
-        /// <param name="folderPath">Optional folder path to add the item too.</param>
+        /// <param name="folderPath">Optional folder path to add the item to.</param>
         /// <param name="underlyingObjectType">Type of object to create. Defaults to File/ListItem</param>
         /// <returns>Newly added list item</returns>
         public IListItem AddBatch(Dictionary<string, object> values, string folderPath = null, FileSystemObjectType underlyingObjectType = FileSystemObjectType.File);
@@ -88,15 +89,17 @@ namespace PnP.Core.Model.SharePoint
         /// Method to select a list item by Id
         /// </summary>
         /// <param name="id">The Id to search for</param>
+        /// <param name="selectors">The expressions declaring the fields to select</param>
         /// <returns>The resulting list item instance, if any</returns>
-        public IListItem GetById(int id);
+        public IListItem GetById(int id, params Expression<Func<IListItem, object>>[] selectors);
 
         /// <summary>
         /// Method to select a list item by Id asynchronously
         /// </summary>
         /// <param name="id">The Id to search for</param>
+        /// <param name="selectors">The expressions declaring the fields to select</param>
         /// <returns>The resulting list item instance, if any</returns>
-        public Task<IListItem> GetByIdAsync(int id);
+        public Task<IListItem> GetByIdAsync(int id, params Expression<Func<IListItem, object>>[] selectors);
 
         #endregion
 

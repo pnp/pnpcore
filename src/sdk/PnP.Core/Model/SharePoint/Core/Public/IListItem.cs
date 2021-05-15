@@ -22,12 +22,50 @@ namespace PnP.Core.Model.SharePoint
         /// </summary>
         public string Title { get; set; }
 
+        public bool CommentsDisabled { get; }
+
+        public CommentsDisabledScope CommentsDisabledScope { get; }
+
+        public IContentType ContentType { get; }
+
+        public IPropertyValues FieldValuesAsHtml { get; }
+
+        public IPropertyValues FieldValuesAsText { get; }
+
+        public IPropertyValues FieldValuesForEdit { get; }
+
+        public IFile File { get; }
+
+        public FileSystemObjectType FileSystemObjectType { get; }
+
+        public IFolder Folder { get; }
+
+        public IList ParentList { get; }
+
+        public IPropertyValues Properties { get; }
+
+        public string ServerRedirectedEmbedUri { get; }
+
+        public string ServerRedirectedEmbedUrl { get; }
+
+        public Guid UniqueId { get; }
+
         /// <summary>
         /// Role assignments of the list item
         /// </summary>
         public IRoleAssignmentCollection RoleAssignments { get; }
 
+        public object AllColumns { get; }
+
         #region Extension methods
+
+        #region Display Name
+
+        public Task<string> GetDisplayNameAsync();
+
+        public string GetDisplayName();
+
+        #endregion
 
         #region File
 

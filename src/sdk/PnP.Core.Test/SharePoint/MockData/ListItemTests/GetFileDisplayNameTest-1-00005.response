@@ -1,0 +1,9 @@
+--batchresponse_4b47cd97-551f-4f2f-b92d-5e89d2a510b0
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+HTTP/1.1 200 OK
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+
+{"d":{"DisplayName":"PNP_SDK_TEST_GetFileDisplayNameTest"}}
+--batchresponse_4b47cd97-551f-4f2f-b92d-5e89d2a510b0--
