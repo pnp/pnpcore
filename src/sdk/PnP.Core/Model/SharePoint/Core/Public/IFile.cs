@@ -49,6 +49,9 @@ namespace PnP.Core.Model.SharePoint
         /// </summary>
         public bool Exists { get; }
 
+        /// <summary>
+        /// Indicates whether this file has alternate streams with content.
+        /// </summary>
         public bool HasAlternateContentStreams { get; }
 
         /// <summary>

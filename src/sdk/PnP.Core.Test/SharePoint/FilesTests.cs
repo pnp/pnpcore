@@ -2427,13 +2427,13 @@ namespace PnP.Core.Test.SharePoint
                     f => f.VroomItemID);
 
                 Assert.IsNotNull(documentWithProperties);
-                Assert.AreEqual(new Guid("1da95e02-da8b-4695-af65-d8259a33942a"), documentWithProperties.UniqueId);
 
+                Assert.IsTrue(documentWithProperties.UniqueId != Guid.Empty);
                 Assert.IsFalse(documentWithProperties.HasAlternateContentStreams);
-                Assert.AreEqual(18054, documentWithProperties.Length);
-                Assert.AreEqual("https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_layouts/15/Doc.aspx?sourcedoc=%7B1DA95E02-DA8B-4695-AF65-D8259A33942A%7D&file=PNP_SDK_TEST_GetIFilePropertiesAsyncTest.docx&action=default&mobileredirect=true", documentWithProperties.ServerRedirectedUrl);
-                Assert.AreEqual("b!ZtxgsoWyf0eKGhSZeYLphlfDo3rrzblDnc3cFkWzDP9Y_NwRML4tS7O6tnUsdm9H", documentWithProperties.VroomDriveID);
-                Assert.AreEqual("01TEEVMCACL2UR3C62SVDK6ZOYEWNDHFBK", documentWithProperties.VroomItemID);
+                Assert.IsTrue(documentWithProperties.Length > 0);
+                Assert.IsTrue(!string.IsNullOrEmpty(documentWithProperties.ServerRedirectedUrl) && documentWithProperties.ServerRedirectedUrl.Contains("_layouts/15/Doc.aspx?sourcedoc=", StringComparison.InvariantCultureIgnoreCase));
+                Assert.IsTrue(!string.IsNullOrEmpty(documentWithProperties.VroomDriveID));
+                Assert.IsTrue(!string.IsNullOrEmpty(documentWithProperties.VroomItemID));
             }
 
             await TestAssets.CleanupTestDocumentAsync(2);
@@ -2455,13 +2455,12 @@ namespace PnP.Core.Test.SharePoint
                     f => f.VroomItemID);
 
                 Assert.IsNotNull(documentWithProperties);
-                Assert.AreEqual(new Guid("4128af05-f375-4a02-9099-1c7dbd888a2b"), documentWithProperties.UniqueId);
-
+                Assert.IsTrue(documentWithProperties.UniqueId != Guid.Empty);
                 Assert.IsFalse(documentWithProperties.HasAlternateContentStreams);
-                Assert.AreEqual(18047, documentWithProperties.Length);
-                Assert.AreEqual("https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_layouts/15/Doc.aspx?sourcedoc=%7B4128AF05-F375-4A02-9099-1C7DBD888A2B%7D&file=PNP_SDK_TEST_GetIFilePropertiesTest.docx&action=default&mobileredirect=true", documentWithProperties.ServerRedirectedUrl);
-                Assert.AreEqual("b!ZtxgsoWyf0eKGhSZeYLphlfDo3rrzblDnc3cFkWzDP9Y_NwRML4tS7O6tnUsdm9H", documentWithProperties.VroomDriveID);
-                Assert.AreEqual("01TEEVMCAFV4UEC5PTAJFJBGI4PW6YRCRL", documentWithProperties.VroomItemID);
+                Assert.IsTrue(documentWithProperties.Length > 0);
+                Assert.IsTrue(!string.IsNullOrEmpty(documentWithProperties.ServerRedirectedUrl) && documentWithProperties.ServerRedirectedUrl.Contains("_layouts/15/Doc.aspx?sourcedoc=", StringComparison.InvariantCultureIgnoreCase));
+                Assert.IsTrue(!string.IsNullOrEmpty(documentWithProperties.VroomDriveID));
+                Assert.IsTrue(!string.IsNullOrEmpty(documentWithProperties.VroomItemID));
             }
 
             await TestAssets.CleanupTestDocumentAsync(2);
@@ -2484,13 +2483,12 @@ namespace PnP.Core.Test.SharePoint
                 await context.ExecuteAsync();
 
                 Assert.IsNotNull(documentWithProperties);
-                Assert.AreEqual(new Guid("eb8cf6a2-e76e-4d7f-8b04-88302476f7ad"), documentWithProperties.UniqueId);
-
+                Assert.IsTrue(documentWithProperties.UniqueId != Guid.Empty);
                 Assert.IsFalse(documentWithProperties.HasAlternateContentStreams);
-                Assert.AreEqual(18050, documentWithProperties.Length);
-                Assert.AreEqual("https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_layouts/15/Doc.aspx?sourcedoc=%7BEB8CF6A2-E76E-4D7F-8B04-88302476F7AD%7D&file=PNP_SDK_TEST_GetIFilePropertiesCurrentBatchAsyncTest.docx&action=default&mobileredirect=true", documentWithProperties.ServerRedirectedUrl);
-                Assert.AreEqual("b!ZtxgsoWyf0eKGhSZeYLphlfDo3rrzblDnc3cFkWzDP9Y_NwRML4tS7O6tnUsdm9H", documentWithProperties.VroomDriveID);
-                Assert.AreEqual("01TEEVMCFC62GOW3XHP5GYWBEIGASHN55N", documentWithProperties.VroomItemID);
+                Assert.IsTrue(documentWithProperties.Length > 0);
+                Assert.IsTrue(!string.IsNullOrEmpty(documentWithProperties.ServerRedirectedUrl) && documentWithProperties.ServerRedirectedUrl.Contains("_layouts/15/Doc.aspx?sourcedoc=", StringComparison.InvariantCultureIgnoreCase));
+                Assert.IsTrue(!string.IsNullOrEmpty(documentWithProperties.VroomDriveID));
+                Assert.IsTrue(!string.IsNullOrEmpty(documentWithProperties.VroomItemID));
             }
 
             await TestAssets.CleanupTestDocumentAsync(2);
@@ -2513,13 +2511,12 @@ namespace PnP.Core.Test.SharePoint
                 await context.ExecuteAsync();
 
                 Assert.IsNotNull(documentWithProperties);
-                Assert.AreEqual(new Guid("fbd54892-2efc-4a13-8968-a48ad6d3f4f0"), documentWithProperties.UniqueId);
-
+                Assert.IsTrue(documentWithProperties.UniqueId != Guid.Empty);
                 Assert.IsFalse(documentWithProperties.HasAlternateContentStreams);
-                Assert.AreEqual(18046, documentWithProperties.Length);
-                Assert.AreEqual("https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_layouts/15/Doc.aspx?sourcedoc=%7BFBD54892-2EFC-4A13-8968-A48AD6D3F4F0%7D&file=PNP_SDK_TEST_GetIFilePropertiesCurrentBatchTest.docx&action=default&mobileredirect=true", documentWithProperties.ServerRedirectedUrl);
-                Assert.AreEqual("b!ZtxgsoWyf0eKGhSZeYLphlfDo3rrzblDnc3cFkWzDP9Y_NwRML4tS7O6tnUsdm9H", documentWithProperties.VroomDriveID);
-                Assert.AreEqual("01TEEVMCESJDK7X7BOCNFIS2FERLLNH5HQ", documentWithProperties.VroomItemID);
+                Assert.IsTrue(documentWithProperties.Length > 0);
+                Assert.IsTrue(!string.IsNullOrEmpty(documentWithProperties.ServerRedirectedUrl) && documentWithProperties.ServerRedirectedUrl.Contains("_layouts/15/Doc.aspx?sourcedoc=", StringComparison.InvariantCultureIgnoreCase));
+                Assert.IsTrue(!string.IsNullOrEmpty(documentWithProperties.VroomDriveID));
+                Assert.IsTrue(!string.IsNullOrEmpty(documentWithProperties.VroomItemID));
             }
 
             await TestAssets.CleanupTestDocumentAsync(2);
@@ -2543,13 +2540,12 @@ namespace PnP.Core.Test.SharePoint
                 await context.ExecuteAsync(batch);
 
                 Assert.IsNotNull(documentWithProperties);
-                Assert.AreEqual(new Guid("a29586fa-5b54-4596-9ad2-04a3723f7d01"), documentWithProperties.UniqueId);
-
+                Assert.IsTrue(documentWithProperties.UniqueId != Guid.Empty);
                 Assert.IsFalse(documentWithProperties.HasAlternateContentStreams);
-                Assert.AreEqual(18046, documentWithProperties.Length);
-                Assert.AreEqual("https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_layouts/15/Doc.aspx?sourcedoc=%7BA29586FA-5B54-4596-9AD2-04A3723F7D01%7D&file=PNP_SDK_TEST_GetIFilePropertiesBatchAsyncTest.docx&action=default&mobileredirect=true", documentWithProperties.ServerRedirectedUrl);
-                Assert.AreEqual("b!ZtxgsoWyf0eKGhSZeYLphlfDo3rrzblDnc3cFkWzDP9Y_NwRML4tS7O6tnUsdm9H", documentWithProperties.VroomDriveID);
-                Assert.AreEqual("01TEEVMCH2Q2K2EVC3SZCZVUQEUNZD67IB", documentWithProperties.VroomItemID);
+                Assert.IsTrue(documentWithProperties.Length > 0);
+                Assert.IsTrue(!string.IsNullOrEmpty(documentWithProperties.ServerRedirectedUrl) && documentWithProperties.ServerRedirectedUrl.Contains("_layouts/15/Doc.aspx?sourcedoc=", StringComparison.InvariantCultureIgnoreCase));
+                Assert.IsTrue(!string.IsNullOrEmpty(documentWithProperties.VroomDriveID));
+                Assert.IsTrue(!string.IsNullOrEmpty(documentWithProperties.VroomItemID));
             }
 
             await TestAssets.CleanupTestDocumentAsync(2);
@@ -2573,13 +2569,12 @@ namespace PnP.Core.Test.SharePoint
                 await context.ExecuteAsync(batch);
 
                 Assert.IsNotNull(documentWithProperties);
-                Assert.AreEqual(new Guid("431407d7-d943-427e-ab55-aba4fe13791f"), documentWithProperties.UniqueId);
-
+                Assert.IsTrue(documentWithProperties.UniqueId != Guid.Empty);
                 Assert.IsFalse(documentWithProperties.HasAlternateContentStreams);
-                Assert.AreEqual(18052, documentWithProperties.Length);
-                Assert.AreEqual("https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_layouts/15/Doc.aspx?sourcedoc=%7B431407D7-D943-427E-AB55-ABA4FE13791F%7D&file=PNP_SDK_TEST_GetIFilePropertiesBatchTest.docx&action=default&mobileredirect=true", documentWithProperties.ServerRedirectedUrl);
-                Assert.AreEqual("b!ZtxgsoWyf0eKGhSZeYLphlfDo3rrzblDnc3cFkWzDP9Y_NwRML4tS7O6tnUsdm9H", documentWithProperties.VroomDriveID);
-                Assert.AreEqual("01TEEVMCGXA4KEGQ6ZPZBKWVNLUT7BG6I7", documentWithProperties.VroomItemID);
+                Assert.IsTrue(documentWithProperties.Length > 0);
+                Assert.IsTrue(!string.IsNullOrEmpty(documentWithProperties.ServerRedirectedUrl) && documentWithProperties.ServerRedirectedUrl.Contains("_layouts/15/Doc.aspx?sourcedoc=", StringComparison.InvariantCultureIgnoreCase));
+                Assert.IsTrue(!string.IsNullOrEmpty(documentWithProperties.VroomDriveID));
+                Assert.IsTrue(!string.IsNullOrEmpty(documentWithProperties.VroomItemID));
             }
 
             await TestAssets.CleanupTestDocumentAsync(2);

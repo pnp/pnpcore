@@ -10,11 +10,13 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
 ### Added
 
+- Added missing properties to IFile #445 [DaleyKD - Kyle Daley]
 - Support for making custom SPO REST / Microsoft Graph calls [jansenbe - Bert Jansen]
 - IsFile() method on IListItem [jansenbe - Bert Jansen]
 
 ### Changed
 
+- Fixed NullReferenceException in Values_CollectionChange (issue #447) #445 [DaleyKD - Kyle Daley]
 - Ensure the Context.Group model has it's groupid set if that was available [jansenbe - Bert Jansen]
 - Use ConcurrentDictionary to track batches in the BatchClient class [jansenbe - Bert Jansen]
 - Fix BannerImageUrl to use sphost only since siteid, webid are given as parameter #439 [czullu - Christian Zuellig]
