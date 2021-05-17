@@ -121,6 +121,10 @@
 <h2 id="making-changes-and-testing-them">Making changes and testing them</h2>
 <p>The recommended approach for making changes and testing them is by writing the appropriate unit tests (see the <a href="writing%20tests.html">Writing tests</a> article).</p>
 <h2 id="create-a-pr-with-your-changes">Create a PR with your changes</h2>
+<div class="NOTE">
+<h5>Note</h5>
+<p>When you want to make changes it's recommended to isolate each change in a separate PR and that's best done by creating a branch per change. Having a branch per change allows you to work on multiple changes while you still can submit them as individual PR's. To create a new branch starting from the dev branch you can use <code>git checkout -b mybranch dev</code>. To push this branch to GitHub you can use <code>git push -u mybranch</code>.</p>
+</div>
 <p>Once you've coded and tested your contribution you'll need to create a pull request (PR) again the dev branch of the <a href="https://github.com/pnp/pnpcore">https://github.com/pnp/pnpcore</a> repository:</p>
 <ul>
 <li>Go to <strong>Pull requests</strong> in your fork and click on the green <strong>New pull request</strong> button</li>
