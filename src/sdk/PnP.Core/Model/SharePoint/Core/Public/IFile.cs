@@ -49,10 +49,17 @@ namespace PnP.Core.Model.SharePoint
         /// </summary>
         public bool Exists { get; }
 
+        public bool HasAlternateContentStreams { get; }
+
         /// <summary>
         /// Gets or sets whether Irm is enabled on the file.
         /// </summary>
         public bool IrmEnabled { get; set; }
+
+        /// <summary>
+        /// Gets the file size of the file.
+        /// </summary>
+        public long Length { get; }
 
         /// <summary>
         /// Gets the linking URI of the file.
@@ -88,6 +95,11 @@ namespace PnP.Core.Model.SharePoint
         /// Level of the file (published or draft)
         /// </summary>
         public PublishedStatus Level { get; }
+
+        /// <summary>
+        /// Gets the URL which opens the document in Office Web Apps.
+        /// </summary>
+        public string ServerRedirectedUrl { get; }
 
         /// <summary>
         /// Gets the relative URL of the file based on the URL for the server.
@@ -128,6 +140,16 @@ namespace PnP.Core.Model.SharePoint
         /// Gets the unique Id of the file.
         /// </summary>
         public Guid UniqueId { get; }
+
+        /// <summary>
+        /// Get the Graph Drive ID of the drive to which the file belongs.
+        /// </summary>
+        public string VroomDriveID { get; }
+
+        /// <summary>
+        /// Get the Graph DriveItem ID of the file.
+        /// </summary>
+        public string VroomItemID { get; }
 
         /// <summary>
         /// Gets the Id of the site in which the file is stored.

@@ -41,7 +41,11 @@ namespace PnP.Core.Model.SharePoint
 
         public bool Exists { get => GetValue<bool>(); set => SetValue(value); }
 
+        public bool HasAlternateContentStreams { get => GetValue<bool>(); set => SetValue(value); }
+
         public bool IrmEnabled { get => GetValue<bool>(); set => SetValue(value); }
+
+        public long Length { get => GetValue<long>(); set => SetValue(value); }
 
         public string LinkingUri { get => GetValue<string>(); set => SetValue(value); }
 
@@ -56,6 +60,8 @@ namespace PnP.Core.Model.SharePoint
         public ListPageRenderType PageRenderType { get => GetValue<ListPageRenderType>(); set => SetValue(value); }
 
         public PublishedStatus Level { get => GetValue<PublishedStatus>(); set => SetValue(value); }
+
+        public string ServerRedirectedUrl { get => GetValue<string>(); set => SetValue(value); }
 
         public string ServerRelativeUrl { get => GetValue<string>(); set => SetValue(value); }
 
@@ -72,6 +78,10 @@ namespace PnP.Core.Model.SharePoint
         public string UIVersionLabel { get => GetValue<string>(); set => SetValue(value); }
 
         public Guid UniqueId { get => GetValue<Guid>(); set => SetValue(value); }
+
+        public string VroomDriveID { get => GetValue<string>(); set => SetValue(value); }
+
+        public string VroomItemID { get => GetValue<string>(); set => SetValue(value); }
 
         public Guid WebId { get => GetValue<Guid>(); set => SetValue(value); }
 
@@ -691,7 +701,7 @@ namespace PnP.Core.Model.SharePoint
             };
 
             var batchRequest = await RawRequestBatchAsync(batch, apiCall, HttpMethod.Post).ConfigureAwait(false);
-            
+
             return new BatchSingleResult<ISyntexClassifyAndExtractResult>(batch, batchRequest.Id, apiCall.RawSingleResult as ISyntexClassifyAndExtractResult);
         }
 
