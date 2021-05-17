@@ -11597,6 +11597,19 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IFile.GetContentBytesAsync
   nameWithType: IFile.GetContentBytesAsync
+- uid: PnP.Core.Model.SharePoint.IFile.HasAlternateContentStreams
+  name: HasAlternateContentStreams
+  href: api/PnP.Core.Model.SharePoint.IFile.html#PnP_Core_Model_SharePoint_IFile_HasAlternateContentStreams
+  commentId: P:PnP.Core.Model.SharePoint.IFile.HasAlternateContentStreams
+  fullName: PnP.Core.Model.SharePoint.IFile.HasAlternateContentStreams
+  nameWithType: IFile.HasAlternateContentStreams
+- uid: PnP.Core.Model.SharePoint.IFile.HasAlternateContentStreams*
+  name: HasAlternateContentStreams
+  href: api/PnP.Core.Model.SharePoint.IFile.html#PnP_Core_Model_SharePoint_IFile_HasAlternateContentStreams_
+  commentId: Overload:PnP.Core.Model.SharePoint.IFile.HasAlternateContentStreams
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IFile.HasAlternateContentStreams
+  nameWithType: IFile.HasAlternateContentStreams
 - uid: PnP.Core.Model.SharePoint.IFile.InformationRightsManagementSettings
   name: InformationRightsManagementSettings
   href: api/PnP.Core.Model.SharePoint.IFile.html#PnP_Core_Model_SharePoint_IFile_InformationRightsManagementSettings
@@ -11623,6 +11636,19 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IFile.IrmEnabled
   nameWithType: IFile.IrmEnabled
+- uid: PnP.Core.Model.SharePoint.IFile.Length
+  name: Length
+  href: api/PnP.Core.Model.SharePoint.IFile.html#PnP_Core_Model_SharePoint_IFile_Length
+  commentId: P:PnP.Core.Model.SharePoint.IFile.Length
+  fullName: PnP.Core.Model.SharePoint.IFile.Length
+  nameWithType: IFile.Length
+- uid: PnP.Core.Model.SharePoint.IFile.Length*
+  name: Length
+  href: api/PnP.Core.Model.SharePoint.IFile.html#PnP_Core_Model_SharePoint_IFile_Length_
+  commentId: Overload:PnP.Core.Model.SharePoint.IFile.Length
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IFile.Length
+  nameWithType: IFile.Length
 - uid: PnP.Core.Model.SharePoint.IFile.Level
   name: Level
   href: api/PnP.Core.Model.SharePoint.IFile.html#PnP_Core_Model_SharePoint_IFile_Level
@@ -11971,6 +11997,19 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IFile.RecycleBatchAsync
   nameWithType: IFile.RecycleBatchAsync
+- uid: PnP.Core.Model.SharePoint.IFile.ServerRedirectedUrl
+  name: ServerRedirectedUrl
+  href: api/PnP.Core.Model.SharePoint.IFile.html#PnP_Core_Model_SharePoint_IFile_ServerRedirectedUrl
+  commentId: P:PnP.Core.Model.SharePoint.IFile.ServerRedirectedUrl
+  fullName: PnP.Core.Model.SharePoint.IFile.ServerRedirectedUrl
+  nameWithType: IFile.ServerRedirectedUrl
+- uid: PnP.Core.Model.SharePoint.IFile.ServerRedirectedUrl*
+  name: ServerRedirectedUrl
+  href: api/PnP.Core.Model.SharePoint.IFile.html#PnP_Core_Model_SharePoint_IFile_ServerRedirectedUrl_
+  commentId: Overload:PnP.Core.Model.SharePoint.IFile.ServerRedirectedUrl
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IFile.ServerRedirectedUrl
+  nameWithType: IFile.ServerRedirectedUrl
 - uid: PnP.Core.Model.SharePoint.IFile.ServerRelativeUrl
   name: ServerRelativeUrl
   href: api/PnP.Core.Model.SharePoint.IFile.html#PnP_Core_Model_SharePoint_IFile_ServerRelativeUrl
@@ -12229,6 +12268,32 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IFile.Versions
   nameWithType: IFile.Versions
+- uid: PnP.Core.Model.SharePoint.IFile.VroomDriveID
+  name: VroomDriveID
+  href: api/PnP.Core.Model.SharePoint.IFile.html#PnP_Core_Model_SharePoint_IFile_VroomDriveID
+  commentId: P:PnP.Core.Model.SharePoint.IFile.VroomDriveID
+  fullName: PnP.Core.Model.SharePoint.IFile.VroomDriveID
+  nameWithType: IFile.VroomDriveID
+- uid: PnP.Core.Model.SharePoint.IFile.VroomDriveID*
+  name: VroomDriveID
+  href: api/PnP.Core.Model.SharePoint.IFile.html#PnP_Core_Model_SharePoint_IFile_VroomDriveID_
+  commentId: Overload:PnP.Core.Model.SharePoint.IFile.VroomDriveID
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IFile.VroomDriveID
+  nameWithType: IFile.VroomDriveID
+- uid: PnP.Core.Model.SharePoint.IFile.VroomItemID
+  name: VroomItemID
+  href: api/PnP.Core.Model.SharePoint.IFile.html#PnP_Core_Model_SharePoint_IFile_VroomItemID
+  commentId: P:PnP.Core.Model.SharePoint.IFile.VroomItemID
+  fullName: PnP.Core.Model.SharePoint.IFile.VroomItemID
+  nameWithType: IFile.VroomItemID
+- uid: PnP.Core.Model.SharePoint.IFile.VroomItemID*
+  name: VroomItemID
+  href: api/PnP.Core.Model.SharePoint.IFile.html#PnP_Core_Model_SharePoint_IFile_VroomItemID_
+  commentId: Overload:PnP.Core.Model.SharePoint.IFile.VroomItemID
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IFile.VroomItemID
+  nameWithType: IFile.VroomItemID
 - uid: PnP.Core.Model.SharePoint.IFile.WebId
   name: WebId
   href: api/PnP.Core.Model.SharePoint.IFile.html#PnP_Core_Model_SharePoint_IFile_WebId
