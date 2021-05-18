@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace PnP.Core.Transformation.Services.Core
@@ -14,9 +15,7 @@ namespace PnP.Core.Transformation.Services.Core
         /// <summary>
         /// Defines a list of Page Transformation Tasks
         /// </summary>
-        /// <param name="sourceContext">The PnPContext of the source site</param>
-        /// <param name="targetContext">The PnPContext of the target site</param>
         /// <returns>A list of PageTransformationTask to transform</returns>
-        IAsyncEnumerable<PageTransformationTask> GetTransformationTasks(PnPContext sourceContext, PnPContext targetContext);
+        IAsyncEnumerable<PageTransformationTask> GetSourceItemsIdsAsync(CancellationToken token = default);
     }
 }

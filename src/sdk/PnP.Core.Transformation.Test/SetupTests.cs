@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
@@ -8,6 +10,7 @@ using PnP.Core.Transformation.Services.Builder.Configuration;
 using PnP.Core.Transformation.Services.Core;
 using PnP.Core.Transformation.Services.MappingProviders;
 using PnP.Core.Services;
+using PnP.Core.Transformation.SharePoint.MappingProviders;
 
 namespace PnP.Core.Transformation.Test
 {
@@ -19,12 +22,16 @@ namespace PnP.Core.Transformation.Test
         public void DefaultServices()
         {
             var services = new ServiceCollection();
-            services.AddPnPTransformation();
+            services.AddLogging();
+            services.AddPnPTransformation()
+                .WithMappingProvider<Mock>()
+                .WithTransformationDistiller<Mock>();
 
             var provider = services.BuildServiceProvider();
 
-            //Assert.IsInstanceOfType(provider.GetRequiredService<IPageTransformator>(), typeof(Mock));
-            //Assert.IsInstanceOfType(provider.GetRequiredService<ITransformationDistiller>(), typeof(Mock));
+            // TODO: check all types
+
+            Assert.IsInstanceOfType(provider.GetRequiredService<IPageTransformator>(), typeof(DefaultPageTransformator));
             Assert.IsInstanceOfType(provider.GetRequiredService<ITransformationStateManager>(), typeof(InMemoryTransformationStateManager));
             Assert.IsInstanceOfType(provider.GetRequiredService<ITransformationExecutor>(), typeof(InProcessTransformationExecutor));
         }
@@ -33,17 +40,19 @@ namespace PnP.Core.Transformation.Test
         public void CustomServices()
         {
             var services = new ServiceCollection();
+            services.AddLogging();
+
             services.AddPnPTransformation(o => o.DisableTelemetry = true)
                 .WithPageOptions(o => o.DisablePageComments = true)
 
-                .WithMetadataMappingProvider<Mock>()
-                .WithPageLayoutMappingProvider<Mock>()
-                .WithTaxonomyMappingProvider<Mock>()
-                .WithUrlMappingProvider<Mock>()
-                .WithUserMappingProvider<Mock>()
-                .WithWebPartMappingProvider<Mock>()
+                .WithMappingProvider<Mock>()
 
-                .WithPageTransformator<PageTransformator>()
+                .WithPageTransformator<Mock>()
+                .AddPagePostTransformation<Mock>()
+                .AddPagePostTransformation<Mock>()
+                .AddPagePreTransformation<Mock>()
+                .AddPagePreTransformation<Mock>()
+
                 .WithTransformationDistiller<Mock>()
                 .WithTransformationStateManager<Mock>()
                 .WithTransformationExecutor<Mock>();
@@ -56,69 +65,51 @@ namespace PnP.Core.Transformation.Test
             var transformationOptions = provider.GetRequiredService<IOptions<PageTransformationOptions>>().Value;
             Assert.IsTrue(transformationOptions.DisablePageComments);
 
-            Assert.IsInstanceOfType(transformationOptions.MetadataMappingProvider, typeof(Mock));
-            Assert.IsInstanceOfType(transformationOptions.PageLayoutMappingProvider, typeof(Mock));
-            Assert.IsInstanceOfType(transformationOptions.TaxonomyMappingProvider, typeof(Mock));
-            Assert.IsInstanceOfType(transformationOptions.UrlMappingProvider, typeof(Mock));
-            Assert.IsInstanceOfType(transformationOptions.UserMappingProvider, typeof(Mock));
-            Assert.IsInstanceOfType(transformationOptions.MetadataMappingProvider, typeof(Mock));
-
+            Assert.IsInstanceOfType(provider.GetRequiredService<IMappingProvider>(), typeof(Mock));
             Assert.IsInstanceOfType(provider.GetRequiredService<IPageTransformator>(), typeof(Mock));
             Assert.IsInstanceOfType(provider.GetRequiredService<ITransformationDistiller>(), typeof(Mock));
             Assert.IsInstanceOfType(provider.GetRequiredService<ITransformationStateManager>(), typeof(Mock));
             Assert.IsInstanceOfType(provider.GetRequiredService<ITransformationExecutor>(), typeof(Mock));
+
+            Assert.AreEqual(2, provider.GetServices<IPagePreTransformation>().Count());
+            Assert.AreEqual(2, provider.GetServices<IPagePostTransformation>().Count());
+            Assert.IsInstanceOfType(provider.GetRequiredService<IPagePostTransformation>(), typeof(Mock));
+            Assert.IsInstanceOfType(provider.GetRequiredService<IPagePreTransformation>(), typeof(Mock));
         }
 
         #region Mock
 
         private class Mock :
-            IWebPartMappingProvider,
-            IUserMappingProvider,
-            ITaxonomyMappingProvider,
-            IPageLayoutMappingProvider,
-            IMetadataMappingProvider,
-            IUrlMappingProvider,
+            IMappingProvider,
             IPageTransformator,
             ITransformationDistiller,
             ITransformationStateManager,
-            ITransformationExecutor
+            ITransformationExecutor,
+            IHtmlMappingProvider,
+            IPagePreTransformation,
+            IPagePostTransformation
         {
-            Task<WebPartMappingProviderOutput> IWebPartMappingProvider.MapWebPartAsync(WebPartMappingProviderInput input)
-            {
-                throw new System.NotImplementedException();
-            }
-
-            Task<UserMappingProviderOutput> IUserMappingProvider.MapUserAsync(UserMappingProviderInput input)
-            {
-                throw new System.NotImplementedException();
-            }
-
-            Task<TaxonomyMappingProviderOutput> ITaxonomyMappingProvider.MapTermAsync(TaxonomyMappingProviderInput input)
-            {
-                throw new System.NotImplementedException();
-            }
-
-            Task<PageLayoutMappingProviderOutput> IPageLayoutMappingProvider.MapPageLayoutAsync(PageLayoutMappingProviderInput input)
-            {
-                throw new System.NotImplementedException();
-            }
-
-            Task<MetadataMappingProviderOutput> IMetadataMappingProvider.MapMetadataFieldAsync(MetadataMappingProviderInput input)
-            {
-                throw new System.NotImplementedException();
-            }
-
-            Task<UrlMappingProviderOutput> IUrlMappingProvider.MapUrlAsync(UrlMappingProviderInput input)
-            {
-                throw new System.NotImplementedException();
-            }
-
-            Task<Uri> IPageTransformator.TransformAsync(PageTransformationTask task, Action<PageTransformationOptions> options = null)
+            Task<MappingProviderOutput> IMappingProvider.MapAsync(MappingProviderInput input)
             {
                 throw new NotImplementedException();
             }
 
-            IAsyncEnumerable<PageTransformationTask> ITransformationDistiller.GetTransformationTasks(PnPContext sourceContext, PnPContext targetContext)
+            Task<Uri> IPageTransformator.TransformAsync(PageTransformationTask task)
+            {
+                throw new NotImplementedException();
+            }
+
+            IAsyncEnumerable<PageTransformationTask> ITransformationDistiller.GetSourceItemsIdsAsync(CancellationToken token)
+            {
+                throw new NotImplementedException();
+            }
+
+            Task ITransformationStateManager.WriteStateAsync<T>(object key, T state)
+            {
+                throw new NotImplementedException();
+            }
+
+            Task<T> ITransformationStateManager.ReadStateAsync<T>(object key)
             {
                 throw new NotImplementedException();
             }
@@ -133,12 +124,17 @@ namespace PnP.Core.Transformation.Test
                 throw new NotImplementedException();
             }
 
-            Task ITransformationStateManager.WriteStateAsync<T>(object key, T state)
+            Task<HtmlMappingProviderOutput> IHtmlMappingProvider.MapHtmlAsync(HtmlMappingProviderInput input)
             {
                 throw new NotImplementedException();
             }
 
-            Task<T> ITransformationStateManager.ReadStateAsync<T>(object key)
+            Task IPagePreTransformation.PreTransformAsync(PagePreTransformationContext context)
+            {
+                throw new NotImplementedException();
+            }
+
+            Task IPagePostTransformation.PostTransformAsync(PagePostTransformationContext context)
             {
                 throw new NotImplementedException();
             }

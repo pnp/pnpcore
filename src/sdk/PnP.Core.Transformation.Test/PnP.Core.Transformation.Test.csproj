@@ -24,6 +24,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\PnP.Core.Auth\PnP.Core.Auth.csproj" />
+    <ProjectReference Include="..\PnP.Core.Transformation.SharePoint\PnP.Core.Transformation.SharePoint.csproj" />
     <ProjectReference Include="..\PnP.Core.Transformation\PnP.Core.Transformation.csproj" />
     <ProjectReference Include="..\PnP.Core\PnP.Core.csproj" />
   </ItemGroup>

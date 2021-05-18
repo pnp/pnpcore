@@ -11,8 +11,8 @@ namespace PnP.Core.Transformation.Services.MappingProviders
     public class MappingProviderInput
     {
         /// <summary>
-        /// Provides information about the current transformation task
+        /// Provides information about the current transformation
         /// </summary>
-        public PageTransformationTask TransformationTask { get; set; }
+        public PageTransformationContext Context { get; set; }
     }
 }

@@ -4,6 +4,7 @@ using PnP.Core.Transformation.Services.Builder.Configuration;
 using System;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using PnP.Core.Transformation.Services.Core;
+using PnP.Core.Transformation.Services.MappingProviders;
 
 namespace Microsoft.Extensions.DependencyInjection
 {
@@ -57,6 +58,7 @@ namespace Microsoft.Extensions.DependencyInjection
         {
             if (builder == null) throw new ArgumentNullException(nameof(builder));
 
+            builder.Services.TryAddTransient<IPageTransformator, DefaultPageTransformator>();
             builder.Services.TryAddTransient<ITransformationStateManager, InMemoryTransformationStateManager>();
             builder.Services.TryAddTransient<ITransformationExecutor, InProcessTransformationExecutor>();
 
