@@ -40,7 +40,7 @@ Things to think about:
 
 Questions for Bert:
 - What is the whole Observer thing? Can't we simply use logging?
-	- Nowadays it generates a report of what happened ... think about that, talk with Paul Bullock
+	- Nowadays it generates a report of what happened ... think about that, talk with Paul Bullock -> Paul said that we can remove it
 - Do we really need a "custom" cache?
 	- Ok we can use the out of the box one
 - What if we just implement one PageTransformator that adapts to the page instead of PageTransformator and PublishingPageTransformator?
@@ -69,9 +69,17 @@ Bert's feedback:
 - HTML Content Mapping Provider
 - Custom mapping provider pre/post-transformation with order
 - Don't assume that the source is always Microsoft SharePoint
+	- Add another level of abstraction for generic data sources
+	- We cannot use PnPContext for SourceContext, we need to support on-prem and other sources
+	- Source:
+		- Metadata (dictionary)
+		- RawContent (string -> GetStreamAsync)
+		- Components/Parts (IEnumerable<{ id, Properties: Dictionary, GetStreamAsync }>)
+		- Users
+			- CreatedBy
+			- ModifiedBy
+		- Taxonomy
 * PnP.Core.Modernization => PnP.Core.Transformation
-- Add another level of abstraction for generic data sources
-- We cannot use PnPContext for SourceContext, we need to support on-prem and other sources
 - Internal multiple transformators, outside just one
 - JSON configuration file for PowerShell
 - PnP Core pre-requirements to check
