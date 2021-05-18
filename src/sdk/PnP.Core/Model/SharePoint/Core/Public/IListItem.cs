@@ -11,7 +11,6 @@ namespace PnP.Core.Model.SharePoint
     [ConcreteType(typeof(ListItem))]
     public interface IListItem : IDataModel<IListItem>, IDataModelGet<IListItem>, IDataModelLoad<IListItem>, IDataModelUpdate, IDataModelDelete, IExpandoDataModel, IQueryableDataModel
     {
-
         /// <summary>
         /// Id of the list item
         /// </summary>
@@ -22,32 +21,76 @@ namespace PnP.Core.Model.SharePoint
         /// </summary>
         public string Title { get; set; }
 
+        /// <summary>
+        /// Determines if comments are disabled for the list item
+        /// </summary>
         public bool CommentsDisabled { get; }
 
+        /// <summary>
+        /// The scope for which comments are disabled
+        /// </summary>
         public CommentsDisabledScope CommentsDisabledScope { get; }
 
+        /// <summary>
+        /// The content type for the list item
+        /// </summary>
         public IContentType ContentType { get; }
 
+        /// <summary>
+        /// All the field values for the list item as HTML
+        /// </summary>
         public IPropertyValues FieldValuesAsHtml { get; }
 
+        /// <summary>
+        /// All the field values for the list item as text
+        /// </summary>
         public IPropertyValues FieldValuesAsText { get; }
 
+        /// <summary>
+        /// All the field values for the list item for editing
+        /// </summary>
         public IPropertyValues FieldValuesForEdit { get; }
 
+        /// <summary>
+        /// The file, if any, associated with the list item
+        /// </summary>
         public IFile File { get; }
 
+        /// <summary>
+        /// The <seealso cref="SharePoint.FileSystemObjectType"/> for the list item, such as Folder or File
+        /// </summary>
         public FileSystemObjectType FileSystemObjectType { get; }
 
+        /// <summary>
+        /// The folder, if any, represented by the list item
+        /// </summary>
+#pragma warning disable CA1721 // Property names should not match get methods
         public IFolder Folder { get; }
+#pragma warning restore CA1721 // Property names should not match get methods
 
+        /// <summary>
+        /// The list for the list item
+        /// </summary>
         public IList ParentList { get; }
 
+        /// <summary>
+        /// The properties of the list item
+        /// </summary>
         public IPropertyValues Properties { get; }
 
+        /// <summary>
+        /// The URI used to render the WOPI (Web Application Open Platform Interface) frame
+        /// </summary>
         public string ServerRedirectedEmbedUri { get; }
 
+        /// <summary>
+        /// The URL used to render the WOPI (Web Application Open Platform Interface) frame
+        /// </summary>
         public string ServerRedirectedEmbedUrl { get; }
 
+        /// <summary>
+        /// The unique identifier of the list item
+        /// </summary>
         public Guid UniqueId { get; }
 
         /// <summary>
@@ -55,14 +98,25 @@ namespace PnP.Core.Model.SharePoint
         /// </summary>
         public IRoleAssignmentCollection RoleAssignments { get; }
 
+        /// <summary>
+        /// A special property used to add an asterisk to a $select statement
+        /// </summary>
         public object AllColumns { get; }
 
         #region Extension methods
 
         #region Display Name
 
+        /// <summary>
+        /// Gets the display name of the list item.
+        /// </summary>
+        /// <returns>The display name or <c>null</c>.</returns>
         public Task<string> GetDisplayNameAsync();
 
+        /// <summary>
+        /// Gets the display name of the list item.
+        /// </summary>
+        /// <returns>The display name or <c>null</c>.</returns>
         public string GetDisplayName();
 
         #endregion

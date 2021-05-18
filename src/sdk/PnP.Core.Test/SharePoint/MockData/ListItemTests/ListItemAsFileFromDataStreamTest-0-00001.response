@@ -1,4 +1,4 @@
---batchresponse_5ee6d5e0-1f65-4eb7-b62e-17e63af2ca2e
+--batchresponse_388bcacf-8216-4cb0-9876-8035de0e4f54
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
@@ -6,4 +6,4 @@ HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
 {"d":{"__metadata":{"id":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Site","uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Site","type":"SP.Site"},"GroupId":"08b3accf-0665-4523-945b-473c3161b2ec","Id":"b260dc66-b285-477f-8a1a-14997982e986"}}
---batchresponse_5ee6d5e0-1f65-4eb7-b62e-17e63af2ca2e--
+--batchresponse_388bcacf-8216-4cb0-9876-8035de0e4f54--

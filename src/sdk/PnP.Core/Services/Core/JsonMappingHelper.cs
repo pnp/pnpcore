@@ -124,8 +124,11 @@ namespace PnP.Core.Services
                 // Enumerate the received properties and try to map them to the model
                 foreach (var property in apiResponse.JsonElement.EnumerateObject())
                 {
+                    // Very special case to handle when the data is loaded via DataStream. A DataStream returns "ID", but not "Id".
+                    var ignoreCasing = pnpObject is IListItem && property.NameEquals("ID");
+                    
                     // Find the model field linked to this field
-                    EntityFieldInfo entityField = LookupEntityField(entity, apiResponse, property);
+                    EntityFieldInfo entityField = LookupEntityField(entity, apiResponse, property, ignoreCasing);
 
                     // Do we need to re-parent this json mapping to a non expandable collection in the current model?
                     if (!string.IsNullOrEmpty(apiResponse.ApiCall.ReceivingProperty) && (property.NameEquals("results") || property.NameEquals("Row")))
@@ -1167,13 +1170,15 @@ namespace PnP.Core.Services
             pnpObject.BatchRequestId = batchRequestId;
         }
 
-        private static EntityFieldInfo LookupEntityField(EntityInfo entity, ApiResponse apiResponse, JsonProperty property)
+        private static EntityFieldInfo LookupEntityField(EntityInfo entity, ApiResponse apiResponse, JsonProperty property, bool forceIgnoreCase = false)
         {
             EntityFieldInfo entityField = null;
             if (apiResponse.ApiCall.Type == ApiType.SPORest)
             {
                 // Changed to case insensitive because when loading data via DataStream, the ID field comes back not as "Id", but as "ID"
-                entityField = entity.Fields.FirstOrDefault(p => !string.IsNullOrEmpty(p.SharePointName) && p.SharePointName.Equals(property.Name, StringComparison.InvariantCultureIgnoreCase));
+                entityField = forceIgnoreCase
+                    ? entity.Fields.FirstOrDefault(p => !string.IsNullOrEmpty(p.SharePointName) && p.SharePointName.Equals(property.Name, StringComparison.InvariantCultureIgnoreCase))
+                    : entity.Fields.FirstOrDefault(p => p.SharePointName == property.Name);
             }
             else if (apiResponse.ApiCall.Type == ApiType.Graph || apiResponse.ApiCall.Type == ApiType.GraphBeta)
             {

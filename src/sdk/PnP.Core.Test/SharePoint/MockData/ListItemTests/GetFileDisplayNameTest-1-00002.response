@@ -1,9 +1,9 @@
---batchresponse_7e9dd90e-22cf-422a-b372-c244dc5c0758
+--batchresponse_6dd6fa8a-4bc5-41ac-bb6d-1a0884859252
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{"d":{"__metadata":{"id":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/pnpcoresdktestgroup/Shared Documents/PNP_SDK_TEST_GetFileDisplayNameTest.docx')","uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/pnpcoresdktestgroup/Shared%20Documents/PNP_SDK_TEST_GetFileDisplayNameTest.docx')","type":"SP.File"},"ListItemAllFields":{"__metadata":{"id":"a8f7fdfb-b728-4c77-ba41-26b86dfe8b76","uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/pnpcoresdktestgroup/Shared%20Documents/PNP_SDK_TEST_GetFileDisplayNameTest.docx')/ListItemAllFields","etag":"\"1\"","type":"SP.Data.Shared_x0020_DocumentsItem"},"Id":50,"ID":50},"UniqueId":"8c2ce26a-14a3-47bb-b8b5-a6a26de7c2af"}}
---batchresponse_7e9dd90e-22cf-422a-b372-c244dc5c0758--
+{"d":{"__metadata":{"id":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/pnpcoresdktestgroup/Shared Documents/PNP_SDK_TEST_GetFileDisplayNameTest.docx')","uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/pnpcoresdktestgroup/Shared%20Documents/PNP_SDK_TEST_GetFileDisplayNameTest.docx')","type":"SP.File"},"ListItemAllFields":{"__metadata":{"id":"196c4a21-17ae-482b-ab57-2427823b138c","uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/pnpcoresdktestgroup/Shared%20Documents/PNP_SDK_TEST_GetFileDisplayNameTest.docx')/ListItemAllFields","etag":"\"1\"","type":"SP.Data.Shared_x0020_DocumentsItem"},"Id":70,"ID":70},"UniqueId":"4fc3eb94-e78f-4839-bb8b-1f9d41b6cca4"}}
+--batchresponse_6dd6fa8a-4bc5-41ac-bb6d-1a0884859252--
