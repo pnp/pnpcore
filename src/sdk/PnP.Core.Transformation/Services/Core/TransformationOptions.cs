@@ -13,13 +13,22 @@ namespace PnP.Core.Transformation.Services.Core
     {
         #region Ctor
 
+        /// <summary>
+        /// Creates an instance with default values
+        /// </summary>
         protected TransformationOptions()
         {
 
         }
 
+        /// <summary>
+        /// Creates a new instance copying settings from another
+        /// </summary>
+        /// <param name="options"></param>
         protected TransformationOptions(TransformationOptions options)
         {
+            if (options == null) throw new ArgumentNullException(nameof(options));
+
             Overwrite = options.Overwrite;
             KeepPermissions = options.KeepPermissions;
             KeepPageCreationModificationInformation = options.KeepPageCreationModificationInformation;
@@ -126,6 +135,11 @@ namespace PnP.Core.Transformation.Services.Core
         /// Defines a custom User mapping provider
         /// </summary>
         public IUserMappingProvider UserMappingProvider { get; set; }
+
+        /// <summary>
+        /// Defines a custom HTML mapping provider
+        /// </summary>
+        public IHtmlMappingProvider HtmlMappingProvider { get; set; }
 
         #endregion
 

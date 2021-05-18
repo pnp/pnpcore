@@ -9,15 +9,15 @@ namespace PnP.Core.Transformation.Services.Core
     /// <summary>
     /// Implements the concret PageTransformator (this is the core of PnP Transformation Framework)
     /// </summary>
-    public class PageTransformator : IPageTransformator
+    public class DefaultPageTransformator : IPageTransformator
     {
-        private readonly ILogger<PageTransformator> _logger;
+        private readonly ILogger<DefaultPageTransformator> _logger;
 
         /// <summary>
         /// Constructor with DI support
         /// </summary>
         /// <param name="logger">The logger interface</param>
-        public PageTransformator(ILogger<PageTransformator> logger)
+        public DefaultPageTransformator(ILogger<DefaultPageTransformator> logger)
         {
             this._logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
