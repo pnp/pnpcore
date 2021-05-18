@@ -13,9 +13,8 @@ namespace PnP.Core.Transformation.Services.Core
         /// <summary>
         /// Transforms a page from classic to modern
         /// </summary>
-        /// <param name="options">The options to use while transforming the page, optional</param>
         /// <param name="task">The context of the transformation process</param>
         /// <returns>The URL of the transformed page</returns>
-        Task<Uri> TransformAsync(PageTransformationTask task, Action<PageTransformationOptions> options = null);
+        Task<Uri> TransformAsync(PageTransformationTask task);
     }
 }

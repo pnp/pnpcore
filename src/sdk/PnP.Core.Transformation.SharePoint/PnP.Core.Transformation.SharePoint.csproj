@@ -58,4 +58,8 @@
     <None Include="nugeticon.png" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\PnP.Core.Transformation\PnP.Core.Transformation.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -1,22 +1,25 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Options;
+using PnP.Core.Transformation.Services.Core;
+using PnP.Core.Transformation.Services.MappingProviders;
 
-namespace PnP.Core.Transformation.Services.MappingProviders
+namespace PnP.Core.Transformation.SharePoint.MappingProviders
 {
     /// <summary>
     /// Default implementation of <see cref="IMappingProvider"/>
     /// </summary>
-    public class DefaultMappingProvider : IMappingProvider
+    public class SharePointMappingProvider : IMappingProvider
     {
-        private readonly IServiceProvider services;
+        private readonly IOptions<SharePointTransformationOptions> options;
 
         /// <summary>
         /// Creates an instance
         /// </summary>
-        /// <param name="services"></param>
-        public DefaultMappingProvider(IServiceProvider services)
+        /// <param name="options"></param>
+        public SharePointMappingProvider(IOptions<SharePointTransformationOptions> options)
         {
-            this.services = services ?? throw new ArgumentNullException(nameof(services));
+            this.options = options ?? throw new ArgumentNullException(nameof(options));
         }
 
         /// <summary>
@@ -28,7 +31,7 @@ namespace PnP.Core.Transformation.Services.MappingProviders
         {
             if (input == null) throw new ArgumentNullException(nameof(input));
 
-            var options = input.Context.Options;
+            var options = this.options.Value;
             if (options.WebPartMappingProvider != null)
             {
                 var webPartInput = new WebPartMappingProviderInput

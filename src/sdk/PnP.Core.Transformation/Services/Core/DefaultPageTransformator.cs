@@ -22,29 +22,24 @@ namespace PnP.Core.Transformation.Services.Core
         /// </summary>
         /// <param name="logger">The logger interface</param>
         /// <param name="mappingProvider">The mapping provider interface</param>
-        /// <param name="defaultPageTransformationOptions"></param>
-        public DefaultPageTransformator(ILogger<DefaultPageTransformator> logger, IMappingProvider mappingProvider, IOptions<PageTransformationOptions> defaultPageTransformationOptions)
+        /// <param name="pageTransformationOptions"></param>
+        public DefaultPageTransformator(ILogger<DefaultPageTransformator> logger, IMappingProvider mappingProvider, IOptions<PageTransformationOptions> pageTransformationOptions)
         {
             this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
             this.mappingProvider = mappingProvider ?? throw new ArgumentNullException(nameof(mappingProvider));
-            this.defaultPageTransformationOptions = defaultPageTransformationOptions ?? throw new ArgumentNullException(nameof(defaultPageTransformationOptions));
+            this.defaultPageTransformationOptions = pageTransformationOptions ?? throw new ArgumentNullException(nameof(pageTransformationOptions));
         }
 
         /// <summary>
         /// Transforms a page from classic to modern
         /// </summary>
-        /// <param name="options">The options to use while transforming the page, optional</param>
         /// <param name="task">The context of the transformation process</param>
         /// <returns>The URL of the transformed page</returns>
-        public async Task<Uri> TransformAsync(PageTransformationTask task, Action<PageTransformationOptions> options = null)
+        public async Task<Uri> TransformAsync(PageTransformationTask task)
         {
             this.logger.LogInformation("TransformAsync");
 
-            // Create a custom options instance for this page
-            var pageTransformationOptions = new PageTransformationOptions(defaultPageTransformationOptions.Value);
-            options?.Invoke(pageTransformationOptions);
-
-            var context = new PageTransformationContext(task, pageTransformationOptions);
+            var context = new PageTransformationContext(task);
             var input = new MappingProviderInput
             {
                 Context = context

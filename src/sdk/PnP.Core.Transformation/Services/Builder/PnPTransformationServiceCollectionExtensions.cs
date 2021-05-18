@@ -59,7 +59,6 @@ namespace Microsoft.Extensions.DependencyInjection
             if (builder == null) throw new ArgumentNullException(nameof(builder));
 
             builder.Services.TryAddTransient<IPageTransformator, DefaultPageTransformator>();
-            builder.Services.TryAddTransient<IMappingProvider, DefaultMappingProvider>();
             builder.Services.TryAddTransient<ITransformationStateManager, InMemoryTransformationStateManager>();
             builder.Services.TryAddTransient<ITransformationExecutor, InProcessTransformationExecutor>();
 

@@ -55,62 +55,6 @@ namespace PnP.Core.Transformation.Services.Builder
         IPnPTransformationBuilder WithPageOptions(Action<PageTransformationOptions> options);
 
         /// <summary>
-        /// Sets a custom <see cref="IWebPartMappingProvider" /> to use for the default transformation
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <returns></returns>
-        IPnPTransformationBuilder WithWebPartMappingProvider<T>()
-            where T : class, IWebPartMappingProvider;
-
-        /// <summary>
-        /// Sets a custom <see cref="IPageLayoutMappingProvider" /> to use for the default transformation
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <returns></returns>
-        IPnPTransformationBuilder WithPageLayoutMappingProvider<T>()
-            where T : class, IPageLayoutMappingProvider;
-
-        /// <summary>
-        /// Sets a custom <see cref="ITaxonomyMappingProvider" /> to use for the default transformation
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <returns></returns>
-        IPnPTransformationBuilder WithTaxonomyMappingProvider<T>()
-            where T : class, ITaxonomyMappingProvider;
-
-        /// <summary>
-        /// Sets a custom <see cref="IMetadataMappingProvider" /> to use for the default transformation
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <returns></returns>
-        IPnPTransformationBuilder WithMetadataMappingProvider<T>()
-            where T : class, IMetadataMappingProvider;
-
-        /// <summary>
-        /// Sets a custom <see cref="IUrlMappingProvider" /> to use for the default transformation
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <returns></returns>
-        IPnPTransformationBuilder WithUrlMappingProvider<T>()
-            where T : class, IUrlMappingProvider;
-
-        /// <summary>
-        /// Sets a custom <see cref="IHtmlMappingProvider" /> to use for the default transformation
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <returns></returns>
-        IPnPTransformationBuilder WithHtmlMappingProvider<T>()
-            where T : class, IHtmlMappingProvider;
-
-        /// <summary>
-        /// Sets a custom <see cref="IUserMappingProvider" /> to use for the default transformation
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <returns></returns>
-        IPnPTransformationBuilder WithUserMappingProvider<T>()
-            where T : class, IUserMappingProvider;
-
-        /// <summary>
         /// Sets a custom <see cref="IMappingProvider" /> to use for all transformations
         /// </summary>
         /// <typeparam name="T"></typeparam>
@@ -133,5 +77,13 @@ namespace PnP.Core.Transformation.Services.Builder
         /// <returns></returns>
         IPnPTransformationBuilder AddPagePostTransformation<T>()
             where T : class, IPagePostTransformation;
+
+        /// <summary>
+        /// Sets the <see cref="ISourceProvider"/> to use in order to get the source items
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
+        IPnPTransformationBuilder WithSourceProvider<T>()
+            where T : class, ISourceProvider;
     }
 }

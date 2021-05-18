@@ -13,17 +13,10 @@ namespace PnP.Core.Transformation.Services.Core
         /// Creates an instance
         /// </summary>
         /// <param name="task"></param>
-        /// <param name="options"></param>
-        public PageTransformationContext(PageTransformationTask task, PageTransformationOptions options)
+        public PageTransformationContext(PageTransformationTask task)
         {
-            Options = options ?? throw new ArgumentNullException(nameof(options));
             Task = task ?? throw new ArgumentNullException(nameof(task));
         }
-
-        /// <summary>
-        /// Gets the options used for the transformation
-        /// </summary>
-        public PageTransformationOptions Options { get; }
 
         /// <summary>
         /// Gets the task of the current transformation
