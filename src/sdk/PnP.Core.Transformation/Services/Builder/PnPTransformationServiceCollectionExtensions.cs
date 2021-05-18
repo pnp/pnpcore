@@ -8,28 +8,28 @@ using PnP.Core.Transformation.Services.Core;
 namespace Microsoft.Extensions.DependencyInjection
 {
     /// <summary>
-    /// Extension methods for setting up PnP Modernization services in an <see cref="IServiceCollection" />.
+    /// Extension methods for setting up PnP Transformation services in an <see cref="IServiceCollection" />.
     /// </summary>
-    public static class PnPModernizationServiceCollectionExtensions
+    public static class PnPTransformationServiceCollectionExtensions
     {
         /// <summary>
-        /// Configures PnP Modernization with default options
+        /// Configures PnP Transformation with default options
         /// </summary>
         /// <param name="services">The collection of services in an <see cref="IServiceCollection" /></param>
-        /// <returns>A PnPModernizationBuilder instance</returns>
-        public static IPnPModernizationBuilder AddPnPModernization(this IServiceCollection services)
+        /// <returns>A PnPTransformationBuilder instance</returns>
+        public static IPnPTransformationBuilder AddPnPTransformation(this IServiceCollection services)
         {
-            return AddPnPModernization(services, null);
+            return AddPnPTransformation(services, null);
         }
 
         /// <summary>
-        /// Configures PnP Modernization with custom options
+        /// Configures PnP Transformation with custom options
         /// </summary>
         /// <param name="services">The collection of services in an <see cref="IServiceCollection" /></param>
-        /// <param name="options">An Action to configure the PnP Modernization options</param>
-        /// <returns>A PnPModernizationBuilder instance</returns>
-        public static IPnPModernizationBuilder AddPnPModernization(this IServiceCollection services,
-            Action<PnPModernizationOptions> options)
+        /// <param name="options">An Action to configure the PnP Transformation options</param>
+        /// <returns>A PnPTransformationBuilder instance</returns>
+        public static IPnPTransformationBuilder AddPnPTransformation(this IServiceCollection services,
+            Action<PnPTransformationOptions> options)
         {
             if (services == null)
             {
@@ -41,7 +41,7 @@ namespace Microsoft.Extensions.DependencyInjection
                 services.Configure(options);
             }
 
-            var builder = new PnPModernizationBuilder(services);
+            var builder = new PnPTransformationBuilder(services);
             // Set default implementations
             builder.AddDefaults();
 
@@ -49,11 +49,11 @@ namespace Microsoft.Extensions.DependencyInjection
         }
 
         /// <summary>
-        /// Adds default implementations provided by the modernization framework
+        /// Adds default implementations provided by the transformation framework
         /// </summary>
         /// <param name="builder"></param>
         /// <returns></returns>
-        public static IPnPModernizationBuilder AddDefaults(this IPnPModernizationBuilder builder)
+        public static IPnPTransformationBuilder AddDefaults(this IPnPTransformationBuilder builder)
         {
             if (builder == null) throw new ArgumentNullException(nameof(builder));
 

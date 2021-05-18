@@ -69,7 +69,7 @@ Bert's feedback:
 - HTML Content Mapping Provider
 - Custom mapping provider pre/post-transformation with order
 - Don't assume that the source is always Microsoft SharePoint
-- PnP.Core.Modernization => PnP.Core.Transformation
+* PnP.Core.Modernization => PnP.Core.Transformation
 - Add another level of abstraction for generic data sources
 - We cannot use PnPContext for SourceContext, we need to support on-prem and other sources
 - Internal multiple transformators, outside just one

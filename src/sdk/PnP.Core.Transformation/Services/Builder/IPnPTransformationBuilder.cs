@@ -6,9 +6,9 @@ using PnP.Core.Transformation.Services.MappingProviders;
 namespace PnP.Core.Transformation.Services.Builder
 {
     /// <summary>
-    /// Used to configure PnP Core Modernization
+    /// Used to configure PnP Core Transformation
     /// </summary>
-    public interface IPnPModernizationBuilder
+    public interface IPnPTransformationBuilder
     {
         /// <summary>
         /// Collection of services for Dependecy Injection
@@ -20,7 +20,7 @@ namespace PnP.Core.Transformation.Services.Builder
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
-        IPnPModernizationBuilder WithTransformationStateManager<T>()
+        IPnPTransformationBuilder WithTransformationStateManager<T>()
             where T : class, ITransformationStateManager;
 
         /// <summary>
@@ -28,7 +28,7 @@ namespace PnP.Core.Transformation.Services.Builder
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
-        IPnPModernizationBuilder WithTransformationDistiller<T>()
+        IPnPTransformationBuilder WithTransformationDistiller<T>()
             where T : class, ITransformationDistiller;
 
         /// <summary>
@@ -36,7 +36,7 @@ namespace PnP.Core.Transformation.Services.Builder
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
-        IPnPModernizationBuilder WithPageTransformator<T>()
+        IPnPTransformationBuilder WithPageTransformator<T>()
             where T : class, IPageTransformator;
 
         /// <summary>
@@ -44,7 +44,7 @@ namespace PnP.Core.Transformation.Services.Builder
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
-        IPnPModernizationBuilder WithTransformationExecutor<T>()
+        IPnPTransformationBuilder WithTransformationExecutor<T>()
             where T : class, ITransformationExecutor;
 
         /// <summary>
@@ -52,14 +52,14 @@ namespace PnP.Core.Transformation.Services.Builder
         /// </summary>
         /// <param name="options"></param>
         /// <returns></returns>
-        IPnPModernizationBuilder WithPageOptions(Action<PageTransformationOptions> options);
+        IPnPTransformationBuilder WithPageOptions(Action<PageTransformationOptions> options);
 
         /// <summary>
         /// Set a custom <see cref="IWebPartMappingProvider" /> to use for the default transformation
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
-        IPnPModernizationBuilder WithWebPartMappingProvider<T>()
+        IPnPTransformationBuilder WithWebPartMappingProvider<T>()
             where T : class, IWebPartMappingProvider;
 
         /// <summary>
@@ -67,7 +67,7 @@ namespace PnP.Core.Transformation.Services.Builder
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
-        IPnPModernizationBuilder WithPageLayoutMappingProvider<T>()
+        IPnPTransformationBuilder WithPageLayoutMappingProvider<T>()
             where T : class, IPageLayoutMappingProvider;
 
         /// <summary>
@@ -75,7 +75,7 @@ namespace PnP.Core.Transformation.Services.Builder
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
-        IPnPModernizationBuilder WithTaxonomyMappingProvider<T>()
+        IPnPTransformationBuilder WithTaxonomyMappingProvider<T>()
             where T : class, ITaxonomyMappingProvider;
 
         /// <summary>
@@ -83,7 +83,7 @@ namespace PnP.Core.Transformation.Services.Builder
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
-        IPnPModernizationBuilder WithMetadataMappingProvider<T>()
+        IPnPTransformationBuilder WithMetadataMappingProvider<T>()
             where T : class, IMetadataMappingProvider;
 
         /// <summary>
@@ -91,7 +91,7 @@ namespace PnP.Core.Transformation.Services.Builder
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
-        IPnPModernizationBuilder WithUrlMappingProvider<T>()
+        IPnPTransformationBuilder WithUrlMappingProvider<T>()
             where T : class, IUrlMappingProvider;
 
         /// <summary>
@@ -99,7 +99,7 @@ namespace PnP.Core.Transformation.Services.Builder
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
-        IPnPModernizationBuilder WithUserMappingProvider<T>()
+        IPnPTransformationBuilder WithUserMappingProvider<T>()
             where T : class, IUserMappingProvider;
     }
 }

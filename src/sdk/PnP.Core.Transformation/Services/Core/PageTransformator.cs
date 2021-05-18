@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace PnP.Core.Transformation.Services.Core
 {
     /// <summary>
-    /// Implements the concret PageTransformator (this is the core of PnP Modernization Framework)
+    /// Implements the concret PageTransformator (this is the core of PnP Transformation Framework)
     /// </summary>
     public class PageTransformator : IPageTransformator
     {

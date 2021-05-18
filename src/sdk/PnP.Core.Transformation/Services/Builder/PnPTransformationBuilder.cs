@@ -7,15 +7,15 @@ using PnP.Core.Transformation.Services.MappingProviders;
 namespace PnP.Core.Transformation.Services.Builder
 {
     /// <summary>
-    /// Used to configure PnP Core Modernization
+    /// Used to configure PnP Core Transformation
     /// </summary>
-    public class PnPModernizationBuilder : IPnPModernizationBuilder
+    public class PnPTransformationBuilder : IPnPTransformationBuilder
     {
         /// <summary>
         /// Constructor
         /// </summary>
         /// <param name="services">The services being configured.</param>
-        public PnPModernizationBuilder(IServiceCollection services) => Services = services;
+        public PnPTransformationBuilder(IServiceCollection services) => Services = services;
 
         /// <summary>
         /// The services being configured
@@ -27,7 +27,7 @@ namespace PnP.Core.Transformation.Services.Builder
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
-        public IPnPModernizationBuilder WithTransformationStateManager<T>()
+        public IPnPTransformationBuilder WithTransformationStateManager<T>()
             where T : class, ITransformationStateManager
         {
             Services.RemoveAll<ITransformationStateManager>();
@@ -40,7 +40,7 @@ namespace PnP.Core.Transformation.Services.Builder
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
-        public IPnPModernizationBuilder WithTransformationDistiller<T>()
+        public IPnPTransformationBuilder WithTransformationDistiller<T>()
             where T : class, ITransformationDistiller
         {
             Services.RemoveAll<ITransformationDistiller>();
@@ -53,7 +53,7 @@ namespace PnP.Core.Transformation.Services.Builder
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
-        public IPnPModernizationBuilder WithPageTransformator<T>()
+        public IPnPTransformationBuilder WithPageTransformator<T>()
             where T : class, IPageTransformator
         {
             Services.RemoveAll<IPageTransformator>();
@@ -66,7 +66,7 @@ namespace PnP.Core.Transformation.Services.Builder
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
-        public IPnPModernizationBuilder WithTransformationExecutor<T>()
+        public IPnPTransformationBuilder WithTransformationExecutor<T>()
             where T : class, ITransformationExecutor
         {
             Services.RemoveAll<ITransformationExecutor>();
@@ -79,7 +79,7 @@ namespace PnP.Core.Transformation.Services.Builder
         /// </summary>
         /// <param name="options"></param>
         /// <returns></returns>
-        public IPnPModernizationBuilder WithPageOptions(Action<PageTransformationOptions> options)
+        public IPnPTransformationBuilder WithPageOptions(Action<PageTransformationOptions> options)
         {
             Services.Configure(options);
             return this;
@@ -90,7 +90,7 @@ namespace PnP.Core.Transformation.Services.Builder
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
-        public IPnPModernizationBuilder WithWebPartMappingProvider<T>()
+        public IPnPTransformationBuilder WithWebPartMappingProvider<T>()
             where T : class, IWebPartMappingProvider
         {
             return WithProvider<T>((o, t) => o.WebPartMappingProvider = t);
@@ -101,7 +101,7 @@ namespace PnP.Core.Transformation.Services.Builder
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
-        public IPnPModernizationBuilder WithPageLayoutMappingProvider<T>() where T : class, IPageLayoutMappingProvider
+        public IPnPTransformationBuilder WithPageLayoutMappingProvider<T>() where T : class, IPageLayoutMappingProvider
         {
             return WithProvider<T>((o, t) => o.PageLayoutMappingProvider = t);
         }
@@ -111,7 +111,7 @@ namespace PnP.Core.Transformation.Services.Builder
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
-        public IPnPModernizationBuilder WithTaxonomyMappingProvider<T>()
+        public IPnPTransformationBuilder WithTaxonomyMappingProvider<T>()
             where T : class, ITaxonomyMappingProvider
         {
             return WithProvider<T>((o, t) => o.TaxonomyMappingProvider = t);
@@ -122,7 +122,7 @@ namespace PnP.Core.Transformation.Services.Builder
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
-        public IPnPModernizationBuilder WithMetadataMappingProvider<T>()
+        public IPnPTransformationBuilder WithMetadataMappingProvider<T>()
             where T : class, IMetadataMappingProvider
         {
             return WithProvider<T>((o, t) => o.MetadataMappingProvider = t);
@@ -133,7 +133,7 @@ namespace PnP.Core.Transformation.Services.Builder
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
-        public IPnPModernizationBuilder WithUrlMappingProvider<T>()
+        public IPnPTransformationBuilder WithUrlMappingProvider<T>()
             where T : class, IUrlMappingProvider
         {
             return WithProvider<T>((o, t) => o.UrlMappingProvider = t);
@@ -144,13 +144,13 @@ namespace PnP.Core.Transformation.Services.Builder
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
-        public IPnPModernizationBuilder WithUserMappingProvider<T>()
+        public IPnPTransformationBuilder WithUserMappingProvider<T>()
             where T : class, IUserMappingProvider
         {
             return WithProvider<T>((o, t) => o.UserMappingProvider = t);
         }
 
-        private IPnPModernizationBuilder WithProvider<T>(Action<PageTransformationOptions, T> setAction)
+        private IPnPTransformationBuilder WithProvider<T>(Action<PageTransformationOptions, T> setAction)
             where T : class
         {
             Services.RemoveAll<T>();

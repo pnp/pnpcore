@@ -19,7 +19,7 @@ namespace PnP.Core.Transformation.Test
         public void DefaultServices()
         {
             var services = new ServiceCollection();
-            services.AddPnPModernization();
+            services.AddPnPTransformation();
 
             var provider = services.BuildServiceProvider();
 
@@ -33,7 +33,7 @@ namespace PnP.Core.Transformation.Test
         public void CustomServices()
         {
             var services = new ServiceCollection();
-            services.AddPnPModernization(o => o.DisableTelemetry = true)
+            services.AddPnPTransformation(o => o.DisableTelemetry = true)
                 .WithPageOptions(o => o.DisablePageComments = true)
 
                 .WithMetadataMappingProvider<Mock>()
@@ -50,7 +50,7 @@ namespace PnP.Core.Transformation.Test
 
             var provider = services.BuildServiceProvider();
 
-            var pnpModernizationOptions = provider.GetRequiredService<IOptions<PnPModernizationOptions>>().Value;
+            var pnpModernizationOptions = provider.GetRequiredService<IOptions<PnPTransformationOptions>>().Value;
             Assert.IsTrue(pnpModernizationOptions.DisableTelemetry);
 
             var transformationOptions = provider.GetRequiredService<IOptions<PageTransformationOptions>>().Value;
