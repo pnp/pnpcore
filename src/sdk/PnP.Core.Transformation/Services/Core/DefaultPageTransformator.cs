@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using PnP.Core.Transformation.Services.MappingProviders;
 
 namespace PnP.Core.Transformation.Services.Core
 {
@@ -11,15 +12,18 @@ namespace PnP.Core.Transformation.Services.Core
     /// </summary>
     public class DefaultPageTransformator : IPageTransformator
     {
-        private readonly ILogger<DefaultPageTransformator> _logger;
+        private readonly ILogger<DefaultPageTransformator> logger;
+        private readonly IMappingProvider mappingProvider;
 
         /// <summary>
         /// Constructor with DI support
         /// </summary>
         /// <param name="logger">The logger interface</param>
-        public DefaultPageTransformator(ILogger<DefaultPageTransformator> logger)
+        /// <param name="mappingProvider">The mapping provider interface</param>
+        public DefaultPageTransformator(ILogger<DefaultPageTransformator> logger, IMappingProvider mappingProvider)
         {
-            this._logger = logger ?? throw new ArgumentNullException(nameof(logger));
+            this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
+            this.mappingProvider = mappingProvider ?? throw new ArgumentNullException(nameof(mappingProvider));
         }
 
         /// <summary>
@@ -30,7 +34,14 @@ namespace PnP.Core.Transformation.Services.Core
         /// <returns>The URL of the transformed page</returns>
         public async Task<Uri> TransformAsync(PageTransformationTask task, Action<PageTransformationOptions> options = null)
         {
-            this._logger.LogInformation("TransformAsync");
+            this.logger.LogInformation("TransformAsync");
+
+            //var context = new PageTransformationContext(task, options);
+            var input = new MappingProviderInput
+            {
+
+            };
+            await this.mappingProvider.MapAsync(input).ConfigureAwait(false);
 
             return default(Uri);
         }

@@ -3,7 +3,6 @@ using PnP.Core.Transformation.Services.Builder;
 using PnP.Core.Transformation.Services.Builder.Configuration;
 using System;
 using Microsoft.Extensions.DependencyInjection.Extensions;
-using PnP.Core.Modernization.Services.MappingProviders;
 using PnP.Core.Transformation.Services.Core;
 using PnP.Core.Transformation.Services.MappingProviders;
 

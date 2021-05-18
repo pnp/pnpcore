@@ -12,9 +12,9 @@ namespace PnP.Core.Transformation.Services.Core
         /// <summary>
         /// Creates an instance
         /// </summary>
-        /// <param name="options"></param>
         /// <param name="task"></param>
-        public PagePostTransformationContext(PageTransformationOptions options, PageTransformationTask task) : base(options, task)
+        /// <param name="options"></param>
+        public PagePostTransformationContext(PageTransformationTask task, PageTransformationOptions options) : base(task, options)
         {
         }
     }
