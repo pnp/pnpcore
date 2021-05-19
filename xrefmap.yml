@@ -5297,6 +5297,42 @@ references:
   commentId: F:PnP.Core.Model.SharePoint.ChoiceFormatType.RadioButtons
   fullName: PnP.Core.Model.SharePoint.ChoiceFormatType.RadioButtons
   nameWithType: ChoiceFormatType.RadioButtons
+- uid: PnP.Core.Model.SharePoint.CommentsDisabledScope
+  name: CommentsDisabledScope
+  href: api/PnP.Core.Model.SharePoint.CommentsDisabledScope.html
+  commentId: T:PnP.Core.Model.SharePoint.CommentsDisabledScope
+  fullName: PnP.Core.Model.SharePoint.CommentsDisabledScope
+  nameWithType: CommentsDisabledScope
+- uid: PnP.Core.Model.SharePoint.CommentsDisabledScope.Item
+  name: Item
+  href: api/PnP.Core.Model.SharePoint.CommentsDisabledScope.html#PnP_Core_Model_SharePoint_CommentsDisabledScope_Item
+  commentId: F:PnP.Core.Model.SharePoint.CommentsDisabledScope.Item
+  fullName: PnP.Core.Model.SharePoint.CommentsDisabledScope.Item
+  nameWithType: CommentsDisabledScope.Item
+- uid: PnP.Core.Model.SharePoint.CommentsDisabledScope.None
+  name: None
+  href: api/PnP.Core.Model.SharePoint.CommentsDisabledScope.html#PnP_Core_Model_SharePoint_CommentsDisabledScope_None
+  commentId: F:PnP.Core.Model.SharePoint.CommentsDisabledScope.None
+  fullName: PnP.Core.Model.SharePoint.CommentsDisabledScope.None
+  nameWithType: CommentsDisabledScope.None
+- uid: PnP.Core.Model.SharePoint.CommentsDisabledScope.Site
+  name: Site
+  href: api/PnP.Core.Model.SharePoint.CommentsDisabledScope.html#PnP_Core_Model_SharePoint_CommentsDisabledScope_Site
+  commentId: F:PnP.Core.Model.SharePoint.CommentsDisabledScope.Site
+  fullName: PnP.Core.Model.SharePoint.CommentsDisabledScope.Site
+  nameWithType: CommentsDisabledScope.Site
+- uid: PnP.Core.Model.SharePoint.CommentsDisabledScope.Tenant
+  name: Tenant
+  href: api/PnP.Core.Model.SharePoint.CommentsDisabledScope.html#PnP_Core_Model_SharePoint_CommentsDisabledScope_Tenant
+  commentId: F:PnP.Core.Model.SharePoint.CommentsDisabledScope.Tenant
+  fullName: PnP.Core.Model.SharePoint.CommentsDisabledScope.Tenant
+  nameWithType: CommentsDisabledScope.Tenant
+- uid: PnP.Core.Model.SharePoint.CommentsDisabledScope.Web
+  name: Web
+  href: api/PnP.Core.Model.SharePoint.CommentsDisabledScope.html#PnP_Core_Model_SharePoint_CommentsDisabledScope_Web
+  commentId: F:PnP.Core.Model.SharePoint.CommentsDisabledScope.Web
+  fullName: PnP.Core.Model.SharePoint.CommentsDisabledScope.Web
+  nameWithType: CommentsDisabledScope.Web
 - uid: PnP.Core.Model.SharePoint.CommonFieldOptions
   name: CommonFieldOptions
   href: api/PnP.Core.Model.SharePoint.CommonFieldOptions.html
@@ -10903,6 +10939,12 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IFieldLookupValue.LookupValue
   nameWithType: IFieldLookupValue.LookupValue
+- uid: PnP.Core.Model.SharePoint.IFieldStringValues
+  name: IFieldStringValues
+  href: api/PnP.Core.Model.SharePoint.IFieldStringValues.html
+  commentId: T:PnP.Core.Model.SharePoint.IFieldStringValues
+  fullName: PnP.Core.Model.SharePoint.IFieldStringValues
+  nameWithType: IFieldStringValues
 - uid: PnP.Core.Model.SharePoint.IFieldTaxonomyValue
   name: IFieldTaxonomyValue
   href: api/PnP.Core.Model.SharePoint.IFieldTaxonomyValue.html
@@ -14260,18 +14302,24 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IList.ListItemEntityTypeFullName
   nameWithType: IList.ListItemEntityTypeFullName
-- uid: PnP.Core.Model.SharePoint.IList.LoadItemsByCamlQuery(PnP.Core.Model.SharePoint.CamlQueryOptions)
-  name: LoadItemsByCamlQuery(CamlQueryOptions)
-  href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_LoadItemsByCamlQuery_PnP_Core_Model_SharePoint_CamlQueryOptions_
-  commentId: M:PnP.Core.Model.SharePoint.IList.LoadItemsByCamlQuery(PnP.Core.Model.SharePoint.CamlQueryOptions)
-  fullName: PnP.Core.Model.SharePoint.IList.LoadItemsByCamlQuery(PnP.Core.Model.SharePoint.CamlQueryOptions)
-  nameWithType: IList.LoadItemsByCamlQuery(CamlQueryOptions)
-- uid: PnP.Core.Model.SharePoint.IList.LoadItemsByCamlQuery(System.String)
-  name: LoadItemsByCamlQuery(String)
-  href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_LoadItemsByCamlQuery_System_String_
-  commentId: M:PnP.Core.Model.SharePoint.IList.LoadItemsByCamlQuery(System.String)
-  fullName: PnP.Core.Model.SharePoint.IList.LoadItemsByCamlQuery(System.String)
-  nameWithType: IList.LoadItemsByCamlQuery(String)
+- uid: PnP.Core.Model.SharePoint.IList.LoadItemsByCamlQuery(PnP.Core.Model.SharePoint.CamlQueryOptions,Expression{Func{PnP.Core.Model.SharePoint.IListItem,System.Object}}[])
+  name: LoadItemsByCamlQuery(CamlQueryOptions, Expression<Func<IListItem, Object>>[])
+  href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_LoadItemsByCamlQuery_PnP_Core_Model_SharePoint_CamlQueryOptions_Expression_Func_PnP_Core_Model_SharePoint_IListItem_System_Object_____
+  commentId: M:PnP.Core.Model.SharePoint.IList.LoadItemsByCamlQuery(PnP.Core.Model.SharePoint.CamlQueryOptions,Expression{Func{PnP.Core.Model.SharePoint.IListItem,System.Object}}[])
+  name.vb: LoadItemsByCamlQuery(CamlQueryOptions, Expression(Of Func(Of IListItem, Object))())
+  fullName: PnP.Core.Model.SharePoint.IList.LoadItemsByCamlQuery(PnP.Core.Model.SharePoint.CamlQueryOptions, Expression<Func<PnP.Core.Model.SharePoint.IListItem, System.Object>>[])
+  fullName.vb: PnP.Core.Model.SharePoint.IList.LoadItemsByCamlQuery(PnP.Core.Model.SharePoint.CamlQueryOptions, Expression(Of Func(Of PnP.Core.Model.SharePoint.IListItem, System.Object))())
+  nameWithType: IList.LoadItemsByCamlQuery(CamlQueryOptions, Expression<Func<IListItem, Object>>[])
+  nameWithType.vb: IList.LoadItemsByCamlQuery(CamlQueryOptions, Expression(Of Func(Of IListItem, Object))())
+- uid: PnP.Core.Model.SharePoint.IList.LoadItemsByCamlQuery(System.String,Expression{Func{PnP.Core.Model.SharePoint.IListItem,System.Object}}[])
+  name: LoadItemsByCamlQuery(String, Expression<Func<IListItem, Object>>[])
+  href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_LoadItemsByCamlQuery_System_String_Expression_Func_PnP_Core_Model_SharePoint_IListItem_System_Object_____
+  commentId: M:PnP.Core.Model.SharePoint.IList.LoadItemsByCamlQuery(System.String,Expression{Func{PnP.Core.Model.SharePoint.IListItem,System.Object}}[])
+  name.vb: LoadItemsByCamlQuery(String, Expression(Of Func(Of IListItem, Object))())
+  fullName: PnP.Core.Model.SharePoint.IList.LoadItemsByCamlQuery(System.String, Expression<Func<PnP.Core.Model.SharePoint.IListItem, System.Object>>[])
+  fullName.vb: PnP.Core.Model.SharePoint.IList.LoadItemsByCamlQuery(System.String, Expression(Of Func(Of PnP.Core.Model.SharePoint.IListItem, System.Object))())
+  nameWithType: IList.LoadItemsByCamlQuery(String, Expression<Func<IListItem, Object>>[])
+  nameWithType.vb: IList.LoadItemsByCamlQuery(String, Expression(Of Func(Of IListItem, Object))())
 - uid: PnP.Core.Model.SharePoint.IList.LoadItemsByCamlQuery*
   name: LoadItemsByCamlQuery
   href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_LoadItemsByCamlQuery_
@@ -14279,18 +14327,24 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IList.LoadItemsByCamlQuery
   nameWithType: IList.LoadItemsByCamlQuery
-- uid: PnP.Core.Model.SharePoint.IList.LoadItemsByCamlQueryAsync(PnP.Core.Model.SharePoint.CamlQueryOptions)
-  name: LoadItemsByCamlQueryAsync(CamlQueryOptions)
-  href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_LoadItemsByCamlQueryAsync_PnP_Core_Model_SharePoint_CamlQueryOptions_
-  commentId: M:PnP.Core.Model.SharePoint.IList.LoadItemsByCamlQueryAsync(PnP.Core.Model.SharePoint.CamlQueryOptions)
-  fullName: PnP.Core.Model.SharePoint.IList.LoadItemsByCamlQueryAsync(PnP.Core.Model.SharePoint.CamlQueryOptions)
-  nameWithType: IList.LoadItemsByCamlQueryAsync(CamlQueryOptions)
-- uid: PnP.Core.Model.SharePoint.IList.LoadItemsByCamlQueryAsync(System.String)
-  name: LoadItemsByCamlQueryAsync(String)
-  href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_LoadItemsByCamlQueryAsync_System_String_
-  commentId: M:PnP.Core.Model.SharePoint.IList.LoadItemsByCamlQueryAsync(System.String)
-  fullName: PnP.Core.Model.SharePoint.IList.LoadItemsByCamlQueryAsync(System.String)
-  nameWithType: IList.LoadItemsByCamlQueryAsync(String)
+- uid: PnP.Core.Model.SharePoint.IList.LoadItemsByCamlQueryAsync(PnP.Core.Model.SharePoint.CamlQueryOptions,Expression{Func{PnP.Core.Model.SharePoint.IListItem,System.Object}}[])
+  name: LoadItemsByCamlQueryAsync(CamlQueryOptions, Expression<Func<IListItem, Object>>[])
+  href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_LoadItemsByCamlQueryAsync_PnP_Core_Model_SharePoint_CamlQueryOptions_Expression_Func_PnP_Core_Model_SharePoint_IListItem_System_Object_____
+  commentId: M:PnP.Core.Model.SharePoint.IList.LoadItemsByCamlQueryAsync(PnP.Core.Model.SharePoint.CamlQueryOptions,Expression{Func{PnP.Core.Model.SharePoint.IListItem,System.Object}}[])
+  name.vb: LoadItemsByCamlQueryAsync(CamlQueryOptions, Expression(Of Func(Of IListItem, Object))())
+  fullName: PnP.Core.Model.SharePoint.IList.LoadItemsByCamlQueryAsync(PnP.Core.Model.SharePoint.CamlQueryOptions, Expression<Func<PnP.Core.Model.SharePoint.IListItem, System.Object>>[])
+  fullName.vb: PnP.Core.Model.SharePoint.IList.LoadItemsByCamlQueryAsync(PnP.Core.Model.SharePoint.CamlQueryOptions, Expression(Of Func(Of PnP.Core.Model.SharePoint.IListItem, System.Object))())
+  nameWithType: IList.LoadItemsByCamlQueryAsync(CamlQueryOptions, Expression<Func<IListItem, Object>>[])
+  nameWithType.vb: IList.LoadItemsByCamlQueryAsync(CamlQueryOptions, Expression(Of Func(Of IListItem, Object))())
+- uid: PnP.Core.Model.SharePoint.IList.LoadItemsByCamlQueryAsync(System.String,Expression{Func{PnP.Core.Model.SharePoint.IListItem,System.Object}}[])
+  name: LoadItemsByCamlQueryAsync(String, Expression<Func<IListItem, Object>>[])
+  href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_LoadItemsByCamlQueryAsync_System_String_Expression_Func_PnP_Core_Model_SharePoint_IListItem_System_Object_____
+  commentId: M:PnP.Core.Model.SharePoint.IList.LoadItemsByCamlQueryAsync(System.String,Expression{Func{PnP.Core.Model.SharePoint.IListItem,System.Object}}[])
+  name.vb: LoadItemsByCamlQueryAsync(String, Expression(Of Func(Of IListItem, Object))())
+  fullName: PnP.Core.Model.SharePoint.IList.LoadItemsByCamlQueryAsync(System.String, Expression<Func<PnP.Core.Model.SharePoint.IListItem, System.Object>>[])
+  fullName.vb: PnP.Core.Model.SharePoint.IList.LoadItemsByCamlQueryAsync(System.String, Expression(Of Func(Of PnP.Core.Model.SharePoint.IListItem, System.Object))())
+  nameWithType: IList.LoadItemsByCamlQueryAsync(String, Expression<Func<IListItem, Object>>[])
+  nameWithType.vb: IList.LoadItemsByCamlQueryAsync(String, Expression(Of Func(Of IListItem, Object))())
 - uid: PnP.Core.Model.SharePoint.IList.LoadItemsByCamlQueryAsync*
   name: LoadItemsByCamlQueryAsync
   href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_LoadItemsByCamlQueryAsync_
@@ -14298,30 +14352,42 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IList.LoadItemsByCamlQueryAsync
   nameWithType: IList.LoadItemsByCamlQueryAsync
-- uid: PnP.Core.Model.SharePoint.IList.LoadItemsByCamlQueryBatch(PnP.Core.Model.SharePoint.CamlQueryOptions)
-  name: LoadItemsByCamlQueryBatch(CamlQueryOptions)
-  href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_LoadItemsByCamlQueryBatch_PnP_Core_Model_SharePoint_CamlQueryOptions_
-  commentId: M:PnP.Core.Model.SharePoint.IList.LoadItemsByCamlQueryBatch(PnP.Core.Model.SharePoint.CamlQueryOptions)
-  fullName: PnP.Core.Model.SharePoint.IList.LoadItemsByCamlQueryBatch(PnP.Core.Model.SharePoint.CamlQueryOptions)
-  nameWithType: IList.LoadItemsByCamlQueryBatch(CamlQueryOptions)
-- uid: PnP.Core.Model.SharePoint.IList.LoadItemsByCamlQueryBatch(PnP.Core.Services.Batch,PnP.Core.Model.SharePoint.CamlQueryOptions)
-  name: LoadItemsByCamlQueryBatch(Batch, CamlQueryOptions)
-  href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_LoadItemsByCamlQueryBatch_PnP_Core_Services_Batch_PnP_Core_Model_SharePoint_CamlQueryOptions_
-  commentId: M:PnP.Core.Model.SharePoint.IList.LoadItemsByCamlQueryBatch(PnP.Core.Services.Batch,PnP.Core.Model.SharePoint.CamlQueryOptions)
-  fullName: PnP.Core.Model.SharePoint.IList.LoadItemsByCamlQueryBatch(PnP.Core.Services.Batch, PnP.Core.Model.SharePoint.CamlQueryOptions)
-  nameWithType: IList.LoadItemsByCamlQueryBatch(Batch, CamlQueryOptions)
-- uid: PnP.Core.Model.SharePoint.IList.LoadItemsByCamlQueryBatch(PnP.Core.Services.Batch,System.String)
-  name: LoadItemsByCamlQueryBatch(Batch, String)
-  href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_LoadItemsByCamlQueryBatch_PnP_Core_Services_Batch_System_String_
-  commentId: M:PnP.Core.Model.SharePoint.IList.LoadItemsByCamlQueryBatch(PnP.Core.Services.Batch,System.String)
-  fullName: PnP.Core.Model.SharePoint.IList.LoadItemsByCamlQueryBatch(PnP.Core.Services.Batch, System.String)
-  nameWithType: IList.LoadItemsByCamlQueryBatch(Batch, String)
-- uid: PnP.Core.Model.SharePoint.IList.LoadItemsByCamlQueryBatch(System.String)
-  name: LoadItemsByCamlQueryBatch(String)
-  href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_LoadItemsByCamlQueryBatch_System_String_
-  commentId: M:PnP.Core.Model.SharePoint.IList.LoadItemsByCamlQueryBatch(System.String)
-  fullName: PnP.Core.Model.SharePoint.IList.LoadItemsByCamlQueryBatch(System.String)
-  nameWithType: IList.LoadItemsByCamlQueryBatch(String)
+- uid: PnP.Core.Model.SharePoint.IList.LoadItemsByCamlQueryBatch(PnP.Core.Model.SharePoint.CamlQueryOptions,Expression{Func{PnP.Core.Model.SharePoint.IListItem,System.Object}}[])
+  name: LoadItemsByCamlQueryBatch(CamlQueryOptions, Expression<Func<IListItem, Object>>[])
+  href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_LoadItemsByCamlQueryBatch_PnP_Core_Model_SharePoint_CamlQueryOptions_Expression_Func_PnP_Core_Model_SharePoint_IListItem_System_Object_____
+  commentId: M:PnP.Core.Model.SharePoint.IList.LoadItemsByCamlQueryBatch(PnP.Core.Model.SharePoint.CamlQueryOptions,Expression{Func{PnP.Core.Model.SharePoint.IListItem,System.Object}}[])
+  name.vb: LoadItemsByCamlQueryBatch(CamlQueryOptions, Expression(Of Func(Of IListItem, Object))())
+  fullName: PnP.Core.Model.SharePoint.IList.LoadItemsByCamlQueryBatch(PnP.Core.Model.SharePoint.CamlQueryOptions, Expression<Func<PnP.Core.Model.SharePoint.IListItem, System.Object>>[])
+  fullName.vb: PnP.Core.Model.SharePoint.IList.LoadItemsByCamlQueryBatch(PnP.Core.Model.SharePoint.CamlQueryOptions, Expression(Of Func(Of PnP.Core.Model.SharePoint.IListItem, System.Object))())
+  nameWithType: IList.LoadItemsByCamlQueryBatch(CamlQueryOptions, Expression<Func<IListItem, Object>>[])
+  nameWithType.vb: IList.LoadItemsByCamlQueryBatch(CamlQueryOptions, Expression(Of Func(Of IListItem, Object))())
+- uid: PnP.Core.Model.SharePoint.IList.LoadItemsByCamlQueryBatch(PnP.Core.Services.Batch,PnP.Core.Model.SharePoint.CamlQueryOptions,Expression{Func{PnP.Core.Model.SharePoint.IListItem,System.Object}}[])
+  name: LoadItemsByCamlQueryBatch(Batch, CamlQueryOptions, Expression<Func<IListItem, Object>>[])
+  href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_LoadItemsByCamlQueryBatch_PnP_Core_Services_Batch_PnP_Core_Model_SharePoint_CamlQueryOptions_Expression_Func_PnP_Core_Model_SharePoint_IListItem_System_Object_____
+  commentId: M:PnP.Core.Model.SharePoint.IList.LoadItemsByCamlQueryBatch(PnP.Core.Services.Batch,PnP.Core.Model.SharePoint.CamlQueryOptions,Expression{Func{PnP.Core.Model.SharePoint.IListItem,System.Object}}[])
+  name.vb: LoadItemsByCamlQueryBatch(Batch, CamlQueryOptions, Expression(Of Func(Of IListItem, Object))())
+  fullName: PnP.Core.Model.SharePoint.IList.LoadItemsByCamlQueryBatch(PnP.Core.Services.Batch, PnP.Core.Model.SharePoint.CamlQueryOptions, Expression<Func<PnP.Core.Model.SharePoint.IListItem, System.Object>>[])
+  fullName.vb: PnP.Core.Model.SharePoint.IList.LoadItemsByCamlQueryBatch(PnP.Core.Services.Batch, PnP.Core.Model.SharePoint.CamlQueryOptions, Expression(Of Func(Of PnP.Core.Model.SharePoint.IListItem, System.Object))())
+  nameWithType: IList.LoadItemsByCamlQueryBatch(Batch, CamlQueryOptions, Expression<Func<IListItem, Object>>[])
+  nameWithType.vb: IList.LoadItemsByCamlQueryBatch(Batch, CamlQueryOptions, Expression(Of Func(Of IListItem, Object))())
+- uid: PnP.Core.Model.SharePoint.IList.LoadItemsByCamlQueryBatch(PnP.Core.Services.Batch,System.String,Expression{Func{PnP.Core.Model.SharePoint.IListItem,System.Object}}[])
+  name: LoadItemsByCamlQueryBatch(Batch, String, Expression<Func<IListItem, Object>>[])
+  href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_LoadItemsByCamlQueryBatch_PnP_Core_Services_Batch_System_String_Expression_Func_PnP_Core_Model_SharePoint_IListItem_System_Object_____
+  commentId: M:PnP.Core.Model.SharePoint.IList.LoadItemsByCamlQueryBatch(PnP.Core.Services.Batch,System.String,Expression{Func{PnP.Core.Model.SharePoint.IListItem,System.Object}}[])
+  name.vb: LoadItemsByCamlQueryBatch(Batch, String, Expression(Of Func(Of IListItem, Object))())
+  fullName: PnP.Core.Model.SharePoint.IList.LoadItemsByCamlQueryBatch(PnP.Core.Services.Batch, System.String, Expression<Func<PnP.Core.Model.SharePoint.IListItem, System.Object>>[])
+  fullName.vb: PnP.Core.Model.SharePoint.IList.LoadItemsByCamlQueryBatch(PnP.Core.Services.Batch, System.String, Expression(Of Func(Of PnP.Core.Model.SharePoint.IListItem, System.Object))())
+  nameWithType: IList.LoadItemsByCamlQueryBatch(Batch, String, Expression<Func<IListItem, Object>>[])
+  nameWithType.vb: IList.LoadItemsByCamlQueryBatch(Batch, String, Expression(Of Func(Of IListItem, Object))())
+- uid: PnP.Core.Model.SharePoint.IList.LoadItemsByCamlQueryBatch(System.String,Expression{Func{PnP.Core.Model.SharePoint.IListItem,System.Object}}[])
+  name: LoadItemsByCamlQueryBatch(String, Expression<Func<IListItem, Object>>[])
+  href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_LoadItemsByCamlQueryBatch_System_String_Expression_Func_PnP_Core_Model_SharePoint_IListItem_System_Object_____
+  commentId: M:PnP.Core.Model.SharePoint.IList.LoadItemsByCamlQueryBatch(System.String,Expression{Func{PnP.Core.Model.SharePoint.IListItem,System.Object}}[])
+  name.vb: LoadItemsByCamlQueryBatch(String, Expression(Of Func(Of IListItem, Object))())
+  fullName: PnP.Core.Model.SharePoint.IList.LoadItemsByCamlQueryBatch(System.String, Expression<Func<PnP.Core.Model.SharePoint.IListItem, System.Object>>[])
+  fullName.vb: PnP.Core.Model.SharePoint.IList.LoadItemsByCamlQueryBatch(System.String, Expression(Of Func(Of PnP.Core.Model.SharePoint.IListItem, System.Object))())
+  nameWithType: IList.LoadItemsByCamlQueryBatch(String, Expression<Func<IListItem, Object>>[])
+  nameWithType.vb: IList.LoadItemsByCamlQueryBatch(String, Expression(Of Func(Of IListItem, Object))())
 - uid: PnP.Core.Model.SharePoint.IList.LoadItemsByCamlQueryBatch*
   name: LoadItemsByCamlQueryBatch
   href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_LoadItemsByCamlQueryBatch_
@@ -14329,30 +14395,42 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IList.LoadItemsByCamlQueryBatch
   nameWithType: IList.LoadItemsByCamlQueryBatch
-- uid: PnP.Core.Model.SharePoint.IList.LoadItemsByCamlQueryBatchAsync(PnP.Core.Model.SharePoint.CamlQueryOptions)
-  name: LoadItemsByCamlQueryBatchAsync(CamlQueryOptions)
-  href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_LoadItemsByCamlQueryBatchAsync_PnP_Core_Model_SharePoint_CamlQueryOptions_
-  commentId: M:PnP.Core.Model.SharePoint.IList.LoadItemsByCamlQueryBatchAsync(PnP.Core.Model.SharePoint.CamlQueryOptions)
-  fullName: PnP.Core.Model.SharePoint.IList.LoadItemsByCamlQueryBatchAsync(PnP.Core.Model.SharePoint.CamlQueryOptions)
-  nameWithType: IList.LoadItemsByCamlQueryBatchAsync(CamlQueryOptions)
-- uid: PnP.Core.Model.SharePoint.IList.LoadItemsByCamlQueryBatchAsync(PnP.Core.Services.Batch,PnP.Core.Model.SharePoint.CamlQueryOptions)
-  name: LoadItemsByCamlQueryBatchAsync(Batch, CamlQueryOptions)
-  href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_LoadItemsByCamlQueryBatchAsync_PnP_Core_Services_Batch_PnP_Core_Model_SharePoint_CamlQueryOptions_
-  commentId: M:PnP.Core.Model.SharePoint.IList.LoadItemsByCamlQueryBatchAsync(PnP.Core.Services.Batch,PnP.Core.Model.SharePoint.CamlQueryOptions)
-  fullName: PnP.Core.Model.SharePoint.IList.LoadItemsByCamlQueryBatchAsync(PnP.Core.Services.Batch, PnP.Core.Model.SharePoint.CamlQueryOptions)
-  nameWithType: IList.LoadItemsByCamlQueryBatchAsync(Batch, CamlQueryOptions)
-- uid: PnP.Core.Model.SharePoint.IList.LoadItemsByCamlQueryBatchAsync(PnP.Core.Services.Batch,System.String)
-  name: LoadItemsByCamlQueryBatchAsync(Batch, String)
-  href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_LoadItemsByCamlQueryBatchAsync_PnP_Core_Services_Batch_System_String_
-  commentId: M:PnP.Core.Model.SharePoint.IList.LoadItemsByCamlQueryBatchAsync(PnP.Core.Services.Batch,System.String)
-  fullName: PnP.Core.Model.SharePoint.IList.LoadItemsByCamlQueryBatchAsync(PnP.Core.Services.Batch, System.String)
-  nameWithType: IList.LoadItemsByCamlQueryBatchAsync(Batch, String)
-- uid: PnP.Core.Model.SharePoint.IList.LoadItemsByCamlQueryBatchAsync(System.String)
-  name: LoadItemsByCamlQueryBatchAsync(String)
-  href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_LoadItemsByCamlQueryBatchAsync_System_String_
-  commentId: M:PnP.Core.Model.SharePoint.IList.LoadItemsByCamlQueryBatchAsync(System.String)
-  fullName: PnP.Core.Model.SharePoint.IList.LoadItemsByCamlQueryBatchAsync(System.String)
-  nameWithType: IList.LoadItemsByCamlQueryBatchAsync(String)
+- uid: PnP.Core.Model.SharePoint.IList.LoadItemsByCamlQueryBatchAsync(PnP.Core.Model.SharePoint.CamlQueryOptions,Expression{Func{PnP.Core.Model.SharePoint.IListItem,System.Object}}[])
+  name: LoadItemsByCamlQueryBatchAsync(CamlQueryOptions, Expression<Func<IListItem, Object>>[])
+  href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_LoadItemsByCamlQueryBatchAsync_PnP_Core_Model_SharePoint_CamlQueryOptions_Expression_Func_PnP_Core_Model_SharePoint_IListItem_System_Object_____
+  commentId: M:PnP.Core.Model.SharePoint.IList.LoadItemsByCamlQueryBatchAsync(PnP.Core.Model.SharePoint.CamlQueryOptions,Expression{Func{PnP.Core.Model.SharePoint.IListItem,System.Object}}[])
+  name.vb: LoadItemsByCamlQueryBatchAsync(CamlQueryOptions, Expression(Of Func(Of IListItem, Object))())
+  fullName: PnP.Core.Model.SharePoint.IList.LoadItemsByCamlQueryBatchAsync(PnP.Core.Model.SharePoint.CamlQueryOptions, Expression<Func<PnP.Core.Model.SharePoint.IListItem, System.Object>>[])
+  fullName.vb: PnP.Core.Model.SharePoint.IList.LoadItemsByCamlQueryBatchAsync(PnP.Core.Model.SharePoint.CamlQueryOptions, Expression(Of Func(Of PnP.Core.Model.SharePoint.IListItem, System.Object))())
+  nameWithType: IList.LoadItemsByCamlQueryBatchAsync(CamlQueryOptions, Expression<Func<IListItem, Object>>[])
+  nameWithType.vb: IList.LoadItemsByCamlQueryBatchAsync(CamlQueryOptions, Expression(Of Func(Of IListItem, Object))())
+- uid: PnP.Core.Model.SharePoint.IList.LoadItemsByCamlQueryBatchAsync(PnP.Core.Services.Batch,PnP.Core.Model.SharePoint.CamlQueryOptions,Expression{Func{PnP.Core.Model.SharePoint.IListItem,System.Object}}[])
+  name: LoadItemsByCamlQueryBatchAsync(Batch, CamlQueryOptions, Expression<Func<IListItem, Object>>[])
+  href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_LoadItemsByCamlQueryBatchAsync_PnP_Core_Services_Batch_PnP_Core_Model_SharePoint_CamlQueryOptions_Expression_Func_PnP_Core_Model_SharePoint_IListItem_System_Object_____
+  commentId: M:PnP.Core.Model.SharePoint.IList.LoadItemsByCamlQueryBatchAsync(PnP.Core.Services.Batch,PnP.Core.Model.SharePoint.CamlQueryOptions,Expression{Func{PnP.Core.Model.SharePoint.IListItem,System.Object}}[])
+  name.vb: LoadItemsByCamlQueryBatchAsync(Batch, CamlQueryOptions, Expression(Of Func(Of IListItem, Object))())
+  fullName: PnP.Core.Model.SharePoint.IList.LoadItemsByCamlQueryBatchAsync(PnP.Core.Services.Batch, PnP.Core.Model.SharePoint.CamlQueryOptions, Expression<Func<PnP.Core.Model.SharePoint.IListItem, System.Object>>[])
+  fullName.vb: PnP.Core.Model.SharePoint.IList.LoadItemsByCamlQueryBatchAsync(PnP.Core.Services.Batch, PnP.Core.Model.SharePoint.CamlQueryOptions, Expression(Of Func(Of PnP.Core.Model.SharePoint.IListItem, System.Object))())
+  nameWithType: IList.LoadItemsByCamlQueryBatchAsync(Batch, CamlQueryOptions, Expression<Func<IListItem, Object>>[])
+  nameWithType.vb: IList.LoadItemsByCamlQueryBatchAsync(Batch, CamlQueryOptions, Expression(Of Func(Of IListItem, Object))())
+- uid: PnP.Core.Model.SharePoint.IList.LoadItemsByCamlQueryBatchAsync(PnP.Core.Services.Batch,System.String,Expression{Func{PnP.Core.Model.SharePoint.IListItem,System.Object}}[])
+  name: LoadItemsByCamlQueryBatchAsync(Batch, String, Expression<Func<IListItem, Object>>[])
+  href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_LoadItemsByCamlQueryBatchAsync_PnP_Core_Services_Batch_System_String_Expression_Func_PnP_Core_Model_SharePoint_IListItem_System_Object_____
+  commentId: M:PnP.Core.Model.SharePoint.IList.LoadItemsByCamlQueryBatchAsync(PnP.Core.Services.Batch,System.String,Expression{Func{PnP.Core.Model.SharePoint.IListItem,System.Object}}[])
+  name.vb: LoadItemsByCamlQueryBatchAsync(Batch, String, Expression(Of Func(Of IListItem, Object))())
+  fullName: PnP.Core.Model.SharePoint.IList.LoadItemsByCamlQueryBatchAsync(PnP.Core.Services.Batch, System.String, Expression<Func<PnP.Core.Model.SharePoint.IListItem, System.Object>>[])
+  fullName.vb: PnP.Core.Model.SharePoint.IList.LoadItemsByCamlQueryBatchAsync(PnP.Core.Services.Batch, System.String, Expression(Of Func(Of PnP.Core.Model.SharePoint.IListItem, System.Object))())
+  nameWithType: IList.LoadItemsByCamlQueryBatchAsync(Batch, String, Expression<Func<IListItem, Object>>[])
+  nameWithType.vb: IList.LoadItemsByCamlQueryBatchAsync(Batch, String, Expression(Of Func(Of IListItem, Object))())
+- uid: PnP.Core.Model.SharePoint.IList.LoadItemsByCamlQueryBatchAsync(System.String,Expression{Func{PnP.Core.Model.SharePoint.IListItem,System.Object}}[])
+  name: LoadItemsByCamlQueryBatchAsync(String, Expression<Func<IListItem, Object>>[])
+  href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_LoadItemsByCamlQueryBatchAsync_System_String_Expression_Func_PnP_Core_Model_SharePoint_IListItem_System_Object_____
+  commentId: M:PnP.Core.Model.SharePoint.IList.LoadItemsByCamlQueryBatchAsync(System.String,Expression{Func{PnP.Core.Model.SharePoint.IListItem,System.Object}}[])
+  name.vb: LoadItemsByCamlQueryBatchAsync(String, Expression(Of Func(Of IListItem, Object))())
+  fullName: PnP.Core.Model.SharePoint.IList.LoadItemsByCamlQueryBatchAsync(System.String, Expression<Func<PnP.Core.Model.SharePoint.IListItem, System.Object>>[])
+  fullName.vb: PnP.Core.Model.SharePoint.IList.LoadItemsByCamlQueryBatchAsync(System.String, Expression(Of Func(Of PnP.Core.Model.SharePoint.IListItem, System.Object))())
+  nameWithType: IList.LoadItemsByCamlQueryBatchAsync(String, Expression<Func<IListItem, Object>>[])
+  nameWithType.vb: IList.LoadItemsByCamlQueryBatchAsync(String, Expression(Of Func(Of IListItem, Object))())
 - uid: PnP.Core.Model.SharePoint.IList.LoadItemsByCamlQueryBatchAsync*
   name: LoadItemsByCamlQueryBatchAsync
   href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_LoadItemsByCamlQueryBatchAsync_
@@ -15022,6 +15100,19 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IListItem.AddRoleDefinitionsAsync
   nameWithType: IListItem.AddRoleDefinitionsAsync
+- uid: PnP.Core.Model.SharePoint.IListItem.AllColumns
+  name: AllColumns
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_AllColumns
+  commentId: P:PnP.Core.Model.SharePoint.IListItem.AllColumns
+  fullName: PnP.Core.Model.SharePoint.IListItem.AllColumns
+  nameWithType: IListItem.AllColumns
+- uid: PnP.Core.Model.SharePoint.IListItem.AllColumns*
+  name: AllColumns
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_AllColumns_
+  commentId: Overload:PnP.Core.Model.SharePoint.IListItem.AllColumns
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IListItem.AllColumns
+  nameWithType: IListItem.AllColumns
 - uid: PnP.Core.Model.SharePoint.IListItem.AreCommentsDisabled
   name: AreCommentsDisabled()
   href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_AreCommentsDisabled
@@ -15112,6 +15203,149 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IListItem.BreakRoleInheritanceBatchAsync
   nameWithType: IListItem.BreakRoleInheritanceBatchAsync
+- uid: PnP.Core.Model.SharePoint.IListItem.CommentsDisabled
+  name: CommentsDisabled
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_CommentsDisabled
+  commentId: P:PnP.Core.Model.SharePoint.IListItem.CommentsDisabled
+  fullName: PnP.Core.Model.SharePoint.IListItem.CommentsDisabled
+  nameWithType: IListItem.CommentsDisabled
+- uid: PnP.Core.Model.SharePoint.IListItem.CommentsDisabled*
+  name: CommentsDisabled
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_CommentsDisabled_
+  commentId: Overload:PnP.Core.Model.SharePoint.IListItem.CommentsDisabled
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IListItem.CommentsDisabled
+  nameWithType: IListItem.CommentsDisabled
+- uid: PnP.Core.Model.SharePoint.IListItem.CommentsDisabledScope
+  name: CommentsDisabledScope
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_CommentsDisabledScope
+  commentId: P:PnP.Core.Model.SharePoint.IListItem.CommentsDisabledScope
+  fullName: PnP.Core.Model.SharePoint.IListItem.CommentsDisabledScope
+  nameWithType: IListItem.CommentsDisabledScope
+- uid: PnP.Core.Model.SharePoint.IListItem.CommentsDisabledScope*
+  name: CommentsDisabledScope
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_CommentsDisabledScope_
+  commentId: Overload:PnP.Core.Model.SharePoint.IListItem.CommentsDisabledScope
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IListItem.CommentsDisabledScope
+  nameWithType: IListItem.CommentsDisabledScope
+- uid: PnP.Core.Model.SharePoint.IListItem.ContentType
+  name: ContentType
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_ContentType
+  commentId: P:PnP.Core.Model.SharePoint.IListItem.ContentType
+  fullName: PnP.Core.Model.SharePoint.IListItem.ContentType
+  nameWithType: IListItem.ContentType
+- uid: PnP.Core.Model.SharePoint.IListItem.ContentType*
+  name: ContentType
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_ContentType_
+  commentId: Overload:PnP.Core.Model.SharePoint.IListItem.ContentType
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IListItem.ContentType
+  nameWithType: IListItem.ContentType
+- uid: PnP.Core.Model.SharePoint.IListItem.FieldValuesAsHtml
+  name: FieldValuesAsHtml
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_FieldValuesAsHtml
+  commentId: P:PnP.Core.Model.SharePoint.IListItem.FieldValuesAsHtml
+  fullName: PnP.Core.Model.SharePoint.IListItem.FieldValuesAsHtml
+  nameWithType: IListItem.FieldValuesAsHtml
+- uid: PnP.Core.Model.SharePoint.IListItem.FieldValuesAsHtml*
+  name: FieldValuesAsHtml
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_FieldValuesAsHtml_
+  commentId: Overload:PnP.Core.Model.SharePoint.IListItem.FieldValuesAsHtml
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IListItem.FieldValuesAsHtml
+  nameWithType: IListItem.FieldValuesAsHtml
+- uid: PnP.Core.Model.SharePoint.IListItem.FieldValuesAsText
+  name: FieldValuesAsText
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_FieldValuesAsText
+  commentId: P:PnP.Core.Model.SharePoint.IListItem.FieldValuesAsText
+  fullName: PnP.Core.Model.SharePoint.IListItem.FieldValuesAsText
+  nameWithType: IListItem.FieldValuesAsText
+- uid: PnP.Core.Model.SharePoint.IListItem.FieldValuesAsText*
+  name: FieldValuesAsText
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_FieldValuesAsText_
+  commentId: Overload:PnP.Core.Model.SharePoint.IListItem.FieldValuesAsText
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IListItem.FieldValuesAsText
+  nameWithType: IListItem.FieldValuesAsText
+- uid: PnP.Core.Model.SharePoint.IListItem.FieldValuesForEdit
+  name: FieldValuesForEdit
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_FieldValuesForEdit
+  commentId: P:PnP.Core.Model.SharePoint.IListItem.FieldValuesForEdit
+  fullName: PnP.Core.Model.SharePoint.IListItem.FieldValuesForEdit
+  nameWithType: IListItem.FieldValuesForEdit
+- uid: PnP.Core.Model.SharePoint.IListItem.FieldValuesForEdit*
+  name: FieldValuesForEdit
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_FieldValuesForEdit_
+  commentId: Overload:PnP.Core.Model.SharePoint.IListItem.FieldValuesForEdit
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IListItem.FieldValuesForEdit
+  nameWithType: IListItem.FieldValuesForEdit
+- uid: PnP.Core.Model.SharePoint.IListItem.File
+  name: File
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_File
+  commentId: P:PnP.Core.Model.SharePoint.IListItem.File
+  fullName: PnP.Core.Model.SharePoint.IListItem.File
+  nameWithType: IListItem.File
+- uid: PnP.Core.Model.SharePoint.IListItem.File*
+  name: File
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_File_
+  commentId: Overload:PnP.Core.Model.SharePoint.IListItem.File
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IListItem.File
+  nameWithType: IListItem.File
+- uid: PnP.Core.Model.SharePoint.IListItem.FileSystemObjectType
+  name: FileSystemObjectType
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_FileSystemObjectType
+  commentId: P:PnP.Core.Model.SharePoint.IListItem.FileSystemObjectType
+  fullName: PnP.Core.Model.SharePoint.IListItem.FileSystemObjectType
+  nameWithType: IListItem.FileSystemObjectType
+- uid: PnP.Core.Model.SharePoint.IListItem.FileSystemObjectType*
+  name: FileSystemObjectType
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_FileSystemObjectType_
+  commentId: Overload:PnP.Core.Model.SharePoint.IListItem.FileSystemObjectType
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IListItem.FileSystemObjectType
+  nameWithType: IListItem.FileSystemObjectType
+- uid: PnP.Core.Model.SharePoint.IListItem.Folder
+  name: Folder
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_Folder
+  commentId: P:PnP.Core.Model.SharePoint.IListItem.Folder
+  fullName: PnP.Core.Model.SharePoint.IListItem.Folder
+  nameWithType: IListItem.Folder
+- uid: PnP.Core.Model.SharePoint.IListItem.Folder*
+  name: Folder
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_Folder_
+  commentId: Overload:PnP.Core.Model.SharePoint.IListItem.Folder
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IListItem.Folder
+  nameWithType: IListItem.Folder
+- uid: PnP.Core.Model.SharePoint.IListItem.GetDisplayName
+  name: GetDisplayName()
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_GetDisplayName
+  commentId: M:PnP.Core.Model.SharePoint.IListItem.GetDisplayName
+  fullName: PnP.Core.Model.SharePoint.IListItem.GetDisplayName()
+  nameWithType: IListItem.GetDisplayName()
+- uid: PnP.Core.Model.SharePoint.IListItem.GetDisplayName*
+  name: GetDisplayName
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_GetDisplayName_
+  commentId: Overload:PnP.Core.Model.SharePoint.IListItem.GetDisplayName
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IListItem.GetDisplayName
+  nameWithType: IListItem.GetDisplayName
+- uid: PnP.Core.Model.SharePoint.IListItem.GetDisplayNameAsync
+  name: GetDisplayNameAsync()
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_GetDisplayNameAsync
+  commentId: M:PnP.Core.Model.SharePoint.IListItem.GetDisplayNameAsync
+  fullName: PnP.Core.Model.SharePoint.IListItem.GetDisplayNameAsync()
+  nameWithType: IListItem.GetDisplayNameAsync()
+- uid: PnP.Core.Model.SharePoint.IListItem.GetDisplayNameAsync*
+  name: GetDisplayNameAsync
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_GetDisplayNameAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.IListItem.GetDisplayNameAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IListItem.GetDisplayNameAsync
+  nameWithType: IListItem.GetDisplayNameAsync
 - uid: PnP.Core.Model.SharePoint.IListItem.GetFolder
   name: GetFolder()
   href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_GetFolder
@@ -15300,6 +15534,32 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IListItem.NewFieldValueCollection
   nameWithType: IListItem.NewFieldValueCollection
+- uid: PnP.Core.Model.SharePoint.IListItem.ParentList
+  name: ParentList
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_ParentList
+  commentId: P:PnP.Core.Model.SharePoint.IListItem.ParentList
+  fullName: PnP.Core.Model.SharePoint.IListItem.ParentList
+  nameWithType: IListItem.ParentList
+- uid: PnP.Core.Model.SharePoint.IListItem.ParentList*
+  name: ParentList
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_ParentList_
+  commentId: Overload:PnP.Core.Model.SharePoint.IListItem.ParentList
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IListItem.ParentList
+  nameWithType: IListItem.ParentList
+- uid: PnP.Core.Model.SharePoint.IListItem.Properties
+  name: Properties
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_Properties
+  commentId: P:PnP.Core.Model.SharePoint.IListItem.Properties
+  fullName: PnP.Core.Model.SharePoint.IListItem.Properties
+  nameWithType: IListItem.Properties
+- uid: PnP.Core.Model.SharePoint.IListItem.Properties*
+  name: Properties
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_Properties_
+  commentId: Overload:PnP.Core.Model.SharePoint.IListItem.Properties
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IListItem.Properties
+  nameWithType: IListItem.Properties
 - uid: PnP.Core.Model.SharePoint.IListItem.Recycle
   name: Recycle()
   href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_Recycle
@@ -15537,6 +15797,32 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IListItem.RoleAssignments
   nameWithType: IListItem.RoleAssignments
+- uid: PnP.Core.Model.SharePoint.IListItem.ServerRedirectedEmbedUri
+  name: ServerRedirectedEmbedUri
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_ServerRedirectedEmbedUri
+  commentId: P:PnP.Core.Model.SharePoint.IListItem.ServerRedirectedEmbedUri
+  fullName: PnP.Core.Model.SharePoint.IListItem.ServerRedirectedEmbedUri
+  nameWithType: IListItem.ServerRedirectedEmbedUri
+- uid: PnP.Core.Model.SharePoint.IListItem.ServerRedirectedEmbedUri*
+  name: ServerRedirectedEmbedUri
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_ServerRedirectedEmbedUri_
+  commentId: Overload:PnP.Core.Model.SharePoint.IListItem.ServerRedirectedEmbedUri
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IListItem.ServerRedirectedEmbedUri
+  nameWithType: IListItem.ServerRedirectedEmbedUri
+- uid: PnP.Core.Model.SharePoint.IListItem.ServerRedirectedEmbedUrl
+  name: ServerRedirectedEmbedUrl
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_ServerRedirectedEmbedUrl
+  commentId: P:PnP.Core.Model.SharePoint.IListItem.ServerRedirectedEmbedUrl
+  fullName: PnP.Core.Model.SharePoint.IListItem.ServerRedirectedEmbedUrl
+  nameWithType: IListItem.ServerRedirectedEmbedUrl
+- uid: PnP.Core.Model.SharePoint.IListItem.ServerRedirectedEmbedUrl*
+  name: ServerRedirectedEmbedUrl
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_ServerRedirectedEmbedUrl_
+  commentId: Overload:PnP.Core.Model.SharePoint.IListItem.ServerRedirectedEmbedUrl
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IListItem.ServerRedirectedEmbedUrl
+  nameWithType: IListItem.ServerRedirectedEmbedUrl
 - uid: PnP.Core.Model.SharePoint.IListItem.SetCommentsDisabled(System.Boolean)
   name: SetCommentsDisabled(Boolean)
   href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_SetCommentsDisabled_System_Boolean_
@@ -15704,6 +15990,19 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IListItem.Title
   nameWithType: IListItem.Title
+- uid: PnP.Core.Model.SharePoint.IListItem.UniqueId
+  name: UniqueId
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_UniqueId
+  commentId: P:PnP.Core.Model.SharePoint.IListItem.UniqueId
+  fullName: PnP.Core.Model.SharePoint.IListItem.UniqueId
+  nameWithType: IListItem.UniqueId
+- uid: PnP.Core.Model.SharePoint.IListItem.UniqueId*
+  name: UniqueId
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_UniqueId_
+  commentId: Overload:PnP.Core.Model.SharePoint.IListItem.UniqueId
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IListItem.UniqueId
+  nameWithType: IListItem.UniqueId
 - uid: PnP.Core.Model.SharePoint.IListItem.UpdateOverwriteVersion
   name: UpdateOverwriteVersion()
   href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_UpdateOverwriteVersion
@@ -15869,12 +16168,15 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IListItemCollection.Contains
   nameWithType: IListItemCollection.Contains
-- uid: PnP.Core.Model.SharePoint.IListItemCollection.GetById(System.Int32)
-  name: GetById(Int32)
-  href: api/PnP.Core.Model.SharePoint.IListItemCollection.html#PnP_Core_Model_SharePoint_IListItemCollection_GetById_System_Int32_
-  commentId: M:PnP.Core.Model.SharePoint.IListItemCollection.GetById(System.Int32)
-  fullName: PnP.Core.Model.SharePoint.IListItemCollection.GetById(System.Int32)
-  nameWithType: IListItemCollection.GetById(Int32)
+- uid: PnP.Core.Model.SharePoint.IListItemCollection.GetById(System.Int32,Expression{Func{PnP.Core.Model.SharePoint.IListItem,System.Object}}[])
+  name: GetById(Int32, Expression<Func<IListItem, Object>>[])
+  href: api/PnP.Core.Model.SharePoint.IListItemCollection.html#PnP_Core_Model_SharePoint_IListItemCollection_GetById_System_Int32_Expression_Func_PnP_Core_Model_SharePoint_IListItem_System_Object_____
+  commentId: M:PnP.Core.Model.SharePoint.IListItemCollection.GetById(System.Int32,Expression{Func{PnP.Core.Model.SharePoint.IListItem,System.Object}}[])
+  name.vb: GetById(Int32, Expression(Of Func(Of IListItem, Object))())
+  fullName: PnP.Core.Model.SharePoint.IListItemCollection.GetById(System.Int32, Expression<Func<PnP.Core.Model.SharePoint.IListItem, System.Object>>[])
+  fullName.vb: PnP.Core.Model.SharePoint.IListItemCollection.GetById(System.Int32, Expression(Of Func(Of PnP.Core.Model.SharePoint.IListItem, System.Object))())
+  nameWithType: IListItemCollection.GetById(Int32, Expression<Func<IListItem, Object>>[])
+  nameWithType.vb: IListItemCollection.GetById(Int32, Expression(Of Func(Of IListItem, Object))())
 - uid: PnP.Core.Model.SharePoint.IListItemCollection.GetById*
   name: GetById
   href: api/PnP.Core.Model.SharePoint.IListItemCollection.html#PnP_Core_Model_SharePoint_IListItemCollection_GetById_
@@ -15882,12 +16184,15 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IListItemCollection.GetById
   nameWithType: IListItemCollection.GetById
-- uid: PnP.Core.Model.SharePoint.IListItemCollection.GetByIdAsync(System.Int32)
-  name: GetByIdAsync(Int32)
-  href: api/PnP.Core.Model.SharePoint.IListItemCollection.html#PnP_Core_Model_SharePoint_IListItemCollection_GetByIdAsync_System_Int32_
-  commentId: M:PnP.Core.Model.SharePoint.IListItemCollection.GetByIdAsync(System.Int32)
-  fullName: PnP.Core.Model.SharePoint.IListItemCollection.GetByIdAsync(System.Int32)
-  nameWithType: IListItemCollection.GetByIdAsync(Int32)
+- uid: PnP.Core.Model.SharePoint.IListItemCollection.GetByIdAsync(System.Int32,Expression{Func{PnP.Core.Model.SharePoint.IListItem,System.Object}}[])
+  name: GetByIdAsync(Int32, Expression<Func<IListItem, Object>>[])
+  href: api/PnP.Core.Model.SharePoint.IListItemCollection.html#PnP_Core_Model_SharePoint_IListItemCollection_GetByIdAsync_System_Int32_Expression_Func_PnP_Core_Model_SharePoint_IListItem_System_Object_____
+  commentId: M:PnP.Core.Model.SharePoint.IListItemCollection.GetByIdAsync(System.Int32,Expression{Func{PnP.Core.Model.SharePoint.IListItem,System.Object}}[])
+  name.vb: GetByIdAsync(Int32, Expression(Of Func(Of IListItem, Object))())
+  fullName: PnP.Core.Model.SharePoint.IListItemCollection.GetByIdAsync(System.Int32, Expression<Func<PnP.Core.Model.SharePoint.IListItem, System.Object>>[])
+  fullName.vb: PnP.Core.Model.SharePoint.IListItemCollection.GetByIdAsync(System.Int32, Expression(Of Func(Of PnP.Core.Model.SharePoint.IListItem, System.Object))())
+  nameWithType: IListItemCollection.GetByIdAsync(Int32, Expression<Func<IListItem, Object>>[])
+  nameWithType.vb: IListItemCollection.GetByIdAsync(Int32, Expression(Of Func(Of IListItem, Object))())
 - uid: PnP.Core.Model.SharePoint.IListItemCollection.GetByIdAsync*
   name: GetByIdAsync
   href: api/PnP.Core.Model.SharePoint.IListItemCollection.html#PnP_Core_Model_SharePoint_IListItemCollection_GetByIdAsync_
@@ -25895,6 +26200,12 @@ references:
   commentId: T:PnP.Core.Model.SharePoint.RenderListDataOptionsFlags
   fullName: PnP.Core.Model.SharePoint.RenderListDataOptionsFlags
   nameWithType: RenderListDataOptionsFlags
+- uid: PnP.Core.Model.SharePoint.RenderListDataOptionsFlags.AddToOneDrive
+  name: AddToOneDrive
+  href: api/PnP.Core.Model.SharePoint.RenderListDataOptionsFlags.html#PnP_Core_Model_SharePoint_RenderListDataOptionsFlags_AddToOneDrive
+  commentId: F:PnP.Core.Model.SharePoint.RenderListDataOptionsFlags.AddToOneDrive
+  fullName: PnP.Core.Model.SharePoint.RenderListDataOptionsFlags.AddToOneDrive
+  nameWithType: RenderListDataOptionsFlags.AddToOneDrive
 - uid: PnP.Core.Model.SharePoint.RenderListDataOptionsFlags.ClientFormSchema
   name: ClientFormSchema
   href: api/PnP.Core.Model.SharePoint.RenderListDataOptionsFlags.html#PnP_Core_Model_SharePoint_RenderListDataOptionsFlags_ClientFormSchema
@@ -25913,6 +26224,12 @@ references:
   commentId: F:PnP.Core.Model.SharePoint.RenderListDataOptionsFlags.ContextInfo
   fullName: PnP.Core.Model.SharePoint.RenderListDataOptionsFlags.ContextInfo
   nameWithType: RenderListDataOptionsFlags.ContextInfo
+- uid: PnP.Core.Model.SharePoint.RenderListDataOptionsFlags.CustomActions
+  name: CustomActions
+  href: api/PnP.Core.Model.SharePoint.RenderListDataOptionsFlags.html#PnP_Core_Model_SharePoint_RenderListDataOptionsFlags_CustomActions
+  commentId: F:PnP.Core.Model.SharePoint.RenderListDataOptionsFlags.CustomActions
+  fullName: PnP.Core.Model.SharePoint.RenderListDataOptionsFlags.CustomActions
+  nameWithType: RenderListDataOptionsFlags.CustomActions
 - uid: PnP.Core.Model.SharePoint.RenderListDataOptionsFlags.DisableAutoHyperlink
   name: DisableAutoHyperlink
   href: api/PnP.Core.Model.SharePoint.RenderListDataOptionsFlags.html#PnP_Core_Model_SharePoint_RenderListDataOptionsFlags_DisableAutoHyperlink
@@ -25931,6 +26248,24 @@ references:
   commentId: F:PnP.Core.Model.SharePoint.RenderListDataOptionsFlags.FileSystemItemId
   fullName: PnP.Core.Model.SharePoint.RenderListDataOptionsFlags.FileSystemItemId
   nameWithType: RenderListDataOptionsFlags.FileSystemItemId
+- uid: PnP.Core.Model.SharePoint.RenderListDataOptionsFlags.FolderContentTypeOrder
+  name: FolderContentTypeOrder
+  href: api/PnP.Core.Model.SharePoint.RenderListDataOptionsFlags.html#PnP_Core_Model_SharePoint_RenderListDataOptionsFlags_FolderContentTypeOrder
+  commentId: F:PnP.Core.Model.SharePoint.RenderListDataOptionsFlags.FolderContentTypeOrder
+  fullName: PnP.Core.Model.SharePoint.RenderListDataOptionsFlags.FolderContentTypeOrder
+  nameWithType: RenderListDataOptionsFlags.FolderContentTypeOrder
+- uid: PnP.Core.Model.SharePoint.RenderListDataOptionsFlags.GridInitInfo
+  name: GridInitInfo
+  href: api/PnP.Core.Model.SharePoint.RenderListDataOptionsFlags.html#PnP_Core_Model_SharePoint_RenderListDataOptionsFlags_GridInitInfo
+  commentId: F:PnP.Core.Model.SharePoint.RenderListDataOptionsFlags.GridInitInfo
+  fullName: PnP.Core.Model.SharePoint.RenderListDataOptionsFlags.GridInitInfo
+  nameWithType: RenderListDataOptionsFlags.GridInitInfo
+- uid: PnP.Core.Model.SharePoint.RenderListDataOptionsFlags.ListAvailableContentTypes
+  name: ListAvailableContentTypes
+  href: api/PnP.Core.Model.SharePoint.RenderListDataOptionsFlags.html#PnP_Core_Model_SharePoint_RenderListDataOptionsFlags_ListAvailableContentTypes
+  commentId: F:PnP.Core.Model.SharePoint.RenderListDataOptionsFlags.ListAvailableContentTypes
+  fullName: PnP.Core.Model.SharePoint.RenderListDataOptionsFlags.ListAvailableContentTypes
+  nameWithType: RenderListDataOptionsFlags.ListAvailableContentTypes
 - uid: PnP.Core.Model.SharePoint.RenderListDataOptionsFlags.ListContentType
   name: ListContentType
   href: api/PnP.Core.Model.SharePoint.RenderListDataOptionsFlags.html#PnP_Core_Model_SharePoint_RenderListDataOptionsFlags_ListContentType
@@ -25979,6 +26314,18 @@ references:
   commentId: F:PnP.Core.Model.SharePoint.RenderListDataOptionsFlags.QuickLaunch
   fullName: PnP.Core.Model.SharePoint.RenderListDataOptionsFlags.QuickLaunch
   nameWithType: RenderListDataOptionsFlags.QuickLaunch
+- uid: PnP.Core.Model.SharePoint.RenderListDataOptionsFlags.SiteUrlAsMediaTASPItemHost
+  name: SiteUrlAsMediaTASPItemHost
+  href: api/PnP.Core.Model.SharePoint.RenderListDataOptionsFlags.html#PnP_Core_Model_SharePoint_RenderListDataOptionsFlags_SiteUrlAsMediaTASPItemHost
+  commentId: F:PnP.Core.Model.SharePoint.RenderListDataOptionsFlags.SiteUrlAsMediaTASPItemHost
+  fullName: PnP.Core.Model.SharePoint.RenderListDataOptionsFlags.SiteUrlAsMediaTASPItemHost
+  nameWithType: RenderListDataOptionsFlags.SiteUrlAsMediaTASPItemHost
+- uid: PnP.Core.Model.SharePoint.RenderListDataOptionsFlags.SPFXCustomActions
+  name: SPFXCustomActions
+  href: api/PnP.Core.Model.SharePoint.RenderListDataOptionsFlags.html#PnP_Core_Model_SharePoint_RenderListDataOptionsFlags_SPFXCustomActions
+  commentId: F:PnP.Core.Model.SharePoint.RenderListDataOptionsFlags.SPFXCustomActions
+  fullName: PnP.Core.Model.SharePoint.RenderListDataOptionsFlags.SPFXCustomActions
+  nameWithType: RenderListDataOptionsFlags.SPFXCustomActions
 - uid: PnP.Core.Model.SharePoint.RenderListDataOptionsFlags.Spotlight
   name: Spotlight
   href: api/PnP.Core.Model.SharePoint.RenderListDataOptionsFlags.html#PnP_Core_Model_SharePoint_RenderListDataOptionsFlags_Spotlight

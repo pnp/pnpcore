@@ -226,6 +226,26 @@ IFolder siteAssetsFolder = await context.Web.Folders.Where(f =&gt; f.Name == &qu
 IFile addedFile = await siteAssetsFolder.Files.AddAsync(&quot;test.docx&quot;, 
                   System.IO.File.OpenRead($&quot;.{Path.DirectorySeparatorChar}TestFilesFolder{Path.DirectorySeparatorChar}test.docx&quot;));
 </code></pre>
+<h2 id="updating-file-metadata">Updating file metadata</h2>
+<p>The library in which you've uploaded a file might have additional columns to store metadata about the file. To update this metadata you first need to load the <code>IListItem</code> linked to the added file via the <code>ListItemAllFields</code> property, followed by setting the metadata and updating the <code>IListItem</code>.</p>
+<div class="NOTE">
+<h5>Note</h5>
+<p>See the <a href="listitems-intro.html">working with list items</a> page for information on how to update an <code>IListItem</code>.</p>
+</div>
+<pre><code class="lang-csharp">// Get a reference to a folder
+IFolder documentsFolder = await context.Web.Folders.Where(f =&gt; f.Name == &quot;Documents&quot;).FirstOrDefaultAsync();
+
+// Upload a file by adding it to the folder's files collection
+IFile addedFile = await documentsFolder.Files.AddAsync(&quot;test.docx&quot;, 
+                  System.IO.File.OpenRead($&quot;.{Path.DirectorySeparatorChar}TestFilesFolder{Path.DirectorySeparatorChar}test.docx&quot;));
+// Load the corresponding ListItem
+await addedFile.ListItemAllFields.LoadAsync();
+// Set the metadata
+addedFile.ListItemAllFields[&quot;Field1&quot;] = &quot;Hi there&quot;;
+addedFile.ListItemAllFields[&quot;Field2&quot;] = true;
+// Persist the ListItem changes
+await addedFile.ListItemAllFields.UpdateAsync();
+</code></pre>
 <h2 id="downloading-files">Downloading files</h2>
 <p>If you want to download a file you do need to use either the <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IFile.html#PnP_Core_Model_SharePoint_IFile_GetContentAsync_System_Boolean_">GetContentAsync method</a> if you prefer a Stream as result type or <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IFile.html#collapsible-PnP_Core_Model_SharePoint_IFile_GetContentBytesAsync">GetContentBytesAsync</a> if you prefer a byte array.</p>
 <div class="NOTE">
