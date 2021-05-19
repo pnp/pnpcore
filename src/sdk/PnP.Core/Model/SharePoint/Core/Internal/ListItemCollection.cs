@@ -98,14 +98,14 @@ namespace PnP.Core.Model.SharePoint
 
         #region GetById methods
 
-        public IListItem GetById(int id)
+        public IListItem GetById(int id, params Expression<Func<IListItem, object>>[] selectors)
         {
-            return GetByIdAsync(id).GetAwaiter().GetResult();
+            return GetByIdAsync(id, selectors).GetAwaiter().GetResult();
         }
 
-        public Task<IListItem> GetByIdAsync(int id)
+        public async Task<IListItem> GetByIdAsync(int id, params Expression<Func<IListItem, object>>[] selectors)
         {
-            return this.FirstOrDefaultAsync(l => l.Id == id);
+            return await this.QueryProperties(selectors).FirstOrDefaultAsync(l => l.Id == id).ConfigureAwait(false);
         }
 
         #endregion
@@ -190,9 +190,7 @@ namespace PnP.Core.Model.SharePoint
                 RemoveFromModel = removeFromModel
             };
         }
-
-
-
+        
         #endregion
 
     }

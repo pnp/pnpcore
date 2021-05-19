@@ -24,7 +24,7 @@ namespace PnP.Core.Model.SharePoint
         // Graph requires the "system" field to be loaded as trigger to return all lists 
         internal const string SystemFacet = "system";
         //internal const string DefaultGraphFieldsToLoad = "system,createdDateTime,description,eTag,id,lastModifiedDateTime,name,webUrl,displayName,createdBy,lastModifiedBy,parentReference,list";
-        internal static Expression<Func<IList, object>>[] LoadFieldsExpression = new Expression<Func<IList, object>>[] { p => p.Fields.QueryProperties(p => p.InternalName, p => p.FieldTypeKind, p => p.TypeAsString, p => p.Title) };
+        internal static readonly Expression<Func<IList, object>>[] LoadFieldsExpression = { p => p.Fields.QueryProperties(p => p.InternalName, p => p.FieldTypeKind, p => p.TypeAsString, p => p.Title) };
 
         #region Construction
         public List()
@@ -174,7 +174,7 @@ namespace PnP.Core.Model.SharePoint
 
         public IInformationRightsManagementSettings InformationRightsManagementSettings { get => GetModelValue<IInformationRightsManagementSettings>(); }
 
-        // BERT/PAOLO: not possible at this moment after refactoring, somethign to reassess later on
+        // BERT/PAOLO: not possible at this moment after refactoring, something to reassess later on
         //[GraphProperty("items", Get = "/sites/{Web.GraphId}/lists/{GraphId}/items?expand=fields")]
         public IListItemCollection Items { get => GetModelCollectionValue<IListItemCollection>(); }
 
@@ -187,7 +187,6 @@ namespace PnP.Core.Model.SharePoint
         public bool HasUniqueRoleAssignments { get => GetValue<bool>(); set => SetValue(value); }
 
         public IRoleAssignmentCollection RoleAssignments { get => GetModelCollectionValue<IRoleAssignmentCollection>(); }
-
 
         [KeyProperty(nameof(Id))]
         public override object Key { get => Id; set => Id = Guid.Parse(value.ToString()); }
@@ -305,73 +304,73 @@ namespace PnP.Core.Model.SharePoint
         #endregion
 
         #region GetItemsByCamlQuery
-        public async Task LoadItemsByCamlQueryAsync(string query)
+        public async Task LoadItemsByCamlQueryAsync(string query, params Expression<Func<IListItem, object>>[] selectors)
         {
-            await LoadItemsByCamlQueryAsync(new CamlQueryOptions() { ViewXml = query }).ConfigureAwait(false);
+            await LoadItemsByCamlQueryAsync(new CamlQueryOptions() { ViewXml = query }, selectors).ConfigureAwait(false);
         }
 
-        public void LoadItemsByCamlQuery(string query)
+        public void LoadItemsByCamlQuery(string query, params Expression<Func<IListItem, object>>[] selectors)
         {
-            LoadItemsByCamlQueryAsync(query).GetAwaiter().GetResult();
+            LoadItemsByCamlQueryAsync(query, selectors).GetAwaiter().GetResult();
         }
 
-        public async Task LoadItemsByCamlQueryAsync(CamlQueryOptions queryOptions)
+        public async Task LoadItemsByCamlQueryAsync(CamlQueryOptions queryOptions, params Expression<Func<IListItem, object>>[] selectors)
         {
-            ApiCall apiCall = BuildGetItemsByCamlQueryApiCall(queryOptions);
+            ApiCall apiCall = await BuildGetItemsByCamlQueryApiCall(queryOptions, selectors).ConfigureAwait(false);
 
             await RequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
         }
 
-        public void LoadItemsByCamlQuery(CamlQueryOptions queryOptions)
+        public void LoadItemsByCamlQuery(CamlQueryOptions queryOptions, params Expression<Func<IListItem, object>>[] selectors)
         {
-            LoadItemsByCamlQueryAsync(queryOptions).GetAwaiter().GetResult();
+            LoadItemsByCamlQueryAsync(queryOptions, selectors).GetAwaiter().GetResult();
         }
 
-        public async Task LoadItemsByCamlQueryBatchAsync(string query)
+        public async Task LoadItemsByCamlQueryBatchAsync(string query, params Expression<Func<IListItem, object>>[] selectors)
         {
-            await LoadItemsByCamlQueryBatchAsync(new CamlQueryOptions() { ViewXml = query }).ConfigureAwait(false);
+            await LoadItemsByCamlQueryBatchAsync(new CamlQueryOptions() { ViewXml = query }, selectors).ConfigureAwait(false);
         }
 
-        public void LoadItemsByCamlQueryBatch(string query)
+        public void LoadItemsByCamlQueryBatch(string query, params Expression<Func<IListItem, object>>[] selectors)
         {
-            LoadItemsByCamlQueryBatchAsync(query).GetAwaiter().GetResult();
+            LoadItemsByCamlQueryBatchAsync(query, selectors).GetAwaiter().GetResult();
         }
 
-        public async Task LoadItemsByCamlQueryBatchAsync(CamlQueryOptions queryOptions)
+        public async Task LoadItemsByCamlQueryBatchAsync(CamlQueryOptions queryOptions, params Expression<Func<IListItem, object>>[] selectors)
         {
-            ApiCall apiCall = BuildGetItemsByCamlQueryApiCall(queryOptions);
+            ApiCall apiCall = await BuildGetItemsByCamlQueryApiCall(queryOptions, selectors).ConfigureAwait(false);
 
             await RequestBatchAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
         }
 
-        public void LoadItemsByCamlQueryBatch(CamlQueryOptions queryOptions)
+        public void LoadItemsByCamlQueryBatch(CamlQueryOptions queryOptions, params Expression<Func<IListItem, object>>[] selectors)
         {
-            LoadItemsByCamlQueryBatchAsync(queryOptions).GetAwaiter().GetResult();
+            LoadItemsByCamlQueryBatchAsync(queryOptions, selectors).GetAwaiter().GetResult();
         }
 
-        public async Task LoadItemsByCamlQueryBatchAsync(Batch batch, string query)
+        public async Task LoadItemsByCamlQueryBatchAsync(Batch batch, string query, params Expression<Func<IListItem, object>>[] selectors)
         {
-            await LoadItemsByCamlQueryBatchAsync(batch, new CamlQueryOptions() { ViewXml = query }).ConfigureAwait(false);
+            await LoadItemsByCamlQueryBatchAsync(batch, new CamlQueryOptions() { ViewXml = query }, selectors).ConfigureAwait(false);
         }
 
-        public void LoadItemsByCamlQueryBatch(Batch batch, string query)
+        public void LoadItemsByCamlQueryBatch(Batch batch, string query, params Expression<Func<IListItem, object>>[] selectors)
         {
-            LoadItemsByCamlQueryBatchAsync(batch, query).GetAwaiter().GetResult();
+            LoadItemsByCamlQueryBatchAsync(batch, query, selectors).GetAwaiter().GetResult();
         }
 
-        public async Task LoadItemsByCamlQueryBatchAsync(Batch batch, CamlQueryOptions queryOptions)
+        public async Task LoadItemsByCamlQueryBatchAsync(Batch batch, CamlQueryOptions queryOptions, params Expression<Func<IListItem, object>>[] selectors)
         {
-            ApiCall apiCall = BuildGetItemsByCamlQueryApiCall(queryOptions);
+            ApiCall apiCall = await BuildGetItemsByCamlQueryApiCall(queryOptions, selectors).ConfigureAwait(false);
 
             await RequestBatchAsync(batch, apiCall, HttpMethod.Post).ConfigureAwait(false);
         }
 
-        public void LoadItemsByCamlQueryBatch(Batch batch, CamlQueryOptions queryOptions)
+        public void LoadItemsByCamlQueryBatch(Batch batch, CamlQueryOptions queryOptions, params Expression<Func<IListItem, object>>[] selectors)
         {
-            LoadItemsByCamlQueryBatchAsync(batch, queryOptions).GetAwaiter().GetResult();
+            LoadItemsByCamlQueryBatchAsync(batch, queryOptions, selectors).GetAwaiter().GetResult();
         }
 
-        private ApiCall BuildGetItemsByCamlQueryApiCall(CamlQueryOptions queryOptions)
+        private async Task<ApiCall> BuildGetItemsByCamlQueryApiCall(CamlQueryOptions queryOptions, params Expression<Func<IListItem, object>>[] selectors)
         {
             // Build body
             ExpandoObject camlQuery;
@@ -408,13 +407,21 @@ namespace PnP.Core.Model.SharePoint
                     }
                 }.AsExpando();
             }
+
+            var baseRequestUri = $"_api/Web/Lists(guid'{Id}')/GetItems";
             string body = JsonSerializer.Serialize(camlQuery, typeof(ExpandoObject), new JsonSerializerOptions() { IgnoreNullValues = true });
 
-            var apiCall = new ApiCall($"_api/Web/Lists(guid'{Id}')/GetItems", ApiType.SPORest, body, "Items")
+            if (EntityManager.GetEntityConcreteInstance(typeof(IListItem), this, this.PnPContext) is BaseDataModel<IListItem> concreteEntity)
+            {
+                var entityInfo = EntityManager.GetClassInfo(concreteEntity.GetType(), concreteEntity, null, selectors);
+                var apiCallRequest = await QueryClient.BuildGetAPICallAsync(concreteEntity, entityInfo, new ApiCall(baseRequestUri, ApiType.SPORest), true).ConfigureAwait(false);
+                baseRequestUri = apiCallRequest.ApiCall.Request;
+            }
+
+            return new ApiCall(baseRequestUri, ApiType.SPORest, body, "Items")
             {
                 SkipCollectionClearing = true
             };
-            return apiCall;
         }
         #endregion
 
@@ -442,10 +449,16 @@ namespace PnP.Core.Model.SharePoint
 
             // The field information request was regular request and as such the returned json was automatically handled
             // The GetListDataAsStream request is a raw request, so we'll need to process the returned json manually
-            string responseJson = batch.Requests[requestToUse].ResponseJson;
+            var batchRequest = batch.Requests[requestToUse];
+            string responseJson = batchRequest.ResponseJson;
 
             if (!string.IsNullOrEmpty(responseJson))
             {
+                // Load as much as we can to match the properties of an IListItem. I realize this isn't perfect, because it won't
+                // hydrate something like IListItem.ContentType, but it's a start.
+                await JsonMappingHelper.MapJsonToModel(batchRequest).ConfigureAwait(false);
+
+                // Now do it again to properly transform the Values dictionary to proper objects
                 return await ListDataAsStreamHandler.Deserialize(responseJson, this).ConfigureAwait(false);
             }
 
@@ -485,7 +498,7 @@ namespace PnP.Core.Model.SharePoint
             }.AsExpando();
             string body = JsonSerializer.Serialize(renderListDataParameters, typeof(ExpandoObject), new JsonSerializerOptions() { IgnoreNullValues = true });
 
-            var apiCall = new ApiCall($"_api/Web/Lists(guid'{Id}')/RenderListDataAsStream", ApiType.SPORest, body)
+            var apiCall = new ApiCall($"_api/Web/Lists(guid'{Id}')/RenderListDataAsStream", ApiType.SPORest, body, "Items")
             {
                 SkipCollectionClearing = true
             };

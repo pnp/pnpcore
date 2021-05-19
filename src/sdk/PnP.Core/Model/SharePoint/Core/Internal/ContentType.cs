@@ -21,12 +21,17 @@ namespace PnP.Core.Model.SharePoint
         {
             PostMappingHandler = (json) =>
             {
-                // In the case of Add operation, the CSOM api is used and JSON mapping to model is not possible
-                // So here, populate the Rest Id metadata field to enable actions upon 
-                // this content type without having to read it again from the server
-                AddMetadata(PnPConstants.MetaDataRestId, StringId);
-                AddMetadata(PnPConstants.MetaDataType, "SP.ContentType");
-                Requested = true;
+                // Trying to load values with the selectors will result in this not having a StringId sometimes.
+                // Prevent a ClientException by checking first
+                if (HasValue(nameof(StringId)))
+                {
+                    // In the case of Add operation, the CSOM api is used and JSON mapping to model is not possible
+                    // So here, populate the Rest Id metadata field to enable actions upon 
+                    // this content type without having to read it again from the server
+                    AddMetadata(PnPConstants.MetaDataRestId, StringId);
+                    AddMetadata(PnPConstants.MetaDataType, "SP.ContentType");
+                    Requested = true;
+                }
             };
 
             // Handler to construct the Add request for this content type

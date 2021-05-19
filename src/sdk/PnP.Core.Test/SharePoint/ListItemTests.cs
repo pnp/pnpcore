@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace PnP.Core.Test.SharePoint
@@ -30,7 +31,7 @@ namespace PnP.Core.Test.SharePoint
             {
                 string listTitle = TestCommon.GetPnPSdkTestAssetName("UpdateListItemWithUnderScoreField");
                 var myList = context.Web.Lists.FirstOrDefault(p => p.Title == listTitle);
-                
+
                 string fldText1 = "_SpecialField";
                 if (myList == null)
                 {
@@ -72,7 +73,7 @@ namespace PnP.Core.Test.SharePoint
                         {
                             Assert.IsTrue(firstItem.Values["Title"].ToString() == "Yes");
                             Assert.IsTrue(firstItem.Values[fldText1].ToString() == "No");
-                                                                                   
+
                             firstItem.Values["Title"] = "No";
                             firstItem.Values[fldText1] = "Noo";
                             // The values property should have changed
@@ -248,7 +249,7 @@ namespace PnP.Core.Test.SharePoint
                 var listTitle = TestCommon.GetPnPSdkTestAssetName("RecycleListItemBatchTest");
                 var list = await context.Web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
                 var item = await list.Items.AddAsync(new Dictionary<string, object> { { "Title", "Recycle me" } });
-                
+
                 var recycleBatchResponse = await item.RecycleBatchAsync();
                 Assert.IsFalse(recycleBatchResponse.IsAvailable);
                 await context.ExecuteAsync();
@@ -523,7 +524,7 @@ namespace PnP.Core.Test.SharePoint
 
             using (var context4 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 3))
             {
-                var myList4 = context4.Web.Lists.FirstOrDefault(p => p.Title == listTitle); 
+                var myList4 = context4.Web.Lists.FirstOrDefault(p => p.Title == listTitle);
                 await myList4.LoadAsync(p => p.Items);
                 var first4 = myList4.Items.AsRequested().First();
 
@@ -540,7 +541,7 @@ namespace PnP.Core.Test.SharePoint
 
             using (var context5 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 4))
             {
-                var myList5 = context5.Web.Lists.FirstOrDefault(p => p.Title == listTitle); 
+                var myList5 = context5.Web.Lists.FirstOrDefault(p => p.Title == listTitle);
                 myList5.Load(p => p.Items);
                 var first5 = myList5.Items.AsRequested().First();
 
@@ -557,7 +558,7 @@ namespace PnP.Core.Test.SharePoint
 
             using (var context6 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 5))
             {
-                var myList6 = context6.Web.Lists.FirstOrDefault(p => p.Title == listTitle); 
+                var myList6 = context6.Web.Lists.FirstOrDefault(p => p.Title == listTitle);
                 myList6.Load(p => p.Items);
                 var first6 = myList6.Items.AsRequested().First();
 
@@ -758,7 +759,7 @@ namespace PnP.Core.Test.SharePoint
             using (var contextFinal = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))
             {
                 var myList = contextFinal.Web.Lists.FirstOrDefault(p => p.Title == listTitle);
-                
+
                 // Cleanup the created list
                 await myList.DeleteAsync();
             }
@@ -1560,7 +1561,7 @@ namespace PnP.Core.Test.SharePoint
         {
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, id, testName))
             {
-                var myList = context.Web.Lists.GetByTitle(listTitle);                
+                var myList = context.Web.Lists.GetByTitle(listTitle);
 
                 var listDataOptions = new RenderListDataOptions()
                 {
@@ -2626,6 +2627,399 @@ namespace PnP.Core.Test.SharePoint
         }
         #endregion
 
+        #region Properties
+        [TestMethod]
+        public async Task ListItemAsFilePropertiesTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            (string parentLibraryName, _, string documentUrl) = await TestAssets.CreateTestDocumentAsync(0);
+
+            try
+            {
+                using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+                {
+                    IFile file = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl,
+                        f => f.ListItemAllFields.QueryProperties(li => li.Id),
+                        f => f.Length,
+                        f => f.ServerRelativeUrl);
+
+                    Assert.IsNotNull(file);
+                    Assert.IsNotNull(file.ListItemAllFields);
+                    Assert.IsTrue(file.ListItemAllFields.Id > 0);
+
+                    IList list = await context.Web.Lists.GetByTitleAsync(parentLibraryName);
+
+                    Assert.IsNotNull(list);
+
+                    IListItem listItem = await list.Items.GetByIdAsync(file.ListItemAllFields.Id,
+                        li => li.CommentsDisabled,
+                        li => li.CommentsDisabledScope,
+                        li => li.ContentType.QueryProperties(ct => ct.Name, ct => ct.ReadOnly, ct => ct.Sealed),
+                        li => li.File.QueryProperties(f => f.Length, f => f.ServerRelativeUrl, f => f.Name),
+                        li => li.FileSystemObjectType,
+                        li => li.Folder.QueryProperties(f => f.Name, f => f.ServerRelativeUrl),
+                        li => li.ParentList.QueryProperties(l => l.Title),
+                        li => li.ServerRedirectedEmbedUri,
+                        li => li.ServerRedirectedEmbedUrl,
+                        li => li.UniqueId);
+
+                    Assert.IsNotNull(listItem);
+                    Assert.IsNotNull(listItem.ContentType);
+                    Assert.IsNotNull(listItem.File);
+
+                    Assert.AreEqual(file.ListItemAllFields.Id, listItem.Id);
+
+                    Assert.IsFalse(listItem.CommentsDisabled);
+                    Assert.AreEqual(CommentsDisabledScope.None, listItem.CommentsDisabledScope);
+                    Assert.AreEqual(FileSystemObjectType.File, listItem.FileSystemObjectType);
+                    Assert.AreNotEqual(Guid.Empty, listItem.UniqueId);
+                    Assert.IsNotNull(listItem.ServerRedirectedEmbedUri);
+                    Assert.IsFalse(string.IsNullOrWhiteSpace(listItem.ServerRedirectedEmbedUrl));
+
+                    Assert.IsFalse(listItem.ContentType.ReadOnly);
+                    Assert.IsFalse(listItem.ContentType.Sealed);
+
+                    Assert.ThrowsException<ClientException>(() => listItem.Folder.ServerRelativeUrl);
+
+                    Assert.AreEqual(file.Length, listItem.File.Length);
+                    Assert.AreEqual(file.ServerRelativeUrl, listItem.File.ServerRelativeUrl);
+
+                    Assert.AreEqual(list.Id, listItem.ParentList.Id);
+                    Assert.AreEqual(list.Title, listItem.ParentList.Title);
+                }
+            }
+            finally
+            {
+                await TestAssets.CleanupTestDocumentAsync(2);
+            }
+        }
+
+        [TestMethod]
+        public async Task ListItemAsFolderPropertiesTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            IFolder mockFolder = null;
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                try
+                {
+                    IFolder parentFolder = (await context.Web.Lists.GetByTitleAsync("Documents", p => p.RootFolder)).RootFolder;
+                    mockFolder = await parentFolder.Folders.AddAsync(nameof(ListItemAsFolderPropertiesTest));
+                    mockFolder = await context.Web.GetFolderByServerRelativeUrlAsync(mockFolder.ServerRelativeUrl,
+                        f => f.Name,
+                        f => f.ServerRelativeUrl,
+                        f => f.ListItemAllFields.QueryProperties(li => li.Id));
+
+                    IList list = await context.Web.Lists.GetByTitleAsync("Documents");
+
+                    Assert.IsNotNull(list);
+
+                    IListItem listItem = await list.Items.GetByIdAsync(mockFolder.ListItemAllFields.Id,
+                        li => li.CommentsDisabled,
+                        li => li.CommentsDisabledScope,
+                        li => li.ContentType.QueryProperties(ct => ct.Name, ct => ct.ReadOnly, ct => ct.Sealed),
+                        li => li.File.QueryProperties(f => f.Length, f => f.ServerRelativeUrl, f => f.Name),
+                        li => li.FileSystemObjectType,
+                        li => li.Folder.QueryProperties(f => f.Name, f => f.ServerRelativeUrl),
+                        li => li.ParentList.QueryProperties(l => l.Title),
+                        li => li.ServerRedirectedEmbedUri,
+                        li => li.ServerRedirectedEmbedUrl,
+                        li => li.UniqueId);
+
+                    Assert.IsNotNull(listItem);
+                    Assert.IsNotNull(listItem.ContentType);
+                    Assert.IsNotNull(listItem.Folder);
+
+                    Assert.AreEqual(mockFolder.ListItemAllFields.Id, listItem.Id);
+
+                    Assert.IsFalse(listItem.CommentsDisabled);
+                    Assert.AreEqual(CommentsDisabledScope.None, listItem.CommentsDisabledScope);
+                    Assert.AreEqual(FileSystemObjectType.Folder, listItem.FileSystemObjectType);
+                    Assert.AreNotEqual(Guid.Empty, listItem.UniqueId);
+                    Assert.IsNull(listItem.ServerRedirectedEmbedUri);
+                    Assert.IsTrue(string.IsNullOrWhiteSpace(listItem.ServerRedirectedEmbedUrl));
+
+                    Assert.IsFalse(listItem.ContentType.ReadOnly);
+                    Assert.IsTrue(listItem.ContentType.Sealed);
+
+                    Assert.ThrowsException<ClientException>(() => listItem.File.ServerRelativeUrl);
+
+                    Assert.AreEqual(mockFolder.Name, listItem.Folder.Name);
+                    Assert.AreEqual(mockFolder.ServerRelativeUrl, listItem.Folder.ServerRelativeUrl);
+
+                    Assert.AreEqual(list.Id, listItem.ParentList.Id);
+                    Assert.AreEqual(list.Title, listItem.ParentList.Title);
+                }
+                finally
+                {
+                    if (mockFolder != null)
+                    {
+                        await mockFolder.DeleteAsync();
+                    }
+                }
+            }
+        }
+
+        [TestMethod]
+        public async Task ListItemFieldValuesTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            try
+            {
+                (string parentListName, int itemId, _) = await TestAssets.CreateTestListItemAsync(0);
+
+                using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+                {
+                    IList list = await context.Web.Lists.GetByTitleAsync(parentListName);
+
+                    Assert.IsNotNull(list);
+
+                    IListItem listItem = await list.Items.GetByIdAsync(itemId,
+                        li => li.FieldValuesAsHtml,
+                        li => li.FieldValuesAsText,
+                        li => li.FieldValuesForEdit);
+
+                    Assert.IsNotNull(listItem);
+                    Assert.AreNotEqual(0, listItem.FieldValuesAsHtml.Count);
+                    Assert.AreNotEqual(0, listItem.FieldValuesAsText.Count);
+                    Assert.AreNotEqual(0, listItem.FieldValuesForEdit.Count);
+                }
+            }
+            finally
+            {
+                await TestAssets.CleanupTestDedicatedListAsync(2);
+            }
+        }
+
+        [TestMethod]
+        public async Task ListItemAsFileFromCamlQueryAsyncTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            var documentMetadata = new Dictionary<string, object>()
+            {
+                {"TestNumberField", 154.65},
+                {"TestBoolField", true},
+                {"TestStringField", "This is my test"}
+            };
+            (string parentLibraryName, _, _) = await TestAssets.CreateTestDocumentAsync(0, documentMetadata: documentMetadata);
+
+            try
+            {
+                using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+                {
+                    const string viewXml = @"<View Scope='Recursive'><RowLimit>1</RowLimit></View>";
+
+                    IList list = await context.Web.Lists.GetByTitleAsync(parentLibraryName);
+
+                    Assert.IsNotNull(list);
+
+                    Expression<Func<IListItem, object>>[] selectors =
+                    {
+                        li => li.AllColumns,
+                        li => li.CommentsDisabled,
+                        li => li.CommentsDisabledScope,
+                        li => li.ContentType.QueryProperties(ct => ct.Name, ct => ct.Sealed),
+                        li => li.UniqueId
+                    };
+
+                    await list.LoadItemsByCamlQueryAsync(new CamlQueryOptions()
+                    {
+                        ViewXml = viewXml,
+                        DatesInUtc = true
+                    }, selectors).ConfigureAwait(false);
+
+                    IListItem listItem = list.Items.AsRequested().FirstOrDefault();
+
+                    Assert.IsNotNull(listItem);
+                    Assert.IsFalse(listItem.CommentsDisabled);
+                    Assert.AreEqual(CommentsDisabledScope.None, listItem.CommentsDisabledScope);
+                    Assert.AreEqual(FileSystemObjectType.File, listItem.FileSystemObjectType);
+                    Assert.AreNotEqual(Guid.Empty, listItem.UniqueId);
+                    Assert.IsNotNull(listItem.ServerRedirectedEmbedUri);
+                    Assert.IsFalse(string.IsNullOrWhiteSpace(listItem.ServerRedirectedEmbedUrl));
+
+                    Assert.IsFalse(string.IsNullOrWhiteSpace(listItem.ContentType.Name));
+                    Assert.IsFalse(listItem.ContentType.Sealed);
+
+                    // TODO: Update ListItem from file is not working yet (look at CreateTestDocumentAsync)
+                    //Assert.AreEqual(154.65, listItem.Values["TestNumberField"]);
+                    //Assert.AreEqual(true, listItem.Values["TestBoolField"]);
+                    //Assert.AreEqual("This is my test", listItem.Values["TestStringField"]);
+                }
+            }
+            finally
+            {
+                await TestAssets.CleanupTestDocumentAsync(2);
+            }
+        }
+
+        [TestMethod]
+        public async Task ListItemAsFileFromDataStreamTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            (string parentLibraryName, _, _) = await TestAssets.CreateTestDocumentAsync(0);
+
+            try
+            {
+                using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+                {
+                    const string viewXml = @"<View Scope='Recursive'><RowLimit Paged='TRUE'>1</RowLimit></View>";
+
+                    IList list = await context.Web.Lists.GetByTitleAsync(parentLibraryName);
+
+                    Assert.IsNotNull(list);
+
+                    var output = await list.LoadListDataAsStreamAsync(new RenderListDataOptions()
+                    {
+                        ViewXml = viewXml,
+                        RenderOptions = RenderListDataOptionsFlags.ListData
+                    }).ConfigureAwait(false);
+
+                    IListItem listItem = list.Items.AsRequested().FirstOrDefault();
+
+                    Assert.IsNotNull(listItem);
+
+
+                }
+            }
+            finally
+            {
+                await TestAssets.CleanupTestDocumentAsync(2);
+            }
+        }
+        #endregion
+
+        #region GetDisplayName
+        [TestMethod]
+        public async Task GetFileDisplayNameAsyncTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            (string parentLibraryName, _, string documentUrl) = await TestAssets.CreateTestDocumentAsync(0);
+
+            try
+            {
+                using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+                {
+                    IFile file = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl, f => f.ListItemAllFields.QueryProperties(li => li.Id));
+
+                    Assert.IsNotNull(file);
+                    Assert.IsNotNull(file.ListItemAllFields);
+                    Assert.IsTrue(file.ListItemAllFields.Id > 0);
+
+                    IList list = await context.Web.Lists.GetByTitleAsync(parentLibraryName);
+
+                    Assert.IsNotNull(list);
+
+                    IListItem listItem = await list.Items.GetByIdAsync(file.ListItemAllFields.Id);
+
+                    Assert.IsNotNull(listItem);
+
+                    string displayName = await listItem.GetDisplayNameAsync();
+
+                    Assert.IsFalse(string.IsNullOrWhiteSpace(displayName));
+                }
+            }
+            finally
+            {
+                await TestAssets.CleanupTestDocumentAsync(2);
+            }
+        }
+
+        [TestMethod]
+        public async Task GetFileDisplayNameTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            (string parentLibraryName, _, string documentUrl) = await TestAssets.CreateTestDocumentAsync(0);
+
+            try
+            {
+                using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+                {
+                    IFile file = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl, f => f.ListItemAllFields.QueryProperties(li => li.Id));
+
+                    Assert.IsNotNull(file);
+                    Assert.IsNotNull(file.ListItemAllFields);
+                    Assert.IsTrue(file.ListItemAllFields.Id > 0);
+
+                    IList list = await context.Web.Lists.GetByTitleAsync(parentLibraryName);
+
+                    Assert.IsNotNull(list);
+
+                    IListItem listItem = await list.Items.GetByIdAsync(file.ListItemAllFields.Id);
+
+                    Assert.IsNotNull(listItem);
+
+                    string displayName = listItem.GetDisplayName();
+
+                    Assert.IsFalse(string.IsNullOrWhiteSpace(displayName));
+                }
+            }
+            finally
+            {
+                await TestAssets.CleanupTestDocumentAsync(2);
+            }
+        }
+
+        [TestMethod]
+        public async Task GetDisplayNameAsyncTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            try
+            {
+                (string parentListName, int itemId, _) = await TestAssets.CreateTestListItemAsync(0);
+
+                using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+                {
+                    IList list = await context.Web.Lists.GetByTitleAsync(parentListName);
+
+                    Assert.IsNotNull(list);
+
+                    IListItem listItem = await list.Items.GetByIdAsync(itemId);
+
+                    Assert.IsNotNull(listItem);
+
+                    string displayName = await listItem.GetDisplayNameAsync();
+
+                    Assert.IsFalse(string.IsNullOrWhiteSpace(displayName));
+                }
+            }
+            finally
+            {
+                await TestAssets.CleanupTestDedicatedListAsync(2);
+            }
+        }
+
+        [TestMethod]
+        public async Task GetDisplayNameTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            try
+            {
+                (string parentListName, int itemId, _) = await TestAssets.CreateTestListItemAsync(0);
+
+                using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+                {
+                    IList list = await context.Web.Lists.GetByTitleAsync(parentListName);
+
+                    Assert.IsNotNull(list);
+
+                    IListItem listItem = await list.Items.GetByIdAsync(itemId);
+
+                    Assert.IsNotNull(listItem);
+
+                    string displayName = listItem.GetDisplayName();
+
+                    Assert.IsFalse(string.IsNullOrWhiteSpace(displayName));
+                }
+            }
+            finally
+            {
+                await TestAssets.CleanupTestDedicatedListAsync(2);
+            }
+        }
+        #endregion
 
         //[TestMethod]
         //public async Task FieldTypeReadUrl()
@@ -2739,7 +3133,5 @@ namespace PnP.Core.Test.SharePoint
 
         //    }
         //}
-
-
     }
 }
