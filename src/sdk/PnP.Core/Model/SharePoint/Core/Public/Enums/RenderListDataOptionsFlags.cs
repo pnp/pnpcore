@@ -93,5 +93,40 @@ namespace PnP.Core.Model.SharePoint
         /// Return client-side component manifest information associated with the list (reserved for future use)
         /// </summary>
         ClientSideComponentManifest = 32768,
+
+        /// <summary>
+        /// Return all content-types available on the list
+        /// </summary>
+        ListAvailableContentTypes = 65536,
+
+        /// <summary>
+        /// Return the order of items in the new-item menu
+        /// </summary>
+        FolderContentTypeOrder = 131072,
+
+        /// <summary>
+        /// Return information to initialize Grid for quick edit
+        /// </summary>
+        GridInitInfo = 262144,
+        
+        /// <summary>
+        /// Indicator if the vroom API of the SPItemUrl returned in MediaTAUrlGenerator should use site url as host
+        /// </summary>
+        SiteUrlAsMediaTASPItemHost = 524288,
+        
+        /// <summary>
+        /// Return the files representing mount points in the list
+        /// </summary>
+        AddToOneDrive = 1048576,
+        
+        /// <summary>
+        /// Return SPFX CustomAction
+        /// </summary>
+        SPFXCustomActions = 2097152,
+
+        /// <summary>
+        /// Do not return non-SPFX CustomAction
+        /// </summary>
+        CustomActions = 4194304,
     }
 }

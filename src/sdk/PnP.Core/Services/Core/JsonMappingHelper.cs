@@ -124,14 +124,11 @@ namespace PnP.Core.Services
                 // Enumerate the received properties and try to map them to the model
                 foreach (var property in apiResponse.JsonElement.EnumerateObject())
                 {
-                    // Very special case to handle when the data is loaded via DataStream. A DataStream returns "ID", but not "Id".
-                    var ignoreCasing = pnpObject is IListItem && property.NameEquals("ID");
-                    
                     // Find the model field linked to this field
-                    EntityFieldInfo entityField = LookupEntityField(entity, apiResponse, property, ignoreCasing);
+                    EntityFieldInfo entityField = LookupEntityField(entity, apiResponse, property);
 
                     // Do we need to re-parent this json mapping to a non expandable collection in the current model?
-                    if (!string.IsNullOrEmpty(apiResponse.ApiCall.ReceivingProperty) && (property.NameEquals("results") || property.NameEquals("Row")))
+                    if (!string.IsNullOrEmpty(apiResponse.ApiCall.ReceivingProperty) && property.NameEquals("results"))
                     {
                         entityField = entity.Fields.FirstOrDefault(p => !string.IsNullOrEmpty(p.Name) && p.Name.Equals(apiResponse.ApiCall.ReceivingProperty, StringComparison.InvariantCultureIgnoreCase)) ??
                                       entity.Fields.FirstOrDefault(p => !string.IsNullOrEmpty(p.SharePointName) && p.SharePointName.Equals(apiResponse.ApiCall.ReceivingProperty, StringComparison.InvariantCultureIgnoreCase));
@@ -152,7 +149,7 @@ namespace PnP.Core.Services
                             JsonElement resultsProperty = default;
 
                             // If the property is named "results" and is of type Array, it means it is a collection of items
-                            if ((property.NameEquals("results") || property.NameEquals("Row")) && property.Value.ValueKind == JsonValueKind.Array)
+                            if (property.NameEquals("results") && property.Value.ValueKind == JsonValueKind.Array)
                             {
                                 // and we use it directly
                                 resultsProperty = property.Value;
@@ -267,7 +264,7 @@ namespace PnP.Core.Services
                         else // Simple property mapping
                         {
                             // Keep the id value aside when seeing it for later usage
-                            if (string.IsNullOrEmpty(idFieldValue) && property.Name.Equals(entity.SharePointKeyField.Name, StringComparison.InvariantCultureIgnoreCase))
+                            if (string.IsNullOrEmpty(idFieldValue) && property.Name.Equals(entity.SharePointKeyField.Name))
                             {
                                 idFieldValue = GetJsonPropertyValue(property).ToString();
                             }
@@ -328,7 +325,7 @@ namespace PnP.Core.Services
                         }
                         else if (useOverflowField)
                         {
-                            if (string.IsNullOrEmpty(idFieldValue) && property.Name.Equals(entity.SharePointKeyField.Name, StringComparison.InvariantCultureIgnoreCase))
+                            if (string.IsNullOrEmpty(idFieldValue) && property.Name.Equals(entity.SharePointKeyField.Name))
                             {
                                 idFieldValue = GetJsonPropertyValue(property).ToString();
                             }
@@ -1170,15 +1167,13 @@ namespace PnP.Core.Services
             pnpObject.BatchRequestId = batchRequestId;
         }
 
-        private static EntityFieldInfo LookupEntityField(EntityInfo entity, ApiResponse apiResponse, JsonProperty property, bool forceIgnoreCase = false)
+        private static EntityFieldInfo LookupEntityField(EntityInfo entity, ApiResponse apiResponse, JsonProperty property)
         {
             EntityFieldInfo entityField = null;
             if (apiResponse.ApiCall.Type == ApiType.SPORest)
             {
                 // Changed to case insensitive because when loading data via DataStream, the ID field comes back not as "Id", but as "ID"
-                entityField = forceIgnoreCase
-                    ? entity.Fields.FirstOrDefault(p => !string.IsNullOrEmpty(p.SharePointName) && p.SharePointName.Equals(property.Name, StringComparison.InvariantCultureIgnoreCase))
-                    : entity.Fields.FirstOrDefault(p => p.SharePointName == property.Name);
+                entityField = entity.Fields.FirstOrDefault(p => p.SharePointName == property.Name);
             }
             else if (apiResponse.ApiCall.Type == ApiType.Graph || apiResponse.ApiCall.Type == ApiType.GraphBeta)
             {

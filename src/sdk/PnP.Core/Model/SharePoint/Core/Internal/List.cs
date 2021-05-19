@@ -411,7 +411,7 @@ namespace PnP.Core.Model.SharePoint
             var baseRequestUri = $"_api/Web/Lists(guid'{Id}')/GetItems";
             string body = JsonSerializer.Serialize(camlQuery, typeof(ExpandoObject), new JsonSerializerOptions() { IgnoreNullValues = true });
 
-            if (EntityManager.GetEntityConcreteInstance(typeof(IListItem), this, this.PnPContext) is BaseDataModel<IListItem> concreteEntity)
+            if (EntityManager.GetEntityConcreteInstance(typeof(IListItem), this, PnPContext) is BaseDataModel<IListItem> concreteEntity)
             {
                 var entityInfo = EntityManager.GetClassInfo(concreteEntity.GetType(), concreteEntity, null, selectors);
                 var apiCallRequest = await QueryClient.BuildGetAPICallAsync(concreteEntity, entityInfo, new ApiCall(baseRequestUri, ApiType.SPORest), true).ConfigureAwait(false);
@@ -449,15 +449,10 @@ namespace PnP.Core.Model.SharePoint
 
             // The field information request was regular request and as such the returned json was automatically handled
             // The GetListDataAsStream request is a raw request, so we'll need to process the returned json manually
-            var batchRequest = batch.Requests[requestToUse];
-            string responseJson = batchRequest.ResponseJson;
+            string responseJson = batch.Requests[requestToUse].ResponseJson;
 
             if (!string.IsNullOrEmpty(responseJson))
             {
-                // Load as much as we can to match the properties of an IListItem. I realize this isn't perfect, because it won't
-                // hydrate something like IListItem.ContentType, but it's a start.
-                await JsonMappingHelper.MapJsonToModel(batchRequest).ConfigureAwait(false);
-
                 // Now do it again to properly transform the Values dictionary to proper objects
                 return await ListDataAsStreamHandler.Deserialize(responseJson, this).ConfigureAwait(false);
             }
@@ -498,7 +493,7 @@ namespace PnP.Core.Model.SharePoint
             }.AsExpando();
             string body = JsonSerializer.Serialize(renderListDataParameters, typeof(ExpandoObject), new JsonSerializerOptions() { IgnoreNullValues = true });
 
-            var apiCall = new ApiCall($"_api/Web/Lists(guid'{Id}')/RenderListDataAsStream", ApiType.SPORest, body, "Items")
+            var apiCall = new ApiCall($"_api/Web/Lists(guid'{Id}')/RenderListDataAsStream", ApiType.SPORest, body/*, "Items"*/)
             {
                 SkipCollectionClearing = true
             };

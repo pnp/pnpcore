@@ -182,6 +182,29 @@ IFile addedFile = await siteAssetsFolder.Files.AddAsync("test.docx",
                   System.IO.File.OpenRead($".{Path.DirectorySeparatorChar}TestFilesFolder{Path.DirectorySeparatorChar}test.docx"));
 ```
 
+## Updating file metadata
+
+The library in which you've uploaded a file might have additional columns to store metadata about the file. To update this metadata you first need to load the `IListItem` linked to the added file via the `ListItemAllFields` property, followed by setting the metadata and updating the `IListItem`.
+
+>[!Note]
+> See the [working with list items](listitems-intro.md) page for information on how to update an `IListItem`.
+
+```csharp
+// Get a reference to a folder
+IFolder documentsFolder = await context.Web.Folders.Where(f => f.Name == "Documents").FirstOrDefaultAsync();
+
+// Upload a file by adding it to the folder's files collection
+IFile addedFile = await documentsFolder.Files.AddAsync("test.docx", 
+                  System.IO.File.OpenRead($".{Path.DirectorySeparatorChar}TestFilesFolder{Path.DirectorySeparatorChar}test.docx"));
+// Load the corresponding ListItem
+await addedFile.ListItemAllFields.LoadAsync();
+// Set the metadata
+addedFile.ListItemAllFields["Field1"] = "Hi there";
+addedFile.ListItemAllFields["Field2"] = true;
+// Persist the ListItem changes
+await addedFile.ListItemAllFields.UpdateAsync();
+```
+
 ## Downloading files
 
 If you want to download a file you do need to use either the [GetContentAsync method](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IFile.html#PnP_Core_Model_SharePoint_IFile_GetContentAsync_System_Boolean_) if you prefer a Stream as result type or [GetContentBytesAsync](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IFile.html#collapsible-PnP_Core_Model_SharePoint_IFile_GetContentBytesAsync) if you prefer a byte array.

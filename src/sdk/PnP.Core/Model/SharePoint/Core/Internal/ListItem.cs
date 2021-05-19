@@ -194,11 +194,11 @@ namespace PnP.Core.Model.SharePoint
 
         public IContentType ContentType { get => GetModelValue<IContentType>(); }
 
-        public IPropertyValues FieldValuesAsHtml { get => GetModelValue<IPropertyValues>(); }
+        public IFieldStringValues FieldValuesAsHtml { get => GetModelValue<IFieldStringValues>(); }
 
-        public IPropertyValues FieldValuesAsText { get => GetModelValue<IPropertyValues>(); }
+        public IFieldStringValues FieldValuesAsText { get => GetModelValue<IFieldStringValues>(); }
 
-        public IPropertyValues FieldValuesForEdit { get => GetModelValue<IPropertyValues>(); }
+        public IFieldStringValues FieldValuesForEdit { get => GetModelValue<IFieldStringValues>(); }
 
         public IFile File { get => GetModelValue<IFile>(); }
 
@@ -685,7 +685,9 @@ namespace PnP.Core.Model.SharePoint
             {
                 var json = JsonDocument.Parse(response.Json).RootElement.GetProperty("d");
 
+#pragma warning disable CA1507 // Use nameof to express symbol names
                 if (json.TryGetProperty("CommentsDisabled", out JsonElement commentsDisabled))
+#pragma warning restore CA1507 // Use nameof to express symbol names
                 {
                     return commentsDisabled.GetBoolean();
                 }

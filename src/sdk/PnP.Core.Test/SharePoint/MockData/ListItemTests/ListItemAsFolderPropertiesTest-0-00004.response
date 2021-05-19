@@ -1,9 +1,9 @@
---batchresponse_3e76f5ac-97af-423c-bbde-611f93b91e4f
+--batchresponse_5dba6f17-18b3-45f0-82d7-1c7cdb5c492a
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{"d":{"__metadata":{"id":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/pnpcoresdktestgroup/Shared Documents/ListItemAsFolderPropertiesTest')","uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/pnpcoresdktestgroup/Shared%20Documents/ListItemAsFolderPropertiesTest')","type":"SP.Folder"},"ListItemAllFields":{"__metadata":{"id":"0b4c0cd8-6d31-4b2a-a8a2-4d29c96dede6","uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/pnpcoresdktestgroup/Shared%20Documents/ListItemAsFolderPropertiesTest')/ListItemAllFields","etag":"\"1\"","type":"SP.Data.Shared_x0020_DocumentsItem"},"Id":54,"ID":54},"Name":"ListItemAsFolderPropertiesTest","ServerRelativeUrl":"/sites/pnpcoresdktestgroup/Shared Documents/ListItemAsFolderPropertiesTest","UniqueId":"73abc5f8-b2b3-4353-820e-c730ae7a37e8"}}
---batchresponse_3e76f5ac-97af-423c-bbde-611f93b91e4f--
+{"d":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/prov-1/Shared Documents/ListItemAsFolderPropertiesTest')","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/prov-1/Shared%20Documents/ListItemAsFolderPropertiesTest')","type":"SP.Folder"},"ListItemAllFields":{"__metadata":{"id":"4ddef780-f3ca-4df1-9820-ba8a794f708f","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/prov-1/Shared%20Documents/ListItemAsFolderPropertiesTest')/ListItemAllFields","etag":"\"1\"","type":"SP.Data.Shared_x0020_DocumentsItem"},"Id":3363,"ID":3363},"Name":"ListItemAsFolderPropertiesTest","ServerRelativeUrl":"/sites/prov-1/Shared Documents/ListItemAsFolderPropertiesTest","UniqueId":"f4dd864b-9797-4e1a-a28f-2e1da0b843b1"}}
+--batchresponse_5dba6f17-18b3-45f0-82d7-1c7cdb5c492a--

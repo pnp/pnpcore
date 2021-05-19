@@ -1,9 +1,9 @@
---batchresponse_cdc0b08c-2b1c-4a0c-8b41-895b378c7a1a
+--batchresponse_b769ad0f-5b67-48ae-a5fc-8533dea1a6d5
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{"d":{"__metadata":{"id":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/pnpcoresdktestgroup/Shared Documents/PNP_SDK_TEST_ListItemAsFilePropertiesTest.docx')","uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/pnpcoresdktestgroup/Shared%20Documents/PNP_SDK_TEST_ListItemAsFilePropertiesTest.docx')","type":"SP.File"},"ListItemAllFields":{"__metadata":{"id":"63ee6b49-c2fd-45b7-be53-1da4aa48f330","uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/pnpcoresdktestgroup/Shared%20Documents/PNP_SDK_TEST_ListItemAsFilePropertiesTest.docx')/ListItemAllFields","etag":"\"1\"","type":"SP.Data.Shared_x0020_DocumentsItem"},"Id":53,"ID":53},"Length":"18466","ServerRelativeUrl":"/sites/pnpcoresdktestgroup/Shared Documents/PNP_SDK_TEST_ListItemAsFilePropertiesTest.docx","UniqueId":"9eb50729-3f3f-42ec-a025-07d5bdf5eaf6"}}
---batchresponse_cdc0b08c-2b1c-4a0c-8b41-895b378c7a1a--
+{"d":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/prov-1/Shared Documents/PNP_SDK_TEST_ListItemAsFilePropertiesTest.docx')","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/prov-1/Shared%20Documents/PNP_SDK_TEST_ListItemAsFilePropertiesTest.docx')","type":"SP.File"},"ListItemAllFields":{"__metadata":{"id":"50a8f190-bcff-47b6-a607-ea2da5137fc2","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/prov-1/Shared%20Documents/PNP_SDK_TEST_ListItemAsFilePropertiesTest.docx')/ListItemAllFields","etag":"\"1\"","type":"SP.Data.Shared_x0020_DocumentsItem"},"Id":3362,"ID":3362},"Length":"18050","ServerRelativeUrl":"/sites/prov-1/Shared Documents/PNP_SDK_TEST_ListItemAsFilePropertiesTest.docx","UniqueId":"128b2371-4a0c-4356-b624-bb9f77d6f338"}}
+--batchresponse_b769ad0f-5b67-48ae-a5fc-8533dea1a6d5--

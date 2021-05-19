@@ -39,17 +39,17 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// All the field values for the list item as HTML
         /// </summary>
-        public IPropertyValues FieldValuesAsHtml { get; }
+        public IFieldStringValues FieldValuesAsHtml { get; }
 
         /// <summary>
         /// All the field values for the list item as text
         /// </summary>
-        public IPropertyValues FieldValuesAsText { get; }
+        public IFieldStringValues FieldValuesAsText { get; }
 
         /// <summary>
         /// All the field values for the list item for editing
         /// </summary>
-        public IPropertyValues FieldValuesForEdit { get; }
+        public IFieldStringValues FieldValuesForEdit { get; }
 
         /// <summary>
         /// The file, if any, associated with the list item

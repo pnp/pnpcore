@@ -102,15 +102,7 @@ namespace PnP.Core.Model.SharePoint
                             if (property.Name == "ID")
                             {
                                 // already handled, so continue
-                            }
-                            //else if (property.Name == "_CommentFlags")
-                            //{
-                            //    string commentsFlags = row.GetProperty("_CommentFlags").GetString();
-                            //    if (bool.TryParse(commentsFlags, out bool commentsEnabled))
-                            //    {
-                            //        itemToUpdate.SetSystemProperty(p => p.CommentsDisabled, commentsEnabled);
-                            //    }
-                            //}
+                            }                            
                             // Handle the overflow fields
                             else
                             {
@@ -123,7 +115,7 @@ namespace PnP.Core.Model.SharePoint
                                     {
                                         // MultiChoice property
                                         fieldValue = new List<string>();
-                                        foreach(var prop in property.Value.EnumerateArray())
+                                        foreach (var prop in property.Value.EnumerateArray())
                                         {
                                             (fieldValue as List<string>).Add(prop.GetString());
                                         }
@@ -131,7 +123,7 @@ namespace PnP.Core.Model.SharePoint
                                     else
                                     {
                                         // Handle empty regular field value so that they're the same as with a regular Get call
-                                        if ((property.Field.FieldTypeKind == FieldType.Text || property.Field.FieldTypeKind == FieldType.Note || property.Field.FieldTypeKind == FieldType.MultiChoice || property.Field.FieldTypeKind == FieldType.Choice ) &&
+                                        if ((property.Field.FieldTypeKind == FieldType.Text || property.Field.FieldTypeKind == FieldType.Note || property.Field.FieldTypeKind == FieldType.MultiChoice || property.Field.FieldTypeKind == FieldType.Choice) &&
                                             property.Value.ValueKind == JsonValueKind.String &&
                                             string.IsNullOrEmpty(property.Value.GetString()))
                                         {
@@ -165,7 +157,7 @@ namespace PnP.Core.Model.SharePoint
                                     else
                                     {
                                         fieldValue = new FieldValueCollection(property.Field, property.Name);
-                                        foreach(var xx in property.Values)
+                                        foreach (var xx in property.Values)
                                         {
                                             var yy = xx.FieldValue.FromListDataAsStream(xx.Properties);
                                             if (yy is FieldLookupValue yyLookup)
@@ -177,7 +169,7 @@ namespace PnP.Core.Model.SharePoint
                                                     (fieldValue as FieldValueCollection).Values.Add(yyLookup);
                                                 }
                                             }
-                                            else 
+                                            else
                                             {
                                                 (fieldValue as FieldValueCollection).Values.Add(yy);
                                             }
@@ -193,6 +185,26 @@ namespace PnP.Core.Model.SharePoint
                                 {
                                     overflowDictionary.SystemUpdate(property.Name, fieldValue);
                                 }
+                            }
+                        }
+
+                        // Post processing for ListItem properties
+                        if (row.TryGetProperty("UniqueId", out JsonElement uniqueId))
+                        {
+                            itemToUpdate.SetSystemProperty(p => p.UniqueId, Guid.Parse(uniqueId.ToString()));
+                        }
+
+                        if (row.TryGetProperty("ServerRedirectedEmbedUrl", out JsonElement serverRedirectedEmbedUrl))
+                        {
+                            itemToUpdate.SetSystemProperty(p => p.ServerRedirectedEmbedUri, serverRedirectedEmbedUrl.GetString());
+                            itemToUpdate.SetSystemProperty(p => p.ServerRedirectedEmbedUrl, serverRedirectedEmbedUrl.GetString());
+                        }
+
+                        if (row.TryGetProperty("FSObjType", out JsonElement fsObjType))
+                        {
+                            if (Enum.TryParse(fsObjType.GetString(), out FileSystemObjectType fsot))
+                            {
+                                itemToUpdate.SetSystemProperty(p => p.FileSystemObjectType, fsot);
                             }
                         }
                     }

@@ -2797,40 +2797,68 @@ namespace PnP.Core.Test.SharePoint
         {
             //TestCommon.Instance.Mocking = false;
 
-            var documentMetadata = new Dictionary<string, object>()
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                {"TestNumberField", 154.65},
-                {"TestBoolField", true},
-                {"TestStringField", "This is my test"}
-            };
-            (string parentLibraryName, _, _) = await TestAssets.CreateTestDocumentAsync(0, documentMetadata: documentMetadata);
+                // Create new library with extra fields
+                var listTitle = TestCommon.GetPnPSdkTestAssetName("ListItemAsFileFromCamlQueryAsyncTest");
+                var list = await context.Web.Lists.AddAsync(listTitle, ListTemplateType.DocumentLibrary);
 
-            try
-            {
-                using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+                // Add the fields as one batch call
+                string fieldGroup = "custom";
+                IField addedTextField1 = await list.Fields.AddTextBatchAsync("TestStringField", new FieldTextOptions()
                 {
+                    Group = fieldGroup,
+                    AddToDefaultView = true,
+                });
+
+                IField addedBoolField1 = await list.Fields.AddBooleanBatchAsync("TestBoolField", new FieldBooleanOptions()
+                {
+                    Group = fieldGroup,
+                    AddToDefaultView = true,
+                });
+
+                IField addedNumberField1 = await list.Fields.AddNumberBatchAsync("TestNumberField", new FieldNumberOptions()
+                {
+                    Group = fieldGroup,
+                    AddToDefaultView = true,
+                });
+                await context.ExecuteAsync();
+
+                // Add a file
+                await list.EnsurePropertiesAsync(l => l.RootFolder);
+                IFile testDocument = list.RootFolder.Files.Add("test.docx", System.IO.File.OpenRead($".{Path.DirectorySeparatorChar}TestAssets{Path.DirectorySeparatorChar}test.docx"), true);
+
+                // Set the file metadata, first load the connected list item
+                await testDocument.ListItemAllFields.LoadAsync();
+                testDocument.ListItemAllFields["TestStringField"] = "This is my test";
+                testDocument.ListItemAllFields["TestBoolField"] = true;
+                testDocument.ListItemAllFields["TestNumberField"] = 10;
+                await testDocument.ListItemAllFields.UpdateAsync();
+
+                using (var context2 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))
+                {
+                    // Query the document again
                     const string viewXml = @"<View Scope='Recursive'><RowLimit>1</RowLimit></View>";
 
-                    IList list = await context.Web.Lists.GetByTitleAsync(parentLibraryName);
-
-                    Assert.IsNotNull(list);
-
+                    var list2 = await context2.Web.Lists.GetByTitleAsync(listTitle);
                     Expression<Func<IListItem, object>>[] selectors =
                     {
-                        li => li.AllColumns,
-                        li => li.CommentsDisabled,
-                        li => li.CommentsDisabledScope,
-                        li => li.ContentType.QueryProperties(ct => ct.Name, ct => ct.Sealed),
-                        li => li.UniqueId
-                    };
+                            li => li.AllColumns,
+                            li => li.CommentsDisabled,
+                            li => li.CommentsDisabledScope,
+                            li => li.ContentType.QueryProperties(ct => ct.Name, ct => ct.Sealed),
+                            li => li.UniqueId,
+                            li => li.ServerRedirectedEmbedUri,
+                            li => li.ServerRedirectedEmbedUrl
+                        };
 
-                    await list.LoadItemsByCamlQueryAsync(new CamlQueryOptions()
+                    await list2.LoadItemsByCamlQueryAsync(new CamlQueryOptions()
                     {
                         ViewXml = viewXml,
                         DatesInUtc = true
                     }, selectors).ConfigureAwait(false);
 
-                    IListItem listItem = list.Items.AsRequested().FirstOrDefault();
+                    IListItem listItem = list2.Items.AsRequested().FirstOrDefault();
 
                     Assert.IsNotNull(listItem);
                     Assert.IsFalse(listItem.CommentsDisabled);
@@ -2843,15 +2871,13 @@ namespace PnP.Core.Test.SharePoint
                     Assert.IsFalse(string.IsNullOrWhiteSpace(listItem.ContentType.Name));
                     Assert.IsFalse(listItem.ContentType.Sealed);
 
-                    // TODO: Update ListItem from file is not working yet (look at CreateTestDocumentAsync)
-                    //Assert.AreEqual(154.65, listItem.Values["TestNumberField"]);
-                    //Assert.AreEqual(true, listItem.Values["TestBoolField"]);
-                    //Assert.AreEqual("This is my test", listItem.Values["TestStringField"]);
+                    Assert.AreEqual(10, listItem.Values["TestNumberField"]);
+                    Assert.AreEqual(true, listItem.Values["TestBoolField"]);
+                    Assert.AreEqual("This is my test", listItem.Values["TestStringField"]);
                 }
-            }
-            finally
-            {
-                await TestAssets.CleanupTestDocumentAsync(2);
+
+                // Delete the library again
+                await list.DeleteAsync();
             }
         }
 
@@ -2859,34 +2885,76 @@ namespace PnP.Core.Test.SharePoint
         public async Task ListItemAsFileFromDataStreamTest()
         {
             //TestCommon.Instance.Mocking = false;
-            (string parentLibraryName, _, _) = await TestAssets.CreateTestDocumentAsync(0);
 
-            try
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+                // Create new library with extra fields
+                var listTitle = TestCommon.GetPnPSdkTestAssetName("ListItemAsFileFromDataStreamTest");
+                var list = await context.Web.Lists.AddAsync(listTitle, ListTemplateType.DocumentLibrary);
+
+                // Add the fields as one batch call
+                string fieldGroup = "custom";
+                IField addedTextField1 = await list.Fields.AddTextBatchAsync("TestStringField", new FieldTextOptions()
+                {
+                    Group = fieldGroup,
+                    AddToDefaultView = true,
+                });
+
+                IField addedBoolField1 = await list.Fields.AddBooleanBatchAsync("TestBoolField", new FieldBooleanOptions()
+                {
+                    Group = fieldGroup,
+                    AddToDefaultView = true,
+                });
+
+                IField addedNumberField1 = await list.Fields.AddNumberBatchAsync("TestNumberField", new FieldNumberOptions()
+                {
+                    Group = fieldGroup,
+                    AddToDefaultView = true,
+                });
+                await context.ExecuteAsync();
+
+                // Add a file
+                await list.EnsurePropertiesAsync(l => l.RootFolder);
+                IFile testDocument = list.RootFolder.Files.Add("test.docx", System.IO.File.OpenRead($".{Path.DirectorySeparatorChar}TestAssets{Path.DirectorySeparatorChar}test.docx"), true);
+
+                // Set the file metadata, first load the connected list item
+                await testDocument.ListItemAllFields.LoadAsync();
+                testDocument.ListItemAllFields["TestStringField"] = "This is my test";
+                testDocument.ListItemAllFields["TestBoolField"] = true;
+                testDocument.ListItemAllFields["TestNumberField"] = 10;
+                await testDocument.ListItemAllFields.UpdateAsync();
+
+                using (var context2 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))
                 {
                     const string viewXml = @"<View Scope='Recursive'><RowLimit Paged='TRUE'>1</RowLimit></View>";
 
-                    IList list = await context.Web.Lists.GetByTitleAsync(parentLibraryName);
+                    IList list2 = await context2.Web.Lists.GetByTitleAsync(listTitle);
 
-                    Assert.IsNotNull(list);
+                    Assert.IsNotNull(list2);
 
-                    var output = await list.LoadListDataAsStreamAsync(new RenderListDataOptions()
+                    var output = await list2.LoadListDataAsStreamAsync(new RenderListDataOptions()
                     {
                         ViewXml = viewXml,
+                        //RenderOptions = RenderListDataOptionsFlags.ListData | RenderListDataOptionsFlags.ListContentType | RenderListDataOptionsFlags.ContextInfo
                         RenderOptions = RenderListDataOptionsFlags.ListData
                     }).ConfigureAwait(false);
 
-                    IListItem listItem = list.Items.AsRequested().FirstOrDefault();
+                    IListItem listItem = list2.Items.AsRequested().FirstOrDefault();
 
                     Assert.IsNotNull(listItem);
 
+                    Assert.AreEqual(FileSystemObjectType.File, listItem.FileSystemObjectType);
+                    Assert.AreNotEqual(Guid.Empty, listItem.UniqueId);
+                    Assert.IsNotNull(listItem.ServerRedirectedEmbedUri);
+                    Assert.IsFalse(string.IsNullOrWhiteSpace(listItem.ServerRedirectedEmbedUrl));
 
+                    Assert.AreEqual(10, (double)listItem.Values["TestNumberField"]);
+                    Assert.AreEqual(true, (bool)listItem.Values["TestBoolField"]);
+                    Assert.AreEqual("This is my test", (string)listItem.Values["TestStringField"]);
                 }
-            }
-            finally
-            {
-                await TestAssets.CleanupTestDocumentAsync(2);
+
+                // Delete the library again
+                await list.DeleteAsync();
             }
         }
         #endregion
