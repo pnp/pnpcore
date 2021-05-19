@@ -17,6 +17,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
 ### Changed
 
+- RenderListDataAsStream populates the IListItem's IContentType [jansenbe - Bert Jansen]
 - Fixed NullReferenceException in Values_CollectionChange (issue #447) #445 [DaleyKD - Kyle Daley]
 - Ensure the Context.Group model has it's groupid set if that was available [jansenbe - Bert Jansen]
 - Use ConcurrentDictionary to track batches in the BatchClient class [jansenbe - Bert Jansen]

@@ -493,7 +493,7 @@ namespace PnP.Core.Model.SharePoint
             }.AsExpando();
             string body = JsonSerializer.Serialize(renderListDataParameters, typeof(ExpandoObject), new JsonSerializerOptions() { IgnoreNullValues = true });
 
-            var apiCall = new ApiCall($"_api/Web/Lists(guid'{Id}')/RenderListDataAsStream", ApiType.SPORest, body/*, "Items"*/)
+            var apiCall = new ApiCall($"_api/Web/Lists(guid'{Id}')/RenderListDataAsStream", ApiType.SPORest, body)
             {
                 SkipCollectionClearing = true
             };

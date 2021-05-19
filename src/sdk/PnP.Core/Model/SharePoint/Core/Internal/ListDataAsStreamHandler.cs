@@ -1,11 +1,11 @@
-﻿using System;
+﻿using PnP.Core.QueryModel;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Text.Json;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using PnP.Core.QueryModel;
 
 namespace PnP.Core.Model.SharePoint
 {
@@ -206,6 +206,18 @@ namespace PnP.Core.Model.SharePoint
                             {
                                 itemToUpdate.SetSystemProperty(p => p.FileSystemObjectType, fsot);
                             }
+                        }
+
+                        if (row.TryGetProperty("ContentTypeId", out JsonElement contentTypeId) && row.TryGetProperty("ContentType", out JsonElement contentTypeName))
+                        {
+                            var ct = itemToUpdate.ContentType;
+
+                            ct.SetSystemProperty(p => p.Id, contentTypeId.GetString());
+                            ct.SetSystemProperty(p => p.StringId, contentTypeId.GetString());
+                            ct.SetSystemProperty(p => p.Name, contentTypeName.GetString());
+                            (ct as IMetadataExtensible).Metadata.Add(PnPConstants.MetaDataRestId, contentTypeId.GetString());
+                            (ct as IMetadataExtensible).Metadata.Add(PnPConstants.MetaDataType, "SP.ContentType");
+                            (ct as ContentType).Requested = true;                            
                         }
                     }
                 }

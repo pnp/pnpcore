@@ -2891,6 +2891,10 @@ namespace PnP.Core.Test.SharePoint
                 // Create new library with extra fields
                 var listTitle = TestCommon.GetPnPSdkTestAssetName("ListItemAsFileFromDataStreamTest");
                 var list = await context.Web.Lists.AddAsync(listTitle, ListTemplateType.DocumentLibrary);
+                await list.EnsurePropertiesAsync(l => l.RootFolder);
+                list.ContentTypesEnabled = true;
+                list.EnableFolderCreation = true;
+                await list.UpdateAsync();
 
                 // Add the fields as one batch call
                 string fieldGroup = "custom";
@@ -2913,8 +2917,7 @@ namespace PnP.Core.Test.SharePoint
                 });
                 await context.ExecuteAsync();
 
-                // Add a file
-                await list.EnsurePropertiesAsync(l => l.RootFolder);
+                // Add a file                
                 IFile testDocument = list.RootFolder.Files.Add("test.docx", System.IO.File.OpenRead($".{Path.DirectorySeparatorChar}TestAssets{Path.DirectorySeparatorChar}test.docx"), true);
 
                 // Set the file metadata, first load the connected list item
@@ -2924,9 +2927,19 @@ namespace PnP.Core.Test.SharePoint
                 testDocument.ListItemAllFields["TestNumberField"] = 10;
                 await testDocument.ListItemAllFields.UpdateAsync();
 
+                // Add file in folder
+                IFolder testFolder = await list.RootFolder.AddFolderAsync("Test");
+                IFile testDocument2 = testFolder.Files.Add("test2.docx", System.IO.File.OpenRead($".{Path.DirectorySeparatorChar}TestAssets{Path.DirectorySeparatorChar}test.docx"), true);
+                // Set the file metadata, first load the connected list item
+                await testDocument2.ListItemAllFields.LoadAsync();
+                testDocument2.ListItemAllFields["TestStringField"] = "This is my test 2";
+                testDocument2.ListItemAllFields["TestBoolField"] = false;
+                testDocument2.ListItemAllFields["TestNumberField"] = 100;
+                await testDocument2.ListItemAllFields.UpdateAsync();
+
                 using (var context2 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))
                 {
-                    const string viewXml = @"<View Scope='Recursive'><RowLimit Paged='TRUE'>1</RowLimit></View>";
+                    const string viewXml = @"<View Scope='Recursive'><RowLimit Paged='TRUE'>5</RowLimit></View>";
 
                     IList list2 = await context2.Web.Lists.GetByTitleAsync(listTitle);
 
@@ -2935,7 +2948,6 @@ namespace PnP.Core.Test.SharePoint
                     var output = await list2.LoadListDataAsStreamAsync(new RenderListDataOptions()
                     {
                         ViewXml = viewXml,
-                        //RenderOptions = RenderListDataOptionsFlags.ListData | RenderListDataOptionsFlags.ListContentType | RenderListDataOptionsFlags.ContextInfo
                         RenderOptions = RenderListDataOptionsFlags.ListData
                     }).ConfigureAwait(false);
 
@@ -2948,9 +2960,28 @@ namespace PnP.Core.Test.SharePoint
                     Assert.IsNotNull(listItem.ServerRedirectedEmbedUri);
                     Assert.IsFalse(string.IsNullOrWhiteSpace(listItem.ServerRedirectedEmbedUrl));
 
+                    Assert.IsFalse(string.IsNullOrWhiteSpace(listItem.ContentType.Name));
+
                     Assert.AreEqual(10, (double)listItem.Values["TestNumberField"]);
                     Assert.AreEqual(true, (bool)listItem.Values["TestBoolField"]);
                     Assert.AreEqual("This is my test", (string)listItem.Values["TestStringField"]);
+
+
+                    IListItem lastListItem = list2.Items.AsRequested().LastOrDefault();
+
+                    Assert.IsNotNull(lastListItem);
+
+                    Assert.AreEqual(FileSystemObjectType.File, lastListItem.FileSystemObjectType);
+                    Assert.AreNotEqual(Guid.Empty, lastListItem.UniqueId);
+                    Assert.IsNotNull(lastListItem.ServerRedirectedEmbedUri);
+                    Assert.IsFalse(string.IsNullOrWhiteSpace(lastListItem.ServerRedirectedEmbedUrl));
+
+                    Assert.IsFalse(string.IsNullOrWhiteSpace(lastListItem.ContentType.Name));
+
+                    Assert.AreEqual(100, (double)lastListItem.Values["TestNumberField"]);
+                    Assert.AreEqual(false, (bool)lastListItem.Values["TestBoolField"]);
+                    Assert.AreEqual("This is my test 2", (string)lastListItem.Values["TestStringField"]);
+
                 }
 
                 // Delete the library again
