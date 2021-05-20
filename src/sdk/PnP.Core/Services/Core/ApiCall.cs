@@ -9,7 +9,7 @@ namespace PnP.Core.Services
     /// </summary>
     internal struct ApiCall
     {
-        internal ApiCall(string request, ApiType apiType, string jsonBody = null, string receivingProperty = null, bool loadPages = false)
+        internal ApiCall(string request, ApiType apiType, string jsonBody = null, string receivingProperty = null, bool loadPages = false, Dictionary<string, string> headers = null)
         {
             Type = apiType;
             Request = request;
@@ -29,9 +29,10 @@ namespace PnP.Core.Services
             LoadPages = loadPages;
             SkipCollectionClearing = false;
             ExecuteRequestApiCall = false;
+            Headers = headers;
         }
 
-        internal ApiCall(List<Core.CSOM.Requests.IRequest<object>> csomRequests, string receivingProperty = null)
+        internal ApiCall(List<Core.CSOM.Requests.IRequest<object>> csomRequests, string receivingProperty = null, Dictionary<string, string> headers=null)
         {
             Request = null;
             Type = ApiType.CSOM;
@@ -51,6 +52,7 @@ namespace PnP.Core.Services
             LoadPages = false;
             SkipCollectionClearing = false;
             ExecuteRequestApiCall = false;
+            Headers = headers;
         }
 
         /// <summary>
@@ -146,5 +148,10 @@ namespace PnP.Core.Services
         /// Flag that indicates this ApiCall was issued from an ExecuteRequest method
         /// </summary>
         internal bool ExecuteRequestApiCall { get; set; }
+
+        /// <summary>
+        /// Http-Headers for Request
+        /// </summary>
+        internal Dictionary<string, string> Headers { get; set; } 
     }
 }
