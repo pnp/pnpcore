@@ -112,7 +112,8 @@ foreach (var listItem in myList.Items)
 <h3 id="getting-list-items-via-a-caml-query">Getting list items via a CAML query</h3>
 <p>SharePoint <a href="https://docs.microsoft.com/en-us/sharepoint/dev/schema/query-schema">CAML</a> queries allow you to express a filter when loading list item data and scope down the loaded fields to the ones you need. You can use call the <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IList.html#collapsible-PnP_Core_Model_SharePoint_IList_LoadItemsByCamlQueryAsync_PnP_Core_Model_SharePoint_CamlQueryOptions_">LoadItemsByCamlQueryAsync method</a> on an <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IList.html">IList</a> for this purpose. When using this method you can either provide the CAML query directly or use the <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.CamlQueryOptions.html">CamlQueryOptions</a> class for more fine-grained control. If you use this class you typically would use the <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.CamlQueryOptions.html#collapsible-PnP_Core_Model_SharePoint_CamlQueryOptions_ViewXml">ViewXml property</a>, but also <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.CamlQueryOptions.html#collapsible-PnP_Core_Model_SharePoint_CamlQueryOptions_FolderServerRelativeUrl">FolderServerRelativeUrl</a> is used a lot to scope the query to given folder in the list.</p>
 <pre><code class="lang-csharp">// Assume the fields where not yet loaded, so loading them with the list
-var myList = context.Web.Lists.GetByTitle(&quot;My List&quot;, p =&gt; p.Title, p =&gt; p.Items, 
+// If you are using CAML query, do not use the parameter 'p =&gt; p.Items'. It causes full items to load, ignoring the CAML query. 
+var myList = context.Web.Lists.GetByTitle(&quot;My List&quot;, p =&gt; p.Title,
                                                      p =&gt; p.Fields.QueryProperties(p =&gt; p.InternalName, p =&gt; p.FieldTypeKind, p =&gt; p.TypeAsString, p =&gt; p.Title));
 
 // Build a query that only returns the Title field for items where the Title field starts with &quot;Item1&quot;
@@ -146,7 +147,8 @@ foreach (var listItem in myList.Items.AsRequested())
 <h4 id="using-paging-with-caml-queries">Using paging with CAML queries</h4>
 <p>By setting a row limit in the CAML query combined with using the the PagingInfo attribute of the <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.CamlQueryOptions.html">CamlQueryOptions</a> class you can use CAML queries to load data in a paged manner. Below snippet shows the initial page load getting 20 items and the next one getting the next 20 items.</p>
 <pre><code class="lang-csharp">// Assume the fields where not yet loaded, so loading them with the list
-var myList = context.Web.Lists.GetByTitle(&quot;My List&quot;, p =&gt; p.Title, p =&gt; p.Items, 
+// If you are using CAML query, do not use the parameter 'p =&gt; p.Items'. It causes full items to load, ignoring the CAML query. 
+var myList = context.Web.Lists.GetByTitle(&quot;My List&quot;, p =&gt; p.Title,
                                                      p =&gt; p.Fields.QueryProperties(p =&gt; p.InternalName, p =&gt; p.FieldTypeKind, p =&gt; p.TypeAsString, p =&gt; p.Title));
 
 // Build a query that only returns the first 20 rows where the Title field starts with &quot;Item1&quot;
@@ -196,7 +198,7 @@ foreach (var listItem in myList.Items.AsRequested())
 <h3 id="using-the-listdataasstream-approach">Using the ListDataAsStream approach</h3>
 <p>Using the <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_LoadListDataAsStreamAsync_PnP_Core_Model_SharePoint_RenderListDataOptions_">LoadListDataAsStreamAsync method</a> gives you the most control over how to query the list and what data to return. Using this method is similar to the above described <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IList.html#collapsible-PnP_Core_Model_SharePoint_IList_LoadItemsByCamlQueryAsync_System_String_">LoadItemsByCamlQueryAsync method</a> as you typically specify a <a href="https://docs.microsoft.com/en-us/sharepoint/dev/schema/query-schema">CAML</a> query when using this method. To configure the input of this method you need to use the <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.RenderListDataOptions.html">RenderListDataOptions class</a>. Defining the CAML query to run can be done via the ViewXml property and telling what type of data to return can be done via the <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.RenderListDataOptions.html#PnP_Core_Model_SharePoint_RenderListDataOptions_RenderOptions">RenderOptions</a> property.</p>
 <pre><code class="lang-csharp">// Assume the fields where not yet loaded, so loading them with the list
-var myList = context.Web.Lists.GetByTitle(&quot;My List&quot;, p =&gt; p.Title, p =&gt; p.Items, 
+var myList = context.Web.Lists.GetByTitle(&quot;My List&quot;, p =&gt; p.Title, 
                                                      p =&gt; p.Fields.QueryProperties(p =&gt; p.InternalName, p =&gt; p.FieldTypeKind, p =&gt; p.TypeAsString, p =&gt; p.Title));
 
 // Build a query that only returns the Title field for the top 5 items where the Title field starts with &quot;Item1&quot;
@@ -233,7 +235,7 @@ foreach (var listItem in myList.Items.AsRequested())
 </code></pre>
 <h4 id="using-paging-with-listdataasstream">Using paging with ListDataAsStream</h4>
 <pre><code class="lang-csharp">// Assume the fields where not yet loaded, so loading them with the list
-var myList = context.Web.Lists.GetByTitle(&quot;My List&quot;, p =&gt; p.Title, p =&gt; p.Items, 
+var myList = context.Web.Lists.GetByTitle(&quot;My List&quot;, p =&gt; p.Title, 
                                                      p =&gt; p.Fields.QueryProperties(p =&gt; p.InternalName, p =&gt; p.FieldTypeKind, p =&gt; p.TypeAsString, p =&gt; p.Title));
 
 // Build a query that only returns the Title field for the first 20 items where the Title field starts with &quot;Item1&quot;
