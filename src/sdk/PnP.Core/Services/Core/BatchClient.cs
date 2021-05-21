@@ -775,13 +775,14 @@ namespace PnP.Core.Services
                     {
                         foreach(var key in request.ApiCall.Headers.Keys)
                         {
-                            if(!graphRequest.Headers.ContainsKey(key))
+                            string existingKey = graphRequest.Headers.Keys.FirstOrDefault(k => k.Equals(key, StringComparison.InvariantCultureIgnoreCase));
+                            if (string.IsNullOrWhiteSpace(existingKey))
                             {
                                 graphRequest.Headers.Add(key, request.ApiCall.Headers[key]);
                             }
                             else
                             {
-                                graphRequest.Headers[key] = request.ApiCall.Headers[key];
+                                graphRequest.Headers[existingKey] = request.ApiCall.Headers[key];
                             }
                         }
                     }
