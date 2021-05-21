@@ -1,9 +1,9 @@
---batchresponse_49c4f3d7-2430-4159-8033-1ee3a27fe968
+--batchresponse_ec104b05-da69-4b1c-bf93-6d099e55cd23
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{"d":{"CopyFolder":null}}
---batchresponse_49c4f3d7-2430-4159-8033-1ee3a27fe968--
+{"d":{"__metadata":{"id":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/pnpcoresdktestgroup/Shared Documents/TEST_COPIED_NO_OPTIONS')","uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/pnpcoresdktestgroup/Shared%20Documents/TEST_COPIED_NO_OPTIONS')","type":"SP.Folder"},"Files":{"__deferred":{"uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/pnpcoresdktestgroup/Shared%20Documents/TEST_COPIED_NO_OPTIONS')/Files"}},"ListItemAllFields":{"__deferred":{"uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/pnpcoresdktestgroup/Shared%20Documents/TEST_COPIED_NO_OPTIONS')/ListItemAllFields"}},"ParentFolder":{"__deferred":{"uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/pnpcoresdktestgroup/Shared%20Documents/TEST_COPIED_NO_OPTIONS')/ParentFolder"}},"Properties":{"__deferred":{"uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/pnpcoresdktestgroup/Shared%20Documents/TEST_COPIED_NO_OPTIONS')/Properties"}},"StorageMetrics":{"__deferred":{"uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/pnpcoresdktestgroup/Shared%20Documents/TEST_COPIED_NO_OPTIONS')/StorageMetrics"}},"Folders":{"__deferred":{"uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/pnpcoresdktestgroup/Shared%20Documents/TEST_COPIED_NO_OPTIONS')/Folders"}},"Exists":true,"IsWOPIEnabled":false,"ItemCount":0,"Name":"TEST_COPIED_NO_OPTIONS","ProgID":null,"ServerRelativeUrl":"/sites/pnpcoresdktestgroup/Shared Documents/TEST_COPIED_NO_OPTIONS","TimeCreated":"2021-05-21T02:57:01Z","TimeLastModified":"2021-05-21T02:57:02Z","UniqueId":"40993493-9f39-4a9e-b135-1625fb92c51a","WelcomePage":""}}
+--batchresponse_ec104b05-da69-4b1c-bf93-6d099e55cd23--

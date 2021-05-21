@@ -1,10 +1,9 @@
---batchresponse_0eb58fa2-233a-408e-8018-95b87ce148b3
+--batchresponse_36e8ed0c-4a15-4038-886b-d21e1e16ea25
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
-HTTP/1.1 201 Created
+HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
-LOCATION: https://mwdevvalo.sharepoint.com/sites/tea-point/_api/Web/ContentTypes('0x0100302EF0D1F1DB4C4EBF58251BCCF5968A')/FieldLinks(guid'fa564e0f-0c70-4ab9-b863-0177e6ddd247')
 
-{"d":{"__metadata":{"id":"https://mwdevvalo.sharepoint.com/sites/tea-point/_api/Web/ContentTypes('0x0100302EF0D1F1DB4C4EBF58251BCCF5968A')/FieldLinks(guid'fa564e0f-0c70-4ab9-b863-0177e6ddd247')","uri":"https://mwdevvalo.sharepoint.com/sites/tea-point/_api/Web/ContentTypes('0x0100302EF0D1F1DB4C4EBF58251BCCF5968A')/FieldLinks(guid'fa564e0f-0c70-4ab9-b863-0177e6ddd247')","type":"SP.FieldLink"},"FieldInternalName":"Title","Hidden":false,"Id":"fa564e0f-0c70-4ab9-b863-0177e6ddd247","Name":"Title","Required":false}}
---batchresponse_0eb58fa2-233a-408e-8018-95b87ce148b3--
+
+--batchresponse_36e8ed0c-4a15-4038-886b-d21e1e16ea25--

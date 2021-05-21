@@ -1,9 +1,9 @@
---batchresponse_bf62f738-6ff5-46a2-8063-3370a1b19603
+--batchresponse_50240670-f488-46d4-abc1-7ee648c1c216
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{"d":{"results":[{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/RoleDefinitions(1073741972)","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/RoleDefinitions(1073741972)","type":"SP.RoleDefinition"},"BasePermissions":{"__metadata":{"type":"SP.BasePermissions"},"High":"0","Low":"262144"},"Description":null,"Hidden":false,"Id":1073741972,"Name":"Fullst\u00e4ndig Beh\u00f6righet","Order":0,"RoleTypeKind":0}]}}
---batchresponse_bf62f738-6ff5-46a2-8063-3370a1b19603--
+{"d":{"AddRoleAssignment":null}}
+--batchresponse_50240670-f488-46d4-abc1-7ee648c1c216--

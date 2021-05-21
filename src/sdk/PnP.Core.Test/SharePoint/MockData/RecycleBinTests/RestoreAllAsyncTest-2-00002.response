@@ -1,9 +1,9 @@
---batchresponse_87f6357d-7187-4b05-b670-26d72803851c
+--batchresponse_1d1d151e-7c41-426a-b597-74cea0dcfb8f
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{"d":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web","type":"SP.Web"},"RecycleBin":{"results":[]},"Id":"8c8e101c-1b0d-4253-85e7-c30039bf46e2"}}
---batchresponse_87f6357d-7187-4b05-b670-26d72803851c--
+{"d":{"__metadata":{"id":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/pnpcoresdktestgroup/Shared Documents')","uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/pnpcoresdktestgroup/Shared%20Documents')","type":"SP.Folder"},"Files":{"__deferred":{"uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/pnpcoresdktestgroup/Shared%20Documents')/Files"}},"ListItemAllFields":{"__deferred":{"uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/pnpcoresdktestgroup/Shared%20Documents')/ListItemAllFields"}},"ParentFolder":{"__deferred":{"uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/pnpcoresdktestgroup/Shared%20Documents')/ParentFolder"}},"Properties":{"__deferred":{"uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/pnpcoresdktestgroup/Shared%20Documents')/Properties"}},"StorageMetrics":{"__deferred":{"uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/pnpcoresdktestgroup/Shared%20Documents')/StorageMetrics"}},"Folders":{"__deferred":{"uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/pnpcoresdktestgroup/Shared%20Documents')/Folders"}},"Exists":true,"IsWOPIEnabled":false,"ItemCount":23,"Name":"Shared Documents","ProgID":null,"ServerRelativeUrl":"/sites/pnpcoresdktestgroup/Shared Documents","TimeCreated":"2021-05-09T05:30:54Z","TimeLastModified":"2021-05-21T02:48:17Z","UniqueId":"f3991d81-8402-4396-a0b1-b0fe28ca6f30","WelcomePage":""}}
+--batchresponse_1d1d151e-7c41-426a-b597-74cea0dcfb8f--

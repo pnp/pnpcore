@@ -1,9 +1,9 @@
---batchresponse_0aeeda49-0f92-4321-8df5-513627ee69c6
+--batchresponse_7113077e-c693-4742-aa0c-96359012931c
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{"d":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Site","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Site","type":"SP.Site"},"GroupId":"b32780e9-df70-4548-a735-4e7f055415a1","Id":"b56adf79-ff6a-4964-a63a-ff1fa23be9f8"}}
---batchresponse_0aeeda49-0f92-4321-8df5-513627ee69c6--
+{"d":{"__metadata":{"id":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web","uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web","type":"SP.Web"},"AllProperties":{"__metadata":{"id":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/AllProperties","uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/AllProperties","type":"SP.PropertyValues"},"GroupAlias":"pnpcoresdktestgroup","FollowLinkEnabled":"TRUE","vti_x005f_categories":"Travel Expense\\ Report Business Competition Goals/Objectives Ideas Miscellaneous Waiting VIP In\\ Process Planning Schedule","vti_x005f_associateownergroup":"3","vti_x005f_indexedpropertykeys":"","disabledhelpcollections":"","LastGroupSitePrivacyUpdated":"637564231447700570","vti_x005f_defaultlanguage":"en-us","taxonomyhiddenlist":"a7ede817-85ca-439d-8c44-d5acb6bf7a2d","enabledhelpcollections":"VGSEndUser","vti_x005f_sitemasterid":"1a4d4438-7137-4683-a8cf-eb4b9626ef85","ProvCorrelationId":"412fc79f-202e-0000-b821-4c039a0ce7dc","profileschemaversion":"1","vti_x005f_associatemembergroup":"5","vti_x005f_associategroups":"5;4;3","vti_x005f_associatevisitorgroup":"4","GroupDocumentsUrl":"Shared Documents","vti_x005f_extenderversion":"16.0.0.21228","GroupType":"Public","HomepageProvisioned":"1","GroupDocumentsListId":"11dcfc58-be30-4b2d-b3ba-b6752c766f47","GroupId":"08b3accf-0665-4523-945b-473c3161b2ec","vti_x005f_approvallevels":"Approved Rejected Pending\\ Review","OData__x005f__x005f_AllowExternalEmbedding":1,"vti_x005f_createdassociategroups":"3;4;5","SiteNotebookGuid":"ac11ff65-7fdb-4241-830f-08fa25bc449b"},"Id":"7aa3c357-cdeb-43b9-9dcd-dc1645b30cff"}}
+--batchresponse_7113077e-c693-4742-aa0c-96359012931c--

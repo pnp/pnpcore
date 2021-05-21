@@ -1,9 +1,9 @@
---batchresponse_f24af28d-7550-4af4-b8ed-1826b220b864
+--batchresponse_bb0993e3-8d4c-4d60-98b3-2ecb23776afd
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{"d":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Site","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Site","type":"SP.Site"},"GroupId":"b32780e9-df70-4548-a735-4e7f055415a1","Id":"b56adf79-ff6a-4964-a63a-ff1fa23be9f8"}}
---batchresponse_f24af28d-7550-4af4-b8ed-1826b220b864--
+{"d":{"__metadata":{"id":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/pnpcoresdktestgroup/Shared Documents/PNP_SDK_TEST_GetFileIRMSettingsCurrentBatchTest.docx')","uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/pnpcoresdktestgroup/Shared%20Documents/PNP_SDK_TEST_GetFileIRMSettingsCurrentBatchTest.docx')","type":"SP.File"},"InformationRightsManagementSettings":{"__metadata":{"id":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/pnpcoresdktestgroup/Shared Documents/PNP_SDK_TEST_GetFileIRMSettingsCurrentBatchTest.docx')/InformationRightsManagementSettings","uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/pnpcoresdktestgroup/Shared%20Documents/PNP_SDK_TEST_GetFileIRMSettingsCurrentBatchTest.docx')/InformationRightsManagementSettings","type":"SP.InformationRightsManagementFileSettings"},"AllowPrint":false,"AllowScript":false,"AllowWriteCopy":false,"DisableDocumentBrowserView":false,"DocumentAccessExpireDays":90,"EnableDocumentAccessExpire":false,"EnableDocumentBrowserPublishingView":false,"EnableGroupProtection":false,"EnableLicenseCacheExpire":false,"GroupName":"","IrmEnabled":false,"LicenseCacheExpireDays":30,"PolicyDescription":"","PolicyTitle":"","TemplateId":""},"UniqueId":"49ca9aae-e9f6-434a-93ad-553dfc970761"}}
+--batchresponse_bb0993e3-8d4c-4d60-98b3-2ecb23776afd--

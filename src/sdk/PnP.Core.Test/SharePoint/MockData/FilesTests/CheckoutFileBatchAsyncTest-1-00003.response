@@ -1,9 +1,9 @@
---batchresponse_8915b1c6-6995-4ce5-858a-05e9ef9accaf
+--batchresponse_64cc5d7d-c6ff-4c7a-a54c-2b0195f34ad2
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{"d":{"CheckOut":null}}
---batchresponse_8915b1c6-6995-4ce5-858a-05e9ef9accaf--
+{"d":{"__metadata":{"id":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/pnpcoresdktestgroup/PNP_SDK_TEST_CheckoutFileBatchAsyncTest/PNP_SDK_TEST_CheckoutFileBatchAsyncTest.docx')","uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/pnpcoresdktestgroup/PNP_SDK_TEST_CheckoutFileBatchAsyncTest/PNP_SDK_TEST_CheckoutFileBatchAsyncTest.docx')","type":"SP.File"},"CheckedOutByUser":{"__metadata":{"id":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/pnpcoresdktestgroup/PNP_SDK_TEST_CheckoutFileBatchAsyncTest/PNP_SDK_TEST_CheckoutFileBatchAsyncTest.docx')/CheckedOutByUser","uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/pnpcoresdktestgroup/PNP_SDK_TEST_CheckoutFileBatchAsyncTest/PNP_SDK_TEST_CheckoutFileBatchAsyncTest.docx')/CheckedOutByUser","type":"SP.User"},"Alerts":{"__deferred":{"uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/pnpcoresdktestgroup/PNP_SDK_TEST_CheckoutFileBatchAsyncTest/PNP_SDK_TEST_CheckoutFileBatchAsyncTest.docx')/CheckedOutByUser/Alerts"}},"Groups":{"__deferred":{"uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/pnpcoresdktestgroup/PNP_SDK_TEST_CheckoutFileBatchAsyncTest/PNP_SDK_TEST_CheckoutFileBatchAsyncTest.docx')/CheckedOutByUser/Groups"}},"Id":9,"IsHiddenInUI":false,"LoginName":"i:0#.f|membership|kyle@gimmalkyle2.onmicrosoft.com","Title":"Kyle Daley","PrincipalType":1,"Email":"kyle@gimmalkyle2.onmicrosoft.com","Expiration":"","IsEmailAuthenticationGuestUser":false,"IsShareByEmailGuestUser":false,"IsSiteAdmin":false,"UserId":{"__metadata":{"type":"SP.UserIdInfo"},"NameId":"100320013f67db2c","NameIdIssuer":"urn:federation:microsoftonline"},"UserPrincipalName":"kyle@gimmalkyle2.onmicrosoft.com"},"CheckOutType":0,"UniqueId":"f92ed531-2cfb-41c2-b7af-973ac80726aa"}}
+--batchresponse_64cc5d7d-c6ff-4c7a-a54c-2b0195f34ad2--

@@ -1,9 +1,9 @@
---batchresponse_3e4057a9-e68e-407b-b482-289544bdbb6d
+--batchresponse_5f4abe96-10d1-4f76-a396-20eb6aca82d1
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
-HTTP/1.1 200 OK
+HTTP/1.1 404 Not Found
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{"d":{"results":[]}}
---batchresponse_3e4057a9-e68e-407b-b482-289544bdbb6d--
+{"error":{"code":"-2130575338, Microsoft.SharePoint.SPException","message":{"lang":"en-US","value":"The file /sites/pnpcoresdktestgroup/SitePages/PNP_SDK_TEST_CreateAndDeletePage.aspx does not exist."}}}
+--batchresponse_5f4abe96-10d1-4f76-a396-20eb6aca82d1--

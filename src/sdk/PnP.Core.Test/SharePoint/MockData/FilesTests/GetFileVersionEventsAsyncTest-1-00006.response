@@ -1,9 +1,9 @@
---batchresponse_c36cb0cf-be45-4bfc-b664-440777591757
+--batchresponse_32c7fef3-c86d-4bb2-8014-6854889d7c3f
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{"d":{"CheckIn":null}}
---batchresponse_c36cb0cf-be45-4bfc-b664-440777591757--
+{"d":{"__metadata":{"id":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/pnpcoresdktestgroup/PNP_SDK_TEST_GetFileVersionEventsAsyncTest/PNP_SDK_TEST_GetFileVersionEventsAsyncTest.docx')","uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/pnpcoresdktestgroup/PNP_SDK_TEST_GetFileVersionEventsAsyncTest/PNP_SDK_TEST_GetFileVersionEventsAsyncTest.docx')","type":"SP.File"},"VersionEvents":{"results":[]},"UniqueId":"7713f372-61c5-4da6-8c66-5af4b9f16707"}}
+--batchresponse_32c7fef3-c86d-4bb2-8014-6854889d7c3f--

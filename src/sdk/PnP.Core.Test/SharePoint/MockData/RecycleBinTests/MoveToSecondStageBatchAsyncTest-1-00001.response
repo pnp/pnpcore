@@ -1,9 +1,9 @@
---batchresponse_b75cff9b-2778-415a-9589-acd7ee948fa8
+--batchresponse_2c994fd9-f7b7-4a01-9608-0293eb6690d4
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{"d":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Site","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Site","type":"SP.Site"},"GroupId":"b32780e9-df70-4548-a735-4e7f055415a1","Id":"b56adf79-ff6a-4964-a63a-ff1fa23be9f8"}}
---batchresponse_b75cff9b-2778-415a-9589-acd7ee948fa8--
+{"d":{"results":[{"__metadata":{"id":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/RecycleBin(guid'b8ae21b9-d545-4bdc-b70c-a88183cf109e')","uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/RecycleBin(guid'b8ae21b9-d545-4bdc-b70c-a88183cf109e')","type":"SP.RecycleBinItem"},"Author":{"__deferred":{"uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/RecycleBin(guid'b8ae21b9-d545-4bdc-b70c-a88183cf109e')/Author"}},"DeletedBy":{"__deferred":{"uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/RecycleBin(guid'b8ae21b9-d545-4bdc-b70c-a88183cf109e')/DeletedBy"}},"AuthorEmail":"kyle@gimmalkyle2.onmicrosoft.com","AuthorName":"Kyle Daley","DeletedByEmail":"kyle@gimmalkyle2.onmicrosoft.com","DeletedByName":"Kyle Daley","DeletedDate":"2021-05-21T02:48:11Z","DeletedDateLocalFormatted":"5/20/2021 7:48 PM","DirName":"sites/pnpcoresdktestgroup/Shared Documents","DirNamePath":{"__metadata":{"type":"SP.ResourcePath"},"DecodedUrl":"sites/pnpcoresdktestgroup/Shared Documents"},"Id":"b8ae21b9-d545-4bdc-b70c-a88183cf109e","ItemState":1,"ItemType":1,"LeafName":"PNP_SDK_TEST_MoveToSecondStageBatchAsyncTest.docx","LeafNamePath":{"__metadata":{"type":"SP.ResourcePath"},"DecodedUrl":"PNP_SDK_TEST_MoveToSecondStageBatchAsyncTest.docx"},"Size":"19066","Title":"PNP_SDK_TEST_MoveToSecondStageBatchAsyncTest.docx"}]}}
+--batchresponse_2c994fd9-f7b7-4a01-9608-0293eb6690d4--

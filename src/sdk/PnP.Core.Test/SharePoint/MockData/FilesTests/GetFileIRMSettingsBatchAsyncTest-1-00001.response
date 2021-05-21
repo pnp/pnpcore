@@ -1,9 +1,9 @@
---batchresponse_4443a468-b589-4ee7-a295-f2cc585be660
+--batchresponse_9ba00763-1697-4cad-a607-f6fe26286d89
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{"d":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Site","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Site","type":"SP.Site"},"GroupId":"b32780e9-df70-4548-a735-4e7f055415a1","Id":"b56adf79-ff6a-4964-a63a-ff1fa23be9f8"}}
---batchresponse_4443a468-b589-4ee7-a295-f2cc585be660--
+{"d":{"__metadata":{"id":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/pnpcoresdktestgroup/Shared Documents/PNP_SDK_TEST_GetFileIRMSettingsBatchAsyncTest.docx')","uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/pnpcoresdktestgroup/Shared%20Documents/PNP_SDK_TEST_GetFileIRMSettingsBatchAsyncTest.docx')","type":"SP.File"},"InformationRightsManagementSettings":{"__metadata":{"id":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/pnpcoresdktestgroup/Shared Documents/PNP_SDK_TEST_GetFileIRMSettingsBatchAsyncTest.docx')/InformationRightsManagementSettings","uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/pnpcoresdktestgroup/Shared%20Documents/PNP_SDK_TEST_GetFileIRMSettingsBatchAsyncTest.docx')/InformationRightsManagementSettings","type":"SP.InformationRightsManagementFileSettings"},"AllowPrint":false,"AllowScript":false,"AllowWriteCopy":false,"DisableDocumentBrowserView":false,"DocumentAccessExpireDays":90,"EnableDocumentAccessExpire":false,"EnableDocumentBrowserPublishingView":false,"EnableGroupProtection":false,"EnableLicenseCacheExpire":false,"GroupName":"","IrmEnabled":false,"LicenseCacheExpireDays":30,"PolicyDescription":"","PolicyTitle":"","TemplateId":""},"UniqueId":"93b540d8-6695-4291-969c-054d81b5cb28"}}
+--batchresponse_9ba00763-1697-4cad-a607-f6fe26286d89--

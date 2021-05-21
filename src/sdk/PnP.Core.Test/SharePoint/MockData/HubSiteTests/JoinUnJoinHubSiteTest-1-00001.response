@@ -1,9 +1,9 @@
---batchresponse_247996c8-4cdf-4a7b-98f1-4d6b31e5aac1
+--batchresponse_7abbb462-46fa-4174-9e6d-b176a9baf33a
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{"d":{"__metadata":{"id":"https://capadevtest.sharepoint.com/sites/pnpcoresdktest/_api/Site","uri":"https://capadevtest.sharepoint.com/sites/pnpcoresdktest/_api/Site","type":"SP.Site"},"GroupId":"00000000-0000-0000-0000-000000000000","Id":"3587329c-bd89-47b1-a880-99899b1d1885"}}
---batchresponse_247996c8-4cdf-4a7b-98f1-4d6b31e5aac1--
+{"d":{"__metadata":{"id":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktest/_api/Site","uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktest/_api/Site","type":"SP.Site"},"HubSiteId":"00000000-0000-0000-0000-000000000000","Id":"ede01b50-553e-48a6-843d-e916101f0654","IsHubSite":false}}
+--batchresponse_7abbb462-46fa-4174-9e6d-b176a9baf33a--

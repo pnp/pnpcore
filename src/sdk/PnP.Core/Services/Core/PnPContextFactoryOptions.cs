@@ -1,4 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using PnP.Core.Model.SharePoint;
+using System;
+using System.Collections.Generic;
+using System.Linq.Expressions;
 
 namespace PnP.Core.Services
 {
@@ -21,6 +24,16 @@ namespace PnP.Core.Services
         /// If true than all requests to Microsoft Graph use the beta endpoint
         /// </summary>
         public bool GraphAlwaysUseBeta { get; set; }
+
+        /// <summary>
+        /// Additional <seealso cref="ISite"/> properties to load when creating a new <seealso cref="PnPContext"/>.
+        /// </summary>
+        public IEnumerable<Expression<Func<ISite, object>>> DefaultSitePropertiesOnCreate { get; set; }
+
+        /// <summary>
+        /// Additional <seealso cref="IWeb"/> properties to load when creating a new <seealso cref="PnPContext"/>.
+        /// </summary>
+        public IEnumerable<Expression<Func<IWeb, object>>> DefaultWebPropertiesOnCreate { get; set; }
 
         /// <summary>
         /// The Default Authentication Provider configuration

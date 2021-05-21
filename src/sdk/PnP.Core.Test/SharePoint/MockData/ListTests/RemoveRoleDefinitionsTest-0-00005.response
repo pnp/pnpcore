@@ -1,9 +1,9 @@
---batchresponse_0eb1a6aa-d94e-40f5-a39e-1becac595825
+--batchresponse_c87e444c-0c30-4cc9-9eda-2fddc5f42762
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{"d":{"BreakRoleInheritance":null}}
---batchresponse_0eb1a6aa-d94e-40f5-a39e-1becac595825--
+{"d":{"results":[{"__metadata":{"id":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/RoleDefinitions(1073741937)","uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/RoleDefinitions(1073741937)","type":"SP.RoleDefinition"},"BasePermissions":{"__metadata":{"type":"SP.BasePermissions"},"High":"0","Low":"262144"},"Description":null,"Hidden":false,"Id":1073741937,"Name":"PNP_SDK_TEST_RemoveRoleDefinitionsTest","Order":0,"RoleTypeKind":0}]}}
+--batchresponse_c87e444c-0c30-4cc9-9eda-2fddc5f42762--

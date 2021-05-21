@@ -55,13 +55,13 @@ namespace PnP.Core.Test.SharePoint
                 Assert.IsNotNull(web);
                 Assert.IsNull(web.AccessRequestListUrl);
                 Assert.AreEqual("", web.AccessRequestSiteDescription);
-                Assert.IsTrue(web.AllowCreateDeclarativeWorkflowForCurrentUser);
+                Assert.IsFalse(web.AllowCreateDeclarativeWorkflowForCurrentUser);
                 Assert.IsTrue(web.AllowDesignerForCurrentUser);
                 Assert.IsFalse(web.AllowMasterPageEditingForCurrentUser);
                 Assert.IsTrue(web.AllowRevertFromTemplateForCurrentUser);
                 Assert.IsTrue(web.AllowRssFeeds);
-                Assert.IsTrue(web.AllowSaveDeclarativeWorkflowAsTemplateForCurrentUser);
-                Assert.IsTrue(web.AllowSavePublishDeclarativeWorkflowForCurrentUser);
+                Assert.IsFalse(web.AllowSaveDeclarativeWorkflowAsTemplateForCurrentUser);
+                Assert.IsFalse(web.AllowSavePublishDeclarativeWorkflowForCurrentUser);
                 Assert.AreEqual("", web.AlternateCssUrl);
                 // TODO: This one should be tested with an addin web to be relevant
                 Assert.AreEqual(default, web.AppInstanceId);

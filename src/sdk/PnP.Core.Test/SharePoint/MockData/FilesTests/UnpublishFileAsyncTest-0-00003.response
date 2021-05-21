@@ -1,10 +1,9 @@
---batchresponse_eef33d5c-57d1-46ec-9b62-ab71dc034056
+--batchresponse_ec2a05e4-2def-4f60-80ec-496324e8e45a
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
-HTTP/1.1 204 No Content
+HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
-ETAG: "2"
 
-
---batchresponse_eef33d5c-57d1-46ec-9b62-ab71dc034056--
+{"d":{"__metadata":{"id":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/pnpcoresdktestgroup/PNP_SDK_TEST_UnpublishFileAsyncTest')","uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/pnpcoresdktestgroup/PNP_SDK_TEST_UnpublishFileAsyncTest')","type":"SP.Folder"},"Files":{"__deferred":{"uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/pnpcoresdktestgroup/PNP_SDK_TEST_UnpublishFileAsyncTest')/Files"}},"ListItemAllFields":{"__deferred":{"uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/pnpcoresdktestgroup/PNP_SDK_TEST_UnpublishFileAsyncTest')/ListItemAllFields"}},"ParentFolder":{"__deferred":{"uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/pnpcoresdktestgroup/PNP_SDK_TEST_UnpublishFileAsyncTest')/ParentFolder"}},"Properties":{"__deferred":{"uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/pnpcoresdktestgroup/PNP_SDK_TEST_UnpublishFileAsyncTest')/Properties"}},"StorageMetrics":{"__deferred":{"uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/pnpcoresdktestgroup/PNP_SDK_TEST_UnpublishFileAsyncTest')/StorageMetrics"}},"Folders":{"__deferred":{"uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/pnpcoresdktestgroup/PNP_SDK_TEST_UnpublishFileAsyncTest')/Folders"}},"Exists":true,"IsWOPIEnabled":false,"ItemCount":0,"Name":"PNP_SDK_TEST_UnpublishFileAsyncTest","ProgID":null,"ServerRelativeUrl":"/sites/pnpcoresdktestgroup/PNP_SDK_TEST_UnpublishFileAsyncTest","TimeCreated":"2021-05-21T02:42:13Z","TimeLastModified":"2021-05-21T02:42:13Z","UniqueId":"975433a2-b0ff-40c9-b681-77af0e4aabf4","WelcomePage":""}}
+--batchresponse_ec2a05e4-2def-4f60-80ec-496324e8e45a--

@@ -1,9 +1,10 @@
---batchresponse_bdd17ead-727f-4c34-a485-d7498cec44e7
+--batchresponse_b06aa0e7-7f09-494e-86fd-03092c4c18f1
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
-HTTP/1.1 200 OK
+HTTP/1.1 204 No Content
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+ETAG: "3"
 
-{"d":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/web/lists/getbyid(guid'8250ed41-6c91-401e-a405-7bf8550670b1')/InformationRightsManagementSettings","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/web/lists/getbyid(guid'8250ed41-6c91-401e-a405-7bf8550670b1')/InformationRightsManagementSettings","type":"SP.InformationRightsManagementSettings"},"AllowPrint":false,"AllowScript":false,"AllowWriteCopy":false,"DisableDocumentBrowserView":false,"DocumentAccessExpireDays":90,"DocumentLibraryProtectionExpireDate":"2021-04-08T08:17:17-07:00","EnableDocumentAccessExpire":false,"EnableDocumentBrowserPublishingView":false,"EnableGroupProtection":false,"EnableLicenseCacheExpire":false,"GroupName":"","LicenseCacheExpireDays":30,"PolicyDescription":"","PolicyTitle":"","TemplateId":""}}
---batchresponse_bdd17ead-727f-4c34-a485-d7498cec44e7--
+
+--batchresponse_b06aa0e7-7f09-494e-86fd-03092c4c18f1--

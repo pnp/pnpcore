@@ -1,9 +1,9 @@
---batchresponse_56a98235-ed75-4b9e-8abc-ea4e65ec1de3
+--batchresponse_68fe46f6-d351-4ef5-a7d9-251c5ed85f83
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{"d":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/sts0/_api/Web","uri":"https://bertonline.sharepoint.com/sites/sts0/_api/Web","type":"SP.Web"},"EffectiveBasePermissions":{"__metadata":{"type":"SP.BasePermissions"},"High":"2147483647","Low":"4294967295"},"Id":"7109c7c3-e99f-40c9-aca7-732d470d1c41"}}
---batchresponse_56a98235-ed75-4b9e-8abc-ea4e65ec1de3--
+{"d":{"__metadata":{"id":"https://gimmalkyle2.sharepoint.com/sites/sts0/_api/Web","uri":"https://gimmalkyle2.sharepoint.com/sites/sts0/_api/Web","type":"SP.Web"},"AllProperties":{"__metadata":{"id":"https://gimmalkyle2.sharepoint.com/sites/sts0/_api/Web/AllProperties","uri":"https://gimmalkyle2.sharepoint.com/sites/sts0/_api/Web/AllProperties","type":"SP.PropertyValues"},"vti_x005f_customuploadpage":"/_layouts/15/UploadEx.aspx","FollowLinkEnabled":"TRUE","vti_x005f_associateownergroup":"7","enabledhelpcollections":"VGSEndUser","vti_x005f_defaultlanguage":"en-us","taxonomyhiddenlist":"803a255f-c599-4574-b510-c1417904a921","sharepointhelpoverride":"SPOStandard","disabledhelpcollections":"WSSEndUser;#WSSCentralAdmin;#FastEndUser;#FastCentralAdmin;#MSSEndUser;#MSSCentralAdmin;#PPSDesignerEndUser;#SQLWSSAddIn","profileschemaversion":"1","vti_x005f_associatemembergroup":"9","vti_x005f_associategroups":"9;5;8;7","vti_x005f_associatevisitorgroup":"8","vti_x005f_sitemasterid":"13072de9-8c8b-479b-9e4e-301111f94fd9","vti_x005f_extenderversion":"16.0.0.21228","OData__x005f__x005f_ScriptSafeInternalPages":"WopiFrame.aspx;videoembedplayer.aspx;","vti_x005f_categories":"Travel Expense\\ Report Business Competition Goals/Objectives Ideas Miscellaneous Waiting VIP In\\ Process Planning Schedule","vti_x005f_createdassociategroups":"7;8;9","allowslistpolicy":"True","vti_x005f_approvallevels":"Approved Rejected Pending\\ Review","TestPnPProperty":"TestPropertyValue","SiteNotebookGuid":"9684289c-d0f8-4e0f-8c1e-49c954edf279"},"Id":"339207e6-b238-4cea-9589-7fa86701d769"}}
+--batchresponse_68fe46f6-d351-4ef5-a7d9-251c5ed85f83--

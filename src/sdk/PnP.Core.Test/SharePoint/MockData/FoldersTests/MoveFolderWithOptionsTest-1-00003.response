@@ -1,9 +1,9 @@
---batchresponse_41180d68-8089-4737-b42a-8b32fb88bd95
+--batchresponse_812001ae-8641-4f55-863c-30b7dcd398a8
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{"d":{"MoveFolderByPath":null}}
---batchresponse_41180d68-8089-4737-b42a-8b32fb88bd95--
+{"d":{"results":[{"__metadata":{"id":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/Lists(guid'11dcfc58-be30-4b2d-b3ba-b6752c766f47')","uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/Lists(guid'11dcfc58-be30-4b2d-b3ba-b6752c766f47')","etag":"\"389\"","type":"SP.List"},"RootFolder":{"__metadata":{"id":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/Lists(guid'11dcfc58-be30-4b2d-b3ba-b6752c766f47')/RootFolder","uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/Lists(guid'11dcfc58-be30-4b2d-b3ba-b6752c766f47')/RootFolder","type":"SP.Folder"},"Files":{"__deferred":{"uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/Lists(guid'11dcfc58-be30-4b2d-b3ba-b6752c766f47')/RootFolder/Files"}},"ListItemAllFields":{"__deferred":{"uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/Lists(guid'11dcfc58-be30-4b2d-b3ba-b6752c766f47')/RootFolder/ListItemAllFields"}},"ParentFolder":{"__deferred":{"uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/Lists(guid'11dcfc58-be30-4b2d-b3ba-b6752c766f47')/RootFolder/ParentFolder"}},"Properties":{"__deferred":{"uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/Lists(guid'11dcfc58-be30-4b2d-b3ba-b6752c766f47')/RootFolder/Properties"}},"StorageMetrics":{"__deferred":{"uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/Lists(guid'11dcfc58-be30-4b2d-b3ba-b6752c766f47')/RootFolder/StorageMetrics"}},"Folders":{"__deferred":{"uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/Lists(guid'11dcfc58-be30-4b2d-b3ba-b6752c766f47')/RootFolder/Folders"}},"Exists":true,"IsWOPIEnabled":false,"ItemCount":24,"Name":"Shared Documents","ProgID":null,"ServerRelativeUrl":"/sites/pnpcoresdktestgroup/Shared Documents","TimeCreated":"2021-05-09T05:30:54Z","TimeLastModified":"2021-05-21T02:57:17Z","UniqueId":"f3991d81-8402-4396-a0b1-b0fe28ca6f30","WelcomePage":""},"Id":"11dcfc58-be30-4b2d-b3ba-b6752c766f47"}]}}
+--batchresponse_812001ae-8641-4f55-863c-30b7dcd398a8--

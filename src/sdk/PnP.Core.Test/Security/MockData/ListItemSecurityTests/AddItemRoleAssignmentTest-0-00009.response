@@ -1,9 +1,9 @@
---batchresponse_789a0461-faff-4b9c-953e-dc12fa665533
+--batchresponse_aa50b00e-bb3c-4cb4-9b06-59355bc72d92
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{"d":{"BreakRoleInheritance":null}}
---batchresponse_789a0461-faff-4b9c-953e-dc12fa665533--
+{"d":{"results":[{"__metadata":{"id":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/GetUserById(12)","uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/GetUserById(12)","type":"SP.User"},"Alerts":{"__deferred":{"uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/GetUserById(12)/Alerts"}},"Groups":{"__deferred":{"uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/GetUserById(12)/Groups"}},"Id":12,"IsHiddenInUI":false,"LoginName":"i:0#.f|membership|alexw@gimmalkyle2.onmicrosoft.com","Title":"Alex Wilber","PrincipalType":1,"Email":"AlexW@gimmalkyle2.onmicrosoft.com","Expiration":"","IsEmailAuthenticationGuestUser":false,"IsShareByEmailGuestUser":false,"IsSiteAdmin":false,"UserId":{"__metadata":{"type":"SP.UserIdInfo"},"NameId":"100320013f739ed7","NameIdIssuer":"urn:federation:microsoftonline"},"UserPrincipalName":"alexw@gimmalkyle2.onmicrosoft.com"}]}}
+--batchresponse_aa50b00e-bb3c-4cb4-9b06-59355bc72d92--

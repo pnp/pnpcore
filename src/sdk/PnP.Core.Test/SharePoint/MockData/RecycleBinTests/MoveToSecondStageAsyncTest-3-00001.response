@@ -1,9 +1,9 @@
---batchresponse_feebd9c1-6feb-4ebe-80eb-0c5da39c8225
+--batchresponse_0612bbcc-f623-4667-9718-eef8859d41b0
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{"d":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Site","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Site","type":"SP.Site"},"GroupId":"b32780e9-df70-4548-a735-4e7f055415a1","Id":"b56adf79-ff6a-4964-a63a-ff1fa23be9f8"}}
---batchresponse_feebd9c1-6feb-4ebe-80eb-0c5da39c8225--
+{"d":{"results":[{"__metadata":{"id":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Site/RecycleBin(guid'0a25fbbb-b69d-4c5c-9437-b16d434c37bf')","uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Site/RecycleBin(guid'0a25fbbb-b69d-4c5c-9437-b16d434c37bf')","type":"SP.RecycleBinItem"},"Author":{"__deferred":{"uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Site/RecycleBin(guid'0a25fbbb-b69d-4c5c-9437-b16d434c37bf')/Author"}},"DeletedBy":{"__deferred":{"uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Site/RecycleBin(guid'0a25fbbb-b69d-4c5c-9437-b16d434c37bf')/DeletedBy"}},"AuthorEmail":"kyle@gimmalkyle2.onmicrosoft.com","AuthorName":"Kyle Daley","DeletedByEmail":"kyle@gimmalkyle2.onmicrosoft.com","DeletedByName":"Kyle Daley","DeletedDate":"2021-05-21T02:48:10Z","DeletedDateLocalFormatted":"5/20/2021 7:48 PM","DirName":"sites/pnpcoresdktestgroup/Shared Documents","DirNamePath":{"__metadata":{"type":"SP.ResourcePath"},"DecodedUrl":"sites/pnpcoresdktestgroup/Shared Documents"},"Id":"0a25fbbb-b69d-4c5c-9437-b16d434c37bf","ItemState":2,"ItemType":1,"LeafName":"PNP_SDK_TEST_MoveToSecondStageAsyncTest.docx","LeafNamePath":{"__metadata":{"type":"SP.ResourcePath"},"DecodedUrl":"PNP_SDK_TEST_MoveToSecondStageAsyncTest.docx"},"Size":"19068","Title":"PNP_SDK_TEST_MoveToSecondStageAsyncTest.docx"}]}}
+--batchresponse_0612bbcc-f623-4667-9718-eef8859d41b0--

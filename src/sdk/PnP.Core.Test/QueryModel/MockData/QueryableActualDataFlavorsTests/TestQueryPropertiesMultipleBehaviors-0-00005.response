@@ -1,9 +1,9 @@
---batchresponse_2a19176d-d958-4ea7-b641-c1afd02866b5
+--batchresponse_c500abf1-aef2-400c-9688-83349f9cc16c
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{"d":{"results":[]}}
---batchresponse_2a19176d-d958-4ea7-b641-c1afd02866b5--
+{"d":{"results":[{"__metadata":{"id":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/Lists(guid'11dcfc58-be30-4b2d-b3ba-b6752c766f47')","uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/Lists(guid'11dcfc58-be30-4b2d-b3ba-b6752c766f47')","etag":"\"211\"","type":"SP.List"},"ContentTypes":{"results":[{"__metadata":{"id":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/Lists(guid'11dcfc58-be30-4b2d-b3ba-b6752c766f47')/ContentTypes('0x010100CC0C91973992F748A8036C9E2253D02F')","uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/Lists(guid'11dcfc58-be30-4b2d-b3ba-b6752c766f47')/ContentTypes('0x010100CC0C91973992F748A8036C9E2253D02F')","type":"SP.ContentType"},"Description":"Create a new document.","Id":{"__metadata":{"type":"SP.ContentTypeId"},"StringValue":"0x010100CC0C91973992F748A8036C9E2253D02F"},"StringId":"0x010100CC0C91973992F748A8036C9E2253D02F"},{"__metadata":{"id":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/Lists(guid'11dcfc58-be30-4b2d-b3ba-b6752c766f47')/ContentTypes('0x012000C0C5489B6DB68E4B86F17A382595867D')","uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/Lists(guid'11dcfc58-be30-4b2d-b3ba-b6752c766f47')/ContentTypes('0x012000C0C5489B6DB68E4B86F17A382595867D')","type":"SP.ContentType"},"Description":"Create a new folder.","Id":{"__metadata":{"type":"SP.ContentTypeId"},"StringValue":"0x012000C0C5489B6DB68E4B86F17A382595867D"},"StringId":"0x012000C0C5489B6DB68E4B86F17A382595867D"}]},"Id":"11dcfc58-be30-4b2d-b3ba-b6752c766f47","Title":"Documents"}]}}
+--batchresponse_c500abf1-aef2-400c-9688-83349f9cc16c--

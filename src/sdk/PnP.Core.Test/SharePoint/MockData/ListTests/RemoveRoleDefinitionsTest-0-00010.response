@@ -1,9 +1,9 @@
---batchresponse_7ffeb52b-7d3b-48ab-b66b-e0a9b2d4b824
+--batchresponse_acb424c0-18c3-4e64-bb91-c8e5f4e23687
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{"d":{"RemoveRoleAssignment":null}}
---batchresponse_7ffeb52b-7d3b-48ab-b66b-e0a9b2d4b824--
+{"d":{"results":[{"__metadata":{"id":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/Lists(guid'eed9e66a-07ab-4153-a669-effb666ddb1a')/RoleAssignments/GetByPrincipalId(9)","uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/Lists(guid'eed9e66a-07ab-4153-a669-effb666ddb1a')/RoleAssignments/GetByPrincipalId(9)","type":"SP.RoleAssignment"},"RoleDefinitionBindings":{"results":[{"__metadata":{"id":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/RoleDefinitions(1073741829)","uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/RoleDefinitions(1073741829)","type":"SP.RoleDefinition"},"BasePermissions":{"__metadata":{"type":"SP.BasePermissions"},"High":"2147483647","Low":"4294967295"},"Description":"Has full control.","Hidden":false,"Id":1073741829,"Name":"Full Control","Order":1,"RoleTypeKind":5}]},"PrincipalId":9}]}}
+--batchresponse_acb424c0-18c3-4e64-bb91-c8e5f4e23687--

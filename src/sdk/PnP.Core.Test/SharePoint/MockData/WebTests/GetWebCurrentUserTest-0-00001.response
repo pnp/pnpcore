@@ -1,9 +1,9 @@
---batchresponse_cf149457-6e82-469d-858f-c54f6003abdc
+--batchresponse_4c9ac43f-56dc-4fae-baed-c94df63829eb
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{"d":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Site","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Site","type":"SP.Site"},"GroupId":"b32780e9-df70-4548-a735-4e7f055415a1","Id":"b56adf79-ff6a-4964-a63a-ff1fa23be9f8"}}
---batchresponse_cf149457-6e82-469d-858f-c54f6003abdc--
+{"d":{"__metadata":{"id":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/GetUserById(9)","uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/GetUserById(9)","type":"SP.User"},"Alerts":{"__deferred":{"uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/GetUserById(9)/Alerts"}},"Groups":{"__deferred":{"uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/GetUserById(9)/Groups"}},"Id":9,"IsHiddenInUI":false,"LoginName":"i:0#.f|membership|kyle@gimmalkyle2.onmicrosoft.com","Title":"Kyle Daley","PrincipalType":1,"Email":"kyle@gimmalkyle2.onmicrosoft.com","Expiration":"","IsEmailAuthenticationGuestUser":false,"IsShareByEmailGuestUser":false,"IsSiteAdmin":true,"UserId":{"__metadata":{"type":"SP.UserIdInfo"},"NameId":"100320013f67db2c","NameIdIssuer":"urn:federation:microsoftonline"},"UserPrincipalName":"kyle@gimmalkyle2.onmicrosoft.com"}}
+--batchresponse_4c9ac43f-56dc-4fae-baed-c94df63829eb--

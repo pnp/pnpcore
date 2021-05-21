@@ -1,9 +1,9 @@
---batchresponse_8a64c4fa-a41c-4199-8ff3-a6fe84b4cfcb
+--batchresponse_314988e3-e8c2-407a-ac6e-278e610f8c23
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{"d":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Site","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Site","type":"SP.Site"},"GroupId":"b32780e9-df70-4548-a735-4e7f055415a1","Id":"b56adf79-ff6a-4964-a63a-ff1fa23be9f8"}}
---batchresponse_8a64c4fa-a41c-4199-8ff3-a6fe84b4cfcb--
+{"d":{"__metadata":{"id":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web","uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web","type":"SP.Web"},"RecycleBin":{"results":[{"__metadata":{"id":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/RecycleBin(guid'db32f945-cc7b-4d38-8fbc-5705927cd311')","uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/RecycleBin(guid'db32f945-cc7b-4d38-8fbc-5705927cd311')","type":"SP.RecycleBinItem"},"Author":{"__deferred":{"uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/RecycleBin(guid'db32f945-cc7b-4d38-8fbc-5705927cd311')/Author"}},"DeletedBy":{"__deferred":{"uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/RecycleBin(guid'db32f945-cc7b-4d38-8fbc-5705927cd311')/DeletedBy"}},"AuthorEmail":"kyle@gimmalkyle2.onmicrosoft.com","AuthorName":"Kyle Daley","DeletedByEmail":"kyle@gimmalkyle2.onmicrosoft.com","DeletedByName":"Kyle Daley","DeletedDate":"2021-05-21T02:47:48Z","DeletedDateLocalFormatted":"5/20/2021 7:47 PM","DirName":"sites/pnpcoresdktestgroup/Shared Documents","DirNamePath":{"__metadata":{"type":"SP.ResourcePath"},"DecodedUrl":"sites/pnpcoresdktestgroup/Shared Documents"},"Id":"db32f945-cc7b-4d38-8fbc-5705927cd311","ItemState":1,"ItemType":1,"LeafName":"PNP_SDK_TEST_DeleteAllBatchAsyncTest.docx","LeafNamePath":{"__metadata":{"type":"SP.ResourcePath"},"DecodedUrl":"PNP_SDK_TEST_DeleteAllBatchAsyncTest.docx"},"Size":"19066","Title":"PNP_SDK_TEST_DeleteAllBatchAsyncTest.docx"}]},"Id":"7aa3c357-cdeb-43b9-9dcd-dc1645b30cff"}}
+--batchresponse_314988e3-e8c2-407a-ac6e-278e610f8c23--

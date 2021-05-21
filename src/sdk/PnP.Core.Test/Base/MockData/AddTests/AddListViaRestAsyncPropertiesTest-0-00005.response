@@ -1,10 +1,9 @@
---batchresponse_ae4baaa7-a260-4892-b739-71b52aad8158
+--batchresponse_8b45b90c-ef85-40cd-ae32-a60fc14f9bde
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
-HTTP/1.1 204 No Content
+HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
-ETAG: "2"
 
-
---batchresponse_ae4baaa7-a260-4892-b739-71b52aad8158--
+{"d":{"results":[{"__metadata":{"id":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/Lists(guid'f7e8b520-bbb8-4747-90e7-af7c9ae34563')","uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/Lists(guid'f7e8b520-bbb8-4747-90e7-af7c9ae34563')","etag":"\"2\"","type":"SP.List"},"ContentTypesEnabled":false,"Description":"TEST DESCRIPTION","Direction":"none","DocumentTemplateUrl":null,"DraftVersionVisibility":0,"EnableAttachments":false,"EnableFolderCreation":true,"EnableMinorVersions":false,"EnableModeration":true,"EnableVersioning":true,"ForceCheckout":false,"Hidden":false,"Id":"f7e8b520-bbb8-4747-90e7-af7c9ae34563","ImageUrl":"/_layouts/15/images/itgen.png?rev=47","IrmExpire":false,"IrmReject":false,"IsApplicationList":false,"ListExperienceOptions":1,"MajorVersionLimit":400,"MajorWithMinorVersionsLimit":20,"TemplateFeatureId":"00bfea71-de22-43b2-a848-c05709900100"}]}}
+--batchresponse_8b45b90c-ef85-40cd-ae32-a60fc14f9bde--

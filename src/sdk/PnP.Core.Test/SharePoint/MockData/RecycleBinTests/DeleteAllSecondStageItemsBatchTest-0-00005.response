@@ -1,9 +1,9 @@
---batchresponse_97ad5bd7-5970-4e05-82d2-4a4ae699b172
+--batchresponse_031f5c5e-5e01-43f9-ba5e-ac265f031251
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{"d":{"Recycle":"43c5bff5-c0d5-4af2-b1dd-e0b5fb049ee6"}}
---batchresponse_97ad5bd7-5970-4e05-82d2-4a4ae699b172--
+{"d":{"__metadata":{"id":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web","uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web","type":"SP.Web"},"RecycleBin":{"results":[{"__metadata":{"id":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/RecycleBin(guid'82d4e2c8-9507-403f-87ab-c980eb6629d2')","uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/RecycleBin(guid'82d4e2c8-9507-403f-87ab-c980eb6629d2')","type":"SP.RecycleBinItem"},"Author":{"__deferred":{"uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/RecycleBin(guid'82d4e2c8-9507-403f-87ab-c980eb6629d2')/Author"}},"DeletedBy":{"__deferred":{"uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/RecycleBin(guid'82d4e2c8-9507-403f-87ab-c980eb6629d2')/DeletedBy"}},"AuthorEmail":"kyle@gimmalkyle2.onmicrosoft.com","AuthorName":"Kyle Daley","DeletedByEmail":"kyle@gimmalkyle2.onmicrosoft.com","DeletedByName":"Kyle Daley","DeletedDate":"2021-05-21T02:47:55Z","DeletedDateLocalFormatted":"5/20/2021 7:47 PM","DirName":"sites/pnpcoresdktestgroup/Shared Documents","DirNamePath":{"__metadata":{"type":"SP.ResourcePath"},"DecodedUrl":"sites/pnpcoresdktestgroup/Shared Documents"},"Id":"82d4e2c8-9507-403f-87ab-c980eb6629d2","ItemState":1,"ItemType":1,"LeafName":"PNP_SDK_TEST_DeleteAllSecondStageItemsBatchTest.docx","LeafNamePath":{"__metadata":{"type":"SP.ResourcePath"},"DecodedUrl":"PNP_SDK_TEST_DeleteAllSecondStageItemsBatchTest.docx"},"Size":"19065","Title":"PNP_SDK_TEST_DeleteAllSecondStageItemsBatchTest.docx"}]},"Id":"7aa3c357-cdeb-43b9-9dcd-dc1645b30cff"}}
+--batchresponse_031f5c5e-5e01-43f9-ba5e-ac265f031251--

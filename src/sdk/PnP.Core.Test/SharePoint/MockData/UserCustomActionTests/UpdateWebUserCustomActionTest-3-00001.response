@@ -1,9 +1,9 @@
---batchresponse_7e3b2c48-e4b5-4f85-a37e-d59bdd00657f
+--batchresponse_cdab1af8-a653-4fb1-bbf5-f549e4c1ad5a
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{"d":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Site","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Site","type":"SP.Site"},"GroupId":"b32780e9-df70-4548-a735-4e7f055415a1","Id":"b56adf79-ff6a-4964-a63a-ff1fa23be9f8"}}
---batchresponse_7e3b2c48-e4b5-4f85-a37e-d59bdd00657f--
+{"d":{"__metadata":{"id":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web","uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web","type":"SP.Web"},"UserCustomActions":{"results":[{"__metadata":{"id":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/UserCustomActions(guid'16fd7863-75bb-4561-b60c-1d6c9ae3a091')","uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/UserCustomActions(guid'16fd7863-75bb-4561-b60c-1d6c9ae3a091')","type":"SP.UserCustomAction"},"DescriptionResource":{"__deferred":{"uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/UserCustomActions(guid'16fd7863-75bb-4561-b60c-1d6c9ae3a091')/DescriptionResource"}},"TitleResource":{"__deferred":{"uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/UserCustomActions(guid'16fd7863-75bb-4561-b60c-1d6c9ae3a091')/TitleResource"}},"ClientSideComponentId":"a54612b1-e5cb-4a43-80ae-3b5fb6ce1e35","ClientSideComponentProperties":"{\"message\":\"Added from Test UpdateWebUserCustomActionTest\"}","CommandUIExtension":null,"Description":"UPDATED DESCRIPTION","Group":null,"HostProperties":"","Id":"16fd7863-75bb-4561-b60c-1d6c9ae3a091","ImageUrl":null,"Location":"ClientSideExtension.ApplicationCustomizer","Name":"PNP_SDK_TEST_UpdateWebUserCustomActionTest_UPDATED","RegistrationId":null,"RegistrationType":0,"Rights":{"__metadata":{"type":"SP.BasePermissions"},"High":"0","Low":"262162"},"Scope":3,"ScriptBlock":null,"ScriptSrc":null,"Sequence":200,"Title":"PNP_SDK_TEST_UpdateWebUserCustomActionTest_UPDATED","Url":null,"VersionOfUserCustomAction":"16.0.2.0"}]},"Id":"7aa3c357-cdeb-43b9-9dcd-dc1645b30cff"}}
+--batchresponse_cdab1af8-a653-4fb1-bbf5-f549e4c1ad5a--

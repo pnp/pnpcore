@@ -1,9 +1,1 @@
---batchresponse_a2e55f59-e327-411f-80ab-7da379d5cd28
-Content-Type: application/http
-Content-Transfer-Encoding: binary
-
-HTTP/1.1 200 OK
-CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
-
-{"d":{"__metadata":{"id":"https://capadevtest.sharepoint.com/sites/pnpcoresdktestgroup/_api/Site","uri":"https://capadevtest.sharepoint.com/sites/pnpcoresdktestgroup/_api/Site","type":"SP.Site"},"GroupId":"9d1aef4b-f974-433e-a3ac-26d29fc6719c","Id":"a24405b9-c457-4548-875c-09c5b23339d5"}}
---batchresponse_a2e55f59-e327-411f-80ab-7da379d5cd28--
+{"responses": [{"id": "2","status":200,"headers" : {"OData-Version":"4.0","Content-Type":"application/json;odata.metadata=minimal;odata.streaming=true;IEEE754Compatible=false;charset=utf-8"},"body":{"@odata.context":"https://graph.microsoft.com/v1.0/$metadata#teams('08b3accf-0665-4523-945b-473c3161b2ec')/primaryChannel/$entity","id":"19:aUSLW1E49X7j-W5NYO5BYSp1l7ruuleVIQtH2iFr5Bw1@thread.tacv2","createdDateTime":"2021-05-20T02:52:37.759Z","displayName":"General","description":"PnP Microsoft 365 library test with group","isFavoriteByDefault":null,"email":"","webUrl":"https://teams.microsoft.com/l/channel/19%3aaUSLW1E49X7j-W5NYO5BYSp1l7ruuleVIQtH2iFr5Bw1%40thread.tacv2/General?groupId=08b3accf-0665-4523-945b-473c3161b2ec&tenantId=8c5f9cbf-10f3-425c-9384-1a404ca3945d","membershipType":"standard"}},{"id": "1","status":200,"headers" : {"OData-Version":"4.0","Content-Type":"application/json;odata.metadata=minimal;odata.streaming=true;IEEE754Compatible=false;charset=utf-8"},"body":{"@odata.context":"https://graph.microsoft.com/v1.0/$metadata#teams(id,primaryChannel)/$entity","id":"08b3accf-0665-4523-945b-473c3161b2ec"}}]}

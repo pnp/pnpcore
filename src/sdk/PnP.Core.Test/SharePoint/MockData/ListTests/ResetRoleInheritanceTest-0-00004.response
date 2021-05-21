@@ -1,9 +1,9 @@
---batchresponse_faf5b2a8-df73-4810-8d59-588a74a361f2
+--batchresponse_b72f3420-eead-4862-87bf-0143180fd356
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{"d":{"BreakRoleInheritance":null}}
---batchresponse_faf5b2a8-df73-4810-8d59-588a74a361f2--
+{"d":{"ResetRoleInheritance":null}}
+--batchresponse_b72f3420-eead-4862-87bf-0143180fd356--

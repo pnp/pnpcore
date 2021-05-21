@@ -1,9 +1,9 @@
---batchresponse_45c6294d-987f-4512-a477-710b81a3fdb3
+--batchresponse_566a5c24-71d8-4f6c-bc60-d11211e6e464
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{"d":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Site","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Site","type":"SP.Site"},"GroupId":"b32780e9-df70-4548-a735-4e7f055415a1","Id":"b56adf79-ff6a-4964-a63a-ff1fa23be9f8"}}
---batchresponse_45c6294d-987f-4512-a477-710b81a3fdb3--
+{"d":{"__metadata":{"id":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Site","uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Site","type":"SP.Site"},"AllowCreateDeclarativeWorkflow":false,"AllowDesigner":true,"AllowExternalEmbeddingWrapper":1,"AllowMasterPageEditing":false,"AllowRevertFromTemplate":false,"AllowSaveDeclarativeWorkflowAsTemplate":false,"AllowSavePublishDeclarativeWorkflow":false,"AuditLogTrimmingRetention":90,"CanSyncHubSitePermissions":false,"ChannelGroupId":"00000000-0000-0000-0000-000000000000","Classification":"","CommentsOnSitePagesDisabled":false,"DisableAppViews":false,"DisableCompanyWideSharingLinks":false,"DisableFlows":false,"ExternalSharingTipsEnabled":false,"ExternalUserExpirationInDays":0,"GeoLocation":"NAM","GroupId":"08b3accf-0665-4523-945b-473c3161b2ec","Id":"b260dc66-b285-477f-8a1a-14997982e986"}}
+--batchresponse_566a5c24-71d8-4f6c-bc60-d11211e6e464--

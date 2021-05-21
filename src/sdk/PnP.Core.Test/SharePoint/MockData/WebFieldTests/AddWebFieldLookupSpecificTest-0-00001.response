@@ -1,9 +1,1 @@
---batchresponse_b2417317-bf25-47bb-908e-81d65137a453
-Content-Type: application/http
-Content-Transfer-Encoding: binary
-
-HTTP/1.1 200 OK
-CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
-
-{"d":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Site","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Site","type":"SP.Site"},"GroupId":"b32780e9-df70-4548-a735-4e7f055415a1","Id":"b56adf79-ff6a-4964-a63a-ff1fa23be9f8"}}
---batchresponse_b2417317-bf25-47bb-908e-81d65137a453--
+{"responses": [{"id": "1","status":200,"headers" : {"Cache-Control":"no-cache","OData-Version":"4.0","Content-Type":"application/json;odata.metadata=minimal;odata.streaming=true;IEEE754Compatible=false;charset=utf-8"},"body":{"@odata.context":"https://graph.microsoft.com/v1.0/$metadata#sites/$entity","createdDateTime":"2021-05-12T13:32:22.367Z","description":"","id":"gimmalkyle2.sharepoint.com,b260dc66-b285-477f-8a1a-14997982e986,7aa3c357-cdeb-43b9-9dcd-dc1645b30cff","lastModifiedDateTime":"2021-05-21T02:48:31Z","name":"pnpcoresdktestgroup","webUrl":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup","displayName":"PnP Microsoft 365 library test with group","root":{},"siteCollection":{"hostname":"gimmalkyle2.sharepoint.com"}}}]}

@@ -1,9 +1,10 @@
---batchresponse_5960ae8b-a103-4dff-95c1-173f6a961d4c
+--batchresponse_f0082371-8b18-4754-9299-8878cd8a42e0
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+ETAG: "2"
 
-{"d":{"__metadata":{"id":"https://capadevtest.sharepoint.com/sites/pnpcoresdktest/_api/Site","uri":"https://capadevtest.sharepoint.com/sites/pnpcoresdktest/_api/Site","type":"SP.Site"},"HubSiteId":"00000000-0000-0000-0000-000000000000","Id":"3587329c-bd89-47b1-a880-99899b1d1885","IsHubSite":false}}
---batchresponse_5960ae8b-a103-4dff-95c1-173f6a961d4c--
+{"d":{"__metadata":{"id":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktest/_api/site/RegisterHubSite","uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktest/_api/site/RegisterHubSite","etag":"\"2\"","type":"SP.HubSite"},"Description":null,"EnablePermissionsSync":false,"EnforcedECTs":null,"EnforcedECTsVersion":0,"HideNameInNavigation":false,"ID":"ede01b50-553e-48a6-843d-e916101f0654","LogoUrl":null,"ParentHubSiteId":"00000000-0000-0000-0000-000000000000","PermissionsSyncTag":0,"RequiresJoinApproval":false,"SiteDesignId":"00000000-0000-0000-0000-000000000000","SiteId":"ede01b50-553e-48a6-843d-e916101f0654","SiteUrl":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktest","Targets":null,"TenantInstanceId":"a9f08329-5a95-46bc-b104-b355d07231f6","Title":"PnP Microsoft 365 library test"}}
+--batchresponse_f0082371-8b18-4754-9299-8878cd8a42e0--

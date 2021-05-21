@@ -1,9 +1,9 @@
---batchresponse_d10de214-c18b-4fe0-ba6e-b37480d0be53
+--batchresponse_81b9de39-89bd-48c5-b7d0-80002dfff475
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{"d":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Site","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Site","type":"SP.Site"},"GroupId":"b32780e9-df70-4548-a735-4e7f055415a1","Id":"b56adf79-ff6a-4964-a63a-ff1fa23be9f8"}}
---batchresponse_d10de214-c18b-4fe0-ba6e-b37480d0be53--
+{"d":{"__metadata":{"id":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Site","uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Site","type":"SP.Site"},"Id":"b260dc66-b285-477f-8a1a-14997982e986","SensitivityLabelId":null,"SensitivityLabel":"00000000-0000-0000-0000-000000000000","SearchBoxInNavBar":0,"SearchBoxPlaceholderText":null,"ServerRelativeUrl":"/sites/pnpcoresdktestgroup","ShareByEmailEnabled":true,"ShareByLinkEnabled":false,"ShowPeoplePickerSuggestionsForGuestUsers":false,"SocialBarOnSitePagesDisabled":false,"StatusBarLink":null,"StatusBarText":null,"ThicketSupportDisabled":true,"TrimAuditLog":true}}
+--batchresponse_81b9de39-89bd-48c5-b7d0-80002dfff475--

@@ -1,10 +1,10 @@
---batchresponse_b79fa02e-b7ee-4592-98aa-a78c78d4e103
+--batchresponse_a354d5ef-cc0e-476d-954a-00ac4aeccfe8
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
-HTTP/1.1 204 No Content
+HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
-ETAG: "5846"
+ETAG: "206"
 
-
---batchresponse_b79fa02e-b7ee-4592-98aa-a78c78d4e103--
+{"d":{"__metadata":{"id":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/Lists(guid'11dcfc58-be30-4b2d-b3ba-b6752c766f47')","uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/Lists(guid'11dcfc58-be30-4b2d-b3ba-b6752c766f47')","etag":"\"206\"","type":"SP.List"},"Description":"Updated on 5/21/2021 2:38:50 AM","Id":"11dcfc58-be30-4b2d-b3ba-b6752c766f47"}}
+--batchresponse_a354d5ef-cc0e-476d-954a-00ac4aeccfe8--

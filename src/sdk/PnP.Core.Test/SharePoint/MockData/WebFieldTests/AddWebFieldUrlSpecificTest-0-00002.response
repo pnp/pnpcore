@@ -1,9 +1,9 @@
---batchresponse_a0ba4f5a-b8cb-4858-a9e6-6d401d67c2d3
+--batchresponse_86b7e6ab-3d43-4aa2-9769-66ed9dafc75b
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{"d":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/AvailableFields(guid'a3ead4ca-1b67-44c1-813e-9dd22e68ae3b')","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/AvailableFields(guid'a3ead4ca-1b67-44c1-813e-9dd22e68ae3b')","type":"SP.FieldUrl"},"DescriptionResource":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/AvailableFields(guid'a3ead4ca-1b67-44c1-813e-9dd22e68ae3b')/DescriptionResource"}},"TitleResource":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/AvailableFields(guid'a3ead4ca-1b67-44c1-813e-9dd22e68ae3b')/TitleResource"}},"AutoIndexed":false,"CanBeDeleted":true,"ClientSideComponentId":"00000000-0000-0000-0000-000000000000","ClientSideComponentProperties":null,"ClientValidationFormula":null,"ClientValidationMessage":null,"CustomFormatter":null,"DefaultFormula":null,"DefaultValue":null,"Description":"","Direction":"none","EnforceUniqueValues":false,"EntityPropertyName":"ADDED FIELD12","Filterable":false,"FromBaseType":false,"Group":"TEST GROUP","Hidden":false,"Id":"a3ead4ca-1b67-44c1-813e-9dd22e68ae3b","Indexed":false,"IndexStatus":0,"InternalName":"ADDED FIELD12","IsModern":false,"JSLink":"clienttemplates.js","PinnedToFiltersPane":false,"ReadOnlyField":false,"Required":false,"SchemaXml":"<Field Type=\"URL\" Name=\"ADDED FIELD12\" DisplayName=\"ADDED FIELD12\" ID=\"{a3ead4ca-1b67-44c1-813e-9dd22e68ae3b}\" Group=\"TEST GROUP\" Required=\"FALSE\" Format=\"Image\" SourceID=\"{8c8e101c-1b0d-4253-85e7-c30039bf46e2}\" StaticName=\"ADDED_x0020_FIELD12\" Version=\"1\" />","Scope":"/sites/prov-1","Sealed":false,"ShowInFiltersPane":0,"Sortable":true,"StaticName":"ADDED_x0020_FIELD12","Title":"ADDED FIELD12","FieldTypeKind":11,"TypeAsString":"URL","TypeDisplayName":"Hyperlink or Picture","TypeShortDescription":"Hyperlink or Picture","ValidationFormula":null,"ValidationMessage":null,"DisplayFormat":1}}
---batchresponse_a0ba4f5a-b8cb-4858-a9e6-6d401d67c2d3--
+
+--batchresponse_86b7e6ab-3d43-4aa2-9769-66ed9dafc75b--

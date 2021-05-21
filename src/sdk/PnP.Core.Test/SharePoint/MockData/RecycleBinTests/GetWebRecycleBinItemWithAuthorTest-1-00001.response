@@ -1,9 +1,9 @@
---batchresponse_7336b5e4-661d-4066-98ec-4f208df72b0c
+--batchresponse_10ef4c65-4c6b-4f62-87ab-10126d18479f
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{"d":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Site","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Site","type":"SP.Site"},"GroupId":"b32780e9-df70-4548-a735-4e7f055415a1","Id":"b56adf79-ff6a-4964-a63a-ff1fa23be9f8"}}
---batchresponse_7336b5e4-661d-4066-98ec-4f208df72b0c--
+{"d":{"__metadata":{"id":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web","uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web","type":"SP.Web"},"RecycleBin":{"results":[{"__metadata":{"id":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/RecycleBin(guid'46f1c452-0fee-4223-8017-df52dc9df81b')","uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/RecycleBin(guid'46f1c452-0fee-4223-8017-df52dc9df81b')","type":"SP.RecycleBinItem"},"Author":{"__metadata":{"id":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/RecycleBin(guid'46f1c452-0fee-4223-8017-df52dc9df81b')/Author","uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/RecycleBin(guid'46f1c452-0fee-4223-8017-df52dc9df81b')/Author","type":"SP.User"},"Alerts":{"__deferred":{"uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/RecycleBin(guid'46f1c452-0fee-4223-8017-df52dc9df81b')/Author/Alerts"}},"Groups":{"__deferred":{"uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/RecycleBin(guid'46f1c452-0fee-4223-8017-df52dc9df81b')/Author/Groups"}},"Id":9,"IsHiddenInUI":false,"LoginName":"i:0#.f|membership|kyle@gimmalkyle2.onmicrosoft.com","Title":"Kyle Daley","PrincipalType":1,"Email":"kyle@gimmalkyle2.onmicrosoft.com","Expiration":"","IsEmailAuthenticationGuestUser":false,"IsShareByEmailGuestUser":false,"IsSiteAdmin":false,"UserId":{"__metadata":{"type":"SP.UserIdInfo"},"NameId":"100320013f67db2c","NameIdIssuer":"urn:federation:microsoftonline"},"UserPrincipalName":"kyle@gimmalkyle2.onmicrosoft.com"},"Id":"46f1c452-0fee-4223-8017-df52dc9df81b","Title":"PNP_SDK_TEST_GetWebRecycleBinItemWithAuthorTest.docx"}]},"Id":"7aa3c357-cdeb-43b9-9dcd-dc1645b30cff"}}
+--batchresponse_10ef4c65-4c6b-4f62-87ab-10126d18479f--

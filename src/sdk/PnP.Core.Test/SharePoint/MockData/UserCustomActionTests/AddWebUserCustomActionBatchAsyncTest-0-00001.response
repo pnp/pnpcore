@@ -1,9 +1,10 @@
---batchresponse_47a9d222-cde3-46f0-bcca-052877b36d7a
+--batchresponse_0cbe6075-3108-4590-abaf-a010444b8416
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
-HTTP/1.1 200 OK
+HTTP/1.1 201 Created
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+LOCATION: https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/UserCustomActions(guid'2417afa5-4bcd-4462-bd3a-e802e43ff79d')
 
-{"d":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Site","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Site","type":"SP.Site"},"GroupId":"b32780e9-df70-4548-a735-4e7f055415a1","Id":"b56adf79-ff6a-4964-a63a-ff1fa23be9f8"}}
---batchresponse_47a9d222-cde3-46f0-bcca-052877b36d7a--
+{"d":{"__metadata":{"id":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/UserCustomActions(guid'2417afa5-4bcd-4462-bd3a-e802e43ff79d')","uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/UserCustomActions(guid'2417afa5-4bcd-4462-bd3a-e802e43ff79d')","type":"SP.UserCustomAction"},"DescriptionResource":{"__deferred":{"uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/UserCustomActions(guid'2417afa5-4bcd-4462-bd3a-e802e43ff79d')/DescriptionResource"}},"TitleResource":{"__deferred":{"uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/UserCustomActions(guid'2417afa5-4bcd-4462-bd3a-e802e43ff79d')/TitleResource"}},"ClientSideComponentId":"a54612b1-e5cb-4a43-80ae-3b5fb6ce1e35","ClientSideComponentProperties":"{\"message\":\"Added from AddWebUserCustomActionBatchAsyncTest\"}","CommandUIExtension":null,"Description":"TESTING","Group":null,"HostProperties":"","Id":"2417afa5-4bcd-4462-bd3a-e802e43ff79d","ImageUrl":null,"Location":"ClientSideExtension.ApplicationCustomizer","Name":"UCA_CustomHeader","RegistrationId":null,"RegistrationType":0,"Rights":{"__metadata":{"type":"SP.BasePermissions"},"High":"0","Low":"262144"},"Scope":3,"ScriptBlock":null,"ScriptSrc":null,"Sequence":100,"Title":"Custom Header","Url":null,"VersionOfUserCustomAction":"16.0.1.0"}}
+--batchresponse_0cbe6075-3108-4590-abaf-a010444b8416--

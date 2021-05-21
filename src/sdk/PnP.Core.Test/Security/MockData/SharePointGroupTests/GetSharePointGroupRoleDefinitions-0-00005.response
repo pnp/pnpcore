@@ -1,9 +1,9 @@
---batchresponse_c4f2d906-d615-4c3f-b65a-2254646b4395
+--batchresponse_cf41dac4-4ac2-41d7-afda-c4a00eed7a73
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{"d":{"AddRoleAssignment":null}}
---batchresponse_c4f2d906-d615-4c3f-b65a-2254646b4395--
+{"d":{"results":[{"__metadata":{"id":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/RoleAssignments/GetByPrincipalId(22)","uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/RoleAssignments/GetByPrincipalId(22)","type":"SP.RoleAssignment"},"RoleDefinitionBindings":{"results":[{"__metadata":{"id":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/RoleDefinitions(1073741933)","uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/RoleDefinitions(1073741933)","type":"SP.RoleDefinition"},"BasePermissions":{"__metadata":{"type":"SP.BasePermissions"},"High":"0","Low":"65536"},"Description":null,"Hidden":false,"Id":1073741933,"Name":"PNP_SDK_TEST_TestRoleDef","Order":0,"RoleTypeKind":0}]},"PrincipalId":22}]}}
+--batchresponse_cf41dac4-4ac2-41d7-afda-c4a00eed7a73--

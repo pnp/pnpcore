@@ -1,9 +1,9 @@
---batchresponse_9dadd3e5-e643-491a-8b03-3e0bed3412ed
+--batchresponse_d170149e-db36-4775-a716-f9d4b4bb9b86
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
-HTTP/1.1 200 OK
+HTTP/1.1 404 Not Found
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{"d":{"results":[]}}
---batchresponse_9dadd3e5-e643-491a-8b03-3e0bed3412ed--
+{"error":{"code":"-2130575338, Microsoft.SharePoint.SPException","message":{"lang":"en-US","value":"The file /sites/pnpcoresdktestgroup/SitePages/PNP_SDK_TEST_A&B-C.aspx does not exist."}}}
+--batchresponse_d170149e-db36-4775-a716-f9d4b4bb9b86--

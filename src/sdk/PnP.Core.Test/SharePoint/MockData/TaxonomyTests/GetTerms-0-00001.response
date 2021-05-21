@@ -1,9 +1,1 @@
---batchresponse_a1c2cb6c-59f3-4f21-94a9-7a3637e5f2d6
-Content-Type: application/http
-Content-Transfer-Encoding: binary
-
-HTTP/1.1 200 OK
-CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
-
-{"d":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Site","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Site","type":"SP.Site"},"GroupId":"b32780e9-df70-4548-a735-4e7f055415a1","Id":"b56adf79-ff6a-4964-a63a-ff1fa23be9f8"}}
---batchresponse_a1c2cb6c-59f3-4f21-94a9-7a3637e5f2d6--
+{"responses": [{"id": "1","status":201,"headers" : {"Location":"https://gimmalkyle2.sharepoint.com/_api/v2.0/termStores('root')/groups('5d512f72-02ac-4744-b14d-06e2d4424381')","Cache-Control":"no-cache","OData-Version":"4.0","Content-Type":"application/json;odata.metadata=minimal;odata.streaming=true;IEEE754Compatible=false;charset=utf-8"},"body":{"@odata.context":"https://graph.microsoft.com/beta/$metadata#termStore/groups/$entity","id":"5d512f72-02ac-4744-b14d-06e2d4424381","description":"","displayName":"PnP-1099f482-277a-479e-9822-0b3f6847fb06","createdDateTime":"2021-05-21T03:27:59.413Z","scope":"global"}}]}

@@ -1,9 +1,10 @@
---batchresponse_d336ff7a-a25e-466a-b0a3-f35e1068ad1f
+--batchresponse_91c949dc-f92d-4964-bafe-1c81aacbef21
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+ETAG: "a6ac79c6-aa42-49bc-93eb-b9358658448b,1"
 
-{"d":{"AddValidateUpdateItemUsingPath":{"__metadata":{"type":"Collection(SP.ListItemFormUpdateValue)"},"results":[{"ErrorCode":0,"ErrorMessage":null,"FieldName":"Title","FieldValue":"root","HasException":false,"ItemId":0},{"ErrorCode":0,"ErrorMessage":null,"FieldName":"Id","FieldValue":"1","HasException":false,"ItemId":0}]}}}
---batchresponse_d336ff7a-a25e-466a-b0a3-f35e1068ad1f--
+{"d":{"__metadata":{"id":"3d841401-e5d1-47eb-afd2-1e9b4b9a93d6","uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/Lists(guid'61bc55f0-018f-4a95-b361-7e13bc956267')/Items(1)","etag":"\"1\"","type":"SP.Data.PNP_x005f_SDK_x005f_TEST_x005f_AddListItemWithFolderTestListItem"},"ContentTypeId":"0x010013E906F974433148898DD80BEF36A827","FileDirRef":"/sites/pnpcoresdktestgroup/Lists/PNP_SDK_TEST_AddListItemWithFolderTest"}}
+--batchresponse_91c949dc-f92d-4964-bafe-1c81aacbef21--

@@ -1,10 +1,9 @@
---batchresponse_5cd56da0-ff27-4476-86a8-957764a01edf
+--batchresponse_1d0378fb-d3b1-4d7b-add0-dd3510f55e85
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
-HTTP/1.1 201 Created
+HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
-LOCATION: https://bertonline.sharepoint.com/sites/prov-1/_api/Web/SiteGroups/GetById(38)
 
-{"d":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/SiteGroups/GetById(38)","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/SiteGroups/GetById(38)","type":"SP.Group"},"Owner":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/SiteGroups/GetById(38)/Owner"}},"Users":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/SiteGroups/GetById(38)/Users"}},"Id":38,"IsHiddenInUI":false,"LoginName":"PNP_SDK_TEST_TestGroup","Title":"PNP_SDK_TEST_TestGroup","PrincipalType":8,"AllowMembersEditMembership":false,"AllowRequestToJoinLeave":false,"AutoAcceptRequestToJoinLeave":false,"Description":null,"OnlyAllowMembersViewMembership":true,"OwnerTitle":"Bert Jansen (Cloud)","RequestToJoinLeaveEmailSetting":null}}
---batchresponse_5cd56da0-ff27-4476-86a8-957764a01edf--
+{"d":{"results":[{"__metadata":{"id":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/SiteGroups/GetById(20)","uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/SiteGroups/GetById(20)","type":"SP.Group"},"Owner":{"__deferred":{"uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/SiteGroups/GetById(20)/Owner"}},"Users":{"__deferred":{"uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/SiteGroups/GetById(20)/Users"}},"Id":20,"IsHiddenInUI":false,"LoginName":"PNP_SDK_TEST_TestGroup","Title":"PNP_SDK_TEST_TestGroup","PrincipalType":8,"AllowMembersEditMembership":false,"AllowRequestToJoinLeave":false,"AutoAcceptRequestToJoinLeave":false,"Description":null,"OnlyAllowMembersViewMembership":true,"OwnerTitle":"Kyle Daley","RequestToJoinLeaveEmailSetting":null}]}}
+--batchresponse_1d0378fb-d3b1-4d7b-add0-dd3510f55e85--

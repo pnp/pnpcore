@@ -1,1 +1,9 @@
-PnP Rocks !!!
+--batchresponse_99506064-e55d-4714-85b7-4572c60422fa
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+HTTP/1.1 200 OK
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+
+
+--batchresponse_99506064-e55d-4714-85b7-4572c60422fa--

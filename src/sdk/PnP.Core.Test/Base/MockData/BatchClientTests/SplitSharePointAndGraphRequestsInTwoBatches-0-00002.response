@@ -1,9 +1,1 @@
---batchresponse_93e270f2-1416-41b4-bd17-88adda687563
-Content-Type: application/http
-Content-Transfer-Encoding: binary
-
-HTTP/1.1 200 OK
-CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
-
-{"d":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web","type":"SP.Web"},"Id":"8c8e101c-1b0d-4253-85e7-c30039bf46e2","SearchScope":0,"Title":"prov-1"}}
---batchresponse_93e270f2-1416-41b4-bd17-88adda687563--
+{"responses": [{"id": "1","status":200,"headers" : {"OData-Version":"4.0","Content-Type":"application/json;odata.metadata=minimal;odata.streaming=true;IEEE754Compatible=false;charset=utf-8"},"body":{"@odata.context":"https://graph.microsoft.com/v1.0/$metadata#teams/$entity","id":"08b3accf-0665-4523-945b-473c3161b2ec","createdDateTime":"2021-05-20T02:52:37.759Z","displayName":"PnP Microsoft 365 library test with group","description":"PnP Microsoft 365 library test with group","internalId":"19:aUSLW1E49X7j-W5NYO5BYSp1l7ruuleVIQtH2iFr5Bw1@thread.tacv2","classification":null,"specialization":"none","visibility":"public","webUrl":"https://teams.microsoft.com/l/team/19:aUSLW1E49X7j-W5NYO5BYSp1l7ruuleVIQtH2iFr5Bw1%40thread.tacv2/conversations?groupId=08b3accf-0665-4523-945b-473c3161b2ec&tenantId=8c5f9cbf-10f3-425c-9384-1a404ca3945d","isArchived":false,"isMembershipLimitedToOwners":false,"discoverySettings":{"showInTeamsSearchAndSuggestions":true},"memberSettings":{"allowCreateUpdateChannels":true,"allowCreatePrivateChannels":true,"allowDeleteChannels":true,"allowAddRemoveApps":true,"allowCreateUpdateRemoveTabs":true,"allowCreateUpdateRemoveConnectors":true},"guestSettings":{"allowCreateUpdateChannels":true,"allowDeleteChannels":true},"messagingSettings":{"allowUserEditMessages":true,"allowUserDeleteMessages":true,"allowOwnerDeleteMessages":true,"allowTeamMentions":true,"allowChannelMentions":true},"funSettings":{"allowGiphy":true,"giphyContentRating":"moderate","allowStickersAndMemes":true,"allowCustomMemes":true}}}]}

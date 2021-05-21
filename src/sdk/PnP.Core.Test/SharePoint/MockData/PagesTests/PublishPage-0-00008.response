@@ -1,1 +1,9 @@
-[{"SchemaVersion":"15.0.0.0","LibraryVersion":"16.0.21221.12003","ErrorInfo":null,"TraceCorrelationId":"a544c39f-2024-2000-cd61-68f9d375f3bf"}]
+--batchresponse_2d40d9fb-c142-4e52-8499-91da8c2b03ee
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+HTTP/1.1 200 OK
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+
+{"d":{"__metadata":{"id":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/pnpcoresdktestgroup/SitePages/PNP_SDK_TEST_PublishPage.aspx')","uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/pnpcoresdktestgroup/SitePages/PNP_SDK_TEST_PublishPage.aspx')","type":"SP.File"},"Level":2,"UniqueId":"d38c5b09-87fb-4ace-a266-c93c1c8bd932"}}
+--batchresponse_2d40d9fb-c142-4e52-8499-91da8c2b03ee--

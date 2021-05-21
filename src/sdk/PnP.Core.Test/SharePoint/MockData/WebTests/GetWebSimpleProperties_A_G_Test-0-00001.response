@@ -1,9 +1,9 @@
---batchresponse_f200a119-445d-4370-ba02-2f3c0f0b0ac9
+--batchresponse_dcc259eb-a9b3-460d-9d2e-f2c74d72e52e
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{"d":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Site","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Site","type":"SP.Site"},"GroupId":"b32780e9-df70-4548-a735-4e7f055415a1","Id":"b56adf79-ff6a-4964-a63a-ff1fa23be9f8"}}
---batchresponse_f200a119-445d-4370-ba02-2f3c0f0b0ac9--
+{"d":{"__metadata":{"id":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web","uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web","type":"SP.Web"},"AccessRequestListUrl":null,"AccessRequestSiteDescription":"","AllowCreateDeclarativeWorkflowForCurrentUser":false,"AllowDesignerForCurrentUser":true,"AllowMasterPageEditingForCurrentUser":false,"AllowRevertFromTemplateForCurrentUser":true,"AllowRssFeeds":true,"AllowSaveDeclarativeWorkflowAsTemplateForCurrentUser":false,"AllowSavePublishDeclarativeWorkflowForCurrentUser":false,"AlternateCssUrl":"","AppInstanceId":"00000000-0000-0000-0000-000000000000","ContainsConfidentialInfo":false,"Created":"2021-05-12T13:32:22.367","CustomMasterUrl":"/sites/pnpcoresdktestgroup/_catalogs/masterpage/seattle.master","DesignPackageId":"00000000-0000-0000-0000-000000000000","DisableRecommendedItems":false,"DocumentLibraryCalloutOfficeWebAppPreviewersDisabled":false,"EffectiveBasePermissions":{"__metadata":{"type":"SP.BasePermissions"},"High":"2147483647","Low":"4294705151"},"EnableMinimalDownload":false,"FooterEmphasis":0,"FooterEnabled":false,"FooterLayout":0,"Id":"7aa3c357-cdeb-43b9-9dcd-dc1645b30cff"}}
+--batchresponse_dcc259eb-a9b3-460d-9d2e-f2c74d72e52e--

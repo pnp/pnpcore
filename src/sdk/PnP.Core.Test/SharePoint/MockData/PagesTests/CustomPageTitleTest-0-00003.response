@@ -1,9 +1,9 @@
---batchresponse_d10a5540-88bd-46a7-b8a7-08fd3ffb1e27
+--batchresponse_dfd8647d-0337-4bdd-8746-ddd54fe7c91a
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
-HTTP/1.1 200 OK
+HTTP/1.1 404 Not Found
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{"d":{"results":[]}}
---batchresponse_d10a5540-88bd-46a7-b8a7-08fd3ffb1e27--
+{"error":{"code":"-2130575338, Microsoft.SharePoint.SPException","message":{"lang":"en-US","value":"The file /sites/pnpcoresdktestgroup/SitePages/PNP_SDK_TEST_CustomPageTitleTest.aspx does not exist."}}}
+--batchresponse_dfd8647d-0337-4bdd-8746-ddd54fe7c91a--

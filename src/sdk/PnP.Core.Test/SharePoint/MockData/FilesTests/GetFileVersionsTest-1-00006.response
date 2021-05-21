@@ -1,9 +1,9 @@
---batchresponse_19f41f3d-55f1-4d41-ac67-5ae8c739d64e
+--batchresponse_ffbbb0e3-bd6e-4983-84bb-98b5f35ce488
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{"d":{"CheckIn":null}}
---batchresponse_19f41f3d-55f1-4d41-ac67-5ae8c739d64e--
+{"d":{"__metadata":{"id":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/pnpcoresdktestgroup/PNP_SDK_TEST_GetFileVersionsTest/PNP_SDK_TEST_GetFileVersionsTest.docx')","uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/pnpcoresdktestgroup/PNP_SDK_TEST_GetFileVersionsTest/PNP_SDK_TEST_GetFileVersionsTest.docx')","type":"SP.File"},"Versions":{"results":[{"__metadata":{"id":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/SP.FileVersionc7223af4-66b3-4ffe-b458-bf68130c7a56","uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/SP.FileVersionc7223af4-66b3-4ffe-b458-bf68130c7a56","type":"SP.FileVersion"},"CreatedBy":{"__deferred":{"uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/SP.FileVersionc7223af4-66b3-4ffe-b458-bf68130c7a56/CreatedBy"}},"CheckInComment":"","Created":"2021-05-21T02:41:29Z","ID":1,"IsCurrentVersion":false,"Length":"17811","Size":17811,"Url":"_vti_history/1/PNP_SDK_TEST_GetFileVersionsTest/PNP_SDK_TEST_GetFileVersionsTest.docx","VersionLabel":"0.1"},{"__metadata":{"id":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/SP.FileVersion5686db86-b353-49fc-bd83-5a3fd8dd1221","uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/SP.FileVersion5686db86-b353-49fc-bd83-5a3fd8dd1221","type":"SP.FileVersion"},"CreatedBy":{"__deferred":{"uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/SP.FileVersion5686db86-b353-49fc-bd83-5a3fd8dd1221/CreatedBy"}},"CheckInComment":"","Created":"2021-05-21T02:41:29Z","ID":2,"IsCurrentVersion":false,"Length":"17811","Size":17811,"Url":"_vti_history/2/PNP_SDK_TEST_GetFileVersionsTest/PNP_SDK_TEST_GetFileVersionsTest.docx","VersionLabel":"0.2"}]},"UniqueId":"921a1c04-64b9-4f43-b555-9552b066a154"}}
+--batchresponse_ffbbb0e3-bd6e-4983-84bb-98b5f35ce488--

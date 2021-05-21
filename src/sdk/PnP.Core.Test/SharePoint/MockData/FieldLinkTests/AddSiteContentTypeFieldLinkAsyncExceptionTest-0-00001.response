@@ -1,9 +1,1 @@
---batchresponse_53b28e37-ded9-43cb-bec6-179b04ac3573
-Content-Type: application/http
-Content-Transfer-Encoding: binary
-
-HTTP/1.1 200 OK
-CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
-
-{"d":{"__metadata":{"id":"https://mwdevvalo.sharepoint.com/sites/tea-point/_api/Site","uri":"https://mwdevvalo.sharepoint.com/sites/tea-point/_api/Site","type":"SP.Site"},"GroupId":"00000000-0000-0000-0000-000000000000","Id":"69399214-4542-4f93-b658-328a712a834f"}}
---batchresponse_53b28e37-ded9-43cb-bec6-179b04ac3573--
+[{"SchemaVersion":"15.0.0.0","LibraryVersion":"16.0.21312.12002","ErrorInfo":null,"TraceCorrelationId":"7eefc99f-e0fe-0000-def2-bd9025e5237a"},5,{"IsNull":false},6,{"_ObjectIdentity_":"7eefc99f-e0fe-0000-def2-bd9025e5237a|740c6a0b-85e2-48a0-a494-e0f1759d4aa7:site:b260dc66-b285-477f-8a1a-14997982e986:web:7aa3c357-cdeb-43b9-9dcd-dc1645b30cff:contenttype:0x0100302EF0D1F1DB4C4EBF58251BCCF5968A"}]

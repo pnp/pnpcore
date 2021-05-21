@@ -1,1 +1,10 @@
-[{"SchemaVersion":"15.0.0.0","LibraryVersion":"16.0.21024.12002","ErrorInfo":null,"TraceCorrelationId":"8dfcb29f-f025-2000-a0c6-86f8145aebfd"},5,{"IsNull":false},6,{"_ObjectIdentity_":"8dfcb29f-f025-2000-a0c6-86f8145aebfd|740c6a0b-85e2-48a0-a494-e0f1759d4aa7:site:69399214-4542-4f93-b658-328a712a834f:web:f5ad2fe7-d9f1-4b96-8dce-884fa6cc49cd:contenttype:0x0100302EF0D1F1DB4C4EBF58251BCCF5967F"}]
+--batchresponse_b048a7a8-de18-4990-8aca-6de3ca00c8e9
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+HTTP/1.1 201 Created
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+LOCATION: https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/ContentTypes('0x0100302EF0D1F1DB4C4EBF58251BCCF5967F')/FieldLinks(guid'fa564e0f-0c70-4ab9-b863-0177e6ddd247')
+
+{"d":{"__metadata":{"id":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/ContentTypes('0x0100302EF0D1F1DB4C4EBF58251BCCF5967F')/FieldLinks(guid'fa564e0f-0c70-4ab9-b863-0177e6ddd247')","uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/ContentTypes('0x0100302EF0D1F1DB4C4EBF58251BCCF5967F')/FieldLinks(guid'fa564e0f-0c70-4ab9-b863-0177e6ddd247')","type":"SP.FieldLink"},"FieldInternalName":"Title","Hidden":false,"Id":"fa564e0f-0c70-4ab9-b863-0177e6ddd247","Name":"Title","Required":false}}
+--batchresponse_b048a7a8-de18-4990-8aca-6de3ca00c8e9--

@@ -1,9 +1,9 @@
---batchresponse_3d24efc5-84e5-4ace-abb3-b1aed654d174
+--batchresponse_01778aaa-1a22-45bb-95c4-165b2b430b07
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{"d":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/AvailableFields(guid'8bd5bfcb-4cc3-4168-b4ce-b19058fdfb1d')","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/AvailableFields(guid'8bd5bfcb-4cc3-4168-b4ce-b19058fdfb1d')","type":"SP.FieldCalculated"},"DescriptionResource":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/AvailableFields(guid'8bd5bfcb-4cc3-4168-b4ce-b19058fdfb1d')/DescriptionResource"}},"TitleResource":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/AvailableFields(guid'8bd5bfcb-4cc3-4168-b4ce-b19058fdfb1d')/TitleResource"}},"AutoIndexed":false,"CanBeDeleted":true,"ClientSideComponentId":"00000000-0000-0000-0000-000000000000","ClientSideComponentProperties":null,"ClientValidationFormula":null,"ClientValidationMessage":null,"CustomFormatter":null,"DefaultFormula":null,"DefaultValue":null,"Description":"","Direction":"none","EnforceUniqueValues":false,"EntityPropertyName":"ADDED FIELD15","Filterable":true,"FromBaseType":false,"Group":"TEST GROUP","Hidden":false,"Id":"8bd5bfcb-4cc3-4168-b4ce-b19058fdfb1d","Indexed":false,"IndexStatus":0,"InternalName":"ADDED FIELD15","IsModern":false,"JSLink":"clienttemplates.js","PinnedToFiltersPane":false,"ReadOnlyField":false,"Required":false,"SchemaXml":"<Field Type=\"Calculated\" Name=\"ADDED FIELD15\" DisplayName=\"ADDED FIELD15\" ID=\"{8bd5bfcb-4cc3-4168-b4ce-b19058fdfb1d}\" Group=\"TEST GROUP\" Required=\"FALSE\" ResultType=\"Text\" SourceID=\"{8c8e101c-1b0d-4253-85e7-c30039bf46e2}\" StaticName=\"ADDED_x0020_FIELD15\" Version=\"1\"><Formula>=\"HELLO\"</Formula></Field>","Scope":"/sites/prov-1","Sealed":false,"ShowInFiltersPane":0,"Sortable":true,"StaticName":"ADDED_x0020_FIELD15","Title":"ADDED FIELD15","FieldTypeKind":17,"TypeAsString":"Calculated","TypeDisplayName":"Calculated","TypeShortDescription":"Calculated (calculation based on other columns)","ValidationFormula":null,"ValidationMessage":null,"CurrencyLocaleId":2067,"DateFormat":0,"DisplayFormat":-1,"Formula":"=\"HELLO\"","OutputType":2,"ShowAsPercentage":false}}
---batchresponse_3d24efc5-84e5-4ace-abb3-b1aed654d174--
+
+--batchresponse_01778aaa-1a22-45bb-95c4-165b2b430b07--

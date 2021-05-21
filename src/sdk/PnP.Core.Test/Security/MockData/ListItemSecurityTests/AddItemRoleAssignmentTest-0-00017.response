@@ -1,17 +1,10 @@
---batchresponse_c12ebffb-ca9c-4c64-88da-bfde69d0d62f
+--batchresponse_004c196c-eeb1-472d-9ee8-ceaa1ca315d4
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+ETAG: "ba9c5f6c-4876-450f-b71a-a3103e20debd,1"
 
-{"d":{"BreakRoleInheritance":null}}
---batchresponse_c12ebffb-ca9c-4c64-88da-bfde69d0d62f
-Content-Type: application/http
-Content-Transfer-Encoding: binary
-
-HTTP/1.1 200 OK
-CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
-
-{"d":{"AddRoleAssignment":null}}
---batchresponse_c12ebffb-ca9c-4c64-88da-bfde69d0d62f--
+{"d":{"__metadata":{"id":"ea0252f8-088e-46fb-94fa-da0e56aea96b","uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/Lists(guid'9482a6be-9864-45b2-a2f6-21fc8b0e8d79')/Items(10)","etag":"\"1\"","type":"SP.Data.PNP_x005f_SDK_x005f_TEST_x005f_AddItemRoleAssignmentTestListItem"},"RoleAssignments":{"results":[{"__metadata":{"id":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/Lists(guid'9482a6be-9864-45b2-a2f6-21fc8b0e8d79')/Items(10)/RoleAssignments/GetByPrincipalId(9)","uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/Lists(guid'9482a6be-9864-45b2-a2f6-21fc8b0e8d79')/Items(10)/RoleAssignments/GetByPrincipalId(9)","type":"SP.RoleAssignment"},"Member":{"__deferred":{"uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/Lists(guid'9482a6be-9864-45b2-a2f6-21fc8b0e8d79')/Items(10)/RoleAssignments/GetByPrincipalId(9)/Member"}},"RoleDefinitionBindings":{"__deferred":{"uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/Lists(guid'9482a6be-9864-45b2-a2f6-21fc8b0e8d79')/Items(10)/RoleAssignments/GetByPrincipalId(9)/RoleDefinitionBindings"}},"PrincipalId":9}]},"Id":10,"ID":10}}
+--batchresponse_004c196c-eeb1-472d-9ee8-ceaa1ca315d4--

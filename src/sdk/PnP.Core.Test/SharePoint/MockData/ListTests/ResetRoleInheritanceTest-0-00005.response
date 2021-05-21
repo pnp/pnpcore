@@ -1,9 +1,10 @@
---batchresponse_69b771cf-94fc-4bfd-b2ee-677646ce236a
+--batchresponse_c2582280-b0ec-42d8-95c8-53e5e4034871
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+ETAG: "1"
 
-{"d":{"ResetRoleInheritance":null}}
---batchresponse_69b771cf-94fc-4bfd-b2ee-677646ce236a--
+{"d":{"__metadata":{"id":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/Lists(guid'd18ec81f-a5f6-4bcb-8ac5-1749fd76e2e1')","uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/Lists(guid'd18ec81f-a5f6-4bcb-8ac5-1749fd76e2e1')","etag":"\"1\"","type":"SP.List"},"HasUniqueRoleAssignments":false,"Id":"d18ec81f-a5f6-4bcb-8ac5-1749fd76e2e1"}}
+--batchresponse_c2582280-b0ec-42d8-95c8-53e5e4034871--

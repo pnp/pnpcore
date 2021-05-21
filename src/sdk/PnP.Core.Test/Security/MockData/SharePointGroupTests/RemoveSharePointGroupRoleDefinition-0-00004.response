@@ -1,9 +1,9 @@
---batchresponse_36f35aa1-4c7e-4106-9485-8c51d190c3f6
+--batchresponse_cbd5cc2b-66d6-4944-8a4d-5fe1efb7f5f2
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{"d":{"results":[{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/RoleDefinitions(1073741960)","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/RoleDefinitions(1073741960)","type":"SP.RoleDefinition"},"BasePermissions":{"__metadata":{"type":"SP.BasePermissions"},"High":"0","Low":"65536"},"Description":null,"Hidden":false,"Id":1073741960,"Name":"PNP_SDK_TEST_TestRoleDef","Order":0,"RoleTypeKind":0}]}}
---batchresponse_36f35aa1-4c7e-4106-9485-8c51d190c3f6--
+{"d":{"AddRoleAssignment":null}}
+--batchresponse_cbd5cc2b-66d6-4944-8a4d-5fe1efb7f5f2--

@@ -124,6 +124,11 @@ namespace PnP.Core.Model.SharePoint
         /// </summary>
         public ITimeZoneCollection TimeZones { get; }
 
+        /// <summary>
+        /// A special property used to add an asterisk to a $select statement
+        /// </summary>
+        public object AllColumns { get; }
+
         #endregion
 
     }

@@ -1,9 +1,10 @@
---batchresponse_8669aa71-05a4-4f3a-b35e-3ad15dad9d00
+--batchresponse_1666c4e6-f6c0-4fc5-ae57-f28ae87846c1
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+ETAG: "be073d90-fd66-41a9-8d8c-001d6b1ac6d0,1"
 
-{"d":{"AddRoleAssignment":null}}
---batchresponse_8669aa71-05a4-4f3a-b35e-3ad15dad9d00--
+{"d":{"__metadata":{"id":"e08ea434-cfb0-42a5-a025-44ff41f49b86","uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/Lists(guid'9482a6be-9864-45b2-a2f6-21fc8b0e8d79')/Items(1)","etag":"\"1\"","type":"SP.Data.PNP_x005f_SDK_x005f_TEST_x005f_AddItemRoleAssignmentTestListItem"},"RoleAssignments":{"results":[{"__metadata":{"id":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/Lists(guid'9482a6be-9864-45b2-a2f6-21fc8b0e8d79')/Items(1)/RoleAssignments/GetByPrincipalId(9)","uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/Lists(guid'9482a6be-9864-45b2-a2f6-21fc8b0e8d79')/Items(1)/RoleAssignments/GetByPrincipalId(9)","type":"SP.RoleAssignment"},"Member":{"__deferred":{"uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/Lists(guid'9482a6be-9864-45b2-a2f6-21fc8b0e8d79')/Items(1)/RoleAssignments/GetByPrincipalId(9)/Member"}},"RoleDefinitionBindings":{"__deferred":{"uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/Lists(guid'9482a6be-9864-45b2-a2f6-21fc8b0e8d79')/Items(1)/RoleAssignments/GetByPrincipalId(9)/RoleDefinitionBindings"}},"PrincipalId":9},{"__metadata":{"id":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/Lists(guid'9482a6be-9864-45b2-a2f6-21fc8b0e8d79')/Items(1)/RoleAssignments/GetByPrincipalId(12)","uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/Lists(guid'9482a6be-9864-45b2-a2f6-21fc8b0e8d79')/Items(1)/RoleAssignments/GetByPrincipalId(12)","type":"SP.RoleAssignment"},"Member":{"__deferred":{"uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/Lists(guid'9482a6be-9864-45b2-a2f6-21fc8b0e8d79')/Items(1)/RoleAssignments/GetByPrincipalId(12)/Member"}},"RoleDefinitionBindings":{"__deferred":{"uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/Lists(guid'9482a6be-9864-45b2-a2f6-21fc8b0e8d79')/Items(1)/RoleAssignments/GetByPrincipalId(12)/RoleDefinitionBindings"}},"PrincipalId":12}]},"Id":1,"ID":1}}
+--batchresponse_1666c4e6-f6c0-4fc5-ae57-f28ae87846c1--

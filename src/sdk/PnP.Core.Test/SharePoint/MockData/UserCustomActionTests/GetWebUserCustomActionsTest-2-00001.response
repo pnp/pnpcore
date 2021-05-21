@@ -1,9 +1,9 @@
---batchresponse_f6ff1d7b-fbe1-412e-ad93-775fd510621d
+--batchresponse_9c9c2ad3-327f-42b5-b275-0b2ec4cfb6ee
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{"d":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Site","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Site","type":"SP.Site"},"GroupId":"b32780e9-df70-4548-a735-4e7f055415a1","Id":"b56adf79-ff6a-4964-a63a-ff1fa23be9f8"}}
---batchresponse_f6ff1d7b-fbe1-412e-ad93-775fd510621d--
+{"d":{"__metadata":{"id":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web","uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web","type":"SP.Web"},"UserCustomActions":{"results":[{"__metadata":{"id":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/UserCustomActions(guid'413a97c0-31fc-4197-b2c1-661d54bec48f')","uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/UserCustomActions(guid'413a97c0-31fc-4197-b2c1-661d54bec48f')","type":"SP.UserCustomAction"},"DescriptionResource":{"__deferred":{"uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/UserCustomActions(guid'413a97c0-31fc-4197-b2c1-661d54bec48f')/DescriptionResource"}},"TitleResource":{"__deferred":{"uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/UserCustomActions(guid'413a97c0-31fc-4197-b2c1-661d54bec48f')/TitleResource"}},"ClientSideComponentId":"a54612b1-e5cb-4a43-80ae-3b5fb6ce1e35","ClientSideComponentProperties":"{\"message\":\"Added from Test GetWebUserCustomActionsTest\"}","CommandUIExtension":null,"Description":"PNP_SDK_TEST_GetWebUserCustomActionsTest","Group":null,"HostProperties":"","Id":"413a97c0-31fc-4197-b2c1-661d54bec48f","ImageUrl":null,"Location":"ClientSideExtension.ApplicationCustomizer","Name":"PNP_SDK_TEST_GetWebUserCustomActionsTest","RegistrationId":null,"RegistrationType":0,"Rights":{"__metadata":{"type":"SP.BasePermissions"},"High":"0","Low":"262146"},"Scope":3,"ScriptBlock":null,"ScriptSrc":null,"Sequence":100,"Title":"PNP_SDK_TEST_GetWebUserCustomActionsTest","Url":null,"VersionOfUserCustomAction":"16.0.1.0"}]},"Id":"7aa3c357-cdeb-43b9-9dcd-dc1645b30cff"}}
+--batchresponse_9c9c2ad3-327f-42b5-b275-0b2ec4cfb6ee--

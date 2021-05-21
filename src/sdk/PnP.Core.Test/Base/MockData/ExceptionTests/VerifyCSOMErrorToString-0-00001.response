@@ -1,9 +1,1 @@
---batchresponse_8ea0ab01-6871-486f-b31e-a9c64c0054d6
-Content-Type: application/http
-Content-Transfer-Encoding: binary
-
-HTTP/1.1 200 OK
-CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
-
-{"d":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Site","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Site","type":"SP.Site"},"GroupId":"b32780e9-df70-4548-a735-4e7f055415a1","Id":"b56adf79-ff6a-4964-a63a-ff1fa23be9f8"}}
---batchresponse_8ea0ab01-6871-486f-b31e-a9c64c0054d6--
+[{"SchemaVersion":"15.0.0.0","LibraryVersion":"16.0.21312.12002","ErrorInfo":{"ErrorMessage":"The 'TypeId' attribute is invalid - The value '' is invalid according to its datatype 'http:\u002f\u002fschemas.microsoft.com\u002fsharepoint\u002fclientquery\u002f2009:TypeIdGuidType' - The Pattern constraint failed.","ErrorValue":null,"TraceCorrelationId":"23efc99f-e021-0000-bd3c-7b35253d1d52","ErrorCode":-1,"ErrorTypeName":"System.Xml.Schema.XmlSchemaValidationException"},"TraceCorrelationId":"23efc99f-e021-0000-bd3c-7b35253d1d52"}]

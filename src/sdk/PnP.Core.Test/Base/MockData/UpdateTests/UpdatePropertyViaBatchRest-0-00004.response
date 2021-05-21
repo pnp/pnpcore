@@ -1,10 +1,10 @@
---batchresponse_e37c41b2-a045-42b0-a9a6-b7f81a956924
+--batchresponse_cdad4f22-382d-40b9-a0c8-d27502fa3f46
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
-HTTP/1.1 200 OK
+HTTP/1.1 204 No Content
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
-ETAG: "5846"
+ETAG: "207"
 
-{"d":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'f90d07e0-bbea-4464-9611-f695d0b7b3e4')","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'f90d07e0-bbea-4464-9611-f695d0b7b3e4')","etag":"\"5846\"","type":"SP.List"},"Description":"Updated on 9/03/2021 15:04:30","Id":"f90d07e0-bbea-4464-9611-f695d0b7b3e4"}}
---batchresponse_e37c41b2-a045-42b0-a9a6-b7f81a956924--
+
+--batchresponse_cdad4f22-382d-40b9-a0c8-d27502fa3f46--

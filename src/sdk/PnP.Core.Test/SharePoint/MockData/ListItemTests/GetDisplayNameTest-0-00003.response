@@ -1,10 +1,9 @@
---batchresponse_a091fe45-76a8-440a-848c-b63876eb8f36
+--batchresponse_a6cdb888-0a65-4a62-a7a6-1e5cec0f4d21
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
-HTTP/1.1 204 No Content
+HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
-ETAG: "2"
 
-
---batchresponse_a091fe45-76a8-440a-848c-b63876eb8f36--
+{"d":{"AddValidateUpdateItemUsingPath":{"__metadata":{"type":"Collection(SP.ListItemFormUpdateValue)"},"results":[{"ErrorCode":0,"ErrorMessage":null,"FieldName":"Title","FieldValue":"PNP_SDK_TEST_GetDisplayNameTest","HasException":false,"ItemId":0},{"ErrorCode":0,"ErrorMessage":null,"FieldName":"Id","FieldValue":"1","HasException":false,"ItemId":0}]}}}
+--batchresponse_a6cdb888-0a65-4a62-a7a6-1e5cec0f4d21--

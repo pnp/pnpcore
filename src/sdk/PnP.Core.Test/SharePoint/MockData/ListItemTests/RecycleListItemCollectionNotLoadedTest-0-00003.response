@@ -1,9 +1,9 @@
---batchresponse_7dc2e69b-86d9-434f-85ee-0b5a15d7f53a
+--batchresponse_1c972de7-cd11-453c-838c-6d37a77e0ec4
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{"d":{"AddValidateUpdateItemUsingPath":{"__metadata":{"type":"Collection(SP.ListItemFormUpdateValue)"},"results":[{"ErrorCode":0,"ErrorMessage":null,"FieldName":"Title","FieldValue":"Recycle me","HasException":false,"ItemId":0},{"ErrorCode":0,"ErrorMessage":null,"FieldName":"Id","FieldValue":"1","HasException":false,"ItemId":0}]}}}
---batchresponse_7dc2e69b-86d9-434f-85ee-0b5a15d7f53a--
+{"d":{"results":[{"__metadata":{"id":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/RecycleBin(guid'dd780cf5-2f77-4fac-abc8-78d804e815fe')","uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/RecycleBin(guid'dd780cf5-2f77-4fac-abc8-78d804e815fe')","type":"SP.RecycleBinItem"},"Author":{"__deferred":{"uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/RecycleBin(guid'dd780cf5-2f77-4fac-abc8-78d804e815fe')/Author"}},"DeletedBy":{"__deferred":{"uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/RecycleBin(guid'dd780cf5-2f77-4fac-abc8-78d804e815fe')/DeletedBy"}},"AuthorEmail":"kyle@gimmalkyle2.onmicrosoft.com","AuthorName":"Kyle Daley","DeletedByEmail":"kyle@gimmalkyle2.onmicrosoft.com","DeletedByName":"Kyle Daley","DeletedDate":"2021-05-21T02:43:56Z","DeletedDateLocalFormatted":"5/20/2021 7:43 PM","DirName":"sites/pnpcoresdktestgroup/Lists/PNP_SDK_TEST_RecycleListItemCollectionNotLoadedTes","DirNamePath":{"__metadata":{"type":"SP.ResourcePath"},"DecodedUrl":"sites/pnpcoresdktestgroup/Lists/PNP_SDK_TEST_RecycleListItemCollectionNotLoadedTes"},"Id":"dd780cf5-2f77-4fac-abc8-78d804e815fe","ItemState":1,"ItemType":3,"LeafName":"1_.000","LeafNamePath":{"__metadata":{"type":"SP.ResourcePath"},"DecodedUrl":"1_.000"},"Size":"192","Title":"Recycle me"}]}}
+--batchresponse_1c972de7-cd11-453c-838c-6d37a77e0ec4--

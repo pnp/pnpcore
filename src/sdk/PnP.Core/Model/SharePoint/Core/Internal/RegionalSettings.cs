@@ -65,6 +65,9 @@ namespace PnP.Core.Model.SharePoint
 
         public ITimeZoneCollection TimeZones { get => GetModelCollectionValue<ITimeZoneCollection>(); }
 
+        [SharePointProperty("*")]
+        public object AllColumns { get => null; }
+
         [KeyProperty(nameof(DateFormat))]
         public override object Key { get => DateFormat; set => DateFormat = int.Parse(value.ToString()); }
 

@@ -1,9 +1,10 @@
---batchresponse_c1ecc7fd-9815-4258-8991-e5ee395a6a6c
+--batchresponse_cee80ed3-b89d-45eb-87ad-5832de53d28b
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
-HTTP/1.1 200 OK
+HTTP/1.1 201 Created
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+LOCATION: https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/UserCustomActions(guid'969c6c5f-1bff-4cdc-a688-b6e72dd81b57')
 
-{"d":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Site","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Site","type":"SP.Site"},"GroupId":"b32780e9-df70-4548-a735-4e7f055415a1","Id":"b56adf79-ff6a-4964-a63a-ff1fa23be9f8"}}
---batchresponse_c1ecc7fd-9815-4258-8991-e5ee395a6a6c--
+{"d":{"__metadata":{"id":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/UserCustomActions(guid'969c6c5f-1bff-4cdc-a688-b6e72dd81b57')","uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/UserCustomActions(guid'969c6c5f-1bff-4cdc-a688-b6e72dd81b57')","type":"SP.UserCustomAction"},"DescriptionResource":{"__deferred":{"uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/UserCustomActions(guid'969c6c5f-1bff-4cdc-a688-b6e72dd81b57')/DescriptionResource"}},"TitleResource":{"__deferred":{"uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/UserCustomActions(guid'969c6c5f-1bff-4cdc-a688-b6e72dd81b57')/TitleResource"}},"ClientSideComponentId":"a54612b1-e5cb-4a43-80ae-3b5fb6ce1e35","ClientSideComponentProperties":"{\"message\":\"Added from Test DeleteWebUserCustomActionsTest\"}","CommandUIExtension":null,"Description":"PNP_SDK_TEST_DeleteWebUserCustomActionsTest","Group":null,"HostProperties":"","Id":"969c6c5f-1bff-4cdc-a688-b6e72dd81b57","ImageUrl":null,"Location":"ClientSideExtension.ApplicationCustomizer","Name":"PNP_SDK_TEST_DeleteWebUserCustomActionsTest","RegistrationId":null,"RegistrationType":0,"Rights":{"__metadata":{"type":"SP.BasePermissions"},"High":"0","Low":"262146"},"Scope":3,"ScriptBlock":null,"ScriptSrc":null,"Sequence":100,"Title":"PNP_SDK_TEST_DeleteWebUserCustomActionsTest","Url":null,"VersionOfUserCustomAction":"16.0.1.0"}}
+--batchresponse_cee80ed3-b89d-45eb-87ad-5832de53d28b--

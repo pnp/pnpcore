@@ -1,10 +1,1 @@
---batchresponse_c5c75a48-5508-400d-9552-3d6c2ffe0df3
-Content-Type: application/http
-Content-Transfer-Encoding: binary
-
-HTTP/1.1 204 No Content
-CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
-ETAG: "5850"
-
-
---batchresponse_c5c75a48-5508-400d-9552-3d6c2ffe0df3--
+{"responses": [{"id": "1","status":200,"headers" : {"Cache-Control":"no-cache","OData-Version":"4.0","Content-Type":"application/json;odata.metadata=minimal;odata.streaming=true;IEEE754Compatible=false;charset=utf-8"},"body":{"@odata.context":"https://graph.microsoft.com/v1.0/$metadata#sites(sharepointIds,description,id)/$entity","description":"","id":"gimmalkyle2.sharepoint.com,b260dc66-b285-477f-8a1a-14997982e986,7aa3c357-cdeb-43b9-9dcd-dc1645b30cff","sharepointIds":{"siteId":"b260dc66-b285-477f-8a1a-14997982e986","siteUrl":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup","tenantId":"8c5f9cbf-10f3-425c-9384-1a404ca3945d","webId":"7aa3c357-cdeb-43b9-9dcd-dc1645b30cff"}}}]}

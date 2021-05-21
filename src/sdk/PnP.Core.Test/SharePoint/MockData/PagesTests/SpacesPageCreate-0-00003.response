@@ -1,9 +1,9 @@
---batchresponse_a9013532-5363-4d98-b486-0cd0a17decd2
+--batchresponse_ab2441b1-7456-4bbd-b960-57a61e2275d5
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
-HTTP/1.1 200 OK
+HTTP/1.1 404 Not Found
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{"d":{"results":[]}}
---batchresponse_a9013532-5363-4d98-b486-0cd0a17decd2--
+{"error":{"code":"-2130575338, Microsoft.SharePoint.SPException","message":{"lang":"en-US","value":"The file /sites/pnpcoresdktestgroup/SitePages/PNP_SDK_TEST_SpacesPageCreate.aspx does not exist."}}}
+--batchresponse_ab2441b1-7456-4bbd-b960-57a61e2275d5--

@@ -1,9 +1,10 @@
---batchresponse_cd1e55ff-547e-4e34-b402-b27c55825c7d
+--batchresponse_e3ece352-f838-453d-91bc-2381af9620f0
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
-HTTP/1.1 200 OK
+HTTP/1.1 201 Created
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+LOCATION: https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/SiteGroups/GetById(24)
 
-{"d":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Site","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Site","type":"SP.Site"},"GroupId":"b32780e9-df70-4548-a735-4e7f055415a1","Id":"b56adf79-ff6a-4964-a63a-ff1fa23be9f8"}}
---batchresponse_cd1e55ff-547e-4e34-b402-b27c55825c7d--
+{"d":{"__metadata":{"id":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/SiteGroups/GetById(24)","uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/SiteGroups/GetById(24)","type":"SP.Group"},"Owner":{"__deferred":{"uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/SiteGroups/GetById(24)/Owner"}},"Users":{"__deferred":{"uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/SiteGroups/GetById(24)/Users"}},"Id":24,"IsHiddenInUI":false,"LoginName":"PNP_SDK_TEST_TestGroup","Title":"PNP_SDK_TEST_TestGroup","PrincipalType":8,"AllowMembersEditMembership":false,"AllowRequestToJoinLeave":false,"AutoAcceptRequestToJoinLeave":false,"Description":null,"OnlyAllowMembersViewMembership":true,"OwnerTitle":"Kyle Daley","RequestToJoinLeaveEmailSetting":null}}
+--batchresponse_e3ece352-f838-453d-91bc-2381af9620f0--

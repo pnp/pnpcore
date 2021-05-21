@@ -1,9 +1,19 @@
---batchresponse_a836818e-2b3d-4b2c-ae88-1f690aa800ca
+--batchresponse_bb742cc9-9ea6-4254-840a-5a3c849e12a2
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
-HTTP/1.1 404 Not Found
-CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+HTTP/1.1 200 OK
+CONTENT-TYPE: application/json; charset=utf-8
 
-{"error":{"code":"-2130575338, Microsoft.SharePoint.SPException","message":{"lang":"en-US","value":"The file /sites/prov-1/SitePages/PNP_SDK_TEST_CreateAndUpdatePageWith Space InName.aspx does not exist."}}}
---batchresponse_a836818e-2b3d-4b2c-ae88-1f690aa800ca--
+{ "Row" : 
+[],"FirstRow" : 1,
+"FolderPermissions" : "0x7ffffffffffbffff"
+,"LastRow" : 0,
+"RowLimit" : 500
+,"FilterLink" : "?"
+,"ForceNoHierarchy" : "1"
+,"HierarchyHasIndention" : ""
+,"CurrentFolderSpItemUrl" : ""
+
+}
+--batchresponse_bb742cc9-9ea6-4254-840a-5a3c849e12a2--

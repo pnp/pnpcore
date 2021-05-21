@@ -1,9 +1,9 @@
---batchresponse_78a1e45b-1668-4b98-8043-0703bbcffb5f
+--batchresponse_6145a57a-45de-4794-95f8-3d993dc012d1
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
-HTTP/1.1 204 No Content
+HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-
---batchresponse_78a1e45b-1668-4b98-8043-0703bbcffb5f--
+{"d":{"__metadata":{"id":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/subsite/_api/Web","uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/subsite/_api/Web","type":"SP.Web"},"Id":"b3d16c63-3475-43db-ac7c-e78b4debaabe","SupportedUILanguageIds":{"__metadata":{"type":"Collection(Edm.Int32)"},"results":[1033,1031,1036,2108,1057,1044,1049,2052,1028,1081,1086,1060,1030,1069,1035,1043,1051,1068,1026,1110,1055,1106,1050,1038,1042,1063,1071,1025,1041,1062,1164,1046,2070,9242,1054,5146,1029,3082,1037,1045,10266,2074,1058,1032,1061,1040,1087,1053,1066,1027]}}}
+--batchresponse_6145a57a-45de-4794-95f8-3d993dc012d1--

@@ -1,9 +1,9 @@
---batchresponse_0775d3c4-5477-4f88-bc49-f9379c7c0903
+--batchresponse_33a81cc5-1e8a-4985-834a-d3a7df59dc07
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{"d":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Site","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Site","type":"SP.Site"},"GroupId":"b32780e9-df70-4548-a735-4e7f055415a1","Id":"b56adf79-ff6a-4964-a63a-ff1fa23be9f8"}}
---batchresponse_0775d3c4-5477-4f88-bc49-f9379c7c0903--
+{"d":{"results":[{"__metadata":{"id":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Site/RecycleBin(guid'aa03f970-e57a-40de-9def-dc2e32be46d5')","uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Site/RecycleBin(guid'aa03f970-e57a-40de-9def-dc2e32be46d5')","type":"SP.RecycleBinItem"},"Author":{"__deferred":{"uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Site/RecycleBin(guid'aa03f970-e57a-40de-9def-dc2e32be46d5')/Author"}},"DeletedBy":{"__deferred":{"uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Site/RecycleBin(guid'aa03f970-e57a-40de-9def-dc2e32be46d5')/DeletedBy"}},"AuthorEmail":"kyle@gimmalkyle2.onmicrosoft.com","AuthorName":"Kyle Daley","DeletedByEmail":"kyle@gimmalkyle2.onmicrosoft.com","DeletedByName":"Kyle Daley","DeletedDate":"2021-05-21T02:47:59Z","DeletedDateLocalFormatted":"5/20/2021 7:47 PM","DirName":"sites/pnpcoresdktestgroup/Shared Documents","DirNamePath":{"__metadata":{"type":"SP.ResourcePath"},"DecodedUrl":"sites/pnpcoresdktestgroup/Shared Documents"},"Id":"aa03f970-e57a-40de-9def-dc2e32be46d5","ItemState":1,"ItemType":1,"LeafName":"PNP_SDK_TEST_GetRecycleBinItemByIdAsyncTest.docx","LeafNamePath":{"__metadata":{"type":"SP.ResourcePath"},"DecodedUrl":"PNP_SDK_TEST_GetRecycleBinItemByIdAsyncTest.docx"},"Size":"19067","Title":"PNP_SDK_TEST_GetRecycleBinItemByIdAsyncTest.docx"}]}}
+--batchresponse_33a81cc5-1e8a-4985-834a-d3a7df59dc07--

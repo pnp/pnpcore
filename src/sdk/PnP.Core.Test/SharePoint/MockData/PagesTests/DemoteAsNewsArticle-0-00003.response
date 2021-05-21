@@ -1,9 +1,9 @@
---batchresponse_13c06d1e-00ad-4951-8844-6f73c78fd895
+--batchresponse_9b612b04-4f65-4c86-9239-d719c193aab4
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
-HTTP/1.1 200 OK
+HTTP/1.1 404 Not Found
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{"d":{"results":[]}}
---batchresponse_13c06d1e-00ad-4951-8844-6f73c78fd895--
+{"error":{"code":"-2130575338, Microsoft.SharePoint.SPException","message":{"lang":"en-US","value":"The file /sites/pnpcoresdktestgroup/SitePages/PNP_SDK_TEST_DemoteAsNewsArticle.aspx does not exist."}}}
+--batchresponse_9b612b04-4f65-4c86-9239-d719c193aab4--

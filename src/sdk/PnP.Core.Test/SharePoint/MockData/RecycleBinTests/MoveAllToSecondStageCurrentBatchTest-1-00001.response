@@ -1,9 +1,9 @@
---batchresponse_134dbedc-8d74-4ad6-abb5-eed9ad9b15bb
+--batchresponse_d7ce1e6e-0ce7-452f-8e8e-2d8a486ee980
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{"d":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Site","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Site","type":"SP.Site"},"GroupId":"b32780e9-df70-4548-a735-4e7f055415a1","Id":"b56adf79-ff6a-4964-a63a-ff1fa23be9f8"}}
---batchresponse_134dbedc-8d74-4ad6-abb5-eed9ad9b15bb--
+{"d":{"__metadata":{"id":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web","uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web","type":"SP.Web"},"RecycleBin":{"results":[{"__metadata":{"id":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/RecycleBin(guid'b8731a54-1f6e-44a1-bcf2-fc406fa9dcfc')","uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/RecycleBin(guid'b8731a54-1f6e-44a1-bcf2-fc406fa9dcfc')","type":"SP.RecycleBinItem"},"Author":{"__deferred":{"uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/RecycleBin(guid'b8731a54-1f6e-44a1-bcf2-fc406fa9dcfc')/Author"}},"DeletedBy":{"__deferred":{"uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/RecycleBin(guid'b8731a54-1f6e-44a1-bcf2-fc406fa9dcfc')/DeletedBy"}},"AuthorEmail":"kyle@gimmalkyle2.onmicrosoft.com","AuthorName":"Kyle Daley","DeletedByEmail":"kyle@gimmalkyle2.onmicrosoft.com","DeletedByName":"Kyle Daley","DeletedDate":"2021-05-21T02:48:08Z","DeletedDateLocalFormatted":"5/20/2021 7:48 PM","DirName":"sites/pnpcoresdktestgroup/Shared Documents","DirNamePath":{"__metadata":{"type":"SP.ResourcePath"},"DecodedUrl":"sites/pnpcoresdktestgroup/Shared Documents"},"Id":"b8731a54-1f6e-44a1-bcf2-fc406fa9dcfc","ItemState":1,"ItemType":1,"LeafName":"PNP_SDK_TEST_MoveAllToSecondStageCurrentBatchTest.docx","LeafNamePath":{"__metadata":{"type":"SP.ResourcePath"},"DecodedUrl":"PNP_SDK_TEST_MoveAllToSecondStageCurrentBatchTest.docx"},"Size":"19066","Title":"PNP_SDK_TEST_MoveAllToSecondStageCurrentBatchTest.docx"}]},"Id":"7aa3c357-cdeb-43b9-9dcd-dc1645b30cff"}}
+--batchresponse_d7ce1e6e-0ce7-452f-8e8e-2d8a486ee980--

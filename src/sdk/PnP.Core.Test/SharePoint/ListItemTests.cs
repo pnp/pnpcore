@@ -1692,6 +1692,7 @@ namespace PnP.Core.Test.SharePoint
         [TestMethod]
         public async Task SpecialFieldRestUpdateTest()
         {
+            // TODO: This test is destined to fail in any other environment other than Bert's b/c of the taxonomy IDs
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
@@ -2073,6 +2074,7 @@ namespace PnP.Core.Test.SharePoint
         [TestMethod]
         public async Task SpecialFieldCsomTest()
         {
+            // TODO: This test is destined to fail in any other environment other than Bert's b/c of the taxonomy IDs
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {

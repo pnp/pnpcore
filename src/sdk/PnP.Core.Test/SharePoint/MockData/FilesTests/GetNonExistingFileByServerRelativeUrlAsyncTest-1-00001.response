@@ -1,9 +1,9 @@
---batchresponse_4856d42b-96be-4e6c-a58d-4ccb85971052
+--batchresponse_34680d7a-4c0f-4613-8cc1-69dab6a98447
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
-HTTP/1.1 200 OK
+HTTP/1.1 404 Not Found
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{"d":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Site","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Site","type":"SP.Site"},"GroupId":"b32780e9-df70-4548-a735-4e7f055415a1","Id":"b56adf79-ff6a-4964-a63a-ff1fa23be9f8"}}
---batchresponse_4856d42b-96be-4e6c-a58d-4ccb85971052--
+{"error":{"code":"-2130575338, Microsoft.SharePoint.SPException","message":{"lang":"en-US","value":"The file /sites/pnpcoresdktestgroup/Shared%20Documents/IdontExist.pdf does not exist."}}}
+--batchresponse_34680d7a-4c0f-4613-8cc1-69dab6a98447--

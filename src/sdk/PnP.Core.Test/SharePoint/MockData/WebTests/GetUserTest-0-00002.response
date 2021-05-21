@@ -1,9 +1,9 @@
---batchresponse_bda50190-350d-46b6-b67e-e0a8b47ca416
+--batchresponse_61a127e0-c24c-4352-b6a8-1d5f8f5da486
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{"d":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetUserById(6)","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetUserById(6)","type":"SP.User"},"Alerts":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetUserById(6)/Alerts"}},"Groups":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetUserById(6)/Groups"}},"Id":6,"IsHiddenInUI":false,"LoginName":"i:0#.f|membership|bert.jansen@bertonline.onmicrosoft.com","Title":"Bert Jansen (Cloud)","PrincipalType":1,"Email":"bert.jansen@bertonline.onmicrosoft.com","Expiration":"","IsEmailAuthenticationGuestUser":false,"IsShareByEmailGuestUser":false,"IsSiteAdmin":true,"UserId":{"__metadata":{"type":"SP.UserIdInfo"},"NameId":"1003000084e4ff61","NameIdIssuer":"urn:federation:microsoftonline"},"UserPrincipalName":"bert.jansen@bertonline.onmicrosoft.com"}}
---batchresponse_bda50190-350d-46b6-b67e-e0a8b47ca416--
+{"d":{"__metadata":{"id":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/GetUserById(9)","uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/GetUserById(9)","type":"SP.User"},"Alerts":{"__deferred":{"uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/GetUserById(9)/Alerts"}},"Groups":{"__deferred":{"uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/GetUserById(9)/Groups"}},"Id":9,"IsHiddenInUI":false,"LoginName":"i:0#.f|membership|kyle@gimmalkyle2.onmicrosoft.com","Title":"Kyle Daley","PrincipalType":1,"Email":"kyle@gimmalkyle2.onmicrosoft.com","Expiration":"","IsEmailAuthenticationGuestUser":false,"IsShareByEmailGuestUser":false,"IsSiteAdmin":false,"UserId":{"__metadata":{"type":"SP.UserIdInfo"},"NameId":"100320013f67db2c","NameIdIssuer":"urn:federation:microsoftonline"},"UserPrincipalName":"kyle@gimmalkyle2.onmicrosoft.com"}}
+--batchresponse_61a127e0-c24c-4352-b6a8-1d5f8f5da486--

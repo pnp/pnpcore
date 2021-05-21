@@ -1,9 +1,9 @@
---batchresponse_360dc989-3bf0-4f69-b6f2-eb62cab8579e
+--batchresponse_175cbcad-e3bd-44f4-8447-98d9e05d0217
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{"d":{"__metadata":{"id":"https://mwdevvalo.sharepoint.com/sites/tea-point/_api/Site","uri":"https://mwdevvalo.sharepoint.com/sites/tea-point/_api/Site","type":"SP.Site"},"GroupId":"00000000-0000-0000-0000-000000000000","Id":"69399214-4542-4f93-b658-328a712a834f"}}
---batchresponse_360dc989-3bf0-4f69-b6f2-eb62cab8579e--
+{"d":{"results":[{"__metadata":{"id":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/pnpcoresdktestgroup/SiteAssets')","uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/pnpcoresdktestgroup/SiteAssets')","type":"SP.Folder"},"Files":{"__deferred":{"uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/pnpcoresdktestgroup/SiteAssets')/Files"}},"ListItemAllFields":{"__deferred":{"uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/pnpcoresdktestgroup/SiteAssets')/ListItemAllFields"}},"ParentFolder":{"__deferred":{"uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/pnpcoresdktestgroup/SiteAssets')/ParentFolder"}},"Properties":{"__deferred":{"uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/pnpcoresdktestgroup/SiteAssets')/Properties"}},"StorageMetrics":{"__deferred":{"uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/pnpcoresdktestgroup/SiteAssets')/StorageMetrics"}},"Folders":{"__deferred":{"uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/pnpcoresdktestgroup/SiteAssets')/Folders"}},"Exists":true,"IsWOPIEnabled":false,"ItemCount":1,"Name":"SiteAssets","ProgID":null,"ServerRelativeUrl":"/sites/pnpcoresdktestgroup/SiteAssets","TimeCreated":"2021-05-20T02:52:53Z","TimeLastModified":"2021-05-20T03:05:36Z","UniqueId":"7b51f3e8-9b25-4af3-b4a1-336483aad3c0","WelcomePage":""}]}}
+--batchresponse_175cbcad-e3bd-44f4-8447-98d9e05d0217--

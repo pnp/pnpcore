@@ -1,9 +1,10 @@
---batchresponse_95703c25-1ae7-4923-85d5-53c737823b79
+--batchresponse_3be9461e-9a30-4258-9a28-82fe704769a6
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+ETAG: "4f7c6c63-b8a0-4c40-9f7b-367a43c5d255,1"
 
-{"d":{"AddValidateUpdateItemUsingPath":{"__metadata":{"type":"Collection(SP.ListItemFormUpdateValue)"},"results":[{"ErrorCode":0,"ErrorMessage":null,"FieldName":"Title","FieldValue":"Test","HasException":false,"ItemId":0},{"ErrorCode":0,"ErrorMessage":null,"FieldName":"FileLeafRef","FieldValue":"Test","HasException":false,"ItemId":0},{"ErrorCode":0,"ErrorMessage":null,"FieldName":"ContentTypeId","FieldValue":"0x0120","HasException":false,"ItemId":0},{"ErrorCode":0,"ErrorMessage":null,"FieldName":"Id","FieldValue":"2","HasException":false,"ItemId":0}]}}}
---batchresponse_95703c25-1ae7-4923-85d5-53c737823b79--
+{"d":{"__metadata":{"id":"628673ab-6242-4d63-8ce6-1d9ba6c83875","uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/Lists(guid'61bc55f0-018f-4a95-b361-7e13bc956267')/Items(2)","etag":"\"1\"","type":"SP.Data.PNP_x005f_SDK_x005f_TEST_x005f_AddListItemWithFolderTestListItem"},"ContentTypeId":"0x012000435B5CB42E50EC4382D426D3DF280795","FileDirRef":"/sites/pnpcoresdktestgroup/Lists/PNP_SDK_TEST_AddListItemWithFolderTest"}}
+--batchresponse_3be9461e-9a30-4258-9a28-82fe704769a6--

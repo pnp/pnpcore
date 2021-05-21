@@ -1,9 +1,9 @@
---batchresponse_af0fdfb1-ee9a-4628-9852-116fc9a731ee
+--batchresponse_bf5d2378-d397-439f-bf4f-12179eca80ac
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
-HTTP/1.1 200 OK
+HTTP/1.1 404 Not Found
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{"d":{"results":[]}}
---batchresponse_af0fdfb1-ee9a-4628-9852-116fc9a731ee--
+{"error":{"code":"-2130575338, Microsoft.SharePoint.SPException","message":{"lang":"en-US","value":"The file /sites/pnpcoresdktestgroup/SitePages/PNP_SDK_TEST_CreateAndUpdatePageWithReloadWithoutPageName.aspx does not exist."}}}
+--batchresponse_bf5d2378-d397-439f-bf4f-12179eca80ac--

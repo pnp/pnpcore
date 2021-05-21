@@ -166,8 +166,20 @@ namespace PnP.Core.Test.Services
 
         public async override Task<PnPContext> CreateAsync(Uri url, IAuthenticationProvider authenticationProvider)
         {
+            // Make a copy of the options since I was having problems with tests due to static properties
+            var contextOptionsCopy = new PnPContextFactoryOptions()
+            {
+                DefaultWebPropertiesOnCreate = ContextOptions.DefaultWebPropertiesOnCreate,
+                DefaultSitePropertiesOnCreate = ContextOptions.DefaultSitePropertiesOnCreate,
+                DefaultAuthenticationProvider = ContextOptions.DefaultAuthenticationProvider,
+                GraphAlwaysUseBeta = ContextOptions.GraphAlwaysUseBeta,
+                GraphCanUseBeta = ContextOptions.GraphCanUseBeta,
+                GraphFirst = ContextOptions.GraphFirst
+            };
+            contextOptionsCopy.Configurations.AddRange(ContextOptions.Configurations);
+
             // Use the provided settings to create a new instance of SPOContext
-            var context = new PnPContext(Log, authenticationProvider, SharePointRestClient, MicrosoftGraphClient, ContextOptions, GlobalOptions, TelemetryManager)
+            var context = new PnPContext(Log, authenticationProvider, SharePointRestClient, MicrosoftGraphClient, contextOptionsCopy, GlobalOptions, TelemetryManager)
             {
                 Uri = url
             };
@@ -184,7 +196,29 @@ namespace PnP.Core.Test.Services
             context.GraphCanUseBeta = ContextOptions.GraphCanUseBeta;
             context.GraphAlwaysUseBeta = ContextOptions.GraphAlwaysUseBeta;
 
+            // Return static options back to null for future tests
+            ContextOptions.DefaultWebPropertiesOnCreate = null;
+            ContextOptions.DefaultSitePropertiesOnCreate = null;
+
             return context;
+        }
+
+        public async Task<PnPContext> CreateWithOptionsAsync(string name, PnPContextFactoryOptions options)
+        {
+            var configuration = ContextOptions.Configurations.FirstOrDefault(c => c.Name == name);
+            if (configuration == null)
+            {
+                throw new ClientException(ErrorType.ConfigurationError,
+                    string.Format(PnPCoreResources.Exception_ConfigurationError_InvalidPnPContextConfigurationName, name));
+            }
+
+            if (options != null)
+            {
+                ContextOptions.DefaultWebPropertiesOnCreate = options.DefaultWebPropertiesOnCreate;
+                ContextOptions.DefaultSitePropertiesOnCreate = options.DefaultSitePropertiesOnCreate;
+            }
+
+            return await CreateAsync(configuration.SiteUrl, configuration.AuthenticationProvider).ConfigureAwait(false);
         }
 
         public override PnPContext Create(Uri url)

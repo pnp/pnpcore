@@ -1,9 +1,9 @@
---batchresponse_93dc8a3d-d4e9-4b78-9df9-288b8fc2742c
+--batchresponse_fb397094-aa82-4e4f-a8d6-ba8e3c6ee9c5
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{"d":{"CheckOut":null}}
---batchresponse_93dc8a3d-d4e9-4b78-9df9-288b8fc2742c--
+{"d":{"__metadata":{"id":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/pnpcoresdktestgroup/PNP_SDK_TEST_CheckoutFileCurrentBatchTest/PNP_SDK_TEST_CheckoutFileCurrentBatchTest.docx')","uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/pnpcoresdktestgroup/PNP_SDK_TEST_CheckoutFileCurrentBatchTest/PNP_SDK_TEST_CheckoutFileCurrentBatchTest.docx')","type":"SP.File"},"CheckedOutByUser":{"__metadata":{"id":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/pnpcoresdktestgroup/PNP_SDK_TEST_CheckoutFileCurrentBatchTest/PNP_SDK_TEST_CheckoutFileCurrentBatchTest.docx')/CheckedOutByUser","uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/pnpcoresdktestgroup/PNP_SDK_TEST_CheckoutFileCurrentBatchTest/PNP_SDK_TEST_CheckoutFileCurrentBatchTest.docx')/CheckedOutByUser","type":"SP.User"},"Alerts":{"__deferred":{"uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/pnpcoresdktestgroup/PNP_SDK_TEST_CheckoutFileCurrentBatchTest/PNP_SDK_TEST_CheckoutFileCurrentBatchTest.docx')/CheckedOutByUser/Alerts"}},"Groups":{"__deferred":{"uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/pnpcoresdktestgroup/PNP_SDK_TEST_CheckoutFileCurrentBatchTest/PNP_SDK_TEST_CheckoutFileCurrentBatchTest.docx')/CheckedOutByUser/Groups"}},"Id":9,"IsHiddenInUI":false,"LoginName":"i:0#.f|membership|kyle@gimmalkyle2.onmicrosoft.com","Title":"Kyle Daley","PrincipalType":1,"Email":"kyle@gimmalkyle2.onmicrosoft.com","Expiration":"","IsEmailAuthenticationGuestUser":false,"IsShareByEmailGuestUser":false,"IsSiteAdmin":false,"UserId":{"__metadata":{"type":"SP.UserIdInfo"},"NameId":"100320013f67db2c","NameIdIssuer":"urn:federation:microsoftonline"},"UserPrincipalName":"kyle@gimmalkyle2.onmicrosoft.com"},"CheckOutType":0,"UniqueId":"c0cdcc93-db67-4961-954f-3bc5e160726f"}}
+--batchresponse_fb397094-aa82-4e4f-a8d6-ba8e3c6ee9c5--

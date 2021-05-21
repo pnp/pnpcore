@@ -1,9 +1,9 @@
---batchresponse_d58ff011-d470-4892-8afa-e879a7e53ae9
+--batchresponse_fe74cef0-bdb6-4465-b27c-f285872030fd
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{"d":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/prov-1/SiteAssets/TEST')","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/prov-1/SiteAssets/TEST')","type":"SP.Folder"},"Files":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/prov-1/SiteAssets/TEST')/Files"}},"ListItemAllFields":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/prov-1/SiteAssets/TEST')/ListItemAllFields"}},"ParentFolder":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/prov-1/SiteAssets/TEST')/ParentFolder"}},"Properties":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/prov-1/SiteAssets/TEST')/Properties"}},"StorageMetrics":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/prov-1/SiteAssets/TEST')/StorageMetrics"}},"Folders":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/prov-1/SiteAssets/TEST')/Folders"}},"Exists":true,"IsWOPIEnabled":false,"ItemCount":0,"Name":"TEST","ProgID":null,"ServerRelativeUrl":"/sites/prov-1/SiteAssets/TEST","TimeCreated":"2021-03-09T15:14:45Z","TimeLastModified":"2021-03-09T15:14:45Z","UniqueId":"b65208e0-9652-47e1-98fd-f2bb779ee946","WelcomePage":""}}
---batchresponse_d58ff011-d470-4892-8afa-e879a7e53ae9--
+
+--batchresponse_fe74cef0-bdb6-4465-b27c-f285872030fd--

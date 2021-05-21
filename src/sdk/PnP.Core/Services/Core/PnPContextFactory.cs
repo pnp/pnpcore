@@ -4,7 +4,9 @@ using PnP.Core.Model;
 using PnP.Core.Model.Security;
 using PnP.Core.Model.SharePoint;
 using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Net.Http;
 #if NET5_0
 using System.Runtime.InteropServices;
@@ -19,6 +21,9 @@ namespace PnP.Core.Services
     /// </summary>
     public class PnPContextFactory : IPnPContextFactory
     {
+        private static readonly Expression<Func<IWeb, object>>[] defaultWebProps = { w => w.Id, w => w.Url, w => w.RegionalSettings.QueryProperties(rs => rs.TimeZone, rs => rs.AllColumns) };
+        private static readonly Expression<Func<ISite, object>>[] defaultSiteProps = { s => s.Id, s => s.GroupId };
+
 #if NET5_0
         private static readonly HttpClient httpClient = new HttpClient();
 #endif
@@ -46,7 +51,7 @@ namespace PnP.Core.Services
             ContextOptions = contextOptions?.Value;
             GlobalOptions = globalOptions?.Value;
 
-            ConnectTelemetry();            
+            ConnectTelemetry();
         }
 
         /// <summary>
@@ -257,22 +262,20 @@ namespace PnP.Core.Services
         /// <returns></returns>
         internal static async Task InitializeContextAsync(PnPContext context)
         {
+            var (siteProps, webProps) = GetDefaultLoadProps(context);
 
             // IMPORTANT: if you change this logic by adding more initialization data you also need
             //            to update the CopyContextInitialization method!
 
             // Load required web properties
-            var api = new ApiCall($"{context.Uri}/_api/Web?$select=Id,Url,RegionalSettings&$expand=RegionalSettings/TimeZone", ApiType.SPORest)
-            {
-                Interactive = true
-            };
-            await (context.Web as Web).RequestAsync(api, HttpMethod.Get, "Get").ConfigureAwait(false);
+            var batch = context.NewBatch();
+            await context.Web.LoadBatchAsync(batch, webProps.ToArray()).ConfigureAwait(false);
+
+            await context.Site.LoadBatchAsync(batch, siteProps.ToArray()).ConfigureAwait(false);
+            await context.ExecuteAsync(batch).ConfigureAwait(false);
 
             // Replace the context URI with the value using the correct casing
             context.Uri = context.Web.Url;
-
-            // Request the Site Id
-            await context.Site.LoadAsync(p => p.Id, p => p.GroupId).ConfigureAwait(false);
 
             // Ensure the Graph ID is set once and only once
             if (context.Web is IMetadataExtensible me)
@@ -295,63 +298,75 @@ namespace PnP.Core.Services
                     }
                 }
             }
-
         }
 
         internal static async Task CopyContextInitializationAsync(PnPContext source, PnPContext target)
         {
-            if (source.Web.IsPropertyAvailable(p=>p.Id) && 
-                source.Web.IsPropertyAvailable(p => p.Url) &&
-                source.Web.IsPropertyAvailable(p=>p.RegionalSettings) &&
-                source.Site.IsPropertyAvailable(p=>p.Id) &&
-                source.Site.IsPropertyAvailable(p=>p.GroupId))
+            var (siteProps, webProps) = GetDefaultLoadProps(source);
+            var allWebPropsAvailable = webProps.All(p => p.Body is MethodCallExpression || source.Web.IsPropertyAvailable(p));
+            var allSitePropsAvailable = siteProps.All(p => p.Body is MethodCallExpression || source.Site.IsPropertyAvailable(p));
+            
+            if (allWebPropsAvailable && allSitePropsAvailable)
             {
                 target.Web.SetSystemProperty(p => p.Id, source.Web.Id);
                 target.Web.SetSystemProperty(p => p.Url, source.Web.Url);
                 target.Web.Requested = true;
-                (target.Web as Web).Metadata = new System.Collections.Generic.Dictionary<string, string>((source.Web as Web).Metadata);
+                (target.Web as Web).Metadata = new Dictionary<string, string>((source.Web as Web).Metadata);
 
                 // Copy regional settings, important to trigger the creation of the regional settings model from the target web model
-                var regionalSettings = target.Web.RegionalSettings;                
-                if (source.Web.RegionalSettings.IsPropertyAvailable(p => p.AM)) { regionalSettings.SetSystemProperty(p => p.AM, source.Web.RegionalSettings.AM); };
-                if (source.Web.RegionalSettings.IsPropertyAvailable(p => p.CollationLCID)) { regionalSettings.SetSystemProperty(p => p.CollationLCID, source.Web.RegionalSettings.CollationLCID); };
-                if (source.Web.RegionalSettings.IsPropertyAvailable(p => p.DateFormat)) { regionalSettings.SetSystemProperty(p => p.DateFormat, source.Web.RegionalSettings.DateFormat); };
-                if (source.Web.RegionalSettings.IsPropertyAvailable(p => p.DateSeparator)) { regionalSettings.SetSystemProperty(p => p.DateSeparator, source.Web.RegionalSettings.DateSeparator); };
-                if (source.Web.RegionalSettings.IsPropertyAvailable(p => p.DecimalSeparator)) { regionalSettings.SetSystemProperty(p => p.DecimalSeparator, source.Web.RegionalSettings.DecimalSeparator); };
-                if (source.Web.RegionalSettings.IsPropertyAvailable(p => p.DigitGrouping)) { regionalSettings.SetSystemProperty(p => p.DigitGrouping, source.Web.RegionalSettings.DigitGrouping); };
-                if (source.Web.RegionalSettings.IsPropertyAvailable(p => p.FirstDayOfWeek)) { regionalSettings.SetSystemProperty(p => p.FirstDayOfWeek, source.Web.RegionalSettings.FirstDayOfWeek); };
-                if (source.Web.RegionalSettings.IsPropertyAvailable(p => p.IsEastAsia)) { regionalSettings.SetSystemProperty(p => p.IsEastAsia, source.Web.RegionalSettings.IsEastAsia); };
-                if (source.Web.RegionalSettings.IsPropertyAvailable(p => p.IsRightToLeft)) { regionalSettings.SetSystemProperty(p => p.IsRightToLeft, source.Web.RegionalSettings.IsRightToLeft); };
-                if (source.Web.RegionalSettings.IsPropertyAvailable(p => p.IsUIRightToLeft)) { regionalSettings.SetSystemProperty(p => p.IsUIRightToLeft, source.Web.RegionalSettings.IsUIRightToLeft); };
-                if (source.Web.RegionalSettings.IsPropertyAvailable(p => p.ListSeparator)) { regionalSettings.SetSystemProperty(p => p.ListSeparator, source.Web.RegionalSettings.ListSeparator); };
-                if (source.Web.RegionalSettings.IsPropertyAvailable(p => p.LocaleId)) { regionalSettings.SetSystemProperty(p => p.LocaleId, source.Web.RegionalSettings.LocaleId); };
-                if (source.Web.RegionalSettings.IsPropertyAvailable(p => p.NegativeSign)) { regionalSettings.SetSystemProperty(p => p.NegativeSign, source.Web.RegionalSettings.NegativeSign); };
-                if (source.Web.RegionalSettings.IsPropertyAvailable(p => p.NegNumberMode)) { regionalSettings.SetSystemProperty(p => p.NegNumberMode, source.Web.RegionalSettings.NegNumberMode); };
-                if (source.Web.RegionalSettings.IsPropertyAvailable(p => p.PM)) { regionalSettings.SetSystemProperty(p => p.PM, source.Web.RegionalSettings.PM); };
-                if (source.Web.RegionalSettings.IsPropertyAvailable(p => p.PositiveSign)) { regionalSettings.SetSystemProperty(p => p.PositiveSign, source.Web.RegionalSettings.PositiveSign); };
-                if (source.Web.RegionalSettings.IsPropertyAvailable(p => p.ShowWeeks)) { regionalSettings.SetSystemProperty(p => p.ShowWeeks, source.Web.RegionalSettings.ShowWeeks); };
-                if (source.Web.RegionalSettings.IsPropertyAvailable(p => p.ThousandSeparator)) { regionalSettings.SetSystemProperty(p => p.ThousandSeparator, source.Web.RegionalSettings.ThousandSeparator); };
-                if (source.Web.RegionalSettings.IsPropertyAvailable(p => p.Time24)) { regionalSettings.SetSystemProperty(p => p.Time24, source.Web.RegionalSettings.Time24); };
-                if (source.Web.RegionalSettings.IsPropertyAvailable(p => p.TimeMarkerPosition)) { regionalSettings.SetSystemProperty(p => p.TimeMarkerPosition, source.Web.RegionalSettings.TimeMarkerPosition); };
-                if (source.Web.RegionalSettings.IsPropertyAvailable(p => p.TimeSeparator)) { regionalSettings.SetSystemProperty(p => p.TimeSeparator, source.Web.RegionalSettings.TimeSeparator); };
+                var regionalSettings = target.Web.RegionalSettings;
+                if (source.Web.RegionalSettings.IsPropertyAvailable(p => p.AM)) { regionalSettings.SetSystemProperty(p => p.AM, source.Web.RegionalSettings.AM); }
+                if (source.Web.RegionalSettings.IsPropertyAvailable(p => p.CollationLCID)) { regionalSettings.SetSystemProperty(p => p.CollationLCID, source.Web.RegionalSettings.CollationLCID); }
+                if (source.Web.RegionalSettings.IsPropertyAvailable(p => p.DateFormat)) { regionalSettings.SetSystemProperty(p => p.DateFormat, source.Web.RegionalSettings.DateFormat); }
+                if (source.Web.RegionalSettings.IsPropertyAvailable(p => p.DateSeparator)) { regionalSettings.SetSystemProperty(p => p.DateSeparator, source.Web.RegionalSettings.DateSeparator); }
+                if (source.Web.RegionalSettings.IsPropertyAvailable(p => p.DecimalSeparator)) { regionalSettings.SetSystemProperty(p => p.DecimalSeparator, source.Web.RegionalSettings.DecimalSeparator); }
+                if (source.Web.RegionalSettings.IsPropertyAvailable(p => p.DigitGrouping)) { regionalSettings.SetSystemProperty(p => p.DigitGrouping, source.Web.RegionalSettings.DigitGrouping); }
+                if (source.Web.RegionalSettings.IsPropertyAvailable(p => p.FirstDayOfWeek)) { regionalSettings.SetSystemProperty(p => p.FirstDayOfWeek, source.Web.RegionalSettings.FirstDayOfWeek); }
+                if (source.Web.RegionalSettings.IsPropertyAvailable(p => p.IsEastAsia)) { regionalSettings.SetSystemProperty(p => p.IsEastAsia, source.Web.RegionalSettings.IsEastAsia); }
+                if (source.Web.RegionalSettings.IsPropertyAvailable(p => p.IsRightToLeft)) { regionalSettings.SetSystemProperty(p => p.IsRightToLeft, source.Web.RegionalSettings.IsRightToLeft); }
+                if (source.Web.RegionalSettings.IsPropertyAvailable(p => p.IsUIRightToLeft)) { regionalSettings.SetSystemProperty(p => p.IsUIRightToLeft, source.Web.RegionalSettings.IsUIRightToLeft); }
+                if (source.Web.RegionalSettings.IsPropertyAvailable(p => p.ListSeparator)) { regionalSettings.SetSystemProperty(p => p.ListSeparator, source.Web.RegionalSettings.ListSeparator); }
+                if (source.Web.RegionalSettings.IsPropertyAvailable(p => p.LocaleId)) { regionalSettings.SetSystemProperty(p => p.LocaleId, source.Web.RegionalSettings.LocaleId); }
+                if (source.Web.RegionalSettings.IsPropertyAvailable(p => p.NegativeSign)) { regionalSettings.SetSystemProperty(p => p.NegativeSign, source.Web.RegionalSettings.NegativeSign); }
+                if (source.Web.RegionalSettings.IsPropertyAvailable(p => p.NegNumberMode)) { regionalSettings.SetSystemProperty(p => p.NegNumberMode, source.Web.RegionalSettings.NegNumberMode); }
+                if (source.Web.RegionalSettings.IsPropertyAvailable(p => p.PM)) { regionalSettings.SetSystemProperty(p => p.PM, source.Web.RegionalSettings.PM); }
+                if (source.Web.RegionalSettings.IsPropertyAvailable(p => p.PositiveSign)) { regionalSettings.SetSystemProperty(p => p.PositiveSign, source.Web.RegionalSettings.PositiveSign); }
+                if (source.Web.RegionalSettings.IsPropertyAvailable(p => p.ShowWeeks)) { regionalSettings.SetSystemProperty(p => p.ShowWeeks, source.Web.RegionalSettings.ShowWeeks); }
+                if (source.Web.RegionalSettings.IsPropertyAvailable(p => p.ThousandSeparator)) { regionalSettings.SetSystemProperty(p => p.ThousandSeparator, source.Web.RegionalSettings.ThousandSeparator); }
+                if (source.Web.RegionalSettings.IsPropertyAvailable(p => p.Time24)) { regionalSettings.SetSystemProperty(p => p.Time24, source.Web.RegionalSettings.Time24); }
+                if (source.Web.RegionalSettings.IsPropertyAvailable(p => p.TimeMarkerPosition)) { regionalSettings.SetSystemProperty(p => p.TimeMarkerPosition, source.Web.RegionalSettings.TimeMarkerPosition); }
+                if (source.Web.RegionalSettings.IsPropertyAvailable(p => p.TimeSeparator)) { regionalSettings.SetSystemProperty(p => p.TimeSeparator, source.Web.RegionalSettings.TimeSeparator); }
                 regionalSettings.Requested = true;
-                (regionalSettings as RegionalSettings).Metadata = new System.Collections.Generic.Dictionary<string, string>((source.Web.RegionalSettings as RegionalSettings).Metadata);
+                (regionalSettings as RegionalSettings).Metadata = new Dictionary<string, string>((source.Web.RegionalSettings as RegionalSettings).Metadata);
 
                 // Copy timezone settings
                 var timeZone = regionalSettings.TimeZone;
-                if (source.Web.RegionalSettings.TimeZone.IsPropertyAvailable(p => p.Description)) { timeZone.SetSystemProperty(p => p.Description, source.Web.RegionalSettings.TimeZone.Description); };
-                if (source.Web.RegionalSettings.TimeZone.IsPropertyAvailable(p => p.Id)) { timeZone.SetSystemProperty(p => p.Id, source.Web.RegionalSettings.TimeZone.Id); };
-                if (source.Web.RegionalSettings.TimeZone.IsPropertyAvailable(p => p.Bias)) { timeZone.SetSystemProperty(p => p.Bias, source.Web.RegionalSettings.TimeZone.Bias); };
-                if (source.Web.RegionalSettings.TimeZone.IsPropertyAvailable(p => p.DaylightBias)) { timeZone.SetSystemProperty(p => p.DaylightBias, source.Web.RegionalSettings.TimeZone.DaylightBias); };
-                if (source.Web.RegionalSettings.TimeZone.IsPropertyAvailable(p => p.StandardBias)) { timeZone.SetSystemProperty(p => p.StandardBias, source.Web.RegionalSettings.TimeZone.StandardBias); };
+                if (source.Web.RegionalSettings.TimeZone.IsPropertyAvailable(p => p.Description)) { timeZone.SetSystemProperty(p => p.Description, source.Web.RegionalSettings.TimeZone.Description); }
+                if (source.Web.RegionalSettings.TimeZone.IsPropertyAvailable(p => p.Id)) { timeZone.SetSystemProperty(p => p.Id, source.Web.RegionalSettings.TimeZone.Id); }
+                if (source.Web.RegionalSettings.TimeZone.IsPropertyAvailable(p => p.Bias)) { timeZone.SetSystemProperty(p => p.Bias, source.Web.RegionalSettings.TimeZone.Bias); }
+                if (source.Web.RegionalSettings.TimeZone.IsPropertyAvailable(p => p.DaylightBias)) { timeZone.SetSystemProperty(p => p.DaylightBias, source.Web.RegionalSettings.TimeZone.DaylightBias); }
+                if (source.Web.RegionalSettings.TimeZone.IsPropertyAvailable(p => p.StandardBias)) { timeZone.SetSystemProperty(p => p.StandardBias, source.Web.RegionalSettings.TimeZone.StandardBias); }
                 timeZone.Requested = true;
-                (timeZone as Model.SharePoint.TimeZone).Metadata = new System.Collections.Generic.Dictionary<string, string>((source.Web.RegionalSettings.TimeZone as Model.SharePoint.TimeZone).Metadata);
+                (timeZone as Model.SharePoint.TimeZone).Metadata = new Dictionary<string, string>((source.Web.RegionalSettings.TimeZone as Model.SharePoint.TimeZone).Metadata);
 
                 // Copy site settings                
                 target.Site.SetSystemProperty(p => p.Id, source.Site.Id);
                 target.Site.SetSystemProperty(p => p.GroupId, source.Site.GroupId);
-                target.Site.Requested = true; 
-                (target.Site as Site).Metadata = new System.Collections.Generic.Dictionary<string, string>((source.Site as Site).Metadata);
+                target.Site.Requested = true;
+                (target.Site as Site).Metadata = new Dictionary<string, string>((source.Site as Site).Metadata);
+
+                foreach (var prop in siteProps.Except(defaultSiteProps))
+                {
+                    var value = GetValue(source.Site, prop);
+                    target.Site.SetSystemProperty(prop, value);
+                }
+
+                // TODO: How to copy things like AllProperties?
+                foreach (var prop in webProps.Except(defaultWebProps))
+                {
+                    var val = GetValue(source.Web, prop);
+                    target.Web.SetSystemProperty(prop, val);
+                }
             }
             else
             {
@@ -489,5 +504,37 @@ namespace PnP.Core.Services
         }
 #endif
 
+        private static TResult GetValue<TSource, TResult>(TSource source, Expression<Func<TSource, TResult>> expression)
+        {
+            var propertyName = expression.Body switch
+            {
+                MemberExpression m => m.Member.Name,
+                UnaryExpression u when u.Operand is MemberExpression m => m.Member.Name,
+                _ => throw new NotImplementedException(expression.GetType().ToString())
+            };
+
+            return (TResult)source.GetPublicInstancePropertyValue(propertyName);
+        }
+
+        private static (IEnumerable<Expression<Func<ISite, object>>>, IEnumerable<Expression<Func<IWeb, object>>>) GetDefaultLoadProps(PnPContext context)
+        {
+            IEnumerable<Expression<Func<ISite, object>>> siteProps = defaultSiteProps;
+            IEnumerable<Expression<Func<IWeb, object>>> webProps = defaultWebProps;
+
+            if (context.ContextOptions != null)
+            {
+                if (context.ContextOptions.DefaultSitePropertiesOnCreate != null)
+                {
+                    siteProps = siteProps.Union(context.ContextOptions.DefaultSitePropertiesOnCreate);
+                }
+
+                if (context.ContextOptions.DefaultWebPropertiesOnCreate != null)
+                {
+                    webProps = webProps.Union(context.ContextOptions.DefaultWebPropertiesOnCreate);
+                }
+            }
+
+            return (siteProps, webProps);
+        }
     }
 }

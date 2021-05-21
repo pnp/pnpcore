@@ -1,9 +1,9 @@
---batchresponse_443bcf07-c997-4ece-a1f3-43eebba5bcf6
+--batchresponse_41b05a60-acaa-46b5-80da-3ac3504221af
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{"d":{"results":[]}}
---batchresponse_443bcf07-c997-4ece-a1f3-43eebba5bcf6--
+{"d":{"RemoveById":null}}
+--batchresponse_41b05a60-acaa-46b5-80da-3ac3504221af--

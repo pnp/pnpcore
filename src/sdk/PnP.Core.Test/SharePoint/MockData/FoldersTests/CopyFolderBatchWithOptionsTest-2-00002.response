@@ -1,9 +1,9 @@
---batchresponse_f5dce57c-dce3-4e2d-b97f-f84bf010baba
+--batchresponse_a2a866c7-c30d-4db4-ba41-0b330188a016
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{"d":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/prov-1/Shared Documents/TEST_COPY2_BATCH_OPTIONS1')","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/prov-1/Shared%20Documents/TEST_COPY2_BATCH_OPTIONS1')","type":"SP.Folder"},"Files":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/prov-1/Shared%20Documents/TEST_COPY2_BATCH_OPTIONS1')/Files"}},"ListItemAllFields":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/prov-1/Shared%20Documents/TEST_COPY2_BATCH_OPTIONS1')/ListItemAllFields"}},"ParentFolder":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/prov-1/Shared%20Documents/TEST_COPY2_BATCH_OPTIONS1')/ParentFolder"}},"Properties":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/prov-1/Shared%20Documents/TEST_COPY2_BATCH_OPTIONS1')/Properties"}},"StorageMetrics":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/prov-1/Shared%20Documents/TEST_COPY2_BATCH_OPTIONS1')/StorageMetrics"}},"Folders":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/prov-1/Shared%20Documents/TEST_COPY2_BATCH_OPTIONS1')/Folders"}},"Exists":true,"IsWOPIEnabled":false,"ItemCount":0,"Name":"TEST_COPY2_BATCH_OPTIONS1","ProgID":null,"ServerRelativeUrl":"/sites/prov-1/Shared Documents/TEST_COPY2_BATCH_OPTIONS1","TimeCreated":"2021-03-09T15:14:52Z","TimeLastModified":"2021-03-09T15:14:52Z","UniqueId":"95a004e0-b7df-41f3-8798-de624d5ba366","WelcomePage":""}}
---batchresponse_f5dce57c-dce3-4e2d-b97f-f84bf010baba--
+
+--batchresponse_a2a866c7-c30d-4db4-ba41-0b330188a016--

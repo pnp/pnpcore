@@ -1,1 +1,9 @@
-[{"SchemaVersion":"15.0.0.0","LibraryVersion":"16.0.21221.12003","ErrorInfo":null,"TraceCorrelationId":"7244c39f-2022-2000-b948-c12fea5684d9"}]
+--batchresponse_89afe4be-5f0b-4f9c-9892-7d15ef80ca60
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+HTTP/1.1 200 OK
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+
+{"d":{"__metadata":{"id":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/pnpcoresdktestgroup/SitePages/PNP_SDK_TEST_PromoteAsNewsArticle.aspx')","uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/pnpcoresdktestgroup/SitePages/PNP_SDK_TEST_PromoteAsNewsArticle.aspx')","type":"SP.File"},"CheckOutType":0,"ListId":"4de9f27e-adc4-43dd-bf92-282d95914821","Exists":true,"UniqueId":"f5f251f3-3b29-41aa-bac7-999a37a561bc"}}
+--batchresponse_89afe4be-5f0b-4f9c-9892-7d15ef80ca60--

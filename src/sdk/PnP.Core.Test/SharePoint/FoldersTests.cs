@@ -152,7 +152,7 @@ namespace PnP.Core.Test.SharePoint
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                string sharedDocumentsServerRelativeUrl = $"{context.Uri.PathAndQuery}/Shared Documents/";
+                string sharedDocumentsServerRelativeUrl = $"{context.Uri.PathAndQuery}/Shared Documents";
 
                 IFolder folderWithProperties = await context.Web.GetFolderByServerRelativeUrlAsync(sharedDocumentsServerRelativeUrl, f => f.Properties);
 
@@ -285,7 +285,7 @@ namespace PnP.Core.Test.SharePoint
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                IFolder parentFolder = (await context.Web.Lists.GetByTitleAsync("Documents", p=>p.RootFolder)).RootFolder;
+                IFolder parentFolder = (await context.Web.Lists.GetByTitleAsync("Documents", p => p.RootFolder)).RootFolder;
                 IFolder newFolder = await parentFolder.Folders.AddAsync("TEST");
 
                 // Test the created object
@@ -616,7 +616,6 @@ namespace PnP.Core.Test.SharePoint
             {
                 IFolder parentFolder = (await context.Web.Lists.GetByTitleAsync("Documents", p => p.RootFolder)).RootFolder;
                 IFolder folderToUpdate = await parentFolder.Folders.AddAsync("TEST");
-
                 // NOTE: WelcomePage is currently the only supported updatable property of Folder
                 folderToUpdate.WelcomePage = "NewWelcomePage.aspx";
 

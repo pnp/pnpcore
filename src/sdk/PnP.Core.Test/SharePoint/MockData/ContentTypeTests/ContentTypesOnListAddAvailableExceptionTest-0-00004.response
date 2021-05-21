@@ -1,10 +1,9 @@
---batchresponse_2f1fef40-3ac1-4c73-90e9-986421946849
+--batchresponse_382e4079-cc0a-4195-b101-ad833e285c95
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
-HTTP/1.1 204 No Content
+HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
-ETAG: "2"
 
 
---batchresponse_2f1fef40-3ac1-4c73-90e9-986421946849--
+--batchresponse_382e4079-cc0a-4195-b101-ad833e285c95--

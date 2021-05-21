@@ -1,33 +1,9 @@
---batchresponse_d8252140-9c30-4955-854c-052906af5ad9
+--batchresponse_58b5bcdf-9354-4b71-b2ec-d21192168c37
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{"d":{"CheckOut":null}}
---batchresponse_d8252140-9c30-4955-854c-052906af5ad9
-Content-Type: application/http
-Content-Transfer-Encoding: binary
-
-HTTP/1.1 200 OK
-CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
-
-{"d":{"CheckIn":null}}
---batchresponse_d8252140-9c30-4955-854c-052906af5ad9
-Content-Type: application/http
-Content-Transfer-Encoding: binary
-
-HTTP/1.1 200 OK
-CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
-
-{"d":{"CheckOut":null}}
---batchresponse_d8252140-9c30-4955-854c-052906af5ad9
-Content-Type: application/http
-Content-Transfer-Encoding: binary
-
-HTTP/1.1 200 OK
-CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
-
-{"d":{"CheckIn":null}}
---batchresponse_d8252140-9c30-4955-854c-052906af5ad9--
+{"d":{"__metadata":{"id":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/pnpcoresdktestgroup/PNP_SDK_TEST_GetFileVersionsBatchAsyncTest/PNP_SDK_TEST_GetFileVersionsBatchAsyncTest.docx')","uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/pnpcoresdktestgroup/PNP_SDK_TEST_GetFileVersionsBatchAsyncTest/PNP_SDK_TEST_GetFileVersionsBatchAsyncTest.docx')","type":"SP.File"},"Versions":{"results":[{"__metadata":{"id":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/SP.FileVersion96f223cf-69e3-4de6-91ab-2aa3b7e09f70","uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/SP.FileVersion96f223cf-69e3-4de6-91ab-2aa3b7e09f70","type":"SP.FileVersion"},"CreatedBy":{"__deferred":{"uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/SP.FileVersion96f223cf-69e3-4de6-91ab-2aa3b7e09f70/CreatedBy"}},"CheckInComment":"","Created":"2021-05-21T02:41:22Z","ID":1,"IsCurrentVersion":false,"Length":"17814","Size":17814,"Url":"_vti_history/1/PNP_SDK_TEST_GetFileVersionsBatchAsyncTest/PNP_SDK_TEST_GetFileVersionsBatchAsyncTest.docx","VersionLabel":"0.1"},{"__metadata":{"id":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/SP.FileVersionfd10e32c-8a57-4094-981c-78ad6c228433","uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/SP.FileVersionfd10e32c-8a57-4094-981c-78ad6c228433","type":"SP.FileVersion"},"CreatedBy":{"__deferred":{"uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/SP.FileVersionfd10e32c-8a57-4094-981c-78ad6c228433/CreatedBy"}},"CheckInComment":"","Created":"2021-05-21T02:41:23Z","ID":2,"IsCurrentVersion":false,"Length":"17814","Size":17814,"Url":"_vti_history/2/PNP_SDK_TEST_GetFileVersionsBatchAsyncTest/PNP_SDK_TEST_GetFileVersionsBatchAsyncTest.docx","VersionLabel":"0.2"}]},"UniqueId":"f3ef5b52-2d2e-4fce-9152-effbe12ae5e9"}}
+--batchresponse_58b5bcdf-9354-4b71-b2ec-d21192168c37--

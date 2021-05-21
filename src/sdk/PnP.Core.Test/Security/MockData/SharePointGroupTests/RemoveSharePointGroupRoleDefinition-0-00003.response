@@ -1,10 +1,9 @@
---batchresponse_37155f02-74a9-491d-b3b6-68daf890f24e
+--batchresponse_00249e54-4bcc-4ef1-9109-95d7dba580b2
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
-HTTP/1.1 201 Created
+HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
-LOCATION: https://bertonline.sharepoint.com/sites/prov-1/_api/Web/SiteGroups/GetById(41)
 
-{"d":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/SiteGroups/GetById(41)","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/SiteGroups/GetById(41)","type":"SP.Group"},"Owner":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/SiteGroups/GetById(41)/Owner"}},"Users":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/SiteGroups/GetById(41)/Users"}},"Id":41,"IsHiddenInUI":false,"LoginName":"PNP_SDK_TEST_TestGroup","Title":"PNP_SDK_TEST_TestGroup","PrincipalType":8,"AllowMembersEditMembership":false,"AllowRequestToJoinLeave":false,"AutoAcceptRequestToJoinLeave":false,"Description":null,"OnlyAllowMembersViewMembership":true,"OwnerTitle":"Bert Jansen (Cloud)","RequestToJoinLeaveEmailSetting":null}}
---batchresponse_37155f02-74a9-491d-b3b6-68daf890f24e--
+{"d":{"results":[{"__metadata":{"id":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/RoleDefinitions(1073741934)","uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/RoleDefinitions(1073741934)","type":"SP.RoleDefinition"},"BasePermissions":{"__metadata":{"type":"SP.BasePermissions"},"High":"0","Low":"65536"},"Description":null,"Hidden":false,"Id":1073741934,"Name":"PNP_SDK_TEST_TestRoleDef","Order":0,"RoleTypeKind":0}]}}
+--batchresponse_00249e54-4bcc-4ef1-9109-95d7dba580b2--

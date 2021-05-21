@@ -1,10 +1,9 @@
---batchresponse_16ae43bd-6cb8-4cf2-9e5f-e482f0bceb3b
+--batchresponse_a01a7025-5624-489a-bc78-fa4513c9102c
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
-HTTP/1.1 201 Created
+HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
-LOCATION: https://bertonline.sharepoint.com/sites/prov-1/_api/Web/UserCustomActions(guid'400ce3c5-a4b7-4737-bba4-757209199c3e')
 
-{"d":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/UserCustomActions(guid'400ce3c5-a4b7-4737-bba4-757209199c3e')","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/UserCustomActions(guid'400ce3c5-a4b7-4737-bba4-757209199c3e')","type":"SP.UserCustomAction"},"DescriptionResource":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/UserCustomActions(guid'400ce3c5-a4b7-4737-bba4-757209199c3e')/DescriptionResource"}},"TitleResource":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/UserCustomActions(guid'400ce3c5-a4b7-4737-bba4-757209199c3e')/TitleResource"}},"ClientSideComponentId":"a54612b1-e5cb-4a43-80ae-3b5fb6ce1e35","ClientSideComponentProperties":"{\"message\":\"Added from AddWebUserCustomActionCurrentBatchTest\"}","CommandUIExtension":null,"Description":"TESTING","Group":null,"HostProperties":"","Id":"400ce3c5-a4b7-4737-bba4-757209199c3e","ImageUrl":null,"Location":"ClientSideExtension.ApplicationCustomizer","Name":"UCA_CustomHeader","RegistrationId":null,"RegistrationType":0,"Rights":{"__metadata":{"type":"SP.BasePermissions"},"High":"0","Low":"262144"},"Scope":3,"ScriptBlock":null,"ScriptSrc":null,"Sequence":100,"Title":"Custom Header","Url":null,"VersionOfUserCustomAction":"16.0.1.0"}}
---batchresponse_16ae43bd-6cb8-4cf2-9e5f-e482f0bceb3b--
+
+--batchresponse_a01a7025-5624-489a-bc78-fa4513c9102c--

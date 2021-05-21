@@ -1,9 +1,9 @@
---batchresponse_04cb3754-e2a4-4d4a-89e8-a901b832f0c4
+--batchresponse_5560426c-1ebc-40a3-83a9-669e219fceb6
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{"d":{"__metadata":{"id":"https://mwdevvalo.sharepoint.com/sites/tea-point/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/tea-point/PNP_SDK_TEST_CheckoutFileBatchTest/PNP_SDK_TEST_CheckoutFileBatchTest.docx')","uri":"https://mwdevvalo.sharepoint.com/sites/tea-point/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/tea-point/PNP_SDK_TEST_CheckoutFileBatchTest/PNP_SDK_TEST_CheckoutFileBatchTest.docx')","type":"SP.File"},"CheckedOutByUser":{"__metadata":{"id":"https://mwdevvalo.sharepoint.com/sites/tea-point/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/tea-point/PNP_SDK_TEST_CheckoutFileBatchTest/PNP_SDK_TEST_CheckoutFileBatchTest.docx')/CheckedOutByUser","uri":"https://mwdevvalo.sharepoint.com/sites/tea-point/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/tea-point/PNP_SDK_TEST_CheckoutFileBatchTest/PNP_SDK_TEST_CheckoutFileBatchTest.docx')/CheckedOutByUser","type":"SP.User"},"Alerts":{"__deferred":{"uri":"https://mwdevvalo.sharepoint.com/sites/tea-point/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/tea-point/PNP_SDK_TEST_CheckoutFileBatchTest/PNP_SDK_TEST_CheckoutFileBatchTest.docx')/CheckedOutByUser/Alerts"}},"Groups":{"__deferred":{"uri":"https://mwdevvalo.sharepoint.com/sites/tea-point/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/tea-point/PNP_SDK_TEST_CheckoutFileBatchTest/PNP_SDK_TEST_CheckoutFileBatchTest.docx')/CheckedOutByUser/Groups"}},"Id":7,"IsHiddenInUI":false,"LoginName":"i:0#.f|membership|admin@mwdevvalo.onmicrosoft.com","Title":"Marcin Wojciechowski","PrincipalType":1,"Email":"admin@mwdevvalo.onmicrosoft.com","Expiration":"","IsEmailAuthenticationGuestUser":false,"IsShareByEmailGuestUser":false,"IsSiteAdmin":true,"UserId":{"__metadata":{"type":"SP.UserIdInfo"},"NameId":"10032000832b6ef2","NameIdIssuer":"urn:federation:microsoftonline"},"UserPrincipalName":"admin@mwdevvalo.onmicrosoft.com"},"CheckOutType":0,"UniqueId":"31176ef5-f843-43ed-b46b-bdb12f016c54"}}
---batchresponse_04cb3754-e2a4-4d4a-89e8-a901b832f0c4--
+{"d":{"UndoCheckOut":null}}
+--batchresponse_5560426c-1ebc-40a3-83a9-669e219fceb6--

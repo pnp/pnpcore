@@ -1,9 +1,9 @@
---batchresponse_029a32d9-a4b9-4d9c-b69b-02c4ad2d27b0
+--batchresponse_6e8eec86-541b-49ff-8a94-b1b609503ea9
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{"d":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Site","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Site","type":"SP.Site"},"GroupId":"b32780e9-df70-4548-a735-4e7f055415a1","Id":"b56adf79-ff6a-4964-a63a-ff1fa23be9f8"}}
---batchresponse_029a32d9-a4b9-4d9c-b69b-02c4ad2d27b0--
+{"d":{"__metadata":{"id":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/AvailableFields(guid'a33d4193-54bf-48bf-a57f-9a32b9d5228b')","uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/AvailableFields(guid'a33d4193-54bf-48bf-a57f-9a32b9d5228b')","type":"SP.FieldText"},"DescriptionResource":{"__deferred":{"uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/AvailableFields(guid'a33d4193-54bf-48bf-a57f-9a32b9d5228b')/DescriptionResource"}},"TitleResource":{"__deferred":{"uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/AvailableFields(guid'a33d4193-54bf-48bf-a57f-9a32b9d5228b')/TitleResource"}},"AutoIndexed":false,"CanBeDeleted":true,"ClientSideComponentId":"00000000-0000-0000-0000-000000000000","ClientSideComponentProperties":null,"ClientValidationFormula":null,"ClientValidationMessage":null,"CustomFormatter":null,"DefaultFormula":null,"DefaultValue":null,"Description":"","Direction":"none","EnforceUniqueValues":false,"EntityPropertyName":"ADDED FIELD3","Filterable":true,"FromBaseType":false,"Group":"Custom Columns","Hidden":false,"Id":"a33d4193-54bf-48bf-a57f-9a32b9d5228b","Indexed":false,"IndexStatus":0,"InternalName":"ADDED FIELD3","IsModern":false,"JSLink":"clienttemplates.js","PinnedToFiltersPane":false,"ReadOnlyField":false,"Required":false,"SchemaXml":"<Field Type=\"Text\" Name=\"ADDED FIELD3\" DisplayName=\"ADDED FIELD3\" ID=\"{a33d4193-54bf-48bf-a57f-9a32b9d5228b}\" SourceID=\"{7aa3c357-cdeb-43b9-9dcd-dc1645b30cff}\" StaticName=\"ADDED_x0020_FIELD3\" Version=\"1\" />","Scope":"/sites/pnpcoresdktestgroup","Sealed":false,"ShowInFiltersPane":0,"Sortable":true,"StaticName":"ADDED_x0020_FIELD3","Title":"ADDED FIELD3","FieldTypeKind":2,"TypeAsString":"Text","TypeDisplayName":"Single line of text","TypeShortDescription":"Single line of text","ValidationFormula":null,"ValidationMessage":null,"MaxLength":255}}
+--batchresponse_6e8eec86-541b-49ff-8a94-b1b609503ea9--

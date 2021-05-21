@@ -131,9 +131,38 @@ namespace PnP.Core.Test.Utilities
             return await factory.CreateAsync(configurationName).ConfigureAwait(false);
         }
 
+        public async Task<PnPContext> GetContextWithOptionsAsync(string configurationName, int id = 0,
+            PnPContextFactoryOptions factoryOptions = null,
+            [System.Runtime.CompilerServices.CallerMemberName] string testName = null,
+            [System.Runtime.CompilerServices.CallerFilePath] string sourceFilePath = null)
+        {
+            // Obtain factory (cached)
+            var factory = BuildContextFactory();
+
+            // Remove Async suffix
+            if (testName.EndsWith(AsyncSuffix))
+            {
+                testName = testName.Substring(0, testName.Length - AsyncSuffix.Length);
+            }
+
+            // Configure the factory for our testing mode
+            var testPnPContextFactory = factory as TestPnPContextFactory;
+            testPnPContextFactory.Mocking = Mocking;
+            testPnPContextFactory.Id = id;
+            testPnPContextFactory.TestName = testName;
+            testPnPContextFactory.SourceFilePath = sourceFilePath;
+            testPnPContextFactory.GenerateTestMockingDebugFiles = GenerateMockingDebugFiles;
+            testPnPContextFactory.TestUris = TestUris;
+
+            // rewrite configuration for special cases
+            configurationName = RewriteConfigurationNameForOptionalOfflineTestConfigurations(configurationName);
+
+            return await factory.CreateWithOptionsAsync(configurationName, factoryOptions).ConfigureAwait(false);
+        }
+
         private string RewriteConfigurationNameForOptionalOfflineTestConfigurations(string configurationName)
         {
-            if (Mocking && 
+            if (Mocking &&
                 configurationName == ClassicSTS0TestSite || configurationName == SyntexContentCenterTestSite || configurationName == VivaTopicCenterTestSite)
             {
                 var configuration = GetConfigurationSettings();
@@ -155,8 +184,8 @@ namespace PnP.Core.Test.Utilities
         }
 
         internal async Task<PnPContext> GetContextWithTelemetryManagerAsync(string configurationName, TelemetryManager telemetryManager, int id = 0,
-    [System.Runtime.CompilerServices.CallerMemberName] string testName = null,
-    [System.Runtime.CompilerServices.CallerFilePath] string sourceFilePath = null)
+            [System.Runtime.CompilerServices.CallerMemberName] string testName = null,
+            [System.Runtime.CompilerServices.CallerFilePath] string sourceFilePath = null)
         {
             // Obtain factory (cached)
             var factory = BuildContextFactory();

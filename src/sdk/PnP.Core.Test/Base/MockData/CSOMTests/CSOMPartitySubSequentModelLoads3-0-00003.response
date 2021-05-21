@@ -1,9 +1,9 @@
---batchresponse_737c412a-968e-43ce-8819-b08375c33b44
+--batchresponse_c5d4e942-6011-44e5-bf7f-4ec6b9a02e29
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{"d":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web","type":"SP.Web"},"AssociatedOwnerGroup":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/AssociatedOwnerGroup","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/AssociatedOwnerGroup","type":"SP.Group"},"Id":3,"Title":"prov-1 Owners"},"AlternateCssUrl":"","Id":"8c8e101c-1b0d-4253-85e7-c30039bf46e2"}}
---batchresponse_737c412a-968e-43ce-8819-b08375c33b44--
+{"d":{"__metadata":{"id":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web","uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web","type":"SP.Web"},"AssociatedOwnerGroup":{"__metadata":{"id":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/AssociatedOwnerGroup","uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/AssociatedOwnerGroup","type":"SP.Group"},"Id":3,"LoginName":"PnP Microsoft 365 library test with group Owners","Description":null},"AlternateCssUrl":"","Id":"7aa3c357-cdeb-43b9-9dcd-dc1645b30cff"}}
+--batchresponse_c5d4e942-6011-44e5-bf7f-4ec6b9a02e29--

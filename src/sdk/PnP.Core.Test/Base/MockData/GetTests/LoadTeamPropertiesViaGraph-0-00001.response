@@ -1,9 +1,1 @@
---batchresponse_3e7f4a59-b143-4743-a5be-ed7a5938c63f
-Content-Type: application/http
-Content-Transfer-Encoding: binary
-
-HTTP/1.1 200 OK
-CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
-
-{"d":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Site","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Site","type":"SP.Site"},"GroupId":"b32780e9-df70-4548-a735-4e7f055415a1","Id":"b56adf79-ff6a-4964-a63a-ff1fa23be9f8"}}
---batchresponse_3e7f4a59-b143-4743-a5be-ed7a5938c63f--
+{"responses": [{"id": "1","status":200,"headers" : {"OData-Version":"4.0","Content-Type":"application/json;odata.metadata=minimal;odata.streaming=true;IEEE754Compatible=false;charset=utf-8"},"body":{"@odata.context":"https://graph.microsoft.com/v1.0/$metadata#teams(id)/$entity","id":"08b3accf-0665-4523-945b-473c3161b2ec"}},{"id": "2","status":200,"headers" : {"OData-Version":"4.0","Content-Type":"application/json;odata.metadata=minimal;odata.streaming=true;IEEE754Compatible=false;charset=utf-8"},"body":{"@odata.context":"https://graph.microsoft.com/v1.0/$metadata#teams('08b3accf-0665-4523-945b-473c3161b2ec')/channels(displayName,id)","@odata.count":9,"value":[{"id":"19:aUSLW1E49X7j-W5NYO5BYSp1l7ruuleVIQtH2iFr5Bw1@thread.tacv2","displayName":"General"},{"id":"19:97f105d8021040aab834abdaf86f311b@thread.tacv2","displayName":"Channel test 585680868"},{"id":"19:907a5168ea224d72bf820c1b7afb3b97@thread.tacv2","displayName":"Channel test 982780058"},{"id":"19:785e66377a3141a3998c77f7aabee3d4@thread.tacv2","displayName":"Channel test 1153113818"},{"id":"19:32e6be943fee4fc685ce7b4ba4b4b141@thread.tacv2","displayName":"Channel test 1680855877"},{"id":"19:d922fec28da04129840d6e27a2d775a7@thread.tacv2","displayName":"Channel test 1306848247"},{"id":"19:e45c46314617432588b1fea047e77b28@thread.tacv2","displayName":"Channel test 1395930601"},{"id":"19:a8fb26b7dfd44a03b08b794270682bdd@thread.tacv2","displayName":"Channel test 706937752"},{"id":"19:06ac972629924b93b953d5fba7f307b2@thread.tacv2","displayName":"Fail channel"}]}}]}

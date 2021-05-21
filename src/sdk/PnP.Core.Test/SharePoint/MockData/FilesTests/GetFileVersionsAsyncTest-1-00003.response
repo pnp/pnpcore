@@ -1,9 +1,9 @@
---batchresponse_cd20bf7c-c9f4-40e6-bebc-e15f148a18af
+--batchresponse_32e9051a-9187-4986-8abd-eb150a17949e
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{"d":{"CheckOut":null}}
---batchresponse_cd20bf7c-c9f4-40e6-bebc-e15f148a18af--
+{"d":{"CheckIn":null}}
+--batchresponse_32e9051a-9187-4986-8abd-eb150a17949e--

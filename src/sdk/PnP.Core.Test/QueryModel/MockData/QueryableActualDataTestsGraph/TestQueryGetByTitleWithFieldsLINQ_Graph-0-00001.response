@@ -1,9 +1,9 @@
---batchresponse_d4ce148f-b18b-4a66-8b96-2f2e61101f3c
+--batchresponse_784f2a99-603d-4065-b1e8-d65903446237
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{"d":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Site","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Site","type":"SP.Site"},"GroupId":"b32780e9-df70-4548-a735-4e7f055415a1","Id":"b56adf79-ff6a-4964-a63a-ff1fa23be9f8"}}
---batchresponse_d4ce148f-b18b-4a66-8b96-2f2e61101f3c--
+{"d":{"results":[{"__metadata":{"id":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/Lists(guid'11dcfc58-be30-4b2d-b3ba-b6752c766f47')","uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/Lists(guid'11dcfc58-be30-4b2d-b3ba-b6752c766f47')","etag":"\"211\"","type":"SP.List"},"Id":"11dcfc58-be30-4b2d-b3ba-b6752c766f47","Title":"Documents"}]}}
+--batchresponse_784f2a99-603d-4065-b1e8-d65903446237--

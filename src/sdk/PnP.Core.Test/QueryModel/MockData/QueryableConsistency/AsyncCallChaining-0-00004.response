@@ -1,9 +1,9 @@
---batchresponse_84b54b4e-1dfa-46b2-9e50-4c911bb534f5
+--batchresponse_60bd2bd8-882d-41b1-8e76-e8d11c502f9a
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{"d":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/prov-1/Shared Documents/bla')","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/prov-1/Shared%20Documents/bla')","type":"SP.Folder"},"Files":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/prov-1/Shared%20Documents/bla')/Files"}},"ListItemAllFields":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/prov-1/Shared%20Documents/bla')/ListItemAllFields"}},"ParentFolder":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/prov-1/Shared%20Documents/bla')/ParentFolder"}},"Properties":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/prov-1/Shared%20Documents/bla')/Properties"}},"StorageMetrics":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/prov-1/Shared%20Documents/bla')/StorageMetrics"}},"Folders":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/prov-1/Shared%20Documents/bla')/Folders"}},"Exists":true,"IsWOPIEnabled":false,"ItemCount":0,"Name":"bla","ProgID":null,"ServerRelativeUrl":"/sites/prov-1/Shared Documents/bla","TimeCreated":"2021-03-09T15:09:13Z","TimeLastModified":"2021-03-09T15:09:13Z","UniqueId":"e6a776f5-d585-4c50-ba7d-bd5bac0408f4","WelcomePage":""}}
---batchresponse_84b54b4e-1dfa-46b2-9e50-4c911bb534f5--
+
+--batchresponse_60bd2bd8-882d-41b1-8e76-e8d11c502f9a--

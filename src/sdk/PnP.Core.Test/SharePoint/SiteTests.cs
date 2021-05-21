@@ -47,13 +47,13 @@ namespace PnP.Core.Test.SharePoint
                 var site = context.Site;
 
                 Assert.IsNotNull(site);
-                Assert.IsTrue(site.AllowCreateDeclarativeWorkflow);
+                Assert.IsFalse(site.AllowCreateDeclarativeWorkflow);
                 Assert.IsTrue(site.AllowDesigner);
                 Assert.AreNotEqual(0, site.AllowExternalEmbeddingWrapper);
                 Assert.IsFalse(site.AllowMasterPageEditing);
                 Assert.IsFalse(site.AllowRevertFromTemplate);
-                Assert.IsTrue(site.AllowSaveDeclarativeWorkflowAsTemplate);
-                Assert.IsTrue(site.AllowSavePublishDeclarativeWorkflow);
+                Assert.IsFalse(site.AllowSaveDeclarativeWorkflowAsTemplate);
+                Assert.IsFalse(site.AllowSavePublishDeclarativeWorkflow);
                 Assert.AreNotEqual(0, site.AuditLogTrimmingRetention);
                 Assert.IsFalse(site.CanSyncHubSitePermissions);
                 Assert.AreEqual(default, site.ChannelGroupId);
@@ -126,7 +126,7 @@ namespace PnP.Core.Test.SharePoint
                 Assert.IsNull(site.SensitivityLabelId);
                 Assert.AreEqual(default, site.SensitivityLabel);
                 Assert.AreNotEqual("", site.ServerRelativeUrl);
-                Assert.IsFalse(site.ShareByEmailEnabled);
+                Assert.IsTrue(site.ShareByEmailEnabled);
                 Assert.IsFalse(site.ShareByLinkEnabled);
                 Assert.IsFalse(site.ShowPeoplePickerSuggestionsForGuestUsers);
                 Assert.IsFalse(site.SocialBarOnSitePagesDisabled);

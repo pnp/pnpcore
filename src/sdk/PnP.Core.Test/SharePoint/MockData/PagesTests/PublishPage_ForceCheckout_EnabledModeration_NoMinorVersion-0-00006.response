@@ -1,9 +1,9 @@
---batchresponse_e9848b30-bc5a-4637-a76b-c342a1647aa5
+--batchresponse_31a3cc12-2809-45c7-89cd-6d345d19d2f9
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
-HTTP/1.1 404 Not Found
+HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{"error":{"code":"-2130575338, Microsoft.SharePoint.SPException","message":{"lang":"en-US","value":"The file /sites/prov-1/SitePages/PNP_SDK_TEST_PublishPage.aspx does not exist."}}}
---batchresponse_e9848b30-bc5a-4637-a76b-c342a1647aa5--
+{"d":{"__metadata":{"id":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/pnpcoresdktestgroup/SitePages/PNP_SDK_TEST_PublishPage.aspx')","uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/pnpcoresdktestgroup/SitePages/PNP_SDK_TEST_PublishPage.aspx')","type":"SP.File"},"ListId":"4de9f27e-adc4-43dd-bf92-282d95914821","UniqueId":"908edb6a-6614-4e4e-9ad2-ddb0870aa90b"}}
+--batchresponse_31a3cc12-2809-45c7-89cd-6d345d19d2f9--

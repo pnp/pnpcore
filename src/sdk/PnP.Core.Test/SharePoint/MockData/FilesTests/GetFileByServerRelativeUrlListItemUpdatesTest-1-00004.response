@@ -1,9 +1,9 @@
---batchresponse_9d29a7f1-7e6c-4376-96f5-bc25aeaabc35
+--batchresponse_bffc5744-c551-4146-83ce-2187aa1ef9f1
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{"d":{"ValidateUpdateListItem":{"__metadata":{"type":"Collection(SP.ListItemFormUpdateValue)"},"results":[{"ErrorCode":0,"ErrorMessage":null,"FieldName":"Title","FieldValue":"NewTitle","HasException":false,"ItemId":3230}]}}}
---batchresponse_9d29a7f1-7e6c-4376-96f5-bc25aeaabc35--
+{"d":{"__metadata":{"id":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/pnpcoresdktestgroup/Shared Documents/PNP_SDK_TEST_GetFileByServerRelativeUrlListItemUpdatesTest.docx')","uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/pnpcoresdktestgroup/Shared%20Documents/PNP_SDK_TEST_GetFileByServerRelativeUrlListItemUpdatesTest.docx')","type":"SP.File"},"ListId":"11dcfc58-be30-4b2d-b3ba-b6752c766f47","UniqueId":"f2d11cd2-dfcb-46ff-8c34-b984a55fd598"}}
+--batchresponse_bffc5744-c551-4146-83ce-2187aa1ef9f1--
