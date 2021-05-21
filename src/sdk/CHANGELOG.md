@@ -17,6 +17,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
 ### Changed
 
+- List item documentation update #461 [cesarhoeflich - Cesar Hoeflich]
 - Fix for supporting teams apps as web parts on pages [jansenbe - Bert Jansen]
 - RenderListDataAsStream populates the IListItem's IContentType [jansenbe - Bert Jansen]
 - Fixed NullReferenceException in Values_CollectionChange (issue #447) #445 [DaleyKD - Kyle Daley]
