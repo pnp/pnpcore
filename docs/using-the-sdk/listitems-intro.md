@@ -42,7 +42,8 @@ SharePoint [CAML](https://docs.microsoft.com/en-us/sharepoint/dev/schema/query-s
 
 ```csharp
 // Assume the fields where not yet loaded, so loading them with the list
-var myList = context.Web.Lists.GetByTitle("My List", p => p.Title, p => p.Items, 
+// If you are using CAML query, do not use the parameter 'p => p.Items'. It causes full items to load, ignoring the CAML query. 
+var myList = context.Web.Lists.GetByTitle("My List", p => p.Title,
                                                      p => p.Fields.QueryProperties(p => p.InternalName, p => p.FieldTypeKind, p => p.TypeAsString, p => p.Title));
 
 // Build a query that only returns the Title field for items where the Title field starts with "Item1"
@@ -80,7 +81,8 @@ By setting a row limit in the CAML query combined with using the the PagingInfo 
 
 ```csharp
 // Assume the fields where not yet loaded, so loading them with the list
-var myList = context.Web.Lists.GetByTitle("My List", p => p.Title, p => p.Items, 
+// If you are using CAML query, do not use the parameter 'p => p.Items'. It causes full items to load, ignoring the CAML query. 
+var myList = context.Web.Lists.GetByTitle("My List", p => p.Title,
                                                      p => p.Fields.QueryProperties(p => p.InternalName, p => p.FieldTypeKind, p => p.TypeAsString, p => p.Title));
 
 // Build a query that only returns the first 20 rows where the Title field starts with "Item1"
@@ -132,7 +134,7 @@ Using the [LoadListDataAsStreamAsync method](https://pnp.github.io/pnpcore/api/P
 
 ```csharp
 // Assume the fields where not yet loaded, so loading them with the list
-var myList = context.Web.Lists.GetByTitle("My List", p => p.Title, p => p.Items, 
+var myList = context.Web.Lists.GetByTitle("My List", p => p.Title, 
                                                      p => p.Fields.QueryProperties(p => p.InternalName, p => p.FieldTypeKind, p => p.TypeAsString, p => p.Title));
 
 // Build a query that only returns the Title field for the top 5 items where the Title field starts with "Item1"
@@ -172,7 +174,7 @@ foreach (var listItem in myList.Items.AsRequested())
 
 ```csharp
 // Assume the fields where not yet loaded, so loading them with the list
-var myList = context.Web.Lists.GetByTitle("My List", p => p.Title, p => p.Items, 
+var myList = context.Web.Lists.GetByTitle("My List", p => p.Title, 
                                                      p => p.Fields.QueryProperties(p => p.InternalName, p => p.FieldTypeKind, p => p.TypeAsString, p => p.Title));
 
 // Build a query that only returns the Title field for the first 20 items where the Title field starts with "Item1"
