@@ -511,6 +511,11 @@ namespace PnP.Core.Model.SharePoint
 
         private void SetPropertiesJson(JsonElement parsedJson)
         {
+            if (parsedJson.ValueKind == JsonValueKind.Null)
+            {
+                return;
+            }
+
             propertiesJson = parsedJson.ToString();
 
             if (parsedJson.TryGetProperty("webPartData", out JsonElement webPartData))
