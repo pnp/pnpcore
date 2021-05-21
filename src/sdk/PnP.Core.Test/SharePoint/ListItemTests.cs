@@ -2990,6 +2990,142 @@ namespace PnP.Core.Test.SharePoint
         }
         #endregion
 
+        #region Load File
+
+        [TestMethod]
+        public async Task LoadFileFromListItemTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            (string parentLibraryName, _, string documentUrl) = await TestAssets.CreateTestDocumentAsync(0);
+
+            try
+            {
+                int listItemID = -1;
+                using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+                {
+                    IFile file = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl, f => f.ListItemAllFields.QueryProperties(li => li.Id));
+
+                    listItemID = file.ListItemAllFields.Id;
+
+                    Assert.IsTrue(listItemID > 0);
+                }
+
+                using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))
+                {
+                    IList list = await context.Web.Lists.GetByTitleAsync(parentLibraryName);
+                    IListItem listItem = await list.Items.GetByIdAsync(listItemID);
+
+                    Assert.IsNotNull(listItem);
+
+                    await listItem.File.LoadAsync();
+
+                    Assert.IsNotNull(listItem.File);
+                    Assert.IsTrue(listItem.File.Length > 0);
+                    Assert.IsTrue(!string.IsNullOrWhiteSpace(listItem.File.ServerRelativeUrl));
+                    Assert.IsTrue(listItem.File.IsPropertyAvailable(f => f.CheckOutType));
+                }
+            }
+            finally
+            {
+                await TestAssets.CleanupTestDocumentAsync(3);
+            }
+        }
+
+        [TestMethod]
+        public async Task LoadFileWithPropertiesFromListItemTest()
+        {
+            TestCommon.Instance.Mocking = false;
+            (string parentLibraryName, _, string documentUrl) = await TestAssets.CreateTestDocumentAsync(0);
+
+            try
+            {
+                int listItemID = -1;
+                using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+                {
+                    IFile file = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl, f => f.ListItemAllFields.QueryProperties(li => li.Id));
+
+                    listItemID = file.ListItemAllFields.Id;
+
+                    Assert.IsTrue(listItemID > 0);
+                }
+
+                using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))
+                {
+                    IList list = await context.Web.Lists.GetByTitleAsync(parentLibraryName);
+                    IListItem listItem = await list.Items.GetByIdAsync(listItemID);
+
+                    Assert.IsNotNull(listItem);
+
+                    await listItem.File.LoadAsync(f => f.Length, f => f.Author.QueryProperties(u => u.UserPrincipalName));
+
+                    Assert.IsNotNull(listItem.File);
+                    Assert.IsTrue(listItem.File.Length > 0);
+                    Assert.IsTrue(!string.IsNullOrWhiteSpace(listItem.File.Author.UserPrincipalName));
+                    Assert.IsTrue(!listItem.File.IsPropertyAvailable(f => f.CheckOutType));
+                }
+            }
+            finally
+            {
+                await TestAssets.CleanupTestDocumentAsync(3);
+            }
+        }
+
+        [TestMethod]
+        public async Task LoadFileInBatchWithPropertiesFromListItemTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            (string parentLibraryName, _, string documentUrl) = await TestAssets.CreateTestDocumentAsync(0);
+            (_, _, string documentUrl2) = await TestAssets.CreateTestDocumentAsync(1, fileName: $"{nameof(LoadFileInBatchWithPropertiesFromListItemTest)}2");
+
+            try
+            {
+                int listItemID = -1;
+                int listItemID2 = -1;
+                using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))
+                {
+                    IFile file = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl, f => f.ListItemAllFields.QueryProperties(li => li.Id));
+                    IFile file2 = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl2, f => f.ListItemAllFields.QueryProperties(li => li.Id));
+
+                    listItemID = file.ListItemAllFields.Id;
+                    listItemID2 = file2.ListItemAllFields.Id;
+
+                    Assert.IsTrue(listItemID > 0);
+                    Assert.IsTrue(listItemID2 > 0);
+                }
+
+                using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 3))
+                {
+                    IList list = await context.Web.Lists.GetByTitleAsync(parentLibraryName);
+                    IListItem listItem = await list.Items.GetByIdAsync(listItemID);
+                    IListItem listItem2 = await list.Items.GetByIdAsync(listItemID2);
+
+                    Assert.IsNotNull(listItem);
+                    Assert.IsNotNull(listItem2);
+
+                    var batch = context.NewBatch();
+                    await listItem.File.LoadBatchAsync(batch, f => f.Length, f => f.Author.QueryProperties(u => u.UserPrincipalName));
+                    await listItem2.File.LoadBatchAsync(batch, f => f.Length, f => f.Author.QueryProperties(u => u.UserPrincipalName));
+                    await context.ExecuteAsync(batch);
+                    
+                    Assert.IsNotNull(listItem.File);
+                    Assert.IsTrue(listItem.File.Length > 0);
+                    Assert.IsTrue(!string.IsNullOrWhiteSpace(listItem.File.Author.UserPrincipalName));
+                    Assert.IsTrue(!listItem.File.IsPropertyAvailable(f => f.CheckOutType));
+
+                    Assert.IsNotNull(listItem2.File);
+                    Assert.IsTrue(listItem2.File.Length > 0);
+                    Assert.IsTrue(!string.IsNullOrWhiteSpace(listItem2.File.Author.UserPrincipalName));
+                    Assert.IsTrue(!listItem2.File.IsPropertyAvailable(f => f.CheckOutType));
+                }
+            }
+            finally
+            {
+                await TestAssets.CleanupTestDocumentAsync(4);
+            }
+        }
+
+        #endregion
+        
         #region GetDisplayName
         [TestMethod]
         public async Task GetFileDisplayNameAsyncTest()
