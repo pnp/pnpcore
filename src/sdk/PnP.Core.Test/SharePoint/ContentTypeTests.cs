@@ -1,12 +1,11 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using PnP.Core.Model;
 using PnP.Core.Model.SharePoint;
 using PnP.Core.QueryModel;
 using PnP.Core.Test.Utilities;
 using System;
-using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
-using PnP.Core.Model;
 
 namespace PnP.Core.Test.SharePoint
 {
@@ -134,8 +133,6 @@ namespace PnP.Core.Test.SharePoint
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                context.GraphFirst = false;
-
                 var sitePages = await context.Web.Lists.GetByTitleAsync("Site Pages");
                 if (sitePages != null)
                 {
