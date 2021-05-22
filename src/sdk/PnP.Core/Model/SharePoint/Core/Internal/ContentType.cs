@@ -121,6 +121,8 @@ namespace PnP.Core.Model.SharePoint
 
         public IFieldLinkCollection FieldLinks { get => GetModelCollectionValue<IFieldLinkCollection>(); }
 
+        public IFieldCollection Fields { get => GetModelCollectionValue<IFieldCollection>(); }
+
         [KeyProperty(nameof(StringId))]
         public override object Key { get => StringId; set => StringId = value.ToString(); }
         #endregion

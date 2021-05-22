@@ -100,8 +100,7 @@
         /// Gets or Sets the New Form URL of the Content Type
         /// </summary>
         public string NewFormUrl { get; set; }
-
-
+        
         /// <summary>
         /// Gets or Sets whether the Content Type is read only
         /// </summary>
@@ -133,16 +132,16 @@
         /// </summary>
         public IFieldLinkCollection FieldLinks { get; }
 
+        /// <summary>
+        /// Gets the collection of fields of the Content Type.
+        /// </summary>
+        public IFieldCollection Fields { get; }
+
         #region To implement
         ///// <summary>
         ///// To update...
         ///// </summary>
         //public IUserResource DescriptionResource { get; }
-
-        ///// <summary>
-        ///// To update...
-        ///// </summary>
-        //public IFieldCollection Fields { get; }
 
         ///// <summary>
         ///// To update...
