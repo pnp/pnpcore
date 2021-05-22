@@ -131,24 +131,24 @@ namespace PnP.Core.Services
                                 break;
                             }
                         case "Url":
-                        {
+                            {
                                 await context.Site.EnsurePropertiesAsync(p => p.Url).ConfigureAwait(false);
-                                if(context.Site.HasValue(propertyToLoad))
+                                if (context.Site.HasValue(propertyToLoad))
                                 {
                                     result = result.Replace(match.Value, context.Site.Url.ToString());
                                 }
                                 break;
-                        }
+                            }
 
                         case "HubSiteId":
-                        {
-                            await context.Site.EnsurePropertiesAsync(p => p.HubSiteId).ConfigureAwait(false);
-                            if (context.Site.HasValue(propertyToLoad))
                             {
-                                result = result.Replace(match.Value, context.Site.HubSiteId.ToString());
+                                await context.Site.EnsurePropertiesAsync(p => p.HubSiteId).ConfigureAwait(false);
+                                if (context.Site.HasValue(propertyToLoad))
+                                {
+                                    result = result.Replace(match.Value, context.Site.HubSiteId.ToString());
+                                }
+                                break;
                             }
-                            break;
-                        }
                     }
                 }
                 // Replace tokens coming from the Web object connected to the current PnPContext
@@ -192,12 +192,20 @@ namespace PnP.Core.Services
                                 var list = pnpObject as Model.SharePoint.IList;
 
                                 // If the object is a list item
-                                if (list == null && pnpObject is Model.SharePoint.IListItem listItem)
+                                if (list == null)
                                 {
-                                    // Get the parent list of the current list item
-                                    list = GetParentDataModel(listItem as IMetadataExtensible) as Model.SharePoint.IList;
+                                    if (pnpObject is Model.SharePoint.IListItem listItem)
+                                    {
+                                        // Get the parent list of the current list item
+                                        list = GetParentDataModel(listItem as IMetadataExtensible) as Model.SharePoint.IList;
+                                    }
+                                    else if (pnpObject is Model.SharePoint.IFile file)
+                                    {
+                                        listItem = GetParentDataModel(file as IMetadataExtensible) as Model.SharePoint.IListItem;
+                                        list = GetParentDataModel(listItem as IMetadataExtensible) as Model.SharePoint.IList;
+                                    }
                                 }
-                                
+
                                 // If we've got the list
                                 if (list != null)
                                 {

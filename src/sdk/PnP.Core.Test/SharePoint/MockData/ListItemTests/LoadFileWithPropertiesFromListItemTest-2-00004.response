@@ -1,0 +1,9 @@
+--batchresponse_ef7155c8-02d9-4635-9850-dd52c22b1482
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+HTTP/1.1 200 OK
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+
+{"d":{"__metadata":{"id":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/pnpcoresdktestgroup/Shared Documents/PNP_SDK_TEST_LoadFileWithPropertiesFromListItemTest.docx')","uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/pnpcoresdktestgroup/Shared%20Documents/PNP_SDK_TEST_LoadFileWithPropertiesFromListItemTest.docx')","type":"SP.File"},"Author":{"__metadata":{"id":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/pnpcoresdktestgroup/Shared Documents/PNP_SDK_TEST_LoadFileWithPropertiesFromListItemTest.docx')/Author","uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/pnpcoresdktestgroup/Shared%20Documents/PNP_SDK_TEST_LoadFileWithPropertiesFromListItemTest.docx')/Author","type":"SP.User"},"Id":9,"UserPrincipalName":"kyle@gimmalkyle2.onmicrosoft.com"},"Length":"18467","UniqueId":"0de52653-06f5-41d0-89e4-4b372b39b7e2"}}
+--batchresponse_ef7155c8-02d9-4635-9850-dd52c22b1482--

@@ -1,0 +1,9 @@
+--batchresponse_a95dc87e-3ce1-4cdb-b24a-d2d7994ab7c2
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+HTTP/1.1 200 OK
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+
+{"d":{"__metadata":{"id":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/pnpcoresdktestgroup/Shared Documents/PNP_SDK_TEST_LoadFileInBatchWithPropertiesFromListItemTest.docx')","uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/pnpcoresdktestgroup/Shared%20Documents/PNP_SDK_TEST_LoadFileInBatchWithPropertiesFromListItemTest.docx')","type":"SP.File"},"ListItemAllFields":{"__metadata":{"id":"0e093599-5319-4317-92cc-02631a81ba0c","uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/pnpcoresdktestgroup/Shared%20Documents/PNP_SDK_TEST_LoadFileInBatchWithPropertiesFromListItemTest.docx')/ListItemAllFields","etag":"\"1\"","type":"SP.Data.Shared_x0020_DocumentsItem"},"Id":462,"ID":462},"UniqueId":"feda7652-4987-4184-8e7d-e50ff0211709"}}
+--batchresponse_a95dc87e-3ce1-4cdb-b24a-d2d7994ab7c2--
