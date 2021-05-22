@@ -771,6 +771,22 @@ namespace PnP.Core.Services
                     };
                     };
 
+                    if(request.ApiCall.Headers!=null)
+                    {
+                        foreach(var key in request.ApiCall.Headers.Keys)
+                        {
+                            string existingKey = graphRequest.Headers.Keys.FirstOrDefault(k => k.Equals(key, StringComparison.InvariantCultureIgnoreCase));
+                            if (string.IsNullOrWhiteSpace(existingKey))
+                            {
+                                graphRequest.Headers.Add(key, request.ApiCall.Headers[key]);
+                            }
+                            else
+                            {
+                                graphRequest.Headers[existingKey] = request.ApiCall.Headers[key];
+                            }
+                        }
+                    }
+
                     graphRequests.Requests.Add(graphRequest);
 
 #if DEBUG

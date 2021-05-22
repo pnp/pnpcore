@@ -1,4 +1,5 @@
-﻿using System.Net.Http;
+﻿using System.Collections.Generic;
+using System.Net.Http;
 
 namespace PnP.Core.Services
 {
@@ -15,12 +16,14 @@ namespace PnP.Core.Services
         /// <param name="type"><see cref="ApiRequestType"/> of the request</param>
         /// <param name="request">Actual API call to issue</param>
         /// <param name="body">Optional body of the request</param>
-        public ApiRequest(HttpMethod httpMethod, ApiRequestType type, string request, string body)
+        /// <param name="headers">Optional for the request</param>
+        public ApiRequest(HttpMethod httpMethod, ApiRequestType type, string request, string body, Dictionary<string,string>headers=null)
         {
             HttpMethod = httpMethod;
             Type = type;
             Request = request;
             Body = body;
+            Headers = headers;
         }
 
         /// <summary>
@@ -51,5 +54,10 @@ namespace PnP.Core.Services
         /// The optional payload/body of the API call to execute
         /// </summary>
         public string Body { get; set; }
+
+        /// <summary>
+        /// The optional headers of the API call to execute - for example IF-Match for PATCH Request
+        /// </summary>
+        public Dictionary<string, string> Headers { get; }
     }
 }
