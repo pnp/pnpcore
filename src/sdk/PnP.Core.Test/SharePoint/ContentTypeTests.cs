@@ -3,6 +3,7 @@ using PnP.Core.Model.SharePoint;
 using PnP.Core.QueryModel;
 using PnP.Core.Test.Utilities;
 using System;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using PnP.Core.Model;
@@ -128,6 +129,34 @@ namespace PnP.Core.Test.SharePoint
         }
 
         [TestMethod]
+        public async Task ContentTypesWithFieldsOnListGetByIdTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                context.GraphFirst = false;
+
+                var sitePages = await context.Web.Lists.GetByTitleAsync("Site Pages");
+                if (sitePages != null)
+                {
+                    await sitePages.LoadAsync(p => p.ContentTypes.QueryProperties(ct => ct.Id, ct => ct.Fields, ct => ct.Name));
+                    IContentType contentType = sitePages.ContentTypes.AsRequested().FirstOrDefault(p => p.StringId.StartsWith("0x0101009D1CB255DA76424F860D91F20E6C4118"));
+
+                    Assert.IsNotNull(contentType);
+                    // Test Id property
+                    Assert.IsTrue(contentType.Id.StartsWith("0x0101009D1CB255DA76424F860D91F20E6C4118"));
+                    Assert.IsTrue(!string.IsNullOrWhiteSpace(contentType.Name));
+                    Assert.IsTrue(contentType.Fields.Length > 0);
+
+                    IField field = contentType.Fields.AsRequested().FirstOrDefault(ct => ct.InternalName == "BannerImageUrl");
+
+                    Assert.IsNotNull(field);
+                    Assert.AreEqual(new Guid("5baf6db5-9d25-4738-b15e-db5789298e82"), field.Id);
+                }
+            }
+        }
+
+        [TestMethod]
         public async Task ContentTypesGetByIdTest()
         {
             //TestCommon.Instance.Mocking = false;
@@ -142,6 +171,27 @@ namespace PnP.Core.Test.SharePoint
                 Assert.IsNotNull(contentType);
                 // Test Id property
                 Assert.AreEqual(contentType.Id, "0x01");
+            }
+        }
+
+        [TestMethod]
+        public async Task ContentTypesWithFieldsGetByIdTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                IContentType contentType = await context.Web.ContentTypes.QueryProperties(ct => ct.Id, ct => ct.Name, ct => ct.Fields).FirstOrDefaultAsync(ct => ct.StringId == "0x01");
+
+                Assert.IsNotNull(contentType);
+                // Test Id property
+                Assert.AreEqual(contentType.Id, "0x01");
+                Assert.IsTrue(!string.IsNullOrWhiteSpace(contentType.Name));
+                Assert.IsTrue(contentType.Fields.Length > 0);
+
+                IField field = contentType.Fields.AsRequested().FirstOrDefault(ct => ct.InternalName == "ContentType");
+
+                Assert.IsNotNull(field);
+                Assert.AreEqual(new Guid("c042a256-787d-4a6f-8a8a-cf6ab767f12d"), field.Id);
             }
         }
 
