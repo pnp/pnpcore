@@ -7807,6 +7807,19 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IContentType.FieldLinks
   nameWithType: IContentType.FieldLinks
+- uid: PnP.Core.Model.SharePoint.IContentType.Fields
+  name: Fields
+  href: api/PnP.Core.Model.SharePoint.IContentType.html#PnP_Core_Model_SharePoint_IContentType_Fields
+  commentId: P:PnP.Core.Model.SharePoint.IContentType.Fields
+  fullName: PnP.Core.Model.SharePoint.IContentType.Fields
+  nameWithType: IContentType.Fields
+- uid: PnP.Core.Model.SharePoint.IContentType.Fields*
+  name: Fields
+  href: api/PnP.Core.Model.SharePoint.IContentType.html#PnP_Core_Model_SharePoint_IContentType_Fields_
+  commentId: Overload:PnP.Core.Model.SharePoint.IContentType.Fields
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IContentType.Fields
+  nameWithType: IContentType.Fields
 - uid: PnP.Core.Model.SharePoint.IContentType.Group
   name: Group
   href: api/PnP.Core.Model.SharePoint.IContentType.html#PnP_Core_Model_SharePoint_IContentType_Group
