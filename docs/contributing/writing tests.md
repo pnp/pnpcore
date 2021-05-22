@@ -17,7 +17,10 @@ If you want to use and extend these unit tests then you'll need to do a simple o
 5. Ensure that you have the **PnP O365 Management Shell** multi-tenant app registered in Azure AD and Consented - this is used for the Graph and SharePoint tests. Quickest way to set this up, is to either:
     * Use PnP PowerShell to connect to a site using the '-PnPO365ManagementShell' parameter see reference: [https://docs.microsoft.com/en-us/powershell/module/sharepoint-pnp/connect-pnponline?view=sharepoint-ps](https://docs.microsoft.com/en-us/powershell/module/sharepoint-pnp/connect-pnponline?view=sharepoint-ps)
     * Refer to the User documentation article [Using the multi-tenant PnP Azure AD application](../using-the-sdk/configuring%20authentication.md)
-6. That should be it. Happy testing!
+6. If you want run the taxonomy tests live you need to configure your term store:
+    * Ensure your account is a term store administrator. Go to your SharePoint admin center (e.g. https://contoso-admin.sharepoint.com), under **Content services** select **Term store** and add your account as admin
+    * Ensure you've added Dutch as working language for your term store. Go to your SharePoint admin center (e.g. https://contoso-admin.sharepoint.com), under **Content services** select **Term store** and ensure Dutch is in the list of working languages
+7. That should be it. Happy testing!
 
 ## Running the existing tests in offline mode
 
