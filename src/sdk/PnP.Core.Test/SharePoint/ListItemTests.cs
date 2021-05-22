@@ -3034,7 +3034,7 @@ namespace PnP.Core.Test.SharePoint
         [TestMethod]
         public async Task LoadFileWithPropertiesFromListItemTest()
         {
-            TestCommon.Instance.Mocking = false;
+            //TestCommon.Instance.Mocking = false;
             (string parentLibraryName, _, string documentUrl) = await TestAssets.CreateTestDocumentAsync(0);
 
             try

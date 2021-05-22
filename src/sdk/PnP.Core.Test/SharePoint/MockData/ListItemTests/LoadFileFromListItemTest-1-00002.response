@@ -1,9 +1,9 @@
---batchresponse_b1d70e15-ef00-4d4b-b66b-f0a8cee310f0
+--batchresponse_7657daa7-b193-406e-a8a0-ae43cf251759
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{"d":{"__metadata":{"id":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/pnpcoresdktestgroup/Shared Documents/PNP_SDK_TEST_LoadFileFromListItemTest.docx')","uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/pnpcoresdktestgroup/Shared%20Documents/PNP_SDK_TEST_LoadFileFromListItemTest.docx')","type":"SP.File"},"ListItemAllFields":{"__metadata":{"id":"998a52c8-5958-404e-85b7-2a48c232aa44","uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/pnpcoresdktestgroup/Shared%20Documents/PNP_SDK_TEST_LoadFileFromListItemTest.docx')/ListItemAllFields","etag":"\"1\"","type":"SP.Data.Shared_x0020_DocumentsItem"},"Id":460,"ID":460},"UniqueId":"63a6e737-0b09-4ee0-b597-a0fcd0d76edb"}}
---batchresponse_b1d70e15-ef00-4d4b-b66b-f0a8cee310f0--
+{"d":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/prov-1/Shared Documents/PNP_SDK_TEST_LoadFileFromListItemTest.docx')","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/prov-1/Shared%20Documents/PNP_SDK_TEST_LoadFileFromListItemTest.docx')","type":"SP.File"},"ListItemAllFields":{"__metadata":{"id":"30ba3ce5-1733-47d3-aa5c-bc59e511dd28","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/prov-1/Shared%20Documents/PNP_SDK_TEST_LoadFileFromListItemTest.docx')/ListItemAllFields","etag":"\"1\"","type":"SP.Data.Shared_x0020_DocumentsItem"},"Id":3367,"ID":3367},"UniqueId":"58ccae38-58c6-4ffa-81d2-11099e137413"}}
+--batchresponse_7657daa7-b193-406e-a8a0-ae43cf251759--
