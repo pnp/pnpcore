@@ -10,6 +10,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
 ### Added
 
+- Added support for adding custom HTTP headers when executing a custom apirequest via ExecuteRequest #459 [czullu - Christian Zuellig]
 - Added support to load an IFile directly off of an IListItem #463 [DaleyKD - Kyle Daley]
 - Added missing properties to IListItem and GetDisplayName methods #452 [DaleyKD - Kyle Daley]
 - Added missing properties to IFile #445 [DaleyKD - Kyle Daley]

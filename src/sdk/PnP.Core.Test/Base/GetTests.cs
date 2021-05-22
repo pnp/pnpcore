@@ -10,6 +10,8 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using PnP.Core.QueryModel;
+using System.Collections.Generic;
+using System.Net.Http;
 
 namespace PnP.Core.Test.Base
 {
@@ -1111,6 +1113,27 @@ namespace PnP.Core.Test.Base
 
                 apiRequest = new ApiRequest(ApiRequestType.Graph, "/me");
                 response = context.Team.ExecuteRequest(apiRequest);
+
+                Assert.IsTrue(response.ApiRequest == apiRequest);
+                Assert.IsTrue(!string.IsNullOrEmpty(response.Response));
+                Assert.IsTrue(response.StatusCode == System.Net.HttpStatusCode.OK);
+            }
+        }
+
+        [TestMethod]
+        public async Task ExecuteGraphRequestWithCustomHeaders()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                Dictionary<string, string> extraHeaders = new()
+                {
+                    { "random", "random" },
+                    { "random2", "random2" }
+                };
+
+                var apiRequest = new ApiRequest(HttpMethod.Get, ApiRequestType.Graph, "me", null, extraHeaders);
+                var response = context.Team.ExecuteRequest(apiRequest);
 
                 Assert.IsTrue(response.ApiRequest == apiRequest);
                 Assert.IsTrue(!string.IsNullOrEmpty(response.Response));

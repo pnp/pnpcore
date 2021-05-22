@@ -16,8 +16,8 @@ namespace PnP.Core.Services
         /// <param name="type"><see cref="ApiRequestType"/> of the request</param>
         /// <param name="request">Actual API call to issue</param>
         /// <param name="body">Optional body of the request</param>
-        /// <param name="headers">Optional for the request</param>
-        public ApiRequest(HttpMethod httpMethod, ApiRequestType type, string request, string body, Dictionary<string,string>headers=null)
+        /// <param name="headers">Optional headers for the request</param>
+        public ApiRequest(HttpMethod httpMethod, ApiRequestType type, string request, string body, Dictionary<string, string> headers = null)
         {
             HttpMethod = httpMethod;
             Type = type;
@@ -56,7 +56,7 @@ namespace PnP.Core.Services
         public string Body { get; set; }
 
         /// <summary>
-        /// The optional headers of the API call to execute - for example IF-Match for PATCH Request
+        /// The optional headers of the API call to execute - for example IF-Match for PATCH Request. Currently only supported for Graph calls.
         /// </summary>
         public Dictionary<string, string> Headers { get; }
     }

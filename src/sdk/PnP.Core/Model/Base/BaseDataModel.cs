@@ -212,7 +212,7 @@ namespace PnP.Core.Model
                                                                     ExecuteRequestApiCall = true,
                                                                     SkipCollectionClearing = true,
                                                                     RawRequest = true, 
-                                                                    Headers= request.Headers
+                                                                    Headers = request.Headers
                                                                 }
                                                     , request.HttpMethod).ConfigureAwait(false);
 

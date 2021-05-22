@@ -766,15 +766,20 @@ namespace PnP.Core.Services
                         bodiesToReplace.Add(counter, request.ApiCall.JsonBody);
                         graphRequest.Body = $"@#|Body{counter}|#@";
                         graphRequest.Headers = new Dictionary<string, string>
-                    {
-                        { "Content-Type", "application/json" }
-                    };
+                            {
+                                { "Content-Type", "application/json" }
+                            };
                     };
 
-                    if(request.ApiCall.Headers!=null)
+                    if (request.ApiCall.Headers != null && request.ApiCall.Headers.Count > 0)
                     {
-                        foreach(var key in request.ApiCall.Headers.Keys)
+                        if (graphRequest.Headers == null)
                         {
+                            graphRequest.Headers = new Dictionary<string, string>();
+                        }
+
+                        foreach (var key in request.ApiCall.Headers.Keys)
+                        {                            
                             string existingKey = graphRequest.Headers.Keys.FirstOrDefault(k => k.Equals(key, StringComparison.InvariantCultureIgnoreCase));
                             if (string.IsNullOrWhiteSpace(existingKey))
                             {
