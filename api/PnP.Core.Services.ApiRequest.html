@@ -80,7 +80,7 @@
           <div class="col-md-10">
             <article class="content wrap" id="_content" data-uid="PnP.Core.Services.ApiRequest">
                   <div class="contribution-panel mobile-hide pull-right">
-                      <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/ApiRequest.cs/#L8" title="View Source" class="view-source-lg"><i class="fa fa-code"></i></a>
+                      <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/ApiRequest.cs/#L9" title="View Source" class="view-source-lg"><i class="fa fa-code"></i></a>
                       <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Services_ApiRequest.md&amp;value=---%0Auid%3A%20PnP.Core.Services.ApiRequest%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc" class="improve-doc-lg"><i class="glyphicon glyphicon-pencil"></i></a>
                   </div>
                       <h1 id="PnP_Core_Services_ApiRequest" data-uid="PnP.Core.Services.ApiRequest">Class ApiRequest
@@ -114,24 +114,24 @@
   
   <span class="small pull-right mobile-hide">
     <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Services_ApiRequest__ctor_HttpMethod_PnP_Core_Services_ApiRequestType_System_String_System_String_.md&amp;value=---%0Auid%3A%20PnP.Core.Services.ApiRequest.%23ctor(HttpMethod%2CPnP.Core.Services.ApiRequestType%2CSystem.String%2CSystem.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Services_ApiRequest__ctor_HttpMethod_PnP_Core_Services_ApiRequestType_System_String_System_String_Dictionary_System_String_System_String__.md&amp;value=---%0Auid%3A%20PnP.Core.Services.ApiRequest.%23ctor(HttpMethod%2CPnP.Core.Services.ApiRequestType%2CSystem.String%2CSystem.String%2CDictionary%7BSystem.String%2CSystem.String%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/ApiRequest.cs/#L18" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/ApiRequest.cs/#L20" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Services_ApiRequest__ctor_" data-uid="PnP.Core.Services.ApiRequest.#ctor*"></a>
   
-  <h4 id="PnP_Core_Services_ApiRequest__ctor_HttpMethod_PnP_Core_Services_ApiRequestType_System_String_System_String_" data-uid="PnP.Core.Services.ApiRequest.#ctor(HttpMethod,PnP.Core.Services.ApiRequestType,System.String,System.String)"><a href="#collapsible-PnP_Core_Services_ApiRequest__ctor_HttpMethod_PnP_Core_Services_ApiRequestType_System_String_System_String_" class="expander" data-toggle="collapse">ApiRequest(HttpMethod, ApiRequestType, String, String)</a></h4>
+  <h4 id="PnP_Core_Services_ApiRequest__ctor_HttpMethod_PnP_Core_Services_ApiRequestType_System_String_System_String_Dictionary_System_String_System_String__" data-uid="PnP.Core.Services.ApiRequest.#ctor(HttpMethod,PnP.Core.Services.ApiRequestType,System.String,System.String,Dictionary{System.String,System.String})"><a href="#collapsible-PnP_Core_Services_ApiRequest__ctor_HttpMethod_PnP_Core_Services_ApiRequestType_System_String_System_String_Dictionary_System_String_System_String__" class="expander" data-toggle="collapse">ApiRequest(HttpMethod, ApiRequestType, String, String, Dictionary&lt;String, String&gt;)</a></h4>
   
-  <div id="collapsible-PnP_Core_Services_ApiRequest__ctor_HttpMethod_PnP_Core_Services_ApiRequestType_System_String_System_String_" class="collapse in">
+  <div id="collapsible-PnP_Core_Services_ApiRequest__ctor_HttpMethod_PnP_Core_Services_ApiRequestType_System_String_System_String_Dictionary_System_String_System_String__" class="collapse in">
   <div class="markdown level1 summary"><p>Creates an API request to execute</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public ApiRequest(HttpMethod httpMethod, ApiRequestType type, string request, string body)</code></pre>
+    <pre><code class="lang-csharp hljs">public ApiRequest(HttpMethod httpMethod, ApiRequestType type, string request, string body, Dictionary&lt;string, string&gt; headers = null)</code></pre>
   </div>
 
   <h5 class="parameters">Parameters</h5>
@@ -168,6 +168,14 @@
 </p>
       </td>
     </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><span class="xref">Dictionary</span>&lt;<a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a>, <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a>&gt;</span>
+        <span class="parametername">headers</span>
+        <p><p>Optional headers for the request</p>
+</p>
+      </td>
+    </tr>
   </table>
   
   
@@ -187,7 +195,7 @@
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Services_ApiRequest__ctor_PnP_Core_Services_ApiRequestType_System_String_.md&amp;value=---%0Auid%3A%20PnP.Core.Services.ApiRequest.%23ctor(PnP.Core.Services.ApiRequestType%2CSystem.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/ApiRequest.cs/#L31" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/ApiRequest.cs/#L34" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Services_ApiRequest__ctor_" data-uid="PnP.Core.Services.ApiRequest.#ctor*"></a>
@@ -243,7 +251,7 @@
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Services_ApiRequest_Body.md&amp;value=---%0Auid%3A%20PnP.Core.Services.ApiRequest.Body%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/ApiRequest.cs/#L53" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/ApiRequest.cs/#L56" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Services_ApiRequest_Body_" data-uid="PnP.Core.Services.ApiRequest.Body*"></a>
@@ -284,10 +292,54 @@
   
   <span class="small pull-right mobile-hide">
     <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Services_ApiRequest_Headers.md&amp;value=---%0Auid%3A%20PnP.Core.Services.ApiRequest.Headers%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/ApiRequest.cs/#L61" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Services_ApiRequest_Headers_" data-uid="PnP.Core.Services.ApiRequest.Headers*"></a>
+  
+  <h4 id="PnP_Core_Services_ApiRequest_Headers" data-uid="PnP.Core.Services.ApiRequest.Headers"><a href="#collapsible-PnP_Core_Services_ApiRequest_Headers" class="expander" data-toggle="collapse">Headers</a></h4>
+  
+  <div id="collapsible-PnP_Core_Services_ApiRequest_Headers" class="collapse in">
+  <div class="markdown level1 summary"><p>The optional headers of the API call to execute - for example IF-Match for PATCH Request. Currently only supported for Graph calls.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Dictionary&lt;string, string&gt; Headers { get; }</code></pre>
+  </div>
+
+  
+  
+  
+  
+  <h5 class="propertyValue">Property Value</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="xref">Dictionary</span>&lt;<a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a>, <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a>&gt;
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Services_ApiRequest_HttpMethod.md&amp;value=---%0Auid%3A%20PnP.Core.Services.ApiRequest.HttpMethod%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/ApiRequest.cs/#L38" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/ApiRequest.cs/#L41" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Services_ApiRequest_HttpMethod_" data-uid="PnP.Core.Services.ApiRequest.HttpMethod*"></a>
@@ -331,7 +383,7 @@
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Services_ApiRequest_Request.md&amp;value=---%0Auid%3A%20PnP.Core.Services.ApiRequest.Request%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/ApiRequest.cs/#L43" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/ApiRequest.cs/#L46" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Services_ApiRequest_Request_" data-uid="PnP.Core.Services.ApiRequest.Request*"></a>
@@ -375,7 +427,7 @@
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Services_ApiRequest_Type.md&amp;value=---%0Auid%3A%20PnP.Core.Services.ApiRequest.Type%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/ApiRequest.cs/#L48" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/ApiRequest.cs/#L51" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Services_ApiRequest_Type_" data-uid="PnP.Core.Services.ApiRequest.Type*"></a>

@@ -30551,12 +30551,15 @@ references:
   commentId: T:PnP.Core.Services.ApiRequest
   fullName: PnP.Core.Services.ApiRequest
   nameWithType: ApiRequest
-- uid: PnP.Core.Services.ApiRequest.#ctor(HttpMethod,PnP.Core.Services.ApiRequestType,System.String,System.String)
-  name: ApiRequest(HttpMethod, ApiRequestType, String, String)
-  href: api/PnP.Core.Services.ApiRequest.html#PnP_Core_Services_ApiRequest__ctor_HttpMethod_PnP_Core_Services_ApiRequestType_System_String_System_String_
-  commentId: M:PnP.Core.Services.ApiRequest.#ctor(HttpMethod,PnP.Core.Services.ApiRequestType,System.String,System.String)
-  fullName: PnP.Core.Services.ApiRequest.ApiRequest(HttpMethod, PnP.Core.Services.ApiRequestType, System.String, System.String)
-  nameWithType: ApiRequest.ApiRequest(HttpMethod, ApiRequestType, String, String)
+- uid: PnP.Core.Services.ApiRequest.#ctor(HttpMethod,PnP.Core.Services.ApiRequestType,System.String,System.String,Dictionary{System.String,System.String})
+  name: ApiRequest(HttpMethod, ApiRequestType, String, String, Dictionary<String, String>)
+  href: api/PnP.Core.Services.ApiRequest.html#PnP_Core_Services_ApiRequest__ctor_HttpMethod_PnP_Core_Services_ApiRequestType_System_String_System_String_Dictionary_System_String_System_String__
+  commentId: M:PnP.Core.Services.ApiRequest.#ctor(HttpMethod,PnP.Core.Services.ApiRequestType,System.String,System.String,Dictionary{System.String,System.String})
+  name.vb: ApiRequest(HttpMethod, ApiRequestType, String, String, Dictionary(Of String, String))
+  fullName: PnP.Core.Services.ApiRequest.ApiRequest(HttpMethod, PnP.Core.Services.ApiRequestType, System.String, System.String, Dictionary<System.String, System.String>)
+  fullName.vb: PnP.Core.Services.ApiRequest.ApiRequest(HttpMethod, PnP.Core.Services.ApiRequestType, System.String, System.String, Dictionary(Of System.String, System.String))
+  nameWithType: ApiRequest.ApiRequest(HttpMethod, ApiRequestType, String, String, Dictionary<String, String>)
+  nameWithType.vb: ApiRequest.ApiRequest(HttpMethod, ApiRequestType, String, String, Dictionary(Of String, String))
 - uid: PnP.Core.Services.ApiRequest.#ctor(PnP.Core.Services.ApiRequestType,System.String)
   name: ApiRequest(ApiRequestType, String)
   href: api/PnP.Core.Services.ApiRequest.html#PnP_Core_Services_ApiRequest__ctor_PnP_Core_Services_ApiRequestType_System_String_
@@ -30583,6 +30586,19 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Services.ApiRequest.Body
   nameWithType: ApiRequest.Body
+- uid: PnP.Core.Services.ApiRequest.Headers
+  name: Headers
+  href: api/PnP.Core.Services.ApiRequest.html#PnP_Core_Services_ApiRequest_Headers
+  commentId: P:PnP.Core.Services.ApiRequest.Headers
+  fullName: PnP.Core.Services.ApiRequest.Headers
+  nameWithType: ApiRequest.Headers
+- uid: PnP.Core.Services.ApiRequest.Headers*
+  name: Headers
+  href: api/PnP.Core.Services.ApiRequest.html#PnP_Core_Services_ApiRequest_Headers_
+  commentId: Overload:PnP.Core.Services.ApiRequest.Headers
+  isSpec: "True"
+  fullName: PnP.Core.Services.ApiRequest.Headers
+  nameWithType: ApiRequest.Headers
 - uid: PnP.Core.Services.ApiRequest.HttpMethod
   name: HttpMethod
   href: api/PnP.Core.Services.ApiRequest.html#PnP_Core_Services_ApiRequest_HttpMethod
