@@ -134,11 +134,14 @@ namespace PnP.Core.Model.SharePoint
                 }
                 else
                 {
+                    var chunkBuffer = new byte[bytesRead];
+                    Array.Copy(buffer, chunkBuffer, chunkBuffer.Length);
+
                     var endpointUrl = $"_api/web/getFileById('{{Id}}')/continueupload(uploadId=guid'{uploadId}',fileOffset={offset})";
                     var api = new ApiCall(endpointUrl, ApiType.SPORest)
                     {
                         Interactive = true,
-                        BinaryBody = buffer
+                        BinaryBody = chunkBuffer
                     };
                     await newFile.RequestAsync(api, HttpMethod.Post).ConfigureAwait(false);
                 }
