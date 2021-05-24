@@ -98,6 +98,9 @@ namespace PnP.Core.Model.SharePoint
             int bytesRead;
             while ((bytesRead = content.Read(buffer, 0, buffer.Length)) > 0)
             {
+                var chunk = new byte[bytesRead];
+                Array.Copy(buffer, chunk, chunk.Length);
+
                 if (firstChunk)
                 {
                     // Add empty file
@@ -113,7 +116,7 @@ namespace PnP.Core.Model.SharePoint
                     api = new ApiCall(endpointUrl, ApiType.SPORest)
                     {
                         Interactive = true,
-                        BinaryBody = buffer
+                        BinaryBody = chunk
                     };
                     await newFile.RequestAsync(api, HttpMethod.Post).ConfigureAwait(false);
                     firstChunk = false;
@@ -121,27 +124,21 @@ namespace PnP.Core.Model.SharePoint
                 else if (content.Position == content.Length)
                 {
                     // Finalize upload
-                    var finalBuffer = new byte[bytesRead];
-                    Array.Copy(buffer, finalBuffer, finalBuffer.Length);
-
                     var endpointUrl = $"_api/web/getFileById('{{Id}}')/finishupload(uploadId=guid'{uploadId}',fileOffset={offset})";
                     var api = new ApiCall(endpointUrl, ApiType.SPORest)
                     {
                         Interactive = true,
-                        BinaryBody = finalBuffer
+                        BinaryBody = chunk
                     };
                     await newFile.RequestAsync(api, HttpMethod.Post).ConfigureAwait(false);
                 }
                 else
                 {
-                    var chunkBuffer = new byte[bytesRead];
-                    Array.Copy(buffer, chunkBuffer, chunkBuffer.Length);
-
                     var endpointUrl = $"_api/web/getFileById('{{Id}}')/continueupload(uploadId=guid'{uploadId}',fileOffset={offset})";
                     var api = new ApiCall(endpointUrl, ApiType.SPORest)
                     {
                         Interactive = true,
-                        BinaryBody = chunkBuffer
+                        BinaryBody = chunk
                     };
                     await newFile.RequestAsync(api, HttpMethod.Post).ConfigureAwait(false);
                 }
