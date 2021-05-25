@@ -22,7 +22,7 @@ namespace PnP.Core.Services
     public class PnPContextFactory : IPnPContextFactory
     {
         private static readonly Expression<Func<IWeb, object>>[] defaultWebProps = { w => w.Id, w => w.Url,
-                                                                                     w => w.RegionalSettings.QueryProperties(r => r.TimeZone, r => r.AllProperties) };
+                                                                                     w => w.RegionalSettings.QueryProperties(r => r.TimeZone, r => r.All) };
         private static readonly Expression<Func<ISite, object>>[] defaultSiteProps = { s => s.Id, s => s.GroupId };
 
 #if NET5_0

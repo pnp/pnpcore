@@ -117,7 +117,7 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// Gets all properties of this entity
         /// </summary>
-        public object AllProperties { get; }
+        public object All { get; }
 
         /// <summary>
         /// Gets the time zone that is used.

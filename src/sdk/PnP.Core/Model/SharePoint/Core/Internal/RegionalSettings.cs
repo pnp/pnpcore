@@ -62,7 +62,7 @@ namespace PnP.Core.Model.SharePoint
         public string TimeSeparator { get => GetValue<string>(); set => SetValue(value); }
 
         [SharePointProperty("*")]
-        public object AllProperties { get => null; }
+        public object All { get => null; }
 
         public ITimeZone TimeZone { get => GetModelValue<ITimeZone>(); }
 

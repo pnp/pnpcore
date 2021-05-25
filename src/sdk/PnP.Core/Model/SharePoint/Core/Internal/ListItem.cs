@@ -226,7 +226,7 @@ namespace PnP.Core.Model.SharePoint
         public IRoleAssignmentCollection RoleAssignments { get => GetModelCollectionValue<IRoleAssignmentCollection>(); }
 
         [SharePointProperty("*")]
-        public object AllProperties { get => null; }
+        public object All { get => null; }
 
         #endregion
 

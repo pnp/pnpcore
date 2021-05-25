@@ -326,7 +326,7 @@ namespace PnP.Core.Test.Base
         public async Task ComplexPropertyRequest()
         {
             Expression<Func<IWeb, object>>[] defaultWebProps = {w => w.Id, w => w.Url,
-                                                                w => w.RegionalSettings.QueryProperties(r => r.TimeZone, r => r.AllProperties) };
+                                                                w => w.RegionalSettings.QueryProperties(r => r.TimeZone, r => r.All) };
 
             Expression<Func<IWeb, object>>[] extraWebProps =  {w => w.CustomMasterUrl,
                                                                w => w.Fields, w => w.Features,
