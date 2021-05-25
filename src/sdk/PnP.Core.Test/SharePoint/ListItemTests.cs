@@ -2843,7 +2843,7 @@ namespace PnP.Core.Test.SharePoint
                     var list2 = await context2.Web.Lists.GetByTitleAsync(listTitle);
                     Expression<Func<IListItem, object>>[] selectors =
                     {
-                            li => li.AllColumns,
+                            li => li.AllProperties,
                             li => li.CommentsDisabled,
                             li => li.CommentsDisabledScope,
                             li => li.ContentType.QueryProperties(ct => ct.Name, ct => ct.Sealed),

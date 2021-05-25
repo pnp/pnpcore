@@ -13,89 +13,101 @@ namespace PnP.Core.Services
         /// </summary>
         /// <param name="url">The URL of the PnPContext as a URI</param>
         /// <param name="authenticationProvider">The Authentication Provider to use to authenticate within the PnPContext</param>
+        /// <param name="options">Options used to configure the created context</param>
         /// <returns>A PnPContext object based on the provided configuration name</returns>
-        public PnPContext Create(Uri url, IAuthenticationProvider authenticationProvider);
+        public PnPContext Create(Uri url, IAuthenticationProvider authenticationProvider, PnPContextOptions options = null);
 
         /// <summary>
         /// Creates a new instance of PnPContext based on a provided URL and Authentication Provider instance
         /// </summary>
         /// <param name="url">The URL of the PnPContext as a URI</param>
         /// <param name="authenticationProvider">The Authentication Provider to use to authenticate within the PnPContext</param>
+        /// <param name="options">Options used to configure the created context</param>
         /// <returns>A PnPContext object based on the provided configuration name</returns>
-        public Task<PnPContext> CreateAsync(Uri url, IAuthenticationProvider authenticationProvider);
+        public Task<PnPContext> CreateAsync(Uri url, IAuthenticationProvider authenticationProvider, PnPContextOptions options = null);
 
         /// <summary>
         /// Creates a new instance of PnPContext based on a provided URL and using the default Authentication Provider
         /// </summary>
         /// <param name="url">The URL of the PnPContext as a URI</param>
+        /// <param name="options">Options used to configure the created context</param>
         /// <returns>A PnPContext object based on the provided configuration name</returns>
-        public PnPContext Create(Uri url);
+        public PnPContext Create(Uri url, PnPContextOptions options = null);
 
         /// <summary>
         /// Creates a new instance of PnPContext based on a provided URL and using the default Authentication Provider
         /// </summary>
         /// <param name="url">The URL of the PnPContext as a URI</param>
+        /// <param name="options">Options used to configure the created context</param>
         /// <returns>A PnPContext object based on the provided configuration name</returns>
-        public Task<PnPContext> CreateAsync(Uri url);
+        public Task<PnPContext> CreateAsync(Uri url, PnPContextOptions options = null);
 
         /// <summary>
         /// Creates a new instance of PnPContext based on a provided group and Authentication Provider instance
         /// </summary>
         /// <param name="groupId">The id of an Microsoft 365 group</param>
         /// <param name="authenticationProvider">The Authentication Provider to use to authenticate within the PnPContext</param>
+        /// <param name="options">Options used to configure the created context</param>
         /// <returns>A PnPContext object based on the provided configuration name</returns>
-        public PnPContext Create(Guid groupId, IAuthenticationProvider authenticationProvider);
+        public PnPContext Create(Guid groupId, IAuthenticationProvider authenticationProvider, PnPContextOptions options = null);
 
         /// <summary>
         /// Creates a new instance of PnPContext based on a provided group and Authentication Provider instance
         /// </summary>
         /// <param name="groupId">The id of an Microsoft 365 group</param>
         /// <param name="authenticationProvider">The Authentication Provider to use to authenticate within the PnPContext</param>
+        /// <param name="options">Options used to configure the created context</param>
         /// <returns>A PnPContext object based on the provided configuration name</returns>
-        public Task<PnPContext> CreateAsync(Guid groupId, IAuthenticationProvider authenticationProvider);
+        public Task<PnPContext> CreateAsync(Guid groupId, IAuthenticationProvider authenticationProvider, PnPContextOptions options = null);
 
         /// <summary>
         /// Creates a new instance of PnPContext based on a provided group and using the default Authentication Provider
         /// </summary>
         /// <param name="groupId">The id of an Microsoft 365 group</param>
+        /// <param name="options">Options used to configure the created context</param>
         /// <returns>A PnPContext object based on the provided configuration name</returns>
-        public PnPContext Create(Guid groupId);
+        public PnPContext Create(Guid groupId, PnPContextOptions options = null);
 
         /// <summary>
         /// Creates a new instance of PnPContext based on a provided group and using the default Authentication Provider
         /// </summary>
         /// <param name="groupId">The id of an Microsoft 365 group</param>
+        /// <param name="options">Options used to configure the created context</param>
         /// <returns>A PnPContext object based on the provided configuration name</returns>
-        public Task<PnPContext> CreateAsync(Guid groupId);
+        public Task<PnPContext> CreateAsync(Guid groupId, PnPContextOptions options = null);
 
         /// <summary>
         /// Creates a new instance of PnPContext based on a provided configuration name and on a custom initialization function for the IAuthenticationProvider reference instance
         /// </summary>
         /// <param name="name">The name of the configuration to use</param>
         /// <param name="initializeAuthenticationProvider">The function to initialize the context</param>
+        /// <param name="options">Options used to configure the created context</param>
         /// <returns>A PnPContext object based on the provided configuration name</returns>
-        public PnPContext Create(string name, Action<IAuthenticationProvider> initializeAuthenticationProvider);
+        public PnPContext Create(string name, Action<IAuthenticationProvider> initializeAuthenticationProvider, PnPContextOptions options = null);
 
         /// <summary>
         /// Creates a new instance of PnPContext based on a provided configuration name and on a custom initialization function for the IAuthenticationProvider reference instance
         /// </summary>
         /// <param name="name">The name of the configuration to use</param>
         /// <param name="initializeAuthenticationProvider">The function to initialize the context</param>
+        /// <param name="options">Options used to configure the created context</param>
         /// <returns>A PnPContext object based on the provided configuration name</returns>
-        public Task<PnPContext> CreateAsync(string name, Action<IAuthenticationProvider> initializeAuthenticationProvider);
+        public Task<PnPContext> CreateAsync(string name, Action<IAuthenticationProvider> initializeAuthenticationProvider, PnPContextOptions options = null);
 
         /// <summary>
         /// Creates a new instance of PnPContext based on a provided configuration name
         /// </summary>
         /// <param name="name">The name of the configuration to use</param>
+        /// <param name="options">Options used to configure the created context</param>
         /// <returns>A PnPContext object based on the provided configuration name</returns>
-        public PnPContext Create(string name);
+        public PnPContext Create(string name, PnPContextOptions options = null);
 
         /// <summary>
         /// Creates a new instance of PnPContext based on a provided configuration name
         /// </summary>
         /// <param name="name">The name of the configuration to use</param>
+        /// <param name="options">Options used to configure the created context</param>
         /// <returns>A PnPContext object based on the provided configuration name</returns>
-        public Task<PnPContext> CreateAsync(string name);
+        public Task<PnPContext> CreateAsync(string name, PnPContextOptions options = null);
     }
 }
