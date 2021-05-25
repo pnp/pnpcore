@@ -1,0 +1,181 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html lang="en">
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Advanced PnPContext use | PnP Core SDK </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Advanced PnPContext use | PnP Core SDK ">
+    <meta name="generator" content="docfx 2.56.5.0">
+    <meta name="description" content="The PnP Core SDK is an SDK designed to work against Microsoft 365. Its aim is to provide a unified object model to work with the whole Microsoft 365 ecosystem. ">
+    <link rel="shortcut icon" href="https://c.s-microsoft.com/favicon.ico?v2">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    <meta property="docfx:newtab" content="true">
+  </head>  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../images/logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <label class="glyphicon glyphicon-search" for="search-query"></label>
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first="First" data-prev="Previous" data-next="Next" data-last="Last"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+                  <div class="contribution-panel mobile-hide pull-right">
+                      <a href="https://github.com/pnp/pnpcore/blob/dev/docs/using-the-sdk/basics-context.md/#L1" title="Improve this Doc" class="improve-doc-lg"><i class="glyphicon glyphicon-pencil"></i></a>
+                  </div>
+                    <h1 id="advanced-pnpcontext-use">Advanced PnPContext use</h1>
+
+<p>Requesting a <code>PnPContext</code> is something each application does, using the <code>PnPContextFactory</code> as explained in the <a href="readme.html">overview article</a>. Whereas the overview article describes how to get a <code>PnPContext</code> there are additional possibilities when requesting and working with a <code>PnPContext</code>.</p>
+<h2 id="loading-additional-iweb-and-isite-properties-when-creating-a-pnpcontext">Loading additional IWeb and ISite properties when creating a PnPContext</h2>
+<p>When a <code>PnPContext</code> is created two calls are issued to SharePoint Online. In a first call the <code>IWeb</code> is loaded with following properties: <code>Id</code>, <code>Url</code> and <code>RegionalSettings</code>. In the second call <code>ISite</code> is loaded with the <code>Id</code> and <code>GroupId</code> properties. If your application needs additional <code>IWeb</code> or <code>ISite</code> properties you can optimize the number of server roundtrips by adding the extra needed properties to the already planned requests for loading <code>IWeb</code> and <code>ISite</code>. To do this you can provide a <code>PnPContextOptions</code> object specifying the additional <code>IWeb</code> and <code>ISite</code> properties to load.</p>
+<pre><code class="lang-csharp">using (var context = await pnpContextFactory.CreateAsync(&quot;SiteToWorkWith&quot;, new PnPContextOptions()
+            {
+                AdditionalSitePropertiesOnCreate = new Expression&lt;Func&lt;ISite, object&gt;&gt;[] { s =&gt; s.Url, s =&gt; s.HubSiteId },
+                AdditionalWebPropertiesOnCreate = new Expression&lt;Func&lt;IWeb, object&gt;&gt;[] { w =&gt; w.ServerRelativeUrl }
+            }))
+{
+    // the created context has besides the default properties also the Url and HubSiteId ISite properties loaded + 
+    // the ServerRelativeUrl IWeb property.
+}
+</code></pre>
+<p>While above sample just loaded some basic <code>IWeb</code> and <code>ISite</code> properties you can also do more complex LINQ expressions. Below sa</p>
+<pre><code class="lang-csharp">using (var context = await pnpContextFactory.CreateAsync(&quot;SiteToWorkWith&quot;, new PnPContextOptions()
+        {
+            AdditionalSitePropertiesOnCreate = new Expression&lt;Func&lt;ISite, object&gt;&gt;[] { s =&gt; s.Url, s =&gt; s.HubSiteId,
+                                                                                        s =&gt; s.Features },
+            AdditionalWebPropertiesOnCreate = new Expression&lt;Func&lt;IWeb, object&gt;&gt;[] { w =&gt; w.ServerRelativeUrl,
+                                                                                        w =&gt; w.Fields, w =&gt; w.Features,
+                                                                                        w =&gt; w.Lists.QueryProperties(r =&gt; r.Title,
+                                                                                        r =&gt; r.RootFolder.QueryProperties(p=&gt;p.ServerRelativeUrl)) }
+        }))
+{
+    // the created context has besides the default properties also the Url, HubSiteId and Features ISite properties loaded + 
+    // the ServerRelativeUrl, Fields, Features, Lists with RootFolder IWeb properties.
+}
+</code></pre>
+<p>Any expression that you'd normally would write to retrieve data can also be specified to be included in the default context creation.</p>
+<h2 id="cloning-a-pnpcontext">Cloning a PnPContext</h2>
+<p>Once you've created a <code>PnPContext</code> you might want to clone it for the same site or for a new web.</p>
+<h3 id="cloning-a-pnpcontext-for-a-new-web">Cloning a PnPContext for a new web</h3>
+<p>When you clone contexts for a new web the context settings (e.g. <code>GraphFirst</code>) are copied over. If you've specified additional properties to load on context creation these properties will also be loaded for the cloned context. So the cloned context will be exactly configured like the original site, but then for the other web url.</p>
+<pre><code class="lang-csharp">using (var context = await pnpContextFactory.CreateAsync(&quot;SiteToWorkWith&quot;))
+{
+    // Clone this context using a configuration
+    using (var contextClone = await context.CloneAsync(&quot;OtherSite&quot;))
+    {
+        // Use the cloned context
+    }
+
+    // Clone this context using a URL
+    using (var contextClone = await context.CloneAsync(new Uri(&quot;https://contoso.sharepoint.com/sites/anothersite&quot;)))
+    {
+        // Use the cloned context
+    }
+}
+</code></pre>
+<h3 id="cloning-a-pnpcontext-for-the-same-web">Cloning a PnPContext for the same web</h3>
+<p>Sometimes you want to use a new <code>PnPContext</code> for the same web. You can obviously create a new <code>PnPContext</code> via the context factory, but then you do get the initialization cost again. When you clone a <code>PnPContext</code> the initialization data will be copied across contexts, just like the settings, so you'll get a functioning <code>PnPContext</code> without calling back into SharePoint Online. If you've specified additional properties to load on context creation then only the extra properties which are basic (so no model classes) are copied into the cloned context.</p>
+<pre><code class="lang-csharp">using (var context = await pnpContextFactory.CreateAsync(&quot;SiteToWorkWith&quot; , new PnPContextOptions()
+        {
+            AdditionalSitePropertiesOnCreate = new Expression&lt;Func&lt;ISite, object&gt;&gt;[] { s =&gt; s.Url, s =&gt; s.HubSiteId,
+                                                                                        s =&gt; s.Features },
+            AdditionalWebPropertiesOnCreate = new Expression&lt;Func&lt;IWeb, object&gt;&gt;[] { w =&gt; w.ServerRelativeUrl,
+                                                                                        w =&gt; w.Fields, w =&gt; w.Features,
+                                                                                        w =&gt; w.Lists.QueryProperties(r =&gt; r.Title,
+                                                                                        r =&gt; r.RootFolder.QueryProperties(p=&gt;p.ServerRelativeUrl))))
+{
+    // Clone this context using a configuration
+    using (var contextClone = await context.CloneAsync(&quot;SiteToWorkWith&quot;))
+    {
+        // Use the cloned context. Without going to the server the default IWeb and ISite properties are loaded
+        // + the ISite Url and HubSiteId properties
+        // + the IWeb ServerRelativeUrl property
+        // Other extra initialization properties are model classes and are not copied over
+    }
+}
+</code></pre>
+</article>
+          </div>
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              </nav>
+            </div>
+          </div>        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            <span>PnP Core SDK<br>Generated by <strong><a href='https://dotnet.github.io/docfx' alt='Doc FX Website'>DocFX</a></strong> with <strong><a href='https://ovasquez.github.io/docfx-material' alt='DocFx Material Theme'>Material UI</a></strong></span>
+            
+            <img src="https://telemetry.sharepointpnp.com/@pnp.github.io/index/" alt="spacer">
+          </div>
+        </div>
+      </footer>    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>  </body>
+</html>

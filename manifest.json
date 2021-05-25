@@ -4731,6 +4731,18 @@
     },
     {
       "type": "Conceptual",
+      "source_relative_path": "using-the-sdk/basics-context.md",
+      "output": {
+        ".html": {
+          "relative_path": "using-the-sdk/basics-context.html",
+          "hash": "eAGavCZ4rcjz7m0qpG/ZeQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
       "source_relative_path": "using-the-sdk/basics-customapirequests.md",
       "output": {
         ".html": {
@@ -4771,7 +4783,7 @@
       "output": {
         ".html": {
           "relative_path": "using-the-sdk/basics-getdata.html",
-          "hash": "8aLmrq57Dy/lvPg1g+QB5Q=="
+          "hash": "lOhFSVamZ5cYaBU3xn5coQ=="
         }
       },
       "is_incremental": false,
@@ -5155,7 +5167,7 @@
       "output": {
         ".html": {
           "relative_path": "using-the-sdk/toc.html",
-          "hash": "RRQ35L+c4RWsIKZ4yLd4Cg=="
+          "hash": "4xPmoNaKTG3lNkW2Xuow1Q=="
         }
       },
       "is_incremental": false,
@@ -5200,7 +5212,7 @@
         "ConceptualDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build",
-          "total_file_count": 62,
+          "total_file_count": 63,
           "skipped_file_count": 0
         },
         "ManagedReferenceDocumentProcessor": {
