@@ -29,7 +29,7 @@ These methods allow you to perform a default load or a controlled load in which 
 > [!Note]
 >
 > - When loading data the SDK will automatically load the primary key property of a model, even if you've not requested that when doing a controlled load.
-> - When you create a `PnPContext` the SDK already loads the relevant [IWeb](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IWeb.html) and [ISite](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.ISite.html) properties of the `PnPContext`. When loading these [IWeb](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IWeb.html) and [ISite](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.ISite.html) properties, a controlled load is done to only retrieve what's needed to support the internal workings of the SDK.
+> - When you create a `PnPContext` the SDK already loads the relevant [IWeb](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IWeb.html) and [ISite](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.ISite.html) properties of the `PnPContext`. When loading these [IWeb](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IWeb.html) and [ISite](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.ISite.html) properties, a controlled load is done to only retrieve what's needed to support the internal workings of the SDK. See also [Advanced PnPContext use](basics-context.md) to learn more about how to use your `PnPContext`.
 
 Below sample shows some of the above discussed data loads.
 
