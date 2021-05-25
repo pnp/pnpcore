@@ -1938,7 +1938,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.IListItem.html",
-          "hash": "7eVPOt5uoGr1iMAesWaDGQ=="
+          "hash": "CyVSW/+RbLXTBDgj5pDayw=="
         }
       },
       "is_incremental": false,
@@ -2082,7 +2082,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.IRegionalSettings.html",
-          "hash": "rPMUtmJVC5ulOg4e14+17g=="
+          "hash": "ECMdDDp9b/5kPPCA508p0A=="
         }
       },
       "is_incremental": false,

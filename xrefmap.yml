@@ -15113,19 +15113,19 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IListItem.AddRoleDefinitionsAsync
   nameWithType: IListItem.AddRoleDefinitionsAsync
-- uid: PnP.Core.Model.SharePoint.IListItem.AllProperties
-  name: AllProperties
-  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_AllProperties
-  commentId: P:PnP.Core.Model.SharePoint.IListItem.AllProperties
-  fullName: PnP.Core.Model.SharePoint.IListItem.AllProperties
-  nameWithType: IListItem.AllProperties
-- uid: PnP.Core.Model.SharePoint.IListItem.AllProperties*
-  name: AllProperties
-  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_AllProperties_
-  commentId: Overload:PnP.Core.Model.SharePoint.IListItem.AllProperties
+- uid: PnP.Core.Model.SharePoint.IListItem.All
+  name: All
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_All
+  commentId: P:PnP.Core.Model.SharePoint.IListItem.All
+  fullName: PnP.Core.Model.SharePoint.IListItem.All
+  nameWithType: IListItem.All
+- uid: PnP.Core.Model.SharePoint.IListItem.All*
+  name: All
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_All_
+  commentId: Overload:PnP.Core.Model.SharePoint.IListItem.All
   isSpec: "True"
-  fullName: PnP.Core.Model.SharePoint.IListItem.AllProperties
-  nameWithType: IListItem.AllProperties
+  fullName: PnP.Core.Model.SharePoint.IListItem.All
+  nameWithType: IListItem.All
 - uid: PnP.Core.Model.SharePoint.IListItem.AreCommentsDisabled
   name: AreCommentsDisabled()
   href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_AreCommentsDisabled
@@ -18521,19 +18521,19 @@ references:
   commentId: T:PnP.Core.Model.SharePoint.IRegionalSettings
   fullName: PnP.Core.Model.SharePoint.IRegionalSettings
   nameWithType: IRegionalSettings
-- uid: PnP.Core.Model.SharePoint.IRegionalSettings.AllProperties
-  name: AllProperties
-  href: api/PnP.Core.Model.SharePoint.IRegionalSettings.html#PnP_Core_Model_SharePoint_IRegionalSettings_AllProperties
-  commentId: P:PnP.Core.Model.SharePoint.IRegionalSettings.AllProperties
-  fullName: PnP.Core.Model.SharePoint.IRegionalSettings.AllProperties
-  nameWithType: IRegionalSettings.AllProperties
-- uid: PnP.Core.Model.SharePoint.IRegionalSettings.AllProperties*
-  name: AllProperties
-  href: api/PnP.Core.Model.SharePoint.IRegionalSettings.html#PnP_Core_Model_SharePoint_IRegionalSettings_AllProperties_
-  commentId: Overload:PnP.Core.Model.SharePoint.IRegionalSettings.AllProperties
+- uid: PnP.Core.Model.SharePoint.IRegionalSettings.All
+  name: All
+  href: api/PnP.Core.Model.SharePoint.IRegionalSettings.html#PnP_Core_Model_SharePoint_IRegionalSettings_All
+  commentId: P:PnP.Core.Model.SharePoint.IRegionalSettings.All
+  fullName: PnP.Core.Model.SharePoint.IRegionalSettings.All
+  nameWithType: IRegionalSettings.All
+- uid: PnP.Core.Model.SharePoint.IRegionalSettings.All*
+  name: All
+  href: api/PnP.Core.Model.SharePoint.IRegionalSettings.html#PnP_Core_Model_SharePoint_IRegionalSettings_All_
+  commentId: Overload:PnP.Core.Model.SharePoint.IRegionalSettings.All
   isSpec: "True"
-  fullName: PnP.Core.Model.SharePoint.IRegionalSettings.AllProperties
-  nameWithType: IRegionalSettings.AllProperties
+  fullName: PnP.Core.Model.SharePoint.IRegionalSettings.All
+  nameWithType: IRegionalSettings.All
 - uid: PnP.Core.Model.SharePoint.IRegionalSettings.AM
   name: AM
   href: api/PnP.Core.Model.SharePoint.IRegionalSettings.html#PnP_Core_Model_SharePoint_IRegionalSettings_AM
