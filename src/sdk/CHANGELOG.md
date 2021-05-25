@@ -19,6 +19,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
 ### Changed
 
+- Fixed nested QueryProperties() use on non-collection expandable properties (e.g. List.RootFolder) [jansenbe - Bert Jansen]
 - List item documentation update #461 [cesarhoeflich - Cesar Hoeflich]
 - Fix for supporting teams apps as web parts on pages [jansenbe - Bert Jansen]
 - RenderListDataAsStream populates the IListItem's IContentType [jansenbe - Bert Jansen]
