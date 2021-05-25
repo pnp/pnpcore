@@ -115,6 +115,11 @@ namespace PnP.Core.Model.SharePoint
         public string TimeSeparator { get; }
 
         /// <summary>
+        /// Gets all properties of this entity
+        /// </summary>
+        public object AllProperties { get; }
+
+        /// <summary>
         /// Gets the time zone that is used.
         /// </summary>
         public ITimeZone TimeZone { get; }

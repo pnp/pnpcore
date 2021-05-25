@@ -252,6 +252,34 @@ namespace PnP.Core.Test.Utilities
             return context;
         }
 
+        public async Task<PnPContext> GetContextWithOptionsAsync(string configurationName, PnPContextOptions options, int id = 0,
+            [System.Runtime.CompilerServices.CallerMemberName] string testName = null,
+            [System.Runtime.CompilerServices.CallerFilePath] string sourceFilePath = null)
+        {
+            // Obtain factory (cached)
+            var factory = BuildContextFactory();
+
+            // Remove Async suffix
+            if (testName.EndsWith(AsyncSuffix))
+            {
+                testName = testName.Substring(0, testName.Length - AsyncSuffix.Length);
+            }
+
+            // Configure the factory for our testing mode
+            var testPnPContextFactory = factory as TestPnPContextFactory;
+            testPnPContextFactory.Mocking = Mocking;
+            testPnPContextFactory.Id = id;
+            testPnPContextFactory.TestName = testName;
+            testPnPContextFactory.SourceFilePath = sourceFilePath;
+            testPnPContextFactory.GenerateTestMockingDebugFiles = GenerateMockingDebugFiles;
+            testPnPContextFactory.TestUris = TestUris;
+
+            // rewrite configuration for special cases
+            configurationName = RewriteConfigurationNameForOptionalOfflineTestConfigurations(configurationName);
+
+            return await factory.CreateAsync(configurationName, options).ConfigureAwait(false);
+        }
+
         public async Task<PnPContext> CloneAsync(PnPContext source, int id)
         {
             return await source.CloneForTestingAsync(source, null, null, id);
