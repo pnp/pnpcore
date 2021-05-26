@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace PnP.Core.Transformation.Services.Core
@@ -14,7 +15,8 @@ namespace PnP.Core.Transformation.Services.Core
         /// Transforms a page from classic to modern
         /// </summary>
         /// <param name="task">The context of the transformation process</param>
+        /// <param name="token">The cancellation token</param>
         /// <returns>The URL of the transformed page</returns>
-        Task<Uri> TransformAsync(PageTransformationTask task);
+        Task<Uri> TransformAsync(PageTransformationTask task, CancellationToken token = default);
     }
 }

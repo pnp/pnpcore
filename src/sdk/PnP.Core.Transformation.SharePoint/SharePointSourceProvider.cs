@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using PnP.Core.Services;
 using PnP.Core.Transformation.Services.Core;
 
 namespace PnP.Core.Transformation.SharePoint
@@ -12,6 +13,11 @@ namespace PnP.Core.Transformation.SharePoint
     /// </summary>
     public class SharePointSourceProvider : ISourceProvider
     {
+        public SharePointSourceProvider(PnPContext sourceContext)
+        {
+            
+        }
+
         /// <summary>
         /// Gets the id of each available items
         /// </summary>
@@ -26,7 +32,7 @@ namespace PnP.Core.Transformation.SharePoint
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public Task<ISourceItem> GetItemAsync(ISourceItemId id)
+        public Task<ISourceItem> GetItemAsync(ISourceItemId id, CancellationToken token = default)
         {
             throw new NotImplementedException();
         }

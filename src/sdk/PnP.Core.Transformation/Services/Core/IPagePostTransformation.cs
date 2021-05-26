@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace PnP.Core.Transformation.Services.Core
@@ -14,7 +15,8 @@ namespace PnP.Core.Transformation.Services.Core
         /// Method called when a page has been transformed
         /// </summary>
         /// <param name="context">The context contained all information related to the transformation</param>
+        /// <param name="token">The cancellation token</param>
         /// <returns></returns>
-        Task PostTransformAsync(PagePostTransformationContext context);
+        Task PostTransformAsync(PagePostTransformationContext context, CancellationToken token = default);
     }
 }

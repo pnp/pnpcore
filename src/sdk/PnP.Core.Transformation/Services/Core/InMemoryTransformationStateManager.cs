@@ -2,6 +2,7 @@
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace PnP.Core.Transformation.Services.Core
@@ -20,8 +21,9 @@ namespace PnP.Core.Transformation.Services.Core
         /// <typeparam name="T">The Type of the state variable</typeparam>
         /// <param name="key">The name of the state variable</param>
         /// <param name="state">The value of the state variable</param>
+        /// <param name="token">The cancellation token</param>
         /// <returns></returns>
-        public Task WriteStateAsync<T>(object key, T state)
+        public Task WriteStateAsync<T>(object key, T state, CancellationToken token = default)
         {
             var serializedKey = GetSerializedKey(key);
             var itemKey = Tuple.Create(typeof(T), serializedKey);
@@ -35,8 +37,9 @@ namespace PnP.Core.Transformation.Services.Core
         /// </summary>
         /// <typeparam name="T">The Type of the state variable</typeparam>
         /// <param name="key">The name of the state variable</param>
+        /// <param name="token">The cancellation token</param>
         /// <returns>The value of the state variable</returns>
-        public Task<T> ReadStateAsync<T>(object key)
+        public Task<T> ReadStateAsync<T>(object key, CancellationToken token = default)
         {
             var serializedKey = GetSerializedKey(key);
             var itemKey = Tuple.Create(typeof(T), serializedKey);

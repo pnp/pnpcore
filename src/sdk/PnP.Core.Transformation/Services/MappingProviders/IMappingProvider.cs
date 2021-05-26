@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace PnP.Core.Transformation.Services.MappingProviders
@@ -14,7 +15,8 @@ namespace PnP.Core.Transformation.Services.MappingProviders
         /// Maps an item from the source platform to the target platform
         /// </summary>
         /// <param name="input">The input for the mapping</param>
+        /// <param name="token">The cancellation token</param>
         /// <returns>The output of the mapping</returns>
-        Task<MappingProviderOutput> MapAsync(MappingProviderInput input);
+        Task<MappingProviderOutput> MapAsync(MappingProviderInput input, CancellationToken token = default);
     }
 }

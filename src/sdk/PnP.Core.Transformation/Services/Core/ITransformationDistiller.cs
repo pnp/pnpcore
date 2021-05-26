@@ -16,6 +16,9 @@ namespace PnP.Core.Transformation.Services.Core
         /// Defines a list of Page Transformation Tasks
         /// </summary>
         /// <returns>A list of PageTransformationTask to transform</returns>
-        IAsyncEnumerable<PageTransformationTask> GetSourceItemsIdsAsync(CancellationToken token = default);
+        IAsyncEnumerable<PageTransformationTask> GetPageTransformationTasksAsync(
+            ISourceProvider sourceProvider,
+            PnPContext targetContext,
+            CancellationToken token = default);
     }
 }

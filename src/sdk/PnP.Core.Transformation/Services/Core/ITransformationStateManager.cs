@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace PnP.Core.Transformation.Services.Core
@@ -16,15 +17,17 @@ namespace PnP.Core.Transformation.Services.Core
         /// <typeparam name="T">The Type of the state variable</typeparam>
         /// <param name="key">The key of the state variable</param>
         /// <param name="state">The value of the state variable</param>
+        /// <param name="token">The cancellation token</param>
         /// <returns></returns>
-        Task WriteStateAsync<T>(object key, T state);
+        Task WriteStateAsync<T>(object key, T state, CancellationToken token = default);
 
         /// <summary>
         /// Allows to read a state variable for a specific Transformation process
         /// </summary>
         /// <typeparam name="T">The Type of the state variable</typeparam>
         /// <param name="key">The key of the state variable</param>
+        /// <param name="token">The cancellation token</param>
         /// <returns>The value of the state variable</returns>
-        Task<T> ReadStateAsync<T>(object key);
+        Task<T> ReadStateAsync<T>(object key, CancellationToken token = default);
     }
 }

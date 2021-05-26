@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace PnP.Core.Transformation.Services.Core
@@ -14,16 +15,18 @@ namespace PnP.Core.Transformation.Services.Core
         /// <summary>
         /// Creates a Page Transformation process
         /// </summary>
-        /// <param name="sourceContext">The PnPContext of the source site</param>
+        /// <param name="sourceProvider">The source provider to use</param>
         /// <param name="targetContext">The PnPContext of the target site</param>
+        /// <param name="token">The cancellation token</param>
         /// <returns>The transformation process</returns>
-        Task<TransformationProcess> CreateTransformationProcessAsync(PnPContext sourceContext, PnPContext targetContext);
+        Task<ITransformationProcess> CreateTransformationProcessAsync(ISourceProvider sourceProvider, PnPContext targetContext, CancellationToken token = default);
 
         /// <summary>
         /// Loads a Page Transformation process
         /// </summary>
         /// <param name="processId">The ID of the process to load</param>
+        /// <param name="token">The cancellation token</param>
         /// <returns>The transformation process</returns>
-        Task<TransformationProcess> LoadTransformationProcessAsync(Guid processId);
+        Task<ITransformationProcess> LoadTransformationProcessAsync(Guid processId, CancellationToken token = default);
     }
 }

@@ -6,7 +6,7 @@ using PnP.Core.Services;
 namespace PnP.Core.Transformation.Services.Core
 {
     /// <summary>
-    /// Defines a page tranformation task
+    /// Defines a page transformation task
     /// </summary>
     public class PageTransformationTask
     {

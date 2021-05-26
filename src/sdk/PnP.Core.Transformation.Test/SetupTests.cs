@@ -10,6 +10,7 @@ using PnP.Core.Transformation.Services.Builder.Configuration;
 using PnP.Core.Transformation.Services.Core;
 using PnP.Core.Transformation.Services.MappingProviders;
 using PnP.Core.Services;
+using PnP.Core.Transformation.SharePoint;
 using PnP.Core.Transformation.SharePoint.MappingProviders;
 
 namespace PnP.Core.Transformation.Test
@@ -24,8 +25,7 @@ namespace PnP.Core.Transformation.Test
             var services = new ServiceCollection();
             services.AddLogging();
             services.AddPnPTransformation()
-                .WithMappingProvider<Mock>()
-                .WithTransformationDistiller<Mock>();
+                .WithMappingProvider<Mock>();
 
             var provider = services.BuildServiceProvider();
 
@@ -34,6 +34,29 @@ namespace PnP.Core.Transformation.Test
             Assert.IsInstanceOfType(provider.GetRequiredService<IPageTransformator>(), typeof(DefaultPageTransformator));
             Assert.IsInstanceOfType(provider.GetRequiredService<ITransformationStateManager>(), typeof(InMemoryTransformationStateManager));
             Assert.IsInstanceOfType(provider.GetRequiredService<ITransformationExecutor>(), typeof(InProcessTransformationExecutor));
+        }
+
+        [TestMethod]
+        public void DefaultSharePointServices()
+        {
+            var services = new ServiceCollection();
+            services.AddLogging();
+            services.AddPnPSharePointTransformation();
+
+            var provider = services.BuildServiceProvider();
+
+            // TODO: check all types
+
+            Assert.IsInstanceOfType(provider.GetRequiredService<IMappingProvider>(), typeof(SharePointMappingProvider));
+            Assert.IsInstanceOfType(provider.GetRequiredService<ITransformationDistiller>(), typeof(SharePointTransformationDistiller));
+
+            Assert.IsInstanceOfType(provider.GetRequiredService<IMetadataMappingProvider>(), typeof(SharePointMetadataMappingProvider));
+            Assert.IsInstanceOfType(provider.GetRequiredService<IHtmlMappingProvider>(), typeof(SharePointHtmlMappingProvider));
+            Assert.IsInstanceOfType(provider.GetRequiredService<IPageLayoutMappingProvider>(), typeof(SharePointPageLayoutMappingProvider));
+            Assert.IsInstanceOfType(provider.GetRequiredService<ITaxonomyMappingProvider>(), typeof(SharePointTaxonomyMappingProvider));
+            Assert.IsInstanceOfType(provider.GetRequiredService<IUserMappingProvider>(), typeof(SharePointUserMappingProvider));
+            Assert.IsInstanceOfType(provider.GetRequiredService<IUrlMappingProvider>(), typeof(SharePointUrlMappingProvider));
+            Assert.IsInstanceOfType(provider.GetRequiredService<IWebPartMappingProvider>(), typeof(SharePointWebPartMappingProvider));
         }
 
         [TestMethod]
@@ -89,52 +112,54 @@ namespace PnP.Core.Transformation.Test
             IPagePreTransformation,
             IPagePostTransformation
         {
-            Task<MappingProviderOutput> IMappingProvider.MapAsync(MappingProviderInput input)
+            Task<MappingProviderOutput> IMappingProvider.MapAsync(MappingProviderInput input, CancellationToken token)
             {
                 throw new NotImplementedException();
             }
 
-            Task<Uri> IPageTransformator.TransformAsync(PageTransformationTask task)
+            Task<Uri> IPageTransformator.TransformAsync(PageTransformationTask task, CancellationToken token)
             {
                 throw new NotImplementedException();
             }
 
-            IAsyncEnumerable<PageTransformationTask> ITransformationDistiller.GetSourceItemsIdsAsync(CancellationToken token)
+            IAsyncEnumerable<PageTransformationTask> ITransformationDistiller.GetPageTransformationTasksAsync(ISourceProvider sourceProvider, PnPContext targetContext,
+                CancellationToken token)
             {
                 throw new NotImplementedException();
             }
 
-            Task ITransformationStateManager.WriteStateAsync<T>(object key, T state)
+            Task ITransformationStateManager.WriteStateAsync<T>(object key, T state, CancellationToken token)
             {
                 throw new NotImplementedException();
             }
 
-            Task<T> ITransformationStateManager.ReadStateAsync<T>(object key)
+            Task<T> ITransformationStateManager.ReadStateAsync<T>(object key, CancellationToken token)
             {
                 throw new NotImplementedException();
             }
 
-            Task<TransformationProcess> ITransformationExecutor.CreateTransformationProcessAsync(PnPContext sourceContext, PnPContext targetContext)
+            Task<ITransformationProcess> ITransformationExecutor.CreateTransformationProcessAsync(ISourceProvider sourceProvider, PnPContext targetContext,
+                CancellationToken token)
             {
                 throw new NotImplementedException();
             }
 
-            Task<TransformationProcess> ITransformationExecutor.LoadTransformationProcessAsync(Guid processId)
+            Task<ITransformationProcess> ITransformationExecutor.LoadTransformationProcessAsync(Guid processId, CancellationToken token)
             {
                 throw new NotImplementedException();
             }
 
-            Task<HtmlMappingProviderOutput> IHtmlMappingProvider.MapHtmlAsync(HtmlMappingProviderInput input)
+            Task<HtmlMappingProviderOutput> IHtmlMappingProvider.MapHtmlAsync(HtmlMappingProviderInput input, CancellationToken token)
             {
                 throw new NotImplementedException();
             }
 
-            Task IPagePreTransformation.PreTransformAsync(PagePreTransformationContext context)
+            Task IPagePreTransformation.PreTransformAsync(PagePreTransformationContext context, CancellationToken token)
             {
                 throw new NotImplementedException();
             }
 
-            Task IPagePostTransformation.PostTransformAsync(PagePostTransformationContext context)
+            Task IPagePostTransformation.PostTransformAsync(PagePostTransformationContext context, CancellationToken token)
             {
                 throw new NotImplementedException();
             }
