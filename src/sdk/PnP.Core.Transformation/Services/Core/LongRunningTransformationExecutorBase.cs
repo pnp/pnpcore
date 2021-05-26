@@ -1,58 +1,64 @@
-﻿//using System;
-//using System.Collections.Generic;
-//using System.Text;
-//using System.Threading.Tasks;
-//using PnP.Core.Services;
+﻿using System;
+using System.Threading;
+using System.Threading.Tasks;
+using PnP.Core.Services;
 
-//namespace PnP.Core.Transformation.Services.Core
-//{
-//    /// <summary>
-//    /// Implementation of <see cref="ITransformationExecutor"/> that persists state for a long running operation
-//    /// </summary>
-//    public abstract class LongRunningTransformationExecutorBase : TransformationExecutorBase
-//    {
-//        /// <summary>
-//        /// Instance of the Transformation Distiller
-//        /// </summary>
-//        protected ITransformationDistiller TransformationDistiller { get; }
+namespace PnP.Core.Transformation.Services.Core
+{
+    /// <summary>
+    /// Implementation of <see cref="ITransformationExecutor"/> that persists state for a long running transformation
+    /// </summary>
+    public abstract class LongRunningTransformationExecutorBase : ITransformationExecutor
+    {
+        /// <summary>
+        /// The provider to use to resolve dependencies
+        /// </summary>
+        public IServiceProvider ServiceProvider { get; }
 
-//        /// <summary>
-//        /// Instance of the Transformation State Manager
-//        /// </summary>
-//        protected ITransformationStateManager TransformationStateManager { get; }
+        /// <summary>
+        /// Constructor with Dependency Injection
+        /// </summary>
+        protected LongRunningTransformationExecutorBase(IServiceProvider serviceProvider)
+        {
+            ServiceProvider = serviceProvider ?? throw new ArgumentNullException(nameof(serviceProvider));
+        }
 
-//        /// <summary>
-//        /// Constructor with Dependency Injection
-//        /// </summary>
-//        /// <param name="transformationDistiller">The Transformation Distiller</param>
-//        /// <param name="transformationStateManager">The State Manager</param>
-//        protected LongRunningTransformationExecutorBase(
-//            ITransformationDistiller transformationDistiller,
-//            ITransformationStateManager transformationStateManager)
-//        {
-//            TransformationDistiller = transformationDistiller ?? throw new ArgumentNullException(nameof(transformationDistiller));
-//            TransformationStateManager = transformationStateManager ?? throw new ArgumentNullException(nameof(transformationStateManager));
-//        }
+        /// <summary>
+        /// Creates a Page Transformation process
+        /// </summary>
+        /// <param name="sourceProvider">The source provider to use</param>
+        /// <param name="targetContext">The PnPContext of the target site</param>
+        /// <param name="token">The cancellation token</param>
+        /// <returns>The transformation process</returns>
+        public async Task<ITransformationProcess> CreateTransformationProcessAsync(
+            ISourceProvider sourceProvider,
+            PnPContext targetContext,
+            CancellationToken token = default)
+        {
+            var process = CreateProcess(Guid.NewGuid());
+            await process.InitAsync(token).ConfigureAwait(false);
 
-//        /// <summary>
-//        /// Creates a Page Transformation process
-//        /// </summary>
-//        /// <param name="sourceContext">The PnPContext of the source site</param>
-//        /// <param name="targetContext">The PnPContext of the target site</param>
-//        /// <returns>The transformation process</returns>
-//        public override Task<ITransformationProcess> CreateTransformationProcessAsync(PnPContext sourceContext, PnPContext targetContext)
-//        {
-//            return base.CreateTransformationProcessAsync(sourceContext, targetContext);
-//        }
+            return process;
+        }
 
-//        /// <summary>
-//        /// Loads a Page Transformation process
-//        /// </summary>
-//        /// <param name="processId">The ID of the process to load</param>
-//        /// <returns>The transformation process</returns>
-//        public override Task<ITransformationProcess> LoadTransformationProcessAsync(Guid processId)
-//        {
-//            return base.LoadTransformationProcessAsync(processId);
-//        }
-//    }
-//}
+        /// <summary>
+        /// Loads a Page Transformation process
+        /// </summary>
+        /// <param name="processId">The ID of the process to load</param>
+        /// <param name="token">The cancellation token</param>
+        /// <returns>The transformation process</returns>
+        public Task<ITransformationProcess> LoadTransformationProcessAsync(Guid processId,
+            CancellationToken token = default)
+        {
+
+            throw new ArgumentException($"Cannot find process with id {processId}");
+        }
+
+        /// <summary>
+        /// Creates a new instance of a inherited of type <see cref="LongRunningTransformationProcessBase"/>
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        protected abstract LongRunningTransformationProcessBase CreateProcess(Guid id);
+    }
+}

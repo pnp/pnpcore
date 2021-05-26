@@ -22,9 +22,7 @@ namespace PnP.Core.Transformation.Services.Core
         /// <summary>
         /// Constructor with Dependency Injection
         /// </summary>
-        public InProcessTransformationExecutor(
-            IServiceProvider serviceProvider
-            )
+        public InProcessTransformationExecutor(IServiceProvider serviceProvider)
         {
             this.serviceProvider = serviceProvider;
         }
