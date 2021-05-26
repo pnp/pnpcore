@@ -11,7 +11,7 @@ using PnP.Core.Services;
 namespace PnP.Core.Transformation.Services.Core
 {
     /// <summary>
-    /// 
+    /// Implementation of <see cref="ITransformationExecutor"/> with works sequentially and in process
     /// </summary>
     public class InProcessTransformationExecutor : ITransformationExecutor, IDisposable
     {

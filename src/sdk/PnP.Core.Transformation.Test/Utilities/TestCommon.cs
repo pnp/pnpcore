@@ -12,9 +12,14 @@ namespace PnP.Core.Transformation.Test.Utilities
     {
 
         /// <summary>
-        /// Name of the default test site configuration
+        /// Name of the default test source site configuration
         /// </summary>
-        internal static string TestSite => "TestSite";
+        internal static string SourceTestSite => "SourceTestSite";
+
+        /// <summary>
+        /// Name of the default test target site configuration
+        /// </summary>
+        internal static string TargetTestSite => "TargetTestSite";
 
         public static IConfigurationRoot GetConfigurationSettings()
         {

@@ -55,7 +55,7 @@ namespace PnP.Core.Transformation.Services.Core
         /// <summary>
         ///     Starts the Transformation Process
         /// </summary>
-        public override Task StartProcessAsync(CancellationToken token = default)
+        public override async Task StartProcessAsync(CancellationToken token = default)
         {
             if (cancellationTokenSource is { IsCancellationRequested: false })
             {
@@ -63,9 +63,11 @@ namespace PnP.Core.Transformation.Services.Core
             }
 
             cancellationTokenSource = new CancellationTokenSource();
+
+            await RaiseProgressAsync(GetStatus()).ConfigureAwait(false);
+
             var runToken = cancellationTokenSource.Token;
             _ = Task.Run(() => Run(runToken), token);
-            return Task.CompletedTask;
         }
 
         private async Task Run(CancellationToken token)
@@ -92,6 +94,10 @@ namespace PnP.Core.Transformation.Services.Core
                     }
                     await RaiseProgressAsync(GetStatus()).ConfigureAwait(false);
                 }
+
+                // Re-align total
+                total = done + errors;
+                await RaiseProgressAsync(GetStatus()).ConfigureAwait(false);
             }
             catch (OperationCanceledException)
             {

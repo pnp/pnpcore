@@ -28,7 +28,7 @@ namespace PnP.Core.Transformation.Test
 
             var provider = services.BuildServiceProvider();
 
-            var targetContext = await provider.GetRequiredService<IPnPContextFactory>().CreateAsync(TestCommon.TestSite);
+            var targetContext = await provider.GetRequiredService<IPnPContextFactory>().CreateAsync(TestCommon.TargetTestSite);
             // TODO: complete with real uris
             var sourceItem = new SharePointSourceItem(new Uri("http://site/item"));
             var targetUri = new Uri("http://target/item");
@@ -36,7 +36,29 @@ namespace PnP.Core.Transformation.Test
             var pageTransformator = provider.GetRequiredService<IPageTransformator>();
             var result = await pageTransformator.TransformAsync(new PageTransformationTask(sourceItem, targetContext, targetUri));
 
+            Assert.IsNotNull(result);
             Assert.Equals(targetUri, result);
+        }
+
+        [TestMethod]
+        public async Task InMemoryExecutorSharePointTransformAsync()
+        {
+            var services = new ServiceCollection();
+            services.AddTestPnPCore();
+            services.AddPnPSharePointTransformation();
+
+            var provider = services.BuildServiceProvider();
+
+            var transformationExecutor = provider.GetRequiredService<ITransformationExecutor>();
+            var pnpContextFactory = provider.GetRequiredService<IPnPContextFactory>();
+            var result = await transformationExecutor.TransformSharePointAsync(
+                pnpContextFactory,
+                TestCommon.SourceTestSite,
+                TestCommon.TargetTestSite);
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(TransformationExecutionState.Completed, result.State);
+            Assert.AreEqual(100, result.Percentage);
         }
 
     }

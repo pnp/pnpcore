@@ -19,7 +19,7 @@ namespace PnP.Core.Transformation.Services.Core
         /// <param name="processId"></param>
         /// <returns></returns>
         public static TransformationProcessStatus GetPending(Guid processId) =>
-            new TransformationProcessStatus {ProcessId = processId, Status = TransformationExecutionStatus.Pending};
+            new TransformationProcessStatus {ProcessId = processId, State = TransformationExecutionState.Pending};
 
         /// <summary>
         /// Gets the process status as running
@@ -30,7 +30,7 @@ namespace PnP.Core.Transformation.Services.Core
         /// <param name="total"></param>
         /// <returns></returns>
         public static TransformationProcessStatus GetRunning(Guid processId, int done, int errors, int? total) =>
-            new TransformationProcessStatus { ProcessId = processId, Done = done, Errors = errors, Total = total, Status = TransformationExecutionStatus.Running };
+            new TransformationProcessStatus { ProcessId = processId, Done = done, Errors = errors, Total = total, State = TransformationExecutionState.Running };
 
         /// <summary>
         /// Gets the process status as completed
@@ -41,7 +41,7 @@ namespace PnP.Core.Transformation.Services.Core
         /// <param name="total"></param>
         /// <returns></returns>
         public static TransformationProcessStatus GetCompleted(Guid processId, int done, int errors, int? total) =>
-            new TransformationProcessStatus { ProcessId = processId, Done = done, Errors = errors, Total = total, Status = TransformationExecutionStatus.Completed };
+            new TransformationProcessStatus { ProcessId = processId, Done = done, Errors = errors, Total = total, State = TransformationExecutionState.Completed };
 
         /// <summary>
         /// Gets the process status as aborted
@@ -52,7 +52,7 @@ namespace PnP.Core.Transformation.Services.Core
         /// <param name="total"></param>
         /// <returns></returns>
         public static TransformationProcessStatus GetAborted(Guid processId, int done, int errors, int? total) =>
-            new TransformationProcessStatus { ProcessId = processId, Done = done, Errors = errors, Total = total, Status = TransformationExecutionStatus.Aborted };
+            new TransformationProcessStatus { ProcessId = processId, Done = done, Errors = errors, Total = total, State = TransformationExecutionState.Aborted };
 
         /// <summary>
         /// The ID of the process
@@ -82,13 +82,13 @@ namespace PnP.Core.Transformation.Services.Core
         /// <summary>
         /// Gets the status of the process
         /// </summary>
-        public TransformationExecutionStatus Status { get; private set; }
+        public TransformationExecutionState State { get; private set; }
     }
 
     /// <summary>
     /// List of process status
     /// </summary>
-    public enum TransformationExecutionStatus
+    public enum TransformationExecutionState
     {
         /// <summary>
         /// Process is in pending state
