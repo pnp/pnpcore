@@ -15359,32 +15359,32 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IListItem.GetDisplayNameAsync
   nameWithType: IListItem.GetDisplayNameAsync
-- uid: PnP.Core.Model.SharePoint.IListItem.GetFolder
-  name: GetFolder()
-  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_GetFolder
-  commentId: M:PnP.Core.Model.SharePoint.IListItem.GetFolder
-  fullName: PnP.Core.Model.SharePoint.IListItem.GetFolder()
-  nameWithType: IListItem.GetFolder()
-- uid: PnP.Core.Model.SharePoint.IListItem.GetFolder*
-  name: GetFolder
-  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_GetFolder_
-  commentId: Overload:PnP.Core.Model.SharePoint.IListItem.GetFolder
+- uid: PnP.Core.Model.SharePoint.IListItem.GetParentFolder
+  name: GetParentFolder()
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_GetParentFolder
+  commentId: M:PnP.Core.Model.SharePoint.IListItem.GetParentFolder
+  fullName: PnP.Core.Model.SharePoint.IListItem.GetParentFolder()
+  nameWithType: IListItem.GetParentFolder()
+- uid: PnP.Core.Model.SharePoint.IListItem.GetParentFolder*
+  name: GetParentFolder
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_GetParentFolder_
+  commentId: Overload:PnP.Core.Model.SharePoint.IListItem.GetParentFolder
   isSpec: "True"
-  fullName: PnP.Core.Model.SharePoint.IListItem.GetFolder
-  nameWithType: IListItem.GetFolder
-- uid: PnP.Core.Model.SharePoint.IListItem.GetFolderAsync
-  name: GetFolderAsync()
-  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_GetFolderAsync
-  commentId: M:PnP.Core.Model.SharePoint.IListItem.GetFolderAsync
-  fullName: PnP.Core.Model.SharePoint.IListItem.GetFolderAsync()
-  nameWithType: IListItem.GetFolderAsync()
-- uid: PnP.Core.Model.SharePoint.IListItem.GetFolderAsync*
-  name: GetFolderAsync
-  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_GetFolderAsync_
-  commentId: Overload:PnP.Core.Model.SharePoint.IListItem.GetFolderAsync
+  fullName: PnP.Core.Model.SharePoint.IListItem.GetParentFolder
+  nameWithType: IListItem.GetParentFolder
+- uid: PnP.Core.Model.SharePoint.IListItem.GetParentFolderAsync
+  name: GetParentFolderAsync()
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_GetParentFolderAsync
+  commentId: M:PnP.Core.Model.SharePoint.IListItem.GetParentFolderAsync
+  fullName: PnP.Core.Model.SharePoint.IListItem.GetParentFolderAsync()
+  nameWithType: IListItem.GetParentFolderAsync()
+- uid: PnP.Core.Model.SharePoint.IListItem.GetParentFolderAsync*
+  name: GetParentFolderAsync
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_GetParentFolderAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.IListItem.GetParentFolderAsync
   isSpec: "True"
-  fullName: PnP.Core.Model.SharePoint.IListItem.GetFolderAsync
-  nameWithType: IListItem.GetFolderAsync
+  fullName: PnP.Core.Model.SharePoint.IListItem.GetParentFolderAsync
+  nameWithType: IListItem.GetParentFolderAsync
 - uid: PnP.Core.Model.SharePoint.IListItem.GetRoleDefinitions(System.Int32)
   name: GetRoleDefinitions(Int32)
   href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_GetRoleDefinitions_System_Int32_
