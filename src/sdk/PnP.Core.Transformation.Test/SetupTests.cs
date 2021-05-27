@@ -25,6 +25,7 @@ namespace PnP.Core.Transformation.Test
             var services = new ServiceCollection();
             services.AddLogging();
             services.AddPnPTransformation()
+                .WithTargetPageUriResolver<Mock>()
                 .WithMappingProvider<Mock>();
 
             var provider = services.BuildServiceProvider();
@@ -142,8 +143,7 @@ namespace PnP.Core.Transformation.Test
                 throw new NotImplementedException();
             }
 
-            Task<ITransformationProcess> ITransformationExecutor.CreateTransformationProcessAsync(ISourceProvider sourceProvider, PnPContext targetContext,
-                CancellationToken token)
+            Task<ITransformationProcess> ITransformationExecutor.CreateTransformationProcessAsync(CancellationToken token)
             {
                 throw new NotImplementedException();
             }
@@ -168,7 +168,7 @@ namespace PnP.Core.Transformation.Test
                 throw new NotImplementedException();
             }
 
-            Task<Uri> ITargetPageUriResolver.ResolveAsync(ISourceItem sourceItem, PnPContext targetContext, CancellationToken token = default)
+            Task<Uri> ITargetPageUriResolver.ResolveAsync(ISourceItem sourceItem, PnPContext targetContext, CancellationToken token)
             {
                 throw new NotImplementedException();
             }

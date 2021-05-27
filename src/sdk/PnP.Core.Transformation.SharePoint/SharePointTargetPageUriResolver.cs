@@ -27,7 +27,7 @@ namespace PnP.Core.Transformation.SharePoint
             if (!(sourceItem is SharePointSourceItem spItem))
                 throw new ArgumentException($"Only source item of type {typeof(SharePointSourceItem)} is supported", nameof(sourceItem));
 
-            var uri = new Uri(targetContext.Uri + "/" + spItem.Id.Id);
+            var uri = new Uri(targetContext.Uri + spItem.Id.Uri.LocalPath);
             return Task.FromResult(uri);
         }
     }

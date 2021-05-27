@@ -30,15 +30,33 @@ namespace PnP.Core.Transformation.Services.Core
             if (sourceProvider == null) throw new ArgumentNullException(nameof(sourceProvider));
             if (targetContext == null) throw new ArgumentNullException(nameof(targetContext));
 
+            // Start the process
+            await process.StartProcessAsync(sourceProvider, targetContext, token).ConfigureAwait(false);
+
+            return await process.WaitProcessAsync(token).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Wait for the completion of a process
+        /// </summary>
+        /// <param name="process">The process to start</param>
+        /// <param name="token">The cancellation token</param>
+        /// <returns></returns>
+        public static async Task<TransformationProcessStatus> WaitProcessAsync(
+            this ITransformationProcess process,
+            CancellationToken token = default)
+        {
+            if (process == null) throw new ArgumentNullException(nameof(process));
+
             // Intercept progress
             var completionTask = new TaskCompletionSource<TransformationProcessStatus>();
             process.Progress = LocalProgress;
 
-            // Start the process
-            await process.StartProcessAsync(sourceProvider, targetContext, token).ConfigureAwait(false);
-
             // When token is cancelled, stop the process
             token.Register(() => _ = process.StopProcessAsync(token));
+
+            // Since process could be already completed, we check immediately the status
+            await LocalProgress(await process.GetStatusAsync(token).ConfigureAwait(false)).ConfigureAwait(false);
 
             // Wait for the completion of the task
             return await completionTask.Task.ConfigureAwait(false);

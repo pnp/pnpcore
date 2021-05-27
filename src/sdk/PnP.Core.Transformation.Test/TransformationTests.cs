@@ -28,16 +28,20 @@ namespace PnP.Core.Transformation.Test
 
             var provider = services.BuildServiceProvider();
 
-            var targetContext = await provider.GetRequiredService<IPnPContextFactory>().CreateAsync(TestCommon.TargetTestSite);
-            // TODO: complete with real uris
-            var sourceItem = new SharePointSourceItem(new Uri("http://site/item"));
-            var targetUri = new Uri("http://target/item");
-
+            var pnpContextFactory = provider.GetRequiredService<IPnPContextFactory>();
             var pageTransformator = provider.GetRequiredService<IPageTransformator>();
-            var result = await pageTransformator.TransformAsync(new PageTransformationTask(sourceItem, targetContext, targetUri));
+
+            var sourceContext = await pnpContextFactory.CreateAsync(TestCommon.SourceTestSite);
+            var targetContext = await pnpContextFactory.CreateAsync(TestCommon.TargetTestSite);
+
+            // TODO: complete with real uris
+            var sourceItemId = new SharePointSourceItemId(new Uri("http://site/item"));
+
+            var sourceProvider = new SharePointSourceProvider(sourceContext);
+            var result = await pageTransformator.TransformAsync(new PageTransformationTask(sourceProvider, sourceItemId, targetContext));
 
             Assert.IsNotNull(result);
-            Assert.Equals(targetUri, result);
+            Assert.AreEqual(new Uri("https://officedevpnp.sharepoint.com/sites/pnpcoresdkdemo/item"), result);
         }
 
         [TestMethod]
@@ -58,7 +62,6 @@ namespace PnP.Core.Transformation.Test
 
             Assert.IsNotNull(result);
             Assert.AreEqual(TransformationExecutionState.Completed, result.State);
-            Assert.AreEqual(100, result.Percentage);
         }
 
     }

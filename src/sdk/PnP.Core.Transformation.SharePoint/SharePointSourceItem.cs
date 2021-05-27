@@ -33,6 +33,11 @@ namespace PnP.Core.Transformation.SharePoint
         /// <summary>
         /// Gets the id of the source item
         /// </summary>
-        public ISourceItemId Id => sourceItemId;
+        ISourceItemId ISourceItem.Id => sourceItemId;
+
+        /// <summary>
+        /// Gets the id of the source item
+        /// </summary>
+        public SharePointSourceItemId Id => sourceItemId;
     }
 }
