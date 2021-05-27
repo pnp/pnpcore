@@ -7,14 +7,14 @@ using PnP.Core.Transformation.Services.Core;
 
 namespace PnP.Core.Transformation.Poc.Implementations
 {
-    public class AzureTransformationStateManager : ITransformationStateManager
+    public class AzureTableTransformationStateManager : ITransformationStateManager
     {
         private readonly CloudTable tableReference;
 
         private static readonly SemaphoreSlim CreationSemaphoreSlim = new SemaphoreSlim(1, 1);
         private static bool TableCreated;
 
-        public AzureTransformationStateManager(CloudTableClient cloudTableClient)
+        public AzureTableTransformationStateManager(CloudTableClient cloudTableClient)
         {
             if (cloudTableClient == null) throw new ArgumentNullException(nameof(cloudTableClient));
 

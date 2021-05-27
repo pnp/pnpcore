@@ -30,14 +30,9 @@ namespace PnP.Core.Transformation.Services.Core
         /// <summary>
         /// Creates a Page Transformation process
         /// </summary>
-        /// <param name="sourceProvider">The source provider to use</param>
-        /// <param name="targetContext">The PnPContext of the target site</param>
         /// <param name="token">The cancellation token</param>
         /// <returns>The transformation process</returns>
-        public Task<ITransformationProcess> CreateTransformationProcessAsync(
-            ISourceProvider sourceProvider,
-            PnPContext targetContext,
-            CancellationToken token = default)
+        public Task<ITransformationProcess> CreateTransformationProcessAsync(CancellationToken token = default)
         {
             var transformationDistiller = serviceProvider.GetRequiredService<ITransformationDistiller>();
             var pageTransformator = serviceProvider.GetRequiredService<IPageTransformator>();
@@ -46,8 +41,6 @@ namespace PnP.Core.Transformation.Services.Core
             ITransformationProcess result = new InProcessTransformationProcess(
                 Guid.NewGuid(),
                 logger,
-                sourceProvider,
-                targetContext,
                 transformationDistiller,
                 pageTransformator);
 

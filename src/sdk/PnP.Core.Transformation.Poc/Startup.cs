@@ -25,7 +25,7 @@ namespace PnP.Core.Transformation.Poc
             builder.Services.AddPnPCoreAuthentication();
 
             builder.Services.AddPnPSharePointTransformation()
-                .WithTransformationStateManager<AzureTransformationStateManager>()
+                .WithTransformationStateManager<AzureTableTransformationStateManager>()
                 .WithTransformationExecutor<AzureQueueTransformationExecutor>();
         }
     }

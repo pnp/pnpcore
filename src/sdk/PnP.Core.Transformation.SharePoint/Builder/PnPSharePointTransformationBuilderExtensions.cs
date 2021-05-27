@@ -36,7 +36,7 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IPnPSharePointTransformationBuilder AddPnPSharePointTransformation(this IServiceCollection services, Action<PnPTransformationOptions> options)
         {
             return services.AddPnPTransformation(options)
-                .WithSharePointMappings();
+                .WithSharePoint();
         }
 
         /// <summary>
@@ -44,9 +44,9 @@ namespace Microsoft.Extensions.DependencyInjection
         /// </summary>
         /// <param name="builder"></param>
         /// <returns></returns>
-        public static IPnPSharePointTransformationBuilder WithSharePointMappings(this IPnPTransformationBuilder builder)
+        public static IPnPSharePointTransformationBuilder WithSharePoint(this IPnPTransformationBuilder builder)
         {
-            return WithSharePointMappings(builder, null);
+            return WithSharePoint(builder, null);
         }
 
         /// <summary>
@@ -55,7 +55,7 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <param name="builder"></param>
         /// <param name="options"></param>
         /// <returns></returns>
-        public static IPnPSharePointTransformationBuilder WithSharePointMappings(this IPnPTransformationBuilder builder, Action<SharePointTransformationOptions> options)
+        public static IPnPSharePointTransformationBuilder WithSharePoint(this IPnPTransformationBuilder builder, Action<SharePointTransformationOptions> options)
         {
             if (builder == null) throw new ArgumentNullException(nameof(builder));
 
@@ -65,7 +65,8 @@ namespace Microsoft.Extensions.DependencyInjection
             }
 
             builder.WithMappingProvider<SharePointMappingProvider>()
-                .WithTransformationDistiller<SharePointTransformationDistiller>();
+                .WithTransformationDistiller<SharePointTransformationDistiller>()
+                .WithTargetPageUriResolver<SharePointTargetPageUriResolver>();
 
             builder.Services.TryAddTransient<IMetadataMappingProvider, SharePointMetadataMappingProvider>();
             builder.Services.TryAddTransient<IHtmlMappingProvider, SharePointHtmlMappingProvider>();

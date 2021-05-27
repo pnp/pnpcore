@@ -14,6 +14,17 @@ namespace PnP.Core.Transformation.SharePoint
     /// </summary>
     public class SharePointTransformationDistiller : ITransformationDistiller
     {
+        private readonly ITargetPageUriResolver targetPageUriResolver;
+
+        /// <summary>
+        /// Creates a new instance
+        /// </summary>
+        /// <param name="targetPageUriResolver"></param>
+        public SharePointTransformationDistiller(ITargetPageUriResolver targetPageUriResolver)
+        {
+            this.targetPageUriResolver = targetPageUriResolver ?? throw new ArgumentNullException(nameof(targetPageUriResolver));
+        }
+
         /// <summary>
         /// Defines a list of Page Transformation Tasks
         /// </summary>
@@ -28,14 +39,7 @@ namespace PnP.Core.Transformation.SharePoint
 
             await foreach (var sourceItemId in sourceProvider.GetItemsIdsAsync(token).WithCancellation(token))
             {
-                var sourceItem = await sourceProvider.GetItemAsync(sourceItemId, token).ConfigureAwait(false);
-
-                var spSourceItem = sourceItem as SharePointSourceItem;
-                if (spSourceItem == null) throw new InvalidOperationException($"Only source item of type {typeof(SharePointSourceItem)} is supported");
-
-                // TODO: compute the target uri
-                var targetPageUri = new Uri(targetContext.Uri, sourceItemId.Id);
-                yield return new PageTransformationTask(sourceItem, targetContext, targetPageUri);
+                yield return new PageTransformationTask(sourceProvider, sourceItemId, targetContext);
             }
         }
     }

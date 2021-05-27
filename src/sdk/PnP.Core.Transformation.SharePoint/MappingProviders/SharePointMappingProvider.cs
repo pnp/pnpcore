@@ -37,7 +37,7 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
         public async Task<MappingProviderOutput> MapAsync(MappingProviderInput input, CancellationToken token)
         {
             if (input == null) throw new ArgumentNullException(nameof(input));
-
+            
             var webPartMappingProvider = serviceProvider.GetService<IWebPartMappingProvider>();
             if (webPartMappingProvider != null)
             {

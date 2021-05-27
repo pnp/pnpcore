@@ -12,23 +12,30 @@ namespace PnP.Core.Transformation.Services.Core
     /// </summary>
     public static class TransformationExecutorExtensions
     {
-
         /// <summary>
         /// Starts a process and wait for its completion
         /// </summary>
         /// <param name="process">The process to start</param>
+        /// <param name="sourceProvider">The source provider to use</param>
+        /// <param name="targetContext">The PnP target context</param>
         /// <param name="token">The cancellation token</param>
         /// <returns></returns>
-        public static async Task<TransformationProcessStatus> StartAndWaitProcessAsync(this ITransformationProcess process, CancellationToken token = default)
+        public static async Task<TransformationProcessStatus> StartAndWaitProcessAsync(
+            this ITransformationProcess process,
+            ISourceProvider sourceProvider,
+            PnPContext targetContext,
+            CancellationToken token = default)
         {
             if (process == null) throw new ArgumentNullException(nameof(process));
+            if (sourceProvider == null) throw new ArgumentNullException(nameof(sourceProvider));
+            if (targetContext == null) throw new ArgumentNullException(nameof(targetContext));
 
             // Intercept progress
             var completionTask = new TaskCompletionSource<TransformationProcessStatus>();
             process.Progress = LocalProgress;
 
             // Start the process
-            await process.StartProcessAsync(token).ConfigureAwait(false);
+            await process.StartProcessAsync(sourceProvider, targetContext, token).ConfigureAwait(false);
 
             // When token is cancelled, stop the process
             token.Register(() => _ = process.StopProcessAsync(token));
@@ -67,10 +74,10 @@ namespace PnP.Core.Transformation.Services.Core
         {
             if (transformationExecutor == null) throw new ArgumentNullException(nameof(transformationExecutor));
 
-            var process = await transformationExecutor.CreateTransformationProcessAsync(sourceProvider, targetContext, token).ConfigureAwait(false);
+            var process = await transformationExecutor.CreateTransformationProcessAsync(token).ConfigureAwait(false);
             using (process as IDisposable)
             {
-                return await process.StartAndWaitProcessAsync(token).ConfigureAwait(false);
+                return await process.StartAndWaitProcessAsync(sourceProvider, targetContext, token).ConfigureAwait(false);
             }
         }
     }

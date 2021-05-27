@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using PnP.Core.Services;
+using PnP.Core.Transformation.Poc.Implementations;
 using PnP.Core.Transformation.Services.Core;
 using PnP.Core.Transformation.SharePoint;
 
@@ -18,11 +19,13 @@ namespace PnP.Core.Transformation.Poc
     {
         private readonly IPnPContextFactory pnpContextFactory;
         private readonly ITransformationExecutor transformationExecutor;
+        private readonly ITransformationStateManager transformationStateManager;
 
-        public TransformSiteFunction(IPnPContextFactory pnpContextFactory, ITransformationExecutor transformationExecutor)
+        public TransformSiteFunction(IPnPContextFactory pnpContextFactory, ITransformationExecutor transformationExecutor, ITransformationStateManager transformationStateManager)
         {
             this.pnpContextFactory = pnpContextFactory;
             this.transformationExecutor = transformationExecutor;
+            this.transformationStateManager = transformationStateManager;
         }
 
         [FunctionName("TransformSite")]
@@ -43,8 +46,9 @@ namespace PnP.Core.Transformation.Poc
                     process = await transformationExecutor.CreateSharePointTransformationProcessAsync(
                         pnpContextFactory,
                         source,
-                        target, 
+                        target,
                         token);
+                    await transformationStateManager.WriteStateAsync(process.Id, new SharePointConfig { Source = source, Target = target }, token);
                     await process.StartProcessAsync(token);
 
                     return new OkObjectResult(new { process.Id });

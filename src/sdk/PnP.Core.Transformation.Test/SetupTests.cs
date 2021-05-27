@@ -49,6 +49,7 @@ namespace PnP.Core.Transformation.Test
 
             Assert.IsInstanceOfType(provider.GetRequiredService<IMappingProvider>(), typeof(SharePointMappingProvider));
             Assert.IsInstanceOfType(provider.GetRequiredService<ITransformationDistiller>(), typeof(SharePointTransformationDistiller));
+            Assert.IsInstanceOfType(provider.GetRequiredService<ITargetPageUriResolver>(), typeof(SharePointTargetPageUriResolver));
 
             Assert.IsInstanceOfType(provider.GetRequiredService<IMetadataMappingProvider>(), typeof(SharePointMetadataMappingProvider));
             Assert.IsInstanceOfType(provider.GetRequiredService<IHtmlMappingProvider>(), typeof(SharePointHtmlMappingProvider));
@@ -78,7 +79,8 @@ namespace PnP.Core.Transformation.Test
 
                 .WithTransformationDistiller<Mock>()
                 .WithTransformationStateManager<Mock>()
-                .WithTransformationExecutor<Mock>();
+                .WithTransformationExecutor<Mock>()
+                .WithTargetPageUriResolver<Mock>();
 
             var provider = services.BuildServiceProvider();
 
@@ -93,6 +95,7 @@ namespace PnP.Core.Transformation.Test
             Assert.IsInstanceOfType(provider.GetRequiredService<ITransformationDistiller>(), typeof(Mock));
             Assert.IsInstanceOfType(provider.GetRequiredService<ITransformationStateManager>(), typeof(Mock));
             Assert.IsInstanceOfType(provider.GetRequiredService<ITransformationExecutor>(), typeof(Mock));
+            Assert.IsInstanceOfType(provider.GetRequiredService<ITargetPageUriResolver>(), typeof(Mock));
 
             Assert.AreEqual(2, provider.GetServices<IPagePreTransformation>().Count());
             Assert.AreEqual(2, provider.GetServices<IPagePostTransformation>().Count());
@@ -110,7 +113,8 @@ namespace PnP.Core.Transformation.Test
             ITransformationExecutor,
             IHtmlMappingProvider,
             IPagePreTransformation,
-            IPagePostTransformation
+            IPagePostTransformation,
+            ITargetPageUriResolver
         {
             Task<MappingProviderOutput> IMappingProvider.MapAsync(MappingProviderInput input, CancellationToken token)
             {
@@ -160,6 +164,11 @@ namespace PnP.Core.Transformation.Test
             }
 
             Task IPagePostTransformation.PostTransformAsync(PagePostTransformationContext context, CancellationToken token)
+            {
+                throw new NotImplementedException();
+            }
+
+            Task<Uri> ITargetPageUriResolver.ResolveAsync(ISourceItem sourceItem, PnPContext targetContext, CancellationToken token = default)
             {
                 throw new NotImplementedException();
             }

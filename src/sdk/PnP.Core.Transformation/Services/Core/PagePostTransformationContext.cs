@@ -13,7 +13,9 @@ namespace PnP.Core.Transformation.Services.Core
         /// Creates an instance
         /// </summary>
         /// <param name="task"></param>
-        public PagePostTransformationContext(PageTransformationTask task) : base(task)
+        /// <param name="sourceItem"></param>
+        /// <param name="targetPageUri"></param>
+        public PagePostTransformationContext(PageTransformationTask task, ISourceItem sourceItem, Uri targetPageUri) : base(task, sourceItem, targetPageUri)
         {
         }
 

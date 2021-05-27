@@ -1,47 +1,41 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using PnP.Core.Services;
 
 namespace PnP.Core.Transformation.Services.Core
 {
     /// <summary>
-    /// Defines a page transformation task
+    ///     Defines a page transformation task
     /// </summary>
     public class PageTransformationTask
     {
         /// <summary>
-        /// Creates an instance of the task
+        ///     Creates an instance of the task
         /// </summary>
-        /// <param name="sourceItem"></param>
-        /// <param name="targetContext"></param>
-        /// <param name="targetPageUri"></param>
-        public PageTransformationTask(ISourceItem sourceItem, PnPContext targetContext, Uri targetPageUri)
+        public PageTransformationTask(ISourceProvider sourceProvider, ISourceItemId sourceItemId, PnPContext targetContext)
         {
-            SourceItem = sourceItem ?? throw new ArgumentNullException(nameof(sourceItem));
+            SourceProvider = sourceProvider ?? throw new ArgumentNullException(nameof(sourceProvider));
+            SourceItemId = sourceItemId ?? throw new ArgumentNullException(nameof(sourceItemId));
             TargetContext = targetContext ?? throw new ArgumentNullException(nameof(targetContext));
-            TargetPageUri = targetPageUri ?? throw new ArgumentNullException(nameof(targetPageUri));
         }
 
         /// <summary>
-        /// The Unique ID of a Transformation Task
+        ///     The source provider to use for the task
         /// </summary>
-        public Guid Id { get; } = Guid.NewGuid();
+        public ISourceProvider SourceProvider { get; }
 
         /// <summary>
-        /// Gets the source item to process
+        ///     The source item id to process
         /// </summary>
-        public ISourceItem SourceItem { get; }
+        public ISourceItemId SourceItemId { get; }
 
         /// <summary>
-        /// The target PnPContext
+        /// The PnP target context
         /// </summary>
         public PnPContext TargetContext { get; }
 
         /// <summary>
-        /// Relative URL of the source page to transform
+        ///     The Unique ID of a Transformation Task
         /// </summary>
-        public Uri TargetPageUri { get; }
-
+        public Guid Id { get; } = Guid.NewGuid();
     }
 }

@@ -1,110 +1,62 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace PnP.Core.Transformation.Services.Core
 {
     /// <summary>
-    /// Defines the status of a transformation execution process
+    ///     Defines the status of a transformation execution process
     /// </summary>
     public class TransformationProcessStatus
     {
-        private TransformationProcessStatus()
+        /// <summary>
+        ///     Creates a new instance
+        /// </summary>
+        /// <param name="processId"></param>
+        /// <param name="state"></param>
+        public TransformationProcessStatus(Guid processId, TransformationExecutionState state)
         {
+            ProcessId = processId;
+            State = state;
         }
 
         /// <summary>
-        /// Gets the process status as pending
+        ///     The ID of the process
         /// </summary>
-        /// <param name="processId"></param>
-        /// <returns></returns>
-        public static TransformationProcessStatus GetPending(Guid processId) =>
-            new TransformationProcessStatus {ProcessId = processId, State = TransformationExecutionState.Pending};
+        public Guid ProcessId { get; }
 
         /// <summary>
-        /// Gets the process status as running
+        ///     Gets the status of the process
         /// </summary>
-        /// <param name="processId"></param>
-        /// <param name="done"></param>
-        /// <param name="errors"></param>
-        /// <param name="total"></param>
-        /// <returns></returns>
-        public static TransformationProcessStatus GetRunning(Guid processId, int done, int errors, int? total) =>
-            new TransformationProcessStatus { ProcessId = processId, Done = done, Errors = errors, Total = total, State = TransformationExecutionState.Running };
-
-        /// <summary>
-        /// Gets the process status as completed
-        /// </summary>
-        /// <param name="processId"></param>
-        /// <param name="done"></param>
-        /// <param name="errors"></param>
-        /// <param name="total"></param>
-        /// <returns></returns>
-        public static TransformationProcessStatus GetCompleted(Guid processId, int done, int errors, int? total) =>
-            new TransformationProcessStatus { ProcessId = processId, Done = done, Errors = errors, Total = total, State = TransformationExecutionState.Completed };
-
-        /// <summary>
-        /// Gets the process status as aborted
-        /// </summary>
-        /// <param name="processId"></param>
-        /// <param name="done"></param>
-        /// <param name="errors"></param>
-        /// <param name="total"></param>
-        /// <returns></returns>
-        public static TransformationProcessStatus GetAborted(Guid processId, int done, int errors, int? total) =>
-            new TransformationProcessStatus { ProcessId = processId, Done = done, Errors = errors, Total = total, State = TransformationExecutionState.Aborted };
-
-        /// <summary>
-        /// The ID of the process
-        /// </summary>
-        public Guid ProcessId { get; private set; }
-
-        /// <summary>
-        /// Gets the number of total items
-        /// </summary>
-        public int? Total { get; private set; }
-
-        /// <summary>
-        /// Gets the number of done items
-        /// </summary>
-        public int Done { get; private set; }
-
-        /// <summary>
-        /// Gets the number of items with an error
-        /// </summary>
-        public int Errors { get; private set; }
-
-        /// <summary>
-        /// Gets the percentage of done items
-        /// </summary>
-        public int? Percentage => Total.HasValue ? Done * 100 / Total : null;
-
-        /// <summary>
-        /// Gets the status of the process
-        /// </summary>
-        public TransformationExecutionState State { get; private set; }
+        public TransformationExecutionState State { get; }
     }
 
     /// <summary>
-    /// List of process status
+    ///     List of process status
     /// </summary>
     public enum TransformationExecutionState
     {
         /// <summary>
-        /// Process is in pending state
+        ///     Process is in pending state
         /// </summary>
         Pending,
+
         /// <summary>
-        /// Process is running
+        ///     Process is running
         /// </summary>
         Running,
+
         /// <summary>
-        /// Process has been aborted
+        ///     Process has been aborted
         /// </summary>
         Aborted,
+
         /// <summary>
-        /// Process is completed
+        ///     Process is completed
         /// </summary>
-        Completed
+        Completed,
+
+        /// <summary>
+        ///     Process could not process any tasks
+        /// </summary>
+        Faulted
     }
 }

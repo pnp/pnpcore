@@ -15,23 +15,23 @@ namespace PnP.Core.Transformation.SharePoint
         /// <summary>
         /// Creates a new transformation process for SharePoint
         /// </summary>
-        /// <param name="transformationExecutor">The executor to use</param>
+        /// <param name="transformationProcess">The process to use</param>
         /// <param name="sourceContext">The source context</param>
         /// <param name="targetContext">The target context</param>
         /// <param name="token">The cancellation token</param>
         /// <returns></returns>
-        public static Task<ITransformationProcess> CreateSharePointTransformationProcessAsync(
-            this ITransformationExecutor transformationExecutor,
+        public static Task StartSharePointProcessAsync(
+            this ITransformationProcess transformationProcess,
             PnPContext sourceContext,
             PnPContext targetContext,
             CancellationToken token = default)
         {
-            if (transformationExecutor == null) throw new ArgumentNullException(nameof(transformationExecutor));
+            if (transformationProcess == null) throw new ArgumentNullException(nameof(transformationProcess));
 
             // Create the provider
             var sourceProvider = new SharePointSourceProvider(sourceContext);
 
-            return transformationExecutor.CreateTransformationProcessAsync(sourceProvider, targetContext, token);
+            return transformationProcess.StartProcessAsync(sourceProvider, targetContext, token);
         }
 
         /// <summary>
@@ -59,20 +59,20 @@ namespace PnP.Core.Transformation.SharePoint
         /// <summary>
         /// Creates a new transformation process for SharePoint
         /// </summary>
-        /// <param name="transformationExecutor">The executor to use</param>
+        /// <param name="transformationProcess">The process to use</param>
         /// <param name="pnpContextFactory">The context factory to use</param>
         /// <param name="sourceName">The source site name</param>
         /// <param name="targetName">The target site name</param>
         /// <param name="token">The cancellation token</param>
         /// <returns></returns>
-        public static async Task<ITransformationProcess> CreateSharePointTransformationProcessAsync(
-            this ITransformationExecutor transformationExecutor,
+        public static async Task StartProcessAsync(
+            this ITransformationProcess transformationProcess,
             IPnPContextFactory pnpContextFactory,
             string sourceName,
             string targetName,
             CancellationToken token = default)
         {
-            if (transformationExecutor == null) throw new ArgumentNullException(nameof(transformationExecutor));
+            if (transformationProcess == null) throw new ArgumentNullException(nameof(transformationProcess));
             if (pnpContextFactory == null) throw new ArgumentNullException(nameof(pnpContextFactory));
 
             // Create contexts
@@ -81,7 +81,7 @@ namespace PnP.Core.Transformation.SharePoint
             var targetContext = await pnpContextFactory.CreateAsync(targetName).ConfigureAwait(false);
             token.ThrowIfCancellationRequested();
 
-            return await transformationExecutor.CreateSharePointTransformationProcessAsync(sourceContext, targetContext, token).ConfigureAwait(false);
+            await transformationProcess.StartSharePointProcessAsync(sourceContext, targetContext, token).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -101,14 +101,15 @@ namespace PnP.Core.Transformation.SharePoint
             CancellationToken token = default)
         {
             if (transformationExecutor == null) throw new ArgumentNullException(nameof(transformationExecutor));
+            if (pnpContextFactory == null) throw new ArgumentNullException(nameof(pnpContextFactory));
 
-            var process = await transformationExecutor.CreateSharePointTransformationProcessAsync(pnpContextFactory,
-                    sourceName,
-                    targetName,
-                    token)
-                .ConfigureAwait(false);
+            // Create contexts
+            var sourceContext = await pnpContextFactory.CreateAsync(sourceName).ConfigureAwait(false);
+            token.ThrowIfCancellationRequested();
+            var targetContext = await pnpContextFactory.CreateAsync(targetName).ConfigureAwait(false);
+            token.ThrowIfCancellationRequested();
 
-            return await process.StartAndWaitProcessAsync(token).ConfigureAwait(false);
+            return await transformationExecutor.TransformSharePointAsync(sourceContext, targetContext, token).ConfigureAwait(false);
         }
     }
 }

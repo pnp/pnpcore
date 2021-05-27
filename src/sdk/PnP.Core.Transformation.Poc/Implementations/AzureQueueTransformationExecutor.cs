@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
 using PnP.Core.Transformation.Services.Core;
 
 namespace PnP.Core.Transformation.Poc.Implementations
@@ -11,6 +13,8 @@ namespace PnP.Core.Transformation.Poc.Implementations
         {
         }
 
+        
+        
         protected override LongRunningTransformationProcessBase CreateProcess(Guid id)
         {
             return new AzureQueueTransformationProcessBase(id, ServiceProvider);
@@ -21,6 +25,17 @@ namespace PnP.Core.Transformation.Poc.Implementations
     {
         public AzureQueueTransformationProcessBase(Guid id, IServiceProvider serviceProvider) : base(id, serviceProvider)
         {
+        }
+
+
+        protected override Task QueueTaskAsync(PageTransformationTask task, CancellationToken token)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override Task StopProcessAsync(CancellationToken token = default)
+        {
+            return base.StopProcessAsync(token);
         }
     }
 }

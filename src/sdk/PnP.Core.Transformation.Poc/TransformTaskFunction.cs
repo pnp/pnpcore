@@ -15,11 +15,13 @@ namespace PnP.Core.Transformation.Poc
     {
         private readonly ITransformationExecutor executor;
         private readonly IPnPContextFactory pnpContextFactory;
+        private readonly ITransformationStateManager transformationStateManager;
 
-        public TransformTaskFunction(ITransformationExecutor executor, IPnPContextFactory pnpContextFactory)
+        public TransformTaskFunction(ITransformationExecutor executor, IPnPContextFactory pnpContextFactory, ITransformationStateManager transformationStateManager)
         {
             this.executor = executor;
             this.pnpContextFactory = pnpContextFactory;
+            this.transformationStateManager = transformationStateManager;
         }
 
         [FunctionName("TransformTaskFunction")]
@@ -32,14 +34,15 @@ namespace PnP.Core.Transformation.Poc
             var process = await executor.LoadTransformationProcessAsync(item.ProcessId, token);
             if (!(process is LongRunningTransformationProcessBase p)) throw new NotSupportedException();
 
-            PnPContext targetContext = null;
-            PnPContext sourceContext = null;
-            
+            var sharePointConfig = await transformationStateManager.ReadStateAsync<SharePointConfig>(process.Id, token);
+
+            PnPContext targetContext = await pnpContextFactory.CreateAsync(sharePointConfig.Target);
+            PnPContext sourceContext = await pnpContextFactory.CreateAsync(sharePointConfig.Source);
+
             var sourceItemId = new SharePointSourceItemId(item.SourcePageUri);
             var sourceProvider = new SharePointSourceProvider(sourceContext);
-            var sourceItem = await sourceProvider.GetItemAsync(sourceItemId, token);
 
-            var task = new PageTransformationTask(sourceItem, targetContext, item.TargetPageUri);
+            var task = new PageTransformationTask(sourceProvider, sourceItemId, targetContext);
             await p.ProcessTaskAsync(task, token);
         }
     }
