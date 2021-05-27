@@ -311,7 +311,7 @@ namespace PnP.Core.Model.SharePoint
             return IsFolderAsync().GetAwaiter().GetResult();
         }
 
-        public async Task<IFolder> GetFolderAsync()
+        public async Task<IFolder> GetParentFolderAsync()
         {
             if (!Values.ContainsKey("FileDirRef"))
             {
@@ -321,9 +321,9 @@ namespace PnP.Core.Model.SharePoint
             return await PnPContext.Web.GetFolderByServerRelativeUrlAsync(Values["FileDirRef"].ToString()).ConfigureAwait(false);
         }
 
-        public IFolder GetFolder()
+        public IFolder GetParentFolder()
         {
-            return GetFolderAsync().GetAwaiter().GetResult();
+            return GetParentFolderAsync().GetAwaiter().GetResult();
         }
 
         private async Task LoadKeyListItemProperties()

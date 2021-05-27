@@ -117,12 +117,12 @@ namespace PnP.Core.Test.SharePoint
 
                 // Add item to root of the list
                 var rootItem = list.Items.Add(new Dictionary<string, object> { { "Title", "root" } });
-                var folderForRootItem = await rootItem.GetFolderAsync().ConfigureAwait(false);
+                var folderForRootItem = await rootItem.GetParentFolderAsync().ConfigureAwait(false);
                 Assert.IsFalse(await rootItem.IsFolderAsync());
                 Assert.IsFalse(await rootItem.IsFileAsync());
 
                 var folderItem = await list.AddListFolderAsync("Test");
-                var folderForFolderItem = await folderItem.GetFolderAsync().ConfigureAwait(false);
+                var folderForFolderItem = await folderItem.GetParentFolderAsync().ConfigureAwait(false);
                 Assert.IsTrue(folderForFolderItem != null);
 
                 var item = list.Items.Add(new Dictionary<string, object> { { "Title", "blabla" } }, "Test");
@@ -130,7 +130,7 @@ namespace PnP.Core.Test.SharePoint
                 Assert.IsTrue(newFolderItem.IsFolder());
                 Assert.IsFalse(newFolderItem.IsFile());
 
-                var folder = await item.GetFolderAsync().ConfigureAwait(false);
+                var folder = await item.GetParentFolderAsync().ConfigureAwait(false);
                 Assert.IsTrue(folder.Name == "Test");
 
                 using (var context2 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))

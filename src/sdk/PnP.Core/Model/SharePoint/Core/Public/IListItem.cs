@@ -155,13 +155,13 @@ namespace PnP.Core.Model.SharePoint
         /// Returns the <see cref="IFolder"/> that holds this item
         /// </summary>
         /// <returns>The <see cref="IFolder"/> for this item is returned, if the item itself is a folder then the item is returned as <see cref="IFolder"/>.</returns>
-        public Task<IFolder> GetFolderAsync();
+        public Task<IFolder> GetParentFolderAsync();
 
         /// <summary>
         /// Returns the <see cref="IFolder"/> that holds this item
         /// </summary>
         /// <returns>The <see cref="IFolder"/> for this item is returned, if the item itself is a folder then the item is returned as <see cref="IFolder"/>.</returns>
-        public IFolder GetFolder();
+        public IFolder GetParentFolder();
         #endregion
 
         #region SystemUpdate
