@@ -61,3 +61,102 @@ var response = context.Team.ExecuteRequest(apiRequest);
 
 // Parse the json response returned via response.Response
 ```
+
+## Batching custom API requests
+
+To optimize performance it's recommended to limit the amount of server roundtrips and therefore batching custom API requests can be used. Batching requests is quite similar to interactive requests, you simply use one of the available `ExecuteRequestBatch` methods. Since batching requests implies that you'll only get a result once the batch is executed you do not get back a JSON string, instead you get an `IBatchSingleResult<BatchResultValue<string>>` which allows you to check if the batch was executed and if so get the batch result via the `Value` property.
+
+```csharp
+// Create a new batch
+var batch = context.NewBatch();
+
+// Add requests to the batch
+var meResponse = context.Web.ExecuteRequestBatch(batch, new ApiRequest(ApiRequestType.Graph, "me"));
+// Note: meResponse.IsAvailable is false
+var drivesResponse = context.Web.ExecuteRequestBatch(batch, new ApiRequest(ApiRequestType.Graph, "drives"));
+// Note: drivesResponse.IsAvailable is false
+
+// Execute the batch
+await context.ExecuteAsync(batch);
+
+// Use the batch results
+if (meResponse.IsAvailable)
+{
+    string meJsonResonse = meResponse.Result.Value;
+}
+
+if (drivesResponse.IsAvailable)
+{
+    string drivesJsonResponse = drivesResponse.Result.Value;
+}
+```
+
+Batching can be used with an dedicated batch like shown in above example, but it's also possible to use the implicit batch which is always available, in that case you'd just leave out the `batch` parameter in the `ExecuteRequestBatch` methods:
+
+```csharp
+// Add requests to the batch
+var meResponse = await context.Web.ExecuteRequestBatchAsync(new ApiRequest(ApiRequestType.Graph, "me"));
+var drivesResponse = await context.Web.ExecuteRequestBatchAsync(new ApiRequest(ApiRequestType.Graph, "drives"));
+
+// Execute the batch
+await context.ExecuteAsync();
+
+// Use the batch results
+if (meResponse.IsAvailable)
+{
+    string meJsonResonse = meResponse.Result.Value;
+}
+
+if (drivesResponse.IsAvailable)
+{
+    string drivesJsonResponse = drivesResponse.Result.Value;
+}
+```
+
+## Handling failing requests in a batch
+
+What if one of the requests in a batch fails? The default behavior is that a `SharePointRestServiceException` or `MicrosoftGraphServiceException` exception is thrown when the first failed request is processed, but you can also choose to get back a list of failed batch requests and then handle the follow-up in your code. To do this you need to tell the `Execute` methods to not throw an exception and collect the output of the `Execute` method. Following snippet shows how to do this:
+
+```csharp
+// Create a new batch
+var batch = context.NewBatch();
+
+// Add requests to the batch
+var meResponse = await context.Web.ExecuteRequestBatchAsync(batch, new ApiRequest(ApiRequestType.Graph, "me"));
+var drivesResponse = await context.Web.ExecuteRequestBatchAsync(batch, new ApiRequest(ApiRequestType.Graph, "thiswillgiveanerror"));
+
+// Execute the batch, notice we tell here to not throw an exception and we collect the possible errors in a collection
+var batchErrors = await context.ExecuteAsync(batch, false);
+
+// Use the batch results
+if (batchErrors.Any())
+{
+    // there were errors
+}
+else
+{
+    // all good
+}
+```
+
+## Can I mix custom API requests with out-the-box API requests in a single batch?
+
+Yes, this is perfectly possible, below example combines a custom API with an API request that will load a set of lists.
+
+```csharp
+// Create a new batch
+var batch = context.NewBatch();
+
+// Add requests to the batch
+var result1 = await context.Web.ExecuteRequestBatchAsync(batch, new ApiRequest(ApiRequestType.Graph, "_api/web"));
+var result2 = await context.Web.Lists
+    .Where(p => p.TemplateType == ListTemplateType.GenericList)
+    .QueryProperties(
+        p => p.Title, p => p.TemplateType,
+        p => p.ContentTypes.QueryProperties(
+            p => p.Name, p => p.FieldLinks.QueryProperties(p => p.Name)))
+    .AsBatchAsync(batch);
+
+// Execute the batch
+await context.ExecuteAsync(batch);
+```
