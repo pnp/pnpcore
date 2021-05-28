@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Host;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.ObjectPool;
 using PnP.Core.Services;
 using PnP.Core.Transformation.Poc.Implementations;
 using PnP.Core.Transformation.Services.Core;
@@ -25,24 +26,33 @@ namespace PnP.Core.Transformation.Poc
         }
 
         [FunctionName("TransformTaskFunction")]
-        public async Task Run([QueueTrigger("tasks", Connection = "%AzureWebJobsStorage%")] TaskQueueItem item,
+        public async Task Run([QueueTrigger("%TasksQueueName%", Connection = "AzureWebJobsStorage")] TaskQueueItem item,
             ILogger log,
             CancellationToken token)
         {
             log.LogInformation($"Processing: {item.TaskId}");
 
+            // Restore process info
             var process = await executor.LoadTransformationProcessAsync(item.ProcessId, token);
             if (!(process is LongRunningTransformationProcessBase p)) throw new NotSupportedException();
 
-            var sharePointConfig = await transformationStateManager.ReadStateAsync<SharePointConfig>(process.Id, token);
+            // Try to read additional info
+            var sharePointConfig = await transformationStateManager.ReadStateAsync<SharePointConfig>(process.Id.ToString(), token);
+            if (sharePointConfig == null)
+            {
+                log.LogError("Cannot find config for process {id}", process.Id);
+                return;
+            }
 
+            // Create SharePoint contexts
             PnPContext targetContext = await pnpContextFactory.CreateAsync(sharePointConfig.Target);
             PnPContext sourceContext = await pnpContextFactory.CreateAsync(sharePointConfig.Source);
 
             var sourceItemId = new SharePointSourceItemId(item.SourcePageUri);
             var sourceProvider = new SharePointSourceProvider(sourceContext);
 
-            var task = new PageTransformationTask(sourceProvider, sourceItemId, targetContext);
+            // Execute task
+            var task = new PageTransformationTask(item.TaskId, sourceProvider, sourceItemId, targetContext);
             await p.ProcessTaskAsync(task, token);
         }
     }

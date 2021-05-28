@@ -11,7 +11,5 @@ namespace PnP.Core.Transformation.Poc.Implementations
         public Guid TaskId { get; set; }
 
         public Guid ProcessId { get; set; }
-
-        public Uri TargetPageUri { get; set; }
     }
 }

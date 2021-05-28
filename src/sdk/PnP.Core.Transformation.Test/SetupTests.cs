@@ -133,12 +133,17 @@ namespace PnP.Core.Transformation.Test
                 throw new NotImplementedException();
             }
 
-            Task ITransformationStateManager.WriteStateAsync<T>(object key, T state, CancellationToken token)
+            Task ITransformationStateManager.WriteStateAsync<T>(string key, T state, CancellationToken token)
             {
                 throw new NotImplementedException();
             }
 
-            Task<T> ITransformationStateManager.ReadStateAsync<T>(object key, CancellationToken token)
+            IAsyncEnumerable<T> ITransformationStateManager.ListStateAsync<T>(string prefix, CancellationToken token)
+            {
+                throw new NotImplementedException();
+            }
+
+            Task<T> ITransformationStateManager.ReadStateAsync<T>(string key, CancellationToken token)
             {
                 throw new NotImplementedException();
             }

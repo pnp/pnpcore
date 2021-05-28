@@ -34,7 +34,7 @@ namespace PnP.Core.Transformation.SharePoint
         /// <returns></returns>
         public async IAsyncEnumerable<ISourceItemId> GetItemsIdsAsync([EnumeratorCancellation] CancellationToken token = default)
         {
-            for (int x = 0; x < 100; x++)
+            for (int x = 0; x < 10; x++)
             {
                 yield return new SharePointSourceItemId(new Uri(new Uri(SourceContext.Uri + "/"), $"{x}"));
             }

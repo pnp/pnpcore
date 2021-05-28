@@ -47,7 +47,7 @@ namespace PnP.Core.Transformation.Services.Core
             CancellationToken token = default)
         {
             // When a long running process is restored, source provider and target context are not available
-            ITransformationProcess process = CreateProcess(Guid.NewGuid());
+            ITransformationProcess process = CreateProcess(processId);
 
             return Task.FromResult(process);
         }

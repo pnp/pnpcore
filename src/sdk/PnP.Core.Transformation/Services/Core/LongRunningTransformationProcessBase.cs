@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
+using AngleSharp.Html.Parser;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using PnP.Core.Services;
@@ -66,11 +69,11 @@ namespace PnP.Core.Transformation.Services.Core
                 await foreach (var task in transformationDistiller.GetPageTransformationTasksAsync(sourceProvider, targetContext, token).WithCancellation(token))
                 {
                     // Set task state to pending
-                    await ChangeTaskStatusAsync(new TransformationProcessTaskStatus(Id, task.Id, DateTimeOffset.Now), token)
+                    await ChangeTaskStatusAsync( TransformationProcessTaskStatus.GetPending(Id, task.Id, DateTimeOffset.Now), token)
                         .ConfigureAwait(false);
 
                     // Queue item
-                    await QueueTaskAsync(task, token).ConfigureAwait(false);
+                    await EnqueueTaskAsync(task, token).ConfigureAwait(false);
                 }
             }
             catch (OperationCanceledException)
@@ -93,7 +96,7 @@ namespace PnP.Core.Transformation.Services.Core
         /// <param name="task"></param>
         /// <param name="token"></param>
         /// <returns></returns>
-        protected abstract Task QueueTaskAsync(PageTransformationTask task, CancellationToken token);
+        protected abstract Task EnqueueTaskAsync(PageTransformationTask task, CancellationToken token);
 
         /// <summary>
         ///     Stops the Transformation Process
@@ -110,8 +113,28 @@ namespace PnP.Core.Transformation.Services.Core
         /// <returns>The status of the Transformation Process</returns>
         public override async Task<TransformationProcessStatus> GetStatusAsync(CancellationToken token = default)
         {
-            var status = await TransformationStateManager.ReadStateAsync<TransformationProcessStatus>(Id, token).ConfigureAwait(false);
-            return status ?? new TransformationProcessStatus(Id, TransformationExecutionState.Pending);
+            var status = await TransformationStateManager.ReadStateAsync<TransformationProcessStatus>(Id.ToString(), token).ConfigureAwait(false);
+            status ??= new TransformationProcessStatus(Id, TransformationExecutionState.Pending);
+
+            // If status is running we need to check if there is any item in pending state
+            if (status.State == TransformationExecutionState.Running)
+            {
+                bool hasPending = false;
+                await foreach (var task in GetTasksStatusAsync(new TasksStatusQuery(TransformationTaskExecutionState.Pending), token))
+                {
+                    hasPending = true;
+                    break;
+                }
+
+                // No more tasks in pending state
+                if (!hasPending)
+                {
+                    // Automatically set the state to completed
+                    status = await ChangeProcessStateAsync(TransformationExecutionState.Completed, token).ConfigureAwait(false);
+                }
+            }
+
+            return status;
         }
 
         /// <summary>
@@ -131,35 +154,57 @@ namespace PnP.Core.Transformation.Services.Core
         /// <param name="task"></param>
         /// <param name="token"></param>
         /// <returns></returns>
-        public async Task ProcessTaskAsync(PageTransformationTask task, CancellationToken token = default)
+        public virtual async Task<TransformationProcessTaskStatus> ProcessTaskAsync(PageTransformationTask task,
+            CancellationToken token = default)
         {
             if (task == null) throw new ArgumentNullException(nameof(task));
 
             var logger = ServiceProvider.GetRequiredService<ILogger<LongRunningTransformationProcessBase>>();
             var pageTransformator = ServiceProvider.GetRequiredService<IPageTransformator>();
 
-            // Retrieve current status
+            // Retrieve the status for the task
             var taskStatus = await GetTaskStatusAsync(task.Id, token).ConfigureAwait(false);
+            // Check if task is already processed
+            if (taskStatus.State != TransformationTaskExecutionState.Pending)
+            {
+                // Skip
+                return taskStatus;
+            }
+
+            // Retrieve current process status
+            var status = await GetStatusAsync(token).ConfigureAwait(false);
+            // Process is not running, skip the task
+            if (status.State != TransformationExecutionState.Running)
+            {
+                // Set task to aborted
+                taskStatus = TransformationProcessTaskStatus.GetNormalState(Id, task.Id, taskStatus.CreationDate, taskStatus.StartDate, DateTimeOffset.Now, TransformationTaskExecutionState.Aborted);
+                await ChangeTaskStatusAsync(taskStatus, token).ConfigureAwait(false);
+                return taskStatus;
+            }
 
             try
             {
                 // Set task to running
-                taskStatus = new TransformationProcessTaskStatus(Id, task.Id, taskStatus.CreationDate, DateTimeOffset.Now, null, TransformationTaskExecutionState.Running);
+                taskStatus = TransformationProcessTaskStatus.GetNormalState(Id, task.Id, taskStatus.CreationDate, DateTimeOffset.Now, null, TransformationTaskExecutionState.Running);
                 await ChangeTaskStatusAsync(taskStatus, token).ConfigureAwait(false);
 
                 await pageTransformator.TransformAsync(task, token).ConfigureAwait(false);
 
                 // Set task to completed
-                taskStatus = new TransformationProcessTaskStatus(Id, task.Id, taskStatus.CreationDate, taskStatus.StartDate, DateTimeOffset.Now, TransformationTaskExecutionState.Completed);
+                taskStatus = TransformationProcessTaskStatus.GetNormalState(Id, task.Id, taskStatus.CreationDate, taskStatus.StartDate, DateTimeOffset.Now, TransformationTaskExecutionState.Completed);
                 await ChangeTaskStatusAsync(taskStatus, token).ConfigureAwait(false);
+
+                return taskStatus;
             }
             catch (Exception ex)
             {
                 logger.LogError(ex, "Error while transforming task {id}", task.Id);
 
                 // Set task to faulted
-                taskStatus = new TransformationProcessTaskStatus(Id, task.Id, taskStatus.CreationDate, taskStatus.StartDate, DateTimeOffset.Now, ex);
+                taskStatus = TransformationProcessTaskStatus.GetException(Id, task.Id, taskStatus.CreationDate, taskStatus.StartDate, DateTimeOffset.Now, ex);
                 await ChangeTaskStatusAsync(taskStatus, token).ConfigureAwait(false);
+
+                return taskStatus;
             }
         }
 
@@ -171,13 +216,18 @@ namespace PnP.Core.Transformation.Services.Core
         /// <returns></returns>
         public override async Task<TransformationProcessTaskStatus> GetTaskStatusAsync(Guid id, CancellationToken token = default)
         {
-            var taskStatus = await TransformationStateManager.ReadStateAsync<TransformationProcessTaskStatus>(Id, token).ConfigureAwait(false);
-            if (taskStatus == null)
+            // Since task can be in different state, we have to try to search item for each
+            foreach (var state in Enum.GetValues(typeof(TransformationTaskExecutionState))
+                .Cast<TransformationTaskExecutionState>())
             {
-                throw new ArgumentException($"Cannot find task with id {id}", nameof(id));
+                var taskStatus = await TransformationStateManager.ReadStateAsync<TransformationProcessTaskStatus>(GetTaskKey(id, state), token).ConfigureAwait(false);
+                if (taskStatus != null)
+                {
+                    return taskStatus;
+                }
             }
 
-            return taskStatus;
+            throw new ArgumentException($"Cannot find task with id {id}", nameof(id));
         }
 
         /// <summary>
@@ -186,9 +236,21 @@ namespace PnP.Core.Transformation.Services.Core
         /// <param name="query">Query to use for filtering</param>
         /// <param name="token">Cancellation token to use</param>
         /// <returns></returns>
-        public override IAsyncEnumerable<TransformationProcessTaskStatus> GetTasksStatusAsync(TasksStatusQuery query, CancellationToken token = default)
+        public override async IAsyncEnumerable<TransformationProcessTaskStatus> GetTasksStatusAsync(TasksStatusQuery query, [EnumeratorCancellation] CancellationToken token = default)
         {
-            throw new NotImplementedException();
+            if (query == null) throw new ArgumentNullException(nameof(query));
+
+            // Prepare the prefix to apply
+            string key = $"{Id}:";
+            if (query.State.HasValue)
+            {
+                key += $"{query.State}:";
+            }
+
+            await foreach (var pair in TransformationStateManager.ListStateAsync<TransformationProcessTaskStatus>(key, token))
+            {
+                yield return pair.Value;
+            }
         }
 
         /// <summary>
@@ -197,14 +259,16 @@ namespace PnP.Core.Transformation.Services.Core
         /// <param name="state"></param>
         /// <param name="token"></param>
         /// <returns></returns>
-        protected virtual async Task ChangeProcessStateAsync(TransformationExecutionState state, CancellationToken token)
+        protected virtual async Task<TransformationProcessStatus> ChangeProcessStateAsync(TransformationExecutionState state, CancellationToken token)
         {
             var status = new TransformationProcessStatus(Id, state);
             await TransformationStateManager
-                .WriteStateAsync(Id, status, token)
+                .WriteStateAsync(Id.ToString(), status, token)
                 .ConfigureAwait(false);
 
             await RaiseProgressAsync(status).ConfigureAwait(false);
+
+            return status;
         }
 
         /// <summary>
@@ -215,11 +279,35 @@ namespace PnP.Core.Transformation.Services.Core
         /// <returns></returns>
         protected virtual async Task ChangeTaskStatusAsync(TransformationProcessTaskStatus status, CancellationToken token)
         {
+            if (status == null) throw new ArgumentNullException(nameof(status));
+
+            // Since task can be in different state, we have to try to remove item for each of
+            if (status.State != TransformationTaskExecutionState.Pending)
+            {
+                // If status is pending no previous state should be already persisted
+
+                foreach (var state in Enum.GetValues(typeof(TransformationTaskExecutionState))
+                    .Cast<TransformationTaskExecutionState>())
+                {
+                    var removed = await TransformationStateManager
+                        .RemoveStateAsync<TransformationProcessTaskStatus>(GetTaskKey(status.Id, state), token)
+                        .ConfigureAwait(false);
+                    // Item found, exit
+                    if (removed) break;
+                }
+            }
+
+            // Save the new state
             await TransformationStateManager
-                .WriteStateAsync(Id, status, token)
+                .WriteStateAsync(GetTaskKey(status.Id, status.State), status, token)
                 .ConfigureAwait(false);
 
             await RaiseTasksProgressAsync(status).ConfigureAwait(false);
+        }
+
+        private string GetTaskKey(Guid id, TransformationTaskExecutionState state)
+        {
+            return $"{Id}:{state}:{id}";
         }
     }
 

@@ -43,13 +43,15 @@ namespace PnP.Core.Transformation.Poc
                     string source = req.Query["source"];
                     string target = req.Query["target"];
 
-                    process = await transformationExecutor.CreateSharePointTransformationProcessAsync(
+                    // Create the process
+                    process = await transformationExecutor.CreateTransformationProcessAsync(token);
+                    // Keep additional info for the process
+                    await transformationStateManager.WriteStateAsync(process.Id.ToString(), new SharePointConfig { Source = source, Target = target }, token);
+                    // Start to enqueue items
+                    await process.StartProcessAsync(
                         pnpContextFactory,
                         source,
-                        target,
-                        token);
-                    await transformationStateManager.WriteStateAsync(process.Id, new SharePointConfig { Source = source, Target = target }, token);
-                    await process.StartProcessAsync(token);
+                        target, token);
 
                     return new OkObjectResult(new { process.Id });
                 case "GET":

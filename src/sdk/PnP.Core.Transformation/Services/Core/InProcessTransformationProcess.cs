@@ -79,7 +79,7 @@ namespace PnP.Core.Transformation.Services.Core
                 await foreach (var task in transformationDistiller.GetPageTransformationTasksAsync(sourceProvider, targetContext, token))
                 {
 
-                    var taskStatus = new TransformationProcessTaskStatus(Id, task.Id, DateTimeOffset.Now, DateTimeOffset.Now, null, TransformationTaskExecutionState.Running);
+                    var taskStatus = TransformationProcessTaskStatus.GetNormalState(Id, task.Id, DateTimeOffset.Now, DateTimeOffset.Now, null, TransformationTaskExecutionState.Running);
                     try
                     {
                         // Save the task status to pending
@@ -88,7 +88,7 @@ namespace PnP.Core.Transformation.Services.Core
                         await pageTransformator.TransformAsync(task, token).ConfigureAwait(false);
 
                         // Save the task status to completed
-                        taskStatus = new TransformationProcessTaskStatus(Id, task.Id, taskStatus.CreationDate, taskStatus.StartDate, DateTimeOffset.Now, TransformationTaskExecutionState.Completed);
+                        taskStatus = TransformationProcessTaskStatus.GetNormalState(Id, task.Id, taskStatus.CreationDate, taskStatus.StartDate, DateTimeOffset.Now, TransformationTaskExecutionState.Completed);
                         await ChangeTaskStatusAsync(taskStatus).ConfigureAwait(false);
                     }
                     catch (Exception ex)
@@ -96,7 +96,7 @@ namespace PnP.Core.Transformation.Services.Core
                         logger.LogError(ex, "Error while transforming task {id}", task.Id);
 
                         // Save the task status to faulted
-                        taskStatus = new TransformationProcessTaskStatus(Id, task.Id, taskStatus.CreationDate, taskStatus.StartDate, DateTimeOffset.Now, ex);
+                        taskStatus = TransformationProcessTaskStatus.GetException(Id, task.Id, taskStatus.CreationDate, taskStatus.StartDate, DateTimeOffset.Now, ex);
                         await ChangeTaskStatusAsync(taskStatus).ConfigureAwait(false);
                     }
 
