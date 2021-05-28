@@ -724,6 +724,29 @@ namespace PnP.Core.Test.Base
                 Assert.IsTrue(response.StatusCode == System.Net.HttpStatusCode.OK);
             }
         }
+
+        [TestMethod]
+        public async Task ExecuteBatchRestRequest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                // Relative url for current site
+                var batch = context.NewBatch();
+                var webResponse = context.Web.ExecuteRequestBatch(batch, new ApiRequest(ApiRequestType.SPORest, "_api/web"));
+                Assert.IsTrue(webResponse.IsAvailable == false);
+                var siteResponse = context.Web.ExecuteRequestBatch(batch, new ApiRequest(ApiRequestType.SPORest, "_api/site"));
+                Assert.IsTrue(siteResponse.IsAvailable == false);
+
+                await context.ExecuteAsync(batch);
+
+                Assert.IsTrue(webResponse.IsAvailable);
+                Assert.IsFalse(string.IsNullOrEmpty(webResponse.Result.Value));
+                Assert.IsTrue(siteResponse.IsAvailable);
+                Assert.IsFalse(string.IsNullOrEmpty(siteResponse.Result.Value));
+            }
+        }
+
         #endregion
 
         #region Tests that use Graph to hit SharePoint
@@ -1138,6 +1161,54 @@ namespace PnP.Core.Test.Base
                 Assert.IsTrue(response.ApiRequest == apiRequest);
                 Assert.IsTrue(!string.IsNullOrEmpty(response.Response));
                 Assert.IsTrue(response.StatusCode == System.Net.HttpStatusCode.OK);
+            }
+        }
+
+        [TestMethod]
+        public async Task ExecuteGraphBatchRequest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                // Relative url for current site
+                var batch = context.NewBatch();
+                var meResponse = context.Web.ExecuteRequestBatch(batch, new ApiRequest(ApiRequestType.Graph, "me"));
+                Assert.IsTrue(meResponse.IsAvailable == false);
+                var drivesResponse = context.Web.ExecuteRequestBatch(batch, new ApiRequest(ApiRequestType.Graph, "drives"));
+                Assert.IsTrue(drivesResponse.IsAvailable == false);
+
+                await context.ExecuteAsync(batch);
+
+                Assert.IsTrue(meResponse.IsAvailable);
+                Assert.IsFalse(string.IsNullOrEmpty(meResponse.Result.Value));
+                Assert.IsTrue(drivesResponse.IsAvailable);
+                Assert.IsFalse(string.IsNullOrEmpty(drivesResponse.Result.Value));
+            }
+        }
+
+        [TestMethod]
+        public async Task ExecuteGraphBatchRequestWithErrors()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                // Relative url for current site
+                var batch = context.NewBatch();
+                var meResponse = context.Web.ExecuteRequestBatch(batch, new ApiRequest(ApiRequestType.Graph, "me"));
+                Assert.IsTrue(meResponse.IsAvailable == false);
+                var drivesResponse = context.Web.ExecuteRequestBatch(batch, new ApiRequest(ApiRequestType.Graph, "thiswillgiveanerror"));
+                Assert.IsTrue(drivesResponse.IsAvailable == false);
+
+                var batchErrors = await context.ExecuteAsync(batch, false);
+
+                Assert.IsTrue(meResponse.IsAvailable);
+                Assert.IsFalse(string.IsNullOrEmpty(meResponse.Result.Value));
+
+                // The last request in our batch failed!
+                var driveBatchResult = batchErrors.First();
+                Assert.IsTrue(driveBatchResult.StatusCode != System.Net.HttpStatusCode.OK);
+                Assert.IsTrue(drivesResponse.IsAvailable);
+                Assert.IsTrue(string.IsNullOrEmpty(drivesResponse.Result.Value));
             }
         }
 

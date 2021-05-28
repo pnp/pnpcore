@@ -183,38 +183,15 @@ namespace PnP.Core.Model
         #region ExecuteRequest
         public async Task<ApiRequestResponse> ExecuteRequestAsync(ApiRequest request)
         {
-            ApiType apiType = ApiType.SPORest;
-            string apiRequest = request.Request;
-            switch (request.Type)
-            {
-                case ApiRequestType.SPORest:
-                    {
-                        if (apiRequest != null && !apiRequest.StartsWith("https://", StringComparison.InvariantCultureIgnoreCase))
-                        {
-                            apiRequest = $"{PnPContext.Uri.ToString().TrimEnd(new char[] { '/' })}/{apiRequest}";
-                        }
-                        break;
-                    }
-                case ApiRequestType.Graph: 
-                    {
-                        apiType = ApiType.Graph; 
-                        break; 
-                    }
-                case ApiRequestType.GraphBeta: 
-                    {
-                        apiType = ApiType.GraphBeta; 
-                        break; 
-                    }                    
-            }
+            ConfigureApiTypeAndRequest(request, out ApiType apiType, out string apiRequest);
 
             var apiResponse = await RawRequestAsync(new ApiCall(apiRequest, apiType, request.Body)
-                                                                {
-                                                                    ExecuteRequestApiCall = true,
-                                                                    SkipCollectionClearing = true,
-                                                                    RawRequest = true, 
-                                                                    Headers = request.Headers
-                                                                }
-                                                    , request.HttpMethod).ConfigureAwait(false);
+                                {
+                                    ExecuteRequestApiCall = true,
+                                    SkipCollectionClearing = true,
+                                    RawRequest = true,
+                                    Headers = request.Headers
+                                } , request.HttpMethod).ConfigureAwait(false);
 
             return new ApiRequestResponse()
             {
@@ -225,9 +202,73 @@ namespace PnP.Core.Model
             };
         }
 
+        private void ConfigureApiTypeAndRequest(ApiRequest request, out ApiType apiType, out string apiRequest)
+        {
+            apiType = ApiType.SPORest;
+            apiRequest = request.Request;
+            switch (request.Type)
+            {
+                case ApiRequestType.SPORest:
+                    {
+                        if (apiRequest != null && !apiRequest.StartsWith("https://", StringComparison.InvariantCultureIgnoreCase))
+                        {
+                            apiRequest = $"{PnPContext.Uri.ToString().TrimEnd(new char[] { '/' })}/{apiRequest}";
+                        }
+                        break;
+                    }
+                case ApiRequestType.Graph:
+                    {
+                        apiType = ApiType.Graph;
+                        break;
+                    }
+                case ApiRequestType.GraphBeta:
+                    {
+                        apiType = ApiType.GraphBeta;
+                        break;
+                    }
+            }
+        }
+
         public ApiRequestResponse ExecuteRequest(ApiRequest request)
         {
             return ExecuteRequestAsync(request).GetAwaiter().GetResult();
+        }
+
+        public async Task<IBatchSingleResult<BatchResultValue<string>>> ExecuteRequestBatchAsync(Batch batch, ApiRequest request)
+        {
+            ConfigureApiTypeAndRequest(request, out ApiType apiType, out string apiRequest);
+
+            var apiCall = new ApiCall(apiRequest, apiType, request.Body)
+            {
+                ExecuteRequestApiCall = true,
+                SkipCollectionClearing = true,
+                RawRequest = true,
+                Headers = request.Headers,
+                RawSingleResult = new BatchResultValue<string>(null),
+                RawResultsHandler = (json, apiCall) =>
+                {
+                    (apiCall.RawSingleResult as BatchResultValue<string>).Value = json;
+                }
+            };
+
+            var batchRequest = await RawRequestBatchAsync(batch, apiCall, request.HttpMethod).ConfigureAwait(false);
+
+            return new BatchSingleResult<BatchResultValue<string>>(batch, batchRequest.Id, apiCall.RawSingleResult as BatchResultValue<string>);
+        }
+
+        public IBatchSingleResult<BatchResultValue<string>> ExecuteRequestBatch(Batch batch, ApiRequest request)
+        {
+            return ExecuteRequestBatchAsync(batch, request).GetAwaiter().GetResult();
+        }
+
+        public async Task<IBatchSingleResult<BatchResultValue<string>>> ExecuteRequestBatchAsync(ApiRequest request)
+        {
+            return await ExecuteRequestBatchAsync(PnPContext.CurrentBatch, request).ConfigureAwait(false);
+        }
+
+        public IBatchSingleResult<BatchResultValue<string>> ExecuteRequestBatch(ApiRequest request)
+        {
+            return ExecuteRequestBatchAsync(request).GetAwaiter().GetResult();
         }
         #endregion
 
@@ -946,7 +987,6 @@ namespace PnP.Core.Model
                 // Get entity information for the entity to update
                 entityInfo = GetClassInfo();
 
-
                 // Prefix API request with context url if needed
                 apiCall = PrefixApiCall(apiCall, entityInfo);
 
@@ -991,20 +1031,24 @@ namespace PnP.Core.Model
         internal async Task<BatchRequest> RawRequestBatchAsync(Batch batch, ApiCall apiCall, HttpMethod method, [CallerMemberName] string operationName = null)
         {
             // TODO: Can we consolidate this one with the previous one?
+            EntityInfo entityInfo = null;
 
-            // Mark request as raw
-            apiCall.RawRequest = true;
-
-            // Get entity information for the entity to update
-            var entityInfo = GetClassInfo();
-
-            // Prefix API request with context url if needed
-            apiCall = PrefixApiCall(apiCall, entityInfo);
-
-            // Ensure there's no Graph beta endpoint being used when that was not allowed
-            if (!CanUseGraphBetaForRequest(apiCall, entityInfo))
+            if (!apiCall.ExecuteRequestApiCall)
             {
-                return null;
+                // Get entity information for the entity to update
+                entityInfo = GetClassInfo();
+                
+                // Mark request as raw
+                apiCall.RawRequest = true;
+
+                // Prefix API request with context url if needed
+                apiCall = PrefixApiCall(apiCall, entityInfo);
+
+                // Ensure there's no Graph beta endpoint being used when that was not allowed
+                if (!CanUseGraphBetaForRequest(apiCall, entityInfo))
+                {
+                    return null;
+                }
             }
 
             // Ensure token replacement is done
