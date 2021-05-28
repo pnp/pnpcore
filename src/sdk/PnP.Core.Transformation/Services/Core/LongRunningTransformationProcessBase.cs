@@ -69,7 +69,7 @@ namespace PnP.Core.Transformation.Services.Core
                 await foreach (var task in transformationDistiller.GetPageTransformationTasksAsync(sourceProvider, targetContext, token).WithCancellation(token))
                 {
                     // Set task state to pending
-                    await ChangeTaskStatusAsync( TransformationProcessTaskStatus.GetPending(Id, task.Id, DateTimeOffset.Now), token)
+                    await ChangeTaskStatusAsync(TransformationProcessTaskStatus.GetPending(Id, task.Id, DateTimeOffset.Now), token)
                         .ConfigureAwait(false);
 
                     // Queue item
@@ -216,15 +216,10 @@ namespace PnP.Core.Transformation.Services.Core
         /// <returns></returns>
         public override async Task<TransformationProcessTaskStatus> GetTaskStatusAsync(Guid id, CancellationToken token = default)
         {
-            // Since task can be in different state, we have to try to search item for each
-            foreach (var state in Enum.GetValues(typeof(TransformationTaskExecutionState))
-                .Cast<TransformationTaskExecutionState>())
+            var taskStatus = await TransformationStateManager.ReadStateAsync<TransformationProcessTaskStatus>(GetTaskKey(id), token).ConfigureAwait(false);
+            if (taskStatus != null)
             {
-                var taskStatus = await TransformationStateManager.ReadStateAsync<TransformationProcessTaskStatus>(GetTaskKey(id, state), token).ConfigureAwait(false);
-                if (taskStatus != null)
-                {
-                    return taskStatus;
-                }
+                return taskStatus;
             }
 
             throw new ArgumentException($"Cannot find task with id {id}", nameof(id));
@@ -281,23 +276,22 @@ namespace PnP.Core.Transformation.Services.Core
         {
             if (status == null) throw new ArgumentNullException(nameof(status));
 
-            // Since task can be in different state, we have to try to remove item for each of
-            if (status.State != TransformationTaskExecutionState.Pending)
+            // Get previous state
+            var prevStatus = await TransformationStateManager.ReadStateAsync<TransformationProcessTaskStatus>(GetTaskKey(status.Id), token).ConfigureAwait(false);
+            if (prevStatus != null)
             {
-                // If status is pending no previous state should be already persisted
-
-                foreach (var state in Enum.GetValues(typeof(TransformationTaskExecutionState))
-                    .Cast<TransformationTaskExecutionState>())
-                {
-                    var removed = await TransformationStateManager
-                        .RemoveStateAsync<TransformationProcessTaskStatus>(GetTaskKey(status.Id, state), token)
-                        .ConfigureAwait(false);
-                    // Item found, exit
-                    if (removed) break;
-                }
+                // Remove previous entry used to support list operation
+                await TransformationStateManager
+                    .RemoveStateAsync<TransformationProcessTaskStatus>(GetTaskKey(prevStatus.Id, prevStatus.State), token)
+                    .ConfigureAwait(false);
             }
 
             // Save the new state
+            await TransformationStateManager
+                .WriteStateAsync(GetTaskKey(status.Id), status, token)
+                .ConfigureAwait(false);
+
+            // Save an entry also to support list operation
             await TransformationStateManager
                 .WriteStateAsync(GetTaskKey(status.Id, status.State), status, token)
                 .ConfigureAwait(false);
@@ -305,9 +299,13 @@ namespace PnP.Core.Transformation.Services.Core
             await RaiseTasksProgressAsync(status).ConfigureAwait(false);
         }
 
-        private string GetTaskKey(Guid id, TransformationTaskExecutionState state)
+        private string GetTaskKey(Guid id, TransformationTaskExecutionState? state = null)
         {
-            return $"{Id}:{state}:{id}";
+            if (state.HasValue)
+            {
+                return $"{Id}:{state}:{id}";
+            }
+            return $"{Id}:{id}";
         }
     }
 

@@ -5,6 +5,14 @@
     <UserSecretsId>234de3f0-082f-42df-b3a4-bb7bcddc3909</UserSecretsId>
   </PropertyGroup>
   <ItemGroup>
+    <None Remove="default.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="default.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
     <PackageReference Include="Microsoft.Azure.Functions.Extensions" Version="1.1.0" />
     <PackageReference Include="Microsoft.Azure.WebJobs.Extensions.Storage" Version="3.0.10" />
     <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="3.1.0" />

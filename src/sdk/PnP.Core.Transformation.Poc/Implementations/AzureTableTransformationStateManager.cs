@@ -67,6 +67,9 @@ namespace PnP.Core.Transformation.Poc.Implementations
 
                 foreach (var stateEntity in segment)
                 {
+                    // Prefix search is not fully supported
+                    if (!stateEntity.RowKey.StartsWith(prefix)) continue;
+
                     // Remove the type from the beginning of the row key
                     string key = stateEntity.RowKey.Split(':', 2)[1];
                     yield return new KeyValuePair<string, T>(key, stateEntity.GetTypedData<T>());
