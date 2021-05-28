@@ -64,9 +64,7 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// The folder, if any, represented by the list item
         /// </summary>
-#pragma warning disable CA1721 // Property names should not match get methods
         public IFolder Folder { get; }
-#pragma warning restore CA1721 // Property names should not match get methods
 
         /// <summary>
         /// The list for the list item

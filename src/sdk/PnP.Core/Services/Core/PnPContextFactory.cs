@@ -137,10 +137,7 @@ namespace PnP.Core.Services
             }
 
             // Process the Authentication Provider initialization code, if any
-            if (initializeAuthenticationProvider != null)
-            {
-                initializeAuthenticationProvider(configuration.AuthenticationProvider);
-            }
+            initializeAuthenticationProvider?.Invoke(configuration.AuthenticationProvider);
 
             return await CreateAsync(configuration.SiteUrl, configuration.AuthenticationProvider, options).ConfigureAwait(false);
         }

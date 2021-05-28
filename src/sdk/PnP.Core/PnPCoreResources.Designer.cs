@@ -70,6 +70,15 @@ namespace PnP.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cannot access the result since batch was not yet executed.
+        /// </summary>
+        internal static string Exception_BatchResult_BatchNotYetExecuted {
+            get {
+                return ResourceManager.GetString("Exception_BatchResult_BatchNotYetExecuted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {0} cannot be 0.
         /// </summary>
         internal static string Exception_CannotBeZero {

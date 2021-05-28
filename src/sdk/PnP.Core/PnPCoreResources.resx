@@ -120,6 +120,9 @@
   <data name="Exception_ArgumentExpressionNotValid" xml:space="preserve">
     <value>Argument expression is not valid</value>
   </data>
+  <data name="Exception_BatchResult_BatchNotYetExecuted" xml:space="preserve">
+    <value>Cannot access the result since batch was not yet executed</value>
+  </data>
   <data name="Exception_CannotBeZero" xml:space="preserve">
     <value>{0} cannot be 0</value>
   </data>

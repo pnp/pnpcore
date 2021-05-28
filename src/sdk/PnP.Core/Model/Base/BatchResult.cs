@@ -43,8 +43,7 @@ namespace PnP.Core.Model
             {
                 if (!IsAvailable)
                 {
-                    // TODO: use resources
-                    throw new InvalidOperationException("Cannot access the result since batch is not available yet");
+                    throw new InvalidOperationException(PnPCoreResources.Exception_BatchResult_BatchNotYetExecuted);
                 }
 
                 if (BatchRequest.ApiCall.RawRequest)
@@ -72,8 +71,7 @@ namespace PnP.Core.Model
         {
             if (!IsAvailable)
             {
-                // TODO: use resources
-                throw new InvalidOperationException("Cannot access the result since batch is not available yet");
+                throw new InvalidOperationException(PnPCoreResources.Exception_BatchResult_BatchNotYetExecuted);
             }
 
             return this.result.GetEnumerator();
