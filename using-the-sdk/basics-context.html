@@ -85,29 +85,38 @@
 <p>Requesting a <code>PnPContext</code> is something each application does, using the <code>PnPContextFactory</code> as explained in the <a href="readme.html">overview article</a>. Whereas the overview article describes how to get a <code>PnPContext</code> there are additional possibilities when requesting and working with a <code>PnPContext</code>.</p>
 <h2 id="loading-additional-iweb-and-isite-properties-when-creating-a-pnpcontext">Loading additional IWeb and ISite properties when creating a PnPContext</h2>
 <p>When a <code>PnPContext</code> is created two calls are issued to SharePoint Online. In a first call the <code>IWeb</code> is loaded with following properties: <code>Id</code>, <code>Url</code> and <code>RegionalSettings</code>. In the second call <code>ISite</code> is loaded with the <code>Id</code> and <code>GroupId</code> properties. If your application needs additional <code>IWeb</code> or <code>ISite</code> properties you can optimize the number of server roundtrips by adding the extra needed properties to the already planned requests for loading <code>IWeb</code> and <code>ISite</code>. To do this you can provide a <code>PnPContextOptions</code> object specifying the additional <code>IWeb</code> and <code>ISite</code> properties to load.</p>
-<pre><code class="lang-csharp">using (var context = await pnpContextFactory.CreateAsync(&quot;SiteToWorkWith&quot;, new PnPContextOptions()
-            {
-                AdditionalSitePropertiesOnCreate = new Expression&lt;Func&lt;ISite, object&gt;&gt;[] { s =&gt; s.Url, s =&gt; s.HubSiteId },
-                AdditionalWebPropertiesOnCreate = new Expression&lt;Func&lt;IWeb, object&gt;&gt;[] { w =&gt; w.ServerRelativeUrl }
-            }))
+<pre><code class="lang-csharp">var options = new PnPContextOptions()
+{
+    AdditionalSitePropertiesOnCreate = new Expression&lt;Func&lt;ISite, object&gt;&gt;[] { s =&gt; s.Url, s =&gt; s.HubSiteId },
+    AdditionalWebPropertiesOnCreate = new Expression&lt;Func&lt;IWeb, object&gt;&gt;[] { w =&gt; w.ServerRelativeUrl }
+};
+
+using (var context = await pnpContextFactory.CreateAsync(&quot;SiteToWorkWith&quot;, options))
 {
     // the created context has besides the default properties also the Url and HubSiteId ISite properties loaded + 
     // the ServerRelativeUrl IWeb property.
 }
 </code></pre>
 <p>While above sample just loaded some basic <code>IWeb</code> and <code>ISite</code> properties you can also do more complex LINQ expressions. Below sa</p>
-<pre><code class="lang-csharp">using (var context = await pnpContextFactory.CreateAsync(&quot;SiteToWorkWith&quot;, new PnPContextOptions()
-        {
-            AdditionalSitePropertiesOnCreate = new Expression&lt;Func&lt;ISite, object&gt;&gt;[] { s =&gt; s.Url, s =&gt; s.HubSiteId,
-                                                                                        s =&gt; s.Features },
-            AdditionalWebPropertiesOnCreate = new Expression&lt;Func&lt;IWeb, object&gt;&gt;[] { w =&gt; w.ServerRelativeUrl,
-                                                                                        w =&gt; w.Fields, w =&gt; w.Features,
-                                                                                        w =&gt; w.Lists.QueryProperties(r =&gt; r.Title,
-                                                                                        r =&gt; r.RootFolder.QueryProperties(p=&gt;p.ServerRelativeUrl)) }
-        }))
+<pre><code class="lang-csharp">var options = new PnPContextOptions()
 {
-    // the created context has besides the default properties also the Url, HubSiteId and Features ISite properties loaded + 
-    // the ServerRelativeUrl, Fields, Features, Lists with RootFolder IWeb properties.
+    AdditionalSitePropertiesOnCreate = 
+        new Expression&lt;Func&lt;ISite, object&gt;&gt;[] { s =&gt; s.Url, s =&gt; s.HubSiteId,
+                                                s =&gt; s.Features },
+    AdditionalWebPropertiesOnCreate = 
+        new Expression&lt;Func&lt;IWeb, object&gt;&gt;[] 
+        {   
+            w =&gt; w.ServerRelativeUrl,
+            w =&gt; w.Fields, w =&gt; w.Features,
+            w =&gt; w.Lists.QueryProperties(r =&gt; r.Title,
+                r =&gt; r.RootFolder.QueryProperties(p =&gt; p.ServerRelativeUrl)) 
+        }
+};
+
+using (var context = await pnpContextFactory.CreateAsync(&quot;SiteToWorkWith&quot;, options))
+{
+    // the created context has besides the default properties also the Url, HubSiteId and Features ISite 
+    // properties loaded + the ServerRelativeUrl, Fields, Features, Lists with RootFolder IWeb properties.
 }
 </code></pre>
 <p>Any expression that you'd normally would write to retrieve data can also be specified to be included in the default context creation.</p>
@@ -132,14 +141,22 @@
 </code></pre>
 <h3 id="cloning-a-pnpcontext-for-the-same-web">Cloning a PnPContext for the same web</h3>
 <p>Sometimes you want to use a new <code>PnPContext</code> for the same web. You can obviously create a new <code>PnPContext</code> via the context factory, but then you do get the initialization cost again. When you clone a <code>PnPContext</code> the initialization data will be copied across contexts, just like the settings, so you'll get a functioning <code>PnPContext</code> without calling back into SharePoint Online. If you've specified additional properties to load on context creation then only the extra properties which are basic (so no model classes) are copied into the cloned context.</p>
-<pre><code class="lang-csharp">using (var context = await pnpContextFactory.CreateAsync(&quot;SiteToWorkWith&quot; , new PnPContextOptions()
-        {
-            AdditionalSitePropertiesOnCreate = new Expression&lt;Func&lt;ISite, object&gt;&gt;[] { s =&gt; s.Url, s =&gt; s.HubSiteId,
-                                                                                        s =&gt; s.Features },
-            AdditionalWebPropertiesOnCreate = new Expression&lt;Func&lt;IWeb, object&gt;&gt;[] { w =&gt; w.ServerRelativeUrl,
-                                                                                        w =&gt; w.Fields, w =&gt; w.Features,
-                                                                                        w =&gt; w.Lists.QueryProperties(r =&gt; r.Title,
-                                                                                        r =&gt; r.RootFolder.QueryProperties(p=&gt;p.ServerRelativeUrl))))
+<pre><code class="lang-csharp">var options = new PnPContextOptions()
+{
+    AdditionalSitePropertiesOnCreate = 
+        new Expression&lt;Func&lt;ISite, object&gt;&gt;[] { s =&gt; s.Url, s =&gt; s.HubSiteId,
+                                                s =&gt; s.Features },
+    AdditionalWebPropertiesOnCreate = 
+        new Expression&lt;Func&lt;IWeb, object&gt;&gt;[] 
+        {   
+            w =&gt; w.ServerRelativeUrl,
+            w =&gt; w.Fields, w =&gt; w.Features,
+            w =&gt; w.Lists.QueryProperties(r =&gt; r.Title,
+                r =&gt; r.RootFolder.QueryProperties(p =&gt; p.ServerRelativeUrl)) 
+        }
+};
+
+using (var context = await pnpContextFactory.CreateAsync(&quot;SiteToWorkWith&quot; , options))
 {
     // Clone this context using a configuration
     using (var contextClone = await context.CloneAsync(&quot;SiteToWorkWith&quot;))
