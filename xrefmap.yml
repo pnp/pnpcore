@@ -2445,6 +2445,56 @@ references:
   fullName.vb: PnP.Core.Model.IDataModel(Of TModel).ExecuteRequestAsync
   nameWithType: IDataModel<TModel>.ExecuteRequestAsync
   nameWithType.vb: IDataModel(Of TModel).ExecuteRequestAsync
+- uid: PnP.Core.Model.IDataModel`1.ExecuteRequestBatch(PnP.Core.Services.ApiRequest)
+  name: ExecuteRequestBatch(ApiRequest)
+  href: api/PnP.Core.Model.IDataModel-1.html#PnP_Core_Model_IDataModel_1_ExecuteRequestBatch_PnP_Core_Services_ApiRequest_
+  commentId: M:PnP.Core.Model.IDataModel`1.ExecuteRequestBatch(PnP.Core.Services.ApiRequest)
+  fullName: PnP.Core.Model.IDataModel<TModel>.ExecuteRequestBatch(PnP.Core.Services.ApiRequest)
+  fullName.vb: PnP.Core.Model.IDataModel(Of TModel).ExecuteRequestBatch(PnP.Core.Services.ApiRequest)
+  nameWithType: IDataModel<TModel>.ExecuteRequestBatch(ApiRequest)
+  nameWithType.vb: IDataModel(Of TModel).ExecuteRequestBatch(ApiRequest)
+- uid: PnP.Core.Model.IDataModel`1.ExecuteRequestBatch(PnP.Core.Services.Batch,PnP.Core.Services.ApiRequest)
+  name: ExecuteRequestBatch(Batch, ApiRequest)
+  href: api/PnP.Core.Model.IDataModel-1.html#PnP_Core_Model_IDataModel_1_ExecuteRequestBatch_PnP_Core_Services_Batch_PnP_Core_Services_ApiRequest_
+  commentId: M:PnP.Core.Model.IDataModel`1.ExecuteRequestBatch(PnP.Core.Services.Batch,PnP.Core.Services.ApiRequest)
+  fullName: PnP.Core.Model.IDataModel<TModel>.ExecuteRequestBatch(PnP.Core.Services.Batch, PnP.Core.Services.ApiRequest)
+  fullName.vb: PnP.Core.Model.IDataModel(Of TModel).ExecuteRequestBatch(PnP.Core.Services.Batch, PnP.Core.Services.ApiRequest)
+  nameWithType: IDataModel<TModel>.ExecuteRequestBatch(Batch, ApiRequest)
+  nameWithType.vb: IDataModel(Of TModel).ExecuteRequestBatch(Batch, ApiRequest)
+- uid: PnP.Core.Model.IDataModel`1.ExecuteRequestBatch*
+  name: ExecuteRequestBatch
+  href: api/PnP.Core.Model.IDataModel-1.html#PnP_Core_Model_IDataModel_1_ExecuteRequestBatch_
+  commentId: Overload:PnP.Core.Model.IDataModel`1.ExecuteRequestBatch
+  isSpec: "True"
+  fullName: PnP.Core.Model.IDataModel<TModel>.ExecuteRequestBatch
+  fullName.vb: PnP.Core.Model.IDataModel(Of TModel).ExecuteRequestBatch
+  nameWithType: IDataModel<TModel>.ExecuteRequestBatch
+  nameWithType.vb: IDataModel(Of TModel).ExecuteRequestBatch
+- uid: PnP.Core.Model.IDataModel`1.ExecuteRequestBatchAsync(PnP.Core.Services.ApiRequest)
+  name: ExecuteRequestBatchAsync(ApiRequest)
+  href: api/PnP.Core.Model.IDataModel-1.html#PnP_Core_Model_IDataModel_1_ExecuteRequestBatchAsync_PnP_Core_Services_ApiRequest_
+  commentId: M:PnP.Core.Model.IDataModel`1.ExecuteRequestBatchAsync(PnP.Core.Services.ApiRequest)
+  fullName: PnP.Core.Model.IDataModel<TModel>.ExecuteRequestBatchAsync(PnP.Core.Services.ApiRequest)
+  fullName.vb: PnP.Core.Model.IDataModel(Of TModel).ExecuteRequestBatchAsync(PnP.Core.Services.ApiRequest)
+  nameWithType: IDataModel<TModel>.ExecuteRequestBatchAsync(ApiRequest)
+  nameWithType.vb: IDataModel(Of TModel).ExecuteRequestBatchAsync(ApiRequest)
+- uid: PnP.Core.Model.IDataModel`1.ExecuteRequestBatchAsync(PnP.Core.Services.Batch,PnP.Core.Services.ApiRequest)
+  name: ExecuteRequestBatchAsync(Batch, ApiRequest)
+  href: api/PnP.Core.Model.IDataModel-1.html#PnP_Core_Model_IDataModel_1_ExecuteRequestBatchAsync_PnP_Core_Services_Batch_PnP_Core_Services_ApiRequest_
+  commentId: M:PnP.Core.Model.IDataModel`1.ExecuteRequestBatchAsync(PnP.Core.Services.Batch,PnP.Core.Services.ApiRequest)
+  fullName: PnP.Core.Model.IDataModel<TModel>.ExecuteRequestBatchAsync(PnP.Core.Services.Batch, PnP.Core.Services.ApiRequest)
+  fullName.vb: PnP.Core.Model.IDataModel(Of TModel).ExecuteRequestBatchAsync(PnP.Core.Services.Batch, PnP.Core.Services.ApiRequest)
+  nameWithType: IDataModel<TModel>.ExecuteRequestBatchAsync(Batch, ApiRequest)
+  nameWithType.vb: IDataModel(Of TModel).ExecuteRequestBatchAsync(Batch, ApiRequest)
+- uid: PnP.Core.Model.IDataModel`1.ExecuteRequestBatchAsync*
+  name: ExecuteRequestBatchAsync
+  href: api/PnP.Core.Model.IDataModel-1.html#PnP_Core_Model_IDataModel_1_ExecuteRequestBatchAsync_
+  commentId: Overload:PnP.Core.Model.IDataModel`1.ExecuteRequestBatchAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.IDataModel<TModel>.ExecuteRequestBatchAsync
+  fullName.vb: PnP.Core.Model.IDataModel(Of TModel).ExecuteRequestBatchAsync
+  nameWithType: IDataModel<TModel>.ExecuteRequestBatchAsync
+  nameWithType.vb: IDataModel(Of TModel).ExecuteRequestBatchAsync
 - uid: PnP.Core.Model.IDataModel`1.HasChanged(System.String)
   name: HasChanged(String)
   href: api/PnP.Core.Model.IDataModel-1.html#PnP_Core_Model_IDataModel_1_HasChanged_System_String_
