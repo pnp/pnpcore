@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -12,47 +13,61 @@ namespace PnP.Core.Transformation.Services.Core
     public interface ITransformationStateManager
     {
         /// <summary>
-        /// Allows to write a state variable
+        /// Allows to write the process status
         /// </summary>
-        /// <typeparam name="T">The Type of the state variable</typeparam>
-        /// <param name="key">The key of the state variable</param>
-        /// <param name="state">The value of the state variable</param>
+        /// <param name="status">The status to write</param>
         /// <param name="token">The cancellation token</param>
         /// <returns></returns>
-        Task WriteStateAsync<T>(string key, T state, CancellationToken token = default);
+        Task WriteProcessStatusAsync(TransformationProcessStatus status, CancellationToken token = default);
 
         /// <summary>
-        /// Returns the list of items with a prefix
+        /// Allows to write the task status
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="prefix"></param>
+        /// <param name="status">The status to write</param>
+        /// <param name="token">The cancellation token</param>
+        /// <returns></returns>
+        Task WriteTaskStatusAsync(TransformationProcessTaskStatus status, CancellationToken token = default);
+
+        /// <summary>
+        /// Returns the list of tasks using the query specified
+        /// </summary>
+        /// <param name="processId"></param>
+        /// <param name="query"></param>
         /// <param name="token"></param>
-        /// <returns>List of items with a prefix</returns>
-        IAsyncEnumerable<KeyValuePair<string, T>> ListStateAsync<T>(string prefix, CancellationToken token = default);
+        /// <returns></returns>
+        IAsyncEnumerable<TransformationProcessTaskStatus> GetProcessTasksStatus(Guid processId, TasksStatusQuery query, CancellationToken token = default);
 
         /// <summary>
-        /// Allows to read a state variable
+        /// Allows to read the process status by id
         /// </summary>
-        /// <typeparam name="T">The Type of the state variable</typeparam>
-        /// <param name="key">The key of the state variable</param>
+        /// <param name="processId">The process id</param>
         /// <param name="token">The cancellation token</param>
         /// <returns>The value of the state variable</returns>
-        Task<T> ReadStateAsync<T>(string key, CancellationToken token = default);
+        Task<TransformationProcessStatus> ReadProcessStatusAsync(Guid processId, CancellationToken token = default);
 
         /// <summary>
-        /// Allows to remove a variable
+        /// Allows to read the task status by process and task ids
         /// </summary>
-        /// <typeparam name="T">The Type of the state variable</typeparam>
-        /// <param name="key">The key of the state variable</param>
+        /// <param name="processId"></param>
+        /// <param name="taskId">The task id</param>
         /// <param name="token">The cancellation token</param>
-        Task<bool> RemoveStateAsync<T>(string key, CancellationToken token = default);
+        /// <returns>The value of the state variable</returns>
+        Task<TransformationProcessTaskStatus> ReadTaskStatusAsync(Guid processId, Guid taskId, CancellationToken token = default);
 
         /// <summary>
-        /// Allows to remove a variable by a prefix
+        /// Allows to remove a process status by id
         /// </summary>
-        /// <typeparam name="T">The Type of the state variable</typeparam>
-        /// <param name="prefix">The prefix of the state variable</param>
+        /// <param name="processId">The process id</param>
         /// <param name="token">The cancellation token</param>
-        Task<bool> RemoveListStateAsync<T>(string prefix, CancellationToken token = default);
+        Task<bool> RemoveProcessStatusAsync(Guid processId, CancellationToken token = default);
+
+        /// <summary>
+        /// Allows to remove a task status by process and task ids
+        /// </summary>
+        /// <param name="processId">The process id</param>
+        /// <param name="taskId">The task id</param>
+        /// <param name="token">The cancellation token</param>
+        Task<bool> RemoveTaskStatusAsync(Guid processId, Guid taskId, CancellationToken token = default);
+
     }
 }

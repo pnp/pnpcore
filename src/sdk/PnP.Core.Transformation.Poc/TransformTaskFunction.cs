@@ -36,17 +36,12 @@ namespace PnP.Core.Transformation.Poc
             var process = await executor.LoadTransformationProcessAsync(item.ProcessId, token);
             if (!(process is LongRunningTransformationProcessBase p)) throw new NotSupportedException();
 
-            // Try to read additional info
-            var sharePointConfig = await transformationStateManager.ReadStateAsync<SharePointConfig>(process.Id.ToString(), token);
-            if (sharePointConfig == null)
-            {
-                log.LogError("Cannot find config for process {id}", process.Id);
-                return;
-            }
+            string source = "SourceTestSite";
+            string target = "TargetTestSite";
 
             // Create SharePoint contexts
-            PnPContext targetContext = await pnpContextFactory.CreateAsync(sharePointConfig.Target);
-            PnPContext sourceContext = await pnpContextFactory.CreateAsync(sharePointConfig.Source);
+            PnPContext sourceContext = await pnpContextFactory.CreateAsync(source);
+            PnPContext targetContext = await pnpContextFactory.CreateAsync(target);
 
             var sourceItemId = new SharePointSourceItemId(item.SourcePageUri);
             var sourceProvider = new SharePointSourceProvider(sourceContext);

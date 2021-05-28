@@ -40,13 +40,11 @@ namespace PnP.Core.Transformation.Poc
             switch (req.Method)
             {
                 case "POST":
-                    string source = req.Query["source"];
-                    string target = req.Query["target"];
+                    string source = "SourceTestSite";
+                    string target = "TargetTestSite";
 
                     // Create the process
                     process = await transformationExecutor.CreateTransformationProcessAsync(token);
-                    // Keep additional info for the process
-                    await transformationStateManager.WriteStateAsync(process.Id.ToString(), new SharePointConfig { Source = source, Target = target }, token);
                     // Start to enqueue items
                     await process.StartProcessAsync(
                         pnpContextFactory,

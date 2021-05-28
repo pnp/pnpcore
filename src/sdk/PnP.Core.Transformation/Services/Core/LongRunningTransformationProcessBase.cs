@@ -113,7 +113,7 @@ namespace PnP.Core.Transformation.Services.Core
         /// <returns>The status of the Transformation Process</returns>
         public override async Task<TransformationProcessStatus> GetStatusAsync(CancellationToken token = default)
         {
-            var status = await TransformationStateManager.ReadStateAsync<TransformationProcessStatus>(Id.ToString(), token).ConfigureAwait(false);
+            var status = await TransformationStateManager.ReadProcessStatusAsync(Id, token).ConfigureAwait(false);
             status ??= new TransformationProcessStatus(Id, TransformationExecutionState.Pending);
 
             // If status is running we need to check if there is any item in pending state
@@ -216,7 +216,7 @@ namespace PnP.Core.Transformation.Services.Core
         /// <returns></returns>
         public override async Task<TransformationProcessTaskStatus> GetTaskStatusAsync(Guid id, CancellationToken token = default)
         {
-            var taskStatus = await TransformationStateManager.ReadStateAsync<TransformationProcessTaskStatus>(GetTaskKey(id), token).ConfigureAwait(false);
+            var taskStatus = await TransformationStateManager.ReadTaskStatusAsync(Id, id, token).ConfigureAwait(false);
             if (taskStatus != null)
             {
                 return taskStatus;
@@ -231,21 +231,11 @@ namespace PnP.Core.Transformation.Services.Core
         /// <param name="query">Query to use for filtering</param>
         /// <param name="token">Cancellation token to use</param>
         /// <returns></returns>
-        public override async IAsyncEnumerable<TransformationProcessTaskStatus> GetTasksStatusAsync(TasksStatusQuery query, [EnumeratorCancellation] CancellationToken token = default)
+        public override IAsyncEnumerable<TransformationProcessTaskStatus> GetTasksStatusAsync(TasksStatusQuery query, CancellationToken token = default)
         {
             if (query == null) throw new ArgumentNullException(nameof(query));
 
-            // Prepare the prefix to apply
-            string key = $"{Id}:";
-            if (query.State.HasValue)
-            {
-                key += $"{query.State}:";
-            }
-
-            await foreach (var pair in TransformationStateManager.ListStateAsync<TransformationProcessTaskStatus>(key, token))
-            {
-                yield return pair.Value;
-            }
+            return TransformationStateManager.GetProcessTasksStatus(Id, query, token);
         }
 
         /// <summary>
@@ -258,7 +248,7 @@ namespace PnP.Core.Transformation.Services.Core
         {
             var status = new TransformationProcessStatus(Id, state);
             await TransformationStateManager
-                .WriteStateAsync(Id.ToString(), status, token)
+                .WriteProcessStatusAsync(status, token)
                 .ConfigureAwait(false);
 
             await RaiseProgressAsync(status).ConfigureAwait(false);
@@ -276,37 +266,15 @@ namespace PnP.Core.Transformation.Services.Core
         {
             if (status == null) throw new ArgumentNullException(nameof(status));
 
-            // Get previous state
-            var prevStatus = await TransformationStateManager.ReadStateAsync<TransformationProcessTaskStatus>(GetTaskKey(status.Id), token).ConfigureAwait(false);
-            if (prevStatus != null)
-            {
-                // Remove previous entry used to support list operation
-                await TransformationStateManager
-                    .RemoveStateAsync<TransformationProcessTaskStatus>(GetTaskKey(prevStatus.Id, prevStatus.State), token)
-                    .ConfigureAwait(false);
-            }
-
             // Save the new state
             await TransformationStateManager
-                .WriteStateAsync(GetTaskKey(status.Id), status, token)
-                .ConfigureAwait(false);
-
-            // Save an entry also to support list operation
-            await TransformationStateManager
-                .WriteStateAsync(GetTaskKey(status.Id, status.State), status, token)
+                .WriteTaskStatusAsync( status, token)
                 .ConfigureAwait(false);
 
             await RaiseTasksProgressAsync(status).ConfigureAwait(false);
         }
 
-        private string GetTaskKey(Guid id, TransformationTaskExecutionState? state = null)
-        {
-            if (state.HasValue)
-            {
-                return $"{Id}:{state}:{id}";
-            }
-            return $"{Id}:{id}";
-        }
+
     }
 
 }

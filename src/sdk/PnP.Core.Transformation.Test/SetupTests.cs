@@ -133,17 +133,37 @@ namespace PnP.Core.Transformation.Test
                 throw new NotImplementedException();
             }
 
-            Task ITransformationStateManager.WriteStateAsync<T>(string key, T state, CancellationToken token)
+            Task ITransformationStateManager.WriteProcessStatusAsync(TransformationProcessStatus status, CancellationToken token)
             {
                 throw new NotImplementedException();
             }
 
-            IAsyncEnumerable<T> ITransformationStateManager.ListStateAsync<T>(string prefix, CancellationToken token)
+            Task ITransformationStateManager.WriteTaskStatusAsync(TransformationProcessTaskStatus status, CancellationToken token)
             {
                 throw new NotImplementedException();
             }
 
-            Task<T> ITransformationStateManager.ReadStateAsync<T>(string key, CancellationToken token)
+            IAsyncEnumerable<TransformationProcessTaskStatus> ITransformationStateManager.GetProcessTasksStatus(Guid processId, TasksStatusQuery query, CancellationToken token)
+            {
+                throw new NotImplementedException();
+            }
+
+            Task<TransformationProcessStatus> ITransformationStateManager.ReadProcessStatusAsync(Guid processId, CancellationToken token)
+            {
+                throw new NotImplementedException();
+            }
+
+            Task<TransformationProcessTaskStatus> ITransformationStateManager.ReadTaskStatusAsync(Guid processId, Guid taskId, CancellationToken token)
+            {
+                throw new NotImplementedException();
+            }
+
+            Task<bool> ITransformationStateManager.RemoveProcessStatusAsync(Guid processId, CancellationToken token)
+            {
+                throw new NotImplementedException();
+            }
+
+            Task<bool> ITransformationStateManager.RemoveTaskStatusAsync(Guid processId, Guid taskId, CancellationToken token)
             {
                 throw new NotImplementedException();
             }

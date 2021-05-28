@@ -44,9 +44,13 @@ namespace PnP.Core.Transformation.Poc
             builder.Services.AddPnPCore();
 
             // Workaround: DryIoc (used by functions choose wrong ctor)
+            builder.Services.RemoveAll<X509CertificateAuthenticationProvider>();
             builder.Services.RemoveAll<CredentialManagerAuthenticationProvider>();
             builder.Services.AddTransient(p =>
                 new CredentialManagerAuthenticationProvider(
+                    p.GetRequiredService<ILogger<OAuthAuthenticationProvider>>()));
+            builder.Services.AddTransient(p =>
+                new X509CertificateAuthenticationProvider(
                     p.GetRequiredService<ILogger<OAuthAuthenticationProvider>>()));
 
             builder.Services.AddPnPSharePointTransformation()

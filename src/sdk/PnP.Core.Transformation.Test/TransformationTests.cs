@@ -33,12 +33,9 @@ namespace PnP.Core.Transformation.Test
 
             var sourceContext = await pnpContextFactory.CreateAsync(TestCommon.SourceTestSite);
             var targetContext = await pnpContextFactory.CreateAsync(TestCommon.TargetTestSite);
+            var sourceUri = new Uri("http://site/item");
 
-            // TODO: complete with real uris
-            var sourceItemId = new SharePointSourceItemId(new Uri("http://site/item"));
-
-            var sourceProvider = new SharePointSourceProvider(sourceContext);
-            var result = await pageTransformator.TransformAsync(new PageTransformationTask(sourceProvider, sourceItemId, targetContext));
+            var result = await pageTransformator.TransformSharePointAsync(sourceContext, targetContext, sourceUri);
 
             Assert.IsNotNull(result);
             Assert.AreEqual(new Uri("https://officedevpnp.sharepoint.com/sites/pnpcoresdkdemo/item"), result);
@@ -55,6 +52,7 @@ namespace PnP.Core.Transformation.Test
 
             var transformationExecutor = provider.GetRequiredService<ITransformationExecutor>();
             var pnpContextFactory = provider.GetRequiredService<IPnPContextFactory>();
+
             var result = await transformationExecutor.TransformSharePointAsync(
                 pnpContextFactory,
                 TestCommon.SourceTestSite,
