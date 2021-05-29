@@ -103,6 +103,12 @@
     href: teams-channel-chat.md
   - name: Archiving
     href: teams-archiving.md
+- name: Taxonomy
+  items:
+  - name: Overview
+    href: taxonomy-intro.md
+  - name: Advanced
+    href: taxonomy-advanced.md
 - name: SharePoint Syntex
   items:
   - name: Overview
