@@ -228,7 +228,7 @@ namespace PnP.Core.Model.SharePoint
 
         internal Task<IBatchSingleResult<IList>> BatchGetByTitleAsync(Batch batch, string title, params Expression<Func<IList, object>>[] expressions)
         {
-            return GetBatchAsync(batch, apiOverride: GetByTitleApiCall(title), selectors: expressions);
+            return GetBatchAsync(batch, GetByTitleApiCall(title), expressions);
         }
         #endregion
 
@@ -770,19 +770,19 @@ namespace PnP.Core.Model.SharePoint
             {
                 var apiCall = CreateClassifyAndExtractApiCall(Guid.Parse(file.Values["UniqueId"].ToString()));
                 apiCall.RawSingleResult = new SyntexClassifyAndExtractResult();
-                apiCall.RawResultsHandler = (json, apiCall) =>
+                apiCall.RawResultsHandler = (json, call) =>
                 {
                     var result = ProcessClassifyAndExtractResponse(json);
-                    (apiCall.RawSingleResult as SyntexClassifyAndExtractResult).Created = result.Created;
-                    (apiCall.RawSingleResult as SyntexClassifyAndExtractResult).DeliverDate = result.DeliverDate;
-                    (apiCall.RawSingleResult as SyntexClassifyAndExtractResult).ErrorMessage = result.ErrorMessage;
-                    (apiCall.RawSingleResult as SyntexClassifyAndExtractResult).Id = result.Id;
-                    (apiCall.RawSingleResult as SyntexClassifyAndExtractResult).Status = result.Status;
-                    (apiCall.RawSingleResult as SyntexClassifyAndExtractResult).StatusCode = result.StatusCode;
-                    (apiCall.RawSingleResult as SyntexClassifyAndExtractResult).TargetServerRelativeUrl = result.TargetServerRelativeUrl;
-                    (apiCall.RawSingleResult as SyntexClassifyAndExtractResult).TargetSiteUrl = result.TargetSiteUrl;
-                    (apiCall.RawSingleResult as SyntexClassifyAndExtractResult).TargetWebServerRelativeUrl = result.TargetWebServerRelativeUrl;
-                    (apiCall.RawSingleResult as SyntexClassifyAndExtractResult).WorkItemType = result.WorkItemType;
+                    (call.RawSingleResult as SyntexClassifyAndExtractResult).Created = result.Created;
+                    (call.RawSingleResult as SyntexClassifyAndExtractResult).DeliverDate = result.DeliverDate;
+                    (call.RawSingleResult as SyntexClassifyAndExtractResult).ErrorMessage = result.ErrorMessage;
+                    (call.RawSingleResult as SyntexClassifyAndExtractResult).Id = result.Id;
+                    (call.RawSingleResult as SyntexClassifyAndExtractResult).Status = result.Status;
+                    (call.RawSingleResult as SyntexClassifyAndExtractResult).StatusCode = result.StatusCode;
+                    (call.RawSingleResult as SyntexClassifyAndExtractResult).TargetServerRelativeUrl = result.TargetServerRelativeUrl;
+                    (call.RawSingleResult as SyntexClassifyAndExtractResult).TargetSiteUrl = result.TargetSiteUrl;
+                    (call.RawSingleResult as SyntexClassifyAndExtractResult).TargetWebServerRelativeUrl = result.TargetWebServerRelativeUrl;
+                    (call.RawSingleResult as SyntexClassifyAndExtractResult).WorkItemType = result.WorkItemType;
                 };
 
                 var batchRequest = await RawRequestBatchAsync(batch, apiCall, HttpMethod.Post).ConfigureAwait(false);
@@ -843,6 +843,22 @@ namespace PnP.Core.Model.SharePoint
             var apiCall = new ApiCall("_api/machinelearning/workitems", ApiType.SPORest, body);
             return apiCall;
         }
+        #endregion
+
+        #region Get Changes
+
+        public async Task<IList<IChange>> GetChangesAsync(ChangeQueryOptions query)
+        {
+            var apiCall = ChangeCollectionHandler.GetApiCall(this, query);
+            var response = await RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
+            return ChangeCollectionHandler.Deserialize(response).ToList();
+        }
+
+        public IList<IChange> GetChanges(ChangeQueryOptions query)
+        {
+            return GetChangesAsync(query).GetAwaiter().GetResult();
+        }
+
         #endregion
 
         #endregion

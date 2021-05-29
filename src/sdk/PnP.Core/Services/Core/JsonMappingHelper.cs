@@ -1675,7 +1675,6 @@ namespace PnP.Core.Services
             AddSharePointMetaDataProperty(target, property.Value, PnPConstants.MetaDataUri);
             AddSharePointMetaDataProperty(target, property.Value, PnPConstants.MetaDataId);
             AddSharePointMetaDataProperty(target, property.Value, PnPConstants.MetaDataType);
-            AddSharePointMetaDataProperty(target, property.Value, PnPConstants.MetaDataType);
         }
 
         internal static void AddSharePointMetaDataProperty(IMetadataExtensible target, JsonElement jsonElement, string propertyName)

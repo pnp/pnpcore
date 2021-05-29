@@ -1,0 +1,9 @@
+--batchresponse_59301fbf-0a57-4681-8686-ed125773dbd7
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+HTTP/1.1 200 OK
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+
+{"d":{"results":[{"__metadata":{"id":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/SP.ChangeItem426bbbb2-bce1-4a0d-8004-c91afac27db7","uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/SP.ChangeItem426bbbb2-bce1-4a0d-8004-c91afac27db7","type":"SP.ChangeItem"},"ChangeToken":{"__metadata":{"type":"SP.ChangeToken"},"StringValue":"1;3;11dcfc58-be30-4b2d-b3ba-b6752c766f47;637579067709600000;178081259"},"ChangeType":1,"SiteId":"b260dc66-b285-477f-8a1a-14997982e986","Time":"2021-05-29T17:39:31Z","Editor":"Kyle Daley","EditorEmailHint":"kyle@gimmalkyle2.onmicrosoft.com","ItemId":466,"ListId":"11dcfc58-be30-4b2d-b3ba-b6752c766f47","ServerRelativeUrl":"/sites/pnpcoresdktestgroup/Shared Documents/PNP_SDK_TEST_GetListItemChangesAsyncTest.docx","SharedByUser":null,"SharedWithUsers":null,"UniqueId":"521147ee-3384-49d6-989f-1386450569ea","WebId":"7aa3c357-cdeb-43b9-9dcd-dc1645b30cff"}]}}
+--batchresponse_59301fbf-0a57-4681-8686-ed125773dbd7--

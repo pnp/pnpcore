@@ -1034,6 +1034,24 @@ namespace PnP.Core.Test.SharePoint
             await CleanupMockFolderFromSharedDocuments(2, folderToFindName);
         }
 
+        [TestMethod]
+        public async Task GetFolderChangesAsyncTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var folder = await context.Web.Folders.FirstOrDefaultAsync(f => f.Name == "SiteAssets");
+                var changes = await folder.GetChangesAsync(new ChangeQueryOptions(true, true)
+                {
+                    FetchLimit = 5,
+                });
+
+                Assert.IsNotNull(changes);
+                Assert.IsTrue(changes.Count > 0);
+            }
+        }
+
         #region Mock folder
         private async Task<string> AddMockFolderToSharedDocuments(int contextId, string folderName, [System.Runtime.CompilerServices.CallerMemberName] string testName = null)
         {
