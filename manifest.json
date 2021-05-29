@@ -5103,6 +5103,30 @@
     },
     {
       "type": "Conceptual",
+      "source_relative_path": "using-the-sdk/taxonomy-advanced.md",
+      "output": {
+        ".html": {
+          "relative_path": "using-the-sdk/taxonomy-advanced.html",
+          "hash": "QKW67qNIIMIKyCy8VeD6Sg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "using-the-sdk/taxonomy-intro.md",
+      "output": {
+        ".html": {
+          "relative_path": "using-the-sdk/taxonomy-intro.html",
+          "hash": "S78ab2jpPZF12ow3DiSs9Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
       "source_relative_path": "using-the-sdk/teams-archiving.md",
       "output": {
         ".html": {
@@ -5167,7 +5191,7 @@
       "output": {
         ".html": {
           "relative_path": "using-the-sdk/toc.html",
-          "hash": "4xPmoNaKTG3lNkW2Xuow1Q=="
+          "hash": "o8kk6TTkTTqxzB4pMZJmtA=="
         }
       },
       "is_incremental": false,
@@ -5212,7 +5236,7 @@
         "ConceptualDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build",
-          "total_file_count": 63,
+          "total_file_count": 65,
           "skipped_file_count": 0
         },
         "ManagedReferenceDocumentProcessor": {

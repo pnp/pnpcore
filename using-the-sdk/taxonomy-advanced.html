@@ -1,0 +1,165 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html lang="en">
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Working with taxonomy: advanced concepts | PnP Core SDK </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Working with taxonomy: advanced concepts | PnP Core SDK ">
+    <meta name="generator" content="docfx 2.56.5.0">
+    <meta name="description" content="The PnP Core SDK is an SDK designed to work against Microsoft 365. Its aim is to provide a unified object model to work with the whole Microsoft 365 ecosystem. ">
+    <link rel="shortcut icon" href="https://c.s-microsoft.com/favicon.ico?v2">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    <meta property="docfx:newtab" content="true">
+  </head>  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../images/logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <label class="glyphicon glyphicon-search" for="search-query"></label>
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first="First" data-prev="Previous" data-next="Next" data-last="Last"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+                  <div class="contribution-panel mobile-hide pull-right">
+                      <a href="https://github.com/pnp/pnpcore/blob/dev/docs/using-the-sdk/taxonomy-advanced.md/#L1" title="Improve this Doc" class="improve-doc-lg"><i class="glyphicon glyphicon-pencil"></i></a>
+                  </div>
+                    <h1 id="working-with-taxonomy-advanced-concepts">Working with taxonomy: advanced concepts</h1>
+
+<p>Whereas the introduction article got you started working with taxonomy data, this article will cover some additional scenarios like term set and term properties, pinning and reusing terms.</p>
+<p>In the remainder of this article you'll see a lot of <code>context</code> use: in this case this is a <code>PnPContext</code> which was obtained via the <code>PnPContextFactory</code> as explained in the <a href="readme.html">overview article</a> and show below:</p>
+<pre><code class="lang-csharp">using (var context = await pnpContextFactory.CreateAsync(&quot;SiteToWorkWith&quot;))
+{
+    // See next chapter on how to use the PnPContext for adding, updating and deleting data
+}
+</code></pre>
+<div class="NOTE">
+<h5>Note</h5>
+<p>The taxonomy implementation uses Microsoft Graph and currently the Microsoft Graph taxonomy APIs are in beta. See the <a href="basics-apis.html">&quot;Graph V1 versus Graph Beta&quot; section</a> to learn more.</p>
+</div>
+<h2 id="working-with-term-set-properties">Working with term set properties</h2>
+<p>A term set has a property bag implemented via the <code>Properties</code> property on an <code>ITermSet</code>. This property bag is of type <code>ITermSetPropertyCollection</code> and you can perform CRUD operations on it. To read the term set properties you can read all properties of a term set or use a LINQ query to load specific properties</p>
+<pre><code class="lang-csharp">// Load a term set with all it's properties
+var termSet = await myTermGroup.Sets.GetByIdAsync(termSet.Id, p =&gt; p.Properties);
+
+foreach (var property in termSet.Properties.AsRequested())
+{
+    // Do something with the property
+}
+
+// Load a specific property of a term set
+var property = termSet.Properties.FirstOrDefault(p =&gt; p.KeyField == &quot;property1&quot;);
+</code></pre>
+<p>To add new properties you use one of the <code>AddProperty</code> methods on the <code>ITermSet</code></p>
+<pre><code class="lang-csharp">// Add a new property
+await termSet.AddPropertyAsync(&quot;property2&quot;, &quot;property 2 value&quot;);
+// Persist the added property
+await termSet.UpdateAsync();
+</code></pre>
+<p>Once you've loaded a property you can also update it using the same <code>AddPropertyAsync</code> method, the method will update the property if it already existed in the property bag or add it when it was not yet available.</p>
+<pre><code class="lang-csharp">// Update property2 with a new value
+await termSet.AddPropertyAsync(&quot;property2&quot;, &quot;updated property 2 value&quot;);
+// Persist the updated property
+await termSet.UpdateAsync();
+</code></pre>
+<p>To delete properties you remove them from the <code>ITermSetPropertyCollection</code> and then use one of the <code>Update</code> methods.</p>
+<pre><code class="lang-csharp">// Delete all properties
+(termSet.Properties as TermSetPropertyCollection).Clear();
+// Persist the change
+await termSet.UpdateAsync();
+</code></pre>
+<h2 id="working-with-term-properties">Working with term properties</h2>
+<p>Working with term properties is identical to working with term set properties.</p>
+<h2 id="pinning-and-reusing-a-term">Pinning and reusing a term</h2>
+<p>Pinning a term makes linked copies of the term and its children available at the destination. The children of a pinned term can only be created or edited at the source and the changes will reflect everywhere the term is used. Reusing a term makes linked copies of the term and its children available at the destination. Children can be created for a reused term anywhere it is used but will exist only in the term set they were created.</p>
+<p>Both pinning a term or reusing a term comes down to adding a term relation of either type <code>TermRelationType.Pin</code> or <code>TermRelationType.Reuse</code>.</p>
+<pre><code class="lang-csharp">// Pin term A in term set A under term B in term set B
+await termA.Relations.AddAsync(TermRelationType.Pin, termSetB, termB);
+
+// Reuse TermA under TermSetB
+await termA.Relations.AddAsync(TermRelationType.Reuse, termSetB);
+</code></pre>
+</article>
+          </div>
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              </nav>
+            </div>
+          </div>        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            <span>PnP Core SDK<br>Generated by <strong><a href='https://dotnet.github.io/docfx' alt='Doc FX Website'>DocFX</a></strong> with <strong><a href='https://ovasquez.github.io/docfx-material' alt='DocFx Material Theme'>Material UI</a></strong></span>
+            
+            <img src="https://telemetry.sharepointpnp.com/@pnp.github.io/index/" alt="spacer">
+          </div>
+        </div>
+      </footer>    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>  </body>
+</html>
