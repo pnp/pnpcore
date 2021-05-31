@@ -950,11 +950,14 @@ namespace PnP.Core.Test.SharePoint
 
                 Assert.IsTrue(changes.Last().IsPropertyAvailable<IChangeContentType>(p => p.ContentTypeId));
                 Assert.IsFalse(changes.Last().IsPropertyAvailable<IChangeContentType>(p => p.RelativeTime));
-                await Assert.ThrowsExceptionAsync<ClientException>(async () =>
+                Assert.ThrowsException<ClientException>(() =>
                 {
                     changes.Last().IsPropertyAvailable<IChangeContentType>(p => p.ContentTypeId.Name);
                 });
-
+                Assert.ThrowsException<ArgumentNullException>(() =>
+                {
+                    changes.Last().IsPropertyAvailable<IChangeContentType>(null);
+                });
 
                 // Load additional properties based upon the returned content type
                 var changedContentType = (changes.Last() as IChangeContentType).ContentTypeId;

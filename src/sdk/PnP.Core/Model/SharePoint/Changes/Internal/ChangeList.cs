@@ -11,8 +11,6 @@ namespace PnP.Core.Model.SharePoint
         
         public Guid ListId { get => GetValue<Guid>(); set => SetValue(value); }
         
-        public string RootFolderUrl { get => GetValue<string>(); set => SetValue(value); }
-
         [SharePointProperty("BaseTemplate")]
         public ListTemplateType TemplateType { get => GetValue<ListTemplateType>(); set => SetValue(value); }
         

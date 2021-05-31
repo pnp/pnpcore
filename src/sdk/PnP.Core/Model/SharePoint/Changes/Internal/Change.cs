@@ -13,9 +13,11 @@ namespace PnP.Core.Model.SharePoint
     internal partial class Change : TransientObject, IChange, IMetadataExtensible
     {
         public IChangeToken ChangeToken { get => GetValue<IChangeToken>(); set => SetValue(value); }
+
         public ChangeType ChangeType { get => GetValue<ChangeType>(); set => SetValue(value); }
-        public string RelativeTime { get => GetValue<string>(); set => SetValue(value); }
+
         public Guid SiteId { get => GetValue<Guid>(); set => SetValue(value); }
+
         public DateTime Time { get => GetValue<DateTime>(); set => SetValue(value); }
 
         [SystemProperty]
