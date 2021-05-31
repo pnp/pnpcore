@@ -8199,6 +8199,22 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IChange.ChangeType
   nameWithType: IChange.ChangeType
+- uid: PnP.Core.Model.SharePoint.IChange.IsPropertyAvailable*
+  name: IsPropertyAvailable
+  href: api/PnP.Core.Model.SharePoint.IChange.html#PnP_Core_Model_SharePoint_IChange_IsPropertyAvailable_
+  commentId: Overload:PnP.Core.Model.SharePoint.IChange.IsPropertyAvailable
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IChange.IsPropertyAvailable
+  nameWithType: IChange.IsPropertyAvailable
+- uid: PnP.Core.Model.SharePoint.IChange.IsPropertyAvailable``1(Expression{Func{``0,System.Object}})
+  name: IsPropertyAvailable<TModel>(Expression<Func<TModel, Object>>)
+  href: api/PnP.Core.Model.SharePoint.IChange.html#PnP_Core_Model_SharePoint_IChange_IsPropertyAvailable__1_Expression_Func___0_System_Object___
+  commentId: M:PnP.Core.Model.SharePoint.IChange.IsPropertyAvailable``1(Expression{Func{``0,System.Object}})
+  name.vb: IsPropertyAvailable(Of TModel)(Expression(Of Func(Of TModel, Object)))
+  fullName: PnP.Core.Model.SharePoint.IChange.IsPropertyAvailable<TModel>(Expression<Func<TModel, System.Object>>)
+  fullName.vb: PnP.Core.Model.SharePoint.IChange.IsPropertyAvailable(Of TModel)(Expression(Of Func(Of TModel, System.Object)))
+  nameWithType: IChange.IsPropertyAvailable<TModel>(Expression<Func<TModel, Object>>)
+  nameWithType.vb: IChange.IsPropertyAvailable(Of TModel)(Expression(Of Func(Of TModel, Object)))
 - uid: PnP.Core.Model.SharePoint.IChange.RelativeTime
   name: RelativeTime
   href: api/PnP.Core.Model.SharePoint.IChange.html#PnP_Core_Model_SharePoint_IChange_RelativeTime
@@ -8715,19 +8731,6 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IChangeList.ListId
   nameWithType: IChangeList.ListId
-- uid: PnP.Core.Model.SharePoint.IChangeList.RootFolderUrl
-  name: RootFolderUrl
-  href: api/PnP.Core.Model.SharePoint.IChangeList.html#PnP_Core_Model_SharePoint_IChangeList_RootFolderUrl
-  commentId: P:PnP.Core.Model.SharePoint.IChangeList.RootFolderUrl
-  fullName: PnP.Core.Model.SharePoint.IChangeList.RootFolderUrl
-  nameWithType: IChangeList.RootFolderUrl
-- uid: PnP.Core.Model.SharePoint.IChangeList.RootFolderUrl*
-  name: RootFolderUrl
-  href: api/PnP.Core.Model.SharePoint.IChangeList.html#PnP_Core_Model_SharePoint_IChangeList_RootFolderUrl_
-  commentId: Overload:PnP.Core.Model.SharePoint.IChangeList.RootFolderUrl
-  isSpec: "True"
-  fullName: PnP.Core.Model.SharePoint.IChangeList.RootFolderUrl
-  nameWithType: IChangeList.RootFolderUrl
 - uid: PnP.Core.Model.SharePoint.IChangeList.TemplateType
   name: TemplateType
   href: api/PnP.Core.Model.SharePoint.IChangeList.html#PnP_Core_Model_SharePoint_IChangeList_TemplateType
