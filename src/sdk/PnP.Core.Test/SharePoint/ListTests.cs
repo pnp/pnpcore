@@ -85,7 +85,6 @@ namespace PnP.Core.Test.SharePoint
             }
         }
 
-
         [TestMethod]
         public async Task ListLinqGetMethods()
         {
@@ -601,7 +600,7 @@ namespace PnP.Core.Test.SharePoint
                 await context.Web.LoadAsync(p => p.Lists);
 
                 var web = context.Web;
-                
+
                 int listCount = web.Lists.Length;
 
                 string listTitle = TestCommon.GetPnPSdkTestAssetName("RecycleListBatch");
@@ -955,7 +954,7 @@ namespace PnP.Core.Test.SharePoint
                     Assert.Inconclusive("Test data set should be setup to not have the list available.");
                 }
 
-              
+
                 myList = web.Lists.Add(listTitle, ListTemplateType.GenericList);
 
                 await myList.BreakRoleInheritanceAsync(false, false);
@@ -1046,7 +1045,7 @@ namespace PnP.Core.Test.SharePoint
                 var web = context.Web;
 
                 var roleDefinition = web.RoleDefinitions.Add(roleDefName, RoleType.Administrator, new PermissionKind[] { PermissionKind.AddAndCustomizePages });
-                                
+
                 var myList = web.Lists.AsRequested().FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
 
                 if (myList != null)
@@ -1154,6 +1153,22 @@ namespace PnP.Core.Test.SharePoint
             }
         }
 
+        [TestMethod]
+        public async Task GetListChangesAsyncTest()
+        {
+            //TestCommon.Instance.Mocking = false;
 
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var list = await context.Web.Lists.GetByTitleAsync("Documents", p => p.Id);
+                var changes = await list.GetChangesAsync(new ChangeQueryOptions(true, true)
+                {
+                    FetchLimit = 5,
+                });
+
+                Assert.IsNotNull(changes);
+                Assert.IsTrue(changes.Count > 0);
+            }
+        }
     }
 }

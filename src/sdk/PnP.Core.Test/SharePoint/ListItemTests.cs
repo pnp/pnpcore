@@ -3106,7 +3106,7 @@ namespace PnP.Core.Test.SharePoint
                     await listItem.File.LoadBatchAsync(batch, f => f.Length, f => f.Author.QueryProperties(u => u.UserPrincipalName));
                     await listItem2.File.LoadBatchAsync(batch, f => f.Length, f => f.Author.QueryProperties(u => u.UserPrincipalName));
                     await context.ExecuteAsync(batch);
-                    
+
                     Assert.IsNotNull(listItem.File);
                     Assert.IsTrue(listItem.File.Length > 0);
                     Assert.IsTrue(!string.IsNullOrWhiteSpace(listItem.File.Author.UserPrincipalName));
@@ -3125,7 +3125,7 @@ namespace PnP.Core.Test.SharePoint
         }
 
         #endregion
-        
+
         #region GetDisplayName
         [TestMethod]
         public async Task GetFileDisplayNameAsyncTest()
@@ -3255,6 +3255,56 @@ namespace PnP.Core.Test.SharePoint
             }
         }
         #endregion
+
+        [TestMethod]
+        public async Task GetListItemChangesAsyncTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            (string parentLibraryName, _, string documentUrl) = await TestAssets.CreateTestDocumentAsync(0);
+
+            try
+            {
+                using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+                {
+                    IFile file = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl, f => f.ListItemAllFields.QueryProperties(li => li.Id));
+
+                    Assert.IsNotNull(file);
+                    Assert.IsNotNull(file.ListItemAllFields);
+                    Assert.IsTrue(file.ListItemAllFields.Id > 0);
+
+                    IList list = await context.Web.Lists.GetByTitleAsync(parentLibraryName);
+
+                    Assert.IsNotNull(list);
+
+                    IListItem listItem = await list.Items.GetByIdAsync(file.ListItemAllFields.Id);
+
+                    Assert.IsNotNull(listItem);
+
+                    var changes = await listItem.GetChangesAsync(new ChangeQueryOptions(true, true)
+                    {
+                        FetchLimit = 5,
+                    });
+
+                    Assert.IsNotNull(changes);
+                    Assert.IsTrue(changes.Count == 1);
+
+                    var changeItem = changes[0] as IChangeItem;
+                    Assert.IsNotNull(changeItem);
+                    Assert.AreEqual(ChangeType.Add, changeItem.ChangeType);
+                    Assert.IsTrue(changeItem.ItemId > 0);
+                    Assert.IsTrue(!string.IsNullOrWhiteSpace(changeItem.Editor));
+                    Assert.IsTrue(!string.IsNullOrWhiteSpace(changeItem.ServerRelativeUrl));
+                    Assert.AreNotEqual(Guid.Empty, changeItem.UniqueId);
+                    Assert.AreNotEqual(Guid.Empty, changeItem.WebId);
+                    Assert.AreNotEqual(Guid.Empty, changeItem.SiteId);
+                    Assert.AreNotEqual(Guid.Empty, changeItem.ListId);
+                }
+            }
+            finally
+            {
+                await TestAssets.CleanupTestDocumentAsync(2);
+            }
+        }
 
         //[TestMethod]
         //public async Task FieldTypeReadUrl()
