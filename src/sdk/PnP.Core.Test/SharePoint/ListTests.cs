@@ -1286,6 +1286,8 @@ namespace PnP.Core.Test.SharePoint
                 Assert.IsTrue(lastChange.ItemId == 1);
                 Assert.IsTrue(lastChange.IsPropertyAvailable<IChangeItem>(p => p.Editor));
                 Assert.IsTrue(lastChange.IsPropertyAvailable<IChangeItem>(p => p.EditorEmailHint));
+                Assert.IsFalse(changes.Last().IsPropertyAvailable<IChangeItem>(p => p.Hidden));
+
 
                 await myList.DeleteAsync();
             }

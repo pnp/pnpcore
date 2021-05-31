@@ -949,7 +949,6 @@ namespace PnP.Core.Test.SharePoint
                 Assert.IsTrue((changes.Last() as IChangeContentType).WebId != Guid.Empty);
 
                 Assert.IsTrue(changes.Last().IsPropertyAvailable<IChangeContentType>(p => p.ContentTypeId));
-                Assert.IsFalse(changes.Last().IsPropertyAvailable<IChangeContentType>(p => p.RelativeTime));
                 Assert.ThrowsException<ClientException>(() =>
                 {
                     changes.Last().IsPropertyAvailable<IChangeContentType>(p => p.ContentTypeId.Name);
