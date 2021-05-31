@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq.Expressions;
 
 namespace PnP.Core.Model.SharePoint
 {
@@ -41,5 +42,7 @@ namespace PnP.Core.Model.SharePoint
         /// Gets a value that specifies the time that the object was modified.
         /// </summary>
         public DateTime Time { get; }
+
+        public bool IsPropertyAvailable<TModel>(Expression<Func<TModel, object>> expression);
     }
 }

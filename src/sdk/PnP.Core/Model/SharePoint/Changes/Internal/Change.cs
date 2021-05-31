@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace PnP.Core.Model.SharePoint
@@ -28,6 +29,38 @@ namespace PnP.Core.Model.SharePoint
         Task IMetadataExtensible.SetRestToGraphMetadataAsync()
         {
             return Task.CompletedTask;
+        }
+
+        public bool IsPropertyAvailable<TModel>(Expression<Func<TModel, object>> expression)
+        {
+            if (expression == null)
+            {
+                throw new ArgumentNullException(nameof(expression));
+            }
+
+            var body = expression.Body as MemberExpression ?? ((UnaryExpression)expression.Body).Operand as MemberExpression;
+
+            if (body.Expression is MemberExpression)
+            {
+                throw new ClientException(ErrorType.Unsupported, PnPCoreResources.Exception_PropertyNotLoaded_NestedProperties);
+            }
+
+            if (HasValue(body.Member.Name))
+            {
+                if (GetValue(body.Member.Name) is IRequestable)
+                {
+                    if ((GetValue(body.Member.Name) as IRequestable).Requested)
+                    {
+                        return true;
+                    }
+                }
+                else
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
     }
 }

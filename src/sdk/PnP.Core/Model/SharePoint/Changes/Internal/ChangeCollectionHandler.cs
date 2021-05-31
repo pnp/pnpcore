@@ -163,13 +163,7 @@ namespace PnP.Core.Model.SharePoint
                         concreteInstance.Requested = true;
 
                         entityField.PropertyInfo?.SetValue(pnpObject, concreteInstance);
-                    }
-                    else if (entityField.PropertyInfo.PropertyType.ImplementsInterface(typeof(IDataModel<>)))
-                    {
-                        var concreteInstance = EntityManager.GetEntityConcreteInstance(entityField.PropertyInfo.PropertyType, parent, context);
-                        ProcessChangeElement(concreteInstance, parent, context, property.Value, batchRequestId);
-                        entityField.PropertyInfo?.SetValue(pnpObject, concreteInstance);
-                    }
+                    }                    
                     else // Simple property mapping
                     {
                         // Set the object property value taken from the JSON payload

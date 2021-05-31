@@ -25,11 +25,6 @@ namespace PnP.Core.Model.SharePoint
         public Guid ListId { get; }
 
         /// <summary>
-        /// Gets a value that specifies the root folder URL of the the changed list.
-        /// </summary>
-        public string RootFolderUrl { get; }
-
-        /// <summary>
         /// Gets a value that specifies the template type of the the changed list.
         /// </summary>
         public ListTemplateType TemplateType { get; }

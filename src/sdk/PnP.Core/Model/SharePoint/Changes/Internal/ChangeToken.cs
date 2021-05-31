@@ -12,7 +12,7 @@ namespace PnP.Core.Model.SharePoint
 
         public ChangeToken(string stringValue)
         {
-            this.StringValue = stringValue;
+            StringValue = stringValue;
         }
 
         public string StringValue { get => GetValue<string>(); set => SetValue(value); }
@@ -32,7 +32,7 @@ namespace PnP.Core.Model.SharePoint
 
         public override string ToString()
         {
-            return this.StringValue;
+            return StringValue;
         }
     }
 }

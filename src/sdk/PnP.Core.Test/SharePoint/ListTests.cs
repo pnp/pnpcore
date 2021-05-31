@@ -1233,9 +1233,63 @@ namespace PnP.Core.Test.SharePoint
                 Assert.IsTrue(lastChange.WebId != Guid.Empty);
                 Assert.IsTrue(lastChange.ChangeType == ChangeType.Update);
                 Assert.IsTrue(lastChange.SiteId != Guid.Empty);
+                Assert.IsTrue(lastChange.TemplateType == ListTemplateType.NoListTemplate || lastChange.TemplateType == ListTemplateType.GenericList);
 
                 await myList.DeleteAsync();
             }
         }
+
+        [TestMethod]
+        public async Task GetListItemChangesOnlyAsyncTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+
+                // Create a new list
+                string listTitle = TestCommon.GetPnPSdkTestAssetName("GetListItemChangesOnlyAsyncTest");
+                var myList = context.Web.Lists.GetByTitle(listTitle);
+
+                if (TestCommon.Instance.Mocking && myList != null)
+                {
+                    Assert.Inconclusive("Test data set should be setup to not have the list available.");
+                }
+
+                if (myList == null)
+                {
+                    myList = await context.Web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
+                }
+
+                // Add an item
+                await myList.Items.AddAsync(new Dictionary<string, object>() { { "Title", "Test" } });                             
+
+                var changes = await myList.GetChangesAsync(new ChangeQueryOptions(false, true)
+                {
+                    FetchLimit = 5,
+                    Item = true,
+                    RequireSecurityTrim = false
+                });
+
+                Assert.IsNotNull(changes);
+                Assert.IsTrue(changes.Count > 0);
+
+                var lastChange = (changes.Last() as IChangeItem);
+                Assert.IsTrue(lastChange.ChangeToken != null);
+                Assert.IsTrue(!string.IsNullOrEmpty(lastChange.ChangeToken.StringValue));
+                Assert.IsTrue(lastChange.Time != DateTime.MinValue);
+                Assert.IsTrue(lastChange.ListId != Guid.Empty);
+                Assert.IsTrue(lastChange.WebId != Guid.Empty);
+                Assert.IsTrue(lastChange.ChangeType == ChangeType.Add);
+                Assert.IsTrue(lastChange.SiteId != Guid.Empty);
+                Assert.IsTrue(lastChange.UniqueId != Guid.Empty);
+                Assert.IsTrue(lastChange.ItemId == 1);
+                Assert.IsTrue(lastChange.IsPropertyAvailable<IChangeItem>(p => p.Editor));
+                Assert.IsTrue(lastChange.IsPropertyAvailable<IChangeItem>(p => p.EditorEmailHint));
+
+                await myList.DeleteAsync();
+            }
+        }
+
     }
 }
