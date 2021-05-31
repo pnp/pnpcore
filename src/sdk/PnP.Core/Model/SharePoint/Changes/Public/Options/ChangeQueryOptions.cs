@@ -79,6 +79,7 @@
 
         /// <summary>
         /// Gets or sets a value that specifies the start date and start time for changes that are returned through the query.
+        /// Changes after this change token are returned.
         /// </summary>
         public IChangeToken ChangeTokenStart { get; set; }
 
@@ -93,7 +94,7 @@
         public bool DeleteObject { get; set; }
 
         /// <summary>
-        /// The maximum number of items to return.
+        /// The maximum number of items to return (defaults to 1000).
         /// </summary>
         public long FetchLimit { get; set; }
 

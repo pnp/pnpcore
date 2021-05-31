@@ -897,5 +897,69 @@ namespace PnP.Core.Test.SharePoint
                 Assert.IsTrue(changes.Count > 0);
             }
         }
+
+        [TestMethod]
+        public async Task GetWebChangesViaChangeTokenAsyncTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var changes = await context.Web.GetChangesAsync(new ChangeQueryOptions(true, true)
+                {
+                    FetchLimit = 10
+                });
+
+                Assert.IsNotNull(changes);
+                Assert.IsTrue(changes.Count > 0);
+
+                var firstChangeToken = changes.First().ChangeToken;
+
+                var lastChangetoken = changes.Last().ChangeToken;
+
+                var changes2 = await context.Web.GetChangesAsync(new ChangeQueryOptions(true, true)
+                {
+                    ChangeTokenStart = firstChangeToken,
+                    ChangeTokenEnd = lastChangetoken
+                });
+               
+                Assert.IsTrue(changes2.Count == 9);
+            }
+        }
+
+        [TestMethod]
+        public async Task GetWebChangesContentTypeAsyncTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                // Add a new content type
+                IContentType newContentType = await context.Web.ContentTypes.AddAsync("0x0100554FB756A84E4A4899FB819522D2BF50", "ChangeTest", "TESTING", "TESTING");
+
+                var changes = await context.Web.GetChangesAsync(new ChangeQueryOptions(false, true)
+                {
+                    ContentType = true,
+                    FetchLimit = 5
+                });
+
+                Assert.IsNotNull(changes);
+                Assert.IsTrue(changes.Count > 0);
+                Assert.IsTrue((changes.Last() as IChangeContentType).ContentTypeId != null);
+                Assert.IsTrue((changes.Last() as IChangeContentType).WebId != Guid.Empty);
+
+                // Load additional properties based upon the returned content type
+                var changedContentType = (changes.Last() as IChangeContentType).ContentTypeId;
+                
+                await changedContentType.LoadAsync(p => p.Group);
+
+                Assert.IsTrue(changedContentType.IsPropertyAvailable(p => p.Group));
+
+                // Delete the content type again
+                await newContentType.DeleteAsync();
+            }
+        }
+
+
     }
 }

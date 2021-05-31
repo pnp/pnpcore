@@ -1219,7 +1219,7 @@ namespace PnP.Core.Model.SharePoint
         {
             var apiCall = ChangeCollectionHandler.GetApiCall(this, query);
             var response = await RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
-            return ChangeCollectionHandler.Deserialize(response).ToList();
+            return ChangeCollectionHandler.Deserialize(response, this, PnPContext).ToList();
         }
 
         public IList<IChange> GetChanges(ChangeQueryOptions query)

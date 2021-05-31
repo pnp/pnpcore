@@ -14,7 +14,6 @@ namespace PnP.Core.Model.SharePoint
     /// </summary>
     [SharePointType("SP.Field", Target = typeof(Web), Uri = "_api/Web/Fields('{Id}')", Get = "_api/Web/Fields", LinqGet = "_api/Web/Fields")]
     [SharePointType("SP.Field", Target = typeof(List), Uri = "_api/Web/Lists(guid'{Parent.Id}')/Fields('{Id}')", Get = "_api/Web/Lists(guid'{Parent.Id}')/Fields", LinqGet = "_api/Web/Lists(guid'{Parent.Id}')/Fields")]
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Usage", "CA2243:Attribute string literals should parse correctly", Justification = "<Pending>")]
     internal partial class Field : BaseDataModel<IField>, IField
     {
         internal const string FieldOptionsAdditionalInformationKey = "FieldOptions";

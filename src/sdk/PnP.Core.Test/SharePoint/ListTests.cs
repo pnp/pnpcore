@@ -1188,5 +1188,54 @@ namespace PnP.Core.Test.SharePoint
                 Assert.IsTrue(changes.Count > 0);
             }
         }
+
+        [TestMethod]
+        public async Task GetListChangesOnlyAsyncTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+
+                // Create a new list
+                string listTitle = TestCommon.GetPnPSdkTestAssetName("GetListChangesOnlyAsyncTest");
+                var myList = context.Web.Lists.GetByTitle(listTitle);
+
+                if (TestCommon.Instance.Mocking && myList != null)
+                {
+                    Assert.Inconclusive("Test data set should be setup to not have the list available.");
+                }
+
+                if (myList == null)
+                {
+                    myList = await context.Web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
+                }
+
+                // Make a change
+                myList.ContentTypesEnabled = true;
+                await myList.UpdateAsync();
+                
+                var changes = await myList.GetChangesAsync(new ChangeQueryOptions(false, true)
+                {
+                    FetchLimit = 5,
+                    List = true
+                });
+
+                Assert.IsNotNull(changes);
+                Assert.IsTrue(changes.Count > 0);
+
+                var lastChange = (changes.Last() as IChangeList);
+                Assert.IsTrue(lastChange.ChangeToken != null);
+                Assert.IsTrue(!string.IsNullOrEmpty(lastChange.ChangeToken.StringValue));
+                Assert.IsTrue(lastChange.Time != DateTime.MinValue);
+                Assert.IsTrue(lastChange.Hidden == false);
+                Assert.IsTrue(lastChange.ListId != Guid.Empty);
+                Assert.IsTrue(lastChange.WebId != Guid.Empty);
+                Assert.IsTrue(lastChange.ChangeType == ChangeType.Update);
+                Assert.IsTrue(lastChange.SiteId != Guid.Empty);
+
+                await myList.DeleteAsync();
+            }
+        }
     }
 }

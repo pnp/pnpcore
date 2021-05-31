@@ -1,5 +1,4 @@
-﻿using PnP.Core.Model.Security;
-using System;
+﻿using System;
 
 namespace PnP.Core.Model.SharePoint
 {
@@ -14,7 +13,5 @@ namespace PnP.Core.Model.SharePoint
         public string Title { get => GetValue<string>(); set => SetValue(value); }
         public Guid WebId { get => GetValue<Guid>(); set => SetValue(value); }
 
-        // This is a navigation property, and the __deferred url it gives us is awkward
-        public ISharePointUser Creator { get => GetValue<ISharePointUser>(); set => SetValue(value); }
     }
 }

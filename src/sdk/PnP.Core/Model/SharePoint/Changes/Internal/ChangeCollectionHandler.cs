@@ -94,7 +94,7 @@ namespace PnP.Core.Model.SharePoint
             return JsonSerializer.Serialize(bodyQuery as ExpandoObject, new JsonSerializerOptions() { IgnoreNullValues = true });
         }
 
-        internal static IEnumerable<IChange> Deserialize(ApiCallResponse response)
+        internal static IEnumerable<IChange> Deserialize(ApiCallResponse response, IDataModelParent parent, PnPContext context)
         {
             if (string.IsNullOrEmpty(response.Json))
             {
@@ -119,7 +119,7 @@ namespace PnP.Core.Model.SharePoint
                     var pnpObject = GetConcreteInstance(row);
                     if (pnpObject != null)
                     {
-                        ProcessChangeElement(pnpObject, row, response.BatchRequestId);
+                        ProcessChangeElement(pnpObject, parent, context, row, response.BatchRequestId);
                         result.Add(pnpObject as IChange);
                     }
                 }
@@ -128,7 +128,7 @@ namespace PnP.Core.Model.SharePoint
             return result;
         }
 
-        private static void ProcessChangeElement(object pnpObject, JsonElement element, Guid batchRequestId)
+        private static void ProcessChangeElement(object pnpObject, IDataModelParent parent, PnPContext context, JsonElement element, Guid batchRequestId)
         {
             var metadataBasedObject = pnpObject as IMetadataExtensible;
             var entity = EntityManager.GetClassInfo<IChange>(pnpObject.GetType(), null);
@@ -147,53 +147,34 @@ namespace PnP.Core.Model.SharePoint
                     if (entityField.PropertyInfo.PropertyType == typeof(IChangeToken)) // Special case
                     {
                         var changeToken = GetConcreteInstance(property.Value);
-                        ProcessChangeElement(changeToken, property.Value, batchRequestId);
+                        ProcessChangeElement(changeToken, parent, context, property.Value, batchRequestId);
                         entityField.PropertyInfo?.SetValue(pnpObject, changeToken);
                     }
                     else if (entityField.PropertyInfo.PropertyType == typeof(IContentType))
                     {
                         // Since this is an SP.ContentTypeId and NOT an SP.ContentType, it's not a perfect entity match; we'll do it manually
-                        var concreteInstance = (IContentType)EntityManager.GetEntityConcreteInstance(entityField.PropertyInfo.PropertyType);
+                        var concreteInstance = (IContentType)EntityManager.GetEntityConcreteInstance(entityField.PropertyInfo.PropertyType, parent, context);
                         var contentTypeId = property.Value.GetProperty("StringValue").GetString();
                         concreteInstance.SetSystemProperty(ct => ct.Id, contentTypeId);
                         concreteInstance.SetSystemProperty(ct => ct.StringId, contentTypeId);
                         (concreteInstance as IMetadataExtensible).Metadata.Add(PnPConstants.MetaDataType, "SP.ContentTypeId");
-                        
+                        (concreteInstance as IMetadataExtensible).Metadata.Add(PnPConstants.MetaDataId, contentTypeId);
+                        (concreteInstance as IMetadataExtensible).Metadata.Add(PnPConstants.MetaDataRestId, contentTypeId);
+                        concreteInstance.Requested = true;
+
                         entityField.PropertyInfo?.SetValue(pnpObject, concreteInstance);
                     }
                     else if (entityField.PropertyInfo.PropertyType.ImplementsInterface(typeof(IDataModel<>)))
                     {
-                        var concreteInstance = EntityManager.GetEntityConcreteInstance(entityField.PropertyInfo.PropertyType);
-                        ProcessChangeElement(concreteInstance, property.Value, batchRequestId);
+                        var concreteInstance = EntityManager.GetEntityConcreteInstance(entityField.PropertyInfo.PropertyType, parent, context);
+                        ProcessChangeElement(concreteInstance, parent, context, property.Value, batchRequestId);
                         entityField.PropertyInfo?.SetValue(pnpObject, concreteInstance);
                     }
                     else // Simple property mapping
                     {
-                        if (!string.IsNullOrEmpty(entityField.SharePointJsonPath))
-                        {
-                            var jsonPathFields = entity.Fields.Where(p => !string.IsNullOrEmpty(p.SharePointName) && p.SharePointName.Equals(entityField.SharePointName)).ToList();
-                            if (jsonPathFields.Any())
-                            {
-                                foreach (var jsonPathField in jsonPathFields)
-                                {
-                                    var jsonElement = JsonMappingHelper.GetJsonElementFromPath(property.Value, jsonPathField.SharePointJsonPath);
-
-                                    // Don't assume that the requested json path was also loaded. When using the QueryProperties model there can be 
-                                    // a json object returned that does have all properties loaded 
-                                    if (!jsonElement.Equals(property.Value))
-                                    {
-                                        jsonPathField.PropertyInfo?.SetValue(pnpObject, JsonMappingHelper.GetJsonFieldValue(null, jsonPathField.Name,
-                                            jsonElement, jsonPathField.DataType, jsonPathField.SharePointUseCustomMapping, null));
-                                    }
-                                }
-                            }
-                        }
-                        else
-                        {
-                            // Set the object property value taken from the JSON payload
-                            entityField.PropertyInfo?.SetValue(pnpObject, JsonMappingHelper.GetJsonFieldValue(null, entityField.Name,
-                                property.Value, entityField.DataType, entityField.SharePointUseCustomMapping, null));
-                        }
+                        // Set the object property value taken from the JSON payload
+                        entityField.PropertyInfo?.SetValue(pnpObject, JsonMappingHelper.GetJsonFieldValue(null, entityField.Name,
+                            property.Value, entityField.DataType, entityField.SharePointUseCustomMapping, null));
                     }
                 }
                 else
@@ -202,20 +183,6 @@ namespace PnP.Core.Model.SharePoint
                     if (property.Name == "__metadata")
                     {
                         JsonMappingHelper.TrackSharePointMetaData(metadataBasedObject, property);
-                    }
-                    else if (property.Name == "__deferred")
-                    {
-                        // Let's keep track of these "pointers". Not sure we can do anything with them, but I don't want to lose them just yet.
-
-                        // __deferred property
-                        //"__deferred": {
-                        //    "uri": "https://bertonline.sharepoint.com/sites/modern/_api/site/RootWeb/WorkflowAssociations"
-                        //}
-
-                        if (!metadataBasedObject.Metadata.ContainsKey("deferredUri"))
-                        {
-                            metadataBasedObject.Metadata.Add("deferredUri", property.Value.GetProperty("uri").GetString());
-                        }
                     }
                 }
             }

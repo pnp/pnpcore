@@ -1,5 +1,4 @@
-﻿using PnP.Core.Model.Security;
-using System;
+﻿using System;
 
 namespace PnP.Core.Model.SharePoint
 {
@@ -45,9 +44,5 @@ namespace PnP.Core.Model.SharePoint
         /// </summary>
         public Guid WebId { get; }
 
-        /// <summary>
-        /// Gets a value that specifies the creator of the the changed list.
-        /// </summary>
-        public ISharePointUser Creator { get; }
     }
 }
