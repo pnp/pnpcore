@@ -1182,7 +1182,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.ChangeQueryOptions.html",
-          "hash": "fbCRrx1OgDl7udLQR8dk4w=="
+          "hash": "YH7JLKSVNAm9f6fzvXpdww=="
         }
       },
       "is_incremental": false,
@@ -1710,7 +1710,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.IChangeList.html",
-          "hash": "WjJxKcTFliAYzct0MHKqDQ=="
+          "hash": "1+UnYMyOisGsy6nsFZpzJw=="
         }
       },
       "is_incremental": false,

@@ -8676,19 +8676,6 @@ references:
   commentId: T:PnP.Core.Model.SharePoint.IChangeList
   fullName: PnP.Core.Model.SharePoint.IChangeList
   nameWithType: IChangeList
-- uid: PnP.Core.Model.SharePoint.IChangeList.Creator
-  name: Creator
-  href: api/PnP.Core.Model.SharePoint.IChangeList.html#PnP_Core_Model_SharePoint_IChangeList_Creator
-  commentId: P:PnP.Core.Model.SharePoint.IChangeList.Creator
-  fullName: PnP.Core.Model.SharePoint.IChangeList.Creator
-  nameWithType: IChangeList.Creator
-- uid: PnP.Core.Model.SharePoint.IChangeList.Creator*
-  name: Creator
-  href: api/PnP.Core.Model.SharePoint.IChangeList.html#PnP_Core_Model_SharePoint_IChangeList_Creator_
-  commentId: Overload:PnP.Core.Model.SharePoint.IChangeList.Creator
-  isSpec: "True"
-  fullName: PnP.Core.Model.SharePoint.IChangeList.Creator
-  nameWithType: IChangeList.Creator
 - uid: PnP.Core.Model.SharePoint.IChangeList.Editor
   name: Editor
   href: api/PnP.Core.Model.SharePoint.IChangeList.html#PnP_Core_Model_SharePoint_IChangeList_Editor
