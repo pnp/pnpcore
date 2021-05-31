@@ -8215,19 +8215,6 @@ references:
   fullName.vb: PnP.Core.Model.SharePoint.IChange.IsPropertyAvailable(Of TModel)(Expression(Of Func(Of TModel, System.Object)))
   nameWithType: IChange.IsPropertyAvailable<TModel>(Expression<Func<TModel, Object>>)
   nameWithType.vb: IChange.IsPropertyAvailable(Of TModel)(Expression(Of Func(Of TModel, Object)))
-- uid: PnP.Core.Model.SharePoint.IChange.RelativeTime
-  name: RelativeTime
-  href: api/PnP.Core.Model.SharePoint.IChange.html#PnP_Core_Model_SharePoint_IChange_RelativeTime
-  commentId: P:PnP.Core.Model.SharePoint.IChange.RelativeTime
-  fullName: PnP.Core.Model.SharePoint.IChange.RelativeTime
-  nameWithType: IChange.RelativeTime
-- uid: PnP.Core.Model.SharePoint.IChange.RelativeTime*
-  name: RelativeTime
-  href: api/PnP.Core.Model.SharePoint.IChange.html#PnP_Core_Model_SharePoint_IChange_RelativeTime_
-  commentId: Overload:PnP.Core.Model.SharePoint.IChange.RelativeTime
-  isSpec: "True"
-  fullName: PnP.Core.Model.SharePoint.IChange.RelativeTime
-  nameWithType: IChange.RelativeTime
 - uid: PnP.Core.Model.SharePoint.IChange.SiteId
   name: SiteId
   href: api/PnP.Core.Model.SharePoint.IChange.html#PnP_Core_Model_SharePoint_IChange_SiteId
