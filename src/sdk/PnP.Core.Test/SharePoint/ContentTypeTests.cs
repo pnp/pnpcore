@@ -172,6 +172,29 @@ namespace PnP.Core.Test.SharePoint
         }
 
         [TestMethod]
+        public async Task ContentTypesGetByIdPlusLoadExtraPropertiesTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                IContentType contentType = (from ct in context.Web.ContentTypes
+                                            where ct.StringId == "0x01"
+                                            select ct)
+                            .QueryProperties(ct => ct.StringId, ct => ct.Id)
+                            .FirstOrDefault();
+
+                Assert.IsNotNull(contentType);
+                // Test Id property
+                Assert.AreEqual(contentType.Id, "0x01");
+
+                // Load extra properties
+                await contentType.LoadAsync(p => p.Group);
+
+                Assert.IsTrue(contentType.IsPropertyAvailable(p => p.Group));
+            }
+        }
+
+        [TestMethod]
         public async Task ContentTypesWithFieldsGetByIdTest()
         {
             //TestCommon.Instance.Mocking = false;

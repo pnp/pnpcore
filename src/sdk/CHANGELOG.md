@@ -22,6 +22,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
 ### Changed
 
+- Fixed loading of extra properties on retrieved content types [jansenbe - Bert Jansen]
 - Renamed GetFolder methods on IListItem to GetParentFolder [jansenbe - Bert Jansen]
 - Improved reliability for ChunkedFileUpload #465 [thechriskent - Chris Kent]
 - Fixed nested QueryProperties() use on non-collection expandable properties (e.g. List.RootFolder) [jansenbe - Bert Jansen]

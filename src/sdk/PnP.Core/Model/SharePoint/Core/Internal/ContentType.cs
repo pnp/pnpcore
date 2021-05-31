@@ -10,10 +10,8 @@ using System.Threading.Tasks;
 
 namespace PnP.Core.Model.SharePoint
 {
-    [SharePointType("SP.ContentType", Target = typeof(Web),
-        Uri = "_api/Web/ContentTypes('{Id}')", Get = "_api/web/ContentTypes", LinqGet = "_api/web/ContentTypes")]
-    [SharePointType("SP.ContentType", Target = typeof(List), Uri = "_api/Web/Lists(guid'{Parent.Id}')/ContentTypes('{Id}')",
-        Get = "_api/Web/Lists(guid'{Parent.Id}')/ContentTypes", LinqGet = "_api/Web/Lists(guid'{Parent.Id}')/ContentTypes")]
+    [SharePointType("SP.ContentType", Target = typeof(Web), Uri = "_api/Web/ContentTypes('{Id}')", LinqGet = "_api/web/ContentTypes")]
+    [SharePointType("SP.ContentType", Target = typeof(List), Uri = "_api/Web/Lists(guid'{Parent.Id}')/ContentTypes('{Id}')", LinqGet = "_api/Web/Lists(guid'{Parent.Id}')/ContentTypes")]
     internal partial class ContentType : BaseDataModel<IContentType>, IContentType
     {
         #region Construction
@@ -140,7 +138,7 @@ namespace PnP.Core.Model.SharePoint
             // automatically provide the correct 'parent'
             var entity = EntityManager.GetClassInfo(GetType(), this);
 
-            return new ApiCall($"{entity.SharePointGet}/AddAvailableContentType", ApiType.SPORest, bodyContent);
+            return new ApiCall($"{entity.SharePointLinqGet}/AddAvailableContentType", ApiType.SPORest, bodyContent);
         }
 
         internal async Task<IContentType> AddAvailableContentTypeBatchAsync(Batch batch, string id)
