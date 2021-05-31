@@ -103,22 +103,22 @@
         ScopeDelete = 18,
 
         /// <remarks>
-        /// Undefined
+        /// Enumeration whose values specify that an object has been added within the scope of a list content type.
         /// </remarks>
         ListContentTypeAdd,
 
         /// <remarks>
-        /// Undefined
+        /// Enumeration whose values specify that an object has been deleted within the scope of a list content type.
         /// </remarks>
         ListContentTypeDelete,
 
         /// <remarks>
-        /// Undefined
+        /// Enumeration whose values specify that an object has a pending modification due to an operation on another item.
         /// </remarks>
         Dirty,
 
         /// <remarks>
-        /// Undefined
+        /// Enumeration whose values specify that an object has had an activity
         /// </remarks>
         Activity
     }

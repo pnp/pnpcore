@@ -1170,5 +1170,23 @@ namespace PnP.Core.Test.SharePoint
                 Assert.IsTrue(changes.Count > 0);
             }
         }
+
+        [TestMethod]
+        public void GetListChangesTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            {
+                var list = context.Web.Lists.GetByTitle("Documents", p => p.Id);
+                var changes = list.GetChanges(new ChangeQueryOptions(true, true)
+                {
+                    FetchLimit = 5,
+                });
+
+                Assert.IsNotNull(changes);
+                Assert.IsTrue(changes.Count > 0);
+            }
+        }
     }
 }

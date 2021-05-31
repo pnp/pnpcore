@@ -22,41 +22,44 @@
         {
             if (allChangeObjectTypes)
             {
-                this.Item = true;
-                this.List = true;
-                this.Web = true;
-                this.Site = true;
-                this.File = true;
-                this.Folder = true;
-                this.Alert = true;
-                this.User = true;
-                this.Group = true;
-                this.ContentType = true;
-                this.Field = true;
-                this.SecurityPolicy = true;
-                this.View = true;
+                Item = true;
+                List = true;
+                Web = true;
+                Site = true;
+                File = true;
+                Folder = true;
+                Alert = true;
+                User = true;
+                Group = true;
+                ContentType = true;
+                Field = true;
+                SecurityPolicy = true;
+                View = true;
             }
 
             if (allChangeTypes)
             {
-                this.Add = true;
-                this.Update = true;
-                this.DeleteObject = true;
-                this.Rename = true;
-                this.Move = true;
-                this.Restore = true;
-                this.RoleDefinitionAdd = true;
-                this.RoleDefinitionDelete = true;
-                this.RoleDefinitionUpdate = true;
-                this.RoleAssignmentAdd = true;
-                this.RoleAssignmentDelete = true;
-                this.GroupMembershipAdd = true;
-                this.GroupMembershipDelete = true;
-                this.SystemUpdate = true;
-                this.Navigation = true;
+                Add = true;
+                Update = true;
+                DeleteObject = true;
+                Rename = true;
+                Move = true;
+                Restore = true;
+                RoleDefinitionAdd = true;
+                RoleDefinitionDelete = true;
+                RoleDefinitionUpdate = true;
+                RoleAssignmentAdd = true;
+                RoleAssignmentDelete = true;
+                GroupMembershipAdd = true;
+                GroupMembershipDelete = true;
+                SystemUpdate = true;
+                Navigation = true;
             }
         }
-        
+
+        /// <summary>
+        /// Specifies whether activity is included in the query.
+        /// </summary>
         public bool Activity { get; set; }
 
         /// <summary>
@@ -124,6 +127,11 @@
         /// </summary>
         public bool GroupMembershipDelete { get; set; }
 
+        /// <summary>
+        /// Ignore errors when calling GetChanges if the caller's start ChangeToken
+        /// is not found in the database (exact match) or if there are no changes in
+        /// the database.
+        /// </summary>
         public bool IgnoreStartTokenNotFoundError { get; set; }
 
         /// <summary>
@@ -151,6 +159,12 @@
         /// </summary>
         public bool Navigation { get; set; }
 
+        /// <summary>
+        /// specifies whether we return all the change logs for folder scoped query.
+        /// The flag will only work for Folder query. If true, all changes in the current folder
+        /// and all sub folders will be returned. Otherwise, only changes in the current folder
+        /// will be returned.
+        /// </summary>
         public bool RecursiveAll { get; set; }
 
         /// <summary>
@@ -158,6 +172,9 @@
         /// </summary>
         public bool Rename { get; set; }
 
+        /// <summary>
+        /// Specifies whether we return log with security trimming. If true, we'll return the events with security trimming.
+        /// </summary>
         public bool RequireSecurityTrim { get; set; }
 
         /// <summary>

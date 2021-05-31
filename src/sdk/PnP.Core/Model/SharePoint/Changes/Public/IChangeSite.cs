@@ -3,7 +3,7 @@
     /// <summary>
     /// Indicates a change to a <seealso cref="ISite"/> object.
     /// </summary>
-    /// <seealso cref="PnP.Core.Model.SharePoint.IChange" />
+    /// <seealso cref="IChange" />
     [ConcreteType(typeof(ChangeSite))]
     public interface IChangeSite : IChange
     {

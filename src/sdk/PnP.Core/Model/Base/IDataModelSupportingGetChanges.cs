@@ -7,7 +7,7 @@ namespace PnP.Core.Model
     /// <summary>
     /// Defines the interface for Domain Model objects that can obtain a change log.
     /// </summary>
-    public interface IDataModelWithChanges
+    public interface IDataModelSupportingGetChanges
     {
         /// <summary>
         /// Gets the list of changes.

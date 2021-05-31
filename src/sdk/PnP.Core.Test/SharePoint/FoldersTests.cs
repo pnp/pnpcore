@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using PnP.Core.Model;
+using System.Linq;
 
 namespace PnP.Core.Test.SharePoint
 {
@@ -1043,6 +1044,24 @@ namespace PnP.Core.Test.SharePoint
             {
                 var folder = await context.Web.Folders.FirstOrDefaultAsync(f => f.Name == "SiteAssets");
                 var changes = await folder.GetChangesAsync(new ChangeQueryOptions(true, true)
+                {
+                    FetchLimit = 5,
+                });
+
+                Assert.IsNotNull(changes);
+                Assert.IsTrue(changes.Count > 0);
+            }
+        }
+
+        [TestMethod]
+        public void GetFolderChangesTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            {
+                var folder = context.Web.Folders.FirstOrDefault(f => f.Name == "SiteAssets");
+                var changes = folder.GetChanges(new ChangeQueryOptions(true, true)
                 {
                     FetchLimit = 5,
                 });

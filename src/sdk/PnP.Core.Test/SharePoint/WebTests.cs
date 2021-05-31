@@ -865,13 +865,30 @@ namespace PnP.Core.Test.SharePoint
         }
 
         [TestMethod]
-        public async Task GeWebChangesAsyncTest()
+        public async Task GetWebChangesAsyncTest()
         {
             //TestCommon.Instance.Mocking = false;
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 var changes = await context.Web.GetChangesAsync(new ChangeQueryOptions(true, true)
+                {
+                    FetchLimit = 5
+                });
+
+                Assert.IsNotNull(changes);
+                Assert.IsTrue(changes.Count > 0);
+            }
+        }
+
+        [TestMethod]
+        public void GetWebChangesTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            {
+                var changes = context.Web.GetChanges(new ChangeQueryOptions(true, true)
                 {
                     FetchLimit = 5
                 });

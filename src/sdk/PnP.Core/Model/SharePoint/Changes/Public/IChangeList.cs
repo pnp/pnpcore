@@ -6,11 +6,18 @@ namespace PnP.Core.Model.SharePoint
     /// <summary>
     /// Indicates a change to a <seealso cref="IList"/> object.
     /// </summary>
-    /// <seealso cref="PnP.Core.Model.SharePoint.IChange" />
+    /// <seealso cref="IChange" />
     [ConcreteType(typeof(ChangeList))]
     public interface IChangeList : IChange
     {
+        /// <summary>
+        /// A string that returns the name of the person who modified the list.
+        /// </summary>
         public string Editor { get; }
+
+        /// <summary>
+        /// Returns a Boolean value that indicates whether a list is a hidden list.
+        /// </summary>
         public bool Hidden { get; }
 
         /// <summary>

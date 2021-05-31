@@ -10,6 +10,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
 ### Added
 
+- Support for getting changes on IWeb, ISite, IList, IListItem and IFolder [DaleyKD - Kyle Daley]
 - Added support batching custom SPO REST / Microsoft Graph calls [jansenbe - Bert Jansen]
 - Added support to request additional Site/Web properties to be loaded as part of the PnPContext initialization [DaleyKD - Kyle Daley] and [jansenbe - Bert Jansen]
 - Added support for adding custom HTTP headers when executing a custom apirequest via ExecuteRequest #459 [czullu - Christian Zuellig]

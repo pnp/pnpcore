@@ -5,7 +5,7 @@ namespace PnP.Core.Model.SharePoint
     /// <summary>
     /// Indicates a change to a <seealso cref="IField"/> object.
     /// </summary>
-    /// <seealso cref="PnP.Core.Model.SharePoint.IChange" />
+    /// <seealso cref="IChange" />
     [ConcreteType(typeof(ChangeField))]
     public interface IChangeField : IChange
     {

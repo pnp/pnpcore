@@ -5,10 +5,13 @@ namespace PnP.Core.Model.SharePoint
     /// <summary>
     /// Indicates a change to a <seealso cref="IListItem"/> object;
     /// </summary>
-    /// <seealso cref="PnP.Core.Model.SharePoint.IChange" />
+    /// <seealso cref="IChange" />
     [ConcreteType(typeof(ChangeItem))]
     public interface IChangeItem : IChange
     {
+        /// <summary>
+        /// Gets the change activity type
+        /// </summary>
         public ChangeActivityType ActivityType { get; }
 
         /// <summary>
@@ -45,6 +48,10 @@ namespace PnP.Core.Model.SharePoint
         /// Gets a value that specifies the hash tag of the the changed item.
         /// </summary>
         public string Hashtag { get; }
+
+        /// <summary>
+        /// Returns a Boolean value that indicates whether the parent list is a hidden list.
+        /// </summary>
         public bool Hidden { get; }
 
         /// <summary>
@@ -61,7 +68,15 @@ namespace PnP.Core.Model.SharePoint
         /// Gets a value that specifies the title of the list that contains the changed item.
         /// </summary>
         public string ListTitle { get; }
+
+        /// <summary>
+        /// Indicates that this is a move which is part of a recycle operation.
+        /// </summary>
         public bool MoveWasForRecycle { get; }
+
+        /// <summary>
+        /// Indicates that this is a move which is part of a restore from recycle bin operation.
+        /// </summary>
         public bool MoveWasForRestore { get; }
 
         /// <summary>

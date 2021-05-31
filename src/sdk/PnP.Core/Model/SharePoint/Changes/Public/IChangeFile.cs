@@ -5,7 +5,7 @@ namespace PnP.Core.Model.SharePoint
     /// <summary>
     /// Indicates a change to a <seealso cref="IFile"/> object.
     /// </summary>
-    /// <seealso cref="PnP.Core.Model.SharePoint.IChange" />
+    /// <seealso cref="IChange" />
     [ConcreteType(typeof(ChangeFile))]
     public interface IChangeFile : IChange
     {

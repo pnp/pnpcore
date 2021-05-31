@@ -98,7 +98,9 @@ namespace PnP.Core.Model.SharePoint
         {
             if (string.IsNullOrEmpty(response.Json))
             {
+#pragma warning disable CA2208 // Instantiate argument exceptions correctly
                 throw new ArgumentNullException(nameof(response.Json));
+#pragma warning restore CA2208 // Instantiate argument exceptions correctly
             }
 
             var result = new List<IChange>();
@@ -223,39 +225,26 @@ namespace PnP.Core.Model.SharePoint
         {
             if (row.ValueKind == JsonValueKind.Object && row.TryGetProperty(PnPConstants.SharePointRestMetadata, out JsonElement metadata) && metadata.TryGetProperty(PnPConstants.MetaDataType, out JsonElement type))
             {
-                switch (type.GetString())
+                return type.GetString() switch
                 {
-                    case "SP.Change":
-                        return new Change();
-                    case "SP.ChangeAlert":
-                        return new ChangeAlert();
-                    case "SP.ChangeContentType":
-                        return new ChangeContentType();
-                    case "SP.ChangeField":
-                        return new ChangeField();
-                    case "SP.ChangeFile":
-                        return new ChangeFile();
-                    case "SP.ChangeFolder":
-                        return new ChangeFolder();
-                    case "SP.ChangeGroup":
-                        return new ChangeGroup();
-                    case "SP.ChangeItem":
-                        return new ChangeItem();
-                    case "SP.ChangeList":
-                        return new ChangeList();
-                    case "SP.ChangeSite":
-                        return new ChangeSite();
-                    case "SP.ChangeToken":
-                        return new ChangeToken();
-                    case "SP.ChangeUser":
-                        return new ChangeUser();
-                    case "SP.ChangeView":
-                        return new ChangeView();
-                    case "SP.ChangeWeb":
-                        return new ChangeWeb();
-                    default:
-                        throw new ArgumentOutOfRangeException();
-                }
+                    "SP.Change" => new Change(),
+                    "SP.ChangeAlert" => new ChangeAlert(),
+                    "SP.ChangeContentType" => new ChangeContentType(),
+                    "SP.ChangeField" => new ChangeField(),
+                    "SP.ChangeFile" => new ChangeFile(),
+                    "SP.ChangeFolder" => new ChangeFolder(),
+                    "SP.ChangeGroup" => new ChangeGroup(),
+                    "SP.ChangeItem" => new ChangeItem(),
+                    "SP.ChangeList" => new ChangeList(),
+                    "SP.ChangeSite" => new ChangeSite(),
+                    "SP.ChangeToken" => new ChangeToken(),
+                    "SP.ChangeUser" => new ChangeUser(),
+                    "SP.ChangeView" => new ChangeView(),
+                    "SP.ChangeWeb" => new ChangeWeb(),
+#pragma warning disable CA2208 // Instantiate argument exceptions correctly
+                    _ => throw new ArgumentOutOfRangeException(),
+#pragma warning restore CA2208 // Instantiate argument exceptions correctly
+                };
             }
 
             return null;

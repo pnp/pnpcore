@@ -3298,6 +3298,15 @@ namespace PnP.Core.Test.SharePoint
                     Assert.AreNotEqual(Guid.Empty, changeItem.WebId);
                     Assert.AreNotEqual(Guid.Empty, changeItem.SiteId);
                     Assert.AreNotEqual(Guid.Empty, changeItem.ListId);
+
+                    var changes2 = listItem.GetChanges(new ChangeQueryOptions(true, true)
+                    {
+                        FetchLimit = 5,
+                    });
+
+                    Assert.IsNotNull(changes2);
+                    Assert.IsTrue(changes2.Count == 1);
+
                 }
             }
             finally

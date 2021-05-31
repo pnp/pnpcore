@@ -11,7 +11,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a List object of SharePoint Online
     /// </summary>
     [ConcreteType(typeof(List))]
-    public interface IList : IDataModel<IList>, IDataModelGet<IList>, IDataModelLoad<IList>, IDataModelUpdate, IDataModelDelete, IDataModelWithChanges, IQueryableDataModel
+    public interface IList : IDataModel<IList>, IDataModelGet<IList>, IDataModelLoad<IList>, IDataModelUpdate, IDataModelDelete, IDataModelSupportingGetChanges, IQueryableDataModel
     {
         #region Properties
 

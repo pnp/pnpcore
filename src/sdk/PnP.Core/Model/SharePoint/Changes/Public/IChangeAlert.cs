@@ -5,7 +5,7 @@ namespace PnP.Core.Model.SharePoint
     /// <summary>
     /// Indicates a change to an Alert object.
     /// </summary>
-    /// <seealso cref="PnP.Core.Model.SharePoint.IChange" />
+    /// <seealso cref="IChange" />
     [ConcreteType(typeof(ChangeAlert))]
     public interface IChangeAlert : IChange
     {
