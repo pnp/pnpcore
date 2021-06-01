@@ -32,6 +32,7 @@ namespace PnP.Core.Model.SharePoint
 
         /// <summary>
         /// Gets or sets a value that specifies the identifier of the document template for the new list.
+        /// SP REST property name: DocumentTemplateUrl.
         /// </summary>
         public string DocumentTemplate { get; set; }
 
@@ -43,6 +44,7 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// Gets or sets a value that specifies the list server template of the new list.
         /// https://msdn.microsoft.com/en-us/library/office/microsoft.sharepoint.client.listtemplatetype.aspx
+        /// SP REST property name: BaseTemplate
         /// </summary>
         public ListTemplateType TemplateType { get; }
 
@@ -73,11 +75,13 @@ namespace PnP.Core.Model.SharePoint
 
         /// <summary>
         /// Gets or sets the MinorVersionLimit  for versioning, just in case it is enabled on the list
+        /// SP REST property name: MajorWithMinorVersionsLimit.
         /// </summary>
         public int MinorVersionLimit { get; set; }
 
         /// <summary>
         /// Gets or sets the MinorVersionLimit  for verisioning, just in case it is enabled on the list
+        /// SP REST property name: MajorVersionLimit.
         /// </summary>
         public int MaxVersionLimit { get; set; }
 
@@ -123,6 +127,7 @@ namespace PnP.Core.Model.SharePoint
 
         /// <summary>
         /// Defines the current list UI/UX experience (valid for SPO only).
+        /// SP REST property name: ListExperienceOptions.
         /// </summary>
         public ListExperience ListExperience { get; set; }
 

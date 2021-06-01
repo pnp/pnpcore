@@ -19,7 +19,8 @@ namespace PnP.Core.Model.Security
         public string UserPrincipalName { get; set; }
 
         /// <summary>
-        /// Email adress of the user
+        /// E-mail address of the user.
+        /// SP REST property name: Email
         /// </summary>
         public string Mail { get; set; }
 

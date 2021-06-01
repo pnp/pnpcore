@@ -26,6 +26,7 @@ namespace PnP.Core.Model.SharePoint
 
         /// <summary>
         /// Gets a value that specifies the template type of the the changed list.
+        /// SP REST property name: BaseTemplate
         /// </summary>
         public ListTemplateType TemplateType { get; }
 
