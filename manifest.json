@@ -5043,6 +5043,18 @@
     },
     {
       "type": "Conceptual",
+      "source_relative_path": "using-the-sdk/changes-sharepoint.md",
+      "output": {
+        ".html": {
+          "relative_path": "using-the-sdk/changes-sharepoint.html",
+          "hash": "Lb6VOlbBehSiFDAVtvg3vA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
       "source_relative_path": "using-the-sdk/configuring authentication.md",
       "output": {
         ".html": {
@@ -5131,7 +5143,7 @@
       "output": {
         ".html": {
           "relative_path": "using-the-sdk/folders-intro.html",
-          "hash": "OVRi3fwr45tubPGH2NV/6Q=="
+          "hash": "8bl3WLZWIpwNH3mc0Eymlw=="
         }
       },
       "is_incremental": false,
@@ -5167,7 +5179,7 @@
       "output": {
         ".html": {
           "relative_path": "using-the-sdk/listitems-intro.html",
-          "hash": "N5XSC00YROmGmQ2YFw6O1w=="
+          "hash": "QXhOB2A1wONzUvlBkIvxXQ=="
         }
       },
       "is_incremental": false,
@@ -5179,7 +5191,7 @@
       "output": {
         ".html": {
           "relative_path": "using-the-sdk/lists-intro.html",
-          "hash": "JTAaPU9UlgRx9w6V/0ULCg=="
+          "hash": "/wTg+6r5fgJSKLdPLnnLxQ=="
         }
       },
       "is_incremental": false,
@@ -5299,7 +5311,7 @@
       "output": {
         ".html": {
           "relative_path": "using-the-sdk/sites-intro.html",
-          "hash": "XvGJwvVO3N6j01BubHmMYQ=="
+          "hash": "WIX1ZDhtUMEwQLZuzoGK5A=="
         }
       },
       "is_incremental": false,
@@ -5431,7 +5443,7 @@
       "output": {
         ".html": {
           "relative_path": "using-the-sdk/webs-intro.html",
-          "hash": "BJBWH8tfYa3OujC/bmMxTA=="
+          "hash": "FaVllaUoIo406hX8iezw1A=="
         }
       },
       "is_incremental": false,
@@ -5452,7 +5464,7 @@
         "ConceptualDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build",
-          "total_file_count": 65,
+          "total_file_count": 66,
           "skipped_file_count": 0
         },
         "ManagedReferenceDocumentProcessor": {

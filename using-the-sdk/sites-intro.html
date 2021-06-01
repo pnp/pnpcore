@@ -102,6 +102,8 @@ await context.Web.LoadAsync(p =&gt; p.RootFolder);
 var site = await context.Site.GetAsync(p =&gt; p.HubSiteId);
 Console.WriteLine(site.HubSiteId);
 </code></pre>
+<h2 id="getting-changes-for-a-site">Getting changes for a site</h2>
+<p>You can use the <code>GetChanges</code> methods on an <code>ISite</code> to list all the changes. See <a href="changes-sharepoint.html">Enumerating changes that happened in SharePoint</a> to learn more.</p>
 </article>
           </div>
           <div class="hidden-sm col-md-2" role="complementary">

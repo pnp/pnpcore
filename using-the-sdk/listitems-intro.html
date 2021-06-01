@@ -378,8 +378,9 @@ foreach (var listItem in myList.Items.AsRequested())
 // Execute the batch
 await context.ExecuteAsync();
 </code></pre>
-<h2 id="other-list-item-operations">Other list item operations</h2>
-<h3 id="enablingdisabling-list-item-comments">Enabling/Disabling list item comments</h3>
+<h2 id="getting-changes-for-a-list-item">Getting changes for a list item</h2>
+<p>You can use the <code>GetChanges</code> methods on an <code>IListItem</code> to list all the changes. See <a href="changes-sharepoint.html">Enumerating changes that happened in SharePoint</a> to learn more.</p>
+<h2 id="enablingdisabling-list-item-comments">Enabling/Disabling list item comments</h2>
 <p>List items can have comments in SharePoint and using the <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IListItemBase.html#PnP_Core_Model_SharePoint_IListItemBase_SetCommentsDisabledAsync_System_Boolean_">SetCommentsDisabledAsync method</a> you can turn off commenting for a given list item. This method goes hand in hand with the <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IListItemBase.html#PnP_Core_Model_SharePoint_IListItemBase_AreCommentsDisabledAsync">AreCommentsDisabledAsync</a> method to get the current commenting status of a list item.</p>
 <pre><code class="lang-csharp">// Assume the fields where not yet loaded, so loading them with the list
 var myList = context.Web.Lists.GetByTitle(&quot;My List&quot;, p =&gt; p.Title, p =&gt; p.Items, 
