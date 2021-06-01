@@ -75,6 +75,18 @@ namespace PnP.Core.Transformation.Services.Builder
         }
 
         /// <summary>
+        /// Sets a custom <see cref="ITargetPageUriResolver"/> which resolves target page uri
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
+        public IPnPTransformationBuilder WithTargetPageUriResolver<T>() where T : class, ITargetPageUriResolver
+        {
+            Services.RemoveAll<ITargetPageUriResolver>();
+            Services.AddTransient<ITargetPageUriResolver, T>();
+            return this;
+        }
+
+        /// <summary>
         /// Customizes the default transformation options for the pages
         /// </summary>
         /// <param name="options"></param>

@@ -48,6 +48,14 @@ namespace PnP.Core.Transformation.Services.Builder
             where T : class, ITransformationExecutor;
 
         /// <summary>
+        /// Sets a custom <see cref="ITargetPageUriResolver"/> which resolves target page uri
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
+        IPnPTransformationBuilder WithTargetPageUriResolver<T>()
+            where T : class, ITargetPageUriResolver;
+
+        /// <summary>
         /// Customizes the default transformation options for the pages
         /// </summary>
         /// <param name="options"></param>

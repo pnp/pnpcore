@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace PnP.Core.Transformation.Services.MappingProviders
@@ -14,7 +15,8 @@ namespace PnP.Core.Transformation.Services.MappingProviders
         /// Maps HTML content from classic to modern
         /// </summary>
         /// <param name="input">The input for the mapping activity</param>
+        /// <param name="token">The cancellation token</param>
         /// <returns>The output of the mapping activity</returns>
-        Task<HtmlMappingProviderOutput> MapHtmlAsync(HtmlMappingProviderInput input);
+        Task<HtmlMappingProviderOutput> MapHtmlAsync(HtmlMappingProviderInput input, CancellationToken token = default);
     }
 }

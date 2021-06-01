@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using PnP.Core.Transformation.Model.Classic;
 using PnP.Core.Transformation.Model.Modern;
@@ -16,7 +17,8 @@ namespace PnP.Core.Transformation.Services.MappingProviders
         /// Maps a classic Web Part into a modern Web Part
         /// </summary>
         /// <param name="input">The input for the mapping activity</param>
+        /// <param name="token">The cancellation token</param>
         /// <returns>The output of the mapping activity</returns>
-        Task<WebPartMappingProviderOutput> MapWebPartAsync(WebPartMappingProviderInput input);
+        Task<WebPartMappingProviderOutput> MapWebPartAsync(WebPartMappingProviderInput input, CancellationToken token = default);
     }
 }

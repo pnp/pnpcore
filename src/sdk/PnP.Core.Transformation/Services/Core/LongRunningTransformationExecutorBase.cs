@@ -1,58 +1,62 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using PnP.Core.Services;
 
 namespace PnP.Core.Transformation.Services.Core
 {
     /// <summary>
-    /// Implementation of <see cref="ITransformationExecutor"/> that persists state for a long running operation
+    /// Implementation of <see cref="ITransformationExecutor"/> that persists state for a long running transformation
     /// </summary>
-    public abstract class LongRunningTransformationExecutorBase : TransformationExecutorBase
+    public abstract class LongRunningTransformationExecutorBase : ITransformationExecutor
     {
         /// <summary>
-        /// Instance of the Transformation Distiller
+        /// The provider to use to resolve dependencies
         /// </summary>
-        protected ITransformationDistiller TransformationDistiller { get; }
-
-        /// <summary>
-        /// Instance of the Transformation State Manager
-        /// </summary>
-        protected ITransformationStateManager TransformationStateManager { get; }
+        public IServiceProvider ServiceProvider { get; }
 
         /// <summary>
         /// Constructor with Dependency Injection
         /// </summary>
-        /// <param name="transformationDistiller">The Transformation Distiller</param>
-        /// <param name="transformationStateManager">The State Manager</param>
-        protected LongRunningTransformationExecutorBase(
-            ITransformationDistiller transformationDistiller,
-            ITransformationStateManager transformationStateManager)
+        protected LongRunningTransformationExecutorBase(IServiceProvider serviceProvider)
         {
-            TransformationDistiller = transformationDistiller ?? throw new ArgumentNullException(nameof(transformationDistiller));
-            TransformationStateManager = transformationStateManager ?? throw new ArgumentNullException(nameof(transformationStateManager));
+            ServiceProvider = serviceProvider ?? throw new ArgumentNullException(nameof(serviceProvider));
         }
 
         /// <summary>
         /// Creates a Page Transformation process
         /// </summary>
-        /// <param name="sourceContext">The PnPContext of the source site</param>
-        /// <param name="targetContext">The PnPContext of the target site</param>
+        /// <param name="token">The cancellation token</param>
         /// <returns>The transformation process</returns>
-        public override Task<TransformationProcess> CreateTransformationProcessAsync(PnPContext sourceContext, PnPContext targetContext)
+        public virtual async Task<ITransformationProcess> CreateTransformationProcessAsync(
+            CancellationToken token = default)
         {
-            return base.CreateTransformationProcessAsync(sourceContext, targetContext);
+            var process = CreateProcess(Guid.NewGuid());
+            await process.InitAsync(token).ConfigureAwait(false);
+
+            return process;
         }
 
         /// <summary>
         /// Loads a Page Transformation process
         /// </summary>
         /// <param name="processId">The ID of the process to load</param>
+        /// <param name="token">The cancellation token</param>
         /// <returns>The transformation process</returns>
-        public override Task<TransformationProcess> LoadTransformationProcessAsync(Guid processId)
+        public virtual Task<ITransformationProcess> LoadTransformationProcessAsync(Guid processId,
+            CancellationToken token = default)
         {
-            return base.LoadTransformationProcessAsync(processId);
+            // When a long running process is restored, source provider and target context are not available
+            ITransformationProcess process = CreateProcess(processId);
+
+            return Task.FromResult(process);
         }
+
+        /// <summary>
+        /// Creates a new instance of a inherited of type <see cref="LongRunningTransformationProcessBase"/>
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        protected abstract LongRunningTransformationProcessBase CreateProcess(Guid id);
     }
 }

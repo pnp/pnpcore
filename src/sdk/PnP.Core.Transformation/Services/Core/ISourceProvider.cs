@@ -15,13 +15,15 @@ namespace PnP.Core.Transformation.Services.Core
         /// Gets the id of each available items
         /// </summary>
         /// <returns></returns>
+        /// <param name="token">The cancellation token to use</param>
         IAsyncEnumerable<ISourceItemId> GetItemsIdsAsync(CancellationToken token = default);
 
         /// <summary>
         /// Get the item and related information based on its id
         /// </summary>
         /// <param name="id"></param>
+        /// <param name="token">The cancellation token to use</param>
         /// <returns></returns>
-        Task<ISourceItem> GetItemAsync(ISourceItemId id);
+        Task<ISourceItem> GetItemAsync(ISourceItemId id, CancellationToken token = default);
     }
 }

@@ -32,7 +32,7 @@
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <DefineConstants>TRACE</DefineConstants>
-    <DocumentationFile>obj\Debug\PnP.Core.Transformation.xml</DocumentationFile>
+    <DocumentationFile>obj\Debug\PnP.Core.Transformation.SharePoint.xml</DocumentationFile>
     <InformationalVersion>Nightly</InformationalVersion>
     <!-- Uncomment if you build using GitHub Actions -->
     <!-- https://help.github.com/en/actions/configuring-and-managing-workflows/using-environment-variables -->
@@ -40,7 +40,7 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <DocumentationFile>obj\Debug\PnP.Core.Transformation.xml</DocumentationFile>
+    <DocumentationFile>obj\Debug\PnP.Core.Transformation.SharePoint.xml</DocumentationFile>
     <ContinuousIntegrationBuild>True</ContinuousIntegrationBuild>
   </PropertyGroup>
 
@@ -51,7 +51,6 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0-*" PrivateAssets="All" />
-    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.8.0" />
   </ItemGroup>
 
   <ItemGroup>
