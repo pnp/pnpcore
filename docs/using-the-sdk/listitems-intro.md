@@ -314,9 +314,11 @@ foreach (var listItem in myList.Items.AsRequested())
 await context.ExecuteAsync();
 ```
 
-## Other list item operations
+## Getting changes for a list item
 
-### Enabling/Disabling list item comments
+You can use the `GetChanges` methods on an `IListItem` to list all the changes. See [Enumerating changes that happened in SharePoint](changes-sharepoint.md) to learn more.
+
+## Enabling/Disabling list item comments
 
 List items can have comments in SharePoint and using the [SetCommentsDisabledAsync method](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IListItemBase.html#PnP_Core_Model_SharePoint_IListItemBase_SetCommentsDisabledAsync_System_Boolean_) you can turn off commenting for a given list item. This method goes hand in hand with the [AreCommentsDisabledAsync](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IListItemBase.html#PnP_Core_Model_SharePoint_IListItemBase_AreCommentsDisabledAsync) method to get the current commenting status of a list item.
 
