@@ -2,6 +2,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using PnP.Core.Transformation.Services.Core;
 using PnP.Core.Transformation.Services.MappingProviders;
@@ -14,6 +15,7 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
     /// </summary>
     public class SharePointMappingProvider : IMappingProvider
     {
+        private ILogger<SharePointMappingProvider> logger;
         private readonly IOptions<SharePointTransformationOptions> options;
         private readonly IServiceProvider serviceProvider;
 
@@ -22,8 +24,9 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
         /// </summary>
         /// <param name="options"></param>
         /// <param name="serviceProvider"></param>
-        public SharePointMappingProvider(IOptions<SharePointTransformationOptions> options, IServiceProvider serviceProvider)
+        public SharePointMappingProvider(ILogger<SharePointMappingProvider> logger, IOptions<SharePointTransformationOptions> options, IServiceProvider serviceProvider)
         {
+            this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
             this.options = options ?? throw new ArgumentNullException(nameof(options));
             this.serviceProvider = serviceProvider;
         }
@@ -36,8 +39,10 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
         /// <returns>The output of the mapping</returns>
         public async Task<MappingProviderOutput> MapAsync(MappingProviderInput input, CancellationToken token)
         {
+            logger.LogInformation($"Invoked: {this.GetType().Namespace}.{this.GetType().Name}.MapAsync");
+
             if (input == null) throw new ArgumentNullException(nameof(input));
-            
+
             var webPartMappingProvider = serviceProvider.GetService<IWebPartMappingProvider>();
             if (webPartMappingProvider != null)
             {

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 using PnP.Core.Transformation.Services.MappingProviders;
 
 namespace PnP.Core.Transformation.SharePoint.MappingProviders
@@ -12,6 +13,13 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
     /// </summary>
     public class SharePointPageLayoutMappingProvider : IPageLayoutMappingProvider
     {
+        private ILogger<SharePointPageLayoutMappingProvider> logger;
+
+        public SharePointPageLayoutMappingProvider(ILogger<SharePointPageLayoutMappingProvider> logger)
+        {
+            this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
+        }
+
         /// <summary>
         /// Maps a classic Page Layout into a modern Page Layout
         /// </summary>
@@ -20,6 +28,7 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
         /// <returns>The output of the mapping activity</returns>
         public Task<PageLayoutMappingProviderOutput> MapPageLayoutAsync(PageLayoutMappingProviderInput input, CancellationToken token)
         {
+            logger.LogInformation($"Invoked: {this.GetType().Namespace}.{this.GetType().Name}.MapPageLayoutAsync");
             return Task.FromResult(new PageLayoutMappingProviderOutput());
         }
     }

@@ -73,10 +73,11 @@ namespace PnP.Core.Transformation.Test
                 .WithMappingProvider<Mock>()
 
                 .WithPageTransformator<Mock>()
-                .AddPagePostTransformation<Mock>()
-                .AddPagePostTransformation<Mock>()
+
                 .AddPagePreTransformation<Mock>()
                 .AddPagePreTransformation<Mock>()
+                .AddPagePostTransformation<Mock>()
+                .AddPagePostTransformation<Mock>()
 
                 .WithTransformationDistiller<Mock>()
                 .WithTransformationStateManager<Mock>()
