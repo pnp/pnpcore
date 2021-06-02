@@ -303,15 +303,24 @@ namespace PnP.Core.Services
                         else
                         {
                             // implement logic to split batch in a rest batch and a graph batch
-                            (Batch spoRestBatch, Batch graphBatch, Batch csomBatch) = SplitIntoBatchesPerApiType(batch);
-                            // execute the 3 batches
+                            (Batch spoRestBatch, Batch graphBatch, Batch graphBetaBatch, Batch csomBatch) = SplitIntoBatchesPerApiType(batch, PnPContext.GraphAlwaysUseBeta);                            
+
+                            // execute the 4 batches
                             await ExecuteSharePointRestBatchAsync(spoRestBatch).ConfigureAwait(false);
-                            await ExecuteMicrosoftGraphBatchAsync(graphBatch).ConfigureAwait(false);
+                            if (!PnPContext.GraphAlwaysUseBeta)
+                            {
+                                await ExecuteMicrosoftGraphBatchAsync(graphBatch).ConfigureAwait(false);
+                            }
+                            await ExecuteMicrosoftGraphBatchAsync(graphBetaBatch).ConfigureAwait(false);
                             await ExecuteCsomBatchAsync(csomBatch).ConfigureAwait(false);
 
                             // Aggregate batch results from the executed batches
                             batch.Results.AddRange(spoRestBatch.Results);
-                            batch.Results.AddRange(graphBatch.Results);
+                            if (!PnPContext.GraphAlwaysUseBeta)
+                            {
+                                batch.Results.AddRange(graphBatch.Results);
+                            }
+                            batch.Results.AddRange(graphBetaBatch.Results);
                             batch.Results.AddRange(csomBatch.Results);
                         }
                     }
@@ -451,7 +460,7 @@ namespace PnP.Core.Services
         private async Task ExecuteMicrosoftGraphBatchAsync(Batch batch)
         {
             // Due to previous splitting we can see empty batches...
-            if (!batch.Requests.Any())
+            if (!batch.Requests.Any(p => p.Value.ExecutionNeeded))
             {
                 return;
             }
@@ -914,7 +923,7 @@ namespace PnP.Core.Services
         private async Task ExecuteSharePointRestBatchAsync(Batch batch)
         {
             // Due to previous splitting we can see empty batches...
-            if (!batch.Requests.Any())
+            if (!batch.Requests.Any(p => p.Value.ExecutionNeeded))
             {
                 return;
             }
@@ -1490,7 +1499,7 @@ namespace PnP.Core.Services
         private async Task ExecuteCsomBatchAsync(Batch batch)
         {
             // Due to previous splitting we can see empty batches...
-            if (!batch.Requests.Any())
+            if (!batch.Requests.Any(p => p.Value.ExecutionNeeded))
             {
                 return;
             }
@@ -1787,8 +1796,9 @@ namespace PnP.Core.Services
         /// Splits a batch that contains rest and graph calls in two batches, one containing the rest calls, one containing the graph calls
         /// </summary>
         /// <param name="input">Batch to split</param>
+        /// <param name="graphAlwaysUsesBeta">Indicates if all Microsoft Graph use the Graph beta endpoint</param>
         /// <returns>A rest batch and graph batch</returns>
-        private static Tuple<Batch, Batch, Batch> SplitIntoBatchesPerApiType(Batch input)
+        private static Tuple<Batch, Batch, Batch, Batch> SplitIntoBatchesPerApiType(Batch input, bool graphAlwaysUsesBeta)
         {
             Batch restBatch = new Batch()
             {
@@ -1798,21 +1808,36 @@ namespace PnP.Core.Services
             {
                 ThrowOnError = input.ThrowOnError
             };
+            Batch graphBetaBatch = new Batch()
+            {
+                ThrowOnError = input.ThrowOnError
+            };
             Batch csomBatch = new Batch()
             {
                 ThrowOnError = input.ThrowOnError
             };
 
-            foreach (var request in input.Requests)
+            foreach (var request in input.Requests.Where(p => p.Value.ExecutionNeeded))
             {
                 var br = request.Value;
                 if (br.ApiCall.Type == ApiType.SPORest)
                 {
                     restBatch.Add(br.Model, br.EntityInfo, br.Method, br.ApiCall, br.BackupApiCall, br.FromJsonCasting, br.PostMappingJson, br.OperationName);
                 }
-                else if (br.ApiCall.Type == ApiType.Graph || br.ApiCall.Type == ApiType.GraphBeta)
+                else if (br.ApiCall.Type == ApiType.Graph)
                 {
-                    graphBatch.Add(br.Model, br.EntityInfo, br.Method, br.ApiCall, br.BackupApiCall, br.FromJsonCasting, br.PostMappingJson, br.OperationName);
+                    if (graphAlwaysUsesBeta)
+                    {
+                        graphBetaBatch.Add(br.Model, br.EntityInfo, br.Method, br.ApiCall, br.BackupApiCall, br.FromJsonCasting, br.PostMappingJson, br.OperationName);
+                    }
+                    else
+                    {
+                        graphBatch.Add(br.Model, br.EntityInfo, br.Method, br.ApiCall, br.BackupApiCall, br.FromJsonCasting, br.PostMappingJson, br.OperationName);
+                    }
+                }
+                else if (br.ApiCall.Type == ApiType.GraphBeta)
+                {
+                    graphBetaBatch.Add(br.Model, br.EntityInfo, br.Method, br.ApiCall, br.BackupApiCall, br.FromJsonCasting, br.PostMappingJson, br.OperationName);
                 }
                 else if (br.ApiCall.Type == ApiType.CSOM)
                 {
@@ -1820,7 +1845,7 @@ namespace PnP.Core.Services
                 }
             }
 
-            return new Tuple<Batch, Batch, Batch>(restBatch, graphBatch, csomBatch);
+            return new Tuple<Batch, Batch, Batch, Batch>(restBatch, graphBatch, graphBetaBatch, csomBatch);
         }
 
         /// <summary>

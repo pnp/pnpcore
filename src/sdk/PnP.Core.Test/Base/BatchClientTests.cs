@@ -62,6 +62,62 @@ namespace PnP.Core.Test.Base
         }
 
         [TestMethod]
+        public async Task RemoveProcessedExplicitGraphBatch()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var batch = context.NewBatch();
+                var team = context.Team.GetBatch(batch, o => o.Channels);
+                context.Execute(batch);
+                Assert.IsTrue(team.Result.Channels.Length > 0);
+                Assert.IsTrue(batch.Executed);
+                Assert.IsTrue(batch.Requests.Count == 2);
+
+                var firstChannel = team.Result.Channels.AsRequested().FirstOrDefault(i => i.DisplayName == "General");
+                Assert.IsNotNull(firstChannel);
+
+                var channel = firstChannel.GetBatch(batch, o => o.Tabs);
+
+                Assert.IsTrue(batch.Requests.Where(p => p.Value.ExecutionNeeded).Count() == 2);
+                Assert.IsTrue(batch.Requests.Count == 4);
+
+                context.Execute(batch);
+
+                Assert.IsTrue(batch.Executed);
+                Assert.IsTrue(batch.Requests.Where(p => p.Value.ExecutionNeeded).Count() == 0);
+                Assert.IsTrue(batch.Requests.Count == 4);
+            }
+        }
+
+        [TestMethod]
+        public async Task RemoveProcessedExplicitRestBatch()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var batch = context.NewBatch();
+                var site = context.Site.GetBatch(batch, p => p.AllowMasterPageEditing);
+                context.Execute(batch);
+                Assert.IsTrue(site.Result.IsPropertyAvailable(p => p.AllowMasterPageEditing));
+                Assert.IsTrue(batch.Executed);
+                Assert.IsTrue(batch.Requests.Count == 1);
+
+                var web = context.Web.GetBatch(batch, p => p.MasterUrl, p => p.CustomMasterUrl);                
+                
+                Assert.IsTrue(batch.Requests.Where(p => p.Value.ExecutionNeeded).Count() == 1);
+                Assert.IsTrue(batch.Requests.Count == 2);
+
+                context.Execute(batch);
+                Assert.IsTrue(web.Result.IsPropertyAvailable(p => p.CustomMasterUrl));
+
+                Assert.IsTrue(batch.Executed);
+                Assert.IsTrue(batch.Requests.Where(p => p.Value.ExecutionNeeded).Count() == 0);
+                Assert.IsTrue(batch.Requests.Count == 2);
+            }
+        }
+
+        [TestMethod]
         public async Task RemoveProcessedBatch()
         {
             //TestCommon.Instance.Mocking = false;
@@ -158,6 +214,72 @@ namespace PnP.Core.Test.Base
                 Assert.IsTrue(context.Team.IsPropertyAvailable(p => p.Id));
                 Assert.IsTrue(context.Web.Requested);
                 Assert.IsTrue(context.Web.IsPropertyAvailable(p => p.Title));
+            }
+        }
+
+        [TestMethod]
+        public async Task SplitGraphAndGraphBetaRequestsInTwoBatches()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                // Graph only request (there's no option to fallback to a SharePoint REST call)
+                await context.Team.LoadBatchAsync();
+                // Graph beta request
+                await context.TermStore.LoadBatchAsync();
+
+                // Grab the id of the current batch so we can later on find it back
+                Guid currentBatchId = context.CurrentBatch.Id;
+                var batchToExecute = context.BatchClient.GetBatchById(currentBatchId);
+                // We added 2 requests to the the current batch
+                Assert.IsTrue(batchToExecute.Requests.Count == 2);
+
+                // The first call in the batch are graph calls
+                Assert.IsTrue(batchToExecute.Requests[0].ApiCall.Type == ApiType.Graph);
+                // The second one is rest
+                Assert.IsTrue(batchToExecute.Requests[1].ApiCall.Type == ApiType.GraphBeta);
+                // Execute the batch, this will result in 2 individual batches being executed, one graph and one graph beta
+                await context.ExecuteAsync();
+
+                // verify data was loaded 
+                Assert.IsTrue(context.Team.Requested);
+                Assert.IsTrue(context.Team.IsPropertyAvailable(p => p.Id));
+                Assert.IsTrue(context.TermStore.Requested);
+                Assert.IsTrue(context.TermStore.IsPropertyAvailable(p => p.Id));
+            }
+        }
+
+        [TestMethod]
+        public async Task SplitGraphAndGraphBetaRequestsInTwoBatchesWhileForcingGraphBeta()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                context.GraphAlwaysUseBeta = true;
+
+                // Graph only request (there's no option to fallback to a SharePoint REST call)
+                await context.Team.LoadBatchAsync();
+                // Graph beta request
+                await context.TermStore.LoadBatchAsync();
+
+                // Grab the id of the current batch so we can later on find it back
+                Guid currentBatchId = context.CurrentBatch.Id;
+                var batchToExecute = context.BatchClient.GetBatchById(currentBatchId);
+                // We added 2 requests to the the current batch
+                Assert.IsTrue(batchToExecute.Requests.Count == 2);
+
+                // The first call in the batch are graph calls
+                Assert.IsTrue(batchToExecute.Requests[0].ApiCall.Type == ApiType.Graph);
+                // The second one is rest
+                Assert.IsTrue(batchToExecute.Requests[1].ApiCall.Type == ApiType.GraphBeta);
+                // Execute the batch, this will result in 1 graph beta batch being executed
+                await context.ExecuteAsync();
+
+                // verify data was loaded 
+                Assert.IsTrue(context.Team.Requested);
+                Assert.IsTrue(context.Team.IsPropertyAvailable(p => p.Id));
+                Assert.IsTrue(context.TermStore.Requested);
+                Assert.IsTrue(context.TermStore.IsPropertyAvailable(p => p.Id));
             }
         }
 

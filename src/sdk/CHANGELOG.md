@@ -22,6 +22,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
 ### Changed
 
+- Split batches containing Graph Beta and Graph V1 requests into individual batches [jansenbe - Bert Jansen]
+- Prevent unneeded extra requests in a batch when the a previous batch was reused [jansenbe - Bert Jansen]
 - Fixed loading of extra properties on retrieved content types [jansenbe - Bert Jansen]
 - Renamed GetFolder methods on IListItem to GetParentFolder [jansenbe - Bert Jansen]
 - Improved reliability for ChunkedFileUpload #465 [thechriskent - Chris Kent]

@@ -83,11 +83,10 @@ namespace PnP.Core.Services
             {
                 int apiTypeCount = 0;
 
-
-                if (Requests.Any(r => r.Value.ApiCall.Type == ApiType.SPORest)) { apiTypeCount++; }
-                // Graph v1 and beta are handled "together"
-                if (Requests.Any(r => r.Value.ApiCall.Type == ApiType.Graph || r.Value.ApiCall.Type == ApiType.GraphBeta)) { apiTypeCount++; }
-                if (Requests.Any(r => r.Value.ApiCall.Type == ApiType.CSOM)) { apiTypeCount++; }
+                if (Requests.Any(r => r.Value.ExecutionNeeded && r.Value.ApiCall.Type == ApiType.SPORest)) { apiTypeCount++; }
+                if (Requests.Any(r => r.Value.ExecutionNeeded && r.Value.ApiCall.Type == ApiType.Graph)) { apiTypeCount++; }
+                if (Requests.Any(r => r.Value.ExecutionNeeded && r.Value.ApiCall.Type == ApiType.GraphBeta)) { apiTypeCount++; }
+                if (Requests.Any(r => r.Value.ExecutionNeeded && r.Value.ApiCall.Type == ApiType.CSOM)) { apiTypeCount++; }
 
                 return apiTypeCount > 1;
             }
