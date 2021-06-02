@@ -86,7 +86,6 @@ namespace PnP.Core.Model.SharePoint
             };
             AddApiCallHandler = async (keyValuePairs) =>
             {
-
                 var parentList = Parent.Parent as List;
                 // sample parent list uri: https://bertonline.sharepoint.com/sites/modern/_api/Web/Lists(guid'b2d52a36-52f1-48a4-b499-629063c6a38c')
                 var parentListUri = parentList.GetMetadata(PnPConstants.MetaDataUri);
@@ -99,7 +98,7 @@ namespace PnP.Core.Model.SharePoint
                 string serverRelativeUrl = null;
                 if (string.IsNullOrEmpty(parentListTitle) || string.IsNullOrEmpty(parentListUri) || !parentList.IsPropertyAvailable(p => p.TemplateType))
                 {
-                    // Fall back to loading the rootfolder propery if we can't determine the list name
+                    // Fall back to loading the RootFolder property if we can't determine the list name
                     await parentList.EnsurePropertiesAsync(p => p.RootFolder).ConfigureAwait(false);
                     serverRelativeUrl = parentList.RootFolder.ServerRelativeUrl;
                 }
