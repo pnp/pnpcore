@@ -5836,6 +5836,57 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.ChangeQueryOptions.Web
   nameWithType: ChangeQueryOptions.Web
+- uid: PnP.Core.Model.SharePoint.ChangeTokenOptions
+  name: ChangeTokenOptions
+  href: api/PnP.Core.Model.SharePoint.ChangeTokenOptions.html
+  commentId: T:PnP.Core.Model.SharePoint.ChangeTokenOptions
+  fullName: PnP.Core.Model.SharePoint.ChangeTokenOptions
+  nameWithType: ChangeTokenOptions
+- uid: PnP.Core.Model.SharePoint.ChangeTokenOptions.#ctor
+  name: ChangeTokenOptions()
+  href: api/PnP.Core.Model.SharePoint.ChangeTokenOptions.html#PnP_Core_Model_SharePoint_ChangeTokenOptions__ctor
+  commentId: M:PnP.Core.Model.SharePoint.ChangeTokenOptions.#ctor
+  fullName: PnP.Core.Model.SharePoint.ChangeTokenOptions.ChangeTokenOptions()
+  nameWithType: ChangeTokenOptions.ChangeTokenOptions()
+- uid: PnP.Core.Model.SharePoint.ChangeTokenOptions.#ctor(System.String)
+  name: ChangeTokenOptions(String)
+  href: api/PnP.Core.Model.SharePoint.ChangeTokenOptions.html#PnP_Core_Model_SharePoint_ChangeTokenOptions__ctor_System_String_
+  commentId: M:PnP.Core.Model.SharePoint.ChangeTokenOptions.#ctor(System.String)
+  fullName: PnP.Core.Model.SharePoint.ChangeTokenOptions.ChangeTokenOptions(System.String)
+  nameWithType: ChangeTokenOptions.ChangeTokenOptions(String)
+- uid: PnP.Core.Model.SharePoint.ChangeTokenOptions.#ctor*
+  name: ChangeTokenOptions
+  href: api/PnP.Core.Model.SharePoint.ChangeTokenOptions.html#PnP_Core_Model_SharePoint_ChangeTokenOptions__ctor_
+  commentId: Overload:PnP.Core.Model.SharePoint.ChangeTokenOptions.#ctor
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.ChangeTokenOptions.ChangeTokenOptions
+  nameWithType: ChangeTokenOptions.ChangeTokenOptions
+- uid: PnP.Core.Model.SharePoint.ChangeTokenOptions.StringValue
+  name: StringValue
+  href: api/PnP.Core.Model.SharePoint.ChangeTokenOptions.html#PnP_Core_Model_SharePoint_ChangeTokenOptions_StringValue
+  commentId: P:PnP.Core.Model.SharePoint.ChangeTokenOptions.StringValue
+  fullName: PnP.Core.Model.SharePoint.ChangeTokenOptions.StringValue
+  nameWithType: ChangeTokenOptions.StringValue
+- uid: PnP.Core.Model.SharePoint.ChangeTokenOptions.StringValue*
+  name: StringValue
+  href: api/PnP.Core.Model.SharePoint.ChangeTokenOptions.html#PnP_Core_Model_SharePoint_ChangeTokenOptions_StringValue_
+  commentId: Overload:PnP.Core.Model.SharePoint.ChangeTokenOptions.StringValue
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.ChangeTokenOptions.StringValue
+  nameWithType: ChangeTokenOptions.StringValue
+- uid: PnP.Core.Model.SharePoint.ChangeTokenOptions.ToString
+  name: ToString()
+  href: api/PnP.Core.Model.SharePoint.ChangeTokenOptions.html#PnP_Core_Model_SharePoint_ChangeTokenOptions_ToString
+  commentId: M:PnP.Core.Model.SharePoint.ChangeTokenOptions.ToString
+  fullName: PnP.Core.Model.SharePoint.ChangeTokenOptions.ToString()
+  nameWithType: ChangeTokenOptions.ToString()
+- uid: PnP.Core.Model.SharePoint.ChangeTokenOptions.ToString*
+  name: ToString
+  href: api/PnP.Core.Model.SharePoint.ChangeTokenOptions.html#PnP_Core_Model_SharePoint_ChangeTokenOptions_ToString_
+  commentId: Overload:PnP.Core.Model.SharePoint.ChangeTokenOptions.ToString
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.ChangeTokenOptions.ToString
+  nameWithType: ChangeTokenOptions.ToString
 - uid: PnP.Core.Model.SharePoint.ChangeType
   name: ChangeType
   href: api/PnP.Core.Model.SharePoint.ChangeType.html

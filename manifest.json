@@ -1190,6 +1190,18 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.SharePoint.ChangeTokenOptions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.SharePoint.ChangeTokenOptions.html",
+          "hash": "95nqAm1R9HPm6Bljywq31A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/PnP.Core.Model.SharePoint.ChangeType.yml",
       "output": {
         ".html": {
@@ -3234,7 +3246,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.html",
-          "hash": "AhZi3WqK/27I0G9Er82L9A=="
+          "hash": "qCcQSbuNnStOLnQboABJIg=="
         }
       },
       "is_incremental": false,
@@ -4362,7 +4374,7 @@
       "output": {
         ".html": {
           "relative_path": "api/toc.html",
-          "hash": "xZhde2YGiakN4X4Ilgs/uA=="
+          "hash": "L15yGKWFhCMCwxkx0LRzDA=="
         }
       },
       "is_incremental": false,
@@ -5047,7 +5059,7 @@
       "output": {
         ".html": {
           "relative_path": "using-the-sdk/changes-sharepoint.html",
-          "hash": "Lb6VOlbBehSiFDAVtvg3vA=="
+          "hash": "1jEr7HsFx+86mYofWlRCzA=="
         }
       },
       "is_incremental": false,
@@ -5470,7 +5482,7 @@
         "ManagedReferenceDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build",
-          "total_file_count": 361,
+          "total_file_count": 362,
           "skipped_file_count": 0
         },
         "ResourceDocumentProcessor": {
