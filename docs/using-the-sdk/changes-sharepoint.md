@@ -108,6 +108,12 @@ var changes2 = await context.Web.GetChangesAsync(new ChangeQueryOptions(true, tr
                 });
 ```
 
+The `lastChangeToken` in previous example is of type `IChangeToken`, if you've stored the actual change token (e.g."1;2;8c8e101c-1b0d-4253-85e7-c30039bf46e2;637577313637500000;563287977") you can construct an `IChangeToken` for it as follows:
+
+```csharp
+var lastChangetoken = new ChangeTokenOptions("1;2;8c8e101c-1b0d-4253-85e7-c30039bf46e2;637577313637500000;563287977");
+```
+
 ## Processing the returned changes
 
 The returned collection of changes all inherit of the same base model `IChange`, but depending on the changed object you get different model. Changes on a web result in a `IChangeWeb` instance, changes on a list in a `IChangeList` instance and so on. When iterating over the changes you can check for the type and cast it as shown in below example. When a change is returned not all properties of the returned object are always populated, use the `IsPropertyAvailable` method to verify a property is populated before using it (in case the property is not always populated).

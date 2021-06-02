@@ -915,7 +915,8 @@ namespace PnP.Core.Test.SharePoint
 
                 var firstChangeToken = changes.First().ChangeToken;
 
-                var lastChangetoken = changes.Last().ChangeToken;
+                // Alternative way to pass in a change token if you've stored the last change token string value
+                var lastChangetoken = new ChangeTokenOptions(changes.Last().ChangeToken.StringValue);
 
                 var changes2 = await context.Web.GetChangesAsync(new ChangeQueryOptions(true, true)
                 {
