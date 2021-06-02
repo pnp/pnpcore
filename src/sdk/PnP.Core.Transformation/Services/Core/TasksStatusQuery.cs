@@ -1,7 +1,7 @@
 ﻿namespace PnP.Core.Transformation.Services.Core
 {
     /// <summary>
-    /// Object containing filters and orders criteria
+    /// Object defining filters and sorting criteria for transformation tasks
     /// </summary>
     public class TasksStatusQuery
     {
@@ -24,6 +24,5 @@
         /// The optional state to filter by
         /// </summary>
         public TransformationTaskExecutionState? State { get; }
-
     }
 }

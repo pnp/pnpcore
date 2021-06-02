@@ -23,7 +23,7 @@ namespace PnP.Core.Transformation.Services.Builder
         public virtual IServiceCollection Services { get; }
 
         /// <summary>
-        /// Sets a custom <see cref="ITransformationStateManager" /> to use to handle the state of a transformation process
+        /// Allows configuring a custom <see cref="ITransformationStateManager" /> to use to handle the state of a transformation process
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
@@ -36,7 +36,7 @@ namespace PnP.Core.Transformation.Services.Builder
         }
 
         /// <summary>
-        /// Sets a custom <see cref="ITransformationDistiller" /> to defines a list of pages to transform
+        /// Allows configuring a custom <see cref="ITransformationDistiller" /> to defines a list of pages to transform
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
@@ -49,7 +49,7 @@ namespace PnP.Core.Transformation.Services.Builder
         }
 
         /// <summary>
-        /// Sets a custom <see cref="IPageTransformator" /> to use to transform pages
+        /// Allows configuring a custom <see cref="IPageTransformator" /> to use to transform pages
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
@@ -62,7 +62,7 @@ namespace PnP.Core.Transformation.Services.Builder
         }
 
         /// <summary>
-        /// Sets a custom <see cref="ITransformationExecutor" /> that manages the transformation of one or more pages
+        /// Allows configuring a custom <see cref="ITransformationExecutor" /> that manages the transformation of one or more pages
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
@@ -75,7 +75,7 @@ namespace PnP.Core.Transformation.Services.Builder
         }
 
         /// <summary>
-        /// Sets a custom <see cref="ITargetPageUriResolver"/> which resolves target page uri
+        /// Allows configuring a custom <see cref="ITargetPageUriResolver"/> which resolves target page uri
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
@@ -87,7 +87,7 @@ namespace PnP.Core.Transformation.Services.Builder
         }
 
         /// <summary>
-        /// Customizes the default transformation options for the pages
+        /// Allows configuring the default transformation options for pages
         /// </summary>
         /// <param name="options"></param>
         /// <returns></returns>
@@ -96,9 +96,9 @@ namespace PnP.Core.Transformation.Services.Builder
             Services.Configure(options);
             return this;
         }
-        
+
         /// <summary>
-        /// Sets a custom <see cref="IMappingProvider" /> to use for all transformations
+        /// Allows configuring a custom <see cref="IMappingProvider" /> to use for all transformations
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
@@ -112,7 +112,7 @@ namespace PnP.Core.Transformation.Services.Builder
         }
 
         /// <summary>
-        /// Adds a object to intercept a page before the transformation
+        /// Adds an object to intercept a page before the transformation
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
@@ -124,7 +124,7 @@ namespace PnP.Core.Transformation.Services.Builder
         }
 
         /// <summary>
-        /// Adds a object to intercept a page after the transformation
+        /// Adds an object to intercept a page after the transformation
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
@@ -136,7 +136,7 @@ namespace PnP.Core.Transformation.Services.Builder
         }
 
         /// <summary>
-        /// Sets the <see cref="ISourceProvider"/> to use in order to get the source items
+        /// Allows configuring a custom <see cref="ISourceProvider"/> to use in order to get the source items
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
@@ -148,7 +148,5 @@ namespace PnP.Core.Transformation.Services.Builder
 
             return this;
         }
-
-
     }
 }

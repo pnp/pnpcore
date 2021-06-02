@@ -12,5 +12,7 @@ namespace PnP.Core.Transformation.Services.Builder.Configuration
         /// Turns on/off telemetry, can be customized via configuration. Defaults to false.
         /// </summary>
         public bool DisableTelemetry { get; set; }
+
+        // TODO: Define all the configuration settings
     }
 }

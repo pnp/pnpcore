@@ -11,8 +11,9 @@ using PnP.Core.Services;
 namespace PnP.Core.Transformation.Services.Core
 {
     /// <summary>
-    /// Implementation of <see cref="ITransformationExecutor"/> with works sequentially and in process
+    /// Implementation of <see cref="ITransformationExecutor"/> that works sequentially and in process
     /// </summary>
+    /// <remarks>This class is thread safe</remarks>
     public class InProcessTransformationExecutor : ITransformationExecutor, IDisposable
     {
         private readonly IServiceProvider serviceProvider;
@@ -30,7 +31,7 @@ namespace PnP.Core.Transformation.Services.Core
         /// <summary>
         /// Creates a Page Transformation process
         /// </summary>
-        /// <param name="token">The cancellation token</param>
+        /// <param name="token">The cancellation token, if any</param>
         /// <returns>The transformation process</returns>
         public Task<ITransformationProcess> CreateTransformationProcessAsync(CancellationToken token = default)
         {
@@ -53,7 +54,7 @@ namespace PnP.Core.Transformation.Services.Core
         /// Loads a Page Transformation process
         /// </summary>
         /// <param name="processId">The ID of the process to load</param>
-        /// <param name="token">The cancellation token</param>
+        /// <param name="token">The cancellation token, if any</param>
         /// <returns>The transformation process</returns>
         public Task<ITransformationProcess> LoadTransformationProcessAsync(Guid processId,
             CancellationToken token = default)

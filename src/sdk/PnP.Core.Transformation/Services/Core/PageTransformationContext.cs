@@ -10,11 +10,11 @@ namespace PnP.Core.Transformation.Services.Core
     public class PageTransformationContext
     {
         /// <summary>
-        /// Creates an instance
+        /// Creates an instance of PageTransformationContext
         /// </summary>
-        /// <param name="task"></param>
-        /// <param name="sourceItem"></param>
-        /// <param name="targetPageUri"></param>
+        /// <param name="task">The page transformation task</param>
+        /// <param name="sourceItem">The source item of the transformation</param>
+        /// <param name="targetPageUri">The target URI of the transformed page</param>
         public PageTransformationContext(PageTransformationTask task, ISourceItem sourceItem, Uri targetPageUri)
         {
             Task = task ?? throw new ArgumentNullException(nameof(task));

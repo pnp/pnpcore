@@ -83,3 +83,8 @@ Bert's feedback:
 - Internal multiple transformators, outside just one
 - JSON configuration file for PowerShell
 - PnP Core pre-requirements to check
+
+
+TODO:
+- Replace all explicit strings with resource strings
+- state or status?

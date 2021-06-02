@@ -15,9 +15,9 @@ namespace PnP.Core.Transformation.Services.Core
         /// <summary>
         /// Resolves the SharePoint target uri for the specified source item
         /// </summary>
-        /// <param name="sourceItem"></param>
-        /// <param name="targetContext"></param>
-        /// <param name="token"></param>
+        /// <param name="sourceItem">The source item to transform</param>
+        /// <param name="targetContext">The target context to transform the item to</param>
+        /// <param name="token">The cancellation token to use, if any</param>
         /// <returns></returns>
         Task<Uri> ResolveAsync(ISourceItem sourceItem, PnPContext targetContext, CancellationToken token = default);
     }

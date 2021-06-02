@@ -15,7 +15,7 @@ namespace PnP.Core.Transformation.Services.Core
         /// <summary>
         /// Creates a Page Transformation process
         /// </summary>
-        /// <param name="token">The cancellation token</param>
+        /// <param name="token">The cancellation token, if any</param>
         /// <returns>The transformation process</returns>
         Task<ITransformationProcess> CreateTransformationProcessAsync(CancellationToken token = default);
 
@@ -23,7 +23,7 @@ namespace PnP.Core.Transformation.Services.Core
         /// Loads a Page Transformation process
         /// </summary>
         /// <param name="processId">The ID of the process to load</param>
-        /// <param name="token">The cancellation token</param>
+        /// <param name="token">The cancellation token, if any</param>
         /// <returns>The transformation process</returns>
         Task<ITransformationProcess> LoadTransformationProcessAsync(Guid processId, CancellationToken token = default);
     }

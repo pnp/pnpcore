@@ -9,14 +9,14 @@ using PnP.Core.Transformation.Services.MappingProviders;
 namespace Microsoft.Extensions.DependencyInjection
 {
     /// <summary>
-    /// Extension methods for setting up PnP Transformation services in an <see cref="IServiceCollection" />.
+    /// Extension methods for setting up PnP Transformation services in a <see cref="IServiceCollection" />.
     /// </summary>
     public static class PnPTransformationServiceCollectionExtensions
     {
         /// <summary>
         /// Configures PnP Transformation with default options
         /// </summary>
-        /// <param name="services">The collection of services in an <see cref="IServiceCollection" /></param>
+        /// <param name="services">The collection of services in a <see cref="IServiceCollection" /></param>
         /// <returns>A PnPTransformationBuilder instance</returns>
         public static IPnPTransformationBuilder AddPnPTransformation(this IServiceCollection services)
         {
@@ -26,7 +26,7 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <summary>
         /// Configures PnP Transformation with custom options
         /// </summary>
-        /// <param name="services">The collection of services in an <see cref="IServiceCollection" /></param>
+        /// <param name="services">The collection of services in a <see cref="IServiceCollection" /></param>
         /// <param name="options">An Action to configure the PnP Transformation options</param>
         /// <returns>A PnPTransformationBuilder instance</returns>
         public static IPnPTransformationBuilder AddPnPTransformation(this IServiceCollection services,
@@ -43,6 +43,7 @@ namespace Microsoft.Extensions.DependencyInjection
             }
 
             var builder = new PnPTransformationBuilder(services);
+
             // Set default implementations
             builder.AddDefaults();
 
@@ -52,8 +53,8 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <summary>
         /// Adds default implementations provided by the transformation framework
         /// </summary>
-        /// <param name="builder"></param>
-        /// <returns></returns>
+        /// <param name="builder">The services builder</param>
+        /// <returns>A PnPTransformationBuilder instance</returns>
         public static IPnPTransformationBuilder AddDefaults(this IPnPTransformationBuilder builder)
         {
             if (builder == null) throw new ArgumentNullException(nameof(builder));
