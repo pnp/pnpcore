@@ -494,6 +494,14 @@ namespace PnP.Core.Services
         {
             ApiType apiType = ApiType.Graph;
 
+            if (entityInfo.GraphBeta)
+            {
+                if (CanUseGraphBeta(model, entityInfo))
+                {
+                    apiType = ApiType.GraphBeta;
+                }
+            }
+
             var nonExpandableFields = entityInfo.GraphNonExpandableCollections;
             if (nonExpandableFields.Any())
             {
