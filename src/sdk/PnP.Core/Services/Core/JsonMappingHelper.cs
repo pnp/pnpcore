@@ -1202,7 +1202,7 @@ namespace PnP.Core.Services
 
             if (key.Contains("_x0020_"))
             {
-                key = key.Replace("_x0020_", "");
+                key = key.Replace("_x0020_", " ");
             }
 
             if (!dictionary.ContainsKey(key))
