@@ -11,15 +11,13 @@ namespace PnP.Core.Transformation.SharePoint
     /// </summary>
     public static class SharePointTransformationExecutorExtensions
     {
-
         /// <summary>
         /// Creates a new transformation process for SharePoint
         /// </summary>
         /// <param name="transformationProcess">The process to use</param>
         /// <param name="sourceContext">The source context</param>
         /// <param name="targetContext">The target context</param>
-        /// <param name="token">The cancellation token</param>
-        /// <returns></returns>
+        /// <param name="token">The cancellation token, if any</param>
         public static Task StartSharePointProcessAsync(
             this ITransformationProcess transformationProcess,
             PnPContext sourceContext,
@@ -35,13 +33,13 @@ namespace PnP.Core.Transformation.SharePoint
         }
 
         /// <summary>
-        /// Creates a new transformation process for SharePoint and wait for its completion
+        /// Creates a new transformation process for SharePoint and waits for its completion
         /// </summary>
         /// <param name="transformationExecutor">The executor to use</param>
         /// <param name="sourceContext">The source context</param>
         /// <param name="targetContext">The target context</param>
-        /// <param name="token">The cancellation token</param>
-        /// <returns></returns>
+        /// <param name="token">The cancellation token, if any</param>
+        /// <returns>The status of the transformation process</returns>
         public static Task<TransformationProcessStatus> TransformSharePointAsync(
             this ITransformationExecutor transformationExecutor,
             PnPContext sourceContext,
@@ -63,7 +61,7 @@ namespace PnP.Core.Transformation.SharePoint
         /// <param name="pnpContextFactory">The context factory to use</param>
         /// <param name="sourceName">The source site name</param>
         /// <param name="targetName">The target site name</param>
-        /// <param name="token">The cancellation token</param>
+        /// <param name="token">The cancellation token, if any</param>
         /// <returns></returns>
         public static async Task StartProcessAsync(
             this ITransformationProcess transformationProcess,
@@ -85,13 +83,13 @@ namespace PnP.Core.Transformation.SharePoint
         }
 
         /// <summary>
-        /// Creates a new transformation process for SharePoint and wait for its completion
+        /// Creates a new transformation process for SharePoint and waits for its completion
         /// </summary>
         /// <param name="transformationExecutor">The executor to use</param>
         /// <param name="pnpContextFactory">The context factory to use</param>
         /// <param name="sourceName">The source site name</param>
         /// <param name="targetName">The target site name</param>
-        /// <param name="token">The cancellation token</param>
+        /// <param name="token">The cancellation token, if any</param>
         /// <returns></returns>
         public static async Task<TransformationProcessStatus> TransformSharePointAsync(
             this ITransformationExecutor transformationExecutor,

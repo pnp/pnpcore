@@ -15,8 +15,8 @@ namespace PnP.Core.Transformation.SharePoint.Builder
         /// <summary>
         /// Customizes the default transformation options for SharePoint
         /// </summary>
-        /// <param name="options"></param>
-        /// <returns></returns>
+        /// <param name="options">The configuration options</param>
+        /// <returns>The builder object for the current configuration</returns>
         IPnPSharePointTransformationBuilder WithSharePointOptions(Action<SharePointTransformationOptions> options);
 
     }

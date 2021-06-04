@@ -11,6 +11,9 @@ using PnP.Core.Transformation.Services.Core;
 
 namespace PnP.Core.Transformation.Poc.Implementations
 {
+    /// <summary>
+    /// State manager that relies on an Azure Table Storage to store the state items
+    /// </summary>
     public class AzureTableTransformationStateManager : ITransformationStateManager
     {
         private readonly CloudTable tableReference;

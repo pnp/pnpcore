@@ -6,6 +6,6 @@
     /// </summary>
     public class SharePointTransformationOptions
     {
-       
+       // TODO: To be defined
     }
 }

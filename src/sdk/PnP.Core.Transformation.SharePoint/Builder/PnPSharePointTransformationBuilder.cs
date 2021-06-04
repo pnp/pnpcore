@@ -16,15 +16,15 @@ namespace PnP.Core.Transformation.SharePoint.Builder
         /// <summary>
         /// Constructor
         /// </summary>
-        /// <param name="services">The services being configured.</param>
+        /// <param name="services">The services being configured</param>
         public PnPSharePointTransformationBuilder(IServiceCollection services) : base(services)
         {}
 
         /// <summary>
         /// Customizes the default transformation options for SharePoint
         /// </summary>
-        /// <param name="options"></param>
-        /// <returns></returns>
+        /// <param name="options">The configuration options</param>
+        /// <returns>The builder object for the current configuration</returns>
         public IPnPSharePointTransformationBuilder WithSharePointOptions(Action<SharePointTransformationOptions> options)
         {
             Services.Configure(options);

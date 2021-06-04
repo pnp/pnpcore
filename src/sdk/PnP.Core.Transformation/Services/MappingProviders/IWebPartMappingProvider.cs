@@ -17,7 +17,7 @@ namespace PnP.Core.Transformation.Services.MappingProviders
         /// Maps a classic Web Part into a modern Web Part
         /// </summary>
         /// <param name="input">The input for the mapping activity</param>
-        /// <param name="token">The cancellation token</param>
+        /// <param name="token">The cancellation token, if any</param>
         /// <returns>The output of the mapping activity</returns>
         Task<WebPartMappingProviderOutput> MapWebPartAsync(WebPartMappingProviderInput input, CancellationToken token = default);
     }

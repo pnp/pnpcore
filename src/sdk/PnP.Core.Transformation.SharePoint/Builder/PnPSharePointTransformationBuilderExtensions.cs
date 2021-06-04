@@ -78,6 +78,5 @@ namespace Microsoft.Extensions.DependencyInjection
 
             return new PnPSharePointTransformationBuilder(builder.Services);
         }
-
     }
 }

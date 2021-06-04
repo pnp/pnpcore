@@ -13,18 +13,17 @@ namespace PnP.Core.Transformation.SharePoint
         private readonly SharePointSourceItemId sourceItemId;
 
         /// <summary>
-        /// Creates a new instance based on uri
+        /// Creates a new instance based on a uri
         /// </summary>
-        /// <param name="uri"></param>
+        /// <param name="uri">The URI of the item</param>
         public SharePointSourceItem(Uri uri) : this(new SharePointSourceItemId(uri))
-        {
-            
+        {            
         }
 
         /// <summary>
-        /// Creates a new instance based on id
+        /// Creates a new instance based on an id
         /// </summary>
-        /// <param name="sourceItemId"></param>
+        /// <param name="sourceItemId">The ID of the item</param>
         public SharePointSourceItem(SharePointSourceItemId sourceItemId)
         {
             this.sourceItemId = sourceItemId ?? throw new ArgumentNullException(nameof(sourceItemId));

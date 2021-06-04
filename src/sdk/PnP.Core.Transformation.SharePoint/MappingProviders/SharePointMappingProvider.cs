@@ -20,10 +20,11 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
         private readonly IServiceProvider serviceProvider;
 
         /// <summary>
-        /// Creates an instance
+        /// Main constructor for the mapping provider
         /// </summary>
-        /// <param name="options"></param>
-        /// <param name="serviceProvider"></param>
+        /// <param name="logger">Logger for tracing activities</param>
+        /// <param name="options">Configuration options</param>
+        /// <param name="serviceProvider">Service provider</param>
         public SharePointMappingProvider(ILogger<SharePointMappingProvider> logger, IOptions<SharePointTransformationOptions> options, IServiceProvider serviceProvider)
         {
             this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
@@ -35,9 +36,9 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
         /// Maps an item from the source platform to the target platform
         /// </summary>
         /// <param name="input">The input for the mapping</param>
-        /// <param name="token">The cancellation token to use</param>
+        /// <param name="token">The cancellation token to use, if any</param>
         /// <returns>The output of the mapping</returns>
-        public async Task<MappingProviderOutput> MapAsync(MappingProviderInput input, CancellationToken token)
+        public async Task<MappingProviderOutput> MapAsync(MappingProviderInput input, CancellationToken token = default)
         {
             logger.LogInformation($"Invoked: {this.GetType().Namespace}.{this.GetType().Name}.MapAsync");
 

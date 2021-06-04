@@ -5,7 +5,7 @@ using System.Text;
 namespace PnP.Core.Transformation.Services.MappingProviders
 {
     /// <summary>
-    /// Defines the input for a mapping provider
+    /// Defines the output for a mapping provider
     /// </summary>
     public class MappingProviderOutput
     {

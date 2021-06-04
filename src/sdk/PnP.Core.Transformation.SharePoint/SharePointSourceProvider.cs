@@ -10,7 +10,7 @@ using PnP.Core.Transformation.Services.Core;
 namespace PnP.Core.Transformation.SharePoint
 {
     /// <summary>
-    /// <see cref="ISourceProvider"/> implementation which supports SharePoint Online
+    /// Implementation of <see cref="ISourceProvider"/> supporting SharePoint
     /// </summary>
     public class SharePointSourceProvider : ISourceProvider
     {
@@ -22,15 +22,16 @@ namespace PnP.Core.Transformation.SharePoint
         /// <summary>
         /// Creates a new instance for the context
         /// </summary>
-        /// <param name="sourceContext"></param>
+        /// <param name="sourceContext">The source PnP Context</param>
         public SharePointSourceProvider(PnPContext sourceContext)
         {
             SourceContext = sourceContext ?? throw new ArgumentNullException(nameof(sourceContext));
         }
 
         /// <summary>
-        /// Gets the id of each available items
+        /// Gets the id of each available item
         /// </summary>
+        /// <param name="token">The cancellation token, if any</param>
         /// <returns></returns>
         public async IAsyncEnumerable<ISourceItemId> GetItemsIdsAsync([EnumeratorCancellation] CancellationToken token = default)
         {
@@ -41,11 +42,11 @@ namespace PnP.Core.Transformation.SharePoint
         }
 
         /// <summary>
-        /// Get the item and related information based on its id
+        /// Gets an item and its related information based on the id
         /// </summary>
-        /// <param name="id"></param>
-        /// <param name="token">The cancellation token to use</param>
-        /// <returns></returns>
+        /// <param name="id">The Id of the item to retrieve</param>
+        /// <param name="token">The cancellation token, if any</param>
+        /// <returns>The retrieved item</returns>
         public Task<ISourceItem> GetItemAsync(ISourceItemId id, CancellationToken token = default)
         {
             if (!(id is SharePointSourceItemId sid))

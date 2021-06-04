@@ -4,7 +4,9 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using PnP.Core.Transformation.Services.MappingProviders;
+using PnP.Core.Transformation.SharePoint.Builder.Configuration;
 
 namespace PnP.Core.Transformation.SharePoint.MappingProviders
 {
@@ -14,19 +16,31 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
     public class SharePointWebPartMappingProvider : IWebPartMappingProvider
     {
         private ILogger<SharePointWebPartMappingProvider> logger;
+        private readonly IOptions<SharePointTransformationOptions> options;
+        private readonly IServiceProvider serviceProvider;
 
-        public SharePointWebPartMappingProvider(ILogger<SharePointWebPartMappingProvider> logger)
+        /// <summary>
+        /// Main constructor for the mapping provider
+        /// </summary>
+        /// <param name="logger">Logger for tracing activities</param>
+        /// <param name="options">Configuration options</param>
+        /// <param name="serviceProvider">Service provider</param>
+        public SharePointWebPartMappingProvider(ILogger<SharePointWebPartMappingProvider> logger, 
+            IOptions<SharePointTransformationOptions> options, 
+            IServiceProvider serviceProvider)
         {
             this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
+            this.options = options ?? throw new ArgumentNullException(nameof(options));
+            this.serviceProvider = serviceProvider;
         }
 
         /// <summary>
         /// Maps a classic Web Part into a modern Web Part
         /// </summary>
         /// <param name="input">The input for the mapping activity</param>
-        /// <param name="token">The cancellation token to use</param>
+        /// <param name="token">The cancellation token to use, if any</param>
         /// <returns>The output of the mapping activity</returns>
-        public Task<WebPartMappingProviderOutput> MapWebPartAsync(WebPartMappingProviderInput input, CancellationToken token)
+        public Task<WebPartMappingProviderOutput> MapWebPartAsync(WebPartMappingProviderInput input, CancellationToken token = default)
         {
             logger.LogInformation($"Invoked: {this.GetType().Namespace}.{this.GetType().Name}.MapWebPartAsync");
             return Task.FromResult(new WebPartMappingProviderOutput());
