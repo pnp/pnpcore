@@ -455,10 +455,51 @@ namespace PnP.Core.Test.SharePoint
 
                 page.AddSection(CanvasSectionTemplate.OneColumn, 1);
 
+                Assert.ThrowsException<ArgumentNullException>(() =>
+                {
+                    page.AddControl(null);
+                });
+
+                Assert.ThrowsException<ArgumentNullException>(() =>
+                {
+                    page.AddControl(page.NewTextPart("<h2>Heading1</h2><p>Normal</p>"), null as ICanvasSection);
+                });
+
+                Assert.ThrowsException<ArgumentNullException>(() =>
+                {
+                    page.AddControl(null, page.Sections[0]);
+                });
+
+                Assert.ThrowsException<ArgumentNullException>(() =>
+                {
+                    page.AddControl(null, 10);
+                });
+
+                Assert.ThrowsException<ArgumentNullException>(() =>
+                {
+                    page.AddControl(null, page.Sections[0], 20);
+                });
+
+                Assert.ThrowsException<ArgumentNullException>(() =>
+                {
+                    page.AddControl(page.NewTextPart("<h2>Heading1</h2><p>Normal</p>"), null as ICanvasSection, 20);
+                });
+
+                Assert.ThrowsException<ArgumentNullException>(() =>
+                {
+                    page.AddControl(null, page.Sections[0].Columns[0], 30);
+                });
+
+                Assert.ThrowsException<ArgumentNullException>(() =>
+                {
+                    page.AddControl(page.NewTextPart("<h3>Heading3</h3><p>Normal</p>"), null as ICanvasColumn, 30);
+                });
+
                 page.AddControl(page.NewTextPart("Normal"));
                 page.AddControl(page.NewTextPart("<h2>Heading1</h2><p>Normal</p>"), page.Sections[0]);
                 page.AddControl(page.NewTextPart("<p>Normal</p><p>Normal</p>"), 10);
                 page.AddControl(page.NewTextPart("<h2>Heading1</h2><p>Normal</p>"), page.Sections[0], 20);
+                page.AddControl(page.NewTextPart("<h3>Heading3</h3><p>Normal</p>"), page.Sections[0].Columns[0], 30);
 
                 await page.SaveAsync(pageName);
 
@@ -470,6 +511,7 @@ namespace PnP.Core.Test.SharePoint
                 Assert.IsTrue((createdPage.Sections[0].Columns[0].Controls[1] as PageText).Text == "<h2>Heading1</h2><p>Normal</p>");
                 Assert.IsTrue((createdPage.Sections[0].Columns[0].Controls[2] as PageText).Text == "<p>Normal</p><p>Normal</p>");
                 Assert.IsTrue((createdPage.Sections[0].Columns[0].Controls[3] as PageText).Text == "<h2>Heading1</h2><p>Normal</p>");
+                Assert.IsTrue((createdPage.Sections[0].Columns[0].Controls[4] as PageText).Text == "<h3>Heading3</h3><p>Normal</p>");
 
                 await page.DeleteAsync();
             }
