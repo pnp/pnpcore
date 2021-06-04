@@ -17812,6 +17812,12 @@ references:
   commentId: M:PnP.Core.Model.SharePoint.IPage.AddControl(PnP.Core.Model.SharePoint.ICanvasControl,PnP.Core.Model.SharePoint.ICanvasColumn,System.Int32)
   fullName: PnP.Core.Model.SharePoint.IPage.AddControl(PnP.Core.Model.SharePoint.ICanvasControl, PnP.Core.Model.SharePoint.ICanvasColumn, System.Int32)
   nameWithType: IPage.AddControl(ICanvasControl, ICanvasColumn, Int32)
+- uid: PnP.Core.Model.SharePoint.IPage.AddControl(PnP.Core.Model.SharePoint.ICanvasControl,PnP.Core.Model.SharePoint.ICanvasSection)
+  name: AddControl(ICanvasControl, ICanvasSection)
+  href: api/PnP.Core.Model.SharePoint.IPage.html#PnP_Core_Model_SharePoint_IPage_AddControl_PnP_Core_Model_SharePoint_ICanvasControl_PnP_Core_Model_SharePoint_ICanvasSection_
+  commentId: M:PnP.Core.Model.SharePoint.IPage.AddControl(PnP.Core.Model.SharePoint.ICanvasControl,PnP.Core.Model.SharePoint.ICanvasSection)
+  fullName: PnP.Core.Model.SharePoint.IPage.AddControl(PnP.Core.Model.SharePoint.ICanvasControl, PnP.Core.Model.SharePoint.ICanvasSection)
+  nameWithType: IPage.AddControl(ICanvasControl, ICanvasSection)
 - uid: PnP.Core.Model.SharePoint.IPage.AddControl(PnP.Core.Model.SharePoint.ICanvasControl,PnP.Core.Model.SharePoint.ICanvasSection,System.Int32)
   name: AddControl(ICanvasControl, ICanvasSection, Int32)
   href: api/PnP.Core.Model.SharePoint.IPage.html#PnP_Core_Model_SharePoint_IPage_AddControl_PnP_Core_Model_SharePoint_ICanvasControl_PnP_Core_Model_SharePoint_ICanvasSection_System_Int32_
