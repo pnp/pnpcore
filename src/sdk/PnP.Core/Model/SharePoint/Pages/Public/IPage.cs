@@ -178,6 +178,13 @@ namespace PnP.Core.Model.SharePoint
         public void AddControl(ICanvasControl control, int order);
 
         /// <summary>
+        /// Adds a new control to your client side page in the given section
+        /// </summary>
+        /// <param name="control"><see cref="ICanvasControl"/> to add</param>
+        /// <param name="section"><see cref="ICanvasSection"/> that will hold the control. Control will end up in the <see cref="ICanvasSection.DefaultColumn"/>.</param>
+        public void AddControl(ICanvasControl control, ICanvasSection section);
+
+        /// <summary>
         /// Adds a new control to your client side page in the given section with a given order
         /// </summary>
         /// <param name="control"><see cref="ICanvasControl"/> to add</param>
