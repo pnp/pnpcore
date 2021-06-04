@@ -6,6 +6,9 @@
     /// </summary>
     public class SharePointTransformationOptions
     {
-       // TODO: To be defined
+        /// <summary>
+        /// Defines the path for the Web Part Mapping File
+        /// </summary>
+        public string WebPartMappingFile { get; set; }
     }
 }

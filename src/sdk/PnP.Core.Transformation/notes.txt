@@ -88,3 +88,4 @@ Bert's feedback:
 TODO:
 - Replace all explicit strings with resource strings
 - state or status?
+- Consider creating custom Exception types
