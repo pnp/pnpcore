@@ -158,10 +158,10 @@ namespace PnP.Core.Test.SharePoint
                 IFolder folderWithProperties = await context.Web.GetFolderByServerRelativeUrlAsync(sharedDocumentsServerRelativeUrl, f => f.Properties);
 
                 Assert.IsNotNull(folderWithProperties.Properties);
-                Assert.AreEqual("true", folderWithProperties.Properties["vti_x005f_isbrowsable"]);
-                Assert.AreEqual("true", (object)folderWithProperties.Properties.AsDynamic().vti_x005f_isbrowsable);
-                Assert.AreEqual(1, folderWithProperties.Properties["vti_x005f_level"]);
-                Assert.AreEqual(1, (object)folderWithProperties.Properties.AsDynamic().vti_x005f_level);
+                Assert.AreEqual("true", folderWithProperties.Properties["vti_isbrowsable"]);
+                Assert.AreEqual("true", (object)folderWithProperties.Properties.AsDynamic().vti_isbrowsable);
+                Assert.AreEqual(1, folderWithProperties.Properties["vti_level"]);
+                Assert.AreEqual(1, (object)folderWithProperties.Properties.AsDynamic().vti_level);
             }
         }
 

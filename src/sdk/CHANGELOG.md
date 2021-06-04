@@ -22,6 +22,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
 ### Changed
 
+- Handle SPO REST's replacement of _ with _x005f_ and space with _x0020_ when deserializing data [jansenbe - Bert Jansen]
 - Added ChangeTokenOptions class to allow creation of an IChangeToken #471 [DaleyKD - Kyle Daley]
 - Fixed an issue where adding items to the root site collection resulted in a 404 #470 [DaleyKD - Kyle Daley]
 - Split batches containing Graph Beta and Graph V1 requests into individual batches [jansenbe - Bert Jansen]

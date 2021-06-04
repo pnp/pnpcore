@@ -1195,6 +1195,16 @@ namespace PnP.Core.Services
                 key = key.Replace("OData__", "_");
             }
 
+            if (key.Contains("_x005f_"))
+            {
+                key = key.Replace("_x005f_", "_");
+            }
+
+            if (key.Contains("_x0020_"))
+            {
+                key = key.Replace("_x0020_", "");
+            }
+
             if (!dictionary.ContainsKey(key))
             {
                 dictionary.SystemAdd(key, value);

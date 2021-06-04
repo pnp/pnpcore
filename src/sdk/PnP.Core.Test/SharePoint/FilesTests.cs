@@ -2223,8 +2223,8 @@ namespace PnP.Core.Test.SharePoint
                 Assert.IsNotNull(documentWithProperties.Properties);
                 Assert.IsTrue(documentWithProperties.Properties.AsDynamic().ContentTypeId.StartsWith("0x0101"));
 
-                Assert.AreEqual(1, (int)documentWithProperties.Properties["vti_x005f_level"]);
-                Assert.AreEqual("100", documentWithProperties.Properties["vti_x005f_genericcontenttempnextbsnalloc"]);
+                Assert.AreEqual(1, (int)documentWithProperties.Properties["vti_level"]);
+                Assert.AreEqual("100", documentWithProperties.Properties["vti_genericcontenttempnextbsnalloc"]);
             }
 
             await TestAssets.CleanupTestDocumentAsync(2);
@@ -2242,8 +2242,8 @@ namespace PnP.Core.Test.SharePoint
 
                 Assert.IsNotNull(documentWithProperties.Properties);
                 Assert.IsTrue(documentWithProperties.Properties.AsDynamic().ContentTypeId.StartsWith("0x0101"));
-                Assert.AreEqual(1, (int)documentWithProperties.Properties["vti_x005f_level"]);
-                Assert.AreEqual("100", documentWithProperties.Properties["vti_x005f_genericcontenttempnextbsnalloc"]);
+                Assert.AreEqual(1, (int)documentWithProperties.Properties["vti_level"]);
+                Assert.AreEqual("100", documentWithProperties.Properties["vti_genericcontenttempnextbsnalloc"]);
             }
 
             await TestAssets.CleanupTestDocumentAsync(2);
@@ -2262,8 +2262,8 @@ namespace PnP.Core.Test.SharePoint
 
                 Assert.IsNotNull(documentWithProperties.Properties);
                 Assert.IsTrue(documentWithProperties.Properties.AsDynamic().ContentTypeId.StartsWith("0x0101"));
-                Assert.AreEqual(1, (int)documentWithProperties.Properties["vti_x005f_level"]);
-                Assert.AreEqual("100", documentWithProperties.Properties["vti_x005f_genericcontenttempnextbsnalloc"]);
+                Assert.AreEqual(1, (int)documentWithProperties.Properties["vti_level"]);
+                Assert.AreEqual("100", documentWithProperties.Properties["vti_genericcontenttempnextbsnalloc"]);
             }
 
             await TestAssets.CleanupTestDocumentAsync(2);
@@ -2282,8 +2282,8 @@ namespace PnP.Core.Test.SharePoint
 
                 Assert.IsNotNull(documentWithProperties.Properties);
                 Assert.IsTrue(documentWithProperties.Properties.AsDynamic().ContentTypeId.StartsWith("0x0101"));
-                Assert.AreEqual(1, (int)documentWithProperties.Properties["vti_x005f_level"]);
-                Assert.AreEqual("100", documentWithProperties.Properties["vti_x005f_genericcontenttempnextbsnalloc"]);
+                Assert.AreEqual(1, (int)documentWithProperties.Properties["vti_level"]);
+                Assert.AreEqual("100", documentWithProperties.Properties["vti_genericcontenttempnextbsnalloc"]);
             }
 
             await TestAssets.CleanupTestDocumentAsync(2);
@@ -2303,8 +2303,8 @@ namespace PnP.Core.Test.SharePoint
 
                 Assert.IsNotNull(documentWithProperties.Properties);
                 Assert.IsTrue(documentWithProperties.Properties.AsDynamic().ContentTypeId.StartsWith("0x0101"));
-                Assert.AreEqual(1, (int)documentWithProperties.Properties["vti_x005f_level"]);
-                Assert.AreEqual("100", documentWithProperties.Properties["vti_x005f_genericcontenttempnextbsnalloc"]);
+                Assert.AreEqual(1, (int)documentWithProperties.Properties["vti_level"]);
+                Assert.AreEqual("100", documentWithProperties.Properties["vti_genericcontenttempnextbsnalloc"]);
             }
 
             await TestAssets.CleanupTestDocumentAsync(2);
@@ -2324,8 +2324,8 @@ namespace PnP.Core.Test.SharePoint
 
                 Assert.IsNotNull(documentWithProperties.Properties);
                 Assert.IsTrue(documentWithProperties.Properties.AsDynamic().ContentTypeId.StartsWith("0x0101"));
-                Assert.AreEqual(1, (int)documentWithProperties.Properties["vti_x005f_level"]);
-                Assert.AreEqual("100", documentWithProperties.Properties["vti_x005f_genericcontenttempnextbsnalloc"]);
+                Assert.AreEqual(1, (int)documentWithProperties.Properties["vti_level"]);
+                Assert.AreEqual("100", documentWithProperties.Properties["vti_genericcontenttempnextbsnalloc"]);
             }
 
             await TestAssets.CleanupTestDocumentAsync(2);
