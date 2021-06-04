@@ -22,7 +22,7 @@ namespace PnP.Core.Model.SharePoint
         private string pageTitle;
         private string pageName;
         private static readonly Expression<Func<IList, object>>[] getPagesLibraryExpression = new Expression<Func<IList, object>>[] {p => p.Title, p => p.TemplateType, p => p.EnableFolderCreation,
-            p => p.EnableMinorVersions, p => p.EnableModeration, p => p.EnableVersioning, p => p.ForceCheckout, p => p.RootFolder, p => p.ListItemEntityTypeFullName, p => p.Fields };
+            p => p.EnableMinorVersions, p => p.EnableModeration, p => p.EnableVersioning, p => p.ForceCheckout, p => p.RootFolder.QueryProperties(p => p.Properties, p => p.ServerRelativeUrl), p => p.ListItemEntityTypeFullName, p => p.Fields };
 #pragma warning disable CA5351 // Do Not Use Broken Cryptographic Algorithms
         private static readonly MD5 md5 = MD5.Create();
 #pragma warning restore CA5351 // Do Not Use Broken Cryptographic Algorithms
@@ -480,8 +480,6 @@ namespace PnP.Core.Model.SharePoint
         {
             IList pagesLibrary = await EnsurePagesLibraryAsync(PnPContext).ConfigureAwait(false);
 
-            // Templates folder is indicated via a property bag entry
-            await pagesLibrary.RootFolder.EnsurePropertiesAsync(p => p.Properties).ConfigureAwait(false);
             var folderGuid = pagesLibrary.RootFolder.Properties.GetString(PageConstants.TemplatesFolderGuid, null);
 
             if (folderGuid == null)

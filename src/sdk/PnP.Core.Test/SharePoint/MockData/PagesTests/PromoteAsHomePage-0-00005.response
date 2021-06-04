@@ -1,4 +1,4 @@
---batchresponse_ee179785-ba89-4889-9d0e-86ffa893cf6f
+--batchresponse_8131a4f5-3a7a-45a7-ba54-8f0a3e30058d
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
@@ -6,4 +6,4 @@ HTTP/1.1 404 Not Found
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
 {"error":{"code":"-2130575338, Microsoft.SharePoint.SPException","message":{"lang":"en-US","value":"The file /sites/prov-1/SitePages/PNP_SDK_TEST_PromoteAsHomePage.aspx does not exist."}}}
---batchresponse_ee179785-ba89-4889-9d0e-86ffa893cf6f--
+--batchresponse_8131a4f5-3a7a-45a7-ba54-8f0a3e30058d--

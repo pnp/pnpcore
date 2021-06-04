@@ -1,4 +1,4 @@
---batchresponse_9f69a3d1-4468-440f-97b1-b547114eb543
+--batchresponse_2431bcd2-1aa1-4e0c-b20f-8fb67d96a8e9
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
@@ -7,11 +7,11 @@ CONTENT-TYPE: application/json; charset=utf-8
 
 { "Row" : 
 [{
-"ID": "13",
+"ID": "14",
 "PermMask": "0x7ffffffffffbffff",
 "FSObjType": "0",
 "HTML_x0020_File_x0020_Type": "",
-"UniqueId": "{2237C810-0D27-4AFC-B68E-A5F522C27455}",
+"UniqueId": "{9A603285-0506-416E-907A-E06F81C170EC}",
 "ProgId": "",
 "NoExecute": "0",
 "ContentTypeId": "0x0101009D1CB255DA76424F860D91F20E6C41180004EEC8087A216D4DAF24B2810EB8AF8E",
@@ -21,8 +21,8 @@ CONTENT-TYPE: application/json; charset=utf-8
 "FileRef.urlencoding": "\u002fsites\u002fTopicCenter\u002fSitePages\u002fPNP_SDK_TEST_TopicPageClone.aspx",
 "FileRef.scriptencodeasurl": "\\u002fsites\\u002fTopicCenter\\u002fSitePages\\u002fPNP_SDK_TEST_TopicPageClone.aspx",
 "_UIVersion": "1",
-"SMTotalSize": "15691",
-"File_x0020_Size": "13615",
+"SMTotalSize": "15713",
+"File_x0020_Size": "13632",
 "_CommentFlags": "",
 "File_x0020_Type": "aspx",
 "HTML_x0020_File_x0020_Type.File_x0020_Type.mapall": "ichtm.gif|Microsoft SharePoint Designer|SharePoint.OpenDocuments|",
@@ -40,7 +40,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "Title": "TopicPageClone",
 "ClientSideApplicationId": "{B6917CB1-93A0-4B97-A84D-7CF49975D4EC}",
 "PageLayoutType": "Topic",
-"_EntityId": "CRKB_n219iJsWIp-nekFCtgobXA",
+"_EntityId": "CRKB_lQkWJ7BdAzMwLzXXcbcXpA",
 "_EntityType": "Project",
 "_EntityRelations": "{\"schemaVersion\":1,\"relations\":{\"Definitions\":{\"added\":[{\"type\":\"TextProperty\",\"text\":\"topicA\\n\",\"curationDetails\":{\"author\":{\"email\":\"bert.jansen@bertonline.onmicrosoft.com\",\"name\":\"Bert Jansen (Cloud)\",\"upn\":\"bert.jansen@bertonline.onmicrosoft.com\"},\"time\":\"2021-04-15T09:24:15.824Z\",\"isAddedFromSearch\":false}}]},\"RelatedPeople\":{\"added\":[{\"type\":\"Person\",\"upn\":\"bert.jansen@bertonline.onmicrosoft.com\",\"email\":\"bert.jansen@bertonline.onmicrosoft.com\",\"name\":\"Bert Jansen (Cloud)\",\"curationDetails\":{\"author\":{\"email\":\"bert.jansen@bertonline.onmicrosoft.com\",\"name\":\"Bert Jansen (Cloud)\",\"upn\":\"bert.jansen@bertonline.onmicrosoft.com\"},\"time\":\"2021-04-15T09:23:58.554Z\",\"isAddedFromSearch\":false},\"description\":\"\"}],\"removed\":[]},\"RelatedDocuments\":{\"added\":[]},\"RelatedSites\":{\"added\":[]}}}",
 "CanvasContent1": "<div dir=\"\" class=\"ms-rtestate-field\"><div><\u002fdiv><\u002fdiv>",
@@ -86,4 +86,4 @@ CONTENT-TYPE: application/json; charset=utf-8
 ,"CurrentFolderSpItemUrl" : ""
 
 }
---batchresponse_9f69a3d1-4468-440f-97b1-b547114eb543--
+--batchresponse_2431bcd2-1aa1-4e0c-b20f-8fb67d96a8e9--

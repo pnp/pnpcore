@@ -1,9 +1,9 @@
---batchresponse_211f88dc-0952-4c32-9f9c-4b4f462a1309
+--batchresponse_c41454aa-3c1c-4969-9c93-56223f06a987
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{"d":{"results":[{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'5c73d6b2-ac03-4058-8233-af21df6ed8de')","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'5c73d6b2-ac03-4058-8233-af21df6ed8de')","etag":"\"89\"","type":"SP.List"},"BaseTemplate":119,"EnableFolderCreation":true,"EnableMinorVersions":true,"EnableModeration":false,"EnableVersioning":true,"ForceCheckout":false,"Id":"5c73d6b2-ac03-4058-8233-af21df6ed8de","MajorVersionLimit":500,"MajorWithMinorVersionsLimit":0,"Title":"Site Pages"}]}}
---batchresponse_211f88dc-0952-4c32-9f9c-4b4f462a1309--
+{"d":{"results":[{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'5c73d6b2-ac03-4058-8233-af21df6ed8de')","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'5c73d6b2-ac03-4058-8233-af21df6ed8de')","etag":"\"100\"","type":"SP.List"},"BaseTemplate":119,"EnableFolderCreation":true,"EnableMinorVersions":true,"EnableModeration":false,"EnableVersioning":true,"ForceCheckout":false,"Id":"5c73d6b2-ac03-4058-8233-af21df6ed8de","MajorVersionLimit":500,"MajorWithMinorVersionsLimit":0,"Title":"Site Pages"}]}}
+--batchresponse_c41454aa-3c1c-4969-9c93-56223f06a987--

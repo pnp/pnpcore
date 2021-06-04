@@ -1665,7 +1665,6 @@ namespace PnP.Core.Test.SharePoint
             }
         }
 
-
         [TestMethod]
         public async Task SavePageAsTemplate()
         {
