@@ -2425,5 +2425,44 @@ namespace PnP.Core.Test.SharePoint
         }
         #endregion
 
+        #region Other page types : SingleWebPartAppPage page
+        [TestMethod]
+        public async Task SingleWebPartAppPageCreate()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                // Create new "spaces" page
+                var newPage = await context.Web.NewPageAsync(PageLayoutType.SingleWebPartAppPage);
+                string pageName = TestCommon.GetPnPSdkTestAssetName("SingleWebPartAppPageCreate.aspx");
+
+                // adding sections to the page
+                newPage.AddSection(CanvasSectionTemplate.OneColumn, 1);
+
+                // get the web part 'blueprint' --> this uses our standard test app
+                // See setuptestenv.ps1 for the PnP PS commands to install the test app (.\TestAssets\pnpcoresdk-test-app.sppkg)
+                var availableComponents = await newPage.AvailablePageComponentsAsync();
+                var pnpWebPartComponent = availableComponents.FirstOrDefault(p => p.Id == "{9A57F808-CA0E-408E-B28C-319A9C8204ED}");
+                var pnpWebPart = newPage.NewWebPart(pnpWebPartComponent);
+
+                // add the web part to the first column of the first section
+                newPage.AddControl(pnpWebPart, newPage.Sections[0].Columns[0]);
+
+                // Save the page
+                await newPage.SaveAsync(pageName);
+
+                // Load the page again
+                var pages = await context.Web.GetPagesAsync(pageName);
+                Assert.IsTrue(pages.Count == 1);
+                newPage = pages.AsEnumerable().First();
+
+                Assert.IsTrue(newPage.LayoutType == PageLayoutType.SingleWebPartAppPage);
+
+                // Delete the page
+                await newPage.DeleteAsync();
+            }
+        }
+        #endregion
+
     }
 }

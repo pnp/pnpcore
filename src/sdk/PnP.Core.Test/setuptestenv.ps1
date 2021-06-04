@@ -51,7 +51,7 @@ $tenantUrl = "https://$tenantName.sharepoint.com"
 $tenantContext = Connect-PnPOnline -Url $tenantUrl -Credentials $credentials -Verbose -ReturnConnection
 
 # Add test Client Side app package
-$app = Add-PnPApp -Path .\TestAssets\pnpcoresdk-test-app.sppkg
+$app = Add-PnPApp -Path .\TestAssets\pnpcoresdk-test-app.sppkg -Publish
 
 
 # Create test site without a group
@@ -65,6 +65,10 @@ New-PnPWeb -Title "Sub site" -Url "subsite" -Locale 1033 -Template "STS#3"
 $pnpTestSiteWithGroup = New-PnPSite -Type TeamSite -Title "PnP Microsoft 365 library test with group" -Alias pnpcoresdktestgroup -IsPublic -Wait -Connection $tenantContext
 # Connect to the newly created site
 Connect-PnPOnline -Url $pnpTestSiteWithGroup -Credentials $credentials
+
+# Install the client side app to the site
+Install-PnPApp -Identity $app
+
 # Teamify the site
 Add-PnPTeamsTeam
 # Create test document in default documents Library
