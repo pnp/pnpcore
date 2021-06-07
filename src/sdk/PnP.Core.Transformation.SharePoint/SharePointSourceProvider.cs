@@ -54,7 +54,7 @@ namespace PnP.Core.Transformation.SharePoint
                 throw new ArgumentException($"Only id of type {typeof(SharePointSourceItemId)} is supported");
             }
 
-            ISourceItem result = new SharePointSourceItem(sid);
+            ISourceItem result = new SharePointSourceItem(sid, SourceContext);
             return Task.FromResult(result);
         }
     }

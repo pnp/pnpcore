@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using PnP.Core.Transformation.Model.Classic;
-using PnP.Core.Transformation.Model.Modern;
 
 namespace PnP.Core.Transformation.Services.MappingProviders
 {

@@ -1,7 +1,7 @@
-﻿using System;
+﻿using PnP.Core.Transformation.Model;
+using System;
 using System.Collections.Generic;
 using System.Text;
-using PnP.Core.Transformation.Model.Modern;
 
 namespace PnP.Core.Transformation.Services.MappingProviders
 {
@@ -11,8 +11,8 @@ namespace PnP.Core.Transformation.Services.MappingProviders
     public class WebPartMappingProviderOutput : MappingProviderOutput
     {
         /// <summary>
-        /// Defines the target Web Part from the mapping
+        /// The Web Part Entity resulting after the mapping
         /// </summary>
-        public ClientSideWebPart WebPart { get; set; }
+        public WebPartEntity WebPart { get; set; }
     }
 }

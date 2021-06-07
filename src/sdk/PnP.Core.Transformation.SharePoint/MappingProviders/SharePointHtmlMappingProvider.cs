@@ -23,10 +23,6 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
     /// </summary>
     public class SharePointHtmlMappingProvider : IHtmlMappingProvider
     {
-        #region Internal table classes
-       
-        #endregion
-
         private readonly ILogger<SharePointHtmlMappingProvider> logger;
         private readonly IOptions<SharePointTransformationOptions> options;
         private readonly IServiceProvider serviceProvider;
@@ -93,7 +89,7 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
             // Process image and iframes ==> put a place holder text as these will be dropped by RTE on edit mode
             if (input.UsePlaceHolders)
             {
-                ImageIFramePlaceHolders(document);
+                AddPlaceHolders(document);
             }
 
             // Process tables
@@ -114,8 +110,14 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
             return Task.FromResult(new HtmlMappingProviderOutput(text));
         }
 
+        /// <summary>
+        /// Clean html nodes
+        /// </summary>
+        /// <param name="document"></param>
         protected virtual void CleanHtmlNodes(IHtmlDocument document)
         {
+            if (document == null) throw new ArgumentNullException(nameof(document));
+
             // HR tag --> replace by BR
             foreach (var element in document.All.Where(p => p.TagName.Equals("hr", StringComparison.InvariantCultureIgnoreCase)))
             {
@@ -129,8 +131,14 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
             }
         }
 
+        /// <summary>
+        /// Clean css stylesheet
+        /// </summary>
+        /// <param name="document"></param>
         protected virtual void CleanStyles(IHtmlDocument document)
         {
+            if (document == null) throw new ArgumentNullException(nameof(document));
+
             foreach (var element in document.All.Where(p => p.HasAttribute("style")))
             {
 
@@ -183,8 +191,16 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
             }
         }
 
+        /// <summary>
+        /// Transform tables
+        /// </summary>
+        /// <param name="tables"></param>
+        /// <param name="document"></param>
         protected virtual void TransformTables(IHtmlCollection<IElement> tables, IHtmlDocument document)
         {
+            if (tables == null) throw new ArgumentNullException(nameof(tables));
+            if (document == null) throw new ArgumentNullException(nameof(document));
+
             List<Tuple<IElement, IElement, IElement>> tableReplaceList = new List<Tuple<IElement, IElement, IElement>>();
 
             foreach (var table in tables)
@@ -361,8 +377,14 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
             }
         }
 
-        protected virtual void ImageIFramePlaceHolders(IHtmlDocument document)
+        /// <summary>
+        /// Apply placeholder
+        /// </summary>
+        /// <param name="document"></param>
+        protected virtual void AddPlaceHolders(IHtmlDocument document)
         {
+            if (document == null) throw new ArgumentNullException(nameof(document));
+
             var images = document.QuerySelectorAll("img");
             var iframes = document.QuerySelectorAll("iframe");
             var elements = images.Union(iframes);
@@ -399,8 +421,16 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
             }
         }
 
+        /// <summary>
+        /// Transform block quotes
+        /// </summary>
+        /// <param name="blockQuotes"></param>
+        /// <param name="document"></param>
         protected virtual void TransformBlockQuotes(IHtmlCollection<IElement> blockQuotes, IHtmlDocument document)
         {
+            if (blockQuotes == null) throw new ArgumentNullException(nameof(blockQuotes));
+            if (document == null) throw new ArgumentNullException(nameof(document));
+
             int level = 1;
             // Dictionary that holds the nodes that will be replaced. Replacement node is a span that groups the elements at the given level.
             // We can't immediately replace the nodes as that will break the model where we walk the tree to find the level and top node
@@ -534,7 +564,6 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
 
                         // reset variables since we're starting a new blockquote
                         level = 1;
-                        insertionContainer = null;
                     }
                 }
             }
@@ -550,16 +579,22 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
             }
         }
 
-#pragma warning disable CA1716
-        protected virtual void TransformHeadings(IHtmlDocument document, int from, int to)
-#pragma warning restore CA1716
+        /// <summary>
+        /// Transform headings
+        /// </summary>
+        /// <param name="document"></param>
+        /// <param name="fromSize"></param>
+        /// <param name="toSize"></param>
+        protected virtual void TransformHeadings(IHtmlDocument document, int fromSize, int toSize)
         {
-            var fromNodes = document.QuerySelectorAll($"h{from}");
+            if (document == null) throw new ArgumentNullException(nameof(document));
+
+            var fromNodes = document.QuerySelectorAll($"h{fromSize}");
             foreach (var fromNode in fromNodes)
             {
                 var parent = fromNode.Parent;
 
-                if (to == 0)
+                if (toSize == 0)
                 {
                     // wrap the content inside a div so that further formatting processing will pick it up
                     var newElement = document.CreateElement("div");
@@ -568,7 +603,7 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
                 }
                 else
                 {
-                    var newElement = document.CreateElement($"h{to}");
+                    var newElement = document.CreateElement($"h{toSize}");
                     newElement.InnerHtml = fromNode.InnerHtml;
 
                     // Copy the text alignment style
@@ -581,8 +616,16 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
             }
         }
 
+        /// <summary>
+        /// Transform elements
+        /// </summary>
+        /// <param name="elementsToTransform"></param>
+        /// <param name="document"></param>
         protected virtual void TransformElements(IHtmlCollection<IElement> elementsToTransform, IHtmlDocument document)
         {
+            if (elementsToTransform == null) throw new ArgumentNullException(nameof(elementsToTransform));
+            if (document == null) throw new ArgumentNullException(nameof(document));
+
             foreach (var element in elementsToTransform)
             {
                 var parent = element.Parent;

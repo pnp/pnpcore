@@ -1,13 +1,15 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using PnP.Core.Transformation.Model.Classic;
-using PnP.Core.Transformation.Services.Core;
+using Microsoft.SharePoint.Client;
+using Microsoft.SharePoint.Client.WebParts;
 using PnP.Core.Transformation.Services.MappingProviders;
 using PnP.Core.Transformation.SharePoint.Builder.Configuration;
+using PnP.Core.Transformation.SharePoint.Model;
 
 namespace PnP.Core.Transformation.SharePoint.MappingProviders
 {
@@ -45,15 +47,22 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
 
             if (input == null) throw new ArgumentNullException(nameof(input));
 
-            var webPartMappingProvider = serviceProvider.GetService<IWebPartMappingProvider>();
-            if (webPartMappingProvider != null)
-            {
-                // TODO: prepare webpart
-                var webPartInput = new WebPartMappingProviderInput(input.Context, new WebPart());
-                var output = await webPartMappingProvider
-                    .MapWebPartAsync(webPartInput, token)
-                    .ConfigureAwait(false);
-            }
+            var sourceItem = input.Context.SourceItem as SharePointSourceItem;
+
+            if (sourceItem == null) throw new ApplicationException(SharePointTransformationResources.Error_MissiningSharePointInputItem);
+
+            //var webPartMappingProvider = serviceProvider.GetService<IWebPartMappingProvider>();
+            //if (webPartMappingProvider != null)
+            //{
+            //    // Extract the list of Web Parts to process
+            //    var webPartsToProcess = ExtractWebParts(null);
+
+            //    // TODO: prepare webpart
+            //    var webPartInput = new WebPartMappingProviderInput(input.Context);
+            //    var output = await webPartMappingProvider
+            //        .MapWebPartAsync(webPartInput, token)
+            //        .ConfigureAwait(false);
+            //}
 
             var htmlMappingProvider = serviceProvider.GetService<IHtmlMappingProvider>();
             if (htmlMappingProvider != null)
@@ -89,7 +98,7 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
             if (pageLayoutMappingProvider != null)
             {
                 // TODO: prepare page layout
-                var pageLayoutInput = new PageLayoutMappingProviderInput(input.Context, new PageLayout());
+                var pageLayoutInput = new PageLayoutMappingProviderInput(input.Context);
                 var output = await pageLayoutMappingProvider
                     .MapPageLayoutAsync(pageLayoutInput, token)
                     .ConfigureAwait(false);
@@ -117,5 +126,17 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
 
             return new MappingProviderOutput();
         }
+
+        //private List<WebPartPlaceHolder> ExtractWebParts(File page)
+        //{
+        //    // Load web parts on web part page
+        //    // Note: Web parts placed outside of a web part zone using SPD are not picked up by the web part manager. There's no API that will return those,
+        //    //       only possible option to add parsing of the raw page aspx file.
+        //    var limitedWPManager = page.GetLimitedWebPartManager(PersonalizationScope.Shared);
+        //    cc.Load(limitedWPManager);
+
+        //    IEnumerable<WebPartDefinition> webParts = cc.LoadQuery(limitedWPManager.WebParts.IncludeWithDefaultProperties(wp => wp.Id, wp => wp.ZoneId, wp => wp.WebPart.ExportMode, wp => wp.WebPart.Title, wp => wp.WebPart.ZoneIndex, wp => wp.WebPart.IsClosed, wp => wp.WebPart.Hidden, wp => wp.WebPart.Properties));
+        //    cc.ExecuteQueryRetry();
+        //}
     }
 }

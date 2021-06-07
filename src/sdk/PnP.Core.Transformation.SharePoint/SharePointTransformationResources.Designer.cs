@@ -61,6 +61,15 @@ namespace PnP.Core.Transformation.SharePoint {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The SharePoint input item is missing.
+        /// </summary>
+        internal static string Error_MissiningSharePointInputItem {
+            get {
+                return ResourceManager.GetString("Error_MissiningSharePointInputItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Provided custom pagelayout mapping file is invalid: {0}.
         /// </summary>
         internal static string Error_PageLayoutMappingFileSchemaValidation {

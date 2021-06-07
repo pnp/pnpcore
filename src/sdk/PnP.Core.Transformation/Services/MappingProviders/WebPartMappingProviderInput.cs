@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using PnP.Core.Transformation.Model.Classic;
 using PnP.Core.Transformation.Services.Core;
 
 namespace PnP.Core.Transformation.Services.MappingProviders
@@ -14,16 +13,24 @@ namespace PnP.Core.Transformation.Services.MappingProviders
         /// <summary>
         /// Creates an instance for the specified context and web part
         /// </summary>
-        /// <param name="context"></param>
-        /// <param name="webPart"></param>
-        public WebPartMappingProviderInput(PageTransformationContext context, WebPart webPart) : base(context)
+        /// <param name="context">The transformation context</param>
+        public WebPartMappingProviderInput(PageTransformationContext context) : base(context)
         {
-            WebPart = webPart ?? throw new ArgumentNullException(nameof(webPart));
         }
 
         /// <summary>
-        /// Defines the source Web Part to map
+        /// Defines the type of the source component
         /// </summary>
-        public WebPart WebPart { get; }
+        public string SourceComponentType { get; set; }
+
+        /// <summary>
+        /// Property bag of the source component
+        /// </summary>
+        public Dictionary<string, string> SourceProperties { get; set; }
+
+        /// <summary>
+        /// The actual TXT/XML/JSON content of the source component
+        /// </summary>
+        public string SourceComponentRawContent { get; set; }
     }
 }

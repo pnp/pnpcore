@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using PnP.Core.Transformation.Model.Modern;
 
 namespace PnP.Core.Transformation.Services.MappingProviders
 {
@@ -13,6 +12,6 @@ namespace PnP.Core.Transformation.Services.MappingProviders
         /// <summary>
         /// Provides the resulting Page Layout from the mapping
         /// </summary>
-        public PageLayout PageLayout { get; set; }
+        //public PageLayout PageLayout { get; set; }
     }
 }
