@@ -53,7 +53,7 @@ To delete properties you remove them from the `ITermSetPropertyCollection` and t
 
 ```csharp
 // Delete all properties
-(termSet.Properties as TermSetPropertyCollection).Clear();
+termSet.Properties.Clear();
 // Persist the change
 await termSet.UpdateAsync();
 ```
