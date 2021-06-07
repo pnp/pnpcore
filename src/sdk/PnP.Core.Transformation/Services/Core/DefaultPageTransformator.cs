@@ -73,10 +73,7 @@ namespace PnP.Core.Transformation.Services.Core
             }
 
             var context = new PageTransformationContext(task, sourceItem, targetPageUri);
-            var input = new MappingProviderInput
-            {
-                Context = context
-            };
+            var input = new MappingProviderInput(context);
             MappingProviderOutput output = await mappingProvider.MapAsync(input, token).ConfigureAwait(false);
             token.ThrowIfCancellationRequested();
 

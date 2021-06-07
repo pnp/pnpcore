@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using PnP.Core.Transformation.Model.Classic;
+using PnP.Core.Transformation.Services.Core;
 
 namespace PnP.Core.Transformation.Services.MappingProviders
 {
@@ -10,6 +11,16 @@ namespace PnP.Core.Transformation.Services.MappingProviders
     /// </summary>
     public class TaxonomyMappingProviderInput : MappingProviderInput
     {
+        /// <summary>
+        /// Creates an instance for the context
+        /// </summary>
+        /// <param name="context"></param>
+        /// <param name="termId"></param>
+        public TaxonomyMappingProviderInput(PageTransformationContext context, string termId) : base(context)
+        {
+            TermId = termId ?? throw new ArgumentNullException(nameof(termId));
+        }
+
         /// <summary>
         /// Defines the source Term ID to map
         /// </summary>

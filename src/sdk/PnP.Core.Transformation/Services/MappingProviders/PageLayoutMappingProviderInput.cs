@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using PnP.Core.Transformation.Model.Classic;
+using PnP.Core.Transformation.Services.Core;
 
 namespace PnP.Core.Transformation.Services.MappingProviders
 {
@@ -11,8 +12,17 @@ namespace PnP.Core.Transformation.Services.MappingProviders
     public class PageLayoutMappingProviderInput : MappingProviderInput
     {
         /// <summary>
+        /// Creates an instances for the specified context
+        /// </summary>
+        /// <param name="context"></param>
+        public PageLayoutMappingProviderInput(PageTransformationContext context, PageLayout pageLayout) : base(context)
+        {
+            PageLayout = pageLayout;
+        }
+
+        /// <summary>
         /// Defines the source Page Layout to map
         /// </summary>
-        public PageLayout PageLayout { get; set; }
+        public PageLayout PageLayout { get; }
     }
 }
