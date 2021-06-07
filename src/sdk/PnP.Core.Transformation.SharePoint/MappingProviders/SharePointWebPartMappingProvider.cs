@@ -51,20 +51,20 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
             logger.LogInformation($"Invoked: {this.GetType().Namespace}.{this.GetType().Name}.MapWebPartAsync");
 
             // Load the mapping configuration
-            PageTransformation mapping = LoadMappingFile(this.options.Value.WebPartMappingFile);
+            WebPartMapping mapping = LoadMappingFile(this.options.Value.WebPartMappingFile);
 
             // TODO: Do the actual web part mapping
 
             return Task.FromResult(new WebPartMappingProviderOutput());
         }
 
-        private PageTransformation LoadMappingFile(string mappingFilePath = null)
+        private WebPartMapping LoadMappingFile(string mappingFilePath = null)
         {
             // Create the xml mapping serializer
-            XmlSerializer xmlMapping = new XmlSerializer(typeof(PageTransformation));
+            XmlSerializer xmlMapping = new XmlSerializer(typeof(WebPartMapping));
 
             // Prepare the result variable
-            PageTransformation result = null;
+            WebPartMapping result = null;
 
             // If we don't have the mapping file as an input
             if (!string.IsNullOrEmpty(mappingFilePath) ||
@@ -75,7 +75,7 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
                 {
                     using (var reader = XmlReader.Create(mappingStream))
                     {
-                        result = (PageTransformation)xmlMapping.Deserialize(reader);
+                        result = (WebPartMapping)xmlMapping.Deserialize(reader);
                     }
                 }
             }
@@ -90,7 +90,7 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
 
                         using (var reader = XmlReader.Create(mappingStream))
                         {
-                            result = (PageTransformation)xmlMapping.Deserialize(reader);
+                            result = (WebPartMapping)xmlMapping.Deserialize(reader);
                         }
                     }
                 }

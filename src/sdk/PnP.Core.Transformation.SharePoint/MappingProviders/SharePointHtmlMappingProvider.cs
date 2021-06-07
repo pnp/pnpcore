@@ -23,7 +23,6 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
     /// </summary>
     public class SharePointHtmlMappingProvider : IHtmlMappingProvider
     {
-
         #region Internal table classes
        
         #endregion
