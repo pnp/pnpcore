@@ -120,7 +120,7 @@ await termSet.UpdateAsync();
 </code></pre>
 <p>To delete properties you remove them from the <code>ITermSetPropertyCollection</code> and then use one of the <code>Update</code> methods.</p>
 <pre><code class="lang-csharp">// Delete all properties
-(termSet.Properties as TermSetPropertyCollection).Clear();
+termSet.Properties.Clear();
 // Persist the change
 await termSet.UpdateAsync();
 </code></pre>
