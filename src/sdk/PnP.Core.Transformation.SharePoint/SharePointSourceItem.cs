@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Microsoft.SharePoint.Client;
 using PnP.Core.Services;
 using PnP.Core.Transformation.Services.Core;
 
@@ -18,7 +19,7 @@ namespace PnP.Core.Transformation.SharePoint
         /// </summary>
         /// <param name="uri">The URI of the item</param>
         /// <param name="sourceContext">The source context</param>
-        public SharePointSourceItem(Uri uri, PnPContext sourceContext) : this(new SharePointSourceItemId(uri), sourceContext)
+        public SharePointSourceItem(Uri uri, ClientContext sourceContext) : this(new SharePointSourceItemId(uri), sourceContext)
         {            
         }
 
@@ -27,7 +28,7 @@ namespace PnP.Core.Transformation.SharePoint
         /// </summary>
         /// <param name="sourceItemId">The ID of the item</param>
         /// <param name="sourceContext">The source context</param>
-        public SharePointSourceItem(SharePointSourceItemId sourceItemId, PnPContext sourceContext)
+        public SharePointSourceItem(SharePointSourceItemId sourceItemId, ClientContext sourceContext)
         {
             SourceContext = sourceContext;
             this.sourceItemId = sourceItemId ?? throw new ArgumentNullException(nameof(sourceItemId));
@@ -36,7 +37,7 @@ namespace PnP.Core.Transformation.SharePoint
         /// <summary>
         /// Gets the source context
         /// </summary>
-        public PnPContext SourceContext { get; }
+        public ClientContext SourceContext { get; }
 
         /// <summary>
         /// Gets the id of the source item

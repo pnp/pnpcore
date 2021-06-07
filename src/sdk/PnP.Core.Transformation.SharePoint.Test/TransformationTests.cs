@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.SharePoint.Client;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PnP.Core.Services;
 using PnP.Core.Transformation.Services.Core;
@@ -24,7 +25,7 @@ namespace PnP.Core.Transformation.SharePoint.Test
             var pnpContextFactory = provider.GetRequiredService<IPnPContextFactory>();
             var pageTransformator = provider.GetRequiredService<IPageTransformator>();
 
-            var sourceContext = await pnpContextFactory.CreateAsync(TestCommon.SourceTestSite);
+            var sourceContext = provider.GetRequiredService<ClientContext>();
             var targetContext = await pnpContextFactory.CreateAsync(TestCommon.TargetTestSite);
             var sourceUri = new Uri("http://site/item");
 
@@ -46,9 +47,11 @@ namespace PnP.Core.Transformation.SharePoint.Test
             var transformationExecutor = provider.GetRequiredService<ITransformationExecutor>();
             var pnpContextFactory = provider.GetRequiredService<IPnPContextFactory>();
 
+            var sourceContext = provider.GetRequiredService<ClientContext>();
+
             var result = await transformationExecutor.TransformSharePointAsync(
                 pnpContextFactory,
-                TestCommon.SourceTestSite,
+                sourceContext,
                 TestCommon.TargetTestSite);
 
             Assert.IsNotNull(result);

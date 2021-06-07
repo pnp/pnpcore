@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.SharePoint.Client;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PnP.Core.Services;
 using PnP.Core.Transformation.Services.Core;
@@ -27,7 +28,8 @@ namespace PnP.Core.Transformation.SharePoint.Test
             var pnpContextFactory = provider.GetRequiredService<IPnPContextFactory>();
             var mappingProvider = provider.GetRequiredService<IHtmlMappingProvider>();
 
-            var sourceContext = await pnpContextFactory.CreateAsync(TestCommon.SourceTestSite); 
+            // Prepare contexts
+            var sourceContext = provider.GetRequiredService<ClientContext>();
             var targetContext = await pnpContextFactory.CreateAsync(TestCommon.TargetTestSite);
 
             var sourceUri = new Uri("http://site/item");
@@ -35,9 +37,12 @@ namespace PnP.Core.Transformation.SharePoint.Test
 
             SharePointSourceItem sourceItem = new SharePointSourceItem(sourceUri, sourceContext);
 
+            // Prepare task
             var task = new PageTransformationTask(new SharePointSourceProvider(sourceContext), sourceItem.Id, targetContext);
             var context = new PageTransformationContext(task, sourceItem, targetPageUri);
             var htmlContent = "<p><span class=\"ms-rteStyle-Normal\">Norm</span>​al<br></p><h1>Hea​​ding1<br></h1><h2>hea​​​ding2<br></h2><h3>Hea​​ding3<br></h3><h4>​heading4​​​​<br></h4><p>Quote<br></p><p>Text in <strong>bold</strong>, in <em>italic</em>, in <span style=\"text-decoration&#58;underline;\">underline</span>, in <span class=\"ms-rteThemeForeColor-5-0\" style=\"\">red</span> with <span class=\"ms-rteBackColor-4\">yellow</span> highlight<br></p><p>with <span style=\"text-decoration&#58;line-through;\">striked</span>, with <sup>superscript</sup> with <sub>lowerscript</sub> and with a different <span class=\"ms-rteFontSize-5\">size</span><br></p><p>left centered<br></p><p style=\"text-align&#58;center;\">Middle centered</p><p style=\"text-align&#58;right;\">Right centered<br></p><p style=\"text-align&#58;justify;\">spread<br></p><blockquote style=\"margin&#58;0px 0px 0px 40px;border&#58;none;padding&#58;0px;\"><p>Indent1</p></blockquote><blockquote style=\"margin&#58;0px 0px 0px 40px;border&#58;none;padding&#58;0px;\"><blockquote style=\"margin&#58;0px 0px 0px 40px;border&#58;none;padding&#58;0px;\"><p>Indent2</p></blockquote></blockquote><ul><li>Bullet 1<br></li><li>Bullet2<br></li><ul><li>Bullet 2.1</li></ul></ul><ol><li>Numbered1<br></li><li>Numbered2<br></li></ol><p>with a link to <a href=\"https&#58;//www.microsoft.com/\">microsoft.com​</a></p><p>table centered</p><p></p><table cellspacing=\"0\" class=\"ms-rteTable-1 \" style=\"width&#58;100%;\"><tbody><tr class=\"ms-rteTableHeaderRow-1\"><th class=\"ms-rteTableHeaderEvenCol-1\" rowspan=\"1\" colspan=\"1\" style=\"width&#58;33.3333%;\">​​H1<br></th><th class=\"ms-rteTableHeaderOddCol-1\" rowspan=\"1\" colspan=\"1\" style=\"width&#58;33.3333%;\">​H2<br></th><th class=\"ms-rteTableHeaderEvenCol-1\" rowspan=\"1\" colspan=\"1\" style=\"width&#58;33.3333%;\">​H3<br></th></tr><tr class=\"ms-rteTableOddRow-1\"><td class=\"ms-rteTableEvenCol-1\">​v1<br></td><td class=\"ms-rteTableOddCol-1\">​v2<br></td><td class=\"ms-rteTableEvenCol-1\">​v3<br></td></tr><tr class=\"ms-rteTableEvenRow-1\"><td class=\"ms-rteTableEvenCol-1\">​v12<br></td><td class=\"ms-rteTableOddCol-1\">​v22<br></td><td class=\"ms-rteTableEvenCol-1\">​v32<br></td></tr><tr class=\"ms-rteTableOddRow-1\"><td class=\"ms-rteTableEvenCol-1\">​v13<br></td><td class=\"ms-rteTableOddCol-1\">​​v23<br></td><td class=\"ms-rteTableEvenCol-1\">​v33<br></td></tr></tbody></table><p><br><br></p><p><br></p>";
+            
+            // Map html
             var input = new HtmlMappingProviderInput(context, htmlContent);
             var result = await mappingProvider.MapHtmlAsync(input);
 

@@ -41,141 +41,101 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
         /// <param name="input">The input for the mapping activity</param>
         /// <param name="token">The cancellation token to use, if any</param>
         /// <returns>The output of the mapping activity</returns>
-        public Task<UrlMappingProviderOutput> MapUrlAsync(UrlMappingProviderInput input, CancellationToken token = default)
+        public async Task<UrlMappingProviderOutput> MapUrlAsync(UrlMappingProviderInput input, CancellationToken token = default)
         {
             logger.LogInformation($"Invoked: {this.GetType().Namespace}.{this.GetType().Name}.MapUrlAsync");
 
-            //// Try cast
-            //var sharePointSourceItem = input.Context.SourceItem as SharePointSourceItem;
-            //if (sharePointSourceItem == null)
-            //{
-            //    throw new ArgumentException($"Only source item of type {typeof(SharePointSourceItem)} is supported");
-            //}
+            // Try cast
+            var sharePointSourceItem = input.Context.SourceItem as SharePointSourceItem;
+            if (sharePointSourceItem == null)
+            {
+                throw new ArgumentException($"Only source item of type {typeof(SharePointSourceItem)} is supported");
+            }
 
-            //Uri origSourceSiteUrl = input.Url;
-            //Uri origTargetWebUrl = input.Context.Task.TargetContext.Web.Url;
+            // TODO: resolve library path
+            string pagesLibrary = "sitepages";
 
-            //bool isSubSite = origSourceSiteUrl.IsBaseOf(origTargetWebUrl);
+            // TODO: load only if needed
+            sharePointSourceItem.SourceContext.Load(sharePointSourceItem.SourceContext.Web, w => w.Url);
+            sharePointSourceItem.SourceContext.Load(sharePointSourceItem.SourceContext.Site, w => w.Url);
+            await sharePointSourceItem.SourceContext.ExecuteQueryAsync();
 
-            //// ********************************************
-            //// Default URL rewriting logic
-            //// ********************************************            
-            ////
-            //// Root site collection URL rewriting:
-            //// http://contoso.com/sites/portal -> https://contoso.sharepoint.com/sites/hr
-            //// http://contoso.com/sites/portal/pages -> https://contoso.sharepoint.com/sites/hr/sitepages
-            //// /sites/portal -> /sites/hr
-            //// /sites/portal/pages -> /sites/hr/sitepages
-            ////
-            //// If site is a sub site then we also by rewrite the sub URL's
-            //// http://contoso.com/sites/portal/hr -> https://contoso.sharepoint.com/sites/hr
-            //// http://contoso.com/sites/portal/hr/pages -> https://contoso.sharepoint.com/sites/hr/sitepages
-            //// /sites/portal/hr -> /sites/hr
-            //// /sites/portal/hr/pages -> /sites/hr/sitepages
+            Uri result = input.Url;
+            Uri sourceWebUrl = new Uri(sharePointSourceItem.SourceContext.Web.Url);
+            Uri sourceSiteUrl = new Uri(sharePointSourceItem.SourceContext.Site.Url);
+
+            Uri origTargetWebUrl = sourceWebUrl;
+            Uri origSourceSiteUrl = sourceSiteUrl;
+            Uri targetWebUrl = input.Context.Task.TargetContext.Web.Url;
+
+            bool isSubSite = origSourceSiteUrl.IsBaseOf(origTargetWebUrl);
+
+            // TODO: apply custom mappings
+
+            // ********************************************
+            // Default URL rewriting logic
+            // ********************************************            
+            //
+            // Root site collection URL rewriting:
+            // http://contoso.com/sites/portal -> https://contoso.sharepoint.com/sites/hr
+            // http://contoso.com/sites/portal/pages -> https://contoso.sharepoint.com/sites/hr/sitepages
+            // /sites/portal -> /sites/hr
+            // /sites/portal/pages -> /sites/hr/sitepages
+            //
+            // If site is a sub site then we also by rewrite the sub URL's
+            // http://contoso.com/sites/portal/hr -> https://contoso.sharepoint.com/sites/hr
+            // http://contoso.com/sites/portal/hr/pages -> https://contoso.sharepoint.com/sites/hr/sitepages
+            // /sites/portal/hr -> /sites/hr
+            // /sites/portal/hr/pages -> /sites/hr/sitepages
 
 
-            //// Rewrite url's from pages library to sitepages
-            //if (!string.IsNullOrEmpty(pagesLibrary))
-            //{
-            //    string pagesSourceWebUrl = UrlUtility.Combine(sourceWebUrl, pagesLibrary);
-            //    string sitePagesTargetWebUrl = UrlUtility.Combine(targetWebUrl, "sitepages");
+            // Rewrite url's from pages library to sitepages
+            if (!string.IsNullOrEmpty(pagesLibrary))
+            {
+                var pagesSourceWebUrl = sourceWebUrl.Combine(pagesLibrary);
+                var sitePagesTargetWebUrl = targetWebUrl.Combine("sitepages");
 
-            //    if (pagesSourceWebUrl.StartsWith("https://", StringComparison.InvariantCultureIgnoreCase) || pagesSourceWebUrl.StartsWith("http://", StringComparison.InvariantCultureIgnoreCase))
-            //    {
-            //        input = RewriteUrl(input, pagesSourceWebUrl, sitePagesTargetWebUrl);
+                result = RewriteUrl(result, pagesSourceWebUrl, sitePagesTargetWebUrl);
+            }
 
-            //        // Make relative for next replacement attempt
-            //        pagesSourceWebUrl = MakeRelative(pagesSourceWebUrl);
-            //        sitePagesTargetWebUrl = MakeRelative(sitePagesTargetWebUrl);
-            //    }
+            result = RewriteUrl(result, sourceWebUrl, targetWebUrl);
 
-            //    input = RewriteUrl(input, pagesSourceWebUrl, sitePagesTargetWebUrl);
-            //}
+            if (isSubSite)
+            {
+                // reset URLs
+                sourceSiteUrl = origSourceSiteUrl;
+                targetWebUrl = origTargetWebUrl;
 
-            ////Ensure the trailing slash
-            //if (input != sourceSiteUrl)
-            //{
-            //    sourceWebUrl = $"{sourceWebUrl.TrimEnd('/')}/";
-            //    targetWebUrl = $"{targetWebUrl.TrimEnd('/')}/";
-            //}
+                // Rewrite url's from pages library to sitepages
+                if (!string.IsNullOrEmpty(pagesLibrary))
+                {
+                    var pagesSourceSiteUrl = sourceSiteUrl.Combine(pagesLibrary);
+                    var sitePagesTargetWebUrl = targetWebUrl.Combine("sitepages");
+                    
+                    result = RewriteUrl(result, pagesSourceSiteUrl, sitePagesTargetWebUrl);
+                }
 
-            //// Rewrite web urls
-            //if (sourceWebUrl.StartsWith("https://", StringComparison.InvariantCultureIgnoreCase) || sourceWebUrl.StartsWith("http://", StringComparison.InvariantCultureIgnoreCase))
-            //{
-            //    input = RewriteUrl(input, sourceWebUrl, targetWebUrl);
+                result = RewriteUrl(result, sourceSiteUrl, targetWebUrl);
+            }
 
-            //    // Make relative for next replacement attempt
-            //    sourceWebUrl = $"{MakeRelative(sourceWebUrl).TrimEnd('/')}/";
-            //    targetWebUrl = $"{MakeRelative(targetWebUrl).TrimEnd('/')}/";
-            //}
-
-            //input = RewriteUrl(input, sourceWebUrl, targetWebUrl);
-
-            //if (isSubSite)
-            //{
-            //    // reset URLs
-            //    sourceSiteUrl = origSourceSiteUrl;
-            //    targetWebUrl = origTargetWebUrl;
-
-            //    // Rewrite url's from pages library to sitepages
-            //    if (!string.IsNullOrEmpty(pagesLibrary))
-            //    {
-            //        string pagesSourceSiteUrl = UrlUtility.Combine(sourceSiteUrl, pagesLibrary);
-            //        string sitePagesTargetWebUrl = UrlUtility.Combine(targetWebUrl, "sitepages");
-
-            //        if (pagesSourceSiteUrl.StartsWith("https://", StringComparison.InvariantCultureIgnoreCase) || pagesSourceSiteUrl.StartsWith("http://", StringComparison.InvariantCultureIgnoreCase))
-            //        {
-            //            input = RewriteUrl(input, pagesSourceSiteUrl, sitePagesTargetWebUrl);
-
-            //            // Make relative for next replacement attempt
-            //            pagesSourceSiteUrl = MakeRelative(pagesSourceSiteUrl);
-            //            sitePagesTargetWebUrl = MakeRelative(sitePagesTargetWebUrl);
-            //        }
-
-            //        input = RewriteUrl(input, pagesSourceSiteUrl, sitePagesTargetWebUrl);
-            //    }
-
-            //    // Rewrite root site urls
-            //    if (sourceSiteUrl.StartsWith("https://", StringComparison.InvariantCultureIgnoreCase) || sourceSiteUrl.StartsWith("http://", StringComparison.InvariantCultureIgnoreCase))
-            //    {
-            //        input = RewriteUrl(input, sourceSiteUrl, targetWebUrl);
-
-            //        // Make relative for next replacement attempt
-            //        sourceSiteUrl = $"{MakeRelative(sourceSiteUrl).TrimEnd('/')}/";
-            //        targetWebUrl = $"{MakeRelative(targetWebUrl).TrimEnd('/')}/";
-            //    }
-
-            //    input = RewriteUrl(input, sourceSiteUrl, targetWebUrl);
-            //}
-
-            return Task.FromResult(new UrlMappingProviderOutput());
+            return new UrlMappingProviderOutput(result);
         }
 
-        //private string RewriteUrl(string input, string from, string to)
-        //{
-        //    //Do not replace this character - breaks HTML
-        //    if (from != "/" && !IsRoot(from))
-        //    {
-        //        var regex = new Regex($"{Regex.Escape(from)}", RegexOptions.IgnoreCase);
-        //        if (regex.IsMatch(input))
-        //        {
-        //            string before = input;
-        //            input = regex.Replace(input, to);
-        //        }
-        //    }
-
-        //    return input;
-        //}
-
-        private bool IsRoot(Uri url)
+        private Uri RewriteUrl(Uri input, Uri from, Uri to)
         {
-            return url.LocalPath == "/";
+            // If not root
+            if (from.LocalPath != "/")
+            {
+                var regex = new Regex($"{Regex.Escape(from.ToString())}", RegexOptions.IgnoreCase);
+                if (regex.IsMatch(input.ToString()))
+                {
+                    input = new Uri(regex.Replace(input.ToString(), to.ToString()));
+                }
+            }
+
+            return input;
         }
 
-        private string MakeRelative(string url)
-        {
-            Uri uri = new Uri(url);
-            return uri.AbsolutePath;
-        }
+
     }
 }

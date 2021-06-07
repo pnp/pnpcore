@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.SharePoint.Client;
 using PnP.Core.Services;
 using PnP.Core.Transformation.Services.Core;
 
@@ -20,7 +21,7 @@ namespace PnP.Core.Transformation.SharePoint
         /// <param name="token">The cancellation token, if any</param>
         public static Task StartSharePointProcessAsync(
             this ITransformationProcess transformationProcess,
-            PnPContext sourceContext,
+            ClientContext sourceContext,
             PnPContext targetContext,
             CancellationToken token = default)
         {
@@ -42,7 +43,7 @@ namespace PnP.Core.Transformation.SharePoint
         /// <returns>The status of the transformation process</returns>
         public static Task<TransformationProcessStatus> TransformSharePointAsync(
             this ITransformationExecutor transformationExecutor,
-            PnPContext sourceContext,
+            ClientContext sourceContext,
             PnPContext targetContext,
             CancellationToken token = default)
         {
@@ -59,23 +60,21 @@ namespace PnP.Core.Transformation.SharePoint
         /// </summary>
         /// <param name="transformationProcess">The process to use</param>
         /// <param name="pnpContextFactory">The context factory to use</param>
-        /// <param name="sourceName">The source site name</param>
+        /// <param name="sourceContext">The source context</param>
         /// <param name="targetName">The target site name</param>
         /// <param name="token">The cancellation token, if any</param>
         /// <returns></returns>
         public static async Task StartProcessAsync(
             this ITransformationProcess transformationProcess,
             IPnPContextFactory pnpContextFactory,
-            string sourceName,
+            ClientContext sourceContext,
             string targetName,
             CancellationToken token = default)
         {
             if (transformationProcess == null) throw new ArgumentNullException(nameof(transformationProcess));
             if (pnpContextFactory == null) throw new ArgumentNullException(nameof(pnpContextFactory));
 
-            // Create contexts
-            var sourceContext = await pnpContextFactory.CreateAsync(sourceName).ConfigureAwait(false);
-            token.ThrowIfCancellationRequested();
+            // Create context
             var targetContext = await pnpContextFactory.CreateAsync(targetName).ConfigureAwait(false);
             token.ThrowIfCancellationRequested();
 
@@ -87,14 +86,14 @@ namespace PnP.Core.Transformation.SharePoint
         /// </summary>
         /// <param name="transformationExecutor">The executor to use</param>
         /// <param name="pnpContextFactory">The context factory to use</param>
-        /// <param name="sourceName">The source site name</param>
+        /// <param name="sourceContext">The source context</param>
         /// <param name="targetName">The target site name</param>
         /// <param name="token">The cancellation token, if any</param>
         /// <returns></returns>
         public static async Task<TransformationProcessStatus> TransformSharePointAsync(
             this ITransformationExecutor transformationExecutor,
             IPnPContextFactory pnpContextFactory,
-            string sourceName,
+            ClientContext sourceContext,
             string targetName,
             CancellationToken token = default)
         {
@@ -102,8 +101,6 @@ namespace PnP.Core.Transformation.SharePoint
             if (pnpContextFactory == null) throw new ArgumentNullException(nameof(pnpContextFactory));
 
             // Create contexts
-            var sourceContext = await pnpContextFactory.CreateAsync(sourceName).ConfigureAwait(false);
-            token.ThrowIfCancellationRequested();
             var targetContext = await pnpContextFactory.CreateAsync(targetName).ConfigureAwait(false);
             token.ThrowIfCancellationRequested();
 
