@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using PnP.Core.Transformation.Services.Core;
 
 namespace PnP.Core.Transformation.Services.MappingProviders
 {
@@ -9,6 +10,14 @@ namespace PnP.Core.Transformation.Services.MappingProviders
     /// </summary>
     public class MetadataMappingProviderInput : MappingProviderInput
     {
+        /// <summary>
+        /// Creates an instances for the specified context
+        /// </summary>
+        /// <param name="context"></param>
+        public MetadataMappingProviderInput(PageTransformationContext context) : base(context)
+        {
+        }
+
         /// <summary>
         /// Defines the internal name of the source field
         /// </summary>
@@ -22,6 +31,7 @@ namespace PnP.Core.Transformation.Services.MappingProviders
         /// <summary>
         /// Provides the value of the source field
         /// </summary>
-        public object SourceValue { get; set; }        
+        public object SourceValue { get; set; }
+
     }
 }

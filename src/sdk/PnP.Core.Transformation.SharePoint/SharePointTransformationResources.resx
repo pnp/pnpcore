@@ -126,4 +126,7 @@
   <data name="Heading_PageTransformationInfomation" xml:space="preserve">
     <value>Page Transformation Information</value>
   </data>
+  <data name="Warning_TableCouldNotBeNormalized" xml:space="preserve">
+    <value>Table could not be normalized and will be taken over as is</value>
+  </data>
 </root>

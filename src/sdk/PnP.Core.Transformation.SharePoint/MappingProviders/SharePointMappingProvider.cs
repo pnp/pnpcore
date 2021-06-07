@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using PnP.Core.Transformation.Model.Classic;
 using PnP.Core.Transformation.Services.Core;
 using PnP.Core.Transformation.Services.MappingProviders;
 using PnP.Core.Transformation.SharePoint.Builder.Configuration;
@@ -47,10 +48,8 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
             var webPartMappingProvider = serviceProvider.GetService<IWebPartMappingProvider>();
             if (webPartMappingProvider != null)
             {
-                var webPartInput = new WebPartMappingProviderInput
-                {
-                    Context = input.Context
-                };
+                // TODO: prepare webpart
+                var webPartInput = new WebPartMappingProviderInput(input.Context, new WebPart());
                 var output = await webPartMappingProvider
                     .MapWebPartAsync(webPartInput, token)
                     .ConfigureAwait(false);
@@ -59,10 +58,8 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
             var htmlMappingProvider = serviceProvider.GetService<IHtmlMappingProvider>();
             if (htmlMappingProvider != null)
             {
-                var htmlInput = new HtmlMappingProviderInput
-                {
-                    Context = input.Context
-                };
+                // TODO: get the html content
+                var htmlInput = new HtmlMappingProviderInput(input.Context, "TODO");
                 var output = await htmlMappingProvider
                     .MapHtmlAsync(htmlInput, token)
                     .ConfigureAwait(false);
@@ -71,10 +68,8 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
             var metadataMappingProvider = serviceProvider.GetService<IMetadataMappingProvider>();
             if (metadataMappingProvider != null)
             {
-                var metadataInput = new MetadataMappingProviderInput
-                {
-                    Context = input.Context
-                };
+                // TODO: prepare input
+                var metadataInput = new MetadataMappingProviderInput(input.Context);
                 var output = await metadataMappingProvider
                     .MapMetadataFieldAsync(metadataInput, token)
                     .ConfigureAwait(false);
@@ -83,10 +78,8 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
             var urlMappingProvider = serviceProvider.GetService<IUrlMappingProvider>();
             if (urlMappingProvider != null)
             {
-                var metadataInput = new UrlMappingProviderInput
-                {
-                    Context = input.Context
-                };
+                // TODO: prepare uri
+                var metadataInput = new UrlMappingProviderInput(input.Context, new Uri("http://dummy"));
                 var output = await urlMappingProvider
                     .MapUrlAsync(metadataInput, token)
                     .ConfigureAwait(false);
@@ -95,10 +88,8 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
             var pageLayoutMappingProvider = serviceProvider.GetService<IPageLayoutMappingProvider>();
             if (pageLayoutMappingProvider != null)
             {
-                var pageLayoutInput = new PageLayoutMappingProviderInput
-                {
-                    Context = input.Context
-                };
+                // TODO: prepare page layout
+                var pageLayoutInput = new PageLayoutMappingProviderInput(input.Context, new PageLayout());
                 var output = await pageLayoutMappingProvider
                     .MapPageLayoutAsync(pageLayoutInput, token)
                     .ConfigureAwait(false);
@@ -107,10 +98,8 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
             var taxonomyMappingProvider = serviceProvider.GetService<ITaxonomyMappingProvider>();
             if (taxonomyMappingProvider != null)
             {
-                var taxonomyInput = new TaxonomyMappingProviderInput
-                {
-                    Context = input.Context
-                };
+                // TODO: prepare term id
+                var taxonomyInput = new TaxonomyMappingProviderInput(input.Context, "");
                 var output = await taxonomyMappingProvider
                     .MapTermAsync(taxonomyInput, token)
                     .ConfigureAwait(false);
@@ -119,10 +108,8 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
             var userMappingProvider = serviceProvider.GetService<IUserMappingProvider>();
             if (userMappingProvider != null)
             {
-                var userInput = new UserMappingProviderInput
-                {
-                    Context = input.Context
-                };
+                // TODO: prepare user
+                var userInput = new UserMappingProviderInput(input.Context, "");
                 var output = await userMappingProvider
                     .MapUserAsync(userInput, token)
                     .ConfigureAwait(false);

@@ -86,5 +86,14 @@ namespace PnP.Core.Transformation.SharePoint {
                 return ResourceManager.GetString("Heading_PageTransformationInfomation", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Table could not be normalized and will be taken over as is.
+        /// </summary>
+        internal static string Warning_TableCouldNotBeNormalized {
+            get {
+                return ResourceManager.GetString("Warning_TableCouldNotBeNormalized", resourceCulture);
+            }
+        }
     }
 }
