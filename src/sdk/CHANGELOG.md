@@ -22,6 +22,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
 ### Changed
 
+- Upgrade to version 4.30.0 of Microsoft.Identity.Web [jansenbe - Bert Jansen]
+- Upgrade to version 6.11.1 of System.IdentityModel.Tokens.Jwt [jansenbe - Bert Jansen]
 - Optimized initial load to speed up detection of "Templates" folder [jansenbe - Bert Jansen]
 - Detect existing templates folder if it's not named "Templates" [jansenbe - Bert Jansen]
 - Handle SPO REST's replacement of _ with _x005f_ and space with _x0020_ when deserializing data [jansenbe - Bert Jansen]
