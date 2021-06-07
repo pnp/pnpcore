@@ -15,7 +15,7 @@ namespace PnP.Core.Transformation.Services.MappingProviders
         /// Maps a URL from classic to modern
         /// </summary>
         /// <param name="input">The input for the mapping activity</param>
-        /// <param name="token">The cancellation token</param>
+        /// <param name="token">The cancellation token, if any</param>
         /// <returns>The output of the mapping activity</returns>
         Task<UrlMappingProviderOutput> MapUrlAsync(UrlMappingProviderInput input, CancellationToken token = default);
     }

@@ -19,7 +19,7 @@ namespace PnP.Core.Transformation.SharePoint
         /// <summary>
         /// Creates a new instance
         /// </summary>
-        /// <param name="targetPageUriResolver"></param>
+        /// <param name="targetPageUriResolver">Instance of an URI resolver to use</param>
         public SharePointTransformationDistiller(ITargetPageUriResolver targetPageUriResolver)
         {
             this.targetPageUriResolver = targetPageUriResolver ?? throw new ArgumentNullException(nameof(targetPageUriResolver));
@@ -28,6 +28,9 @@ namespace PnP.Core.Transformation.SharePoint
         /// <summary>
         /// Defines a list of Page Transformation Tasks
         /// </summary>
+        /// <param name="sourceProvider">The source provider</param>
+        /// <param name="targetContext">The target context</param>
+        /// <param name="token">The cancellation token, if any</param>
         /// <returns>A list of PageTransformationTask to transform</returns>
         public async IAsyncEnumerable<PageTransformationTask> GetPageTransformationTasksAsync(
             ISourceProvider sourceProvider,

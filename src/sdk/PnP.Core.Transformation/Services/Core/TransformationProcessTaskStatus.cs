@@ -10,14 +10,14 @@ namespace PnP.Core.Transformation.Services.Core
         /// <summary>
         /// Default constructor
         /// </summary>
-        /// <param name="processId"></param>
-        /// <param name="id"></param>
-        /// <param name="creationDate"></param>
-        /// <param name="startDate"></param>
-        /// <param name="endDate"></param>
-        /// <param name="state"></param>
-        /// <param name="exceptionMessage"></param>
-        /// <param name="exceptionStackTrace"></param>
+        /// <param name="processId">The process id</param>
+        /// <param name="id">The task id</param>
+        /// <param name="creationDate">The creation date time for the task</param>
+        /// <param name="startDate">The start date time for the task</param>
+        /// <param name="endDate">The end date time for the task</param>
+        /// <param name="state">The state of the task</param>
+        /// <param name="exceptionMessage">The exception message, if any</param>
+        /// <param name="exceptionStackTrace">The exception stack trace, if any</param>
         public TransformationProcessTaskStatus(Guid processId, Guid id, DateTimeOffset creationDate, DateTimeOffset? startDate, DateTimeOffset? endDate, TransformationTaskExecutionState state, string exceptionMessage, string exceptionStackTrace)
         {
             ProcessId = processId;
@@ -38,10 +38,11 @@ namespace PnP.Core.Transformation.Services.Core
         /// <summary>
         /// Creates an instance for pending state
         /// </summary>
-        /// <param name="processId"></param>
-        /// <param name="id"></param>
-        /// <param name="creationDate"></param>
-        public static TransformationProcessTaskStatus GetPending(Guid processId, Guid id, DateTimeOffset creationDate)
+        /// <param name="processId">The process id</param>
+        /// <param name="id">The task id</param>
+        /// <param name="creationDate">The creation date time for the task</param>
+        /// <returns>A new instance of  <see cref="TransformationProcessTaskStatus"/></returns>
+        public static TransformationProcessTaskStatus CreatePending(Guid processId, Guid id, DateTimeOffset creationDate)
         {
             return new TransformationProcessTaskStatus
             {
@@ -55,13 +56,14 @@ namespace PnP.Core.Transformation.Services.Core
         /// <summary>
         /// Creates an instance specifying the state
         /// </summary>
-        /// <param name="processId"></param>
-        /// <param name="id"></param>
-        /// <param name="creationDate"></param>
-        /// <param name="startDate"></param>
-        /// <param name="endDate"></param>
-        /// <param name="state"></param>
-        public static TransformationProcessTaskStatus GetNormalState(Guid processId, Guid id, DateTimeOffset creationDate, DateTimeOffset? startDate, DateTimeOffset? endDate, TransformationTaskExecutionState state)
+        /// <param name="processId">The process id</param>
+        /// <param name="id">The task id</param>
+        /// <param name="creationDate">The creation date time for the task</param>
+        /// <param name="startDate">The start date time for the task</param>
+        /// <param name="endDate">The end date time for the task</param>
+        /// <param name="state">The state of the task</param>
+        /// <returns>A new instance of  <see cref="TransformationProcessTaskStatus"/></returns>
+        public static TransformationProcessTaskStatus CreateNormal(Guid processId, Guid id, DateTimeOffset creationDate, DateTimeOffset? startDate, DateTimeOffset? endDate, TransformationTaskExecutionState state)
         {
             return new TransformationProcessTaskStatus
             {
@@ -77,14 +79,15 @@ namespace PnP.Core.Transformation.Services.Core
         /// <summary>
         /// Creates an instance for faulted state
         /// </summary>
-        /// <param name="processId"></param>
-        /// <param name="id"></param>
-        /// <param name="creationDate"></param>
-        /// <param name="startDate"></param>
-        /// <param name="endDate"></param>
-        /// <param name="exceptionMessage"></param>
-        /// <param name="exceptionStackTrace"></param>
-        public static TransformationProcessTaskStatus GetException(Guid processId, Guid id, DateTimeOffset creationDate, DateTimeOffset? startDate, DateTimeOffset? endDate, string exceptionMessage, string exceptionStackTrace)
+        /// <param name="processId">The process id</param>
+        /// <param name="id">The task id</param>
+        /// <param name="creationDate">The creation date time for the task</param>
+        /// <param name="startDate">The start date time for the task</param>
+        /// <param name="endDate">The end date time for the task</param>
+        /// <param name="exceptionMessage">The exception message, if any</param>
+        /// <param name="exceptionStackTrace">The exception stack trace, if any</param>
+        /// <returns>A new instance of  <see cref="TransformationProcessTaskStatus"/></returns>
+        public static TransformationProcessTaskStatus CreateFaulted(Guid processId, Guid id, DateTimeOffset creationDate, DateTimeOffset? startDate, DateTimeOffset? endDate, string exceptionMessage, string exceptionStackTrace)
         {
             return new TransformationProcessTaskStatus
             {
@@ -102,13 +105,14 @@ namespace PnP.Core.Transformation.Services.Core
         /// <summary>
         /// Creates an instance for faulted state
         /// </summary>
-        /// <param name="processId"></param>
-        /// <param name="id"></param>
-        /// <param name="creationDate"></param>
-        /// <param name="startDate"></param>
-        /// <param name="endDate"></param>
-        /// <param name="exception"></param>
-        public static TransformationProcessTaskStatus GetException(Guid processId, Guid id, DateTimeOffset creationDate, DateTimeOffset? startDate, DateTimeOffset? endDate, Exception exception)
+        /// <param name="processId">The process id</param>
+        /// <param name="id">The task id</param>
+        /// <param name="creationDate">The creation date time for the task</param>
+        /// <param name="startDate">The start date time for the task</param>
+        /// <param name="endDate">The end date time for the task</param>
+        /// <param name="exception">The exception</param>
+        /// <returns>A new instance of  <see cref="TransformationProcessTaskStatus"/></returns>
+        public static TransformationProcessTaskStatus CreateFaulted(Guid processId, Guid id, DateTimeOffset creationDate, DateTimeOffset? startDate, DateTimeOffset? endDate, Exception exception)
         {
             if (exception == null) throw new ArgumentNullException(nameof(exception));
 

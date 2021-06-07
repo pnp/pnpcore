@@ -4,19 +4,19 @@ using PnP.Core.Services;
 namespace PnP.Core.Transformation.Services.Core
 {
     /// <summary>
-    ///     Defines a page transformation task
+    /// Defines a page transformation task
     /// </summary>
     public class PageTransformationTask
     {
         /// <summary>
-        ///     Creates an instance of the task with a new id
+        /// Creates an instance of the task with a new id
         /// </summary>
         public PageTransformationTask(ISourceProvider sourceProvider, ISourceItemId sourceItemId, PnPContext targetContext) : this(Guid.NewGuid(), sourceProvider, sourceItemId, targetContext)
         {
         }
 
         /// <summary>
-        ///     Creates an instance of the task
+        /// Creates an instance of the task
         /// </summary>
         public PageTransformationTask(Guid id, ISourceProvider sourceProvider, ISourceItemId sourceItemId, PnPContext targetContext)
         {
@@ -27,22 +27,22 @@ namespace PnP.Core.Transformation.Services.Core
         }
 
         /// <summary>
-        ///     The source provider to use for the task
+        /// The source provider to use for the task
         /// </summary>
         public ISourceProvider SourceProvider { get; }
 
         /// <summary>
-        ///     The source item id to process
+        /// The source item id to process
         /// </summary>
         public ISourceItemId SourceItemId { get; }
 
         /// <summary>
-        /// The PnP target context
+        /// The target PnP context
         /// </summary>
         public PnPContext TargetContext { get; }
 
         /// <summary>
-        ///     The Unique ID of a Transformation Task
+        /// The unique ID of the transformation task
         /// </summary>
         public Guid Id { get; }
     }

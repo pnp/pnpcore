@@ -44,6 +44,16 @@
     <ContinuousIntegrationBuild>True</ContinuousIntegrationBuild>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="MappingFiles\webpartmapping.xml" />
+    <None Remove="MappingFiles\webpartmapping.xsd" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="MappingFiles\webpartmapping.xml" />
+    <EmbeddedResource Include="MappingFiles\webpartmapping.xsd" />
+  </ItemGroup>
+
 
   <ItemGroup>
     <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="3.3.1">
@@ -59,6 +69,21 @@
 
   <ItemGroup>
     <ProjectReference Include="..\PnP.Core.Transformation\PnP.Core.Transformation.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="SharePointTransformationResources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>SharePointTransformationResources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="SharePointTransformationResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>SharePointTransformationResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
 
 </Project>

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace PnP.Core.Transformation.Services.Core
 {
     /// <summary>
-    /// Abstract interface for a service that defines a list of pages to transform
+    /// Abstract interface for a service that defines a list of items to transform
     /// </summary>
     public interface ITransformationDistiller
     {

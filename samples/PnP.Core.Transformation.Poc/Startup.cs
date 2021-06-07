@@ -35,14 +35,17 @@ namespace PnP.Core.Transformation.Poc
                 return account.CreateCloudQueueClient();
             });
 
+            // Configure PnP Core and PnP Core Auth options
             builder.Services.AddOptions<PnPCoreOptions>()
                 .Configure<IConfiguration>((options, configuration) => configuration.GetSection("PnPCore").Bind(options));
             builder.Services.AddOptions<PnPCoreAuthenticationOptions>()
                 .Configure<IConfiguration>((options, configuration) => configuration.GetSection("PnPCore").Bind(options));
 
+            // Register PnP Core and PnP Core Auth services
             builder.Services.AddPnPCoreAuthentication();
             builder.Services.AddPnPCore();
 
+            // Register the PnP Core Auth providers
             // Workaround: DryIoc (used by functions choose wrong ctor)
             builder.Services.RemoveAll<X509CertificateAuthenticationProvider>();
             builder.Services.RemoveAll<CredentialManagerAuthenticationProvider>();
@@ -53,6 +56,7 @@ namespace PnP.Core.Transformation.Poc
                 new X509CertificateAuthenticationProvider(
                     p.GetRequiredService<ILogger<OAuthAuthenticationProvider>>()));
 
+            // Register the PnP Transformation Framework services for a SharePoint to SharePoint transformation
             builder.Services.AddPnPSharePointTransformation()
                 .WithTransformationStateManager<AzureTableTransformationStateManager>()
                 .WithTransformationExecutor<AzureQueueTransformationExecutor>();

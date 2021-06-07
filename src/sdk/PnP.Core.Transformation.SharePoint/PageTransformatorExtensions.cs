@@ -13,13 +13,13 @@ namespace PnP.Core.Transformation.SharePoint
     public static class PageTransformatorExtensions
     {
         /// <summary>
-        /// Transform a SharePoint page uri
+        /// Transforms a SharePoint page uri
         /// </summary>
-        /// <param name="pageTransformator"></param>
-        /// <param name="sourceContext"></param>
-        /// <param name="targetContext"></param>
-        /// <param name="sourceUri"></param>
-        /// <returns></returns>
+        /// <param name="pageTransformator">The page transformator to use</param>
+        /// <param name="sourceContext">The source context</param>
+        /// <param name="targetContext">The destination context</param>
+        /// <param name="sourceUri">The source URI</param>
+        /// <returns>The resulting URI</returns>
         public static Task<Uri> TransformSharePointAsync(this IPageTransformator pageTransformator, PnPContext sourceContext, PnPContext targetContext, Uri sourceUri)
         {
             if (pageTransformator == null) throw new ArgumentNullException(nameof(pageTransformator));

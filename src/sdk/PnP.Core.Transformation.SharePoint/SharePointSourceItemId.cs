@@ -10,11 +10,10 @@ namespace PnP.Core.Transformation.SharePoint
     /// </summary>
     public class SharePointSourceItemId : ISourceItemId
     {
-
         /// <summary>
         /// Creates a new instance
         /// </summary>
-        /// <param name="uri"></param>
+        /// <param name="uri">The URI of the item</param>
         public SharePointSourceItemId(Uri uri)
         {
             Uri = uri ?? throw new ArgumentNullException(nameof(uri));

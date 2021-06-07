@@ -1,32 +1,32 @@
 ﻿namespace PnP.Core.Transformation.Services.Core
 {
     /// <summary>
-    ///     List of process status
+    /// List of process status
     /// </summary>
     public enum TransformationTaskExecutionState
     {
         /// <summary>
-        ///     Process is in pending state
+        /// Process is in pending state
         /// </summary>
         Pending,
 
         /// <summary>
-        ///     Process is running
+        /// Process is running
         /// </summary>
         Running,
 
         /// <summary>
-        ///     Process has been aborted
+        /// Process has been aborted
         /// </summary>
         Aborted,
 
         /// <summary>
-        ///     Process is completed
+        /// Process is completed
         /// </summary>
         Completed,
 
         /// <summary>
-        ///     Process could not process any tasks
+        /// Process could not process any tasks
         /// </summary>
         Faulted
     }

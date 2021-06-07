@@ -47,16 +47,16 @@ namespace PnP.Core.Transformation.Services.Core
         }
 
         /// <summary>
-        /// Transforms a page from classic to modern
+        /// Transforms a page from the configured data source to a modern SharePoint Online page
         /// </summary>
         /// <param name="task">The context of the transformation process</param>
-        /// <param name="token">The cancellation token</param>
+        /// <param name="token">The cancellation token, if any</param>
         /// <returns>The URL of the transformed page</returns>
         public virtual async Task<Uri> TransformAsync(PageTransformationTask task, CancellationToken token = default)
         {
             if (task == null) throw new ArgumentNullException(nameof(task));
 
-            logger.LogInformation("Transforming task {id} from {sourceItemId}", task.Id, task.SourceItemId.Id);
+            logger.LogInformation("Running transformation task {id} on data source item {sourceItemId}", task.Id, task.SourceItemId.Id);
 
             // Get the source item by id
             var sourceItem = await task.SourceProvider.GetItemAsync(task.SourceItemId, token).ConfigureAwait(false);
@@ -64,7 +64,7 @@ namespace PnP.Core.Transformation.Services.Core
             // Resolve the target page uri
             var targetPageUri = await targetPageUriResolver.ResolveAsync(sourceItem, task.TargetContext, token).ConfigureAwait(false);
 
-            // Call pre transformations
+            // Call pre transformations handlers
             var preContext = new PagePreTransformationContext(task, sourceItem, targetPageUri);
             foreach (var pagePreTransformation in pagePreTransformations)
             {
@@ -80,7 +80,7 @@ namespace PnP.Core.Transformation.Services.Core
             MappingProviderOutput output = await mappingProvider.MapAsync(input, token).ConfigureAwait(false);
             token.ThrowIfCancellationRequested();
 
-            // Call post transformations
+            // Call post transformations handlers
             var postContext = new PagePostTransformationContext(task, sourceItem, targetPageUri);
             foreach (var pagePostTransformation in pagePostTransformations)
             {

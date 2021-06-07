@@ -26,7 +26,7 @@ namespace PnP.Core.Transformation.Services.Core
         /// <summary>
         /// Creates a Page Transformation process
         /// </summary>
-        /// <param name="token">The cancellation token</param>
+        /// <param name="token">The cancellation token, if any</param>
         /// <returns>The transformation process</returns>
         public virtual async Task<ITransformationProcess> CreateTransformationProcessAsync(
             CancellationToken token = default)
@@ -41,7 +41,7 @@ namespace PnP.Core.Transformation.Services.Core
         /// Loads a Page Transformation process
         /// </summary>
         /// <param name="processId">The ID of the process to load</param>
-        /// <param name="token">The cancellation token</param>
+        /// <param name="token">The cancellation token, if any</param>
         /// <returns>The transformation process</returns>
         public virtual Task<ITransformationProcess> LoadTransformationProcessAsync(Guid processId,
             CancellationToken token = default)
@@ -55,8 +55,8 @@ namespace PnP.Core.Transformation.Services.Core
         /// <summary>
         /// Creates a new instance of a inherited of type <see cref="LongRunningTransformationProcessBase"/>
         /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
+        /// <param name="id">The process id</param>
+        /// <returns>A new instance of a long running transformation process</returns>
         protected abstract LongRunningTransformationProcessBase CreateProcess(Guid id);
     }
 }

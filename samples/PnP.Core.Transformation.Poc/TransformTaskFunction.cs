@@ -12,6 +12,9 @@ using PnP.Core.Transformation.SharePoint;
 
 namespace PnP.Core.Transformation.Poc
 {
+    /// <summary>
+    /// Function to process a single page transformation request
+    /// </summary>
     public class TransformTaskFunction
     {
         private readonly ITransformationExecutor executor;
@@ -43,10 +46,11 @@ namespace PnP.Core.Transformation.Poc
             PnPContext sourceContext = await pnpContextFactory.CreateAsync(source);
             PnPContext targetContext = await pnpContextFactory.CreateAsync(target);
 
+            // Configure the source item id and data source provider
             var sourceItemId = new SharePointSourceItemId(item.SourcePageUri);
             var sourceProvider = new SharePointSourceProvider(sourceContext);
 
-            // Execute task
+            // Execute the actual transformatio task
             var task = new PageTransformationTask(item.TaskId, sourceProvider, sourceItemId, targetContext);
             await p.ProcessTaskAsync(task, token);
         }

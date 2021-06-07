@@ -15,6 +15,9 @@ using PnP.Core.Transformation.SharePoint;
 
 namespace PnP.Core.Transformation.Poc
 {
+    /// <summary>
+    /// Function to magage the transformation of a whole site
+    /// </summary>
     public class TransformSiteFunction
     {
         private readonly IPnPContextFactory pnpContextFactory;
@@ -39,6 +42,7 @@ namespace PnP.Core.Transformation.Poc
             Guid processId;
             switch (req.Method)
             {
+                // Trigger the transformation a whole site
                 case "POST":
                     string source = "SourceTestSite";
                     string target = "TargetTestSite";
@@ -52,6 +56,7 @@ namespace PnP.Core.Transformation.Poc
                         target, token);
 
                     return new OkObjectResult(new { process.Id });
+                // Get the status of a running transformation
                 case "GET":
                     id = req.Query["id"];
                     if (!Guid.TryParse(id, out processId)) return new BadRequestResult();
@@ -60,6 +65,7 @@ namespace PnP.Core.Transformation.Poc
                     var status = await process.GetStatusAsync(token);
 
                     return new OkObjectResult(status);
+                // Cancel a running transformation
                 case "DELETE":
                     id = req.Query["id"];
                     if (!Guid.TryParse(id, out processId)) return new BadRequestResult();

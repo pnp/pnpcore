@@ -15,7 +15,7 @@ namespace PnP.Core.Transformation.Services.MappingProviders
         /// Maps HTML content from classic to modern
         /// </summary>
         /// <param name="input">The input for the mapping activity</param>
-        /// <param name="token">The cancellation token</param>
+        /// <param name="token">The cancellation token, if any</param>
         /// <returns>The output of the mapping activity</returns>
         Task<HtmlMappingProviderOutput> MapHtmlAsync(HtmlMappingProviderInput input, CancellationToken token = default);
     }

@@ -12,12 +12,14 @@ using PnP.Core.Transformation.SharePoint;
 
 namespace PnP.Core.Transformation.Poc.Implementations
 {
+    /// <summary>
+    /// Executor that relies on an Azure Storage Queue to process the transformations
+    /// </summary>
     public class AzureQueueTransformationExecutor : LongRunningTransformationExecutorBase
     {
         public AzureQueueTransformationExecutor(IServiceProvider serviceProvider) : base(serviceProvider)
         {
         }
-
         
         protected override LongRunningTransformationProcessBase CreateProcess(Guid id)
         {
@@ -25,6 +27,9 @@ namespace PnP.Core.Transformation.Poc.Implementations
         }
     }
 
+    /// <summary>
+    /// Transformation Process that relies on an Azure Storage Queue
+    /// </summary>
     public class AzureQueueTransformationProcessBase : LongRunningTransformationProcessBase
     {
         private readonly CloudQueue queueReference;
@@ -42,7 +47,13 @@ namespace PnP.Core.Transformation.Poc.Implementations
             await base.StartProcessAsync(sourceProvider, targetContext, token).ConfigureAwait(false);
         }
 
-        protected override async Task EnqueueTaskAsync(PageTransformationTask task, CancellationToken token)
+        /// <summary>
+        /// Protected method that simply enqueues a task into an Azure Storage Queue
+        /// </summary>
+        /// <param name="task">The task to enqueue</param>
+        /// <param name="token">The cancellation token, if any</param>
+        /// <returns></returns>
+        protected override async Task EnqueueTaskAsync(PageTransformationTask task, CancellationToken token = default)
         {
             var spItemId = (SharePointSourceItemId) task.SourceItemId;
 
@@ -57,7 +68,5 @@ namespace PnP.Core.Transformation.Poc.Implementations
                     null, null, null, null, token)
                 .ConfigureAwait(false);
         }
-
-
     }
 }

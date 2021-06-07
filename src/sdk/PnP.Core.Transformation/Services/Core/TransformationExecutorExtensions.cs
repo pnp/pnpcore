@@ -13,12 +13,12 @@ namespace PnP.Core.Transformation.Services.Core
     public static class TransformationExecutorExtensions
     {
         /// <summary>
-        /// Starts a process and wait for its completion
+        /// Starts a process and waits for its completion
         /// </summary>
         /// <param name="process">The process to start</param>
         /// <param name="sourceProvider">The source provider to use</param>
-        /// <param name="targetContext">The PnP target context</param>
-        /// <param name="token">The cancellation token</param>
+        /// <param name="targetContext">The target PnP context</param>
+        /// <param name="token">The cancellation token, if any</param>
         /// <returns></returns>
         public static async Task<TransformationProcessStatus> StartAndWaitProcessAsync(
             this ITransformationProcess process,
@@ -40,8 +40,8 @@ namespace PnP.Core.Transformation.Services.Core
         /// Wait for the completion of a process
         /// </summary>
         /// <param name="process">The process to start</param>
-        /// <param name="token">The cancellation token</param>
-        /// <returns></returns>
+        /// <param name="token">The cancellation token, if any</param>
+        /// <returns>The status of the process</returns>
         public static async Task<TransformationProcessStatus> WaitProcessAsync(
             this ITransformationProcess process,
             CancellationToken token = default)
@@ -58,7 +58,7 @@ namespace PnP.Core.Transformation.Services.Core
             // Since process could be already completed, we check immediately the status
             await LocalProgress(await process.GetStatusAsync(token).ConfigureAwait(false)).ConfigureAwait(false);
 
-            // Wait for the completion of the task
+            // Wait for completion of the task
             return await completionTask.Task.ConfigureAwait(false);
 
             Task LocalProgress(TransformationProcessStatus status)
@@ -77,13 +77,13 @@ namespace PnP.Core.Transformation.Services.Core
         }
 
         /// <summary>
-        /// Creates a new transformation process and wait for its completion
+        /// Creates a new transformation process and waits for its completion
         /// </summary>
         /// <param name="transformationExecutor">The executor to use</param>
         /// <param name="sourceProvider">The source provider</param>
         /// <param name="targetContext">The target context</param>
-        /// <param name="token">The cancellation token</param>
-        /// <returns></returns>
+        /// <param name="token">The cancellation token, if any</param>
+        /// <returns>The status of the process</returns>
         public static async Task<TransformationProcessStatus> TransformAsync(
             this ITransformationExecutor transformationExecutor,
             ISourceProvider sourceProvider,

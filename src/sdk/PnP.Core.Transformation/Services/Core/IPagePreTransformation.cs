@@ -15,7 +15,7 @@ namespace PnP.Core.Transformation.Services.Core
         /// Method called when a page is going to be transformed
         /// </summary>
         /// <param name="context">The context contained all information related to the transformation</param>
-        /// <param name="token">The cancellation token</param>
+        /// <param name="token">The cancellation token, if any</param>
         /// <returns></returns>
         Task PreTransformAsync(PagePreTransformationContext context, CancellationToken token);
     }

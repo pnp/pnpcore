@@ -12,7 +12,7 @@ namespace PnP.Core.Transformation.Services.Core
     public abstract class TransformationProcessBase : ITransformationProcess
     {
         /// <summary>
-        ///     The unique ID of a Transformation Process
+        /// The unique ID of a Transformation Process
         /// </summary>
         public abstract Guid Id { get; }
 
@@ -20,17 +20,18 @@ namespace PnP.Core.Transformation.Services.Core
         /// Starts the Transformation Process
         /// </summary>
         /// <param name="sourceProvider">The source provider to use</param>
-        /// <param name="targetContext">The PnPContext of the target site</param>
-        /// <param name="token">The cancellation token</param>
+        /// <param name="targetContext">The target PnP context</param>
+        /// <param name="token">The cancellation token, if any</param>
         public abstract Task StartProcessAsync(ISourceProvider sourceProvider, PnPContext targetContext, CancellationToken token = default);
 
         /// <summary>
-        ///     Stops the Transformation Process
+        /// Stops the Transformation Process
         /// </summary>
+        /// <param name="token">The cancellation token, if any</param>
         public abstract Task StopProcessAsync(CancellationToken token = default);
 
         /// <summary>
-        ///     Allows monitoring the progress of the Transformation Process
+        /// Allows monitoring the progress of the Transformation Process
         /// </summary>
         public virtual Func<TransformationProcessStatus, Task> Progress { get; set; }
 
@@ -40,8 +41,9 @@ namespace PnP.Core.Transformation.Services.Core
         public Func<TransformationProcessTaskStatus, Task> TasksProgress { get; set; }
 
         /// <summary>
-        ///     Allows to retrieve the status of the Transformation Process
+        /// Allows retrieving the status of the Transformation Process
         /// </summary>
+        /// <param name="token">The cancellation token, if any</param>
         /// <returns>The status of the Transformation Process</returns>
         public abstract Task<TransformationProcessStatus> GetStatusAsync(CancellationToken token = default);
 
@@ -49,7 +51,7 @@ namespace PnP.Core.Transformation.Services.Core
         /// Gets the status of a single task
         /// </summary>
         /// <param name="id">The id of the task</param>
-        /// <param name="token">Cancellation token to use</param>
+        /// <param name="token">The cancellation token, if any</param>
         /// <returns></returns>
         public abstract Task<TransformationProcessTaskStatus> GetTaskStatusAsync(Guid id, CancellationToken token = default);
 
@@ -57,15 +59,14 @@ namespace PnP.Core.Transformation.Services.Core
         /// Gets the list of the tasks using the criteria specified into the query
         /// </summary>
         /// <param name="query">Query to use for filtering</param>
-        /// <param name="token">Cancellation token to use</param>
+        /// <param name="token">The cancellation token, if any</param>
         /// <returns></returns>
         public abstract IAsyncEnumerable<TransformationProcessTaskStatus> GetTasksStatusAsync(TasksStatusQuery query, CancellationToken token = default);
 
         /// <summary>
-        ///     Raises the progress if property is set
+        /// Raises the process progress, if a Progress function is defined
         /// </summary>
-        /// <param name="status"></param>
-        /// <returns></returns>
+        /// <param name="status">The status to notify</param>
         protected virtual Task RaiseProgressAsync(TransformationProcessStatus status)
         {
             if (Progress != null)
@@ -77,10 +78,9 @@ namespace PnP.Core.Transformation.Services.Core
         }
 
         /// <summary>
-        ///     Raises the tasks progress if property is set
+        /// Raises the task progress, if a TaskProgress function is defined
         /// </summary>
-        /// <param name="status"></param>
-        /// <returns></returns>
+        /// <param name="status">The status to notify</param>
         protected virtual Task RaiseTasksProgressAsync(TransformationProcessTaskStatus status)
         {
             if (TasksProgress != null)

@@ -15,8 +15,8 @@ namespace PnP.Core.Transformation.Services.MappingProviders
         /// Maps a Taxonomy Term from the source platform to the target platform
         /// </summary>
         /// <param name="input">The input for the mapping activity</param>
-        /// <param name="token">The cancellation token</param>
+        /// <param name="token">The cancellation token, if any</param>
         /// <returns>The output of the mapping activity</returns>
-        Task<TaxonomyMappingProviderOutput> MapTermAsync(TaxonomyMappingProviderInput input, CancellationToken token);
+        Task<TaxonomyMappingProviderOutput> MapTermAsync(TaxonomyMappingProviderInput input, CancellationToken token = default);
     }
 }

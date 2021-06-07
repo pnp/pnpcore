@@ -10,7 +10,6 @@ namespace PnP.Core.Transformation.Services.Core
     /// </summary>
     public class PageTransformationOptions
     {
-
         #region Generic transformation properties
 
         /// <summary>
@@ -66,6 +65,8 @@ namespace PnP.Core.Transformation.Services.Core
 
         #endregion
 
+        #region Other page transformation properties
+
         /// <summary>
         /// Name of the transformed page. Leave it blank to reuse the source page name.
         /// </summary>
@@ -96,5 +97,6 @@ namespace PnP.Core.Transformation.Services.Core
         /// </summary>
         public bool CopyPageMetadata { get; set; }
 
+        #endregion
     }
 }

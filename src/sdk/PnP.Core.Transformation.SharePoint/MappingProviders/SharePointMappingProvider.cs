@@ -2,6 +2,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using PnP.Core.Transformation.Services.Core;
 using PnP.Core.Transformation.Services.MappingProviders;
@@ -14,16 +15,19 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
     /// </summary>
     public class SharePointMappingProvider : IMappingProvider
     {
+        private ILogger<SharePointMappingProvider> logger;
         private readonly IOptions<SharePointTransformationOptions> options;
         private readonly IServiceProvider serviceProvider;
 
         /// <summary>
-        /// Creates an instance
+        /// Main constructor for the mapping provider
         /// </summary>
-        /// <param name="options"></param>
-        /// <param name="serviceProvider"></param>
-        public SharePointMappingProvider(IOptions<SharePointTransformationOptions> options, IServiceProvider serviceProvider)
+        /// <param name="logger">Logger for tracing activities</param>
+        /// <param name="options">Configuration options</param>
+        /// <param name="serviceProvider">Service provider</param>
+        public SharePointMappingProvider(ILogger<SharePointMappingProvider> logger, IOptions<SharePointTransformationOptions> options, IServiceProvider serviceProvider)
         {
+            this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
             this.options = options ?? throw new ArgumentNullException(nameof(options));
             this.serviceProvider = serviceProvider;
         }
@@ -32,12 +36,14 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
         /// Maps an item from the source platform to the target platform
         /// </summary>
         /// <param name="input">The input for the mapping</param>
-        /// <param name="token">The cancellation token to use</param>
+        /// <param name="token">The cancellation token to use, if any</param>
         /// <returns>The output of the mapping</returns>
-        public async Task<MappingProviderOutput> MapAsync(MappingProviderInput input, CancellationToken token)
+        public async Task<MappingProviderOutput> MapAsync(MappingProviderInput input, CancellationToken token = default)
         {
+            logger.LogInformation($"Invoked: {this.GetType().Namespace}.{this.GetType().Name}.MapAsync");
+
             if (input == null) throw new ArgumentNullException(nameof(input));
-            
+
             var webPartMappingProvider = serviceProvider.GetService<IWebPartMappingProvider>();
             if (webPartMappingProvider != null)
             {
