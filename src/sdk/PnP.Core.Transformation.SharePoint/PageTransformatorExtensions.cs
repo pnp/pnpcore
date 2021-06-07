@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.SharePoint.Client;
 using PnP.Core.Services;
 using PnP.Core.Transformation.Services.Core;
 
@@ -20,7 +21,7 @@ namespace PnP.Core.Transformation.SharePoint
         /// <param name="targetContext">The destination context</param>
         /// <param name="sourceUri">The source URI</param>
         /// <returns>The resulting URI</returns>
-        public static Task<Uri> TransformSharePointAsync(this IPageTransformator pageTransformator, PnPContext sourceContext, PnPContext targetContext, Uri sourceUri)
+        public static Task<Uri> TransformSharePointAsync(this IPageTransformator pageTransformator, ClientContext sourceContext, PnPContext targetContext, Uri sourceUri)
         {
             if (pageTransformator == null) throw new ArgumentNullException(nameof(pageTransformator));
             if (sourceContext == null) throw new ArgumentNullException(nameof(sourceContext));

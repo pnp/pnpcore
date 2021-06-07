@@ -3,18 +3,15 @@ using System.IO;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Microsoft.SharePoint.Client;
 using PnP.Core.Auth.Services.Builder.Configuration;
 using PnP.Core.Services.Builder.Configuration;
+using File = System.IO.File;
 
 namespace PnP.Core.Transformation.Test.Utilities
 {
     public static class TestCommon
     {
-
-        /// <summary>
-        /// Name of the default test source site configuration
-        /// </summary>
-        internal static string SourceTestSite => "SourceTestSite";
 
         /// <summary>
         /// Name of the default test target site configuration
@@ -64,6 +61,8 @@ namespace PnP.Core.Transformation.Test.Utilities
                 .AddPnPCoreAuthentication()
                 // Add the PnP Core SDK Authentication Providers
                 .AddPnPCore();
+
+            services.AddTransient(p => new ClientContext(configuration["SourceTestSite"]));
 
             return services.BuildServiceProvider();
         }

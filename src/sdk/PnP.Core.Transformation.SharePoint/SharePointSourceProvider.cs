@@ -4,6 +4,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.SharePoint.Client;
 using PnP.Core.Services;
 using PnP.Core.Transformation.Services.Core;
 
@@ -17,13 +18,13 @@ namespace PnP.Core.Transformation.SharePoint
         /// <summary>
         /// Gets the source context used by the provider
         /// </summary>
-        public PnPContext SourceContext { get; }
+        public ClientContext SourceContext { get; }
 
         /// <summary>
         /// Creates a new instance for the context
         /// </summary>
         /// <param name="sourceContext">The source PnP Context</param>
-        public SharePointSourceProvider(PnPContext sourceContext)
+        public SharePointSourceProvider(ClientContext sourceContext)
         {
             SourceContext = sourceContext ?? throw new ArgumentNullException(nameof(sourceContext));
         }
@@ -37,7 +38,7 @@ namespace PnP.Core.Transformation.SharePoint
         {
             for (int x = 0; x < 10; x++)
             {
-                yield return new SharePointSourceItemId(new Uri(new Uri(SourceContext.Uri + "/"), $"{x}"));
+                yield return new SharePointSourceItemId(new Uri(new Uri(SourceContext.Web.Url + "/"), $"{x}"));
             }
         }
 
