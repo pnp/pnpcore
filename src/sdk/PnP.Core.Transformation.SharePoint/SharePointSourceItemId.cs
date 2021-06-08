@@ -28,5 +28,10 @@ namespace PnP.Core.Transformation.SharePoint
         /// Gets the string representation of the item
         /// </summary>
         public string Id => Uri.ToString();
+
+        /// <summary>
+        /// Gets the string representation of the Server Relative Url of the item
+        /// </summary>
+        public string ServerRelativeUrl => Uri.AbsolutePath; 
     }
 }

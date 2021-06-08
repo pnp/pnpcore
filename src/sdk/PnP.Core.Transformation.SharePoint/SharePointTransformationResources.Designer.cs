@@ -61,6 +61,24 @@ namespace PnP.Core.Transformation.SharePoint {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Source page &apos;{0}&apos; is a basic ASPX page ... can&apos;t currently transform that one, sorry!.
+        /// </summary>
+        internal static string Error_BasicASPXPageCannotTransform {
+            get {
+                return ResourceManager.GetString("Error_BasicASPXPageCannotTransform", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Blog pages cannot be transformed in-place, their target site collection must be a different one..
+        /// </summary>
+        internal static string Error_BlogPageTransformationHasToBeCrossSite {
+            get {
+                return ResourceManager.GetString("Error_BlogPageTransformationHasToBeCrossSite", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The SharePoint input item is missing.
         /// </summary>
         internal static string Error_MissiningSharePointInputItem {
@@ -79,6 +97,33 @@ namespace PnP.Core.Transformation.SharePoint {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Page &apos;{0}&apos; is not valid due to missing FileRef or FileLeafRef value.
+        /// </summary>
+        internal static string Error_PageNotValidMissingFileRef {
+            get {
+                return ResourceManager.GetString("Error_PageNotValidMissingFileRef", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Source page &apos;{0}&apos; is already a modern page.
+        /// </summary>
+        internal static string Error_SourcePageIsModern {
+            get {
+                return ResourceManager.GetString("Error_SourcePageIsModern", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Source page &apos;{0}&apos; cannot be null.
+        /// </summary>
+        internal static string Error_SourcePageNotFound {
+            get {
+                return ResourceManager.GetString("Error_SourcePageNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Provided custom web part mapping file is invalid: {0}.
         /// </summary>
         internal static string Error_WebPartMappingSchemaValidation {
@@ -88,11 +133,47 @@ namespace PnP.Core.Transformation.SharePoint {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Page Transformation Information.
+        ///   Looks up a localized string similar to Source page &apos;{0}&apos; contains web part &apos;{1}&apos; of type &apos;{2}&apos;.
         /// </summary>
-        internal static string Heading_PageTransformationInfomation {
+        internal static string Info_ContentTransformFoundSourceWebParts {
             get {
-                return ResourceManager.GetString("Heading_PageTransformationInfomation", resourceCulture);
+                return ResourceManager.GetString("Info_ContentTransformFoundSourceWebParts", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No web parts were found on page &apos;{0}&apos;.
+        /// </summary>
+        internal static string Info_NoWebPartsFound {
+            get {
+                return ResourceManager.GetString("Info_NoWebPartsFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Page &apos;{0}&apos; is loaded from outside a library.
+        /// </summary>
+        internal static string Info_PageLivesOutsideOfALibrary {
+            get {
+                return ResourceManager.GetString("Info_PageLivesOutsideOfALibrary", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Transformation of page &apos;{0}&apos; of type &apos;{1}&apos;.
+        /// </summary>
+        internal static string Info_TransformationMode {
+            get {
+                return ResourceManager.GetString("Info_TransformationMode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Validation checks completed.
+        /// </summary>
+        internal static string Info_ValidationChecksComplete {
+            get {
+                return ResourceManager.GetString("Info_ValidationChecksComplete", resourceCulture);
             }
         }
         

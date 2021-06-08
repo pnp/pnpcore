@@ -92,6 +92,81 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
             return Task.FromResult(result);
         }
 
+        private WebPartMapping LoadMappingFile(string mappingFilePath = null)
+        {
+            // Check if we already have the mapping file in the in-memory cache
+            if (mappingsCache.ContainsKey(mappingFilePath))
+            {
+                return mappingsCache[mappingFilePath];
+            }
+
+            // Create the xml mapping serializer
+            XmlSerializer xmlMapping = new XmlSerializer(typeof(WebPartMapping));
+
+            // Prepare the result variable
+            WebPartMapping result = null;
+
+            // If we don't have the mapping file as an input
+            if (!string.IsNullOrEmpty(mappingFilePath) ||
+                !System.IO.File.Exists(mappingFilePath))
+            {
+                // We use the default one, without validation
+                using (var mappingStream = this.GetType().Assembly.GetManifestResourceStream("PnP.Core.Transformation.SharePoint.MappingFiles.webpartmapping.xml"))
+                {
+                    using (var reader = XmlReader.Create(mappingStream))
+                    {
+                        result = (WebPartMapping)xmlMapping.Deserialize(reader);
+                    }
+                }
+            }
+            else
+            {
+                using (Stream schema = this.GetType().Assembly.GetManifestResourceStream("PnP.Core.Transformation.SharePoint.MappingFiles.webpartmapping.xsd"))
+                {
+                    using (var mappingStream = new FileStream(mappingFilePath, FileMode.Open))
+                    {
+                        // Ensure the provided file complies with the current schema
+                        ValidateSchema(schema, mappingStream);
+
+                        using (var reader = XmlReader.Create(mappingStream))
+                        {
+                            result = (WebPartMapping)xmlMapping.Deserialize(reader);
+                        }
+                    }
+                }
+            }
+
+            // Cache the mapping file into the in-memory cache
+            mappingsCache.AddOrUpdate(mappingFilePath, result, (k, v) => result);
+ 
+            return result;
+        }
+
+        private void ValidateSchema(Stream schema, FileStream stream)
+        {
+            // Load the template into an XDocument
+            XDocument xml = XDocument.Load(stream);
+
+            using (var schemaReader = new XmlTextReader(schema))
+            {
+                // Prepare the XML Schema Set
+                XmlSchemaSet schemas = new XmlSchemaSet();
+                schema.Seek(0, SeekOrigin.Begin);
+                schemas.Add(SharePointConstants.PageTransformationSchema, schemaReader);
+
+                // Set stream back to start
+                stream.Seek(0, SeekOrigin.Begin);
+
+                xml.Validate(schemas, (o, e) =>
+                {
+                    var errorMessage = string.Format(System.Globalization.CultureInfo.InvariantCulture,
+                        SharePointTransformationResources.Error_WebPartMappingSchemaValidation, e.Message);
+                    this.logger.LogError(e.Exception, errorMessage);
+                    throw new ApplicationException(errorMessage);
+                });
+            }
+        }
+
         private static Dictionary<string, string> ExtractProperties(WebPartMappingProviderInput input, WebPartMapping mapping)
         {
             // Storage for properties to keep
@@ -277,81 +352,6 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
             }
 
             return propertiesToKeep;
-        }
-
-        private WebPartMapping LoadMappingFile(string mappingFilePath = null)
-        {
-            // Check if we already have the mapping file in the in-memory cache
-            if (mappingsCache.ContainsKey(mappingFilePath))
-            {
-                return mappingsCache[mappingFilePath];
-            }
-
-            // Create the xml mapping serializer
-            XmlSerializer xmlMapping = new XmlSerializer(typeof(WebPartMapping));
-
-            // Prepare the result variable
-            WebPartMapping result = null;
-
-            // If we don't have the mapping file as an input
-            if (!string.IsNullOrEmpty(mappingFilePath) ||
-                !System.IO.File.Exists(mappingFilePath))
-            {
-                // We use the default one, without validation
-                using (var mappingStream = this.GetType().Assembly.GetManifestResourceStream("PnP.Core.Transformation.SharePoint.MappingFiles.webpartmapping.xml"))
-                {
-                    using (var reader = XmlReader.Create(mappingStream))
-                    {
-                        result = (WebPartMapping)xmlMapping.Deserialize(reader);
-                    }
-                }
-            }
-            else
-            {
-                using (Stream schema = this.GetType().Assembly.GetManifestResourceStream("PnP.Core.Transformation.SharePoint.MappingFiles.webpartmapping.xsd"))
-                {
-                    using (var mappingStream = new FileStream(mappingFilePath, FileMode.Open))
-                    {
-                        // Ensure the provided file complies with the current schema
-                        ValidateSchema(schema, mappingStream);
-
-                        using (var reader = XmlReader.Create(mappingStream))
-                        {
-                            result = (WebPartMapping)xmlMapping.Deserialize(reader);
-                        }
-                    }
-                }
-            }
-
-            // Cache the mapping file into the in-memory cache
-            mappingsCache.AddOrUpdate(mappingFilePath, result, (k, v) => result);
- 
-            return result;
-        }
-
-        private void ValidateSchema(Stream schema, FileStream stream)
-        {
-            // Load the template into an XDocument
-            XDocument xml = XDocument.Load(stream);
-
-            using (var schemaReader = new XmlTextReader(schema))
-            {
-                // Prepare the XML Schema Set
-                XmlSchemaSet schemas = new XmlSchemaSet();
-                schema.Seek(0, SeekOrigin.Begin);
-                schemas.Add(SharePointConstants.PageTransformationSchema, schemaReader);
-
-                // Set stream back to start
-                stream.Seek(0, SeekOrigin.Begin);
-
-                xml.Validate(schemas, (o, e) =>
-                {
-                    var errorMessage = string.Format(System.Globalization.CultureInfo.InvariantCulture,
-                        SharePointTransformationResources.Error_WebPartMappingSchemaValidation, e.Message);
-                    this.logger.LogError(errorMessage, SharePointTransformationResources.Heading_PageTransformationInfomation, e.Exception);
-                    throw new ApplicationException(errorMessage);
-                });
-            }
         }
     }
 }

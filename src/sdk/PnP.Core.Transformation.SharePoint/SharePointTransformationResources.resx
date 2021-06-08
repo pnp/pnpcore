@@ -117,17 +117,44 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Error_BasicASPXPageCannotTransform" xml:space="preserve">
+    <value>Source page '{0}' is a basic ASPX page ... can't currently transform that one, sorry!</value>
+  </data>
+  <data name="Error_BlogPageTransformationHasToBeCrossSite" xml:space="preserve">
+    <value>Blog pages cannot be transformed in-place, their target site collection must be a different one.</value>
+  </data>
   <data name="Error_MissiningSharePointInputItem" xml:space="preserve">
     <value>The SharePoint input item is missing</value>
   </data>
   <data name="Error_PageLayoutMappingFileSchemaValidation" xml:space="preserve">
     <value>Provided custom pagelayout mapping file is invalid: {0}</value>
   </data>
+  <data name="Error_PageNotValidMissingFileRef" xml:space="preserve">
+    <value>Page '{0}' is not valid due to missing FileRef or FileLeafRef value</value>
+  </data>
+  <data name="Error_SourcePageIsModern" xml:space="preserve">
+    <value>Source page '{0}' is already a modern page</value>
+  </data>
+  <data name="Error_SourcePageNotFound" xml:space="preserve">
+    <value>Source page '{0}' cannot be null</value>
+  </data>
   <data name="Error_WebPartMappingSchemaValidation" xml:space="preserve">
     <value>Provided custom web part mapping file is invalid: {0}</value>
   </data>
-  <data name="Heading_PageTransformationInfomation" xml:space="preserve">
-    <value>Page Transformation Information</value>
+  <data name="Info_ContentTransformFoundSourceWebParts" xml:space="preserve">
+    <value>Source page '{0}' contains web part '{1}' of type '{2}'</value>
+  </data>
+  <data name="Info_NoWebPartsFound" xml:space="preserve">
+    <value>No web parts were found on page '{0}'</value>
+  </data>
+  <data name="Info_PageLivesOutsideOfALibrary" xml:space="preserve">
+    <value>Page '{0}' is loaded from outside a library</value>
+  </data>
+  <data name="Info_TransformationMode" xml:space="preserve">
+    <value>Transformation of page '{0}' of type '{1}'</value>
+  </data>
+  <data name="Info_ValidationChecksComplete" xml:space="preserve">
+    <value>Validation checks completed</value>
   </data>
   <data name="Warning_TableCouldNotBeNormalized" xml:space="preserve">
     <value>Table could not be normalized and will be taken over as is</value>
