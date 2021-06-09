@@ -14,5 +14,6 @@ namespace PnP.Core.Transformation.Services.Builder.Configuration
         public bool DisableTelemetry { get; set; }
 
         // TODO: Define all the configuration settings
+
     }
 }

@@ -83,5 +83,26 @@ namespace PnP.Core.Transformation.SharePoint.Extensions
         {
             return (item.FieldValues.ContainsKey(fieldName) && item[fieldName] != null);
         }
+
+        /// <summary>
+        /// Checks if a listitem contains a field and eventually retrieves its value
+        /// </summary>
+        /// <param name="item">List item to check</param>
+        /// <param name="fieldName">Name of the field to check</param>
+        /// <param name="fieldValue">The value of the field, if any</param>
+        /// <returns>Whether the field is defined in the target item</returns>
+        internal static bool TryGetFieldValue(this ListItem item, string fieldName, out string fieldValue)
+        {
+            if (item.FieldValues.ContainsKey(fieldName) && item[fieldName] != null)
+            {
+                fieldValue = item[fieldName].ToString();
+                return true;
+            }
+            else
+            {
+                fieldValue = null;
+                return false;
+            }
+        }
     }
 }

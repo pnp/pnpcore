@@ -6,6 +6,9 @@ namespace PnP.Core.Transformation.SharePoint
 {
     public static class SharePointConstants
     {
+        // Client tag and user agent
+        public const string TransformationClientTag = "SPDev:PageTransformator";
+        public const string TransformationUserAgent = "";
         // Web Properties
         public const string WebPropertyKeyPagesListId = "__PagesListId";
 

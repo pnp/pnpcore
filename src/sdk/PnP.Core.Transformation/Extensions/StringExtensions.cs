@@ -14,11 +14,10 @@ namespace PnP.Core.Transformation
         /// </summary>
         /// <param name="value">original string</param>
         /// <param name="comparedWith">string to compare with</param>
-        /// <param name="stringComparison">optional comparison mode</param>
         /// <returns></returns>
-        public static bool ContainsIgnoringCasing(this string value, string comparedWith, StringComparison stringComparison = StringComparison.InvariantCultureIgnoreCase)
+        public static bool ContainsIgnoringCasing(this string value, string comparedWith)
         {
-            return value.IndexOf(comparedWith, stringComparison) >= 0;
+            return value.IndexOf(comparedWith, StringComparison.InvariantCultureIgnoreCase) >= 0;
         }
 
         /// <summary>

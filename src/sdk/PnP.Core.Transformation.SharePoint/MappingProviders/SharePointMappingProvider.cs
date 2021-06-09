@@ -70,11 +70,14 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
             var crossSiteTransformation = IsCrossSiteTransformation(input, sourceItem);
             var crossTenantTransformation = IsCrossTenantTransformation(input, sourceItem);
 
-            // TODO: Retrieve Version and ExactVersion of source and target
-            // See line 1155 of file BasePageTransformator.cs in PnP Framework
+            // Read source page information
+            var sourcePage = ReadSourcePageInformation(pageItem);
 
-            // Evaluate page type
-            SourcePageType pageType = EvaluatePageType(pageFile, pageItem, crossSiteTransformation, crossTenantTransformation);
+            // Determine if the page is a Root Page
+            sourcePage.IsRootPage = pageFile != null;
+
+            // Evaluate the source page type
+            sourcePage.PageType = EvaluatePageType(pageFile, pageItem, crossSiteTransformation, crossTenantTransformation);
 
             logger.LogInformation(SharePointTransformationResources.Info_ValidationChecksComplete);
 
@@ -83,6 +86,19 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
 
             // Start the actual transformation
             var transformationStartDateTime = DateTime.Now;
+
+            // Load information from source context
+            LoadClientObjects(sourceContext);
+
+            // TODO: Let's see if we really need to load tenant global properties or not
+            // see line 299 of PageTransformator.cs in PnP Framework
+
+            // Retrieve Version and ExactVersion of source and target
+            (sourcePage.SourceVersion, sourcePage.SourceVersionNumber) = sourceContext.GetVersions();
+
+            // Retrieve the parent Folder of the page, if any and the target page name
+            string targetPageName = null;
+            (sourcePage.Folder, targetPageName) = DeterminePageFolder(sourceContext, sourcePage, pageItem, input.Context.TargetPageUri);
 
             // Transform the web parts
             var webPartMappingProvider = serviceProvider.GetService<IWebPartMappingProvider>();
@@ -159,6 +175,57 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
             }
 
             return new MappingProviderOutput();
+        }
+
+        private static (string, string) DeterminePageFolder(ClientContext sourceContext, SourcePageInformation sourcePage, ListItem pageItem, Uri targetPageUri)
+        {
+            string pageFolder = null;
+            string targetPageName = targetPageUri.Segments[targetPageUri.Segments.Length - 1];
+
+            string fileRefFieldValue;
+            if (pageItem.TryGetFieldValue(SharePointConstants.FileDirRefField, out fileRefFieldValue))
+            {
+                if (sourcePage.IsRootPage)
+                {
+                    pageFolder = "Root/";
+                    if (string.IsNullOrEmpty(targetPageName))
+                    {
+                        targetPageName = fileRefFieldValue;
+                    }
+                }
+                else if (sourcePage.PageType == SourcePageType.BlogPage)
+                {
+                    var blogsListName = sourceContext.Web.GetLocalizedListName(ListType.Blogs, "posts");
+                    if (fileRefFieldValue.ContainsIgnoringCasing($"/lists/{blogsListName}"))
+                    {
+                        pageFolder = fileRefFieldValue.Replace($"{sourceContext.Web.ServerRelativeUrl.TrimEnd(new[] { '/' })}/Lists/{blogsListName}", "", StringComparison.InvariantCultureIgnoreCase).Trim();
+                    }
+                    else
+                    {
+                        // Page was living in another list, leave the list name as that will be the folder hosting the modern file in SitePages.
+                        // This convention is used to avoid naming conflicts
+                        pageFolder = fileRefFieldValue.Replace($"{sourceContext.Web.ServerRelativeUrl}", "").Trim();
+                    }
+                }
+                else
+                {
+                    if (fileRefFieldValue.ContainsIgnoringCasing("/sitepages"))
+                    {
+                        pageFolder = fileRefFieldValue.Replace($"{sourceContext.Web.ServerRelativeUrl.TrimEnd(new[] { '/' })}/SitePages", "").Trim();
+                    }
+                    else
+                    {
+                        // Page was living in another list, leave the list name as that will be the folder hosting the modern file in SitePages.
+                        // This convention is used to avoid naming conflicts
+                        pageFolder = fileRefFieldValue.Replace($"{sourceContext.Web.ServerRelativeUrl}", "").Trim();
+                    }
+                }
+
+                // Ensure that the page Folder does not start with "/" and does end with "/"
+                pageFolder = pageFolder.TrimStart('/').TrimEnd('/') + "/";
+            }
+
+            return (pageFolder, targetPageName);
         }
 
         private static bool IsCrossSiteTransformation(MappingProviderInput input, SharePointSourceItem sourceItem)
@@ -929,5 +996,46 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
 
             return 1;
         }
+
+        /// <summary>
+        /// Loads the telemetry and properties for the client objects
+        /// </summary>
+        /// <param name="clientContext"></param>
+        private static void LoadClientObjects(ClientContext clientContext)
+        {
+            if (clientContext != null)
+            {
+                clientContext.ClientTag = $"SPDev:PageTransformator";
+
+                // Load all web properties needed further one
+                clientContext.Load(clientContext.Web, w => w.Id, w => w.Url, w => w.ServerRelativeUrl, w => w.RootFolder.WelcomePage, w => w.Language);
+                clientContext.Load(clientContext.Site, s => s.RootWeb.ServerRelativeUrl, s => s.Id, s => s.Url);
+                // Use regular ExecuteQuery as we want to send this custom clienttag
+                clientContext.ExecuteQuery();
+            }
+        }
+
+        private static SourcePageInformation ReadSourcePageInformation(ListItem sourcePage)
+        {
+            var result = new SourcePageInformation();
+
+            result.Author = sourcePage[SharePointConstants.CreatedByField] as FieldUserValue;
+            result.Editor = sourcePage[SharePointConstants.ModifiedByField] as FieldUserValue;
+
+            // Ensure to interprete time correctly: SPO stores in UTC, but we'll need to push back in local
+            if (DateTime.TryParse(sourcePage[SharePointConstants.CreatedField].ToString(), out DateTime created))
+            {
+                DateTime createdIsUtc = DateTime.SpecifyKind(created, DateTimeKind.Utc);
+                result.Created = createdIsUtc.ToLocalTime();
+            }
+            if (DateTime.TryParse(sourcePage[SharePointConstants.ModifiedField].ToString(), out DateTime modified))
+            {
+                DateTime modifiedIsUtc = DateTime.SpecifyKind(modified, DateTimeKind.Utc);
+                result.Modified = modifiedIsUtc.ToLocalTime();
+            }
+
+            return result;
+        }
+
     }
 }

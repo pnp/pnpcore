@@ -1,27 +1,27 @@
 ﻿Architectural notes:
-- implement all the native providers with file-based approach (both XML and JSON)
-- add With* methods to the builder
-	- builder.WithName("MyConfiguration).WithWebPartMappingProvider<MyCustomWebPartMappingProvider>().With*().Build();
-- or what about having also named options?
+* implement all the native providers with file-based approach (both XML and JSON)
+* add With* methods to the builder
+	* builder.WithName("MyConfiguration).WithWebPartMappingProvider<MyCustomWebPartMappingProvider>().With*().Build();
+* or what about having also named options?
 	- https://docs.microsoft.com/en-us/aspnet/core/fundamentals/configuration/options?view=aspnetcore-5.0#named-options-support-using-iconfigurenamedoptions
-- abstract the "executor" of a transformation request
-- implement PageTransformator through interface IPageTransformator
-- all asynchronous
-- add support for external executor
-	- provide default in-memory executor
+* abstract the "executor" of a transformation request
+* implement PageTransformator through interface IPageTransformator
+* all asynchronous
+* add support for external executor
+	* provide default in-memory executor
 - implement a Metadata Mapping provider with support for an in-memory dictionary of fields to add to the target
 - add support for "delta" transformation
 	- transform only pages updated after XYZ (stored somewhere, like in the property bag of the Pages library or of the site)
 - think about having a LayoutTransformator and ContentTransformator abstraction
 
-- Hierarchy:
+* Hierarchy:
 	TransformationDistiller <- TransformationExecutor -> PageTransformator
 										|
 										˅
 								TransformationStateManager
 
-- TransformationDistiller: defines the list of items (pages) to process
-- TransformationExecutor:
+* TransformationDistiller: defines the list of items (pages) to process
+* TransformationExecutor:
 	- Creates/Loads a TransformationProcess
 		- Start/Stop
 		- Events to notify status
@@ -31,56 +31,56 @@
 		- Parallel
 		- Background
 		- External
-- PageTransformator: does the actual tranformation of a single page
-- TransformationStateManager: handles state management for the Executor
+* PageTransformator: does the actual tranformation of a single page
+* TransformationStateManager: handles state management for the Executor
 
 Things to think about:
 - How do we pass configuration settings (like file path) to mapping provider instances in With* methods?
 	- We need an "open" configuration model, because we don't simply need file path, but also other kind of settings (like db connection string, etc.)
 
 Questions for Bert:
-- What is the whole Observer thing? Can't we simply use logging?
-	- Nowadays it generates a report of what happened ... think about that, talk with Paul Bullock -> Paul said that we can remove it
-- Do we really need a "custom" cache?
-	- Ok we can use the out of the box one
-- What if we just implement one PageTransformator that adapts to the page instead of PageTransformator and PublishingPageTransformator?
-	- Yes, we are on the same page
+* What is the whole Observer thing? Can't we simply use logging?
+	* Nowadays it generates a report of what happened ... think about that, talk with Paul Bullock -> Paul said that we can remove it
+* Do we really need a "custom" cache?
+	* Ok we can use the out of the box one
+* What if we just implement one PageTransformator that adapts to the page instead of PageTransformator and PublishingPageTransformator?
+	* Yes, we are on the same page
 - Is TargetPageFolderOverridesDefaultFolder really needed? Can't we just rely on TargetPageFolder != null?
 	- Pending ...
-- Do we need SkipUrlRewrite and SkipDefaultUrlRewrite? Can't we just rely on IUrlMappingProvider specific implementation?
-	- Ok
+* Do we need SkipUrlRewrite and SkipDefaultUrlRewrite? Can't we just rely on IUrlMappingProvider specific implementation?
+	* Ok
 - I need to better understand the purpose of AddTableListImageAsImageWebPart
 	- Future meeting
 - About the MappingProperties property, can we simply rely on the Metadata Mapping provider?
 	- Future meeting
-- Do we still need PageTitleOverride, LayoutTransformatorOverride, and ContentTransformatorOverride?
-	- Can't we rely on the new providers model?
-		- Ok, except ContentTransformatorOverride
+* Do we still need PageTitleOverride, LayoutTransformatorOverride, and ContentTransformatorOverride?
+	* Can't we rely on the new providers model?
+		* Ok, except ContentTransformatorOverride
 - What's the purpose of the "internal fields"? (Folder, IsCrossFarmTransformation, etc.)
 	- Future meeting
-- Is the ModernizationCenter gone, right?
-	- Yes
-- Do we really neew TargetPageTakesSourcePageName? Can't we simply rely on TargetPageName and if blank it will take source page name?
-	- Ok
-- PnPContext is online only. How do we manage on-prem sources in the new Modernization Framework based on PnP.Core?
-	- Refactoring coming to ensure support for on-prem and other sources ...
+* Is the ModernizationCenter gone, right?
+	* Yes
+* Do we really need TargetPageTakesSourcePageName? Can't we simply rely on TargetPageName and if blank it will take source page name?
+	* Ok
+* PnPContext is online only. How do we manage on-prem sources in the new Modernization Framework based on PnP.Core?
+	* Refactoring coming to ensure support for on-prem and other sources ...
 
 Bert's feedback:
-- HTML Content Mapping Provider
-- Custom mapping provider pre/post-transformation with order
-- Don't assume that the source is always Microsoft SharePoint
-	- Add another level of abstraction for generic data sources
-	- We cannot use PnPContext for SourceContext, we need to support on-prem and other sources
-	- Source:
-		- Metadata (dictionary)
-		- RawContent (string -> GetStreamAsync)
-		- Components/Parts (IEnumerable<{ id, Properties: Dictionary, GetStreamAsync }>)
-		- Users
-			- CreatedBy
-			- ModifiedBy
-		- Taxonomy
+* HTML Content Mapping Provider
+* Custom mapping provider pre/post-transformation with order
+* Don't assume that the source is always Microsoft SharePoint
+	* Add another level of abstraction for generic data sources
+	* We cannot use PnPContext for SourceContext, we need to support on-prem and other sources
+	* Source:
+		* Metadata (dictionary)
+		* RawContent (string -> GetStreamAsync)
+		* Components/Parts (IEnumerable<{ id, Properties: Dictionary, GetStreamAsync }>)
+		* Users
+			* CreatedBy
+			* ModifiedBy
+		* Taxonomy
 * PnP.Core.Modernization => PnP.Core.Transformation
-- Internal multiple transformators, outside just one
+* Internal multiple transformators, outside just one
 - JSON configuration file for PowerShell
 - PnP Core pre-requirements to check
 
@@ -89,3 +89,4 @@ TODO:
 - Replace all explicit strings with resource strings
 - state or status?
 - Consider creating custom Exception types
+- Unified logging utility, to log data with TransformationId, Source/Target coordinates, etc.
