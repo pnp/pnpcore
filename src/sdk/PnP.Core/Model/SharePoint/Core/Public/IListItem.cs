@@ -95,7 +95,7 @@ namespace PnP.Core.Model.SharePoint
         /// Role assignments of the list item
         /// </summary>
         public IRoleAssignmentCollection RoleAssignments { get; }
-
+        
         /// <summary>
         /// A special property used to add an asterisk to a $select statement
         /// </summary>
@@ -665,6 +665,18 @@ namespace PnP.Core.Model.SharePoint
         /// <param name="roleDefinition">Role definition to remove</param>
         /// <returns></returns>
         public Task RemoveRoleDefinitionBatchAsync(Batch batch, int principalId, IRoleDefinition roleDefinition);
+        #endregion
+
+        #region Comments
+        /// <summary>
+        /// Get list item comments
+        /// </summary>
+        public Task<ICommentCollection> GetCommentsAsync();
+
+        /// <summary>
+        /// Get list item comments
+        /// </summary>
+        public ICommentCollection GetComments();
         #endregion
 
         #endregion

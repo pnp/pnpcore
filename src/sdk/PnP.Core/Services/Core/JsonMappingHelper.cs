@@ -264,7 +264,7 @@ namespace PnP.Core.Services
                         else // Simple property mapping
                         {
                             // Keep the id value aside when seeing it for later usage
-                            if (string.IsNullOrEmpty(idFieldValue) && property.Name.Equals(entity.SharePointKeyField.Name))
+                            if (string.IsNullOrEmpty(idFieldValue) && property.Name.Equals(entity.SharePointKeyField.Name, StringComparison.InvariantCultureIgnoreCase))
                             {
                                 idFieldValue = GetJsonPropertyValue(property).ToString();
                             }
@@ -1173,7 +1173,7 @@ namespace PnP.Core.Services
             if (apiResponse.ApiCall.Type == ApiType.SPORest)
             {
                 // Changed to case insensitive because when loading data via DataStream, the ID field comes back not as "Id", but as "ID"
-                entityField = entity.Fields.FirstOrDefault(p => p.SharePointName == property.Name);
+                entityField = entity.Fields.FirstOrDefault(p => !string.IsNullOrEmpty(p.SharePointName) && p.SharePointName.Equals(property.Name, StringComparison.InvariantCultureIgnoreCase));
             }
             else if (apiResponse.ApiCall.Type == ApiType.Graph || apiResponse.ApiCall.Type == ApiType.GraphBeta)
             {

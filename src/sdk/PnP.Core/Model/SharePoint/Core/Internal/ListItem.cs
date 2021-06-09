@@ -224,6 +224,9 @@ namespace PnP.Core.Model.SharePoint
 
         public IRoleAssignmentCollection RoleAssignments { get => GetModelCollectionValue<IRoleAssignmentCollection>(); }
 
+        // Not in public interface as Comments is not an expandable property in REST
+        public ICommentCollection Comments { get => GetModelCollectionValue<ICommentCollection>(); }
+
         [SharePointProperty("*")]
         public object All { get => null; }
 
@@ -1226,6 +1229,51 @@ namespace PnP.Core.Model.SharePoint
             return GetChangesAsync(query).GetAwaiter().GetResult();
         }
 
+        #endregion
+
+        #region Get Comments
+        public ICommentCollection GetComments()
+        {
+            return GetCommentsAsync().GetAwaiter().GetResult();
+        }
+
+        public async Task<ICommentCollection> GetCommentsAsync()
+        {
+            var apiCall = GetApiCall(this);
+
+            // Since Get methods return a disconnected set of data and we've just loaded data into the 
+            // not exposed Comments property we're replicating this ListItem and return the replicated
+            // comments collection
+            IDataModelParent replicatedParent = null;
+
+            // Create a replicated parent
+            if (this.Parent != null)
+            {
+                // Replicate the parent object in order to keep original collection as is
+                replicatedParent = EntityManager.ReplicateParentHierarchy(this.Parent, this.PnPContext);
+            }
+            // Create a new object with a replicated parent
+            var newDataModel = (BaseDataModel<IListItem>)EntityManager.GetEntityConcreteInstance(this.GetType(), replicatedParent, this.PnPContext);
+
+            // Replicate metadata and key between the objects
+            EntityManager.ReplicateKeyAndMetadata(this, newDataModel);
+
+            await newDataModel.RequestAsync(apiCall, HttpMethod.Get).ConfigureAwait(false);
+
+            return (newDataModel as ListItem).Comments;
+        }
+
+        private static ApiCall GetApiCall<TModel>(IDataModel<TModel> listItem)
+        {
+            string itemApi = null;
+            if (listItem is IDataModelParent && listItem.Parent is IListItemCollection)
+            {
+                itemApi = "_api/web/lists/getbyid(guid'{Parent.Id}')/items({Id})";
+            }
+
+            return new ApiCall($"{itemApi}/getcomments", ApiType.SPORest, receivingProperty: nameof(Comments));
+        }
+        
         #endregion
 
         #endregion

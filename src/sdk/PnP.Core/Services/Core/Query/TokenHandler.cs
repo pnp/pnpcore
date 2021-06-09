@@ -204,6 +204,11 @@ namespace PnP.Core.Services
                                         listItem = GetParentDataModel(file as IMetadataExtensible) as Model.SharePoint.IListItem;
                                         list = GetParentDataModel(listItem as IMetadataExtensible) as Model.SharePoint.IList;
                                     }
+                                    else if (pnpObject is Model.SharePoint.IComment comment)
+                                    {
+                                        listItem = GetParentDataModel(comment as IMetadataExtensible) as Model.SharePoint.IListItem;
+                                        list = GetParentDataModel(listItem as IMetadataExtensible) as Model.SharePoint.IList;
+                                    }
                                 }
 
                                 // If we've got the list

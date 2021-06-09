@@ -3315,6 +3315,169 @@ namespace PnP.Core.Test.SharePoint
             }
         }
 
+        [TestMethod]
+        public async Task ListItemCommentsTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var listTitle = TestCommon.GetPnPSdkTestAssetName("ListItemCommentsTest");
+                var list = await context.Web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
+                var item = await list.Items.AddAsync(new Dictionary<string, object> { { "Title", "Comment me" } });
+
+                // get list item comments
+                var comments = await item.GetCommentsAsync();
+                Assert.IsTrue(comments.Length == 0);
+
+                // add comment
+                var comment = await comments.AddAsync("this is great");
+
+                Assert.IsTrue(comment != null);
+                Assert.IsTrue(comment.Id == "1");
+
+                // get comments again
+                var comments2 = item.GetComments();
+                Assert.IsTrue(comments2.Length == 1);
+
+                var firstComment = comments2.AsRequested().First();
+
+                Assert.IsTrue(firstComment.CreatedDate < DateTime.Now);
+                Assert.IsTrue(firstComment.Id == "1");
+                Assert.IsTrue(firstComment.IsLikedByUser == false);
+                Assert.IsTrue(firstComment.IsReply == false);
+                Assert.IsTrue(firstComment.ItemId == 1);
+                Assert.IsTrue(firstComment.LikeCount == 0);
+                Assert.IsTrue(firstComment.ListId == list.Id);
+                Assert.IsTrue(firstComment.ParentId == "0");
+                Assert.IsTrue(firstComment.ReplyCount == 0);
+                Assert.IsTrue(firstComment.Text == "this is great");
+
+                var commentAuthor = firstComment.Author;
+
+                Assert.IsTrue(!string.IsNullOrEmpty(commentAuthor.Mail));
+                Assert.IsTrue(commentAuthor.Expiration == null);
+                Assert.IsTrue(commentAuthor.Id > 0);
+                Assert.IsTrue(commentAuthor.IsActive == true);
+                Assert.IsTrue(commentAuthor.IsExternal == false);
+                Assert.IsTrue(commentAuthor.JobTitle == null);
+                Assert.IsTrue(!string.IsNullOrEmpty(commentAuthor.LoginName));
+                Assert.IsTrue(!string.IsNullOrEmpty(commentAuthor.Name));
+                Assert.IsTrue(commentAuthor.PrincipalType == PrincipalType.User);
+                Assert.IsTrue(commentAuthor.UserPrincipalName == null);
+
+                // Delete comment
+                await firstComment.DeleteAsync();
+
+                // get comments again
+                var comments3 = await item.GetCommentsAsync();
+                Assert.IsTrue(comments3.Length == 0);
+
+                // Cleanup the created list
+                await list.DeleteAsync();
+            }
+        }
+
+        [TestMethod]
+        public async Task ListItemCommentsLikeUnLikeTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var listTitle = TestCommon.GetPnPSdkTestAssetName("ListItemCommentsLikeUnLikeTest");
+                var list = await context.Web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
+                var item = await list.Items.AddAsync(new Dictionary<string, object> { { "Title", "Comment me" } });
+
+                // get list item comments
+                var comments = await item.GetCommentsAsync();
+                Assert.IsTrue(comments.Length == 0);
+
+                // add comment
+                var comment = await comments.AddAsync("this is great");
+
+                Assert.IsTrue(comment != null);
+                Assert.IsTrue(comment.Id == "1");
+
+                // Like the comment
+                await comment.LikeAsync();
+
+                // get comments again
+                var comments2 = item.GetComments();
+                Assert.IsTrue(comments2.Length == 1);
+
+                var firstComment = comments2.AsRequested().First();
+
+                Assert.IsTrue(firstComment.IsLikedByUser == true);
+                Assert.IsTrue(firstComment.Text == "this is great");
+
+                await firstComment.LoadAsync(p => p.LikedBy);
+                Assert.IsTrue(firstComment.LikedBy.Length == 1);
+                var firstLikedByUser = firstComment.LikedBy.AsRequested().First();
+                Assert.IsNotNull(firstLikedByUser.Name);
+                Assert.IsTrue(firstLikedByUser.Id > 0);
+                Assert.IsNotNull(firstLikedByUser.Mail);
+                Assert.IsNotNull(firstLikedByUser.LoginName);
+
+                // unlike the comment
+                await firstComment.UnlikeAsync();
+
+                var comments3 = item.GetComments();
+                Assert.IsTrue(comments3.Length == 1);
+
+                firstComment = comments3.AsRequested().First();
+
+                Assert.IsTrue(firstComment.IsLikedByUser == false);
+                Assert.IsTrue(firstComment.Text == "this is great");
+
+                // Delete comment
+                await firstComment.DeleteAsync();
+
+                // get comments again
+                var comments4 = await item.GetCommentsAsync();
+                Assert.IsTrue(comments4.Length == 0);
+
+                // Cleanup the created list
+                await list.DeleteAsync();
+            }
+        }
+
+        // Updating comments does not seem to work
+        //[TestMethod]
+        //public async Task ListItemCommentUpdateTest()
+        //{
+        //    TestCommon.Instance.Mocking = false;
+        //    using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+        //    {
+        //        var listTitle = TestCommon.GetPnPSdkTestAssetName("ListItemCommentUpdateTest");
+        //        var list = await context.Web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
+        //        var item = await list.Items.AddAsync(new Dictionary<string, object> { { "Title", "Comment me" } });
+
+        //        // get list item comments
+        //        var comments = await item.GetCommentsAsync();
+        //        Assert.IsTrue(comments.Length == 0);
+
+        //        // add comment
+        //        var comment = await comments.AddAsync("this is great");
+
+        //        Assert.IsTrue(comment != null);
+        //        Assert.IsTrue(comment.Id == "1");
+
+        //        // Update the comment
+        //        comment.Text = "this is even better";
+        //        await comment.UpdateAsync();
+
+        //        // get comments again
+        //        var comments2 = item.GetComments();
+        //        Assert.IsTrue(comments2.Length == 1);
+
+        //        var firstComment = comments2.AsRequested().First();
+
+        //        Assert.IsTrue(firstComment.Text == "this is even better");
+
+        //        // Cleanup the created list
+        //        await list.DeleteAsync();
+        //    }
+        //}
+
         //[TestMethod]
         //public async Task FieldTypeReadUrl()
         //{
