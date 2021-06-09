@@ -24,6 +24,8 @@ namespace PnP.Core.Model.SharePoint
 
         public string EnforcedECTs { get => GetValue<string>(); set => SetValue(value); }
 
+        public int EnforcedECTsVersion { get => GetValue<int>(); set => SetValue(value); }
+
         public bool HideNameInNavigation { get => GetValue<bool>(); set => SetValue(value); }
 
         public Guid ID { get => GetValue<Guid>(); set => SetValue(value); }
@@ -31,6 +33,8 @@ namespace PnP.Core.Model.SharePoint
         public string LogoUrl { get => GetValue<string>(); set => SetValue(value); }
 
         public Guid ParentHubSiteId { get => GetValue<Guid>(); set => SetValue(value); }
+
+        public int PermissionsSyncTag { get => GetValue<int>(); set => SetValue(value); }
 
         public bool RequiresJoinApproval { get => GetValue<bool>(); set => SetValue(value); }
 

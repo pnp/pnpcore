@@ -208,6 +208,11 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// To update...
         /// </summary>
+        public bool IsModern { get; set; }
+
+        /// <summary>
+        /// To update...
+        /// </summary>
         public bool NoCrawl { get; set; }
 
         /// <summary>

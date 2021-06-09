@@ -24,6 +24,11 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// To update...
         /// </summary>
+        public bool IsLongHyperlink { get; set; }
+
+        /// <summary>
+        /// To update...
+        /// </summary>
         public int NumberOfLines { get; set; }
 
         /// <summary>

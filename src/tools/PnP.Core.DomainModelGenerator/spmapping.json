@@ -12,6 +12,16 @@
       "schemaNamespace": "Microsoft.SharePoint.Portal",
       "namespace": "PnP.Core.Model.SharePoint",
       "folder": "/Microsoft.SharePoint.Portal"
+    },
+    {
+      "schemaNamespace": "Microsoft.SharePoint.Comments",
+      "namespace": "PnP.Core.Model.SharePoint",
+      "folder": "/Microsoft.SharePoint.Comments"
+    },
+    {
+      "schemaNamespace": "Microsoft.SharePoint.Likes",
+      "namespace": "PnP.Core.Model.SharePoint",
+      "folder": "/Microsoft.SharePoint.Likes"
     }
   ]
 }
