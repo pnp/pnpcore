@@ -191,18 +191,26 @@ namespace PnP.Core.Services
                                 // Try to see if the current object is a list
                                 var list = pnpObject as Model.SharePoint.IList;
 
-                                // If the object is a list item
+                                // If the object is a descendant of a list
                                 if (list == null)
                                 {
-                                    if (pnpObject is Model.SharePoint.IListItem listItem)
+                                    var model = pnpObject;
+                                    if (model is Model.SharePoint.IFileVersion)
+                                    {
+                                        // Should return either an IListItemVersion or an IFile
+                                        model = GetParentDataModel(model) as IMetadataExtensible;
+                                    }
+                                    
+                                    if (model is Model.SharePoint.IFile || model is Model.SharePoint.IListItemVersion)
+                                    {
+                                        // Should return an IListItem
+                                        model = GetParentDataModel(model) as IMetadataExtensible;
+                                    }
+
+                                    if (model is Model.SharePoint.IListItem)
                                     {
                                         // Get the parent list of the current list item
-                                        list = GetParentDataModel(listItem as IMetadataExtensible) as Model.SharePoint.IList;
-                                    }
-                                    else if (pnpObject is Model.SharePoint.IFile file)
-                                    {
-                                        listItem = GetParentDataModel(file as IMetadataExtensible) as Model.SharePoint.IListItem;
-                                        list = GetParentDataModel(listItem as IMetadataExtensible) as Model.SharePoint.IList;
+                                        list = GetParentDataModel(model) as Model.SharePoint.IList;
                                     }
                                 }
 

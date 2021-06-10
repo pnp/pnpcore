@@ -1,0 +1,9 @@
+--batchresponse_cf355030-ade3-4861-b45a-f2003663c45e
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+HTTP/1.1 200 OK
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+
+{"d":{"results":[{"__metadata":{"id":"eab0e2a9-f3a5-4e05-9b73-6dbf28f89869","uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/Lists(guid'2ad544e7-1a9d-4644-ad10-ba275e4190d3')/Items(1)","etag":"\"2\"","type":"SP.Data.ListItemVersionsTest1ListItem"},"Id":1,"ID":1}]}}
+--batchresponse_cf355030-ade3-4861-b45a-f2003663c45e--

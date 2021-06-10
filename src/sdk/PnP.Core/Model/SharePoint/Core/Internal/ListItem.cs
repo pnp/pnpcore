@@ -224,6 +224,8 @@ namespace PnP.Core.Model.SharePoint
 
         public IRoleAssignmentCollection RoleAssignments { get => GetModelCollectionValue<IRoleAssignmentCollection>(); }
 
+        public IListItemVersionCollection Versions { get => GetModelCollectionValue<IListItemVersionCollection>(); }
+
         [SharePointProperty("*")]
         public object All { get => null; }
 
