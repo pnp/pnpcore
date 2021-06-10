@@ -1,6 +1,7 @@
 ﻿using PnP.Core.QueryModel;
 using PnP.Core.Services;
 using System;
+using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace PnP.Core.Model.SharePoint
@@ -15,7 +16,37 @@ namespace PnP.Core.Model.SharePoint
 
         #region Add methods
 
+        public IComment Add(string text)
+        {
+            return AddAsync(text).GetAwaiter().GetResult();
+        }
+
         public async Task<IComment> AddAsync(string text)
+        {
+            return await CreateCommentToAdd(text).AddAsync().ConfigureAwait(false) as Comment;
+        }
+
+        public IComment AddBatch(string text)
+        {
+            return AddBatchAsync(text).GetAwaiter().GetResult();
+        }
+
+        public async Task<IComment> AddBatchAsync(string text)
+        {
+            return await AddBatchAsync(PnPContext.CurrentBatch, text).ConfigureAwait(false);
+        }
+
+        public IComment AddBatch(Batch batch, string text)
+        {
+            return AddBatchAsync(batch, text).GetAwaiter().GetResult();
+        }
+
+        public async Task<IComment> AddBatchAsync(Batch batch, string text)
+        {
+            return await CreateCommentToAdd(text).AddBatchAsync(batch).ConfigureAwait(false) as Comment;
+        }
+
+        private Comment CreateCommentToAdd(string text)
         {
             if (text == null)
             {
@@ -23,12 +54,34 @@ namespace PnP.Core.Model.SharePoint
             }
 
             var newComment = CreateNewAndAdd() as Comment;
-
             newComment.Text = text;
+            return newComment;
+        }
+        #endregion
 
-            return await newComment.AddAsync().ConfigureAwait(false) as Comment;
+        #region DeleteAll method
+
+        public async Task DeleteAllAsync()
+        {
+            var comment = new Comment()
+            {
+                PnPContext = PnPContext,
+                Parent = this
+            };
+            var entity = EntityManager.GetClassInfo(comment.GetType(), comment);
+
+            await comment.RequestAsync(new ApiCall($"{entity.SharePointLinqGet}/deleteall", apiType: ApiType.SPORest) { Commit = true }, HttpMethod.Post).ConfigureAwait(false);
+
+            // remove the comments from the in-memory collection
+            Clear();
+        }
+
+        public void DeleteAll()
+        {
+            DeleteAllAsync().GetAwaiter().GetResult();
         }
 
         #endregion
+
     }
 }

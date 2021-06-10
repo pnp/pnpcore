@@ -207,6 +207,14 @@ namespace PnP.Core.Services
                                     else if (pnpObject is Model.SharePoint.IComment comment)
                                     {
                                         listItem = GetParentDataModel(comment as IMetadataExtensible) as Model.SharePoint.IListItem;
+                                        
+                                        if (listItem == null)
+                                        {
+                                            // comment was a reply to another comment
+                                            var parentComment = GetParentDataModel(comment as IMetadataExtensible) as Model.SharePoint.IComment;
+                                            listItem = GetParentDataModel(parentComment as IMetadataExtensible) as Model.SharePoint.IListItem;
+                                        }
+
                                         list = GetParentDataModel(listItem as IMetadataExtensible) as Model.SharePoint.IList;
                                     }
                                 }

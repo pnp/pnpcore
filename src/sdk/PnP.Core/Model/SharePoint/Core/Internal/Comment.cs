@@ -32,7 +32,21 @@ namespace PnP.Core.Model.SharePoint
                     text = Text
                 }.AsExpando();
                 string body = JsonSerializer.Serialize(addParameters, typeof(ExpandoObject));
-                return new ApiCall(entity.SharePointLinqGet, ApiType.SPORest, body);
+
+                if (Parent != null && Parent.GetType() == typeof(CommentCollection) && Parent.Parent != null && !(Parent.Parent.GetType() == typeof(Comment)))
+                {
+                    // We're adding a root level comment
+                    return new ApiCall(entity.SharePointLinqGet, ApiType.SPORest, body);
+                }
+                else
+                {
+                    // We're adding a reply to an existing comment
+                    Comment parentComment = Parent.Parent as Comment;
+                    string apiRequest = entity.SharePointUri;
+                    apiRequest = apiRequest.Replace("{Parent.Id}", parentComment.ItemId.ToString()).Replace("{Id}", parentComment.Id);
+
+                    return new ApiCall($"{apiRequest}/replies", ApiType.SPORest, body);
+                }
             };
         }
         #endregion

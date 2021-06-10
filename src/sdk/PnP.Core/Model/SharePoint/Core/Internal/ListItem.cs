@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Dynamic;
 using System.Globalization;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Net.Http;
 using System.Text;
 using System.Text.Json;
@@ -1232,14 +1233,14 @@ namespace PnP.Core.Model.SharePoint
         #endregion
 
         #region Get Comments
-        public ICommentCollection GetComments()
+        public ICommentCollection GetComments(params Expression<Func<IComment, object>>[] selectors)
         {
-            return GetCommentsAsync().GetAwaiter().GetResult();
+            return GetCommentsAsync(selectors).GetAwaiter().GetResult();
         }
 
-        public async Task<ICommentCollection> GetCommentsAsync()
+        public async Task<ICommentCollection> GetCommentsAsync(params Expression<Func<IComment, object>>[] selectors)
         {
-            var apiCall = GetApiCall(this);
+            var apiCall = await GetApiCallAsync(this, PnPContext, selectors);
 
             // Since Get methods return a disconnected set of data and we've just loaded data into the 
             // not exposed Comments property we're replicating this ListItem and return the replicated
@@ -1258,12 +1259,14 @@ namespace PnP.Core.Model.SharePoint
             // Replicate metadata and key between the objects
             EntityManager.ReplicateKeyAndMetadata(this, newDataModel);
 
+            //return await BaseDataModelExtensions.BaseGetAsync(this, new ApiCall($"_api/web/getlist('{serverRelativeUrl}')", ApiType.SPORest), selectors).ConfigureAwait(false);
+
             await newDataModel.RequestAsync(apiCall, HttpMethod.Get).ConfigureAwait(false);
 
             return (newDataModel as ListItem).Comments;
         }
 
-        private static ApiCall GetApiCall<TModel>(IDataModel<TModel> listItem)
+        private static async Task<ApiCall> GetApiCallAsync<TModel>(IDataModel<TModel> listItem, PnPContext context, params Expression<Func<IComment, object>>[] selectors)
         {
             string itemApi = null;
             if (listItem is IDataModelParent && listItem.Parent is IListItemCollection)
@@ -1271,7 +1274,22 @@ namespace PnP.Core.Model.SharePoint
                 itemApi = "_api/web/lists/getbyid(guid'{Parent.Id}')/items({Id})";
             }
 
-            return new ApiCall($"{itemApi}/getcomments", ApiType.SPORest, receivingProperty: nameof(Comments));
+            var apiCall = new ApiCall($"{itemApi}/getcomments", ApiType.SPORest, receivingProperty: nameof(Comments));
+            if (selectors != null && selectors.Any())
+            {
+                var tempComment = new Comment()
+                {
+                    PnPContext = context
+                };
+
+                var entityInfo = EntityManager.GetClassInfo(tempComment.GetType(), tempComment, expressions: selectors);
+                var query = await QueryClient.BuildGetAPICallAsync(tempComment, entityInfo, apiCall).ConfigureAwait(false);
+                return new ApiCall(query.ApiCall.Request, ApiType.SPORest, receivingProperty: nameof(Comments));
+            }
+            else
+            {
+                return apiCall;
+            }
         }
         
         #endregion

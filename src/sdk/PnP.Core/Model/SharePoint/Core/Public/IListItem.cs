@@ -1,6 +1,7 @@
 ﻿using PnP.Core.Model.Security;
 using PnP.Core.Services;
 using System;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace PnP.Core.Model.SharePoint
@@ -671,12 +672,14 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// Get list item comments
         /// </summary>
-        public Task<ICommentCollection> GetCommentsAsync();
+        /// <param name="selectors">The expressions declaring the fields to select</param>
+        public Task<ICommentCollection> GetCommentsAsync(params Expression<Func<IComment, object>>[] selectors);
 
         /// <summary>
         /// Get list item comments
         /// </summary>
-        public ICommentCollection GetComments();
+        /// <param name="selectors">The expressions declaring the fields to select</param>
+        public ICommentCollection GetComments(params Expression<Func<IComment, object>>[] selectors);
         #endregion
 
         #endregion
