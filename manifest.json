@@ -2238,7 +2238,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.IListItem.html",
-          "hash": "SqVI1X98MoserJMwF23Hmw=="
+          "hash": "MhG3ZxUOeXB7zldPoctFwQ=="
         }
       },
       "is_incremental": false,
@@ -2251,6 +2251,30 @@
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.IListItemCollection.html",
           "hash": "q4sQTavP/z6rjjLUUD+QGA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.SharePoint.IListItemVersion.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.SharePoint.IListItemVersion.html",
+          "hash": "sg5yjm9I5FrZgjQloNOQ+Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.SharePoint.IListItemVersionCollection.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.SharePoint.IListItemVersionCollection.html",
+          "hash": "vbWJCcfOfTviD8+Ejtkk7g=="
         }
       },
       "is_incremental": false,
@@ -3318,7 +3342,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.html",
-          "hash": "fDZ7G2kHy5u6ZnUJHAZEtQ=="
+          "hash": "bgCbiuMkRLk4ojksrLr1DA=="
         }
       },
       "is_incremental": false,
@@ -4446,7 +4470,7 @@
       "output": {
         ".html": {
           "relative_path": "api/toc.html",
-          "hash": "9pQGcvN7MTZLBOrZYQnZHA=="
+          "hash": "fxl/VUWm+j/QorglXGVP9A=="
         }
       },
       "is_incremental": false,
@@ -5554,7 +5578,7 @@
         "ManagedReferenceDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build",
-          "total_file_count": 368,
+          "total_file_count": 370,
           "skipped_file_count": 0
         },
         "ResourceDocumentProcessor": {

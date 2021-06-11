@@ -18230,6 +18230,19 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IListItem.UpdateOverwriteVersionBatchAsync
   nameWithType: IListItem.UpdateOverwriteVersionBatchAsync
+- uid: PnP.Core.Model.SharePoint.IListItem.Versions
+  name: Versions
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_Versions
+  commentId: P:PnP.Core.Model.SharePoint.IListItem.Versions
+  fullName: PnP.Core.Model.SharePoint.IListItem.Versions
+  nameWithType: IListItem.Versions
+- uid: PnP.Core.Model.SharePoint.IListItem.Versions*
+  name: Versions
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_Versions_
+  commentId: Overload:PnP.Core.Model.SharePoint.IListItem.Versions
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IListItem.Versions
+  nameWithType: IListItem.Versions
 - uid: PnP.Core.Model.SharePoint.IListItemCollection
   name: IListItemCollection
   href: api/PnP.Core.Model.SharePoint.IListItemCollection.html
@@ -18427,6 +18440,154 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IListItemCollection.RecycleByIdBatchAsync
   nameWithType: IListItemCollection.RecycleByIdBatchAsync
+- uid: PnP.Core.Model.SharePoint.IListItemVersion
+  name: IListItemVersion
+  href: api/PnP.Core.Model.SharePoint.IListItemVersion.html
+  commentId: T:PnP.Core.Model.SharePoint.IListItemVersion
+  fullName: PnP.Core.Model.SharePoint.IListItemVersion
+  nameWithType: IListItemVersion
+- uid: PnP.Core.Model.SharePoint.IListItemVersion.All
+  name: All
+  href: api/PnP.Core.Model.SharePoint.IListItemVersion.html#PnP_Core_Model_SharePoint_IListItemVersion_All
+  commentId: P:PnP.Core.Model.SharePoint.IListItemVersion.All
+  fullName: PnP.Core.Model.SharePoint.IListItemVersion.All
+  nameWithType: IListItemVersion.All
+- uid: PnP.Core.Model.SharePoint.IListItemVersion.All*
+  name: All
+  href: api/PnP.Core.Model.SharePoint.IListItemVersion.html#PnP_Core_Model_SharePoint_IListItemVersion_All_
+  commentId: Overload:PnP.Core.Model.SharePoint.IListItemVersion.All
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IListItemVersion.All
+  nameWithType: IListItemVersion.All
+- uid: PnP.Core.Model.SharePoint.IListItemVersion.Created
+  name: Created
+  href: api/PnP.Core.Model.SharePoint.IListItemVersion.html#PnP_Core_Model_SharePoint_IListItemVersion_Created
+  commentId: P:PnP.Core.Model.SharePoint.IListItemVersion.Created
+  fullName: PnP.Core.Model.SharePoint.IListItemVersion.Created
+  nameWithType: IListItemVersion.Created
+- uid: PnP.Core.Model.SharePoint.IListItemVersion.Created*
+  name: Created
+  href: api/PnP.Core.Model.SharePoint.IListItemVersion.html#PnP_Core_Model_SharePoint_IListItemVersion_Created_
+  commentId: Overload:PnP.Core.Model.SharePoint.IListItemVersion.Created
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IListItemVersion.Created
+  nameWithType: IListItemVersion.Created
+- uid: PnP.Core.Model.SharePoint.IListItemVersion.CreatedBy
+  name: CreatedBy
+  href: api/PnP.Core.Model.SharePoint.IListItemVersion.html#PnP_Core_Model_SharePoint_IListItemVersion_CreatedBy
+  commentId: P:PnP.Core.Model.SharePoint.IListItemVersion.CreatedBy
+  fullName: PnP.Core.Model.SharePoint.IListItemVersion.CreatedBy
+  nameWithType: IListItemVersion.CreatedBy
+- uid: PnP.Core.Model.SharePoint.IListItemVersion.CreatedBy*
+  name: CreatedBy
+  href: api/PnP.Core.Model.SharePoint.IListItemVersion.html#PnP_Core_Model_SharePoint_IListItemVersion_CreatedBy_
+  commentId: Overload:PnP.Core.Model.SharePoint.IListItemVersion.CreatedBy
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IListItemVersion.CreatedBy
+  nameWithType: IListItemVersion.CreatedBy
+- uid: PnP.Core.Model.SharePoint.IListItemVersion.Fields
+  name: Fields
+  href: api/PnP.Core.Model.SharePoint.IListItemVersion.html#PnP_Core_Model_SharePoint_IListItemVersion_Fields
+  commentId: P:PnP.Core.Model.SharePoint.IListItemVersion.Fields
+  fullName: PnP.Core.Model.SharePoint.IListItemVersion.Fields
+  nameWithType: IListItemVersion.Fields
+- uid: PnP.Core.Model.SharePoint.IListItemVersion.Fields*
+  name: Fields
+  href: api/PnP.Core.Model.SharePoint.IListItemVersion.html#PnP_Core_Model_SharePoint_IListItemVersion_Fields_
+  commentId: Overload:PnP.Core.Model.SharePoint.IListItemVersion.Fields
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IListItemVersion.Fields
+  nameWithType: IListItemVersion.Fields
+- uid: PnP.Core.Model.SharePoint.IListItemVersion.FileVersion
+  name: FileVersion
+  href: api/PnP.Core.Model.SharePoint.IListItemVersion.html#PnP_Core_Model_SharePoint_IListItemVersion_FileVersion
+  commentId: P:PnP.Core.Model.SharePoint.IListItemVersion.FileVersion
+  fullName: PnP.Core.Model.SharePoint.IListItemVersion.FileVersion
+  nameWithType: IListItemVersion.FileVersion
+- uid: PnP.Core.Model.SharePoint.IListItemVersion.FileVersion*
+  name: FileVersion
+  href: api/PnP.Core.Model.SharePoint.IListItemVersion.html#PnP_Core_Model_SharePoint_IListItemVersion_FileVersion_
+  commentId: Overload:PnP.Core.Model.SharePoint.IListItemVersion.FileVersion
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IListItemVersion.FileVersion
+  nameWithType: IListItemVersion.FileVersion
+- uid: PnP.Core.Model.SharePoint.IListItemVersion.Id
+  name: Id
+  href: api/PnP.Core.Model.SharePoint.IListItemVersion.html#PnP_Core_Model_SharePoint_IListItemVersion_Id
+  commentId: P:PnP.Core.Model.SharePoint.IListItemVersion.Id
+  fullName: PnP.Core.Model.SharePoint.IListItemVersion.Id
+  nameWithType: IListItemVersion.Id
+- uid: PnP.Core.Model.SharePoint.IListItemVersion.Id*
+  name: Id
+  href: api/PnP.Core.Model.SharePoint.IListItemVersion.html#PnP_Core_Model_SharePoint_IListItemVersion_Id_
+  commentId: Overload:PnP.Core.Model.SharePoint.IListItemVersion.Id
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IListItemVersion.Id
+  nameWithType: IListItemVersion.Id
+- uid: PnP.Core.Model.SharePoint.IListItemVersion.IsCurrentVersion
+  name: IsCurrentVersion
+  href: api/PnP.Core.Model.SharePoint.IListItemVersion.html#PnP_Core_Model_SharePoint_IListItemVersion_IsCurrentVersion
+  commentId: P:PnP.Core.Model.SharePoint.IListItemVersion.IsCurrentVersion
+  fullName: PnP.Core.Model.SharePoint.IListItemVersion.IsCurrentVersion
+  nameWithType: IListItemVersion.IsCurrentVersion
+- uid: PnP.Core.Model.SharePoint.IListItemVersion.IsCurrentVersion*
+  name: IsCurrentVersion
+  href: api/PnP.Core.Model.SharePoint.IListItemVersion.html#PnP_Core_Model_SharePoint_IListItemVersion_IsCurrentVersion_
+  commentId: Overload:PnP.Core.Model.SharePoint.IListItemVersion.IsCurrentVersion
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IListItemVersion.IsCurrentVersion
+  nameWithType: IListItemVersion.IsCurrentVersion
+- uid: PnP.Core.Model.SharePoint.IListItemVersion.VersionLabel
+  name: VersionLabel
+  href: api/PnP.Core.Model.SharePoint.IListItemVersion.html#PnP_Core_Model_SharePoint_IListItemVersion_VersionLabel
+  commentId: P:PnP.Core.Model.SharePoint.IListItemVersion.VersionLabel
+  fullName: PnP.Core.Model.SharePoint.IListItemVersion.VersionLabel
+  nameWithType: IListItemVersion.VersionLabel
+- uid: PnP.Core.Model.SharePoint.IListItemVersion.VersionLabel*
+  name: VersionLabel
+  href: api/PnP.Core.Model.SharePoint.IListItemVersion.html#PnP_Core_Model_SharePoint_IListItemVersion_VersionLabel_
+  commentId: Overload:PnP.Core.Model.SharePoint.IListItemVersion.VersionLabel
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IListItemVersion.VersionLabel
+  nameWithType: IListItemVersion.VersionLabel
+- uid: PnP.Core.Model.SharePoint.IListItemVersionCollection
+  name: IListItemVersionCollection
+  href: api/PnP.Core.Model.SharePoint.IListItemVersionCollection.html
+  commentId: T:PnP.Core.Model.SharePoint.IListItemVersionCollection
+  fullName: PnP.Core.Model.SharePoint.IListItemVersionCollection
+  nameWithType: IListItemVersionCollection
+- uid: PnP.Core.Model.SharePoint.IListItemVersionCollection.GetById(System.Int32,Expression{Func{PnP.Core.Model.SharePoint.IListItemVersion,System.Object}}[])
+  name: GetById(Int32, Expression<Func<IListItemVersion, Object>>[])
+  href: api/PnP.Core.Model.SharePoint.IListItemVersionCollection.html#PnP_Core_Model_SharePoint_IListItemVersionCollection_GetById_System_Int32_Expression_Func_PnP_Core_Model_SharePoint_IListItemVersion_System_Object_____
+  commentId: M:PnP.Core.Model.SharePoint.IListItemVersionCollection.GetById(System.Int32,Expression{Func{PnP.Core.Model.SharePoint.IListItemVersion,System.Object}}[])
+  name.vb: GetById(Int32, Expression(Of Func(Of IListItemVersion, Object))())
+  fullName: PnP.Core.Model.SharePoint.IListItemVersionCollection.GetById(System.Int32, Expression<Func<PnP.Core.Model.SharePoint.IListItemVersion, System.Object>>[])
+  fullName.vb: PnP.Core.Model.SharePoint.IListItemVersionCollection.GetById(System.Int32, Expression(Of Func(Of PnP.Core.Model.SharePoint.IListItemVersion, System.Object))())
+  nameWithType: IListItemVersionCollection.GetById(Int32, Expression<Func<IListItemVersion, Object>>[])
+  nameWithType.vb: IListItemVersionCollection.GetById(Int32, Expression(Of Func(Of IListItemVersion, Object))())
+- uid: PnP.Core.Model.SharePoint.IListItemVersionCollection.GetById*
+  name: GetById
+  href: api/PnP.Core.Model.SharePoint.IListItemVersionCollection.html#PnP_Core_Model_SharePoint_IListItemVersionCollection_GetById_
+  commentId: Overload:PnP.Core.Model.SharePoint.IListItemVersionCollection.GetById
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IListItemVersionCollection.GetById
+  nameWithType: IListItemVersionCollection.GetById
+- uid: PnP.Core.Model.SharePoint.IListItemVersionCollection.GetByIdAsync(System.Int32,Expression{Func{PnP.Core.Model.SharePoint.IListItemVersion,System.Object}}[])
+  name: GetByIdAsync(Int32, Expression<Func<IListItemVersion, Object>>[])
+  href: api/PnP.Core.Model.SharePoint.IListItemVersionCollection.html#PnP_Core_Model_SharePoint_IListItemVersionCollection_GetByIdAsync_System_Int32_Expression_Func_PnP_Core_Model_SharePoint_IListItemVersion_System_Object_____
+  commentId: M:PnP.Core.Model.SharePoint.IListItemVersionCollection.GetByIdAsync(System.Int32,Expression{Func{PnP.Core.Model.SharePoint.IListItemVersion,System.Object}}[])
+  name.vb: GetByIdAsync(Int32, Expression(Of Func(Of IListItemVersion, Object))())
+  fullName: PnP.Core.Model.SharePoint.IListItemVersionCollection.GetByIdAsync(System.Int32, Expression<Func<PnP.Core.Model.SharePoint.IListItemVersion, System.Object>>[])
+  fullName.vb: PnP.Core.Model.SharePoint.IListItemVersionCollection.GetByIdAsync(System.Int32, Expression(Of Func(Of PnP.Core.Model.SharePoint.IListItemVersion, System.Object))())
+  nameWithType: IListItemVersionCollection.GetByIdAsync(Int32, Expression<Func<IListItemVersion, Object>>[])
+  nameWithType.vb: IListItemVersionCollection.GetByIdAsync(Int32, Expression(Of Func(Of IListItemVersion, Object))())
+- uid: PnP.Core.Model.SharePoint.IListItemVersionCollection.GetByIdAsync*
+  name: GetByIdAsync
+  href: api/PnP.Core.Model.SharePoint.IListItemVersionCollection.html#PnP_Core_Model_SharePoint_IListItemVersionCollection_GetByIdAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.IListItemVersionCollection.GetByIdAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IListItemVersionCollection.GetByIdAsync
+  nameWithType: IListItemVersionCollection.GetByIdAsync
 - uid: PnP.Core.Model.SharePoint.IPage
   name: IPage
   href: api/PnP.Core.Model.SharePoint.IPage.html
