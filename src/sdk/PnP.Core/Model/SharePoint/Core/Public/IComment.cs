@@ -74,7 +74,7 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// List of users who have liked the comment.
         /// </summary>
-        public ICommentUserEntityCollection LikedBy { get; }
+        public ICommentLikeUserEntityCollection LikedBy { get; }
 
         /// <summary>
         /// Replies to the comment.

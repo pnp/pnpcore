@@ -1,4 +1,4 @@
---batchresponse_a395cba4-54d7-4374-ae31-916f503ee444
+--batchresponse_0d17b006-a42e-47d3-9d86-3a2033d421f2
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
@@ -6,4 +6,4 @@ HTTP/1.1 404 Not Found
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
 {"error":{"code":"-2130575338, Microsoft.SharePoint.SPException","message":{"lang":"en-US","value":"The file /sites/prov-1/SitePages/PNP_SDK_TEST_CustomPageHeaderWithSiteRelativeImageFocalPointsTest.aspx does not exist."}}}
---batchresponse_a395cba4-54d7-4374-ae31-916f503ee444--
+--batchresponse_0d17b006-a42e-47d3-9d86-3a2033d421f2--

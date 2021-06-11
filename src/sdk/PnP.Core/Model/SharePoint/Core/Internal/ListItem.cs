@@ -228,6 +228,8 @@ namespace PnP.Core.Model.SharePoint
         // Not in public interface as Comments is not an expandable property in REST
         public ICommentCollection Comments { get => GetModelCollectionValue<ICommentCollection>(); }
 
+        public ILikedByInformation LikedByInformation { get => GetModelValue<ILikedByInformation>(); }
+
         [SharePointProperty("*")]
         public object All { get => null; }
 
@@ -1232,7 +1234,7 @@ namespace PnP.Core.Model.SharePoint
 
         #endregion
 
-        #region Get Comments
+        #region Comments and liking
         public ICommentCollection GetComments(params Expression<Func<IComment, object>>[] selectors)
         {
             return GetCommentsAsync(selectors).GetAwaiter().GetResult();
@@ -1240,7 +1242,7 @@ namespace PnP.Core.Model.SharePoint
 
         public async Task<ICommentCollection> GetCommentsAsync(params Expression<Func<IComment, object>>[] selectors)
         {
-            var apiCall = await GetApiCallAsync(this, PnPContext, selectors);
+            var apiCall = await BuildGetCommentsApiCallAsync(this, PnPContext, selectors).ConfigureAwait(false);
 
             // Since Get methods return a disconnected set of data and we've just loaded data into the 
             // not exposed Comments property we're replicating this ListItem and return the replicated
@@ -1248,35 +1250,39 @@ namespace PnP.Core.Model.SharePoint
             IDataModelParent replicatedParent = null;
 
             // Create a replicated parent
-            if (this.Parent != null)
+            if (Parent != null)
             {
                 // Replicate the parent object in order to keep original collection as is
-                replicatedParent = EntityManager.ReplicateParentHierarchy(this.Parent, this.PnPContext);
+                replicatedParent = EntityManager.ReplicateParentHierarchy(Parent, PnPContext);
             }
             // Create a new object with a replicated parent
-            var newDataModel = (BaseDataModel<IListItem>)EntityManager.GetEntityConcreteInstance(this.GetType(), replicatedParent, this.PnPContext);
+            var newDataModel = (BaseDataModel<IListItem>)EntityManager.GetEntityConcreteInstance(GetType(), replicatedParent, PnPContext);
 
             // Replicate metadata and key between the objects
             EntityManager.ReplicateKeyAndMetadata(this, newDataModel);
 
-            //return await BaseDataModelExtensions.BaseGetAsync(this, new ApiCall($"_api/web/getlist('{serverRelativeUrl}')", ApiType.SPORest), selectors).ConfigureAwait(false);
-
+            // Load the comments on the replicated model
             await newDataModel.RequestAsync(apiCall, HttpMethod.Get).ConfigureAwait(false);
 
             return (newDataModel as ListItem).Comments;
         }
 
-        private static async Task<ApiCall> GetApiCallAsync<TModel>(IDataModel<TModel> listItem, PnPContext context, params Expression<Func<IComment, object>>[] selectors)
+        private static async Task<ApiCall> BuildGetCommentsApiCallAsync<TModel>(IDataModel<TModel> listItem, PnPContext context, params Expression<Func<IComment, object>>[] selectors)
         {
             string itemApi = null;
-            if (listItem is IDataModelParent && listItem.Parent is IListItemCollection)
+            if (listItem.Parent is IListItemCollection)
             {
                 itemApi = "_api/web/lists/getbyid(guid'{Parent.Id}')/items({Id})";
+            }
+            else if (listItem.Parent is IFile)
+            {
+                itemApi = "_api/web/lists(guid'{List.Id}')/getitembyid({Id})";
             }
 
             var apiCall = new ApiCall($"{itemApi}/getcomments", ApiType.SPORest, receivingProperty: nameof(Comments));
             if (selectors != null && selectors.Any())
             {
+                // Use the query client to translate the seletors into the needed query string
                 var tempComment = new Comment()
                 {
                     PnPContext = context
@@ -1291,7 +1297,41 @@ namespace PnP.Core.Model.SharePoint
                 return apiCall;
             }
         }
-        
+
+        public async Task LikeAsync()
+        {
+            await LikeUnlike(true).ConfigureAwait(false);
+        }
+
+        public void Like()
+        {
+            LikeAsync().GetAwaiter().GetResult();
+        }
+
+        public async Task UnlikeAsync()
+        {
+            await LikeUnlike(false).ConfigureAwait(false);
+        }
+
+        public void Unlike()
+        {
+            UnlikeAsync().GetAwaiter().GetResult();
+        }
+
+        private async Task LikeUnlike(bool like)
+        {
+            var baseApiCall = $"_api/web/lists(guid'{{List.Id}}')/getitembyid({{Id}})";
+
+            if (like)
+            {
+                await RequestAsync(new ApiCall($"{baseApiCall}/like", ApiType.SPORest), HttpMethod.Post).ConfigureAwait(false);
+            }
+            else
+            {
+                await RequestAsync(new ApiCall($"{baseApiCall}/unlike", ApiType.SPORest), HttpMethod.Post).ConfigureAwait(false);
+            }
+        }
+
         #endregion
 
         #endregion

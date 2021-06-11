@@ -1,0 +1,9 @@
+--batchresponse_b296badf-e547-4e80-a9af-dc1506241ee4
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+HTTP/1.1 200 OK
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+
+{"d":{"Like":null}}
+--batchresponse_b296badf-e547-4e80-a9af-dc1506241ee4--

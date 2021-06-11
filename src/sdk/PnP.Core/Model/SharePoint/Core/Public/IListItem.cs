@@ -96,7 +96,12 @@ namespace PnP.Core.Model.SharePoint
         /// Role assignments of the list item
         /// </summary>
         public IRoleAssignmentCollection RoleAssignments { get; }
-        
+
+        /// <summary>
+        /// Information about the likes on this list item
+        /// </summary>
+        public ILikedByInformation LikedByInformation { get; }
+
         /// <summary>
         /// A special property used to add an asterisk to a $select statement
         /// </summary>
@@ -668,7 +673,7 @@ namespace PnP.Core.Model.SharePoint
         public Task RemoveRoleDefinitionBatchAsync(Batch batch, int principalId, IRoleDefinition roleDefinition);
         #endregion
 
-        #region Comments
+        #region Comments and liking
         /// <summary>
         /// Get list item comments
         /// </summary>

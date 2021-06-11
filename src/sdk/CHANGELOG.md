@@ -6,6 +6,15 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
+## [Unreleased]
+
+### Added
+
+- Support for liking/unliking pages + adding/deleting comments and comment replies + like/unlike these comments on pages [jansenbe - Bert Jansen]
+- Support for adding/deleting comments and comment replies + like/unlike these comments on list items [jansenbe - Bert Jansen]
+
+### Changed
+
 ## [1.2.0]
 
 ### Added

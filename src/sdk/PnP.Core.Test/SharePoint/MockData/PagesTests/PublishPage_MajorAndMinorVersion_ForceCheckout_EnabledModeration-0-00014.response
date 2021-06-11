@@ -1,9 +1,9 @@
---batchresponse_bb13b2fe-b976-4373-9f39-a51915f8c269
+--batchresponse_f94cd016-3043-4527-a60d-4669ef660e91
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{"d":{"results":[]}}
---batchresponse_bb13b2fe-b976-4373-9f39-a51915f8c269--
+{"d":{"CheckIn":null}}
+--batchresponse_f94cd016-3043-4527-a60d-4669ef660e91--

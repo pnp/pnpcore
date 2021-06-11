@@ -2294,7 +2294,7 @@ namespace PnP.Core.Test.SharePoint
 
         #endregion
 
-        #region Page comments handling
+        #region Page likes and comments handling
 
         [TestMethod]
         public async Task DisableEnablePageComments()
@@ -2330,6 +2330,94 @@ namespace PnP.Core.Test.SharePoint
             }
         }
 
+        [TestMethod]
+        public async Task LikeUnLikePage()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var newPage = await context.Web.NewPageAsync();
+                string pageName = TestCommon.GetPnPSdkTestAssetName("LikeUnLikePage.aspx");
+
+                // Save the page
+                await newPage.SaveAsync(pageName);
+
+                // Publish the page, required before it can be liked
+                newPage.Publish();
+
+                // Like the page
+                newPage.Like();
+
+                // Get a list of users who liked this page
+                var pageLikeInformation = newPage.GetLikedByInformation();
+
+                Assert.IsTrue(pageLikeInformation != null);
+                Assert.IsTrue(pageLikeInformation.IsLikedByUser == true);
+                Assert.IsTrue(pageLikeInformation.LikeCount == "1");
+                Assert.IsTrue(pageLikeInformation.LikedBy.Length == 1);
+
+                var firstUserThatLikedThePage = pageLikeInformation.LikedBy.AsRequested().First();
+
+                Assert.IsTrue(firstUserThatLikedThePage.Id > 0);
+                Assert.IsTrue(!string.IsNullOrEmpty(firstUserThatLikedThePage.LoginName));
+                Assert.IsTrue(!string.IsNullOrEmpty(firstUserThatLikedThePage.Mail));
+                Assert.IsTrue(!string.IsNullOrEmpty(firstUserThatLikedThePage.Name));
+                Assert.IsTrue(firstUserThatLikedThePage.CreationDate < DateTime.Now);
+
+                // Unlike the page
+                newPage.Unlike();
+
+                // Get a list of users who liked this page
+                pageLikeInformation = newPage.GetLikedByInformation();
+
+                Assert.IsTrue(pageLikeInformation != null);
+                Assert.IsTrue(pageLikeInformation.IsLikedByUser == false);
+                Assert.IsTrue(pageLikeInformation.LikeCount == "0");
+                Assert.IsTrue(pageLikeInformation.LikedBy.Length == 0);
+
+                // Delete the page
+                await newPage.DeleteAsync();
+            }
+        }
+
+        [TestMethod]
+        public async Task PageCommentingTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var newPage = await context.Web.NewPageAsync();
+                string pageName = TestCommon.GetPnPSdkTestAssetName("PageCommentingTest.aspx");
+
+                // Save the page
+                await newPage.SaveAsync(pageName);
+
+                // Publish the page, required before it can be liked
+                newPage.Publish();
+
+                // Get Page comments                
+                var comments = newPage.GetComments();
+                Assert.IsTrue(comments.Length == 0);
+
+                // Add a new comment
+                var addedComment = comments.Add("This is great");
+
+                // Like the added comment
+                addedComment.Like();
+
+                // Add a reply
+                var addedReply = addedComment.Replies.Add("this is a reply");
+
+                // Like the reply
+                addedReply.Like();
+
+                comments = newPage.GetComments();
+                Assert.IsTrue(comments.Length == 1);
+
+                // Delete the page
+                await newPage.DeleteAsync();
+            }
+        }
         #endregion
 
         #region Other page types: Repost page

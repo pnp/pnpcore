@@ -198,6 +198,20 @@ namespace PnP.Core.Services
                                     {
                                         // Get the parent list of the current list item
                                         list = GetParentDataModel(listItem as IMetadataExtensible) as Model.SharePoint.IList;
+
+                                        // Option A: the file has the ListId property loaded
+                                        if (list == null && GetParentDataModel(listItem as IMetadataExtensible) is Model.SharePoint.IFile file && file.IsPropertyAvailable(p => p.ListId))
+                                        {
+                                            result = result.Replace(match.Value, file.ListId.ToString());
+                                            break;
+                                        }
+
+                                        // Option B: the IListItem has a property that indicates the used list
+                                        if (list == null && (listItem as IMetadataExtensible).Metadata.ContainsKey(PnPConstants.MetaDataListId))
+                                        {
+                                            result = result.Replace(match.Value, (listItem as IMetadataExtensible).Metadata[PnPConstants.MetaDataListId]);
+                                            break;
+                                        }
                                     }
                                     else if (pnpObject is Model.SharePoint.IFile file)
                                     {
@@ -207,12 +221,19 @@ namespace PnP.Core.Services
                                     else if (pnpObject is Model.SharePoint.IComment comment)
                                     {
                                         listItem = GetParentDataModel(comment as IMetadataExtensible) as Model.SharePoint.IListItem;
-                                        
+
                                         if (listItem == null)
                                         {
                                             // comment was a reply to another comment
                                             var parentComment = GetParentDataModel(comment as IMetadataExtensible) as Model.SharePoint.IComment;
                                             listItem = GetParentDataModel(parentComment as IMetadataExtensible) as Model.SharePoint.IListItem;
+                                        }
+
+                                        // the IListItem has a property that indicates the used list
+                                        if (listItem != null && (listItem as IMetadataExtensible).Metadata.ContainsKey(PnPConstants.MetaDataListId))
+                                        {
+                                            result = result.Replace(match.Value, (listItem as IMetadataExtensible).Metadata[PnPConstants.MetaDataListId]);
+                                            break;
                                         }
 
                                         list = GetParentDataModel(listItem as IMetadataExtensible) as Model.SharePoint.IList;

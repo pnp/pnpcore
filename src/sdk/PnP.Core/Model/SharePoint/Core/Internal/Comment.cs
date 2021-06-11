@@ -41,11 +41,7 @@ namespace PnP.Core.Model.SharePoint
                 else
                 {
                     // We're adding a reply to an existing comment
-                    Comment parentComment = Parent.Parent as Comment;
-                    string apiRequest = entity.SharePointUri;
-                    apiRequest = apiRequest.Replace("{Parent.Id}", parentComment.ItemId.ToString()).Replace("{Id}", parentComment.Id);
-
-                    return new ApiCall($"{apiRequest}/replies", ApiType.SPORest, body);
+                    return new ApiCall($"{BuildBaseApiRequestForReply(entity)}/replies", ApiType.SPORest, body);
                 }
             };
         }
@@ -77,7 +73,7 @@ namespace PnP.Core.Model.SharePoint
 
         public ISharePointSharingPrincipal Author { get => GetModelValue<ISharePointSharingPrincipal>(); }
 
-        public ICommentUserEntityCollection LikedBy { get => GetModelCollectionValue<ICommentUserEntityCollection>(); }
+        public ICommentLikeUserEntityCollection LikedBy { get => GetModelCollectionValue<ICommentLikeUserEntityCollection>(); }
 
         public ICommentCollection Replies { get => GetModelCollectionValue<ICommentCollection>(); }
 
@@ -94,7 +90,16 @@ namespace PnP.Core.Model.SharePoint
         {
             var entity = EntityManager.GetClassInfo(GetType(), this);
 
-            await RequestAsync(new ApiCall($"{entity.SharePointUri}/like", apiType: ApiType.SPORest), HttpMethod.Post).ConfigureAwait(false);
+            if (Parent != null && Parent.GetType() == typeof(CommentCollection) && Parent.Parent != null && !(Parent.Parent.GetType() == typeof(Comment)))
+            {
+                // We're liking a root level comment
+                await RequestAsync(new ApiCall($"{entity.SharePointUri}/like", apiType: ApiType.SPORest), HttpMethod.Post).ConfigureAwait(false);
+            }
+            else
+            {
+                // We're liking a reply
+                await RequestAsync(new ApiCall($"{BuildBaseApiRequestForLikeUnLike(entity)}/like", apiType: ApiType.SPORest), HttpMethod.Post).ConfigureAwait(false);
+            }            
         }
 
         public void Like()
@@ -106,7 +111,16 @@ namespace PnP.Core.Model.SharePoint
         {
             var entity = EntityManager.GetClassInfo(GetType(), this);
 
-            await RequestAsync(new ApiCall($"{entity.SharePointUri}/unlike", apiType: ApiType.SPORest), HttpMethod.Post).ConfigureAwait(false);
+            if (Parent != null && Parent.GetType() == typeof(CommentCollection) && Parent.Parent != null && !(Parent.Parent.GetType() == typeof(Comment)))
+            {
+                // We're liking a root level comment
+                await RequestAsync(new ApiCall($"{entity.SharePointUri}/unlike", apiType: ApiType.SPORest), HttpMethod.Post).ConfigureAwait(false);
+            }
+            else
+            {
+                // We're liking a reply
+                await RequestAsync(new ApiCall($"{BuildBaseApiRequestForLikeUnLike(entity)}/unlike", apiType: ApiType.SPORest), HttpMethod.Post).ConfigureAwait(false);
+            }
         }
 
         public void Unlike()
@@ -115,6 +129,21 @@ namespace PnP.Core.Model.SharePoint
         }
         #endregion
 
+        private string BuildBaseApiRequestForReply(EntityInfo entity)
+        {
+            Comment parentComment = Parent.Parent as Comment;
+            string apiRequest = entity.SharePointUri;
+            apiRequest = apiRequest.Replace("{Parent.Id}", parentComment.ItemId.ToString()).Replace("{Id}", parentComment.Id);
+            return apiRequest;
+        }
+
+        private string BuildBaseApiRequestForLikeUnLike(EntityInfo entity)
+        {
+            Comment parentComment = Parent.Parent as Comment;
+            string apiRequest = entity.SharePointUri;
+            apiRequest = apiRequest.Replace("{Parent.Id}", parentComment.ItemId.ToString()).Replace("{Id}", Id);
+            return apiRequest;
+        }
         #endregion
     }
 }
