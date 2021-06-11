@@ -29,6 +29,7 @@ namespace PnP.Core.Transformation.SharePoint.Model
         WebPart_Custom = 28,
         WebPart_2010_TwoColumnsLeft = 29,
         PublishingPage_AutoDetect = 40,
-        PublishingPage_AutoDetectWithVerticalColumn = 41
+        PublishingPage_AutoDetectWithVerticalColumn = 41,
+        Unknown = 1024,
     }
 }

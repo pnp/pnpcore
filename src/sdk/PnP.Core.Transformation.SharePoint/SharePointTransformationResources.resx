@@ -117,11 +117,26 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Error_AnalysingNoWebPartsFound" xml:space="preserve">
+    <value>No web parts were found on page '{0}'</value>
+  </data>
   <data name="Error_BasicASPXPageCannotTransform" xml:space="preserve">
     <value>Source page '{0}' is a basic ASPX page ... can't currently transform that one, sorry!</value>
   </data>
   <data name="Error_BlogPageTransformationHasToBeCrossSite" xml:space="preserve">
     <value>Blog pages cannot be transformed in-place, their target site collection must be a different one.</value>
+  </data>
+  <data name="Error_CallingWebServicesToExtractWebPartsFromPage" xml:space="preserve">
+    <value>Error calling Web Services to Extract Web Parts from page '{0}'</value>
+  </data>
+  <data name="Error_InvalidOrMissingBlogContent" xml:space="preserve">
+    <value>Body contents was set to null, this is an invalid and empty blog page: '{0}'</value>
+  </data>
+  <data name="Error_InvalidOrMissingWikiContent" xml:space="preserve">
+    <value>WikiField contents was set to null, this is an invalid and empty wiki page: '{0}'</value>
+  </data>
+  <data name="Error_InvalidSourceContext" xml:space="preserve">
+    <value>Invalid source context for exporting content</value>
   </data>
   <data name="Error_MissiningSharePointInputItem" xml:space="preserve">
     <value>The SharePoint input item is missing</value>
@@ -141,20 +156,32 @@
   <data name="Error_WebPartMappingSchemaValidation" xml:space="preserve">
     <value>Provided custom web part mapping file is invalid: {0}</value>
   </data>
+  <data name="Error_WebPartXmlNotExported" xml:space="preserve">
+    <value>XML definition for web part '{0}' from page '{1}' was not exportable. Exception: {2}.</value>
+  </data>
+  <data name="Info_CallingWebServicesToExtractWebPartsFromPage" xml:space="preserve">
+    <value>Calling Web Services to Extract Web Parts from page '{0}'</value>
+  </data>
   <data name="Info_ContentTransformFoundSourceWebParts" xml:space="preserve">
     <value>Source page '{0}' contains web part '{1}' of type '{2}'</value>
   </data>
   <data name="Info_NoWebPartsFound" xml:space="preserve">
     <value>No web parts were found on page '{0}'</value>
   </data>
+  <data name="Info_PageAnalysisComplete" xml:space="preserve">
+    <value>Page analysis completed for page '{0}'</value>
+  </data>
   <data name="Info_PageLivesOutsideOfALibrary" xml:space="preserve">
     <value>Page '{0}' is loaded from outside a library</value>
   </data>
+  <data name="Info_PageValidationChecksComplete" xml:space="preserve">
+    <value>Validation checks completed for page '{0}'</value>
+  </data>
+  <data name="Info_RetreivingExportWebPartXmlWorkaround" xml:space="preserve">
+    <value>Retrieving Web Part '{0}' using Workaround from page '{1}'</value>
+  </data>
   <data name="Info_TransformationMode" xml:space="preserve">
     <value>Transformation of page '{0}' of type '{1}'</value>
-  </data>
-  <data name="Info_ValidationChecksComplete" xml:space="preserve">
-    <value>Validation checks completed</value>
   </data>
   <data name="Warning_TableCouldNotBeNormalized" xml:space="preserve">
     <value>Table could not be normalized and will be taken over as is</value>

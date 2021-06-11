@@ -61,6 +61,15 @@ namespace PnP.Core.Transformation.SharePoint {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to No web parts were found on page &apos;{0}&apos;.
+        /// </summary>
+        internal static string Error_AnalysingNoWebPartsFound {
+            get {
+                return ResourceManager.GetString("Error_AnalysingNoWebPartsFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Source page &apos;{0}&apos; is a basic ASPX page ... can&apos;t currently transform that one, sorry!.
         /// </summary>
         internal static string Error_BasicASPXPageCannotTransform {
@@ -75,6 +84,42 @@ namespace PnP.Core.Transformation.SharePoint {
         internal static string Error_BlogPageTransformationHasToBeCrossSite {
             get {
                 return ResourceManager.GetString("Error_BlogPageTransformationHasToBeCrossSite", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error calling Web Services to Extract Web Parts from page &apos;{0}&apos;.
+        /// </summary>
+        internal static string Error_CallingWebServicesToExtractWebPartsFromPage {
+            get {
+                return ResourceManager.GetString("Error_CallingWebServicesToExtractWebPartsFromPage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Body contents was set to null, this is an invalid and empty blog page: &apos;{0}&apos;.
+        /// </summary>
+        internal static string Error_InvalidOrMissingBlogContent {
+            get {
+                return ResourceManager.GetString("Error_InvalidOrMissingBlogContent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to WikiField contents was set to null, this is an invalid and empty wiki page: &apos;{0}&apos;.
+        /// </summary>
+        internal static string Error_InvalidOrMissingWikiContent {
+            get {
+                return ResourceManager.GetString("Error_InvalidOrMissingWikiContent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid source context for exporting content.
+        /// </summary>
+        internal static string Error_InvalidSourceContext {
+            get {
+                return ResourceManager.GetString("Error_InvalidSourceContext", resourceCulture);
             }
         }
         
@@ -133,6 +178,24 @@ namespace PnP.Core.Transformation.SharePoint {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to XML definition for web part &apos;{0}&apos; from page &apos;{1}&apos; was not exportable. Exception: {2}..
+        /// </summary>
+        internal static string Error_WebPartXmlNotExported {
+            get {
+                return ResourceManager.GetString("Error_WebPartXmlNotExported", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Calling Web Services to Extract Web Parts from page &apos;{0}&apos;.
+        /// </summary>
+        internal static string Info_CallingWebServicesToExtractWebPartsFromPage {
+            get {
+                return ResourceManager.GetString("Info_CallingWebServicesToExtractWebPartsFromPage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Source page &apos;{0}&apos; contains web part &apos;{1}&apos; of type &apos;{2}&apos;.
         /// </summary>
         internal static string Info_ContentTransformFoundSourceWebParts {
@@ -151,6 +214,15 @@ namespace PnP.Core.Transformation.SharePoint {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Page analysis completed for page &apos;{0}&apos;.
+        /// </summary>
+        internal static string Info_PageAnalysisComplete {
+            get {
+                return ResourceManager.GetString("Info_PageAnalysisComplete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Page &apos;{0}&apos; is loaded from outside a library.
         /// </summary>
         internal static string Info_PageLivesOutsideOfALibrary {
@@ -160,20 +232,29 @@ namespace PnP.Core.Transformation.SharePoint {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Validation checks completed for page &apos;{0}&apos;.
+        /// </summary>
+        internal static string Info_PageValidationChecksComplete {
+            get {
+                return ResourceManager.GetString("Info_PageValidationChecksComplete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Retrieving Web Part &apos;{0}&apos; using Workaround from page &apos;{1}&apos;.
+        /// </summary>
+        internal static string Info_RetreivingExportWebPartXmlWorkaround {
+            get {
+                return ResourceManager.GetString("Info_RetreivingExportWebPartXmlWorkaround", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Transformation of page &apos;{0}&apos; of type &apos;{1}&apos;.
         /// </summary>
         internal static string Info_TransformationMode {
             get {
                 return ResourceManager.GetString("Info_TransformationMode", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Validation checks completed.
-        /// </summary>
-        internal static string Info_ValidationChecksComplete {
-            get {
-                return ResourceManager.GetString("Info_ValidationChecksComplete", resourceCulture);
             }
         }
         

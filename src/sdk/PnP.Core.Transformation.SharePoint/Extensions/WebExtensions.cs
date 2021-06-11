@@ -18,19 +18,24 @@ namespace PnP.Core.Transformation.SharePoint.Extensions
             // TODO: Consider using caching
 
             string resourceName = null;
+            string assemblyName = "core";
             switch (listType)
             {
                 case ListType.Blogs:
                     resourceName = "$Resources:blogpost_Folder";
                     break;
-                case ListType.Pages:
+                case ListType.SitePages:
                     resourceName = "$Resources:pages_Folder";
+                    break;
+                case ListType.PublishingPages:
+                    resourceName = "$Resources:List_Pages_UrlName";
+                    assemblyName = "osrvcore";
                     break;
                 default:
                     break;
             }
 
-            ClientResult<string> result = Microsoft.SharePoint.Client.Utilities.Utility.GetLocalizedString(context, resourceName, "core", lcid);
+            ClientResult<string> result = Microsoft.SharePoint.Client.Utilities.Utility.GetLocalizedString(context, resourceName, assemblyName, lcid);
             context.ExecuteQueryRetry();
             var listName = new Regex(@"['´`]").Replace(result.Value, "");
 
@@ -48,8 +53,12 @@ namespace PnP.Core.Transformation.SharePoint.Extensions
         /// </summary>
         Blogs,
         /// <summary>
+        /// List of site pages
+        /// </summary>
+        SitePages,
+        /// <summary>
         /// List of pages
         /// </summary>
-        Pages,
+        PublishingPages,
     }
 }

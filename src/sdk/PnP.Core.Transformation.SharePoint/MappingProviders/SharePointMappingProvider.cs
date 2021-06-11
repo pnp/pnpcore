@@ -1,10 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Xml;
 using System.Xml.Linq;
 using System.Xml.XPath;
+using AngleSharp.Dom;
+using AngleSharp.Html.Dom;
+using AngleSharp.Html.Parser;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
@@ -27,6 +34,8 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
         private ILogger<SharePointMappingProvider> logger;
         private readonly IOptions<SharePointTransformationOptions> options;
         private readonly IServiceProvider serviceProvider;
+
+        private const string webPartMarkerString = "[[WebPartMarker]]";
 
         /// <summary>
         /// Main constructor for the mapping provider
@@ -79,10 +88,15 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
             // Evaluate the source page type
             sourcePage.PageType = EvaluatePageType(pageFile, pageItem, crossSiteTransformation, crossTenantTransformation);
 
-            logger.LogInformation(SharePointTransformationResources.Info_ValidationChecksComplete);
+            // Retrieve Version and ExactVersion of source and target
+            (sourcePage.SourceVersion, sourcePage.SourceVersionNumber) = sourceContext.GetVersions();
+
+            // Log that we've finished the validation stage
+            logger.LogInformation(string.Format(System.Globalization.CultureInfo.InvariantCulture,
+                    SharePointTransformationResources.Info_PageValidationChecksComplete, pageFile.ServerRelativeUrl));
 
             // Extract the list of Web Parts to process and the reference page layout
-            var (layout, webPartsToProcess) = await AnalyzePageAsync(pageFile).ConfigureAwait(false);
+            var (layout, webPartsToProcess) = await AnalyzePageAsync(pageFile, pageItem, sourcePage).ConfigureAwait(false);
 
             // Start the actual transformation
             var transformationStartDateTime = DateTime.Now;
@@ -93,12 +107,13 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
             // TODO: Let's see if we really need to load tenant global properties or not
             // see line 299 of PageTransformator.cs in PnP Framework
 
-            // Retrieve Version and ExactVersion of source and target
-            (sourcePage.SourceVersion, sourcePage.SourceVersionNumber) = sourceContext.GetVersions();
-
             // Retrieve the parent Folder of the page, if any and the target page name
             string targetPageName = null;
             (sourcePage.Folder, targetPageName) = DeterminePageFolder(sourceContext, sourcePage, pageItem, input.Context.TargetPageUri);
+
+            // Log that we've finished the analysis stage
+            logger.LogInformation(string.Format(System.Globalization.CultureInfo.InvariantCulture,
+                SharePointTransformationResources.Info_PageAnalysisComplete, pageFile.ServerRelativeUrl));
 
             // Transform the web parts
             var webPartMappingProvider = serviceProvider.GetService<IWebPartMappingProvider>();
@@ -199,6 +214,20 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
                     if (fileRefFieldValue.ContainsIgnoringCasing($"/lists/{blogsListName}"))
                     {
                         pageFolder = fileRefFieldValue.Replace($"{sourceContext.Web.ServerRelativeUrl.TrimEnd(new[] { '/' })}/Lists/{blogsListName}", "", StringComparison.InvariantCultureIgnoreCase).Trim();
+                    }
+                    else
+                    {
+                        // Page was living in another list, leave the list name as that will be the folder hosting the modern file in SitePages.
+                        // This convention is used to avoid naming conflicts
+                        pageFolder = fileRefFieldValue.Replace($"{sourceContext.Web.ServerRelativeUrl}", "").Trim();
+                    }
+                }
+                else if (sourcePage.PageType == SourcePageType.PublishingPage)
+                {
+                    var pagesLibraryName = sourceContext.Web.GetLocalizedListName(ListType.PublishingPages, "pages");
+                    if (fileRefFieldValue.ContainsIgnoringCasing($"/{pagesLibraryName}"))
+                    {
+                        pageFolder = fileRefFieldValue.Replace($"{sourceContext.Web.ServerRelativeUrl.TrimEnd(new[] { '/' })}/{pagesLibraryName}", "", StringComparison.InvariantCultureIgnoreCase).Trim();
                     }
                     else
                     {
@@ -330,7 +359,42 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
             }
         }
 
-        private async Task<Tuple<PageLayout, List<WebPartEntity>>> AnalyzePageAsync(File pageFile)
+        /// <summary>
+        /// Analyzes the current page to provide information about web parts and page layout
+        /// </summary>
+        /// <returns>The page layout and the list of web parts</returns>
+        internal async Task<Tuple<PageLayout, List<WebPartEntity>>> AnalyzePageAsync(File pageFile, ListItem pageItem, SourcePageInformation page)
+        {
+            // Prepare the result variables
+            List<WebPartEntity> webparts = null;
+            PageLayout layout = PageLayout.Unknown;
+
+            switch (page.PageType)
+            {
+                case SourcePageType.WebPartPage when page.SourceVersion != SPVersion.SPO:
+                    (layout, webparts) = await AnalyzeWebPartPageOnPremisesAsync(pageFile, page).ConfigureAwait(false);
+                    break;
+                case SourcePageType.WebPartPage:
+                    (layout, webparts) = await AnalyzeWebPartPageAsync(pageFile, page).ConfigureAwait(false);
+                    break;
+                case SourcePageType.WikiPage:
+                    (layout, webparts) = await AnalyzeWikiPageAsync(pageFile, pageItem, page).ConfigureAwait(false);
+                    break;
+                case SourcePageType.BlogPage:
+                    (layout, webparts) = await AnalyzeWikiPageAsync(pageFile, pageItem, page).ConfigureAwait(false);
+                    break;
+                case SourcePageType.PublishingPage when page.SourceVersion != SPVersion.SPO:
+                    (layout, webparts) = await AnalyzePublishingPageAsync(pageFile, page).ConfigureAwait(false);
+                    break;
+                case SourcePageType.PublishingPage:
+                    (layout, webparts) = await AnalyzePublishingPageOnPremisesAsync(pageFile, page).ConfigureAwait(false);
+                    break;
+            }
+
+            return new Tuple<PageLayout, List<WebPartEntity>>(layout, webparts);
+        }
+
+        private async Task<Tuple<PageLayout, List<WebPartEntity>>> AnalyzeWebPartPageAsync(File pageFile, SourcePageInformation page)
         {
             // Prepare the result variable
             List<WebPartEntity> webparts = new List<WebPartEntity>();
@@ -349,16 +413,19 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
             context.Load(pageProperties);
 
             // Load the web parts properties
-            IEnumerable<WebPartDefinition> webParts = context.LoadQuery(
-                limitedWPManager.WebParts.IncludeWithDefaultProperties(
-                    wp => wp.Id, 
-                    wp => wp.ZoneId, 
-                    wp => wp.WebPart.ExportMode, 
-                    wp => wp.WebPart.Title, 
-                    wp => wp.WebPart.ZoneIndex, 
-                    wp => wp.WebPart.IsClosed, 
-                    wp => wp.WebPart.Hidden,
-                    wp => wp.WebPart.Properties));
+            IEnumerable<WebPartDefinition> webParts;
+
+            webParts = context.LoadQuery(
+            limitedWPManager.WebParts.IncludeWithDefaultProperties(
+                wp => wp.Id,
+                wp => wp.ZoneId,
+                wp => wp.WebPart.ExportMode,
+                wp => wp.WebPart.Title,
+                wp => wp.WebPart.ZoneIndex,
+                wp => wp.WebPart.IsClosed,
+                wp => wp.WebPart.Hidden,
+                wp => wp.WebPart.Properties));
+
             await context.ExecuteQueryAsync().ConfigureAwait(false);
 
             // Check page type
@@ -426,7 +493,7 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
                     logger.LogInformation(string.Format(System.Globalization.CultureInfo.InvariantCulture,
                         SharePointTransformationResources.Info_ContentTransformFoundSourceWebParts,
                         pageFile.ServerRelativeUrl,
-                        foundWebPart.WebPartDefinition.WebPart.Title, 
+                        foundWebPart.WebPartDefinition.WebPart.Title,
                         foundWebPart.WebPartType.GetTypeShort()));
 
                     webparts.Add(new WebPartEntity()
@@ -452,12 +519,599 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
             {
                 logger.LogInformation(string.Format(
                     System.Globalization.CultureInfo.InvariantCulture,
-                    SharePointTransformationResources.Info_NoWebPartsFound, 
+                    SharePointTransformationResources.Info_NoWebPartsFound,
                     pageFile.ServerRelativeUrl));
             }
 
+            return new Tuple<PageLayout, List<WebPartEntity>>(layout, webparts);
+        }
+
+        private async Task<Tuple<PageLayout, List<WebPartEntity>>> AnalyzeWebPartPageOnPremisesAsync(File pageFile, SourcePageInformation page)
+        {
+            // Prepare the result variable
+            List<WebPartEntity> webparts = new List<WebPartEntity>();
+
+            // Get a reference to the current source context
+            var context = pageFile.Context;
+
+            // Load web parts on web part page
+            // Note: Web parts placed outside of a web part zone using SPD are not picked up by the web part manager. There's no API that will return those,
+            //       only possible option to add parsing of the raw page aspx file.
+            var limitedWPManager = pageFile.GetLimitedWebPartManager(PersonalizationScope.Shared);
+            context.Load(limitedWPManager);
+
+            // Load page properties
+            var pageProperties = pageFile.Properties;
+            context.Load(pageProperties);
+
+            // Load the web parts properties
+            IEnumerable<WebPartDefinition> webParts;
+
+            webParts = context.LoadQuery(
+            limitedWPManager.WebParts.IncludeWithDefaultProperties(
+                wp => wp.Id,
+                wp => wp.ZoneId,
+                wp => wp.WebPart.ExportMode,
+                wp => wp.WebPart.Title,
+                wp => wp.WebPart.ZoneIndex,
+                wp => wp.WebPart.IsClosed,
+                wp => wp.WebPart.Hidden,
+                wp => wp.WebPart.Properties));
+
+            await context.ExecuteQueryAsync().ConfigureAwait(false);
+
+            // Check page type
+            var layout = GetLayoutFromWebServices(pageFile);
+
+            if (webParts.Any())
+            {
+                List<WebPartPlaceHolder> webPartsToRetrieve = new List<WebPartPlaceHolder>();
+
+                foreach (var foundWebPart in webParts)
+                {
+                    webPartsToRetrieve.Add(new WebPartPlaceHolder()
+                    {
+                        WebPartDefinition = foundWebPart,
+                        WebPartXml = null,
+                        WebPartType = "",
+                    });
+                }
+
+                foreach (var foundWebPart in webPartsToRetrieve)
+                {
+                    // Skip Microsoft.SharePoint.WebPartPages.TitleBarWebPart webpart in TitleBar zone
+                    if (foundWebPart.WebPartDefinition.ZoneId.Equals("TitleBar", StringComparison.InvariantCultureIgnoreCase))
+                    {
+                        if (!options.Value.IncludeTitleBarWebPart)
+                        {
+                            continue;
+                        }
+                    }
+
+                    var webPartXml = ExportWebPartXmlWorkaround(pageFile, foundWebPart.WebPartDefinition.Id.ToString());
+                    foundWebPart.WebPartXmlOnPremises = webPartXml;
+                }
+
+                foreach (var foundWebPart in webPartsToRetrieve)
+                {
+                    Dictionary<string, object> webPartProperties = null;
+
+                    string zoneId = foundWebPart.WebPartDefinition.ZoneId;
+                    webPartProperties = foundWebPart.WebPartDefinition.WebPart.Properties.FieldValues;
+
+                    // TODO: Ask Bert -> isn't this a repetition?
+                    if (foundWebPart.WebPartDefinition.ZoneId.Equals("TitleBar", StringComparison.InvariantCultureIgnoreCase))
+                    {
+                        if (!options.Value.IncludeTitleBarWebPart)
+                        {
+                            continue;
+                        }
+                    }
+
+                    if (string.IsNullOrEmpty(foundWebPart.WebPartXmlOnPremises))
+                    {
+                        // Use different approach to determine type as we can't export the web part XML without indroducing a change
+                        foundWebPart.WebPartType = GetTypeFromProperties(webPartProperties, true);
+                    }
+                    else
+                    {
+                        foundWebPart.WebPartType = GetType(foundWebPart.WebPartXmlOnPremises);
+                    }
+
+                    logger.LogInformation(string.Format(System.Globalization.CultureInfo.InvariantCulture,
+                        SharePointTransformationResources.Info_ContentTransformFoundSourceWebParts,
+                        pageFile.ServerRelativeUrl,
+                        foundWebPart.WebPartDefinition.WebPart.Title,
+                        foundWebPart.WebPartType.GetTypeShort()));
+
+                    webparts.Add(new WebPartEntity()
+                    {
+                        Title = foundWebPart.WebPartDefinition.WebPart.Title,
+                        Type = foundWebPart.WebPartType,
+                        Id = foundWebPart.WebPartDefinition.Id,
+                        ServerControlId = foundWebPart.WebPartDefinition.Id.ToString(),
+                        Row = GetRow(foundWebPart.WebPartDefinition.ZoneId, layout),
+                        Column = GetColumn(foundWebPart.WebPartDefinition.ZoneId, layout),
+                        Order = foundWebPart.WebPartDefinition.WebPart.ZoneIndex,
+                        ZoneId = foundWebPart.WebPartDefinition.ZoneId,
+                        ZoneIndex = (uint)foundWebPart.WebPartDefinition.WebPart.ZoneIndex,
+                        IsClosed = foundWebPart.WebPartDefinition.WebPart.IsClosed,
+                        Hidden = foundWebPart.WebPartDefinition.WebPart.Hidden,
+                        //Properties = ExtractProperties(foundWebPart.WebPartDefinition.WebPart.Properties.FieldValues, 
+                        //    foundWebPart.WebPartType, foundWebPart.WebPartXml == null ? "" : foundWebPart.WebPartXml.Value),
+                    });
+                }
+            }
+            else
+            {
+                logger.LogInformation(string.Format(
+                    System.Globalization.CultureInfo.InvariantCulture,
+                    SharePointTransformationResources.Info_NoWebPartsFound,
+                    pageFile.ServerRelativeUrl));
+            }
 
             return new Tuple<PageLayout, List<WebPartEntity>>(layout, webparts);
+        }
+
+        private async Task<Tuple<PageLayout, List<WebPartEntity>>> AnalyzeWikiPageAsync(File wikiPage, ListItem pageItem, SourcePageInformation page)
+        {
+            List<WebPartEntity> webparts = new List<WebPartEntity>();
+            string pageContents = null;
+
+            if (page.PageType == SourcePageType.BlogPage)
+            {
+                pageContents = pageItem.FieldValues[SharePointConstants.BodyField].ToString();
+                if (string.IsNullOrEmpty(pageContents))
+                {
+                    throw new ApplicationException(string.Format(
+                        System.Globalization.CultureInfo.InvariantCulture,
+                        SharePointTransformationResources.Error_InvalidOrMissingBlogContent,
+                        wikiPage.ServerRelativeUrl));
+                }
+            }
+            else if (page.PageType == SourcePageType.WikiPage)
+            {
+                pageContents = pageItem.FieldValues[SharePointConstants.WikiField].ToString();
+                if (string.IsNullOrEmpty(pageContents))
+                {
+                    throw new ApplicationException(string.Format(
+                        System.Globalization.CultureInfo.InvariantCulture,
+                        SharePointTransformationResources.Error_InvalidOrMissingWikiContent,
+                        wikiPage.ServerRelativeUrl));
+                }
+            }
+
+            HtmlParser parser = new HtmlParser();
+
+            var layout = PageLayout.Wiki_OneColumn;
+
+            if (!string.IsNullOrEmpty(pageContents))
+            {
+                var htmlDoc = parser.ParseDocument(pageContents);
+                layout = GetWikiLayout(htmlDoc);
+
+                List<WebPartPlaceHolder> webPartsToRetrieve = new List<WebPartPlaceHolder>();
+
+                var rows = htmlDoc.All.Where(p => p.LocalName == "tr");
+                int rowCount = 0;
+
+                foreach (var row in rows)
+                {
+                    rowCount++;
+                    var columns = row.Children.Where(p => p.LocalName == "td" && p.Parent == row);
+
+                    int colCount = 0;
+                    foreach (var column in columns)
+                    {
+                        colCount++;
+                        var contentHost = column.Children.Where(p => p.LocalName == "div" && (p.ClassName != null && p.ClassName.Equals("ms-rte-layoutszone-outer", StringComparison.InvariantCultureIgnoreCase))).FirstOrDefault();
+
+                        // Check if this element is nested in another already processed element...this needs to be skipped to avoid content duplication and possible processing errors
+                        if (contentHost != null && contentHost.FirstElementChild != null && !IsNestedLayoutsZoneOuter(contentHost))
+                        {
+                            var content = contentHost.FirstElementChild;
+                            AnalyzeWikiContentBlock(parser, webparts, htmlDoc, webPartsToRetrieve, rowCount, colCount, 0, content);
+                        }
+                    }
+                }
+
+                // Bulk load the needed web part information
+                if (webPartsToRetrieve.Count > 0)
+                {
+                    if (page.SourceVersion == SPVersion.SP2010 || 
+                        page.SourceVersion == SPVersion.SP2013Legacy || 
+                        page.SourceVersion == SPVersion.SP2016Legacy)
+                    {
+                        LoadWebPartsInWikiContentFromOnPremisesServer(webparts, wikiPage, webPartsToRetrieve);
+                    }
+                    else
+                    {
+                        LoadWebPartsInWikiContentFromServer(webparts, wikiPage, webPartsToRetrieve);
+                    }
+                }
+                else
+                {
+                    logger.LogInformation(string.Format(System.Globalization.CultureInfo.InvariantCulture,
+                        SharePointTransformationResources.Error_AnalysingNoWebPartsFound,
+                        wikiPage.ServerRelativeUrl));
+                }
+
+                // Somehow the wiki was not standard formatted, so lets wrap its contents in a text block
+                if (webparts.Count == 0 && !String.IsNullOrEmpty(htmlDoc.Source.Text))
+                {
+                    webparts.Add(CreateWikiTextPart(htmlDoc.Source.Text, 1, 1, 1));
+                }
+            }
+
+            return new Tuple<PageLayout, List<WebPartEntity>>(layout, webparts);
+        }
+
+        private async Task<Tuple<PageLayout, List<WebPartEntity>>> AnalyzePublishingPageAsync(File pageFile, SourcePageInformation page)
+        {
+            // Prepare the result variable
+            List<WebPartEntity> webparts = new List<WebPartEntity>();
+
+            // Get a reference to the current source context
+            var context = pageFile.Context;
+
+            return null;
+        }
+
+        private async Task<Tuple<PageLayout, List<WebPartEntity>>> AnalyzePublishingPageOnPremisesAsync(File pageFile, SourcePageInformation page)
+        {
+            return null;
+        }
+
+        /// <summary>
+        /// Check if this element is nested in another already processed element...this needs to be skipped to avoid content duplication and possible processing errors
+        /// </summary>
+        /// <param name="contentHost">element to check</param>
+        /// <returns>true if embedded in a already processed element</returns>
+        private static bool IsNestedLayoutsZoneOuter(IElement contentHost)
+        {
+            if (contentHost == null)
+            {
+                return false;
+            }
+
+            var elementToInspect = contentHost.ParentElement;
+            if (elementToInspect == null)
+            {
+                return false;
+            }
+
+            while (elementToInspect != null)
+            {
+                if (elementToInspect.LocalName == "div" && (elementToInspect.ClassName != null && elementToInspect.ClassName.Equals("ms-rte-layoutszone-outer", StringComparison.InvariantCultureIgnoreCase)))
+                {
+                    return true;
+                }
+                else
+                {
+                    elementToInspect = elementToInspect.ParentElement;
+                }
+            }
+
+            return false;
+        }
+
+        private static void AnalyzeWikiContentBlock(HtmlParser parser, List<WebPartEntity> webparts, IHtmlDocument htmlDoc, List<WebPartPlaceHolder> webPartsToRetrieve, int rowCount, int colCount, int startOrder, IElement content)
+        {
+            // Drop elements which we anyhow can't transform and/or which are stripped out from RTE
+            CleanHtml(content, htmlDoc);
+
+            StringBuilder textContent = new StringBuilder();
+            int order = startOrder;
+            foreach (var node in content.ChildNodes)
+            {
+                // Do we find a web part inside...
+                if (((node as IHtmlElement) != null) && ContainsWebPart(parser, node as IHtmlElement))
+                {
+                    var extraText = StripWebPart(parser, node as IHtmlElement);
+                    string extraTextAfterWebPart = null;
+                    string extraTextBeforeWebPart = null;
+                    if (!string.IsNullOrEmpty(extraText))
+                    {
+                        // Should be, but checking anyhow
+                        int webPartMarker = extraText.IndexOf(webPartMarkerString);
+                        if (webPartMarker > -1)
+                        {
+                            extraTextBeforeWebPart = extraText.Substring(0, webPartMarker);
+                            extraTextAfterWebPart = extraText.Substring(webPartMarker + webPartMarkerString.Length);
+
+                            // there could have been multiple web parts in a row (we don't support text inbetween them for now)...strip the remaining markers
+                            extraTextBeforeWebPart = extraTextBeforeWebPart.Replace(webPartMarkerString, "");
+                            extraTextAfterWebPart = extraTextAfterWebPart.Replace(webPartMarkerString, "");
+                        }
+                    }
+
+                    if (!string.IsNullOrEmpty(extraTextBeforeWebPart))
+                    {
+                        textContent.AppendLine(extraTextBeforeWebPart);
+                    }
+
+                    // first insert text part (if it was available)
+                    if (!string.IsNullOrEmpty(textContent.ToString()))
+                    {
+                        order++;
+                        webparts.Add(CreateWikiTextPart(textContent.ToString(), rowCount, colCount, order));
+                        textContent.Clear();
+                    }
+
+                    // then process the web part
+                    order++;
+                    Regex regexClientIds = new Regex(@"id=\""div_(?<ControlId>(\w|\-)+)");
+                    if (regexClientIds.IsMatch((node as IHtmlElement).OuterHtml))
+                    {
+                        foreach (Match webPartMatch in regexClientIds.Matches((node as IHtmlElement).OuterHtml))
+                        {
+                            // Store the web part we need, will be retrieved afterwards to optimize performance
+                            string serverSideControlId = webPartMatch.Groups["ControlId"].Value;
+                            var serverSideControlIdToSearchFor = $"g_{serverSideControlId.Replace("-", "_")}";
+                            webPartsToRetrieve.Add(new WebPartPlaceHolder() { ControlId = serverSideControlIdToSearchFor, Id = serverSideControlId, Row = rowCount, Column = colCount, Order = order });
+                        }
+                    }
+
+                    // Process the extra text that was positioned after the web part (if any)
+                    if (!string.IsNullOrEmpty(extraTextAfterWebPart))
+                    {
+                        textContent.AppendLine(extraTextAfterWebPart);
+                    }
+                }
+                else
+                {
+                    if (!string.IsNullOrEmpty(node.TextContent.Trim()) && node.TextContent.Trim() == "\n")
+                    {
+                        // ignore, this one is typically added after a web part
+                    }
+                    else
+                    {
+                        if (node.HasChildNodes)
+                        {
+                            textContent.AppendLine((node as IHtmlElement).OuterHtml);
+                        }
+                        else
+                        {
+                            if (!string.IsNullOrEmpty(node.TextContent.Trim()))
+                            {
+                                textContent.AppendLine(node.TextContent);
+                            }
+                            else
+                            {
+                                if (node.NodeName.Equals("br", StringComparison.InvariantCultureIgnoreCase))
+                                {
+                                    textContent.AppendLine("<BR>");
+                                }
+                                // given that wiki html can contain embedded images and videos while not having child nodes we need include these.
+                                // case: img/iframe tag as "only" element to evaluate (e.g. first element in the contenthost)
+                                else if (node.NodeName.Equals("img", StringComparison.InvariantCultureIgnoreCase) ||
+                                         node.NodeName.Equals("iframe", StringComparison.InvariantCultureIgnoreCase))
+                                {
+                                    textContent.AppendLine((node as IHtmlElement).OuterHtml);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            // there was only one text part
+            if (!string.IsNullOrEmpty(textContent.ToString()))
+            {
+                // insert text part to the web part collection
+                order++;
+                webparts.Add(CreateWikiTextPart(textContent.ToString(), rowCount, colCount, order));
+            }
+        }
+
+        private static void CleanHtml(IElement element, IHtmlDocument document)
+        {
+            foreach (var node in element.QuerySelectorAll("*").ToList())
+            {
+                if (node.ParentElement != null && IsUntransformableBlockElement(node))
+                {
+                    // create new div node and add all current children to it
+                    var div = document.CreateElement("div");
+                    foreach (var child in node.ChildNodes.ToList())
+                    {
+                        div.AppendChild(child);
+                    }
+                    // replace the unsupported node with the new div
+                    node.ParentElement.ReplaceChild(div, node);
+                }
+            }
+        }
+
+        private static bool IsUntransformableBlockElement(IElement element)
+        {
+            var tag = element.TagName.ToLower();
+            if (tag == "article" ||
+                tag == "address" ||
+                tag == "aside" ||
+                tag == "canvas" ||
+                tag == "dd" ||
+                tag == "dl" ||
+                tag == "dt" ||
+                tag == "fieldset" ||
+                tag == "figcaption" ||
+                tag == "figure" ||
+                tag == "footer" ||
+                tag == "form" ||
+                tag == "header" ||
+                //tag == "hr" || // will be replaced at in the html transformator
+                tag == "main" ||
+                tag == "nav" ||
+                tag == "noscript" ||
+                tag == "output" ||
+                tag == "pre" ||
+                tag == "section" ||
+                tag == "tfoot" ||
+                tag == "video" ||
+                tag == "aside")
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// Does the tree of nodes somewhere contain a web part?
+        /// </summary>
+        /// <param name="parser">Html parser</param>
+        /// <param name="element">Html content to analyze</param>
+        /// <returns>True if it contains a web part</returns>
+        private static bool ContainsWebPart(HtmlParser parser, IHtmlElement element)
+        {
+            var doc = parser.ParseDocument(element.OuterHtml);
+            var nodes = doc.All.Where(p => p.LocalName == "div");
+            foreach (var node in nodes)
+            {
+                if (((node as IHtmlElement) != null) && (node as IHtmlElement).ClassList.Contains("ms-rte-wpbox"))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        /// <summary>
+        /// Strips the div holding the web part from the html
+        /// </summary>
+        /// <param name="parser">Html parser</param>
+        /// <param name="element">Html element holding one or more web part divs</param>
+        /// <returns>Cleaned html with a placeholder for the web part div</returns>
+        private static string StripWebPart(HtmlParser parser, IHtmlElement element)
+        {
+            IElement copy = element.Clone(true) as IElement;
+            var doc = parser.ParseDocument(copy.OuterHtml);
+            var nodes = doc.All.Where(p => p.LocalName == "div");
+            if (nodes.Any())
+            {
+                foreach (var node in nodes.ToList())
+                {
+                    if (((node as IHtmlElement) != null) && (node as IHtmlElement).ClassList.Contains("ms-rte-wpbox"))
+                    {
+                        var newElement = doc.CreateTextNode(webPartMarkerString);
+                        node.Parent.ReplaceChild(newElement, node);
+                    }
+                }
+
+                if (doc.DocumentElement.Children[1].FirstElementChild != null &&
+                    doc.DocumentElement.Children[1].FirstElementChild is IHtmlDivElement)
+                {
+                    return doc.DocumentElement.Children[1].FirstElementChild.InnerHtml;
+                }
+                else
+                {
+                    return doc.DocumentElement.Children[1].InnerHtml;
+                }
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// Stores text content as a fake web part
+        /// </summary>
+        /// <param name="wikiTextPartContent">Text to store</param>
+        /// <param name="row">Row of the fake web part</param>
+        /// <param name="col">Column of the fake web part</param>
+        /// <param name="order">Order inside the row/column</param>
+        /// <returns>A web part entity to add to the collection</returns>
+        private static WebPartEntity CreateWikiTextPart(string wikiTextPartContent, int row, int col, int order)
+        {
+            Dictionary<string, string> properties = new Dictionary<string, string>();
+            properties.Add("Text", wikiTextPartContent.Trim().Replace("\r\n", string.Empty));
+
+            return new WebPartEntity()
+            {
+                Title = "WikiText",
+                Type = "SharePointPnP.Modernization.WikiTextPart",
+                Id = Guid.Empty,
+                Row = row,
+                Column = col,
+                Order = order,
+                Properties = properties,
+            };
+        }
+
+        /// <summary>
+        /// Exports Web Part XML via an older workround
+        /// </summary>
+        /// <param name="pageFile">The file of the page</param>
+        /// <param name="webPartGuid">The ID of the web part</param>
+        /// <returns>The XML of the web part</returns>
+        internal string ExportWebPartXmlWorkaround(File pageFile, string webPartGuid)
+        {
+            // Issue hints and Credit: 
+            //      https://blog.mastykarz.nl/export-web-parts-csom/ 
+            //      https://sharepoint.stackexchange.com/questions/30865/missing-export-option-for-sharepoint-2010-webparts
+            //      https://github.com/SharePoint/PnP-Sites-Core/pull/908/files
+
+            var context = pageFile.Context as ClientContext;
+            if (context == null)
+            {
+                throw new ApplicationException(SharePointTransformationResources.Error_InvalidSourceContext);
+            }
+
+            try
+            {
+                logger.LogInformation(string.Format(
+                    System.Globalization.CultureInfo.InvariantCulture,
+                    SharePointTransformationResources.Info_RetreivingExportWebPartXmlWorkaround,
+                    webPartGuid, pageFile.ServerRelativeUrl));
+
+                string webPartXml = string.Empty;
+                string serverRelativeUrl = context.Web.EnsureProperty(w => w.ServerRelativeUrl);
+                var uri = new Uri(context.Site.EnsureProperty(s => s.Url));
+
+                var fullWebUrl = $"{uri.Scheme}://{uri.Host}:{uri.Port}{serverRelativeUrl}";
+                var fullPageUrl = $"{uri.Scheme}://{uri.Host}:{uri.Port}{pageFile.ServerRelativeUrl}";
+
+                if (!fullWebUrl.EndsWith("/"))
+                {
+                    fullWebUrl = fullWebUrl + "/";
+                }
+
+                string webServiceUrl = $"{fullWebUrl}_vti_bin/exportwp.aspx?pageurl={fullPageUrl}&guidstring={webPartGuid}";
+
+                HttpWebRequest request = (HttpWebRequest)WebRequest.Create(webServiceUrl); //hack to force webpart zones to render
+                //request.Credentials = context.Credentials;
+                request.AddAuthenticationData(context);
+                request.Method = "GET";
+
+                var response = request.GetResponse();
+                using (var dataStream = response.GetResponseStream())
+                {
+                    XmlDocument xDoc = new XmlDocument();
+                    xDoc.Load(dataStream);
+
+                    if (xDoc.DocumentElement != null && xDoc.DocumentElement.OuterXml.Length > 0)
+                    {
+                        webPartXml = xDoc.DocumentElement.OuterXml;
+
+                        // Not sure what causes the web parts to switch from singular to multiple
+                        if (xDoc.DocumentElement.LocalName == "webParts")
+                        {
+                            webPartXml = xDoc.DocumentElement.InnerXml;
+                        }
+
+                        return webPartXml;
+                    }
+                }
+            }
+            catch (WebException ex)
+            {
+                logger.LogInformation(string.Format(
+                    System.Globalization.CultureInfo.InvariantCulture,
+                    SharePointTransformationResources.Error_WebPartXmlNotExported,
+                    webPartGuid, pageFile.ServerRelativeUrl, ex.Message));
+            }
+
+            return string.Empty;
         }
 
         /// <summary>
@@ -512,6 +1166,275 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
             }
 
             return PageLayout.WebPart_Custom;
+        }
+
+        /// <summary>
+        /// Analyzes the wiki page to determine which layout was used
+        /// </summary>
+        /// <param name="doc">html object</param>
+        /// <returns>Layout of the wiki page</returns>
+        private static PageLayout GetWikiLayout(IHtmlDocument doc)
+        {
+            string spanValue = "";
+            var spanTags = doc.All.Where(p => p.LocalName == "span" && p.HasAttribute("id"));
+            if (spanTags.Any())
+            {
+                foreach (var span in spanTags)
+                {
+                    if (span.GetAttribute("id").Equals("layoutsdata", StringComparison.InvariantCultureIgnoreCase))
+                    {
+                        spanValue = span.InnerHtml.ToLower();
+
+                        if (spanValue == "false,false,1")
+                        {
+                            return PageLayout.Wiki_OneColumn;
+                        }
+                        else if (spanValue == "false,false,2")
+                        {
+                            var tdTag = doc.All.Where(p => p.LocalName == "td" && p.HasAttribute("style")).FirstOrDefault();
+                            if (tdTag != null)
+                            {
+                                if (tdTag.GetAttribute("style").IndexOf("width:49.95%;", StringComparison.InvariantCultureIgnoreCase) > -1)
+                                {
+                                    return PageLayout.Wiki_TwoColumns;
+                                }
+                                else if (tdTag.GetAttribute("style").IndexOf("width:66.6%;", StringComparison.InvariantCultureIgnoreCase) > -1)
+                                {
+                                    return PageLayout.Wiki_TwoColumnsWithSidebar;
+                                }
+                                else
+                                {
+                                    return PageLayout.Wiki_TwoColumns;
+                                }
+                            }
+                        }
+                        else if (spanValue == "true,false,2")
+                        {
+                            return PageLayout.Wiki_TwoColumnsWithHeader;
+                        }
+                        else if (spanValue == "true,true,2")
+                        {
+                            return PageLayout.Wiki_TwoColumnsWithHeaderAndFooter;
+                        }
+                        else if (spanValue == "false,false,3")
+                        {
+                            return PageLayout.Wiki_ThreeColumns;
+                        }
+                        else if (spanValue == "true,false,3")
+                        {
+                            return PageLayout.Wiki_ThreeColumnsWithHeader;
+                        }
+                        else if (spanValue == "true,true,3")
+                        {
+                            return PageLayout.Wiki_ThreeColumnsWithHeaderAndFooter;
+                        }
+                    }
+                }
+            }
+
+            // Oops, we're still here...let's try to deduct a layout as some pages (e.g. from community template) do not add the proper span value
+            if (spanValue.StartsWith("false,false,") || spanValue.StartsWith("true,true,") || spanValue.StartsWith("true,false,"))
+            {
+                // false,false,&#123;0&#125; case..let's try to count the columns via the TD tag data
+                var tdTags = doc.All.Where(p => p.LocalName == "td" && p.HasAttribute("style"));
+                if (spanValue.StartsWith("false,false,"))
+                {
+                    if (tdTags.Count() == 1)
+                    {
+                        return PageLayout.Wiki_OneColumn;
+                    }
+                    else if (tdTags.Count() == 2)
+                    {
+                        if (tdTags.First().GetAttribute("style").IndexOf("width:49.95%;", StringComparison.InvariantCultureIgnoreCase) > -1)
+                        {
+                            return PageLayout.Wiki_TwoColumns;
+                        }
+                        else if (tdTags.First().GetAttribute("style").IndexOf("width:66.6%;", StringComparison.InvariantCultureIgnoreCase) > -1)
+                        {
+                            return PageLayout.Wiki_TwoColumnsWithSidebar;
+                        }
+                        else
+                        {
+                            return PageLayout.Wiki_TwoColumns;
+                        }
+                    }
+                    else if (tdTags.Count() == 3)
+                    {
+                        return PageLayout.Wiki_ThreeColumns;
+                    }
+                }
+                else if (spanValue.StartsWith("true,true,"))
+                {
+                    if (tdTags.Count() == 2)
+                    {
+                        return PageLayout.Wiki_TwoColumnsWithHeaderAndFooter;
+                    }
+                    else if (tdTags.Count() == 3)
+                    {
+                        return PageLayout.Wiki_ThreeColumnsWithHeaderAndFooter;
+                    }
+                }
+                else if (spanValue.StartsWith("true,false,"))
+                {
+                    if (tdTags.Count() == 2)
+                    {
+                        return PageLayout.Wiki_TwoColumnsWithHeader;
+                    }
+                    else if (tdTags.Count() == 3)
+                    {
+                        return PageLayout.Wiki_ThreeColumnsWithHeader;
+                    }
+                }
+            }
+
+            return PageLayout.Wiki_Custom;
+        }
+
+        /// <summary>
+        /// Gets and parses the layout from the web services URL
+        /// </summary>
+        /// <param name="pageFile">The page file</param>
+        /// <returns></returns>
+        private PageLayout GetLayoutFromWebServices(File pageFile)
+        {
+            var wsPageDocument = ExtractWebPartDocumentViaWebServicesFromPage(pageFile);
+
+            if (!string.IsNullOrEmpty(wsPageDocument.Item1))
+            {
+                //Example fragment from WS
+                //<li>vti_setuppath
+                //<li>SR|1033&#92;STS&#92;doctemp&#92;smartpgs&#92;spstd2.aspx
+                //<li>vti_generator
+
+                var fullDocument = wsPageDocument.Item1;
+
+                if (!string.IsNullOrEmpty(fullDocument))
+                {
+                    if (fullDocument.ContainsIgnoringCasing(@"STS&#92;doctemp&#92;smartpgs&#92;spstd1.aspx"))
+                    {
+                        return PageLayout.WebPart_FullPageVertical;
+                    }
+                    else if (fullDocument.ContainsIgnoringCasing(@"STS&#92;doctemp&#92;smartpgs&#92;spstd2.aspx"))
+                    {
+                        return PageLayout.WebPart_HeaderFooterThreeColumns;
+                    }
+                    else if (fullDocument.ContainsIgnoringCasing(@"STS&#92;doctemp&#92;smartpgs&#92;spstd3.aspx"))
+                    {
+                        return PageLayout.WebPart_HeaderLeftColumnBody;
+                    }
+                    else if (fullDocument.ContainsIgnoringCasing(@"STS&#92;doctemp&#92;smartpgs&#92;spstd4.aspx"))
+                    {
+                        return PageLayout.WebPart_HeaderRightColumnBody;
+                    }
+                    else if (fullDocument.ContainsIgnoringCasing(@"STS&#92;doctemp&#92;smartpgs&#92;spstd5.aspx"))
+                    {
+                        return PageLayout.WebPart_HeaderFooter2Columns4Rows;
+                    }
+                    else if (fullDocument.ContainsIgnoringCasing(@"STS&#92;doctemp&#92;smartpgs&#92;spstd6.aspx"))
+                    {
+                        return PageLayout.WebPart_HeaderFooter4ColumnsTopRow;
+                    }
+                    else if (fullDocument.ContainsIgnoringCasing(@"STS&#92;doctemp&#92;smartpgs&#92;spstd7.aspx"))
+                    {
+                        return PageLayout.WebPart_LeftColumnHeaderFooterTopRow3Columns;
+                    }
+                    else if (fullDocument.ContainsIgnoringCasing(@"STS&#92;doctemp&#92;smartpgs&#92;spstd8.aspx"))
+                    {
+                        return PageLayout.WebPart_RightColumnHeaderFooterTopRow3Columns;
+                    }
+                    else if (fullDocument.ContainsIgnoringCasing(@"SiteTemplates&#92;STS&#92;default.aspx"))
+                    {
+                        return PageLayout.WebPart_2010_TwoColumnsLeft;
+                    }
+                }
+
+            }
+
+            return PageLayout.WebPart_Custom;
+        }
+
+        /// <summary>
+        /// Call SharePoint Web Services to extract web part properties not exposed by CSOM
+        /// </summary>
+        /// <returns></returns>
+        private Tuple<string, string> ExtractWebPartDocumentViaWebServicesFromPage(File pageFile)
+        {
+            var pageUrl = pageFile.EnsureProperty(p => p.ServerRelativeUrl);
+            var context = pageFile.Context as ClientContext;
+
+            try
+            {
+                logger.LogInformation(string.Format(
+                    System.Globalization.CultureInfo.InvariantCulture,
+                    SharePointTransformationResources.Info_CallingWebServicesToExtractWebPartsFromPage,
+                    pageFile.ServerRelativeUrl));
+
+                string webUrl = context.Web.EnsureProperty(p => p.Url);
+                string webServiceUrl = webUrl + "/_vti_bin/WebPartPages.asmx";
+
+                StringBuilder soapEnvelope = new StringBuilder();
+
+                soapEnvelope.Append("<?xml version=\"1.0\" encoding=\"utf-8\"?>");
+                soapEnvelope.Append("<soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">");
+
+                soapEnvelope.Append(String.Format(
+                 "<soap:Body>" +
+                     "<GetWebPartPage xmlns=\"http://microsoft.com/sharepoint/webpartpages\">" +
+                         "<documentName>{0}</documentName>" +
+                         "<behavior>Version3</behavior>" +
+                     "</GetWebPartPage>" +
+                 "</soap:Body>"
+                 , pageUrl));
+
+                soapEnvelope.Append("</soap:Envelope>");
+
+                HttpWebRequest request = (HttpWebRequest)WebRequest.Create(webServiceUrl);
+                //request.Credentials = cc.Credentials;
+                request.AddAuthenticationData(context);
+                request.Method = "POST";
+                request.ContentType = "text/xml; charset=\"utf-8\"";
+                request.Accept = "text/xml";
+                request.Headers.Add("SOAPAction", "\"http://microsoft.com/sharepoint/webpartpages/GetWebPartPage\"");
+
+                using (System.IO.Stream stream = request.GetRequestStream())
+                {
+                    using (System.IO.StreamWriter writer = new System.IO.StreamWriter(stream))
+                    {
+                        writer.Write(soapEnvelope.ToString());
+                    }
+                }
+
+                var response = request.GetResponse();
+                using (var dataStream = response.GetResponseStream())
+                {
+                    XmlDocument xDoc = new XmlDocument();
+                    xDoc.Load(dataStream);
+
+                    if (xDoc.DocumentElement != null && xDoc.DocumentElement.InnerText.Length > 0)
+                    {
+                        var webPartPageContents = xDoc.DocumentElement.InnerText;
+                        //Remove the junk from the result
+                        var tag = "<HasByteOrderMark/>";
+                        var marker = webPartPageContents.IndexOf(tag);
+                        var partDocument = string.Empty;
+                        if (marker > -1)
+                        {
+                            partDocument = webPartPageContents.Substring(marker).Replace(tag, "");
+                        }
+
+                        return new Tuple<string, string>(webPartPageContents, partDocument);
+                    }
+                }
+            }
+            catch (WebException ex)
+            {
+                logger.LogError(string.Format(
+                    System.Globalization.CultureInfo.InvariantCulture,
+                    SharePointTransformationResources.Error_CallingWebServicesToExtractWebPartsFromPage,
+                    pageFile.ServerRelativeUrl));
+            }
+
+            return new Tuple<string, string>(string.Empty, string.Empty);
         }
 
         /// <summary>
@@ -1037,5 +1960,215 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
             return result;
         }
 
+
+        /// <summary>
+        /// Load Web Parts from Wiki Content page on On-Premises Server
+        /// </summary>
+        /// <param name="webparts"></param>
+        /// <param name="wikiPage"></param>
+        /// <param name="webPartsToRetrieve"></param>
+        private void LoadWebPartsInWikiContentFromOnPremisesServer(List<WebPartEntity> webparts, File wikiPage, List<WebPartPlaceHolder> webPartsToRetrieve)
+        {
+            var context = wikiPage.Context as ClientContext;
+
+            // Load web part manager and use it to load each web part
+            LimitedWebPartManager limitedWPManager = wikiPage.GetLimitedWebPartManager(PersonalizationScope.Shared);
+            context.Load(limitedWPManager);
+
+            // Don't load export mode as it's not available in on-premises, we'll try to complement this data afterwards with data retrieved via the web service call
+            foreach (var webPartToRetrieve in webPartsToRetrieve)
+            {
+                // Check if the web part was loaded when we loaded the web parts collection via the web part manager
+                if (!Guid.TryParse(webPartToRetrieve.Id, out Guid webPartToRetrieveGuid))
+                {
+                    // Skip since guid is not valid
+                    continue;
+                }
+
+                // Sometimes the returned wiki html contains web parts which are not anymore on the page...using the ExceptionHandlingScope 
+                // we can handle these errors server side while just doing a single roundtrip
+                var scope = new ExceptionHandlingScope(context);
+                using (scope.StartScope())
+                {
+                    using (scope.StartTry())
+                    {
+                        webPartToRetrieve.WebPartDefinition = limitedWPManager.WebParts.GetByControlId(webPartToRetrieve.ControlId);
+                        context.Load(webPartToRetrieve.WebPartDefinition, wp => wp.Id, wp => wp.WebPart.Title, wp => wp.WebPart.ZoneIndex, wp => wp.WebPart.IsClosed, wp => wp.WebPart.Hidden, wp => wp.WebPart.Properties);
+                    }
+                    using (scope.StartCatch())
+                    {
+
+                    }
+                }
+            }
+
+            context.ExecuteQueryRetry();
+
+            // Load the web part XML for the web parts that do allow it
+            foreach (var webPartToRetrieve in webPartsToRetrieve)
+            {
+                if (webPartToRetrieve.WebPartDefinition != null)
+                {
+                    // Important to only process the web parts that did not return an error in the previous server call
+                    if (webPartToRetrieve.WebPartDefinition.ServerObjectIsNull.HasValue && webPartToRetrieve.WebPartDefinition.ServerObjectIsNull.Value == false)
+                    {
+                        // Let's try to retrieve the web part XML...this will fail for web parts that are not exportable
+                        var webPartXml = ExportWebPartXmlWorkaround(wikiPage, webPartToRetrieve.WebPartDefinition.Id.ToString());
+                        webPartToRetrieve.WebPartXmlOnPremises = webPartXml;
+                    }
+                }
+            }
+
+            // Determine the web part type and store it in the web parts array
+            foreach (var webPartToRetrieve in webPartsToRetrieve)
+            {
+                if (webPartToRetrieve.WebPartDefinition != null && (webPartToRetrieve.WebPartDefinition.ServerObjectIsNull.HasValue && webPartToRetrieve.WebPartDefinition.ServerObjectIsNull.Value == false))
+                {
+                    Dictionary<string, object> webPartProperties = null;
+                    webPartProperties = webPartToRetrieve.WebPartDefinition.WebPart.Properties.FieldValues;
+
+                    if (string.IsNullOrEmpty(webPartToRetrieve.WebPartXmlOnPremises))
+                    {
+                        // Use different approach to determine type as we can't export the web part XML without indroducing a change
+                        webPartToRetrieve.WebPartType = GetTypeFromProperties(webPartProperties, true);
+                    }
+                    else
+                    {
+                        webPartToRetrieve.WebPartType = GetType(webPartToRetrieve.WebPartXmlOnPremises);
+                    }
+
+                    logger.LogInformation(string.Format(System.Globalization.CultureInfo.InvariantCulture,
+                        SharePointTransformationResources.Info_ContentTransformFoundSourceWebParts,
+                        wikiPage.ServerRelativeUrl,
+                        webPartToRetrieve.WebPartDefinition.WebPart.Title,
+                        webPartToRetrieve.WebPartType.GetTypeShort()));
+
+                    webparts.Add(new WebPartEntity()
+                    {
+                        Title = webPartToRetrieve.WebPartDefinition.WebPart.Title,
+                        Type = webPartToRetrieve.WebPartType,
+                        Id = webPartToRetrieve.WebPartDefinition.Id,
+                        ServerControlId = webPartToRetrieve.Id,
+                        Row = webPartToRetrieve.Row,
+                        Column = webPartToRetrieve.Column,
+                        Order = webPartToRetrieve.Order,
+                        ZoneId = "",
+                        ZoneIndex = (uint)webPartToRetrieve.WebPartDefinition.WebPart.ZoneIndex,
+                        IsClosed = webPartToRetrieve.WebPartDefinition.WebPart.IsClosed,
+                        Hidden = webPartToRetrieve.WebPartDefinition.WebPart.Hidden,
+                        // Properties = Properties(webPartProperties, webPartToRetrieve.WebPartType, 
+                        // webPartToRetrieve.WebPartXmlOnPremises),
+                    });
+                }
+            }
+        }
+
+        /// <summary>
+        /// Load Web Parts from Wiki Content page on Online Server
+        /// </summary>
+        /// <param name="webparts"></param>
+        /// <param name="wikiPage"></param>
+        /// <param name="webPartsToRetrieve"></param>
+        internal void LoadWebPartsInWikiContentFromServer(List<WebPartEntity> webparts, File wikiPage, List<WebPartPlaceHolder> webPartsToRetrieve)
+        {
+            var context = wikiPage.Context as ClientContext;
+
+            // Load web part manager and use it to load each web part
+            LimitedWebPartManager limitedWPManager = wikiPage.GetLimitedWebPartManager(PersonalizationScope.Shared);
+            context.Load(limitedWPManager);
+
+            foreach (var webPartToRetrieve in webPartsToRetrieve)
+            {
+                // Check if the web part was loaded when we loaded the web parts collection via the web part manager
+                if (!Guid.TryParse(webPartToRetrieve.Id, out Guid webPartToRetrieveGuid))
+                {
+                    // Skip since guid is not valid
+                    continue;
+                }
+
+                // Sometimes the returned wiki html contains web parts which are not anymore on the page...using the ExceptionHandlingScope 
+                // we can handle these errors server side while just doing a single roundtrip
+                var scope = new ExceptionHandlingScope(context);
+                using (scope.StartScope())
+                {
+                    using (scope.StartTry())
+                    {
+                        webPartToRetrieve.WebPartDefinition = limitedWPManager.WebParts.GetByControlId(webPartToRetrieve.ControlId);
+                        context.Load(webPartToRetrieve.WebPartDefinition, wp => wp.Id, wp => wp.WebPart.ExportMode, wp => wp.WebPart.Title, wp => wp.WebPart.ZoneIndex, wp => wp.WebPart.IsClosed, wp => wp.WebPart.Hidden, wp => wp.WebPart.Properties);
+                    }
+                    using (scope.StartCatch())
+                    {
+
+                    }
+                }
+            }
+            context.ExecuteQueryRetry();
+
+
+            // Load the web part XML for the web parts that do allow it
+            bool isDirty = false;
+            foreach (var webPartToRetrieve in webPartsToRetrieve)
+            {
+                // Important to only process the web parts that did not return an error in the previous server call
+                if (webPartToRetrieve.WebPartDefinition != null && (webPartToRetrieve.WebPartDefinition.ServerObjectIsNull.HasValue && webPartToRetrieve.WebPartDefinition.ServerObjectIsNull.Value == false))
+                {
+                    // Retry to load the properties, sometimes they're not retrieved
+                    webPartToRetrieve.WebPartDefinition.EnsureProperty(wp => wp.Id);
+                    webPartToRetrieve.WebPartDefinition.WebPart.EnsureProperties(wp => wp.ExportMode, wp => wp.Title, wp => wp.ZoneIndex, wp => wp.IsClosed, wp => wp.Hidden, wp => wp.Properties);
+
+                    if (webPartToRetrieve.WebPartDefinition.WebPart.ExportMode == WebPartExportMode.All)
+                    {
+                        webPartToRetrieve.WebPartXml = limitedWPManager.ExportWebPart(webPartToRetrieve.WebPartDefinition.Id);
+                        isDirty = true;
+                    }
+                }
+            }
+            if (isDirty)
+            {
+                context.ExecuteQueryRetry();
+            }
+
+            // Determine the web part type and store it in the web parts array
+            foreach (var webPartToRetrieve in webPartsToRetrieve)
+            {
+                if (webPartToRetrieve.WebPartDefinition != null && (webPartToRetrieve.WebPartDefinition.ServerObjectIsNull.HasValue && webPartToRetrieve.WebPartDefinition.ServerObjectIsNull.Value == false))
+                {
+                    // Important to only process the web parts that did not return an error in the previous server call
+                    if (webPartToRetrieve.WebPartDefinition.WebPart.ExportMode != WebPartExportMode.All)
+                    {
+                        // Use different approach to determine type as we can't export the web part XML without indroducing a change
+                        webPartToRetrieve.WebPartType = GetTypeFromProperties(webPartToRetrieve.WebPartDefinition.WebPart.Properties.FieldValues);
+                    }
+                    else
+                    {
+                        webPartToRetrieve.WebPartType = GetType(webPartToRetrieve.WebPartXml.Value);
+                    }
+
+                    logger.LogInformation(string.Format(System.Globalization.CultureInfo.InvariantCulture,
+                        SharePointTransformationResources.Info_ContentTransformFoundSourceWebParts,
+                        wikiPage.ServerRelativeUrl,
+                        webPartToRetrieve.WebPartDefinition.WebPart.Title,
+                        webPartToRetrieve.WebPartType.GetTypeShort()));
+
+                    webparts.Add(new WebPartEntity()
+                    {
+                        Title = webPartToRetrieve.WebPartDefinition.WebPart.Title,
+                        Type = webPartToRetrieve.WebPartType,
+                        Id = webPartToRetrieve.WebPartDefinition.Id,
+                        ServerControlId = webPartToRetrieve.Id,
+                        Row = webPartToRetrieve.Row,
+                        Column = webPartToRetrieve.Column,
+                        Order = webPartToRetrieve.Order,
+                        ZoneId = "",
+                        ZoneIndex = (uint)webPartToRetrieve.WebPartDefinition.WebPart.ZoneIndex,
+                        IsClosed = webPartToRetrieve.WebPartDefinition.WebPart.IsClosed,
+                        Hidden = webPartToRetrieve.WebPartDefinition.WebPart.Hidden,
+                        // Properties = Properties(webPartToRetrieve.WebPartDefinition.WebPart.Properties.FieldValues, 
+                        // webPartToRetrieve.WebPartType, webPartToRetrieve.WebPartXml == null ? "" : 
+                        // webPartToRetrieve.WebPartXml.Value),
+                    });
+                }
+            }
+        }
     }
 }
