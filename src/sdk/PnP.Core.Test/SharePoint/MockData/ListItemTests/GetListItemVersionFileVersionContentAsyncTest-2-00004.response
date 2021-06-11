@@ -1,0 +1,9 @@
+--batchresponse_3a84f508-1d8e-4712-b482-a77b04485e96
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+HTTP/1.1 200 OK
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+
+{"d":{"results":[{"__metadata":{"id":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/SP.ListItemVersion45cb18b9-4bf7-4260-af5d-89f326695243","uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/SP.ListItemVersion45cb18b9-4bf7-4260-af5d-89f326695243","type":"SP.ListItemVersion"},"FileVersion":{"__metadata":{"id":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/SP.ListItemVersion45cb18b9-4bf7-4260-af5d-89f326695243/FileVersion","uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/SP.ListItemVersion45cb18b9-4bf7-4260-af5d-89f326695243/FileVersion","type":"SP.FileVersion"},"CreatedBy":{"__deferred":{"uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/SP.ListItemVersion45cb18b9-4bf7-4260-af5d-89f326695243/FileVersion/CreatedBy"}},"CheckInComment":"","Created":"2021-06-11T17:45:15Z","ID":512,"IsCurrentVersion":false,"Length":"13","Size":13,"Url":"_vti_history/512/PNP_SDK_TEST_GetListItemVersionFileVersionContentA/GetListItemVersionFileVersionContentAsyncTest.txt","VersionLabel":"1.0"},"VersionId":512}]}}
+--batchresponse_3a84f508-1d8e-4712-b482-a77b04485e96--

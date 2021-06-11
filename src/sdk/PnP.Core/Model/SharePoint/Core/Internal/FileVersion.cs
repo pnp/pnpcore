@@ -11,7 +11,7 @@ namespace PnP.Core.Model.SharePoint
     /// FileVersion class, write your custom code here
     /// </summary>
     [SharePointType("SP.FileVersion", Target = typeof(File), Uri = "_api/Web/getFileById('{Parent.Id}')/versions/getById({Id})", LinqGet = "_api/Web/getFileById('{Parent.Id}')/versions")]
-    [SharePointType("SP.FileVersion", Target = typeof(ListItemVersion))]
+    [SharePointType("SP.FileVersion", Target = typeof(ListItemVersion), Uri = "_api/web/lists/getbyid(guid'{List.Id}')/items({Item.Id})/versions/getbyid({Parent.Id})/fileversion")]
     internal partial class FileVersion : BaseDataModel<IFileVersion>, IFileVersion
     {
         #region Properties

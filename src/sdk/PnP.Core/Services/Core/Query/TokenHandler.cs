@@ -200,7 +200,7 @@ namespace PnP.Core.Services
                                         // Should return either an IListItemVersion or an IFile
                                         model = GetParentDataModel(model) as IMetadataExtensible;
                                     }
-                                    
+
                                     if (model is Model.SharePoint.IFile || model is Model.SharePoint.IListItemVersion)
                                     {
                                         // Should return an IListItem
@@ -220,6 +220,46 @@ namespace PnP.Core.Services
                                     // We retrieve the Id and we use it as the token value
                                     await list.EnsurePropertiesAsync(l => l.Id).ConfigureAwait(false);
                                     result = result.Replace(match.Value, list.Id.ToString());
+                                }
+                                break;
+                            }
+                    }
+                }
+                // Replace tokens coming from the List Item object connected to the current PnPContext
+                else if (match.Value.StartsWith("{Item.") && context != null)
+                {
+                    var propertyToLoad = match.Value.Split(new[] { "." }, StringSplitOptions.RemoveEmptyEntries)[1].Replace("}", "");
+
+                    switch (propertyToLoad)
+                    {
+                        case "Id":
+                            {
+                                // Try to see if the current object is a list item
+                                var listItem = pnpObject as Model.SharePoint.IListItem;
+
+                                // If the object is a descendant of a list item
+                                if (listItem == null)
+                                {
+                                    var model = pnpObject;
+                                    if (model is Model.SharePoint.IFileVersion)
+                                    {
+                                        // Should return either an IListItemVersion or an IFile
+                                        model = GetParentDataModel(model) as IMetadataExtensible;
+                                    }
+
+                                    if (model is Model.SharePoint.IFile || model is Model.SharePoint.IListItemVersion)
+                                    {
+                                        // Should return an IListItem
+                                        listItem = GetParentDataModel(model) as Model.SharePoint.IListItem;
+                                    }
+                                }
+
+                                // If we've got the list item
+                                if (listItem != null)
+                                {
+                                    // We retrieve the Id and we use it as the token value
+                                    await listItem.EnsurePropertiesAsync(l => l.Id).ConfigureAwait(false);
+                                    result = result.Replace(match.Value, listItem.Id.ToString());
                                 }
                                 break;
                             }
@@ -272,6 +312,7 @@ namespace PnP.Core.Services
                     match.Value.Equals("{Web.Id}") ||
                     match.Value.Equals("{Web.GraphId}") ||
                     match.Value.Equals("{List.Id}") ||
+                    match.Value.Equals("{Item.Id}") ||
                     match.Value.Equals("{hostname") ||
                     match.Value.Equals("{serverrelativepath}"))
                 {

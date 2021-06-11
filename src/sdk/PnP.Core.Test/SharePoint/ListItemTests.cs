@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace PnP.Core.Test.SharePoint
@@ -3372,7 +3373,7 @@ namespace PnP.Core.Test.SharePoint
 
                 Assert.AreEqual("blabla", first2.Title);
                 Assert.AreEqual("2.0", first2.Values["_UIVersionString"].ToString());
-                
+
                 Assert.AreEqual(2, first2.Versions.Length);
                 Assert.AreEqual("Item 0", lastVersion.Values["Title"].ToString());
             }
@@ -3397,6 +3398,74 @@ namespace PnP.Core.Test.SharePoint
                 // Cleanup the created list
                 await myList.DeleteAsync();
             }
+        }
+
+        [TestMethod]
+        public async Task GetListItemVersionFileVersionContentAsyncTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            const string fileContent = "PnP Rocks !!!";
+
+            int firstId;
+            (string libraryTitle, _, _) = await TestAssets.CreateTestDocumentInDedicatedLibraryAsync(0, parentLibraryEnableVersioning: true);
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+            {
+                var myLibrary = await context.Web.Lists.GetByTitleAsync(libraryTitle, l => l.RootFolder);
+
+                var contentStream = new MemoryStream(Encoding.UTF8.GetBytes(fileContent));
+                var documentName = $"{nameof(GetListItemVersionFileVersionContentAsyncTest)}.txt";
+                var testDocument = await myLibrary.RootFolder.Files.AddAsync(documentName, contentStream);
+                testDocument = await context.Web.GetFileByServerRelativeUrlAsync(testDocument.ServerRelativeUrl, f => f.ListItemAllFields);
+
+                var listItem = testDocument.ListItemAllFields;
+                firstId = listItem.Id;
+                listItem.Title = "blabla";
+
+                // Use the batch update flow here
+                var batch = context.NewBatch();
+                await listItem.UpdateBatchAsync(batch).ConfigureAwait(false);
+                await context.ExecuteAsync(batch);
+            }
+
+            int versionId;
+            using (var context2 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+            {
+                var myList2 = await context2.Web.Lists.GetByTitleAsync(libraryTitle);
+                var first2 = await myList2.Items.GetByIdAsync(firstId, li => li.All, li => li.Versions);
+
+                var lastVersion = first2.Versions.AsRequested().Last();
+                versionId = lastVersion.Id;
+
+                Assert.AreEqual("blabla", first2.Title);
+                Assert.AreEqual("2.0", first2.Values["_UIVersionString"].ToString());
+
+                Assert.AreEqual(2, first2.Versions.Length);
+            }
+
+            using (var context3 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))
+            {
+                var myList3 = await context3.Web.Lists.GetByTitleAsync(libraryTitle);
+                var first3 = await myList3.Items.GetByIdAsync(firstId, li => li.Id);
+                var firstVersion = await first3.Versions.GetByIdAsync(versionId, v => v.FileVersion);
+
+                Assert.AreEqual(versionId, firstVersion.Id);
+                Assert.IsNotNull(firstVersion.FileVersion);
+
+                /* TODO: Finish this
+                // Download document version content
+                Stream downloadedContentStream = await firstVersion.FileVersion.GetContentAsync();
+                downloadedContentStream.Seek(0, SeekOrigin.Begin);
+                // Get string from the content stream
+                string downloadedContent = await new StreamReader(downloadedContentStream).ReadToEndAsync();
+
+                Assert.IsTrue(!string.IsNullOrEmpty(downloadedContent));
+                Assert.AreEqual(fileContent, downloadedContent);
+                */
+            }
+
+            await TestAssets.CleanupTestDedicatedListAsync(3);
         }
 
         //[TestMethod]
