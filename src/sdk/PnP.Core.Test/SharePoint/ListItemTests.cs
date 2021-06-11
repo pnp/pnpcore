@@ -3256,6 +3256,8 @@ namespace PnP.Core.Test.SharePoint
         }
         #endregion
 
+        #region Changes
+
         [TestMethod]
         public async Task GetListItemChangesAsyncTest()
         {
@@ -3315,117 +3317,282 @@ namespace PnP.Core.Test.SharePoint
             }
         }
 
-        //[TestMethod]
-        //public async Task FieldTypeReadUrl()
-        //{
-        //    //TestCommon.Instance.Mocking = false;
-        //    using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
-        //    {
-        //        /*
-        //        var list = await context.Web.Lists.GetByTitleAsync("FieldTypes");
+        #endregion
 
-        //        var listDataOptions = new RenderListDataOptions()
-        //        {
-        //            RenderOptions = RenderListDataOptionsFlags.ListData,
-        //        };
+        #region Comments
 
-        //        listDataOptions.SetViewXmlFromFields(new List<string>() { "Title", "Url", "PersonSingle", "PersonMultiple", 
-        //                                                                  "MMSingle", "MMMultiple", "LookupSingle", "LookupMultiple", 
-        //                                                                  "Location", "Bool", "Number", "DateTime", "ChoiceSingle", "ChoiceMultiple" });
+        [TestMethod]
+        public async Task ListItemCommentsTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var listTitle = TestCommon.GetPnPSdkTestAssetName("ListItemCommentsTest");
+                var list = await context.Web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
+                var item = await list.Items.AddAsync(new Dictionary<string, object> { { "Title", "Comment me" } });
 
-        //        await list.GetListDataAsStreamAsync(listDataOptions).ConfigureAwait(false);
+                // get list item comments
+                var comments = await item.GetCommentsAsync();
+                Assert.IsTrue(comments.Length == 0);
 
-        //        var item = list.Items.First();
-        //        */
+                // add comment
+                var comment = await comments.AddAsync("this is great");
 
+                Assert.IsTrue(comment != null);
+                Assert.IsTrue(comment.Id == "1");
 
-        //        var list = await context.Web.Lists.GetByTitleAsync("FieldTypes", p => p.Title, p => p.Items, p => p.Fields.Load(p => p.InternalName, p => p.FieldTypeKind, p => p.TypeAsString, p => p.Title));
+                // get comments again
+                var comments2 = item.GetComments();
+                Assert.IsTrue(comments2.Length == 1);
 
-        //        var item = list.Items.FirstOrDefault(p => p.Title == "Item1");
+                var firstComment = comments2.AsRequested().First();
 
+                Assert.IsTrue(firstComment.CreatedDate < DateTime.Now);
+                Assert.IsTrue(firstComment.Id == "1");
+                Assert.IsTrue(firstComment.IsLikedByUser == false);
+                Assert.IsTrue(firstComment.IsReply == false);
+                Assert.IsTrue(firstComment.ItemId == 1);
+                Assert.IsTrue(firstComment.LikeCount == 0);
+                Assert.IsTrue(firstComment.ListId == list.Id);
+                Assert.IsTrue(firstComment.ParentId == "0");
+                Assert.IsTrue(firstComment.ReplyCount == 0);
+                Assert.IsTrue(firstComment.Text == "this is great");
 
-        //        //Assert.IsTrue(item != null);
-        //        //Assert.IsTrue(item["Url"] != null);
-        //        //Assert.IsTrue(item["Url"] is IFieldUrlValue);
-        //        //Assert.IsTrue(item["PersonSingle"] is IFieldUserValue);
-        //        //Assert.IsTrue(item["PersonMultiple"] is IFieldValueCollection);
-        //        //Assert.IsTrue(item["MMSingle"] is IFieldTaxonomyValue);
-        //        //Assert.IsTrue(item["MMMultiple"] is IFieldValueCollection);
-        //        //Assert.IsTrue(item["LookupSingle"] is IFieldValueCollection);
-        //        //Assert.IsTrue(item["LookupMultiple"] is IFieldValueCollection);
-        //        //Assert.IsTrue(item["Location"] is IFieldLocationValue);
-        //        //Assert.IsTrue(item["ChoiceSingle"] is string);
-        //        //Assert.IsTrue(item["ChoiceMultiple"] is List<string>);
+                var commentAuthor = firstComment.Author;
 
-        //        // Clear user field testing
-        //        //var urlField = list.Fields.First(p => p.InternalName == "Url");
-        //        //item["Url"] = item.NewFieldUrlValue(urlField, "");
+                Assert.IsTrue(!string.IsNullOrEmpty(commentAuthor.Mail));
+                Assert.IsTrue(commentAuthor.Expiration == null);
+                Assert.IsTrue(commentAuthor.Id > 0);
+                Assert.IsTrue(commentAuthor.IsActive == true);
+                Assert.IsTrue(commentAuthor.IsExternal == false);
+                Assert.IsTrue(commentAuthor.JobTitle == null);
+                Assert.IsTrue(!string.IsNullOrEmpty(commentAuthor.LoginName));
+                Assert.IsTrue(!string.IsNullOrEmpty(commentAuthor.Name));
+                Assert.IsTrue(commentAuthor.PrincipalType == PrincipalType.User);
+                Assert.IsTrue(commentAuthor.UserPrincipalName == null);
 
-        //        //// Update url field
-        //        //var urlField = list.Fields.First(p => p.InternalName == "Url");
+                // Delete comment
+                await firstComment.DeleteAsync();
 
-        //        //(item["Url"] as IFieldUrlValue).Url = "https://pnp.com/3";
-        //        //(item["Url"] as IFieldUrlValue).Description = "something3";
+                // get comments again
+                var comments3 = await item.GetCommentsAsync();
+                Assert.IsTrue(comments3.Length == 0);
 
-        //        // clear person field testing
-        //        //(item["PersonSingle"] as IFieldUserValue).LookupId = -1;
-        //        //(item["PersonMultiple"] as IFieldValueCollection).Values.Clear();
+                // Cleanup the created list
+                await list.DeleteAsync();
+            }
+        }
 
-        //        //// Update user fields
-        //        //var personMultipleField = list.Fields.First(p => p.InternalName == "PersonMultiple");
-        //        //(item["PersonSingle"] as IFieldUserValue).LookupId = 6;
-        //        //(item["PersonMultiple"] as IFieldValueCollection).Values.Clear();
-        //        //(item["PersonMultiple"] as IFieldValueCollection).Values.Add(item.NewFieldUserValue(personMultipleField, 6));
-        //        //(item["PersonMultiple"] as IFieldValueCollection).Values.Add(item.NewFieldUserValue(personMultipleField, 14));
+        [TestMethod]
+        public async Task ListItemCommentsLikeUnLikeTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var listTitle = TestCommon.GetPnPSdkTestAssetName("ListItemCommentsLikeUnLikeTest");
+                var list = await context.Web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
+                var item = await list.Items.AddAsync(new Dictionary<string, object> { { "Title", "Comment me" } });
 
-        //        // Clear lookup field testing
-        //        //(item["LookupSingle"] as IFieldValueCollection).Values.Clear();
-        //        //(item["LookupMultiple"] as IFieldValueCollection).Values.Clear();
+                // get list item comments
+                var comments = await item.GetCommentsAsync();
+                Assert.IsTrue(comments.Length == 0);
 
-        //        //// Update lookup fields
-        //        //var lookupSingleField = list.Fields.First(p => p.InternalName == "LookupSingle");
-        //        //var lookupMultipleField = list.Fields.First(p => p.InternalName == "LookupMultiple");
+                // add comment
+                var comment = await comments.AddAsync("this is great");
 
-        //        //(item["LookupSingle"] as IFieldValueCollection).Values.Clear();
-        //        //(item["LookupSingle"] as IFieldValueCollection).Values.Add(item.NewFieldLookupValue(lookupSingleField, 122));
-        //        //(item["LookupMultiple"] as IFieldValueCollection).Values.Clear();
-        //        //(item["LookupMultiple"] as IFieldValueCollection).Values.Add(item.NewFieldLookupValue(lookupMultipleField, 1));
-        //        //(item["LookupMultiple"] as IFieldValueCollection).Values.Add(item.NewFieldLookupValue(lookupMultipleField, 71));
-        //        //(item["LookupMultiple"] as IFieldValueCollection).Values.Add(item.NewFieldLookupValue(lookupMultipleField, 122));
+                Assert.IsTrue(comment != null);
+                Assert.IsTrue(comment.Id == "1");
 
-        //        // Clear taxonomy fields
-        //        //item["MMSingle"] = null;
-        //        //(item["MMMultiple"] as IFieldValueCollection).Values.Clear();
+                // Like the comment
+                comment.Like();
 
-        //        //// Update taxonomy fields
-        //        //var mmSingleField = list.Fields.First(p => p.InternalName == "MMSingle");
+                // get comments again
+                var comments2 = item.GetComments();
+                Assert.IsTrue(comments2.Length == 1);
 
-        //        //item["MMSingle"] = item.NewFieldTaxonomyValue(mmSingleField, Guid.Parse("0b709a34-a74e-4d07-b493-48041424a917"), "HBI");
+                var firstComment = comments2.AsRequested().First();
 
-        //        //(item["MMMultiple"] as IFieldValueCollection).RemoveTaxonomyFieldValue(Guid.Parse("1824510b-00e1-40ac-8294-528b1c9421e0"));
-        //        //var mmMultipleField = list.Fields.First(p => p.InternalName == "MMMultiple");
-        //        //var taxCollection = item.NewFieldValueCollection(mmMultipleField, item.Values);
-        //        //taxCollection.Values.Add(item.NewFieldTaxonomyValue(mmMultipleField, Guid.Parse("ed5449ec-4a4f-4102-8f07-5a207c438571"), "LBI"));
-        //        //taxCollection.Values.Add(item.NewFieldTaxonomyValue(mmMultipleField, Guid.Parse("1824510b-00e1-40ac-8294-528b1c9421e0"), "MBI"));
-        //        //item["MMMultiple"] = taxCollection;
+                Assert.IsTrue(firstComment.IsLikedByUser == true);
+                Assert.IsTrue(firstComment.Text == "this is great");
 
-        //        // Clear choice fields
-        //        //item["ChoiceSingle"] = null;
-        //        //item["ChoiceMultiple"] = new List<string>();
+                await firstComment.LoadAsync(p => p.LikedBy);
+                Assert.IsTrue(firstComment.LikedBy.Length == 1);
+                var firstLikedByUser = firstComment.LikedBy.AsRequested().First();
+                Assert.IsNotNull(firstLikedByUser.Name);
+                Assert.IsTrue(firstLikedByUser.Id > 0);
+                Assert.IsNotNull(firstLikedByUser.Mail);
+                Assert.IsNotNull(firstLikedByUser.LoginName);
 
-        //        // Update Choice field
-        //        //item["ChoiceSingle"] = "Choice 1";
+                // unlike the comment
+                firstComment.Unlike();
 
-        //        //item["ChoiceMultiple"] = new List<string>() { "Choice 2", "Choice 3", "Choice 4" };
+                var comments3 = item.GetComments();
+                Assert.IsTrue(comments3.Length == 1);
 
+                firstComment = comments3.AsRequested().First();
 
+                Assert.IsTrue(firstComment.IsLikedByUser == false);
+                Assert.IsTrue(firstComment.Text == "this is great");
 
-        //        // save update back
-        //        await item.UpdateAsync();
+                // Delete comment
+                await firstComment.DeleteAsync();
 
-        //        //await item.UpdateOverwriteVersionAsync();
+                // get comments again
+                var comments4 = await item.GetCommentsAsync();
+                Assert.IsTrue(comments4.Length == 0);
 
-        //    }
-        //}
+                // Cleanup the created list
+                await list.DeleteAsync();
+            }
+        }
+
+        [TestMethod]
+        public async Task ListItemCommentsBatchAddTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var listTitle = TestCommon.GetPnPSdkTestAssetName("ListItemCommentsBatchAddTest");
+                var list = await context.Web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
+                var item = await list.Items.AddAsync(new Dictionary<string, object> { { "Title", "Comment me" } });
+
+                // get list item comments
+                var comments = await item.GetCommentsAsync();
+                Assert.IsTrue(comments.Length == 0);
+
+                // add comment
+                var comment1 = comments.AddBatch("this is great 1");
+                var comment2 = comments.AddBatch("this is great 2");
+                var comment3 = await comments.AddBatchAsync("this is great 3");
+
+                // Execute batch
+                await context.ExecuteAsync();
+
+                Assert.IsTrue(comment1 != null);
+                Assert.IsTrue(comment1.Id == "1");
+                Assert.IsTrue(comment2 != null);
+                Assert.IsTrue(comment2.Id == "2");
+                Assert.IsTrue(comment3 != null);
+                Assert.IsTrue(comment3.Id == "3");
+
+                // get comments again
+                var comments2 = item.GetComments();
+                Assert.IsTrue(comments2.Length == 3);
+
+                var firstComment = comments2.AsRequested().First();
+
+                Assert.IsTrue(firstComment.CreatedDate < DateTime.Now);
+                Assert.IsTrue(firstComment.Id == "3");
+                Assert.IsTrue(firstComment.IsLikedByUser == false);
+                Assert.IsTrue(firstComment.IsReply == false);
+                Assert.IsTrue(firstComment.ItemId == 1);
+                Assert.IsTrue(firstComment.LikeCount == 0);
+                Assert.IsTrue(firstComment.ListId == list.Id);
+                Assert.IsTrue(firstComment.ParentId == "0");
+                Assert.IsTrue(firstComment.ReplyCount == 0);
+                Assert.IsTrue(firstComment.Text == "this is great 3");
+
+                var commentAuthor = firstComment.Author;
+
+                Assert.IsTrue(!string.IsNullOrEmpty(commentAuthor.Mail));
+                Assert.IsTrue(commentAuthor.Expiration == null);
+                Assert.IsTrue(commentAuthor.Id > 0);
+                Assert.IsTrue(commentAuthor.IsActive == true);
+                Assert.IsTrue(commentAuthor.IsExternal == false);
+                Assert.IsTrue(commentAuthor.JobTitle == null);
+                Assert.IsTrue(!string.IsNullOrEmpty(commentAuthor.LoginName));
+                Assert.IsTrue(!string.IsNullOrEmpty(commentAuthor.Name));
+                Assert.IsTrue(commentAuthor.PrincipalType == PrincipalType.User);
+                Assert.IsTrue(commentAuthor.UserPrincipalName == null);
+
+                // Delete all comment
+                comments2.DeleteAll();
+                Assert.IsTrue(comments2.Length == 0);
+
+                // get comments again
+                var comments3 = await item.GetCommentsAsync();
+                Assert.IsTrue(comments3.Length == 0);
+
+                // Cleanup the created list
+                await list.DeleteAsync();
+            }
+        }
+
+        [TestMethod]
+        public async Task ListItemCommentsReplyTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var listTitle = TestCommon.GetPnPSdkTestAssetName("ListItemCommentsReplyTest");
+                var list = await context.Web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
+                var item = await list.Items.AddAsync(new Dictionary<string, object> { { "Title", "Comment me" } });
+
+                // get list item comments
+                var comments = await item.GetCommentsAsync();
+                Assert.IsTrue(comments.Length == 0);
+
+                // add comment
+                var comment = await comments.AddAsync("this is great");
+
+                Assert.IsTrue(comment != null);
+                Assert.IsTrue(comment.Id == "1");
+
+                // add a reply to the comment
+                var reply = await comment.Replies.AddAsync("this is a reply");
+
+                // Verify all reply comment properties are loaded
+                Assert.IsTrue(reply != null);
+                Assert.IsTrue(reply.CreatedDate < DateTime.Now);
+                Assert.IsTrue(reply.Id == "2");
+                Assert.IsTrue(reply.IsLikedByUser == false);
+                Assert.IsTrue(reply.IsReply == true);
+                Assert.IsTrue(reply.ItemId == 1);
+                Assert.IsTrue(reply.LikeCount == 0);
+                Assert.IsTrue(reply.ListId == list.Id);
+                Assert.IsTrue(reply.ParentId == "1");
+                Assert.IsTrue(reply.ReplyCount == 0);
+                Assert.IsTrue(reply.Text == "this is a reply");
+
+                var commentAuthor = reply.Author;
+
+                Assert.IsTrue(!string.IsNullOrEmpty(commentAuthor.Mail));
+                Assert.IsTrue(commentAuthor.Expiration == null);
+                Assert.IsTrue(commentAuthor.Id > 0);
+                Assert.IsTrue(commentAuthor.IsActive == true);
+                Assert.IsTrue(commentAuthor.IsExternal == false);
+                Assert.IsTrue(commentAuthor.JobTitle == null);
+                Assert.IsTrue(!string.IsNullOrEmpty(commentAuthor.LoginName));
+                Assert.IsTrue(!string.IsNullOrEmpty(commentAuthor.Name));
+                Assert.IsTrue(commentAuthor.PrincipalType == PrincipalType.User);
+                Assert.IsTrue(commentAuthor.UserPrincipalName == null);
+
+                // Load the comments with replies and verify the reply collection is now populated
+                comments = await item.GetCommentsAsync(p => p.Replies);
+
+                var firstComment = comments.AsRequested().First();
+
+                Assert.IsTrue(firstComment.Id == "1");
+                Assert.IsTrue(firstComment.Replies.Length == 1);
+
+                var firstCommentReply = firstComment.Replies.AsRequested().First();
+                Assert.IsTrue(firstCommentReply.IsReply == true);
+                Assert.IsTrue(firstCommentReply.ParentId == "1");
+
+                // Delete the reply again
+                await firstCommentReply.DeleteAsync();
+
+                comments = await item.GetCommentsAsync(p => p.Replies);
+                firstComment = comments.AsRequested().First();
+                
+                Assert.IsTrue(firstComment.Id == "1");
+                Assert.IsTrue(firstComment.Replies.Length == 0);
+
+                // Cleanup the created list
+                await list.DeleteAsync();
+            }
+        }
+
+        #endregion
     }
 }

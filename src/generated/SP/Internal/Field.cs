@@ -98,6 +98,8 @@ namespace PnP.Core.Model.SharePoint
 
         #region New properties
 
+        public bool IsModern { get => GetValue<bool>(); set => SetValue(value); }
+
         public bool NoCrawl { get => GetValue<bool>(); set => SetValue(value); }
 
         public string SchemaXmlWithResourceTokens { get => GetValue<string>(); set => SetValue(value); }

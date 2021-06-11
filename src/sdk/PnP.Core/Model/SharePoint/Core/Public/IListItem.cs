@@ -1,6 +1,7 @@
 ﻿using PnP.Core.Model.Security;
 using PnP.Core.Services;
 using System;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace PnP.Core.Model.SharePoint
@@ -95,6 +96,11 @@ namespace PnP.Core.Model.SharePoint
         /// Role assignments of the list item
         /// </summary>
         public IRoleAssignmentCollection RoleAssignments { get; }
+
+        /// <summary>
+        /// Information about the likes on this list item
+        /// </summary>
+        public ILikedByInformation LikedByInformation { get; }
 
         /// <summary>
         /// A special property used to add an asterisk to a $select statement
@@ -665,6 +671,20 @@ namespace PnP.Core.Model.SharePoint
         /// <param name="roleDefinition">Role definition to remove</param>
         /// <returns></returns>
         public Task RemoveRoleDefinitionBatchAsync(Batch batch, int principalId, IRoleDefinition roleDefinition);
+        #endregion
+
+        #region Comments and liking
+        /// <summary>
+        /// Get list item comments
+        /// </summary>
+        /// <param name="selectors">The expressions declaring the fields to select</param>
+        public Task<ICommentCollection> GetCommentsAsync(params Expression<Func<IComment, object>>[] selectors);
+
+        /// <summary>
+        /// Get list item comments
+        /// </summary>
+        /// <param name="selectors">The expressions declaring the fields to select</param>
+        public ICommentCollection GetComments(params Expression<Func<IComment, object>>[] selectors);
         #endregion
 
         #endregion

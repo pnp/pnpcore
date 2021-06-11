@@ -1,9 +1,87 @@
---batchresponse_3aab6f42-859d-42c4-967c-de1b2eda5e61
+--batchresponse_27e7db1b-dd03-45a7-bc59-da3581d64c3b
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 200 OK
-CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+CONTENT-TYPE: application/json; charset=utf-8
 
-{"d":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/OverwriteHomePage/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/prov-1/OverwriteHomePage/SitePages/Home.aspx')","uri":"https://bertonline.sharepoint.com/sites/prov-1/OverwriteHomePage/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/prov-1/OverwriteHomePage/SitePages/Home.aspx')","type":"SP.File"},"ListItemAllFields":{"__metadata":{"id":"2feb8ebf-0058-4a9f-a567-a66452eed72f","uri":"https://bertonline.sharepoint.com/sites/prov-1/OverwriteHomePage/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/prov-1/OverwriteHomePage/SitePages/Home.aspx')/ListItemAllFields","etag":"\"4\"","type":"SP.Data.SitePagesItem"},"FirstUniqueAncestorSecurableObject":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/OverwriteHomePage/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/prov-1/OverwriteHomePage/SitePages/Home.aspx')/ListItemAllFields/FirstUniqueAncestorSecurableObject"}},"RoleAssignments":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/OverwriteHomePage/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/prov-1/OverwriteHomePage/SitePages/Home.aspx')/ListItemAllFields/RoleAssignments"}},"AttachmentFiles":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/OverwriteHomePage/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/prov-1/OverwriteHomePage/SitePages/Home.aspx')/ListItemAllFields/AttachmentFiles"}},"ContentType":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/OverwriteHomePage/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/prov-1/OverwriteHomePage/SitePages/Home.aspx')/ListItemAllFields/ContentType"}},"GetDlpPolicyTip":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/OverwriteHomePage/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/prov-1/OverwriteHomePage/SitePages/Home.aspx')/ListItemAllFields/GetDlpPolicyTip"}},"FieldValuesAsHtml":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/OverwriteHomePage/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/prov-1/OverwriteHomePage/SitePages/Home.aspx')/ListItemAllFields/FieldValuesAsHtml"}},"FieldValuesAsText":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/OverwriteHomePage/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/prov-1/OverwriteHomePage/SitePages/Home.aspx')/ListItemAllFields/FieldValuesAsText"}},"FieldValuesForEdit":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/OverwriteHomePage/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/prov-1/OverwriteHomePage/SitePages/Home.aspx')/ListItemAllFields/FieldValuesForEdit"}},"File":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/OverwriteHomePage/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/prov-1/OverwriteHomePage/SitePages/Home.aspx')/ListItemAllFields/File"}},"Folder":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/OverwriteHomePage/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/prov-1/OverwriteHomePage/SitePages/Home.aspx')/ListItemAllFields/Folder"}},"LikedByInformation":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/OverwriteHomePage/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/prov-1/OverwriteHomePage/SitePages/Home.aspx')/ListItemAllFields/LikedByInformation"}},"ParentList":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/OverwriteHomePage/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/prov-1/OverwriteHomePage/SitePages/Home.aspx')/ListItemAllFields/ParentList"}},"Properties":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/OverwriteHomePage/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/prov-1/OverwriteHomePage/SitePages/Home.aspx')/ListItemAllFields/Properties"}},"Versions":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/OverwriteHomePage/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/prov-1/OverwriteHomePage/SitePages/Home.aspx')/ListItemAllFields/Versions"}},"FileSystemObjectType":0,"Id":1,"ServerRedirectedEmbedUri":null,"ServerRedirectedEmbedUrl":"","ContentTypeId":"0x0101009D1CB255DA76424F860D91F20E6C4118001FA668A9DB5CA84AA1D34FB7FA03579F","ComplianceAssetId":null,"WikiField":null,"Title":"Home","CanvasContent1":"<div><div data-sp-canvascontrol=\"\" data-sp-canvasdataversion=\"1.0\" data-sp-controldata=\"&#123;&quot;editorType&quot;&#58;&quot;CKEditor&quot;,&quot;controlType&quot;&#58;4,&quot;id&quot;&#58;&quot;3fd549b6-7b92-49fe-a50e-8e12955d1131&quot;,&quot;position&quot;&#58;&#123;&quot;controlIndex&quot;&#58;1,&quot;zoneIndex&quot;&#58;1,&quot;sectionIndex&quot;&#58;1,&quot;sectionFactor&quot;&#58;4,&quot;layoutIndex&quot;&#58;1&#125;,&quot;emphasis&quot;&#58;&#123;&quot;zoneEmphasis&quot;&#58;2&#125;&#125;\"><div data-sp-rte=\"\"><p>I</p></div></div><div data-sp-canvascontrol=\"\" data-sp-canvasdataversion=\"1.0\" data-sp-controldata=\"&#123;&quot;editorType&quot;&#58;&quot;CKEditor&quot;,&quot;controlType&quot;&#58;4,&quot;id&quot;&#58;&quot;166692af-9919-4c80-bb06-1dbf240315a4&quot;,&quot;position&quot;&#58;&#123;&quot;controlIndex&quot;&#58;1,&quot;zoneIndex&quot;&#58;1,&quot;sectionIndex&quot;&#58;2,&quot;sectionFactor&quot;&#58;4,&quot;layoutIndex&quot;&#58;1&#125;,&quot;emphasis&quot;&#58;&#123;&quot;zoneEmphasis&quot;&#58;2&#125;&#125;\"><div data-sp-rte=\"\"><p>like</p></div></div><div data-sp-canvascontrol=\"\" data-sp-canvasdataversion=\"1.0\" data-sp-controldata=\"&#123;&quot;editorType&quot;&#58;&quot;CKEditor&quot;,&quot;controlType&quot;&#58;4,&quot;id&quot;&#58;&quot;0a915e3c-dd92-4e4f-ad3a-b489fb325c3d&quot;,&quot;position&quot;&#58;&#123;&quot;controlIndex&quot;&#58;1,&quot;zoneIndex&quot;&#58;1,&quot;sectionIndex&quot;&#58;3,&quot;sectionFactor&quot;&#58;4,&quot;layoutIndex&quot;&#58;1&#125;,&quot;emphasis&quot;&#58;&#123;&quot;zoneEmphasis&quot;&#58;2&#125;&#125;\"><div data-sp-rte=\"\"><p>PnP</p></div></div><div data-sp-canvascontrol=\"\" data-sp-canvasdataversion=\"1.0\" data-sp-controldata=\"&#123;&quot;controlType&quot;&#58;0,&quot;pageSettingsSlice&quot;&#58;&#123;&quot;isDefaultDescription&quot;&#58;false,&quot;isDefaultThumbnail&quot;&#58;true&#125;&#125;\"></div></div>","BannerImageUrl":null,"Description":null,"PromotedState":0,"FirstPublishedDate":null,"LayoutWebpartsContent":"<div><div data-sp-canvascontrol=\"\" data-sp-canvasdataversion=\"1.4\" data-sp-controldata=\"&#123;&quot;id&quot;&#58;&quot;cbe7b0a9-3504-44dd-a3a3-0e5cacd07788&quot;,&quot;instanceId&quot;&#58;&quot;cbe7b0a9-3504-44dd-a3a3-0e5cacd07788&quot;,&quot;title&quot;&#58;&quot;Title Region&quot;,&quot;description&quot;&#58;&quot;Title Region Description&quot;,&quot;serverProcessedContent&quot;&#58;&#123;&quot;htmlStrings&quot;&#58;&#123;&#125;,&quot;searchablePlainTexts&quot;&#58;&#123;&#125;,&quot;imageSources&quot;&#58;&#123;&#125;,&quot;links&quot;&#58;&#123;&#125;&#125;,&quot;dataVersion&quot;&#58;&quot;1.4&quot;,&quot;properties&quot;&#58;&#123;&quot;title&quot;&#58;&quot;Home&quot;,&quot;imageSourceType&quot;&#58;4,&quot;layoutType&quot;&#58;&quot;FullWidthImage&quot;,&quot;textAlignment&quot;&#58;&quot;Left&quot;,&quot;showTopicHeader&quot;&#58;false,&quot;showPublishDate&quot;&#58;false,&quot;topicHeader&quot;&#58;&quot;&quot;,&quot;authorByline&quot;&#58;[],&quot;authors&quot;&#58;[]&#125;&#125;\"></div></div>","OData__AuthorBylineId":null,"_AuthorBylineStringId":null,"OData__TopicHeader":null,"OData__SPSitePageFlags":null,"OData__SPTranslatedLanguages":null,"OData__SPTranslationLanguage":null,"OData__SPTranslationSourceItemId":null,"OData__SPIsTranslation":false,"OData__OriginalSourceUrl":null,"OData__OriginalSourceSiteId":null,"OData__OriginalSourceWebId":null,"OData__OriginalSourceListId":null,"OData__OriginalSourceItemId":null,"ID":1,"Created":"2021-06-04T13:55:09","AuthorId":6,"Modified":"2021-06-04T13:55:09","EditorId":6,"OData__CopySource":null,"CheckoutUserId":null,"OData__UIVersionString":"1.0","GUID":"da3cb647-237b-4a7e-bbf3-a3c6762fc3dc"},"ServerRelativeUrl":"/sites/prov-1/OverwriteHomePage/SitePages/Home.aspx","UniqueId":"7d6cd317-e987-452b-bcf4-89765a1930de"}}
---batchresponse_3aab6f42-859d-42c4-967c-de1b2eda5e61--
+{ "Row" : 
+[{
+"ID": "1",
+"PermMask": "0x7ffffffffffbffff",
+"FSObjType": "0",
+"HTML_x0020_File_x0020_Type": "",
+"UniqueId": "{03D168C5-50FA-4D0F-A2D5-DD6773F8FDB2}",
+"ProgId": "",
+"NoExecute": "0",
+"ContentTypeId": "0x0101009D1CB255DA76424F860D91F20E6C4118003736598C41467947A1A94751FAC8EE97",
+"FileRef": "\u002fsites\u002fprov-1\u002fOverwriteHomePage\u002fSitePages\u002fHome.aspx",
+"FileRef.urlencode": "%2Fsites%2Fprov%2D1%2FOverwriteHomePage%2FSitePages%2FHome%2Easpx",
+"FileRef.urlencodeasurl": "\u002fsites\u002fprov-1\u002fOverwriteHomePage\u002fSitePages\u002fHome.aspx",
+"FileRef.urlencoding": "\u002fsites\u002fprov-1\u002fOverwriteHomePage\u002fSitePages\u002fHome.aspx",
+"FileRef.scriptencodeasurl": "\\u002fsites\\u002fprov-1\\u002fOverwriteHomePage\\u002fSitePages\\u002fHome.aspx",
+"_UIVersion": "512",
+"SMTotalSize": "2049",
+"File_x0020_Size": "805",
+"_CommentFlags": "1",
+"File_x0020_Type": "aspx",
+"HTML_x0020_File_x0020_Type.File_x0020_Type.mapall": "ichtm.gif|Microsoft SharePoint Designer|SharePoint.OpenDocuments|",
+"HTML_x0020_File_x0020_Type.File_x0020_Type.mapcon": "SharePoint.OpenDocuments",
+"HTML_x0020_File_x0020_Type.File_x0020_Type.mapico": "ichtm.gif",
+"serverurl.progid": "",
+"ServerRedirectedEmbedUrl": "",
+"File_x0020_Type.progid": "",
+"File_x0020_Type.url": "FALSE",
+"FileLeafRef": "Home.aspx",
+"FileLeafRef.Name": "Home",
+"FileLeafRef.Suffix": "aspx",
+"FileDirRef": "\u002fsites\u002fprov-1\u002fOverwriteHomePage\u002fSitePages",
+"Description": "",
+"Title": "Home",
+"ClientSideApplicationId": "{B6917CB1-93A0-4B97-A84D-7CF49975D4EC}",
+"PageLayoutType": "Home",
+"CanvasContent1": "<div dir=\"\" class=\"ms-rtestate-field\"><div><div data-sp-canvascontrol=\"\" data-sp-canvasdataversion=\"1.0\" data-sp-controldata=\"&#123;&quot;editorType&quot;&#58;&quot;CKEditor&quot;,&quot;controlType&quot;&#58;4,&quot;id&quot;&#58;&quot;23d4b01e-0068-4b79-baac-7553240cc9c3&quot;,&quot;position&quot;&#58;&#123;&quot;controlIndex&quot;&#58;1,&quot;zoneIndex&quot;&#58;1,&quot;sectionIndex&quot;&#58;1,&quot;sectionFactor&quot;&#58;4,&quot;layoutIndex&quot;&#58;1&#125;,&quot;emphasis&quot;&#58;&#123;&quot;zoneEmphasis&quot;&#58;2&#125;&#125;\"><div data-sp-rte=\"\"><p>I<\u002fp><\u002fdiv><\u002fdiv><div data-sp-canvascontrol=\"\" data-sp-canvasdataversion=\"1.0\" data-sp-controldata=\"&#123;&quot;editorType&quot;&#58;&quot;CKEditor&quot;,&quot;controlType&quot;&#58;4,&quot;id&quot;&#58;&quot;612da9dc-84c0-4d60-988d-ffd234a884f2&quot;,&quot;position&quot;&#58;&#123;&quot;controlIndex&quot;&#58;1,&quot;zoneIndex&quot;&#58;1,&quot;sectionIndex&quot;&#58;2,&quot;sectionFactor&quot;&#58;4,&quot;layoutIndex&quot;&#58;1&#125;,&quot;emphasis&quot;&#58;&#123;&quot;zoneEmphasis&quot;&#58;2&#125;&#125;\"><div data-sp-rte=\"\"><p>like<\u002fp><\u002fdiv><\u002fdiv><div data-sp-canvascontrol=\"\" data-sp-canvasdataversion=\"1.0\" data-sp-controldata=\"&#123;&quot;editorType&quot;&#58;&quot;CKEditor&quot;,&quot;controlType&quot;&#58;4,&quot;id&quot;&#58;&quot;e6c75a6c-cd3e-4bae-b1b1-0b128ab15a2b&quot;,&quot;position&quot;&#58;&#123;&quot;controlIndex&quot;&#58;1,&quot;zoneIndex&quot;&#58;1,&quot;sectionIndex&quot;&#58;3,&quot;sectionFactor&quot;&#58;4,&quot;layoutIndex&quot;&#58;1&#125;,&quot;emphasis&quot;&#58;&#123;&quot;zoneEmphasis&quot;&#58;2&#125;&#125;\"><div data-sp-rte=\"\"><p>PnP<\u002fp><\u002fdiv><\u002fdiv><div data-sp-canvascontrol=\"\" data-sp-canvasdataversion=\"1.0\" data-sp-controldata=\"&#123;&quot;controlType&quot;&#58;0,&quot;pageSettingsSlice&quot;&#58;&#123;&quot;isDefaultDescription&quot;&#58;false,&quot;isDefaultThumbnail&quot;&#58;true&#125;&#125;\"><\u002fdiv><\u002fdiv><\u002fdiv>",
+"_AuthorByline": "",
+"_AuthorByline.id": "",
+"_AuthorByline.title": "",
+"_AuthorByline.span": "",
+"_AuthorByline.email": "<div><div data-sp-canvascontrol=\"\" data-sp-canvasdataversion=\"1.4\" data-sp-controldata=\"&#123;&quot;id&quot;&#58;&quot;cbe7b0a9-3504-44dd-a3a3-0e5cacd07788&quot;,&quot;instanceId&quot;&#58;&quot;cbe7b0a9-3504-44dd-a3a3-0e5cacd07788&quot;,&quot;title&quot;&#58;&quot;Title Region&quot;,&quot;description&quot;&#58;&quot;Title Region Description&quot;,&quot;serverProcessedContent&quot;&#58;&#123;&quot;htmlStrings&quot;&#58;&#123;&#125;,&quot;searchablePlainTexts&quot;&#58;&#123;&#125;,&quot;imageSources&quot;&#58;&#123;&#125;,&quot;links&quot;&#58;&#123;&#125;&#125;,&quot;dataVersion&quot;&#58;&quot;1.4&quot;,&quot;properties&quot;&#58;&#123;&quot;title&quot;&#58;&quot;Home&quot;,&quot;imageSourceType&quot;&#58;4,&quot;layoutType&quot;&#58;&quot;FullWidthImage&quot;,&quot;textAlignment&quot;&#58;&quot;Left&quot;,&quot;showTopicHeader&quot;&#58;false,&quot;showPublishDate&quot;&#58;false,&quot;topicHeader&quot;&#58;&quot;&quot;,&quot;authorByline&quot;&#58;[],&quot;authors&quot;&#58;[]&#125;&#125;\"><\u002fdiv><\u002fdiv>",
+"_AuthorByline.sip": "",
+"_AuthorByline.jobTitle": "",
+"_AuthorByline.department": "",
+"_AuthorByline.picture": "0",
+"LayoutWebpartsContent": "<div dir=\"\" class=\"ms-rtestate-field\"><div><div data-sp-canvascontrol=\"\" data-sp-canvasdataversion=\"1.4\" data-sp-controldata=\"&#123;&quot;id&quot;&#58;&quot;cbe7b0a9-3504-44dd-a3a3-0e5cacd07788&quot;,&quot;instanceId&quot;&#58;&quot;cbe7b0a9-3504-44dd-a3a3-0e5cacd07788&quot;,&quot;title&quot;&#58;&quot;Title Region&quot;,&quot;description&quot;&#58;&quot;Title Region Description&quot;,&quot;serverProcessedContent&quot;&#58;&#123;&quot;htmlStrings&quot;&#58;&#123;&#125;,&quot;searchablePlainTexts&quot;&#58;&#123;&#125;,&quot;imageSources&quot;&#58;&#123;&#125;,&quot;links&quot;&#58;&#123;&#125;&#125;,&quot;dataVersion&quot;&#58;&quot;1.4&quot;,&quot;properties&quot;&#58;&#123;&quot;title&quot;&#58;&quot;Home&quot;,&quot;imageSourceType&quot;&#58;4,&quot;layoutType&quot;&#58;&quot;FullWidthImage&quot;,&quot;textAlignment&quot;&#58;&quot;Left&quot;,&quot;showTopicHeader&quot;&#58;false,&quot;showPublishDate&quot;&#58;false,&quot;topicHeader&quot;&#58;&quot;&quot;,&quot;authorByline&quot;&#58;[],&quot;authors&quot;&#58;[]&#125;&#125;\"><\u002fdiv><\u002fdiv><\u002fdiv>",
+"BannerImageUrl": "",
+"BannerImageUrl.desc": "",
+"PromotedState": "0",
+"PromotedState.": "0",
+"_OriginalSourceUrl": "",
+"_OriginalSourceSiteId": "",
+"_OriginalSourceWebId": "",
+"_OriginalSourceListId": "",
+"_OriginalSourceItemId": "",
+"ItemChildCount": "0",
+"FolderChildCount": "0",
+"A2ODMountCount": "",
+"_StubFile": "0",
+"_ComplianceTag": "",
+"owshiddenversion": "4",
+"_SPTranslatedLanguages": "",
+"_SPSitePageFlags": "",
+"ContentVersion": "0",
+"DocConcurrencyNumber": "4",
+"_VirusStatus": "",
+"Restricted": "",
+"ecb.dispex": "return DispEx(this,event,'TRUE','FALSE','FALSE','','1','SharePoint.OpenDocuments','','','','6','0','','0x7ffffffffffbffff','','')"
+}
+],"FirstRow" : 1,
+"FolderPermissions" : "0x7ffffffffffbffff"
+,"LastRow" : 1,
+"RowLimit" : 500
+,"FilterLink" : "?"
+,"ForceNoHierarchy" : "1"
+,"HierarchyHasIndention" : ""
+,"CurrentFolderSpItemUrl" : ""
+
+}
+--batchresponse_27e7db1b-dd03-45a7-bc59-da3581d64c3b--

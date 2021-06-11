@@ -54,6 +54,8 @@ namespace PnP.Core.Model.SharePoint
 
         public bool EnforceIBSegmentFiltering { get => GetValue<bool>(); set => SetValue(value); }
 
+        public bool EnforceSPOSearch { get => GetValue<bool>(); set => SetValue(value); }
+
         public bool HasEditRole { get => GetValue<bool>(); set => SetValue(value); }
 
         public bool HasReadRole { get => GetValue<bool>(); set => SetValue(value); }
@@ -81,6 +83,8 @@ namespace PnP.Core.Model.SharePoint
         public bool ShareByEmailEnabled { get => GetValue<bool>(); set => SetValue(value); }
 
         public bool ShowExternalSharingWarning { get => GetValue<bool>(); set => SetValue(value); }
+
+        public string SiteIBMode { get => GetValue<string>(); set => SetValue(value); }
 
         public bool SupportsAclPropagation { get => GetValue<bool>(); set => SetValue(value); }
 

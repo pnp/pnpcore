@@ -241,6 +241,10 @@ namespace PnP.Core.Model.SharePoint
 
         #region New properties
 
+        public bool HasWebTemplateExtension { get => GetValue<bool>(); set => SetValue(value); }
+
+        public bool KeepFieldUserResources { get => GetValue<bool>(); set => SetValue(value); }
+
         public IList AccessRequestsList { get => GetModelValue<IList>(); }
 
 

@@ -1,9 +1,87 @@
---batchresponse_cb7ea338-4342-43ae-826a-1dee1d91a997
+--batchresponse_470fc836-ecb7-4d2c-bc03-c655d7ab6846
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 200 OK
-CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+CONTENT-TYPE: application/json; charset=utf-8
 
-{"d":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/prov-1/SitePages/PNP_SDK_TEST_AddFormattedText.aspx')","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/prov-1/SitePages/PNP_SDK_TEST_AddFormattedText.aspx')","type":"SP.File"},"ListItemAllFields":{"__metadata":{"id":"95ed09cc-d59d-4e5b-8cf9-c112ed33adb8","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/prov-1/SitePages/PNP_SDK_TEST_AddFormattedText.aspx')/ListItemAllFields","etag":"\"2\"","type":"SP.Data.SitePagesItem"},"FirstUniqueAncestorSecurableObject":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/prov-1/SitePages/PNP_SDK_TEST_AddFormattedText.aspx')/ListItemAllFields/FirstUniqueAncestorSecurableObject"}},"RoleAssignments":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/prov-1/SitePages/PNP_SDK_TEST_AddFormattedText.aspx')/ListItemAllFields/RoleAssignments"}},"AttachmentFiles":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/prov-1/SitePages/PNP_SDK_TEST_AddFormattedText.aspx')/ListItemAllFields/AttachmentFiles"}},"ContentType":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/prov-1/SitePages/PNP_SDK_TEST_AddFormattedText.aspx')/ListItemAllFields/ContentType"}},"GetDlpPolicyTip":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/prov-1/SitePages/PNP_SDK_TEST_AddFormattedText.aspx')/ListItemAllFields/GetDlpPolicyTip"}},"FieldValuesAsHtml":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/prov-1/SitePages/PNP_SDK_TEST_AddFormattedText.aspx')/ListItemAllFields/FieldValuesAsHtml"}},"FieldValuesAsText":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/prov-1/SitePages/PNP_SDK_TEST_AddFormattedText.aspx')/ListItemAllFields/FieldValuesAsText"}},"FieldValuesForEdit":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/prov-1/SitePages/PNP_SDK_TEST_AddFormattedText.aspx')/ListItemAllFields/FieldValuesForEdit"}},"File":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/prov-1/SitePages/PNP_SDK_TEST_AddFormattedText.aspx')/ListItemAllFields/File"}},"Folder":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/prov-1/SitePages/PNP_SDK_TEST_AddFormattedText.aspx')/ListItemAllFields/Folder"}},"LikedByInformation":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/prov-1/SitePages/PNP_SDK_TEST_AddFormattedText.aspx')/ListItemAllFields/LikedByInformation"}},"ParentList":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/prov-1/SitePages/PNP_SDK_TEST_AddFormattedText.aspx')/ListItemAllFields/ParentList"}},"Properties":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/prov-1/SitePages/PNP_SDK_TEST_AddFormattedText.aspx')/ListItemAllFields/Properties"}},"Versions":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/prov-1/SitePages/PNP_SDK_TEST_AddFormattedText.aspx')/ListItemAllFields/Versions"}},"FileSystemObjectType":0,"Id":1912,"ServerRedirectedEmbedUri":null,"ServerRedirectedEmbedUrl":"","ContentTypeId":"0x0101009D1CB255DA76424F860D91F20E6C411800BC66A1F7CEC63943B700A35FCBCF0164","ComplianceAssetId":null,"WikiField":null,"Title":"PNP_SDK_TEST_AddFormattedText","CanvasContent1":"<div><div data-sp-canvascontrol=\"\" data-sp-canvasdataversion=\"1.0\" data-sp-controldata=\"&#123;&quot;editorType&quot;&#58;&quot;CKEditor&quot;,&quot;controlType&quot;&#58;4,&quot;id&quot;&#58;&quot;a56624d0-a388-49fa-ac7f-23f692e9b387&quot;,&quot;position&quot;&#58;&#123;&quot;controlIndex&quot;&#58;1,&quot;zoneIndex&quot;&#58;1,&quot;sectionIndex&quot;&#58;1,&quot;sectionFactor&quot;&#58;12,&quot;layoutIndex&quot;&#58;1&#125;,&quot;emphasis&quot;&#58;&#123;&quot;zoneEmphasis&quot;&#58;0&#125;&#125;\"><div data-sp-rte=\"\"><p>PnP <span class=\"fontSizeXLargePlus\"><span class=\"fontColorRed\"><strong>rocks!</strong></span></span></p></div></div><div data-sp-canvascontrol=\"\" data-sp-canvasdataversion=\"1.0\" data-sp-controldata=\"&#123;&quot;controlType&quot;&#58;0,&quot;pageSettingsSlice&quot;&#58;&#123;&quot;isDefaultDescription&quot;&#58;false,&quot;isDefaultThumbnail&quot;&#58;true&#125;&#125;\"></div></div>","BannerImageUrl":{"__metadata":{"type":"SP.FieldUrlValue"},"Description":"/_layouts/15/images/sitepagethumbnail.png","Url":"https://bertonline.sharepoint.com/_layouts/15/images/sitepagethumbnail.png"},"Description":"PnP rocks!","PromotedState":0,"FirstPublishedDate":null,"LayoutWebpartsContent":"<div><div data-sp-canvascontrol=\"\" data-sp-canvasdataversion=\"1.4\" data-sp-controldata=\"&#123;&quot;id&quot;&#58;&quot;cbe7b0a9-3504-44dd-a3a3-0e5cacd07788&quot;,&quot;instanceId&quot;&#58;&quot;cbe7b0a9-3504-44dd-a3a3-0e5cacd07788&quot;,&quot;title&quot;&#58;&quot;Title Region&quot;,&quot;description&quot;&#58;&quot;Title Region Description&quot;,&quot;serverProcessedContent&quot;&#58;&#123;&quot;htmlStrings&quot;&#58;&#123;&#125;,&quot;searchablePlainTexts&quot;&#58;&#123;&#125;,&quot;imageSources&quot;&#58;&#123;&#125;,&quot;links&quot;&#58;&#123;&#125;&#125;,&quot;dataVersion&quot;&#58;&quot;1.4&quot;,&quot;properties&quot;&#58;&#123;&quot;title&quot;&#58;&quot;&quot;,&quot;imageSourceType&quot;&#58;4,&quot;layoutType&quot;&#58;&quot;FullWidthImage&quot;,&quot;textAlignment&quot;&#58;&quot;Left&quot;,&quot;showTopicHeader&quot;&#58;false,&quot;showPublishDate&quot;&#58;false,&quot;topicHeader&quot;&#58;&quot;&quot;,&quot;authorByline&quot;&#58;[],&quot;authors&quot;&#58;[]&#125;&#125;\"></div></div>","OData__AuthorBylineId":null,"_AuthorBylineStringId":null,"OData__TopicHeader":null,"OData__OriginalSourceUrl":null,"OData__OriginalSourceSiteId":null,"OData__OriginalSourceWebId":null,"OData__OriginalSourceListId":null,"OData__OriginalSourceItemId":null,"OData__SPSitePageFlags":null,"OData__SPTranslatedLanguages":null,"OData__SPTranslationLanguage":null,"OData__SPTranslationSourceItemId":null,"OData__SPIsTranslation":null,"ID":1912,"Created":"2021-06-04T13:53:33","AuthorId":6,"Modified":"2021-06-04T13:53:34","EditorId":6,"OData__CopySource":null,"CheckoutUserId":null,"OData__UIVersionString":"0.1","GUID":"3a4e74e5-808c-4332-a965-c8b8bbad4b05"},"ServerRelativeUrl":"/sites/prov-1/SitePages/PNP_SDK_TEST_AddFormattedText.aspx","UniqueId":"07512e03-33e9-49e6-9db0-40c793c69a79"}}
---batchresponse_cb7ea338-4342-43ae-826a-1dee1d91a997--
+{ "Row" : 
+[{
+"ID": "1993",
+"PermMask": "0x7ffffffffffbffff",
+"FSObjType": "0",
+"HTML_x0020_File_x0020_Type": "",
+"UniqueId": "{A733B927-4CA0-43D0-A86B-5F0359810DC4}",
+"ProgId": "",
+"NoExecute": "0",
+"ContentTypeId": "0x0101009D1CB255DA76424F860D91F20E6C411800BC66A1F7CEC63943B700A35FCBCF0164",
+"FileRef": "\u002fsites\u002fprov-1\u002fSitePages\u002fPNP_SDK_TEST_AddFormattedText.aspx",
+"FileRef.urlencode": "%2Fsites%2Fprov%2D1%2FSitePages%2FPNP%5FSDK%5FTEST%5FAddFormattedText%2Easpx",
+"FileRef.urlencodeasurl": "\u002fsites\u002fprov-1\u002fSitePages\u002fPNP_SDK_TEST_AddFormattedText.aspx",
+"FileRef.urlencoding": "\u002fsites\u002fprov-1\u002fSitePages\u002fPNP_SDK_TEST_AddFormattedText.aspx",
+"FileRef.scriptencodeasurl": "\\u002fsites\\u002fprov-1\\u002fSitePages\\u002fPNP_SDK_TEST_AddFormattedText.aspx",
+"_UIVersion": "1",
+"SMTotalSize": "6211",
+"File_x0020_Size": "4864",
+"_CommentFlags": "",
+"File_x0020_Type": "aspx",
+"HTML_x0020_File_x0020_Type.File_x0020_Type.mapall": "ichtm.gif|Microsoft SharePoint Designer|SharePoint.OpenDocuments|",
+"HTML_x0020_File_x0020_Type.File_x0020_Type.mapcon": "SharePoint.OpenDocuments",
+"HTML_x0020_File_x0020_Type.File_x0020_Type.mapico": "ichtm.gif",
+"serverurl.progid": "",
+"ServerRedirectedEmbedUrl": "",
+"File_x0020_Type.progid": "",
+"File_x0020_Type.url": "FALSE",
+"FileLeafRef": "PNP_SDK_TEST_AddFormattedText.aspx",
+"FileLeafRef.Name": "PNP_SDK_TEST_AddFormattedText",
+"FileLeafRef.Suffix": "aspx",
+"FileDirRef": "\u002fsites\u002fprov-1\u002fSitePages",
+"Description": "PnP rocks!",
+"Title": "PNP_SDK_TEST_AddFormattedText",
+"ClientSideApplicationId": "{B6917CB1-93A0-4B97-A84D-7CF49975D4EC}",
+"PageLayoutType": "Article",
+"CanvasContent1": "<div dir=\"\" class=\"ms-rtestate-field\"><div><div data-sp-canvascontrol=\"\" data-sp-canvasdataversion=\"1.0\" data-sp-controldata=\"&#123;&quot;editorType&quot;&#58;&quot;CKEditor&quot;,&quot;controlType&quot;&#58;4,&quot;id&quot;&#58;&quot;f14b460e-7f5f-4f01-86d7-9027a331fe82&quot;,&quot;position&quot;&#58;&#123;&quot;controlIndex&quot;&#58;1,&quot;zoneIndex&quot;&#58;1,&quot;sectionIndex&quot;&#58;1,&quot;sectionFactor&quot;&#58;12,&quot;layoutIndex&quot;&#58;1&#125;,&quot;emphasis&quot;&#58;&#123;&quot;zoneEmphasis&quot;&#58;0&#125;&#125;\"><div data-sp-rte=\"\"><p>PnP <span class=\"fontSizeXLargePlus\"><span class=\"fontColorRed\"><strong>rocks!<\u002fstrong><\u002fspan><\u002fspan><\u002fp><\u002fdiv><\u002fdiv><div data-sp-canvascontrol=\"\" data-sp-canvasdataversion=\"1.0\" data-sp-controldata=\"&#123;&quot;controlType&quot;&#58;0,&quot;pageSettingsSlice&quot;&#58;&#123;&quot;isDefaultDescription&quot;&#58;false,&quot;isDefaultThumbnail&quot;&#58;true&#125;&#125;\"><\u002fdiv><\u002fdiv><\u002fdiv>",
+"_AuthorByline": "",
+"_AuthorByline.id": "",
+"_AuthorByline.title": "\u002f_layouts\u002f15\u002fimages\u002fsitepagethumbnail.png",
+"_AuthorByline.span": "",
+"_AuthorByline.email": "<div><div data-sp-canvascontrol=\"\" data-sp-canvasdataversion=\"1.4\" data-sp-controldata=\"&#123;&quot;id&quot;&#58;&quot;cbe7b0a9-3504-44dd-a3a3-0e5cacd07788&quot;,&quot;instanceId&quot;&#58;&quot;cbe7b0a9-3504-44dd-a3a3-0e5cacd07788&quot;,&quot;title&quot;&#58;&quot;Title Region&quot;,&quot;description&quot;&#58;&quot;Title Region Description&quot;,&quot;serverProcessedContent&quot;&#58;&#123;&quot;htmlStrings&quot;&#58;&#123;&#125;,&quot;searchablePlainTexts&quot;&#58;&#123;&#125;,&quot;imageSources&quot;&#58;&#123;&#125;,&quot;links&quot;&#58;&#123;&#125;&#125;,&quot;dataVersion&quot;&#58;&quot;1.4&quot;,&quot;properties&quot;&#58;&#123;&quot;title&quot;&#58;&quot;&quot;,&quot;imageSourceType&quot;&#58;4,&quot;layoutType&quot;&#58;&quot;FullWidthImage&quot;,&quot;textAlignment&quot;&#58;&quot;Left&quot;,&quot;showTopicHeader&quot;&#58;false,&quot;showPublishDate&quot;&#58;false,&quot;topicHeader&quot;&#58;&quot;&quot;,&quot;authorByline&quot;&#58;[],&quot;authors&quot;&#58;[]&#125;&#125;\"><\u002fdiv><\u002fdiv>",
+"_AuthorByline.sip": "\u002f_layouts\u002f15\u002fimages\u002fsitepagethumbnail.png",
+"_AuthorByline.jobTitle": "",
+"_AuthorByline.department": "",
+"_AuthorByline.picture": "0",
+"LayoutWebpartsContent": "<div dir=\"\" class=\"ms-rtestate-field\"><div><div data-sp-canvascontrol=\"\" data-sp-canvasdataversion=\"1.4\" data-sp-controldata=\"&#123;&quot;id&quot;&#58;&quot;cbe7b0a9-3504-44dd-a3a3-0e5cacd07788&quot;,&quot;instanceId&quot;&#58;&quot;cbe7b0a9-3504-44dd-a3a3-0e5cacd07788&quot;,&quot;title&quot;&#58;&quot;Title Region&quot;,&quot;description&quot;&#58;&quot;Title Region Description&quot;,&quot;serverProcessedContent&quot;&#58;&#123;&quot;htmlStrings&quot;&#58;&#123;&#125;,&quot;searchablePlainTexts&quot;&#58;&#123;&#125;,&quot;imageSources&quot;&#58;&#123;&#125;,&quot;links&quot;&#58;&#123;&#125;&#125;,&quot;dataVersion&quot;&#58;&quot;1.4&quot;,&quot;properties&quot;&#58;&#123;&quot;title&quot;&#58;&quot;&quot;,&quot;imageSourceType&quot;&#58;4,&quot;layoutType&quot;&#58;&quot;FullWidthImage&quot;,&quot;textAlignment&quot;&#58;&quot;Left&quot;,&quot;showTopicHeader&quot;&#58;false,&quot;showPublishDate&quot;&#58;false,&quot;topicHeader&quot;&#58;&quot;&quot;,&quot;authorByline&quot;&#58;[],&quot;authors&quot;&#58;[]&#125;&#125;\"><\u002fdiv><\u002fdiv><\u002fdiv>",
+"BannerImageUrl": "\u002f_layouts\u002f15\u002fimages\u002fsitepagethumbnail.png",
+"BannerImageUrl.desc": "\u002f_layouts\u002f15\u002fimages\u002fsitepagethumbnail.png",
+"PromotedState": "0",
+"PromotedState.": "0",
+"_OriginalSourceUrl": "",
+"_OriginalSourceSiteId": "",
+"_OriginalSourceWebId": "",
+"_OriginalSourceListId": "",
+"_OriginalSourceItemId": "",
+"ItemChildCount": "0",
+"FolderChildCount": "0",
+"A2ODMountCount": "",
+"_StubFile": "0",
+"_ComplianceTag": "",
+"owshiddenversion": "2",
+"_SPTranslatedLanguages": "",
+"_SPSitePageFlags": "",
+"ContentVersion": "1",
+"DocConcurrencyNumber": "2",
+"_VirusStatus": "",
+"Restricted": "",
+"ecb.dispex": "return DispEx(this,event,'TRUE','FALSE','FALSE','','1','SharePoint.OpenDocuments','','','','6','0','','0x7ffffffffffbffff','','')"
+}
+],"FirstRow" : 1,
+"FolderPermissions" : "0x7ffffffffffbffff"
+,"LastRow" : 1,
+"RowLimit" : 500
+,"FilterLink" : "?"
+,"ForceNoHierarchy" : "1"
+,"HierarchyHasIndention" : ""
+,"CurrentFolderSpItemUrl" : ""
+
+}
+--batchresponse_470fc836-ecb7-4d2c-bc03-c655d7ab6846--

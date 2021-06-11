@@ -183,6 +183,16 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// To update...
         /// </summary>
+        public bool HasAlternateContentStreams { get; set; }
+
+        /// <summary>
+        /// To update...
+        /// </summary>
+        public string ServerRedirectedUrl { get; set; }
+
+        /// <summary>
+        /// To update...
+        /// </summary>
         public string VroomDriveID { get; set; }
 
         /// <summary>

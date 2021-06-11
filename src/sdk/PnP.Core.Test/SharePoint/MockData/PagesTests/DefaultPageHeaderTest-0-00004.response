@@ -1,4 +1,4 @@
---batchresponse_eaed806f-3a72-4352-b01a-a6fe354bcb93
+--batchresponse_6774cf18-0702-4923-9b1f-468f2fb79b02
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
@@ -6,4 +6,4 @@ HTTP/1.1 404 Not Found
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
 {"error":{"code":"-2130575338, Microsoft.SharePoint.SPException","message":{"lang":"en-US","value":"The file /sites/prov-1/SitePages/PNP_SDK_TEST_DefaultPageHeaderTest.aspx does not exist."}}}
---batchresponse_eaed806f-3a72-4352-b01a-a6fe354bcb93--
+--batchresponse_6774cf18-0702-4923-9b1f-468f2fb79b02--

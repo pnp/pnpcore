@@ -1,0 +1,10 @@
+--batchresponse_4b2fc91f-0dba-4e07-855e-b2645bd9af69
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+HTTP/1.1 200 OK
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+ETAG: "952f8a53-8c34-43ee-9825-8dcb9fc745c4,3"
+
+{"d":{"__metadata":{"id":"743b1cb5-5c03-4e02-bf50-439082718dcd","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'5c73d6b2-ac03-4058-8233-af21df6ed8de')/Items(2012)","etag":"\"3\"","type":"SP.Data.SitePagesItem"},"LikedByInformation":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'5c73d6b2-ac03-4058-8233-af21df6ed8de')/Items(2012)/LikedByInformation","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'5c73d6b2-ac03-4058-8233-af21df6ed8de')/Items(2012)/LikedByInformation","type":"Microsoft.SharePoint.Likes.likedByInformation"},"likedBy":{"results":[]},"isLikedByUser":false,"likeCount":"0"},"Id":2012,"ID":2012}}
+--batchresponse_4b2fc91f-0dba-4e07-855e-b2645bd9af69--

@@ -29,6 +29,11 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// To update...
         /// </summary>
+        public int EnforcedECTsVersion { get; set; }
+
+        /// <summary>
+        /// To update...
+        /// </summary>
         public bool HideNameInNavigation { get; set; }
 
         /// <summary>
@@ -45,6 +50,11 @@ namespace PnP.Core.Model.SharePoint
         /// To update...
         /// </summary>
         public Guid ParentHubSiteId { get; set; }
+
+        /// <summary>
+        /// To update...
+        /// </summary>
+        public int PermissionsSyncTag { get; set; }
 
         /// <summary>
         /// To update...

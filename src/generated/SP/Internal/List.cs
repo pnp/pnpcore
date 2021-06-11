@@ -141,6 +141,8 @@ namespace PnP.Core.Model.SharePoint
 
         public string DefaultViewUrl { get => GetValue<string>(); set => SetValue(value); }
 
+        public bool DisableCommenting { get => GetValue<bool>(); set => SetValue(value); }
+
         public bool DisableGridEditing { get => GetValue<bool>(); set => SetValue(value); }
 
         public bool EnableAssignToEmail { get => GetValue<bool>(); set => SetValue(value); }
@@ -196,6 +198,8 @@ namespace PnP.Core.Model.SharePoint
         public string SchemaXml { get => GetValue<string>(); set => SetValue(value); }
 
         public bool ServerTemplateCanCreateFolders { get => GetValue<bool>(); set => SetValue(value); }
+
+        public bool ShowHiddenFieldsInModernForm { get => GetValue<bool>(); set => SetValue(value); }
 
         public string TemplateTypeId { get => GetValue<string>(); set => SetValue(value); }
 

@@ -115,6 +115,8 @@ namespace PnP.Core.Model.SharePoint
 
         #region New properties
 
+        public string CustomOrder { get => GetValue<string>(); set => SetValue(value); }
+
         #endregion
 
         [KeyProperty(nameof(Id))]

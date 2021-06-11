@@ -459,6 +459,56 @@ namespace PnP.Core.Model.SharePoint
         /// </summary>
         /// <returns><see cref="IPageTranslationStatusCollection"/> list containing information about this page's translations</returns>
         IPageTranslationStatusCollection TranslatePages();
+
+        /// <summary>
+        /// Get list item comments
+        /// </summary>
+        /// <param name="selectors">The expressions declaring the fields to select</param>
+        public Task<ICommentCollection> GetCommentsAsync(params Expression<Func<IComment, object>>[] selectors);
+
+        /// <summary>
+        /// Get list item comments
+        /// </summary>
+        /// <param name="selectors">The expressions declaring the fields to select</param>
+        public ICommentCollection GetComments(params Expression<Func<IComment, object>>[] selectors);
+
+        /// <summary>
+        /// Likes a page
+        /// </summary>
+        /// <returns></returns>
+        public Task LikeAsync();
+
+        /// <summary>
+        /// Likes a page
+        /// </summary>
+        /// <returns></returns>
+#pragma warning disable CA1716 // Identifiers should not match keywords
+        public void Like();
+#pragma warning restore CA1716 // Identifiers should not match keywords
+
+        /// <summary>
+        /// Unlikes a page
+        /// </summary>
+        /// <returns></returns>
+        public Task UnlikeAsync();
+
+        /// <summary>
+        /// Unlikes a page
+        /// </summary>
+        /// <returns></returns>
+        public void Unlike();
+
+        /// <summary>
+        /// Returns information about the likes on this page
+        /// </summary>
+        /// <returns></returns>
+        public Task<ILikedByInformation> GetLikedByInformationAsync();
+
+        /// <summary>
+        /// Returns information about the likes on this page
+        /// </summary>
+        /// <returns></returns>
+        public ILikedByInformation GetLikedByInformation();
     }
 
 }

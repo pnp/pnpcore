@@ -1,9 +1,9 @@
---batchresponse_d764fbc9-c275-4978-8f01-6b5c323db146
+--batchresponse_a5e25f26-c927-4368-9e52-afad70814934
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{"d":{"results":[]}}
---batchresponse_d764fbc9-c275-4978-8f01-6b5c323db146--
+{"d":{"Publish":null}}
+--batchresponse_a5e25f26-c927-4368-9e52-afad70814934--

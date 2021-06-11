@@ -98,6 +98,10 @@ namespace PnP.Core.Model.SharePoint
 
         #region New properties
 
+        public bool HasAlternateContentStreams { get => GetValue<bool>(); set => SetValue(value); }
+
+        public string ServerRedirectedUrl { get => GetValue<string>(); set => SetValue(value); }
+
         public string VroomDriveID { get => GetValue<string>(); set => SetValue(value); }
 
         public string VroomItemID { get => GetValue<string>(); set => SetValue(value); }

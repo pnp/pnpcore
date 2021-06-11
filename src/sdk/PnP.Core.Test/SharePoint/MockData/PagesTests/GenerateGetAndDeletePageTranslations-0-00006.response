@@ -1,4 +1,4 @@
---batchresponse_6fa41003-d370-4b65-a0fd-e6a3bb285787
+--batchresponse_d0dd26f2-22af-4efe-bcf1-5a86ebb1913f
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
@@ -6,4 +6,4 @@ HTTP/1.1 404 Not Found
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
 {"error":{"code":"-2130575338, Microsoft.SharePoint.SPException","message":{"lang":"en-US","value":"The file /sites/pnpcoresdktest/SitePages/PNP_SDK_TEST_PageToTranslate.aspx does not exist."}}}
---batchresponse_6fa41003-d370-4b65-a0fd-e6a3bb285787--
+--batchresponse_d0dd26f2-22af-4efe-bcf1-5a86ebb1913f--

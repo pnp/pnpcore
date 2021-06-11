@@ -1,4 +1,4 @@
---batchresponse_0cb91725-2a41-43c0-887d-6eea357b7321
+--batchresponse_e23ded02-10f7-4683-b175-9f4ad98a8fde
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
@@ -6,4 +6,4 @@ HTTP/1.1 404 Not Found
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
 {"error":{"code":"-2130575338, Microsoft.SharePoint.SPException","message":{"lang":"en-US","value":"The file /sites/prov-1/SitePages/PNP_SDK_TEST_PromoteAsNewsArticle.aspx does not exist."}}}
---batchresponse_0cb91725-2a41-43c0-887d-6eea357b7321--
+--batchresponse_e23ded02-10f7-4683-b175-9f4ad98a8fde--

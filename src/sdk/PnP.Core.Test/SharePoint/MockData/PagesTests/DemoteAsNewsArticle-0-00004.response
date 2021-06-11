@@ -1,4 +1,4 @@
---batchresponse_b2cdb9f8-80c2-484e-a053-8fd86271e634
+--batchresponse_fa41e83c-fe7d-4f41-9626-4b06202c97e2
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
@@ -6,4 +6,4 @@ HTTP/1.1 404 Not Found
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
 {"error":{"code":"-2130575338, Microsoft.SharePoint.SPException","message":{"lang":"en-US","value":"The file /sites/prov-1/SitePages/PNP_SDK_TEST_DemoteAsNewsArticle.aspx does not exist."}}}
---batchresponse_b2cdb9f8-80c2-484e-a053-8fd86271e634--
+--batchresponse_fa41e83c-fe7d-4f41-9626-4b06202c97e2--

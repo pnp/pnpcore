@@ -1,9 +1,9 @@
---batchresponse_a6f8c62f-09f8-4802-af27-0219e066c788
+--batchresponse_47595b47-061a-44c0-898a-95a4825973d6
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{"d":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/prov-1/SitePages/PNP_SDK_TEST_PromoteAsNewsArticle.aspx')","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/prov-1/SitePages/PNP_SDK_TEST_PromoteAsNewsArticle.aspx')","type":"SP.File"},"ListId":"5c73d6b2-ac03-4058-8233-af21df6ed8de","UniqueId":"54862b1a-54b1-4616-8505-0da140dde43c"}}
---batchresponse_a6f8c62f-09f8-4802-af27-0219e066c788--
+{"d":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/prov-1/SitePages/PNP_SDK_TEST_PromoteAsNewsArticle.aspx')","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/prov-1/SitePages/PNP_SDK_TEST_PromoteAsNewsArticle.aspx')","type":"SP.File"},"CheckOutType":2,"ListId":"5c73d6b2-ac03-4058-8233-af21df6ed8de","Exists":true,"UniqueId":"7e5f9db4-5d3b-4504-abcb-d81b25244c93"}}
+--batchresponse_47595b47-061a-44c0-898a-95a4825973d6--
