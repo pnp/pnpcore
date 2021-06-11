@@ -10,7 +10,8 @@ namespace PnP.Core.Model.SharePoint
     /// <summary>
     /// FileVersion class, write your custom code here
     /// </summary>
-    [SharePointType("SP.FileVersion")]
+    [SharePointType("SP.FileVersion", Target = typeof(File), Uri = "_api/Web/getFileById('{Parent.Id}')/versions/getById({Id})", LinqGet = "_api/Web/getFileById('{Parent.Id}')/versions")]
+    [SharePointType("SP.FileVersion", Target = typeof(ListItemVersion))]
     internal partial class FileVersion : BaseDataModel<IFileVersion>, IFileVersion
     {
         #region Properties
@@ -18,8 +19,7 @@ namespace PnP.Core.Model.SharePoint
 
         public DateTime Created { get => GetValue<DateTime>(); set => SetValue(value); }
 
-        [SharePointProperty("ID")]
-        public int Id { get => GetValue<int>(); set => SetValue(value); }
+        public int ID { get => GetValue<int>(); set => SetValue(value); }
 
         public bool IsCurrentVersion { get => GetValue<bool>(); set => SetValue(value); }
 
@@ -31,8 +31,8 @@ namespace PnP.Core.Model.SharePoint
 
         public ISharePointUser CreatedBy { get => GetModelValue<ISharePointUser>(); }
 
-        [KeyProperty(nameof(Created))]
-        public override object Key { get => Created; set => Created = DateTime.Parse(value.ToString()); }
+        [KeyProperty(nameof(ID))]
+        public override object Key { get => ID; set => ID = (int)value; }
         #endregion
 
         #region Methods
@@ -40,18 +40,17 @@ namespace PnP.Core.Model.SharePoint
         #region GetContent
         public async Task<Stream> GetContentAsync(bool streamContent = false)
         {
-            await EnsurePropertiesAsync(p => p.Url).ConfigureAwait(false);
+            var entity = EntityManager.GetClassInfo(GetType(), this);
+            string streamUrl = $"{entity.SharePointUri}/OpenBinaryStream";
 
-            string downloadUrl = $"{PnPContext.Uri}/_layouts/15/download.aspx?SourceUrl={Url}";
-
-            var apiCall = new ApiCall(downloadUrl, ApiType.SPORest)
+            var apiCall = new ApiCall(streamUrl, ApiType.SPORest)
             {
                 Interactive = true,
                 ExpectBinaryResponse = true,
                 StreamResponse = streamContent
             };
 
-            var response = await RawRequestAsync(apiCall, HttpMethod.Get).ConfigureAwait(false);
+            var response = await RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
             return response.BinaryContent;
         }
 
@@ -59,7 +58,6 @@ namespace PnP.Core.Model.SharePoint
         {
             return GetContentAsync(streamContent).GetAwaiter().GetResult();
         }
-
 
         public async Task<byte[]> GetContentBytesAsync()
         {

@@ -1172,7 +1172,6 @@ namespace PnP.Core.Services
             EntityFieldInfo entityField = null;
             if (apiResponse.ApiCall.Type == ApiType.SPORest)
             {
-                // Changed to case insensitive because when loading data via DataStream, the ID field comes back not as "Id", but as "ID"
                 entityField = entity.Fields.FirstOrDefault(p => p.SharePointName == property.Name);
             }
             else if (apiResponse.ApiCall.Type == ApiType.Graph || apiResponse.ApiCall.Type == ApiType.GraphBeta)
