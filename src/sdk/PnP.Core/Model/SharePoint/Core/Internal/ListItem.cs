@@ -230,6 +230,8 @@ namespace PnP.Core.Model.SharePoint
 
         public ILikedByInformation LikedByInformation { get => GetModelValue<ILikedByInformation>(); }
 
+        public IListItemVersionCollection Versions { get => GetModelCollectionValue<IListItemVersionCollection>(); }
+
         [SharePointProperty("*")]
         public object All { get => null; }
 
