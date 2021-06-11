@@ -1058,6 +1058,18 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.Security.ISharePointSharingPrincipal.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.Security.ISharePointSharingPrincipal.html",
+          "hash": "B9cT6xYPYaNA/d5AVCjjcw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/PnP.Core.Model.Security.ISharePointUser.yml",
       "output": {
         ".html": {
@@ -1098,7 +1110,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.Security.html",
-          "hash": "v7x3jy0+WvzG9EnliHVp0A=="
+          "hash": "Rcf/7mfUEG3/G2AI6qfP+w=="
         }
       },
       "is_incremental": false,
@@ -1790,6 +1802,54 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.SharePoint.IComment.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.SharePoint.IComment.html",
+          "hash": "Z83o7axrbdtv9E4fvVRtaw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.SharePoint.ICommentCollection.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.SharePoint.ICommentCollection.html",
+          "hash": "hi1CNyPzS+DI/5qBHIPnQQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.SharePoint.ICommentLikeUserEntity.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.SharePoint.ICommentLikeUserEntity.html",
+          "hash": "6BUvpZIIlOHhty1FkWpsqA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.SharePoint.ICommentLikeUserEntityCollection.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.SharePoint.ICommentLikeUserEntityCollection.html",
+          "hash": "J5ntM868xlt7q5XscT1MSQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/PnP.Core.Model.SharePoint.IComplianceTag.yml",
       "output": {
         ".html": {
@@ -2138,6 +2198,18 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.SharePoint.ILikedByInformation.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.SharePoint.ILikedByInformation.html",
+          "hash": "v0+ANR3xwGwSsbWNerb4iQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/PnP.Core.Model.SharePoint.IList.yml",
       "output": {
         ".html": {
@@ -2166,7 +2238,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.IListItem.html",
-          "hash": "6fmF7bTzjBUYWwDSzuu5qQ=="
+          "hash": "SqVI1X98MoserJMwF23Hmw=="
         }
       },
       "is_incremental": false,
@@ -2190,7 +2262,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.IPage.html",
-          "hash": "lKdEOo7PYRgkpT6/M1I+CQ=="
+          "hash": "3aMbFbGyNcpODcAQumdtFg=="
         }
       },
       "is_incremental": false,
@@ -3246,7 +3318,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.html",
-          "hash": "qCcQSbuNnStOLnQboABJIg=="
+          "hash": "fDZ7G2kHy5u6ZnUJHAZEtQ=="
         }
       },
       "is_incremental": false,
@@ -4374,7 +4446,7 @@
       "output": {
         ".html": {
           "relative_path": "api/toc.html",
-          "hash": "L15yGKWFhCMCwxkx0LRzDA=="
+          "hash": "9pQGcvN7MTZLBOrZYQnZHA=="
         }
       },
       "is_incremental": false,
@@ -5482,7 +5554,7 @@
         "ManagedReferenceDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build",
-          "total_file_count": 362,
+          "total_file_count": 368,
           "skipped_file_count": 0
         },
         "ResourceDocumentProcessor": {

@@ -2356,6 +2356,204 @@
   
   <span class="small pull-right mobile-hide">
     <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IPage_GetComments_Expression_Func_PnP_Core_Model_SharePoint_IComment_System_Object_____.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IPage.GetComments(Expression%7BFunc%7BPnP.Core.Model.SharePoint.IComment%2CSystem.Object%7D%7D%5B%5D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Pages/Public/IPage.cs/#L473" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IPage_GetComments_" data-uid="PnP.Core.Model.SharePoint.IPage.GetComments*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IPage_GetComments_Expression_Func_PnP_Core_Model_SharePoint_IComment_System_Object_____" data-uid="PnP.Core.Model.SharePoint.IPage.GetComments(Expression{Func{PnP.Core.Model.SharePoint.IComment,System.Object}}[])"><a href="#collapsible-PnP_Core_Model_SharePoint_IPage_GetComments_Expression_Func_PnP_Core_Model_SharePoint_IComment_System_Object_____" class="expander" data-toggle="collapse">GetComments(Expression&lt;Func&lt;IComment, Object&gt;&gt;[])</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IPage_GetComments_Expression_Func_PnP_Core_Model_SharePoint_IComment_System_Object_____" class="collapse in">
+  <div class="markdown level1 summary"><p>Get list item comments</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">ICommentCollection GetComments(params Expression&lt;Func&lt;IComment, object&gt;&gt;[] selectors)</code></pre>
+  </div>
+
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><span class="xref">Expression</span>&lt;<span class="xref">Func</span>&lt;<a class="xref" href="PnP.Core.Model.SharePoint.IComment.html">IComment</a>, <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object">Object</a>&gt;&gt;[]</span>
+        <span class="parametername">selectors</span>
+        <p><p>The expressions declaring the fields to select</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="PnP.Core.Model.SharePoint.ICommentCollection.html">ICommentCollection</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IPage_GetCommentsAsync_Expression_Func_PnP_Core_Model_SharePoint_IComment_System_Object_____.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IPage.GetCommentsAsync(Expression%7BFunc%7BPnP.Core.Model.SharePoint.IComment%2CSystem.Object%7D%7D%5B%5D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Pages/Public/IPage.cs/#L467" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IPage_GetCommentsAsync_" data-uid="PnP.Core.Model.SharePoint.IPage.GetCommentsAsync*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IPage_GetCommentsAsync_Expression_Func_PnP_Core_Model_SharePoint_IComment_System_Object_____" data-uid="PnP.Core.Model.SharePoint.IPage.GetCommentsAsync(Expression{Func{PnP.Core.Model.SharePoint.IComment,System.Object}}[])"><a href="#collapsible-PnP_Core_Model_SharePoint_IPage_GetCommentsAsync_Expression_Func_PnP_Core_Model_SharePoint_IComment_System_Object_____" class="expander" data-toggle="collapse">GetCommentsAsync(Expression&lt;Func&lt;IComment, Object&gt;&gt;[])</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IPage_GetCommentsAsync_Expression_Func_PnP_Core_Model_SharePoint_IComment_System_Object_____" class="collapse in">
+  <div class="markdown level1 summary"><p>Get list item comments</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task&lt;ICommentCollection&gt; GetCommentsAsync(params Expression&lt;Func&lt;IComment, object&gt;&gt;[] selectors)</code></pre>
+  </div>
+
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><span class="xref">Expression</span>&lt;<span class="xref">Func</span>&lt;<a class="xref" href="PnP.Core.Model.SharePoint.IComment.html">IComment</a>, <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object">Object</a>&gt;&gt;[]</span>
+        <span class="parametername">selectors</span>
+        <p><p>The expressions declaring the fields to select</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="xref">Task</span>&lt;<a class="xref" href="PnP.Core.Model.SharePoint.ICommentCollection.html">ICommentCollection</a>&gt;
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IPage_GetLikedByInformation.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IPage.GetLikedByInformation%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Pages/Public/IPage.cs/#L511" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IPage_GetLikedByInformation_" data-uid="PnP.Core.Model.SharePoint.IPage.GetLikedByInformation*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IPage_GetLikedByInformation" data-uid="PnP.Core.Model.SharePoint.IPage.GetLikedByInformation"><a href="#collapsible-PnP_Core_Model_SharePoint_IPage_GetLikedByInformation" class="expander" data-toggle="collapse">GetLikedByInformation()</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IPage_GetLikedByInformation" class="collapse in">
+  <div class="markdown level1 summary"><p>Returns information about the likes on this page</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">ILikedByInformation GetLikedByInformation()</code></pre>
+  </div>
+
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="PnP.Core.Model.SharePoint.ILikedByInformation.html">ILikedByInformation</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IPage_GetLikedByInformationAsync.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IPage.GetLikedByInformationAsync%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Pages/Public/IPage.cs/#L505" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IPage_GetLikedByInformationAsync_" data-uid="PnP.Core.Model.SharePoint.IPage.GetLikedByInformationAsync*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IPage_GetLikedByInformationAsync" data-uid="PnP.Core.Model.SharePoint.IPage.GetLikedByInformationAsync"><a href="#collapsible-PnP_Core_Model_SharePoint_IPage_GetLikedByInformationAsync" class="expander" data-toggle="collapse">GetLikedByInformationAsync()</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IPage_GetLikedByInformationAsync" class="collapse in">
+  <div class="markdown level1 summary"><p>Returns information about the likes on this page</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task&lt;ILikedByInformation&gt; GetLikedByInformationAsync()</code></pre>
+  </div>
+
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="xref">Task</span>&lt;<a class="xref" href="PnP.Core.Model.SharePoint.ILikedByInformation.html">ILikedByInformation</a>&gt;
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IPage_GetPageFile_Expression_Func_PnP_Core_Model_SharePoint_IFile_System_Object_____.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IPage.GetPageFile(Expression%7BFunc%7BPnP.Core.Model.SharePoint.IFile%2CSystem.Object%7D%7D%5B%5D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
@@ -2741,6 +2939,85 @@
         <span class="xref">Task</span>&lt;<a class="xref" href="PnP.Core.Model.SharePoint.IPageWebPart.html">IPageWebPart</a>&gt;
         <p><p>Instantiated web part</p>
 </p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IPage_Like.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IPage.Like%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Pages/Public/IPage.cs/#L486" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IPage_Like_" data-uid="PnP.Core.Model.SharePoint.IPage.Like*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IPage_Like" data-uid="PnP.Core.Model.SharePoint.IPage.Like"><a href="#collapsible-PnP_Core_Model_SharePoint_IPage_Like" class="expander" data-toggle="collapse">Like()</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IPage_Like" class="collapse in">
+  <div class="markdown level1 summary"><p>Likes a page</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void Like()</code></pre>
+  </div>
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IPage_LikeAsync.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IPage.LikeAsync%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Pages/Public/IPage.cs/#L479" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IPage_LikeAsync_" data-uid="PnP.Core.Model.SharePoint.IPage.LikeAsync*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IPage_LikeAsync" data-uid="PnP.Core.Model.SharePoint.IPage.LikeAsync"><a href="#collapsible-PnP_Core_Model_SharePoint_IPage_LikeAsync" class="expander" data-toggle="collapse">LikeAsync()</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IPage_LikeAsync" class="collapse in">
+  <div class="markdown level1 summary"><p>Likes a page</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task LikeAsync()</code></pre>
+  </div>
+
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="xref">Task</span>
+        <p>
       </td>
     </tr>
   </table>
@@ -3670,6 +3947,85 @@
         <span class="xref">Task</span>&lt;<a class="xref" href="PnP.Core.Model.SharePoint.IPageTranslationStatusCollection.html">IPageTranslationStatusCollection</a>&gt;
         <p><p><a class="xref" href="PnP.Core.Model.SharePoint.IPageTranslationStatusCollection.html">IPageTranslationStatusCollection</a> list containing information about this page's translations</p>
 </p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IPage_Unlike.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IPage.Unlike%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Pages/Public/IPage.cs/#L499" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IPage_Unlike_" data-uid="PnP.Core.Model.SharePoint.IPage.Unlike*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IPage_Unlike" data-uid="PnP.Core.Model.SharePoint.IPage.Unlike"><a href="#collapsible-PnP_Core_Model_SharePoint_IPage_Unlike" class="expander" data-toggle="collapse">Unlike()</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IPage_Unlike" class="collapse in">
+  <div class="markdown level1 summary"><p>Unlikes a page</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void Unlike()</code></pre>
+  </div>
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IPage_UnlikeAsync.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IPage.UnlikeAsync%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Pages/Public/IPage.cs/#L493" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IPage_UnlikeAsync_" data-uid="PnP.Core.Model.SharePoint.IPage.UnlikeAsync*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IPage_UnlikeAsync" data-uid="PnP.Core.Model.SharePoint.IPage.UnlikeAsync"><a href="#collapsible-PnP_Core_Model_SharePoint_IPage_UnlikeAsync" class="expander" data-toggle="collapse">UnlikeAsync()</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IPage_UnlikeAsync" class="collapse in">
+  <div class="markdown level1 summary"><p>Unlikes a page</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task UnlikeAsync()</code></pre>
+  </div>
+
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="xref">Task</span>
+        <p>
       </td>
     </tr>
   </table>
