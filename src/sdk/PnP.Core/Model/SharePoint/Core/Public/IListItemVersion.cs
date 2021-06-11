@@ -35,8 +35,14 @@ namespace PnP.Core.Model.SharePoint
         /// </summary>
         public ISharePointUser CreatedBy { get; }
 
+        /// <summary>
+        /// Fields of this list item version.
+        /// </summary>
         public IFieldCollection Fields { get; }
 
+        /// <summary>
+        /// <see cref="IFileVersion"/> of this list item version
+        /// </summary>
         public IFileVersion FileVersion { get; }
 
         /// <summary>
