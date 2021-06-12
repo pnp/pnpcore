@@ -83,6 +83,10 @@
                     <h1 id="working-with-sharepoint-syntex">Working with SharePoint Syntex</h1>
 
 <p><a href="https://www.microsoft.com/en-ww/microsoft-365/enterprise/sharepoint-syntex-overview">SharePoint Syntex</a> provides content services to capture and scale your expertise. <a href="https://www.microsoft.com/en-ww/microsoft-365/enterprise/sharepoint-syntex-overview">SharePoint Syntex</a> uses advanced AI and machine teaching to amplify human expertise, automate content processing, and transform content into knowledge. PnP Core SDK does provide support to help you with content models: you can list content models and deploy them inside your tenant using the provided support.</p>
+<div class="NOTE">
+<h5>Note</h5>
+<p>PnP Core SDK uses the SharePoint Syntex REST APIs, checkout the <a href="https://docs.microsoft.com/en-us/microsoft-365/contentunderstanding/rest-api/syntex-model-rest-api">SharePoint Syntex document understanding model REST API article</a> for more details on them.</p>
+</div>
 <p>In the remainder of this article you'll see a lot of <code>context</code> use: in this case this is a <code>PnPContext</code> which was obtained via the <code>PnPContextFactory</code> as explained in the <a href="readme.html">overview article</a> and show below:</p>
 <pre><code class="lang-csharp">using (var context = await pnpContextFactory.CreateAsync(&quot;SiteToWorkWith&quot;))
 {
