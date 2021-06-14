@@ -10,6 +10,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
 ### Added
 
+- Support for downloading versions of a file #483 [DaleyKD - Kyle Daley]
 - Support for ListItem versions #481 [DaleyKD - Kyle Daley]
 - Support for liking/unliking pages + adding/deleting comments and comment replies + like/unlike these comments on pages [jansenbe - Bert Jansen]
 - Support for adding/deleting comments and comment replies + like/unlike these comments on list items [jansenbe - Bert Jansen]
