@@ -14648,6 +14648,38 @@ references:
   commentId: T:PnP.Core.Model.SharePoint.IFileVersionCollection
   fullName: PnP.Core.Model.SharePoint.IFileVersionCollection
   nameWithType: IFileVersionCollection
+- uid: PnP.Core.Model.SharePoint.IFileVersionCollection.GetById(System.Int32,Expression{Func{PnP.Core.Model.SharePoint.IFileVersion,System.Object}}[])
+  name: GetById(Int32, Expression<Func<IFileVersion, Object>>[])
+  href: api/PnP.Core.Model.SharePoint.IFileVersionCollection.html#PnP_Core_Model_SharePoint_IFileVersionCollection_GetById_System_Int32_Expression_Func_PnP_Core_Model_SharePoint_IFileVersion_System_Object_____
+  commentId: M:PnP.Core.Model.SharePoint.IFileVersionCollection.GetById(System.Int32,Expression{Func{PnP.Core.Model.SharePoint.IFileVersion,System.Object}}[])
+  name.vb: GetById(Int32, Expression(Of Func(Of IFileVersion, Object))())
+  fullName: PnP.Core.Model.SharePoint.IFileVersionCollection.GetById(System.Int32, Expression<Func<PnP.Core.Model.SharePoint.IFileVersion, System.Object>>[])
+  fullName.vb: PnP.Core.Model.SharePoint.IFileVersionCollection.GetById(System.Int32, Expression(Of Func(Of PnP.Core.Model.SharePoint.IFileVersion, System.Object))())
+  nameWithType: IFileVersionCollection.GetById(Int32, Expression<Func<IFileVersion, Object>>[])
+  nameWithType.vb: IFileVersionCollection.GetById(Int32, Expression(Of Func(Of IFileVersion, Object))())
+- uid: PnP.Core.Model.SharePoint.IFileVersionCollection.GetById*
+  name: GetById
+  href: api/PnP.Core.Model.SharePoint.IFileVersionCollection.html#PnP_Core_Model_SharePoint_IFileVersionCollection_GetById_
+  commentId: Overload:PnP.Core.Model.SharePoint.IFileVersionCollection.GetById
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IFileVersionCollection.GetById
+  nameWithType: IFileVersionCollection.GetById
+- uid: PnP.Core.Model.SharePoint.IFileVersionCollection.GetByIdAsync(System.Int32,Expression{Func{PnP.Core.Model.SharePoint.IFileVersion,System.Object}}[])
+  name: GetByIdAsync(Int32, Expression<Func<IFileVersion, Object>>[])
+  href: api/PnP.Core.Model.SharePoint.IFileVersionCollection.html#PnP_Core_Model_SharePoint_IFileVersionCollection_GetByIdAsync_System_Int32_Expression_Func_PnP_Core_Model_SharePoint_IFileVersion_System_Object_____
+  commentId: M:PnP.Core.Model.SharePoint.IFileVersionCollection.GetByIdAsync(System.Int32,Expression{Func{PnP.Core.Model.SharePoint.IFileVersion,System.Object}}[])
+  name.vb: GetByIdAsync(Int32, Expression(Of Func(Of IFileVersion, Object))())
+  fullName: PnP.Core.Model.SharePoint.IFileVersionCollection.GetByIdAsync(System.Int32, Expression<Func<PnP.Core.Model.SharePoint.IFileVersion, System.Object>>[])
+  fullName.vb: PnP.Core.Model.SharePoint.IFileVersionCollection.GetByIdAsync(System.Int32, Expression(Of Func(Of PnP.Core.Model.SharePoint.IFileVersion, System.Object))())
+  nameWithType: IFileVersionCollection.GetByIdAsync(Int32, Expression<Func<IFileVersion, Object>>[])
+  nameWithType.vb: IFileVersionCollection.GetByIdAsync(Int32, Expression(Of Func(Of IFileVersion, Object))())
+- uid: PnP.Core.Model.SharePoint.IFileVersionCollection.GetByIdAsync*
+  name: GetByIdAsync
+  href: api/PnP.Core.Model.SharePoint.IFileVersionCollection.html#PnP_Core_Model_SharePoint_IFileVersionCollection_GetByIdAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.IFileVersionCollection.GetByIdAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IFileVersionCollection.GetByIdAsync
+  nameWithType: IFileVersionCollection.GetByIdAsync
 - uid: PnP.Core.Model.SharePoint.IFileVersionEvent
   name: IFileVersionEvent
   href: api/PnP.Core.Model.SharePoint.IFileVersionEvent.html

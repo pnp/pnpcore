@@ -2094,7 +2094,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.IFileVersion.html",
-          "hash": "S8dKPPzg3VvtZzrg4tUfiQ=="
+          "hash": "B8B5GIQ5NslDqJzuwmQk0g=="
         }
       },
       "is_incremental": false,
@@ -2106,7 +2106,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.IFileVersionCollection.html",
-          "hash": "4ceENHdg5SrxIKvy7mltMg=="
+          "hash": "BacxALgoEUfpUkPiMDSHKw=="
         }
       },
       "is_incremental": false,
