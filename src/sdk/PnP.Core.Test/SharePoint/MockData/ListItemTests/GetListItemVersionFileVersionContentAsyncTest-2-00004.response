@@ -1,0 +1,9 @@
+--batchresponse_6b499050-7283-47ce-a359-0f64e1cb3e0d
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+HTTP/1.1 200 OK
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+
+{"d":{"results":[{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/SP.ListItemVersion101a0c79-688b-4693-a39c-21e2efccc9dd","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/SP.ListItemVersion101a0c79-688b-4693-a39c-21e2efccc9dd","type":"SP.ListItemVersion"},"FileVersion":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/SP.ListItemVersion101a0c79-688b-4693-a39c-21e2efccc9dd/FileVersion","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/SP.ListItemVersion101a0c79-688b-4693-a39c-21e2efccc9dd/FileVersion","type":"SP.FileVersion"},"CreatedBy":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/SP.ListItemVersion101a0c79-688b-4693-a39c-21e2efccc9dd/FileVersion/CreatedBy"}},"CheckInComment":"","Created":"2021-06-14T08:24:53Z","ID":512,"IsCurrentVersion":false,"Length":"17813","Size":17813,"Url":"_vti_history/512/PNP_SDK_TEST_GetListItemVersionFileVersionContentA/PNP_SDK_TEST_GetListItemVersionFileVersionContentAsyncTest.docx","VersionLabel":"1.0"},"VersionId":512}]}}
+--batchresponse_6b499050-7283-47ce-a359-0f64e1cb3e0d--

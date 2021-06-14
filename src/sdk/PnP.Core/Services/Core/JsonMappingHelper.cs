@@ -264,7 +264,7 @@ namespace PnP.Core.Services
                         else // Simple property mapping
                         {
                             // Keep the id value aside when seeing it for later usage
-                            if (string.IsNullOrEmpty(idFieldValue) && property.Name.Equals(entity.SharePointKeyField.Name, StringComparison.InvariantCultureIgnoreCase))
+                            if (string.IsNullOrEmpty(idFieldValue) && property.Name.Equals(entity.SharePointKeyField.SharePointName, StringComparison.InvariantCultureIgnoreCase))
                             {
                                 idFieldValue = GetJsonPropertyValue(property).ToString();
                             }
