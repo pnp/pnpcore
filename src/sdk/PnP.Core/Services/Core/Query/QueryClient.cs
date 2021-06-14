@@ -695,8 +695,6 @@ namespace PnP.Core.Services
 
 #endregion
 
-#endregion
-
 #region UPDATE
         internal static async Task<ApiCallRequest> BuildUpdateAPICallAsync<TModel>(BaseDataModel<TModel> model, EntityInfo entity)
         {
