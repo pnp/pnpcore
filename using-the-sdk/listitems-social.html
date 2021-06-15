@@ -5,9 +5,9 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Using the &quot;social&quot; features of a page | PnP Core SDK </title>
+    <title>Commenting list item fields | PnP Core SDK </title>
     <meta name="viewport" content="width=device-width">
-    <meta name="title" content="Using the &quot;social&quot; features of a page | PnP Core SDK ">
+    <meta name="title" content="Commenting list item fields | PnP Core SDK ">
     <meta name="generator" content="docfx 2.56.5.0">
     <meta name="description" content="The PnP Core SDK is an SDK designed to work against Microsoft 365. Its aim is to provide a unified object model to work with the whole Microsoft 365 ecosystem. ">
     <link rel="shortcut icon" href="https://c.s-microsoft.com/favicon.ico?v2">
@@ -78,98 +78,46 @@
           <div class="col-md-10">
             <article class="content wrap" id="_content" data-uid="">
                   <div class="contribution-panel mobile-hide pull-right">
-                      <a href="https://github.com/pnp/pnpcore/blob/dev/docs/using-the-sdk/pages-social.md/#L1" title="Improve this Doc" class="improve-doc-lg"><i class="glyphicon glyphicon-pencil"></i></a>
+                      <a href="https://github.com/pnp/pnpcore/blob/dev/docs/using-the-sdk/listitems-social.md/#L1" title="Improve this Doc" class="improve-doc-lg"><i class="glyphicon glyphicon-pencil"></i></a>
                   </div>
-                    <h1 id="using-the-social-features-of-a-page">Using the &quot;social&quot; features of a page</h1>
+                    <h1 id="commenting-list-item-fields">Commenting list item fields</h1>
 
-<p>A SharePoint Page can have comments, replies and likes. This chapter explains how to enable or disable page commenting and how to work with comments, replies and likes.</p>
-<p>In the remainder of this article you'll see a lot of <code>context</code> use: in this case this is a <code>PnPContext</code> which was obtained via the <code>PnPContextFactory</code> as explained in the <a href="readme.html">overview article</a> and show below:</p>
-<pre><code class="lang-csharp">using (var context = await pnpContextFactory.CreateAsync(&quot;SiteToWorkWith&quot;))
-{
-    // See next chapter on how to use the PnPContext for working with pages
-}
-</code></pre>
-<h2 id="disablingenabling-page-comments">Disabling/Enabling page comments</h2>
-<p>By default commenting is enabled on article pages and for the majority of use cases this default is fine. You can however also turn off commenting by calling the <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IPage.html#PnP_Core_Model_SharePoint_IPage_DisableCommentsAsync">DisableCommentsAsync method</a>. Getting the current commenting status can be done using the <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IPage.html#PnP_Core_Model_SharePoint_IPage_AreCommentsDisabledAsync">AreCommentsDisabledAsync method</a> and turning on commenting again is done via the <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IPage.html#collapsible-PnP_Core_Model_SharePoint_IPage_EnableCommentsAsync">EnableCommentsAsync method</a>.</p>
+<p>List items can have comments and replies in SharePoint. This chapter explains how to enable or disable list item commenting and how to work with comments and replies.</p>
 <div class="NOTE">
 <h5>Note</h5>
-<p>A page needs to be saved before you can configure it's commenting settings.</p>
+<p>Some of the samples assume you've loaded a list into the variable <code>mylist</code>, the code that shows how to do so is listed in the first examples.</p>
 </div>
-<pre><code class="lang-csharp">// Create the page
-var page = await context.Web.NewPageAsync();
+<h2 id="enablingdisabling-list-item-comments">Enabling/Disabling list item comments</h2>
+<p>List items can have comments in SharePoint and using the <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IListItemBase.html#PnP_Core_Model_SharePoint_IListItemBase_SetCommentsDisabledAsync_System_Boolean_">SetCommentsDisabledAsync method</a> you can turn off commenting for a given list item. This method goes hand in hand with the <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IListItemBase.html#PnP_Core_Model_SharePoint_IListItemBase_AreCommentsDisabledAsync">AreCommentsDisabledAsync</a> method to get the current commenting status of a list item.</p>
+<pre><code class="lang-csharp">// Assume the fields where not yet loaded, so loading them with the list
+var myList = context.Web.Lists.GetByTitle(&quot;My List&quot;, p =&gt; p.Title, p =&gt; p.Items, 
+                                                     p =&gt; p.Fields.QueryProperties(p =&gt; p.InternalName, 
+                                                                                   p =&gt; p.FieldTypeKind, 
+                                                                                   p =&gt; p.TypeAsString, 
+                                                                                   p =&gt; p.Title));
+// Get the item with title &quot;Item1&quot;
+var addedItem = myList.Items.AsRequested().FirstOrDefault(p =&gt; p.Title == &quot;Item1&quot;);
 
-// Save the page
-await page.SaveAsync(&quot;PageA.aspx&quot;);
-
-// Are comments disabled?
-var commentsDisabled = await newPage.AreCommentsDisabledAsync();
-
-// disable comments
-await page.DisableCommentsAsync();
-
-// enabled comments again
-await page.EnableCommentsAsync();
-</code></pre>
-<h2 id="likingunliking-a-page">Liking/unliking a page</h2>
-<p>The currently authenticated user can like/unlike a page using one of the <code>Like</code> or <code>Unlike</code> methods on the page.</p>
-<div class="NOTE">
-<h5>Note</h5>
-<p>A page needs to be published before it can be liked.</p>
-</div>
-<pre><code class="lang-csharp">// Create the page
-var page = await context.Web.NewPageAsync();
-
-// Save the page
-await page.SaveAsync(&quot;PageA.aspx&quot;);
-
-// Publish the page, required before it can be liked
-await newPage.PublishAsync();
-
-// Like the page
-await newPage.LikeAsync();
-
-// Unlike the page
-await newPage.UnlikeAsync();
-</code></pre>
-<h2 id="enumerating-page-likes">Enumerating page likes</h2>
-<p>If you want to understand who liked a page you can load the <code>LikedByInformation</code> of page which tell you if the page like count, whether the current user liked the page and which users liked the page:</p>
-<pre><code class="lang-csharp">// Create the page
-var page = await context.Web.NewPageAsync();
-
-// Save the page
-await page.SaveAsync(&quot;PageA.aspx&quot;);
-
-// Publish the page, required before it can be liked
-await newPage.PublishAsync();
-
-// Like the page
-await newPage.LikeAsync();
-
-// Get a list of users who liked this page
-var pageLikeInformation = await newPage.GetLikedByInformationAsync();
-
-// Was page liked by the current user?
-bool pageLikedByCurrentUser = pageLikeInformation.IsLikedByUser;
-
-// Enumerate the persons that liked this page
-foreach(var likedByUser in pageLikeInformation.LikedBy.AsRequested())
+// Check if commenting was turned off
+if (!(await addedItem.AreCommentsDisabledAsync()))
 {
-    // do something with the information about the user who liked this page
+    // Turn commenting of the list item on
+    await addedItem.SetCommentsDisabledAsync(false);
 }
 </code></pre>
 <h2 id="getting-comments">Getting comments</h2>
-<p>To work with page comments you first need to get a reference to the page comments collection. Once you've done that, you can enumerate the existing comments, add new comments or delete comments. Below code snippet shows how the comments can be enumerated.</p>
-<pre><code class="lang-csharp">// Create the page
-var page = await context.Web.NewPageAsync();
+<p>To work with list item comments you first need to get a reference to the list item comments collection. Once you've done that, you can enumerate the existing comments, add new comments or delete comments. Below code snippet shows how the comments can be enumerated.</p>
+<pre><code class="lang-csharp">// Assume the fields where not yet loaded, so loading them with the list
+var myList = context.Web.Lists.GetByTitle(&quot;My List&quot;, p =&gt; p.Title, p =&gt; p.Items, 
+                                                     p =&gt; p.Fields.QueryProperties(p =&gt; p.InternalName, 
+                                                                                   p =&gt; p.FieldTypeKind, 
+                                                                                   p =&gt; p.TypeAsString, 
+                                                                                   p =&gt; p.Title));
+// Get the item with title &quot;Item1&quot;
+var myItem = myList.Items.AsRequested().FirstOrDefault(p =&gt; p.Title == &quot;Item1&quot;);
 
-// Save the page
-await page.SaveAsync(&quot;PageA.aspx&quot;);
-
-// Publish the page, required before it can be commented
-await newPage.PublishAsync();
-
-// Get the comments for this page
-var comments = await newPage.GetCommentsAsync();
+// Get the comments for this list item
+var comments = await myItem.GetCommentsAsync();
 
 // Loop over the comments
 foreach(var comment in comments.AsRequested())
@@ -179,16 +127,16 @@ foreach(var comment in comments.AsRequested())
 </code></pre>
 <h2 id="adding-a-comment">Adding a comment</h2>
 <p>Once you've load a comments collection via one of the <code>GetComments</code> methods you can add new comments or delete comments.</p>
-<pre><code class="lang-csharp">// Get the comments for this page
-var comments = await newPage.GetCommentsAsync();
+<pre><code class="lang-csharp">// Get the comments for this list item
+var comments = await myItem.GetCommentsAsync();
 
 // Add a comment
 var comment = await comments.AddAsync(&quot;this is great&quot;);
 </code></pre>
 <h2 id="adding-a-reply-to-a-comment">Adding a reply to a comment</h2>
 <p>Comments can also have replies and since the collection of replies is similar to the collections of comments to code to add a reply is the same:</p>
-<pre><code class="lang-csharp">// Get the comments for this page
-var comments = await newPage.GetCommentsAsync();
+<pre><code class="lang-csharp">// Get the comments for this list item
+var comments = await myItem.GetCommentsAsync();
 
 // Add a comment
 var comment = await comments.AddAsync(&quot;this is great&quot;);
@@ -199,7 +147,7 @@ var reply = await comment.Replies.AddAsync(&quot;yes this is great!&quot;);
 <h2 id="removing-a-comment-or-reply">Removing a comment or reply</h2>
 <p>Once you've load a comments collection via one of the <code>GetComments</code> methods you can delete comments and/or their replies using one of the <code>Delete</code> methods.</p>
 <pre><code class="lang-csharp">// Load the comments with replies 
-comments = await newPage.GetCommentsAsync(p =&gt; p.Author, p =&gt; p.Text, p =&gt; p.Replies);
+comments = await myItem.GetCommentsAsync(p =&gt; p.Author, p =&gt; p.Text, p =&gt; p.Replies);
 
 // Get first comment
 var firstComment = comments.AsRequested().First();
@@ -216,7 +164,7 @@ await firstComment.DeleteAsync();
 <h2 id="likingunliking-comments-and-replies">Liking\Unliking comments and replies</h2>
 <p>A comment or reply can be liked by the authenticated user, this is done using one of the <code>Like</code> or <code>Unlike</code> methods on either the comment or reply.</p>
 <pre><code class="lang-csharp">// Load the comments with replies 
-comments = await newPage.GetCommentsAsync(p =&gt; p.Author, p =&gt; p.Text, p =&gt; p.Replies);
+comments = await myItem.GetCommentsAsync(p =&gt; p.Author, p =&gt; p.Text, p =&gt; p.Replies);
 
 // Get first comment
 var firstComment = comments.AsRequested().First();
@@ -239,7 +187,7 @@ await firstCommentReply.UnlikeAsync();
 <h2 id="enumerating-likes-on-comments-and-replies">Enumerating likes on comments and replies</h2>
 <p>A comment or reply can be liked by multiple persons and you can enumerate the &quot;likers&quot; by loading the <code>LikedBy</code> collection of a comment or reply.</p>
 <pre><code class="lang-csharp">// Load the comments with replies 
-comments = await newPage.GetCommentsAsync(p =&gt; p.Author, p =&gt; p.Text, p =&gt; p.Replies, p =&gt; p.LikedBy);
+comments = await myItem.GetCommentsAsync(p =&gt; p.Author, p =&gt; p.Text, p =&gt; p.Replies, p =&gt; p.LikedBy);
 
 // Get first comment
 var firstComment = comments.AsRequested().First();

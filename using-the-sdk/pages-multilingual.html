@@ -87,6 +87,12 @@
 <h5>Important</h5>
 <p>Multilingual pages only work on SharePoint Communication sites.</p>
 </div>
+<p>In the remainder of this article you'll see a lot of <code>context</code> use: in this case this is a <code>PnPContext</code> which was obtained via the <code>PnPContextFactory</code> as explained in the <a href="readme.html">overview article</a> and show below:</p>
+<pre><code class="lang-csharp">using (var context = await pnpContextFactory.CreateAsync(&quot;SiteToWorkWith&quot;))
+{
+    // See next chapter on how to use the PnPContext for working with pages
+}
+</code></pre>
 <h2 id="ensuring-your-site-is-correctly-configured-for-multilingual-pages">Ensuring your site is correctly configured for multilingual pages</h2>
 <p>Before you use multilingual pages on a site you need to ensure the site is configured to support multilingual pages. There are 2 pre-requisites:</p>
 <ul>

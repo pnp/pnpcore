@@ -5287,7 +5287,19 @@
       "output": {
         ".html": {
           "relative_path": "using-the-sdk/listitems-intro.html",
-          "hash": "QXhOB2A1wONzUvlBkIvxXQ=="
+          "hash": "iIYfwJ7BbCogX71B7NUD9Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "using-the-sdk/listitems-social.md",
+      "output": {
+        ".html": {
+          "relative_path": "using-the-sdk/listitems-social.html",
+          "hash": "1Ce11jSHrkpL93KjTmULHQ=="
         }
       },
       "is_incremental": false,
@@ -5323,7 +5335,7 @@
       "output": {
         ".html": {
           "relative_path": "using-the-sdk/pages-header.html",
-          "hash": "NAm2B2g3WzkgxLtKusoWRg=="
+          "hash": "+oNlWh90WsJIRiYgxwueww=="
         }
       },
       "is_incremental": false,
@@ -5347,7 +5359,7 @@
       "output": {
         ".html": {
           "relative_path": "using-the-sdk/pages-multilingual.html",
-          "hash": "sPwEYU9z2U/7aHX7jFUsMQ=="
+          "hash": "/0JBhP68j5GLN5TbUm1KwA=="
         }
       },
       "is_incremental": false,
@@ -5359,7 +5371,7 @@
       "output": {
         ".html": {
           "relative_path": "using-the-sdk/pages-promote.html",
-          "hash": "4ENauN8VDvq5PZgXgpbTGg=="
+          "hash": "+CTI47rIYtjVHzgciMFZyw=="
         }
       },
       "is_incremental": false,
@@ -5371,7 +5383,7 @@
       "output": {
         ".html": {
           "relative_path": "using-the-sdk/pages-social.html",
-          "hash": "U74T51ndVyBgrnN8tVp7dw=="
+          "hash": "fTzq38FXfnNA2/BlVeLuWA=="
         }
       },
       "is_incremental": false,
@@ -5383,7 +5395,7 @@
       "output": {
         ".html": {
           "relative_path": "using-the-sdk/pages-webparts.html",
-          "hash": "FhexUUr+/L0RQrcRF/37KQ=="
+          "hash": "yasxasW8gQVvdOB2+rQkmQ=="
         }
       },
       "is_incremental": false,
@@ -5527,7 +5539,7 @@
       "output": {
         ".html": {
           "relative_path": "using-the-sdk/toc.html",
-          "hash": "o8kk6TTkTTqxzB4pMZJmtA=="
+          "hash": "RGz447MYnb8MERw5gY1UlA=="
         }
       },
       "is_incremental": false,
@@ -5572,7 +5584,7 @@
         "ConceptualDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build",
-          "total_file_count": 66,
+          "total_file_count": 67,
           "skipped_file_count": 0
         },
         "ManagedReferenceDocumentProcessor": {

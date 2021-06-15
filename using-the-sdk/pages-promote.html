@@ -87,6 +87,12 @@
 <h5>Note</h5>
 <p>A page needs to be saved before you can use any of the &quot;promotion&quot; APIs.</p>
 </div>
+<p>In the remainder of this article you'll see a lot of <code>context</code> use: in this case this is a <code>PnPContext</code> which was obtained via the <code>PnPContextFactory</code> as explained in the <a href="readme.html">overview article</a> and show below:</p>
+<pre><code class="lang-csharp">using (var context = await pnpContextFactory.CreateAsync(&quot;SiteToWorkWith&quot;))
+{
+    // See next chapter on how to use the PnPContext for working with pages
+}
+</code></pre>
 <h2 id="publishing-a-page">Publishing a page</h2>
 <p>After a page has been created publishing it is as simple as calling the <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IPage.html#PnP_Core_Model_SharePoint_IPage_PublishAsync">PublishAsync method</a>.</p>
 <pre><code class="lang-csharp">// Create the page
