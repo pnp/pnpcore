@@ -2,8 +2,12 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PnP.Core.QueryModel;
 using PnP.Core.Test.Utilities;
 using System;
+using System.Collections;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
+using PnP.Core.Model;
+using PnP.Core.Model.SharePoint;
 
 namespace PnP.Core.Test.QueryModel
 {
@@ -187,5 +191,21 @@ namespace PnP.Core.Test.QueryModel
                 Assert.AreEqual(expected, actual);
             }
         }
+
+        //[TestMethod]
+        //public async Task QueryWithoutPagingCheck()
+        //{
+        //    Expression<Func<Model.SharePoint.IList, object>>[] getPagesLibraryExpression = new Expression<Func<Model.SharePoint.IList, object>>[] { p => p.Title, p => p.Fields };
+
+        //    TestCommon.Instance.Mocking = false;
+        //    using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+        //    {
+        //        var libraries = await context.Web.Lists.QueryProperties(getPagesLibraryExpression)
+        //        .Where(p => p.TemplateType == ListTemplateType.WebPageLibrary)
+        //        .ToListAsync()
+        //        .ConfigureAwait(false);
+        //        Assert.IsTrue(libraries.Count == 1);
+        //    }
+        //}
     }
 }
