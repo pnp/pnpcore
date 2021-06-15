@@ -29,7 +29,7 @@ IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentU
 IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl, f => f.CheckOutType, f => f.CheckedOutByUser);
 ```
 
-## Getting the file of a list item
+### Getting the file of a list item
 
 A document in a document library is an `IListItem` holding the file metadata with an `IFile` holding the actual file. If you have an `IListItem` you can load the connected file via `File` property:
 

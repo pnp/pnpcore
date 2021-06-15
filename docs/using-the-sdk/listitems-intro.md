@@ -342,8 +342,10 @@ Depending on the list versioning settings an `IListItem` can have multiple versi
 
 ```csharp
 var myList = await context.Web.Lists.GetByTitleAsync("My List");
+
 // Load list item with id 1
 var first = await myList.Items.GetByIdAsync(1, li => li.All, li => li.Versions);
+
 // Iterate over the retrieved list items
 foreach (var version in first.Versions.AsRequested())
 {
@@ -371,14 +373,17 @@ If there's a file for the list item then there's also a version of that file for
 
 ```csharp
 var myList = await context.Web.Lists.GetByTitleAsync("My List");
+
 // Load list item with id 1, also load the FileVersion
 var first = await myList.Items.GetByIdAsync(1, li => li.All, li => li.Versions.QueryProperties(p => p.FileVersion));
+
 // Iterate over the retrieved list items
 foreach (var version in first.Versions.AsRequested())
 {
   // do something with the file version, e.g. download it
   Stream downloadedContentStream = await version.FileVersion.GetContentAsync();
   downloadedContentStream.Seek(0, SeekOrigin.Begin);
+
   // Get string from the content stream
   string downloadedContent = await new StreamReader(downloadedContentStream).ReadToEndAsync();
 }
