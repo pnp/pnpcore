@@ -1,9 +1,9 @@
---batchresponse_3b07ff54-0fe7-44cb-b5f1-a677f2b89e5f
+--batchresponse_f0ca19e6-21dc-4e4e-9d24-83deebf61a03
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
-HTTP/1.1 200 OK
+HTTP/1.1 404 Not Found
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{"d":{"results":[]}}
---batchresponse_3b07ff54-0fe7-44cb-b5f1-a677f2b89e5f--
+{"error":{"code":"-2130575338, Microsoft.SharePoint.SPException","message":{"lang":"en-US","value":"The file /sites/prov-1/SitePages/Templates/PNP_SDK_TEST_SavePageWithDataAsTemplate.aspx does not exist."}}}
+--batchresponse_f0ca19e6-21dc-4e4e-9d24-83deebf61a03--

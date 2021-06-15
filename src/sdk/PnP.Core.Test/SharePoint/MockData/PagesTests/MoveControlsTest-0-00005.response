@@ -1,9 +1,9 @@
---batchresponse_84e66d52-4d0d-43a7-b3bd-dc41de263539
+--batchresponse_4f93a1a6-c51f-4dbb-ae7c-2469e6cf1851
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
-HTTP/1.1 200 OK
+HTTP/1.1 404 Not Found
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{"d":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/pnpcoresdktest/_api/Web","uri":"https://bertonline.sharepoint.com/sites/pnpcoresdktest/_api/Web","type":"SP.Web"},"Id":"bc3f47bc-6313-43a4-b21d-ffe6200c0436","WebTemplate":"SITEPAGEPUBLISHING"}}
---batchresponse_84e66d52-4d0d-43a7-b3bd-dc41de263539--
+{"error":{"code":"-2130575338, Microsoft.SharePoint.SPException","message":{"lang":"en-US","value":"The file /sites/pnpcoresdktest/SitePages/PNP_SDK_TEST_MoveControlsTest.aspx does not exist."}}}
+--batchresponse_4f93a1a6-c51f-4dbb-ae7c-2469e6cf1851--

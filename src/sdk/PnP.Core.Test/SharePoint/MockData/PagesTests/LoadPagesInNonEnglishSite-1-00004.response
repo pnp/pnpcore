@@ -1,9 +1,87 @@
---batchresponse_8ea5aa60-ab52-497c-8644-729e58cd33d6
+--batchresponse_c522e488-f985-472e-b256-d457bd3f5d56
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 200 OK
-CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+CONTENT-TYPE: application/json; charset=utf-8
 
-{"d":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/DutchWeb/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/prov-1/DutchWeb/SitePages/Home.aspx')","uri":"https://bertonline.sharepoint.com/sites/prov-1/DutchWeb/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/prov-1/DutchWeb/SitePages/Home.aspx')","type":"SP.File"},"ListItemAllFields":{"__metadata":{"id":"f24bfc27-f202-4cdc-9445-9086bcba7ac3","uri":"https://bertonline.sharepoint.com/sites/prov-1/DutchWeb/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/prov-1/DutchWeb/SitePages/Home.aspx')/ListItemAllFields","etag":"\"3\"","type":"SP.Data.SitePagesItem"},"FirstUniqueAncestorSecurableObject":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/DutchWeb/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/prov-1/DutchWeb/SitePages/Home.aspx')/ListItemAllFields/FirstUniqueAncestorSecurableObject"}},"RoleAssignments":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/DutchWeb/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/prov-1/DutchWeb/SitePages/Home.aspx')/ListItemAllFields/RoleAssignments"}},"AttachmentFiles":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/DutchWeb/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/prov-1/DutchWeb/SitePages/Home.aspx')/ListItemAllFields/AttachmentFiles"}},"ContentType":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/DutchWeb/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/prov-1/DutchWeb/SitePages/Home.aspx')/ListItemAllFields/ContentType"}},"GetDlpPolicyTip":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/DutchWeb/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/prov-1/DutchWeb/SitePages/Home.aspx')/ListItemAllFields/GetDlpPolicyTip"}},"FieldValuesAsHtml":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/DutchWeb/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/prov-1/DutchWeb/SitePages/Home.aspx')/ListItemAllFields/FieldValuesAsHtml"}},"FieldValuesAsText":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/DutchWeb/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/prov-1/DutchWeb/SitePages/Home.aspx')/ListItemAllFields/FieldValuesAsText"}},"FieldValuesForEdit":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/DutchWeb/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/prov-1/DutchWeb/SitePages/Home.aspx')/ListItemAllFields/FieldValuesForEdit"}},"File":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/DutchWeb/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/prov-1/DutchWeb/SitePages/Home.aspx')/ListItemAllFields/File"}},"Folder":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/DutchWeb/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/prov-1/DutchWeb/SitePages/Home.aspx')/ListItemAllFields/Folder"}},"LikedByInformation":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/DutchWeb/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/prov-1/DutchWeb/SitePages/Home.aspx')/ListItemAllFields/LikedByInformation"}},"ParentList":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/DutchWeb/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/prov-1/DutchWeb/SitePages/Home.aspx')/ListItemAllFields/ParentList"}},"Properties":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/DutchWeb/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/prov-1/DutchWeb/SitePages/Home.aspx')/ListItemAllFields/Properties"}},"Versions":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/DutchWeb/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/prov-1/DutchWeb/SitePages/Home.aspx')/ListItemAllFields/Versions"}},"FileSystemObjectType":0,"Id":1,"ServerRedirectedEmbedUri":null,"ServerRedirectedEmbedUrl":"","ContentTypeId":"0x0101009D1CB255DA76424F860D91F20E6C4118008D8713BBC6DA2C4A880C30035E1B35B7","ComplianceAssetId":null,"WikiField":null,"Title":"Introductiepagina","CanvasContent1":null,"BannerImageUrl":null,"Description":null,"PromotedState":0,"FirstPublishedDate":null,"LayoutWebpartsContent":null,"OData__AuthorBylineId":null,"_AuthorBylineStringId":null,"OData__TopicHeader":null,"OData__SPSitePageFlags":null,"OData__SPTranslatedLanguages":null,"OData__SPTranslationLanguage":null,"OData__SPTranslationSourceItemId":null,"OData__SPIsTranslation":false,"OData__OriginalSourceUrl":null,"OData__OriginalSourceSiteId":null,"OData__OriginalSourceWebId":null,"OData__OriginalSourceListId":null,"OData__OriginalSourceItemId":null,"ID":1,"Created":"2021-06-04T13:54:46","AuthorId":6,"Modified":"2021-06-04T13:54:46","EditorId":6,"OData__CopySource":null,"CheckoutUserId":null,"OData__UIVersionString":"1.0","GUID":"7c9a9dba-2a0b-47aa-a12e-bc38ce96ccba"},"ServerRelativeUrl":"/sites/prov-1/DutchWeb/SitePages/Home.aspx","UniqueId":"4d2da731-b013-43e8-bbe1-c4f75e67ee51"}}
---batchresponse_8ea5aa60-ab52-497c-8644-729e58cd33d6--
+{ "Row" : 
+[{
+"ID": "1",
+"PermMask": "0x7ffffffffffbffff",
+"FSObjType": "0",
+"HTML_x0020_File_x0020_Type": "",
+"UniqueId": "{F3B55EE7-7874-4CB7-8B41-9E065A5693C5}",
+"ProgId": "",
+"NoExecute": "0",
+"ContentTypeId": "0x0101009D1CB255DA76424F860D91F20E6C4118003E9ABA34AFE15C4AAA0B8393B87FA940",
+"FileRef": "\u002fsites\u002fprov-1\u002fDutchWeb\u002fSitePages\u002fHome.aspx",
+"FileRef.urlencode": "%2Fsites%2Fprov%2D1%2FDutchWeb%2FSitePages%2FHome%2Easpx",
+"FileRef.urlencodeasurl": "\u002fsites\u002fprov-1\u002fDutchWeb\u002fSitePages\u002fHome.aspx",
+"FileRef.urlencoding": "\u002fsites\u002fprov-1\u002fDutchWeb\u002fSitePages\u002fHome.aspx",
+"FileRef.scriptencodeasurl": "\\u002fsites\\u002fprov-1\\u002fDutchWeb\\u002fSitePages\\u002fHome.aspx",
+"_UIVersion": "512",
+"SMTotalSize": "1446",
+"File_x0020_Size": "805",
+"_CommentFlags": "1",
+"File_x0020_Type": "aspx",
+"HTML_x0020_File_x0020_Type.File_x0020_Type.mapall": "ichtm.gif|Microsoft SharePoint Designer|SharePoint.OpenDocuments|",
+"HTML_x0020_File_x0020_Type.File_x0020_Type.mapcon": "SharePoint.OpenDocuments",
+"HTML_x0020_File_x0020_Type.File_x0020_Type.mapico": "ichtm.gif",
+"serverurl.progid": "",
+"ServerRedirectedEmbedUrl": "",
+"File_x0020_Type.progid": "",
+"File_x0020_Type.url": "FALSE",
+"FileLeafRef": "Home.aspx",
+"FileLeafRef.Name": "Home",
+"FileLeafRef.Suffix": "aspx",
+"FileDirRef": "\u002fsites\u002fprov-1\u002fDutchWeb\u002fSitePages",
+"Description": "",
+"Title": "Introductiepagina",
+"ClientSideApplicationId": "{B6917CB1-93A0-4B97-A84D-7CF49975D4EC}",
+"PageLayoutType": "Home",
+"CanvasContent1": "<div dir=\"\" class=\"ms-rtestate-field\"><\u002fdiv>",
+"_AuthorByline": "",
+"_AuthorByline.id": "",
+"_AuthorByline.title": "",
+"_AuthorByline.span": "",
+"_AuthorByline.email": "",
+"_AuthorByline.sip": "",
+"_AuthorByline.jobTitle": "",
+"_AuthorByline.department": "",
+"_AuthorByline.picture": "0",
+"LayoutWebpartsContent": "<div dir=\"\" class=\"ms-rtestate-field\"><\u002fdiv>",
+"BannerImageUrl": "",
+"BannerImageUrl.desc": "",
+"PromotedState": "0",
+"PromotedState.": "0",
+"_OriginalSourceUrl": "",
+"_OriginalSourceSiteId": "",
+"_OriginalSourceWebId": "",
+"_OriginalSourceListId": "",
+"_OriginalSourceItemId": "",
+"ItemChildCount": "0",
+"FolderChildCount": "0",
+"A2ODMountCount": "",
+"_StubFile": "0",
+"_ComplianceTag": "",
+"owshiddenversion": "3",
+"_SPTranslatedLanguages": "",
+"_SPSitePageFlags": "",
+"ContentVersion": "0",
+"DocConcurrencyNumber": "3",
+"_VirusStatus": "",
+"Restricted": "",
+"ecb.dispex": "return DispEx(this,event,'TRUE','FALSE','FALSE','','1','SharePoint.OpenDocuments','','','','6','0','','0x7ffffffffffbffff','','')"
+}
+],"FirstRow" : 1,
+"FolderPermissions" : "0x7ffffffffffbffff"
+,"LastRow" : 1,
+"RowLimit" : 500
+,"FilterLink" : "?"
+,"ForceNoHierarchy" : "1"
+,"HierarchyHasIndention" : ""
+,"CurrentFolderSpItemUrl" : ""
+
+}
+--batchresponse_c522e488-f985-472e-b256-d457bd3f5d56--

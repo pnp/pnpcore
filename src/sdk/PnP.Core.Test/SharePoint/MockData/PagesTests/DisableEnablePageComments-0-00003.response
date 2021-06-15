@@ -1,9 +1,9 @@
---batchresponse_f45a2f28-e87d-44c9-809c-38e130e330be
+--batchresponse_49620f30-01f3-4ebe-adb4-518db9decb04
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
-HTTP/1.1 200 OK
+HTTP/1.1 404 Not Found
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{"d":{"results":[]}}
---batchresponse_f45a2f28-e87d-44c9-809c-38e130e330be--
+{"error":{"code":"-2130575338, Microsoft.SharePoint.SPException","message":{"lang":"en-US","value":"The file /sites/prov-1/SitePages/PNP_SDK_TEST_DisableEnablePageComments.aspx does not exist."}}}
+--batchresponse_49620f30-01f3-4ebe-adb4-518db9decb04--

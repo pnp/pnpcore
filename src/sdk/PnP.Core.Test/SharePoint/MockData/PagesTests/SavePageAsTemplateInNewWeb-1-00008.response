@@ -1,9 +1,9 @@
---batchresponse_75e13182-2a0b-424d-ae3e-868d99a37a98
+--batchresponse_cfe9a97b-9c46-4a4c-a9b8-050dff8e09b0
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
-HTTP/1.1 200 OK
+HTTP/1.1 404 Not Found
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{"d":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/DutchTemplateWeb/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/prov-1/DutchTemplateWeb/SitePages/Templates')","uri":"https://bertonline.sharepoint.com/sites/prov-1/DutchTemplateWeb/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/prov-1/DutchTemplateWeb/SitePages/Templates')","type":"SP.Folder"},"Files":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/DutchTemplateWeb/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/prov-1/DutchTemplateWeb/SitePages/Templates')/Files"}},"ListItemAllFields":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/DutchTemplateWeb/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/prov-1/DutchTemplateWeb/SitePages/Templates')/ListItemAllFields"}},"ParentFolder":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/DutchTemplateWeb/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/prov-1/DutchTemplateWeb/SitePages/Templates')/ParentFolder"}},"Properties":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/DutchTemplateWeb/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/prov-1/DutchTemplateWeb/SitePages/Templates')/Properties"}},"StorageMetrics":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/DutchTemplateWeb/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/prov-1/DutchTemplateWeb/SitePages/Templates')/StorageMetrics"}},"Folders":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/DutchTemplateWeb/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/prov-1/DutchTemplateWeb/SitePages/Templates')/Folders"}},"Exists":true,"IsWOPIEnabled":false,"ItemCount":0,"Name":"Templates","ProgID":null,"ServerRelativeUrl":"/sites/prov-1/DutchTemplateWeb/SitePages/Templates","TimeCreated":"2021-06-11T11:33:36Z","TimeLastModified":"2021-06-11T11:33:36Z","UniqueId":"54cdd507-882d-46de-b4e9-df075f3fec77","WelcomePage":""}}
---batchresponse_75e13182-2a0b-424d-ae3e-868d99a37a98--
+{"error":{"code":"-2130575338, Microsoft.SharePoint.SPException","message":{"lang":"nl-NL","value":"Het bestand /sites/prov-1/DutchTemplateWeb/SitePages/Templates/PNP_SDK_TEST_SavePageAsTemplate.aspx bestaat niet."}}}
+--batchresponse_cfe9a97b-9c46-4a4c-a9b8-050dff8e09b0--

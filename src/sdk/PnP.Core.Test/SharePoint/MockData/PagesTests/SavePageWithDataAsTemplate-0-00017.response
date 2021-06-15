@@ -1,9 +1,1 @@
---batchresponse_de96f3de-f98d-4afd-b59f-efa19cd13689
-Content-Type: application/http
-Content-Transfer-Encoding: binary
-
-HTTP/1.1 404 Not Found
-CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
-
-{"error":{"code":"-2130575338, Microsoft.SharePoint.SPException","message":{"lang":"en-US","value":"The file /sites/prov-1/SitePages/PNP_SDK_TEST_FromTemplate.aspx does not exist."}}}
---batchresponse_de96f3de-f98d-4afd-b59f-efa19cd13689--
+[{"SchemaVersion":"15.0.0.0","LibraryVersion":"16.0.21402.12001","ErrorInfo":null,"TraceCorrelationId":"2330d29f-407f-2000-f377-66e3f0e14305"}]

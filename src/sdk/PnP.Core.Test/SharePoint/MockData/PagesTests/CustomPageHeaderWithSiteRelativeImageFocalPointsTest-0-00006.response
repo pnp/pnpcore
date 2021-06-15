@@ -1,9 +1,9 @@
---batchresponse_612bf333-e3c7-47f3-96d5-4d04401a8af3
+--batchresponse_1183639f-8d47-4e13-8588-44666b70b6c8
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
-HTTP/1.1 200 OK
+HTTP/1.1 404 Not Found
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{"d":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/prov-1/SiteAssets/pageheader.jpg')","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/prov-1/SiteAssets/pageheader.jpg')","type":"SP.File"},"ListId":"0da08977-4f32-4cda-ae2d-91ef05fb54f6","UniqueId":"2795eb37-7bed-4005-9d09-5d45e3f00b2f"}}
---batchresponse_612bf333-e3c7-47f3-96d5-4d04401a8af3--
+{"error":{"code":"-2130575338, Microsoft.SharePoint.SPException","message":{"lang":"en-US","value":"The file /sites/prov-1/SitePages/PNP_SDK_TEST_CustomPageHeaderWithSiteRelativeImageFocalPointsTest.aspx does not exist."}}}
+--batchresponse_1183639f-8d47-4e13-8588-44666b70b6c8--

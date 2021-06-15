@@ -1,87 +1,9 @@
---batchresponse_cdebab6f-b814-4b8c-817a-eebfb77d4d71
+--batchresponse_14d04937-2f88-43ae-8695-036db3f78655
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 200 OK
-CONTENT-TYPE: application/json; charset=utf-8
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{ "Row" : 
-[{
-"ID": "2030",
-"PermMask": "0x7ffffffffffbffff",
-"FSObjType": "0",
-"HTML_x0020_File_x0020_Type": "",
-"UniqueId": "{78E5D1C8-154F-4B00-8A0B-A929830E8D00}",
-"ProgId": "",
-"NoExecute": "0",
-"ContentTypeId": "0x0101009D1CB255DA76424F860D91F20E6C4118002A50BFCFB7614729B56886FADA02339B00F0F4E89AC972FF45B8C2A814246E5545",
-"FileRef": "\u002fsites\u002fprov-1\u002fSitePages\u002fPNP_SDK_TEST_RePostPageCreate.aspx",
-"FileRef.urlencode": "%2Fsites%2Fprov%2D1%2FSitePages%2FPNP%5FSDK%5FTEST%5FRePostPageCreate%2Easpx",
-"FileRef.urlencodeasurl": "\u002fsites\u002fprov-1\u002fSitePages\u002fPNP_SDK_TEST_RePostPageCreate.aspx",
-"FileRef.urlencoding": "\u002fsites\u002fprov-1\u002fSitePages\u002fPNP_SDK_TEST_RePostPageCreate.aspx",
-"FileRef.scriptencodeasurl": "\\u002fsites\\u002fprov-1\\u002fSitePages\\u002fPNP_SDK_TEST_RePostPageCreate.aspx",
-"_UIVersion": "1",
-"SMTotalSize": "3371",
-"File_x0020_Size": "2472",
-"_CommentFlags": "",
-"File_x0020_Type": "aspx",
-"HTML_x0020_File_x0020_Type.File_x0020_Type.mapall": "ichtm.gif|Microsoft SharePoint Designer|SharePoint.OpenDocuments|",
-"HTML_x0020_File_x0020_Type.File_x0020_Type.mapcon": "SharePoint.OpenDocuments",
-"HTML_x0020_File_x0020_Type.File_x0020_Type.mapico": "ichtm.gif",
-"serverurl.progid": "",
-"ServerRedirectedEmbedUrl": "",
-"File_x0020_Type.progid": "",
-"File_x0020_Type.url": "FALSE",
-"FileLeafRef": "PNP_SDK_TEST_RePostPageCreate.aspx",
-"FileLeafRef.Name": "PNP_SDK_TEST_RePostPageCreate",
-"FileLeafRef.Suffix": "aspx",
-"FileDirRef": "\u002fsites\u002fprov-1\u002fSitePages",
-"Description": "Some description",
-"Title": "Custom page title",
-"ClientSideApplicationId": "{B6917CB1-93A0-4B97-A84D-7CF49975D4EC}",
-"PageLayoutType": "RepostPage",
-"CanvasContent1": "<div dir=\"\" class=\"ms-rtestate-field\"><\u002fdiv>",
-"_AuthorByline": "",
-"_AuthorByline.id": "",
-"_AuthorByline.title": "\u002fsites\u002fprov-1\u002fSiteAssets\u002frepostpreview.jpg",
-"_AuthorByline.span": "",
-"_AuthorByline.email": "",
-"_AuthorByline.sip": "\u002fsites\u002fprov-1\u002fSiteAssets\u002frepostpreview.jpg",
-"_AuthorByline.jobTitle": "",
-"_AuthorByline.department": "https:\u002f\u002ftechcommunity.microsoft.com\u002ft5\u002fsharepoint\u002fhow-to-create-repost-page-modern-page-library-with-powershell\u002fm-p\u002f269332",
-"_AuthorByline.picture": "0",
-"LayoutWebpartsContent": "<div dir=\"\" class=\"ms-rtestate-field\"><\u002fdiv>",
-"BannerImageUrl": "\u002fsites\u002fprov-1\u002fSiteAssets\u002frepostpreview.jpg",
-"BannerImageUrl.desc": "\u002fsites\u002fprov-1\u002fSiteAssets\u002frepostpreview.jpg",
-"PromotedState": "0",
-"PromotedState.": "0",
-"_OriginalSourceUrl": "https:\u002f\u002ftechcommunity.microsoft.com\u002ft5\u002fsharepoint\u002fhow-to-create-repost-page-modern-page-library-with-powershell\u002fm-p\u002f269332",
-"_OriginalSourceSiteId": "",
-"_OriginalSourceWebId": "",
-"_OriginalSourceListId": "",
-"_OriginalSourceItemId": "",
-"ItemChildCount": "0",
-"FolderChildCount": "0",
-"A2ODMountCount": "",
-"_StubFile": "0",
-"_ComplianceTag": "",
-"owshiddenversion": "2",
-"_SPTranslatedLanguages": "",
-"_SPSitePageFlags": "",
-"ContentVersion": "1",
-"DocConcurrencyNumber": "2",
-"_VirusStatus": "",
-"Restricted": "",
-"ecb.dispex": "return DispEx(this,event,'TRUE','FALSE','FALSE','','1','SharePoint.OpenDocuments','','','','6','0','','0x7ffffffffffbffff','','')"
-}
-],"FirstRow" : 1,
-"FolderPermissions" : "0x7ffffffffffbffff"
-,"LastRow" : 1,
-"RowLimit" : 500
-,"FilterLink" : "?"
-,"ForceNoHierarchy" : "1"
-,"HierarchyHasIndention" : ""
-,"CurrentFolderSpItemUrl" : ""
 
-}
---batchresponse_cdebab6f-b814-4b8c-817a-eebfb77d4d71--
+--batchresponse_14d04937-2f88-43ae-8695-036db3f78655--

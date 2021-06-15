@@ -1,9 +1,0 @@
---batchresponse_cd690d77-6f26-46bf-8a93-b03df07efc2b
-Content-Type: application/http
-Content-Transfer-Encoding: binary
-
-HTTP/1.1 404 Not Found
-CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
-
-{"error":{"code":"-2130575338, Microsoft.SharePoint.SPException","message":{"lang":"en-US","value":"The file /sites/prov-1/SitePages/PNP_SDK_TEST_CreateAndUpdatePageWith Space InName.aspx does not exist."}}}
---batchresponse_cd690d77-6f26-46bf-8a93-b03df07efc2b--

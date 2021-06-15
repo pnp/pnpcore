@@ -1,9 +1,10 @@
---batchresponse_00b37672-a50d-4ccf-bfcb-e182449f954e
+--batchresponse_7482ec67-4a71-48d6-97dd-7040b8e1799e
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+ETAG: "dcaf8d41-c2f5-48fd-bde7-6b5c5bfe5df8,3"
 
-{"d":{"Publish":null}}
---batchresponse_00b37672-a50d-4ccf-bfcb-e182449f954e--
+{"d":{"__metadata":{"id":"dcd0e346-7b23-4666-aba3-1e5ff4b454ab","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'5c73d6b2-ac03-4058-8233-af21df6ed8de')/Items(2057)","etag":"\"3\"","type":"SP.Data.SitePagesItem"},"LikedByInformation":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'5c73d6b2-ac03-4058-8233-af21df6ed8de')/Items(2057)/LikedByInformation","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'5c73d6b2-ac03-4058-8233-af21df6ed8de')/Items(2057)/LikedByInformation","type":"Microsoft.SharePoint.Likes.likedByInformation"},"likedBy":{"results":[{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Microsoft.SharePoint.Likes.userEntityfb9b9419-3ca2-4923-b371-a05fd30a8121","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Microsoft.SharePoint.Likes.userEntityfb9b9419-3ca2-4923-b371-a05fd30a8121","type":"Microsoft.SharePoint.Likes.userEntity"},"creationDate":"2021-06-15T17:59:25.563Z","email":"bert.jansen@bertonline.onmicrosoft.com","id":6,"loginName":"i:0#.f|membership|bert.jansen@bertonline.onmicrosoft.com","name":"Bert Jansen (Cloud)"}]},"isLikedByUser":true,"likeCount":"1"},"Id":2057,"ID":2057}}
+--batchresponse_7482ec67-4a71-48d6-97dd-7040b8e1799e--

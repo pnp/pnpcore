@@ -1,87 +1,9 @@
---batchresponse_fe39bfb5-7dcd-45f7-9b18-ca3374fda098
+--batchresponse_6db8b21a-7896-4cf3-9add-f061727806db
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 200 OK
-CONTENT-TYPE: application/json; charset=utf-8
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{ "Row" : 
-[{
-"ID": "1",
-"PermMask": "0x7ffffffffffbffff",
-"FSObjType": "0",
-"HTML_x0020_File_x0020_Type": "",
-"UniqueId": "{03D168C5-50FA-4D0F-A2D5-DD6773F8FDB2}",
-"ProgId": "",
-"NoExecute": "0",
-"ContentTypeId": "0x0101009D1CB255DA76424F860D91F20E6C4118003736598C41467947A1A94751FAC8EE97",
-"FileRef": "\u002fsites\u002fprov-1\u002fOverwriteHomePage\u002fSitePages\u002fHome.aspx",
-"FileRef.urlencode": "%2Fsites%2Fprov%2D1%2FOverwriteHomePage%2FSitePages%2FHome%2Easpx",
-"FileRef.urlencodeasurl": "\u002fsites\u002fprov-1\u002fOverwriteHomePage\u002fSitePages\u002fHome.aspx",
-"FileRef.urlencoding": "\u002fsites\u002fprov-1\u002fOverwriteHomePage\u002fSitePages\u002fHome.aspx",
-"FileRef.scriptencodeasurl": "\\u002fsites\\u002fprov-1\\u002fOverwriteHomePage\\u002fSitePages\\u002fHome.aspx",
-"_UIVersion": "512",
-"SMTotalSize": "1435",
-"File_x0020_Size": "805",
-"_CommentFlags": "1",
-"File_x0020_Type": "aspx",
-"HTML_x0020_File_x0020_Type.File_x0020_Type.mapall": "ichtm.gif|Microsoft SharePoint Designer|SharePoint.OpenDocuments|",
-"HTML_x0020_File_x0020_Type.File_x0020_Type.mapcon": "SharePoint.OpenDocuments",
-"HTML_x0020_File_x0020_Type.File_x0020_Type.mapico": "ichtm.gif",
-"serverurl.progid": "",
-"ServerRedirectedEmbedUrl": "",
-"File_x0020_Type.progid": "",
-"File_x0020_Type.url": "FALSE",
-"FileLeafRef": "Home.aspx",
-"FileLeafRef.Name": "Home",
-"FileLeafRef.Suffix": "aspx",
-"FileDirRef": "\u002fsites\u002fprov-1\u002fOverwriteHomePage\u002fSitePages",
-"Description": "",
-"Title": "Home",
-"ClientSideApplicationId": "{B6917CB1-93A0-4B97-A84D-7CF49975D4EC}",
-"PageLayoutType": "Home",
-"CanvasContent1": "<div dir=\"\" class=\"ms-rtestate-field\"><\u002fdiv>",
-"_AuthorByline": "",
-"_AuthorByline.id": "",
-"_AuthorByline.title": "",
-"_AuthorByline.span": "",
-"_AuthorByline.email": "",
-"_AuthorByline.sip": "",
-"_AuthorByline.jobTitle": "",
-"_AuthorByline.department": "",
-"_AuthorByline.picture": "0",
-"LayoutWebpartsContent": "<div dir=\"\" class=\"ms-rtestate-field\"><\u002fdiv>",
-"BannerImageUrl": "",
-"BannerImageUrl.desc": "",
-"PromotedState": "0",
-"PromotedState.": "0",
-"_OriginalSourceUrl": "",
-"_OriginalSourceSiteId": "",
-"_OriginalSourceWebId": "",
-"_OriginalSourceListId": "",
-"_OriginalSourceItemId": "",
-"ItemChildCount": "0",
-"FolderChildCount": "0",
-"A2ODMountCount": "",
-"_StubFile": "0",
-"_ComplianceTag": "",
-"owshiddenversion": "3",
-"_SPTranslatedLanguages": "",
-"_SPSitePageFlags": "",
-"ContentVersion": "0",
-"DocConcurrencyNumber": "3",
-"_VirusStatus": "",
-"Restricted": "",
-"ecb.dispex": "return DispEx(this,event,'TRUE','FALSE','FALSE','','1','SharePoint.OpenDocuments','','','','6','0','','0x7ffffffffffbffff','','')"
-}
-],"FirstRow" : 1,
-"FolderPermissions" : "0x7ffffffffffbffff"
-,"LastRow" : 1,
-"RowLimit" : 500
-,"FilterLink" : "?"
-,"ForceNoHierarchy" : "1"
-,"HierarchyHasIndention" : ""
-,"CurrentFolderSpItemUrl" : ""
-
-}
---batchresponse_fe39bfb5-7dcd-45f7-9b18-ca3374fda098--
+{"d":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/OverwriteHomePage/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/prov-1/OverwriteHomePage/SitePages/Home.aspx')","uri":"https://bertonline.sharepoint.com/sites/prov-1/OverwriteHomePage/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/prov-1/OverwriteHomePage/SitePages/Home.aspx')","type":"SP.File"},"ListItemAllFields":{"__metadata":{"id":"a0cbc237-30fc-47fc-aab7-d6f89f00e56c","uri":"https://bertonline.sharepoint.com/sites/prov-1/OverwriteHomePage/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/prov-1/OverwriteHomePage/SitePages/Home.aspx')/ListItemAllFields","etag":"\"3\"","type":"SP.Data.SitePagesItem"},"FirstUniqueAncestorSecurableObject":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/OverwriteHomePage/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/prov-1/OverwriteHomePage/SitePages/Home.aspx')/ListItemAllFields/FirstUniqueAncestorSecurableObject"}},"RoleAssignments":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/OverwriteHomePage/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/prov-1/OverwriteHomePage/SitePages/Home.aspx')/ListItemAllFields/RoleAssignments"}},"AttachmentFiles":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/OverwriteHomePage/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/prov-1/OverwriteHomePage/SitePages/Home.aspx')/ListItemAllFields/AttachmentFiles"}},"ContentType":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/OverwriteHomePage/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/prov-1/OverwriteHomePage/SitePages/Home.aspx')/ListItemAllFields/ContentType"}},"GetDlpPolicyTip":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/OverwriteHomePage/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/prov-1/OverwriteHomePage/SitePages/Home.aspx')/ListItemAllFields/GetDlpPolicyTip"}},"FieldValuesAsHtml":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/OverwriteHomePage/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/prov-1/OverwriteHomePage/SitePages/Home.aspx')/ListItemAllFields/FieldValuesAsHtml"}},"FieldValuesAsText":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/OverwriteHomePage/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/prov-1/OverwriteHomePage/SitePages/Home.aspx')/ListItemAllFields/FieldValuesAsText"}},"FieldValuesForEdit":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/OverwriteHomePage/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/prov-1/OverwriteHomePage/SitePages/Home.aspx')/ListItemAllFields/FieldValuesForEdit"}},"File":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/OverwriteHomePage/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/prov-1/OverwriteHomePage/SitePages/Home.aspx')/ListItemAllFields/File"}},"Folder":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/OverwriteHomePage/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/prov-1/OverwriteHomePage/SitePages/Home.aspx')/ListItemAllFields/Folder"}},"LikedByInformation":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/OverwriteHomePage/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/prov-1/OverwriteHomePage/SitePages/Home.aspx')/ListItemAllFields/LikedByInformation"}},"ParentList":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/OverwriteHomePage/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/prov-1/OverwriteHomePage/SitePages/Home.aspx')/ListItemAllFields/ParentList"}},"Properties":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/OverwriteHomePage/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/prov-1/OverwriteHomePage/SitePages/Home.aspx')/ListItemAllFields/Properties"}},"Versions":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/OverwriteHomePage/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/prov-1/OverwriteHomePage/SitePages/Home.aspx')/ListItemAllFields/Versions"}},"FileSystemObjectType":0,"Id":1,"ServerRedirectedEmbedUri":null,"ServerRedirectedEmbedUrl":"","ContentTypeId":"0x0101009D1CB255DA76424F860D91F20E6C41180003ADBB1658EB614EAC6B01F6C31A0B1C","ComplianceAssetId":null,"WikiField":null,"Title":"Home","CanvasContent1":null,"BannerImageUrl":null,"Description":null,"PromotedState":0,"FirstPublishedDate":null,"LayoutWebpartsContent":null,"OData__AuthorBylineId":null,"_AuthorBylineStringId":null,"OData__TopicHeader":null,"OData__SPSitePageFlags":null,"OData__SPTranslatedLanguages":null,"OData__SPTranslationLanguage":null,"OData__SPTranslationSourceItemId":null,"OData__SPIsTranslation":false,"OData__OriginalSourceUrl":null,"OData__OriginalSourceSiteId":null,"OData__OriginalSourceWebId":null,"OData__OriginalSourceListId":null,"OData__OriginalSourceItemId":null,"ID":1,"Created":"2021-06-15T19:59:54","AuthorId":6,"Modified":"2021-06-15T19:59:54","EditorId":6,"OData__CopySource":null,"CheckoutUserId":null,"OData__UIVersionString":"1.0","GUID":"e6091e61-0037-436f-bf16-062e97437479"},"ListId":"96db743e-9977-454e-a193-2578d665b9cf","ServerRelativeUrl":"/sites/prov-1/OverwriteHomePage/SitePages/Home.aspx","UniqueId":"6b5a2f4b-793e-43d9-af11-e789cf611956"}}
+--batchresponse_6db8b21a-7896-4cf3-9add-f061727806db--

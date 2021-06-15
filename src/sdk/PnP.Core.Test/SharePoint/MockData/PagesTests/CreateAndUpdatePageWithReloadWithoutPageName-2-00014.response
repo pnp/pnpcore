@@ -1,9 +1,0 @@
---batchresponse_57cbc316-5316-4972-8a70-c554d8109ffc
-Content-Type: application/http
-Content-Transfer-Encoding: binary
-
-HTTP/1.1 200 OK
-CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
-
-{"d":{"results":[]}}
---batchresponse_57cbc316-5316-4972-8a70-c554d8109ffc--

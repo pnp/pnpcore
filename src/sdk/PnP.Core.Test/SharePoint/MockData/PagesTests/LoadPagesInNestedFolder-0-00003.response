@@ -1,9 +1,9 @@
---batchresponse_0245b76c-5440-43f0-a0c9-d721639018b0
+--batchresponse_9c0389bd-22c1-47d4-bcb6-a9ada2225784
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
-HTTP/1.1 200 OK
+HTTP/1.1 404 Not Found
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{"d":{"results":[]}}
---batchresponse_0245b76c-5440-43f0-a0c9-d721639018b0--
+{"error":{"code":"-2130575338, Microsoft.SharePoint.SPException","message":{"lang":"en-US","value":"The file /sites/prov-1/SitePages/PNP_SDK_TEST_folder1/PNP_SDK_TEST_folder2/PNP_SDK_TEST_folder3/PNP_SDK_TEST_LoadPagesInNestedFolder.aspx does not exist."}}}
+--batchresponse_9c0389bd-22c1-47d4-bcb6-a9ada2225784--

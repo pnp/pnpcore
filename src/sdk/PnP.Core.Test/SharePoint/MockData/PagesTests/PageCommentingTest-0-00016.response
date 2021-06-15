@@ -1,9 +1,9 @@
---batchresponse_8cd95fc9-9ed8-4f25-9200-692f1ccdc0e5
+--batchresponse_9f9a4284-472a-4a94-b645-322ec0c6e008
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{"d":{"Like":null}}
---batchresponse_8cd95fc9-9ed8-4f25-9200-692f1ccdc0e5--
+
+--batchresponse_9f9a4284-472a-4a94-b645-322ec0c6e008--

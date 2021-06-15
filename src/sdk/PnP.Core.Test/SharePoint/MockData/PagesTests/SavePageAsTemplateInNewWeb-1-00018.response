@@ -1,9 +1,9 @@
---batchresponse_232af538-34ed-4017-b913-3cf4c63e360e
+--batchresponse_0649fb61-ee59-4592-a75f-4f530f5b0d04
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
-HTTP/1.1 404 Not Found
+HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{"error":{"code":"-2130575338, Microsoft.SharePoint.SPException","message":{"lang":"nl-NL","value":"Het bestand /sites/prov-1/DutchTemplateWeb/SitePages/PNP_SDK_TEST_SavePageAsTemplate.aspx bestaat niet."}}}
---batchresponse_232af538-34ed-4017-b913-3cf4c63e360e--
+{"d":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/DutchTemplateWeb/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/prov-1/DutchTemplateWeb/SitePages/Templates')","uri":"https://bertonline.sharepoint.com/sites/prov-1/DutchTemplateWeb/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/prov-1/DutchTemplateWeb/SitePages/Templates')","type":"SP.Folder"},"Name":"Templates","UniqueId":"e56c62ac-f398-4834-b931-ea615ccbfc57"}}
+--batchresponse_0649fb61-ee59-4592-a75f-4f530f5b0d04--

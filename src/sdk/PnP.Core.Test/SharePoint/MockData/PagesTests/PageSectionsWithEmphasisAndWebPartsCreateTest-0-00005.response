@@ -1,9 +1,9 @@
---batchresponse_e7d53638-ebba-4816-be8e-87b0c3824ebb
+--batchresponse_e97b7cba-1887-48eb-8ed4-c10c860b7848
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
-HTTP/1.1 200 OK
+HTTP/1.1 404 Not Found
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{"d":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/pnpcoresdktest/_api/Web","uri":"https://bertonline.sharepoint.com/sites/pnpcoresdktest/_api/Web","type":"SP.Web"},"Id":"bc3f47bc-6313-43a4-b21d-ffe6200c0436","WebTemplate":"SITEPAGEPUBLISHING"}}
---batchresponse_e7d53638-ebba-4816-be8e-87b0c3824ebb--
+{"error":{"code":"-2130575338, Microsoft.SharePoint.SPException","message":{"lang":"en-US","value":"The file /sites/pnpcoresdktest/SitePages/PNP_SDK_TEST_PageSectionsWithEmphasisAndWebPartsCreateTest.aspx does not exist."}}}
+--batchresponse_e97b7cba-1887-48eb-8ed4-c10c860b7848--

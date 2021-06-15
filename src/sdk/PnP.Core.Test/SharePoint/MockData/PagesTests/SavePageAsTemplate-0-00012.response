@@ -1,1 +1,9 @@
-[{"SchemaVersion":"15.0.0.0","LibraryVersion":"16.0.21326.12005","ErrorInfo":null,"TraceCorrelationId":"60d0d09f-a0a0-3000-04a6-b79f9c99e2e0"}]
+--batchresponse_ab977b45-2e9e-47da-93e3-42b366cfb17d
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+HTTP/1.1 404 Not Found
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+
+{"error":{"code":"-2130575338, Microsoft.SharePoint.SPException","message":{"lang":"en-US","value":"The file /sites/prov-1/SitePages/PNP_SDK_TEST_SavePageAsTemplate.aspx does not exist."}}}
+--batchresponse_ab977b45-2e9e-47da-93e3-42b366cfb17d--

@@ -1,9 +1,9 @@
---batchresponse_96d45241-4681-4f5a-9c09-a7e32978ed92
+--batchresponse_e8dec47f-d61f-4cbf-9092-9f8a207e7dca
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
-HTTP/1.1 404 Not Found
+HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{"error":{"code":"-2130575338, Microsoft.SharePoint.SPException","message":{"lang":"en-US","value":"The file /sites/prov-1/SitePages/PNP_SDK_TEST_SavePageAsTemplate.aspx does not exist."}}}
---batchresponse_96d45241-4681-4f5a-9c09-a7e32978ed92--
+{"d":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/prov-1/SitePages/Templates')","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/prov-1/SitePages/Templates')","type":"SP.Folder"},"Name":"Templates","UniqueId":"e13a9604-f564-4d66-b962-9f33217ecb69"}}
+--batchresponse_e8dec47f-d61f-4cbf-9092-9f8a207e7dca--
