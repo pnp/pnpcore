@@ -398,6 +398,42 @@ await context.ExecuteAsync();
 </code></pre>
 <h2 id="getting-changes-for-a-list-item">Getting changes for a list item</h2>
 <p>You can use the <code>GetChanges</code> methods on an <code>IListItem</code> to list all the changes. See <a href="changes-sharepoint.html">Enumerating changes that happened in SharePoint</a> to learn more.</p>
+<h2 id="getting-list-item-versions">Getting list item versions</h2>
+<p>Depending on the list versioning settings an <code>IListItem</code> can have multiple versions. If you want to enumerate these versions you need to first load the <code>Versions</code> property:</p>
+<pre><code class="lang-csharp">var myList = await context.Web.Lists.GetByTitleAsync(&quot;My List&quot;);
+// Load list item with id 1
+var first = await myList.Items.GetByIdAsync(1, li =&gt; li.All, li =&gt; li.Versions);
+// Iterate over the retrieved list items
+foreach (var version in first.Versions.AsRequested())
+{
+  // do something with the file version
+}
+</code></pre>
+<h2 id="getting-the-file-of-a-list-item">Getting the file of a list item</h2>
+<p>A document in a document library is an <code>IListItem</code> holding the file metadata with an <code>IFile</code> holding the actual file. If you have an <code>IListItem</code> you can load the connected file via <code>File</code> property:</p>
+<pre><code class="lang-csharp">var myList = await context.Web.Lists.GetByTitleAsync(&quot;My List&quot;);
+
+// Load list item with id 1 with it's file
+var first = await myList.Items.GetByIdAsync(1, li =&gt; li.All, li =&gt; li.File);
+
+// Download the content of the actual file
+byte[] downloadedContentBytes = await first.File.GetContentBytesAsync();
+</code></pre>
+<h2 id="getting-the-file-version-of-a-list-item-version">Getting the file version of a list item version</h2>
+<p>If there's a file for the list item then there's also a version of that file for each list item version. To access that file version you need to load the <code>FileVersion</code> property on the <code>IListItemVersion</code> instance.</p>
+<pre><code class="lang-csharp">var myList = await context.Web.Lists.GetByTitleAsync(&quot;My List&quot;);
+// Load list item with id 1, also load the FileVersion
+var first = await myList.Items.GetByIdAsync(1, li =&gt; li.All, li =&gt; li.Versions.QueryProperties(p =&gt; p.FileVersion));
+// Iterate over the retrieved list items
+foreach (var version in first.Versions.AsRequested())
+{
+  // do something with the file version, e.g. download it
+  Stream downloadedContentStream = await version.FileVersion.GetContentAsync();
+  downloadedContentStream.Seek(0, SeekOrigin.Begin);
+  // Get string from the content stream
+  string downloadedContent = await new StreamReader(downloadedContentStream).ReadToEndAsync();
+}
+</code></pre>
 </article>
           </div>
           <div class="hidden-sm col-md-2" role="complementary">
