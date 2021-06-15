@@ -54,5 +54,10 @@ namespace PnP.Core.Transformation.SharePoint.Model
         /// Defines whether the source page is a root page for the source site
         /// </summary>
         public bool IsRootPage { get; set; }
+
+        /// <summary>
+        /// Defines the Page Layout for the publishing page, if any
+        /// </summary>
+        public string PageLayout { get; set; }
     }
 }

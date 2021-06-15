@@ -384,7 +384,7 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
                     (layout, webparts) = await AnalyzeWikiPageAsync(pageFile, pageItem, page).ConfigureAwait(false);
                     break;
                 case SourcePageType.PublishingPage when page.SourceVersion != SPVersion.SPO:
-                    (layout, webparts) = await AnalyzePublishingPageAsync(pageFile, page).ConfigureAwait(false);
+                    (layout, webparts) = await AnalyzePublishingPageAsync(pageFile, pageItem, page).ConfigureAwait(false);
                     break;
                 case SourcePageType.PublishingPage:
                     (layout, webparts) = await AnalyzePublishingPageOnPremisesAsync(pageFile, page).ConfigureAwait(false);
@@ -746,13 +746,126 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
             return new Tuple<PageLayout, List<WebPartEntity>>(layout, webparts);
         }
 
-        private async Task<Tuple<PageLayout, List<WebPartEntity>>> AnalyzePublishingPageAsync(File pageFile, SourcePageInformation page)
+        private async Task<Tuple<PageLayout, List<WebPartEntity>>> AnalyzePublishingPageAsync(File pageFile, ListItem pageItem, SourcePageInformation page)
         {
             // Prepare the result variable
             List<WebPartEntity> webparts = new List<WebPartEntity>();
 
             // Get a reference to the current source context
             var context = pageFile.Context;
+
+            // Determine the source page layout
+            string pageLayoutUrl;
+            if (pageItem.TryGetFieldValue(SharePointConstants.PublishingPageLayoutField, out pageLayoutUrl))
+            {
+                page.PageLayout = System.IO.Path.GetFileNameWithoutExtension(pageLayoutUrl);
+            }
+
+            //#region Process fields that become web parts 
+            //if (publishingPageTransformationModel.WebParts != null)
+            //{
+            //    #region Publishing Html column processing
+            //    // Converting to WikiTextPart is a special case as we'll need to process the html
+            //    var wikiTextWebParts = publishingPageTransformationModel.WebParts.Where(p => p.TargetWebPart.Equals(WebParts.WikiText, StringComparison.InvariantCultureIgnoreCase));
+            //    List<WebPartPlaceHolder> webPartsToRetrieve = new List<WebPartPlaceHolder>();
+            //    foreach (var wikiTextPart in wikiTextWebParts)
+            //    {
+            //        string pageContents = page.GetFieldValueAs<string>(wikiTextPart.Name);
+
+            //        if (wikiTextPart.Property.Length > 0)
+            //        {
+            //            foreach (var fieldWebPartProperty in wikiTextPart.Property)
+            //            {
+            //                if (fieldWebPartProperty.Name.Equals("Text", StringComparison.InvariantCultureIgnoreCase) && !string.IsNullOrEmpty(fieldWebPartProperty.Functions))
+            //                {
+            //                    // execute function
+            //                    var evaluatedField = this.functionProcessor.Process(fieldWebPartProperty.Functions, fieldWebPartProperty.Name, MapToFunctionProcessorFieldType(fieldWebPartProperty.Type));
+            //                    if (!string.IsNullOrEmpty(evaluatedField.Item1))
+            //                    {
+            //                        pageContents = evaluatedField.Item2;
+            //                    }
+            //                }
+            //            }
+            //        }
+
+            //        if (pageContents != null && !string.IsNullOrEmpty(pageContents))
+            //        {
+            //            var htmlDoc = parser.ParseDocument(pageContents);
+
+            //            // Analyze the html block (which is a wiki block)
+            //            var content = htmlDoc.FirstElementChild.LastElementChild;
+            //            AnalyzeWikiContentBlock(webparts, htmlDoc, webPartsToRetrieve, wikiTextPart.Row, wikiTextPart.Column, GetNextOrder(wikiTextPart.Row, wikiTextPart.Column, wikiTextPart.Order, webparts), content);
+            //        }
+            //        else
+            //        {
+            //            LogWarning(LogStrings.Warning_CannotRetrieveFieldValue, LogStrings.Heading_PublishingPage);
+            //        }
+            //    }
+
+            //    // Bulk load the needed web part information
+            //    if (webPartsToRetrieve.Count > 0)
+            //    {
+            //        LoadWebPartsInWikiContentFromServer(webparts, publishingPage, webPartsToRetrieve);
+            //    }
+            //    #endregion
+
+            //    #region Generic processing of the other 'webpart' fields
+            //    var fieldWebParts = publishingPageTransformationModel.WebParts.Where(p => !p.TargetWebPart.Equals(WebParts.WikiText, StringComparison.InvariantCultureIgnoreCase));
+            //    foreach (var fieldWebPart in fieldWebParts.OrderBy(p => p.Row).OrderBy(p => p.Column))
+            //    {
+            //        // In publishing scenarios it's common to not have all fields defined in the page layout mapping filled. By default we'll not map empty fields as that will result in empty web parts
+            //        // which impact the page look and feel. Using the RemoveEmptySectionsAndColumns flag this behaviour can be turned off.
+            //        if (this.baseTransformationInformation.RemoveEmptySectionsAndColumns)
+            //        {
+            //            var fieldContents = page.GetFieldValueAs<string>(fieldWebPart.Name);
+
+            //            if (string.IsNullOrEmpty(fieldContents))
+            //            {
+            //                LogWarning(String.Format(LogStrings.Warning_SkippedWebPartDueToEmptyInSourcee, fieldWebPart.TargetWebPart, fieldWebPart.Name), LogStrings.Heading_PublishingPage);
+            //                continue;
+            //            }
+            //        }
+
+            //        Dictionary<string, string> properties = new Dictionary<string, string>(StringComparer.InvariantCultureIgnoreCase);
+
+            //        foreach (var fieldWebPartProperty in fieldWebPart.Property)
+            //        {
+            //            if (!string.IsNullOrEmpty(fieldWebPartProperty.Functions))
+            //            {
+            //                // execute function
+            //                var evaluatedField = this.functionProcessor.Process(fieldWebPartProperty.Functions, fieldWebPartProperty.Name, MapToFunctionProcessorFieldType(fieldWebPartProperty.Type));
+            //                if (!string.IsNullOrEmpty(evaluatedField.Item1) && !properties.ContainsKey(evaluatedField.Item1))
+            //                {
+            //                    properties.Add(evaluatedField.Item1, evaluatedField.Item2);
+            //                }
+            //            }
+            //            else
+            //            {
+            //                var webPartName = page.FieldValues[fieldWebPart.Name]?.ToString().Trim();
+            //                if (webPartName != null)
+            //                {
+            //                    properties.Add(fieldWebPartProperty.Name, page.FieldValues[fieldWebPart.Name].ToString().Trim());
+            //                }
+            //            }
+            //        }
+
+            //        var wpEntity = new WebPartEntity()
+            //        {
+            //            Title = fieldWebPart.Name,
+            //            Type = fieldWebPart.TargetWebPart,
+            //            Id = Guid.Empty,
+            //            Row = fieldWebPart.Row,
+            //            Column = fieldWebPart.Column,
+            //            Order = GetNextOrder(fieldWebPart.Row, fieldWebPart.Column, fieldWebPart.Order, webparts),
+            //            Properties = properties,
+            //        };
+
+            //        webparts.Add(wpEntity);
+            //    }
+            //    #endregion
+            //}
+            //#endregion
+
 
             return null;
         }
