@@ -29,6 +29,20 @@ IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentU
 IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl, f => f.CheckOutType, f => f.CheckedOutByUser);
 ```
 
+## Getting the file of a list item
+
+A document in a document library is an `IListItem` holding the file metadata with an `IFile` holding the actual file. If you have an `IListItem` you can load the connected file via `File` property:
+
+```csharp
+var myList = await context.Web.Lists.GetByTitleAsync("My List");
+
+// Load list item with id 1 with it's file
+var first = await myList.Items.GetByIdAsync(1, li => li.All, li => li.File);
+
+// Use the loaded IFile, e.g. for downloading it
+byte[] downloadedContentBytes = await first.File.GetContentBytesAsync();
+```
+
 ### Enumerating files
 
 Files do live in an [IFolder](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IFolder.html), document libraries do have a [RootFolder property](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_RootFolder) allowing you to enumerate files, but also the [IWeb](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IWeb.html) has a [collection of Folders](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_Folders), a [RootFolder](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IWeb.html#collapsible-PnP_Core_Model_SharePoint_IWeb_RootFolder) and [GetFolderByIdAsync](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IWeb.html#collapsible-PnP_Core_Model_SharePoint_IWeb_GetFolderByIdAsync_Guid_Expression_Func_PnP_Core_Model_SharePoint_IFolder_System_Object_____) and [GetFolderByServerRelativeUrlAsync](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IWeb.html#collapsible-PnP_Core_Model_SharePoint_IWeb_GetFolderByServerRelativeUrlAsync_System_String_Expression_Func_PnP_Core_Model_SharePoint_IFolder_System_Object_____) methods. Once you've a folder you can enumerate the files inside it.

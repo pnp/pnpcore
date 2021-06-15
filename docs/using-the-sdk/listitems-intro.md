@@ -335,3 +335,51 @@ await context.ExecuteAsync();
 ## Getting changes for a list item
 
 You can use the `GetChanges` methods on an `IListItem` to list all the changes. See [Enumerating changes that happened in SharePoint](changes-sharepoint.md) to learn more.
+
+## Getting list item versions
+
+Depending on the list versioning settings an `IListItem` can have multiple versions. If you want to enumerate these versions you need to first load the `Versions` property:
+
+```csharp
+var myList = await context.Web.Lists.GetByTitleAsync("My List");
+// Load list item with id 1
+var first = await myList.Items.GetByIdAsync(1, li => li.All, li => li.Versions);
+// Iterate over the retrieved list items
+foreach (var version in first.Versions.AsRequested())
+{
+  // do something with the file version
+}
+```
+
+## Getting the file of a list item
+
+A document in a document library is an `IListItem` holding the file metadata with an `IFile` holding the actual file. If you have an `IListItem` you can load the connected file via `File` property:
+
+```csharp
+var myList = await context.Web.Lists.GetByTitleAsync("My List");
+
+// Load list item with id 1 with it's file
+var first = await myList.Items.GetByIdAsync(1, li => li.All, li => li.File);
+
+// Download the content of the actual file
+byte[] downloadedContentBytes = await first.File.GetContentBytesAsync();
+```
+
+## Getting the file version of a list item version
+
+If there's a file for the list item then there's also a version of that file for each list item version. To access that file version you need to load the `FileVersion` property on the `IListItemVersion` instance.
+
+```csharp
+var myList = await context.Web.Lists.GetByTitleAsync("My List");
+// Load list item with id 1, also load the FileVersion
+var first = await myList.Items.GetByIdAsync(1, li => li.All, li => li.Versions.QueryProperties(p => p.FileVersion));
+// Iterate over the retrieved list items
+foreach (var version in first.Versions.AsRequested())
+{
+  // do something with the file version, e.g. download it
+  Stream downloadedContentStream = await version.FileVersion.GetContentAsync();
+  downloadedContentStream.Seek(0, SeekOrigin.Begin);
+  // Get string from the content stream
+  string downloadedContent = await new StreamReader(downloadedContentStream).ReadToEndAsync();
+}
+```
