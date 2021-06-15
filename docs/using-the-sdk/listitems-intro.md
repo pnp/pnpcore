@@ -25,7 +25,10 @@ If you simply want to load all list items and your list is not containing a lot 
 ```csharp
 // Assume the fields where not yet loaded, so loading them with the list
 var myList = context.Web.Lists.GetByTitle("My List", p => p.Title, p => p.Items, 
-                                                     p => p.Fields.QueryProperties(p => p.InternalName, p => p.FieldTypeKind, p => p.TypeAsString, p => p.Title));
+                                                     p => p.Fields.QueryProperties(p => p.InternalName, 
+                                                                                   p => p.FieldTypeKind, 
+                                                                                   p => p.TypeAsString, 
+                                                                                   p => p.Title));
 // Get the item with title "Item1"
 var addedItem = myList.Items.AsRequested().FirstOrDefault(p => p.Title == "Item1");
 
@@ -44,7 +47,10 @@ SharePoint [CAML](https://docs.microsoft.com/en-us/sharepoint/dev/schema/query-s
 // Assume the fields where not yet loaded, so loading them with the list
 // If you are using CAML query, do not use the parameter 'p => p.Items'. It causes full items to load, ignoring the CAML query. 
 var myList = context.Web.Lists.GetByTitle("My List", p => p.Title,
-                                                     p => p.Fields.QueryProperties(p => p.InternalName, p => p.FieldTypeKind, p => p.TypeAsString, p => p.Title));
+                                                     p => p.Fields.QueryProperties(p => p.InternalName, 
+                                                                                   p => p.FieldTypeKind, 
+                                                                                   p => p.TypeAsString, 
+                                                                                   p => p.Title));
 
 // Build a query that only returns the Title field for items where the Title field starts with "Item1"
 string viewXml = @"<View>
@@ -83,7 +89,10 @@ By setting a row limit in the CAML query combined with using the the PagingInfo 
 // Assume the fields where not yet loaded, so loading them with the list
 // If you are using CAML query, do not use the parameter 'p => p.Items'. It causes full items to load, ignoring the CAML query. 
 var myList = context.Web.Lists.GetByTitle("My List", p => p.Title,
-                                                     p => p.Fields.QueryProperties(p => p.InternalName, p => p.FieldTypeKind, p => p.TypeAsString, p => p.Title));
+                                                     p => p.Fields.QueryProperties(p => p.InternalName, 
+                                                                                   p => p.FieldTypeKind, 
+                                                                                   p => p.TypeAsString, 
+                                                                                   p => p.Title));
 
 // Build a query that only returns the first 20 rows where the Title field starts with "Item1"
 string viewXml = @"<View>
@@ -135,7 +144,10 @@ Using the [LoadListDataAsStreamAsync method](https://pnp.github.io/pnpcore/api/P
 ```csharp
 // Assume the fields where not yet loaded, so loading them with the list
 var myList = context.Web.Lists.GetByTitle("My List", p => p.Title, 
-                                                     p => p.Fields.QueryProperties(p => p.InternalName, p => p.FieldTypeKind, p => p.TypeAsString, p => p.Title));
+                                                     p => p.Fields.QueryProperties(p => p.InternalName, 
+                                                                                   p => p.FieldTypeKind, 
+                                                                                   p => p.TypeAsString, 
+                                                                                   p => p.Title));
 
 // Build a query that only returns the Title field for the top 5 items where the Title field starts with "Item1"
 string viewXml = @"<View>
@@ -175,7 +187,10 @@ foreach (var listItem in myList.Items.AsRequested())
 ```csharp
 // Assume the fields where not yet loaded, so loading them with the list
 var myList = context.Web.Lists.GetByTitle("My List", p => p.Title, 
-                                                     p => p.Fields.QueryProperties(p => p.InternalName, p => p.FieldTypeKind, p => p.TypeAsString, p => p.Title));
+                                                     p => p.Fields.QueryProperties(p => p.InternalName, 
+                                                                                   p => p.FieldTypeKind, 
+                                                                                   p => p.TypeAsString, 
+                                                                                   p => p.Title));
 
 // Build a query that only returns the Title field for the first 20 items where the Title field starts with "Item1"
 string viewXml = @"<View>
@@ -302,7 +317,10 @@ Using the Delete methods like DeleteAsync or DeleteBatchAsync you can delete one
 ```csharp
 // Assume the fields where not yet loaded, so loading them with the list
 var myList = context.Web.Lists.GetByTitle("My List", p => p.Title, p => p.Items, 
-                                                     p => p.Fields.QueryProperties(p => p.InternalName, p => p.FieldTypeKind, p => p.TypeAsString, p => p.Title));
+                                                     p => p.Fields.QueryProperties(p => p.InternalName, 
+                                                                                   p => p.FieldTypeKind, 
+                                                                                   p => p.TypeAsString, 
+                                                                                   p => p.Title));
 // Iterate over the retrieved list items
 foreach (var listItem in myList.Items.AsRequested())
 {
@@ -317,22 +335,3 @@ await context.ExecuteAsync();
 ## Getting changes for a list item
 
 You can use the `GetChanges` methods on an `IListItem` to list all the changes. See [Enumerating changes that happened in SharePoint](changes-sharepoint.md) to learn more.
-
-## Enabling/Disabling list item comments
-
-List items can have comments in SharePoint and using the [SetCommentsDisabledAsync method](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IListItemBase.html#PnP_Core_Model_SharePoint_IListItemBase_SetCommentsDisabledAsync_System_Boolean_) you can turn off commenting for a given list item. This method goes hand in hand with the [AreCommentsDisabledAsync](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IListItemBase.html#PnP_Core_Model_SharePoint_IListItemBase_AreCommentsDisabledAsync) method to get the current commenting status of a list item.
-
-```csharp
-// Assume the fields where not yet loaded, so loading them with the list
-var myList = context.Web.Lists.GetByTitle("My List", p => p.Title, p => p.Items, 
-                                                     p => p.Fields.QueryProperties(p => p.InternalName, p => p.FieldTypeKind, p => p.TypeAsString, p => p.Title));
-// Get the item with title "Item1"
-var addedItem = myList.Items.AsRequested().FirstOrDefault(p => p.Title == "Item1");
-
-// Check if commenting was turned off
-if (!(await addedItem.AreCommentsDisabledAsync()))
-{
-    // Turn commenting of the list item on
-    await addedItem.SetCommentsDisabledAsync(false);
-}
-```

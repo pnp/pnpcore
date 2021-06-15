@@ -5,6 +5,15 @@ SharePoint does support multilingual pages in communication sites and the page A
 > [!Important]
 > Multilingual pages only work on SharePoint Communication sites.
 
+In the remainder of this article you'll see a lot of `context` use: in this case this is a `PnPContext` which was obtained via the `PnPContextFactory` as explained in the [overview article](readme.md) and show below:
+
+```csharp
+using (var context = await pnpContextFactory.CreateAsync("SiteToWorkWith"))
+{
+    // See next chapter on how to use the PnPContext for working with pages
+}
+```
+
 ## Ensuring your site is correctly configured for multilingual pages
 
 Before you use multilingual pages on a site you need to ensure the site is configured to support multilingual pages. There are 2 pre-requisites:

@@ -67,6 +67,8 @@
     href: listitems-intro.md
   - name: Field handling
     href: listitems-fields.md
+  - name: Commenting and liking
+    href: listitems-social.md
 - name: Files
   items:
   - name: Overview
@@ -85,7 +87,7 @@
     href: pages-promote.md
   - name: Multilingual pages
     href: pages-multilingual.md
-  - name: Page commenting
+  - name: Commenting and liking
     href: pages-social.md
 - name: Folders
   items:
