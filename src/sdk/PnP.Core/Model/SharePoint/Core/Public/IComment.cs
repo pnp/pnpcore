@@ -81,6 +81,11 @@ namespace PnP.Core.Model.SharePoint
         /// </summary>
         public ICommentCollection Replies { get; }
 
+        /// <summary>
+        /// List of users who are at mentioned in this comment.
+        /// </summary>
+        public ICommentLikeUserEntityCollection Mentions { get; }
+
         #region Like/Unlike
 
         /// <summary>

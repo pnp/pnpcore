@@ -1,9 +1,10 @@
---batchresponse_1ec26755-a8f7-4ff3-bb32-482af4fff031
+--batchresponse_c1dd566d-fcb9-4bbf-a6d5-18054352c58b
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
-HTTP/1.1 200 OK
+HTTP/1.1 201 Created
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+LOCATION: https://bertonline.sharepoint.com/sites/prov-1/_api/web/lists('5c73d6b2-ac03-4058-8233-af21df6ed8de')/GetItemById(2086)/Comments(1)
 
-{"d":{"Like":null}}
---batchresponse_1ec26755-a8f7-4ff3-bb32-482af4fff031--
+{"d":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/web/lists('5c73d6b2-ac03-4058-8233-af21df6ed8de')/GetItemById(2086)/Comments(1)","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/web/lists('5c73d6b2-ac03-4058-8233-af21df6ed8de')/GetItemById(2086)/Comments(1)","type":"Microsoft.SharePoint.Comments.comment"},"likedBy":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/web/lists('5c73d6b2-ac03-4058-8233-af21df6ed8de')/GetItemById(2086)/Comments(1)/likedBy"}},"replies":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/web/lists('5c73d6b2-ac03-4058-8233-af21df6ed8de')/GetItemById(2086)/Comments(1)/replies"}},"author":{"__metadata":{"type":"SP.Sharing.Principal"},"email":"bert.jansen@bertonline.onmicrosoft.com","expiration":null,"id":6,"isActive":true,"isExternal":false,"jobTitle":null,"loginName":"i:0#.f|membership|bert.jansen@bertonline.onmicrosoft.com","name":"Bert Jansen (Cloud)","principalType":1,"userId":null,"userPrincipalName":null},"createdDate":"2021-06-16T11:46:45.1040132Z","id":"1","isLikedByUser":false,"isReply":false,"itemId":2086,"likeCount":0,"listId":"5c73d6b2-ac03-4058-8233-af21df6ed8de","mentions":{"__metadata":{"type":"Collection(Microsoft.SharePoint.Comments.Client.Identity)"},"results":[{"email":"bert.jansen@bertonline.onmicrosoft.com","id":6,"loginName":"i:0#.f|membership|bert.jansen@bertonline.onmicrosoft.com","name":"Bert Jansen (Cloud)"}]},"parentId":"0","replyCount":0,"text":"This is great <a data-sp-mention-user-id=\"bert.jansen@bertonline.onmicrosoft.com\" href=\"mailto&#58;bert.jansen@bertonline.onmicrosoft.com\" tabindex=\"-1\">@Bert</a>!"}}
+--batchresponse_c1dd566d-fcb9-4bbf-a6d5-18054352c58b--

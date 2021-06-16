@@ -77,6 +77,8 @@ namespace PnP.Core.Model.SharePoint
 
         public ICommentCollection Replies { get => GetModelCollectionValue<ICommentCollection>(); }
 
+        public ICommentLikeUserEntityCollection Mentions { get => GetModelCollectionValue<ICommentLikeUserEntityCollection>(); }
+
         [KeyProperty(nameof(Id))]
         public override object Key { get => Id; set => Id = value.ToString(); }
 

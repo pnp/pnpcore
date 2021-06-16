@@ -72,5 +72,18 @@ namespace PnP.Core.Model.SharePoint
         public void DeleteAll();
 
         #endregion
+
+        #region At mentioning
+
+        /// <summary>
+        /// Constructs the at mentioning string to be used when at mentioning someone in a comment or reply
+        /// </summary>
+        /// <param name="userName">Name of the user to show in front of the @ (e.g. @Bert) </param>
+        /// <param name="userPrincipalName">The UPN of the user represented in the at mentioning</param>
+        /// <param name="email">The email of the user represented in the at mentioning. If not specified the UPN is used for email as well</param>
+        /// <returns>The formatted at mentioning html</returns>
+        public string GetAtMentioningString(string userName, string userPrincipalName, string email = null);
+
+        #endregion
     }
 }

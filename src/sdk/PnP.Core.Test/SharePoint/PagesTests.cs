@@ -2399,8 +2399,21 @@ namespace PnP.Core.Test.SharePoint
                 var comments = newPage.GetComments();
                 Assert.IsTrue(comments.Length == 0);
 
-                // Add a new comment
-                var addedComment = comments.Add("This is great");
+                // Add a new comment with an at mentioning
+                var currentUser = await context.Web.GetCurrentUserAsync();
+
+                var addedComment = comments.Add($"This is great {comments.GetAtMentioningString("Bert", currentUser.UserPrincipalName)}!");
+
+                // verify exception handling of GetAtMentioningString
+                Assert.ThrowsException<ArgumentException>(() =>
+                {
+                    comments.GetAtMentioningString(null, currentUser.UserPrincipalName);
+                });
+
+                Assert.ThrowsException<ArgumentException>(() =>
+                {
+                    comments.GetAtMentioningString("Bert", null);
+                });
 
                 // Like the added comment
                 addedComment.Like();
@@ -2413,6 +2426,10 @@ namespace PnP.Core.Test.SharePoint
 
                 comments = newPage.GetComments();
                 Assert.IsTrue(comments.Length == 1);
+
+                var firstAtMention = comments.AsRequested().First().Mentions.AsRequested().First();
+                // loginName: i:0#.f|membership|bert.jansen@bertonline.onmicrosoft.com
+                Assert.IsTrue(firstAtMention.LoginName.Split('|')[2] == currentUser.UserPrincipalName);
 
                 // Delete the page
                 await newPage.DeleteAsync();

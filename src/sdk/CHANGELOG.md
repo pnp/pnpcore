@@ -10,6 +10,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
 ### Added
 
+- Using @mentioning in page/listitem comments and replies [jansenbe - Bert Jansen]
 - Support for downloading versions of a file #483 [DaleyKD - Kyle Daley]
 - Support for ListItem versions #481 [DaleyKD - Kyle Daley]
 - Support for liking/unliking pages + adding/deleting comments and comment replies + like/unlike these comments on pages [jansenbe - Bert Jansen]
@@ -17,7 +18,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
 ### Changed
 
-- Fixed bug that resulted in an unneede query due to paging #486 [PaoloPia - Paolo Pialorsi]
+- Fixed bug that resulted in an unneeded query due to paging #486 [PaoloPia - Paolo Pialorsi]
 
 ## [1.2.0]
 

@@ -83,5 +83,28 @@ namespace PnP.Core.Model.SharePoint
 
         #endregion
 
+        #region At mentioning
+
+        public string GetAtMentioningString(string userName, string userPrincipalName, string email = null)
+        {
+            if (string.IsNullOrEmpty(userName))
+            {
+                throw new ArgumentException(null, nameof(userName));
+            }
+
+            if (string.IsNullOrEmpty(userPrincipalName))
+            {
+                throw new ArgumentException(null, nameof(userPrincipalName));
+            }
+
+            if (string.IsNullOrEmpty(email))
+            {
+                email = userPrincipalName;
+            }
+
+            return $"<a data-sp-mention-user-id=\"{userPrincipalName}\" contenteditable=\"false\" access-type=\"0\" href=\"mailto:{email}\" tabindex=\"-1\">@{userName}</a>";
+        }
+
+        #endregion
     }
 }
