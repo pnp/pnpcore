@@ -185,6 +185,18 @@ var comments = await newPage.GetCommentsAsync();
 // Add a comment
 var comment = await comments.AddAsync(&quot;this is great&quot;);
 </code></pre>
+<h2 id="adding-a-comment-containing-an-at-mentioning">Adding a comment containing an at-mentioning</h2>
+<p>Page comments can at mention other users and this is done by inserting a html snippet in the comment text. To construct this html snippet you can use the <code>GetAtMentioningString</code> method on the <code>ICommentCollection</code>:</p>
+<pre><code class="lang-csharp">// Get the comments for this page
+var comments = await newPage.GetCommentsAsync();
+
+// Get information about the current user
+var currentUser = await context.Web.GetCurrentUserAsync();
+
+// Add a comment
+var comment = await comments.AddAsync($&quot;This is great {comments.GetAtMentioningString(&quot;Bert&quot;, currentUser.UserPrincipalName)}!&quot;);
+</code></pre>
+<p>To understand which users are at-mentioned in a comment or reply you can inspect the <code>Mention</code> collection on the <code>IComment</code>.</p>
 <h2 id="adding-a-reply-to-a-comment">Adding a reply to a comment</h2>
 <p>Comments can also have replies and since the collection of replies is similar to the collections of comments to code to add a reply is the same:</p>
 <pre><code class="lang-csharp">// Get the comments for this page

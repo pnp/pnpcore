@@ -9214,6 +9214,19 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IComment.ListId
   nameWithType: IComment.ListId
+- uid: PnP.Core.Model.SharePoint.IComment.Mentions
+  name: Mentions
+  href: api/PnP.Core.Model.SharePoint.IComment.html#PnP_Core_Model_SharePoint_IComment_Mentions
+  commentId: P:PnP.Core.Model.SharePoint.IComment.Mentions
+  fullName: PnP.Core.Model.SharePoint.IComment.Mentions
+  nameWithType: IComment.Mentions
+- uid: PnP.Core.Model.SharePoint.IComment.Mentions*
+  name: Mentions
+  href: api/PnP.Core.Model.SharePoint.IComment.html#PnP_Core_Model_SharePoint_IComment_Mentions_
+  commentId: Overload:PnP.Core.Model.SharePoint.IComment.Mentions
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IComment.Mentions
+  nameWithType: IComment.Mentions
 - uid: PnP.Core.Model.SharePoint.IComment.ParentId
   name: ParentId
   href: api/PnP.Core.Model.SharePoint.IComment.html#PnP_Core_Model_SharePoint_IComment_ParentId
@@ -9401,6 +9414,19 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.ICommentCollection.DeleteAllAsync
   nameWithType: ICommentCollection.DeleteAllAsync
+- uid: PnP.Core.Model.SharePoint.ICommentCollection.GetAtMentioningString(System.String,System.String,System.String)
+  name: GetAtMentioningString(String, String, String)
+  href: api/PnP.Core.Model.SharePoint.ICommentCollection.html#PnP_Core_Model_SharePoint_ICommentCollection_GetAtMentioningString_System_String_System_String_System_String_
+  commentId: M:PnP.Core.Model.SharePoint.ICommentCollection.GetAtMentioningString(System.String,System.String,System.String)
+  fullName: PnP.Core.Model.SharePoint.ICommentCollection.GetAtMentioningString(System.String, System.String, System.String)
+  nameWithType: ICommentCollection.GetAtMentioningString(String, String, String)
+- uid: PnP.Core.Model.SharePoint.ICommentCollection.GetAtMentioningString*
+  name: GetAtMentioningString
+  href: api/PnP.Core.Model.SharePoint.ICommentCollection.html#PnP_Core_Model_SharePoint_ICommentCollection_GetAtMentioningString_
+  commentId: Overload:PnP.Core.Model.SharePoint.ICommentCollection.GetAtMentioningString
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.ICommentCollection.GetAtMentioningString
+  nameWithType: ICommentCollection.GetAtMentioningString
 - uid: PnP.Core.Model.SharePoint.ICommentLikeUserEntity
   name: ICommentLikeUserEntity
   href: api/PnP.Core.Model.SharePoint.ICommentLikeUserEntity.html

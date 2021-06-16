@@ -1806,7 +1806,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.IComment.html",
-          "hash": "Z83o7axrbdtv9E4fvVRtaw=="
+          "hash": "D2nLq3CZli/UmCcH/YZwHQ=="
         }
       },
       "is_incremental": false,
@@ -1818,7 +1818,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.ICommentCollection.html",
-          "hash": "hi1CNyPzS+DI/5qBHIPnQQ=="
+          "hash": "ir5kegnhos2oSZBM6o25bg=="
         }
       },
       "is_incremental": false,
@@ -5383,7 +5383,7 @@
       "output": {
         ".html": {
           "relative_path": "using-the-sdk/pages-social.html",
-          "hash": "fTzq38FXfnNA2/BlVeLuWA=="
+          "hash": "qUW+2gjUdn0oTTEnvqHIJw=="
         }
       },
       "is_incremental": false,
