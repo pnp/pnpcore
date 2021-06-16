@@ -10,6 +10,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
 ### Added
 
+- Support for converting the site's datetime to UTC and vice versa [jansenbe - Bert Jansen]
 - Using @mentioning in page/listitem comments and replies [jansenbe - Bert Jansen]
 - Support for downloading versions of a file #483 [DaleyKD - Kyle Daley]
 - Support for ListItem versions #481 [DaleyKD - Kyle Daley]

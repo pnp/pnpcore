@@ -1,3 +1,5 @@
+using System;
+
 namespace PnP.Core.Model.SharePoint
 {
     /// <summary>
@@ -33,6 +35,22 @@ namespace PnP.Core.Model.SharePoint
         #endregion
 
         #region Extension methods
+
+        public DateTime LocalTimeToUtc(DateTime dateTime)
+        {
+            return dateTime + UtcDelta(dateTime);
+        }
+
+        public DateTime UtcToLocalTime(DateTime dateTime)
+        {
+            return dateTime - UtcDelta(dateTime);
+        }
+
+        private TimeSpan UtcDelta(DateTime dateTime)
+        {
+            return new TimeSpan(0, Bias + (TimeZoneInfo.Local.IsDaylightSavingTime(dateTime) ? DaylightBias : StandardBias), 0);
+        }
+
         #endregion
     }
 }

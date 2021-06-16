@@ -561,6 +561,24 @@ namespace PnP.Core.Test.SharePoint
         }
 
         [TestMethod]
+        public async Task TimeZoneUtcToLocalTimeTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {                
+                var utcDate = new DateTime(2021, 7, 15, 15, 15, 15);
+
+                // convert to site's timezone
+                var localSiteTime = context.Web.RegionalSettings.TimeZone.UtcToLocalTime(utcDate);
+
+                // convert back to UTC time
+                var localSiteTimeBackToUtc = context.Web.RegionalSettings.TimeZone.LocalTimeToUtc(localSiteTime);
+
+                Assert.AreEqual(utcDate, localSiteTimeBackToUtc);
+            }
+        }
+
+        [TestMethod]
         public async Task GetWebCurrentUserTest()
         {
             //TestCommon.Instance.Mocking = false;
