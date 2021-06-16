@@ -24109,6 +24109,19 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.ITimeZone.Id
   nameWithType: ITimeZone.Id
+- uid: PnP.Core.Model.SharePoint.ITimeZone.LocalTimeToUtc(DateTime)
+  name: LocalTimeToUtc(DateTime)
+  href: api/PnP.Core.Model.SharePoint.ITimeZone.html#PnP_Core_Model_SharePoint_ITimeZone_LocalTimeToUtc_DateTime_
+  commentId: M:PnP.Core.Model.SharePoint.ITimeZone.LocalTimeToUtc(DateTime)
+  fullName: PnP.Core.Model.SharePoint.ITimeZone.LocalTimeToUtc(DateTime)
+  nameWithType: ITimeZone.LocalTimeToUtc(DateTime)
+- uid: PnP.Core.Model.SharePoint.ITimeZone.LocalTimeToUtc*
+  name: LocalTimeToUtc
+  href: api/PnP.Core.Model.SharePoint.ITimeZone.html#PnP_Core_Model_SharePoint_ITimeZone_LocalTimeToUtc_
+  commentId: Overload:PnP.Core.Model.SharePoint.ITimeZone.LocalTimeToUtc
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.ITimeZone.LocalTimeToUtc
+  nameWithType: ITimeZone.LocalTimeToUtc
 - uid: PnP.Core.Model.SharePoint.ITimeZone.StandardBias
   name: StandardBias
   href: api/PnP.Core.Model.SharePoint.ITimeZone.html#PnP_Core_Model_SharePoint_ITimeZone_StandardBias
@@ -24122,6 +24135,19 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.ITimeZone.StandardBias
   nameWithType: ITimeZone.StandardBias
+- uid: PnP.Core.Model.SharePoint.ITimeZone.UtcToLocalTime(DateTime)
+  name: UtcToLocalTime(DateTime)
+  href: api/PnP.Core.Model.SharePoint.ITimeZone.html#PnP_Core_Model_SharePoint_ITimeZone_UtcToLocalTime_DateTime_
+  commentId: M:PnP.Core.Model.SharePoint.ITimeZone.UtcToLocalTime(DateTime)
+  fullName: PnP.Core.Model.SharePoint.ITimeZone.UtcToLocalTime(DateTime)
+  nameWithType: ITimeZone.UtcToLocalTime(DateTime)
+- uid: PnP.Core.Model.SharePoint.ITimeZone.UtcToLocalTime*
+  name: UtcToLocalTime
+  href: api/PnP.Core.Model.SharePoint.ITimeZone.html#PnP_Core_Model_SharePoint_ITimeZone_UtcToLocalTime_
+  commentId: Overload:PnP.Core.Model.SharePoint.ITimeZone.UtcToLocalTime
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.ITimeZone.UtcToLocalTime
+  nameWithType: ITimeZone.UtcToLocalTime
 - uid: PnP.Core.Model.SharePoint.ITimeZoneCollection
   name: ITimeZoneCollection
   href: api/PnP.Core.Model.SharePoint.ITimeZoneCollection.html
