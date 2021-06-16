@@ -156,6 +156,12 @@ namespace PnP.Core.Services
                             }
                             else
                             {
+                                // Some collections are returned as null when they're empty (e.g. Mentions on IComment)
+                                if (property.Value.ValueKind == JsonValueKind.Null)
+                                {
+                                    continue;
+                                }
+
                                 // otherwise we try to get the child property called "results", if any
                                 property.Value.TryGetProperty("results", out resultsProperty);
                             }
