@@ -18,6 +18,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
 ### Changed
 
+- Fixed memory leaks for use cases that resulted in repeated creation of the Azure AppInsights TelemetryClient [jansenbe - Bert Jansen]
 - Fixed bug that resulted in an unneeded query due to paging #486 [PaoloPia - Paolo Pialorsi]
 
 ## [1.2.0]
