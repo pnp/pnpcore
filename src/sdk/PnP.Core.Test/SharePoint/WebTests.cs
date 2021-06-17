@@ -566,6 +566,123 @@ namespace PnP.Core.Test.SharePoint
         }
 
         [TestMethod]
+        [DataRow("(UTC-12:00) International Date Line West")]
+        [DataRow("(UTC-11:00) Coordinated Universal Time-11")]
+        [DataRow("(UTC-10:00) Hawaii")]
+        [DataRow("(UTC-09:00) Alaska")]
+        [DataRow("(UTC-08:00) Baja California")]
+        [DataRow("(UTC-08:00) Pacific Time (US and Canada)")]
+        [DataRow("(UTC-07:00) Arizona")]
+        [DataRow("(UTC-07:00) Chihuahua, La Paz, Mazatlan")]
+        [DataRow("(UTC-07:00) Mountain Time (US and Canada)")]
+        [DataRow("(UTC-06:00) Central America")]
+        [DataRow("(UTC-06:00) Central Time (US and Canada)")]
+        [DataRow("(UTC-06:00) Guadalajara, Mexico City, Monterrey")]
+        [DataRow("(UTC-06:00) Saskatchewan")]
+        [DataRow("(UTC-05:00) Bogota, Lima, Quito")]
+        [DataRow("(UTC-05:00) Eastern Time (US and Canada)")]
+        [DataRow("(UTC-05:00) Indiana (East)")]
+        [DataRow("(UTC-04:30) Caracas")]
+        [DataRow("(UTC-04:00) Asuncion")]
+        [DataRow("(UTC-04:00) Atlantic Time (Canada)")]
+        [DataRow("(UTC-04:00) Cuiaba")]
+        [DataRow("(UTC-04:00) Georgetown, La Paz, Manaus, San Juan")]
+        [DataRow("(UTC-04:00) Santiago")]
+        [DataRow("(UTC-03:30) Newfoundland")]
+        [DataRow("(UTC-03:00) Brasilia")]
+        [DataRow("(UTC-03:00) Buenos Aires")]
+        [DataRow("(UTC-03:00) Cayenne, Fortaleza")]
+        [DataRow("(UTC-03:00) Greenland")]
+        [DataRow("(UTC-03:00) Montevideo")]
+        [DataRow("(UTC-03:00) Salvador")]
+        [DataRow("(UTC-02:00) Coordinated Universal Time-02")]
+        [DataRow("(UTC-02:00) Mid-Atlantic")]
+        [DataRow("(UTC-01:00) Azores")]
+        [DataRow("(UTC-01:00) Cabo Verde")]
+        [DataRow("(UTC) Casablanca")]
+        [DataRow("(UTC) Coordinated Universal Time")]
+        [DataRow("(UTC) Dublin, Edinburgh, Lisbon, London")]
+        [DataRow("(UTC) Monrovia, Reykjavik")]
+        [DataRow("(UTC+01:00) Amsterdam, Berlin, Bern, Rome, Stockholm, Vienna")]
+        [DataRow("(UTC+01:00) Belgrade, Bratislava, Budapest, Ljubljana, Prague")]
+        [DataRow("(UTC+01:00) Brussels, Copenhagen, Madrid, Paris")]
+        [DataRow("(UTC+01:00) Sarajevo, Skopje, Warsaw, Zagreb")]
+        [DataRow("(UTC+01:00) West Central Africa")]
+        [DataRow("(UTC+01:00) Windhoek")]
+        [DataRow("(UTC+02:00) Amman")]
+        [DataRow("(UTC+02:00) Athens, Bucharest")]
+        [DataRow("(UTC+02:00) Beirut")]
+        [DataRow("(UTC+02:00) Cairo")]
+        [DataRow("(UTC+02:00) Damascus")]
+        [DataRow("(UTC+02:00) Harare, Pretoria")]
+        [DataRow("(UTC+02:00) Helsinki, Kyiv, Riga, Sofia, Tallinn, Vilnius")]
+        [DataRow("(UTC+02:00) Jerusalem")]
+        [DataRow("(UTC+02:00) Minsk (old)")]
+        [DataRow("(UTC+02:00) E. Europe")]
+        [DataRow("(UTC+02:00) Kaliningrad")]
+        [DataRow("(UTC+03:00) Baghdad")]
+        [DataRow("(UTC+03:00) Istanbul")]
+        [DataRow("(UTC+03:00) Kuwait, Riyadh")]
+        [DataRow("(UTC+03:00) Minsk")]
+        [DataRow("(UTC+03:00) Moscow, St. Petersburg, Volgograd")]
+        [DataRow("(UTC+03:00) Nairobi")]
+        [DataRow("(UTC+03:30) Tehran")]
+        [DataRow("(UTC+04:00) Abu Dhabi, Muscat")]
+        [DataRow("(UTC+04:00) Astrakhan, Ulyanovsk")]
+        [DataRow("(UTC+04:00) Baku")]
+        [DataRow("(UTC+04:00) Izhevsk, Samara")]
+        [DataRow("(UTC+04:00) Port Louis")]
+        [DataRow("(UTC+04:00) Tbilisi")]
+        [DataRow("(UTC+04:00) Yerevan")]
+        [DataRow("(UTC+04:30) Kabul")]
+        [DataRow("(UTC+05:00) Ekaterinburg")]
+        [DataRow("(UTC+05:00) Islamabad, Karachi")]
+        [DataRow("(UTC+05:00) Tashkent")]
+        [DataRow("(UTC+05:30) Chennai, Kolkata, Mumbai, New Delhi")]
+        [DataRow("(UTC+05:30) Sri Jayawardenepura")]
+        [DataRow("(UTC+05:45) Kathmandu")]
+        [DataRow("(UTC+06:00) Astana")]
+        [DataRow("(UTC+06:00) Dhaka")]
+        [DataRow("(UTC+06:00) Omsk")]
+        [DataRow("(UTC+06:30) Yangon (Rangoon)")]
+        [DataRow("(UTC+07:00) Bangkok, Hanoi, Jakarta")]
+        [DataRow("(UTC+07:00) Barnaul, Gorno-Altaysk")]
+        [DataRow("(UTC+07:00) Krasnoyarsk")]
+        [DataRow("(UTC+07:00) Novosibirsk")]
+        [DataRow("(UTC+07:00) Tomsk")]
+        [DataRow("(UTC+08:00) Beijing, Chongqing, Hong Kong, Urumqi")]
+        [DataRow("(UTC+08:00) Irkutsk")]
+        [DataRow("(UTC+08:00) Kuala Lumpur, Singapore")]
+        [DataRow("(UTC+08:00) Perth")]
+        [DataRow("(UTC+08:00) Taipei")]
+        [DataRow("(UTC+08:00) Ulaanbaatar")]
+        [DataRow("(UTC+09:00) Osaka, Sapporo, Tokyo")]
+        [DataRow("(UTC+09:00) Seoul")]
+        [DataRow("(UTC+09:00) Yakutsk")]
+        [DataRow("(UTC+09:30) Adelaide")]
+        [DataRow("(UTC+09:30) Darwin")]
+        [DataRow("(UTC+10:00) Brisbane")]
+        [DataRow("(UTC+10:00) Canberra, Melbourne, Sydney")]
+        [DataRow("(UTC+10:00) Guam, Port Moresby")]
+        [DataRow("(UTC+10:00) Hobart")]
+        [DataRow("(UTC+10:00) Magadan")]
+        [DataRow("(UTC+10:00) Vladivostok")]
+        [DataRow("(UTC+11:00) Chokurdakh")]
+        [DataRow("(UTC+11:00) Sakhalin")]
+        [DataRow("(UTC+11:00) Solomon Is., New Caledonia")]
+        [DataRow("(UTC+12:00) Anadyr, Petropavlovsk-Kamchatsky")]
+        [DataRow("(UTC+12:00) Auckland, Wellington")]
+        [DataRow("(UTC+12:00) Coordinated Universal Time+12")]
+        [DataRow("(UTC+12:00) Fiji")]
+        [DataRow("(UTC+12:00) Petropavlovsk-Kamchatsky - Old")]
+        [DataRow("(UTC+13:00) Nuku'alofa")]
+        [DataRow("(UTC+13:00) Samoa")]
+        public void TimeZoneMappingTest(string sharePointTimeZone)
+        {
+            Assert.IsNotNull(Model.SharePoint.TimeZone.GetTimeZoneInfoFromSharePoint(sharePointTimeZone));
+        }
+
+        [TestMethod]
         public void TimeZoneConversionTests()
         {
             // Assume timezone UTC-8 (PST), description = (UTC-08:00) Pacific Time (US and Canada)
@@ -614,23 +731,24 @@ namespace PnP.Core.Test.SharePoint
 
         private TimeSpan UtcDelta(DateTime dateTime, int bias, int daylightBias, int standardBias, string description)
         {
+            TimeZoneInfo myTimeZone = null;
 
             var fixedTimeZoneName = description.Replace("and", "&");
 
-            var TimeZoneID = "";
-            foreach (var tzi in TZConvert.KnownWindowsTimeZoneIds)
+            // As we also support running on Linux/MacOS we need to use TZConvert.KnownWindowsTimeZoneIds to ensure
+            // we load windows timezone names as that's what SharePoint uses
+            foreach (var timeZoneId in TZConvert.KnownWindowsTimeZoneIds)
             {
-                //load TimeZone 
-                var z = TZConvert.GetTimeZoneInfo(tzi);
+                // Load the TimeZoneInfo
+                var tzi = TZConvert.GetTimeZoneInfo(timeZoneId);
 
-                if (z.DisplayName == fixedTimeZoneName)
+                // Match on display name
+                if (tzi.DisplayName == fixedTimeZoneName)
                 {
-                    TimeZoneID = z.Id;
+                    myTimeZone = tzi;
                     break;
                 }
             }
-
-            var myTimeZone = TimeZoneInfo.FindSystemTimeZoneById(TimeZoneID);
 
             return new TimeSpan(0, bias + (myTimeZone.IsDaylightSavingTime(dateTime) ? daylightBias : standardBias), 0);
         }
