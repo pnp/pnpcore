@@ -38,17 +38,17 @@ namespace PnP.Core.Model.SharePoint
 
         public DateTime LocalTimeToUtc(DateTime dateTime)
         {
-            return dateTime + UtcDelta(dateTime);
+            return dateTime + UtcDelta();
         }
 
         public DateTime UtcToLocalTime(DateTime dateTime)
         {
-            return dateTime - UtcDelta(dateTime);
+            return dateTime - UtcDelta();
         }
 
-        private TimeSpan UtcDelta(DateTime dateTime)
+        private TimeSpan UtcDelta()
         {
-            return new TimeSpan(0, Bias + (TimeZoneInfo.Local.IsDaylightSavingTime(dateTime) ? DaylightBias : StandardBias), 0);
+            return new TimeSpan(0, Bias + DaylightBias + StandardBias, 0);
         }
 
         #endregion

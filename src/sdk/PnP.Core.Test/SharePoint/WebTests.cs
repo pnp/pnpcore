@@ -570,16 +570,57 @@ namespace PnP.Core.Test.SharePoint
             //TestCommon.Instance.Mocking = false;
             // Test site is configured with UTC + 1 timezone
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
-            {                
-                var utcDate = new DateTime(2021, 7, 15, 15, 15, 15);
+            {
+                // Datetime in timezone of the code running PnP Core SDK
+                var localDate = new DateTime(2021, 7, 15, 15, 15, 15);
 
-                // convert to site's timezone
+                // Convert to UTC time
+                var utcDate = localDate.ToUniversalTime();
+
+                // Convert to Web's timezone
                 var localSiteTime = context.Web.RegionalSettings.TimeZone.UtcToLocalTime(utcDate);
 
-                // convert back to UTC time
+                // Use server call to do the same
+                var response = context.Web.RegionalSettings.TimeZone.ExecuteRequest(new ApiRequest(HttpMethod.Post, ApiRequestType.SPORest, $"_api/web/regionalsettings/timezone/utctolocaltime('{utcDate.ToString("o", CultureInfo.InvariantCulture)}')", null));
+
+                if (!string.IsNullOrEmpty(response.Response))
+                {
+                    var json = JsonDocument.Parse(response.Response).RootElement.GetProperty("d");
+
+                    if (json.TryGetProperty("UTCToLocalTime", out JsonElement utcToLocalTimeViaServerCall))
+                    {
+                        if (utcToLocalTimeViaServerCall.TryGetDateTime(out DateTime utcToLocalTimeViaServerCallDateTime))
+                        {
+                            Assert.AreEqual(utcToLocalTimeViaServerCallDateTime, localSiteTime);
+                        }
+                    }
+                }
+
+                // Convert from Web's timezone back to UTC time
                 var localSiteTimeBackToUtc = context.Web.RegionalSettings.TimeZone.LocalTimeToUtc(localSiteTime);
 
+                // Use server call to do the same
+                var response2 = context.Web.RegionalSettings.TimeZone.ExecuteRequest(new ApiRequest(HttpMethod.Post, ApiRequestType.SPORest, $"_api/web/regionalsettings/timezone/localtimetoutc('{localSiteTime.ToString("o", CultureInfo.InvariantCulture)}')", null));
+
+                if (!string.IsNullOrEmpty(response2.Response))
+                {
+                    var json = JsonDocument.Parse(response2.Response).RootElement.GetProperty("d");
+
+                    if (json.TryGetProperty("LocalTimeToUTC", out JsonElement LocalTimeToUtcViaServerCall))
+                    {
+                        if (LocalTimeToUtcViaServerCall.TryGetDateTime(out DateTime LocalTimeToUtcViaServerCallDateTime))
+                        {
+                            Assert.AreEqual(LocalTimeToUtcViaServerCallDateTime, localSiteTimeBackToUtc);
+                        }
+                    }
+                }
+
                 Assert.AreEqual(utcDate, localSiteTimeBackToUtc);
+
+                // Convert back to timezone of the running code
+                var utcDateBackToLocal = localSiteTimeBackToUtc.ToLocalTime();
+
+                Assert.AreEqual(localDate, utcDateBackToLocal);
             }
         }
 
