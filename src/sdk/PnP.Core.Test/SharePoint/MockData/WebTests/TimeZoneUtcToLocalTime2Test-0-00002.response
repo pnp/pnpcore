@@ -1,4 +1,4 @@
---batchresponse_48612f20-45c6-4eff-96f2-dc07b43a0d8b
+--batchresponse_e90f11ec-44b7-49e5-a3e2-ed2b6257bad5
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
@@ -6,4 +6,4 @@ HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
 {"d":{"UTCToLocalTime":"2021-07-15T06:15:15"}}
---batchresponse_48612f20-45c6-4eff-96f2-dc07b43a0d8b--
+--batchresponse_e90f11ec-44b7-49e5-a3e2-ed2b6257bad5--
