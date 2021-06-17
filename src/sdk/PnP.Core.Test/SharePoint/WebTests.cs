@@ -565,14 +565,82 @@ namespace PnP.Core.Test.SharePoint
         }
 
         [TestMethod]
+        public void TimeZoneConversionTests()
+        {
+            // Assume timezone UTC-8 (PST), description = (UTC-08:00) Pacific Time (US and Canada)
+            // Bias = 480, DaylightBias = -60, StandardBias = 0
+
+            // Winter time in Belgium: Jan 15, 15:15 = 06:15 PST
+            var localDate = new DateTime(2021, 1, 15, 15, 15, 15);
+            var utcDate = localDate.ToUniversalTime();
+            var localWebTime = utcDate - UtcDelta(utcDate, 480, -60, 0, "(UTC-08:00) Pacific Time (US and Canada)");
+            Assert.IsTrue(localWebTime.Hour == 6);
+
+            // Summer time in Belgium: Jul 15, 15:15 = 06:15 PST
+            localDate = new DateTime(2021, 6, 15, 15, 15, 15);
+            utcDate = localDate.ToUniversalTime();
+            localWebTime = utcDate - UtcDelta(utcDate, 480, -60, 0, "(UTC-08:00) Pacific Time (US and Canada)");
+            Assert.IsTrue(localWebTime.Hour == 6);
+
+            // Period when US swithed to summer time while Belgium is still on winter time: Mar 15, 15:15 = 07:15 PST
+            localDate = new DateTime(2021, 3, 15, 15, 15, 15);
+            utcDate = localDate.ToUniversalTime();
+            localWebTime = utcDate - UtcDelta(utcDate, 480, -60, 0, "(UTC-08:00) Pacific Time (US and Canada)");
+            Assert.IsTrue(localWebTime.Hour == 7);
+
+            // Assume timezone UTC-1 (Brussels), description = (UTC+01:00) Brussels, Copenhagen, Madrid, Paris
+            // Bias = -60, DaylightBias = -60, StandardBias = 0
+
+            // Winter time in Belgium: Jan 15, 15:15 stays the same
+            localDate = new DateTime(2021, 1, 15, 15, 15, 15);
+            utcDate = localDate.ToUniversalTime();
+            localWebTime = utcDate - UtcDelta(utcDate, -60, -60, 0, "(UTC+01:00) Brussels, Copenhagen, Madrid, Paris");
+            Assert.IsTrue(localWebTime.Hour == 15);
+
+            // Summer time in Belgium: Jul 15, 15:15 stays the same
+            localDate = new DateTime(2021, 6, 15, 15, 15, 15);
+            utcDate = localDate.ToUniversalTime();
+            localWebTime = utcDate - UtcDelta(utcDate, -60, -60, 0, "(UTC+01:00) Brussels, Copenhagen, Madrid, Paris");
+            Assert.IsTrue(localWebTime.Hour == 15);
+
+            // Period when US swithed to summer time while Belgium is still on winter time: Mar 15, 15:15 stays the same
+            localDate = new DateTime(2021, 3, 15, 15, 15, 15);
+            utcDate = localDate.ToUniversalTime();
+            localWebTime = utcDate - UtcDelta(utcDate, -60, -60, 0, "(UTC+01:00) Brussels, Copenhagen, Madrid, Paris");
+            Assert.IsTrue(localWebTime.Hour == 15);
+
+        }
+
+        private TimeSpan UtcDelta(DateTime dateTime, int bias, int daylightBias, int standardBias, string description)
+        {
+
+            var fixedTimeZoneName = description.Replace("and", "&");
+
+            var TimeZoneID = "";
+            foreach (var z in TimeZoneInfo.GetSystemTimeZones())
+            {
+                if (z.DisplayName == fixedTimeZoneName)
+                {
+                    TimeZoneID = z.Id;
+                    break;
+                }
+            }
+
+            var myTimeZone = TimeZoneInfo.FindSystemTimeZoneById(TimeZoneID);
+
+            return new TimeSpan(0, bias + (myTimeZone.IsDaylightSavingTime(dateTime) ? daylightBias : standardBias), 0);
+        }
+
+
+        [TestMethod]
         public async Task TimeZoneUtcToLocalTimeTest()
         {
             //TestCommon.Instance.Mocking = false;
             // Test site is configured with UTC + 1 timezone
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                // Datetime in timezone of the code running PnP Core SDK
-                var localDate = new DateTime(2021, 7, 15, 15, 15, 15, DateTimeKind.Local);
+                // Datetime in timezone of the code running PnP Core SDK, use time that falls outside of daylight saving time
+                var localDate = new DateTime(2021, 1, 15, 15, 15, 15, DateTimeKind.Local);
 
                 // Convert to UTC time
                 var utcDate = localDate.ToUniversalTime();
@@ -591,10 +659,10 @@ namespace PnP.Core.Test.SharePoint
                     {
                         if (utcToLocalTimeViaServerCall.TryGetDateTime(out DateTime utcToLocalTimeViaServerCallDateTime))
                         {
-                            if (!TestCommon.RunningInGitHubWorkflow())
-                            {
+                            //if (!TestCommon.RunningInGitHubWorkflow())
+                            //{
                                 Assert.AreEqual(utcToLocalTimeViaServerCallDateTime, localSiteTime);
-                            }
+                            //}
                         }
                     }
                 }
@@ -613,10 +681,10 @@ namespace PnP.Core.Test.SharePoint
                     {
                         if (LocalTimeToUtcViaServerCall.TryGetDateTime(out DateTime LocalTimeToUtcViaServerCallDateTime))
                         {
-                            if (!TestCommon.RunningInGitHubWorkflow())
-                            {
+                            //if (!TestCommon.RunningInGitHubWorkflow())
+                            //{
                                 Assert.AreEqual(LocalTimeToUtcViaServerCallDateTime, localSiteTimeBackToUtc);
-                            }
+                            //}
                         }
                     }
                 }
@@ -637,7 +705,7 @@ namespace PnP.Core.Test.SharePoint
             // Test sub site is configured with UTC-8 timezone 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSubSite))
             {
-                // Datetime in timezone of the code running PnP Core SDK
+                // Datetime in timezone of the code running PnP Core SDK, use time that falls inside daylight saving time
                 var localDate = new DateTime(2021, 7, 15, 15, 15, 15, DateTimeKind.Local);
 
                 // Convert to UTC time
@@ -658,10 +726,10 @@ namespace PnP.Core.Test.SharePoint
                     {
                         if (utcToLocalTimeViaServerCall.TryGetDateTime(out DateTime utcToLocalTimeViaServerCallDateTime))
                         {
-                            if (!TestCommon.RunningInGitHubWorkflow())
-                            {
+                            //if (!TestCommon.RunningInGitHubWorkflow())
+                            //{
                                 Assert.AreEqual(utcToLocalTimeViaServerCallDateTime, localSiteTime);
-                            }
+                            //}
                         }
                     }
                 }
@@ -681,10 +749,10 @@ namespace PnP.Core.Test.SharePoint
                     {
                         if (LocalTimeToUtcViaServerCall.TryGetDateTime(out DateTime LocalTimeToUtcViaServerCallDateTime))
                         {
-                            if (!TestCommon.RunningInGitHubWorkflow())
-                            {
+                            //if (!TestCommon.RunningInGitHubWorkflow())
+                            //{
                                 Assert.AreEqual(LocalTimeToUtcViaServerCallDateTime, localSiteTimeBackToUtc);
-                            }
+                            //}
                         }
                     }
                 }
