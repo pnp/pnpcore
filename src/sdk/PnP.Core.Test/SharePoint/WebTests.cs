@@ -685,6 +685,8 @@ namespace PnP.Core.Test.SharePoint
         [TestMethod]
         public void TimeZoneConversionTests()
         {
+            if (TestCommon.RunningInGitHubWorkflow()) Assert.Inconclusive("Skipping running this one on GitHub");
+
             // Assume timezone UTC-8 (PST), description = (UTC-08:00) Pacific Time (US and Canada)
             // Bias = 480, DaylightBias = -60, StandardBias = 0
 
