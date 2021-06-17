@@ -731,28 +731,8 @@ namespace PnP.Core.Test.SharePoint
 
         private TimeSpan UtcDelta(DateTime dateTime, int bias, int daylightBias, int standardBias, string description)
         {
-            TimeZoneInfo myTimeZone = null;
-
-            var fixedTimeZoneName = description.Replace("and", "&");
-
-            // As we also support running on Linux/MacOS we need to use TZConvert.KnownWindowsTimeZoneIds to ensure
-            // we load windows timezone names as that's what SharePoint uses
-            foreach (var timeZoneId in TZConvert.KnownWindowsTimeZoneIds)
-            {
-                // Load the TimeZoneInfo
-                var tzi = TZConvert.GetTimeZoneInfo(timeZoneId);
-
-                // Match on display name
-                if (tzi.DisplayName == fixedTimeZoneName)
-                {
-                    myTimeZone = tzi;
-                    break;
-                }
-            }
-
-            return new TimeSpan(0, bias + (myTimeZone.IsDaylightSavingTime(dateTime) ? daylightBias : standardBias), 0);
+            return new TimeSpan(0, bias + (Model.SharePoint.TimeZone.GetTimeZoneInfoFromSharePoint(description).IsDaylightSavingTime(dateTime) ? daylightBias : standardBias), 0);
         }
-
 
         [TestMethod]
         public async Task TimeZoneUtcToLocalTimeTest()
@@ -781,10 +761,10 @@ namespace PnP.Core.Test.SharePoint
                     {
                         if (utcToLocalTimeViaServerCall.TryGetDateTime(out DateTime utcToLocalTimeViaServerCallDateTime))
                         {
-                            //if (!TestCommon.RunningInGitHubWorkflow())
-                            //{
+                            if (!TestCommon.RunningInGitHubWorkflow())
+                            {
                                 Assert.AreEqual(utcToLocalTimeViaServerCallDateTime, localSiteTime);
-                            //}
+                            }
                         }
                     }
                 }
@@ -803,10 +783,10 @@ namespace PnP.Core.Test.SharePoint
                     {
                         if (LocalTimeToUtcViaServerCall.TryGetDateTime(out DateTime LocalTimeToUtcViaServerCallDateTime))
                         {
-                            //if (!TestCommon.RunningInGitHubWorkflow())
-                            //{
+                            if (!TestCommon.RunningInGitHubWorkflow())
+                            {
                                 Assert.AreEqual(LocalTimeToUtcViaServerCallDateTime, localSiteTimeBackToUtc);
-                            //}
+                            }
                         }
                     }
                 }
@@ -848,10 +828,10 @@ namespace PnP.Core.Test.SharePoint
                     {
                         if (utcToLocalTimeViaServerCall.TryGetDateTime(out DateTime utcToLocalTimeViaServerCallDateTime))
                         {
-                            //if (!TestCommon.RunningInGitHubWorkflow())
-                            //{
+                            if (!TestCommon.RunningInGitHubWorkflow())
+                            {
                                 Assert.AreEqual(utcToLocalTimeViaServerCallDateTime, localSiteTime);
-                            //}
+                            }
                         }
                     }
                 }
@@ -871,10 +851,10 @@ namespace PnP.Core.Test.SharePoint
                     {
                         if (LocalTimeToUtcViaServerCall.TryGetDateTime(out DateTime LocalTimeToUtcViaServerCallDateTime))
                         {
-                            //if (!TestCommon.RunningInGitHubWorkflow())
-                            //{
+                            if (!TestCommon.RunningInGitHubWorkflow())
+                            {
                                 Assert.AreEqual(LocalTimeToUtcViaServerCallDateTime, localSiteTimeBackToUtc);
-                            //}
+                            }
                         }
                     }
                 }

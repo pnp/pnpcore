@@ -478,7 +478,7 @@ namespace PnP.Core.Model.SharePoint
             }
             else if (changedProp.Value is DateTime dateValue)
             {
-                field.FieldValue = DateTimeToSharePointString(context, dateValue);
+                field.FieldValue = DateTimeToSharePointWebDateTimeString(context, dateValue);
             }
             else if (changedProp.Value != null && (changedProp.Value is int))
             {
@@ -498,17 +498,16 @@ namespace PnP.Core.Model.SharePoint
             }
         }
 
-        private static string DateTimeToSharePointString(PnPContext context, DateTime input)
+        private static string DateTimeToSharePointWebDateTimeString(PnPContext context, DateTime input)
         {
             // Convert incoming date to UTC
             DateTime inputInUTC = input.ToUniversalTime();
 
             // Convert to the time zone used by the SharePoint site, take in account the daylight savings delta
-            bool isDaylight = TimeZoneInfo.Local.IsDaylightSavingTime(input);
-            TimeSpan utcDelta = new TimeSpan(0, context.Web.RegionalSettings.TimeZone.Bias + (isDaylight ? context.Web.RegionalSettings.TimeZone.DaylightBias : context.Web.RegionalSettings.TimeZone.StandardBias), 0);
+            DateTime localDateTime = context.Web.RegionalSettings.TimeZone.UtcToLocalTime(inputInUTC);
 
             // Apply the delta from UTC to get the date used by the site and apply formatting 
-            return (inputInUTC - utcDelta).ToString("yyyy-MM-dd hh:mm:ss", CultureInfo.InvariantCulture);
+            return (localDateTime).ToString("yyyy-MM-dd hh:mm:ss", CultureInfo.InvariantCulture);
         }
 
         private static string DoubleToSharePointString(PnPContext context, double input)
