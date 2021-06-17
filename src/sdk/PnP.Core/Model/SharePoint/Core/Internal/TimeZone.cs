@@ -1,4 +1,5 @@
 using System;
+using TimeZoneConverter;
 
 namespace PnP.Core.Model.SharePoint
 {
@@ -8,7 +9,7 @@ namespace PnP.Core.Model.SharePoint
     [SharePointType("SP.TimeZone", Uri = "_api/web/regionalsettings/timezone", LinqGet = "_api/web/regionalsettings/timezone")]
     internal partial class TimeZone : BaseDataModel<ITimeZone>, ITimeZone
     {
-        private TimeZoneInfo timeZoneInfo = null;
+        private TimeZoneInfo timeZoneInfo;
 
         #region Construction
         public TimeZone()
@@ -53,19 +54,27 @@ namespace PnP.Core.Model.SharePoint
             return new TimeSpan(0, Bias + (GetTimeZoneInfo().IsDaylightSavingTime(dateTime) ? DaylightBias : StandardBias), 0);
         }
 
+        /// <summary>
+        /// Determine the TimeZoneInfo object based upon the timezone description in SharePoint
+        /// </summary>
+        /// <returns></returns>
         private TimeZoneInfo GetTimeZoneInfo()
         {
             if (timeZoneInfo == null)
             {
-                // Determine the TimeZoneInfo object based upon the timezone description in SharePoint
-
                 var fixedTimeZoneName = Description.Replace("and", "&");
 
-                foreach (var z in TimeZoneInfo.GetSystemTimeZones())
+                // As we also support running on Linux/MacOS we need to use TZConvert.KnownWindowsTimeZoneIds to ensure
+                // we load windows timezone names as that's what SharePoint uses
+                foreach (var timeZoneId in TZConvert.KnownWindowsTimeZoneIds)
                 {
-                    if (z.DisplayName == fixedTimeZoneName)
+                    // Load the TimeZoneInfo
+                    var tzi = TZConvert.GetTimeZoneInfo(timeZoneId);
+                    
+                    // Match on display name
+                    if (tzi.DisplayName == fixedTimeZoneName)
                     {
-                        timeZoneInfo = TimeZoneInfo.FindSystemTimeZoneById(z.Id);
+                        timeZoneInfo = tzi;
                         break;
                     }
                 }

@@ -10,6 +10,7 @@ using PnP.Core.Services;
 using System.Net.Http;
 using System.Globalization;
 using System.Text.Json;
+using TimeZoneConverter;
 
 namespace PnP.Core.Test.SharePoint
 {
@@ -617,8 +618,11 @@ namespace PnP.Core.Test.SharePoint
             var fixedTimeZoneName = description.Replace("and", "&");
 
             var TimeZoneID = "";
-            foreach (var z in TimeZoneInfo.GetSystemTimeZones())
+            foreach (var tzi in TZConvert.KnownWindowsTimeZoneIds)
             {
+                //load TimeZone 
+                var z = TZConvert.GetTimeZoneInfo(tzi);
+
                 if (z.DisplayName == fixedTimeZoneName)
                 {
                     TimeZoneID = z.Id;
