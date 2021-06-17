@@ -6,6 +6,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using PnP.Core.QueryModel;
 using System.IO;
+using PnP.Core.Services;
+using System.Net.Http;
+using System.Globalization;
+using System.Text.Json;
 
 namespace PnP.Core.Test.SharePoint
 {
@@ -564,6 +568,7 @@ namespace PnP.Core.Test.SharePoint
         public async Task TimeZoneUtcToLocalTimeTest()
         {
             //TestCommon.Instance.Mocking = false;
+            // Test site is configured with UTC + 1 timezone
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {                
                 var utcDate = new DateTime(2021, 7, 15, 15, 15, 15);
@@ -575,6 +580,68 @@ namespace PnP.Core.Test.SharePoint
                 var localSiteTimeBackToUtc = context.Web.RegionalSettings.TimeZone.LocalTimeToUtc(localSiteTime);
 
                 Assert.AreEqual(utcDate, localSiteTimeBackToUtc);
+            }
+        }
+
+        [TestMethod]
+        public async Task TimeZoneUtcToLocalTime2Test()
+        {
+            //TestCommon.Instance.Mocking = false;
+            // Test sub site is configured with UTC-8 timezone 
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSubSite))
+            {
+                // Datetime in timezone of the code running PnP Core SDK
+                var localDate = new DateTime(2021, 7, 15, 15, 15, 15);
+
+                // Convert to UTC time
+                var utcDate = localDate.ToUniversalTime();
+
+                // Convert to Web's timezone
+                var localSiteTime = context.Web.RegionalSettings.TimeZone.UtcToLocalTime(utcDate);
+
+                // Use server call to do the same
+                var response = context.Web.RegionalSettings.TimeZone.ExecuteRequest(new ApiRequest(HttpMethod.Post, ApiRequestType.SPORest, $"_api/web/regionalsettings/timezone/utctolocaltime('{utcDate.ToString("o", CultureInfo.InvariantCulture)}')", null));
+                // {"d":{"UTCToLocalTime":"2021-07-15T06:15:15"}}
+
+                if (!string.IsNullOrEmpty(response.Response))
+                {
+                    var json = JsonDocument.Parse(response.Response).RootElement.GetProperty("d");
+
+                    if (json.TryGetProperty("UTCToLocalTime", out JsonElement utcToLocalTimeViaServerCall))
+                    {
+                        if (utcToLocalTimeViaServerCall.TryGetDateTime(out DateTime utcToLocalTimeViaServerCallDateTime))
+                        {
+                            Assert.AreEqual(utcToLocalTimeViaServerCallDateTime, localSiteTime);
+                        }
+                    }
+                }
+
+                // Convert from Web's timezone back to UTC time
+                var localSiteTimeBackToUtc = context.Web.RegionalSettings.TimeZone.LocalTimeToUtc(localSiteTime);
+
+                // Use server call to do the same
+                var response2 = context.Web.RegionalSettings.TimeZone.ExecuteRequest(new ApiRequest(HttpMethod.Post, ApiRequestType.SPORest, $"_api/web/regionalsettings/timezone/localtimetoutc('{localSiteTime.ToString("o", CultureInfo.InvariantCulture)}')", null));
+                // {"d":{"LocalTimeToUTC":"2021-07-15T13:15:15Z"}}
+
+                if (!string.IsNullOrEmpty(response2.Response))
+                {
+                    var json = JsonDocument.Parse(response2.Response).RootElement.GetProperty("d");
+
+                    if (json.TryGetProperty("LocalTimeToUTC", out JsonElement LocalTimeToUtcViaServerCall))
+                    {
+                        if (LocalTimeToUtcViaServerCall.TryGetDateTime(out DateTime LocalTimeToUtcViaServerCallDateTime))
+                        {
+                            Assert.AreEqual(LocalTimeToUtcViaServerCallDateTime, localSiteTimeBackToUtc);
+                        }
+                    }
+                }
+
+                Assert.AreEqual(utcDate, localSiteTimeBackToUtc);
+
+                // Convert back to timezone of the running code
+                var utcDateBackToLocal = localSiteTimeBackToUtc.ToLocalTime();
+
+                Assert.AreEqual(localDate, utcDateBackToLocal);
             }
         }
 
