@@ -141,6 +141,9 @@
   <data name="Error_MissiningSharePointInputItem" xml:space="preserve">
     <value>The SharePoint input item is missing</value>
   </data>
+  <data name="Error_NoPageLayoutTransformationModel" xml:space="preserve">
+    <value>No valid PageLayout transformation model could be retrieved for publishing page layout '{0}' of page '{1}'</value>
+  </data>
   <data name="Error_PageLayoutMappingFileSchemaValidation" xml:space="preserve">
     <value>Provided custom pagelayout mapping file is invalid: {0}</value>
   </data>
@@ -170,6 +173,12 @@
   </data>
   <data name="Info_PageAnalysisComplete" xml:space="preserve">
     <value>Page analysis completed for page '{0}'</value>
+  </data>
+  <data name="Info_PageLayoutMappingBeingUsed" xml:space="preserve">
+    <value>Page '{0}' uses '{1}' as page layout, mapping that will be used is {2}</value>
+  </data>
+  <data name="Info_PageLayoutMappingGeneration" xml:space="preserve">
+    <value>Page '{0}' uses '{1}' as page layout, no mapping was provided so auto generating a mapping</value>
   </data>
   <data name="Info_PageLivesOutsideOfALibrary" xml:space="preserve">
     <value>Page '{0}' is loaded from outside a library</value>

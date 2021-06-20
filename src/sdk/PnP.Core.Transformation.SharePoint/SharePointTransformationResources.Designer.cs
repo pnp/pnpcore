@@ -133,6 +133,15 @@ namespace PnP.Core.Transformation.SharePoint {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to No valid PageLayout transformation model could be retrieved for publishing page layout &apos;{0}&apos; of page &apos;{1}&apos;.
+        /// </summary>
+        internal static string Error_NoPageLayoutTransformationModel {
+            get {
+                return ResourceManager.GetString("Error_NoPageLayoutTransformationModel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Provided custom pagelayout mapping file is invalid: {0}.
         /// </summary>
         internal static string Error_PageLayoutMappingFileSchemaValidation {
@@ -219,6 +228,24 @@ namespace PnP.Core.Transformation.SharePoint {
         internal static string Info_PageAnalysisComplete {
             get {
                 return ResourceManager.GetString("Info_PageAnalysisComplete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Page &apos;{0}&apos; uses &apos;{1}&apos; as page layout, mapping that will be used is {2}.
+        /// </summary>
+        internal static string Info_PageLayoutMappingBeingUsed {
+            get {
+                return ResourceManager.GetString("Info_PageLayoutMappingBeingUsed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Page &apos;{0}&apos; uses &apos;{1}&apos; as page layout, no mapping was provided so auto generating a mapping.
+        /// </summary>
+        internal static string Info_PageLayoutMappingGeneration {
+            get {
+                return ResourceManager.GetString("Info_PageLayoutMappingGeneration", resourceCulture);
             }
         }
         

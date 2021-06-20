@@ -91,18 +91,34 @@ namespace PnP.Core.Transformation.SharePoint.Extensions
         /// <param name="fieldName">Name of the field to check</param>
         /// <param name="fieldValue">The value of the field, if any</param>
         /// <returns>Whether the field is defined in the target item</returns>
-        internal static bool TryGetFieldValue(this ListItem item, string fieldName, out string fieldValue)
+        internal static bool TryGetFieldValue<TFieldValue>(this ListItem item, string fieldName, out TFieldValue fieldValue)
         {
             if (item.FieldValues.ContainsKey(fieldName) && item[fieldName] != null)
             {
-                fieldValue = item[fieldName].ToString();
+                fieldValue = (TFieldValue)item[fieldName];
                 return true;
             }
             else
             {
-                fieldValue = null;
+                fieldValue = default(TFieldValue);
                 return false;
             }
+        }
+
+        internal static string GetPageLayoutFileUrl(this ListItem pageItem)
+        {
+            FieldUrlValue fileRefField = null;
+            if (pageItem.TryGetFieldValue(SharePointConstants.PublishingPageLayoutField, out fileRefField))
+            {
+                string pageLayoutUrl = fileRefField.Url;
+                if (string.IsNullOrEmpty(pageLayoutUrl))
+                {
+                    pageLayoutUrl = "";
+                }
+                return pageLayoutUrl;
+            }
+
+            return "";
         }
     }
 }

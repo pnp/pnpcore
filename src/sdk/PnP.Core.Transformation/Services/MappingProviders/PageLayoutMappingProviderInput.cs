@@ -21,6 +21,6 @@ namespace PnP.Core.Transformation.Services.MappingProviders
         /// <summary>
         /// Defines the source Page Layout to map
         /// </summary>
-        // public PageLayout PageLayout { get; }
+        public string PageLayout { get; set; }
     }
 }

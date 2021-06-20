@@ -96,7 +96,7 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
                     SharePointTransformationResources.Info_PageValidationChecksComplete, pageFile.ServerRelativeUrl));
 
             // Extract the list of Web Parts to process and the reference page layout
-            var (layout, webPartsToProcess) = await AnalyzePageAsync(pageFile, pageItem, sourcePage).ConfigureAwait(false);
+            var (layout, webPartsToProcess) = await AnalyzePageAsync(input.Context, pageFile, pageItem, sourcePage).ConfigureAwait(false);
 
             // Start the actual transformation
             var transformationStartDateTime = DateTime.Now;
@@ -159,15 +159,15 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
                     .ConfigureAwait(false);
             }
 
-            var pageLayoutMappingProvider = serviceProvider.GetService<IPageLayoutMappingProvider>();
-            if (pageLayoutMappingProvider != null)
-            {
-                // TODO: prepare page layout
-                var pageLayoutInput = new PageLayoutMappingProviderInput(input.Context);
-                var output = await pageLayoutMappingProvider
-                    .MapPageLayoutAsync(pageLayoutInput, token)
-                    .ConfigureAwait(false);
-            }
+            //var pageLayoutMappingProvider = serviceProvider.GetService<IPageLayoutMappingProvider>();
+            //if (pageLayoutMappingProvider != null)
+            //{
+            //    // TODO: prepare page layout
+            //    var pageLayoutInput = new PageLayoutMappingProviderInput(input.Context);
+            //    var output = await pageLayoutMappingProvider
+            //        .MapPageLayoutAsync(pageLayoutInput, token)
+            //        .ConfigureAwait(false);
+            //}
 
             var taxonomyMappingProvider = serviceProvider.GetService<ITaxonomyMappingProvider>();
             if (taxonomyMappingProvider != null)
@@ -363,59 +363,63 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
         /// Analyzes the current page to provide information about web parts and page layout
         /// </summary>
         /// <returns>The page layout and the list of web parts</returns>
-        internal async Task<Tuple<PageLayout, List<WebPartEntity>>> AnalyzePageAsync(File pageFile, ListItem pageItem, SourcePageInformation page)
+        internal async Task<Tuple<Model.PageLayout, List<WebPartEntity>>> AnalyzePageAsync(
+            Services.Core.PageTransformationContext context, 
+            File pageFile, 
+            ListItem pageItem, 
+            SourcePageInformation page)
         {
             // Prepare the result variables
             List<WebPartEntity> webparts = null;
-            PageLayout layout = PageLayout.Unknown;
+            Model.PageLayout layout = Model.PageLayout.Unknown;
 
             switch (page.PageType)
             {
                 case SourcePageType.WebPartPage when page.SourceVersion != SPVersion.SPO:
-                    (layout, webparts) = await AnalyzeWebPartPageOnPremisesAsync(pageFile, page).ConfigureAwait(false);
+                    (layout, webparts) = await AnalyzeWebPartPageOnPremisesAsync(context, pageFile, page).ConfigureAwait(false);
                     break;
                 case SourcePageType.WebPartPage:
-                    (layout, webparts) = await AnalyzeWebPartPageAsync(pageFile, page).ConfigureAwait(false);
+                    (layout, webparts) = await AnalyzeWebPartPageAsync(context, pageFile, page).ConfigureAwait(false);
                     break;
                 case SourcePageType.WikiPage:
-                    (layout, webparts) = await AnalyzeWikiPageAsync(pageFile, pageItem, page).ConfigureAwait(false);
+                    (layout, webparts) = await AnalyzeWikiPageAsync(context, pageFile, pageItem, page).ConfigureAwait(false);
                     break;
                 case SourcePageType.BlogPage:
-                    (layout, webparts) = await AnalyzeWikiPageAsync(pageFile, pageItem, page).ConfigureAwait(false);
+                    (layout, webparts) = await AnalyzeWikiPageAsync(context, pageFile, pageItem, page).ConfigureAwait(false);
                     break;
                 case SourcePageType.PublishingPage when page.SourceVersion != SPVersion.SPO:
-                    (layout, webparts) = await AnalyzePublishingPageAsync(pageFile, pageItem, page).ConfigureAwait(false);
+                    (layout, webparts) = await AnalyzePublishingPageOnPremisesAsync(context, pageFile, pageItem, page).ConfigureAwait(false);
                     break;
                 case SourcePageType.PublishingPage:
-                    (layout, webparts) = await AnalyzePublishingPageOnPremisesAsync(pageFile, page).ConfigureAwait(false);
+                    (layout, webparts) = await AnalyzePublishingPageAsync(context, pageFile, pageItem, page).ConfigureAwait(false);
                     break;
             }
 
-            return new Tuple<PageLayout, List<WebPartEntity>>(layout, webparts);
+            return new Tuple<Model.PageLayout, List<WebPartEntity>>(layout, webparts);
         }
 
-        private async Task<Tuple<PageLayout, List<WebPartEntity>>> AnalyzeWebPartPageAsync(File pageFile, SourcePageInformation page)
+        private async Task<Tuple<Model.PageLayout, List<WebPartEntity>>> AnalyzeWebPartPageAsync(Services.Core.PageTransformationContext context, File pageFile, SourcePageInformation page)
         {
             // Prepare the result variable
             List<WebPartEntity> webparts = new List<WebPartEntity>();
 
             // Get a reference to the current source context
-            var context = pageFile.Context;
+            var clientContext = pageFile.Context;
 
             // Load web parts on web part page
             // Note: Web parts placed outside of a web part zone using SPD are not picked up by the web part manager. There's no API that will return those,
             //       only possible option to add parsing of the raw page aspx file.
             var limitedWPManager = pageFile.GetLimitedWebPartManager(PersonalizationScope.Shared);
-            context.Load(limitedWPManager);
+            clientContext.Load(limitedWPManager);
 
             // Load page properties
             var pageProperties = pageFile.Properties;
-            context.Load(pageProperties);
+            clientContext.Load(pageProperties);
 
             // Load the web parts properties
             IEnumerable<WebPartDefinition> webParts;
 
-            webParts = context.LoadQuery(
+            webParts = clientContext.LoadQuery(
             limitedWPManager.WebParts.IncludeWithDefaultProperties(
                 wp => wp.Id,
                 wp => wp.ZoneId,
@@ -426,7 +430,7 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
                 wp => wp.WebPart.Hidden,
                 wp => wp.WebPart.Properties));
 
-            await context.ExecuteQueryAsync().ConfigureAwait(false);
+            await clientContext.ExecuteQueryAsync().ConfigureAwait(false);
 
             // Check page type
             var layout = GetLayout(pageProperties);
@@ -465,7 +469,7 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
                 }
                 if (isDirty)
                 {
-                    await context.ExecuteQueryAsync().ConfigureAwait(false);
+                    await clientContext.ExecuteQueryAsync().ConfigureAwait(false);
                 }
 
                 // TODO: Ask Bert -> isn't this a repetition?
@@ -523,31 +527,31 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
                     pageFile.ServerRelativeUrl));
             }
 
-            return new Tuple<PageLayout, List<WebPartEntity>>(layout, webparts);
+            return new Tuple<Model.PageLayout, List<WebPartEntity>>(layout, webparts);
         }
 
-        private async Task<Tuple<PageLayout, List<WebPartEntity>>> AnalyzeWebPartPageOnPremisesAsync(File pageFile, SourcePageInformation page)
+        private async Task<Tuple<Model.PageLayout, List<WebPartEntity>>> AnalyzeWebPartPageOnPremisesAsync(Services.Core.PageTransformationContext context, File pageFile, SourcePageInformation page)
         {
             // Prepare the result variable
             List<WebPartEntity> webparts = new List<WebPartEntity>();
 
             // Get a reference to the current source context
-            var context = pageFile.Context;
+            var clientContext = pageFile.Context;
 
             // Load web parts on web part page
             // Note: Web parts placed outside of a web part zone using SPD are not picked up by the web part manager. There's no API that will return those,
             //       only possible option to add parsing of the raw page aspx file.
             var limitedWPManager = pageFile.GetLimitedWebPartManager(PersonalizationScope.Shared);
-            context.Load(limitedWPManager);
+            clientContext.Load(limitedWPManager);
 
             // Load page properties
             var pageProperties = pageFile.Properties;
-            context.Load(pageProperties);
+            clientContext.Load(pageProperties);
 
             // Load the web parts properties
             IEnumerable<WebPartDefinition> webParts;
 
-            webParts = context.LoadQuery(
+            webParts = clientContext.LoadQuery(
             limitedWPManager.WebParts.IncludeWithDefaultProperties(
                 wp => wp.Id,
                 wp => wp.ZoneId,
@@ -558,7 +562,7 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
                 wp => wp.WebPart.Hidden,
                 wp => wp.WebPart.Properties));
 
-            await context.ExecuteQueryAsync().ConfigureAwait(false);
+            await clientContext.ExecuteQueryAsync().ConfigureAwait(false);
 
             // Check page type
             var layout = GetLayoutFromWebServices(pageFile);
@@ -650,10 +654,10 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
                     pageFile.ServerRelativeUrl));
             }
 
-            return new Tuple<PageLayout, List<WebPartEntity>>(layout, webparts);
+            return new Tuple<Model.PageLayout, List<WebPartEntity>>(layout, webparts);
         }
 
-        private async Task<Tuple<PageLayout, List<WebPartEntity>>> AnalyzeWikiPageAsync(File wikiPage, ListItem pageItem, SourcePageInformation page)
+        private async Task<Tuple<Model.PageLayout, List<WebPartEntity>>> AnalyzeWikiPageAsync(Services.Core.PageTransformationContext context, File wikiPage, ListItem pageItem, SourcePageInformation page)
         {
             List<WebPartEntity> webparts = new List<WebPartEntity>();
             string pageContents = null;
@@ -683,7 +687,7 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
 
             HtmlParser parser = new HtmlParser();
 
-            var layout = PageLayout.Wiki_OneColumn;
+            var layout = Model.PageLayout.Wiki_OneColumn;
 
             if (!string.IsNullOrEmpty(pageContents))
             {
@@ -743,16 +747,16 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
                 }
             }
 
-            return new Tuple<PageLayout, List<WebPartEntity>>(layout, webparts);
+            return new Tuple<Model.PageLayout, List<WebPartEntity>>(layout, webparts);
         }
 
-        private async Task<Tuple<PageLayout, List<WebPartEntity>>> AnalyzePublishingPageAsync(File pageFile, ListItem pageItem, SourcePageInformation page)
+        private async Task<Tuple<Model.PageLayout, List<WebPartEntity>>> AnalyzePublishingPageAsync(Services.Core.PageTransformationContext context, File pageFile, ListItem pageItem, SourcePageInformation page)
         {
             // Prepare the result variable
             List<WebPartEntity> webparts = new List<WebPartEntity>();
 
             // Get a reference to the current source context
-            var context = pageFile.Context;
+            var sourceContext = pageFile.Context;
 
             // Determine the source page layout
             string pageLayoutUrl;
@@ -760,6 +764,21 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
             {
                 page.PageLayout = System.IO.Path.GetFileNameWithoutExtension(pageLayoutUrl);
             }
+
+            // Here we need to invoke the Page Layout Mapping Provider
+            // to determine the target page layout
+            // => Where do we store the result?
+            // => Should we pass the cancellation token?
+            var pageLayoutMappingProvider = serviceProvider.GetService<IPageLayoutMappingProvider>();
+            if (pageLayoutMappingProvider != null)
+            {
+                var pageLayoutInput = new PageLayoutMappingProviderInput(context);
+                pageLayoutInput.PageLayout = page.PageLayout;
+                var output = await pageLayoutMappingProvider
+                    .MapPageLayoutAsync(pageLayoutInput)
+                    .ConfigureAwait(false);
+            }
+
 
             //#region Process fields that become web parts 
             //if (publishingPageTransformationModel.WebParts != null)
@@ -870,7 +889,7 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
             return null;
         }
 
-        private async Task<Tuple<PageLayout, List<WebPartEntity>>> AnalyzePublishingPageOnPremisesAsync(File pageFile, SourcePageInformation page)
+        private async Task<Tuple<PageLayout, List<WebPartEntity>>> AnalyzePublishingPageOnPremisesAsync(Services.Core.PageTransformationContext context, File pageFile, ListItem pageItem, SourcePageInformation page)
         {
             return null;
         }

@@ -12,6 +12,11 @@
         public string WebPartMappingFile { get; set; }
 
         /// <summary>
+        /// Defines the path for the Page Layout Mapping File
+        /// </summary>
+        public string PageLayoutMappingFile { get; set; }
+
+        /// <summary>
         /// Defines whether to include the TitleBarWebPart in the list of web parts to process
         /// </summary>
         public bool IncludeTitleBarWebPart { get; set; }

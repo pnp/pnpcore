@@ -2,6 +2,7 @@
 using PnP.Core.Transformation.SharePoint.Model;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 using System.Text.RegularExpressions;
 
@@ -40,6 +41,68 @@ namespace PnP.Core.Transformation.SharePoint.Extensions
             var listName = new Regex(@"['´`]").Replace(result.Value, "");
 
             return (string.IsNullOrEmpty(listName) ? defaultName : listName).ToLowerInvariant();
+        }
+
+        /// <summary>
+        /// Checks if the current web is a sub site or not
+        /// </summary>
+        /// <param name="web">Web to check</param>
+        /// <returns>True is sub site, false otherwise</returns>
+        public static bool IsSubSite(this Web web)
+        {
+            if (web == null) throw new ArgumentNullException(nameof(web));
+
+            var site = (web.Context as ClientContext).Site;
+            var rootWeb = site.EnsureProperty(s => s.RootWeb);
+
+            web.EnsureProperty(w => w.Id);
+            rootWeb.EnsureProperty(w => w.Id);
+
+            if (rootWeb.Id != web.Id)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        /// <summary>
+        /// Returns a file as string
+        /// </summary>
+        /// <param name="web">The Web to process</param>
+        /// <param name="serverRelativeUrl">The server relative URL to the file</param>
+        /// <returns>The file contents as a string</returns>
+        /// <remarks>#
+        /// 
+        ///     Based on https://github.com/SharePoint/PnP-Sites-Core/blob/master/Core/OfficeDevPnP.Core/Extensions/FileFolderExtensions.cs
+        ///     Modified to force onpremises support
+        ///     
+        /// </remarks>
+        public static string GetFileByServerRelativeUrlAsString(this Web web, string serverRelativeUrl)
+        {
+            var file = web.GetFileByServerRelativeUrl(serverRelativeUrl);
+            var context = web.Context;
+            context.Load(file);
+            context.ExecuteQueryRetry();
+
+            Stream sourceStream;
+            ClientResult<Stream> stream = file.OpenBinaryStream();
+            web.Context.ExecuteQueryRetry();
+            sourceStream = stream.Value;
+
+            string returnString = string.Empty;
+
+            using (Stream memStream = new MemoryStream())
+            {
+                sourceStream.CopyTo(memStream);
+                memStream.Position = 0;
+
+                using (var reader = new StreamReader(memStream))
+                {
+                    returnString = reader.ReadToEnd();
+                }
+            }
+
+            return returnString;
         }
     }
 
