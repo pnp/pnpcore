@@ -9,8 +9,6 @@ namespace PnP.Core.Model.SharePoint
     [SharePointType("SP.TimeZone", Uri = "_api/web/regionalsettings/timezone", LinqGet = "_api/web/regionalsettings/timezone")]
     internal partial class TimeZone : BaseDataModel<ITimeZone>, ITimeZone
     {
-        private TimeZoneInfo timeZoneInfo;
-
         #region Construction
         public TimeZone()
         {
@@ -56,7 +54,6 @@ namespace PnP.Core.Model.SharePoint
 
         internal static TimeZoneInfo GetTimeZoneInfoFromSharePoint(string timeZoneDescription)
         {
-
             return timeZoneDescription switch
             {
                 "(UTC-12:00) International Date Line West" => TZConvert.GetTimeZoneInfo("Dateline Standard Time"),

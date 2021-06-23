@@ -32,7 +32,7 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// Gets a value that specifies whether the automatic ASPX page indexed is allowed.
         /// </summary>
-        public bool AllowAutomaticASPXPageIndexing { get; }
+        public bool AllowAutomaticASPXPageIndexing { get; set; }
 
         /// <summary>
         /// Gets a value that specifies whether the current user is allowed to create declarative workflow on this site.
