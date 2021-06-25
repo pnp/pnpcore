@@ -534,7 +534,7 @@ namespace PnP.Core.Test.SharePoint
                 Assert.IsTrue(classifyInformation.Created != DateTime.MinValue);
                 Assert.IsTrue(classifyInformation.DeliverDate != DateTime.MinValue);
                 Assert.IsTrue(classifyInformation.ErrorMessage == null);
-                Assert.IsTrue(classifyInformation.StatusCode == 0);
+                Assert.IsTrue(classifyInformation.StatusCode == 201);
                 Assert.IsTrue(classifyInformation.Status == "ExponentialBackoff");
                 Assert.IsTrue(classifyInformation.TargetSiteUrl == context.Uri.ToString());
                 Assert.IsTrue(classifyInformation.TargetWebServerRelativeUrl == context.Web.ServerRelativeUrl);
@@ -552,7 +552,7 @@ namespace PnP.Core.Test.SharePoint
                 Assert.IsTrue(file1BatchResult.Result.Created != DateTime.MinValue);
                 Assert.IsTrue(file1BatchResult.Result.DeliverDate != DateTime.MinValue);
                 Assert.IsTrue(file1BatchResult.Result.ErrorMessage == null);
-                Assert.IsTrue(file1BatchResult.Result.StatusCode == 0);
+                Assert.IsTrue(file1BatchResult.Result.StatusCode == 201);
                 Assert.IsTrue(file1BatchResult.Result.Status == "ExponentialBackoff");
                 Assert.IsTrue(file1BatchResult.Result.TargetSiteUrl == context.Uri.ToString());
                 Assert.IsTrue(file1BatchResult.Result.TargetWebServerRelativeUrl == context.Web.ServerRelativeUrl);
@@ -561,7 +561,7 @@ namespace PnP.Core.Test.SharePoint
                 Assert.IsTrue(file2BatchResult.Result.Created != DateTime.MinValue);
                 Assert.IsTrue(file2BatchResult.Result.DeliverDate != DateTime.MinValue);
                 Assert.IsTrue(file2BatchResult.Result.ErrorMessage == null);
-                Assert.IsTrue(file2BatchResult.Result.StatusCode == 0);
+                Assert.IsTrue(file2BatchResult.Result.StatusCode == 201);
                 Assert.IsTrue(file2BatchResult.Result.Status == "ExponentialBackoff");
                 Assert.IsTrue(file2BatchResult.Result.TargetSiteUrl == context.Uri.ToString());
                 Assert.IsTrue(file2BatchResult.Result.TargetWebServerRelativeUrl == context.Web.ServerRelativeUrl);
@@ -628,7 +628,7 @@ namespace PnP.Core.Test.SharePoint
                     Assert.IsTrue(classifyInformation.Created != DateTime.MinValue);
                     Assert.IsTrue(classifyInformation.DeliverDate != DateTime.MinValue);
                     Assert.IsTrue(classifyInformation.ErrorMessage == null);
-                    Assert.IsTrue(classifyInformation.StatusCode == 0);
+                    Assert.IsTrue(classifyInformation.StatusCode == 201);
                     Assert.IsTrue(classifyInformation.Status == "ExponentialBackoff");
                     Assert.IsTrue(classifyInformation.TargetSiteUrl == context.Uri.ToString());
                     Assert.IsTrue(classifyInformation.TargetWebServerRelativeUrl == context.Web.ServerRelativeUrl);

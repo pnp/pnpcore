@@ -1,9 +1,9 @@
---batchresponse_0951534b-b2d8-4c99-90de-60f9911e7b97
+--batchresponse_0d50d9b3-6ef5-478d-ac62-0e0d4b1999f0
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{"d":{"__metadata":{"id":"https://m365x215748.sharepoint.com/sites/AdminContentCenter/_api/Web","uri":"https://m365x215748.sharepoint.com/sites/AdminContentCenter/_api/Web","type":"SP.Web"},"Id":"f6dcd4e5-2d7e-47ff-8397-177c364f363b","WebTemplate":"CONTENTCTR"}}
---batchresponse_0951534b-b2d8-4c99-90de-60f9911e7b97--
+{"d":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/ContentCenter/_api/Web","uri":"https://bertonline.sharepoint.com/sites/ContentCenter/_api/Web","type":"SP.Web"},"Id":"bf9c5c94-907a-41ed-9593-9fb9c716a5a0","WebTemplate":"CONTENTCTR"}}
+--batchresponse_0d50d9b3-6ef5-478d-ac62-0e0d4b1999f0--

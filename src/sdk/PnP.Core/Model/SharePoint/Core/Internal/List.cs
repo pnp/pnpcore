@@ -702,41 +702,25 @@ namespace PnP.Core.Model.SharePoint
         public async Task<List<ISyntexClassifyAndExtractResult>> ClassifyAndExtractAsync(bool force = false, int pageSize = 500)
         {
             // load required fields in this list
-            string viewXml = @"<View>
+            string viewXml = @"<View Scope='Recursive'>
                     <ViewFields>
                       <FieldRef Name='FileDirRef' />
                       <FieldRef Name='FileLeafRef' />
                       <FieldRef Name='UniqueId' />
                       <FieldRef Name='PrimeLastClassified' />
                     </ViewFields>   
-                    {1}
+                    <OrderBy Override='TRUE'><FieldRef Name= 'ID' Ascending= 'FALSE' /></OrderBy>
                     <RowLimit Paged='TRUE'>{0}</RowLimit>
                    </View>";
 
             bool paging = true;
             string nextPageInfo = null;
-            string filter;
-
-            if (!force)
-            {
-                filter = @"<Query>
-                      <Where>
-                        <IsNull>
-                          <FieldRef Name='PrimeLastClassified'/>                          
-                        </IsNull>
-                      </Where>
-                    </Query>";
-            }
-            else
-            {
-                filter = "";
-            }
 
             while (paging)
             {
                 var queryOptions = new RenderListDataOptions()
                 {
-                    ViewXml = string.Format(viewXml, pageSize, filter),
+                    ViewXml = string.Format(viewXml, pageSize),
                     RenderOptions = RenderListDataOptionsFlags.ListData
                 };
 
@@ -768,6 +752,13 @@ namespace PnP.Core.Model.SharePoint
             var batch = PnPContext.NewBatch();
             foreach (var file in Items.AsRequested())
             {
+                // We use client side filtering to prevent re-processing already processed files, doing 
+                // this filter via the CAML query will triggers a list scan and as such results in throttling/large list issues
+                if (!force && file.Values["PrimeLastClassified"] != null)
+                {
+                    continue;
+                }
+
                 var apiCall = CreateClassifyAndExtractApiCall(Guid.Parse(file.Values["UniqueId"].ToString()));
                 apiCall.RawSingleResult = new SyntexClassifyAndExtractResult();
                 apiCall.RawResultsHandler = (json, call) =>
