@@ -259,6 +259,15 @@ namespace PnP.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to There was an exception while writing field {0}. Verify you&apos;re using the correct InternalName value for the field you want to write to..
+        /// </summary>
+        internal static string Exception_ListItemAdd_WrongInternalFieldName {
+            get {
+                return ResourceManager.GetString("Exception_ListItemAdd_WrongInternalFieldName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Please ensure your list Fields are loaded before getting list data. E.g. await list.LoadAsync(p =&gt; p.Fields.QueryProperties(p =&gt; p.InternalName, p =&gt; p.FieldTypeKind, p =&gt; p.TypeAsString, p =&gt; p.Title)).
         /// </summary>
         internal static string Exception_ListItemUpdate_NoFieldsLoaded {

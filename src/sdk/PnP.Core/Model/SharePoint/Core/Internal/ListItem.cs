@@ -45,6 +45,13 @@ namespace PnP.Core.Model.SharePoint
                             var fieldName = field.GetProperty("FieldName").GetString();
                             var fieldValue = field.GetProperty("FieldValue").GetString();
 
+                            // In some cases SharePoint will return HTTP 200 indicating the list item was added ok, but one or more fields could 
+                            // not be added which is indicated via the HasException property on the field. If so then throw an error.
+                            if (field.TryGetProperty("HasException", out JsonElement hasExceptionProperty) && hasExceptionProperty.GetBoolean() == true)
+                            {
+                                throw new SharePointRestServiceException(string.Format(PnPCoreResources.Exception_ListItemAdd_WrongInternalFieldName, fieldName));
+                            }
+
                             if (fieldName == "Id")
                             {
                                 if (int.TryParse(fieldValue, out int id))

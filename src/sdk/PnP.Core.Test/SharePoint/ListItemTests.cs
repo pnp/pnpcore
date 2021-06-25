@@ -24,6 +24,8 @@ namespace PnP.Core.Test.SharePoint
             //TestCommon.Instance.Mocking = false;
         }
 
+        #region Add and update list items, including folders
+
         [TestMethod]
         public async Task UpdateListItemWithUnderScoreField()
         {
@@ -221,6 +223,59 @@ namespace PnP.Core.Test.SharePoint
         }
 
         [TestMethod]
+        public async Task BulkAddListItemsWithBadFieldNameTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var listTitle = TestCommon.GetPnPSdkTestAssetName("BulkAddListItemsWithBadFieldNameTest");
+                var list = await context.Web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
+                
+                IField myField = await list.Fields.AddTextAsync("MetaInfo", new FieldTextOptions()
+                {
+                    Group = "Custom Fields",
+                    AddToDefaultView = true,
+                });
+
+                Assert.IsTrue(myField.InternalName != "MetaInfo");
+
+                List<Dictionary<string, object>> propertiesToUpdate = new List<Dictionary<string, object>>();
+
+                var prop = new Dictionary<string, object>
+                {
+                    { "Title", "My title 1" },
+                    { "MetaInfo", "abc" }
+                };
+                propertiesToUpdate.Add(prop);
+
+                var prop2 = new Dictionary<string, object>
+                {
+                    { "Title", "My title 2" },
+                    { "MetaInfo", "abc" }
+                };
+                propertiesToUpdate.Add(prop2);
+
+                foreach (var propItem in propertiesToUpdate)
+                {
+                    await list.Items.AddBatchAsync(propItem);
+                }
+
+                await Assert.ThrowsExceptionAsync<SharePointRestServiceException>(async () =>
+                {
+                    await context.ExecuteAsync();
+                });
+
+                await list.DeleteAsync();
+            }
+        }
+
+
+
+        #endregion
+
+        #region Recycle tests
+
+        [TestMethod]
         public async Task RecycleListItemTest()
         {
             //TestCommon.Instance.Mocking = false;
@@ -338,6 +393,10 @@ namespace PnP.Core.Test.SharePoint
                 await list.DeleteAsync();
             }
         }
+
+        #endregion
+
+        #region SystemUpdate tests
 
         [TestMethod]
         public async Task SystemUpdate()
@@ -987,6 +1046,8 @@ namespace PnP.Core.Test.SharePoint
                 await myList.DeleteAsync();
             }
         }
+
+        #endregion
 
         #region Field type read/update tests
 

@@ -183,6 +183,9 @@
   <data name="Exception_LinqError_MissingValue" xml:space="preserve">
     <value>Missing value for {0} in {1}</value>
   </data>
+  <data name="Exception_ListItemAdd_WrongInternalFieldName" xml:space="preserve">
+    <value>There was an exception while writing field {0}. Verify you're using the correct InternalName value for the field you want to write to.</value>
+  </data>
   <data name="Exception_ListItemUpdate_NoFieldsLoaded" xml:space="preserve">
     <value>Please ensure your list Fields are loaded before getting list data. E.g. await list.LoadAsync(p =&gt; p.Fields.QueryProperties(p =&gt; p.InternalName, p =&gt; p.FieldTypeKind, p =&gt; p.TypeAsString, p =&gt; p.Title))</value>
   </data>
