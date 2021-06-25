@@ -16,7 +16,7 @@ IField myField = await myList.Fields.AddTextAsync("My Field", new FieldTextOptio
 {
     Group = "Custom Fields",
     AddToDefaultView = true,
-    MaxLenght = 30
+    MaxLength = 30
 });
 ```
 
