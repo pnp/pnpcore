@@ -103,6 +103,9 @@ namespace PnP.Core.Model.SharePoint
                 }
             }
 
+            // Clear changes
+            Commit();
+
             return this;
         }
 
@@ -158,6 +161,9 @@ namespace PnP.Core.Model.SharePoint
                     Longitude = longitude;
                 }
             }
+
+            // Clear changes
+            Commit();
 
             return this;
         }

@@ -40,6 +40,10 @@ namespace PnP.Core.Model.SharePoint
             if (json.ValueKind == JsonValueKind.Number)
             {
                 LookupId = json.GetInt32();
+
+                // Clear changes
+                Commit();
+
                 return this;
             }
             else
@@ -69,6 +73,9 @@ namespace PnP.Core.Model.SharePoint
             {
                 IsSecretFieldValue = bool.Parse(properties["isSecretFieldValue"]);
             }
+
+            // Clear changes
+            Commit();
 
             return this;
         }

@@ -43,6 +43,9 @@ namespace PnP.Core.Model.SharePoint
                 WssId = wssId.GetInt32();
             }
 
+            // Clear changes
+            Commit();
+
             return this;
         }
 
@@ -64,6 +67,9 @@ namespace PnP.Core.Model.SharePoint
             }
 
             WssId = -1;
+
+            // Clear changes
+            Commit();
 
             return this;
         }

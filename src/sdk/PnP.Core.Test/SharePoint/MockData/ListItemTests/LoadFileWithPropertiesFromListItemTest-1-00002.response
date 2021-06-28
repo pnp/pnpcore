@@ -1,9 +1,9 @@
---batchresponse_c1342c4a-62c9-44c0-bb2d-7921953f2316
+--batchresponse_28d455d2-02f5-4697-ae1d-53b661cc9dce
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{"d":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/prov-1/Shared Documents/PNP_SDK_TEST_LoadFileWithPropertiesFromListItemTest.docx')","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/prov-1/Shared%20Documents/PNP_SDK_TEST_LoadFileWithPropertiesFromListItemTest.docx')","type":"SP.File"},"ListItemAllFields":{"__metadata":{"id":"4b349135-3371-4cc1-9655-4972681f8c60","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/prov-1/Shared%20Documents/PNP_SDK_TEST_LoadFileWithPropertiesFromListItemTest.docx')/ListItemAllFields","etag":"\"1\"","type":"SP.Data.Shared_x0020_DocumentsItem"},"Id":3369,"ID":3369},"UniqueId":"f2529936-db1a-48b1-8725-0ef32bc05bb2"}}
---batchresponse_c1342c4a-62c9-44c0-bb2d-7921953f2316--
+{"d":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/prov-1/Shared Documents/PNP_SDK_TEST_LoadFileWithPropertiesFromListItemTest.docx')","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/prov-1/Shared%20Documents/PNP_SDK_TEST_LoadFileWithPropertiesFromListItemTest.docx')","type":"SP.File"},"ListItemAllFields":{"__metadata":{"id":"54885882-ad9d-496e-98b3-a383407cf182","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/prov-1/Shared%20Documents/PNP_SDK_TEST_LoadFileWithPropertiesFromListItemTest.docx')/ListItemAllFields","etag":"\"1\"","type":"SP.Data.Shared_x0020_DocumentsItem"},"Id":3380,"ID":3380},"UniqueId":"07983702-d26c-4581-9746-a5e1c3a2c819"}}
+--batchresponse_28d455d2-02f5-4697-ae1d-53b661cc9dce--

@@ -1,9 +1,9 @@
---batchresponse_36ba6463-2ec5-47a1-90bd-61a5582ef651
+--batchresponse_17c4a41f-e5a9-454f-8ce0-37a4182df440
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{"d":{"results":[{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/SP.ChangeItem4725cf4b-32c4-4430-8620-e4fbdbadb611","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/SP.ChangeItem4725cf4b-32c4-4430-8620-e4fbdbadb611","type":"SP.ChangeItem"},"ChangeToken":{"__metadata":{"type":"SP.ChangeToken"},"StringValue":"1;3;f90d07e0-bbea-4464-9611-f695d0b7b3e4;637580471039700000;563751326"},"ChangeType":1,"SiteId":"b56adf79-ff6a-4964-a63a-ff1fa23be9f8","Time":"2021-05-31T08:38:24Z","Editor":"Bert Jansen (Cloud)","EditorEmailHint":"bert.jansen@bertonline.onmicrosoft.com","ItemId":3372,"ListId":"f90d07e0-bbea-4464-9611-f695d0b7b3e4","ServerRelativeUrl":"/sites/prov-1/Shared Documents/PNP_SDK_TEST_GetListItemChangesAsyncTest.docx","SharedByUser":null,"SharedWithUsers":null,"UniqueId":"113e4625-b251-4fe3-8aee-2f0cdec3721a","WebId":"8c8e101c-1b0d-4253-85e7-c30039bf46e2"}]}}
---batchresponse_36ba6463-2ec5-47a1-90bd-61a5582ef651--
+{"d":{"results":[{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/SP.ChangeItemca29b8f3-149d-475f-a6e7-4dad50b2daba","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/SP.ChangeItemca29b8f3-149d-475f-a6e7-4dad50b2daba","type":"SP.ChangeItem"},"ChangeToken":{"__metadata":{"type":"SP.ChangeToken"},"StringValue":"1;3;f90d07e0-bbea-4464-9611-f695d0b7b3e4;637604753468970000;569084244"},"ChangeType":1,"SiteId":"b56adf79-ff6a-4964-a63a-ff1fa23be9f8","Time":"2021-06-28T11:09:07Z","Editor":"Bert Jansen (Cloud)","EditorEmailHint":"bert.jansen@bertonline.onmicrosoft.com","ItemId":3375,"ListId":"f90d07e0-bbea-4464-9611-f695d0b7b3e4","ServerRelativeUrl":"/sites/prov-1/Shared Documents/PNP_SDK_TEST_GetListItemChangesAsyncTest.docx","SharedByUser":null,"SharedWithUsers":null,"UniqueId":"23ca6fa2-f4d0-44d5-8cf5-690a2c53d9d9","WebId":"8c8e101c-1b0d-4253-85e7-c30039bf46e2"}]}}
+--batchresponse_17c4a41f-e5a9-454f-8ce0-37a4182df440--

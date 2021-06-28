@@ -19,6 +19,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
 ### Changed
 
+- "Special" field value types (User, Lookup, Url, Taxonomy) were wrongly marked as changed on data load causing blanking out data with item updates [jansenbe - Bert Jansen]
 - Fixed the SharePoint Syntex ClassifyAndExtract functionality to skip folders and work well with large lists [jansenbe - Bert Jansen]
 - Fixed issue when using AddValidateUpdateItemUsingPath (used for IlistItem adds) is returning a field level add error - now an exception is thrown [jansenbe - Bert Jansen]
 - Fixed memory leaks for use cases that resulted in repeated creation of the Azure AppInsights TelemetryClient [jansenbe - Bert Jansen]

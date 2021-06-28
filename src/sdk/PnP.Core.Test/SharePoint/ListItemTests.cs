@@ -269,7 +269,80 @@ namespace PnP.Core.Test.SharePoint
             }
         }
 
+        [TestMethod]
+        public async Task VerifyUserFieldsInRepetiveUpdates()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var listTitle = TestCommon.GetPnPSdkTestAssetName("VerifyUserFieldsInRepetiveUpdates");
+                var list = await context.Web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
 
+                IField myUserField = await list.Fields.AddUserAsync("User1", new FieldUserOptions()
+                {
+                    Group = "Custom Fields",
+                    AddToDefaultView = true,                    
+                });
+
+                // load the current user
+                var currentUser = await context.Web.GetCurrentUserAsync();
+
+                var addedListItem = await list.Items.AddAsync(new Dictionary<string, object>
+                {
+                    { "Title", "My title 1" },
+                    { "User1", myUserField.NewFieldUserValue(currentUser) }
+                });
+
+                Assert.IsTrue((addedListItem["User1"] as IFieldUserValue).LookupId == currentUser.Id);
+
+                // Update approach 1
+                // Update only the list item title
+                var firstListItem = list.Items.AsRequested().First();
+                firstListItem.Title = "updated title 1";
+                await firstListItem.UpdateAsync();
+
+                Assert.IsTrue((firstListItem["User1"] as IFieldUserValue).LookupId == currentUser.Id);
+
+                // Update approach 2
+                // retrieve the list + items again
+                list = context.Web.Lists.GetByTitle(listTitle, p => p.Title, p => p.Items,
+                                                     p => p.Fields.QueryProperties(p => p.InternalName,
+                                                                                   p => p.FieldTypeKind,
+                                                                                   p => p.TypeAsString,
+                                                                                   p => p.Title));
+                firstListItem = list.Items.AsRequested().First();
+
+                Assert.IsTrue((firstListItem["User1"] as IFieldUserValue).LookupId == currentUser.Id);
+
+                firstListItem.Title = "updated title 2";
+                
+                // This update cleared out the user value, fixed now by ensuring a freshly loaded fieldvalue object has no pending changes
+                await firstListItem.UpdateAsync();
+
+                // Update approach 3
+                var listItemToUpdate = await list.Items.GetByIdAsync(firstListItem.Id);
+                Assert.IsTrue((listItemToUpdate["User1"] as IFieldUserValue).LookupId == currentUser.Id);
+
+                listItemToUpdate.Title = "updated title 2";
+                await listItemToUpdate.UpdateAsync();
+
+                // Retrieve via ListDataAsStream method
+                list.Items.Clear();
+                var result = await list.LoadListDataAsStreamAsync(new RenderListDataOptions() { ViewXml = "<View><ViewFields><FieldRef Name='Title' /><FieldRef Name='User1' /></ViewFields><RowLimit>5</RowLimit></View>", RenderOptions = RenderListDataOptionsFlags.ListData });
+                firstListItem = list.Items.AsRequested().First();
+
+                Assert.IsTrue((firstListItem["User1"] as IFieldUserValue).LookupId == currentUser.Id);
+
+                firstListItem.Title = "updated title 3";
+
+                await firstListItem.UpdateAsync();
+
+                listItemToUpdate = await list.Items.GetByIdAsync(firstListItem.Id);
+                Assert.IsTrue((listItemToUpdate["User1"] as IFieldUserValue).LookupId == currentUser.Id);
+
+                await list.DeleteAsync();
+            }
+        }
 
         #endregion
 

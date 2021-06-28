@@ -61,6 +61,9 @@ namespace PnP.Core.Model.SharePoint
                 LookupId = -1;
             }
 
+            // Clear changes
+            Commit();
+
             return this;
         }
 
@@ -71,6 +74,10 @@ namespace PnP.Core.Model.SharePoint
                 if (string.IsNullOrEmpty(properties["id"]))
                 {
                     LookupId = -1;
+                    
+                    // Clear changes
+                    Commit();
+
                     return this;
                 }
 
@@ -96,6 +103,9 @@ namespace PnP.Core.Model.SharePoint
             {
                 Picture = properties["picture"];
             }
+
+            // Clear changes
+            Commit();
 
             return this;
         }
