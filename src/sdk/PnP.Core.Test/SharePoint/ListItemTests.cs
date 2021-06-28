@@ -344,6 +344,38 @@ namespace PnP.Core.Test.SharePoint
             }
         }
 
+        [TestMethod]
+        public async Task SetUserViaIdOnly()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var listTitle = TestCommon.GetPnPSdkTestAssetName("SetUserViaIdOnly");
+                var list = await context.Web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
+
+                IField myUserField = await list.Fields.AddUserAsync("User1", new FieldUserOptions()
+                {
+                    Group = "Custom Fields",
+                    AddToDefaultView = true,
+                    SelectionMode = FieldUserSelectionMode.PeopleAndGroups
+                });
+
+                // load the current user
+                var currentUser = await context.Web.GetCurrentUserAsync();
+
+                await Assert.ThrowsExceptionAsync<ClientException>(async () =>
+                {
+                    var addedListItem = await list.Items.AddAsync(new Dictionary<string, object>
+                    {
+                        { "Title", "My title 1" },
+                        { "User1", myUserField.NewFieldUserValue(currentUser.Id) }
+                    });
+                });
+
+                await list.DeleteAsync();
+            }
+        }
+
         #endregion
 
         #region Recycle tests

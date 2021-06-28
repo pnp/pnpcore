@@ -127,7 +127,6 @@ namespace PnP.Core.Model.SharePoint
             {
                 if (Principal == null)
                 {
-                    //throw new ClientException(ErrorType.Unsupported, PnPCoreResources.Exception_Unsupported_MissingSharePointPrincipal);
                     return JsonSerializer.Serialize(new List<object>());
                 }
 
@@ -139,7 +138,7 @@ namespace PnP.Core.Model.SharePoint
                 return JsonSerializer.Serialize(users.ToArray());
             }
 
-            return JsonSerializer.Serialize(new List<object>());
+            throw new ClientException(ErrorType.Unsupported, PnPCoreResources.Exception_Unsupported_MissingSharePointPrincipal);
         }
 
         internal override string ToCsomXml()

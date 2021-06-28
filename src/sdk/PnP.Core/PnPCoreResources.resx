@@ -349,7 +349,7 @@
     <value>The method '{0}' is not supported</value>
   </data>
   <data name="Exception_Unsupported_MissingSharePointPrincipal" xml:space="preserve">
-    <value>You need to provide the user via it's principal when adding a new item</value>
+    <value>You need to provide the user via it's principal when adding a list item or when updating it via one of the Update() methods. Updating using SystemUpdate() or SystemUpdateOverwriteVersion() do work with just the user id value</value>
   </data>
   <data name="Exception_Unsupported_NodeType" xml:space="preserve">
     <value>Node of type {0} of expression {1} is not supported</value>

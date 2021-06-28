@@ -754,7 +754,7 @@ namespace PnP.Core {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You need to provide the user via it&apos;s principal when adding a new item.
+        ///   Looks up a localized string similar to You need to provide the user via it&apos;s principal when adding a list item or when updating it via one of the Update() methods. Updating using SystemUpdate() or SystemUpdateOverwriteVersion() do work with just the user id value.
         /// </summary>
         internal static string Exception_Unsupported_MissingSharePointPrincipal {
             get {
