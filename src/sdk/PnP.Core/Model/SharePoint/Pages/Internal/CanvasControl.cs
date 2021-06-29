@@ -276,7 +276,7 @@ namespace PnP.Core.Model.SharePoint
 
             foreach (var control in section.Page.Controls.Where(c => c.Section == section && c.Column == column && c.Order >= position).OrderBy(p => p.Order))
             {
-                control.Order = control.Order + 1;
+                control.Order++;
             }
             Order = position;
 

@@ -471,7 +471,7 @@ namespace PnP.Core.Model.SharePoint
             // Set/update dataVersion if it was set in the json data
             if (wpJObject.TryGetProperty("dataVersion", out JsonElement dataVersionValue))
             {
-                this.dataVersion = dataVersionValue.GetString();
+                dataVersion = dataVersionValue.GetString();
             }
 
             // Check for fullbleed supporting web parts

@@ -1,7 +1,6 @@
 ﻿using PnP.Core.Services;
 using System;
 using System.Linq.Expressions;
-using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace PnP.Core.Model

@@ -270,8 +270,8 @@ namespace PnP.Core.Model.SharePoint
         {
             IHubSite hubSite = new HubSite()
             {
-                PnPContext = this.PnPContext,
-                Id = Id ?? this.HubSiteId
+                PnPContext = PnPContext,
+                Id = Id ?? HubSiteId
             };
 
             var hubResult = await hubSite.GetAsync().ConfigureAwait(false);

@@ -1,7 +1,6 @@
 ﻿using PnP.Core.Model;
 using System;
 using System.Collections.Generic;
-using System.Collections.Specialized;
 using System.Globalization;
 using System.Linq;
 using System.Linq.Expressions;
@@ -203,25 +202,17 @@ namespace PnP.Core.QueryModel
 
         private static string ConvertFilteringCriteria(FilteringCriteria criteria)
         {
-            switch (criteria)
+            return criteria switch
             {
-                case FilteringCriteria.Equal:
-                    return "eq";
-                case FilteringCriteria.NotEqual:
-                    return "ne";
-                case FilteringCriteria.GreaterThan:
-                    return "gt";
-                case FilteringCriteria.GreaterThanOrEqual:
-                    return "ge";
-                case FilteringCriteria.LessThan:
-                    return "lt";
-                case FilteringCriteria.LessThanOrEqual:
-                    return "le";
-                case FilteringCriteria.Not:
-                    return "not";
-                default:
-                    throw new NotSupportedException(string.Format(PnPCoreResources.Exception_Unsupported_Criteria, criteria));
-            }
+                FilteringCriteria.Equal => "eq",
+                FilteringCriteria.NotEqual => "ne",
+                FilteringCriteria.GreaterThan => "gt",
+                FilteringCriteria.GreaterThanOrEqual => "ge",
+                FilteringCriteria.LessThan => "lt",
+                FilteringCriteria.LessThanOrEqual => "le",
+                FilteringCriteria.Not => "not",
+                _ => throw new NotSupportedException(string.Format(PnPCoreResources.Exception_Unsupported_Criteria, criteria)),
+            };
         }
 
         /// <summary>

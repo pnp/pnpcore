@@ -44,7 +44,7 @@ namespace PnP.Core.QueryModel
         public async Task<BatchRequest> AddToBatchAsync(ODataQuery<TModel> query, Batch batch)
         {
             // We always refresh the EntityInfo object accordingly to the current query
-            EntityInfo = EntityManager.GetClassInfo<TModel>(typeof(TModel), null, this.Parent, query.Fields.ToArray());
+            EntityInfo = EntityManager.GetClassInfo<TModel>(typeof(TModel), null, Parent, query.Fields.ToArray());
 
             var batchParent = Parent;
 

@@ -683,7 +683,7 @@ namespace PnP.Core.Model.SharePoint
 
         public async Task<IListItem> AddListFolderAsync(string path, string parentFolder = null, string contentTypeId = "0x0120")
         {
-            return await this.Items.AddAsync(new Dictionary<string, object>
+            return await Items.AddAsync(new Dictionary<string, object>
             {
                 {
                     "Title",path

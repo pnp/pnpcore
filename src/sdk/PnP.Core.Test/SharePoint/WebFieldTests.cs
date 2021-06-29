@@ -4,7 +4,6 @@ using PnP.Core.Test.Utilities;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
-using PnP.Core.QueryModel;
 
 namespace PnP.Core.Test.SharePoint
 {

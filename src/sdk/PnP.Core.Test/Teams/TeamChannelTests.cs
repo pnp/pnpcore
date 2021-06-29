@@ -1,11 +1,11 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using PnP.Core.Model;
 using PnP.Core.Model.Teams;
+using PnP.Core.QueryModel;
 using PnP.Core.Test.Utilities;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
-using PnP.Core.Model;
-using PnP.Core.QueryModel;
 
 namespace PnP.Core.Test.Teams
 {

@@ -100,18 +100,18 @@ namespace PnP.Core.Services
             AuthenticationProvider = authenticationProvider;
             RestClient = sharePointRestClient;
             GraphClient = microsoftGraphClient;
-            this.GlobalOptions = globalOptions;
-            this.ContextOptions = contextOptions;
+            GlobalOptions = globalOptions;
+            ContextOptions = contextOptions;
             telemetry = telemetryManager;
 
-            if (this.ContextOptions != null)
+            if (ContextOptions != null)
             {
-                GraphFirst = this.ContextOptions.GraphFirst;
-                GraphAlwaysUseBeta = this.ContextOptions.GraphAlwaysUseBeta;
-                GraphCanUseBeta = this.ContextOptions.GraphCanUseBeta;
+                GraphFirst = ContextOptions.GraphFirst;
+                GraphAlwaysUseBeta = ContextOptions.GraphAlwaysUseBeta;
+                GraphCanUseBeta = ContextOptions.GraphCanUseBeta;
             }
 
-            BatchClient = new BatchClient(this, this.GlobalOptions, telemetryManager);
+            BatchClient = new BatchClient(this, GlobalOptions, telemetryManager);
         }
         #endregion
 

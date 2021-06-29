@@ -119,13 +119,13 @@ namespace PnP.Core.Model
             IDataModelParent replicatedParent = null;
 
             // Create a replicated parent
-            if (this.Parent != null)
+            if (Parent != null)
             {
                 // Replicate the parent object in order to keep original collection as is
-                replicatedParent = EntityManager.ReplicateParentHierarchy(this.Parent, this.PnPContext);
+                replicatedParent = EntityManager.ReplicateParentHierarchy(Parent, PnPContext);
             }
             // Create a new object with a replicated parent
-            var newDataModel = (BaseDataModel<TModel>)EntityManager.GetEntityConcreteInstance(this.GetType(), replicatedParent, this.PnPContext);
+            var newDataModel = (BaseDataModel<TModel>)EntityManager.GetEntityConcreteInstance(GetType(), replicatedParent, PnPContext);
 
             // Replicate metadata and key between the objects
             EntityManager.ReplicateKeyAndMetadata(this, newDataModel);
@@ -161,13 +161,13 @@ namespace PnP.Core.Model
             IDataModelParent replicatedParent = null;
 
             // Create a replicated parent
-            if (this.Parent != null)
+            if (Parent != null)
             {
                 // Replicate the parent object in order to keep original collection as is
-                replicatedParent = EntityManager.ReplicateParentHierarchy(this.Parent, this.PnPContext);
+                replicatedParent = EntityManager.ReplicateParentHierarchy(Parent, PnPContext);
             }
             // Create a new object with a replicated parent
-            var newDataModel = (BaseDataModel<TModel>)EntityManager.GetEntityConcreteInstance(this.GetType(), replicatedParent, this.PnPContext);
+            var newDataModel = (BaseDataModel<TModel>)EntityManager.GetEntityConcreteInstance(GetType(), replicatedParent, PnPContext);
 
             // Replicate metadata and key between the objects
             EntityManager.ReplicateKeyAndMetadata(this, newDataModel);
