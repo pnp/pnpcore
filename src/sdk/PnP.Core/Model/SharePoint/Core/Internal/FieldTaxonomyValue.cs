@@ -24,27 +24,39 @@ namespace PnP.Core.Model.SharePoint
 
         internal override IFieldValue FromJson(JsonElement json)
         {
-            if (json.TryGetProperty("TermGuid", out JsonElement termGuid))
+            if (json.ValueKind == JsonValueKind.Object)
             {
-                TermId = termGuid.GetGuid();
-            }
+                if (json.TryGetProperty("TermGuid", out JsonElement termGuid))
+                {
+                    if (termGuid.ValueKind != JsonValueKind.Null)
+                    {
+                        TermId = termGuid.GetGuid();
+                    }
+                }
 
 #pragma warning disable CA1507 // Use nameof to express symbol names
-            if (json.TryGetProperty("Label", out JsonElement label))
+                if (json.TryGetProperty("Label", out JsonElement label))
 #pragma warning restore CA1507 // Use nameof to express symbol names
-            {
-                Label = label.GetString();
-            }
+                {
+                    if (label.ValueKind != JsonValueKind.Null)
+                    {
+                        Label = label.GetString();
+                    }
+                }
 
 #pragma warning disable CA1507 // Use nameof to express symbol names
-            if (json.TryGetProperty("WssId", out JsonElement wssId))
+                if (json.TryGetProperty("WssId", out JsonElement wssId))
 #pragma warning restore CA1507 // Use nameof to express symbol names
-            {
-                WssId = wssId.GetInt32();
-            }
+                {
+                    if (wssId.ValueKind != JsonValueKind.Null)
+                    {
+                        WssId = wssId.GetInt32();
+                    }
+                }
 
-            // Clear changes
-            Commit();
+                // Clear changes
+                Commit();
+            }
 
             return this;
         }
