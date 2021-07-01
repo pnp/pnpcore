@@ -89,6 +89,86 @@ using (var context = await pnpContextFactory.CreateAsync("SiteToWorkWith"))
 }
 ```
 
+## Loading data in batch
+
+While above example showed how to add items in a batch it's also possible to batch queries that load data. When you want to load data into the context you can use the `LoadBatch` or `LoadBatchAsync` methods, loading data into a variable can be done using the respective `GetBatchAsync` and `GetBatch` methods.
+
+```csharp
+// Create a single batch that loads SharePoint Site and Web data + Teams Members. As this involves REST and Graph the net
+// result will two batch requests going to Microsoft 365. One SharePoint batch request for the web + site data, one Microsoft
+// Graph batch request for the Teams data
+var batch = context.BatchClient.EnsureBatch();
+await context.Web.LoadBatchAsync(batch, p => p.Lists, p => p.Features);
+await context.Site.LoadBatchAsync(batch, p => p.Features, p => p.IsHubSite);
+await context.Team.LoadBatchAsync(batch, p => p.Members);
+await context.ExecuteAsync(batch);
+
+// Pick a list from the in batch loaded lists
+var myList = context.Web.Lists.AsRequested().FirstOrDefault(l => l.Title == "Site Pages");
+
+// Iterate over the in batch loaded Teams members
+foreach(var member in context.Team.Members.AsRequested())
+{
+    // do something with the members
+}
+```
+
+While the above approach loads data via a batch request it does load all data in a collection, all lists, features and members were loaded. What if you would want to perform a filtered batch load? For that you can use the `AsBatchAsync` and `AsBatch` methods. When you batch load data into a variable you can use the `IsAvailable` property of the variable to check if the batch was executed before consuming the data. In case of a collection the returned variable (e.g. `siteAssets` in below sample) simply allows you to query the results.
+
+```csharp
+// Do a two list gets with filter and custom properties specifying the data to load
+var siteAssets = await context.Web.Lists.QueryProperties(
+        p => p.Title, p => p.TemplateType,
+        p => p.ContentTypes.QueryProperties(
+            p => p.Name, 
+            p => p.FieldLinks.QueryProperties(p => p.Name)))
+    .Where(p => p.Title == "Site Assets")
+    .AsBatchAsync();
+
+var sitePages = await context.Web.Lists.QueryProperties(
+        p => p.Title, p => p.TemplateType,
+        p => p.ContentTypes.QueryProperties(
+            p => p.Name, 
+            p => p.FieldLinks.QueryProperties(p => p.Name)))
+    .Where(p => p.Title == "Site Pages")
+    .AsBatchAsync();
+
+// Batch results are not available right now
+Assert.IsFalse(siteAssets.IsAvailable);
+Assert.IsFalse(sitePages.IsAvailable);
+
+// Execute the batch
+await context.ExecuteAsync();
+
+// Batch results are now available
+Assert.IsTrue(siteAssets.IsAvailable);
+Assert.IsTrue(sitePages.IsAvailable);
+
+// Get the loaded data to use it
+var siteAssetsList = siteAssets.AsEnumerable().First();
+var sitePagesList = sitePages.AsEnumerable().First();
+```
+
+In case of a collection the returned variable (e.g. `siteAssets` in above sample) simply allows you to query the results. When you're returning a simple type or a single model (e.g. `web` and `site` in below sample) you can access the batch loaded data via the `Result` property. Checking whether the batch was executed still happens via the `IsAvailable` property.
+
+```csharp
+var batch = context.BatchClient.EnsureBatch();
+var web = await context.Web.GetBatchAsync(batch, p => p.Lists, p => p.Features);
+var site = await context.Site.GetBatchAsync(batch, p => p.Features, p => p.IsHubSite);
+
+// Batch results are not available right now
+Assert.IsFalse(web.IsAvailable);
+
+// Execute the batch
+await context.ExecuteAsync(batch);
+
+// Batch results are now available
+Assert.IsTrue(web.IsAvailable);
+
+// Pick a list from the in batch loaded lists
+var myList = web.Result.Lists.AsRequested().FirstOrDefault(l => l.Title == "Site Pages");
+```
+
 ## Batch limits
 
 PnP Core SDK is not imposing limits on the number of requests you can add to a single batch before executing the batch, but internally the SDK uses the official limits being maximum 20 requests for a Graph batch and 100 requests for a SharePoint REST batch. What that means is that you for example can add 1000 items into a single batch and execute that batch, during execution that batch will then be split into 10 batches of 100 items and each of these 10 batches will be executed sequentially resulting in 10 network calls to the respective batch endpoint.
