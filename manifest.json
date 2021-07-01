@@ -5047,7 +5047,7 @@
       "output": {
         ".html": {
           "relative_path": "using-the-sdk/basics-batching.html",
-          "hash": "ncqEkRglUaS4zfltY2J2zQ=="
+          "hash": "eeIuzAFWawXWmBEPg+Zakg=="
         }
       },
       "is_incremental": false,
@@ -5059,7 +5059,7 @@
       "output": {
         ".html": {
           "relative_path": "using-the-sdk/basics-context.html",
-          "hash": "0jn81f/ru83n+JP2bvggCg=="
+          "hash": "whAZkwrIAxRFVkXEVs9RFQ=="
         }
       },
       "is_incremental": false,
@@ -5095,7 +5095,7 @@
       "output": {
         ".html": {
           "relative_path": "using-the-sdk/basics-getdata-paging.html",
-          "hash": "8a1jrd7Q2in3lVBXxeH5Qg=="
+          "hash": "CaLnd2wUaha0kRG9AaKVMw=="
         }
       },
       "is_incremental": false,
@@ -5107,7 +5107,7 @@
       "output": {
         ".html": {
           "relative_path": "using-the-sdk/basics-getdata.html",
-          "hash": "lOhFSVamZ5cYaBU3xn5coQ=="
+          "hash": "DtCdY/d9bqKu0SSHsSpukg=="
         }
       },
       "is_incremental": false,
