@@ -31,9 +31,9 @@ await page.SaveAsync("PageA.aspx");
 await page.PublishAsync();
 ```
 
-## Scheduling the publishing a page
+## Scheduling the publishing of a page
 
-After a page has been created you can immediately publish the page as described above, but you can also opt to schedule the page publication for a certain date. To do so you need to use one of the `SchedulePublish` methods. This method will verify the pages library does have scheduled publishing turned on via calling the `EnsurePageScheduling` method on the connected `IWeb`. To verify if a page has a pending publication scheduled you can verify the `ScheduledPublishDate` property. This property is a nullable property, if there was no publication scheduled this property will not contain a value. If you want to remove the scheduled publication of a page you need to use one of the `RemoveSchedulePublish` methods.
+After a page has been created you can immediately publish the page as described above, but you can also choose to schedule the page publication for a certain date. To do so, you need to use one of the `SchedulePublish` methods. These methods will verify if the pages library does have scheduled publishing turned on via calling the `EnsurePageScheduling` method on the connected `IWeb`. To verify if a page has a pending publication scheduled you can use the `ScheduledPublishDate` property. This property is a nullable property, if there was no publication scheduled this property will not contain a value. If you want to remove the scheduled publication of a page you need to use one of the `RemoveSchedulePublish` methods.
 
 ```csharp
 // Create the page
