@@ -2152,7 +2152,7 @@ namespace PnP.Core.Model.SharePoint
             // Set promoted state
             PageListItem[PageConstants.PromotedStateField] = (int)PromotedState.Promoted;
             // Set publication date
-            PageListItem[PageConstants.FirstPublishedDate] = DateTime.UtcNow;
+            PageListItem[PageConstants.FirstPublishedDate] = DateTime.Now;
             // Don't use UpdateOverWriteVersion here as the page can already be checked in, doing so will give an 
             // "Additions to this Web site have been blocked" error
             await PageListItem.SystemUpdateAsync().ConfigureAwait(false);
