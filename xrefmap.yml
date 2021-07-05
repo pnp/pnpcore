@@ -19410,6 +19410,32 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IPage.RemovePageHeader
   nameWithType: IPage.RemovePageHeader
+- uid: PnP.Core.Model.SharePoint.IPage.RemoveSchedulePublish
+  name: RemoveSchedulePublish()
+  href: api/PnP.Core.Model.SharePoint.IPage.html#PnP_Core_Model_SharePoint_IPage_RemoveSchedulePublish
+  commentId: M:PnP.Core.Model.SharePoint.IPage.RemoveSchedulePublish
+  fullName: PnP.Core.Model.SharePoint.IPage.RemoveSchedulePublish()
+  nameWithType: IPage.RemoveSchedulePublish()
+- uid: PnP.Core.Model.SharePoint.IPage.RemoveSchedulePublish*
+  name: RemoveSchedulePublish
+  href: api/PnP.Core.Model.SharePoint.IPage.html#PnP_Core_Model_SharePoint_IPage_RemoveSchedulePublish_
+  commentId: Overload:PnP.Core.Model.SharePoint.IPage.RemoveSchedulePublish
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IPage.RemoveSchedulePublish
+  nameWithType: IPage.RemoveSchedulePublish
+- uid: PnP.Core.Model.SharePoint.IPage.RemoveSchedulePublishAsync
+  name: RemoveSchedulePublishAsync()
+  href: api/PnP.Core.Model.SharePoint.IPage.html#PnP_Core_Model_SharePoint_IPage_RemoveSchedulePublishAsync
+  commentId: M:PnP.Core.Model.SharePoint.IPage.RemoveSchedulePublishAsync
+  fullName: PnP.Core.Model.SharePoint.IPage.RemoveSchedulePublishAsync()
+  nameWithType: IPage.RemoveSchedulePublishAsync()
+- uid: PnP.Core.Model.SharePoint.IPage.RemoveSchedulePublishAsync*
+  name: RemoveSchedulePublishAsync
+  href: api/PnP.Core.Model.SharePoint.IPage.html#PnP_Core_Model_SharePoint_IPage_RemoveSchedulePublishAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.IPage.RemoveSchedulePublishAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IPage.RemoveSchedulePublishAsync
+  nameWithType: IPage.RemoveSchedulePublishAsync
 - uid: PnP.Core.Model.SharePoint.IPage.RepostDescription
   name: RepostDescription
   href: api/PnP.Core.Model.SharePoint.IPage.html#PnP_Core_Model_SharePoint_IPage_RepostDescription
@@ -19540,6 +19566,45 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IPage.SaveAsync
   nameWithType: IPage.SaveAsync
+- uid: PnP.Core.Model.SharePoint.IPage.ScheduledPublishDate
+  name: ScheduledPublishDate
+  href: api/PnP.Core.Model.SharePoint.IPage.html#PnP_Core_Model_SharePoint_IPage_ScheduledPublishDate
+  commentId: P:PnP.Core.Model.SharePoint.IPage.ScheduledPublishDate
+  fullName: PnP.Core.Model.SharePoint.IPage.ScheduledPublishDate
+  nameWithType: IPage.ScheduledPublishDate
+- uid: PnP.Core.Model.SharePoint.IPage.ScheduledPublishDate*
+  name: ScheduledPublishDate
+  href: api/PnP.Core.Model.SharePoint.IPage.html#PnP_Core_Model_SharePoint_IPage_ScheduledPublishDate_
+  commentId: Overload:PnP.Core.Model.SharePoint.IPage.ScheduledPublishDate
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IPage.ScheduledPublishDate
+  nameWithType: IPage.ScheduledPublishDate
+- uid: PnP.Core.Model.SharePoint.IPage.SchedulePublish(DateTime)
+  name: SchedulePublish(DateTime)
+  href: api/PnP.Core.Model.SharePoint.IPage.html#PnP_Core_Model_SharePoint_IPage_SchedulePublish_DateTime_
+  commentId: M:PnP.Core.Model.SharePoint.IPage.SchedulePublish(DateTime)
+  fullName: PnP.Core.Model.SharePoint.IPage.SchedulePublish(DateTime)
+  nameWithType: IPage.SchedulePublish(DateTime)
+- uid: PnP.Core.Model.SharePoint.IPage.SchedulePublish*
+  name: SchedulePublish
+  href: api/PnP.Core.Model.SharePoint.IPage.html#PnP_Core_Model_SharePoint_IPage_SchedulePublish_
+  commentId: Overload:PnP.Core.Model.SharePoint.IPage.SchedulePublish
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IPage.SchedulePublish
+  nameWithType: IPage.SchedulePublish
+- uid: PnP.Core.Model.SharePoint.IPage.SchedulePublishAsync(DateTime)
+  name: SchedulePublishAsync(DateTime)
+  href: api/PnP.Core.Model.SharePoint.IPage.html#PnP_Core_Model_SharePoint_IPage_SchedulePublishAsync_DateTime_
+  commentId: M:PnP.Core.Model.SharePoint.IPage.SchedulePublishAsync(DateTime)
+  fullName: PnP.Core.Model.SharePoint.IPage.SchedulePublishAsync(DateTime)
+  nameWithType: IPage.SchedulePublishAsync(DateTime)
+- uid: PnP.Core.Model.SharePoint.IPage.SchedulePublishAsync*
+  name: SchedulePublishAsync
+  href: api/PnP.Core.Model.SharePoint.IPage.html#PnP_Core_Model_SharePoint_IPage_SchedulePublishAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.IPage.SchedulePublishAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IPage.SchedulePublishAsync
+  nameWithType: IPage.SchedulePublishAsync
 - uid: PnP.Core.Model.SharePoint.IPage.Sections
   name: Sections
   href: api/PnP.Core.Model.SharePoint.IPage.html#PnP_Core_Model_SharePoint_IPage_Sections
@@ -25676,6 +25741,32 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IWeb.EnsureMultilingualAsync
   nameWithType: IWeb.EnsureMultilingualAsync
+- uid: PnP.Core.Model.SharePoint.IWeb.EnsurePageScheduling
+  name: EnsurePageScheduling()
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_EnsurePageScheduling
+  commentId: M:PnP.Core.Model.SharePoint.IWeb.EnsurePageScheduling
+  fullName: PnP.Core.Model.SharePoint.IWeb.EnsurePageScheduling()
+  nameWithType: IWeb.EnsurePageScheduling()
+- uid: PnP.Core.Model.SharePoint.IWeb.EnsurePageScheduling*
+  name: EnsurePageScheduling
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_EnsurePageScheduling_
+  commentId: Overload:PnP.Core.Model.SharePoint.IWeb.EnsurePageScheduling
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IWeb.EnsurePageScheduling
+  nameWithType: IWeb.EnsurePageScheduling
+- uid: PnP.Core.Model.SharePoint.IWeb.EnsurePageSchedulingAsync
+  name: EnsurePageSchedulingAsync()
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_EnsurePageSchedulingAsync
+  commentId: M:PnP.Core.Model.SharePoint.IWeb.EnsurePageSchedulingAsync
+  fullName: PnP.Core.Model.SharePoint.IWeb.EnsurePageSchedulingAsync()
+  nameWithType: IWeb.EnsurePageSchedulingAsync()
+- uid: PnP.Core.Model.SharePoint.IWeb.EnsurePageSchedulingAsync*
+  name: EnsurePageSchedulingAsync
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_EnsurePageSchedulingAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.IWeb.EnsurePageSchedulingAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IWeb.EnsurePageSchedulingAsync
+  nameWithType: IWeb.EnsurePageSchedulingAsync
 - uid: PnP.Core.Model.SharePoint.IWeb.EnsureUser(System.String)
   name: EnsureUser(String)
   href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_EnsureUser_System_String_
@@ -26374,6 +26465,32 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IWeb.IsRevertHomepageLinkHidden
   nameWithType: IWeb.IsRevertHomepageLinkHidden
+- uid: PnP.Core.Model.SharePoint.IWeb.IsSubSite
+  name: IsSubSite()
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_IsSubSite
+  commentId: M:PnP.Core.Model.SharePoint.IWeb.IsSubSite
+  fullName: PnP.Core.Model.SharePoint.IWeb.IsSubSite()
+  nameWithType: IWeb.IsSubSite()
+- uid: PnP.Core.Model.SharePoint.IWeb.IsSubSite*
+  name: IsSubSite
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_IsSubSite_
+  commentId: Overload:PnP.Core.Model.SharePoint.IWeb.IsSubSite
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IWeb.IsSubSite
+  nameWithType: IWeb.IsSubSite
+- uid: PnP.Core.Model.SharePoint.IWeb.IsSubSiteAsync
+  name: IsSubSiteAsync()
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_IsSubSiteAsync
+  commentId: M:PnP.Core.Model.SharePoint.IWeb.IsSubSiteAsync
+  fullName: PnP.Core.Model.SharePoint.IWeb.IsSubSiteAsync()
+  nameWithType: IWeb.IsSubSiteAsync()
+- uid: PnP.Core.Model.SharePoint.IWeb.IsSubSiteAsync*
+  name: IsSubSiteAsync
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_IsSubSiteAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.IWeb.IsSubSiteAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IWeb.IsSubSiteAsync
+  nameWithType: IWeb.IsSubSiteAsync
 - uid: PnP.Core.Model.SharePoint.IWeb.IsSyntexContentCenter
   name: IsSyntexContentCenter()
   href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_IsSyntexContentCenter
