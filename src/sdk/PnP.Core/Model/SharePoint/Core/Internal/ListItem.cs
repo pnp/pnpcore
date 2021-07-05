@@ -69,7 +69,8 @@ namespace PnP.Core.Model.SharePoint
                                     AddMetadata(PnPConstants.MetaDataRestId, $"{id}");
                                     MetadataSetup();
 
-                                    // Ensure the values are committed to the model when an item is being added
+                                    // Ensure the values are committed to the model when an item is being added: this
+                                    // will ensure there's no pending changes anymore
                                     Values.Commit();
 
                                     // We're currently only interested in the Id property

@@ -354,6 +354,9 @@
   <data name="Exception_Unsupported_NodeType" xml:space="preserve">
     <value>Node of type {0} of expression {1} is not supported</value>
   </data>
+  <data name="Exception_Unsupported_PagePublishingOnSubWeb" xml:space="preserve">
+    <value>Page publish scheduling only works on the pages library in the root web of a site collection</value>
+  </data>
   <data name="Exception_Unsupported_Projection" xml:space="preserve">
     <value>The projection is not supported</value>
   </data>

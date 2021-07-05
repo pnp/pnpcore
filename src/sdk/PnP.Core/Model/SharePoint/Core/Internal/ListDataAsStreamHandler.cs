@@ -219,6 +219,10 @@ namespace PnP.Core.Model.SharePoint
                             (ct as IMetadataExtensible).Metadata.Add(PnPConstants.MetaDataType, "SP.ContentType");
                             (ct as ContentType).Requested = true;                            
                         }
+
+                        // Ensure the values are committed to the model when an item is being added: this
+                        // will ensure there's no pending changes anymore
+                        itemToUpdate.Values.Commit();
                     }
                 }
             }

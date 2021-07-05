@@ -1,4 +1,4 @@
---batchresponse_fa6698e5-bb60-4e09-bac0-9ab78b77f87e
+--batchresponse_b45857ab-0064-46e3-9510-1f55df2b4972
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
@@ -66,6 +66,9 @@ CONTENT-TYPE: application/json; charset=utf-8
 "_StubFile": "0",
 "_ComplianceTag": "",
 "owshiddenversion": "2",
+"_PublishStartDate": "",
+"_PublishStartDate.": "",
+"_ScheduledVersion": "",
 "_SPTranslatedLanguages": "",
 "_SPSitePageFlags": "",
 "ContentVersion": "2",
@@ -84,4 +87,4 @@ CONTENT-TYPE: application/json; charset=utf-8
 ,"CurrentFolderSpItemUrl" : ""
 
 }
---batchresponse_fa6698e5-bb60-4e09-bac0-9ab78b77f87e--
+--batchresponse_b45857ab-0064-46e3-9510-1f55df2b4972--

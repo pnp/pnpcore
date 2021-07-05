@@ -772,6 +772,15 @@ namespace PnP.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Page publish scheduling only works on the pages library in the root web of a site collection.
+        /// </summary>
+        internal static string Exception_Unsupported_PagePublishingOnSubWeb {
+            get {
+                return ResourceManager.GetString("Exception_Unsupported_PagePublishingOnSubWeb", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The projection is not supported.
         /// </summary>
         internal static string Exception_Unsupported_Projection {

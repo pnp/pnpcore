@@ -1,6 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PnP.Core.Model.SharePoint;
 using PnP.Core.QueryModel;
+using PnP.Core.Services;
 using PnP.Core.Test.Utilities;
 using System;
 using System.Collections.Generic;
@@ -2435,6 +2436,98 @@ namespace PnP.Core.Test.SharePoint
                 await newPage.DeleteAsync();
             }
         }
+        #endregion
+
+        #region Page scheduling
+
+        [TestMethod]
+        public async Task SchedulePagePublish()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.NoGroupTestSite))
+            {
+                var newPage = await context.Web.NewPageAsync();
+                string pageName = TestCommon.GetPnPSdkTestAssetName("SchedulePagePublish.aspx");
+
+                // Save the page
+                await newPage.SaveAsync(pageName);
+
+                // Schedule the page publishing
+                DateTime scheduleDate = DateTime.MinValue;
+                if (!TestCommon.Instance.Mocking)
+                {
+                    scheduleDate = DateTime.Now + new TimeSpan(0, 5, 0);
+                    Dictionary<string, string> properties = new Dictionary<string, string>
+                        {
+                            { "Ticks", scheduleDate.Ticks.ToString() },
+                        };
+                    TestManager.SaveProperties(context, properties);
+                }
+                else
+                {
+                    var properties = TestManager.GetProperties(context);
+                    scheduleDate = new DateTime(long.Parse(properties["Ticks"]));
+                }
+                
+                newPage.SchedulePublish(scheduleDate);
+
+                // Verify the scheduled publishing date
+                Assert.AreEqual(scheduleDate.Day, newPage.ScheduledPublishDate.Value.Day);
+                Assert.AreEqual(scheduleDate.Hour, newPage.ScheduledPublishDate.Value.Hour);
+                Assert.AreEqual(scheduleDate.Minute, newPage.ScheduledPublishDate.Value.Minute);
+
+                // Load the page again
+                var pages = await context.Web.GetPagesAsync(pageName);
+                var createdPage = pages.First();
+
+                // Verify the scheduled publishing date
+                Assert.AreEqual(scheduleDate.Day, createdPage.ScheduledPublishDate.Value.Day);
+                Assert.AreEqual(scheduleDate.Hour, createdPage.ScheduledPublishDate.Value.Hour);
+                Assert.AreEqual(scheduleDate.Minute, createdPage.ScheduledPublishDate.Value.Minute);
+
+                // Clear the scheduled publishing
+                createdPage.RemoveSchedulePublish();
+
+                Assert.IsFalse(createdPage.ScheduledPublishDate.HasValue);
+
+                // reload the page again
+                pages = await context.Web.GetPagesAsync(pageName);
+                createdPage = pages.First();
+
+                Assert.IsFalse(createdPage.ScheduledPublishDate.HasValue);
+
+                // Delete the page
+                await newPage.DeleteAsync();
+            }
+        }
+
+        [TestMethod]
+        public async Task VerifyScheduledPublishDateOnSubSite()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSubSite))
+            {
+                var newPage = await context.Web.NewPageAsync();
+                string pageName = TestCommon.GetPnPSdkTestAssetName("VerifyScheduledPublishDateOnSubSite.aspx");
+
+                // Save the page
+                await newPage.SaveAsync(pageName);
+
+                Assert.IsFalse(newPage.ScheduledPublishDate.HasValue);
+
+                // Load the page again
+                var pages = await context.Web.GetPagesAsync(pageName);
+                var createdPage = pages.First();
+
+                Assert.IsFalse(createdPage.ScheduledPublishDate.HasValue);
+
+                // Delete the page
+                await newPage.DeleteAsync();
+            }
+        }
+
         #endregion
 
         #region Other page types: Repost page

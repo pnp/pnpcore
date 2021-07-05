@@ -907,6 +907,38 @@ namespace PnP.Core.Model.SharePoint
 
         #endregion
 
+        #region Is sub site
+
+        /// <summary>
+        /// Checks if this web is a sub site
+        /// </summary>
+        /// <returns>True if the web is a sub site</returns>
+        Task<bool> IsSubSiteAsync();
+
+        /// <summary>
+        /// Checks if this web is a sub site
+        /// </summary>
+        /// <returns>True if the web is a sub site</returns>
+        bool IsSubSite();
+
+        #endregion
+
+        #region Ensure page scheduling
+
+        /// <summary>
+        /// Ensures that page publishing can work for this site. Page scheduling only works for the root web of a site collection
+        /// </summary>
+        /// <returns></returns>
+        Task EnsurePageSchedulingAsync();
+
+        /// <summary>
+        /// Ensures that page publishing can work for this site. Page scheduling only works for the root web of a site collection
+        /// </summary>
+        /// <returns></returns>
+        void EnsurePageScheduling();
+
+        #endregion
+
         #endregion
 
         #region TO IMPLEMENT

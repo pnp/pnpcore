@@ -127,6 +127,11 @@ namespace PnP.Core.Model.SharePoint
         public string Name { get; }
 
         /// <summary>
+        /// Returns the scheduled publish data of a page (only if publish was scheduled)
+        /// </summary>
+        public DateTime? ScheduledPublishDate { get; }
+
+        /// <summary>
         /// Adds a new section to your client side page
         /// </summary>
         /// <param name="sectionTemplate">The <see cref="CanvasSectionTemplate"/> type of the section</param>
@@ -319,6 +324,28 @@ namespace PnP.Core.Model.SharePoint
         /// </summary>
         /// <param name="comment">Publishing comment</param>
         public Task PublishAsync(string comment = null);
+
+        /// <summary>
+        /// Schedules the publication of a client side page
+        /// </summary>
+        /// <param name="publishDate">Date when the page needs to be publishing</param>
+        public Task SchedulePublishAsync(DateTime publishDate);
+
+        /// <summary>
+        /// Schedules the publication of a client side page
+        /// </summary>
+        /// <param name="publishDate">Date when the page needs to be publishing</param>
+        public void SchedulePublish(DateTime publishDate);
+
+        /// <summary>
+        /// Removes the publication schedule of a client side page
+        /// </summary>
+        public Task RemoveSchedulePublishAsync();
+
+        /// <summary>
+        /// Removes the publication schedule of a client side page
+        /// </summary>
+        public void RemoveSchedulePublish();
 
         /// <summary>
         /// Demotes an client side <see cref="PageLayoutType.Article"/> news page as a regular client side page

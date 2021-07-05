@@ -10,6 +10,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
 ### Added
 
+- Page scheduling support: enable a pages library for page publish scheduling and schedule the publishing of a page [jansenbe - Bert Jansen]
+- IsSubSite methods on IWeb [jansenbe - Bert Jansen]
 - Support for converting the site's datetime to UTC and vice versa [jansenbe - Bert Jansen]
 - Using @mentioning in page/listitem comments and replies [jansenbe - Bert Jansen]
 - Support for downloading versions of a file #483 [DaleyKD - Kyle Daley]

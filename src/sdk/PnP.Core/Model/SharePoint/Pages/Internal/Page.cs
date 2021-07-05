@@ -171,6 +171,21 @@ namespace PnP.Core.Model.SharePoint
             }
         }
 
+        public DateTime? ScheduledPublishDate 
+        { 
+            get
+            {
+                if (PageListItem != null && PageListItem.Values.ContainsKey(PageConstants._PublishStartDate) && PageListItem[PageConstants._PublishStartDate] != null)
+                {
+                    string publishDateString = PageListItem[PageConstants._PublishStartDate].ToString();
+
+                    return Convert.ToDateTime(publishDateString);
+                }
+
+                return null;
+            }
+        }
+
         /// <summary>
         /// Returns the page header for this page
         /// </summary>
@@ -335,6 +350,7 @@ namespace PnP.Core.Model.SharePoint
                     <FieldRef Name='{PageConstants._OriginalSourceWebId}' />
                     <FieldRef Name='{PageConstants._OriginalSourceListId}' />
                     <FieldRef Name='{PageConstants._OriginalSourceItemId}' />
+                    {{3}}
                   </ViewFields>
                   <RowLimit Paged='TRUE'>500</RowLimit>
                   <Query>
@@ -349,6 +365,12 @@ namespace PnP.Core.Model.SharePoint
                     </Where>
                   </Query>
                 </View>";
+
+            string extraPropertiesToLoad = $"";
+            if (pagesLibrary.Fields.AsRequested().FirstOrDefault(p=>p.InternalName == PageConstants._PublishStartDate) != null)
+            {
+                extraPropertiesToLoad = "<FieldRef Name='{PageConstants._PublishStartDate}' />";
+            }
 
             if (!string.IsNullOrEmpty(pageNameWithoutFolder))
             {
@@ -378,11 +400,11 @@ namespace PnP.Core.Model.SharePoint
                           <Value Type='text'><![CDATA[{pageNameWithoutFolder}]]></Value>
                         </BeginsWith>";
                 }
-                pageQuery = string.Format(pageQuery, pageNameFilter, "<And>", "</And>");
+                pageQuery = string.Format(pageQuery, pageNameFilter, "<And>", "</And>", extraPropertiesToLoad);
             }
             else
             {
-                pageQuery = string.Format(pageQuery, "", "", "");
+                pageQuery = string.Format(pageQuery, "", "", "", extraPropertiesToLoad);
             }
 
             // Remove unneeded cariage returns
@@ -2157,6 +2179,58 @@ namespace PnP.Core.Model.SharePoint
             PnPContext.Web.RootFolder.WelcomePage = $"sitepages/{PageListItem[PageConstants.FileLeafRef]}";
             await PnPContext.Web.RootFolder.UpdateAsync().ConfigureAwait(false);
         }
+        #endregion
+
+        #region Page scheduling
+
+        public async Task SchedulePublishAsync(DateTime publishDate)
+        {
+            // Ensure this pages library can handle scheduled publishing
+            await PnPContext.Web.EnsurePageSchedulingAsync().ConfigureAwait(false);
+
+            // ensure we do have the page list item loaded
+            if (PageListItem == null)
+            {
+                await EnsurePageListItemAsync(pageName).ConfigureAwait(false);
+            }
+
+            // Set the scheduled publish date
+            PageListItem[PageConstants._PublishStartDate] = publishDate;
+
+            // Don't use UpdateOverWriteVersion here as the page can already be checked in, doing so will give an 
+            // "Additions to this Web site have been blocked" error
+            await PageListItem.SystemUpdateAsync().ConfigureAwait(false);
+
+            // Activate the scheduled publishing
+            await (PnPContext.Web as Web).RawRequestAsync(new ApiCall($"_api/sitepages/pages({PageListItem.Id})/schedulepublish", ApiType.SPORest, "{}"), HttpMethod.Post).ConfigureAwait(false);
+        }
+
+        public void SchedulePublish(DateTime publishDate)
+        {
+            SchedulePublishAsync(publishDate).GetAwaiter().GetResult();
+        }
+
+        public async Task RemoveSchedulePublishAsync()
+        {
+            // ensure we do have the page list item loaded
+            if (PageListItem == null)
+            {
+                await EnsurePageListItemAsync(pageName).ConfigureAwait(false);
+            }
+
+            // Set the scheduled publish date
+            PageListItem[PageConstants._PublishStartDate] = null;
+
+            // Don't use UpdateOverWriteVersion here as the page can already be checked in, doing so will give an 
+            // "Additions to this Web site have been blocked" error
+            await PageListItem.SystemUpdateAsync().ConfigureAwait(false);
+        }
+        
+        public void RemoveSchedulePublish()
+        {
+            RemoveSchedulePublishAsync().GetAwaiter().GetResult();
+        }
+
         #endregion
 
         #region Page commenting and liking

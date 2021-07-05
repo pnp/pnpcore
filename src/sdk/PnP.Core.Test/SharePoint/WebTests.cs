@@ -1279,6 +1279,65 @@ namespace PnP.Core.Test.SharePoint
             }
         }
 
+        [TestMethod]
+        public void IsSubSitePositiveTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSubSite))
+            {
+                Assert.IsTrue(context.Web.IsSubSite());
+            }
+        }
+
+        [TestMethod]
+        public void IsSubSiteNegativeTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            {
+                Assert.IsFalse(context.Web.IsSubSite());
+            }
+        }
+
+        [TestMethod]
+        public void EnsurePageSchedulingTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            using (var context = TestCommon.Instance.GetContext(TestCommon.NoGroupTestSite))
+            {
+                Guid pageSchedulingFeature = new("e87ca965-5e07-4a23-b007-ddd4b5afb9c7");
+
+                try
+                {
+                    context.Web.EnsurePageScheduling();
+
+                    Assert.IsTrue(context.Web.Features.AsRequested().Any(p => p.DefinitionId == pageSchedulingFeature));
+                }
+                finally
+                {
+                    context.Web.Features.Disable(pageSchedulingFeature);
+                }
+
+            }
+        }
+
+        [TestMethod]
+        public void EnsurePageSchedulingOnSubSiteTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSubSite))
+            {
+                Assert.ThrowsException<ClientException>(() =>
+                {
+                    context.Web.EnsurePageScheduling();
+                });
+            }
+        }
+
 
     }
 }
