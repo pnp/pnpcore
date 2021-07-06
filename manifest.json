@@ -1586,6 +1586,30 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.SharePoint.IAttachment.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.SharePoint.IAttachment.html",
+          "hash": "aWAFwD2pFcJIMqmZYcxZMg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.SharePoint.IAttachmentCollection.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.SharePoint.IAttachmentCollection.html",
+          "hash": "TfpTHVnEJ457VwSvvv7a8w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/PnP.Core.Model.SharePoint.IBasePermissions.yml",
       "output": {
         ".html": {
@@ -2238,7 +2262,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.IListItem.html",
-          "hash": "MhG3ZxUOeXB7zldPoctFwQ=="
+          "hash": "DInc5M0ssk2FCL7pxVHO7g=="
         }
       },
       "is_incremental": false,
@@ -3342,7 +3366,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.html",
-          "hash": "bgCbiuMkRLk4ojksrLr1DA=="
+          "hash": "0uHv7dkCNZjmYE3l021WQg=="
         }
       },
       "is_incremental": false,
@@ -4470,7 +4494,7 @@
       "output": {
         ".html": {
           "relative_path": "api/toc.html",
-          "hash": "fxl/VUWm+j/QorglXGVP9A=="
+          "hash": "9lE4lUGxKZropTgt0t73Ww=="
         }
       },
       "is_incremental": false,
@@ -5590,7 +5614,7 @@
         "ManagedReferenceDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build",
-          "total_file_count": 370,
+          "total_file_count": 372,
           "skipped_file_count": 0
         },
         "ResourceDocumentProcessor": {
