@@ -5295,6 +5295,18 @@
     },
     {
       "type": "Conceptual",
+      "source_relative_path": "using-the-sdk/listitems-attachments.md",
+      "output": {
+        ".html": {
+          "relative_path": "using-the-sdk/listitems-attachments.html",
+          "hash": "wcUDpIP6IzZnTLUtwmjwoQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
       "source_relative_path": "using-the-sdk/listitems-fields.md",
       "output": {
         ".html": {
@@ -5563,7 +5575,7 @@
       "output": {
         ".html": {
           "relative_path": "using-the-sdk/toc.html",
-          "hash": "RGz447MYnb8MERw5gY1UlA=="
+          "hash": "reGJG9lO8w2FKdILwtDBVw=="
         }
       },
       "is_incremental": false,
@@ -5608,7 +5620,7 @@
         "ConceptualDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build",
-          "total_file_count": 67,
+          "total_file_count": 68,
           "skipped_file_count": 0
         },
         "ManagedReferenceDocumentProcessor": {

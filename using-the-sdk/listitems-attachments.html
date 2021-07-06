@@ -1,0 +1,152 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html lang="en">
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Working with list item attachments | PnP Core SDK </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Working with list item attachments | PnP Core SDK ">
+    <meta name="generator" content="docfx 2.56.5.0">
+    <meta name="description" content="The PnP Core SDK is an SDK designed to work against Microsoft 365. Its aim is to provide a unified object model to work with the whole Microsoft 365 ecosystem. ">
+    <link rel="shortcut icon" href="https://c.s-microsoft.com/favicon.ico?v2">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    <meta property="docfx:newtab" content="true">
+  </head>  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../images/logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <label class="glyphicon glyphicon-search" for="search-query"></label>
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first="First" data-prev="Previous" data-next="Next" data-last="Last"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+                  <div class="contribution-panel mobile-hide pull-right">
+                      <a href="https://github.com/pnp/pnpcore/blob/dev/docs/using-the-sdk/listitems-attachments.md/#L1" title="Improve this Doc" class="improve-doc-lg"><i class="glyphicon glyphicon-pencil"></i></a>
+                  </div>
+                    <h1 id="working-with-list-item-attachments">Working with list item attachments</h1>
+
+<p>List items can have one or more attachments. This chapter explains how to load the attachments, how to add them and how to delete or recycle them.</p>
+<div class="NOTE">
+<h5>Note</h5>
+<p>Some of the samples assume you've loaded a list into the variable <code>mylist</code>, the code that shows how to do so is listed in the first examples.</p>
+</div>
+<h2 id="loading-the-list-item-attachments">Loading the list item attachments</h2>
+<p>List item attachments are handled via the <code>AttachmentFiles</code> property of an <code>IListItem</code>. Simply requesting this property will get you the needed information about all the attachments on the <code>IListItem</code>. Once you've requested the attachments you can also download them using one of the <code>GetContent</code> methods.</p>
+<pre><code class="lang-csharp">// Load the list item with attachments
+var item = await mylist.Items.GetByIdAsync(1, p =&gt; p.AttachmentFiles);
+
+// Enumerate over the attachments and download them
+foreach (var attachment in item.AttachmentFiles.AsRequested())
+{
+    // Download the attachment as stream
+    Stream downloadedContentStream = await attachment.GetContentAsync();
+
+    // Download the attachment as an array of bytes
+    byte[] downloadedContentBytes = await attachment.GetContentBytesAsync();
+}
+</code></pre>
+<h2 id="adding-a-list-item-attachment">Adding a list item attachment</h2>
+<p>Adding attachments to an <code>IListItem</code> can be done using the <code>Add</code> methods on the attachment collection.</p>
+<pre><code class="lang-csharp">// Load the list item with attachments
+var item = await mylist.Items.GetByIdAsync(1, p =&gt; p.AttachmentFiles);
+
+// Add an attachment by adding it the attachment collection
+var fileName = TestCommon.GetPnPSdkTestAssetName(&quot;test_added.docx&quot;);
+var addedAttachment = await itemLoaded.AttachmentFiles.AddAsync(&quot;test.docx&quot;, System.IO.File.OpenRead($&quot;.{Path.DirectorySeparatorChar}test.docx&quot;));
+</code></pre>
+<h2 id="deleting-or-recycling-list-item-attachments">Deleting or recycling list item attachments</h2>
+<p>To remove a list item attachment you can either delete it, which is permanent, or recycle it so that it can still be restored.</p>
+<pre><code class="lang-csharp">// Load the list item with attachments
+var item = await mylist.Items.GetByIdAsync(1, p =&gt; p.AttachmentFiles);
+
+// Delete the attachment
+await item.AttachmentFiles.AsRequested().First().Delete();
+
+// Recycle the attachment
+await item.AttachmentFiles.AsRequested().First().Recycle();
+</code></pre>
+</article>
+          </div>
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              </nav>
+            </div>
+          </div>        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            <span>PnP Core SDK<br>Generated by <strong><a href='https://dotnet.github.io/docfx' alt='Doc FX Website'>DocFX</a></strong> with <strong><a href='https://ovasquez.github.io/docfx-material' alt='DocFx Material Theme'>Material UI</a></strong></span>
+            
+            <img src="https://telemetry.sharepointpnp.com/@pnp.github.io/index/" alt="spacer">
+          </div>
+        </div>
+      </footer>    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>  </body>
+</html>
