@@ -33,7 +33,6 @@ Adding attachments to an `IListItem` can be done using the `Add` methods on the 
 var item = await mylist.Items.GetByIdAsync(1, p => p.AttachmentFiles);
 
 // Add an attachment by adding it the attachment collection
-var fileName = TestCommon.GetPnPSdkTestAssetName("test_added.docx");
 var addedAttachment = await itemLoaded.AttachmentFiles.AddAsync("test.docx", System.IO.File.OpenRead($".{Path.DirectorySeparatorChar}test.docx"));
 ```
 
