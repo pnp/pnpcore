@@ -69,6 +69,8 @@
     href: listitems-fields.md
   - name: Commenting and liking
     href: listitems-social.md
+  - name: Attachments
+    href: listitems-attachments.md
 - name: Files
   items:
   - name: Overview
