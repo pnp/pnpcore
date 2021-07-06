@@ -108,7 +108,6 @@ foreach (var attachment in item.AttachmentFiles.AsRequested())
 var item = await mylist.Items.GetByIdAsync(1, p =&gt; p.AttachmentFiles);
 
 // Add an attachment by adding it the attachment collection
-var fileName = TestCommon.GetPnPSdkTestAssetName(&quot;test_added.docx&quot;);
 var addedAttachment = await itemLoaded.AttachmentFiles.AddAsync(&quot;test.docx&quot;, System.IO.File.OpenRead($&quot;.{Path.DirectorySeparatorChar}test.docx&quot;));
 </code></pre>
 <h2 id="deleting-or-recycling-list-item-attachments">Deleting or recycling list item attachments</h2>
