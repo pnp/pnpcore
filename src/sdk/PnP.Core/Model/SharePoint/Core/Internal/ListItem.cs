@@ -240,6 +240,8 @@ namespace PnP.Core.Model.SharePoint
 
         public IListItemVersionCollection Versions { get => GetModelCollectionValue<IListItemVersionCollection>(); }
 
+        public IAttachmentCollection AttachmentFiles { get => GetModelCollectionValue<IAttachmentCollection>(); }
+
         [SharePointProperty("*")]
         public object All { get => null; }
 

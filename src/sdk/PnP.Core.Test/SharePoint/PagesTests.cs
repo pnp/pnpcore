@@ -2479,6 +2479,10 @@ namespace PnP.Core.Test.SharePoint
                     Assert.AreEqual(scheduleDate.Hour, newPage.ScheduledPublishDate.Value.Hour);
                     Assert.AreEqual(scheduleDate.Minute, newPage.ScheduledPublishDate.Value.Minute);
                 }
+                else
+                {
+                    Assert.IsTrue(newPage.ScheduledPublishDate.Value > DateTime.MinValue);
+                }
 
                 // Load the page again
                 var pages = await context.Web.GetPagesAsync(pageName);
@@ -2491,6 +2495,11 @@ namespace PnP.Core.Test.SharePoint
                     Assert.AreEqual(scheduleDate.Hour, createdPage.ScheduledPublishDate.Value.Hour);
                     Assert.AreEqual(scheduleDate.Minute, createdPage.ScheduledPublishDate.Value.Minute);
                 }
+                else
+                {
+                    Assert.IsTrue(createdPage.ScheduledPublishDate.Value > DateTime.MinValue);
+                }
+
                 // Clear the scheduled publishing
                 createdPage.RemoveSchedulePublish();
 

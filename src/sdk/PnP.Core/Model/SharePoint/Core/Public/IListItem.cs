@@ -103,9 +103,14 @@ namespace PnP.Core.Model.SharePoint
         public ILikedByInformation LikedByInformation { get; }
 
         /// <summary>
-        /// Gets a value that returns a collection of list item version objects that represent the versions of the list item.
+        /// Gets a value that returns a collection of list item version objects that represent the versions of the list item
         /// </summary>
         public IListItemVersionCollection Versions { get; }
+
+        /// <summary>
+        /// Collection of attachments for this list item
+        /// </summary>
+        public IAttachmentCollection AttachmentFiles { get; }
 
         /// <summary>
         /// A special property used to add an asterisk to a $select statement

@@ -262,6 +262,11 @@ namespace PnP.Core.Services
 
                                         list = GetParentDataModel(listItem as IMetadataExtensible) as Model.SharePoint.IList;
                                     }
+                                    else if (pnpObject is Model.SharePoint.IAttachment attachment)
+                                    {
+                                        listItem = GetParentDataModel(attachment as IMetadataExtensible) as Model.SharePoint.IListItem;
+                                        list = GetParentDataModel(listItem as IMetadataExtensible) as Model.SharePoint.IList;
+                                    }
                                 }
 
                                 // If we've got the list
