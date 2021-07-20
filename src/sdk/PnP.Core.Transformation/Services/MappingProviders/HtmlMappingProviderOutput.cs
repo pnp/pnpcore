@@ -7,7 +7,7 @@ namespace PnP.Core.Transformation.Services.MappingProviders
     /// <summary>
     /// Defines the output for a HTML mapping provider
     /// </summary>
-    public class HtmlMappingProviderOutput : MappingProviderOutput
+    public class HtmlMappingProviderOutput : BaseMappingProviderOutput
     {
         /// <summary>
         /// Creates an instance for the content

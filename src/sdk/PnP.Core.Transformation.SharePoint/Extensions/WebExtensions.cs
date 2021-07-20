@@ -1,10 +1,14 @@
 ﻿using Microsoft.SharePoint.Client;
 using PnP.Core.Transformation.SharePoint.Model;
+using PnP.Core.Transformation.SharePoint.Utilities;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 
 namespace PnP.Core.Transformation.SharePoint.Extensions
 {
@@ -96,6 +100,57 @@ namespace PnP.Core.Transformation.SharePoint.Extensions
                 sourceStream.CopyTo(memStream);
                 memStream.Position = 0;
 
+                using (var reader = new StreamReader(memStream))
+                {
+                    returnString = reader.ReadToEnd();
+                }
+            }
+
+            return returnString;
+        }
+
+        /// <summary>
+        /// Returns a file as string
+        /// </summary>
+        /// <param name="web">The Web to process</param>
+        /// <param name="serverRelativeUrl">The server relative URL to the file</param>
+        /// <returns>The file contents as a string</returns>
+        public static string GetFileAsString(this Web web, string serverRelativeUrl)
+        {
+            return Task.Run(() => web.GetFileAsStringImplementation(serverRelativeUrl)).GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        /// Returns a file as string
+        /// </summary>
+        /// <param name="web">The Web to process</param>
+        /// <param name="serverRelativeUrl">The server relative URL to the file</param>
+        /// <returns>The file contents as a string</returns>
+        public static async Task<string> GetFileAsStringAsync(this Web web, string serverRelativeUrl)
+        {
+            await new SynchronizationContextRemover();
+            return await web.GetFileAsStringImplementation(serverRelativeUrl);
+        }
+
+        /// <summary>
+        /// Returns a file as string
+        /// </summary>
+        /// <param name="web">The Web to process</param>
+        /// <param name="serverRelativeUrl">The server relative URL to the file</param>
+        /// <returns>The file contents as a string</returns>
+        private static async Task<string> GetFileAsStringImplementation(this Web web, string serverRelativeUrl)
+        {
+            var file = web.GetFileByServerRelativePath(ResourcePath.FromDecodedUrl(serverRelativeUrl));
+            web.Context.Load(file);
+            await web.Context.ExecuteQueryRetryAsync();
+            ClientResult<Stream> stream = file.OpenBinaryStream();
+            await web.Context.ExecuteQueryRetryAsync();
+
+            string returnString = string.Empty;
+            using (Stream memStream = new MemoryStream())
+            {
+                stream.Value.CopyTo(memStream);
+                memStream.Position = 0;
                 using (var reader = new StreamReader(memStream))
                 {
                     returnString = reader.ReadToEnd();

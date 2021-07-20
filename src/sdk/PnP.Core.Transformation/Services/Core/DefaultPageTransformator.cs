@@ -10,7 +10,7 @@ using PnP.Core.Transformation.Services.MappingProviders;
 namespace PnP.Core.Transformation.Services.Core
 {
     /// <summary>
-    /// Implements the concret PageTransformator (this is the core of PnP Transformation Framework)
+    /// Implements the concrete PageTransformator (this is the core of PnP Transformation Framework)
     /// </summary>
     public class DefaultPageTransformator : IPageTransformator
     {
@@ -20,6 +20,7 @@ namespace PnP.Core.Transformation.Services.Core
         private readonly IEnumerable<IPagePreTransformation> pagePreTransformations;
         private readonly IEnumerable<IPagePostTransformation> pagePostTransformations;
         private readonly IOptions<PageTransformationOptions> defaultPageTransformationOptions;
+        private readonly IPageGenerator pageGenerator;
 
         /// <summary>
         /// Constructor with DI support
@@ -30,13 +31,15 @@ namespace PnP.Core.Transformation.Services.Core
         /// <param name="pagePreTransformations">The list of post transformations to call</param>
         /// <param name="pagePostTransformations">The list of pre transformations to call</param>
         /// <param name="pageTransformationOptions">The options</param>
+        /// <param name="pageGenerator">The page generator to create the actual SPO modern page</param>
         public DefaultPageTransformator(
             ILogger<DefaultPageTransformator> logger,
             IMappingProvider mappingProvider,
             ITargetPageUriResolver targetPageUriResolver,
             IEnumerable<IPagePreTransformation> pagePreTransformations,
             IEnumerable<IPagePostTransformation> pagePostTransformations,
-            IOptions<PageTransformationOptions> pageTransformationOptions)
+            IOptions<PageTransformationOptions> pageTransformationOptions,
+            IPageGenerator pageGenerator)
         {
             this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
             this.mappingProvider = mappingProvider ?? throw new ArgumentNullException(nameof(mappingProvider));
@@ -44,6 +47,7 @@ namespace PnP.Core.Transformation.Services.Core
             this.pagePreTransformations = pagePreTransformations ?? throw new ArgumentNullException(nameof(pagePreTransformations));
             this.pagePostTransformations = pagePostTransformations ?? throw new ArgumentNullException(nameof(pagePostTransformations));
             this.defaultPageTransformationOptions = pageTransformationOptions ?? throw new ArgumentNullException(nameof(pageTransformationOptions));
+            this.pageGenerator = pageGenerator ?? throw new ArgumentNullException(nameof(pageGenerator));
         }
 
         /// <summary>
@@ -72,20 +76,25 @@ namespace PnP.Core.Transformation.Services.Core
                 token.ThrowIfCancellationRequested();
             }
 
+            // Invoke the configured main mapping provider
             var context = new PageTransformationContext(task, sourceItem, targetPageUri);
             var input = new MappingProviderInput(context);
             MappingProviderOutput output = await mappingProvider.MapAsync(input, token).ConfigureAwait(false);
             token.ThrowIfCancellationRequested();
 
+            // Here we generate the actual SPO modern page in SharePoint Online
+            var generatedPageUri = await pageGenerator.GenerateAsync(context, output, targetPageUri, token).ConfigureAwait(false);
+            token.ThrowIfCancellationRequested();
+
             // Call post transformations handlers
-            var postContext = new PagePostTransformationContext(task, sourceItem, targetPageUri);
+            var postContext = new PagePostTransformationContext(task, sourceItem, generatedPageUri);
             foreach (var pagePostTransformation in pagePostTransformations)
             {
                 await pagePostTransformation.PostTransformAsync(postContext, token).ConfigureAwait(false);
                 token.ThrowIfCancellationRequested();
             }
 
-            return targetPageUri;
+            return generatedPageUri;
         }
     }
 }

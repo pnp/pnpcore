@@ -42,6 +42,10 @@ namespace Microsoft.Extensions.DependencyInjection
                 services.Configure(options);
             }
 
+            // TODO: Consider using the distributed one or providing an option to use the distributed one
+            // Add the caching services
+            services.AddMemoryCache(); 
+
             var builder = new PnPTransformationBuilder(services);
 
             // Set default implementations
@@ -60,6 +64,7 @@ namespace Microsoft.Extensions.DependencyInjection
             if (builder == null) throw new ArgumentNullException(nameof(builder));
 
             builder.Services.TryAddTransient<IPageTransformator, DefaultPageTransformator>();
+            builder.Services.TryAddTransient<IPageGenerator, DefaultPageGenerator>();
             builder.Services.TryAddTransient<ITransformationStateManager, InMemoryTransformationStateManager>();
             builder.Services.TryAddTransient<ITransformationExecutor, InProcessTransformationExecutor>();
 

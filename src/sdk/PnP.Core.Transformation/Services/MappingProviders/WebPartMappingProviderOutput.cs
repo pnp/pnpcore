@@ -8,7 +8,7 @@ namespace PnP.Core.Transformation.Services.MappingProviders
     /// <summary>
     /// Defines the output for a Web Part mapping provider
     /// </summary>
-    public class WebPartMappingProviderOutput : MappingProviderOutput
+    public class WebPartMappingProviderOutput : BaseMappingProviderOutput
     {
         /// <summary>
         /// The Web Part Entity resulting after the mapping

@@ -117,8 +117,35 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Debug_CombiningMappingData" xml:space="preserve">
+    <value>Combining mapping data</value>
+  </data>
+  <data name="Debug_ProcessingSelectorFunctions" xml:space="preserve">
+    <value>Processing selector functions</value>
+  </data>
+  <data name="Error_AnalyserCleaningExtractedWebPartFields" xml:space="preserve">
+    <value>An error occurred cleaning extracted web part fields</value>
+  </data>
+  <data name="Error_AnalyserCouldNotFindLayouts" xml:space="preserve">
+    <value>GetAllPageLayouts - Could not search for page layouts</value>
+  </data>
+  <data name="Error_AnalyserErrorOccurredExtractHtmlBlocks" xml:space="preserve">
+    <value>An error occurred extracting html blocks from page layout html</value>
+  </data>
+  <data name="Error_AnalyserErrorOccurredExtractMetadata" xml:space="preserve">
+    <value>An issue occurred with extracting metadata from page layout</value>
+  </data>
+  <data name="Error_AnalyserErrorOccurredExtractNamespaces" xml:space="preserve">
+    <value>An error occurred extracting web part prefixes from namespaces</value>
+  </data>
+  <data name="Error_AnalyserExtractPageHeaderFromPageLayout" xml:space="preserve">
+    <value>An error occurred extract page header from page layout associated content type</value>
+  </data>
   <data name="Error_AnalysingNoWebPartsFound" xml:space="preserve">
     <value>No web parts were found on page '{0}'</value>
+  </data>
+  <data name="Error_AnErrorOccurredFunctions" xml:space="preserve">
+    <value>An error occurred processing functions</value>
   </data>
   <data name="Error_BasicASPXPageCannotTransform" xml:space="preserve">
     <value>Source page '{0}' is a basic ASPX page ... can't currently transform that one, sorry!</value>
@@ -129,6 +156,33 @@
   <data name="Error_CallingWebServicesToExtractWebPartsFromPage" xml:space="preserve">
     <value>Error calling Web Services to Extract Web Parts from page '{0}'</value>
   </data>
+  <data name="Error_CannotCastToEnum" xml:space="preserve">
+    <value>An error occurred casting value to enum</value>
+  </data>
+  <data name="Error_CannotGetSiteCollContext" xml:space="preserve">
+    <value>Cannot get site collection context</value>
+  </data>
+  <data name="Error_CannotMapMetadataFields" xml:space="preserve">
+    <value>Cannot map the metadata fields from the content types</value>
+  </data>
+  <data name="Error_CannotProcessPageLayoutAnalyse" xml:space="preserve">
+    <value>Error mapping page layout - Analyse</value>
+  </data>
+  <data name="Error_CannotProcessPageLayoutAnalyseAll" xml:space="preserve">
+    <value>Error mapping page layout - Analyse All</value>
+  </data>
+  <data name="Error_CannotWriteToXmlFile" xml:space="preserve">
+    <value>Error writing to mapping file: {0} {1}</value>
+  </data>
+  <data name="Error_Clone_Context_Url_Required" xml:space="preserve">
+    <value>Url of the site is required.</value>
+  </data>
+  <data name="Error_DocumentEmbedLookup" xml:space="preserve">
+    <value>An error occurred in DocumentEmbedLookup function: {0}</value>
+  </data>
+  <data name="Error_DocumentEmbedLookupFileNotRetrievable" xml:space="preserve">
+    <value>An error occurred in DocumentEmbedLookup function - file not retrievable - {0}</value>
+  </data>
   <data name="Error_InvalidOrMissingBlogContent" xml:space="preserve">
     <value>Body contents was set to null, this is an invalid and empty blog page: '{0}'</value>
   </data>
@@ -138,11 +192,35 @@
   <data name="Error_InvalidSourceContext" xml:space="preserve">
     <value>Invalid source context for exporting content</value>
   </data>
+  <data name="Error_InvalidWebPartMappingProviderInput" xml:space="preserve">
+    <value>Invalid input for the SharePointWebPartMappingProvider</value>
+  </data>
+  <data name="Error_LoadContentFromFile" xml:space="preserve">
+    <value>An error occurred in LoadContentFromFile function: {0}</value>
+  </data>
+  <data name="Error_LoadContentFromFileContentLink" xml:space="preserve">
+    <value>An error occurred in getting the referenced file in content link: {0}</value>
+  </data>
+  <data name="Error_MediaWebpartConfiguration" xml:space="preserve">
+    <value>The media web part configuration could not be read, skipping this web part from the transformation</value>
+  </data>
+  <data name="Error_MediaWebPartNotProperlyConfigured" xml:space="preserve">
+    <value>Media web part configuration did not allow to read it's settings. Did you check if there was a preview image set?</value>
+  </data>
+  <data name="Error_Message_EmptyString_Arg" xml:space="preserve">
+    <value>Invalid empty string argument</value>
+  </data>
   <data name="Error_MissiningSharePointInputItem" xml:space="preserve">
     <value>The SharePoint input item is missing</value>
   </data>
+  <data name="Error_NoDefaultMappingFound" xml:space="preserve">
+    <value>No default mapping was found int the provided mapping file</value>
+  </data>
   <data name="Error_NoPageLayoutTransformationModel" xml:space="preserve">
     <value>No valid PageLayout transformation model could be retrieved for publishing page layout '{0}' of page '{1}'</value>
+  </data>
+  <data name="Error_NotValidForTargetSiteCollection" xml:space="preserve">
+    <value>NotAvailableAtTargetException is used to "skip" a web part since it's not valid for the target site collection (only applies to cross site collection transfers)</value>
   </data>
   <data name="Error_PageLayoutMappingFileSchemaValidation" xml:space="preserve">
     <value>Provided custom pagelayout mapping file is invalid: {0}</value>
@@ -162,14 +240,32 @@
   <data name="Error_WebPartXmlNotExported" xml:space="preserve">
     <value>XML definition for web part '{0}' from page '{1}' was not exportable. Exception: {2}.</value>
   </data>
+  <data name="Info_AnalyserFoundItems" xml:space="preserve">
+    <value>Found {0} page layouts</value>
+  </data>
+  <data name="Info_AnalyserMappingLayout" xml:space="preserve">
+    <value>Generating mapping for `{0}` layout</value>
+  </data>
+  <data name="Info_AnalyserNoLayoutsFound" xml:space="preserve">
+    <value>There are no page layouts found to analyse</value>
+  </data>
   <data name="Info_CallingWebServicesToExtractWebPartsFromPage" xml:space="preserve">
     <value>Calling Web Services to Extract Web Parts from page '{0}'</value>
   </data>
   <data name="Info_ContentTransformFoundSourceWebParts" xml:space="preserve">
     <value>Source page '{0}' contains web part '{1}' of type '{2}'</value>
   </data>
+  <data name="Info_ContentWebPartBeingTransformed" xml:space="preserve">
+    <value>Web Part '{0}' of type '{1}' is being transformed</value>
+  </data>
+  <data name="Info_NotTransformingTitleBar" xml:space="preserve">
+    <value>Not transforming Title Bar - this is not used in modern pages</value>
+  </data>
   <data name="Info_NoWebPartsFound" xml:space="preserve">
     <value>No web parts were found on page '{0}'</value>
+  </data>
+  <data name="Info_OOBPageLayoutSkipped" xml:space="preserve">
+    <value>Skipped page layout {0} because it's an OOB page layout</value>
   </data>
   <data name="Info_PageAnalysisComplete" xml:space="preserve">
     <value>Page analysis completed for page '{0}'</value>
@@ -186,11 +282,41 @@
   <data name="Info_PageValidationChecksComplete" xml:space="preserve">
     <value>Validation checks completed for page '{0}'</value>
   </data>
+  <data name="Info_ProcessingMappingFunctions" xml:space="preserve">
+    <value>Processing mapping functions</value>
+  </data>
   <data name="Info_RetreivingExportWebPartXmlWorkaround" xml:space="preserve">
     <value>Retrieving Web Part '{0}' using Workaround from page '{1}'</value>
   </data>
   <data name="Info_TransformationMode" xml:space="preserve">
     <value>Transformation of page '{0}' of type '{1}'</value>
+  </data>
+  <data name="Info_TransformPageModernTitle" xml:space="preserve">
+    <value>Setting title of page '{0}' to value: '{1}'</value>
+  </data>
+  <data name="Info_TransformSourcePageIsHomePage" xml:space="preserve">
+    <value>The current page is used as a home page - settings modern page to 'Home' layout</value>
+  </data>
+  <data name="Info_TransformSourcePageIsNotHomePage" xml:space="preserve">
+    <value>The current page is not used as the site home page</value>
+  </data>
+  <data name="Info_WelcomePageSettingsIsPresent" xml:space="preserve">
+    <value>Welcome page setting does exist, checking if the transform page is a home page</value>
+  </data>
+  <data name="Info_XmlMappingSavedAs" xml:space="preserve">
+    <value>Xml Mapping saved as {0}</value>
+  </data>
+  <data name="Warning_ContentWebPartMappingNotFound" xml:space="preserve">
+    <value>Web Part Mapping not found</value>
+  </data>
+  <data name="Warning_CrossSiteNotSupported" xml:space="preserve">
+    <value>Skipping this web part's transformation - cross site not supported</value>
+  </data>
+  <data name="Warning_NothingToTransform" xml:space="preserve">
+    <value>There is nothing to transform - no web parts found</value>
+  </data>
+  <data name="Warning_PageLayoutsCannotBeDetermined" xml:space="preserve">
+    <value>Page layout could not be determined by the publishing page</value>
   </data>
   <data name="Warning_TableCouldNotBeNormalized" xml:space="preserve">
     <value>Table could not be normalized and will be taken over as is</value>

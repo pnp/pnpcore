@@ -12,6 +12,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Reflection;
+using System.Security.Cryptography.X509Certificates;
 using System.Text.Json;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -24,6 +25,8 @@ namespace Microsoft.SharePoint.Client
     /// </summary>
     public static partial class ClientContextExtensions
     {
+        private const string PnPSettingsKey = "SharePointPnP$Settings$ContextCloning";
+
         private static readonly string userAgentFromConfig;
 
 #pragma warning disable CS0169
@@ -492,6 +495,68 @@ namespace Microsoft.SharePoint.Client
             // TODO: Replace with global caching via DI
             // CacheManager.Instance.SetSharePointVersion(urlUri, SPVersion.SPO);
             return (spVersionFromCache, version);
+        }
+
+        /// <summary>
+        /// Clones a ClientContext object while "taking over" the security context of the existing ClientContext instance
+        /// </summary>
+        /// <param name="clientContext">ClientContext to be cloned</param>
+        /// <param name="siteUrl">Site URL to be used for cloned ClientContext</param>
+        /// <returns>A ClientContext object created for the passed site URL</returns>
+        public static ClientContext Clone(this ClientRuntimeContext clientContext, string siteUrl)
+        {
+            if (string.IsNullOrWhiteSpace(siteUrl))
+            {
+                throw new ArgumentException(SharePointTransformationResources.Error_Clone_Context_Url_Required, nameof(siteUrl));
+            }
+
+            return clientContext.Clone(new Uri(siteUrl));
+        }
+
+        /// <summary>
+        /// Clones a ClientContext object while "taking over" the security context of the existing ClientContext instance
+        /// </summary>
+        /// <param name="clientContext">ClientContext to be cloned</param>
+        /// <param name="siteUrl">Site URL to be used for cloned ClientContext</param>
+        /// <returns>A ClientContext object created for the passed site URL</returns>
+        public static ClientContext Clone(this ClientRuntimeContext clientContext, Uri siteUrl)
+        {
+            return Clone(clientContext, new ClientContext(siteUrl), siteUrl);
+        }
+
+        /// <summary>
+        /// Clones a ClientContext object while "taking over" the security context of the existing ClientContext instance
+        /// </summary>
+        /// <param name="clientContext">ClientContext to be cloned</param>
+        /// <param name="targetContext">CientContext stub to be used for cloning</param>
+        /// <param name="siteUrl">Site URL to be used for cloned ClientContext</param>
+        /// <returns>A ClientContext object created for the passed site URL</returns>
+        internal static ClientContext Clone(this ClientRuntimeContext clientContext, ClientContext targetContext, Uri siteUrl)
+        {
+            if (siteUrl == null)
+            {
+                throw new ArgumentException(SharePointTransformationResources.Error_Clone_Context_Url_Required, nameof(siteUrl));
+            }
+
+            ClientContext clonedClientContext = targetContext;
+            clonedClientContext.ClientTag = clientContext.ClientTag;
+            clonedClientContext.DisableReturnValueCache = clientContext.DisableReturnValueCache;
+            clonedClientContext.WebRequestExecutorFactory = clientContext.WebRequestExecutorFactory;
+
+            //Take over the form digest handling setting
+
+            var originalUri = new Uri(clientContext.Url);
+
+            clonedClientContext.ExecutingWebRequest += (sender, webRequestEventArgs) =>
+            {
+                // Call the ExecutingWebRequest delegate method from the original ClientContext object, but pass along the webRequestEventArgs of 
+                // the new delegate method
+                MethodInfo methodInfo = clientContext.GetType().GetMethod("OnExecutingWebRequest", BindingFlags.Instance | BindingFlags.NonPublic);
+                object[] parametersArray = new object[] { webRequestEventArgs };
+                methodInfo.Invoke(clientContext, parametersArray);
+            };
+
+            return clonedClientContext;
         }
     }
 }

@@ -63,9 +63,19 @@ namespace PnP.Core.Transformation.Services.Core
         /// </summary>
         public bool AddTableListImageAsImageWebPart { get; set; }
 
+        /// <summary>
+        /// If the page to be transformed is the web's home page, then replace with stock modern home page instead of transforming it
+        /// </summary>
+        public bool ReplaceHomePageWithDefaultHomePage { get; set; }
+
         #endregion
 
         #region Other page transformation properties
+
+        /// <summary>
+        /// Defines if the target page will get the name of the source page
+        /// </summary>
+        public bool TargetPageTakesSourcePageName { get; set; }
 
         /// <summary>
         /// Name of the transformed page. Leave it blank to reuse the source page name.

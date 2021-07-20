@@ -7,20 +7,20 @@ namespace PnP.Core.Transformation.Services.MappingProviders
     /// <summary>
     /// Defines the output for a URL mapping provider
     /// </summary>
-    public class UrlMappingProviderOutput : MappingProviderOutput
+    public class UrlMappingProviderOutput : BaseMappingProviderOutput
     {
         /// <summary>
-        /// Creates an instance with the specified url
+        /// Creates an instance with the specified text
         /// </summary>
-        /// <param name="url"></param>
-        public UrlMappingProviderOutput(Uri url)
+        /// <param name="text">The text with mapped URLs</param>
+        public UrlMappingProviderOutput(string text)
         {
-            Url = url ?? throw new ArgumentNullException(nameof(url));
+            Text = text ?? throw new ArgumentNullException(nameof(text));
         }
 
         /// <summary>
-        /// Defines the target URL from the mapping
+        /// Defines the text after the URL mapping
         /// </summary>
-        public Uri Url { get; }
+        public string Text { get; }
     }
 }

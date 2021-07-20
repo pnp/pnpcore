@@ -108,5 +108,7 @@ namespace PnP.Core.Transformation.SharePoint
                                                                          "PageFromDocLayout", "WelcomeSplash", "ErrorLayout", "EnterpriseWiki", "CatalogArticle", "CatalogWelcome",
                                                                          "PageLayoutTemplate", "RedirectPageLayout", "VariationRootPageLayout" };
 
+
+        public const string HeaderTitle = "HeaderTitle";
     }
 }

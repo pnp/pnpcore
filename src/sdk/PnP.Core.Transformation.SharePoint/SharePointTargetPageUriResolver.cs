@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -27,7 +28,13 @@ namespace PnP.Core.Transformation.SharePoint
             if (!(sourceItem is SharePointSourceItem spItem))
                 throw new ArgumentException($"Only source item of type {typeof(SharePointSourceItem)} is supported", nameof(sourceItem));
 
-            var uri = new Uri(targetContext.Uri + spItem.Id.Uri.LocalPath);
+            var itemSiteLocalUri = new StringBuilder();
+            foreach (var s in spItem.Id.Uri.Segments.Skip(3))
+            {
+                itemSiteLocalUri.Append(s);
+            }
+
+            var uri = new Uri(targetContext.Uri + "/" + itemSiteLocalUri.ToString());
             return Task.FromResult(uri);
         }
     }

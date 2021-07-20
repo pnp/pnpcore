@@ -8,7 +8,7 @@ namespace PnP.Core.Transformation.Services.MappingProviders
     /// <summary>
     /// Defines the input for a taxonomy mapping provider
     /// </summary>
-    public class TaxonomyMappingProviderInput : MappingProviderInput
+    public class TaxonomyMappingProviderInput : BaseMappingProviderInput
     {
         /// <summary>
         /// Creates an instance for the context

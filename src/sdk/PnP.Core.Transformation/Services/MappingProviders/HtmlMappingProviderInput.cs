@@ -8,7 +8,7 @@ namespace PnP.Core.Transformation.Services.MappingProviders
     /// <summary>
     /// Defines the input for a HTML mapping provider
     /// </summary>
-    public class HtmlMappingProviderInput : MappingProviderInput
+    public class HtmlMappingProviderInput : BaseMappingProviderInput
     {
         /// <summary>
         /// Creates an instance for the specified context

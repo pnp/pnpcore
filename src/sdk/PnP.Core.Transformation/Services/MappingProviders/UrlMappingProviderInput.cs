@@ -8,21 +8,21 @@ namespace PnP.Core.Transformation.Services.MappingProviders
     /// <summary>
     /// Defines the input for a URL mapping provider
     /// </summary>
-    public class UrlMappingProviderInput : MappingProviderInput
+    public class UrlMappingProviderInput : BaseMappingProviderInput
     {
         /// <summary>
         /// Creates an instance for the specified context
         /// </summary>
         /// <param name="context"></param>
-        /// <param name="url"></param>
-        public UrlMappingProviderInput(PageTransformationContext context, Uri url) : base(context)
+        /// <param name="text"></param>
+        public UrlMappingProviderInput(PageTransformationContext context, string text) : base(context)
         {
-            Url = url ?? throw new ArgumentNullException(nameof(url));
+            Text = text ?? throw new ArgumentNullException(nameof(text));
         }
 
         /// <summary>
-        /// Defines the source URL to map
+        /// Defines the text to use for URL mapping
         /// </summary>
-        public Uri Url { get; }
+        public string Text { get; }
     }
 }

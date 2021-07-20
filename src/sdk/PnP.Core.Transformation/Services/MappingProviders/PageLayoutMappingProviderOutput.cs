@@ -7,14 +7,7 @@ namespace PnP.Core.Transformation.Services.MappingProviders
     /// <summary>
     /// Defines the output for a page layout mapping provider
     /// </summary>
-    public class PageLayoutMappingProviderOutput: MappingProviderOutput
+    public class PageLayoutMappingProviderOutput: BaseMappingProviderOutput
     {
-        /// <summary>
-        /// Provides the resulting Page Layout from the mapping
-        /// </summary>
-        public object PageLayout { get; set; } 
-        
-        // TODO: Define what to do with PageLayouts
-        // Is it something related to SharePoint only? I think so ...
     }
 }

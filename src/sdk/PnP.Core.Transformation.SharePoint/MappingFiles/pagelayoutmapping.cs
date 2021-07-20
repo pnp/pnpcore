@@ -21,8 +21,8 @@ namespace PnP.Core.Transformation.SharePoint.MappingFiles.Publishing
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.dev.office.com/PnP/2019/03/PublishingPageTransformationSchema")]
-    [System.Xml.Serialization.XmlRootAttribute(Namespace="http://schemas.dev.office.com/PnP/2019/03/PublishingPageTransformationSchema", IsNullable=false)]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace= "http://schemas.dev.office.com/PnP/2019/03/PublishingPageTransformationSchema")]
+    [System.Xml.Serialization.XmlRootAttribute(Namespace= "http://schemas.dev.office.com/PnP/2019/03/PublishingPageTransformationSchema", IsNullable=false)]
     public partial class PublishingPageTransformation {
         
         private AddOn[] addOnsField;

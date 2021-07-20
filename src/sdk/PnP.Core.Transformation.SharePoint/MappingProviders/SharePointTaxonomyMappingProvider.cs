@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using PnP.Core.Transformation.Services.MappingProviders;
-using PnP.Core.Transformation.SharePoint.Builder.Configuration;
+using PnP.Core.Transformation.SharePoint.Services.Builder.Configuration;
 
 namespace PnP.Core.Transformation.SharePoint.MappingProviders
 {

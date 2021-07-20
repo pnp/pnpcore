@@ -3,9 +3,9 @@ using Microsoft.Extensions.DependencyInjection;
 using PnP.Core.Transformation.Services.Builder;
 using PnP.Core.Transformation.Services.Core;
 using PnP.Core.Transformation.Services.MappingProviders;
-using PnP.Core.Transformation.SharePoint.Builder.Configuration;
+using PnP.Core.Transformation.SharePoint.Services.Builder.Configuration;
 
-namespace PnP.Core.Transformation.SharePoint.Builder
+namespace PnP.Core.Transformation.SharePoint.Services.Builder
 {
     /// <summary>
     /// Used to configure PnP Core Transformation for SharePoint

@@ -4,6 +4,8 @@ using System.Runtime.CompilerServices;
 [assembly: InternalsVisibleTo("PnP.Core.Auth")]
 [assembly: InternalsVisibleTo("PnP.Framework")]
 [assembly: InternalsVisibleTo("PnP.PowerShell")]
+[assembly: InternalsVisibleTo("PnP.Core.Transformation")]
+[assembly: InternalsVisibleTo("PnP.Core.Transformation.SharePoint")]
 
 #if DEBUG
 [assembly: InternalsVisibleTo("PnP.Core.Test")]

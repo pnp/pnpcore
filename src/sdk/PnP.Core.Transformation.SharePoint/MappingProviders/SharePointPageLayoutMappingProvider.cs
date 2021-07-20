@@ -11,13 +11,14 @@ using System.Xml.Schema;
 using System.Xml.Serialization;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Microsoft.Extensions.DependencyInjection;
 using PnP.Core.Transformation.Services.MappingProviders;
-using PnP.Core.Transformation.SharePoint.Builder.Configuration;
 using PnP.Core.Transformation.SharePoint.MappingFiles.Publishing;
 using PnP.Core.Transformation.SharePoint.Extensions;
 using System.Linq;
-using Microsoft.SharePoint.Client;
 using PnP.Core.Transformation.SharePoint.Publishing;
+using Microsoft.Extensions.Caching.Memory;
+using PnP.Core.Transformation.SharePoint.Services.Builder.Configuration;
 
 namespace PnP.Core.Transformation.SharePoint.MappingProviders
 {
@@ -29,12 +30,7 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
         private ILogger<SharePointPageLayoutMappingProvider> logger;
         private readonly IOptions<SharePointTransformationOptions> options;
         private readonly IServiceProvider serviceProvider;
-
-        #region Local in memory cache for the page layout mapping file
-
-        private ConcurrentDictionary<string, PublishingPageTransformation> mappingsCache = new ConcurrentDictionary<string, PublishingPageTransformation>();
-
-        #endregion
+        private readonly IMemoryCache memoryCache;
 
         /// <summary>
         /// Main constructor for the mapping provider
@@ -49,6 +45,7 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
             this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
             this.options = options ?? throw new ArgumentNullException(nameof(options));
             this.serviceProvider = serviceProvider;
+            this.memoryCache = this.serviceProvider.GetService<IMemoryCache>();
         }
 
         /// <summary>
@@ -135,44 +132,42 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
                 SharePointTransformationResources.Info_PageLayoutMappingBeingUsed, 
                 pageFile.ServerRelativeUrl, input.PageLayout, publishingPageTransformationModel.Name));
 
-            // TODO: Think about a solution to manage the output, unless we make the Page Layout
-            // mapper specific for SP transformations ...
-            return new PageLayoutMappingProviderOutput { PageLayout = publishingPageTransformationModel };
+            return new SharePointPageLayoutMappingProviderOutput { PageLayout = publishingPageTransformationModel };
         }
 
         private PageLayout GeneratePageLayout(Microsoft.SharePoint.Client.ListItem pageItem)
         {
             var pageLayoutFileUrl = pageItem.GetPageLayoutFileUrl();
 
-            // TODO: Consider using caching
-
             // Let's try to generate a 'basic' model and use that...not optimal, but better than bailing out.
-            PageLayoutAnalyser pageLayoutAnalyzer = new PageLayoutAnalyser();
+            var pageLayoutAnalyzer = this.serviceProvider.GetService<PageLayoutAnalyser>();
             var newPageLayoutMapping = pageLayoutAnalyzer.AnalysePageLayoutFromPublishingPage(pageItem);
-
-            // TODO: Consider caching the result
 
             // Return to requestor
             return newPageLayoutMapping;
-
         }
 
         private PublishingPageTransformation LoadMappingFile(string mappingFilePath = null)
         {
-            // Check if we already have the mapping file in the in-memory cache
-            if (mappingsCache.ContainsKey(mappingFilePath))
+            // Prepare the result variable
+            PublishingPageTransformation result = null;
+
+            if (string.IsNullOrEmpty(mappingFilePath))
             {
-                return mappingsCache[mappingFilePath];
+                mappingFilePath = "stream.pagelayoutmapping.xml";
+            }
+
+            // Check if we already have the mapping file in the in-memory cache
+            if (this.memoryCache.TryGetValue(mappingFilePath, out result))
+            {
+                return result;
             }
 
             // Create the xml mapping serializer
             XmlSerializer xmlMapping = new XmlSerializer(typeof(PublishingPageTransformation));
 
-            // Prepare the result variable
-            PublishingPageTransformation result = null;
-
             // If we don't have the mapping file as an input
-            if (!string.IsNullOrEmpty(mappingFilePath) ||
+            if (string.IsNullOrEmpty(mappingFilePath) ||
                 !System.IO.File.Exists(mappingFilePath))
             {
                 // We use the default one, without validation
@@ -202,7 +197,7 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
             }
 
             // Cache the mapping file into the in-memory cache
-            mappingsCache.AddOrUpdate(mappingFilePath, result, (k, v) => result);
+            this.memoryCache.Set(mappingFilePath, result);
 
             return result;
         }

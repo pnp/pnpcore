@@ -8,7 +8,7 @@ namespace PnP.Core.Transformation.Services.MappingProviders
     /// <summary>
     /// Defines the input for a metadata mapping provider
     /// </summary>
-    public class MetadataMappingProviderInput : MappingProviderInput
+    public class MetadataMappingProviderInput : BaseMappingProviderInput
     {
         /// <summary>
         /// Creates an instances for the specified context

@@ -20,7 +20,7 @@ namespace PnP.Core.Transformation.SharePoint.MappingFiles {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.dev.office.com/PnP/2018/01/WebPartMappingSchema")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.dev.office.com/PnP/2018/01/PageTransformationSchema")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="http://schemas.dev.office.com/PnP/2018/01/PageTransformationSchema", IsNullable=false, ElementName = "PageTransformation")]
     public partial class WebPartMapping {
         
@@ -81,7 +81,7 @@ namespace PnP.Core.Transformation.SharePoint.MappingFiles {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.dev.office.com/PnP/2018/01/WebPartMappingSchema")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.dev.office.com/PnP/2018/01/PageTransformationSchema")]
     public partial class BaseWebPart {
         
         private Property[] propertiesField;
@@ -115,7 +115,7 @@ namespace PnP.Core.Transformation.SharePoint.MappingFiles {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.dev.office.com/PnP/2018/01/WebPartMappingSchema")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.dev.office.com/PnP/2018/01/PageTransformationSchema")]
     public partial class Property {
         
         private string nameField;
@@ -161,7 +161,7 @@ namespace PnP.Core.Transformation.SharePoint.MappingFiles {
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
     [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://schemas.dev.office.com/PnP/2018/01/WebPartMappingSchema")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://schemas.dev.office.com/PnP/2018/01/PageTransformationSchema")]
     public enum PropertyType {
         
         /// <remarks/>
@@ -185,7 +185,7 @@ namespace PnP.Core.Transformation.SharePoint.MappingFiles {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.dev.office.com/PnP/2018/01/WebPartMappingSchema")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.dev.office.com/PnP/2018/01/PageTransformationSchema")]
     public partial class WebPart {
         
         private Property[] propertiesField;
@@ -258,7 +258,7 @@ namespace PnP.Core.Transformation.SharePoint.MappingFiles {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.dev.office.com/PnP/2018/01/WebPartMappingSchema")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.dev.office.com/PnP/2018/01/PageTransformationSchema")]
     public partial class Mappings {
         
         private Mapping[] mappingField;
@@ -293,7 +293,7 @@ namespace PnP.Core.Transformation.SharePoint.MappingFiles {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.dev.office.com/PnP/2018/01/WebPartMappingSchema")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.dev.office.com/PnP/2018/01/PageTransformationSchema")]
     public partial class Mapping {
         
         private ClientSideText[] clientSideTextField;
@@ -367,7 +367,7 @@ namespace PnP.Core.Transformation.SharePoint.MappingFiles {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.dev.office.com/PnP/2018/01/WebPartMappingSchema")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.dev.office.com/PnP/2018/01/PageTransformationSchema")]
     public partial class ClientSideText {
         
         private string textField;
@@ -402,7 +402,7 @@ namespace PnP.Core.Transformation.SharePoint.MappingFiles {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.dev.office.com/PnP/2018/01/WebPartMappingSchema")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.dev.office.com/PnP/2018/01/PageTransformationSchema")]
     public partial class ClientSideWebPart {
         
         private ClientSideWebPartType typeField;
@@ -461,7 +461,7 @@ namespace PnP.Core.Transformation.SharePoint.MappingFiles {
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
     [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://schemas.dev.office.com/PnP/2018/01/WebPartMappingSchema")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://schemas.dev.office.com/PnP/2018/01/PageTransformationSchema")]
     public enum ClientSideWebPartType {
         
         /// <remarks/>
@@ -587,7 +587,7 @@ namespace PnP.Core.Transformation.SharePoint.MappingFiles {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.dev.office.com/PnP/2018/01/WebPartMappingSchema")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.dev.office.com/PnP/2018/01/PageTransformationSchema")]
     public partial class AddOn {
         
         private string nameField;

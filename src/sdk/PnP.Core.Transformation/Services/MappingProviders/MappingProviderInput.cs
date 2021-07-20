@@ -8,20 +8,15 @@ namespace PnP.Core.Transformation.Services.MappingProviders
     /// <summary>
     /// Defines the input for a mapping provider
     /// </summary>
-    public class MappingProviderInput
+    public class MappingProviderInput : BaseMappingProviderInput
     {
         /// <summary>
-        /// Creates an instance with the context specified
+        /// Public constructor
         /// </summary>
         /// <param name="context"></param>
-        public MappingProviderInput(PageTransformationContext context)
+        public MappingProviderInput(PageTransformationContext context): base(context)
         {
-            Context = context ?? throw new ArgumentNullException(nameof(context));
-        }
 
-        /// <summary>
-        /// Provides information about the current transformation
-        /// </summary>
-        public PageTransformationContext Context { get; }
+        }
     }
 }

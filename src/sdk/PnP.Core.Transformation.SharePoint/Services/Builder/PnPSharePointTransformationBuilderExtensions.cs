@@ -7,9 +7,12 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 using PnP.Core.Transformation.Services.Core;
 using PnP.Core.Transformation.Services.MappingProviders;
 using PnP.Core.Transformation.SharePoint;
-using PnP.Core.Transformation.SharePoint.Builder;
-using PnP.Core.Transformation.SharePoint.Builder.Configuration;
+using PnP.Core.Transformation.SharePoint.Services.Builder;
+using PnP.Core.Transformation.SharePoint.Services.Builder.Configuration;
 using PnP.Core.Transformation.SharePoint.MappingProviders;
+using PnP.Core.Transformation.SharePoint.Publishing;
+using PnP.Core.Transformation.SharePoint.Functions;
+using PnP.Core.Transformation.SharePoint.Services;
 
 namespace Microsoft.Extensions.DependencyInjection
 {
@@ -37,6 +40,17 @@ namespace Microsoft.Extensions.DependencyInjection
         {
             return services.AddPnPTransformation(options)
                 .WithSharePoint();
+        }
+
+        /// <summary>
+        /// Configures PnP Transformation for SharePoint with default options
+        /// </summary>
+        /// <param name="services">The collection of services in an <see cref="IServiceCollection" /></param>
+        /// <returns>A PnPTransformationBuilder instance</returns>
+        public static IPnPSharePointTransformationBuilder AddPnPSharePointTransformation(this IServiceCollection services, Action<PnPTransformationOptions> pnpOptions, Action<SharePointTransformationOptions> sharePointOptions)
+        {
+            return services.AddPnPTransformation(pnpOptions)
+                .WithSharePoint(sharePointOptions);
         }
 
         /// <summary>
@@ -75,6 +89,16 @@ namespace Microsoft.Extensions.DependencyInjection
             builder.Services.TryAddTransient<IUserMappingProvider, SharePointUserMappingProvider>();
             builder.Services.TryAddTransient<IUrlMappingProvider, SharePointUrlMappingProvider>();
             builder.Services.TryAddTransient<IWebPartMappingProvider, SharePointWebPartMappingProvider>();
+
+            // Add the custom PageLayoutAnalyser type
+            builder.Services.TryAddTransient<PageLayoutAnalyser, PageLayoutAnalyser>();
+
+            // Add the SharePoint functions service
+            builder.Services.TryAddTransient<FunctionProcessor, FunctionProcessor>();
+            builder.Services.TryAddTransient<SharePointFunctionsService, SharePointFunctionsService>();
+
+            // Add the HTML Transformator service
+            builder.Services.TryAddTransient<HtmlTransformator, HtmlTransformator>();
 
             return new PnPSharePointTransformationBuilder(builder.Services);
         }

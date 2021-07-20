@@ -42,11 +42,10 @@ namespace PnP.Core.Transformation.SharePoint.Test
             var context = new PageTransformationContext(task, sourceItem, targetPageUri);
 
             // Map url
-            var input = new UrlMappingProviderInput(context, sourceUri);
+            var input = new UrlMappingProviderInput(context, sourceUri.ToString());
             var result = await mappingProvider.MapUrlAsync(input);
 
-            Assert.AreEqual("https://capadevtest.sharepoint.com/sites/PnPSauceModern/Documents/Folder/Employee-Handbook.docx", result.Url);
+            Assert.AreEqual("https://capadevtest.sharepoint.com/sites/PnPSauceModern/Documents/Folder/Employee-Handbook.docx", result.Text);
         }
-
     }
 }

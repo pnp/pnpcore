@@ -10,17 +10,21 @@ using PnP.Core.Transformation.SharePoint.Extensions;
 using System.Xml.Serialization;
 using System.Text.RegularExpressions;
 using AngleSharp.Dom;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Caching.Memory;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace PnP.Core.Transformation.SharePoint.Publishing
 {
-    // TODO: This class should become a registered service and we should use Dependency Injection to
-    // get a reference to logger, cache, etc.
-
     /// <summary>
     /// Utility class to analyze a Page Layout
     /// </summary>
     internal class PageLayoutAnalyser
     {
+        private ILogger<PageLayoutAnalyser> logger;
+        private readonly IServiceProvider serviceProvider;
+        private readonly IMemoryCache memoryCache;
+
         /// <summary>
         /// Simple entity for the extracted blocks of data
         /// </summary>
@@ -45,17 +49,24 @@ namespace PnP.Core.Transformation.SharePoint.Publishing
         private Dictionary<string, string> _pageLayoutFileCache;
 
         #region Construction
+
         /// <summary>
         /// Analyse Page Layouts class constructor
         /// </summary>
-        public PageLayoutAnalyser()
+        public PageLayoutAnalyser(ILogger<PageLayoutAnalyser> logger,
+            IServiceProvider serviceProvider)
         {
+            this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
+            this.serviceProvider = serviceProvider;
+            this.memoryCache = this.serviceProvider.GetService<IMemoryCache>();
+
             _mapping = new PublishingPageTransformation();
             _contentTypeFieldCache = new Dictionary<string, FieldCollection>();
             _pageLayoutFileCache = new Dictionary<string, string>();
 
             parser = new HtmlParser();
         }
+
         #endregion
 
         #region Public interface
@@ -71,43 +82,42 @@ namespace PnP.Core.Transformation.SharePoint.Publishing
             // part can be used in point 2 for customers to generate a starting layout mapping file which they then can edit
             // Don't assume that you are in a top level site, you maybe in a sub site
 
-            ClientContext siteCollContext = EnsureSiteCollectionContext(pageLayoutItem.Context as ClientContext);
-
-            var spPageLayouts = GetAllPageLayouts(siteCollContext);
-
-            if (spPageLayouts != null)
+            using (ClientContext siteCollContext = EnsureSiteCollectionContext(pageLayoutItem.Context as ClientContext))
             {
-                foreach (ListItem layout in spPageLayouts)
+                var spPageLayouts = GetAllPageLayouts(siteCollContext);
+
+                if (spPageLayouts != null)
                 {
-                    try
+                    foreach (ListItem layout in spPageLayouts)
                     {
-                        if (skipOOBPageLayouts)
+                        try
                         {
-                            // Check if this is an OOB page layout and skip if so
-                            string pageLayoutName = Path.GetFileNameWithoutExtension(layout[SharePointConstants.FileLeafRefField].ToString());
-                            var oobPageLayoutFile = SharePointConstants.OobPublishingPageLayouts.Any(o => o.Equals(pageLayoutName, StringComparison.InvariantCultureIgnoreCase));
-                            if (oobPageLayoutFile)
+                            if (skipOOBPageLayouts)
                             {
-                                // TODO: We need to log the information
-                                // LogInfo(String.Format(LogStrings.OOBPageLayoutSkipped, pageLayoutName), LogStrings.Heading_PageLayoutAnalyser);
-                                continue;
+                                // Check if this is an OOB page layout and skip if so
+                                string pageLayoutName = Path.GetFileNameWithoutExtension(layout[SharePointConstants.FileLeafRefField].ToString());
+                                var oobPageLayoutFile = SharePointConstants.OobPublishingPageLayouts.Any(o => o.Equals(pageLayoutName, StringComparison.InvariantCultureIgnoreCase));
+                                if (oobPageLayoutFile)
+                                {
+                                    logger.LogInformation(string.Format(System.Globalization.CultureInfo.InvariantCulture,
+                                        SharePointTransformationResources.Info_OOBPageLayoutSkipped, pageLayoutName));
+                                    continue;
+                                }
                             }
+
+                            AnalysePageLayout(layout);
+                        }
+                        catch (Exception)
+                        {
+                            logger.LogError(SharePointTransformationResources.Error_CannotProcessPageLayoutAnalyseAll);
                         }
 
-                        AnalysePageLayout(layout);
                     }
-                    catch (Exception ex)
-                    {
-                        // TODO: We need to log the information
-                        // LogError(LogStrings.Error_CannotProcessPageLayoutAnalyseAll, LogStrings.Heading_PageLayoutAnalyser, ex);
-                    }
-
                 }
-            }
-            else
-            {
-                // TODO: We need to log the information
-                // LogInfo(LogStrings.AnalyserNoLayoutsFound, LogStrings.Heading_PageLayoutAnalyser);
+                else
+                {
+                    logger.LogInformation(SharePointTransformationResources.Info_AnalyserNoLayoutsFound);
+                }
             }
         }
 
@@ -182,16 +192,15 @@ namespace PnP.Core.Transformation.SharePoint.Publishing
                     _mapping.PageLayouts = new[] { layoutMapping };
                 }
 
-                // TODO: We need to log the information
-                // LogInfo(string.Format(LogStrings.AnalyserMappingLayout, layoutMapping.Name), LogStrings.Heading_PageLayoutAnalyser);
+                logger.LogInformation(string.Format(System.Globalization.CultureInfo.InvariantCulture,
+                    SharePointTransformationResources.Info_AnalyserMappingLayout, layoutMapping.Name));
 
                 return layoutMapping;
 
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                // TODO: We need to log the error
-                // LogError(LogStrings.Error_CannotProcessPageLayoutAnalyse, LogStrings.Heading_PageLayoutAnalyser, ex);
+                logger.LogError(SharePointTransformationResources.Error_CannotProcessPageLayoutAnalyse);
             }
 
             return null;
@@ -223,8 +232,7 @@ namespace PnP.Core.Transformation.SharePoint.Publishing
             }
             else
             {
-                // TODO: We need to log the warning
-                // LogWarning(LogStrings.Warning_PageLayoutsCannotBeDetermined, LogStrings.Heading_PageLayoutAnalyser);
+                logger.LogWarning(SharePointTransformationResources.Warning_PageLayoutsCannotBeDetermined);
             }
 
             return null;
@@ -267,15 +275,15 @@ namespace PnP.Core.Transformation.SharePoint.Publishing
                     xmlMapping.Serialize(sw, _mapping);
                 }
 
-                // TODO: We need to log the information
-                // LogInfo($"{LogStrings.XmlMappingSavedAs}: {mappingFileName}", LogStrings.Heading_PageLayoutAnalyser);
+                logger.LogInformation(string.Format(System.Globalization.CultureInfo.InvariantCulture,
+                    SharePointTransformationResources.Info_XmlMappingSavedAs, mappingFileName));
+
                 return mappingFileName;
             }
             catch (Exception ex)
             {
-                // TODO: We need to log the error
-                // var message = string.Format(LogStrings.Error_CannotWriteToXmlFile, ex.Message, ex.StackTrace);
-                // LogError(message, LogStrings.Heading_PageLayoutAnalyser, ex);
+                logger.LogError(string.Format(System.Globalization.CultureInfo.InvariantCulture,
+                    SharePointTransformationResources.Error_CannotWriteToXmlFile, ex.Message, ex.StackTrace));
             }
 
             return string.Empty;
@@ -344,16 +352,16 @@ namespace PnP.Core.Transformation.SharePoint.Publishing
                 siteCollContext.ExecuteQueryRetry();
 
                 var galleryItemsCount = galleryItems.Count;
-                // TODO: We need to log the information
-                // LogInfo(String.Format(LogStrings.AnalyserFoundItems, galleryItemsCount), LogStrings.Heading_PageLayoutAnalyser);
+
+                logger.LogInformation(string.Format(System.Globalization.CultureInfo.InvariantCulture,
+                    SharePointTransformationResources.Info_AnalyserFoundItems, galleryItemsCount));
 
                 return galleryItemsCount > 0 ? galleryItems : null;
 
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                // TODO: We need to log the error
-                // LogError(LogStrings.Error_AnalyserCouldNotFindLayouts, LogStrings.Heading_PageLayoutAnalyser, ex);
+                logger.LogError(SharePointTransformationResources.Error_AnalyserCouldNotFindLayouts);
             }
 
             return null;
@@ -418,8 +426,7 @@ namespace PnP.Core.Transformation.SharePoint.Publishing
             }
             catch (Exception ex)
             {
-                // TODO: We need to log the error
-                // LogError(LogStrings.Error_AnalyserErrorOccurredExtractMetadata, LogStrings.Heading_PageLayoutAnalyser, ex);
+                logger.LogError(SharePointTransformationResources.Error_AnalyserErrorOccurredExtractMetadata);
             }
 
             return fields.ToArray();
@@ -475,8 +482,7 @@ namespace PnP.Core.Transformation.SharePoint.Publishing
             }
             catch (Exception ex)
             {
-                // TODO: We need to log the error
-                // LogError(LogStrings.Error_AnalyserErrorOccurredExtractNamespaces, LogStrings.Heading_PageLayoutAnalyser, ex);
+                logger.LogError(SharePointTransformationResources.Error_AnalyserErrorOccurredExtractNamespaces);
             }
 
             return tagPrefixes;
@@ -654,8 +660,7 @@ namespace PnP.Core.Transformation.SharePoint.Publishing
             }
             catch (Exception ex)
             {
-                // TODO: We need to log the error
-                // LogError(LogStrings.Error_AnalyserErrorOccurredExtractHtmlBlocks, LogStrings.Heading_PageLayoutAnalyser, ex);
+                logger.LogError(SharePointTransformationResources.Error_AnalyserErrorOccurredExtractHtmlBlocks);
             }
 
             return extractedHtmlBlocks;
@@ -732,10 +737,9 @@ namespace PnP.Core.Transformation.SharePoint.Publishing
 
                 return spFields;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                // TODO: We need to log the error
-                // LogError(LogStrings.Error_CannotMapMetadataFields, LogStrings.Heading_PageLayoutAnalyser, ex);
+                logger.LogError(SharePointTransformationResources.Error_CannotMapMetadataFields);
                 throw;
             }
         }
@@ -811,10 +815,9 @@ namespace PnP.Core.Transformation.SharePoint.Publishing
                 }
 
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                // TODO: We need to log the error
-                // LogError(LogStrings.Error_AnalyserCleaningExtractedWebPartFields, LogStrings.Heading_PageLayoutAnalyser, ex);
+                logger.LogError(SharePointTransformationResources.Error_AnalyserCleaningExtractedWebPartFields);
             }
 
             return cleanedWebPartFields;
@@ -862,10 +865,9 @@ namespace PnP.Core.Transformation.SharePoint.Publishing
                 }
 
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                // TODO: We need to log the error
-                // LogError(LogStrings.Error_AnalyserExtractPageHeaderFromPageLayout, LogStrings.Heading_PageLayoutAnalyser, ex);
+                logger.LogError(SharePointTransformationResources.Error_AnalyserExtractPageHeaderFromPageLayout);
             }
 
             return null;
@@ -888,17 +890,17 @@ namespace PnP.Core.Transformation.SharePoint.Publishing
                 if (context.Web.IsSubSite())
                 {
                     string siteCollectionUrl = context.Site.EnsureProperty(o => o.Url);
-                    return context.Clone(siteCollectionUrl);
+                    return new ClientContext(siteCollectionUrl);
                 }
                 else
                 {
                     return context;
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                // TODO: We need to log the exception
-                // LogError(LogStrings.Error_CannotGetSiteCollContext, LogStrings.Heading_PageLayoutAnalyser, ex);
+                logger.LogError(SharePointTransformationResources.Info_AnalyserFoundItems);
+                throw;
             }
         }
 
@@ -921,8 +923,7 @@ namespace PnP.Core.Transformation.SharePoint.Publishing
                 }
                 catch (Exception ex)
                 {
-                    // TODO: We need to log the error
-                    // LogError(LogStrings.Error_CannotCastToEnum, LogStrings.Heading_PageLayoutAnalyser, ex);
+                    logger.LogError(SharePointTransformationResources.Error_CannotCastToEnum);
                 }
             }
 

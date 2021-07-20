@@ -8,7 +8,7 @@ namespace PnP.Core.Transformation.Services.MappingProviders
     /// <summary>
     /// Defines the input for a URL mapping provider
     /// </summary>
-    public class UserMappingProviderInput : MappingProviderInput
+    public class UserMappingProviderInput : BaseMappingProviderInput
     {
         /// <summary>
         /// Creates an instance for user

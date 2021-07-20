@@ -1,4 +1,7 @@
-﻿namespace PnP.Core.Transformation.SharePoint.Builder.Configuration
+﻿using System;
+using System.Collections.Generic;
+
+namespace PnP.Core.Transformation.SharePoint.Services.Builder.Configuration
 {
     
     /// <summary>
@@ -30,5 +33,31 @@
         /// Defines whether the target page takes the source page name or not
         /// </summary>
         public bool TargetPageTakesSourcePageName { get; set; }
+
+        /// <summary>
+        /// Skip URL rewriting
+        /// </summary>
+        public bool SkipUrlRewrite { get; set; }
+
+        /// <summary>
+        /// Custom URL mappings
+        /// </summary>
+        public List<UrlMapping> UrlMappings { get; set; }
+    }
+
+    /// <summary>
+    /// Defines a custom URL mapping item
+    /// </summary>
+    public class UrlMapping
+    {
+        /// <summary>
+        /// Url to be replaced
+        /// </summary>
+        public string SourceUrl { get; set; }
+
+        /// <summary>
+        /// Url replacement value
+        /// </summary>
+        public string TargetUrl { get; set; }
     }
 }

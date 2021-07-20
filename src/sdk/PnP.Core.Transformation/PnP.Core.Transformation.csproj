@@ -89,5 +89,20 @@
     <ProjectReference Include="..\PnP.Core.Auth\PnP.Core.Auth.csproj" />
     <ProjectReference Include="..\PnP.Core\PnP.Core.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="TransformationResources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>TransformationResources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="TransformationResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>TransformationResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
   
 </Project>
