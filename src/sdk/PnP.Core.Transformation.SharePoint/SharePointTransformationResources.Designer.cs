@@ -259,6 +259,15 @@ namespace PnP.Core.Transformation.SharePoint {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Failed to ensure user exists: {0}.
+        /// </summary>
+        internal static string Error_GetPrincipalFailedEnsureUser {
+            get {
+                return ResourceManager.GetString("Error_GetPrincipalFailedEnsureUser", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Body contents was set to null, this is an invalid and empty blog page: &apos;{0}&apos;.
         /// </summary>
         internal static string Error_InvalidOrMissingBlogContent {
@@ -430,6 +439,15 @@ namespace PnP.Core.Transformation.SharePoint {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Added &apos;Client Side Text Web Part&apos; to target page.
+        /// </summary>
+        internal static string Info_AddedClientSideTextWebPart {
+            get {
+                return ResourceManager.GetString("Info_AddedClientSideTextWebPart", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Found {0} page layouts.
         /// </summary>
         internal static string Info_AnalyserFoundItems {
@@ -475,11 +493,29 @@ namespace PnP.Core.Transformation.SharePoint {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Using {0} modern web part.
+        /// </summary>
+        internal static string Info_ContentUsingModernWebPart {
+            get {
+                return ResourceManager.GetString("Info_ContentUsingModernWebPart", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Web Part &apos;{0}&apos; of type &apos;{1}&apos; is being transformed.
         /// </summary>
         internal static string Info_ContentWebPartBeingTransformed {
             get {
                 return ResourceManager.GetString("Info_ContentWebPartBeingTransformed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Item level permissions read.
+        /// </summary>
+        internal static string Info_GetItemLevelPermissions {
+            get {
+                return ResourceManager.GetString("Info_GetItemLevelPermissions", resourceCulture);
             }
         }
         
@@ -592,6 +628,15 @@ namespace PnP.Core.Transformation.SharePoint {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Removing empty text web part.
+        /// </summary>
+        internal static string Info_TransformRemovingEmptyWebPart {
+            get {
+                return ResourceManager.GetString("Info_TransformRemovingEmptyWebPart", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The current page is used as a home page - settings modern page to &apos;Home&apos; layout.
         /// </summary>
         internal static string Info_TransformSourcePageIsHomePage {
@@ -606,6 +651,15 @@ namespace PnP.Core.Transformation.SharePoint {
         internal static string Info_TransformSourcePageIsNotHomePage {
             get {
                 return ResourceManager.GetString("Info_TransformSourcePageIsNotHomePage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Using &apos;custom&apos; modern web part.
+        /// </summary>
+        internal static string Info_UsingCustomModernWebPart {
+            get {
+                return ResourceManager.GetString("Info_UsingCustomModernWebPart", resourceCulture);
             }
         }
         
@@ -669,6 +723,15 @@ namespace PnP.Core.Transformation.SharePoint {
         internal static string Warning_TableCouldNotBeNormalized {
             get {
                 return ResourceManager.GetString("Warning_TableCouldNotBeNormalized", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You don&apos;t have needed the needed permission level (ManagePermissions) to read item level permissions.
+        /// </summary>
+        internal static string Warning_TransformGetItemPermissionsAccessDenied {
+            get {
+                return ResourceManager.GetString("Warning_TransformGetItemPermissionsAccessDenied", resourceCulture);
             }
         }
     }

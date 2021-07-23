@@ -9,7 +9,7 @@ using PnP.Core.Transformation.Services.MappingProviders;
 namespace PnP.Core.Transformation.SharePoint.Services.MappingProviders
 {
     /// <summary>
-    /// Defines the input for a Web Part mapping provider
+    /// Defines the input for a Web Part mapping provider for SharePoint
     /// </summary>
     public class SharePointWebPartMappingProviderInput : WebPartMappingProviderInput
     {

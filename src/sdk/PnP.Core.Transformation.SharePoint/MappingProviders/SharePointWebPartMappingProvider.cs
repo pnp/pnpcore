@@ -36,13 +36,6 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
         private readonly IMemoryCache memoryCache;
         private readonly FunctionProcessor functionProcessor;
 
-        class CombinedMapping
-        {
-            public int Order { get; set; }
-            public ClientSideText ClientSideText { get; set; }
-            public ClientSideWebPart ClientSideWebPart { get; set; }
-        }
-
         /// <summary>
         /// Main constructor for the mapping provider
         /// </summary>
@@ -132,10 +125,12 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
                 }
             }
 
+            var globalTokens = PrepareGlobalTokens();
+
             if (webPartData != null && webPartData.Mappings != null)
             {
                 // Add site level (e.g. site) tokens to the web part properties and model so they can be used in the same manner as a web part property
-                UpdateWebPartDataProperties(webPartData, mappingFile);
+                UpdateWebPartDataProperties(webPart, webPartData, mappingFile, globalTokens);
 
                 string selectorResult = null;
                 try
@@ -215,384 +210,35 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
                 }
             }
 
-            // Use the mapping data => make one list of Text and WebParts to allow for correct ordering
-            logger.LogDebug(SharePointTransformationResources.Debug_CombiningMappingData);
-            var combinedMappinglist = new List<CombinedMapping>();
-            if (mapping.ClientSideText != null)
-            {
-                foreach (var map in mapping.ClientSideText.OrderBy(p => p.Order))
-                {
-                    if (!Int32.TryParse(map.Order, out Int32 mapOrder))
-                    {
-                        mapOrder = 0;
-                    }
+            return new SharePointWebPartMappingProviderOutput(mapping);
+        }
 
-                    combinedMappinglist.Add(new CombinedMapping { ClientSideText = map, ClientSideWebPart = null, Order = mapOrder });
-                }
-            }
-            if (mapping.ClientSideWebPart != null)
-            {
-                foreach (var map in mapping.ClientSideWebPart.OrderBy(p => p.Order))
-                {
-                    if (!Int32.TryParse(map.Order, out Int32 mapOrder))
-                    {
-                        mapOrder = 0;
-                    }
+        /// <summary>
+        /// Prepares placeholders for global tokens
+        /// </summary>
+        /// <returns></returns>
+        private Dictionary<string, string> PrepareGlobalTokens()
+        {
+            Dictionary<string, string> globalTokens = new Dictionary<string, string>(5);
 
-                    combinedMappinglist.Add(new CombinedMapping { ClientSideText = null, ClientSideWebPart = map, Order = mapOrder });
-                }
-            }
+            //var url = cc.Web.GetUrl();
+            //Uri hostUri = new Uri(url);
 
-            //// Get the order of the last inserted control in this column
-            //int order = LastColumnOrder(webPart.Row - 1, webPart.Column - 1);
-            //// Interate the controls for this mapping using their order
-            //foreach (var map in combinedMappinglist.OrderBy(p => p.Order))
-            //{
-            //    order++;
+            //// Add the fixed properties
+            //globalTokens.Add("Host", $"{hostUri.Scheme}://{hostUri.DnsSafeHost}");
+            //globalTokens.Add("Web", cc.Web.ServerRelativeUrl.TrimEnd('/'));
+            //globalTokens.Add("SiteCollection", cc.Site.RootWeb.ServerRelativeUrl.TrimEnd('/'));
+            //globalTokens.Add("WebId", cc.Web.Id.ToString());
+            //globalTokens.Add("SiteId", cc.Site.Id.ToString());
 
-            //    if (map.ClientSideText != null)
-            //    {
-            //        // Insert a Text control
-            //        //PnP.Framework.Pages.ClientSideText text = new PnP.Framework.Pages.ClientSideText()
-            //        //{
-            //        //    Text = TokenParser.ReplaceTokens(map.ClientSideText.Text, webPart)
-            //        //};
+            // Add the fixed properties tokens
+            globalTokens.Add("Host", "{Host}");
+            globalTokens.Add("Web", "{Web}");
+            globalTokens.Add("SiteCollection", "{SiteCollection}");
+            globalTokens.Add("WebId", "{WebId}");
+            globalTokens.Add("SiteId", "{SiteId}");
 
-            //        var text = page.NewTextPart();
-            //        text.Text = TokenParser.ReplaceTokens(map.ClientSideText.Text, webPart);
-
-            //        page.AddControl(text, page.Sections[webPart.Row - 1].Columns[webPart.Column - 1], order);
-            //        LogInfo(LogStrings.AddedClientSideTextWebPart, LogStrings.Heading_AddingWebPartsToPage);
-
-            //    }
-            //    else if (map.ClientSideWebPart != null)
-            //    {
-            //        // Insert a web part
-            //        //ClientSideComponent baseControl = null;
-            //        PnPCore.IPageComponent baseControl = null;
-
-            //        if (map.ClientSideWebPart.Type == ClientSideWebPartType.Custom)
-            //        {
-            //            // Parse the control ID to support generic web part placement scenarios
-            //            map.ClientSideWebPart.ControlId = TokenParser.ReplaceTokens(map.ClientSideWebPart.ControlId, webPart);
-            //            // Check if this web part belongs to the list of "usable" web parts for this site
-            //            baseControl = componentsToAdd.FirstOrDefault(p => p.Id.Equals($"{{{map.ClientSideWebPart.ControlId}}}", StringComparison.InvariantCultureIgnoreCase));
-            //            LogInfo(LogStrings.UsingCustomModernWebPart, LogStrings.Heading_AddingWebPartsToPage);
-            //        }
-            //        else
-            //        {
-            //            string webPartName = "";
-            //            switch (map.ClientSideWebPart.Type)
-            //            {
-            //                case ClientSideWebPartType.List:
-            //                    {
-            //                        //webPartName = ClientSidePage.ClientSideWebPartEnumToName(DefaultClientSideWebParts.List);
-            //                        webPartName = page.DefaultWebPartToWebPartId(PnPCore.DefaultWebPart.List);
-            //                        break;
-            //                    }
-            //                case ClientSideWebPartType.Image:
-            //                    {
-            //                        //webPartName = ClientSidePage.ClientSideWebPartEnumToName(DefaultClientSideWebParts.Image);
-            //                        webPartName = page.DefaultWebPartToWebPartId(PnPCore.DefaultWebPart.Image);
-            //                        break;
-            //                    }
-            //                case ClientSideWebPartType.ContentRollup:
-            //                    {
-            //                        //webPartName = ClientSidePage.ClientSideWebPartEnumToName(DefaultClientSideWebParts.ContentRollup);
-            //                        webPartName = page.DefaultWebPartToWebPartId(PnPCore.DefaultWebPart.ContentRollup);
-            //                        break;
-            //                    }
-            //                case ClientSideWebPartType.BingMap:
-            //                    {
-            //                        //webPartName = ClientSidePage.ClientSideWebPartEnumToName(DefaultClientSideWebParts.BingMap);
-            //                        webPartName = page.DefaultWebPartToWebPartId(PnPCore.DefaultWebPart.BingMap);
-            //                        break;
-            //                    }
-            //                case ClientSideWebPartType.ContentEmbed:
-            //                    {
-            //                        //webPartName = ClientSidePage.ClientSideWebPartEnumToName(DefaultClientSideWebParts.ContentEmbed);
-            //                        webPartName = page.DefaultWebPartToWebPartId(PnPCore.DefaultWebPart.ContentEmbed);
-            //                        break;
-            //                    }
-            //                case ClientSideWebPartType.DocumentEmbed:
-            //                    {
-            //                        //webPartName = ClientSidePage.ClientSideWebPartEnumToName(DefaultClientSideWebParts.DocumentEmbed);
-            //                        webPartName = page.DefaultWebPartToWebPartId(PnPCore.DefaultWebPart.DocumentEmbed);
-            //                        break;
-            //                    }
-            //                case ClientSideWebPartType.ImageGallery:
-            //                    {
-            //                        //webPartName = ClientSidePage.ClientSideWebPartEnumToName(DefaultClientSideWebParts.ImageGallery);
-            //                        webPartName = page.DefaultWebPartToWebPartId(PnPCore.DefaultWebPart.ImageGallery);
-            //                        break;
-            //                    }
-            //                case ClientSideWebPartType.LinkPreview:
-            //                    {
-            //                        //webPartName = ClientSidePage.ClientSideWebPartEnumToName(DefaultClientSideWebParts.LinkPreview);
-            //                        webPartName = page.DefaultWebPartToWebPartId(PnPCore.DefaultWebPart.LinkPreview);
-            //                        break;
-            //                    }
-            //                case ClientSideWebPartType.NewsFeed:
-            //                    {
-            //                        //webPartName = ClientSidePage.ClientSideWebPartEnumToName(DefaultClientSideWebParts.NewsFeed);
-            //                        webPartName = page.DefaultWebPartToWebPartId(PnPCore.DefaultWebPart.NewsFeed);
-            //                        break;
-            //                    }
-            //                case ClientSideWebPartType.NewsReel:
-            //                    {
-            //                        //webPartName = ClientSidePage.ClientSideWebPartEnumToName(DefaultClientSideWebParts.NewsReel);
-            //                        webPartName = page.DefaultWebPartToWebPartId(PnPCore.DefaultWebPart.NewsReel);
-            //                        break;
-            //                    }
-            //                case ClientSideWebPartType.News:
-            //                    {
-            //                        //webPartName = ClientSidePage.ClientSideWebPartEnumToName(DefaultClientSideWebParts.News);
-            //                        webPartName = page.DefaultWebPartToWebPartId(PnPCore.DefaultWebPart.News);
-            //                        break;
-            //                    }
-            //                case ClientSideWebPartType.PowerBIReportEmbed:
-            //                    {
-            //                        //webPartName = ClientSidePage.ClientSideWebPartEnumToName(DefaultClientSideWebParts.PowerBIReportEmbed);
-            //                        webPartName = page.DefaultWebPartToWebPartId(PnPCore.DefaultWebPart.PowerBIReportEmbed);
-            //                        break;
-            //                    }
-            //                case ClientSideWebPartType.QuickChart:
-            //                    {
-            //                        //webPartName = ClientSidePage.ClientSideWebPartEnumToName(DefaultClientSideWebParts.QuickChart);
-            //                        webPartName = page.DefaultWebPartToWebPartId(PnPCore.DefaultWebPart.QuickChart);
-            //                        break;
-            //                    }
-            //                case ClientSideWebPartType.SiteActivity:
-            //                    {
-            //                        //webPartName = ClientSidePage.ClientSideWebPartEnumToName(DefaultClientSideWebParts.SiteActivity);
-            //                        webPartName = page.DefaultWebPartToWebPartId(PnPCore.DefaultWebPart.SiteActivity);
-            //                        break;
-            //                    }
-            //                case ClientSideWebPartType.VideoEmbed:
-            //                    {
-            //                        //webPartName = ClientSidePage.ClientSideWebPartEnumToName(DefaultClientSideWebParts.VideoEmbed);
-            //                        webPartName = page.DefaultWebPartToWebPartId(PnPCore.DefaultWebPart.VideoEmbed);
-            //                        break;
-            //                    }
-            //                case ClientSideWebPartType.YammerEmbed:
-            //                    {
-            //                        //webPartName = ClientSidePage.ClientSideWebPartEnumToName(DefaultClientSideWebParts.YammerEmbed);
-            //                        webPartName = page.DefaultWebPartToWebPartId(PnPCore.DefaultWebPart.YammerEmbed);
-            //                        break;
-            //                    }
-            //                case ClientSideWebPartType.Events:
-            //                    {
-            //                        //webPartName = ClientSidePage.ClientSideWebPartEnumToName(DefaultClientSideWebParts.Events);
-            //                        webPartName = page.DefaultWebPartToWebPartId(PnPCore.DefaultWebPart.Events);
-            //                        break;
-            //                    }
-            //                case ClientSideWebPartType.GroupCalendar:
-            //                    {
-            //                        //webPartName = ClientSidePage.ClientSideWebPartEnumToName(DefaultClientSideWebParts.GroupCalendar);
-            //                        webPartName = page.DefaultWebPartToWebPartId(PnPCore.DefaultWebPart.GroupCalendar);
-            //                        break;
-            //                    }
-            //                case ClientSideWebPartType.Hero:
-            //                    {
-            //                        //webPartName = ClientSidePage.ClientSideWebPartEnumToName(DefaultClientSideWebParts.Hero);
-            //                        webPartName = page.DefaultWebPartToWebPartId(PnPCore.DefaultWebPart.Hero);
-            //                        break;
-            //                    }
-            //                case ClientSideWebPartType.PageTitle:
-            //                    {
-            //                        //webPartName = ClientSidePage.ClientSideWebPartEnumToName(DefaultClientSideWebParts.PageTitle);
-            //                        webPartName = page.DefaultWebPartToWebPartId(PnPCore.DefaultWebPart.PageTitle);
-            //                        break;
-            //                    }
-            //                case ClientSideWebPartType.People:
-            //                    {
-            //                        //webPartName = ClientSidePage.ClientSideWebPartEnumToName(DefaultClientSideWebParts.People);
-            //                        webPartName = page.DefaultWebPartToWebPartId(PnPCore.DefaultWebPart.People);
-            //                        break;
-            //                    }
-            //                case ClientSideWebPartType.QuickLinks:
-            //                    {
-            //                        //webPartName = ClientSidePage.ClientSideWebPartEnumToName(DefaultClientSideWebParts.QuickLinks);
-            //                        webPartName = page.DefaultWebPartToWebPartId(PnPCore.DefaultWebPart.QuickLinks);
-            //                        break;
-            //                    }
-            //                case ClientSideWebPartType.Divider:
-            //                    {
-            //                        //webPartName = ClientSidePage.ClientSideWebPartEnumToName(DefaultClientSideWebParts.Divider);
-            //                        webPartName = page.DefaultWebPartToWebPartId(PnPCore.DefaultWebPart.Divider);
-            //                        break;
-            //                    }
-            //                case ClientSideWebPartType.MicrosoftForms:
-            //                    {
-            //                        //webPartName = ClientSidePage.ClientSideWebPartEnumToName(DefaultClientSideWebParts.MicrosoftForms);
-            //                        webPartName = page.DefaultWebPartToWebPartId(PnPCore.DefaultWebPart.MicrosoftForms);
-            //                        break;
-            //                    }
-            //                case ClientSideWebPartType.Spacer:
-            //                    {
-            //                        //webPartName = ClientSidePage.ClientSideWebPartEnumToName(DefaultClientSideWebParts.Spacer);
-            //                        webPartName = page.DefaultWebPartToWebPartId(PnPCore.DefaultWebPart.Spacer);
-            //                        break;
-            //                    }
-            //                case ClientSideWebPartType.ClientWebPart:
-            //                    {
-            //                        //webPartName = ClientSidePage.ClientSideWebPartEnumToName(DefaultClientSideWebParts.ClientWebPart);
-            //                        webPartName = page.DefaultWebPartToWebPartId(PnPCore.DefaultWebPart.ClientWebPart);
-            //                        break;
-            //                    }
-            //                case ClientSideWebPartType.PowerApps:
-            //                    {
-            //                        //webPartName = ClientSidePage.ClientSideWebPartEnumToName(DefaultClientSideWebParts.PowerApps);
-            //                        webPartName = page.DefaultWebPartToWebPartId(PnPCore.DefaultWebPart.PowerApps);
-            //                        break;
-            //                    }
-            //                case ClientSideWebPartType.CodeSnippet:
-            //                    {
-            //                        //webPartName = ClientSidePage.ClientSideWebPartEnumToName(DefaultClientSideWebParts.CodeSnippet);
-            //                        webPartName = page.DefaultWebPartToWebPartId(PnPCore.DefaultWebPart.CodeSnippet);
-            //                        break;
-            //                    }
-            //                case ClientSideWebPartType.PageFields:
-            //                    {
-            //                        //webPartName = ClientSidePage.ClientSideWebPartEnumToName(DefaultClientSideWebParts.PageFields);
-            //                        webPartName = page.DefaultWebPartToWebPartId(PnPCore.DefaultWebPart.PageFields);
-            //                        break;
-            //                    }
-            //                case ClientSideWebPartType.Weather:
-            //                    {
-            //                        //webPartName = ClientSidePage.ClientSideWebPartEnumToName(DefaultClientSideWebParts.Weather);
-            //                        webPartName = page.DefaultWebPartToWebPartId(PnPCore.DefaultWebPart.Weather);
-            //                        break;
-            //                    }
-            //                case ClientSideWebPartType.YouTube:
-            //                    {
-            //                        //webPartName = ClientSidePage.ClientSideWebPartEnumToName(DefaultClientSideWebParts.YouTube);
-            //                        webPartName = page.DefaultWebPartToWebPartId(PnPCore.DefaultWebPart.YouTube);
-            //                        break;
-            //                    }
-            //                case ClientSideWebPartType.MyDocuments:
-            //                    {
-            //                        //webPartName = ClientSidePage.ClientSideWebPartEnumToName(DefaultClientSideWebParts.MyDocuments);
-            //                        webPartName = page.DefaultWebPartToWebPartId(PnPCore.DefaultWebPart.MyDocuments);
-            //                        break;
-            //                    }
-            //                case ClientSideWebPartType.YammerFullFeed:
-            //                    {
-            //                        //webPartName = ClientSidePage.ClientSideWebPartEnumToName(DefaultClientSideWebParts.YammerFullFeed);
-            //                        webPartName = page.DefaultWebPartToWebPartId(PnPCore.DefaultWebPart.YammerFullFeed);
-            //                        break;
-            //                    }
-            //                case ClientSideWebPartType.CountDown:
-            //                    {
-            //                        //webPartName = ClientSidePage.ClientSideWebPartEnumToName(DefaultClientSideWebParts.CountDown);
-            //                        webPartName = page.DefaultWebPartToWebPartId(PnPCore.DefaultWebPart.CountDown);
-            //                        break;
-            //                    }
-            //                case ClientSideWebPartType.ListProperties:
-            //                    {
-            //                        //webPartName = ClientSidePage.ClientSideWebPartEnumToName(DefaultClientSideWebParts.ListProperties);
-            //                        webPartName = page.DefaultWebPartToWebPartId(PnPCore.DefaultWebPart.ListProperties);
-            //                        break;
-            //                    }
-            //                case ClientSideWebPartType.MarkDown:
-            //                    {
-            //                        //webPartName = ClientSidePage.ClientSideWebPartEnumToName(DefaultClientSideWebParts.MarkDown);
-            //                        webPartName = page.DefaultWebPartToWebPartId(PnPCore.DefaultWebPart.MarkDown);
-            //                        break;
-            //                    }
-            //                case ClientSideWebPartType.Planner:
-            //                    {
-            //                        //webPartName = ClientSidePage.ClientSideWebPartEnumToName(DefaultClientSideWebParts.Planner);
-            //                        webPartName = page.DefaultWebPartToWebPartId(PnPCore.DefaultWebPart.Planner);
-            //                        break;
-            //                    }
-            //                default:
-            //                    {
-            //                        break;
-            //                    }
-            //            }
-
-            //            // SharePoint add-ins can be added on client side pages...all add-ins are added via the client web part, so we need additional logic to find the one we need
-            //            if (map.ClientSideWebPart.Type == ClientSideWebPartType.ClientWebPart)
-            //            {
-            //                var addinComponents = componentsToAdd.Where(p => p.Name.Equals(webPartName, StringComparison.InvariantCultureIgnoreCase));
-            //                foreach (var addin in addinComponents)
-            //                {
-            //                    // Find the right add-in web part via title matching...maybe not bullet proof but did find anything better for now
-            //                    JObject wpJObject = JObject.Parse(addin.Manifest);
-
-            //                    // As there can be multiple classic web parts (via provider hosted add ins or SharePoint hosted add ins) we're looping to find the first one with a matching title
-            //                    foreach (var addinEntry in wpJObject["preconfiguredEntries"])
-            //                    {
-            //                        if (addinEntry["title"]["default"].Value<string>() == webPart.Title)
-            //                        {
-            //                            baseControl = addin;
-
-            //                            var jsonProperties = addinEntry;
-
-            //                            // Fill custom web part properties in this json. Custom properties are listed as child elements under clientWebPartProperties, 
-            //                            // replace their "default" value with the value we got from the web part's properties
-            //                            jsonProperties = PopulateAddInProperties(jsonProperties, webPart);
-
-            //                            // Override the JSON data we read from the model as this is fully dynamic due to the nature of the add-in client part
-            //                            map.ClientSideWebPart.JsonControlData = jsonProperties.ToString(Newtonsoft.Json.Formatting.None);
-
-            //                            LogInfo($"{LogStrings.ContentUsingAddinWebPart} '{baseControl.Name}' ", LogStrings.Heading_AddingWebPartsToPage);
-            //                            break;
-            //                        }
-            //                    }
-            //                }
-            //            }
-            //            else
-            //            {
-            //                baseControl = componentsToAdd.FirstOrDefault(p => p.Name.Equals(webPartName, StringComparison.InvariantCultureIgnoreCase));
-            //                LogInfo($"{LogStrings.ContentUsing} '{ map.ClientSideWebPart.Type.ToString() }' {LogStrings.ContentModernWebPart}", LogStrings.Heading_AddingWebPartsToPage);
-            //            }
-            //        }
-
-            //        // If we found the web part as a possible candidate to use then add it
-            //        if (baseControl != null)
-            //        {
-            //            var jsonDecoded = WebUtility.HtmlDecode(TokenParser.ReplaceTokens(map.ClientSideWebPart.JsonControlData, webPart));
-            //            //PnP.Framework.Pages.ClientSideWebPart myWebPart = new PnP.Framework.Pages.ClientSideWebPart(baseControl)
-            //            //{
-            //            //    Order = map.Order,
-            //            //    PropertiesJson = jsonDecoded
-            //            //};
-
-            //            var myWebPart = page.NewWebPart(baseControl);
-            //            myWebPart.Order = map.Order;
-            //            myWebPart.PropertiesJson = jsonDecoded;
-
-            //            page.AddControl(myWebPart, page.Sections[webPart.Row - 1].Columns[webPart.Column - 1], order);
-            //            LogInfo($"{LogStrings.ContentAdded} '{ myWebPart.Title }' {LogStrings.ContentClientToTargetPage}", LogStrings.Heading_AddingWebPartsToPage);
-            //        }
-            //        else
-            //        {
-            //            LogWarning(LogStrings.ContentWarnModernNotFound, LogStrings.Heading_AddingWebPartsToPage);
-            //        }
-
-            //    }
-            //}
-
-            // Transform the source Web Part into the the target Web Part
-            result.WebPart = new PnP.Core.Transformation.Model.WebPartEntity();
-            //{
-            //    Title = webPartToRetrieve.WebPartDefinition.WebPart.Title,
-            //    Type = webPartToRetrieve.WebPartType,
-            //    Id = webPartToRetrieve.WebPartDefinition.Id,
-            //    ServerControlId = webPartToRetrieve.Id,
-            //    Row = webPartToRetrieve.Row,
-            //    Column = webPartToRetrieve.Column,
-            //    Order = webPartToRetrieve.Order,
-            //    ZoneId = "",
-            //    ZoneIndex = (uint)webPartToRetrieve.WebPartDefinition.WebPart.ZoneIndex,
-            //    IsClosed = webPartToRetrieve.WebPartDefinition.WebPart.IsClosed,
-            //    Hidden = webPartToRetrieve.WebPartDefinition.WebPart.Hidden,
-            //    Properties = ExtractProperties(input, mapping);
-            //};
-
-            return result;
+            return globalTokens;
         }
 
         private WebPartMapping LoadMappingFile(string mappingFilePath = null)
@@ -862,7 +508,7 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
             return propertiesToKeep;
         }
 
-        private void UpdateWebPartDataProperties(WebPart webPartData, WebPartMapping mapping)
+        private void UpdateWebPartDataProperties(WebPartEntity webPart, WebPart webPartData, WebPartMapping mapping, Dictionary<string, string> globalProperties)
         {
             List<Property> tempList = new List<Property>();
             if (webPartData.Properties != null)
@@ -882,6 +528,31 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
                     {
                         Functions = baseProperty.Functions,
                         Name = baseProperty.Name,
+                        Type = PropertyType.@string
+                    });
+                }
+            }
+
+            // NOTE: We replaced Global Properties, with tokens
+
+            // Add global properties
+            foreach (var token in globalProperties)
+            {
+                // Add property to web part
+                if (!webPart.Properties.ContainsKey(token.Key))
+                {
+                    webPart.Properties.Add(token.Key, token.Value);
+                }
+
+                // Only add the global property once as the webPartData.Properties collection is reused across web parts and pages
+                var propAlreadyAdded = tempList.Where(p => p.Name.Equals(token.Key, StringComparison.InvariantCultureIgnoreCase)).FirstOrDefault();
+                if (propAlreadyAdded == null)
+                {
+                    // Add parameter to model
+                    tempList.Add(new Property()
+                    {
+                        Functions = "",
+                        Name = token.Key,
                         Type = PropertyType.@string
                     });
                 }

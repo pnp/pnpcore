@@ -18,11 +18,15 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.SharePoint.Client;
 using Microsoft.SharePoint.Client.WebParts;
+using Newtonsoft.Json.Linq;
+using PnPCoreModelSP = PnP.Core.Model.SharePoint;
 using PnP.Core.Transformation.Model;
 using PnP.Core.Transformation.Services.Core;
 using PnP.Core.Transformation.Services.MappingProviders;
 using PnP.Core.Transformation.SharePoint.Extensions;
+using PnP.Core.Transformation.SharePoint.MappingFiles;
 using PnP.Core.Transformation.SharePoint.Model;
+using PnP.Core.Transformation.SharePoint.Services;
 using PnP.Core.Transformation.SharePoint.Services.Builder.Configuration;
 using PnP.Core.Transformation.SharePoint.Services.MappingProviders;
 
@@ -33,6 +37,13 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
     /// </summary>
     public class SharePointMappingProvider : IMappingProvider
     {
+        class CombinedMapping
+        {
+            public int Order { get; set; }
+            public ClientSideText ClientSideText { get; set; }
+            public ClientSideWebPart ClientSideWebPart { get; set; }
+        }
+
         private ILogger<SharePointMappingProvider> logger;
         private readonly IOptions<SharePointTransformationOptions> options;
         private readonly IServiceProvider serviceProvider;
@@ -88,8 +99,17 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
             // Read source page information
             var sourcePage = ReadSourcePageInformation(pageItem);
 
+            // And set target properties accordingly
+            result.TargetPage.Author = sourcePage.Author.Email;
+            result.TargetPage.Editor = sourcePage.Editor.Email;
+            result.TargetPage.Created = sourcePage.Created.Date;
+            result.TargetPage.Modified = sourcePage.Modified.Date;
+
             // Determine if the page is a Root Page
             sourcePage.IsRootPage = pageFile != null;
+            
+            // and configure the resulting object
+            result.TargetPage.IsHomePage = sourcePage.IsRootPage;
 
             // Evaluate the source page type
             sourcePage.PageType = EvaluatePageType(pageFile, pageItem, crossSiteTransformation, crossTenantTransformation);
@@ -105,7 +125,7 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
             var (layout, webPartsToProcess) = await AnalyzePageAsync(input.Context, pageFile, pageItem, sourcePage).ConfigureAwait(false);
 
             // Determine the target page title
-            result.PageTitle = DeterminePageTitle(input.Context, pageFile, pageItem, sourcePage, webPartsToProcess);
+            result.TargetPage.PageTitle = DeterminePageTitle(input.Context, pageFile, pageItem, sourcePage, webPartsToProcess);
 
             // Start the actual transformation
             var transformationStartDateTime = DateTime.Now;
@@ -123,11 +143,10 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
             // Log that we've finished the analysis stage
             logger.LogInformation(string.Format(System.Globalization.CultureInfo.InvariantCulture,
                 SharePointTransformationResources.Info_PageAnalysisComplete, pageFile.ServerRelativeUrl));
-
-            // Start mapping content and page information
+            result.TargetPage.Folder = sourcePage.Folder;
 
             // Map the page layout into a modern page structure
-            result.Sections = MapPageWireframe(layout);
+            result.TargetPage.Sections.AddRange(MapPageWireframe(layout));
 
             // Transform the web parts
             var webPartMappingProvider = serviceProvider.GetService<IWebPartMappingProvider>();
@@ -161,86 +180,458 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
                     foreach (var webPart in sourceWebParts.OrderBy(p => p.Row).ThenBy(p => p.Column).ThenBy(p => p.Order))
                     {
                         // Process the actual mapping
-                        var webPartInput = new SharePointWebPartMappingProviderInput(input.Context, sourceContext) { 
+                        var webPartInput = new SharePointWebPartMappingProviderInput(input.Context, sourceContext)
+                        {
                             WebPart = webPart,
                             IsCrossSiteTransformation = crossSiteTransformation
                         };
                         var output = await webPartMappingProvider
                             .MapWebPartAsync(webPartInput, token)
-                            .ConfigureAwait(false);
+                            .ConfigureAwait(false) as SharePointWebPartMappingProviderOutput;
+
+                        ManageCombinedMapping(result.TargetPage, webPart, output.Mapping);
                     }
                 }
             }
 
-            var htmlMappingProvider = serviceProvider.GetService<IHtmlMappingProvider>();
-            if (htmlMappingProvider != null)
+            #region Text/Section/Column cleanup
+
+            // Drop "empty" text parts. Wiki pages tend to have a lot of text parts just containing div's and BR's...no point in keep those as they generate to much whitespace
+            RemoveEmptyTextParts(result.TargetPage);
+
+            // Remove empty sections and columns to optimize screen real estate
+            if (options.Value.RemoveEmptySectionsAndColumns)
             {
-                // TODO: get the html content
-                var htmlInput = new HtmlMappingProviderInput(input.Context, "TODO");
-                var output = await htmlMappingProvider
-                    .MapHtmlAsync(htmlInput, token)
-                    .ConfigureAwait(false);
+                RemoveEmptySectionsAndColumns(result.TargetPage);
             }
 
-            var metadataMappingProvider = serviceProvider.GetService<IMetadataMappingProvider>();
-            if (metadataMappingProvider != null)
+            #endregion
+
+            #region Handle page metadata
+
+            if (options.Value.CopyPageMetadata)
             {
-                // TODO: prepare input
-                var metadataInput = new MetadataMappingProviderInput(input.Context);
-                var output = await metadataMappingProvider
-                    .MapMetadataFieldAsync(metadataInput, token)
-                    .ConfigureAwait(false);
+                // Copy the source page metadata 
+                var metadata = await LoadSourcePageMetadataAsync(pageItem).ConfigureAwait(false);
+                foreach (var m in metadata)
+                {
+                    result.Metadata.Add(m.Key, m.Value);
+                }
             }
 
-            var urlMappingProvider = serviceProvider.GetService<IUrlMappingProvider>();
-            if (urlMappingProvider != null)
+            #endregion
+
+            #region Handle page permissions
+
+            if (options.Value.KeepPageSpecificPermissions)
             {
-                // TODO: prepare uri
-                var metadataInput = new UrlMappingProviderInput(input.Context, string.Empty);
-                var output = await urlMappingProvider
-                    .MapUrlAsync(metadataInput, token)
-                    .ConfigureAwait(false);
+                // Copy the source page item level permissions                 
+                GetItemLevelPermissions(sourceContext, pageItem);
             }
 
-            //var pageLayoutMappingProvider = serviceProvider.GetService<IPageLayoutMappingProvider>();
-            //if (pageLayoutMappingProvider != null)
+            #endregion
+
+            #region temporary code, most likely to be removed
+
+            //var htmlMappingProvider = serviceProvider.GetService<IHtmlMappingProvider>();
+            //if (htmlMappingProvider != null)
             //{
-            //    // TODO: prepare page layout
-            //    var pageLayoutInput = new PageLayoutMappingProviderInput(input.Context);
-            //    var output = await pageLayoutMappingProvider
-            //        .MapPageLayoutAsync(pageLayoutInput, token)
+            //    // TODO: get the html content
+            //    var htmlInput = new HtmlMappingProviderInput(input.Context, "TODO");
+            //    var output = await htmlMappingProvider
+            //        .MapHtmlAsync(htmlInput, token)
             //        .ConfigureAwait(false);
             //}
 
-            var taxonomyMappingProvider = serviceProvider.GetService<ITaxonomyMappingProvider>();
-            if (taxonomyMappingProvider != null)
-            {
-                // TODO: prepare term id
-                var taxonomyInput = new TaxonomyMappingProviderInput(input.Context, "");
-                var output = await taxonomyMappingProvider
-                    .MapTermAsync(taxonomyInput, token)
-                    .ConfigureAwait(false);
-            }
+            //var metadataMappingProvider = serviceProvider.GetService<IMetadataMappingProvider>();
+            //if (metadataMappingProvider != null)
+            //{
+            //    // TODO: prepare input
+            //    var metadataInput = new MetadataMappingProviderInput(input.Context);
+            //    var output = await metadataMappingProvider
+            //        .MapMetadataFieldAsync(metadataInput, token)
+            //        .ConfigureAwait(false);
+            //}
 
-            var userMappingProvider = serviceProvider.GetService<IUserMappingProvider>();
-            if (userMappingProvider != null)
-            {
-                // TODO: prepare user
-                var userInput = new UserMappingProviderInput(input.Context, "");
-                var output = await userMappingProvider
-                    .MapUserAsync(userInput, token)
-                    .ConfigureAwait(false);
-            }
+            //var urlMappingProvider = serviceProvider.GetService<IUrlMappingProvider>();
+            //if (urlMappingProvider != null)
+            //{
+            //    // TODO: prepare uri
+            //    var metadataInput = new UrlMappingProviderInput(input.Context, string.Empty);
+            //    var output = await urlMappingProvider
+            //        .MapUrlAsync(metadataInput, token)
+            //        .ConfigureAwait(false);
+            //}
 
-            // Configure the resulting object
-            result.IsHomePage = sourcePage.IsRootPage;
+            ////var pageLayoutMappingProvider = serviceProvider.GetService<IPageLayoutMappingProvider>();
+            ////if (pageLayoutMappingProvider != null)
+            ////{
+            ////    // TODO: prepare page layout
+            ////    var pageLayoutInput = new PageLayoutMappingProviderInput(input.Context);
+            ////    var output = await pageLayoutMappingProvider
+            ////        .MapPageLayoutAsync(pageLayoutInput, token)
+            ////        .ConfigureAwait(false);
+            ////}
+
+            //var taxonomyMappingProvider = serviceProvider.GetService<ITaxonomyMappingProvider>();
+            //if (taxonomyMappingProvider != null)
+            //{
+            //    // TODO: prepare term id
+            //    var taxonomyInput = new TaxonomyMappingProviderInput(input.Context, "");
+            //    var output = await taxonomyMappingProvider
+            //        .MapTermAsync(taxonomyInput, token)
+            //        .ConfigureAwait(false);
+            //}
+
+            //var userMappingProvider = serviceProvider.GetService<IUserMappingProvider>();
+            //if (userMappingProvider != null)
+            //{
+            //    // TODO: prepare user
+            //    var userInput = new UserMappingProviderInput(input.Context, "");
+            //    var output = await userMappingProvider
+            //        .MapUserAsync(userInput, token)
+            //        .ConfigureAwait(false);
+            //}
+
+            #endregion
 
             return result;
         }
 
-        private static List<Core.Model.SharePoint.CanvasSectionTemplate> MapPageWireframe(PageLayout pageLayout)
+        private ListItemPermission GetItemLevelPermissions(ClientContext sourceContext, ListItem pageItem)
         {
-            var result = new List<Core.Model.SharePoint.CanvasSectionTemplate>();
+            // Prepare result variable
+            ListItemPermission lip = new ListItemPermission();
+
+            // Prepare supporting data
+            var pagesLibrary = pageItem.ParentList;
+            pagesLibrary.EnsureProperty(l => l.EffectiveBasePermissions);
+            pageItem.EnsureProperty(p => p.HasUniqueRoleAssignments);
+
+            if (pageItem.IsPropertyAvailable("HasUniqueRoleAssignments") && pageItem.HasUniqueRoleAssignments)
+            {
+                // You need to have the ManagePermissions permission before item level permissions can be copied
+                if (pagesLibrary.EffectiveBasePermissions.Has(PermissionKind.ManagePermissions))
+                {
+                    // Copy the unique permissions from source to target
+                    // Get the unique permissions
+                    sourceContext.Load(pageItem, a => a.EffectiveBasePermissions, a => a.RoleAssignments.Include(roleAsg => roleAsg.Member.LoginName,
+                        roleAsg => roleAsg.RoleDefinitionBindings.Include(roleDef => roleDef.Id, roleDef => roleDef.Name, roleDef => roleDef.Description)));
+                    sourceContext.ExecuteQueryRetry();
+
+                    if (pageItem.EffectiveBasePermissions.Has(PermissionKind.ManagePermissions))
+                    {
+                        // Load the site groups
+                        sourceContext.Load(sourceContext.Web.SiteGroups, p => p.Include(g => g.LoginName));
+                        sourceContext.ExecuteQueryRetry();
+                        
+                        // TODO: We need to manage this information
+                        // lip.RoleAssignments = pageItem.RoleAssignments;
+
+                        // Apply new permissions
+                        foreach (var roleAssignment in pageItem.RoleAssignments)
+                        {
+                            var principal = GetPrincipal(sourceContext.Web, roleAssignment.Member.LoginName, true);
+                            if (principal != null)
+                            {
+                                if (!lip.Principals.ContainsKey(roleAssignment.Member.LoginName))
+                                {
+                                    lip.Principals.Add(roleAssignment.Member.LoginName, principal);
+                                }
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    logger.LogWarning(SharePointTransformationResources.Warning_TransformGetItemPermissionsAccessDenied);
+                    return lip;
+                }
+            }
+
+            logger.LogInformation(SharePointTransformationResources.Info_GetItemLevelPermissions);
+
+            return lip;
+        }
+
+        private Principal GetPrincipal(Web web, string principalInput, bool reading = false)
+        {
+            Principal principal = web.SiteGroups.FirstOrDefault(g => g.LoginName.Equals(principalInput, StringComparison.OrdinalIgnoreCase));
+
+            if (principal == null)
+            {
+                if (principalInput.Contains("#ext#"))
+                {
+                    principal = web.SiteUsers.FirstOrDefault(u => u.LoginName.Equals(principalInput));
+
+                    if (principal == null)
+                    {
+                        //Skipping external user...
+                    }
+                }
+                else
+                {
+                    try
+                    {
+                        principal = web.EnsureUser(principalInput);
+                        web.Context.ExecuteQueryRetry();
+                    }
+                    catch (Exception ex)
+                    {
+                        //Failed to EnsureUser, we're not failing for this, only log as error when doing an in site transformation as it's not expected to fail here
+                        logger.LogError(SharePointTransformationResources.Error_GetPrincipalFailedEnsureUser, ex);
+
+                        principal = null;
+                    }
+                }
+            }
+
+            return principal;
+        }
+
+        private static async Task<Dictionary<string, FieldData>> LoadSourcePageMetadataAsync(ListItem pageItem)
+        {
+            var result = new Dictionary<string, FieldData>();
+
+            var listFields = pageItem.ParentList.Fields;
+            pageItem.Context.Load(listFields);
+            await pageItem.Context.ExecuteQueryRetryAsync().ConfigureAwait(false);
+
+            foreach (var field in pageItem.FieldValues)
+            {
+                // Search for the corresponding field in the list
+                var listField = listFields.FirstOrDefault(f => f.InternalName == field.Key);
+
+                result.Add(field.Key, new FieldData
+                {
+                    Id = listField != null ? listField.Id : Guid.Empty,
+                    Name = listField?.InternalName,
+                    Type = listField?.TypeAsString,
+                    Value = field.Value
+                });
+            }
+
+            return result;
+        }
+
+        internal void RemoveEmptyTextParts(Page targetPage)
+        {
+            foreach (var section in targetPage.Sections)
+            {
+                foreach (var column in section.Columns)
+                {
+                    foreach (var cc in column.Controls.Where(i => i.ControlType == CanvasControlType.ClientSideText).ToList())
+                    {
+                        HtmlParser parser = new HtmlParser(new HtmlParserOptions() { IsEmbedded = true });
+
+                        using (var document = parser.ParseDocument(cc["Text"] as string))
+                        {
+                            if (document.FirstChild != null && string.IsNullOrEmpty(document.FirstChild.TextContent))
+                            {
+                                logger.LogInformation(SharePointTransformationResources.Info_TransformRemovingEmptyWebPart);
+                                // Drop text part
+                                column.Controls.Remove(cc);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        internal void RemoveEmptySectionsAndColumns(Page targetPage)
+        {
+            foreach (var section in targetPage.Sections.ToList())
+            {
+                // First remove all empty sections
+                if (section.Columns.Count == 0)
+                {
+                    targetPage.Sections.Remove(section);
+                }
+            }
+
+            // Remove empty columns
+            foreach (var section in targetPage.Sections)
+            {
+                if (section.CanvasTemplate == PnPCoreModelSP.CanvasSectionTemplate.TwoColumn ||
+                    section.CanvasTemplate == PnPCoreModelSP.CanvasSectionTemplate.TwoColumnLeft ||
+                    section.CanvasTemplate == PnPCoreModelSP.CanvasSectionTemplate.TwoColumnRight ||
+                    section.CanvasTemplate == PnPCoreModelSP.CanvasSectionTemplate.TwoColumnVerticalSection ||
+                    section.CanvasTemplate == PnPCoreModelSP.CanvasSectionTemplate.TwoColumnLeftVerticalSection ||
+                    section.CanvasTemplate == PnPCoreModelSP.CanvasSectionTemplate.TwoColumnRightVerticalSection)
+                {
+                    // NOTE: We never set IsVerticalSectionColumn, how is it possible?
+
+                    var emptyColumn = section.Columns.FirstOrDefault(p => p.Controls.Count == 0); // && !p.IsVerticalSectionColumn);
+                    if (emptyColumn != null)
+                    {
+                        // drop the empty column and change to single column section
+                        section.Columns.Remove(emptyColumn);
+
+                        if (section.CanvasTemplate == PnPCoreModelSP.CanvasSectionTemplate.TwoColumnVerticalSection ||
+                            section.CanvasTemplate == PnPCoreModelSP.CanvasSectionTemplate.TwoColumnLeftVerticalSection ||
+                            section.CanvasTemplate == PnPCoreModelSP.CanvasSectionTemplate.TwoColumnRightVerticalSection)
+                        {
+                            section.CanvasTemplate = PnPCoreModelSP.CanvasSectionTemplate.OneColumnVerticalSection;
+                        }
+                        else
+                        {
+                            section.CanvasTemplate = PnPCoreModelSP.CanvasSectionTemplate.OneColumn;
+                        }
+
+                        // NOTE: This should be done by the generator (on the target side) so we don't need it here, I guess
+                        // (section.Columns.First() as PnPCore.CanvasColumn).ResetColumn(0, 12);
+                    }
+                }
+                else if (section.CanvasTemplate == PnPCoreModelSP.CanvasSectionTemplate.ThreeColumn ||
+                         section.CanvasTemplate == PnPCoreModelSP.CanvasSectionTemplate.ThreeColumnVerticalSection)
+                {
+
+                    // NOTE: Same note as before about IsVerticalSectionColumn
+
+                    var emptyColumns = section.Columns.Where(p => p.Controls.Count == 0); // && !p.IsVerticalSectionColumn);
+                    if (emptyColumns != null)
+                    {
+                        if (emptyColumns.Count() == 2)
+                        {
+                            // drop the two empty columns and change to single column section
+                            foreach (var emptyColumn in emptyColumns)
+                            {
+                                section.Columns.Remove(emptyColumn);
+                            }
+
+                            if (section.CanvasTemplate == PnPCoreModelSP.CanvasSectionTemplate.ThreeColumnVerticalSection)
+                            {
+                                section.CanvasTemplate = PnPCoreModelSP.CanvasSectionTemplate.OneColumnVerticalSection;
+                            }
+                            else
+                            {
+                                section.CanvasTemplate = PnPCoreModelSP.CanvasSectionTemplate.OneColumn;
+                            }
+
+                            // NOTE: This should be done by the generator (on the target side) so we don't need it here, I guess
+                            // (section.Columns.First() as PnPCoreModelSP.CanvasColumn).ResetColumn(0, 12);
+                        }
+                        if (emptyColumns.Count() == 1)
+                        {
+                            // Remove the empty column and change to two column section
+                            section.Columns.Remove(emptyColumns.First());
+
+                            if (section.CanvasTemplate == PnPCoreModelSP.CanvasSectionTemplate.ThreeColumnVerticalSection)
+                            {
+                                section.CanvasTemplate = PnPCoreModelSP.CanvasSectionTemplate.TwoColumnVerticalSection;
+                            }
+                            else
+                            {
+                                section.CanvasTemplate = PnPCoreModelSP.CanvasSectionTemplate.TwoColumn;
+                            }
+
+                            // NOTE: This should be done by the generator (on the target side) so we don't need it here, I guess
+                            //int i = 0;
+                            //foreach (var column in section.Columns.Where(p => !p.IsVerticalSectionColumn))
+                            //{
+                            //    (column as PnPCore.CanvasColumn).ResetColumn(i, 6);
+                            //    i++;
+                            //}
+                        }
+                    }
+                }
+            }
+        }
+
+        private void ManageCombinedMapping(Page targetPage, WebPartEntity webPart, Mapping mapping)
+        {
+            // Use the mapping data => make one list of Text and WebParts to allow for correct ordering
+            logger.LogDebug(SharePointTransformationResources.Debug_CombiningMappingData);
+            var combinedMappinglist = new List<CombinedMapping>();
+            if (mapping.ClientSideText != null)
+            {
+                foreach (var map in mapping.ClientSideText.OrderBy(p => p.Order))
+                {
+                    if (!Int32.TryParse(map.Order, out Int32 mapOrder))
+                    {
+                        mapOrder = 0;
+                    }
+
+                    combinedMappinglist.Add(new CombinedMapping { ClientSideText = map, ClientSideWebPart = null, Order = mapOrder });
+                }
+            }
+            if (mapping.ClientSideWebPart != null)
+            {
+                foreach (var map in mapping.ClientSideWebPart.OrderBy(p => p.Order))
+                {
+                    if (!Int32.TryParse(map.Order, out Int32 mapOrder))
+                    {
+                        mapOrder = 0;
+                    }
+
+                    combinedMappinglist.Add(new CombinedMapping { ClientSideText = null, ClientSideWebPart = map, Order = mapOrder });
+                }
+            }
+
+            // Get the order of the last inserted control in this column
+            int order = LastColumnOrder(targetPage, webPart.Row - 1, webPart.Column - 1);
+            // Interate the controls for this mapping using their order
+            foreach (var map in combinedMappinglist.OrderBy(p => p.Order))
+            {
+                order++;
+
+                var control = new CanvasControl();
+                control.Order = order;
+
+                if (map.ClientSideText != null)
+                {
+                    control.ControlType = CanvasControlType.ClientSideText;
+
+                    // Parse the Text to support custom tokens
+                    control["Text"] = TokenParser.ReplaceTokens(map.ClientSideText.Text, webPart);
+
+                    logger.LogInformation(SharePointTransformationResources.Info_AddedClientSideTextWebPart);
+                }
+                else if (map.ClientSideWebPart != null)
+                {
+                    if (map.ClientSideWebPart.Type == ClientSideWebPartType.Custom)
+                    {
+                        control.ControlType = CanvasControlType.CustomClientSideWebPart;
+
+                        // Parse the control ID to support generic web part placement scenarios
+                        control["ControlId"] = TokenParser.ReplaceTokens(map.ClientSideWebPart.ControlId, webPart);
+
+                        logger.LogInformation(SharePointTransformationResources.Info_UsingCustomModernWebPart);
+                    }
+                    else
+                    {
+                        control.ControlType = CanvasControlType.DefaultWebPart;
+
+                        string webPartName = map.ClientSideWebPart.Type.ToString();
+
+                        logger.LogInformation(string.Format(
+                            System.Globalization.CultureInfo.InvariantCulture,
+                            SharePointTransformationResources.Info_ContentUsingModernWebPart,
+                            map.ClientSideWebPart.Type.ToString()));
+                    }
+                }
+
+                // We add the component to the temporary abstract page
+                targetPage.Sections[webPart.Row - 1].Columns[webPart.Column - 1].Controls.Add(control);
+            }
+        }
+
+        private Int32 LastColumnOrder(Page targetPage, int row, int col)
+        {
+            var lastControl = targetPage.Sections[row].Columns[col].Controls.OrderBy(p => p.Order).LastOrDefault();
+            if (lastControl != null)
+            {
+                return lastControl.Order;
+            }
+            else
+            {
+                return -1;
+            }
+        }
+
+        private static List<Section> MapPageWireframe(PageLayout pageLayout)
+        {
+            var result = new List<Section>();
 
             switch (pageLayout)
             {
@@ -249,60 +640,180 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
                 case PageLayout.WebPart_FullPageVertical:
                 case PageLayout.Wiki_Custom:
                 case PageLayout.WebPart_Custom:
-                    result.Add(Core.Model.SharePoint.CanvasSectionTemplate.OneColumn);
+                    result.Add(
+                        new Section
+                        {
+                            CanvasTemplate = Core.Model.SharePoint.CanvasSectionTemplate.OneColumn,
+                            Columns = GetColumns(1)
+                        });
                     break;
                 case PageLayout.Wiki_TwoColumns:
-                    result.Add(Core.Model.SharePoint.CanvasSectionTemplate.TwoColumn);
+                    result.Add(
+                        new Section
+                        {
+                            CanvasTemplate = Core.Model.SharePoint.CanvasSectionTemplate.TwoColumn,
+                            Columns = GetColumns(2)
+                        });
                     break;
                 case PageLayout.Wiki_ThreeColumns:
-                    result.Add(Core.Model.SharePoint.CanvasSectionTemplate.ThreeColumn);
+                    result.Add(
+                        new Section
+                        {
+                            CanvasTemplate = Core.Model.SharePoint.CanvasSectionTemplate.ThreeColumn,
+                            Columns = GetColumns(3)
+                        });
                     break;
                 case PageLayout.Wiki_TwoColumnsWithSidebar:
                 case PageLayout.WebPart_2010_TwoColumnsLeft:
-                    result.Add(Core.Model.SharePoint.CanvasSectionTemplate.TwoColumnLeft);
+                    result.Add(
+                        new Section
+                        {
+                            CanvasTemplate = Core.Model.SharePoint.CanvasSectionTemplate.TwoColumnLeft,
+                            Columns = GetColumns(2)
+                        });
                     break;
                 case PageLayout.WebPart_HeaderRightColumnBody:
-                    result.Add(Core.Model.SharePoint.CanvasSectionTemplate.OneColumn);
-                    result.Add(Core.Model.SharePoint.CanvasSectionTemplate.TwoColumnLeft);
+                    result.Add(
+                        new Section
+                        {
+                            CanvasTemplate = Core.Model.SharePoint.CanvasSectionTemplate.OneColumn,
+                            Columns = GetColumns(1)
+                        });
+                    result.Add(
+                        new Section
+                        {
+                            CanvasTemplate = Core.Model.SharePoint.CanvasSectionTemplate.TwoColumnLeft,
+                            Columns = GetColumns(2)
+                        });
                     break;
                 case PageLayout.WebPart_HeaderLeftColumnBody:
-                    result.Add(Core.Model.SharePoint.CanvasSectionTemplate.OneColumn);
-                    result.Add(Core.Model.SharePoint.CanvasSectionTemplate.TwoColumnRight);
+                    result.Add(
+                        new Section
+                        {
+                            CanvasTemplate = Core.Model.SharePoint.CanvasSectionTemplate.OneColumn,
+                            Columns = GetColumns(1)
+                        });
+                    result.Add(
+                        new Section
+                        {
+                            CanvasTemplate = Core.Model.SharePoint.CanvasSectionTemplate.TwoColumnRight,
+                            Columns = GetColumns(2)
+                        });
                     break;
                 case PageLayout.Wiki_TwoColumnsWithHeader:
-                    result.Add(Core.Model.SharePoint.CanvasSectionTemplate.OneColumn);
-                    result.Add(Core.Model.SharePoint.CanvasSectionTemplate.TwoColumn);
+                    result.Add(
+                        new Section
+                        {
+                            CanvasTemplate = Core.Model.SharePoint.CanvasSectionTemplate.OneColumn,
+                            Columns = GetColumns(1)
+                        });
+                    result.Add(
+                        new Section
+                        {
+                            CanvasTemplate = Core.Model.SharePoint.CanvasSectionTemplate.TwoColumn,
+                            Columns = GetColumns(2)
+                        });
                     break;
                 case PageLayout.Wiki_TwoColumnsWithHeaderAndFooter:
-                    result.Add(Core.Model.SharePoint.CanvasSectionTemplate.OneColumn);
-                    result.Add(Core.Model.SharePoint.CanvasSectionTemplate.TwoColumn);
-                    result.Add(Core.Model.SharePoint.CanvasSectionTemplate.OneColumn);
+                    result.Add(
+                        new Section
+                        {
+                            CanvasTemplate = Core.Model.SharePoint.CanvasSectionTemplate.OneColumn,
+                            Columns = GetColumns(1)
+                        });
+                    result.Add(
+                        new Section
+                        {
+                            CanvasTemplate = Core.Model.SharePoint.CanvasSectionTemplate.TwoColumn,
+                            Columns = GetColumns(2)
+                        });
+                    result.Add(
+                        new Section
+                        {
+                            CanvasTemplate = Core.Model.SharePoint.CanvasSectionTemplate.OneColumn,
+                            Columns = GetColumns(1)
+                        });
                     break;
                 case PageLayout.Wiki_ThreeColumnsWithHeader:
-                    result.Add(Core.Model.SharePoint.CanvasSectionTemplate.OneColumn);
-                    result.Add(Core.Model.SharePoint.CanvasSectionTemplate.ThreeColumn);
+                    result.Add(
+                        new Section
+                        {
+                            CanvasTemplate = Core.Model.SharePoint.CanvasSectionTemplate.OneColumn,
+                            Columns = GetColumns(1)
+                        });
+                    result.Add(
+                        new Section
+                        {
+                            CanvasTemplate = Core.Model.SharePoint.CanvasSectionTemplate.ThreeColumn,
+                            Columns = GetColumns(3)
+                        });
                     break;
                 case PageLayout.Wiki_ThreeColumnsWithHeaderAndFooter:
                 case PageLayout.WebPart_HeaderFooterThreeColumns:
                 case PageLayout.WebPart_HeaderFooter4ColumnsTopRow:
                 case PageLayout.WebPart_HeaderFooter2Columns4Rows:
-                    result.Add(Core.Model.SharePoint.CanvasSectionTemplate.OneColumn);
-                    result.Add(Core.Model.SharePoint.CanvasSectionTemplate.ThreeColumn);
-                    result.Add(Core.Model.SharePoint.CanvasSectionTemplate.OneColumn);
+                    result.Add(
+                        new Section
+                        {
+                            CanvasTemplate = Core.Model.SharePoint.CanvasSectionTemplate.OneColumn,
+                            Columns = GetColumns(1)
+                        });
+                    result.Add(
+                        new Section
+                        {
+                            CanvasTemplate = Core.Model.SharePoint.CanvasSectionTemplate.ThreeColumn,
+                            Columns = GetColumns(3)
+                        });
+                    result.Add(
+                        new Section
+                        {
+                            CanvasTemplate = Core.Model.SharePoint.CanvasSectionTemplate.OneColumn,
+                            Columns = GetColumns(1)
+                        });
                     break;
                 case PageLayout.WebPart_LeftColumnHeaderFooterTopRow3Columns:
                 case PageLayout.WebPart_RightColumnHeaderFooterTopRow3Columns:
-                    result.Add(Core.Model.SharePoint.CanvasSectionTemplate.OneColumn);
-                    result.Add(Core.Model.SharePoint.CanvasSectionTemplate.OneColumn);
-                    result.Add(Core.Model.SharePoint.CanvasSectionTemplate.ThreeColumn);
-                    result.Add(Core.Model.SharePoint.CanvasSectionTemplate.OneColumn);
+                    result.Add(
+                        new Section
+                        {
+                            CanvasTemplate = Core.Model.SharePoint.CanvasSectionTemplate.OneColumn,
+                            Columns = GetColumns(1)
+                        });
+                    result.Add(
+                        new Section
+                        {
+                            CanvasTemplate = Core.Model.SharePoint.CanvasSectionTemplate.OneColumn,
+                            Columns = GetColumns(1)
+                        });
+                    result.Add(
+                        new Section
+                        {
+                            CanvasTemplate = Core.Model.SharePoint.CanvasSectionTemplate.ThreeColumn,
+                            Columns = GetColumns(3)
+                        });
+                    result.Add(
+                        new Section
+                        {
+                            CanvasTemplate = Core.Model.SharePoint.CanvasSectionTemplate.OneColumn,
+                            Columns = GetColumns(1)
+                        });
                     break;
                 default:
-                    result.Add(Core.Model.SharePoint.CanvasSectionTemplate.OneColumn);
+                    result.Add(
+                        new Section
+                        {
+                            CanvasTemplate = Core.Model.SharePoint.CanvasSectionTemplate.OneColumn,
+                            Columns = GetColumns(1)
+                        });
                     break;
             }
 
             return result;
+
+            List<Column> GetColumns(int size)
+            {
+                return (from n in Enumerable.Range(0, size) select new Column()).ToList();
+            }
         }
 
         private string DeterminePageTitle(PageTransformationContext context, Microsoft.SharePoint.Client.File pageFile, ListItem pageItem, SourcePageInformation sourcePage, List<WebPartEntity> webPartsToProcess)
@@ -1335,19 +1846,19 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
         /// <returns>A web part entity to add to the collection</returns>
         private static WebPartEntity CreateWikiTextPart(string wikiTextPartContent, int row, int col, int order)
         {
-            Dictionary<string, string> properties = new Dictionary<string, string>();
-            properties.Add("Text", wikiTextPartContent.Trim().Replace("\r\n", string.Empty));
-
-            return new WebPartEntity()
+            var result = new WebPartEntity()
             {
                 Title = "WikiText",
                 Type = "SharePointPnP.Modernization.WikiTextPart",
                 Id = Guid.Empty,
                 Row = row,
                 Column = col,
-                Order = order,
-                Properties = properties,
+                Order = order
             };
+
+            result.Properties.Add("Text", wikiTextPartContent.Trim().Replace("\r\n", string.Empty));
+
+            return result;
         }
 
         /// <summary>

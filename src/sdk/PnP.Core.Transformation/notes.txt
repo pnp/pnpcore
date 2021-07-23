@@ -1,4 +1,14 @@
-﻿Architectural notes:
+﻿New notes/issues:
+- How do we manage functions for properties when they refer to target context?
+	- Can we use tokens?
+- Where do we user taxonomy, metadata, and users mapping?
+- We cannot rely on PnP Provisioning Template for fields, we can't have a dependency on PnP Framework
+- We cannot use methods to "re-org" columns in pages unless we are already working on the target environment
+- Consider adding back caching for fields in pages library (see GetFieldsToCopy in PnP Framework)
+- Go back to CopyPageMetadata of BasePageTransformator when writing fields values to the target
+- How do we manage an abstract version of ListItemPermission as result of GetItemLevelPermissions?
+
+Architectural notes:
 * implement all the native providers with file-based approach (both XML and JSON)
 * add With* methods to the builder
 	* builder.WithName("MyConfiguration).WithWebPartMappingProvider<MyCustomWebPartMappingProvider>().With*().Build();

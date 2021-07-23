@@ -40,6 +40,16 @@ namespace PnP.Core.Transformation.SharePoint.Services.Builder.Configuration
         public bool SkipUrlRewrite { get; set; }
 
         /// <summary>
+        /// Defines whether to remove empty sections and columns on target
+        /// </summary>
+        public bool RemoveEmptySectionsAndColumns { get; set; }
+
+        /// <summary>
+        /// Defines whether to copy metadata onto the target page
+        /// </summary>
+        public bool CopyPageMetadata { get; set; }
+
+        /// <summary>
         /// Custom URL mappings
         /// </summary>
         public List<UrlMapping> UrlMappings { get; set; }

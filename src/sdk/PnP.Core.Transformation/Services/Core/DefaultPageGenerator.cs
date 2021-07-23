@@ -117,7 +117,7 @@ namespace PnP.Core.Transformation.Services.Core
             bool replacedByOOBHomePage = false;
 
             // Check if the transformed page is the web's home page
-            if (mappingOutput.IsHomePage)
+            if (mappingOutput.TargetPage.IsHomePage)
             {
                 targetPage.LayoutType = PnP.Core.Model.SharePoint.PageLayoutType.Home;
                 if (this.defaultPageTransformationOptions.ReplaceHomePageWithDefaultHomePage)
@@ -135,11 +135,11 @@ namespace PnP.Core.Transformation.Services.Core
                 logger.LogInformation(TransformationResources.Info_TransformSourcePageAsArticlePage);
 
                 #region Configure header from target page
-                if (mappingOutput.PageHeader == null || (mappingOutput.PageHeader as PageHeader).Type == PageHeaderType.None)
+                if (mappingOutput.TargetPage.PageHeader == null || (mappingOutput.TargetPage.PageHeader as PageHeader).Type == PageHeaderType.None)
                 {
                     logger.LogInformation(TransformationResources.Info_TransformArticleSetHeaderToNone);
 
-                    if (mappingOutput.SetAuthorInPageHeader)
+                    if (mappingOutput.TargetPage.SetAuthorInPageHeader)
                     {
                         targetPage.SetDefaultPageHeader();
                         targetPage.PageHeader.LayoutType = PageHeaderLayoutType.NoImage;
@@ -152,19 +152,19 @@ namespace PnP.Core.Transformation.Services.Core
                         targetPage.RemovePageHeader();
                     }
                 }
-                else if ((mappingOutput.PageHeader as PageHeader).Type == PageHeaderType.Default)
+                else if ((mappingOutput.TargetPage.PageHeader as PageHeader).Type == PageHeaderType.Default)
                 {
                     logger.LogInformation(TransformationResources.Info_TransformArticleSetHeaderToDefault);
                     targetPage.SetDefaultPageHeader();
                 }
-                else if ((mappingOutput.PageHeader as PageHeader).Type == PageHeaderType.Custom)
+                else if ((mappingOutput.TargetPage.PageHeader as PageHeader).Type == PageHeaderType.Custom)
                 {
-                    var infoMessage = $"{TransformationResources.Info_TransformArticleSetHeaderToCustom} {TransformationResources.Info_TransformArticleHeaderImageUrl} {mappingOutput.PageHeader.ImageServerRelativeUrl}";
+                    var infoMessage = $"{TransformationResources.Info_TransformArticleSetHeaderToCustom} {TransformationResources.Info_TransformArticleHeaderImageUrl} {mappingOutput.TargetPage.PageHeader.ImageServerRelativeUrl}";
                     logger.LogInformation(infoMessage);
 
-                    targetPage.SetCustomPageHeader(mappingOutput.PageHeader.ImageServerRelativeUrl,
-                        mappingOutput.PageHeader.TranslateX,
-                        mappingOutput.PageHeader.TranslateY);
+                    targetPage.SetCustomPageHeader(mappingOutput.TargetPage.PageHeader.ImageServerRelativeUrl,
+                        mappingOutput.TargetPage.PageHeader.TranslateX,
+                        mappingOutput.TargetPage.PageHeader.TranslateY);
                 }
                 #endregion
             }
@@ -172,15 +172,16 @@ namespace PnP.Core.Transformation.Services.Core
             #endregion
 
             // Set page title
-            targetPage.PageTitle = mappingOutput.PageTitle;
+            targetPage.PageTitle = mappingOutput.TargetPage.PageTitle;
 
             // Create the web parts and the transformed content
 
             // Start with the content sections
             int order = 1;
-            foreach (var section in mappingOutput.Sections)
+            foreach (var section in mappingOutput.TargetPage.Sections)
             {
-                targetPage.AddSection(section, order);
+                section.Order = order;
+                targetPage.AddSection(section.CanvasTemplate, order);
                 order++;
             }
 
@@ -297,7 +298,7 @@ namespace PnP.Core.Transformation.Services.Core
 
             try
             {
-                var mappedAuthorOutput = await userMappingProvider.MapUserAsync(new UserMappingProviderInput(context, mappingOutput.Author), token).ConfigureAwait(false);
+                var mappedAuthorOutput = await userMappingProvider.MapUserAsync(new UserMappingProviderInput(context, mappingOutput.TargetPage.Author), token).ConfigureAwait(false);
                 var ensuredPageAuthorUser = await targetClientSidePage.PnPContext.Web.EnsureUserAsync(mappedAuthorOutput.UserPrincipalName).ConfigureAwait(false);
 
                 if (ensuredPageAuthorUser != null)
@@ -326,14 +327,14 @@ namespace PnP.Core.Transformation.Services.Core
                     {
                         logger.LogWarning(string.Format(System.Globalization.CultureInfo.InvariantCulture,
                             TransformationResources.Warning_PageHeaderAuthorNotSet,
-                            mappingOutput.Author));
+                            mappingOutput.TargetPage.Author));
                     }
                 }
                 else
                 {
                     logger.LogWarning(string.Format(System.Globalization.CultureInfo.InvariantCulture,
                         TransformationResources.Warning_PageHeaderAuthorNotSet,
-                        mappingOutput.Author));
+                        mappingOutput.TargetPage.Author));
                 }
             }
             catch (Exception ex)

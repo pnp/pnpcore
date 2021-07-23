@@ -271,6 +271,7 @@ namespace PnP.Core.Transformation.SharePoint.Functions
         {
             List<Property> tempList = new List<Property>();
             tempList.AddRange(webPartData.Properties);
+
             tempList.Add(new Property()
             {
                 Functions = "",
@@ -392,14 +393,14 @@ namespace PnP.Core.Transformation.SharePoint.Functions
                 }
 
                 // Populate the function parameter with a value coming from the analyzed web part
-                var wpProp = webPartData.Properties.Where(p => p.Name.Equals(input.Name, StringComparison.CurrentCultureIgnoreCase)).FirstOrDefault();
+                var wpProp = webPartData.Properties?.FirstOrDefault(p => p.Name.Equals(input.Name, StringComparison.CurrentCultureIgnoreCase));
                 if (wpProp != null)
                 {
                     // Map types used in the model to types used in function processor
                     input.Type = MapType(wpProp.Type.ToString());
                     if (!input.IsStatic)
                     {
-                        var wpInstanceProp = webPart.Properties.Where(p => p.Key.Equals(input.Name, StringComparison.CurrentCultureIgnoreCase)).FirstOrDefault();
+                        var wpInstanceProp = webPart.Properties.FirstOrDefault(p => p.Key.Equals(input.Name, StringComparison.CurrentCultureIgnoreCase));
                         input.Value = wpInstanceProp.Value;
                     }
                     def.Input.Add(input);

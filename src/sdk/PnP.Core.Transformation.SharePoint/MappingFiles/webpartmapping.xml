@@ -15,7 +15,6 @@ configure the page transformation engine to use the community script editor. You
 - Setting the needed mapping property (e.g. pti.MappingProperties["UseCommunityScriptEditor"] = "true");
 - Using the needed switch in PnP PowerShell
 -->
-
 <PageTransformation xmlns="http://schemas.dev.office.com/PnP/2018/01/PageTransformationSchema" Version="1.0.1912.0">
     <!-- Information that applies to all web parts listed in this file -->
     <BaseWebPart>

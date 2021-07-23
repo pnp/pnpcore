@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<xs:schema  targetNamespace="http://schemas.dev.office.com/PnP/2018/01/PageTransformationSchema" 
+<xs:schema targetNamespace="http://schemas.dev.office.com/PnP/2018/01/PageTransformationSchema" 
             elementFormDefault="qualified" 
             xmlns="http://schemas.dev.office.com/PnP/2018/01/PageTransformationSchema"  
             xmlns:xs="http://www.w3.org/2001/XMLSchema">

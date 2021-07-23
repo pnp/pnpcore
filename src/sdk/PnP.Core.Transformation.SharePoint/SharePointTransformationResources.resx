@@ -183,6 +183,9 @@
   <data name="Error_DocumentEmbedLookupFileNotRetrievable" xml:space="preserve">
     <value>An error occurred in DocumentEmbedLookup function - file not retrievable - {0}</value>
   </data>
+  <data name="Error_GetPrincipalFailedEnsureUser" xml:space="preserve">
+    <value>Failed to ensure user exists: {0}</value>
+  </data>
   <data name="Error_InvalidOrMissingBlogContent" xml:space="preserve">
     <value>Body contents was set to null, this is an invalid and empty blog page: '{0}'</value>
   </data>
@@ -240,6 +243,9 @@
   <data name="Error_WebPartXmlNotExported" xml:space="preserve">
     <value>XML definition for web part '{0}' from page '{1}' was not exportable. Exception: {2}.</value>
   </data>
+  <data name="Info_AddedClientSideTextWebPart" xml:space="preserve">
+    <value>Added 'Client Side Text Web Part' to target page</value>
+  </data>
   <data name="Info_AnalyserFoundItems" xml:space="preserve">
     <value>Found {0} page layouts</value>
   </data>
@@ -255,8 +261,14 @@
   <data name="Info_ContentTransformFoundSourceWebParts" xml:space="preserve">
     <value>Source page '{0}' contains web part '{1}' of type '{2}'</value>
   </data>
+  <data name="Info_ContentUsingModernWebPart" xml:space="preserve">
+    <value>Using {0} modern web part</value>
+  </data>
   <data name="Info_ContentWebPartBeingTransformed" xml:space="preserve">
     <value>Web Part '{0}' of type '{1}' is being transformed</value>
+  </data>
+  <data name="Info_GetItemLevelPermissions" xml:space="preserve">
+    <value>Item level permissions read</value>
   </data>
   <data name="Info_NotTransformingTitleBar" xml:space="preserve">
     <value>Not transforming Title Bar - this is not used in modern pages</value>
@@ -294,11 +306,17 @@
   <data name="Info_TransformPageModernTitle" xml:space="preserve">
     <value>Setting title of page '{0}' to value: '{1}'</value>
   </data>
+  <data name="Info_TransformRemovingEmptyWebPart" xml:space="preserve">
+    <value>Removing empty text web part</value>
+  </data>
   <data name="Info_TransformSourcePageIsHomePage" xml:space="preserve">
     <value>The current page is used as a home page - settings modern page to 'Home' layout</value>
   </data>
   <data name="Info_TransformSourcePageIsNotHomePage" xml:space="preserve">
     <value>The current page is not used as the site home page</value>
+  </data>
+  <data name="Info_UsingCustomModernWebPart" xml:space="preserve">
+    <value>Using 'custom' modern web part</value>
   </data>
   <data name="Info_WelcomePageSettingsIsPresent" xml:space="preserve">
     <value>Welcome page setting does exist, checking if the transform page is a home page</value>
@@ -320,5 +338,8 @@
   </data>
   <data name="Warning_TableCouldNotBeNormalized" xml:space="preserve">
     <value>Table could not be normalized and will be taken over as is</value>
+  </data>
+  <data name="Warning_TransformGetItemPermissionsAccessDenied" xml:space="preserve">
+    <value>You don't have needed the needed permission level (ManagePermissions) to read item level permissions</value>
   </data>
 </root>
