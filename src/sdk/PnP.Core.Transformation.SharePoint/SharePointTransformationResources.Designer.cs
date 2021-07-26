@@ -79,6 +79,15 @@ namespace PnP.Core.Transformation.SharePoint {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Principal Input: {0}.
+        /// </summary>
+        internal static string Debug_UserTransformPrincipalInput {
+            get {
+                return ResourceManager.GetString("Debug_UserTransformPrincipalInput", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to An error occurred cleaning extracted web part fields.
         /// </summary>
         internal static string Error_AnalyserCleaningExtractedWebPartFields {
@@ -651,6 +660,33 @@ namespace PnP.Core.Transformation.SharePoint {
         internal static string Info_TransformSourcePageIsNotHomePage {
             get {
                 return ResourceManager.GetString("Info_TransformSourcePageIsNotHomePage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Default remapping mechanism for user: {0}.
+        /// </summary>
+        internal static string Info_UserTransformDefaultMapping {
+            get {
+                return ResourceManager.GetString("Info_UserTransformDefaultMapping", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mapping for user cannot be found: {0}.
+        /// </summary>
+        internal static string Info_UserTransformMappingNotFound {
+            get {
+                return ResourceManager.GetString("Info_UserTransformMappingNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mapping done and user replaced: from {0} to {1}.
+        /// </summary>
+        internal static string Info_UserTransformSuccess {
+            get {
+                return ResourceManager.GetString("Info_UserTransformSuccess", resourceCulture);
             }
         }
         

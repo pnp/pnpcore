@@ -7,6 +7,10 @@
 - Consider adding back caching for fields in pages library (see GetFieldsToCopy in PnP Framework)
 - Go back to CopyPageMetadata of BasePageTransformator when writing fields values to the target
 - How do we manage an abstract version of ListItemPermission as result of GetItemLevelPermissions?
+- User transformation: do we really want to search on the on-premises AD domain via LDAP?
+- Do we still need to support blog pages? Aren't them deprecated?
+- I need to better understand Root/ for isRootPage (PageTransformator line 399)
+- I need to better understand the logic around PageFolder from line 345 to 432 in PageTransformator.cs
 
 Architectural notes:
 * implement all the native providers with file-based approach (both XML and JSON)

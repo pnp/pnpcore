@@ -8,18 +8,10 @@ namespace PnP.Core.Transformation.Model
     /// Class used to temporarily hold list item level permissions that need to be re-applied
     /// </summary>
     public class ListItemPermission
-    {
+    {    
         /// <summary>
-        /// Roles assigned to the list item
+        /// List of members with role assignments
         /// </summary>
-        public object RoleAssignments { get; set; }
-//        public RoleAssignmentCollection RoleAssignments { get; set; }
-
-        /// <summary>
-        /// Resolved principals used in those roles, kept for performance reasons
-        /// </summary>
-        public Dictionary<string, object> Principals { get; } = new Dictionary<string, object>();
-//        public Dictionary<string, Principal> Principals { get; } = new Dictionary<string, Principal>();
-
+        public Dictionary<string, string[]> Members { get; } = new Dictionary<string, string[]>();
     }
 }

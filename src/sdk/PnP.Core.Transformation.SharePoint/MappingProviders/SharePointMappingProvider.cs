@@ -37,6 +37,11 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
     /// </summary>
     public class SharePointMappingProvider : IMappingProvider
     {
+        private readonly Regex invalidCharsRegex = new Regex(@"[\*\?\|\\\t/:""'<>#{}%~&]", RegexOptions.Compiled);
+        private readonly Regex invalidRulesRegex = new Regex(@"\.{2,}", RegexOptions.Compiled);
+        private readonly Regex startEndRegex = new Regex(@"^[\. ]|[\. ]$", RegexOptions.Compiled);
+        private readonly Regex extraSpacesRegex = new Regex(" {2,}", RegexOptions.Compiled);
+
         class CombinedMapping
         {
             public int Order { get; set; }
@@ -106,7 +111,7 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
             result.TargetPage.Modified = sourcePage.Modified.Date;
 
             // Determine if the page is a Root Page
-            sourcePage.IsRootPage = pageFile != null;
+            sourcePage.IsRootPage = pageFile != null && pageItem == null;
             
             // and configure the resulting object
             result.TargetPage.IsHomePage = sourcePage.IsRootPage;
@@ -144,6 +149,28 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
             logger.LogInformation(string.Format(System.Globalization.CultureInfo.InvariantCulture,
                 SharePointTransformationResources.Info_PageAnalysisComplete, pageFile.ServerRelativeUrl));
             result.TargetPage.Folder = sourcePage.Folder;
+            
+            if (sourcePage.PageType == SourcePageType.BlogPage)
+            {
+                var generatedBlogPageName = $"{result.TargetPage.PageTitle.Replace(" ", "-")}-{pageItem[SharePointConstants.IDField]}.aspx";
+
+                // Based on this blog - http://www.simplyaprogrammer.com/2008/05/importing-files-into-sharepoint.html
+                string sanitizedName = extraSpacesRegex.Replace(
+                    invalidRulesRegex.Replace(
+                        invalidCharsRegex.Replace(input: generatedBlogPageName, 
+                        replacement: string.Empty).Trim(), "."), " ");
+
+                while (startEndRegex.IsMatch(sanitizedName))
+                {
+                    sanitizedName = startEndRegex.Replace(sanitizedName, string.Empty);
+                }
+
+                result.TargetPage.PageName = sanitizedName;
+            }
+            else
+            {
+                result.TargetPage.PageName = targetPageName;
+            }
 
             // Map the page layout into a modern page structure
             result.TargetPage.Sections.AddRange(MapPageWireframe(layout));
@@ -226,12 +253,12 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
             if (options.Value.KeepPageSpecificPermissions)
             {
                 // Copy the source page item level permissions                 
-                GetItemLevelPermissions(sourceContext, pageItem);
+                result.Permissions = GetItemLevelPermissions(sourceContext, pageItem);
             }
 
             #endregion
 
-            #region temporary code, most likely to be removed
+            #region Temporary code, most likely to be removed
 
             //var htmlMappingProvider = serviceProvider.GetService<IHtmlMappingProvider>();
             //if (htmlMappingProvider != null)
@@ -315,8 +342,13 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
                 {
                     // Copy the unique permissions from source to target
                     // Get the unique permissions
-                    sourceContext.Load(pageItem, a => a.EffectiveBasePermissions, a => a.RoleAssignments.Include(roleAsg => roleAsg.Member.LoginName,
-                        roleAsg => roleAsg.RoleDefinitionBindings.Include(roleDef => roleDef.Id, roleDef => roleDef.Name, roleDef => roleDef.Description)));
+                    sourceContext.Load(pageItem, 
+                        a => a.EffectiveBasePermissions, 
+                        a => a.RoleAssignments.Include(
+                            roleAsg => roleAsg.Member.LoginName,
+                            roleAsg => roleAsg.RoleDefinitionBindings.Include(
+                                roleDef => roleDef.Id,
+                                roleDef => roleDef.Name)));
                     sourceContext.ExecuteQueryRetry();
 
                     if (pageItem.EffectiveBasePermissions.Has(PermissionKind.ManagePermissions))
@@ -331,13 +363,20 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
                         // Apply new permissions
                         foreach (var roleAssignment in pageItem.RoleAssignments)
                         {
-                            var principal = GetPrincipal(sourceContext.Web, roleAssignment.Member.LoginName, true);
-                            if (principal != null)
+                            var roles = new List<string>();
+
+                            foreach (var role in roleAssignment.RoleDefinitionBindings)
                             {
-                                if (!lip.Principals.ContainsKey(roleAssignment.Member.LoginName))
-                                {
-                                    lip.Principals.Add(roleAssignment.Member.LoginName, principal);
-                                }
+                                roles.Add(role.Name);
+                            }
+
+                            if (!lip.Members.ContainsKey(roleAssignment.Member.LoginName))
+                            {
+                                lip.Members.Add(roleAssignment.Member.LoginName, roles.ToArray());
+                            }
+                            else
+                            {
+                                lip.Members[roleAssignment.Member.LoginName] = lip.Members[roleAssignment.Member.LoginName].Union(roles.ToArray()).ToArray();
                             }
                         }
                     }
@@ -352,41 +391,6 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
             logger.LogInformation(SharePointTransformationResources.Info_GetItemLevelPermissions);
 
             return lip;
-        }
-
-        private Principal GetPrincipal(Web web, string principalInput, bool reading = false)
-        {
-            Principal principal = web.SiteGroups.FirstOrDefault(g => g.LoginName.Equals(principalInput, StringComparison.OrdinalIgnoreCase));
-
-            if (principal == null)
-            {
-                if (principalInput.Contains("#ext#"))
-                {
-                    principal = web.SiteUsers.FirstOrDefault(u => u.LoginName.Equals(principalInput));
-
-                    if (principal == null)
-                    {
-                        //Skipping external user...
-                    }
-                }
-                else
-                {
-                    try
-                    {
-                        principal = web.EnsureUser(principalInput);
-                        web.Context.ExecuteQueryRetry();
-                    }
-                    catch (Exception ex)
-                    {
-                        //Failed to EnsureUser, we're not failing for this, only log as error when doing an in site transformation as it's not expected to fail here
-                        logger.LogError(SharePointTransformationResources.Error_GetPrincipalFailedEnsureUser, ex);
-
-                        principal = null;
-                    }
-                }
-            }
-
-            return principal;
         }
 
         private static async Task<Dictionary<string, FieldData>> LoadSourcePageMetadataAsync(ListItem pageItem)

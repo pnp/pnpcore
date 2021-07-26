@@ -15,18 +15,6 @@ namespace PnP.Core.Transformation.Model
         /// </summary>
         public bool IsHomePage { get; set; }
 
-        //public PageLayoutType PageLayoutType { get; set; }
-
-        ///// <summary>
-        ///// The list of Web Parts to transform
-        ///// </summary>
-        //public List<WebPartEntity> WebParts { get; set; }
-
-        ///// <summary>
-        ///// The taxonomy terms to transform
-        ///// </summary>
-        //public List<TaxonomyTerm> Terms { get; set; }
-
         /// <summary>
         /// The Author of the page
         /// </summary>
@@ -46,6 +34,11 @@ namespace PnP.Core.Transformation.Model
         /// The last Update date time of the page
         /// </summary>
         public DateTime Modified { get; set; }
+
+        /// <summary>
+        /// The name of the page
+        /// </summary>
+        public string PageName { get; set; }
 
         /// <summary>
         /// The parent Folder of the page, if any

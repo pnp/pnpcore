@@ -50,9 +50,19 @@ namespace PnP.Core.Transformation.SharePoint.Services.Builder.Configuration
         public bool CopyPageMetadata { get; set; }
 
         /// <summary>
+        /// Defines whether to map users or not
+        /// </summary>
+        public bool ShouldMapUsers { get; set; }
+
+        /// <summary>
         /// Custom URL mappings
         /// </summary>
         public List<UrlMapping> UrlMappings { get; set; }
+
+        /// <summary>
+        /// Custom URL mappings
+        /// </summary>
+        public List<UserMapping> UserMappings { get; set; }
     }
 
     /// <summary>
@@ -69,5 +79,21 @@ namespace PnP.Core.Transformation.SharePoint.Services.Builder.Configuration
         /// Url replacement value
         /// </summary>
         public string TargetUrl { get; set; }
+    }
+
+    /// <summary>
+    /// Defines a custom User mapping item
+    /// </summary>
+    public class UserMapping
+    {
+        /// <summary>
+        /// User to be replaced
+        /// </summary>
+        public string SourceUser { get; set; }
+
+        /// <summary>
+        /// User replacement value
+        /// </summary>
+        public string TargetUser { get; set; }
     }
 }

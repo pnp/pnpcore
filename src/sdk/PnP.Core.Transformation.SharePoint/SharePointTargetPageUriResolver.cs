@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Options;
 using PnP.Core.Services;
 using PnP.Core.Transformation.Services.Core;
 
@@ -14,6 +15,14 @@ namespace PnP.Core.Transformation.SharePoint
     /// </summary>
     public class SharePointTargetPageUriResolver : ITargetPageUriResolver
     {
+        private readonly PageTransformationOptions defaultPageTransformationOptions;
+
+
+        public SharePointTargetPageUriResolver(IOptions<PageTransformationOptions> pageTransformationOptions)
+        {
+            this.defaultPageTransformationOptions = pageTransformationOptions?.Value ?? throw new ArgumentNullException(nameof(pageTransformationOptions));
+        }
+
         /// <summary>
         /// Resolves the SharePoint target uri for the specified source item
         /// </summary>
@@ -29,10 +38,13 @@ namespace PnP.Core.Transformation.SharePoint
                 throw new ArgumentException($"Only source item of type {typeof(SharePointSourceItem)} is supported", nameof(sourceItem));
 
             var itemSiteLocalUri = new StringBuilder();
-            foreach (var s in spItem.Id.Uri.Segments.Skip(3))
+            foreach (var s in spItem.Id.Uri.Segments.Skip(3).Take(spItem.Id.Uri.Segments.Length - 4))
             {
                 itemSiteLocalUri.Append(s);
             }
+
+            itemSiteLocalUri.Append(this.defaultPageTransformationOptions.TargetPagePrefix);
+            itemSiteLocalUri.Append(spItem.Id.Uri.Segments[spItem.Id.Uri.Segments.Length - 1]);
 
             var uri = new Uri(targetContext.Uri + "/" + itemSiteLocalUri.ToString());
             return Task.FromResult(uri);

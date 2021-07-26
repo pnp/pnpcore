@@ -77,7 +77,7 @@ namespace PnP.Core.Transformation.Services.Core
 
             #endregion
 
-            #region Validate and create target page
+            #region Validate and create the target page
 
             // Ensure PostAsNews is used together with PagePublishing
             if (this.defaultPageTransformationOptions.PostAsNews && !this.defaultPageTransformationOptions.PublishPage)
@@ -88,14 +88,25 @@ namespace PnP.Core.Transformation.Services.Core
 
             // Check if the target page already exists
             string targetPageUriString = targetPageUri.IsAbsoluteUri ? targetPageUri.AbsolutePath : targetPageUri.ToString();
-            var targetFile = await targetWeb.GetFileByServerRelativeUrlAsync(targetPageUriString).ConfigureAwait(false);
-            if (targetFile.Exists)
+            IFile targetFile = null;
+            var targetFileExists = false;
+            try
+            {
+                targetFile = await targetWeb.GetFileByServerRelativeUrlAsync(targetPageUriString).ConfigureAwait(false);
+                targetFileExists = true;
+            }
+            catch (SharePointRestServiceException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            if (targetFileExists)
             {
                 logger.LogInformation(string.Format(System.Globalization.CultureInfo.InvariantCulture,
                     TransformationResources.Info_PageAlreadyExistsInTargetLocation, targetPageUri.ToString()));
 
                 if (!this.defaultPageTransformationOptions.Overwrite)
                 {
+                    // Raise an exception and stop the process if Overwrite is not allowed
                     var errorMessage = string.Format(System.Globalization.CultureInfo.InvariantCulture,
                         TransformationResources.Error_PageNotOverwriteIfExists, targetPageUri.ToString());
 
@@ -104,14 +115,17 @@ namespace PnP.Core.Transformation.Services.Core
                 }
             }
 
-            // Create the client side page using PnP Core SDK
+            // Create the client side page using PnP Core SDK and save it
             var targetPage = await targetWeb.NewPageAsync().ConfigureAwait(false);
 
-            logger.LogDebug(TransformationResources.Debug_TransformCheckIfPageIsHomePage);
+            var targetPageFilePath = $"{mappingOutput.TargetPage.Folder}{mappingOutput.TargetPage.PageName}";
+            await targetPage.SaveAsync(targetPageFilePath).ConfigureAwait(false);
 
             #endregion
 
             #region Check if the page is the home page
+
+            logger.LogDebug(TransformationResources.Debug_TransformCheckIfPageIsHomePage);
 
             // Check if the page is the home page
             bool replacedByOOBHomePage = false;
@@ -175,17 +189,39 @@ namespace PnP.Core.Transformation.Services.Core
             targetPage.PageTitle = mappingOutput.TargetPage.PageTitle;
 
             // Create the web parts and the transformed content
+            // TODO: Still to be fully implemented!
 
-            // Start with the content sections
-            int order = 1;
+            // Process all the sections, columns, and controls
+            int sectionOrder = 0;
             foreach (var section in mappingOutput.TargetPage.Sections)
             {
-                section.Order = order;
-                targetPage.AddSection(section.CanvasTemplate, order);
-                order++;
+                section.Order = sectionOrder;
+                targetPage.AddSection(section.CanvasTemplate, sectionOrder);
+                var targetSection = targetPage.Sections[sectionOrder];
+                sectionOrder++;
+
+                int columnOrder = 0;
+                int controlOrder = 0;
+                foreach (var column in section.Columns)
+                {
+                    var targetColumn = targetSection.Columns[columnOrder];
+                    columnOrder++;
+                    controlOrder++;
+
+                    // Here we need to determine the correct type of component and add it
+                    var tmp = targetPage.NewTextPart();
+                    tmp.Text = "<h1>Hello World!</h1>";
+
+                    targetPage.AddControl(tmp, targetColumn, controlOrder);
+                }
             }
 
-            // Now generate web parts
+            // TODO: Process metadata
+
+            // TODO: Process taxonomy
+
+            #region Leftover code, most likely to be removed
+
             //if (transformationInformation.SkipHiddenWebParts)
             //{
             //    webParts = webParts.Where(c => !c.Hidden).ToList();
@@ -283,7 +319,22 @@ namespace PnP.Core.Transformation.Services.Core
 
             // Log generation completed
 
-            return null;
+            #endregion
+
+            // Save the generated page
+            await targetPage.SaveAsync(targetPageFilePath).ConfigureAwait(false);
+
+            // Return the generated page URL
+            var generatedPageFile = await targetPage.GetPageFileAsync(f => f.ServerRelativeUrl).ConfigureAwait(false);
+            var generatedPageUri = new Uri($"{targetWeb.Url.Scheme}://{targetWeb.Url.Host}{generatedPageFile.ServerRelativeUrl}");
+
+            // Validate the URI of the output page
+            if (generatedPageUri != targetPageUri)
+            {
+                throw new ApplicationException(TransformationResources.Error_InvalidTargetPageUri);
+            }
+
+            return targetPageUri;
         }
 
         internal async Task SetAuthorInPageHeaderAsync(PageTransformationContext context, MappingProviderOutput mappingOutput, IPage targetClientSidePage, CancellationToken token = default)

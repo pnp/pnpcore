@@ -123,6 +123,9 @@
   <data name="Debug_ProcessingSelectorFunctions" xml:space="preserve">
     <value>Processing selector functions</value>
   </data>
+  <data name="Debug_UserTransformPrincipalInput" xml:space="preserve">
+    <value>Principal Input: {0}</value>
+  </data>
   <data name="Error_AnalyserCleaningExtractedWebPartFields" xml:space="preserve">
     <value>An error occurred cleaning extracted web part fields</value>
   </data>
@@ -314,6 +317,15 @@
   </data>
   <data name="Info_TransformSourcePageIsNotHomePage" xml:space="preserve">
     <value>The current page is not used as the site home page</value>
+  </data>
+  <data name="Info_UserTransformDefaultMapping" xml:space="preserve">
+    <value>Default remapping mechanism for user: {0}</value>
+  </data>
+  <data name="Info_UserTransformMappingNotFound" xml:space="preserve">
+    <value>Mapping for user cannot be found: {0}</value>
+  </data>
+  <data name="Info_UserTransformSuccess" xml:space="preserve">
+    <value>Mapping done and user replaced: from {0} to {1}</value>
   </data>
   <data name="Info_UsingCustomModernWebPart" xml:space="preserve">
     <value>Using 'custom' modern web part</value>

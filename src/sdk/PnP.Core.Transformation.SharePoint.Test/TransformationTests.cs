@@ -41,7 +41,8 @@ namespace PnP.Core.Transformation.SharePoint.Test
             var result = await pageTransformator.TransformSharePointAsync(sourceContext, targetContext, sourceUri);
 
             Assert.IsNotNull(result);
-            Assert.AreEqual(new Uri("https://officedevpnp.sharepoint.com/sites/pnpcoresdkdemo/item"), result);
+            var expectedUri = new Uri($"{targetContext.Web.Url}/SitePages/Migrated_{sourceUri.Segments[sourceUri.Segments.Length - 1]}");
+            Assert.AreEqual(expectedUri, result);
         }
 
         [TestMethod]

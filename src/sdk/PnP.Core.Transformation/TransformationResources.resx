@@ -123,6 +123,9 @@
   <data name="Error_CrossSiteTransferTargetsNonModernSite" xml:space="preserve">
     <value>Page transformation for targeting non-modern sites is currently not supported</value>
   </data>
+  <data name="Error_InvalidTargetPageUri" xml:space="preserve">
+    <value>The generated modern page does not have the expected URI.</value>
+  </data>
   <data name="Error_MissingUserMappingProvider" xml:space="preserve">
     <value>Missing UserMappingProvider in current services configuration</value>
   </data>

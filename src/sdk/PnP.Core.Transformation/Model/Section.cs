@@ -18,7 +18,7 @@ namespace PnP.Core.Transformation.Model
         /// <summary>
         /// Defines the order of the section in the target page
         /// </summary>
-        public float Order { get; set; }
+        public int Order { get; set; }
 
         /// <summary>
         /// The columns in the current section

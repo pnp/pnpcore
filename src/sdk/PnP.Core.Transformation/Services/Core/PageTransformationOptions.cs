@@ -95,7 +95,7 @@ namespace PnP.Core.Transformation.Services.Core
         /// <summary>
         /// Prefix used to name the target page.
         /// </summary>
-        public string TargetPagePrefix { get; set; }
+        public string TargetPagePrefix { get; set; } = "Migrated_";
 
         /// <summary>
         /// Prefix used to rename the source page. Used in conjunction with TargetPageName.

@@ -19,5 +19,10 @@ namespace PnP.Core.Transformation.Services.MappingProviders
         /// Defines the metadata fields of the target page
         /// </summary>
         public Dictionary<string, FieldData> Metadata { get; } = new Dictionary<string, FieldData>();
+
+        /// <summary>
+        /// Defines the list item permissions for the target page
+        /// </summary>
+        public ListItemPermission Permissions { get; set; }
     }
 }
