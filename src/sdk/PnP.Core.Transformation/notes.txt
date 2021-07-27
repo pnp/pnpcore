@@ -1,16 +1,17 @@
 ﻿New notes/issues:
-- How do we manage functions for properties when they refer to target context?
-	- Can we use tokens?
-- Where do we user taxonomy, metadata, and users mapping?
-- We cannot rely on PnP Provisioning Template for fields, we can't have a dependency on PnP Framework
-- We cannot use methods to "re-org" columns in pages unless we are already working on the target environment
-- Consider adding back caching for fields in pages library (see GetFieldsToCopy in PnP Framework)
-- Go back to CopyPageMetadata of BasePageTransformator when writing fields values to the target
-- How do we manage an abstract version of ListItemPermission as result of GetItemLevelPermissions?
+- We need to review the logic of CopyPageMetadata of BasePageTransformator when writing fields values to the target
+	- Do we have full feature coverage in PnP Core?
 - User transformation: do we really want to search on the on-premises AD domain via LDAP?
 - Do we still need to support blog pages? Aren't them deprecated?
 - I need to better understand Root/ for isRootPage (PageTransformator line 399)
 - I need to better understand the logic around PageFolder from line 345 to 432 in PageTransformator.cs
+- Where do we set SetAuthorInPageHeader in the current model? I can't find it ...
+- I installed Newtonsoft.Json because I don't want to go crazy :-) with web part properties ...
+- We need to debug issues with images and "real" web parts like List modern web part
+- We cannot rely on PnP Provisioning Template for fields, we can't have a dependency on PnP Framework
+- Is the content type handling correct? Shouldn't we just get the new one of the "modern page"?
+- Are we sure that the built-in fields of PnP Core are correct?
+	- Should we exclude built-in fields on the source side?
 
 Architectural notes:
 * implement all the native providers with file-based approach (both XML and JSON)

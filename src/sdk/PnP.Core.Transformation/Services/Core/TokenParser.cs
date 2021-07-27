@@ -1,10 +1,10 @@
-﻿using PnP.Core.Transformation.Model;
+﻿using PnP.Core.Transformation.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace PnP.Core.Transformation.SharePoint.Services
+namespace PnP.Core.Transformation.Services.Core
 {
     /// <summary>
     /// Resolves tokens by their actual representation
@@ -15,9 +15,10 @@ namespace PnP.Core.Transformation.SharePoint.Services
         /// Replaces the tokens in the provided input string with their values
         /// </summary>
         /// <param name="input">String with tokens</param>
-        /// <param name="webPartData">Web part information holding all possible tokens for this web part</param>
+        /// <param name="webPartProperties">Web part properties</param>
+        /// <param name="globalProperties">Global context properties</param>
         /// <returns>A string with tokens replaced by actual values</returns>
-        public static string ReplaceTokens(string input, WebPartEntity webPartData)
+        public static string ReplaceTokens(string input, Dictionary<string, string> webPartProperties, Dictionary<string, string> globalProperties = null)
         {
             if (string.IsNullOrWhiteSpace(input))
             {
@@ -30,11 +31,14 @@ namespace PnP.Core.Transformation.SharePoint.Services
                 return input;
             }
 
+            // Merge the web part properties and the global properties, if any
+            var properties = webPartProperties.Merge(globalProperties);
+
             string origInput;
             do
             {
                 origInput = input;
-                foreach (var property in webPartData.Properties)
+                foreach (var property in properties)
                 {
                     if (property.Value != null)
                     {

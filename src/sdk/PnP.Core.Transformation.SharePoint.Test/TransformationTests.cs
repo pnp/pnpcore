@@ -26,6 +26,8 @@ namespace PnP.Core.Transformation.SharePoint.Test
                 spOptions.CopyPageMetadata = true;
                 spOptions.KeepPageSpecificPermissions = true;
                 spOptions.RemoveEmptySectionsAndColumns = true;
+                spOptions.ShouldMapUsers = true;
+                spOptions.TargetPageTakesSourcePageName = true;
             });
 
             var provider = services.BuildServiceProvider();

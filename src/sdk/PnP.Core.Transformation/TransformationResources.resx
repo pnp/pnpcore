@@ -132,6 +132,24 @@
   <data name="Error_PageNotOverwriteIfExists" xml:space="preserve">
     <value>The target page '{0}' already exists and overwrite is not configured</value>
   </data>
+  <data name="Info_AddedClientSideWebPartToPage" xml:space="preserve">
+    <value>Added '{0}' Client Side Web Part to target page</value>
+  </data>
+  <data name="Info_ContentUsingAddinWebPart" xml:space="preserve">
+    <value>Using add-in web part '{0}'</value>
+  </data>
+  <data name="Info_ContentUsingModernWebPart" xml:space="preserve">
+    <value>Using '{0}' modern web part</value>
+  </data>
+  <data name="Info_CreatedTextControl" xml:space="preserve">
+    <value>Created new Text control</value>
+  </data>
+  <data name="Info_MappingRegularField" xml:space="preserve">
+    <value>Mapping field '{0}'</value>
+  </data>
+  <data name="Info_MappingTaxonomyField" xml:space="preserve">
+    <value>Mapping taxonomy field '{0}'</value>
+  </data>
   <data name="Info_PageAlreadyExistsInTargetLocation" xml:space="preserve">
     <value>The page '{0}' already exists in target location</value>
   </data>
@@ -155,6 +173,12 @@
   </data>
   <data name="Info_TransformSourcePageHomePageUsingStock" xml:space="preserve">
     <value>Using a stock homepage layout as the new homepage - not transforming page</value>
+  </data>
+  <data name="Info_UsingCustomModernWebPart" xml:space="preserve">
+    <value>Using 'custom' modern web part</value>
+  </data>
+  <data name="Warning_ContentWarnModernNotFound" xml:space="preserve">
+    <value>Modern web part not found</value>
   </data>
   <data name="Warning_PageHeaderAuthorNotSet" xml:space="preserve">
     <value>The page author header could not be set. Author '{0}' could not be resolved</value>

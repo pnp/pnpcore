@@ -106,6 +106,60 @@ namespace PnP.Core.Transformation {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Added &apos;{0}&apos; Client Side Web Part to target page.
+        /// </summary>
+        internal static string Info_AddedClientSideWebPartToPage {
+            get {
+                return ResourceManager.GetString("Info_AddedClientSideWebPartToPage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Using add-in web part &apos;{0}&apos;.
+        /// </summary>
+        internal static string Info_ContentUsingAddinWebPart {
+            get {
+                return ResourceManager.GetString("Info_ContentUsingAddinWebPart", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Using &apos;{0}&apos; modern web part.
+        /// </summary>
+        internal static string Info_ContentUsingModernWebPart {
+            get {
+                return ResourceManager.GetString("Info_ContentUsingModernWebPart", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Created new Text control.
+        /// </summary>
+        internal static string Info_CreatedTextControl {
+            get {
+                return ResourceManager.GetString("Info_CreatedTextControl", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mapping field &apos;{0}&apos;.
+        /// </summary>
+        internal static string Info_MappingRegularField {
+            get {
+                return ResourceManager.GetString("Info_MappingRegularField", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mapping taxonomy field &apos;{0}&apos;.
+        /// </summary>
+        internal static string Info_MappingTaxonomyField {
+            get {
+                return ResourceManager.GetString("Info_MappingTaxonomyField", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The page &apos;{0}&apos; already exists in target location.
         /// </summary>
         internal static string Info_PageAlreadyExistsInTargetLocation {
@@ -174,6 +228,24 @@ namespace PnP.Core.Transformation {
         internal static string Info_TransformSourcePageHomePageUsingStock {
             get {
                 return ResourceManager.GetString("Info_TransformSourcePageHomePageUsingStock", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Using &apos;custom&apos; modern web part.
+        /// </summary>
+        internal static string Info_UsingCustomModernWebPart {
+            get {
+                return ResourceManager.GetString("Info_UsingCustomModernWebPart", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Modern web part not found.
+        /// </summary>
+        internal static string Warning_ContentWarnModernNotFound {
+            get {
+                return ResourceManager.GetString("Warning_ContentWarnModernNotFound", resourceCulture);
             }
         }
         

@@ -587,18 +587,20 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
                     control.ControlType = CanvasControlType.ClientSideText;
 
                     // Parse the Text to support custom tokens
-                    control["Text"] = TokenParser.ReplaceTokens(map.ClientSideText.Text, webPart);
+                    control["Text"] = TokenParser.ReplaceTokens(map.ClientSideText.Text, webPart.Properties);
 
                     logger.LogInformation(SharePointTransformationResources.Info_AddedClientSideTextWebPart);
                 }
                 else if (map.ClientSideWebPart != null)
                 {
+                    control["JsonControlData"] = map.ClientSideWebPart.JsonControlData;
+
                     if (map.ClientSideWebPart.Type == ClientSideWebPartType.Custom)
                     {
                         control.ControlType = CanvasControlType.CustomClientSideWebPart;
 
                         // Parse the control ID to support generic web part placement scenarios
-                        control["ControlId"] = TokenParser.ReplaceTokens(map.ClientSideWebPart.ControlId, webPart);
+                        control["ControlId"] = TokenParser.ReplaceTokens(map.ClientSideWebPart.ControlId, webPart.Properties);
 
                         logger.LogInformation(SharePointTransformationResources.Info_UsingCustomModernWebPart);
                     }
@@ -606,7 +608,10 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
                     {
                         control.ControlType = CanvasControlType.DefaultWebPart;
 
-                        string webPartName = map.ClientSideWebPart.Type.ToString();
+                        // Save the web part name
+                        control["WebPartType"] = map.ClientSideWebPart.Type.ToString();
+                        control["Title"] = webPart.Title;
+                        control["Properties"] = webPart.Properties;
 
                         logger.LogInformation(string.Format(
                             System.Globalization.CultureInfo.InvariantCulture,

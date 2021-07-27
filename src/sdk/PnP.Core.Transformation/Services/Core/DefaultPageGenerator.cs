@@ -9,6 +9,13 @@ using System.Threading;
 using System.Threading.Tasks;
 using PnP.Core.Model.SharePoint;
 using System.Text.Json;
+using System.Linq;
+using Newtonsoft.Json.Linq;
+using System.Net;
+using PnP.Core.Model;
+using Microsoft.Extensions.Caching.Memory;
+using PnP.Core.QueryModel;
+using PnP.Core.Transformation.Model;
 
 namespace PnP.Core.Transformation.Services.Core
 {
@@ -19,6 +26,7 @@ namespace PnP.Core.Transformation.Services.Core
     {
         private readonly ILogger<DefaultPageGenerator> logger;
         private readonly PageTransformationOptions defaultPageTransformationOptions;
+        private readonly IMemoryCache memoryCache;
         private readonly IServiceProvider serviceProvider;
 
         /// <summary>
@@ -35,6 +43,7 @@ namespace PnP.Core.Transformation.Services.Core
             this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
             this.defaultPageTransformationOptions = pageTransformationOptions?.Value ?? throw new ArgumentNullException(nameof(pageTransformationOptions));
             this.serviceProvider = serviceProvider;
+            this.memoryCache = this.serviceProvider.GetService<IMemoryCache>();
         }
 
         public async Task<Uri> GenerateAsync(PageTransformationContext context, MappingProviderOutput mappingOutput, Uri targetPageUri, CancellationToken token = default)
@@ -97,7 +106,8 @@ namespace PnP.Core.Transformation.Services.Core
             }
             catch (SharePointRestServiceException ex)
             {
-                Console.WriteLine(ex.Message);
+                // Simply ignore this exception and assume that the page does not exist
+                targetFileExists = false;
             }
             if (targetFileExists)
             {
@@ -120,6 +130,9 @@ namespace PnP.Core.Transformation.Services.Core
 
             var targetPageFilePath = $"{mappingOutput.TargetPage.Folder}{mappingOutput.TargetPage.PageName}";
             await targetPage.SaveAsync(targetPageFilePath).ConfigureAwait(false);
+
+            // Reload the generated file
+            targetFile = await targetWeb.GetFileByServerRelativeUrlAsync(targetPageUriString).ConfigureAwait(false);
 
             #endregion
 
@@ -192,33 +205,12 @@ namespace PnP.Core.Transformation.Services.Core
             // TODO: Still to be fully implemented!
 
             // Process all the sections, columns, and controls
-            int sectionOrder = 0;
-            foreach (var section in mappingOutput.TargetPage.Sections)
-            {
-                section.Order = sectionOrder;
-                targetPage.AddSection(section.CanvasTemplate, sectionOrder);
-                var targetSection = targetPage.Sections[sectionOrder];
-                sectionOrder++;
+            await GenerateTargetCanvasControlsAsync(targetWeb, targetPage, mappingOutput).ConfigureAwait(false);
 
-                int columnOrder = 0;
-                int controlOrder = 0;
-                foreach (var column in section.Columns)
-                {
-                    var targetColumn = targetSection.Columns[columnOrder];
-                    columnOrder++;
-                    controlOrder++;
+            // Process metadata
+            await CopyPageMetadataAsync(targetFile, mappingOutput).ConfigureAwait(false);
 
-                    // Here we need to determine the correct type of component and add it
-                    var tmp = targetPage.NewTextPart();
-                    tmp.Text = "<h1>Hello World!</h1>";
-
-                    targetPage.AddControl(tmp, targetColumn, controlOrder);
-                }
-            }
-
-            // TODO: Process metadata
-
-            // TODO: Process taxonomy
+            // TODO: Process permissions
 
             #region Leftover code, most likely to be removed
 
@@ -337,6 +329,247 @@ namespace PnP.Core.Transformation.Services.Core
             return targetPageUri;
         }
 
+        private async Task CopyPageMetadataAsync(IFile targetFile, MappingProviderOutput mappingOutput)
+        {
+            // Ensure the properties to define the cache key
+            var targetWeb = targetFile.PnPContext.Web;
+            await targetWeb.EnsurePropertiesAsync(w => w.Id).ConfigureAwait(false);
+            var targetSite = targetFile.PnPContext.Site;
+            await targetSite.EnsurePropertiesAsync(s => s.Id).ConfigureAwait(false);
+            await targetFile.EnsurePropertiesAsync(f => f.ListId).ConfigureAwait(false);
+
+            // Retrieve the list of fields from cache
+            var fieldsToCopy = await GetFieldsFromCache(targetFile, targetWeb, targetSite).ConfigureAwait(false);
+
+            bool listItemWasReloaded = false;
+            if (fieldsToCopy.Count > 0)
+            {
+                // Load the list item corresponding to the file
+                await targetFile.LoadAsync(f => f.ListItemAllFields).ConfigureAwait(false);
+                var targetItem = targetFile.ListItemAllFields;
+
+                // Initially set the content type Id - Are we sure about this excerpt?
+                //targetItem[PageConstants.ContentTypeId] = mappingOutput.Metadata[PageConstants.ContentTypeId]?.Value;
+                //await targetItem.UpdateOverwriteVersionAsync().ConfigureAwait(false);
+
+                // TODO: Complete metadata fields handling (taxonomy with mapping provider and other fields)
+                foreach (var fieldToCopy in fieldsToCopy.Where(f => f.Type == "TaxonomyFieldTypeMulti" || f.Type == "TaxonomyFieldType"))
+                {
+                    logger.LogInformation(string.Format(System.Globalization.CultureInfo.InvariantCulture,
+                        TransformationResources.Info_MappingTaxonomyField, fieldToCopy.Name));
+                }
+
+                foreach (var fieldToCopy in fieldsToCopy.Where(f => f.Type != "TaxonomyFieldTypeMulti" && f.Type != "TaxonomyFieldType"))
+                {
+                    logger.LogInformation(string.Format(System.Globalization.CultureInfo.InvariantCulture,
+                        TransformationResources.Info_MappingRegularField, fieldToCopy.Name));
+                }
+            }
+        }
+
+        private async Task<List<FieldData>> GetFieldsFromCache(IFile targetFile, IWeb targetWeb, ISite targetSite)
+        {
+            // Define the cache key
+            var fieldsCacheKey = $"Fields|{targetSite.Id}|{targetWeb.Id}|{targetFile.ListId}";
+
+            List<FieldData> result = null;
+            if (!this.memoryCache.TryGetValue(fieldsCacheKey, out result))
+            {
+                // Get the fields of the current list
+                var targetList = await targetFile.PnPContext.Web.Lists.GetByIdAsync(targetFile.ListId,
+                    l => l.Id,
+                    l => l.Fields.QueryProperties(f => f.Id, f => f.StaticName, f => f.TypeAsString, f => f.Hidden)
+                    ).ConfigureAwait(false);
+
+                // Exclude hidden and built-in fields
+                result = targetList.Fields.AsRequested()
+                    .Where(f => !f.Hidden && !BuiltInFields.Contains(f.StaticName)).Select(f => new FieldData
+                {
+                    Id = f.Id,
+                    Name = f.StaticName,
+                    Type = f.TypeAsString
+                }).ToList();
+
+                // Store the list of fields in cache for future use
+                this.memoryCache.Set(fieldsCacheKey, result);
+            }
+
+            return result;
+        }
+
+        private async Task GenerateTargetCanvasControlsAsync(IWeb targetWeb, IPage targetPage, MappingProviderOutput mappingOutput)
+        {
+            // Prepare global tokens
+            var globalTokens = await PrepareGlobalTokensAsync(targetWeb).ConfigureAwait(false);
+
+            // Get the list of components available in the current site
+            var componentsToAdd = await GetClientSideComponentsAsync(targetPage).ConfigureAwait(false);
+
+            int sectionOrder = 0;
+            foreach (var section in mappingOutput.TargetPage.Sections)
+            {
+                section.Order = sectionOrder;
+                targetPage.AddSection(section.CanvasTemplate, sectionOrder);
+                var targetSection = targetPage.Sections[sectionOrder];
+                sectionOrder++;
+
+                int columnOrder = 0;
+                int controlOrder = 0;
+                foreach (var column in section.Columns)
+                {
+                    var targetColumn = targetSection.Columns[columnOrder];
+                    columnOrder++;
+                    controlOrder++;
+
+                    foreach (var control in column.Controls)
+                    {
+                        GenerateTargetCanvasControl(targetPage, componentsToAdd, controlOrder, targetColumn, control, globalTokens);
+                    }
+                }
+            }
+        }
+
+        private void GenerateTargetCanvasControl(IPage targetPage, List<PageComponent> componentsToAdd, int controlOrder, ICanvasColumn targetColumn, Model.CanvasControl control, Dictionary<string, string> globalTokens)
+        {
+            // Prepare a web part control container
+            IPageComponent baseControl = null;
+
+            switch (control.ControlType)
+            {
+                case Model.CanvasControlType.ClientSideText:
+                    // Here we add a text control
+                    var text = targetPage.NewTextPart();
+                    text.Text = control["Text"] as string;
+
+                    // Add the actual text control to the page
+                    targetPage.AddControl(text, targetColumn, controlOrder);
+
+                    // Log the just executed action
+                    logger.LogInformation(TransformationResources.Info_CreatedTextControl);
+
+                    break;
+                case Model.CanvasControlType.CustomClientSideWebPart:
+                    // Parse the control ID to support generic web part placement scenarios
+                    var ControlId = control["ControlId"] as string;
+                    // Check if this web part belongs to the list of "usable" web parts for this site
+                    baseControl = componentsToAdd.FirstOrDefault(p => p.Id.Equals($"{{{ControlId}}}", StringComparison.InvariantCultureIgnoreCase));
+
+                    logger.LogInformation(TransformationResources.Info_UsingCustomModernWebPart);
+
+                    break;
+                case Model.CanvasControlType.DefaultWebPart:
+                    // Determine the actual default web part
+                    var webPartType = (DefaultWebPart)Enum.Parse(typeof(DefaultWebPart), control["WebPartType"] as string);
+                    var webPartName = targetPage.DefaultWebPartToWebPartId(webPartType);
+                    var webPartTitle = control["Title"] as string;
+                    var webPartProperties = control["Properties"] as Dictionary<string, string>;
+                    var jsonControlData = control["JsonControlData"] as string;
+
+                    if (webPartType == DefaultWebPart.ClientWebPart)
+                    {
+                        var addinComponents = componentsToAdd.Where(p => p.Name.Equals(webPartName, StringComparison.InvariantCultureIgnoreCase));
+                        foreach (var addin in addinComponents)
+                        {
+                            // Find the right add-in web part via title matching...maybe not bullet proof but did find anything better for now
+                            JObject wpJObject = JObject.Parse(addin.Manifest);
+
+                            // As there can be multiple classic web parts (via provider hosted add ins or SharePoint hosted add ins) we're looping to find the first one with a matching title
+                            foreach (var addinEntry in wpJObject["preconfiguredEntries"])
+                            {
+                                if (addinEntry["title"]["default"].Value<string>() == webPartTitle)
+                                {
+                                    baseControl = addin;
+
+                                    var jsonProperties = addinEntry;
+
+                                    // Fill custom web part properties in this json. Custom properties are listed as child elements under clientWebPartProperties, 
+                                    // replace their "default" value with the value we got from the web part's properties
+                                    jsonProperties = PopulateAddInProperties(jsonProperties, webPartProperties);
+
+                                    // Override the JSON data we read from the model as this is fully dynamic due to the nature of the add-in client part
+                                    jsonControlData = jsonProperties.ToString(Newtonsoft.Json.Formatting.None);
+
+                                    logger.LogInformation(string.Format(System.Globalization.CultureInfo.InvariantCulture,
+                                        TransformationResources.Info_ContentUsingAddinWebPart, baseControl.Name));
+
+                                    break;
+                                }
+                            }
+                        }
+
+                    }
+                    else
+                    {
+                        baseControl = componentsToAdd.FirstOrDefault(p => p.Name.Equals(webPartName, StringComparison.InvariantCultureIgnoreCase));
+
+                        logger.LogInformation(string.Format(System.Globalization.CultureInfo.InvariantCulture,
+                            TransformationResources.Info_ContentUsingModernWebPart, webPartType));
+                    }
+
+                    // If we found the web part as a possible candidate to use then add it
+                    if (baseControl != null)
+                    {
+                        var jsonDecoded = WebUtility.HtmlDecode(TokenParser.ReplaceTokens(jsonControlData, webPartProperties, globalTokens));
+
+                        var myWebPart = targetPage.NewWebPart(baseControl);
+                        myWebPart.Order = controlOrder;
+                        myWebPart.PropertiesJson = jsonDecoded;
+
+                        // Add the actual text control to the page
+                        targetPage.AddControl(myWebPart, targetColumn, controlOrder);
+
+                        logger.LogInformation(string.Format(System.Globalization.CultureInfo.InvariantCulture,
+                            TransformationResources.Info_AddedClientSideWebPartToPage, webPartTitle));
+                    }
+                    else
+                    {
+                        logger.LogWarning(TransformationResources.Warning_ContentWarnModernNotFound);
+                    }
+
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private async Task<List<PageComponent>> GetClientSideComponentsAsync(IPage targetPage)
+        {
+            var siteToComponentMapping = new Dictionary<Guid, string>();
+
+            var componentsToAdd = (await targetPage.AvailablePageComponentsAsync().ConfigureAwait(false))
+                .Cast<PageComponent>().ToList();
+
+            // TODO: Consider adding back caching
+
+            return componentsToAdd;
+        }
+
+        private JToken PopulateAddInProperties(JToken jsonProperties, Dictionary<string, string> webPartProperties)
+        {
+            foreach (JToken property in jsonProperties["properties"]["clientWebPartProperties"])
+            {
+                var wpProp = property["name"].Value<string>();
+                if (!string.IsNullOrEmpty(wpProp))
+                {
+                    if (webPartProperties.ContainsKey(wpProp))
+                    {
+                        if (jsonProperties["properties"]["userDefinedProperties"][wpProp] != null)
+                        {
+                            jsonProperties["properties"]["userDefinedProperties"][wpProp] = webPartProperties[wpProp].ToString();
+                        }
+                        else
+                        {
+                            JToken newProp = JObject.Parse($"{{\"{wpProp}\": \"{webPartProperties[wpProp].ToString()}\"}}");
+                            (jsonProperties["properties"]["userDefinedProperties"] as JObject).Merge(newProp);
+                        }
+                    }
+                }
+            }
+
+            return jsonProperties;
+        }
+
+
         internal async Task SetAuthorInPageHeaderAsync(PageTransformationContext context, MappingProviderOutput mappingOutput, IPage targetClientSidePage, CancellationToken token = default)
         {
             // Try to get th
@@ -394,6 +627,28 @@ namespace PnP.Core.Transformation.Services.Core
                     TransformationResources.Warning_PageHeaderAuthorNotSetGenericError,
                     ex.Message));
             }
+        }
+
+        /// <summary>
+        /// Prepares global tokens for target environment
+        /// </summary>
+        /// <returns></returns>
+        private async Task<Dictionary<string, string>> PrepareGlobalTokensAsync(IWeb web)
+        {
+            Dictionary<string, string> globalTokens = new Dictionary<string, string>(5);
+
+            await web.EnsurePropertiesAsync(w => w.Id, w => w.Url, w => w.ServerRelativeUrl).ConfigureAwait(false);
+            var site = web.PnPContext.Site;
+            await site.EnsurePropertiesAsync(s => s.Id, s => s.RootWeb.QueryProperties(rw => rw.ServerRelativeUrl)).ConfigureAwait(false);
+
+            // Add the fixed properties
+            globalTokens.Add("Host", $"{web.Url.Scheme}://{web.Url.DnsSafeHost}");
+            globalTokens.Add("Web", web.ServerRelativeUrl.TrimEnd('/'));
+            globalTokens.Add("SiteCollection", site.RootWeb.ServerRelativeUrl.TrimEnd('/'));
+            globalTokens.Add("WebId", web.Id.ToString());
+            globalTokens.Add("SiteId", site.Id.ToString());
+
+            return globalTokens;
         }
     }
 }
