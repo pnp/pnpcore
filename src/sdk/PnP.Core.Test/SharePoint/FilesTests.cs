@@ -215,6 +215,17 @@ namespace PnP.Core.Test.SharePoint
         }
 
         [TestMethod]
+        public async Task GetNonExistingFileByServerRelativeUrlOrDefaultAsyncTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+            {
+                IFile testDocument = context.Web.GetFileByServerRelativeUrlOrDefault($"{TestCommon.Instance.TestUris[TestCommon.TestSite].LocalPath}/Shared%20Documents/IdontExist.pdf");
+                Assert.IsTrue(testDocument == null);
+            }
+        }
+
+        [TestMethod]
         public async Task GetExistingFileInOtherSiteByServerRelativeUrlAsyncTest()
         {
             //TestCommon.Instance.Mocking = false;
@@ -270,7 +281,6 @@ namespace PnP.Core.Test.SharePoint
                 Assert.IsTrue(!string.IsNullOrEmpty(testDocument.ContentTag));
                 Assert.AreEqual(CustomizedPageStatus.None, testDocument.CustomizedPageStatus);
                 Assert.IsTrue(!string.IsNullOrEmpty(testDocument.ETag));
-                Assert.IsTrue(testDocument.Exists);
                 Assert.IsFalse(testDocument.IrmEnabled);
                 Assert.IsTrue(testDocument.TimeCreated != DateTime.MinValue);
                 Assert.IsTrue(testDocument.TimeLastModified != DateTime.MinValue);

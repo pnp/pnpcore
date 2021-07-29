@@ -2072,13 +2072,9 @@ namespace PnP.Core.Model.SharePoint
         {
             if (PageListItem != null)
             {
-                var pageFile = await PnPContext.Web.GetFileByServerRelativeUrlAsync($"{PageListItem[PageConstants.FileDirRef]}/{PageListItem[PageConstants.FileLeafRef]}", f => f.ListId, f => f.Exists, f => f.CheckOutType).ConfigureAwait(false);
-                if (pageFile.Exists)
+                var pageFile = await PnPContext.Web.GetFileByServerRelativeUrlOrDefaultAsync($"{PageListItem[PageConstants.FileDirRef]}/{PageListItem[PageConstants.FileLeafRef]}", f => f.ListId, f => f.CheckOutType).ConfigureAwait(false);
+                if (pageFile != null)
                 {
-                    //var sitePagesLibrary = await PnPContext.Web.Lists.GetByIdAsync(pageFile.ListId,
-                    //    l => l.EnableMinorVersions,
-                    //    l => l.EnableModeration,
-                    //    l => l.ForceCheckout).ConfigureAwait(false);
                     var sitePagesLibrary = await EnsurePagesLibraryAsync(PnPContext).ConfigureAwait(false);
 
                     if (pageFile.CheckOutType != CheckOutType.None)

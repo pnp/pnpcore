@@ -40,8 +40,6 @@ namespace PnP.Core.Model.SharePoint
 
         public string ETag { get => GetValue<string>(); set => SetValue(value); }
 
-        public bool Exists { get => GetValue<bool>(); set => SetValue(value); }
-
         public bool HasAlternateContentStreams { get => GetValue<bool>(); set => SetValue(value); }
 
         public bool IrmEnabled { get => GetValue<bool>(); set => SetValue(value); }

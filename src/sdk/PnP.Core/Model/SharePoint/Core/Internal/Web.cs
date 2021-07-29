@@ -469,6 +469,30 @@ namespace PnP.Core.Model.SharePoint
         #endregion
 
         #region Files
+        public IFile GetFileByServerRelativeUrlOrDefault(string serverRelativeUrl, params Expression<Func<IFile, object>>[] expressions)
+        {
+            return GetFileByServerRelativeUrlOrDefaultAsync(serverRelativeUrl, expressions).GetAwaiter().GetResult();
+        }
+
+        public async Task<IFile> GetFileByServerRelativeUrlOrDefaultAsync(string serverRelativeUrl, params Expression<Func<IFile, object>>[] expressions)
+        {
+            try
+            {
+                return await GetFileByServerRelativeUrlAsync(serverRelativeUrl, expressions).ConfigureAwait(false);
+            }
+            catch (SharePointRestServiceException ex)
+            {
+                var error = ex.Error as SharePointRestError;
+                // Indicates the file did not exist
+                if (error.HttpResponseCode == 404 && error.ServerErrorCode == -2130575338)
+                {
+                    return null;
+                }
+
+                throw;
+            }
+        }
+
         public IFile GetFileByServerRelativeUrl(string serverRelativeUrl, params Expression<Func<IFile, object>>[] expressions)
         {
             return GetFileByServerRelativeUrlAsync(serverRelativeUrl, expressions).GetAwaiter().GetResult();
