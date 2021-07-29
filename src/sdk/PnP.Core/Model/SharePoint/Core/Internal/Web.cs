@@ -484,7 +484,7 @@ namespace PnP.Core.Model.SharePoint
             {
                 var error = ex.Error as SharePointRestError;
                 // Indicates the file did not exist
-                if (error.HttpResponseCode == 404 && error.ServerErrorCode == -2130575338)
+                if (File.ErrorIndicatesFileDoesNotExists(error))
                 {
                     return null;
                 }

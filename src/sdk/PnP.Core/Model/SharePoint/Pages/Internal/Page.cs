@@ -1832,26 +1832,7 @@ namespace PnP.Core.Model.SharePoint
                 pageName += ".aspx";
             }
 
-            IFile pageFile = null;
-
-            try
-            {
-                pageFile = await pagesLibrary.PnPContext.Web.GetFileByServerRelativeUrlAsync($"{pagesLibrary.RootFolder.ServerRelativeUrl}/{pageName}", p => p.ListItemAllFields, p => p.ServerRelativeUrl, p => p.ListId).ConfigureAwait(false);
-            }
-            catch (SharePointRestServiceException ex)
-            {
-                // The file /sites/prov-1/SitePages/PNP_SDK_TEST_CreateAndUpdatePage.aspx does not exist.
-                if ((ex.Error as SharePointRestError).ServerErrorCode == -2130575338)
-                {
-                    // ignore this error
-                }
-                else
-                {
-                    throw ex;
-                }
-            }
-
-            return pageFile;
+            return await pagesLibrary.PnPContext.Web.GetFileByServerRelativeUrlOrDefaultAsync($"{pagesLibrary.RootFolder.ServerRelativeUrl}/{pageName}", p => p.ListItemAllFields, p => p.ServerRelativeUrl, p => p.ListId).ConfigureAwait(false);
         }
 
         private async Task EnsurePageListItemAsync(string pageName)

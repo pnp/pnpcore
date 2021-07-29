@@ -466,7 +466,7 @@ namespace PnP.Core.Model.SharePoint
             {
                 var error = ex.Error as SharePointRestError;
 
-                if (error.HttpResponseCode == 404 && error.ServerErrorCode == -2130575338)
+                if (File.ErrorIndicatesFileDoesNotExists(error))
                 {
                     clientContext.Logger.LogInformation("Provided file link does not exist...we're eating the exception and the page will end up with a default page header");
                 }

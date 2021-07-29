@@ -759,5 +759,21 @@ namespace PnP.Core.Model.SharePoint
         #endregion
 
         #endregion
+
+        #region Helper methods
+        internal static bool ErrorIndicatesFileDoesNotExists(SharePointRestError error)
+        {
+            // Indicates the file did not exist
+            if (error.HttpResponseCode == 404 && error.ServerErrorCode == -2130575338)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        #endregion
     }
 }
