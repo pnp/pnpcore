@@ -13841,19 +13841,6 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IFile.ETag
   nameWithType: IFile.ETag
-- uid: PnP.Core.Model.SharePoint.IFile.Exists
-  name: Exists
-  href: api/PnP.Core.Model.SharePoint.IFile.html#PnP_Core_Model_SharePoint_IFile_Exists
-  commentId: P:PnP.Core.Model.SharePoint.IFile.Exists
-  fullName: PnP.Core.Model.SharePoint.IFile.Exists
-  nameWithType: IFile.Exists
-- uid: PnP.Core.Model.SharePoint.IFile.Exists*
-  name: Exists
-  href: api/PnP.Core.Model.SharePoint.IFile.html#PnP_Core_Model_SharePoint_IFile_Exists_
-  commentId: Overload:PnP.Core.Model.SharePoint.IFile.Exists
-  isSpec: "True"
-  fullName: PnP.Core.Model.SharePoint.IFile.Exists
-  nameWithType: IFile.Exists
 - uid: PnP.Core.Model.SharePoint.IFile.GetContent(System.Boolean)
   name: GetContent(Boolean)
   href: api/PnP.Core.Model.SharePoint.IFile.html#PnP_Core_Model_SharePoint_IFile_GetContent_System_Boolean_
@@ -26249,6 +26236,38 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IWeb.GetFileByServerRelativeUrlBatchAsync
   nameWithType: IWeb.GetFileByServerRelativeUrlBatchAsync
+- uid: PnP.Core.Model.SharePoint.IWeb.GetFileByServerRelativeUrlOrDefault(System.String,Expression{Func{PnP.Core.Model.SharePoint.IFile,System.Object}}[])
+  name: GetFileByServerRelativeUrlOrDefault(String, Expression<Func<IFile, Object>>[])
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_GetFileByServerRelativeUrlOrDefault_System_String_Expression_Func_PnP_Core_Model_SharePoint_IFile_System_Object_____
+  commentId: M:PnP.Core.Model.SharePoint.IWeb.GetFileByServerRelativeUrlOrDefault(System.String,Expression{Func{PnP.Core.Model.SharePoint.IFile,System.Object}}[])
+  name.vb: GetFileByServerRelativeUrlOrDefault(String, Expression(Of Func(Of IFile, Object))())
+  fullName: PnP.Core.Model.SharePoint.IWeb.GetFileByServerRelativeUrlOrDefault(System.String, Expression<Func<PnP.Core.Model.SharePoint.IFile, System.Object>>[])
+  fullName.vb: PnP.Core.Model.SharePoint.IWeb.GetFileByServerRelativeUrlOrDefault(System.String, Expression(Of Func(Of PnP.Core.Model.SharePoint.IFile, System.Object))())
+  nameWithType: IWeb.GetFileByServerRelativeUrlOrDefault(String, Expression<Func<IFile, Object>>[])
+  nameWithType.vb: IWeb.GetFileByServerRelativeUrlOrDefault(String, Expression(Of Func(Of IFile, Object))())
+- uid: PnP.Core.Model.SharePoint.IWeb.GetFileByServerRelativeUrlOrDefault*
+  name: GetFileByServerRelativeUrlOrDefault
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_GetFileByServerRelativeUrlOrDefault_
+  commentId: Overload:PnP.Core.Model.SharePoint.IWeb.GetFileByServerRelativeUrlOrDefault
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IWeb.GetFileByServerRelativeUrlOrDefault
+  nameWithType: IWeb.GetFileByServerRelativeUrlOrDefault
+- uid: PnP.Core.Model.SharePoint.IWeb.GetFileByServerRelativeUrlOrDefaultAsync(System.String,Expression{Func{PnP.Core.Model.SharePoint.IFile,System.Object}}[])
+  name: GetFileByServerRelativeUrlOrDefaultAsync(String, Expression<Func<IFile, Object>>[])
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_GetFileByServerRelativeUrlOrDefaultAsync_System_String_Expression_Func_PnP_Core_Model_SharePoint_IFile_System_Object_____
+  commentId: M:PnP.Core.Model.SharePoint.IWeb.GetFileByServerRelativeUrlOrDefaultAsync(System.String,Expression{Func{PnP.Core.Model.SharePoint.IFile,System.Object}}[])
+  name.vb: GetFileByServerRelativeUrlOrDefaultAsync(String, Expression(Of Func(Of IFile, Object))())
+  fullName: PnP.Core.Model.SharePoint.IWeb.GetFileByServerRelativeUrlOrDefaultAsync(System.String, Expression<Func<PnP.Core.Model.SharePoint.IFile, System.Object>>[])
+  fullName.vb: PnP.Core.Model.SharePoint.IWeb.GetFileByServerRelativeUrlOrDefaultAsync(System.String, Expression(Of Func(Of PnP.Core.Model.SharePoint.IFile, System.Object))())
+  nameWithType: IWeb.GetFileByServerRelativeUrlOrDefaultAsync(String, Expression<Func<IFile, Object>>[])
+  nameWithType.vb: IWeb.GetFileByServerRelativeUrlOrDefaultAsync(String, Expression(Of Func(Of IFile, Object))())
+- uid: PnP.Core.Model.SharePoint.IWeb.GetFileByServerRelativeUrlOrDefaultAsync*
+  name: GetFileByServerRelativeUrlOrDefaultAsync
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_GetFileByServerRelativeUrlOrDefaultAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.IWeb.GetFileByServerRelativeUrlOrDefaultAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IWeb.GetFileByServerRelativeUrlOrDefaultAsync
+  nameWithType: IWeb.GetFileByServerRelativeUrlOrDefaultAsync
 - uid: PnP.Core.Model.SharePoint.IWeb.GetFolderById(Guid,Expression{Func{PnP.Core.Model.SharePoint.IFolder,System.Object}}[])
   name: GetFolderById(Guid, Expression<Func<IFolder, Object>>[])
   href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_GetFolderById_Guid_Expression_Func_PnP_Core_Model_SharePoint_IFolder_System_Object_____
