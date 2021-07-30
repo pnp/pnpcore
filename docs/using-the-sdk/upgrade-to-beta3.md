@@ -1,4 +1,4 @@
-# Upgrade to Beta3
+# Upgrade to Beta3 or later
 
 Beta3 introduces some fundamental changes which will require minor updates in your code base. These changes are done to provide a more consistent experience while also doing internal refactoring to centralize to a common query engine regardless of the entry point. In the remainder of this article you'll see a lot of `context` use: in this case this is a `PnPContext` which was obtained via the `PnPContextFactory` as explained in the [overview article](readme.md) and show below:
 
@@ -43,8 +43,8 @@ GetBatchAsync() | AsBatchAsync() | No
 GetBatch() | AsBatch() | No
 GetFirstOrDefaultAsync() | FirstOrDefaultAsync() | No
 GetFirstOrDefault() | FirstOrDefault() | No
-GetFirstOrDefaultBatchAsync() | FirstOrDefault().AsBatchAsync() | No
-GetFirstOrDefaultBatch() | FirstOrDefault().AsBatch() | No
+GetFirstOrDefaultBatchAsync() | Use GetBatchAsync() with filter | No
+GetFirstOrDefaultBatch() | Use GetBatch() with filter | No
 
 ## Querying collections of models
 

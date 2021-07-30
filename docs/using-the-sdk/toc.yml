@@ -26,7 +26,7 @@
     href: basics-settings.md
   - name: API configuration
     href: basics-apis.md
-  - name: Upgrade from beta2
+  - name: Upgrade to beta3 or later
     href: upgrade-to-beta3.md
 - name: Authentication  
   items:
