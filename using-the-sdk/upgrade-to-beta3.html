@@ -5,9 +5,9 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Upgrade to Beta3 | PnP Core SDK </title>
+    <title>Upgrade to Beta3 or later | PnP Core SDK </title>
     <meta name="viewport" content="width=device-width">
-    <meta name="title" content="Upgrade to Beta3 | PnP Core SDK ">
+    <meta name="title" content="Upgrade to Beta3 or later | PnP Core SDK ">
     <meta name="generator" content="docfx 2.56.5.0">
     <meta name="description" content="The PnP Core SDK is an SDK designed to work against Microsoft 365. Its aim is to provide a unified object model to work with the whole Microsoft 365 ecosystem. ">
     <link rel="shortcut icon" href="https://c.s-microsoft.com/favicon.ico?v2">
@@ -80,7 +80,7 @@
                   <div class="contribution-panel mobile-hide pull-right">
                       <a href="https://github.com/pnp/pnpcore/blob/dev/docs/using-the-sdk/upgrade-to-beta3.md/#L1" title="Improve this Doc" class="improve-doc-lg"><i class="glyphicon glyphicon-pencil"></i></a>
                   </div>
-                    <h1 id="upgrade-to-beta3">Upgrade to Beta3</h1>
+                    <h1 id="upgrade-to-beta3-or-later">Upgrade to Beta3 or later</h1>
 
 <p>Beta3 introduces some fundamental changes which will require minor updates in your code base. These changes are done to provide a more consistent experience while also doing internal refactoring to centralize to a common query engine regardless of the entry point. In the remainder of this article you'll see a lot of <code>context</code> use: in this case this is a <code>PnPContext</code> which was obtained via the <code>PnPContextFactory</code> as explained in the <a href="readme.html">overview article</a> and show below:</p>
 <pre><code class="lang-csharp">using (var context = await pnpContextFactory.CreateAsync(&quot;SiteToWorkWith&quot;))
@@ -190,12 +190,12 @@
 </tr>
 <tr>
 <td>GetFirstOrDefaultBatchAsync()</td>
-<td>FirstOrDefault().AsBatchAsync()</td>
+<td>Use GetBatchAsync() with filter</td>
 <td>No</td>
 </tr>
 <tr>
 <td>GetFirstOrDefaultBatch()</td>
-<td>FirstOrDefault().AsBatch()</td>
+<td>Use GetBatch() with filter</td>
 <td>No</td>
 </tr>
 </tbody>
