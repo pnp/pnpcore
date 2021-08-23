@@ -450,6 +450,75 @@ namespace PnP.Core.Test.SharePoint
             }
         }
 
+        [TestMethod]
+        public async Task ParseListItemSpecialIssue519()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                string listTitle = TestCommon.GetPnPSdkTestAssetName("ParseListItemSpecialIssue519");
+                var myList = context.Web.Lists.FirstOrDefault(p => p.Title == listTitle);
+
+                string fldText1 = "SpecialField";
+                if (myList == null)
+                {
+                    // Create the list
+                    myList = await context.Web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
+
+                    // Text field 1                    
+                    IField addedTextField1 = await myList.Fields.AddTextAsync(fldText1, new FieldTextOptions()
+                    {
+                        Group = "TEST GROUP",
+                        AddToDefaultView = true,
+                    });
+
+                    // Add a list item to this list
+                    // Add a list item
+                    Dictionary<string, object> values = new Dictionary<string, object>
+                    {
+                        { "Title", "Yes" },
+                        { fldText1, "1.1" }
+                    };
+
+                    await myList.Items.AddAsync(values);
+                }
+                else
+                {
+                    Assert.Inconclusive("Test data set should be setup to not have the list available.");
+                }
+
+                if (myList != null)
+                {
+                    try
+                    {
+                        // get items from the list
+                        await myList.LoadAsync(p => p.Items);
+
+                        // grab first item via list load
+                        var firstItem = myList.Items.AsRequested().FirstOrDefault();
+                        if (firstItem != null)
+                        {
+                            Assert.IsTrue(firstItem.Values["Title"].ToString() == "Yes");
+                            Assert.IsTrue(firstItem.Values[fldText1].ToString() == "1.1");
+                        }
+
+                        // grab first item via GetById
+                        var firstItem2 = await myList.Items.GetByIdAsync(1);
+                        if (firstItem2 != null)
+                        {
+                            Assert.IsTrue(firstItem2.Values["Title"].ToString() == "Yes");
+                            Assert.IsTrue(firstItem2.Values[fldText1].ToString() == "1.1");
+                        }
+
+                    }
+                    finally
+                    {
+                        // Clean up
+                        await myList.DeleteAsync();
+                    }
+                }
+            }
+        }
         #endregion
 
         #region Recycle tests

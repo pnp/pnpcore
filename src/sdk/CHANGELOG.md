@@ -14,6 +14,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
 ### Changed
 
+- Improved parsing of JSON ListItem content, preventing unwanted string into DateTime parsing #519 [jansenbe - Bert Jansen]
+
 ## [1.3.0]
 
 ### Added

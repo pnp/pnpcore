@@ -1090,8 +1090,10 @@ namespace PnP.Core.Services
 
             if (property.Value.ValueKind == JsonValueKind.String)
             {
-                // SharePoint REST data format
-                if (DateTime.TryParse(property.Value.GetString(), out DateTime foundDate2))
+                // SharePoint REST/Graph date formats, assume length of 10 or more before trying to parse to avoid getting strings like "1.1" being parsed as date (issue 519)
+                // This is fix will still parse text fields with date formatted content to datetime, would be better if this code path understood the type of the field it's
+                // parsing data for, but that's a costly thing to implement
+                if (property.Value.GetString() != null && property.Value.GetString().Length >= 10 && DateTime.TryParse(property.Value.GetString(), out DateTime foundDate2))
                 {
                     return foundDate2;
                 }
