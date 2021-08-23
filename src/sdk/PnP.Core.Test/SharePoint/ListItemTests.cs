@@ -376,6 +376,80 @@ namespace PnP.Core.Test.SharePoint
             }
         }
 
+        [TestMethod]
+        public async Task UpdateListItemModifiedCreatedBy()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                string listTitle = TestCommon.GetPnPSdkTestAssetName("UpdateListItemModifiedCreatedBy");
+                var myList = context.Web.Lists.FirstOrDefault(p => p.Title == listTitle);
+
+                if (myList == null)
+                {
+                    // Create the list
+                    myList = await context.Web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
+
+
+                    // Add a list item to this list
+                    // Add a list item
+                    Dictionary<string, object> values = new Dictionary<string, object>
+                    {
+                        { "Title", "Yes" }
+                    };
+
+                    await myList.Items.AddAsync(values);
+                }
+                else
+                {
+                    Assert.Inconclusive("Test data set should be setup to not have the list available.");
+                }
+
+                if (myList != null)
+                {
+                    try
+                    {
+                        // get items from the list
+                        await myList.LoadAsync(p => p.Items, p => p.Fields);
+
+                        // grab first item
+                        var firstItem = myList.Items.AsRequested().FirstOrDefault();
+                        if (firstItem != null)
+                        {
+                            Assert.IsTrue(firstItem.Values["Title"].ToString() == "Yes");
+
+                            // Load the Author and Editor fields
+                            var author = myList.Fields.AsRequested().FirstOrDefault(p => p.InternalName == "Author");
+                            var editor = myList.Fields.AsRequested().FirstOrDefault(p => p.InternalName == "Editor");
+
+                            // load the current user
+                            var currentUser = await context.Web.GetCurrentUserAsync();
+                            var newDate = new DateTime(2020, 10, 20);
+
+                            firstItem.Values["Author"] = author.NewFieldUserValue(currentUser);
+                            firstItem.Values["Editor"] = editor.NewFieldUserValue(currentUser);                             
+                            firstItem.Values["Created"] = newDate;
+                            firstItem.Values["Modified"] = newDate;
+
+                            await firstItem.UpdateOverwriteVersionAsync();
+
+                            // get items again from the list
+                            await myList.LoadAsync(p => p.Items);
+                            firstItem = myList.Items.AsRequested().FirstOrDefault();
+
+                            Assert.IsTrue(firstItem.Values["Created"].ToString() == newDate.ToString());
+                            Assert.IsTrue(firstItem.Values["Modified"].ToString() == newDate.ToString());
+                        }
+                    }
+                    finally
+                    {
+                        // Clean up
+                        await myList.DeleteAsync();
+                    }
+                }
+            }
+        }
+
         #endregion
 
         #region Recycle tests
@@ -1149,6 +1223,82 @@ namespace PnP.Core.Test.SharePoint
 
                 // Cleanup the created list
                 await myList.DeleteAsync();
+            }
+        }
+
+        [TestMethod]
+        public async Task SystemUpdateMetaInfo()
+        {
+            //TestCommon.Instance.Mocking = false;
+            string listTitle = "SystemUpdateMetaInfo";
+
+            try
+            {
+                using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+                {
+                    // Create a new list
+                    var myList = context.Web.Lists.FirstOrDefault(p => p.Title == listTitle);
+
+                    if (TestCommon.Instance.Mocking && myList != null)
+                    {
+                        Assert.Inconclusive("Test data set should be setup to not have the list available.");
+                    }
+
+                    if (myList == null)
+                    {
+                        myList = await context.Web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
+                        // Enable versioning
+                        myList.EnableVersioning = true;
+                        await myList.UpdateAsync();
+                    }
+
+                    // Add items to the list
+                    for (int i = 0; i < 10; i++)
+                    {
+                        Dictionary<string, object> values = new Dictionary<string, object>
+                        {
+                            { "Title", $"Item {i}" }
+                        };
+
+                        await myList.Items.AddBatchAsync(values);
+                    }
+                    await context.ExecuteAsync();
+
+                    // get first item and do a system update
+                    var first = myList.Items.AsRequested().First();
+
+                    first["MetaInfo"] = "{DFC8691F-2432-4741-B780-3CAE3235A612}:SW|MyStringWithXmlValues";
+                    first["Title"] = "okido";                    
+
+                    // Both work
+                    //await first.UpdateOverwriteVersionAsync();
+                    await first.SystemUpdateAsync();
+                    // Does not work
+                    // await first.UpdateAsync();
+                }
+
+                using (var context2 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+                {
+                    var myList2 = context2.Web.Lists.FirstOrDefault(p => p.Title == listTitle);
+                    await myList2.LoadAsync(p => p.Items.QueryProperties(p=>p.Title, p=>p.FieldValuesAsText));
+
+                    var first2 = myList2.Items.AsRequested().First();
+
+                    // verify the list item was updated and that we're still at version 1.0
+                    Assert.IsTrue(first2.Title == "okido");
+                    Assert.IsTrue(first2.FieldValuesAsText.Values["MetaInfo"].ToString().Contains("{DFC8691F-2432-4741-B780-3CAE3235A612}:SW|MyStringWithXmlValues"));
+                }
+
+            }
+            finally
+            {
+                using (var contextFinal = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 4))
+                {
+                    var myList = contextFinal.Web.Lists.FirstOrDefault(p => p.Title == listTitle);
+
+                    // Cleanup the created list
+                    await myList.DeleteAsync();
+                }
             }
         }
 
