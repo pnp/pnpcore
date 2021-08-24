@@ -1336,17 +1336,16 @@ namespace PnP.Core.Test.SharePoint
                     }
                     await context.ExecuteAsync();
 
-                    // get first item and do a system update
-                    var first = myList.Items.AsRequested().First();
+                    foreach(var item in myList.Items.AsRequested())
+                    {
+                        item["MetaInfo"] = "{DFC8691F-2432-4741-B780-3CAE3235A612}:SW|MyStringWithXmlValues";
+                        item["Title"] = "okido";
+                        // Both work
+                        await item.SystemUpdateBatchAsync();
+                        //await item.UpdateOverwriteVersionBatchAsync();
+                    }
+                    await context.ExecuteAsync();
 
-                    first["MetaInfo"] = "{DFC8691F-2432-4741-B780-3CAE3235A612}:SW|MyStringWithXmlValues";
-                    first["Title"] = "okido";                    
-
-                    // Both work
-                    //await first.UpdateOverwriteVersionAsync();
-                    await first.SystemUpdateAsync();
-                    // Does not work
-                    // await first.UpdateAsync();
                 }
 
                 using (var context2 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
@@ -1354,11 +1353,11 @@ namespace PnP.Core.Test.SharePoint
                     var myList2 = context2.Web.Lists.FirstOrDefault(p => p.Title == listTitle);
                     await myList2.LoadAsync(p => p.Items.QueryProperties(p=>p.Title, p=>p.FieldValuesAsText));
 
-                    var first2 = myList2.Items.AsRequested().First();
-
-                    // verify the list item was updated and that we're still at version 1.0
-                    Assert.IsTrue(first2.Title == "okido");
-                    Assert.IsTrue(first2.FieldValuesAsText.Values["MetaInfo"].ToString().Contains("{DFC8691F-2432-4741-B780-3CAE3235A612}:SW|MyStringWithXmlValues"));
+                    foreach (var item2 in myList2.Items.AsRequested())
+                    {
+                        Assert.IsTrue(item2.Title == "okido");
+                        Assert.IsTrue(item2.FieldValuesAsText.Values["MetaInfo"].ToString().Contains("{DFC8691F-2432-4741-B780-3CAE3235A612}:SW|MyStringWithXmlValues"));
+                    }
                 }
 
             }
