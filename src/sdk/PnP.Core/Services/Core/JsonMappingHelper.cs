@@ -370,7 +370,7 @@ namespace PnP.Core.Services
             // Ensure all changes are reset (as setting Title on the ListItem will trigger a change)
             if (useOverflowField)
             {
-                dictionaryPropertyToAddValueTo.RemoveTitleFieldChange();
+                dictionaryPropertyToAddValueTo.Commit();
             }
 
             // Try populate the PnP Object metadata from the mapped info
