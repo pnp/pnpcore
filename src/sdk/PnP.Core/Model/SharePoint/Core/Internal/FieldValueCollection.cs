@@ -69,7 +69,10 @@ namespace PnP.Core.Model.SharePoint
             hasChangedDueToDeleteOrAdd = false;
             foreach(var fieldValue in Values)
             {
-                (fieldValue as FieldValue).Commit();
+                if (fieldValue != null && fieldValue is FieldValue)
+                {
+                    (fieldValue as FieldValue).Commit();
+                }
             }
         }
 
