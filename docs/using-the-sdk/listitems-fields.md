@@ -3,7 +3,8 @@
 When getting and setting list item values you'll need to work with the various field types SharePoint and PnP Core SDK support. Depending on the field type you'll need to work with different objects as you can see in below chapters.
 
 > [!Note]
-> The samples assume you've loaded a list into the variable `mylist`.
+> - The samples assume you've loaded a list into the variable `mylist`.
+> - When referencing a field keep in mind that if the field's `StaticName` or `InternalName` properties contain a unicode encoded space (`_x0020_`) or underscore (`_x005f_`) these are converted back to a space and underscore character. Getting the value of a field with internal name `Version_x0020_Tag` will be done using `myItem["Version Tag"]`. This is done to provide consistency across the various ways to read list item data supported by PnP Core SDK.
 
 ## Text and Multiline text fields
 

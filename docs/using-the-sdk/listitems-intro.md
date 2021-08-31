@@ -36,8 +36,15 @@ var addedItem = myList.Items.AsRequested().FirstOrDefault(p => p.Title == "Item1
 foreach (var listItem in myList.Items.AsRequested())
 {
     // Do something with the list item
+    if (listItem["MyStatus"].ToString() == "Pending")
+    {
+      // take action
+    }
 }
 ```
+
+> [!Note]
+> - When referencing a field keep in mind that if the field's `StaticName` or `InternalName` properties contain a unicode encoded space (`_x0020_`) or underscore (`_x005f_`) these are converted back to a space and underscore character. Getting the value of a field with internal name `Version_x0020_Tag` will be done using `myItem["Version Tag"]`. This is done to provide consistency across the various ways to read list item data supported by PnP Core SDK.
 
 ### Getting list items via a CAML query
 
