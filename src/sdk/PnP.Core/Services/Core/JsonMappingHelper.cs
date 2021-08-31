@@ -344,7 +344,7 @@ namespace PnP.Core.Services
                                 (object fieldValue, string fieldName) = ProcessSpecialRestFieldType(pnpObject, property.Name, property.Value);
                                 if (fieldName != null)
                                 {
-                                    AddToDictionary(dictionaryPropertyToAddValueTo, fieldName, fieldValue);
+                                    AddToDictionary(dictionaryPropertyToAddValueTo, fieldName, fieldValue, pnpObject);
                                 }
                                 else
                                 {
@@ -357,7 +357,7 @@ namespace PnP.Core.Services
                                     else
                                     {
                                         // Default mapping to dictionary can handle simple types, more complex types require custom logic
-                                        AddToDictionary(dictionaryPropertyToAddValueTo, property.Name, GetJsonPropertyValue(property));
+                                        AddToDictionary(dictionaryPropertyToAddValueTo, property.Name, GetJsonPropertyValue(property), pnpObject);
                                     }
                                 }
                                 requested = true;
@@ -932,7 +932,7 @@ namespace PnP.Core.Services
                                         else
                                         {
                                             // Default mapping to dictionary can handle simple types, more complex types require custom logic
-                                            AddToDictionary(dictionaryPropertyToAddValueTo, overflowField.Name, GetJsonPropertyValue(overflowField));
+                                            AddToDictionary(dictionaryPropertyToAddValueTo, overflowField.Name, GetJsonPropertyValue(overflowField), pnpObject);
                                         }
                                     }
                                 }
@@ -1192,7 +1192,7 @@ namespace PnP.Core.Services
             return entityField;
         }
 
-        private static void AddToDictionary(TransientDictionary dictionary, string key, object value)
+        private static void AddToDictionary(TransientDictionary dictionary, string key, object value, TransientObject pnpObject)
         {
             // Handle the OData__ case: SPO REST will replace the _ in field names that start with an _ by OData__
             // This will pose compatability issues as other data retrieval methods don't do this, hence
@@ -1203,14 +1203,18 @@ namespace PnP.Core.Services
                 key = key.Replace("OData__", "_");
             }
 
-            if (key.Contains("_x005f_"))
+            // Only normalize in case of propertyvalues, not in case of ListItem properties
+            if (pnpObject is PropertyValues)
             {
-                key = key.Replace("_x005f_", "_");
-            }
+                if (key.Contains("_x005f_"))
+                {
+                    key = key.Replace("_x005f_", "_");
+                }
 
-            if (key.Contains("_x0020_"))
-            {
-                key = key.Replace("_x0020_", " ");
+                if (key.Contains("_x0020_"))
+                {
+                    key = key.Replace("_x0020_", " ");
+                }
             }
 
             if (!dictionary.ContainsKey(key))

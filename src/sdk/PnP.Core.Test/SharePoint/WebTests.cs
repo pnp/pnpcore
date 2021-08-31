@@ -369,6 +369,44 @@ namespace PnP.Core.Test.SharePoint
         }
 
         [TestMethod]
+        public async Task SetWebPropertiesUnderScoreTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            TestCommon.ClassicSTS0TestSetup();
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.ClassicSTS0TestSite))
+            {
+                // Test safety - sites typically are noscript sites
+                bool isNoScript = await context.Web.IsNoScriptSiteAsync();
+
+                if (!isNoScript)
+                {
+                    var web = await context.Web.GetAsync(p => p.AllProperties);
+
+                    var propertyKey = "With SpaceAnd_Underscore";
+                    var myProperty = web.AllProperties.GetInteger(propertyKey, 0);
+                    if (myProperty == 0)
+                    {
+                        web.AllProperties[propertyKey] = 55;
+                        await web.AllProperties.UpdateAsync();
+                    }
+
+                    web = await context.Web.GetAsync(p => p.AllProperties);
+
+                    myProperty = web.AllProperties.GetInteger(propertyKey, 0);
+                    Assert.IsTrue(myProperty == 55);
+
+                    web.AllProperties[propertyKey] = null;
+                    await web.AllProperties.UpdateAsync();
+
+                    web = await context.Web.GetAsync(p => p.AllProperties);
+                    myProperty = web.AllProperties.GetInteger(propertyKey, 0);
+                    Assert.IsTrue(myProperty == 0);
+                }
+            }
+        }
+
+        [TestMethod]
         public async Task SetWebPropertiesBooleanTest()
         {
             //TestCommon.Instance.Mocking = false;

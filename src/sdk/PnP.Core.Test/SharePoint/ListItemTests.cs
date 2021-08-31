@@ -3376,6 +3376,131 @@ namespace PnP.Core.Test.SharePoint
                 await list.DeleteAsync();
             }
         }
+
+        [TestMethod]
+        public async Task ListItemSpecialFieldNamesTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                // Create new library with extra fields
+                var listTitle = TestCommon.GetPnPSdkTestAssetName("ListItemSpecialFieldNamesTest");
+                var list = await context.Web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
+
+                try
+                {
+                    // Add the fields as one batch call
+                    string fieldGroup = "custom";
+                    IField addedTextField1 = await list.Fields.AddTextBatchAsync("With Space", new FieldTextOptions()
+                    {
+                        Group = fieldGroup,
+                        AddToDefaultView = true,
+                    });
+
+                    IField addedBoolField1 = await list.Fields.AddTextBatchAsync("With_Underscore", new FieldTextOptions()
+                    {
+                        Group = fieldGroup,
+                        AddToDefaultView = true,
+                    });
+
+                    IField addedNumberField1 = await list.Fields.AddTextBatchAsync("With SpaceAnd_Underscore", new FieldTextOptions()
+                    {
+                        Group = fieldGroup,
+                        AddToDefaultView = true,
+                    });
+                    await context.ExecuteAsync();
+
+                    // Add a list item
+                    Dictionary<string, object> values = new Dictionary<string, object>
+                    {
+                        { "Title", "Yes" },
+                        { "With_x0020_Space", "Yes" },
+                        { "With_Underscore", "Yes" },
+                        { "With_x0020_SpaceAnd_Underscore", "Yes" },
+                    };
+
+                    await list.Items.AddAsync(values);
+
+                    // Verify that all read options return the fields using their internal names
+                    using (var context2 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))
+                    {
+                        // Query the document again
+                        const string viewXml = @"<View Scope='Recursive'><RowLimit>1</RowLimit></View>";
+
+                        var list2 = await context2.Web.Lists.GetByTitleAsync(listTitle);
+                        Expression<Func<IListItem, object>>[] selectors =
+                        {
+                            li => li.All
+                        };
+
+                        // Use CAML Query
+                        await list2.LoadItemsByCamlQueryAsync(new CamlQueryOptions()
+                        {
+                            ViewXml = viewXml,
+                            DatesInUtc = true
+                        }).ConfigureAwait(false);
+
+                        IListItem listItem = list2.Items.AsRequested().FirstOrDefault();
+
+                        Assert.IsNotNull(listItem);
+
+                        Assert.AreEqual("Yes", listItem.Values["With_x0020_Space"]);
+                        Assert.AreEqual("Yes", listItem.Values["With_Underscore"]);
+                        Assert.AreEqual("Yes", listItem.Values["With_x0020_SpaceAnd_Underscore"]);
+
+                        // ListDataAsStream loading
+                        list2.Items.Clear();
+                        
+                        var output = await list2.LoadListDataAsStreamAsync(new RenderListDataOptions()
+                        {
+                            ViewXml = viewXml,
+                            RenderOptions = RenderListDataOptionsFlags.ListData
+                        }).ConfigureAwait(false);
+
+                        listItem = list2.Items.AsRequested().FirstOrDefault();
+                        
+                        Assert.AreEqual("Yes", listItem.Values["With_x0020_Space"]);
+                        Assert.AreEqual("Yes", listItem.Values["With_Underscore"]);
+                        Assert.AreEqual("Yes", listItem.Values["With_x0020_SpaceAnd_Underscore"]);
+
+                        // Use REST based item loading 
+                        list2.Items.Clear();
+
+                        listItem = await list2.Items.GetByIdAsync(1);
+
+                        Assert.AreEqual("Yes", listItem.Values["With_x0020_Space"]);
+                        Assert.AreEqual("Yes", listItem.Values["With_Underscore"]);
+                        Assert.AreEqual("Yes", listItem.Values["With_x0020_SpaceAnd_Underscore"]);
+
+                        // Verify updates: REST
+                        listItem.Values["With_x0020_SpaceAnd_Underscore"] = "No";
+                        await listItem.UpdateAsync();
+
+                        // Read again to verify
+                        list2.Items.Clear();
+                        listItem = await list2.Items.GetByIdAsync(1);
+                        Assert.AreEqual("No", listItem.Values["With_x0020_SpaceAnd_Underscore"]);
+
+                        // Verify updates: CSOM
+                        listItem.Values["With_x0020_SpaceAnd_Underscore"] = "Yes";
+                        await listItem.SystemUpdateAsync();
+
+                        // Read again to verify
+                        list2.Items.Clear();
+                        listItem = await list2.Items.GetByIdAsync(1);
+                        Assert.AreEqual("Yes", listItem.Values["With_x0020_SpaceAnd_Underscore"]);
+                    }
+
+                }
+                finally
+                {
+                    // Delete the library again
+                    await list.DeleteAsync();
+                }
+            }
+        }
+
         #endregion
 
         #region Load File
