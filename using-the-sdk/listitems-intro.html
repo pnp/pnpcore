@@ -107,7 +107,7 @@ var myList = context.Web.Lists.GetByTitle(&quot;My List&quot;, p =&gt; p.Title, 
 var addedItem = myList.Items.AsRequested().FirstOrDefault(p =&gt; p.Title == &quot;Item1&quot;);
 
 // Iterate over the retrieved list items
-foreach (var listItem in myList.Items)
+foreach (var listItem in myList.Items.AsRequested())
 {
     // Do something with the list item
 }
