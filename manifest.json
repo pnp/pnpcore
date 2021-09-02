@@ -5115,6 +5115,18 @@
     },
     {
       "type": "Conceptual",
+      "source_relative_path": "using-the-sdk/basics-errorhandling.md",
+      "output": {
+        ".html": {
+          "relative_path": "using-the-sdk/basics-errorhandling.html",
+          "hash": "5JryUMDX/h0HazliZmZCyQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
       "source_relative_path": "using-the-sdk/basics-getdata-paging.md",
       "output": {
         ".html": {
@@ -5575,7 +5587,7 @@
       "output": {
         ".html": {
           "relative_path": "using-the-sdk/toc.html",
-          "hash": "TYGoBSk2QLCgwn7JNwm5nw=="
+          "hash": "wvOYdPSChO5XXdK++bkAQA=="
         }
       },
       "is_incremental": false,
@@ -5620,7 +5632,7 @@
         "ConceptualDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build",
-          "total_file_count": 68,
+          "total_file_count": 69,
           "skipped_file_count": 0
         },
         "ManagedReferenceDocumentProcessor": {
