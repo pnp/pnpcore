@@ -106,7 +106,7 @@
 </ul>
 <p>All PnP Core exceptions inherit from <code>PnPException</code>, for service calls there's an extra base exception named <code>ServiceException</code> which enables you to filter out all service call related exceptions.</p>
 <h2 id="catching-a-pnp-core-sdk-exception-and-getting-the-exception-details">Catching a PnP Core SDK exception and getting the exception details</h2>
-<p>All PnP Core SDK specific exceptions inherit from <code>PnPException</code> making it easy for you to filter them out. Also each <code>PnPException</code> does have an <code>Error</code> property holding detailed exception information. As both <code>PnPException</code> is an abstract base class you'd typically want to work with the actual exceptions like <code>ClientException</code>, <code>AuthenticationException</code>, <code>SharePointRestServiceException</code>, <code>MicrosoftGraphServiceException</code> and <code>CsomServiceException</code> as shown in below code snippets. The first snippet shows how to log the detailed exception information:</p>
+<p>All PnP Core SDK specific exceptions inherit from <code>PnPException</code> making it easy for you to filter them out. Also each <code>PnPException</code> does have an <code>Error</code> property holding detailed exception information. As <code>PnPException</code> is an abstract base class you'd typically want to work with the actual exceptions like <code>ClientException</code>, <code>AuthenticationException</code>, <code>SharePointRestServiceException</code>, <code>MicrosoftGraphServiceException</code> and <code>CsomServiceException</code> as shown in below code snippets. The first snippet shows how to log the detailed exception information:</p>
 <pre><code class="lang-csharp">try
 {
     // Make service call    
