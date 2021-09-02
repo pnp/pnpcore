@@ -28,7 +28,7 @@ All PnP Core exceptions inherit from `PnPException`, for service calls there's a
 
 ## Catching a PnP Core SDK exception and getting the exception details
 
-All PnP Core SDK specific exceptions inherit from `PnPException` making it easy for you to filter them out. Also each `PnPException` does have an `Error` property holding detailed exception information. As both `PnPException` is an abstract base class you'd typically want to work with the actual exceptions like `ClientException`, `AuthenticationException`, `SharePointRestServiceException`, `MicrosoftGraphServiceException` and `CsomServiceException` as shown in below code snippets. The first snippet shows how to log the detailed exception information:
+All PnP Core SDK specific exceptions inherit from `PnPException` making it easy for you to filter them out. Also each `PnPException` does have an `Error` property holding detailed exception information. As `PnPException` is an abstract base class you'd typically want to work with the actual exceptions like `ClientException`, `AuthenticationException`, `SharePointRestServiceException`, `MicrosoftGraphServiceException` and `CsomServiceException` as shown in below code snippets. The first snippet shows how to log the detailed exception information:
 
 ```csharp
 try
