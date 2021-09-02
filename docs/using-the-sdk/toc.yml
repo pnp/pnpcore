@@ -14,6 +14,8 @@
     href: basics-batching.md
   - name: Async or not
     href: basics-async.md
+  - name: Error handling
+    href: basics-errorhandling.md
   - name: Custom API requests
     href: basics-customapirequests.md
   - name: PnP Framework interop
