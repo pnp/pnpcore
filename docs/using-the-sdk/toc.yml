@@ -51,7 +51,7 @@
   items:
   - name: Overview
     href: lists-intro.md
-  - name: working with views
+  - name: Working with views
     href: lists-views.md
 - name: Fields
   items:
