@@ -30401,6 +30401,12 @@ references:
   commentId: F:PnP.Core.Model.Teams.ChatMessageType.Message
   fullName: PnP.Core.Model.Teams.ChatMessageType.Message
   nameWithType: ChatMessageType.Message
+- uid: PnP.Core.Model.Teams.ChatMessageType.SystemEventMessage
+  name: SystemEventMessage
+  href: api/PnP.Core.Model.Teams.ChatMessageType.html#PnP_Core_Model_Teams_ChatMessageType_SystemEventMessage
+  commentId: F:PnP.Core.Model.Teams.ChatMessageType.SystemEventMessage
+  fullName: PnP.Core.Model.Teams.ChatMessageType.SystemEventMessage
+  nameWithType: ChatMessageType.SystemEventMessage
 - uid: PnP.Core.Model.Teams.ITeam
   name: ITeam
   href: api/PnP.Core.Model.Teams.ITeam.html

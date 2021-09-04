@@ -1447,7 +1447,7 @@
   "api/PnP.Core.Model.Teams.ChatMessageType.html": {
     "href": "api/PnP.Core.Model.Teams.ChatMessageType.html",
     "title": "Enum ChatMessageType | PnP Core SDK",
-    "keywords": "Enum ChatMessageType Types of chat messages Namespace : PnP.Core.Model.Teams Assembly : PnP.Core.dll Syntax public enum ChatMessageType : int Message Message type"
+    "keywords": "Enum ChatMessageType Types of chat messages Namespace : PnP.Core.Model.Teams Assembly : PnP.Core.dll Syntax public enum ChatMessageType : int Message Message type SystemEventMessage SystemEventMessage type"
   },
   "api/PnP.Core.Model.Teams.html": {
     "href": "api/PnP.Core.Model.Teams.html",
