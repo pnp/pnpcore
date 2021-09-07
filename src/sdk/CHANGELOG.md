@@ -18,6 +18,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Ensure list item fields are not marked as changed after the initial load of the list item #508 [jansenbe - Bert Jansen]
 - Don't replace _ with _x005f_ and space with _x0020_ when working with list item fields, the StaticName is to be used for instead [jansenbe - Bert Jansen]
 - Fix for "Requested value 'systemEventMessage' was not found." for Chat Messages #536 [jansenbe - Bert Jansen]
+- Default retry mechanism now uses retry-after header for REST, CSOM and Graph requests, aligned with the settings in PnP Framework [jansenbe - Bert Jansen]
 
 ## [1.3.0]
 
