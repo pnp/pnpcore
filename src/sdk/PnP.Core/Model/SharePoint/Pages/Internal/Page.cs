@@ -1123,7 +1123,7 @@ namespace PnP.Core.Model.SharePoint
                         control.FromHtml(clientSideControl);
 
                         // Handle control positioning in sections and columns
-                        ApplySectionAndColumn(control, control.SpControlData.Position, control.SpControlData.Emphasis);
+                        ApplySectionAndColumn(control, control.SpControlData.Position, control.SpControlData.Emphasis, control.SpControlData.ZoneGroupMetadata);
 
                         AddControl(control);
                     }
@@ -1136,7 +1136,7 @@ namespace PnP.Core.Model.SharePoint
                         control.FromHtml(clientSideControl);
 
                         // Handle control positioning in sections and columns
-                        ApplySectionAndColumn(control, control.SpControlData.Position, control.SpControlData.Emphasis);
+                        ApplySectionAndColumn(control, control.SpControlData.Position, control.SpControlData.Emphasis, control.SpControlData.ZoneGroupMetadata);
 
                         AddControl(control);
                     }
@@ -1381,7 +1381,7 @@ namespace PnP.Core.Model.SharePoint
             }
         }
 
-        private void ApplySectionAndColumn(CanvasControl control, CanvasControlPosition position, SectionEmphasis emphasis)
+        private void ApplySectionAndColumn(CanvasControl control, CanvasControlPosition position, SectionEmphasis emphasis, SectionZoneGroupMetadata zoneGroupMetadata)
         {
             if (position == null)
             {
@@ -1391,6 +1391,8 @@ namespace PnP.Core.Model.SharePoint
                     AddSection(new CanvasSection(this) { ZoneEmphasis = 0 }, 0);
                     currentSection = sections.FirstOrDefault();
                 }
+                
+                ApplyCollapsibleSectionSettings(zoneGroupMetadata, currentSection);
 
                 var currentColumn = currentSection.Columns.FirstOrDefault();
                 if (currentColumn == null)
@@ -1410,6 +1412,8 @@ namespace PnP.Core.Model.SharePoint
                     AddSection(new CanvasSection(this) { ZoneEmphasis = emphasis != null ? emphasis.ZoneEmphasis : 0 }, position.ZoneIndex);
                     currentSection = sections.Where(p => p.Order == position.ZoneIndex).First();
                 }
+
+                ApplyCollapsibleSectionSettings(zoneGroupMetadata, currentSection);
 
                 var currentColumn = currentSection.Columns.Where(p => p.Order == position.SectionIndex).FirstOrDefault();
 
@@ -1441,6 +1445,26 @@ namespace PnP.Core.Model.SharePoint
 
                 control.section = currentSection;
                 control.column = currentColumn;
+            }
+        }
+
+        private static void ApplyCollapsibleSectionSettings(SectionZoneGroupMetadata zoneGroupMetadata, CanvasSection currentSection)
+        {
+            if (zoneGroupMetadata != null)
+            {
+                currentSection.Collapsible = true;
+                currentSection.SectionType = zoneGroupMetadata.Type;
+                currentSection.DisplayName = zoneGroupMetadata.DisplayName;
+                currentSection.IsExpanded = zoneGroupMetadata.IsExpanded;
+                currentSection.ShowDividerLine = zoneGroupMetadata.ShowDividerLine;
+                if (zoneGroupMetadata.IconAlignment.Equals("left", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    currentSection.IconAlignment = IconAlignment.Left;
+                }
+                else if (zoneGroupMetadata.IconAlignment.Equals("right", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    currentSection.IconAlignment = IconAlignment.Right;
+                }
             }
         }
         #endregion

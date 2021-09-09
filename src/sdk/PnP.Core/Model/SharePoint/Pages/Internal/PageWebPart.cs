@@ -255,6 +255,28 @@ namespace PnP.Core.Model.SharePoint
                     ZoneEmphasis = Column.VerticalSectionEmphasis ?? Section.ZoneEmphasis,
                 };
 
+                // Persist the collapsible section settings
+                if (Section.Collapsible)
+                {
+                    controlData.ZoneGroupMetadata = new SectionZoneGroupMetadata()
+                    {
+                        // Set section type to 1 if it was not set (when new sections are added via code)
+                        Type = (Section as CanvasSection).SectionType,
+                        DisplayName = Section.DisplayName,
+                        IsExpanded = Section.IsExpanded,
+                        ShowDividerLine = Section.ShowDividerLine,
+                    };
+
+                    if (Section.IconAlignment.HasValue)
+                    {
+                        controlData.ZoneGroupMetadata.IconAlignment = Section.IconAlignment.Value.ToString().ToLower();
+                    }
+                    else
+                    {
+                        controlData.ZoneGroupMetadata.IconAlignment = "true";
+                    }
+                }
+
                 // Set the control's data version to the latest version...default was 1.0, but some controls use a higher version
                 var webPartType = Page.IdToDefaultWebPart(controlData.WebPartId);
 

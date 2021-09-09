@@ -18,5 +18,8 @@ namespace PnP.Core.Model.SharePoint
 
         [JsonPropertyName("pageSettingsSlice")]
         public PageSettingsSlice PageSettingsSlice { get; set; }
+
+        [JsonPropertyName("zoneGroupMetadata")]
+        public SectionZoneGroupMetadata ZoneGroupMetadata { get; set; }
     }
 }

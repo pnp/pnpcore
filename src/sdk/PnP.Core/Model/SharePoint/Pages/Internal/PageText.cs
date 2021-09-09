@@ -95,6 +95,27 @@ namespace PnP.Core.Model.SharePoint
                 EditorType = "CKEditor"
             };
 
+            // Persist the collapsible section settings
+            if (Section.Collapsible)
+            {
+                controlData.ZoneGroupMetadata = new SectionZoneGroupMetadata()
+                {
+                    // Set section type to 1 if it was not set (when new sections are added via code)
+                    Type = (Section as CanvasSection).SectionType == 0 ? 1 : (Section as CanvasSection).SectionType,
+                    DisplayName = Section.DisplayName,
+                    IsExpanded = Section.IsExpanded,
+                    ShowDividerLine = Section.ShowDividerLine,                    
+                };
+
+                if (Section.IconAlignment.HasValue)
+                {
+                    controlData.ZoneGroupMetadata.IconAlignment = Section.IconAlignment.Value.ToString().ToLower();
+                }
+                else
+                {
+                    controlData.ZoneGroupMetadata.IconAlignment = "true";
+                }
+            }
 
             if (section.Type == CanvasSectionTemplate.OneColumnVerticalSection)
             {
@@ -169,7 +190,7 @@ namespace PnP.Core.Model.SharePoint
                 Text = div.InnerHtml;
             }
 
-            SpControlData = JsonSerializer.Deserialize<TextControlData>(element.GetAttribute(CanvasControl.ControlDataAttribute), new JsonSerializerOptions() { IgnoreNullValues = true });
+            SpControlData = JsonSerializer.Deserialize<TextControlData>(element.GetAttribute(ControlDataAttribute), new JsonSerializerOptions() { IgnoreNullValues = true });
             controlType = SpControlData.ControlType;
         }
         #endregion

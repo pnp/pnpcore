@@ -787,6 +787,92 @@ namespace PnP.Core.Test.SharePoint
         }
 
         [TestMethod]
+        public async Task CollapsiblePageSections()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var page = await context.Web.NewPageAsync();
+                string pageName = TestCommon.GetPnPSdkTestAssetName("CollapsiblePageSections.aspx");
+
+                // Non collapsible section
+                page.AddSection(CanvasSectionTemplate.OneColumn, 1, VariantThemeType.Neutral);
+
+                // Collapsible section - collapsed
+                page.AddSection(CanvasSectionTemplate.TwoColumn, 2, VariantThemeType.Soft);
+                page.Sections[1].Collapsible = true;
+                page.Sections[1].DisplayName = "Section 1";
+                page.Sections[1].IsExpanded = false;
+                page.Sections[1].ShowDividerLine = false;
+                page.Sections[1].IconAlignment = IconAlignment.Right;
+
+                // Collapsible section - expanded
+                page.AddSection(CanvasSectionTemplate.ThreeColumn, 3, VariantThemeType.None);
+                page.Sections[2].Collapsible = true;
+                page.Sections[2].IsExpanded = true;
+                page.Sections[2].ShowDividerLine = false;
+
+                var availableComponents = await page.AvailablePageComponentsAsync();
+                var imageWebPartComponent = availableComponents.FirstOrDefault(p => p.Id == page.DefaultWebPartToWebPartId(DefaultWebPart.Image));
+
+                // Add a text control in each section
+                page.AddControl(page.NewTextPart("PnP"), page.Sections[0].Columns[0]);
+                page.AddControl(page.NewTextPart("PnP"), page.Sections[1].Columns[0]);
+                page.AddControl(page.NewTextPart("PnP"), page.Sections[1].Columns[1]);
+                page.AddControl(page.NewTextPart("PnP"), page.Sections[2].Columns[0]);
+                page.AddControl(page.NewTextPart("PnP"), page.Sections[2].Columns[1]);
+                page.AddControl(page.NewTextPart("PnP"), page.Sections[2].Columns[2]);
+
+                // Add a webpart in each section
+                page.AddControl(page.NewWebPart(imageWebPartComponent), page.Sections[0].Columns[0]);
+                page.AddControl(page.NewWebPart(imageWebPartComponent), page.Sections[1].Columns[0]);
+                page.AddControl(page.NewWebPart(imageWebPartComponent), page.Sections[1].Columns[1]);
+                page.AddControl(page.NewWebPart(imageWebPartComponent), page.Sections[2].Columns[0]);
+                page.AddControl(page.NewWebPart(imageWebPartComponent), page.Sections[2].Columns[1]);
+                page.AddControl(page.NewWebPart(imageWebPartComponent), page.Sections[2].Columns[2]);
+
+                await page.SaveAsync(pageName);
+
+                // load page again
+                var pages = await context.Web.GetPagesAsync(pageName);
+
+                Assert.IsTrue(pages.Count == 1);
+
+                page = pages.AsEnumerable().First();
+
+                Assert.IsTrue(page.Sections.Count == 3);
+                Assert.IsTrue(page.Sections[0].Type == CanvasSectionTemplate.OneColumn);
+                Assert.IsTrue(page.Sections[0].ZoneEmphasis == (int)VariantThemeType.Neutral);
+                Assert.IsTrue(page.Sections[0].Collapsible == false);
+                Assert.IsTrue(page.Sections[0].Columns[0].Controls.Count == 2);
+
+                Assert.IsTrue(page.Sections[1].Type == CanvasSectionTemplate.TwoColumn);
+                Assert.IsTrue(page.Sections[1].ZoneEmphasis == (int)VariantThemeType.Soft);
+                Assert.IsTrue(page.Sections[1].Collapsible == true);
+                Assert.IsTrue(page.Sections[1].DisplayName == "Section 1");
+                Assert.IsTrue(page.Sections[1].IsExpanded == false);
+                Assert.IsTrue(page.Sections[1].ShowDividerLine == false);
+                Assert.IsTrue(page.Sections[1].IconAlignment == IconAlignment.Right);
+                Assert.IsTrue(page.Sections[1].Columns[0].Controls.Count == 2);
+                Assert.IsTrue(page.Sections[1].Columns[1].Controls.Count == 2);
+
+                Assert.IsTrue(page.Sections[2].Type == CanvasSectionTemplate.ThreeColumn);
+                Assert.IsTrue(page.Sections[2].ZoneEmphasis == (int)VariantThemeType.None);
+                Assert.IsTrue(page.Sections[2].Collapsible == true);
+                Assert.IsTrue(page.Sections[2].DisplayName == null);
+                Assert.IsTrue(page.Sections[2].IsExpanded == true);
+                Assert.IsTrue(page.Sections[2].ShowDividerLine == false);
+                Assert.IsTrue(page.Sections[2].IconAlignment == null);
+                Assert.IsTrue(page.Sections[2].Columns[0].Controls.Count == 2);
+                Assert.IsTrue(page.Sections[2].Columns[1].Controls.Count == 2);
+                Assert.IsTrue(page.Sections[2].Columns[2].Controls.Count == 2);
+
+                // delete the page
+                await page.DeleteAsync();
+            }
+        }
+
+        [TestMethod]
         public async Task PageSectionsAndWebPartsCreateTest()
         {
             //TestCommon.Instance.Mocking = false;
