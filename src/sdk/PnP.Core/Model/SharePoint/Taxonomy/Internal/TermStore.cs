@@ -2,7 +2,9 @@
 
 namespace PnP.Core.Model.SharePoint
 {
-    [GraphType(Uri = "termstore", Beta = true)]
+#pragma warning disable CA2243 // Attribute string literals should parse correctly
+    [GraphType(Uri = "sites/{hostname},{Site.Id},{Web.Id}/termstore")]
+#pragma warning restore CA2243 // Attribute string literals should parse correctly
     internal partial class TermStore : BaseDataModel<ITermStore>, ITermStore
     {
         #region Properties
@@ -14,7 +16,7 @@ namespace PnP.Core.Model.SharePoint
         [GraphProperty("languageTags")]
         public List<string> Languages { get => GetValue<List<string>>(); set => SetValue(value); }
 
-        [GraphProperty("groups", Get = "termstore/groups")]
+        [GraphProperty("groups", Get = "sites/{hostname},{Site.Id},{Web.Id}/termstore/groups")]
         public ITermGroupCollection Groups { get => GetModelCollectionValue<ITermGroupCollection>(); }
 
         [KeyProperty(nameof(Id))]
