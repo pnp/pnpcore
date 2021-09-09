@@ -223,29 +223,30 @@ namespace PnP.Core.Test.Base
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
+
+                // Let's upfront load the team primary channel as we need it's id for the graph beta call
+                // This is a temp workaround as there's currently no other Graph Beta entity anymore
+                await context.Team.LoadAsync(p => p.Channels);
+
                 // Graph only request (there's no option to fallback to a SharePoint REST call)
-                await context.Team.LoadBatchAsync();
+                // Results in 2 calls as we're also loading the primary channel
+                await context.Team.LoadBatchAsync(p => p.Channels);
                 // Graph beta request
-                await context.TermStore.LoadBatchAsync();
+                //await context.TermStore.LoadBatchAsync();
+                await context.Team.Channels.AsRequested().Last().LoadBatchAsync(p => p.Messages);
 
                 // Grab the id of the current batch so we can later on find it back
                 Guid currentBatchId = context.CurrentBatch.Id;
                 var batchToExecute = context.BatchClient.GetBatchById(currentBatchId);
                 // We added 2 requests to the the current batch
-                Assert.IsTrue(batchToExecute.Requests.Count == 2);
+                Assert.IsTrue(batchToExecute.Requests.Count == 4);
 
                 // The first call in the batch are graph calls
                 Assert.IsTrue(batchToExecute.Requests[0].ApiCall.Type == ApiType.Graph);
                 // The second one is rest
-                Assert.IsTrue(batchToExecute.Requests[1].ApiCall.Type == ApiType.GraphBeta);
+                Assert.IsTrue(batchToExecute.Requests[2].ApiCall.Type == ApiType.GraphBeta);
                 // Execute the batch, this will result in 2 individual batches being executed, one graph and one graph beta
                 await context.ExecuteAsync();
-
-                // verify data was loaded 
-                Assert.IsTrue(context.Team.Requested);
-                Assert.IsTrue(context.Team.IsPropertyAvailable(p => p.Id));
-                Assert.IsTrue(context.TermStore.Requested);
-                Assert.IsTrue(context.TermStore.IsPropertyAvailable(p => p.Id));
             }
         }
 
@@ -257,29 +258,29 @@ namespace PnP.Core.Test.Base
             {
                 context.GraphAlwaysUseBeta = true;
 
+                // Let's upfront load the team primary channel as we need it's id for the graph beta call
+                // This is a temp workaround as there's currently no other Graph Beta entity anymore
+                await context.Team.LoadAsync(p => p.Channels);
+
                 // Graph only request (there's no option to fallback to a SharePoint REST call)
-                await context.Team.LoadBatchAsync();
+                // Results in 2 calls as we're also loading the primary channel
+                await context.Team.LoadBatchAsync(p => p.Channels);
                 // Graph beta request
-                await context.TermStore.LoadBatchAsync();
+                //await context.TermStore.LoadBatchAsync();
+                await context.Team.Channels.AsRequested().Last().LoadBatchAsync(p => p.Messages);
 
                 // Grab the id of the current batch so we can later on find it back
                 Guid currentBatchId = context.CurrentBatch.Id;
                 var batchToExecute = context.BatchClient.GetBatchById(currentBatchId);
                 // We added 2 requests to the the current batch
-                Assert.IsTrue(batchToExecute.Requests.Count == 2);
+                Assert.IsTrue(batchToExecute.Requests.Count == 4);
 
                 // The first call in the batch are graph calls
                 Assert.IsTrue(batchToExecute.Requests[0].ApiCall.Type == ApiType.Graph);
                 // The second one is rest
-                Assert.IsTrue(batchToExecute.Requests[1].ApiCall.Type == ApiType.GraphBeta);
-                // Execute the batch, this will result in 1 graph beta batch being executed
+                Assert.IsTrue(batchToExecute.Requests[2].ApiCall.Type == ApiType.GraphBeta);
+                // Execute the batch, this will result in 2 individual batches being executed, one graph and one graph beta
                 await context.ExecuteAsync();
-
-                // verify data was loaded 
-                Assert.IsTrue(context.Team.Requested);
-                Assert.IsTrue(context.Team.IsPropertyAvailable(p => p.Id));
-                Assert.IsTrue(context.TermStore.Requested);
-                Assert.IsTrue(context.TermStore.IsPropertyAvailable(p => p.Id));
             }
         }
 
