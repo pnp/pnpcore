@@ -1650,7 +1650,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.ICanvasSection.html",
-          "hash": "TDrGzejzxExX7t3av8SGeQ=="
+          "hash": "JegHOeizdR41NOLweKLMxw=="
         }
       },
       "is_incremental": false,
@@ -2858,6 +2858,18 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.SharePoint.IconAlignment.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.SharePoint.IconAlignment.html",
+          "hash": "TjE/6IS4/SkqCuHWe6oaUw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/PnP.Core.Model.SharePoint.ListExperience.yml",
       "output": {
         ".html": {
@@ -3366,7 +3378,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.html",
-          "hash": "0uHv7dkCNZjmYE3l021WQg=="
+          "hash": "cLkiaf6irW7CuTI2AhI0NQ=="
         }
       },
       "is_incremental": false,
@@ -4494,7 +4506,7 @@
       "output": {
         ".html": {
           "relative_path": "api/toc.html",
-          "hash": "9lE4lUGxKZropTgt0t73Ww=="
+          "hash": "bz/xIHykEdwSSrjrhgj3BA=="
         }
       },
       "is_incremental": false,
@@ -5395,7 +5407,7 @@
       "output": {
         ".html": {
           "relative_path": "using-the-sdk/pages-intro.html",
-          "hash": "LQqaVUM9uPTnXY56jS/2Pw=="
+          "hash": "O97XDyu2fREfimMY4lKxcw=="
         }
       },
       "is_incremental": false,
@@ -5638,7 +5650,7 @@
         "ManagedReferenceDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build",
-          "total_file_count": 372,
+          "total_file_count": 373,
           "skipped_file_count": 0
         },
         "ResourceDocumentProcessor": {

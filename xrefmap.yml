@@ -8418,6 +8418,19 @@ references:
   commentId: T:PnP.Core.Model.SharePoint.ICanvasSection
   fullName: PnP.Core.Model.SharePoint.ICanvasSection
   nameWithType: ICanvasSection
+- uid: PnP.Core.Model.SharePoint.ICanvasSection.Collapsible
+  name: Collapsible
+  href: api/PnP.Core.Model.SharePoint.ICanvasSection.html#PnP_Core_Model_SharePoint_ICanvasSection_Collapsible
+  commentId: P:PnP.Core.Model.SharePoint.ICanvasSection.Collapsible
+  fullName: PnP.Core.Model.SharePoint.ICanvasSection.Collapsible
+  nameWithType: ICanvasSection.Collapsible
+- uid: PnP.Core.Model.SharePoint.ICanvasSection.Collapsible*
+  name: Collapsible
+  href: api/PnP.Core.Model.SharePoint.ICanvasSection.html#PnP_Core_Model_SharePoint_ICanvasSection_Collapsible_
+  commentId: Overload:PnP.Core.Model.SharePoint.ICanvasSection.Collapsible
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.ICanvasSection.Collapsible
+  nameWithType: ICanvasSection.Collapsible
 - uid: PnP.Core.Model.SharePoint.ICanvasSection.Columns
   name: Columns
   href: api/PnP.Core.Model.SharePoint.ICanvasSection.html#PnP_Core_Model_SharePoint_ICanvasSection_Columns
@@ -8457,6 +8470,45 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.ICanvasSection.DefaultColumn
   nameWithType: ICanvasSection.DefaultColumn
+- uid: PnP.Core.Model.SharePoint.ICanvasSection.DisplayName
+  name: DisplayName
+  href: api/PnP.Core.Model.SharePoint.ICanvasSection.html#PnP_Core_Model_SharePoint_ICanvasSection_DisplayName
+  commentId: P:PnP.Core.Model.SharePoint.ICanvasSection.DisplayName
+  fullName: PnP.Core.Model.SharePoint.ICanvasSection.DisplayName
+  nameWithType: ICanvasSection.DisplayName
+- uid: PnP.Core.Model.SharePoint.ICanvasSection.DisplayName*
+  name: DisplayName
+  href: api/PnP.Core.Model.SharePoint.ICanvasSection.html#PnP_Core_Model_SharePoint_ICanvasSection_DisplayName_
+  commentId: Overload:PnP.Core.Model.SharePoint.ICanvasSection.DisplayName
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.ICanvasSection.DisplayName
+  nameWithType: ICanvasSection.DisplayName
+- uid: PnP.Core.Model.SharePoint.ICanvasSection.IconAlignment
+  name: IconAlignment
+  href: api/PnP.Core.Model.SharePoint.ICanvasSection.html#PnP_Core_Model_SharePoint_ICanvasSection_IconAlignment
+  commentId: P:PnP.Core.Model.SharePoint.ICanvasSection.IconAlignment
+  fullName: PnP.Core.Model.SharePoint.ICanvasSection.IconAlignment
+  nameWithType: ICanvasSection.IconAlignment
+- uid: PnP.Core.Model.SharePoint.ICanvasSection.IconAlignment*
+  name: IconAlignment
+  href: api/PnP.Core.Model.SharePoint.ICanvasSection.html#PnP_Core_Model_SharePoint_ICanvasSection_IconAlignment_
+  commentId: Overload:PnP.Core.Model.SharePoint.ICanvasSection.IconAlignment
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.ICanvasSection.IconAlignment
+  nameWithType: ICanvasSection.IconAlignment
+- uid: PnP.Core.Model.SharePoint.ICanvasSection.IsExpanded
+  name: IsExpanded
+  href: api/PnP.Core.Model.SharePoint.ICanvasSection.html#PnP_Core_Model_SharePoint_ICanvasSection_IsExpanded
+  commentId: P:PnP.Core.Model.SharePoint.ICanvasSection.IsExpanded
+  fullName: PnP.Core.Model.SharePoint.ICanvasSection.IsExpanded
+  nameWithType: ICanvasSection.IsExpanded
+- uid: PnP.Core.Model.SharePoint.ICanvasSection.IsExpanded*
+  name: IsExpanded
+  href: api/PnP.Core.Model.SharePoint.ICanvasSection.html#PnP_Core_Model_SharePoint_ICanvasSection_IsExpanded_
+  commentId: Overload:PnP.Core.Model.SharePoint.ICanvasSection.IsExpanded
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.ICanvasSection.IsExpanded
+  nameWithType: ICanvasSection.IsExpanded
 - uid: PnP.Core.Model.SharePoint.ICanvasSection.Order
   name: Order
   href: api/PnP.Core.Model.SharePoint.ICanvasSection.html#PnP_Core_Model_SharePoint_ICanvasSection_Order
@@ -8483,6 +8535,19 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.ICanvasSection.Page
   nameWithType: ICanvasSection.Page
+- uid: PnP.Core.Model.SharePoint.ICanvasSection.ShowDividerLine
+  name: ShowDividerLine
+  href: api/PnP.Core.Model.SharePoint.ICanvasSection.html#PnP_Core_Model_SharePoint_ICanvasSection_ShowDividerLine
+  commentId: P:PnP.Core.Model.SharePoint.ICanvasSection.ShowDividerLine
+  fullName: PnP.Core.Model.SharePoint.ICanvasSection.ShowDividerLine
+  nameWithType: ICanvasSection.ShowDividerLine
+- uid: PnP.Core.Model.SharePoint.ICanvasSection.ShowDividerLine*
+  name: ShowDividerLine
+  href: api/PnP.Core.Model.SharePoint.ICanvasSection.html#PnP_Core_Model_SharePoint_ICanvasSection_ShowDividerLine_
+  commentId: Overload:PnP.Core.Model.SharePoint.ICanvasSection.ShowDividerLine
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.ICanvasSection.ShowDividerLine
+  nameWithType: ICanvasSection.ShowDividerLine
 - uid: PnP.Core.Model.SharePoint.ICanvasSection.Type
   name: Type
   href: api/PnP.Core.Model.SharePoint.ICanvasSection.html#PnP_Core_Model_SharePoint_ICanvasSection_Type
@@ -9938,6 +10003,24 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IComplianceTag.TagRetentionBasedOn
   nameWithType: IComplianceTag.TagRetentionBasedOn
+- uid: PnP.Core.Model.SharePoint.IconAlignment
+  name: IconAlignment
+  href: api/PnP.Core.Model.SharePoint.IconAlignment.html
+  commentId: T:PnP.Core.Model.SharePoint.IconAlignment
+  fullName: PnP.Core.Model.SharePoint.IconAlignment
+  nameWithType: IconAlignment
+- uid: PnP.Core.Model.SharePoint.IconAlignment.Left
+  name: Left
+  href: api/PnP.Core.Model.SharePoint.IconAlignment.html#PnP_Core_Model_SharePoint_IconAlignment_Left
+  commentId: F:PnP.Core.Model.SharePoint.IconAlignment.Left
+  fullName: PnP.Core.Model.SharePoint.IconAlignment.Left
+  nameWithType: IconAlignment.Left
+- uid: PnP.Core.Model.SharePoint.IconAlignment.Right
+  name: Right
+  href: api/PnP.Core.Model.SharePoint.IconAlignment.html#PnP_Core_Model_SharePoint_IconAlignment_Right
+  commentId: F:PnP.Core.Model.SharePoint.IconAlignment.Right
+  fullName: PnP.Core.Model.SharePoint.IconAlignment.Right
+  nameWithType: IconAlignment.Right
 - uid: PnP.Core.Model.SharePoint.IContentType
   name: IContentType
   href: api/PnP.Core.Model.SharePoint.IContentType.html

@@ -196,6 +196,15 @@ await page.SaveAsync(&quot;MyPage.aspx&quot;);
 <p>You can also control the emphasis (background color) of the section and vertical column via specifying the needed emphasis in the <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IPage.html#collapsible-PnP_Core_Model_SharePoint_IPage_AddSection_PnP_Core_Model_SharePoint_CanvasSectionTemplate_System_Single_PnP_Core_Model_SharePoint_VariantThemeType_PnP_Core_Model_SharePoint_VariantThemeType_">AddSection method</a>:</p>
 <pre><code class="lang-csharp">page.AddSection(CanvasSectionTemplate.TwoColumnVerticalSection, 1, VariantThemeType.Neutral, VariantThemeType.Strong);
 </code></pre>
+<h3 id="configuring-page-sections">Configuring page sections</h3>
+<p>Adding a section to a page gets you a default, non-collapsible, section. If you want your section to be collapsible then simply set the <code>Collapsible</code> property to true and optionally configure the additional settings for collapsible sections:</p>
+<pre><code class="lang-csharp">page.AddSection(CanvasSectionTemplate.TwoColumn, 1, VariantThemeType.Soft);
+page.Sections[0].Collapsible = true;
+page.Sections[0].DisplayName = &quot;My collapsible section&quot;;
+page.Sections[0].IsExpanded = false;
+page.Sections[0].ShowDividerLine = false;
+page.Sections[0].IconAlignment = IconAlignment.Right;
+</code></pre>
 <h3 id="adding-controls-to-the-page">Adding controls to the page</h3>
 <p>A control is either a piece of text or a web part and can be added in one of the section columns. Below sample shows how to add the text part to an existing section column. It boils down to these two steps:</p>
 <ul>
