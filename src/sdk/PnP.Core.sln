@@ -16,6 +16,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PnP.Core.Auth", "PnP.Core.A
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PnP.Core.Auth.Test", "PnP.Core.Auth.Test\PnP.Core.Auth.Test.csproj", "{D11B7FF5-DE02-4DAA-A634-62B9D6C684F8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PnP.Core.Admin", "PnP.Core.Admin\PnP.Core.Admin.csproj", "{EB0CA4A2-BB67-44B0-BB1E-8D7DAFCB5BC2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PnP.Core.Admin.Test", "PnP.Core.Admin.Test\PnP.Core.Admin.Test.csproj", "{8806BABA-C6CC-495C-AA33-B9A56E213572}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -38,6 +42,14 @@ Global
 		{D11B7FF5-DE02-4DAA-A634-62B9D6C684F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D11B7FF5-DE02-4DAA-A634-62B9D6C684F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D11B7FF5-DE02-4DAA-A634-62B9D6C684F8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EB0CA4A2-BB67-44B0-BB1E-8D7DAFCB5BC2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EB0CA4A2-BB67-44B0-BB1E-8D7DAFCB5BC2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EB0CA4A2-BB67-44B0-BB1E-8D7DAFCB5BC2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EB0CA4A2-BB67-44B0-BB1E-8D7DAFCB5BC2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8806BABA-C6CC-495C-AA33-B9A56E213572}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8806BABA-C6CC-495C-AA33-B9A56E213572}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8806BABA-C6CC-495C-AA33-B9A56E213572}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8806BABA-C6CC-495C-AA33-B9A56E213572}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
