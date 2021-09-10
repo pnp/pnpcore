@@ -1,13 +1,13 @@
 ﻿using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using PnP.Core.Services;
-using PnP.Core.Test.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using PnP.Core.Test.Common.Utilities;
 
-namespace PnP.Core.Test.Services
+namespace PnP.Core.Test.Common.Services
 {
     /// <summary>
     /// Test context factory, delivering PnPContext objects that can be used in testing (with Mocking/Recording enabled)
@@ -51,7 +51,7 @@ namespace PnP.Core.Test.Services
             IOptions<PnPContextFactoryOptions> contextOptions,
             IOptions<PnPGlobalSettingsOptions> globalOptions) : base(logger, sharePointRestClient, microsoftGraphClient, contextOptions, globalOptions)
         {
-            if (TelemetryManager != null && !TestCommon.RunningInGitHubWorkflow())
+            if (TelemetryManager != null && !TestCommonBase.RunningInGitHubWorkflow())
             {
                 // Send telemetry to the test Azure AppInsights instance
                 TelemetryManager.TelemetryClient.InstrumentationKey = "6073339d-9e70-4004-9ff7-1345316ade97";

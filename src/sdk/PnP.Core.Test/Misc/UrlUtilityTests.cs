@@ -1,7 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 
-namespace PnP.Core.Utilities.Tests
+namespace PnP.Core.Test.Misc
 {
     [TestClass()]
     public class UrlUtilityTests

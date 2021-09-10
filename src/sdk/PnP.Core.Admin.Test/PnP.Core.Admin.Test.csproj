@@ -24,6 +24,7 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\PnP.Core.Admin\PnP.Core.Admin.csproj" />
+		<ProjectReference Include="..\PnP.Core.Test.Common\PnP.Core.Test.Common.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>

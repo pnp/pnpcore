@@ -1099,7 +1099,7 @@ namespace PnP.Core.Model
 
         private ApiCall PrefixApiCall(ApiCall apiCall, EntityInfo entityInfo)
         {
-            if (!string.IsNullOrEmpty(entityInfo.SharePointType))
+            if (!string.IsNullOrEmpty(entityInfo.SharePointType) && (apiCall.Type == ApiType.SPORest || apiCall.Type == ApiType.CSOM))
             {
                 // The request is populated and already has a fully qualified url
                 if (apiCall.Request != null && apiCall.Request.StartsWith("https://", StringComparison.InvariantCultureIgnoreCase))

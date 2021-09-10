@@ -2,7 +2,7 @@
 using System;
 using System.Threading.Tasks;
 
-namespace PnP.Core.Test.Services
+namespace PnP.Core.Test.Common.Services
 {
     public interface IPnPTestContextFactory : IPnPContextFactory
     {

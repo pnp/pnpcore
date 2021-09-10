@@ -2,7 +2,7 @@
 using System.Collections.Specialized;
 using System.Web;
 
-namespace PnP.Core.Test.Utilities
+namespace PnP.Core.Test.Misc
 {
     [TestClass()]
     public class NameValueCollectionTests

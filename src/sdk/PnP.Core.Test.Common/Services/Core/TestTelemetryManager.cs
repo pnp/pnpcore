@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace PnP.Core.Test.Services
+namespace PnP.Core.Test.Common.Services
 {
     internal class TestTelemetryManager: TelemetryManager
     {

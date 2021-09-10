@@ -3,7 +3,7 @@ using PnP.Core.Services;
 using PnP.Core.Services.Builder.Configuration;
 using System;
 
-namespace PnP.Core.Test.Services
+namespace PnP.Core.Test.Common.Services
 {
     /// <summary>
     /// Extension class for the IServiceCollection type to provide supporting methods for the TestPnPContextFactory service
