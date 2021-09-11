@@ -10,7 +10,7 @@ namespace PnP.Core.Admin.Model.SharePoint
 {
     internal class SharePointAdmin : ISharePointAdmin
     {
-        private PnPContext context;
+        private readonly PnPContext context;
 
         internal SharePointAdmin(PnPContext pnpContext)
         {
@@ -25,30 +25,119 @@ namespace PnP.Core.Admin.Model.SharePoint
 
             var uriParts = uri.Host.Split('.');
 
-            if (uriParts[1].Equals("SharePoint", StringComparison.InvariantCultureIgnoreCase))
+            if (uriParts[1].Equals("sharepoint", StringComparison.InvariantCultureIgnoreCase))
             {
-                if (uriParts[0].EndsWith("-admin"))
-                {
-                    return new Uri(uri.OriginalString);
-                }
-
-                if (!uriParts[0].EndsWith("-admin"))
-                {
-                    return new Uri($"https://{uriParts[0]}-admin.{string.Join(".", uriParts.Skip(1))}");
-                }
+                return GetTenantAdminCenterUriForStandardTenants(uri);
             }
             else
             {
                 // Tenant is using vanity urls
                 // TODO: check for alternative method
+                throw new ClientException(ErrorType.Unsupported, PnPCoreAdminResources.Exception_VanityUrl);
+            }
+        }
+
+        internal static Uri GetTenantAdminCenterUriForStandardTenants(Uri uri)
+        {
+            var uriParts = uri.Host.Split('.');
+            if (uriParts[0].EndsWith("-admin"))
+            {
+                return new Uri($"https://{uriParts[0]}.{string.Join(".", uriParts.Skip(1))}");
             }
 
-            return null;
+            if (uriParts[0].EndsWith("-my"))
+            {
+                return new Uri($"https://{uriParts[0].Replace("-my", "")}-admin.{string.Join(".", uriParts.Skip(1))}");
+            }
+
+            return new Uri($"https://{uriParts[0]}-admin.{string.Join(".", uriParts.Skip(1))}");
         }
 
         public Uri GetTenantAdminCenterUri()
         {
             return GetTenantAdminCenterUriAsync().GetAwaiter().GetResult();
+        }
+
+#pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
+        public async Task<Uri> GetTenantPortalUriAsync()
+#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
+        {
+            var uri = context.Web.Url;
+
+            var uriParts = uri.Host.Split('.');
+
+            if (uriParts[1].Equals("sharepoint", StringComparison.InvariantCultureIgnoreCase))
+            {
+                return GetTenantPortalUriForStandardTenants(uri);
+            }
+            else
+            {
+                // Tenant is using vanity urls
+                // TODO: check for alternative method
+                throw new ClientException(ErrorType.Unsupported, PnPCoreAdminResources.Exception_VanityUrl);
+            }
+        }
+
+        internal static Uri GetTenantPortalUriForStandardTenants(Uri uri)
+        {
+            var uriParts = uri.Host.Split('.');
+            if (uriParts[0].EndsWith("-admin"))
+            {
+                return new Uri($"https://{uriParts[0].Replace("-admin", "")}.{string.Join(".", uriParts.Skip(1))}");
+            }
+
+            if (uriParts[0].EndsWith("-my"))
+            {
+                return new Uri($"https://{uriParts[0].Replace("-my", "")}.{string.Join(".", uriParts.Skip(1))}");
+            }
+
+            return new Uri($"https://{uriParts[0]}.{string.Join(".", uriParts.Skip(1))}");
+        }
+
+        public Uri GetTenantPortalUri()
+        {
+            return GetTenantPortalUriAsync().GetAwaiter().GetResult();
+        }
+
+#pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
+        public async Task<Uri> GetTenantMySiteHostUriAsync()
+#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
+        {
+            var uri = context.Web.Url;
+
+            var uriParts = uri.Host.Split('.');
+
+            if (uriParts[1].Equals("sharepoint", StringComparison.InvariantCultureIgnoreCase))
+            {
+                return GetTenantMySiteHostUriForStandardTenants(uri);
+            }
+            else
+            {
+                // Tenant is using vanity urls
+                // TODO: check for alternative method
+                throw new ClientException(ErrorType.Unsupported, PnPCoreAdminResources.Exception_VanityUrl);
+            }
+        }
+
+        public Uri GetTenantMySiteHostUri()
+        {
+            return GetTenantMySiteHostUriAsync().GetAwaiter().GetResult();
+        }
+
+        internal static Uri GetTenantMySiteHostUriForStandardTenants(Uri uri)
+        {
+            var uriParts = uri.Host.Split('.');
+            if (uriParts[0].EndsWith("-admin"))
+            {
+                return new Uri($"https://{uriParts[0].Replace("-admin", "")}-my.{string.Join(".", uriParts.Skip(1))}");
+            }
+
+            if (uriParts[0].EndsWith("-my"))
+            {
+                return new Uri($"https://{uriParts[0]}.{string.Join(".", uriParts.Skip(1))}");
+            }
+
+            return new Uri($"https://{uriParts[0]}-my.{string.Join(".", uriParts.Skip(1))}");
         }
 
         public async Task<PnPContext> GetTenantAdminCenterContextAsync()

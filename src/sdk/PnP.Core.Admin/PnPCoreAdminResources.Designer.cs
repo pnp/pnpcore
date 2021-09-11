@@ -59,5 +59,14 @@ namespace PnP.Core.Admin {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Vanity urls are currently not handled..
+        /// </summary>
+        internal static string Exception_VanityUrl {
+            get {
+                return ResourceManager.GetString("Exception_VanityUrl", resourceCulture);
+            }
+        }
     }
 }

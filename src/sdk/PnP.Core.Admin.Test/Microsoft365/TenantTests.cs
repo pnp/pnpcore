@@ -33,7 +33,7 @@ namespace PnP.Core.Admin.Test.Microsoft365
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                var locations = context.GetMicrosoft365Admin().GetMultiGeoDataLocations();
+                var locations = context.GetMicrosoft365Admin().GetMultiGeoLocations();
                 Assert.IsNull(locations);
             }
         }

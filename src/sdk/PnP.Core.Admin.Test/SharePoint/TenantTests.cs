@@ -1,4 +1,5 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using PnP.Core.Admin.Model.SharePoint;
 using PnP.Core.Admin.Test.Utilities;
 using PnP.Core.Services;
 using System;
@@ -15,6 +16,86 @@ namespace PnP.Core.Admin.Test
         {
             // Configure mocking default for all tests in this class, unless override by a specific test
             //TestCommon.Instance.Mocking = false;
+        }
+
+        [TestMethod]
+        public void GetTenantPortalUrlForRegularTenants()
+        {
+            Assert.AreEqual(new Uri("https://bertonline.sharepoint.com"), SharePointAdmin.GetTenantPortalUriForStandardTenants(new Uri("https://bertonline.sharepoint.com")));
+            Assert.AreEqual(new Uri("https://bertonline.sharepoint.com"), SharePointAdmin.GetTenantPortalUriForStandardTenants(new Uri("https://bertonline-my.sharepoint.com")));
+            Assert.AreEqual(new Uri("https://bertonline.sharepoint.com"), SharePointAdmin.GetTenantPortalUriForStandardTenants(new Uri("https://bertonline-admin.sharepoint.com")));
+            Assert.AreEqual(new Uri("https://BertOnline.sharepoint.com"), SharePointAdmin.GetTenantPortalUriForStandardTenants(new Uri("https://BertOnline.sharepoint.com")));
+            Assert.AreEqual(new Uri("https://BertOnline.sharepoint.com"), SharePointAdmin.GetTenantPortalUriForStandardTenants(new Uri("https://BertOnline-my.sharepoint.com")));
+            Assert.AreEqual(new Uri("https://BertOnline.sharepoint.com"), SharePointAdmin.GetTenantPortalUriForStandardTenants(new Uri("https://BertOnline-admin.sharepoint.com")));
+            Assert.AreEqual(new Uri("https://bertonline.sharepoint.us"), SharePointAdmin.GetTenantPortalUriForStandardTenants(new Uri("https://bertonline.sharepoint.us")));
+            Assert.AreEqual(new Uri("https://bertonline.sharepoint.us"), SharePointAdmin.GetTenantPortalUriForStandardTenants(new Uri("https://bertonline-my.sharepoint.us")));
+            Assert.AreEqual(new Uri("https://bertonline.sharepoint.us"), SharePointAdmin.GetTenantPortalUriForStandardTenants(new Uri("https://bertonline-admin.sharepoint.us")));
+        }
+
+        [TestMethod]
+        public async Task GetTenantPortalUrl()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var url = context.GetSharePointAdmin().GetTenantPortalUri();
+                Assert.IsFalse(url.DnsSafeHost.Contains("-admin", StringComparison.InvariantCultureIgnoreCase));
+                Assert.IsFalse(url.DnsSafeHost.Contains("-my", StringComparison.InvariantCultureIgnoreCase));
+
+                using (var tenantContext = await TestCommon.Instance.CloneAsync(context, url, 2))
+                {
+                    var url2 = context.GetSharePointAdmin().GetTenantPortalUri();
+                    Assert.IsFalse(url2.DnsSafeHost.Contains("-admin", StringComparison.InvariantCultureIgnoreCase));
+                    Assert.IsFalse(url2.DnsSafeHost.Contains("-my", StringComparison.InvariantCultureIgnoreCase));
+                }
+            }
+        }
+
+        [TestMethod]
+        public void GetTenantMySiteHostUrlForRegularTenants()
+        {
+            Assert.AreEqual(new Uri("https://bertonline-my.sharepoint.com"), SharePointAdmin.GetTenantMySiteHostUriForStandardTenants(new Uri("https://bertonline.sharepoint.com")));
+            Assert.AreEqual(new Uri("https://bertonline-my.sharepoint.com"), SharePointAdmin.GetTenantMySiteHostUriForStandardTenants(new Uri("https://bertonline-my.sharepoint.com")));
+            Assert.AreEqual(new Uri("https://bertonline-my.sharepoint.com"), SharePointAdmin.GetTenantMySiteHostUriForStandardTenants(new Uri("https://bertonline-admin.sharepoint.com")));
+            Assert.AreEqual(new Uri("https://BertOnline-my.sharepoint.com"), SharePointAdmin.GetTenantMySiteHostUriForStandardTenants(new Uri("https://BertOnline.sharepoint.com")));
+            Assert.AreEqual(new Uri("https://BertOnline-my.sharepoint.com"), SharePointAdmin.GetTenantMySiteHostUriForStandardTenants(new Uri("https://BertOnline-my.sharepoint.com")));
+            Assert.AreEqual(new Uri("https://BertOnline-my.sharepoint.com"), SharePointAdmin.GetTenantMySiteHostUriForStandardTenants(new Uri("https://BertOnline-admin.sharepoint.com")));
+            Assert.AreEqual(new Uri("https://bertonline-my.sharepoint.us"), SharePointAdmin.GetTenantMySiteHostUriForStandardTenants(new Uri("https://bertonline.sharepoint.us")));
+            Assert.AreEqual(new Uri("https://bertonline-my.sharepoint.us"), SharePointAdmin.GetTenantMySiteHostUriForStandardTenants(new Uri("https://bertonline-my.sharepoint.us")));
+            Assert.AreEqual(new Uri("https://bertonline-my.sharepoint.us"), SharePointAdmin.GetTenantMySiteHostUriForStandardTenants(new Uri("https://bertonline-admin.sharepoint.us")));
+        }
+
+        [TestMethod]
+        public async Task GetTenantMySiteHostUrl()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var url = context.GetSharePointAdmin().GetTenantMySiteHostUri();
+                Assert.IsFalse(url.DnsSafeHost.Contains("-admin", StringComparison.InvariantCultureIgnoreCase));
+                Assert.IsTrue(url.DnsSafeHost.Contains("-my", StringComparison.InvariantCultureIgnoreCase));
+
+                using (var tenantContext = await TestCommon.Instance.CloneAsync(context, url, 2))
+                {
+                    var url2 = context.GetSharePointAdmin().GetTenantMySiteHostUri();
+                    Assert.IsFalse(url2.DnsSafeHost.Contains("-admin", StringComparison.InvariantCultureIgnoreCase));
+                    Assert.IsTrue(url.DnsSafeHost.Contains("-my", StringComparison.InvariantCultureIgnoreCase));
+                }
+            }
+        }
+
+        [TestMethod]
+        public void GetTenantAdminCenterUrlForRegularTenants()
+        {
+            Assert.AreEqual(new Uri("https://bertonline-admin.sharepoint.com"), SharePointAdmin.GetTenantAdminCenterUriForStandardTenants(new Uri("https://bertonline.sharepoint.com")));
+            Assert.AreEqual(new Uri("https://bertonline-admin.sharepoint.com"), SharePointAdmin.GetTenantAdminCenterUriForStandardTenants(new Uri("https://bertonline-my.sharepoint.com")));
+            Assert.AreEqual(new Uri("https://bertonline-admin.sharepoint.com"), SharePointAdmin.GetTenantAdminCenterUriForStandardTenants(new Uri("https://bertonline-admin.sharepoint.com")));
+            Assert.AreEqual(new Uri("https://BertOnline-admin.sharepoint.com"), SharePointAdmin.GetTenantAdminCenterUriForStandardTenants(new Uri("https://BertOnline.sharepoint.com")));
+            Assert.AreEqual(new Uri("https://BertOnline-admin.sharepoint.com"), SharePointAdmin.GetTenantAdminCenterUriForStandardTenants(new Uri("https://BertOnline-my.sharepoint.com")));
+            Assert.AreEqual(new Uri("https://BertOnline-admin.sharepoint.com"), SharePointAdmin.GetTenantAdminCenterUriForStandardTenants(new Uri("https://BertOnline-admin.sharepoint.com")));
+            Assert.AreEqual(new Uri("https://bertonline-admin.sharepoint.us"), SharePointAdmin.GetTenantAdminCenterUriForStandardTenants(new Uri("https://bertonline.sharepoint.us")));
+            Assert.AreEqual(new Uri("https://bertonline-admin.sharepoint.us"), SharePointAdmin.GetTenantAdminCenterUriForStandardTenants(new Uri("https://bertonline-my.sharepoint.us")));
+            Assert.AreEqual(new Uri("https://bertonline-admin.sharepoint.us"), SharePointAdmin.GetTenantAdminCenterUriForStandardTenants(new Uri("https://bertonline-admin.sharepoint.us")));
         }
 
         [TestMethod]

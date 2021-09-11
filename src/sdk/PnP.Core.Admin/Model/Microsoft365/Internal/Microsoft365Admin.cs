@@ -1,6 +1,9 @@
-﻿using PnP.Core.Model.SharePoint;
+﻿using PnP.Core.Admin.Model.SharePoint;
+using PnP.Core.Model.SharePoint;
 using PnP.Core.Services;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -9,7 +12,7 @@ namespace PnP.Core.Admin.Model.Microsoft365
 {
     internal class Microsoft365Admin : IMicrosoft365Admin
     {
-        private PnPContext context;
+        private readonly PnPContext context;
 
         internal Microsoft365Admin(PnPContext pnpContext)
         {
@@ -94,7 +97,7 @@ namespace PnP.Core.Admin.Model.Microsoft365
             return IsMultiGeoTenantAsync().GetAwaiter().GetResult();
         }
 
-        public async Task<List<string>> GetMultiGeoDataLocationsAsync()
+        public async Task<List<IGeoLocation>> GetMultiGeoLocationsAsync()
         {
             var result = await(context.Web as Web).RawRequestAsync(new ApiCall("sites?filter=siteCollection/root%20ne%20null&select=webUrl,siteCollection", ApiType.Graph), HttpMethod.Get);
 
@@ -147,7 +150,7 @@ namespace PnP.Core.Admin.Model.Microsoft365
 
             var root = JsonDocument.Parse(result.Json).RootElement.GetProperty("value");
 
-            List<string> dataLocations = null;
+            List<IGeoLocation> dataLocations = null;
 
             if (root.ValueKind == JsonValueKind.Array)
             {
@@ -161,10 +164,21 @@ namespace PnP.Core.Admin.Model.Microsoft365
                             {
                                 if (dataLocations == null)
                                 {
-                                    dataLocations = new List<string>();
+                                    dataLocations = new List<IGeoLocation>();
                                 }
 
-                                dataLocations.Add(dataLocationCode.GetString());
+                                var geoLocation = new GeoLocation()
+                                {
+                                    DataLocationCode = dataLocationCode.GetString(),
+                                    SharePointPortalUrl = siteInformation.GetProperty("webUrl").GetString(),
+                                    SharePointAdminUrl = SharePointAdmin.GetTenantAdminCenterUriForStandardTenants(new Uri(siteInformation.GetProperty("webUrl").GetString())).ToString(),
+                                    SharePointMySiteUrl = SharePointAdmin.GetTenantMySiteHostUriForStandardTenants(new Uri(siteInformation.GetProperty("webUrl").GetString())).ToString()
+                                };
+
+                                if (dataLocations.FirstOrDefault(p => p.DataLocationCode.Equals(geoLocation.DataLocationCode, StringComparison.InvariantCultureIgnoreCase)) == null)
+                                {
+                                    dataLocations.Add(geoLocation);
+                                }
                             }
                         }
                     }
@@ -174,9 +188,9 @@ namespace PnP.Core.Admin.Model.Microsoft365
             return dataLocations;
         }
 
-        public List<string> GetMultiGeoDataLocations()
+        public List<IGeoLocation> GetMultiGeoLocations()
         {
-            return GetMultiGeoDataLocationsAsync().GetAwaiter().GetResult();
+            return GetMultiGeoLocationsAsync().GetAwaiter().GetResult();
         }
     }
 }

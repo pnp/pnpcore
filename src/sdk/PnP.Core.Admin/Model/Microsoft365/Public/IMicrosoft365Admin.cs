@@ -21,16 +21,16 @@ namespace PnP.Core.Admin.Model.Microsoft365
         bool IsMultiGeoTenant();
 
         /// <summary>
-        /// Returns a list of multi-geo data locations for this tenant
+        /// Returns a list of multi-geo locations for this tenant
         /// </summary>
-        /// <returns>List of multi-geo data locations if multi-geo, null otherwise</returns>
-        Task<List<string>> GetMultiGeoDataLocationsAsync();
+        /// <returns>List of multi-geo locations if multi-geo, null otherwise</returns>
+        Task<List<IGeoLocation>> GetMultiGeoLocationsAsync();
 
         /// <summary>
-        /// Returns a list of multi-geo data locations for this tenant
+        /// Returns a list of multi-geo locations for this tenant
         /// </summary>
-        /// <returns>List of multi-geo data locations if multi-geo, null otherwise</returns>
-        List<string> GetMultiGeoDataLocations();
+        /// <returns>List of multi-geo locations if multi-geo, null otherwise</returns>
+        List<IGeoLocation> GetMultiGeoLocations();
 
     }
 }
