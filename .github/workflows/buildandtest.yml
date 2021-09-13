@@ -7,15 +7,19 @@ on:
     paths:
     - 'src/sdk/PnP.Core/**'
     - 'src/sdk/PnP.Core.Auth/**'
+    - 'src/sdk/PnP.Core.Admin/**'
     - 'src/sdk/PnP.Core.Test/**'
     - 'src/sdk/PnP.Core.Auth.Test/**'
+    - 'src/sdk/PnP.Core.Admin.Test/**'
   pull_request:
     branches: [ dev ]
     paths:
     - 'src/sdk/PnP.Core/**'
     - 'src/sdk/PnP.Core.Auth/**'
+    - 'src/sdk/PnP.Core.Admin/**'
     - 'src/sdk/PnP.Core.Test/**'
     - 'src/sdk/PnP.Core.Auth.Test/**'
+    - 'src/sdk/PnP.Core.Admin.Test/**'
 
 jobs:
   build:

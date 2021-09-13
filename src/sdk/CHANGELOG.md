@@ -12,6 +12,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
 - Added IWeb.GetFileByServerRelativeUrlOrDefault methods that can return null for non existing files + dropped the IFile.Exists property as it never really worked [jansenbe - Bert Jansen]
 - Added support for reading, configuring and saving of collapsible sections on pages #539 [jansenbe - Bert Jansen]
+- Admin library providing Microsoft 365 admin functionality to PnP Core SDK users [jansenbe - Bert Jansen]
 
 ### Changed
 
