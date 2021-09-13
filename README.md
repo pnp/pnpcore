@@ -6,6 +6,7 @@ Nuget package | Description | Latest version | Latest nightly development versio
 --------------|-------------|----------------|------------------------------------
 PnP.Core | The PnP Core SDK | [![PnP.Core Nuget package](https://img.shields.io/nuget/v/PnP.Core.svg)](https://www.nuget.org/packages/PnP.Core/) | [![PnP.Core Nuget package](https://img.shields.io/nuget/vpre/PnP.Core.svg)](https://www.nuget.org/packages/PnP.Core/)
 PnP.Core.Auth | The authentication provider for the PnP Core SDK | [![PnP.Core.Auth Nuget package](https://img.shields.io/nuget/v/PnP.Core.Auth.svg)](https://www.nuget.org/packages/PnP.Core.Auth/) | [![PnP.Core.Auth Nuget package](https://img.shields.io/nuget/vpre/PnP.Core.Auth.svg)](https://www.nuget.org/packages/PnP.Core.Auth/)
+PnP.Core.Admin | Microsoft 365 admin features for the PnP Core SDK | soon | soon
 
 The PnP Core SDK is an SDK designed to work for Microsoft 365. It provides a unified object model for working with SharePoint Online and Teams which is agnostic to the underlying APIs being called. The initial goal for this library will be to cover the needs of developers working with either SharePoint Online or Teams, but we're also open to extend this library further towards other Microsoft 365 workloads if there's community demand for doing so.
 
