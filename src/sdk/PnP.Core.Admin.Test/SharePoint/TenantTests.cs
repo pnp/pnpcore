@@ -3,6 +3,7 @@ using PnP.Core.Admin.Model.SharePoint;
 using PnP.Core.Admin.Test.Utilities;
 using PnP.Core.Services;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace PnP.Core.Admin.Test
@@ -129,6 +130,28 @@ namespace PnP.Core.Admin.Test
                     Assert.IsTrue(tenantContext.Web.IsPropertyAvailable(p => p.Id));
                     Assert.IsTrue(tenantContext.Uri == url);
                 }
+            }
+        }
+
+        [TestMethod]
+        public async Task GetTenantAdmins()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var admins = context.GetSharePointAdmin().GetTenantAdmins();
+                Assert.IsTrue(admins != null);
+                Assert.IsTrue(admins.Any());
+            }
+        }
+
+        [TestMethod]
+        public async Task IsCurrentUserSharePointAdmin()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {                
+                Assert.IsTrue(context.GetSharePointAdmin().IsCurrentUserTenantAdmin());
             }
         }
 

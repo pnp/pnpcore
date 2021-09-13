@@ -1,5 +1,7 @@
-﻿using PnP.Core.Services;
+﻿using PnP.Core.Model.Security;
+using PnP.Core.Services;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace PnP.Core.Admin.Model.SharePoint
@@ -56,6 +58,30 @@ namespace PnP.Core.Admin.Model.SharePoint
         /// </summary>
         /// <returns><see cref="PnPContext"/> for the tenant's SharePoint admin center</returns>
         PnPContext GetTenantAdminCenterContext();
+
+        /// <summary>
+        /// Returns a list of <see cref="ISharePointUser"/>s who are SharePoint Online Tenant admin
+        /// </summary>
+        /// <returns>List of SharePoint Online Tenant admins</returns>
+        Task<List<ISharePointUser>> GetTenantAdminsAsync();
+
+        /// <summary>
+        /// Returns a list of <see cref="ISharePointUser"/>s who are SharePoint Online Tenant admin
+        /// </summary>
+        /// <returns>List of SharePoint Online Tenant admins</returns>
+        List<ISharePointUser> GetTenantAdmins();
+
+        /// <summary>
+        /// Checks if the current user is SharePoint Online tenant admin
+        /// </summary>
+        /// <returns>True if the user is a SharePoint Online tenant admin, false otherwise</returns>
+        Task<bool> IsCurrentUserTenantAdminAsync();
+
+        /// <summary>
+        /// Checks if the current user is SharePoint Online tenant admin
+        /// </summary>
+        /// <returns>True if the user is a SharePoint Online tenant admin, false otherwise</returns>
+        bool IsCurrentUserTenantAdmin();
 
         /// <summary>
         /// Returns the URI of the current tenant app catalog

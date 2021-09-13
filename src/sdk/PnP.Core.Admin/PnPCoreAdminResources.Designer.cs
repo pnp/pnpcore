@@ -68,5 +68,14 @@ namespace PnP.Core.Admin {
                 return ResourceManager.GetString("Exception_VanityUrl", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Following exception was eaten while getting the tenant admins: {0}.
+        /// </summary>
+        internal static string Log_Information_ExceptionWhileGettingSharePointAdmins {
+            get {
+                return ResourceManager.GetString("Log_Information_ExceptionWhileGettingSharePointAdmins", resourceCulture);
+            }
+        }
     }
 }

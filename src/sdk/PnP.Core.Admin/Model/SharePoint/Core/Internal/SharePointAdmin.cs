@@ -1,6 +1,10 @@
-﻿using PnP.Core.Model.SharePoint;
+﻿using Microsoft.Extensions.Logging;
+using PnP.Core.Model.Security;
+using PnP.Core.Model.SharePoint;
+using PnP.Core.QueryModel;
 using PnP.Core.Services;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Text.Json;
@@ -40,12 +44,12 @@ namespace PnP.Core.Admin.Model.SharePoint
         internal static Uri GetTenantAdminCenterUriForStandardTenants(Uri uri)
         {
             var uriParts = uri.Host.Split('.');
-            if (uriParts[0].EndsWith("-admin"))
+            if (uriParts[0].EndsWith("-admin", StringComparison.InvariantCulture))
             {
                 return new Uri($"https://{uriParts[0]}.{string.Join(".", uriParts.Skip(1))}");
             }
 
-            if (uriParts[0].EndsWith("-my"))
+            if (uriParts[0].EndsWith("-my", StringComparison.InvariantCulture))
             {
                 return new Uri($"https://{uriParts[0].Replace("-my", "")}-admin.{string.Join(".", uriParts.Skip(1))}");
             }
@@ -81,12 +85,12 @@ namespace PnP.Core.Admin.Model.SharePoint
         internal static Uri GetTenantPortalUriForStandardTenants(Uri uri)
         {
             var uriParts = uri.Host.Split('.');
-            if (uriParts[0].EndsWith("-admin"))
+            if (uriParts[0].EndsWith("-admin", StringComparison.InvariantCulture))
             {
                 return new Uri($"https://{uriParts[0].Replace("-admin", "")}.{string.Join(".", uriParts.Skip(1))}");
             }
 
-            if (uriParts[0].EndsWith("-my"))
+            if (uriParts[0].EndsWith("-my", StringComparison.InvariantCulture))
             {
                 return new Uri($"https://{uriParts[0].Replace("-my", "")}.{string.Join(".", uriParts.Skip(1))}");
             }
@@ -127,12 +131,12 @@ namespace PnP.Core.Admin.Model.SharePoint
         internal static Uri GetTenantMySiteHostUriForStandardTenants(Uri uri)
         {
             var uriParts = uri.Host.Split('.');
-            if (uriParts[0].EndsWith("-admin"))
+            if (uriParts[0].EndsWith("-admin", StringComparison.InvariantCulture))
             {
                 return new Uri($"https://{uriParts[0].Replace("-admin", "")}-my.{string.Join(".", uriParts.Skip(1))}");
             }
 
-            if (uriParts[0].EndsWith("-my"))
+            if (uriParts[0].EndsWith("-my", StringComparison.InvariantCulture))
             {
                 return new Uri($"https://{uriParts[0]}.{string.Join(".", uriParts.Skip(1))}");
             }
@@ -142,7 +146,7 @@ namespace PnP.Core.Admin.Model.SharePoint
 
         public async Task<PnPContext> GetTenantAdminCenterContextAsync()
         {
-            return await context.CloneAsync(await GetTenantAdminCenterUriAsync().ConfigureAwait(false));
+            return await context.CloneAsync(await GetTenantAdminCenterUriAsync().ConfigureAwait(false)).ConfigureAwait(false);
         }
 
         public PnPContext GetTenantAdminCenterContext()
@@ -150,9 +154,47 @@ namespace PnP.Core.Admin.Model.SharePoint
             return GetTenantAdminCenterContextAsync().GetAwaiter().GetResult();
         }
 
+        public async Task<List<ISharePointUser>> GetTenantAdminsAsync()
+        {
+            using (var tenantAdminCenterContext = await GetTenantAdminCenterContextAsync().ConfigureAwait(false))
+            {
+                return await tenantAdminCenterContext.Web.SiteUsers.Where(p => p.IsSiteAdmin == true).ToListAsync().ConfigureAwait(false);    
+            }
+        }
+
+        public async Task<bool> IsCurrentUserTenantAdminAsync()
+        {
+            //TODO: consider replacing with IsCurrentUserTenantAdminViaGraph approach used in PnP Framework. Requires option to pass along custom http headers
+
+            try
+            {
+                // Get current tenant admin center admins...might throw an error if the current user does not have access to SharePoint Admin
+                var admins = await GetTenantAdminsAsync().ConfigureAwait(false);
+                // Get information about the current user
+                var currentUser = await context.Web.GetCurrentUserAsync().ConfigureAwait(false);
+                return admins.FirstOrDefault(p => p.LoginName.Equals(currentUser.LoginName)) != null;                
+            }
+            catch(PnPException ex)
+            {
+                // When lacking permissions we'll end up here, eat the exceptions and assume user is not an admin
+                context.Logger?.LogInformation(PnPCoreAdminResources.Log_Information_ExceptionWhileGettingSharePointAdmins, ex.ToString());
+                return false;
+            }
+        }
+
+        public bool IsCurrentUserTenantAdmin()
+        {
+            return IsCurrentUserTenantAdminAsync().GetAwaiter().GetResult();
+        }
+
+        public List<ISharePointUser> GetTenantAdmins()
+        {
+            return GetTenantAdminsAsync().GetAwaiter().GetResult();
+        }
+
         public async Task<Uri> GetTenantAppCatalogUriAsync()
         {
-            var result = await (context.Web as Web).RawRequestAsync(new ApiCall("_api/SP_TenantSettings_Current", ApiType.SPORest), HttpMethod.Get);
+            var result = await (context.Web as Web).RawRequestAsync(new ApiCall("_api/SP_TenantSettings_Current", ApiType.SPORest), HttpMethod.Get).ConfigureAwait(false);
 
             var root = JsonDocument.Parse(result.Json).RootElement.GetProperty("d").GetProperty("CorporateCatalogUrl");
 
@@ -171,7 +213,7 @@ namespace PnP.Core.Admin.Model.SharePoint
 
         public async Task<bool> EnsureTenantAppCatalogAsync()
         {
-            var result = await (context.Web as Web).RawRequestAsync(new ApiCall("_api/web/EnsureTenantAppCatalog(callerId='pnpcoresdk')", ApiType.SPORest), HttpMethod.Post);
+            var result = await (context.Web as Web).RawRequestAsync(new ApiCall("_api/web/EnsureTenantAppCatalog(callerId='pnpcoresdk')", ApiType.SPORest), HttpMethod.Post).ConfigureAwait(false);
             var root = JsonDocument.Parse(result.Json).RootElement.GetProperty("d").GetProperty("EnsureTenantAppCatalog");
             return root.GetBoolean();
         }

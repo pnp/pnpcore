@@ -120,4 +120,7 @@
   <data name="Exception_VanityUrl" xml:space="preserve">
     <value>Vanity urls are currently not handled.</value>
   </data>
+  <data name="Log_Information_ExceptionWhileGettingSharePointAdmins" xml:space="preserve">
+    <value>Following exception was eaten while getting the tenant admins: {0}</value>
+  </data>
 </root>
