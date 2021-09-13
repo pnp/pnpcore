@@ -22,6 +22,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Fix for "Requested value 'systemEventMessage' was not found." for Chat Messages #536 [jansenbe - Bert Jansen]
 - Default retry mechanism now uses retry-after header for REST, CSOM and Graph requests, aligned with the settings in PnP Framework [jansenbe - Bert Jansen]
 - Switched to using V1 Taxonomy API now that it's out of beta [jansenbe - Bert Jansen]
+- Implemented generic handling for non-English timezone strings, initial fix for #543 [jansenbe - Bert Jansen]
 
 ## [1.3.0]
 
