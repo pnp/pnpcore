@@ -19,6 +19,7 @@ namespace PnP.Core.Admin.Model.Microsoft365
             context = pnpContext;
         }
 
+        #region Multi-geo support
         public async Task<bool> IsMultiGeoTenantAsync()
         {
             var result = await (context.Web as Web).RawRequestAsync(new ApiCall("sites?filter=siteCollection/root%20ne%20null&select=webUrl,siteCollection", ApiType.Graph), HttpMethod.Get).ConfigureAwait(false);
@@ -192,5 +193,99 @@ namespace PnP.Core.Admin.Model.Microsoft365
         {
             return GetMultiGeoLocationsAsync().GetAwaiter().GetResult();
         }
+        #endregion
+
+        #region Access token related extensions
+        /// <summary>
+        /// Checks if the current access token holds the requested role
+        /// </summary>
+        /// <param name="role">Role to check for</param>
+        /// <returns>True if the token has the role, false otherwise</returns>
+        public async Task<bool> AccessTokenHasRoleAsync(string role)
+        {
+            return await context.AccessTokenHasRoleAsync(role).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Checks if the current access token holds the requested role
+        /// </summary>
+        /// <param name="role">Role to check for</param>
+        /// <returns>True if the token has the role, false otherwise</returns>
+        public bool AccessTokenHasRole(string role)
+        {
+            return AccessTokenHasRoleAsync(role).GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        /// Checks if the provided access token holds the requested role
+        /// </summary>
+        /// <param name="accessToken">Accesstoken to inspect</param>
+        /// <param name="role">Role to check for</param>
+        /// <returns>True if the token has the role, false otherwise</returns>
+        public bool AccessTokenHasRole(string accessToken, string role)
+        {
+            return PnPContext.AccessTokenHasRole(accessToken, role);
+        }
+
+        /// <summary>
+        /// Checks if the current access token holds the requested scope
+        /// </summary>
+        /// <param name="scope">Scopee to check for</param>
+        /// <returns>True if the token has the scope, false otherwise</returns>
+        public async Task<bool> AccessTokenHasScopeAsync(string scope)
+        {
+            return await context.AccessTokenHasScopeAsync(scope).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Checks if the current access token holds the requested scope
+        /// </summary>
+        /// <param name="scope">Scope to check for</param>
+        /// <returns>True if the token has the scope, false otherwise</returns>
+        public bool AccessTokenHasScope(string scope)
+        {
+            return AccessTokenHasScopeAsync(scope).GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        /// Checks if the provided access token holds the requested scope
+        /// </summary>
+        /// <param name="accessToken">Accesstoken to inspect</param>
+        /// <param name="scope">Scope to check for</param>
+        /// <returns>True if the token has the scope, false otherwise</returns>
+        public bool AccessTokenHasScope(string accessToken, string scope)
+        {
+            return PnPContext.AccessTokenHasScope(accessToken, scope);
+        }
+
+        /// <summary>
+        /// Checks if the current access token uses application permissions
+        /// </summary>
+        /// <returns>True if using application permissions, false otherwise</returns>
+        public async Task<bool> AccessTokenUsesApplicationPermissionsAsync()
+        {
+            return await context.AccessTokenUsesApplicationPermissionsAsync().ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Checks if the current access token uses application permissions
+        /// </summary>
+        /// <returns>True if using application permissions, false otherwise</returns>
+        public bool AccessTokenUsesApplicationPermissions()
+        {
+            return AccessTokenUsesApplicationPermissionsAsync().GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        /// Checks if the provided access token uses application permissions
+        /// </summary>
+        /// <param name="accessToken">Accesstoken to inspect</param>
+        /// <returns>True if using application permissions, false otherwise</returns>
+        public bool AccessTokenUsesApplicationPermissions(string accessToken)
+        {
+            return PnPContext.AccessTokenUsesApplicationPermissions(accessToken);
+        }
+        #endregion
+
     }
 }

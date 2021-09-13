@@ -3,6 +3,7 @@ using PnP.Core.Model;
 using PnP.Core.Model.SharePoint;
 using PnP.Core.QueryModel;
 using PnP.Core.Services;
+using PnP.Core.Test.Common;
 using PnP.Core.Test.Utilities;
 using System;
 using System.Linq;
@@ -17,9 +18,6 @@ namespace PnP.Core.Test.Base
     [TestClass]
     public class PnPContextTests
     {
-        private static readonly string DelegatedAccessToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6Im5PbzNaRHJPRFhFSzFqS1doWHNsSFJfS1hFZyIsImtpZCI6Im5PbzNaRHJPRFhFSzFqS1doWHNsSFJfS1hFZyJ9.eyJhdWQiOiJodHRwczovL2JlcnRvbmxpbmUuc2hhcmVwb2ludC5jb20iLCJpc3MiOiJodHRwczovL3N0cy53aW5kb3dzLm5ldC9kODYyM2M5ZS0zMGM3LTQ3M2EtODNiYy1kOTA3ZGY0NGEyNmUvIiwiaWF0IjoxNjMxMjk2MDE4LCJuYmYiOjE2MzEyOTYwMTgsImV4cCI6MTYzMTI5OTkxOCwiYWNyIjoiMSIsImFpbyI6IkUyWmdZQWlwN1puMVNtclNWQUZycVkyeE14S3FWVHNGNXNhZll2MC9qZGtnYThLM2RaMEEiLCJhbXIiOlsicHdkIl0sImFwcF9kaXNwbGF5bmFtZSI6IlBuUCBNYW5hZ2VtZW50IFNoZWxsIiwiYXBwaWQiOiIzMTM1OWM3Zi1iZDdlLTQ3NWMtODZkYi1mZGI4YzkzNzU0OGUiLCJhcHBpZGFjciI6IjAiLCJmYW1pbHlfbmFtZSI6IkphbnNlbiIsImdpdmVuX25hbWUiOiJCZXJ0IiwiaWR0eXAiOiJ1c2VyIiwiaXBhZGRyIjoiODQuMTk1LjIwOC43MCIsIm5hbWUiOiJCZXJ0IEphbnNlbiAoQ2xvdWQpIiwib2lkIjoiMzNhY2EzMTAtYTQ4OS00MTIxLWI4NTMtNjYzZDAzMjdmZTA4IiwicHVpZCI6IjEwMDMwMDAwODRFNEZGNjEiLCJyaCI6IjAuQVFJQW5qeGkyTWN3T2tlRHZOa0gzMFNpYm4tY05URi12VnhIaHR2OXVNazNWSTRDQU9VLiIsInNjcCI6IkFsbFNpdGVzLkZ1bGxDb250cm9sIEFwcENhdGFsb2cuUmVhZFdyaXRlLkFsbCBEaXJlY3RvcnkuQWNjZXNzQXNVc2VyLkFsbCBEaXJlY3RvcnkuUmVhZFdyaXRlLkFsbCBHcm91cC5SZWFkV3JpdGUuQWxsIElkZW50aXR5UHJvdmlkZXIuUmVhZFdyaXRlLkFsbCBNYWlsLlNlbmQgUmVwb3J0cy5SZWFkLkFsbCBUZXJtU3RvcmUuUmVhZFdyaXRlLkFsbCBVc2VyLkludml0ZS5BbGwgVXNlci5SZWFkLkFsbCIsInNpZCI6IjM2OWU5NmQ1LThmZDMtNDc5Ni04MTc4LTk5MDRjOTI5MmM1ZSIsInN1YiI6ImFGSEVJdDk5bk1YaVlfSVBqcERNZmxmV3czekNXYTJHaWxtNnRmekJXaGMiLCJ0aWQiOiJkODYyM2M5ZS0zMGM3LTQ3M2EtODNiYy1kOTA3ZGY0NGEyNmUiLCJ1bmlxdWVfbmFtZSI6ImJlcnQuamFuc2VuQGJlcnRvbmxpbmUub25taWNyb3NvZnQuY29tIiwidXBuIjoiYmVydC5qYW5zZW5AYmVydG9ubGluZS5vbm1pY3Jvc29mdC5jb20iLCJ1dGkiOiJYaHEwbkQ1VS0weXRsWmsydVlNa0FBIiwidmVyIjoiMS4wIiwid2lkcyI6WyI2MmU5MDM5NC02OWY1LTQyMzctOTE5MC0wMTIxNzcxNDVlMTAiLCJiNzlmYmY0ZC0zZWY5LTQ2ODktODE0My03NmIxOTRlODU1MDkiXX0.VlSOGxb1fTB18rwGqshZL8f0pQP9LAwd2fPK9YSNECul7K8NoWf1WPxgj7A9jAVB9gL9MF98zTJ4i9dieyu4l7B9zd-1q2j6aQmi2HB08VXtx1MtapE_hAY9ynS0vCmsPnyBHwunu5OZt7pLO_T6cXZAQ3TwZwa6Lzb6nNl9v2zh57jEsUnyMhWizDDriTDZKcSkhKNNeSKk9tZ78B8tX4iGVhFtw3vYEFIeR-hBWFqWQ-sAkPGzWpSF7GjF7jItduUW2OxlKZQ3g9naFAtIDskbSAfGSuK-_ZIGnLiau7DtWtSNtB3H8W7u3CPcPYXD6Dq99_pTF-LgeItHBUVCXQ";
-        private static readonly string ApplicationAccessToken = "eyJ0eXAiOiJKV1QiLCJub25jZSI6IkZyRGJDZUxhOGs4QlpsdUNWMER2V3RHa3NGaTlHTWFPei12Vk9QSTVESnMiLCJhbGciOiJSUzI1NiIsIng1dCI6Imwzc1EtNTBjQ0g0eEJWWkxIVEd3blNSNzY4MCIsImtpZCI6Imwzc1EtNTBjQ0g0eEJWWkxIVEd3blNSNzY4MCJ9.eyJhdWQiOiJodHRwczovL2dyYXBoLm1pY3Jvc29mdC5jb20iLCJpc3MiOiJodHRwczovL3N0cy53aW5kb3dzLm5ldC9kODYyM2M5ZS0zMGM3LTQ3M2EtODNiYy1kOTA3ZGY0NGEyNmUvIiwiaWF0IjoxNjMxNTI4ODk5LCJuYmYiOjE2MzE1Mjg4OTksImV4cCI6MTYzMTUzMjc5OSwiYWlvIjoiRTJaZ1lHZ09VRXlZdWVNbEQyZFoySXNPbnA2REFBPT0iLCJhcHBfZGlzcGxheW5hbWUiOiJQbnBDb3JlVGVzdEFwcCIsImFwcGlkIjoiYzU0NWY5Y2UtMWMxMS00NDBiLTgxMmItMGIzNTIxN2Q5ZTgzIiwiYXBwaWRhY3IiOiIyIiwiaWRwIjoiaHR0cHM6Ly9zdHMud2luZG93cy5uZXQvZDg2MjNjOWUtMzBjNy00NzNhLTgzYmMtZDkwN2RmNDRhMjZlLyIsImlkdHlwIjoiYXBwIiwib2lkIjoiMmU4YTFmODktYzRhMS00NTJhLTk2NzctMzFiODU2MjU5ZWIzIiwicmgiOiIwLkFRSUFuanhpMk1jd09rZUR2TmtIMzBTaWJzNzVSY1VSSEF0RWdTc0xOU0Y5bm9NQ0FBQS4iLCJyb2xlcyI6WyJHcm91cC5SZWFkLkFsbCIsIlNpdGVzLkZ1bGxDb250cm9sLkFsbCJdLCJzdWIiOiIyZThhMWY4OS1jNGExLTQ1MmEtOTY3Ny0zMWI4NTYyNTllYjMiLCJ0ZW5hbnRfcmVnaW9uX3Njb3BlIjoiRVUiLCJ0aWQiOiJkODYyM2M5ZS0zMGM3LTQ3M2EtODNiYy1kOTA3ZGY0NGEyNmUiLCJ1dGkiOiJDbXUzTVo5Q2RFLUtxOGxuTVZWZUFBIiwidmVyIjoiMS4wIiwid2lkcyI6WyIwOTk3YTFkMC0wZDFkLTRhY2ItYjQwOC1kNWNhNzMxMjFlOTAiXSwieG1zX3RjZHQiOjEzNjIwMzExMjl9.ecBoItG9-n-RzM-FHQV-Mjr7t5obghNkK0JOC1JmMP12iVwl6AvAIuHiSqovEP8ZdGjn8bGKJFLOmylseFLrsWAsMQa3Xh0YFrBsHmISGxMoxtCVpi7hUF-gqURsGT5KxbFkSouA-WvGMGtpLVuJXoN7mzpyji4OxEd0KIsGwmPmEtZ7XdMZzID0RblqnmuY0BlWafqKqB4mwdsB5hD1y4e4oM7CTsUzW7XppISPKxCCujcJiPLbNLcdcjqfUYEuAjdZz58RnhHl60eNFNkAMRRd_plSqyMYBla5zojUVcYfrC1hpC12IHp-uQNMcYeyaQpJ45aeiEwQ61U_8VLUuA";
-
         [ClassInitialize]
         public static void TestFixtureSetup(TestContext testContext)
         {
@@ -700,7 +698,7 @@ namespace PnP.Core.Test.Base
 
             using (var context = await TestCommon.Instance.GetLiveContextAsync())
             {
-                Assert.IsTrue(await context.AccessTokenHasScopesAsync("AllSites.FullControl"));
+                Assert.IsTrue(await context.AccessTokenHasScopeAsync("AllSites.FullControl"));
                 Assert.IsFalse(await context.AccessTokenHasRoleAsync("Sites.FullControl.All"));
                 Assert.IsFalse(await context.AccessTokenUsesApplicationPermissionsAsync());
             }
@@ -709,9 +707,9 @@ namespace PnP.Core.Test.Base
         [TestMethod]
         public void StaticAccessTokenAnalysis()
         {
-            Assert.IsTrue(PnPContext.AccessTokenHasScope(DelegatedAccessToken, "AllSites.FullControl"));
-            Assert.IsTrue(PnPContext.AccessTokenHasRole(ApplicationAccessToken, "Sites.FullControl.All"));
-            Assert.IsTrue(PnPContext.AccessTokenUsesApplicationPermissions(ApplicationAccessToken));
+            Assert.IsTrue(PnPContext.AccessTokenHasScope(Constants.DelegatedAccessToken, "AllSites.FullControl"));
+            Assert.IsTrue(PnPContext.AccessTokenHasRole(Constants.ApplicationAccessToken, "Sites.FullControl.All"));
+            Assert.IsTrue(PnPContext.AccessTokenUsesApplicationPermissions(Constants.ApplicationAccessToken));
         }
     }
 }

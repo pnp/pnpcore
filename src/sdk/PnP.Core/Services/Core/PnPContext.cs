@@ -513,9 +513,9 @@ namespace PnP.Core.Services
             return AnalyzeAccessToken(role, accessToken, "roles");
         }
 
-        internal async Task<bool> AccessTokenHasScopesAsync(string role)
+        internal async Task<bool> AccessTokenHasScopeAsync(string scope)
         {
-            return AnalyzeAccessToken(role, await AuthenticationProvider.GetAccessTokenAsync(Uri).ConfigureAwait(false), "scp");
+            return AnalyzeAccessToken(scope, await AuthenticationProvider.GetAccessTokenAsync(Uri).ConfigureAwait(false), "scp");
         }
 
         internal static bool AccessTokenHasScope(string accessToken, string scope)
