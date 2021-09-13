@@ -146,7 +146,14 @@ namespace PnP.Core.Admin.Model.SharePoint
 
         public async Task<PnPContext> GetTenantAdminCenterContextAsync()
         {
-            return await context.CloneAsync(await GetTenantAdminCenterUriAsync().ConfigureAwait(false)).ConfigureAwait(false);
+            // We've already established a connection to the SharePoint Tenant admin center site
+            var tenantAdminCenterUri = await GetTenantAdminCenterUriAsync().ConfigureAwait(false);
+            if (context.Uri == tenantAdminCenterUri)
+            {
+                return context;
+            }
+
+            return await context.CloneAsync(tenantAdminCenterUri).ConfigureAwait(false);
         }
 
         public PnPContext GetTenantAdminCenterContext()
@@ -160,6 +167,11 @@ namespace PnP.Core.Admin.Model.SharePoint
             {
                 return await tenantAdminCenterContext.Web.SiteUsers.Where(p => p.IsSiteAdmin == true).ToListAsync().ConfigureAwait(false);    
             }
+        }
+
+        public List<ISharePointUser> GetTenantAdmins()
+        {
+            return GetTenantAdminsAsync().GetAwaiter().GetResult();
         }
 
         public async Task<bool> IsCurrentUserTenantAdminAsync()
@@ -185,11 +197,6 @@ namespace PnP.Core.Admin.Model.SharePoint
         public bool IsCurrentUserTenantAdmin()
         {
             return IsCurrentUserTenantAdminAsync().GetAwaiter().GetResult();
-        }
-
-        public List<ISharePointUser> GetTenantAdmins()
-        {
-            return GetTenantAdminsAsync().GetAwaiter().GetResult();
         }
 
         public async Task<Uri> GetTenantAppCatalogUriAsync()

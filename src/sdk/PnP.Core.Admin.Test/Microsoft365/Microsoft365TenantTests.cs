@@ -4,10 +4,10 @@ using PnP.Core.Services;
 using PnP.Core.Test.Common;
 using System.Threading.Tasks;
 
-namespace PnP.Core.Admin.Test.Microsoft365
+namespace PnP.Core.Admin.Test
 {
     [TestClass]
-    public class TenantTests
+    public class Microsoft365TenantTests
     {
 
         [ClassInitialize]

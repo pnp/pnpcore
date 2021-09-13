@@ -47,6 +47,11 @@ namespace PnP.Core.Test.Common.Utilities
         internal static string ClassicSTS0TestSite { get { return "ClassicSTS0TestSite"; } }
 
         /// <summary>
+        /// Name of the tenant admin center site configuration
+        /// </summary>
+        internal static string TenantAdminCenterSite { get { return "TenantAdminCenterSite"; } }
+
+        /// <summary>
         /// Name of the default Syntex Content Center test site confguration
         /// </summary>
         internal static string SyntexContentCenterTestSite { get { return "SyntexContentCenterTestSite"; } }
@@ -318,6 +323,7 @@ namespace PnP.Core.Test.Common.Utilities
                 string targetSubSiteUrl = configuration.GetValue<string>("PnPCore:Sites:TestSubSite:SiteUrl");
                 string noGroupSiteUrl = configuration.GetValue<string>("PnPCore:Sites:NoGroupTestSite:SiteUrl");
                 string classicSTS0SiteUrl = configuration.GetValue<string>("PnPCore:Sites:ClassicSTS0TestSite:SiteUrl");
+                string tenantAdminCenterSiteUrl = configuration.GetValue<string>("PnPCore:Sites:TenantAdminCenterSite:SiteUrl");
                 string syntexContentCenterSiteUrl = configuration.GetValue<string>("PnPCore:Sites:SyntexContentCenterTestSite:SiteUrl");
                 string vivaTopicCenterSiteUrl = configuration.GetValue<string>("PnPCore:Sites:VivaTopicCenterTestSite:SiteUrl");
 
@@ -327,6 +333,7 @@ namespace PnP.Core.Test.Common.Utilities
                     targetSubSiteUrl = "https://bertonline.sharepoint.com/sites/prov-1/testsub1";
                     noGroupSiteUrl = "https://bertonline.sharepoint.com/sites/modern";
                     classicSTS0SiteUrl = "https://bertonline.sharepoint.com/sites/sts0";
+                    tenantAdminCenterSiteUrl = "https://bertonline-admin.sharepoint.com";
                     syntexContentCenterSiteUrl = "https://bertonline.sharepoint.com/sites/syntextcc";
                 }
 
@@ -358,6 +365,11 @@ namespace PnP.Core.Test.Common.Utilities
                 if (!string.IsNullOrEmpty(classicSTS0SiteUrl))
                 {
                     TestUris.Add("ClassicSTS0TestSite", new Uri(classicSTS0SiteUrl));
+                }
+
+                if (!string.IsNullOrEmpty(tenantAdminCenterSiteUrl))
+                {
+                    TestUris.Add("TenantAdminCenterSite", new Uri(tenantAdminCenterSiteUrl));
                 }
 
                 if (!string.IsNullOrEmpty(syntexContentCenterSiteUrl))

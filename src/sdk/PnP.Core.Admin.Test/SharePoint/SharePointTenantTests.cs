@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace PnP.Core.Admin.Test
 {
     [TestClass]
-    public class TenantTests
+    public class SharePointTenantTests
     {
 
         [ClassInitialize]
@@ -120,7 +120,7 @@ namespace PnP.Core.Admin.Test
         public async Task GetTenantAdminCenterContext()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TenantAdminCenterSite))
             {
                 using (var tenantContext = context.GetSharePointAdmin().GetTenantAdminCenterContext())
                 {
@@ -137,7 +137,7 @@ namespace PnP.Core.Admin.Test
         public async Task GetTenantAdmins()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TenantAdminCenterSite))
             {
                 var admins = context.GetSharePointAdmin().GetTenantAdmins();
                 Assert.IsTrue(admins != null);
@@ -149,7 +149,7 @@ namespace PnP.Core.Admin.Test
         public async Task IsCurrentUserSharePointAdmin()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TenantAdminCenterSite))
             {                
                 Assert.IsTrue(context.GetSharePointAdmin().IsCurrentUserTenantAdmin());
             }
