@@ -58,9 +58,9 @@ namespace PnP.Core.Admin.Test
 
             using (var context = await TestCommon.Instance.GetLiveContextAsync())
             {
-                Assert.IsTrue(await context.GetMicrosoft365Admin().AccessTokenHasScopeAsync("AllSites.FullControl"));
-                Assert.IsFalse(await context.GetMicrosoft365Admin().AccessTokenHasRoleAsync("Sites.FullControl.All"));
-                Assert.IsFalse(await context.GetMicrosoft365Admin().AccessTokenUsesApplicationPermissionsAsync());
+                Assert.IsTrue(context.GetMicrosoft365Admin().AccessTokenHasScope("AllSites.FullControl"));
+                Assert.IsFalse(context.GetMicrosoft365Admin().AccessTokenHasRole("Sites.FullControl.All"));
+                Assert.IsFalse(context.GetMicrosoft365Admin().AccessTokenUsesApplicationPermissions());
             }
         }
 
