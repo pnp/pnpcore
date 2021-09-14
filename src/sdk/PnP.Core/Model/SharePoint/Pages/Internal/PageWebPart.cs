@@ -55,7 +55,7 @@ namespace PnP.Core.Model.SharePoint
             {
                 throw new ArgumentNullException(nameof(component));
             }
-            Import(component as PageComponent);
+            Import(component);
         }
         #endregion
 
@@ -172,7 +172,7 @@ namespace PnP.Core.Model.SharePoint
         /// </summary>
         /// <param name="component"><see cref="PageComponent"/> to import</param>
         /// <param name="clientSideWebPartPropertiesUpdater">Function callback that allows you to manipulate the client side web part properties after import</param>
-        public void Import(PageComponent component, Func<string, string> clientSideWebPartPropertiesUpdater = null)
+        public void Import(IPageComponent component, Func<string, string> clientSideWebPartPropertiesUpdater = null)
         {
             // Sometimes the id guid is encoded with curly brackets, so let's drop those
             WebPartId = new Guid(component.Id).ToString("D");
