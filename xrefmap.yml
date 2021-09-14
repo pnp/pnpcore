@@ -8607,6 +8607,19 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.ICanvasColumn.Order
   nameWithType: ICanvasColumn.Order
+- uid: PnP.Core.Model.SharePoint.ICanvasColumn.ResetColumn(System.Int32,System.Int32)
+  name: ResetColumn(Int32, Int32)
+  href: api/PnP.Core.Model.SharePoint.ICanvasColumn.html#PnP_Core_Model_SharePoint_ICanvasColumn_ResetColumn_System_Int32_System_Int32_
+  commentId: M:PnP.Core.Model.SharePoint.ICanvasColumn.ResetColumn(System.Int32,System.Int32)
+  fullName: PnP.Core.Model.SharePoint.ICanvasColumn.ResetColumn(System.Int32, System.Int32)
+  nameWithType: ICanvasColumn.ResetColumn(Int32, Int32)
+- uid: PnP.Core.Model.SharePoint.ICanvasColumn.ResetColumn*
+  name: ResetColumn
+  href: api/PnP.Core.Model.SharePoint.ICanvasColumn.html#PnP_Core_Model_SharePoint_ICanvasColumn_ResetColumn_
+  commentId: Overload:PnP.Core.Model.SharePoint.ICanvasColumn.ResetColumn
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.ICanvasColumn.ResetColumn
+  nameWithType: ICanvasColumn.ResetColumn
 - uid: PnP.Core.Model.SharePoint.ICanvasColumn.Section
   name: Section
   href: api/PnP.Core.Model.SharePoint.ICanvasColumn.html#PnP_Core_Model_SharePoint_ICanvasColumn_Section
@@ -19384,6 +19397,19 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IPage.AddControl
   nameWithType: IPage.AddControl
+- uid: PnP.Core.Model.SharePoint.IPage.AddHeaderControl(PnP.Core.Model.SharePoint.ICanvasControl,System.Int32)
+  name: AddHeaderControl(ICanvasControl, Int32)
+  href: api/PnP.Core.Model.SharePoint.IPage.html#PnP_Core_Model_SharePoint_IPage_AddHeaderControl_PnP_Core_Model_SharePoint_ICanvasControl_System_Int32_
+  commentId: M:PnP.Core.Model.SharePoint.IPage.AddHeaderControl(PnP.Core.Model.SharePoint.ICanvasControl,System.Int32)
+  fullName: PnP.Core.Model.SharePoint.IPage.AddHeaderControl(PnP.Core.Model.SharePoint.ICanvasControl, System.Int32)
+  nameWithType: IPage.AddHeaderControl(ICanvasControl, Int32)
+- uid: PnP.Core.Model.SharePoint.IPage.AddHeaderControl*
+  name: AddHeaderControl
+  href: api/PnP.Core.Model.SharePoint.IPage.html#PnP_Core_Model_SharePoint_IPage_AddHeaderControl_
+  commentId: Overload:PnP.Core.Model.SharePoint.IPage.AddHeaderControl
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IPage.AddHeaderControl
+  nameWithType: IPage.AddHeaderControl
 - uid: PnP.Core.Model.SharePoint.IPage.AddSection(PnP.Core.Model.SharePoint.CanvasSectionTemplate,System.Single)
   name: AddSection(CanvasSectionTemplate, Single)
   href: api/PnP.Core.Model.SharePoint.IPage.html#PnP_Core_Model_SharePoint_IPage_AddSection_PnP_Core_Model_SharePoint_CanvasSectionTemplate_System_Single_
@@ -19826,6 +19852,19 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IPage.GetTemplatesFolderAsync
   nameWithType: IPage.GetTemplatesFolderAsync
+- uid: PnP.Core.Model.SharePoint.IPage.HeaderControls
+  name: HeaderControls
+  href: api/PnP.Core.Model.SharePoint.IPage.html#PnP_Core_Model_SharePoint_IPage_HeaderControls
+  commentId: P:PnP.Core.Model.SharePoint.IPage.HeaderControls
+  fullName: PnP.Core.Model.SharePoint.IPage.HeaderControls
+  nameWithType: IPage.HeaderControls
+- uid: PnP.Core.Model.SharePoint.IPage.HeaderControls*
+  name: HeaderControls
+  href: api/PnP.Core.Model.SharePoint.IPage.html#PnP_Core_Model_SharePoint_IPage_HeaderControls_
+  commentId: Overload:PnP.Core.Model.SharePoint.IPage.HeaderControls
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IPage.HeaderControls
+  nameWithType: IPage.HeaderControls
 - uid: PnP.Core.Model.SharePoint.IPage.InstantiateDefaultWebPart(PnP.Core.Model.SharePoint.DefaultWebPart)
   name: InstantiateDefaultWebPart(DefaultWebPart)
   href: api/PnP.Core.Model.SharePoint.IPage.html#PnP_Core_Model_SharePoint_IPage_InstantiateDefaultWebPart_PnP_Core_Model_SharePoint_DefaultWebPart_
@@ -19969,6 +20008,19 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IPage.PageId
   nameWithType: IPage.PageId
+- uid: PnP.Core.Model.SharePoint.IPage.PageListItem
+  name: PageListItem
+  href: api/PnP.Core.Model.SharePoint.IPage.html#PnP_Core_Model_SharePoint_IPage_PageListItem
+  commentId: P:PnP.Core.Model.SharePoint.IPage.PageListItem
+  fullName: PnP.Core.Model.SharePoint.IPage.PageListItem
+  nameWithType: IPage.PageListItem
+- uid: PnP.Core.Model.SharePoint.IPage.PageListItem*
+  name: PageListItem
+  href: api/PnP.Core.Model.SharePoint.IPage.html#PnP_Core_Model_SharePoint_IPage_PageListItem_
+  commentId: Overload:PnP.Core.Model.SharePoint.IPage.PageListItem
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IPage.PageListItem
+  nameWithType: IPage.PageListItem
 - uid: PnP.Core.Model.SharePoint.IPage.PagesLibrary
   name: PagesLibrary
   href: api/PnP.Core.Model.SharePoint.IPage.html#PnP_Core_Model_SharePoint_IPage_PagesLibrary
@@ -20685,6 +20737,19 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IPageHeader.TranslateY
   nameWithType: IPageHeader.TranslateY
+- uid: PnP.Core.Model.SharePoint.IPageHeader.Type
+  name: Type
+  href: api/PnP.Core.Model.SharePoint.IPageHeader.html#PnP_Core_Model_SharePoint_IPageHeader_Type
+  commentId: P:PnP.Core.Model.SharePoint.IPageHeader.Type
+  fullName: PnP.Core.Model.SharePoint.IPageHeader.Type
+  nameWithType: IPageHeader.Type
+- uid: PnP.Core.Model.SharePoint.IPageHeader.Type*
+  name: Type
+  href: api/PnP.Core.Model.SharePoint.IPageHeader.html#PnP_Core_Model_SharePoint_IPageHeader_Type_
+  commentId: Overload:PnP.Core.Model.SharePoint.IPageHeader.Type
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IPageHeader.Type
+  nameWithType: IPageHeader.Type
 - uid: PnP.Core.Model.SharePoint.IPageText
   name: IPageText
   href: api/PnP.Core.Model.SharePoint.IPageText.html
@@ -34113,6 +34178,64 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Services.Batch.Batch
   nameWithType: Batch.Batch
+- uid: PnP.Core.Services.Batch.Executed
+  name: Executed
+  href: api/PnP.Core.Services.Batch.html#PnP_Core_Services_Batch_Executed
+  commentId: P:PnP.Core.Services.Batch.Executed
+  fullName: PnP.Core.Services.Batch.Executed
+  nameWithType: Batch.Executed
+- uid: PnP.Core.Services.Batch.Executed*
+  name: Executed
+  href: api/PnP.Core.Services.Batch.html#PnP_Core_Services_Batch_Executed_
+  commentId: Overload:PnP.Core.Services.Batch.Executed
+  isSpec: "True"
+  fullName: PnP.Core.Services.Batch.Executed
+  nameWithType: Batch.Executed
+- uid: PnP.Core.Services.Batch.Requests
+  name: Requests
+  href: api/PnP.Core.Services.Batch.html#PnP_Core_Services_Batch_Requests
+  commentId: P:PnP.Core.Services.Batch.Requests
+  fullName: PnP.Core.Services.Batch.Requests
+  nameWithType: Batch.Requests
+- uid: PnP.Core.Services.Batch.Requests*
+  name: Requests
+  href: api/PnP.Core.Services.Batch.html#PnP_Core_Services_Batch_Requests_
+  commentId: Overload:PnP.Core.Services.Batch.Requests
+  isSpec: "True"
+  fullName: PnP.Core.Services.Batch.Requests
+  nameWithType: Batch.Requests
+- uid: PnP.Core.Services.BatchRequest
+  name: BatchRequest
+  href: api/PnP.Core.Services.BatchRequest.html
+  commentId: T:PnP.Core.Services.BatchRequest
+  fullName: PnP.Core.Services.BatchRequest
+  nameWithType: BatchRequest
+- uid: PnP.Core.Services.BatchRequest.ResponseHttpStatusCode
+  name: ResponseHttpStatusCode
+  href: api/PnP.Core.Services.BatchRequest.html#PnP_Core_Services_BatchRequest_ResponseHttpStatusCode
+  commentId: P:PnP.Core.Services.BatchRequest.ResponseHttpStatusCode
+  fullName: PnP.Core.Services.BatchRequest.ResponseHttpStatusCode
+  nameWithType: BatchRequest.ResponseHttpStatusCode
+- uid: PnP.Core.Services.BatchRequest.ResponseHttpStatusCode*
+  name: ResponseHttpStatusCode
+  href: api/PnP.Core.Services.BatchRequest.html#PnP_Core_Services_BatchRequest_ResponseHttpStatusCode_
+  commentId: Overload:PnP.Core.Services.BatchRequest.ResponseHttpStatusCode
+  isSpec: "True"
+  fullName: PnP.Core.Services.BatchRequest.ResponseHttpStatusCode
+  nameWithType: BatchRequest.ResponseHttpStatusCode
+- uid: PnP.Core.Services.BatchRequest.ResponseJson
+  name: ResponseJson
+  href: api/PnP.Core.Services.BatchRequest.html#PnP_Core_Services_BatchRequest_ResponseJson
+  commentId: P:PnP.Core.Services.BatchRequest.ResponseJson
+  fullName: PnP.Core.Services.BatchRequest.ResponseJson
+  nameWithType: BatchRequest.ResponseJson
+- uid: PnP.Core.Services.BatchRequest.ResponseJson*
+  name: ResponseJson
+  href: api/PnP.Core.Services.BatchRequest.html#PnP_Core_Services_BatchRequest_ResponseJson_
+  commentId: Overload:PnP.Core.Services.BatchRequest.ResponseJson
+  isSpec: "True"
+  fullName: PnP.Core.Services.BatchRequest.ResponseJson
+  nameWithType: BatchRequest.ResponseJson
 - uid: PnP.Core.Services.BatchResult
   name: BatchResult
   href: api/PnP.Core.Services.BatchResult.html
@@ -34700,6 +34823,51 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Services.IAuthenticationProvider.GetAccessTokenAsync
   nameWithType: IAuthenticationProvider.GetAccessTokenAsync
+- uid: PnP.Core.Services.ILegacyAuthenticationProvider
+  name: ILegacyAuthenticationProvider
+  href: api/PnP.Core.Services.ILegacyAuthenticationProvider.html
+  commentId: T:PnP.Core.Services.ILegacyAuthenticationProvider
+  fullName: PnP.Core.Services.ILegacyAuthenticationProvider
+  nameWithType: ILegacyAuthenticationProvider
+- uid: PnP.Core.Services.ILegacyAuthenticationProvider.GetCookieHeader(Uri)
+  name: GetCookieHeader(Uri)
+  href: api/PnP.Core.Services.ILegacyAuthenticationProvider.html#PnP_Core_Services_ILegacyAuthenticationProvider_GetCookieHeader_Uri_
+  commentId: M:PnP.Core.Services.ILegacyAuthenticationProvider.GetCookieHeader(Uri)
+  fullName: PnP.Core.Services.ILegacyAuthenticationProvider.GetCookieHeader(Uri)
+  nameWithType: ILegacyAuthenticationProvider.GetCookieHeader(Uri)
+- uid: PnP.Core.Services.ILegacyAuthenticationProvider.GetCookieHeader*
+  name: GetCookieHeader
+  href: api/PnP.Core.Services.ILegacyAuthenticationProvider.html#PnP_Core_Services_ILegacyAuthenticationProvider_GetCookieHeader_
+  commentId: Overload:PnP.Core.Services.ILegacyAuthenticationProvider.GetCookieHeader
+  isSpec: "True"
+  fullName: PnP.Core.Services.ILegacyAuthenticationProvider.GetCookieHeader
+  nameWithType: ILegacyAuthenticationProvider.GetCookieHeader
+- uid: PnP.Core.Services.ILegacyAuthenticationProvider.GetRequestDigest
+  name: GetRequestDigest()
+  href: api/PnP.Core.Services.ILegacyAuthenticationProvider.html#PnP_Core_Services_ILegacyAuthenticationProvider_GetRequestDigest
+  commentId: M:PnP.Core.Services.ILegacyAuthenticationProvider.GetRequestDigest
+  fullName: PnP.Core.Services.ILegacyAuthenticationProvider.GetRequestDigest()
+  nameWithType: ILegacyAuthenticationProvider.GetRequestDigest()
+- uid: PnP.Core.Services.ILegacyAuthenticationProvider.GetRequestDigest*
+  name: GetRequestDigest
+  href: api/PnP.Core.Services.ILegacyAuthenticationProvider.html#PnP_Core_Services_ILegacyAuthenticationProvider_GetRequestDigest_
+  commentId: Overload:PnP.Core.Services.ILegacyAuthenticationProvider.GetRequestDigest
+  isSpec: "True"
+  fullName: PnP.Core.Services.ILegacyAuthenticationProvider.GetRequestDigest
+  nameWithType: ILegacyAuthenticationProvider.GetRequestDigest
+- uid: PnP.Core.Services.ILegacyAuthenticationProvider.RequiresCookieAuthentication
+  name: RequiresCookieAuthentication
+  href: api/PnP.Core.Services.ILegacyAuthenticationProvider.html#PnP_Core_Services_ILegacyAuthenticationProvider_RequiresCookieAuthentication
+  commentId: P:PnP.Core.Services.ILegacyAuthenticationProvider.RequiresCookieAuthentication
+  fullName: PnP.Core.Services.ILegacyAuthenticationProvider.RequiresCookieAuthentication
+  nameWithType: ILegacyAuthenticationProvider.RequiresCookieAuthentication
+- uid: PnP.Core.Services.ILegacyAuthenticationProvider.RequiresCookieAuthentication*
+  name: RequiresCookieAuthentication
+  href: api/PnP.Core.Services.ILegacyAuthenticationProvider.html#PnP_Core_Services_ILegacyAuthenticationProvider_RequiresCookieAuthentication_
+  commentId: Overload:PnP.Core.Services.ILegacyAuthenticationProvider.RequiresCookieAuthentication
+  isSpec: "True"
+  fullName: PnP.Core.Services.ILegacyAuthenticationProvider.RequiresCookieAuthentication
+  nameWithType: ILegacyAuthenticationProvider.RequiresCookieAuthentication
 - uid: PnP.Core.Services.IPnPContextFactory
   name: IPnPContextFactory
   href: api/PnP.Core.Services.IPnPContextFactory.html
