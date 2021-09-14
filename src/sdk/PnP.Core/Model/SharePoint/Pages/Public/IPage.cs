@@ -42,6 +42,11 @@ namespace PnP.Core.Model.SharePoint
         List<ICanvasControl> Controls { get; }
 
         /// <summary>
+        /// List of controls on this page's header
+        /// </summary>
+        List<ICanvasControl> HeaderControls { get; }
+
+        /// <summary>
         /// Returns the page header for this page
         /// </summary>
         IPageHeader PageHeader { get; }
@@ -105,6 +110,11 @@ namespace PnP.Core.Model.SharePoint
         /// Pages library
         /// </summary>
         IList PagesLibrary { get; }
+
+        /// <summary>
+        /// ListItem linked to this page
+        /// </summary>
+        public IListItem PageListItem { get; }
 
         /// <summary>
         /// ID value of the page (only available when the page was saved)
@@ -229,6 +239,13 @@ namespace PnP.Core.Model.SharePoint
         /// <param name="translateX">X focal point for image</param>
         /// <param name="translateY">Y focal point for image</param>
         public void SetCustomPageHeader(string serverRelativeImageUrl, double? translateX = null, double? translateY = null);
+
+        /// <summary>
+        /// Adds a new header control to your client side page with a given order. Used for topic page creation
+        /// </summary>
+        /// <param name="control"><see cref="ICanvasControl"/> to add</param>
+        /// <param name="order">Order of the control in the given section</param>
+        public void AddHeaderControl(ICanvasControl control, int order);
 
         /// <summary>
         /// Creates a new text part which can be configured and added to the page

@@ -21,7 +21,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PnP.Core.Admin", "PnP.Core.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PnP.Core.Admin.Test", "PnP.Core.Admin.Test\PnP.Core.Admin.Test.csproj", "{8806BABA-C6CC-495C-AA33-B9A56E213572}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PnP.Core.Test.Common", "PnP.Core.Test.Common\PnP.Core.Test.Common.csproj", "{A973BF05-1883-49AE-BA39-8CB837C5476F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PnP.Core.Test.Common", "PnP.Core.Test.Common\PnP.Core.Test.Common.csproj", "{A973BF05-1883-49AE-BA39-8CB837C5476F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

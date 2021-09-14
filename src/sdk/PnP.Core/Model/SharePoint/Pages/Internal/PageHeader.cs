@@ -28,7 +28,7 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// Returns the type of header
         /// </summary>
-        internal PageHeaderType Type { get; private set; }
+        public PageHeaderType Type { get; private set; }
 
         /// <summary>
         /// Server relative link to page header image, set to null for default header image.

@@ -72,6 +72,10 @@ namespace PnP.Core.Model.SharePoint
             {
                 return dataVersion;
             }
+            set
+            {
+                dataVersion = value;
+            }
         }
 
         /// <summary>
@@ -126,6 +130,10 @@ namespace PnP.Core.Model.SharePoint
             get
             {
                 return instanceId;
+            }
+            set
+            {
+                instanceId = value;
             }
         }
 

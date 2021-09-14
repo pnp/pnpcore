@@ -41,5 +41,12 @@ namespace PnP.Core.Model.SharePoint
         /// Color emphasis of the column (used for the vertical section column) 
         /// </summary>
         int? VerticalSectionEmphasis { get; }
+
+        /// <summary>
+        /// Resets the column, used in scenarios where a section is changed from type (e.g. from 3 column to 2 column)
+        /// </summary>
+        /// <param name="order">Column order to set</param>
+        /// <param name="columnFactor">Column factor to set</param>
+        void ResetColumn(int order, int columnFactor);
     }
 }

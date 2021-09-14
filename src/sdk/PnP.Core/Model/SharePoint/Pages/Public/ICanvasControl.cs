@@ -20,7 +20,7 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// The internal storage version used for this control
         /// </summary>
-        string DataVersion { get; }
+        string DataVersion { get; set; }
 
         /// <summary>
         /// The internal canvas storage version used
@@ -45,7 +45,7 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// Instance ID of the control
         /// </summary>
-        Guid InstanceId { get; }
+        Guid InstanceId { get; set; }
 
         /// <summary>
         /// Order of the control in the control collection

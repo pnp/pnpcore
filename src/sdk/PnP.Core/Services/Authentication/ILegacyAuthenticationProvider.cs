@@ -3,9 +3,10 @@
 namespace PnP.Core.Services
 {
     /// <summary>
-    /// Defines the internal interface that a legacy Authentication Provider must implement
+    /// Defines the interface that a legacy Authentication Provider must implement.
+    /// Note: this is only meant to be used by PnP Framework, no 3rd party support will be provided.
     /// </summary>
-    internal interface ILegacyAuthenticationProvider : IAuthenticationProvider
+    public interface ILegacyAuthenticationProvider : IAuthenticationProvider
     {
         /// <summary>
         /// Provides the value of the Cookie header for legacy cookie-based authentication

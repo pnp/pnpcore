@@ -6,6 +6,8 @@
 		<IsPackable>false</IsPackable>
 
 		<Configurations>Debug;Release</Configurations>
+		<SignAssembly>true</SignAssembly>
+		<AssemblyOriginatorKeyFile>..\pnp.core.snk</AssemblyOriginatorKeyFile>
 	</PropertyGroup>
 
 	<ItemGroup>

@@ -85,7 +85,7 @@ namespace PnP.Core.Model.SharePoint
 
         public List<ICanvasControl> Controls { get; } = new List<ICanvasControl>(5);
 
-        internal List<ICanvasControl> HeaderControls { get; } = new List<ICanvasControl>();
+        public List<ICanvasControl> HeaderControls { get; } = new List<ICanvasControl>();
 
         /// <summary>
         /// Layout type of the client side page
@@ -256,7 +256,7 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// ListItem linked to this page
         /// </summary>
-        internal IListItem PageListItem { get; set; }
+        public IListItem PageListItem { get; set; }
 
         #endregion
 
@@ -835,7 +835,7 @@ namespace PnP.Core.Model.SharePoint
         /// </summary>
         /// <param name="control"><see cref="ICanvasControl"/> to add</param>
         /// <param name="order">Order of the control in the given section</param>
-        internal void AddHeaderControl(ICanvasControl control, int order)
+        public void AddHeaderControl(ICanvasControl control, int order)
         {
             if (control == null)
             {

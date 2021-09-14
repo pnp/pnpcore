@@ -34,7 +34,7 @@ namespace PnP.Core.Services
         /// <summary>
         /// List with requests 
         /// </summary>
-        internal SortedList<int, BatchRequest> Requests { get; private set; } = new SortedList<int, BatchRequest>();
+        public SortedList<int, BatchRequest> Requests { get; internal set; } = new SortedList<int, BatchRequest>();
 
         /// <summary>
         /// List with batch results, will be populated when <see cref="ThrowOnError"/> is set
@@ -50,7 +50,7 @@ namespace PnP.Core.Services
         /// <summary>
         /// Was this <see cref="Batch"/> executed?
         /// </summary>
-        internal bool Executed { get; set; }
+        public bool Executed { get; internal set; }
 
         /// <summary>
         /// Only use Graph batching when all requests in the batch are targeting Graph
