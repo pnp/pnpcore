@@ -18,6 +18,8 @@ namespace PnP.Core.Services
     /// </summary>
     internal static class JsonMappingHelper
     {
+        internal static readonly Regex arrayMatchingRegex = new Regex(@"\[(?<index>[0-9]+)\]", RegexOptions.Compiled);
+
         /// <summary>
         /// Maps a json string to the provided domain model object instance
         /// </summary>
@@ -1122,7 +1124,7 @@ namespace PnP.Core.Services
             foreach (var part in jsonPathTree)
             {
                 // Won't support multi-dimensions arrays
-                Match indexMatch = new Regex(@"\[(?<index>[0-9]+)\]").Match(part);
+                Match indexMatch = arrayMatchingRegex.Match(part);
                 if (indexMatch.Success)
                 {
                     if (int.TryParse(indexMatch.Groups["index"].Value, out int index))
