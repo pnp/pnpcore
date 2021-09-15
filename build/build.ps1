@@ -12,10 +12,10 @@ $version = Get-Content ./build/version.debug -Raw
 $version = $version.Replace("{incremental}", $versionIncrement)
 
 Write-Host "Building PnP.Core versions $version"
-dotnet build ./src/sdk/PnP.Core/PnP.Core.csproj --no-incremental /p:Version=$version
+dotnet build ./src/sdk/PnP.Core/PnP.Core.csproj --configuration Release --no-incremental /p:Version=$version
 
 Write-Host "Building PnP.Core.Auth versions $version"
-dotnet build ./src/sdk/PnP.Core.Auth/PnP.Core.Auth.csproj --no-incremental /p:Version=$version
+dotnet build ./src/sdk/PnP.Core.Auth/PnP.Core.Auth.csproj --configuration Release --no-incremental /p:Version=$version
 
 Write-Host "Packinging PnP.Core versions $version"
 dotnet pack ./src/sdk/PnP.Core/PnP.Core.csproj --no-build /p:PackageVersion=$version
