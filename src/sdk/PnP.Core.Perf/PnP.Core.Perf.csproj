@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net5.0</TargetFramework>
+	<SignAssembly>true</SignAssembly>
+	<AssemblyOriginatorKeyFile>..\pnp.core.snk</AssemblyOriginatorKeyFile>  
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="BenchmarkDotNet" Version="0.13.1" />
+    <PackageReference Include="System.Memory" Version="4.5.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\PnP.Core\PnP.Core.csproj" />
+  </ItemGroup>
+
+</Project>
