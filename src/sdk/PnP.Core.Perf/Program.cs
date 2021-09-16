@@ -14,7 +14,8 @@ namespace PnP.Core.Perf
             //JsonMapping jm = new JsonMapping();
             //Console.WriteLine(jm.CamelCase());
             //Console.WriteLine(jm.CamelCaseSpan());
-            
+            //ReadOnlySpan<char> b = new ReadOnlySpan<char>();
+            //b.IndexOf
 
 #else
             var summary = BenchmarkRunner.Run<JsonMapping>();
