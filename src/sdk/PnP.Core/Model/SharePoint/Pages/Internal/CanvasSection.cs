@@ -157,7 +157,7 @@ namespace PnP.Core.Model.SharePoint
         {
             get
             {
-                return Columns.Where(p => p.LayoutIndex == 2).FirstOrDefault();
+                return Columns.FirstOrDefault(p => p.LayoutIndex == 2);
             }
         }
 

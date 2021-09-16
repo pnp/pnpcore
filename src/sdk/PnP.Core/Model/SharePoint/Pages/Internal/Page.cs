@@ -1149,7 +1149,7 @@ namespace PnP.Core.Model.SharePoint
                         CanvasSection currentSection = null;
                         if (sectionData.Position != null)
                         {
-                            currentSection = sections.Where(p => p.Order == sectionData.Position.ZoneIndex).FirstOrDefault();
+                            currentSection = sections.FirstOrDefault(p => p.Order == sectionData.Position.ZoneIndex);
                         }
 
                         if (currentSection == null)
@@ -1157,7 +1157,7 @@ namespace PnP.Core.Model.SharePoint
                             if (sectionData.Position != null)
                             {
                                 AddSection(new CanvasSection(this) { ZoneEmphasis = sectionData.Emphasis != null ? sectionData.Emphasis.ZoneEmphasis : 0 }, sectionData.Position.ZoneIndex);
-                                currentSection = sections.Where(p => p.Order == sectionData.Position.ZoneIndex).First();
+                                currentSection = sections.First(p => p.Order == sectionData.Position.ZoneIndex);
                             }
                         }
 
@@ -1166,11 +1166,11 @@ namespace PnP.Core.Model.SharePoint
                         {
                             if (sectionData.Position.LayoutIndex.HasValue)
                             {
-                                currentColumn = currentSection.Columns.Where(p => p.Order == sectionData.Position.SectionIndex && p.LayoutIndex == sectionData.Position.LayoutIndex.Value).FirstOrDefault();
+                                currentColumn = currentSection.Columns.FirstOrDefault(p => p.Order == sectionData.Position.SectionIndex && p.LayoutIndex == sectionData.Position.LayoutIndex.Value);
                             }
                             else
                             {
-                                currentColumn = currentSection.Columns.Where(p => p.Order == sectionData.Position.SectionIndex).FirstOrDefault();
+                                currentColumn = currentSection.Columns.FirstOrDefault(p => p.Order == sectionData.Position.SectionIndex);
                             }
                         }
 
@@ -1232,17 +1232,17 @@ namespace PnP.Core.Model.SharePoint
             }
 
             // Perform vertical section column matchup if that did not happen yet
-            var verticalSectionColumn = sections.Where(p => p.VerticalSectionColumn != null).FirstOrDefault();
+            var verticalSectionColumn = sections.FirstOrDefault(p => p.VerticalSectionColumn != null);
             // Only continue if the vertical section column we found was "standalone" and not yet matched with other columns
             if (verticalSectionColumn != null && verticalSectionColumn.Columns.Count == 1)
             {
                 // find another, non vertical section, column with the same zoneindex
-                var matchedUpSection = sections.Where(p => p.VerticalSectionColumn == null && p.Order == verticalSectionColumn.Order).FirstOrDefault();
+                var matchedUpSection = sections.FirstOrDefault(p => p.VerticalSectionColumn == null && p.Order == verticalSectionColumn.Order);
                 if (matchedUpSection == null)
                 {
                     // matchup did not yet happen, so let's handle it now
                     // Get the top section
-                    var topSection = sections.Where(p => p.VerticalSectionColumn == null).OrderBy(p => p.Order).FirstOrDefault();
+                    var topSection = sections.OrderBy(p => p.Order).FirstOrDefault(p => p.VerticalSectionColumn == null);
                     if (topSection != null)
                     {
                         // Add the "standalone" vertical section column to this section
@@ -1406,7 +1406,7 @@ namespace PnP.Core.Model.SharePoint
             }
             else
             {
-                var currentSection = sections.Where(p => p.Order == position.ZoneIndex).FirstOrDefault();
+                var currentSection = sections.FirstOrDefault(p => p.Order == position.ZoneIndex);
                 if (currentSection == null)
                 {
                     AddSection(new CanvasSection(this) { ZoneEmphasis = emphasis != null ? emphasis.ZoneEmphasis : 0 }, position.ZoneIndex);
@@ -1415,12 +1415,12 @@ namespace PnP.Core.Model.SharePoint
 
                 ApplyCollapsibleSectionSettings(zoneGroupMetadata, currentSection);
 
-                var currentColumn = currentSection.Columns.Where(p => p.Order == position.SectionIndex).FirstOrDefault();
+                var currentColumn = currentSection.Columns.FirstOrDefault(p => p.Order == position.SectionIndex);
 
                 // if layout index was set this means that we possibly have a vertical section column
                 if (position.LayoutIndex.HasValue)
                 {
-                    currentColumn = currentSection.Columns.Where(p => p.Order == position.SectionIndex && p.LayoutIndex == position.LayoutIndex.Value).FirstOrDefault();
+                    currentColumn = currentSection.Columns.FirstOrDefault(p => p.Order == position.SectionIndex && p.LayoutIndex == position.LayoutIndex.Value);
                 }
 
                 if (currentColumn == null)
