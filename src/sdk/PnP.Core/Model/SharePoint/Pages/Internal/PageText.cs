@@ -165,7 +165,7 @@ namespace PnP.Core.Model.SharePoint
         {
             base.FromHtml(element);
 
-            var div = element.GetElementsByTagName("div").Where(a => a.HasAttribute(TextRteAttribute)).FirstOrDefault();
+            var div = element.GetElementsByTagName("div").FirstOrDefault(a => a.HasAttribute(TextRteAttribute));
 
             if (div != null)
             {

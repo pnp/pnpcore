@@ -449,7 +449,7 @@ namespace PnP.Core.Model.SharePoint
             SpControlData = JsonSerializer.Deserialize<WebPartControlData>(element.GetAttribute(ControlDataAttribute), new JsonSerializerOptions() { IgnoreNullValues = true });
             controlType = SpControlData.ControlType;
 
-            var wpDiv = element.GetElementsByTagName("div").Where(a => a.HasAttribute(WebPartDataAttribute)).FirstOrDefault();
+            var wpDiv = element.GetElementsByTagName("div").FirstOrDefault(a => a.HasAttribute(WebPartDataAttribute));
 
             string decodedWebPart;
             // Some components are in the page header and need to be handled as a control instead of a webpart
@@ -525,7 +525,7 @@ namespace PnP.Core.Model.SharePoint
 
             if (wpDiv != null)
             {
-                var wpHtmlProperties = wpDiv.GetElementsByTagName("div").Where(a => a.HasAttribute(WebPartHtmlPropertiesAttribute)).FirstOrDefault();
+                var wpHtmlProperties = wpDiv.GetElementsByTagName("div").FirstOrDefault(a => a.HasAttribute(WebPartHtmlPropertiesAttribute));
                 HtmlPropertiesData = wpHtmlProperties.InnerHtml;
                 HtmlProperties = wpHtmlProperties.GetAttribute(WebPartHtmlPropertiesAttribute);
             }

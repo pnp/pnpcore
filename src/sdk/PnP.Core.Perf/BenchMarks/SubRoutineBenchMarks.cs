@@ -1,20 +1,23 @@
 ﻿using BenchmarkDotNet.Attributes;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PnP.Core.Perf.BenchMarks
 {
     /// <summary>
-    /// Resoureces:
+    /// Note: uses span/readonlyspan extensions coming from here
     /// https://github.com/ServiceStack/ServiceStack.Text/blob/master/src/ServiceStack.Text/StringSpanExtensions.cs
     /// </summary>
     [MemoryDiagnoser]
-    public class JsonMapping
+    public class SubRoutineBenchMarks
     {
-        #region works
+        
+
+        public SubRoutineBenchMarks()
+        {
+            
+        }
+
+
+        #region Test done, clear improvements and candidates to implement in PnP.Core
         /*
         |        Method |     Mean |    Error |   StdDev | Ratio |  Gen 0 | Allocated |
         |-------------- |---------:|---------:|---------:|------:|-------:|----------:|
@@ -76,6 +79,31 @@ namespace PnP.Core.Perf.BenchMarks
         //    return Guid.Empty;
         //}
 
+        #endregion
+
+        #region Nah, does not seem to help
+        /*
+        Add: 
+        private readonly Func<object> _expression;
+        _expression = Expression.Lambda<Func<object>>(Expression.New(typeof(PnP.Core.Model.SharePoint.Web))).Compile(); to constuctor
+
+        |              Method |      Mean |    Error |   StdDev | Ratio |  Gen 0 |  Gen 1 | Allocated |
+        |-------------------- |----------:|---------:|---------:|------:|-------:|-------:|----------:|
+        | ReflectionActivator | 117.58 ns | 0.842 ns | 0.787 ns |  1.00 | 0.0994 |      - |     624 B |
+        |  CompiledExpression |  94.98 ns | 1.216 ns | 1.137 ns |  0.81 | 0.0994 | 0.0001 |     624 B |
+        
+        */
+        //[Benchmark(Baseline = true)]
+        //public object ReflectionActivator()
+        //{
+        //    return Activator.CreateInstance(typeof(PnP.Core.Model.SharePoint.Web));
+        //}
+
+        //[Benchmark]
+        //public object CompiledExpression()
+        //{
+        //    return _expression();
+        //}
         #endregion
 
     }

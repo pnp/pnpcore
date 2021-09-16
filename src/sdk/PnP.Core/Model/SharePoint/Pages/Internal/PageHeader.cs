@@ -181,7 +181,7 @@ namespace PnP.Core.Model.SharePoint
             HtmlParser parser = new HtmlParser(new HtmlParserOptions() { IsEmbedded = true });
             using (var document = parser.ParseDocument(pageHeaderHtml))
             {
-                var pageHeaderControl = document.All.Where(m => m.HasAttribute(CanvasControl.ControlDataAttribute)).FirstOrDefault();
+                var pageHeaderControl = document.All.FirstOrDefault(m => m.HasAttribute(CanvasControl.ControlDataAttribute));
                 if (pageHeaderControl != null)
                 {
                     string pageHeaderData = pageHeaderControl.GetAttribute(CanvasControl.ControlDataAttribute);
