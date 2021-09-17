@@ -1,4 +1,6 @@
 ﻿using BenchmarkDotNet.Attributes;
+using PnP.Core.Model;
+using PnP.Core.Model.SharePoint;
 
 namespace PnP.Core.Perf.BenchMarks
 {
@@ -17,7 +19,37 @@ namespace PnP.Core.Perf.BenchMarks
         }
 
 
+
         #region Test done, clear improvements and candidates to implement in PnP.Core
+
+        /*
+         
+        |                  Method |        Mean |     Error |    StdDev | Ratio |  Gen 0 | Allocated |
+        |------------------------ |------------:|----------:|----------:|------:|-------:|----------:|
+        | BaseImplementsInterface | 40,035.4 ns | 314.50 ns | 294.19 ns | 1.000 | 0.1221 |     913 B |
+        |  NewImplementsInterface |    173.1 ns |   1.01 ns |   0.95 ns | 0.004 | 0.0598 |     376 B |
+
+        */
+        //[Benchmark(Baseline = true)]
+        //public void OldImplementsInterface()
+        //{
+        //    typeof(IWeb).BaseImplementsInterface(typeof(IQueryableDataModel));
+        //    typeof(IWeb).BaseImplementsInterface(typeof(IDataModelGet<IWeb>));
+        //    typeof(IDataModel<IWeb>).BaseImplementsInterface(typeof(IDataModelWithContext));
+        //    typeof(IDataModel<>).BaseImplementsInterface(typeof(IDataModelWithContext));
+        //    typeof(Web).BaseImplementsInterface(typeof(IDataModel<>));
+        //}
+
+        //[Benchmark]
+        //public void NewImplementsInterface()
+        //{
+        //    typeof(IWeb).NewImplementsInterface(typeof(IQueryableDataModel));
+        //    typeof(IWeb).NewImplementsInterface(typeof(IDataModelGet<IWeb>));
+        //    typeof(IDataModel<IWeb>).NewImplementsInterface(typeof(IDataModelWithContext));
+        //    typeof(IDataModel<>).NewImplementsInterface(typeof(IDataModelWithContext));
+        //    typeof(Web).NewImplementsInterface(typeof(IDataModel<>));
+        //}
+
         /*
         |        Method |     Mean |    Error |   StdDev | Ratio |  Gen 0 | Allocated |
         |-------------- |---------:|---------:|---------:|------:|-------:|----------:|
