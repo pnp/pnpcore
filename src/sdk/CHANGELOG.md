@@ -25,7 +25,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Implemented generic handling for non-English timezone strings, initial fix for #543 [jansenbe - Bert Jansen]
 - PnP Core SDK internals are not exposed anymore to libraries outside of the PnP Core SDK solution [jansenbe - Bert Jansen]
 - PnP Core SDK assemblies are now strong named #542 [jansenbe - Bert Jansen]
-- Rewritten the ImplementsInterface -> massive performance improvement! Running all offline PnP.Core tests is twice as fast... [jansenbe - Bert Jansen] 
+- PERF: ImplementsInterface -> massive performance improvement! Running all offline PnP.Core tests is twice as fast... [jansenbe - Bert Jansen] 
+- PERF: AsExpando removed LINQ dependencies to speed up and lower memory requirments [jansenbe - Bert Jansen]
 
 ## [1.3.0]
 

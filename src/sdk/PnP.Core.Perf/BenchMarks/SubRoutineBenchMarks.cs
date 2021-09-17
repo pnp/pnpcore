@@ -1,6 +1,7 @@
 ﻿using BenchmarkDotNet.Attributes;
 using PnP.Core.Model;
 using PnP.Core.Model.SharePoint;
+using System.Dynamic;
 
 namespace PnP.Core.Perf.BenchMarks
 {
@@ -10,17 +11,71 @@ namespace PnP.Core.Perf.BenchMarks
     /// </summary>
     [MemoryDiagnoser]
     public class SubRoutineBenchMarks
-    {
-        
-
+    {        
         public SubRoutineBenchMarks()
-        {
-            
+        {            
         }
 
 
-
         #region Test done, clear improvements and candidates to implement in PnP.Core
+
+        /*
+        |        Method |     Mean |   Error |  StdDev | Ratio |  Gen 0 | Allocated |
+        |-------------- |---------:|--------:|--------:|------:|-------:|----------:|
+        | BaseAsExpando | 463.1 ns | 4.36 ns | 4.08 ns |  1.00 | 0.1783 |   1,120 B |
+        |  NewAsExpando | 252.3 ns | 1.44 ns | 1.20 ns |  0.54 | 0.0710 |     448 B |
+        */
+
+        // Add variables
+        //private RenderListDataOptions renderOptions;
+        //private object renderOptionsBody;
+        //private string[] ignoreProperties = new string[] { "RenderOptions" };
+
+        // Add in constructor
+        //renderOptions = new RenderListDataOptions()
+        //{
+        //    AddRequiredFields = false,
+        //        ViewXml = "<View><ViewFields><FieldRef Name='Title' /></ViewFields><RowLimit>5</RowLimit></View>",
+        //        FolderServerRelativeUrl = null,
+        //        RenderOptions = RenderListDataOptionsFlags.ListData
+        //    };
+
+        //renderOptionsBody = new
+        //    {
+        //        parameters = new
+        //        {
+        //            __metadata = new { type = "SP.RenderListDataParameters" },
+        //            renderOptions.AddRequiredFields,
+        //            renderOptions.AllowMultipleValueFilterForTaxonomyFields,
+        //            renderOptions.AudienceTarget,
+        //            renderOptions.DatesInUtc,
+        //            renderOptions.DeferredRender,
+        //            renderOptions.ExpandGroups,
+        //            renderOptions.FirstGroupOnly,
+        //            renderOptions.FolderServerRelativeUrl,
+        //            renderOptions.ImageFieldsToTryRewriteToCdnUrls,
+        //            renderOptions.MergeDefaultView,
+        //            renderOptions.OriginalDate,
+        //            renderOptions.OverrideViewXml,
+        //            renderOptions.Paging,
+        //            renderOptions.RenderOptions,
+        //            renderOptions.ReplaceGroup,
+        //            renderOptions.ViewXml
+        //    }
+        // };
+
+
+        //[Benchmark(Baseline = true)]
+        //public ExpandoObject BaseAsExpando()
+        //{
+        //    return renderOptionsBody.BaseAsExpando();
+        //}
+
+        //[Benchmark]
+        //public ExpandoObject NewAsExpando()
+        //{
+        //    return renderOptionsBody.NewAsExpando();
+        //}
 
         /*
          
