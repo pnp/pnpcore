@@ -1457,13 +1457,16 @@ namespace PnP.Core.Model.SharePoint
                 currentSection.DisplayName = zoneGroupMetadata.DisplayName;
                 currentSection.IsExpanded = zoneGroupMetadata.IsExpanded;
                 currentSection.ShowDividerLine = zoneGroupMetadata.ShowDividerLine;
-                if (zoneGroupMetadata.IconAlignment.Equals("left", StringComparison.InvariantCultureIgnoreCase))
+                if (zoneGroupMetadata.IconAlignment != null)
                 {
-                    currentSection.IconAlignment = IconAlignment.Left;
-                }
-                else if (zoneGroupMetadata.IconAlignment.Equals("right", StringComparison.InvariantCultureIgnoreCase))
-                {
-                    currentSection.IconAlignment = IconAlignment.Right;
+                    if (zoneGroupMetadata.IconAlignment.Equals("left", StringComparison.InvariantCultureIgnoreCase))
+                    {
+                        currentSection.IconAlignment = IconAlignment.Left;
+                    }
+                    else if (zoneGroupMetadata.IconAlignment.Equals("right", StringComparison.InvariantCultureIgnoreCase))
+                    {
+                        currentSection.IconAlignment = IconAlignment.Right;
+                    }
                 }
             }
         }
