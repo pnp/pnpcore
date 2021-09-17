@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.ObjectPool;
+using Microsoft.SharePoint.Client;
 using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Table;
 using PnP.Core.Auth;
@@ -56,10 +57,32 @@ namespace PnP.Core.Transformation.Poc
                 new X509CertificateAuthenticationProvider(
                     p.GetRequiredService<ILogger<OAuthAuthenticationProvider>>()));
 
-            // Register the PnP Transformation Framework services for a SharePoint to SharePoint transformation
+            // Register the PnP Transformation Framework services
+            // for a SharePoint to SharePoint transformation
             builder.Services.AddPnPSharePointTransformation()
                 .WithTransformationStateManager<AzureTableTransformationStateManager>()
                 .WithTransformationExecutor<AzureQueueTransformationExecutor>();
+
+            // Register the CSOM ClientContext for the data source
+            builder.Services.AddTransient(p => {
+
+                var clientContext = new ClientContext(Environment.GetEnvironmentVariable("SourceSite"));
+                clientContext.ExecutingWebRequest += (sender, args) =>
+                {
+                    var resource = $"https://{new Uri(Environment.GetEnvironmentVariable("SourceSite")).Authority}";
+
+                    var clientId = Environment.GetEnvironmentVariable("PnPCore:Credentials:Configurations:CredentialManager:ClientId");
+                    var tenantId = Environment.GetEnvironmentVariable("PnPCore:Credentials:Configurations:CredentialManager:TenantId");
+                    var credentialManager = Environment.GetEnvironmentVariable("PnPCore:Credentials:Configurations:CredentialManager:CredentialManager:CredentialManagerName");
+
+                    var cmap = new CredentialManagerAuthenticationProvider(clientId, tenantId, credentialManager);
+                    if (cmap != null)
+                    {
+                        args.WebRequestExecutor.RequestHeaders["Authorization"] = "Bearer " + cmap.GetAccessTokenAsync(new Uri(resource)).GetAwaiter().GetResult();
+                    }
+                };
+                return clientContext;
+            });
         }
 
 

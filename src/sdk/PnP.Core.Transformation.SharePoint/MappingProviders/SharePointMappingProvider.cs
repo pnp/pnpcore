@@ -29,6 +29,7 @@ using PnP.Core.Transformation.SharePoint.Model;
 using PnP.Core.Transformation.SharePoint.Services;
 using PnP.Core.Transformation.SharePoint.Services.Builder.Configuration;
 using PnP.Core.Transformation.SharePoint.Services.MappingProviders;
+using Microsoft.Extensions.Caching.Memory;
 
 namespace PnP.Core.Transformation.SharePoint.MappingProviders
 {
@@ -51,6 +52,7 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
 
         private ILogger<SharePointMappingProvider> logger;
         private readonly IOptions<SharePointTransformationOptions> options;
+        private readonly IMemoryCache memoryCache;
         private readonly IServiceProvider serviceProvider;
 
         private const string webPartMarkerString = "[[WebPartMarker]]";
@@ -68,6 +70,8 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
             this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
             this.options = options ?? throw new ArgumentNullException(nameof(options));
             this.serviceProvider = serviceProvider;
+
+            this.memoryCache = this.serviceProvider.GetService<IMemoryCache>();
         }
 
         /// <summary>
@@ -393,31 +397,139 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
             return lip;
         }
 
-        private static async Task<Dictionary<string, FieldData>> LoadSourcePageMetadataAsync(ListItem pageItem)
+        private async Task<Dictionary<string, FieldData>> LoadSourcePageMetadataAsync(ListItem pageItem)
         {
             var result = new Dictionary<string, FieldData>();
 
-            var listFields = pageItem.ParentList.Fields;
-            pageItem.Context.Load(listFields);
-            await pageItem.Context.ExecuteQueryRetryAsync().ConfigureAwait(false);
+            // Determine the list of fields to copy
+            var listFields = await GetFieldsToCopyAsync(pageItem).ConfigureAwait(false);
 
             foreach (var field in pageItem.FieldValues)
             {
                 // Search for the corresponding field in the list
-                var listField = listFields.FirstOrDefault(f => f.InternalName == field.Key);
+                var listField = listFields.FirstOrDefault(f => f.Name == field.Key);
 
-                result.Add(field.Key, new FieldData
+                // If any
+                if (listField != null)
                 {
-                    Id = listField != null ? listField.Id : Guid.Empty,
-                    Name = listField?.InternalName,
-                    Type = listField?.TypeAsString,
-                    Value = field.Value
-                });
+                    // Collect field information and value
+                    result.Add(field.Key, new FieldData
+                    {
+                        Id = listField != null ? listField.Id : Guid.Empty,
+                        Name = listField?.Name,
+                        Type = listField?.Type,
+                        Value = field.Value
+                    });
+                }
             }
 
             return result;
         }
 
+        /// <summary>
+        /// Defines the list of fields to copy from source item
+        /// </summary>
+        /// <param name="pageItem">The source page item</param>
+        /// <param name="isBlog">Defines whether the page is a blog page or not</param>
+        /// <returns>The list of fields to copy</returns>
+        private async Task<List<FieldData>> GetFieldsToCopyAsync(ListItem pageItem, bool isBlog = false)
+        {
+            // Ensure the parent list ID, web ID, site ID
+            var parentList = pageItem.ParentList;
+            pageItem.Context.Load(parentList, l => l.Id);
+            var parentWeb = (pageItem.Context as ClientContext)?.Web;
+            pageItem.Context.Load(parentWeb, w => w.Id);
+            var parentSite = (pageItem.Context as ClientContext)?.Site;
+            pageItem.Context.Load(parentSite, s => s.Id);
+            await pageItem.Context.ExecuteQueryRetryAsync().ConfigureAwait(false);
+
+            // Create the cache item key
+            var fieldsCacheKey = $"{parentSite.Id}|{parentWeb.Id}|{parentList.Id}";
+
+            List<FieldData> result;
+
+            // Try to get the result from cache
+            if (!memoryCache.TryGetValue(fieldsCacheKey, out result))
+            {
+                // If not available in cache, prepare a fresh new result
+                result = new List<FieldData>();
+
+                var listFields = pageItem.ParentList.Fields;
+                pageItem.Context.Load(listFields);
+                await pageItem.Context.ExecuteQueryRetryAsync().ConfigureAwait(false);
+
+                foreach (var sourceField in listFields.Where(f => !f.Hidden).ToList())
+                {
+                    // Skip OOB fields and Site Pages built in fields
+                    if (!IsBuiltInField(isBlog, sourceField.Id) &&
+                        !IsSitePagesBuiltInField(sourceField.Id))
+                    {
+                        // copy metadata for this field
+                        FieldData fieldToAdd = new FieldData()
+                        {
+                            Name = sourceField.StaticName,
+                            Id = sourceField.Id,
+                            Type = sourceField.TypeAsString,
+                        };
+
+                        result.Add(fieldToAdd);
+                    }
+                }
+
+                // Put the result in cache for future usage
+                memoryCache.Set(fieldsCacheKey, result);
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// Determines whether a field is built in or not
+        /// </summary>
+        /// <param name="isBlog">Defines whether the page is a blog page or not</param>
+        /// <param name="fieldId">The ID of the field to check</param>
+        /// <returns>A boolean stating if the field is built in</returns>
+        private static bool IsBuiltInField(bool isBlog, Guid fieldId)
+        {
+            if (Utilities.BuiltInFieldIds.Contains(fieldId))
+            {
+                if (isBlog)
+                {
+                    // Always allow the PostCategory field
+                    if (fieldId.Equals(Utilities.BuiltInFieldIds.PostCategory))
+                    {
+                        return false;
+                    }
+                    else
+                    {
+                        return true;
+                    }
+                }
+                else
+                {
+                    return true;
+                }
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// Determines whether a field is built in Site Pages field or not
+        /// </summary>
+        /// <param name="fieldId">The ID of the field to check</param>
+        /// <returns>A boolean stating if the field is built in for the Site Pages library</returns>
+        private static bool IsSitePagesBuiltInField(Guid fieldId)
+        {
+            return Utilities.SitePagesBuiltInFieldIds.Contains(fieldId);
+        }
+
+        /// <summary>
+        /// Removes empty web parts from the page content
+        /// </summary>
+        /// <param name="targetPage">The target page to cleanup</param>
         internal void RemoveEmptyTextParts(Page targetPage)
         {
             foreach (var section in targetPage.Sections)
@@ -1865,6 +1977,10 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
                 Order = order
             };
 
+            if (result.Properties == null)
+            {
+                result.Properties = new Dictionary<string, string>();
+            }
             result.Properties.Add("Text", wikiTextPartContent.Trim().Replace("\r\n", string.Empty));
 
             return result;
@@ -2765,7 +2881,7 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
                 // Load all web properties needed further one
                 clientContext.Load(clientContext.Web, w => w.Id, w => w.Url, w => w.ServerRelativeUrl, w => w.RootFolder.WelcomePage, w => w.Language);
                 clientContext.Load(clientContext.Site, s => s.RootWeb.ServerRelativeUrl, s => s.Id, s => s.Url);
-                // Use regular ExecuteQuery as we want to send this custom clienttag
+                // Use regular ExecuteQuery as we want to send our custom clienttag
                 clientContext.ExecuteQuery();
             }
         }
@@ -3021,12 +3137,205 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
                         ZoneIndex = (uint)webPartToRetrieve.WebPartDefinition.WebPart.ZoneIndex,
                         IsClosed = webPartToRetrieve.WebPartDefinition.WebPart.IsClosed,
                         Hidden = webPartToRetrieve.WebPartDefinition.WebPart.Hidden,
-                        // Properties = Properties(webPartToRetrieve.WebPartDefinition.WebPart.Properties.FieldValues, 
-                        // webPartToRetrieve.WebPartType, webPartToRetrieve.WebPartXml == null ? "" : 
-                        // webPartToRetrieve.WebPartXml.Value),
+                        Properties = Properties(webPartToRetrieve.WebPartDefinition.WebPart.Properties.FieldValues,
+                            webPartToRetrieve.WebPartType, webPartToRetrieve.WebPartXml == null ? "" :
+                            webPartToRetrieve.WebPartXml.Value),
                     });
                 }
             }
+        }
+
+        /// <summary>
+        /// Checks the PageTransformation XML data to know which properties need to be kept for the given web part and collects their values
+        /// </summary>
+        /// <param name="properties">Properties collection retrieved when we loaded the web part</param>
+        /// <param name="webPartType">Type of the web part</param>
+        /// <param name="webPartXml">Web part XML</param>
+        /// <returns>Collection of the requested property/value pairs</returns>
+        internal Dictionary<string, string> Properties(Dictionary<string, object> properties, string webPartType, string webPartXml)
+        {
+            var webPartMappingProvider = serviceProvider.GetService<IWebPartMappingProvider>();
+
+            // Load the mapping configuration
+            WebPartMapping mappingFile = ((SharePointWebPartMappingProvider)webPartMappingProvider)
+                .LoadMappingFile(this.options.Value.WebPartMappingFile);
+
+            Dictionary<string, string> propertiesToKeep = new Dictionary<string, string>();
+
+            List<Property> propertiesToRetrieve = mappingFile.BaseWebPart.Properties.ToList<Property>();
+
+            //For older versions of SharePoint the type in the mapping would not match. Use the TypeShort Comparison. 
+            var webPartProperties = mappingFile.WebParts.Where(p => p.Type.GetTypeShort().Equals(webPartType.GetTypeShort(), StringComparison.InvariantCultureIgnoreCase)).FirstOrDefault();
+            if (webPartProperties != null && webPartProperties.Properties != null)
+            {
+                foreach (var p in webPartProperties.Properties.ToList<Property>())
+                {
+                    if (!propertiesToRetrieve.Contains(p))
+                    {
+                        propertiesToRetrieve.Add(p);
+                    }
+                }
+            }
+
+            if (string.IsNullOrEmpty(webPartXml))
+            {
+                if (webPartType.GetTypeShort() == WebParts.Client.GetTypeShort())
+                {
+                    // Special case since we don't know upfront which properties are relevant here...so let's take them all
+                    foreach (var prop in properties)
+                    {
+                        if (!propertiesToKeep.ContainsKey(prop.Key))
+                        {
+                            propertiesToKeep.Add(prop.Key, prop.Value != null ? prop.Value.ToString() : "");
+                        }
+                    }
+                }
+                else
+                {
+                    // Special case where we did not have export rights for the web part XML, assume this is a V3 web part
+                    foreach (var property in propertiesToRetrieve)
+                    {
+                        if (!string.IsNullOrEmpty(property.Name) && properties.ContainsKey(property.Name))
+                        {
+                            if (!propertiesToKeep.ContainsKey(property.Name))
+                            {
+                                propertiesToKeep.Add(property.Name, properties[property.Name] != null ? properties[property.Name].ToString() : "");
+                            }
+                        }
+                    }
+                }
+            }
+            else
+            {
+                var xml = XElement.Parse(webPartXml);
+                var xmlns = xml.XPathSelectElement("*").GetDefaultNamespace();
+                if (xmlns.NamespaceName.Equals("http://schemas.microsoft.com/WebPart/v3", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    if (webPartType.GetTypeShort() == WebParts.Client.GetTypeShort())
+                    {
+                        // Special case since we don't know upfront which properties are relevant here...so let's take them all
+                        foreach (var prop in properties)
+                        {
+                            if (!propertiesToKeep.ContainsKey(prop.Key))
+                            {
+                                propertiesToKeep.Add(prop.Key, prop.Value != null ? prop.Value.ToString() : "");
+                            }
+                        }
+                    }
+                    else
+                    {
+                        // the retrieved properties are sufficient
+                        foreach (var property in propertiesToRetrieve)
+                        {
+                            if (!string.IsNullOrEmpty(property.Name) && properties.ContainsKey(property.Name))
+                            {
+                                if (!propertiesToKeep.ContainsKey(property.Name))
+                                {
+                                    propertiesToKeep.Add(property.Name, properties[property.Name] != null ? properties[property.Name].ToString() : "");
+                                }
+                            }
+                        }
+                    }
+                }
+                else if (xmlns.NamespaceName.Equals("http://schemas.microsoft.com/WebPart/v2", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    foreach (var property in propertiesToRetrieve)
+                    {
+                        if (!string.IsNullOrEmpty(property.Name))
+                        {
+                            if (properties.ContainsKey(property.Name))
+                            {
+                                if (!propertiesToKeep.ContainsKey(property.Name))
+                                {
+                                    propertiesToKeep.Add(property.Name, properties[property.Name] != null ? properties[property.Name].ToString() : "");
+                                }
+                            }
+                            else
+                            {
+                                // check XMl for property
+                                var v2Element = xml.Descendants(xmlns + property.Name).FirstOrDefault();
+                                if (v2Element != null)
+                                {
+                                    if (!propertiesToKeep.ContainsKey(property.Name))
+                                    {
+                                        propertiesToKeep.Add(property.Name, v2Element.Value);
+                                    }
+                                }
+
+                                // Some properties do have their own namespace defined
+                                if (webPartType.GetTypeShort() == WebParts.SimpleForm.GetTypeShort() && property.Name.Equals("Content", StringComparison.InvariantCultureIgnoreCase))
+                                {
+                                    // Load using the http://schemas.microsoft.com/WebPart/v2/SimpleForm namespace
+                                    XNamespace xmlcontentns = "http://schemas.microsoft.com/WebPart/v2/SimpleForm";
+                                    v2Element = xml.Descendants(xmlcontentns + property.Name).FirstOrDefault();
+                                    if (v2Element != null)
+                                    {
+                                        if (!propertiesToKeep.ContainsKey(property.Name))
+                                        {
+                                            propertiesToKeep.Add(property.Name, v2Element.Value);
+                                        }
+                                    }
+                                }
+                                else if (webPartType.GetTypeShort() == WebParts.ContentEditor.GetTypeShort())
+                                {
+                                    if (property.Name.Equals("ContentLink", StringComparison.InvariantCultureIgnoreCase) ||
+                                        property.Name.Equals("Content", StringComparison.InvariantCultureIgnoreCase) ||
+                                        property.Name.Equals("PartStorage", StringComparison.InvariantCultureIgnoreCase))
+                                    {
+                                        XNamespace xmlcontentns = "http://schemas.microsoft.com/WebPart/v2/ContentEditor";
+                                        v2Element = xml.Descendants(xmlcontentns + property.Name).FirstOrDefault();
+                                        if (v2Element != null)
+                                        {
+                                            if (!propertiesToKeep.ContainsKey(property.Name))
+                                            {
+                                                propertiesToKeep.Add(property.Name, v2Element.Value);
+                                            }
+                                        }
+                                    }
+                                }
+                                else if (webPartType.GetTypeShort() == WebParts.Xml.GetTypeShort())
+                                {
+                                    if (property.Name.Equals("XMLLink", StringComparison.InvariantCultureIgnoreCase) ||
+                                        property.Name.Equals("XML", StringComparison.InvariantCultureIgnoreCase) ||
+                                        property.Name.Equals("XSLLink", StringComparison.InvariantCultureIgnoreCase) ||
+                                        property.Name.Equals("XSL", StringComparison.InvariantCultureIgnoreCase) ||
+                                        property.Name.Equals("PartStorage", StringComparison.InvariantCultureIgnoreCase))
+                                    {
+                                        XNamespace xmlcontentns = "http://schemas.microsoft.com/WebPart/v2/Xml";
+                                        v2Element = xml.Descendants(xmlcontentns + property.Name).FirstOrDefault();
+                                        if (v2Element != null)
+                                        {
+                                            if (!propertiesToKeep.ContainsKey(property.Name))
+                                            {
+                                                propertiesToKeep.Add(property.Name, v2Element.Value);
+                                            }
+                                        }
+                                    }
+                                }
+                                else if (webPartType.GetTypeShort() == WebParts.SiteDocuments.GetTypeShort())
+                                {
+                                    if (property.Name.Equals("UserControlledNavigation", StringComparison.InvariantCultureIgnoreCase) ||
+                                        property.Name.Equals("ShowMemberships", StringComparison.InvariantCultureIgnoreCase) ||
+                                        property.Name.Equals("UserTabs", StringComparison.InvariantCultureIgnoreCase))
+                                    {
+                                        XNamespace xmlcontentns = "urn:schemas-microsoft-com:sharepoint:portal:sitedocumentswebpart";
+                                        v2Element = xml.Descendants(xmlcontentns + property.Name).FirstOrDefault();
+                                        if (v2Element != null)
+                                        {
+                                            if (!propertiesToKeep.ContainsKey(property.Name))
+                                            {
+                                                propertiesToKeep.Add(property.Name, v2Element.Value);
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            return propertiesToKeep;
         }
     }
 }

@@ -12,6 +12,7 @@ using PnP.Core.Services;
 using PnP.Core.Transformation.Poc.Implementations;
 using PnP.Core.Transformation.Services.Core;
 using PnP.Core.Transformation.SharePoint;
+using Microsoft.SharePoint.Client;
 
 namespace PnP.Core.Transformation.Poc
 {
@@ -23,12 +24,18 @@ namespace PnP.Core.Transformation.Poc
         private readonly IPnPContextFactory pnpContextFactory;
         private readonly ITransformationExecutor transformationExecutor;
         private readonly ITransformationStateManager transformationStateManager;
+        private readonly ClientContext sourceContext;
 
-        public TransformSiteFunction(IPnPContextFactory pnpContextFactory, ITransformationExecutor transformationExecutor, ITransformationStateManager transformationStateManager)
+        public TransformSiteFunction(
+            IPnPContextFactory pnpContextFactory, 
+            ITransformationExecutor transformationExecutor, 
+            ITransformationStateManager transformationStateManager,
+            ClientContext sourceContext)
         {
             this.pnpContextFactory = pnpContextFactory;
             this.transformationExecutor = transformationExecutor;
             this.transformationStateManager = transformationStateManager;
+            this.sourceContext = sourceContext;
         }
 
         [FunctionName("TransformSite")]
@@ -42,20 +49,22 @@ namespace PnP.Core.Transformation.Poc
             Guid processId;
             switch (req.Method)
             {
-                // Trigger the transformation a whole site
+                // Trigger the transformation of a whole site
                 case "POST":
-                    string source = "SourceTestSite";
-                    string target = "TargetTestSite";
+                    string target = "TargetSite";
 
                     // Create the process
                     process = await transformationExecutor.CreateTransformationProcessAsync(token);
+
                     // Start to enqueue items
                     await process.StartProcessAsync(
                         pnpContextFactory,
-                        source,
-                        target, token);
+                        sourceContext,
+                        target, 
+                        token);
 
                     return new OkObjectResult(new { process.Id });
+
                 // Get the status of a running transformation
                 case "GET":
                     id = req.Query["id"];
@@ -65,6 +74,7 @@ namespace PnP.Core.Transformation.Poc
                     var status = await process.GetStatusAsync(token);
 
                     return new OkObjectResult(status);
+
                 // Cancel a running transformation
                 case "DELETE":
                     id = req.Query["id"];

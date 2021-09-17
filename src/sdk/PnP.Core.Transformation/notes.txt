@@ -1,17 +1,39 @@
-﻿New notes/issues:
-- We need to review the logic of CopyPageMetadata of BasePageTransformator when writing fields values to the target
-	- Do we have full feature coverage in PnP Core?
-- User transformation: do we really want to search on the on-premises AD domain via LDAP?
-- Do we still need to support blog pages? Aren't them deprecated?
-- I need to better understand Root/ for isRootPage (PageTransformator line 399)
-- I need to better understand the logic around PageFolder from line 345 to 432 in PageTransformator.cs
-- Where do we set SetAuthorInPageHeader in the current model? I can't find it ...
-- I installed Newtonsoft.Json because I don't want to go crazy :-) with web part properties ...
+﻿New notes/issues/activities:
+* We need to review the logic of CopyPageMetadata of BasePageTransformator when writing fields values to the target
+	* Do we have full feature coverage in PnP Core? Yes, we do
+* Do we still need to support blog pages? Aren't them deprecated?
+	* yes
+* Where do we set SetAuthorInPageHeader in the current model? I can't find it ...
+	* Bert will double-check
 - We need to debug issues with images and "real" web parts like List modern web part
-- We cannot rely on PnP Provisioning Template for fields, we can't have a dependency on PnP Framework
-- Is the content type handling correct? Shouldn't we just get the new one of the "modern page"?
-- Are we sure that the built-in fields of PnP Core are correct?
-	- Should we exclude built-in fields on the source side?
+* Is the content type handling correct? Shouldn't we just get the new one of the "modern page"?
+	* We need to dig into this, there are cases where we need it for publishing pages
+	- Add yet another mapper for content type IDs used where we work with page layout mappings
+* We need to have an "open" model for storing binary assets (by default on the file system)
+	* Define a mapping model for assets with yet another mapping provider
+	* Make it possible to optimize bandwidth skipping already existing files on the target
+	* The default mapper will simply read and write the file taking care of duplicates
+	* In MappingOutput store both file ID and hash of content
+* Implement SummaryLinksToQuickLinksProperties function in SharePointFunctionService.cs
+	- Mind the fact that current implementation in PnP Framework relies on both source and dest page/context
+* Implement ReturnCrossSiteRelativePath function in SharePointFunctionService.cs
+	- Mind the fact that current implementation in PnP Framework relies on both source and dest page/context
+* Publish news at the end of transformation
+* Reset system properties like file created, modified, created by, modified by, etc.
+
+Closed questions:
+* I installed Newtonsoft.Json because I don't want to go crazy :-) with web part properties ...
+	* ok so far
+* User transformation: do we really want to search on the on-premises AD domain via LDAP?
+	* Ok to focus on essentials right now
+* Can we change the "model" for custom AddOns relying on dependency injection rather than on reflection?
+	* low priority, so far
+* I need to better understand the logic around PageFolder from line 345 to 432 in PageTransformator.cs
+	* I need to better understand Root/ for isRootPage (PageTransformator line 399)
+* We cannot rely on PnP Provisioning Template for fields, we can't have a dependency on PnP Framework
+	* Ok we agreed on a solution => manually generated class file with field names to exclude, so far
+* Are we sure that the built-in fields of PnP Core are correct?
+	* Should we exclude built-in fields on the source side?
 
 Architectural notes:
 * implement all the native providers with file-based approach (both XML and JSON)

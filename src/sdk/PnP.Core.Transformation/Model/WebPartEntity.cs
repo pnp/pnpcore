@@ -67,7 +67,7 @@ namespace PnP.Core.Transformation.Model
         /// <summary>
         /// Dictionary with web part properties
         /// </summary>
-        public Dictionary<string, string> Properties { get; } = new Dictionary<string, string>();
+        public Dictionary<string, string> Properties { get; set; }
 
         /// <summary>
         /// The XML representation of the Web Part

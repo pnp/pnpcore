@@ -13,7 +13,11 @@ namespace PnP.Core.Transformation.Services.Builder.Configuration
         /// </summary>
         public bool DisableTelemetry { get; set; }
 
-        // TODO: Define all the configuration settings
+        /// <summary>
+        /// Defines the connection string for the configured persistence provider
+        /// </summary>
+        public string PersistenceProviderConnectionString { get; set; }
 
+        // TODO: Define all the configuration settings
     }
 }

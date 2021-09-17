@@ -241,7 +241,7 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
             return globalTokens;
         }
 
-        private WebPartMapping LoadMappingFile(string mappingFilePath = null)
+        internal WebPartMapping LoadMappingFile(string mappingFilePath = null)
         {
             // Prepare the result variable
             WebPartMapping result = null;

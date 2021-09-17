@@ -79,6 +79,15 @@ namespace PnP.Core.Transformation {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The provided asset stream is not valid for persistence.
+        /// </summary>
+        internal static string Error_InvalidAssetStreamToPersist {
+            get {
+                return ResourceManager.GetString("Error_InvalidAssetStreamToPersist", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The generated modern page does not have the expected URI..
         /// </summary>
         internal static string Error_InvalidTargetPageUri {

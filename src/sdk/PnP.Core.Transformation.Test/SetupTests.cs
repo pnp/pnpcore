@@ -60,8 +60,8 @@ namespace PnP.Core.Transformation.Test
 
             var provider = services.BuildServiceProvider();
 
-            var pnpModernizationOptions = provider.GetRequiredService<IOptions<PnPTransformationOptions>>().Value;
-            Assert.IsTrue(pnpModernizationOptions.DisableTelemetry);
+            var pnpTransformationOptions = provider.GetRequiredService<IOptions<PnPTransformationOptions>>().Value;
+            Assert.IsTrue(pnpTransformationOptions.DisableTelemetry);
 
             var transformationOptions = provider.GetRequiredService<IOptions<PageTransformationOptions>>().Value;
             Assert.IsTrue(transformationOptions.DisablePageComments);

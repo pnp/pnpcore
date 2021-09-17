@@ -357,12 +357,16 @@ namespace PnP.Core.Transformation.Services.Core
                 {
                     logger.LogInformation(string.Format(System.Globalization.CultureInfo.InvariantCulture,
                         TransformationResources.Info_MappingTaxonomyField, fieldToCopy.Name));
+
+                    // https://pnp.github.io/pnpcore/using-the-sdk/listitems-fields.html#taxonomy-fields
                 }
 
                 foreach (var fieldToCopy in fieldsToCopy.Where(f => f.Type != "TaxonomyFieldTypeMulti" && f.Type != "TaxonomyFieldType"))
                 {
                     logger.LogInformation(string.Format(System.Globalization.CultureInfo.InvariantCulture,
                         TransformationResources.Info_MappingRegularField, fieldToCopy.Name));
+
+                    // https://pnp.github.io/pnpcore/using-the-sdk/listitems-fields.html
                 }
             }
         }
