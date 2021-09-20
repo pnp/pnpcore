@@ -84,7 +84,7 @@ namespace PnP.Core.Model
 
         #endregion
 
-        #region Core data access methods
+        #region Public core data access methods
 
         #region Process
 
@@ -323,38 +323,18 @@ namespace PnP.Core.Model
         #endregion
 
         #region Add
-
-        /// <summary>
-        /// Adds a domain model instance
-        /// </summary>
-        /// <returns>The added domain model</returns>
-        internal virtual async Task<BaseDataModel<TModel>> AddBatchAsync(Dictionary<string, object> keyValuePairs = null)
-        {
-            // TODO: Can we consolidate this method with the next one
-            // setting a default value of null for the Batch input argument?
-
-            if (AddApiCallHandler != null)
-            {
-                var call = await AddApiCallHandler.Invoke(keyValuePairs).ConfigureAwait(false);
-                await BaseAddBatchAsync(call, fromJsonCasting: MappingHandler, postMappingJson: PostMappingHandler).ConfigureAwait(false);
-                return this;
-            }
-            else
-            {
-                throw new ClientException(ErrorType.MissingAddApiHandler,
-                    PnPCoreResources.Exception_MissingAddApiHandler);
-            }
-        }
-
         /// <summary>
         /// Adds a domain model instance
         /// </summary>
         /// <param name="batch">Batch add this request to</param>
         /// <param name="keyValuePairs">Properties to control add</param>
         /// <returns>The added domain model</returns>
-        internal virtual async Task<BaseDataModel<TModel>> AddBatchAsync(Batch batch, Dictionary<string, object> keyValuePairs = null)
+        internal virtual async Task<BaseDataModel<TModel>> AddBatchAsync(Batch batch = null, Dictionary<string, object> keyValuePairs = null)
         {
-            // TODO: Can we consolidate this method with the previous one?
+            if (batch == null)
+            {
+                batch = PnPContext.CurrentBatch;
+            }
 
             if (AddApiCallHandler != null)
             {
@@ -391,24 +371,11 @@ namespace PnP.Core.Model
         /// <summary>
         /// Adds a domain model instance
         /// </summary>
-        /// <returns>The added domain model</returns>
-        internal virtual BaseDataModel<TModel> AddBatch(Dictionary<string, object> keyValuePairs = null)
-        {
-            // TODO: Can we consolidate this method with the next one?
-
-            return AddBatchAsync(keyValuePairs).GetAwaiter().GetResult();
-        }
-
-        /// <summary>
-        /// Adds a domain model instance
-        /// </summary>
         /// <param name="batch">Batch add this request to</param>
         /// <param name="keyValuePairs">Properties to control add</param>
         /// <returns>The added domain model</returns>
-        internal virtual BaseDataModel<TModel> AddBatch(Batch batch, Dictionary<string, object> keyValuePairs = null)
+        internal virtual BaseDataModel<TModel> AddBatch(Batch batch = null, Dictionary<string, object> keyValuePairs = null)
         {
-            // TODO: Can we consolidate this method with the previous one?
-
             return AddBatchAsync(batch, keyValuePairs).GetAwaiter().GetResult();
         }
 
@@ -533,7 +500,7 @@ namespace PnP.Core.Model
 
         #endregion
 
-        #region Core data access implementation
+        #region Internal core data access implementation
 
         #region Get
 
@@ -681,20 +648,6 @@ namespace PnP.Core.Model
         /// <summary>
         /// Creates and adds a Post request to the given batch
         /// </summary>
-        /// <param name="postApiCall">Api call to execute</param>
-        /// <param name="fromJsonCasting">Delegate for type mapping when the request is executed</param>
-        /// <param name="postMappingJson">Delegate for post mapping</param>
-        internal virtual Task BaseAddBatchAsync(ApiCall postApiCall, Func<FromJson, object> fromJsonCasting = null, Action<string> postMappingJson = null)
-        {
-            // TODO: Can we consolidate this method with the next one, using the batch argument
-            // as an optional one with a default in the inner logic?
-
-            return BaseAddBatchAsync(PnPContext.CurrentBatch, postApiCall, fromJsonCasting, postMappingJson);
-        }
-
-        /// <summary>
-        /// Creates and adds a Post request to the given batch
-        /// </summary>
         /// <param name="batch">Batch to add the request to</param>
         /// <param name="postApiCall">Api call to execute</param>
         /// <param name="fromJsonCasting">Delegate for type mapping when the request is executed</param>
@@ -800,18 +753,6 @@ namespace PnP.Core.Model
         /// <summary>
         /// Creates and adds an Update request to the given batch
         /// </summary>
-        /// <param name="fromJsonCasting">Delegate for type mapping when the request is executed</param>
-        /// <param name="postMappingJson">Delegate for post mapping</param>
-        internal virtual Task BaseUpdateBatchAsync(Func<FromJson, object> fromJsonCasting = null, Action<string> postMappingJson = null)
-        {
-            // TODO: Can we consolidate this one with the next one?
-
-            return BaseBatchUpdateAsync(PnPContext.CurrentBatch, fromJsonCasting, postMappingJson);
-        }
-
-        /// <summary>
-        /// Creates and adds an Update request to the given batch
-        /// </summary>
         /// <param name="batch">Batch to add the request to</param>
         /// <param name="fromJsonCasting">Delegate for type mapping when the request is executed</param>
         /// <param name="postMappingJson">Delegate for post mapping</param>
@@ -868,18 +809,6 @@ namespace PnP.Core.Model
         /// <summary>
         /// Creates and adds an Delete request to the given batch
         /// </summary>
-        /// <param name="fromJsonCasting">Delegate for type mapping when the request is executed</param>
-        /// <param name="postMappingJson">Delegate for post mapping</param>
-        internal virtual Task BaseDeleteBatchAsync(Func<FromJson, object> fromJsonCasting = null, Action<string> postMappingJson = null)
-        {
-            // TODO: Can we consolidate this one with the next one?
-
-            return BaseDeleteBatchAsync(PnPContext.CurrentBatch, fromJsonCasting, postMappingJson);
-        }
-
-        /// <summary>
-        /// Creates and adds an Delete request to the given batch
-        /// </summary>
         /// <param name="batch">Batch to add the request to</param>
         /// <param name="fromJsonCasting">Delegate for type mapping when the request is executed</param>
         /// <param name="postMappingJson">Delegate for post mapping</param>
@@ -932,27 +861,12 @@ namespace PnP.Core.Model
         /// <summary>
         /// Adds a request to the given batch
         /// </summary>
-        /// <param name="apiCall">Api call to execute</param>
-        /// <param name="method"><see cref="HttpMethod"/> to use for this request</param>
-        /// <param name="operationName">Name of the operation, used for telemetry purposes</param>
-        internal Task RequestBatchAsync(ApiCall apiCall, HttpMethod method, [CallerMemberName] string operationName = null)
-        {
-            // TODO: Can we consolidate this one with the next one?
-
-            return RequestBatchAsync(PnPContext.CurrentBatch, apiCall, method, operationName);
-        }
-
-        /// <summary>
-        /// Adds a request to the given batch
-        /// </summary>
         /// <param name="batch">Batch to add the request to</param>
         /// <param name="apiCall">Api call to execute</param>
         /// <param name="method"><see cref="HttpMethod"/> to use for this request</param>
         /// <param name="operationName">Name of the operation, used for telemetry purposes</param>
         internal async Task RequestBatchAsync(Batch batch, ApiCall apiCall, HttpMethod method, [CallerMemberName] string operationName = null)
         {
-            // TODO: Can we consolidate this one with the previous one?
-
             // Get entity information for the entity to update
             var entityInfo = GetClassInfo();
 
@@ -1011,26 +925,12 @@ namespace PnP.Core.Model
         /// <summary>
         /// Adds a request to the given batch
         /// </summary>
-        /// <param name="apiCall">Api call to execute</param>
-        /// <param name="method"><see cref="HttpMethod"/> to use for this request</param>
-        /// <param name="operationName">Name of the operation, used for telemetry purposes</param>
-        internal Task<BatchRequest> RawRequestBatchAsync(ApiCall apiCall, HttpMethod method, [CallerMemberName] string operationName = null)
-        {
-            // TODO: Can we consolidate this one with the next one?
-
-            return RawRequestBatchAsync(PnPContext.CurrentBatch, apiCall, method, operationName);
-        }
-
-        /// <summary>
-        /// Adds a request to the given batch
-        /// </summary>
         /// <param name="batch">Batch to add the request to</param>
         /// <param name="apiCall">Api call to execute</param>
         /// <param name="method"><see cref="HttpMethod"/> to use for this request</param>
         /// <param name="operationName">Name of the operation, used for telemetry purposes</param>
         internal async Task<BatchRequest> RawRequestBatchAsync(Batch batch, ApiCall apiCall, HttpMethod method, [CallerMemberName] string operationName = null)
         {
-            // TODO: Can we consolidate this one with the previous one?
             EntityInfo entityInfo = null;
 
             if (!apiCall.ExecuteRequestApiCall)
@@ -1162,7 +1062,6 @@ namespace PnP.Core.Model
         /// <returns>Entity model class describing this model instance</returns>
         internal EntityInfo GetClassInfo(params Expression<Func<TModel, object>>[] expressions)
         {
-            // TODO: Do we really need this method? Can't we just use EntityManager?
             return EntityManager.GetClassInfo(GetType(), this, expressions: expressions);
         }
 
