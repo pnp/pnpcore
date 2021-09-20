@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.Linq;
 using System.Text;
 using System.Text.Json;
@@ -31,19 +32,19 @@ namespace PnP.Core.Model.SharePoint
 
         internal bool HasChanges => GetChangedValues() != null;
 
-        private void Values_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        private void Values_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
-            if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Remove ||
-                e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Reset ||
-                e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Add)
+            if (e?.Action != null && (e.Action == NotifyCollectionChangedAction.Remove ||
+                                      e.Action == NotifyCollectionChangedAction.Reset ||
+                                      e.Action == NotifyCollectionChangedAction.Add))
             {
                 hasChangedDueToDeleteOrAdd = true;
 
-                if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Add)
+                if (e.Action == NotifyCollectionChangedAction.Add && e.NewItems != null)
                 {
-                    foreach (var item in e.NewItems)
+                    foreach (var item in e.NewItems.OfType<FieldValue>())
                     {
-                        (item as FieldValue).MarkAsChanged();
+                        item.MarkAsChanged();
                     }
                 }
             }
@@ -68,7 +69,10 @@ namespace PnP.Core.Model.SharePoint
             hasChangedDueToDeleteOrAdd = false;
             foreach(var fieldValue in Values)
             {
-                (fieldValue as FieldValue).Commit();
+                if (fieldValue != null && fieldValue is FieldValue)
+                {
+                    (fieldValue as FieldValue).Commit();
+                }
             }
         }
 

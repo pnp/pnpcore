@@ -1,11 +1,12 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using PnP.Core.Model;
 using PnP.Core.Model.SharePoint;
 using PnP.Core.QueryModel;
 using PnP.Core.Test.Utilities;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
-using PnP.Core.Model;
 
 namespace PnP.Core.Test.SharePoint
 {
@@ -157,10 +158,10 @@ namespace PnP.Core.Test.SharePoint
                 IFolder folderWithProperties = await context.Web.GetFolderByServerRelativeUrlAsync(sharedDocumentsServerRelativeUrl, f => f.Properties);
 
                 Assert.IsNotNull(folderWithProperties.Properties);
-                Assert.AreEqual("true", folderWithProperties.Properties["vti_x005f_isbrowsable"]);
-                Assert.AreEqual("true", (object)folderWithProperties.Properties.AsDynamic().vti_x005f_isbrowsable);
-                Assert.AreEqual(1, folderWithProperties.Properties["vti_x005f_level"]);
-                Assert.AreEqual(1, (object)folderWithProperties.Properties.AsDynamic().vti_x005f_level);
+                Assert.AreEqual("true", folderWithProperties.Properties["vti_isbrowsable"]);
+                Assert.AreEqual("true", (object)folderWithProperties.Properties.AsDynamic().vti_isbrowsable);
+                Assert.AreEqual(1, folderWithProperties.Properties["vti_level"]);
+                Assert.AreEqual(1, (object)folderWithProperties.Properties.AsDynamic().vti_level);
             }
         }
 
@@ -1032,6 +1033,42 @@ namespace PnP.Core.Test.SharePoint
 
             await CleanupMockFolderFromSharedDocuments(2, "TEST_MOVE_EXISTING_BATCH_OPTIONS");
             await CleanupMockFolderFromSharedDocuments(2, folderToFindName);
+        }
+
+        [TestMethod]
+        public async Task GetFolderChangesAsyncTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var folder = await context.Web.Folders.FirstOrDefaultAsync(f => f.Name == "SiteAssets");
+                var changes = await folder.GetChangesAsync(new ChangeQueryOptions(true, true)
+                {
+                    FetchLimit = 5,
+                });
+
+                Assert.IsNotNull(changes);
+                Assert.IsTrue(changes.Count > 0);
+            }
+        }
+
+        [TestMethod]
+        public void GetFolderChangesTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            {
+                var folder = context.Web.Folders.FirstOrDefault(f => f.Name == "SiteAssets");
+                var changes = folder.GetChanges(new ChangeQueryOptions(true, true)
+                {
+                    FetchLimit = 5,
+                });
+
+                Assert.IsNotNull(changes);
+                Assert.IsTrue(changes.Count > 0);
+            }
         }
 
         #region Mock folder

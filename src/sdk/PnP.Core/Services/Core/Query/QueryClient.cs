@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Dynamic;
-using System.Globalization;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Net.Http;
@@ -494,6 +493,14 @@ namespace PnP.Core.Services
         {
             ApiType apiType = ApiType.Graph;
 
+            if (entityInfo.GraphBeta)
+            {
+                if (CanUseGraphBeta(model, entityInfo))
+                {
+                    apiType = ApiType.GraphBeta;
+                }
+            }
+
             var nonExpandableFields = entityInfo.GraphNonExpandableCollections;
             if (nonExpandableFields.Any())
             {
@@ -636,38 +643,6 @@ namespace PnP.Core.Services
 
 #region Paging 
 
-        internal static string EnsureTopUrlParameter(string url, ApiType nextLinkApiType, int pageSize)
-        {
-            // prefix the relative url with a host so it can be properly processed
-            if (nextLinkApiType == ApiType.Graph || nextLinkApiType == ApiType.GraphBeta)
-            {
-                url = $"https://removeme.com/{url}";
-            }
-
-            if (Uri.TryCreate(url, UriKind.Absolute, out Uri uri))
-            {
-                NameValueCollection queryString = HttpUtility.ParseQueryString(uri.Query);
-                if (queryString["$top"] != null)
-                {
-                    queryString["$top"] = pageSize.ToString(CultureInfo.CurrentCulture);
-                }
-                else
-                {
-                    queryString.Add("$top", pageSize.ToString(CultureInfo.CurrentCulture));
-                }
-
-                var updatedUrl = $"{uri.Scheme}://{uri.DnsSafeHost}{uri.AbsolutePath}?{queryString.ToEncodedString()}";
-
-                if (nextLinkApiType == ApiType.Graph || nextLinkApiType == ApiType.GraphBeta)
-                {
-                    updatedUrl = updatedUrl.Replace("https://removeme.com/", "");
-                }
-
-                return updatedUrl;
-            }
-
-            return null;
-        }
 
         internal static Tuple<string, ApiType> BuildNextPageLink(IMetadataExtensible collection)
         {
@@ -713,41 +688,6 @@ namespace PnP.Core.Services
             }
 
             return url;
-        }
-
-#endregion
-
-#region LINQ data get
-
-        internal static IQueryable<TModel> ProcessExpression<TModel>(IQueryable<TModel> source, EntityInfo entityInfo, params Expression<Func<TModel, object>>[] selectors)
-        {
-            IQueryable<TModel> selectionTarget = source;
-
-            if (selectors != null)
-            {
-                IEnumerable<EntityFieldInfo> fields = entityInfo.Fields.Where(p => p.Load);
-
-                foreach (var s in selectors)
-                {
-                    var fieldToLoad = EntityManager.GetFieldToLoad(entityInfo, s);
-
-                    var field = fields.FirstOrDefault(p => p.Name == fieldToLoad);
-                    if (field != null)
-                    {
-                        if (field.SharePointExpandable || field.GraphExpandable || !string.IsNullOrEmpty(field.GraphGet))
-                        {
-                            // TODO: still need this method?
-                            //selectionTarget = selectionTarget.Include(s);
-                        }
-                        else
-                        {
-                            selectionTarget = selectionTarget.QueryProperties(s);
-                        }
-                    }
-                }
-            }
-
-            return selectionTarget;
         }
 
 #endregion

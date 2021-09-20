@@ -7,7 +7,7 @@ namespace PnP.Core.Services
     /// Defines the response of an executed API call
     /// </summary>
 #pragma warning disable CA1815 // Override equals and operator equals on value types
-    public struct ApiResponse
+    public readonly struct ApiResponse
 #pragma warning restore CA1815 // Override equals and operator equals on value types
     {
         internal ApiResponse(ApiCall apiCall, JsonElement jsonElement, Guid batchRequestId)
@@ -17,8 +17,8 @@ namespace PnP.Core.Services
             BatchRequestId = batchRequestId;
         }
 
-        internal ApiCall ApiCall { get; private set; }
-        internal JsonElement JsonElement { get; private set; }
-        internal Guid BatchRequestId { get; private set; }
+        internal ApiCall ApiCall { get; }
+        internal JsonElement JsonElement { get; }
+        internal Guid BatchRequestId { get; }
     }
 }

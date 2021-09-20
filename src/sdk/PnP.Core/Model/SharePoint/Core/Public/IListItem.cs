@@ -1,6 +1,7 @@
 ﻿using PnP.Core.Model.Security;
 using PnP.Core.Services;
 using System;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace PnP.Core.Model.SharePoint
@@ -9,9 +10,8 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a SharePoint Online list item
     /// </summary>
     [ConcreteType(typeof(ListItem))]
-    public interface IListItem : IDataModel<IListItem>, IDataModelGet<IListItem>, IDataModelLoad<IListItem>, IDataModelUpdate, IDataModelDelete, IExpandoDataModel, IQueryableDataModel
+    public interface IListItem : IDataModel<IListItem>, IDataModelGet<IListItem>, IDataModelLoad<IListItem>, IDataModelUpdate, IDataModelDelete, IDataModelSupportingGetChanges, IExpandoDataModel, IQueryableDataModel
     {
-
         /// <summary>
         /// Id of the list item
         /// </summary>
@@ -23,11 +23,133 @@ namespace PnP.Core.Model.SharePoint
         public string Title { get; set; }
 
         /// <summary>
+        /// Determines if comments are disabled for the list item
+        /// </summary>
+        public bool CommentsDisabled { get; }
+
+        /// <summary>
+        /// The scope for which comments are disabled
+        /// </summary>
+        public CommentsDisabledScope CommentsDisabledScope { get; }
+
+        /// <summary>
+        /// The content type for the list item
+        /// </summary>
+        public IContentType ContentType { get; }
+
+        /// <summary>
+        /// All the field values for the list item as HTML
+        /// </summary>
+        public IFieldStringValues FieldValuesAsHtml { get; }
+
+        /// <summary>
+        /// All the field values for the list item as text
+        /// </summary>
+        public IFieldStringValues FieldValuesAsText { get; }
+
+        /// <summary>
+        /// All the field values for the list item for editing
+        /// </summary>
+        public IFieldStringValues FieldValuesForEdit { get; }
+
+        /// <summary>
+        /// The file, if any, associated with the list item
+        /// </summary>
+        public IFile File { get; }
+
+        /// <summary>
+        /// The <seealso cref="SharePoint.FileSystemObjectType"/> for the list item, such as Folder or File
+        /// </summary>
+        public FileSystemObjectType FileSystemObjectType { get; }
+
+        /// <summary>
+        /// The folder, if any, represented by the list item
+        /// </summary>
+        public IFolder Folder { get; }
+
+        /// <summary>
+        /// The list for the list item
+        /// </summary>
+        public IList ParentList { get; }
+
+        /// <summary>
+        /// The properties of the list item
+        /// </summary>
+        public IPropertyValues Properties { get; }
+
+        /// <summary>
+        /// The URI used to render the WOPI (Web Application Open Platform Interface) frame
+        /// </summary>
+        public string ServerRedirectedEmbedUri { get; }
+
+        /// <summary>
+        /// The URL used to render the WOPI (Web Application Open Platform Interface) frame
+        /// </summary>
+        public string ServerRedirectedEmbedUrl { get; }
+
+        /// <summary>
+        /// The unique identifier of the list item
+        /// </summary>
+        public Guid UniqueId { get; }
+
+        /// <summary>
         /// Role assignments of the list item
         /// </summary>
         public IRoleAssignmentCollection RoleAssignments { get; }
 
+        /// <summary>
+        /// Information about the likes on this list item
+        /// </summary>
+        public ILikedByInformation LikedByInformation { get; }
+
+        /// <summary>
+        /// Gets a value that returns a collection of list item version objects that represent the versions of the list item
+        /// </summary>
+        public IListItemVersionCollection Versions { get; }
+
+        /// <summary>
+        /// Collection of attachments for this list item
+        /// </summary>
+        public IAttachmentCollection AttachmentFiles { get; }
+
+        /// <summary>
+        /// A special property used to add an asterisk to a $select statement
+        /// </summary>
+        public object All { get; }
+
         #region Extension methods
+
+        #region Display Name
+
+        /// <summary>
+        /// Gets the display name of the list item.
+        /// </summary>
+        /// <returns>The display name or <c>null</c>.</returns>
+        public Task<string> GetDisplayNameAsync();
+
+        /// <summary>
+        /// Gets the display name of the list item.
+        /// </summary>
+        /// <returns>The display name or <c>null</c>.</returns>
+        public string GetDisplayName();
+
+        #endregion
+
+        #region File
+
+        /// <summary>
+        /// Checks if this <see cref="IListItem"/> is a file
+        /// </summary>
+        /// <returns>Returns true if this <see cref="IListItem"/> is a file.</returns>
+        public Task<bool> IsFileAsync();
+
+        /// <summary>
+        /// Checks if this <see cref="IListItem"/> is a file
+        /// </summary>
+        /// <returns>Returns true if this <see cref="IListItem"/> is a file.</returns>
+        public bool IsFile();
+
+        #endregion
 
         #region Folder
 
@@ -47,13 +169,13 @@ namespace PnP.Core.Model.SharePoint
         /// Returns the <see cref="IFolder"/> that holds this item
         /// </summary>
         /// <returns>The <see cref="IFolder"/> for this item is returned, if the item itself is a folder then the item is returned as <see cref="IFolder"/>.</returns>
-        public Task<IFolder> GetFolderAsync();
+        public Task<IFolder> GetParentFolderAsync();
 
         /// <summary>
         /// Returns the <see cref="IFolder"/> that holds this item
         /// </summary>
         /// <returns>The <see cref="IFolder"/> for this item is returned, if the item itself is a folder then the item is returned as <see cref="IFolder"/>.</returns>
-        public IFolder GetFolder();
+        public IFolder GetParentFolder();
         #endregion
 
         #region SystemUpdate
@@ -559,6 +681,20 @@ namespace PnP.Core.Model.SharePoint
         /// <param name="roleDefinition">Role definition to remove</param>
         /// <returns></returns>
         public Task RemoveRoleDefinitionBatchAsync(Batch batch, int principalId, IRoleDefinition roleDefinition);
+        #endregion
+
+        #region Comments and liking
+        /// <summary>
+        /// Get list item comments
+        /// </summary>
+        /// <param name="selectors">The expressions declaring the fields to select</param>
+        public Task<ICommentCollection> GetCommentsAsync(params Expression<Func<IComment, object>>[] selectors);
+
+        /// <summary>
+        /// Get list item comments
+        /// </summary>
+        /// <param name="selectors">The expressions declaring the fields to select</param>
+        public ICommentCollection GetComments(params Expression<Func<IComment, object>>[] selectors);
         #endregion
 
         #endregion

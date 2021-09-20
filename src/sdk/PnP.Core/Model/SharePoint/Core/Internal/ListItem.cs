@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Dynamic;
 using System.Globalization;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Net.Http;
 using System.Text;
 using System.Text.Json;
@@ -44,6 +45,13 @@ namespace PnP.Core.Model.SharePoint
                             var fieldName = field.GetProperty("FieldName").GetString();
                             var fieldValue = field.GetProperty("FieldValue").GetString();
 
+                            // In some cases SharePoint will return HTTP 200 indicating the list item was added ok, but one or more fields could 
+                            // not be added which is indicated via the HasException property on the field. If so then throw an error.
+                            if (field.TryGetProperty("HasException", out JsonElement hasExceptionProperty) && hasExceptionProperty.GetBoolean() == true)
+                            {
+                                throw new SharePointRestServiceException(string.Format(PnPCoreResources.Exception_ListItemAdd_WrongInternalFieldName, fieldName));
+                            }
+
                             if (fieldName == "Id")
                             {
                                 if (int.TryParse(fieldValue, out int id))
@@ -61,7 +69,8 @@ namespace PnP.Core.Model.SharePoint
                                     AddMetadata(PnPConstants.MetaDataRestId, $"{id}");
                                     MetadataSetup();
 
-                                    // Ensure the values are committed to the model when an item is being added
+                                    // Ensure the values are committed to the model when an item is being added: this
+                                    // will ensure there's no pending changes anymore
                                     Values.Commit();
 
                                     // We're currently only interested in the Id property
@@ -86,7 +95,6 @@ namespace PnP.Core.Model.SharePoint
             };
             AddApiCallHandler = async (keyValuePairs) =>
             {
-
                 var parentList = Parent.Parent as List;
                 // sample parent list uri: https://bertonline.sharepoint.com/sites/modern/_api/Web/Lists(guid'b2d52a36-52f1-48a4-b499-629063c6a38c')
                 var parentListUri = parentList.GetMetadata(PnPConstants.MetaDataUri);
@@ -99,7 +107,7 @@ namespace PnP.Core.Model.SharePoint
                 string serverRelativeUrl = null;
                 if (string.IsNullOrEmpty(parentListTitle) || string.IsNullOrEmpty(parentListUri) || !parentList.IsPropertyAvailable(p => p.TemplateType))
                 {
-                    // Fall back to loading the rootfolder propery if we can't determine the list name
+                    // Fall back to loading the RootFolder property if we can't determine the list name
                     await parentList.EnsurePropertiesAsync(p => p.RootFolder).ConfigureAwait(false);
                     serverRelativeUrl = parentList.RootFolder.ServerRelativeUrl;
                 }
@@ -188,10 +196,54 @@ namespace PnP.Core.Model.SharePoint
 
         public string Title { get => (string)Values["Title"]; set => Values["Title"] = value; }
 
+        public bool CommentsDisabled { get => GetValue<bool>(); set => SetValue(value); }
+
+        public CommentsDisabledScope CommentsDisabledScope { get => GetValue<CommentsDisabledScope>(); set => SetValue(value); }
+
+        public IContentType ContentType { get => GetModelValue<IContentType>(); }
+
+        public IFieldStringValues FieldValuesAsHtml { get => GetModelValue<IFieldStringValues>(); }
+
+        public IFieldStringValues FieldValuesAsText { get => GetModelValue<IFieldStringValues>(); }
+
+        public IFieldStringValues FieldValuesForEdit { get => GetModelValue<IFieldStringValues>(); }
+
+        public IFile File { get => GetModelValue<IFile>(); }
+
+        public FileSystemObjectType FileSystemObjectType
+        {
+            get => HasValue("FSObjType") ? GetValue<FileSystemObjectType>("FSObjType") : GetValue<FileSystemObjectType>();
+            set => SetValue(value);
+        }
+
+        public IFolder Folder { get => GetModelValue<IFolder>(); }
+
+        public IList ParentList { get => GetModelValue<IList>(); }
+
+        public IPropertyValues Properties { get => GetModelValue<IPropertyValues>(); }
+
+        public string ServerRedirectedEmbedUri { get => GetValue<string>(); set => SetValue(value); }
+
+        public string ServerRedirectedEmbedUrl { get => GetValue<string>(); set => SetValue(value); }
+
+        public Guid UniqueId { get => GetValue<Guid>(); set => SetValue(value); }
+
         [KeyProperty(nameof(Id))]
         public override object Key { get => Id; set => Id = (int)value; }
 
         public IRoleAssignmentCollection RoleAssignments { get => GetModelCollectionValue<IRoleAssignmentCollection>(); }
+
+        // Not in public interface as Comments is not an expandable property in REST
+        public ICommentCollection Comments { get => GetModelCollectionValue<ICommentCollection>(); }
+
+        public ILikedByInformation LikedByInformation { get => GetModelValue<ILikedByInformation>(); }
+
+        public IListItemVersionCollection Versions { get => GetModelCollectionValue<IListItemVersionCollection>(); }
+
+        public IAttachmentCollection AttachmentFiles { get => GetModelCollectionValue<IAttachmentCollection>(); }
+
+        [SharePointProperty("*")]
+        public object All { get => null; }
 
         #endregion
 
@@ -215,6 +267,51 @@ namespace PnP.Core.Model.SharePoint
 
         #endregion
 
+        #region Display Name
+
+        public async Task<string> GetDisplayNameAsync()
+        {
+            var apiCall = new ApiCall($"{GetItemUri()}/DisplayName", ApiType.SPORest);
+
+            var response = await RawRequestAsync(apiCall, HttpMethod.Get).ConfigureAwait(false);
+
+            if (!string.IsNullOrEmpty(response.Json))
+            {
+                var json = JsonDocument.Parse(response.Json).RootElement.GetProperty("d");
+
+                if (json.TryGetProperty("DisplayName", out JsonElement displayName))
+                {
+                    return displayName.GetString();
+                }
+            }
+
+            return null;
+        }
+
+        public string GetDisplayName()
+        {
+            return GetDisplayNameAsync().GetAwaiter().GetResult();
+        }
+
+        #endregion
+
+        #region File
+        public async Task<bool> IsFileAsync()
+        {
+            if (!Values.ContainsKey("ContentTypeId"))
+            {
+                await LoadKeyListItemProperties().ConfigureAwait(false);
+            }
+
+            return Values["ContentTypeId"].ToString().StartsWith("0x0101", StringComparison.InvariantCultureIgnoreCase);
+        }
+
+        public bool IsFile()
+        {
+            return IsFileAsync().GetAwaiter().GetResult();
+        }
+        #endregion
+
         #region Folder
         public async Task<bool> IsFolderAsync()
         {
@@ -231,7 +328,7 @@ namespace PnP.Core.Model.SharePoint
             return IsFolderAsync().GetAwaiter().GetResult();
         }
 
-        public async Task<IFolder> GetFolderAsync()
+        public async Task<IFolder> GetParentFolderAsync()
         {
             if (!Values.ContainsKey("FileDirRef"))
             {
@@ -241,9 +338,9 @@ namespace PnP.Core.Model.SharePoint
             return await PnPContext.Web.GetFolderByServerRelativeUrlAsync(Values["FileDirRef"].ToString()).ConfigureAwait(false);
         }
 
-        public IFolder GetFolder()
+        public IFolder GetParentFolder()
         {
-            return GetFolderAsync().GetAwaiter().GetResult();
+            return GetParentFolderAsync().GetAwaiter().GetResult();
         }
 
         private async Task LoadKeyListItemProperties()
@@ -391,7 +488,7 @@ namespace PnP.Core.Model.SharePoint
             }
             else if (changedProp.Value is DateTime dateValue)
             {
-                field.FieldValue = DateTimeToSharePointString(context, dateValue);
+                field.FieldValue = DateTimeToSharePointWebDateTimeString(context, dateValue);
             }
             else if (changedProp.Value != null && (changedProp.Value is int))
             {
@@ -411,17 +508,16 @@ namespace PnP.Core.Model.SharePoint
             }
         }
 
-        private static string DateTimeToSharePointString(PnPContext context, DateTime input)
+        private static string DateTimeToSharePointWebDateTimeString(PnPContext context, DateTime input)
         {
             // Convert incoming date to UTC
             DateTime inputInUTC = input.ToUniversalTime();
 
             // Convert to the time zone used by the SharePoint site, take in account the daylight savings delta
-            bool isDaylight = TimeZoneInfo.Local.IsDaylightSavingTime(input);
-            TimeSpan utcDelta = new TimeSpan(0, context.Web.RegionalSettings.TimeZone.Bias + (isDaylight ? context.Web.RegionalSettings.TimeZone.DaylightBias : context.Web.RegionalSettings.TimeZone.StandardBias), 0);
+            DateTime localDateTime = context.Web.RegionalSettings.TimeZone.UtcToLocalTime(inputInUTC);
 
             // Apply the delta from UTC to get the date used by the site and apply formatting 
-            return (inputInUTC - utcDelta).ToString("yyyy-MM-dd hh:mm:ss", CultureInfo.InvariantCulture);
+            return (localDateTime).ToString("yyyy-MM-dd hh:mm:ss", CultureInfo.InvariantCulture);
         }
 
         private static string DoubleToSharePointString(PnPContext context, double input)
@@ -605,7 +701,9 @@ namespace PnP.Core.Model.SharePoint
             {
                 var json = JsonDocument.Parse(response.Json).RootElement.GetProperty("d");
 
+#pragma warning disable CA1507 // Use nameof to express symbol names
                 if (json.TryGetProperty("CommentsDisabled", out JsonElement commentsDisabled))
+#pragma warning restore CA1507 // Use nameof to express symbol names
                 {
                     return commentsDisabled.GetBoolean();
                 }
@@ -1127,6 +1225,122 @@ namespace PnP.Core.Model.SharePoint
         private ApiCall BuildRemoveRoleDefinitionApiCall(int principalId, IRoleDefinition roleDefinition)
         {
             return new ApiCall($"{GetItemUri()}/roleassignments/removeroleassignment(principalid={principalId},roledefid={roleDefinition.Id})", ApiType.SPORest);
+        }
+
+        #endregion
+
+        #region Get Changes
+
+        public async Task<IList<IChange>> GetChangesAsync(ChangeQueryOptions query)
+        {
+            var apiCall = ChangeCollectionHandler.GetApiCall(this, query);
+            var response = await RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
+            return ChangeCollectionHandler.Deserialize(response, this, PnPContext).ToList();
+        }
+
+        public IList<IChange> GetChanges(ChangeQueryOptions query)
+        {
+            return GetChangesAsync(query).GetAwaiter().GetResult();
+        }
+
+        #endregion
+
+        #region Comments and liking
+        public ICommentCollection GetComments(params Expression<Func<IComment, object>>[] selectors)
+        {
+            return GetCommentsAsync(selectors).GetAwaiter().GetResult();
+        }
+
+        public async Task<ICommentCollection> GetCommentsAsync(params Expression<Func<IComment, object>>[] selectors)
+        {
+            var apiCall = await BuildGetCommentsApiCallAsync(this, PnPContext, selectors).ConfigureAwait(false);
+
+            // Since Get methods return a disconnected set of data and we've just loaded data into the 
+            // not exposed Comments property we're replicating this ListItem and return the replicated
+            // comments collection
+            IDataModelParent replicatedParent = null;
+
+            // Create a replicated parent
+            if (Parent != null)
+            {
+                // Replicate the parent object in order to keep original collection as is
+                replicatedParent = EntityManager.ReplicateParentHierarchy(Parent, PnPContext);
+            }
+            // Create a new object with a replicated parent
+            var newDataModel = (BaseDataModel<IListItem>)EntityManager.GetEntityConcreteInstance(GetType(), replicatedParent, PnPContext);
+
+            // Replicate metadata and key between the objects
+            EntityManager.ReplicateKeyAndMetadata(this, newDataModel);
+
+            // Load the comments on the replicated model
+            await newDataModel.RequestAsync(apiCall, HttpMethod.Get).ConfigureAwait(false);
+
+            return (newDataModel as ListItem).Comments;
+        }
+
+        private static async Task<ApiCall> BuildGetCommentsApiCallAsync<TModel>(IDataModel<TModel> listItem, PnPContext context, params Expression<Func<IComment, object>>[] selectors)
+        {
+            string itemApi = null;
+            if (listItem.Parent is IListItemCollection)
+            {
+                itemApi = "_api/web/lists/getbyid(guid'{Parent.Id}')/items({Id})";
+            }
+            else if (listItem.Parent is IFile)
+            {
+                itemApi = "_api/web/lists(guid'{List.Id}')/getitembyid({Id})";
+            }
+
+            var apiCall = new ApiCall($"{itemApi}/getcomments", ApiType.SPORest, receivingProperty: nameof(Comments));
+            if (selectors != null && selectors.Any())
+            {
+                // Use the query client to translate the seletors into the needed query string
+                var tempComment = new Comment()
+                {
+                    PnPContext = context
+                };
+
+                var entityInfo = EntityManager.GetClassInfo(tempComment.GetType(), tempComment, expressions: selectors);
+                var query = await QueryClient.BuildGetAPICallAsync(tempComment, entityInfo, apiCall).ConfigureAwait(false);
+                return new ApiCall(query.ApiCall.Request, ApiType.SPORest, receivingProperty: nameof(Comments));
+            }
+            else
+            {
+                return apiCall;
+            }
+        }
+
+        public async Task LikeAsync()
+        {
+            await LikeUnlike(true).ConfigureAwait(false);
+        }
+
+        public void Like()
+        {
+            LikeAsync().GetAwaiter().GetResult();
+        }
+
+        public async Task UnlikeAsync()
+        {
+            await LikeUnlike(false).ConfigureAwait(false);
+        }
+
+        public void Unlike()
+        {
+            UnlikeAsync().GetAwaiter().GetResult();
+        }
+
+        private async Task LikeUnlike(bool like)
+        {
+            var baseApiCall = $"_api/web/lists(guid'{{List.Id}}')/getitembyid({{Id}})";
+
+            if (like)
+            {
+                await RequestAsync(new ApiCall($"{baseApiCall}/like", ApiType.SPORest), HttpMethod.Post).ConfigureAwait(false);
+            }
+            else
+            {
+                await RequestAsync(new ApiCall($"{baseApiCall}/unlike", ApiType.SPORest), HttpMethod.Post).ConfigureAwait(false);
+            }
         }
 
         #endregion

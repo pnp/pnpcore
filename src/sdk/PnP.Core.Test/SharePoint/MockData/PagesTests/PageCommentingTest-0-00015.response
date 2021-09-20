@@ -1,0 +1,9 @@
+--batchresponse_106ffddc-b870-4616-86fd-c3f8455d75f2
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+HTTP/1.1 200 OK
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+
+{"d":{"Like":null}}
+--batchresponse_106ffddc-b870-4616-86fd-c3f8455d75f2--

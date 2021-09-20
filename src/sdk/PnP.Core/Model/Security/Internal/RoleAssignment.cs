@@ -1,6 +1,5 @@
 using PnP.Core.Model.SharePoint;
 using PnP.Core.Services;
-using System.Linq;
 
 namespace PnP.Core.Model.Security
 {

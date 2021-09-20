@@ -11,7 +11,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a Web object of SharePoint Online
     /// </summary>
     [ConcreteType(typeof(Web))]
-    public interface IWeb : IDataModel<IWeb>, IDataModelGet<IWeb>, IDataModelLoad<IWeb>, IDataModelUpdate, IDataModelDelete, IQueryableDataModel
+    public interface IWeb : IDataModel<IWeb>, IDataModelGet<IWeb>, IDataModelLoad<IWeb>, IDataModelUpdate, IDataModelDelete, IDataModelSupportingGetChanges, IQueryableDataModel
     {
         #region Properties
         /// <summary>
@@ -32,7 +32,7 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// Gets a value that specifies whether the automatic ASPX page indexed is allowed.
         /// </summary>
-        public bool AllowAutomaticASPXPageIndexing { get; }
+        public bool AllowAutomaticASPXPageIndexing { get; set; }
 
         /// <summary>
         /// Gets a value that specifies whether the current user is allowed to create declarative workflow on this site.
@@ -656,6 +656,21 @@ namespace PnP.Core.Model.SharePoint
         #endregion
 
         #region GetFileByServerRelativeUrl
+        /// <summary>
+        /// Get a file in the current web from its server relative URL, it not available null will be returned
+        /// </summary>
+        /// <param name="serverRelativeUrl">The server relative URL of the file to get.</param>
+        /// <param name="expressions">Expressions needed to create the request</param>
+        /// <returns>The file to get or null if the file was not available</returns>
+        public IFile GetFileByServerRelativeUrlOrDefault(string serverRelativeUrl, params Expression<Func<IFile, object>>[] expressions);
+
+        /// <summary>
+        /// Get a file in the current web from its server relative URL, it not available null will be returned
+        /// </summary>
+        /// <param name="serverRelativeUrl">The server relative URL of the file to get.</param>
+        /// <param name="expressions">Expressions needed to create the request</param>
+        /// <returns>The file to get or null if the file was not available</returns>
+        public Task<IFile> GetFileByServerRelativeUrlOrDefaultAsync(string serverRelativeUrl, params Expression<Func<IFile, object>>[] expressions);
 
         /// <summary>
         /// Get a file in the current web from its server relative URL.
@@ -904,6 +919,38 @@ namespace PnP.Core.Model.SharePoint
         /// Sync the hub site theme from parent hub site
         /// </summary>
         public Task SyncHubSiteThemeAsync();
+
+        #endregion
+
+        #region Is sub site
+
+        /// <summary>
+        /// Checks if this web is a sub site
+        /// </summary>
+        /// <returns>True if the web is a sub site</returns>
+        Task<bool> IsSubSiteAsync();
+
+        /// <summary>
+        /// Checks if this web is a sub site
+        /// </summary>
+        /// <returns>True if the web is a sub site</returns>
+        bool IsSubSite();
+
+        #endregion
+
+        #region Ensure page scheduling
+
+        /// <summary>
+        /// Ensures that page publishing can work for this site. Page scheduling only works for the root web of a site collection
+        /// </summary>
+        /// <returns></returns>
+        Task EnsurePageSchedulingAsync();
+
+        /// <summary>
+        /// Ensures that page publishing can work for this site. Page scheduling only works for the root web of a site collection
+        /// </summary>
+        /// <returns></returns>
+        void EnsurePageScheduling();
 
         #endregion
 

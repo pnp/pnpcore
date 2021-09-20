@@ -3,7 +3,8 @@
 When getting and setting list item values you'll need to work with the various field types SharePoint and PnP Core SDK support. Depending on the field type you'll need to work with different objects as you can see in below chapters.
 
 > [!Note]
-> The samples assume you've loaded a list into the variable `mylist`.
+> - The samples assume you've loaded a list into the variable `mylist`.
+> - When referencing a field keep in mind that you need to use the field's `StaticName`. If you've created a field with name `Version Tag` then the `StaticName` will be `Version_x0020_Tag`, so you will be using `myItem["Version_x0020_Tag"]` to work with the field.
 
 ## Text and Multiline text fields
 
@@ -303,6 +304,9 @@ if (addedItem["MyField"] != null)
 
 Working with multi user fields builds on top of working with user fields, you still use the [IFieldUserValue interface](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IFieldUserValue.html) for field setting and the [NewFieldUserValue method on the IField](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IField.html#PnP_Core_Model_SharePoint_IField_NewFieldUserValue_PnP_Core_Model_Security_ISharePointPrincipal_) or [NewFieldUserValue method on the IListItem](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IListItem.html#collapsible-PnP_Core_Model_SharePoint_IListItem_NewFieldUserValue_PnP_Core_Model_SharePoint_IField_PnP_Core_Model_Security_ISharePointPrincipal_) methods, but since you need to store multiple users you need to manage them via an [IFieldValueCollection](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IFieldValueCollection.html).
 
+> [!Note]
+> It's important to create an `IFieldValueCollection` (e.g. via `IField.NewFieldValueCollection()`) per `IListItem` you're adding as the `IFieldValueCollection` handles the change tracking for that specific `IListItem`.
+
 ```csharp
 // Add a multi user field
 IField myField = await myList.Fields.AddUserMultiAsync("MyField", new FieldUserOptions()
@@ -399,6 +403,9 @@ if (addedItem["MyField"] != null)
 
 Working with multi lookup fields builds on top of working with lookup fields, you still use the [IFieldLookupValue interface](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IFieldLookupValue.html) for field setting and the [NewFieldLookupValue method on the IField](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IField.html#PnP_Core_Model_SharePoint_IField_NewFieldLookupValue_System_Int32_) or [NewFieldLookupValue method on the IListItem](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_NewFieldLookupValue_PnP_Core_Model_SharePoint_IField_System_Int32_) methods, but since you need to store multiple lookups you need to manage them via an [IFieldValueCollection](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IFieldValueCollection.html).
 
+> [!Note]
+> It's important to create an `IFieldValueCollection` (e.g. via `IField.NewFieldValueCollection()`) per `IListItem` you're adding as the `IFieldValueCollection` handles the change tracking for that specific `IListItem`.
+
 ```csharp
 IList sitePages = await context.Web.Lists.GetByTitleAsync("Site Pages");
 
@@ -492,6 +499,9 @@ if (addedItem["MyField"] != null)
 ## Multi taxonomy fields
 
 Working with multi taxonomy fields builds on top of working with taxonomy fields, you still use the [IFieldTaxonomyValue interface](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IFieldTaxonomyValue.html) for field setting and the [NewFieldTaxonomyValue method on the IField](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IField.html#PnP_Core_Model_SharePoint_IField_NewFieldTaxonomyValue_Guid_System_String_System_Int32_) or [NewFieldTaxonomyValue method on the IListItem](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_NewFieldTaxonomyValue_PnP_Core_Model_SharePoint_IField_Guid_System_String_System_Int32_) methods, but since you need to store multiple taxonomy fields you need to manage them via an [IFieldValueCollection](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IFieldValueCollection.html).
+
+> [!Note]
+> It's important to create an `IFieldValueCollection` (e.g. via `IField.NewFieldValueCollection()`) per `IListItem` you're adding as the `IFieldValueCollection` handles the change tracking for that specific `IListItem`.
 
 ```csharp
 // Add a multi taxonomy field

@@ -104,6 +104,11 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// To update...
         /// </summary>
+        public bool EnforceSPOSearch { get; set; }
+
+        /// <summary>
+        /// To update...
+        /// </summary>
         public bool HasEditRole { get; set; }
 
         /// <summary>
@@ -170,6 +175,11 @@ namespace PnP.Core.Model.SharePoint
         /// To update...
         /// </summary>
         public bool ShowExternalSharingWarning { get; set; }
+
+        /// <summary>
+        /// To update...
+        /// </summary>
+        public string SiteIBMode { get; set; }
 
         /// <summary>
         /// To update...

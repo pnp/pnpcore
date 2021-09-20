@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using PnP.Core.Model;
 using PnP.Core.Model.SharePoint;
 using PnP.Core.QueryModel;
 using PnP.Core.Test.Utilities;
@@ -196,9 +197,9 @@ namespace PnP.Core.Test.SharePoint
                 {
                     IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync($"{TestCommon.Instance.TestUris[TestCommon.TestSite].LocalPath}/Shared%20Documents/IdontExist.pdf");
 
-                    Assert.IsNotNull(testDocument);                
+                    Assert.IsNotNull(testDocument);
                 }
-                catch(SharePointRestServiceException ex)
+                catch (SharePointRestServiceException ex)
                 {
                     var error = ex.Error as SharePointRestError;
                     // Indicates the file did not exist
@@ -211,6 +212,17 @@ namespace PnP.Core.Test.SharePoint
                 Assert.IsTrue(exceptionThrown);
             }
 
+        }
+
+        [TestMethod]
+        public async Task GetNonExistingFileByServerRelativeUrlOrDefaultAsyncTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+            {
+                IFile testDocument = context.Web.GetFileByServerRelativeUrlOrDefault($"{TestCommon.Instance.TestUris[TestCommon.TestSite].LocalPath}/Shared%20Documents/IdontExist.pdf");
+                Assert.IsTrue(testDocument == null);
+            }
         }
 
         [TestMethod]
@@ -260,7 +272,7 @@ namespace PnP.Core.Test.SharePoint
                 initialMajorVersion = testDocument.MajorVersion;
                 initialMinorVersion = testDocument.MinorVersion;
                 await testDocument.PublishAsync("TEST PUBLISH");
-            
+
                 testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl);
                 //Assert.AreEqual(currentVersion + 1, testDocument.MajorVersion);
                 Assert.AreEqual("TEST PUBLISH", testDocument.CheckInComment);
@@ -269,7 +281,6 @@ namespace PnP.Core.Test.SharePoint
                 Assert.IsTrue(!string.IsNullOrEmpty(testDocument.ContentTag));
                 Assert.AreEqual(CustomizedPageStatus.None, testDocument.CustomizedPageStatus);
                 Assert.IsTrue(!string.IsNullOrEmpty(testDocument.ETag));
-                Assert.IsTrue(testDocument.Exists);
                 Assert.IsFalse(testDocument.IrmEnabled);
                 Assert.IsTrue(testDocument.TimeCreated != DateTime.MinValue);
                 Assert.IsTrue(testDocument.TimeLastModified != DateTime.MinValue);
@@ -302,7 +313,7 @@ namespace PnP.Core.Test.SharePoint
                 initialMajorVersion = testDocument.MajorVersion;
                 initialMinorVersion = testDocument.MinorVersion;
                 testDocument.Publish("TEST PUBLISH");
-            
+
                 testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl);
                 //Assert.AreEqual(currentVersion + 1, testDocument.MajorVersion);
                 Assert.AreEqual("TEST PUBLISH", testDocument.CheckInComment);
@@ -332,7 +343,7 @@ namespace PnP.Core.Test.SharePoint
                 initialMinorVersion = testDocument.MinorVersion;
                 await testDocument.PublishBatchAsync("TEST PUBLISH");
                 await context.ExecuteAsync();
-            
+
                 testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl);
                 //Assert.AreEqual(currentVersion + 1, testDocument.MajorVersion);
                 Assert.AreEqual("TEST PUBLISH", testDocument.CheckInComment);
@@ -362,7 +373,7 @@ namespace PnP.Core.Test.SharePoint
                 initialMinorVersion = testDocument.MinorVersion;
                 testDocument.PublishBatch("TEST PUBLISH");
                 await context.ExecuteAsync();
-            
+
                 testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl);
                 //Assert.AreEqual(currentVersion + 1, testDocument.MajorVersion);
                 Assert.AreEqual("TEST PUBLISH", testDocument.CheckInComment);
@@ -392,7 +403,7 @@ namespace PnP.Core.Test.SharePoint
                 var batch = context.NewBatch();
                 await testDocument.PublishBatchAsync(batch, "TEST PUBLISH");
                 await context.ExecuteAsync(batch);
-            
+
                 testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl);
                 //Assert.AreEqual(currentVersion + 1, testDocument.MajorVersion);
                 Assert.AreEqual("TEST PUBLISH", testDocument.CheckInComment);
@@ -423,7 +434,7 @@ namespace PnP.Core.Test.SharePoint
                 var batch = context.NewBatch();
                 testDocument.PublishBatch(batch, "TEST PUBLISH");
                 await context.ExecuteAsync(batch);
-            
+
                 testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl);
                 //Assert.AreEqual(currentVersion + 1, testDocument.MajorVersion);
                 Assert.AreEqual("TEST PUBLISH", testDocument.CheckInComment);
@@ -483,7 +494,7 @@ namespace PnP.Core.Test.SharePoint
                 initialMinorVersion = testDocument.MinorVersion;
                 await testDocument.PublishAsync("TEST PUBLISH");
                 testDocument.Unpublish("TEST UNPUBLISHED");
-                
+
                 testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl);
                 Assert.AreEqual("TEST UNPUBLISHED", testDocument.CheckInComment);
                 Assert.AreEqual(initialMajorVersion, testDocument.MajorVersion);
@@ -512,7 +523,7 @@ namespace PnP.Core.Test.SharePoint
                 await testDocument.PublishAsync("TEST PUBLISH");
                 await testDocument.UnpublishBatchAsync("TEST UNPUBLISHED");
                 await context.ExecuteAsync();
-                
+
                 testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl);
                 Assert.AreEqual("TEST UNPUBLISHED", testDocument.CheckInComment);
                 Assert.AreEqual(initialMajorVersion, testDocument.MajorVersion);
@@ -541,7 +552,7 @@ namespace PnP.Core.Test.SharePoint
                 await testDocument.PublishAsync("TEST PUBLISH");
                 testDocument.UnpublishBatch("TEST UNPUBLISHED");
                 await context.ExecuteAsync();
-                
+
                 testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl);
                 Assert.AreEqual("TEST UNPUBLISHED", testDocument.CheckInComment);
                 Assert.AreEqual(initialMajorVersion, testDocument.MajorVersion);
@@ -571,7 +582,7 @@ namespace PnP.Core.Test.SharePoint
                 var batch = context.NewBatch();
                 await testDocument.UnpublishBatchAsync(batch, "TEST UNPUBLISHED");
                 await context.ExecuteAsync(batch);
-            
+
                 testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl);
                 Assert.AreEqual("TEST UNPUBLISHED", testDocument.CheckInComment);
                 Assert.AreEqual(initialMajorVersion, testDocument.MajorVersion);
@@ -601,7 +612,7 @@ namespace PnP.Core.Test.SharePoint
                 var batch = context.NewBatch();
                 testDocument.UnpublishBatch(batch, "TEST UNPUBLISHED");
                 await context.ExecuteAsync(batch);
-            
+
                 testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl);
                 Assert.AreEqual("TEST UNPUBLISHED", testDocument.CheckInComment);
                 Assert.AreEqual(initialMajorVersion, testDocument.MajorVersion);
@@ -625,7 +636,7 @@ namespace PnP.Core.Test.SharePoint
             {
                 IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl);
                 await testDocument.CheckoutAsync();
-            
+
                 testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl, f => f.CheckOutType, f => f.CheckedOutByUser);
                 Assert.AreNotEqual(CheckOutType.None, testDocument.CheckOutType);
                 Assert.IsNotNull(testDocument.CheckedOutByUser);
@@ -649,7 +660,7 @@ namespace PnP.Core.Test.SharePoint
             {
                 IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl);
                 testDocument.Checkout();
-            
+
                 testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl, f => f.CheckOutType, f => f.CheckedOutByUser);
                 Assert.AreNotEqual(CheckOutType.None, testDocument.CheckOutType);
                 Assert.IsNotNull(testDocument.CheckedOutByUser);
@@ -674,7 +685,7 @@ namespace PnP.Core.Test.SharePoint
                 IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl);
                 await testDocument.CheckoutBatchAsync();
                 await context.ExecuteAsync();
-            
+
                 testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl, f => f.CheckOutType, f => f.CheckedOutByUser);
                 Assert.AreNotEqual(CheckOutType.None, testDocument.CheckOutType);
                 Assert.IsNotNull(testDocument.CheckedOutByUser);
@@ -699,7 +710,7 @@ namespace PnP.Core.Test.SharePoint
                 IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl);
                 testDocument.CheckoutBatch();
                 await context.ExecuteAsync();
-            
+
                 testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl, f => f.CheckOutType, f => f.CheckedOutByUser);
                 Assert.AreNotEqual(CheckOutType.None, testDocument.CheckOutType);
                 Assert.IsNotNull(testDocument.CheckedOutByUser);
@@ -725,7 +736,7 @@ namespace PnP.Core.Test.SharePoint
                 var batch = context.NewBatch();
                 await testDocument.CheckoutBatchAsync(batch);
                 await context.ExecuteAsync(batch);
-            
+
                 testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl, f => f.CheckOutType, f => f.CheckedOutByUser);
                 Assert.AreNotEqual(CheckOutType.None, testDocument.CheckOutType);
                 Assert.IsNotNull(testDocument.CheckedOutByUser);
@@ -751,7 +762,7 @@ namespace PnP.Core.Test.SharePoint
                 var batch = context.NewBatch();
                 testDocument.CheckoutBatch(batch);
                 await context.ExecuteAsync(batch);
-            
+
                 testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl, f => f.CheckOutType, f => f.CheckedOutByUser);
                 Assert.AreNotEqual(CheckOutType.None, testDocument.CheckOutType);
                 Assert.IsNotNull(testDocument.CheckedOutByUser);
@@ -783,7 +794,7 @@ namespace PnP.Core.Test.SharePoint
                 initialMinorVersion = testDocument.MinorVersion;
                 await testDocument.CheckoutAsync();
                 await testDocument.UndoCheckoutAsync();
-                            
+
                 testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl);
                 Assert.AreEqual(CheckOutType.None, testDocument.CheckOutType);
                 Assert.AreEqual(initialMajorVersion, testDocument.MajorVersion);
@@ -810,7 +821,7 @@ namespace PnP.Core.Test.SharePoint
                 initialMinorVersion = testDocument.MinorVersion;
                 testDocument.Checkout();
                 testDocument.UndoCheckout();
-            
+
                 testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl);
                 Assert.AreEqual(CheckOutType.None, testDocument.CheckOutType);
                 Assert.AreEqual(initialMajorVersion, testDocument.MajorVersion);
@@ -838,7 +849,7 @@ namespace PnP.Core.Test.SharePoint
                 await testDocument.CheckoutAsync();
                 await testDocument.UndoCheckoutBatchAsync();
                 await context.ExecuteAsync();
-            
+
                 testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl);
                 Assert.AreEqual(CheckOutType.None, testDocument.CheckOutType);
                 Assert.AreEqual(initialMajorVersion, testDocument.MajorVersion);
@@ -866,7 +877,7 @@ namespace PnP.Core.Test.SharePoint
                 testDocument.Checkout();
                 testDocument.UndoCheckoutBatch();
                 await context.ExecuteAsync();
-            
+
                 testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl);
                 Assert.AreEqual(CheckOutType.None, testDocument.CheckOutType);
                 Assert.AreEqual(initialMajorVersion, testDocument.MajorVersion);
@@ -895,7 +906,7 @@ namespace PnP.Core.Test.SharePoint
                 var batch = context.NewBatch();
                 await testDocument.UndoCheckoutBatchAsync(batch);
                 await context.ExecuteAsync(batch);
-            
+
                 testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl);
                 Assert.AreEqual(CheckOutType.None, testDocument.CheckOutType);
                 Assert.AreEqual(initialMajorVersion, testDocument.MajorVersion);
@@ -924,7 +935,7 @@ namespace PnP.Core.Test.SharePoint
                 var batch = context.NewBatch();
                 testDocument.UndoCheckoutBatch(batch);
                 await context.ExecuteAsync(batch);
-            
+
                 testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl);
                 Assert.AreEqual(CheckOutType.None, testDocument.CheckOutType);
                 Assert.AreEqual(initialMajorVersion, testDocument.MajorVersion);
@@ -954,10 +965,10 @@ namespace PnP.Core.Test.SharePoint
                 await testDocument.CheckinAsync("TEST CHECK IN", CheckinType.MajorCheckIn);
                 await testDocument.ApproveAsync("TEST APPROVE");
 
-                testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl, f=>f.CheckOutType, f => f.CheckInComment, f => f.MajorVersion, f => f.MinorVersion, p => p.ListItemAllFields);
+                testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl, f => f.CheckOutType, f => f.CheckInComment, f => f.MajorVersion, f => f.MinorVersion, p => p.ListItemAllFields);
                 Assert.AreEqual(CheckOutType.None, testDocument.CheckOutType);
                 Assert.AreEqual("TEST CHECK IN", testDocument.CheckInComment);
-                
+
                 Assert.AreEqual("0", testDocument.ListItemAllFields["_ModerationStatus"].ToString());
                 Assert.AreEqual("TEST APPROVE", testDocument.ListItemAllFields["_ModerationComments"].ToString());
                 Assert.IsTrue(testDocument.MajorVersion == initialMajorVersion + 1);
@@ -1021,7 +1032,7 @@ namespace PnP.Core.Test.SharePoint
                 initialMinorVersion = testDocument.MinorVersion;
                 await testDocument.CheckoutAsync();
                 await testDocument.CheckinAsync("TEST CHECK IN", CheckinType.MajorCheckIn);
-            
+
                 testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl);
                 Assert.AreEqual(CheckOutType.None, testDocument.CheckOutType);
                 Assert.AreEqual("TEST CHECK IN", testDocument.CheckInComment);
@@ -1049,7 +1060,7 @@ namespace PnP.Core.Test.SharePoint
                 initialMinorVersion = testDocument.MinorVersion;
                 await testDocument.CheckoutAsync();
                 await testDocument.CheckinAsync("TEST CHECK IN", CheckinType.MinorCheckIn);
-            
+
                 testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl);
                 Assert.AreEqual(CheckOutType.None, testDocument.CheckOutType);
                 Assert.AreEqual("TEST CHECK IN", testDocument.CheckInComment);
@@ -1078,7 +1089,7 @@ namespace PnP.Core.Test.SharePoint
                 initialMinorVersion = testDocument.MinorVersion;
                 await testDocument.CheckoutAsync();
                 await testDocument.CheckinAsync("TEST CHECK IN", CheckinType.OverwriteCheckIn);
-            
+
                 testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl);
                 Assert.AreEqual(CheckOutType.None, testDocument.CheckOutType);
                 Assert.AreEqual("TEST CHECK IN", testDocument.CheckInComment);
@@ -1107,7 +1118,7 @@ namespace PnP.Core.Test.SharePoint
                 await testDocument.CheckoutAsync();
                 await testDocument.CheckinBatchAsync("TEST CHECK IN", CheckinType.MajorCheckIn);
                 await context.ExecuteAsync();
-            
+
                 testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl);
                 Assert.AreEqual(CheckOutType.None, testDocument.CheckOutType);
                 Assert.AreEqual("TEST CHECK IN", testDocument.CheckInComment);
@@ -1134,7 +1145,7 @@ namespace PnP.Core.Test.SharePoint
                 Guid recycleBinId = await testDocument.RecycleAsync();
 
                 Assert.AreNotEqual(Guid.Empty, recycleBinId);
-            
+
                 try
                 {
                     testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl);
@@ -1161,7 +1172,7 @@ namespace PnP.Core.Test.SharePoint
                 Guid recycleBinId = testDocument.Recycle();
 
                 Assert.AreNotEqual(Guid.Empty, recycleBinId);
-            
+
                 try
                 {
                     testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl);
@@ -1216,7 +1227,7 @@ namespace PnP.Core.Test.SharePoint
 
                 testDocument.RecycleBatch();
                 await context.ExecuteAsync();
-            
+
                 try
                 {
                     testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl);
@@ -1243,7 +1254,7 @@ namespace PnP.Core.Test.SharePoint
                 var batch = context.NewBatch();
                 await testDocument.RecycleBatchAsync(batch);
                 await context.ExecuteAsync(batch);
-            
+
                 try
                 {
                     testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl);
@@ -1270,7 +1281,7 @@ namespace PnP.Core.Test.SharePoint
                 var batch = context.NewBatch();
                 testDocument.RecycleBatch(batch);
                 await context.ExecuteAsync(batch);
-            
+
                 try
                 {
                     testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl);
@@ -1908,41 +1919,100 @@ namespace PnP.Core.Test.SharePoint
         public async Task GetFileVersionContentAsyncTest()
         {
             //TestCommon.Instance.Mocking = false;
-            (string libraryName, string documentName, string documentUrl) = await TestAssets.CreateTestDocumentInDedicatedLibraryAsync(0, parentLibraryEnableVersioning: true, parentLibraryEnableMinorVersions: true);
+
+            (string libraryName, _, _) = await TestAssets.CreateTestDocumentInDedicatedLibraryAsync(0, parentLibraryEnableVersioning: true, parentLibraryEnableMinorVersions: true);
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
             {
-                IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl);
-                // Create 2 minor versions
+                var list = await context.Web.Lists.GetByTitleAsync(libraryName, l => l.RootFolder.QueryProperties(f => f.ServerRelativeUrl));
+                
+                const string fileContent1 = "PnP Rocks !!!";
+                const string fileContent2 = "BlahBlahBlah???";
+                
+                var contentStream1 = new MemoryStream(Encoding.UTF8.GetBytes(fileContent1));
+                var contentStream2 = new MemoryStream(Encoding.UTF8.GetBytes(fileContent2));
+
+                string documentName = $"{nameof(GetFileVersionContentAsyncTest)}.txt";
+                IFile testDocument = await list.RootFolder.Files.AddAsync(documentName, contentStream1);
+                
+                // Create 2 additional minor versions
                 await testDocument.CheckoutAsync();
                 await testDocument.CheckinAsync();
                 await testDocument.CheckoutAsync();
                 await testDocument.CheckinAsync();
 
+                // Create major version
+                await testDocument.CheckoutAsync();
+                testDocument = await list.RootFolder.Files.AddAsync(documentName, contentStream2, true);
+                await testDocument.CheckinAsync("OVERWROTE A FILE", CheckinType.MajorCheckIn);
+                
+                // Create another major version
                 await testDocument.CheckoutAsync();
                 await testDocument.CheckinAsync("TEST COMMENT", CheckinType.MajorCheckIn);
+                
+                IFile documentWithVersions = await context.Web.GetFileByServerRelativeUrlAsync(testDocument.ServerRelativeUrl, 
+                    f => f.Versions,
+                    f => f.CheckInComment,
+                    f => f.MajorVersion, 
+                    f => f.MinorVersion,
+                    f => f.UIVersionLabel);
 
-                IFile documentWithVersions = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl, f => f.Versions);
+                Assert.AreEqual("TEST COMMENT", documentWithVersions.CheckInComment);
+                Assert.AreEqual(2, documentWithVersions.MajorVersion);
+                Assert.AreEqual(0, documentWithVersions.MinorVersion);
+                Assert.AreEqual("2.0", documentWithVersions.UIVersionLabel);
 
                 Assert.IsNotNull(documentWithVersions.Versions);
-                // The versions history contains 2 versions
-                Assert.AreEqual(3, documentWithVersions.Versions.Length);
-                Assert.AreEqual($"_vti_history/1/{libraryName}/{documentName}", documentWithVersions.Versions.ElementAt(0).Url);
-                Assert.AreEqual("0.1", documentWithVersions.Versions.ElementAt(0).VersionLabel);
-                Assert.AreEqual("0.2", documentWithVersions.Versions.ElementAt(1).VersionLabel);
+                
+                var versions = documentWithVersions.Versions.AsRequested().ToList();
 
-                Assert.AreEqual(3, documentWithVersions.Versions.ElementAt(2).Id);
-                Assert.IsTrue(documentWithVersions.Versions.ElementAt(2).Created != DateTime.MinValue);
+                // The versions history contains 2 versions
+                Assert.AreEqual(4, versions.Count);
+                
+                Assert.AreEqual($"_vti_history/1/{libraryName}/{documentName}", versions.ElementAt(0).Url);
+                
+                Assert.AreEqual("0.1", versions.ElementAt(0).VersionLabel);
+                Assert.AreEqual("0.2", versions.ElementAt(1).VersionLabel);
+                Assert.AreEqual("0.3", versions.ElementAt(2).VersionLabel);
+                Assert.AreEqual("1.0", versions.ElementAt(3).VersionLabel);
+
+                Assert.AreEqual("OVERWROTE A FILE", versions.ElementAt(3).CheckInComment);
+
+                Assert.AreEqual(3, versions.ElementAt(2).Id);
+                Assert.IsTrue(versions.ElementAt(2).Created != DateTime.MinValue);
 
                 // Download document version content
-                Stream downloadedContentStream = await documentWithVersions.Versions.ElementAt(2).GetContentAsync();
+                Stream downloadedContentStream = await versions.ElementAt(2).GetContentAsync();
                 downloadedContentStream.Seek(0, SeekOrigin.Begin);
                 // Get string from the content stream
-                string downloadedContent = new StreamReader(downloadedContentStream).ReadToEnd();
+                string downloadedContent = await new StreamReader(downloadedContentStream).ReadToEndAsync();
+                
                 Assert.IsTrue(!string.IsNullOrEmpty(downloadedContent));
+                Assert.AreEqual(fileContent1, downloadedContent);
+                Assert.AreNotEqual(fileContent2, downloadedContent);
+
+                // Get the last file version
+                downloadedContentStream = await versions.ElementAt(3).GetContentAsync();
+                downloadedContentStream.Seek(0, SeekOrigin.Begin);
+                // Get string from the content stream
+                downloadedContent = await new StreamReader(downloadedContentStream).ReadToEndAsync();
+
+                Assert.IsTrue(!string.IsNullOrEmpty(downloadedContent));
+                Assert.AreEqual(fileContent2, downloadedContent);
+                Assert.AreNotEqual(fileContent1, downloadedContent);
+
+                // Download the latest from the actual file
+                downloadedContentStream = await documentWithVersions.GetContentAsync();
+                downloadedContentStream.Seek(0, SeekOrigin.Begin);
+                // Get string from the content stream
+                downloadedContent = await new StreamReader(downloadedContentStream).ReadToEndAsync();
+
+                Assert.IsTrue(!string.IsNullOrEmpty(downloadedContent));
+                Assert.AreEqual(fileContent2, downloadedContent);
+                Assert.AreNotEqual(fileContent1, downloadedContent);
             }
 
-            await TestAssets.CleanupTestDedicatedListAsync(3);
+            await TestAssets.CleanupTestDedicatedListAsync(2);
         }
 
         #endregion
@@ -2223,8 +2293,8 @@ namespace PnP.Core.Test.SharePoint
                 Assert.IsNotNull(documentWithProperties.Properties);
                 Assert.IsTrue(documentWithProperties.Properties.AsDynamic().ContentTypeId.StartsWith("0x0101"));
 
-                Assert.AreEqual(1, (int)documentWithProperties.Properties["vti_x005f_level"]);
-                Assert.AreEqual("100", documentWithProperties.Properties["vti_x005f_genericcontenttempnextbsnalloc"]);
+                Assert.AreEqual(1, (int)documentWithProperties.Properties["vti_level"]);
+                Assert.AreEqual("100", documentWithProperties.Properties["vti_genericcontenttempnextbsnalloc"]);
             }
 
             await TestAssets.CleanupTestDocumentAsync(2);
@@ -2242,8 +2312,8 @@ namespace PnP.Core.Test.SharePoint
 
                 Assert.IsNotNull(documentWithProperties.Properties);
                 Assert.IsTrue(documentWithProperties.Properties.AsDynamic().ContentTypeId.StartsWith("0x0101"));
-                Assert.AreEqual(1, (int)documentWithProperties.Properties["vti_x005f_level"]);
-                Assert.AreEqual("100", documentWithProperties.Properties["vti_x005f_genericcontenttempnextbsnalloc"]);
+                Assert.AreEqual(1, (int)documentWithProperties.Properties["vti_level"]);
+                Assert.AreEqual("100", documentWithProperties.Properties["vti_genericcontenttempnextbsnalloc"]);
             }
 
             await TestAssets.CleanupTestDocumentAsync(2);
@@ -2262,8 +2332,8 @@ namespace PnP.Core.Test.SharePoint
 
                 Assert.IsNotNull(documentWithProperties.Properties);
                 Assert.IsTrue(documentWithProperties.Properties.AsDynamic().ContentTypeId.StartsWith("0x0101"));
-                Assert.AreEqual(1, (int)documentWithProperties.Properties["vti_x005f_level"]);
-                Assert.AreEqual("100", documentWithProperties.Properties["vti_x005f_genericcontenttempnextbsnalloc"]);
+                Assert.AreEqual(1, (int)documentWithProperties.Properties["vti_level"]);
+                Assert.AreEqual("100", documentWithProperties.Properties["vti_genericcontenttempnextbsnalloc"]);
             }
 
             await TestAssets.CleanupTestDocumentAsync(2);
@@ -2282,8 +2352,8 @@ namespace PnP.Core.Test.SharePoint
 
                 Assert.IsNotNull(documentWithProperties.Properties);
                 Assert.IsTrue(documentWithProperties.Properties.AsDynamic().ContentTypeId.StartsWith("0x0101"));
-                Assert.AreEqual(1, (int)documentWithProperties.Properties["vti_x005f_level"]);
-                Assert.AreEqual("100", documentWithProperties.Properties["vti_x005f_genericcontenttempnextbsnalloc"]);
+                Assert.AreEqual(1, (int)documentWithProperties.Properties["vti_level"]);
+                Assert.AreEqual("100", documentWithProperties.Properties["vti_genericcontenttempnextbsnalloc"]);
             }
 
             await TestAssets.CleanupTestDocumentAsync(2);
@@ -2303,8 +2373,8 @@ namespace PnP.Core.Test.SharePoint
 
                 Assert.IsNotNull(documentWithProperties.Properties);
                 Assert.IsTrue(documentWithProperties.Properties.AsDynamic().ContentTypeId.StartsWith("0x0101"));
-                Assert.AreEqual(1, (int)documentWithProperties.Properties["vti_x005f_level"]);
-                Assert.AreEqual("100", documentWithProperties.Properties["vti_x005f_genericcontenttempnextbsnalloc"]);
+                Assert.AreEqual(1, (int)documentWithProperties.Properties["vti_level"]);
+                Assert.AreEqual("100", documentWithProperties.Properties["vti_genericcontenttempnextbsnalloc"]);
             }
 
             await TestAssets.CleanupTestDocumentAsync(2);
@@ -2324,8 +2394,8 @@ namespace PnP.Core.Test.SharePoint
 
                 Assert.IsNotNull(documentWithProperties.Properties);
                 Assert.IsTrue(documentWithProperties.Properties.AsDynamic().ContentTypeId.StartsWith("0x0101"));
-                Assert.AreEqual(1, (int)documentWithProperties.Properties["vti_x005f_level"]);
-                Assert.AreEqual("100", documentWithProperties.Properties["vti_x005f_genericcontenttempnextbsnalloc"]);
+                Assert.AreEqual(1, (int)documentWithProperties.Properties["vti_level"]);
+                Assert.AreEqual("100", documentWithProperties.Properties["vti_genericcontenttempnextbsnalloc"]);
             }
 
             await TestAssets.CleanupTestDocumentAsync(2);
@@ -2408,6 +2478,177 @@ namespace PnP.Core.Test.SharePoint
 
         #endregion
 
+        #endregion
+
+        #region Get IFile Properties
+        [TestMethod]
+        public async Task GetIFilePropertiesAsyncTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            (_, _, string documentUrl) = await TestAssets.CreateTestDocumentAsync(0);
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+            {
+                IFile documentWithProperties = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl,
+                    f => f.HasAlternateContentStreams,
+                    f => f.Length,
+                    f => f.ServerRedirectedUrl,
+                    f => f.VroomDriveID,
+                    f => f.VroomItemID);
+
+                Assert.IsNotNull(documentWithProperties);
+
+                Assert.IsTrue(documentWithProperties.UniqueId != Guid.Empty);
+                Assert.IsFalse(documentWithProperties.HasAlternateContentStreams);
+                Assert.IsTrue(documentWithProperties.Length > 0);
+                Assert.IsTrue(!string.IsNullOrEmpty(documentWithProperties.ServerRedirectedUrl) && documentWithProperties.ServerRedirectedUrl.Contains("_layouts/15/Doc.aspx?sourcedoc=", StringComparison.InvariantCultureIgnoreCase));
+                Assert.IsTrue(!string.IsNullOrEmpty(documentWithProperties.VroomDriveID));
+                Assert.IsTrue(!string.IsNullOrEmpty(documentWithProperties.VroomItemID));
+            }
+
+            await TestAssets.CleanupTestDocumentAsync(2);
+        }
+
+        [TestMethod]
+        public async Task GetIFilePropertiesTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            (_, _, string documentUrl) = await TestAssets.CreateTestDocumentAsync(0);
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+            {
+                IFile documentWithProperties = context.Web.GetFileByServerRelativeUrl(documentUrl,
+                    f => f.HasAlternateContentStreams,
+                    f => f.Length,
+                    f => f.ServerRedirectedUrl,
+                    f => f.VroomDriveID,
+                    f => f.VroomItemID);
+
+                Assert.IsNotNull(documentWithProperties);
+                Assert.IsTrue(documentWithProperties.UniqueId != Guid.Empty);
+                Assert.IsFalse(documentWithProperties.HasAlternateContentStreams);
+                Assert.IsTrue(documentWithProperties.Length > 0);
+                Assert.IsTrue(!string.IsNullOrEmpty(documentWithProperties.ServerRedirectedUrl) && documentWithProperties.ServerRedirectedUrl.Contains("_layouts/15/Doc.aspx?sourcedoc=", StringComparison.InvariantCultureIgnoreCase));
+                Assert.IsTrue(!string.IsNullOrEmpty(documentWithProperties.VroomDriveID));
+                Assert.IsTrue(!string.IsNullOrEmpty(documentWithProperties.VroomItemID));
+            }
+
+            await TestAssets.CleanupTestDocumentAsync(2);
+        }
+
+        [TestMethod]
+        public async Task GetIFilePropertiesCurrentBatchAsyncTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            (_, _, string documentUrl) = await TestAssets.CreateTestDocumentAsync(0);
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+            {
+                IFile documentWithProperties = await context.Web.GetFileByServerRelativeUrlBatchAsync(documentUrl,
+                    f => f.HasAlternateContentStreams,
+                    f => f.Length,
+                    f => f.ServerRedirectedUrl,
+                    f => f.VroomDriveID,
+                    f => f.VroomItemID);
+                await context.ExecuteAsync();
+
+                Assert.IsNotNull(documentWithProperties);
+                Assert.IsTrue(documentWithProperties.UniqueId != Guid.Empty);
+                Assert.IsFalse(documentWithProperties.HasAlternateContentStreams);
+                Assert.IsTrue(documentWithProperties.Length > 0);
+                Assert.IsTrue(!string.IsNullOrEmpty(documentWithProperties.ServerRedirectedUrl) && documentWithProperties.ServerRedirectedUrl.Contains("_layouts/15/Doc.aspx?sourcedoc=", StringComparison.InvariantCultureIgnoreCase));
+                Assert.IsTrue(!string.IsNullOrEmpty(documentWithProperties.VroomDriveID));
+                Assert.IsTrue(!string.IsNullOrEmpty(documentWithProperties.VroomItemID));
+            }
+
+            await TestAssets.CleanupTestDocumentAsync(2);
+        }
+
+        [TestMethod]
+        public async Task GetIFilePropertiesCurrentBatchTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            (_, _, string documentUrl) = await TestAssets.CreateTestDocumentAsync(0);
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+            {
+                IFile documentWithProperties = context.Web.GetFileByServerRelativeUrlBatch(documentUrl,
+                    f => f.HasAlternateContentStreams,
+                    f => f.Length,
+                    f => f.ServerRedirectedUrl,
+                    f => f.VroomDriveID,
+                    f => f.VroomItemID);
+                await context.ExecuteAsync();
+
+                Assert.IsNotNull(documentWithProperties);
+                Assert.IsTrue(documentWithProperties.UniqueId != Guid.Empty);
+                Assert.IsFalse(documentWithProperties.HasAlternateContentStreams);
+                Assert.IsTrue(documentWithProperties.Length > 0);
+                Assert.IsTrue(!string.IsNullOrEmpty(documentWithProperties.ServerRedirectedUrl) && documentWithProperties.ServerRedirectedUrl.Contains("_layouts/15/Doc.aspx?sourcedoc=", StringComparison.InvariantCultureIgnoreCase));
+                Assert.IsTrue(!string.IsNullOrEmpty(documentWithProperties.VroomDriveID));
+                Assert.IsTrue(!string.IsNullOrEmpty(documentWithProperties.VroomItemID));
+            }
+
+            await TestAssets.CleanupTestDocumentAsync(2);
+        }
+
+        [TestMethod]
+        public async Task GetIFilePropertiesBatchAsyncTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            (_, _, string documentUrl) = await TestAssets.CreateTestDocumentAsync(0);
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+            {
+                var batch = context.NewBatch();
+                IFile documentWithProperties = await context.Web.GetFileByServerRelativeUrlBatchAsync(batch, documentUrl,
+                    f => f.HasAlternateContentStreams,
+                    f => f.Length,
+                    f => f.ServerRedirectedUrl,
+                    f => f.VroomDriveID,
+                    f => f.VroomItemID);
+                await context.ExecuteAsync(batch);
+
+                Assert.IsNotNull(documentWithProperties);
+                Assert.IsTrue(documentWithProperties.UniqueId != Guid.Empty);
+                Assert.IsFalse(documentWithProperties.HasAlternateContentStreams);
+                Assert.IsTrue(documentWithProperties.Length > 0);
+                Assert.IsTrue(!string.IsNullOrEmpty(documentWithProperties.ServerRedirectedUrl) && documentWithProperties.ServerRedirectedUrl.Contains("_layouts/15/Doc.aspx?sourcedoc=", StringComparison.InvariantCultureIgnoreCase));
+                Assert.IsTrue(!string.IsNullOrEmpty(documentWithProperties.VroomDriveID));
+                Assert.IsTrue(!string.IsNullOrEmpty(documentWithProperties.VroomItemID));
+            }
+
+            await TestAssets.CleanupTestDocumentAsync(2);
+        }
+
+        [TestMethod]
+        public async Task GetIFilePropertiesBatchTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            (_, _, string documentUrl) = await TestAssets.CreateTestDocumentAsync(0);
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+            {
+                var batch = context.NewBatch();
+                IFile documentWithProperties = context.Web.GetFileByServerRelativeUrlBatch(batch, documentUrl,
+                    f => f.HasAlternateContentStreams,
+                    f => f.Length,
+                    f => f.ServerRedirectedUrl,
+                    f => f.VroomDriveID,
+                    f => f.VroomItemID);
+                await context.ExecuteAsync(batch);
+
+                Assert.IsNotNull(documentWithProperties);
+                Assert.IsTrue(documentWithProperties.UniqueId != Guid.Empty);
+                Assert.IsFalse(documentWithProperties.HasAlternateContentStreams);
+                Assert.IsTrue(documentWithProperties.Length > 0);
+                Assert.IsTrue(!string.IsNullOrEmpty(documentWithProperties.ServerRedirectedUrl) && documentWithProperties.ServerRedirectedUrl.Contains("_layouts/15/Doc.aspx?sourcedoc=", StringComparison.InvariantCultureIgnoreCase));
+                Assert.IsTrue(!string.IsNullOrEmpty(documentWithProperties.VroomDriveID));
+                Assert.IsTrue(!string.IsNullOrEmpty(documentWithProperties.VroomItemID));
+            }
+
+            await TestAssets.CleanupTestDocumentAsync(2);
+        }
         #endregion
 
         #region Get File IRM
@@ -2583,18 +2824,21 @@ namespace PnP.Core.Test.SharePoint
 
                 await testDocument.CheckoutAsync();
                 await testDocument.CheckinAsync("TEST COMMENT", CheckinType.MajorCheckIn);
-            
+
                 IFile documentWithVersions = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl, f => f.Versions);
 
                 Assert.IsNotNull(documentWithVersions.Versions);
-                // The versions history contains 2 versions
-                Assert.AreEqual(3, documentWithVersions.Versions.Length);
-                Assert.AreEqual($"_vti_history/1/{libraryName}/{documentName}", documentWithVersions.Versions.ElementAt(0).Url);
-                Assert.AreEqual("0.1", documentWithVersions.Versions.ElementAt(0).VersionLabel);
-                Assert.AreEqual("0.2", documentWithVersions.Versions.ElementAt(1).VersionLabel);
 
-                Assert.AreEqual(3, documentWithVersions.Versions.ElementAt(2).Id);
-                Assert.IsTrue(documentWithVersions.Versions.ElementAt(2).Created != DateTime.MinValue);
+                var versions = documentWithVersions.Versions.AsRequested().ToList();
+
+                // The versions history contains 2 versions
+                Assert.AreEqual(3, versions.Count);
+                Assert.AreEqual($"_vti_history/1/{libraryName}/{documentName}", versions.ElementAt(0).Url);
+                Assert.AreEqual("0.1", versions.ElementAt(0).VersionLabel);
+                Assert.AreEqual("0.2", versions.ElementAt(1).VersionLabel);
+
+                Assert.AreEqual(3, versions.ElementAt(2).Id);
+                Assert.IsTrue(versions.ElementAt(2).Created != DateTime.MinValue);
             }
 
             await TestAssets.CleanupTestDedicatedListAsync(3);
@@ -2614,15 +2858,18 @@ namespace PnP.Core.Test.SharePoint
                 await testDocument.CheckinAsync();
                 await testDocument.CheckoutAsync();
                 await testDocument.CheckinAsync();
-            
+
                 IFile documentWithVersions = context.Web.GetFileByServerRelativeUrl(documentUrl, f => f.Versions);
 
                 Assert.IsNotNull(documentWithVersions.Versions);
+
+                var versions = documentWithVersions.Versions.AsRequested().ToList();
+                
                 // The versions history contains 2 versions
-                Assert.AreEqual(2, documentWithVersions.Versions.Length);
-                Assert.AreEqual($"_vti_history/1/{libraryName}/{documentName}", documentWithVersions.Versions.ElementAt(0).Url);
-                Assert.AreEqual("0.1", documentWithVersions.Versions.ElementAt(0).VersionLabel);
-                Assert.AreEqual("0.2", documentWithVersions.Versions.ElementAt(1).VersionLabel);
+                Assert.AreEqual(2, versions.Count);
+                Assert.AreEqual($"_vti_history/1/{libraryName}/{documentName}", versions.ElementAt(0).Url);
+                Assert.AreEqual("0.1", versions.ElementAt(0).VersionLabel);
+                Assert.AreEqual("0.2", versions.ElementAt(1).VersionLabel);
             }
 
             await TestAssets.CleanupTestDedicatedListAsync(3);
@@ -2643,16 +2890,19 @@ namespace PnP.Core.Test.SharePoint
                 await testDocument.CheckoutBatchAsync();
                 await testDocument.CheckinBatchAsync();
                 await context.ExecuteAsync();
-            
+
                 IFile documentWithVersions = await context.Web.GetFileByServerRelativeUrlBatchAsync(documentUrl, f => f.Versions);
                 await context.ExecuteAsync();
 
                 Assert.IsNotNull(documentWithVersions.Versions);
+                
+                var versions = documentWithVersions.Versions.AsRequested().ToList();
+                
                 // The versions history contains 2 versions
-                Assert.AreEqual(2, documentWithVersions.Versions.Length);
-                Assert.AreEqual($"_vti_history/1/{libraryName}/{documentName}", documentWithVersions.Versions.ElementAt(0).Url);
-                Assert.AreEqual("0.1", documentWithVersions.Versions.ElementAt(0).VersionLabel);
-                Assert.AreEqual("0.2", documentWithVersions.Versions.ElementAt(1).VersionLabel);
+                Assert.AreEqual(2, versions.Count);
+                Assert.AreEqual($"_vti_history/1/{libraryName}/{documentName}", versions.ElementAt(0).Url);
+                Assert.AreEqual("0.1", versions.ElementAt(0).VersionLabel);
+                Assert.AreEqual("0.2", versions.ElementAt(1).VersionLabel);
             }
 
             await TestAssets.CleanupTestDedicatedListAsync(3);
@@ -2673,16 +2923,19 @@ namespace PnP.Core.Test.SharePoint
                 testDocument.CheckoutBatch();
                 testDocument.CheckinBatch();
                 await context.ExecuteAsync();
-            
+
                 IFile documentWithVersions = context.Web.GetFileByServerRelativeUrlBatch(documentUrl, f => f.Versions);
                 await context.ExecuteAsync();
 
                 Assert.IsNotNull(documentWithVersions.Versions);
+                
+                var versions = documentWithVersions.Versions.AsRequested().ToList();
+
                 // The versions history contains 2 versions
-                Assert.AreEqual(2, documentWithVersions.Versions.Length);
-                Assert.AreEqual($"_vti_history/1/{libraryName}/{documentName}", documentWithVersions.Versions.ElementAt(0).Url);
-                Assert.AreEqual("0.1", documentWithVersions.Versions.ElementAt(0).VersionLabel);
-                Assert.AreEqual("0.2", documentWithVersions.Versions.ElementAt(1).VersionLabel);
+                Assert.AreEqual(2, versions.Count);
+                Assert.AreEqual($"_vti_history/1/{libraryName}/{documentName}", versions.ElementAt(0).Url);
+                Assert.AreEqual("0.1", versions.ElementAt(0).VersionLabel);
+                Assert.AreEqual("0.2", versions.ElementAt(1).VersionLabel);
             }
 
             await TestAssets.CleanupTestDedicatedListAsync(3);
@@ -2706,17 +2959,20 @@ namespace PnP.Core.Test.SharePoint
                 await testDocument.CheckinBatchAsync(newBatch);
 
                 await context.ExecuteAsync(newBatch);
-            
+
                 var batch = context.NewBatch();
                 IFile documentWithVersions = await context.Web.GetFileByServerRelativeUrlBatchAsync(batch, documentUrl, f => f.Versions);
                 await context.ExecuteAsync(batch);
 
                 Assert.IsNotNull(documentWithVersions.Versions);
+
+                var versions = documentWithVersions.Versions.AsRequested().ToList();
+
                 // The versions history contains 2 versions
-                Assert.AreEqual(2, documentWithVersions.Versions.Length);
-                Assert.AreEqual($"_vti_history/1/{libraryName}/{documentName}", documentWithVersions.Versions.ElementAt(0).Url);
-                Assert.AreEqual("0.1", documentWithVersions.Versions.ElementAt(0).VersionLabel);
-                Assert.AreEqual("0.2", documentWithVersions.Versions.ElementAt(1).VersionLabel);
+                Assert.AreEqual(2, versions.Count);
+                Assert.AreEqual($"_vti_history/1/{libraryName}/{documentName}", versions.ElementAt(0).Url);
+                Assert.AreEqual("0.1", versions.ElementAt(0).VersionLabel);
+                Assert.AreEqual("0.2", versions.ElementAt(1).VersionLabel);
             }
 
             await TestAssets.CleanupTestDedicatedListAsync(3);
@@ -2739,17 +2995,20 @@ namespace PnP.Core.Test.SharePoint
                 testDocument.CheckoutBatch(newBatch);
                 testDocument.CheckinBatch(newBatch);
                 await context.ExecuteAsync(newBatch);
-            
+
                 var batch = context.NewBatch();
                 IFile documentWithVersions = context.Web.GetFileByServerRelativeUrlBatch(batch, documentUrl, f => f.Versions);
                 await context.ExecuteAsync(batch);
 
                 Assert.IsNotNull(documentWithVersions.Versions);
+
+                var versions = documentWithVersions.Versions.AsRequested().ToList();
+
                 // The versions history contains 2 versions
-                Assert.AreEqual(2, documentWithVersions.Versions.Length);
-                Assert.AreEqual($"_vti_history/1/{libraryName}/{documentName}", documentWithVersions.Versions.ElementAt(0).Url);
-                Assert.AreEqual("0.1", documentWithVersions.Versions.ElementAt(0).VersionLabel);
-                Assert.AreEqual("0.2", documentWithVersions.Versions.ElementAt(1).VersionLabel);
+                Assert.AreEqual(2, versions.Count);
+                Assert.AreEqual($"_vti_history/1/{libraryName}/{documentName}", versions.ElementAt(0).Url);
+                Assert.AreEqual("0.1", versions.ElementAt(0).VersionLabel);
+                Assert.AreEqual("0.2", versions.ElementAt(1).VersionLabel);
             }
 
             await TestAssets.CleanupTestDedicatedListAsync(3);
@@ -2767,14 +3026,14 @@ namespace PnP.Core.Test.SharePoint
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
             {
-                IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl, p=>p.Name, p=>p.ServerRelativeUrl, p => p.ListItemAllFields);
+                IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl, p => p.Name, p => p.ServerRelativeUrl, p => p.ListItemAllFields);
 
                 Assert.IsNotNull(testDocument);
                 Assert.AreEqual(documentName, testDocument.Name);
                 Assert.AreEqual(documentUrl, testDocument.ServerRelativeUrl);
 
                 // Ensure list item properties, since the ListItem model's parent is a File this is a special case
-                await testDocument.ListItemAllFields.EnsurePropertiesAsync(p => p.Title, p=>p.Id);
+                await testDocument.ListItemAllFields.EnsurePropertiesAsync(p => p.Title, p => p.Id);
                 Assert.IsTrue(testDocument.ListItemAllFields.IsPropertyAvailable(p => p.Id));
 
                 // Update title
@@ -2783,7 +3042,7 @@ namespace PnP.Core.Test.SharePoint
 
 
                 await testDocument.LoadAsync(p => p.ListId);
-                
+
                 Assert.IsTrue(testDocument.ListId != Guid.Empty);
             }
 
@@ -2807,7 +3066,7 @@ namespace PnP.Core.Test.SharePoint
                 await testDocument.CheckinAsync();
                 await testDocument.CheckoutAsync();
                 await testDocument.CheckinAsync();
-            
+
                 IFile documentWithVersionEvents = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl, f => f.VersionEvents);
 
                 Assert.IsNotNull(documentWithVersionEvents.VersionEvents);

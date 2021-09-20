@@ -136,3 +136,7 @@ await myList.DeleteAsync();
 // Recycle the list
 await myList.RecycleAsync();
 ```
+
+## Getting changes for a list
+
+You can use the `GetChanges` methods on an `IList` to list all the changes. See [Enumerating changes that happened in SharePoint](changes-sharepoint.md) to learn more.

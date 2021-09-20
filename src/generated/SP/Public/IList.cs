@@ -253,6 +253,11 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// To update...
         /// </summary>
+        public bool DisableCommenting { get; set; }
+
+        /// <summary>
+        /// To update...
+        /// </summary>
         public bool DisableGridEditing { get; set; }
 
         /// <summary>
@@ -409,6 +414,11 @@ namespace PnP.Core.Model.SharePoint
         /// To update...
         /// </summary>
         public bool ServerTemplateCanCreateFolders { get; set; }
+
+        /// <summary>
+        /// To update...
+        /// </summary>
+        public bool ShowHiddenFieldsInModernForm { get; set; }
 
         /// <summary>
         /// To update...

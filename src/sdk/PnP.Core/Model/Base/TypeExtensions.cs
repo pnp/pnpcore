@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Reflection;
+using System.Linq;
 
 namespace PnP.Core.Model
 {
@@ -27,16 +27,41 @@ namespace PnP.Core.Model
                 throw new ArgumentNullException(nameof(interfaceType));
             }
 
-            TypeFilter myFilter = new TypeFilter(StartsWithInterfaceFilter);
-
-            Type[] foundInterfaces = propertyType.FindInterfaces(myFilter, interfaceType.FullName);
-
-            return foundInterfaces.Length > 0;
+            if (interfaceType.IsGenericType && !interfaceType.IsConstructedGenericType)
+            {
+                return propertyType.GetInterfaces().Any(i => i.IsGenericType && i.GetGenericTypeDefinition() == interfaceType);
+            }
+            else
+            {
+                return interfaceType.IsAssignableFrom(propertyType);
+            }
         }
 
-        private static bool StartsWithInterfaceFilter(Type typeObj, Object criteriaObj)
-        {
-            return typeObj.FullName.StartsWith(criteriaObj.ToString());
-        }
+        #region Old implementation replaced by above for performance. See PnP.Core.Perf for more context
+
+        //internal static bool ImplementsInterface(this Type propertyType, Type interfaceType)
+        //{
+        //    if (propertyType == null)
+        //    {
+        //        throw new ArgumentNullException(nameof(propertyType));
+        //    }
+
+        //    if (interfaceType == null)
+        //    {
+        //        throw new ArgumentNullException(nameof(interfaceType));
+        //    }
+
+        //    TypeFilter myFilter = new TypeFilter(StartsWithInterfaceFilter);
+
+        //    Type[] foundInterfaces = propertyType.FindInterfaces(myFilter, interfaceType.FullName);
+
+        //    return foundInterfaces.Length > 0;
+        //}
+
+        //private static bool StartsWithInterfaceFilter(Type typeObj, Object criteriaObj)
+        //{
+        //    return typeObj.FullName.StartsWith(criteriaObj.ToString());
+        //}
+        #endregion
     }
 }

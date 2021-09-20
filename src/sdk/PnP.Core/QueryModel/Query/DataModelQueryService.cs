@@ -44,7 +44,7 @@ namespace PnP.Core.QueryModel
         public async Task<BatchRequest> AddToBatchAsync(ODataQuery<TModel> query, Batch batch)
         {
             // We always refresh the EntityInfo object accordingly to the current query
-            EntityInfo = EntityManager.GetClassInfo<TModel>(typeof(TModel), null, this.Parent, query.Fields.ToArray());
+            EntityInfo = EntityManager.GetClassInfo<TModel>(typeof(TModel), null, Parent, query.Fields.ToArray());
 
             var batchParent = Parent;
 
@@ -181,11 +181,19 @@ namespace PnP.Core.QueryModel
                 }
 
                 // Check if collection supports pagination
-                var typedCollection = collection as ISupportPaging;
-                if (typedCollection == null || !typedCollection.CanPage || (query.Top.HasValue && count >= query.Top)) yield break;
+                var pageableCollection = collection as ISupportPaging;
+                var typedCollection = collection as BaseDataModelCollection<TModel>;
+                
+                if (pageableCollection == null || // If the result set is not pageable
+                    !pageableCollection.CanPage || // or if the result set is pageable, but there is no support for paging (no nextLink metadata)
+                    (typedCollection != null && originalBatchRequest.ApiCall.Type == ApiType.SPORest && pageableCollection.CanPage && !query.Top.HasValue && count < typedCollection.PnPContext.GlobalOptions.HttpSharePointRestDefaultPageSize) || // or if the result set comes from SPO REST, is pageable, there is support for nextLink, there is no Top constraint and but the results are the whole result set
+                    (query.Top.HasValue && count >= query.Top)) // or there is Top constraint and the result set is bigger than the Top constraint
+                {
+                    yield break;
+                }
 
                 // Prepare api call
-                IMetadataExtensible metadataExtensible = (IMetadataExtensible)typedCollection;
+                IMetadataExtensible metadataExtensible = (IMetadataExtensible)pageableCollection;
                 (var nextLink, var nextLinkApiType) = QueryClient.BuildNextPageLink(metadataExtensible);
 
                 // Clear the MetaData paging links to avoid loading the collection again via paging

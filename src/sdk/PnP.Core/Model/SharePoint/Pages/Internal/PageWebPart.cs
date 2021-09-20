@@ -55,7 +55,7 @@ namespace PnP.Core.Model.SharePoint
             {
                 throw new ArgumentNullException(nameof(component));
             }
-            Import(component as PageComponent);
+            Import(component);
         }
         #endregion
 
@@ -162,7 +162,7 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// This control lives in the page header (not removable control)
         /// </summary>
-        public bool IsHeaderControl { get; internal set; }
+        public bool IsHeaderControl { get; set; }
 
         #endregion
 
@@ -172,7 +172,7 @@ namespace PnP.Core.Model.SharePoint
         /// </summary>
         /// <param name="component"><see cref="PageComponent"/> to import</param>
         /// <param name="clientSideWebPartPropertiesUpdater">Function callback that allows you to manipulate the client side web part properties after import</param>
-        public void Import(PageComponent component, Func<string, string> clientSideWebPartPropertiesUpdater = null)
+        public void Import(IPageComponent component, Func<string, string> clientSideWebPartPropertiesUpdater = null)
         {
             // Sometimes the id guid is encoded with curly brackets, so let's drop those
             WebPartId = new Guid(component.Id).ToString("D");
@@ -254,6 +254,28 @@ namespace PnP.Core.Model.SharePoint
                 {
                     ZoneEmphasis = Column.VerticalSectionEmphasis ?? Section.ZoneEmphasis,
                 };
+
+                // Persist the collapsible section settings
+                if (Section.Collapsible)
+                {
+                    controlData.ZoneGroupMetadata = new SectionZoneGroupMetadata()
+                    {
+                        // Set section type to 1 if it was not set (when new sections are added via code)
+                        Type = (Section as CanvasSection).SectionType,
+                        DisplayName = Section.DisplayName,
+                        IsExpanded = Section.IsExpanded,
+                        ShowDividerLine = Section.ShowDividerLine,
+                    };
+
+                    if (Section.IconAlignment.HasValue)
+                    {
+                        controlData.ZoneGroupMetadata.IconAlignment = Section.IconAlignment.Value.ToString().ToLower();
+                    }
+                    else
+                    {
+                        controlData.ZoneGroupMetadata.IconAlignment = "true";
+                    }
+                }
 
                 // Set the control's data version to the latest version...default was 1.0, but some controls use a higher version
                 var webPartType = Page.IdToDefaultWebPart(controlData.WebPartId);
@@ -427,7 +449,7 @@ namespace PnP.Core.Model.SharePoint
             SpControlData = JsonSerializer.Deserialize<WebPartControlData>(element.GetAttribute(ControlDataAttribute), new JsonSerializerOptions() { IgnoreNullValues = true });
             controlType = SpControlData.ControlType;
 
-            var wpDiv = element.GetElementsByTagName("div").Where(a => a.HasAttribute(WebPartDataAttribute)).FirstOrDefault();
+            var wpDiv = element.GetElementsByTagName("div").FirstOrDefault(a => a.HasAttribute(WebPartDataAttribute));
 
             string decodedWebPart;
             // Some components are in the page header and need to be handled as a control instead of a webpart
@@ -471,7 +493,7 @@ namespace PnP.Core.Model.SharePoint
             // Set/update dataVersion if it was set in the json data
             if (wpJObject.TryGetProperty("dataVersion", out JsonElement dataVersionValue))
             {
-                this.dataVersion = dataVersionValue.GetString();
+                dataVersion = dataVersionValue.GetString();
             }
 
             // Check for fullbleed supporting web parts
@@ -503,7 +525,7 @@ namespace PnP.Core.Model.SharePoint
 
             if (wpDiv != null)
             {
-                var wpHtmlProperties = wpDiv.GetElementsByTagName("div").Where(a => a.HasAttribute(WebPartHtmlPropertiesAttribute)).FirstOrDefault();
+                var wpHtmlProperties = wpDiv.GetElementsByTagName("div").FirstOrDefault(a => a.HasAttribute(WebPartHtmlPropertiesAttribute));
                 HtmlPropertiesData = wpHtmlProperties.InnerHtml;
                 HtmlProperties = wpHtmlProperties.GetAttribute(WebPartHtmlPropertiesAttribute);
             }
@@ -511,6 +533,11 @@ namespace PnP.Core.Model.SharePoint
 
         private void SetPropertiesJson(JsonElement parsedJson)
         {
+            if (parsedJson.ValueKind == JsonValueKind.Null)
+            {
+                return;
+            }
+
             propertiesJson = parsedJson.ToString();
 
             if (parsedJson.TryGetProperty("webPartData", out JsonElement webPartData))

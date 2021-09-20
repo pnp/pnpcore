@@ -1,9 +1,9 @@
---batchresponse_9374b8c0-876d-470a-a364-b6a3def2326e
+--batchresponse_558fa9a3-d9c5-470c-ae8a-c523e57a599e
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{"d":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/pnpcoresdktest/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/pnpcoresdktest/SitePages/PNP_SDK_TEST_PageToTranslate.aspx')","uri":"https://bertonline.sharepoint.com/sites/pnpcoresdktest/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/pnpcoresdktest/SitePages/PNP_SDK_TEST_PageToTranslate.aspx')","type":"SP.File"},"ListId":"09d60b92-01fb-4ff8-a0a1-77497def424b","UniqueId":"65edbac6-d07c-4ea0-84cd-9cd4b96d070c"}}
---batchresponse_9374b8c0-876d-470a-a364-b6a3def2326e--
+{"d":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/pnpcoresdktest/_api/sitepages/pages(679)/translations","uri":"https://bertonline.sharepoint.com/sites/pnpcoresdktest/_api/sitepages/pages(679)/translations","type":"SP.TranslationStatusCollection"},"UntranslatedLanguages":{"__metadata":{"type":"Collection(Edm.String)"},"results":["nl-nl","fr-fr"]},"Items":{"__metadata":{"type":"Collection(SP.TranslationStatus)"},"results":[]}}}
+--batchresponse_558fa9a3-d9c5-470c-ae8a-c523e57a599e--

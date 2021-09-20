@@ -2,6 +2,9 @@
 
 [SharePoint Syntex](https://www.microsoft.com/en-ww/microsoft-365/enterprise/sharepoint-syntex-overview) provides content services to capture and scale your expertise. [SharePoint Syntex](https://www.microsoft.com/en-ww/microsoft-365/enterprise/sharepoint-syntex-overview) uses advanced AI and machine teaching to amplify human expertise, automate content processing, and transform content into knowledge. PnP Core SDK does provide support to help you with content models: you can list content models and deploy them inside your tenant using the provided support.
 
+> [!Note]
+> PnP Core SDK uses the SharePoint Syntex REST APIs, checkout the [SharePoint Syntex document understanding model REST API article](https://docs.microsoft.com/en-us/microsoft-365/contentunderstanding/rest-api/syntex-model-rest-api) for more details on them.
+
 In the remainder of this article you'll see a lot of `context` use: in this case this is a `PnPContext` which was obtained via the `PnPContextFactory` as explained in the [overview article](readme.md) and show below:
 
 ```csharp

@@ -18,6 +18,8 @@ namespace PnP.Core.Services
     /// </summary>
     internal static class JsonMappingHelper
     {
+        internal static readonly Regex arrayMatchingRegex = new Regex(@"\[(?<index>[0-9]+)\]", RegexOptions.Compiled);
+
         /// <summary>
         /// Maps a json string to the provided domain model object instance
         /// </summary>
@@ -119,243 +121,249 @@ namespace PnP.Core.Services
             // collect metadata
             Dictionary<string, string> metadata = new Dictionary<string, string>();
 
-            // Enumerate the received properties and try to map them to the model
-            foreach (var property in apiResponse.JsonElement.EnumerateObject())
+            if (apiResponse.JsonElement.ValueKind == JsonValueKind.Object)
             {
-                // Find the model field linked to this field
-                EntityFieldInfo entityField = LookupEntityField(entity, apiResponse, property);
-
-                // Do we need to re-parent this json mapping to a non expandable collection in the current model?
-                if (!string.IsNullOrEmpty(apiResponse.ApiCall.ReceivingProperty) && property.NameEquals("results"))
+                // Enumerate the received properties and try to map them to the model
+                foreach (var property in apiResponse.JsonElement.EnumerateObject())
                 {
-                    entityField = entity.Fields.FirstOrDefault(p => !string.IsNullOrEmpty(p.Name) && p.Name.Equals(apiResponse.ApiCall.ReceivingProperty, StringComparison.InvariantCultureIgnoreCase));
-                    if (entityField == null)
+                    // Find the model field linked to this field
+                    EntityFieldInfo entityField = LookupEntityField(entity, apiResponse, property);
+
+                    // Do we need to re-parent this json mapping to a non expandable collection in the current model?
+                    if (!string.IsNullOrEmpty(apiResponse.ApiCall.ReceivingProperty) && property.NameEquals("results"))
                     {
-                        entityField = entity.Fields.FirstOrDefault(p => !string.IsNullOrEmpty(p.SharePointName) && p.SharePointName.Equals(apiResponse.ApiCall.ReceivingProperty, StringComparison.InvariantCultureIgnoreCase));
+                        entityField = entity.Fields.FirstOrDefault(p => !string.IsNullOrEmpty(p.Name) && p.Name.Equals(apiResponse.ApiCall.ReceivingProperty, StringComparison.InvariantCultureIgnoreCase)) ??
+                                      entity.Fields.FirstOrDefault(p => !string.IsNullOrEmpty(p.SharePointName) && p.SharePointName.Equals(apiResponse.ApiCall.ReceivingProperty, StringComparison.InvariantCultureIgnoreCase));
                     }
-                }
 
-                // Entity field should be populated for the actual fields we've requested
-                if (entityField != null)
-                {
-                    // Are we loading a collection (e.g. Web.Lists)?
-                    if (IsModelCollection(entityField.PropertyInfo.PropertyType))
+                    // Entity field should be populated for the actual fields we've requested
+                    if (entityField != null)
                     {
-                        // Get the actual current value of the property we're setting...as that allows to detect it's type
-                        var propertyToSetValue = entityField.PropertyInfo.GetValue(pnpObject);
-                        // Cast object to call the needed methods on it (e.g. ListCollection)
-                        var typedCollection = propertyToSetValue as IManageableCollection;
-
-                        // Try to get the results property, start with a default value
-                        JsonElement resultsProperty = default;
-
-                        // If the property is named "results" and is of type Array, it means it is a collection of items
-                        if (property.Name == "results" && property.Value.ValueKind == JsonValueKind.Array)
+                        // Are we loading a collection (e.g. Web.Lists)?
+                        if (IsModelCollection(entityField.PropertyInfo.PropertyType))
                         {
-                            // and we use it directly
-                            resultsProperty = property.Value;
-                        }
-                        else
-                        {
-                            // otherwise we try to get the child property called "results", if any
-                            property.Value.TryGetProperty("results", out resultsProperty);
-                        }
+                            // Get the actual current value of the property we're setting...as that allows to detect it's type
+                            var propertyToSetValue = entityField.PropertyInfo.GetValue(pnpObject);
+                            // Cast object to call the needed methods on it (e.g. ListCollection)
+                            var typedCollection = propertyToSetValue as IManageableCollection;
 
-                        // Expanded objects are under the results property, if any (i.e. it is not the default one)
-                        if (!resultsProperty.Equals(default(JsonElement)))
-                        {
-                            PropertyInfo pnpChildIdProperty = null;
-                            foreach (var childJson in resultsProperty.EnumerateArray())
+                            // Try to get the results property, start with a default value
+                            JsonElement resultsProperty = default;
+
+                            // If the property is named "results" and is of type Array, it means it is a collection of items
+                            if (property.NameEquals("results") && property.Value.ValueKind == JsonValueKind.Array)
                             {
-                                // Keep track in order to know if proceed to next page
-                                hasResults = true;
-
-                                // Create a new model instance to add to the collection
-                                var pnpChild = typedCollection.CreateNew();
-
-                                // Set the batch request id property
-                                SetBatchRequestId(pnpChild as TransientObject, apiResponse.BatchRequestId);
-
-                                var contextAwarePnPChild = pnpChild as IDataModelWithContext;
-
-                                // TODO: In CreateNew (line 163) we already configure the PnPContext
-                                // Do we really need code in line 174?
-
-                                // Set PnPContext via a dynamic property
-                                contextAwarePnPChild.PnPContext = contextAwareObject.PnPContext;
-
-                                // Recursively map properties, call the method from the actual object as the object could have overriden it
-                                await ((IDataModelProcess)pnpChild).ProcessResponseAsync(new ApiResponse(apiResponse.ApiCall, childJson, apiResponse.BatchRequestId)).ConfigureAwait(false);
-
-                                // Check if we've marked a field to be the key field for the entities in this collection
-                                if (pnpChildIdProperty == null)
-                                {
-                                    // Grab the child entity information, important to call this from the actual child entity
-                                    var pnpChildEntityInfo = EntityManager.Instance.GetStaticClassInfo(pnpChild.GetType());
-                                    // Was there a key defined on the child entity
-                                    var keyField = pnpChildEntityInfo.SharePointKeyField;
-                                    if (keyField != null)
-                                    {
-                                        // There was a key, so that property should exist
-                                        string key = keyField.Name;
-                                        pnpChildIdProperty = pnpChild.GetType().GetProperty(key);
-                                    }
-                                }
-
-                                // We do have a key property, use that to avoid loading duplicates
-                                if (pnpChildIdProperty != null)
-                                {
-                                    var pnpChildIdPropertyValue = ParseStringValueToTyped(pnpChildIdProperty.GetValue(pnpChild).ToString(), pnpChildIdProperty.PropertyType);
-
-                                    // Only add to collection when not yet added
-                                    // or replace the already existing item, if any
-                                    typedCollection.AddOrUpdate(pnpChild,
-                                        i => ((IDataModelWithKey)i).Key.Equals(pnpChildIdPropertyValue));
-                                }
-                                else
-                                {
-                                    // No key checking...so let's just add
-                                    typedCollection.Add(pnpChild);
-                                }
-                            }
-
-                            // Set the collection as requested, if it is supported by
-                            // the target type, because we've got the items
-                            // from the JSON response, or an empty result set if the
-                            // collection is empty
-                            if (typedCollection.GetType().ImplementsInterface(typeof(IRequestableCollection)))
-                            {
-                                ((IRequestableCollection)typedCollection).Requested = true;
-                            }
-
-                            requested = true;
-                        }
-                        else if (property.Value.TryGetProperty("__deferred", out JsonElement deferredProperty))
-                        {
-                            // Let's keep track of these "pointers" to load additional data, no actual usage at this point yet though
-
-                            // __deferred property
-                            //"__deferred": {
-                            //    "uri": "https://bertonline.sharepoint.com/sites/modern/_api/site/RootWeb/WorkflowAssociations"
-                            //}
-
-                            if (!metadataBasedObject.Metadata.ContainsKey(entityField.Name))
-                            {
-                                metadataBasedObject.Metadata.Add(entityField.Name, deferredProperty.GetProperty("uri").GetString());
-                            }
-                        }
-                    }
-                    // Are we loading another model type (e.g. Site.RootWeb)?
-                    else if (IsModelType(entityField.PropertyInfo.PropertyType))
-                    {
-                        // Get instance of the model property
-                        var propertyToSetValue = entityField.PropertyInfo.GetValue(pnpObject);
-
-                        // Set the batch request id property
-                        SetBatchRequestId(propertyToSetValue as TransientObject, apiResponse.BatchRequestId);
-
-                        // Set PnPContext via a dynamic property
-                        ((IDataModelWithContext)propertyToSetValue).PnPContext = contextAwareObject.PnPContext;
-
-                        // Set parent
-                        ((IDataModelParent)propertyToSetValue).Parent = (IDataModelParent)pnpObject;
-
-                        await ((IDataModelProcess)propertyToSetValue).ProcessResponseAsync(new ApiResponse(apiResponse.ApiCall, property.Value, apiResponse.BatchRequestId)).ConfigureAwait(false);
-                    }
-                    else // Simple property mapping
-                    {
-                        // Keep the id value aside when seeing it for later usage
-                        if (string.IsNullOrEmpty(idFieldValue) && property.Name.Equals(entity.SharePointKeyField.Name))
-                        {
-                            idFieldValue = GetJsonPropertyValue(property).ToString();
-                        }
-
-                        if (!string.IsNullOrEmpty(entityField.SharePointJsonPath))
-                        {
-                            var jsonPathFields = entity.Fields.Where(p => !string.IsNullOrEmpty(p.SharePointName) && p.SharePointName.Equals(entityField.SharePointName));
-                            if (jsonPathFields.Any())
-                            {
-                                foreach (var jsonPathField in jsonPathFields)
-                                {
-                                    var jsonElement = GetJsonElementFromPath(property.Value, jsonPathField.SharePointJsonPath);
-
-                                    // Don't assume that the requested json path was also loaded. When using the QueryProperties model there can be 
-                                    // a json object returned that does have all properties loaded 
-                                    if (!jsonElement.Equals(property.Value))
-                                    {
-                                        jsonPathField.PropertyInfo?.SetValue(pnpObject, GetJsonFieldValue(contextAwareObject, jsonPathField.Name,
-                                            jsonElement, jsonPathField.DataType, jsonPathField.SharePointUseCustomMapping, fromJsonCasting));
-                                    }
-                                }
-                            }
-                        }
-                        else
-                        {
-                            // Set the object property value taken from the JSON payload
-                            entityField.PropertyInfo?.SetValue(pnpObject, GetJsonFieldValue(contextAwareObject, entityField.Name,
-                                property.Value, entityField.DataType, entityField.SharePointUseCustomMapping, fromJsonCasting));
-                        }
-                        requested = true;
-                    }
-                }
-                else
-                {
-                    // Let's keep track of the object metadata, useful when creating new requests
-                    if (property.Name == "__metadata")
-                    {
-                        TrackSharePointMetaData(metadataBasedObject, property);
-                    }
-                    // Let's also store: 
-                    // - the EntityTypeName value as metadata as it's usefull for constructing future rest calls
-                    // - the __next link, used in (list item) paging
-                    else if (property.Name == "EntityTypeName")
-                    {
-                        TrackMetaData(metadataBasedObject, property, metadata);
-                    }
-                    else if (property.Name == "__next")
-                    {
-                        // Only applies to paging on listitems
-                        if (metadataBasedObject is List)
-                        {
-                            var listItemCollection = (metadataBasedObject as List).Items;
-                            if (listItemCollection != null && listItemCollection.Requested)
-                            {
-                                TrackAndUpdateMetaData(listItemCollection as IMetadataExtensible, property);
-                            }
-                        }
-                    }
-                    else if (useOverflowField)
-                    {
-                        if (string.IsNullOrEmpty(idFieldValue) && property.Name.Equals(entity.SharePointKeyField.Name))
-                        {
-                            idFieldValue = GetJsonPropertyValue(property).ToString();
-                        }
-
-                        // Add to overflow, skip __deferred properties
-                        if (!(property.Value.ValueKind == JsonValueKind.Object && property.Value.TryGetProperty("__deferred", out JsonElement deferredProperty)))
-                        {
-
-                            // Verify if we can map the received json to a supported field type
-                            (object fieldValue, string fieldName) = ProcessSpecialRestFieldType(pnpObject, property.Name, property.Value);
-                            if (fieldName != null)
-                            {                                
-                                AddToDictionary(dictionaryPropertyToAddValueTo, fieldName, fieldValue);
+                                // and we use it directly
+                                resultsProperty = property.Value;
                             }
                             else
                             {
-                                if (property.Value.ValueKind == JsonValueKind.Object)
+                                // Some collections are returned as null when they're empty (e.g. Mentions on IComment)
+                                if (property.Value.ValueKind == JsonValueKind.Null)
                                 {
-                                    // Handling of complex type via calling out to custom handler, no value is returned as the custom
-                                    // handler can update multiple fields based upon what json result came back
-                                    fromJsonCasting?.Invoke(new FromJson(property.Name, property.Value, Type.GetType("System.Object"), contextAwareObject.PnPContext.Logger));
+                                    continue;
+                                }
+
+                                // otherwise we try to get the child property called "results", if any
+                                property.Value.TryGetProperty("results", out resultsProperty);
+                            }
+
+                            // Expanded objects are under the results property, if any (i.e. it is not the default one)
+                            if (!resultsProperty.Equals(default(JsonElement)))
+                            {
+                                PropertyInfo pnpChildIdProperty = null;
+                                foreach (var childJson in resultsProperty.EnumerateArray())
+                                {
+                                    // Keep track in order to know if proceed to next page
+                                    hasResults = true;
+
+                                    // Create a new model instance to add to the collection
+                                    var pnpChild = typedCollection.CreateNew();
+
+                                    // Set the batch request id property
+                                    SetBatchRequestId(pnpChild as TransientObject, apiResponse.BatchRequestId);
+
+                                    var contextAwarePnPChild = pnpChild as IDataModelWithContext;
+
+                                    // TODO: In CreateNew (line 163) we already configure the PnPContext
+                                    // Do we really need code in line 174?
+
+                                    // Set PnPContext via a dynamic property
+                                    contextAwarePnPChild.PnPContext = contextAwareObject.PnPContext;
+
+                                    // Recursively map properties, call the method from the actual object as the object could have overriden it
+                                    await ((IDataModelProcess)pnpChild).ProcessResponseAsync(new ApiResponse(apiResponse.ApiCall, childJson, apiResponse.BatchRequestId)).ConfigureAwait(false);
+
+                                    // Check if we've marked a field to be the key field for the entities in this collection
+                                    if (pnpChildIdProperty == null)
+                                    {
+                                        // Grab the child entity information, important to call this from the actual child entity
+                                        var pnpChildEntityInfo = EntityManager.Instance.GetStaticClassInfo(pnpChild.GetType());
+                                        // Was there a key defined on the child entity
+                                        var keyField = pnpChildEntityInfo.SharePointKeyField;
+                                        if (keyField != null)
+                                        {
+                                            // There was a key, so that property should exist
+                                            string key = keyField.Name;
+                                            pnpChildIdProperty = pnpChild.GetType().GetProperty(key);
+                                        }
+                                    }
+
+                                    // We do have a key property, use that to avoid loading duplicates
+                                    if (pnpChildIdProperty != null)
+                                    {
+                                        var pnpChildIdPropertyValue = ParseStringValueToTyped(pnpChildIdProperty.GetValue(pnpChild).ToString(), pnpChildIdProperty.PropertyType);
+
+                                        // Only add to collection when not yet added
+                                        // or replace the already existing item, if any
+                                        typedCollection.AddOrUpdate(pnpChild,
+                                            i => ((IDataModelWithKey)i).Key.Equals(pnpChildIdPropertyValue));
+                                    }
+                                    else
+                                    {
+                                        // No key checking...so let's just add
+                                        typedCollection.Add(pnpChild);
+                                    }
+                                }
+
+                                // Set the collection as requested, if it is supported by
+                                // the target type, because we've got the items
+                                // from the JSON response, or an empty result set if the
+                                // collection is empty
+                                if (typedCollection.GetType().ImplementsInterface(typeof(IRequestableCollection)))
+                                {
+                                    ((IRequestableCollection)typedCollection).Requested = true;
+                                }
+
+                                requested = true;
+                            }
+                            else if (property.Value.TryGetProperty("__deferred", out JsonElement deferredProperty))
+                            {
+                                // Let's keep track of these "pointers" to load additional data, no actual usage at this point yet though
+
+                                // __deferred property
+                                //"__deferred": {
+                                //    "uri": "https://bertonline.sharepoint.com/sites/modern/_api/site/RootWeb/WorkflowAssociations"
+                                //}
+
+                                if (!metadataBasedObject.Metadata.ContainsKey(entityField.Name))
+                                {
+                                    metadataBasedObject.Metadata.Add(entityField.Name, deferredProperty.GetProperty("uri").GetString());
+                                }
+                            }
+                        }
+                        // Are we loading another model type (e.g. Site.RootWeb)?
+                        else if (IsModelType(entityField.PropertyInfo.PropertyType))
+                        {
+                            // Get instance of the model property
+                            var propertyToSetValue = entityField.PropertyInfo.GetValue(pnpObject);
+
+                            // Set the batch request id property
+                            SetBatchRequestId(propertyToSetValue as TransientObject, apiResponse.BatchRequestId);
+
+                            // Set PnPContext via a dynamic property
+                            ((IDataModelWithContext)propertyToSetValue).PnPContext = contextAwareObject.PnPContext;
+
+                            // Set parent
+                            ((IDataModelParent)propertyToSetValue).Parent = (IDataModelParent)pnpObject;
+
+                            await ((IDataModelProcess)propertyToSetValue).ProcessResponseAsync(new ApiResponse(apiResponse.ApiCall, property.Value, apiResponse.BatchRequestId)).ConfigureAwait(false);
+                        }
+                        else // Simple property mapping
+                        {
+                            // Keep the id value aside when seeing it for later usage
+                            if (string.IsNullOrEmpty(idFieldValue) && property.Name.Equals(entity.SharePointKeyField.SharePointName, StringComparison.InvariantCultureIgnoreCase))
+                            {
+                                idFieldValue = GetJsonPropertyValue(property).ToString();
+                            }
+
+                            if (!string.IsNullOrEmpty(entityField.SharePointJsonPath))
+                            {
+                                var jsonPathFields = entity.Fields.Where(p => !string.IsNullOrEmpty(p.SharePointName) && p.SharePointName.Equals(entityField.SharePointName));
+                                if (jsonPathFields.Any())
+                                {
+                                    foreach (var jsonPathField in jsonPathFields)
+                                    {
+                                        var jsonElement = GetJsonElementFromPath(property.Value, jsonPathField.SharePointJsonPath);
+
+                                        // Don't assume that the requested json path was also loaded. When using the QueryProperties model there can be 
+                                        // a json object returned that does have all properties loaded 
+                                        if (!jsonElement.Equals(property.Value))
+                                        {
+                                            jsonPathField.PropertyInfo?.SetValue(pnpObject, GetJsonFieldValue(contextAwareObject, jsonPathField.Name,
+                                                    jsonElement, jsonPathField.DataType, jsonPathField.SharePointUseCustomMapping, fromJsonCasting));
+                                        }
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                // Set the object property value taken from the JSON payload
+                                entityField.PropertyInfo?.SetValue(pnpObject, GetJsonFieldValue(contextAwareObject, entityField.Name,
+                                    property.Value, entityField.DataType, entityField.SharePointUseCustomMapping, fromJsonCasting));
+                            }
+                            requested = true;
+                        }
+                    }
+                    else
+                    {
+                        // Let's keep track of the object metadata, useful when creating new requests
+                        if (property.Name == "__metadata")
+                        {
+                            TrackSharePointMetaData(metadataBasedObject, property);
+                        }
+                        // Let's also store: 
+                        // - the EntityTypeName value as metadata as it's useful for constructing future rest calls
+                        // - the __next link, used in (list item) paging
+                        else if (property.Name == "EntityTypeName")
+                        {
+                            TrackMetaData(metadataBasedObject, property, metadata);
+                        }
+                        else if (property.Name == "__next")
+                        {
+                            // Only applies to paging on listitems
+                            if (metadataBasedObject is List)
+                            {
+                                var listItemCollection = (metadataBasedObject as List).Items;
+                                if (listItemCollection != null && listItemCollection.Requested)
+                                {
+                                    TrackAndUpdateMetaData(listItemCollection as IMetadataExtensible, property);
+                                }
+                            }
+                        }
+                        else if (useOverflowField)
+                        {
+                            if (string.IsNullOrEmpty(idFieldValue) && property.Name.Equals(entity.SharePointKeyField.Name))
+                            {
+                                idFieldValue = GetJsonPropertyValue(property).ToString();
+                            }
+
+                            // Add to overflow, skip __deferred properties
+                            if (!(property.Value.ValueKind == JsonValueKind.Object && property.Value.TryGetProperty("__deferred", out JsonElement _)))
+                            {
+
+                                // Verify if we can map the received json to a supported field type
+                                (object fieldValue, string fieldName) = ProcessSpecialRestFieldType(pnpObject, property.Name, property.Value);
+                                if (fieldName != null)
+                                {
+                                    AddToDictionary(dictionaryPropertyToAddValueTo, fieldName, fieldValue, pnpObject);
                                 }
                                 else
                                 {
-                                    // Default mapping to dictionary can handle simple types, more complex types require custom logic
-                                    AddToDictionary(dictionaryPropertyToAddValueTo, property.Name, GetJsonPropertyValue(property));
+                                    if (property.Value.ValueKind == JsonValueKind.Object)
+                                    {
+                                        // Handling of complex type via calling out to custom handler, no value is returned as the custom
+                                        // handler can update multiple fields based upon what json result came back
+                                        fromJsonCasting?.Invoke(new FromJson(property.Name, property.Value, Type.GetType("System.Object"), contextAwareObject.PnPContext.Logger));
+                                    }
+                                    else
+                                    {
+                                        // Default mapping to dictionary can handle simple types, more complex types require custom logic
+                                        AddToDictionary(dictionaryPropertyToAddValueTo, property.Name, GetJsonPropertyValue(property), pnpObject);
+                                    }
                                 }
+                                requested = true;
                             }
-                            requested = true;
                         }
                     }
                 }
@@ -364,7 +372,7 @@ namespace PnP.Core.Services
             // Ensure all changes are reset (as setting Title on the ListItem will trigger a change)
             if (useOverflowField)
             {
-                dictionaryPropertyToAddValueTo.RemoveTitleFieldChange();
+                dictionaryPropertyToAddValueTo.Commit();
             }
 
             // Try populate the PnP Object metadata from the mapped info
@@ -397,9 +405,9 @@ namespace PnP.Core.Services
 
                 switch (type.GetString())
                 {
-                    case "SP.FieldUrlValue": 
-                        {                            
-                            var fieldValue = new FieldUrlValue() {  Field = GetListItemField(pnpObject, propertyName) };
+                    case "SP.FieldUrlValue":
+                        {
+                            var fieldValue = new FieldUrlValue() { Field = GetListItemField(pnpObject, propertyName) };
                             fieldValue.FromJson(json);
                             fieldValue.IsArray = false;
                             return new Tuple<object, string>(fieldValue, propertyName);
@@ -504,7 +512,7 @@ namespace PnP.Core.Services
                                 var field = GetListItemField(pnpObject, actualPropertyName);
                                 var values = new FieldValueCollection(field, actualPropertyName);
                                 if (results.ValueKind == JsonValueKind.Array)
-                                {                                    
+                                {
                                     foreach (var lookupId in results.EnumerateArray())
                                     {
                                         FieldLookupValue fieldValue;
@@ -876,7 +884,7 @@ namespace PnP.Core.Services
                                 // Clone the original API call so we can blank out the ReceivingProperty to avoid getting into an endless loop
                                 var newApiCall = new ApiCall(apiResponse.ApiCall.Request, apiResponse.ApiCall.Type, apiResponse.ApiCall.JsonBody)
                                 {
-                                    Type  = apiResponse.ApiCall.Type,                                    
+                                    Type = apiResponse.ApiCall.Type,
                                 };
                                 modelResponse = new ApiResponse(newApiCall, apiResponse.JsonElement, apiResponse.BatchRequestId);
                             }
@@ -886,7 +894,7 @@ namespace PnP.Core.Services
                             }
 
                             await ((IDataModelProcess)propertyToSetValue).ProcessResponseAsync(modelResponse).ConfigureAwait(false);
-                            
+
                             if (modelReparented)
                             {
                                 // The full model was processed, no point in continueing as that would 
@@ -926,7 +934,7 @@ namespace PnP.Core.Services
                                         else
                                         {
                                             // Default mapping to dictionary can handle simple types, more complex types require custom logic
-                                            AddToDictionary(dictionaryPropertyToAddValueTo, overflowField.Name, GetJsonPropertyValue(overflowField));
+                                            AddToDictionary(dictionaryPropertyToAddValueTo, overflowField.Name, GetJsonPropertyValue(overflowField), pnpObject);
                                         }
                                     }
                                 }
@@ -1084,8 +1092,10 @@ namespace PnP.Core.Services
 
             if (property.Value.ValueKind == JsonValueKind.String)
             {
-                // SharePoint REST data format
-                if (DateTime.TryParse(property.Value.GetString(), out DateTime foundDate2))
+                // SharePoint REST/Graph date formats, assume length of 10 or more before trying to parse to avoid getting strings like "1.1" being parsed as date (issue 519)
+                // This is fix will still parse text fields with date formatted content to datetime, would be better if this code path understood the type of the field it's
+                // parsing data for, but that's a costly thing to implement
+                if (property.Value.GetString() != null && property.Value.GetString().Length >= 10 && DateTime.TryParse(property.Value.GetString(), out DateTime foundDate2))
                 {
                     return foundDate2;
                 }
@@ -1114,7 +1124,7 @@ namespace PnP.Core.Services
             foreach (var part in jsonPathTree)
             {
                 // Won't support multi-dimensions arrays
-                Match indexMatch = new Regex(@"\[(?<index>[0-9]+)\]").Match(part);
+                Match indexMatch = arrayMatchingRegex.Match(part);
                 if (indexMatch.Success)
                 {
                     if (int.TryParse(indexMatch.Groups["index"].Value, out int index))
@@ -1152,11 +1162,11 @@ namespace PnP.Core.Services
                         }
                     }
                 }
-                else if (element.ValueKind != JsonValueKind.Null && 
+                else if (element.ValueKind != JsonValueKind.Null &&
                     element.TryGetProperty(part, out JsonElement nextElement))
                 {
                     element = nextElement;
-                }                
+                }
             }
 
             return element;
@@ -1172,18 +1182,19 @@ namespace PnP.Core.Services
             EntityFieldInfo entityField = null;
             if (apiResponse.ApiCall.Type == ApiType.SPORest)
             {
-                entityField = entity.Fields.FirstOrDefault(p => p.SharePointName == property.Name);
+                // Changed to case insensitive because when loading data via DataStream, the ID field comes back not as "Id", but as "ID"
+                entityField = entity.Fields.FirstOrDefault(p => !string.IsNullOrEmpty(p.SharePointName) && p.SharePointName.Equals(property.Name, StringComparison.InvariantCultureIgnoreCase));
             }
             else if (apiResponse.ApiCall.Type == ApiType.Graph || apiResponse.ApiCall.Type == ApiType.GraphBeta)
             {
-                // Use case insentive match for Graph as we get json in camel case while we use pascal case for the model
+                // Use case insensitive match for Graph as we get json in camel case while we use pascal case for the model
                 entityField = entity.Fields.FirstOrDefault(p => !string.IsNullOrEmpty(p.GraphName) && p.GraphName.Equals(property.Name, StringComparison.InvariantCultureIgnoreCase));
             }
 
             return entityField;
         }
 
-        private static void AddToDictionary(TransientDictionary dictionary, string key, object value)
+        private static void AddToDictionary(TransientDictionary dictionary, string key, object value, TransientObject pnpObject)
         {
             // Handle the OData__ case: SPO REST will replace the _ in field names that start with an _ by OData__
             // This will pose compatability issues as other data retrieval methods don't do this, hence
@@ -1192,6 +1203,20 @@ namespace PnP.Core.Services
             if (key.StartsWith("OData__"))
             {
                 key = key.Replace("OData__", "_");
+            }
+
+            // Only normalize in case of propertyvalues, not in case of ListItem properties
+            if (pnpObject is PropertyValues)
+            {
+                if (key.Contains("_x005f_"))
+                {
+                    key = key.Replace("_x005f_", "_");
+                }
+
+                if (key.Contains("_x0020_"))
+                {
+                    key = key.Replace("_x0020_", " ");
+                }
             }
 
             if (!dictionary.ContainsKey(key))
@@ -1422,7 +1447,9 @@ namespace PnP.Core.Services
                         }
                     case "Guid":
                         {
-                            return jsonElement.GetGuid();
+                            // Overriding parsing instead of using .GetGuid() because
+                            // some formats (with squirrely braces) throw an exception (e.g. - "{00000000-0000-0000-0000-000000000000}")
+                            return Guid.Parse(jsonElement.ToString());
                         }
                     case "Int16":
                         {
@@ -1671,7 +1698,6 @@ namespace PnP.Core.Services
         {
             AddSharePointMetaDataProperty(target, property.Value, PnPConstants.MetaDataUri);
             AddSharePointMetaDataProperty(target, property.Value, PnPConstants.MetaDataId);
-            AddSharePointMetaDataProperty(target, property.Value, PnPConstants.MetaDataType);
             AddSharePointMetaDataProperty(target, property.Value, PnPConstants.MetaDataType);
         }
 

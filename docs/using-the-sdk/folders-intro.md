@@ -111,3 +111,7 @@ var subFolder = await folder.Folders.AddAsync("My folder");
 // Delete the folder again
 await subFolder.DeleteAsync();
 ```
+
+## Getting changes for a folder
+
+You can use the `GetChanges` methods on an `IFolder` to list all the changes. See [Enumerating changes that happened in SharePoint](changes-sharepoint.md) to learn more.

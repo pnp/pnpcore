@@ -245,6 +245,11 @@ namespace PnP.Core.Model.SharePoint
 
         #region New properties
 
+        /// <summary>
+        /// To update...
+        /// </summary>
+        public string CustomOrder { get; set; }
+
         #endregion
 
     }

@@ -561,7 +561,7 @@ namespace PnP.Core.Model.SharePoint
 
         private async Task WireUpTaxonomyFieldAsync(Field field, TaxonomyFieldCreationOptions options)
         {
-            string parentId = (this.Parent is IList) ? (this.Parent as IList).Id.ToString() : "";
+            string parentId = (Parent is IList) ? (Parent as IList).Id.ToString() : "";
             ProvisionTaxonomyFieldRequest request = new ProvisionTaxonomyFieldRequest(PnPContext.Site.Id.ToString(),
                 PnPContext.Web.Id.ToString(),
                 field.Id.ToString(),

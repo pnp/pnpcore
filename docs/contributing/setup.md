@@ -41,6 +41,9 @@ The recommended approach for making changes and testing them is by writing the a
 
 ## Create a PR with your changes
 
+> [!Note]
+> When you want to make changes it's recommended to isolate each change in a separate PR and that's best done by creating a branch per change. Having a branch per change allows you to work on multiple changes while you still can submit them as individual PR's. To create a new branch starting from the dev branch you can use `git checkout -b mybranch dev`. To push this branch to GitHub you can use `git push -u mybranch`.
+
 Once you've coded and tested your contribution you'll need to create a pull request (PR) again the dev branch of the https://github.com/pnp/pnpcore repository:
 
 - Go to **Pull requests** in your fork and click on the green **New pull request** button

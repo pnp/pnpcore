@@ -2,6 +2,7 @@
 using PnP.Core.Services;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace PnP.Core.Model.SharePoint
@@ -10,7 +11,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a List object of SharePoint Online
     /// </summary>
     [ConcreteType(typeof(List))]
-    public interface IList : IDataModel<IList>, IDataModelGet<IList>, IDataModelLoad<IList>, IDataModelUpdate, IDataModelDelete, IQueryableDataModel
+    public interface IList : IDataModel<IList>, IDataModelGet<IList>, IDataModelLoad<IList>, IDataModelUpdate, IDataModelDelete, IDataModelSupportingGetChanges, IQueryableDataModel
     {
         #region Properties
 
@@ -31,6 +32,7 @@ namespace PnP.Core.Model.SharePoint
 
         /// <summary>
         /// Gets or sets a value that specifies the identifier of the document template for the new list.
+        /// SP REST property name: DocumentTemplateUrl.
         /// </summary>
         public string DocumentTemplate { get; set; }
 
@@ -42,6 +44,7 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// Gets or sets a value that specifies the list server template of the new list.
         /// https://msdn.microsoft.com/en-us/library/office/microsoft.sharepoint.client.listtemplatetype.aspx
+        /// SP REST property name: BaseTemplate
         /// </summary>
         public ListTemplateType TemplateType { get; }
 
@@ -72,11 +75,13 @@ namespace PnP.Core.Model.SharePoint
 
         /// <summary>
         /// Gets or sets the MinorVersionLimit  for versioning, just in case it is enabled on the list
+        /// SP REST property name: MajorWithMinorVersionsLimit.
         /// </summary>
         public int MinorVersionLimit { get; set; }
 
         /// <summary>
         /// Gets or sets the MinorVersionLimit  for verisioning, just in case it is enabled on the list
+        /// SP REST property name: MajorVersionLimit.
         /// </summary>
         public int MaxVersionLimit { get; set; }
 
@@ -122,6 +127,7 @@ namespace PnP.Core.Model.SharePoint
 
         /// <summary>
         /// Defines the current list UI/UX experience (valid for SPO only).
+        /// SP REST property name: ListExperienceOptions.
         /// </summary>
         public ListExperience ListExperience { get; set; }
 
@@ -219,8 +225,7 @@ namespace PnP.Core.Model.SharePoint
         /// Collection of role assignments for this list
         /// </summary>
         public IRoleAssignmentCollection RoleAssignments { get; }
-
-
+        
         /// <summary>
         /// Get a list of the views
         /// </summary>
@@ -276,89 +281,101 @@ namespace PnP.Core.Model.SharePoint
         /// Loads list items based up on a CAML query
         /// </summary>
         /// <param name="query">query to execute</param>
+        /// <param name="selectors">The expressions declaring the fields to select</param>
         /// <returns></returns>
-        public Task LoadItemsByCamlQueryAsync(string query);
+        public Task LoadItemsByCamlQueryAsync(string query, params Expression<Func<IListItem, object>>[] selectors);
 
         /// <summary>
         /// Loads list items based up on a CAML query
         /// </summary>
         /// <param name="query">query to execute</param>
+        /// <param name="selectors">The expressions declaring the fields to select</param>
         /// <returns></returns>
-        public void LoadItemsByCamlQuery(string query);
+        public void LoadItemsByCamlQuery(string query, params Expression<Func<IListItem, object>>[] selectors);
 
         /// <summary>
         /// Loads list items based up on a CAML query
         /// </summary>
         /// <param name="queryOptions"><see cref="CamlQueryOptions"/> defining the query to execute</param>
+        /// <param name="selectors">The expressions declaring the fields to select</param>
         /// <returns></returns>
-        public Task LoadItemsByCamlQueryAsync(CamlQueryOptions queryOptions);
+        public Task LoadItemsByCamlQueryAsync(CamlQueryOptions queryOptions, params Expression<Func<IListItem, object>>[] selectors);
 
         /// <summary>
         /// Loads list items based up on a CAML query
         /// </summary>
         /// <param name="queryOptions"><see cref="CamlQueryOptions"/> defining the query to execute</param>
+        /// <param name="selectors">The expressions declaring the fields to select</param>
         /// <returns></returns>
-        public void LoadItemsByCamlQuery(CamlQueryOptions queryOptions);
+        public void LoadItemsByCamlQuery(CamlQueryOptions queryOptions, params Expression<Func<IListItem, object>>[] selectors);
 
         /// <summary>
         /// Loads list items based up on a CAML query
         /// </summary>
         /// <param name="query">query to execute</param>
+        /// <param name="selectors">The expressions declaring the fields to select</param>
         /// <returns></returns>
-        public Task LoadItemsByCamlQueryBatchAsync(string query);
+        public Task LoadItemsByCamlQueryBatchAsync(string query, params Expression<Func<IListItem, object>>[] selectors);
 
         /// <summary>
         /// Loads list items based up on a CAML query
         /// </summary>
         /// <param name="query">query to execute</param>
+        /// <param name="selectors">The expressions declaring the fields to select</param>
         /// <returns></returns>
-        public void LoadItemsByCamlQueryBatch(string query);
+        public void LoadItemsByCamlQueryBatch(string query, params Expression<Func<IListItem, object>>[] selectors);
 
         /// <summary>
         /// Loads list items based up on a CAML query
         /// </summary>
         /// <param name="queryOptions"><see cref="CamlQueryOptions"/> defining the query to execute</param>
+        /// <param name="selectors">The expressions declaring the fields to select</param>
         /// <returns></returns>
-        public Task LoadItemsByCamlQueryBatchAsync(CamlQueryOptions queryOptions);
+        public Task LoadItemsByCamlQueryBatchAsync(CamlQueryOptions queryOptions, params Expression<Func<IListItem, object>>[] selectors);
 
         /// <summary>
         /// Loads list items based up on a CAML query
         /// </summary>
         /// <param name="queryOptions"><see cref="CamlQueryOptions"/> defining the query to execute</param>
+        /// <param name="selectors">The expressions declaring the fields to select</param>
         /// <returns></returns>
-        public void LoadItemsByCamlQueryBatch(CamlQueryOptions queryOptions);
+        public void LoadItemsByCamlQueryBatch(CamlQueryOptions queryOptions, params Expression<Func<IListItem, object>>[] selectors);
 
         /// <summary>
         /// Loads list items based up on a CAML query
         /// </summary>
         /// <param name="batch">Batch to add this request to </param>
         /// <param name="query">query to execute</param>
+        /// <param name="selectors">The expressions declaring the fields to select</param>
         /// <returns></returns>
-        public Task LoadItemsByCamlQueryBatchAsync(Batch batch, string query);
+        public Task LoadItemsByCamlQueryBatchAsync(Batch batch, string query, params Expression<Func<IListItem, object>>[] selectors);
 
         /// <summary>
         /// Loads list items based up on a CAML query
         /// </summary>
         /// <param name="batch">Batch to add this request to </param>
         /// <param name="query">query to execute</param>
+        /// <param name="selectors">The expressions declaring the fields to select</param>
         /// <returns></returns>
-        public void LoadItemsByCamlQueryBatch(Batch batch, string query);
+        public void LoadItemsByCamlQueryBatch(Batch batch, string query, params Expression<Func<IListItem, object>>[] selectors);
 
         /// <summary>
         /// Loads list items based up on a CAML query
         /// </summary>
         /// <param name="batch">Batch to add this request to </param>
         /// <param name="queryOptions"><see cref="CamlQueryOptions"/> defining the query to execute</param>
+        /// <param name="selectors">The expressions declaring the fields to select</param>
         /// <returns></returns>
-        public Task LoadItemsByCamlQueryBatchAsync(Batch batch, CamlQueryOptions queryOptions);
+        public Task LoadItemsByCamlQueryBatchAsync(Batch batch, CamlQueryOptions queryOptions, params Expression<Func<IListItem, object>>[] selectors);
 
         /// <summary>
         /// Loads list items based up on a CAML query
         /// </summary>
         /// <param name="batch">Batch to add this request to </param>
         /// <param name="queryOptions"><see cref="CamlQueryOptions"/> defining the query to execute</param>
+        /// <param name="selectors">The expressions declaring the fields to select</param>
         /// <returns></returns>
-        public void LoadItemsByCamlQueryBatch(Batch batch, CamlQueryOptions queryOptions);
+        public void LoadItemsByCamlQueryBatch(Batch batch, CamlQueryOptions queryOptions, params Expression<Func<IListItem, object>>[] selectors);
 
         /// <summary>
         /// Loads list items based up on a CAML query and the RenderListDataAsStream API

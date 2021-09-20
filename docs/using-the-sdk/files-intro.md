@@ -29,6 +29,20 @@ IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentU
 IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl, f => f.CheckOutType, f => f.CheckedOutByUser);
 ```
 
+### Getting the file of a list item
+
+A document in a document library is an `IListItem` holding the file metadata with an `IFile` holding the actual file. If you have an `IListItem` you can load the connected file via `File` property:
+
+```csharp
+var myList = await context.Web.Lists.GetByTitleAsync("My List");
+
+// Load list item with id 1 with it's file
+var first = await myList.Items.GetByIdAsync(1, li => li.All, li => li.File);
+
+// Use the loaded IFile, e.g. for downloading it
+byte[] downloadedContentBytes = await first.File.GetContentBytesAsync();
+```
+
 ### Enumerating files
 
 Files do live in an [IFolder](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IFolder.html), document libraries do have a [RootFolder property](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_RootFolder) allowing you to enumerate files, but also the [IWeb](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IWeb.html) has a [collection of Folders](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_Folders), a [RootFolder](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IWeb.html#collapsible-PnP_Core_Model_SharePoint_IWeb_RootFolder) and [GetFolderByIdAsync](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IWeb.html#collapsible-PnP_Core_Model_SharePoint_IWeb_GetFolderByIdAsync_Guid_Expression_Func_PnP_Core_Model_SharePoint_IFolder_System_Object_____) and [GetFolderByServerRelativeUrlAsync](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IWeb.html#collapsible-PnP_Core_Model_SharePoint_IWeb_GetFolderByServerRelativeUrlAsync_System_String_Expression_Func_PnP_Core_Model_SharePoint_IFolder_System_Object_____) methods. Once you've a folder you can enumerate the files inside it.
@@ -180,6 +194,29 @@ IFolder siteAssetsFolder = await context.Web.Folders.Where(f => f.Name == "SiteA
 // Upload a file by adding it to the folder's files collection
 IFile addedFile = await siteAssetsFolder.Files.AddAsync("test.docx", 
                   System.IO.File.OpenRead($".{Path.DirectorySeparatorChar}TestFilesFolder{Path.DirectorySeparatorChar}test.docx"));
+```
+
+## Updating file metadata
+
+The library in which you've uploaded a file might have additional columns to store metadata about the file. To update this metadata you first need to load the `IListItem` linked to the added file via the `ListItemAllFields` property, followed by setting the metadata and updating the `IListItem`.
+
+>[!Note]
+> See the [working with list items](listitems-intro.md) page for information on how to update an `IListItem`.
+
+```csharp
+// Get a reference to a folder
+IFolder documentsFolder = await context.Web.Folders.Where(f => f.Name == "Documents").FirstOrDefaultAsync();
+
+// Upload a file by adding it to the folder's files collection
+IFile addedFile = await documentsFolder.Files.AddAsync("test.docx", 
+                  System.IO.File.OpenRead($".{Path.DirectorySeparatorChar}TestFilesFolder{Path.DirectorySeparatorChar}test.docx"));
+// Load the corresponding ListItem
+await addedFile.ListItemAllFields.LoadAsync();
+// Set the metadata
+addedFile.ListItemAllFields["Field1"] = "Hi there";
+addedFile.ListItemAllFields["Field2"] = true;
+// Persist the ListItem changes
+await addedFile.ListItemAllFields.UpdateAsync();
 ```
 
 ## Downloading files

@@ -4,7 +4,9 @@ using PnP.Core.Model;
 using PnP.Core.Model.Security;
 using PnP.Core.Model.SharePoint;
 using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Net.Http;
 #if NET5_0
 using System.Runtime.InteropServices;
@@ -19,6 +21,10 @@ namespace PnP.Core.Services
     /// </summary>
     public class PnPContextFactory : IPnPContextFactory
     {
+        private static readonly Expression<Func<IWeb, object>>[] defaultWebProps = { w => w.Id, w => w.Url,
+                                                                                     w => w.RegionalSettings.QueryProperties(r => r.TimeZone, r => r.All) };
+        private static readonly Expression<Func<ISite, object>>[] defaultSiteProps = { s => s.Id, s => s.GroupId };
+
 #if NET5_0
         private static readonly HttpClient httpClient = new HttpClient();
 #endif
@@ -84,30 +90,33 @@ namespace PnP.Core.Services
         /// </summary>
         /// <param name="name">The name of the PnPContext configuration to use</param>
         /// <param name="initializeAuthenticationProvider">The function to initialize the authentication provider</param>
+        /// <param name="options">Options used to configure the created context</param>
         /// <returns>A PnPContext object based on the provided configuration name</returns>
-        public virtual PnPContext Create(string name, Action<IAuthenticationProvider> initializeAuthenticationProvider)
+        public virtual PnPContext Create(string name, Action<IAuthenticationProvider> initializeAuthenticationProvider, PnPContextOptions options = null)
         {
-            return CreateAsync(name, initializeAuthenticationProvider).GetAwaiter().GetResult();
+            return CreateAsync(name, initializeAuthenticationProvider, options).GetAwaiter().GetResult();
         }
 
         /// <summary>
         /// Creates a new instance of PnPContext based on a provided configuration name
         /// </summary>
         /// <param name="name">The name of the PnPContext configuration to use</param>
+        /// <param name="options">Options used to configure the created context</param>
         /// <returns>A PnPContext object based on the provided configuration name</returns>
-        public virtual PnPContext Create(string name)
+        public virtual PnPContext Create(string name, PnPContextOptions options = null)
         {
-            return CreateAsync(name).GetAwaiter().GetResult();
+            return CreateAsync(name, options).GetAwaiter().GetResult();
         }
 
         /// <summary>
         /// Creates a new instance of PnPContext based on a provided configuration name
         /// </summary>
         /// <param name="name">The name of the PnPContext configuration to use</param>
+        /// <param name="options">Options used to configure the created context</param>
         /// <returns>A PnPContext object based on the provided configuration name</returns>
-        public async virtual Task<PnPContext> CreateAsync(string name)
+        public async virtual Task<PnPContext> CreateAsync(string name, PnPContextOptions options = null)
         {
-            return await CreateAsync(name, null).ConfigureAwait(false);
+            return await CreateAsync(name, null, options).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -115,8 +124,9 @@ namespace PnP.Core.Services
         /// </summary>
         /// <param name="name">The name of the PnPContext configuration to use</param>
         /// <param name="initializeAuthenticationProvider">The function to initialize the authentication provider</param>
+        /// <param name="options">Options used to configure the created context</param>
         /// <returns>A PnPContext object based on the provided configuration name</returns>
-        public async virtual Task<PnPContext> CreateAsync(string name, Action<IAuthenticationProvider> initializeAuthenticationProvider)
+        public async virtual Task<PnPContext> CreateAsync(string name, Action<IAuthenticationProvider> initializeAuthenticationProvider, PnPContextOptions options = null)
         {
             // Search for the provided configuration
             var configuration = ContextOptions.Configurations.FirstOrDefault(c => c.Name == name);
@@ -127,33 +137,32 @@ namespace PnP.Core.Services
             }
 
             // Process the Authentication Provider initialization code, if any
-            if (initializeAuthenticationProvider != null)
-            {
-                initializeAuthenticationProvider(configuration.AuthenticationProvider);
-            }
+            initializeAuthenticationProvider?.Invoke(configuration.AuthenticationProvider);
 
-            return await CreateAsync(configuration.SiteUrl, configuration.AuthenticationProvider).ConfigureAwait(false);
+            return await CreateAsync(configuration.SiteUrl, configuration.AuthenticationProvider, options).ConfigureAwait(false);
         }
 
         /// <summary>
         /// Creates a new instance of PnPContext based on a provided configuration name
         /// </summary>
         /// <param name="url">The URL of the PnPContext as a URI</param>
+        /// <param name="options">Options used to configure the created context</param>
         /// <returns>A PnPContext object based on the provided configuration name</returns>
-        public virtual PnPContext Create(Uri url)
+        public virtual PnPContext Create(Uri url, PnPContextOptions options = null)
         {
-            return CreateAsync(url).GetAwaiter().GetResult();
+            return CreateAsync(url, options).GetAwaiter().GetResult();
         }
 
         /// <summary>
         /// Creates a new instance of PnPContext based on a provided configuration name
         /// </summary>
         /// <param name="url">The URL of the PnPContext as a URI</param>
+        /// <param name="options">Options used to configure the created context</param>
         /// <returns>A PnPContext object based on the provided configuration name</returns>
-        public async virtual Task<PnPContext> CreateAsync(Uri url)
+        public async virtual Task<PnPContext> CreateAsync(Uri url, PnPContextOptions options = null)
         {
             // Use the default settings to create a new instance of PnPContext
-            return await CreateAsync(url, ContextOptions.DefaultAuthenticationProvider).ConfigureAwait(false);
+            return await CreateAsync(url, ContextOptions.DefaultAuthenticationProvider, options).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -161,10 +170,11 @@ namespace PnP.Core.Services
         /// </summary>
         /// <param name="url">The URL of the PnPContext as a URI</param>
         /// <param name="authenticationProvider">The Authentication Provider to use to authenticate within the PnPContext</param>
+        /// <param name="options">Options used to configure the created context</param>
         /// <returns>A PnPContext object based on the provided configuration name</returns>
-        public virtual PnPContext Create(Uri url, IAuthenticationProvider authenticationProvider)
+        public virtual PnPContext Create(Uri url, IAuthenticationProvider authenticationProvider, PnPContextOptions options = null)
         {
-            return CreateAsync(url, authenticationProvider).GetAwaiter().GetResult();
+            return CreateAsync(url, authenticationProvider, options).GetAwaiter().GetResult();
         }
 
         /// <summary>
@@ -172,8 +182,9 @@ namespace PnP.Core.Services
         /// </summary>
         /// <param name="url">The URL of the PnPContext as a URI</param>
         /// <param name="authenticationProvider">The Authentication Provider to use to authenticate within the PnPContext</param>
+        /// <param name="options">Options used to configure the created context</param>
         /// <returns>A PnPContext object based on the provided configuration name</returns>
-        public async virtual Task<PnPContext> CreateAsync(Uri url, IAuthenticationProvider authenticationProvider)
+        public async virtual Task<PnPContext> CreateAsync(Uri url, IAuthenticationProvider authenticationProvider, PnPContextOptions options = null)
         {
             // Use the provided settings to create a new instance of PnPContext
             var context = new PnPContext(Log, authenticationProvider, SharePointRestClient, MicrosoftGraphClient, ContextOptions, GlobalOptions, TelemetryManager)
@@ -185,7 +196,7 @@ namespace PnP.Core.Services
             await ConfigureTelemetry(context).ConfigureAwait(false);
 
             // Perform context initialization
-            await InitializeContextAsync(context).ConfigureAwait(false);
+            await InitializeContextAsync(context, options).ConfigureAwait(false);
 
             // Configure the global Microsoft Graph settings
             context.GraphFirst = ContextOptions.GraphFirst;
@@ -200,10 +211,11 @@ namespace PnP.Core.Services
         /// </summary>
         /// <param name="groupId">The id of an Microsoft 365 group</param>
         /// <param name="authenticationProvider">The Authentication Provider to use to authenticate within the PnPContext</param>
+        /// <param name="options">Options used to configure the created context</param>
         /// <returns>A PnPContext object based on the provided configuration name</returns>
-        public virtual PnPContext Create(Guid groupId, IAuthenticationProvider authenticationProvider)
+        public virtual PnPContext Create(Guid groupId, IAuthenticationProvider authenticationProvider, PnPContextOptions options = null)
         {
-            return CreateAsync(groupId, authenticationProvider).GetAwaiter().GetResult();
+            return CreateAsync(groupId, authenticationProvider, options).GetAwaiter().GetResult();
         }
 
         /// <summary>
@@ -211,8 +223,9 @@ namespace PnP.Core.Services
         /// </summary>
         /// <param name="groupId">The id of an Microsoft 365 group</param>
         /// <param name="authenticationProvider">The Authentication Provider to use to authenticate within the PnPContext</param>
+        /// <param name="options">Options used to configure the created context</param>
         /// <returns>A PnPContext object based on the provided configuration name</returns>
-        public async virtual Task<PnPContext> CreateAsync(Guid groupId, IAuthenticationProvider authenticationProvider)
+        public async virtual Task<PnPContext> CreateAsync(Guid groupId, IAuthenticationProvider authenticationProvider, PnPContextOptions options = null)
         {
             // Use the provided settings to create a new instance of PnPContext
             var context = new PnPContext(Log, authenticationProvider, SharePointRestClient, MicrosoftGraphClient, ContextOptions, GlobalOptions, TelemetryManager);
@@ -224,7 +237,7 @@ namespace PnP.Core.Services
             await ConfigureForGroup(context, groupId).ConfigureAwait(false);
 
             // Perform context initialization
-            await InitializeContextAsync(context).ConfigureAwait(false);
+            await InitializeContextAsync(context, options).ConfigureAwait(false);
 
             return context;
         }
@@ -233,46 +246,63 @@ namespace PnP.Core.Services
         /// Creates a new instance of PnPContext based on a provided group and using the default Authentication Provider
         /// </summary>
         /// <param name="groupId">The id of an Microsoft 365 group</param>
+        /// <param name="options">Options used to configure the created context</param>
         /// <returns>A PnPContext object based on the provided configuration name</returns>
-        public virtual PnPContext Create(Guid groupId)
+        public virtual PnPContext Create(Guid groupId, PnPContextOptions options = null)
         {
-            return CreateAsync(groupId).GetAwaiter().GetResult();
+            return CreateAsync(groupId, options).GetAwaiter().GetResult();
         }
 
         /// <summary>
         /// Creates a new instance of PnPContext based on a provided group and using the default Authentication Provider
         /// </summary>
         /// <param name="groupId">The id of an Microsoft 365 group</param>
+        /// <param name="options">Options used to configure the created context</param>
         /// <returns>A PnPContext object based on the provided configuration name</returns>
-        public async virtual Task<PnPContext> CreateAsync(Guid groupId)
+        public async virtual Task<PnPContext> CreateAsync(Guid groupId, PnPContextOptions options = null)
         {
-            return await CreateAsync(groupId, ContextOptions.DefaultAuthenticationProvider).ConfigureAwait(false);
+            return await CreateAsync(groupId, ContextOptions.DefaultAuthenticationProvider, options).ConfigureAwait(false);
         }
 
         /// <summary>
         /// When using REST batch requests the URL needs to be correctly cased, so we're loading the web url while doing an interactive request.
         /// Also loading the default needed properties to save additional loads for missing key properties
         /// </summary>
-        /// <param name="context"></param>
+        /// <param name="context">PnPContext being initialized</param>
+        /// <param name="options">Options for the initialization of this context</param>
         /// <returns></returns>
-        internal static async Task InitializeContextAsync(PnPContext context)
+        internal static async Task InitializeContextAsync(PnPContext context, PnPContextOptions options)
         {
+
+            // Store the provided options, needed for context cloning
+            context.LocalContextOptions = options;
+
+            // IMPORTANT: this first call is an interactive call by design as that allows us set the 
+            //            web URL using the correct casing. Correct casing is required in REST batching
 
             // IMPORTANT: if you change this logic by adding more initialization data you also need
             //            to update the CopyContextInitialization method!
 
+            // Combine the default properties to load with optional additional properties
+            var (siteProps, webProps) = GetDefaultPropertiesToLoad(options);
+            
+            // Use the query client to build the correct initialization query for the given Web properties 
+            BaseDataModel<IWeb> concreteEntity = EntityManager.GetEntityConcreteInstance(typeof(IWeb), context.Web, context) as BaseDataModel<IWeb>;
+            var entityInfo = EntityManager.GetClassInfo(concreteEntity.GetType(), concreteEntity, null, webProps.ToArray());
+            var apiCallRequest = await QueryClient.BuildGetAPICallAsync(concreteEntity, entityInfo, new ApiCall($"_api/Web", ApiType.SPORest), true).ConfigureAwait(false);
+
             // Load required web properties
-            var api = new ApiCall($"{context.Uri}/_api/Web?$select=Id,Url,RegionalSettings&$expand=RegionalSettings/TimeZone", ApiType.SPORest)
+            var api = new ApiCall(apiCallRequest.ApiCall.Request, ApiType.SPORest)
             {
                 Interactive = true
             };
             await (context.Web as Web).RequestAsync(api, HttpMethod.Get, "Get").ConfigureAwait(false);
-            
+
             // Replace the context URI with the value using the correct casing
             context.Uri = context.Web.Url;
 
-            // Request the Site Id
-            await context.Site.LoadAsync(p => p.Id, p=>p.GroupId).ConfigureAwait(false);
+            // Request the site properties
+            await context.Site.LoadAsync(siteProps.ToArray()).ConfigureAwait(false);
 
             // Ensure the Graph ID is set once and only once
             if (context.Web is IMetadataExtensible me)
@@ -282,6 +312,20 @@ namespace PnP.Core.Services
                     me.Metadata.Add(PnPConstants.MetaDataGraphId, $"{context.Uri.DnsSafeHost},{context.Site.Id},{context.Web.Id}");
                 }
             }
+
+            // If the GroupId is available ensure it's also correctly set on the Group metadata so that calls via that
+            // model can work
+            if (context.Site.IsPropertyAvailable(p => p.GroupId) && context.Site.GroupId != Guid.Empty)
+            {
+                if (context.Group is IMetadataExtensible groupMetaData)
+                {
+                    if (!groupMetaData.Metadata.ContainsKey(PnPConstants.MetaDataGraphId))
+                    {
+                        groupMetaData.Metadata.Add(PnPConstants.MetaDataGraphId, context.Site.GroupId.ToString());
+                    }
+                }
+            }
+
         }
 
         internal static async Task CopyContextInitializationAsync(PnPContext source, PnPContext target)
@@ -295,7 +339,7 @@ namespace PnP.Core.Services
                 target.Web.SetSystemProperty(p => p.Id, source.Web.Id);
                 target.Web.SetSystemProperty(p => p.Url, source.Web.Url);
                 target.Web.Requested = true;
-                (target.Web as Web).Metadata = new System.Collections.Generic.Dictionary<string, string>((source.Web as Web).Metadata);
+                (target.Web as Web).Metadata = new Dictionary<string, string>((source.Web as Web).Metadata);
 
                 // Copy regional settings, important to trigger the creation of the regional settings model from the target web model
                 var regionalSettings = target.Web.RegionalSettings;                
@@ -321,7 +365,7 @@ namespace PnP.Core.Services
                 if (source.Web.RegionalSettings.IsPropertyAvailable(p => p.TimeMarkerPosition)) { regionalSettings.SetSystemProperty(p => p.TimeMarkerPosition, source.Web.RegionalSettings.TimeMarkerPosition); };
                 if (source.Web.RegionalSettings.IsPropertyAvailable(p => p.TimeSeparator)) { regionalSettings.SetSystemProperty(p => p.TimeSeparator, source.Web.RegionalSettings.TimeSeparator); };
                 regionalSettings.Requested = true;
-                (regionalSettings as RegionalSettings).Metadata = new System.Collections.Generic.Dictionary<string, string>((source.Web.RegionalSettings as RegionalSettings).Metadata);
+                (regionalSettings as RegionalSettings).Metadata = new Dictionary<string, string>((source.Web.RegionalSettings as RegionalSettings).Metadata);
 
                 // Copy timezone settings
                 var timeZone = regionalSettings.TimeZone;
@@ -331,19 +375,98 @@ namespace PnP.Core.Services
                 if (source.Web.RegionalSettings.TimeZone.IsPropertyAvailable(p => p.DaylightBias)) { timeZone.SetSystemProperty(p => p.DaylightBias, source.Web.RegionalSettings.TimeZone.DaylightBias); };
                 if (source.Web.RegionalSettings.TimeZone.IsPropertyAvailable(p => p.StandardBias)) { timeZone.SetSystemProperty(p => p.StandardBias, source.Web.RegionalSettings.TimeZone.StandardBias); };
                 timeZone.Requested = true;
-                (timeZone as Model.SharePoint.TimeZone).Metadata = new System.Collections.Generic.Dictionary<string, string>((source.Web.RegionalSettings.TimeZone as Model.SharePoint.TimeZone).Metadata);
+                (timeZone as Model.SharePoint.TimeZone).Metadata = new Dictionary<string, string>((source.Web.RegionalSettings.TimeZone as Model.SharePoint.TimeZone).Metadata);
 
                 // Copy site settings                
                 target.Site.SetSystemProperty(p => p.Id, source.Site.Id);
                 target.Site.SetSystemProperty(p => p.GroupId, source.Site.GroupId);
                 target.Site.Requested = true; 
-                (target.Site as Site).Metadata = new System.Collections.Generic.Dictionary<string, string>((source.Site as Site).Metadata);
+                (target.Site as Site).Metadata = new Dictionary<string, string>((source.Site as Site).Metadata);
+
+                // Copy the additional initialization properties (if any)
+                // Only "basic" properties are cloned, complex properties (e.g. Web.Lists) are not cloned as 
+                // a common use case of using a cloned context is to start "clean", basic web/site properties do not change 
+                // when cloning for the same site url, but one might want to load collections (= complex property)
+                // using a different filter
+                if (source.LocalContextOptions != null)
+                {
+                    List<Expression<Func<ISite, object>>> clonedSiteProperties = new List<Expression<Func<ISite, object>>>();
+                    List<Expression<Func<IWeb, object>>> clonedWebProperties = new List<Expression<Func<IWeb, object>>>();
+
+                    if (source.LocalContextOptions.AdditionalSitePropertiesOnCreate != null)
+                    {
+                        
+                        foreach (var prop in source.LocalContextOptions.AdditionalSitePropertiesOnCreate)
+                        {
+                            if (!prop.Body.Type.ImplementsInterface(typeof(IDataModelParent)) && !prop.Body.Type.ImplementsInterface(typeof(IQueryable)))
+                            {
+                                clonedSiteProperties.Add(prop);
+                                target.Site.SetSystemProperty(prop, GetPropertyValue(source.Site, prop));
+                            }
+                        }                        
+                    }
+
+                    if (source.LocalContextOptions.AdditionalWebPropertiesOnCreate != null)
+                    {
+                        foreach (var prop in source.LocalContextOptions.AdditionalWebPropertiesOnCreate)
+                        {
+                            if (!prop.Body.Type.ImplementsInterface(typeof(IDataModelParent)) && !prop.Body.Type.ImplementsInterface(typeof(IQueryable)))
+                            {
+                                clonedWebProperties.Add(prop);
+                                target.Web.SetSystemProperty(prop, GetPropertyValue(source.Web, prop));
+                            }
+                        }
+                    }
+
+                    if (clonedSiteProperties.Any() || clonedWebProperties.Any())
+                    {
+                        target.LocalContextOptions = new PnPContextOptions()
+                        {
+                            AdditionalSitePropertiesOnCreate = clonedSiteProperties.Any() ? clonedSiteProperties : null,
+                            AdditionalWebPropertiesOnCreate = clonedWebProperties.Any() ? clonedWebProperties : null
+                        };
+                    }
+                }
             }
             else
             {
-                // seems the data in the source context was not what we expected, run the usual initialization to reset it
-                await InitializeContextAsync(target).ConfigureAwait(false);
+                // seems the data in the source context was not what we expected, run the usual initialization to reset it, reuse the source context options 
+                // if specified
+                await InitializeContextAsync(target, source.LocalContextOptions).ConfigureAwait(false);
             }
+        }
+
+        private static TResult GetPropertyValue<TSource, TResult>(TSource source, Expression<Func<TSource, TResult>> expression)
+        {
+            var propertyName = expression.Body switch
+            {
+                MemberExpression m => m.Member.Name,
+                UnaryExpression u when u.Operand is MemberExpression m => m.Member.Name,
+                _ => throw new NotImplementedException(expression.GetType().ToString())
+            };
+
+            return (TResult)source.GetPublicInstancePropertyValue(propertyName);
+        }
+
+        private static (IEnumerable<Expression<Func<ISite, object>>>, IEnumerable<Expression<Func<IWeb, object>>>) GetDefaultPropertiesToLoad(PnPContextOptions options)
+        {
+            IEnumerable<Expression<Func<ISite, object>>> siteProps = defaultSiteProps;
+            IEnumerable<Expression<Func<IWeb, object>>> webProps = defaultWebProps;
+
+            if (options != null)
+            {
+                if (options.AdditionalSitePropertiesOnCreate != null)
+                {
+                    siteProps = siteProps.Union(options.AdditionalSitePropertiesOnCreate);
+                }
+
+                if (options.AdditionalWebPropertiesOnCreate != null)
+                {
+                    webProps = webProps.Union(options.AdditionalWebPropertiesOnCreate);
+                }
+            }
+
+            return (siteProps, webProps);
         }
 
         internal static async Task ConfigureForGroup(PnPContext context, Guid groupId)

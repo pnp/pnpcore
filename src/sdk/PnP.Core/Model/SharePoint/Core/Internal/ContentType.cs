@@ -10,10 +10,8 @@ using System.Threading.Tasks;
 
 namespace PnP.Core.Model.SharePoint
 {
-    [SharePointType("SP.ContentType", Target = typeof(Web),
-        Uri = "_api/Web/ContentTypes('{Id}')", Get = "_api/web/ContentTypes", LinqGet = "_api/web/ContentTypes")]
-    [SharePointType("SP.ContentType", Target = typeof(List), Uri = "_api/Web/Lists(guid'{Parent.Id}')/ContentTypes('{Id}')",
-        Get = "_api/Web/Lists(guid'{Parent.Id}')/ContentTypes", LinqGet = "_api/Web/Lists(guid'{Parent.Id}')/ContentTypes")]
+    [SharePointType("SP.ContentType", Target = typeof(Web), Uri = "_api/Web/ContentTypes('{Id}')", LinqGet = "_api/web/ContentTypes")]
+    [SharePointType("SP.ContentType", Target = typeof(List), Uri = "_api/Web/Lists(guid'{Parent.Id}')/ContentTypes('{Id}')", LinqGet = "_api/Web/Lists(guid'{Parent.Id}')/ContentTypes")]
     internal partial class ContentType : BaseDataModel<IContentType>, IContentType
     {
         #region Construction
@@ -21,12 +19,17 @@ namespace PnP.Core.Model.SharePoint
         {
             PostMappingHandler = (json) =>
             {
-                // In the case of Add operation, the CSOM api is used and JSON mapping to model is not possible
-                // So here, populate the Rest Id metadata field to enable actions upon 
-                // this content type without having to read it again from the server
-                AddMetadata(PnPConstants.MetaDataRestId, StringId);
-                AddMetadata(PnPConstants.MetaDataType, "SP.ContentType");
-                Requested = true;
+                // Trying to load values with the selectors will result in this not having a StringId sometimes.
+                // Prevent a ClientException by checking first
+                if (HasValue(nameof(StringId)))
+                {
+                    // In the case of Add operation, the CSOM api is used and JSON mapping to model is not possible
+                    // So here, populate the Rest Id metadata field to enable actions upon 
+                    // this content type without having to read it again from the server
+                    AddMetadata(PnPConstants.MetaDataRestId, StringId);
+                    AddMetadata(PnPConstants.MetaDataType, "SP.ContentType");
+                    Requested = true;
+                }
             };
 
             // Handler to construct the Add request for this content type
@@ -116,6 +119,8 @@ namespace PnP.Core.Model.SharePoint
 
         public IFieldLinkCollection FieldLinks { get => GetModelCollectionValue<IFieldLinkCollection>(); }
 
+        public IFieldCollection Fields { get => GetModelCollectionValue<IFieldCollection>(); }
+
         [KeyProperty(nameof(StringId))]
         public override object Key { get => StringId; set => StringId = value.ToString(); }
         #endregion
@@ -133,7 +138,7 @@ namespace PnP.Core.Model.SharePoint
             // automatically provide the correct 'parent'
             var entity = EntityManager.GetClassInfo(GetType(), this);
 
-            return new ApiCall($"{entity.SharePointGet}/AddAvailableContentType", ApiType.SPORest, bodyContent);
+            return new ApiCall($"{entity.SharePointLinqGet}/AddAvailableContentType", ApiType.SPORest, bodyContent);
         }
 
         internal async Task<IContentType> AddAvailableContentTypeBatchAsync(Batch batch, string id)

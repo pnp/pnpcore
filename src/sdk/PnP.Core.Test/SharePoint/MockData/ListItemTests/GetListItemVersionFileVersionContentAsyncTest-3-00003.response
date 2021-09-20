@@ -1,0 +1,9 @@
+--batchresponse_4a5db9dc-36db-4c8b-86ba-d4b40ee06153
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+HTTP/1.1 200 OK
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+
+{"d":{"results":[{"__metadata":{"id":"4c3ee8fb-6ea9-4ea0-ad4b-c032e0e7fe4b","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'9b78deae-deea-474b-ba50-cb2b555ab218')/Items(2)","etag":"\"2\"","type":"SP.Data.PNP_x005f_SDK_x005f_TEST_x005f_GetListItemVersionFileVersionContentAItem"},"Id":2,"ID":2}]}}
+--batchresponse_4a5db9dc-36db-4c8b-86ba-d4b40ee06153--

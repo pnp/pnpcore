@@ -2,6 +2,15 @@
 
 A page is a canvas with a layout (the sections and columns) and on that canvas you can add controls: simple text parts or more complex web parts. This chapter shows how you can create, configure and add a control on a page.
 
+In the remainder of this article you'll see a lot of `context` use: in this case this is a `PnPContext` which was obtained via the `PnPContextFactory` as explained in the [overview article](readme.md) and show below:
+
+```csharp
+using (var context = await pnpContextFactory.CreateAsync("SiteToWorkWith"))
+{
+    // See next chapter on how to use the PnPContext for working with pages
+}
+```
+
 ## Working with text parts
 
 When you need to put (formatted) text on a page you need to create a [text part](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IPageText.html), configure it and add it to a column of a section on the page. Below sample shows how a simple text can be added to a page with a one column section.

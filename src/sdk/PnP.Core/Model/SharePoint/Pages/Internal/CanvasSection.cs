@@ -157,7 +157,7 @@ namespace PnP.Core.Model.SharePoint
         {
             get
             {
-                return Columns.Where(p => p.LayoutIndex == 2).FirstOrDefault();
+                return Columns.FirstOrDefault(p => p.LayoutIndex == 2);
             }
         }
 
@@ -180,6 +180,36 @@ namespace PnP.Core.Model.SharePoint
                 zoneEmphasis = value;
             }
         }
+
+        /// <summary>
+        /// Is this section collapsible
+        /// </summary>
+        public bool Collapsible { get; set; }
+
+        /// <summary>
+        /// Is the collapsible section expanded?
+        /// </summary>
+        public bool IsExpanded { get; set; }
+
+        /// <summary>
+        /// DisplayName of the collapsible section
+        /// </summary>
+        public string DisplayName { get; set; }        
+
+        /// <summary>
+        /// Sets the alignment of the collaps icon, left/right or not configured
+        /// </summary>
+        public IconAlignment? IconAlignment { get; set; }
+
+        /// <summary>
+        /// Show a devided line for this collapsible section?
+        /// </summary>
+        public bool ShowDividerLine { get; set; }
+
+        /// <summary>
+        /// Type of this section, not configurable by SDK users
+        /// </summary>
+        public int SectionType { get; set; }
 
         #endregion
 

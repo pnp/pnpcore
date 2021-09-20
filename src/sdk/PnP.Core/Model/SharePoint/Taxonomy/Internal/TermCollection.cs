@@ -83,10 +83,6 @@ namespace PnP.Core.Model.SharePoint
             // Request term from server and load it to the model
             return await (term as Term).GetByIdAsync(id, p => p.CreatedDateTime, p => p.Descriptions, p => p.Id,
                                                   p => p.Labels, p => p.LastModifiedDateTime, p => p.Properties).ConfigureAwait(false);
-            // Add to collection or update collection if needed
-            // AddOrUpdate(term, i => ((IDataModelWithKey)i).Key.Equals(term.Id));
-
-            //return term;
         }
 
         public ITerm GetById(string id)

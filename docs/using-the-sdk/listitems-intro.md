@@ -25,16 +25,26 @@ If you simply want to load all list items and your list is not containing a lot 
 ```csharp
 // Assume the fields where not yet loaded, so loading them with the list
 var myList = context.Web.Lists.GetByTitle("My List", p => p.Title, p => p.Items, 
-                                                     p => p.Fields.QueryProperties(p => p.InternalName, p => p.FieldTypeKind, p => p.TypeAsString, p => p.Title));
+                                                     p => p.Fields.QueryProperties(p => p.InternalName, 
+                                                                                   p => p.FieldTypeKind, 
+                                                                                   p => p.TypeAsString, 
+                                                                                   p => p.Title));
 // Get the item with title "Item1"
 var addedItem = myList.Items.AsRequested().FirstOrDefault(p => p.Title == "Item1");
 
 // Iterate over the retrieved list items
-foreach (var listItem in myList.Items)
+foreach (var listItem in myList.Items.AsRequested())
 {
     // Do something with the list item
+    if (listItem["MyStatus"].ToString() == "Pending")
+    {
+      // take action
+    }
 }
 ```
+
+> [!Note]
+> When referencing a field keep in mind that you need to use the field's `StaticName`. If you've created a field with name `Version Tag` then the `StaticName` will be `Version_x0020_Tag`, so you will be using `myItem["Version_x0020_Tag"]` to work with the field.
 
 ### Getting list items via a CAML query
 
@@ -42,8 +52,12 @@ SharePoint [CAML](https://docs.microsoft.com/en-us/sharepoint/dev/schema/query-s
 
 ```csharp
 // Assume the fields where not yet loaded, so loading them with the list
-var myList = context.Web.Lists.GetByTitle("My List", p => p.Title, p => p.Items, 
-                                                     p => p.Fields.QueryProperties(p => p.InternalName, p => p.FieldTypeKind, p => p.TypeAsString, p => p.Title));
+// If you are using CAML query, do not use the parameter 'p => p.Items'. It causes full items to load, ignoring the CAML query. 
+var myList = context.Web.Lists.GetByTitle("My List", p => p.Title,
+                                                     p => p.Fields.QueryProperties(p => p.InternalName, 
+                                                                                   p => p.FieldTypeKind, 
+                                                                                   p => p.TypeAsString, 
+                                                                                   p => p.Title));
 
 // Build a query that only returns the Title field for items where the Title field starts with "Item1"
 string viewXml = @"<View>
@@ -80,8 +94,12 @@ By setting a row limit in the CAML query combined with using the the PagingInfo 
 
 ```csharp
 // Assume the fields where not yet loaded, so loading them with the list
-var myList = context.Web.Lists.GetByTitle("My List", p => p.Title, p => p.Items, 
-                                                     p => p.Fields.QueryProperties(p => p.InternalName, p => p.FieldTypeKind, p => p.TypeAsString, p => p.Title));
+// If you are using CAML query, do not use the parameter 'p => p.Items'. It causes full items to load, ignoring the CAML query. 
+var myList = context.Web.Lists.GetByTitle("My List", p => p.Title,
+                                                     p => p.Fields.QueryProperties(p => p.InternalName, 
+                                                                                   p => p.FieldTypeKind, 
+                                                                                   p => p.TypeAsString, 
+                                                                                   p => p.Title));
 
 // Build a query that only returns the first 20 rows where the Title field starts with "Item1"
 string viewXml = @"<View>
@@ -132,8 +150,11 @@ Using the [LoadListDataAsStreamAsync method](https://pnp.github.io/pnpcore/api/P
 
 ```csharp
 // Assume the fields where not yet loaded, so loading them with the list
-var myList = context.Web.Lists.GetByTitle("My List", p => p.Title, p => p.Items, 
-                                                     p => p.Fields.QueryProperties(p => p.InternalName, p => p.FieldTypeKind, p => p.TypeAsString, p => p.Title));
+var myList = context.Web.Lists.GetByTitle("My List", p => p.Title, 
+                                                     p => p.Fields.QueryProperties(p => p.InternalName, 
+                                                                                   p => p.FieldTypeKind, 
+                                                                                   p => p.TypeAsString, 
+                                                                                   p => p.Title));
 
 // Build a query that only returns the Title field for the top 5 items where the Title field starts with "Item1"
 string viewXml = @"<View>
@@ -172,8 +193,11 @@ foreach (var listItem in myList.Items.AsRequested())
 
 ```csharp
 // Assume the fields where not yet loaded, so loading them with the list
-var myList = context.Web.Lists.GetByTitle("My List", p => p.Title, p => p.Items, 
-                                                     p => p.Fields.QueryProperties(p => p.InternalName, p => p.FieldTypeKind, p => p.TypeAsString, p => p.Title));
+var myList = context.Web.Lists.GetByTitle("My List", p => p.Title, 
+                                                     p => p.Fields.QueryProperties(p => p.InternalName, 
+                                                                                   p => p.FieldTypeKind, 
+                                                                                   p => p.TypeAsString, 
+                                                                                   p => p.Title));
 
 // Build a query that only returns the Title field for the first 20 items where the Title field starts with "Item1"
 string viewXml = @"<View>
@@ -300,7 +324,10 @@ Using the Delete methods like DeleteAsync or DeleteBatchAsync you can delete one
 ```csharp
 // Assume the fields where not yet loaded, so loading them with the list
 var myList = context.Web.Lists.GetByTitle("My List", p => p.Title, p => p.Items, 
-                                                     p => p.Fields.QueryProperties(p => p.InternalName, p => p.FieldTypeKind, p => p.TypeAsString, p => p.Title));
+                                                     p => p.Fields.QueryProperties(p => p.InternalName, 
+                                                                                   p => p.FieldTypeKind, 
+                                                                                   p => p.TypeAsString, 
+                                                                                   p => p.Title));
 // Iterate over the retrieved list items
 foreach (var listItem in myList.Items.AsRequested())
 {
@@ -312,23 +339,59 @@ foreach (var listItem in myList.Items.AsRequested())
 await context.ExecuteAsync();
 ```
 
-## Other list item operations
+## Getting changes for a list item
 
-### Enabling/Disabling list item comments
+You can use the `GetChanges` methods on an `IListItem` to list all the changes. See [Enumerating changes that happened in SharePoint](changes-sharepoint.md) to learn more.
 
-List items can have comments in SharePoint and using the [SetCommentsDisabledAsync method](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IListItemBase.html#PnP_Core_Model_SharePoint_IListItemBase_SetCommentsDisabledAsync_System_Boolean_) you can turn off commenting for a given list item. This method goes hand in hand with the [AreCommentsDisabledAsync](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IListItemBase.html#PnP_Core_Model_SharePoint_IListItemBase_AreCommentsDisabledAsync) method to get the current commenting status of a list item.
+## Getting list item versions
+
+Depending on the list versioning settings an `IListItem` can have multiple versions. If you want to enumerate these versions you need to first load the `Versions` property:
 
 ```csharp
-// Assume the fields where not yet loaded, so loading them with the list
-var myList = context.Web.Lists.GetByTitle("My List", p => p.Title, p => p.Items, 
-                                                     p => p.Fields.QueryProperties(p => p.InternalName, p => p.FieldTypeKind, p => p.TypeAsString, p => p.Title));
-// Get the item with title "Item1"
-var addedItem = myList.Items.AsRequested().FirstOrDefault(p => p.Title == "Item1");
+var myList = await context.Web.Lists.GetByTitleAsync("My List");
 
-// Check if commenting was turned off
-if (!(await addedItem.AreCommentsDisabledAsync()))
+// Load list item with id 1
+var first = await myList.Items.GetByIdAsync(1, li => li.All, li => li.Versions);
+
+// Iterate over the retrieved list items
+foreach (var version in first.Versions.AsRequested())
 {
-    // Turn commenting of the list item on
-    await addedItem.SetCommentsDisabledAsync(false);
+  // do something with the file version
+}
+```
+
+## Getting the file of a list item
+
+A document in a document library is an `IListItem` holding the file metadata with an `IFile` holding the actual file. If you have an `IListItem` you can load the connected file via `File` property:
+
+```csharp
+var myList = await context.Web.Lists.GetByTitleAsync("My List");
+
+// Load list item with id 1 with it's file
+var first = await myList.Items.GetByIdAsync(1, li => li.All, li => li.File);
+
+// Download the content of the actual file
+byte[] downloadedContentBytes = await first.File.GetContentBytesAsync();
+```
+
+## Getting the file version of a list item version
+
+If there's a file for the list item then there's also a version of that file for each list item version. To access that file version you need to load the `FileVersion` property on the `IListItemVersion` instance.
+
+```csharp
+var myList = await context.Web.Lists.GetByTitleAsync("My List");
+
+// Load list item with id 1, also load the FileVersion
+var first = await myList.Items.GetByIdAsync(1, li => li.All, li => li.Versions.QueryProperties(p => p.FileVersion));
+
+// Iterate over the retrieved list items
+foreach (var version in first.Versions.AsRequested())
+{
+  // do something with the file version, e.g. download it
+  Stream downloadedContentStream = await version.FileVersion.GetContentAsync();
+  downloadedContentStream.Seek(0, SeekOrigin.Begin);
+
+  // Get string from the content stream
+  string downloadedContent = await new StreamReader(downloadedContentStream).ReadToEndAsync();
 }
 ```

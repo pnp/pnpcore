@@ -2,7 +2,6 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PnP.Core.Auth.Test.Utilities;
 using System;
-using System.Configuration;
 using System.Net.Http;
 using System.Threading.Tasks;
 

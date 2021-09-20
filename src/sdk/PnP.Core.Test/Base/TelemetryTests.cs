@@ -2,7 +2,7 @@
 using PnP.Core.Model.SharePoint;
 using PnP.Core.Services;
 using PnP.Core.Services.Core.CSOM.Requests;
-using PnP.Core.Test.Services;
+using PnP.Core.Test.Common.Services;
 using PnP.Core.Test.Services.Core.CSOM.Requests;
 using PnP.Core.Test.Utilities;
 using System;

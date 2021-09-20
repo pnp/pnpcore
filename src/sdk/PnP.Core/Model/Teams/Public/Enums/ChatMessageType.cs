@@ -8,6 +8,11 @@
         /// <summary>
         /// Message type
         /// </summary>
-        Message
+        Message,
+
+        /// <summary>
+        /// SystemEventMessage type
+        /// </summary>
+        SystemEventMessage
     }
 }

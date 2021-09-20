@@ -6,11 +6,11 @@ using System.Text.Json;
 namespace PnP.Core.Model.SharePoint
 {
 
-    [GraphType(Uri = V, LinqGet = baseUri, Beta = true)]
+    [GraphType(Uri = V, LinqGet = baseUri)]
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Usage", "CA2243:Attribute string literals should parse correctly", Justification = "<Pending>")]
     internal partial class TermGroup : BaseDataModel<ITermGroup>, ITermGroup
     {
-        private const string baseUri = "termstore/groups";
+        private const string baseUri = "sites/{hostname},{Site.Id},{Web.Id}/termstore/groups";
         private const string V = baseUri + "/{GraphId}";
 
         #region Construction
@@ -37,7 +37,7 @@ namespace PnP.Core.Model.SharePoint
 
                 var apiCall = await ApiHelper.ParseApiRequestAsync(this, baseUri).ConfigureAwait(false);
 
-                return new ApiCall(apiCall, ApiType.GraphBeta, bodyContent);
+                return new ApiCall(apiCall, ApiType.Graph, bodyContent);
             };
         }
         #endregion
@@ -54,7 +54,7 @@ namespace PnP.Core.Model.SharePoint
 
         public TermGroupScope Scope { get => GetValue<TermGroupScope>(); set => SetValue(value); }
 
-        [GraphProperty("sets", Get = "termstore/groups/{GraphId}/sets")]
+        [GraphProperty("sets", Get = "sites/{hostname},{Site.Id},{Web.Id}/termstore/groups/{GraphId}/sets")]
         public ITermSetCollection Sets { get => GetModelCollectionValue<ITermSetCollection>(); }
 
         [KeyProperty(nameof(Id))]

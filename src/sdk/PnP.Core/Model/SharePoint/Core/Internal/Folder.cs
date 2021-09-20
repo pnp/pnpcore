@@ -1,6 +1,8 @@
 using PnP.Core.Services;
 using System;
+using System.Collections.Generic;
 using System.Dynamic;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Text.Json;
@@ -347,6 +349,22 @@ namespace PnP.Core.Model.SharePoint
         {
             return EnsureFolderAsync(folderRelativeUrl).GetAwaiter().GetResult();
         }
+        #endregion
+
+        #region Get Changes
+
+        public async Task<IList<IChange>> GetChangesAsync(ChangeQueryOptions query)
+        {
+            var apiCall = ChangeCollectionHandler.GetApiCall(this, query);
+            var response = await RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
+            return ChangeCollectionHandler.Deserialize(response, this, PnPContext).ToList();
+        }
+
+        public IList<IChange> GetChanges(ChangeQueryOptions query)
+        {
+            return GetChangesAsync(query).GetAwaiter().GetResult();
+        }
+
         #endregion
 
         #endregion

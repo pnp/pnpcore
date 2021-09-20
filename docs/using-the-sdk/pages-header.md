@@ -2,6 +2,15 @@
 
 When you create pages you can also configure the page header. There are various options to configure a page header: you can add a nice image, change the header layout mode and more. What you can do via the SharePoint UI can also be done using the pages API, as explained in this chapter.
 
+In the remainder of this article you'll see a lot of `context` use: in this case this is a `PnPContext` which was obtained via the `PnPContextFactory` as explained in the [overview article](readme.md) and show below:
+
+```csharp
+using (var context = await pnpContextFactory.CreateAsync("SiteToWorkWith"))
+{
+    // See next chapter on how to use the PnPContext for working with pages
+}
+```
+
 ## Creating a page without header
 
 Sometimes the header takes up too much space and you prefer to create a page with a minimal header. You can do this by calling the [RemovePageHeader method](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IPage.html#collapsible-PnP_Core_Model_SharePoint_IPage_RemovePageHeader) on a page:

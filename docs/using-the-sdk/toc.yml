@@ -1,7 +1,5 @@
 - name: SDK basics
   items:
-  - name: Upgrade to beta3
-    href: upgrade-to-beta3.md
   - name: Getting started
     href: readme.md
   - name: Get data
@@ -10,10 +8,16 @@
     href: basics-getdata-paging.md
   - name: Adding, updating and deleting data
     href: basics-addupdatedelete.md
+  - name: Advanced PnPContext use
+    href: basics-context.md
   - name: Batching requests
     href: basics-batching.md
   - name: Async or not
     href: basics-async.md
+  - name: Error handling
+    href: basics-errorhandling.md
+  - name: Custom API requests
+    href: basics-customapirequests.md
   - name: PnP Framework interop
     href: basics-pnpframework.md
   - name: Microsoft Graph SDK interop
@@ -24,6 +28,8 @@
     href: basics-settings.md
   - name: API configuration
     href: basics-apis.md
+  - name: Upgrade to beta3 or later
+    href: upgrade-to-beta3.md
 - name: Authentication  
   items:
   - name: Configuration
@@ -45,7 +51,7 @@
   items:
   - name: Overview
     href: lists-intro.md
-  - name: working with views
+  - name: Working with views
     href: lists-views.md
 - name: Fields
   items:
@@ -63,6 +69,10 @@
     href: listitems-intro.md
   - name: Field handling
     href: listitems-fields.md
+  - name: Commenting and liking
+    href: listitems-social.md
+  - name: Attachments
+    href: listitems-attachments.md
 - name: Files
   items:
   - name: Overview
@@ -81,7 +91,7 @@
     href: pages-promote.md
   - name: Multilingual pages
     href: pages-multilingual.md
-  - name: Page commenting
+  - name: Commenting and liking
     href: pages-social.md
 - name: Folders
   items:
@@ -99,6 +109,12 @@
     href: teams-channel-chat.md
   - name: Archiving
     href: teams-archiving.md
+- name: Taxonomy
+  items:
+  - name: Overview
+    href: taxonomy-intro.md
+  - name: Advanced
+    href: taxonomy-advanced.md
 - name: SharePoint Syntex
   items:
   - name: Overview

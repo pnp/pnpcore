@@ -2,6 +2,7 @@
 using PnP.Core.Services;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -269,13 +270,29 @@ namespace PnP.Core.Model.SharePoint
         {
             IHubSite hubSite = new HubSite()
             {
-                PnPContext = this.PnPContext,
-                Id = Id ?? this.HubSiteId
+                PnPContext = PnPContext,
+                Id = Id ?? HubSiteId
             };
 
             var hubResult = await hubSite.GetAsync().ConfigureAwait(false);
 
             return hubResult;
+        }
+
+        #endregion
+
+        #region Get Changes
+
+        public async Task<IList<IChange>> GetChangesAsync(ChangeQueryOptions query)
+        {
+            var apiCall = ChangeCollectionHandler.GetApiCall(this, query);
+            var response = await RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
+            return ChangeCollectionHandler.Deserialize(response, this, PnPContext).ToList();
+        }
+
+        public IList<IChange> GetChanges(ChangeQueryOptions query)
+        {
+            return GetChangesAsync(query).GetAwaiter().GetResult();
         }
 
         #endregion

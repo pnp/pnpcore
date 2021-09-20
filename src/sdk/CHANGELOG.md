@@ -10,8 +10,84 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
 ### Added
 
+- Added IWeb.GetFileByServerRelativeUrlOrDefault methods that can return null for non existing files + dropped the IFile.Exists property as it never really worked [jansenbe - Bert Jansen]
+- Added support for reading, configuring and saving of collapsible sections on pages #539 [jansenbe - Bert Jansen]
+- Admin library providing Microsoft 365 admin functionality to PnP Core SDK users [jansenbe - Bert Jansen]
+
 ### Changed
 
+- Improved parsing of JSON ListItem content, preventing unwanted string into DateTime parsing #519 [jansenbe - Bert Jansen]
+- Ensure list item fields are not marked as changed after the initial load of the list item #508 [jansenbe - Bert Jansen]
+- Don't replace _ with _x005f_ and space with _x0020_ when working with list item fields, the StaticName is to be used for instead [jansenbe - Bert Jansen]
+- Fix for "Requested value 'systemEventMessage' was not found." for Chat Messages #536 [jansenbe - Bert Jansen]
+- Default retry mechanism now uses retry-after header for REST, CSOM and Graph requests, aligned with the settings in PnP Framework [jansenbe - Bert Jansen]
+- Switched to using V1 Taxonomy API now that it's out of beta [jansenbe - Bert Jansen]
+- Implemented generic handling for non-English timezone strings, initial fix for #543 [jansenbe - Bert Jansen]
+- PnP Core SDK internals are not exposed anymore to libraries outside of the PnP Core SDK solution [jansenbe - Bert Jansen]
+- PnP Core SDK assemblies are now strong named #542 [jansenbe - Bert Jansen]
+- PERF: ImplementsInterface -> massive performance improvement! Running all offline PnP.Core tests is twice as fast... [jansenbe - Bert Jansen] 
+- PERF: AsExpando removed LINQ dependencies to speed up and lower memory requirments [jansenbe - Bert Jansen]
+
+## [1.3.0]
+
+### Added
+
+- Support for working with IListItem attachments [jansenbe - Bert Jansen]
+- Page scheduling support: enable a pages library for page publish scheduling and schedule the publishing of a page [jansenbe - Bert Jansen]
+- IsSubSite methods on IWeb [jansenbe - Bert Jansen]
+- Support for converting the site's datetime to UTC and vice versa [jansenbe - Bert Jansen]
+- Using @mentioning in page/listitem comments and replies [jansenbe - Bert Jansen]
+- Support for downloading versions of a file #483 [DaleyKD - Kyle Daley]
+- Support for ListItem versions #481 [DaleyKD - Kyle Daley]
+- Support for liking/unliking pages + adding/deleting comments and comment replies + like/unlike these comments on pages [jansenbe - Bert Jansen]
+- Support for adding/deleting comments and comment replies + like/unlike these comments on list items [jansenbe - Bert Jansen]
+
+### Changed
+
+- Reliabilty update when parsing taxonomy field json [jansenbe - Bert Jansen]
+- Throw exception when using a REST based list item add/update while only the user id is specified [jansenbe - Bert Jansen]
+- "Special" field value types (User, Lookup, Url, Taxonomy) were wrongly marked as changed on data load causing blanking out data with item updates [jansenbe - Bert Jansen]
+- Fixed the SharePoint Syntex ClassifyAndExtract functionality to skip folders and work well with large lists [jansenbe - Bert Jansen]
+- Fixed issue when using AddValidateUpdateItemUsingPath (used for IlistItem adds) is returning a field level add error - now an exception is thrown [jansenbe - Bert Jansen]
+- Fixed memory leaks for use cases that resulted in repeated creation of the Azure AppInsights TelemetryClient [jansenbe - Bert Jansen]
+- Fixed bug that resulted in an unneeded query due to paging #486 [PaoloPia - Paolo Pialorsi]
+
+## [1.2.0]
+
+### Added
+
+- Support for getting changes on IWeb, ISite, IList, IListItem and IFolder [DaleyKD - Kyle Daley]
+- Added support batching custom SPO REST / Microsoft Graph calls [jansenbe - Bert Jansen]
+- Added support to request additional Site/Web properties to be loaded as part of the PnPContext initialization [DaleyKD - Kyle Daley] and [jansenbe - Bert Jansen]
+- Added support for adding custom HTTP headers when executing a custom apirequest via ExecuteRequest #459 [czullu - Christian Zuellig]
+- Added support to load an IFile directly off of an IListItem #463 [DaleyKD - Kyle Daley]
+- Added missing properties to IListItem and GetDisplayName methods #452 [DaleyKD - Kyle Daley]
+- Added missing properties to IFile #445 [DaleyKD - Kyle Daley]
+- Support for making custom SPO REST / Microsoft Graph calls [jansenbe - Bert Jansen]
+- IsFile() method on IListItem [jansenbe - Bert Jansen]
+
+### Changed
+
+- Upgrade to version 4.30.1 of Microsoft.Identity.Web [jansenbe - Bert Jansen]
+- Upgrade to version 6.11.1 of System.IdentityModel.Tokens.Jwt [jansenbe - Bert Jansen]
+- Optimized initial load to speed up detection of "Templates" folder [jansenbe - Bert Jansen]
+- Detect existing templates folder if it's not named "Templates" [jansenbe - Bert Jansen]
+- Handle SPO REST's replacement of _ with _x005f_ and space with _x0020_ when deserializing data [jansenbe - Bert Jansen]
+- Added ChangeTokenOptions class to allow creation of an IChangeToken #471 [DaleyKD - Kyle Daley]
+- Fixed an issue where adding items to the root site collection resulted in a 404 #470 [DaleyKD - Kyle Daley]
+- Split batches containing Graph Beta and Graph V1 requests into individual batches [jansenbe - Bert Jansen]
+- Prevent unneeded extra requests in a batch when the a previous batch was reused [jansenbe - Bert Jansen]
+- Fixed loading of extra properties on retrieved content types [jansenbe - Bert Jansen]
+- Renamed GetFolder methods on IListItem to GetParentFolder [jansenbe - Bert Jansen]
+- Improved reliability for ChunkedFileUpload #465 [thechriskent - Chris Kent]
+- Fixed nested QueryProperties() use on non-collection expandable properties (e.g. List.RootFolder) [jansenbe - Bert Jansen]
+- List item documentation update #461 [cesarhoeflich - Cesar Hoeflich]
+- Fix for supporting teams apps as web parts on pages [jansenbe - Bert Jansen]
+- RenderListDataAsStream populates the IListItem's IContentType [jansenbe - Bert Jansen]
+- Fixed NullReferenceException in Values_CollectionChange (issue #447) #445 [DaleyKD - Kyle Daley]
+- Ensure the Context.Group model has it's groupid set if that was available [jansenbe - Bert Jansen]
+- Use ConcurrentDictionary to track batches in the BatchClient class [jansenbe - Bert Jansen]
+- Fix BannerImageUrl to use sphost only since siteid, webid are given as parameter #439 [czullu - Christian Zuellig]
 - Alignment of PageHeaderTitleAlignment enum with what's used in PnP Framework [jansenbe - Bert Jansen]
 - Hubsite joining/unjoining documention update #416 [plamber - Patrick Lamber]
 - Fixed url encoding issue when the .NET Standard 2.0 build was used in a .NET Framework application [jansenbe - Bert Jansen]

@@ -1,12 +1,12 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using PnP.Core.Model;
 using PnP.Core.Model.SharePoint;
+using PnP.Core.QueryModel;
 using PnP.Core.Test.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using PnP.Core.QueryModel;
-using PnP.Core.Model;
 
 namespace PnP.Core.Test.SharePoint
 {
@@ -84,7 +84,6 @@ namespace PnP.Core.Test.SharePoint
                 await myList.DeleteAsync();
             }
         }
-
 
         [TestMethod]
         public async Task ListLinqGetMethods()
@@ -601,7 +600,7 @@ namespace PnP.Core.Test.SharePoint
                 await context.Web.LoadAsync(p => p.Lists);
 
                 var web = context.Web;
-                
+
                 int listCount = web.Lists.Length;
 
                 string listTitle = TestCommon.GetPnPSdkTestAssetName("RecycleListBatch");
@@ -955,7 +954,7 @@ namespace PnP.Core.Test.SharePoint
                     Assert.Inconclusive("Test data set should be setup to not have the list available.");
                 }
 
-              
+
                 myList = web.Lists.Add(listTitle, ListTemplateType.GenericList);
 
                 await myList.BreakRoleInheritanceAsync(false, false);
@@ -1046,7 +1045,7 @@ namespace PnP.Core.Test.SharePoint
                 var web = context.Web;
 
                 var roleDefinition = web.RoleDefinitions.Add(roleDefName, RoleType.Administrator, new PermissionKind[] { PermissionKind.AddAndCustomizePages });
-                                
+
                 var myList = web.Lists.AsRequested().FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
 
                 if (myList != null)
@@ -1154,6 +1153,145 @@ namespace PnP.Core.Test.SharePoint
             }
         }
 
+        [TestMethod]
+        public async Task GetListChangesAsyncTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var list = await context.Web.Lists.GetByTitleAsync("Documents", p => p.Id);
+                var changes = await list.GetChangesAsync(new ChangeQueryOptions(true, true)
+                {
+                    FetchLimit = 5,
+                });
+
+                Assert.IsNotNull(changes);
+                Assert.IsTrue(changes.Count > 0);
+            }
+        }
+
+        [TestMethod]
+        public void GetListChangesTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            {
+                var list = context.Web.Lists.GetByTitle("Documents", p => p.Id);
+                var changes = list.GetChanges(new ChangeQueryOptions(true, true)
+                {
+                    FetchLimit = 5,
+                });
+
+                Assert.IsNotNull(changes);
+                Assert.IsTrue(changes.Count > 0);
+            }
+        }
+
+        [TestMethod]
+        public async Task GetListChangesOnlyAsyncTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+
+                // Create a new list
+                string listTitle = TestCommon.GetPnPSdkTestAssetName("GetListChangesOnlyAsyncTest");
+                var myList = context.Web.Lists.GetByTitle(listTitle);
+
+                if (TestCommon.Instance.Mocking && myList != null)
+                {
+                    Assert.Inconclusive("Test data set should be setup to not have the list available.");
+                }
+
+                if (myList == null)
+                {
+                    myList = await context.Web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
+                }
+
+                // Make a change
+                myList.ContentTypesEnabled = true;
+                await myList.UpdateAsync();
+                
+                var changes = await myList.GetChangesAsync(new ChangeQueryOptions(false, true)
+                {
+                    FetchLimit = 5,
+                    List = true
+                });
+
+                Assert.IsNotNull(changes);
+                Assert.IsTrue(changes.Count > 0);
+
+                var lastChange = (changes.Last() as IChangeList);
+                Assert.IsTrue(lastChange.ChangeToken != null);
+                Assert.IsTrue(!string.IsNullOrEmpty(lastChange.ChangeToken.StringValue));
+                Assert.IsTrue(lastChange.Time != DateTime.MinValue);
+                Assert.IsTrue(lastChange.Hidden == false);
+                Assert.IsTrue(lastChange.ListId != Guid.Empty);
+                Assert.IsTrue(lastChange.WebId != Guid.Empty);
+                Assert.IsTrue(lastChange.ChangeType == ChangeType.Update);
+                Assert.IsTrue(lastChange.SiteId != Guid.Empty);
+                Assert.IsTrue(lastChange.TemplateType == ListTemplateType.NoListTemplate || lastChange.TemplateType == ListTemplateType.GenericList);
+
+                await myList.DeleteAsync();
+            }
+        }
+
+        [TestMethod]
+        public async Task GetListItemChangesOnlyAsyncTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+
+                // Create a new list
+                string listTitle = TestCommon.GetPnPSdkTestAssetName("GetListItemChangesOnlyAsyncTest");
+                var myList = context.Web.Lists.GetByTitle(listTitle);
+
+                if (TestCommon.Instance.Mocking && myList != null)
+                {
+                    Assert.Inconclusive("Test data set should be setup to not have the list available.");
+                }
+
+                if (myList == null)
+                {
+                    myList = await context.Web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
+                }
+
+                // Add an item
+                await myList.Items.AddAsync(new Dictionary<string, object>() { { "Title", "Test" } });                             
+
+                var changes = await myList.GetChangesAsync(new ChangeQueryOptions(false, true)
+                {
+                    FetchLimit = 5,
+                    Item = true,
+                    RequireSecurityTrim = false
+                });
+
+                Assert.IsNotNull(changes);
+                Assert.IsTrue(changes.Count > 0);
+
+                var lastChange = (changes.Last() as IChangeItem);
+                Assert.IsTrue(lastChange.ChangeToken != null);
+                Assert.IsTrue(!string.IsNullOrEmpty(lastChange.ChangeToken.StringValue));
+                Assert.IsTrue(lastChange.Time != DateTime.MinValue);
+                Assert.IsTrue(lastChange.ListId != Guid.Empty);
+                Assert.IsTrue(lastChange.WebId != Guid.Empty);
+                Assert.IsTrue(lastChange.ChangeType == ChangeType.Add);
+                Assert.IsTrue(lastChange.SiteId != Guid.Empty);
+                Assert.IsTrue(lastChange.UniqueId != Guid.Empty);
+                Assert.IsTrue(lastChange.ItemId == 1);
+                Assert.IsTrue(lastChange.IsPropertyAvailable<IChangeItem>(p => p.Editor));
+                Assert.IsTrue(lastChange.IsPropertyAvailable<IChangeItem>(p => p.EditorEmailHint));
+                Assert.IsFalse(changes.Last().IsPropertyAvailable<IChangeItem>(p => p.Hidden));
+
+
+                await myList.DeleteAsync();
+            }
+        }
 
     }
 }

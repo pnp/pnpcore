@@ -15,6 +15,7 @@ namespace PnP.Core.Model.SharePoint
     /// </summary>
     [SharePointType("SP.File", Target = typeof(Folder), Uri = "_api/Web/getFileById('{Id}')", Get = "_api/Web/getFolderById('{Parent.Id}')/Files", LinqGet = "_api/Web/getFolderById('{Parent.Id}')/Files")]
     [SharePointType("SP.File", Target = typeof(Web), Uri = "_api/Web/getFileById('{Id}')")]
+    [SharePointType("SP.File", Target = typeof(ListItem), Uri = "_api/Web/lists(guid'{List.Id}')/items({Parent.Id})/file")]
     internal partial class File : BaseDataModel<IFile>, IFile
     {
         internal const string AddFileContentAdditionalInformationKey = "Content";
@@ -39,9 +40,11 @@ namespace PnP.Core.Model.SharePoint
 
         public string ETag { get => GetValue<string>(); set => SetValue(value); }
 
-        public bool Exists { get => GetValue<bool>(); set => SetValue(value); }
+        public bool HasAlternateContentStreams { get => GetValue<bool>(); set => SetValue(value); }
 
         public bool IrmEnabled { get => GetValue<bool>(); set => SetValue(value); }
+
+        public long Length { get => GetValue<long>(); set => SetValue(value); }
 
         public string LinkingUri { get => GetValue<string>(); set => SetValue(value); }
 
@@ -56,6 +59,8 @@ namespace PnP.Core.Model.SharePoint
         public ListPageRenderType PageRenderType { get => GetValue<ListPageRenderType>(); set => SetValue(value); }
 
         public PublishedStatus Level { get => GetValue<PublishedStatus>(); set => SetValue(value); }
+
+        public string ServerRedirectedUrl { get => GetValue<string>(); set => SetValue(value); }
 
         public string ServerRelativeUrl { get => GetValue<string>(); set => SetValue(value); }
 
@@ -72,6 +77,10 @@ namespace PnP.Core.Model.SharePoint
         public string UIVersionLabel { get => GetValue<string>(); set => SetValue(value); }
 
         public Guid UniqueId { get => GetValue<Guid>(); set => SetValue(value); }
+
+        public string VroomDriveID { get => GetValue<string>(); set => SetValue(value); }
+
+        public string VroomItemID { get => GetValue<string>(); set => SetValue(value); }
 
         public Guid WebId { get => GetValue<Guid>(); set => SetValue(value); }
 
@@ -691,7 +700,7 @@ namespace PnP.Core.Model.SharePoint
             };
 
             var batchRequest = await RawRequestBatchAsync(batch, apiCall, HttpMethod.Post).ConfigureAwait(false);
-            
+
             return new BatchSingleResult<ISyntexClassifyAndExtractResult>(batch, batchRequest.Id, apiCall.RawSingleResult as ISyntexClassifyAndExtractResult);
         }
 
@@ -748,6 +757,22 @@ namespace PnP.Core.Model.SharePoint
             return apiCall;
         }
         #endregion
+
+        #endregion
+
+        #region Helper methods
+        internal static bool ErrorIndicatesFileDoesNotExists(SharePointRestError error)
+        {
+            // Indicates the file did not exist
+            if (error.HttpResponseCode == 404 && error.ServerErrorCode == -2130575338)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
 
         #endregion
     }

@@ -5,7 +5,6 @@ namespace PnP.Core.Model.SharePoint
 {
     internal static class ListMetaDataMapper
     {
-
         internal static string MicrosoftGraphNameToRestEntityTypeName(string microsoftGraphListName, ListTemplateType listTemplateType)
         {
             if (listTemplateType == ListTemplateType.UserInformation)
@@ -23,7 +22,7 @@ namespace PnP.Core.Model.SharePoint
             }
             
             // Build the name
-            string entityNameToUse = $"{entityName.ToString().Replace(" ", "")}{(isList ? "List" : "")}";
+            string entityNameToUse = $"{entityName.Replace(" ", "")}{(isList ? "List" : "")}";
             // Ensure first character is upper case
             entityNameToUse = entityNameToUse.First().ToString().ToUpper() + entityNameToUse.Substring(1);
 
@@ -32,6 +31,7 @@ namespace PnP.Core.Model.SharePoint
 
         internal static string RestEntityTypeNameToUrl(Uri pnpContextUri, string restEntityTypeName, ListTemplateType listTemplateType)
         {
+            var contextUrl = pnpContextUri.ToString().TrimEnd('/');
             (bool isList, _, bool isCatalog) = DetectListType(listTemplateType);
 
             // Translate special chars back to their regular values
@@ -52,17 +52,17 @@ namespace PnP.Core.Model.SharePoint
 
                 // Drop List suffix
                 listUrl = listUrl.Substring(0, listUrl.Length - 4);
-                return $"{pnpContextUri}/lists/{listUrl}";
+                return $"{contextUrl}/lists/{listUrl}";
             }
             else if (isCatalog)
             {
                 // catalog
-                return $"{pnpContextUri}/_catalogs/{listUrl}";
+                return $"{contextUrl}/_catalogs/{listUrl}";
             }
             else
             {
                 // library
-                return $"{pnpContextUri}/{listUrl}";
+                return $"{contextUrl}/{listUrl}";
             }
         }
 
@@ -118,8 +118,5 @@ namespace PnP.Core.Model.SharePoint
 
             return (isList, isLibrary, isCatalog);
         }
-
-
-
     }
 }

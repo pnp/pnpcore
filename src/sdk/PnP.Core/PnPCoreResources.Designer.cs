@@ -70,6 +70,15 @@ namespace PnP.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cannot access the result since batch was not yet executed.
+        /// </summary>
+        internal static string Exception_BatchResult_BatchNotYetExecuted {
+            get {
+                return ResourceManager.GetString("Exception_BatchResult_BatchNotYetExecuted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {0} cannot be 0.
         /// </summary>
         internal static string Exception_CannotBeZero {
@@ -246,6 +255,15 @@ namespace PnP.Core {
         internal static string Exception_LinqError_MissingValue {
             get {
                 return ResourceManager.GetString("Exception_LinqError_MissingValue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There was an exception while writing field {0}. Verify you&apos;re using the correct InternalName value for the field you want to write to..
+        /// </summary>
+        internal static string Exception_ListItemAdd_WrongInternalFieldName {
+            get {
+                return ResourceManager.GetString("Exception_ListItemAdd_WrongInternalFieldName", resourceCulture);
             }
         }
         
@@ -556,6 +574,15 @@ namespace PnP.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Batch could not be added to list of batches.
+        /// </summary>
+        internal static string Exception_Unsupported_CannotAddBatch {
+            get {
+                return ResourceManager.GetString("Exception_Unsupported_CannotAddBatch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The model in the queried collection does not implement the IQueryableDataModel interface.
         /// </summary>
         internal static string Exception_Unsupported_CollectionModelIsNotQueryable {
@@ -727,7 +754,7 @@ namespace PnP.Core {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You need to provide the user via it&apos;s principal when adding a new item.
+        ///   Looks up a localized string similar to You need to provide the user via it&apos;s principal when adding a list item or when updating it via one of the Update() methods. Updating using SystemUpdate() or SystemUpdateOverwriteVersion() do work with just the user id value.
         /// </summary>
         internal static string Exception_Unsupported_MissingSharePointPrincipal {
             get {
@@ -741,6 +768,15 @@ namespace PnP.Core {
         internal static string Exception_Unsupported_NodeType {
             get {
                 return ResourceManager.GetString("Exception_Unsupported_NodeType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Page publish scheduling only works on the pages library in the root web of a site collection.
+        /// </summary>
+        internal static string Exception_Unsupported_PagePublishingOnSubWeb {
+            get {
+                return ResourceManager.GetString("Exception_Unsupported_PagePublishingOnSubWeb", resourceCulture);
             }
         }
         

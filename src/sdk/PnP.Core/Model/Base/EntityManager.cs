@@ -506,7 +506,20 @@ namespace PnP.Core.Model
                         if ((fieldExpressionBody as MethodCallExpression).Method.Name == nameof(DataModelLoadExtensions.QueryProperties))
                         {
                             var fld = ((fieldExpressionBody as MethodCallExpression).Arguments[0] as MemberExpression).Member.Name;
-                            var publicTypeRecursive = (fieldExpressionBody as MethodCallExpression).Type.GenericTypeArguments[0];
+
+                            Type publicTypeRecursive = null;                            
+                            if ((fieldExpressionBody as MethodCallExpression).Type.GetGenericArguments().Length > 0)
+                            {
+                                // Expandable property (e.g. List.RootFolder)
+                                publicTypeRecursive = (fieldExpressionBody as MethodCallExpression).Type.GenericTypeArguments[0];
+                            }
+                            else
+                            {
+                                // Expandable collection (e.g. List.ContentTypes)
+                                publicTypeRecursive = (fieldExpressionBody as MethodCallExpression).Type;
+                            }
+
+                            //var publicTypeRecursive = (fieldExpressionBody as MethodCallExpression).Type.GenericTypeArguments[0];
                             var entityInfoRecursive = EntityManager.Instance.GetStaticClassInfo(publicTypeRecursive);
 
                             var expandedEntityField = new EntityFieldExpandInfo() { Name = fld, Type = publicTypeRecursive, Expandable = true };

@@ -115,3 +115,7 @@ await addedWeb.DeleteAsync();
 // DOES NOT WORK: deleting the current web
 await context.Web.DeleteAsync();
 ```
+
+## Getting changes for a web
+
+You can use the `GetChanges` methods on an `IWeb` to list all the changes. See [Enumerating changes that happened in SharePoint](changes-sharepoint.md) to learn more.

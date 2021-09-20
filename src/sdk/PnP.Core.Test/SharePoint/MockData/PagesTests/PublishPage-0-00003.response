@@ -1,9 +1,9 @@
---batchresponse_c437baf9-c2a7-4482-a0a3-80b6573ff56a
+--batchresponse_0e669745-e43c-461d-8b36-bd68b6d17479
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
-HTTP/1.1 200 OK
+HTTP/1.1 404 Not Found
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{"d":{"results":[]}}
---batchresponse_c437baf9-c2a7-4482-a0a3-80b6573ff56a--
+{"error":{"code":"-2130575338, Microsoft.SharePoint.SPException","message":{"lang":"en-US","value":"The file /sites/prov-1/SitePages/PNP_SDK_TEST_PublishPage.aspx does not exist."}}}
+--batchresponse_0e669745-e43c-461d-8b36-bd68b6d17479--

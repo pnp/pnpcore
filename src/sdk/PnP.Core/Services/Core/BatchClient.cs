@@ -3,6 +3,7 @@ using PnP.Core.Model;
 using PnP.Core.Services.Core.CSOM;
 using PnP.Core.Services.Core.CSOM.Requests;
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
@@ -29,8 +30,8 @@ namespace PnP.Core.Services
         // Handles sending telemetry events
         private readonly TelemetryManager telemetryManager;
 
-        // Collection of current batches
-        private readonly Dictionary<Guid, Batch> batches = new Dictionary<Guid, Batch>();
+        // Collection of current batches, ensure thread safety via a concurrent dictionary
+        private readonly ConcurrentDictionary<Guid, Batch> batches = new ConcurrentDictionary<Guid, Batch>();
 
         #region Embedded classes
 
@@ -200,8 +201,14 @@ namespace PnP.Core.Services
             else
             {
                 var batch = new Batch(id);
-                batches.Add(id, batch);
-                return batch;
+                if (batches.TryAdd(id, batch))
+                {
+                    return batch;
+                }
+                else
+                {
+                    throw new ClientException(ErrorType.Unsupported, PnPCoreResources.Exception_Unsupported_CannotAddBatch);
+                }
             }
         }
 
@@ -243,7 +250,7 @@ namespace PnP.Core.Services
             foreach (var request in batch.Requests.Values)
             {
 
-                if (request.ApiCall.SkipCollectionClearing)
+                if (request.ApiCall.SkipCollectionClearing || request.ApiCall.ExecuteRequestApiCall)
                 {
                     continue;
                 }
@@ -296,15 +303,24 @@ namespace PnP.Core.Services
                         else
                         {
                             // implement logic to split batch in a rest batch and a graph batch
-                            (Batch spoRestBatch, Batch graphBatch, Batch csomBatch) = SplitIntoBatchesPerApiType(batch);
-                            // execute the 3 batches
+                            (Batch spoRestBatch, Batch graphBatch, Batch graphBetaBatch, Batch csomBatch) = SplitIntoBatchesPerApiType(batch, PnPContext.GraphAlwaysUseBeta);                            
+
+                            // execute the 4 batches
                             await ExecuteSharePointRestBatchAsync(spoRestBatch).ConfigureAwait(false);
-                            await ExecuteMicrosoftGraphBatchAsync(graphBatch).ConfigureAwait(false);
+                            if (!PnPContext.GraphAlwaysUseBeta)
+                            {
+                                await ExecuteMicrosoftGraphBatchAsync(graphBatch).ConfigureAwait(false);
+                            }
+                            await ExecuteMicrosoftGraphBatchAsync(graphBetaBatch).ConfigureAwait(false);
                             await ExecuteCsomBatchAsync(csomBatch).ConfigureAwait(false);
 
                             // Aggregate batch results from the executed batches
                             batch.Results.AddRange(spoRestBatch.Results);
-                            batch.Results.AddRange(graphBatch.Results);
+                            if (!PnPContext.GraphAlwaysUseBeta)
+                            {
+                                batch.Results.AddRange(graphBatch.Results);
+                            }
+                            batch.Results.AddRange(graphBetaBatch.Results);
                             batch.Results.AddRange(csomBatch.Results);
                         }
                     }
@@ -444,7 +460,7 @@ namespace PnP.Core.Services
         private async Task ExecuteMicrosoftGraphBatchAsync(Batch batch)
         {
             // Due to previous splitting we can see empty batches...
-            if (!batch.Requests.Any())
+            if (!batch.Requests.Any(p => p.Value.ExecutionNeeded))
             {
                 return;
             }
@@ -759,10 +775,31 @@ namespace PnP.Core.Services
                         bodiesToReplace.Add(counter, request.ApiCall.JsonBody);
                         graphRequest.Body = $"@#|Body{counter}|#@";
                         graphRequest.Headers = new Dictionary<string, string>
+                            {
+                                { "Content-Type", "application/json" }
+                            };
+                    };
+
+                    if (request.ApiCall.Headers != null && request.ApiCall.Headers.Count > 0)
                     {
-                        { "Content-Type", "application/json" }
-                    };
-                    };
+                        if (graphRequest.Headers == null)
+                        {
+                            graphRequest.Headers = new Dictionary<string, string>();
+                        }
+
+                        foreach (var key in request.ApiCall.Headers.Keys)
+                        {                            
+                            string existingKey = graphRequest.Headers.Keys.FirstOrDefault(k => k.Equals(key, StringComparison.InvariantCultureIgnoreCase));
+                            if (string.IsNullOrWhiteSpace(existingKey))
+                            {
+                                graphRequest.Headers.Add(key, request.ApiCall.Headers[key]);
+                            }
+                            else
+                            {
+                                graphRequest.Headers[existingKey] = request.ApiCall.Headers[key];
+                            }
+                        }
+                    }
 
                     graphRequests.Requests.Add(graphRequest);
 
@@ -886,7 +923,7 @@ namespace PnP.Core.Services
         private async Task ExecuteSharePointRestBatchAsync(Batch batch)
         {
             // Due to previous splitting we can see empty batches...
-            if (!batch.Requests.Any())
+            if (!batch.Requests.Any(p => p.Value.ExecutionNeeded))
             {
                 return;
             }
@@ -1462,7 +1499,7 @@ namespace PnP.Core.Services
         private async Task ExecuteCsomBatchAsync(Batch batch)
         {
             // Due to previous splitting we can see empty batches...
-            if (!batch.Requests.Any())
+            if (!batch.Requests.Any(p => p.Value.ExecutionNeeded))
             {
                 return;
             }
@@ -1759,8 +1796,9 @@ namespace PnP.Core.Services
         /// Splits a batch that contains rest and graph calls in two batches, one containing the rest calls, one containing the graph calls
         /// </summary>
         /// <param name="input">Batch to split</param>
+        /// <param name="graphAlwaysUsesBeta">Indicates if all Microsoft Graph use the Graph beta endpoint</param>
         /// <returns>A rest batch and graph batch</returns>
-        private static Tuple<Batch, Batch, Batch> SplitIntoBatchesPerApiType(Batch input)
+        private static Tuple<Batch, Batch, Batch, Batch> SplitIntoBatchesPerApiType(Batch input, bool graphAlwaysUsesBeta)
         {
             Batch restBatch = new Batch()
             {
@@ -1770,21 +1808,36 @@ namespace PnP.Core.Services
             {
                 ThrowOnError = input.ThrowOnError
             };
+            Batch graphBetaBatch = new Batch()
+            {
+                ThrowOnError = input.ThrowOnError
+            };
             Batch csomBatch = new Batch()
             {
                 ThrowOnError = input.ThrowOnError
             };
 
-            foreach (var request in input.Requests)
+            foreach (var request in input.Requests.Where(p => p.Value.ExecutionNeeded))
             {
                 var br = request.Value;
                 if (br.ApiCall.Type == ApiType.SPORest)
                 {
                     restBatch.Add(br.Model, br.EntityInfo, br.Method, br.ApiCall, br.BackupApiCall, br.FromJsonCasting, br.PostMappingJson, br.OperationName);
                 }
-                else if (br.ApiCall.Type == ApiType.Graph || br.ApiCall.Type == ApiType.GraphBeta)
+                else if (br.ApiCall.Type == ApiType.Graph)
                 {
-                    graphBatch.Add(br.Model, br.EntityInfo, br.Method, br.ApiCall, br.BackupApiCall, br.FromJsonCasting, br.PostMappingJson, br.OperationName);
+                    if (graphAlwaysUsesBeta)
+                    {
+                        graphBetaBatch.Add(br.Model, br.EntityInfo, br.Method, br.ApiCall, br.BackupApiCall, br.FromJsonCasting, br.PostMappingJson, br.OperationName);
+                    }
+                    else
+                    {
+                        graphBatch.Add(br.Model, br.EntityInfo, br.Method, br.ApiCall, br.BackupApiCall, br.FromJsonCasting, br.PostMappingJson, br.OperationName);
+                    }
+                }
+                else if (br.ApiCall.Type == ApiType.GraphBeta)
+                {
+                    graphBetaBatch.Add(br.Model, br.EntityInfo, br.Method, br.ApiCall, br.BackupApiCall, br.FromJsonCasting, br.PostMappingJson, br.OperationName);
                 }
                 else if (br.ApiCall.Type == ApiType.CSOM)
                 {
@@ -1792,7 +1845,7 @@ namespace PnP.Core.Services
                 }
             }
 
-            return new Tuple<Batch, Batch, Batch>(restBatch, graphBatch, csomBatch);
+            return new Tuple<Batch, Batch, Batch, Batch>(restBatch, graphBatch, graphBetaBatch, csomBatch);
         }
 
         /// <summary>
@@ -1812,6 +1865,12 @@ namespace PnP.Core.Services
             // Step 1: group the requests that have values with the same id (=keyfield) value
             foreach (var request in batch.Requests.Values.Where(p => p.Method == HttpMethod.Get))
             {
+                // ExecuteRequest requests are never impacting the domain model
+                if (request.ApiCall.ExecuteRequestApiCall)
+                {
+                    continue;
+                }
+
                 EntityFieldInfo keyField = useGraphBatch ? request.EntityInfo.GraphKeyField : request.EntityInfo.SharePointKeyField;
 
                 // Consolidation can only happen when there's a keyfield set in the model
@@ -1865,6 +1924,12 @@ namespace PnP.Core.Services
             // Mark deleted objects as deleted and remove from their respective parent collection
             foreach (var request in batch.Requests.Values.Where(p => p.Method == HttpMethod.Delete || p.ApiCall.RemoveFromModel))
             {
+                // ExecuteRequest requests are never impacting the domain model
+                if (request.ApiCall.ExecuteRequestApiCall)
+                {
+                    continue;
+                }
+
                 request.Model.RemoveFromParentCollection();
             }
         }
@@ -1890,7 +1955,7 @@ namespace PnP.Core.Services
             // And remove them from the current collection
             foreach (var key in keysToRemove)
             {
-                batches.Remove(key);
+                batches.TryRemove(key, out Batch _);
             }
         }
 

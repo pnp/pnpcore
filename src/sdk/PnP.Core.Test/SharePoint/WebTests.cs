@@ -1,11 +1,15 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PnP.Core.Model.SharePoint;
+using PnP.Core.QueryModel;
+using PnP.Core.Services;
 using PnP.Core.Test.Utilities;
 using System;
-using System.Linq;
-using System.Threading.Tasks;
-using PnP.Core.QueryModel;
+using System.Globalization;
 using System.IO;
+using System.Linq;
+using System.Net.Http;
+using System.Text.Json;
+using System.Threading.Tasks;
 
 namespace PnP.Core.Test.SharePoint
 {
@@ -365,6 +369,44 @@ namespace PnP.Core.Test.SharePoint
         }
 
         [TestMethod]
+        public async Task SetWebPropertiesUnderScoreTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            TestCommon.ClassicSTS0TestSetup();
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.ClassicSTS0TestSite))
+            {
+                // Test safety - sites typically are noscript sites
+                bool isNoScript = await context.Web.IsNoScriptSiteAsync();
+
+                if (!isNoScript)
+                {
+                    var web = await context.Web.GetAsync(p => p.AllProperties);
+
+                    var propertyKey = "With SpaceAnd_Underscore";
+                    var myProperty = web.AllProperties.GetInteger(propertyKey, 0);
+                    if (myProperty == 0)
+                    {
+                        web.AllProperties[propertyKey] = 55;
+                        await web.AllProperties.UpdateAsync();
+                    }
+
+                    web = await context.Web.GetAsync(p => p.AllProperties);
+
+                    myProperty = web.AllProperties.GetInteger(propertyKey, 0);
+                    Assert.IsTrue(myProperty == 55);
+
+                    web.AllProperties[propertyKey] = null;
+                    await web.AllProperties.UpdateAsync();
+
+                    web = await context.Web.GetAsync(p => p.AllProperties);
+                    myProperty = web.AllProperties.GetInteger(propertyKey, 0);
+                    Assert.IsTrue(myProperty == 0);
+                }
+            }
+        }
+
+        [TestMethod]
         public async Task SetWebPropertiesBooleanTest()
         {
             //TestCommon.Instance.Mocking = false;
@@ -557,6 +599,343 @@ namespace PnP.Core.Test.SharePoint
                 Assert.IsTrue(context.Web.RegionalSettings.IsPropertyAvailable(p => p.TimeZone));
                 Assert.IsTrue(context.Web.RegionalSettings.TimeZone.Requested);
                 Assert.IsTrue(context.Web.RegionalSettings.TimeZone.IsPropertyAvailable(p=>p.Bias));
+            }
+        }
+
+        [TestMethod]
+        [DataRow("(UTC-12:00) International Date Line West")]
+        [DataRow("(UTC-11:00) Coordinated Universal Time-11")]
+        [DataRow("(UTC-10:00) Hawaii")]
+        [DataRow("(UTC-09:00) Alaska")]
+        [DataRow("(UTC-08:00) Baja California")]
+        [DataRow("(UTC-08:00) Pacific Time (US and Canada)")]
+        [DataRow("(UTC-07:00) Arizona")]
+        [DataRow("(UTC-07:00) Chihuahua, La Paz, Mazatlan")]
+        [DataRow("(UTC-07:00) Mountain Time (US and Canada)")]
+        [DataRow("(UTC-06:00) Central America")]
+        [DataRow("(UTC-06:00) Central Time (US and Canada)")]
+        [DataRow("(UTC-06:00) Guadalajara, Mexico City, Monterrey")]
+        [DataRow("(UTC-06:00) Saskatchewan")]
+        [DataRow("(UTC-05:00) Bogota, Lima, Quito")]
+        [DataRow("(UTC-05:00) Eastern Time (US and Canada)")]
+        [DataRow("(UTC-05:00) Indiana (East)")]
+        [DataRow("(UTC-04:30) Caracas")]
+        [DataRow("(UTC-04:00) Asuncion")]
+        [DataRow("(UTC-04:00) Atlantic Time (Canada)")]
+        [DataRow("(UTC-04:00) Cuiaba")]
+        [DataRow("(UTC-04:00) Georgetown, La Paz, Manaus, San Juan")]
+        [DataRow("(UTC-04:00) Santiago")]
+        [DataRow("(UTC-03:30) Newfoundland")]
+        [DataRow("(UTC-03:00) Brasilia")]
+        [DataRow("(UTC-03:00) Buenos Aires")]
+        [DataRow("(UTC-03:00) Cayenne, Fortaleza")]
+        [DataRow("(UTC-03:00) Greenland")]
+        [DataRow("(UTC-03:00) Montevideo")]
+        [DataRow("(UTC-03:00) Salvador")]
+        [DataRow("(UTC-02:00) Coordinated Universal Time-02")]
+        [DataRow("(UTC-02:00) Mid-Atlantic")]
+        [DataRow("(UTC-01:00) Azores")]
+        [DataRow("(UTC-01:00) Cabo Verde")]
+        [DataRow("(UTC) Casablanca")]
+        [DataRow("(UTC) Coordinated Universal Time")]
+        [DataRow("(UTC) Dublin, Edinburgh, Lisbon, London")]
+        [DataRow("(UTC) Monrovia, Reykjavik")]
+        [DataRow("(UTC+01:00) Amsterdam, Berlin, Bern, Rome, Stockholm, Vienna")]
+        [DataRow("(UTC+01:00) Belgrade, Bratislava, Budapest, Ljubljana, Prague")]
+        [DataRow("(UTC+01:00) Brussels, Copenhagen, Madrid, Paris")]
+        [DataRow("(UTC+01:00) Sarajevo, Skopje, Warsaw, Zagreb")]
+        [DataRow("(UTC+01:00) West Central Africa")]
+        [DataRow("(UTC+01:00) Windhoek")]
+        [DataRow("(UTC+02:00) Amman")]
+        [DataRow("(UTC+02:00) Athens, Bucharest")]
+        [DataRow("(UTC+02:00) Beirut")]
+        [DataRow("(UTC+02:00) Cairo")]
+        [DataRow("(UTC+02:00) Damascus")]
+        [DataRow("(UTC+02:00) Harare, Pretoria")]
+        [DataRow("(UTC+02:00) Helsinki, Kyiv, Riga, Sofia, Tallinn, Vilnius")]
+        [DataRow("(UTC+02:00) Jerusalem")]
+        [DataRow("(UTC+02:00) Minsk (old)")]
+        [DataRow("(UTC+02:00) E. Europe")]
+        [DataRow("(UTC+02:00) Kaliningrad")]
+        [DataRow("(UTC+03:00) Baghdad")]
+        [DataRow("(UTC+03:00) Istanbul")]
+        [DataRow("(UTC+03:00) Kuwait, Riyadh")]
+        [DataRow("(UTC+03:00) Minsk")]
+        [DataRow("(UTC+03:00) Moscow, St. Petersburg, Volgograd")]
+        [DataRow("(UTC+03:00) Nairobi")]
+        [DataRow("(UTC+03:30) Tehran")]
+        [DataRow("(UTC+04:00) Abu Dhabi, Muscat")]
+        [DataRow("(UTC+04:00) Astrakhan, Ulyanovsk")]
+        [DataRow("(UTC+04:00) Baku")]
+        [DataRow("(UTC+04:00) Izhevsk, Samara")]
+        [DataRow("(UTC+04:00) Port Louis")]
+        [DataRow("(UTC+04:00) Tbilisi")]
+        [DataRow("(UTC+04:00) Yerevan")]
+        [DataRow("(UTC+04:30) Kabul")]
+        [DataRow("(UTC+05:00) Ekaterinburg")]
+        [DataRow("(UTC+05:00) Islamabad, Karachi")]
+        [DataRow("(UTC+05:00) Tashkent")]
+        [DataRow("(UTC+05:30) Chennai, Kolkata, Mumbai, New Delhi")]
+        [DataRow("(UTC+05:30) Sri Jayawardenepura")]
+        [DataRow("(UTC+05:45) Kathmandu")]
+        [DataRow("(UTC+06:00) Astana")]
+        [DataRow("(UTC+06:00) Dhaka")]
+        [DataRow("(UTC+06:00) Omsk")]
+        [DataRow("(UTC+06:30) Yangon (Rangoon)")]
+        [DataRow("(UTC+07:00) Bangkok, Hanoi, Jakarta")]
+        [DataRow("(UTC+07:00) Barnaul, Gorno-Altaysk")]
+        [DataRow("(UTC+07:00) Krasnoyarsk")]
+        [DataRow("(UTC+07:00) Novosibirsk")]
+        [DataRow("(UTC+07:00) Tomsk")]
+        [DataRow("(UTC+08:00) Beijing, Chongqing, Hong Kong, Urumqi")]
+        [DataRow("(UTC+08:00) Irkutsk")]
+        [DataRow("(UTC+08:00) Kuala Lumpur, Singapore")]
+        [DataRow("(UTC+08:00) Perth")]
+        [DataRow("(UTC+08:00) Taipei")]
+        [DataRow("(UTC+08:00) Ulaanbaatar")]
+        [DataRow("(UTC+09:00) Osaka, Sapporo, Tokyo")]
+        [DataRow("(UTC+09:00) Seoul")]
+        [DataRow("(UTC+09:00) Yakutsk")]
+        [DataRow("(UTC+09:30) Adelaide")]
+        [DataRow("(UTC+09:30) Darwin")]
+        [DataRow("(UTC+10:00) Brisbane")]
+        [DataRow("(UTC+10:00) Canberra, Melbourne, Sydney")]
+        [DataRow("(UTC+10:00) Guam, Port Moresby")]
+        [DataRow("(UTC+10:00) Hobart")]
+        [DataRow("(UTC+10:00) Magadan")]
+        [DataRow("(UTC+10:00) Vladivostok")]
+        [DataRow("(UTC+11:00) Chokurdakh")]
+        [DataRow("(UTC+11:00) Sakhalin")]
+        [DataRow("(UTC+11:00) Solomon Is., New Caledonia")]
+        [DataRow("(UTC+12:00) Anadyr, Petropavlovsk-Kamchatsky")]
+        [DataRow("(UTC+12:00) Auckland, Wellington")]
+        [DataRow("(UTC+12:00) Coordinated Universal Time+12")]
+        [DataRow("(UTC+12:00) Fiji")]
+        [DataRow("(UTC+12:00) Petropavlovsk-Kamchatsky - Old")]
+        [DataRow("(UTC+13:00) Nuku'alofa")]
+        [DataRow("(UTC+13:00) Samoa")]
+        [DataRow("(UTC-11:00) whatever")]
+        [DataRow("(UTC-12:00) whatever")]
+        [DataRow("(UTC-10:00) whatever")]
+        [DataRow("(UTC-09:00) whatever")]
+        [DataRow("(UTC-08:00) whatever")]
+        [DataRow("(UTC-07:00) whatever")]
+        [DataRow("(UTC-06:00) whatever")]
+        [DataRow("(UTC-05:00) whatever")]
+        [DataRow("(UTC-04:30) whatever")]
+        [DataRow("(UTC-04:00) whatever")]
+        [DataRow("(UTC-03:30) whatever")]
+        [DataRow("(UTC-03:00) whatever")]
+        [DataRow("(UTC-02:00) whatever")]
+        [DataRow("(UTC-01:00) whatever")]
+        [DataRow("(UTC) whatever")]
+        [DataRow("(UTC+01:00) whatever")]
+        [DataRow("(UTC+02:00) whatever")]
+        [DataRow("(UTC+03:00) whatever")]
+        [DataRow("(UTC+04:00) whatever")]
+        [DataRow("(UTC+05:00) whatever")]
+        [DataRow("(UTC+05:30) whatever")]
+        [DataRow("(UTC+05:45) whatever")]
+        [DataRow("(UTC+06:00) whatever")]
+        [DataRow("(UTC+06:30) whatever")]
+        [DataRow("(UTC+07:00) whatever")]
+        [DataRow("(UTC+08:00) whatever")]
+        [DataRow("(UTC+09:00) whatever")]
+        [DataRow("(UTC+09:30) whatever")]
+        [DataRow("(UTC+10:00) whatever")]
+        [DataRow("(UTC+11:00) whatever")]
+        [DataRow("(UTC+12:00) whatever")]
+        [DataRow("(UTC+13:00) whatever")]
+        public void TimeZoneMappingTest(string sharePointTimeZone)
+        {
+            Assert.IsNotNull(Model.SharePoint.TimeZone.GetTimeZoneInfoFromSharePoint(sharePointTimeZone));
+        }
+
+        [TestMethod]
+        public void TimeZoneConversionTests()
+        {
+            if (TestCommon.RunningInGitHubWorkflow()) Assert.Inconclusive("Skipping running this one on GitHub");
+
+            // Assume timezone UTC-8 (PST), description = (UTC-08:00) Pacific Time (US and Canada)
+            // Bias = 480, DaylightBias = -60, StandardBias = 0
+
+            // Winter time in Belgium: Jan 15, 15:15 = 06:15 PST
+            var localDate = new DateTime(2021, 1, 15, 15, 15, 15);
+            var utcDate = localDate.ToUniversalTime();
+            var localWebTime = utcDate - UtcDelta(utcDate, 480, -60, 0, "(UTC-08:00) Pacific Time (US and Canada)");
+            Assert.IsTrue(localWebTime.Hour == 6);
+
+            // Summer time in Belgium: Jul 15, 15:15 = 06:15 PST
+            localDate = new DateTime(2021, 6, 15, 15, 15, 15);
+            utcDate = localDate.ToUniversalTime();
+            localWebTime = utcDate - UtcDelta(utcDate, 480, -60, 0, "(UTC-08:00) Pacific Time (US and Canada)");
+            Assert.IsTrue(localWebTime.Hour == 6);
+
+            // Period when US swithed to summer time while Belgium is still on winter time: Mar 15, 15:15 = 07:15 PST
+            localDate = new DateTime(2021, 3, 15, 15, 15, 15);
+            utcDate = localDate.ToUniversalTime();
+            localWebTime = utcDate - UtcDelta(utcDate, 480, -60, 0, "(UTC-08:00) Pacific Time (US and Canada)");
+            Assert.IsTrue(localWebTime.Hour == 7);
+
+            // Assume timezone UTC-1 (Brussels), description = (UTC+01:00) Brussels, Copenhagen, Madrid, Paris
+            // Bias = -60, DaylightBias = -60, StandardBias = 0
+
+            // Winter time in Belgium: Jan 15, 15:15 stays the same
+            localDate = new DateTime(2021, 1, 15, 15, 15, 15);
+            utcDate = localDate.ToUniversalTime();
+            localWebTime = utcDate - UtcDelta(utcDate, -60, -60, 0, "(UTC+01:00) Brussels, Copenhagen, Madrid, Paris");
+            Assert.IsTrue(localWebTime.Hour == 15);
+
+            // Summer time in Belgium: Jul 15, 15:15 stays the same
+            localDate = new DateTime(2021, 6, 15, 15, 15, 15);
+            utcDate = localDate.ToUniversalTime();
+            localWebTime = utcDate - UtcDelta(utcDate, -60, -60, 0, "(UTC+01:00) Brussels, Copenhagen, Madrid, Paris");
+            Assert.IsTrue(localWebTime.Hour == 15);
+
+            // Period when US swithed to summer time while Belgium is still on winter time: Mar 15, 15:15 stays the same
+            localDate = new DateTime(2021, 3, 15, 15, 15, 15);
+            utcDate = localDate.ToUniversalTime();
+            localWebTime = utcDate - UtcDelta(utcDate, -60, -60, 0, "(UTC+01:00) Brussels, Copenhagen, Madrid, Paris");
+            Assert.IsTrue(localWebTime.Hour == 15);
+
+        }
+
+        private TimeSpan UtcDelta(DateTime dateTime, int bias, int daylightBias, int standardBias, string description)
+        {
+            return new TimeSpan(0, bias + (Model.SharePoint.TimeZone.GetTimeZoneInfoFromSharePoint(description).IsDaylightSavingTime(dateTime) ? daylightBias : standardBias), 0);
+        }
+
+        [TestMethod]
+        public async Task TimeZoneUtcToLocalTimeTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            // Test site is configured with UTC + 1 timezone
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                // Datetime in timezone of the code running PnP Core SDK, use time that falls outside of daylight saving time
+                var localDate = new DateTime(2021, 1, 15, 15, 15, 15, DateTimeKind.Local);
+
+                // Convert to UTC time
+                var utcDate = localDate.ToUniversalTime();
+
+                // Convert to Web's timezone
+                var localSiteTime = context.Web.RegionalSettings.TimeZone.UtcToLocalTime(utcDate);
+
+                // Use server call to do the same
+                var response = context.Web.RegionalSettings.TimeZone.ExecuteRequest(new ApiRequest(HttpMethod.Post, ApiRequestType.SPORest, $"_api/web/regionalsettings/timezone/utctolocaltime('{utcDate.ToString("o", CultureInfo.InvariantCulture)}')", null));
+
+                if (!string.IsNullOrEmpty(response.Response))
+                {
+                    var json = JsonDocument.Parse(response.Response).RootElement.GetProperty("d");
+
+                    if (json.TryGetProperty("UTCToLocalTime", out JsonElement utcToLocalTimeViaServerCall))
+                    {
+                        if (utcToLocalTimeViaServerCall.TryGetDateTime(out DateTime utcToLocalTimeViaServerCallDateTime))
+                        {
+                            if (!TestCommon.RunningInGitHubWorkflow())
+                            {
+                                Assert.AreEqual(utcToLocalTimeViaServerCallDateTime, localSiteTime);
+                            }
+                        }
+                    }
+                }
+
+                // Convert from Web's timezone back to UTC time
+                var localSiteTimeBackToUtc = context.Web.RegionalSettings.TimeZone.LocalTimeToUtc(localSiteTime);
+
+                // Use server call to do the same
+                var response2 = context.Web.RegionalSettings.TimeZone.ExecuteRequest(new ApiRequest(HttpMethod.Post, ApiRequestType.SPORest, $"_api/web/regionalsettings/timezone/localtimetoutc('{localSiteTime.ToString("o", CultureInfo.InvariantCulture)}')", null));
+
+                if (!string.IsNullOrEmpty(response2.Response))
+                {
+                    var json = JsonDocument.Parse(response2.Response).RootElement.GetProperty("d");
+
+                    if (json.TryGetProperty("LocalTimeToUTC", out JsonElement LocalTimeToUtcViaServerCall))
+                    {
+                        if (LocalTimeToUtcViaServerCall.TryGetDateTime(out DateTime LocalTimeToUtcViaServerCallDateTime))
+                        {
+                            if (!TestCommon.RunningInGitHubWorkflow())
+                            {
+                                Assert.AreEqual(LocalTimeToUtcViaServerCallDateTime, localSiteTimeBackToUtc);
+                            }
+                        }
+                    }
+                }
+
+                Assert.AreEqual(utcDate, localSiteTimeBackToUtc);
+
+                // Convert back to timezone of the running code
+                var utcDateBackToLocal = localSiteTimeBackToUtc.ToLocalTime();
+
+                Assert.AreEqual(localDate, utcDateBackToLocal);
+            }
+        }
+
+        [TestMethod]
+        public async Task TimeZoneUtcToLocalTime2Test()
+        {
+            //TestCommon.Instance.Mocking = false;
+            // Test sub site is configured with UTC-8 timezone 
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSubSite))
+            {
+                // Datetime in timezone of the code running PnP Core SDK, use time that falls inside daylight saving time
+                var localDate = new DateTime(2021, 7, 15, 15, 15, 15, DateTimeKind.Local);
+
+                // Convert to UTC time
+                var utcDate = localDate.ToUniversalTime();
+
+                // Convert to Web's timezone
+                var localSiteTime = context.Web.RegionalSettings.TimeZone.UtcToLocalTime(utcDate);
+
+                // Use server call to do the same
+                var response = context.Web.RegionalSettings.TimeZone.ExecuteRequest(new ApiRequest(HttpMethod.Post, ApiRequestType.SPORest, $"_api/web/regionalsettings/timezone/utctolocaltime('{utcDate.ToString("o", CultureInfo.InvariantCulture)}')", null));
+                // {"d":{"UTCToLocalTime":"2021-07-15T06:15:15"}}
+
+                if (!string.IsNullOrEmpty(response.Response))
+                {
+                    var json = JsonDocument.Parse(response.Response).RootElement.GetProperty("d");
+
+                    if (json.TryGetProperty("UTCToLocalTime", out JsonElement utcToLocalTimeViaServerCall))
+                    {
+                        if (utcToLocalTimeViaServerCall.TryGetDateTime(out DateTime utcToLocalTimeViaServerCallDateTime))
+                        {
+                            if (!TestCommon.RunningInGitHubWorkflow())
+                            {
+                                Assert.AreEqual(utcToLocalTimeViaServerCallDateTime, localSiteTime);
+                            }
+                        }
+                    }
+                }
+
+                // Convert from Web's timezone back to UTC time
+                var localSiteTimeBackToUtc = context.Web.RegionalSettings.TimeZone.LocalTimeToUtc(localSiteTime);
+
+                // Use server call to do the same
+                var response2 = context.Web.RegionalSettings.TimeZone.ExecuteRequest(new ApiRequest(HttpMethod.Post, ApiRequestType.SPORest, $"_api/web/regionalsettings/timezone/localtimetoutc('{localSiteTime.ToString("o", CultureInfo.InvariantCulture)}')", null));
+                // {"d":{"LocalTimeToUTC":"2021-07-15T13:15:15Z"}}
+
+                if (!string.IsNullOrEmpty(response2.Response))
+                {
+                    var json = JsonDocument.Parse(response2.Response).RootElement.GetProperty("d");
+
+                    if (json.TryGetProperty("LocalTimeToUTC", out JsonElement LocalTimeToUtcViaServerCall))
+                    {
+                        if (LocalTimeToUtcViaServerCall.TryGetDateTime(out DateTime LocalTimeToUtcViaServerCallDateTime))
+                        {
+                            if (!TestCommon.RunningInGitHubWorkflow())
+                            {
+                                Assert.AreEqual(LocalTimeToUtcViaServerCallDateTime, localSiteTimeBackToUtc);
+                            }
+                        }
+                    }
+                }
+
+                Assert.AreEqual(utcDate, localSiteTimeBackToUtc);
+
+                // Convert back to timezone of the running code
+                var utcDateBackToLocal = localSiteTimeBackToUtc.ToLocalTime();
+
+                Assert.AreEqual(localDate, utcDateBackToLocal);
             }
         }
 
@@ -863,6 +1242,172 @@ namespace PnP.Core.Test.SharePoint
                 await lib2.DeleteAsync();
             }
         }
+
+        [TestMethod]
+        public async Task GetWebChangesAsyncTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var changes = await context.Web.GetChangesAsync(new ChangeQueryOptions(true, true)
+                {
+                    FetchLimit = 5
+                });
+
+                Assert.IsNotNull(changes);
+                Assert.IsTrue(changes.Count > 0);
+            }
+        }
+
+        [TestMethod]
+        public void GetWebChangesTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            {
+                var changes = context.Web.GetChanges(new ChangeQueryOptions(true, true)
+                {
+                    FetchLimit = 5
+                });
+
+                Assert.IsNotNull(changes);
+                Assert.IsTrue(changes.Count > 0);
+            }
+        }
+
+        [TestMethod]
+        public async Task GetWebChangesViaChangeTokenAsyncTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var changes = await context.Web.GetChangesAsync(new ChangeQueryOptions(true, true)
+                {
+                    FetchLimit = 10
+                });
+
+                Assert.IsNotNull(changes);
+                Assert.IsTrue(changes.Count > 0);
+
+                var firstChangeToken = changes.First().ChangeToken;
+
+                // Alternative way to pass in a change token if you've stored the last change token string value
+                var lastChangetoken = new ChangeTokenOptions(changes.Last().ChangeToken.StringValue);
+
+                var changes2 = await context.Web.GetChangesAsync(new ChangeQueryOptions(true, true)
+                {
+                    ChangeTokenStart = firstChangeToken,
+                    ChangeTokenEnd = lastChangetoken
+                });
+               
+                Assert.IsTrue(changes2.Count == 9);
+            }
+        }
+
+        [TestMethod]
+        public async Task GetWebChangesContentTypeAsyncTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                // Add a new content type
+                IContentType newContentType = await context.Web.ContentTypes.AddAsync("0x0100554FB756A84E4A4899FB819522D2BF50", "ChangeTest", "TESTING", "TESTING");
+
+                var changes = await context.Web.GetChangesAsync(new ChangeQueryOptions(false, true)
+                {
+                    ContentType = true,
+                    FetchLimit = 5
+                });
+
+                Assert.IsNotNull(changes);
+                Assert.IsTrue(changes.Count > 0);
+                Assert.IsTrue((changes.Last() as IChangeContentType).ContentTypeId != null);
+                Assert.IsTrue((changes.Last() as IChangeContentType).WebId != Guid.Empty);
+
+                Assert.IsTrue(changes.Last().IsPropertyAvailable<IChangeContentType>(p => p.ContentTypeId));
+                Assert.ThrowsException<ClientException>(() =>
+                {
+                    changes.Last().IsPropertyAvailable<IChangeContentType>(p => p.ContentTypeId.Name);
+                });
+                Assert.ThrowsException<ArgumentNullException>(() =>
+                {
+                    changes.Last().IsPropertyAvailable<IChangeContentType>(null);
+                });
+
+                // Load additional properties based upon the returned content type
+                var changedContentType = (changes.Last() as IChangeContentType).ContentTypeId;
+                await changedContentType.LoadAsync(p => p.Group);
+
+                Assert.IsTrue(changedContentType.IsPropertyAvailable(p => p.Group));
+
+                // Delete the content type again
+                await newContentType.DeleteAsync();
+            }
+        }
+
+        [TestMethod]
+        public void IsSubSitePositiveTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSubSite))
+            {
+                Assert.IsTrue(context.Web.IsSubSite());
+            }
+        }
+
+        [TestMethod]
+        public void IsSubSiteNegativeTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            {
+                Assert.IsFalse(context.Web.IsSubSite());
+            }
+        }
+
+        [TestMethod]
+        public void EnsurePageSchedulingTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            using (var context = TestCommon.Instance.GetContext(TestCommon.NoGroupTestSite))
+            {
+                Guid pageSchedulingFeature = new("e87ca965-5e07-4a23-b007-ddd4b5afb9c7");
+
+                try
+                {
+                    context.Web.EnsurePageScheduling();
+
+                    Assert.IsTrue(context.Web.Features.AsRequested().Any(p => p.DefinitionId == pageSchedulingFeature));
+                }
+                finally
+                {
+                    context.Web.Features.Disable(pageSchedulingFeature);
+                }
+
+            }
+        }
+
+        [TestMethod]
+        public void EnsurePageSchedulingOnSubSiteTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSubSite))
+            {
+                Assert.ThrowsException<ClientException>(() =>
+                {
+                    context.Web.EnsurePageScheduling();
+                });
+            }
+        }
+
 
     }
 }

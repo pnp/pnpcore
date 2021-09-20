@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace PnP.Core.Model.SharePoint
 {
-    [GraphType( Uri = V, Beta = true, LinqGet = baseUri)]
+    [GraphType( Uri = V, LinqGet = baseUri)]
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Usage", "CA2243:Attribute string literals should parse correctly", Justification = "<Pending>")]
     internal partial class Term : BaseDataModel<ITerm>, ITerm
     {
-        private const string baseUri = "termstore/sets/{Parent.GraphId}/terms";
+        private const string baseUri = "sites/{hostname},{Site.Id},{Web.Id}/termstore/sets/{Parent.GraphId}/terms";
         private const string V = baseUri + "/{GraphId}";
 
         #region Construction
@@ -57,17 +57,17 @@ namespace PnP.Core.Model.SharePoint
                 if (Parent != null && Parent.GetType() == typeof(TermCollection) && (Parent.Parent != null && !(Parent.Parent.GetType() == typeof(Term))))
                 {
                     // we're adding a root level term
-                    termApi = $"termstore/sets/{Set.Id}/children";
+                    termApi = $"sites/{{hostname}},{{Site.Id}},{{Web.Id}}/termstore/sets/{Set.Id}/children";
                 }
                 else
                 {
                     // we're adding a term to an existing term
-                    termApi = $"termstore/sets/{Set.Id}/terms/{{Parent.GraphId}}/children";
+                    termApi = $"sites/{{hostname}},{{Site.Id}},{{Web.Id}}/termstore/sets/{Set.Id}/terms/{{Parent.GraphId}}/children";
                 }
 
                 var apiCall = await ApiHelper.ParseApiRequestAsync(this, termApi).ConfigureAwait(false);
 
-                return new ApiCall(apiCall, ApiType.GraphBeta, bodyContent);
+                return new ApiCall(apiCall, ApiType.Graph, bodyContent);
             };
 
             ExpandUpdatePayLoad = (payload) =>
@@ -173,12 +173,12 @@ namespace PnP.Core.Model.SharePoint
         }
 
 
-        [GraphProperty("children", Get = "termstore/sets/{Parent.GraphId}/terms/{GraphId}/children", Beta = true)]
+        [GraphProperty("children", Get = "sites/{hostname},{Site.Id},{Web.Id}/termstore/sets/{Parent.GraphId}/terms/{GraphId}/children")]
         public ITermCollection Terms { get => GetModelCollectionValue<ITermCollection>(); }
 
         public ITermPropertyCollection Properties { get => GetModelCollectionValue<ITermPropertyCollection>(); }
 
-        [GraphProperty("relations", Get = "termstore/sets/{Parent.GraphId}/terms/{GraphId}/relations?$expand=fromTerm,set,toTerm", Beta = true)]
+        [GraphProperty("relations", Get = "sites/{hostname},{Site.Id},{Web.Id}/termstore/sets/{Parent.GraphId}/terms/{GraphId}/relations?$expand=fromTerm,set,toTerm")]
         public ITermRelationCollection Relations { get => GetModelCollectionValue<ITermRelationCollection>(); }
 
         [KeyProperty(nameof(Id))]
@@ -189,8 +189,8 @@ namespace PnP.Core.Model.SharePoint
         #region Extension methods
         private async Task<ApiCallRequest> OverrideApiCall(ApiCallRequest apiCallRequest)
         {
-            var request = await ApiHelper.ParseApiRequestAsync(this, $"termstore/sets/{Set.Id}/terms/{{GraphId}}").ConfigureAwait(false);
-            var apiCall = new ApiCall(request, ApiType.GraphBeta, apiCallRequest.ApiCall.JsonBody);
+            var request = await ApiHelper.ParseApiRequestAsync(this, $"sites/{{hostname}},{{Site.Id}},{{Web.Id}}/termstore/sets/{Set.Id}/terms/{{GraphId}}").ConfigureAwait(false);
+            var apiCall = new ApiCall(request, ApiType.Graph, apiCallRequest.ApiCall.JsonBody);
             return new ApiCallRequest(apiCall);
         }
 
@@ -269,7 +269,7 @@ namespace PnP.Core.Model.SharePoint
 
         private ApiCall GetByIdApiCall(string id)
         {
-            return new ApiCall($"termstore/sets/{Set.Id}/terms/{id}", ApiType.GraphBeta);
+            return new ApiCall($"sites/{{hostname}},{{Site.Id}},{{Web.Id}}/termstore/sets/{Set.Id}/terms/{id}", ApiType.Graph);
         }
 
         internal async Task<ITerm> GetByIdAsync(string id, params Expression<Func<ITerm, object>>[] expressions)

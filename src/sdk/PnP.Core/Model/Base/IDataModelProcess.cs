@@ -1,6 +1,5 @@
 ﻿using PnP.Core.Services;
 using System;
-using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
@@ -19,6 +18,5 @@ namespace PnP.Core.Model
         /// <returns>The Domain Model object</returns>
         Task ProcessResponseAsync(ApiResponse apiResponse, params Expression<Func<object, object>>[] expressions);
 
-        // DONE: Consider renaming the above method because GetAsync is a misleading name
     }
 }

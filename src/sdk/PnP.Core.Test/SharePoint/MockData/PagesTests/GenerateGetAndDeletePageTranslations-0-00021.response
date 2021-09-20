@@ -1,4 +1,4 @@
---batchresponse_f60da9e9-e7db-47dc-b845-3cc465d2ef73
+--batchresponse_025e2f47-8ce5-4745-b485-e49b2175ad0d
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
@@ -7,22 +7,22 @@ CONTENT-TYPE: application/json; charset=utf-8
 
 { "Row" : 
 [{
-"ID": "590",
+"ID": "679",
 "PermMask": "0x7ffffffffffbffff",
 "FSObjType": "0",
 "HTML_x0020_File_x0020_Type": "",
-"UniqueId": "{F9D7A337-C74A-4737-AD85-FB0BBD3F4161}",
+"UniqueId": "{7F54B81D-7241-40F0-AC8E-14336F6D6D51}",
 "ProgId": "",
 "NoExecute": "0",
 "ContentTypeId": "0x0101009D1CB255DA76424F860D91F20E6C41180044C66AD09592964583DFF5030205BD34",
-"FileRef": "\u002fsites\u002fpnpcoresdktest\u002fSitePages\u002ffr\u002fPNP_SDK_TEST_PageToTranslate.aspx",
-"FileRef.urlencode": "%2Fsites%2Fpnpcoresdktest%2FSitePages%2Ffr%2FPNP%5FSDK%5FTEST%5FPageToTranslate%2Easpx",
-"FileRef.urlencodeasurl": "\u002fsites\u002fpnpcoresdktest\u002fSitePages\u002ffr\u002fPNP_SDK_TEST_PageToTranslate.aspx",
-"FileRef.urlencoding": "\u002fsites\u002fpnpcoresdktest\u002fSitePages\u002ffr\u002fPNP_SDK_TEST_PageToTranslate.aspx",
-"FileRef.scriptencodeasurl": "\\u002fsites\\u002fpnpcoresdktest\\u002fSitePages\\u002ffr\\u002fPNP_SDK_TEST_PageToTranslate.aspx",
-"_UIVersion": "1",
-"SMTotalSize": "4994",
-"File_x0020_Size": "3818",
+"FileRef": "\u002fsites\u002fpnpcoresdktest\u002fSitePages\u002fPNP_SDK_TEST_PageToTranslate.aspx",
+"FileRef.urlencode": "%2Fsites%2Fpnpcoresdktest%2FSitePages%2FPNP%5FSDK%5FTEST%5FPageToTranslate%2Easpx",
+"FileRef.urlencodeasurl": "\u002fsites\u002fpnpcoresdktest\u002fSitePages\u002fPNP_SDK_TEST_PageToTranslate.aspx",
+"FileRef.urlencoding": "\u002fsites\u002fpnpcoresdktest\u002fSitePages\u002fPNP_SDK_TEST_PageToTranslate.aspx",
+"FileRef.scriptencodeasurl": "\\u002fsites\\u002fpnpcoresdktest\\u002fSitePages\\u002fPNP_SDK_TEST_PageToTranslate.aspx",
+"_UIVersion": "2",
+"SMTotalSize": "9112",
+"File_x0020_Size": "3581",
 "_CommentFlags": "",
 "File_x0020_Type": "aspx",
 "HTML_x0020_File_x0020_Type.File_x0020_Type.mapall": "ichtm.gif|Microsoft SharePoint Designer|SharePoint.OpenDocuments|",
@@ -35,9 +35,9 @@ CONTENT-TYPE: application/json; charset=utf-8
 "FileLeafRef": "PNP_SDK_TEST_PageToTranslate.aspx",
 "FileLeafRef.Name": "PNP_SDK_TEST_PageToTranslate",
 "FileLeafRef.Suffix": "aspx",
-"FileDirRef": "\u002fsites\u002fpnpcoresdktest\u002fSitePages\u002ffr",
+"FileDirRef": "\u002fsites\u002fpnpcoresdktest\u002fSitePages",
 "Description": "",
-"Title": "Translate into French: PNP_SDK_TEST_PageToTranslate",
+"Title": "PNP_SDK_TEST_PageToTranslate",
 "ClientSideApplicationId": "{B6917CB1-93A0-4B97-A84D-7CF49975D4EC}",
 "PageLayoutType": "Article",
 "CanvasContent1": "<div dir=\"\" class=\"ms-rtestate-field\"><\u002fdiv>",
@@ -65,11 +65,14 @@ CONTENT-TYPE: application/json; charset=utf-8
 "A2ODMountCount": "",
 "_StubFile": "0",
 "_ComplianceTag": "",
-"owshiddenversion": "0",
-"_SPTranslatedLanguages": "",
+"owshiddenversion": "3",
+"_PublishStartDate": "7\u002f5\u002f2021 9:57 AM",
+"_PublishStartDate.": "2021-07-05T16:57:30Z",
+"_ScheduledVersion": "",
+"_SPTranslatedLanguages": ["nl-nl","fr-fr"],
 "_SPSitePageFlags": "",
-"ContentVersion": "3",
-"DocConcurrencyNumber": "4",
+"ContentVersion": "2",
+"DocConcurrencyNumber": "3",
 "_VirusStatus": "",
 "Restricted": "",
 "ecb.dispex": "return DispEx(this,event,'TRUE','FALSE','FALSE','','1','SharePoint.OpenDocuments','','','','6','0','','0x7ffffffffffbffff','','')"
@@ -84,4 +87,4 @@ CONTENT-TYPE: application/json; charset=utf-8
 ,"CurrentFolderSpItemUrl" : ""
 
 }
---batchresponse_f60da9e9-e7db-47dc-b845-3cc465d2ef73--
+--batchresponse_025e2f47-8ce5-4745-b485-e49b2175ad0d--

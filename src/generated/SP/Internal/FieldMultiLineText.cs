@@ -22,6 +22,8 @@ namespace PnP.Core.Model.SharePoint
 
         public bool AppendOnly { get => GetValue<bool>(); set => SetValue(value); }
 
+        public bool IsLongHyperlink { get => GetValue<bool>(); set => SetValue(value); }
+
         public int NumberOfLines { get => GetValue<int>(); set => SetValue(value); }
 
         public bool RestrictedMode { get => GetValue<bool>(); set => SetValue(value); }

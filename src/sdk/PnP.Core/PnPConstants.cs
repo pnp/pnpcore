@@ -63,6 +63,11 @@ namespace PnP.Core
         internal const string MetaDataRestId = "restId";
 
         /// <summary>
+        /// The id of the list holding an item
+        /// </summary>
+        internal const string MetaDataListId = "listId";
+
+        /// <summary>
         /// The name of the Entity Type Name metadata attribute
         /// </summary>
         internal const string MetaDataRestEntityTypeName = "EntityTypeName";

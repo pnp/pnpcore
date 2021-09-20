@@ -15,9 +15,10 @@ namespace PnP.Core.Services
 
         internal TelemetryManager(PnPGlobalSettingsOptions globalOptions)
         {
-            TelemetryConfiguration = TelemetryConfiguration.CreateDefault();
-            TelemetryConfiguration.InstrumentationKey = InstrumentationKey;
-            TelemetryClient = new TelemetryClient(TelemetryConfiguration);
+            // Ensure there's only one telemetry client and configuration created in the current process
+            // Otherwise we're running into possible memory leaks: https://briancaos.wordpress.com/2020/05/07/c-azure-telemetryclient-will-leak-memory-if-not-implemented-as-a-singleton/
+            (TelemetryConfiguration, TelemetryClient) = TelemetryClientFactory.GetTelemetryClientAndConfiguration(InstrumentationKey);
+            
             GlobalOptions = globalOptions;
 
             Assembly coreAssembly = Assembly.GetExecutingAssembly();

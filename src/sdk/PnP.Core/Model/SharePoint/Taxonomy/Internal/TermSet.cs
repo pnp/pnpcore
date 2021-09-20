@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace PnP.Core.Model.SharePoint
 {
-    [GraphType(Uri = V, Delete = "termStore/groups/{Parent.GraphId}/sets/{GraphId}", LinqGet = "termStore/groups/{Parent.GraphId}/sets", Beta = true)]
+    [GraphType(Uri = V, Delete = "sites/{hostname},{Site.Id},{Web.Id}/termStore/groups/{Parent.GraphId}/sets/{GraphId}", LinqGet = "sites/{hostname},{Site.Id},{Web.Id}/termStore/groups/{Parent.GraphId}/sets")]
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Usage", "CA2243:Attribute string literals should parse correctly", Justification = "<Pending>")]
     internal partial class TermSet : BaseDataModel<ITermSet>, ITermSet
     {
-        private const string baseUri = "termstore/sets";
+        private const string baseUri = "sites/{hostname},{Site.Id},{Web.Id}/termstore/sets";
         private const string V = baseUri + "/{GraphId}";
 
         #region Construction
@@ -48,7 +48,7 @@ namespace PnP.Core.Model.SharePoint
 
                 var apiCall = await ApiHelper.ParseApiRequestAsync(this, baseUri).ConfigureAwait(false);
 
-                return new ApiCall(apiCall, ApiType.GraphBeta, bodyContent);
+                return new ApiCall(apiCall, ApiType.Graph, bodyContent);
             };
 
             ExpandUpdatePayLoad = (payload) =>
@@ -85,7 +85,7 @@ namespace PnP.Core.Model.SharePoint
 
         public DateTimeOffset CreatedDateTime { get => GetValue<DateTimeOffset>(); set => SetValue(value); }
 
-        [GraphProperty("children", Get = "termstore/sets/{GraphId}/children", Beta = true)]
+        [GraphProperty("children", Get = "sites/{hostname},{Site.Id},{Web.Id}/termstore/sets/{GraphId}/children")]
         public ITermCollection Terms { get => GetModelCollectionValue<ITermCollection>(); }
 
         [GraphProperty("parentGroup", Expandable = true)]
@@ -108,7 +108,7 @@ namespace PnP.Core.Model.SharePoint
 
         public ITermSetPropertyCollection Properties { get => GetModelCollectionValue<ITermSetPropertyCollection>(); }
 
-        [GraphProperty("relations", Get = "termstore/sets/{GraphId}/relations?$expand=fromTerm,set,toTerm", Beta = true)]
+        [GraphProperty("relations", Get = "sites/{hostname},{Site.Id},{Web.Id}/termstore/sets/{GraphId}/relations?$expand=fromTerm,set,toTerm")]
         public ITermRelationCollection Relations { get => GetModelCollectionValue<ITermRelationCollection>(); }
 
         [KeyProperty(nameof(Id))]

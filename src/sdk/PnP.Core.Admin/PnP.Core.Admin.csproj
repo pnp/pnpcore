@@ -1,0 +1,86 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+	  <TargetFrameworks>netstandard2.0;net5.0</TargetFrameworks>
+	  <LangVersion>8.0</LangVersion>
+	  <RootNamespace>PnP.Core.Admin</RootNamespace>
+	  <AssemblyName>PnP.Core.Admin</AssemblyName>
+	  <Version>0.1.0</Version>
+	  <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+	  <Copyright>PnP 2021</Copyright>
+	  <Company>PnP</Company>
+	  <Authors>PnP</Authors>
+	  <Description>The PnP Core SDK provides a development model that unites SharePoint REST and Microsoft Graph in a high performance, lightweight library. The SDK uses a model which under the covers is automatically translated to the needed SharePoint REST or Microsoft Graph queries.</Description>
+	  <PackageProjectUrl>https://aka.ms/pnp/coresdk</PackageProjectUrl>
+	  <RepositoryUrl>https://github.com/pnp/pnpcore</RepositoryUrl>
+	  <RepositoryType>git</RepositoryType>
+	  <PublishRepositoryUrl>true</PublishRepositoryUrl>
+	  <!-- Generate symbol packages (.snupkg) -->
+	  <!-- You must publish both packages, the package that contains the dll (.nupkg) and the one that contains the symbols (.snupkg) -->
+	  <IncludeSymbols>true</IncludeSymbols>
+	  <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+	  <EmbedUntrackedSources>true</EmbedUntrackedSources>
+	  <Deterministic>true</Deterministic>
+	  <Configurations>Debug;Release</Configurations>
+	  <PackageIcon>nugeticon.png</PackageIcon>
+	  <SignAssembly>true</SignAssembly>
+	  <AssemblyOriginatorKeyFile>..\pnp.core.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+
+	<PropertyGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
+		<DefineConstants>NETSTANDARD2_0</DefineConstants>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(TargetFramework)' == 'net5.0'">
+		<DefineConstants>NET5_0</DefineConstants>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+		<DefineConstants>TRACE</DefineConstants>
+		<DocumentationFile>obj\Debug\PnP.Core.Admin.xml</DocumentationFile>
+		<InformationalVersion>Nightly</InformationalVersion>
+		<!-- Uncomment if you build using GitHub Actions -->
+		<!-- https://help.github.com/en/actions/configuring-and-managing-workflows/using-environment-variables -->
+		<ContinuousIntegrationBuild Condition="'$(GITHUB_ACTIONS)' == 'true'">True</ContinuousIntegrationBuild>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+		<DocumentationFile>obj\Debug\PnP.Core.Admin.xml</DocumentationFile>
+		<ContinuousIntegrationBuild>True</ContinuousIntegrationBuild>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="3.3.1">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0-*" PrivateAssets="All" />
+	</ItemGroup>
+	
+	<ItemGroup>
+		<None Include="nugeticon.png">
+			<Pack>True</Pack>
+			<PackagePath></PackagePath>
+		</None>
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\PnP.Core\PnP.Core.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Compile Update="PnPCoreAdminResources.Designer.cs">
+	    <DesignTime>True</DesignTime>
+	    <AutoGen>True</AutoGen>
+	    <DependentUpon>PnPCoreAdminResources.resx</DependentUpon>
+	  </Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <EmbeddedResource Update="PnPCoreAdminResources.resx">
+	    <Generator>ResXFileCodeGenerator</Generator>
+	    <LastGenOutput>PnPCoreAdminResources.Designer.cs</LastGenOutput>
+	  </EmbeddedResource>
+	</ItemGroup>
+	
+</Project>

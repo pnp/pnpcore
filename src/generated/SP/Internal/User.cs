@@ -20,6 +20,8 @@ namespace PnP.Core.Model.SharePoint
 
         public string Email { get => GetValue<string>(); set => SetValue(value); }
 
+        public string EmailWithFallback { get => GetValue<string>(); set => SetValue(value); }
+
         public string Expiration { get => GetValue<string>(); set => SetValue(value); }
 
         public bool IsEmailAuthenticationGuestUser { get => GetValue<bool>(); set => SetValue(value); }

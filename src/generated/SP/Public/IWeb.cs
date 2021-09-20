@@ -513,6 +513,16 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// To update...
         /// </summary>
+        public bool HasWebTemplateExtension { get; set; }
+
+        /// <summary>
+        /// To update...
+        /// </summary>
+        public bool KeepFieldUserResources { get; set; }
+
+        /// <summary>
+        /// To update...
+        /// </summary>
         public IList AccessRequestsList { get; }
 
         /// <summary>

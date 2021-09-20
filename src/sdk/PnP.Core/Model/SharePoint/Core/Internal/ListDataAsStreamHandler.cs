@@ -1,11 +1,11 @@
-﻿using System;
+﻿using PnP.Core.QueryModel;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Text.Json;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using PnP.Core.QueryModel;
 
 namespace PnP.Core.Model.SharePoint
 {
@@ -102,15 +102,7 @@ namespace PnP.Core.Model.SharePoint
                             if (property.Name == "ID")
                             {
                                 // already handled, so continue
-                            }
-                            //else if (property.Name == "_CommentFlags")
-                            //{
-                            //    string commentsFlags = row.GetProperty("_CommentFlags").GetString();
-                            //    if (bool.TryParse(commentsFlags, out bool commentsEnabled))
-                            //    {
-                            //        itemToUpdate.SetSystemProperty(p => p.CommentsDisabled, commentsEnabled);
-                            //    }
-                            //}
+                            }                            
                             // Handle the overflow fields
                             else
                             {
@@ -123,7 +115,7 @@ namespace PnP.Core.Model.SharePoint
                                     {
                                         // MultiChoice property
                                         fieldValue = new List<string>();
-                                        foreach(var prop in property.Value.EnumerateArray())
+                                        foreach (var prop in property.Value.EnumerateArray())
                                         {
                                             (fieldValue as List<string>).Add(prop.GetString());
                                         }
@@ -131,7 +123,7 @@ namespace PnP.Core.Model.SharePoint
                                     else
                                     {
                                         // Handle empty regular field value so that they're the same as with a regular Get call
-                                        if ((property.Field.FieldTypeKind == FieldType.Text || property.Field.FieldTypeKind == FieldType.Note || property.Field.FieldTypeKind == FieldType.MultiChoice || property.Field.FieldTypeKind == FieldType.Choice ) &&
+                                        if ((property.Field.FieldTypeKind == FieldType.Text || property.Field.FieldTypeKind == FieldType.Note || property.Field.FieldTypeKind == FieldType.MultiChoice || property.Field.FieldTypeKind == FieldType.Choice) &&
                                             property.Value.ValueKind == JsonValueKind.String &&
                                             string.IsNullOrEmpty(property.Value.GetString()))
                                         {
@@ -165,7 +157,7 @@ namespace PnP.Core.Model.SharePoint
                                     else
                                     {
                                         fieldValue = new FieldValueCollection(property.Field, property.Name);
-                                        foreach(var xx in property.Values)
+                                        foreach (var xx in property.Values)
                                         {
                                             var yy = xx.FieldValue.FromListDataAsStream(xx.Properties);
                                             if (yy is FieldLookupValue yyLookup)
@@ -177,7 +169,7 @@ namespace PnP.Core.Model.SharePoint
                                                     (fieldValue as FieldValueCollection).Values.Add(yyLookup);
                                                 }
                                             }
-                                            else 
+                                            else
                                             {
                                                 (fieldValue as FieldValueCollection).Values.Add(yy);
                                             }
@@ -195,6 +187,42 @@ namespace PnP.Core.Model.SharePoint
                                 }
                             }
                         }
+
+                        // Post processing for ListItem properties
+                        if (row.TryGetProperty("UniqueId", out JsonElement uniqueId))
+                        {
+                            itemToUpdate.SetSystemProperty(p => p.UniqueId, Guid.Parse(uniqueId.ToString()));
+                        }
+
+                        if (row.TryGetProperty("ServerRedirectedEmbedUrl", out JsonElement serverRedirectedEmbedUrl))
+                        {
+                            itemToUpdate.SetSystemProperty(p => p.ServerRedirectedEmbedUri, serverRedirectedEmbedUrl.GetString());
+                            itemToUpdate.SetSystemProperty(p => p.ServerRedirectedEmbedUrl, serverRedirectedEmbedUrl.GetString());
+                        }
+
+                        if (row.TryGetProperty("FSObjType", out JsonElement fsObjType))
+                        {
+                            if (Enum.TryParse(fsObjType.GetString(), out FileSystemObjectType fsot))
+                            {
+                                itemToUpdate.SetSystemProperty(p => p.FileSystemObjectType, fsot);
+                            }
+                        }
+
+                        if (row.TryGetProperty("ContentTypeId", out JsonElement contentTypeId) && row.TryGetProperty("ContentType", out JsonElement contentTypeName))
+                        {
+                            var ct = itemToUpdate.ContentType;
+
+                            ct.SetSystemProperty(p => p.Id, contentTypeId.GetString());
+                            ct.SetSystemProperty(p => p.StringId, contentTypeId.GetString());
+                            ct.SetSystemProperty(p => p.Name, contentTypeName.GetString());
+                            (ct as IMetadataExtensible).Metadata.Add(PnPConstants.MetaDataRestId, contentTypeId.GetString());
+                            (ct as IMetadataExtensible).Metadata.Add(PnPConstants.MetaDataType, "SP.ContentType");
+                            (ct as ContentType).Requested = true;                            
+                        }
+
+                        // Ensure the values are committed to the model when an item is being added: this
+                        // will ensure there's no pending changes anymore
+                        itemToUpdate.Values.Commit();
                     }
                 }
             }

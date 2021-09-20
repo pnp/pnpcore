@@ -90,7 +90,7 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// This control lives in the page header (not removable control)
         /// </summary>
-        public bool IsHeaderControl { get; }
+        public bool IsHeaderControl { get; set; }
 
     }
 }

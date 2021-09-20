@@ -5,11 +5,8 @@ using PnP.Core.Services.Core.CSOM.QueryIdentities;
 using PnP.Core.Services.Core.CSOM.Requests.Web;
 using PnP.Core.Services.Core.CSOM.Utils;
 using PnP.Core.Services.Core.CSOM.Utils.Model;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PnP.Core.Test.Services.Core.CSOM.Requests
 {
@@ -32,7 +29,7 @@ namespace PnP.Core.Test.Services.Core.CSOM.Requests
             var actionRequests = requests.Select(r => r.Action).Where(r => r != null).ToList();
             var identities = requests.Select(r => r.ObjectPath).Where(id => id != null).ToList();
 
-            BaseAction objectPath = actionRequests[0] as BaseAction;
+            BaseAction objectPath = actionRequests[0];
             IdentityQueryAction objectIdQuery = actionRequests[1] as IdentityQueryAction;
 
             ObjectPathMethod createCTAction = identities[0] as ObjectPathMethod;

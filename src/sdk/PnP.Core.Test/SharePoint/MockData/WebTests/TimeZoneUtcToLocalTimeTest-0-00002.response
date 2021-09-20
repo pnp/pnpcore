@@ -1,0 +1,9 @@
+--batchresponse_5bd36573-a5cb-45a9-870c-b182e5bc7d7a
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+HTTP/1.1 200 OK
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+
+{"d":{"UTCToLocalTime":"2021-01-15T15:15:15"}}
+--batchresponse_5bd36573-a5cb-45a9-870c-b182e5bc7d7a--

@@ -98,6 +98,12 @@ namespace PnP.Core.Model.SharePoint
             int bytesRead;
             while ((bytesRead = content.Read(buffer, 0, buffer.Length)) > 0)
             {
+                // A chunk can be returned smaller than the bytes requested. See https://docs.microsoft.com/en-us/dotnet/api/system.io.stream.read?view=net-5.0&viewFallbackFrom=net-3.1#System_IO_Stream_Read_System_Byte___System_Int32_System_Int32_
+                // The total number of bytes read into the buffer. This can be less than the number of bytes requested if that many bytes are not currently available,
+                // or zero (0) if the end of the stream has been reached.
+                var chunk = new byte[bytesRead];
+                Array.Copy(buffer, chunk, chunk.Length);
+
                 if (firstChunk)
                 {
                     // Add empty file
@@ -113,7 +119,7 @@ namespace PnP.Core.Model.SharePoint
                     api = new ApiCall(endpointUrl, ApiType.SPORest)
                     {
                         Interactive = true,
-                        BinaryBody = buffer
+                        BinaryBody = chunk
                     };
                     await newFile.RequestAsync(api, HttpMethod.Post).ConfigureAwait(false);
                     firstChunk = false;
@@ -121,14 +127,11 @@ namespace PnP.Core.Model.SharePoint
                 else if (content.Position == content.Length)
                 {
                     // Finalize upload
-                    var finalBuffer = new byte[bytesRead];
-                    Array.Copy(buffer, finalBuffer, finalBuffer.Length);
-
                     var endpointUrl = $"_api/web/getFileById('{{Id}}')/finishupload(uploadId=guid'{uploadId}',fileOffset={offset})";
                     var api = new ApiCall(endpointUrl, ApiType.SPORest)
                     {
                         Interactive = true,
-                        BinaryBody = finalBuffer
+                        BinaryBody = chunk
                     };
                     await newFile.RequestAsync(api, HttpMethod.Post).ConfigureAwait(false);
                 }
@@ -138,7 +141,7 @@ namespace PnP.Core.Model.SharePoint
                     var api = new ApiCall(endpointUrl, ApiType.SPORest)
                     {
                         Interactive = true,
-                        BinaryBody = buffer
+                        BinaryBody = chunk
                     };
                     await newFile.RequestAsync(api, HttpMethod.Post).ConfigureAwait(false);
                 }

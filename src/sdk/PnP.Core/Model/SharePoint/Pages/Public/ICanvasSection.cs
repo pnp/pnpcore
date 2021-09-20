@@ -45,6 +45,31 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// Color emphasis of the section 
         /// </summary>
-        int ZoneEmphasis { get; }
+        int ZoneEmphasis { get; set; }
+
+        /// <summary>
+        /// Is this section collapsible?
+        /// </summary>
+        bool Collapsible { get; set; }
+
+        /// <summary>
+        /// Is the collapsible section expanded?
+        /// </summary>
+        bool IsExpanded { get; set; }
+
+        /// <summary>
+        /// DisplayName of the collapsible section
+        /// </summary>
+        string DisplayName { get; set; }
+
+        /// <summary>
+        /// Sets the alignment of the collaps icon, left/right or not configured
+        /// </summary>
+        IconAlignment? IconAlignment { get; set; }
+
+        /// <summary>
+        /// Show a devided line for this collapsible section?
+        /// </summary>
+        bool ShowDividerLine { get; set; }
     }
 }

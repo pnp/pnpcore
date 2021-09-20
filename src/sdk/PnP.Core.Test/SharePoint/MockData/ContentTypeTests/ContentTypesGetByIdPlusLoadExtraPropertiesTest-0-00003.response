@@ -1,0 +1,9 @@
+--batchresponse_69871690-14bf-4784-bfb6-2e8616937316
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+HTTP/1.1 200 OK
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+
+{"d":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/ContentTypes('0x01')","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/ContentTypes('0x01')","type":"SP.ContentType"},"Group":"List Content Types","StringId":"0x01"}}
+--batchresponse_69871690-14bf-4784-bfb6-2e8616937316--

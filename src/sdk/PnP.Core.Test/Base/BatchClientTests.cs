@@ -1,5 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using PnP.Core.Model;
 using PnP.Core.Model.SharePoint;
+using PnP.Core.QueryModel;
 using PnP.Core.Services;
 using PnP.Core.Test.Utilities;
 using System;
@@ -7,8 +9,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
-using PnP.Core.Model;
-using PnP.Core.QueryModel;
 
 namespace PnP.Core.Test.Base
 {
@@ -58,6 +58,62 @@ namespace PnP.Core.Test.Base
                 await context.Web.LoadAsync();
 
                 Assert.IsFalse(context.BatchClient.ContainsBatch(batch.Id));
+            }
+        }
+
+        [TestMethod]
+        public async Task RemoveProcessedExplicitGraphBatch()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var batch = context.NewBatch();
+                var team = context.Team.GetBatch(batch, o => o.Channels);
+                context.Execute(batch);
+                Assert.IsTrue(team.Result.Channels.Length > 0);
+                Assert.IsTrue(batch.Executed);
+                Assert.IsTrue(batch.Requests.Count == 2);
+
+                var firstChannel = team.Result.Channels.AsRequested().FirstOrDefault(i => i.DisplayName == "General");
+                Assert.IsNotNull(firstChannel);
+
+                var channel = firstChannel.GetBatch(batch, o => o.Tabs);
+
+                Assert.IsTrue(batch.Requests.Where(p => p.Value.ExecutionNeeded).Count() == 2);
+                Assert.IsTrue(batch.Requests.Count == 4);
+
+                context.Execute(batch);
+
+                Assert.IsTrue(batch.Executed);
+                Assert.IsTrue(batch.Requests.Where(p => p.Value.ExecutionNeeded).Count() == 0);
+                Assert.IsTrue(batch.Requests.Count == 4);
+            }
+        }
+
+        [TestMethod]
+        public async Task RemoveProcessedExplicitRestBatch()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var batch = context.NewBatch();
+                var site = context.Site.GetBatch(batch, p => p.AllowMasterPageEditing);
+                context.Execute(batch);
+                Assert.IsTrue(site.Result.IsPropertyAvailable(p => p.AllowMasterPageEditing));
+                Assert.IsTrue(batch.Executed);
+                Assert.IsTrue(batch.Requests.Count == 1);
+
+                var web = context.Web.GetBatch(batch, p => p.MasterUrl, p => p.CustomMasterUrl);                
+                
+                Assert.IsTrue(batch.Requests.Where(p => p.Value.ExecutionNeeded).Count() == 1);
+                Assert.IsTrue(batch.Requests.Count == 2);
+
+                context.Execute(batch);
+                Assert.IsTrue(web.Result.IsPropertyAvailable(p => p.CustomMasterUrl));
+
+                Assert.IsTrue(batch.Executed);
+                Assert.IsTrue(batch.Requests.Where(p => p.Value.ExecutionNeeded).Count() == 0);
+                Assert.IsTrue(batch.Requests.Count == 2);
             }
         }
 
@@ -158,6 +214,73 @@ namespace PnP.Core.Test.Base
                 Assert.IsTrue(context.Team.IsPropertyAvailable(p => p.Id));
                 Assert.IsTrue(context.Web.Requested);
                 Assert.IsTrue(context.Web.IsPropertyAvailable(p => p.Title));
+            }
+        }
+
+        [TestMethod]
+        public async Task SplitGraphAndGraphBetaRequestsInTwoBatches()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+
+                // Let's upfront load the team primary channel as we need it's id for the graph beta call
+                // This is a temp workaround as there's currently no other Graph Beta entity anymore
+                await context.Team.LoadAsync(p => p.Channels);
+
+                // Graph only request (there's no option to fallback to a SharePoint REST call)
+                // Results in 2 calls as we're also loading the primary channel
+                await context.Team.LoadBatchAsync(p => p.Channels);
+                // Graph beta request
+                //await context.TermStore.LoadBatchAsync();
+                await context.Team.Channels.AsRequested().Last().LoadBatchAsync(p => p.Messages);
+
+                // Grab the id of the current batch so we can later on find it back
+                Guid currentBatchId = context.CurrentBatch.Id;
+                var batchToExecute = context.BatchClient.GetBatchById(currentBatchId);
+                // We added 2 requests to the the current batch
+                Assert.IsTrue(batchToExecute.Requests.Count == 4);
+
+                // The first call in the batch are graph calls
+                Assert.IsTrue(batchToExecute.Requests[0].ApiCall.Type == ApiType.Graph);
+                // The second one is rest
+                Assert.IsTrue(batchToExecute.Requests[2].ApiCall.Type == ApiType.GraphBeta);
+                // Execute the batch, this will result in 2 individual batches being executed, one graph and one graph beta
+                await context.ExecuteAsync();
+            }
+        }
+
+        [TestMethod]
+        public async Task SplitGraphAndGraphBetaRequestsInTwoBatchesWhileForcingGraphBeta()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                context.GraphAlwaysUseBeta = true;
+
+                // Let's upfront load the team primary channel as we need it's id for the graph beta call
+                // This is a temp workaround as there's currently no other Graph Beta entity anymore
+                await context.Team.LoadAsync(p => p.Channels);
+
+                // Graph only request (there's no option to fallback to a SharePoint REST call)
+                // Results in 2 calls as we're also loading the primary channel
+                await context.Team.LoadBatchAsync(p => p.Channels);
+                // Graph beta request
+                //await context.TermStore.LoadBatchAsync();
+                await context.Team.Channels.AsRequested().Last().LoadBatchAsync(p => p.Messages);
+
+                // Grab the id of the current batch so we can later on find it back
+                Guid currentBatchId = context.CurrentBatch.Id;
+                var batchToExecute = context.BatchClient.GetBatchById(currentBatchId);
+                // We added 2 requests to the the current batch
+                Assert.IsTrue(batchToExecute.Requests.Count == 4);
+
+                // The first call in the batch are graph calls
+                Assert.IsTrue(batchToExecute.Requests[0].ApiCall.Type == ApiType.Graph);
+                // The second one is rest
+                Assert.IsTrue(batchToExecute.Requests[2].ApiCall.Type == ApiType.GraphBeta);
+                // Execute the batch, this will result in 2 individual batches being executed, one graph and one graph beta
+                await context.ExecuteAsync();
             }
         }
 

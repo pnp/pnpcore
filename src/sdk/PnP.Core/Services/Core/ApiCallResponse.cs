@@ -5,7 +5,7 @@ using System.Net;
 
 namespace PnP.Core.Services
 {
-    internal struct ApiCallResponse
+    internal readonly struct ApiCallResponse
     {
         internal ApiCallResponse(ApiCall apiCall, string json, HttpStatusCode statusCode,
             Guid batchRequestId, Dictionary<string, string> headers, Stream binaryContent = null)
@@ -21,31 +21,31 @@ namespace PnP.Core.Services
         /// <summary>
         /// The API call that issued the current response
         /// </summary>
-        internal ApiCall ApiCall { get; private set; }
+        internal ApiCall ApiCall { get; }
 
         /// <summary>
         /// The Id of the batch used to get the current response
         /// </summary>
-        internal Guid BatchRequestId { get; private set; }
+        internal Guid BatchRequestId { get; }
 
         /// <summary>
         /// Contains the json response of the request (if any)
         /// </summary>
-        internal string Json { get; private set; }
+        internal string Json { get; }
 
         /// <summary>
         /// Contains the request http status code
         /// </summary>
-        internal HttpStatusCode StatusCode { get; private set; }
+        internal HttpStatusCode StatusCode { get; }
 
         /// <summary>
         /// Contains additional response headers (if any)
         /// </summary>
-        internal Dictionary<string, string> Headers { get; private set; }
+        internal Dictionary<string, string> Headers { get;  }
 
         /// <summary>
         /// Stream containing binary content of the response
         /// </summary>
-        internal Stream BinaryContent { get; private set; }
+        internal Stream BinaryContent { get; }
     }
 }

@@ -1,0 +1,9 @@
+--batchresponse_283287ab-cec2-4539-b861-f3a79cba7975
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+HTTP/1.1 200 OK
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+
+{"d":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/prov-1/Shared Documents/ListItemAsFolderPropertiesTest')","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/prov-1/Shared%20Documents/ListItemAsFolderPropertiesTest')","type":"SP.Folder"},"ListItemAllFields":{"__metadata":{"id":"87d487ca-0df4-49cd-ab0a-8673e00dc5e5","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/prov-1/Shared%20Documents/ListItemAsFolderPropertiesTest')/ListItemAllFields","etag":"\"1\"","type":"SP.Data.Shared_x0020_DocumentsItem"},"Id":3377,"ID":3377},"Name":"ListItemAsFolderPropertiesTest","ServerRelativeUrl":"/sites/prov-1/Shared Documents/ListItemAsFolderPropertiesTest","UniqueId":"3d37d30b-066f-4f77-855d-1293f5301ade"}}
+--batchresponse_283287ab-cec2-4539-b861-f3a79cba7975--

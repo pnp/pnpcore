@@ -1,7 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PnP.Core.Model;
 using PnP.Core.Model.SharePoint;
-using PnP.Core.Model.Teams;
 using PnP.Core.QueryModel;
 using PnP.Core.Services;
 using PnP.Core.Test.Utilities;
@@ -9,7 +8,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Reflection;
 using System.Threading.Tasks;
 
 namespace PnP.Core.Test.Base
@@ -322,351 +320,367 @@ namespace PnP.Core.Test.Base
             Assert.AreEqual(requests[0], "_api/web?$select=Id%2cTitle%2cDescription%2cLists%2fTitle%2cLists%2fBaseTemplate%2cLists%2fId%2cLists%2fContentTypes%2fName%2cLists%2fContentTypes%2fStringId%2cLists%2fContentTypes%2fFieldLinks%2fId%2cLists%2fContentTypes%2fFieldLinks%2fName%2cLists%2fContentTypes%2fFieldLinks%2fHidden&$expand=Lists%2cLists%2fContentTypes%2cLists%2fContentTypes%2fFieldLinks", true);
         }
 
-        #endregion
-/*
-        #region Graph only tests using the Taxonomy model
-
         [TestMethod]
-        public async Task GetTermStoreDefault()
+        public async Task ComplexPropertyRequest()
         {
-            var requests = await GetAPICallTestAsync(BuildModel<TermStore, ITermStore>());
+            Expression<Func<IWeb, object>>[] defaultWebProps = {w => w.Id, w => w.Url,
+                                                                w => w.RegionalSettings.QueryProperties(r => r.TimeZone, r => r.All) };
+
+            Expression<Func<IWeb, object>>[] extraWebProps =  {w => w.CustomMasterUrl,
+                                                               w => w.Fields, w => w.Features,
+                                                               w => w.Lists.QueryProperties(r => r.Title, r => r.RootFolder.QueryProperties(p=>p.ServerRelativeUrl)) };
+
+            var propsToLoad = defaultWebProps.Union(extraWebProps);
+
+            var requests = await GetAPICallTestAsync(BuildModel<Web, IWeb>(propsToLoad.ToArray()));
             Assert.IsTrue(requests.Count == 1);
-            Assert.AreEqual(requests[0], "termstore", true);
-        }
-
-        [TestMethod]
-        public async Task GetTeamExpressionSingleSimpleProperty()
-        {
-            var requests = await GetAPICallTestAsync(BuildModel<TermStore, ITermStore>(new Expression<Func<ITermStore, object>>[] { p => p.DefaultLanguage }));
-            Assert.IsTrue(requests.Count == 1);
-            Assert.AreEqual(requests[0], "termstore?$select=id%2cdefaultLanguageTag", true);
-        }
-
-        [TestMethod]
-        public async Task GetTeamExpressionKeyProperty()
-        {
-            var requests = await GetAPICallTestAsync(BuildModel<TermStore, ITermStore>(new Expression<Func<ITermStore, object>>[] { p => p.Id }));
-            Assert.IsTrue(requests.Count == 1);
-            Assert.AreEqual(requests[0], "termstore?$select=id", true);
-        }
-
-        [TestMethod]
-        public async Task GetTeamExpressionSingleSimplePropertyPlusKeyProperty()
-        {
-            var requests = await GetAPICallTestAsync(BuildModel<TermStore, ITermStore>(new Expression<Func<ITermStore, object>>[] { p => p.DefaultLanguage, p => p.Id }));
-            Assert.IsTrue(requests.Count == 1);
-            Assert.AreEqual(requests[0], "termstore?$select=id%2cdefaultLanguageTag", true);
-        }
-
-        [TestMethod]
-        public async Task GetTeamExpressionExpandable()
-        {
-            var requests = await GetAPICallTestAsync(BuildModel<TermStore, ITermStore>(new Expression<Func<ITermStore, object>>[] { p => p.Groups }));
-            Assert.IsTrue(requests.Count == 2);
-            Assert.AreEqual(requests[0], "termstore?$select=id%2cgroups", true);
-            Assert.AreEqual(requests[1], "termstore/groups", true);
-        }
-
-        [TestMethod]
-        public async Task GetTeamExpressionExpandableKeyProperty()
-        {
-            var requests = await GetAPICallTestAsync(BuildModel<TermStore, ITermStore>(new Expression<Func<ITermStore, object>>[] { p => p.Groups, p => p.Id }));
-            Assert.IsTrue(requests.Count == 2);
-            Assert.AreEqual(requests[0], "termstore?$select=id%2cgroups", true);
-            Assert.AreEqual(requests[1], "termstore/groups", true);
-        }
-
-        [TestMethod]
-        public async Task GetTeamExpressionExpandableKeyPropertyPlusLoad()
-        {
-            var requests = await GetAPICallTestAsync(BuildModel<TermStore, ITermStore>(new Expression<Func<ITermStore, object>>[] { p => p.Id, p => p.Groups.QueryProperties(
-                p=>p.Name )
-            }));
-            Assert.IsTrue(requests.Count == 2);
-            Assert.AreEqual(requests[0], "termstore?$select=id", true);
-            Assert.AreEqual(requests[1], "termstore/groups?$select=displayname,id", true);
-        }
-
-        [TestMethod]
-        public async Task GetTeamExpressionExpandableKeyPropertyPlusLoadPlusKeyProperty()
-        {
-            var requests = await GetAPICallTestAsync(BuildModel<TermStore, ITermStore>(new Expression<Func<ITermStore, object>>[] { p => p.Id, p => p.Groups.QueryProperties(
-                p=>p.Name, p=>p.Id )
-            }));
-            Assert.IsTrue(requests.Count == 2);
-            Assert.AreEqual(requests[0], "termstore?$select=id", true);
-            Assert.AreEqual(requests[1], "termstore/groups?$select=displayname,id", true);
-        }
-
-        [TestMethod]
-        [ExpectedException(typeof(ClientException))]
-        public async Task GetTeamExpressionExpandableKeyPropertyPlusLoadPlusExpandKeyProperty()
-        {
-            var requests = await GetAPICallTestAsync(BuildModel<TermStore, ITermStore>(new Expression<Func<ITermStore, object>>[] { p => p.Id, p => p.Groups.QueryProperties(
-                p=>p.Name, p=>p.Id, p=>p.Sets )
-            }));
+            Assert.AreEqual(requests[0], "_api/web?$select=Id%2cUrl%2cCustomMasterUrl%2cFields%2cLists%2fTitle%2cLists%2fId%2cLists%2fRootFolder%2fServerRelativeUrl%2cLists%2fRootFolder%2fUniqueId%2cFeatures%2cRegionalSettings%2f*%2cRegionalSettings%2fDateFormat&$expand=Fields%2cLists%2cLists%2fRootFolder%2cFeatures%2cRegionalSettings%2cRegionalSettings%2fTimeZone", true);
         }
         #endregion
-*/
+        /*
+                #region Graph only tests using the Taxonomy model
 
-/*
-        #region Linq query tests
+                [TestMethod]
+                public async Task GetTermStoreDefault()
+                {
+                    var requests = await GetAPICallTestAsync(BuildModel<TermStore, ITermStore>());
+                    Assert.IsTrue(requests.Count == 1);
+                    Assert.AreEqual(requests[0], "termstore", true);
+                }
 
-        [TestMethod]
-        [Ignore]
-        public async Task GetLinqListGraph()
-        {
-            //NOTE: $skip does not work ~ should result in exception once we've the needed metadata to check for that
-            var requests = await GetODataAPICallTestAsync(BuildModel<List, IList>(), new ODataQuery<IList> { Top = 10, Skip = 5 });
-            // Using default load without specifying fields or filter will use REST
-            Assert.AreEqual(requests[0], "_api/web/lists?$top=10&$skip=5", true);
-        }
+                [TestMethod]
+                public async Task GetTeamExpressionSingleSimpleProperty()
+                {
+                    var requests = await GetAPICallTestAsync(BuildModel<TermStore, ITermStore>(new Expression<Func<ITermStore, object>>[] { p => p.DefaultLanguage }));
+                    Assert.IsTrue(requests.Count == 1);
+                    Assert.AreEqual(requests[0], "termstore?$select=id%2cdefaultLanguageTag", true);
+                }
 
-        [TestMethod]
-        [Ignore]
-        public async Task GetLinqListGraphSingleSimpleProperty()
-        {
-            //NOTE: $skip does not work ~ should result in exception once we've the needed metadata to check for that
-            var requests = await GetODataAPICallTestAsync(
-                BuildModel<List, IList>(new Expression<Func<IList, object>>[] { p => p.Title }),
-                new ODataQuery<IList> { Top = 10, Skip = 5 });
-            Assert.AreEqual(requests[0], "sites/{Parent.GraphId}/lists?$select=id,displayName,system&$top=10&$skip=5", true);
-        }
+                [TestMethod]
+                public async Task GetTeamExpressionKeyProperty()
+                {
+                    var requests = await GetAPICallTestAsync(BuildModel<TermStore, ITermStore>(new Expression<Func<ITermStore, object>>[] { p => p.Id }));
+                    Assert.IsTrue(requests.Count == 1);
+                    Assert.AreEqual(requests[0], "termstore?$select=id", true);
+                }
 
-        [TestMethod]
-        [Ignore]
-        public async Task GetLinqListGraphMultipleSimpleProperty()
-        {
-            //NOTE: $skip does not work ~ should result in exception once we've the needed metadata to check for that
-            var requests = await GetODataAPICallTestAsync(
-                BuildModel<List, IList>(new Expression<Func<IList, object>>[] { p => p.Title, p => p.Description }),
-                new ODataQuery<IList> { Top = 10, Skip = 5 });
-            Assert.AreEqual(requests[0], "sites/{Parent.GraphId}/lists?$select=id,displayName,description,system&$top=10&$skip=5", true);
-        }
+                [TestMethod]
+                public async Task GetTeamExpressionSingleSimplePropertyPlusKeyProperty()
+                {
+                    var requests = await GetAPICallTestAsync(BuildModel<TermStore, ITermStore>(new Expression<Func<ITermStore, object>>[] { p => p.DefaultLanguage, p => p.Id }));
+                    Assert.IsTrue(requests.Count == 1);
+                    Assert.AreEqual(requests[0], "termstore?$select=id%2cdefaultLanguageTag", true);
+                }
 
-        [TestMethod]
-        [Ignore]
-        public async Task GetLinqListSingleSimpleProperty()
-        {
-            var requests = await GetODataAPICallTestAsync(
-                BuildModel<List, IList>(new Expression<Func<IList, object>>[] { p => p.ListExperience }),
-                new ODataQuery<IList> { Top = 10, Skip = 5 });
-            Assert.AreEqual(requests[0], "_api/web/lists?$select=Id,ListExperienceOptions&$top=10&$skip=5", true);
-        }
+                [TestMethod]
+                public async Task GetTeamExpressionExpandable()
+                {
+                    var requests = await GetAPICallTestAsync(BuildModel<TermStore, ITermStore>(new Expression<Func<ITermStore, object>>[] { p => p.Groups }));
+                    Assert.IsTrue(requests.Count == 2);
+                    Assert.AreEqual(requests[0], "termstore?$select=id%2cgroups", true);
+                    Assert.AreEqual(requests[1], "termstore/groups", true);
+                }
 
-        [TestMethod]
-        [Ignore]
-        public async Task GetLinqListMultipleSimpleProperty()
-        {
-            var requests = await GetODataAPICallTestAsync(
-                BuildModel<List, IList>(new Expression<Func<IList, object>>[] { p => p.ListExperience, p => p.Description }),
-                new ODataQuery<IList> { Top = 10, Skip = 5 });
-            Assert.AreEqual(requests[0], "_api/web/lists?$select=id,description,listexperienceoptions&$top=10&$skip=5", true);
-        }
+                [TestMethod]
+                public async Task GetTeamExpressionExpandableKeyProperty()
+                {
+                    var requests = await GetAPICallTestAsync(BuildModel<TermStore, ITermStore>(new Expression<Func<ITermStore, object>>[] { p => p.Groups, p => p.Id }));
+                    Assert.IsTrue(requests.Count == 2);
+                    Assert.AreEqual(requests[0], "termstore?$select=id%2cgroups", true);
+                    Assert.AreEqual(requests[1], "termstore/groups", true);
+                }
 
-        [TestMethod]
-        [Ignore]
-        public async Task GetLinqListSingleSimpleExpandProperty()
-        {
-            //NOTE: $skip does not work ~ should result in exception once we've the needed metadata to check for that
-            var requests = await GetODataAPICallTestAsync(
-                BuildModel<List, IList>(new Expression<Func<IList, object>>[] { p => p.InformationRightsManagementSettings }),
-                new ODataQuery<IList> { Top = 10, Skip = 5 });
-            Assert.AreEqual(requests[0], "_api/web/lists?$select=id,informationrightsmanagementsettings&$expand=informationrightsmanagementsettings&$top=10&$skip=5", true);
-        }
+                [TestMethod]
+                public async Task GetTeamExpressionExpandableKeyPropertyPlusLoad()
+                {
+                    var requests = await GetAPICallTestAsync(BuildModel<TermStore, ITermStore>(new Expression<Func<ITermStore, object>>[] { p => p.Id, p => p.Groups.QueryProperties(
+                        p=>p.Name )
+                    }));
+                    Assert.IsTrue(requests.Count == 2);
+                    Assert.AreEqual(requests[0], "termstore?$select=id", true);
+                    Assert.AreEqual(requests[1], "termstore/groups?$select=displayname,id", true);
+                }
 
-        [TestMethod]
-        [Ignore]
-        public async Task GetLinqListSingleSimpleNormalAndExpandProperty()
-        {
-            //NOTE: $skip does not work ~ should result in exception once we've the needed metadata to check for that
-            var requests = await GetODataAPICallTestAsync(
-                BuildModel<List, IList>(new Expression<Func<IList, object>>[] { p => p.Title, p => p.InformationRightsManagementSettings }),
-                new ODataQuery<IList> { Top = 10, Skip = 5 });
-            Assert.AreEqual(requests[0], "_api/web/lists?$select=id,title,informationrightsmanagementsettings&$expand=informationrightsmanagementsettings&$top=10&$skip=5", true);
-        }
+                [TestMethod]
+                public async Task GetTeamExpressionExpandableKeyPropertyPlusLoadPlusKeyProperty()
+                {
+                    var requests = await GetAPICallTestAsync(BuildModel<TermStore, ITermStore>(new Expression<Func<ITermStore, object>>[] { p => p.Id, p => p.Groups.QueryProperties(
+                        p=>p.Name, p=>p.Id )
+                    }));
+                    Assert.IsTrue(requests.Count == 2);
+                    Assert.AreEqual(requests[0], "termstore?$select=id", true);
+                    Assert.AreEqual(requests[1], "termstore/groups?$select=displayname,id", true);
+                }
 
-        [TestMethod]
-        [Ignore]
-        [ExpectedException(typeof(ClientException))]
-        public async Task GetLinqTermStoreSingleSimpleNormalAndExpandProperty()
-        {
-            // x BERT: Should we review/remove this test?
+                [TestMethod]
+                [ExpectedException(typeof(ClientException))]
+                public async Task GetTeamExpressionExpandableKeyPropertyPlusLoadPlusExpandKeyProperty()
+                {
+                    var requests = await GetAPICallTestAsync(BuildModel<TermStore, ITermStore>(new Expression<Func<ITermStore, object>>[] { p => p.Id, p => p.Groups.QueryProperties(
+                        p=>p.Name, p=>p.Id, p=>p.Sets )
+                    }));
+                }
+                #endregion
+        */
 
-            // Throws exception since expand via a separate query (like for loading the Terms) is not possible
-            var requests = await GetODataAPICallTestAsync(
-                BuildModel<TermSet, ITermSet>(new Expression<Func<ITermSet, object>>[] { p => p.Id, p => p.Terms }),
-                new ODataQuery<ITermSet> { Top = 10, Skip = 5 });
-        }
+        /*
+                #region Linq query tests
 
-        [TestMethod]
-        [Ignore]
-        public async Task GetLinqListPlusLoad()
-        {
-            var requests = await GetODataAPICallTestAsync(
-                BuildModel<List, IList>(new Expression<Func<IList, object>>[] { p => p.ListExperience, p => p.Fields.QueryProperties(p => p.Id, p => p.InternalName) }),
-                new ODataQuery<IList> { Top = 10, Skip = 5 });
-            Assert.AreEqual(requests[0], "_api/web/lists?$select=id,listexperienceoptions,fields%2fid,fields%2finternalname&$expand=fields&$top=10&$skip=5", true);
-        }
+                [TestMethod]
+                [Ignore]
+                public async Task GetLinqListGraph()
+                {
+                    //NOTE: $skip does not work ~ should result in exception once we've the needed metadata to check for that
+                    var requests = await GetODataAPICallTestAsync(BuildModel<List, IList>(), new ODataQuery<IList> { Top = 10, Skip = 5 });
+                    // Using default load without specifying fields or filter will use REST
+                    Assert.AreEqual(requests[0], "_api/web/lists?$top=10&$skip=5", true);
+                }
 
-        #endregion
+                [TestMethod]
+                [Ignore]
+                public async Task GetLinqListGraphSingleSimpleProperty()
+                {
+                    //NOTE: $skip does not work ~ should result in exception once we've the needed metadata to check for that
+                    var requests = await GetODataAPICallTestAsync(
+                        BuildModel<List, IList>(new Expression<Func<IList, object>>[] { p => p.Title }),
+                        new ODataQuery<IList> { Top = 10, Skip = 5 });
+                    Assert.AreEqual(requests[0], "sites/{Parent.GraphId}/lists?$select=id,displayName,system&$top=10&$skip=5", true);
+                }
 
-        #region Combined tests: expression + linq based filter (like used in the collection Get methods)
+                [TestMethod]
+                [Ignore]
+                public async Task GetLinqListGraphMultipleSimpleProperty()
+                {
+                    //NOTE: $skip does not work ~ should result in exception once we've the needed metadata to check for that
+                    var requests = await GetODataAPICallTestAsync(
+                        BuildModel<List, IList>(new Expression<Func<IList, object>>[] { p => p.Title, p => p.Description }),
+                        new ODataQuery<IList> { Top = 10, Skip = 5 });
+                    Assert.AreEqual(requests[0], "sites/{Parent.GraphId}/lists?$select=id,displayName,description,system&$top=10&$skip=5", true);
+                }
 
-        [TestMethod]
-        [Ignore]
-        public async Task GetCombinedNoExpressionNoFilter()
-        {
-            var requests = await GetODataAPICallTestAsync(BuildModel<List, IList>(null), null, collectionMode: true);
-            Assert.AreEqual(requests[0], "_api/web/lists", true);
-        }
+                [TestMethod]
+                [Ignore]
+                public async Task GetLinqListSingleSimpleProperty()
+                {
+                    var requests = await GetODataAPICallTestAsync(
+                        BuildModel<List, IList>(new Expression<Func<IList, object>>[] { p => p.ListExperience }),
+                        new ODataQuery<IList> { Top = 10, Skip = 5 });
+                    Assert.AreEqual(requests[0], "_api/web/lists?$select=Id,ListExperienceOptions&$top=10&$skip=5", true);
+                }
 
-        [TestMethod]
-        [Ignore]
-        public async Task GetCombinedExpressionGraphPropertyNoFilter()
-        {
-            var requests = await GetODataAPICallTestAsync(BuildModel<List, IList>(new Expression<Func<IList, object>>[] { p => p.Title }), null, collectionMode: true);
-            Assert.AreEqual(requests[0], "sites/{Parent.GraphId}/lists?$select=id,displayname,system,createdDateTime,description,eTag,lastModifiedDateTime,name,webUrl,createdBy,lastModifiedBy,parentReference,list", true);
-        }
+                [TestMethod]
+                [Ignore]
+                public async Task GetLinqListMultipleSimpleProperty()
+                {
+                    var requests = await GetODataAPICallTestAsync(
+                        BuildModel<List, IList>(new Expression<Func<IList, object>>[] { p => p.ListExperience, p => p.Description }),
+                        new ODataQuery<IList> { Top = 10, Skip = 5 });
+                    Assert.AreEqual(requests[0], "_api/web/lists?$select=id,description,listexperienceoptions&$top=10&$skip=5", true);
+                }
 
-        [TestMethod]
-        [Ignore]
-        public async Task GetCombinedNotGraphFirstExpressionGraphPropertyNoFilter()
-        {
-            var requests = await GetODataAPICallTestAsync(BuildModel<List, IList>(new Expression<Func<IList, object>>[] { p => p.Title }, graphFirst: false), null, collectionMode: true);
-            Assert.AreEqual(requests[0], "_api/web/lists?$select=id,title", true);
-        }
+                [TestMethod]
+                [Ignore]
+                public async Task GetLinqListSingleSimpleExpandProperty()
+                {
+                    //NOTE: $skip does not work ~ should result in exception once we've the needed metadata to check for that
+                    var requests = await GetODataAPICallTestAsync(
+                        BuildModel<List, IList>(new Expression<Func<IList, object>>[] { p => p.InformationRightsManagementSettings }),
+                        new ODataQuery<IList> { Top = 10, Skip = 5 });
+                    Assert.AreEqual(requests[0], "_api/web/lists?$select=id,informationrightsmanagementsettings&$expand=informationrightsmanagementsettings&$top=10&$skip=5", true);
+                }
 
-        [TestMethod]
-        [Ignore]
-        public async Task GetCombinedExpressionGraphExpandableViaExtraQueryNoFilter()
-        {
-            var requests = await GetODataAPICallTestAsync(BuildModel<List, IList>(new Expression<Func<IList, object>>[] { p => p.Title, p => p.Items }), null, collectionMode: true);
-            Assert.AreEqual(requests[0], "_api/web/lists?$select=id,title,items&$expand=items", true);
-        }
+                [TestMethod]
+                [Ignore]
+                public async Task GetLinqListSingleSimpleNormalAndExpandProperty()
+                {
+                    //NOTE: $skip does not work ~ should result in exception once we've the needed metadata to check for that
+                    var requests = await GetODataAPICallTestAsync(
+                        BuildModel<List, IList>(new Expression<Func<IList, object>>[] { p => p.Title, p => p.InformationRightsManagementSettings }),
+                        new ODataQuery<IList> { Top = 10, Skip = 5 });
+                    Assert.AreEqual(requests[0], "_api/web/lists?$select=id,title,informationrightsmanagementsettings&$expand=informationrightsmanagementsettings&$top=10&$skip=5", true);
+                }
 
-        [TestMethod]
-        [Ignore]
-        public async Task GetCombinedNotGraphFirstExpressionGraphExpandableViaExtraQueryNoFilter()
-        {
-            var requests = await GetODataAPICallTestAsync(BuildModel<List, IList>(new Expression<Func<IList, object>>[] { p => p.Title, p => p.Items }, graphFirst: false), null, collectionMode: true);
-            Assert.AreEqual(requests[0], "_api/web/lists?$select=id,title,items&$expand=items", true);
-        }
+                [TestMethod]
+                [Ignore]
+                [ExpectedException(typeof(ClientException))]
+                public async Task GetLinqTermStoreSingleSimpleNormalAndExpandProperty()
+                {
+                    // x BERT: Should we review/remove this test?
 
-        [TestMethod]
-        [Ignore]
-        public async Task GetCombinedExpressionNonGraphPropertyNoFilter()
-        {
-            var requests = await GetODataAPICallTestAsync(BuildModel<List, IList>(new Expression<Func<IList, object>>[] { p => p.ListExperience }), null, collectionMode: true);
-            Assert.AreEqual(requests[0], "_api/web/lists?$select=id,listexperienceoptions", true);
-        }
+                    // Throws exception since expand via a separate query (like for loading the Terms) is not possible
+                    var requests = await GetODataAPICallTestAsync(
+                        BuildModel<TermSet, ITermSet>(new Expression<Func<ITermSet, object>>[] { p => p.Id, p => p.Terms }),
+                        new ODataQuery<ITermSet> { Top = 10, Skip = 5 });
+                }
 
-        [TestMethod]
-        [Ignore]
-        public async Task GetCombinedNotGraphFirstExpressionNonGraphPropertyNoFilter()
-        {
-            var requests = await GetODataAPICallTestAsync(BuildModel<List, IList>(new Expression<Func<IList, object>>[] { p => p.ListExperience }, graphFirst: false), null, collectionMode: true);
-            Assert.AreEqual(requests[0], "_api/web/lists?$select=id,listexperienceoptions", true);
-        }
+                [TestMethod]
+                [Ignore]
+                public async Task GetLinqListPlusLoad()
+                {
+                    var requests = await GetODataAPICallTestAsync(
+                        BuildModel<List, IList>(new Expression<Func<IList, object>>[] { p => p.ListExperience, p => p.Fields.QueryProperties(p => p.Id, p => p.InternalName) }),
+                        new ODataQuery<IList> { Top = 10, Skip = 5 });
+                    Assert.AreEqual(requests[0], "_api/web/lists?$select=id,listexperienceoptions,fields%2fid,fields%2finternalname&$expand=fields&$top=10&$skip=5", true);
+                }
 
-        [TestMethod]
-        [Ignore]
-        public async Task GetCombinedExpressionMixedPropertyNoFilter()
-        {
-            var requests = await GetODataAPICallTestAsync(BuildModel<List, IList>(new Expression<Func<IList, object>>[] { p => p.Title, p => p.ListExperience }), null, collectionMode: true);
-            Assert.AreEqual(requests[0], "_api/web/lists?$select=id,title,listexperienceoptions", true);
-        }
+                #endregion
 
-        [TestMethod]
-        [Ignore]
-        public async Task GetCombinedNotGraphFirstExpressionMixedPropertyNoFilter()
-        {
-            var requests = await GetODataAPICallTestAsync(BuildModel<List, IList>(new Expression<Func<IList, object>>[] { p => p.Title, p => p.ListExperience }, graphFirst: false), null, collectionMode: true);
-            Assert.AreEqual(requests[0], "_api/web/lists?$select=id,title,listexperienceoptions", true);
-        }
+                #region Combined tests: expression + linq based filter (like used in the collection Get methods)
 
-        [TestMethod]
-        [Ignore]
-        public async Task GetCombinedNoExpressionGraphPropertyFilter()
-        {
-            var requests = await GetODataAPICallTestAsync(BuildModel<List, IList>(null), null, collectionMode: true,
-                                                          filter: new Expression<Func<IList, bool>>[] { p => p.Title == "bla" }, firstOrDefaultMode: false);
-            Assert.AreEqual(requests[0], "_api/web/lists?$filter=Title+eq+%27bla%27", true);
-        }
+                [TestMethod]
+                [Ignore]
+                public async Task GetCombinedNoExpressionNoFilter()
+                {
+                    var requests = await GetODataAPICallTestAsync(BuildModel<List, IList>(null), null, collectionMode: true);
+                    Assert.AreEqual(requests[0], "_api/web/lists", true);
+                }
 
-        [TestMethod]
-        [Ignore]
-        public async Task GetCombinedNoExpressionGraphPropertyFilterForFirstOrDefault()
-        {
-            var requests = await GetODataAPICallTestAsync(BuildModel<List, IList>(null), null, collectionMode: true,
-                                                          filter: new Expression<Func<IList, bool>>[] { p => p.Title == "bla" }, firstOrDefaultMode: true);
-            Assert.AreEqual(requests[0], "_api/web/lists?$filter=Title+eq+%27bla%27&$top=1", true);
-        }
+                [TestMethod]
+                [Ignore]
+                public async Task GetCombinedExpressionGraphPropertyNoFilter()
+                {
+                    var requests = await GetODataAPICallTestAsync(BuildModel<List, IList>(new Expression<Func<IList, object>>[] { p => p.Title }), null, collectionMode: true);
+                    Assert.AreEqual(requests[0], "sites/{Parent.GraphId}/lists?$select=id,displayname,system,createdDateTime,description,eTag,lastModifiedDateTime,name,webUrl,createdBy,lastModifiedBy,parentReference,list", true);
+                }
 
-        [TestMethod]
-        [Ignore]
-        public async Task GetCombinedNotGraphFirstNoExpressionGraphPropertyFilter()
-        {
-            var requests = await GetODataAPICallTestAsync(BuildModel<List, IList>(null, graphFirst: false), null, collectionMode: true,
-                                                          filter: new Expression<Func<IList, bool>>[] { p => p.Title == "bla" }, firstOrDefaultMode: false);
-            Assert.AreEqual(requests[0], "_api/web/lists?$filter=Title+eq+%27bla%27", true);
-        }
+                [TestMethod]
+                [Ignore]
+                public async Task GetCombinedNotGraphFirstExpressionGraphPropertyNoFilter()
+                {
+                    var requests = await GetODataAPICallTestAsync(BuildModel<List, IList>(new Expression<Func<IList, object>>[] { p => p.Title }, graphFirst: false), null, collectionMode: true);
+                    Assert.AreEqual(requests[0], "_api/web/lists?$select=id,title", true);
+                }
 
-        [TestMethod]
-        [Ignore]
-        public async Task GetCombinedNoExpressionNonGraphPropertyFilter()
-        {
-            var requests = await GetODataAPICallTestAsync(BuildModel<List, IList>(null), null, collectionMode: true,
-                                                          filter: new Expression<Func<IList, bool>>[] { p => p.ListExperience == ListExperience.ClassicExperience }, firstOrDefaultMode: false);
-            Assert.AreEqual(requests[0], "_api/web/lists?$filter=ListExperienceOptions+eq+1", true);
-        }
+                [TestMethod]
+                [Ignore]
+                public async Task GetCombinedExpressionGraphExpandableViaExtraQueryNoFilter()
+                {
+                    var requests = await GetODataAPICallTestAsync(BuildModel<List, IList>(new Expression<Func<IList, object>>[] { p => p.Title, p => p.Items }), null, collectionMode: true);
+                    Assert.AreEqual(requests[0], "_api/web/lists?$select=id,title,items&$expand=items", true);
+                }
 
-        [TestMethod]
-        [Ignore]
-        public async Task GetCombinedNotGraphFirstNoExpressionNonGraphPropertyFilter()
-        {
-            var requests = await GetODataAPICallTestAsync(BuildModel<List, IList>(null, graphFirst: false), null, collectionMode: true,
-                                                          filter: new Expression<Func<IList, bool>>[] { p => p.ListExperience == ListExperience.ClassicExperience }, firstOrDefaultMode: false);
-            Assert.AreEqual(requests[0], "_api/web/lists?$filter=ListExperienceOptions+eq+1", true);
-        }
+                [TestMethod]
+                [Ignore]
+                public async Task GetCombinedNotGraphFirstExpressionGraphExpandableViaExtraQueryNoFilter()
+                {
+                    var requests = await GetODataAPICallTestAsync(BuildModel<List, IList>(new Expression<Func<IList, object>>[] { p => p.Title, p => p.Items }, graphFirst: false), null, collectionMode: true);
+                    Assert.AreEqual(requests[0], "_api/web/lists?$select=id,title,items&$expand=items", true);
+                }
 
-        [TestMethod]
-        [Ignore]
-        public async Task GetCombinedNoExpressionNonGraphPropertyWithMappingFilter()
-        {
-            var requests = await GetODataAPICallTestAsync(BuildModel<List, IList>(null), null, collectionMode: true,
-                                                          filter: new Expression<Func<IList, bool>>[] { p => p.DocumentTemplate == "bla" }, firstOrDefaultMode: false);
-            // Note that we used DocumentTemplate in the filter expression while the query uses DocumentTemplateUrl
-            Assert.AreEqual(requests[0], "_api/web/lists?$filter=DocumentTemplateUrl+eq+%27bla%27", true);
-        }
+                [TestMethod]
+                [Ignore]
+                public async Task GetCombinedExpressionNonGraphPropertyNoFilter()
+                {
+                    var requests = await GetODataAPICallTestAsync(BuildModel<List, IList>(new Expression<Func<IList, object>>[] { p => p.ListExperience }), null, collectionMode: true);
+                    Assert.AreEqual(requests[0], "_api/web/lists?$select=id,listexperienceoptions", true);
+                }
 
-        [TestMethod]
-        [Ignore]
-        public async Task GetCombinedNoExpressionMixedPropertyFilter()
-        {
-            var requests = await GetODataAPICallTestAsync(BuildModel<List, IList>(null), null, collectionMode: true,
-                                                          filter: new Expression<Func<IList, bool>>[] { p => p.Title == "bla" && p.DocumentTemplate == "bla" }, firstOrDefaultMode: false);
-            Assert.AreEqual(requests[0], "_api/web/lists?$filter=(Title+eq+%27bla%27+and+DocumentTemplateUrl+eq+%27bla%27)", true);
-        }
+                [TestMethod]
+                [Ignore]
+                public async Task GetCombinedNotGraphFirstExpressionNonGraphPropertyNoFilter()
+                {
+                    var requests = await GetODataAPICallTestAsync(BuildModel<List, IList>(new Expression<Func<IList, object>>[] { p => p.ListExperience }, graphFirst: false), null, collectionMode: true);
+                    Assert.AreEqual(requests[0], "_api/web/lists?$select=id,listexperienceoptions", true);
+                }
 
-        [TestMethod]
-        [Ignore]
-        public async Task GetCombinedGraphExpressionGraphPropertyFilter()
-        {
-            var requests = await GetODataAPICallTestAsync(BuildModel<List, IList>(new Expression<Func<IList, object>>[] { p => p.Title }), null, collectionMode: true,
-                                                          filter: new Expression<Func<IList, bool>>[] { p => p.Title == "bla" }, firstOrDefaultMode: false);
-            Assert.AreEqual(requests[0], "sites/{Parent.GraphId}/lists?$select=id,displayname,system&$filter=displayName+eq+%27bla%27", true);
-        }
+                [TestMethod]
+                [Ignore]
+                public async Task GetCombinedExpressionMixedPropertyNoFilter()
+                {
+                    var requests = await GetODataAPICallTestAsync(BuildModel<List, IList>(new Expression<Func<IList, object>>[] { p => p.Title, p => p.ListExperience }), null, collectionMode: true);
+                    Assert.AreEqual(requests[0], "_api/web/lists?$select=id,title,listexperienceoptions", true);
+                }
 
-        [TestMethod]
-        [Ignore]
-        public async Task GetCombinedNotGraphFirstGraphExpressionGraphPropertyFilter()
-        {
-            var requests = await GetODataAPICallTestAsync(BuildModel<List, IList>(new Expression<Func<IList, object>>[] { p => p.Title }, graphFirst: false), null, collectionMode: true,
-                                                          filter: new Expression<Func<IList, bool>>[] { p => p.Title == "bla" }, firstOrDefaultMode: false);
-            Assert.AreEqual(requests[0], "_api/web/lists?$select=id,title&$filter=Title+eq+%27bla%27", true);
-        }
-        #endregion
-*/
+                [TestMethod]
+                [Ignore]
+                public async Task GetCombinedNotGraphFirstExpressionMixedPropertyNoFilter()
+                {
+                    var requests = await GetODataAPICallTestAsync(BuildModel<List, IList>(new Expression<Func<IList, object>>[] { p => p.Title, p => p.ListExperience }, graphFirst: false), null, collectionMode: true);
+                    Assert.AreEqual(requests[0], "_api/web/lists?$select=id,title,listexperienceoptions", true);
+                }
+
+                [TestMethod]
+                [Ignore]
+                public async Task GetCombinedNoExpressionGraphPropertyFilter()
+                {
+                    var requests = await GetODataAPICallTestAsync(BuildModel<List, IList>(null), null, collectionMode: true,
+                                                                  filter: new Expression<Func<IList, bool>>[] { p => p.Title == "bla" }, firstOrDefaultMode: false);
+                    Assert.AreEqual(requests[0], "_api/web/lists?$filter=Title+eq+%27bla%27", true);
+                }
+
+                [TestMethod]
+                [Ignore]
+                public async Task GetCombinedNoExpressionGraphPropertyFilterForFirstOrDefault()
+                {
+                    var requests = await GetODataAPICallTestAsync(BuildModel<List, IList>(null), null, collectionMode: true,
+                                                                  filter: new Expression<Func<IList, bool>>[] { p => p.Title == "bla" }, firstOrDefaultMode: true);
+                    Assert.AreEqual(requests[0], "_api/web/lists?$filter=Title+eq+%27bla%27&$top=1", true);
+                }
+
+                [TestMethod]
+                [Ignore]
+                public async Task GetCombinedNotGraphFirstNoExpressionGraphPropertyFilter()
+                {
+                    var requests = await GetODataAPICallTestAsync(BuildModel<List, IList>(null, graphFirst: false), null, collectionMode: true,
+                                                                  filter: new Expression<Func<IList, bool>>[] { p => p.Title == "bla" }, firstOrDefaultMode: false);
+                    Assert.AreEqual(requests[0], "_api/web/lists?$filter=Title+eq+%27bla%27", true);
+                }
+
+                [TestMethod]
+                [Ignore]
+                public async Task GetCombinedNoExpressionNonGraphPropertyFilter()
+                {
+                    var requests = await GetODataAPICallTestAsync(BuildModel<List, IList>(null), null, collectionMode: true,
+                                                                  filter: new Expression<Func<IList, bool>>[] { p => p.ListExperience == ListExperience.ClassicExperience }, firstOrDefaultMode: false);
+                    Assert.AreEqual(requests[0], "_api/web/lists?$filter=ListExperienceOptions+eq+1", true);
+                }
+
+                [TestMethod]
+                [Ignore]
+                public async Task GetCombinedNotGraphFirstNoExpressionNonGraphPropertyFilter()
+                {
+                    var requests = await GetODataAPICallTestAsync(BuildModel<List, IList>(null, graphFirst: false), null, collectionMode: true,
+                                                                  filter: new Expression<Func<IList, bool>>[] { p => p.ListExperience == ListExperience.ClassicExperience }, firstOrDefaultMode: false);
+                    Assert.AreEqual(requests[0], "_api/web/lists?$filter=ListExperienceOptions+eq+1", true);
+                }
+
+                [TestMethod]
+                [Ignore]
+                public async Task GetCombinedNoExpressionNonGraphPropertyWithMappingFilter()
+                {
+                    var requests = await GetODataAPICallTestAsync(BuildModel<List, IList>(null), null, collectionMode: true,
+                                                                  filter: new Expression<Func<IList, bool>>[] { p => p.DocumentTemplate == "bla" }, firstOrDefaultMode: false);
+                    // Note that we used DocumentTemplate in the filter expression while the query uses DocumentTemplateUrl
+                    Assert.AreEqual(requests[0], "_api/web/lists?$filter=DocumentTemplateUrl+eq+%27bla%27", true);
+                }
+
+                [TestMethod]
+                [Ignore]
+                public async Task GetCombinedNoExpressionMixedPropertyFilter()
+                {
+                    var requests = await GetODataAPICallTestAsync(BuildModel<List, IList>(null), null, collectionMode: true,
+                                                                  filter: new Expression<Func<IList, bool>>[] { p => p.Title == "bla" && p.DocumentTemplate == "bla" }, firstOrDefaultMode: false);
+                    Assert.AreEqual(requests[0], "_api/web/lists?$filter=(Title+eq+%27bla%27+and+DocumentTemplateUrl+eq+%27bla%27)", true);
+                }
+
+                [TestMethod]
+                [Ignore]
+                public async Task GetCombinedGraphExpressionGraphPropertyFilter()
+                {
+                    var requests = await GetODataAPICallTestAsync(BuildModel<List, IList>(new Expression<Func<IList, object>>[] { p => p.Title }), null, collectionMode: true,
+                                                                  filter: new Expression<Func<IList, bool>>[] { p => p.Title == "bla" }, firstOrDefaultMode: false);
+                    Assert.AreEqual(requests[0], "sites/{Parent.GraphId}/lists?$select=id,displayname,system&$filter=displayName+eq+%27bla%27", true);
+                }
+
+                [TestMethod]
+                [Ignore]
+                public async Task GetCombinedNotGraphFirstGraphExpressionGraphPropertyFilter()
+                {
+                    var requests = await GetODataAPICallTestAsync(BuildModel<List, IList>(new Expression<Func<IList, object>>[] { p => p.Title }, graphFirst: false), null, collectionMode: true,
+                                                                  filter: new Expression<Func<IList, bool>>[] { p => p.Title == "bla" }, firstOrDefaultMode: false);
+                    Assert.AreEqual(requests[0], "_api/web/lists?$select=id,title&$filter=Title+eq+%27bla%27", true);
+                }
+                #endregion
+        */
     }
 }

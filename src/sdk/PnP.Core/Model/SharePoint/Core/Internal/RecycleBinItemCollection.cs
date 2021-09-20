@@ -1,4 +1,3 @@
-using PnP.Core.Model.Teams;
 using PnP.Core.QueryModel;
 using PnP.Core.Services;
 using System;

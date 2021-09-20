@@ -163,6 +163,19 @@ You can also control the emphasis (background color) of the section and vertical
 page.AddSection(CanvasSectionTemplate.TwoColumnVerticalSection, 1, VariantThemeType.Neutral, VariantThemeType.Strong);
 ```
 
+### Configuring page sections
+
+Adding a section to a page gets you a default, non-collapsible, section. If you want your section to be collapsible then simply set the `Collapsible` property to true and optionally configure the additional settings for collapsible sections:
+
+```csharp
+page.AddSection(CanvasSectionTemplate.TwoColumn, 1, VariantThemeType.Soft);
+page.Sections[0].Collapsible = true;
+page.Sections[0].DisplayName = "My collapsible section";
+page.Sections[0].IsExpanded = false;
+page.Sections[0].ShowDividerLine = false;
+page.Sections[0].IconAlignment = IconAlignment.Right;
+```
+
 ### Adding controls to the page
 
 A control is either a piece of text or a web part and can be added in one of the section columns. Below sample shows how to add the text part to an existing section column. It boils down to these two steps:

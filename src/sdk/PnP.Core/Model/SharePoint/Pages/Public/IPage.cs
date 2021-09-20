@@ -42,6 +42,11 @@ namespace PnP.Core.Model.SharePoint
         List<ICanvasControl> Controls { get; }
 
         /// <summary>
+        /// List of controls on this page's header
+        /// </summary>
+        List<ICanvasControl> HeaderControls { get; }
+
+        /// <summary>
         /// Returns the page header for this page
         /// </summary>
         IPageHeader PageHeader { get; }
@@ -107,6 +112,11 @@ namespace PnP.Core.Model.SharePoint
         IList PagesLibrary { get; }
 
         /// <summary>
+        /// ListItem linked to this page
+        /// </summary>
+        public IListItem PageListItem { get; }
+
+        /// <summary>
         /// ID value of the page (only available when the page was saved)
         /// </summary>
         public int? PageId { get; }
@@ -125,6 +135,11 @@ namespace PnP.Core.Model.SharePoint
         /// The name of this page (available after saving the page)
         /// </summary>
         public string Name { get; }
+
+        /// <summary>
+        /// Returns the scheduled publish data of a page (only if publish was scheduled)
+        /// </summary>
+        public DateTime? ScheduledPublishDate { get; }
 
         /// <summary>
         /// Adds a new section to your client side page
@@ -178,6 +193,13 @@ namespace PnP.Core.Model.SharePoint
         public void AddControl(ICanvasControl control, int order);
 
         /// <summary>
+        /// Adds a new control to your client side page in the given section
+        /// </summary>
+        /// <param name="control"><see cref="ICanvasControl"/> to add</param>
+        /// <param name="section"><see cref="ICanvasSection"/> that will hold the control. Control will end up in the <see cref="ICanvasSection.DefaultColumn"/>.</param>
+        public void AddControl(ICanvasControl control, ICanvasSection section);
+
+        /// <summary>
         /// Adds a new control to your client side page in the given section with a given order
         /// </summary>
         /// <param name="control"><see cref="ICanvasControl"/> to add</param>
@@ -217,6 +239,13 @@ namespace PnP.Core.Model.SharePoint
         /// <param name="translateX">X focal point for image</param>
         /// <param name="translateY">Y focal point for image</param>
         public void SetCustomPageHeader(string serverRelativeImageUrl, double? translateX = null, double? translateY = null);
+
+        /// <summary>
+        /// Adds a new header control to your client side page with a given order. Used for topic page creation
+        /// </summary>
+        /// <param name="control"><see cref="ICanvasControl"/> to add</param>
+        /// <param name="order">Order of the control in the given section</param>
+        public void AddHeaderControl(ICanvasControl control, int order);
 
         /// <summary>
         /// Creates a new text part which can be configured and added to the page
@@ -312,6 +341,28 @@ namespace PnP.Core.Model.SharePoint
         /// </summary>
         /// <param name="comment">Publishing comment</param>
         public Task PublishAsync(string comment = null);
+
+        /// <summary>
+        /// Schedules the publication of a client side page
+        /// </summary>
+        /// <param name="publishDate">Date when the page needs to be publishing</param>
+        public Task SchedulePublishAsync(DateTime publishDate);
+
+        /// <summary>
+        /// Schedules the publication of a client side page
+        /// </summary>
+        /// <param name="publishDate">Date when the page needs to be publishing</param>
+        public void SchedulePublish(DateTime publishDate);
+
+        /// <summary>
+        /// Removes the publication schedule of a client side page
+        /// </summary>
+        public Task RemoveSchedulePublishAsync();
+
+        /// <summary>
+        /// Removes the publication schedule of a client side page
+        /// </summary>
+        public void RemoveSchedulePublish();
 
         /// <summary>
         /// Demotes an client side <see cref="PageLayoutType.Article"/> news page as a regular client side page
@@ -452,6 +503,56 @@ namespace PnP.Core.Model.SharePoint
         /// </summary>
         /// <returns><see cref="IPageTranslationStatusCollection"/> list containing information about this page's translations</returns>
         IPageTranslationStatusCollection TranslatePages();
+
+        /// <summary>
+        /// Get list item comments
+        /// </summary>
+        /// <param name="selectors">The expressions declaring the fields to select</param>
+        public Task<ICommentCollection> GetCommentsAsync(params Expression<Func<IComment, object>>[] selectors);
+
+        /// <summary>
+        /// Get list item comments
+        /// </summary>
+        /// <param name="selectors">The expressions declaring the fields to select</param>
+        public ICommentCollection GetComments(params Expression<Func<IComment, object>>[] selectors);
+
+        /// <summary>
+        /// Likes a page
+        /// </summary>
+        /// <returns></returns>
+        public Task LikeAsync();
+
+        /// <summary>
+        /// Likes a page
+        /// </summary>
+        /// <returns></returns>
+#pragma warning disable CA1716 // Identifiers should not match keywords
+        public void Like();
+#pragma warning restore CA1716 // Identifiers should not match keywords
+
+        /// <summary>
+        /// Unlikes a page
+        /// </summary>
+        /// <returns></returns>
+        public Task UnlikeAsync();
+
+        /// <summary>
+        /// Unlikes a page
+        /// </summary>
+        /// <returns></returns>
+        public void Unlike();
+
+        /// <summary>
+        /// Returns information about the likes on this page
+        /// </summary>
+        /// <returns></returns>
+        public Task<ILikedByInformation> GetLikedByInformationAsync();
+
+        /// <summary>
+        /// Returns information about the likes on this page
+        /// </summary>
+        /// <returns></returns>
+        public ILikedByInformation GetLikedByInformation();
     }
 
 }

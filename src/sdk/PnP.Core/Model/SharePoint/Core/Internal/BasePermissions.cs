@@ -1,6 +1,4 @@
-﻿using PnP.Core.Services;
-
-namespace PnP.Core.Model.SharePoint
+﻿namespace PnP.Core.Model.SharePoint
 {
     [SharePointType("SP.BasePermissions", Target = typeof(Web), Uri = "_api/Web/EffectiveBasePermissions)")]
     internal partial class BasePermissions : BaseDataModel<IBasePermissions>, IBasePermissions
@@ -116,7 +114,7 @@ namespace PnP.Core.Model.SharePoint
 
         public BasePermissions()
         {
-            this.ClearAll(); // initialize the values
+            ClearAll(); // initialize the values
         }
     }
 }

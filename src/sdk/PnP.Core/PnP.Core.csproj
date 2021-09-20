@@ -5,9 +5,9 @@
 		<LangVersion>8.0</LangVersion>
 		<RootNamespace>PnP.Core</RootNamespace>
 		<AssemblyName>PnP.Core</AssemblyName>
-		<Version>1.1.0</Version>
+		<Version>1.3.0</Version>
 		<GeneratePackageOnBuild>false</GeneratePackageOnBuild>
-		<Copyright>PnP 2020</Copyright>
+		<Copyright>PnP 2021</Copyright>
 		<Company>PnP</Company>
 		<Authors>PnP</Authors>
 		<Description>The PnP Core SDK provides a development model that unites SharePoint REST and Microsoft Graph in a high performance, lightweight library. The SDK uses a model which under the covers is automatically translated to the needed SharePoint REST or Microsoft Graph queries.</Description>
@@ -23,6 +23,8 @@
 		<Deterministic>true</Deterministic>
 		<Configurations>Debug;Release</Configurations>
 		<PackageIcon>nugeticon.png</PackageIcon>
+		<SignAssembly>true</SignAssembly>
+		<AssemblyOriginatorKeyFile>..\pnp.core.snk</AssemblyOriginatorKeyFile>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
@@ -46,12 +48,6 @@
 	    <DocumentationFile>obj\Debug\PnP.Core.xml</DocumentationFile>
 		<ContinuousIntegrationBuild>True</ContinuousIntegrationBuild>
 	</PropertyGroup>
-
-	<ItemGroup>
-		<Compile Remove="Services\Authentication\ToRemove\**" />
-		<EmbeddedResource Remove="Services\Authentication\ToRemove\**" />
-		<None Remove="Services\Authentication\ToRemove\**" />
-	</ItemGroup>
 
 	<ItemGroup Condition=" '$(TargetFramework)' == 'netstandard2.0' ">
 		<PackageReference Include="Microsoft.ApplicationInsights" Version="2.13.1" />
@@ -84,7 +80,8 @@
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
 		<PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0-*" PrivateAssets="All" />
-		<PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.8.0" />
+		<PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.12.2" />
+		<PackageReference Include="TimeZoneConverter" Version="3.5.0" />
 	</ItemGroup>
 
 	<ItemGroup>

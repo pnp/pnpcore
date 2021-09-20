@@ -1,9 +1,9 @@
---batchresponse_ba0f11f6-1f98-40ad-98ff-6b55a5209247
+--batchresponse_1295287e-9970-43b0-85b5-1e261bf8e217
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{"d":{"__metadata":{"id":"https://m365x215748.sharepoint.com/sites/AdminContentCenter/_api/machinelearning/publications/batchdelete","uri":"https://m365x215748.sharepoint.com/sites/AdminContentCenter/_api/machinelearning/publications/batchdelete","type":"Microsoft.Office.Server.ContentCenter.SPMachineLearningPublicationsResult"},"Details":{"__metadata":{"type":"Collection(Microsoft.Office.Server.ContentCenter.SPMachineLearningPublicationResult)"},"results":[{"ErrorMessage":null,"Publication":{"__metadata":{"type":"Microsoft.Office.Server.ContentCenter.SPMachineLearningPublicationEntityData"},"ModelUniqueId":"bb25a5be-aeed-436d-90e7-add975ac766e","TargetLibraryServerRelativeUrl":"/sites/AdminContentCenter/PNP_SDK_TEST_PublishUnPublishModelToList","TargetSiteUrl":"https://m365x215748.sharepoint.com/sites/AdminContentCenter","TargetWebServerRelativeUrl":"/sites/AdminContentCenter","ViewOption":"NewView"},"StatusCode":200}]},"TotalFailures":0,"TotalSuccesses":1}}
---batchresponse_ba0f11f6-1f98-40ad-98ff-6b55a5209247--
+{"d":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/ContentCenter/_api/machinelearning/publications/batchdelete","uri":"https://bertonline.sharepoint.com/sites/ContentCenter/_api/machinelearning/publications/batchdelete","type":"Microsoft.Office.Server.ContentCenter.SPMachineLearningPublicationsResult"},"Details":{"__metadata":{"type":"Collection(Microsoft.Office.Server.ContentCenter.SPMachineLearningPublicationResult)"},"results":[{"ErrorMessage":null,"Publication":{"__metadata":{"type":"Microsoft.Office.Server.ContentCenter.SPMachineLearningPublicationEntityData"},"ModelUniqueId":"ddeeb4c2-3f8e-4b6e-8b75-1d9c0db4210e","TargetLibraryServerRelativeUrl":"/sites/ContentCenter/PNP_SDK_TEST_PublishUnPublishModelToList","TargetSiteUrl":"https://bertonline.sharepoint.com/sites/ContentCenter","TargetWebServerRelativeUrl":"/sites/ContentCenter","ViewOption":"NewView"},"StatusCode":200}]},"TotalFailures":0,"TotalSuccesses":1}}
+--batchresponse_1295287e-9970-43b0-85b5-1e261bf8e217--

@@ -27,6 +27,7 @@
         internal const string _OriginalSourceItemId = "_OriginalSourceItemId";
         internal const string IdField = "ID";
         internal const string _SPSitePageFlags = "_SPSitePageFlags";
+        internal const string _PublishStartDate = "_PublishStartDate";
 
         // feature
         internal const string SitePagesFeatureId = "{b6917cb1-93a0-4b97-a84d-7cf49975d4ec}";

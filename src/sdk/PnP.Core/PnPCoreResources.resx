@@ -120,6 +120,9 @@
   <data name="Exception_ArgumentExpressionNotValid" xml:space="preserve">
     <value>Argument expression is not valid</value>
   </data>
+  <data name="Exception_BatchResult_BatchNotYetExecuted" xml:space="preserve">
+    <value>Cannot access the result since batch was not yet executed</value>
+  </data>
   <data name="Exception_CannotBeZero" xml:space="preserve">
     <value>{0} cannot be 0</value>
   </data>
@@ -179,6 +182,9 @@
   </data>
   <data name="Exception_LinqError_MissingValue" xml:space="preserve">
     <value>Missing value for {0} in {1}</value>
+  </data>
+  <data name="Exception_ListItemAdd_WrongInternalFieldName" xml:space="preserve">
+    <value>There was an exception while writing field {0}. Verify you're using the correct InternalName value for the field you want to write to.</value>
   </data>
   <data name="Exception_ListItemUpdate_NoFieldsLoaded" xml:space="preserve">
     <value>Please ensure your list Fields are loaded before getting list data. E.g. await list.LoadAsync(p =&gt; p.Fields.QueryProperties(p =&gt; p.InternalName, p =&gt; p.FieldTypeKind, p =&gt; p.TypeAsString, p =&gt; p.Title))</value>
@@ -282,6 +288,9 @@
   <data name="Exception_Unsupported_AddingContentTypeToList" xml:space="preserve">
     <value>Adding new content types on a list is not possible, use the AddAvailableContentType method to add an existing site content type</value>
   </data>
+  <data name="Exception_Unsupported_CannotAddBatch" xml:space="preserve">
+    <value>Batch could not be added to list of batches</value>
+  </data>
   <data name="Exception_Unsupported_CollectionModelIsNotQueryable" xml:space="preserve">
     <value>The model in the queried collection does not implement the IQueryableDataModel interface</value>
   </data>
@@ -340,10 +349,13 @@
     <value>The method '{0}' is not supported</value>
   </data>
   <data name="Exception_Unsupported_MissingSharePointPrincipal" xml:space="preserve">
-    <value>You need to provide the user via it's principal when adding a new item</value>
+    <value>You need to provide the user via it's principal when adding a list item or when updating it via one of the Update() methods. Updating using SystemUpdate() or SystemUpdateOverwriteVersion() do work with just the user id value</value>
   </data>
   <data name="Exception_Unsupported_NodeType" xml:space="preserve">
     <value>Node of type {0} of expression {1} is not supported</value>
+  </data>
+  <data name="Exception_Unsupported_PagePublishingOnSubWeb" xml:space="preserve">
+    <value>Page publish scheduling only works on the pages library in the root web of a site collection</value>
   </data>
   <data name="Exception_Unsupported_Projection" xml:space="preserve">
     <value>The projection is not supported</value>

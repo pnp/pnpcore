@@ -12,7 +12,7 @@ namespace PnP.Core.Services.Core.CSOM.Requests.Web
 
         public CreateContentTypeRequest(ContentTypeCreationInfo creationInfo)
         {
-            this.ContentTypeCreationInfo = creationInfo;
+            ContentTypeCreationInfo = creationInfo;
         }
 
         public object Result { get; set; }

@@ -5,6 +5,7 @@ using PnP.Core.Model.SharePoint;
 using PnP.Core.Model.Teams;
 using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -54,7 +55,7 @@ namespace PnP.Core.Services
         #region Internal properties
 
         internal readonly PnPGlobalSettingsOptions GlobalOptions;
-        internal readonly PnPContextFactoryOptions ContextOptions;
+        internal readonly PnPContextFactoryOptions ContextOptions;        
 
         #endregion
 
@@ -100,18 +101,18 @@ namespace PnP.Core.Services
             AuthenticationProvider = authenticationProvider;
             RestClient = sharePointRestClient;
             GraphClient = microsoftGraphClient;
-            this.GlobalOptions = globalOptions;
-            this.ContextOptions = contextOptions;
+            GlobalOptions = globalOptions;
+            ContextOptions = contextOptions;
             telemetry = telemetryManager;
 
-            if (this.ContextOptions != null)
+            if (ContextOptions != null)
             {
-                GraphFirst = this.ContextOptions.GraphFirst;
-                GraphAlwaysUseBeta = this.ContextOptions.GraphAlwaysUseBeta;
-                GraphCanUseBeta = this.ContextOptions.GraphCanUseBeta;
+                GraphFirst = ContextOptions.GraphFirst;
+                GraphAlwaysUseBeta = ContextOptions.GraphAlwaysUseBeta;
+                GraphCanUseBeta = ContextOptions.GraphCanUseBeta;
             }
 
-            BatchClient = new BatchClient(this, this.GlobalOptions, telemetryManager);
+            BatchClient = new BatchClient(this, GlobalOptions, telemetryManager);
         }
         #endregion
 
@@ -151,6 +152,11 @@ namespace PnP.Core.Services
         /// Unique id for this <see cref="PnPContext"/>
         /// </summary>
         internal Guid Id { get; private set; }
+
+        /// <summary>
+        /// Optional options specified during context creation, needed for context cloning
+        /// </summary>
+        internal PnPContextOptions LocalContextOptions { get; set; }
 
 #if DEBUG
 
@@ -466,7 +472,7 @@ namespace PnP.Core.Services
         {
             if (!uri.Equals(Uri))
             {
-                await PnPContextFactory.InitializeContextAsync(clonedContext).ConfigureAwait(false);
+                await PnPContextFactory.InitializeContextAsync(clonedContext, LocalContextOptions).ConfigureAwait(false);
             }
             else
             {
@@ -491,6 +497,80 @@ namespace PnP.Core.Services
                 Uri = uri
             };
             return clonedContext;
+        }
+
+        #endregion
+
+        #region Internal methods
+
+        internal async Task<bool> AccessTokenHasRoleAsync(string role)
+        {
+            return AnalyzeAccessToken(role, await AuthenticationProvider.GetAccessTokenAsync(Uri).ConfigureAwait(false), "roles");
+        }
+
+        internal static bool AccessTokenHasRole(string accessToken, string role)
+        {
+            return AnalyzeAccessToken(role, accessToken, "roles");
+        }
+
+        internal async Task<bool> AccessTokenHasScopeAsync(string scope)
+        {
+            return AnalyzeAccessToken(scope, await AuthenticationProvider.GetAccessTokenAsync(Uri).ConfigureAwait(false), "scp");
+        }
+
+        internal static bool AccessTokenHasScope(string accessToken, string scope)
+        {
+            return AnalyzeAccessToken(scope, accessToken, "scp");
+        }
+
+        internal async Task<bool> AccessTokenUsesApplicationPermissionsAsync()
+        {
+            return AccessTokenUsesRoles(await AuthenticationProvider.GetAccessTokenAsync(Uri).ConfigureAwait(false));
+        }
+
+        internal static bool AccessTokenUsesApplicationPermissions(string accessToken)
+        {
+            return AccessTokenUsesRoles(accessToken);
+        }
+
+        private static bool AnalyzeAccessToken(string role, string accessToken, string tokenPropertyToVerify)
+        {
+            if (!string.IsNullOrEmpty(accessToken))
+            {
+                var handler = new JwtSecurityTokenHandler();
+                var token = handler.ReadJwtToken(accessToken);
+
+                if (token != null)
+                {
+                    if (token.Payload.ContainsKey(tokenPropertyToVerify))
+                    {
+                        if (token.Payload[tokenPropertyToVerify].ToString().Contains(role, StringComparison.InvariantCultureIgnoreCase))
+                        {
+                            return true;
+                        }
+                    }
+
+                    return false;
+                }
+            }
+
+            return false;
+        }
+
+        private static bool AccessTokenUsesRoles(string accessToken)
+        {
+            if (!string.IsNullOrEmpty(accessToken))
+            {
+                var handler = new JwtSecurityTokenHandler();
+                var token = handler.ReadJwtToken(accessToken);
+
+                if (token != null)
+                {
+                    return token.Payload.ContainsKey("roles");
+                }
+            }
+
+            return false;
         }
 
         #endregion
@@ -589,7 +669,7 @@ namespace PnP.Core.Services
             if (disposing)
             {
                 // Future, lightweight, custom logic comes here
-                // Note: flushing telemetry does not belong here since apps potentially can create/dispose a log of contexts
+                // Note: flushing telemetry does not belong here since apps potentially can create/dispose a lot of contexts
             }
 
             disposed = true;

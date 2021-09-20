@@ -60,7 +60,10 @@ namespace PnP.Core.Model.SharePoint
         public int TimeMarkerPosition { get => GetValue<int>(); set => SetValue(value); }
 
         public string TimeSeparator { get => GetValue<string>(); set => SetValue(value); }
-        
+
+        [SharePointProperty("*")]
+        public object All { get => null; }
+
         public ITimeZone TimeZone { get => GetModelValue<ITimeZone>(); }
 
         public ITimeZoneCollection TimeZones { get => GetModelCollectionValue<ITimeZoneCollection>(); }

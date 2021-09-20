@@ -34,7 +34,7 @@ namespace PnP.Core.Services
         /// <summary>
         /// List with requests 
         /// </summary>
-        internal SortedList<int, BatchRequest> Requests { get; private set; } = new SortedList<int, BatchRequest>();
+        public SortedList<int, BatchRequest> Requests { get; internal set; } = new SortedList<int, BatchRequest>();
 
         /// <summary>
         /// List with batch results, will be populated when <see cref="ThrowOnError"/> is set
@@ -50,7 +50,7 @@ namespace PnP.Core.Services
         /// <summary>
         /// Was this <see cref="Batch"/> executed?
         /// </summary>
-        internal bool Executed { get; set; }
+        public bool Executed { get; internal set; }
 
         /// <summary>
         /// Only use Graph batching when all requests in the batch are targeting Graph
@@ -83,11 +83,10 @@ namespace PnP.Core.Services
             {
                 int apiTypeCount = 0;
 
-
-                if (Requests.Any(r => r.Value.ApiCall.Type == ApiType.SPORest)) { apiTypeCount++; }
-                // Graph v1 and beta are handled "together"
-                if (Requests.Any(r => r.Value.ApiCall.Type == ApiType.Graph || r.Value.ApiCall.Type == ApiType.GraphBeta)) { apiTypeCount++; }
-                if (Requests.Any(r => r.Value.ApiCall.Type == ApiType.CSOM)) { apiTypeCount++; }
+                if (Requests.Any(r => r.Value.ExecutionNeeded && r.Value.ApiCall.Type == ApiType.SPORest)) { apiTypeCount++; }
+                if (Requests.Any(r => r.Value.ExecutionNeeded && r.Value.ApiCall.Type == ApiType.Graph)) { apiTypeCount++; }
+                if (Requests.Any(r => r.Value.ExecutionNeeded && r.Value.ApiCall.Type == ApiType.GraphBeta)) { apiTypeCount++; }
+                if (Requests.Any(r => r.Value.ExecutionNeeded && r.Value.ApiCall.Type == ApiType.CSOM)) { apiTypeCount++; }
 
                 return apiTypeCount > 1;
             }

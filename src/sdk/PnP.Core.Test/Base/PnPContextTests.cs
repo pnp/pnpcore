@@ -1,9 +1,14 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using PnP.Core.Model;
+using PnP.Core.Model.SharePoint;
+using PnP.Core.QueryModel;
 using PnP.Core.Services;
+using PnP.Core.Test.Common;
 using PnP.Core.Test.Utilities;
 using System;
+using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
-using PnP.Core.Model;
 
 namespace PnP.Core.Test.Base
 {
@@ -173,6 +178,21 @@ namespace PnP.Core.Test.Base
         }
 
         [TestMethod]
+        public async Task UseGroupMethodsFromRegularContext()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                // Ensure the metadata on the group is populated
+                Assert.IsTrue((context.Group as IMetadataExtensible).Metadata.ContainsKey(PnPConstants.MetaDataGraphId));
+
+                // Perform a Graph call via the group
+                await context.Group.EnsurePropertiesAsync(g => g.Visibility);
+                Assert.IsTrue(context.Group.IsPropertyAvailable(p => p.Visibility));
+            }
+        }
+
+        [TestMethod]
         public async Task ContextCloningForSameSite()
         {
             //TestCommon.Instance.Mocking = false;
@@ -331,5 +351,365 @@ namespace PnP.Core.Test.Base
             }
         }
 
+        [TestMethod]
+        public async Task ConfigureWithContextOptions()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextWithOptionsAsync(TestCommon.TestSite, new PnPContextOptions()
+                                                            {
+                                                                AdditionalSitePropertiesOnCreate = new Expression<Func<ISite, object>>[] { s => s.Url, s => s.HubSiteId },
+                                                                AdditionalWebPropertiesOnCreate = new Expression<Func<IWeb, object>>[] { w => w.ServerRelativeUrl }
+                                                            })
+                )
+            {
+                Assert.IsNotNull(context.Web);
+                Assert.IsNotNull(context.Site);
+
+                // Default properties
+                Assert.IsTrue(context.Web.IsPropertyAvailable(p => p.Id));
+                Assert.IsTrue(context.Web.IsPropertyAvailable(p => p.Url));
+                Assert.IsTrue(context.Web.IsPropertyAvailable(p => p.RegionalSettings));
+                Assert.IsTrue(context.Web.RegionalSettings.IsPropertyAvailable(p => p.AM));
+                Assert.IsTrue(context.Web.RegionalSettings.IsPropertyAvailable(p => p.TimeSeparator));
+                Assert.IsTrue(context.Web.RegionalSettings.IsPropertyAvailable(p => p.TimeZone));
+                Assert.IsTrue(context.Web.RegionalSettings.TimeZone.IsPropertyAvailable(p => p.Description));
+                Assert.IsTrue(context.Web.RegionalSettings.TimeZone.IsPropertyAvailable(p => p.StandardBias));
+                Assert.IsTrue(context.Site.IsPropertyAvailable(p => p.Id));
+                Assert.IsTrue(context.Site.IsPropertyAvailable(p => p.GroupId));
+
+                // Extra properties
+                Assert.IsTrue(context.Web.IsPropertyAvailable(p => p.ServerRelativeUrl));
+                Assert.IsTrue(context.Site.IsPropertyAvailable(p => p.Url));
+                Assert.IsTrue(context.Site.IsPropertyAvailable(p => p.HubSiteId));
+
+            }
+        }
+
+        [TestMethod]
+        public async Task ConfigureWithComplexContextOptions()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextWithOptionsAsync(TestCommon.TestSite, new PnPContextOptions()
+            {
+                AdditionalSitePropertiesOnCreate = new Expression<Func<ISite, object>>[] { s => s.Url, s => s.HubSiteId,
+                                                                                           s => s.Features },
+                AdditionalWebPropertiesOnCreate = new Expression<Func<IWeb, object>>[] { w => w.ServerRelativeUrl,
+                                                                                         w => w.Fields, w => w.Features,
+                                                                                         w => w.Lists.QueryProperties(r => r.Title, 
+                                                                                            r => r.RootFolder.QueryProperties(p=>p.ServerRelativeUrl)) }
+            })
+                )
+            {
+                Assert.IsNotNull(context.Web);
+                Assert.IsNotNull(context.Site);
+
+                // Default properties
+                Assert.IsTrue(context.Web.IsPropertyAvailable(p => p.Id));
+                Assert.IsTrue(context.Web.IsPropertyAvailable(p => p.Url));
+                Assert.IsTrue(context.Web.IsPropertyAvailable(p => p.RegionalSettings));
+                Assert.IsTrue(context.Web.RegionalSettings.IsPropertyAvailable(p => p.AM));
+                Assert.IsTrue(context.Web.RegionalSettings.IsPropertyAvailable(p => p.TimeSeparator));
+                Assert.IsTrue(context.Web.RegionalSettings.IsPropertyAvailable(p => p.TimeZone));
+                Assert.IsTrue(context.Web.RegionalSettings.TimeZone.IsPropertyAvailable(p => p.Description));
+                Assert.IsTrue(context.Web.RegionalSettings.TimeZone.IsPropertyAvailable(p => p.StandardBias));
+                Assert.IsTrue(context.Site.IsPropertyAvailable(p => p.Id));
+                Assert.IsTrue(context.Site.IsPropertyAvailable(p => p.GroupId));
+
+                // Extra properties
+                Assert.IsTrue(context.Web.IsPropertyAvailable(p => p.ServerRelativeUrl));
+                Assert.IsTrue(context.Web.IsPropertyAvailable(p => p.Fields));
+                Assert.IsTrue(context.Web.Fields.Length > 0);
+                Assert.IsTrue(context.Web.IsPropertyAvailable(p => p.Features));
+                Assert.IsTrue(context.Web.Features.Length > 0);
+                Assert.IsTrue(context.Web.IsPropertyAvailable(p => p.Lists));
+                Assert.IsTrue(context.Web.Lists.AsRequested().FirstOrDefault().IsPropertyAvailable(p => p.Title));
+                Assert.IsTrue(context.Web.Lists.AsRequested().FirstOrDefault().IsPropertyAvailable(p => p.RootFolder));
+                Assert.IsTrue(context.Web.Lists.AsRequested().FirstOrDefault().RootFolder.IsPropertyAvailable(p=>p.ServerRelativeUrl));
+
+                Assert.IsTrue(context.Site.IsPropertyAvailable(p => p.Url));
+                Assert.IsTrue(context.Site.IsPropertyAvailable(p => p.HubSiteId));
+                Assert.IsTrue(context.Site.IsPropertyAvailable(p => p.Features));
+                Assert.IsTrue(context.Site.Features.Length > 0);
+
+            }
+        }
+
+        [TestMethod]
+        public async Task ContextCloningForSameSiteWithContextOptions()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextWithOptionsAsync(TestCommon.TestSite, new PnPContextOptions()
+            {
+                AdditionalSitePropertiesOnCreate = new Expression<Func<ISite, object>>[] { s => s.Url, s => s.HubSiteId },
+                AdditionalWebPropertiesOnCreate = new Expression<Func<IWeb, object>>[] { w => w.ServerRelativeUrl }
+            })
+                )
+            {
+                await context.Web.LoadAsync(p => p.Title);
+
+                using (var clonedContext = await TestCommon.Instance.CloneAsync(context, 2))
+                {
+                    Assert.AreEqual(context.Uri, clonedContext.Uri);
+                    Assert.AreEqual(context.AuthenticationProvider, clonedContext.AuthenticationProvider);
+
+                    Assert.AreEqual(context.GraphAlwaysUseBeta, clonedContext.GraphAlwaysUseBeta);
+                    Assert.AreEqual(context.GraphCanUseBeta, clonedContext.GraphCanUseBeta);
+                    Assert.AreEqual(context.GraphFirst, clonedContext.GraphFirst);
+
+                    Assert.AreEqual(context.RestClient, clonedContext.RestClient);
+                    Assert.AreEqual(context.GraphClient, clonedContext.GraphClient);
+                    Assert.AreEqual(context.Logger, clonedContext.Logger);
+
+                    // Cloning for the same site will not run context initialization to save on performance but will copy 
+                    // the earlier loaded data into the new model. Validate that everything needed was copied over
+                    Assert.AreEqual(context.Web.Id, clonedContext.Web.Id);
+                    Assert.AreEqual(context.Web.Url, clonedContext.Web.Url);
+
+                    Assert.AreEqual(context.Web.RegionalSettings.AM, clonedContext.Web.RegionalSettings.AM);
+                    Assert.AreEqual(context.Web.RegionalSettings.CollationLCID, clonedContext.Web.RegionalSettings.CollationLCID);
+                    Assert.AreEqual(context.Web.RegionalSettings.DateFormat, clonedContext.Web.RegionalSettings.DateFormat);
+                    Assert.AreEqual(context.Web.RegionalSettings.DateSeparator, clonedContext.Web.RegionalSettings.DateSeparator);
+                    Assert.AreEqual(context.Web.RegionalSettings.DecimalSeparator, clonedContext.Web.RegionalSettings.DecimalSeparator);
+                    Assert.AreEqual(context.Web.RegionalSettings.DigitGrouping, clonedContext.Web.RegionalSettings.DigitGrouping);
+                    Assert.AreEqual(context.Web.RegionalSettings.FirstDayOfWeek, clonedContext.Web.RegionalSettings.FirstDayOfWeek);
+                    Assert.AreEqual(context.Web.RegionalSettings.IsEastAsia, clonedContext.Web.RegionalSettings.IsEastAsia);
+                    Assert.AreEqual(context.Web.RegionalSettings.IsRightToLeft, clonedContext.Web.RegionalSettings.IsRightToLeft);
+                    Assert.AreEqual(context.Web.RegionalSettings.IsUIRightToLeft, clonedContext.Web.RegionalSettings.IsUIRightToLeft);
+                    Assert.AreEqual(context.Web.RegionalSettings.ListSeparator, clonedContext.Web.RegionalSettings.ListSeparator);
+                    Assert.AreEqual(context.Web.RegionalSettings.LocaleId, clonedContext.Web.RegionalSettings.LocaleId);
+                    Assert.AreEqual(context.Web.RegionalSettings.NegativeSign, clonedContext.Web.RegionalSettings.NegativeSign);
+                    Assert.AreEqual(context.Web.RegionalSettings.NegNumberMode, clonedContext.Web.RegionalSettings.NegNumberMode);
+                    Assert.AreEqual(context.Web.RegionalSettings.PM, clonedContext.Web.RegionalSettings.PM);
+                    Assert.AreEqual(context.Web.RegionalSettings.PositiveSign, clonedContext.Web.RegionalSettings.PositiveSign);
+                    Assert.AreEqual(context.Web.RegionalSettings.ShowWeeks, clonedContext.Web.RegionalSettings.ShowWeeks);
+                    Assert.AreEqual(context.Web.RegionalSettings.ThousandSeparator, clonedContext.Web.RegionalSettings.ThousandSeparator);
+                    Assert.AreEqual(context.Web.RegionalSettings.Time24, clonedContext.Web.RegionalSettings.Time24);
+                    Assert.AreEqual(context.Web.RegionalSettings.TimeMarkerPosition, clonedContext.Web.RegionalSettings.TimeMarkerPosition);
+                    Assert.AreEqual(context.Web.RegionalSettings.TimeSeparator, clonedContext.Web.RegionalSettings.TimeSeparator);
+
+                    Assert.AreEqual(context.Web.RegionalSettings.TimeZone.Description, clonedContext.Web.RegionalSettings.TimeZone.Description);
+                    Assert.AreEqual(context.Web.RegionalSettings.TimeZone.Bias, clonedContext.Web.RegionalSettings.TimeZone.Bias);
+                    Assert.AreEqual(context.Web.RegionalSettings.TimeZone.DaylightBias, clonedContext.Web.RegionalSettings.TimeZone.DaylightBias);
+                    Assert.AreEqual(context.Web.RegionalSettings.TimeZone.Id, clonedContext.Web.RegionalSettings.TimeZone.Id);
+                    Assert.AreEqual(context.Web.RegionalSettings.TimeZone.StandardBias, clonedContext.Web.RegionalSettings.TimeZone.StandardBias);
+
+                    Assert.AreEqual(context.Site.Id, clonedContext.Site.Id);
+                    Assert.AreEqual(context.Site.GroupId, clonedContext.Site.GroupId);
+
+                    // This is a new context, so id's have to be different
+                    Assert.AreNotEqual(context.Id, clonedContext.Id);
+
+                    // Extra properties
+                    Assert.AreEqual(context.Web.ServerRelativeUrl, clonedContext.Web.ServerRelativeUrl);
+                    Assert.AreEqual(context.Site.Url, clonedContext.Site.Url);
+                    Assert.AreEqual(context.Site.HubSiteId, clonedContext.Site.HubSiteId);
+
+                    // Check the cloned context options
+                    Assert.IsTrue(clonedContext.LocalContextOptions.AdditionalSitePropertiesOnCreate.Count() == 2);
+                    Assert.IsTrue(clonedContext.LocalContextOptions.AdditionalWebPropertiesOnCreate.Count() == 1);
+
+                }
+
+                // Since test cases work with mocking data we need to use a custom Clone method, this one will use
+                // the PnPContext.Clone method and additionally will copy of the "test" settings
+                using (var clonedContext = await TestCommon.Instance.CloneAsync(context, 1))
+                {
+                    await clonedContext.Web.LoadAsync(p => p.Title);
+
+                    Assert.AreEqual(context.Web.Title, clonedContext.Web.Title);
+                }
+            }
+        }
+
+        [TestMethod]
+        public async Task ContextCloningForSameSiteWithComplexContextOptions()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextWithOptionsAsync(TestCommon.TestSite, new PnPContextOptions()
+            {
+                AdditionalSitePropertiesOnCreate = new Expression<Func<ISite, object>>[] { s => s.Url, s => s.HubSiteId,
+                                                                                           s => s.Features },
+                AdditionalWebPropertiesOnCreate = new Expression<Func<IWeb, object>>[] { w => w.ServerRelativeUrl,
+                                                                                         w => w.Fields, w => w.Features,
+                                                                                         w => w.Lists.QueryProperties(r => r.Title,
+                                                                                            r => r.RootFolder.QueryProperties(p=>p.ServerRelativeUrl)) }
+            })
+                )
+            {
+                await context.Web.LoadAsync(p => p.Title);
+
+                using (var clonedContext = await TestCommon.Instance.CloneAsync(context, 2))
+                {
+                    Assert.AreEqual(context.Uri, clonedContext.Uri);
+                    Assert.AreEqual(context.AuthenticationProvider, clonedContext.AuthenticationProvider);
+
+                    Assert.AreEqual(context.GraphAlwaysUseBeta, clonedContext.GraphAlwaysUseBeta);
+                    Assert.AreEqual(context.GraphCanUseBeta, clonedContext.GraphCanUseBeta);
+                    Assert.AreEqual(context.GraphFirst, clonedContext.GraphFirst);
+
+                    Assert.AreEqual(context.RestClient, clonedContext.RestClient);
+                    Assert.AreEqual(context.GraphClient, clonedContext.GraphClient);
+                    Assert.AreEqual(context.Logger, clonedContext.Logger);
+
+                    // Cloning for the same site will not run context initialization to save on performance but will copy 
+                    // the earlier loaded data into the new model. Validate that everything needed was copied over
+                    Assert.AreEqual(context.Web.Id, clonedContext.Web.Id);
+                    Assert.AreEqual(context.Web.Url, clonedContext.Web.Url);
+
+                    Assert.AreEqual(context.Web.RegionalSettings.AM, clonedContext.Web.RegionalSettings.AM);
+                    Assert.AreEqual(context.Web.RegionalSettings.CollationLCID, clonedContext.Web.RegionalSettings.CollationLCID);
+                    Assert.AreEqual(context.Web.RegionalSettings.DateFormat, clonedContext.Web.RegionalSettings.DateFormat);
+                    Assert.AreEqual(context.Web.RegionalSettings.DateSeparator, clonedContext.Web.RegionalSettings.DateSeparator);
+                    Assert.AreEqual(context.Web.RegionalSettings.DecimalSeparator, clonedContext.Web.RegionalSettings.DecimalSeparator);
+                    Assert.AreEqual(context.Web.RegionalSettings.DigitGrouping, clonedContext.Web.RegionalSettings.DigitGrouping);
+                    Assert.AreEqual(context.Web.RegionalSettings.FirstDayOfWeek, clonedContext.Web.RegionalSettings.FirstDayOfWeek);
+                    Assert.AreEqual(context.Web.RegionalSettings.IsEastAsia, clonedContext.Web.RegionalSettings.IsEastAsia);
+                    Assert.AreEqual(context.Web.RegionalSettings.IsRightToLeft, clonedContext.Web.RegionalSettings.IsRightToLeft);
+                    Assert.AreEqual(context.Web.RegionalSettings.IsUIRightToLeft, clonedContext.Web.RegionalSettings.IsUIRightToLeft);
+                    Assert.AreEqual(context.Web.RegionalSettings.ListSeparator, clonedContext.Web.RegionalSettings.ListSeparator);
+                    Assert.AreEqual(context.Web.RegionalSettings.LocaleId, clonedContext.Web.RegionalSettings.LocaleId);
+                    Assert.AreEqual(context.Web.RegionalSettings.NegativeSign, clonedContext.Web.RegionalSettings.NegativeSign);
+                    Assert.AreEqual(context.Web.RegionalSettings.NegNumberMode, clonedContext.Web.RegionalSettings.NegNumberMode);
+                    Assert.AreEqual(context.Web.RegionalSettings.PM, clonedContext.Web.RegionalSettings.PM);
+                    Assert.AreEqual(context.Web.RegionalSettings.PositiveSign, clonedContext.Web.RegionalSettings.PositiveSign);
+                    Assert.AreEqual(context.Web.RegionalSettings.ShowWeeks, clonedContext.Web.RegionalSettings.ShowWeeks);
+                    Assert.AreEqual(context.Web.RegionalSettings.ThousandSeparator, clonedContext.Web.RegionalSettings.ThousandSeparator);
+                    Assert.AreEqual(context.Web.RegionalSettings.Time24, clonedContext.Web.RegionalSettings.Time24);
+                    Assert.AreEqual(context.Web.RegionalSettings.TimeMarkerPosition, clonedContext.Web.RegionalSettings.TimeMarkerPosition);
+                    Assert.AreEqual(context.Web.RegionalSettings.TimeSeparator, clonedContext.Web.RegionalSettings.TimeSeparator);
+
+                    Assert.AreEqual(context.Web.RegionalSettings.TimeZone.Description, clonedContext.Web.RegionalSettings.TimeZone.Description);
+                    Assert.AreEqual(context.Web.RegionalSettings.TimeZone.Bias, clonedContext.Web.RegionalSettings.TimeZone.Bias);
+                    Assert.AreEqual(context.Web.RegionalSettings.TimeZone.DaylightBias, clonedContext.Web.RegionalSettings.TimeZone.DaylightBias);
+                    Assert.AreEqual(context.Web.RegionalSettings.TimeZone.Id, clonedContext.Web.RegionalSettings.TimeZone.Id);
+                    Assert.AreEqual(context.Web.RegionalSettings.TimeZone.StandardBias, clonedContext.Web.RegionalSettings.TimeZone.StandardBias);
+
+                    Assert.AreEqual(context.Site.Id, clonedContext.Site.Id);
+                    Assert.AreEqual(context.Site.GroupId, clonedContext.Site.GroupId);
+
+                    // This is a new context, so id's have to be different
+                    Assert.AreNotEqual(context.Id, clonedContext.Id);
+
+                    // Extra properties: only simple properties are copied as part of the same site clone
+                    Assert.AreEqual(context.Web.ServerRelativeUrl, clonedContext.Web.ServerRelativeUrl);
+                    Assert.AreNotEqual(context.Web.Fields.Length, clonedContext.Web.Fields.Length);
+                    Assert.AreNotEqual(context.Web.Features.Length, clonedContext.Web.Features.Length);
+                    Assert.AreNotEqual(context.Web.Lists.Length, clonedContext.Web.Lists.Length);
+
+                    Assert.AreEqual(context.Site.Url, clonedContext.Site.Url);
+                    Assert.AreEqual(context.Site.HubSiteId, clonedContext.Site.HubSiteId);
+                    Assert.AreNotEqual(context.Site.Features.Length, clonedContext.Site.Features.Length);
+
+                    // Check the cloned context options
+                    Assert.IsTrue(clonedContext.LocalContextOptions.AdditionalSitePropertiesOnCreate.Count() == 2);
+                    Assert.IsTrue(clonedContext.LocalContextOptions.AdditionalWebPropertiesOnCreate.Count() == 1);
+
+                }
+
+                // Since test cases work with mocking data we need to use a custom Clone method, this one will use
+                // the PnPContext.Clone method and additionally will copy of the "test" settings
+                using (var clonedContext = await TestCommon.Instance.CloneAsync(context, 1))
+                {
+                    await clonedContext.Web.LoadAsync(p => p.Title);
+
+                    Assert.AreEqual(context.Web.Title, clonedContext.Web.Title);
+                }
+            }
+        }
+
+        [TestMethod]
+        public async Task ContextCloningForOtherConfigurationWithContextOptions()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextWithOptionsAsync(TestCommon.TestSite, new PnPContextOptions()
+            {
+                AdditionalSitePropertiesOnCreate = new Expression<Func<ISite, object>>[] { s => s.Url, s => s.HubSiteId,
+                                                                                           s => s.Features },
+                AdditionalWebPropertiesOnCreate = new Expression<Func<IWeb, object>>[] { w => w.ServerRelativeUrl,
+                                                                                         w => w.Fields, w => w.Features,
+                                                                                         w => w.Lists.QueryProperties(r => r.Title,
+                                                                                            r => r.RootFolder.QueryProperties(p=>p.ServerRelativeUrl)) }
+            })
+                )
+            {
+                await context.Web.LoadAsync(p => p.Title);
+
+                using (var clonedContext = await TestCommon.Instance.CloneAsync(context, TestCommon.NoGroupTestSite, 2))
+                {
+                    Assert.AreNotEqual(context.Uri, clonedContext.Uri);
+                    Assert.AreEqual(context.AuthenticationProvider, clonedContext.AuthenticationProvider);
+
+                    Assert.AreEqual(context.GraphAlwaysUseBeta, clonedContext.GraphAlwaysUseBeta);
+                    Assert.AreEqual(context.GraphCanUseBeta, clonedContext.GraphCanUseBeta);
+                    Assert.AreEqual(context.GraphFirst, clonedContext.GraphFirst);
+
+                    Assert.AreEqual(context.RestClient, clonedContext.RestClient);
+                    Assert.AreEqual(context.GraphClient, clonedContext.GraphClient);
+                    Assert.AreEqual(context.Logger, clonedContext.Logger);
+
+                    Assert.AreNotEqual(context.Id, clonedContext.Id);
+
+                    // Default properties
+                    Assert.IsTrue(clonedContext.Web.IsPropertyAvailable(p => p.Id));
+                    Assert.IsTrue(clonedContext.Web.IsPropertyAvailable(p => p.Url));
+                    Assert.IsTrue(clonedContext.Web.IsPropertyAvailable(p => p.RegionalSettings));
+                    Assert.IsTrue(clonedContext.Web.RegionalSettings.IsPropertyAvailable(p => p.AM));
+                    Assert.IsTrue(clonedContext.Web.RegionalSettings.IsPropertyAvailable(p => p.TimeSeparator));
+                    Assert.IsTrue(clonedContext.Web.RegionalSettings.IsPropertyAvailable(p => p.TimeZone));
+                    Assert.IsTrue(clonedContext.Web.RegionalSettings.TimeZone.IsPropertyAvailable(p => p.Description));
+                    Assert.IsTrue(clonedContext.Web.RegionalSettings.TimeZone.IsPropertyAvailable(p => p.StandardBias));
+                    Assert.IsTrue(clonedContext.Site.IsPropertyAvailable(p => p.Id));
+                    Assert.IsTrue(clonedContext.Site.IsPropertyAvailable(p => p.GroupId));
+
+                    // Extra properties: all extra properties are requested again as part of the clone for another url
+                    Assert.IsTrue(clonedContext.Web.IsPropertyAvailable(p => p.ServerRelativeUrl));
+                    Assert.IsTrue(clonedContext.Web.IsPropertyAvailable(p => p.Fields));
+                    Assert.IsTrue(clonedContext.Web.Fields.Length > 0);
+                    Assert.IsTrue(clonedContext.Web.IsPropertyAvailable(p => p.Features));
+                    Assert.IsTrue(clonedContext.Web.Features.Length > 0);
+                    Assert.IsTrue(clonedContext.Web.IsPropertyAvailable(p => p.Lists));
+                    Assert.IsTrue(clonedContext.Web.Lists.AsRequested().FirstOrDefault().IsPropertyAvailable(p => p.Title));
+                    Assert.IsTrue(clonedContext.Web.Lists.AsRequested().FirstOrDefault().IsPropertyAvailable(p => p.RootFolder));
+                    Assert.IsTrue(clonedContext.Web.Lists.AsRequested().FirstOrDefault().RootFolder.IsPropertyAvailable(p => p.ServerRelativeUrl));
+
+                    Assert.IsTrue(clonedContext.Site.IsPropertyAvailable(p => p.Url));
+                    Assert.IsTrue(clonedContext.Site.IsPropertyAvailable(p => p.HubSiteId));
+                    Assert.IsTrue(clonedContext.Site.IsPropertyAvailable(p => p.Features));
+                    Assert.IsTrue(clonedContext.Site.Features.Length > 0);
+
+
+                }
+
+                // Since test cases work with mocking data we need to use a custom Clone method, this one will use
+                // the PnPContext.Clone method and additionally will copy of the "test" settings
+                using (var clonedContext = await TestCommon.Instance.CloneAsync(context, TestCommon.TestSubSite, 1))
+                {
+                    await clonedContext.Web.LoadAsync(p => p.Title);
+
+                    Assert.AreNotEqual(context.Web.Title, clonedContext.Web.Title);
+                }
+            }
+        }
+
+        [TestMethod]
+        public async Task LiveAccessTokenAnalysis()
+        {
+            TestCommon.PnPCoreSDKTestUserSetup();
+
+            using (var context = await TestCommon.Instance.GetLiveContextAsync())
+            {
+                Assert.IsTrue(await context.AccessTokenHasScopeAsync("AllSites.FullControl"));
+                Assert.IsFalse(await context.AccessTokenHasRoleAsync("Sites.FullControl.All"));
+                Assert.IsFalse(await context.AccessTokenUsesApplicationPermissionsAsync());
+            }
+        }
+
+        [TestMethod]
+        public void StaticAccessTokenAnalysis()
+        {
+            Assert.IsTrue(PnPContext.AccessTokenHasScope(Constants.DelegatedAccessToken, "AllSites.FullControl"));
+            Assert.IsTrue(PnPContext.AccessTokenHasRole(Constants.ApplicationAccessToken, "Sites.FullControl.All"));
+            Assert.IsTrue(PnPContext.AccessTokenUsesApplicationPermissions(Constants.ApplicationAccessToken));
+        }
     }
 }

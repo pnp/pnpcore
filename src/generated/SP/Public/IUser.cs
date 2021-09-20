@@ -19,6 +19,11 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// To update...
         /// </summary>
+        public string EmailWithFallback { get; set; }
+
+        /// <summary>
+        /// To update...
+        /// </summary>
         public string Expiration { get; set; }
 
         /// <summary>
