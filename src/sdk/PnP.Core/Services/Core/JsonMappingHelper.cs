@@ -118,9 +118,6 @@ namespace PnP.Core.Services
 
             bool hasResults = false;
 
-            // collect metadata
-            Dictionary<string, string> metadata = new Dictionary<string, string>();
-
             if (apiResponse.JsonElement.ValueKind == JsonValueKind.Object)
             {
                 // Enumerate the received properties and try to map them to the model
@@ -143,6 +140,7 @@ namespace PnP.Core.Services
                         if (IsModelCollection(entityField.PropertyInfo.PropertyType))
                         {
                             // Get the actual current value of the property we're setting...as that allows to detect it's type
+                            // Doing the get also initializes the model collection, so keep this code block 
                             var propertyToSetValue = entityField.PropertyInfo.GetValue(pnpObject);
                             // Cast object to call the needed methods on it (e.g. ListCollection)
                             var typedCollection = propertyToSetValue as IManageableCollection;
@@ -151,7 +149,7 @@ namespace PnP.Core.Services
                             JsonElement resultsProperty = default;
 
                             // If the property is named "results" and is of type Array, it means it is a collection of items
-                            if (property.NameEquals("results") && property.Value.ValueKind == JsonValueKind.Array)
+                            if (property.Value.ValueKind == JsonValueKind.Array && property.NameEquals("results"))
                             {
                                 // and we use it directly
                                 resultsProperty = property.Value;
@@ -182,14 +180,6 @@ namespace PnP.Core.Services
 
                                     // Set the batch request id property
                                     SetBatchRequestId(pnpChild as TransientObject, apiResponse.BatchRequestId);
-
-                                    var contextAwarePnPChild = pnpChild as IDataModelWithContext;
-
-                                    // TODO: In CreateNew (line 163) we already configure the PnPContext
-                                    // Do we really need code in line 174?
-
-                                    // Set PnPContext via a dynamic property
-                                    contextAwarePnPChild.PnPContext = contextAwareObject.PnPContext;
 
                                     // Recursively map properties, call the method from the actual object as the object could have overriden it
                                     await ((IDataModelProcess)pnpChild).ProcessResponseAsync(new ApiResponse(apiResponse.ApiCall, childJson, apiResponse.BatchRequestId)).ConfigureAwait(false);
@@ -237,20 +227,23 @@ namespace PnP.Core.Services
 
                                 requested = true;
                             }
-                            else if (property.Value.TryGetProperty("__deferred", out JsonElement deferredProperty))
-                            {
-                                // Let's keep track of these "pointers" to load additional data, no actual usage at this point yet though
 
-                                // __deferred property
-                                //"__deferred": {
-                                //    "uri": "https://bertonline.sharepoint.com/sites/modern/_api/site/RootWeb/WorkflowAssociations"
+                            #region Stop tracking the deferred properties to safe on memory and processing time
+                            //else if (property.Value.TryGetProperty("__deferred", out JsonElement deferredProperty))
+                            //{
+                                //// Let's keep track of these "pointers" to load additional data, no actual usage at this point yet though
+
+                                //// __deferred property
+                                ////"__deferred": {
+                                ////    "uri": "https://bertonline.sharepoint.com/sites/modern/_api/site/RootWeb/WorkflowAssociations"
+                                ////}
+
+                                //if (!metadataBasedObject.Metadata.ContainsKey(entityField.Name))
+                                //{
+                                //    metadataBasedObject.Metadata.Add(entityField.Name, deferredProperty.GetProperty("uri").GetString());
                                 //}
-
-                                if (!metadataBasedObject.Metadata.ContainsKey(entityField.Name))
-                                {
-                                    metadataBasedObject.Metadata.Add(entityField.Name, deferredProperty.GetProperty("uri").GetString());
-                                }
-                            }
+                            //}
+                            #endregion
                         }
                         // Are we loading another model type (e.g. Site.RootWeb)?
                         else if (IsModelType(entityField.PropertyInfo.PropertyType))
@@ -317,7 +310,7 @@ namespace PnP.Core.Services
                         // - the __next link, used in (list item) paging
                         else if (property.Name == "EntityTypeName")
                         {
-                            TrackMetaData(metadataBasedObject, property, metadata);
+                            TrackMetaData(metadataBasedObject, property, null);
                         }
                         else if (property.Name == "__next")
                         {
@@ -666,31 +659,29 @@ namespace PnP.Core.Services
             return null;
         }
 
-        internal static async Task TryPopuplatePnPObjectMetadataFromRest(IDataModelWithContext contextAwareObject, IMetadataExtensible targetMetadataObject, EntityInfo entity, string idFieldValue)
+        private static async Task TryPopuplatePnPObjectMetadataFromRest(IDataModelWithContext contextAwareObject, IMetadataExtensible targetMetadataObject, EntityInfo entity, string idFieldValue)
         {
             // Store the rest ID field for follow-up rest requests
-            Dictionary<string, string> Metadata = targetMetadataObject.Metadata;
-            PnPContext pnpContext = contextAwareObject.PnPContext;
-
-            if (!Metadata.ContainsKey(PnPConstants.MetaDataRestId) && !string.IsNullOrEmpty(idFieldValue))
+            if (!targetMetadataObject.Metadata.ContainsKey(PnPConstants.MetaDataRestId) && !string.IsNullOrEmpty(idFieldValue))
             {
-                Metadata.Add(PnPConstants.MetaDataRestId, idFieldValue);
+                targetMetadataObject.Metadata.Add(PnPConstants.MetaDataRestId, idFieldValue);
             }
             // Store graph ID for transition to graph when needed. No point in doing this when we've disabled graph first behaviour or when the entity does not support rest + graph
-            if (entity.SupportsGraphAndRest && !Metadata.ContainsKey(PnPConstants.MetaDataGraphId))
+            if (entity.SupportsGraphAndRest && !targetMetadataObject.Metadata.ContainsKey(PnPConstants.MetaDataGraphId))
             {
 
                 // SP.Web requires a special id value
                 if (entity.SharePointType.Equals("SP.Web"))
                 {
-                    if (!Metadata.ContainsKey(PnPConstants.MetaDataGraphId))
+                    if (!targetMetadataObject.Metadata.ContainsKey(PnPConstants.MetaDataGraphId))
                     {
-                        if (pnpContext.Site.IsPropertyAvailable(p => p.Id) && pnpContext.Web.IsPropertyAvailable(p => p.Id))
+                        if (contextAwareObject.PnPContext.Site.IsPropertyAvailable(p => p.Id) && contextAwareObject.PnPContext.Web.IsPropertyAvailable(p => p.Id))
                         {
                             // Check again here due to the recursive nature of this code
-                            if (!Metadata.ContainsKey(PnPConstants.MetaDataGraphId))
+                            if (!targetMetadataObject.Metadata.ContainsKey(PnPConstants.MetaDataGraphId))
                             {
-                                Metadata.Add(PnPConstants.MetaDataGraphId, $"{pnpContext.Uri.DnsSafeHost},{pnpContext.Site.Id},{pnpContext.Web.Id}");
+                                targetMetadataObject.Metadata.Add(PnPConstants.MetaDataGraphId, 
+                                    $"{contextAwareObject.PnPContext.Uri.DnsSafeHost},{contextAwareObject.PnPContext.Site.Id},{contextAwareObject.PnPContext.Web.Id}");
                             }
                         }
                     }
@@ -802,11 +793,6 @@ namespace PnP.Core.Services
 
                                 // Set the batch request id property
                                 SetBatchRequestId(pnpChild as TransientObject, apiResponse.BatchRequestId);
-
-                                var contextAwarePnPChild = pnpChild as IDataModelWithContext;
-
-                                // Set PnPContext via a dynamic property
-                                contextAwarePnPChild.PnPContext = contextAwareObject.PnPContext;
 
                                 // Recursively map properties, call the method from the actual object as the object could have overriden it
                                 ApiResponse modelResponse;
@@ -1688,7 +1674,7 @@ namespace PnP.Core.Services
                 target.Metadata.Add(property.Name, GetJsonPropertyValue(property).ToString());
             }
 
-            if (!metadata.ContainsKey(property.Name))
+            if (metadata != null && !metadata.ContainsKey(property.Name))
             {
                 metadata.Add(property.Name, GetJsonPropertyValue(property).ToString());
             }
