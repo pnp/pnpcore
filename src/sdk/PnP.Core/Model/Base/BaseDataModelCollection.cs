@@ -152,9 +152,7 @@ namespace PnP.Core.Model
         /// <returns>Model entity</returns>
         public TModel CreateNew()
         {
-            TModel newModel = (TModel)EntityManager.GetEntityConcreteInstance(typeof(TModel), this);
-            (newModel as IDataModelWithContext).PnPContext = PnPContext;
-            return newModel;
+            return (TModel)EntityManager.GetEntityConcreteInstance(typeof(TModel), this, PnPContext);
         }
 
         /// <summary>
@@ -568,7 +566,6 @@ namespace PnP.Core.Model
                 var queryPropertiesExpression = Expression.Call(null, queryPropertiesMethod, collectionMemberExpression, arrayExpression);
 
                 // Convert all other expression in order to change the source object with the collection
-                //var newBody = new ParameterReplaceVisitor(this.GetType(), collectionMemberExpression).Visit(queryPropertiesExpression);
                 result.Add(Expression.Lambda(lambdaType, queryPropertiesExpression, parentParameter));
             }
 
@@ -593,28 +590,6 @@ namespace PnP.Core.Model
             }
 
             throw new NotSupportedException();
-        }
-
-        private class ParameterReplaceVisitor : ExpressionVisitor
-        {
-            private readonly Type type;
-            private readonly Expression to;
-
-            public ParameterReplaceVisitor(Type type, Expression to)
-            {
-                this.type = type;
-                this.to = to;
-            }
-
-            protected override Expression VisitMember(MemberExpression node)
-            {
-                if (node.Expression.Type == type)
-                {
-                    return node.Update(to);
-                }
-                return base.VisitMember(node);
-            }
-
         }
 
         #endregion
