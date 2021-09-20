@@ -17,6 +17,9 @@ namespace PnP.Core.Admin.Test
         {
             // Configure mocking default for all tests in this class, unless override by a specific test
             //TestCommon.Instance.Mocking = false;
+
+            // Configure the test cases to use application permissions instead of delegated permissions
+            //TestCommon.Instance.UseApplicationPermissions = true;
         }
 
         [TestMethod]
@@ -137,6 +140,7 @@ namespace PnP.Core.Admin.Test
         public async Task GetTenantAdmins()
         {
             //TestCommon.Instance.Mocking = false;
+            //TestCommon.Instance.UseApplicationPermissions = true;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TenantAdminCenterSite))
             {
                 var admins = context.GetSharePointAdmin().GetTenantAdmins();
