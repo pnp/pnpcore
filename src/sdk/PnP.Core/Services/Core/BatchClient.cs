@@ -1172,13 +1172,19 @@ namespace PnP.Core.Services
         /// <param name="batchResponse">Batch response received from the server</param>
         private static void ProcessSharePointRestBatchResponseContent(Batch batch, string batchResponse)
         {
+#if !NET5_0
             var responseLines = batchResponse.Split(new char[] { '\n' });
+#endif
             int counter = -1;
             var httpStatusCode = HttpStatusCode.Continue;
 
             bool responseContentOpen = false;
             StringBuilder responseContent = new StringBuilder();
+#if NET5_0
+            foreach (ReadOnlySpan<char> line in batchResponse.SplitLines())
+#else
             foreach (var line in responseLines)
+#endif
             {
                 // Signals the start/end of a response
                 // --batchresponse_6ed85e4b-869f-428e-90c9-19038f964718
@@ -1238,7 +1244,11 @@ namespace PnP.Core.Services
                 else if (line.StartsWith("HTTP/1.1 "))
                 {
                     // HTTP/1.1 200 OK
+#if NET5_0
+                    if (int.TryParse(line.Slice(9, 3), out int parsedHttpStatusCode))
+#else
                     if (int.TryParse(line.Substring(9, 3), out int parsedHttpStatusCode))
+#endif
                     {
                         httpStatusCode = (HttpStatusCode)parsedHttpStatusCode;
                     }
@@ -1251,21 +1261,29 @@ namespace PnP.Core.Services
                 else if ((line.StartsWith("{") || httpStatusCode == HttpStatusCode.NoContent) && !responseContentOpen)
                 {
                     // content can be seperated via \r\n and we split on \n. Since we're using AppendLine remove the carriage return to avoid duplication
+#if NET5_0
+                    responseContent.Append(line).AppendLine();
+#else
                     responseContent.AppendLine(line.TrimEnd('\r'));
+#endif
                     responseContentOpen = true;
                 }
                 // More content is being returned, so let's append it
                 else if (responseContentOpen)
                 {
                     // content can be seperated via \r\n and we split on \n. Since we're using AppendLine remove the carriage return to avoid duplication
+#if NET5_0
+                    responseContent.Append(line).AppendLine();
+#else
                     responseContent.AppendLine(line.TrimEnd('\r'));
+#endif
                 }
             }
         }
 
-        #endregion
+#endregion
 
-        #region SharePoint REST interactive calls
+#region SharePoint REST interactive calls
 
         private async Task ExecuteSharePointRestInteractiveAsync(Batch batch)
         {
@@ -1487,9 +1505,9 @@ namespace PnP.Core.Services
             }
         }
 
-        #endregion
+#endregion
 
-        #region CSOM batching
+#region CSOM batching
         /// <summary>
         /// Execute a batch with CSOM requests.
         /// See https://docs.microsoft.com/en-us/openspecs/sharepoint_protocols/ms-csom/fd645da2-fa28-4daa-b3cd-8f4e506df117 for the CSOM protocol specs
@@ -1773,7 +1791,7 @@ namespace PnP.Core.Services
 
             return batches;
         }
-        #endregion
+#endregion
 
         /// <summary>
         /// Checks if a batch contains an API call that still has unresolved tokens...no point in sending the request at that point

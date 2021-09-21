@@ -28,6 +28,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - PnP Core SDK assemblies are now strong named #542 [jansenbe - Bert Jansen]
 - PERF: ImplementsInterface -> massive performance improvement! Running all offline PnP.Core tests is twice as fast... [jansenbe - Bert Jansen] 
 - PERF: AsExpando removed LINQ dependencies to speed up and lower memory requirments [jansenbe - Bert Jansen]
+- PERF: Improved parsing of REST batch response for .NET 5: 50% less memory allocations + 50% to 90% performance gain (depending on the size) [jansenbe - Bert Jansen]
 
 ## [1.3.0]
 

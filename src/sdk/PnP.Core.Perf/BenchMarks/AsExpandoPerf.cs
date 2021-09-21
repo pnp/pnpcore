@@ -15,7 +15,7 @@ namespace PnP.Core.Perf.BenchMarks
                     string[] ignoreProperties = null,
                     bool ignoreNullValues = false)
         {
-            Dictionary<string, object> result = new();
+            Dictionary<string, object> result = new Dictionary<string, object>();
 
             if (obj == null)
             {
