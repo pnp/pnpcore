@@ -82,6 +82,11 @@ namespace PnP.Core.Test.Common.Utilities
         /// </summary>
         public Dictionary<string, Uri> TestUris { get; set; }
 
+        /// <summary>
+        /// Run the tests using application permissions instead of delegated permissions, this can be setup per test, test class or globally
+        /// </summary>
+        public bool UseApplicationPermissions { get; set; }
+
         public PnPContext GetContext(string configurationName, int id = 0,
             [System.Runtime.CompilerServices.CallerMemberName] string testName = null,
             [System.Runtime.CompilerServices.CallerFilePath] string sourceFilePath = null)
@@ -103,16 +108,7 @@ namespace PnP.Core.Test.Common.Utilities
             }
 
             // Configure the factory for our testing mode
-            var testPnPContextFactory = factory as TestPnPContextFactory;
-            testPnPContextFactory.Mocking = Mocking;
-            testPnPContextFactory.Id = id;
-            testPnPContextFactory.TestName = testName;
-            testPnPContextFactory.SourceFilePath = sourceFilePath;
-            testPnPContextFactory.GenerateTestMockingDebugFiles = GenerateMockingDebugFiles;
-            testPnPContextFactory.TestUris = TestUris;
-
-            // rewrite configuration for special cases
-            configurationName = RewriteConfigurationNameForOptionalOfflineTestConfigurations(configurationName);
+            configurationName = ConfigurePnPContextFactory(configurationName, id, testName, sourceFilePath, factory);
 
             return await factory.CreateAsync(configurationName).ConfigureAwait(false);
         }
@@ -141,8 +137,8 @@ namespace PnP.Core.Test.Common.Utilities
         }
 
         internal async Task<PnPContext> GetContextWithTelemetryManagerAsync(string configurationName, TelemetryManager telemetryManager, int id = 0,
-    [System.Runtime.CompilerServices.CallerMemberName] string testName = null,
-    [System.Runtime.CompilerServices.CallerFilePath] string sourceFilePath = null)
+            [System.Runtime.CompilerServices.CallerMemberName] string testName = null,
+            [System.Runtime.CompilerServices.CallerFilePath] string sourceFilePath = null)
         {
             // Obtain factory (cached)
             var factory = BuildContextFactory();
@@ -153,17 +149,9 @@ namespace PnP.Core.Test.Common.Utilities
                 testName = testName.Substring(0, testName.Length - AsyncSuffix.Length);
             }
 
-            // Configure the factory for our testing mode
-            var testPnPContextFactory = factory as TestPnPContextFactory;
-            testPnPContextFactory.Mocking = Mocking;
-            testPnPContextFactory.Id = id;
-            testPnPContextFactory.TestName = testName;
-            testPnPContextFactory.SourceFilePath = sourceFilePath;
-            testPnPContextFactory.GenerateTestMockingDebugFiles = GenerateMockingDebugFiles;
-            testPnPContextFactory.TestUris = TestUris;
 
-            // rewrite configuration for special cases
-            configurationName = RewriteConfigurationNameForOptionalOfflineTestConfigurations(configurationName);
+            // Configure the factory for our testing mode
+            configurationName = ConfigurePnPContextFactory(configurationName, id, testName, sourceFilePath, factory);
 
             return await (factory as TestPnPContextFactory).CreateWithTelemetryManagerAsync(configurationName, telemetryManager).ConfigureAwait(false);
         }
@@ -182,16 +170,7 @@ namespace PnP.Core.Test.Common.Utilities
             }
 
             // Configure the factory for our testing mode
-            var testPnPContextFactory = factory as TestPnPContextFactory;
-            testPnPContextFactory.Mocking = Mocking;
-            testPnPContextFactory.Id = id;
-            testPnPContextFactory.TestName = testName;
-            testPnPContextFactory.SourceFilePath = sourceFilePath;
-            testPnPContextFactory.GenerateTestMockingDebugFiles = GenerateMockingDebugFiles;
-            testPnPContextFactory.TestUris = TestUris;
-
-            // rewrite configuration for special cases
-            configurationName = RewriteConfigurationNameForOptionalOfflineTestConfigurations(configurationName);
+            configurationName = ConfigurePnPContextFactory(configurationName, id, testName, sourceFilePath, factory);
 
             return await factory.CreateWithoutInitializationAsync(configurationName).ConfigureAwait(false);
         }
@@ -215,9 +194,10 @@ namespace PnP.Core.Test.Common.Utilities
             (factory as TestPnPContextFactory).Mocking = Mocking;
             (factory as TestPnPContextFactory).Id = id;
             (factory as TestPnPContextFactory).TestName = testName;
-            (factory as TestPnPContextFactory).SourceFilePath = sourceFilePath;
+            (factory as TestPnPContextFactory).SourceFilePath = UseApplicationPermissions ? $"{sourceFilePath}{Constants.ApplicationPermissionsSuffix}" : sourceFilePath;
             (factory as TestPnPContextFactory).GenerateTestMockingDebugFiles = GenerateMockingDebugFiles;
             (factory as TestPnPContextFactory).TestUris = TestUris;
+            (factory as TestPnPContextFactory).UseApplicationPermissions = UseApplicationPermissions;
 
             return await factory.CreateAsync(groupId).ConfigureAwait(false);
         }
@@ -252,16 +232,7 @@ namespace PnP.Core.Test.Common.Utilities
             }
 
             // Configure the factory for our testing mode
-            var testPnPContextFactory = factory as TestPnPContextFactory;
-            testPnPContextFactory.Mocking = Mocking;
-            testPnPContextFactory.Id = id;
-            testPnPContextFactory.TestName = testName;
-            testPnPContextFactory.SourceFilePath = sourceFilePath;
-            testPnPContextFactory.GenerateTestMockingDebugFiles = GenerateMockingDebugFiles;
-            testPnPContextFactory.TestUris = TestUris;
-
-            // rewrite configuration for special cases
-            configurationName = RewriteConfigurationNameForOptionalOfflineTestConfigurations(configurationName);
+            configurationName = ConfigurePnPContextFactory(configurationName, id, testName, sourceFilePath, factory);
 
             return await factory.CreateAsync(configurationName, options).ConfigureAwait(false);
         }
@@ -395,6 +366,22 @@ namespace PnP.Core.Test.Common.Utilities
             {
                 semaphoreSlimFactory.Release();
             }
+        }
+
+        private string ConfigurePnPContextFactory(string configurationName, int id, string testName, string sourceFilePath, IPnPTestContextFactory factory)
+        {
+            var testPnPContextFactory = factory as TestPnPContextFactory;
+            testPnPContextFactory.Mocking = Mocking;
+            testPnPContextFactory.Id = id;
+            testPnPContextFactory.TestName = testName;
+            testPnPContextFactory.SourceFilePath = UseApplicationPermissions ? $"{sourceFilePath}{Constants.ApplicationPermissionsSuffix}" : sourceFilePath;
+            testPnPContextFactory.GenerateTestMockingDebugFiles = GenerateMockingDebugFiles;
+            testPnPContextFactory.TestUris = TestUris;
+            testPnPContextFactory.UseApplicationPermissions = UseApplicationPermissions;
+
+            // rewrite configuration for special cases
+            configurationName = RewriteConfigurationNameForOptionalOfflineTestConfigurations(configurationName);
+            return configurationName;
         }
 
         private static string LoadTestEnvironment()

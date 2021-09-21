@@ -44,6 +44,11 @@ namespace PnP.Core.Test.Common.Services
         /// </summary>
         public Dictionary<string, Uri> TestUris { get; set; }
 
+        /// <summary>
+        /// Run the tests using application permissions instead of delegated permissions
+        /// </summary>
+        public bool UseApplicationPermissions { get; set; }
+
         public TestPnPContextFactory(
             ILogger<PnPContext> logger,
             SharePointRestClient sharePointRestClient,
@@ -65,6 +70,8 @@ namespace PnP.Core.Test.Common.Services
 
         public async override Task<PnPContext> CreateAsync(string name, PnPContextOptions options = null)
         {
+            name = UpdateConfigurationForApplicationPermissions(name);
+
             // Search for the provided configuration
             var configuration = ContextOptions.Configurations.FirstOrDefault(c => c.Name == name);
             if (configuration == null)
@@ -78,6 +85,8 @@ namespace PnP.Core.Test.Common.Services
 
         internal async Task<PnPContext> CreateWithTelemetryManagerAsync(string name, TelemetryManager telemetryManager)
         {
+            name = UpdateConfigurationForApplicationPermissions(name);
+
             // Search for the provided configuration
             var configuration = ContextOptions.Configurations.FirstOrDefault(c => c.Name == name);
             if (configuration == null)
@@ -110,6 +119,8 @@ namespace PnP.Core.Test.Common.Services
 
         public async Task<PnPContext> CreateWithoutInitializationAsync(string name)
         {
+            name = UpdateConfigurationForApplicationPermissions(name);
+
             // Search for the provided configuration
             var configuration = ContextOptions.Configurations.FirstOrDefault(c => c.Name == name);
             if (configuration == null)
@@ -263,6 +274,16 @@ namespace PnP.Core.Test.Common.Services
             {
                 context.SetRecordingMode(Id, TestName, SourceFilePath, GenerateTestMockingDebugFiles, TestUris);
             }
+        }
+
+        private string UpdateConfigurationForApplicationPermissions(string configuration)
+        {
+            if (UseApplicationPermissions)
+            {
+                return $"{configuration}{Constants.ApplicationPermissionsSuffix}";
+            }
+
+            return configuration;
         }
 
     }

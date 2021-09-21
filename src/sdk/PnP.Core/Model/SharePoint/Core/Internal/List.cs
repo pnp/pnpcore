@@ -340,7 +340,7 @@ namespace PnP.Core.Model.SharePoint
         {
             ApiCall apiCall = await BuildGetItemsByCamlQueryApiCall(queryOptions, selectors).ConfigureAwait(false);
 
-            await RequestBatchAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
+            await RequestBatchAsync(PnPContext.CurrentBatch, apiCall, HttpMethod.Post).ConfigureAwait(false);
         }
 
         public void LoadItemsByCamlQueryBatch(CamlQueryOptions queryOptions, params Expression<Func<IListItem, object>>[] selectors)
