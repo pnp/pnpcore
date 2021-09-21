@@ -136,7 +136,7 @@ namespace PnP.Core.Model.SharePoint
             catch { }
 #pragma warning restore CA1031 // Do not catch general exception types
 
-            StringBuilder html = new StringBuilder(100);
+            StringBuilder html = new StringBuilder();
             html.Append($@"<div {CanvasControlAttribute}=""{CanvasControlData}"" {CanvasDataVersionAttribute}=""{ DataVersion}""  {ControlDataAttribute}=""{jsonControlData.Replace("\"", "&quot;")}"">");
             html.Append($@"<div {TextRteAttribute}=""{Rte}"">");
             if (Text.Trim().StartsWith("<p>", StringComparison.InvariantCultureIgnoreCase) ||

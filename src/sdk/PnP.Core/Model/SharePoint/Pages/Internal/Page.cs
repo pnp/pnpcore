@@ -915,7 +915,7 @@ namespace PnP.Core.Model.SharePoint
         /// <returns>Html representation</returns>
         public string ToHtml()
         {
-            StringBuilder html = new StringBuilder(100);
+            StringBuilder html = new StringBuilder();
 
             if (sections.Count == 0) return string.Empty;
 

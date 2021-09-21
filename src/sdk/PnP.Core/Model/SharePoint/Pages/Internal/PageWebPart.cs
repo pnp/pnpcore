@@ -355,7 +355,7 @@ namespace PnP.Core.Model.SharePoint
                 jsonControlData = JsonWebPartData;
             }
 
-            StringBuilder html = new StringBuilder(100);
+            StringBuilder html = new StringBuilder();
             if (UsingSpControlDataOnly || IsHeaderControl)
             {
                 html.Append($@"<div {CanvasControlAttribute}=""{CanvasControlData}"" {CanvasDataVersionAttribute}=""{DataVersion}"" {ControlDataAttribute}=""{JsonControlData.Replace("\"", "&quot;")}""></div>");
