@@ -67,6 +67,7 @@ namespace Microsoft.Extensions.DependencyInjection
             builder.Services.TryAddTransient<IPageGenerator, DefaultPageGenerator>();
             builder.Services.TryAddTransient<ITransformationStateManager, InMemoryTransformationStateManager>();
             builder.Services.TryAddTransient<ITransformationExecutor, InProcessTransformationExecutor>();
+            builder.Services.TryAddTransient<IAssetPersistenceProvider, FileSystemAssetPersistenceProvider>();
 
             return builder;
         }

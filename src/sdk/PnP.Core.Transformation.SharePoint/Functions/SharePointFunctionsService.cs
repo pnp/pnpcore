@@ -703,45 +703,50 @@ namespace PnP.Core.Transformation.SharePoint.Functions
         /// Copy the asset to target site in cross site transformation
         /// </summary>
         /// <param name="imageLink"></param>
-        //[FunctionDocumentation(Description = "Transforms the incoming path into a server relative path. If the page is located on another site the asset is transferred and url updated. Any failures keep to the original value.",
-        //    Example = "{ServerRelativeFileName} = ReturnCrossSiteRelativePath({ImageLink})")]
-        //[InputDocumentation(Name = "{ImageLink}", Description = "Original value for the image link")]
-        //[OutputDocumentation(Name = "{ServerRelativeFileName}", Description = "New target location for the asset if transferred.")]
-        //public string ReturnCrossSiteRelativePath(string imageLink)
-        //{
-        //    // Defaults to the orignal operation
-        //    var serverRelativeAssetFileName = ReturnServerRelativePath(imageLink);
+        [FunctionDocumentation(Description = "Transforms the incoming path into a server relative path. If the page is located on another site the asset is transferred and url updated. Any failures keep to the original value.",
+            Example = "{ServerRelativeFileName} = ReturnCrossSiteRelativePath({ImageLink})")]
+        [InputDocumentation(Name = "{ImageLink}", Description = "Original value for the image link")]
+        [OutputDocumentation(Name = "{ServerRelativeFileName}", Description = "New target location for the asset if transferred.")]
+        public string ReturnCrossSiteRelativePath(string imageLink)
+        {
+            // Retrieve the currently configured instance of the assets persistence provider
+            var assetPersistenceProvider = serviceProvider.GetService<IAssetPersistenceProvider>();
 
-        //    try
-        //    {
-        //        string pageFileName = null;
+            return string.Empty;
 
-        //        if (this.clientSidePage != null && !string.IsNullOrEmpty(this.clientSidePage.PageTitle))
-        //        {
-        //            pageFileName = this.clientSidePage.PageTitle;
-        //        }
-        //        else
-        //        {
-        //            // deduct based upon filename in url
-        //            pageFileName = Path.GetFileNameWithoutExtension(serverRelativeAssetFileName);
-        //        }
+            //// Defaults to the orignal operation
+            //var serverRelativeAssetFileName = ReturnServerRelativePath(imageLink);
 
-        //        AssetTransfer assetTransfer = new AssetTransfer(sourceClientContext, base.clientContext, base.RegisteredLogObservers);
+            //try
+            //{
+            //    string pageFileName = null;
 
-        //        var newAssetLocation = assetTransfer.TransferAsset(serverRelativeAssetFileName, pageFileName);
+            //    if (this.clientSidePage != null && !string.IsNullOrEmpty(this.clientSidePage.PageTitle))
+            //    {
+            //        pageFileName = this.clientSidePage.PageTitle;
+            //    }
+            //    else
+            //    {
+            //        // deduct based upon filename in url
+            //        pageFileName = Path.GetFileNameWithoutExtension(serverRelativeAssetFileName);
+            //    }
 
-        //        if (!string.IsNullOrEmpty(newAssetLocation))
-        //        {
-        //            return newAssetLocation;
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        LogError(LogStrings.Error_ReturnCrossSiteRelativePath, LogStrings.Heading_BuiltInFunctions, ex);
-        //    }
+            //    AssetTransfer assetTransfer = new AssetTransfer(sourceClientContext, base.clientContext, base.RegisteredLogObservers);
 
-        //    return serverRelativeAssetFileName;
-        //}
+            //    var newAssetLocation = assetTransfer.TransferAsset(serverRelativeAssetFileName, pageFileName);
+
+            //    if (!string.IsNullOrEmpty(newAssetLocation))
+            //    {
+            //        return newAssetLocation;
+            //    }
+            //}
+            //catch (Exception ex)
+            //{
+            //    LogError(LogStrings.Error_ReturnCrossSiteRelativePath, LogStrings.Heading_BuiltInFunctions, ex);
+            //}
+
+            //return serverRelativeAssetFileName;
+        }
 
         /// <summary>
         /// Rewrite the image anchor tag url
@@ -1346,65 +1351,67 @@ namespace PnP.Core.Transformation.SharePoint.Functions
         /// <param name="text">Original wiki html content</param>
         /// <param name="quickLinksJsonProperties"></param>
         /// <returns>Properties collection for the quicklinks web part</returns>
-        //[FunctionDocumentation(Description = "Maps summarylinks web part data into a properties collection and supporting serverProcessedContent nodes for the quicklinks web part",
-        //                       Example = "SummaryLinksToQuickLinksProperties({Text},{QuickLinksJsonProperties})")]
-        //[InputDocumentation(Name = "{Text}", Description = "Original wiki html content")]
-        //[InputDocumentation(Name = "{QuickLinksJsonProperties}", Description = "QuickLinks JSON properties blob (optional)")]
-        //[OutputDocumentation(Name = "JsonProperties", Description = "Properties collection for the quicklinks web part")]
-        //[OutputDocumentation(Name = "SearchablePlainTexts", Description = "SearchablePlainTexts nodes to be added in the serverProcessedContent node")]
-        //[OutputDocumentation(Name = "Links", Description = "Links nodes to be added in the serverProcessedContent node")]
-        //[OutputDocumentation(Name = "ImageSources", Description = "ImageSources nodes to be added in the serverProcessedContent node")]
-        //public Dictionary<string, string> SummaryLinksToQuickLinksProperties(string text, string quickLinksJsonProperties = "")
-        //{
-        //    Dictionary<string, string> results = new Dictionary<string, string>();
+        [FunctionDocumentation(Description = "Maps summarylinks web part data into a properties collection and supporting serverProcessedContent nodes for the quicklinks web part",
+                               Example = "SummaryLinksToQuickLinksProperties({Text},{QuickLinksJsonProperties})")]
+        [InputDocumentation(Name = "{Text}", Description = "Original wiki html content")]
+        [InputDocumentation(Name = "{QuickLinksJsonProperties}", Description = "QuickLinks JSON properties blob (optional)")]
+        [OutputDocumentation(Name = "JsonProperties", Description = "Properties collection for the quicklinks web part")]
+        [OutputDocumentation(Name = "SearchablePlainTexts", Description = "SearchablePlainTexts nodes to be added in the serverProcessedContent node")]
+        [OutputDocumentation(Name = "Links", Description = "Links nodes to be added in the serverProcessedContent node")]
+        [OutputDocumentation(Name = "ImageSources", Description = "ImageSources nodes to be added in the serverProcessedContent node")]
+        public Dictionary<string, string> SummaryLinksToQuickLinksProperties(string text, string quickLinksJsonProperties = "")
+        {
+            Dictionary<string, string> results = new Dictionary<string, string>();
 
-        //    var links = new SummaryLinksHtmlTransformator().GetLinks(text);
+            return results;
 
-        //    if (IsCrossSiteTransfer())
-        //    {
-        //        var clientSidePage = this.clientSidePage.PageTitle;
-        //        AssetTransfer assetTransfer = new AssetTransfer(sourceClientContext, base.clientContext, base.RegisteredLogObservers);
+            //var links = new SummaryLinksHtmlTransformator().GetLinks(text);
 
-        //        foreach (var link in links)
-        //        {
-        //            // preview images
-        //            if (!string.IsNullOrEmpty(link.ImageUrl))
-        //            {
-        //                var serverRelativeAssetFileName = ReturnServerRelativePath(link.ImageUrl);
-        //                var newAssetLocation = assetTransfer.TransferAsset(serverRelativeAssetFileName, clientSidePage);
-        //                link.ImageUrl = newAssetLocation;
-        //            }
+            //if (IsCrossSiteTransfer())
+            //{
+            //    var clientSidePage = this.clientSidePage.PageTitle;
+            //    AssetTransfer assetTransfer = new AssetTransfer(sourceClientContext, base.clientContext, base.RegisteredLogObservers);
 
-        //            // urls
-        //            if (!string.IsNullOrEmpty(link.Url))
-        //            {
-        //                var serverRelativeAssetFileName = ReturnServerRelativePath(link.Url);
-        //                var newAssetLocation = assetTransfer.TransferAsset(serverRelativeAssetFileName, clientSidePage);
-        //                link.Url = newAssetLocation;
-        //            }
-        //        }
-        //    }
+            //    foreach (var link in links)
+            //    {
+            //        // preview images
+            //        if (!string.IsNullOrEmpty(link.ImageUrl))
+            //        {
+            //            var serverRelativeAssetFileName = ReturnServerRelativePath(link.ImageUrl);
+            //            var newAssetLocation = assetTransfer.TransferAsset(serverRelativeAssetFileName, clientSidePage);
+            //            link.ImageUrl = newAssetLocation;
+            //        }
 
-        //    // Rewrite url's if needed
-        //    if (!this.baseTransformationInformation.SkipUrlRewrite)
-        //    {
-        //        foreach (var link in links)
-        //        {
-        //            link.Url = this.urlTransformator.Transform(link.Url);
-        //        }
-        //    }
+            //        // urls
+            //        if (!string.IsNullOrEmpty(link.Url))
+            //        {
+            //            var serverRelativeAssetFileName = ReturnServerRelativePath(link.Url);
+            //            var newAssetLocation = assetTransfer.TransferAsset(serverRelativeAssetFileName, clientSidePage);
+            //            link.Url = newAssetLocation;
+            //        }
+            //    }
+            //}
 
-        //    QuickLinksTransformator qlt = new QuickLinksTransformator(this.clientContext, base.RegisteredLogObservers);
-        //    var res = qlt.Transform(links, quickLinksJsonProperties);
+            //// Rewrite url's if needed
+            //if (!this.baseTransformationInformation.SkipUrlRewrite)
+            //{
+            //    foreach (var link in links)
+            //    {
+            //        link.Url = this.urlTransformator.Transform(link.Url);
+            //    }
+            //}
 
-        //    // Output the calculated properties so then can be used in the mapping
-        //    results.Add("JsonProperties", res.Properties);
-        //    results.Add("SearchablePlainTexts", res.SearchablePlainTexts);
-        //    results.Add("Links", res.Links);
-        //    results.Add("ImageSources", res.ImageSources);
+            //QuickLinksTransformator qlt = new QuickLinksTransformator(this.clientContext, base.RegisteredLogObservers);
+            //var res = qlt.Transform(links, quickLinksJsonProperties);
 
-        //    return results;
-        //}
+            //// Output the calculated properties so then can be used in the mapping
+            //results.Add("JsonProperties", res.Properties);
+            //results.Add("SearchablePlainTexts", res.SearchablePlainTexts);
+            //results.Add("Links", res.Links);
+            //results.Add("ImageSources", res.ImageSources);
+
+            //return results;
+        }
         #endregion
 
         #region Script Editor functions

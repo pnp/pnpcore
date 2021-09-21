@@ -93,5 +93,13 @@ namespace PnP.Core.Transformation.Services.Builder
         /// <returns></returns>
         IPnPTransformationBuilder WithSourceProvider<T>()
             where T : class, ISourceProvider;
+
+        /// <summary>
+        /// Allows configuring a custom <see cref="IAssetPersistenceProvider" /> that manages the persistence of assets onto a target persistence storage
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
+        IPnPTransformationBuilder WithPersistenceProvider<T>()
+            where T : class, IAssetPersistenceProvider;
     }
 }

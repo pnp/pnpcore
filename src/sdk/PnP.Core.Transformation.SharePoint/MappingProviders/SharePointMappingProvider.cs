@@ -30,6 +30,7 @@ using PnP.Core.Transformation.SharePoint.Services;
 using PnP.Core.Transformation.SharePoint.Services.Builder.Configuration;
 using PnP.Core.Transformation.SharePoint.Services.MappingProviders;
 using Microsoft.Extensions.Caching.Memory;
+using PnP.Core.Transformation.SharePoint.Utilities;
 
 namespace PnP.Core.Transformation.SharePoint.MappingProviders
 {
@@ -1207,7 +1208,11 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
                     break;
             }
 
-            return new Tuple<Model.PageLayout, List<WebPartEntity>>(layout, webparts);
+            var clientContext = pageFile.Context as ClientContext;
+            var wikiHtmlTransformator = serviceProvider.GetService<WikiHtmlTransformator>();
+            var processedWebparts = wikiHtmlTransformator.TransformPlusSplit(clientContext, webparts);
+
+            return new Tuple<Model.PageLayout, List<WebPartEntity>>(layout, processedWebparts);
         }
 
         private async Task<Tuple<Model.PageLayout, List<WebPartEntity>>> AnalyzeWebPartPageAsync(PageTransformationContext context, Microsoft.SharePoint.Client.File pageFile, SourcePageInformation page)

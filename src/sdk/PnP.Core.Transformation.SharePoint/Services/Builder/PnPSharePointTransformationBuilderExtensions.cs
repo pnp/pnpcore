@@ -100,6 +100,8 @@ namespace Microsoft.Extensions.DependencyInjection
             // Add the HTML Transformator service
             builder.Services.TryAddTransient<HtmlTransformator, HtmlTransformator>();
 
+            builder.Services.TryAddTransient<WikiHtmlTransformator, WikiHtmlTransformator>();
+
             return new PnPSharePointTransformationBuilder(builder.Services);
         }
     }

@@ -55,6 +55,23 @@ namespace PnP.Core.Transformation.SharePoint.Services.Builder.Configuration
         public bool ShouldMapUsers { get; set; }
 
         /// <summary>
+        /// If true images and videos embedded in wiki text will be transformed to actual image/video web parts, 
+        /// else they'll get a placeholder and will be added as separate web parts at the end of the page
+        /// </summary>
+        public bool HandleWikiImagesAndVideos { get; set; }
+
+        /// <summary>
+        /// When an image lives inside a table (or list) then also add it as a separate image web part
+        /// </summary>
+        public bool AddTableListImageAsImageWebPart { get; set; }
+
+        /// <summary>
+        /// Property bag for adding properties that will be exposed to the functions and selectors in the web part mapping file.
+        /// These properties are used to condition the transformation process.
+        /// </summary>
+        public Dictionary<string, string> MappingProperties { get; set; }
+
+        /// <summary>
         /// Custom URL mappings
         /// </summary>
         public List<UrlMapping> UrlMappings { get; set; }
