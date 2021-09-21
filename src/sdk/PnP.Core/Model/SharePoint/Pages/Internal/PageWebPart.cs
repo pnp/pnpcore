@@ -446,7 +446,7 @@ namespace PnP.Core.Model.SharePoint
                 dataVersion = element.GetAttribute(WebPartDataVersionAttribute);
             }
 
-            SpControlData = JsonSerializer.Deserialize<WebPartControlData>(element.GetAttribute(ControlDataAttribute), new JsonSerializerOptions() { IgnoreNullValues = true });
+            SpControlData = JsonSerializer.Deserialize<WebPartControlData>(element.GetAttribute(ControlDataAttribute), PnPConstants.JsonSerializer_IgnoreNullValues);
             controlType = SpControlData.ControlType;
 
             var wpDiv = element.GetElementsByTagName("div").FirstOrDefault(a => a.HasAttribute(WebPartDataAttribute));

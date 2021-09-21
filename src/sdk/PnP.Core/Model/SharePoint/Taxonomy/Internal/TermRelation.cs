@@ -35,7 +35,7 @@ namespace PnP.Core.Model.SharePoint
                 };
 
                 // Serialize object to json
-                var bodyContent = JsonSerializer.Serialize(body, typeof(ExpandoObject), new JsonSerializerOptions { WriteIndented = false });
+                var bodyContent = JsonSerializer.Serialize(body, typeof(ExpandoObject), PnPConstants.JsonSerializer_WriteIndentedFalse);
 
                 Term parentTerm = null;
                 if (Parent != null && Parent.GetType() == typeof(TermRelationCollection) && (Parent.Parent != null && (Parent.Parent.GetType() == typeof(Term))))

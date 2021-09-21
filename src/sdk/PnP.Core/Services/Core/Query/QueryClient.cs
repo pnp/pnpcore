@@ -11,7 +11,6 @@ using System.Linq.Expressions;
 using System.Net.Http;
 using System.Text;
 using System.Text.Json;
-using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using System.Web;
 
@@ -814,13 +813,7 @@ namespace PnP.Core.Services
             // Get the corresponding JSON text content
             var jsonUpdateMessage = JsonSerializer.Serialize(updateMessage,
                 typeof(ExpandoObject),
-                new JsonSerializerOptions
-                {
-                    Converters = { new JsonStringEnumConverter() },
-                    WriteIndented = false,
-                    // For some reason the naming policy is not applied on ExpandoObjects
-                    PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
-                });
+                PnPConstants.JsonSerializer_WriteIndentedFalse_CamelCase_JsonStringEnumConverter);
 
             // Prepare the variable to contain the target URL for the update operation
             var updateUrl = await ApiHelper.ParseApiCallAsync(model, entity.GraphUpdate).ConfigureAwait(false);
@@ -922,7 +915,7 @@ namespace PnP.Core.Services
             // Get the corresponding JSON text content
             var jsonUpdateMessage = JsonSerializer.Serialize(updateMessage,
                 typeof(ExpandoObject),
-                new JsonSerializerOptions { WriteIndented = true });
+                PnPConstants.JsonSerializer_WriteIndentedTrue);
 
             // Prepare the variable to contain the target URL for the update operation
             var updateUrl = await ApiHelper.ParseApiCallAsync(model, $"{model.PnPContext.Uri.ToString().TrimEnd(new char[] { '/' })}/{entity.SharePointUpdate}").ConfigureAwait(false);

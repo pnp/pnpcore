@@ -1143,8 +1143,7 @@ namespace PnP.Core.Model.SharePoint
                     else if (controlType == typeof(CanvasColumn))
                     {
                         // Need to parse empty sections
-                        var jsonSerializerSettings = new JsonSerializerOptions() { IgnoreNullValues = true };
-                        var sectionData = JsonSerializer.Deserialize<CanvasData>(controlData, jsonSerializerSettings);
+                        var sectionData = JsonSerializer.Deserialize<CanvasData>(controlData, PnPConstants.JsonSerializer_IgnoreNullValues);
 
                         CanvasSection currentSection = null;
                         if (sectionData.Position != null)
@@ -2426,8 +2425,7 @@ namespace PnP.Core.Model.SharePoint
             {
                 var root = JsonDocument.Parse(response.Json).RootElement.GetProperty("d").GetProperty("GetClientSideWebParts").GetProperty("results");
 
-                var jsonSerializerSettings = new JsonSerializerOptions() { IgnoreNullValues = true };
-                var clientSideComponents = JsonSerializer.Deserialize<List<PageComponent>>(root.ToString(), jsonSerializerSettings);
+                var clientSideComponents = JsonSerializer.Deserialize<List<PageComponent>>(root.ToString(), PnPConstants.JsonSerializer_IgnoreNullValues);
 
                 if (!clientSideComponents.Any())
                 {

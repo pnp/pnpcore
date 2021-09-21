@@ -190,7 +190,7 @@ namespace PnP.Core.Model.SharePoint
                 Text = div.InnerHtml;
             }
 
-            SpControlData = JsonSerializer.Deserialize<TextControlData>(element.GetAttribute(ControlDataAttribute), new JsonSerializerOptions() { IgnoreNullValues = true });
+            SpControlData = JsonSerializer.Deserialize<TextControlData>(element.GetAttribute(ControlDataAttribute), PnPConstants.JsonSerializer_IgnoreNullValues);
             controlType = SpControlData.ControlType;
         }
         #endregion

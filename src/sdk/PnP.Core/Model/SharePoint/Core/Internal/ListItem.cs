@@ -183,7 +183,7 @@ namespace PnP.Core.Model.SharePoint
                 body.formValues = itemValues;
 
                 // Serialize object to json
-                var bodyContent = JsonSerializer.Serialize(body, typeof(ExpandoObject), new JsonSerializerOptions { WriteIndented = true });
+                var bodyContent = JsonSerializer.Serialize(body, typeof(ExpandoObject), PnPConstants.JsonSerializer_WriteIndentedTrue);
 
                 // Return created api call
                 return new ApiCall($"{baseApiCall}/AddValidateUpdateItemUsingPath", ApiType.SPORest, bodyContent);
@@ -405,7 +405,7 @@ namespace PnP.Core.Model.SharePoint
             // Get the corresponding JSON text content
             var jsonUpdateMessage = JsonSerializer.Serialize(updateMessage,
                 typeof(ExpandoObject),
-                new JsonSerializerOptions { WriteIndented = true });
+                PnPConstants.JsonSerializer_WriteIndentedTrue);
 
             var itemUri = GetMetadata(PnPConstants.MetaDataUri);
 

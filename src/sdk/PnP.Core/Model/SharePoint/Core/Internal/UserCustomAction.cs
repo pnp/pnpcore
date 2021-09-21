@@ -50,11 +50,7 @@ namespace PnP.Core.Model.SharePoint
                     addParameters.Rights = rightsPayload;
                 }
 
-                string json = JsonSerializer.Serialize(addParameters, typeof(ExpandoObject),
-                    new JsonSerializerOptions()
-                    {
-                        IgnoreNullValues = true
-                    });
+                string json = JsonSerializer.Serialize(addParameters, typeof(ExpandoObject), PnPConstants.JsonSerializer_IgnoreNullValues);
 
 
                 return new ApiCall(endpointUrl, ApiType.SPORest, json);
@@ -98,7 +94,7 @@ namespace PnP.Core.Model.SharePoint
                     Url
                 };
 
-                var jsonBody = JsonSerializer.Serialize(updateProps, new JsonSerializerOptions { IgnoreNullValues = true });
+                var jsonBody = JsonSerializer.Serialize(updateProps, PnPConstants.JsonSerializer_IgnoreNullValues);
                 return new ApiCallRequest(new ApiCall(apiCallRequest.ApiCall.Request, apiCallRequest.ApiCall.Type, jsonBody));
 
             };

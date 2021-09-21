@@ -19,6 +19,10 @@ namespace PnP.Core.Services
     internal static class JsonMappingHelper
     {
         internal static readonly Regex arrayMatchingRegex = new Regex(@"\[(?<index>[0-9]+)\]", RegexOptions.Compiled);
+        internal static JsonDocumentOptions jsonDocumentOptions = new JsonDocumentOptions
+        {
+            AllowTrailingCommas = true
+        };
 
         /// <summary>
         /// Maps a json string to the provided domain model object instance
@@ -34,13 +38,13 @@ namespace PnP.Core.Services
             }
 
             // Json parsing options
-            var options = new JsonDocumentOptions
-            {
-                AllowTrailingCommas = true
-            };
+            //var options = new JsonDocumentOptions
+            //{
+            //    AllowTrailingCommas = true
+            //};
 
             // Parse the received json content
-            using (JsonDocument document = JsonDocument.Parse(batchRequest.ResponseJson, options))
+            using (JsonDocument document = JsonDocument.Parse(batchRequest.ResponseJson, jsonDocumentOptions))
             {
                 // for SharePoint REST calls the root property is d, for recursive calls this is not the case
                 if (!document.RootElement.TryGetProperty("d", out JsonElement root))
@@ -231,17 +235,17 @@ namespace PnP.Core.Services
                             #region Stop tracking the deferred properties to safe on memory and processing time
                             //else if (property.Value.TryGetProperty("__deferred", out JsonElement deferredProperty))
                             //{
-                                //// Let's keep track of these "pointers" to load additional data, no actual usage at this point yet though
+                            //// Let's keep track of these "pointers" to load additional data, no actual usage at this point yet though
 
-                                //// __deferred property
-                                ////"__deferred": {
-                                ////    "uri": "https://bertonline.sharepoint.com/sites/modern/_api/site/RootWeb/WorkflowAssociations"
-                                ////}
+                            //// __deferred property
+                            ////"__deferred": {
+                            ////    "uri": "https://bertonline.sharepoint.com/sites/modern/_api/site/RootWeb/WorkflowAssociations"
+                            ////}
 
-                                //if (!metadataBasedObject.Metadata.ContainsKey(entityField.Name))
-                                //{
-                                //    metadataBasedObject.Metadata.Add(entityField.Name, deferredProperty.GetProperty("uri").GetString());
-                                //}
+                            //if (!metadataBasedObject.Metadata.ContainsKey(entityField.Name))
+                            //{
+                            //    metadataBasedObject.Metadata.Add(entityField.Name, deferredProperty.GetProperty("uri").GetString());
+                            //}
                             //}
                             #endregion
                         }
@@ -680,7 +684,7 @@ namespace PnP.Core.Services
                             // Check again here due to the recursive nature of this code
                             if (!targetMetadataObject.Metadata.ContainsKey(PnPConstants.MetaDataGraphId))
                             {
-                                targetMetadataObject.Metadata.Add(PnPConstants.MetaDataGraphId, 
+                                targetMetadataObject.Metadata.Add(PnPConstants.MetaDataGraphId,
                                     $"{contextAwareObject.PnPContext.Uri.DnsSafeHost},{contextAwareObject.PnPContext.Site.Id},{contextAwareObject.PnPContext.Web.Id}");
                             }
                         }

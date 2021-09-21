@@ -162,7 +162,7 @@ namespace PnP.Core.Model.SharePoint
                     if (getAvailableTagsForSite.TryGetProperty("results", out JsonElement result))
                     {
                         var returnTags = new List<IComplianceTag>();
-                        var tags = JsonSerializer.Deserialize<IEnumerable<ComplianceTag>>(result.GetRawText(), new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+                        var tags = JsonSerializer.Deserialize<IEnumerable<ComplianceTag>>(result.GetRawText(), PnPConstants.JsonSerializer_PropertyNameCaseInsensitiveTrue);
                         foreach (var tag in tags)
                         {
                             returnTags.Add(tag);

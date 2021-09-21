@@ -50,7 +50,7 @@ namespace PnP.Core.Model.SharePoint
                     }
                 }.AsExpando();
 
-                string body = JsonSerializer.Serialize(webCreationInformation, typeof(ExpandoObject), new JsonSerializerOptions() { IgnoreNullValues = true });
+                string body = JsonSerializer.Serialize(webCreationInformation, typeof(ExpandoObject), PnPConstants.JsonSerializer_IgnoreNullValues);
 
                 return new ApiCall($"{V}/Webs/Add", ApiType.SPORest, body);
             };

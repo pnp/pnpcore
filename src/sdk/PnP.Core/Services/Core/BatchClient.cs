@@ -658,12 +658,7 @@ namespace PnP.Core.Services
         private async Task<bool> ProcessGraphRestBatchResponse(Batch batch, string batchResponse)
         {
             // Deserialize the graph batch response json
-            JsonSerializerOptions options = new JsonSerializerOptions()
-            {
-                IgnoreNullValues = true,
-                PropertyNamingPolicy = JsonNamingPolicy.CamelCase
-            };
-            var graphBatchResponses = JsonSerializer.Deserialize<GraphBatchResponses>(batchResponse, options);
+            var graphBatchResponses = JsonSerializer.Deserialize<GraphBatchResponses>(batchResponse, PnPConstants.JsonSerializer_IgnoreNullValues_CamelCase);
 
             // Was there any request that's eligible for a retry?
             bool retryNeeded = false;
@@ -816,13 +811,7 @@ namespace PnP.Core.Services
                 telemetryManager?.LogServiceRequest(request, PnPContext);
             }
 
-            JsonSerializerOptions options = new JsonSerializerOptions()
-            {
-                IgnoreNullValues = true,
-                PropertyNamingPolicy = JsonNamingPolicy.CamelCase
-            };
-
-            string stringContent = JsonSerializer.Serialize(graphRequests, options);
+            string stringContent = JsonSerializer.Serialize(graphRequests, PnPConstants.JsonSerializer_IgnoreNullValues_CamelCase);
 
             foreach (var bodyToReplace in bodiesToReplace)
             {

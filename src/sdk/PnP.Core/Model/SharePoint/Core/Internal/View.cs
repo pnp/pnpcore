@@ -2,7 +2,6 @@ using PnP.Core.Services;
 using System;
 using System.Dynamic;
 using System.Text.Json;
-using System.Text.Json.Serialization;
 
 namespace PnP.Core.Model.SharePoint
 {
@@ -52,12 +51,8 @@ namespace PnP.Core.Model.SharePoint
                     }
                 }.AsExpando();
 
-                // To handle the serialization of string collections
-                var serializerOptions = new JsonSerializerOptions() { IgnoreNullValues = true };
-                serializerOptions.Converters.Add(new SharePointRestCollectionJsonConverter<string>());
-                serializerOptions.Converters.Add(new JsonStringEnumConverter(allowIntegerValues:false));
 
-                string body = JsonSerializer.Serialize(viewCreationInformation, typeof(ExpandoObject), serializerOptions);
+                string body = JsonSerializer.Serialize(viewCreationInformation, typeof(ExpandoObject), PnPConstants.JsonSerializer_IgnoreNullValues_SharePointRestCollectionJsonConverter_JsonStringEnumConverter);
 
                 return new ApiCall($"{entity.SharePointGet}/Add", ApiType.SPORest, body);
             };

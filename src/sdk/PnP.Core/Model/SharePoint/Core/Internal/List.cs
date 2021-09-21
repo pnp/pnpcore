@@ -409,7 +409,7 @@ namespace PnP.Core.Model.SharePoint
             }
 
             var baseRequestUri = $"_api/Web/Lists(guid'{Id}')/GetItems";
-            string body = JsonSerializer.Serialize(camlQuery, typeof(ExpandoObject), new JsonSerializerOptions() { IgnoreNullValues = true });
+            string body = JsonSerializer.Serialize(camlQuery, typeof(ExpandoObject), PnPConstants.JsonSerializer_IgnoreNullValues);
 
             if (EntityManager.GetEntityConcreteInstance(typeof(IListItem), this, PnPContext) is BaseDataModel<IListItem> concreteEntity)
             {
@@ -491,7 +491,7 @@ namespace PnP.Core.Model.SharePoint
                     renderOptions.ViewXml
                 }
             }.AsExpando();
-            string body = JsonSerializer.Serialize(renderListDataParameters, typeof(ExpandoObject), new JsonSerializerOptions() { IgnoreNullValues = true });
+            string body = JsonSerializer.Serialize(renderListDataParameters, typeof(ExpandoObject), PnPConstants.JsonSerializer_IgnoreNullValues);
 
             var apiCall = new ApiCall($"_api/Web/Lists(guid'{Id}')/RenderListDataAsStream", ApiType.SPORest, body)
             {
@@ -522,7 +522,7 @@ namespace PnP.Core.Model.SharePoint
 
                 if (json.TryGetProperty("GetListComplianceTag", out JsonElement getAvailableTagsForSite))
                 {
-                    var tag = getAvailableTagsForSite.ToObject<ComplianceTag>(new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+                    var tag = getAvailableTagsForSite.ToObject<ComplianceTag>(PnPConstants.JsonSerializer_PropertyNameCaseInsensitiveTrue);
                     return tag;
                 }
             }
@@ -826,10 +826,7 @@ namespace PnP.Core.Model.SharePoint
                 TargetUniqueId = fileUniqueId
             }.AsExpando();
 
-            string body = JsonSerializer.Serialize(classifyAndExtractFile, new JsonSerializerOptions()
-            {
-                IgnoreNullValues = true
-            });
+            string body = JsonSerializer.Serialize(classifyAndExtractFile, PnPConstants.JsonSerializer_IgnoreNullValues);
 
             var apiCall = new ApiCall("_api/machinelearning/workitems", ApiType.SPORest, body);
             return apiCall;

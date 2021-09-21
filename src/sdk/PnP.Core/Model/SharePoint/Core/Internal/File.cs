@@ -748,10 +748,7 @@ namespace PnP.Core.Model.SharePoint
                 TargetUniqueId = UniqueId
             }.AsExpando();
 
-            string body = JsonSerializer.Serialize(classifyAndExtractFile, new JsonSerializerOptions()
-            {
-                IgnoreNullValues = true
-            });
+            string body = JsonSerializer.Serialize(classifyAndExtractFile, PnPConstants.JsonSerializer_IgnoreNullValues);
 
             var apiCall = new ApiCall("_api/machinelearning/workitems", ApiType.SPORest, body);
             return apiCall;
