@@ -572,37 +572,44 @@ namespace PnP.Core.Services
                     // Send the request
                     HttpResponseMessage response = await PnPContext.GraphClient.Client.SendAsync(request).ConfigureAwait(false);
 
-                    // Process the request response
-                    if (response.IsSuccessStatusCode)
+                    try
                     {
-                        // Get the response string
-                        string batchResponse = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+                        // Process the request response
+                        if (response.IsSuccessStatusCode)
+                        {
+                            // Get the response string
+                            string batchResponse = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
 
 #if DEBUG
-                        if (PnPContext.Mode == TestMode.Record)
-                        {
-                            // Call out to the rewrite handler if that one is connected
-                            if (MockingFileRewriteHandler != null)
+                            if (PnPContext.Mode == TestMode.Record)
                             {
-                                batchResponse = MockingFileRewriteHandler(batchResponse);
-                            }
+                                // Call out to the rewrite handler if that one is connected
+                                if (MockingFileRewriteHandler != null)
+                                {
+                                    batchResponse = MockingFileRewriteHandler(batchResponse);
+                                }
 
-                            // Write response
-                            TestManager.RecordResponse(PnPContext, requestKey, batchResponse);
-                        }
+                                // Write response
+                                TestManager.RecordResponse(PnPContext, requestKey, batchResponse);
+                            }
 
 #endif
 
-                        var ready = await ProcessGraphRestBatchResponse(batch, batchResponse).ConfigureAwait(false);
-                        if (!ready)
+                            var ready = await ProcessGraphRestBatchResponse(batch, batchResponse).ConfigureAwait(false);
+                            if (!ready)
+                            {
+                                return false;
+                            }
+                        }
+                        else
                         {
-                            return false;
+                            // Something went wrong...
+                            throw new MicrosoftGraphServiceException(ErrorType.GraphServiceError, (int)response.StatusCode, await response.Content.ReadAsStringAsync().ConfigureAwait(false));
                         }
                     }
-                    else
+                    finally
                     {
-                        // Something went wrong...
-                        throw new MicrosoftGraphServiceException(ErrorType.GraphServiceError, (int)response.StatusCode, await response.Content.ReadAsStringAsync().ConfigureAwait(false));
+                        response.Dispose();
                     }
 #if DEBUG
                 }
@@ -970,32 +977,39 @@ namespace PnP.Core.Services
                             // Send the request
                             HttpResponseMessage response = await PnPContext.RestClient.Client.SendAsync(request).ConfigureAwait(false);
 
-                            // Process the request response
-                            if (response.IsSuccessStatusCode)
+                            try
                             {
-                                // Get the response string
-                                string batchResponse = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+                                // Process the request response
+                                if (response.IsSuccessStatusCode)
+                                {
+                                    // Get the response string
+                                    string batchResponse = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
 
 #if DEBUG
-                                if (PnPContext.Mode == TestMode.Record)
-                                {
-                                    // Call out to the rewrite handler if that one is connected
-                                    if (MockingFileRewriteHandler != null)
+                                    if (PnPContext.Mode == TestMode.Record)
                                     {
-                                        batchResponse = MockingFileRewriteHandler(batchResponse);
-                                    }
+                                        // Call out to the rewrite handler if that one is connected
+                                        if (MockingFileRewriteHandler != null)
+                                        {
+                                            batchResponse = MockingFileRewriteHandler(batchResponse);
+                                        }
 
-                                    // Write response
-                                    TestManager.RecordResponse(PnPContext, requestKey, batchResponse);
-                                }
+                                        // Write response
+                                        TestManager.RecordResponse(PnPContext, requestKey, batchResponse);
+                                    }
 #endif
 
-                                await ProcessSharePointRestBatchResponse(splitRestBatch, batchResponse).ConfigureAwait(false);
+                                    await ProcessSharePointRestBatchResponse(splitRestBatch, batchResponse).ConfigureAwait(false);
+                                }
+                                else
+                                {
+                                    // Something went wrong...
+                                    throw new SharePointRestServiceException(ErrorType.SharePointRestServiceError, (int)response.StatusCode, await response.Content.ReadAsStringAsync().ConfigureAwait(false));
+                                }
                             }
-                            else
+                            finally
                             {
-                                // Something went wrong...
-                                throw new SharePointRestServiceException(ErrorType.SharePointRestServiceError, (int)response.StatusCode, await response.Content.ReadAsStringAsync().ConfigureAwait(false));
+                                response.Dispose();
                             }
 #if DEBUG
                         }
@@ -1582,32 +1596,39 @@ namespace PnP.Core.Services
                                 // Send the request
                                 HttpResponseMessage response = await PnPContext.RestClient.Client.SendAsync(request).ConfigureAwait(false);
 
-                                // Process the request response
-                                if (response.IsSuccessStatusCode)
+                                try
                                 {
-                                    // Get the response string
-                                    string batchResponse = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+                                    // Process the request response
+                                    if (response.IsSuccessStatusCode)
+                                    {
+                                        // Get the response string
+                                        string batchResponse = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
 
 #if DEBUG
-                                    if (PnPContext.Mode == TestMode.Record)
-                                    {
-                                        // Call out to the rewrite handler if that one is connected
-                                        if (MockingFileRewriteHandler != null)
+                                        if (PnPContext.Mode == TestMode.Record)
                                         {
-                                            batchResponse = MockingFileRewriteHandler(batchResponse);
-                                        }
+                                            // Call out to the rewrite handler if that one is connected
+                                            if (MockingFileRewriteHandler != null)
+                                            {
+                                                batchResponse = MockingFileRewriteHandler(batchResponse);
+                                            }
 
-                                        // Write response
-                                        TestManager.RecordResponse(PnPContext, requestKey, batchResponse);
-                                    }
+                                            // Write response
+                                            TestManager.RecordResponse(PnPContext, requestKey, batchResponse);
+                                        }
 #endif
 
-                                    ProcessCsomBatchResponse(csomBatch, batchResponse, response.StatusCode);
+                                        ProcessCsomBatchResponse(csomBatch, batchResponse, response.StatusCode);
+                                    }
+                                    else
+                                    {
+                                        // Something went wrong...
+                                        throw new SharePointRestServiceException(ErrorType.SharePointRestServiceError, (int)response.StatusCode, await response.Content.ReadAsStringAsync().ConfigureAwait(false));
+                                    }
                                 }
-                                else
+                                finally
                                 {
-                                    // Something went wrong...
-                                    throw new SharePointRestServiceException(ErrorType.SharePointRestServiceError, (int)response.StatusCode, await response.Content.ReadAsStringAsync().ConfigureAwait(false));
+                                    response.Dispose();
                                 }
 #if DEBUG
                             }
