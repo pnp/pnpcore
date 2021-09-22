@@ -440,7 +440,6 @@ namespace PnP.Core.Model.SharePoint
                     {
                         string[] nameParts = property.Name.Split(new char[] { '.' });
 
-                        var field2 = fields.AsRequested().FirstOrDefault(p => p.InternalName == nameParts[0]);
                         var propertyToUpdate = properties.FirstOrDefault(p => p.Name == nameParts[0]);
                         if (propertyToUpdate != null && propertyToUpdate.Values.Count == 1 && !string.IsNullOrEmpty(nameParts[1]))
                         {
@@ -458,6 +457,12 @@ namespace PnP.Core.Model.SharePoint
                         else if (propertyToUpdate != null && !string.IsNullOrEmpty(nameParts[1]))
                         {
                             //"Bool1.value": "1",
+
+                            if (!fieldLookupCache.TryGetValue(nameParts[0], out IField field2))
+                            {
+                                field2 = fields.AsRequested().FirstOrDefault(p => p.InternalName == nameParts[0]);
+                                fieldLookupCache.Add(nameParts[0], field2);
+                            }
 
                             // Extra properties on "regular" fields
                             if (field2 != null && field2.FieldTypeKind == FieldType.Boolean && nameParts[1] == "value")
