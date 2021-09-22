@@ -27,6 +27,8 @@ namespace PnP.Core.Model.SharePoint
 
             var result = new Dictionary<string, object>();
 
+            Dictionary<string, IField> fieldLookupCache = new Dictionary<string, IField>();
+
             var document = JsonSerializer.Deserialize<JsonElement>(json);
 
             // Process "non-rows" data
@@ -95,7 +97,7 @@ namespace PnP.Core.Model.SharePoint
                         var overflowDictionary = itemToUpdate.Values;
 
                         // Translate this row first into an object model for easier consumption
-                        var rowToProcess = TransformRowData(row, list.Fields);
+                        var rowToProcess = TransformRowData(row, list.Fields, ref fieldLookupCache);
 
                         foreach (var property in rowToProcess)
                         {
@@ -230,13 +232,19 @@ namespace PnP.Core.Model.SharePoint
             return result;
         }
 
-        private static List<ListDataAsStreamProperty> TransformRowData(JsonElement row, IFieldCollection fields)
+        private static List<ListDataAsStreamProperty> TransformRowData(JsonElement row, IFieldCollection fields, ref Dictionary<string, IField> fieldLookupCache)
         {
             List<ListDataAsStreamProperty> properties = new List<ListDataAsStreamProperty>();
 
             foreach (var property in row.EnumerateObject())
-            {                
-                var field = fields.AsRequested().FirstOrDefault(p => p.InternalName == property.Name);
+            {
+                // Doing the field lookup is expensive given it happens per field/row, caching drastically improves performance when reading large sets of items
+                if (!fieldLookupCache.TryGetValue(property.Name, out IField field))
+                {
+                    field = fields.AsRequested().FirstOrDefault(p => p.InternalName == property.Name);
+                    fieldLookupCache.Add(property.Name, field);
+                }               
+
                 if (field != null)
                 {
                     var streamProperty = new ListDataAsStreamProperty()
