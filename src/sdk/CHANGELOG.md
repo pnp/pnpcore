@@ -31,6 +31,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - PERF: Improved parsing of REST batch response for .NET 5: 50% less memory allocations + 50% to 90% performance gain (depending on the size) [jansenbe - Bert Jansen]
 - PERF: Reuse JsonSerializerOptions: overall offline test run is 10% faster [jansenbe - Bert Jansen]
 - PERF: Standardized on JsonSerializer.Deserialize, replaced JsonDocument.Parse where needed [jansenbe - Bert Jansen]
+- PERF: Get the response string, using HttpCompletionOption.ResponseHeadersRead and ReadAsStreamAsync to lower the memory pressure when processing larger responses + performance is better [jansenbe - Bert Jansen]
 
 ## [1.3.0]
 
