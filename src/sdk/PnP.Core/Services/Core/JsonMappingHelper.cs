@@ -19,10 +19,6 @@ namespace PnP.Core.Services
     internal static class JsonMappingHelper
     {
         internal static readonly Regex arrayMatchingRegex = new Regex(@"\[(?<index>[0-9]+)\]", RegexOptions.Compiled);
-        internal static JsonDocumentOptions jsonDocumentOptions = new JsonDocumentOptions
-        {
-            AllowTrailingCommas = true
-        };
 
         /// <summary>
         /// Maps a json string to the provided domain model object instance
@@ -37,28 +33,20 @@ namespace PnP.Core.Services
                 return;
             }
 
-            // Json parsing options
-            //var options = new JsonDocumentOptions
-            //{
-            //    AllowTrailingCommas = true
-            //};
-
             // Parse the received json content
-            using (JsonDocument document = JsonDocument.Parse(batchRequest.ResponseJson, jsonDocumentOptions))
+            var json = JsonSerializer.Deserialize<JsonElement>(batchRequest.ResponseJson, PnPConstants.JsonSerializer_AllowTrailingCommasTrue);
+            // for SharePoint REST calls the root property is d, for recursive calls this is not the case
+            if (!json.TryGetProperty("d", out JsonElement root))
             {
-                // for SharePoint REST calls the root property is d, for recursive calls this is not the case
-                if (!document.RootElement.TryGetProperty("d", out JsonElement root))
-                {
-                    root = document.RootElement;
-                }
-
-                // TODO: The below method's signature is quite complex and reuses the same object
-                // multiple times. Can we try to simplify it?
-
-                // Map the returned JSON to the respective entities
-                await FromJson(batchRequest.Model, batchRequest.EntityInfo, new ApiResponse(batchRequest.ApiCall, root, batchRequest.Id), batchRequest.FromJsonCasting).ConfigureAwait(false);
-                batchRequest.PostMappingJson?.Invoke(batchRequest.ResponseJson);
+                root = json;
             }
+
+            // TODO: The below method's signature is quite complex and reuses the same object
+            // multiple times. Can we try to simplify it?
+
+            // Map the returned JSON to the respective entities
+            await FromJson(batchRequest.Model, batchRequest.EntityInfo, new ApiResponse(batchRequest.ApiCall, root, batchRequest.Id), batchRequest.FromJsonCasting).ConfigureAwait(false);
+            batchRequest.PostMappingJson?.Invoke(batchRequest.ResponseJson);
         }
 
         /// <summary>
@@ -639,7 +627,7 @@ namespace PnP.Core.Services
                     #endregion
 
                     // investigate if this can be a location field
-                    var parsedFieldContent = JsonDocument.Parse(json.GetString()).RootElement;
+                    var parsedFieldContent = JsonSerializer.Deserialize<JsonElement>(json.GetString());
                     var fieldValue = new FieldLocationValue() { Field = GetListItemField(pnpObject, propertyName) };
                     fieldValue.FromJson(parsedFieldContent);
                     fieldValue.IsArray = false;

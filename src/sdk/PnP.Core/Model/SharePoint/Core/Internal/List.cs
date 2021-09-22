@@ -518,7 +518,7 @@ namespace PnP.Core.Model.SharePoint
 
             if (!string.IsNullOrEmpty(response.Json))
             {
-                var json = JsonDocument.Parse(response.Json).RootElement.GetProperty("d");
+                var json = JsonSerializer.Deserialize<JsonElement>(response.Json).GetProperty("d");
 
                 if (json.TryGetProperty("GetListComplianceTag", out JsonElement getAvailableTagsForSite))
                 {
@@ -799,7 +799,7 @@ namespace PnP.Core.Model.SharePoint
 
         private static ISyntexClassifyAndExtractResult ProcessClassifyAndExtractResponse(string json)
         {
-            var root = JsonDocument.Parse(json).RootElement.GetProperty("d");
+            var root = JsonSerializer.Deserialize<JsonElement>(json).GetProperty("d");
             return new SyntexClassifyAndExtractResult
             {
                 Created = root.GetProperty("Created").GetDateTime(),

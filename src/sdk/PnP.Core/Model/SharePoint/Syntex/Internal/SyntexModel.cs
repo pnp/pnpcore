@@ -151,7 +151,7 @@ namespace PnP.Core.Model.SharePoint
 
         private static void ProcessGetModelPublicationsResponse(string json, List<ISyntexModelPublication> results)
         {
-            var root = JsonDocument.Parse(json).RootElement.GetProperty("d").GetProperty("results");
+            var root = JsonSerializer.Deserialize<JsonElement>(json).GetProperty("d").GetProperty("results");
             if (root.ValueKind == JsonValueKind.Array)
             {
                 foreach (var publicationResultJson in root.EnumerateArray())
@@ -444,7 +444,7 @@ namespace PnP.Core.Model.SharePoint
 
         private static List<SyntexModelPublicationResult> ParseModelPublishResponse(string json)
         {
-            var root = JsonDocument.Parse(json).RootElement.GetProperty("d").GetProperty("Details").GetProperty("results");
+            var root = JsonSerializer.Deserialize<JsonElement>(json).GetProperty("d").GetProperty("Details").GetProperty("results");
             var modelPublicationResults = DeserializeModelPublishResult(root.ToString());
             return modelPublicationResults;
         }

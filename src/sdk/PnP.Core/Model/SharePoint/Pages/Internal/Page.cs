@@ -1970,7 +1970,7 @@ namespace PnP.Core.Model.SharePoint
                 TranslatedLanguages = new List<IPageTranslationStatus>()
             };
 
-            var root = JsonDocument.Parse(response).RootElement.GetProperty("d");
+            var root = JsonSerializer.Deserialize<JsonElement>(response).GetProperty("d");
 
             // Process untranslated languages
             var untranslatedLanguages = root.GetProperty("UntranslatedLanguages").GetProperty("results");
@@ -2423,7 +2423,7 @@ namespace PnP.Core.Model.SharePoint
 
             if (!string.IsNullOrEmpty(response.Json))
             {
-                var root = JsonDocument.Parse(response.Json).RootElement.GetProperty("d").GetProperty("GetClientSideWebParts").GetProperty("results");
+                var root = JsonSerializer.Deserialize<JsonElement>(response.Json).GetProperty("d").GetProperty("GetClientSideWebParts").GetProperty("results");
 
                 var clientSideComponents = JsonSerializer.Deserialize<List<PageComponent>>(root.ToString(), PnPConstants.JsonSerializer_IgnoreNullValues);
 

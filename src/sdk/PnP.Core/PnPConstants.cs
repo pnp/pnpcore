@@ -146,6 +146,11 @@ namespace PnP.Core
         internal static JsonSerializerOptions JsonSerializer_PropertyNameCaseInsensitiveTrue = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
 
         /// <summary>
+        /// Cached JsonSerializerOptions for performance using AllowTrailingCommas = true
+        /// </summary>
+        internal static JsonSerializerOptions JsonSerializer_AllowTrailingCommasTrue = new JsonSerializerOptions { AllowTrailingCommas = true };
+
+        /// <summary>
         /// Cached JsonSerializerOptions for performance with SPGuidConverter and DateTimeConverter
         /// </summary>
         internal static JsonSerializerOptions JsonSerializer_SPGuidConverter_DateTimeConverter = new JsonSerializerOptions()
