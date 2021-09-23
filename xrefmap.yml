@@ -4322,6 +4322,19 @@ references:
   commentId: T:PnP.Core.Model.Security.IRoleAssignment
   fullName: PnP.Core.Model.Security.IRoleAssignment
   nameWithType: IRoleAssignment
+- uid: PnP.Core.Model.Security.IRoleAssignment.All
+  name: All
+  href: api/PnP.Core.Model.Security.IRoleAssignment.html#PnP_Core_Model_Security_IRoleAssignment_All
+  commentId: P:PnP.Core.Model.Security.IRoleAssignment.All
+  fullName: PnP.Core.Model.Security.IRoleAssignment.All
+  nameWithType: IRoleAssignment.All
+- uid: PnP.Core.Model.Security.IRoleAssignment.All*
+  name: All
+  href: api/PnP.Core.Model.Security.IRoleAssignment.html#PnP_Core_Model_Security_IRoleAssignment_All_
+  commentId: Overload:PnP.Core.Model.Security.IRoleAssignment.All
+  isSpec: "True"
+  fullName: PnP.Core.Model.Security.IRoleAssignment.All
+  nameWithType: IRoleAssignment.All
 - uid: PnP.Core.Model.Security.IRoleAssignment.PrincipalId
   name: PrincipalId
   href: api/PnP.Core.Model.Security.IRoleAssignment.html#PnP_Core_Model_Security_IRoleAssignment_PrincipalId
@@ -4360,6 +4373,19 @@ references:
   commentId: T:PnP.Core.Model.Security.IRoleDefinition
   fullName: PnP.Core.Model.Security.IRoleDefinition
   nameWithType: IRoleDefinition
+- uid: PnP.Core.Model.Security.IRoleDefinition.All
+  name: All
+  href: api/PnP.Core.Model.Security.IRoleDefinition.html#PnP_Core_Model_Security_IRoleDefinition_All
+  commentId: P:PnP.Core.Model.Security.IRoleDefinition.All
+  fullName: PnP.Core.Model.Security.IRoleDefinition.All
+  nameWithType: IRoleDefinition.All
+- uid: PnP.Core.Model.Security.IRoleDefinition.All*
+  name: All
+  href: api/PnP.Core.Model.Security.IRoleDefinition.html#PnP_Core_Model_Security_IRoleDefinition_All_
+  commentId: Overload:PnP.Core.Model.Security.IRoleDefinition.All
+  isSpec: "True"
+  fullName: PnP.Core.Model.Security.IRoleDefinition.All
+  nameWithType: IRoleDefinition.All
 - uid: PnP.Core.Model.Security.IRoleDefinition.BasePermissions
   name: BasePermissions
   href: api/PnP.Core.Model.Security.IRoleDefinition.html#PnP_Core_Model_Security_IRoleDefinition_BasePermissions
@@ -4641,6 +4667,19 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.Security.ISharePointGroup.AddUserBatchAsync
   nameWithType: ISharePointGroup.AddUserBatchAsync
+- uid: PnP.Core.Model.Security.ISharePointGroup.All
+  name: All
+  href: api/PnP.Core.Model.Security.ISharePointGroup.html#PnP_Core_Model_Security_ISharePointGroup_All
+  commentId: P:PnP.Core.Model.Security.ISharePointGroup.All
+  fullName: PnP.Core.Model.Security.ISharePointGroup.All
+  nameWithType: ISharePointGroup.All
+- uid: PnP.Core.Model.Security.ISharePointGroup.All*
+  name: All
+  href: api/PnP.Core.Model.Security.ISharePointGroup.html#PnP_Core_Model_Security_ISharePointGroup_All_
+  commentId: Overload:PnP.Core.Model.Security.ISharePointGroup.All
+  isSpec: "True"
+  fullName: PnP.Core.Model.Security.ISharePointGroup.All
+  nameWithType: ISharePointGroup.All
 - uid: PnP.Core.Model.Security.ISharePointGroup.AllowMembersEditMembership
   name: AllowMembersEditMembership
   href: api/PnP.Core.Model.Security.ISharePointGroup.html#PnP_Core_Model_Security_ISharePointGroup_AllowMembersEditMembership
@@ -5202,6 +5241,19 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.Security.ISharePointUser.AadObjectId
   nameWithType: ISharePointUser.AadObjectId
+- uid: PnP.Core.Model.Security.ISharePointUser.All
+  name: All
+  href: api/PnP.Core.Model.Security.ISharePointUser.html#PnP_Core_Model_Security_ISharePointUser_All
+  commentId: P:PnP.Core.Model.Security.ISharePointUser.All
+  fullName: PnP.Core.Model.Security.ISharePointUser.All
+  nameWithType: ISharePointUser.All
+- uid: PnP.Core.Model.Security.ISharePointUser.All*
+  name: All
+  href: api/PnP.Core.Model.Security.ISharePointUser.html#PnP_Core_Model_Security_ISharePointUser_All_
+  commentId: Overload:PnP.Core.Model.Security.ISharePointUser.All
+  isSpec: "True"
+  fullName: PnP.Core.Model.Security.ISharePointUser.All
+  nameWithType: ISharePointUser.All
 - uid: PnP.Core.Model.Security.ISharePointUser.AsGraphUser
   name: AsGraphUser()
   href: api/PnP.Core.Model.Security.ISharePointUser.html#PnP_Core_Model_Security_ISharePointUser_AsGraphUser
@@ -8277,6 +8329,19 @@ references:
   commentId: T:PnP.Core.Model.SharePoint.IAttachment
   fullName: PnP.Core.Model.SharePoint.IAttachment
   nameWithType: IAttachment
+- uid: PnP.Core.Model.SharePoint.IAttachment.All
+  name: All
+  href: api/PnP.Core.Model.SharePoint.IAttachment.html#PnP_Core_Model_SharePoint_IAttachment_All
+  commentId: P:PnP.Core.Model.SharePoint.IAttachment.All
+  fullName: PnP.Core.Model.SharePoint.IAttachment.All
+  nameWithType: IAttachment.All
+- uid: PnP.Core.Model.SharePoint.IAttachment.All*
+  name: All
+  href: api/PnP.Core.Model.SharePoint.IAttachment.html#PnP_Core_Model_SharePoint_IAttachment_All_
+  commentId: Overload:PnP.Core.Model.SharePoint.IAttachment.All
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IAttachment.All
+  nameWithType: IAttachment.All
 - uid: PnP.Core.Model.SharePoint.IAttachment.FileName
   name: FileName
   href: api/PnP.Core.Model.SharePoint.IAttachment.html#PnP_Core_Model_SharePoint_IAttachment_FileName
@@ -8445,6 +8510,19 @@ references:
   commentId: T:PnP.Core.Model.SharePoint.IBasePermissions
   fullName: PnP.Core.Model.SharePoint.IBasePermissions
   nameWithType: IBasePermissions
+- uid: PnP.Core.Model.SharePoint.IBasePermissions.All
+  name: All
+  href: api/PnP.Core.Model.SharePoint.IBasePermissions.html#PnP_Core_Model_SharePoint_IBasePermissions_All
+  commentId: P:PnP.Core.Model.SharePoint.IBasePermissions.All
+  fullName: PnP.Core.Model.SharePoint.IBasePermissions.All
+  nameWithType: IBasePermissions.All
+- uid: PnP.Core.Model.SharePoint.IBasePermissions.All*
+  name: All
+  href: api/PnP.Core.Model.SharePoint.IBasePermissions.html#PnP_Core_Model_SharePoint_IBasePermissions_All_
+  commentId: Overload:PnP.Core.Model.SharePoint.IBasePermissions.All
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IBasePermissions.All
+  nameWithType: IBasePermissions.All
 - uid: PnP.Core.Model.SharePoint.IBasePermissions.Clear(PnP.Core.Model.SharePoint.PermissionKind)
   name: Clear(PermissionKind)
   href: api/PnP.Core.Model.SharePoint.IBasePermissions.html#PnP_Core_Model_SharePoint_IBasePermissions_Clear_PnP_Core_Model_SharePoint_PermissionKind_
@@ -9755,6 +9833,19 @@ references:
   commentId: T:PnP.Core.Model.SharePoint.IComment
   fullName: PnP.Core.Model.SharePoint.IComment
   nameWithType: IComment
+- uid: PnP.Core.Model.SharePoint.IComment.All
+  name: All
+  href: api/PnP.Core.Model.SharePoint.IComment.html#PnP_Core_Model_SharePoint_IComment_All
+  commentId: P:PnP.Core.Model.SharePoint.IComment.All
+  fullName: PnP.Core.Model.SharePoint.IComment.All
+  nameWithType: IComment.All
+- uid: PnP.Core.Model.SharePoint.IComment.All*
+  name: All
+  href: api/PnP.Core.Model.SharePoint.IComment.html#PnP_Core_Model_SharePoint_IComment_All_
+  commentId: Overload:PnP.Core.Model.SharePoint.IComment.All
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IComment.All
+  nameWithType: IComment.All
 - uid: PnP.Core.Model.SharePoint.IComment.Author
   name: Author
   href: api/PnP.Core.Model.SharePoint.IComment.html#PnP_Core_Model_SharePoint_IComment_Author
@@ -10478,6 +10569,19 @@ references:
   commentId: T:PnP.Core.Model.SharePoint.IContentType
   fullName: PnP.Core.Model.SharePoint.IContentType
   nameWithType: IContentType
+- uid: PnP.Core.Model.SharePoint.IContentType.All
+  name: All
+  href: api/PnP.Core.Model.SharePoint.IContentType.html#PnP_Core_Model_SharePoint_IContentType_All
+  commentId: P:PnP.Core.Model.SharePoint.IContentType.All
+  fullName: PnP.Core.Model.SharePoint.IContentType.All
+  nameWithType: IContentType.All
+- uid: PnP.Core.Model.SharePoint.IContentType.All*
+  name: All
+  href: api/PnP.Core.Model.SharePoint.IContentType.html#PnP_Core_Model_SharePoint_IContentType_All_
+  commentId: Overload:PnP.Core.Model.SharePoint.IContentType.All
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IContentType.All
+  nameWithType: IContentType.All
 - uid: PnP.Core.Model.SharePoint.IContentType.ClientFormCustomFormatter
   name: ClientFormCustomFormatter
   href: api/PnP.Core.Model.SharePoint.IContentType.html#PnP_Core_Model_SharePoint_IContentType_ClientFormCustomFormatter
@@ -11183,6 +11287,19 @@ references:
   commentId: T:PnP.Core.Model.SharePoint.IFeature
   fullName: PnP.Core.Model.SharePoint.IFeature
   nameWithType: IFeature
+- uid: PnP.Core.Model.SharePoint.IFeature.All
+  name: All
+  href: api/PnP.Core.Model.SharePoint.IFeature.html#PnP_Core_Model_SharePoint_IFeature_All
+  commentId: P:PnP.Core.Model.SharePoint.IFeature.All
+  fullName: PnP.Core.Model.SharePoint.IFeature.All
+  nameWithType: IFeature.All
+- uid: PnP.Core.Model.SharePoint.IFeature.All*
+  name: All
+  href: api/PnP.Core.Model.SharePoint.IFeature.html#PnP_Core_Model_SharePoint_IFeature_All_
+  commentId: Overload:PnP.Core.Model.SharePoint.IFeature.All
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IFeature.All
+  nameWithType: IFeature.All
 - uid: PnP.Core.Model.SharePoint.IFeature.DefinitionId
   name: DefinitionId
   href: api/PnP.Core.Model.SharePoint.IFeature.html#PnP_Core_Model_SharePoint_IFeature_DefinitionId
@@ -11349,6 +11466,19 @@ references:
   commentId: T:PnP.Core.Model.SharePoint.IField
   fullName: PnP.Core.Model.SharePoint.IField
   nameWithType: IField
+- uid: PnP.Core.Model.SharePoint.IField.All
+  name: All
+  href: api/PnP.Core.Model.SharePoint.IField.html#PnP_Core_Model_SharePoint_IField_All
+  commentId: P:PnP.Core.Model.SharePoint.IField.All
+  fullName: PnP.Core.Model.SharePoint.IField.All
+  nameWithType: IField.All
+- uid: PnP.Core.Model.SharePoint.IField.All*
+  name: All
+  href: api/PnP.Core.Model.SharePoint.IField.html#PnP_Core_Model_SharePoint_IField_All_
+  commentId: Overload:PnP.Core.Model.SharePoint.IField.All
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IField.All
+  nameWithType: IField.All
 - uid: PnP.Core.Model.SharePoint.IField.AllowDisplay
   name: AllowDisplay
   href: api/PnP.Core.Model.SharePoint.IField.html#PnP_Core_Model_SharePoint_IField_AllowDisplay
@@ -13398,6 +13528,19 @@ references:
   commentId: T:PnP.Core.Model.SharePoint.IFieldLink
   fullName: PnP.Core.Model.SharePoint.IFieldLink
   nameWithType: IFieldLink
+- uid: PnP.Core.Model.SharePoint.IFieldLink.All
+  name: All
+  href: api/PnP.Core.Model.SharePoint.IFieldLink.html#PnP_Core_Model_SharePoint_IFieldLink_All
+  commentId: P:PnP.Core.Model.SharePoint.IFieldLink.All
+  fullName: PnP.Core.Model.SharePoint.IFieldLink.All
+  nameWithType: IFieldLink.All
+- uid: PnP.Core.Model.SharePoint.IFieldLink.All*
+  name: All
+  href: api/PnP.Core.Model.SharePoint.IFieldLink.html#PnP_Core_Model_SharePoint_IFieldLink_All_
+  commentId: Overload:PnP.Core.Model.SharePoint.IFieldLink.All
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IFieldLink.All
+  nameWithType: IFieldLink.All
 - uid: PnP.Core.Model.SharePoint.IFieldLink.DisplayName
   name: DisplayName
   href: api/PnP.Core.Model.SharePoint.IFieldLink.html#PnP_Core_Model_SharePoint_IFieldLink_DisplayName
@@ -13951,6 +14094,19 @@ references:
   commentId: T:PnP.Core.Model.SharePoint.IFile
   fullName: PnP.Core.Model.SharePoint.IFile
   nameWithType: IFile
+- uid: PnP.Core.Model.SharePoint.IFile.All
+  name: All
+  href: api/PnP.Core.Model.SharePoint.IFile.html#PnP_Core_Model_SharePoint_IFile_All
+  commentId: P:PnP.Core.Model.SharePoint.IFile.All
+  fullName: PnP.Core.Model.SharePoint.IFile.All
+  nameWithType: IFile.All
+- uid: PnP.Core.Model.SharePoint.IFile.All*
+  name: All
+  href: api/PnP.Core.Model.SharePoint.IFile.html#PnP_Core_Model_SharePoint_IFile_All_
+  commentId: Overload:PnP.Core.Model.SharePoint.IFile.All
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IFile.All
+  nameWithType: IFile.All
 - uid: PnP.Core.Model.SharePoint.IFile.Approve(System.String)
   name: Approve(String)
   href: api/PnP.Core.Model.SharePoint.IFile.html#PnP_Core_Model_SharePoint_IFile_Approve_System_String_
@@ -15201,6 +15357,19 @@ references:
   commentId: T:PnP.Core.Model.SharePoint.IFileVersion
   fullName: PnP.Core.Model.SharePoint.IFileVersion
   nameWithType: IFileVersion
+- uid: PnP.Core.Model.SharePoint.IFileVersion.All
+  name: All
+  href: api/PnP.Core.Model.SharePoint.IFileVersion.html#PnP_Core_Model_SharePoint_IFileVersion_All
+  commentId: P:PnP.Core.Model.SharePoint.IFileVersion.All
+  fullName: PnP.Core.Model.SharePoint.IFileVersion.All
+  nameWithType: IFileVersion.All
+- uid: PnP.Core.Model.SharePoint.IFileVersion.All*
+  name: All
+  href: api/PnP.Core.Model.SharePoint.IFileVersion.html#PnP_Core_Model_SharePoint_IFileVersion_All_
+  commentId: Overload:PnP.Core.Model.SharePoint.IFileVersion.All
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IFileVersion.All
+  nameWithType: IFileVersion.All
 - uid: PnP.Core.Model.SharePoint.IFileVersion.CheckInComment
   name: CheckInComment
   href: api/PnP.Core.Model.SharePoint.IFileVersion.html#PnP_Core_Model_SharePoint_IFileVersion_CheckInComment
@@ -15529,6 +15698,19 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IFolder.AddFolderBatchAsync
   nameWithType: IFolder.AddFolderBatchAsync
+- uid: PnP.Core.Model.SharePoint.IFolder.All
+  name: All
+  href: api/PnP.Core.Model.SharePoint.IFolder.html#PnP_Core_Model_SharePoint_IFolder_All
+  commentId: P:PnP.Core.Model.SharePoint.IFolder.All
+  fullName: PnP.Core.Model.SharePoint.IFolder.All
+  nameWithType: IFolder.All
+- uid: PnP.Core.Model.SharePoint.IFolder.All*
+  name: All
+  href: api/PnP.Core.Model.SharePoint.IFolder.html#PnP_Core_Model_SharePoint_IFolder_All_
+  commentId: Overload:PnP.Core.Model.SharePoint.IFolder.All
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IFolder.All
+  nameWithType: IFolder.All
 - uid: PnP.Core.Model.SharePoint.IFolder.CopyTo(System.String,PnP.Core.Model.SharePoint.MoveCopyOptions)
   name: CopyTo(String, MoveCopyOptions)
   href: api/PnP.Core.Model.SharePoint.IFolder.html#PnP_Core_Model_SharePoint_IFolder_CopyTo_System_String_PnP_Core_Model_SharePoint_MoveCopyOptions_
@@ -15967,6 +16149,19 @@ references:
   commentId: T:PnP.Core.Model.SharePoint.IHubSite
   fullName: PnP.Core.Model.SharePoint.IHubSite
   nameWithType: IHubSite
+- uid: PnP.Core.Model.SharePoint.IHubSite.All
+  name: All
+  href: api/PnP.Core.Model.SharePoint.IHubSite.html#PnP_Core_Model_SharePoint_IHubSite_All
+  commentId: P:PnP.Core.Model.SharePoint.IHubSite.All
+  fullName: PnP.Core.Model.SharePoint.IHubSite.All
+  nameWithType: IHubSite.All
+- uid: PnP.Core.Model.SharePoint.IHubSite.All*
+  name: All
+  href: api/PnP.Core.Model.SharePoint.IHubSite.html#PnP_Core_Model_SharePoint_IHubSite_All_
+  commentId: Overload:PnP.Core.Model.SharePoint.IHubSite.All
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IHubSite.All
+  nameWithType: IHubSite.All
 - uid: PnP.Core.Model.SharePoint.IHubSite.Description
   name: Description
   href: api/PnP.Core.Model.SharePoint.IHubSite.html#PnP_Core_Model_SharePoint_IHubSite_Description
@@ -16382,6 +16577,19 @@ references:
   commentId: T:PnP.Core.Model.SharePoint.IInformationRightsManagementSettings
   fullName: PnP.Core.Model.SharePoint.IInformationRightsManagementSettings
   nameWithType: IInformationRightsManagementSettings
+- uid: PnP.Core.Model.SharePoint.IInformationRightsManagementSettings.All
+  name: All
+  href: api/PnP.Core.Model.SharePoint.IInformationRightsManagementSettings.html#PnP_Core_Model_SharePoint_IInformationRightsManagementSettings_All
+  commentId: P:PnP.Core.Model.SharePoint.IInformationRightsManagementSettings.All
+  fullName: PnP.Core.Model.SharePoint.IInformationRightsManagementSettings.All
+  nameWithType: IInformationRightsManagementSettings.All
+- uid: PnP.Core.Model.SharePoint.IInformationRightsManagementSettings.All*
+  name: All
+  href: api/PnP.Core.Model.SharePoint.IInformationRightsManagementSettings.html#PnP_Core_Model_SharePoint_IInformationRightsManagementSettings_All_
+  commentId: Overload:PnP.Core.Model.SharePoint.IInformationRightsManagementSettings.All
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IInformationRightsManagementSettings.All
+  nameWithType: IInformationRightsManagementSettings.All
 - uid: PnP.Core.Model.SharePoint.IInformationRightsManagementSettings.AllowPrint
   name: AllowPrint
   href: api/PnP.Core.Model.SharePoint.IInformationRightsManagementSettings.html#PnP_Core_Model_SharePoint_IInformationRightsManagementSettings_AllowPrint
@@ -16686,6 +16894,19 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IList.AddRoleDefinitionsAsync
   nameWithType: IList.AddRoleDefinitionsAsync
+- uid: PnP.Core.Model.SharePoint.IList.All
+  name: All
+  href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_All
+  commentId: P:PnP.Core.Model.SharePoint.IList.All
+  fullName: PnP.Core.Model.SharePoint.IList.All
+  nameWithType: IList.All
+- uid: PnP.Core.Model.SharePoint.IList.All*
+  name: All
+  href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_All_
+  commentId: Overload:PnP.Core.Model.SharePoint.IList.All
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IList.All
+  nameWithType: IList.All
 - uid: PnP.Core.Model.SharePoint.IList.BreakRoleInheritance(System.Boolean,System.Boolean)
   name: BreakRoleInheritance(Boolean, Boolean)
   href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_BreakRoleInheritance_System_Boolean_System_Boolean_
@@ -21202,6 +21423,19 @@ references:
   commentId: T:PnP.Core.Model.SharePoint.IRecycleBinItem
   fullName: PnP.Core.Model.SharePoint.IRecycleBinItem
   nameWithType: IRecycleBinItem
+- uid: PnP.Core.Model.SharePoint.IRecycleBinItem.All
+  name: All
+  href: api/PnP.Core.Model.SharePoint.IRecycleBinItem.html#PnP_Core_Model_SharePoint_IRecycleBinItem_All
+  commentId: P:PnP.Core.Model.SharePoint.IRecycleBinItem.All
+  fullName: PnP.Core.Model.SharePoint.IRecycleBinItem.All
+  nameWithType: IRecycleBinItem.All
+- uid: PnP.Core.Model.SharePoint.IRecycleBinItem.All*
+  name: All
+  href: api/PnP.Core.Model.SharePoint.IRecycleBinItem.html#PnP_Core_Model_SharePoint_IRecycleBinItem_All_
+  commentId: Overload:PnP.Core.Model.SharePoint.IRecycleBinItem.All
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IRecycleBinItem.All
+  nameWithType: IRecycleBinItem.All
 - uid: PnP.Core.Model.SharePoint.IRecycleBinItem.Author
   name: Author
   href: api/PnP.Core.Model.SharePoint.IRecycleBinItem.html#PnP_Core_Model_SharePoint_IRecycleBinItem_Author
@@ -22143,6 +22377,19 @@ references:
   commentId: T:PnP.Core.Model.SharePoint.ISite
   fullName: PnP.Core.Model.SharePoint.ISite
   nameWithType: ISite
+- uid: PnP.Core.Model.SharePoint.ISite.All
+  name: All
+  href: api/PnP.Core.Model.SharePoint.ISite.html#PnP_Core_Model_SharePoint_ISite_All
+  commentId: P:PnP.Core.Model.SharePoint.ISite.All
+  fullName: PnP.Core.Model.SharePoint.ISite.All
+  nameWithType: ISite.All
+- uid: PnP.Core.Model.SharePoint.ISite.All*
+  name: All
+  href: api/PnP.Core.Model.SharePoint.ISite.html#PnP_Core_Model_SharePoint_ISite_All_
+  commentId: Overload:PnP.Core.Model.SharePoint.ISite.All
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.ISite.All
+  nameWithType: ISite.All
 - uid: PnP.Core.Model.SharePoint.ISite.AllowCreateDeclarativeWorkflow
   name: AllowCreateDeclarativeWorkflow
   href: api/PnP.Core.Model.SharePoint.ISite.html#PnP_Core_Model_SharePoint_ISite_AllowCreateDeclarativeWorkflow
@@ -22841,6 +23088,19 @@ references:
   commentId: T:PnP.Core.Model.SharePoint.IStorageMetrics
   fullName: PnP.Core.Model.SharePoint.IStorageMetrics
   nameWithType: IStorageMetrics
+- uid: PnP.Core.Model.SharePoint.IStorageMetrics.All
+  name: All
+  href: api/PnP.Core.Model.SharePoint.IStorageMetrics.html#PnP_Core_Model_SharePoint_IStorageMetrics_All
+  commentId: P:PnP.Core.Model.SharePoint.IStorageMetrics.All
+  fullName: PnP.Core.Model.SharePoint.IStorageMetrics.All
+  nameWithType: IStorageMetrics.All
+- uid: PnP.Core.Model.SharePoint.IStorageMetrics.All*
+  name: All
+  href: api/PnP.Core.Model.SharePoint.IStorageMetrics.html#PnP_Core_Model_SharePoint_IStorageMetrics_All_
+  commentId: Overload:PnP.Core.Model.SharePoint.IStorageMetrics.All
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IStorageMetrics.All
+  nameWithType: IStorageMetrics.All
 - uid: PnP.Core.Model.SharePoint.IStorageMetrics.LastModified
   name: LastModified
   href: api/PnP.Core.Model.SharePoint.IStorageMetrics.html#PnP_Core_Model_SharePoint_IStorageMetrics_LastModified
@@ -24876,6 +25136,19 @@ references:
   commentId: T:PnP.Core.Model.SharePoint.ITimeZone
   fullName: PnP.Core.Model.SharePoint.ITimeZone
   nameWithType: ITimeZone
+- uid: PnP.Core.Model.SharePoint.ITimeZone.All
+  name: All
+  href: api/PnP.Core.Model.SharePoint.ITimeZone.html#PnP_Core_Model_SharePoint_ITimeZone_All
+  commentId: P:PnP.Core.Model.SharePoint.ITimeZone.All
+  fullName: PnP.Core.Model.SharePoint.ITimeZone.All
+  nameWithType: ITimeZone.All
+- uid: PnP.Core.Model.SharePoint.ITimeZone.All*
+  name: All
+  href: api/PnP.Core.Model.SharePoint.ITimeZone.html#PnP_Core_Model_SharePoint_ITimeZone_All_
+  commentId: Overload:PnP.Core.Model.SharePoint.ITimeZone.All
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.ITimeZone.All
+  nameWithType: ITimeZone.All
 - uid: PnP.Core.Model.SharePoint.ITimeZone.Bias
   name: Bias
   href: api/PnP.Core.Model.SharePoint.ITimeZone.html#PnP_Core_Model_SharePoint_ITimeZone_Bias
@@ -24979,6 +25252,19 @@ references:
   commentId: T:PnP.Core.Model.SharePoint.IUserCustomAction
   fullName: PnP.Core.Model.SharePoint.IUserCustomAction
   nameWithType: IUserCustomAction
+- uid: PnP.Core.Model.SharePoint.IUserCustomAction.All
+  name: All
+  href: api/PnP.Core.Model.SharePoint.IUserCustomAction.html#PnP_Core_Model_SharePoint_IUserCustomAction_All
+  commentId: P:PnP.Core.Model.SharePoint.IUserCustomAction.All
+  fullName: PnP.Core.Model.SharePoint.IUserCustomAction.All
+  nameWithType: IUserCustomAction.All
+- uid: PnP.Core.Model.SharePoint.IUserCustomAction.All*
+  name: All
+  href: api/PnP.Core.Model.SharePoint.IUserCustomAction.html#PnP_Core_Model_SharePoint_IUserCustomAction_All_
+  commentId: Overload:PnP.Core.Model.SharePoint.IUserCustomAction.All
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IUserCustomAction.All
+  nameWithType: IUserCustomAction.All
 - uid: PnP.Core.Model.SharePoint.IUserCustomAction.ClientSideComponentId
   name: ClientSideComponentId
   href: api/PnP.Core.Model.SharePoint.IUserCustomAction.html#PnP_Core_Model_SharePoint_IUserCustomAction_ClientSideComponentId
@@ -25341,6 +25627,19 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IView.AggregationsStatus
   nameWithType: IView.AggregationsStatus
+- uid: PnP.Core.Model.SharePoint.IView.All
+  name: All
+  href: api/PnP.Core.Model.SharePoint.IView.html#PnP_Core_Model_SharePoint_IView_All
+  commentId: P:PnP.Core.Model.SharePoint.IView.All
+  fullName: PnP.Core.Model.SharePoint.IView.All
+  nameWithType: IView.All
+- uid: PnP.Core.Model.SharePoint.IView.All*
+  name: All
+  href: api/PnP.Core.Model.SharePoint.IView.html#PnP_Core_Model_SharePoint_IView_All_
+  commentId: Overload:PnP.Core.Model.SharePoint.IView.All
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IView.All
+  nameWithType: IView.All
 - uid: PnP.Core.Model.SharePoint.IView.AssociatedContentTypeId
   name: AssociatedContentTypeId
   href: api/PnP.Core.Model.SharePoint.IView.html#PnP_Core_Model_SharePoint_IView_AssociatedContentTypeId
@@ -26034,6 +26333,19 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IWeb.AccessRequestSiteDescription
   nameWithType: IWeb.AccessRequestSiteDescription
+- uid: PnP.Core.Model.SharePoint.IWeb.All
+  name: All
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_All
+  commentId: P:PnP.Core.Model.SharePoint.IWeb.All
+  fullName: PnP.Core.Model.SharePoint.IWeb.All
+  nameWithType: IWeb.All
+- uid: PnP.Core.Model.SharePoint.IWeb.All*
+  name: All
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_All_
+  commentId: Overload:PnP.Core.Model.SharePoint.IWeb.All
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IWeb.All
+  nameWithType: IWeb.All
 - uid: PnP.Core.Model.SharePoint.IWeb.AllowAutomaticASPXPageIndexing
   name: AllowAutomaticASPXPageIndexing
   href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_AllowAutomaticASPXPageIndexing
