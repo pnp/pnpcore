@@ -9,8 +9,11 @@
 
         [KeyProperty(nameof(High))]
         public override object Key { get => High; set => High = long.Parse(value.ToString()); }
+
+        [SharePointProperty("*")]
+        public object All { get => null; }
         #endregion
-        
+
         #region Extension methods
         public bool Has(PermissionKind perm)
         {

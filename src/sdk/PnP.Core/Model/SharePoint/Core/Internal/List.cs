@@ -191,6 +191,9 @@ namespace PnP.Core.Model.SharePoint
         [KeyProperty(nameof(Id))]
         public override object Key { get => Id; set => Id = Guid.Parse(value.ToString()); }
 
+        [SharePointProperty("*")]
+        public object All { get => null; }
+
         #endregion
 
         #region Methods

@@ -16,6 +16,9 @@ namespace PnP.Core.Model.Security
         [KeyProperty(nameof(PrincipalId))]
         public override object Key { get => PrincipalId; set => PrincipalId = int.Parse(value.ToString()); }
 
+        [SharePointProperty("*")]
+        public object All { get => null; }
+
         public RoleAssignment()
         {
 #pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously

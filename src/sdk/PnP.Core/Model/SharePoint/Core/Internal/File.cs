@@ -106,6 +106,9 @@ namespace PnP.Core.Model.SharePoint
 
         [KeyProperty(nameof(UniqueId))]
         public override object Key { get => UniqueId; set => UniqueId = Guid.Parse(value.ToString()); }
+
+        [SharePointProperty("*")]
+        public object All { get => null; }
         #endregion
 
         #region Extension methods

@@ -123,6 +123,9 @@ namespace PnP.Core.Model.SharePoint
 
         [KeyProperty(nameof(StringId))]
         public override object Key { get => StringId; set => StringId = value.ToString(); }
+
+        [SharePointProperty("*")]
+        public object All { get => null; }
         #endregion
 
         #region Extension methods

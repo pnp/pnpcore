@@ -27,5 +27,11 @@ namespace PnP.Core.Model.SharePoint
         /// Gets the total size of the storage resource.
         /// </summary>
         public long TotalSize { get; }
+
+        /// <summary>
+        /// A special property used to add an asterisk to a $select statement
+        /// </summary>
+        public object All { get; }
+
     }
 }

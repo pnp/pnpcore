@@ -47,6 +47,9 @@ namespace PnP.Core.Model.SharePoint
 
         [KeyProperty(nameof(PolicyTitle))]
         public override object Key { get => PolicyTitle; set => PolicyTitle = value.ToString(); }
+
+        [SharePointProperty("*")]
+        public object All { get => null; }
         #endregion
     }
 }
