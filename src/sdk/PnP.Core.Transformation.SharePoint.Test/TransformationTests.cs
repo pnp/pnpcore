@@ -19,16 +19,23 @@ namespace PnP.Core.Transformation.SharePoint.Test
             var services = new ServiceCollection();
             services.AddTestPnPCore();
             // services.AddPnPSharePointTransformation();
-            services.AddPnPSharePointTransformation(null, spOptions =>
-            {
-                //spOptions.WebPartMappingFile = @"C:\github\pnpcore\src\sdk\PnP.Core.Transformation.SharePoint\MappingFiles\webpartmapping.xml";
-                //spOptions.PageLayoutMappingFile = @"C:\github\pnpcore\src\sdk\PnP.Core.Transformation.SharePoint\MappingFiles\pagelayoutmapping.xml";
-                spOptions.CopyPageMetadata = true;
-                spOptions.KeepPageSpecificPermissions = true;
-                spOptions.RemoveEmptySectionsAndColumns = true;
-                spOptions.ShouldMapUsers = true;
-                spOptions.TargetPageTakesSourcePageName = true;
-            });
+            services.AddPnPSharePointTransformation(
+                pnpOptions =>
+                {
+                    pnpOptions.DisableTelemetry = false;
+                    pnpOptions.PersistenceProviderConnectionString = @"c:\temp";
+                }
+                , spOptions =>
+                {
+                    //spOptions.WebPartMappingFile = @"C:\github\pnpcore\src\sdk\PnP.Core.Transformation.SharePoint\MappingFiles\webpartmapping.xml";
+                    //spOptions.PageLayoutMappingFile = @"C:\github\pnpcore\src\sdk\PnP.Core.Transformation.SharePoint\MappingFiles\pagelayoutmapping.xml";
+                    spOptions.CopyPageMetadata = true;
+                    spOptions.KeepPageSpecificPermissions = true;
+                    spOptions.RemoveEmptySectionsAndColumns = true;
+                    spOptions.ShouldMapUsers = true;
+                    spOptions.TargetPageTakesSourcePageName = true;
+                }
+            );
 
             var provider = services.BuildServiceProvider();
 
@@ -39,7 +46,7 @@ namespace PnP.Core.Transformation.SharePoint.Test
             var targetContext = await pnpContextFactory.CreateAsync(TestCommon.TargetTestSite);
             var sourceUri = new Uri("https://piasysdev.sharepoint.com/sites/ClassicTest01/SitePages/tourdefrance2018.aspx");
             // var sourceUri = new Uri("https://piasysdev.sharepoint.com/sites/ClassicTest01/SitePages/ToMigrate_giro2018.aspx");
-            
+
             var result = await pageTransformator.TransformSharePointAsync(sourceContext, targetContext, sourceUri);
 
             Assert.IsNotNull(result);

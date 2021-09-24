@@ -150,6 +150,9 @@
   <data name="Error_AnErrorOccurredFunctions" xml:space="preserve">
     <value>An error occurred processing functions</value>
   </data>
+  <data name="Error_AssetTransferFailedFallback" xml:space="preserve">
+    <value>Asset was not transferred. Asset: {0}</value>
+  </data>
   <data name="Error_BasicASPXPageCannotTransform" xml:space="preserve">
     <value>Source page '{0}' is a basic ASPX page ... can't currently transform that one, sorry!</value>
   </data>
@@ -234,11 +237,17 @@
   <data name="Error_PageNotValidMissingFileRef" xml:space="preserve">
     <value>Page '{0}' is not valid due to missing FileRef or FileLeafRef value</value>
   </data>
+  <data name="Error_ReturnCrossSiteRelativePathFailedFallback" xml:space="preserve">
+    <value>Issue while retrieving the new location for the asset. Asset: {0}</value>
+  </data>
   <data name="Error_SourcePageIsModern" xml:space="preserve">
     <value>Source page '{0}' is already a modern page</value>
   </data>
   <data name="Error_SourcePageNotFound" xml:space="preserve">
     <value>Source page '{0}' cannot be null</value>
+  </data>
+  <data name="Error_UnsupportedSourceVersion" xml:space="preserve">
+    <value>Unsupported version of SharePoint as the source of transformation</value>
   </data>
   <data name="Error_WebPartMappingSchemaValidation" xml:space="preserve">
     <value>Provided custom web part mapping file is invalid: {0}</value>
@@ -272,6 +281,9 @@
   </data>
   <data name="Info_GetItemLevelPermissions" xml:space="preserve">
     <value>Item level permissions read</value>
+  </data>
+  <data name="Info_ImageFilePersisted" xml:space="preserve">
+    <value>Image file {0} temporary persisted as {1}</value>
   </data>
   <data name="Info_NotTransformingTitleBar" xml:space="preserve">
     <value>Not transforming Title Bar - this is not used in modern pages</value>

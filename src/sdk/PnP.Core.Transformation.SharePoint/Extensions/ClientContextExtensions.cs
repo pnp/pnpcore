@@ -458,13 +458,13 @@ namespace Microsoft.SharePoint.Client
                             {
                                 if (v.Major == 14)
                                 {
-                                    spVersionFromCache = SPVersion.SP2010;
+                                    // SP2010 is not supported anymore
+                                    spVersionFromCache = SPVersion.Unsupported;
                                 }
                                 else if (v.Major == 15)
                                 {
                                     // You can change the output to SP2013 to use standard CSOM calls.
                                     spVersionFromCache = SPVersion.SP2013Legacy;
-
                                 }
                                 else if (v.Major == 16)
                                 {

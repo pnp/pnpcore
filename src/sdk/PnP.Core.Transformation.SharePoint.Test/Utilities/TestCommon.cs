@@ -63,20 +63,23 @@ namespace PnP.Core.Transformation.Test.Utilities
                 // Add the PnP Core SDK Authentication Providers
                 .AddPnPCore();
 
+            var clientId = configuration.GetSection("PnPCore:Credentials:Configurations:CredentialManager:ClientId")?.Value;
+            var tenantId = configuration.GetSection("PnPCore:Credentials:Configurations:CredentialManager:TenantId")?.Value;
+            var credentialManager = configuration.GetSection("PnPCore:Credentials:Configurations:CredentialManager:CredentialManager:CredentialManagerName")?.Value;
+
+            var resource = $"https://{new Uri(configuration["SourceTestSite"]).Authority}";
+
+            var cmap = new CredentialManagerAuthenticationProvider(clientId, tenantId, credentialManager);
+            var accessToken = cmap.GetAccessTokenAsync(new Uri(resource)).GetAwaiter().GetResult();
+
             services.AddTransient(p => {
                 var clientContext = new ClientContext(configuration["SourceTestSite"]);
                 clientContext.ExecutingWebRequest += (sender, args) =>
                 {
-                    var resource = $"https://{new Uri(configuration["SourceTestSite"]).Authority}";
 
-                    var clientId = configuration.GetSection("PnPCore:Credentials:Configurations:CredentialManager:ClientId")?.Value;
-                    var tenantId = configuration.GetSection("PnPCore:Credentials:Configurations:CredentialManager:TenantId")?.Value;
-                    var credentialManager = configuration.GetSection("PnPCore:Credentials:Configurations:CredentialManager:CredentialManager:CredentialManagerName")?.Value;
-
-                    var cmap = new CredentialManagerAuthenticationProvider(clientId, tenantId, credentialManager);
                     if (cmap != null)
                     {
-                        args.WebRequestExecutor.RequestHeaders["Authorization"] = "Bearer " + cmap.GetAccessTokenAsync(new Uri(resource)).GetAwaiter().GetResult();
+                        args.WebRequestExecutor.RequestHeaders["Authorization"] = "Bearer " + accessToken;
                     }
                 };
                 return clientContext;

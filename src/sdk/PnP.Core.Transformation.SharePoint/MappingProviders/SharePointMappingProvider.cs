@@ -1539,8 +1539,17 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
                 // Bulk load the needed web part information
                 if (webPartsToRetrieve.Count > 0)
                 {
-                    if (page.SourceVersion == SPVersion.SP2010 ||
-                        page.SourceVersion == SPVersion.SP2013Legacy ||
+                    if (page.SourceVersion == SPVersion.Unknown ||
+                        page.SourceVersion == SPVersion.Unsupported)
+                    {
+                        var unsupportedError = string.Format(System.Globalization.CultureInfo.InvariantCulture,
+                            SharePointTransformationResources.Error_UnsupportedSourceVersion,
+                            wikiPage.ServerRelativeUrl);
+                        logger.LogError(unsupportedError);
+
+                        throw new ApplicationException(unsupportedError);
+                    }
+                    else if (page.SourceVersion == SPVersion.SP2013Legacy ||
                         page.SourceVersion == SPVersion.SP2016Legacy)
                     {
                         LoadWebPartsInWikiContentFromOnPremisesServer(webparts, wikiPage, webPartsToRetrieve);
@@ -1552,7 +1561,7 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
                 }
                 else
                 {
-                    logger.LogInformation(string.Format(System.Globalization.CultureInfo.InvariantCulture,
+                    logger.LogError(string.Format(System.Globalization.CultureInfo.InvariantCulture,
                         SharePointTransformationResources.Error_AnalysingNoWebPartsFound,
                         wikiPage.ServerRelativeUrl));
                 }

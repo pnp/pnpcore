@@ -160,6 +160,15 @@ namespace PnP.Core.Transformation.SharePoint {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Asset was not transferred. Asset: {0}.
+        /// </summary>
+        internal static string Error_AssetTransferFailedFallback {
+            get {
+                return ResourceManager.GetString("Error_AssetTransferFailedFallback", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Source page &apos;{0}&apos; is a basic ASPX page ... can&apos;t currently transform that one, sorry!.
         /// </summary>
         internal static string Error_BasicASPXPageCannotTransform {
@@ -412,6 +421,15 @@ namespace PnP.Core.Transformation.SharePoint {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Issue while retrieving the new location for the asset. Asset: {0}.
+        /// </summary>
+        internal static string Error_ReturnCrossSiteRelativePathFailedFallback {
+            get {
+                return ResourceManager.GetString("Error_ReturnCrossSiteRelativePathFailedFallback", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Source page &apos;{0}&apos; is already a modern page.
         /// </summary>
         internal static string Error_SourcePageIsModern {
@@ -426,6 +444,15 @@ namespace PnP.Core.Transformation.SharePoint {
         internal static string Error_SourcePageNotFound {
             get {
                 return ResourceManager.GetString("Error_SourcePageNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unsupported version of SharePoint as the source of transformation.
+        /// </summary>
+        internal static string Error_UnsupportedSourceVersion {
+            get {
+                return ResourceManager.GetString("Error_UnsupportedSourceVersion", resourceCulture);
             }
         }
         
@@ -525,6 +552,15 @@ namespace PnP.Core.Transformation.SharePoint {
         internal static string Info_GetItemLevelPermissions {
             get {
                 return ResourceManager.GetString("Info_GetItemLevelPermissions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Image file {0} temporary persisted as {1}.
+        /// </summary>
+        internal static string Info_ImageFilePersisted {
+            get {
+                return ResourceManager.GetString("Info_ImageFilePersisted", resourceCulture);
             }
         }
         

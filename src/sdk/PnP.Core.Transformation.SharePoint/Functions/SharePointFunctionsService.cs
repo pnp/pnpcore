@@ -152,16 +152,15 @@ namespace PnP.Core.Transformation.SharePoint.Functions
         [OutputDocumentation(Name = "{ServerRelativePath}", Description = "Server relative path")]
         public string ReturnServerRelativePath(string path)
         {
-            if (!string.IsNullOrEmpty(path) && siteUrlRegex.IsMatch(path))
-            {
-                var matches = siteUrlRegex.Matches(path);
-                var serverRelativeUrl = matches[0].Groups["serverRelativeUrl"];
-                return serverRelativeUrl.Value;
-            }
-            else
+            if (string.IsNullOrEmpty(path))
             {
                 return string.Empty;
             }
+
+            var hostUri = new Uri(this.SourceContext.Web.Url);
+            string host = $"{hostUri.Scheme}://{hostUri.DnsSafeHost}";
+
+            return path.Replace(host, "");
         }
 
         /// <summary>
@@ -436,19 +435,19 @@ namespace PnP.Core.Transformation.SharePoint.Functions
                 sourceList.EnsureProperty(p => p.Title);
                 string listTitleToCheck = sourceList.Title;
 
-                List targetlist = null;
-                try
-                {
-                    // TODO: Is this still valid with the new architecture?
-                    targetlist = this.SourceContext.Web.GetListByTitle(listTitleToCheck);
-                    targetlist.EnsureProperty(p => p.Id);
-                }
-                catch (Exception ex)
-                {
-                    throw new NotAvailableAtTargetException($"List with id {listId} and Title {listTitleToCheck} is not available in the target site collection. This web part will be skipped.", ex);
-                }
+                //List targetlist = null;
+                //try
+                //{
+                //    // TODO: Is this still valid with the new architecture?
+                //    targetlist = this.SourceContext.Web.GetListByTitle(listTitleToCheck);
+                //    targetlist.EnsureProperty(p => p.Id);
+                //}
+                //catch (Exception ex)
+                //{
+                //    throw new NotAvailableAtTargetException($"List with id {listId} and Title {listTitleToCheck} is not available in the target site collection. This web part will be skipped.", ex);
+                //}
 
-                return targetlist.Id.ToString();
+                return $"{{TargetListIdByTitle:{listTitleToCheck}}}";
             }
         }
 
@@ -709,43 +708,134 @@ namespace PnP.Core.Transformation.SharePoint.Functions
         [OutputDocumentation(Name = "{ServerRelativeFileName}", Description = "New target location for the asset if transferred.")]
         public string ReturnCrossSiteRelativePath(string imageLink)
         {
+            // Defaults to the orignal operation
+            var serverRelativeAssetFileName = ReturnServerRelativePath(imageLink);
+
+            // Deep validation of urls
+            var isValid = ValidateAssetInSupportedLocation(serverRelativeAssetFileName, this.SourceContext);
+
+            if (isValid)
+            {
+                return RetrieveImageFileRelativePath(serverRelativeAssetFileName, this.SourceContext);
+            }
+            else
+            {
+                logger.LogError(string.Format(
+                    SharePointTransformationResources.Error_ReturnCrossSiteRelativePathFailedFallback,
+                    imageLink));
+
+                // Fall back to send back the same link
+                return imageLink;
+            }
+        }
+
+        private string RetrieveImageFileRelativePath(string sourceAssetRelativeUrl, ClientContext context)
+        {
+            // Check the string is not null
+            if (!string.IsNullOrEmpty(sourceAssetRelativeUrl))
+            {
+                // Are we dealing with an _layouts image?
+                if (sourceAssetRelativeUrl.ContainsIgnoringCasing("_layouts/"))
+                {
+                    var siteCollectionToken = "{SiteCollection}";
+                    return $"{siteCollectionToken}/{sourceAssetRelativeUrl.Substring(sourceAssetRelativeUrl.IndexOf("_layouts /", StringComparison.InvariantCultureIgnoreCase))}";
+                }
+
+                var targetAssetRelativeUrl = PersistImageFileContent(sourceAssetRelativeUrl, context);
+
+                logger.LogInformation(string.Format(SharePointTransformationResources.Info_ImageFilePersisted,
+                    sourceAssetRelativeUrl, targetAssetRelativeUrl));
+
+                return targetAssetRelativeUrl;
+            }
+
+            logger.LogError(string.Format(SharePointTransformationResources.Error_AssetTransferFailedFallback,
+                sourceAssetRelativeUrl));
+
+            // Fall back to send back the same link
+            return sourceAssetRelativeUrl;
+        }
+
+        private string PersistImageFileContent(string sourceAssetRelativeUrl, ClientContext context, int fileChunkSizeInMB = 3)
+        {
+            // Declare the result variable
+            Stream sourceStream = null;
+
             // Retrieve the currently configured instance of the assets persistence provider
             var assetPersistenceProvider = serviceProvider.GetService<IAssetPersistenceProvider>();
 
+            // Retrieve the actual file stream
+            var imageFile = context.Web.GetFileByServerRelativeUrl(sourceAssetRelativeUrl);
+            context.Load(imageFile, f => f.Exists);
+            context.ExecuteQueryRetry();
+
+            if (imageFile.Exists)
+            {
+                ClientResult<System.IO.Stream> imageFileData = imageFile.OpenBinaryStream();
+                context.ExecuteQueryRetry();
+                sourceStream = imageFileData.Value;
+
+                if (sourceStream != null)
+                {
+                    // Determine the target file name
+                    var fileName = sourceAssetRelativeUrl.Substring(sourceAssetRelativeUrl.LastIndexOf("/") + 1);
+
+                    // Save the stream onto the currently configured persistence storage
+                    var persistedFilePath = assetPersistenceProvider.WriteAssetAsync(sourceStream, fileName).GetAwaiter().GetResult();
+
+                    return $"{{AssetPersistenceProvider:{persistedFilePath}}}";
+                }
+            }
+
             return string.Empty;
+        }
 
-            //// Defaults to the orignal operation
-            //var serverRelativeAssetFileName = ReturnServerRelativePath(imageLink);
+        /// <summary>
+        /// Checks if the URL is located in a supported location
+        /// </summary>
+        private static bool ValidateAssetInSupportedLocation(string sourceUrl, ClientContext context)
+        {
+            //  Referenced assets should only be files e.g. 
+            //      not aspx pages 
+            //      located in the pages, site pages libraries
 
-            //try
-            //{
-            //    string pageFileName = null;
+            var fileExtension = Path.GetExtension(sourceUrl).ToLower();
 
-            //    if (this.clientSidePage != null && !string.IsNullOrEmpty(this.clientSidePage.PageTitle))
-            //    {
-            //        pageFileName = this.clientSidePage.PageTitle;
-            //    }
-            //    else
-            //    {
-            //        // deduct based upon filename in url
-            //        pageFileName = Path.GetFileNameWithoutExtension(serverRelativeAssetFileName);
-            //    }
+            // Check block list
+            var containsBlockedExtension = SharePointConstants.BlockedAssetFileExtensions.Any(o => o == fileExtension.Replace(".", ""));
+            if (containsBlockedExtension)
+            {
+                return false;
+            }
 
-            //    AssetTransfer assetTransfer = new AssetTransfer(sourceClientContext, base.clientContext, base.RegisteredLogObservers);
+            // Check allow list
+            var containsAllowedExtension = SharePointConstants.AllowedAssetFileExtensions.Any(o => o == fileExtension.Replace(".", ""));
+            if (!containsAllowedExtension)
+            {
+                return false;
+            }
 
-            //    var newAssetLocation = assetTransfer.TransferAsset(serverRelativeAssetFileName, pageFileName);
+            // Additional check to see if image is outside SharePoint for OnPrem to Online scenario for root site and subsites in root site collection
+            if (sourceUrl.ContainsIgnoringCasing("https://") || sourceUrl.ContainsIgnoringCasing("http://"))
+            {
+                var sourceBaseUrl = sourceUrl.GetBaseUrl();
+                var sourceCCBaseUrl = context.Url.GetBaseUrl();
 
-            //    if (!string.IsNullOrEmpty(newAssetLocation))
-            //    {
-            //        return newAssetLocation;
-            //    }
-            //}
-            //catch (Exception ex)
-            //{
-            //    LogError(LogStrings.Error_ReturnCrossSiteRelativePath, LogStrings.Heading_BuiltInFunctions, ex);
-            //}
+                if (!sourceBaseUrl.Equals(sourceCCBaseUrl, StringComparison.InvariantCultureIgnoreCase))
+                {
+                    return false;
+                }
+            }
 
-            //return serverRelativeAssetFileName;
+            //  Ensure the referenced assets exist within the source site collection
+            var sourceSiteContextUrl = context.Site.EnsureProperty(w => w.ServerRelativeUrl);
+
+            if (!sourceUrl.ContainsIgnoringCasing(sourceSiteContextUrl))
+            {
+                return false;
+            }
+
+            return true;
         }
 
         /// <summary>
@@ -1578,7 +1668,7 @@ namespace PnP.Core.Transformation.SharePoint.Functions
             {
                 var matches = siteUrlRegex.Matches(targatPageUri);
                 var serverRelativeUrl = matches[0].Groups["serverRelativeUrl"];
-                
+
                 targetPageServerRelativeUrl = serverRelativeUrl.Value;
             }
 

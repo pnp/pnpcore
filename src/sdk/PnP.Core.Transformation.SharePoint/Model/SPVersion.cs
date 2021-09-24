@@ -34,12 +34,12 @@ namespace PnP.Core.Transformation.SharePoint.Model
         /// </summary>
         SP2013Legacy = 5,
         /// <summary>
-        /// SharePoint 2010 (on-premises)
-        /// </summary>
-        SP2010 = 6,
-        /// <summary>
         /// Unknown version
         /// </summary>
-        Unknown = 100
+        Unknown = 100,
+        /// <summary>
+        /// Unsupported version
+        /// </summary>
+        Unsupported = 200
     }
 }
