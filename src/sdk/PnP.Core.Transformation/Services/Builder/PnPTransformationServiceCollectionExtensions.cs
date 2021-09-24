@@ -78,7 +78,7 @@ namespace Microsoft.Extensions.DependencyInjection
 
             foreach (var tokenDefinition in tokenDefinitions)
             {
-                builder.Services.TryAddTransient(typeof(ITokenDefinition), tokenDefinition);
+                builder.Services.AddTransient(typeof(ITokenDefinition), tokenDefinition);
             }
 
             return builder;

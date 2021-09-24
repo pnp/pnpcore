@@ -79,6 +79,15 @@ namespace PnP.Core.Transformation {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Invalid content for parameter &apos;argument&apos; of AssetPersistenceProviderToken.
+        /// </summary>
+        internal static string Error_InvalidArgumentForAssetPersistenceProviderToken {
+            get {
+                return ResourceManager.GetString("Error_InvalidArgumentForAssetPersistenceProviderToken", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The provided asset stream is not valid for persistence.
         /// </summary>
         internal static string Error_InvalidAssetStreamToPersist {

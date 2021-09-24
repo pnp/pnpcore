@@ -769,6 +769,10 @@ namespace PnP.Core.Transformation.SharePoint.Functions
             context.Load(imageFile, f => f.Exists);
             context.ExecuteQueryRetry();
 
+            // Determine the relative URL of the file, from a site point of view
+            var webUrl = context.Web.EnsureProperty(w => w.ServerRelativeUrl);
+            var assetSiteRelativeUrl = sourceAssetRelativeUrl.Substring(webUrl.Length);
+
             if (imageFile.Exists)
             {
                 ClientResult<System.IO.Stream> imageFileData = imageFile.OpenBinaryStream();
@@ -783,7 +787,7 @@ namespace PnP.Core.Transformation.SharePoint.Functions
                     // Save the stream onto the currently configured persistence storage
                     var persistedFilePath = assetPersistenceProvider.WriteAssetAsync(sourceStream, fileName).GetAwaiter().GetResult();
 
-                    return $"{{AssetPersistenceProvider:{persistedFilePath}}}";
+                    return $"{{AssetPersistenceProvider:{persistedFilePath}|{assetSiteRelativeUrl}}}";
                 }
             }
 
