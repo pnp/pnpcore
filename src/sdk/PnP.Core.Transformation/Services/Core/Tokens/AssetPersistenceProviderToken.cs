@@ -1,7 +1,9 @@
-﻿using PnP.Core.Services;
+﻿using PnP.Core.Model.SharePoint;
+using PnP.Core.Services;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace PnP.Core.Transformation.Services.Core.Tokens
 {
@@ -31,12 +33,21 @@ namespace PnP.Core.Transformation.Services.Core.Tokens
 
             var persistedFilePath = arguments[0];
             var assetSiteRelativeUrl = arguments[1];
+            var targetFilePath = assetSiteRelativeUrl.Substring(0, assetSiteRelativeUrl.LastIndexOf('/'));
+            var targetFileName = assetSiteRelativeUrl.Substring(assetSiteRelativeUrl.LastIndexOf('/') + 1);
 
-            var stream = this.assetPersistenceProvider.ReadAssetAsync(persistedFilePath);
+            Task.Run(async () => {
 
-            // TODO: Handle SPO upload
+                // Get the file stream from the persistence provider
+                var stream = await this.assetPersistenceProvider.ReadAssetAsync(persistedFilePath).ConfigureAwait(false);
 
-            return null;
+                // Handle SPO upload
+                IFolder targetFolder = await context.Web.GetFolderByServerRelativeUrlAsync($"{context.Web.ServerRelativeUrl}{targetFilePath}").ConfigureAwait(false);
+                IFile addedFile = await targetFolder.Files.AddAsync(targetFileName, stream).ConfigureAwait(false);
+
+            }).GetAwaiter().GetResult();
+
+            return $"{context.Web.ServerRelativeUrl}{targetFilePath}/{targetFileName}";
         }
     }
 }

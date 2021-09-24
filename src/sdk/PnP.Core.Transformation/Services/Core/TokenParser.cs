@@ -95,7 +95,7 @@ namespace PnP.Core.Transformation.Services.Core
                 {
                     foreach (var tokenDefinition in tokenDefinitions)
                     {
-                        var regex = new Regex($"{{{tokenDefinition.Name}\\:(?<argument>[\\w|\\||\\d|-]*)}}", RegexOptions.IgnoreCase);
+                        var regex = new Regex($"{{{tokenDefinition.Name}\\:(?<argument>[\\w\\|\\d\\-\\.\\:\\\\\\/]*)}}", RegexOptions.IgnoreCase);
                         if (regex.IsMatch(property.Value))
                         {
                             var match = regex.Match(property.Value);
