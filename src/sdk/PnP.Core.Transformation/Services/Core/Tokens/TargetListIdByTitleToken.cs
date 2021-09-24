@@ -8,16 +8,13 @@ namespace PnP.Core.Transformation.Services.Core.Tokens
     /// <summary>
     /// Resolves the ID of a list in the target context based on the list title
     /// </summary>
-    internal class TargetListIdByTitleToken : TargetTokenDefinition
+    internal class TargetListIdByTitleToken : ITokenDefinition
     {
-        public TargetListIdByTitleToken(PnPContext targetContext): base(targetContext)
-        {
-            this.Name = "TargetListIdByTitle";
-        }
+        public string Name { get => "TargetListIdByTitle"; }
 
-        public override string GetValue(string argument)
+        public string GetValue(PnPContext context, string argument)
         {
-            var targetList = this.TargetContext.Web.Lists.GetByTitle(argument, l => l.Id);
+            var targetList = context.Web.Lists.GetByTitle(argument, l => l.Id);
             if (targetList != null)
             {
                 return targetList.Id.ToString();

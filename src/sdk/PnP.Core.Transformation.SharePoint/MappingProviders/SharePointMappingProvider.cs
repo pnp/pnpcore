@@ -55,6 +55,7 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
         private readonly IOptions<SharePointTransformationOptions> options;
         private readonly IMemoryCache memoryCache;
         private readonly IServiceProvider serviceProvider;
+        private readonly TokenParser tokenParser;
 
         private const string webPartMarkerString = "[[WebPartMarker]]";
 
@@ -73,6 +74,7 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
             this.serviceProvider = serviceProvider;
 
             this.memoryCache = this.serviceProvider.GetService<IMemoryCache>();
+            this.tokenParser = this.serviceProvider.GetService<TokenParser>();
         }
 
         /// <summary>
@@ -700,7 +702,7 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
                     control.ControlType = CanvasControlType.ClientSideText;
 
                     // Parse the Text to support custom tokens
-                    control["Text"] = TokenParser.ReplaceTokens(map.ClientSideText.Text, webPart.Properties);
+                    control["Text"] = this.tokenParser.ReplaceSourceTokens(map.ClientSideText.Text, webPart.Properties);
 
                     logger.LogInformation(SharePointTransformationResources.Info_AddedClientSideTextWebPart);
                 }
@@ -713,7 +715,7 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
                         control.ControlType = CanvasControlType.CustomClientSideWebPart;
 
                         // Parse the control ID to support generic web part placement scenarios
-                        control["ControlId"] = TokenParser.ReplaceTokens(map.ClientSideWebPart.ControlId, webPart.Properties);
+                        control["ControlId"] = this.tokenParser.ReplaceSourceTokens(map.ClientSideWebPart.ControlId, webPart.Properties);
 
                         logger.LogInformation(SharePointTransformationResources.Info_UsingCustomModernWebPart);
                     }

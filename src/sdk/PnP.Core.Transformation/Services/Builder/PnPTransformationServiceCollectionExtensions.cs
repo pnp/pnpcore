@@ -5,6 +5,7 @@ using System;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using PnP.Core.Transformation.Services.Core;
 using PnP.Core.Transformation.Services.MappingProviders;
+using System.Linq;
 
 namespace Microsoft.Extensions.DependencyInjection
 {
@@ -68,6 +69,17 @@ namespace Microsoft.Extensions.DependencyInjection
             builder.Services.TryAddTransient<ITransformationStateManager, InMemoryTransformationStateManager>();
             builder.Services.TryAddTransient<ITransformationExecutor, InProcessTransformationExecutor>();
             builder.Services.TryAddTransient<IAssetPersistenceProvider, FileSystemAssetPersistenceProvider>();
+            builder.Services.TryAddTransient<TokenParser, TokenParser>();
+
+            // Register all the token definitions as services
+            var tokenDefinitionInterface = typeof(ITokenDefinition);
+            var tokenDefinitions = typeof(PnPTransformationServiceCollectionExtensions).Assembly.GetTypes()
+                .Where(t => tokenDefinitionInterface.IsAssignableFrom(t) && !t.IsInterface);
+
+            foreach (var tokenDefinition in tokenDefinitions)
+            {
+                builder.Services.TryAddTransient(typeof(ITokenDefinition), tokenDefinition);
+            }
 
             return builder;
         }

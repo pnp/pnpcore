@@ -28,6 +28,7 @@ namespace PnP.Core.Transformation.Services.Core
         private readonly PageTransformationOptions defaultPageTransformationOptions;
         private readonly IMemoryCache memoryCache;
         private readonly IServiceProvider serviceProvider;
+        private readonly TokenParser tokenParser;
 
         /// <summary>
         /// Constructor with DI support
@@ -44,6 +45,7 @@ namespace PnP.Core.Transformation.Services.Core
             this.defaultPageTransformationOptions = pageTransformationOptions?.Value ?? throw new ArgumentNullException(nameof(pageTransformationOptions));
             this.serviceProvider = serviceProvider;
             this.memoryCache = this.serviceProvider.GetService<IMemoryCache>();
+            this.tokenParser = this.serviceProvider.GetService<TokenParser>();
         }
 
         public async Task<Uri> GenerateAsync(PageTransformationContext context, MappingProviderOutput mappingOutput, Uri targetPageUri, CancellationToken token = default)
@@ -512,8 +514,8 @@ namespace PnP.Core.Transformation.Services.Core
 
                     // If we found the web part as a possible candidate to use then add it
                     if (baseControl != null)
-                    {
-                        var jsonDecoded = WebUtility.HtmlDecode(TokenParser.ReplaceTokens(jsonControlData, webPartProperties, globalTokens));
+                    {                        
+                        var jsonDecoded = WebUtility.HtmlDecode(this.tokenParser.ReplaceTargetTokens(targetPage.PnPContext, jsonControlData, webPartProperties, globalTokens));
 
                         var myWebPart = targetPage.NewWebPart(baseControl);
                         myWebPart.Order = controlOrder;
