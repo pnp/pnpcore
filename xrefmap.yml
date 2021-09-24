@@ -325,6 +325,32 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.EnsureTenantAppCatalogAsync
   nameWithType: ISharePointAdmin.EnsureTenantAppCatalogAsync
+- uid: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetSiteCollections(System.Boolean)
+  name: GetSiteCollections(Boolean)
+  href: api/PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.html#PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_GetSiteCollections_System_Boolean_
+  commentId: M:PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetSiteCollections(System.Boolean)
+  fullName: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetSiteCollections(System.Boolean)
+  nameWithType: ISharePointAdmin.GetSiteCollections(Boolean)
+- uid: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetSiteCollections*
+  name: GetSiteCollections
+  href: api/PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.html#PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_GetSiteCollections_
+  commentId: Overload:PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetSiteCollections
+  isSpec: "True"
+  fullName: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetSiteCollections
+  nameWithType: ISharePointAdmin.GetSiteCollections
+- uid: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetSiteCollectionsAsync(System.Boolean)
+  name: GetSiteCollectionsAsync(Boolean)
+  href: api/PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.html#PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_GetSiteCollectionsAsync_System_Boolean_
+  commentId: M:PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetSiteCollectionsAsync(System.Boolean)
+  fullName: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetSiteCollectionsAsync(System.Boolean)
+  nameWithType: ISharePointAdmin.GetSiteCollectionsAsync(Boolean)
+- uid: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetSiteCollectionsAsync*
+  name: GetSiteCollectionsAsync
+  href: api/PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.html#PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_GetSiteCollectionsAsync_
+  commentId: Overload:PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetSiteCollectionsAsync
+  isSpec: "True"
+  fullName: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetSiteCollectionsAsync
+  nameWithType: ISharePointAdmin.GetSiteCollectionsAsync
 - uid: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantAdminCenterContext
   name: GetTenantAdminCenterContext()
   href: api/PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.html#PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_GetTenantAdminCenterContext
@@ -507,6 +533,77 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.IsCurrentUserTenantAdminAsync
   nameWithType: ISharePointAdmin.IsCurrentUserTenantAdminAsync
+- uid: PnP.Core.Admin.Model.SharePoint.ISiteCollection
+  name: ISiteCollection
+  href: api/PnP.Core.Admin.Model.SharePoint.ISiteCollection.html
+  commentId: T:PnP.Core.Admin.Model.SharePoint.ISiteCollection
+  fullName: PnP.Core.Admin.Model.SharePoint.ISiteCollection
+  nameWithType: ISiteCollection
+- uid: PnP.Core.Admin.Model.SharePoint.ISiteCollection.GraphId
+  name: GraphId
+  href: api/PnP.Core.Admin.Model.SharePoint.ISiteCollection.html#PnP_Core_Admin_Model_SharePoint_ISiteCollection_GraphId
+  commentId: P:PnP.Core.Admin.Model.SharePoint.ISiteCollection.GraphId
+  fullName: PnP.Core.Admin.Model.SharePoint.ISiteCollection.GraphId
+  nameWithType: ISiteCollection.GraphId
+- uid: PnP.Core.Admin.Model.SharePoint.ISiteCollection.GraphId*
+  name: GraphId
+  href: api/PnP.Core.Admin.Model.SharePoint.ISiteCollection.html#PnP_Core_Admin_Model_SharePoint_ISiteCollection_GraphId_
+  commentId: Overload:PnP.Core.Admin.Model.SharePoint.ISiteCollection.GraphId
+  isSpec: "True"
+  fullName: PnP.Core.Admin.Model.SharePoint.ISiteCollection.GraphId
+  nameWithType: ISiteCollection.GraphId
+- uid: PnP.Core.Admin.Model.SharePoint.ISiteCollection.Id
+  name: Id
+  href: api/PnP.Core.Admin.Model.SharePoint.ISiteCollection.html#PnP_Core_Admin_Model_SharePoint_ISiteCollection_Id
+  commentId: P:PnP.Core.Admin.Model.SharePoint.ISiteCollection.Id
+  fullName: PnP.Core.Admin.Model.SharePoint.ISiteCollection.Id
+  nameWithType: ISiteCollection.Id
+- uid: PnP.Core.Admin.Model.SharePoint.ISiteCollection.Id*
+  name: Id
+  href: api/PnP.Core.Admin.Model.SharePoint.ISiteCollection.html#PnP_Core_Admin_Model_SharePoint_ISiteCollection_Id_
+  commentId: Overload:PnP.Core.Admin.Model.SharePoint.ISiteCollection.Id
+  isSpec: "True"
+  fullName: PnP.Core.Admin.Model.SharePoint.ISiteCollection.Id
+  nameWithType: ISiteCollection.Id
+- uid: PnP.Core.Admin.Model.SharePoint.ISiteCollection.RootWebDescription
+  name: RootWebDescription
+  href: api/PnP.Core.Admin.Model.SharePoint.ISiteCollection.html#PnP_Core_Admin_Model_SharePoint_ISiteCollection_RootWebDescription
+  commentId: P:PnP.Core.Admin.Model.SharePoint.ISiteCollection.RootWebDescription
+  fullName: PnP.Core.Admin.Model.SharePoint.ISiteCollection.RootWebDescription
+  nameWithType: ISiteCollection.RootWebDescription
+- uid: PnP.Core.Admin.Model.SharePoint.ISiteCollection.RootWebDescription*
+  name: RootWebDescription
+  href: api/PnP.Core.Admin.Model.SharePoint.ISiteCollection.html#PnP_Core_Admin_Model_SharePoint_ISiteCollection_RootWebDescription_
+  commentId: Overload:PnP.Core.Admin.Model.SharePoint.ISiteCollection.RootWebDescription
+  isSpec: "True"
+  fullName: PnP.Core.Admin.Model.SharePoint.ISiteCollection.RootWebDescription
+  nameWithType: ISiteCollection.RootWebDescription
+- uid: PnP.Core.Admin.Model.SharePoint.ISiteCollection.RootWebId
+  name: RootWebId
+  href: api/PnP.Core.Admin.Model.SharePoint.ISiteCollection.html#PnP_Core_Admin_Model_SharePoint_ISiteCollection_RootWebId
+  commentId: P:PnP.Core.Admin.Model.SharePoint.ISiteCollection.RootWebId
+  fullName: PnP.Core.Admin.Model.SharePoint.ISiteCollection.RootWebId
+  nameWithType: ISiteCollection.RootWebId
+- uid: PnP.Core.Admin.Model.SharePoint.ISiteCollection.RootWebId*
+  name: RootWebId
+  href: api/PnP.Core.Admin.Model.SharePoint.ISiteCollection.html#PnP_Core_Admin_Model_SharePoint_ISiteCollection_RootWebId_
+  commentId: Overload:PnP.Core.Admin.Model.SharePoint.ISiteCollection.RootWebId
+  isSpec: "True"
+  fullName: PnP.Core.Admin.Model.SharePoint.ISiteCollection.RootWebId
+  nameWithType: ISiteCollection.RootWebId
+- uid: PnP.Core.Admin.Model.SharePoint.ISiteCollection.Url
+  name: Url
+  href: api/PnP.Core.Admin.Model.SharePoint.ISiteCollection.html#PnP_Core_Admin_Model_SharePoint_ISiteCollection_Url
+  commentId: P:PnP.Core.Admin.Model.SharePoint.ISiteCollection.Url
+  fullName: PnP.Core.Admin.Model.SharePoint.ISiteCollection.Url
+  nameWithType: ISiteCollection.Url
+- uid: PnP.Core.Admin.Model.SharePoint.ISiteCollection.Url*
+  name: Url
+  href: api/PnP.Core.Admin.Model.SharePoint.ISiteCollection.html#PnP_Core_Admin_Model_SharePoint_ISiteCollection_Url_
+  commentId: Overload:PnP.Core.Admin.Model.SharePoint.ISiteCollection.Url
+  isSpec: "True"
+  fullName: PnP.Core.Admin.Model.SharePoint.ISiteCollection.Url
+  nameWithType: ISiteCollection.Url
 - uid: PnP.Core.Auth
   name: PnP.Core.Auth
   href: api/PnP.Core.Auth.html
