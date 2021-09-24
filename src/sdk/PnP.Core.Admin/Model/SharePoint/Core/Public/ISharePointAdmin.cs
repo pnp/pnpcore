@@ -107,5 +107,23 @@ namespace PnP.Core.Admin.Model.SharePoint
         /// <returns>True if the app catalog was created, false if the app catalog already existed</returns>
         bool EnsureTenantAppCatalog();
 
+        /// <summary>
+        /// Returns the list of site collections. When using application permissions or a delegated permissions 
+        /// for a SharePoint admin account all site collections are returned, otherwise only the site collections
+        /// accessible by the requesting user are returned
+        /// </summary>
+        /// <param name="ignoreUserIsSharePointAdmin">When set to true and when the user is SharePoint admin then only return the site collections accessible by the user</param>
+        /// <returns>A list of site collections</returns>
+        Task<List<ISiteCollection>> GetSiteCollectionsAsync(bool ignoreUserIsSharePointAdmin = false);
+
+        /// <summary>
+        /// Returns the list of site collections. When using application permissions or a delegated permissions 
+        /// for a SharePoint admin account all site collections are returned, otherwise only the site collections
+        /// accessible by the requesting user are returned
+        /// </summary>
+        /// <param name="ignoreUserIsSharePointAdmin">When set to true and when the user is SharePoint admin then only return the site collections accessible by the user</param>
+        /// <returns>A list of site collections</returns>
+        List<ISiteCollection> GetSiteCollections(bool ignoreUserIsSharePointAdmin = false);
+
     }
 }

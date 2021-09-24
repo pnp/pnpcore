@@ -230,5 +230,14 @@ namespace PnP.Core.Admin.Model.SharePoint
             return EnsureTenantAppCatalogAsync().GetAwaiter().GetResult();
         }
 
+        public async Task<List<ISiteCollection>> GetSiteCollectionsAsync(bool ignoreUserIsSharePointAdmin = false)
+        {
+            return await SiteCollectionEnumerator.GetAsync(context, ignoreUserIsSharePointAdmin).ConfigureAwait(false);
+        }
+
+        public List<ISiteCollection> GetSiteCollections(bool ignoreUserIsSharePointAdmin = false)
+        {
+            return GetSiteCollectionsAsync(ignoreUserIsSharePointAdmin).GetAwaiter().GetResult();
+        }
     }
 }
