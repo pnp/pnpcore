@@ -1386,43 +1386,36 @@ namespace PnP.Core.Services
                         // Send the request
                         HttpResponseMessage response = await PnPContext.RestClient.Client.SendAsync(request, httpCompletionOption).ConfigureAwait(false);
 
-                        try
+                        // Process the request response
+                        if (response.IsSuccessStatusCode)
                         {
-                            // Process the request response
-                            if (response.IsSuccessStatusCode)
-                            {
-                                // Get the response string
-                                Stream requestResponseStream = await response.Content.ReadAsStreamAsync().ConfigureAwait(false);
+                            // Get the response string
+                            Stream requestResponseStream = await response.Content.ReadAsStreamAsync().ConfigureAwait(false);
 
 #if DEBUG
-                                if (PnPContext.Mode == TestMode.Record && !restRequest.ApiCall.StreamResponse)
+                            if (PnPContext.Mode == TestMode.Record && !restRequest.ApiCall.StreamResponse)
+                            {
+                                // Call out to the rewrite handler if that one is connected
+                                if (MockingFileRewriteHandler != null)
                                 {
-                                    // Call out to the rewrite handler if that one is connected
-                                    if (MockingFileRewriteHandler != null)
-                                    {
-                                        var mockedRewrittenFileString = MockingFileRewriteHandler(requestResponseStream.CopyAsString());
+                                    var mockedRewrittenFileString = MockingFileRewriteHandler(requestResponseStream.CopyAsString());
 #pragma warning disable CA2000 // Dispose objects before losing scope
-                                        requestResponseStream = mockedRewrittenFileString.AsStream();
+                                    requestResponseStream = mockedRewrittenFileString.AsStream();
 #pragma warning restore CA2000 // Dispose objects before losing scope
-                                    }
-
-                                    // Write response
-                                    TestManager.RecordResponse(PnPContext, batchKey, requestResponseStream);
                                 }
+
+                                // Write response
+                                TestManager.RecordResponse(PnPContext, batchKey, requestResponseStream);
+                            }
 #endif
 
-                                await ProcessSharePointRestInteractiveResponse(restRequest, response.StatusCode, requestResponseStream).ConfigureAwait(false);
+                            await ProcessSharePointRestInteractiveResponse(restRequest, response.StatusCode, requestResponseStream).ConfigureAwait(false);
 
-                            }
-                            else
-                            {
-                                // Something went wrong...
-                                throw new SharePointRestServiceException(ErrorType.SharePointRestServiceError, (int)response.StatusCode, await response.Content.ReadAsStringAsync().ConfigureAwait(false));
-                            }
                         }
-                        finally
+                        else
                         {
-                            response.Dispose();
+                            // Something went wrong...
+                            throw new SharePointRestServiceException(ErrorType.SharePointRestServiceError, (int)response.StatusCode, await response.Content.ReadAsStringAsync().ConfigureAwait(false));
                         }
 #if DEBUG
                     }
