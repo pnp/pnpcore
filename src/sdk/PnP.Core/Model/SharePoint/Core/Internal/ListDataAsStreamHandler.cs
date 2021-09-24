@@ -97,7 +97,7 @@ namespace PnP.Core.Model.SharePoint
                         var overflowDictionary = itemToUpdate.Values;
 
                         // Translate this row first into an object model for easier consumption
-                        var rowToProcess = TransformRowData(row, list.Fields, ref fieldLookupCache);
+                        var rowToProcess = TransformRowData(row, list.Fields, fieldLookupCache);
 
                         foreach (var property in rowToProcess)
                         {
@@ -232,7 +232,7 @@ namespace PnP.Core.Model.SharePoint
             return result;
         }
 
-        private static List<ListDataAsStreamProperty> TransformRowData(JsonElement row, IFieldCollection fields, ref Dictionary<string, IField> fieldLookupCache)
+        private static List<ListDataAsStreamProperty> TransformRowData(JsonElement row, IFieldCollection fields, Dictionary<string, IField> fieldLookupCache)
         {
             List<ListDataAsStreamProperty> properties = new List<ListDataAsStreamProperty>();
 

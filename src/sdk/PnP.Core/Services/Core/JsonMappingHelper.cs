@@ -116,13 +116,17 @@ namespace PnP.Core.Services
                 foreach (var property in apiResponse.JsonElement.EnumerateObject())
                 {
                     // Find the model field linked to this field
-                    EntityFieldInfo entityField = LookupEntityField(entity, apiResponse, property);
+                    EntityFieldInfo entityField = null;
 
                     // Do we need to re-parent this json mapping to a non expandable collection in the current model?
                     if (!string.IsNullOrEmpty(apiResponse.ApiCall.ReceivingProperty) && property.NameEquals("results"))
                     {
                         entityField = entity.Fields.FirstOrDefault(p => !string.IsNullOrEmpty(p.Name) && p.Name.Equals(apiResponse.ApiCall.ReceivingProperty, StringComparison.InvariantCultureIgnoreCase)) ??
                                       entity.Fields.FirstOrDefault(p => !string.IsNullOrEmpty(p.SharePointName) && p.SharePointName.Equals(apiResponse.ApiCall.ReceivingProperty, StringComparison.InvariantCultureIgnoreCase));
+                    }
+                    else
+                    {
+                        entityField = LookupEntityField(entity, apiResponse, property);
                     }
 
                     // Entity field should be populated for the actual fields we've requested
@@ -593,7 +597,7 @@ namespace PnP.Core.Services
                     }
                     else
                     {
-                        var fieldValue = new FieldUserValue() { Field = GetListItemField(pnpObject, actualPropertyName) };
+                        var fieldValue = new FieldUserValue() { Field = field };
                         fieldValue.FromJson(json);
                         fieldValue.IsArray = false;
                         return new Tuple<object, string>(fieldValue, actualPropertyName);
@@ -733,7 +737,7 @@ namespace PnP.Core.Services
                 foreach (var property in apiResponse.JsonElement.EnumerateObject())
                 {
                     // Find the model field linked to this field
-                    EntityFieldInfo entityField = LookupEntityField(entity, apiResponse, property);
+                    EntityFieldInfo entityField = null;
 
                     // Do we need to re-parent this json mapping to a non expandable collection in the current model?
                     bool modelReparented = false;
@@ -745,6 +749,10 @@ namespace PnP.Core.Services
                             entityField = entity.Fields.FirstOrDefault(p => !string.IsNullOrEmpty(p.GraphName) && p.GraphName.Equals(apiResponse.ApiCall.ReceivingProperty, StringComparison.InvariantCultureIgnoreCase));
                         }
                         modelReparented = true;
+                    }
+                    else
+                    {
+                        entityField = LookupEntityField(entity, apiResponse, property);
                     }
 
                     // Entity field should be populate for the actual fields we've requested
