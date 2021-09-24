@@ -65,6 +65,11 @@ namespace PnP.Core.Model.Security
         public ISharePointUserCollection Users { get; }
 
         /// <summary>
+        /// A special property used to add an asterisk to a $select statement
+        /// </summary>
+        public object All { get; }
+
+        /// <summary>
         /// Adds a user to this group. Specify the full username, e.g. "i:0#.f|membership|user@domain.com"
         /// </summary>
         public void AddUser(string loginName);

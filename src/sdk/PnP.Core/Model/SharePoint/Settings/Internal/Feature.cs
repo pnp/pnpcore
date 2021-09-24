@@ -8,7 +8,6 @@ namespace PnP.Core.Model.SharePoint
 
     [SharePointType("SP.Feature", Target = typeof(Site), Uri = "_api/Site/Features/GetById(guid'{DefinitionId}')')", Get = "_api/Site/Features", LinqGet = "_api/Site/Features")]
     [SharePointType("SP.Feature", Target = typeof(Web), Uri = "_api/Web/Features/GetById(guid'{DefinitionId}')", Get = "_api/Web/Features", LinqGet = "_api/Web/Features")]
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Usage", "CA2243:Attribute string literals should parse correctly", Justification = "<Pending>")]
     internal partial class Feature : BaseDataModel<IFeature>, IFeature
     {
         #region Construction
@@ -31,6 +30,9 @@ namespace PnP.Core.Model.SharePoint
 
         [KeyProperty(nameof(DefinitionId))]
         public override object Key { get => DefinitionId; set => DefinitionId = Guid.Parse(value.ToString()); }
+
+        [SharePointProperty("*")]
+        public object All { get => null; }
         #endregion
 
         #region Extension methods

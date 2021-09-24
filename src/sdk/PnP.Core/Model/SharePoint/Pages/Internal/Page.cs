@@ -915,7 +915,7 @@ namespace PnP.Core.Model.SharePoint
         /// <returns>Html representation</returns>
         public string ToHtml()
         {
-            StringBuilder html = new StringBuilder(100);
+            StringBuilder html = new StringBuilder();
 
             if (sections.Count == 0) return string.Empty;
 
@@ -1143,8 +1143,7 @@ namespace PnP.Core.Model.SharePoint
                     else if (controlType == typeof(CanvasColumn))
                     {
                         // Need to parse empty sections
-                        var jsonSerializerSettings = new JsonSerializerOptions() { IgnoreNullValues = true };
-                        var sectionData = JsonSerializer.Deserialize<CanvasData>(controlData, jsonSerializerSettings);
+                        var sectionData = JsonSerializer.Deserialize<CanvasData>(controlData, PnPConstants.JsonSerializer_IgnoreNullValues);
 
                         CanvasSection currentSection = null;
                         if (sectionData.Position != null)
@@ -1971,7 +1970,7 @@ namespace PnP.Core.Model.SharePoint
                 TranslatedLanguages = new List<IPageTranslationStatus>()
             };
 
-            var root = JsonDocument.Parse(response).RootElement.GetProperty("d");
+            var root = JsonSerializer.Deserialize<JsonElement>(response).GetProperty("d");
 
             // Process untranslated languages
             var untranslatedLanguages = root.GetProperty("UntranslatedLanguages").GetProperty("results");
@@ -2424,10 +2423,9 @@ namespace PnP.Core.Model.SharePoint
 
             if (!string.IsNullOrEmpty(response.Json))
             {
-                var root = JsonDocument.Parse(response.Json).RootElement.GetProperty("d").GetProperty("GetClientSideWebParts").GetProperty("results");
+                var root = JsonSerializer.Deserialize<JsonElement>(response.Json).GetProperty("d").GetProperty("GetClientSideWebParts").GetProperty("results");
 
-                var jsonSerializerSettings = new JsonSerializerOptions() { IgnoreNullValues = true };
-                var clientSideComponents = JsonSerializer.Deserialize<List<PageComponent>>(root.ToString(), jsonSerializerSettings);
+                var clientSideComponents = JsonSerializer.Deserialize<List<PageComponent>>(root.ToString(), PnPConstants.JsonSerializer_IgnoreNullValues);
 
                 if (!clientSideComponents.Any())
                 {

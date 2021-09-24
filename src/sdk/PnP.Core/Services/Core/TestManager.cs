@@ -118,7 +118,7 @@ namespace PnP.Core.Services
         {
             string fileName = GetPropertiesFile(context);
 
-            var bodyContent = JsonSerializer.Serialize(properties, typeof(Dictionary<string, string>), new JsonSerializerOptions { WriteIndented = false });
+            var bodyContent = JsonSerializer.Serialize(properties, typeof(Dictionary<string, string>), PnPConstants.JsonSerializer_WriteIndentedFalse);
 
             // Write serialized properties to a file, overwrites the existing file if needed
             File.WriteAllText(fileName, bodyContent);

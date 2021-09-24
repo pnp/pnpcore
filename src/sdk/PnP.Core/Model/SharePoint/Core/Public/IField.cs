@@ -407,6 +407,11 @@ namespace PnP.Core.Model.SharePoint
         public FieldUserSelectionMode SelectionMode { get; set; }
         #endregion
 
+        /// <summary>
+        /// A special property used to add an asterisk to a $select statement
+        /// </summary>
+        public object All { get; }
+
         #region FieldValue object creation
         /// <summary>
         /// Creates a new <see cref="IFieldUrlValue"/> object

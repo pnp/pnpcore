@@ -44,7 +44,7 @@ namespace PnP.Core.QueryModel
         public async Task<BatchRequest> AddToBatchAsync(ODataQuery<TModel> query, Batch batch)
         {
             // We always refresh the EntityInfo object accordingly to the current query
-            EntityInfo = EntityManager.GetClassInfo<TModel>(typeof(TModel), null, Parent, query.Fields.ToArray());
+            EntityInfo = EntityManager.GetClassInfo(typeof(TModel), null, Parent, query.Fields.ToArray());
 
             var batchParent = Parent;
 
@@ -71,7 +71,7 @@ namespace PnP.Core.QueryModel
             var parentEntityWithMappingHandlers = (IDataModelMappingHandler)batchParent;
 
             // Build the needed API call
-            ApiCallRequest apiCallRequest = await QueryClient.BuildGetAPICallAsync<TModel>(concreteEntity as BaseDataModel<TModel>, EntityInfo, query, default, false, true).ConfigureAwait(false);
+            ApiCallRequest apiCallRequest = await QueryClient.BuildGetAPICallAsync(concreteEntity as BaseDataModel<TModel>, EntityInfo, query, default, false, true).ConfigureAwait(false);
             var apiCall = apiCallRequest.ApiCall;
             apiCall.ReceivingProperty = MemberName;
 

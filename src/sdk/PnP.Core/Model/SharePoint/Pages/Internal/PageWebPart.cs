@@ -30,6 +30,8 @@ namespace PnP.Core.Model.SharePoint
         /// </summary>
         public PageWebPart() : base()
         {
+            var emptyJson = JsonSerializer.Deserialize<JsonElement>("{}");
+
             controlType = 3;
             WebPartData = "";
             HtmlPropertiesData = "";
@@ -37,12 +39,12 @@ namespace PnP.Core.Model.SharePoint
             Title = "";
             Description = "";
             SupportsFullBleed = false;
-            SetPropertiesJson(JsonDocument.Parse("{}").RootElement);
+            SetPropertiesJson(emptyJson);
             WebPartPreviewImage = "";
             UsingSpControlDataOnly = false;
-            DynamicDataPaths = JsonDocument.Parse("{}").RootElement;
-            DynamicDataValues = JsonDocument.Parse("{}").RootElement;
-            ServerProcessedContent = JsonDocument.Parse("{}").RootElement;
+            DynamicDataPaths = emptyJson;
+            DynamicDataValues = emptyJson;
+            ServerProcessedContent = emptyJson;
         }
 
         /// <summary>
@@ -118,7 +120,7 @@ namespace PnP.Core.Model.SharePoint
             }
             set
             {
-                SetPropertiesJson(JsonDocument.Parse(value).RootElement);
+                SetPropertiesJson(JsonSerializer.Deserialize<JsonElement>(value));
             }
         }
 
@@ -178,7 +180,7 @@ namespace PnP.Core.Model.SharePoint
             WebPartId = new Guid(component.Id).ToString("D");
 
             // Parse the manifest json blob as we need some data from it
-            var wpJObject = JsonDocument.Parse(component.Manifest).RootElement;
+            var wpJObject = JsonSerializer.Deserialize<JsonElement>(component.Manifest);
 
             Title = wpJObject.GetProperty("preconfiguredEntries").EnumerateArray().First().GetProperty("title").GetProperty("default").GetString();
 
@@ -355,7 +357,7 @@ namespace PnP.Core.Model.SharePoint
                 jsonControlData = JsonWebPartData;
             }
 
-            StringBuilder html = new StringBuilder(100);
+            StringBuilder html = new StringBuilder();
             if (UsingSpControlDataOnly || IsHeaderControl)
             {
                 html.Append($@"<div {CanvasControlAttribute}=""{CanvasControlData}"" {CanvasDataVersionAttribute}=""{DataVersion}"" {ControlDataAttribute}=""{JsonControlData.Replace("\"", "&quot;")}""></div>");
@@ -446,7 +448,7 @@ namespace PnP.Core.Model.SharePoint
                 dataVersion = element.GetAttribute(WebPartDataVersionAttribute);
             }
 
-            SpControlData = JsonSerializer.Deserialize<WebPartControlData>(element.GetAttribute(ControlDataAttribute), new JsonSerializerOptions() { IgnoreNullValues = true });
+            SpControlData = JsonSerializer.Deserialize<WebPartControlData>(element.GetAttribute(ControlDataAttribute), PnPConstants.JsonSerializer_IgnoreNullValues);
             controlType = SpControlData.ControlType;
 
             var wpDiv = element.GetElementsByTagName("div").FirstOrDefault(a => a.HasAttribute(WebPartDataAttribute));
@@ -467,7 +469,7 @@ namespace PnP.Core.Model.SharePoint
                 decodedWebPart = WebUtility.HtmlDecode(wpDiv.GetAttribute(WebPartDataAttribute));
             }
 
-            var wpJObject = JsonDocument.Parse(decodedWebPart).RootElement;
+            var wpJObject = JsonSerializer.Deserialize<JsonElement>(decodedWebPart);
 
             if (wpJObject.TryGetProperty("title", out JsonElement titleProperty))
             {

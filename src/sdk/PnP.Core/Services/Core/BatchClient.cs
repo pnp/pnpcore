@@ -570,39 +570,53 @@ namespace PnP.Core.Services
                     await PnPContext.AuthenticationProvider.AuthenticateRequestAsync(PnPConstants.MicrosoftGraphBaseUri, request).ConfigureAwait(false);
 
                     // Send the request
-                    HttpResponseMessage response = await PnPContext.GraphClient.Client.SendAsync(request).ConfigureAwait(false);
+                    HttpResponseMessage response = await PnPContext.GraphClient.Client.SendAsync(request, HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false);
 
-                    // Process the request response
-                    if (response.IsSuccessStatusCode)
+                    try
                     {
-                        // Get the response string
-                        string batchResponse = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+                        // Process the request response
+                        if (response.IsSuccessStatusCode)
+                        {
+                            // Get the response string, using HttpCompletionOption.ResponseHeadersRead and ReadAsStreamAsync to lower the memory
+                            // pressure when processing larger responses + performance is better
+                            using (Stream streamToReadFrom = await response.Content.ReadAsStreamAsync().ConfigureAwait(false))
+                            {
+                                using (StreamReader reader = new StreamReader(streamToReadFrom))
+                                {
+                                    string batchResponse = await reader.ReadToEndAsync().ConfigureAwait(false);
 
 #if DEBUG
-                        if (PnPContext.Mode == TestMode.Record)
-                        {
-                            // Call out to the rewrite handler if that one is connected
-                            if (MockingFileRewriteHandler != null)
-                            {
-                                batchResponse = MockingFileRewriteHandler(batchResponse);
-                            }
+                                    if (PnPContext.Mode == TestMode.Record)
+                                    {
+                                        // Call out to the rewrite handler if that one is connected
+                                        if (MockingFileRewriteHandler != null)
+                                        {
+                                            batchResponse = MockingFileRewriteHandler(batchResponse);
+                                        }
 
-                            // Write response
-                            TestManager.RecordResponse(PnPContext, requestKey, batchResponse);
-                        }
+                                        // Write response
+                                        TestManager.RecordResponse(PnPContext, requestKey, batchResponse);
+                                    }
 
 #endif
 
-                        var ready = await ProcessGraphRestBatchResponse(batch, batchResponse).ConfigureAwait(false);
-                        if (!ready)
+                                    var ready = await ProcessGraphRestBatchResponse(batch, batchResponse).ConfigureAwait(false);
+                                    if (!ready)
+                                    {
+                                        return false;
+                                    }
+                                }
+                            }
+                        }
+                        else
                         {
-                            return false;
+                            // Something went wrong...
+                            throw new MicrosoftGraphServiceException(ErrorType.GraphServiceError, (int)response.StatusCode, await response.Content.ReadAsStringAsync().ConfigureAwait(false));
                         }
                     }
-                    else
+                    finally
                     {
-                        // Something went wrong...
-                        throw new MicrosoftGraphServiceException(ErrorType.GraphServiceError, (int)response.StatusCode, await response.Content.ReadAsStringAsync().ConfigureAwait(false));
+                        response.Dispose();
                     }
 #if DEBUG
                 }
@@ -658,12 +672,7 @@ namespace PnP.Core.Services
         private async Task<bool> ProcessGraphRestBatchResponse(Batch batch, string batchResponse)
         {
             // Deserialize the graph batch response json
-            JsonSerializerOptions options = new JsonSerializerOptions()
-            {
-                IgnoreNullValues = true,
-                PropertyNamingPolicy = JsonNamingPolicy.CamelCase
-            };
-            var graphBatchResponses = JsonSerializer.Deserialize<GraphBatchResponses>(batchResponse, options);
+            var graphBatchResponses = JsonSerializer.Deserialize<GraphBatchResponses>(batchResponse, PnPConstants.JsonSerializer_IgnoreNullValues_CamelCase);
 
             // Was there any request that's eligible for a retry?
             bool retryNeeded = false;
@@ -816,13 +825,7 @@ namespace PnP.Core.Services
                 telemetryManager?.LogServiceRequest(request, PnPContext);
             }
 
-            JsonSerializerOptions options = new JsonSerializerOptions()
-            {
-                IgnoreNullValues = true,
-                PropertyNamingPolicy = JsonNamingPolicy.CamelCase
-            };
-
-            string stringContent = JsonSerializer.Serialize(graphRequests, options);
+            string stringContent = JsonSerializer.Serialize(graphRequests, PnPConstants.JsonSerializer_IgnoreNullValues_CamelCase);
 
             foreach (var bodyToReplace in bodiesToReplace)
             {
@@ -979,34 +982,47 @@ namespace PnP.Core.Services
                             await ProcessSharePointRestAuthentication(splitRestBatch.Site, request).ConfigureAwait(false);
 
                             // Send the request
-                            HttpResponseMessage response = await PnPContext.RestClient.Client.SendAsync(request).ConfigureAwait(false);
+                            HttpResponseMessage response = await PnPContext.RestClient.Client.SendAsync(request, HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false);
 
-                            // Process the request response
-                            if (response.IsSuccessStatusCode)
+                            try
                             {
-                                // Get the response string
-                                string batchResponse = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-
-#if DEBUG
-                                if (PnPContext.Mode == TestMode.Record)
+                                // Process the request response
+                                if (response.IsSuccessStatusCode)
                                 {
-                                    // Call out to the rewrite handler if that one is connected
-                                    if (MockingFileRewriteHandler != null)
+                                    // Get the response string, using HttpCompletionOption.ResponseHeadersRead and ReadAsStreamAsync to lower the memory
+                                    // pressure when processing larger responses + performance is better
+                                    using (Stream streamToReadFrom = await response.Content.ReadAsStreamAsync().ConfigureAwait(false))
                                     {
-                                        batchResponse = MockingFileRewriteHandler(batchResponse);
-                                    }
+                                        using (StreamReader reader = new StreamReader(streamToReadFrom))
+                                        {
+                                            string batchResponse = await reader.ReadToEndAsync().ConfigureAwait(false);
+#if DEBUG
+                                            if (PnPContext.Mode == TestMode.Record)
+                                            {
+                                                // Call out to the rewrite handler if that one is connected
+                                                if (MockingFileRewriteHandler != null)
+                                                {
+                                                    batchResponse = MockingFileRewriteHandler(batchResponse);
+                                                }
 
-                                    // Write response
-                                    TestManager.RecordResponse(PnPContext, requestKey, batchResponse);
-                                }
+                                                // Write response
+                                                TestManager.RecordResponse(PnPContext, requestKey, batchResponse);
+                                            }
 #endif
 
-                                await ProcessSharePointRestBatchResponse(splitRestBatch, batchResponse).ConfigureAwait(false);
+                                            await ProcessSharePointRestBatchResponse(splitRestBatch, batchResponse).ConfigureAwait(false);
+                                        }
+                                    }
+                                }
+                                else
+                                {
+                                    // Something went wrong...
+                                    throw new SharePointRestServiceException(ErrorType.SharePointRestServiceError, (int)response.StatusCode, await response.Content.ReadAsStringAsync().ConfigureAwait(false));
+                                }
                             }
-                            else
+                            finally
                             {
-                                // Something went wrong...
-                                throw new SharePointRestServiceException(ErrorType.SharePointRestServiceError, (int)response.StatusCode, await response.Content.ReadAsStringAsync().ConfigureAwait(false));
+                                response.Dispose();
                             }
 #if DEBUG
                         }
@@ -1172,13 +1188,19 @@ namespace PnP.Core.Services
         /// <param name="batchResponse">Batch response received from the server</param>
         private static void ProcessSharePointRestBatchResponseContent(Batch batch, string batchResponse)
         {
+#if !NET5_0
             var responseLines = batchResponse.Split(new char[] { '\n' });
+#endif
             int counter = -1;
             var httpStatusCode = HttpStatusCode.Continue;
 
             bool responseContentOpen = false;
             StringBuilder responseContent = new StringBuilder();
+#if NET5_0
+            foreach (ReadOnlySpan<char> line in batchResponse.SplitLines())
+#else
             foreach (var line in responseLines)
+#endif
             {
                 // Signals the start/end of a response
                 // --batchresponse_6ed85e4b-869f-428e-90c9-19038f964718
@@ -1238,7 +1260,11 @@ namespace PnP.Core.Services
                 else if (line.StartsWith("HTTP/1.1 "))
                 {
                     // HTTP/1.1 200 OK
+#if NET5_0
+                    if (int.TryParse(line.Slice(9, 3), out int parsedHttpStatusCode))
+#else
                     if (int.TryParse(line.Substring(9, 3), out int parsedHttpStatusCode))
+#endif
                     {
                         httpStatusCode = (HttpStatusCode)parsedHttpStatusCode;
                     }
@@ -1251,21 +1277,29 @@ namespace PnP.Core.Services
                 else if ((line.StartsWith("{") || httpStatusCode == HttpStatusCode.NoContent) && !responseContentOpen)
                 {
                     // content can be seperated via \r\n and we split on \n. Since we're using AppendLine remove the carriage return to avoid duplication
+#if NET5_0
+                    responseContent.Append(line).AppendLine();
+#else
                     responseContent.AppendLine(line.TrimEnd('\r'));
+#endif
                     responseContentOpen = true;
                 }
                 // More content is being returned, so let's append it
                 else if (responseContentOpen)
                 {
                     // content can be seperated via \r\n and we split on \n. Since we're using AppendLine remove the carriage return to avoid duplication
+#if NET5_0
+                    responseContent.Append(line).AppendLine();
+#else
                     responseContent.AppendLine(line.TrimEnd('\r'));
+#endif
                 }
             }
         }
 
-        #endregion
+#endregion
 
-        #region SharePoint REST interactive calls
+#region SharePoint REST interactive calls
 
         private async Task ExecuteSharePointRestInteractiveAsync(Batch batch)
         {
@@ -1383,7 +1417,6 @@ namespace PnP.Core.Services
                             // Something went wrong...
                             throw new SharePointRestServiceException(ErrorType.SharePointRestServiceError, (int)response.StatusCode, await response.Content.ReadAsStringAsync().ConfigureAwait(false));
                         }
-
 #if DEBUG
                     }
                     else
@@ -1487,9 +1520,9 @@ namespace PnP.Core.Services
             }
         }
 
-        #endregion
+#endregion
 
-        #region CSOM batching
+#region CSOM batching
         /// <summary>
         /// Execute a batch with CSOM requests.
         /// See https://docs.microsoft.com/en-us/openspecs/sharepoint_protocols/ms-csom/fd645da2-fa28-4daa-b3cd-8f4e506df117 for the CSOM protocol specs
@@ -1573,34 +1606,48 @@ namespace PnP.Core.Services
                                 await ProcessSharePointRestAuthentication(csomBatch.Site, request).ConfigureAwait(false);
 
                                 // Send the request
-                                HttpResponseMessage response = await PnPContext.RestClient.Client.SendAsync(request).ConfigureAwait(false);
+                                HttpResponseMessage response = await PnPContext.RestClient.Client.SendAsync(request, HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false);
 
-                                // Process the request response
-                                if (response.IsSuccessStatusCode)
+                                try
                                 {
-                                    // Get the response string
-                                    string batchResponse = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+                                    // Process the request response
+                                    if (response.IsSuccessStatusCode)
+                                    {
+                                        // Get the response string, using HttpCompletionOption.ResponseHeadersRead and ReadAsStreamAsync to lower the memory
+                                        // pressure when processing larger responses + performance is better
+                                        using (Stream streamToReadFrom = await response.Content.ReadAsStreamAsync().ConfigureAwait(false))
+                                        {
+                                            using (StreamReader reader = new StreamReader(streamToReadFrom))
+                                            {
+                                                string batchResponse = await reader.ReadToEndAsync().ConfigureAwait(false);
 
 #if DEBUG
-                                    if (PnPContext.Mode == TestMode.Record)
-                                    {
-                                        // Call out to the rewrite handler if that one is connected
-                                        if (MockingFileRewriteHandler != null)
-                                        {
-                                            batchResponse = MockingFileRewriteHandler(batchResponse);
-                                        }
+                                                if (PnPContext.Mode == TestMode.Record)
+                                                {
+                                                    // Call out to the rewrite handler if that one is connected
+                                                    if (MockingFileRewriteHandler != null)
+                                                    {
+                                                        batchResponse = MockingFileRewriteHandler(batchResponse);
+                                                    }
 
-                                        // Write response
-                                        TestManager.RecordResponse(PnPContext, requestKey, batchResponse);
-                                    }
+                                                    // Write response
+                                                    TestManager.RecordResponse(PnPContext, requestKey, batchResponse);
+                                                }
 #endif
 
-                                    ProcessCsomBatchResponse(csomBatch, batchResponse, response.StatusCode);
+                                                ProcessCsomBatchResponse(csomBatch, batchResponse, response.StatusCode);
+                                            }
+                                        }
+                                    }
+                                    else
+                                    {
+                                        // Something went wrong...
+                                        throw new SharePointRestServiceException(ErrorType.SharePointRestServiceError, (int)response.StatusCode, await response.Content.ReadAsStringAsync().ConfigureAwait(false));
+                                    }
                                 }
-                                else
+                                finally
                                 {
-                                    // Something went wrong...
-                                    throw new SharePointRestServiceException(ErrorType.SharePointRestServiceError, (int)response.StatusCode, await response.Content.ReadAsStringAsync().ConfigureAwait(false));
+                                    response.Dispose();
                                 }
 #if DEBUG
                             }
@@ -1773,7 +1820,7 @@ namespace PnP.Core.Services
 
             return batches;
         }
-        #endregion
+#endregion
 
         /// <summary>
         /// Checks if a batch contains an API call that still has unresolved tokens...no point in sending the request at that point

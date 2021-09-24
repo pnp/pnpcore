@@ -86,6 +86,11 @@ namespace PnP.Core.Model.SharePoint
         /// </summary>
         public ISharePointUser DeletedBy { get; }
 
+        /// <summary>
+        /// A special property used to add an asterisk to a $select statement
+        /// </summary>
+        public object All { get; }
+
         #region Restore
         /// <summary>
         /// Restores the recycle bin item to its original location.

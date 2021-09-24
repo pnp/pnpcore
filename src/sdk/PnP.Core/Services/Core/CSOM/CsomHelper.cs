@@ -48,7 +48,7 @@ namespace PnP.Core.Services.Core.CSOM
 
         internal static string XmlString(string text, bool isAttribute = false)
         {
-            var sb = new StringBuilder(text.Length);
+            var sb = new StringBuilder();
 
             foreach (var chr in text)
             {

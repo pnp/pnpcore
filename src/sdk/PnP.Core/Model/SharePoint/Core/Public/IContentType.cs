@@ -137,6 +137,11 @@
         /// </summary>
         public IFieldCollection Fields { get; }
 
+        /// <summary>
+        /// A special property used to add an asterisk to a $select statement
+        /// </summary>
+        public object All { get; }
+
         #region To implement
         ///// <summary>
         ///// To update...

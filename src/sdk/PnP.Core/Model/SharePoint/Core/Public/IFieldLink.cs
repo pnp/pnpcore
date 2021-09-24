@@ -49,5 +49,10 @@ namespace PnP.Core.Model.SharePoint
         /// Gets or sets whether the field should be shown in display form.
         /// </summary>
         public bool ShowInDisplayForm { get; set; }
+
+        /// <summary>
+        /// A special property used to add an asterisk to a $select statement
+        /// </summary>
+        public object All { get; }
     }
 }

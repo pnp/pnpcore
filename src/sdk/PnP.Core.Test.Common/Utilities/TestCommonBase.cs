@@ -370,6 +370,8 @@ namespace PnP.Core.Test.Common.Utilities
 
         private string ConfigurePnPContextFactory(string configurationName, int id, string testName, string sourceFilePath, IPnPTestContextFactory factory)
         {
+            sourceFilePath = Path.GetFullPath(sourceFilePath);
+
             var testPnPContextFactory = factory as TestPnPContextFactory;
             testPnPContextFactory.Mocking = Mocking;
             testPnPContextFactory.Id = id;

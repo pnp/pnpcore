@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Text.Json;
-using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace PnP.Core.Model.SharePoint
@@ -152,7 +151,7 @@ namespace PnP.Core.Model.SharePoint
 
         private static void ProcessGetModelPublicationsResponse(string json, List<ISyntexModelPublication> results)
         {
-            var root = JsonDocument.Parse(json).RootElement.GetProperty("d").GetProperty("results");
+            var root = JsonSerializer.Deserialize<JsonElement>(json).GetProperty("d").GetProperty("results");
             if (root.ValueKind == JsonValueKind.Array)
             {
                 foreach (var publicationResultJson in root.EnumerateArray())
@@ -214,14 +213,7 @@ namespace PnP.Core.Model.SharePoint
                                                                                   targetLibraryServerRelativeUrl,
                                                                                   viewOption);
 
-            string body = JsonSerializer.Serialize(registerInfo, new JsonSerializerOptions()
-            {
-                IgnoreNullValues = true,
-                Converters =
-                {
-                    new JsonStringEnumConverter()
-                }
-            });
+            string body = JsonSerializer.Serialize(registerInfo, PnPConstants.JsonSerializer_IgnoreNullValues_StringEnumConvertor);
 
             var apiCall = new ApiCall("_api/machinelearning/publications", ApiType.SPORest, body)
             {
@@ -296,14 +288,7 @@ namespace PnP.Core.Model.SharePoint
         private async Task<IEnumerableBatchResult<ISyntexModelPublicationResult>> PublishModelBatchImplementationAsync(Batch batch, List<SyntexModelPublication> modelPublications)
         {
             System.Dynamic.ExpandoObject registerInfo = PublishModelApiRequestBody(modelPublications);
-            string body = JsonSerializer.Serialize(registerInfo, new JsonSerializerOptions()
-            {
-                IgnoreNullValues = true,
-                Converters =
-                {
-                    new JsonStringEnumConverter()
-                }
-            });
+            string body = JsonSerializer.Serialize(registerInfo, PnPConstants.JsonSerializer_IgnoreNullValues_StringEnumConvertor);
 
             var apiCall = new ApiCall("_api/machinelearning/publications", ApiType.SPORest, body)
             {
@@ -459,7 +444,7 @@ namespace PnP.Core.Model.SharePoint
 
         private static List<SyntexModelPublicationResult> ParseModelPublishResponse(string json)
         {
-            var root = JsonDocument.Parse(json).RootElement.GetProperty("d").GetProperty("Details").GetProperty("results");
+            var root = JsonSerializer.Deserialize<JsonElement>(json).GetProperty("d").GetProperty("Details").GetProperty("results");
             var modelPublicationResults = DeserializeModelPublishResult(root.ToString());
             return modelPublicationResults;
         }
@@ -537,14 +522,7 @@ namespace PnP.Core.Model.SharePoint
 
         private async Task<ApiCallResponse> PublishModelApiCallAsync(System.Dynamic.ExpandoObject registerInfo)
         {
-            string body = JsonSerializer.Serialize(registerInfo, new JsonSerializerOptions()
-            {
-                IgnoreNullValues = true,
-                Converters =
-                {
-                    new JsonStringEnumConverter()
-                }
-            });
+            string body = JsonSerializer.Serialize(registerInfo, PnPConstants.JsonSerializer_IgnoreNullValues_StringEnumConvertor);
 
             var apiCall = new ApiCall("_api/machinelearning/publications", ApiType.SPORest, body);
             return await (ListItem as ListItem).RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
@@ -582,14 +560,7 @@ namespace PnP.Core.Model.SharePoint
                                                                                     library.PnPContext.Web.ServerRelativeUrl,
                                                                                     library.RootFolder.ServerRelativeUrl);
 
-            string body = JsonSerializer.Serialize(unPublishInfo, new JsonSerializerOptions()
-            {
-                IgnoreNullValues = true,
-                Converters =
-                {
-                    new JsonStringEnumConverter()
-                }
-            });
+            string body = JsonSerializer.Serialize(unPublishInfo, PnPConstants.JsonSerializer_IgnoreNullValues_StringEnumConvertor);
 
             var apiCall = new ApiCall("_api/machinelearning/publications/batchdelete", ApiType.SPORest, body)
             {
@@ -662,14 +633,7 @@ namespace PnP.Core.Model.SharePoint
                 publications = modelUnPublications
             }.AsExpando();
 
-            string body = JsonSerializer.Serialize(unPublishInfo, new JsonSerializerOptions()
-            {
-                IgnoreNullValues = true,
-                Converters =
-                {
-                    new JsonStringEnumConverter()
-                }
-            });
+            string body = JsonSerializer.Serialize(unPublishInfo, PnPConstants.JsonSerializer_IgnoreNullValues_StringEnumConvertor);
 
             var apiCall = new ApiCall("_api/machinelearning/publications/batchdelete", ApiType.SPORest, body)
             {
@@ -718,14 +682,7 @@ namespace PnP.Core.Model.SharePoint
                                                         unPublicationOptions.TargetWebServerRelativeUrl,
                                                         unPublicationOptions.TargetLibraryServerRelativeUrl);
 
-            string body = JsonSerializer.Serialize(unPublishInfo, new JsonSerializerOptions()
-            {
-                IgnoreNullValues = true,
-                Converters =
-                {
-                    new JsonStringEnumConverter()
-                }
-            });
+            string body = JsonSerializer.Serialize(unPublishInfo, PnPConstants.JsonSerializer_IgnoreNullValues_StringEnumConvertor);
 
             var apiCall = new ApiCall("_api/machinelearning/publications/batchdelete", ApiType.SPORest, body)
             {
@@ -796,14 +753,7 @@ namespace PnP.Core.Model.SharePoint
                 publications = modelUnPublications
             }.AsExpando();
 
-            string body = JsonSerializer.Serialize(unPublishInfo, new JsonSerializerOptions()
-            {
-                IgnoreNullValues = true,
-                Converters =
-                {
-                    new JsonStringEnumConverter()
-                }
-            });
+            string body = JsonSerializer.Serialize(unPublishInfo, PnPConstants.JsonSerializer_IgnoreNullValues_StringEnumConvertor);
 
             var apiCall = new ApiCall("_api/machinelearning/publications/batchdelete", ApiType.SPORest, body)
             {
@@ -883,14 +833,7 @@ namespace PnP.Core.Model.SharePoint
 
         private async Task<ApiCallResponse> UnPublishModelApiCallAsync(System.Dynamic.ExpandoObject unPublishInfo)
         {
-            string body = JsonSerializer.Serialize(unPublishInfo, new JsonSerializerOptions()
-            {
-                IgnoreNullValues = true,
-                Converters =
-                {
-                    new JsonStringEnumConverter()
-                }
-            });
+            string body = JsonSerializer.Serialize(unPublishInfo, PnPConstants.JsonSerializer_IgnoreNullValues_StringEnumConvertor);
 
             var apiCall = new ApiCall("_api/machinelearning/publications/batchdelete", ApiType.SPORest, body);
             return await (ListItem as ListItem).RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);

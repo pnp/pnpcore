@@ -33,28 +33,20 @@ namespace PnP.Core.Services
                 return;
             }
 
-            // Json parsing options
-            var options = new JsonDocumentOptions
-            {
-                AllowTrailingCommas = true
-            };
-
             // Parse the received json content
-            using (JsonDocument document = JsonDocument.Parse(batchRequest.ResponseJson, options))
+            var json = JsonSerializer.Deserialize<JsonElement>(batchRequest.ResponseJson, PnPConstants.JsonSerializer_AllowTrailingCommasTrue);
+            // for SharePoint REST calls the root property is d, for recursive calls this is not the case
+            if (!json.TryGetProperty("d", out JsonElement root))
             {
-                // for SharePoint REST calls the root property is d, for recursive calls this is not the case
-                if (!document.RootElement.TryGetProperty("d", out JsonElement root))
-                {
-                    root = document.RootElement;
-                }
-
-                // TODO: The below method's signature is quite complex and reuses the same object
-                // multiple times. Can we try to simplify it?
-
-                // Map the returned JSON to the respective entities
-                await FromJson(batchRequest.Model, batchRequest.EntityInfo, new ApiResponse(batchRequest.ApiCall, root, batchRequest.Id), batchRequest.FromJsonCasting).ConfigureAwait(false);
-                batchRequest.PostMappingJson?.Invoke(batchRequest.ResponseJson);
+                root = json;
             }
+
+            // TODO: The below method's signature is quite complex and reuses the same object
+            // multiple times. Can we try to simplify it?
+
+            // Map the returned JSON to the respective entities
+            await FromJson(batchRequest.Model, batchRequest.EntityInfo, new ApiResponse(batchRequest.ApiCall, root, batchRequest.Id), batchRequest.FromJsonCasting).ConfigureAwait(false);
+            batchRequest.PostMappingJson?.Invoke(batchRequest.ResponseJson);
         }
 
         /// <summary>
@@ -124,13 +116,17 @@ namespace PnP.Core.Services
                 foreach (var property in apiResponse.JsonElement.EnumerateObject())
                 {
                     // Find the model field linked to this field
-                    EntityFieldInfo entityField = LookupEntityField(entity, apiResponse, property);
+                    EntityFieldInfo entityField = null;
 
                     // Do we need to re-parent this json mapping to a non expandable collection in the current model?
                     if (!string.IsNullOrEmpty(apiResponse.ApiCall.ReceivingProperty) && property.NameEquals("results"))
                     {
                         entityField = entity.Fields.FirstOrDefault(p => !string.IsNullOrEmpty(p.Name) && p.Name.Equals(apiResponse.ApiCall.ReceivingProperty, StringComparison.InvariantCultureIgnoreCase)) ??
                                       entity.Fields.FirstOrDefault(p => !string.IsNullOrEmpty(p.SharePointName) && p.SharePointName.Equals(apiResponse.ApiCall.ReceivingProperty, StringComparison.InvariantCultureIgnoreCase));
+                    }
+                    else
+                    {
+                        entityField = LookupEntityField(entity, apiResponse, property);
                     }
 
                     // Entity field should be populated for the actual fields we've requested
@@ -231,17 +227,17 @@ namespace PnP.Core.Services
                             #region Stop tracking the deferred properties to safe on memory and processing time
                             //else if (property.Value.TryGetProperty("__deferred", out JsonElement deferredProperty))
                             //{
-                                //// Let's keep track of these "pointers" to load additional data, no actual usage at this point yet though
+                            //// Let's keep track of these "pointers" to load additional data, no actual usage at this point yet though
 
-                                //// __deferred property
-                                ////"__deferred": {
-                                ////    "uri": "https://bertonline.sharepoint.com/sites/modern/_api/site/RootWeb/WorkflowAssociations"
-                                ////}
+                            //// __deferred property
+                            ////"__deferred": {
+                            ////    "uri": "https://bertonline.sharepoint.com/sites/modern/_api/site/RootWeb/WorkflowAssociations"
+                            ////}
 
-                                //if (!metadataBasedObject.Metadata.ContainsKey(entityField.Name))
-                                //{
-                                //    metadataBasedObject.Metadata.Add(entityField.Name, deferredProperty.GetProperty("uri").GetString());
-                                //}
+                            //if (!metadataBasedObject.Metadata.ContainsKey(entityField.Name))
+                            //{
+                            //    metadataBasedObject.Metadata.Add(entityField.Name, deferredProperty.GetProperty("uri").GetString());
+                            //}
                             //}
                             #endregion
                         }
@@ -601,7 +597,7 @@ namespace PnP.Core.Services
                     }
                     else
                     {
-                        var fieldValue = new FieldUserValue() { Field = GetListItemField(pnpObject, actualPropertyName) };
+                        var fieldValue = new FieldUserValue() { Field = field };
                         fieldValue.FromJson(json);
                         fieldValue.IsArray = false;
                         return new Tuple<object, string>(fieldValue, actualPropertyName);
@@ -635,7 +631,7 @@ namespace PnP.Core.Services
                     #endregion
 
                     // investigate if this can be a location field
-                    var parsedFieldContent = JsonDocument.Parse(json.GetString()).RootElement;
+                    var parsedFieldContent = JsonSerializer.Deserialize<JsonElement>(json.GetString());
                     var fieldValue = new FieldLocationValue() { Field = GetListItemField(pnpObject, propertyName) };
                     fieldValue.FromJson(parsedFieldContent);
                     fieldValue.IsArray = false;
@@ -680,7 +676,7 @@ namespace PnP.Core.Services
                             // Check again here due to the recursive nature of this code
                             if (!targetMetadataObject.Metadata.ContainsKey(PnPConstants.MetaDataGraphId))
                             {
-                                targetMetadataObject.Metadata.Add(PnPConstants.MetaDataGraphId, 
+                                targetMetadataObject.Metadata.Add(PnPConstants.MetaDataGraphId,
                                     $"{contextAwareObject.PnPContext.Uri.DnsSafeHost},{contextAwareObject.PnPContext.Site.Id},{contextAwareObject.PnPContext.Web.Id}");
                             }
                         }
@@ -741,7 +737,7 @@ namespace PnP.Core.Services
                 foreach (var property in apiResponse.JsonElement.EnumerateObject())
                 {
                     // Find the model field linked to this field
-                    EntityFieldInfo entityField = LookupEntityField(entity, apiResponse, property);
+                    EntityFieldInfo entityField = null;
 
                     // Do we need to re-parent this json mapping to a non expandable collection in the current model?
                     bool modelReparented = false;
@@ -753,6 +749,10 @@ namespace PnP.Core.Services
                             entityField = entity.Fields.FirstOrDefault(p => !string.IsNullOrEmpty(p.GraphName) && p.GraphName.Equals(apiResponse.ApiCall.ReceivingProperty, StringComparison.InvariantCultureIgnoreCase));
                         }
                         modelReparented = true;
+                    }
+                    else
+                    {
+                        entityField = LookupEntityField(entity, apiResponse, property);
                     }
 
                     // Entity field should be populate for the actual fields we've requested

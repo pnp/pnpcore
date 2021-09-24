@@ -99,7 +99,7 @@ namespace PnP.Core.Model.Teams
                 dynamic body = new ExpandoObject();
                 body.shouldSetSpoSiteReadOnlyForMembers = setSPOSiteReadOnlyForMembers;
 
-                var bodyContent = JsonSerializer.Serialize(body, typeof(ExpandoObject), new JsonSerializerOptions { WriteIndented = false });
+                var bodyContent = JsonSerializer.Serialize(body, typeof(ExpandoObject), PnPConstants.JsonSerializer_WriteIndentedFalse);
 
                 var apiCall = new ApiCall($"teams/{Id}/archive", ApiType.Graph, bodyContent);
 

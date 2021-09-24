@@ -183,7 +183,7 @@ namespace PnP.Core.Model.SharePoint
                 body.formValues = itemValues;
 
                 // Serialize object to json
-                var bodyContent = JsonSerializer.Serialize(body, typeof(ExpandoObject), new JsonSerializerOptions { WriteIndented = true });
+                var bodyContent = JsonSerializer.Serialize(body, typeof(ExpandoObject), PnPConstants.JsonSerializer_WriteIndentedTrue);
 
                 // Return created api call
                 return new ApiCall($"{baseApiCall}/AddValidateUpdateItemUsingPath", ApiType.SPORest, bodyContent);
@@ -277,7 +277,7 @@ namespace PnP.Core.Model.SharePoint
 
             if (!string.IsNullOrEmpty(response.Json))
             {
-                var json = JsonDocument.Parse(response.Json).RootElement.GetProperty("d");
+                var json = JsonSerializer.Deserialize<JsonElement>(response.Json).GetProperty("d");
 
                 if (json.TryGetProperty("DisplayName", out JsonElement displayName))
                 {
@@ -405,7 +405,7 @@ namespace PnP.Core.Model.SharePoint
             // Get the corresponding JSON text content
             var jsonUpdateMessage = JsonSerializer.Serialize(updateMessage,
                 typeof(ExpandoObject),
-                new JsonSerializerOptions { WriteIndented = true });
+                PnPConstants.JsonSerializer_WriteIndentedTrue);
 
             var itemUri = GetMetadata(PnPConstants.MetaDataUri);
 
@@ -699,7 +699,7 @@ namespace PnP.Core.Model.SharePoint
 
             if (!string.IsNullOrEmpty(response.Json))
             {
-                var json = JsonDocument.Parse(response.Json).RootElement.GetProperty("d");
+                var json = JsonSerializer.Deserialize<JsonElement>(response.Json).GetProperty("d");
 
 #pragma warning disable CA1507 // Use nameof to express symbol names
                 if (json.TryGetProperty("CommentsDisabled", out JsonElement commentsDisabled))

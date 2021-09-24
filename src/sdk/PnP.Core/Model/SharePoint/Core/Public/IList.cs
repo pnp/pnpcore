@@ -236,6 +236,11 @@ namespace PnP.Core.Model.SharePoint
         /// </summary>
         public bool HasUniqueRoleAssignments { get; }
 
+        /// <summary>
+        /// A special property used to add an asterisk to a $select statement
+        /// </summary>
+        public object All { get; }
+
         #endregion
 
         #region Methods

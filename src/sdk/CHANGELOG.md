@@ -28,6 +28,12 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - PnP Core SDK assemblies are now strong named #542 [jansenbe - Bert Jansen]
 - PERF: ImplementsInterface -> massive performance improvement! Running all offline PnP.Core tests is twice as fast... [jansenbe - Bert Jansen] 
 - PERF: AsExpando removed LINQ dependencies to speed up and lower memory requirments [jansenbe - Bert Jansen]
+- PERF: Improved parsing of REST batch response for .NET 5: 50% less memory allocations + 50% to 90% performance gain (depending on the size) [jansenbe - Bert Jansen]
+- PERF: Reuse JsonSerializerOptions: overall offline test run is 10% faster [jansenbe - Bert Jansen]
+- PERF: Standardized on JsonSerializer.Deserialize, replaced JsonDocument.Parse where needed [jansenbe - Bert Jansen]
+- PERF: Get the response string, using HttpCompletionOption.ResponseHeadersRead and ReadAsStreamAsync to lower the memory pressure when processing larger responses + performance is better [jansenbe - Bert Jansen]
+- PERF: Cache LINQ based field lookups in ListDataAsStreamHandler, 35% faster when loading 2500 list items with all fields [jansenbe - Bert Jansen]
+- Added `All` property that gets translated to a * in the $select when PnP Framework resorts to using a SharePoint REST query [jansenbe - Bert Jansen]
 
 ## [1.3.0]
 

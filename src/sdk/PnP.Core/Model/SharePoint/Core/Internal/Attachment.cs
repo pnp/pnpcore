@@ -32,6 +32,9 @@ namespace PnP.Core.Model.SharePoint
 
         [KeyProperty(nameof(FileName))]
         public override object Key { get => FileName; set => FileName = value.ToString(); }
+
+        [SharePointProperty("*")]
+        public object All { get => null; }
         #endregion
 
         #region GetContent

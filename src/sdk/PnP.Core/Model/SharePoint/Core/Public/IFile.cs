@@ -204,6 +204,11 @@ namespace PnP.Core.Model.SharePoint
         /// </summary>
         public ISharePointUser ModifiedBy { get; }
 
+        /// <summary>
+        /// A special property used to add an asterisk to a $select statement
+        /// </summary>
+        public object All { get; }
+
         #endregion
 
         #region GetContent

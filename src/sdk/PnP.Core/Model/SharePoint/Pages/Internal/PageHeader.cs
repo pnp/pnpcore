@@ -196,7 +196,7 @@ namespace PnP.Core.Model.SharePoint
                         decoded = WebUtility.HtmlDecode(pageHeaderData);
                     }
 
-                    var wpJObject = JsonDocument.Parse(decoded).RootElement;
+                    var wpJObject = JsonSerializer.Deserialize<JsonElement>(decoded);
 
                     // Store the server processed content as that's needed for full fidelity
                     if (wpJObject.TryGetProperty("serverProcessedContent", out JsonElement serverProcessedContent))

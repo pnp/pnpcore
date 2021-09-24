@@ -1,29 +1,20 @@
-﻿using PnP.Core.Services.Core.CSOM.Utils.CustomConverters;
-using PnP.Core.Test.Services.Core.CSOM.Utils.CustomConverters;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Text.Json;
 
 namespace PnP.Core.Services.Core.CSOM.Utils
 {
     internal class CSOMResponseHelper
     {
-        internal JsonSerializerOptions Options { get; set; }
-
-        internal CSOMResponseHelper()
-        {
-            Options = new JsonSerializerOptions();
-            Options.Converters.Add(new SPGuidConverter());
-            Options.Converters.Add(new DateTimeConverter());
-        }
-
+#pragma warning disable CA1822 // Mark members as static
         internal T ProcessResponse<T>(string response, long propertyIdentifier)
+#pragma warning restore CA1822 // Mark members as static
         {
-            List<JsonElement> results = JsonSerializer.Deserialize<List<JsonElement>>(response, Options);
+            List<JsonElement> results = JsonSerializer.Deserialize<List<JsonElement>>(response, PnPConstants.JsonSerializer_SPGuidConverter_DateTimeConverter);
             int idIndex = results.FindIndex(r => CompareIdElement(r, propertyIdentifier));
             if (idIndex >= 0)
             {
                 JsonElement result = results[idIndex + 1];
-                return JsonSerializer.Deserialize<T>(result.GetRawText(), Options);
+                return JsonSerializer.Deserialize<T>(result.GetRawText(), PnPConstants.JsonSerializer_SPGuidConverter_DateTimeConverter);
             }
             return default;
         }

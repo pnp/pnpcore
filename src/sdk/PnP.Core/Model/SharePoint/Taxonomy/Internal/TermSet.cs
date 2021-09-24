@@ -44,7 +44,7 @@ namespace PnP.Core.Model.SharePoint
                 }
 
                 // Serialize object to json
-                var bodyContent = JsonSerializer.Serialize(body, typeof(ExpandoObject), new JsonSerializerOptions { WriteIndented = false });
+                var bodyContent = JsonSerializer.Serialize(body, typeof(ExpandoObject), PnPConstants.JsonSerializer_WriteIndentedFalse);
 
                 var apiCall = await ApiHelper.ParseApiRequestAsync(this, baseUri).ConfigureAwait(false);
 

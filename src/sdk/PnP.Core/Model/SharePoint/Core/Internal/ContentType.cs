@@ -123,6 +123,9 @@ namespace PnP.Core.Model.SharePoint
 
         [KeyProperty(nameof(StringId))]
         public override object Key { get => StringId; set => StringId = value.ToString(); }
+
+        [SharePointProperty("*")]
+        public object All { get => null; }
         #endregion
 
         #region Extension methods
@@ -132,7 +135,7 @@ namespace PnP.Core.Model.SharePoint
             dynamic body = new ExpandoObject();
             body.contentTypeId = id;
 
-            var bodyContent = JsonSerializer.Serialize(body, typeof(ExpandoObject), new JsonSerializerOptions { WriteIndented = false });
+            var bodyContent = JsonSerializer.Serialize(body, typeof(ExpandoObject), PnPConstants.JsonSerializer_WriteIndentedFalse);
 
             // Given this method can apply on both Web.ContentTypes as List.ContentTypes we're getting the entity info which will 
             // automatically provide the correct 'parent'
