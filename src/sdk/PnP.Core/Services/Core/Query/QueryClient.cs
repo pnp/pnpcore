@@ -917,7 +917,7 @@ namespace PnP.Core.Services
                 PnPConstants.JsonSerializer_WriteIndentedTrue);
 
             // Prepare the variable to contain the target URL for the update operation
-            var updateUrl = await ApiHelper.ParseApiCallAsync(model, $"{model.PnPContext.Uri.ToString().TrimEnd(new char[] { '/' })}/{entity.SharePointUpdate}").ConfigureAwait(false);
+            var updateUrl = await ApiHelper.ParseApiCallAsync(model, $"{model.PnPContext.Uri.AbsoluteUri.ToString().TrimEnd(new char[] { '/' })}/{entity.SharePointUpdate}").ConfigureAwait(false);
 
             // Create ApiCall instance and call the override option if needed
             var call = new ApiCallRequest(new ApiCall(updateUrl, ApiType.SPORest, jsonUpdateMessage)
@@ -1003,7 +1003,7 @@ namespace PnP.Core.Services
         private static async Task<ApiCallRequest> BuildDeleteAPICallRestAsync<TModel>(BaseDataModel<TModel> model, EntityInfo entity)
         {
             // Prepare the variable to contain the target URL for the delete operation
-            var deleteUrl = await ApiHelper.ParseApiCallAsync(model, $"{model.PnPContext.Uri.ToString().TrimEnd(new char[] { '/' })}/{entity.SharePointDelete}").ConfigureAwait(false);
+            var deleteUrl = await ApiHelper.ParseApiCallAsync(model, $"{model.PnPContext.Uri.AbsoluteUri.ToString().TrimEnd(new char[] { '/' })}/{entity.SharePointDelete}").ConfigureAwait(false);
 
             // Create ApiCall instance and call the override option if needed
             var call = new ApiCallRequest(new ApiCall(deleteUrl, ApiType.SPORest));

@@ -35,6 +35,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - PERF: Cache LINQ based field lookups in ListDataAsStreamHandler, 35% faster when loading 2500 list items with all fields [jansenbe - Bert Jansen]
 - Added `All` property that gets translated to a * in the $select when PnP Framework resorts to using a SharePoint REST query [jansenbe - Bert Jansen]
 - Added _CommentCount to BuiltInFields #554 [avuorine]
+- For raw API requests the url encoding was not always done correct [jansenbe - Bert Jansen]
 
 ## [1.3.0]
 
