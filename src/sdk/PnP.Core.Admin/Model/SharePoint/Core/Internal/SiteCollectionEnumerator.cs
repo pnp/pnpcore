@@ -37,7 +37,7 @@ namespace PnP.Core.Admin.Model.SharePoint
         /// application permissions with Sites.Read.All or higher or when the user has read access to SharePoint tenant admin,
         /// which is the case for global SharePoint administrators
         /// </summary>
-        private async static Task<List<ISiteCollection>> GetViaTenantAdminHiddenListAsync(PnPContext context, int pageSize = 500)
+        internal async static Task<List<ISiteCollection>> GetViaTenantAdminHiddenListAsync(PnPContext context, int pageSize = 500)
         {
             string sitesInformationListAllUrl = "DO_NOT_DELETE_SPLIST_TENANTADMIN_ALL_SITES_AGGREGA";
 
@@ -116,7 +116,7 @@ namespace PnP.Core.Admin.Model.SharePoint
         /// <summary>
         /// Enumerating site collections using Graph Sites endpoint. Only works when using application permissions with Sites.Read.All or higher!
         /// </summary>
-        private async static Task<List<ISiteCollection>> GetViaGraphSitesApiAsync(PnPContext context)
+        internal async static Task<List<ISiteCollection>> GetViaGraphSitesApiAsync(PnPContext context)
         {
             List<ISiteCollection> loadedSites = new List<ISiteCollection>();
 
@@ -209,7 +209,7 @@ namespace PnP.Core.Admin.Model.SharePoint
         /// <summary>
         /// Enumerating site collections using Graph Search endpoint. Only works when using delegated permissions!
         /// </summary>
-        private async static Task<List<ISiteCollection>> GetViaGraphSearchApiAsync(PnPContext context, int pageSize = 500)
+        internal async static Task<List<ISiteCollection>> GetViaGraphSearchApiAsync(PnPContext context, int pageSize = 500)
         {
             string requestBody = "{\"requests\": [{ \"entityTypes\": [\"site\"], \"query\": { \"queryString\": \"contentclass:STS_Site\" }, \"from\": %from%, \"size\": %to% }]}";
 

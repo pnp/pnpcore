@@ -1,8 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PnP.Core.Admin.Model.SharePoint;
 using PnP.Core.Admin.Test.Utilities;
-using PnP.Core.Services;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace PnP.Core.Admin.Test.SharePoint
@@ -22,42 +20,50 @@ namespace PnP.Core.Admin.Test.SharePoint
         }
 
         [TestMethod]
-        public async Task EnumerateSitesWithApplicationPermissions()
+        public async Task EnumerateSitesWithApplicationPermissionsViaSitesApi()
         {
-            TestCommon.Instance.UseApplicationPermissions = true;
-            await EnumerateSitesImplementation("EnumerateSitesWithApplicationPermissions");
-            TestCommon.Instance.UseApplicationPermissions = false;
+            //TestCommon.Instance.Mocking = false;
+            try
+            {
+                TestCommon.Instance.UseApplicationPermissions = true;
+                using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+                {
+                    var sites = await SiteCollectionEnumerator.GetViaGraphSitesApiAsync(context);
+
+                    Assert.IsTrue(sites.Count > 0);
+                }
+            }
+            finally
+            {
+                TestCommon.Instance.UseApplicationPermissions = false;
+            }
         }
 
         [TestMethod]
-        public async Task EnumerateSitesWithDelegatedPermissions()
-        {
-            TestCommon.Instance.UseApplicationPermissions = false;
-            var sitesUsingSearch = await EnumerateSitesImplementation("EnumerateSitesWithDelegatedPermissionsSearch", true);
-            var sitesUsingTenantAdmin = await EnumerateSitesImplementation("EnumerateSitesWithDelegatedPermissionsSites", false);
-
-            //// Verify all sites returned via admin are also in sites returned via search
-            //foreach(var site in sitesUsingTenantAdmin)
-            //{
-            //    if (sitesUsingSearch.FirstOrDefault(p => p.Id == site.Id) == null)
-            //    {
-
-            //    }
-            //}
-        }
-
-        private static async Task<List<ISiteCollection>> EnumerateSitesImplementation(string testName, bool ignoreUserIsSharePointAdmin = false)
+        public async Task EnumerateSitesWithDelegatedPermissionsViaSearchApi()
         {
             //TestCommon.Instance.Mocking = false;
-
-            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, testName: testName))
+            TestCommon.Instance.UseApplicationPermissions = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                var sites = context.GetSharePointAdmin().GetSiteCollections(ignoreUserIsSharePointAdmin);
+                var sites = await SiteCollectionEnumerator.GetViaGraphSearchApiAsync(context);
 
                 Assert.IsTrue(sites.Count > 0);
-
-                return sites;
             }
         }
+
+        [TestMethod]
+        public async Task EnumerateSitesWithDelegatedPermissionsViaSharePointAdminCenter()
+        {
+            //TestCommon.Instance.Mocking = false;
+            TestCommon.Instance.UseApplicationPermissions = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var sites = await SiteCollectionEnumerator.GetViaTenantAdminHiddenListAsync(context);
+
+                Assert.IsTrue(sites.Count > 0);
+            }
+        }
+
     }
 }

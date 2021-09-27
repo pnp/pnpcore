@@ -6,10 +6,10 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace PnP.Core.Admin.Test
+namespace PnP.Core.Admin.Test.SharePoint
 {
     [TestClass]
-    public class SharePointTenantTests
+    public class TenantTests
     {
 
         [ClassInitialize]
