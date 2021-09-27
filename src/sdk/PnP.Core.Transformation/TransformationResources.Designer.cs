@@ -187,6 +187,15 @@ namespace PnP.Core.Transformation {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Published by the PnP Transformation Framework.
+        /// </summary>
+        internal static string Info_PublishMessage {
+            get {
+                return ResourceManager.GetString("Info_PublishMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Image Url:.
         /// </summary>
         internal static string Info_TransformArticleHeaderImageUrl {
@@ -264,6 +273,15 @@ namespace PnP.Core.Transformation {
         internal static string Warning_ContentWarnModernNotFound {
             get {
                 return ResourceManager.GetString("Warning_ContentWarnModernNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There was a non critical issue during page update/publish. Returned error message: {0}.
+        /// </summary>
+        internal static string Warning_NonCriticalErrorDuringPublish {
+            get {
+                return ResourceManager.GetString("Warning_NonCriticalErrorDuringPublish", resourceCulture);
             }
         }
         

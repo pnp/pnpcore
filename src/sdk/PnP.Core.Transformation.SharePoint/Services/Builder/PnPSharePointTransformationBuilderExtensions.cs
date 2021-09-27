@@ -28,17 +28,21 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <returns>A PnPTransformationBuilder instance</returns>
         public static IPnPSharePointTransformationBuilder AddPnPSharePointTransformation(this IServiceCollection services)
         {
-            return AddPnPSharePointTransformation(services, null);
+            return AddPnPSharePointTransformation(services, null, null);
         }
 
         /// <summary>
         /// Configures PnP Transformation for SharePoint with default options
         /// </summary>
         /// <param name="services">The collection of services in an <see cref="IServiceCollection" /></param>
+        /// <param name="pnpOptions">An Action to configure the PnP Transformation global options</param>
+        /// <param name="pageOptions">An Action to configure the page transformation options</param>
         /// <returns>A PnPTransformationBuilder instance</returns>
-        public static IPnPSharePointTransformationBuilder AddPnPSharePointTransformation(this IServiceCollection services, Action<PnPTransformationOptions> options)
+        public static IPnPSharePointTransformationBuilder AddPnPSharePointTransformation(this IServiceCollection services, 
+            Action<PnPTransformationOptions> pnpOptions,
+            Action<PageTransformationOptions> pageOptions)
         {
-            return services.AddPnPTransformation(options)
+            return services.AddPnPTransformation(pnpOptions, pageOptions)
                 .WithSharePoint();
         }
 
@@ -46,10 +50,16 @@ namespace Microsoft.Extensions.DependencyInjection
         /// Configures PnP Transformation for SharePoint with default options
         /// </summary>
         /// <param name="services">The collection of services in an <see cref="IServiceCollection" /></param>
+        /// <param name="pnpOptions">An Action to configure the PnP Transformation global options</param>
+        /// <param name="pageOptions">An Action to configure the page transformation options</param>
+        /// <param name="sharePointOptions">An Action to configure the SharePoint transformation options</param>
         /// <returns>A PnPTransformationBuilder instance</returns>
-        public static IPnPSharePointTransformationBuilder AddPnPSharePointTransformation(this IServiceCollection services, Action<PnPTransformationOptions> pnpOptions, Action<SharePointTransformationOptions> sharePointOptions)
+        public static IPnPSharePointTransformationBuilder AddPnPSharePointTransformation(this IServiceCollection services, 
+            Action<PnPTransformationOptions> pnpOptions,
+            Action<PageTransformationOptions> pageOptions,
+            Action<SharePointTransformationOptions> sharePointOptions)
         {
-            return services.AddPnPTransformation(pnpOptions)
+            return services.AddPnPTransformation(pnpOptions, pageOptions)
                 .WithSharePoint(sharePointOptions);
         }
 

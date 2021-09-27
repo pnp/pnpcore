@@ -39,7 +39,7 @@ namespace PnP.Core.Transformation.Test
             var services = new ServiceCollection();
             services.AddLogging();
 
-            services.AddPnPTransformation(o => o.DisableTelemetry = true)
+            services.AddPnPTransformation(o => o.DisableTelemetry = true, p => p.CopyPageMetadata = true)
                 .WithPageOptions(o => o.DisablePageComments = true)
 
                 .WithMappingProvider<Mock>()

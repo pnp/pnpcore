@@ -37,6 +37,7 @@ namespace PnP.Core.Transformation.SharePoint.Functions
         private readonly IOptions<SharePointTransformationOptions> options;
 
         private Regex siteUrlRegex = new Regex(@"https?:\/\/(?<hostName>[\w.]*)(?<serverRelativeUrl>[\w\/.]*)");
+        private Regex siteLinkRelativeUrlRegex = new Regex(@"\/sites\/(?<sitePath>\w*)\/(?<siteRelativePath>[\w\/.]*)");
 
         #region Constructor with DI
 
@@ -1439,54 +1440,56 @@ namespace PnP.Core.Transformation.SharePoint.Functions
         {
             Dictionary<string, string> results = new Dictionary<string, string>();
 
+            var links = new SummaryLinksHtmlTransformator().GetLinks(text);
+
+            if (IsCrossSiteTransfer())
+            {
+                foreach (var link in links)
+                {
+                    // preview images
+                    if (!string.IsNullOrEmpty(link.ImageUrl))
+                    {
+                        var serverRelativeAssetFileName = ReturnServerRelativePath(link.ImageUrl);
+                        link.ImageUrl = PersistImageFileContent(serverRelativeAssetFileName, this.SourceContext);
+                    }
+
+                    // urls
+                    if (!string.IsNullOrEmpty(link.Url))
+                    {
+                        var serverRelativeAssetFileName = ReturnServerRelativePath(link.Url);
+                        if (siteLinkRelativeUrlRegex.IsMatch(serverRelativeAssetFileName))
+                        {
+                            var match = siteLinkRelativeUrlRegex.Match(serverRelativeAssetFileName);
+
+                            var newAssetLocation = match.Groups["siteRelativePath"].Value;
+                            link.Url = $"{{SiteRelativeLink:{newAssetLocation}}}";
+                        }
+                    }
+                }
+            }
+
+            // Rewrite url's if needed
+            if (!this.options.Value.SkipUrlRewrite)
+            {
+                foreach (var link in links)
+                {
+                    var urlMappingInput = new UrlMappingProviderInput(this.PageTransformationContext, link.Url);
+                    var urlMappingOutput = this.urlMappingProvider.MapUrlAsync(urlMappingInput).GetAwaiter().GetResult();
+
+                    link.Url = urlMappingOutput.Text;
+                }
+            }
+
+            QuickLinksTransformator qlt = new QuickLinksTransformator(this.SourceContext);
+            var res = qlt.Transform(links, quickLinksJsonProperties);
+
+            // Output the calculated properties so then can be used in the mapping
+            results.Add("JsonProperties", res.Properties);
+            results.Add("SearchablePlainTexts", res.SearchablePlainTexts);
+            results.Add("Links", res.Links);
+            results.Add("ImageSources", res.ImageSources);
+
             return results;
-
-            //var links = new SummaryLinksHtmlTransformator().GetLinks(text);
-
-            //if (IsCrossSiteTransfer())
-            //{
-            //    var clientSidePage = this.clientSidePage.PageTitle;
-            //    AssetTransfer assetTransfer = new AssetTransfer(sourceClientContext, base.clientContext, base.RegisteredLogObservers);
-
-            //    foreach (var link in links)
-            //    {
-            //        // preview images
-            //        if (!string.IsNullOrEmpty(link.ImageUrl))
-            //        {
-            //            var serverRelativeAssetFileName = ReturnServerRelativePath(link.ImageUrl);
-            //            var newAssetLocation = assetTransfer.TransferAsset(serverRelativeAssetFileName, clientSidePage);
-            //            link.ImageUrl = newAssetLocation;
-            //        }
-
-            //        // urls
-            //        if (!string.IsNullOrEmpty(link.Url))
-            //        {
-            //            var serverRelativeAssetFileName = ReturnServerRelativePath(link.Url);
-            //            var newAssetLocation = assetTransfer.TransferAsset(serverRelativeAssetFileName, clientSidePage);
-            //            link.Url = newAssetLocation;
-            //        }
-            //    }
-            //}
-
-            //// Rewrite url's if needed
-            //if (!this.baseTransformationInformation.SkipUrlRewrite)
-            //{
-            //    foreach (var link in links)
-            //    {
-            //        link.Url = this.urlTransformator.Transform(link.Url);
-            //    }
-            //}
-
-            //QuickLinksTransformator qlt = new QuickLinksTransformator(this.clientContext, base.RegisteredLogObservers);
-            //var res = qlt.Transform(links, quickLinksJsonProperties);
-
-            //// Output the calculated properties so then can be used in the mapping
-            //results.Add("JsonProperties", res.Properties);
-            //results.Add("SearchablePlainTexts", res.SearchablePlainTexts);
-            //results.Add("Links", res.Links);
-            //results.Add("ImageSources", res.ImageSources);
-
-            //return results;
         }
         #endregion
 

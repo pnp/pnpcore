@@ -21,7 +21,7 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <returns>A PnPTransformationBuilder instance</returns>
         public static IPnPTransformationBuilder AddPnPTransformation(this IServiceCollection services)
         {
-            return AddPnPTransformation(services, null);
+            return AddPnPTransformation(services, null, null);
         }
 
         /// <summary>
@@ -29,9 +29,11 @@ namespace Microsoft.Extensions.DependencyInjection
         /// </summary>
         /// <param name="services">The collection of services in a <see cref="IServiceCollection" /></param>
         /// <param name="options">An Action to configure the PnP Transformation options</param>
+        /// <param name="pageOptions">An Action to configure the Page Transformation options</param>
         /// <returns>A PnPTransformationBuilder instance</returns>
         public static IPnPTransformationBuilder AddPnPTransformation(this IServiceCollection services,
-            Action<PnPTransformationOptions> options)
+            Action<PnPTransformationOptions> options, 
+            Action<PageTransformationOptions> pageOptions)
         {
             if (services == null)
             {
@@ -41,6 +43,11 @@ namespace Microsoft.Extensions.DependencyInjection
             if (options != null)
             {
                 services.Configure(options);
+            }
+
+            if (pageOptions != null)
+            {
+                services.Configure(pageOptions);
             }
 
             // TODO: Consider using the distributed one or providing an option to use the distributed one

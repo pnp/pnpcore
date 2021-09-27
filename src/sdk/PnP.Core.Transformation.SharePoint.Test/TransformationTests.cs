@@ -26,8 +26,15 @@ namespace PnP.Core.Transformation.SharePoint.Test
                 {
                     pnpOptions.DisableTelemetry = false;
                     pnpOptions.PersistenceProviderConnectionString = config["PersistenceProviderConnectionString"];
-                }
-                , spOptions =>
+                },
+                pageOptions =>
+                {
+                    pageOptions.CopyPageMetadata = true;
+                    pageOptions.KeepPageCreationModificationInformation = true;
+                    pageOptions.PostAsNews = false;
+                    pageOptions.PublishPage = false;
+                },
+                spOptions =>
                 {
                     //spOptions.WebPartMappingFile = config["WebPartMappingFile"];
                     //spOptions.PageLayoutMappingFile = config["PageLayoutMappingFile"];

@@ -159,6 +159,9 @@
   <data name="Info_PageAlreadyExistsInTargetLocation" xml:space="preserve">
     <value>The page '{0}' already exists in target location</value>
   </data>
+  <data name="Info_PublishMessage" xml:space="preserve">
+    <value>Published by the PnP Transformation Framework</value>
+  </data>
   <data name="Info_TransformArticleHeaderImageUrl" xml:space="preserve">
     <value>Image Url:</value>
   </data>
@@ -185,6 +188,9 @@
   </data>
   <data name="Warning_ContentWarnModernNotFound" xml:space="preserve">
     <value>Modern web part not found</value>
+  </data>
+  <data name="Warning_NonCriticalErrorDuringPublish" xml:space="preserve">
+    <value>There was a non critical issue during page update/publish. Returned error message: {0}</value>
   </data>
   <data name="Warning_PageHeaderAuthorNotSet" xml:space="preserve">
     <value>The page author header could not be set. Author '{0}' could not be resolved</value>

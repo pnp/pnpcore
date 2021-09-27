@@ -317,6 +317,15 @@ namespace PnP.Core.Transformation.Services.Core
             // Save the generated page
             await targetPage.SaveAsync(targetPageFilePath).ConfigureAwait(false);
 
+            // Restore page author/editor/created/modified
+            if ((this.defaultPageTransformationOptions.KeepPageCreationModificationInformation
+                && mappingOutput.TargetPage.Author != null
+                && mappingOutput.TargetPage.Editor != null) ||
+                this.defaultPageTransformationOptions.PostAsNews)
+            {
+                await UpdateTargetPageWithSourcePageInformationAsync(targetFile, mappingOutput);
+            }
+
             // Return the generated page URL
             var generatedPageFile = await targetPage.GetPageFileAsync(f => f.ServerRelativeUrl).ConfigureAwait(false);
             var generatedPageUri = new Uri($"{targetWeb.Url.Scheme}://{targetWeb.Url.Host}{generatedPageFile.ServerRelativeUrl}");
@@ -328,6 +337,77 @@ namespace PnP.Core.Transformation.Services.Core
             }
 
             return targetPageUri;
+        }
+
+        private async Task UpdateTargetPageWithSourcePageInformationAsync(IFile targetFile, MappingProviderOutput mappingOutput)
+        {
+            try
+            {
+                // Ensure the properties to define the cache key
+                var targetWeb = targetFile.PnPContext.Web;
+                await targetWeb.EnsurePropertiesAsync(w => w.Id).ConfigureAwait(false);
+
+                // Load the list item corresponding to the file
+                await targetFile.LoadAsync(f => f.ListItemAllFields).ConfigureAwait(false);
+                var targetItem = targetFile.ListItemAllFields;
+
+                // Update the target page information properties
+                var pageAuthorUser = await targetWeb.EnsureUserAsync(mappingOutput.TargetPage.Author).ConfigureAwait(false);
+                var pageEditorUser = await targetWeb.EnsureUserAsync(mappingOutput.TargetPage.Editor).ConfigureAwait(false);
+
+                // Prep a new FieldUserValue object instance and update the list item
+                var pageAuthor = new FieldUserValue()
+                {
+                    LookupValue = pageAuthorUser.Title,
+                    LookupId = pageAuthorUser.Id
+                };
+
+                var pageEditor = new FieldUserValue()
+                {
+                    LookupValue = pageEditorUser.Title,
+                    LookupId = pageEditorUser.Id
+                };
+
+                if (this.defaultPageTransformationOptions.KeepPageCreationModificationInformation ||
+                    this.defaultPageTransformationOptions.PostAsNews)
+                {
+                    if (this.defaultPageTransformationOptions.KeepPageCreationModificationInformation)
+                    {
+                        // All 4 fields have to be set!
+                        targetItem[SharePointConstants.CreatedByField] = pageAuthor;
+                        targetItem[SharePointConstants.ModifiedByField] = pageEditor;
+                        targetItem[SharePointConstants.CreatedField] = mappingOutput.TargetPage.Created;
+                        targetItem[SharePointConstants.ModifiedField] = mappingOutput.TargetPage.Modified;
+                    }
+
+                    if (this.defaultPageTransformationOptions.PostAsNews)
+                    {
+                        targetItem[SharePointConstants.PromotedStateField] = "2";
+
+                        // Determine what will be the publishing date that will show up in the news rollup
+                        if (this.defaultPageTransformationOptions.KeepPageCreationModificationInformation)
+                        {
+                            targetItem[SharePointConstants.FirstPublishedDateField] = mappingOutput.TargetPage.Modified;
+                        }
+                        else
+                        {
+                            targetItem[SharePointConstants.FirstPublishedDateField] = targetItem[SharePointConstants.ModifiedField];
+                        }
+                    }
+
+                    await targetItem.UpdateOverwriteVersionAsync().ConfigureAwait(false);
+
+                    if (this.defaultPageTransformationOptions.PublishPage)
+                    {
+                        await targetFile.PublishAsync(TransformationResources.Info_PublishMessage).ConfigureAwait(false);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Eat exceptions as this is not critical for the generated page
+                logger.LogWarning(string.Format(TransformationResources.Warning_NonCriticalErrorDuringPublish, ex.Message));
+            }
         }
 
         private async Task CopyPageMetadataAsync(IFile targetFile, MappingProviderOutput mappingOutput)

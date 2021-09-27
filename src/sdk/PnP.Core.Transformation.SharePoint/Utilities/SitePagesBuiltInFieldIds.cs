@@ -84,6 +84,61 @@ namespace PnP.Core.Transformation.SharePoint.Utilities
         /// </summary>
         public static readonly Guid OriginalSourceItemIdID = new Guid("91e86a43-75f2-426f-80da-35edfb47d55d");
 
+        /// <summary>
+        /// Compliance Asset Id
+        /// </summary>
+        public static readonly Guid ComplianceAssetId = new Guid("3a6b296c-3f50-445c-a13f-9c679ea9dda3");
+
+        /// <summary>
+        /// _SPCallToAction
+        /// </summary>
+        public static readonly Guid SPCallToAction = new Guid("9889a80f-c9ec-41d8-a359-ac5fb5c4cfa2");
+
+        /// <summary>
+        /// SharedWithUsers
+        /// </summary>
+        public static readonly Guid SharedWithUsers = new Guid("ef991a83-108d-4407-8ee5-ccc0c3d836b9");
+
+        /// <summary>
+        /// SharedWithDetails
+        /// </summary>
+        public static readonly Guid SharedWithDetails = new Guid("d3c9caf7-044c-4c71-ae64-092981e54b33");
+
+        /// <summary>
+        /// _ComplianceFlags
+        /// </summary>
+        public static readonly Guid ComplianceFlags = new Guid("ccc1037f-f65e-434a-868e-8c98af31fe29");
+
+        /// <summary>
+        /// _ComplianceTag
+        /// </summary>
+        public static readonly Guid ComplianceTag = new Guid("d4b6480a-4bed-4094-9a52-30181ea38f1d");
+
+        /// <summary>
+        /// _ComplianceTagWrittenTime
+        /// </summary>
+        public static readonly Guid ComplianceTagWrittenTime = new Guid("92be610e-ddbb-49f4-b3b1-5c2bc768df8f");
+
+        /// <summary>
+        /// _ComplianceTagUserId
+        /// </summary>
+        public static readonly Guid ComplianceTagUserId = new Guid("418d7676-2d6f-42cf-a16a-e43d2971252a");
+
+        /// <summary>
+        /// _CommentCount
+        /// </summary>
+        public static readonly Guid CommentCount = new Guid("d307dff3-340f-44a2-9f4b-fbfe1ba07459");
+
+        /// <summary>
+        /// _LikeCount
+        /// </summary>
+        public static readonly Guid LikeCount = new Guid("db8d9d6d-dc9a-4fbd-85f3-4a753bfdc58c");
+
+        /// <summary>
+        /// _DisplayName
+        /// </summary>
+        public static readonly Guid DisplayName = new Guid("1a53ab5a-11f9-4b92-a377-8cfaaf6ba7be");
+
         // Hashset to contain the whole list of built in fields
         private static HashSet<Guid> builtInFieldsHashSet;
         private static object builtInFieldsHashSetSyncLock = new object();
@@ -120,7 +175,18 @@ namespace PnP.Core.Transformation.SharePoint.Utilities
                                 OriginalSourceSiteIdID,
                                 OriginalSourceWebIdID,
                                 OriginalSourceListIdID,
-                                OriginalSourceItemIdID
+                                OriginalSourceItemIdID,
+                                ComplianceAssetId,
+                                SPCallToAction,
+                                SharedWithUsers,
+                                SharedWithDetails,
+                                ComplianceFlags,
+                                ComplianceTag,
+                                ComplianceTagWrittenTime,
+                                ComplianceTagUserId,
+                                CommentCount,
+                                LikeCount,
+                                DisplayName
                             });
                     }
                 }
