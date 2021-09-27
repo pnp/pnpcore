@@ -413,7 +413,9 @@ namespace PnP.Core.Test.Utilities
             }
             else
             {
-                string testEnvironmentFile = "..\\..\\..\\env.txt";
+                string testEnvironmentFile = "..//..//..//env.txt";
+                string path = Directory.GetCurrentDirectory();
+                System.Console.WriteLine(path);
                 if (File.Exists(testEnvironmentFile))
                 {
                     string content = File.ReadAllText(testEnvironmentFile);
