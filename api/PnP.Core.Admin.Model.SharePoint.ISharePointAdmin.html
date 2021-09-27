@@ -202,7 +202,7 @@
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_GetSiteCollections_System_Boolean_.md&amp;value=---%0Auid%3A%20PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetSiteCollections(System.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Admin/Model/SharePoint/Core/Public/ISharePointAdmin.cs/#L126" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Admin/Model/SharePoint/Core/Public/ISharePointAdmin.cs/#L132" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_GetSiteCollections_" data-uid="PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetSiteCollections*"></a>
@@ -212,7 +212,12 @@
   <div id="collapsible-PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_GetSiteCollections_System_Boolean_" class="collapse in">
   <div class="markdown level1 summary"><p>Returns the list of site collections. When using application permissions or a delegated permissions
 for a SharePoint admin account all site collections are returned, otherwise only the site collections
-accessible by the requesting user are returned</p>
+accessible by the requesting user are returned. Under the covers this method uses different approaches:</p>
+<ul>
+<li>Application permissions: using the Sites endpoint via Graph</li>
+<li>Delegated permissions, user is SharePoint Tenant Admin: querying the sites list maintained in the SharePoint Tenant Admin site</li>
+<li>Delegated permissions, non admin: using the Search endpoint via Graph</li>
+</ul>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -260,7 +265,7 @@ accessible by the requesting user are returned</p>
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_GetSiteCollectionsAsync_System_Boolean_.md&amp;value=---%0Auid%3A%20PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetSiteCollectionsAsync(System.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Admin/Model/SharePoint/Core/Public/ISharePointAdmin.cs/#L117" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Admin/Model/SharePoint/Core/Public/ISharePointAdmin.cs/#L120" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_GetSiteCollectionsAsync_" data-uid="PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetSiteCollectionsAsync*"></a>
@@ -270,7 +275,12 @@ accessible by the requesting user are returned</p>
   <div id="collapsible-PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_GetSiteCollectionsAsync_System_Boolean_" class="collapse in">
   <div class="markdown level1 summary"><p>Returns the list of site collections. When using application permissions or a delegated permissions
 for a SharePoint admin account all site collections are returned, otherwise only the site collections
-accessible by the requesting user are returned</p>
+accessible by the requesting user are returned. Under the covers this method uses different approaches:</p>
+<ul>
+<li>Application permissions: using the Sites endpoint via Graph</li>
+<li>Delegated permissions, user is SharePoint Tenant Admin: querying the sites list maintained in the SharePoint Tenant Admin site</li>
+<li>Delegated permissions, non admin: using the Search endpoint via Graph</li>
+</ul>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>

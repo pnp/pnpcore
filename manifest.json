@@ -90,7 +90,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.html",
-          "hash": "Y4Ol+0Md6UR+Flr10ERI7g=="
+          "hash": "T71hhJE+Mk2O1MMti8Dd2w=="
         }
       },
       "is_incremental": false,
@@ -102,7 +102,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Admin.Model.SharePoint.ISiteCollection.html",
-          "hash": "WeVOH+4Y5H/YQWIJUVRGKA=="
+          "hash": "K8ioArpQVryrTtmsjUfziw=="
         }
       },
       "is_incremental": false,
