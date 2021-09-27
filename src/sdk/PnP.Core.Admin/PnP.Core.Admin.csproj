@@ -10,7 +10,7 @@
 	  <Copyright>PnP 2021</Copyright>
 	  <Company>PnP</Company>
 	  <Authors>PnP</Authors>
-	  <Description>The PnP Core SDK provides a development model that unites SharePoint REST and Microsoft Graph in a high performance, lightweight library. The SDK uses a model which under the covers is automatically translated to the needed SharePoint REST or Microsoft Graph queries.</Description>
+	  <Description>This library adds admin related functionality to PnP Core SDK</Description>
 	  <PackageProjectUrl>https://aka.ms/pnp/coresdk</PackageProjectUrl>
 	  <RepositoryUrl>https://github.com/pnp/pnpcore</RepositoryUrl>
 	  <RepositoryType>git</RepositoryType>
