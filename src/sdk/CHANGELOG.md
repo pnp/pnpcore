@@ -34,6 +34,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - PERF: Get the response string, using HttpCompletionOption.ResponseHeadersRead and ReadAsStreamAsync to lower the memory pressure when processing larger responses + performance is better [jansenbe - Bert Jansen]
 - PERF: Cache LINQ based field lookups in ListDataAsStreamHandler, 35% faster when loading 2500 list items with all fields [jansenbe - Bert Jansen]
 - Added `All` property that gets translated to a * in the $select when PnP Framework resorts to using a SharePoint REST query [jansenbe - Bert Jansen]
+- Added _CommentCount to BuiltInFields #554 [avuorine]
 
 ## [1.3.0]
 
