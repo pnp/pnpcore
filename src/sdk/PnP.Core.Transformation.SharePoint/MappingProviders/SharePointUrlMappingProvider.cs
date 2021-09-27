@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Microsoft.SharePoint.Client;
 using PnP.Core.Transformation.Services.MappingProviders;
 using PnP.Core.Transformation.SharePoint.Services.Builder.Configuration;
 
@@ -43,6 +45,11 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
         /// <returns>The output of the mapping activity</returns>
         public async Task<UrlMappingProviderOutput> MapUrlAsync(UrlMappingProviderInput input, CancellationToken token = default)
         {
+            if (input == null)
+            {
+                throw new ArgumentNullException(nameof(input));
+            }
+
             logger.LogInformation($"Invoked: {this.GetType().Namespace}.{this.GetType().Name}.MapUrlAsync");
 
             // Try cast
@@ -52,10 +59,8 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
                 throw new ArgumentException($"Only source item of type {typeof(SharePointSourceItem)} is supported");
             }
 
-            // TODO: resolve library path
-            string pagesLibrary = "sitepages";
+            string pagesLibrary = await ResolveSitePagesLibraryAsync(sharePointSourceItem.SourceContext);
 
-            // TODO: load only if needed
             sharePointSourceItem.SourceContext.Load(sharePointSourceItem.SourceContext.Web, w => w.Url);
             sharePointSourceItem.SourceContext.Load(sharePointSourceItem.SourceContext.Site, w => w.Url);
             await sharePointSourceItem.SourceContext.ExecuteQueryAsync().ConfigureAwait(false);
@@ -172,6 +177,33 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
             }
 
             return new UrlMappingProviderOutput(resultText);
+        }
+
+        private async Task<string> ResolveSitePagesLibraryAsync(ClientContext context)
+        {
+            var lists = context.Web.Lists;
+            context.Load(lists, lists => lists.Include(
+                l => l.Title, 
+                l => l.BaseTemplate,
+                l => l.RootFolder,
+                l => l.Fields.Include(f => f.InternalName)));
+            await context.ExecuteQueryRetryAsync().ConfigureAwait(false);
+
+            foreach (var list in lists)
+            {
+                if (list.BaseTemplate == (int)ListTemplateType.WebPageLibrary)
+                {
+                    // The site pages library has the CanvasContent1 column,
+                    // using that to distinguish between Site Pages and other wiki page libraries
+                    if (list.Fields.FirstOrDefault(f => f.InternalName == "CanvasContent1") != null)
+                    {
+                        return list.RootFolder.Name;
+                    }
+                }
+            }
+
+            // Fallback to the default "sitepages" value
+            return "sitepages";
         }
 
         private string RewriteUrl(string input, string from, string to)

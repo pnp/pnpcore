@@ -17,6 +17,7 @@ using System.Text.Json;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Xml;
+using Microsoft.Extensions.Logging;
 
 namespace Microsoft.SharePoint.Client
 {
@@ -27,6 +28,8 @@ namespace Microsoft.SharePoint.Client
     {
         private const string PnPSettingsKey = "SharePointPnP$Settings$ContextCloning";
 
+        private static ILoggerFactory loggerFactory;
+        private static ILogger log;
         private static readonly string userAgentFromConfig;
 
 #pragma warning disable CS0169
@@ -53,6 +56,9 @@ namespace Microsoft.SharePoint.Client
             {
                 ClientContextExtensions.userAgentFromConfig = Environment.GetEnvironmentVariable("SharePointPnPUserAgent", EnvironmentVariableTarget.Process);
             }
+
+            loggerFactory = LoggerFactory.Create(builder => builder.AddConsole());
+            log = new Logger<ClientContext>(loggerFactory);
         }
 #pragma warning restore CA1810
 
@@ -162,13 +168,11 @@ namespace Microsoft.SharePoint.Client
 
                         if (wex.Status == WebExceptionStatus.Timeout)
                         {
-                            // TODO: Find an alternative solution
-                            // Log.Warning(Constants.LOGGING_SOURCE, $"CSOM request timeout. Retry attempt {retryAttempts + 1}. Sleeping for {retryAfterInterval} milliseconds before retrying.");
+                            log.LogWarning(string.Format(SharePointTransformationResources.Warning_CSOMRequestTimeout, retryAttempts + 1, retryAfterInterval));
                         }
                         else
                         {
-                            // TODO: Find an alternative solution
-                            // Log.Warning(Constants.LOGGING_SOURCE, $"CSOM request frequency exceeded usage limits. Retry attempt {retryAttempts + 1}. Sleeping for {retryAfterInterval} milliseconds before retrying.");
+                            log.LogWarning(string.Format(SharePointTransformationResources.Warning_CSOMRequestFrequencyExceeded, retryAttempts + 1, retryAfterInterval));
                         }
 
                         await Task.Delay(retryAfterInterval);
@@ -194,8 +198,7 @@ namespace Microsoft.SharePoint.Client
                             errorSb.AppendLine($"SocketErrorCode: {socketEx.SocketErrorCode}"); //ConnectionReset
                             errorSb.AppendLine($"Message: {socketEx.Message}"); //An existing connection was forcibly closed by the remote host
 
-                            // TODO: Find an alternative solution
-                            // Log.Error(Constants.LOGGING_SOURCE, CoreResources.ClientContextExtensions_ExecuteQueryRetryException, errorSb.ToString());
+                            log.LogError(string.Format(SharePointTransformationResources.Error_ClientContextExtensions_ExecuteQueryRetryException, errorSb));
 
                             //retry
                             wrapper = (ClientRequestWrapper)wex.Data["ClientRequest"];
@@ -216,8 +219,7 @@ namespace Microsoft.SharePoint.Client
                                 backoffInterval *= 2;
                             }
 
-                            // TODO: Find an alternative solution
-                            // Log.Warning(Constants.LOGGING_SOURCE, $"CSOM request socket exception. Retry attempt {retryAttempts + 1}. Sleeping for {retryAfterInterval} milliseconds before retrying.");
+                            log.LogWarning(string.Format(SharePointTransformationResources.Error_CSOMRequestSocketException, retryAttempts + 1, retryAfterInterval));
 
                             await Task.Delay(retryAfterInterval);
 
@@ -236,8 +238,7 @@ namespace Microsoft.SharePoint.Client
                                 }
                             }
 
-                            // TODO: Find an alternative solution
-                            // Log.Error(Constants.LOGGING_SOURCE, CoreResources.ClientContextExtensions_ExecuteQueryRetryException, errorSb.ToString());
+                            log.LogError(string.Format(SharePointTransformationResources.Error_ClientContextExtensions_ExecuteQueryRetryException, errorSb));
                             throw;
                         }
                     }
@@ -253,8 +254,7 @@ namespace Microsoft.SharePoint.Client
                     errorSb.AppendLine($"ServerErrorValue: {serverEx.ServerErrorValue}");
                     errorSb.AppendLine($"ServerErrorDetails: {serverEx.ServerErrorDetails}");
 
-                    // TODO: Find an alternative solution
-                    // Log.Error(Constants.LOGGING_SOURCE, CoreResources.ClientContextExtensions_ExecuteQueryRetryException, errorSb.ToString());
+                    log.LogError(string.Format(SharePointTransformationResources.Error_ClientContextExtensions_ExecuteQueryRetryException, errorSb));
 
                     throw;
                 }
@@ -403,7 +403,7 @@ namespace Microsoft.SharePoint.Client
             Uri urlUri = new Uri(clientContext.Url);
 
             // TODO: Consider adding a global caching provider via DI
-            var spVersionFromCache = SPVersion.Unknown; // CacheManager.Instance.GetSharePointVersion(urlUri);
+            var spVersionFromCache = SPVersion.Unknown;
             string version = null;
             if (spVersionFromCache != SPVersion.Unknown)
             {
@@ -451,8 +451,7 @@ namespace Microsoft.SharePoint.Client
 
                             version = reader.ReadToEnd().Split('|')[2].Trim();
                             
-                            // TODO: Replace with global caching via DI
-                            // CacheManager.Instance.SetExactSharePointVersion(urlUri, version);
+                            // TODO: Consider using global caching to store versions
 
                             if (Version.TryParse(version, out Version v))
                             {
@@ -492,8 +491,7 @@ namespace Microsoft.SharePoint.Client
                 }
             }
 
-            // TODO: Replace with global caching via DI
-            // CacheManager.Instance.SetSharePointVersion(urlUri, SPVersion.SPO);
+            // TODO: Consider using global caching to store versions
             return (spVersionFromCache, version);
         }
 

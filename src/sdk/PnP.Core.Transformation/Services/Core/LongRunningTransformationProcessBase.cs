@@ -247,7 +247,8 @@ namespace PnP.Core.Transformation.Services.Core
         /// <returns>The updated process status</returns>
         protected virtual async Task<TransformationProcessStatus> ChangeProcessStatusAsync(TransformationExecutionState status, CancellationToken token)
         {
-            // TODO: This one returns the TransformationProcessStatus, while the next one doesn't (for the task)
+            // NOTE: This one returns the TransformationProcessStatus, while the next one doesn't (for the task)
+            // Evaluate a different and more consistent approach
 
             var newStatus = new TransformationProcessStatus(Id, status);
             await TransformationStateManager

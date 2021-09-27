@@ -204,7 +204,6 @@ namespace PnP.Core.Transformation.Services.Core
             targetPage.PageTitle = mappingOutput.TargetPage.PageTitle;
 
             // Create the web parts and the transformed content
-            // TODO: Still to be fully implemented!
 
             // Process all the sections, columns, and controls
             await GenerateTargetCanvasControlsAsync(targetWeb, targetPage, mappingOutput).ConfigureAwait(false);

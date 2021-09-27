@@ -287,9 +287,6 @@ namespace PnP.Core.Transformation.SharePoint.Functions
             // Rewrite url's if needed
             if (!this.options.Value.SkipUrlRewrite)
             {
-                // TODO: Re-think the URL Rewriting/Mapper logic to support text and not only URLs
-                // and to work without a transformationcontext (or can we have it here?)
-
                 text = this.urlMappingProvider.MapUrlAsync(
                     new UrlMappingProviderInput(this.PageTransformationContext, text))
                     .GetAwaiter().GetResult().Text;
@@ -374,7 +371,6 @@ namespace PnP.Core.Transformation.SharePoint.Functions
                     }
                 }
 
-                // TODO: Fix the following line
                 var list = this.SourceContext.Web.GetListById(listId);
                 list.EnsureProperties(p => p.BaseType, p => p.BaseTemplate);
 
@@ -435,18 +431,6 @@ namespace PnP.Core.Transformation.SharePoint.Functions
                 sourceList.EnsureProperty(p => p.Title);
                 string listTitleToCheck = sourceList.Title;
 
-                //List targetlist = null;
-                //try
-                //{
-                //    // TODO: Is this still valid with the new architecture?
-                //    targetlist = this.SourceContext.Web.GetListByTitle(listTitleToCheck);
-                //    targetlist.EnsureProperty(p => p.Id);
-                //}
-                //catch (Exception ex)
-                //{
-                //    throw new NotAvailableAtTargetException($"List with id {listId} and Title {listTitleToCheck} is not available in the target site collection. This web part will be skipped.", ex);
-                //}
-
                 return $"{{TargetListIdByTitle:{listTitleToCheck}}}";
             }
         }
@@ -468,7 +452,6 @@ namespace PnP.Core.Transformation.SharePoint.Functions
             }
             else
             {
-                // TODO: Fix the following line providing (how?) the client context
                 var list = this.SourceContext.Web.GetListById(listId);
                 list.EnsureProperty(p => p.RootFolder).EnsureProperty(p => p.ServerRelativeUrl);
                 return list.RootFolder.ServerRelativeUrl;
@@ -697,7 +680,6 @@ namespace PnP.Core.Transformation.SharePoint.Functions
             }
         }
 
-        // TODO: Update this one
         /// <summary>
         /// Copy the asset to target site in cross site transformation
         /// </summary>
@@ -1572,7 +1554,7 @@ namespace PnP.Core.Transformation.SharePoint.Functions
         public Dictionary<string, string> LookupPerson(string person)
         {
 
-            //TODO: On-Prem User Mapping
+            // NOTE: So far, we removed support for On-Prem User Mapping
             Dictionary<string, string> result = new Dictionary<string, string>();
 
             if (string.IsNullOrEmpty(person))

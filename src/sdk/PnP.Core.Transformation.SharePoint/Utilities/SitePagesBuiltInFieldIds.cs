@@ -84,9 +84,6 @@ namespace PnP.Core.Transformation.SharePoint.Utilities
         /// </summary>
         public static readonly Guid OriginalSourceItemIdID = new Guid("91e86a43-75f2-426f-80da-35edfb47d55d");
 
-
-        // TODO: Define the real list of built in fields for the Site Pages library
-
         // Hashset to contain the whole list of built in fields
         private static HashSet<Guid> builtInFieldsHashSet;
         private static object builtInFieldsHashSetSyncLock = new object();

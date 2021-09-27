@@ -214,8 +214,8 @@ namespace PnP.Core.Transformation.SharePoint.Publishing
         {
             ClientContext siteCollContext = EnsureSiteCollectionContext(publishingPage.Context as ClientContext);
 
-            //Note: ListItemExtensions class contains this logic - reuse.
-            //TODO: Make more defensive, this could represent the wrong item 
+            // NOTE: ListItemExtensions class contains this logic - reuse.
+            // TODO: Make more defensive, this could represent the wrong item 
             var pageLayoutFileUrl = publishingPage.GetPageLayoutFileUrl();
 
             if (!string.IsNullOrEmpty(pageLayoutFileUrl))
@@ -589,7 +589,7 @@ namespace PnP.Core.Transformation.SharePoint.Publishing
                                         ZoneId = docNode.Id,
                                         Column = 1,
                                         Row = 1,
-                                        //ZoneIndex = control. // TODO: Is this used?
+                                        // ZoneIndex = ??? // TODO: Is this used?
                                     });
                                 }
 

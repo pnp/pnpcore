@@ -28,8 +28,6 @@ namespace PnP.Core.Transformation.Test
 
             var provider = services.BuildServiceProvider();
 
-            // TODO: check all types
-
             Assert.IsInstanceOfType(provider.GetRequiredService<IPageTransformator>(), typeof(DefaultPageTransformator));
             Assert.IsInstanceOfType(provider.GetRequiredService<ITransformationStateManager>(), typeof(InMemoryTransformationStateManager));
             Assert.IsInstanceOfType(provider.GetRequiredService<ITransformationExecutor>(), typeof(InProcessTransformationExecutor));

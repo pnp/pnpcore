@@ -64,7 +64,6 @@ namespace PnP.Core.Transformation.Services.Core
                 throw new InvalidOperationException("Process cannot start twice");
             }
 
-            // TODO: Shouldn't we use a semaphore here?
             cancellationTokenSource = new CancellationTokenSource();
 
             await ChangeProcessStateAsync(TransformationExecutionState.Running).ConfigureAwait(false);

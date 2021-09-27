@@ -250,11 +250,29 @@ namespace PnP.Core.Transformation.SharePoint {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ExecuteQuery threw following exception: {0}..
+        /// </summary>
+        internal static string Error_ClientContextExtensions_ExecuteQueryRetryException {
+            get {
+                return ResourceManager.GetString("Error_ClientContextExtensions_ExecuteQueryRetryException", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Url of the site is required..
         /// </summary>
         internal static string Error_Clone_Context_Url_Required {
             get {
                 return ResourceManager.GetString("Error_Clone_Context_Url_Required", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to CSOM request socket exception. Retry attempt {0}. Sleeping for {1} milliseconds before retrying..
+        /// </summary>
+        internal static string Error_CSOMRequestSocketException {
+            get {
+                return ResourceManager.GetString("Error_CSOMRequestSocketException", resourceCulture);
             }
         }
         
@@ -768,6 +786,24 @@ namespace PnP.Core.Transformation.SharePoint {
         internal static string Warning_CrossSiteNotSupported {
             get {
                 return ResourceManager.GetString("Warning_CrossSiteNotSupported", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to CSOM request frequency exceeded usage limits. Retry attempt {0}. Sleeping for {1} milliseconds before retrying..
+        /// </summary>
+        internal static string Warning_CSOMRequestFrequencyExceeded {
+            get {
+                return ResourceManager.GetString("Warning_CSOMRequestFrequencyExceeded", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to CSOM request timeout. Retry attempt {0}. Sleeping for {1} milliseconds before retrying..
+        /// </summary>
+        internal static string Warning_CSOMRequestTimeout {
+            get {
+                return ResourceManager.GetString("Warning_CSOMRequestTimeout", resourceCulture);
             }
         }
         

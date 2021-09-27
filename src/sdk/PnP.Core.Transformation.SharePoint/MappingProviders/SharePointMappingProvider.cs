@@ -145,9 +145,6 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
             // Load information from source context
             LoadClientObjects(sourceContext);
 
-            // TODO: Let's see if we really need to load tenant global properties or not
-            // see line 299 of PageTransformator.cs in PnP Framework
-
             // Retrieve the parent Folder of the page, if any and the target page name
             string targetPageName = null;
             (sourcePage.Folder, targetPageName) = DeterminePageFolder(sourceContext, sourcePage, pageItem, input.Context.TargetPageUri);
@@ -270,7 +267,6 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
             //var htmlMappingProvider = serviceProvider.GetService<IHtmlMappingProvider>();
             //if (htmlMappingProvider != null)
             //{
-            //    // TODO: get the html content
             //    var htmlInput = new HtmlMappingProviderInput(input.Context, "TODO");
             //    var output = await htmlMappingProvider
             //        .MapHtmlAsync(htmlInput, token)
@@ -280,7 +276,6 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
             //var metadataMappingProvider = serviceProvider.GetService<IMetadataMappingProvider>();
             //if (metadataMappingProvider != null)
             //{
-            //    // TODO: prepare input
             //    var metadataInput = new MetadataMappingProviderInput(input.Context);
             //    var output = await metadataMappingProvider
             //        .MapMetadataFieldAsync(metadataInput, token)
@@ -290,7 +285,6 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
             //var urlMappingProvider = serviceProvider.GetService<IUrlMappingProvider>();
             //if (urlMappingProvider != null)
             //{
-            //    // TODO: prepare uri
             //    var metadataInput = new UrlMappingProviderInput(input.Context, string.Empty);
             //    var output = await urlMappingProvider
             //        .MapUrlAsync(metadataInput, token)
@@ -300,7 +294,6 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
             ////var pageLayoutMappingProvider = serviceProvider.GetService<IPageLayoutMappingProvider>();
             ////if (pageLayoutMappingProvider != null)
             ////{
-            ////    // TODO: prepare page layout
             ////    var pageLayoutInput = new PageLayoutMappingProviderInput(input.Context);
             ////    var output = await pageLayoutMappingProvider
             ////        .MapPageLayoutAsync(pageLayoutInput, token)
@@ -310,7 +303,6 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
             //var taxonomyMappingProvider = serviceProvider.GetService<ITaxonomyMappingProvider>();
             //if (taxonomyMappingProvider != null)
             //{
-            //    // TODO: prepare term id
             //    var taxonomyInput = new TaxonomyMappingProviderInput(input.Context, "");
             //    var output = await taxonomyMappingProvider
             //        .MapTermAsync(taxonomyInput, token)
@@ -320,7 +312,6 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
             //var userMappingProvider = serviceProvider.GetService<IUserMappingProvider>();
             //if (userMappingProvider != null)
             //{
-            //    // TODO: prepare user
             //    var userInput = new UserMappingProviderInput(input.Context, "");
             //    var output = await userMappingProvider
             //        .MapUserAsync(userInput, token)
@@ -1291,7 +1282,7 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
                     await clientContext.ExecuteQueryAsync().ConfigureAwait(false);
                 }
 
-                // TODO: Ask Bert -> isn't this a repetition?
+                // TODO: Let's see if we can optimize this foreach and the previous one merging them into a unique one
                 foreach (var foundWebPart in webPartsToRetrieve)
                 {
                     // Skip Microsoft.SharePoint.WebPartPages.TitleBarWebPart webpart in TitleBar zone
@@ -1422,7 +1413,7 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
                     string zoneId = foundWebPart.WebPartDefinition.ZoneId;
                     webPartProperties = foundWebPart.WebPartDefinition.WebPart.Properties.FieldValues;
 
-                    // TODO: Ask Bert -> isn't this a repetition?
+                    // TODO: Let's see if we can optimize this foreach and the previous one merging them into a unique one
                     if (foundWebPart.WebPartDefinition.ZoneId.Equals("TitleBar", StringComparison.InvariantCultureIgnoreCase))
                     {
                         if (!options.Value.IncludeTitleBarWebPart)

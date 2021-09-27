@@ -180,8 +180,14 @@
   <data name="Error_CannotWriteToXmlFile" xml:space="preserve">
     <value>Error writing to mapping file: {0} {1}</value>
   </data>
+  <data name="Error_ClientContextExtensions_ExecuteQueryRetryException" xml:space="preserve">
+    <value>ExecuteQuery threw following exception: {0}.</value>
+  </data>
   <data name="Error_Clone_Context_Url_Required" xml:space="preserve">
     <value>Url of the site is required.</value>
+  </data>
+  <data name="Error_CSOMRequestSocketException" xml:space="preserve">
+    <value>CSOM request socket exception. Retry attempt {0}. Sleeping for {1} milliseconds before retrying.</value>
   </data>
   <data name="Error_DocumentEmbedLookup" xml:space="preserve">
     <value>An error occurred in DocumentEmbedLookup function: {0}</value>
@@ -353,6 +359,12 @@
   </data>
   <data name="Warning_CrossSiteNotSupported" xml:space="preserve">
     <value>Skipping this web part's transformation - cross site not supported</value>
+  </data>
+  <data name="Warning_CSOMRequestFrequencyExceeded" xml:space="preserve">
+    <value>CSOM request frequency exceeded usage limits. Retry attempt {0}. Sleeping for {1} milliseconds before retrying.</value>
+  </data>
+  <data name="Warning_CSOMRequestTimeout" xml:space="preserve">
+    <value>CSOM request timeout. Retry attempt {0}. Sleeping for {1} milliseconds before retrying.</value>
   </data>
   <data name="Warning_NothingToTransform" xml:space="preserve">
     <value>There is nothing to transform - no web parts found</value>

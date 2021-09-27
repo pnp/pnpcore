@@ -60,44 +60,7 @@ namespace PnP.Core.Transformation.SharePoint.Functions
             this.sharePointFunctionsService.PageTransformationContext = pageTransformationContext;
             this.sharePointFunctionsService.SourceContext = sourceContext;
 
-            // TODO: Consider using a different approach for Addons ...
-
-            //// instantiate default built in functions class
-            //this.addOnTypes = new List<AddOnType>();
-
-            //// instantiate the custom function classes (if there are)
-            //foreach (var addOn in pageTransformation.AddOns)
-            //{
-            //    try
-            //    {
-            //        string path = "";
-            //        if (addOn.Assembly.Contains("\\") && System.IO.File.Exists(addOn.Assembly))
-            //        {
-            //            path = addOn.Assembly;
-            //        }
-            //        else
-            //        {
-            //            path = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, addOn.Assembly);
-            //        }
-
-            //        var assembly = Assembly.LoadFile(path);
-            //        var customType = assembly.GetType(addOn.Type);
-            //        var instance = Activator.CreateInstance(customType, baseTransformationInformation, targetClientContext, sourceClientContext, this.page, base.RegisteredLogObservers);
-
-            //        this.addOnTypes.Add(new AddOnType()
-            //        {
-            //            Name = addOn.Name,
-            //            Assembly = assembly,
-            //            Instance = instance,
-            //            Type = customType,
-            //        });
-            //    }
-            //    catch (Exception ex)
-            //    {
-            //        LogError(LogStrings.Error_FailedToInitiateCustomFunctionClasses, LogStrings.Heading_FunctionProcessor, ex);
-            //        throw;
-            //    }
-            //}
+            // NOTE: We removed support for addons
         }
 
         /// <summary>
@@ -132,23 +95,9 @@ namespace PnP.Core.Transformation.SharePoint.Functions
                 MethodInfo methodInfo = null;
                 object functionClassInstance = null;
 
-                // TODO: Consider adding support for custom Addons
-                //if (string.IsNullOrEmpty(functionDefinition.AddOn))
-                //{
-                    // Native builtin function
-                    methodInfo = this.sharePointFunctionsService.GetType().GetMethod(functionDefinition.Name);
+                // NOTE: We removed support for addons
+                methodInfo = this.sharePointFunctionsService.GetType().GetMethod(functionDefinition.Name);
                     functionClassInstance = this.sharePointFunctionsService;
-                //}
-                //else
-                //{
-                //    // Function specified via addon
-                //    var addOn = this.addOnTypes.Where(p => p.Name.Equals(functionDefinition.AddOn, StringComparison.InvariantCultureIgnoreCase)).FirstOrDefault();
-                //    if (addOn != null)
-                //    {
-                //        methodInfo = addOn.Type.GetMethod(functionDefinition.Name);
-                //        functionClassInstance = addOn.Instance;
-                //    }
-                //}
 
                 if (methodInfo != null)
                 {
@@ -196,23 +145,9 @@ namespace PnP.Core.Transformation.SharePoint.Functions
                 MethodInfo methodInfo = null;
                 object functionClassInstance = null;
 
-                // TODO: Consider adding support for custom Addons
-                //if (string.IsNullOrEmpty(functionDefinition.AddOn))
-                //{
-                // Native builtin function
-                    methodInfo = this.sharePointFunctionsService.GetType().GetMethod(functionDefinition.Name);
+                // NOTE: We removed support for addons
+                methodInfo = this.sharePointFunctionsService.GetType().GetMethod(functionDefinition.Name);
                     functionClassInstance = this.sharePointFunctionsService;
-                //}
-                //else
-                //{
-                //    // Function specified via addon
-                //    var addOn = this.addOnTypes.Where(p => p.Name.Equals(functionDefinition.AddOn, StringComparison.InvariantCultureIgnoreCase)).FirstOrDefault();
-                //    if (addOn != null)
-                //    {
-                //        methodInfo = addOn.Type.GetMethod(functionDefinition.Name);
-                //        functionClassInstance = addOn.Instance;
-                //    }
-                //}
 
                 if (methodInfo != null)
                 {

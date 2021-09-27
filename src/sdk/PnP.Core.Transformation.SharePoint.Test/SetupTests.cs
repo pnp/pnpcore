@@ -19,8 +19,6 @@ namespace PnP.Core.Transformation.SharePoint.Test
 
             var provider = services.BuildServiceProvider();
 
-            // TODO: check all types
-
             Assert.IsInstanceOfType(provider.GetRequiredService<IMappingProvider>(), typeof(SharePointMappingProvider));
             Assert.IsInstanceOfType(provider.GetRequiredService<ITransformationDistiller>(), typeof(SharePointTransformationDistiller));
             Assert.IsInstanceOfType(provider.GetRequiredService<ITargetPageUriResolver>(), typeof(SharePointTargetPageUriResolver));
