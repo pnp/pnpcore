@@ -468,7 +468,7 @@ namespace PnP.Core.Services
 #if DEBUG
             if (Mode != TestMode.Default)
             {
-                clonedContext = await CloneForTestingAsync(this, uri, TestName, TestId).ConfigureAwait(false);
+                clonedContext = await CloneForTestingAsync(this, uri, TestName, TestId + 100).ConfigureAwait(false);
             }
             else
             {

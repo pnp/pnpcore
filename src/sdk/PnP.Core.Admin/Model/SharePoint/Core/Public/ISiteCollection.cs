@@ -30,9 +30,9 @@ namespace PnP.Core.Admin.Model.SharePoint
         public Guid RootWebId { get; }
 
         /// <summary>
-        /// Description of the root web of the site collection
+        /// Name of the site collection
         /// </summary>
-        public string RootWebDescription { get; }
+        public string Name { get; }
 
 
     }

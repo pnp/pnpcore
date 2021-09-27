@@ -211,7 +211,7 @@ namespace PnP.Core.Admin.Model.SharePoint
         /// </summary>
         internal async static Task<List<ISiteCollection>> GetViaGraphSearchApiAsync(PnPContext context, int pageSize = 500)
         {
-            string requestBody = "{\"requests\": [{ \"entityTypes\": [\"site\"], \"query\": { \"queryString\": \"contentclass:STS_Site\" }, \"from\": %from%, \"size\": %to% }]}";
+            string requestBody = "{\"requests\": [{ \"entityTypes\": [\"site\"], \"query\": { \"queryString\": \"contentclass:STS_Site\" }, \"from\": %from%, \"size\": %to%, \"fields\": [ \"webUrl\", \"id\", \"name\" ] }]}";
 
             List<ISiteCollection> loadedSites = new List<ISiteCollection>();
 
@@ -272,7 +272,7 @@ namespace PnP.Core.Admin.Model.SharePoint
                                           hit.GetProperty("resource").GetProperty("webUrl").GetString(),
                                           siteId,
                                           webId,
-                                          null);
+                                          hit.GetProperty("resource").TryGetProperty("name", out JsonElement rootWebDescription) ? rootWebDescription.GetString() : null);
                         }
                     }
                 }
@@ -290,7 +290,7 @@ namespace PnP.Core.Admin.Model.SharePoint
                 {
                     Url = new Uri(url),
                     GraphId = graphId,
-                    RootWebDescription = rootWebDescription,
+                    Name = rootWebDescription,
                     Id = id,
                     RootWebId = rootWebId,
                 });

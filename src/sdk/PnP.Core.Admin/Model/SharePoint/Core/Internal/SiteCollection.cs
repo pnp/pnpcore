@@ -12,6 +12,6 @@ namespace PnP.Core.Admin.Model.SharePoint
 
         public Guid RootWebId { get; set; }
 
-        public string RootWebDescription { get; set; }
+        public string Name { get; set; }
     }
 }

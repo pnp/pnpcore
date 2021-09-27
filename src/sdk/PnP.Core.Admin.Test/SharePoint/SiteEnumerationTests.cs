@@ -1,6 +1,9 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PnP.Core.Admin.Model.SharePoint;
 using PnP.Core.Admin.Test.Utilities;
+using PnP.Core.Services;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace PnP.Core.Admin.Test.SharePoint
@@ -30,7 +33,7 @@ namespace PnP.Core.Admin.Test.SharePoint
                 {
                     var sites = await SiteCollectionEnumerator.GetViaGraphSitesApiAsync(context);
 
-                    Assert.IsTrue(sites.Count > 0);
+                    VerifySite(sites, context);
                 }
             }
             finally
@@ -48,7 +51,8 @@ namespace PnP.Core.Admin.Test.SharePoint
             {
                 var sites = await SiteCollectionEnumerator.GetViaGraphSearchApiAsync(context);
 
-                Assert.IsTrue(sites.Count > 0);
+                VerifySite(sites, context);
+
             }
         }
 
@@ -61,8 +65,20 @@ namespace PnP.Core.Admin.Test.SharePoint
             {
                 var sites = await SiteCollectionEnumerator.GetViaTenantAdminHiddenListAsync(context);
 
-                Assert.IsTrue(sites.Count > 0);
+                VerifySite(sites, context);
             }
+        }
+
+        private void VerifySite(List<ISiteCollection> sites, PnPContext context)
+        {
+            Assert.IsTrue(sites.Count > 0);
+            //if (!TestCommon.RunningInGitHubWorkflow())
+            //{
+                var myTestSite = sites.FirstOrDefault(p => p.Id == context.Site.Id);                
+                Assert.IsTrue(myTestSite != null);
+                Assert.IsTrue(myTestSite.RootWebId == context.Web.Id);
+                Assert.IsTrue(!string.IsNullOrEmpty(myTestSite.Name));
+            //}
         }
 
     }
