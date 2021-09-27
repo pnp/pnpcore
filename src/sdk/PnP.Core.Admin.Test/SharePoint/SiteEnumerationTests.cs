@@ -2,6 +2,7 @@
 using PnP.Core.Admin.Model.SharePoint;
 using PnP.Core.Admin.Test.Utilities;
 using PnP.Core.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -72,13 +73,33 @@ namespace PnP.Core.Admin.Test.SharePoint
         private void VerifySite(List<ISiteCollection> sites, PnPContext context)
         {
             Assert.IsTrue(sites.Count > 0);
-            //if (!TestCommon.RunningInGitHubWorkflow())
-            //{
-                var myTestSite = sites.FirstOrDefault(p => p.Id == context.Site.Id);                
+            var myTestSite = sites.FirstOrDefault(p => p.Id == context.Site.Id);                
+            Assert.IsTrue(myTestSite != null);
+            Assert.IsTrue(myTestSite.RootWebId == context.Web.Id);
+            Assert.IsTrue(!string.IsNullOrEmpty(myTestSite.Name));
+        }
+
+        [TestMethod]
+        public async Task EnumerateSitesWithDetails()
+        {
+            //TestCommon.Instance.Mocking = false;
+            TestCommon.Instance.UseApplicationPermissions = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var sites = await SiteCollectionEnumerator.GetWithDetailsViaTenantAdminHiddenListAsync(context);
+
+                Assert.IsTrue(sites.Count > 0);
+                var myTestSite = sites.FirstOrDefault(p => p.Id == context.Site.Id);
                 Assert.IsTrue(myTestSite != null);
                 Assert.IsTrue(myTestSite.RootWebId == context.Web.Id);
                 Assert.IsTrue(!string.IsNullOrEmpty(myTestSite.Name));
-            //}
+                Assert.IsTrue(!string.IsNullOrEmpty(myTestSite.CreatedBy));
+                Assert.IsTrue(myTestSite.TimeCreated > DateTime.MinValue);
+                Assert.IsTrue(myTestSite.TimeDeleted == DateTime.MinValue);
+                Assert.IsTrue(myTestSite.StorageQuota > 0);
+                Assert.IsTrue(myTestSite.StorageUsed > 0);
+                Assert.IsTrue(!string.IsNullOrEmpty(myTestSite.TemplateName));
+            }
         }
 
     }

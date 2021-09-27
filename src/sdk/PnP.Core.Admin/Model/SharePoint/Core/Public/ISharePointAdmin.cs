@@ -131,5 +131,21 @@ namespace PnP.Core.Admin.Model.SharePoint
         /// <returns>A list of site collections</returns>
         List<ISiteCollection> GetSiteCollections(bool ignoreUserIsSharePointAdmin = false);
 
+        /// <summary>
+        /// Returns a list of the site collections in the current tenant including details about the site. This method
+        /// queries a hidden list in the SharePoint Tenant Admin site and therefore requires the user or application to 
+        /// have the proper permissions
+        /// </summary>
+        /// <returns>A list of site collections with details</returns>
+        Task<List<ISiteCollectionWithDetails>> GetSiteCollectionsWithDetailsAsync();
+
+        /// <summary>
+        /// Returns a list of the site collections in the current tenant including details about the site. This method
+        /// queries a hidden list in the SharePoint Tenant Admin site and therefore requires the user or application to 
+        /// have the proper permissions
+        /// </summary>
+        /// <returns>A list of site collections with details</returns>
+        List<ISiteCollectionWithDetails> GetSiteCollectionsWithDetails();
+
     }
 }

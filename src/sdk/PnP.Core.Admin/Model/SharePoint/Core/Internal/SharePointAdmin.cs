@@ -239,5 +239,15 @@ namespace PnP.Core.Admin.Model.SharePoint
         {
             return GetSiteCollectionsAsync(ignoreUserIsSharePointAdmin).GetAwaiter().GetResult();
         }
+
+        public async Task<List<ISiteCollectionWithDetails>> GetSiteCollectionsWithDetailsAsync()
+        {
+            return await SiteCollectionEnumerator.GetWithDetailsViaTenantAdminHiddenListAsync(context).ConfigureAwait(false);
+        }
+
+        public List<ISiteCollectionWithDetails> GetSiteCollectionsWithDetails()
+        {
+            return GetSiteCollectionsWithDetailsAsync().GetAwaiter().GetResult();
+        }
     }
 }
