@@ -11,6 +11,7 @@ $version = Get-Content ./build/version.debug -Raw
 $versionUnreleased = Get-Content ./build/version.unreleased.debug -Raw
 
 $version = $version.Replace("{incremental}", $versionIncrement)
+$versionUnreleased = $versionUnreleased.Replace("{incremental}", $versionIncrement)
 
 Write-Host "Building PnP.Core version $version"
 dotnet build ./src/sdk/PnP.Core/PnP.Core.csproj --configuration Release --no-incremental /p:Version=$version
