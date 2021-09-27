@@ -53,17 +53,6 @@ namespace PnP.Core.Transformation.Services.Core
         public bool PostAsNews { get; set; }
 
         /// <summary>
-        /// If true images and videos embedded in wiki text will be transformed to actual image/video web parts, 
-        /// else they'll get a placeholder and will be added as separate web parts at the end of the page. Defaults to false.
-        /// </summary>
-        public bool HandleWikiImagesAndVideos { get; set; }
-
-        /// <summary>
-        /// When an image lives inside a table (or list) then also add it as a separate image web part. Defaults to false.
-        /// </summary>
-        public bool AddTableListImageAsImageWebPart { get; set; }
-
-        /// <summary>
         /// If the page to be transformed is the web's home page, then replace with stock modern home page instead of transforming it
         /// </summary>
         public bool ReplaceHomePageWithDefaultHomePage { get; set; }

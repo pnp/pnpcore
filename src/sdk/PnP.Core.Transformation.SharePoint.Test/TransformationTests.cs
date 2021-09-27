@@ -16,6 +16,8 @@ namespace PnP.Core.Transformation.SharePoint.Test
         [TestMethod]
         public async Task SharepointTransformAsync()
         {
+            var config = TestCommon.GetConfigurationSettings();
+
             var services = new ServiceCollection();
             services.AddTestPnPCore();
             // services.AddPnPSharePointTransformation();
@@ -23,17 +25,19 @@ namespace PnP.Core.Transformation.SharePoint.Test
                 pnpOptions =>
                 {
                     pnpOptions.DisableTelemetry = false;
-                    pnpOptions.PersistenceProviderConnectionString = @"c:\temp";
+                    pnpOptions.PersistenceProviderConnectionString = config["PersistenceProviderConnectionString"];
                 }
                 , spOptions =>
                 {
-                    //spOptions.WebPartMappingFile = @"C:\github\pnpcore\src\sdk\PnP.Core.Transformation.SharePoint\MappingFiles\webpartmapping.xml";
-                    //spOptions.PageLayoutMappingFile = @"C:\github\pnpcore\src\sdk\PnP.Core.Transformation.SharePoint\MappingFiles\pagelayoutmapping.xml";
+                    //spOptions.WebPartMappingFile = config["WebPartMappingFile"];
+                    //spOptions.PageLayoutMappingFile = config["PageLayoutMappingFile"];
                     spOptions.CopyPageMetadata = true;
                     spOptions.KeepPageSpecificPermissions = true;
                     spOptions.RemoveEmptySectionsAndColumns = true;
                     spOptions.ShouldMapUsers = true;
                     spOptions.TargetPageTakesSourcePageName = true;
+                    spOptions.HandleWikiImagesAndVideos = true;
+                    spOptions.AddTableListImageAsImageWebPart = true;
                 }
             );
 
@@ -44,8 +48,7 @@ namespace PnP.Core.Transformation.SharePoint.Test
 
             var sourceContext = provider.GetRequiredService<ClientContext>();
             var targetContext = await pnpContextFactory.CreateAsync(TestCommon.TargetTestSite);
-            var sourceUri = new Uri("https://piasysdev.sharepoint.com/sites/ClassicTest01/SitePages/tourdefrance2018.aspx");
-            // var sourceUri = new Uri("https://piasysdev.sharepoint.com/sites/ClassicTest01/SitePages/ToMigrate_giro2018.aspx");
+            var sourceUri = new Uri(config["SourceUri"]);
 
             var result = await pageTransformator.TransformSharePointAsync(sourceContext, targetContext, sourceUri);
 

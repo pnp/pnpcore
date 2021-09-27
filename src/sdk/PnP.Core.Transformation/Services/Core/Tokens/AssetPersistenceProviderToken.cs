@@ -43,7 +43,7 @@ namespace PnP.Core.Transformation.Services.Core.Tokens
 
                 // Handle SPO upload
                 IFolder targetFolder = await context.Web.GetFolderByServerRelativeUrlAsync($"{context.Web.ServerRelativeUrl}{targetFilePath}").ConfigureAwait(false);
-                IFile addedFile = await targetFolder.Files.AddAsync(targetFileName, stream).ConfigureAwait(false);
+                IFile addedFile = await targetFolder.Files.AddAsync(targetFileName, stream, true).ConfigureAwait(false);
 
             }).GetAwaiter().GetResult();
 

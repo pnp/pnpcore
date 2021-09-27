@@ -58,12 +58,12 @@ namespace PnP.Core.Transformation.SharePoint.Services.Builder.Configuration
         /// If true images and videos embedded in wiki text will be transformed to actual image/video web parts, 
         /// else they'll get a placeholder and will be added as separate web parts at the end of the page
         /// </summary>
-        public bool HandleWikiImagesAndVideos { get; set; }
+        public bool HandleWikiImagesAndVideos { get; set; } = true;
 
         /// <summary>
         /// When an image lives inside a table (or list) then also add it as a separate image web part
         /// </summary>
-        public bool AddTableListImageAsImageWebPart { get; set; }
+        public bool AddTableListImageAsImageWebPart { get; set; } = true;
 
         /// <summary>
         /// Property bag for adding properties that will be exposed to the functions and selectors in the web part mapping file.
