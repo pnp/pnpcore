@@ -100,7 +100,24 @@
 }
 </code></pre>
 <h2 id="getting-the-url-for-the-tenant-app-catalog-site">Getting the url for the tenant app catalog site</h2>
-<p>todo</p>
+<p>When deploying SharePoint apps (SharePoint SPFx solutions, but also the classic SharePoint Add-Ins) these apps are first added into an app catalog. There's one app catalog site at tenant level hosting the app catalog with apps that are available for all sites in your tenant, alternatively you can setup an app catalog at site collection level to scope the apps to the site collection.</p>
+<p>When you're running setup tasks you need to ensure there's an app catalog site setup, using the <code>GetTenantAppCatalogUri</code> methods you can get the current tenant app catalog site url:</p>
+<pre><code class="lang-csharp">// Get the tenant app catalog url, returns null if there's none setup
+var url = await context.GetSharePointAdmin().GetTenantAppCatalogUriAsync();
+</code></pre>
+<h2 id="ensuring-theres-a-tenant-app-catalog">Ensuring there's a tenant app catalog</h2>
+<p>If you want to ensure there's a tenant app catalog because you need to deploy an app to it, you can use the <code>EnsureTenantAppCatalog</code> methods. If the tenant app catalog site exists the methods return false, if there was no app catalog it will be setup using the default path of <code>sites/appcatalog</code> and the method returns true.</p>
+<pre><code class="lang-csharp">// Get the tenant app catalog url, returns null if there's none setup
+if (await context.GetSharePointAdmin().EnsureTenantAppCatalogAsync())
+{
+    // App catalog site was missing, but now added as /sites/appcatalog
+}
+else
+{
+    // The app catalog site was already available
+}
+</code></pre>
+<p>Note that you have to use the <code>GetTenantAppCatalogUri</code> to get the actual app catalog site url, even when there was no app catalog site and it was created by calling <code>EnsureTenantAppCatalog</code> it's still recommended to get the actual url.</p>
 </article>
           </div>
           <div class="hidden-sm col-md-2" role="complementary">

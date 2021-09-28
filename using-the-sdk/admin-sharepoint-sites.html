@@ -100,7 +100,38 @@
 }
 </code></pre>
 <h2 id="enumerate-the-site-collections-in-a-tenant">Enumerate the site collections in a tenant</h2>
-<p>todo</p>
+<p>The typical SharePoint Online tenants contains hundreds of site collections and for quite often there's a need to perform admin tasks on all site collections, so being able to enumerate sites is important. The PnP Core SDK Admin component offers two approaches.</p>
+<h3 id="getting-all-site-collections">Getting all site collections</h3>
+<p>Using the <code>GetSiteCollections</code> methods any user/app can enumerate site collections but depending on the user/app's permissions the results will be different:</p>
+<ul>
+<li>When using <strong>application permissions</strong> with <code>Sites.Read.All</code> the Microsoft Graph Sites endpoint is queried and <strong>all</strong> site collections in the tenant are returned</li>
+<li>When using <strong>delegated permissions</strong> with <code>Sites.Read.All</code> and a user that's not a SharePoint Tenant admin then the Microsoft Graph Search endpoint is queries to return all site collections that the user can access, so a <strong>subset</strong> of the site collections is returned</li>
+<li>When using <strong>delegated permissions</strong> and the user is a SharePoint Tenant administrator then a hidden list in the SharePoint Tenant Admin Center site is queried and <strong>all</strong> site collections in the tenant are returned</li>
+</ul>
+<p>Below sample shows how to use the <code>GetSiteCollections</code> methods:</p>
+<pre><code class="lang-csharp">// Get a list of site collections
+var siteCollections = await context.GetSharePointAdmin().GetSiteCollectionsAsync();
+</code></pre>
+<h3 id="getting-all-site-collections-with-details">Getting all site collections with details</h3>
+<p>Whereas above approach works for any user, the amount of information returned for a given site collection is limited. If you want to get site collection list with more details about each site collection then consider using the <code>GetSiteCollectionsWithDetails</code> methods. The collected information per site collection is:</p>
+<ul>
+<li>The various id's such as site collection id, root web id and Microsoft Graph site id</li>
+<li>The site collection url</li>
+<li>The name of the site collection</li>
+<li>Creation time and creator</li>
+<li>External sharing information</li>
+<li>Site owner name and email</li>
+<li>Storage quota information</li>
+<li>Template details</li>
+</ul>
+<div class="IMPORTANT">
+<h5>Important</h5>
+<p>The <code>GetSiteCollectionsWithDetails</code> methods do not work when using delegated permissions while the user is <strong>not</strong> a SharePoint Tenant administrator.</p>
+</div>
+<p>Below sample shows how to use the <code>GetSiteCollectionsWithDetails</code> methods:</p>
+<pre><code class="lang-csharp">// Get a list of site collections with details about each site collection
+var siteCollections = await context.GetSharePointAdmin().GetSiteCollectionsWithDetailsAsync();
+</code></pre>
 </article>
           </div>
           <div class="hidden-sm col-md-2" role="complementary">
