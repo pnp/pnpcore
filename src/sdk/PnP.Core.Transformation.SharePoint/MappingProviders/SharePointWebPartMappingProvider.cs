@@ -286,16 +286,15 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
             return result;
         }
 
-        private void ValidateSchema(Stream schema, FileStream stream)
+        private void ValidateSchema(Stream schema, Stream stream)
         {
             // Load the template into an XDocument
             XDocument xml = XDocument.Load(stream);
 
-            using (var schemaReader = new XmlTextReader(schema))
+            using (var schemaReader = XmlReader.Create(schema))
             {
                 // Prepare the XML Schema Set
                 XmlSchemaSet schemas = new XmlSchemaSet();
-                schema.Seek(0, SeekOrigin.Begin);
                 schemas.Add(SharePointConstants.PageTransformationSchema, schemaReader);
 
                 // Set stream back to start

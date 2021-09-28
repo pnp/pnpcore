@@ -47,11 +47,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="MappingFiles\pagelayoutmapping.xml" />
+    <None Remove="MappingFiles\pagelayoutmapping.xsd" />
     <None Remove="MappingFiles\webpartmapping.xml" />
     <None Remove="MappingFiles\webpartmapping.xsd" />
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="MappingFiles\pagelayoutmapping.xml" />
+    <EmbeddedResource Include="MappingFiles\pagelayoutmapping.xsd" />
     <EmbeddedResource Include="MappingFiles\webpartmapping.xml" />
     <EmbeddedResource Include="MappingFiles\webpartmapping.xsd" />
   </ItemGroup>
