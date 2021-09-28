@@ -464,7 +464,19 @@ namespace PnP.Core.Services
         public async Task<PnPContext> CloneAsync(Uri uri)
         {
             PnPContext clonedContext = CreateClonedContext(uri);
+
+#if DEBUG
+            if (Mode != TestMode.Default)
+            {
+                clonedContext = await CloneForTestingAsync(this, uri, TestName, TestId + 100).ConfigureAwait(false);
+            }
+            else
+            {
+                await InitializeClonedContextAsync(uri, clonedContext).ConfigureAwait(false);
+            }
+#else
             await InitializeClonedContextAsync(uri, clonedContext).ConfigureAwait(false);
+#endif
             return clonedContext;
         }
 
@@ -499,9 +511,9 @@ namespace PnP.Core.Services
             return clonedContext;
         }
 
-        #endregion
+#endregion
 
-        #region Internal methods
+#region Internal methods
 
         internal async Task<bool> AccessTokenHasRoleAsync(string role)
         {
@@ -573,11 +585,11 @@ namespace PnP.Core.Services
             return false;
         }
 
-        #endregion
+#endregion
 
 #if DEBUG
 
-        #region Internal methods to support unit testing
+#region Internal methods to support unit testing
 
         internal async Task<PnPContext> CloneForTestingAsync(PnPContext source, Uri uri, string name, int id)
         {
@@ -640,11 +652,11 @@ namespace PnP.Core.Services
             TestUris = testUris;
         }
 
-        #endregion
+#endregion
 
 #endif
 
-        #region IDisposable implementation
+#region IDisposable implementation
 
         private bool disposed;
 
@@ -675,9 +687,9 @@ namespace PnP.Core.Services
             disposed = true;
         }
 
-        #endregion
+#endregion
 
-        #region Helper methods
+#region Helper methods
 
         /// <summary>
         /// Gets the Azure Active Directory tenant id. Using the client.svc endpoint approach as that one will also work with vanity SharePoint domains
@@ -728,6 +740,6 @@ namespace PnP.Core.Services
             return false;
         }
 
-        #endregion
+#endregion
     }
 }

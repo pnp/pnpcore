@@ -1045,7 +1045,7 @@ namespace PnP.Core.Services
             }
             if (!metadata.ContainsKey(PnPConstants.MetaDataUri))
             {
-                var parsedApiCall = await ApiHelper.ParseApiRequestAsync(targetMetadataObject, $"{contextAwareObject.PnPContext.Uri.ToString().TrimEnd(new char[] { '/' })}/{entity.SharePointUri}").ConfigureAwait(false);
+                var parsedApiCall = await ApiHelper.ParseApiRequestAsync(targetMetadataObject, $"{contextAwareObject.PnPContext.Uri.AbsoluteUri.ToString().TrimEnd(new char[] { '/' })}/{entity.SharePointUri}").ConfigureAwait(false);
                 metadata.Add(PnPConstants.MetaDataUri, parsedApiCall);
             }
 

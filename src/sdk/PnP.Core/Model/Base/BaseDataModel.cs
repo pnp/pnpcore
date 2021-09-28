@@ -212,7 +212,7 @@ namespace PnP.Core.Model
                     {
                         if (apiRequest != null && !apiRequest.StartsWith("https://", StringComparison.InvariantCultureIgnoreCase))
                         {
-                            apiRequest = $"{PnPContext.Uri.ToString().TrimEnd(new char[] { '/' })}/{apiRequest}";
+                            apiRequest = $"{PnPContext.Uri.AbsoluteUri.ToString().TrimEnd(new char[] { '/' })}/{apiRequest}";
                         }
                         break;
                     }
@@ -716,7 +716,7 @@ namespace PnP.Core.Model
             if (!string.IsNullOrEmpty(entityInfo.SharePointType))
             {
                 // Prefix API request with context url
-                postApiCall.Request = $"{PnPContext.Uri.ToString().TrimEnd(new char[] { '/' })}/{postApiCall.Request}";
+                postApiCall.Request = $"{PnPContext.Uri.AbsoluteUri.ToString().TrimEnd(new char[] { '/' })}/{postApiCall.Request}";
             }
 
             return postApiCall;
@@ -1008,7 +1008,7 @@ namespace PnP.Core.Model
                 }
 
                 // Prefix API request with context url
-                apiCall.Request = $"{PnPContext.Uri.ToString().TrimEnd(new char[] { '/' })}/{apiCall.Request}";
+                apiCall.Request = $"{PnPContext.Uri.AbsoluteUri.ToString().TrimEnd(new char[] { '/' })}/{apiCall.Request}";
             }
 
             return apiCall;

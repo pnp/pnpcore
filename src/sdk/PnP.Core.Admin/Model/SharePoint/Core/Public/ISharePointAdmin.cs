@@ -110,7 +110,10 @@ namespace PnP.Core.Admin.Model.SharePoint
         /// <summary>
         /// Returns the list of site collections. When using application permissions or a delegated permissions 
         /// for a SharePoint admin account all site collections are returned, otherwise only the site collections
-        /// accessible by the requesting user are returned
+        /// accessible by the requesting user are returned. Under the covers this method uses different approaches:
+        /// - Application permissions: using the Sites endpoint via Graph
+        /// - Delegated permissions, user is SharePoint Tenant Admin: querying the sites list maintained in the SharePoint Tenant Admin site
+        /// - Delegated permissions, non admin: using the Search endpoint via Graph
         /// </summary>
         /// <param name="ignoreUserIsSharePointAdmin">When set to true and when the user is SharePoint admin then only return the site collections accessible by the user</param>
         /// <returns>A list of site collections</returns>
@@ -119,11 +122,30 @@ namespace PnP.Core.Admin.Model.SharePoint
         /// <summary>
         /// Returns the list of site collections. When using application permissions or a delegated permissions 
         /// for a SharePoint admin account all site collections are returned, otherwise only the site collections
-        /// accessible by the requesting user are returned
+        /// accessible by the requesting user are returned. Under the covers this method uses different approaches:
+        /// - Application permissions: using the Sites endpoint via Graph
+        /// - Delegated permissions, user is SharePoint Tenant Admin: querying the sites list maintained in the SharePoint Tenant Admin site
+        /// - Delegated permissions, non admin: using the Search endpoint via Graph
         /// </summary>
         /// <param name="ignoreUserIsSharePointAdmin">When set to true and when the user is SharePoint admin then only return the site collections accessible by the user</param>
         /// <returns>A list of site collections</returns>
         List<ISiteCollection> GetSiteCollections(bool ignoreUserIsSharePointAdmin = false);
+
+        /// <summary>
+        /// Returns a list of the site collections in the current tenant including details about the site. This method
+        /// queries a hidden list in the SharePoint Tenant Admin site and therefore requires the user or application to 
+        /// have the proper permissions
+        /// </summary>
+        /// <returns>A list of site collections with details</returns>
+        Task<List<ISiteCollectionWithDetails>> GetSiteCollectionsWithDetailsAsync();
+
+        /// <summary>
+        /// Returns a list of the site collections in the current tenant including details about the site. This method
+        /// queries a hidden list in the SharePoint Tenant Admin site and therefore requires the user or application to 
+        /// have the proper permissions
+        /// </summary>
+        /// <returns>A list of site collections with details</returns>
+        List<ISiteCollectionWithDetails> GetSiteCollectionsWithDetails();
 
     }
 }

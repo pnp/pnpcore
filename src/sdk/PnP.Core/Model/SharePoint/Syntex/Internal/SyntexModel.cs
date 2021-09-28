@@ -185,7 +185,7 @@ namespace PnP.Core.Model.SharePoint
             await library.PnPContext.Web.EnsurePropertiesAsync(p => p.ServerRelativeUrl).ConfigureAwait(false);
 
             return ProcessModelPublishResponse(await PublishModelApiRequestAsync(UniqueId,
-                                                                      library.PnPContext.Uri.ToString(),
+                                                                      library.PnPContext.Uri.AbsoluteUri.ToString(),
                                                                       library.PnPContext.Web.ServerRelativeUrl,
                                                                       library.RootFolder.ServerRelativeUrl,
                                                                       viewOption).ConfigureAwait(false));
@@ -198,7 +198,7 @@ namespace PnP.Core.Model.SharePoint
             await library.PnPContext.Web.EnsurePropertiesAsync(p => p.ServerRelativeUrl).ConfigureAwait(false);
 
             return await PublishModelBatchImplementationAsync(batch, UniqueId,
-                                                                      library.PnPContext.Uri.ToString(),
+                                                                      library.PnPContext.Uri.AbsoluteUri.ToString(),
                                                                       library.PnPContext.Web.ServerRelativeUrl,
                                                                       library.RootFolder.ServerRelativeUrl,
                                                                       viewOption).ConfigureAwait(false);
@@ -264,7 +264,7 @@ namespace PnP.Core.Model.SharePoint
                 modelPublications.Add(new SyntexModelPublication()
                 {
                     ModelUniqueId = UniqueId,
-                    TargetSiteUrl = library.PnPContext.Uri.ToString(),
+                    TargetSiteUrl = library.PnPContext.Uri.AbsoluteUri.ToString(),
                     TargetWebServerRelativeUrl = library.PnPContext.Web.ServerRelativeUrl,
                     TargetLibraryServerRelativeUrl = library.RootFolder.ServerRelativeUrl,
                     ViewOption = viewOption
@@ -539,7 +539,7 @@ namespace PnP.Core.Model.SharePoint
             await library.PnPContext.Web.EnsurePropertiesAsync(p => p.ServerRelativeUrl).ConfigureAwait(false);
 
             return ProcessModelPublishResponse(await UnPublishModelApiRequestAsync(UniqueId,
-                                                                      library.PnPContext.Uri.ToString(),
+                                                                      library.PnPContext.Uri.AbsoluteUri.ToString(),
                                                                       library.PnPContext.Web.ServerRelativeUrl,
                                                                       library.RootFolder.ServerRelativeUrl).ConfigureAwait(false));
         }
@@ -556,7 +556,7 @@ namespace PnP.Core.Model.SharePoint
             await library.PnPContext.Web.EnsurePropertiesAsync(p => p.ServerRelativeUrl).ConfigureAwait(false);
 
             System.Dynamic.ExpandoObject unPublishInfo = UnPublishModelApiRequestBody(UniqueId,
-                                                                                    library.PnPContext.Uri.ToString(),
+                                                                                    library.PnPContext.Uri.AbsoluteUri.ToString(),
                                                                                     library.PnPContext.Web.ServerRelativeUrl,
                                                                                     library.RootFolder.ServerRelativeUrl);
 
@@ -611,7 +611,7 @@ namespace PnP.Core.Model.SharePoint
                 modelPublications.Add(new SyntexModelPublication()
                 {
                     ModelUniqueId = UniqueId,
-                    TargetSiteUrl = library.PnPContext.Uri.ToString(),
+                    TargetSiteUrl = library.PnPContext.Uri.AbsoluteUri.ToString(),
                     TargetWebServerRelativeUrl = library.PnPContext.Web.ServerRelativeUrl,
                     TargetLibraryServerRelativeUrl = library.RootFolder.ServerRelativeUrl
                 });

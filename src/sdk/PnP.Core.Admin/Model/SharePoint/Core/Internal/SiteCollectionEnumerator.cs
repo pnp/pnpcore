@@ -37,10 +37,8 @@ namespace PnP.Core.Admin.Model.SharePoint
         /// application permissions with Sites.Read.All or higher or when the user has read access to SharePoint tenant admin,
         /// which is the case for global SharePoint administrators
         /// </summary>
-        private async static Task<List<ISiteCollection>> GetViaTenantAdminHiddenListAsync(PnPContext context, int pageSize = 500)
+        internal async static Task<List<ISiteCollection>> GetViaTenantAdminHiddenListAsync(PnPContext context, int pageSize = 500)
         {
-            string sitesInformationListAllUrl = "DO_NOT_DELETE_SPLIST_TENANTADMIN_ALL_SITES_AGGREGA";
-
             // Removed query part to avoid running into list view threshold errors
             string sitesListAllQuery = @"<View Scope='RecursiveAll'>
                                             <ViewFields>
@@ -55,6 +53,35 @@ namespace PnP.Core.Admin.Model.SharePoint
                                          </View>";
 
             List<ISiteCollection> loadedSites = new List<ISiteCollection>();
+
+            await LoadSitesViaTenantAdminHiddenListAsync(context, sitesListAllQuery, (IEnumerable<IListItem> listItems) =>
+            {
+                foreach (var listItem in listItems)
+                {
+                    if (listItem["TimeDeleted"] != null)
+                    {
+                        continue;
+                    }
+
+                    Uri url = new Uri(listItem["SiteUrl"].ToString());
+                    Guid siteId = Guid.Parse(listItem["SiteId"].ToString());
+                    Guid webId = Guid.Parse(listItem["RootWebId"].ToString());
+
+                    AddLoadedSite(loadedSites,
+                                  $"{url.DnsSafeHost},{siteId},{webId}",
+                                  listItem["SiteUrl"].ToString(),
+                                  siteId,
+                                  webId,
+                                  listItem["Title"]?.ToString());
+                }
+            }, pageSize).ConfigureAwait(false);
+
+            return loadedSites;
+        }
+
+        private async static Task LoadSitesViaTenantAdminHiddenListAsync(PnPContext context, string viewXml, Action<IEnumerable<IListItem>> processResults, int pageSize = 500)
+        {
+            string sitesInformationListAllUrl = "DO_NOT_DELETE_SPLIST_TENANTADMIN_ALL_SITES_AGGREGA";
 
             using (var tenantAdminContext = await context.GetSharePointAdmin().GetTenantAdminCenterContextAsync().ConfigureAwait(false))
             {
@@ -73,7 +100,7 @@ namespace PnP.Core.Admin.Model.SharePoint
                     {
                         var output = await myList.LoadListDataAsStreamAsync(new RenderListDataOptions()
                         {
-                            ViewXml = sitesListAllQuery.Replace("%PageSize%", pageSize.ToString()),
+                            ViewXml = viewXml.Replace("%PageSize%", pageSize.ToString()),
                             RenderOptions = RenderListDataOptionsFlags.ListData,
                             Paging = nextPage ?? null,
                         }).ConfigureAwait(false);
@@ -88,27 +115,83 @@ namespace PnP.Core.Admin.Model.SharePoint
                         }
                     }
 
-                    // Iterate over the retrieved list items
-                    foreach (var listItem in myList.Items.AsRequested())
+                    if (processResults != null)
                     {
-                        if (listItem["TimeDeleted"] != null)
-                        {
-                            continue;
-                        }
-
-                        Uri url = new Uri(listItem["SiteUrl"].ToString());
-                        Guid siteId = Guid.Parse(listItem["SiteId"].ToString());
-                        Guid webId = Guid.Parse(listItem["RootWebId"].ToString());
-
-                        AddLoadedSite(loadedSites,
-                                      $"{url.DnsSafeHost},{siteId},{webId}",
-                                      listItem["SiteUrl"].ToString(),
-                                      siteId,
-                                      webId,
-                                      listItem["Title"]?.ToString());
+                        processResults.Invoke(myList.Items.AsRequested());
                     }
                 }
-            }
+            }            
+        }
+
+        /// <summary>
+        /// Enumerating site collections by querying a hidden list in SharePoint tenant admin. Only works when using 
+        /// application permissions with Sites.Read.All or higher or when the user has read access to SharePoint tenant admin,
+        /// which is the case for global SharePoint administrators
+        /// </summary>
+        internal async static Task<List<ISiteCollectionWithDetails>> GetWithDetailsViaTenantAdminHiddenListAsync(PnPContext context, int pageSize = 500)
+        {
+            // Removed query part to avoid running into list view threshold errors
+            string sitesListAllQuery = @"<View Scope='RecursiveAll'>
+                                            <ViewFields>
+                                                <FieldRef Name='SiteUrl' />
+                                                <FieldRef Name='Title' />
+                                                <FieldRef Name='SiteId' />
+                                                <FieldRef Name='RootWebId' />
+                                                <FieldRef Name='CreatedBy' />
+                                                <FieldRef Name='TimeCreated' />
+                                                <FieldRef Name='TimeDeleted' />
+                                                <FieldRef Name='ShareByEmailEnabled' />
+                                                <FieldRef Name='ShareByLinkEnabled' />
+                                                <FieldRef Name='SiteOwnerName' />
+                                                <FieldRef Name='SiteOwnerEmail' />
+                                                <FieldRef Name='StorageQuota' />
+                                                <FieldRef Name='StorageUsed' />
+                                                <FieldRef Name='TemplateId' />
+                                                <FieldRef Name='TemplateName' />
+                                            </ViewFields>
+                                            <OrderBy Override='TRUE'><FieldRef Name= 'ID' Ascending= 'FALSE' /></OrderBy>
+                                            <RowLimit Paged='TRUE'>%PageSize%</RowLimit>
+                                         </View>";
+
+            List<ISiteCollectionWithDetails> loadedSites = new List<ISiteCollectionWithDetails>();
+
+            await LoadSitesViaTenantAdminHiddenListAsync(context, sitesListAllQuery, (IEnumerable<IListItem> listItems) =>
+            {
+                foreach (var listItem in listItems)
+                {
+                    if (listItem["TimeDeleted"] != null)
+                    {
+                        continue;
+                    }
+
+                    Uri url = new Uri(listItem["SiteUrl"].ToString());
+                    Guid siteId = Guid.Parse(listItem["SiteId"].ToString());
+                    Guid webId = Guid.Parse(listItem["RootWebId"].ToString());
+
+                    if (loadedSites.FirstOrDefault(p => p.Id == siteId) == null)
+                    {
+                        loadedSites.Add(new SiteCollectionWithDetails()
+                        {
+                            GraphId = $"{url.DnsSafeHost},{siteId},{webId}",
+                            Url = new Uri(listItem["SiteUrl"].ToString()),
+                            Id = siteId,
+                            RootWebId = webId,
+                            Name = listItem["Title"]?.ToString(),
+                            CreatedBy = listItem["CreatedBy"]?.ToString(),
+                            TimeCreated = listItem["TimeCreated"] != null ? (DateTime)listItem["TimeCreated"] : DateTime.MinValue,
+                            TimeDeleted = listItem["TimeDeleted"] != null ? (DateTime)listItem["TimeDeleted"] : DateTime.MinValue,
+                            ShareByEmailEnabled = (bool)listItem["ShareByEmailEnabled"],
+                            ShareByLinkEnabled = (bool)listItem["ShareByLinkEnabled"],
+                            SiteOwnerName = listItem["SiteOwnerName"]?.ToString(),
+                            SiteOwnerEmail = listItem["SiteOwnerEmail"]?.ToString(),
+                            StorageQuota = Convert.ToInt64(listItem["StorageQuota"].ToString()),
+                            StorageUsed = Convert.ToInt64(listItem["StorageUsed"].ToString()),
+                            TemplateId = (int)listItem["TemplateId"],
+                            TemplateName = listItem["TemplateName"]?.ToString(),
+                        });
+                    }
+                }
+            }, pageSize).ConfigureAwait(false);
 
             return loadedSites;
         }
@@ -116,7 +199,7 @@ namespace PnP.Core.Admin.Model.SharePoint
         /// <summary>
         /// Enumerating site collections using Graph Sites endpoint. Only works when using application permissions with Sites.Read.All or higher!
         /// </summary>
-        private async static Task<List<ISiteCollection>> GetViaGraphSitesApiAsync(PnPContext context)
+        internal async static Task<List<ISiteCollection>> GetViaGraphSitesApiAsync(PnPContext context)
         {
             List<ISiteCollection> loadedSites = new List<ISiteCollection>();
 
@@ -209,9 +292,9 @@ namespace PnP.Core.Admin.Model.SharePoint
         /// <summary>
         /// Enumerating site collections using Graph Search endpoint. Only works when using delegated permissions!
         /// </summary>
-        private async static Task<List<ISiteCollection>> GetViaGraphSearchApiAsync(PnPContext context, int pageSize = 500)
+        internal async static Task<List<ISiteCollection>> GetViaGraphSearchApiAsync(PnPContext context, int pageSize = 500)
         {
-            string requestBody = "{\"requests\": [{ \"entityTypes\": [\"site\"], \"query\": { \"queryString\": \"contentclass:STS_Site\" }, \"from\": %from%, \"size\": %to% }]}";
+            string requestBody = "{\"requests\": [{ \"entityTypes\": [\"site\"], \"query\": { \"queryString\": \"contentclass:STS_Site\" }, \"from\": %from%, \"size\": %to%, \"fields\": [ \"webUrl\", \"id\", \"name\" ] }]}";
 
             List<ISiteCollection> loadedSites = new List<ISiteCollection>();
 
@@ -272,7 +355,7 @@ namespace PnP.Core.Admin.Model.SharePoint
                                           hit.GetProperty("resource").GetProperty("webUrl").GetString(),
                                           siteId,
                                           webId,
-                                          null);
+                                          hit.GetProperty("resource").TryGetProperty("name", out JsonElement rootWebDescription) ? rootWebDescription.GetString() : null);
                         }
                     }
                 }
@@ -290,7 +373,7 @@ namespace PnP.Core.Admin.Model.SharePoint
                 {
                     Url = new Uri(url),
                     GraphId = graphId,
-                    RootWebDescription = rootWebDescription,
+                    Name = rootWebDescription,
                     Id = id,
                     RootWebId = rootWebId,
                 });
