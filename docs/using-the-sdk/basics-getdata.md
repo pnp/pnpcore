@@ -62,7 +62,7 @@ using (var context = await pnpContextFactory.CreateAsync("SiteToWorkWith"))
 
 ### I want to load data into a variable
 
-The `Load` methods do load data into the [PnPContext](https://pnp.github.io/pnpcore/api/PnP.Core.Services.PnPContext.html) and that's not always what you might need: doing a `Get` method will be equivalent to the `Load` method but instead of populating the data in the [PnPContext](https://pnp.github.io/pnpcore/api/PnP.Core.Services.PnPContext.html) the data is loaded into a variable. The following `Get` methods exist on each:
+The `Load` methods do load data into the [PnPContext](https://pnp.github.io/pnpcore/api/PnP.Core.Services.PnPContext.html) and that's not always what you might need: doing a `Get` method will be equivalent to the `Load` method but instead of populating the data in the [PnPContext](https://pnp.github.io/pnpcore/api/PnP.Core.Services.PnPContext.html) the data is loaded into a variable. The following `Get` methods exist on each model:
 
 - [GetAsync](https://pnp.github.io/pnpcore)
 - [Get](https://pnp.github.io/pnpcore)
@@ -105,10 +105,15 @@ using (var context = await pnpContextFactory.CreateAsync("SiteToWorkWith"))
 
 Like with loading the model in the previous chapter you've two ways of using the data: query the data that was loaded in the context or query the data loaded into a variable:
 
+Below sample shows the various options for loading and using collections. 
+
+> [!Note]
+> When you want to enumerate or query (via LINQ) already loaded data you need to first use the `AsRequested()` method to return the domain model objects as an `IEnumerable`.
+
 ```csharp
 using (var context = await pnpContextFactory.CreateAsync("SiteToWorkWith"))
 {
-    // Option A: Use the lists loaded into the context
+    // Option A: Load all lists into the context and use the loaded lists
     await context.Web.LoadAsync(p => p.Lists);
 
     foreach(var list in context.Web.Lists.AsRequested())
@@ -126,7 +131,7 @@ using (var context = await pnpContextFactory.CreateAsync("SiteToWorkWith"))
         // Use list
     }
 
-    // Option C: directly enumerate the lists
+    // Option C: directly enumerate the lists, these lists are not loaded into the context
     await foreach(var list in context.Web.Lists)
     {
         // Use List
@@ -184,7 +189,8 @@ using (var context = await pnpContextFactory.CreateAsync("SiteToWorkWith"))
     //   their content types controlled loaded and 
     //     for each content type the field links are controlled loaded 
     //       with the name property
-    var list = await context.Web.Lists.Where(p => p.TemplateType == ListTemplateType.DocumentLibrary && p.Hidden == true)
+    var list = await context.Web.Lists.Where(p => p.TemplateType == ListTemplateType.DocumentLibrary && 
+                                                  p.Hidden == true)
                                       .QueryProperties(
                                         p => p.Title, p => p.TemplateType, 
                                         p => p.ContentTypes.QueryProperties(

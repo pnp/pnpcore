@@ -33,11 +33,18 @@ var myList = context.Web.Lists.GetByTitle("My List", p => p.Title, p => p.Items,
 var addedItem = myList.Items.AsRequested().FirstOrDefault(p => p.Title == "Item1");
 
 // Iterate over the retrieved list items
-foreach (var listItem in myList.Items)
+foreach (var listItem in myList.Items.AsRequested())
 {
     // Do something with the list item
+    if (listItem["MyStatus"].ToString() == "Pending")
+    {
+      // take action
+    }
 }
 ```
+
+> [!Note]
+> When referencing a field keep in mind that you need to use the field's `StaticName`. If you've created a field with name `Version Tag` then the `StaticName` will be `Version_x0020_Tag`, so you will be using `myItem["Version_x0020_Tag"]` to work with the field.
 
 ### Getting list items via a CAML query
 

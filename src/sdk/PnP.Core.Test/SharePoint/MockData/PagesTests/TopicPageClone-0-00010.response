@@ -1,4 +1,4 @@
---batchresponse_4c45964d-cbb9-4d4d-a4b0-2f9fb326916c
+--batchresponse_d35a8900-02ad-4949-a1db-44b971a4e893
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
@@ -7,11 +7,11 @@ CONTENT-TYPE: application/json; charset=utf-8
 
 { "Row" : 
 [{
-"ID": "16",
+"ID": "18",
 "PermMask": "0x7ffffffffffbffff",
 "FSObjType": "0",
 "HTML_x0020_File_x0020_Type": "",
-"UniqueId": "{CAD44FC5-4E07-475E-BD97-C99D6BA0FD0D}",
+"UniqueId": "{D5DDBCA6-C747-4E6A-BA06-4F54C88E81DB}",
 "ProgId": "",
 "NoExecute": "0",
 "ContentTypeId": "0x0101009D1CB255DA76424F860D91F20E6C41180004EEC8087A216D4DAF24B2810EB8AF8E",
@@ -21,7 +21,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "FileRef.urlencoding": "\u002fsites\u002fTopicCenter\u002fSitePages\u002fPNP_SDK_TEST_TopicPageClone.aspx",
 "FileRef.scriptencodeasurl": "\\u002fsites\\u002fTopicCenter\\u002fSitePages\\u002fPNP_SDK_TEST_TopicPageClone.aspx",
 "_UIVersion": "1",
-"SMTotalSize": "15713",
+"SMTotalSize": "15711",
 "File_x0020_Size": "13632",
 "_CommentFlags": "",
 "File_x0020_Type": "aspx",
@@ -40,7 +40,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "Title": "TopicPageClone",
 "ClientSideApplicationId": "{B6917CB1-93A0-4B97-A84D-7CF49975D4EC}",
 "PageLayoutType": "Topic",
-"_EntityId": "CRKB_FYb3LVi9rYYSNBcDF721lQ",
+"_EntityId": "CRKB_UapwWK-m-HJ8f8Q-HQNZyg",
 "_EntityType": "Project",
 "_EntityRelations": "{\"schemaVersion\":1,\"relations\":{\"Definitions\":{\"added\":[{\"type\":\"TextProperty\",\"text\":\"topicA\\n\",\"curationDetails\":{\"author\":{\"email\":\"bert.jansen@bertonline.onmicrosoft.com\",\"name\":\"Bert Jansen (Cloud)\",\"upn\":\"bert.jansen@bertonline.onmicrosoft.com\"},\"time\":\"2021-04-15T09:24:15.824Z\",\"isAddedFromSearch\":false}}]},\"RelatedPeople\":{\"added\":[{\"type\":\"Person\",\"upn\":\"bert.jansen@bertonline.onmicrosoft.com\",\"email\":\"bert.jansen@bertonline.onmicrosoft.com\",\"name\":\"Bert Jansen (Cloud)\",\"curationDetails\":{\"author\":{\"email\":\"bert.jansen@bertonline.onmicrosoft.com\",\"name\":\"Bert Jansen (Cloud)\",\"upn\":\"bert.jansen@bertonline.onmicrosoft.com\"},\"time\":\"2021-04-15T09:23:58.554Z\",\"isAddedFromSearch\":false},\"description\":\"\"}],\"removed\":[]},\"RelatedDocuments\":{\"added\":[]},\"RelatedSites\":{\"added\":[]}}}",
 "CanvasContent1": "<div dir=\"\" class=\"ms-rtestate-field\"><div><\u002fdiv><\u002fdiv>",
@@ -86,4 +86,4 @@ CONTENT-TYPE: application/json; charset=utf-8
 ,"CurrentFolderSpItemUrl" : ""
 
 }
---batchresponse_4c45964d-cbb9-4d4d-a4b0-2f9fb326916c--
+--batchresponse_d35a8900-02ad-4949-a1db-44b971a4e893--

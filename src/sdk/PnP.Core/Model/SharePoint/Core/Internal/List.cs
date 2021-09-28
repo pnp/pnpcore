@@ -191,6 +191,9 @@ namespace PnP.Core.Model.SharePoint
         [KeyProperty(nameof(Id))]
         public override object Key { get => Id; set => Id = Guid.Parse(value.ToString()); }
 
+        [SharePointProperty("*")]
+        public object All { get => null; }
+
         #endregion
 
         #region Methods
@@ -340,7 +343,7 @@ namespace PnP.Core.Model.SharePoint
         {
             ApiCall apiCall = await BuildGetItemsByCamlQueryApiCall(queryOptions, selectors).ConfigureAwait(false);
 
-            await RequestBatchAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
+            await RequestBatchAsync(PnPContext.CurrentBatch, apiCall, HttpMethod.Post).ConfigureAwait(false);
         }
 
         public void LoadItemsByCamlQueryBatch(CamlQueryOptions queryOptions, params Expression<Func<IListItem, object>>[] selectors)
@@ -409,7 +412,7 @@ namespace PnP.Core.Model.SharePoint
             }
 
             var baseRequestUri = $"_api/Web/Lists(guid'{Id}')/GetItems";
-            string body = JsonSerializer.Serialize(camlQuery, typeof(ExpandoObject), new JsonSerializerOptions() { IgnoreNullValues = true });
+            string body = JsonSerializer.Serialize(camlQuery, typeof(ExpandoObject), PnPConstants.JsonSerializer_IgnoreNullValues);
 
             if (EntityManager.GetEntityConcreteInstance(typeof(IListItem), this, PnPContext) is BaseDataModel<IListItem> concreteEntity)
             {
@@ -491,7 +494,7 @@ namespace PnP.Core.Model.SharePoint
                     renderOptions.ViewXml
                 }
             }.AsExpando();
-            string body = JsonSerializer.Serialize(renderListDataParameters, typeof(ExpandoObject), new JsonSerializerOptions() { IgnoreNullValues = true });
+            string body = JsonSerializer.Serialize(renderListDataParameters, typeof(ExpandoObject), PnPConstants.JsonSerializer_IgnoreNullValues);
 
             var apiCall = new ApiCall($"_api/Web/Lists(guid'{Id}')/RenderListDataAsStream", ApiType.SPORest, body)
             {
@@ -518,11 +521,11 @@ namespace PnP.Core.Model.SharePoint
 
             if (!string.IsNullOrEmpty(response.Json))
             {
-                var json = JsonDocument.Parse(response.Json).RootElement.GetProperty("d");
+                var json = JsonSerializer.Deserialize<JsonElement>(response.Json).GetProperty("d");
 
                 if (json.TryGetProperty("GetListComplianceTag", out JsonElement getAvailableTagsForSite))
                 {
-                    var tag = getAvailableTagsForSite.ToObject<ComplianceTag>(new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+                    var tag = getAvailableTagsForSite.ToObject<ComplianceTag>(PnPConstants.JsonSerializer_PropertyNameCaseInsensitiveTrue);
                     return tag;
                 }
             }
@@ -683,7 +686,7 @@ namespace PnP.Core.Model.SharePoint
 
         public async Task<IListItem> AddListFolderAsync(string path, string parentFolder = null, string contentTypeId = "0x0120")
         {
-            return await this.Items.AddAsync(new Dictionary<string, object>
+            return await Items.AddAsync(new Dictionary<string, object>
             {
                 {
                     "Title",path
@@ -702,41 +705,25 @@ namespace PnP.Core.Model.SharePoint
         public async Task<List<ISyntexClassifyAndExtractResult>> ClassifyAndExtractAsync(bool force = false, int pageSize = 500)
         {
             // load required fields in this list
-            string viewXml = @"<View>
+            string viewXml = @"<View Scope='Recursive'>
                     <ViewFields>
                       <FieldRef Name='FileDirRef' />
                       <FieldRef Name='FileLeafRef' />
                       <FieldRef Name='UniqueId' />
                       <FieldRef Name='PrimeLastClassified' />
                     </ViewFields>   
-                    {1}
+                    <OrderBy Override='TRUE'><FieldRef Name= 'ID' Ascending= 'FALSE' /></OrderBy>
                     <RowLimit Paged='TRUE'>{0}</RowLimit>
                    </View>";
 
             bool paging = true;
             string nextPageInfo = null;
-            string filter;
-
-            if (!force)
-            {
-                filter = @"<Query>
-                      <Where>
-                        <IsNull>
-                          <FieldRef Name='PrimeLastClassified'/>                          
-                        </IsNull>
-                      </Where>
-                    </Query>";
-            }
-            else
-            {
-                filter = "";
-            }
 
             while (paging)
             {
                 var queryOptions = new RenderListDataOptions()
                 {
-                    ViewXml = string.Format(viewXml, pageSize, filter),
+                    ViewXml = string.Format(viewXml, pageSize),
                     RenderOptions = RenderListDataOptionsFlags.ListData
                 };
 
@@ -768,6 +755,13 @@ namespace PnP.Core.Model.SharePoint
             var batch = PnPContext.NewBatch();
             foreach (var file in Items.AsRequested())
             {
+                // We use client side filtering to prevent re-processing already processed files, doing 
+                // this filter via the CAML query will triggers a list scan and as such results in throttling/large list issues
+                if (!force && file.Values["PrimeLastClassified"] != null)
+                {
+                    continue;
+                }
+
                 var apiCall = CreateClassifyAndExtractApiCall(Guid.Parse(file.Values["UniqueId"].ToString()));
                 apiCall.RawSingleResult = new SyntexClassifyAndExtractResult();
                 apiCall.RawResultsHandler = (json, call) =>
@@ -808,7 +802,7 @@ namespace PnP.Core.Model.SharePoint
 
         private static ISyntexClassifyAndExtractResult ProcessClassifyAndExtractResponse(string json)
         {
-            var root = JsonDocument.Parse(json).RootElement.GetProperty("d");
+            var root = JsonSerializer.Deserialize<JsonElement>(json).GetProperty("d");
             return new SyntexClassifyAndExtractResult
             {
                 Created = root.GetProperty("Created").GetDateTime(),
@@ -835,10 +829,7 @@ namespace PnP.Core.Model.SharePoint
                 TargetUniqueId = fileUniqueId
             }.AsExpando();
 
-            string body = JsonSerializer.Serialize(classifyAndExtractFile, new JsonSerializerOptions()
-            {
-                IgnoreNullValues = true
-            });
+            string body = JsonSerializer.Serialize(classifyAndExtractFile, PnPConstants.JsonSerializer_IgnoreNullValues);
 
             var apiCall = new ApiCall("_api/machinelearning/workitems", ApiType.SPORest, body);
             return apiCall;

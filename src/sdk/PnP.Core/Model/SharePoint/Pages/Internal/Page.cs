@@ -85,7 +85,7 @@ namespace PnP.Core.Model.SharePoint
 
         public List<ICanvasControl> Controls { get; } = new List<ICanvasControl>(5);
 
-        internal List<ICanvasControl> HeaderControls { get; } = new List<ICanvasControl>();
+        public List<ICanvasControl> HeaderControls { get; } = new List<ICanvasControl>();
 
         /// <summary>
         /// Layout type of the client side page
@@ -171,6 +171,21 @@ namespace PnP.Core.Model.SharePoint
             }
         }
 
+        public DateTime? ScheduledPublishDate 
+        { 
+            get
+            {
+                if (PageListItem != null && PageListItem.Values.ContainsKey(PageConstants._PublishStartDate) && PageListItem[PageConstants._PublishStartDate] != null)
+                {
+                    string publishDateString = PageListItem[PageConstants._PublishStartDate].ToString();
+
+                    return Convert.ToDateTime(publishDateString);
+                }
+
+                return null;
+            }
+        }
+
         /// <summary>
         /// Returns the page header for this page
         /// </summary>
@@ -241,7 +256,7 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// ListItem linked to this page
         /// </summary>
-        internal IListItem PageListItem { get; set; }
+        public IListItem PageListItem { get; set; }
 
         #endregion
 
@@ -335,6 +350,7 @@ namespace PnP.Core.Model.SharePoint
                     <FieldRef Name='{PageConstants._OriginalSourceWebId}' />
                     <FieldRef Name='{PageConstants._OriginalSourceListId}' />
                     <FieldRef Name='{PageConstants._OriginalSourceItemId}' />
+                    {{3}}
                   </ViewFields>
                   <RowLimit Paged='TRUE'>500</RowLimit>
                   <Query>
@@ -349,6 +365,12 @@ namespace PnP.Core.Model.SharePoint
                     </Where>
                   </Query>
                 </View>";
+
+            string extraPropertiesToLoad = $"";
+            if (pagesLibrary.Fields.AsRequested().FirstOrDefault(p=>p.InternalName == PageConstants._PublishStartDate) != null)
+            {
+                extraPropertiesToLoad = "<FieldRef Name='{PageConstants._PublishStartDate}' />";
+            }
 
             if (!string.IsNullOrEmpty(pageNameWithoutFolder))
             {
@@ -378,11 +400,11 @@ namespace PnP.Core.Model.SharePoint
                           <Value Type='text'><![CDATA[{pageNameWithoutFolder}]]></Value>
                         </BeginsWith>";
                 }
-                pageQuery = string.Format(pageQuery, pageNameFilter, "<And>", "</And>");
+                pageQuery = string.Format(pageQuery, pageNameFilter, "<And>", "</And>", extraPropertiesToLoad);
             }
             else
             {
-                pageQuery = string.Format(pageQuery, "", "", "");
+                pageQuery = string.Format(pageQuery, "", "", "", extraPropertiesToLoad);
             }
 
             // Remove unneeded cariage returns
@@ -813,7 +835,7 @@ namespace PnP.Core.Model.SharePoint
         /// </summary>
         /// <param name="control"><see cref="ICanvasControl"/> to add</param>
         /// <param name="order">Order of the control in the given section</param>
-        internal void AddHeaderControl(ICanvasControl control, int order)
+        public void AddHeaderControl(ICanvasControl control, int order)
         {
             if (control == null)
             {
@@ -893,7 +915,7 @@ namespace PnP.Core.Model.SharePoint
         /// <returns>Html representation</returns>
         public string ToHtml()
         {
-            StringBuilder html = new StringBuilder(100);
+            StringBuilder html = new StringBuilder();
 
             if (sections.Count == 0) return string.Empty;
 
@@ -1101,7 +1123,7 @@ namespace PnP.Core.Model.SharePoint
                         control.FromHtml(clientSideControl);
 
                         // Handle control positioning in sections and columns
-                        ApplySectionAndColumn(control, control.SpControlData.Position, control.SpControlData.Emphasis);
+                        ApplySectionAndColumn(control, control.SpControlData.Position, control.SpControlData.Emphasis, control.SpControlData.ZoneGroupMetadata);
 
                         AddControl(control);
                     }
@@ -1114,20 +1136,19 @@ namespace PnP.Core.Model.SharePoint
                         control.FromHtml(clientSideControl);
 
                         // Handle control positioning in sections and columns
-                        ApplySectionAndColumn(control, control.SpControlData.Position, control.SpControlData.Emphasis);
+                        ApplySectionAndColumn(control, control.SpControlData.Position, control.SpControlData.Emphasis, control.SpControlData.ZoneGroupMetadata);
 
                         AddControl(control);
                     }
                     else if (controlType == typeof(CanvasColumn))
                     {
                         // Need to parse empty sections
-                        var jsonSerializerSettings = new JsonSerializerOptions() { IgnoreNullValues = true };
-                        var sectionData = JsonSerializer.Deserialize<CanvasData>(controlData, jsonSerializerSettings);
+                        var sectionData = JsonSerializer.Deserialize<CanvasData>(controlData, PnPConstants.JsonSerializer_IgnoreNullValues);
 
                         CanvasSection currentSection = null;
                         if (sectionData.Position != null)
                         {
-                            currentSection = sections.Where(p => p.Order == sectionData.Position.ZoneIndex).FirstOrDefault();
+                            currentSection = sections.FirstOrDefault(p => p.Order == sectionData.Position.ZoneIndex);
                         }
 
                         if (currentSection == null)
@@ -1135,7 +1156,7 @@ namespace PnP.Core.Model.SharePoint
                             if (sectionData.Position != null)
                             {
                                 AddSection(new CanvasSection(this) { ZoneEmphasis = sectionData.Emphasis != null ? sectionData.Emphasis.ZoneEmphasis : 0 }, sectionData.Position.ZoneIndex);
-                                currentSection = sections.Where(p => p.Order == sectionData.Position.ZoneIndex).First();
+                                currentSection = sections.First(p => p.Order == sectionData.Position.ZoneIndex);
                             }
                         }
 
@@ -1144,11 +1165,11 @@ namespace PnP.Core.Model.SharePoint
                         {
                             if (sectionData.Position.LayoutIndex.HasValue)
                             {
-                                currentColumn = currentSection.Columns.Where(p => p.Order == sectionData.Position.SectionIndex && p.LayoutIndex == sectionData.Position.LayoutIndex.Value).FirstOrDefault();
+                                currentColumn = currentSection.Columns.FirstOrDefault(p => p.Order == sectionData.Position.SectionIndex && p.LayoutIndex == sectionData.Position.LayoutIndex.Value);
                             }
                             else
                             {
-                                currentColumn = currentSection.Columns.Where(p => p.Order == sectionData.Position.SectionIndex).FirstOrDefault();
+                                currentColumn = currentSection.Columns.FirstOrDefault(p => p.Order == sectionData.Position.SectionIndex);
                             }
                         }
 
@@ -1210,17 +1231,17 @@ namespace PnP.Core.Model.SharePoint
             }
 
             // Perform vertical section column matchup if that did not happen yet
-            var verticalSectionColumn = sections.Where(p => p.VerticalSectionColumn != null).FirstOrDefault();
+            var verticalSectionColumn = sections.FirstOrDefault(p => p.VerticalSectionColumn != null);
             // Only continue if the vertical section column we found was "standalone" and not yet matched with other columns
             if (verticalSectionColumn != null && verticalSectionColumn.Columns.Count == 1)
             {
                 // find another, non vertical section, column with the same zoneindex
-                var matchedUpSection = sections.Where(p => p.VerticalSectionColumn == null && p.Order == verticalSectionColumn.Order).FirstOrDefault();
+                var matchedUpSection = sections.FirstOrDefault(p => p.VerticalSectionColumn == null && p.Order == verticalSectionColumn.Order);
                 if (matchedUpSection == null)
                 {
                     // matchup did not yet happen, so let's handle it now
                     // Get the top section
-                    var topSection = sections.Where(p => p.VerticalSectionColumn == null).OrderBy(p => p.Order).FirstOrDefault();
+                    var topSection = sections.OrderBy(p => p.Order).FirstOrDefault(p => p.VerticalSectionColumn == null);
                     if (topSection != null)
                     {
                         // Add the "standalone" vertical section column to this section
@@ -1359,7 +1380,7 @@ namespace PnP.Core.Model.SharePoint
             }
         }
 
-        private void ApplySectionAndColumn(CanvasControl control, CanvasControlPosition position, SectionEmphasis emphasis)
+        private void ApplySectionAndColumn(CanvasControl control, CanvasControlPosition position, SectionEmphasis emphasis, SectionZoneGroupMetadata zoneGroupMetadata)
         {
             if (position == null)
             {
@@ -1369,6 +1390,8 @@ namespace PnP.Core.Model.SharePoint
                     AddSection(new CanvasSection(this) { ZoneEmphasis = 0 }, 0);
                     currentSection = sections.FirstOrDefault();
                 }
+                
+                ApplyCollapsibleSectionSettings(zoneGroupMetadata, currentSection);
 
                 var currentColumn = currentSection.Columns.FirstOrDefault();
                 if (currentColumn == null)
@@ -1382,19 +1405,21 @@ namespace PnP.Core.Model.SharePoint
             }
             else
             {
-                var currentSection = sections.Where(p => p.Order == position.ZoneIndex).FirstOrDefault();
+                var currentSection = sections.FirstOrDefault(p => p.Order == position.ZoneIndex);
                 if (currentSection == null)
                 {
                     AddSection(new CanvasSection(this) { ZoneEmphasis = emphasis != null ? emphasis.ZoneEmphasis : 0 }, position.ZoneIndex);
                     currentSection = sections.Where(p => p.Order == position.ZoneIndex).First();
                 }
 
-                var currentColumn = currentSection.Columns.Where(p => p.Order == position.SectionIndex).FirstOrDefault();
+                ApplyCollapsibleSectionSettings(zoneGroupMetadata, currentSection);
+
+                var currentColumn = currentSection.Columns.FirstOrDefault(p => p.Order == position.SectionIndex);
 
                 // if layout index was set this means that we possibly have a vertical section column
                 if (position.LayoutIndex.HasValue)
                 {
-                    currentColumn = currentSection.Columns.Where(p => p.Order == position.SectionIndex && p.LayoutIndex == position.LayoutIndex.Value).FirstOrDefault();
+                    currentColumn = currentSection.Columns.FirstOrDefault(p => p.Order == position.SectionIndex && p.LayoutIndex == position.LayoutIndex.Value);
                 }
 
                 if (currentColumn == null)
@@ -1419,6 +1444,29 @@ namespace PnP.Core.Model.SharePoint
 
                 control.section = currentSection;
                 control.column = currentColumn;
+            }
+        }
+
+        private static void ApplyCollapsibleSectionSettings(SectionZoneGroupMetadata zoneGroupMetadata, CanvasSection currentSection)
+        {
+            if (zoneGroupMetadata != null)
+            {
+                currentSection.Collapsible = true;
+                currentSection.SectionType = zoneGroupMetadata.Type;
+                currentSection.DisplayName = zoneGroupMetadata.DisplayName;
+                currentSection.IsExpanded = zoneGroupMetadata.IsExpanded;
+                currentSection.ShowDividerLine = zoneGroupMetadata.ShowDividerLine;
+                if (zoneGroupMetadata.IconAlignment != null)
+                {
+                    if (zoneGroupMetadata.IconAlignment.Equals("left", StringComparison.InvariantCultureIgnoreCase))
+                    {
+                        currentSection.IconAlignment = IconAlignment.Left;
+                    }
+                    else if (zoneGroupMetadata.IconAlignment.Equals("right", StringComparison.InvariantCultureIgnoreCase))
+                    {
+                        currentSection.IconAlignment = IconAlignment.Right;
+                    }
+                }
             }
         }
         #endregion
@@ -1810,26 +1858,7 @@ namespace PnP.Core.Model.SharePoint
                 pageName += ".aspx";
             }
 
-            IFile pageFile = null;
-
-            try
-            {
-                pageFile = await pagesLibrary.PnPContext.Web.GetFileByServerRelativeUrlAsync($"{pagesLibrary.RootFolder.ServerRelativeUrl}/{pageName}", p => p.ListItemAllFields, p => p.ServerRelativeUrl, p => p.ListId).ConfigureAwait(false);
-            }
-            catch (SharePointRestServiceException ex)
-            {
-                // The file /sites/prov-1/SitePages/PNP_SDK_TEST_CreateAndUpdatePage.aspx does not exist.
-                if ((ex.Error as SharePointRestError).ServerErrorCode == -2130575338)
-                {
-                    // ignore this error
-                }
-                else
-                {
-                    throw ex;
-                }
-            }
-
-            return pageFile;
+            return await pagesLibrary.PnPContext.Web.GetFileByServerRelativeUrlOrDefaultAsync($"{pagesLibrary.RootFolder.ServerRelativeUrl}/{pageName}", p => p.ListItemAllFields, p => p.ServerRelativeUrl, p => p.ListId).ConfigureAwait(false);
         }
 
         private async Task EnsurePageListItemAsync(string pageName)
@@ -1941,7 +1970,7 @@ namespace PnP.Core.Model.SharePoint
                 TranslatedLanguages = new List<IPageTranslationStatus>()
             };
 
-            var root = JsonDocument.Parse(response).RootElement.GetProperty("d");
+            var root = JsonSerializer.Deserialize<JsonElement>(response).GetProperty("d");
 
             // Process untranslated languages
             var untranslatedLanguages = root.GetProperty("UntranslatedLanguages").GetProperty("results");
@@ -2050,13 +2079,9 @@ namespace PnP.Core.Model.SharePoint
         {
             if (PageListItem != null)
             {
-                var pageFile = await PnPContext.Web.GetFileByServerRelativeUrlAsync($"{PageListItem[PageConstants.FileDirRef]}/{PageListItem[PageConstants.FileLeafRef]}", f => f.ListId, f => f.Exists, f => f.CheckOutType).ConfigureAwait(false);
-                if (pageFile.Exists)
+                var pageFile = await PnPContext.Web.GetFileByServerRelativeUrlOrDefaultAsync($"{PageListItem[PageConstants.FileDirRef]}/{PageListItem[PageConstants.FileLeafRef]}", f => f.ListId, f => f.CheckOutType).ConfigureAwait(false);
+                if (pageFile != null)
                 {
-                    //var sitePagesLibrary = await PnPContext.Web.Lists.GetByIdAsync(pageFile.ListId,
-                    //    l => l.EnableMinorVersions,
-                    //    l => l.EnableModeration,
-                    //    l => l.ForceCheckout).ConfigureAwait(false);
                     var sitePagesLibrary = await EnsurePagesLibraryAsync(PnPContext).ConfigureAwait(false);
 
                     if (pageFile.CheckOutType != CheckOutType.None)
@@ -2130,7 +2155,7 @@ namespace PnP.Core.Model.SharePoint
             // Set promoted state
             PageListItem[PageConstants.PromotedStateField] = (int)PromotedState.Promoted;
             // Set publication date
-            PageListItem[PageConstants.FirstPublishedDate] = DateTime.UtcNow;
+            PageListItem[PageConstants.FirstPublishedDate] = DateTime.Now;
             // Don't use UpdateOverWriteVersion here as the page can already be checked in, doing so will give an 
             // "Additions to this Web site have been blocked" error
             await PageListItem.SystemUpdateAsync().ConfigureAwait(false);
@@ -2157,6 +2182,58 @@ namespace PnP.Core.Model.SharePoint
             PnPContext.Web.RootFolder.WelcomePage = $"sitepages/{PageListItem[PageConstants.FileLeafRef]}";
             await PnPContext.Web.RootFolder.UpdateAsync().ConfigureAwait(false);
         }
+        #endregion
+
+        #region Page scheduling
+
+        public async Task SchedulePublishAsync(DateTime publishDate)
+        {
+            // Ensure this pages library can handle scheduled publishing
+            await PnPContext.Web.EnsurePageSchedulingAsync().ConfigureAwait(false);
+
+            // ensure we do have the page list item loaded
+            if (PageListItem == null)
+            {
+                await EnsurePageListItemAsync(pageName).ConfigureAwait(false);
+            }
+
+            // Set the scheduled publish date
+            PageListItem[PageConstants._PublishStartDate] = publishDate;
+
+            // Don't use UpdateOverWriteVersion here as the page can already be checked in, doing so will give an 
+            // "Additions to this Web site have been blocked" error
+            await PageListItem.SystemUpdateAsync().ConfigureAwait(false);
+
+            // Activate the scheduled publishing
+            await (PnPContext.Web as Web).RawRequestAsync(new ApiCall($"_api/sitepages/pages({PageListItem.Id})/schedulepublish", ApiType.SPORest, "{}"), HttpMethod.Post).ConfigureAwait(false);
+        }
+
+        public void SchedulePublish(DateTime publishDate)
+        {
+            SchedulePublishAsync(publishDate).GetAwaiter().GetResult();
+        }
+
+        public async Task RemoveSchedulePublishAsync()
+        {
+            // ensure we do have the page list item loaded
+            if (PageListItem == null)
+            {
+                await EnsurePageListItemAsync(pageName).ConfigureAwait(false);
+            }
+
+            // Set the scheduled publish date
+            PageListItem[PageConstants._PublishStartDate] = null;
+
+            // Don't use UpdateOverWriteVersion here as the page can already be checked in, doing so will give an 
+            // "Additions to this Web site have been blocked" error
+            await PageListItem.SystemUpdateAsync().ConfigureAwait(false);
+        }
+        
+        public void RemoveSchedulePublish()
+        {
+            RemoveSchedulePublishAsync().GetAwaiter().GetResult();
+        }
+
         #endregion
 
         #region Page commenting and liking
@@ -2346,10 +2423,9 @@ namespace PnP.Core.Model.SharePoint
 
             if (!string.IsNullOrEmpty(response.Json))
             {
-                var root = JsonDocument.Parse(response.Json).RootElement.GetProperty("d").GetProperty("GetClientSideWebParts").GetProperty("results");
+                var root = JsonSerializer.Deserialize<JsonElement>(response.Json).GetProperty("d").GetProperty("GetClientSideWebParts").GetProperty("results");
 
-                var jsonSerializerSettings = new JsonSerializerOptions() { IgnoreNullValues = true };
-                var clientSideComponents = JsonSerializer.Deserialize<List<PageComponent>>(root.ToString(), jsonSerializerSettings);
+                var clientSideComponents = JsonSerializer.Deserialize<List<PageComponent>>(root.ToString(), PnPConstants.JsonSerializer_IgnoreNullValues);
 
                 if (!clientSideComponents.Any())
                 {

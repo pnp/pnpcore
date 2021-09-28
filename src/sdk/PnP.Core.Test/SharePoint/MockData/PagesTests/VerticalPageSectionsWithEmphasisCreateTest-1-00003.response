@@ -1,4 +1,4 @@
---batchresponse_8106ffd4-100c-4f2e-bfe2-93f09186fa7f
+--batchresponse_20a15c12-c4f1-453e-8e61-08e204ebcfba
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
@@ -6,4 +6,4 @@ HTTP/1.1 404 Not Found
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
 {"error":{"code":"-2130575338, Microsoft.SharePoint.SPException","message":{"lang":"en-US","value":"The file /sites/pnpcoresdktest/SitePages/PNP_SDK_TEST_VerticalPageSectionsWithEmphasisCreateTest.aspx does not exist."}}}
---batchresponse_8106ffd4-100c-4f2e-bfe2-93f09186fa7f--
+--batchresponse_20a15c12-c4f1-453e-8e61-08e204ebcfba--

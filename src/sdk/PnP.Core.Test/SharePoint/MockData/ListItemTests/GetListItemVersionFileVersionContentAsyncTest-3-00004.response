@@ -1,9 +1,9 @@
---batchresponse_7bf048dc-658a-4487-a791-612cd2f6ab9a
+--batchresponse_c1851751-f169-421b-abb2-92a5518d999a
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{"d":{"results":[{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/SP.ListItemVersion5a02afa0-5891-4a2f-8ee1-f7015e310f0c","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/SP.ListItemVersion5a02afa0-5891-4a2f-8ee1-f7015e310f0c","type":"SP.ListItemVersion"},"FileVersion":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/SP.ListItemVersion5a02afa0-5891-4a2f-8ee1-f7015e310f0c/FileVersion","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/SP.ListItemVersion5a02afa0-5891-4a2f-8ee1-f7015e310f0c/FileVersion","type":"SP.FileVersion"},"CreatedBy":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/SP.ListItemVersion5a02afa0-5891-4a2f-8ee1-f7015e310f0c/FileVersion/CreatedBy"}},"CheckInComment":"","Created":"2021-06-14T09:19:12Z","ID":512,"IsCurrentVersion":false,"Length":"13","Size":13,"Url":"_vti_history/512/PNP_SDK_TEST_GetListItemVersionFileVersionContentA/GetListItemVersionFileVersionContentAsyncTest.txt","VersionLabel":"1.0"},"VersionId":512}]}}
---batchresponse_7bf048dc-658a-4487-a791-612cd2f6ab9a--
+{"d":{"results":[{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/SP.ListItemVersion73f3337d-de2d-4f78-819f-0c34fe75f4d2","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/SP.ListItemVersion73f3337d-de2d-4f78-819f-0c34fe75f4d2","type":"SP.ListItemVersion"},"FileVersion":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/SP.ListItemVersion73f3337d-de2d-4f78-819f-0c34fe75f4d2/FileVersion","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/SP.ListItemVersion73f3337d-de2d-4f78-819f-0c34fe75f4d2/FileVersion","type":"SP.FileVersion"},"CreatedBy":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/SP.ListItemVersion73f3337d-de2d-4f78-819f-0c34fe75f4d2/FileVersion/CreatedBy"}},"CheckInComment":"","Created":"2021-06-28T11:09:09Z","ID":512,"IsCurrentVersion":false,"Length":"13","Size":13,"Url":"_vti_history/512/PNP_SDK_TEST_GetListItemVersionFileVersionContentA/GetListItemVersionFileVersionContentAsyncTest.txt","VersionLabel":"1.0"},"VersionId":512}]}}
+--batchresponse_c1851751-f169-421b-abb2-92a5518d999a--

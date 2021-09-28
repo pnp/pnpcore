@@ -2,16 +2,16 @@
 using PnP.Core.Model;
 using PnP.Core.Model.SharePoint;
 using PnP.Core.Model.Teams;
+using PnP.Core.QueryModel;
 using PnP.Core.Services;
 using PnP.Core.Test.Utilities;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
-using PnP.Core.QueryModel;
-using System.Collections.Generic;
-using System.Net.Http;
 
 namespace PnP.Core.Test.Base
 {
@@ -27,6 +27,9 @@ namespace PnP.Core.Test.Base
         {
             // Configure mocking default for all tests in this class, unless override by a specific test
             //TestCommon.Instance.Mocking = false;
+
+            // Configure the test cases to use application permissions instead of delegated permissions
+            //TestCommon.Instance.UseApplicationPermissions = true;
         }
 
         #region Tests that use REST to hit SharePoint
@@ -35,6 +38,7 @@ namespace PnP.Core.Test.Base
         public async Task GetSinglePropertyViaRest()
         {
             //TestCommon.Instance.Mocking = false;
+            //TestCommon.Instance.UseApplicationPermissions = true;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 var web = await context.Web.GetAsync(p => p.WelcomePage);

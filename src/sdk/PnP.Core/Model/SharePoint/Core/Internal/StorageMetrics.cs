@@ -6,7 +6,6 @@ namespace PnP.Core.Model.SharePoint
     /// StorageMetrics class, write your custom code here
     /// </summary>
     [SharePointType("SP.StorageMetrics", Target = typeof(IFolder), Uri = "_api/web/getFolderById('{Parent.Id}')/StorageMetrics", LinqGet = "_api/web/getFolderById('{Parent.Id}')/StorageMetrics")]
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Usage", "CA2243:Attribute string literals should parse correctly", Justification = "<Pending>")]
     internal partial class StorageMetrics : BaseDataModel<IStorageMetrics>, IStorageMetrics
     {
         #region Construction
@@ -27,6 +26,9 @@ namespace PnP.Core.Model.SharePoint
 
         [KeyProperty(nameof(LastModified))]
         public override object Key { get => LastModified; set => LastModified = DateTime.Parse(value.ToString()); }
+
+        [SharePointProperty("*")]
+        public object All { get => null; }
         #endregion
     }
 }

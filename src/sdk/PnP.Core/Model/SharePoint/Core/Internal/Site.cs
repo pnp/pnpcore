@@ -137,6 +137,9 @@ namespace PnP.Core.Model.SharePoint
 
         [KeyProperty(nameof(Id))]
         public override object Key { get => Id; set => Id = Guid.Parse(value.ToString()); }
+
+        [SharePointProperty("*")]
+        public object All { get => null; }
         #endregion
 
         #region Extension methods
@@ -155,14 +158,14 @@ namespace PnP.Core.Model.SharePoint
 
             if (!string.IsNullOrEmpty(response.Json))
             {
-                var json = JsonDocument.Parse(response.Json).RootElement.GetProperty("d");
+                var json = JsonSerializer.Deserialize<JsonElement>(response.Json).GetProperty("d");
 
                 if (json.TryGetProperty("GetAvailableTagsForSite", out JsonElement getAvailableTagsForSite))
                 {
                     if (getAvailableTagsForSite.TryGetProperty("results", out JsonElement result))
                     {
                         var returnTags = new List<IComplianceTag>();
-                        var tags = JsonSerializer.Deserialize<IEnumerable<ComplianceTag>>(result.GetRawText(), new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+                        var tags = JsonSerializer.Deserialize<IEnumerable<ComplianceTag>>(result.GetRawText(), PnPConstants.JsonSerializer_PropertyNameCaseInsensitiveTrue);
                         foreach (var tag in tags)
                         {
                             returnTags.Add(tag);
@@ -270,8 +273,8 @@ namespace PnP.Core.Model.SharePoint
         {
             IHubSite hubSite = new HubSite()
             {
-                PnPContext = this.PnPContext,
-                Id = Id ?? this.HubSiteId
+                PnPContext = PnPContext,
+                Id = Id ?? HubSiteId
             };
 
             var hubResult = await hubSite.GetAsync().ConfigureAwait(false);

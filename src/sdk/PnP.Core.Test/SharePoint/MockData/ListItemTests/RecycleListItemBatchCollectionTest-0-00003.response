@@ -1,4 +1,4 @@
---batchresponse_5206f6bd-54bc-4479-81ca-a2c52b2fed0a
+--batchresponse_6a7a14ae-d3ee-4c2a-8839-8ff67a8c72b8
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
@@ -6,4 +6,4 @@ HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
 {"d":{"AddValidateUpdateItemUsingPath":{"__metadata":{"type":"Collection(SP.ListItemFormUpdateValue)"},"results":[{"ErrorCode":0,"ErrorMessage":null,"FieldName":"Title","FieldValue":"Recycle me","HasException":false,"ItemId":0},{"ErrorCode":0,"ErrorMessage":null,"FieldName":"Id","FieldValue":"1","HasException":false,"ItemId":0}]}}}
---batchresponse_5206f6bd-54bc-4479-81ca-a2c52b2fed0a--
+--batchresponse_6a7a14ae-d3ee-4c2a-8839-8ff67a8c72b8--

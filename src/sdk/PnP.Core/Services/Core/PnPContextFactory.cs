@@ -565,7 +565,7 @@ namespace PnP.Core.Services
                         }
                     };
 
-                    var jsonBody = JsonSerializer.Serialize(body, new JsonSerializerOptions { IgnoreNullValues = true });
+                    var jsonBody = JsonSerializer.Serialize(body, PnPConstants.JsonSerializer_IgnoreNullValues);
 
                     using (StringContent content = new StringContent(jsonBody))
                     {

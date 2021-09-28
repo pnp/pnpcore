@@ -1,15 +1,15 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using PnP.Core.Model;
 using PnP.Core.Model.SharePoint;
+using PnP.Core.QueryModel;
 using PnP.Core.Services;
+using PnP.Core.Services.Core.CSOM.Requests;
+using PnP.Core.Test.Services.Core.CSOM.Requests;
 using PnP.Core.Test.Utilities;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
-using PnP.Core.Model;
-using PnP.Core.QueryModel;
-using System.Collections.Generic;
-using PnP.Core.Test.Services.Core.CSOM.Requests;
-using PnP.Core.Services.Core.CSOM.Requests;
 
 namespace PnP.Core.Test.Base
 {

@@ -1,16 +1,15 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PnP.Core.Model.SharePoint;
+using PnP.Core.QueryModel;
+using PnP.Core.Services;
 using PnP.Core.Test.Utilities;
 using System;
-using System.Linq;
-using System.Threading.Tasks;
-using PnP.Core.QueryModel;
-using System.IO;
-using PnP.Core.Services;
-using System.Net.Http;
 using System.Globalization;
+using System.IO;
+using System.Linq;
+using System.Net.Http;
 using System.Text.Json;
-using TimeZoneConverter;
+using System.Threading.Tasks;
 
 namespace PnP.Core.Test.SharePoint
 {
@@ -370,6 +369,44 @@ namespace PnP.Core.Test.SharePoint
         }
 
         [TestMethod]
+        public async Task SetWebPropertiesUnderScoreTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            TestCommon.ClassicSTS0TestSetup();
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.ClassicSTS0TestSite))
+            {
+                // Test safety - sites typically are noscript sites
+                bool isNoScript = await context.Web.IsNoScriptSiteAsync();
+
+                if (!isNoScript)
+                {
+                    var web = await context.Web.GetAsync(p => p.AllProperties);
+
+                    var propertyKey = "With SpaceAnd_Underscore";
+                    var myProperty = web.AllProperties.GetInteger(propertyKey, 0);
+                    if (myProperty == 0)
+                    {
+                        web.AllProperties[propertyKey] = 55;
+                        await web.AllProperties.UpdateAsync();
+                    }
+
+                    web = await context.Web.GetAsync(p => p.AllProperties);
+
+                    myProperty = web.AllProperties.GetInteger(propertyKey, 0);
+                    Assert.IsTrue(myProperty == 55);
+
+                    web.AllProperties[propertyKey] = null;
+                    await web.AllProperties.UpdateAsync();
+
+                    web = await context.Web.GetAsync(p => p.AllProperties);
+                    myProperty = web.AllProperties.GetInteger(propertyKey, 0);
+                    Assert.IsTrue(myProperty == 0);
+                }
+            }
+        }
+
+        [TestMethod]
         public async Task SetWebPropertiesBooleanTest()
         {
             //TestCommon.Instance.Mocking = false;
@@ -677,6 +714,38 @@ namespace PnP.Core.Test.SharePoint
         [DataRow("(UTC+12:00) Petropavlovsk-Kamchatsky - Old")]
         [DataRow("(UTC+13:00) Nuku'alofa")]
         [DataRow("(UTC+13:00) Samoa")]
+        [DataRow("(UTC-11:00) whatever")]
+        [DataRow("(UTC-12:00) whatever")]
+        [DataRow("(UTC-10:00) whatever")]
+        [DataRow("(UTC-09:00) whatever")]
+        [DataRow("(UTC-08:00) whatever")]
+        [DataRow("(UTC-07:00) whatever")]
+        [DataRow("(UTC-06:00) whatever")]
+        [DataRow("(UTC-05:00) whatever")]
+        [DataRow("(UTC-04:30) whatever")]
+        [DataRow("(UTC-04:00) whatever")]
+        [DataRow("(UTC-03:30) whatever")]
+        [DataRow("(UTC-03:00) whatever")]
+        [DataRow("(UTC-02:00) whatever")]
+        [DataRow("(UTC-01:00) whatever")]
+        [DataRow("(UTC) whatever")]
+        [DataRow("(UTC+01:00) whatever")]
+        [DataRow("(UTC+02:00) whatever")]
+        [DataRow("(UTC+03:00) whatever")]
+        [DataRow("(UTC+04:00) whatever")]
+        [DataRow("(UTC+05:00) whatever")]
+        [DataRow("(UTC+05:30) whatever")]
+        [DataRow("(UTC+05:45) whatever")]
+        [DataRow("(UTC+06:00) whatever")]
+        [DataRow("(UTC+06:30) whatever")]
+        [DataRow("(UTC+07:00) whatever")]
+        [DataRow("(UTC+08:00) whatever")]
+        [DataRow("(UTC+09:00) whatever")]
+        [DataRow("(UTC+09:30) whatever")]
+        [DataRow("(UTC+10:00) whatever")]
+        [DataRow("(UTC+11:00) whatever")]
+        [DataRow("(UTC+12:00) whatever")]
+        [DataRow("(UTC+13:00) whatever")]
         public void TimeZoneMappingTest(string sharePointTimeZone)
         {
             Assert.IsNotNull(Model.SharePoint.TimeZone.GetTimeZoneInfoFromSharePoint(sharePointTimeZone));
@@ -1277,6 +1346,65 @@ namespace PnP.Core.Test.SharePoint
 
                 // Delete the content type again
                 await newContentType.DeleteAsync();
+            }
+        }
+
+        [TestMethod]
+        public void IsSubSitePositiveTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSubSite))
+            {
+                Assert.IsTrue(context.Web.IsSubSite());
+            }
+        }
+
+        [TestMethod]
+        public void IsSubSiteNegativeTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            {
+                Assert.IsFalse(context.Web.IsSubSite());
+            }
+        }
+
+        [TestMethod]
+        public void EnsurePageSchedulingTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            using (var context = TestCommon.Instance.GetContext(TestCommon.NoGroupTestSite))
+            {
+                Guid pageSchedulingFeature = new("e87ca965-5e07-4a23-b007-ddd4b5afb9c7");
+
+                try
+                {
+                    context.Web.EnsurePageScheduling();
+
+                    Assert.IsTrue(context.Web.Features.AsRequested().Any(p => p.DefinitionId == pageSchedulingFeature));
+                }
+                finally
+                {
+                    context.Web.Features.Disable(pageSchedulingFeature);
+                }
+
+            }
+        }
+
+        [TestMethod]
+        public void EnsurePageSchedulingOnSubSiteTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSubSite))
+            {
+                Assert.ThrowsException<ClientException>(() =>
+                {
+                    context.Web.EnsurePageScheduling();
+                });
             }
         }
 

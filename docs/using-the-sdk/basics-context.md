@@ -4,7 +4,7 @@ Requesting a `PnPContext` is something each application does, using the `PnPCont
 
 ## Loading additional IWeb and ISite properties when creating a PnPContext
 
-When a `PnPContext` is created two calls are issued to SharePoint Online. In a first call the `IWeb` is loaded with following properties: `Id`, `Url` and `RegionalSettings`. In the second call `ISite` is loaded with the `Id` and `GroupId` properties. If your application needs additional `IWeb` or `ISite` properties you can optimize the number of server roundtrips by adding the extra needed properties to the already planned requests for loading `IWeb` and `ISite`. To do this you can provide a `PnPContextOptions` object specifying the additional `IWeb` and `ISite` properties to load. 
+When a `PnPContext` is created two calls are issued to SharePoint Online. In a first call the `IWeb` is loaded with following properties: `Id`, `Url` and `RegionalSettings`. In the second call `ISite` is loaded with the `Id` and `GroupId` properties. If your application needs additional `IWeb` or `ISite` properties you can optimize the number of server roundtrips by adding the extra needed properties to the already planned requests for loading `IWeb` and `ISite`. To do this you can provide a `PnPContextOptions` object specifying the additional `IWeb` and `ISite` properties to load.
 
 ```csharp
 var options = new PnPContextOptions()
@@ -20,7 +20,7 @@ using (var context = await pnpContextFactory.CreateAsync("SiteToWorkWith", optio
 }
 ```
 
-While above sample just loaded some basic `IWeb` and `ISite` properties you can also do more complex LINQ expressions. Below sa
+While above sample just loaded some basic `IWeb` and `ISite` properties you can also do more complex LINQ expressions.
 
 ```csharp
 var options = new PnPContextOptions()

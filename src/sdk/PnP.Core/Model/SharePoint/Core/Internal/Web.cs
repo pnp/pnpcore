@@ -1,6 +1,6 @@
 ﻿using PnP.Core.Model.Security;
-using PnP.Core.Services;
 using PnP.Core.QueryModel;
+using PnP.Core.Services;
 using System;
 using System.Collections.Generic;
 using System.Dynamic;
@@ -22,6 +22,7 @@ namespace PnP.Core.Model.SharePoint
     {
         private const string V = "_api/web";
         private static readonly Guid MultilingualPagesFeature = new Guid("24611c05-ee19-45da-955f-6602264abaf8");
+        private static readonly Guid PageSchedulingFeature = new Guid("e87ca965-5e07-4a23-b007-ddd4b5afb9c7");
         internal const string WebOptionsAdditionalInformationKey = "WebOptions";
 
         #region Construction
@@ -49,7 +50,7 @@ namespace PnP.Core.Model.SharePoint
                     }
                 }.AsExpando();
 
-                string body = JsonSerializer.Serialize(webCreationInformation, typeof(ExpandoObject), new JsonSerializerOptions() { IgnoreNullValues = true });
+                string body = JsonSerializer.Serialize(webCreationInformation, typeof(ExpandoObject), PnPConstants.JsonSerializer_IgnoreNullValues);
 
                 return new ApiCall($"{V}/Webs/Add", ApiType.SPORest, body);
             };
@@ -313,6 +314,9 @@ namespace PnP.Core.Model.SharePoint
 
         [KeyProperty(nameof(Id))]
         public override object Key { get => Id; set => Id = Guid.Parse(value.ToString()); }
+
+        [SharePointProperty("*")]
+        public object All { get => null; }
         #endregion
 
         #region Extension methods        
@@ -468,6 +472,30 @@ namespace PnP.Core.Model.SharePoint
         #endregion
 
         #region Files
+        public IFile GetFileByServerRelativeUrlOrDefault(string serverRelativeUrl, params Expression<Func<IFile, object>>[] expressions)
+        {
+            return GetFileByServerRelativeUrlOrDefaultAsync(serverRelativeUrl, expressions).GetAwaiter().GetResult();
+        }
+
+        public async Task<IFile> GetFileByServerRelativeUrlOrDefaultAsync(string serverRelativeUrl, params Expression<Func<IFile, object>>[] expressions)
+        {
+            try
+            {
+                return await GetFileByServerRelativeUrlAsync(serverRelativeUrl, expressions).ConfigureAwait(false);
+            }
+            catch (SharePointRestServiceException ex)
+            {
+                var error = ex.Error as SharePointRestError;
+                // Indicates the file did not exist
+                if (File.ErrorIndicatesFileDoesNotExists(error))
+                {
+                    return null;
+                }
+
+                throw;
+            }
+        }
+
         public IFile GetFileByServerRelativeUrl(string serverRelativeUrl, params Expression<Func<IFile, object>>[] expressions)
         {
             return GetFileByServerRelativeUrlAsync(serverRelativeUrl, expressions).GetAwaiter().GetResult();
@@ -850,6 +878,48 @@ namespace PnP.Core.Model.SharePoint
         public Task SyncHubSiteThemeAsync()
         {
             throw new NotImplementedException();
+        }
+
+        #endregion
+
+        #region Is Sub site
+        public async Task<bool> IsSubSiteAsync()
+        {
+            await PnPContext.Site.EnsurePropertiesAsync(p => p.RootWeb).ConfigureAwait(false);
+            
+            // If the id's differ this implies the current web is a sub site
+            return PnPContext.Site.RootWeb.Id != Id;
+        }
+
+        public bool IsSubSite()
+        {
+            return IsSubSiteAsync().GetAwaiter().GetResult();
+        }
+        #endregion
+
+        #region Ensure page scheduling
+
+        public async Task EnsurePageSchedulingAsync()
+        {
+            // Page scheduling only works for the root site of the site collection
+            if (await IsSubSiteAsync().ConfigureAwait(false))
+            {
+                throw new ClientException(ErrorType.Unsupported, PnPCoreResources.Exception_Unsupported_PagePublishingOnSubWeb);
+            }
+
+            // Ensure the needed web properties are loaded
+            await EnsurePropertiesAsync(p => p.Features).ConfigureAwait(false);
+
+            // Ensure the page scheduling page feature is enabled
+            if (Features.AsRequested().FirstOrDefault(p => p.DefinitionId == PageSchedulingFeature) == null)
+            {
+                await Features.EnableAsync(PageSchedulingFeature).ConfigureAwait(false);
+            }
+        }
+        
+        public void EnsurePageScheduling()
+        {
+            EnsurePageSchedulingAsync().GetAwaiter().GetResult();
         }
 
         #endregion

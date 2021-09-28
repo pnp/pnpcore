@@ -1,10 +1,10 @@
---batchresponse_b51c2a22-0600-4a7a-bb4d-d75ddbd2a7bf
+--batchresponse_ad645d95-a958-4697-a9cc-c60cf87de167
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 201 Created
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
-LOCATION: https://m365x215748.sharepoint.com/sites/AdminContentCenter/_api/machinelearning/publications
+LOCATION: https://bertonline.sharepoint.com/sites/ContentCenter/_api/machinelearning/publications
 
-{"d":{"__metadata":{"id":"https://m365x215748.sharepoint.com/sites/AdminContentCenter/_api/machinelearning/publications","uri":"https://m365x215748.sharepoint.com/sites/AdminContentCenter/_api/machinelearning/publications","type":"Microsoft.Office.Server.ContentCenter.SPMachineLearningPublicationsResult"},"Details":{"__metadata":{"type":"Collection(Microsoft.Office.Server.ContentCenter.SPMachineLearningPublicationResult)"},"results":[{"ErrorMessage":null,"Publication":{"__metadata":{"type":"Microsoft.Office.Server.ContentCenter.SPMachineLearningPublicationEntityData"},"ModelUniqueId":"bb25a5be-aeed-436d-90e7-add975ac766e","TargetLibraryServerRelativeUrl":"/sites/AdminContentCenter/PNP_SDK_TEST_PublishUnPublishModelToList","TargetSiteUrl":"https://m365x215748.sharepoint.com/sites/AdminContentCenter","TargetWebServerRelativeUrl":"/sites/AdminContentCenter","ViewOption":"NewViewAsDefault"},"StatusCode":201}]},"TotalFailures":0,"TotalSuccesses":1}}
---batchresponse_b51c2a22-0600-4a7a-bb4d-d75ddbd2a7bf--
+{"d":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/ContentCenter/_api/machinelearning/publications","uri":"https://bertonline.sharepoint.com/sites/ContentCenter/_api/machinelearning/publications","type":"Microsoft.Office.Server.ContentCenter.SPMachineLearningPublicationsResult"},"Details":{"__metadata":{"type":"Collection(Microsoft.Office.Server.ContentCenter.SPMachineLearningPublicationResult)"},"results":[{"ErrorMessage":null,"Publication":{"__metadata":{"type":"Microsoft.Office.Server.ContentCenter.SPMachineLearningPublicationEntityData"},"ModelUniqueId":"ddeeb4c2-3f8e-4b6e-8b75-1d9c0db4210e","TargetLibraryServerRelativeUrl":"/sites/ContentCenter/PNP_SDK_TEST_PublishUnPublishModelToList","TargetSiteUrl":"https://bertonline.sharepoint.com/sites/ContentCenter","TargetWebServerRelativeUrl":"/sites/ContentCenter","ViewOption":"NewViewAsDefault"},"StatusCode":201}]},"TotalFailures":0,"TotalSuccesses":1}}
+--batchresponse_ad645d95-a958-4697-a9cc-c60cf87de167--

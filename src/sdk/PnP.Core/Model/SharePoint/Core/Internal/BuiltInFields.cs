@@ -7,6 +7,7 @@ namespace PnP.Core.Model.SharePoint
         private static readonly List<string> internalFields = new List<string>()
         {
             "_CheckinComment",
+            "_CommentCount",
             "_CommentFlags",
             "_ComplianceFlags",
             "_ComplianceTag",

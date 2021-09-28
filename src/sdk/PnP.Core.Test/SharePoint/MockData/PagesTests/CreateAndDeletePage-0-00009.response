@@ -1,4 +1,4 @@
---batchresponse_5247fc11-0e05-46c8-89c2-7aec18f2217a
+--batchresponse_e1b3a65f-cf16-40f3-ba88-1f98a8cfa8e2
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
@@ -7,11 +7,11 @@ CONTENT-TYPE: application/json; charset=utf-8
 
 { "Row" : 
 [{
-"ID": "2039",
+"ID": "2135",
 "PermMask": "0x7ffffffffffbffff",
 "FSObjType": "0",
 "HTML_x0020_File_x0020_Type": "",
-"UniqueId": "{96ED0058-EB9E-444E-8D12-D09A18895F34}",
+"UniqueId": "{3AE3B17C-371B-4282-9F3D-E6BA89131F61}",
 "ProgId": "",
 "NoExecute": "0",
 "ContentTypeId": "0x0101009D1CB255DA76424F860D91F20E6C411800BC66A1F7CEC63943B700A35FCBCF0164",
@@ -21,7 +21,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "FileRef.urlencoding": "\u002fsites\u002fprov-1\u002fSitePages\u002fPNP_SDK_TEST_CreateAndDeletePage.aspx",
 "FileRef.scriptencodeasurl": "\\u002fsites\\u002fprov-1\\u002fSitePages\\u002fPNP_SDK_TEST_CreateAndDeletePage.aspx",
 "_UIVersion": "1",
-"SMTotalSize": "4640",
+"SMTotalSize": "4639",
 "File_x0020_Size": "3533",
 "_CommentFlags": "",
 "File_x0020_Type": "aspx",
@@ -84,4 +84,4 @@ CONTENT-TYPE: application/json; charset=utf-8
 ,"CurrentFolderSpItemUrl" : ""
 
 }
---batchresponse_5247fc11-0e05-46c8-89c2-7aec18f2217a--
+--batchresponse_e1b3a65f-cf16-40f3-ba88-1f98a8cfa8e2--

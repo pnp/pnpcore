@@ -70,5 +70,8 @@ namespace PnP.Core.Model.Security
         [KeyProperty(nameof(Id))]
         public override object Key { get => Id; set => Id = int.Parse(value.ToString()); }
 
+        [SharePointProperty("*")]
+        public object All { get => null; }
+
     }
 }

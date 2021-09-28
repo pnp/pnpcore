@@ -183,6 +183,9 @@
   <data name="Exception_LinqError_MissingValue" xml:space="preserve">
     <value>Missing value for {0} in {1}</value>
   </data>
+  <data name="Exception_ListItemAdd_WrongInternalFieldName" xml:space="preserve">
+    <value>There was an exception while writing field {0}. Verify you're using the correct InternalName value for the field you want to write to.</value>
+  </data>
   <data name="Exception_ListItemUpdate_NoFieldsLoaded" xml:space="preserve">
     <value>Please ensure your list Fields are loaded before getting list data. E.g. await list.LoadAsync(p =&gt; p.Fields.QueryProperties(p =&gt; p.InternalName, p =&gt; p.FieldTypeKind, p =&gt; p.TypeAsString, p =&gt; p.Title))</value>
   </data>
@@ -346,10 +349,13 @@
     <value>The method '{0}' is not supported</value>
   </data>
   <data name="Exception_Unsupported_MissingSharePointPrincipal" xml:space="preserve">
-    <value>You need to provide the user via it's principal when adding a new item</value>
+    <value>You need to provide the user via it's principal when adding a list item or when updating it via one of the Update() methods. Updating using SystemUpdate() or SystemUpdateOverwriteVersion() do work with just the user id value</value>
   </data>
   <data name="Exception_Unsupported_NodeType" xml:space="preserve">
     <value>Node of type {0} of expression {1} is not supported</value>
+  </data>
+  <data name="Exception_Unsupported_PagePublishingOnSubWeb" xml:space="preserve">
+    <value>Page publish scheduling only works on the pages library in the root web of a site collection</value>
   </data>
   <data name="Exception_Unsupported_Projection" xml:space="preserve">
     <value>The projection is not supported</value>

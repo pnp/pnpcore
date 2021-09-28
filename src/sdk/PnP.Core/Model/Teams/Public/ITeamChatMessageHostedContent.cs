@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace PnP.Core.Model.Teams
+﻿namespace PnP.Core.Model.Teams
 {
     /// <summary>
     /// Attachments connected to a chat message

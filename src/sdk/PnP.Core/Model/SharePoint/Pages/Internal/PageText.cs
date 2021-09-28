@@ -95,6 +95,27 @@ namespace PnP.Core.Model.SharePoint
                 EditorType = "CKEditor"
             };
 
+            // Persist the collapsible section settings
+            if (Section.Collapsible)
+            {
+                controlData.ZoneGroupMetadata = new SectionZoneGroupMetadata()
+                {
+                    // Set section type to 1 if it was not set (when new sections are added via code)
+                    Type = (Section as CanvasSection).SectionType == 0 ? 1 : (Section as CanvasSection).SectionType,
+                    DisplayName = Section.DisplayName,
+                    IsExpanded = Section.IsExpanded,
+                    ShowDividerLine = Section.ShowDividerLine,                    
+                };
+
+                if (Section.IconAlignment.HasValue)
+                {
+                    controlData.ZoneGroupMetadata.IconAlignment = Section.IconAlignment.Value.ToString().ToLower();
+                }
+                else
+                {
+                    controlData.ZoneGroupMetadata.IconAlignment = "true";
+                }
+            }
 
             if (section.Type == CanvasSectionTemplate.OneColumnVerticalSection)
             {
@@ -115,7 +136,7 @@ namespace PnP.Core.Model.SharePoint
             catch { }
 #pragma warning restore CA1031 // Do not catch general exception types
 
-            StringBuilder html = new StringBuilder(100);
+            StringBuilder html = new StringBuilder();
             html.Append($@"<div {CanvasControlAttribute}=""{CanvasControlData}"" {CanvasDataVersionAttribute}=""{ DataVersion}""  {ControlDataAttribute}=""{jsonControlData.Replace("\"", "&quot;")}"">");
             html.Append($@"<div {TextRteAttribute}=""{Rte}"">");
             if (Text.Trim().StartsWith("<p>", StringComparison.InvariantCultureIgnoreCase) ||
@@ -144,7 +165,7 @@ namespace PnP.Core.Model.SharePoint
         {
             base.FromHtml(element);
 
-            var div = element.GetElementsByTagName("div").Where(a => a.HasAttribute(TextRteAttribute)).FirstOrDefault();
+            var div = element.GetElementsByTagName("div").FirstOrDefault(a => a.HasAttribute(TextRteAttribute));
 
             if (div != null)
             {
@@ -169,7 +190,7 @@ namespace PnP.Core.Model.SharePoint
                 Text = div.InnerHtml;
             }
 
-            SpControlData = JsonSerializer.Deserialize<TextControlData>(element.GetAttribute(CanvasControl.ControlDataAttribute), new JsonSerializerOptions() { IgnoreNullValues = true });
+            SpControlData = JsonSerializer.Deserialize<TextControlData>(element.GetAttribute(ControlDataAttribute), PnPConstants.JsonSerializer_IgnoreNullValues);
             controlType = SpControlData.ControlType;
         }
         #endregion

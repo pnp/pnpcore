@@ -42,6 +42,11 @@ namespace PnP.Core.Model.SharePoint
         List<ICanvasControl> Controls { get; }
 
         /// <summary>
+        /// List of controls on this page's header
+        /// </summary>
+        List<ICanvasControl> HeaderControls { get; }
+
+        /// <summary>
         /// Returns the page header for this page
         /// </summary>
         IPageHeader PageHeader { get; }
@@ -107,6 +112,11 @@ namespace PnP.Core.Model.SharePoint
         IList PagesLibrary { get; }
 
         /// <summary>
+        /// ListItem linked to this page
+        /// </summary>
+        public IListItem PageListItem { get; }
+
+        /// <summary>
         /// ID value of the page (only available when the page was saved)
         /// </summary>
         public int? PageId { get; }
@@ -125,6 +135,11 @@ namespace PnP.Core.Model.SharePoint
         /// The name of this page (available after saving the page)
         /// </summary>
         public string Name { get; }
+
+        /// <summary>
+        /// Returns the scheduled publish data of a page (only if publish was scheduled)
+        /// </summary>
+        public DateTime? ScheduledPublishDate { get; }
 
         /// <summary>
         /// Adds a new section to your client side page
@@ -226,6 +241,13 @@ namespace PnP.Core.Model.SharePoint
         public void SetCustomPageHeader(string serverRelativeImageUrl, double? translateX = null, double? translateY = null);
 
         /// <summary>
+        /// Adds a new header control to your client side page with a given order. Used for topic page creation
+        /// </summary>
+        /// <param name="control"><see cref="ICanvasControl"/> to add</param>
+        /// <param name="order">Order of the control in the given section</param>
+        public void AddHeaderControl(ICanvasControl control, int order);
+
+        /// <summary>
         /// Creates a new text part which can be configured and added to the page
         /// </summary>
         /// <param name="text">Optionally provide the text for the text part</param>
@@ -319,6 +341,28 @@ namespace PnP.Core.Model.SharePoint
         /// </summary>
         /// <param name="comment">Publishing comment</param>
         public Task PublishAsync(string comment = null);
+
+        /// <summary>
+        /// Schedules the publication of a client side page
+        /// </summary>
+        /// <param name="publishDate">Date when the page needs to be publishing</param>
+        public Task SchedulePublishAsync(DateTime publishDate);
+
+        /// <summary>
+        /// Schedules the publication of a client side page
+        /// </summary>
+        /// <param name="publishDate">Date when the page needs to be publishing</param>
+        public void SchedulePublish(DateTime publishDate);
+
+        /// <summary>
+        /// Removes the publication schedule of a client side page
+        /// </summary>
+        public Task RemoveSchedulePublishAsync();
+
+        /// <summary>
+        /// Removes the publication schedule of a client side page
+        /// </summary>
+        public void RemoveSchedulePublish();
 
         /// <summary>
         /// Demotes an client side <see cref="PageLayoutType.Article"/> news page as a regular client side page

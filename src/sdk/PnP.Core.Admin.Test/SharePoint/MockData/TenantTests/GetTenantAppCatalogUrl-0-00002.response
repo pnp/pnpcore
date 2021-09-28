@@ -1,0 +1,9 @@
+--batchresponse_4e698c88-1c79-4d76-bed4-ee7b5c3a8d6b
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+HTTP/1.1 200 OK
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+
+{"d":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/SP_TenantSettings_Current","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/SP_TenantSettings_Current","type":"SP.TenantSettings"},"CorporateCatalogUrl":"https://bertonline.sharepoint.com/sites/apps"}}
+--batchresponse_4e698c88-1c79-4d76-bed4-ee7b5c3a8d6b--

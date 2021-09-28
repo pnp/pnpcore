@@ -4,14 +4,13 @@ using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Net.Http;
-using System.Text.Json;
 
 namespace PnP.Core.Services
 {
     /// <summary>
     /// Defines a request in a <see cref="Batch"/>
     /// </summary>
-    internal class BatchRequest
+    public class BatchRequest
     {
         /// <summary>
         /// Default constructor
@@ -93,7 +92,7 @@ namespace PnP.Core.Services
         /// <summary>
         /// Json response for this request (only populated when the <see cref="Batch"/> was executed)
         /// </summary>
-        internal string ResponseJson { get; private set; }
+        public string ResponseJson { get; private set; }
 
         /// <summary>
         /// Stream containing the response binary content
@@ -103,7 +102,7 @@ namespace PnP.Core.Services
         /// <summary>
         /// Http response code for this request (only populated when the <see cref="Batch"/> was executed)
         /// </summary>
-        internal HttpStatusCode ResponseHttpStatusCode { get; private set; }
+        public HttpStatusCode ResponseHttpStatusCode { get; private set; }
 
         /// <summary>
         /// Headers returned for this request (e.g. Content header to follow-up on async server side operations)

@@ -1,4 +1,4 @@
---batchresponse_cfe9a97b-9c46-4a4c-a9b8-050dff8e09b0
+--batchresponse_1ff7f0c0-c95a-48ff-b525-0c7e9b2eb429
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
@@ -6,4 +6,4 @@ HTTP/1.1 404 Not Found
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
 {"error":{"code":"-2130575338, Microsoft.SharePoint.SPException","message":{"lang":"nl-NL","value":"Het bestand /sites/prov-1/DutchTemplateWeb/SitePages/Templates/PNP_SDK_TEST_SavePageAsTemplate.aspx bestaat niet."}}}
---batchresponse_cfe9a97b-9c46-4a4c-a9b8-050dff8e09b0--
+--batchresponse_1ff7f0c0-c95a-48ff-b525-0c7e9b2eb429--

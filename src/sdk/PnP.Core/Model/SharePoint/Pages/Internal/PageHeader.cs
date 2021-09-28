@@ -28,7 +28,7 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// Returns the type of header
         /// </summary>
-        internal PageHeaderType Type { get; private set; }
+        public PageHeaderType Type { get; private set; }
 
         /// <summary>
         /// Server relative link to page header image, set to null for default header image.
@@ -181,7 +181,7 @@ namespace PnP.Core.Model.SharePoint
             HtmlParser parser = new HtmlParser(new HtmlParserOptions() { IsEmbedded = true });
             using (var document = parser.ParseDocument(pageHeaderHtml))
             {
-                var pageHeaderControl = document.All.Where(m => m.HasAttribute(CanvasControl.ControlDataAttribute)).FirstOrDefault();
+                var pageHeaderControl = document.All.FirstOrDefault(m => m.HasAttribute(CanvasControl.ControlDataAttribute));
                 if (pageHeaderControl != null)
                 {
                     string pageHeaderData = pageHeaderControl.GetAttribute(CanvasControl.ControlDataAttribute);
@@ -196,7 +196,7 @@ namespace PnP.Core.Model.SharePoint
                         decoded = WebUtility.HtmlDecode(pageHeaderData);
                     }
 
-                    var wpJObject = JsonDocument.Parse(decoded).RootElement;
+                    var wpJObject = JsonSerializer.Deserialize<JsonElement>(decoded);
 
                     // Store the server processed content as that's needed for full fidelity
                     if (wpJObject.TryGetProperty("serverProcessedContent", out JsonElement serverProcessedContent))
@@ -466,7 +466,7 @@ namespace PnP.Core.Model.SharePoint
             {
                 var error = ex.Error as SharePointRestError;
 
-                if (error.HttpResponseCode == 404 && error.ServerErrorCode == -2130575338)
+                if (File.ErrorIndicatesFileDoesNotExists(error))
                 {
                     clientContext.Logger.LogInformation("Provided file link does not exist...we're eating the exception and the page will end up with a default page header");
                 }

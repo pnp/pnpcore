@@ -40,8 +40,6 @@ namespace PnP.Core.Model.SharePoint
 
         public string ETag { get => GetValue<string>(); set => SetValue(value); }
 
-        public bool Exists { get => GetValue<bool>(); set => SetValue(value); }
-
         public bool HasAlternateContentStreams { get => GetValue<bool>(); set => SetValue(value); }
 
         public bool IrmEnabled { get => GetValue<bool>(); set => SetValue(value); }
@@ -108,6 +106,9 @@ namespace PnP.Core.Model.SharePoint
 
         [KeyProperty(nameof(UniqueId))]
         public override object Key { get => UniqueId; set => UniqueId = Guid.Parse(value.ToString()); }
+
+        [SharePointProperty("*")]
+        public object All { get => null; }
         #endregion
 
         #region Extension methods
@@ -723,7 +724,7 @@ namespace PnP.Core.Model.SharePoint
 
         private static ISyntexClassifyAndExtractResult ProcessClassifyAndExtractResponse(string json)
         {
-            var root = JsonDocument.Parse(json).RootElement.GetProperty("d");
+            var root = JsonSerializer.Deserialize<JsonElement>(json).GetProperty("d");
             return new SyntexClassifyAndExtractResult
             {
                 Created = root.GetProperty("Created").GetDateTime(),
@@ -750,15 +751,28 @@ namespace PnP.Core.Model.SharePoint
                 TargetUniqueId = UniqueId
             }.AsExpando();
 
-            string body = JsonSerializer.Serialize(classifyAndExtractFile, new JsonSerializerOptions()
-            {
-                IgnoreNullValues = true
-            });
+            string body = JsonSerializer.Serialize(classifyAndExtractFile, PnPConstants.JsonSerializer_IgnoreNullValues);
 
             var apiCall = new ApiCall("_api/machinelearning/workitems", ApiType.SPORest, body);
             return apiCall;
         }
         #endregion
+
+        #endregion
+
+        #region Helper methods
+        internal static bool ErrorIndicatesFileDoesNotExists(SharePointRestError error)
+        {
+            // Indicates the file did not exist
+            if (error.HttpResponseCode == 404 && error.ServerErrorCode == -2130575338)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
 
         #endregion
     }

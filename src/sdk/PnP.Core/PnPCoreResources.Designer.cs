@@ -259,6 +259,15 @@ namespace PnP.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to There was an exception while writing field {0}. Verify you&apos;re using the correct InternalName value for the field you want to write to..
+        /// </summary>
+        internal static string Exception_ListItemAdd_WrongInternalFieldName {
+            get {
+                return ResourceManager.GetString("Exception_ListItemAdd_WrongInternalFieldName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Please ensure your list Fields are loaded before getting list data. E.g. await list.LoadAsync(p =&gt; p.Fields.QueryProperties(p =&gt; p.InternalName, p =&gt; p.FieldTypeKind, p =&gt; p.TypeAsString, p =&gt; p.Title)).
         /// </summary>
         internal static string Exception_ListItemUpdate_NoFieldsLoaded {
@@ -745,7 +754,7 @@ namespace PnP.Core {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You need to provide the user via it&apos;s principal when adding a new item.
+        ///   Looks up a localized string similar to You need to provide the user via it&apos;s principal when adding a list item or when updating it via one of the Update() methods. Updating using SystemUpdate() or SystemUpdateOverwriteVersion() do work with just the user id value.
         /// </summary>
         internal static string Exception_Unsupported_MissingSharePointPrincipal {
             get {
@@ -759,6 +768,15 @@ namespace PnP.Core {
         internal static string Exception_Unsupported_NodeType {
             get {
                 return ResourceManager.GetString("Exception_Unsupported_NodeType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Page publish scheduling only works on the pages library in the root web of a site collection.
+        /// </summary>
+        internal static string Exception_Unsupported_PagePublishingOnSubWeb {
+            get {
+                return ResourceManager.GetString("Exception_Unsupported_PagePublishingOnSubWeb", resourceCulture);
             }
         }
         

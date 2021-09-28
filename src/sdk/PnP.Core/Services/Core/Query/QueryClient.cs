@@ -6,13 +6,11 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Dynamic;
-using System.Globalization;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Net.Http;
 using System.Text;
 using System.Text.Json;
-using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using System.Web;
 
@@ -63,7 +61,7 @@ namespace PnP.Core.Services
 
             IEnumerable<EntityFieldInfo> fields = entity.Fields.Where(p => p.Load);
 
-            Dictionary<string, string> urlParameters = new Dictionary<string, string>(2);
+            Dictionary<string, string> urlParameters = new Dictionary<string, string>();
 
             StringBuilder sb = new StringBuilder();
 
@@ -486,9 +484,9 @@ namespace PnP.Core.Services
             }
         }
 
-#endregion
+        #endregion
 
-#region API Calls for non expandable collections
+        #region API Calls for non expandable collections
 
         internal static async Task AddGraphBatchRequestsForNonExpandableCollectionsAsync<TModel>(BaseDataModel<TModel> model, Batch batch, EntityInfo entityInfo, Expression<Func<TModel, object>>[] expressions, Func<FromJson, object> fromJsonCasting, Action<string> postMappingJson)
         {
@@ -640,10 +638,9 @@ namespace PnP.Core.Services
             return false;
         }
 
-#endregion
+        #endregion
 
-#region Paging 
-
+        #region Paging 
 
         internal static Tuple<string, ApiType> BuildNextPageLink(IMetadataExtensible collection)
         {
@@ -691,11 +688,11 @@ namespace PnP.Core.Services
             return url;
         }
 
-#endregion
+        #endregion
 
-#endregion
+        #endregion
 
-#region UPDATE
+        #region UPDATE
         internal static async Task<ApiCallRequest> BuildUpdateAPICallAsync<TModel>(BaseDataModel<TModel> model, EntityInfo entity)
         {
             bool useGraph = false;
@@ -815,13 +812,7 @@ namespace PnP.Core.Services
             // Get the corresponding JSON text content
             var jsonUpdateMessage = JsonSerializer.Serialize(updateMessage,
                 typeof(ExpandoObject),
-                new JsonSerializerOptions
-                {
-                    Converters = { new JsonStringEnumConverter() },
-                    WriteIndented = false,
-                    // For some reason the naming policy is not applied on ExpandoObjects
-                    PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
-                });
+                PnPConstants.JsonSerializer_WriteIndentedFalse_CamelCase_JsonStringEnumConverter);
 
             // Prepare the variable to contain the target URL for the update operation
             var updateUrl = await ApiHelper.ParseApiCallAsync(model, entity.GraphUpdate).ConfigureAwait(false);
@@ -923,10 +914,10 @@ namespace PnP.Core.Services
             // Get the corresponding JSON text content
             var jsonUpdateMessage = JsonSerializer.Serialize(updateMessage,
                 typeof(ExpandoObject),
-                new JsonSerializerOptions { WriteIndented = true });
+                PnPConstants.JsonSerializer_WriteIndentedTrue);
 
             // Prepare the variable to contain the target URL for the update operation
-            var updateUrl = await ApiHelper.ParseApiCallAsync(model, $"{model.PnPContext.Uri.ToString().TrimEnd(new char[] { '/' })}/{entity.SharePointUpdate}").ConfigureAwait(false);
+            var updateUrl = await ApiHelper.ParseApiCallAsync(model, $"{model.PnPContext.Uri.AbsoluteUri.ToString().TrimEnd(new char[] { '/' })}/{entity.SharePointUpdate}").ConfigureAwait(false);
 
             // Create ApiCall instance and call the override option if needed
             var call = new ApiCallRequest(new ApiCall(updateUrl, ApiType.SPORest, jsonUpdateMessage)
@@ -954,9 +945,9 @@ namespace PnP.Core.Services
             return call;
         }
 
-#endregion
+        #endregion
 
-#region DELETE
+        #region DELETE
         internal static async Task<ApiCallRequest> BuildDeleteAPICallAsync<TModel>(BaseDataModel<TModel> model, EntityInfo entity)
         {
             bool useGraph = false;
@@ -1012,7 +1003,7 @@ namespace PnP.Core.Services
         private static async Task<ApiCallRequest> BuildDeleteAPICallRestAsync<TModel>(BaseDataModel<TModel> model, EntityInfo entity)
         {
             // Prepare the variable to contain the target URL for the delete operation
-            var deleteUrl = await ApiHelper.ParseApiCallAsync(model, $"{model.PnPContext.Uri.ToString().TrimEnd(new char[] { '/' })}/{entity.SharePointDelete}").ConfigureAwait(false);
+            var deleteUrl = await ApiHelper.ParseApiCallAsync(model, $"{model.PnPContext.Uri.AbsoluteUri.ToString().TrimEnd(new char[] { '/' })}/{entity.SharePointDelete}").ConfigureAwait(false);
 
             // Create ApiCall instance and call the override option if needed
             var call = new ApiCallRequest(new ApiCall(deleteUrl, ApiType.SPORest));
@@ -1024,9 +1015,9 @@ namespace PnP.Core.Services
             return call;
         }
 
-#endregion
+        #endregion
 
-#region Helper methods
+        #region Helper methods
 
         private static bool CanUseGraphBeta<TModel>(BaseDataModel<TModel> model, EntityFieldInfo field)
         {
@@ -1038,7 +1029,7 @@ namespace PnP.Core.Services
             return model.PnPContext.GraphCanUseBeta && entity.GraphBeta;
         }
 
-#endregion
+        #endregion
 
     }
 }

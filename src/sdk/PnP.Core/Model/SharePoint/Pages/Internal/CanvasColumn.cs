@@ -121,7 +121,7 @@ namespace PnP.Core.Model.SharePoint
         /// <returns>The HTML presentation of this section</returns>
         internal string ToHtml()
         {
-            StringBuilder html = new StringBuilder(100);
+            StringBuilder html = new StringBuilder();
             bool controlWrittenToSection = false;
             int controlIndex = 0;
             foreach (var control in Section.Page.Controls.Where(p => p.Section == Section && p.Column == this).OrderBy(z => z.Order))

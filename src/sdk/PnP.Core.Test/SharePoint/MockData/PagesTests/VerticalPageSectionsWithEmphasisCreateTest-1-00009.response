@@ -1,4 +1,4 @@
---batchresponse_ef4e89a9-c441-40ed-8e2c-44816e0dcb76
+--batchresponse_e9a31b7d-8962-4dea-bb54-7c0f5f97b1df
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
@@ -7,11 +7,11 @@ CONTENT-TYPE: application/json; charset=utf-8
 
 { "Row" : 
 [{
-"ID": "643",
+"ID": "690",
 "PermMask": "0x7ffffffffffbffff",
 "FSObjType": "0",
 "HTML_x0020_File_x0020_Type": "",
-"UniqueId": "{08288BB9-ECAB-439E-BDAB-534BB316C6E9}",
+"UniqueId": "{7B483F0A-10CF-48AF-B78E-3FEA15FD3782}",
 "ProgId": "",
 "NoExecute": "0",
 "ContentTypeId": "0x0101009D1CB255DA76424F860D91F20E6C41180044C66AD09592964583DFF5030205BD34",
@@ -21,8 +21,8 @@ CONTENT-TYPE: application/json; charset=utf-8
 "FileRef.urlencoding": "\u002fsites\u002fpnpcoresdktest\u002fSitePages\u002fPNP_SDK_TEST_VerticalPageSectionsWithEmphasisCreateTest.aspx",
 "FileRef.scriptencodeasurl": "\\u002fsites\\u002fpnpcoresdktest\\u002fSitePages\\u002fPNP_SDK_TEST_VerticalPageSectionsWithEmphasisCreateTest.aspx",
 "_UIVersion": "1",
-"SMTotalSize": "6701",
-"File_x0020_Size": "5459",
+"SMTotalSize": "6737",
+"File_x0020_Size": "5495",
 "_CommentFlags": "",
 "File_x0020_Type": "aspx",
 "HTML_x0020_File_x0020_Type.File_x0020_Type.mapall": "ichtm.gif|Microsoft SharePoint Designer|SharePoint.OpenDocuments|",
@@ -66,6 +66,9 @@ CONTENT-TYPE: application/json; charset=utf-8
 "_StubFile": "0",
 "_ComplianceTag": "",
 "owshiddenversion": "2",
+"_PublishStartDate": "7\u002f5\u002f2021 9:58 AM",
+"_PublishStartDate.": "2021-07-05T16:58:58Z",
+"_ScheduledVersion": "",
 "_SPTranslatedLanguages": "",
 "_SPSitePageFlags": "",
 "ContentVersion": "1",
@@ -84,4 +87,4 @@ CONTENT-TYPE: application/json; charset=utf-8
 ,"CurrentFolderSpItemUrl" : ""
 
 }
---batchresponse_ef4e89a9-c441-40ed-8e2c-44816e0dcb76--
+--batchresponse_e9a31b7d-8962-4dea-bb54-7c0f5f97b1df--

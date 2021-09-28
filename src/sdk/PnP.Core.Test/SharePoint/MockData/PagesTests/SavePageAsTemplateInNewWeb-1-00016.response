@@ -1,4 +1,4 @@
---batchresponse_28b11886-8831-483a-bf53-3393be8ec186
+--batchresponse_eb263e13-cbdd-4d22-8ecc-a4b29fc05bd0
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
@@ -11,17 +11,17 @@ CONTENT-TYPE: application/json; charset=utf-8
 "PermMask": "0x7ffffffffffbffff",
 "FSObjType": "0",
 "HTML_x0020_File_x0020_Type": "",
-"UniqueId": "{FDA4EEEC-D157-41DC-8CF5-2E830442413B}",
+"UniqueId": "{39EE4C72-5EDD-4C92-B8B0-C1F36653D9AB}",
 "ProgId": "",
 "NoExecute": "0",
-"ContentTypeId": "0x0101009D1CB255DA76424F860D91F20E6C4118004643C73484CDB04B85B91F496B5B45DE",
+"ContentTypeId": "0x0101009D1CB255DA76424F860D91F20E6C411800E3C4055846A3BC42BBD0A3D49FFED698",
 "FileRef": "\u002fsites\u002fprov-1\u002fDutchTemplateWeb\u002fSitePages\u002fTemplates\u002fPNP_SDK_TEST_SavePageAsTemplate.aspx",
 "FileRef.urlencode": "%2Fsites%2Fprov%2D1%2FDutchTemplateWeb%2FSitePages%2FTemplates%2FPNP%5FSDK%5FTEST%5FSavePageAsTemplate%2Easpx",
 "FileRef.urlencodeasurl": "\u002fsites\u002fprov-1\u002fDutchTemplateWeb\u002fSitePages\u002fTemplates\u002fPNP_SDK_TEST_SavePageAsTemplate.aspx",
 "FileRef.urlencoding": "\u002fsites\u002fprov-1\u002fDutchTemplateWeb\u002fSitePages\u002fTemplates\u002fPNP_SDK_TEST_SavePageAsTemplate.aspx",
 "FileRef.scriptencodeasurl": "\\u002fsites\\u002fprov-1\\u002fDutchTemplateWeb\\u002fSitePages\\u002fTemplates\\u002fPNP_SDK_TEST_SavePageAsTemplate.aspx",
 "_UIVersion": "1",
-"SMTotalSize": "4554",
+"SMTotalSize": "4556",
 "File_x0020_Size": "3473",
 "_CommentFlags": "",
 "File_x0020_Type": "aspx",
@@ -84,4 +84,4 @@ CONTENT-TYPE: application/json; charset=utf-8
 ,"CurrentFolderSpItemUrl" : ""
 
 }
---batchresponse_28b11886-8831-483a-bf53-3393be8ec186--
+--batchresponse_eb263e13-cbdd-4d22-8ecc-a4b29fc05bd0--

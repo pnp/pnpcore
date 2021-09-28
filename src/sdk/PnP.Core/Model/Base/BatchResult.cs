@@ -74,7 +74,7 @@ namespace PnP.Core.Model
                 throw new InvalidOperationException(PnPCoreResources.Exception_BatchResult_BatchNotYetExecuted);
             }
 
-            return this.result.GetEnumerator();
+            return result.GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
@@ -82,8 +82,8 @@ namespace PnP.Core.Model
             return GetEnumerator();
         }
 
-        public int Count => this.result.Count;
+        public int Count => result.Count;
 
-        public T this[int index] => this.result[index];
+        public T this[int index] => result[index];
     }
 }

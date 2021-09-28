@@ -32,4 +32,5 @@ $ApiKey = $("$env:NUGET_API_KEY")
 
 CleanPackage "PnP.Core" 10 $ApiKey
 CleanPackage "PnP.Core.Auth" 10 $ApiKey
+CleanPackage "PnP.Core.Admin" 10 $ApiKey
 CleanPackage "PnP.Framework" 10 $ApiKey

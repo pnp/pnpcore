@@ -3,7 +3,6 @@ using System;
 namespace PnP.Core.Model.SharePoint
 {
 
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Usage", "CA2243:Attribute string literals should parse correctly", Justification = "<Pending>")]
     internal partial class ComplianceTag : IComplianceTag
     {
         public bool AcceptMessagesOnlyFromSendersOrMembers { get; set; }

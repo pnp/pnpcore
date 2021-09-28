@@ -4,11 +4,11 @@ using System.Text.Json;
 
 namespace PnP.Core.Model.SharePoint
 {
-    [GraphType(Uri = V, Beta = true, LinqGet = baseUri)]
+    [GraphType(Uri = V, LinqGet = baseUri)]
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Usage", "CA2243:Attribute string literals should parse correctly", Justification = "<Pending>")]
     internal partial class TermRelation : BaseDataModel<ITermRelation>, ITermRelation
     {
-        private const string baseUri = "termstore/sets/{Parent.GraphId}/relations";
+        private const string baseUri = "sites/{hostname},{Site.Id},{Web.Id}/termstore/sets/{Parent.GraphId}/relations";
         private const string V = baseUri + "/{GraphId}";
 
         #region Construction
@@ -35,7 +35,7 @@ namespace PnP.Core.Model.SharePoint
                 };
 
                 // Serialize object to json
-                var bodyContent = JsonSerializer.Serialize(body, typeof(ExpandoObject), new JsonSerializerOptions { WriteIndented = false });
+                var bodyContent = JsonSerializer.Serialize(body, typeof(ExpandoObject), PnPConstants.JsonSerializer_WriteIndentedFalse);
 
                 Term parentTerm = null;
                 if (Parent != null && Parent.GetType() == typeof(TermRelationCollection) && (Parent.Parent != null && (Parent.Parent.GetType() == typeof(Term))))
@@ -49,11 +49,11 @@ namespace PnP.Core.Model.SharePoint
                         PnPCoreResources.Exception_Unsupported_FailedAddingTermRelation);
                 }
 
-                string termApi = $"termstore/sets/{parentTerm.Set.Id}/terms/{parentTerm.Id}/relations";
+                string termApi = $"sites/{{hostname}},{{Site.Id}},{{Web.Id}}/termstore/sets/{parentTerm.Set.Id}/terms/{parentTerm.Id}/relations";
 
                 var apiCall = await ApiHelper.ParseApiRequestAsync(this, termApi).ConfigureAwait(false);
 
-                return new ApiCall(apiCall, ApiType.GraphBeta, bodyContent);
+                return new ApiCall(apiCall, ApiType.Graph, bodyContent);
             };
         }
         #endregion

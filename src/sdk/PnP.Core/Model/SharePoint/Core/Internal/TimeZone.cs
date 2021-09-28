@@ -9,8 +9,6 @@ namespace PnP.Core.Model.SharePoint
     [SharePointType("SP.TimeZone", Uri = "_api/web/regionalsettings/timezone", LinqGet = "_api/web/regionalsettings/timezone")]
     internal partial class TimeZone : BaseDataModel<ITimeZone>, ITimeZone
     {
-        private TimeZoneInfo timeZoneInfo;
-
         #region Construction
         public TimeZone()
         {
@@ -35,6 +33,9 @@ namespace PnP.Core.Model.SharePoint
         [KeyProperty(nameof(Id))]
         public override object Key { get => Id; set => Id = (int)value; }
 
+        [SharePointProperty("*")]
+        public object All { get => null; }
+
         #endregion
 
         #region Extension methods
@@ -56,8 +57,7 @@ namespace PnP.Core.Model.SharePoint
 
         internal static TimeZoneInfo GetTimeZoneInfoFromSharePoint(string timeZoneDescription)
         {
-
-            return timeZoneDescription switch
+            var timeZoneInfo = timeZoneDescription switch
             {
                 "(UTC-12:00) International Date Line West" => TZConvert.GetTimeZoneInfo("Dateline Standard Time"),
                 "(UTC-11:00) Coordinated Universal Time-11" => TZConvert.GetTimeZoneInfo("UTC-11"),
@@ -170,8 +170,57 @@ namespace PnP.Core.Model.SharePoint
                 "(UTC+12:00) Petropavlovsk-Kamchatsky - Old" => TZConvert.GetTimeZoneInfo("Kamchatka Standard Time"),
                 "(UTC+13:00) Nuku'alofa" => TZConvert.GetTimeZoneInfo("Tonga Standard Time"),
                 "(UTC+13:00) Samoa" => TZConvert.GetTimeZoneInfo("Samoa Standard Time"),
+                _ => null,
+            };
+
+            if (timeZoneInfo != null)
+            {
+                return timeZoneInfo;
+            }
+
+            // Generic handling of other strings, above timezones are returned for SharePoint sites in English, some languages 
+            // result in partly differing strings
+            if (timeZoneDescription.StartsWith("(UTC) ", StringComparison.InvariantCulture))
+            {
+                return TZConvert.GetTimeZoneInfo("GMT Standard Time");
+            }
+
+            return timeZoneDescription.Substring(0, 11) switch
+            {
+                "(UTC-12:00)" => TZConvert.GetTimeZoneInfo("Dateline Standard Time"),
+                "(UTC-11:00)" => TZConvert.GetTimeZoneInfo("UTC-11"),
+                "(UTC-10:00)" => TZConvert.GetTimeZoneInfo("Hawaiian Standard Time"),
+                "(UTC-09:00)" => TZConvert.GetTimeZoneInfo("Alaskan Standard Time"),
+                "(UTC-08:00)" => TZConvert.GetTimeZoneInfo("Pacific Standard Time"),
+                "(UTC-07:00)" => TZConvert.GetTimeZoneInfo("Mountain Standard Time"),
+                "(UTC-06:00)" => TZConvert.GetTimeZoneInfo("Central Standard Time"),
+                "(UTC-05:00)" => TZConvert.GetTimeZoneInfo("Eastern Standard Time"),
+                "(UTC-04:30)" => TZConvert.GetTimeZoneInfo("Venezuela Standard Time"),
+                "(UTC-04:00)" => TZConvert.GetTimeZoneInfo("Atlantic Standard Time"),
+                "(UTC-03:30)" => TZConvert.GetTimeZoneInfo("Newfoundland Standard Time"),
+                "(UTC-03:00)" => TZConvert.GetTimeZoneInfo("E. South America Standard Time"),
+                "(UTC-02:00)" => TZConvert.GetTimeZoneInfo("Mid-Atlantic Standard Time"),
+                "(UTC-01:00)" => TZConvert.GetTimeZoneInfo("Azores Standard Time"),
+                "(UTC+01:00)" => TZConvert.GetTimeZoneInfo("Romance Standard Time"),
+                "(UTC+02:00)" => TZConvert.GetTimeZoneInfo("FLE Standard Time"),
+                "(UTC+03:00)" => TZConvert.GetTimeZoneInfo("Russian Standard Time"),
+                "(UTC+04:00)" => TZConvert.GetTimeZoneInfo("Arabian Standard Time"),
+                "(UTC+05:00)" => TZConvert.GetTimeZoneInfo("West Asia Standard Time"),
+                "(UTC+05:30)" => TZConvert.GetTimeZoneInfo("India Standard Time"),
+                "(UTC+05:45)" => TZConvert.GetTimeZoneInfo("Nepal Standard Time"),
+                "(UTC+06:00)" => TZConvert.GetTimeZoneInfo("Central Asia Standard Time"),
+                "(UTC+06:30)" => TZConvert.GetTimeZoneInfo("Myanmar Standard Time"),
+                "(UTC+07:00)" => TZConvert.GetTimeZoneInfo("SE Asia Standard Time"),
+                "(UTC+08:00)" => TZConvert.GetTimeZoneInfo("W. Australia Standard Time"),
+                "(UTC+09:00)" => TZConvert.GetTimeZoneInfo("Tokyo Standard Time"),
+                "(UTC+09:30)" => TZConvert.GetTimeZoneInfo("AUS Central Standard Time"),
+                "(UTC+10:00)" => TZConvert.GetTimeZoneInfo("AUS Eastern Standard Time"),
+                "(UTC+11:00)" => TZConvert.GetTimeZoneInfo("Central Pacific Standard Time"),
+                "(UTC+12:00)" => TZConvert.GetTimeZoneInfo("New Zealand Standard Time"),
+                "(UTC+13:00)" => TZConvert.GetTimeZoneInfo("Tonga Standard Time"),                
                 _ => throw new ArgumentException("Unknown timezone mapping"),
             };
+
         }
 
         #endregion

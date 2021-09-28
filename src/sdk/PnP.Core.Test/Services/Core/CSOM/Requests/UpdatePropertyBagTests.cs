@@ -3,11 +3,6 @@ using PnP.Core.Services.Core.CSOM.Requests.ListItems;
 using PnP.Core.Services.Core.CSOM.Requests.Web;
 using PnP.Core.Services.Core.CSOM.Utils;
 using PnP.Core.Services.Core.CSOM.Utils.Model;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PnP.Core.Test.Services.Core.CSOM.Requests
 {

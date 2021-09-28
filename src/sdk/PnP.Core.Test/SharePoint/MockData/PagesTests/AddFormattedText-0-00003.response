@@ -1,4 +1,4 @@
---batchresponse_290a9240-7c15-4c33-a803-a652cc39dd61
+--batchresponse_655e06ea-70c9-4a0c-a196-75ad20b7c2b9
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
@@ -6,4 +6,4 @@ HTTP/1.1 404 Not Found
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
 {"error":{"code":"-2130575338, Microsoft.SharePoint.SPException","message":{"lang":"en-US","value":"The file /sites/prov-1/SitePages/PNP_SDK_TEST_AddFormattedText.aspx does not exist."}}}
---batchresponse_290a9240-7c15-4c33-a803-a652cc39dd61--
+--batchresponse_655e06ea-70c9-4a0c-a196-75ad20b7c2b9--

@@ -45,6 +45,9 @@ namespace PnP.Core.Model.SharePoint
                 Description = Url;
             }
 
+            // Clear changes
+            Commit();
+
             return this;
         }
 
@@ -68,6 +71,9 @@ namespace PnP.Core.Model.SharePoint
             {
                 Description = Url;
             }
+
+            // Clear changes
+            Commit();
 
             return this;
         }

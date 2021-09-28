@@ -29,6 +29,9 @@ In order for the user to authenticate on the App, A new app registration should 
   - Select __Microsoft Graph__ > __Delegated permissions__ > select __ChannelMessage.Send__
   - Select __Microsoft Graph__ > __Delegated permissions__ > select __TeamSettings.ReadWrite.All__
   - Select __Microsoft Graph__ > __Delegated permissions__ > select __TeamsTab.ReadWrite.All__
+  - Select __Microsoft Graph__ > __Delegated permissions__ > select __Sites.Read.All__
+  - Select __Microsoft Graph__ > __Delegated permissions__ > select __Files.Read.All__
+  - Select __SharePoint__ > __Delegated permissions__ > select __AllSites.Read__
 
 - Click __Grand admin consent for {tenant}__
 

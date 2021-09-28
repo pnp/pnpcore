@@ -7,6 +7,11 @@
     {
 
         /// <summary>
+        /// Returns the type of header
+        /// </summary>
+        public PageHeaderType Type { get; }
+
+        /// <summary>
         /// Server relative link to page header image, set to null for default header image.
         /// Note: image needs to reside in the current site
         /// </summary>

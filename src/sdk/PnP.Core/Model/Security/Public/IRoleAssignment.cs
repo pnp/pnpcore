@@ -17,5 +17,10 @@ namespace PnP.Core.Model.Security
         /// Role definitions for this assignment
         /// </summary>
         public IRoleDefinitionCollection RoleDefinitions { get; }
+
+        /// <summary>
+        /// A special property used to add an asterisk to a $select statement
+        /// </summary>
+        public object All { get; }
     }
 }

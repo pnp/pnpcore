@@ -45,11 +45,6 @@ namespace PnP.Core.Model.SharePoint
         public string ETag { get; }
 
         /// <summary>
-        /// Gets a value that specifies whether the file exists.
-        /// </summary>
-        public bool Exists { get; }
-
-        /// <summary>
         /// Indicates whether this file has alternate streams with content.
         /// </summary>
         public bool HasAlternateContentStreams { get; }
@@ -208,6 +203,11 @@ namespace PnP.Core.Model.SharePoint
         /// Gets a value that returns the last user who has modified the file.
         /// </summary>
         public ISharePointUser ModifiedBy { get; }
+
+        /// <summary>
+        /// A special property used to add an asterisk to a $select statement
+        /// </summary>
+        public object All { get; }
 
         #endregion
 

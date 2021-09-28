@@ -10,6 +10,40 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
 ### Added
 
+- Added IWeb.GetFileByServerRelativeUrlOrDefault methods that can return null for non existing files + dropped the IFile.Exists property as it never really worked [jansenbe - Bert Jansen]
+- Added support for reading, configuring and saving of collapsible sections on pages #539 [jansenbe - Bert Jansen]
+- Admin library providing Microsoft 365 admin functionality to PnP Core SDK users [jansenbe - Bert Jansen]
+- Support for running unit tests using Application permissions (compared to default Delegated) [jansenbe - Bert Jansen]
+
+### Changed
+
+- Improved parsing of JSON ListItem content, preventing unwanted string into DateTime parsing #519 [jansenbe - Bert Jansen]
+- Ensure list item fields are not marked as changed after the initial load of the list item #508 [jansenbe - Bert Jansen]
+- Don't replace _ with _x005f_ and space with _x0020_ when working with list item fields, the StaticName is to be used for instead [jansenbe - Bert Jansen]
+- Fix for "Requested value 'systemEventMessage' was not found." for Chat Messages #536 [jansenbe - Bert Jansen]
+- Default retry mechanism now uses retry-after header for REST, CSOM and Graph requests, aligned with the settings in PnP Framework [jansenbe - Bert Jansen]
+- Switched to using V1 Taxonomy API now that it's out of beta [jansenbe - Bert Jansen]
+- Implemented generic handling for non-English timezone strings, initial fix for #543 [jansenbe - Bert Jansen]
+- PnP Core SDK internals are not exposed anymore to libraries outside of the PnP Core SDK solution [jansenbe - Bert Jansen]
+- PnP Core SDK assemblies are now strong named #542 [jansenbe - Bert Jansen]
+- PERF: ImplementsInterface -> massive performance improvement! Running all offline PnP.Core tests is twice as fast... [jansenbe - Bert Jansen] 
+- PERF: AsExpando removed LINQ dependencies to speed up and lower memory requirments [jansenbe - Bert Jansen]
+- PERF: Improved parsing of REST batch response for .NET 5: 50% less memory allocations + 50% to 90% performance gain (depending on the size) [jansenbe - Bert Jansen]
+- PERF: Reuse JsonSerializerOptions: overall offline test run is 10% faster [jansenbe - Bert Jansen]
+- PERF: Standardized on JsonSerializer.Deserialize, replaced JsonDocument.Parse where needed [jansenbe - Bert Jansen]
+- PERF: Get the response string, using HttpCompletionOption.ResponseHeadersRead and ReadAsStreamAsync to lower the memory pressure when processing larger responses + performance is better [jansenbe - Bert Jansen]
+- PERF: Cache LINQ based field lookups in ListDataAsStreamHandler, 35% faster when loading 2500 list items with all fields [jansenbe - Bert Jansen]
+- Added `All` property that gets translated to a * in the $select when PnP Framework resorts to using a SharePoint REST query [jansenbe - Bert Jansen]
+- Added _CommentCount to BuiltInFields #554 [avuorine]
+- For raw API requests the url encoding was not always done correct [jansenbe - Bert Jansen]
+
+## [1.3.0]
+
+### Added
+
+- Support for working with IListItem attachments [jansenbe - Bert Jansen]
+- Page scheduling support: enable a pages library for page publish scheduling and schedule the publishing of a page [jansenbe - Bert Jansen]
+- IsSubSite methods on IWeb [jansenbe - Bert Jansen]
 - Support for converting the site's datetime to UTC and vice versa [jansenbe - Bert Jansen]
 - Using @mentioning in page/listitem comments and replies [jansenbe - Bert Jansen]
 - Support for downloading versions of a file #483 [DaleyKD - Kyle Daley]
@@ -19,6 +53,11 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
 ### Changed
 
+- Reliabilty update when parsing taxonomy field json [jansenbe - Bert Jansen]
+- Throw exception when using a REST based list item add/update while only the user id is specified [jansenbe - Bert Jansen]
+- "Special" field value types (User, Lookup, Url, Taxonomy) were wrongly marked as changed on data load causing blanking out data with item updates [jansenbe - Bert Jansen]
+- Fixed the SharePoint Syntex ClassifyAndExtract functionality to skip folders and work well with large lists [jansenbe - Bert Jansen]
+- Fixed issue when using AddValidateUpdateItemUsingPath (used for IlistItem adds) is returning a field level add error - now an exception is thrown [jansenbe - Bert Jansen]
 - Fixed memory leaks for use cases that resulted in repeated creation of the Azure AppInsights TelemetryClient [jansenbe - Bert Jansen]
 - Fixed bug that resulted in an unneeded query due to paging #486 [PaoloPia - Paolo Pialorsi]
 

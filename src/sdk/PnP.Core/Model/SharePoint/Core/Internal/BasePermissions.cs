@@ -1,6 +1,4 @@
-﻿using PnP.Core.Services;
-
-namespace PnP.Core.Model.SharePoint
+﻿namespace PnP.Core.Model.SharePoint
 {
     [SharePointType("SP.BasePermissions", Target = typeof(Web), Uri = "_api/Web/EffectiveBasePermissions)")]
     internal partial class BasePermissions : BaseDataModel<IBasePermissions>, IBasePermissions
@@ -11,8 +9,11 @@ namespace PnP.Core.Model.SharePoint
 
         [KeyProperty(nameof(High))]
         public override object Key { get => High; set => High = long.Parse(value.ToString()); }
+
+        [SharePointProperty("*")]
+        public object All { get => null; }
         #endregion
-        
+
         #region Extension methods
         public bool Has(PermissionKind perm)
         {
@@ -116,7 +117,7 @@ namespace PnP.Core.Model.SharePoint
 
         public BasePermissions()
         {
-            this.ClearAll(); // initialize the values
+            ClearAll(); // initialize the values
         }
     }
 }

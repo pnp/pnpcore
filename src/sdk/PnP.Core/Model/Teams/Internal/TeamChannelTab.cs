@@ -5,7 +5,7 @@ using System.Text.Json;
 
 namespace PnP.Core.Model.Teams
 {
-    [GraphType(Uri = tabUri, Beta = true)]
+    [GraphType(Uri = tabUri)]
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Usage", "CA2243:Attribute string literals should parse correctly", Justification = "<Pending>")]
     internal partial class TeamChannelTab : BaseDataModel<ITeamChannelTab>, ITeamChannelTab
     {
@@ -54,7 +54,7 @@ namespace PnP.Core.Model.Teams
                 }
 
                 // Serialize object to json
-                var bodyContent = JsonSerializer.Serialize(tab, typeof(ExpandoObject), new JsonSerializerOptions { WriteIndented = false });
+                var bodyContent = JsonSerializer.Serialize(tab, typeof(ExpandoObject), PnPConstants.JsonSerializer_WriteIndentedFalse);
 
                 var parsedApiCall = await ApiHelper.ParseApiRequestAsync(this, baseUri).ConfigureAwait(false);
                 return new ApiCall(parsedApiCall, ApiType.GraphBeta, bodyContent);

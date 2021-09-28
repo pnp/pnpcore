@@ -1,6 +1,5 @@
 using PnP.Core.Services;
 using System;
-using System.Collections.Generic;
 using System.Dynamic;
 using System.Text.Json;
 
@@ -11,7 +10,6 @@ namespace PnP.Core.Model.SharePoint
     /// </summary>
     [SharePointType("SP.UserCustomAction", Target = typeof(Web), Uri = "_api/Web/UserCustomActions('{Id}')", Get = "_api/Web/UserCustomActions", LinqGet = "_api/Web/UserCustomActions")]
     [SharePointType("SP.UserCustomAction", Target = typeof(Site), Uri = "_api/Site/UserCustomActions('{Id}')", Get = "_api/Site/UserCustomActions", LinqGet = "_api/Site/UserCustomActions")]
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Usage", "CA2243:Attribute string literals should parse correctly", Justification = "<Pending>")]
     internal partial class UserCustomAction : BaseDataModel<IUserCustomAction>, IUserCustomAction
     {
         internal const string AddUserCustomActionOptionsAdditionalInformationKey = "AddOptions";
@@ -51,11 +49,7 @@ namespace PnP.Core.Model.SharePoint
                     addParameters.Rights = rightsPayload;
                 }
 
-                string json = JsonSerializer.Serialize(addParameters, typeof(ExpandoObject),
-                    new JsonSerializerOptions()
-                    {
-                        IgnoreNullValues = true
-                    });
+                string json = JsonSerializer.Serialize(addParameters, typeof(ExpandoObject), PnPConstants.JsonSerializer_IgnoreNullValues);
 
 
                 return new ApiCall(endpointUrl, ApiType.SPORest, json);
@@ -99,7 +93,7 @@ namespace PnP.Core.Model.SharePoint
                     Url
                 };
 
-                var jsonBody = JsonSerializer.Serialize(updateProps, new JsonSerializerOptions { IgnoreNullValues = true });
+                var jsonBody = JsonSerializer.Serialize(updateProps, PnPConstants.JsonSerializer_IgnoreNullValues);
                 return new ApiCallRequest(new ApiCall(apiCallRequest.ApiCall.Request, apiCallRequest.ApiCall.Type, jsonBody));
 
             };
@@ -154,6 +148,8 @@ namespace PnP.Core.Model.SharePoint
         [KeyProperty(nameof(Id))]
         public override object Key { get => Id; set => Id = Guid.Parse(value.ToString()); }
 
+        [SharePointProperty("*")]
+        public object All { get => null; }
         #endregion
     }
 }

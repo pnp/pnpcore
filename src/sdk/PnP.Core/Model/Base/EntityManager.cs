@@ -464,7 +464,7 @@ namespace PnP.Core.Model
             }
 
             var fieldToLoad = ((expression.Body as MethodCallExpression).Arguments[0] as MemberExpression).Member.Name;
-            var resultTypeInfo = EntityManager.Instance.GetStaticClassInfo(resultType);
+            var resultTypeInfo = Instance.GetStaticClassInfo(resultType);
 
             bool first = false;
             if (entityFieldExpandInfo == null)
@@ -520,7 +520,7 @@ namespace PnP.Core.Model
                             }
 
                             //var publicTypeRecursive = (fieldExpressionBody as MethodCallExpression).Type.GenericTypeArguments[0];
-                            var entityInfoRecursive = EntityManager.Instance.GetStaticClassInfo(publicTypeRecursive);
+                            var entityInfoRecursive = Instance.GetStaticClassInfo(publicTypeRecursive);
 
                             var expandedEntityField = new EntityFieldExpandInfo() { Name = fld, Type = publicTypeRecursive, Expandable = true };
                             ParseQueryProperties(entityInfo, (includeFieldExpression as UnaryExpression).Operand as LambdaExpression, expandedEntityField);
@@ -580,17 +580,6 @@ namespace PnP.Core.Model
         }
 
         #region Private implementation
-
-        private static Type GetCollectionPublicType(Type type)
-        {
-            var dataModelCollectionInterface = (type as TypeInfo).ImplementedInterfaces.FirstOrDefault(p => p.Name == "IDataModelCollection`1");
-            if (dataModelCollectionInterface != null)
-            {
-                return dataModelCollectionInterface.GenericTypeArguments[0];
-            }
-
-            return null;
-        }
 
         private static Type GetEntityConcreteType(Type type)
         {

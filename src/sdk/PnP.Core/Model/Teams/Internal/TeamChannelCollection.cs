@@ -1,7 +1,6 @@
 ﻿using PnP.Core.QueryModel;
 using PnP.Core.Services;
 using System;
-using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 

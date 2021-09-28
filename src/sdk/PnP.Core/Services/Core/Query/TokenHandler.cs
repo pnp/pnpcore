@@ -1,5 +1,4 @@
-﻿using AngleSharp.Io.Dom;
-using PnP.Core.Model;
+﻿using PnP.Core.Model;
 using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -261,6 +260,11 @@ namespace PnP.Core.Services
                                             break;
                                         }
 
+                                        list = GetParentDataModel(listItem as IMetadataExtensible) as Model.SharePoint.IList;
+                                    }
+                                    else if (pnpObject is Model.SharePoint.IAttachment attachment)
+                                    {
+                                        listItem = GetParentDataModel(attachment as IMetadataExtensible) as Model.SharePoint.IListItem;
                                         list = GetParentDataModel(listItem as IMetadataExtensible) as Model.SharePoint.IList;
                                     }
                                 }

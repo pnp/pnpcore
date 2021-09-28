@@ -91,7 +91,7 @@ namespace PnP.Core.Model.SharePoint
             dynamic bodyQuery = new ExpandoObject();
             bodyQuery.query = innerQuery;
 
-            return JsonSerializer.Serialize(bodyQuery as ExpandoObject, new JsonSerializerOptions() { IgnoreNullValues = true });
+            return JsonSerializer.Serialize(bodyQuery as ExpandoObject, PnPConstants.JsonSerializer_IgnoreNullValues);
         }
 
         internal static IEnumerable<IChange> Deserialize(ApiCallResponse response, IDataModelParent parent, PnPContext context)

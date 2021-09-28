@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace PnP.Core.Services.Core.CSOM.Utils.Model
+﻿namespace PnP.Core.Services.Core.CSOM.Utils.Model
 {
     internal class ContentTypeCreationInfo
     {

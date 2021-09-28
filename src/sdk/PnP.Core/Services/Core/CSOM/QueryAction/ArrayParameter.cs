@@ -1,9 +1,7 @@
 ﻿using PnP.Core.Model.SharePoint;
 using PnP.Core.Model.SharePoint.Core.Internal;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace PnP.Core.Services.Core.CSOM.QueryAction
 {

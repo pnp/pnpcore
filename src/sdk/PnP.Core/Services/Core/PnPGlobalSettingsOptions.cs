@@ -53,7 +53,7 @@ namespace PnP.Core.Services
         /// <summary>
         /// Use the Retry-After header for calculating the delay in case of a retry. Defaults to false
         /// </summary>
-        public bool HttpSharePointRestUseRetryAfterHeader { get; set; }
+        public bool HttpSharePointRestUseRetryAfterHeader { get; set; } = true;
 
         /// <summary>
         /// Defines the default page size for querying items in SharePoint REST

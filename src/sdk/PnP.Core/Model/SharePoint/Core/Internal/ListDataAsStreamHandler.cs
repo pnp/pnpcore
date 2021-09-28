@@ -27,6 +27,8 @@ namespace PnP.Core.Model.SharePoint
 
             var result = new Dictionary<string, object>();
 
+            Dictionary<string, IField> fieldLookupCache = new Dictionary<string, IField>();
+
             var document = JsonSerializer.Deserialize<JsonElement>(json);
 
             // Process "non-rows" data
@@ -95,7 +97,7 @@ namespace PnP.Core.Model.SharePoint
                         var overflowDictionary = itemToUpdate.Values;
 
                         // Translate this row first into an object model for easier consumption
-                        var rowToProcess = TransformRowData(row, list.Fields);
+                        var rowToProcess = TransformRowData(row, list.Fields, fieldLookupCache);
 
                         foreach (var property in rowToProcess)
                         {
@@ -219,6 +221,10 @@ namespace PnP.Core.Model.SharePoint
                             (ct as IMetadataExtensible).Metadata.Add(PnPConstants.MetaDataType, "SP.ContentType");
                             (ct as ContentType).Requested = true;                            
                         }
+
+                        // Ensure the values are committed to the model when an item is being added: this
+                        // will ensure there's no pending changes anymore
+                        itemToUpdate.Values.Commit();
                     }
                 }
             }
@@ -226,13 +232,19 @@ namespace PnP.Core.Model.SharePoint
             return result;
         }
 
-        private static List<ListDataAsStreamProperty> TransformRowData(JsonElement row, IFieldCollection fields)
+        private static List<ListDataAsStreamProperty> TransformRowData(JsonElement row, IFieldCollection fields, Dictionary<string, IField> fieldLookupCache)
         {
             List<ListDataAsStreamProperty> properties = new List<ListDataAsStreamProperty>();
 
             foreach (var property in row.EnumerateObject())
-            {                
-                var field = fields.AsRequested().FirstOrDefault(p => p.InternalName == property.Name);
+            {
+                // Doing the field lookup is expensive given it happens per field/row, caching drastically improves performance when reading large sets of items
+                if (!fieldLookupCache.TryGetValue(property.Name, out IField field))
+                {
+                    field = fields.AsRequested().FirstOrDefault(p => p.InternalName == property.Name);
+                    fieldLookupCache.Add(property.Name, field);
+                }               
+
                 if (field != null)
                 {
                     var streamProperty = new ListDataAsStreamProperty()
@@ -428,7 +440,6 @@ namespace PnP.Core.Model.SharePoint
                     {
                         string[] nameParts = property.Name.Split(new char[] { '.' });
 
-                        var field2 = fields.AsRequested().FirstOrDefault(p => p.InternalName == nameParts[0]);
                         var propertyToUpdate = properties.FirstOrDefault(p => p.Name == nameParts[0]);
                         if (propertyToUpdate != null && propertyToUpdate.Values.Count == 1 && !string.IsNullOrEmpty(nameParts[1]))
                         {
@@ -446,6 +457,12 @@ namespace PnP.Core.Model.SharePoint
                         else if (propertyToUpdate != null && !string.IsNullOrEmpty(nameParts[1]))
                         {
                             //"Bool1.value": "1",
+
+                            if (!fieldLookupCache.TryGetValue(nameParts[0], out IField field2))
+                            {
+                                field2 = fields.AsRequested().FirstOrDefault(p => p.InternalName == nameParts[0]);
+                                fieldLookupCache.Add(nameParts[0], field2);
+                            }
 
                             // Extra properties on "regular" fields
                             if (field2 != null && field2.FieldTypeKind == FieldType.Boolean && nameParts[1] == "value")

@@ -1,6 +1,5 @@
 using PnP.Core.Model.SharePoint;
 using PnP.Core.Services;
-using System.Linq;
 
 namespace PnP.Core.Model.Security
 {
@@ -16,6 +15,9 @@ namespace PnP.Core.Model.Security
 
         [KeyProperty(nameof(PrincipalId))]
         public override object Key { get => PrincipalId; set => PrincipalId = int.Parse(value.ToString()); }
+
+        [SharePointProperty("*")]
+        public object All { get => null; }
 
         public RoleAssignment()
         {
