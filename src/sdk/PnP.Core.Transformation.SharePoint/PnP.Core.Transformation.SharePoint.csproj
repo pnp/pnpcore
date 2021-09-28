@@ -70,11 +70,14 @@
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
   </ItemGroup>
 
-  <ItemGroup>
-    <None Include="nugeticon.png" />
-  </ItemGroup>
+	<ItemGroup>
+		<None Include="nugeticon.png">
+			<Pack>True</Pack>
+			<PackagePath></PackagePath>
+		</None>
+	</ItemGroup>
 
-  <ItemGroup>
+	<ItemGroup>
     <ProjectReference Include="..\PnP.Core.Transformation\PnP.Core.Transformation.csproj" />
   </ItemGroup>
 
