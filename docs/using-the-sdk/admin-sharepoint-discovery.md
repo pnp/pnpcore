@@ -1,4 +1,4 @@
-# SharePoint discovery
+# Discovery
 
 The Core SDK Admin library provides support for discovering relevant information of the SharePoint Online tenant that's being used.
 

@@ -1,4 +1,4 @@
-# SharePoint Site Collections
+# Sites
 
 The Core SDK Admin library provides SharePoint Admin security related APIs for enumerating, creating, updating and deleting site collections.
 

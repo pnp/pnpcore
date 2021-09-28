@@ -1,4 +1,4 @@
-# SharePoint admin security
+# Security
 
 The Core SDK Admin library provides SharePoint Admin security related APIs like listing the SharePoint Tenant admins and more.
 
