@@ -21,10 +21,10 @@ namespace Microsoft.Extensions.DependencyInjection
         }
 
         /// <summary>
-        /// Configures PnP Core SDK with default options
+        /// Configures PnP Core SDK with custom options
         /// </summary>
         /// <param name="services">The collection of services in an <see cref="IServiceCollection" /></param>
-        /// <param name="options">An Action to configure the Authentication options</param>
+        /// <param name="options">An Action to configure the PnP Core options</param>
         /// <returns>A PnPCoreBuilder instance</returns>
         public static IPnPCoreBuilder AddPnPCore(this IServiceCollection services,
             Action<PnPCoreOptions> options)
