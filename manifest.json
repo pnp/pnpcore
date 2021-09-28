@@ -5163,6 +5163,78 @@
     },
     {
       "type": "Conceptual",
+      "source_relative_path": "using-the-sdk/admin-m365-multigeo.md",
+      "output": {
+        ".html": {
+          "relative_path": "using-the-sdk/admin-m365-multigeo.html",
+          "hash": "uQAVc7Yr2T8PZ2GBSmeTIQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "using-the-sdk/admin-m365-security.md",
+      "output": {
+        ".html": {
+          "relative_path": "using-the-sdk/admin-m365-security.html",
+          "hash": "5oMvsIoavrwcAo/SY9BdXw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "using-the-sdk/admin-sharepoint-apps.md",
+      "output": {
+        ".html": {
+          "relative_path": "using-the-sdk/admin-sharepoint-apps.html",
+          "hash": "DsJveZboE6ox9FqqyNvydA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "using-the-sdk/admin-sharepoint-discovery.md",
+      "output": {
+        ".html": {
+          "relative_path": "using-the-sdk/admin-sharepoint-discovery.html",
+          "hash": "JhzLNnoXFymKK3+ay3xJHQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "using-the-sdk/admin-sharepoint-security.md",
+      "output": {
+        ".html": {
+          "relative_path": "using-the-sdk/admin-sharepoint-security.html",
+          "hash": "aha10fTJWdFeOo3/vAJCPQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "using-the-sdk/admin-sharepoint-sites.md",
+      "output": {
+        ".html": {
+          "relative_path": "using-the-sdk/admin-sharepoint-sites.html",
+          "hash": "QZdMrYXb5KDRrdXl9+djIw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
       "source_relative_path": "using-the-sdk/basics-addupdatedelete.md",
       "output": {
         ".html": {
@@ -5432,6 +5504,30 @@
         ".html": {
           "relative_path": "using-the-sdk/fragments/creating-context.html",
           "hash": "qx8AsepyyMV+JKEO5xlSgw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "using-the-sdk/fragments/setup-admin-m365.md",
+      "output": {
+        ".html": {
+          "relative_path": "using-the-sdk/fragments/setup-admin-m365.html",
+          "hash": "XHAPdwRnxJm60+zdyF8Nuw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "using-the-sdk/fragments/setup-admin-sharepoint.md",
+      "output": {
+        ".html": {
+          "relative_path": "using-the-sdk/fragments/setup-admin-sharepoint.html",
+          "hash": "1FivZWzl+Y9y2OY/WMBgFg=="
         }
       },
       "is_incremental": false,
@@ -5719,7 +5815,7 @@
       "output": {
         ".html": {
           "relative_path": "using-the-sdk/toc.html",
-          "hash": "QOjZ5w8/v1nD0CM9PovANA=="
+          "hash": "HpJJ5Vom916YEWYUjWVnkA=="
         }
       },
       "is_incremental": false,
@@ -5764,7 +5860,7 @@
         "ConceptualDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build",
-          "total_file_count": 69,
+          "total_file_count": 77,
           "skipped_file_count": 0
         },
         "ManagedReferenceDocumentProcessor": {
