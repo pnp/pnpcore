@@ -4,7 +4,7 @@
     <TargetFrameworks>netstandard2.0;net5.0</TargetFrameworks>
     <LangVersion>8.0</LangVersion>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
-    <Copyright>PnP 2020</Copyright>
+    <Copyright>PnP 2021</Copyright>
     <Company>PnP</Company>
     <Authors>PnP</Authors>
     <Description>The PnP Core Transformation library supports provides a set of tools for the PnP Transformation Framework. Internally it is based on PnP.Core and PnP.Core.Auth.</Description>
@@ -21,7 +21,7 @@
     <Configurations>Debug;Release</Configurations>
     <PackageIcon>nugeticon.png</PackageIcon>
     <SignAssembly>true</SignAssembly>
-    <AssemblyOriginatorKeyFile>pnp.core.snk</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>..\pnp.core.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
@@ -64,13 +64,10 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.Extensions.Logging" Version="5.0.0" />
-    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="5.0.0" />
-    <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="5.0.0" />
-    <PackageReference Include="Microsoft.SharePointOnline.CSOM" Version="16.1.21610.12000" />
+	<PackageReference Include="Microsoft.Extensions.Logging.Console" Version="5.0.0" />
+    <PackageReference Include="Microsoft.SharePointOnline.CSOM" Version="16.1.*" />
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0-*" PrivateAssets="All" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
-    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.12.2" />
-    <PackageReference Include="System.Text.Json" Version="5.0.2" />
   </ItemGroup>
 
   <ItemGroup>

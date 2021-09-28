@@ -6,7 +6,7 @@
     <RootNamespace>PnP.Core.Transformation</RootNamespace>
     <AssemblyName>PnP.Core.Transformation</AssemblyName>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
-    <Copyright>PnP 2020</Copyright>
+    <Copyright>PnP 2021</Copyright>
     <Company>PnP</Company>
     <Authors>PnP</Authors>
     <Description>The PnP Core Transformation library supports provides a set of tools for the PnP Transformation Framework. Internally it is based on PnP.Core and PnP.Core.Auth.</Description>
@@ -23,7 +23,7 @@
     <Configurations>Debug;Release</Configurations>
     <PackageIcon>nugeticon.png</PackageIcon>
     <SignAssembly>true</SignAssembly>
-    <AssemblyOriginatorKeyFile>pnp.core.snk</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>..\pnp.core.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
@@ -47,31 +47,6 @@
     <DocumentationFile>obj\Debug\PnP.Core.Transformation.xml</DocumentationFile>
     <ContinuousIntegrationBuild>True</ContinuousIntegrationBuild>
   </PropertyGroup>
-
-  <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard2.0' ">
-    <PackageReference Include="Microsoft.ApplicationInsights" Version="2.13.1" />
-    <PackageReference Include="Microsoft.Bcl.AsyncInterfaces" Version="1.1.1" />
-    <PackageReference Include="Microsoft.Extensions.Caching.Abstractions" Version="2.2.0" />
-    <PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="2.2.0" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="2.2.0" />
-    <PackageReference Include="Microsoft.Extensions.Http" Version="2.2.0" />
-    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="2.2.0" />
-    <PackageReference Include="Microsoft.Extensions.Options" Version="2.2.0" />
-    <PackageReference Include="System.Configuration.ConfigurationManager" Version="4.7.0" />
-    <PackageReference Include="System.Text.Json" Version="4.7.2" />
-  </ItemGroup>
-
-  <ItemGroup Condition=" '$(TargetFramework)' == 'net5.0' ">
-    <PackageReference Include="Microsoft.ApplicationInsights" Version="2.16.0" />
-    <PackageReference Include="Microsoft.Extensions.Caching.Abstractions" Version="5.0.0" />
-    <PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="5.0.0" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="5.0.0" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="5.0.0" />
-    <PackageReference Include="Microsoft.Extensions.Http" Version="5.0.0" />
-    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="5.0.0" />
-    <PackageReference Include="Microsoft.Extensions.Options" Version="5.0.0" />
-    <PackageReference Include="System.Configuration.ConfigurationManager" Version="5.0.0" />
-  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="3.3.1">
