@@ -5,9 +5,9 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Microsoft 365 security | PnP Core SDK </title>
+    <title>Security | PnP Core SDK </title>
     <meta name="viewport" content="width=device-width">
-    <meta name="title" content="Microsoft 365 security | PnP Core SDK ">
+    <meta name="title" content="Security | PnP Core SDK ">
     <meta name="generator" content="docfx 2.56.5.0">
     <meta name="description" content="The PnP Core SDK is a modern .NET SDK designed to work for Microsoft 365. It provides a unified object model for working with SharePoint Online and Teams which is agnostic to the underlying API's being called.">
     <link rel="shortcut icon" href="https://c.s-microsoft.com/favicon.ico?v2">
@@ -80,7 +80,7 @@
                   <div class="contribution-panel mobile-hide pull-right">
                       <a href="https://github.com/pnp/pnpcore/blob/dev/docs/using-the-sdk/admin-m365-security.md/#L1" title="Improve this Doc" class="improve-doc-lg"><i class="glyphicon glyphicon-pencil"></i></a>
                   </div>
-                    <h1 id="microsoft-365-security">Microsoft 365 security</h1>
+                    <h1 id="security">Security</h1>
 
 <p>The Core SDK Admin library provides Microsoft 365 Admin APIs for working with security like for example understanding if the current access token has certain permissions or uses for example application permissions.</p>
 <h2 id="creating-context">Creating Context</h2>
@@ -100,7 +100,47 @@
 }
 </code></pre>
 <h2 id="verify-if-youre-running-using-application-permissions">Verify if you're running using Application permissions</h2>
-<p>todo</p>
+<p>If you're application supports application and delegated permissions you might want to know whether the current user/app is using application permissions. This can be checked via the <code>AccessTokenUsesApplicationPermissions</code> methods.</p>
+<pre><code class="lang-csharp">if (await context.GetMicrosoft365Admin().AccessTokenUsesApplicationPermissionsAsync())
+{
+    // We're using application permissions
+}
+else
+{
+    // We're using delegated permissions
+}
+</code></pre>
+<h2 id="verify-if-the-current-access-token-has-a-specific-scope-or-role">Verify if the current access token has a specific scope or role</h2>
+<p>When using application permissions and access token contains one or more roles that identify the permissions granted to the app for which the access token was issued. Using the <code>AccessTokenHasRole</code> methods you can verify that.</p>
+<div class="NOTE">
+<h5>Note</h5>
+<p>This method checks for the actual granted role, so if you check for <code>Sites.Read.All</code> and the token contains <code>Sites.Manage.All</code> then the check will return false.</p>
+</div>
+<p>Sample code:</p>
+<pre><code class="lang-csharp">if (await context.GetMicrosoft365Admin().AccessTokenHasRoleAsync(&quot;Sites.Read.All&quot;))
+{
+    // We have the needed permissions, let's continue
+}
+else
+{
+    // Oops...
+}
+</code></pre>
+<p>When using delegated permissions and access token contains one or more scopes that identify the permissions granted to the app+user for which the access token was issued. Using the <code>AccessTokenHasScope</code> methods you can verify that.</p>
+<div class="NOTE">
+<h5>Note</h5>
+<p>This method checks for the actual granted role, so if you check for <code>Sites.Read.All</code> and the token contains <code>Sites.Manage.All</code> then the check will return false.</p>
+</div>
+<p>Sample code:</p>
+<pre><code class="lang-csharp">if (await context.GetMicrosoft365Admin().AccessTokenHasScopeAsync(&quot;Sites.Read.All&quot;))
+{
+    // We have the needed permissions, let's continue
+}
+else
+{
+    // Oops...
+}
+</code></pre>
 </article>
           </div>
           <div class="hidden-sm col-md-2" role="complementary">

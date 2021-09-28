@@ -5,9 +5,9 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Multi geo | PnP Core SDK </title>
+    <title>Multi-Geo | PnP Core SDK </title>
     <meta name="viewport" content="width=device-width">
-    <meta name="title" content="Multi geo | PnP Core SDK ">
+    <meta name="title" content="Multi-Geo | PnP Core SDK ">
     <meta name="generator" content="docfx 2.56.5.0">
     <meta name="description" content="The PnP Core SDK is a modern .NET SDK designed to work for Microsoft 365. It provides a unified object model for working with SharePoint Online and Teams which is agnostic to the underlying API's being called.">
     <link rel="shortcut icon" href="https://c.s-microsoft.com/favicon.ico?v2">
@@ -80,7 +80,7 @@
                   <div class="contribution-panel mobile-hide pull-right">
                       <a href="https://github.com/pnp/pnpcore/blob/dev/docs/using-the-sdk/admin-m365-multigeo.md/#L1" title="Improve this Doc" class="improve-doc-lg"><i class="glyphicon glyphicon-pencil"></i></a>
                   </div>
-                    <h1 id="multi-geo">Multi geo</h1>
+                    <h1 id="multi-geo">Multi-Geo</h1>
 
 <p>The Core SDK Admin library provides Microsoft 365 Admin APIs for understanding the multi-geo setup of a tenant.</p>
 <h2 id="creating-context">Creating Context</h2>
@@ -100,7 +100,30 @@
 }
 </code></pre>
 <h2 id="discover-if-a-tenant-is-a-multi-geo-tenant">Discover if a tenant is a multi-geo tenant</h2>
-<p>todo</p>
+<p>Most tenants are single geo, meaning their data lives in one region. If the tenant you're working with is multi-geo it's data is spread over two or more geo locations, for example the tenant can have SharePoint and Teams data hosted in Europe and in the US. Each geo location will have it's own Tenant Admin Center site, it's own personal and portal site hosts and more. If you want to find out if the tenant you're working with supports multiple geo's you can use the <code>IsMultiGeoTenant</code> methods:</p>
+<pre><code class="lang-csharp">if (await context.GetMicrosoft365Admin().IsMultiGeoTenantAsync())
+{
+    // Enumerate geo locations and perform admin task per geo
+}
+else
+{
+    // Perform admin task for the tenant
+}
+</code></pre>
+<h2 id="listing-the-geo-locations-of-a-tenant">Listing the geo locations of a tenant</h2>
+<p>If you want to understand the multi-geo setup of a tenant then using the <code>GetMultiGeoLocations</code> methods will give you the needed details. These methods will return the key information per geo location in the tenant. The returned data includes:</p>
+<ul>
+<li>Data location code: a <a href="https://docs.microsoft.com/en-us/microsoft-365/enterprise/plan-for-multi-geo?view=o365-worldwide">code identifying a geo location</a></li>
+<li>SharePoint Tenant Admin Center url</li>
+<li>SharePoint Portal url</li>
+<li>SharePoint my site host url</li>
+</ul>
+<p>Below sample shows how to use the <code>GetMultiGeoLocations</code> methods:</p>
+<pre><code class="lang-csharp">foreach(IGeoLocation location in await context.GetMicrosoft365Admin().GetMultiGeoLocationsAsync())
+{
+    // Do admin work per geo location
+}
+</code></pre>
 </article>
           </div>
           <div class="hidden-sm col-md-2" role="complementary">
