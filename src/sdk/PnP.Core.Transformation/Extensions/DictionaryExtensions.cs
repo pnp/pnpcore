@@ -5,9 +5,9 @@ namespace PnP.Core.Transformation.Extensions
     /// <summary>
     /// Extension class to provide additional functionalities on top of Dictionary<TKey, TValue></TKey>
     /// </summary>
-    public static class DictionaryExtensions
+    internal static class DictionaryExtensions
     {
-        public static Dictionary<TKey, TValue> Merge<TKey, TValue>(this Dictionary<TKey, TValue> source, Dictionary<TKey, TValue> merger)
+        internal static Dictionary<TKey, TValue> Merge<TKey, TValue>(this Dictionary<TKey, TValue> source, Dictionary<TKey, TValue> merger)
         {
             var result = new Dictionary<TKey, TValue>();
 

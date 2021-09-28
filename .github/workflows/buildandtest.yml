@@ -59,9 +59,9 @@ jobs:
         pnpcoresdktestuser: ${{ secrets.PNPCORESDKTESTUSER }}
         pnpcoresdktestuserpassword: ${{ secrets.PNPCORESDKTESTUSERPASSWORD }}
       run: |
-        dotnet test .\PnP.Core.Test\PnP.Core.Test.csproj --no-restore --verbosity normal --collect:"XPlat Code Coverage"
-        dotnet test .\PnP.Core.Auth.Test\PnP.Core.Auth.Test.csproj --no-restore --verbosity normal --collect:"XPlat Code Coverage"
-        dotnet test .\PnP.Core.Admin.Test\PnP.Core.Admin.Test.csproj --no-restore --verbosity normal --collect:"XPlat Code Coverage"
+        dotnet test ./PnP.Core.Test/PnP.Core.Test.csproj --no-restore --verbosity normal --collect:"XPlat Code Coverage"
+        dotnet test ./PnP.Core.Auth.Test/PnP.Core.Auth.Test.csproj --no-restore --verbosity normal --collect:"XPlat Code Coverage"
+        dotnet test ./PnP.Core.Admin.Test/PnP.Core.Admin.Test.csproj --no-restore --verbosity normal --collect:"XPlat Code Coverage"
       working-directory: src/sdk    
     - name: Upload coverage to Codecov 📝
       uses: codecov/codecov-action@v2
