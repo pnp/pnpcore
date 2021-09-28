@@ -63,5 +63,11 @@ namespace PnP.Core.Model.SharePoint
         /// <param name="value">Property value</param>
         public void AddProperty(string key, string value);
 
+        /// <summary>
+        /// Gets all terms with this property.
+        /// </summary>
+        /// <param name="key">Property key</param>
+        /// <param name="value">Property value</param>
+        public ITermCollection GetTermsByCustomProperty(string key, string value);
     }
 }

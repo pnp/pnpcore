@@ -164,6 +164,22 @@ namespace PnP.Core.Model.SharePoint
                 (Properties as TermSetPropertyCollection).Add(new TermSetProperty() { KeyField = key, Value = value });
             }
         }
+
+        public ITermCollection GetTermsByCustomProperty(string key, string value)
+        {
+            if (string.IsNullOrEmpty(key))
+            {
+                throw new ArgumentNullException(nameof(key));
+            }
+
+            if (value == null)
+            {
+                throw new ArgumentNullException(nameof(value));
+            }
+
+            //throw new NotImplementedException();
+            return null;
+        }
         #endregion
     }
 }
