@@ -74,7 +74,7 @@ namespace PnP.Core.Services.Core.CSOM.QueryAction
         }
     }
 
-    internal class ObjectReferenceParameter : Parameter 
+    internal class ObjectReferenceParameter : Parameter
     {
         internal int ObjectPathId { get; set; }
 
@@ -82,6 +82,27 @@ namespace PnP.Core.Services.Core.CSOM.QueryAction
         {
             return $"<Parameter ObjectPathId=\"{ObjectPathId}\" />";
         }
+    }
+
+    internal class ChildItemQuery
+    {
+        internal bool SelectAllProperties { get; set; }
+        internal List<Property> Properties { get; set; }
+
+        public override string ToString()
+        {
+            if (SelectAllProperties)
+            {
+                return $"<ChildItemQuery SelectAllProperties=\"{SelectAllProperties.ToString().ToLower()}\"><Properties /></ChildItemQuery>";
+            }
+            else
+            {
+                string properties = string.Join("", Properties.Select(value => $"<Property Name=\"{value.Name}\" ScalarProperty=\"true\" />"));
+                return $"<ChildItemQuery SelectAllProperties=\"{SelectAllProperties.ToString().ToLower()}\"><Properties>{properties}</Properties></ChildItemQuery>";
+            }
+        }
+
+
     }
 
     internal class SelectQuery
