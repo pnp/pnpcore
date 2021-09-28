@@ -56,7 +56,6 @@
 		</PackageReference>
 		<PackageReference Include="Microsoft.Identity.Client" Version="4.36.1" />
 		<PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0-*" PrivateAssets="All" />
-		<PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.12.2" />
 	</ItemGroup>
 
 	<ItemGroup>
