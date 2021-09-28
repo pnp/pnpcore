@@ -18,6 +18,6 @@ namespace PnP.Core.Transformation.Services.Builder.Configuration
         /// </summary>
         public string PersistenceProviderConnectionString { get; set; }
 
-        // TODO: Remember to define all the needed configuration settings
+        // TODO: Here we can configure all the "generic" configuration settings for the engine
     }
 }

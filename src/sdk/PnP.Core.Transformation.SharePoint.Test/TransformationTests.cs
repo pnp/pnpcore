@@ -20,25 +20,28 @@ namespace PnP.Core.Transformation.SharePoint.Test
 
             var services = new ServiceCollection();
             services.AddTestPnPCore();
+
+            // You can use the default settings
             // services.AddPnPSharePointTransformation();
+
+            // Or you can provide a set of custom settings
             services.AddPnPSharePointTransformation(
-                pnpOptions =>
+                pnpOptions => // Global settings
                 {
                     pnpOptions.DisableTelemetry = false;
                     pnpOptions.PersistenceProviderConnectionString = config["PersistenceProviderConnectionString"];
                 },
-                pageOptions =>
+                pageOptions => // Target modern page creation settings
                 {
                     pageOptions.CopyPageMetadata = true;
                     pageOptions.KeepPageCreationModificationInformation = true;
                     pageOptions.PostAsNews = false;
                     pageOptions.PublishPage = false;
                 },
-                spOptions =>
+                spOptions => // SharePoint classic source settings
                 {
-                    //spOptions.WebPartMappingFile = config["WebPartMappingFile"];
-                    //spOptions.PageLayoutMappingFile = config["PageLayoutMappingFile"];
-                    spOptions.CopyPageMetadata = true;
+                    // spOptions.WebPartMappingFile = config["WebPartMappingFile"];
+                    // spOptions.PageLayoutMappingFile = config["PageLayoutMappingFile"];
                     spOptions.KeepPageSpecificPermissions = true;
                     spOptions.RemoveEmptySectionsAndColumns = true;
                     spOptions.ShouldMapUsers = true;

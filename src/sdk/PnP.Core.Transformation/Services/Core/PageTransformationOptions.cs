@@ -6,7 +6,7 @@ using System.Text;
 namespace PnP.Core.Transformation.Services.Core
 {
     /// <summary>
-    /// Defines the options to transform a page
+    /// Defines the options to transform a page into a SharePoint Online modern page
     /// </summary>
     public class PageTransformationOptions
     {
@@ -26,16 +26,6 @@ namespace PnP.Core.Transformation.Services.Core
         /// Set this property to true in case you want to retain the page's Author/Editor/Created/Modified fields. Note that a page publish will always set Editor/Modified. Defaults to false.
         /// </summary>
         public bool KeepPageCreationModificationInformation { get; set; }
-
-        /// <summary>
-        /// Defines whether to remove empty sections and columns to optimize screen real estate or not. Defaults to false.
-        /// </summary>
-        public bool RemoveEmptySectionsAndColumns { get; set; }
-
-        /// <summary>
-        /// Defines whether to transform hidden web parts or not. Defaults to false.
-        /// </summary>
-        public bool SkipHiddenWebParts { get; set; }
 
         /// <summary>
         /// Defines whether the target page will be automatically published. Defaults to true.
@@ -85,11 +75,6 @@ namespace PnP.Core.Transformation.Services.Core
         /// Prefix used to name the target page.
         /// </summary>
         public string TargetPagePrefix { get; set; } = "Migrated_";
-
-        /// <summary>
-        /// Prefix used to rename the source page. Used in conjunction with TargetPageName.
-        /// </summary>
-        public string SourcePagePrefix { get; set; }
 
         /// <summary>
         /// Copy the page metadata (if any) to the created modern client side page. Defaults to false.

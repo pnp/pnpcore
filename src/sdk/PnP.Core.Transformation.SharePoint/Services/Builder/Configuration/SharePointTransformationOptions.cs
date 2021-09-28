@@ -45,11 +45,6 @@ namespace PnP.Core.Transformation.SharePoint.Services.Builder.Configuration
         public bool RemoveEmptySectionsAndColumns { get; set; }
 
         /// <summary>
-        /// Defines whether to copy metadata onto the target page
-        /// </summary>
-        public bool CopyPageMetadata { get; set; }
-
-        /// <summary>
         /// Defines whether to map users or not
         /// </summary>
         public bool ShouldMapUsers { get; set; }
@@ -59,6 +54,11 @@ namespace PnP.Core.Transformation.SharePoint.Services.Builder.Configuration
         /// else they'll get a placeholder and will be added as separate web parts at the end of the page
         /// </summary>
         public bool HandleWikiImagesAndVideos { get; set; } = true;
+
+        /// <summary>
+        /// Defines whether to transform hidden web parts or not. Defaults to false.
+        /// </summary>
+        public bool SkipHiddenWebParts { get; set; }
 
         /// <summary>
         /// When an image lives inside a table (or list) then also add it as a separate image web part

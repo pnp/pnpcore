@@ -52,7 +52,8 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
         }
 
         private ILogger<SharePointMappingProvider> logger;
-        private readonly IOptions<SharePointTransformationOptions> options;
+        private readonly IOptions<SharePointTransformationOptions> spOptions;
+        private readonly IOptions<PageTransformationOptions> pageOptions;
         private readonly IMemoryCache memoryCache;
         private readonly IServiceProvider serviceProvider;
         private readonly TokenParser tokenParser;
@@ -63,14 +64,17 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
         /// Main constructor for the mapping provider
         /// </summary>
         /// <param name="logger">Logger for tracing activities</param>
-        /// <param name="options">Configuration options</param>
+        /// <param name="spOptions">SharePoint configuration options</param>
+        /// <param name="pageOptions">Target page configuration options</param>
         /// <param name="serviceProvider">Service provider</param>
         public SharePointMappingProvider(ILogger<SharePointMappingProvider> logger,
-            IOptions<SharePointTransformationOptions> options,
+            IOptions<SharePointTransformationOptions> spOptions,
+            IOptions<PageTransformationOptions> pageOptions,
             IServiceProvider serviceProvider)
         {
             this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
-            this.options = options ?? throw new ArgumentNullException(nameof(options));
+            this.spOptions = spOptions ?? throw new ArgumentNullException(nameof(spOptions));
+            this.pageOptions = pageOptions ?? throw new ArgumentNullException(nameof(pageOptions));
             this.serviceProvider = serviceProvider;
 
             this.memoryCache = this.serviceProvider.GetService<IMemoryCache>();
@@ -231,7 +235,7 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
             RemoveEmptyTextParts(result.TargetPage);
 
             // Remove empty sections and columns to optimize screen real estate
-            if (options.Value.RemoveEmptySectionsAndColumns)
+            if (spOptions.Value.RemoveEmptySectionsAndColumns)
             {
                 RemoveEmptySectionsAndColumns(result.TargetPage);
             }
@@ -240,7 +244,7 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
 
             #region Handle page metadata
 
-            if (options.Value.CopyPageMetadata)
+            if (pageOptions.Value.CopyPageMetadata)
             {
                 // Copy the source page metadata 
                 var metadata = await LoadSourcePageMetadataAsync(pageItem).ConfigureAwait(false);
@@ -254,7 +258,7 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
 
             #region Handle page permissions
 
-            if (options.Value.KeepPageSpecificPermissions)
+            if (spOptions.Value.KeepPageSpecificPermissions)
             {
                 // Copy the source page item level permissions                 
                 result.Permissions = GetItemLevelPermissions(sourceContext, pageItem);
@@ -1095,10 +1099,10 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
                 result = SourcePageType.WebPartPage;
 
                 // Item level permission copy makes no sense here
-                this.options.Value.KeepPageSpecificPermissions = false;
+                this.spOptions.Value.KeepPageSpecificPermissions = false;
 
                 // Same for swap pages, we don't support this as the pages live in a different location
-                this.options.Value.TargetPageTakesSourcePageName = false;
+                this.spOptions.Value.TargetPageTakesSourcePageName = false;
             }
             else
             {
@@ -1265,7 +1269,7 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
                     // Skip Microsoft.SharePoint.WebPartPages.TitleBarWebPart webpart in TitleBar zone
                     if (foundWebPart.WebPartDefinition.ZoneId.Equals("TitleBar", StringComparison.InvariantCultureIgnoreCase))
                     {
-                        if (!options.Value.IncludeTitleBarWebPart)
+                        if (!spOptions.Value.IncludeTitleBarWebPart)
                         {
                             continue;
                         }
@@ -1288,7 +1292,7 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
                     // Skip Microsoft.SharePoint.WebPartPages.TitleBarWebPart webpart in TitleBar zone
                     if (foundWebPart.WebPartDefinition.ZoneId.Equals("TitleBar", StringComparison.InvariantCultureIgnoreCase))
                     {
-                        if (!options.Value.IncludeTitleBarWebPart)
+                        if (!spOptions.Value.IncludeTitleBarWebPart)
                         {
                             continue;
                         }
@@ -1396,7 +1400,7 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
                     // Skip Microsoft.SharePoint.WebPartPages.TitleBarWebPart webpart in TitleBar zone
                     if (foundWebPart.WebPartDefinition.ZoneId.Equals("TitleBar", StringComparison.InvariantCultureIgnoreCase))
                     {
-                        if (!options.Value.IncludeTitleBarWebPart)
+                        if (!spOptions.Value.IncludeTitleBarWebPart)
                         {
                             continue;
                         }
@@ -1416,7 +1420,7 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
                     // TODO: Let's see if we can optimize this foreach and the previous one merging them into a unique one
                     if (foundWebPart.WebPartDefinition.ZoneId.Equals("TitleBar", StringComparison.InvariantCultureIgnoreCase))
                     {
-                        if (!options.Value.IncludeTitleBarWebPart)
+                        if (!spOptions.Value.IncludeTitleBarWebPart)
                         {
                             continue;
                         }
@@ -3165,7 +3169,7 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
 
             // Load the mapping configuration
             WebPartMapping mappingFile = ((SharePointWebPartMappingProvider)webPartMappingProvider)
-                .LoadMappingFile(this.options.Value.WebPartMappingFile);
+                .LoadMappingFile(this.spOptions.Value.WebPartMappingFile);
 
             Dictionary<string, string> propertiesToKeep = new Dictionary<string, string>();
 

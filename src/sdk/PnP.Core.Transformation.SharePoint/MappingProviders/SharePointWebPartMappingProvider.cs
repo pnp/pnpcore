@@ -31,7 +31,7 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
     public class SharePointWebPartMappingProvider : IWebPartMappingProvider
     {
         private ILogger<SharePointWebPartMappingProvider> logger;
-        private readonly IOptions<SharePointTransformationOptions> options;
+        private readonly IOptions<SharePointTransformationOptions> spOptions;
         private readonly IServiceProvider serviceProvider;
         private readonly IMemoryCache memoryCache;
         private readonly FunctionProcessor functionProcessor;
@@ -40,16 +40,16 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
         /// Main constructor for the mapping provider
         /// </summary>
         /// <param name="logger">Logger for tracing activities</param>
-        /// <param name="options">Configuration options</param>
+        /// <param name="spOptions">Configuration options</param>
         /// <param name="functionProcessor">The SharePoint Function processor</param>
         /// <param name="serviceProvider">Service provider</param>
         public SharePointWebPartMappingProvider(ILogger<SharePointWebPartMappingProvider> logger, 
-            IOptions<SharePointTransformationOptions> options,
+            IOptions<SharePointTransformationOptions> spOptions,
             FunctionProcessor functionProcessor,
             IServiceProvider serviceProvider)
         {
             this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
-            this.options = options ?? throw new ArgumentNullException(nameof(options));
+            this.spOptions = spOptions ?? throw new ArgumentNullException(nameof(spOptions));
             this.functionProcessor = functionProcessor ?? throw new ArgumentNullException(nameof(functionProcessor));
             this.serviceProvider = serviceProvider;
             this.memoryCache = this.serviceProvider.GetService<IMemoryCache>();
@@ -92,7 +92,7 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
             }
 
             // Load the mapping configuration
-            WebPartMapping mappingFile = LoadMappingFile(this.options.Value.WebPartMappingFile);
+            WebPartMapping mappingFile = LoadMappingFile(this.spOptions.Value.WebPartMappingFile);
 
             var sourceItem = input.Context.SourceItem as SharePointSourceItem;
 
@@ -220,16 +220,6 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
         private Dictionary<string, string> PrepareGlobalTokens()
         {
             Dictionary<string, string> globalTokens = new Dictionary<string, string>(5);
-
-            //var url = cc.Web.GetUrl();
-            //Uri hostUri = new Uri(url);
-
-            //// Add the fixed properties
-            //globalTokens.Add("Host", $"{hostUri.Scheme}://{hostUri.DnsSafeHost}");
-            //globalTokens.Add("Web", cc.Web.ServerRelativeUrl.TrimEnd('/'));
-            //globalTokens.Add("SiteCollection", cc.Site.RootWeb.ServerRelativeUrl.TrimEnd('/'));
-            //globalTokens.Add("WebId", cc.Web.Id.ToString());
-            //globalTokens.Add("SiteId", cc.Site.Id.ToString());
 
             // Add the fixed properties tokens
             globalTokens.Add("Host", "{Host}");
