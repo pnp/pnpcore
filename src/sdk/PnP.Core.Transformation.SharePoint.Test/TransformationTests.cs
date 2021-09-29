@@ -37,15 +37,15 @@ namespace PnP.Core.Transformation.SharePoint.Test
                     pageOptions.KeepPageCreationModificationInformation = true;
                     pageOptions.PostAsNews = false;
                     pageOptions.PublishPage = false;
-                    //pageOptions.DisablePageComments = false;
-                    //pageOptions.KeepPageSpecificPermissions = true;
-                    //pageOptions.Overwrite = true;
-                    //pageOptions.ReplaceHomePageWithDefaultHomePage = true;
-                    //pageOptions.SetAuthorInPageHeader = true;
-                    //pageOptions.TargetPageFolder = "";
-                    //pageOptions.TargetPageName = "";
-                    //pageOptions.TargetPagePrefix = "";
-                    //pageOptions.TargetPageTakesSourcePageName = true;
+                    pageOptions.DisablePageComments = false;
+                    pageOptions.KeepPageSpecificPermissions = true;
+                    pageOptions.Overwrite = true;
+                    pageOptions.ReplaceHomePageWithDefaultHomePage = true;
+                    pageOptions.SetAuthorInPageHeader = true;
+                    pageOptions.TargetPageFolder = "";
+                    pageOptions.TargetPageName = "";
+                    pageOptions.TargetPagePrefix = "";
+                    pageOptions.TargetPageTakesSourcePageName = true;
                 },
                 spOptions => // SharePoint classic source settings
                 {

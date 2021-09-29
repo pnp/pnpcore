@@ -20,28 +20,28 @@ namespace PnP.Core.Transformation.SharePoint.Services.Builder.Configuration
         public string PageLayoutMappingFile { get; set; }
 
         /// <summary>
-        /// Defines whether to include the TitleBarWebPart in the list of web parts to process
+        /// Defines whether to include the TitleBarWebPart in the list of web parts to process. Defaults to false.
         /// </summary>
         public bool IncludeTitleBarWebPart { get; set; }
 
         /// <summary>
-        /// Skip URL rewriting
+        /// Skip URL rewriting. Defaults to false.
         /// </summary>
         public bool SkipUrlRewrite { get; set; }
 
         /// <summary>
-        /// Defines whether to remove empty sections and columns on target
+        /// Defines whether to remove empty sections and columns on target. Defaults to false.
         /// </summary>
         public bool RemoveEmptySectionsAndColumns { get; set; }
 
         /// <summary>
-        /// Defines whether to map users or not
+        /// Defines whether to map users or not. Defaults to true.
         /// </summary>
-        public bool ShouldMapUsers { get; set; }
+        public bool ShouldMapUsers { get; set; } = true;
 
         /// <summary>
         /// If true images and videos embedded in wiki text will be transformed to actual image/video web parts, 
-        /// else they'll get a placeholder and will be added as separate web parts at the end of the page
+        /// else they'll get a placeholder and will be added as separate web parts at the end of the page. Defaults to true.
         /// </summary>
         public bool HandleWikiImagesAndVideos { get; set; } = true;
 
@@ -51,7 +51,7 @@ namespace PnP.Core.Transformation.SharePoint.Services.Builder.Configuration
         public bool SkipHiddenWebParts { get; set; }
 
         /// <summary>
-        /// When an image lives inside a table (or list) then also add it as a separate image web part
+        /// When an image lives inside a table (or list) then also add it as a separate image web part. Defaults to true.
         /// </summary>
         public bool AddTableListImageAsImageWebPart { get; set; } = true;
 
