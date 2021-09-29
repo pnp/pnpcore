@@ -1582,10 +1582,10 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
             var sourceContext = pageFile.Context;
 
             // Determine the source page layout
-            string pageLayoutUrl;
+            FieldUrlValue pageLayoutUrl = null;
             if (pageItem.TryGetFieldValue(SharePointConstants.PublishingPageLayoutField, out pageLayoutUrl))
             {
-                page.PageLayout = System.IO.Path.GetFileNameWithoutExtension(pageLayoutUrl);
+                page.PageLayout = System.IO.Path.GetFileNameWithoutExtension(pageLayoutUrl.Url);
             }
 
             // Here we need to invoke the Page Layout Mapping Provider
