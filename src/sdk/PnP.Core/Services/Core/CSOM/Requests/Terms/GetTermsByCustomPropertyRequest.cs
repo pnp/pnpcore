@@ -231,6 +231,7 @@ namespace PnP.Core.Services.Core.CSOM.Requests.Terms
             #endregion
 
             #region CustomPropertyMatchInformationConstructor
+
             ConstructorPath customPropertyMatchInformationConstructorPath = new ConstructorPath
             {
                 Id = idProvider.GetActionId(),
@@ -252,9 +253,11 @@ namespace PnP.Core.Services.Core.CSOM.Requests.Terms
             };
 
             result.Add(customPropertyMatchInformationConstructorActionPath);
+
             #endregion
 
             #region CustomPropertyMatchInformationConstructor Properties
+
             ActionObjectPath customPropertyKeyObjectPath = new ActionObjectPath()
             {
                 Action = new SetPropertyAction()
@@ -307,6 +310,7 @@ namespace PnP.Core.Services.Core.CSOM.Requests.Terms
             result.Add(customPropertyTrimUnavailableObjectPath);
             #endregion
 
+            #region GetTermsWithCustomProperty
 
             var objectPathMethodGetTermsWithCustomProperty = new ObjectPathMethod
             {
@@ -323,6 +327,17 @@ namespace PnP.Core.Services.Core.CSOM.Requests.Terms
                         }
                 }
             };
+
+            ActionObjectPath identityQueryBaseAction = new ActionObjectPath()
+            {
+                Action = new BaseAction()
+                {
+                    Id = idProvider.GetActionId(),
+                    ObjectPathId = objectPathMethodGetTermsWithCustomProperty.Id.ToString()
+                }
+            };
+
+            result.Add(identityQueryBaseAction);
 
             ActionObjectPath identityQuery = new ActionObjectPath()
             {
@@ -343,6 +358,8 @@ namespace PnP.Core.Services.Core.CSOM.Requests.Terms
                 },
             };
             result.Add(identityQuery);
+
+            #endregion
 
             return result;
         }

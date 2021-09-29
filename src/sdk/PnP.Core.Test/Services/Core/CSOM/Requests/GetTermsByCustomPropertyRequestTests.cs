@@ -27,9 +27,9 @@ namespace PnP.Core.Test.Services.Core.CSOM.Requests
             var actionRequests = requests.Select(r => r.Action).ToList();
             var identities = requests.Select(r => r.ObjectPath).Where(id => id != null).ToList();
 
-            CSOMApiCallBuilder csomAPICallBuilder = new CSOMApiCallBuilder();
             string requestBody = "";
 
+            CSOMApiCallBuilder csomAPICallBuilder = new CSOMApiCallBuilder();
             csomAPICallBuilder.AddRequest(request);
 
             requestBody = csomAPICallBuilder.SerializeCSOMRequests();
