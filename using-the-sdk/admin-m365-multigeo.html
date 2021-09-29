@@ -119,7 +119,7 @@ else
 <li>SharePoint my site host url</li>
 </ul>
 <p>Below sample shows how to use the <code>GetMultiGeoLocations</code> methods:</p>
-<pre><code class="lang-csharp">foreach(IGeoLocation location in await context.GetMicrosoft365Admin().GetMultiGeoLocationsAsync())
+<pre><code class="lang-csharp">foreach(var location in await context.GetMicrosoft365Admin().GetMultiGeoLocationsAsync())
 {
     // Do admin work per geo location
 }

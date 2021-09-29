@@ -50,11 +50,23 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/PnP.Core.Admin.Model.Microsoft365.IGeoLocation.yml",
+      "source_relative_path": "api/PnP.Core.Admin.Model.Microsoft365.GeoLocation.yml",
       "output": {
         ".html": {
-          "relative_path": "api/PnP.Core.Admin.Model.Microsoft365.IGeoLocation.html",
-          "hash": "/30wYU4FLIm68Xlv7edqwg=="
+          "relative_path": "api/PnP.Core.Admin.Model.Microsoft365.GeoLocation.html",
+          "hash": "M7QkUiX/9yojNqCdrcdFnA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Admin.Model.Microsoft365.IGeoLocationInformation.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Admin.Model.Microsoft365.IGeoLocationInformation.html",
+          "hash": "lzrzCZ1gSmwG5UN0GW1f4g=="
         }
       },
       "is_incremental": false,
@@ -66,7 +78,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Admin.Model.Microsoft365.IMicrosoft365Admin.html",
-          "hash": "NzTNj6HBFptObCu4X6mkMA=="
+          "hash": "avT9GhQ3y1H2vTlRzf+7mQ=="
         }
       },
       "is_incremental": false,
@@ -78,7 +90,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Admin.Model.Microsoft365.html",
-          "hash": "yjkwxH3fdORW7Nx5gywIEw=="
+          "hash": "8CUGPR6E/AVOX0M5dYNMzg=="
         }
       },
       "is_incremental": false,
@@ -4626,7 +4638,7 @@
       "output": {
         ".html": {
           "relative_path": "api/toc.html",
-          "hash": "rhXd+beWUbLFEk1WDNh50g=="
+          "hash": "CngNc600VNv6igTeuIh8+g=="
         }
       },
       "is_incremental": false,
@@ -5167,7 +5179,7 @@
       "output": {
         ".html": {
           "relative_path": "using-the-sdk/admin-m365-multigeo.html",
-          "hash": "bW5vRelAKDK+9DxWuHNkRw=="
+          "hash": "9cAO5nd5p+ZseQpqpFE8Uw=="
         }
       },
       "is_incremental": false,
@@ -5866,7 +5878,7 @@
         "ManagedReferenceDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build",
-          "total_file_count": 383,
+          "total_file_count": 384,
           "skipped_file_count": 0
         },
         "ResourceDocumentProcessor": {
