@@ -20,7 +20,7 @@ namespace PnP.Core.Transformation.Services.Core
         /// <summary>
         /// Defines whether to keep item level page permissions on target or not. Defaults to true.
         /// </summary>
-        public bool KeepPermissions { get; set; } = true;
+        public bool KeepPageSpecificPermissions { get; set; }
 
         /// <summary>
         /// Set this property to true in case you want to retain the page's Author/Editor/Created/Modified fields. Note that a page publish will always set Editor/Modified. Defaults to false.

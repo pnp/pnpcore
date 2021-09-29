@@ -258,7 +258,7 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
 
             #region Handle page permissions
 
-            if (spOptions.Value.KeepPageSpecificPermissions)
+            if (pageOptions.Value.KeepPageSpecificPermissions)
             {
                 // Copy the source page item level permissions                 
                 result.Permissions = GetItemLevelPermissions(sourceContext, pageItem);
@@ -1099,10 +1099,10 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
                 result = SourcePageType.WebPartPage;
 
                 // Item level permission copy makes no sense here
-                this.spOptions.Value.KeepPageSpecificPermissions = false;
+                this.pageOptions.Value.KeepPageSpecificPermissions = false;
 
                 // Same for swap pages, we don't support this as the pages live in a different location
-                this.spOptions.Value.TargetPageTakesSourcePageName = false;
+                this.pageOptions.Value.TargetPageTakesSourcePageName = false;
             }
             else
             {

@@ -37,17 +37,30 @@ namespace PnP.Core.Transformation.SharePoint.Test
                     pageOptions.KeepPageCreationModificationInformation = true;
                     pageOptions.PostAsNews = false;
                     pageOptions.PublishPage = false;
+                    //pageOptions.DisablePageComments = false;
+                    //pageOptions.KeepPageSpecificPermissions = true;
+                    //pageOptions.Overwrite = true;
+                    //pageOptions.ReplaceHomePageWithDefaultHomePage = true;
+                    //pageOptions.SetAuthorInPageHeader = true;
+                    //pageOptions.TargetPageFolder = "";
+                    //pageOptions.TargetPageName = "";
+                    //pageOptions.TargetPagePrefix = "";
+                    //pageOptions.TargetPageTakesSourcePageName = true;
                 },
                 spOptions => // SharePoint classic source settings
                 {
                     // spOptions.WebPartMappingFile = config["WebPartMappingFile"];
                     // spOptions.PageLayoutMappingFile = config["PageLayoutMappingFile"];
-                    spOptions.KeepPageSpecificPermissions = true;
                     spOptions.RemoveEmptySectionsAndColumns = true;
                     spOptions.ShouldMapUsers = true;
-                    spOptions.TargetPageTakesSourcePageName = true;
                     spOptions.HandleWikiImagesAndVideos = true;
                     spOptions.AddTableListImageAsImageWebPart = true;
+                    spOptions.IncludeTitleBarWebPart = true;
+                    spOptions.MappingProperties = null;
+                    spOptions.SkipHiddenWebParts = true;
+                    spOptions.SkipUrlRewrite = true;
+                    spOptions.UrlMappings = null;
+                    spOptions.UserMappings = null;
                 }
             );
 

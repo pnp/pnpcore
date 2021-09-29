@@ -14,6 +14,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Added support for reading, configuring and saving of collapsible sections on pages #539 [jansenbe - Bert Jansen]
 - Admin library providing Microsoft 365 admin functionality to PnP Core SDK users [jansenbe - Bert Jansen]
 - Support for running unit tests using Application permissions (compared to default Delegated) [jansenbe - Bert Jansen]
+- PnP Transformation Framework SDK to support transforming external content to SharePoint Online modern pages [paolopia - Paolo Pialorsi]
 
 ### Changed
 

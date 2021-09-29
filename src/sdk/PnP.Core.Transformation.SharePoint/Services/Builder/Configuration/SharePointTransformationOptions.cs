@@ -25,16 +25,6 @@ namespace PnP.Core.Transformation.SharePoint.Services.Builder.Configuration
         public bool IncludeTitleBarWebPart { get; set; }
 
         /// <summary>
-        /// Defines whether to keep specific permissions for the page or not
-        /// </summary>
-        public bool KeepPageSpecificPermissions { get; set; }
-
-        /// <summary>
-        /// Defines whether the target page takes the source page name or not
-        /// </summary>
-        public bool TargetPageTakesSourcePageName { get; set; }
-
-        /// <summary>
         /// Skip URL rewriting
         /// </summary>
         public bool SkipUrlRewrite { get; set; }
