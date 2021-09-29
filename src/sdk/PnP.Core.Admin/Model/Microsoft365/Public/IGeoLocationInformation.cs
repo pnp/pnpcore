@@ -3,12 +3,12 @@
     /// <summary>
     /// Contains information about a geo location
     /// </summary>
-    public interface IGeoLocation
+    public interface IGeoLocationInformation
     {
         /// <summary>
         /// Data location code for the geo location
         /// </summary>
-        string DataLocationCode { get; }
+        GeoLocation DataLocationCode { get; }
 
         /// <summary>
         /// SharePoint portal url for the geo location

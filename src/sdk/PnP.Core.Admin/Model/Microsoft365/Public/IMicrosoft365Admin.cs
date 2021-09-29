@@ -25,13 +25,13 @@ namespace PnP.Core.Admin.Model.Microsoft365
         /// Returns a list of multi-geo locations for this tenant
         /// </summary>
         /// <returns>List of multi-geo locations if multi-geo, null otherwise</returns>
-        Task<List<IGeoLocation>> GetMultiGeoLocationsAsync();
+        Task<List<IGeoLocationInformation>> GetMultiGeoLocationsAsync();
 
         /// <summary>
         /// Returns a list of multi-geo locations for this tenant
         /// </summary>
         /// <returns>List of multi-geo locations if multi-geo, null otherwise</returns>
-        List<IGeoLocation> GetMultiGeoLocations();
+        List<IGeoLocationInformation> GetMultiGeoLocations();
         #endregion
 
         #region Access token analysis

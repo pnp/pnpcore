@@ -31,7 +31,7 @@ If you want to understand the multi-geo setup of a tenant then using the `GetMul
 Below sample shows how to use the `GetMultiGeoLocations` methods:
 
 ```csharp
-foreach(IGeoLocation location in await context.GetMicrosoft365Admin().GetMultiGeoLocationsAsync())
+foreach(var location in await context.GetMicrosoft365Admin().GetMultiGeoLocationsAsync())
 {
     // Do admin work per geo location
 }

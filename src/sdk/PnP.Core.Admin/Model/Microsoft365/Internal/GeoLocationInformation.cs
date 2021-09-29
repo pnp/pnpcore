@@ -1,8 +1,8 @@
 ﻿namespace PnP.Core.Admin.Model.Microsoft365
 {
-    internal class GeoLocation : IGeoLocation
+    internal class GeoLocationInformation : IGeoLocationInformation
     {
-        public string DataLocationCode { get; set; }
+        public GeoLocation DataLocationCode { get; set; }
 
         public string SharePointPortalUrl { get; set; }
         

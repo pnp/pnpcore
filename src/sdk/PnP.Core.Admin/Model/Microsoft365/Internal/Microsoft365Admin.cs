@@ -98,7 +98,7 @@ namespace PnP.Core.Admin.Model.Microsoft365
             return IsMultiGeoTenantAsync().GetAwaiter().GetResult();
         }
 
-        public async Task<List<IGeoLocation>> GetMultiGeoLocationsAsync()
+        public async Task<List<IGeoLocationInformation>> GetMultiGeoLocationsAsync()
         {
             var result = await(context.Web as Web).RawRequestAsync(new ApiCall("sites?filter=siteCollection/root%20ne%20null&select=webUrl,siteCollection", ApiType.Graph), HttpMethod.Get).ConfigureAwait(false);
 
@@ -151,7 +151,7 @@ namespace PnP.Core.Admin.Model.Microsoft365
 
             var root = JsonDocument.Parse(result.Json).RootElement.GetProperty("value");
 
-            List<IGeoLocation> dataLocations = null;
+            List<IGeoLocationInformation> dataLocations = null;
 
             if (root.ValueKind == JsonValueKind.Array)
             {
@@ -165,18 +165,18 @@ namespace PnP.Core.Admin.Model.Microsoft365
                             {
                                 if (dataLocations == null)
                                 {
-                                    dataLocations = new List<IGeoLocation>();
+                                    dataLocations = new List<IGeoLocationInformation>();
                                 }
 
-                                var geoLocation = new GeoLocation()
+                                var geoLocation = new GeoLocationInformation()
                                 {
-                                    DataLocationCode = dataLocationCode.GetString(),
+                                    DataLocationCode = (GeoLocation)Enum.Parse(typeof(GeoLocation), dataLocationCode.GetString()),
                                     SharePointPortalUrl = siteInformation.GetProperty("webUrl").GetString(),
                                     SharePointAdminUrl = SharePointAdmin.GetTenantAdminCenterUriForStandardTenants(new Uri(siteInformation.GetProperty("webUrl").GetString())).ToString(),
                                     SharePointMySiteUrl = SharePointAdmin.GetTenantMySiteHostUriForStandardTenants(new Uri(siteInformation.GetProperty("webUrl").GetString())).ToString()
                                 };
 
-                                if (dataLocations.FirstOrDefault(p => p.DataLocationCode.Equals(geoLocation.DataLocationCode, StringComparison.InvariantCultureIgnoreCase)) == null)
+                                if (dataLocations.FirstOrDefault(p => p.DataLocationCode == geoLocation.DataLocationCode) == null)
                                 {
                                     dataLocations.Add(geoLocation);
                                 }
@@ -189,7 +189,7 @@ namespace PnP.Core.Admin.Model.Microsoft365
             return dataLocations;
         }
 
-        public List<IGeoLocation> GetMultiGeoLocations()
+        public List<IGeoLocationInformation> GetMultiGeoLocations()
         {
             return GetMultiGeoLocationsAsync().GetAwaiter().GetResult();
         }
