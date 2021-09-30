@@ -61,6 +61,24 @@ namespace PnP.Core.Admin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The site creation for site {0} did not succeed. Returned siteStatus = {1}.
+        /// </summary>
+        internal static string Exception_SiteCreation {
+            get {
+                return ResourceManager.GetString("Exception_SiteCreation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Checking for the status of site creation for site {0} did fail. Last returned siteStatus = {1}.
+        /// </summary>
+        internal static string Exception_SiteCreationStatusCheck {
+            get {
+                return ResourceManager.GetString("Exception_SiteCreationStatusCheck", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Vanity urls are currently not handled..
         /// </summary>
         internal static string Exception_VanityUrl {
@@ -75,6 +93,15 @@ namespace PnP.Core.Admin {
         internal static string Log_Information_ExceptionWhileGettingSharePointAdmins {
             get {
                 return ResourceManager.GetString("Log_Information_ExceptionWhileGettingSharePointAdmins", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Following exception was eaten while getting the status of the site creation of {0} : {1}.
+        /// </summary>
+        internal static string Log_Warning_ExceptionWhileGettingSiteStatus {
+            get {
+                return ResourceManager.GetString("Log_Warning_ExceptionWhileGettingSiteStatus", resourceCulture);
             }
         }
     }

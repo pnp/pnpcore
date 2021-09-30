@@ -21,8 +21,15 @@ namespace PnP.Core.Services.Core.CSOM.QueryIdentities
 
         public override string ToString()
         {
-            string parameters = string.Join("", Parameters.Properties.Select(p => p.SerializeParameter()));
-            return $"<Constructor Id=\"{Id}\" TypeId=\"{TypeId}\"><Parameters>{parameters}</Parameters></Constructor>";
+            if (Parameters != null && Parameters.Properties != null && Parameters.Properties.Count > 0)
+            {
+                string parameters = string.Join("", Parameters.Properties.Select(p => p.SerializeParameter()));
+                return $"<Constructor Id=\"{Id}\" TypeId=\"{TypeId}\"><Parameters>{parameters}</Parameters></Constructor>";
+            }
+            else
+            {
+                return $"<Constructor Id=\"{Id}\" TypeId=\"{TypeId}\" />";
+            }
         }
     }
 

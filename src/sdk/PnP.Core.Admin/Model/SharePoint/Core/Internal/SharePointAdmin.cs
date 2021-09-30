@@ -249,5 +249,35 @@ namespace PnP.Core.Admin.Model.SharePoint
         {
             return GetSiteCollectionsWithDetailsAsync().GetAwaiter().GetResult();
         }
+
+        public async Task<PnPContext> CreateSiteCollectionAsync(CommonSiteOptions siteToCreate, SiteCreationOptions creationOptions = null)
+        {
+            return await SiteCollectionCreator.CreateSiteCollectionAsync(context, siteToCreate, creationOptions).ConfigureAwait(false);
+        }
+
+        public PnPContext CreateSiteCollection(CommonSiteOptions siteToCreate, SiteCreationOptions creationOptions = null)
+        {
+            return CreateSiteCollectionAsync(siteToCreate, creationOptions).GetAwaiter().GetResult();
+        }
+
+        public async Task RecycleSiteCollectionAsync(Uri siteToDelete)
+        {
+            await SiteCollectionManager.RecycleSiteCollectionAsync(context, siteToDelete).ConfigureAwait(false);
+        }
+
+        public void RecycleSiteCollection(Uri siteToDelete)
+        {
+            RecycleSiteCollectionAsync(siteToDelete).GetAwaiter().GetResult();
+        }
+
+        public async Task DeleteSiteCollectionAsync(Uri siteToDelete)
+        {
+            await SiteCollectionManager.DeleteSiteCollectionAsync(context, siteToDelete).ConfigureAwait(false);
+        }
+
+        public void DeleteSiteCollection(Uri siteToDelete)
+        {
+            DeleteSiteCollectionAsync(siteToDelete).GetAwaiter().GetResult();
+        }
     }
 }

@@ -117,10 +117,19 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Exception_SiteCreation" xml:space="preserve">
+    <value>The site creation for site {0} did not succeed. Returned siteStatus = {1}</value>
+  </data>
+  <data name="Exception_SiteCreationStatusCheck" xml:space="preserve">
+    <value>Checking for the status of site creation for site {0} did fail. Last returned siteStatus = {1}</value>
+  </data>
   <data name="Exception_VanityUrl" xml:space="preserve">
     <value>Vanity urls are currently not handled.</value>
   </data>
   <data name="Log_Information_ExceptionWhileGettingSharePointAdmins" xml:space="preserve">
     <value>Following exception was eaten while getting the tenant admins: {0}</value>
+  </data>
+  <data name="Log_Warning_ExceptionWhileGettingSiteStatus" xml:space="preserve">
+    <value>Following exception was eaten while getting the status of the site creation of {0} : {1}</value>
   </data>
 </root>
