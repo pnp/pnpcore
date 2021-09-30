@@ -44,7 +44,7 @@ namespace PnP.Core.Transformation.SharePoint.Test
                     pageOptions.SetAuthorInPageHeader = true;
                     pageOptions.TargetPageFolder = "";
                     pageOptions.TargetPageName = "";
-                    pageOptions.TargetPagePrefix = "";
+                    pageOptions.TargetPagePrefix = "Migrated_";
                     pageOptions.TargetPageTakesSourcePageName = true;
                 },
                 spOptions => // SharePoint classic source settings
