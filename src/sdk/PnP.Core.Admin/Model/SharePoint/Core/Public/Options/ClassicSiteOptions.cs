@@ -1,4 +1,6 @@
-﻿namespace PnP.Core.Admin.Model.SharePoint
+﻿using System;
+
+namespace PnP.Core.Admin.Model.SharePoint
 {
     /// <summary>
     /// Contains the available options for creating a classic site collection (e.g. classic team site)
@@ -13,7 +15,7 @@
         /// <param name="webTemplate">Web template of the classic site collection to create</param>
         /// <param name="siteOwnerLogin">Owner of the classic site collection to create</param>
         /// <param name="timeZone">Time zone of the classic site collection to create</param>
-        public ClassicSiteOptions(string url, string title, string webTemplate, string siteOwnerLogin, TimeZone timeZone)
+        public ClassicSiteOptions(Uri url, string title, string webTemplate, string siteOwnerLogin, TimeZone timeZone)
         {
             Url = url;
             Title = title;
@@ -30,7 +32,7 @@
         /// <summary>
         /// Url of the classic site
         /// </summary>
-        public string Url { get; set; }
+        public Uri Url { get; set; }
 
         /// <summary>
         /// Owner of the classic site

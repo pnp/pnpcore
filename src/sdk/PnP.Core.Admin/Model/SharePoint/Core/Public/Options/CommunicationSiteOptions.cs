@@ -1,4 +1,6 @@
-﻿namespace PnP.Core.Admin.Model.SharePoint
+﻿using System;
+
+namespace PnP.Core.Admin.Model.SharePoint
 {
     /// <summary>
     /// Contains the available options for creating a communication site collection
@@ -10,7 +12,7 @@
         /// </summary>
         /// <param name="url">Url of the communication site to create</param>
         /// <param name="title">Title of the communication site to create</param>
-        public CommunicationSiteOptions(string url, string title): base(url, title)
+        public CommunicationSiteOptions(Uri url, string title): base(url, title)
         {
             WebTemplate = PnPAdminConstants.CommunicationSiteTemplate;
         }

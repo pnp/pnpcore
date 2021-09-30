@@ -21,5 +21,6 @@
         /// Web template of a team site without a group
         /// </summary>
         internal const string TeamSiteWithoutGroupTemplate = "STS#3";
+
     }
 }

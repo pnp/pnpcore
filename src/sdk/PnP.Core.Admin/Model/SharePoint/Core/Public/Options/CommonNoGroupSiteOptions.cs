@@ -13,7 +13,7 @@ namespace PnP.Core.Admin.Model.SharePoint
         /// </summary>
         /// <param name="url">Url of the site to create</param>
         /// <param name="title">Title of the site to create</param>
-        public CommonNoGroupSiteOptions(string url, string title)
+        public CommonNoGroupSiteOptions(Uri url, string title)
         {
             Url = url;
             Title = title;
@@ -22,7 +22,7 @@ namespace PnP.Core.Admin.Model.SharePoint
         /// <summary>
         /// The fully qualified URL (e.g. https://yourtenant.sharepoint.com/sites/mysitecollection) of the site.
         /// </summary>
-        public string Url { get; set; }
+        public Uri Url { get; set; }
 
         /// <summary>
         /// The title of the site to create
@@ -60,11 +60,6 @@ namespace PnP.Core.Admin.Model.SharePoint
         public Guid HubSiteId { get; set; }
 
         /// <summary>
-        /// The Sensitivity label to use. For instance 'Top Secret'. See https://www.youtube.com/watch?v=NxvUXBiPFcw for more information.
-        /// </summary>
-        public string SensitivityLabel { get; set; }
-
-        /// <summary>
         /// The Sensitivity label to use. See https://www.youtube.com/watch?v=NxvUXBiPFcw for more information.
         /// </summary>
         public Guid SensitivityLabelId { get; set; }
@@ -72,7 +67,7 @@ namespace PnP.Core.Admin.Model.SharePoint
         /// <summary>
         /// The geography in which to create the site collection. Only applicable to multi-geo enabled tenants
         /// </summary>
-        public GeoLocation PreferredDataLocation { get; set; }
+        public GeoLocation? PreferredDataLocation { get; set; }
 
     }
 }

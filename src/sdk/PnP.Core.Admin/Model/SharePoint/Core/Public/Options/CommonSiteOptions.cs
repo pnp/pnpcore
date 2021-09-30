@@ -8,7 +8,7 @@
         /// <summary>
         /// The language to use for the site. 
         /// </summary>
-        public uint Lcid { get; set; }
+        public Language Language { get; set; }
 
         /// <summary>
         /// The Web template to use for the site.

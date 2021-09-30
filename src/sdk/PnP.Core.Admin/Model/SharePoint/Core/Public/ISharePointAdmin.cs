@@ -147,5 +147,50 @@ namespace PnP.Core.Admin.Model.SharePoint
         /// <returns>A list of site collections with details</returns>
         List<ISiteCollectionWithDetails> GetSiteCollectionsWithDetails();
 
+        /// <summary>
+        /// Creates a site collection and returns a <see cref="PnPContext"/> to start using the created site collection
+        /// </summary>
+        /// <param name="siteToCreate">Information about the site collection to create. 
+        /// Pass in a <see cref="CommunicationSiteOptions"/>, <see cref="TeamSiteOptions"/>, <see cref="TeamSiteWithoutGroupOptions"/> or <see cref="ClassicSiteOptions"/> instance.</param>
+        /// <param name="creationOptions"></param>
+        /// <returns>A <see cref="PnPContext"/> to start using the created site collection</returns>
+        Task<PnPContext> CreateSiteCollectionAsync(CommonSiteOptions siteToCreate, SiteCreationOptions creationOptions = null);
+
+        /// <summary>
+        /// Creates a site collection and returns a <see cref="PnPContext"/> to start using the created site collection
+        /// </summary>
+        /// <param name="siteToCreate">Information about the site collection to create. 
+        /// Pass in a <see cref="CommunicationSiteOptions"/>, <see cref="TeamSiteOptions"/>, <see cref="TeamSiteWithoutGroupOptions"/> or <see cref="ClassicSiteOptions"/> instance.</param>
+        /// <param name="creationOptions"></param>
+        /// <returns>A <see cref="PnPContext"/> to start using the created site collection</returns>
+        PnPContext CreateSiteCollection(CommonSiteOptions siteToCreate, SiteCreationOptions creationOptions = null);
+
+        /// <summary>
+        /// Recycle a site collection. The site collection ends up in the recycle bin and can be restored.
+        /// </summary>
+        /// <param name="siteToDelete">Site collection to recycle</param>
+        /// <returns></returns>
+        Task RecycleSiteCollectionAsync(Uri siteToDelete);
+
+        /// <summary>
+        /// Recycle a site collection. The site collection ends up in the recycle bin and can be restored.
+        /// </summary>
+        /// <param name="siteToDelete">Site collection to recycle</param>
+        /// <returns></returns>
+        void RecycleSiteCollection(Uri siteToDelete);
+
+        /// <summary>
+        /// Deletes a site collection. The deleted site collection is also removed from the recycle bin!
+        /// </summary>
+        /// <param name="siteToDelete">Site collection to delete</param>
+        /// <returns></returns>
+        Task DeleteSiteCollectionAsync(Uri siteToDelete);
+
+        /// <summary>
+        /// Deletes a site collection. The deleted site collection is also removed from the recycle bin!
+        /// </summary>
+        /// <param name="siteToDelete">Site collection to delete</param>
+        /// <returns></returns>
+        void DeleteSiteCollection(Uri siteToDelete);
     }
 }

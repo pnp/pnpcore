@@ -50,11 +50,6 @@ namespace PnP.Core.Admin.Model.SharePoint
         public Guid HubSiteId { get; set; }
 
         /// <summary>
-        /// The Sensitivity label to use. For instance 'Top Secret'. See https://www.youtube.com/watch?v=NxvUXBiPFcw for more information.
-        /// </summary>
-        public string SensitivityLabel { get; set; }
-
-        /// <summary>
         /// The Sensitivity label to use. See https://www.youtube.com/watch?v=NxvUXBiPFcw for more information.
         /// </summary>
         public Guid SensitivityLabelId { get; set; }
