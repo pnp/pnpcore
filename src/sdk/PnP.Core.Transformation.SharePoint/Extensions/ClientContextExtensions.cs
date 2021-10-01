@@ -19,6 +19,7 @@ using System.Threading.Tasks;
 using System.Xml;
 using Microsoft.Extensions.Logging;
 using Microsoft.SharePoint.Client;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace PnP.Core.Transformation.SharePoint
 {
@@ -58,7 +59,13 @@ namespace PnP.Core.Transformation.SharePoint
                 ClientContextExtensions.userAgentFromConfig = Environment.GetEnvironmentVariable("SharePointPnPUserAgent", EnvironmentVariableTarget.Process);
             }
 
+#if NET5_0
             loggerFactory = LoggerFactory.Create(builder => builder.AddConsole());
+#else
+            var serviceCollection = new ServiceCollection();
+            serviceCollection.AddLogging(builder => builder.AddConsole());
+            loggerFactory = serviceCollection.BuildServiceProvider().GetService<ILoggerFactory>();
+#endif
             log = new Logger<ClientContext>(loggerFactory);
         }
 #pragma warning restore CA1810
