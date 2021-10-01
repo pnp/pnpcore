@@ -1,5 +1,7 @@
 ﻿using PnP.Core.Admin.Model.Microsoft365;
 using PnP.Core.Admin.Model.SharePoint;
+using System;
+using System.Threading.Tasks;
 
 namespace PnP.Core.Services
 {
@@ -31,5 +33,22 @@ namespace PnP.Core.Services
 
         #endregion
 
+        #region Utilities
+        internal static async Task WaitAsync(this PnPContext context, TimeSpan timeToWait)
+        {
+#if DEBUG
+            if (context.Mode == TestMode.Mock)
+            {
+                // No point in waiting when we're running the test as offline test
+            }
+            else
+            {
+                await Task.Delay(timeToWait).ConfigureAwait(false);
+            }
+#else
+            await Task.Delay(timeToWait).ConfigureAwait(false);
+#endif
+        }
+        #endregion
     }
 }

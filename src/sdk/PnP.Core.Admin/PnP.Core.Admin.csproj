@@ -10,7 +10,7 @@
 	  <Copyright>PnP 2021</Copyright>
 	  <Company>PnP</Company>
 	  <Authors>PnP</Authors>
-	  <Description>This library adds admin related functionality to PnP Core SDK</Description>
+	  <Description>[EXPERIMENTAL - Not yet officially released!] This library adds admin related functionality to PnP Core SDK</Description>
 	  <PackageProjectUrl>https://aka.ms/pnp/coresdk</PackageProjectUrl>
 	  <RepositoryUrl>https://github.com/pnp/pnpcore</RepositoryUrl>
 	  <RepositoryType>git</RepositoryType>

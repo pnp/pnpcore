@@ -9,7 +9,7 @@
     <Copyright>PnP 2021</Copyright>
     <Company>PnP</Company>
     <Authors>PnP</Authors>
-    <Description>The PnP Core Transformation library supports provides a set of tools for the PnP Transformation Framework. Internally it is based on PnP.Core and PnP.Core.Auth.</Description>
+    <Description>[EXPERIMENTAL - Not yet officially released!] The PnP Core Transformation library provides a set of tools for the PnP Transformation Framework. Internally it is based on PnP.Core and PnP.Core.Auth.</Description>
     <PackageProjectUrl>https://aka.ms/pnp/coresdk</PackageProjectUrl>
     <RepositoryUrl>https://github.com/pnp/pnpcore</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
