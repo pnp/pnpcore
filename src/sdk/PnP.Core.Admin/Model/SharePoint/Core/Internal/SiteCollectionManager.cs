@@ -68,7 +68,7 @@ namespace PnP.Core.Admin.Model.SharePoint
 
             do
             {
-                await Task.Delay(operation.PollingInterval).ConfigureAwait(false);
+                await tenantAdminContext.WaitAsync(TimeSpan.FromMilliseconds(operation.PollingInterval)).ConfigureAwait(false);
 
                 var result = await (tenantAdminContext.Web as Web).RawRequestAsync(new ApiCall(csomRequests), HttpMethod.Post).ConfigureAwait(false);
 

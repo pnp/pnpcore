@@ -129,7 +129,7 @@ namespace PnP.Core.Services
             {
                 // Can we use the provided retry-after header?
                 string retryAfter = values.First();
-                if (Int32.TryParse(retryAfter, out int delaySeconds))
+                if (int.TryParse(retryAfter, out int delaySeconds))
                 {
                     delayInSeconds = delaySeconds;
                 }
@@ -151,7 +151,7 @@ namespace PnP.Core.Services
             }
 
             // If the delay goes beyond our max wait time for a delay then cap it
-            TimeSpan delayTimeSpan = TimeSpan.FromSeconds(Math.Min(delayInSeconds, RetryHandlerBase.MAXDELAY));
+            TimeSpan delayTimeSpan = TimeSpan.FromSeconds(Math.Min(delayInSeconds, MAXDELAY));
 
             return Task.Delay(delayTimeSpan, cancellationToken);
         }

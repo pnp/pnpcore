@@ -3,6 +3,7 @@ using PnP.Core.Model.SharePoint;
 using PnP.Core.Services;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Dynamic;
 using System.Net.Http;
 using System.Text.Json;
@@ -55,6 +56,16 @@ namespace PnP.Core.Admin.Model.SharePoint
             if (!creationOptions.WaitAfterStatusCheck.HasValue)
             {
                 creationOptions.WaitAfterStatusCheck = 10;
+            }
+
+            // Configure the defaults for the wait on async provisioning complete
+            if (!creationOptions.MaxAsyncProvisioningStatusChecks.HasValue)
+            {
+                creationOptions.MaxAsyncProvisioningStatusChecks = 80;
+            }
+            if (!creationOptions.WaitAfterAsyncProvisioningStatusCheck.HasValue)
+            {
+                creationOptions.WaitAfterAsyncProvisioningStatusCheck = 15;
             }
 
             return creationOptions;
@@ -131,18 +142,98 @@ namespace PnP.Core.Admin.Model.SharePoint
 
             int siteStatus = responseJson.GetProperty("d").GetProperty("Create").GetProperty("SiteStatus").GetInt32();
 
+            PnPContext responseContext;
             if (siteStatus == 2)
             {
                 // Site creation succeeded
-                return await context.CloneAsync(new Uri(responseJson.GetProperty("d").GetProperty("Create").GetProperty("SiteUrl").ToString())).ConfigureAwait(false);
+                responseContext = await context.CloneAsync(new Uri(responseJson.GetProperty("d").GetProperty("Create").GetProperty("SiteUrl").ToString())).ConfigureAwait(false);
             }
             else if (siteStatus == 1)
             {
-                return await VerifySiteStatusAsync(context, payload["Url"].ToString(), creationOptions.MaxStatusChecks.Value, creationOptions.WaitAfterStatusCheck.Value).ConfigureAwait(false);
+                // Site creation in progress, let's wait for it to finish
+                responseContext = await VerifySiteStatusAsync(context, payload["Url"].ToString(), creationOptions.MaxStatusChecks.Value, creationOptions.WaitAfterStatusCheck.Value).ConfigureAwait(false);
             }
             else
             {
+                // Something went wrong
                 throw new ClientException(ErrorType.SharePointRestServiceError, string.Format(PnPCoreAdminResources.Exception_SiteCreation, payload["Url"].ToString(), siteStatus));
+            }
+
+            // Apply our "wait" strategy
+            if (creationOptions.WaitAfterCreation.HasValue && creationOptions.WaitAfterCreation.Value > 0)
+            {
+                await responseContext.WaitAsync(TimeSpan.FromSeconds(creationOptions.WaitAfterCreation.Value)).ConfigureAwait(false);
+            }
+            else
+            {
+                if (creationOptions.WaitForAsyncProvisioning.HasValue && creationOptions.WaitForAsyncProvisioning.Value)
+                {
+                    // Let's wait for the async provisioning of features, site scripts and content types to be done before we allow API's to further update the created site
+                    await WaitForProvisioningToCompleteAsync(responseContext, creationOptions).ConfigureAwait(false);
+                }
+            }
+
+            return responseContext;
+        }
+
+        private static async Task WaitForProvisioningToCompleteAsync(PnPContext context, SiteCreationOptions creationOptions)
+        {
+            context.Logger.LogInformation($"Started waiting for the async provisioning of site {context.Uri} to be complete");
+
+            var stopwatch = new Stopwatch();             
+            stopwatch.Start();
+
+            bool isProvisioningComplete = false;
+            bool validatePendingWebTemplateExtensionCalled = false;
+            var retryAttempt = 1;
+            do
+            {
+                context.Logger.LogDebug($"Elapsed: {stopwatch.Elapsed:mm\\:ss\\.fff} | Attempt {retryAttempt}/{creationOptions.MaxAsyncProvisioningStatusChecks}");
+
+                if (retryAttempt > 1)
+                {
+                    context.Logger.LogDebug($"Elapsed: {stopwatch.Elapsed:mm\\:ss\\.fff} | Waiting {creationOptions.WaitAfterAsyncProvisioningStatusCheck.Value} seconds");
+
+                    await context.WaitAsync(TimeSpan.FromSeconds(creationOptions.WaitAfterAsyncProvisioningStatusCheck.Value)).ConfigureAwait(false);
+                }
+
+                var web = await context.Web.GetAsync(p => p.IsProvisioningComplete).ConfigureAwait(false);
+                if (web.IsProvisioningComplete)
+                {
+                    isProvisioningComplete = true;
+                }
+
+                // We waited for more than 90 seconds
+                if (!isProvisioningComplete && !validatePendingWebTemplateExtensionCalled && retryAttempt * creationOptions.WaitAfterAsyncProvisioningStatusCheck.Value > 90)
+                {
+                    context.Logger.LogDebug($"Calling ValidatePendingWebTemplateExtension for site {context.Uri}");
+
+                    // Try "push" the process
+                    await (context.Web as Web).RawRequestAsync(
+                        new ApiCall("_api/Microsoft.Sharepoint.Utilities.WebTemplateExtensions.SiteScriptUtility.ValidatePendingWebTemplateExtension", ApiType.SPORest), 
+                        HttpMethod.Post).ConfigureAwait(false);
+                    validatePendingWebTemplateExtensionCalled = true;
+
+                    context.Logger.LogDebug($"Calling ValidatePendingWebTemplateExtension for site {context.Uri} done");
+                }
+
+                retryAttempt++;
+
+            }
+            while (!isProvisioningComplete && retryAttempt <= creationOptions.MaxAsyncProvisioningStatusChecks);
+
+            stopwatch.Stop();
+
+            context.Logger.LogDebug($"Elapsed: {stopwatch.Elapsed:mm\\:ss\\.fff} | Finished");
+
+            if (!isProvisioningComplete)
+            {
+                // Bummer, sites seems to be still not ready...log a warning but let's not fail
+                context.Logger.LogWarning($"Async provisioning of site {context.Uri} did not complete in {stopwatch.Elapsed:mm\\:ss\\.fff}");
+            }
+            else
+            {
+                context.Logger.LogInformation($"Async provisioning of site {context.Uri} is complete");
             }
         }
 
@@ -157,7 +248,7 @@ namespace PnP.Core.Admin.Model.SharePoint
             {
                 if (statusCheckAttempt > 1)
                 {
-                    await Task.Delay(statusCheckAttempt * waitAfterStatusCheck * 1000).ConfigureAwait(false);
+                    await context.WaitAsync(TimeSpan.FromSeconds(statusCheckAttempt * waitAfterStatusCheck)).ConfigureAwait(false);
                 }
 
                 try
