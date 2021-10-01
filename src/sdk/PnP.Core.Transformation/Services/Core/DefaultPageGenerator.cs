@@ -323,7 +323,7 @@ namespace PnP.Core.Transformation.Services.Core
                 && mappingOutput.TargetPage.Editor != null) ||
                 this.defaultPageTransformationOptions.PostAsNews)
             {
-                await UpdateTargetPageWithSourcePageInformationAsync(targetFile, mappingOutput);
+                await UpdateTargetPageWithSourcePageInformationAsync(targetFile, mappingOutput).ConfigureAwait(false);
             }
 
             // Return the generated page URL

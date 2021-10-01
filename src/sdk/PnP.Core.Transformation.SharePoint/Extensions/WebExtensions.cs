@@ -128,8 +128,7 @@ namespace PnP.Core.Transformation.SharePoint.Extensions
         /// <returns>The file contents as a string</returns>
         public static async Task<string> GetFileAsStringAsync(this Web web, string serverRelativeUrl)
         {
-            await new SynchronizationContextRemover();
-            return await web.GetFileAsStringImplementation(serverRelativeUrl);
+            return await web.GetFileAsStringImplementation(serverRelativeUrl).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -142,9 +141,9 @@ namespace PnP.Core.Transformation.SharePoint.Extensions
         {
             var file = web.GetFileByServerRelativePath(ResourcePath.FromDecodedUrl(serverRelativeUrl));
             web.Context.Load(file);
-            await web.Context.ExecuteQueryRetryAsync();
+            await web.Context.ExecuteQueryRetryAsync().ConfigureAwait(false);
             ClientResult<Stream> stream = file.OpenBinaryStream();
-            await web.Context.ExecuteQueryRetryAsync();
+            await web.Context.ExecuteQueryRetryAsync().ConfigureAwait(false);
 
             string returnString = string.Empty;
             using (Stream memStream = new MemoryStream())
