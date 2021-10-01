@@ -1,10 +1,12 @@
-﻿using PnP.Core.Transformation.SharePoint.Utilities;
+﻿using Microsoft.SharePoint.Client;
+using PnP.Core.Transformation.SharePoint;
+using PnP.Core.Transformation.SharePoint.Utilities;
 using System;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Threading.Tasks;
 
-namespace Microsoft.SharePoint.Client
+namespace PnP.Core.Transformation.SharePoint
 {
     /// <summary>
     /// Class for client object extension methods

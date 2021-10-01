@@ -18,8 +18,9 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Xml;
 using Microsoft.Extensions.Logging;
+using Microsoft.SharePoint.Client;
 
-namespace Microsoft.SharePoint.Client
+namespace PnP.Core.Transformation.SharePoint
 {
     /// <summary>
     /// Class that deals with cloning client context object, getting access token and validates server version
