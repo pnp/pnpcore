@@ -15,6 +15,9 @@ namespace PnP.Core.Admin.Model.SharePoint
     {
         internal static async Task<PnPContext> CreateSiteCollectionAsync(PnPContext context, CommonSiteOptions siteToCreate, SiteCreationOptions creationOptions)
         {
+            // Provide default creation options as input
+            creationOptions = await EnsureSiteCreationOptionsAsync(context, creationOptions).ConfigureAwait(false);
+
             if (siteToCreate is ClassicSiteOptions classicSite)
             {
                 return await CreateClassicSiteAsync(context, classicSite, creationOptions).ConfigureAwait(false);
@@ -31,11 +34,36 @@ namespace PnP.Core.Admin.Model.SharePoint
             throw new ArgumentException("Provided site options are not implemented");
         }
 
+        private static async Task<SiteCreationOptions> EnsureSiteCreationOptionsAsync(PnPContext context, SiteCreationOptions creationOptions)
+        {
+            if (creationOptions == null)
+            {
+                creationOptions = new SiteCreationOptions();
+            }
+
+            // Ensure there's a value set for UsingApplicationPermissions
+            if (!creationOptions.UsingApplicationPermissions.HasValue)
+            {
+                creationOptions.UsingApplicationPermissions = await context.GetMicrosoft365Admin().AccessTokenUsesApplicationPermissionsAsync().ConfigureAwait(false);
+            }
+
+            // Configure the defaults for the status check
+            if (!creationOptions.MaxStatusChecks.HasValue)
+            {
+                creationOptions.MaxStatusChecks = 12;
+            }
+            if (!creationOptions.WaitAfterStatusCheck.HasValue)
+            {
+                creationOptions.WaitAfterStatusCheck = 10;
+            }
+
+            return creationOptions;
+        }
 
         internal static async Task<PnPContext> CreateCommonNoGroupSiteAsync(PnPContext context, CommonNoGroupSiteOptions siteToCreate, SiteCreationOptions creationOptions)
         {
 
-            if (string.IsNullOrEmpty(siteToCreate.Owner) && await context.GetMicrosoft365Admin().AccessTokenUsesApplicationPermissionsAsync().ConfigureAwait(false))
+            if (string.IsNullOrEmpty(siteToCreate.Owner) && creationOptions.UsingApplicationPermissions.Value)
             {
                 throw new ClientException(ErrorType.Unsupported, "You need to set an owner when using Application permissions to create a communicaiton site");
             }
@@ -110,21 +138,7 @@ namespace PnP.Core.Admin.Model.SharePoint
             }
             else if (siteStatus == 1)
             {
-                int maxStatusChecks = 12;
-                int waitAfterStatusCheck = 10;
-                if (creationOptions != null)
-                {
-                    if (creationOptions.MaxStatusChecks.HasValue)
-                    {
-                        maxStatusChecks = creationOptions.MaxStatusChecks.Value;
-                    }
-                    if (creationOptions.WaitAfterStatusCheck.HasValue)
-                    {
-                        waitAfterStatusCheck = creationOptions.WaitAfterStatusCheck.Value;
-                    }
-                }
-
-                return await VerifySiteStatusAsync(context, payload["Url"].ToString(), maxStatusChecks, waitAfterStatusCheck).ConfigureAwait(false);
+                return await VerifySiteStatusAsync(context, payload["Url"].ToString(), creationOptions.MaxStatusChecks.Value, creationOptions.WaitAfterStatusCheck.Value).ConfigureAwait(false);
             }
             else
             {

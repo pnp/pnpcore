@@ -55,10 +55,16 @@ namespace PnP.Core.Admin.Test.SharePoint
                     communicationSiteToCreate = new CommunicationSiteOptions(siteUrl, "PnP Core SDK Test")
                     {
                         Description = "This is a test site collection",
-                        Language = Language.English,
+                        Language = Language.English,                        
                     };
 
-                    using (var newSiteContext = context.GetSharePointAdmin().CreateSiteCollection(communicationSiteToCreate))
+
+                    SiteCreationOptions siteCreationOptions = new SiteCreationOptions()
+                    {
+                        UsingApplicationPermissions = false
+                    };
+
+                    using (var newSiteContext = context.GetSharePointAdmin().CreateSiteCollection(communicationSiteToCreate, siteCreationOptions))
                     {
                         var web = await newSiteContext.Web.GetAsync(p => p.Url, p => p.Title, p => p.Description, p => p.Language);
                         Assert.IsTrue(web.Url == communicationSiteToCreate.Url);
