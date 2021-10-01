@@ -1734,6 +1734,19 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Admin.Model.SharePoint.SiteCreationOptions.MaxStatusChecks
   nameWithType: SiteCreationOptions.MaxStatusChecks
+- uid: PnP.Core.Admin.Model.SharePoint.SiteCreationOptions.UsingApplicationPermissions
+  name: UsingApplicationPermissions
+  href: api/PnP.Core.Admin.Model.SharePoint.SiteCreationOptions.html#PnP_Core_Admin_Model_SharePoint_SiteCreationOptions_UsingApplicationPermissions
+  commentId: P:PnP.Core.Admin.Model.SharePoint.SiteCreationOptions.UsingApplicationPermissions
+  fullName: PnP.Core.Admin.Model.SharePoint.SiteCreationOptions.UsingApplicationPermissions
+  nameWithType: SiteCreationOptions.UsingApplicationPermissions
+- uid: PnP.Core.Admin.Model.SharePoint.SiteCreationOptions.UsingApplicationPermissions*
+  name: UsingApplicationPermissions
+  href: api/PnP.Core.Admin.Model.SharePoint.SiteCreationOptions.html#PnP_Core_Admin_Model_SharePoint_SiteCreationOptions_UsingApplicationPermissions_
+  commentId: Overload:PnP.Core.Admin.Model.SharePoint.SiteCreationOptions.UsingApplicationPermissions
+  isSpec: "True"
+  fullName: PnP.Core.Admin.Model.SharePoint.SiteCreationOptions.UsingApplicationPermissions
+  nameWithType: SiteCreationOptions.UsingApplicationPermissions
 - uid: PnP.Core.Admin.Model.SharePoint.SiteCreationOptions.WaitAfterCreation
   name: WaitAfterCreation
   href: api/PnP.Core.Admin.Model.SharePoint.SiteCreationOptions.html#PnP_Core_Admin_Model_SharePoint_SiteCreationOptions_WaitAfterCreation
