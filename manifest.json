@@ -222,7 +222,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Admin.Model.SharePoint.SiteCreationOptions.html",
-          "hash": "rKdgWGEUSJ/oaeU4JRHd8A=="
+          "hash": "VK0afcpUoXo+Ls+KWD3DIw=="
         }
       },
       "is_incremental": false,
@@ -4614,7 +4614,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Services.PnPContextExtensions.html",
-          "hash": "n7Fm4o1nGPqwwHL8xZgPaw=="
+          "hash": "U0gUAgJbPfLhKRyYRE1mGg=="
         }
       },
       "is_incremental": false,

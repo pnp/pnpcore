@@ -1721,6 +1721,19 @@ references:
   commentId: T:PnP.Core.Admin.Model.SharePoint.SiteCreationOptions
   fullName: PnP.Core.Admin.Model.SharePoint.SiteCreationOptions
   nameWithType: SiteCreationOptions
+- uid: PnP.Core.Admin.Model.SharePoint.SiteCreationOptions.MaxAsyncProvisioningStatusChecks
+  name: MaxAsyncProvisioningStatusChecks
+  href: api/PnP.Core.Admin.Model.SharePoint.SiteCreationOptions.html#PnP_Core_Admin_Model_SharePoint_SiteCreationOptions_MaxAsyncProvisioningStatusChecks
+  commentId: P:PnP.Core.Admin.Model.SharePoint.SiteCreationOptions.MaxAsyncProvisioningStatusChecks
+  fullName: PnP.Core.Admin.Model.SharePoint.SiteCreationOptions.MaxAsyncProvisioningStatusChecks
+  nameWithType: SiteCreationOptions.MaxAsyncProvisioningStatusChecks
+- uid: PnP.Core.Admin.Model.SharePoint.SiteCreationOptions.MaxAsyncProvisioningStatusChecks*
+  name: MaxAsyncProvisioningStatusChecks
+  href: api/PnP.Core.Admin.Model.SharePoint.SiteCreationOptions.html#PnP_Core_Admin_Model_SharePoint_SiteCreationOptions_MaxAsyncProvisioningStatusChecks_
+  commentId: Overload:PnP.Core.Admin.Model.SharePoint.SiteCreationOptions.MaxAsyncProvisioningStatusChecks
+  isSpec: "True"
+  fullName: PnP.Core.Admin.Model.SharePoint.SiteCreationOptions.MaxAsyncProvisioningStatusChecks
+  nameWithType: SiteCreationOptions.MaxAsyncProvisioningStatusChecks
 - uid: PnP.Core.Admin.Model.SharePoint.SiteCreationOptions.MaxStatusChecks
   name: MaxStatusChecks
   href: api/PnP.Core.Admin.Model.SharePoint.SiteCreationOptions.html#PnP_Core_Admin_Model_SharePoint_SiteCreationOptions_MaxStatusChecks
@@ -1747,6 +1760,19 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Admin.Model.SharePoint.SiteCreationOptions.UsingApplicationPermissions
   nameWithType: SiteCreationOptions.UsingApplicationPermissions
+- uid: PnP.Core.Admin.Model.SharePoint.SiteCreationOptions.WaitAfterAsyncProvisioningStatusCheck
+  name: WaitAfterAsyncProvisioningStatusCheck
+  href: api/PnP.Core.Admin.Model.SharePoint.SiteCreationOptions.html#PnP_Core_Admin_Model_SharePoint_SiteCreationOptions_WaitAfterAsyncProvisioningStatusCheck
+  commentId: P:PnP.Core.Admin.Model.SharePoint.SiteCreationOptions.WaitAfterAsyncProvisioningStatusCheck
+  fullName: PnP.Core.Admin.Model.SharePoint.SiteCreationOptions.WaitAfterAsyncProvisioningStatusCheck
+  nameWithType: SiteCreationOptions.WaitAfterAsyncProvisioningStatusCheck
+- uid: PnP.Core.Admin.Model.SharePoint.SiteCreationOptions.WaitAfterAsyncProvisioningStatusCheck*
+  name: WaitAfterAsyncProvisioningStatusCheck
+  href: api/PnP.Core.Admin.Model.SharePoint.SiteCreationOptions.html#PnP_Core_Admin_Model_SharePoint_SiteCreationOptions_WaitAfterAsyncProvisioningStatusCheck_
+  commentId: Overload:PnP.Core.Admin.Model.SharePoint.SiteCreationOptions.WaitAfterAsyncProvisioningStatusCheck
+  isSpec: "True"
+  fullName: PnP.Core.Admin.Model.SharePoint.SiteCreationOptions.WaitAfterAsyncProvisioningStatusCheck
+  nameWithType: SiteCreationOptions.WaitAfterAsyncProvisioningStatusCheck
 - uid: PnP.Core.Admin.Model.SharePoint.SiteCreationOptions.WaitAfterCreation
   name: WaitAfterCreation
   href: api/PnP.Core.Admin.Model.SharePoint.SiteCreationOptions.html#PnP_Core_Admin_Model_SharePoint_SiteCreationOptions_WaitAfterCreation
