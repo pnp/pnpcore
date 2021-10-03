@@ -16,9 +16,10 @@ namespace PnP.Core.Admin.Model.SharePoint
         {
             using (var tenantAdminContext = await context.GetSharePointAdmin().GetTenantAdminCenterContextAsync().ConfigureAwait(false))
             {
-                if (webTemplate.Equals(PnPAdminConstants.TeamSiteTemplate, StringComparison.InvariantCultureIgnoreCase))
+                // When recycling a group connected site then use the groupsitemanager endpoint. This will also recycle the connected Microsoft 365 group
+                if (HasGroup(webTemplate))
                 {
-                    var result = await (context.Web as Web).RawRequestAsync(new ApiCall($"_api/GroupSiteManager/Delete?siteUrl='{siteToRecycle.AbsoluteUri}'", ApiType.SPORest), HttpMethod.Post).ConfigureAwait(false);
+                    await (context.Web as Web).RawRequestAsync(new ApiCall($"_api/GroupSiteManager/Delete?siteUrl='{siteToRecycle.AbsoluteUri}'", ApiType.SPORest), HttpMethod.Post).ConfigureAwait(false);
                 }
                 else
                 {
@@ -46,19 +47,24 @@ namespace PnP.Core.Admin.Model.SharePoint
                 // first recycle the site collection
                 await RecycleSiteCollectionAsync(tenantAdminContext, siteToDelete, webTemplate).ConfigureAwait(false);
 
-                // once that's done remove the site collection from the recycle bin
-                List<IRequest<object>> csomRequests = new List<IRequest<object>>
+                // Only supporting permanent delete of non group connected sites. For group connected sites permanently deleting the group will
+                // trigger the deletion of the linked resources (like the SharePoint site).  
+                if (!HasGroup(webTemplate))
                 {
-                    new RemoveDeletedSiteRequest(siteToDelete)
-                };
+                    // once that's done remove the site collection from the recycle bin
+                    List<IRequest<object>> csomRequests = new List<IRequest<object>>
+                    {
+                        new RemoveDeletedSiteRequest(siteToDelete)
+                    };
 
-                var result = await (tenantAdminContext.Web as Web).RawRequestAsync(new ApiCall(csomRequests), HttpMethod.Post).ConfigureAwait(false);
+                    var result = await (tenantAdminContext.Web as Web).RawRequestAsync(new ApiCall(csomRequests), HttpMethod.Post).ConfigureAwait(false);
 
-                SpoOperation op = result.ApiCall.CSOMRequests[0].Result as SpoOperation;
+                    SpoOperation op = result.ApiCall.CSOMRequests[0].Result as SpoOperation;
 
-                if (!op.IsComplete)
-                {
-                    await WaitForSpoOperationCompleteAsync(tenantAdminContext, op).ConfigureAwait(false);
+                    if (!op.IsComplete)
+                    {
+                        await WaitForSpoOperationCompleteAsync(tenantAdminContext, op).ConfigureAwait(false);
+                    }
                 }
             }
         }
@@ -90,6 +96,11 @@ namespace PnP.Core.Admin.Model.SharePoint
             }
             while (!operationComplete && statusCheckAttempt <= maxStatusChecks);
 
+        }
+
+        private static bool HasGroup(string webTemplate)
+        {
+            return webTemplate.Equals(PnPAdminConstants.TeamSiteTemplate, StringComparison.InvariantCultureIgnoreCase);
         }
 
     }
