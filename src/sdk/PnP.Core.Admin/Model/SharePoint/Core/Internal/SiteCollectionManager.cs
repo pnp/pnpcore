@@ -12,32 +12,39 @@ namespace PnP.Core.Admin.Model.SharePoint
     internal static class SiteCollectionManager
     {
 
-        internal static async Task RecycleSiteCollectionAsync(PnPContext context, Uri siteToRecycle)
+        internal static async Task RecycleSiteCollectionAsync(PnPContext context, Uri siteToRecycle, string webTemplate)
         {
             using (var tenantAdminContext = await context.GetSharePointAdmin().GetTenantAdminCenterContextAsync().ConfigureAwait(false))
             {
-                List<IRequest<object>> csomRequests = new List<IRequest<object>>
+                if (webTemplate.Equals(PnPAdminConstants.TeamSiteTemplate, StringComparison.InvariantCultureIgnoreCase))
                 {
-                    new RemoveSiteRequest(siteToRecycle)
-                };
-
-                var result = await (tenantAdminContext.Web as Web).RawRequestAsync(new ApiCall(csomRequests), HttpMethod.Post).ConfigureAwait(false);
-
-                SpoOperation op = result.ApiCall.CSOMRequests[0].Result as SpoOperation;
-
-                if (!op.IsComplete)
+                    var result = await (context.Web as Web).RawRequestAsync(new ApiCall($"_api/GroupSiteManager/Delete?siteUrl='{siteToRecycle.AbsoluteUri}'", ApiType.SPORest), HttpMethod.Post).ConfigureAwait(false);
+                }
+                else
                 {
-                    await WaitForSpoOperationCompleteAsync(tenantAdminContext, op).ConfigureAwait(false);
+                    List<IRequest<object>> csomRequests = new List<IRequest<object>>
+                    {
+                        new RemoveSiteRequest(siteToRecycle)
+                    };
+
+                    var result = await (tenantAdminContext.Web as Web).RawRequestAsync(new ApiCall(csomRequests), HttpMethod.Post).ConfigureAwait(false);
+
+                    SpoOperation op = result.ApiCall.CSOMRequests[0].Result as SpoOperation;
+
+                    if (!op.IsComplete)
+                    {
+                        await WaitForSpoOperationCompleteAsync(tenantAdminContext, op).ConfigureAwait(false);
+                    }
                 }
             }
         }
 
-        internal static async Task DeleteSiteCollectionAsync(PnPContext context, Uri siteToDelete)
+        internal static async Task DeleteSiteCollectionAsync(PnPContext context, Uri siteToDelete, string webTemplate)
         {
             using (var tenantAdminContext = await context.GetSharePointAdmin().GetTenantAdminCenterContextAsync().ConfigureAwait(false))
             {
                 // first recycle the site collection
-                await RecycleSiteCollectionAsync(tenantAdminContext, siteToDelete).ConfigureAwait(false);
+                await RecycleSiteCollectionAsync(tenantAdminContext, siteToDelete, webTemplate).ConfigureAwait(false);
 
                 // once that's done remove the site collection from the recycle bin
                 List<IRequest<object>> csomRequests = new List<IRequest<object>>

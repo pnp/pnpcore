@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Dynamic;
+using System.Linq;
 using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -33,6 +34,123 @@ namespace PnP.Core.Admin.Model.SharePoint
             }
 
             throw new ArgumentException("Provided site options are not implemented");
+        }
+
+        private static async Task<PnPContext> CreateCommonNoGroupSiteAsync(PnPContext context, CommonNoGroupSiteOptions siteToCreate, SiteCreationOptions creationOptions)
+        {
+
+            if (string.IsNullOrEmpty(siteToCreate.Owner) && creationOptions.UsingApplicationPermissions.Value)
+            {
+                throw new ClientException(ErrorType.Unsupported, "You need to set an owner when using Application permissions to create a communicaiton site");
+            }
+
+            var payload = BuildBaseCommonNoGroupSiteRequestPayload(siteToCreate);
+
+            var siteDesignId = GetSiteDesignId(siteToCreate);
+            if (siteDesignId != Guid.Empty)
+            {
+                payload.Add("SiteDesignId", siteDesignId);
+
+                // As per https://github.com/SharePoint/sp-dev-docs/issues/4810 the WebTemplateExtensionId property
+                // is what currently drives the application of a custom site design during the creation of a modern site.
+                payload["WebTemplateExtensionId"] = siteDesignId;
+            }
+
+            payload.Add("HubSiteId", siteToCreate.HubSiteId);
+
+            if (siteToCreate.SensitivityLabelId != Guid.Empty)
+            {
+                payload.Add("SensitivityLabel", siteToCreate.SensitivityLabelId);
+            }
+            else
+            {
+                payload["Classification"] = siteToCreate.Classification ?? "";
+            }
+
+            if (siteToCreate.PreferredDataLocation.HasValue)
+            {
+                payload.Add("PreferredDataLocation", siteToCreate.PreferredDataLocation.Value.ToString());
+            }
+
+            return await CreateSiteUsingSpoRestImplementationAsync(context, true, payload, creationOptions).ConfigureAwait(false);
+        }
+
+        private static async Task<PnPContext> CreateTeamSiteAsync(PnPContext context, TeamSiteOptions siteToCreate, SiteCreationOptions creationOptions)
+        {
+
+            // If we're using application permissions we use Microsoft Graph to create the site
+            if (creationOptions.UsingApplicationPermissions.Value)
+            {
+                return null;
+            }
+            else
+            {
+                var creationOptionsValues = new List<string>();
+                Dictionary<string, object> payload = new Dictionary<string, object>
+                {
+                    { "displayName", siteToCreate.DisplayName },
+                    { "alias", siteToCreate.Alias },
+                    { "isPublic", siteToCreate.IsPublic }
+                };
+
+                var optionalParams = new Dictionary<string, object>
+                {
+                    { "Description", siteToCreate.Description ?? "" }
+                };
+
+                if (siteToCreate.SensitivityLabelId != Guid.Empty)
+                {
+                    //optionalParams.Add("Classification", siteCollectionCreationInformation.SensitivityLabel ?? "");
+                    creationOptionsValues.Add($"SensitivityLabel:{siteToCreate.SensitivityLabelId}");
+                }
+                else
+                {
+                    optionalParams.Add("Classification", siteToCreate.Classification ?? "");
+                }
+
+                if (siteToCreate.SiteDesignId.HasValue)
+                {
+                    creationOptionsValues.Add($"implicit_formula_292aa8a00786498a87a5ca52d9f4214a_{siteToCreate.SiteDesignId.Value.ToString("D").ToLower()}");
+                }
+                if (siteToCreate.Language != Language.Default)
+                {
+                    creationOptionsValues.Add($"SPSiteLanguage:{(int)siteToCreate.Language}");
+                }
+                if (!string.IsNullOrEmpty(siteToCreate.SiteAlias))
+                {
+                    creationOptionsValues.Add($"SiteAlias:{siteToCreate.SiteAlias}");
+                }
+                creationOptionsValues.Add($"HubSiteId:{siteToCreate.HubSiteId}");
+                
+                if (siteToCreate.Owners != null && siteToCreate.Owners.Length > 0)
+                {
+                    optionalParams.Add("Owners", siteToCreate.Owners);
+                }
+                if (siteToCreate.PreferredDataLocation.HasValue)
+                {
+                    optionalParams.Add("PreferredDataLocation", siteToCreate.PreferredDataLocation.Value.ToString());
+                }
+
+                if (creationOptionsValues.Any())
+                {
+                    var creationOptionsValuesBody = new
+                    {
+                        __metadata = new { type = "Collection(Edm.String)" },
+                        results = creationOptionsValues
+                    }.AsExpando();
+                    optionalParams.Add("CreationOptions", creationOptionsValuesBody);
+                }
+
+                payload.Add("optionalParams", optionalParams);
+
+                // Delegated permissions can use the SharePoint endpoints for site collection creation
+                return await CreateSiteUsingSpoRestImplementationAsync(context, false, payload, creationOptions).ConfigureAwait(false);
+            }
+        }
+
+        private static async Task<PnPContext> CreateClassicSiteAsync(PnPContext context, ClassicSiteOptions siteToCreate, SiteCreationOptions creationOptions)
+        {
+            return null;
         }
 
         private static async Task<SiteCreationOptions> EnsureSiteCreationOptionsAsync(PnPContext context, SiteCreationOptions creationOptions)
@@ -71,50 +189,28 @@ namespace PnP.Core.Admin.Model.SharePoint
             return creationOptions;
         }
 
-        internal static async Task<PnPContext> CreateCommonNoGroupSiteAsync(PnPContext context, CommonNoGroupSiteOptions siteToCreate, SiteCreationOptions creationOptions)
+        private static async Task<PnPContext> CreateSiteUsingSpoRestImplementationAsync(PnPContext context, bool usingSpSiteManager, Dictionary<string, object> payload, SiteCreationOptions creationOptions)
         {
+            string apiCall;
+            string statusProperty;
+            string body;
 
-            if (string.IsNullOrEmpty(siteToCreate.Owner) && creationOptions.UsingApplicationPermissions.Value)
+            if (usingSpSiteManager)
             {
-                throw new ClientException(ErrorType.Unsupported, "You need to set an owner when using Application permissions to create a communicaiton site");
-            }
-
-            var payload = BuildBaseCommonNoGroupSiteRequestPayload(siteToCreate);
-
-            var siteDesignId = GetSiteDesignId(siteToCreate);
-            if (siteDesignId != Guid.Empty)
-            {
-                payload.Add("SiteDesignId", siteDesignId);
-
-                // As per https://github.com/SharePoint/sp-dev-docs/issues/4810 the WebTemplateExtensionId property
-                // is what currently drives the application of a custom site design during the creation of a modern site.
-                payload["WebTemplateExtensionId"] = siteDesignId;
-            }
-
-            payload.Add("HubSiteId", siteToCreate.HubSiteId);
-
-            if (siteToCreate.SensitivityLabelId != Guid.Empty)
-            {
-                payload.Add("SensitivityLabel", siteToCreate.SensitivityLabelId);
+                apiCall = $"_api/SPSiteManager/Create";
+                statusProperty = "Create";
+                var json = new { request = payload }.AsExpando();
+                body = JsonSerializer.Serialize(json, typeof(ExpandoObject));
             }
             else
             {
-                payload["Classification"] = siteToCreate.Classification ?? "";
+                apiCall = $"_api/GroupSiteManager/CreateGroupEx";
+                statusProperty = "CreateGroupEx";
+                var json = new { payload }.AsExpando();
+                body = JsonSerializer.Serialize(payload, PnPConstants.JsonSerializer_IgnoreNullValues_CamelCase);
             }
 
-            if (siteToCreate.PreferredDataLocation.HasValue)
-            {
-                payload.Add("PreferredDataLocation", siteToCreate.PreferredDataLocation.Value.ToString());
-            }
-
-            return await CreateSiteImplementationAsync(context, payload, creationOptions).ConfigureAwait(false);
-        }
-
-        private static async Task<PnPContext> CreateSiteImplementationAsync(PnPContext context, Dictionary<string, object> payload, SiteCreationOptions creationOptions)
-        {
-            var json = new { request = payload }.AsExpando();
-            string body = JsonSerializer.Serialize(json, typeof(ExpandoObject));
-            var result = await (context.Web as Web).RawRequestAsync(new ApiCall("_api/SPSiteManager/Create", ApiType.SPORest, body), HttpMethod.Post).ConfigureAwait(false);
+            var result = await (context.Web as Web).RawRequestAsync(new ApiCall(apiCall, ApiType.SPORest, body), HttpMethod.Post).ConfigureAwait(false);
 
             var responseJson = JsonSerializer.Deserialize<JsonElement>(result.Json);
 
@@ -140,18 +236,19 @@ namespace PnP.Core.Admin.Model.SharePoint
             */
             #endregion
 
-            int siteStatus = responseJson.GetProperty("d").GetProperty("Create").GetProperty("SiteStatus").GetInt32();
+            int siteStatus = responseJson.GetProperty("d").GetProperty(statusProperty).GetProperty("SiteStatus").GetInt32();
 
             PnPContext responseContext;
             if (siteStatus == 2)
             {
                 // Site creation succeeded
-                responseContext = await context.CloneAsync(new Uri(responseJson.GetProperty("d").GetProperty("Create").GetProperty("SiteUrl").ToString())).ConfigureAwait(false);
+                responseContext = await context.CloneAsync(new Uri(responseJson.GetProperty("d").GetProperty(statusProperty).GetProperty("SiteUrl").ToString())).ConfigureAwait(false);
             }
             else if (siteStatus == 1)
             {
                 // Site creation in progress, let's wait for it to finish
-                responseContext = await VerifySiteStatusAsync(context, payload["Url"].ToString(), creationOptions.MaxStatusChecks.Value, creationOptions.WaitAfterStatusCheck.Value).ConfigureAwait(false);
+                responseContext = await VerifySiteStatusAsync(context, usingSpSiteManager ? payload["GroupId"].ToString() : payload["Url"].ToString(),
+                    usingSpSiteManager, creationOptions.MaxStatusChecks.Value, creationOptions.WaitAfterStatusCheck.Value).ConfigureAwait(false);
             }
             else
             {
@@ -180,7 +277,7 @@ namespace PnP.Core.Admin.Model.SharePoint
         {
             context.Logger.LogInformation($"Started waiting for the async provisioning of site {context.Uri} to be complete");
 
-            var stopwatch = new Stopwatch();             
+            var stopwatch = new Stopwatch();
             stopwatch.Start();
 
             bool isProvisioningComplete = false;
@@ -210,7 +307,7 @@ namespace PnP.Core.Admin.Model.SharePoint
 
                     // Try "push" the process
                     await (context.Web as Web).RawRequestAsync(
-                        new ApiCall("_api/Microsoft.Sharepoint.Utilities.WebTemplateExtensions.SiteScriptUtility.ValidatePendingWebTemplateExtension", ApiType.SPORest), 
+                        new ApiCall("_api/Microsoft.Sharepoint.Utilities.WebTemplateExtensions.SiteScriptUtility.ValidatePendingWebTemplateExtension", ApiType.SPORest),
                         HttpMethod.Post).ConfigureAwait(false);
                     validatePendingWebTemplateExtensionCalled = true;
 
@@ -237,12 +334,26 @@ namespace PnP.Core.Admin.Model.SharePoint
             }
         }
 
-        private static async Task<PnPContext> VerifySiteStatusAsync(PnPContext context, string urlToCheck, int maxStatusChecks, int waitAfterStatusCheck)
+        private static async Task<PnPContext> VerifySiteStatusAsync(PnPContext context, string urlOrGroupToCheck, bool usingSpSiteManager, int maxStatusChecks, int waitAfterStatusCheck)
         {
             var siteCreated = false;
             var siteUrl = string.Empty;
             var statusCheckAttempt = 1;
             int lastSiteStatus = -1;
+
+            string apiCall;
+            string statusProperty;
+
+            if (usingSpSiteManager)
+            {
+                apiCall = $"_api/SPSiteManager/status?url='{HttpUtility.UrlEncode(urlOrGroupToCheck)}'";
+                statusProperty = "Status";
+            }
+            else
+            {
+                apiCall = $"_api/groupsitemanager/GetSiteStatus('{urlOrGroupToCheck}')";
+                statusProperty = "GetSiteStatus";
+            }
 
             do
             {
@@ -253,7 +364,7 @@ namespace PnP.Core.Admin.Model.SharePoint
 
                 try
                 {
-                    var result = await (context.Web as Web).RawRequestAsync(new ApiCall($"_api/SPSiteManager/status?url='{HttpUtility.UrlEncode(urlToCheck)}'", ApiType.SPORest), HttpMethod.Get).ConfigureAwait(false);
+                    var result = await (context.Web as Web).RawRequestAsync(new ApiCall(apiCall, ApiType.SPORest), HttpMethod.Get).ConfigureAwait(false);
                     var responseJson = JsonSerializer.Deserialize<JsonElement>(result.Json);
 
                     #region Json response
@@ -273,12 +384,12 @@ namespace PnP.Core.Admin.Model.SharePoint
                     */
                     #endregion
 
-                    int siteStatus = responseJson.GetProperty("d").GetProperty("Status").GetProperty("SiteStatus").GetInt32();
+                    int siteStatus = responseJson.GetProperty("d").GetProperty(statusProperty).GetProperty("SiteStatus").GetInt32();
                     lastSiteStatus = siteStatus;
                     if (siteStatus == 2)
                     {
                         siteCreated = true;
-                        siteUrl = responseJson.GetProperty("d").GetProperty("Status").GetProperty("SiteUrl").GetString();
+                        siteUrl = responseJson.GetProperty("d").GetProperty(statusProperty).GetProperty("SiteUrl").GetString();
                     }
                 }
 #pragma warning disable CA1031 // Do not catch general exception types
@@ -286,7 +397,7 @@ namespace PnP.Core.Admin.Model.SharePoint
 #pragma warning restore CA1031 // Do not catch general exception types
                 {
                     // Log and eat exception here
-                    context.Logger.LogWarning(PnPCoreAdminResources.Log_Warning_ExceptionWhileGettingSiteStatus, urlToCheck, ex.ToString());
+                    context.Logger.LogWarning(PnPCoreAdminResources.Log_Warning_ExceptionWhileGettingSiteStatus, urlOrGroupToCheck, ex.ToString());
                 }
 
                 statusCheckAttempt++;
@@ -347,15 +458,6 @@ namespace PnP.Core.Admin.Model.SharePoint
             return Guid.Empty;
         }
 
-        internal static async Task<PnPContext> CreateTeamSiteAsync(PnPContext context, TeamSiteOptions siteToCreate, SiteCreationOptions creationOptions)
-        {
-            return null;
-        }
-
-        internal static async Task<PnPContext> CreateClassicSiteAsync(PnPContext context, ClassicSiteOptions siteToCreate, SiteCreationOptions creationOptions)
-        {
-            return null;
-        }
 
     }
 }

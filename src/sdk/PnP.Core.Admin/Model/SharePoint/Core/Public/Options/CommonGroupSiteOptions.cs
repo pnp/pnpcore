@@ -15,7 +15,7 @@ namespace PnP.Core.Admin.Model.SharePoint
         /// <param name="displayName">Display name for the group to create</param>
         public CommonGroupSiteOptions(string alias, string displayName)
         {
-            Alias = alias;
+            Alias = alias;            
             DisplayName = displayName;
         }
 
@@ -62,7 +62,7 @@ namespace PnP.Core.Admin.Model.SharePoint
         /// <summary>
         /// The geography in which to create the site collection. Only applicable to multi-geo enabled tenants
         /// </summary>
-        public GeoLocation PreferredDataLocation { get; set; }
+        public GeoLocation? PreferredDataLocation { get; set; }
 
     }
 }

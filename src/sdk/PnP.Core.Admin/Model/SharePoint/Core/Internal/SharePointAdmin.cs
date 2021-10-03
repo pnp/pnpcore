@@ -260,24 +260,24 @@ namespace PnP.Core.Admin.Model.SharePoint
             return CreateSiteCollectionAsync(siteToCreate, creationOptions).GetAwaiter().GetResult();
         }
 
-        public async Task RecycleSiteCollectionAsync(Uri siteToDelete)
+        public async Task RecycleSiteCollectionAsync(Uri siteToDelete, string webTemplate)
         {
-            await SiteCollectionManager.RecycleSiteCollectionAsync(context, siteToDelete).ConfigureAwait(false);
+            await SiteCollectionManager.RecycleSiteCollectionAsync(context, siteToDelete, webTemplate).ConfigureAwait(false);
         }
 
-        public void RecycleSiteCollection(Uri siteToDelete)
+        public void RecycleSiteCollection(Uri siteToDelete, string webTemplate)
         {
-            RecycleSiteCollectionAsync(siteToDelete).GetAwaiter().GetResult();
+            RecycleSiteCollectionAsync(siteToDelete, webTemplate).GetAwaiter().GetResult();
         }
 
-        public async Task DeleteSiteCollectionAsync(Uri siteToDelete)
+        public async Task DeleteSiteCollectionAsync(Uri siteToDelete, string webTemplate)
         {
-            await SiteCollectionManager.DeleteSiteCollectionAsync(context, siteToDelete).ConfigureAwait(false);
+            await SiteCollectionManager.DeleteSiteCollectionAsync(context, siteToDelete, webTemplate).ConfigureAwait(false);
         }
 
-        public void DeleteSiteCollection(Uri siteToDelete)
+        public void DeleteSiteCollection(Uri siteToDelete, string webTemplate)
         {
-            DeleteSiteCollectionAsync(siteToDelete).GetAwaiter().GetResult();
+            DeleteSiteCollectionAsync(siteToDelete, webTemplate).GetAwaiter().GetResult();
         }
     }
 }

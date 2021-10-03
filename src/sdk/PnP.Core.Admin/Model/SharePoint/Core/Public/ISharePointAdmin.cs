@@ -169,28 +169,32 @@ namespace PnP.Core.Admin.Model.SharePoint
         /// Recycle a site collection. The site collection ends up in the recycle bin and can be restored.
         /// </summary>
         /// <param name="siteToDelete">Site collection to recycle</param>
+        /// <param name="webTemplate">The web template (e.g. STS#3, GROUP#0) of the site collection is used to determine the best delete approach</param>
         /// <returns></returns>
-        Task RecycleSiteCollectionAsync(Uri siteToDelete);
+        Task RecycleSiteCollectionAsync(Uri siteToDelete, string webTemplate);
 
         /// <summary>
         /// Recycle a site collection. The site collection ends up in the recycle bin and can be restored.
         /// </summary>
         /// <param name="siteToDelete">Site collection to recycle</param>
+        /// <param name="webTemplate">The web template (e.g. STS#3, GROUP#0) of the site collection is used to determine the best delete approach</param>
         /// <returns></returns>
-        void RecycleSiteCollection(Uri siteToDelete);
+        void RecycleSiteCollection(Uri siteToDelete, string webTemplate);
 
         /// <summary>
         /// Deletes a site collection. The deleted site collection is also removed from the recycle bin!
         /// </summary>
         /// <param name="siteToDelete">Site collection to delete</param>
+        /// <param name="webTemplate">The web template (e.g. STS#3, GROUP#0) of the site collection is used to determine the best delete approach</param>
         /// <returns></returns>
-        Task DeleteSiteCollectionAsync(Uri siteToDelete);
+        Task DeleteSiteCollectionAsync(Uri siteToDelete, string webTemplate);
 
         /// <summary>
         /// Deletes a site collection. The deleted site collection is also removed from the recycle bin!
         /// </summary>
         /// <param name="siteToDelete">Site collection to delete</param>
+        /// <param name="webTemplate">The web template (e.g. STS#3, GROUP#0) of the site collection is used to determine the best delete approach</param>
         /// <returns></returns>
-        void DeleteSiteCollection(Uri siteToDelete);
+        void DeleteSiteCollection(Uri siteToDelete, string webTemplate);
     }
 }

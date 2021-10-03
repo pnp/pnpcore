@@ -6,6 +6,11 @@
     public enum Language
     {
         /// <summary>
+        /// Use default tenant language
+        /// </summary>
+        Default = 0,
+        
+        /// <summary>
         /// Arabic
         /// </summary>
         Arabic = 1025,
