@@ -890,16 +890,18 @@ namespace PnP.Core.Transformation.SharePoint.Publishing
                 if (context.Web.IsSubSite())
                 {
                     string siteCollectionUrl = context.Site.EnsureProperty(o => o.Url);
-                    return new ClientContext(siteCollectionUrl);
+
+                    return context.Clone(siteCollectionUrl);
+                    //return new ClientContext(siteCollectionUrl);
                 }
                 else
                 {
                     return context;
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                logger.LogError(SharePointTransformationResources.Info_AnalyserFoundItems);
+                logger.LogError(SharePointTransformationResources.Info_AnalyserFoundItems, ex.Message);
                 throw;
             }
         }
