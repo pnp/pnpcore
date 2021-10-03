@@ -871,12 +871,12 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.CreateSiteCollectionAsync
   nameWithType: ISharePointAdmin.CreateSiteCollectionAsync
-- uid: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.DeleteSiteCollection(Uri)
-  name: DeleteSiteCollection(Uri)
-  href: api/PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.html#PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_DeleteSiteCollection_Uri_
-  commentId: M:PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.DeleteSiteCollection(Uri)
-  fullName: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.DeleteSiteCollection(Uri)
-  nameWithType: ISharePointAdmin.DeleteSiteCollection(Uri)
+- uid: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.DeleteSiteCollection(Uri,System.String)
+  name: DeleteSiteCollection(Uri, String)
+  href: api/PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.html#PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_DeleteSiteCollection_Uri_System_String_
+  commentId: M:PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.DeleteSiteCollection(Uri,System.String)
+  fullName: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.DeleteSiteCollection(Uri, System.String)
+  nameWithType: ISharePointAdmin.DeleteSiteCollection(Uri, String)
 - uid: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.DeleteSiteCollection*
   name: DeleteSiteCollection
   href: api/PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.html#PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_DeleteSiteCollection_
@@ -884,12 +884,12 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.DeleteSiteCollection
   nameWithType: ISharePointAdmin.DeleteSiteCollection
-- uid: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.DeleteSiteCollectionAsync(Uri)
-  name: DeleteSiteCollectionAsync(Uri)
-  href: api/PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.html#PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_DeleteSiteCollectionAsync_Uri_
-  commentId: M:PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.DeleteSiteCollectionAsync(Uri)
-  fullName: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.DeleteSiteCollectionAsync(Uri)
-  nameWithType: ISharePointAdmin.DeleteSiteCollectionAsync(Uri)
+- uid: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.DeleteSiteCollectionAsync(Uri,System.String)
+  name: DeleteSiteCollectionAsync(Uri, String)
+  href: api/PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.html#PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_DeleteSiteCollectionAsync_Uri_System_String_
+  commentId: M:PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.DeleteSiteCollectionAsync(Uri,System.String)
+  fullName: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.DeleteSiteCollectionAsync(Uri, System.String)
+  nameWithType: ISharePointAdmin.DeleteSiteCollectionAsync(Uri, String)
 - uid: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.DeleteSiteCollectionAsync*
   name: DeleteSiteCollectionAsync
   href: api/PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.html#PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_DeleteSiteCollectionAsync_
@@ -1157,12 +1157,12 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.IsCurrentUserTenantAdminAsync
   nameWithType: ISharePointAdmin.IsCurrentUserTenantAdminAsync
-- uid: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.RecycleSiteCollection(Uri)
-  name: RecycleSiteCollection(Uri)
-  href: api/PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.html#PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_RecycleSiteCollection_Uri_
-  commentId: M:PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.RecycleSiteCollection(Uri)
-  fullName: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.RecycleSiteCollection(Uri)
-  nameWithType: ISharePointAdmin.RecycleSiteCollection(Uri)
+- uid: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.RecycleSiteCollection(Uri,System.String)
+  name: RecycleSiteCollection(Uri, String)
+  href: api/PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.html#PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_RecycleSiteCollection_Uri_System_String_
+  commentId: M:PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.RecycleSiteCollection(Uri,System.String)
+  fullName: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.RecycleSiteCollection(Uri, System.String)
+  nameWithType: ISharePointAdmin.RecycleSiteCollection(Uri, String)
 - uid: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.RecycleSiteCollection*
   name: RecycleSiteCollection
   href: api/PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.html#PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_RecycleSiteCollection_
@@ -1170,12 +1170,12 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.RecycleSiteCollection
   nameWithType: ISharePointAdmin.RecycleSiteCollection
-- uid: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.RecycleSiteCollectionAsync(Uri)
-  name: RecycleSiteCollectionAsync(Uri)
-  href: api/PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.html#PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_RecycleSiteCollectionAsync_Uri_
-  commentId: M:PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.RecycleSiteCollectionAsync(Uri)
-  fullName: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.RecycleSiteCollectionAsync(Uri)
-  nameWithType: ISharePointAdmin.RecycleSiteCollectionAsync(Uri)
+- uid: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.RecycleSiteCollectionAsync(Uri,System.String)
+  name: RecycleSiteCollectionAsync(Uri, String)
+  href: api/PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.html#PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_RecycleSiteCollectionAsync_Uri_System_String_
+  commentId: M:PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.RecycleSiteCollectionAsync(Uri,System.String)
+  fullName: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.RecycleSiteCollectionAsync(Uri, System.String)
+  nameWithType: ISharePointAdmin.RecycleSiteCollectionAsync(Uri, String)
 - uid: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.RecycleSiteCollectionAsync*
   name: RecycleSiteCollectionAsync
   href: api/PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.html#PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_RecycleSiteCollectionAsync_
@@ -1481,6 +1481,12 @@ references:
   commentId: F:PnP.Core.Admin.Model.SharePoint.Language.Dari
   fullName: PnP.Core.Admin.Model.SharePoint.Language.Dari
   nameWithType: Language.Dari
+- uid: PnP.Core.Admin.Model.SharePoint.Language.Default
+  name: Default
+  href: api/PnP.Core.Admin.Model.SharePoint.Language.html#PnP_Core_Admin_Model_SharePoint_Language_Default
+  commentId: F:PnP.Core.Admin.Model.SharePoint.Language.Default
+  fullName: PnP.Core.Admin.Model.SharePoint.Language.Default
+  nameWithType: Language.Default
 - uid: PnP.Core.Admin.Model.SharePoint.Language.Dutch
   name: Dutch
   href: api/PnP.Core.Admin.Model.SharePoint.Language.html#PnP_Core_Admin_Model_SharePoint_Language_Dutch

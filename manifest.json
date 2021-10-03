@@ -114,7 +114,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Admin.Model.SharePoint.CommonGroupSiteOptions.html",
-          "hash": "x2qrA0CnGMNXev6aAdcnVw=="
+          "hash": "e5Dt38V6xiz8U438PWgdow=="
         }
       },
       "is_incremental": false,
@@ -174,7 +174,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.html",
-          "hash": "D1zWTpnbOBbkhh2W//3epQ=="
+          "hash": "2oklhXG8NTO1yP3CJKyGKg=="
         }
       },
       "is_incremental": false,
@@ -210,7 +210,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Admin.Model.SharePoint.Language.html",
-          "hash": "sdc0H1O/mF+ql7i0Gfm1lg=="
+          "hash": "I1ACmkTWx6MiihIjgPN3Sw=="
         }
       },
       "is_incremental": false,
