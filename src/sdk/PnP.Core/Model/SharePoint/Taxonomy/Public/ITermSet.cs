@@ -68,6 +68,6 @@ namespace PnP.Core.Model.SharePoint
         /// </summary>
         /// <param name="key">Property key</param>
         /// <param name="value">Property value</param>
-        public ITermCollection GetTermsByCustomProperty(string key, string value);
+        public Task<ITermCollection> GetTermsByCustomProperty(string key, string value);
     }
 }

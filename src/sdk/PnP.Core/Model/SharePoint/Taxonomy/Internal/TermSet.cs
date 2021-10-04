@@ -1,8 +1,10 @@
 ﻿using PnP.Core.Services;
+using PnP.Core.Services.Core.CSOM.Requests.Terms;
 using System;
 using System.Collections.Generic;
 using System.Dynamic;
 using System.Linq;
+using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
 
@@ -165,7 +167,7 @@ namespace PnP.Core.Model.SharePoint
             }
         }
 
-        public ITermCollection GetTermsByCustomProperty(string key, string value)
+        public async Task<ITermCollection> GetTermsByCustomProperty(string key, string value)
         {
             if (string.IsNullOrEmpty(key))
             {
@@ -177,7 +179,19 @@ namespace PnP.Core.Model.SharePoint
                 throw new ArgumentNullException(nameof(value));
             }
 
-            //throw new NotImplementedException();
+            GetTermsByCustomPropertyRequest request = new GetTermsByCustomPropertyRequest("key1", "value1", false);
+
+            ApiCall getTermsCall = new ApiCall(new List<Services.Core.CSOM.Requests.IRequest<object>>() { request })
+            {
+                Commit = true,
+            };
+
+            getTermsCall.Request = this.PnPContext.Uri.ToString();
+
+            var result = await RawRequestAsync(getTermsCall, HttpMethod.Post).ConfigureAwait(false);
+
+
+
             return null;
         }
         #endregion

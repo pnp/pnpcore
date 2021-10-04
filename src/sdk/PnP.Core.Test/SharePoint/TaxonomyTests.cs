@@ -40,7 +40,7 @@ namespace PnP.Core.Test.SharePoint
         public static void TestFixtureSetup(TestContext context)
         {
             // Configure mocking default for all tests in this class, unless override by a specific test
-            //TestCommon.Instance.Mocking = false;
+            TestCommon.Instance.Mocking = false;
         }
 
         [TestMethod]
@@ -1083,6 +1083,63 @@ namespace PnP.Core.Test.SharePoint
                 // Delete the group again
                 await group.DeleteAsync();
 
+            }
+        }
+
+        [TestMethod]
+        public async Task GetTermsByProperties()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                string newGroupName = GetGroupName(context);
+
+                // Add new group
+                var group = await context.TermStore.Groups.AddAsync(newGroupName);
+
+                // Add term set
+                var termSet = await group.Sets.AddAsync("PnPSet1", "Set description");
+
+                // Add term
+                var newTerm = await termSet.Terms.AddAsync("T1", "Description in English");
+
+                // test term update
+                newTerm.AddProperty("property1", "value1");
+                await newTerm.UpdateAsync();
+
+                // add child term
+                var newChildTerm = await newTerm.Terms.AddAsync("T1.1", "English T1.1");
+
+                // update child term
+                newChildTerm.AddProperty("property2", "value2");
+                await newChildTerm.UpdateAsync();
+
+                using (var context2 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+                {
+                    var groupLoadedViaLinq2 = await context2.TermStore.Groups.GetByNameAsync(newGroupName);
+                    Assert.IsTrue(groupLoadedViaLinq2.Requested);
+
+                    // read the termset again to test property loading
+                    var termsetLoadedViaLinq2 = await groupLoadedViaLinq2.Sets.GetByIdAsync(termSet.Id, p => p.Properties);
+                    Assert.IsTrue(termsetLoadedViaLinq2.Requested);
+                    Assert.IsTrue(termsetLoadedViaLinq2.Id == termSet.Id);
+
+                    // load the terms by custom property
+                    var terms = await termsetLoadedViaLinq2.GetTermsByCustomProperty("property1", "value1");
+                    Assert.AreEqual(terms.Length, 1);
+                }
+
+                // delete term
+                await newChildTerm.DeleteAsync();
+
+                // delete term 
+                await newTerm.DeleteAsync();
+
+                // Delete term set 
+                await termSet.DeleteAsync();
+
+                // Delete the group again
+                await group.DeleteAsync();
             }
         }
 
