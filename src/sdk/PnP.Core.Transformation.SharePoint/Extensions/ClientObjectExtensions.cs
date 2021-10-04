@@ -6,12 +6,12 @@ using System.Linq.Expressions;
 using System.Reflection;
 using System.Threading.Tasks;
 
-namespace PnP.Core.Transformation.SharePoint
+namespace PnP.Core.Transformation.SharePoint.Extensions
 {
     /// <summary>
     /// Class for client object extension methods
     /// </summary>
-    public static class ClientObjectExtensions
+    internal static class ClientObjectExtensions
     {
         /// <summary>
         /// Checks if the ClientObject is null

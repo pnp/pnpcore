@@ -6,9 +6,9 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 
-namespace PnP.Core.Transformation.Extensions
+namespace PnP.Core.Transformation.SharePoint.Extensions
 {
-    public static class ListExtensions
+    internal static class ListExtensions
     {
         /// <summary>
         /// Get list by using Title
