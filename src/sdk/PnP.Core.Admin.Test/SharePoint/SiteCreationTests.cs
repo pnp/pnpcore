@@ -363,6 +363,72 @@ namespace PnP.Core.Admin.Test.SharePoint
 
         #endregion
 
+        #region Classic site
+        [TestMethod]
+        public async Task CreateClassicSiteUsingDelegatedPermissions()
+        {
+            //TestCommon.Instance.Mocking = false;
+            TestCommon.Instance.UseApplicationPermissions = false;
+
+            ClassicSiteOptions classicSite = null;
+
+            // Create the site collection
+            try
+            {
+                using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+                {
+                    using (var tenantAdminContext = await context.GetSharePointAdmin().GetTenantAdminCenterContextAsync())
+                    {
+                        // Persist the used site url as we need to have the same url when we run an offline test
+                        Uri siteUrl;
+                        string owner;
+                        if (!TestCommon.Instance.Mocking)
+                        {
+                            siteUrl = new Uri($"https://{context.Uri.DnsSafeHost}/sites/pnpcoresdktestclassicsite{Guid.NewGuid().ToString().Replace("-", "")}");
+                            owner = context.Web.GetCurrentUser().LoginName;
+                            Dictionary<string, string> properties = new Dictionary<string, string>
+                            {
+                                { "SiteUrl", siteUrl.ToString() },
+                                { "Owner",  owner}
+                            };
+                            TestManager.SaveProperties(context, properties);
+                        }
+                        else
+                        {
+                            siteUrl = new Uri(TestManager.GetProperties(context)["SiteUrl"]);
+                            owner = TestManager.GetProperties(context)["Owner"];
+                        }
+
+                        classicSite = new ClassicSiteOptions(siteUrl, "PnP Core SDK Test", "STS#0", owner, Language.English,
+                            Model.SharePoint.TimeZone.UTCPLUS0100_BRUSSELS_COPENHAGEN_MADRID_PARIS);
+
+                        SiteCreationOptions siteCreationOptions = new SiteCreationOptions()
+                        {
+                            UsingApplicationPermissions = false
+                        };
+
+                        using (var newSiteContext = tenantAdminContext.GetSharePointAdmin().CreateSiteCollection(classicSite, siteCreationOptions))
+                        {
+                            var web = await newSiteContext.Web.GetAsync(p => p.Url, p => p.Title, p => p.Description, p => p.Language);
+                            Assert.IsTrue(web.Url == classicSite.Url);
+                            Assert.IsTrue(web.Title == classicSite.Title);
+                            Assert.IsTrue(web.Language == (int)classicSite.Language);
+                        }
+                    }
+                }
+            }
+            finally
+            {
+                TestCommon.Instance.UseApplicationPermissions = false;
+                using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+                {
+                    context.GetSharePointAdmin().DeleteSiteCollection(classicSite.Url, classicSite.WebTemplate);
+                }
+
+            }
+        }
+        #endregion
+
         #region Recycle, Restore, Delete 
 
         [TestMethod]

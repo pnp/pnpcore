@@ -31,6 +31,11 @@ namespace PnP.Core.Services.Core.CSOM.QueryAction
                     string multiValue = string.Join("", (Value as List<string>).Select(value => $"<Object Type=\"String\">{TypeSpecificHandling(value, Type)}</Object>"));
                     return $"<{ParameterTagName} Type=\"Array\">{multiValue}</{ParameterTagName}>";
                 }
+                else if (Value is List<NamedProperty>)
+                {
+                    string properties = string.Join("", (Value as List<NamedProperty>).Select(value => $"<Property Name=\"{value.Name}\" Type=\"{value.Type}\">{value.Value}</Property>"));
+                    return $"<{ParameterTagName} TypeId=\"{{{TypeId}}}\">{properties}</{ParameterTagName}>";
+                }
                 else if (Value is DateTime valueAsDateTime)
                 {
                     return $"<{ParameterTagName} Type=\"{type}\">{valueAsDateTime.ToUniversalTime():yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fffzzz}</{ParameterTagName}>";
@@ -54,8 +59,16 @@ namespace PnP.Core.Services.Core.CSOM.QueryAction
 
                 return $"<{ParameterTagName} Type=\"{type}\">{stringValue}</{ParameterTagName}>";
             }
+            else
+            {
+                if (Value is List<NamedProperty>)
+                {
+                    string properties = string.Join("", (Value as List<NamedProperty>).Select(value => $"<Property Name=\"{value.Name}\" Type=\"{value.Type}\">{value.Value}</Property>"));
+                    return $"<{ParameterTagName} TypeId=\"{{{TypeId}}}\">{properties}</{ParameterTagName}>";
+                }
 
-            return $"<{ParameterTagName} TypeId=\"{{{TypeId}}}\">{stringValue}</{ParameterTagName}>";
+                return $"<{ParameterTagName} TypeId=\"{{{TypeId}}}\">{stringValue}</{ParameterTagName}>";
+            }
         }
 
         internal virtual string SerializeValue()

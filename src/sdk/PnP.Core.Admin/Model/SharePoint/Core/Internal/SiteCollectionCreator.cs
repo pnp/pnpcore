@@ -1,6 +1,8 @@
 ﻿using Microsoft.Extensions.Logging;
+using PnP.Core.Admin.Services.Core.CSOM.Requests.Tenant;
 using PnP.Core.Model.SharePoint;
 using PnP.Core.Services;
+using PnP.Core.Services.Core.CSOM.Requests;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -150,7 +152,31 @@ namespace PnP.Core.Admin.Model.SharePoint
 
         private static async Task<PnPContext> CreateClassicSiteAsync(PnPContext context, ClassicSiteOptions siteToCreate, SiteCreationOptions creationOptions)
         {
-            return null;
+            using (var tenantAdminContext = await context.GetSharePointAdmin().GetTenantAdminCenterContextAsync().ConfigureAwait(false))
+            {
+                string owner = siteToCreate.Owner;                
+                var splitOwner = owner.Split(new char[] { '|' }, StringSplitOptions.RemoveEmptyEntries);
+                if (splitOwner.Length == 3)
+                {
+                    owner = splitOwner[2];
+                }
+
+                List<IRequest<object>> csomRequests = new List<IRequest<object>>
+                {
+                    new CreateSiteRequest(siteToCreate.Url, siteToCreate.Title, owner, siteToCreate.WebTemplate, (int)siteToCreate.Language, (int)siteToCreate.TimeZone)
+                };
+
+                var result = await (tenantAdminContext.Web as Web).RawRequestAsync(new ApiCall(csomRequests), HttpMethod.Post).ConfigureAwait(false);
+
+                SpoOperation op = result.ApiCall.CSOMRequests[0].Result as SpoOperation;
+
+                if (!op.IsComplete)
+                {
+                    await SiteCollectionManager.WaitForSpoOperationCompleteAsync(tenantAdminContext, op).ConfigureAwait(false);
+                }
+
+                return await context.CloneAsync(siteToCreate.Url).ConfigureAwait(false);
+            }
         }
 
         private static async Task<SiteCreationOptions> EnsureSiteCreationOptionsAsync(PnPContext context, SiteCreationOptions creationOptions)
