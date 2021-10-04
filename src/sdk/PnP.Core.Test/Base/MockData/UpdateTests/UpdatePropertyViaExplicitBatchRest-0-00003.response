@@ -1,10 +1,10 @@
---batchresponse_c70a7154-b327-4324-9abc-02e082a7c39e
+--batchresponse_bde3403e-6916-41ab-a5e1-2167e785ad1f
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 204 No Content
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
-ETAG: "5848"
+ETAG: "9"
 
 
---batchresponse_c70a7154-b327-4324-9abc-02e082a7c39e--
+--batchresponse_bde3403e-6916-41ab-a5e1-2167e785ad1f--

@@ -1,9 +1,9 @@
---batchresponse_69c57efc-84f2-45df-9b23-978299ae1331
+--batchresponse_2a47b3ee-4414-4522-b6c9-3806a567e5a0
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{"d":{"results":[{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'667904b0-e87d-4563-8858-f4a288a3db67')","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'667904b0-e87d-4563-8858-f4a288a3db67')","etag":"\"2\"","type":"SP.List"},"ContentTypesEnabled":false,"Description":"TEST DESCRIPTION","Direction":"none","DocumentTemplateUrl":null,"DraftVersionVisibility":0,"EnableAttachments":false,"EnableFolderCreation":true,"EnableMinorVersions":false,"EnableModeration":true,"EnableVersioning":true,"ForceCheckout":false,"Hidden":false,"Id":"667904b0-e87d-4563-8858-f4a288a3db67","ImageUrl":"/_layouts/15/images/itgen.png?rev=47","IrmExpire":false,"IrmReject":false,"IsApplicationList":false,"ListExperienceOptions":1,"MajorVersionLimit":400,"MajorWithMinorVersionsLimit":20,"TemplateFeatureId":"00bfea71-de22-43b2-a848-c05709900100"}]}}
---batchresponse_69c57efc-84f2-45df-9b23-978299ae1331--
+{"d":{"results":[{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-2/_api/Web/Lists(guid'3ab3af8c-7ddb-4c45-87fc-b748f55cb767')","uri":"https://bertonline.sharepoint.com/sites/prov-2/_api/Web/Lists(guid'3ab3af8c-7ddb-4c45-87fc-b748f55cb767')","etag":"\"2\"","type":"SP.List"},"ContentTypesEnabled":false,"Description":"TEST DESCRIPTION","Direction":"none","DocumentTemplateUrl":null,"DraftVersionVisibility":0,"EnableAttachments":false,"EnableFolderCreation":true,"EnableMinorVersions":false,"EnableModeration":true,"EnableVersioning":true,"ForceCheckout":false,"Hidden":false,"Id":"3ab3af8c-7ddb-4c45-87fc-b748f55cb767","ImageUrl":"/_layouts/15/images/itgen.png?rev=47","IrmExpire":false,"IrmReject":false,"IsApplicationList":false,"ListExperienceOptions":1,"MajorVersionLimit":400,"MajorWithMinorVersionsLimit":20,"TemplateFeatureId":"00bfea71-de22-43b2-a848-c05709900100"}]}}
+--batchresponse_2a47b3ee-4414-4522-b6c9-3806a567e5a0--

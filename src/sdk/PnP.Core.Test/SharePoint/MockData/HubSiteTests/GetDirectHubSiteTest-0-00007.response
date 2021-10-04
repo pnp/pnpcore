@@ -1,9 +1,9 @@
---batchresponse_67e040ea-6590-4846-975a-e1e7a6d843f9
+--batchresponse_6d72fb4d-b8cd-45cf-8859-51bdb9b27e1d
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{"d":{"__metadata":{"id":"https://capadevtest.sharepoint.com/sites/pnpcoresdktestgroup/_api/Site","uri":"https://capadevtest.sharepoint.com/sites/pnpcoresdktestgroup/_api/Site","type":"SP.Site"},"HubSiteId":"a24405b9-c457-4548-875c-09c5b23339d5","Id":"a24405b9-c457-4548-875c-09c5b23339d5","IsHubSite":true}}
---batchresponse_67e040ea-6590-4846-975a-e1e7a6d843f9--
+{"d":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-2/_api/Site","uri":"https://bertonline.sharepoint.com/sites/prov-2/_api/Site","type":"SP.Site"},"HubSiteId":"f92f9e40-1110-43ef-aa0e-0822e13fb7ba","Id":"f92f9e40-1110-43ef-aa0e-0822e13fb7ba","IsHubSite":true}}
+--batchresponse_6d72fb4d-b8cd-45cf-8859-51bdb9b27e1d--

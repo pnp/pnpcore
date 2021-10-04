@@ -1,9 +1,0 @@
---batchresponse_509bf2d8-c7d4-4c83-b6f8-110956b4c70d
-Content-Type: application/http
-Content-Transfer-Encoding: binary
-
-HTTP/1.1 200 OK
-CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
-
-{"d":{"results":[{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'52b23924-9aee-45be-ba5b-816626939da5')","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'52b23924-9aee-45be-ba5b-816626939da5')","etag":"\"2\"","type":"SP.List"},"Id":"52b23924-9aee-45be-ba5b-816626939da5","Title":"PNP_SDK_TEST_PublishFileBatchAsyncTest"},{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'7b4f24cb-832b-404a-b996-e2bb2440c101')","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'7b4f24cb-832b-404a-b996-e2bb2440c101')","etag":"\"2\"","type":"SP.List"},"Id":"7b4f24cb-832b-404a-b996-e2bb2440c101","Title":"PNP_SDK_TEST_PublishFileBatchTest"}]}}
---batchresponse_509bf2d8-c7d4-4c83-b6f8-110956b4c70d--

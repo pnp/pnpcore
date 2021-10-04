@@ -1,4 +1,4 @@
---batchresponse_cff0f627-3bd7-4cc8-b8a9-ade991184a23
+--batchresponse_e5a0f31b-0082-4482-a280-02db4865b306
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
@@ -10,22 +10,22 @@ CONTENT-TYPE: application/json; charset=utf-8
 "ID": "1",
 "PermMask": "0x7ffffffffffbffff",
 "FSObjType": "0",
-"UniqueId": "{7BE93205-41BC-442F-BD67-5EDD12553F4E}",
-"ContentTypeId": "0x01006F71D748A206C64C8FA04C36A95A402B",
-"FileRef": "\u002fsites\u002fprov-1\u002fLists\u002fPNP_SDK_TEST_VerifyUserFieldsInRepetiveUpdates\u002f1_.000",
-"FileRef.urlencode": "%2Fsites%2Fprov%2D1%2FLists%2FPNP%5FSDK%5FTEST%5FVerifyUserFieldsInRepetiveUpdates%2F1%5F%2E000",
-"FileRef.urlencodeasurl": "\u002fsites\u002fprov-1\u002fLists\u002fPNP_SDK_TEST_VerifyUserFieldsInRepetiveUpdates\u002f1_.000",
-"FileRef.urlencoding": "\u002fsites\u002fprov-1\u002fLists\u002fPNP_SDK_TEST_VerifyUserFieldsInRepetiveUpdates\u002f1_.000",
-"FileRef.scriptencodeasurl": "\\u002fsites\\u002fprov-1\\u002fLists\\u002fPNP_SDK_TEST_VerifyUserFieldsInRepetiveUpdates\\u002f1_.000",
+"UniqueId": "{8A0CCB6C-0D38-41F3-9EE1-C85CB2F97AA9}",
+"ContentTypeId": "0x01007BE828708905724898BD6377B398AEC2",
+"FileRef": "\u002fsites\u002fprov-2\u002fLists\u002fPNP_SDK_TEST_VerifyUserFieldsInRepetiveUpdates\u002f1_.000",
+"FileRef.urlencode": "%2Fsites%2Fprov%2D2%2FLists%2FPNP%5FSDK%5FTEST%5FVerifyUserFieldsInRepetiveUpdates%2F1%5F%2E000",
+"FileRef.urlencodeasurl": "\u002fsites\u002fprov-2\u002fLists\u002fPNP_SDK_TEST_VerifyUserFieldsInRepetiveUpdates\u002f1_.000",
+"FileRef.urlencoding": "\u002fsites\u002fprov-2\u002fLists\u002fPNP_SDK_TEST_VerifyUserFieldsInRepetiveUpdates\u002f1_.000",
+"FileRef.scriptencodeasurl": "\\u002fsites\\u002fprov-2\\u002fLists\\u002fPNP_SDK_TEST_VerifyUserFieldsInRepetiveUpdates\\u002f1_.000",
 "Attachments": "0",
 "SMTotalSize": "320",
 "_CommentFlags": "",
 "_CommentCount": "",
 "Title": "updated title 2",
-"User1": [{"id":"6","title":"Bert Jansen (Cloud)","email":"bert.jansen@bertonline.onmicrosoft.com","sip":"bert.jansen@bertonline.onmicrosoft.com","picture":""}],
-"User1.id": "6",
+"User1": [{"id":"11","title":"Bert Jansen (Cloud)","email":"bert.jansen@bertonline.onmicrosoft.com","sip":"bert.jansen@bertonline.onmicrosoft.com","picture":""}],
+"User1.id": "11",
 "User1.title": "Bert Jansen (Cloud)",
-"User1.span": "<span class=\"ms-noWrap\"><span class='ms-imnSpan'><a href='#' onclick='IMNImageOnClick(event);return false;' class='ms-imnlink ms-spimn-presenceLink' ><span class='ms-spimn-presenceWrapper ms-imnImg ms-spimn-imgSize-10x10'><img name='imnmark' class='ms-spimn-img ms-spimn-presence-disconnected-10x10x32' title='' ShowOfflinePawn='1' src='\u002f_layouts\u002f15\u002fimages\u002fspimn.png?rev=47'  alt='No presence information' sip='bert.jansen@bertonline.onmicrosoft.com' id='imn_477,type=sip'\u002f><\u002fspan><\u002fa><\u002fspan><span class=\"ms-noWrap ms-imnSpan\"><a href='#' onclick='IMNImageOnClick(event);return false;' class='ms-imnlink' tabIndex='-1'><img name='imnmark' class='ms-hide' title='' ShowOfflinePawn='1' src='\u002f_layouts\u002f15\u002fimages\u002fblank.gif?rev=47'  alt='' sip='bert.jansen@bertonline.onmicrosoft.com' id='imn_478,type=sip'\u002f><\u002fa><a class=\"ms-subtleLink\" onclick=\"GoToLinkOrDialogNewWindow(this);return false;\" href=\"\u002fsites\u002fprov-1\u002f_layouts\u002f15\u002fuserdisp.aspx?ID=6\">Bert Jansen (Cloud)<\u002fa><\u002fspan><\u002fspan>",
+"User1.span": "<span class=\"ms-noWrap\"><span class='ms-imnSpan'><a href='#' onclick='IMNImageOnClick(event);return false;' class='ms-imnlink ms-spimn-presenceLink' ><span class='ms-spimn-presenceWrapper ms-imnImg ms-spimn-imgSize-10x10'><img name='imnmark' class='ms-spimn-img ms-spimn-presence-disconnected-10x10x32' title='' ShowOfflinePawn='1' src='\u002f_layouts\u002f15\u002fimages\u002fspimn.png?rev=47'  alt='No presence information' sip='bert.jansen@bertonline.onmicrosoft.com' id='imn_143,type=sip'\u002f><\u002fspan><\u002fa><\u002fspan><span class=\"ms-noWrap ms-imnSpan\"><a href='#' onclick='IMNImageOnClick(event);return false;' class='ms-imnlink' tabIndex='-1'><img name='imnmark' class='ms-hide' title='' ShowOfflinePawn='1' src='\u002f_layouts\u002f15\u002fimages\u002fblank.gif?rev=47'  alt='' sip='bert.jansen@bertonline.onmicrosoft.com' id='imn_144,type=sip'\u002f><\u002fa><a class=\"ms-subtleLink\" onclick=\"GoToLinkOrDialogNewWindow(this);return false;\" href=\"\u002fsites\u002fprov-2\u002f_layouts\u002f15\u002fuserdisp.aspx?ID=11\">Bert Jansen (Cloud)<\u002fa><\u002fspan><\u002fspan>",
 "User1.email": "bert.jansen@bertonline.onmicrosoft.com",
 "User1.sip": "bert.jansen@bertonline.onmicrosoft.com",
 "User1.jobTitle": "Vanalles",
@@ -46,4 +46,4 @@ CONTENT-TYPE: application/json; charset=utf-8
 ,"CurrentFolderSpItemUrl" : ""
 
 }
---batchresponse_cff0f627-3bd7-4cc8-b8a9-ade991184a23--
+--batchresponse_e5a0f31b-0082-4482-a280-02db4865b306--

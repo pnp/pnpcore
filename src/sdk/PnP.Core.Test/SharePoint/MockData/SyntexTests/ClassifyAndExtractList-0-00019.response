@@ -1,4 +1,4 @@
---batchresponse_2a73064a-7c28-49a2-9791-00c135be3d57
+--batchresponse_89de245a-d9f8-499a-9644-5177e8eed89e
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
@@ -7,4 +7,4 @@ CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 LOCATION: https://bertonline.sharepoint.com/sites/ContentCenter/_api/machinelearning/publications
 
 {"d":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/ContentCenter/_api/machinelearning/publications","uri":"https://bertonline.sharepoint.com/sites/ContentCenter/_api/machinelearning/publications","type":"Microsoft.Office.Server.ContentCenter.SPMachineLearningPublicationsResult"},"Details":{"__metadata":{"type":"Collection(Microsoft.Office.Server.ContentCenter.SPMachineLearningPublicationResult)"},"results":[{"ErrorMessage":null,"Publication":{"__metadata":{"type":"Microsoft.Office.Server.ContentCenter.SPMachineLearningPublicationEntityData"},"ModelUniqueId":"ddeeb4c2-3f8e-4b6e-8b75-1d9c0db4210e","TargetLibraryServerRelativeUrl":"/sites/ContentCenter/PNP_SDK_TEST_ClassifyAndExtractList","TargetSiteUrl":"https://bertonline.sharepoint.com/sites/ContentCenter","TargetWebServerRelativeUrl":"/sites/ContentCenter","ViewOption":"NewViewAsDefault"},"StatusCode":201}]},"TotalFailures":0,"TotalSuccesses":1}}
---batchresponse_2a73064a-7c28-49a2-9791-00c135be3d57--
+--batchresponse_89de245a-d9f8-499a-9644-5177e8eed89e--

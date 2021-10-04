@@ -1,5 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PnP.Core.Model.SharePoint;
+using PnP.Core.Model.Teams;
 using PnP.Core.Services;
 using PnP.Core.Services.Core.CSOM.Requests;
 using PnP.Core.Test.Services.Core.CSOM.Requests;
@@ -382,8 +383,8 @@ namespace PnP.Core.Test.Base
                 MicrosoftGraphError error = null;
                 try
                 {
-                    // try adding a channel while the Team was not yet loaded, should result in not correctly formatted query sent to graph
-                    await context.Team.Channels.AddAsync("Fail channel");
+                    // Send a wrong Graph query to trigger a graph exception
+                    await (context.Team as Team).RawRequestAsync(new ApiCall("sites/bla", ApiType.Graph), HttpMethod.Get);
                 }
                 catch (ServiceException ex)
                 {

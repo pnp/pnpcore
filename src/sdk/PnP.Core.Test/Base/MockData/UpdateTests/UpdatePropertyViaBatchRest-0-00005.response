@@ -1,10 +1,10 @@
---batchresponse_31641e82-7bab-4894-9c62-5292ed10f5d2
+--batchresponse_18beeacb-3c14-474e-b213-d75dbf298d65
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 204 No Content
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
-ETAG: "5847"
+ETAG: "8"
 
 
---batchresponse_31641e82-7bab-4894-9c62-5292ed10f5d2--
+--batchresponse_18beeacb-3c14-474e-b213-d75dbf298d65--

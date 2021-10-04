@@ -1,9 +1,0 @@
---batchresponse_9ddff99f-0838-430f-8027-27f0892a13fc
-Content-Type: application/http
-Content-Transfer-Encoding: binary
-
-HTTP/1.1 400 Bad Request
-CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
-
-{"error":{"code":"-1, Microsoft.SharePoint.Client.InvalidClientQueryException","message":{"lang":"en-US","value":"Invalid request."}}}
---batchresponse_9ddff99f-0838-430f-8027-27f0892a13fc--

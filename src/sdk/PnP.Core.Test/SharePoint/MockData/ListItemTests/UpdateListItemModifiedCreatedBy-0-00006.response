@@ -1,9 +1,9 @@
---batchresponse_c7e156f4-e194-4fc0-ad48-56a604a820c2
+--batchresponse_d0502a2b-40fa-4fc1-b107-9857131bfb51
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{"d":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetUserById(6)","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetUserById(6)","type":"SP.User"},"Alerts":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetUserById(6)/Alerts"}},"Groups":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetUserById(6)/Groups"}},"Id":6,"IsHiddenInUI":false,"LoginName":"i:0#.f|membership|bert.jansen@bertonline.onmicrosoft.com","Title":"Bert Jansen (Cloud)","PrincipalType":1,"Email":"bert.jansen@bertonline.onmicrosoft.com","Expiration":"","IsEmailAuthenticationGuestUser":false,"IsShareByEmailGuestUser":false,"IsSiteAdmin":true,"UserId":{"__metadata":{"type":"SP.UserIdInfo"},"NameId":"1003000084e4ff61","NameIdIssuer":"urn:federation:microsoftonline"},"UserPrincipalName":"bert.jansen@bertonline.onmicrosoft.com"}}
---batchresponse_c7e156f4-e194-4fc0-ad48-56a604a820c2--
+{"d":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-2/_api/Web/GetUserById(11)","uri":"https://bertonline.sharepoint.com/sites/prov-2/_api/Web/GetUserById(11)","type":"SP.User"},"Alerts":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-2/_api/Web/GetUserById(11)/Alerts"}},"Groups":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-2/_api/Web/GetUserById(11)/Groups"}},"Id":11,"IsHiddenInUI":false,"LoginName":"i:0#.f|membership|bert.jansen@bertonline.onmicrosoft.com","Title":"Bert Jansen (Cloud)","PrincipalType":1,"Email":"bert.jansen@bertonline.onmicrosoft.com","Expiration":"","IsEmailAuthenticationGuestUser":false,"IsShareByEmailGuestUser":false,"IsSiteAdmin":true,"UserId":{"__metadata":{"type":"SP.UserIdInfo"},"NameId":"1003000084e4ff61","NameIdIssuer":"urn:federation:microsoftonline"},"UserPrincipalName":"bert.jansen@bertonline.onmicrosoft.com"}}
+--batchresponse_d0502a2b-40fa-4fc1-b107-9857131bfb51--

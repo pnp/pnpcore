@@ -177,7 +177,7 @@ namespace PnP.Core.Test.SharePoint
                 Assert.IsTrue(web.SaveSiteAsTemplateEnabled);
                 Assert.IsNull(web.SearchBoxPlaceholderText);
                 Assert.AreNotEqual("", web.ServerRelativeUrl);
-                Assert.AreEqual("", web.SiteLogoDescription);
+                Assert.IsTrue(string.IsNullOrEmpty(web.SiteLogoDescription));
                 Assert.AreNotEqual("", web.SiteLogoUrl);
             }
         }

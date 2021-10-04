@@ -1,4 +1,4 @@
---batchresponse_44d6f32b-f445-4209-8136-86b9382f7dcc
+--batchresponse_08d2696c-9562-47e0-8c43-5db434c67888
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
@@ -6,4 +6,4 @@ HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
 {"d":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/ContentCenter/_api/machinelearning/publications/batchdelete","uri":"https://bertonline.sharepoint.com/sites/ContentCenter/_api/machinelearning/publications/batchdelete","type":"Microsoft.Office.Server.ContentCenter.SPMachineLearningPublicationsResult"},"Details":{"__metadata":{"type":"Collection(Microsoft.Office.Server.ContentCenter.SPMachineLearningPublicationResult)"},"results":[{"ErrorMessage":null,"Publication":{"__metadata":{"type":"Microsoft.Office.Server.ContentCenter.SPMachineLearningPublicationEntityData"},"ModelUniqueId":"ddeeb4c2-3f8e-4b6e-8b75-1d9c0db4210e","TargetLibraryServerRelativeUrl":"/sites/ContentCenter/PNP_SDK_TEST_ClassifyAndExtractList","TargetSiteUrl":"https://bertonline.sharepoint.com/sites/ContentCenter","TargetWebServerRelativeUrl":"/sites/ContentCenter","ViewOption":"NewView"},"StatusCode":200}]},"TotalFailures":0,"TotalSuccesses":1}}
---batchresponse_44d6f32b-f445-4209-8136-86b9382f7dcc--
+--batchresponse_08d2696c-9562-47e0-8c43-5db434c67888--

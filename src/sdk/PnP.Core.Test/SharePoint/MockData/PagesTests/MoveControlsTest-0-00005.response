@@ -1,4 +1,4 @@
---batchresponse_457ff599-ac32-46ca-a2b8-c40d97c252cd
+--batchresponse_913cedfd-46c9-4d70-89ce-0112b08620d7
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
@@ -6,4 +6,4 @@ HTTP/1.1 404 Not Found
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
 {"error":{"code":"-2130575338, Microsoft.SharePoint.SPException","message":{"lang":"en-US","value":"The file /sites/pnpcoresdktest/SitePages/PNP_SDK_TEST_MoveControlsTest.aspx does not exist."}}}
---batchresponse_457ff599-ac32-46ca-a2b8-c40d97c252cd--
+--batchresponse_913cedfd-46c9-4d70-89ce-0112b08620d7--

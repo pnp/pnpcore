@@ -1,9 +1,0 @@
---batchresponse_ead217ad-ced5-48f8-9a3d-231290b01160
-Content-Type: application/http
-Content-Transfer-Encoding: binary
-
-HTTP/1.1 200 OK
-CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
-
-
---batchresponse_ead217ad-ced5-48f8-9a3d-231290b01160--

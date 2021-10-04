@@ -1,9 +1,0 @@
---batchresponse_4dd7de9e-0d3c-45f9-a922-e935b23b5190
-Content-Type: application/http
-Content-Transfer-Encoding: binary
-
-HTTP/1.1 200 OK
-CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
-
-{"d":{"results":[{"__metadata":{"id":"https://officedevpnp.sharepoint.com/sites/pnpcoresdkdemo/_api/Web/SiteGroups/GetById(17)","uri":"https://officedevpnp.sharepoint.com/sites/pnpcoresdkdemo/_api/Web/SiteGroups/GetById(17)","type":"SP.Group"},"Owner":{"__deferred":{"uri":"https://officedevpnp.sharepoint.com/sites/pnpcoresdkdemo/_api/Web/SiteGroups/GetById(17)/Owner"}},"Users":{"__deferred":{"uri":"https://officedevpnp.sharepoint.com/sites/pnpcoresdkdemo/_api/Web/SiteGroups/GetById(17)/Users"}},"Id":17,"IsHiddenInUI":false,"LoginName":"PNP_SDK_TEST_TestGroup","Title":"PNP_SDK_TEST_TestGroup","PrincipalType":8,"AllowMembersEditMembership":false,"AllowRequestToJoinLeave":false,"AutoAcceptRequestToJoinLeave":false,"Description":null,"OnlyAllowMembersViewMembership":true,"OwnerTitle":"PnP.Core.Test","RequestToJoinLeaveEmailSetting":null}]}}
---batchresponse_4dd7de9e-0d3c-45f9-a922-e935b23b5190--

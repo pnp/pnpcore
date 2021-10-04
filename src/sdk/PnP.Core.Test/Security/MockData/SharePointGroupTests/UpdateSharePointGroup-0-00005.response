@@ -1,9 +1,9 @@
---batchresponse_5fa78ee2-f3f9-4f1b-b2df-137ef00278c7
+--batchresponse_046801ec-dd66-4031-a2ee-4570c1ca7cbf
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{"d":{"results":[{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/SiteGroups/GetById(42)","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/SiteGroups/GetById(42)","type":"SP.Group"},"Owner":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/SiteGroups/GetById(42)/Owner"}},"Users":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/SiteGroups/GetById(42)/Users"}},"Id":42,"IsHiddenInUI":false,"LoginName":"PNP_SDK_TEST_TestGroup-Renamed","Title":"PNP_SDK_TEST_TestGroup-Renamed","PrincipalType":8,"AllowMembersEditMembership":false,"AllowRequestToJoinLeave":false,"AutoAcceptRequestToJoinLeave":false,"Description":null,"OnlyAllowMembersViewMembership":true,"OwnerTitle":"Bert Jansen (Cloud)","RequestToJoinLeaveEmailSetting":null}]}}
---batchresponse_5fa78ee2-f3f9-4f1b-b2df-137ef00278c7--
+{"d":{"results":[{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-2/_api/Web/SiteGroups/GetById(16)","uri":"https://bertonline.sharepoint.com/sites/prov-2/_api/Web/SiteGroups/GetById(16)","type":"SP.Group"},"Owner":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-2/_api/Web/SiteGroups/GetById(16)/Owner"}},"Users":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-2/_api/Web/SiteGroups/GetById(16)/Users"}},"Id":16,"IsHiddenInUI":false,"LoginName":"PNP_SDK_TEST_TestGroup-Renamed","Title":"PNP_SDK_TEST_TestGroup-Renamed","PrincipalType":8,"AllowMembersEditMembership":false,"AllowRequestToJoinLeave":false,"AutoAcceptRequestToJoinLeave":false,"Description":null,"OnlyAllowMembersViewMembership":true,"OwnerTitle":"Bert Jansen (Cloud)","RequestToJoinLeaveEmailSetting":null}]}}
+--batchresponse_046801ec-dd66-4031-a2ee-4570c1ca7cbf--

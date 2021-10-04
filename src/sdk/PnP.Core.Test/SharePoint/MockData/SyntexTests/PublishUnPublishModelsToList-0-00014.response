@@ -1,4 +1,4 @@
---batchresponse_66fc333f-1491-4688-bd66-6fe60a54d41e
+--batchresponse_4d07f2d7-6a12-468e-8d25-57707739e3e3
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
@@ -6,4 +6,4 @@ HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
 {"d":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/ContentCenter/_api/machinelearning/publications/batchdelete","uri":"https://bertonline.sharepoint.com/sites/ContentCenter/_api/machinelearning/publications/batchdelete","type":"Microsoft.Office.Server.ContentCenter.SPMachineLearningPublicationsResult"},"Details":{"__metadata":{"type":"Collection(Microsoft.Office.Server.ContentCenter.SPMachineLearningPublicationResult)"},"results":[{"ErrorMessage":null,"Publication":{"__metadata":{"type":"Microsoft.Office.Server.ContentCenter.SPMachineLearningPublicationEntityData"},"ModelUniqueId":"ddeeb4c2-3f8e-4b6e-8b75-1d9c0db4210e","TargetLibraryServerRelativeUrl":"/sites/ContentCenter/PNP_SDK_TEST_PublishUnPublishModelsToList1","TargetSiteUrl":"https://bertonline.sharepoint.com/sites/ContentCenter","TargetWebServerRelativeUrl":"/sites/ContentCenter","ViewOption":"NewView"},"StatusCode":200},{"ErrorMessage":null,"Publication":{"__metadata":{"type":"Microsoft.Office.Server.ContentCenter.SPMachineLearningPublicationEntityData"},"ModelUniqueId":"ddeeb4c2-3f8e-4b6e-8b75-1d9c0db4210e","TargetLibraryServerRelativeUrl":"/sites/ContentCenter/PNP_SDK_TEST_PublishUnPublishModelsToList2","TargetSiteUrl":"https://bertonline.sharepoint.com/sites/ContentCenter","TargetWebServerRelativeUrl":"/sites/ContentCenter","ViewOption":"NewView"},"StatusCode":200}]},"TotalFailures":0,"TotalSuccesses":2}}
---batchresponse_66fc333f-1491-4688-bd66-6fe60a54d41e--
+--batchresponse_4d07f2d7-6a12-468e-8d25-57707739e3e3--

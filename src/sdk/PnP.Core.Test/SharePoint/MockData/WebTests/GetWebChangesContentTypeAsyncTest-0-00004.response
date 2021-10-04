@@ -1,9 +1,9 @@
---batchresponse_01718559-0a0f-4333-9bb6-f3ffbe43f462
+--batchresponse_f350dcc5-5d4c-4b1f-9f62-269d66a8dc8a
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{"d":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/ContentTypes('0x0100554FB756A84E4A4899FB819522D2BF50')","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/ContentTypes('0x0100554FB756A84E4A4899FB819522D2BF50')","type":"SP.ContentType"},"Group":"TESTING","StringId":"0x0100554FB756A84E4A4899FB819522D2BF50"}}
---batchresponse_01718559-0a0f-4333-9bb6-f3ffbe43f462--
+{"d":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-2/_api/Web/ContentTypes('0x010100C5033D6CFB8447359FB795C8A73A2B19')","uri":"https://bertonline.sharepoint.com/sites/prov-2/_api/Web/ContentTypes('0x010100C5033D6CFB8447359FB795C8A73A2B19')","type":"SP.ContentType"},"Group":"_Hidden","StringId":"0x010100C5033D6CFB8447359FB795C8A73A2B19"}}
+--batchresponse_f350dcc5-5d4c-4b1f-9f62-269d66a8dc8a--

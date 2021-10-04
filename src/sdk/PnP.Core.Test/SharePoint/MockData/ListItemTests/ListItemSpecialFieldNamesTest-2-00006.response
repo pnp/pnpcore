@@ -1,4 +1,4 @@
---batchresponse_3833dceb-f798-4eff-8d15-ba0d8be329e9
+--batchresponse_7b19b126-b644-46da-9244-4ec73f88a6cb
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
@@ -6,4 +6,4 @@ HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
 {"d":{"ValidateUpdateListItem":{"__metadata":{"type":"Collection(SP.ListItemFormUpdateValue)"},"results":[{"ErrorCode":0,"ErrorMessage":null,"FieldName":"With_x0020_SpaceAnd_Underscore","FieldValue":"No","HasException":false,"ItemId":1}]}}}
---batchresponse_3833dceb-f798-4eff-8d15-ba0d8be329e9--
+--batchresponse_7b19b126-b644-46da-9244-4ec73f88a6cb--

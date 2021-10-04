@@ -1,11 +1,1 @@
-{"responses": [{"id": "1","status":400,"headers" : {"Content-Type":"application/json"},"body":{
-  "error": {
-    "code": "BadRequest",
-    "message": "Channel name already existed, please use other name",
-    "innerError": {
-      "date": "2021-03-09T15:02:11",
-      "request-id": "ed202364-7cc8-46f0-88cb-49020ce2b6a2",
-      "client-request-id": "ed202364-7cc8-46f0-88cb-49020ce2b6a2"
-    }
-  }
-}}]}
+{"responses": [{"id": "1","status":400,"headers" : {"Content-Type":"application/json"},"body":{"error":{"code":"BadRequest","message":"Channel name already existed, please use other name","innerError":{"message":"Channel name already existed, please use other name","code":"NameAlreadyExists","innerError":{},"date":"2021-10-04T08:07:06","request-id":"3a48f775-e766-482d-a78c-6e1584b83eaa","client-request-id":"3a48f775-e766-482d-a78c-6e1584b83eaa"}}}}]}

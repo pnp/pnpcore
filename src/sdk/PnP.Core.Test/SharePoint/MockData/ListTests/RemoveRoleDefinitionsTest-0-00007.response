@@ -1,4 +1,4 @@
---batchresponse_83591096-550a-405d-8e60-c180a56a042f
+--batchresponse_be658ba5-9b45-4ba6-af05-0ea3bc6481d3
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
@@ -6,4 +6,4 @@ HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
 {"d":{"AddRoleAssignment":null}}
---batchresponse_83591096-550a-405d-8e60-c180a56a042f--
+--batchresponse_be658ba5-9b45-4ba6-af05-0ea3bc6481d3--

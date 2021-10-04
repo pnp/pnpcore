@@ -1,9 +1,0 @@
---batchresponse_f34b69fe-3f77-4619-b5d1-8a56f4d78111
-Content-Type: application/http
-Content-Transfer-Encoding: binary
-
-HTTP/1.1 200 OK
-CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
-
-{"d":{"results":[{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'b5931804-c3af-48bd-b22b-f542271fe633')","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'b5931804-c3af-48bd-b22b-f542271fe633')","etag":"\"1\"","type":"SP.List"},"Id":"b5931804-c3af-48bd-b22b-f542271fe633","Title":"UpdateValuesPropertyViaBatchRest"},{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'5b274cf0-c692-4896-a2fb-8ef651e5bd5a')","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'5b274cf0-c692-4896-a2fb-8ef651e5bd5a')","etag":"\"1\"","type":"SP.List"},"Id":"5b274cf0-c692-4896-a2fb-8ef651e5bd5a","Title":"UpdateValuesPropertyViaRest"}]}}
---batchresponse_f34b69fe-3f77-4619-b5d1-8a56f4d78111--

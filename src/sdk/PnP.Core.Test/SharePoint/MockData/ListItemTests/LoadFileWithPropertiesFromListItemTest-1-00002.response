@@ -1,9 +1,9 @@
---batchresponse_28d455d2-02f5-4697-ae1d-53b661cc9dce
+--batchresponse_d65e4826-b45b-474a-85de-bbf155bf9efb
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{"d":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/prov-1/Shared Documents/PNP_SDK_TEST_LoadFileWithPropertiesFromListItemTest.docx')","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/prov-1/Shared%20Documents/PNP_SDK_TEST_LoadFileWithPropertiesFromListItemTest.docx')","type":"SP.File"},"ListItemAllFields":{"__metadata":{"id":"54885882-ad9d-496e-98b3-a383407cf182","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/prov-1/Shared%20Documents/PNP_SDK_TEST_LoadFileWithPropertiesFromListItemTest.docx')/ListItemAllFields","etag":"\"1\"","type":"SP.Data.Shared_x0020_DocumentsItem"},"Id":3380,"ID":3380},"UniqueId":"07983702-d26c-4581-9746-a5e1c3a2c819"}}
---batchresponse_28d455d2-02f5-4697-ae1d-53b661cc9dce--
+{"d":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-2/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/prov-2/Shared Documents/PNP_SDK_TEST_LoadFileWithPropertiesFromListItemTest.docx')","uri":"https://bertonline.sharepoint.com/sites/prov-2/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/prov-2/Shared%20Documents/PNP_SDK_TEST_LoadFileWithPropertiesFromListItemTest.docx')","type":"SP.File"},"ListItemAllFields":{"__metadata":{"id":"73a9be84-411d-460b-a107-128b0cd7dfb0","uri":"https://bertonline.sharepoint.com/sites/prov-2/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/prov-2/Shared%20Documents/PNP_SDK_TEST_LoadFileWithPropertiesFromListItemTest.docx')/ListItemAllFields","etag":"\"1\"","type":"SP.Data.Shared_x0020_DocumentsItem"},"Id":123,"ID":123},"UniqueId":"f589241d-a8b1-47f7-bdbd-3f7914a762f6"}}
+--batchresponse_d65e4826-b45b-474a-85de-bbf155bf9efb--

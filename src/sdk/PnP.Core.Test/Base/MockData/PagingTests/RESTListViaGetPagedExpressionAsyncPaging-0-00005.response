@@ -1,9 +1,0 @@
---batchresponse_acbd17cd-b7dc-43cd-a8b3-1ad57448257c
-Content-Type: application/http
-Content-Transfer-Encoding: binary
-
-HTTP/1.1 200 OK
-CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
-
-{"d":{"results":[{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'60116bac-f5f0-4ca6-b133-ed93670d638f')","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'60116bac-f5f0-4ca6-b133-ed93670d638f')","etag":"\"6\"","type":"SP.List"},"Id":"60116bac-f5f0-4ca6-b133-ed93670d638f","Title":"Content type publishing error log"},{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'98190d78-44d8-44d9-af15-521cf4717b8d')","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'98190d78-44d8-44d9-af15-521cf4717b8d')","etag":"\"1\"","type":"SP.List"},"Id":"98190d78-44d8-44d9-af15-521cf4717b8d","Title":"Converted Forms"}]}}
---batchresponse_acbd17cd-b7dc-43cd-a8b3-1ad57448257c--

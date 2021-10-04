@@ -1,9 +1,9 @@
---batchresponse_f874f927-7a3c-4b9d-9832-8c04b07dd9f3
+--batchresponse_9e90c513-a1a8-4c85-b217-ca7a8ca02ab2
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{"d":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetUserById(14)","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetUserById(14)","type":"SP.User"},"Id":14,"IsHiddenInUI":false,"LoginName":"i:0#.f|membership|annal@bertonline.onmicrosoft.com","Title":"Anna Lidman","PrincipalType":1,"AadObjectId":{"__metadata":{"type":"SP.UserIdInfo"},"NameId":"225f4ed7-524b-4a6d-8e37-51802e87b3ad","NameIdIssuer":"urn:federation:microsoftonline"},"Email":"AnnaL@bertonline.onmicrosoft.com","Expiration":"","IsEmailAuthenticationGuestUser":false,"IsShareByEmailGuestUser":false,"IsSiteAdmin":false,"UserId":{"__metadata":{"type":"SP.UserIdInfo"},"NameId":"1003bffd84ea5837","NameIdIssuer":"urn:federation:microsoftonline"},"UserPrincipalName":"annal@bertonline.onmicrosoft.com"}}
---batchresponse_f874f927-7a3c-4b9d-9832-8c04b07dd9f3--
+{"d":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-2/_api/Web/GetUserById(11)","uri":"https://bertonline.sharepoint.com/sites/prov-2/_api/Web/GetUserById(11)","type":"SP.User"},"Id":11,"IsHiddenInUI":false,"LoginName":"i:0#.f|membership|bert.jansen@bertonline.onmicrosoft.com","Title":"Bert Jansen (Cloud)","PrincipalType":1,"AadObjectId":{"__metadata":{"type":"SP.UserIdInfo"},"NameId":"33aca310-a489-4121-b853-663d0327fe08","NameIdIssuer":"urn:federation:microsoftonline"},"Email":"bert.jansen@bertonline.onmicrosoft.com","Expiration":"","IsEmailAuthenticationGuestUser":false,"IsShareByEmailGuestUser":false,"IsSiteAdmin":false,"UserId":{"__metadata":{"type":"SP.UserIdInfo"},"NameId":"1003000084e4ff61","NameIdIssuer":"urn:federation:microsoftonline"},"UserPrincipalName":"bert.jansen@bertonline.onmicrosoft.com"}}
+--batchresponse_9e90c513-a1a8-4c85-b217-ca7a8ca02ab2--

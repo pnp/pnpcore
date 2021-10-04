@@ -1,9 +1,0 @@
---batchresponse_cd51ca2a-23e3-494c-92c6-3dae7cfdb22f
-Content-Type: application/http
-Content-Transfer-Encoding: binary
-
-HTTP/1.1 200 OK
-CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
-
-{"d":{"results":[{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'151865b7-8bf7-474c-9509-be6599c40447')","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'151865b7-8bf7-474c-9509-be6599c40447')","etag":"\"2\"","type":"SP.List"},"Id":"151865b7-8bf7-474c-9509-be6599c40447","Title":"TestQueryListsUpdateConsistency - Updated"},{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'84c17956-a17c-4cad-b772-52abde4f2a79')","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'84c17956-a17c-4cad-b772-52abde4f2a79')","etag":"\"0\"","type":"SP.List"},"Id":"84c17956-a17c-4cad-b772-52abde4f2a79","Title":"Theme Gallery"}]}}
---batchresponse_cd51ca2a-23e3-494c-92c6-3dae7cfdb22f--

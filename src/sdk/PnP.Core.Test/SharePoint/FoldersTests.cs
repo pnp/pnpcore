@@ -153,7 +153,7 @@ namespace PnP.Core.Test.SharePoint
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                string sharedDocumentsServerRelativeUrl = $"{context.Uri.PathAndQuery}/Shared Documents/";
+                string sharedDocumentsServerRelativeUrl = $"{context.Uri.PathAndQuery}/Shared Documents";
 
                 IFolder folderWithProperties = await context.Web.GetFolderByServerRelativeUrlAsync(sharedDocumentsServerRelativeUrl, f => f.Properties);
 

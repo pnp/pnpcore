@@ -1,9 +1,9 @@
---batchresponse_b737e15b-3b06-41a0-9a54-70a5a30b6aa6
+--batchresponse_4f673e52-a393-45f7-9fe6-6c4e5c58a739
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{"d":{"Recycle":"6cd70221-570d-4303-a8ae-cf518a362ee5"}}
---batchresponse_b737e15b-3b06-41a0-9a54-70a5a30b6aa6--
+{"d":{"Recycle":"af8612b2-54e9-46dd-8204-c8b01faedfb5"}}
+--batchresponse_4f673e52-a393-45f7-9fe6-6c4e5c58a739--

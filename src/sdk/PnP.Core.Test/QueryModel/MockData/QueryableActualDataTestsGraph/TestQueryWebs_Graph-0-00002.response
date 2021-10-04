@@ -1,9 +1,0 @@
---batchresponse_e6a922ed-7103-46f0-86b1-abf16d0d7b5d
-Content-Type: application/http
-Content-Transfer-Encoding: binary
-
-HTTP/1.1 200 OK
-CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
-
-{"d":{"results":[{"__metadata":{"id":"https://officedevpnp.sharepoint.com/sites/pnpcoresdkdemo/_api/SP.WebInformationac72db1c-67d5-44ec-861b-7e1c4596ef19","uri":"https://officedevpnp.sharepoint.com/sites/pnpcoresdkdemo/_api/SP.WebInformationac72db1c-67d5-44ec-861b-7e1c4596ef19","type":"SP.WebInformation"},"Description":"","Id":"708ea7b4-1b2f-4a90-8e47-b17802b7ed16","Title":"DutchWeb"},{"__metadata":{"id":"https://officedevpnp.sharepoint.com/sites/pnpcoresdkdemo/_api/SP.WebInformation5636ec67-397a-4a89-bcb9-c8839f3352d6","uri":"https://officedevpnp.sharepoint.com/sites/pnpcoresdkdemo/_api/SP.WebInformation5636ec67-397a-4a89-bcb9-c8839f3352d6","type":"SP.WebInformation"},"Description":"","Id":"7f4c2cff-fcfa-4d47-ba9f-c53bfe6e138d","Title":"sub site"}]}}
---batchresponse_e6a922ed-7103-46f0-86b1-abf16d0d7b5d--
