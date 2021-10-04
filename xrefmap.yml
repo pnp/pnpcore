@@ -401,12 +401,12 @@ references:
   commentId: T:PnP.Core.Admin.Model.SharePoint.ClassicSiteOptions
   fullName: PnP.Core.Admin.Model.SharePoint.ClassicSiteOptions
   nameWithType: ClassicSiteOptions
-- uid: PnP.Core.Admin.Model.SharePoint.ClassicSiteOptions.#ctor(Uri,System.String,System.String,System.String,PnP.Core.Admin.Model.SharePoint.TimeZone)
-  name: ClassicSiteOptions(Uri, String, String, String, TimeZone)
-  href: api/PnP.Core.Admin.Model.SharePoint.ClassicSiteOptions.html#PnP_Core_Admin_Model_SharePoint_ClassicSiteOptions__ctor_Uri_System_String_System_String_System_String_PnP_Core_Admin_Model_SharePoint_TimeZone_
-  commentId: M:PnP.Core.Admin.Model.SharePoint.ClassicSiteOptions.#ctor(Uri,System.String,System.String,System.String,PnP.Core.Admin.Model.SharePoint.TimeZone)
-  fullName: PnP.Core.Admin.Model.SharePoint.ClassicSiteOptions.ClassicSiteOptions(Uri, System.String, System.String, System.String, PnP.Core.Admin.Model.SharePoint.TimeZone)
-  nameWithType: ClassicSiteOptions.ClassicSiteOptions(Uri, String, String, String, TimeZone)
+- uid: PnP.Core.Admin.Model.SharePoint.ClassicSiteOptions.#ctor(Uri,System.String,System.String,System.String,PnP.Core.Admin.Model.SharePoint.Language,PnP.Core.Admin.Model.SharePoint.TimeZone)
+  name: ClassicSiteOptions(Uri, String, String, String, Language, TimeZone)
+  href: api/PnP.Core.Admin.Model.SharePoint.ClassicSiteOptions.html#PnP_Core_Admin_Model_SharePoint_ClassicSiteOptions__ctor_Uri_System_String_System_String_System_String_PnP_Core_Admin_Model_SharePoint_Language_PnP_Core_Admin_Model_SharePoint_TimeZone_
+  commentId: M:PnP.Core.Admin.Model.SharePoint.ClassicSiteOptions.#ctor(Uri,System.String,System.String,System.String,PnP.Core.Admin.Model.SharePoint.Language,PnP.Core.Admin.Model.SharePoint.TimeZone)
+  fullName: PnP.Core.Admin.Model.SharePoint.ClassicSiteOptions.ClassicSiteOptions(Uri, System.String, System.String, System.String, PnP.Core.Admin.Model.SharePoint.Language, PnP.Core.Admin.Model.SharePoint.TimeZone)
+  nameWithType: ClassicSiteOptions.ClassicSiteOptions(Uri, String, String, String, Language, TimeZone)
 - uid: PnP.Core.Admin.Model.SharePoint.ClassicSiteOptions.#ctor*
   name: ClassicSiteOptions
   href: api/PnP.Core.Admin.Model.SharePoint.ClassicSiteOptions.html#PnP_Core_Admin_Model_SharePoint_ClassicSiteOptions__ctor_
