@@ -30,8 +30,8 @@ namespace PnP.Core.Transformation.SharePoint.Extensions
     {
         private const string PnPSettingsKey = "SharePointPnP$Settings$ContextCloning";
 
-        private static ILoggerFactory loggerFactory;
-        private static ILogger log;
+        //private static ILoggerFactory loggerFactory;
+        //private static ILogger log;
         private static readonly string userAgentFromConfig;
 
 #pragma warning disable CS0169
@@ -59,14 +59,14 @@ namespace PnP.Core.Transformation.SharePoint.Extensions
                 ClientContextExtensions.userAgentFromConfig = Environment.GetEnvironmentVariable("SharePointPnPUserAgent", EnvironmentVariableTarget.Process);
             }
 
-#if NET5_0
-            loggerFactory = LoggerFactory.Create(builder => builder.AddConsole());
-#else
-            var serviceCollection = new ServiceCollection();
-            serviceCollection.AddLogging(builder => builder.AddConsole());
-            loggerFactory = serviceCollection.BuildServiceProvider().GetService<ILoggerFactory>();
-#endif
-            log = new Logger<ClientContext>(loggerFactory);
+//#if NET5_0
+//            loggerFactory = LoggerFactory.Create(builder => builder.AddConsole());
+//#else
+//            var serviceCollection = new ServiceCollection();
+//            serviceCollection.AddLogging(builder => builder.AddConsole());
+//            loggerFactory = serviceCollection.BuildServiceProvider().GetService<ILoggerFactory>();
+//#endif
+//            log = new Logger<ClientContext>(loggerFactory);
         }
 #pragma warning restore CA1810
 
@@ -174,11 +174,11 @@ namespace PnP.Core.Transformation.SharePoint.Extensions
 
                         if (wex.Status == WebExceptionStatus.Timeout)
                         {
-                            log.LogWarning(string.Format(SharePointTransformationResources.Warning_CSOMRequestTimeout, retryAttempts + 1, retryAfterInterval));
+                            //log.LogWarning(string.Format(SharePointTransformationResources.Warning_CSOMRequestTimeout, retryAttempts + 1, retryAfterInterval));
                         }
                         else
                         {
-                            log.LogWarning(string.Format(SharePointTransformationResources.Warning_CSOMRequestFrequencyExceeded, retryAttempts + 1, retryAfterInterval));
+                            //log.LogWarning(string.Format(SharePointTransformationResources.Warning_CSOMRequestFrequencyExceeded, retryAttempts + 1, retryAfterInterval));
                         }
 
                         await Task.Delay(retryAfterInterval).ConfigureAwait(false);
@@ -204,7 +204,7 @@ namespace PnP.Core.Transformation.SharePoint.Extensions
                             errorSb.AppendLine($"SocketErrorCode: {socketEx.SocketErrorCode}"); //ConnectionReset
                             errorSb.AppendLine($"Message: {socketEx.Message}"); //An existing connection was forcibly closed by the remote host
 
-                            log.LogError(string.Format(SharePointTransformationResources.Error_ClientContextExtensions_ExecuteQueryRetryException, errorSb));
+                            //log.LogError(string.Format(SharePointTransformationResources.Error_ClientContextExtensions_ExecuteQueryRetryException, errorSb));
 
                             //retry
                             wrapper = (ClientRequestWrapper)wex.Data["ClientRequest"];
@@ -225,7 +225,7 @@ namespace PnP.Core.Transformation.SharePoint.Extensions
                                 backoffInterval *= 2;
                             }
 
-                            log.LogWarning(string.Format(SharePointTransformationResources.Error_CSOMRequestSocketException, retryAttempts + 1, retryAfterInterval));
+                            //log.LogWarning(string.Format(SharePointTransformationResources.Error_CSOMRequestSocketException, retryAttempts + 1, retryAfterInterval));
 
                             await Task.Delay(retryAfterInterval).ConfigureAwait(false);
 
@@ -244,7 +244,7 @@ namespace PnP.Core.Transformation.SharePoint.Extensions
                                 }
                             }
 
-                            log.LogError(string.Format(SharePointTransformationResources.Error_ClientContextExtensions_ExecuteQueryRetryException, errorSb));
+                            //log.LogError(string.Format(SharePointTransformationResources.Error_ClientContextExtensions_ExecuteQueryRetryException, errorSb));
                             throw;
                         }
                     }
@@ -260,7 +260,7 @@ namespace PnP.Core.Transformation.SharePoint.Extensions
                     errorSb.AppendLine($"ServerErrorValue: {serverEx.ServerErrorValue}");
                     errorSb.AppendLine($"ServerErrorDetails: {serverEx.ServerErrorDetails}");
 
-                    log.LogError(string.Format(SharePointTransformationResources.Error_ClientContextExtensions_ExecuteQueryRetryException, errorSb));
+                    //log.LogError(string.Format(SharePointTransformationResources.Error_ClientContextExtensions_ExecuteQueryRetryException, errorSb));
 
                     throw;
                 }
