@@ -1,3 +1,8 @@
+#
+# build.ps1 is used for the nightly build and release process triggered from a GitHub workflow. 
+# 
+# For doing a local build use build-debug.ps1
+#
 #!/usr/bin/env pwsh
 
 $ErrorActionPreference = "Stop"

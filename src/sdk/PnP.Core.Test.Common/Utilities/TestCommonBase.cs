@@ -213,7 +213,7 @@ namespace PnP.Core.Test.Common.Utilities
 
             var pwd = new NetworkCredential(null, pnpCoreSDKTestUserPassword).SecurePassword;
 
-            var context = await factory.CreateLiveAsync(new Uri(pnpCoreSDKTestSite), new UsernamePasswordAuthenticationProvider(null, null, pnpCoreSDKTestUser, pwd));
+            var context = await factory.CreateLiveAsync(new Uri(pnpCoreSDKTestSite), new UsernamePasswordAuthenticationProvider(null, null, pnpCoreSDKTestUser, pwd)).ConfigureAwait(false);
 
             return context;
         }
@@ -239,17 +239,17 @@ namespace PnP.Core.Test.Common.Utilities
 
         public async Task<PnPContext> CloneAsync(PnPContext source, int id)
         {
-            return await source.CloneForTestingAsync(source, null, null, id);
+            return await source.CloneForTestingAsync(source, null, null, id).ConfigureAwait(false);
         }
 
         public async Task<PnPContext> CloneAsync(PnPContext source, Uri uri, int id)
         {
-            return await source.CloneForTestingAsync(source, uri, null, id);
+            return await source.CloneForTestingAsync(source, uri, null, id).ConfigureAwait(false);
         }
 
         public async Task<PnPContext> CloneAsync(PnPContext source, string configuration, int id)
         {
-            return await source.CloneForTestingAsync(source, null, configuration, id);
+            return await source.CloneForTestingAsync(source, null, configuration, id).ConfigureAwait(false);
         }
 
         public static IConfigurationRoot GetConfigurationSettings()

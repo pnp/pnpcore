@@ -95,8 +95,6 @@ namespace PnP.Core.Transformation.SharePoint.Extensions
 
         private static async Task ExecuteQueryImplementation(ClientRuntimeContext clientContext, int retryCount = 10, string userAgent = null)
         {
-            // Temporarly remove the SynchronizationContext
-            await new SynchronizationContextRemover();
 
             // Set the TLS preference. Needed on some server os's to work when Office 365 removes support for TLS 1.0
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls;
@@ -129,13 +127,13 @@ namespace PnP.Core.Transformation.SharePoint.Extensions
                     // DO NOT CHANGE THIS TO EXECUTEQUERYRETRY
                     if (!retry)
                     {
-                        await clientContext.ExecuteQueryAsync();
+                        await clientContext.ExecuteQueryAsync().ConfigureAwait(false);
                     }
                     else
                     {
                         if (wrapper != null && wrapper.Value != null)
                         {
-                            await clientContext.RetryQueryAsync(wrapper.Value);
+                            await clientContext.RetryQueryAsync(wrapper.Value).ConfigureAwait(false);
                         }
                     }
 
@@ -183,7 +181,7 @@ namespace PnP.Core.Transformation.SharePoint.Extensions
                             log.LogWarning(string.Format(SharePointTransformationResources.Warning_CSOMRequestFrequencyExceeded, retryAttempts + 1, retryAfterInterval));
                         }
 
-                        await Task.Delay(retryAfterInterval);
+                        await Task.Delay(retryAfterInterval).ConfigureAwait(false);
 
                         //Add to retry count and increase delay.
                         retryAttempts++;
@@ -229,7 +227,7 @@ namespace PnP.Core.Transformation.SharePoint.Extensions
 
                             log.LogWarning(string.Format(SharePointTransformationResources.Error_CSOMRequestSocketException, retryAttempts + 1, retryAfterInterval));
 
-                            await Task.Delay(retryAfterInterval);
+                            await Task.Delay(retryAfterInterval).ConfigureAwait(false);
 
                             //Add to retry count and increase delay.
                             retryAttempts++;

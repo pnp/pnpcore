@@ -250,6 +250,16 @@ namespace PnP.Core.Admin.Model.SharePoint
             return GetSiteCollectionsWithDetailsAsync().GetAwaiter().GetResult();
         }
 
+        public async Task<List<IRecycledSiteCollection>> GetRecycledSiteCollectionsAsync()
+        {
+            return await SiteCollectionEnumerator.GetRecycledWithDetailsViaTenantAdminHiddenListAsync(context).ConfigureAwait(false);
+        }
+
+        public List<IRecycledSiteCollection> GetRecycledSiteCollections()
+        {
+            return GetRecycledSiteCollectionsAsync().GetAwaiter().GetResult();
+        }
+
         public async Task<PnPContext> CreateSiteCollectionAsync(CommonSiteOptions siteToCreate, SiteCreationOptions creationOptions = null)
         {
             return await SiteCollectionCreator.CreateSiteCollectionAsync(context, siteToCreate, creationOptions).ConfigureAwait(false);
@@ -260,24 +270,34 @@ namespace PnP.Core.Admin.Model.SharePoint
             return CreateSiteCollectionAsync(siteToCreate, creationOptions).GetAwaiter().GetResult();
         }
 
-        public async Task RecycleSiteCollectionAsync(Uri siteToDelete)
+        public async Task RecycleSiteCollectionAsync(Uri siteToDelete, string webTemplate)
         {
-            await SiteCollectionManager.RecycleSiteCollectionAsync(context, siteToDelete).ConfigureAwait(false);
+            await SiteCollectionManager.RecycleSiteCollectionAsync(context, siteToDelete, webTemplate).ConfigureAwait(false);
         }
 
-        public void RecycleSiteCollection(Uri siteToDelete)
+        public void RecycleSiteCollection(Uri siteToDelete, string webTemplate)
         {
-            RecycleSiteCollectionAsync(siteToDelete).GetAwaiter().GetResult();
+            RecycleSiteCollectionAsync(siteToDelete, webTemplate).GetAwaiter().GetResult();
         }
 
-        public async Task DeleteSiteCollectionAsync(Uri siteToDelete)
+        public void RestoreSiteCollection(Uri siteToRestore)
         {
-            await SiteCollectionManager.DeleteSiteCollectionAsync(context, siteToDelete).ConfigureAwait(false);
+            RestoreSiteCollectionAsync(siteToRestore).GetAwaiter().GetResult();
         }
 
-        public void DeleteSiteCollection(Uri siteToDelete)
+        public async Task RestoreSiteCollectionAsync(Uri siteToRestore)
         {
-            DeleteSiteCollectionAsync(siteToDelete).GetAwaiter().GetResult();
+            await SiteCollectionManager.RestoreSiteCollectionAsync(context, siteToRestore).ConfigureAwait(false);
+        }
+
+        public async Task DeleteSiteCollectionAsync(Uri siteToDelete, string webTemplate)
+        {
+            await SiteCollectionManager.DeleteSiteCollectionAsync(context, siteToDelete, webTemplate).ConfigureAwait(false);
+        }
+
+        public void DeleteSiteCollection(Uri siteToDelete, string webTemplate)
+        {
+            DeleteSiteCollectionAsync(siteToDelete, webTemplate).GetAwaiter().GetResult();
         }
     }
 }

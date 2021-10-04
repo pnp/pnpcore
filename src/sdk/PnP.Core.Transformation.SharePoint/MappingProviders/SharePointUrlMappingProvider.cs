@@ -60,7 +60,7 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
                 throw new ArgumentException($"Only source item of type {typeof(SharePointSourceItem)} is supported");
             }
 
-            string pagesLibrary = await ResolveSitePagesLibraryAsync(sharePointSourceItem.SourceContext);
+            string pagesLibrary = await ResolveSitePagesLibraryAsync(sharePointSourceItem.SourceContext).ConfigureAwait(false);
 
             sharePointSourceItem.SourceContext.Load(sharePointSourceItem.SourceContext.Web, w => w.Url);
             sharePointSourceItem.SourceContext.Load(sharePointSourceItem.SourceContext.Site, w => w.Url);

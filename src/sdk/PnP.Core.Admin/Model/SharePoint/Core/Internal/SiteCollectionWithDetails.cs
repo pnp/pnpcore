@@ -6,8 +6,6 @@ namespace PnP.Core.Admin.Model.SharePoint
     {
         public DateTime TimeCreated { get; set; }
 
-        public DateTime TimeDeleted { get; set; }
-
         public string CreatedBy { get; set; }
 
         public bool ShareByEmailEnabled { get; set; }

@@ -74,19 +74,30 @@ namespace PnP.Core.Admin.Model.SharePoint
                                   webId,
                                   listItem["Title"]?.ToString());
                 }
-            }, pageSize).ConfigureAwait(false);
+            }, true, pageSize).ConfigureAwait(false);
 
             return loadedSites;
         }
 
-        private async static Task LoadSitesViaTenantAdminHiddenListAsync(PnPContext context, string viewXml, Action<IEnumerable<IListItem>> processResults, int pageSize = 500)
+        private async static Task LoadSitesViaTenantAdminHiddenListAsync(PnPContext context, string viewXml, Action<IEnumerable<IListItem>> processResults, bool allSites = true, int pageSize = 500)
         {
             string sitesInformationListAllUrl = "DO_NOT_DELETE_SPLIST_TENANTADMIN_ALL_SITES_AGGREGA";
+            string sitesInformationListUrl =    "DO_NOT_DELETE_SPLIST_TENANTADMIN_AGGREGATED_SITECO";
 
             using (var tenantAdminContext = await context.GetSharePointAdmin().GetTenantAdminCenterContextAsync().ConfigureAwait(false))
             {
+                string listToQuery;
+                if (allSites)
+                {
+                    listToQuery = sitesInformationListAllUrl;
+                }
+                else
+                {
+                    listToQuery = sitesInformationListUrl;
+                }
+
                 var myList = await tenantAdminContext.Web.Lists.GetByServerRelativeUrlAsync(
-                                $"{tenantAdminContext.Uri}Lists/{sitesInformationListAllUrl}",
+                                $"{tenantAdminContext.Uri}Lists/{listToQuery}",
                                 p => p.Title,
                                 p => p.Fields.QueryProperties(p => p.InternalName,
                                                               p => p.FieldTypeKind,
@@ -179,7 +190,6 @@ namespace PnP.Core.Admin.Model.SharePoint
                             Name = listItem["Title"]?.ToString(),
                             CreatedBy = listItem["CreatedBy"]?.ToString(),
                             TimeCreated = listItem["TimeCreated"] != null ? (DateTime)listItem["TimeCreated"] : DateTime.MinValue,
-                            TimeDeleted = listItem["TimeDeleted"] != null ? (DateTime)listItem["TimeDeleted"] : DateTime.MinValue,
                             ShareByEmailEnabled = (bool)listItem["ShareByEmailEnabled"],
                             ShareByLinkEnabled = (bool)listItem["ShareByLinkEnabled"],
                             SiteOwnerName = listItem["SiteOwnerName"]?.ToString(),
@@ -191,7 +201,86 @@ namespace PnP.Core.Admin.Model.SharePoint
                         });
                     }
                 }
-            }, pageSize).ConfigureAwait(false);
+            }, true, pageSize).ConfigureAwait(false);
+
+            return loadedSites;
+        }
+
+        internal async static Task<List<IRecycledSiteCollection>> GetRecycledWithDetailsViaTenantAdminHiddenListAsync(PnPContext context, int pageSize = 100)
+        {
+            // Removed query part to avoid running into list view threshold errors
+            string sitesListAllQuery = @"<View>
+                                            <Query>
+                                                <Where>
+                                                    <And>
+                                                        <IsNotNull>
+                                                            <FieldRef Name='TimeDeleted'/>
+                                                        </IsNotNull>
+                                                        <And>
+                                                            <Neq>
+                                                                <FieldRef Name='TemplateName'/>
+                                                                <Value Type='TEXT'>TEAMCHANNEL#0</Value>
+                                                            </Neq>
+                                                            <Neq>
+                                                                <FieldRef Name='TemplateName'/>
+                                                                <Value Type='TEXT'>TEAMCHANNEL#1</Value>
+                                                            </Neq>
+                                                        </And>
+                                                    </And>
+                                                </Where>
+                                            </Query>
+                                            <ViewFields>
+                                                <FieldRef Name='SiteUrl' />
+                                                <FieldRef Name='Title' />
+                                                <FieldRef Name='SiteId' />
+                                                <FieldRef Name='GroupId' />
+                                                <FieldRef Name='CreatedBy' />
+                                                <FieldRef Name='DeletedBy' />
+                                                <FieldRef Name='TimeCreated' />
+                                                <FieldRef Name='TimeDeleted' />
+                                                <FieldRef Name='ShareByEmailEnabled' />
+                                                <FieldRef Name='ShareByLinkEnabled' />
+                                                <FieldRef Name='SiteOwnerName' />
+                                                <FieldRef Name='SiteOwnerEmail' />
+                                                <FieldRef Name='StorageQuota' />
+                                                <FieldRef Name='StorageUsed' />
+                                                <FieldRef Name='TemplateId' />
+                                                <FieldRef Name='TemplateName' />
+                                            </ViewFields>
+                                            <RowLimit Paged='TRUE'>%PageSize%</RowLimit>
+                                        </View>";
+
+            List<IRecycledSiteCollection> loadedSites = new List<IRecycledSiteCollection>();
+
+            await LoadSitesViaTenantAdminHiddenListAsync(context, sitesListAllQuery, (IEnumerable<IListItem> listItems) =>
+            {
+                foreach (var listItem in listItems)
+                {
+                    Uri url = new Uri(listItem["SiteUrl"].ToString());
+                    Guid siteId = Guid.Parse(listItem["SiteId"].ToString());
+                    Guid groupId = Guid.Parse(listItem["GroupId"].ToString());
+
+                    if (loadedSites.FirstOrDefault(p => p.Id == siteId) == null)
+                    {
+                        loadedSites.Add(new RecycledSiteCollection()
+                        {
+                            Url = new Uri(listItem["SiteUrl"].ToString()),
+                            Id = siteId,
+                            GroupId = groupId,
+                            Name = listItem["Title"]?.ToString(),
+                            CreatedBy = listItem["CreatedBy"]?.ToString(),
+                            DeletedBy = listItem["DeletedBy"]?.ToString(),
+                            TimeCreated = listItem["TimeCreated"] != null ? (DateTime)listItem["TimeCreated"] : DateTime.MinValue,
+                            TimeDeleted = listItem["TimeDeleted"] != null ? (DateTime)listItem["TimeDeleted"] : DateTime.MinValue,
+                            SiteOwnerName = listItem["SiteOwnerName"]?.ToString(),
+                            SiteOwnerEmail = listItem["SiteOwnerEmail"]?.ToString(),
+                            StorageQuota = Convert.ToInt64(listItem["StorageQuota"].ToString()),
+                            StorageUsed = Convert.ToInt64(listItem["StorageUsed"].ToString()),
+                            TemplateName = listItem["TemplateName"]?.ToString(),
+                        });
+                    }
+                }
+            }, false, pageSize).ConfigureAwait(false);
 
             return loadedSites;
         }

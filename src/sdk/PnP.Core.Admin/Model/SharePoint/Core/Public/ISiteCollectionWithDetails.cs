@@ -15,11 +15,6 @@ namespace PnP.Core.Admin.Model.SharePoint
         public DateTime TimeCreated { get; }
 
         /// <summary>
-        /// Date time when this site collection was deleted
-        /// </summary>
-        public DateTime TimeDeleted { get; }
-
-        /// <summary>
         /// The user that created this site collection
         /// </summary>
         public string CreatedBy { get; }

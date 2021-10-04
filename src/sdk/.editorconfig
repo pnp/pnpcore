@@ -207,3 +207,6 @@ dotnet_diagnostic.CA1054.severity = none
 
 # CA1056: Uri properties should not be strings
 dotnet_diagnostic.CA1056.severity = none
+
+[*.{cs,vb}]
+dotnet_diagnostic.CA2007.severity=error
