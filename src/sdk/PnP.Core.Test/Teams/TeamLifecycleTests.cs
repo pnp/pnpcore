@@ -1,5 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PnP.Core.Model;
+using PnP.Core.Model.Teams;
+using PnP.Core.Services;
 using PnP.Core.Test.Utilities;
 using System.Threading.Tasks;
 
@@ -28,6 +30,10 @@ namespace PnP.Core.Test.Teams
                 Assert.IsTrue(team.IsArchived);
 
                 // lets wait for the operation to complete
+                if (context.Mode == TestMode.Mock)
+                {
+                    (archiveOperation as TeamAsyncOperation).WaitTimeInSeconds = 0;
+                }
                 await archiveOperation.WaitForCompletionAsync();
 
                 // reload from the server
@@ -40,6 +46,10 @@ namespace PnP.Core.Test.Teams
                 // We already updated the model
                 Assert.IsFalse(team.IsArchived);
 
+                if (context.Mode == TestMode.Mock)
+                {
+                    (unarchiveOperation as TeamAsyncOperation).WaitTimeInSeconds = 0;
+                }
                 await unarchiveOperation.WaitForCompletionAsync();
 
                 // reload from the server
@@ -63,6 +73,10 @@ namespace PnP.Core.Test.Teams
                 Assert.IsTrue(team.IsArchived);
 
                 // lets wait for the operation to complete
+                if (context.Mode == TestMode.Mock)
+                {
+                    (archiveOperation as TeamAsyncOperation).WaitTimeInSeconds = 0;
+                }
                 archiveOperation.WaitForCompletion();
 
                 // reload from the server
@@ -75,6 +89,10 @@ namespace PnP.Core.Test.Teams
                 // We already updated the model
                 Assert.IsFalse(team.IsArchived);
 
+                if (context.Mode == TestMode.Mock)
+                {
+                    (unarchiveOperation as TeamAsyncOperation).WaitTimeInSeconds = 0;
+                }
                 unarchiveOperation.WaitForCompletion();
 
                 // reload from the server
@@ -98,6 +116,10 @@ namespace PnP.Core.Test.Teams
                 Assert.IsTrue(team.IsArchived);
 
                 // lets wait for the operation to complete
+                if (context.Mode == TestMode.Mock)
+                {
+                    (archiveOperation as TeamAsyncOperation).WaitTimeInSeconds = 0;
+                }
                 archiveOperation.WaitForCompletion();
 
                 // reload from the server
@@ -110,6 +132,10 @@ namespace PnP.Core.Test.Teams
                 // We already updated the model
                 Assert.IsFalse(team.IsArchived);
 
+                if (context.Mode == TestMode.Mock)
+                {
+                    (unarchiveOperation as TeamAsyncOperation).WaitTimeInSeconds = 0;
+                }
                 unarchiveOperation.WaitForCompletion();
 
                 // reload from the server

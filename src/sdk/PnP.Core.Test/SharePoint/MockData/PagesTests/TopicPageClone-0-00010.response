@@ -1,4 +1,4 @@
---batchresponse_d35a8900-02ad-4949-a1db-44b971a4e893
+--batchresponse_dd519f72-4340-488b-ba62-a68716af099a
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
@@ -7,11 +7,11 @@ CONTENT-TYPE: application/json; charset=utf-8
 
 { "Row" : 
 [{
-"ID": "18",
+"ID": "20",
 "PermMask": "0x7ffffffffffbffff",
 "FSObjType": "0",
 "HTML_x0020_File_x0020_Type": "",
-"UniqueId": "{D5DDBCA6-C747-4E6A-BA06-4F54C88E81DB}",
+"UniqueId": "{AEB062C2-4925-4F78-9085-750273615959}",
 "ProgId": "",
 "NoExecute": "0",
 "ContentTypeId": "0x0101009D1CB255DA76424F860D91F20E6C41180004EEC8087A216D4DAF24B2810EB8AF8E",
@@ -40,7 +40,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "Title": "TopicPageClone",
 "ClientSideApplicationId": "{B6917CB1-93A0-4B97-A84D-7CF49975D4EC}",
 "PageLayoutType": "Topic",
-"_EntityId": "CRKB_UapwWK-m-HJ8f8Q-HQNZyg",
+"_EntityId": "CRKB_9MFvNNTVAAX8w5X1BHlXRA",
 "_EntityType": "Project",
 "_EntityRelations": "{\"schemaVersion\":1,\"relations\":{\"Definitions\":{\"added\":[{\"type\":\"TextProperty\",\"text\":\"topicA\\n\",\"curationDetails\":{\"author\":{\"email\":\"bert.jansen@bertonline.onmicrosoft.com\",\"name\":\"Bert Jansen (Cloud)\",\"upn\":\"bert.jansen@bertonline.onmicrosoft.com\"},\"time\":\"2021-04-15T09:24:15.824Z\",\"isAddedFromSearch\":false}}]},\"RelatedPeople\":{\"added\":[{\"type\":\"Person\",\"upn\":\"bert.jansen@bertonline.onmicrosoft.com\",\"email\":\"bert.jansen@bertonline.onmicrosoft.com\",\"name\":\"Bert Jansen (Cloud)\",\"curationDetails\":{\"author\":{\"email\":\"bert.jansen@bertonline.onmicrosoft.com\",\"name\":\"Bert Jansen (Cloud)\",\"upn\":\"bert.jansen@bertonline.onmicrosoft.com\"},\"time\":\"2021-04-15T09:23:58.554Z\",\"isAddedFromSearch\":false},\"description\":\"\"}],\"removed\":[]},\"RelatedDocuments\":{\"added\":[]},\"RelatedSites\":{\"added\":[]}}}",
 "CanvasContent1": "<div dir=\"\" class=\"ms-rtestate-field\"><div><\u002fdiv><\u002fdiv>",
@@ -68,6 +68,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "A2ODMountCount": "",
 "_StubFile": "0",
 "_ComplianceTag": "",
+"_ExpirationDate": "",
 "owshiddenversion": "2",
 "_SPSitePageFlags": ["TopicPage"],
 "ContentVersion": "1",
@@ -86,4 +87,4 @@ CONTENT-TYPE: application/json; charset=utf-8
 ,"CurrentFolderSpItemUrl" : ""
 
 }
---batchresponse_d35a8900-02ad-4949-a1db-44b971a4e893--
+--batchresponse_dd519f72-4340-488b-ba62-a68716af099a--

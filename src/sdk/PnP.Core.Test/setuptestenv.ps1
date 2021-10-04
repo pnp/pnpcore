@@ -52,7 +52,8 @@ $tenantContext = Connect-PnPOnline -Url $tenantUrl -Credentials $credentials -Ve
 
 # Add test Client Side app package
 $app = Add-PnPApp -Path .\TestAssets\pnpcoresdk-test-app.sppkg -Publish
-
+# or retrieve it's ID if it was already added to the tenant app catalog
+# $app = Get-PnPApp -Identity "pnpcoresdk-test-app-client-side-solution"
 
 # Create test site without a group
 $pnpTestSite = New-PnPSite -Type CommunicationSite -Title "PnP Microsoft 365 library test" -Url  "https://$tenantName.sharepoint.com/sites/pnpcoresdktest"  -Wait -Connection $tenantContext

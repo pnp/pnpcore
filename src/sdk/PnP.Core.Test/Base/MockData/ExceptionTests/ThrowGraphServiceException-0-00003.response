@@ -1,11 +1,1 @@
-{"responses": [{"id": "1","status":400,"headers" : {"Content-Type":"application/json"},"body":{
-  "error": {
-    "code": "BadRequest",
-    "message": "Channel name already existed, please use other name",
-    "innerError": {
-      "date": "2021-03-09T15:02:09",
-      "request-id": "2b9744e0-e101-4ad8-94ac-0420033975dc",
-      "client-request-id": "2b9744e0-e101-4ad8-94ac-0420033975dc"
-    }
-  }
-}}]}
+{"responses": [{"id": "1","status":201,"headers" : {"Location":"https://teamsgraph.teams.microsoft.com/v1.0/teams('d40d729b-df60-4b57-ac8f-102595090e0a')/channels('19:e67323f12a4d4bf095a616db8004f577@thread.tacv2')","OData-Version":"4.0","Content-Type":"application/json;odata.metadata=minimal;odata.streaming=true;IEEE754Compatible=false;charset=utf-8"},"body":{"@odata.context":"https://graph.microsoft.com/v1.0/$metadata#teams('d40d729b-df60-4b57-ac8f-102595090e0a')/channels/$entity","id":"19:e67323f12a4d4bf095a616db8004f577@thread.tacv2","createdDateTime":"2021-10-04T08:07:04.9197277Z","displayName":"Fail channel","description":null,"isFavoriteByDefault":false,"email":"","webUrl":"https://teams.microsoft.com/l/channel/19%3Ae67323f12a4d4bf095a616db8004f577%40thread.tacv2/Fail%20channel?groupId=d40d729b-df60-4b57-ac8f-102595090e0a&tenantId=d8623c9e-30c7-473a-83bc-d907df44a26e","membershipType":"standard"}}]}

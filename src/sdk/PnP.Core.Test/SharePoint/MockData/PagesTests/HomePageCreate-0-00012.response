@@ -1,4 +1,4 @@
---batchresponse_a6e7f918-256a-4b1e-b2ad-e5a09a3775c2
+--batchresponse_8bb51a8c-babb-4164-ac15-328bafb1fd1f
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
@@ -7,22 +7,22 @@ CONTENT-TYPE: application/json; charset=utf-8
 
 { "Row" : 
 [{
-"ID": "2152",
+"ID": "37",
 "PermMask": "0x7ffffffffffbffff",
 "FSObjType": "0",
 "HTML_x0020_File_x0020_Type": "",
-"UniqueId": "{5073DEBB-0386-4122-8A03-A41C24558588}",
+"UniqueId": "{CE29C61F-4B17-4865-A999-B5D2231DAB7D}",
 "ProgId": "",
 "NoExecute": "0",
-"ContentTypeId": "0x0101009D1CB255DA76424F860D91F20E6C411800BC66A1F7CEC63943B700A35FCBCF0164",
-"FileRef": "\u002fsites\u002fprov-1\u002fSitePages\u002fPNP_SDK_TEST_HomePageCreate.aspx",
-"FileRef.urlencode": "%2Fsites%2Fprov%2D1%2FSitePages%2FPNP%5FSDK%5FTEST%5FHomePageCreate%2Easpx",
-"FileRef.urlencodeasurl": "\u002fsites\u002fprov-1\u002fSitePages\u002fPNP_SDK_TEST_HomePageCreate.aspx",
-"FileRef.urlencoding": "\u002fsites\u002fprov-1\u002fSitePages\u002fPNP_SDK_TEST_HomePageCreate.aspx",
-"FileRef.scriptencodeasurl": "\\u002fsites\\u002fprov-1\\u002fSitePages\\u002fPNP_SDK_TEST_HomePageCreate.aspx",
+"ContentTypeId": "0x0101009D1CB255DA76424F860D91F20E6C411800ABCA94743631AD42AF5A113D15A25F6A",
+"FileRef": "\u002fsites\u002fprov-2\u002fSitePages\u002fPNP_SDK_TEST_HomePageCreate.aspx",
+"FileRef.urlencode": "%2Fsites%2Fprov%2D2%2FSitePages%2FPNP%5FSDK%5FTEST%5FHomePageCreate%2Easpx",
+"FileRef.urlencodeasurl": "\u002fsites\u002fprov-2\u002fSitePages\u002fPNP_SDK_TEST_HomePageCreate.aspx",
+"FileRef.urlencoding": "\u002fsites\u002fprov-2\u002fSitePages\u002fPNP_SDK_TEST_HomePageCreate.aspx",
+"FileRef.scriptencodeasurl": "\\u002fsites\\u002fprov-2\\u002fSitePages\\u002fPNP_SDK_TEST_HomePageCreate.aspx",
 "_UIVersion": "1",
-"SMTotalSize": "5744",
-"File_x0020_Size": "4528",
+"SMTotalSize": "5738",
+"File_x0020_Size": "4505",
 "_CommentFlags": "",
 "File_x0020_Type": "aspx",
 "HTML_x0020_File_x0020_Type.File_x0020_Type.mapall": "ichtm.gif|Microsoft SharePoint Designer|SharePoint.OpenDocuments|",
@@ -35,12 +35,12 @@ CONTENT-TYPE: application/json; charset=utf-8
 "FileLeafRef": "PNP_SDK_TEST_HomePageCreate.aspx",
 "FileLeafRef.Name": "PNP_SDK_TEST_HomePageCreate",
 "FileLeafRef.Suffix": "aspx",
-"FileDirRef": "\u002fsites\u002fprov-1\u002fSitePages",
+"FileDirRef": "\u002fsites\u002fprov-2\u002fSitePages",
 "Description": "",
 "Title": "PNP_SDK_TEST_HomePageCreate",
 "ClientSideApplicationId": "{B6917CB1-93A0-4B97-A84D-7CF49975D4EC}",
 "PageLayoutType": "Home",
-"CanvasContent1": "<div dir=\"\" class=\"ms-rtestate-field\"><div><div data-sp-canvascontrol=\"\" data-sp-canvasdataversion=\"1.0\" data-sp-controldata=\"&#123;&quot;editorType&quot;&#58;&quot;CKEditor&quot;,&quot;controlType&quot;&#58;4,&quot;id&quot;&#58;&quot;69d266d3-5c7b-4129-8eae-32a34cb5cc9f&quot;,&quot;position&quot;&#58;&#123;&quot;controlIndex&quot;&#58;1,&quot;zoneIndex&quot;&#58;1,&quot;sectionIndex&quot;&#58;1,&quot;sectionFactor&quot;&#58;12,&quot;layoutIndex&quot;&#58;1&#125;,&quot;emphasis&quot;&#58;&#123;&quot;zoneEmphasis&quot;&#58;0&#125;&#125;\"><div data-sp-rte=\"\"><p>PnP<\u002fp><\u002fdiv><\u002fdiv><div data-sp-canvascontrol=\"\" data-sp-canvasdataversion=\"1.0\" data-sp-controldata=\"&#123;&quot;controlType&quot;&#58;0,&quot;pageSettingsSlice&quot;&#58;&#123;&quot;isDefaultDescription&quot;&#58;false,&quot;isDefaultThumbnail&quot;&#58;true&#125;&#125;\"><\u002fdiv><\u002fdiv><\u002fdiv>",
+"CanvasContent1": "<div dir=\"\" class=\"ms-rtestate-field\"><div><div data-sp-canvascontrol=\"\" data-sp-canvasdataversion=\"1.0\" data-sp-controldata=\"&#123;&quot;editorType&quot;&#58;&quot;CKEditor&quot;,&quot;controlType&quot;&#58;4,&quot;id&quot;&#58;&quot;60a98ae6-0d04-4abb-8d6b-9c104f6cddb7&quot;,&quot;position&quot;&#58;&#123;&quot;controlIndex&quot;&#58;1,&quot;zoneIndex&quot;&#58;1,&quot;sectionIndex&quot;&#58;1,&quot;sectionFactor&quot;&#58;12,&quot;layoutIndex&quot;&#58;1&#125;,&quot;emphasis&quot;&#58;&#123;&quot;zoneEmphasis&quot;&#58;0&#125;,&quot;zoneGroupMetadata&quot;&#58;null&#125;\"><div data-sp-rte=\"\"><p>PnP<\u002fp><\u002fdiv><\u002fdiv><div data-sp-canvascontrol=\"\" data-sp-canvasdataversion=\"1.0\" data-sp-controldata=\"&#123;&quot;controlType&quot;&#58;0,&quot;pageSettingsSlice&quot;&#58;&#123;&quot;isDefaultDescription&quot;&#58;false,&quot;isDefaultThumbnail&quot;&#58;true&#125;&#125;\"><\u002fdiv><\u002fdiv><\u002fdiv>",
 "_AuthorByline": "",
 "_AuthorByline.id": "",
 "_AuthorByline.title": "",
@@ -65,14 +65,14 @@ CONTENT-TYPE: application/json; charset=utf-8
 "A2ODMountCount": "",
 "_StubFile": "0",
 "_ComplianceTag": "",
+"_ExpirationDate": "",
 "owshiddenversion": "2",
-"_SPTranslatedLanguages": "",
 "_SPSitePageFlags": "",
 "ContentVersion": "1",
 "DocConcurrencyNumber": "2",
 "_VirusStatus": "",
 "Restricted": "",
-"ecb.dispex": "return DispEx(this,event,'TRUE','FALSE','FALSE','','1','SharePoint.OpenDocuments','','','','6','0','','0x7ffffffffffbffff','','')"
+"ecb.dispex": "return DispEx(this,event,'TRUE','FALSE','FALSE','','1','SharePoint.OpenDocuments','','','','11','0','','0x7ffffffffffbffff','','')"
 }
 ],"FirstRow" : 1,
 "FolderPermissions" : "0x7ffffffffffbffff"
@@ -84,4 +84,4 @@ CONTENT-TYPE: application/json; charset=utf-8
 ,"CurrentFolderSpItemUrl" : ""
 
 }
---batchresponse_a6e7f918-256a-4b1e-b2ad-e5a09a3775c2--
+--batchresponse_8bb51a8c-babb-4164-ac15-328bafb1fd1f--

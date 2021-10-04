@@ -11,8 +11,8 @@ namespace PnP.Core.Model.Teams
     [GraphType]
     internal class TeamAsyncOperation : BaseDataModel<ITeamAsyncOperation>, ITeamAsyncOperation
     {
-        private const int waitTimeInSeconds = 5;
-        private const int maxRetries = 50;
+        internal int WaitTimeInSeconds { get; set; } = 5;
+        internal int MaxRetries { get; set; } = 50;
 
         internal TeamAsyncOperation(string location, PnPContext context)
         {
@@ -29,10 +29,10 @@ namespace PnP.Core.Model.Teams
 
             while (!wereDone)
             {
-                if (retries >= maxRetries)
+                if (retries >= MaxRetries)
                 {
                     throw new ServiceException(ErrorType.TeamsAsyncOperationError, 0,
-                        string.Format(PnPCoreResources.Exception_TeamsAsyncOperationError_MaxRetries, maxRetries, Location));
+                        string.Format(PnPCoreResources.Exception_TeamsAsyncOperationError_MaxRetries, MaxRetries, Location));
                 }
 
                 var apiCall = new ApiCall(Location.ToString(), ApiType.Graph);
@@ -60,8 +60,8 @@ namespace PnP.Core.Model.Teams
                         else
                         {
                             retries++;
-                            Log.LogInformation(PnPCoreResources.Log_Information_OperationNotReady, Location, statusValue, waitTimeInSeconds, retries);
-                            Thread.Sleep(waitTimeInSeconds * 1000);
+                            Log.LogInformation(PnPCoreResources.Log_Information_OperationNotReady, Location, statusValue, WaitTimeInSeconds, retries);
+                            await Task.Delay(TimeSpan.FromSeconds(WaitTimeInSeconds)).ConfigureAwait(false);
                         }
                     }
                 }

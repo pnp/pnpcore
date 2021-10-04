@@ -1,9 +1,9 @@
---batchresponse_a795825f-0765-49f0-a9ed-a91ff3b1dfef
+--batchresponse_208ac91a-0385-40e4-bcf4-ad6b1372d1ac
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 404 Not Found
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{"error":{"code":"-2130575338, Microsoft.SharePoint.SPException","message":{"lang":"en-US","value":"The file /sites/prov-1/SitePages/PNP_SDK_TEST_CustomPageHeaderWithSiteRelativeImageTest.aspx does not exist."}}}
---batchresponse_a795825f-0765-49f0-a9ed-a91ff3b1dfef--
+{"error":{"code":"-2130575338, Microsoft.SharePoint.SPException","message":{"lang":"en-US","value":"The file /sites/prov-2/SitePages/PNP_SDK_TEST_CustomPageHeaderWithSiteRelativeImageTest.aspx does not exist."}}}
+--batchresponse_208ac91a-0385-40e4-bcf4-ad6b1372d1ac--

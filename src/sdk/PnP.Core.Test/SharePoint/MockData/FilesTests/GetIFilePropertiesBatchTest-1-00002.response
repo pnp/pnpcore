@@ -1,9 +1,9 @@
---batchresponse_4ce9c81a-b312-4b38-9ef8-37806f374488
+--batchresponse_6afbc9c6-1118-4974-8286-1931964b00f1
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{"d":{"__metadata":{"id":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/pnpcoresdktestgroup/Shared Documents/PNP_SDK_TEST_GetIFilePropertiesBatchTest.docx')","uri":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/pnpcoresdktestgroup/Shared%20Documents/PNP_SDK_TEST_GetIFilePropertiesBatchTest.docx')","type":"SP.File"},"HasAlternateContentStreams":false,"Length":"18052","ServerRedirectedUrl":"https://gimmalkyle2.sharepoint.com/sites/pnpcoresdktestgroup/_layouts/15/Doc.aspx?sourcedoc=%7B431407D7-D943-427E-AB55-ABA4FE13791F%7D&file=PNP_SDK_TEST_GetIFilePropertiesBatchTest.docx&action=default&mobileredirect=true","UniqueId":"431407d7-d943-427e-ab55-aba4fe13791f","VroomDriveID":"b!ZtxgsoWyf0eKGhSZeYLphlfDo3rrzblDnc3cFkWzDP9Y_NwRML4tS7O6tnUsdm9H","VroomItemID":"01TEEVMCGXA4KEGQ6ZPZBKWVNLUT7BG6I7"}}
---batchresponse_4ce9c81a-b312-4b38-9ef8-37806f374488--
+{"d":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-2/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/prov-2/Shared Documents/PNP_SDK_TEST_GetIFilePropertiesBatchTest.docx')","uri":"https://bertonline.sharepoint.com/sites/prov-2/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/prov-2/Shared%20Documents/PNP_SDK_TEST_GetIFilePropertiesBatchTest.docx')","type":"SP.File"},"HasAlternateContentStreams":false,"Length":"17823","ServerRedirectedUrl":"https://bertonline.sharepoint.com/sites/prov-2/_layouts/15/Doc.aspx?sourcedoc=%7B2FD017FE-8134-4B25-AC16-83E268A1273C%7D&file=PNP_SDK_TEST_GetIFilePropertiesBatchTest.docx&action=default&mobileredirect=true","UniqueId":"2fd017fe-8134-4b25-ac16-83e268a1273c","VroomDriveID":"b!QJ4v-RAR70OqDggi4T-3uoakmSzJ1ktKjW-p-qNkySxwbjITulgOTpswCBifIdVV","VroomItemID":"01O2ADSGP6C7IC6NEBEVF2YFUD4JUKCJZ4"}}
+--batchresponse_6afbc9c6-1118-4974-8286-1931964b00f1--

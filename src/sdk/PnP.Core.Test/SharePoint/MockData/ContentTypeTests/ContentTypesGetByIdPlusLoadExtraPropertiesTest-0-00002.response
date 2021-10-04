@@ -1,9 +1,9 @@
---batchresponse_e65980ab-018f-4a6d-b595-b6a5a9d147ac
+--batchresponse_609ca848-a560-4752-b8e2-17109b8f1410
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{"d":{"results":[{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/ContentTypes('0x01')","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/ContentTypes('0x01')","type":"SP.ContentType"},"Id":{"__metadata":{"type":"SP.ContentTypeId"},"StringValue":"0x01"},"StringId":"0x01"}]}}
---batchresponse_e65980ab-018f-4a6d-b595-b6a5a9d147ac--
+{"d":{"results":[{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-2/_api/Web/ContentTypes('0x01')","uri":"https://bertonline.sharepoint.com/sites/prov-2/_api/Web/ContentTypes('0x01')","type":"SP.ContentType"},"Id":{"__metadata":{"type":"SP.ContentTypeId"},"StringValue":"0x01"},"StringId":"0x01"}]}}
+--batchresponse_609ca848-a560-4752-b8e2-17109b8f1410--

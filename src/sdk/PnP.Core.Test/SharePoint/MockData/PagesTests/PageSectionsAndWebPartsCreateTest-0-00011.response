@@ -1,4 +1,4 @@
---batchresponse_9e91d2f4-7bb4-4880-8489-259cea53950d
+--batchresponse_7fb90e1a-a78a-4e93-93c6-31e2dc474d32
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
@@ -7,11 +7,11 @@ CONTENT-TYPE: application/json; charset=utf-8
 
 { "Row" : 
 [{
-"ID": "683",
+"ID": "715",
 "PermMask": "0x7ffffffffffbffff",
 "FSObjType": "0",
 "HTML_x0020_File_x0020_Type": "",
-"UniqueId": "{25F8A81D-0B5E-45EF-B596-2D053D1DFBBA}",
+"UniqueId": "{434F4D2B-EB5D-4B8A-850E-126990807206}",
 "ProgId": "",
 "NoExecute": "0",
 "ContentTypeId": "0x0101009D1CB255DA76424F860D91F20E6C41180044C66AD09592964583DFF5030205BD34",
@@ -21,8 +21,8 @@ CONTENT-TYPE: application/json; charset=utf-8
 "FileRef.urlencoding": "\u002fsites\u002fpnpcoresdktest\u002fSitePages\u002fPNP_SDK_TEST_PageSectionsAndWebPartsCreateTest.aspx",
 "FileRef.scriptencodeasurl": "\\u002fsites\\u002fpnpcoresdktest\\u002fSitePages\\u002fPNP_SDK_TEST_PageSectionsAndWebPartsCreateTest.aspx",
 "_UIVersion": "1",
-"SMTotalSize": "7791",
-"File_x0020_Size": "6322",
+"SMTotalSize": "7875",
+"File_x0020_Size": "6390",
 "_CommentFlags": "",
 "File_x0020_Type": "aspx",
 "HTML_x0020_File_x0020_Type.File_x0020_Type.mapall": "ichtm.gif|Microsoft SharePoint Designer|SharePoint.OpenDocuments|",
@@ -40,7 +40,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "Title": "PNP_SDK_TEST_PageSectionsAndWebPartsCreateTest",
 "ClientSideApplicationId": "{B6917CB1-93A0-4B97-A84D-7CF49975D4EC}",
 "PageLayoutType": "Article",
-"CanvasContent1": "<div dir=\"\" class=\"ms-rtestate-field\"><div><div data-sp-canvascontrol=\"\" data-sp-canvasdataversion=\"1.9\" data-sp-controldata=\"&#123;&quot;webPartId&quot;&#58;&quot;d1d91016-032f-456d-98a4-721247c305e8&quot;,&quot;controlType&quot;&#58;3,&quot;id&quot;&#58;&quot;2ea22451-d824-45d7-b523-a34543f64400&quot;,&quot;position&quot;&#58;&#123;&quot;controlIndex&quot;&#58;1,&quot;zoneIndex&quot;&#58;1,&quot;sectionIndex&quot;&#58;1,&quot;sectionFactor&quot;&#58;0,&quot;layoutIndex&quot;&#58;1&#125;,&quot;emphasis&quot;&#58;&#123;&quot;zoneEmphasis&quot;&#58;0&#125;&#125;\"><div data-sp-webpart=\"\" data-sp-webpartdataversion=\"1.9\" data-sp-webpartdata=\"&#123;&quot;id&quot;&#58;&quot;d1d91016-032f-456d-98a4-721247c305e8&quot;,&quot;instanceId&quot;&#58;&quot;2ea22451-d824-45d7-b523-a34543f64400&quot;,&quot;title&quot;&#58;&quot;Image&quot;,&quot;description&quot;&#58;&quot;Image&quot;,&quot;dataVersion&quot;&#58;&quot;1.9&quot;,&quot;properties&quot;&#58;&#123;&quot;imageSourceType&quot;&#58;0,&quot;imageSource&quot;&#58;&quot;&quot;,&quot;captionText&quot;&#58;&quot;&quot;,&quot;altText&quot;&#58;&quot;&quot;,&quot;linkUrl&quot;&#58;&quot;&quot;,&quot;overlayText&quot;&#58;&quot;&quot;,&quot;fileName&quot;&#58;&quot;&quot;,&quot;siteId&quot;&#58;&quot;&quot;,&quot;webId&quot;&#58;&quot;&quot;,&quot;listId&quot;&#58;&quot;&quot;,&quot;uniqueId&quot;&#58;&quot;&quot;,&quot;imgWidth&quot;&#58;&quot;&quot;,&quot;imgHeight&quot;&#58;&quot;&quot;&#125;,&quot;dynamicDataPaths&quot;&#58;&#123;&#125;,&quot;dynamicDataValues&quot;&#58;&#123;&#125;,&quot;serverProcessedContent&quot;&#58;&#123;&#125;&#125;\"><div data-sp-componentid=\"\">d1d91016-032f-456d-98a4-721247c305e8<\u002fdiv><div data-sp-htmlproperties=\"\"><\u002fdiv><\u002fdiv><\u002fdiv><div data-sp-canvascontrol=\"\" data-sp-canvasdataversion=\"1.0\" data-sp-controldata=\"&#123;&quot;controlType&quot;&#58;0,&quot;pageSettingsSlice&quot;&#58;&#123;&quot;isDefaultDescription&quot;&#58;false,&quot;isDefaultThumbnail&quot;&#58;true&#125;&#125;\"><\u002fdiv><\u002fdiv><\u002fdiv>",
+"CanvasContent1": "<div dir=\"\" class=\"ms-rtestate-field\"><div><div data-sp-canvascontrol=\"\" data-sp-canvasdataversion=\"1.9\" data-sp-controldata=\"&#123;&quot;webPartId&quot;&#58;&quot;d1d91016-032f-456d-98a4-721247c305e8&quot;,&quot;controlType&quot;&#58;3,&quot;id&quot;&#58;&quot;77bda43a-4edb-49d3-893b-91bed4376a3c&quot;,&quot;position&quot;&#58;&#123;&quot;controlIndex&quot;&#58;1,&quot;zoneIndex&quot;&#58;1,&quot;sectionIndex&quot;&#58;1,&quot;sectionFactor&quot;&#58;0,&quot;layoutIndex&quot;&#58;1&#125;,&quot;emphasis&quot;&#58;&#123;&quot;zoneEmphasis&quot;&#58;0&#125;,&quot;zoneGroupMetadata&quot;&#58;null&#125;\"><div data-sp-webpart=\"\" data-sp-webpartdataversion=\"1.9\" data-sp-webpartdata=\"&#123;&quot;id&quot;&#58;&quot;d1d91016-032f-456d-98a4-721247c305e8&quot;,&quot;instanceId&quot;&#58;&quot;77bda43a-4edb-49d3-893b-91bed4376a3c&quot;,&quot;title&quot;&#58;&quot;Image&quot;,&quot;description&quot;&#58;&quot;Image&quot;,&quot;dataVersion&quot;&#58;&quot;1.9&quot;,&quot;properties&quot;&#58;&#123;&quot;imageSourceType&quot;&#58;0,&quot;imageSource&quot;&#58;&quot;&quot;,&quot;captionText&quot;&#58;&quot;&quot;,&quot;altText&quot;&#58;&quot;&quot;,&quot;linkUrl&quot;&#58;&quot;&quot;,&quot;overlayText&quot;&#58;&quot;&quot;,&quot;fileName&quot;&#58;&quot;&quot;,&quot;siteId&quot;&#58;&quot;&quot;,&quot;webId&quot;&#58;&quot;&quot;,&quot;listId&quot;&#58;&quot;&quot;,&quot;uniqueId&quot;&#58;&quot;&quot;,&quot;imgWidth&quot;&#58;&quot;&quot;,&quot;imgHeight&quot;&#58;&quot;&quot;&#125;,&quot;dynamicDataPaths&quot;&#58;&#123;&#125;,&quot;dynamicDataValues&quot;&#58;&#123;&#125;,&quot;serverProcessedContent&quot;&#58;&#123;&#125;&#125;\"><div data-sp-componentid=\"\">d1d91016-032f-456d-98a4-721247c305e8<\u002fdiv><div data-sp-htmlproperties=\"\"><\u002fdiv><\u002fdiv><\u002fdiv><div data-sp-canvascontrol=\"\" data-sp-canvasdataversion=\"1.0\" data-sp-controldata=\"&#123;&quot;controlType&quot;&#58;0,&quot;pageSettingsSlice&quot;&#58;&#123;&quot;isDefaultDescription&quot;&#58;false,&quot;isDefaultThumbnail&quot;&#58;true&#125;&#125;\"><\u002fdiv><\u002fdiv><\u002fdiv>",
 "_AuthorByline": "",
 "_AuthorByline.id": "",
 "_AuthorByline.title": "\u002f_layouts\u002f15\u002fimages\u002fsitepagethumbnail.png",
@@ -65,9 +65,10 @@ CONTENT-TYPE: application/json; charset=utf-8
 "A2ODMountCount": "",
 "_StubFile": "0",
 "_ComplianceTag": "",
+"_ExpirationDate": "",
 "owshiddenversion": "2",
-"_PublishStartDate": "7\u002f5\u002f2021 9:58 AM",
-"_PublishStartDate.": "2021-07-05T16:58:09Z",
+"_PublishStartDate": "10\u002f4\u002f2021 1:21 AM",
+"_PublishStartDate.": "2021-10-04T08:21:06Z",
 "_ScheduledVersion": "",
 "_SPTranslatedLanguages": "",
 "_SPSitePageFlags": "",
@@ -87,4 +88,4 @@ CONTENT-TYPE: application/json; charset=utf-8
 ,"CurrentFolderSpItemUrl" : ""
 
 }
---batchresponse_9e91d2f4-7bb4-4880-8489-259cea53950d--
+--batchresponse_7fb90e1a-a78a-4e93-93c6-31e2dc474d32--

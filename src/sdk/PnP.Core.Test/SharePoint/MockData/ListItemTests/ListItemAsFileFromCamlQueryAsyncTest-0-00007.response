@@ -1,4 +1,4 @@
---batchresponse_d07abd86-96e8-4ff7-ac03-6d9214241ab2
+--batchresponse_7b93cf75-002d-4ae9-8d4a-9b14f615a634
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
@@ -6,4 +6,4 @@ HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
 {"d":{"ValidateUpdateListItem":{"__metadata":{"type":"Collection(SP.ListItemFormUpdateValue)"},"results":[{"ErrorCode":0,"ErrorMessage":null,"FieldName":"TestStringField","FieldValue":"This is my test","HasException":false,"ItemId":1},{"ErrorCode":0,"ErrorMessage":null,"FieldName":"TestBoolField","FieldValue":"1","HasException":false,"ItemId":1},{"ErrorCode":0,"ErrorMessage":null,"FieldName":"TestNumberField","FieldValue":"10","HasException":false,"ItemId":1}]}}}
---batchresponse_d07abd86-96e8-4ff7-ac03-6d9214241ab2--
+--batchresponse_7b93cf75-002d-4ae9-8d4a-9b14f615a634--

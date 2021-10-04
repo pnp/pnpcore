@@ -1,4 +1,4 @@
---batchresponse_b86fab1a-b2ea-4034-b21f-6a58d973e0a9
+--batchresponse_cd57a616-e199-4d39-b05d-fb018afbbfdf
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
@@ -6,7 +6,7 @@ HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
 {"d":{"AddValidateUpdateItemUsingPath":{"__metadata":{"type":"Collection(SP.ListItemFormUpdateValue)"},"results":[{"ErrorCode":0,"ErrorMessage":null,"FieldName":"Title","FieldValue":"Item 100","HasException":false,"ItemId":0},{"ErrorCode":0,"ErrorMessage":null,"FieldName":"Id","FieldValue":"101","HasException":false,"ItemId":0}]}}}
---batchresponse_b86fab1a-b2ea-4034-b21f-6a58d973e0a9
+--batchresponse_cd57a616-e199-4d39-b05d-fb018afbbfdf
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
@@ -14,7 +14,7 @@ HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
 {"d":{"AddValidateUpdateItemUsingPath":{"__metadata":{"type":"Collection(SP.ListItemFormUpdateValue)"},"results":[{"ErrorCode":0,"ErrorMessage":null,"FieldName":"Title","FieldValue":"Item 101","HasException":false,"ItemId":0},{"ErrorCode":0,"ErrorMessage":null,"FieldName":"Id","FieldValue":"102","HasException":false,"ItemId":0}]}}}
---batchresponse_b86fab1a-b2ea-4034-b21f-6a58d973e0a9
+--batchresponse_cd57a616-e199-4d39-b05d-fb018afbbfdf
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
@@ -22,7 +22,7 @@ HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
 {"d":{"AddValidateUpdateItemUsingPath":{"__metadata":{"type":"Collection(SP.ListItemFormUpdateValue)"},"results":[{"ErrorCode":0,"ErrorMessage":null,"FieldName":"Title","FieldValue":"Item 102","HasException":false,"ItemId":0},{"ErrorCode":0,"ErrorMessage":null,"FieldName":"Id","FieldValue":"103","HasException":false,"ItemId":0}]}}}
---batchresponse_b86fab1a-b2ea-4034-b21f-6a58d973e0a9
+--batchresponse_cd57a616-e199-4d39-b05d-fb018afbbfdf
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
@@ -30,7 +30,7 @@ HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
 {"d":{"AddValidateUpdateItemUsingPath":{"__metadata":{"type":"Collection(SP.ListItemFormUpdateValue)"},"results":[{"ErrorCode":0,"ErrorMessage":null,"FieldName":"Title","FieldValue":"Item 103","HasException":false,"ItemId":0},{"ErrorCode":0,"ErrorMessage":null,"FieldName":"Id","FieldValue":"104","HasException":false,"ItemId":0}]}}}
---batchresponse_b86fab1a-b2ea-4034-b21f-6a58d973e0a9
+--batchresponse_cd57a616-e199-4d39-b05d-fb018afbbfdf
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
@@ -38,4 +38,4 @@ HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
 {"d":{"AddValidateUpdateItemUsingPath":{"__metadata":{"type":"Collection(SP.ListItemFormUpdateValue)"},"results":[{"ErrorCode":0,"ErrorMessage":null,"FieldName":"Title","FieldValue":"Item 104","HasException":false,"ItemId":0},{"ErrorCode":0,"ErrorMessage":null,"FieldName":"Id","FieldValue":"105","HasException":false,"ItemId":0}]}}}
---batchresponse_b86fab1a-b2ea-4034-b21f-6a58d973e0a9--
+--batchresponse_cd57a616-e199-4d39-b05d-fb018afbbfdf--

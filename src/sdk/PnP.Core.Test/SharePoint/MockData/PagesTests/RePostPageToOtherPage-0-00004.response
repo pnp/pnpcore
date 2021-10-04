@@ -1,4 +1,4 @@
---batchresponse_b45857ab-0064-46e3-9510-1f55df2b4972
+--batchresponse_2032a15d-9bd6-4ff1-963d-99b4fe378b3e
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
@@ -65,6 +65,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "A2ODMountCount": "",
 "_StubFile": "0",
 "_ComplianceTag": "",
+"_ExpirationDate": "",
 "owshiddenversion": "2",
 "_PublishStartDate": "",
 "_PublishStartDate.": "",
@@ -87,4 +88,4 @@ CONTENT-TYPE: application/json; charset=utf-8
 ,"CurrentFolderSpItemUrl" : ""
 
 }
---batchresponse_b45857ab-0064-46e3-9510-1f55df2b4972--
+--batchresponse_2032a15d-9bd6-4ff1-963d-99b4fe378b3e--

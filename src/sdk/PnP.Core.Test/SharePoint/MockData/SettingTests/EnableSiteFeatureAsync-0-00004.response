@@ -1,4 +1,4 @@
---batchresponse_4abd5c28-ec75-42e8-b23e-6884f7021d1c
+--batchresponse_8caa10a0-9d28-4a62-8353-8960827a0247
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
@@ -6,4 +6,4 @@ HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
 {"d":{"Remove":null}}
---batchresponse_4abd5c28-ec75-42e8-b23e-6884f7021d1c--
+--batchresponse_8caa10a0-9d28-4a62-8353-8960827a0247--

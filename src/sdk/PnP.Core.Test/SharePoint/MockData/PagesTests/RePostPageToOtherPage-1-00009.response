@@ -1,4 +1,4 @@
---batchresponse_4e4e7686-8f52-4f83-8d56-b8fe68d92367
+--batchresponse_b47a67a4-329b-499a-abc6-d59e16b5daa4
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
@@ -7,22 +7,24 @@ CONTENT-TYPE: application/json; charset=utf-8
 
 { "Row" : 
 [{
-"ID": "2173",
+"ID": "58",
 "PermMask": "0x7ffffffffffbffff",
 "FSObjType": "0",
 "HTML_x0020_File_x0020_Type": "",
-"UniqueId": "{CFD4AA5A-00DC-4183-80F8-8EC333D35314}",
+"UniqueId": "{EC437D93-40B8-46CA-8471-D34EC415A53E}",
 "ProgId": "",
 "NoExecute": "0",
-"ContentTypeId": "0x0101009D1CB255DA76424F860D91F20E6C4118002A50BFCFB7614729B56886FADA02339B00F0F4E89AC972FF45B8C2A814246E5545",
-"FileRef": "\u002fsites\u002fprov-1\u002fSitePages\u002fPNP_SDK_TEST_RePostPageToOtherPage.aspx",
-"FileRef.urlencode": "%2Fsites%2Fprov%2D1%2FSitePages%2FPNP%5FSDK%5FTEST%5FRePostPageToOtherPage%2Easpx",
-"FileRef.urlencodeasurl": "\u002fsites\u002fprov-1\u002fSitePages\u002fPNP_SDK_TEST_RePostPageToOtherPage.aspx",
-"FileRef.urlencoding": "\u002fsites\u002fprov-1\u002fSitePages\u002fPNP_SDK_TEST_RePostPageToOtherPage.aspx",
-"FileRef.scriptencodeasurl": "\\u002fsites\\u002fprov-1\\u002fSitePages\\u002fPNP_SDK_TEST_RePostPageToOtherPage.aspx",
+"ContentTypeId": "0x0101009D1CB255DA76424F860D91F20E6C4118002A50BFCFB7614729B56886FADA02339B00C5AC83DE312B5C4CB240D1B749B9B360",
+"FileRef": "\u002fsites\u002fprov-2\u002fSitePages\u002fPNP_SDK_TEST_RePostPageToOtherPage.aspx",
+"FileRef.urlencode": "%2Fsites%2Fprov%2D2%2FSitePages%2FPNP%5FSDK%5FTEST%5FRePostPageToOtherPage%2Easpx",
+"FileRef.urlencodeasurl": "\u002fsites\u002fprov-2\u002fSitePages\u002fPNP_SDK_TEST_RePostPageToOtherPage.aspx",
+"FileRef.urlencoding": "\u002fsites\u002fprov-2\u002fSitePages\u002fPNP_SDK_TEST_RePostPageToOtherPage.aspx",
+"FileRef.scriptencodeasurl": "\\u002fsites\\u002fprov-2\\u002fSitePages\\u002fPNP_SDK_TEST_RePostPageToOtherPage.aspx",
+"_ModerationStatus": "Draft",
+"_ModerationStatus.": "3",
 "_UIVersion": "1",
-"SMTotalSize": "3545",
-"File_x0020_Size": "2609",
+"SMTotalSize": "3495",
+"File_x0020_Size": "2535",
 "_CommentFlags": "",
 "File_x0020_Type": "aspx",
 "HTML_x0020_File_x0020_Type.File_x0020_Type.mapall": "ichtm.gif|Microsoft SharePoint Designer|SharePoint.OpenDocuments|",
@@ -35,7 +37,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "FileLeafRef": "PNP_SDK_TEST_RePostPageToOtherPage.aspx",
 "FileLeafRef.Name": "PNP_SDK_TEST_RePostPageToOtherPage",
 "FileLeafRef.Suffix": "aspx",
-"FileDirRef": "\u002fsites\u002fprov-1\u002fSitePages",
+"FileDirRef": "\u002fsites\u002fprov-2\u002fSitePages",
 "Description": "",
 "Title": "PNP_SDK_TEST_RePostPageToOtherPage",
 "ClientSideApplicationId": "{B6917CB1-93A0-4B97-A84D-7CF49975D4EC}",
@@ -65,14 +67,14 @@ CONTENT-TYPE: application/json; charset=utf-8
 "A2ODMountCount": "",
 "_StubFile": "0",
 "_ComplianceTag": "",
+"_ExpirationDate": "",
 "owshiddenversion": "2",
-"_SPTranslatedLanguages": "",
 "_SPSitePageFlags": "",
 "ContentVersion": "1",
 "DocConcurrencyNumber": "2",
 "_VirusStatus": "",
 "Restricted": "",
-"ecb.dispex": "return DispEx(this,event,'TRUE','FALSE','FALSE','','1','SharePoint.OpenDocuments','','','','6','0','','0x7ffffffffffbffff','','')"
+"ecb.dispex": "return DispEx(this,event,'TRUE','FALSE','FALSE','','1','SharePoint.OpenDocuments','','','','11','1','','0x7ffffffffffbffff','','')"
 }
 ],"FirstRow" : 1,
 "FolderPermissions" : "0x7ffffffffffbffff"
@@ -84,4 +86,4 @@ CONTENT-TYPE: application/json; charset=utf-8
 ,"CurrentFolderSpItemUrl" : ""
 
 }
---batchresponse_4e4e7686-8f52-4f83-8d56-b8fe68d92367--
+--batchresponse_b47a67a4-329b-499a-abc6-d59e16b5daa4--
