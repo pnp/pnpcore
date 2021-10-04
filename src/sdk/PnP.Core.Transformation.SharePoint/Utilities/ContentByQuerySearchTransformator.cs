@@ -4,6 +4,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using PnP.Core.Transformation.Extensions;
 using PnP.Core.Transformation.SharePoint.KQL;
+using PnP.Core.Transformation.SharePoint.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;

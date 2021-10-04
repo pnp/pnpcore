@@ -10,6 +10,7 @@ using Microsoft.Extensions.Options;
 using Microsoft.SharePoint.Client;
 using PnP.Core.Transformation.Services.MappingProviders;
 using PnP.Core.Transformation.SharePoint.Services.Builder.Configuration;
+using PnP.Core.Transformation.SharePoint.Extensions;
 
 namespace PnP.Core.Transformation.SharePoint.MappingProviders
 {

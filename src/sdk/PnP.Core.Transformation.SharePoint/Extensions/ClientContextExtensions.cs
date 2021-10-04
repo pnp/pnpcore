@@ -21,12 +21,12 @@ using Microsoft.Extensions.Logging;
 using Microsoft.SharePoint.Client;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace PnP.Core.Transformation.SharePoint
+namespace PnP.Core.Transformation.SharePoint.Extensions
 {
     /// <summary>
     /// Class that deals with cloning client context object, getting access token and validates server version
     /// </summary>
-    public static partial class ClientContextExtensions
+    internal static partial class ClientContextExtensions
     {
         private const string PnPSettingsKey = "SharePointPnP$Settings$ContextCloning";
 

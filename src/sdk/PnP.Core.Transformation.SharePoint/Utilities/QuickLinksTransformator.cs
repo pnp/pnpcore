@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Web;
+using PnP.Core.Transformation.SharePoint.Extensions;
 
 namespace PnP.Core.Transformation.SharePoint.Utilities
 {
