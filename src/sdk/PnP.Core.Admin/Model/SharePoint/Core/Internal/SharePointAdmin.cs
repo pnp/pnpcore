@@ -250,6 +250,16 @@ namespace PnP.Core.Admin.Model.SharePoint
             return GetSiteCollectionsWithDetailsAsync().GetAwaiter().GetResult();
         }
 
+        public async Task<List<IRecycledSiteCollection>> GetRecycledSiteCollectionsAsync()
+        {
+            return await SiteCollectionEnumerator.GetRecycledWithDetailsViaTenantAdminHiddenListAsync(context).ConfigureAwait(false);
+        }
+
+        public List<IRecycledSiteCollection> GetRecycledSiteCollections()
+        {
+            return GetRecycledSiteCollectionsAsync().GetAwaiter().GetResult();
+        }
+
         public async Task<PnPContext> CreateSiteCollectionAsync(CommonSiteOptions siteToCreate, SiteCreationOptions creationOptions = null)
         {
             return await SiteCollectionCreator.CreateSiteCollectionAsync(context, siteToCreate, creationOptions).ConfigureAwait(false);
@@ -268,6 +278,16 @@ namespace PnP.Core.Admin.Model.SharePoint
         public void RecycleSiteCollection(Uri siteToDelete, string webTemplate)
         {
             RecycleSiteCollectionAsync(siteToDelete, webTemplate).GetAwaiter().GetResult();
+        }
+
+        public void RestoreSiteCollection(Uri siteToRestore)
+        {
+            RestoreSiteCollectionAsync(siteToRestore).GetAwaiter().GetResult();
+        }
+
+        public async Task RestoreSiteCollectionAsync(Uri siteToRestore)
+        {
+            await SiteCollectionManager.RestoreSiteCollectionAsync(context, siteToRestore).ConfigureAwait(false);
         }
 
         public async Task DeleteSiteCollectionAsync(Uri siteToDelete, string webTemplate)

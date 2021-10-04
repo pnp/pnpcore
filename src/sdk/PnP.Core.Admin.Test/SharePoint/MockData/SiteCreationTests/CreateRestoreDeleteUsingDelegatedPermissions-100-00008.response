@@ -1,0 +1,56 @@
+--batchresponse_df9c8641-7afd-443e-86b6-f8cb8e529b4b
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+HTTP/1.1 200 OK
+CONTENT-TYPE: application/json; charset=utf-8
+
+{ "Row" : 
+[{
+"ID": "91469",
+"PermMask": "0x7ffffffffffbffff",
+"FSObjType": "0",
+"UniqueId": "{DD9794DE-5440-4A32-BDD4-BAFAB368884F}",
+"ContentTypeId": "0x0100B2BE52A6F7BCB54ABE078FF9835C2473",
+"FileRef": "\u002fLists\u002fDO_NOT_DELETE_SPLIST_TENANTADMIN_AGGREGATED_SITECO\u002f91469_.000",
+"FileRef.urlencode": "%2FLists%2FDO%5FNOT%5FDELETE%5FSPLIST%5FTENANTADMIN%5FAGGREGATED%5FSITECO%2F91469%5F%2E000",
+"FileRef.urlencodeasurl": "\u002fLists\u002fDO_NOT_DELETE_SPLIST_TENANTADMIN_AGGREGATED_SITECO\u002f91469_.000",
+"FileRef.urlencoding": "\u002fLists\u002fDO_NOT_DELETE_SPLIST_TENANTADMIN_AGGREGATED_SITECO\u002f91469_.000",
+"FileRef.scriptencodeasurl": "\\u002fLists\\u002fDO_NOT_DELETE_SPLIST_TENANTADMIN_AGGREGATED_SITECO\\u002f91469_.000",
+"Attachments": "0",
+"SMTotalSize": "892",
+"_CommentFlags": "",
+"_CommentCount": "",
+"SiteUrl": "https:\u002f\u002fbertonline.sharepoint.com\u002fsites\u002fpnpcoresdktestteamsite72f119d75bf441f98cc215fd74842c00",
+"Title": "PnP Core SDK Test",
+"SiteId": "{05D7478C-3260-4FC1-9B3B-8446498F2BDE}",
+"GroupId": "{F5D6204B-852A-4E02-B069-62BD46751A2E}",
+"CreatedBy": "PnP Core SDK Test Owners",
+"DeletedBy": "System Account",
+"TimeCreated": "10\u002f2\u002f2021 3:10 AM",
+"TimeCreated.": "2021-10-02T10:10:12Z",
+"TimeDeleted": "10\u002f2\u002f2021 3:15 AM",
+"TimeDeleted.": "2021-10-02T10:15:49Z",
+"SiteOwnerName": "",
+"SiteOwnerEmail": "",
+"StorageQuota": "1,099,511,627,776",
+"StorageQuota.": "1099511627776.00",
+"StorageUsed": "1,440,670",
+"StorageUsed.": "1440670.00000000",
+"TemplateName": "GROUP#0",
+"ItemChildCount": "0",
+"FolderChildCount": "0",
+"owshiddenversion": "6",
+"Restricted": ""
+}
+],"FirstRow" : 1,
+"FolderPermissions" : "0x7ffffffffffbffff"
+,"LastRow" : 1,
+"RowLimit" : 100
+,"FilterLink" : "?"
+,"ForceNoHierarchy" : "1"
+,"HierarchyHasIndention" : ""
+,"CurrentFolderSpItemUrl" : ""
+
+}
+--batchresponse_df9c8641-7afd-443e-86b6-f8cb8e529b4b--

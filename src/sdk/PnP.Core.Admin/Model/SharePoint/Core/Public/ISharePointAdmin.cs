@@ -148,6 +148,22 @@ namespace PnP.Core.Admin.Model.SharePoint
         List<ISiteCollectionWithDetails> GetSiteCollectionsWithDetails();
 
         /// <summary>
+        /// Returns a list of the recycled site collections in the current tenant including details about the site. This method
+        /// queries a hidden list in the SharePoint Tenant Admin site and therefore requires the user or application to 
+        /// have the proper permissions
+        /// </summary>
+        /// <returns>A list of site collections with details</returns>
+        Task<List<IRecycledSiteCollection>> GetRecycledSiteCollectionsAsync();
+
+        /// <summary>
+        /// Returns a list of the recycled site collections in the current tenant including details about the site. This method
+        /// queries a hidden list in the SharePoint Tenant Admin site and therefore requires the user or application to 
+        /// have the proper permissions
+        /// </summary>
+        /// <returns>A list of site collections with details</returns>
+        List<IRecycledSiteCollection> GetRecycledSiteCollections();
+
+        /// <summary>
         /// Creates a site collection and returns a <see cref="PnPContext"/> to start using the created site collection
         /// </summary>
         /// <param name="siteToCreate">Information about the site collection to create. 
@@ -166,7 +182,8 @@ namespace PnP.Core.Admin.Model.SharePoint
         PnPContext CreateSiteCollection(CommonSiteOptions siteToCreate, SiteCreationOptions creationOptions = null);
 
         /// <summary>
-        /// Recycle a site collection. The site collection ends up in the recycle bin and can be restored.
+        /// Recycle a site collection. The site collection ends up in the recycle bin and can be restored. When the site collection
+        /// has a connected group then also that group is automatically recycled
         /// </summary>
         /// <param name="siteToDelete">Site collection to recycle</param>
         /// <param name="webTemplate">The web template (e.g. STS#3, GROUP#0) of the site collection is used to determine the best delete approach</param>
@@ -174,12 +191,29 @@ namespace PnP.Core.Admin.Model.SharePoint
         Task RecycleSiteCollectionAsync(Uri siteToDelete, string webTemplate);
 
         /// <summary>
-        /// Recycle a site collection. The site collection ends up in the recycle bin and can be restored.
+        /// Recycle a site collection. The site collection ends up in the recycle bin and can be restored. When the site collection
+        /// has a connected group then also that group is automatically recycled
         /// </summary>
         /// <param name="siteToDelete">Site collection to recycle</param>
         /// <param name="webTemplate">The web template (e.g. STS#3, GROUP#0) of the site collection is used to determine the best delete approach</param>
         /// <returns></returns>
         void RecycleSiteCollection(Uri siteToDelete, string webTemplate);
+
+        /// <summary>
+        /// Restores a site collection from the recycle bin. When the site collection
+        /// has a connected group then also that group is automatically restored
+        /// </summary>
+        /// <param name="siteToRestore">Site collection to restore</param>
+        /// <returns></returns>
+        Task RestoreSiteCollectionAsync(Uri siteToRestore);
+
+        /// <summary>
+        /// Restores a site collection from the recycle bin. When the site collection
+        /// has a connected group then also that group is automatically restored
+        /// </summary>
+        /// <param name="siteToRestore">Site collection to restore</param>
+        /// <returns></returns>
+        void RestoreSiteCollection(Uri siteToRestore);
 
         /// <summary>
         /// Deletes a site collection. The deleted site collection is also removed from the recycle bin!

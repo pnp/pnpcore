@@ -2,15 +2,23 @@
 
 namespace PnP.Core.Admin.Model.SharePoint
 {
-    internal class SiteCollectionWithDetails : SiteCollection, ISiteCollectionWithDetails
+    internal class RecycledSiteCollection : IRecycledSiteCollection
     {
+        public Guid Id { get; set; }
+
+        public Uri Url { get; set; }
+
+        public string Name { get; set; }
+
+        public Guid GroupId { get; set; }
+
         public DateTime TimeCreated { get; set; }
+
+        public DateTime TimeDeleted { get; set; }
 
         public string CreatedBy { get; set; }
 
-        public bool ShareByEmailEnabled { get; set; }
-
-        public bool ShareByLinkEnabled { get; set; }
+        public string DeletedBy { get; set; }
 
         public string SiteOwnerName { get; set; }
 
@@ -19,8 +27,6 @@ namespace PnP.Core.Admin.Model.SharePoint
         public long StorageQuota { get; set; }
 
         public long StorageUsed { get; set; }
-
-        public int TemplateId { get; set; }
 
         public string TemplateName { get; set; }
     }

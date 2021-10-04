@@ -95,7 +95,6 @@ namespace PnP.Core.Admin.Test.SharePoint
                 Assert.IsTrue(!string.IsNullOrEmpty(myTestSite.Name));
                 Assert.IsTrue(!string.IsNullOrEmpty(myTestSite.CreatedBy));
                 Assert.IsTrue(myTestSite.TimeCreated > DateTime.MinValue);
-                Assert.IsTrue(myTestSite.TimeDeleted == DateTime.MinValue);
                 Assert.IsTrue(myTestSite.StorageQuota > 0);
                 Assert.IsTrue(myTestSite.StorageUsed > 0);
                 Assert.IsTrue(!string.IsNullOrEmpty(myTestSite.TemplateName));
