@@ -1,0 +1,9 @@
+--batchresponse_6a01e1c7-720c-4bb1-bf7c-29cacf56d409
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+HTTP/1.1 200 OK
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+
+{"d":{"Status":{"__metadata":{"type":"Microsoft.SharePoint.Portal.SPSiteCreationResponse"},"SiteId":"8f0352f8-ed59-452b-836a-b30f77e48ae2","SiteStatus":1,"SiteUrl":"https://bertonline.sharepoint.com/sites/pnpcoresdktestcommsiteaad5db5484ef4fc0a302f0da9dacaf74"}}}
+--batchresponse_6a01e1c7-720c-4bb1-bf7c-29cacf56d409--

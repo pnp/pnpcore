@@ -1,0 +1,9 @@
+--batchresponse_1cd297d4-bf7d-4317-a073-747976c7a14b
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+HTTP/1.1 200 OK
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+
+{"d":{"GetSiteStatus":{"__metadata":{"type":"Microsoft.SharePoint.Portal.GroupSiteInfo"},"DocumentsUrl":"https://bertonline.sharepoint.com/sites/pnpcoresdktestteamsite84095dd004d14b5dbbef9a4964da353f/Shared Documents","ErrorMessage":null,"GroupId":"00000000-0000-0000-0000-000000000000","SiteStatus":2,"SiteUrl":"https://bertonline.sharepoint.com/sites/pnpcoresdktestteamsite84095dd004d14b5dbbef9a4964da353f"}}}
+--batchresponse_1cd297d4-bf7d-4317-a073-747976c7a14b--

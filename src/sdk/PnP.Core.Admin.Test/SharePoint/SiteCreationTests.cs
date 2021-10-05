@@ -69,6 +69,17 @@ namespace PnP.Core.Admin.Test.SharePoint
                         UsingApplicationPermissions = false
                     };
 
+                    int rewrites = 0;
+                    context.BatchClient.MockingFileRewriteHandler = (string input) =>
+                    {
+                        if (rewrites < 2 && input.Contains(",\"SiteStatus\":2,"))
+                        {
+                            input = input.Replace(",\"SiteStatus\":2,", ",\"SiteStatus\":1,");
+                            rewrites++;
+                        }
+                        return input;
+                    };
+
                     using (var newSiteContext = context.GetSharePointAdmin().CreateSiteCollection(communicationSiteToCreate, siteCreationOptions))
                     {
                         var web = await newSiteContext.Web.GetAsync(p => p.Url, p => p.Title, p => p.Description, p => p.Language);
@@ -76,6 +87,12 @@ namespace PnP.Core.Admin.Test.SharePoint
                         Assert.IsTrue(web.Title == communicationSiteToCreate.Title);
                         Assert.IsTrue(web.Description == communicationSiteToCreate.Description);
                         Assert.IsTrue(web.Language == (int)communicationSiteToCreate.Language);
+                    }
+
+                    if (context.Mode == TestMode.Record)
+                    {
+                        // Add a little delay between creation and deletion
+                        await Task.Delay(TimeSpan.FromSeconds(15));
                     }
                 }
             }
@@ -140,6 +157,12 @@ namespace PnP.Core.Admin.Test.SharePoint
                         Assert.IsTrue(web.Title == communicationSiteToCreate.Title);
                         Assert.IsTrue(web.Description == communicationSiteToCreate.Description);
                         Assert.IsTrue(web.Language == (int)communicationSiteToCreate.Language);
+                    }
+
+                    if (context.Mode == TestMode.Record)
+                    {
+                        // Add a little delay between creation and deletion
+                        await Task.Delay(TimeSpan.FromSeconds(15));
                     }
                 }
             }
@@ -210,6 +233,12 @@ namespace PnP.Core.Admin.Test.SharePoint
                         Assert.IsTrue(web.Title == communicationSiteToCreate.Title);
                         Assert.IsTrue(web.Description == communicationSiteToCreate.Description);
                         Assert.IsTrue(web.Language == (int)communicationSiteToCreate.Language);
+                    }
+
+                    if (context.Mode == TestMode.Record)
+                    {
+                        // Add a little delay between creation and deletion
+                        await Task.Delay(TimeSpan.FromSeconds(15));
                     }
                 }
             }
@@ -338,6 +367,17 @@ namespace PnP.Core.Admin.Test.SharePoint
                         UsingApplicationPermissions = false
                     };
 
+                    int rewrites = 0;
+                    context.BatchClient.MockingFileRewriteHandler = (string input) =>
+                    {
+                        if (!siteCreationOptions.UsingApplicationPermissions.Value && rewrites < 2 && input.Contains(",\"SiteStatus\":2,"))
+                        {
+                            input = input.Replace(",\"SiteStatus\":2,", ",\"SiteStatus\":1,");
+                            rewrites++;
+                        }
+                        return input;
+                    };
+
                     using (var newSiteContext = context.GetSharePointAdmin().CreateSiteCollection(teamSiteToCreate, siteCreationOptions))
                     {
                         createdSiteCollection = newSiteContext.Uri;
@@ -347,6 +387,12 @@ namespace PnP.Core.Admin.Test.SharePoint
                         var web = await newSiteContext.Web.GetAsync(p => p.Title, p => p.Description, p => p.Language);
                         Assert.IsTrue(web.Description == teamSiteToCreate.Description);
                         Assert.IsTrue(web.Language == (int)teamSiteToCreate.Language);
+                    }
+
+                    if (context.Mode == TestMode.Record)
+                    {
+                        // Add a little delay between creation and deletion
+                        await Task.Delay(TimeSpan.FromSeconds(15));
                     }
                 }
             }

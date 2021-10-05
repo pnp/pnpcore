@@ -1,4 +1,4 @@
---batchresponse_b32a0e5e-7fc9-4b7c-8a74-c1ef7959a9a3
+--batchresponse_434663fd-fa85-4207-8b83-4ed8cffe2b4d
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
@@ -45,7 +45,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "91",
+"owshiddenversion": "92",
 "Restricted": ""
 }
 ,{
@@ -87,7 +87,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "89",
+"owshiddenversion": "90",
 "Restricted": ""
 }
 ,{
@@ -122,14 +122,14 @@ CONTENT-TYPE: application/json; charset=utf-8
 "SiteOwnerEmail": "bert.jansen@bertonline.onmicrosoft.com",
 "StorageQuota": "27,487,790,694,400",
 "StorageQuota.": "27487790694400.0",
-"StorageUsed": "1,471,343",
-"StorageUsed.": "1471343.00000000",
+"StorageUsed": "1,484,229",
+"StorageUsed.": "1484229.00000000",
 "TemplateId": "68",
 "TemplateId.": "68",
 "TemplateName": "SITEPAGEPUBLISHING#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "101",
+"owshiddenversion": "104",
 "Restricted": ""
 }
 ,{
@@ -171,7 +171,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "86",
+"owshiddenversion": "87",
 "Restricted": ""
 }
 ,{
@@ -213,7 +213,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "85",
+"owshiddenversion": "86",
 "Restricted": ""
 }
 ,{
@@ -255,7 +255,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "87",
+"owshiddenversion": "88",
 "Restricted": ""
 }
 ,{
@@ -297,7 +297,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "86",
+"owshiddenversion": "87",
 "Restricted": ""
 }
 ,{
@@ -339,7 +339,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "89",
+"owshiddenversion": "90",
 "Restricted": ""
 }
 ,{
@@ -381,7 +381,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "86",
+"owshiddenversion": "87",
 "Restricted": ""
 }
 ,{
@@ -423,7 +423,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "88",
+"owshiddenversion": "89",
 "Restricted": ""
 }
 ,{
@@ -465,7 +465,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "87",
+"owshiddenversion": "88",
 "Restricted": ""
 }
 ,{
@@ -507,7 +507,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "88",
+"owshiddenversion": "89",
 "Restricted": ""
 }
 ,{
@@ -549,7 +549,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "87",
+"owshiddenversion": "88",
 "Restricted": ""
 }
 ,{
@@ -591,7 +591,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "91",
+"owshiddenversion": "92",
 "Restricted": ""
 }
 ,{
@@ -626,14 +626,14 @@ CONTENT-TYPE: application/json; charset=utf-8
 "SiteOwnerEmail": "bert.jansen@bertonline.onmicrosoft.com",
 "StorageQuota": "27,487,790,694,400",
 "StorageQuota.": "27487790694400.0",
-"StorageUsed": "27,428,560",
-"StorageUsed.": "27428560.0000000",
+"StorageUsed": "27,428,577",
+"StorageUsed.": "27428577.0000000",
 "TemplateId": "50",
 "TemplateId.": "50",
 "TemplateName": "SRCHCEN#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "92",
+"owshiddenversion": "93",
 "Restricted": ""
 }
 ,{
@@ -675,7 +675,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "91",
+"owshiddenversion": "92",
 "Restricted": ""
 }
 ,{
@@ -717,7 +717,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "88",
+"owshiddenversion": "89",
 "Restricted": ""
 }
 ,{
@@ -759,7 +759,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "90",
+"owshiddenversion": "91",
 "Restricted": ""
 }
 ,{
@@ -794,14 +794,14 @@ CONTENT-TYPE: application/json; charset=utf-8
 "SiteOwnerEmail": "",
 "StorageQuota": "27,487,790,694,400",
 "StorageQuota.": "27487790694400.0",
-"StorageUsed": "2,564,765",
-"StorageUsed.": "2564765.00000000",
+"StorageUsed": "2,591,702",
+"StorageUsed.": "2591702.00000000",
 "TemplateId": "1",
 "TemplateId.": "1",
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "94",
+"owshiddenversion": "95",
 "Restricted": ""
 }
 ,{
@@ -843,7 +843,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "89",
+"owshiddenversion": "90",
 "Restricted": ""
 }
 ,{
@@ -885,7 +885,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "87",
+"owshiddenversion": "88",
 "Restricted": ""
 }
 ,{
@@ -927,7 +927,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "91",
+"owshiddenversion": "92",
 "Restricted": ""
 }
 ,{
@@ -969,7 +969,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "83",
+"owshiddenversion": "84",
 "Restricted": ""
 }
 ,{
@@ -1011,7 +1011,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "87",
+"owshiddenversion": "88",
 "Restricted": ""
 }
 ,{
@@ -1053,7 +1053,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "91",
+"owshiddenversion": "92",
 "Restricted": ""
 }
 ,{
@@ -1095,7 +1095,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "93",
+"owshiddenversion": "94",
 "Restricted": ""
 }
 ,{
@@ -1137,7 +1137,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "86",
+"owshiddenversion": "87",
 "Restricted": ""
 }
 ,{
@@ -1179,7 +1179,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "84",
+"owshiddenversion": "85",
 "Restricted": ""
 }
 ,{
@@ -1221,7 +1221,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "91",
+"owshiddenversion": "92",
 "Restricted": ""
 }
 ,{
@@ -1263,7 +1263,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "90",
+"owshiddenversion": "91",
 "Restricted": ""
 }
 ,{
@@ -1305,7 +1305,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "86",
+"owshiddenversion": "87",
 "Restricted": ""
 }
 ,{
@@ -1347,7 +1347,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "89",
+"owshiddenversion": "90",
 "Restricted": ""
 }
 ,{
@@ -1382,14 +1382,14 @@ CONTENT-TYPE: application/json; charset=utf-8
 "SiteOwnerEmail": "bert.jansen@bertonline.onmicrosoft.com",
 "StorageQuota": "1,099,511,627,776",
 "StorageQuota.": "1099511627776.00",
-"StorageUsed": "146,909,812",
-"StorageUsed.": "146909812.000000",
+"StorageUsed": "145,950,127",
+"StorageUsed.": "145950127.000000",
 "TemplateId": "21",
 "TemplateId.": "21",
 "TemplateName": "SPSPERS#2",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "134",
+"owshiddenversion": "137",
 "Restricted": ""
 }
 ,{
@@ -1431,7 +1431,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "90",
+"owshiddenversion": "91",
 "Restricted": ""
 }
 ,{
@@ -1473,7 +1473,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "90",
+"owshiddenversion": "91",
 "Restricted": ""
 }
 ,{
@@ -1515,7 +1515,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "91",
+"owshiddenversion": "92",
 "Restricted": ""
 }
 ,{
@@ -1557,7 +1557,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "91",
+"owshiddenversion": "92",
 "Restricted": ""
 }
 ,{
@@ -1599,7 +1599,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "89",
+"owshiddenversion": "90",
 "Restricted": ""
 }
 ,{
@@ -1634,14 +1634,14 @@ CONTENT-TYPE: application/json; charset=utf-8
 "SiteOwnerEmail": "bert.jansen@bertonline.onmicrosoft.com",
 "StorageQuota": "27,487,790,694,400",
 "StorageQuota.": "27487790694400.0",
-"StorageUsed": "37,631,975",
-"StorageUsed.": "37631975.0000000",
+"StorageUsed": "37,631,992",
+"StorageUsed.": "37631992.0000000",
 "TemplateId": "3200",
 "TemplateId.": "3200",
 "TemplateName": "BICenterSite#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "86",
+"owshiddenversion": "87",
 "Restricted": ""
 }
 ,{
@@ -1683,7 +1683,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "SITEPAGEPUBLISHING#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "86",
+"owshiddenversion": "87",
 "Restricted": ""
 }
 ,{
@@ -1718,14 +1718,14 @@ CONTENT-TYPE: application/json; charset=utf-8
 "SiteOwnerEmail": "bert.jansen@bertonline.onmicrosoft.com",
 "StorageQuota": "27,487,790,694,400",
 "StorageQuota.": "27487790694400.0",
-"StorageUsed": "127,039,358",
-"StorageUsed.": "127039358.000000",
+"StorageUsed": "127,039,373",
+"StorageUsed.": "127039373.000000",
 "TemplateId": "53",
 "TemplateId.": "53",
 "TemplateName": "BLANKINTERNET#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "97",
+"owshiddenversion": "98",
 "Restricted": ""
 }
 ,{
@@ -1767,7 +1767,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "92",
+"owshiddenversion": "93",
 "Restricted": ""
 }
 ,{
@@ -1802,14 +1802,14 @@ CONTENT-TYPE: application/json; charset=utf-8
 "SiteOwnerEmail": "bert.jansen@bertonline.onmicrosoft.com",
 "StorageQuota": "27,487,790,694,400",
 "StorageQuota.": "27487790694400.0",
-"StorageUsed": "2,157,714",
-"StorageUsed.": "2157714.00000000",
+"StorageUsed": "2,170,600",
+"StorageUsed.": "2170600.00000000",
 "TemplateId": "1",
 "TemplateId.": "1",
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "119",
+"owshiddenversion": "122",
 "Restricted": ""
 }
 ,{
@@ -1844,14 +1844,14 @@ CONTENT-TYPE: application/json; charset=utf-8
 "SiteOwnerEmail": "bert.jansen@bertonline.onmicrosoft.com",
 "StorageQuota": "27,487,790,694,400",
 "StorageQuota.": "27487790694400.0",
-"StorageUsed": "31,195,364",
-"StorageUsed.": "31195364.0000000",
+"StorageUsed": "31,195,390",
+"StorageUsed.": "31195390.0000000",
 "TemplateId": "53",
 "TemplateId.": "53",
 "TemplateName": "BLANKINTERNET#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "117",
+"owshiddenversion": "118",
 "Restricted": ""
 }
 ,{
@@ -1886,14 +1886,14 @@ CONTENT-TYPE: application/json; charset=utf-8
 "SiteOwnerEmail": "bert.jansen@bertonline.onmicrosoft.com",
 "StorageQuota": "27,487,790,694,400",
 "StorageQuota.": "27487790694400.0",
-"StorageUsed": "94,024,459",
-"StorageUsed.": "94024459.0000000",
+"StorageUsed": "94,024,492",
+"StorageUsed.": "94024492.0000000",
 "TemplateId": "1",
 "TemplateId.": "1",
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "177",
+"owshiddenversion": "178",
 "Restricted": ""
 }
 ,{
@@ -1935,7 +1935,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "94",
+"owshiddenversion": "95",
 "Restricted": ""
 }
 ,{
@@ -1970,14 +1970,14 @@ CONTENT-TYPE: application/json; charset=utf-8
 "SiteOwnerEmail": "bert.jansen@bertonline.onmicrosoft.com",
 "StorageQuota": "27,487,790,694,400",
 "StorageQuota.": "27487790694400.0",
-"StorageUsed": "30,132,978",
-"StorageUsed.": "30132978.0000000",
+"StorageUsed": "30,133,013",
+"StorageUsed.": "30133013.0000000",
 "TemplateId": "53",
 "TemplateId.": "53",
 "TemplateName": "BLANKINTERNET#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "98",
+"owshiddenversion": "99",
 "Restricted": ""
 }
 ,{
@@ -2019,7 +2019,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "89",
+"owshiddenversion": "90",
 "Restricted": ""
 }
 ,{
@@ -2061,7 +2061,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "91",
+"owshiddenversion": "92",
 "Restricted": ""
 }
 ,{
@@ -2103,7 +2103,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "87",
+"owshiddenversion": "88",
 "Restricted": ""
 }
 ,{
@@ -2145,7 +2145,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "91",
+"owshiddenversion": "92",
 "Restricted": ""
 }
 ,{
@@ -2187,7 +2187,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "SITEPAGEPUBLISHING#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "88",
+"owshiddenversion": "89",
 "Restricted": ""
 }
 ,{
@@ -2229,7 +2229,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "92",
+"owshiddenversion": "93",
 "Restricted": ""
 }
 ,{
@@ -2271,7 +2271,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "89",
+"owshiddenversion": "90",
 "Restricted": ""
 }
 ,{
@@ -2306,14 +2306,14 @@ CONTENT-TYPE: application/json; charset=utf-8
 "SiteOwnerEmail": "bert.jansen@bertonline.onmicrosoft.com",
 "StorageQuota": "27,487,790,694,400",
 "StorageQuota.": "27487790694400.0",
-"StorageUsed": "4,380,029",
-"StorageUsed.": "4380029.00000000",
+"StorageUsed": "4,380,045",
+"StorageUsed.": "4380045.00000000",
 "TemplateId": "7",
 "TemplateId.": "7",
 "TemplateName": "BDR#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "130",
+"owshiddenversion": "131",
 "Restricted": ""
 }
 ,{
@@ -2355,7 +2355,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "93",
+"owshiddenversion": "94",
 "Restricted": ""
 }
 ,{
@@ -2397,7 +2397,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "92",
+"owshiddenversion": "93",
 "Restricted": ""
 }
 ,{
@@ -2439,7 +2439,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "92",
+"owshiddenversion": "93",
 "Restricted": ""
 }
 ,{
@@ -2481,7 +2481,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "GROUP#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "87",
+"owshiddenversion": "88",
 "Restricted": ""
 }
 ,{
@@ -2523,7 +2523,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "SPSPERS#2",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "76",
+"owshiddenversion": "77",
 "Restricted": ""
 }
 ,{
@@ -2565,7 +2565,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "87",
+"owshiddenversion": "88",
 "Restricted": ""
 }
 ,{
@@ -2607,7 +2607,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "85",
+"owshiddenversion": "86",
 "Restricted": ""
 }
 ,{
@@ -2649,7 +2649,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "92",
+"owshiddenversion": "93",
 "Restricted": ""
 }
 ,{
@@ -2691,7 +2691,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "86",
+"owshiddenversion": "87",
 "Restricted": ""
 }
 ,{
@@ -2733,7 +2733,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "86",
+"owshiddenversion": "87",
 "Restricted": ""
 }
 ,{
@@ -2775,7 +2775,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "SPSPERS#2",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "77",
+"owshiddenversion": "78",
 "Restricted": ""
 }
 ,{
@@ -2817,7 +2817,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "89",
+"owshiddenversion": "90",
 "Restricted": ""
 }
 ,{
@@ -2832,7 +2832,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "FileRef.urlencoding": "\u002fLists\u002fDO_NOT_DELETE_SPLIST_TENANTADMIN_ALL_SITES_AGGREGA\u002f94_.000",
 "FileRef.scriptencodeasurl": "\\u002fLists\\u002fDO_NOT_DELETE_SPLIST_TENANTADMIN_ALL_SITES_AGGREGA\\u002f94_.000",
 "Attachments": "0",
-"SMTotalSize": "540",
+"SMTotalSize": "548",
 "_CommentFlags": "",
 "_CommentCount": "",
 "SiteUrl": "https:\u002f\u002fbertonline.sharepoint.com\u002fsites\u002f130020",
@@ -2842,8 +2842,8 @@ CONTENT-TYPE: application/json; charset=utf-8
 "CreatedBy": "System Account",
 "TimeCreated": "8\u002f6\u002f2013 3:29 PM",
 "TimeCreated.": "2013-08-06T22:29:51Z",
-"TimeDeleted": "",
-"TimeDeleted.": "",
+"TimeDeleted": "9\u002f30\u002f2021 2:25 AM",
+"TimeDeleted.": "2021-09-30T09:25:07Z",
 "ShareByEmailEnabled": "Yes",
 "ShareByEmailEnabled.value": "1",
 "ShareByLinkEnabled": "Yes",
@@ -2852,14 +2852,14 @@ CONTENT-TYPE: application/json; charset=utf-8
 "SiteOwnerEmail": "bert.jansen@bertonline.onmicrosoft.com",
 "StorageQuota": "27,487,790,694,400",
 "StorageQuota.": "27487790694400.0",
-"StorageUsed": "13,341,559",
-"StorageUsed.": "13341559.0000000",
+"StorageUsed": "13,341,574",
+"StorageUsed.": "13341574.0000000",
 "TemplateId": "1",
 "TemplateId.": "1",
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "120",
+"owshiddenversion": "123",
 "Restricted": ""
 }
 ,{
@@ -2901,7 +2901,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "91",
+"owshiddenversion": "92",
 "Restricted": ""
 }
 ,{
@@ -2943,7 +2943,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "84",
+"owshiddenversion": "85",
 "Restricted": ""
 }
 ,{
@@ -2978,14 +2978,14 @@ CONTENT-TYPE: application/json; charset=utf-8
 "SiteOwnerEmail": "bert.jansen@bertonline.onmicrosoft.com",
 "StorageQuota": "27,487,790,694,400",
 "StorageQuota.": "27487790694400.0",
-"StorageUsed": "29,362,942",
-"StorageUsed.": "29362942.0000000",
+"StorageUsed": "29,362,958",
+"StorageUsed.": "29362958.0000000",
 "TemplateId": "3200",
 "TemplateId.": "3200",
 "TemplateName": "BICenterSite#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "106",
+"owshiddenversion": "107",
 "Restricted": ""
 }
 ,{
@@ -3027,7 +3027,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "85",
+"owshiddenversion": "86",
 "Restricted": ""
 }
 ,{
@@ -3069,7 +3069,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "91",
+"owshiddenversion": "92",
 "Restricted": ""
 }
 ,{
@@ -3111,7 +3111,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "SITEPAGEPUBLISHING#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "88",
+"owshiddenversion": "89",
 "Restricted": ""
 }
 ,{
@@ -3153,7 +3153,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "89",
+"owshiddenversion": "90",
 "Restricted": ""
 }
 ,{
@@ -3195,7 +3195,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "83",
+"owshiddenversion": "84",
 "Restricted": ""
 }
 ,{
@@ -3237,7 +3237,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "83",
+"owshiddenversion": "84",
 "Restricted": ""
 }
 ,{
@@ -3279,7 +3279,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "90",
+"owshiddenversion": "91",
 "Restricted": ""
 }
 ,{
@@ -3321,7 +3321,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "91",
+"owshiddenversion": "92",
 "Restricted": ""
 }
 ,{
@@ -3363,7 +3363,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "85",
+"owshiddenversion": "86",
 "Restricted": ""
 }
 ,{
@@ -3405,7 +3405,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "89",
+"owshiddenversion": "90",
 "Restricted": ""
 }
 ,{
@@ -3447,7 +3447,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#3",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "84",
+"owshiddenversion": "85",
 "Restricted": ""
 }
 ,{
@@ -3489,7 +3489,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "92",
+"owshiddenversion": "93",
 "Restricted": ""
 }
 ,{
@@ -3531,7 +3531,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "GROUP#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "86",
+"owshiddenversion": "87",
 "Restricted": ""
 }
 ,{
@@ -3573,7 +3573,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "88",
+"owshiddenversion": "89",
 "Restricted": ""
 }
 ,{
@@ -3615,7 +3615,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "91",
+"owshiddenversion": "92",
 "Restricted": ""
 }
 ,{
@@ -3657,7 +3657,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "91",
+"owshiddenversion": "92",
 "Restricted": ""
 }
 ,{
@@ -3699,7 +3699,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "92",
+"owshiddenversion": "93",
 "Restricted": ""
 }
 ,{
@@ -3741,7 +3741,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "92",
+"owshiddenversion": "93",
 "Restricted": ""
 }
 ,{
@@ -3783,7 +3783,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "92",
+"owshiddenversion": "93",
 "Restricted": ""
 }
 ,{
@@ -3818,14 +3818,14 @@ CONTENT-TYPE: application/json; charset=utf-8
 "SiteOwnerEmail": "bert.jansen@bertonline.onmicrosoft.com",
 "StorageQuota": "27,487,790,694,400",
 "StorageQuota.": "27487790694400.0",
-"StorageUsed": "30,443,073",
-"StorageUsed.": "30443073.0000000",
+"StorageUsed": "30,443,087",
+"StorageUsed.": "30443087.0000000",
 "TemplateId": "53",
 "TemplateId.": "53",
 "TemplateName": "BLANKINTERNET#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "90",
+"owshiddenversion": "91",
 "Restricted": ""
 }
 ,{
@@ -3867,7 +3867,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "SITEPAGEPUBLISHING#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "85",
+"owshiddenversion": "86",
 "Restricted": ""
 }
 ,{
@@ -3909,7 +3909,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "91",
+"owshiddenversion": "92",
 "Restricted": ""
 }
 ,{
@@ -3951,7 +3951,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "83",
+"owshiddenversion": "84",
 "Restricted": ""
 }
 ,{
@@ -3993,7 +3993,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "86",
+"owshiddenversion": "87",
 "Restricted": ""
 }
 ,{
@@ -4035,7 +4035,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "93",
+"owshiddenversion": "94",
 "Restricted": ""
 }
 ,{
@@ -4077,7 +4077,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "SITEPAGEPUBLISHING#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "88",
+"owshiddenversion": "89",
 "Restricted": ""
 }
 ,{
@@ -4119,7 +4119,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "122",
+"owshiddenversion": "123",
 "Restricted": ""
 }
 ,{
@@ -4161,7 +4161,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "86",
+"owshiddenversion": "87",
 "Restricted": ""
 }
 ,{
@@ -4203,7 +4203,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "95",
+"owshiddenversion": "96",
 "Restricted": ""
 }
 ,{
@@ -4245,7 +4245,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "91",
+"owshiddenversion": "92",
 "Restricted": ""
 }
 ,{
@@ -4287,7 +4287,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "86",
+"owshiddenversion": "87",
 "Restricted": ""
 }
 ,{
@@ -4322,14 +4322,14 @@ CONTENT-TYPE: application/json; charset=utf-8
 "SiteOwnerEmail": "bert.jansen@bertonline.onmicrosoft.com",
 "StorageQuota": "27,487,790,694,400",
 "StorageQuota.": "27487790694400.0",
-"StorageUsed": "12,475,666",
-"StorageUsed.": "12475666.0000000",
+"StorageUsed": "12,475,686",
+"StorageUsed.": "12475686.0000000",
 "TemplateId": "1",
 "TemplateId.": "1",
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "88",
+"owshiddenversion": "89",
 "Restricted": ""
 }
 ,{
@@ -4364,14 +4364,14 @@ CONTENT-TYPE: application/json; charset=utf-8
 "SiteOwnerEmail": "bert.jansen@bertonline.onmicrosoft.com",
 "StorageQuota": "27,487,790,694,400",
 "StorageQuota.": "27487790694400.0",
-"StorageUsed": "29,031,458",
-"StorageUsed.": "29031458.0000000",
+"StorageUsed": "29,031,490",
+"StorageUsed.": "29031490.0000000",
 "TemplateId": "53",
 "TemplateId.": "53",
 "TemplateName": "BLANKINTERNET#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "90",
+"owshiddenversion": "91",
 "Restricted": ""
 }
 ,{
@@ -4406,14 +4406,14 @@ CONTENT-TYPE: application/json; charset=utf-8
 "SiteOwnerEmail": "bert.jansen@bertonline.onmicrosoft.com",
 "StorageQuota": "27,487,790,694,400",
 "StorageQuota.": "27487790694400.0",
-"StorageUsed": "30,125,078",
-"StorageUsed.": "30125078.0000000",
+"StorageUsed": "30,125,105",
+"StorageUsed.": "30125105.0000000",
 "TemplateId": "53",
 "TemplateId.": "53",
 "TemplateName": "BLANKINTERNET#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "137",
+"owshiddenversion": "138",
 "Restricted": ""
 }
 ,{
@@ -4455,7 +4455,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "SITEPAGEPUBLISHING#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "88",
+"owshiddenversion": "89",
 "Restricted": ""
 }
 ,{
@@ -4497,7 +4497,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "86",
+"owshiddenversion": "87",
 "Restricted": ""
 }
 ,{
@@ -4532,14 +4532,14 @@ CONTENT-TYPE: application/json; charset=utf-8
 "SiteOwnerEmail": "bert.jansen@bertonline.onmicrosoft.com",
 "StorageQuota": "27,487,790,694,400",
 "StorageQuota.": "27487790694400.0",
-"StorageUsed": "1,035,801,801",
-"StorageUsed.": "1035801801.00000",
+"StorageUsed": "1,053,484,964",
+"StorageUsed.": "1053484964.00000",
 "TemplateId": "68",
 "TemplateId.": "68",
 "TemplateName": "SITEPAGEPUBLISHING#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "193",
+"owshiddenversion": "194",
 "Restricted": ""
 }
 ,{
@@ -4581,7 +4581,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "92",
+"owshiddenversion": "93",
 "Restricted": ""
 }
 ,{
@@ -4623,7 +4623,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "92",
+"owshiddenversion": "93",
 "Restricted": ""
 }
 ,{
@@ -4658,14 +4658,14 @@ CONTENT-TYPE: application/json; charset=utf-8
 "SiteOwnerEmail": "",
 "StorageQuota": "27,487,790,694,400",
 "StorageQuota.": "27487790694400.0",
-"StorageUsed": "23,824,909",
-"StorageUsed.": "23824909.0000000",
+"StorageUsed": "23,824,926",
+"StorageUsed.": "23824926.0000000",
 "TemplateId": "50",
 "TemplateId.": "50",
 "TemplateName": "SRCHCEN#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "91",
+"owshiddenversion": "92",
 "Restricted": ""
 }
 ,{
@@ -4707,7 +4707,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "90",
+"owshiddenversion": "91",
 "Restricted": ""
 }
 ,{
@@ -4749,7 +4749,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "91",
+"owshiddenversion": "92",
 "Restricted": ""
 }
 ,{
@@ -4791,7 +4791,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "91",
+"owshiddenversion": "92",
 "Restricted": ""
 }
 ,{
@@ -4833,7 +4833,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "86",
+"owshiddenversion": "87",
 "Restricted": ""
 }
 ,{
@@ -4875,7 +4875,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "92",
+"owshiddenversion": "93",
 "Restricted": ""
 }
 ,{
@@ -4917,7 +4917,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "90",
+"owshiddenversion": "91",
 "Restricted": ""
 }
 ,{
@@ -4959,7 +4959,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "90",
+"owshiddenversion": "91",
 "Restricted": ""
 }
 ,{
@@ -5001,7 +5001,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "89",
+"owshiddenversion": "90",
 "Restricted": ""
 }
 ,{
@@ -5043,7 +5043,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "90",
+"owshiddenversion": "91",
 "Restricted": ""
 }
 ,{
@@ -5085,7 +5085,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "SITEPAGEPUBLISHING#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "85",
+"owshiddenversion": "86",
 "Restricted": ""
 }
 ,{
@@ -5127,7 +5127,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "92",
+"owshiddenversion": "93",
 "Restricted": ""
 }
 ,{
@@ -5169,7 +5169,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "91",
+"owshiddenversion": "92",
 "Restricted": ""
 }
 ,{
@@ -5211,7 +5211,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "EDISC#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "113",
+"owshiddenversion": "114",
 "Restricted": ""
 }
 ,{
@@ -5253,7 +5253,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "SPSPERS#2",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "78",
+"owshiddenversion": "79",
 "Restricted": ""
 }
 ,{
@@ -5295,7 +5295,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "BLOG#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "111",
+"owshiddenversion": "112",
 "Restricted": ""
 }
 ,{
@@ -5337,7 +5337,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "90",
+"owshiddenversion": "91",
 "Restricted": ""
 }
 ,{
@@ -5379,7 +5379,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "GROUP#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "86",
+"owshiddenversion": "87",
 "Restricted": ""
 }
 ,{
@@ -5421,7 +5421,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "GROUP#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "86",
+"owshiddenversion": "87",
 "Restricted": ""
 }
 ,{
@@ -5463,7 +5463,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "86",
+"owshiddenversion": "87",
 "Restricted": ""
 }
 ,{
@@ -5505,7 +5505,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "91",
+"owshiddenversion": "92",
 "Restricted": ""
 }
 ,{
@@ -5547,7 +5547,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "PROJECTSITE#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "83",
+"owshiddenversion": "84",
 "Restricted": ""
 }
 ,{
@@ -5589,7 +5589,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "GROUP#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "86",
+"owshiddenversion": "87",
 "Restricted": ""
 }
 ,{
@@ -5631,7 +5631,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "83",
+"owshiddenversion": "84",
 "Restricted": ""
 }
 ,{
@@ -5673,7 +5673,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "92",
+"owshiddenversion": "93",
 "Restricted": ""
 }
 ,{
@@ -5715,7 +5715,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "88",
+"owshiddenversion": "89",
 "Restricted": ""
 }
 ,{
@@ -5757,7 +5757,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "GROUP#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "88",
+"owshiddenversion": "89",
 "Restricted": ""
 }
 ,{
@@ -5799,7 +5799,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "86",
+"owshiddenversion": "87",
 "Restricted": ""
 }
 ,{
@@ -5841,7 +5841,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "93",
+"owshiddenversion": "94",
 "Restricted": ""
 }
 ,{
@@ -5883,7 +5883,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "89",
+"owshiddenversion": "90",
 "Restricted": ""
 }
 ,{
@@ -5925,7 +5925,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "90",
+"owshiddenversion": "91",
 "Restricted": ""
 }
 ,{
@@ -5967,7 +5967,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "91",
+"owshiddenversion": "92",
 "Restricted": ""
 }
 ,{
@@ -6009,7 +6009,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "SITEPAGEPUBLISHING#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "86",
+"owshiddenversion": "87",
 "Restricted": ""
 }
 ,{
@@ -6044,14 +6044,14 @@ CONTENT-TYPE: application/json; charset=utf-8
 "SiteOwnerEmail": "bert.jansen@bertonline.onmicrosoft.com",
 "StorageQuota": "27,487,790,694,400",
 "StorageQuota.": "27487790694400.0",
-"StorageUsed": "4,627,338",
-"StorageUsed.": "4627338.00000000",
+"StorageUsed": "4,627,353",
+"StorageUsed.": "4627353.00000000",
 "TemplateId": "7",
 "TemplateId.": "7",
 "TemplateName": "BDR#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "88",
+"owshiddenversion": "89",
 "Restricted": ""
 }
 ,{
@@ -6093,7 +6093,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "89",
+"owshiddenversion": "90",
 "Restricted": ""
 }
 ,{
@@ -6128,14 +6128,14 @@ CONTENT-TYPE: application/json; charset=utf-8
 "SiteOwnerEmail": "bert.jansen@bertonline.onmicrosoft.com",
 "StorageQuota": "27,487,790,694,400",
 "StorageQuota.": "27487790694400.0",
-"StorageUsed": "1,514,544",
-"StorageUsed.": "1514544.00000000",
+"StorageUsed": "1,527,430",
+"StorageUsed.": "1527430.00000000",
 "TemplateId": "1",
 "TemplateId.": "1",
 "TemplateName": "STS#3",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "121",
+"owshiddenversion": "124",
 "Restricted": ""
 }
 ,{
@@ -6177,7 +6177,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "87",
+"owshiddenversion": "88",
 "Restricted": ""
 }
 ,{
@@ -6219,7 +6219,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "91",
+"owshiddenversion": "92",
 "Restricted": ""
 }
 ,{
@@ -6261,7 +6261,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "90",
+"owshiddenversion": "91",
 "Restricted": ""
 }
 ,{
@@ -6296,14 +6296,14 @@ CONTENT-TYPE: application/json; charset=utf-8
 "SiteOwnerEmail": "bert.jansen@bertonline.onmicrosoft.com",
 "StorageQuota": "27,487,790,694,400",
 "StorageQuota.": "27487790694400.0",
-"StorageUsed": "2,629,046",
-"StorageUsed.": "2629046.00000000",
+"StorageUsed": "2,641,361",
+"StorageUsed.": "2641361.00000000",
 "TemplateId": "14483",
 "TemplateId.": "14483",
 "TemplateName": "OFFILE#1",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "141",
+"owshiddenversion": "142",
 "Restricted": ""
 }
 ,{
@@ -6345,7 +6345,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "89",
+"owshiddenversion": "90",
 "Restricted": ""
 }
 ,{
@@ -6387,7 +6387,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "SITEPAGEPUBLISHING#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "87",
+"owshiddenversion": "88",
 "Restricted": ""
 }
 ,{
@@ -6429,7 +6429,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "89",
+"owshiddenversion": "90",
 "Restricted": ""
 }
 ,{
@@ -6471,7 +6471,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "91",
+"owshiddenversion": "92",
 "Restricted": ""
 }
 ,{
@@ -6513,7 +6513,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "91",
+"owshiddenversion": "92",
 "Restricted": ""
 }
 ,{
@@ -6555,7 +6555,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "92",
+"owshiddenversion": "93",
 "Restricted": ""
 }
 ,{
@@ -6597,7 +6597,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "GROUP#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "88",
+"owshiddenversion": "89",
 "Restricted": ""
 }
 ,{
@@ -6639,7 +6639,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "90",
+"owshiddenversion": "91",
 "Restricted": ""
 }
 ,{
@@ -6681,7 +6681,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#3",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "86",
+"owshiddenversion": "87",
 "Restricted": ""
 }
 ,{
@@ -6723,7 +6723,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "100",
+"owshiddenversion": "101",
 "Restricted": ""
 }
 ,{
@@ -6765,7 +6765,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "SITEPAGEPUBLISHING#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "85",
+"owshiddenversion": "86",
 "Restricted": ""
 }
 ,{
@@ -6807,7 +6807,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "85",
+"owshiddenversion": "86",
 "Restricted": ""
 }
 ,{
@@ -6849,7 +6849,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "91",
+"owshiddenversion": "92",
 "Restricted": ""
 }
 ,{
@@ -6891,7 +6891,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "PROJECTSITE#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "80",
+"owshiddenversion": "81",
 "Restricted": ""
 }
 ,{
@@ -6933,7 +6933,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "93",
+"owshiddenversion": "94",
 "Restricted": ""
 }
 ,{
@@ -6975,7 +6975,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "92",
+"owshiddenversion": "93",
 "Restricted": ""
 }
 ,{
@@ -7017,7 +7017,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "93",
+"owshiddenversion": "94",
 "Restricted": ""
 }
 ,{
@@ -7059,7 +7059,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "130656",
+"owshiddenversion": "130657",
 "Restricted": ""
 }
 ,{
@@ -7101,7 +7101,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "89",
+"owshiddenversion": "90",
 "Restricted": ""
 }
 ,{
@@ -7143,7 +7143,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "GROUP#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "86",
+"owshiddenversion": "87",
 "Restricted": ""
 }
 ,{
@@ -7185,7 +7185,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "GROUP#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "89",
+"owshiddenversion": "90",
 "Restricted": ""
 }
 ,{
@@ -7227,7 +7227,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "89",
+"owshiddenversion": "90",
 "Restricted": ""
 }
 ,{
@@ -7269,7 +7269,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "86",
+"owshiddenversion": "87",
 "Restricted": ""
 }
 ,{
@@ -7311,7 +7311,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "100",
+"owshiddenversion": "101",
 "Restricted": ""
 }
 ,{
@@ -7346,14 +7346,14 @@ CONTENT-TYPE: application/json; charset=utf-8
 "SiteOwnerEmail": "bert.jansen@bertonline.onmicrosoft.com",
 "StorageQuota": "27,487,790,694,400",
 "StorageQuota.": "27487790694400.0",
-"StorageUsed": "115,109,735",
-"StorageUsed.": "115109735.000000",
+"StorageUsed": "100,739,816",
+"StorageUsed.": "100739816.000000",
 "TemplateId": "68",
 "TemplateId.": "68",
 "TemplateName": "SITEPAGEPUBLISHING#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "110",
+"owshiddenversion": "111",
 "Restricted": ""
 }
 ,{
@@ -7395,7 +7395,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "85",
+"owshiddenversion": "86",
 "Restricted": ""
 }
 ,{
@@ -7437,7 +7437,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "86",
+"owshiddenversion": "87",
 "Restricted": ""
 }
 ,{
@@ -7479,7 +7479,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "91",
+"owshiddenversion": "92",
 "Restricted": ""
 }
 ,{
@@ -7521,7 +7521,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "85",
+"owshiddenversion": "86",
 "Restricted": ""
 }
 ,{
@@ -7556,14 +7556,14 @@ CONTENT-TYPE: application/json; charset=utf-8
 "SiteOwnerEmail": "bert.jansen@bertonline.onmicrosoft.com",
 "StorageQuota": "27,487,790,694,400",
 "StorageQuota.": "27487790694400.0",
-"StorageUsed": "2,053,545",
-"StorageUsed.": "2053545.00000000",
+"StorageUsed": "2,078,258",
+"StorageUsed.": "2078258.00000000",
 "TemplateId": "68",
 "TemplateId.": "68",
 "TemplateName": "SITEPAGEPUBLISHING#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "98",
+"owshiddenversion": "99",
 "Restricted": ""
 }
 ,{
@@ -7605,7 +7605,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "89",
+"owshiddenversion": "90",
 "Restricted": ""
 }
 ,{
@@ -7640,14 +7640,14 @@ CONTENT-TYPE: application/json; charset=utf-8
 "SiteOwnerEmail": "bert.jansen@bertonline.onmicrosoft.com",
 "StorageQuota": "27,487,790,694,400",
 "StorageQuota.": "27487790694400.0",
-"StorageUsed": "59,167,261",
-"StorageUsed.": "59167261.0000000",
+"StorageUsed": "59,359,563",
+"StorageUsed.": "59359563.0000000",
 "TemplateId": "68",
 "TemplateId.": "68",
 "TemplateName": "SITEPAGEPUBLISHING#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "115",
+"owshiddenversion": "116",
 "Restricted": ""
 }
 ,{
@@ -7689,7 +7689,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "87",
+"owshiddenversion": "88",
 "Restricted": ""
 }
 ,{
@@ -7731,7 +7731,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "COMMUNITY#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "89",
+"owshiddenversion": "90",
 "Restricted": ""
 }
 ,{
@@ -7773,7 +7773,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "GROUP#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "88",
+"owshiddenversion": "89",
 "Restricted": ""
 }
 ,{
@@ -7815,7 +7815,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "87",
+"owshiddenversion": "88",
 "Restricted": ""
 }
 ,{
@@ -7857,7 +7857,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "87",
+"owshiddenversion": "88",
 "Restricted": ""
 }
 ,{
@@ -7892,14 +7892,14 @@ CONTENT-TYPE: application/json; charset=utf-8
 "SiteOwnerEmail": "",
 "StorageQuota": "27,487,790,694,400",
 "StorageQuota.": "27487790694400.0",
-"StorageUsed": "201,596,035",
-"StorageUsed.": "201596035.000000",
+"StorageUsed": "201,613,643",
+"StorageUsed.": "201613643.000000",
 "TemplateId": "64",
 "TemplateId.": "64",
 "TemplateName": "GROUP#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "94",
+"owshiddenversion": "95",
 "Restricted": ""
 }
 ,{
@@ -7941,7 +7941,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "88",
+"owshiddenversion": "89",
 "Restricted": ""
 }
 ,{
@@ -7983,7 +7983,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "COMMUNITYPORTAL#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "84",
+"owshiddenversion": "85",
 "Restricted": ""
 }
 ,{
@@ -8025,7 +8025,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "SITEPAGEPUBLISHING#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "86",
+"owshiddenversion": "87",
 "Restricted": ""
 }
 ,{
@@ -8067,7 +8067,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "90",
+"owshiddenversion": "91",
 "Restricted": ""
 }
 ,{
@@ -8109,7 +8109,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "85",
+"owshiddenversion": "86",
 "Restricted": ""
 }
 ,{
@@ -8151,7 +8151,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "86",
+"owshiddenversion": "87",
 "Restricted": ""
 }
 ,{
@@ -8186,14 +8186,14 @@ CONTENT-TYPE: application/json; charset=utf-8
 "SiteOwnerEmail": "demo@bertonline.onmicrosoft.com",
 "StorageQuota": "1,099,511,627,776",
 "StorageQuota.": "1099511627776.00",
-"StorageUsed": "2,033,965",
-"StorageUsed.": "2033965.00000000",
+"StorageUsed": "2,033,987",
+"StorageUsed.": "2033987.00000000",
 "TemplateId": "21",
 "TemplateId.": "21",
 "TemplateName": "SPSPERS#9",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "105",
+"owshiddenversion": "106",
 "Restricted": ""
 }
 ,{
@@ -8235,7 +8235,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "88",
+"owshiddenversion": "89",
 "Restricted": ""
 }
 ,{
@@ -8277,7 +8277,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "85",
+"owshiddenversion": "86",
 "Restricted": ""
 }
 ,{
@@ -8319,7 +8319,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "90",
+"owshiddenversion": "91",
 "Restricted": ""
 }
 ,{
@@ -8354,14 +8354,14 @@ CONTENT-TYPE: application/json; charset=utf-8
 "SiteOwnerEmail": "bert.jansen@bertonline.onmicrosoft.com",
 "StorageQuota": "27,487,790,694,400",
 "StorageQuota.": "27487790694400.0",
-"StorageUsed": "43,135,435",
-"StorageUsed.": "43135435.0000000",
+"StorageUsed": "43,152,887",
+"StorageUsed.": "43152887.0000000",
 "TemplateId": "53",
 "TemplateId.": "53",
 "TemplateName": "BLANKINTERNET#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "128",
+"owshiddenversion": "129",
 "Restricted": ""
 }
 ,{
@@ -8403,7 +8403,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "99",
+"owshiddenversion": "100",
 "Restricted": ""
 }
 ,{
@@ -8445,7 +8445,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "GROUP#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "87",
+"owshiddenversion": "88",
 "Restricted": ""
 }
 ,{
@@ -8480,14 +8480,14 @@ CONTENT-TYPE: application/json; charset=utf-8
 "SiteOwnerEmail": "bert.jansen@bertonline.onmicrosoft.com",
 "StorageQuota": "27,487,790,694,400",
 "StorageQuota.": "27487790694400.0",
-"StorageUsed": "29,334,075",
-"StorageUsed.": "29334075.0000000",
+"StorageUsed": "29,334,150",
+"StorageUsed.": "29334150.0000000",
 "TemplateId": "53",
 "TemplateId.": "53",
 "TemplateName": "BLANKINTERNET#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "88",
+"owshiddenversion": "89",
 "Restricted": ""
 }
 ,{
@@ -8529,7 +8529,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "89",
+"owshiddenversion": "90",
 "Restricted": ""
 }
 ,{
@@ -8564,14 +8564,14 @@ CONTENT-TYPE: application/json; charset=utf-8
 "SiteOwnerEmail": "bert.jansen@bertonline.onmicrosoft.com",
 "StorageQuota": "27,487,790,694,400",
 "StorageQuota.": "27487790694400.0",
-"StorageUsed": "41,920,932",
-"StorageUsed.": "41920932.0000000",
+"StorageUsed": "41,920,949",
+"StorageUsed.": "41920949.0000000",
 "TemplateId": "18",
 "TemplateId.": "18",
 "TemplateName": "APPCATALOG#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "525",
+"owshiddenversion": "526",
 "Restricted": ""
 }
 ,{
@@ -8613,7 +8613,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "89",
+"owshiddenversion": "90",
 "Restricted": ""
 }
 ,{
@@ -8655,7 +8655,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "86",
+"owshiddenversion": "87",
 "Restricted": ""
 }
 ,{
@@ -8697,7 +8697,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "86",
+"owshiddenversion": "87",
 "Restricted": ""
 }
 ,{
@@ -8739,7 +8739,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "88",
+"owshiddenversion": "89",
 "Restricted": ""
 }
 ,{
@@ -8781,7 +8781,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "90",
+"owshiddenversion": "91",
 "Restricted": ""
 }
 ,{
@@ -8823,7 +8823,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "89",
+"owshiddenversion": "90",
 "Restricted": ""
 }
 ,{
@@ -8858,14 +8858,14 @@ CONTENT-TYPE: application/json; charset=utf-8
 "SiteOwnerEmail": "bert.jansen@bertonline.onmicrosoft.com",
 "StorageQuota": "27,487,790,694,400",
 "StorageQuota.": "27487790694400.0",
-"StorageUsed": "13,106,159",
-"StorageUsed.": "13106159.0000000",
+"StorageUsed": "13,106,174",
+"StorageUsed.": "13106174.0000000",
 "TemplateId": "1",
 "TemplateId.": "1",
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "88",
+"owshiddenversion": "89",
 "Restricted": ""
 }
 ,{
@@ -8907,7 +8907,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "SITEPAGEPUBLISHING#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "89",
+"owshiddenversion": "90",
 "Restricted": ""
 }
 ,{
@@ -8942,14 +8942,14 @@ CONTENT-TYPE: application/json; charset=utf-8
 "SiteOwnerEmail": "bert.jansen@bertonline.onmicrosoft.com",
 "StorageQuota": "27,487,790,694,400",
 "StorageQuota.": "27487790694400.0",
-"StorageUsed": "28,923,125",
-"StorageUsed.": "28923125.0000000",
+"StorageUsed": "28,923,142",
+"StorageUsed.": "28923142.0000000",
 "TemplateId": "50",
 "TemplateId.": "50",
 "TemplateName": "SRCHCEN#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "138",
+"owshiddenversion": "139",
 "Restricted": ""
 }
 ,{
@@ -8991,7 +8991,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "86",
+"owshiddenversion": "87",
 "Restricted": ""
 }
 ,{
@@ -9033,7 +9033,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "85",
+"owshiddenversion": "86",
 "Restricted": ""
 }
 ,{
@@ -9075,7 +9075,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "89",
+"owshiddenversion": "90",
 "Restricted": ""
 }
 ,{
@@ -9110,14 +9110,14 @@ CONTENT-TYPE: application/json; charset=utf-8
 "SiteOwnerEmail": "bert.jansen@bertonline.onmicrosoft.com",
 "StorageQuota": "27,487,790,694,400",
 "StorageQuota.": "27487790694400.0",
-"StorageUsed": "2,953,472",
-"StorageUsed.": "2953472.00000000",
+"StorageUsed": "2,965,769",
+"StorageUsed.": "2965769.00000000",
 "TemplateId": "14483",
 "TemplateId.": "14483",
 "TemplateName": "OFFILE#1",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "114",
+"owshiddenversion": "115",
 "Restricted": ""
 }
 ,{
@@ -9159,7 +9159,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "89",
+"owshiddenversion": "90",
 "Restricted": ""
 }
 ,{
@@ -9201,7 +9201,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "90",
+"owshiddenversion": "91",
 "Restricted": ""
 }
 ,{
@@ -9243,7 +9243,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "90",
+"owshiddenversion": "91",
 "Restricted": ""
 }
 ,{
@@ -9285,7 +9285,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "115",
+"owshiddenversion": "116",
 "Restricted": ""
 }
 ,{
@@ -9320,14 +9320,14 @@ CONTENT-TYPE: application/json; charset=utf-8
 "SiteOwnerEmail": "bert.jansen@bertonline.onmicrosoft.com",
 "StorageQuota": "27,487,790,694,400",
 "StorageQuota.": "27487790694400.0",
-"StorageUsed": "29,517,342",
-"StorageUsed.": "29517342.0000000",
+"StorageUsed": "29,517,393",
+"StorageUsed.": "29517393.0000000",
 "TemplateId": "53",
 "TemplateId.": "53",
 "TemplateName": "BLANKINTERNET#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "96",
+"owshiddenversion": "97",
 "Restricted": ""
 }
 ,{
@@ -9369,7 +9369,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "91",
+"owshiddenversion": "92",
 "Restricted": ""
 }
 ,{
@@ -9411,7 +9411,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "91",
+"owshiddenversion": "92",
 "Restricted": ""
 }
 ,{
@@ -9453,7 +9453,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "83",
+"owshiddenversion": "84",
 "Restricted": ""
 }
 ,{
@@ -9488,14 +9488,14 @@ CONTENT-TYPE: application/json; charset=utf-8
 "SiteOwnerEmail": "bert.jansen@bertonline.onmicrosoft.com",
 "StorageQuota": "27,487,790,694,400",
 "StorageQuota.": "27487790694400.0",
-"StorageUsed": "29,772,948",
-"StorageUsed.": "29772948.0000000",
+"StorageUsed": "29,772,979",
+"StorageUsed.": "29772979.0000000",
 "TemplateId": "53",
 "TemplateId.": "53",
 "TemplateName": "BLANKINTERNET#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "114",
+"owshiddenversion": "115",
 "Restricted": ""
 }
 ,{
@@ -9537,7 +9537,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "90",
+"owshiddenversion": "91",
 "Restricted": ""
 }
 ,{
@@ -9552,7 +9552,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "FileRef.urlencoding": "\u002fLists\u002fDO_NOT_DELETE_SPLIST_TENANTADMIN_ALL_SITES_AGGREGA\u002f325_.000",
 "FileRef.scriptencodeasurl": "\\u002fLists\\u002fDO_NOT_DELETE_SPLIST_TENANTADMIN_ALL_SITES_AGGREGA\\u002f325_.000",
 "Attachments": "0",
-"SMTotalSize": "512",
+"SMTotalSize": "540",
 "_CommentFlags": "",
 "_CommentCount": "",
 "SiteUrl": "https:\u002f\u002fbertonline.sharepoint.com\u002fsites\u002f130021",
@@ -9572,14 +9572,14 @@ CONTENT-TYPE: application/json; charset=utf-8
 "SiteOwnerEmail": "KevinC@bertonline.onmicrosoft.com",
 "StorageQuota": "27,487,790,694,400",
 "StorageQuota.": "27487790694400.0",
-"StorageUsed": "47,956,030",
-"StorageUsed.": "47956030.0000000",
+"StorageUsed": "47,956,258",
+"StorageUsed.": "47956258.0000000",
 "TemplateId": "1",
 "TemplateId.": "1",
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "91",
+"owshiddenversion": "102",
 "Restricted": ""
 }
 ,{
@@ -9621,7 +9621,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "91",
+"owshiddenversion": "92",
 "Restricted": ""
 }
 ,{
@@ -9663,7 +9663,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "90",
+"owshiddenversion": "91",
 "Restricted": ""
 }
 ,{
@@ -9698,14 +9698,14 @@ CONTENT-TYPE: application/json; charset=utf-8
 "SiteOwnerEmail": "",
 "StorageQuota": "27,487,790,694,400",
 "StorageQuota.": "27487790694400.0",
-"StorageUsed": "1,763,351",
-"StorageUsed.": "1763351.00000000",
+"StorageUsed": "1,845,880",
+"StorageUsed.": "1845880.00000000",
 "TemplateId": "64",
 "TemplateId.": "64",
 "TemplateName": "GROUP#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "95",
+"owshiddenversion": "96",
 "Restricted": ""
 }
 ,{
@@ -9747,7 +9747,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "90",
+"owshiddenversion": "91",
 "Restricted": ""
 }
 ,{
@@ -9789,7 +9789,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "89",
+"owshiddenversion": "90",
 "Restricted": ""
 }
 ,{
@@ -9831,7 +9831,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "92",
+"owshiddenversion": "93",
 "Restricted": ""
 }
 ,{
@@ -9873,7 +9873,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "92",
+"owshiddenversion": "93",
 "Restricted": ""
 }
 ,{
@@ -9915,7 +9915,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "92",
+"owshiddenversion": "93",
 "Restricted": ""
 }
 ,{
@@ -9957,7 +9957,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "SITEPAGEPUBLISHING#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "87",
+"owshiddenversion": "88",
 "Restricted": ""
 }
 ,{
@@ -9999,7 +9999,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "87",
+"owshiddenversion": "88",
 "Restricted": ""
 }
 ,{
@@ -10041,7 +10041,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "90",
+"owshiddenversion": "91",
 "Restricted": ""
 }
 ,{
@@ -10083,7 +10083,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "91",
+"owshiddenversion": "92",
 "Restricted": ""
 }
 ,{
@@ -10125,7 +10125,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "91",
+"owshiddenversion": "92",
 "Restricted": ""
 }
 ,{
@@ -10167,7 +10167,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "86",
+"owshiddenversion": "87",
 "Restricted": ""
 }
 ,{
@@ -10209,7 +10209,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "90",
+"owshiddenversion": "91",
 "Restricted": ""
 }
 ,{
@@ -10244,14 +10244,14 @@ CONTENT-TYPE: application/json; charset=utf-8
 "SiteOwnerEmail": "bert.jansen@bertonline.onmicrosoft.com",
 "StorageQuota": "27,487,790,694,400",
 "StorageQuota.": "27487790694400.0",
-"StorageUsed": "3,231,508",
-"StorageUsed.": "3231508.00000000",
+"StorageUsed": "3,326,629",
+"StorageUsed.": "3326629.00000000",
 "TemplateId": "1",
 "TemplateId.": "1",
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "89",
+"owshiddenversion": "92",
 "Restricted": ""
 }
 ,{
@@ -10293,7 +10293,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "89",
+"owshiddenversion": "90",
 "Restricted": ""
 }
 ,{
@@ -10335,7 +10335,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "88",
+"owshiddenversion": "89",
 "Restricted": ""
 }
 ,{
@@ -10377,7 +10377,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "SPSPERS#2",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "73",
+"owshiddenversion": "74",
 "Restricted": ""
 }
 ,{
@@ -10419,7 +10419,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "GROUP#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "86",
+"owshiddenversion": "87",
 "Restricted": ""
 }
 ,{
@@ -10461,7 +10461,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "89",
+"owshiddenversion": "90",
 "Restricted": ""
 }
 ,{
@@ -10503,7 +10503,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "GROUP#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "89",
+"owshiddenversion": "90",
 "Restricted": ""
 }
 ,{
@@ -10545,7 +10545,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "GROUP#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "88",
+"owshiddenversion": "89",
 "Restricted": ""
 }
 ,{
@@ -10587,7 +10587,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "90",
+"owshiddenversion": "91",
 "Restricted": ""
 }
 ,{
@@ -10622,14 +10622,14 @@ CONTENT-TYPE: application/json; charset=utf-8
 "SiteOwnerEmail": "bert.jansen@bertonline.onmicrosoft.com",
 "StorageQuota": "27,487,790,694,400",
 "StorageQuota.": "27487790694400.0",
-"StorageUsed": "197,081,701",
-"StorageUsed.": "197081701.000000",
+"StorageUsed": "197,081,742",
+"StorageUsed.": "197081742.000000",
 "TemplateId": "1",
 "TemplateId.": "1",
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "163",
+"owshiddenversion": "164",
 "Restricted": ""
 }
 ,{
@@ -10671,7 +10671,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "91",
+"owshiddenversion": "92",
 "Restricted": ""
 }
 ,{
@@ -10713,7 +10713,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "90",
+"owshiddenversion": "91",
 "Restricted": ""
 }
 ,{
@@ -10755,7 +10755,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "SITEPAGEPUBLISHING#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "90",
+"owshiddenversion": "91",
 "Restricted": ""
 }
 ,{
@@ -10797,7 +10797,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "88",
+"owshiddenversion": "89",
 "Restricted": ""
 }
 ,{
@@ -10839,7 +10839,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "89",
+"owshiddenversion": "90",
 "Restricted": ""
 }
 ,{
@@ -10874,14 +10874,14 @@ CONTENT-TYPE: application/json; charset=utf-8
 "SiteOwnerEmail": "bert.jansen@bertonline.onmicrosoft.com",
 "StorageQuota": "27,487,790,694,400",
 "StorageQuota.": "27487790694400.0",
-"StorageUsed": "24,307,471",
-"StorageUsed.": "24307471.0000000",
+"StorageUsed": "24,307,516",
+"StorageUsed.": "24307516.0000000",
 "TemplateId": "1",
 "TemplateId.": "1",
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "108",
+"owshiddenversion": "109",
 "Restricted": ""
 }
 ,{
@@ -10923,7 +10923,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "86",
+"owshiddenversion": "87",
 "Restricted": ""
 }
 ,{
@@ -10965,7 +10965,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "108",
+"owshiddenversion": "109",
 "Restricted": ""
 }
 ,{
@@ -11007,7 +11007,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "SITEPAGEPUBLISHING#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "95",
+"owshiddenversion": "96",
 "Restricted": ""
 }
 ,{
@@ -11042,14 +11042,14 @@ CONTENT-TYPE: application/json; charset=utf-8
 "SiteOwnerEmail": "raja@bertonline.onmicrosoft.com",
 "StorageQuota": "27,487,790,694,400",
 "StorageQuota.": "27487790694400.0",
-"StorageUsed": "38,093,805",
-"StorageUsed.": "38093805.0000000",
+"StorageUsed": "38,093,825",
+"StorageUsed.": "38093825.0000000",
 "TemplateId": "1",
 "TemplateId.": "1",
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "90",
+"owshiddenversion": "91",
 "Restricted": ""
 }
 ,{
@@ -11091,7 +11091,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "83",
+"owshiddenversion": "84",
 "Restricted": ""
 }
 ,{
@@ -11133,7 +11133,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "85",
+"owshiddenversion": "86",
 "Restricted": ""
 }
 ,{
@@ -11175,7 +11175,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "83",
+"owshiddenversion": "84",
 "Restricted": ""
 }
 ,{
@@ -11210,14 +11210,14 @@ CONTENT-TYPE: application/json; charset=utf-8
 "SiteOwnerEmail": "bert.jansen@bertonline.onmicrosoft.com",
 "StorageQuota": "27,487,790,694,400",
 "StorageQuota.": "27487790694400.0",
-"StorageUsed": "30,488,579",
-"StorageUsed.": "30488579.0000000",
+"StorageUsed": "30,488,613",
+"StorageUsed.": "30488613.0000000",
 "TemplateId": "53",
 "TemplateId.": "53",
 "TemplateName": "BLANKINTERNET#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "87",
+"owshiddenversion": "88",
 "Restricted": ""
 }
 ,{
@@ -11252,14 +11252,14 @@ CONTENT-TYPE: application/json; charset=utf-8
 "SiteOwnerEmail": "bert.jansen@bertonline.onmicrosoft.com",
 "StorageQuota": "27,487,790,694,400",
 "StorageQuota.": "27487790694400.0",
-"StorageUsed": "29,737,005",
-"StorageUsed.": "29737005.0000000",
+"StorageUsed": "29,737,039",
+"StorageUsed.": "29737039.0000000",
 "TemplateId": "53",
 "TemplateId.": "53",
 "TemplateName": "BLANKINTERNET#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "86",
+"owshiddenversion": "87",
 "Restricted": ""
 }
 ,{
@@ -11301,7 +11301,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "PROJECTSITE#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "83",
+"owshiddenversion": "84",
 "Restricted": ""
 }
 ,{
@@ -11343,7 +11343,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "GROUP#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "91",
+"owshiddenversion": "92",
 "Restricted": ""
 }
 ,{
@@ -11385,7 +11385,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "88",
+"owshiddenversion": "89",
 "Restricted": ""
 }
 ,{
@@ -11427,7 +11427,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "90",
+"owshiddenversion": "91",
 "Restricted": ""
 }
 ,{
@@ -11442,7 +11442,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "FileRef.urlencoding": "\u002fLists\u002fDO_NOT_DELETE_SPLIST_TENANTADMIN_ALL_SITES_AGGREGA\u002f388_.000",
 "FileRef.scriptencodeasurl": "\\u002fLists\\u002fDO_NOT_DELETE_SPLIST_TENANTADMIN_ALL_SITES_AGGREGA\\u002f388_.000",
 "Attachments": "0",
-"SMTotalSize": "532",
+"SMTotalSize": "524",
 "_CommentFlags": "",
 "_CommentCount": "",
 "SiteUrl": "https:\u002f\u002fbertonline.sharepoint.com\u002fsites\u002fprov-1",
@@ -11462,14 +11462,14 @@ CONTENT-TYPE: application/json; charset=utf-8
 "SiteOwnerEmail": "",
 "StorageQuota": "27,487,790,694,400",
 "StorageQuota.": "27487790694400.0",
-"StorageUsed": "123,253,410",
-"StorageUsed.": "123253410.000000",
+"StorageUsed": "122,995,824",
+"StorageUsed.": "122995824.000000",
 "TemplateId": "64",
 "TemplateId.": "64",
 "TemplateName": "GROUP#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "6043",
+"owshiddenversion": "6077",
 "Restricted": ""
 }
 ,{
@@ -11504,14 +11504,14 @@ CONTENT-TYPE: application/json; charset=utf-8
 "SiteOwnerEmail": "bert.jansen@bertonline.onmicrosoft.com",
 "StorageQuota": "27,487,790,694,400",
 "StorageQuota.": "27487790694400.0",
-"StorageUsed": "2,302,801",
-"StorageUsed.": "2302801.00000000",
+"StorageUsed": "2,320,186",
+"StorageUsed.": "2320186.00000000",
 "TemplateId": "62",
 "TemplateId.": "62",
 "TemplateName": "COMMUNITY#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "93",
+"owshiddenversion": "94",
 "Restricted": ""
 }
 ,{
@@ -11546,14 +11546,14 @@ CONTENT-TYPE: application/json; charset=utf-8
 "SiteOwnerEmail": "bert.jansen@bertonline.onmicrosoft.com",
 "StorageQuota": "27,487,790,694,400",
 "StorageQuota.": "27487790694400.0",
-"StorageUsed": "1,797,898",
-"StorageUsed.": "1797898.00000000",
+"StorageUsed": "1,815,302",
+"StorageUsed.": "1815302.00000000",
 "TemplateId": "63",
 "TemplateId.": "63",
 "TemplateName": "COMMUNITYPORTAL#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "84",
+"owshiddenversion": "85",
 "Restricted": ""
 }
 ,{
@@ -11588,14 +11588,14 @@ CONTENT-TYPE: application/json; charset=utf-8
 "SiteOwnerEmail": "bert.jansen@bertonline.onmicrosoft.com",
 "StorageQuota": "27,487,790,694,400",
 "StorageQuota.": "27487790694400.0",
-"StorageUsed": "29,863,344",
-"StorageUsed.": "29863344.0000000",
+"StorageUsed": "29,880,752",
+"StorageUsed.": "29880752.0000000",
 "TemplateId": "56",
 "TemplateId.": "56",
 "TemplateName": "ENTERWIKI#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "110",
+"owshiddenversion": "111",
 "Restricted": ""
 }
 ,{
@@ -11630,14 +11630,14 @@ CONTENT-TYPE: application/json; charset=utf-8
 "SiteOwnerEmail": "bert.jansen@bertonline.onmicrosoft.com",
 "StorageQuota": "27,487,790,694,400",
 "StorageQuota.": "27487790694400.0",
-"StorageUsed": "2,248,983",
-"StorageUsed.": "2248983.00000000",
+"StorageUsed": "2,266,369",
+"StorageUsed.": "2266369.00000000",
 "TemplateId": "6115",
 "TemplateId.": "6115",
 "TemplateName": "PROJECTSITE#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "92",
+"owshiddenversion": "93",
 "Restricted": ""
 }
 ,{
@@ -11672,14 +11672,14 @@ CONTENT-TYPE: application/json; charset=utf-8
 "SiteOwnerEmail": "bert.jansen@bertonline.onmicrosoft.com",
 "StorageQuota": "27,487,790,694,400",
 "StorageQuota.": "27487790694400.0",
-"StorageUsed": "1,629,247",
-"StorageUsed.": "1629247.00000000",
+"StorageUsed": "1,646,650",
+"StorageUsed.": "1646650.00000000",
 "TemplateId": "90",
 "TemplateId.": "90",
 "TemplateName": "SRCHCENTERLITE#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "92",
+"owshiddenversion": "93",
 "Restricted": ""
 }
 ,{
@@ -11714,14 +11714,14 @@ CONTENT-TYPE: application/json; charset=utf-8
 "SiteOwnerEmail": "bert.jansen@bertonline.onmicrosoft.com",
 "StorageQuota": "27,487,790,694,400",
 "StorageQuota.": "27487790694400.0",
-"StorageUsed": "19,501,158",
-"StorageUsed.": "19501158.0000000",
+"StorageUsed": "19,518,543",
+"StorageUsed.": "19518543.0000000",
 "TemplateId": "61",
 "TemplateId.": "61",
 "TemplateName": "visprus#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "98",
+"owshiddenversion": "99",
 "Restricted": ""
 }
 ,{
@@ -11763,7 +11763,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "SITEPAGEPUBLISHING#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "85",
+"owshiddenversion": "86",
 "Restricted": ""
 }
 ,{
@@ -11805,7 +11805,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "SITEPAGEPUBLISHING#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "76",
+"owshiddenversion": "77",
 "Restricted": ""
 }
 ,{
@@ -11847,7 +11847,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#3",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "66",
+"owshiddenversion": "67",
 "Restricted": ""
 }
 ,{
@@ -11889,7 +11889,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "BLOG#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "77",
+"owshiddenversion": "78",
 "Restricted": ""
 }
 ,{
@@ -11931,7 +11931,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "88",
+"owshiddenversion": "89",
 "Restricted": ""
 }
 ,{
@@ -11973,7 +11973,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "SITEPAGEPUBLISHING#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "77",
+"owshiddenversion": "78",
 "Restricted": ""
 }
 ,{
@@ -12015,7 +12015,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "SITEPAGEPUBLISHING#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "83",
+"owshiddenversion": "84",
 "Restricted": ""
 }
 ,{
@@ -12057,7 +12057,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "SPSPERS#9",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "50",
+"owshiddenversion": "51",
 "Restricted": ""
 }
 ,{
@@ -12099,7 +12099,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "61",
+"owshiddenversion": "62",
 "Restricted": ""
 }
 ,{
@@ -12134,14 +12134,14 @@ CONTENT-TYPE: application/json; charset=utf-8
 "SiteOwnerEmail": "",
 "StorageQuota": "27,487,790,694,400",
 "StorageQuota.": "27487790694400.0",
-"StorageUsed": "39,010,607",
-"StorageUsed.": "39010607.0000000",
+"StorageUsed": "38,957,693",
+"StorageUsed.": "38957693.0000000",
 "TemplateId": "1",
 "TemplateId.": "1",
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "75",
+"owshiddenversion": "76",
 "Restricted": ""
 }
 ,{
@@ -12183,7 +12183,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "67",
+"owshiddenversion": "68",
 "Restricted": ""
 }
 ,{
@@ -12225,7 +12225,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "70",
+"owshiddenversion": "71",
 "Restricted": ""
 }
 ,{
@@ -12267,7 +12267,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "68",
+"owshiddenversion": "69",
 "Restricted": ""
 }
 ,{
@@ -12302,14 +12302,14 @@ CONTENT-TYPE: application/json; charset=utf-8
 "SiteOwnerEmail": "bert.jansen@bertonline.onmicrosoft.com",
 "StorageQuota": "27,487,790,694,400",
 "StorageQuota.": "27487790694400.0",
-"StorageUsed": "6,847,112",
-"StorageUsed.": "6847112.00000000",
+"StorageUsed": "6,864,484",
+"StorageUsed.": "6864484.00000000",
 "TemplateId": "68",
 "TemplateId.": "68",
 "TemplateName": "SITEPAGEPUBLISHING#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "55",
+"owshiddenversion": "56",
 "Restricted": ""
 }
 ,{
@@ -12344,14 +12344,14 @@ CONTENT-TYPE: application/json; charset=utf-8
 "SiteOwnerEmail": "bert.jansen@bertonline.onmicrosoft.com",
 "StorageQuota": "27,487,790,694,400",
 "StorageQuota.": "27487790694400.0",
-"StorageUsed": "11,817,648",
-"StorageUsed.": "11817648.0000000",
+"StorageUsed": "11,835,032",
+"StorageUsed.": "11835032.0000000",
 "TemplateId": "68",
 "TemplateId.": "68",
 "TemplateName": "SITEPAGEPUBLISHING#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "61",
+"owshiddenversion": "62",
 "Restricted": ""
 }
 ,{
@@ -12386,14 +12386,14 @@ CONTENT-TYPE: application/json; charset=utf-8
 "SiteOwnerEmail": "bert.jansen@bertonline.onmicrosoft.com",
 "StorageQuota": "27,487,790,694,400",
 "StorageQuota.": "27487790694400.0",
-"StorageUsed": "1,639,625",
-"StorageUsed.": "1639625.00000000",
+"StorageUsed": "1,657,002",
+"StorageUsed.": "1657002.00000000",
 "TemplateId": "68",
 "TemplateId.": "68",
 "TemplateName": "SITEPAGEPUBLISHING#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "51",
+"owshiddenversion": "52",
 "Restricted": ""
 }
 ,{
@@ -12428,14 +12428,14 @@ CONTENT-TYPE: application/json; charset=utf-8
 "SiteOwnerEmail": "bert.jansen@bertonline.onmicrosoft.com",
 "StorageQuota": "27,487,790,694,400",
 "StorageQuota.": "27487790694400.0",
-"StorageUsed": "1,561,059",
-"StorageUsed.": "1561059.00000000",
+"StorageUsed": "1,578,429",
+"StorageUsed.": "1578429.00000000",
 "TemplateId": "68",
 "TemplateId.": "68",
 "TemplateName": "SITEPAGEPUBLISHING#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "49",
+"owshiddenversion": "50",
 "Restricted": ""
 }
 ,{
@@ -12470,14 +12470,14 @@ CONTENT-TYPE: application/json; charset=utf-8
 "SiteOwnerEmail": "bert.jansen@bertonline.onmicrosoft.com",
 "StorageQuota": "27,487,790,694,400",
 "StorageQuota.": "27487790694400.0",
-"StorageUsed": "1,349,099,092",
-"StorageUsed.": "1349099092.00000",
+"StorageUsed": "1,349,116,462",
+"StorageUsed.": "1349116462.00000",
 "TemplateId": "68",
 "TemplateId.": "68",
 "TemplateName": "SITEPAGEPUBLISHING#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "42",
+"owshiddenversion": "43",
 "Restricted": ""
 }
 ,{
@@ -12519,7 +12519,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "SITEPAGEPUBLISHING#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "25",
+"owshiddenversion": "26",
 "Restricted": ""
 }
 ,{
@@ -12554,14 +12554,14 @@ CONTENT-TYPE: application/json; charset=utf-8
 "SiteOwnerEmail": "bert.jansen@bertonline.onmicrosoft.com",
 "StorageQuota": "27,487,790,694,400",
 "StorageQuota.": "27487790694400.0",
-"StorageUsed": "1,853,394",
-"StorageUsed.": "1853394.00000000",
+"StorageUsed": "1,870,792",
+"StorageUsed.": "1870792.00000000",
 "TemplateId": "68",
 "TemplateId.": "68",
 "TemplateName": "SITEPAGEPUBLISHING#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "17",
+"owshiddenversion": "18",
 "Restricted": ""
 }
 ,{
@@ -12596,14 +12596,14 @@ CONTENT-TYPE: application/json; charset=utf-8
 "SiteOwnerEmail": "",
 "StorageQuota": "27,487,790,694,400",
 "StorageQuota.": "27487790694400.0",
-"StorageUsed": "2,025,877",
-"StorageUsed.": "2025877.00000000",
+"StorageUsed": "2,043,278",
+"StorageUsed.": "2043278.00000000",
 "TemplateId": "64",
 "TemplateId.": "64",
 "TemplateName": "GROUP#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "23",
+"owshiddenversion": "24",
 "Restricted": ""
 }
 ,{
@@ -12645,7 +12645,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "SITEPAGEPUBLISHING#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "13",
+"owshiddenversion": "14",
 "Restricted": ""
 }
 ,{
@@ -12687,7 +12687,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "GROUP#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "15",
+"owshiddenversion": "16",
 "Restricted": ""
 }
 ,{
@@ -12729,7 +12729,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "GROUP#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "15",
+"owshiddenversion": "16",
 "Restricted": ""
 }
 ,{
@@ -12771,7 +12771,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "GROUP#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "14",
+"owshiddenversion": "15",
 "Restricted": ""
 }
 ,{
@@ -12813,7 +12813,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "GROUP#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "13",
+"owshiddenversion": "14",
 "Restricted": ""
 }
 ,{
@@ -12855,7 +12855,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "124959",
+"owshiddenversion": "124960",
 "Restricted": ""
 }
 ,{
@@ -12890,14 +12890,14 @@ CONTENT-TYPE: application/json; charset=utf-8
 "SiteOwnerEmail": "",
 "StorageQuota": "27,487,790,694,400",
 "StorageQuota.": "27487790694400.0",
-"StorageUsed": "1,509,771",
-"StorageUsed.": "1509771.00000000",
+"StorageUsed": "1,527,160",
+"StorageUsed.": "1527160.00000000",
 "TemplateId": "64",
 "TemplateId.": "64",
 "TemplateName": "GROUP#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "17",
+"owshiddenversion": "18",
 "Restricted": ""
 }
 ,{
@@ -12932,14 +12932,14 @@ CONTENT-TYPE: application/json; charset=utf-8
 "SiteOwnerEmail": "",
 "StorageQuota": "27,487,790,694,400",
 "StorageQuota.": "27487790694400.0",
-"StorageUsed": "1,510,796",
-"StorageUsed.": "1510796.00000000",
+"StorageUsed": "1,528,190",
+"StorageUsed.": "1528190.00000000",
 "TemplateId": "64",
 "TemplateId.": "64",
 "TemplateName": "GROUP#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "19",
+"owshiddenversion": "20",
 "Restricted": ""
 }
 ,{
@@ -12974,14 +12974,14 @@ CONTENT-TYPE: application/json; charset=utf-8
 "SiteOwnerEmail": "",
 "StorageQuota": "27,487,790,694,400",
 "StorageQuota.": "27487790694400.0",
-"StorageUsed": "1,511,776",
-"StorageUsed.": "1511776.00000000",
+"StorageUsed": "1,529,169",
+"StorageUsed.": "1529169.00000000",
 "TemplateId": "64",
 "TemplateId.": "64",
 "TemplateName": "GROUP#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "21",
+"owshiddenversion": "22",
 "Restricted": ""
 }
 ,{
@@ -13016,14 +13016,14 @@ CONTENT-TYPE: application/json; charset=utf-8
 "SiteOwnerEmail": "bert.jansen@bertonline.onmicrosoft.com",
 "StorageQuota": "27,487,790,694,400",
 "StorageQuota.": "27487790694400.0",
-"StorageUsed": "2,341,157",
-"StorageUsed.": "2341157.00000000",
+"StorageUsed": "2,358,735",
+"StorageUsed.": "2358735.00000000",
 "TemplateId": "1",
 "TemplateId.": "1",
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "16",
+"owshiddenversion": "17",
 "Restricted": ""
 }
 ,{
@@ -13065,7 +13065,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "SITEPAGEPUBLISHING#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "22",
+"owshiddenversion": "23",
 "Restricted": ""
 }
 ,{
@@ -13107,7 +13107,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "SITEPAGEPUBLISHING#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "16",
+"owshiddenversion": "17",
 "Restricted": ""
 }
 ,{
@@ -13149,7 +13149,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "SITEPAGEPUBLISHING#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "12",
+"owshiddenversion": "13",
 "Restricted": ""
 }
 ,{
@@ -13191,7 +13191,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "SITEPAGEPUBLISHING#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "13",
+"owshiddenversion": "14",
 "Restricted": ""
 }
 ,{
@@ -13233,7 +13233,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "GROUP#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "10",
+"owshiddenversion": "11",
 "Restricted": ""
 }
 ,{
@@ -13275,7 +13275,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "GROUP#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "11",
+"owshiddenversion": "12",
 "Restricted": ""
 }
 ,{
@@ -13317,7 +13317,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "GROUP#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "10",
+"owshiddenversion": "11",
 "Restricted": ""
 }
 ,{
@@ -13359,7 +13359,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "GROUP#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "12",
+"owshiddenversion": "13",
 "Restricted": ""
 }
 ,{
@@ -13401,7 +13401,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "GROUP#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "11",
+"owshiddenversion": "12",
 "Restricted": ""
 }
 ,{
@@ -13443,7 +13443,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "GROUP#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "11",
+"owshiddenversion": "12",
 "Restricted": ""
 }
 ,{
@@ -13485,7 +13485,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "GROUP#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "11",
+"owshiddenversion": "12",
 "Restricted": ""
 }
 ,{
@@ -13527,7 +13527,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "GROUP#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "11",
+"owshiddenversion": "12",
 "Restricted": ""
 }
 ,{
@@ -13569,7 +13569,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "GROUP#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "11",
+"owshiddenversion": "12",
 "Restricted": ""
 }
 ,{
@@ -13611,7 +13611,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "GROUP#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "12",
+"owshiddenversion": "13",
 "Restricted": ""
 }
 ,{
@@ -13653,7 +13653,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "GROUP#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "11",
+"owshiddenversion": "12",
 "Restricted": ""
 }
 ,{
@@ -13695,7 +13695,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "GROUP#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "11",
+"owshiddenversion": "12",
 "Restricted": ""
 }
 ,{
@@ -13737,7 +13737,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "GROUP#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "11",
+"owshiddenversion": "12",
 "Restricted": ""
 }
 ,{
@@ -13779,7 +13779,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "GROUP#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "11",
+"owshiddenversion": "12",
 "Restricted": ""
 }
 ,{
@@ -13821,7 +13821,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "GROUP#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "11",
+"owshiddenversion": "12",
 "Restricted": ""
 }
 ,{
@@ -13863,7 +13863,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "GROUP#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "11",
+"owshiddenversion": "12",
 "Restricted": ""
 }
 ,{
@@ -13905,7 +13905,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "GROUP#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "11",
+"owshiddenversion": "12",
 "Restricted": ""
 }
 ,{
@@ -13947,7 +13947,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "GROUP#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "10",
+"owshiddenversion": "11",
 "Restricted": ""
 }
 ,{
@@ -13989,7 +13989,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "GROUP#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "12",
+"owshiddenversion": "13",
 "Restricted": ""
 }
 ,{
@@ -14031,7 +14031,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "GROUP#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "11",
+"owshiddenversion": "12",
 "Restricted": ""
 }
 ,{
@@ -14073,7 +14073,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "GROUP#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "12",
+"owshiddenversion": "13",
 "Restricted": ""
 }
 ,{
@@ -14108,14 +14108,14 @@ CONTENT-TYPE: application/json; charset=utf-8
 "SiteOwnerEmail": "bert.jansen@bertonline.onmicrosoft.com",
 "StorageQuota": "27,487,790,694,400",
 "StorageQuota.": "27487790694400.0",
-"StorageUsed": "54,920,299",
-"StorageUsed.": "54920299.0000000",
+"StorageUsed": "36,683,328",
+"StorageUsed.": "36683328.0000000",
 "TemplateId": "68",
 "TemplateId.": "68",
 "TemplateName": "SITEPAGEPUBLISHING#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "17",
+"owshiddenversion": "18",
 "Restricted": ""
 }
 ,{
@@ -14150,14 +14150,14 @@ CONTENT-TYPE: application/json; charset=utf-8
 "SiteOwnerEmail": "bert.jansen@bertonline.onmicrosoft.com",
 "StorageQuota": "27,487,790,694,400",
 "StorageQuota.": "27487790694400.0",
-"StorageUsed": "33,123,492",
-"StorageUsed.": "33123492.0000000",
+"StorageUsed": "21,630,779",
+"StorageUsed.": "21630779.0000000",
 "TemplateId": "68",
 "TemplateId.": "68",
 "TemplateName": "SITEPAGEPUBLISHING#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "12",
+"owshiddenversion": "13",
 "Restricted": ""
 }
 ,{
@@ -14192,14 +14192,14 @@ CONTENT-TYPE: application/json; charset=utf-8
 "SiteOwnerEmail": "bert.jansen@bertonline.onmicrosoft.com",
 "StorageQuota": "27,487,790,694,400",
 "StorageQuota.": "27487790694400.0",
-"StorageUsed": "40,733,420",
-"StorageUsed.": "40733420.0000000",
+"StorageUsed": "27,561,082",
+"StorageUsed.": "27561082.0000000",
 "TemplateId": "68",
 "TemplateId.": "68",
 "TemplateName": "SITEPAGEPUBLISHING#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "14",
+"owshiddenversion": "15",
 "Restricted": ""
 }
 ,{
@@ -14234,14 +14234,14 @@ CONTENT-TYPE: application/json; charset=utf-8
 "SiteOwnerEmail": "bert.jansen@bertonline.onmicrosoft.com",
 "StorageQuota": "27,487,790,694,400",
 "StorageQuota.": "27487790694400.0",
-"StorageUsed": "28,995,325",
-"StorageUsed.": "28995325.0000000",
+"StorageUsed": "19,103,025",
+"StorageUsed.": "19103025.0000000",
 "TemplateId": "68",
 "TemplateId.": "68",
 "TemplateName": "SITEPAGEPUBLISHING#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "15",
+"owshiddenversion": "16",
 "Restricted": ""
 }
 ,{
@@ -14283,7 +14283,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "GROUP#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "11",
+"owshiddenversion": "12",
 "Restricted": ""
 }
 ,{
@@ -14325,7 +14325,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "GROUP#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "10",
+"owshiddenversion": "11",
 "Restricted": ""
 }
 ,{
@@ -14367,7 +14367,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "GROUP#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "12",
+"owshiddenversion": "13",
 "Restricted": ""
 }
 ,{
@@ -14409,7 +14409,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "GROUP#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "11",
+"owshiddenversion": "12",
 "Restricted": ""
 }
 ,{
@@ -14451,7 +14451,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "GROUP#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "11",
+"owshiddenversion": "12",
 "Restricted": ""
 }
 ,{
@@ -14493,7 +14493,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "GROUP#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "11",
+"owshiddenversion": "12",
 "Restricted": ""
 }
 ,{
@@ -14535,7 +14535,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "GROUP#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "12",
+"owshiddenversion": "13",
 "Restricted": ""
 }
 ,{
@@ -14577,7 +14577,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "GROUP#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "12",
+"owshiddenversion": "13",
 "Restricted": ""
 }
 ,{
@@ -14619,7 +14619,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "GROUP#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "9",
+"owshiddenversion": "10",
 "Restricted": ""
 }
 ,{
@@ -14661,7 +14661,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "GROUP#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "10",
+"owshiddenversion": "11",
 "Restricted": ""
 }
 ,{
@@ -14703,7 +14703,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "GROUP#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "12",
+"owshiddenversion": "13",
 "Restricted": ""
 }
 ,{
@@ -14738,14 +14738,14 @@ CONTENT-TYPE: application/json; charset=utf-8
 "SiteOwnerEmail": "bert.jansen@bertonline.onmicrosoft.com",
 "StorageQuota": "27,487,790,694,400",
 "StorageQuota.": "27487790694400.0",
-"StorageUsed": "26,896,216",
-"StorageUsed.": "26896216.0000000",
+"StorageUsed": "24,561,019",
+"StorageUsed.": "24561019.0000000",
 "TemplateId": "68",
 "TemplateId.": "68",
 "TemplateName": "SITEPAGEPUBLISHING#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "11",
+"owshiddenversion": "12",
 "Restricted": ""
 }
 ,{
@@ -14787,7 +14787,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "GROUP#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "11",
+"owshiddenversion": "12",
 "Restricted": ""
 }
 ,{
@@ -14829,7 +14829,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "GROUP#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "11",
+"owshiddenversion": "12",
 "Restricted": ""
 }
 ,{
@@ -14871,7 +14871,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "GROUP#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "13",
+"owshiddenversion": "14",
 "Restricted": ""
 }
 ,{
@@ -14913,7 +14913,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "GROUP#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "12",
+"owshiddenversion": "13",
 "Restricted": ""
 }
 ,{
@@ -14955,7 +14955,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "GROUP#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "12",
+"owshiddenversion": "13",
 "Restricted": ""
 }
 ,{
@@ -14997,7 +14997,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "GROUP#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "11",
+"owshiddenversion": "12",
 "Restricted": ""
 }
 ,{
@@ -15039,7 +15039,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "GROUP#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "10",
+"owshiddenversion": "11",
 "Restricted": ""
 }
 ,{
@@ -15081,7 +15081,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "GROUP#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "12",
+"owshiddenversion": "13",
 "Restricted": ""
 }
 ,{
@@ -15123,7 +15123,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "GROUP#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "10",
+"owshiddenversion": "11",
 "Restricted": ""
 }
 ,{
@@ -15158,14 +15158,14 @@ CONTENT-TYPE: application/json; charset=utf-8
 "SiteOwnerEmail": "",
 "StorageQuota": "27,487,790,694,400",
 "StorageQuota.": "27487790694400.0",
-"StorageUsed": "1,511,119",
-"StorageUsed.": "1511119.00000000",
+"StorageUsed": "1,528,519",
+"StorageUsed.": "1528519.00000000",
 "TemplateId": "64",
 "TemplateId.": "64",
 "TemplateName": "GROUP#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "11",
+"owshiddenversion": "12",
 "Restricted": ""
 }
 ,{
@@ -15200,14 +15200,14 @@ CONTENT-TYPE: application/json; charset=utf-8
 "SiteOwnerEmail": "",
 "StorageQuota": "27,487,790,694,400",
 "StorageQuota.": "27487790694400.0",
-"StorageUsed": "1,511,329",
-"StorageUsed.": "1511329.00000000",
+"StorageUsed": "1,528,719",
+"StorageUsed.": "1528719.00000000",
 "TemplateId": "64",
 "TemplateId.": "64",
 "TemplateName": "GROUP#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "11",
+"owshiddenversion": "12",
 "Restricted": ""
 }
 ,{
@@ -15242,14 +15242,14 @@ CONTENT-TYPE: application/json; charset=utf-8
 "SiteOwnerEmail": "",
 "StorageQuota": "27,487,790,694,400",
 "StorageQuota.": "27487790694400.0",
-"StorageUsed": "1,510,314",
-"StorageUsed.": "1510314.00000000",
+"StorageUsed": "1,527,703",
+"StorageUsed.": "1527703.00000000",
 "TemplateId": "64",
 "TemplateId.": "64",
 "TemplateName": "GROUP#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "12",
+"owshiddenversion": "13",
 "Restricted": ""
 }
 ,{
@@ -15284,14 +15284,14 @@ CONTENT-TYPE: application/json; charset=utf-8
 "SiteOwnerEmail": "bert.jansen@bertonline.onmicrosoft.com",
 "StorageQuota": "27,487,790,694,400",
 "StorageQuota.": "27487790694400.0",
-"StorageUsed": "2,237,738",
-"StorageUsed.": "2237738.00000000",
+"StorageUsed": "2,255,104",
+"StorageUsed.": "2255104.00000000",
 "TemplateId": "68",
 "TemplateId.": "68",
 "TemplateName": "SITEPAGEPUBLISHING#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "15",
+"owshiddenversion": "16",
 "Restricted": ""
 }
 ,{
@@ -15326,14 +15326,14 @@ CONTENT-TYPE: application/json; charset=utf-8
 "SiteOwnerEmail": "",
 "StorageQuota": "27,487,790,694,400",
 "StorageQuota.": "27487790694400.0",
-"StorageUsed": "1,511,210",
-"StorageUsed.": "1511210.00000000",
+"StorageUsed": "1,528,591",
+"StorageUsed.": "1528591.00000000",
 "TemplateId": "64",
 "TemplateId.": "64",
 "TemplateName": "GROUP#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "12",
+"owshiddenversion": "13",
 "Restricted": ""
 }
 ,{
@@ -15368,14 +15368,14 @@ CONTENT-TYPE: application/json; charset=utf-8
 "SiteOwnerEmail": "",
 "StorageQuota": "27,487,790,694,400",
 "StorageQuota.": "27487790694400.0",
-"StorageUsed": "1,511,304",
-"StorageUsed.": "1511304.00000000",
+"StorageUsed": "1,528,696",
+"StorageUsed.": "1528696.00000000",
 "TemplateId": "64",
 "TemplateId.": "64",
 "TemplateName": "GROUP#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "11",
+"owshiddenversion": "12",
 "Restricted": ""
 }
 ,{
@@ -15410,14 +15410,14 @@ CONTENT-TYPE: application/json; charset=utf-8
 "SiteOwnerEmail": "",
 "StorageQuota": "27,487,790,694,400",
 "StorageQuota.": "27487790694400.0",
-"StorageUsed": "1,511,224",
-"StorageUsed.": "1511224.00000000",
+"StorageUsed": "1,528,612",
+"StorageUsed.": "1528612.00000000",
 "TemplateId": "64",
 "TemplateId.": "64",
 "TemplateName": "GROUP#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "12",
+"owshiddenversion": "13",
 "Restricted": ""
 }
 ,{
@@ -15452,14 +15452,14 @@ CONTENT-TYPE: application/json; charset=utf-8
 "SiteOwnerEmail": "",
 "StorageQuota": "27,487,790,694,400",
 "StorageQuota.": "27487790694400.0",
-"StorageUsed": "1,509,956",
-"StorageUsed.": "1509956.00000000",
+"StorageUsed": "1,527,340",
+"StorageUsed.": "1527340.00000000",
 "TemplateId": "64",
 "TemplateId.": "64",
 "TemplateName": "GROUP#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "11",
+"owshiddenversion": "12",
 "Restricted": ""
 }
 ,{
@@ -15494,14 +15494,14 @@ CONTENT-TYPE: application/json; charset=utf-8
 "SiteOwnerEmail": "",
 "StorageQuota": "27,487,790,694,400",
 "StorageQuota.": "27487790694400.0",
-"StorageUsed": "1,509,842",
-"StorageUsed.": "1509842.00000000",
+"StorageUsed": "1,527,228",
+"StorageUsed.": "1527228.00000000",
 "TemplateId": "64",
 "TemplateId.": "64",
 "TemplateName": "GROUP#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "11",
+"owshiddenversion": "12",
 "Restricted": ""
 }
 ,{
@@ -15536,14 +15536,14 @@ CONTENT-TYPE: application/json; charset=utf-8
 "SiteOwnerEmail": "",
 "StorageQuota": "27,487,790,694,400",
 "StorageQuota.": "27487790694400.0",
-"StorageUsed": "1,510,943",
-"StorageUsed.": "1510943.00000000",
+"StorageUsed": "1,528,329",
+"StorageUsed.": "1528329.00000000",
 "TemplateId": "64",
 "TemplateId.": "64",
 "TemplateName": "GROUP#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "11",
+"owshiddenversion": "12",
 "Restricted": ""
 }
 ,{
@@ -15578,14 +15578,14 @@ CONTENT-TYPE: application/json; charset=utf-8
 "SiteOwnerEmail": "",
 "StorageQuota": "27,487,790,694,400",
 "StorageQuota.": "27487790694400.0",
-"StorageUsed": "1,510,039",
-"StorageUsed.": "1510039.00000000",
+"StorageUsed": "1,527,426",
+"StorageUsed.": "1527426.00000000",
 "TemplateId": "64",
 "TemplateId.": "64",
 "TemplateName": "GROUP#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "11",
+"owshiddenversion": "12",
 "Restricted": ""
 }
 ,{
@@ -15620,14 +15620,14 @@ CONTENT-TYPE: application/json; charset=utf-8
 "SiteOwnerEmail": "",
 "StorageQuota": "27,487,790,694,400",
 "StorageQuota.": "27487790694400.0",
-"StorageUsed": "1,510,273",
-"StorageUsed.": "1510273.00000000",
+"StorageUsed": "1,527,658",
+"StorageUsed.": "1527658.00000000",
 "TemplateId": "64",
 "TemplateId.": "64",
 "TemplateName": "GROUP#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "12",
+"owshiddenversion": "13",
 "Restricted": ""
 }
 ,{
@@ -15662,14 +15662,14 @@ CONTENT-TYPE: application/json; charset=utf-8
 "SiteOwnerEmail": "",
 "StorageQuota": "27,487,790,694,400",
 "StorageQuota.": "27487790694400.0",
-"StorageUsed": "1,510,218",
-"StorageUsed.": "1510218.00000000",
+"StorageUsed": "1,527,605",
+"StorageUsed.": "1527605.00000000",
 "TemplateId": "64",
 "TemplateId.": "64",
 "TemplateName": "GROUP#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "11",
+"owshiddenversion": "12",
 "Restricted": ""
 }
 ,{
@@ -15704,14 +15704,14 @@ CONTENT-TYPE: application/json; charset=utf-8
 "SiteOwnerEmail": "",
 "StorageQuota": "27,487,790,694,400",
 "StorageQuota.": "27487790694400.0",
-"StorageUsed": "1,511,249",
-"StorageUsed.": "1511249.00000000",
+"StorageUsed": "1,528,643",
+"StorageUsed.": "1528643.00000000",
 "TemplateId": "64",
 "TemplateId.": "64",
 "TemplateName": "GROUP#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "11",
+"owshiddenversion": "12",
 "Restricted": ""
 }
 ,{
@@ -15746,14 +15746,14 @@ CONTENT-TYPE: application/json; charset=utf-8
 "SiteOwnerEmail": "",
 "StorageQuota": "27,487,790,694,400",
 "StorageQuota.": "27487790694400.0",
-"StorageUsed": "1,510,143",
-"StorageUsed.": "1510143.00000000",
+"StorageUsed": "1,527,526",
+"StorageUsed.": "1527526.00000000",
 "TemplateId": "64",
 "TemplateId.": "64",
 "TemplateName": "GROUP#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "10",
+"owshiddenversion": "11",
 "Restricted": ""
 }
 ,{
@@ -15788,14 +15788,14 @@ CONTENT-TYPE: application/json; charset=utf-8
 "SiteOwnerEmail": "",
 "StorageQuota": "27,487,790,694,400",
 "StorageQuota.": "27487790694400.0",
-"StorageUsed": "1,510,300",
-"StorageUsed.": "1510300.00000000",
+"StorageUsed": "1,527,682",
+"StorageUsed.": "1527682.00000000",
 "TemplateId": "64",
 "TemplateId.": "64",
 "TemplateName": "GROUP#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "9",
+"owshiddenversion": "10",
 "Restricted": ""
 }
 ,{
@@ -15830,14 +15830,14 @@ CONTENT-TYPE: application/json; charset=utf-8
 "SiteOwnerEmail": "",
 "StorageQuota": "27,487,790,694,400",
 "StorageQuota.": "27487790694400.0",
-"StorageUsed": "1,511,140",
-"StorageUsed.": "1511140.00000000",
+"StorageUsed": "1,528,527",
+"StorageUsed.": "1528527.00000000",
 "TemplateId": "64",
 "TemplateId.": "64",
 "TemplateName": "GROUP#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "11",
+"owshiddenversion": "12",
 "Restricted": ""
 }
 ,{
@@ -15872,14 +15872,14 @@ CONTENT-TYPE: application/json; charset=utf-8
 "SiteOwnerEmail": "",
 "StorageQuota": "27,487,790,694,400",
 "StorageQuota.": "27487790694400.0",
-"StorageUsed": "1,510,213",
-"StorageUsed.": "1510213.00000000",
+"StorageUsed": "1,527,595",
+"StorageUsed.": "1527595.00000000",
 "TemplateId": "64",
 "TemplateId.": "64",
 "TemplateName": "GROUP#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "11",
+"owshiddenversion": "12",
 "Restricted": ""
 }
 ,{
@@ -15914,14 +15914,14 @@ CONTENT-TYPE: application/json; charset=utf-8
 "SiteOwnerEmail": "",
 "StorageQuota": "27,487,790,694,400",
 "StorageQuota.": "27487790694400.0",
-"StorageUsed": "1,511,084",
-"StorageUsed.": "1511084.00000000",
+"StorageUsed": "1,528,474",
+"StorageUsed.": "1528474.00000000",
 "TemplateId": "64",
 "TemplateId.": "64",
 "TemplateName": "GROUP#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "11",
+"owshiddenversion": "12",
 "Restricted": ""
 }
 ,{
@@ -15956,14 +15956,14 @@ CONTENT-TYPE: application/json; charset=utf-8
 "SiteOwnerEmail": "",
 "StorageQuota": "27,487,790,694,400",
 "StorageQuota.": "27487790694400.0",
-"StorageUsed": "1,511,072",
-"StorageUsed.": "1511072.00000000",
+"StorageUsed": "1,528,466",
+"StorageUsed.": "1528466.00000000",
 "TemplateId": "64",
 "TemplateId.": "64",
 "TemplateName": "GROUP#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "12",
+"owshiddenversion": "13",
 "Restricted": ""
 }
 ,{
@@ -15998,14 +15998,14 @@ CONTENT-TYPE: application/json; charset=utf-8
 "SiteOwnerEmail": "",
 "StorageQuota": "27,487,790,694,400",
 "StorageQuota.": "27487790694400.0",
-"StorageUsed": "1,511,045",
-"StorageUsed.": "1511045.00000000",
+"StorageUsed": "1,528,443",
+"StorageUsed.": "1528443.00000000",
 "TemplateId": "64",
 "TemplateId.": "64",
 "TemplateName": "GROUP#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "11",
+"owshiddenversion": "12",
 "Restricted": ""
 }
 ,{
@@ -16040,14 +16040,14 @@ CONTENT-TYPE: application/json; charset=utf-8
 "SiteOwnerEmail": "",
 "StorageQuota": "27,487,790,694,400",
 "StorageQuota.": "27487790694400.0",
-"StorageUsed": "1,510,069",
-"StorageUsed.": "1510069.00000000",
+"StorageUsed": "1,527,452",
+"StorageUsed.": "1527452.00000000",
 "TemplateId": "64",
 "TemplateId.": "64",
 "TemplateName": "GROUP#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "10",
+"owshiddenversion": "11",
 "Restricted": ""
 }
 ,{
@@ -16082,14 +16082,14 @@ CONTENT-TYPE: application/json; charset=utf-8
 "SiteOwnerEmail": "",
 "StorageQuota": "27,487,790,694,400",
 "StorageQuota.": "27487790694400.0",
-"StorageUsed": "1,511,175",
-"StorageUsed.": "1511175.00000000",
+"StorageUsed": "1,528,567",
+"StorageUsed.": "1528567.00000000",
 "TemplateId": "64",
 "TemplateId.": "64",
 "TemplateName": "GROUP#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "11",
+"owshiddenversion": "12",
 "Restricted": ""
 }
 ,{
@@ -16124,14 +16124,14 @@ CONTENT-TYPE: application/json; charset=utf-8
 "SiteOwnerEmail": "",
 "StorageQuota": "27,487,790,694,400",
 "StorageQuota.": "27487790694400.0",
-"StorageUsed": "1,511,207",
-"StorageUsed.": "1511207.00000000",
+"StorageUsed": "1,528,592",
+"StorageUsed.": "1528592.00000000",
 "TemplateId": "64",
 "TemplateId.": "64",
 "TemplateName": "GROUP#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "10",
+"owshiddenversion": "11",
 "Restricted": ""
 }
 ,{
@@ -16166,14 +16166,14 @@ CONTENT-TYPE: application/json; charset=utf-8
 "SiteOwnerEmail": "",
 "StorageQuota": "27,487,790,694,400",
 "StorageQuota.": "27487790694400.0",
-"StorageUsed": "1,511,169",
-"StorageUsed.": "1511169.00000000",
+"StorageUsed": "1,528,557",
+"StorageUsed.": "1528557.00000000",
 "TemplateId": "64",
 "TemplateId.": "64",
 "TemplateName": "GROUP#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "12",
+"owshiddenversion": "13",
 "Restricted": ""
 }
 ,{
@@ -16208,14 +16208,14 @@ CONTENT-TYPE: application/json; charset=utf-8
 "SiteOwnerEmail": "",
 "StorageQuota": "27,487,790,694,400",
 "StorageQuota.": "27487790694400.0",
-"StorageUsed": "1,511,175",
-"StorageUsed.": "1511175.00000000",
+"StorageUsed": "1,528,568",
+"StorageUsed.": "1528568.00000000",
 "TemplateId": "64",
 "TemplateId.": "64",
 "TemplateName": "GROUP#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "11",
+"owshiddenversion": "12",
 "Restricted": ""
 }
 ,{
@@ -16250,14 +16250,14 @@ CONTENT-TYPE: application/json; charset=utf-8
 "SiteOwnerEmail": "",
 "StorageQuota": "27,487,790,694,400",
 "StorageQuota.": "27487790694400.0",
-"StorageUsed": "1,511,173",
-"StorageUsed.": "1511173.00000000",
+"StorageUsed": "1,528,561",
+"StorageUsed.": "1528561.00000000",
 "TemplateId": "64",
 "TemplateId.": "64",
 "TemplateName": "GROUP#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "11",
+"owshiddenversion": "12",
 "Restricted": ""
 }
 ,{
@@ -16292,14 +16292,14 @@ CONTENT-TYPE: application/json; charset=utf-8
 "SiteOwnerEmail": "",
 "StorageQuota": "27,487,790,694,400",
 "StorageQuota.": "27487790694400.0",
-"StorageUsed": "1,511,073",
-"StorageUsed.": "1511073.00000000",
+"StorageUsed": "1,528,462",
+"StorageUsed.": "1528462.00000000",
 "TemplateId": "64",
 "TemplateId.": "64",
 "TemplateName": "GROUP#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "10",
+"owshiddenversion": "11",
 "Restricted": ""
 }
 ,{
@@ -16334,14 +16334,14 @@ CONTENT-TYPE: application/json; charset=utf-8
 "SiteOwnerEmail": "",
 "StorageQuota": "27,487,790,694,400",
 "StorageQuota.": "27487790694400.0",
-"StorageUsed": "1,510,300",
-"StorageUsed.": "1510300.00000000",
+"StorageUsed": "1,527,686",
+"StorageUsed.": "1527686.00000000",
 "TemplateId": "64",
 "TemplateId.": "64",
 "TemplateName": "GROUP#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "12",
+"owshiddenversion": "13",
 "Restricted": ""
 }
 ,{
@@ -16376,14 +16376,14 @@ CONTENT-TYPE: application/json; charset=utf-8
 "SiteOwnerEmail": "",
 "StorageQuota": "27,487,790,694,400",
 "StorageQuota.": "27487790694400.0",
-"StorageUsed": "1,511,133",
-"StorageUsed.": "1511133.00000000",
+"StorageUsed": "1,528,522",
+"StorageUsed.": "1528522.00000000",
 "TemplateId": "64",
 "TemplateId.": "64",
 "TemplateName": "GROUP#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "9",
+"owshiddenversion": "10",
 "Restricted": ""
 }
 ,{
@@ -16418,14 +16418,14 @@ CONTENT-TYPE: application/json; charset=utf-8
 "SiteOwnerEmail": "",
 "StorageQuota": "27,487,790,694,400",
 "StorageQuota.": "27487790694400.0",
-"StorageUsed": "1,511,164",
-"StorageUsed.": "1511164.00000000",
+"StorageUsed": "1,528,555",
+"StorageUsed.": "1528555.00000000",
 "TemplateId": "64",
 "TemplateId.": "64",
 "TemplateName": "GROUP#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "11",
+"owshiddenversion": "12",
 "Restricted": ""
 }
 ,{
@@ -16460,14 +16460,14 @@ CONTENT-TYPE: application/json; charset=utf-8
 "SiteOwnerEmail": "",
 "StorageQuota": "27,487,790,694,400",
 "StorageQuota.": "27487790694400.0",
-"StorageUsed": "1,511,156",
-"StorageUsed.": "1511156.00000000",
+"StorageUsed": "1,528,542",
+"StorageUsed.": "1528542.00000000",
 "TemplateId": "64",
 "TemplateId.": "64",
 "TemplateName": "GROUP#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "12",
+"owshiddenversion": "13",
 "Restricted": ""
 }
 ,{
@@ -16502,14 +16502,14 @@ CONTENT-TYPE: application/json; charset=utf-8
 "SiteOwnerEmail": "",
 "StorageQuota": "27,487,790,694,400",
 "StorageQuota.": "27487790694400.0",
-"StorageUsed": "1,511,181",
-"StorageUsed.": "1511181.00000000",
+"StorageUsed": "1,528,574",
+"StorageUsed.": "1528574.00000000",
 "TemplateId": "64",
 "TemplateId.": "64",
 "TemplateName": "GROUP#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "12",
+"owshiddenversion": "13",
 "Restricted": ""
 }
 ,{
@@ -16544,14 +16544,14 @@ CONTENT-TYPE: application/json; charset=utf-8
 "SiteOwnerEmail": "",
 "StorageQuota": "27,487,790,694,400",
 "StorageQuota.": "27487790694400.0",
-"StorageUsed": "1,511,118",
-"StorageUsed.": "1511118.00000000",
+"StorageUsed": "1,528,499",
+"StorageUsed.": "1528499.00000000",
 "TemplateId": "64",
 "TemplateId.": "64",
 "TemplateName": "GROUP#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "11",
+"owshiddenversion": "12",
 "Restricted": ""
 }
 ,{
@@ -16586,14 +16586,14 @@ CONTENT-TYPE: application/json; charset=utf-8
 "SiteOwnerEmail": "",
 "StorageQuota": "27,487,790,694,400",
 "StorageQuota.": "27487790694400.0",
-"StorageUsed": "1,510,157",
-"StorageUsed.": "1510157.00000000",
+"StorageUsed": "1,527,548",
+"StorageUsed.": "1527548.00000000",
 "TemplateId": "64",
 "TemplateId.": "64",
 "TemplateName": "GROUP#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "11",
+"owshiddenversion": "12",
 "Restricted": ""
 }
 ,{
@@ -16628,14 +16628,14 @@ CONTENT-TYPE: application/json; charset=utf-8
 "SiteOwnerEmail": "",
 "StorageQuota": "27,487,790,694,400",
 "StorageQuota.": "27487790694400.0",
-"StorageUsed": "1,510,144",
-"StorageUsed.": "1510144.00000000",
+"StorageUsed": "1,527,525",
+"StorageUsed.": "1527525.00000000",
 "TemplateId": "64",
 "TemplateId.": "64",
 "TemplateName": "GROUP#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "11",
+"owshiddenversion": "12",
 "Restricted": ""
 }
 ,{
@@ -16670,14 +16670,14 @@ CONTENT-TYPE: application/json; charset=utf-8
 "SiteOwnerEmail": "",
 "StorageQuota": "27,487,790,694,400",
 "StorageQuota.": "27487790694400.0",
-"StorageUsed": "1,511,236",
-"StorageUsed.": "1511236.00000000",
+"StorageUsed": "1,528,626",
+"StorageUsed.": "1528626.00000000",
 "TemplateId": "64",
 "TemplateId.": "64",
 "TemplateName": "GROUP#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "10",
+"owshiddenversion": "11",
 "Restricted": ""
 }
 ,{
@@ -16712,14 +16712,14 @@ CONTENT-TYPE: application/json; charset=utf-8
 "SiteOwnerEmail": "",
 "StorageQuota": "27,487,790,694,400",
 "StorageQuota.": "27487790694400.0",
-"StorageUsed": "1,511,322",
-"StorageUsed.": "1511322.00000000",
+"StorageUsed": "1,528,706",
+"StorageUsed.": "1528706.00000000",
 "TemplateId": "64",
 "TemplateId.": "64",
 "TemplateName": "GROUP#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "11",
+"owshiddenversion": "12",
 "Restricted": ""
 }
 ,{
@@ -16754,14 +16754,14 @@ CONTENT-TYPE: application/json; charset=utf-8
 "SiteOwnerEmail": "",
 "StorageQuota": "27,487,790,694,400",
 "StorageQuota.": "27487790694400.0",
-"StorageUsed": "1,511,296",
-"StorageUsed.": "1511296.00000000",
+"StorageUsed": "1,528,687",
+"StorageUsed.": "1528687.00000000",
 "TemplateId": "64",
 "TemplateId.": "64",
 "TemplateName": "GROUP#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "12",
+"owshiddenversion": "13",
 "Restricted": ""
 }
 ,{
@@ -16796,14 +16796,14 @@ CONTENT-TYPE: application/json; charset=utf-8
 "SiteOwnerEmail": "bert.jansen@bertonline.onmicrosoft.com",
 "StorageQuota": "27,487,790,694,400",
 "StorageQuota.": "27487790694400.0",
-"StorageUsed": "1,517,893",
-"StorageUsed.": "1517893.00000000",
+"StorageUsed": "1,535,309",
+"StorageUsed.": "1535309.00000000",
 "TemplateId": "68",
 "TemplateId.": "68",
 "TemplateName": "SITEPAGEPUBLISHING#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "12",
+"owshiddenversion": "13",
 "Restricted": ""
 }
 ,{
@@ -16838,14 +16838,14 @@ CONTENT-TYPE: application/json; charset=utf-8
 "SiteOwnerEmail": "",
 "StorageQuota": "27,487,790,694,400",
 "StorageQuota.": "27487790694400.0",
-"StorageUsed": "1,511,351",
-"StorageUsed.": "1511351.00000000",
+"StorageUsed": "1,528,740",
+"StorageUsed.": "1528740.00000000",
 "TemplateId": "64",
 "TemplateId.": "64",
 "TemplateName": "GROUP#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "12",
+"owshiddenversion": "13",
 "Restricted": ""
 }
 ,{
@@ -16880,14 +16880,14 @@ CONTENT-TYPE: application/json; charset=utf-8
 "SiteOwnerEmail": "",
 "StorageQuota": "27,487,790,694,400",
 "StorageQuota.": "27487790694400.0",
-"StorageUsed": "1,511,350",
-"StorageUsed.": "1511350.00000000",
+"StorageUsed": "1,528,748",
+"StorageUsed.": "1528748.00000000",
 "TemplateId": "64",
 "TemplateId.": "64",
 "TemplateName": "GROUP#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "12",
+"owshiddenversion": "13",
 "Restricted": ""
 }
 ,{
@@ -16922,14 +16922,14 @@ CONTENT-TYPE: application/json; charset=utf-8
 "SiteOwnerEmail": "",
 "StorageQuota": "27,487,790,694,400",
 "StorageQuota.": "27487790694400.0",
-"StorageUsed": "1,511,303",
-"StorageUsed.": "1511303.00000000",
+"StorageUsed": "1,528,690",
+"StorageUsed.": "1528690.00000000",
 "TemplateId": "64",
 "TemplateId.": "64",
 "TemplateName": "GROUP#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "11",
+"owshiddenversion": "12",
 "Restricted": ""
 }
 ,{
@@ -16964,14 +16964,14 @@ CONTENT-TYPE: application/json; charset=utf-8
 "SiteOwnerEmail": "",
 "StorageQuota": "27,487,790,694,400",
 "StorageQuota.": "27487790694400.0",
-"StorageUsed": "1,511,323",
-"StorageUsed.": "1511323.00000000",
+"StorageUsed": "1,528,717",
+"StorageUsed.": "1528717.00000000",
 "TemplateId": "64",
 "TemplateId.": "64",
 "TemplateName": "GROUP#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "10",
+"owshiddenversion": "11",
 "Restricted": ""
 }
 ,{
@@ -17006,14 +17006,14 @@ CONTENT-TYPE: application/json; charset=utf-8
 "SiteOwnerEmail": "",
 "StorageQuota": "27,487,790,694,400",
 "StorageQuota.": "27487790694400.0",
-"StorageUsed": "1,511,204",
-"StorageUsed.": "1511204.00000000",
+"StorageUsed": "1,528,598",
+"StorageUsed.": "1528598.00000000",
 "TemplateId": "64",
 "TemplateId.": "64",
 "TemplateName": "GROUP#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "11",
+"owshiddenversion": "12",
 "Restricted": ""
 }
 ,{
@@ -17048,14 +17048,14 @@ CONTENT-TYPE: application/json; charset=utf-8
 "SiteOwnerEmail": "",
 "StorageQuota": "27,487,790,694,400",
 "StorageQuota.": "27487790694400.0",
-"StorageUsed": "1,511,109",
-"StorageUsed.": "1511109.00000000",
+"StorageUsed": "1,528,495",
+"StorageUsed.": "1528495.00000000",
 "TemplateId": "64",
 "TemplateId.": "64",
 "TemplateName": "GROUP#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "11",
+"owshiddenversion": "12",
 "Restricted": ""
 }
 ,{
@@ -17090,14 +17090,14 @@ CONTENT-TYPE: application/json; charset=utf-8
 "SiteOwnerEmail": "",
 "StorageQuota": "27,487,790,694,400",
 "StorageQuota.": "27487790694400.0",
-"StorageUsed": "1,510,353",
-"StorageUsed.": "1510353.00000000",
+"StorageUsed": "1,527,742",
+"StorageUsed.": "1527742.00000000",
 "TemplateId": "64",
 "TemplateId.": "64",
 "TemplateName": "GROUP#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "10",
+"owshiddenversion": "11",
 "Restricted": ""
 }
 ,{
@@ -17132,14 +17132,14 @@ CONTENT-TYPE: application/json; charset=utf-8
 "SiteOwnerEmail": "",
 "StorageQuota": "27,487,790,694,400",
 "StorageQuota.": "27487790694400.0",
-"StorageUsed": "1,511,277",
-"StorageUsed.": "1511277.00000000",
+"StorageUsed": "1,528,663",
+"StorageUsed.": "1528663.00000000",
 "TemplateId": "64",
 "TemplateId.": "64",
 "TemplateName": "GROUP#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "11",
+"owshiddenversion": "12",
 "Restricted": ""
 }
 ,{
@@ -17174,14 +17174,14 @@ CONTENT-TYPE: application/json; charset=utf-8
 "SiteOwnerEmail": "",
 "StorageQuota": "27,487,790,694,400",
 "StorageQuota.": "27487790694400.0",
-"StorageUsed": "1,511,232",
-"StorageUsed.": "1511232.00000000",
+"StorageUsed": "1,528,621",
+"StorageUsed.": "1528621.00000000",
 "TemplateId": "64",
 "TemplateId.": "64",
 "TemplateName": "GROUP#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "12",
+"owshiddenversion": "13",
 "Restricted": ""
 }
 ,{
@@ -17216,14 +17216,14 @@ CONTENT-TYPE: application/json; charset=utf-8
 "SiteOwnerEmail": "",
 "StorageQuota": "27,487,790,694,400",
 "StorageQuota.": "27487790694400.0",
-"StorageUsed": "1,510,196",
-"StorageUsed.": "1510196.00000000",
+"StorageUsed": "1,527,587",
+"StorageUsed.": "1527587.00000000",
 "TemplateId": "64",
 "TemplateId.": "64",
 "TemplateName": "GROUP#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "11",
+"owshiddenversion": "12",
 "Restricted": ""
 }
 ,{
@@ -17258,14 +17258,14 @@ CONTENT-TYPE: application/json; charset=utf-8
 "SiteOwnerEmail": "",
 "StorageQuota": "27,487,790,694,400",
 "StorageQuota.": "27487790694400.0",
-"StorageUsed": "1,511,122",
-"StorageUsed.": "1511122.00000000",
+"StorageUsed": "1,528,493",
+"StorageUsed.": "1528493.00000000",
 "TemplateId": "64",
 "TemplateId.": "64",
 "TemplateName": "GROUP#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "9",
+"owshiddenversion": "10",
 "Restricted": ""
 }
 ,{
@@ -17300,14 +17300,14 @@ CONTENT-TYPE: application/json; charset=utf-8
 "SiteOwnerEmail": "",
 "StorageQuota": "27,487,790,694,400",
 "StorageQuota.": "27487790694400.0",
-"StorageUsed": "1,511,235",
-"StorageUsed.": "1511235.00000000",
+"StorageUsed": "1,528,622",
+"StorageUsed.": "1528622.00000000",
 "TemplateId": "64",
 "TemplateId.": "64",
 "TemplateName": "GROUP#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "11",
+"owshiddenversion": "12",
 "Restricted": ""
 }
 ,{
@@ -17342,14 +17342,14 @@ CONTENT-TYPE: application/json; charset=utf-8
 "SiteOwnerEmail": "bert.jansen@bertonline.onmicrosoft.com",
 "StorageQuota": "27,487,790,694,400",
 "StorageQuota.": "27487790694400.0",
-"StorageUsed": "1,555,534",
-"StorageUsed.": "1555534.00000000",
+"StorageUsed": "1,618,833",
+"StorageUsed.": "1618833.00000000",
 "TemplateId": "68",
 "TemplateId.": "68",
 "TemplateName": "SITEPAGEPUBLISHING#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "12",
+"owshiddenversion": "15",
 "Restricted": ""
 }
 ,{
@@ -17384,14 +17384,14 @@ CONTENT-TYPE: application/json; charset=utf-8
 "SiteOwnerEmail": "",
 "StorageQuota": "27,487,790,694,400",
 "StorageQuota.": "27487790694400.0",
-"StorageUsed": "1,510,154",
-"StorageUsed.": "1510154.00000000",
+"StorageUsed": "1,527,543",
+"StorageUsed.": "1527543.00000000",
 "TemplateId": "64",
 "TemplateId.": "64",
 "TemplateName": "GROUP#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "9",
+"owshiddenversion": "10",
 "Restricted": ""
 }
 ,{
@@ -17426,14 +17426,14 @@ CONTENT-TYPE: application/json; charset=utf-8
 "SiteOwnerEmail": "",
 "StorageQuota": "27,487,790,694,400",
 "StorageQuota.": "27487790694400.0",
-"StorageUsed": "1,510,168",
-"StorageUsed.": "1510168.00000000",
+"StorageUsed": "1,527,556",
+"StorageUsed.": "1527556.00000000",
 "TemplateId": "64",
 "TemplateId.": "64",
 "TemplateName": "GROUP#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "11",
+"owshiddenversion": "12",
 "Restricted": ""
 }
 ,{
@@ -17468,14 +17468,14 @@ CONTENT-TYPE: application/json; charset=utf-8
 "SiteOwnerEmail": "",
 "StorageQuota": "27,487,790,694,400",
 "StorageQuota.": "27487790694400.0",
-"StorageUsed": "1,511,207",
-"StorageUsed.": "1511207.00000000",
+"StorageUsed": "1,528,586",
+"StorageUsed.": "1528586.00000000",
 "TemplateId": "64",
 "TemplateId.": "64",
 "TemplateName": "GROUP#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "10",
+"owshiddenversion": "11",
 "Restricted": ""
 }
 ,{
@@ -17510,14 +17510,14 @@ CONTENT-TYPE: application/json; charset=utf-8
 "SiteOwnerEmail": "",
 "StorageQuota": "27,487,790,694,400",
 "StorageQuota.": "27487790694400.0",
-"StorageUsed": "1,511,163",
-"StorageUsed.": "1511163.00000000",
+"StorageUsed": "1,528,550",
+"StorageUsed.": "1528550.00000000",
 "TemplateId": "64",
 "TemplateId.": "64",
 "TemplateName": "GROUP#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "11",
+"owshiddenversion": "12",
 "Restricted": ""
 }
 ,{
@@ -17552,14 +17552,14 @@ CONTENT-TYPE: application/json; charset=utf-8
 "SiteOwnerEmail": "",
 "StorageQuota": "27,487,790,694,400",
 "StorageQuota.": "27487790694400.0",
-"StorageUsed": "1,510,231",
-"StorageUsed.": "1510231.00000000",
+"StorageUsed": "1,527,617",
+"StorageUsed.": "1527617.00000000",
 "TemplateId": "64",
 "TemplateId.": "64",
 "TemplateName": "GROUP#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "12",
+"owshiddenversion": "13",
 "Restricted": ""
 }
 ,{
@@ -17601,7 +17601,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "SITEPAGEPUBLISHING#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "12",
+"owshiddenversion": "13",
 "Restricted": ""
 }
 ,{
@@ -17636,14 +17636,14 @@ CONTENT-TYPE: application/json; charset=utf-8
 "SiteOwnerEmail": "bert.jansen@bertonline.onmicrosoft.com",
 "StorageQuota": "27,487,790,694,400",
 "StorageQuota.": "27487790694400.0",
-"StorageUsed": "34,009,117",
-"StorageUsed.": "34009117.0000000",
+"StorageUsed": "34,009,134",
+"StorageUsed.": "34009134.0000000",
 "TemplateId": "68",
 "TemplateId.": "68",
 "TemplateName": "SITEPAGEPUBLISHING#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "19",
+"owshiddenversion": "20",
 "Restricted": ""
 }
 ,{
@@ -17685,7 +17685,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "SITEPAGEPUBLISHING#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "12",
+"owshiddenversion": "13",
 "Restricted": ""
 }
 ,{
@@ -17727,7 +17727,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "SITEPAGEPUBLISHING#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "12",
+"owshiddenversion": "13",
 "Restricted": ""
 }
 ,{
@@ -17762,14 +17762,14 @@ CONTENT-TYPE: application/json; charset=utf-8
 "SiteOwnerEmail": "bert.jansen@bertonline.onmicrosoft.com",
 "StorageQuota": "27,487,790,694,400",
 "StorageQuota.": "27487790694400.0",
-"StorageUsed": "1,519,790",
-"StorageUsed.": "1519790.00000000",
+"StorageUsed": "1,537,162",
+"StorageUsed.": "1537162.00000000",
 "TemplateId": "68",
 "TemplateId.": "68",
 "TemplateName": "SITEPAGEPUBLISHING#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "9",
+"owshiddenversion": "10",
 "Restricted": ""
 }
 ,{
@@ -17804,14 +17804,14 @@ CONTENT-TYPE: application/json; charset=utf-8
 "SiteOwnerEmail": "bert.jansen@bertonline.onmicrosoft.com",
 "StorageQuota": "27,487,790,694,400",
 "StorageQuota.": "27487790694400.0",
-"StorageUsed": "2,226,941",
-"StorageUsed.": "2226941.00000000",
+"StorageUsed": "2,244,306",
+"StorageUsed.": "2244306.00000000",
 "TemplateId": "1",
 "TemplateId.": "1",
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "9",
+"owshiddenversion": "10",
 "Restricted": ""
 }
 ,{
@@ -17846,14 +17846,14 @@ CONTENT-TYPE: application/json; charset=utf-8
 "SiteOwnerEmail": "bert.jansen@bertonline.onmicrosoft.com",
 "StorageQuota": "27,487,790,694,400",
 "StorageQuota.": "27487790694400.0",
-"StorageUsed": "2,180,190",
-"StorageUsed.": "2180190.00000000",
+"StorageUsed": "2,197,563",
+"StorageUsed.": "2197563.00000000",
 "TemplateId": "1",
 "TemplateId.": "1",
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "9",
+"owshiddenversion": "10",
 "Restricted": ""
 }
 ,{
@@ -17888,14 +17888,14 @@ CONTENT-TYPE: application/json; charset=utf-8
 "SiteOwnerEmail": "bert.jansen@bertonline.onmicrosoft.com",
 "StorageQuota": "27,487,790,694,400",
 "StorageQuota.": "27487790694400.0",
-"StorageUsed": "168,514,449",
-"StorageUsed.": "168514449.000000",
+"StorageUsed": "168,531,822",
+"StorageUsed.": "168531822.000000",
 "TemplateId": "68",
 "TemplateId.": "68",
 "TemplateName": "SITEPAGEPUBLISHING#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "13",
+"owshiddenversion": "14",
 "Restricted": ""
 }
 ,{
@@ -17930,14 +17930,14 @@ CONTENT-TYPE: application/json; charset=utf-8
 "SiteOwnerEmail": "bert.jansen@bertonline.onmicrosoft.com",
 "StorageQuota": "27,487,790,694,400",
 "StorageQuota.": "27487790694400.0",
-"StorageUsed": "159,725,212",
-"StorageUsed.": "159725212.000000",
+"StorageUsed": "159,742,595",
+"StorageUsed.": "159742595.000000",
 "TemplateId": "68",
 "TemplateId.": "68",
 "TemplateName": "SITEPAGEPUBLISHING#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "13",
+"owshiddenversion": "14",
 "Restricted": ""
 }
 ,{
@@ -17972,14 +17972,14 @@ CONTENT-TYPE: application/json; charset=utf-8
 "SiteOwnerEmail": "bert.jansen@bertonline.onmicrosoft.com",
 "StorageQuota": "27,487,790,694,400",
 "StorageQuota.": "27487790694400.0",
-"StorageUsed": "161,217,537",
-"StorageUsed.": "161217537.000000",
+"StorageUsed": "161,234,919",
+"StorageUsed.": "161234919.000000",
 "TemplateId": "68",
 "TemplateId.": "68",
 "TemplateName": "SITEPAGEPUBLISHING#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "13",
+"owshiddenversion": "14",
 "Restricted": ""
 }
 ,{
@@ -18014,14 +18014,14 @@ CONTENT-TYPE: application/json; charset=utf-8
 "SiteOwnerEmail": "bert.jansen@bertonline.onmicrosoft.com",
 "StorageQuota": "27,487,790,694,400",
 "StorageQuota.": "27487790694400.0",
-"StorageUsed": "87,942,025",
-"StorageUsed.": "87942025.0000000",
+"StorageUsed": "87,959,405",
+"StorageUsed.": "87959405.0000000",
 "TemplateId": "68",
 "TemplateId.": "68",
 "TemplateName": "SITEPAGEPUBLISHING#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "11",
+"owshiddenversion": "12",
 "Restricted": ""
 }
 ,{
@@ -18056,14 +18056,14 @@ CONTENT-TYPE: application/json; charset=utf-8
 "SiteOwnerEmail": "bert.jansen@bertonline.onmicrosoft.com",
 "StorageQuota": "27,487,790,694,400",
 "StorageQuota.": "27487790694400.0",
-"StorageUsed": "7,801,102",
-"StorageUsed.": "7801102.00000000",
+"StorageUsed": "7,818,478",
+"StorageUsed.": "7818478.00000000",
 "TemplateId": "68",
 "TemplateId.": "68",
 "TemplateName": "SITEPAGEPUBLISHING#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "12",
+"owshiddenversion": "13",
 "Restricted": ""
 }
 ,{
@@ -18098,14 +18098,14 @@ CONTENT-TYPE: application/json; charset=utf-8
 "SiteOwnerEmail": "bert.jansen@bertonline.onmicrosoft.com",
 "StorageQuota": "27,487,790,694,400",
 "StorageQuota.": "27487790694400.0",
-"StorageUsed": "85,108,952",
-"StorageUsed.": "85108952.0000000",
+"StorageUsed": "85,126,342",
+"StorageUsed.": "85126342.0000000",
 "TemplateId": "68",
 "TemplateId.": "68",
 "TemplateName": "SITEPAGEPUBLISHING#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "12",
+"owshiddenversion": "13",
 "Restricted": ""
 }
 ,{
@@ -18140,14 +18140,14 @@ CONTENT-TYPE: application/json; charset=utf-8
 "SiteOwnerEmail": "bert.jansen@bertonline.onmicrosoft.com",
 "StorageQuota": "27,487,790,694,400",
 "StorageQuota.": "27487790694400.0",
-"StorageUsed": "85,110,769",
-"StorageUsed.": "85110769.0000000",
+"StorageUsed": "85,128,148",
+"StorageUsed.": "85128148.0000000",
 "TemplateId": "68",
 "TemplateId.": "68",
 "TemplateName": "SITEPAGEPUBLISHING#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "13",
+"owshiddenversion": "14",
 "Restricted": ""
 }
 ,{
@@ -18182,14 +18182,14 @@ CONTENT-TYPE: application/json; charset=utf-8
 "SiteOwnerEmail": "bert.jansen@bertonline.onmicrosoft.com",
 "StorageQuota": "27,487,790,694,400",
 "StorageQuota.": "27487790694400.0",
-"StorageUsed": "31,368,899",
-"StorageUsed.": "31368899.0000000",
+"StorageUsed": "31,386,296",
+"StorageUsed.": "31386296.0000000",
 "TemplateId": "68",
 "TemplateId.": "68",
 "TemplateName": "SITEPAGEPUBLISHING#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "15",
+"owshiddenversion": "16",
 "Restricted": ""
 }
 ,{
@@ -18224,14 +18224,14 @@ CONTENT-TYPE: application/json; charset=utf-8
 "SiteOwnerEmail": "bert.jansen@bertonline.onmicrosoft.com",
 "StorageQuota": "27,487,790,694,400",
 "StorageQuota.": "27487790694400.0",
-"StorageUsed": "85,476,747",
-"StorageUsed.": "85476747.0000000",
+"StorageUsed": "85,494,128",
+"StorageUsed.": "85494128.0000000",
 "TemplateId": "68",
 "TemplateId.": "68",
 "TemplateName": "SITEPAGEPUBLISHING#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "12",
+"owshiddenversion": "13",
 "Restricted": ""
 }
 ,{
@@ -18266,14 +18266,14 @@ CONTENT-TYPE: application/json; charset=utf-8
 "SiteOwnerEmail": "bert.jansen@bertonline.onmicrosoft.com",
 "StorageQuota": "27,487,790,694,400",
 "StorageQuota.": "27487790694400.0",
-"StorageUsed": "83,528,053",
-"StorageUsed.": "83528053.0000000",
+"StorageUsed": "83,545,434",
+"StorageUsed.": "83545434.0000000",
 "TemplateId": "68",
 "TemplateId.": "68",
 "TemplateName": "SITEPAGEPUBLISHING#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "11",
+"owshiddenversion": "12",
 "Restricted": ""
 }
 ,{
@@ -18308,14 +18308,14 @@ CONTENT-TYPE: application/json; charset=utf-8
 "SiteOwnerEmail": "bert.jansen@bertonline.onmicrosoft.com",
 "StorageQuota": "27,487,790,694,400",
 "StorageQuota.": "27487790694400.0",
-"StorageUsed": "85,161,526",
-"StorageUsed.": "85161526.0000000",
+"StorageUsed": "85,178,913",
+"StorageUsed.": "85178913.0000000",
 "TemplateId": "68",
 "TemplateId.": "68",
 "TemplateName": "SITEPAGEPUBLISHING#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "11",
+"owshiddenversion": "12",
 "Restricted": ""
 }
 ,{
@@ -18350,14 +18350,14 @@ CONTENT-TYPE: application/json; charset=utf-8
 "SiteOwnerEmail": "bert.jansen@bertonline.onmicrosoft.com",
 "StorageQuota": "27,487,790,694,400",
 "StorageQuota.": "27487790694400.0",
-"StorageUsed": "85,193,015",
-"StorageUsed.": "85193015.0000000",
+"StorageUsed": "85,210,408",
+"StorageUsed.": "85210408.0000000",
 "TemplateId": "68",
 "TemplateId.": "68",
 "TemplateName": "SITEPAGEPUBLISHING#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "12",
+"owshiddenversion": "13",
 "Restricted": ""
 }
 ,{
@@ -18392,14 +18392,14 @@ CONTENT-TYPE: application/json; charset=utf-8
 "SiteOwnerEmail": "bert.jansen@bertonline.onmicrosoft.com",
 "StorageQuota": "27,487,790,694,400",
 "StorageQuota.": "27487790694400.0",
-"StorageUsed": "87,415,582",
-"StorageUsed.": "87415582.0000000",
+"StorageUsed": "87,445,316",
+"StorageUsed.": "87445316.0000000",
 "TemplateId": "68",
 "TemplateId.": "68",
 "TemplateName": "SITEPAGEPUBLISHING#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "11",
+"owshiddenversion": "12",
 "Restricted": ""
 }
 ,{
@@ -18434,14 +18434,14 @@ CONTENT-TYPE: application/json; charset=utf-8
 "SiteOwnerEmail": "bert.jansen@bertonline.onmicrosoft.com",
 "StorageQuota": "27,487,790,694,400",
 "StorageQuota.": "27487790694400.0",
-"StorageUsed": "15,559,943",
-"StorageUsed.": "15559943.0000000",
+"StorageUsed": "14,337,750",
+"StorageUsed.": "14337750.0000000",
 "TemplateId": "6001",
 "TemplateId.": "6001",
 "TemplateName": "CONTENTCTR#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "36",
+"owshiddenversion": "51",
 "Restricted": ""
 }
 ,{
@@ -18476,14 +18476,14 @@ CONTENT-TYPE: application/json; charset=utf-8
 "SiteOwnerEmail": "bert.jansen@bertonline.onmicrosoft.com",
 "StorageQuota": "27,487,790,694,400",
 "StorageQuota.": "27487790694400.0",
-"StorageUsed": "1,576,789",
-"StorageUsed.": "1576789.00000000",
+"StorageUsed": "1,581,529",
+"StorageUsed.": "1581529.00000000",
 "TemplateId": "6001",
 "TemplateId.": "6001",
 "TemplateName": "CONTENTCTR#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "34",
+"owshiddenversion": "35",
 "Restricted": ""
 }
 ,{
@@ -18525,7 +18525,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "SITEPAGEPUBLISHING#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "11",
+"owshiddenversion": "12",
 "Restricted": ""
 }
 ,{
@@ -18567,7 +18567,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "SITEPAGEPUBLISHING#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "12",
+"owshiddenversion": "13",
 "Restricted": ""
 }
 ,{
@@ -18609,7 +18609,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "9",
+"owshiddenversion": "10",
 "Restricted": ""
 }
 ,{
@@ -18651,7 +18651,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "STS#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "9",
+"owshiddenversion": "10",
 "Restricted": ""
 }
 ,{
@@ -18693,7 +18693,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "TemplateName": "SITEPAGEPUBLISHING#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "9",
+"owshiddenversion": "10",
 "Restricted": ""
 }
 ,{
@@ -18728,14 +18728,14 @@ CONTENT-TYPE: application/json; charset=utf-8
 "SiteOwnerEmail": "",
 "StorageQuota": "27,487,790,694,400",
 "StorageQuota.": "27487790694400.0",
-"StorageUsed": "36,086,767",
-"StorageUsed.": "36086767.0000000",
+"StorageUsed": "36,104,487",
+"StorageUsed.": "36104487.0000000",
 "TemplateId": "64",
 "TemplateId.": "64",
 "TemplateName": "GROUP#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "15",
+"owshiddenversion": "16",
 "Restricted": ""
 }
 ,{
@@ -18770,14 +18770,14 @@ CONTENT-TYPE: application/json; charset=utf-8
 "SiteOwnerEmail": "bert.jansen@bertonline.onmicrosoft.com",
 "StorageQuota": "27,487,790,694,400",
 "StorageQuota.": "27487790694400.0",
-"StorageUsed": "35,674,617",
-"StorageUsed.": "35674617.0000000",
+"StorageUsed": "35,692,328",
+"StorageUsed.": "35692328.0000000",
 "TemplateId": "6001",
 "TemplateId.": "6001",
 "TemplateName": "CONTENTCTR#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "19",
+"owshiddenversion": "20",
 "Restricted": ""
 }
 ,{
@@ -18812,14 +18812,14 @@ CONTENT-TYPE: application/json; charset=utf-8
 "SiteOwnerEmail": "bert.jansen@bertonline.onmicrosoft.com",
 "StorageQuota": "27,487,790,694,400",
 "StorageQuota.": "27487790694400.0",
-"StorageUsed": "21,703,819",
-"StorageUsed.": "21703819.0000000",
+"StorageUsed": "21,721,703",
+"StorageUsed.": "21721703.0000000",
 "TemplateId": "6001",
 "TemplateId.": "6001",
 "TemplateName": "CONTENTCTR#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "18",
+"owshiddenversion": "19",
 "Restricted": ""
 }
 ,{
@@ -18854,14 +18854,14 @@ CONTENT-TYPE: application/json; charset=utf-8
 "SiteOwnerEmail": "bert.jansen@bertonline.onmicrosoft.com",
 "StorageQuota": "27,487,790,694,400",
 "StorageQuota.": "27487790694400.0",
-"StorageUsed": "1,590,262",
-"StorageUsed.": "1590262.00000000",
+"StorageUsed": "1,607,968",
+"StorageUsed.": "1607968.00000000",
 "TemplateId": "68",
 "TemplateId.": "68",
 "TemplateName": "SITEPAGEPUBLISHING#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "13",
+"owshiddenversion": "14",
 "Restricted": ""
 }
 ,{
@@ -18896,14 +18896,14 @@ CONTENT-TYPE: application/json; charset=utf-8
 "SiteOwnerEmail": "bert.jansen@bertonline.onmicrosoft.com",
 "StorageQuota": "27,487,790,694,400",
 "StorageQuota.": "27487790694400.0",
-"StorageUsed": "1,535,080",
-"StorageUsed.": "1535080.00000000",
+"StorageUsed": "1,528,871",
+"StorageUsed.": "1528871.00000000",
 "TemplateId": "68",
 "TemplateId.": "68",
 "TemplateName": "SITEPAGEPUBLISHING#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "10",
+"owshiddenversion": "11",
 "Restricted": ""
 }
 ,{
@@ -18938,19 +18938,397 @@ CONTENT-TYPE: application/json; charset=utf-8
 "SiteOwnerEmail": "bert.jansen@bertonline.onmicrosoft.com",
 "StorageQuota": "27,487,790,694,400",
 "StorageQuota.": "27487790694400.0",
-"StorageUsed": "1,465,141",
-"StorageUsed.": "1465141.00000000",
+"StorageUsed": "1,478,029",
+"StorageUsed.": "1478029.00000000",
 "TemplateId": "68",
 "TemplateId.": "68",
 "TemplateName": "SITEPAGEPUBLISHING#0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
-"owshiddenversion": "6",
+"owshiddenversion": "9",
+"Restricted": ""
+}
+,{
+"ID": "17290",
+"PermMask": "0x7ffffffffffbffff",
+"FSObjType": "0",
+"UniqueId": "{93C6D517-A30A-4645-9BF2-F0CD6B6A6587}",
+"ContentTypeId": "0x0100D52197E062CF8649B7C913157263CCAD",
+"FileRef": "\u002fLists\u002fDO_NOT_DELETE_SPLIST_TENANTADMIN_ALL_SITES_AGGREGA\u002f17290_.000",
+"FileRef.urlencode": "%2FLists%2FDO%5FNOT%5FDELETE%5FSPLIST%5FTENANTADMIN%5FALL%5FSITES%5FAGGREGA%2F17290%5F%2E000",
+"FileRef.urlencodeasurl": "\u002fLists\u002fDO_NOT_DELETE_SPLIST_TENANTADMIN_ALL_SITES_AGGREGA\u002f17290_.000",
+"FileRef.urlencoding": "\u002fLists\u002fDO_NOT_DELETE_SPLIST_TENANTADMIN_ALL_SITES_AGGREGA\u002f17290_.000",
+"FileRef.scriptencodeasurl": "\\u002fLists\\u002fDO_NOT_DELETE_SPLIST_TENANTADMIN_ALL_SITES_AGGREGA\\u002f17290_.000",
+"Attachments": "0",
+"SMTotalSize": "648",
+"_CommentFlags": "",
+"_CommentCount": "",
+"SiteUrl": "https:\u002f\u002fbertonline.sharepoint.com\u002fsites\u002fTestO\u00dc",
+"Title": "Special chars",
+"SiteId": "{C47D77D8-1868-464F-88D0-E3E479E625B6}",
+"RootWebId": "{033D7C83-9D92-413C-BB29-3DFBA7481373}",
+"CreatedBy": "Bert Jansen (Cloud)",
+"TimeCreated": "9\u002f27\u002f2021 10:05 AM",
+"TimeCreated.": "2021-09-27T17:05:42Z",
+"TimeDeleted": "",
+"TimeDeleted.": "",
+"ShareByEmailEnabled": "No",
+"ShareByEmailEnabled.value": "0",
+"ShareByLinkEnabled": "No",
+"ShareByLinkEnabled.value": "0",
+"SiteOwnerName": "Bert Jansen (Cloud)",
+"SiteOwnerEmail": "bert.jansen@bertonline.onmicrosoft.com",
+"StorageQuota": "27,487,790,694,400",
+"StorageQuota.": "27487790694400.0",
+"StorageUsed": "2,170,604",
+"StorageUsed.": "2170604.00000000",
+"TemplateId": "1",
+"TemplateId.": "1",
+"TemplateName": "STS#0",
+"ItemChildCount": "0",
+"FolderChildCount": "0",
+"owshiddenversion": "9",
+"Restricted": ""
+}
+,{
+"ID": "17291",
+"PermMask": "0x7ffffffffffbffff",
+"FSObjType": "0",
+"UniqueId": "{18D736E2-7FBF-4400-AF2E-E36D9BFBCE31}",
+"ContentTypeId": "0x0100D52197E062CF8649B7C913157263CCAD",
+"FileRef": "\u002fLists\u002fDO_NOT_DELETE_SPLIST_TENANTADMIN_ALL_SITES_AGGREGA\u002f17291_.000",
+"FileRef.urlencode": "%2FLists%2FDO%5FNOT%5FDELETE%5FSPLIST%5FTENANTADMIN%5FALL%5FSITES%5FAGGREGA%2F17291%5F%2E000",
+"FileRef.urlencodeasurl": "\u002fLists\u002fDO_NOT_DELETE_SPLIST_TENANTADMIN_ALL_SITES_AGGREGA\u002f17291_.000",
+"FileRef.urlencoding": "\u002fLists\u002fDO_NOT_DELETE_SPLIST_TENANTADMIN_ALL_SITES_AGGREGA\u002f17291_.000",
+"FileRef.scriptencodeasurl": "\\u002fLists\\u002fDO_NOT_DELETE_SPLIST_TENANTADMIN_ALL_SITES_AGGREGA\\u002f17291_.000",
+"Attachments": "0",
+"SMTotalSize": "736",
+"_CommentFlags": "",
+"_CommentCount": "",
+"SiteUrl": "https:\u002f\u002fbertonline.sharepoint.com\u002fsites\u002fpnpcoresdktestcommsite1",
+"Title": "PnP Core SDK Test",
+"SiteId": "{DD2F377D-F2B0-4697-88D3-88F8FBAB815D}",
+"RootWebId": "{2A12E959-4B17-4181-86C9-12769C1A6F59}",
+"CreatedBy": "Bert Jansen (Cloud)",
+"TimeCreated": "9\u002f30\u002f2021 10:47 AM",
+"TimeCreated.": "2021-09-30T17:47:03Z",
+"TimeDeleted": "9\u002f30\u002f2021 10:52 AM",
+"TimeDeleted.": "2021-09-30T17:52:28Z",
+"ShareByEmailEnabled": "No",
+"ShareByEmailEnabled.value": "0",
+"ShareByLinkEnabled": "No",
+"ShareByLinkEnabled.value": "0",
+"SiteOwnerName": "Bert Jansen (Cloud)",
+"SiteOwnerEmail": "bert.jansen@bertonline.onmicrosoft.com",
+"StorageQuota": "1,099,511,627,776",
+"StorageQuota.": "1099511627776.00",
+"StorageUsed": "1,446,685",
+"StorageUsed.": "1446685.00000000",
+"TemplateId": "68",
+"TemplateId.": "68",
+"TemplateName": "SITEPAGEPUBLISHING#0",
+"ItemChildCount": "0",
+"FolderChildCount": "0",
+"owshiddenversion": "26",
+"Restricted": ""
+}
+,{
+"ID": "17292",
+"PermMask": "0x7ffffffffffbffff",
+"FSObjType": "0",
+"UniqueId": "{D9C52B6B-0C96-4805-BFC0-ED874827E542}",
+"ContentTypeId": "0x0100D52197E062CF8649B7C913157263CCAD",
+"FileRef": "\u002fLists\u002fDO_NOT_DELETE_SPLIST_TENANTADMIN_ALL_SITES_AGGREGA\u002f17292_.000",
+"FileRef.urlencode": "%2FLists%2FDO%5FNOT%5FDELETE%5FSPLIST%5FTENANTADMIN%5FALL%5FSITES%5FAGGREGA%2F17292%5F%2E000",
+"FileRef.urlencodeasurl": "\u002fLists\u002fDO_NOT_DELETE_SPLIST_TENANTADMIN_ALL_SITES_AGGREGA\u002f17292_.000",
+"FileRef.urlencoding": "\u002fLists\u002fDO_NOT_DELETE_SPLIST_TENANTADMIN_ALL_SITES_AGGREGA\u002f17292_.000",
+"FileRef.scriptencodeasurl": "\\u002fLists\\u002fDO_NOT_DELETE_SPLIST_TENANTADMIN_ALL_SITES_AGGREGA\\u002f17292_.000",
+"Attachments": "0",
+"SMTotalSize": "798",
+"_CommentFlags": "",
+"_CommentCount": "",
+"SiteUrl": "https:\u002f\u002fbertonline.sharepoint.com\u002fsites\u002fpnpcoresdktestcommsitedf6553f83cec42c99cb955e9b82ee15b",
+"Title": "PnP Core SDK Test",
+"SiteId": "{9A27FAFE-813C-4F0D-B1CB-1816E081EEF1}",
+"RootWebId": "{2A12E959-4B17-4181-86C9-12769C1A6F59}",
+"CreatedBy": "Bert Jansen (Cloud)",
+"TimeCreated": "10\u002f1\u002f2021 12:58 AM",
+"TimeCreated.": "2021-10-01T07:58:32Z",
+"TimeDeleted": "10\u002f1\u002f2021 1:24 AM",
+"TimeDeleted.": "2021-10-01T08:24:15Z",
+"ShareByEmailEnabled": "No",
+"ShareByEmailEnabled.value": "0",
+"ShareByLinkEnabled": "No",
+"ShareByLinkEnabled.value": "0",
+"SiteOwnerName": "Bert Jansen (Cloud)",
+"SiteOwnerEmail": "bert.jansen@bertonline.onmicrosoft.com",
+"StorageQuota": "1,099,511,627,776",
+"StorageQuota.": "1099511627776.00",
+"StorageUsed": "1,443,709",
+"StorageUsed.": "1443709.00000000",
+"TemplateId": "68",
+"TemplateId.": "68",
+"TemplateName": "SITEPAGEPUBLISHING#0",
+"ItemChildCount": "0",
+"FolderChildCount": "0",
+"owshiddenversion": "5",
+"Restricted": ""
+}
+,{
+"ID": "17293",
+"PermMask": "0x7ffffffffffbffff",
+"FSObjType": "0",
+"UniqueId": "{8AC8093C-5ACE-41A6-AA8C-169DE5C748CA}",
+"ContentTypeId": "0x0100D52197E062CF8649B7C913157263CCAD",
+"FileRef": "\u002fLists\u002fDO_NOT_DELETE_SPLIST_TENANTADMIN_ALL_SITES_AGGREGA\u002f17293_.000",
+"FileRef.urlencode": "%2FLists%2FDO%5FNOT%5FDELETE%5FSPLIST%5FTENANTADMIN%5FALL%5FSITES%5FAGGREGA%2F17293%5F%2E000",
+"FileRef.urlencodeasurl": "\u002fLists\u002fDO_NOT_DELETE_SPLIST_TENANTADMIN_ALL_SITES_AGGREGA\u002f17293_.000",
+"FileRef.urlencoding": "\u002fLists\u002fDO_NOT_DELETE_SPLIST_TENANTADMIN_ALL_SITES_AGGREGA\u002f17293_.000",
+"FileRef.scriptencodeasurl": "\\u002fLists\\u002fDO_NOT_DELETE_SPLIST_TENANTADMIN_ALL_SITES_AGGREGA\\u002f17293_.000",
+"Attachments": "0",
+"SMTotalSize": "658",
+"_CommentFlags": "",
+"_CommentCount": "",
+"SiteUrl": "https:\u002f\u002fbertonline.sharepoint.com\u002fsites\u002fpnpcoresdktestteamsitebcbe96918efb",
+"Title": "PnP Core SDK Test",
+"SiteId": "{9575E816-572C-46B0-8B0A-40554361EB6A}",
+"RootWebId": "{2C99A486-D6C9-4A4B-8D6F-A9FAA364C92C}",
+"CreatedBy": "PnP Core SDK Test Owners",
+"TimeCreated": "10\u002f3\u002f2021 1:42 AM",
+"TimeCreated.": "2021-10-03T08:42:37Z",
+"TimeDeleted": "",
+"TimeDeleted.": "",
+"ShareByEmailEnabled": "Yes",
+"ShareByEmailEnabled.value": "1",
+"ShareByLinkEnabled": "No",
+"ShareByLinkEnabled.value": "0",
+"SiteOwnerName": "",
+"SiteOwnerEmail": "",
+"StorageQuota": "27,487,790,694,400",
+"StorageQuota.": "27487790694400.0",
+"StorageUsed": "1,462,987",
+"StorageUsed.": "1462987.00000000",
+"TemplateId": "64",
+"TemplateId.": "64",
+"TemplateName": "GROUP#0",
+"ItemChildCount": "0",
+"FolderChildCount": "0",
+"owshiddenversion": "8",
+"Restricted": ""
+}
+,{
+"ID": "17294",
+"PermMask": "0x7ffffffffffbffff",
+"FSObjType": "0",
+"UniqueId": "{E754068A-EE34-4647-8DF8-546A29209CA0}",
+"ContentTypeId": "0x0100D52197E062CF8649B7C913157263CCAD",
+"FileRef": "\u002fLists\u002fDO_NOT_DELETE_SPLIST_TENANTADMIN_ALL_SITES_AGGREGA\u002f17294_.000",
+"FileRef.urlencode": "%2FLists%2FDO%5FNOT%5FDELETE%5FSPLIST%5FTENANTADMIN%5FALL%5FSITES%5FAGGREGA%2F17294%5F%2E000",
+"FileRef.urlencodeasurl": "\u002fLists\u002fDO_NOT_DELETE_SPLIST_TENANTADMIN_ALL_SITES_AGGREGA\u002f17294_.000",
+"FileRef.urlencoding": "\u002fLists\u002fDO_NOT_DELETE_SPLIST_TENANTADMIN_ALL_SITES_AGGREGA\u002f17294_.000",
+"FileRef.scriptencodeasurl": "\\u002fLists\\u002fDO_NOT_DELETE_SPLIST_TENANTADMIN_ALL_SITES_AGGREGA\\u002f17294_.000",
+"Attachments": "0",
+"SMTotalSize": "766",
+"_CommentFlags": "",
+"_CommentCount": "",
+"SiteUrl": "https:\u002f\u002fbertonline.sharepoint.com\u002fsites\u002fpnpcoresdktestteamsite30023edb2a4e44d383a4303639df3ad0",
+"Title": "PnP Core SDK Test",
+"SiteId": "{CD9539E3-FC8F-4C0C-A5E8-AF5DFCFEC8D2}",
+"RootWebId": "{2C99A486-D6C9-4A4B-8D6F-A9FAA364C92C}",
+"CreatedBy": "PnP Core SDK Test Owners",
+"TimeCreated": "10\u002f3\u002f2021 2:22 AM",
+"TimeCreated.": "2021-10-03T09:22:39Z",
+"TimeDeleted": "",
+"TimeDeleted.": "",
+"ShareByEmailEnabled": "Yes",
+"ShareByEmailEnabled.value": "1",
+"ShareByLinkEnabled": "No",
+"ShareByLinkEnabled.value": "0",
+"SiteOwnerName": "",
+"SiteOwnerEmail": "",
+"StorageQuota": "27,487,790,694,400",
+"StorageQuota.": "27487790694400.0",
+"StorageUsed": "1,531,243",
+"StorageUsed.": "1531243.00000000",
+"TemplateId": "64",
+"TemplateId.": "64",
+"TemplateName": "GROUP#0",
+"ItemChildCount": "0",
+"FolderChildCount": "0",
+"owshiddenversion": "5",
+"Restricted": ""
+}
+,{
+"ID": "17295",
+"PermMask": "0x7ffffffffffbffff",
+"FSObjType": "0",
+"UniqueId": "{12A38E0A-15A8-4520-A589-4B1FD33A2FE9}",
+"ContentTypeId": "0x0100D52197E062CF8649B7C913157263CCAD",
+"FileRef": "\u002fLists\u002fDO_NOT_DELETE_SPLIST_TENANTADMIN_ALL_SITES_AGGREGA\u002f17295_.000",
+"FileRef.urlencode": "%2FLists%2FDO%5FNOT%5FDELETE%5FSPLIST%5FTENANTADMIN%5FALL%5FSITES%5FAGGREGA%2F17295%5F%2E000",
+"FileRef.urlencodeasurl": "\u002fLists\u002fDO_NOT_DELETE_SPLIST_TENANTADMIN_ALL_SITES_AGGREGA\u002f17295_.000",
+"FileRef.urlencoding": "\u002fLists\u002fDO_NOT_DELETE_SPLIST_TENANTADMIN_ALL_SITES_AGGREGA\u002f17295_.000",
+"FileRef.scriptencodeasurl": "\\u002fLists\\u002fDO_NOT_DELETE_SPLIST_TENANTADMIN_ALL_SITES_AGGREGA\\u002f17295_.000",
+"Attachments": "0",
+"SMTotalSize": "502",
+"_CommentFlags": "",
+"_CommentCount": "",
+"SiteUrl": "https:\u002f\u002fbertonline.sharepoint.com\u002fsites\u002fprov-2",
+"Title": "prov-2",
+"SiteId": "{F92F9E40-1110-43EF-AA0E-0822E13FB7BA}",
+"RootWebId": "{2C99A486-D6C9-4A4B-8D6F-A9FAA364C92C}",
+"CreatedBy": "prov-2 Owners",
+"TimeCreated": "10\u002f4\u002f2021 12:41 AM",
+"TimeCreated.": "2021-10-04T07:41:04Z",
+"TimeDeleted": "",
+"TimeDeleted.": "",
+"ShareByEmailEnabled": "Yes",
+"ShareByEmailEnabled.value": "1",
+"ShareByLinkEnabled": "No",
+"ShareByLinkEnabled.value": "0",
+"SiteOwnerName": "",
+"SiteOwnerEmail": "",
+"StorageQuota": "27,487,790,694,400",
+"StorageQuota.": "27487790694400.0",
+"StorageUsed": "1,631,046",
+"StorageUsed.": "1631046.00000000",
+"TemplateId": "64",
+"TemplateId.": "64",
+"TemplateName": "GROUP#0",
+"ItemChildCount": "0",
+"FolderChildCount": "0",
+"owshiddenversion": "247",
+"Restricted": ""
+}
+,{
+"ID": "17296",
+"PermMask": "0x7ffffffffffbffff",
+"FSObjType": "0",
+"UniqueId": "{FD8673EF-7AE3-4AD1-BD1C-05E00BD4C05A}",
+"ContentTypeId": "0x0100D52197E062CF8649B7C913157263CCAD",
+"FileRef": "\u002fLists\u002fDO_NOT_DELETE_SPLIST_TENANTADMIN_ALL_SITES_AGGREGA\u002f17296_.000",
+"FileRef.urlencode": "%2FLists%2FDO%5FNOT%5FDELETE%5FSPLIST%5FTENANTADMIN%5FALL%5FSITES%5FAGGREGA%2F17296%5F%2E000",
+"FileRef.urlencodeasurl": "\u002fLists\u002fDO_NOT_DELETE_SPLIST_TENANTADMIN_ALL_SITES_AGGREGA\u002f17296_.000",
+"FileRef.urlencoding": "\u002fLists\u002fDO_NOT_DELETE_SPLIST_TENANTADMIN_ALL_SITES_AGGREGA\u002f17296_.000",
+"FileRef.scriptencodeasurl": "\\u002fLists\\u002fDO_NOT_DELETE_SPLIST_TENANTADMIN_ALL_SITES_AGGREGA\\u002f17296_.000",
+"Attachments": "0",
+"SMTotalSize": "826",
+"_CommentFlags": "",
+"_CommentCount": "",
+"SiteUrl": "https:\u002f\u002fbertonline.sharepoint.com\u002fsites\u002fpnpcoresdktestcommsite2a487e51cdb14670b81601a1e817e305",
+"Title": "PnP Core SDK Test",
+"SiteId": "{54CA4612-4518-4BD3-B330-0F882BF6C171}",
+"RootWebId": "{2A12E959-4B17-4181-86C9-12769C1A6F59}",
+"CreatedBy": "Bert Jansen (Cloud)",
+"TimeCreated": "10\u002f5\u002f2021 6:01 AM",
+"TimeCreated.": "2021-10-05T13:01:08Z",
+"TimeDeleted": "10\u002f5\u002f2021 6:03 AM",
+"TimeDeleted.": "2021-10-05T13:03:30Z",
+"ShareByEmailEnabled": "No",
+"ShareByEmailEnabled.value": "0",
+"ShareByLinkEnabled": "No",
+"ShareByLinkEnabled.value": "0",
+"SiteOwnerName": "Bert Jansen (Cloud)",
+"SiteOwnerEmail": "bert.jansen@bertonline.onmicrosoft.com",
+"StorageQuota": "1,099,511,627,776",
+"StorageQuota.": "1099511627776.00",
+"StorageUsed": "1,443,012",
+"StorageUsed.": "1443012.00000000",
+"TemplateId": "68",
+"TemplateId.": "68",
+"TemplateName": "SITEPAGEPUBLISHING#0",
+"ItemChildCount": "0",
+"FolderChildCount": "0",
+"owshiddenversion": "5",
+"Restricted": ""
+}
+,{
+"ID": "17297",
+"PermMask": "0x7ffffffffffbffff",
+"FSObjType": "0",
+"UniqueId": "{DAB5FA50-C76F-4C58-A77D-1686D6F39229}",
+"ContentTypeId": "0x0100D52197E062CF8649B7C913157263CCAD",
+"FileRef": "\u002fLists\u002fDO_NOT_DELETE_SPLIST_TENANTADMIN_ALL_SITES_AGGREGA\u002f17297_.000",
+"FileRef.urlencode": "%2FLists%2FDO%5FNOT%5FDELETE%5FSPLIST%5FTENANTADMIN%5FALL%5FSITES%5FAGGREGA%2F17297%5F%2E000",
+"FileRef.urlencodeasurl": "\u002fLists\u002fDO_NOT_DELETE_SPLIST_TENANTADMIN_ALL_SITES_AGGREGA\u002f17297_.000",
+"FileRef.urlencoding": "\u002fLists\u002fDO_NOT_DELETE_SPLIST_TENANTADMIN_ALL_SITES_AGGREGA\u002f17297_.000",
+"FileRef.scriptencodeasurl": "\\u002fLists\\u002fDO_NOT_DELETE_SPLIST_TENANTADMIN_ALL_SITES_AGGREGA\\u002f17297_.000",
+"Attachments": "0",
+"SMTotalSize": "782",
+"_CommentFlags": "",
+"_CommentCount": "",
+"SiteUrl": "https:\u002f\u002fbertonline.sharepoint.com\u002fsites\u002fpnpcoresdktestteamsiteceb5218aed74441b938fd5b42223f465",
+"Title": "PnP Core SDK Test",
+"SiteId": "{B8FA7CC3-9B3F-40CD-9B54-91B364486068}",
+"RootWebId": "{2C99A486-D6C9-4A4B-8D6F-A9FAA364C92C}",
+"CreatedBy": "PnP Core SDK Test Owners",
+"TimeCreated": "10\u002f5\u002f2021 6:11 AM",
+"TimeCreated.": "2021-10-05T13:11:03Z",
+"TimeDeleted": "10\u002f5\u002f2021 6:12 AM",
+"TimeDeleted.": "2021-10-05T13:12:43Z",
+"ShareByEmailEnabled": "Yes",
+"ShareByEmailEnabled.value": "1",
+"ShareByLinkEnabled": "No",
+"ShareByLinkEnabled.value": "0",
+"SiteOwnerName": "",
+"SiteOwnerEmail": "",
+"StorageQuota": "1,099,511,627,776",
+"StorageQuota.": "1099511627776.00",
+"StorageUsed": "1,440,377",
+"StorageUsed.": "1440377.00000000",
+"TemplateId": "64",
+"TemplateId.": "64",
+"TemplateName": "GROUP#0",
+"ItemChildCount": "0",
+"FolderChildCount": "0",
+"owshiddenversion": "4",
+"Restricted": ""
+}
+,{
+"ID": "17298",
+"PermMask": "0x7ffffffffffbffff",
+"FSObjType": "0",
+"UniqueId": "{4B8E801A-AEE4-4EFB-8553-E06EDFF66FDD}",
+"ContentTypeId": "0x0100D52197E062CF8649B7C913157263CCAD",
+"FileRef": "\u002fLists\u002fDO_NOT_DELETE_SPLIST_TENANTADMIN_ALL_SITES_AGGREGA\u002f17298_.000",
+"FileRef.urlencode": "%2FLists%2FDO%5FNOT%5FDELETE%5FSPLIST%5FTENANTADMIN%5FALL%5FSITES%5FAGGREGA%2F17298%5F%2E000",
+"FileRef.urlencodeasurl": "\u002fLists\u002fDO_NOT_DELETE_SPLIST_TENANTADMIN_ALL_SITES_AGGREGA\u002f17298_.000",
+"FileRef.urlencoding": "\u002fLists\u002fDO_NOT_DELETE_SPLIST_TENANTADMIN_ALL_SITES_AGGREGA\u002f17298_.000",
+"FileRef.scriptencodeasurl": "\\u002fLists\\u002fDO_NOT_DELETE_SPLIST_TENANTADMIN_ALL_SITES_AGGREGA\\u002f17298_.000",
+"Attachments": "0",
+"SMTotalSize": "782",
+"_CommentFlags": "",
+"_CommentCount": "",
+"SiteUrl": "https:\u002f\u002fbertonline.sharepoint.com\u002fsites\u002fpnpcoresdktestteamsite9638177c742d4740adf802ff2229f217",
+"Title": "PnP Core SDK Test",
+"SiteId": "{5CCD98E7-8AC0-4177-A641-07A72373830F}",
+"RootWebId": "{2C99A486-D6C9-4A4B-8D6F-A9FAA364C92C}",
+"CreatedBy": "PnP Core SDK Test Owners",
+"TimeCreated": "10\u002f5\u002f2021 6:16 AM",
+"TimeCreated.": "2021-10-05T13:16:30Z",
+"TimeDeleted": "10\u002f5\u002f2021 6:17 AM",
+"TimeDeleted.": "2021-10-05T13:17:56Z",
+"ShareByEmailEnabled": "Yes",
+"ShareByEmailEnabled.value": "1",
+"ShareByLinkEnabled": "No",
+"ShareByLinkEnabled.value": "0",
+"SiteOwnerName": "",
+"SiteOwnerEmail": "",
+"StorageQuota": "1,099,511,627,776",
+"StorageQuota.": "1099511627776.00",
+"StorageUsed": "1,440,810",
+"StorageUsed.": "1440810.00000000",
+"TemplateId": "64",
+"TemplateId.": "64",
+"TemplateName": "GROUP#0",
+"ItemChildCount": "0",
+"FolderChildCount": "0",
+"owshiddenversion": "5",
 "Restricted": ""
 }
 ],"FirstRow" : 1,
 "FolderPermissions" : "0x7ffffffffffbffff"
-,"LastRow" : 451,
+,"LastRow" : 460,
 "RowLimit" : 500
 ,"FilterLink" : "?"
 ,"ForceNoHierarchy" : "1"
@@ -18958,4 +19336,4 @@ CONTENT-TYPE: application/json; charset=utf-8
 ,"CurrentFolderSpItemUrl" : ""
 
 }
---batchresponse_b32a0e5e-7fc9-4b7c-8a74-c1ef7959a9a3--
+--batchresponse_434663fd-fa85-4207-8b83-4ed8cffe2b4d--

@@ -63,6 +63,7 @@ namespace PnP.Core.Admin.Model.SharePoint
             if (siteToCreate.SensitivityLabelId != Guid.Empty)
             {
                 payload.Add("SensitivityLabel", siteToCreate.SensitivityLabelId);
+                //payload["Classification"] = siteCollectionCreationInformation.SensitivityLabel;
             }
             else
             {
@@ -83,7 +84,8 @@ namespace PnP.Core.Admin.Model.SharePoint
             // If we're using application permissions we use Microsoft Graph to create the site
             if (creationOptions.UsingApplicationPermissions.Value)
             {
-                return null;
+                //TODO: implement group creation functionality under Microsoft365 and use it here
+                throw new NotSupportedException("Creating Team sites using application permissions is not yet supported in this preview version");
             }
             else
             {
@@ -272,8 +274,14 @@ namespace PnP.Core.Admin.Model.SharePoint
             }
             else if (siteStatus == 1)
             {
+                Guid groupId = Guid.Empty;
+                if (!usingSpSiteManager)
+                {
+                    groupId = responseJson.GetProperty("d").GetProperty(statusProperty).GetProperty("GroupId").GetGuid();
+                }
+
                 // Site creation in progress, let's wait for it to finish
-                responseContext = await VerifySiteStatusAsync(context, usingSpSiteManager ? payload["GroupId"].ToString() : payload["Url"].ToString(),
+                responseContext = await VerifySiteStatusAsync(context, !usingSpSiteManager ? groupId.ToString() : payload["Url"].ToString(),
                     usingSpSiteManager, creationOptions.MaxStatusChecks.Value, creationOptions.WaitAfterStatusCheck.Value).ConfigureAwait(false);
             }
             else
@@ -418,9 +426,7 @@ namespace PnP.Core.Admin.Model.SharePoint
                         siteUrl = responseJson.GetProperty("d").GetProperty(statusProperty).GetProperty("SiteUrl").GetString();
                     }
                 }
-#pragma warning disable CA1031 // Do not catch general exception types
                 catch (Exception ex)
-#pragma warning restore CA1031 // Do not catch general exception types
                 {
                     // Log and eat exception here
                     context.Logger.LogWarning(PnPCoreAdminResources.Log_Warning_ExceptionWhileGettingSiteStatus, urlOrGroupToCheck, ex.ToString());
