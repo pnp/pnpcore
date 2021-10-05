@@ -1577,6 +1577,7 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
         {
             // Prepare the result variable
             List<WebPartEntity> webparts = new List<WebPartEntity>();
+            var pageLayoutModel = Model.PageLayout.Unknown;
 
             // Get a reference to the current source context
             var sourceContext = pageFile.Context;
@@ -1591,6 +1592,8 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
             // Here we need to invoke the Page Layout Mapping Provider
             // to determine the target page layout
             // => Where do we store the result?
+            //      - No storage of result - previously this was a seperate analysis to create a mapping file. Does this tally with new design?
+            //      - There is alot more information gathered here than is used. All the data will need to be factored in the remaining transform proccesses.
             // => Should we pass the cancellation token?
             var pageLayoutMappingProvider = serviceProvider.GetService<IPageLayoutMappingProvider>();
             if (pageLayoutMappingProvider != null)
@@ -1600,6 +1603,16 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
                 var output = await pageLayoutMappingProvider
                     .MapPageLayoutAsync(pageLayoutInput)
                     .ConfigureAwait(false);
+
+                if(output is SharePointPageLayoutMappingProviderOutput)
+                {
+                    var sourcePageLayout = output as SharePointPageLayoutMappingProviderOutput;
+                    pageLayoutModel = sourcePageLayout.PageLayout.IncludeVerticalColumn ? PageLayout.PublishingPage_AutoDetectWithVerticalColumn : PageLayout.PublishingPage_AutoDetect;
+                    
+                }
+
+                // TEMP - Just get basic pages created until discussion over above problem.
+                return new Tuple<Model.PageLayout, List<WebPartEntity>>(pageLayoutModel, webparts);
             }
 
 
