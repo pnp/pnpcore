@@ -58,11 +58,11 @@ $apiKey = $("$env:NUGET_API_KEY")
 
 #Write-Host "API Key starts with:" $apiKey.Substring(0,10)
 
-dotnet nuget push $nupkg --api-key $apiKey --source https://api.nuget.org/v3/index.json
-dotnet nuget push $authNupkg --api-key $apiKey --source https://api.nuget.org/v3/index.json
-dotnet nuget push $adminNupkg --api-key $apiKey --source https://api.nuget.org/v3/index.json
-dotnet nuget push $transformationNupkg --api-key $apiKey --source https://api.nuget.org/v3/index.json
-dotnet nuget push $transformationSharePointNupkg --api-key $apiKey --source https://api.nuget.org/v3/index.json
+dotnet nuget push $nupkg --api-key $apiKey --source https://api.nuget.org/v3/index.json --timeout 600 
+dotnet nuget push $authNupkg --api-key $apiKey --source https://api.nuget.org/v3/index.json --timeout 600
+dotnet nuget push $adminNupkg --api-key $apiKey --source https://api.nuget.org/v3/index.json --timeout 600
+dotnet nuget push $transformationNupkg --api-key $apiKey --source https://api.nuget.org/v3/index.json --timeout 600
+dotnet nuget push $transformationSharePointNupkg --api-key $apiKey --source https://api.nuget.org/v3/index.json --timeout 600
 
 Write-Host "Writing $version to git"
 Set-Content -Path ./build/version.debug.increment -Value $versionIncrement
