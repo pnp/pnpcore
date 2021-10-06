@@ -784,9 +784,9 @@ namespace PnP.Core.Services
                         bodiesToReplace.Add(counter, request.ApiCall.JsonBody);
                         graphRequest.Body = $"@#|Body{counter}|#@";
                         graphRequest.Headers = new Dictionary<string, string>
-                            {
-                                { "Content-Type", "application/json" }
-                            };
+                        {
+                            { "Content-Type", "application/json" }
+                        };
                     };
 
                     if (request.ApiCall.Headers != null && request.ApiCall.Headers.Count > 0)
@@ -974,7 +974,7 @@ namespace PnP.Core.Services
                         }
 
                         // If we are not mocking or if there is no mock data
-                        if (PnPContext.Mode != TestMode.Mock) // || !TestManager.IsMockAvailable(PnPContext, requestKey))
+                        if (PnPContext.Mode != TestMode.Mock)
                         {
 #endif
                             // Process the authentication headers using the currently
@@ -1076,6 +1076,28 @@ namespace PnP.Core.Services
 
             foreach (var request in batch.Requests.Values)
             {
+                Dictionary<string, string> headers = new Dictionary<string, string>();
+                if (request.Method == HttpMethod.Get)
+                {
+                    headers.Add("Accept", "application/json;odata=verbose");
+                }
+                else if (request.Method == new HttpMethod("PATCH") || request.Method == HttpMethod.Post || request.Method == HttpMethod.Delete)
+                {
+                    headers.Add("Accept", "application/json;odata=verbose");
+                    headers.Add("Content-Type", "application/json;odata=verbose");
+                }
+
+                if (request.RequestModules != null && request.RequestModules.Any())
+                {
+                    foreach (var module in request.RequestModules.Where(p => p.ExecuteForSpoRest))
+                    {
+                        if (module.RequestHeaderHandler != null)
+                        {
+                            module.RequestHeaderHandler.Invoke(headers);
+                        }
+                    }
+                }
+
                 if (request.Method == HttpMethod.Get)
                 {
                     sb.AppendLine($"--batch_{batch.Id}");
@@ -1083,7 +1105,11 @@ namespace PnP.Core.Services
                     sb.AppendLine("Content-Transfer-Encoding:binary");
                     sb.AppendLine();
                     sb.AppendLine($"{HttpMethod.Get.Method} {request.ApiCall.Request} HTTP/1.1");
-                    sb.AppendLine("Accept: application/json;odata=verbose");
+                    foreach(var header in headers)
+                    {
+                        sb.AppendLine($"{header.Key}: {header.Value}");
+                    }
+                    //sb.AppendLine("Accept: application/json;odata=verbose");
                     sb.AppendLine();
                 }
                 else if (request.Method == new HttpMethod("PATCH") || request.Method == HttpMethod.Post)
@@ -1098,8 +1124,12 @@ namespace PnP.Core.Services
                     sb.AppendLine("Content-Transfer-Encoding:binary");
                     sb.AppendLine();
                     sb.AppendLine($"{request.Method.Method} {request.ApiCall.Request} HTTP/1.1");
-                    sb.AppendLine("Accept: application/json;odata=verbose");
-                    sb.AppendLine("Content-Type: application/json;odata=verbose");
+                    //sb.AppendLine("Accept: application/json;odata=verbose");
+                    //sb.AppendLine("Content-Type: application/json;odata=verbose");
+                    foreach (var header in headers)
+                    {
+                        sb.AppendLine($"{header.Key}: {header.Value}");
+                    }
                     if (!string.IsNullOrEmpty(request.ApiCall.JsonBody))
                     {
                         sb.AppendLine($"Content-Length: {request.ApiCall.JsonBody.Length}");
@@ -1116,7 +1146,7 @@ namespace PnP.Core.Services
                 }
                 else if (request.Method == HttpMethod.Delete)
                 {
-                    var changesetId = Guid.NewGuid().ToString("d", System.Globalization.CultureInfo.InvariantCulture);
+                    var changesetId = Guid.NewGuid().ToString("d", CultureInfo.InvariantCulture);
 
                     sb.AppendLine($"--batch_{batch.Id}");
                     sb.AppendLine($"Content-Type: multipart/mixed; boundary=\"changeset_{changesetId}\"");
@@ -1126,8 +1156,12 @@ namespace PnP.Core.Services
                     sb.AppendLine("Content-Transfer-Encoding:binary");
                     sb.AppendLine();
                     sb.AppendLine($"{request.Method} {request.ApiCall.Request} HTTP/1.1");
-                    sb.AppendLine("Accept: application/json;odata=verbose");
-                    sb.AppendLine("Content-Type: application/json;odata=verbose");
+                    foreach (var header in headers)
+                    {
+                        sb.AppendLine($"{header.Key}: {header.Value}");
+                    }
+                    //sb.AppendLine("Accept: application/json;odata=verbose");
+                    //sb.AppendLine("Content-Type: application/json;odata=verbose");
                     sb.AppendLine($"IF-MATCH: *"); // TODO: Here we need the E-Tag or something to specify to use *
                     sb.AppendLine();
                     sb.AppendLine($"--changeset_{changesetId}--");
