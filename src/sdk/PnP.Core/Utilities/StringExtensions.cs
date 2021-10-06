@@ -7,6 +7,8 @@ namespace PnP.Core
 {
     internal static class StringExtensions
     {
+        internal const char NonWidthWhiteSpace = (char)0x200B; //Use zero-width space marker to capture empty string
+
         internal static bool Contains(this string source, string toCheck, StringComparison comp)
         {
             return source?.IndexOf(toCheck, comp) >= 0;
@@ -26,6 +28,28 @@ namespace PnP.Core
         {
             return source?.Replace("{", "").Replace("}", "").Replace("\"", "").Split(',').FirstOrDefault();
         }
+
+        #region Code copied from https://github.com/ServiceStack/ServiceStack.Text/blob/master/src/ServiceStack.Text/StringSpanExtensions.cs
+        internal static bool IsNullOrEmpty(this ReadOnlySpan<char> value) => value.IsEmpty || (value.Length == 1 && value[0] == NonWidthWhiteSpace);
+
+        internal static ReadOnlySpan<char> LeftPart(this ReadOnlySpan<char> strVal, char needle)
+        {
+            if (strVal.IsEmpty) return strVal;
+            var pos = strVal.IndexOf(needle);
+            return pos == -1
+                ? strVal
+                : strVal.Slice(0, pos);
+        }
+
+        internal static ReadOnlySpan<char> RightPart(this ReadOnlySpan<char> strVal, char needle)
+        {
+            if (strVal.IsEmpty) return strVal;
+            var pos = strVal.IndexOf(needle);
+            return pos == -1
+                ? strVal
+                : strVal.Slice(pos + 1);
+        }
+        #endregion
 
         #region Code copied from https://www.meziantou.net/split-a-string-into-lines-without-allocation.htm
 

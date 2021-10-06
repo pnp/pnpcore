@@ -1087,6 +1087,10 @@ namespace PnP.Core.Services
                     headers.Add("Content-Type", "application/json;odata=verbose");
                 }
 
+                string requestUrl = request.ApiCall.Request;
+                string requestBody = request.ApiCall.JsonBody;
+
+                // Run request modules if they're connected
                 if (request.RequestModules != null && request.RequestModules.Any())
                 {
                     foreach (var module in request.RequestModules.Where(p => p.ExecuteForSpoRest))
@@ -1094,6 +1098,16 @@ namespace PnP.Core.Services
                         if (module.RequestHeaderHandler != null)
                         {
                             module.RequestHeaderHandler.Invoke(headers);
+                        }
+
+                        if (module.RequestUrlHandler != null)
+                        {
+                            requestUrl = module.RequestUrlHandler.Invoke(requestUrl);
+                        }
+
+                        if (module.RequestBodyHandler != null)
+                        {
+                            requestBody = module.RequestBodyHandler.Invoke(requestBody);
                         }
                     }
                 }
@@ -1104,12 +1118,11 @@ namespace PnP.Core.Services
                     sb.AppendLine("Content-Type: application/http");
                     sb.AppendLine("Content-Transfer-Encoding:binary");
                     sb.AppendLine();
-                    sb.AppendLine($"{HttpMethod.Get.Method} {request.ApiCall.Request} HTTP/1.1");
+                    sb.AppendLine($"{HttpMethod.Get.Method} {requestUrl} HTTP/1.1");
                     foreach(var header in headers)
                     {
                         sb.AppendLine($"{header.Key}: {header.Value}");
                     }
-                    //sb.AppendLine("Accept: application/json;odata=verbose");
                     sb.AppendLine();
                 }
                 else if (request.Method == new HttpMethod("PATCH") || request.Method == HttpMethod.Post)
@@ -1123,16 +1136,14 @@ namespace PnP.Core.Services
                     sb.AppendLine("Content-Type: application/http");
                     sb.AppendLine("Content-Transfer-Encoding:binary");
                     sb.AppendLine();
-                    sb.AppendLine($"{request.Method.Method} {request.ApiCall.Request} HTTP/1.1");
-                    //sb.AppendLine("Accept: application/json;odata=verbose");
-                    //sb.AppendLine("Content-Type: application/json;odata=verbose");
+                    sb.AppendLine($"{request.Method.Method} {requestUrl} HTTP/1.1");
                     foreach (var header in headers)
                     {
                         sb.AppendLine($"{header.Key}: {header.Value}");
                     }
-                    if (!string.IsNullOrEmpty(request.ApiCall.JsonBody))
+                    if (!string.IsNullOrEmpty(requestBody))
                     {
-                        sb.AppendLine($"Content-Length: {request.ApiCall.JsonBody.Length}");
+                        sb.AppendLine($"Content-Length: {requestBody.Length}");
                     }
                     else
                     {
@@ -1140,7 +1151,7 @@ namespace PnP.Core.Services
                     }
                     sb.AppendLine($"If-Match: *"); // TODO: Here we need the E-Tag or something to specify to use *
                     sb.AppendLine();
-                    sb.AppendLine(request.ApiCall.JsonBody);
+                    sb.AppendLine(requestBody);
                     sb.AppendLine();
                     sb.AppendLine($"--changeset_{changesetId}--");
                 }
@@ -1155,13 +1166,11 @@ namespace PnP.Core.Services
                     sb.AppendLine("Content-Type: application/http");
                     sb.AppendLine("Content-Transfer-Encoding:binary");
                     sb.AppendLine();
-                    sb.AppendLine($"{request.Method} {request.ApiCall.Request} HTTP/1.1");
+                    sb.AppendLine($"{request.Method} {requestUrl} HTTP/1.1");
                     foreach (var header in headers)
                     {
                         sb.AppendLine($"{header.Key}: {header.Value}");
                     }
-                    //sb.AppendLine("Accept: application/json;odata=verbose");
-                    //sb.AppendLine("Content-Type: application/json;odata=verbose");
                     sb.AppendLine($"IF-MATCH: *"); // TODO: Here we need the E-Tag or something to specify to use *
                     sb.AppendLine();
                     sb.AppendLine($"--changeset_{changesetId}--");
@@ -1229,6 +1238,8 @@ namespace PnP.Core.Services
             var httpStatusCode = HttpStatusCode.Continue;
 
             bool responseContentOpen = false;
+            bool collectHeaders = false;
+            Dictionary<string, string> responseHeaders = new Dictionary<string, string>();
             StringBuilder responseContent = new StringBuilder();
 #if NET5_0
             foreach (ReadOnlySpan<char> line in batchResponse.SplitLines())
@@ -1264,13 +1275,31 @@ namespace PnP.Core.Services
                         }
                         else
                         {
+                            string responseStringContent = null;
+                            if (httpStatusCode != HttpStatusCode.NoContent)
+                            {
+                                responseStringContent = responseContent.ToString();
+                            }
+
+                            // Run request modules if they're connected
+                            if (currentBatchRequest.RequestModules != null && currentBatchRequest.RequestModules.Any())
+                            {
+                                foreach (var module in currentBatchRequest.RequestModules.Where(p => p.ExecuteForSpoRest))
+                                {
+                                    if (module.ResponseHandler != null)
+                                    {
+                                        responseStringContent = module.ResponseHandler.Invoke(httpStatusCode, responseHeaders, responseStringContent);
+                                    }
+                                }
+                            }
+
                             if (httpStatusCode == HttpStatusCode.NoContent)
                             {
-                                currentBatchRequest.AddResponse("", httpStatusCode);
+                                currentBatchRequest.AddResponse("", httpStatusCode, responseHeaders);
                             }
                             else
                             {
-                                currentBatchRequest.AddResponse(responseContent.ToString(), httpStatusCode);
+                                currentBatchRequest.AddResponse(responseStringContent, httpStatusCode, responseHeaders);
                             }
 
                             // Commit succesful updates in our model
@@ -1284,9 +1313,12 @@ namespace PnP.Core.Services
                         }
 
                         httpStatusCode = 0;
-                        responseContentOpen = false;
+                        responseContentOpen = false;                        
                         responseContent = new StringBuilder();
                     }
+                    
+                    collectHeaders = false;
+                    responseHeaders = new Dictionary<string, string>();
 
                     counter++;
                 }
@@ -1301,6 +1333,7 @@ namespace PnP.Core.Services
 #endif
                     {
                         httpStatusCode = (HttpStatusCode)parsedHttpStatusCode;
+                        collectHeaders = true;
                     }
                     else
                     {
@@ -1328,12 +1361,35 @@ namespace PnP.Core.Services
                     responseContent.AppendLine(line.TrimEnd('\r'));
 #endif
                 }
+                // Response headers e.g. CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+                else if (collectHeaders)
+                {
+#if NET5_0
+                    HeaderSplit(line, responseHeaders);
+#else
+                    HeaderSplit(line.AsSpan(), responseHeaders);
+#endif
+                }
             }
         }
 
-#endregion
+        private static void HeaderSplit(ReadOnlySpan<char> input, Dictionary<string, string> headers)
+        {
+            if (!input.IsNullOrEmpty())
+            {
+                var left = input.LeftPart(':');
+                var right = input.RightPart(':');
 
-#region SharePoint REST interactive calls
+                if (!left.IsNullOrEmpty() && !right.IsNullOrEmpty())
+                {
+                    headers.Add(left.Trim().ToString(), right.Trim().ToString());
+                }
+            }
+        }
+
+        #endregion
+
+        #region SharePoint REST interactive calls
 
         private async Task ExecuteSharePointRestInteractiveAsync(Batch batch)
         {

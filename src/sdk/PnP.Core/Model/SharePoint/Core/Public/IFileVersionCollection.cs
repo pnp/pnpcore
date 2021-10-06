@@ -10,7 +10,7 @@ namespace PnP.Core.Model.SharePoint
     /// Collection of file versions
     /// </summary>
     [ConcreteType(typeof(FileVersionCollection))]
-    public interface IFileVersionCollection : IQueryable<IFileVersion>, IAsyncEnumerable<IFileVersion>, IDataModelCollection<IFileVersion>, IDataModelCollectionLoad<IFileVersion>
+    public interface IFileVersionCollection : IQueryable<IFileVersion>, IAsyncEnumerable<IFileVersion>, IDataModelCollection<IFileVersion>, IDataModelCollectionLoad<IFileVersion>, ISupportModules<IFileVersionCollection>
     {
         #region GetById methods
 

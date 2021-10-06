@@ -9,7 +9,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a collection of FieldLink objects of SharePoint Online
     /// </summary>
     [ConcreteType(typeof(FieldLinkCollection))]
-    public interface IFieldLinkCollection : IQueryable<IFieldLink>, IAsyncEnumerable<IFieldLink>, IDataModelCollection<IFieldLink>, IDataModelCollectionLoad<IFieldLink>, IDataModelCollectionDeleteByGuidId
+    public interface IFieldLinkCollection : IQueryable<IFieldLink>, IAsyncEnumerable<IFieldLink>, IDataModelCollection<IFieldLink>, IDataModelCollectionLoad<IFieldLink>, IDataModelCollectionDeleteByGuidId, ISupportModules<IFieldLinkCollection>
     {
         /// <summary>
         /// Adds a field link via a batch

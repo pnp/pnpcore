@@ -9,7 +9,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a collection of Web objects of SharePoint Online
     /// </summary>
     [ConcreteType(typeof(WebCollection))]
-    public interface IWebCollection : IQueryable<IWeb>, IAsyncEnumerable<IWeb>, IDataModelCollection<IWeb>, IDataModelCollectionLoad<IWeb>
+    public interface IWebCollection : IQueryable<IWeb>, IAsyncEnumerable<IWeb>, IDataModelCollection<IWeb>, IDataModelCollectionLoad<IWeb>, ISupportModules<IWebCollection>
     {
         /// <summary>
         /// Adds a new web to the current web

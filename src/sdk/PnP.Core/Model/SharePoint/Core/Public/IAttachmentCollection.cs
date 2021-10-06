@@ -8,7 +8,7 @@ namespace PnP.Core.Model.SharePoint
     /// Collection of list item attachments
     /// </summary>
     [ConcreteType(typeof(AttachmentCollection))]
-    public interface IAttachmentCollection : IQueryable<IAttachment>, IDataModelCollection<IAttachment>
+    public interface IAttachmentCollection : IQueryable<IAttachment>, IDataModelCollection<IAttachment>, ISupportModules<IAttachment>
     {
         /// <summary>
         /// Adds a list item attachment

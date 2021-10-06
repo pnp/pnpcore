@@ -7,7 +7,7 @@ namespace PnP.Core.Model.Security
     /// Public interface to define a collection of Microsoft 365 users
     /// </summary>
     [ConcreteType(typeof(GraphUserCollection))]
-    public interface IGraphUserCollection : IQueryable<IGraphUser>, IAsyncEnumerable<IGraphUser>, IDataModelCollection<IGraphUser>, IDataModelCollectionLoad<IGraphUser>
+    public interface IGraphUserCollection : IQueryable<IGraphUser>, IAsyncEnumerable<IGraphUser>, IDataModelCollection<IGraphUser>, IDataModelCollectionLoad<IGraphUser>, ISupportModules<IGraphUserCollection>
     {
     }
 }

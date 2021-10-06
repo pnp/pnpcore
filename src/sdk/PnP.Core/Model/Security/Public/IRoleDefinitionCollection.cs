@@ -10,7 +10,7 @@ namespace PnP.Core.Model.Security
     /// Public interface to define a collection of SharePoint RoleDefinitions
     /// </summary>
     [ConcreteType(typeof(RoleDefinitionCollection))]
-    public interface IRoleDefinitionCollection : IQueryable<IRoleDefinition>, IAsyncEnumerable<IRoleDefinition>, IDataModelCollection<IRoleDefinition>, IDataModelCollectionLoad<IRoleDefinition>
+    public interface IRoleDefinitionCollection : IQueryable<IRoleDefinition>, IAsyncEnumerable<IRoleDefinition>, IDataModelCollection<IRoleDefinition>, IDataModelCollectionLoad<IRoleDefinition>, ISupportModules<IRoleDefinitionCollection>
     {
         /// <summary>
         /// Adds a new role definition
