@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net;
 
 namespace PnP.Core.Services
 {
@@ -12,7 +13,8 @@ namespace PnP.Core.Services
         /// Default constructor, configures the custom header module. If provided header was already defined then it will be overwritten
         /// </summary>
         /// <param name="headers">Custom request headers to be added.</param>
-        public CustomHeadersRequestModule(Dictionary<string, string> headers)
+        /// <param name="responseHeaders">Delegate that can be invoked to pass along the response headers</param>
+        internal CustomHeadersRequestModule(Dictionary<string, string> headers, Action<Dictionary<string, string>> responseHeaders)
         {
             Headers = headers;
 
@@ -22,6 +24,11 @@ namespace PnP.Core.Services
                 {
                     foreach (var header in Headers)
                     {
+                        if (currentHeaders == null)
+                        {
+                            currentHeaders = new Dictionary<string, string>();
+                        }
+
                         if (currentHeaders.ContainsKey(header.Key))
                         {
                             currentHeaders[header.Key] = header.Value;
@@ -33,6 +40,15 @@ namespace PnP.Core.Services
                     }
                 }
             };
+
+            if (responseHeaders != null)
+            {
+                ResponseHandler = (HttpStatusCode statusCode, Dictionary<string, string> headers, string responseContent) =>
+                {
+                    responseHeaders.Invoke(new Dictionary<string, string>(headers));
+                    return responseContent;
+                };
+            }
         }
 
         /// <summary>
@@ -43,7 +59,7 @@ namespace PnP.Core.Services
         /// <summary>
         /// The headers that will be added to the requests via this module
         /// </summary>
-        public Dictionary<string, string> Headers { get; private set; }
+        internal Dictionary<string, string> Headers { get; private set; }
 
     }
 }

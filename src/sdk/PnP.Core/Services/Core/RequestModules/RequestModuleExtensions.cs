@@ -1,4 +1,5 @@
 ﻿using PnP.Core.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -16,7 +17,7 @@ namespace PnP.Core.Model
         /// <param name="dataModel">Model instance to operate on</param>
         /// <param name="module">Request module to add</param>
         /// <returns>The passed model instance</returns>
-        public static TModel WithModule<TModel>(this ISupportModules<TModel> dataModel, IRequestModule module)
+        internal static TModel WithModule<TModel>(this ISupportModules<TModel> dataModel, IRequestModule module)
         {
             var context = (dataModel as IDataModelWithContext).PnPContext;
 
@@ -40,10 +41,11 @@ namespace PnP.Core.Model
         /// <typeparam name="TModel">Model type</typeparam>
         /// <param name="dataModel">Model instance to operate on</param>
         /// <param name="headers">Collection of headers to add to add to the request</param>
+        /// <param name="responseHeaders">Delegate that can be invoked to pass along the response headers</param>
         /// <returns>The passed model instance</returns>
-        public static TModel WithHeaders<TModel>(this ISupportModules<TModel> dataModel, Dictionary<string, string> headers)
+        public static TModel WithHeaders<TModel>(this ISupportModules<TModel> dataModel, Dictionary<string, string> headers, Action<Dictionary<string, string>> responseHeaders = null)
         {
-            return dataModel.WithModule(new CustomHeadersRequestModule(headers));
+            return dataModel.WithModule(new CustomHeadersRequestModule(headers, responseHeaders));
         }
 
         #endregion

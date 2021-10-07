@@ -87,6 +87,8 @@ namespace PnP.Core.QueryModel
                 "Linq"
                 );
 
+            PnPContext.RequestModules?.Clear();
+
             return batch.GetRequest(batchRequestId);
         }
 
@@ -220,6 +222,8 @@ namespace PnP.Core.QueryModel
 
                 // Clear collection, in order to not fill it
                 collection.Clear();
+
+                PnPContext.RequestModules?.Clear();
 
                 // and execute the request
                 await PnPContext.ExecuteAsync().ConfigureAwait(false);

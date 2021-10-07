@@ -7,7 +7,7 @@ namespace PnP.Core.Services
     /// <summary>
     /// Base class for request modules
     /// </summary>
-    public abstract class RequestModuleBase : IRequestModule
+    internal abstract class RequestModuleBase : IRequestModule
     {
         /// <summary>
         /// Each request module must have a unique id, override this property in your request module

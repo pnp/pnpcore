@@ -123,7 +123,7 @@ namespace PnP.Core.Services
         /// <summary>
         /// Modules to be added to the request pipeline for this batch request
         /// </summary>
-        internal List<IRequestModule> RequestModules { get; private set; }
+        internal List<IRequestModule> RequestModules { get; set; }
 
         /// <summary>
         /// Records the response of a request (fired as part of the execution of a <see cref="Batch"/>)
@@ -199,8 +199,6 @@ namespace PnP.Core.Services
             if (modelInstance is IDataModelWithContext modelWithContext && modelWithContext.PnPContext != null && modelWithContext.PnPContext.RequestModules?.Count > 0)
             {
                 RequestModules = new List<IRequestModule>(modelWithContext.PnPContext.RequestModules);
-
-                modelWithContext.PnPContext.RequestModules.Clear();
             }
         }
     }
