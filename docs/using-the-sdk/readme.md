@@ -93,6 +93,9 @@ And you will also need to provide the configuration in the `appsettings.json` fi
 }
 ```
 
+> [!Note]
+> Ensure you've set "Copy to output directory" to "Copy always" for the `appsettings.json` file as otherwise the config file is not used.
+
 You should provide the `ClientId` and `TenantId` for an application registered in Azure Active Directory and configured with proper permissions, accordingly to your needs. For example, you could register an app in Azure Active Directory with delegated permission for:
 
 - Microsoft Graph: `Group.ReadWrite.All`
