@@ -1142,7 +1142,10 @@ namespace PnP.Core.Services
                 string requestBody = request.ApiCall.JsonBody;
 
                 // Run request modules if they're connected
-                ExecuteSpoRestRequestModules(request, headers, ref requestUrl, ref requestBody);
+                if (request.RequestModules != null && request.RequestModules.Count > 0)
+                {
+                    ExecuteSpoRestRequestModules(request, headers, ref requestUrl, ref requestBody);
+                }
 
                 if (request.Method == HttpMethod.Get)
                 {
@@ -1314,7 +1317,10 @@ namespace PnP.Core.Services
                             }
 
                             // Run request modules if they're connected
-                            responseStringContent = ExecuteSpoRestRequestModulesOnResponse(httpStatusCode, responseHeaders, currentBatchRequest, responseStringContent);
+                            if (currentBatchRequest.RequestModules != null && currentBatchRequest.RequestModules.Count > 0)
+                            {
+                                responseStringContent = ExecuteSpoRestRequestModulesOnResponse(httpStatusCode, responseHeaders, currentBatchRequest, responseStringContent);
+                            }
 
                             if (httpStatusCode == HttpStatusCode.NoContent)
                             {
@@ -1398,38 +1404,32 @@ namespace PnP.Core.Services
 
         private static void ExecuteSpoRestRequestModules(BatchRequest request, Dictionary<string, string> headers, ref string requestUrl, ref string requestBody)
         {
-            if (request.RequestModules != null && request.RequestModules.Count > 0)
+            foreach (var module in request.RequestModules.Where(p => p.ExecuteForSpoRest))
             {
-                foreach (var module in request.RequestModules.Where(p => p.ExecuteForSpoRest))
+                if (module.RequestHeaderHandler != null)
                 {
-                    if (module.RequestHeaderHandler != null)
-                    {
-                        module.RequestHeaderHandler.Invoke(headers);
-                    }
+                    module.RequestHeaderHandler.Invoke(headers);
+                }
 
-                    if (module.RequestUrlHandler != null)
-                    {
-                        requestUrl = module.RequestUrlHandler.Invoke(requestUrl);
-                    }
+                if (module.RequestUrlHandler != null)
+                {
+                    requestUrl = module.RequestUrlHandler.Invoke(requestUrl);
+                }
 
-                    if (module.RequestBodyHandler != null)
-                    {
-                        requestBody = module.RequestBodyHandler.Invoke(requestBody);
-                    }
+                if (module.RequestBodyHandler != null)
+                {
+                    requestBody = module.RequestBodyHandler.Invoke(requestBody);
                 }
             }
         }
 
         private static string ExecuteSpoRestRequestModulesOnResponse(HttpStatusCode httpStatusCode, Dictionary<string, string> responseHeaders, BatchRequest currentBatchRequest, string responseStringContent)
         {
-            if (currentBatchRequest.RequestModules != null && currentBatchRequest.RequestModules.Count > 0)
+            foreach (var module in currentBatchRequest.RequestModules.Where(p => p.ExecuteForSpoRest))
             {
-                foreach (var module in currentBatchRequest.RequestModules.Where(p => p.ExecuteForSpoRest))
+                if (module.ResponseHandler != null)
                 {
-                    if (module.ResponseHandler != null)
-                    {
-                        responseStringContent = module.ResponseHandler.Invoke(httpStatusCode, responseHeaders, responseStringContent);
-                    }
+                    responseStringContent = module.ResponseHandler.Invoke(httpStatusCode, responseHeaders, responseStringContent);
                 }
             }
 
@@ -1467,7 +1467,10 @@ namespace PnP.Core.Services
                 Dictionary<string, string> headers = new Dictionary<string, string>();
 
                 // Run request modules if they're connected
-                ExecuteSpoRestRequestModules(restRequest, headers, ref requestUrl, ref requestBody);
+                if (restRequest.RequestModules != null && restRequest.RequestModules.Count > 0)
+                {
+                    ExecuteSpoRestRequestModules(restRequest, headers, ref requestUrl, ref requestBody);
+                }
 
                 using (var request = new HttpRequestMessage(restRequest.Method, requestUrl))
                 {
@@ -1648,7 +1651,10 @@ namespace PnP.Core.Services
             }
 
             // Run request modules if they're connected
-            responseStringContent = ExecuteSpoRestRequestModulesOnResponse(statusCode, responseHeaders, restRequest, responseStringContent);
+            if (restRequest.RequestModules != null && restRequest.RequestModules.Count > 0)
+            {
+                responseStringContent = ExecuteSpoRestRequestModulesOnResponse(statusCode, responseHeaders, restRequest, responseStringContent);
+            }
 
             // Store the response for further processing
             restRequest.AddResponse(responseStringContent, statusCode, responseHeaders);
