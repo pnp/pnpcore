@@ -107,7 +107,7 @@ Add methods are implemented in their respective model interfaces</p>
   
   <h5 id="PnP_Core_Model_IDataModel_1_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public interface IDataModel&lt;TModel&gt; : IDataModelParent, IDataModelWithContext</code></pre>
+    <pre><code class="lang-csharp hljs">public interface IDataModel&lt;TModel&gt; : IDataModelParent, IDataModelWithContext, ISupportModules&lt;TModel&gt;</code></pre>
   </div>
 
   
@@ -848,6 +848,10 @@ Add methods are implemented in their respective model interfaces</p>
   
   </div>
   
+  <h3 id="extensionmethods">Extension Methods</h3>
+  <div>
+      <a class="xref" href="PnP.Core.Model.RequestModuleExtensions.html#PnP_Core_Model_RequestModuleExtensions_WithHeaders__1_PnP_Core_Model_ISupportModules___0__Dictionary_System_String_System_String__Action_Dictionary_System_String_System_String___">RequestModuleExtensions.WithHeaders&lt;TModel&gt;(ISupportModules&lt;TModel&gt;, Dictionary&lt;String, String&gt;, Action&lt;Dictionary&lt;String, String&gt;&gt;)</a>
+  </div>
   
 </article>
           </div>

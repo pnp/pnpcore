@@ -145,7 +145,7 @@
   
   <h5 id="PnP_Core_Model_Teams_ITeamDiscoverySettings_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public interface ITeamDiscoverySettings : IDataModel&lt;ITeamDiscoverySettings&gt;, IDataModelParent, IDataModelWithContext</code></pre>
+    <pre><code class="lang-csharp hljs">public interface ITeamDiscoverySettings : IDataModel&lt;ITeamDiscoverySettings&gt;, IDataModelParent, IDataModelWithContext, ISupportModules&lt;ITeamDiscoverySettings&gt;</code></pre>
   </div>
 
   
@@ -199,6 +199,10 @@
   
   </div>
   
+  <h3 id="extensionmethods">Extension Methods</h3>
+  <div>
+      <a class="xref" href="PnP.Core.Model.RequestModuleExtensions.html#PnP_Core_Model_RequestModuleExtensions_WithHeaders__1_PnP_Core_Model_ISupportModules___0__Dictionary_System_String_System_String__Action_Dictionary_System_String_System_String___">RequestModuleExtensions.WithHeaders&lt;TModel&gt;(ISupportModules&lt;TModel&gt;, Dictionary&lt;String, String&gt;, Action&lt;Dictionary&lt;String, String&gt;&gt;)</a>
+  </div>
   
 </article>
           </div>

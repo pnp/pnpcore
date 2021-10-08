@@ -6147,6 +6147,15 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.IRequestableCollection.RequestedItems
   nameWithType: IRequestableCollection.RequestedItems
+- uid: PnP.Core.Model.ISupportModules`1
+  name: ISupportModules<TModel>
+  href: api/PnP.Core.Model.ISupportModules-1.html
+  commentId: T:PnP.Core.Model.ISupportModules`1
+  name.vb: ISupportModules(Of TModel)
+  fullName: PnP.Core.Model.ISupportModules<TModel>
+  fullName.vb: PnP.Core.Model.ISupportModules(Of TModel)
+  nameWithType: ISupportModules<TModel>
+  nameWithType.vb: ISupportModules(Of TModel)
 - uid: PnP.Core.Model.ISupportQuery`1
   name: ISupportQuery<TResult>
   href: api/PnP.Core.Model.ISupportQuery-1.html
@@ -6156,6 +6165,28 @@ references:
   fullName.vb: PnP.Core.Model.ISupportQuery(Of TResult)
   nameWithType: ISupportQuery<TResult>
   nameWithType.vb: ISupportQuery(Of TResult)
+- uid: PnP.Core.Model.RequestModuleExtensions
+  name: RequestModuleExtensions
+  href: api/PnP.Core.Model.RequestModuleExtensions.html
+  commentId: T:PnP.Core.Model.RequestModuleExtensions
+  fullName: PnP.Core.Model.RequestModuleExtensions
+  nameWithType: RequestModuleExtensions
+- uid: PnP.Core.Model.RequestModuleExtensions.WithHeaders*
+  name: WithHeaders
+  href: api/PnP.Core.Model.RequestModuleExtensions.html#PnP_Core_Model_RequestModuleExtensions_WithHeaders_
+  commentId: Overload:PnP.Core.Model.RequestModuleExtensions.WithHeaders
+  isSpec: "True"
+  fullName: PnP.Core.Model.RequestModuleExtensions.WithHeaders
+  nameWithType: RequestModuleExtensions.WithHeaders
+- uid: PnP.Core.Model.RequestModuleExtensions.WithHeaders``1(PnP.Core.Model.ISupportModules{``0},Dictionary{System.String,System.String},Action{Dictionary{System.String,System.String}})
+  name: WithHeaders<TModel>(ISupportModules<TModel>, Dictionary<String, String>, Action<Dictionary<String, String>>)
+  href: api/PnP.Core.Model.RequestModuleExtensions.html#PnP_Core_Model_RequestModuleExtensions_WithHeaders__1_PnP_Core_Model_ISupportModules___0__Dictionary_System_String_System_String__Action_Dictionary_System_String_System_String___
+  commentId: M:PnP.Core.Model.RequestModuleExtensions.WithHeaders``1(PnP.Core.Model.ISupportModules{``0},Dictionary{System.String,System.String},Action{Dictionary{System.String,System.String}})
+  name.vb: WithHeaders(Of TModel)(ISupportModules(Of TModel), Dictionary(Of String, String), Action(Of Dictionary(Of String, String)))
+  fullName: PnP.Core.Model.RequestModuleExtensions.WithHeaders<TModel>(PnP.Core.Model.ISupportModules<TModel>, Dictionary<System.String, System.String>, Action<Dictionary<System.String, System.String>>)
+  fullName.vb: PnP.Core.Model.RequestModuleExtensions.WithHeaders(Of TModel)(PnP.Core.Model.ISupportModules(Of TModel), Dictionary(Of System.String, System.String), Action(Of Dictionary(Of System.String, System.String)))
+  nameWithType: RequestModuleExtensions.WithHeaders<TModel>(ISupportModules<TModel>, Dictionary<String, String>, Action<Dictionary<String, String>>)
+  nameWithType.vb: RequestModuleExtensions.WithHeaders(Of TModel)(ISupportModules(Of TModel), Dictionary(Of String, String), Action(Of Dictionary(Of String, String)))
 - uid: PnP.Core.Model.Security
   name: PnP.Core.Model.Security
   href: api/PnP.Core.Model.Security.html
