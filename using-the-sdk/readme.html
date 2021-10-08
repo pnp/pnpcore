@@ -166,6 +166,10 @@ Each night these preview packages are refreshed, so you can always upgrade to th
   }
 }
 </code></pre>
+<div class="NOTE">
+<h5>Note</h5>
+<p>Ensure you've set &quot;Copy to output directory&quot; to &quot;Copy always&quot; for the <code>appsettings.json</code> file as otherwise the config file is not used.</p>
+</div>
 <p>You should provide the <code>ClientId</code> and <code>TenantId</code> for an application registered in Azure Active Directory and configured with proper permissions, accordingly to your needs. For example, you could register an app in Azure Active Directory with delegated permission for:</p>
 <ul>
 <li>Microsoft Graph: <code>Group.ReadWrite.All</code></li>
