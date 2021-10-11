@@ -645,5 +645,130 @@ namespace PnP.Core.Test.SharePoint
                 await testLibrary.DeleteAsync();
             }
         }
+
+        [TestMethod]
+        public async Task ClassifyAndExtractListOffPeak()
+        {
+            //TestCommon.Instance.Mocking = false;
+            TestCommon.SharePointSyntexTestSetup();
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.SyntexContentCenterTestSite))
+            {
+                await context.Web.EnsurePropertiesAsync(p => p.ServerRelativeUrl);
+
+                var cc = await context.Web.AsSyntexContentCenterAsync();
+                var models = await cc.GetSyntexModelsAsync();
+                var modelToRegister = models.First();
+
+                // Add library with file to site
+                var libraryName = TestCommon.GetPnPSdkTestAssetName("ClassifyAndExtractListOffPeak");
+                var testLibrary = await context.Web.Lists.AddAsync(libraryName, ListTemplateType.DocumentLibrary);
+                await testLibrary.EnsurePropertiesAsync(p => p.RootFolder);
+                IFile testDocument = await testLibrary.RootFolder.Files.AddAsync("ClassifyAndExtractFile.docx", System.IO.File.OpenRead($".{Path.DirectorySeparatorChar}TestAssets{Path.DirectorySeparatorChar}test.docx"), true);
+                IFile testDocument2 = await testLibrary.RootFolder.Files.AddAsync("ClassifyAndExtractFile2.docx", System.IO.File.OpenRead($".{Path.DirectorySeparatorChar}TestAssets{Path.DirectorySeparatorChar}test.docx"), true);
+                IFile testDocument3 = await testLibrary.RootFolder.Files.AddAsync("ClassifyAndExtractFile3.docx", System.IO.File.OpenRead($".{Path.DirectorySeparatorChar}TestAssets{Path.DirectorySeparatorChar}test.docx"), true);
+                IFile testDocument4 = await testLibrary.RootFolder.Files.AddAsync("ClassifyAndExtractFile4.docx", System.IO.File.OpenRead($".{Path.DirectorySeparatorChar}TestAssets{Path.DirectorySeparatorChar}test.docx"), true);
+                IFile testDocument5 = await testLibrary.RootFolder.Files.AddAsync("ClassifyAndExtractFile5.docx", System.IO.File.OpenRead($".{Path.DirectorySeparatorChar}TestAssets{Path.DirectorySeparatorChar}test.docx"), true);
+                IFile testDocument6 = await testLibrary.RootFolder.Files.AddAsync("ClassifyAndExtractFile6.docx", System.IO.File.OpenRead($".{Path.DirectorySeparatorChar}TestAssets{Path.DirectorySeparatorChar}test.docx"), true);
+                IFile testDocument7 = await testLibrary.RootFolder.Files.AddAsync("ClassifyAndExtractFile7.docx", System.IO.File.OpenRead($".{Path.DirectorySeparatorChar}TestAssets{Path.DirectorySeparatorChar}test.docx"), true);
+                IFile testDocument8 = await testLibrary.RootFolder.Files.AddAsync("ClassifyAndExtractFile8.docx", System.IO.File.OpenRead($".{Path.DirectorySeparatorChar}TestAssets{Path.DirectorySeparatorChar}test.docx"), true);
+                IFile testDocument9 = await testLibrary.RootFolder.Files.AddAsync("ClassifyAndExtractFile9.docx", System.IO.File.OpenRead($".{Path.DirectorySeparatorChar}TestAssets{Path.DirectorySeparatorChar}test.docx"), true);
+                IFile testDocument10 = await testLibrary.RootFolder.Files.AddAsync("ClassifyAndExtractFile10.docx", System.IO.File.OpenRead($".{Path.DirectorySeparatorChar}TestAssets{Path.DirectorySeparatorChar}test.docx"), true);
+
+                // publish model to library
+                var result = await modelToRegister.PublishModelAsync(testLibrary);
+                Assert.IsTrue(result != null);
+                Assert.IsTrue(result.ErrorMessage == null);
+                Assert.IsTrue(result.StatusCode == 201);
+                Assert.IsTrue(result.Succeeded);
+
+                // Classify and extract the library off peak
+                var classifyResult = testLibrary.ClassifyAndExtractOffPeak();
+
+                // Validate results
+                Assert.IsTrue(classifyResult.Created != DateTime.MinValue);
+                Assert.IsTrue(classifyResult.DeliverDate != DateTime.MinValue);
+                Assert.IsTrue(classifyResult.ErrorMessage == null);
+                Assert.IsTrue(classifyResult.StatusCode == 201);
+                Assert.IsTrue(classifyResult.Status == "ExponentialBackoff");
+                Assert.IsTrue(classifyResult.TargetSiteUrl == context.Uri.ToString());
+                Assert.IsTrue(classifyResult.TargetWebServerRelativeUrl == context.Web.ServerRelativeUrl);
+
+                // unpublish model from library
+                var unpublishResult = await modelToRegister.UnPublishModelAsync(testLibrary);
+                Assert.IsTrue(unpublishResult != null);
+                Assert.IsTrue(unpublishResult.ErrorMessage == null);
+                Assert.IsTrue(unpublishResult.StatusCode == 200);
+                Assert.IsTrue(unpublishResult.Succeeded);
+
+                // cleanup the library
+                await testLibrary.DeleteAsync();
+            }
+        }
+
+        [TestMethod]
+        public async Task ClassifyAndExtractListFolderOffPeak()
+        {
+            //TestCommon.Instance.Mocking = false;
+            TestCommon.SharePointSyntexTestSetup();
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.SyntexContentCenterTestSite))
+            {
+                await context.Web.EnsurePropertiesAsync(p => p.ServerRelativeUrl);
+
+                var cc = await context.Web.AsSyntexContentCenterAsync();
+                var models = await cc.GetSyntexModelsAsync();
+                var modelToRegister = models.First();
+
+                // Add library with file to site
+                var libraryName = TestCommon.GetPnPSdkTestAssetName("ClassifyAndExtractListFolderOffPeak");
+                var testLibrary = await context.Web.Lists.AddAsync(libraryName, ListTemplateType.DocumentLibrary);
+                await testLibrary.EnsurePropertiesAsync(p => p.RootFolder);
+
+                var targetFolder = await testLibrary.RootFolder.EnsureFolderAsync("level1/level11");
+
+                IFile testDocument = await targetFolder.Files.AddAsync("ClassifyAndExtractFile.docx", System.IO.File.OpenRead($".{Path.DirectorySeparatorChar}TestAssets{Path.DirectorySeparatorChar}test.docx"), true);
+                IFile testDocument2 = await testLibrary.RootFolder.Files.AddAsync("ClassifyAndExtractFile2.docx", System.IO.File.OpenRead($".{Path.DirectorySeparatorChar}TestAssets{Path.DirectorySeparatorChar}test.docx"), true);
+                IFile testDocument3 = await targetFolder.Files.AddAsync("ClassifyAndExtractFile3.docx", System.IO.File.OpenRead($".{Path.DirectorySeparatorChar}TestAssets{Path.DirectorySeparatorChar}test.docx"), true);
+                IFile testDocument4 = await testLibrary.RootFolder.Files.AddAsync("ClassifyAndExtractFile4.docx", System.IO.File.OpenRead($".{Path.DirectorySeparatorChar}TestAssets{Path.DirectorySeparatorChar}test.docx"), true);
+                IFile testDocument5 = await targetFolder.Files.AddAsync("ClassifyAndExtractFile5.docx", System.IO.File.OpenRead($".{Path.DirectorySeparatorChar}TestAssets{Path.DirectorySeparatorChar}test.docx"), true);
+                IFile testDocument6 = await testLibrary.RootFolder.Files.AddAsync("ClassifyAndExtractFile6.docx", System.IO.File.OpenRead($".{Path.DirectorySeparatorChar}TestAssets{Path.DirectorySeparatorChar}test.docx"), true);
+                IFile testDocument7 = await targetFolder.Files.AddAsync("ClassifyAndExtractFile7.docx", System.IO.File.OpenRead($".{Path.DirectorySeparatorChar}TestAssets{Path.DirectorySeparatorChar}test.docx"), true);
+                IFile testDocument8 = await testLibrary.RootFolder.Files.AddAsync("ClassifyAndExtractFile8.docx", System.IO.File.OpenRead($".{Path.DirectorySeparatorChar}TestAssets{Path.DirectorySeparatorChar}test.docx"), true);
+                IFile testDocument9 = await targetFolder.Files.AddAsync("ClassifyAndExtractFile9.docx", System.IO.File.OpenRead($".{Path.DirectorySeparatorChar}TestAssets{Path.DirectorySeparatorChar}test.docx"), true);
+                IFile testDocument10 = await testLibrary.RootFolder.Files.AddAsync("ClassifyAndExtractFile10.docx", System.IO.File.OpenRead($".{Path.DirectorySeparatorChar}TestAssets{Path.DirectorySeparatorChar}test.docx"), true);
+
+                // publish model to library
+                var result = await modelToRegister.PublishModelAsync(testLibrary);
+                Assert.IsTrue(result != null);
+                Assert.IsTrue(result.ErrorMessage == null);
+                Assert.IsTrue(result.StatusCode == 201);
+                Assert.IsTrue(result.Succeeded);
+
+                // Classify and extract the files in the level11 folder off peak
+                var classifyResult = targetFolder.ClassifyAndExtractOffPeak();
+
+                // Validate results
+                Assert.IsTrue(classifyResult.Created != DateTime.MinValue);
+                Assert.IsTrue(classifyResult.DeliverDate != DateTime.MinValue);
+                Assert.IsTrue(classifyResult.ErrorMessage == null);
+                Assert.IsTrue(classifyResult.StatusCode == 201);
+                Assert.IsTrue(classifyResult.Status == "ExponentialBackoff");
+                Assert.IsTrue(classifyResult.TargetSiteUrl == context.Uri.ToString());
+                Assert.IsTrue(classifyResult.TargetWebServerRelativeUrl == context.Web.ServerRelativeUrl);
+
+                // unpublish model from library
+                var unpublishResult = await modelToRegister.UnPublishModelAsync(testLibrary);
+                Assert.IsTrue(unpublishResult != null);
+                Assert.IsTrue(unpublishResult.ErrorMessage == null);
+                Assert.IsTrue(unpublishResult.StatusCode == 200);
+                Assert.IsTrue(unpublishResult.Succeeded);
+
+                // cleanup the library
+                await testLibrary.DeleteAsync();
+            }
+        }
+
+
     }
 }

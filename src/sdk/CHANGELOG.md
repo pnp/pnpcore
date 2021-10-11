@@ -11,6 +11,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 ### Added
 
 - Added IRequestModule pipeline concept enabling to intercept pre/post http requests. First use case is the `WithHeaders()` option [jansenbe - Bert Jansen]
+- Added support for SharePoint Syntex off-peak hours content classification and extraction for lists and folders [jansenbe - Bert Jansen]
 
 ### Changed
 

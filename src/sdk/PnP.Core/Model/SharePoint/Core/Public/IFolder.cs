@@ -248,5 +248,20 @@ namespace PnP.Core.Model.SharePoint
         /// <returns>The <see cref="IFolder"/> representing the final folder in the hiarchy (e.g. FolderC)</returns>
         public IFolder EnsureFolder(string folderRelativeUrl);
         #endregion
+
+        #region Syntex support
+        /// <summary>
+        /// Classifies and extracts all unprocessed files in this folder and it's sub folders via the Syntex off-peak queue
+        /// </summary>
+        /// <returns>Information about the created classify and extract requests</returns>
+        Task<ISyntexClassifyAndExtractResult> ClassifyAndExtractOffPeakAsync();
+
+        /// <summary>
+        /// Classifies and extracts all unprocessed files in this folder and it's sub folders via the Syntex off-peak queue
+        /// </summary>
+        /// <returns>Information about the created classify and extract requests</returns>
+        ISyntexClassifyAndExtractResult ClassifyAndExtractOffPeak();
+
+        #endregion
     }
 }

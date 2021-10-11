@@ -565,6 +565,18 @@ namespace PnP.Core.Model.SharePoint
         /// <param name="pageSize">Page size used when loading the files in this library</param>
         /// <returns>Information about the created classify and extract requests</returns>
         List<ISyntexClassifyAndExtractResult> ClassifyAndExtract(bool force = false, int pageSize = 500);
+
+        /// <summary>
+        /// Classifies and extracts all unprocessed files in the list via the Syntex off-peak queue
+        /// </summary>
+        /// <returns>Information about the created classify and extract requests</returns>
+        Task<ISyntexClassifyAndExtractResult> ClassifyAndExtractOffPeakAsync();
+
+        /// <summary>
+        /// Classifies and extracts all unprocessed files in the list via the Syntex off-peak queue
+        /// </summary>
+        /// <returns>Information about the created classify and extract requests</returns>
+        ISyntexClassifyAndExtractResult ClassifyAndExtractOffPeak();
         #endregion
     }
 }

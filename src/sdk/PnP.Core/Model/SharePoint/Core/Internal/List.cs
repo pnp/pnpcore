@@ -762,11 +762,11 @@ namespace PnP.Core.Model.SharePoint
                     continue;
                 }
 
-                var apiCall = CreateClassifyAndExtractApiCall(Guid.Parse(file.Values["UniqueId"].ToString()));
+                var apiCall = SyntexClassifyAndExtract.CreateClassifyAndExtractApiCall(PnPContext, Guid.Parse(file.Values["UniqueId"].ToString()), false);
                 apiCall.RawSingleResult = new SyntexClassifyAndExtractResult();
                 apiCall.RawResultsHandler = (json, call) =>
                 {
-                    var result = ProcessClassifyAndExtractResponse(json);
+                    var result = SyntexClassifyAndExtract.ProcessClassifyAndExtractResponse(json);
                     (call.RawSingleResult as SyntexClassifyAndExtractResult).Created = result.Created;
                     (call.RawSingleResult as SyntexClassifyAndExtractResult).DeliverDate = result.DeliverDate;
                     (call.RawSingleResult as SyntexClassifyAndExtractResult).ErrorMessage = result.ErrorMessage;
@@ -800,39 +800,21 @@ namespace PnP.Core.Model.SharePoint
             return ClassifyAndExtractAsync(force, pageSize).GetAwaiter().GetResult();
         }
 
-        private static ISyntexClassifyAndExtractResult ProcessClassifyAndExtractResponse(string json)
+        public async Task<ISyntexClassifyAndExtractResult> ClassifyAndExtractOffPeakAsync()
         {
-            var root = JsonSerializer.Deserialize<JsonElement>(json).GetProperty("d");
-            return new SyntexClassifyAndExtractResult
-            {
-                Created = root.GetProperty("Created").GetDateTime(),
-                DeliverDate = root.GetProperty("DeliverDate").GetDateTime(),
-                ErrorMessage = root.GetProperty("ErrorMessage").GetString(),
-                StatusCode = root.GetProperty("StatusCode").GetInt32(),
-                Id = root.GetProperty("ID").GetGuid(),
-                Status = root.GetProperty("Status").GetString(),
-                WorkItemType = root.GetProperty("Type").GetGuid(),
-                TargetServerRelativeUrl = root.GetProperty("TargetServerRelativeUrl").GetString(),
-                TargetSiteUrl = root.GetProperty("TargetSiteUrl").GetString(),
-                TargetWebServerRelativeUrl = root.GetProperty("TargetWebServerRelativeUrl").GetString()
-            };
+            // Ensure we do have the list's root folder id 
+            await EnsurePropertiesAsync(p => p.RootFolder).ConfigureAwait(false);
+            // Build the API call
+            var apiCall = SyntexClassifyAndExtract.CreateClassifyAndExtractApiCall(PnPContext, RootFolder.UniqueId, true);
+            // Send the call to server
+            var response = await RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
+            // Parse the response json
+            return SyntexClassifyAndExtract.ProcessClassifyAndExtractResponse(response.Json);
         }
 
-        private ApiCall CreateClassifyAndExtractApiCall(Guid fileUniqueId)
+        public ISyntexClassifyAndExtractResult ClassifyAndExtractOffPeak()
         {
-            var classifyAndExtractFile = new
-            {
-                __metadata = new { type = "Microsoft.Office.Server.ContentCenter.SPMachineLearningWorkItemEntityData" },
-                Type = "AE9D4F24-EE84-4C0C-A972-A74CFFE939A1",
-                TargetSiteId = PnPContext.Site.Id,
-                TargetWebId = PnPContext.Web.Id,
-                TargetUniqueId = fileUniqueId
-            }.AsExpando();
-
-            string body = JsonSerializer.Serialize(classifyAndExtractFile, PnPConstants.JsonSerializer_IgnoreNullValues);
-
-            var apiCall = new ApiCall("_api/machinelearning/workitems", ApiType.SPORest, body);
-            return apiCall;
+            return ClassifyAndExtractOffPeakAsync().GetAwaiter().GetResult();
         }
         #endregion
 
