@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
+using PnP.Core.Model;
 using PnP.Core.Model.Security;
 using PnP.Core.Model.SharePoint;
 using PnP.Core.QueryModel;
@@ -176,22 +177,17 @@ namespace PnP.Core.Admin.Model.SharePoint
 
         public async Task<bool> IsCurrentUserTenantAdminAsync()
         {
-            //TODO: consider replacing with IsCurrentUserTenantAdminViaGraph approach used in PnP Framework. Requires option to pass along custom http headers
+            var result = await (context.Web.WithHeaders(new Dictionary<string, string>() { { "ConsistencyLevel", "eventual" } }) as Web).RawRequestAsync(
+                new ApiCall("me/memberOf?$count=true&$search=\"displayName: Company Administrator\" OR \"displayName: Global Administrator\"", ApiType.Graph), HttpMethod.Get).ConfigureAwait(false);
 
-            try
+            var json = JsonSerializer.Deserialize<JsonElement>(result.Json);
+
+            if (json.GetProperty("value").ValueKind != JsonValueKind.Undefined)
             {
-                // Get current tenant admin center admins...might throw an error if the current user does not have access to SharePoint Admin
-                var admins = await GetTenantAdminsAsync().ConfigureAwait(false);
-                // Get information about the current user
-                var currentUser = await context.Web.GetCurrentUserAsync().ConfigureAwait(false);
-                return admins.FirstOrDefault(p => p.LoginName.Equals(currentUser.LoginName)) != null;                
+                // "62e90394-69f5-4237-9190-012177145e10" = global tenant admin role template id
+                return json.GetProperty("value").EnumerateArray().Any(r => r.GetProperty("roleTemplateId").GetString() == "62e90394-69f5-4237-9190-012177145e10");
             }
-            catch(PnPException ex)
-            {
-                // When lacking permissions we'll end up here, eat the exceptions and assume user is not an admin
-                context.Logger?.LogInformation(PnPCoreAdminResources.Log_Information_ExceptionWhileGettingSharePointAdmins, ex.ToString());
-                return false;
-            }
+            return false;
         }
 
         public bool IsCurrentUserTenantAdmin()
