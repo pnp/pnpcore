@@ -17895,6 +17895,32 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IFolder.All
   nameWithType: IFolder.All
+- uid: PnP.Core.Model.SharePoint.IFolder.ClassifyAndExtractOffPeak
+  name: ClassifyAndExtractOffPeak()
+  href: api/PnP.Core.Model.SharePoint.IFolder.html#PnP_Core_Model_SharePoint_IFolder_ClassifyAndExtractOffPeak
+  commentId: M:PnP.Core.Model.SharePoint.IFolder.ClassifyAndExtractOffPeak
+  fullName: PnP.Core.Model.SharePoint.IFolder.ClassifyAndExtractOffPeak()
+  nameWithType: IFolder.ClassifyAndExtractOffPeak()
+- uid: PnP.Core.Model.SharePoint.IFolder.ClassifyAndExtractOffPeak*
+  name: ClassifyAndExtractOffPeak
+  href: api/PnP.Core.Model.SharePoint.IFolder.html#PnP_Core_Model_SharePoint_IFolder_ClassifyAndExtractOffPeak_
+  commentId: Overload:PnP.Core.Model.SharePoint.IFolder.ClassifyAndExtractOffPeak
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IFolder.ClassifyAndExtractOffPeak
+  nameWithType: IFolder.ClassifyAndExtractOffPeak
+- uid: PnP.Core.Model.SharePoint.IFolder.ClassifyAndExtractOffPeakAsync
+  name: ClassifyAndExtractOffPeakAsync()
+  href: api/PnP.Core.Model.SharePoint.IFolder.html#PnP_Core_Model_SharePoint_IFolder_ClassifyAndExtractOffPeakAsync
+  commentId: M:PnP.Core.Model.SharePoint.IFolder.ClassifyAndExtractOffPeakAsync
+  fullName: PnP.Core.Model.SharePoint.IFolder.ClassifyAndExtractOffPeakAsync()
+  nameWithType: IFolder.ClassifyAndExtractOffPeakAsync()
+- uid: PnP.Core.Model.SharePoint.IFolder.ClassifyAndExtractOffPeakAsync*
+  name: ClassifyAndExtractOffPeakAsync
+  href: api/PnP.Core.Model.SharePoint.IFolder.html#PnP_Core_Model_SharePoint_IFolder_ClassifyAndExtractOffPeakAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.IFolder.ClassifyAndExtractOffPeakAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IFolder.ClassifyAndExtractOffPeakAsync
+  nameWithType: IFolder.ClassifyAndExtractOffPeakAsync
 - uid: PnP.Core.Model.SharePoint.IFolder.CopyTo(System.String,PnP.Core.Model.SharePoint.MoveCopyOptions)
   name: CopyTo(String, MoveCopyOptions)
   href: api/PnP.Core.Model.SharePoint.IFolder.html#PnP_Core_Model_SharePoint_IFolder_CopyTo_System_String_PnP_Core_Model_SharePoint_MoveCopyOptions_
@@ -19143,6 +19169,32 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IList.ClassifyAndExtractAsync
   nameWithType: IList.ClassifyAndExtractAsync
+- uid: PnP.Core.Model.SharePoint.IList.ClassifyAndExtractOffPeak
+  name: ClassifyAndExtractOffPeak()
+  href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_ClassifyAndExtractOffPeak
+  commentId: M:PnP.Core.Model.SharePoint.IList.ClassifyAndExtractOffPeak
+  fullName: PnP.Core.Model.SharePoint.IList.ClassifyAndExtractOffPeak()
+  nameWithType: IList.ClassifyAndExtractOffPeak()
+- uid: PnP.Core.Model.SharePoint.IList.ClassifyAndExtractOffPeak*
+  name: ClassifyAndExtractOffPeak
+  href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_ClassifyAndExtractOffPeak_
+  commentId: Overload:PnP.Core.Model.SharePoint.IList.ClassifyAndExtractOffPeak
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IList.ClassifyAndExtractOffPeak
+  nameWithType: IList.ClassifyAndExtractOffPeak
+- uid: PnP.Core.Model.SharePoint.IList.ClassifyAndExtractOffPeakAsync
+  name: ClassifyAndExtractOffPeakAsync()
+  href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_ClassifyAndExtractOffPeakAsync
+  commentId: M:PnP.Core.Model.SharePoint.IList.ClassifyAndExtractOffPeakAsync
+  fullName: PnP.Core.Model.SharePoint.IList.ClassifyAndExtractOffPeakAsync()
+  nameWithType: IList.ClassifyAndExtractOffPeakAsync()
+- uid: PnP.Core.Model.SharePoint.IList.ClassifyAndExtractOffPeakAsync*
+  name: ClassifyAndExtractOffPeakAsync
+  href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_ClassifyAndExtractOffPeakAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.IList.ClassifyAndExtractOffPeakAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IList.ClassifyAndExtractOffPeakAsync
+  nameWithType: IList.ClassifyAndExtractOffPeakAsync
 - uid: PnP.Core.Model.SharePoint.IList.ContentTypes
   name: ContentTypes
   href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_ContentTypes

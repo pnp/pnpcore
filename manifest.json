@@ -2430,7 +2430,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.IFolder.html",
-          "hash": "Sh/WCK5w993VJu3DSQlNdQ=="
+          "hash": "AjT6gQ/70L8CBqEaKD0UbQ=="
         }
       },
       "is_incremental": false,
@@ -2502,7 +2502,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.IList.html",
-          "hash": "nmo1zQtDGJJA6Ftfv+xShg=="
+          "hash": "CEMmvyh04oUxk/xg6BvsAQ=="
         }
       },
       "is_incremental": false,
@@ -5899,7 +5899,7 @@
       "output": {
         ".html": {
           "relative_path": "using-the-sdk/syntex-intro.html",
-          "hash": "kQ4o2uz32Rq93e/j9ZjF2Q=="
+          "hash": "849vzYSLI6pN9BdYjpbDhw=="
         }
       },
       "is_incremental": false,
