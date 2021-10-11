@@ -276,6 +276,9 @@
   <data name="Info_AnalyserNoLayoutsFound" xml:space="preserve">
     <value>There are no page layouts found to analyse</value>
   </data>
+  <data name="Info_AnalysingNoWebPartsFound" xml:space="preserve">
+    <value>No web parts were found on page</value>
+  </data>
   <data name="Info_CallingWebServicesToExtractWebPartsFromPage" xml:space="preserve">
     <value>Calling Web Services to Extract Web Parts from page '{0}'</value>
   </data>
