@@ -363,6 +363,32 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Admin.Model.Microsoft365.IMicrosoft365Admin.GetMultiGeoLocationsAsync
   nameWithType: IMicrosoft365Admin.GetMultiGeoLocationsAsync
+- uid: PnP.Core.Admin.Model.Microsoft365.IMicrosoft365Admin.GetSensitivityLabels
+  name: GetSensitivityLabels()
+  href: api/PnP.Core.Admin.Model.Microsoft365.IMicrosoft365Admin.html#PnP_Core_Admin_Model_Microsoft365_IMicrosoft365Admin_GetSensitivityLabels
+  commentId: M:PnP.Core.Admin.Model.Microsoft365.IMicrosoft365Admin.GetSensitivityLabels
+  fullName: PnP.Core.Admin.Model.Microsoft365.IMicrosoft365Admin.GetSensitivityLabels()
+  nameWithType: IMicrosoft365Admin.GetSensitivityLabels()
+- uid: PnP.Core.Admin.Model.Microsoft365.IMicrosoft365Admin.GetSensitivityLabels*
+  name: GetSensitivityLabels
+  href: api/PnP.Core.Admin.Model.Microsoft365.IMicrosoft365Admin.html#PnP_Core_Admin_Model_Microsoft365_IMicrosoft365Admin_GetSensitivityLabels_
+  commentId: Overload:PnP.Core.Admin.Model.Microsoft365.IMicrosoft365Admin.GetSensitivityLabels
+  isSpec: "True"
+  fullName: PnP.Core.Admin.Model.Microsoft365.IMicrosoft365Admin.GetSensitivityLabels
+  nameWithType: IMicrosoft365Admin.GetSensitivityLabels
+- uid: PnP.Core.Admin.Model.Microsoft365.IMicrosoft365Admin.GetSensitivityLabelsAsync
+  name: GetSensitivityLabelsAsync()
+  href: api/PnP.Core.Admin.Model.Microsoft365.IMicrosoft365Admin.html#PnP_Core_Admin_Model_Microsoft365_IMicrosoft365Admin_GetSensitivityLabelsAsync
+  commentId: M:PnP.Core.Admin.Model.Microsoft365.IMicrosoft365Admin.GetSensitivityLabelsAsync
+  fullName: PnP.Core.Admin.Model.Microsoft365.IMicrosoft365Admin.GetSensitivityLabelsAsync()
+  nameWithType: IMicrosoft365Admin.GetSensitivityLabelsAsync()
+- uid: PnP.Core.Admin.Model.Microsoft365.IMicrosoft365Admin.GetSensitivityLabelsAsync*
+  name: GetSensitivityLabelsAsync
+  href: api/PnP.Core.Admin.Model.Microsoft365.IMicrosoft365Admin.html#PnP_Core_Admin_Model_Microsoft365_IMicrosoft365Admin_GetSensitivityLabelsAsync_
+  commentId: Overload:PnP.Core.Admin.Model.Microsoft365.IMicrosoft365Admin.GetSensitivityLabelsAsync
+  isSpec: "True"
+  fullName: PnP.Core.Admin.Model.Microsoft365.IMicrosoft365Admin.GetSensitivityLabelsAsync
+  nameWithType: IMicrosoft365Admin.GetSensitivityLabelsAsync
 - uid: PnP.Core.Admin.Model.Microsoft365.IMicrosoft365Admin.IsMultiGeoTenant
   name: IsMultiGeoTenant()
   href: api/PnP.Core.Admin.Model.Microsoft365.IMicrosoft365Admin.html#PnP_Core_Admin_Model_Microsoft365_IMicrosoft365Admin_IsMultiGeoTenant
@@ -389,6 +415,90 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Admin.Model.Microsoft365.IMicrosoft365Admin.IsMultiGeoTenantAsync
   nameWithType: IMicrosoft365Admin.IsMultiGeoTenantAsync
+- uid: PnP.Core.Admin.Model.Microsoft365.ISensitivityLabel
+  name: ISensitivityLabel
+  href: api/PnP.Core.Admin.Model.Microsoft365.ISensitivityLabel.html
+  commentId: T:PnP.Core.Admin.Model.Microsoft365.ISensitivityLabel
+  fullName: PnP.Core.Admin.Model.Microsoft365.ISensitivityLabel
+  nameWithType: ISensitivityLabel
+- uid: PnP.Core.Admin.Model.Microsoft365.ISensitivityLabel.ApplicableTo
+  name: ApplicableTo
+  href: api/PnP.Core.Admin.Model.Microsoft365.ISensitivityLabel.html#PnP_Core_Admin_Model_Microsoft365_ISensitivityLabel_ApplicableTo
+  commentId: P:PnP.Core.Admin.Model.Microsoft365.ISensitivityLabel.ApplicableTo
+  fullName: PnP.Core.Admin.Model.Microsoft365.ISensitivityLabel.ApplicableTo
+  nameWithType: ISensitivityLabel.ApplicableTo
+- uid: PnP.Core.Admin.Model.Microsoft365.ISensitivityLabel.ApplicableTo*
+  name: ApplicableTo
+  href: api/PnP.Core.Admin.Model.Microsoft365.ISensitivityLabel.html#PnP_Core_Admin_Model_Microsoft365_ISensitivityLabel_ApplicableTo_
+  commentId: Overload:PnP.Core.Admin.Model.Microsoft365.ISensitivityLabel.ApplicableTo
+  isSpec: "True"
+  fullName: PnP.Core.Admin.Model.Microsoft365.ISensitivityLabel.ApplicableTo
+  nameWithType: ISensitivityLabel.ApplicableTo
+- uid: PnP.Core.Admin.Model.Microsoft365.ISensitivityLabel.Description
+  name: Description
+  href: api/PnP.Core.Admin.Model.Microsoft365.ISensitivityLabel.html#PnP_Core_Admin_Model_Microsoft365_ISensitivityLabel_Description
+  commentId: P:PnP.Core.Admin.Model.Microsoft365.ISensitivityLabel.Description
+  fullName: PnP.Core.Admin.Model.Microsoft365.ISensitivityLabel.Description
+  nameWithType: ISensitivityLabel.Description
+- uid: PnP.Core.Admin.Model.Microsoft365.ISensitivityLabel.Description*
+  name: Description
+  href: api/PnP.Core.Admin.Model.Microsoft365.ISensitivityLabel.html#PnP_Core_Admin_Model_Microsoft365_ISensitivityLabel_Description_
+  commentId: Overload:PnP.Core.Admin.Model.Microsoft365.ISensitivityLabel.Description
+  isSpec: "True"
+  fullName: PnP.Core.Admin.Model.Microsoft365.ISensitivityLabel.Description
+  nameWithType: ISensitivityLabel.Description
+- uid: PnP.Core.Admin.Model.Microsoft365.ISensitivityLabel.DisplayName
+  name: DisplayName
+  href: api/PnP.Core.Admin.Model.Microsoft365.ISensitivityLabel.html#PnP_Core_Admin_Model_Microsoft365_ISensitivityLabel_DisplayName
+  commentId: P:PnP.Core.Admin.Model.Microsoft365.ISensitivityLabel.DisplayName
+  fullName: PnP.Core.Admin.Model.Microsoft365.ISensitivityLabel.DisplayName
+  nameWithType: ISensitivityLabel.DisplayName
+- uid: PnP.Core.Admin.Model.Microsoft365.ISensitivityLabel.DisplayName*
+  name: DisplayName
+  href: api/PnP.Core.Admin.Model.Microsoft365.ISensitivityLabel.html#PnP_Core_Admin_Model_Microsoft365_ISensitivityLabel_DisplayName_
+  commentId: Overload:PnP.Core.Admin.Model.Microsoft365.ISensitivityLabel.DisplayName
+  isSpec: "True"
+  fullName: PnP.Core.Admin.Model.Microsoft365.ISensitivityLabel.DisplayName
+  nameWithType: ISensitivityLabel.DisplayName
+- uid: PnP.Core.Admin.Model.Microsoft365.ISensitivityLabel.Id
+  name: Id
+  href: api/PnP.Core.Admin.Model.Microsoft365.ISensitivityLabel.html#PnP_Core_Admin_Model_Microsoft365_ISensitivityLabel_Id
+  commentId: P:PnP.Core.Admin.Model.Microsoft365.ISensitivityLabel.Id
+  fullName: PnP.Core.Admin.Model.Microsoft365.ISensitivityLabel.Id
+  nameWithType: ISensitivityLabel.Id
+- uid: PnP.Core.Admin.Model.Microsoft365.ISensitivityLabel.Id*
+  name: Id
+  href: api/PnP.Core.Admin.Model.Microsoft365.ISensitivityLabel.html#PnP_Core_Admin_Model_Microsoft365_ISensitivityLabel_Id_
+  commentId: Overload:PnP.Core.Admin.Model.Microsoft365.ISensitivityLabel.Id
+  isSpec: "True"
+  fullName: PnP.Core.Admin.Model.Microsoft365.ISensitivityLabel.Id
+  nameWithType: ISensitivityLabel.Id
+- uid: PnP.Core.Admin.Model.Microsoft365.ISensitivityLabel.IsDefault
+  name: IsDefault
+  href: api/PnP.Core.Admin.Model.Microsoft365.ISensitivityLabel.html#PnP_Core_Admin_Model_Microsoft365_ISensitivityLabel_IsDefault
+  commentId: P:PnP.Core.Admin.Model.Microsoft365.ISensitivityLabel.IsDefault
+  fullName: PnP.Core.Admin.Model.Microsoft365.ISensitivityLabel.IsDefault
+  nameWithType: ISensitivityLabel.IsDefault
+- uid: PnP.Core.Admin.Model.Microsoft365.ISensitivityLabel.IsDefault*
+  name: IsDefault
+  href: api/PnP.Core.Admin.Model.Microsoft365.ISensitivityLabel.html#PnP_Core_Admin_Model_Microsoft365_ISensitivityLabel_IsDefault_
+  commentId: Overload:PnP.Core.Admin.Model.Microsoft365.ISensitivityLabel.IsDefault
+  isSpec: "True"
+  fullName: PnP.Core.Admin.Model.Microsoft365.ISensitivityLabel.IsDefault
+  nameWithType: ISensitivityLabel.IsDefault
+- uid: PnP.Core.Admin.Model.Microsoft365.ISensitivityLabel.Name
+  name: Name
+  href: api/PnP.Core.Admin.Model.Microsoft365.ISensitivityLabel.html#PnP_Core_Admin_Model_Microsoft365_ISensitivityLabel_Name
+  commentId: P:PnP.Core.Admin.Model.Microsoft365.ISensitivityLabel.Name
+  fullName: PnP.Core.Admin.Model.Microsoft365.ISensitivityLabel.Name
+  nameWithType: ISensitivityLabel.Name
+- uid: PnP.Core.Admin.Model.Microsoft365.ISensitivityLabel.Name*
+  name: Name
+  href: api/PnP.Core.Admin.Model.Microsoft365.ISensitivityLabel.html#PnP_Core_Admin_Model_Microsoft365_ISensitivityLabel_Name_
+  commentId: Overload:PnP.Core.Admin.Model.Microsoft365.ISensitivityLabel.Name
+  isSpec: "True"
+  fullName: PnP.Core.Admin.Model.Microsoft365.ISensitivityLabel.Name
+  nameWithType: ISensitivityLabel.Name
 - uid: PnP.Core.Admin.Model.SharePoint
   name: PnP.Core.Admin.Model.SharePoint
   href: api/PnP.Core.Admin.Model.SharePoint.html

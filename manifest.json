@@ -78,7 +78,19 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Admin.Model.Microsoft365.IMicrosoft365Admin.html",
-          "hash": "avT9GhQ3y1H2vTlRzf+7mQ=="
+          "hash": "OJhevst6FlxumhoEdlDvJA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Admin.Model.Microsoft365.ISensitivityLabel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Admin.Model.Microsoft365.ISensitivityLabel.html",
+          "hash": "fDneL41JKbyRuLb7RHQUMA=="
         }
       },
       "is_incremental": false,
@@ -90,7 +102,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Admin.Model.Microsoft365.html",
-          "hash": "8CUGPR6E/AVOX0M5dYNMzg=="
+          "hash": "3n4Zwjhy/8JIhPntGb2ykw=="
         }
       },
       "is_incremental": false,
@@ -2706,7 +2718,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.ISite.html",
-          "hash": "eo8weV+ekvH1tIX27S+f4A=="
+          "hash": "71+A5OjN/gjHSrgQUnwbkQ=="
         }
       },
       "is_incremental": false,
@@ -4806,7 +4818,7 @@
       "output": {
         ".html": {
           "relative_path": "api/toc.html",
-          "hash": "NL5bPmMigUZJx+Ojzp5a8g=="
+          "hash": "Yui9QNEwIu6rK/n5RXZt9A=="
         }
       },
       "is_incremental": false,
@@ -6046,7 +6058,7 @@
         "ManagedReferenceDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build",
-          "total_file_count": 398,
+          "total_file_count": 399,
           "skipped_file_count": 0
         },
         "ResourceDocumentProcessor": {
