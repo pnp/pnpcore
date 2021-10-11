@@ -103,14 +103,20 @@ namespace Microsoft.Extensions.DependencyInjection
             // Add the custom PageLayoutAnalyser type
             builder.Services.TryAddTransient<PageLayoutAnalyser, PageLayoutAnalyser>();
 
-            // Add the SharePoint functions service
+            // Add the SharePoint functions services
             builder.Services.TryAddTransient<FunctionProcessor, FunctionProcessor>();
             builder.Services.TryAddTransient<SharePointFunctionsService, SharePointFunctionsService>();
+            builder.Services.TryAddTransient<PublishingFunctionProcessor, PublishingFunctionProcessor>();
+            builder.Services.TryAddTransient<SharePointPublishingFunctionsService, SharePointPublishingFunctionsService>();
 
             // Add the HTML Transformator service
             builder.Services.TryAddTransient<HtmlTransformator, HtmlTransformator>();
 
+            // Add the Wiki HTML Transformator service
             builder.Services.TryAddTransient<WikiHtmlTransformator, WikiHtmlTransformator>();
+
+            // Add the Publishing Page Transformator service
+            builder.Services.TryAddTransient<PublishingLayoutTransformator, PublishingLayoutTransformator>();            
 
             return new PnPSharePointTransformationBuilder(builder.Services);
         }

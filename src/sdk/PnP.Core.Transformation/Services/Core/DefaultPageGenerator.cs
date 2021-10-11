@@ -331,7 +331,7 @@ namespace PnP.Core.Transformation.Services.Core
             var generatedPageUri = new Uri($"{targetWeb.Url.Scheme}://{targetWeb.Url.Host}{generatedPageFile.ServerRelativeUrl}");
 
             // Validate the URI of the output page
-            if (generatedPageUri != targetPageUri)
+            if (!generatedPageUri.AbsoluteUri.Equals(targetPageUri.AbsoluteUri, StringComparison.InvariantCultureIgnoreCase))
             {
                 throw new ApplicationException(TransformationResources.Error_InvalidTargetPageUri);
             }

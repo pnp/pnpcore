@@ -52,9 +52,7 @@ namespace PnP.Core.Transformation.SharePoint.Functions
         /// </summary>
         /// <param name="pageTransformationContext">The current page transformation context</param>
         /// <param name="sourceContext">The CSOM source context</param>
-        public void Init(PageTransformationContext pageTransformationContext, ClientContext sourceContext
-            //, WebPartMapping pageTransformation
-            )
+        public void Init(PageTransformationContext pageTransformationContext, ClientContext sourceContext)
         {
             // Configure the SharePoint Function service instance
             this.sharePointFunctionsService.PageTransformationContext = pageTransformationContext;

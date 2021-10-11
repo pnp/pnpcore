@@ -77,7 +77,7 @@ namespace PnP.Core.Transformation.SharePoint.Test
 
             Assert.IsNotNull(result);
             var expectedUri = new Uri($"{targetContext.Web.Url}/SitePages/Migrated_{sourceUri.Segments[sourceUri.Segments.Length - 1]}");
-            Assert.AreEqual(expectedUri, result);
+            Assert.AreEqual(expectedUri.AbsoluteUri, result.AbsoluteUri, ignoreCase: true);
         }
 
         [TestMethod]

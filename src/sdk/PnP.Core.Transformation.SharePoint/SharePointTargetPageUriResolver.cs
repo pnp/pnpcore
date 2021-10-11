@@ -46,7 +46,12 @@ namespace PnP.Core.Transformation.SharePoint
             itemSiteLocalUri.Append(this.defaultPageTransformationOptions.TargetPagePrefix);
             itemSiteLocalUri.Append(spItem.Id.Uri.Segments[spItem.Id.Uri.Segments.Length - 1]);
 
-            var uri = new Uri(targetContext.Uri + "/" + itemSiteLocalUri.ToString());
+            // In case the source is a classi publishing portal
+            // we also need to replace "pages" with "sitepages"
+            var uri = new Uri((targetContext.Uri + "/" + 
+                itemSiteLocalUri.ToString())
+                .Replace("/pages/", "/sitepages/", StringComparison.InvariantCultureIgnoreCase));
+
             return Task.FromResult(uri);
         }
     }

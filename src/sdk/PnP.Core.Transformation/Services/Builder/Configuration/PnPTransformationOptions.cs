@@ -18,6 +18,11 @@ namespace PnP.Core.Transformation.Services.Builder.Configuration
         /// </summary>
         public string PersistenceProviderConnectionString { get; set; }
 
+        /// <summary>
+        /// Defines the path where to store logs, if any
+        /// </summary>
+        public string LogStoragePath { get; set; }
+
         // TODO: Here we can configure all the "generic" configuration settings for the engine
     }
 }
