@@ -1672,6 +1672,7 @@ namespace PnP.Core.Transformation.SharePoint.Functions
 
             return (!targetPageServerRelativeUrl.StartsWith(sourceServerRelativeUrl, StringComparison.InvariantCultureIgnoreCase));
         }
+
         #endregion
     }
 }

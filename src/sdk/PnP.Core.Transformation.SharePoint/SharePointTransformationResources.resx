@@ -216,6 +216,9 @@
   <data name="Error_LoadContentFromFileContentLink" xml:space="preserve">
     <value>An error occurred in getting the referenced file in content link: {0}</value>
   </data>
+  <data name="Error_Maximum3ColumnsAllowed" xml:space="preserve">
+    <value>Publishing transformation layout mapping can maximum use 3 columns</value>
+  </data>
   <data name="Error_MediaWebpartConfiguration" xml:space="preserve">
     <value>The media web part configuration could not be read, skipping this web part from the transformation</value>
   </data>
@@ -354,6 +357,9 @@
   <data name="Info_XmlMappingSavedAs" xml:space="preserve">
     <value>Xml Mapping saved as {0}</value>
   </data>
+  <data name="Warning_CannotRetrieveFieldValue" xml:space="preserve">
+    <value>Could not retrieve field value from mapping, the contents were empty</value>
+  </data>
   <data name="Warning_ContentWebPartMappingNotFound" xml:space="preserve">
     <value>Web Part Mapping not found</value>
   </data>
@@ -371,6 +377,9 @@
   </data>
   <data name="Warning_PageLayoutsCannotBeDetermined" xml:space="preserve">
     <value>Page layout could not be determined by the publishing page</value>
+  </data>
+  <data name="Warning_SkippedWebPartDueToEmptyInSourcee" xml:space="preserve">
+    <value>Target web part {0} is not added for field {1} because the field value was empty and the RemoveEmptySectionsAndColumns flag was set</value>
   </data>
   <data name="Warning_TableCouldNotBeNormalized" xml:space="preserve">
     <value>Table could not be normalized and will be taken over as is</value>

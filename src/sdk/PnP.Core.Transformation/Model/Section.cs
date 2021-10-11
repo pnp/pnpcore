@@ -29,5 +29,10 @@ namespace PnP.Core.Transformation.Model
         /// The emphasis for the zone
         /// </summary>
         public int ZoneEmphasis { get; set; }
+
+        /// <summary>
+        /// The emphasis for the vertical zone
+        /// </summary>
+        public int VerticalSectionZoneEmphasis { get; set; }
     }
 }

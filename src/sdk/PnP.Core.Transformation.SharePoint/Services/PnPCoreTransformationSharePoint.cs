@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using PnP.Core.Services;
 using PnP.Core.Transformation.Services.Builder.Configuration;
 using PnP.Core.Transformation.Services.Core;
@@ -35,6 +36,11 @@ namespace PnP.Core.Transformation.SharePoint.Services
         {
             // Build the service collection and load PnP Core SDK
             IServiceCollection services = new ServiceCollection();
+
+            services.AddLogging(builder => {
+                // builder.AddConsole();
+                var b = builder;
+            });
 
             // To increase coverage of solutions providing tokens without graph scopes we turn of graphfirst for PnPContext created from PnP Framework                
             services = services.AddPnPCore(options =>
