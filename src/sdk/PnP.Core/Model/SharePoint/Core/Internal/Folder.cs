@@ -370,6 +370,23 @@ namespace PnP.Core.Model.SharePoint
 
         #endregion
 
+        #region Syntex Support
+        public async Task<ISyntexClassifyAndExtractResult> ClassifyAndExtractOffPeakAsync()
+        {
+            // Build the API call
+            var apiCall = SyntexClassifyAndExtract.CreateClassifyAndExtractApiCall(PnPContext, UniqueId, true);
+            // Send the call to server
+            var response = await RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
+            // Parse the response json
+            return SyntexClassifyAndExtract.ProcessClassifyAndExtractResponse(response.Json);
+        }
+
+        public ISyntexClassifyAndExtractResult ClassifyAndExtractOffPeak()
+        {
+            return ClassifyAndExtractOffPeakAsync().GetAwaiter().GetResult();
+        }
+        #endregion
+
         #endregion
     }
 }

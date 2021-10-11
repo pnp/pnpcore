@@ -202,3 +202,19 @@ var classifyAndExtractResults = await invoices.ClassifyAndExtractAsync();
 
 > [!Note]
 > You can set the optional `ClassifyAndExtractAsync` method parameter `force` to true to have all files in the library (again) classified and extracted.
+
+### Classify and extract all files in a library or folder using the off-peak queue
+
+When you've published a Syntex model to an existing library the files in that library are not automatically classified and extracted by that model, only newly added files will be classified and extracted. Previous chapter showed how you can trigger this for a single file or for all files by enumerating all files and submitting them. For very large libraries enumerating files is time consuming and using the option to classify and extract the library during off-peak hours is better
+
+```csharp
+// Get a reference to the list to be classified and extracted
+var invoices = await context.Web.Lists.GetByTitleAsync("Invoices", p => p.RootFolder);
+
+// Request classification and extraction for all files in the Invoices list that were never classified and extracted
+var classifyAndExtractResults = await invoices.ClassifyAndExtractOffPeakAsync();
+
+// Only request classification and extraction for all files in the folder named 2021/Q1/Jan
+var jan2021 = await invoices.RootFolder.EnsureFolderAsync("2021/Q1/Jan");
+var classifyAndExtractResultsForJan2021 = await jan2021.ClassifyAndExtractOffPeakAsync();
+```
