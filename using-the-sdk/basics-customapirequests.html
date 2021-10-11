@@ -253,6 +253,16 @@ var result2 = await context.Web.Lists
 // Execute the batch
 await context.ExecuteAsync(batch);
 </code></pre>
+<h2 id="i-want-to-specify-custom-request-headers-or-read-the-response-headers">I want to specify custom request headers or read the response headers</h2>
+<p>To specify request headers you can use the <code>WithHeaders</code> extension method from the <code>PnP.Core.Model</code> namespace: using a <code>Dictionary&lt;string,string&gt;</code> you provide input headers and using a delegate your code get notified of the resulting response headers. Below are some sample:</p>
+<pre><code class="lang-csharp">Dictionary&lt;string, string&gt; extraHeaders = new Dictionary&lt;string, string&gt;() { { &quot;myheader&quot;, &quot;myheadervalue&quot; } };
+
+// Use WithHeaders on custom API request, process the returned response headers
+var meResponse = await context.Web.WithHeaders(extraHeaders, (responseHeaders) =&gt; { /* process the response headers */ }).ExecuteRequestBatchAsync(batch, new ApiRequest(ApiRequestType.Graph, &quot;me&quot;));
+
+// Use WithHeaders on OOB API request, ignore the response headers
+context.Web.WithHeaders(extraHeaders).Load(p =&gt; p.All);
+</code></pre>
 </article>
           </div>
           <div class="hidden-sm col-md-2" role="complementary">
