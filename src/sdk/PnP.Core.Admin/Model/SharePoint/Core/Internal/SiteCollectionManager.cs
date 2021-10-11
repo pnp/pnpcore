@@ -30,12 +30,7 @@ namespace PnP.Core.Admin.Model.SharePoint
 
                     var result = await (tenantAdminContext.Web as Web).RawRequestAsync(new ApiCall(csomRequests), HttpMethod.Post).ConfigureAwait(false);
 
-                    SpoOperation op = result.ApiCall.CSOMRequests[0].Result as SpoOperation;
-
-                    if (!op.IsComplete)
-                    {
-                        await WaitForSpoOperationCompleteAsync(tenantAdminContext, op).ConfigureAwait(false);
-                    }
+                    await WaitForSpoOperationCompleteAsync(tenantAdminContext, result.ApiCall.CSOMRequests[0].Result as SpoOperation).ConfigureAwait(false);
                 }
             }
         }
@@ -59,12 +54,7 @@ namespace PnP.Core.Admin.Model.SharePoint
 
                     var result = await (tenantAdminContext.Web as Web).RawRequestAsync(new ApiCall(csomRequests), HttpMethod.Post).ConfigureAwait(false);
 
-                    SpoOperation op = result.ApiCall.CSOMRequests[0].Result as SpoOperation;
-
-                    if (!op.IsComplete)
-                    {
-                        await WaitForSpoOperationCompleteAsync(tenantAdminContext, op).ConfigureAwait(false);
-                    }
+                    await WaitForSpoOperationCompleteAsync(tenantAdminContext, result.ApiCall.CSOMRequests[0].Result as SpoOperation).ConfigureAwait(false);
                 }
             }
         }
@@ -80,17 +70,17 @@ namespace PnP.Core.Admin.Model.SharePoint
 
                 var result = await (tenantAdminContext.Web as Web).RawRequestAsync(new ApiCall(csomRequests), HttpMethod.Post).ConfigureAwait(false);
 
-                SpoOperation op = result.ApiCall.CSOMRequests[0].Result as SpoOperation;
-
-                if (!op.IsComplete)
-                {
-                    await WaitForSpoOperationCompleteAsync(tenantAdminContext, op).ConfigureAwait(false);
-                }
+                await WaitForSpoOperationCompleteAsync(tenantAdminContext, result.ApiCall.CSOMRequests[0].Result as SpoOperation).ConfigureAwait(false);
             }
         }
 
         internal static async Task WaitForSpoOperationCompleteAsync(PnPContext tenantAdminContext, SpoOperation operation, int maxStatusChecks = 10)
         {
+            if (operation.IsComplete)
+            {
+                return;
+            }
+
             List<IRequest<object>> csomRequests = new List<IRequest<object>>
             {
                 new SpoOperationRequest(operation.ObjectIdentity)

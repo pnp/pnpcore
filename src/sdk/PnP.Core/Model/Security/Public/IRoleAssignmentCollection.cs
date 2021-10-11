@@ -7,7 +7,7 @@ namespace PnP.Core.Model.Security
     /// Public interface to define a collection of SharePoint groups
     /// </summary>
     [ConcreteType(typeof(RoleAssignmentCollection))]
-    public interface IRoleAssignmentCollection : IQueryable<IRoleAssignment>, IAsyncEnumerable<IRoleAssignment>, IDataModelCollection<IRoleAssignment>, IDataModelCollectionLoad<IRoleAssignment>
+    public interface IRoleAssignmentCollection : IQueryable<IRoleAssignment>, IAsyncEnumerable<IRoleAssignment>, IDataModelCollection<IRoleAssignment>, IDataModelCollectionLoad<IRoleAssignment>, ISupportModules<IRoleAssignmentCollection>
     {
     }
 }

@@ -158,6 +158,11 @@ namespace PnP.Core.Services
         /// </summary>
         internal PnPContextOptions LocalContextOptions { get; set; }
 
+        /// <summary>
+        /// Modules to be added to the next request's execution pipeline
+        /// </summary>
+        internal List<IRequestModule> RequestModules { get; set; }
+
 #if DEBUG
 
         #region Test related properties

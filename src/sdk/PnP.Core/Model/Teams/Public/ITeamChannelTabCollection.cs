@@ -10,7 +10,7 @@ namespace PnP.Core.Model.Teams
     /// Public interface to define a collection of Tabs for a Team Channel
     /// </summary>
     [ConcreteType(typeof(TeamChannelTabCollection))]
-    public interface ITeamChannelTabCollection : IQueryable<ITeamChannelTab>, IAsyncEnumerable<ITeamChannelTab>, IDataModelCollection<ITeamChannelTab>, IDataModelCollectionLoad<ITeamChannelTab>, IDataModelCollectionDeleteByGuidId
+    public interface ITeamChannelTabCollection : IQueryable<ITeamChannelTab>, IAsyncEnumerable<ITeamChannelTab>, IDataModelCollection<ITeamChannelTab>, IDataModelCollectionLoad<ITeamChannelTab>, IDataModelCollectionDeleteByGuidId, ISupportModules<ITeamChannelTabCollection>
     {
         /// <summary>
         /// Adds a new wiki channel tab

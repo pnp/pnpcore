@@ -93,6 +93,18 @@ namespace PnP.Core
         internal const string SharePointRestMetadata = "__metadata";
 
         /// <summary>
+        /// Id of the generic request module
+        /// </summary>
+        internal static Guid GenericRequestModuleId = Guid.Parse("{711CA09B-92E7-4A45-BB4C-E6422632E7F0}");
+
+        /// <summary>
+        /// Id of the custom header request module
+        /// </summary>
+        internal static Guid CustomHeadersModuleId = Guid.Parse("{46307280-190E-4365-8AA1-085C451E7799}");
+
+        #region Json serializers options
+
+        /// <summary>
         /// Cached JsonSerializerOptions for performance using IgnoreNullValues = true
         /// See https://github.com/dotnet/runtime/issues/38982 and https://www.meziantou.net/avoid-performance-issue-with-jsonserializer-by-reusing-the-same-instance-of-json.htm
         /// </summary>
@@ -174,5 +186,7 @@ namespace PnP.Core
                 new JsonStringEnumConverter(allowIntegerValues:false)
             }
         };
+
+        #endregion
     }
 }

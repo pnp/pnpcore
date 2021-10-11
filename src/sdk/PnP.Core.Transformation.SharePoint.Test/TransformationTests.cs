@@ -14,7 +14,7 @@ namespace PnP.Core.Transformation.SharePoint.Test
     {
 
         [TestMethod]
-        public async Task SharepointTransformAsync()
+        public async Task SharePointTransformAsync()
         {
             var config = TestCommon.GetConfigurationSettings();
 

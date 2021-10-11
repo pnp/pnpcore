@@ -1,6 +1,8 @@
 ﻿using Microsoft.Extensions.Logging;
+using PnP.Core.Admin.Services.Core.CSOM.Requests.Tenant;
 using PnP.Core.Model.SharePoint;
 using PnP.Core.Services;
+using PnP.Core.Services.Core.CSOM.Requests;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -61,6 +63,7 @@ namespace PnP.Core.Admin.Model.SharePoint
             if (siteToCreate.SensitivityLabelId != Guid.Empty)
             {
                 payload.Add("SensitivityLabel", siteToCreate.SensitivityLabelId);
+                //payload["Classification"] = siteCollectionCreationInformation.SensitivityLabel;
             }
             else
             {
@@ -81,7 +84,8 @@ namespace PnP.Core.Admin.Model.SharePoint
             // If we're using application permissions we use Microsoft Graph to create the site
             if (creationOptions.UsingApplicationPermissions.Value)
             {
-                return null;
+                //TODO: implement group creation functionality under Microsoft365 and use it here
+                throw new NotSupportedException("Creating Team sites using application permissions is not yet supported in this preview version");
             }
             else
             {
@@ -150,7 +154,31 @@ namespace PnP.Core.Admin.Model.SharePoint
 
         private static async Task<PnPContext> CreateClassicSiteAsync(PnPContext context, ClassicSiteOptions siteToCreate, SiteCreationOptions creationOptions)
         {
-            return null;
+            using (var tenantAdminContext = await context.GetSharePointAdmin().GetTenantAdminCenterContextAsync().ConfigureAwait(false))
+            {
+                string owner = siteToCreate.Owner;                
+                var splitOwner = owner.Split(new char[] { '|' }, StringSplitOptions.RemoveEmptyEntries);
+                if (splitOwner.Length == 3)
+                {
+                    owner = splitOwner[2];
+                }
+
+                List<IRequest<object>> csomRequests = new List<IRequest<object>>
+                {
+                    new CreateSiteRequest(siteToCreate.Url, siteToCreate.Title, owner, siteToCreate.WebTemplate, (int)siteToCreate.Language, (int)siteToCreate.TimeZone)
+                };
+
+                var result = await (tenantAdminContext.Web as Web).RawRequestAsync(new ApiCall(csomRequests), HttpMethod.Post).ConfigureAwait(false);
+
+                SpoOperation op = result.ApiCall.CSOMRequests[0].Result as SpoOperation;
+
+                if (!op.IsComplete)
+                {
+                    await SiteCollectionManager.WaitForSpoOperationCompleteAsync(tenantAdminContext, op).ConfigureAwait(false);
+                }
+
+                return await context.CloneAsync(siteToCreate.Url).ConfigureAwait(false);
+            }
         }
 
         private static async Task<SiteCreationOptions> EnsureSiteCreationOptionsAsync(PnPContext context, SiteCreationOptions creationOptions)
@@ -246,8 +274,14 @@ namespace PnP.Core.Admin.Model.SharePoint
             }
             else if (siteStatus == 1)
             {
+                Guid groupId = Guid.Empty;
+                if (!usingSpSiteManager)
+                {
+                    groupId = responseJson.GetProperty("d").GetProperty(statusProperty).GetProperty("GroupId").GetGuid();
+                }
+
                 // Site creation in progress, let's wait for it to finish
-                responseContext = await VerifySiteStatusAsync(context, usingSpSiteManager ? payload["GroupId"].ToString() : payload["Url"].ToString(),
+                responseContext = await VerifySiteStatusAsync(context, !usingSpSiteManager ? groupId.ToString() : payload["Url"].ToString(),
                     usingSpSiteManager, creationOptions.MaxStatusChecks.Value, creationOptions.WaitAfterStatusCheck.Value).ConfigureAwait(false);
             }
             else
@@ -392,9 +426,7 @@ namespace PnP.Core.Admin.Model.SharePoint
                         siteUrl = responseJson.GetProperty("d").GetProperty(statusProperty).GetProperty("SiteUrl").GetString();
                     }
                 }
-#pragma warning disable CA1031 // Do not catch general exception types
                 catch (Exception ex)
-#pragma warning restore CA1031 // Do not catch general exception types
                 {
                     // Log and eat exception here
                     context.Logger.LogWarning(PnPCoreAdminResources.Log_Warning_ExceptionWhileGettingSiteStatus, urlOrGroupToCheck, ex.ToString());

@@ -128,8 +128,10 @@ namespace PnP.Core.Services
         /// <param name="fromJsonCasting">Delegate for json type parsing</param>
         /// <param name="postMappingJson">Delegate for post mapping</param>
         /// <param name="operationName">Name of the operation, used for telemetry purposes</param>
+        /// <param name="requestModules">List with request modules to execute</param>
         /// <returns>The id to created batch request</returns>
-        internal Guid Add(TransientObject model, EntityInfo entityInfo, HttpMethod method, ApiCall apiCall, ApiCall backupApiCall, Func<FromJson, object> fromJsonCasting, Action<string> postMappingJson, string operationName)
+        internal Guid Add(TransientObject model, EntityInfo entityInfo, HttpMethod method, ApiCall apiCall, 
+            ApiCall backupApiCall, Func<FromJson, object> fromJsonCasting, Action<string> postMappingJson, string operationName, List<IRequestModule> requestModules)
         {
             var lastAddedRequest = GetLastRequest();
             int order = 0;
@@ -139,10 +141,36 @@ namespace PnP.Core.Services
             }
 
             var batchRequest = new BatchRequest(model, entityInfo, method, apiCall, backupApiCall, fromJsonCasting, postMappingJson, operationName, order);
+            batchRequest.RequestModules = requestModules;
 
             Requests.Add(order, batchRequest);
 
             return batchRequest.Id;
+        }
+
+        /// <summary>
+        /// Add a new request to this <see cref="Batch"/>
+        /// </summary>
+        /// <param name="model">Entity object on for which this request was meant</param>
+        /// <param name="entityInfo">Info about the entity object</param>
+        /// <param name="method">Type of http method (GET/PATCH/POST/...)</param>
+        /// <param name="apiCall">Rest/Graph call</param>
+        /// <param name="backupApiCall">Backup rest api call, will be used in case we encounter a mixed batch</param>
+        /// <param name="fromJsonCasting">Delegate for json type parsing</param>
+        /// <param name="postMappingJson">Delegate for post mapping</param>
+        /// <param name="operationName">Name of the operation, used for telemetry purposes</param>
+        /// <returns>The id to created batch request</returns>
+        internal Guid Add(TransientObject model, EntityInfo entityInfo, HttpMethod method, ApiCall apiCall, ApiCall backupApiCall, Func<FromJson, object> fromJsonCasting, Action<string> postMappingJson, string operationName)
+        {
+            // Copy the request modules list as it will get cleared at context level
+            List<IRequestModule> requestModulesToUse = null;
+            var requestModules = (model as IDataModelWithContext).PnPContext.RequestModules;
+            if (requestModules != null)
+            {
+                requestModulesToUse = new List<IRequestModule>(requestModules);
+            }
+
+            return Add(model, entityInfo, method, apiCall, backupApiCall, fromJsonCasting, postMappingJson, operationName, requestModulesToUse);
         }
 
         /// <summary>

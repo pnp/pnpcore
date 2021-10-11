@@ -9,7 +9,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a collection of UserCustomAction objects
     /// </summary>
     [ConcreteType(typeof(UserCustomActionCollection))]
-    public interface IUserCustomActionCollection : IQueryable<IUserCustomAction>, IAsyncEnumerable<IUserCustomAction>, IDataModelCollection<IUserCustomAction>, IDataModelCollectionLoad<IUserCustomAction>, IDataModelCollectionDeleteByGuidId
+    public interface IUserCustomActionCollection : IQueryable<IUserCustomAction>, IAsyncEnumerable<IUserCustomAction>, IDataModelCollection<IUserCustomAction>, IDataModelCollectionLoad<IUserCustomAction>, IDataModelCollectionDeleteByGuidId, ISupportModules<IUserCustomActionCollection>
     {
         #region Add
         /// <summary>

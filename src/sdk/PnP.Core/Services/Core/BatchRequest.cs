@@ -37,6 +37,7 @@ namespace PnP.Core.Services
             OperationName = operationName;
             Order = order;
             ExecutionNeeded = true;
+            CopyRequestModules(modelInstance);
         }
 
         /// <summary>
@@ -105,6 +106,11 @@ namespace PnP.Core.Services
         public HttpStatusCode ResponseHttpStatusCode { get; private set; }
 
         /// <summary>
+        /// Additional headers supplied for this request
+        /// </summary>
+        internal Dictionary<string, string> RequestHeaders { get; private set; } = new Dictionary<string, string>();
+
+        /// <summary>
         /// Headers returned for this request (e.g. Content header to follow-up on async server side operations)
         /// </summary>
         internal Dictionary<string, string> ResponseHeaders { get; private set; } = new Dictionary<string, string>();
@@ -113,6 +119,11 @@ namespace PnP.Core.Services
         /// This batch request was not executed yet or a retry is needed
         /// </summary>
         internal bool ExecutionNeeded { get; private set; }
+
+        /// <summary>
+        /// Modules to be added to the request pipeline for this batch request
+        /// </summary>
+        internal List<IRequestModule> RequestModules { get; set; }
 
         /// <summary>
         /// Records the response of a request (fired as part of the execution of a <see cref="Batch"/>)
@@ -180,6 +191,14 @@ namespace PnP.Core.Services
             if (responseHeaders != null)
             {
                 ResponseHeaders = responseHeaders;
+            }
+        }
+
+        internal void CopyRequestModules(TransientObject modelInstance)
+        {
+            if (modelInstance is IDataModelWithContext modelWithContext && modelWithContext.PnPContext != null && modelWithContext.PnPContext.RequestModules?.Count > 0)
+            {
+                RequestModules = new List<IRequestModule>(modelWithContext.PnPContext.RequestModules);
             }
         }
     }

@@ -9,7 +9,7 @@ namespace PnP.Core.Model.SharePoint
     /// Collection of terms
     /// </summary>
     [ConcreteType(typeof(TermCollection))]
-    public interface ITermCollection : IQueryable<ITerm>, IAsyncEnumerable<ITerm>, IDataModelCollection<ITerm>, IDataModelCollectionDeleteByStringId
+    public interface ITermCollection : IQueryable<ITerm>, IAsyncEnumerable<ITerm>, IDataModelCollection<ITerm>, IDataModelCollectionDeleteByStringId, ISupportModules<ITermCollection>
     {
         /// <summary>
         /// Adds a new term 

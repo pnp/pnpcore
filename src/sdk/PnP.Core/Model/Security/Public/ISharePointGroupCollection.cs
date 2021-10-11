@@ -9,7 +9,7 @@ namespace PnP.Core.Model.Security
     /// Public interface to define a collection of SharePoint groups
     /// </summary>
     [ConcreteType(typeof(SharePointGroupCollection))]
-    public interface ISharePointGroupCollection : IQueryable<ISharePointGroup>, IAsyncEnumerable<ISharePointGroup>, IDataModelCollection<ISharePointGroup>, IDataModelCollectionLoad<ISharePointGroup>
+    public interface ISharePointGroupCollection : IQueryable<ISharePointGroup>, IAsyncEnumerable<ISharePointGroup>, IDataModelCollection<ISharePointGroup>, IDataModelCollectionLoad<ISharePointGroup>, ISupportModules<ISharePointGroupCollection>
     {
         /// <summary>
         /// Adds a new group

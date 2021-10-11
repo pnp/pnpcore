@@ -553,6 +553,8 @@ namespace PnP.Core.Model
                 await QueryClient.AddGraphBatchRequestsForNonExpandableCollectionsAsync(this, batch, entityInfo, expressions, fromJsonCasting, postMappingJson).ConfigureAwait(false);
             }
 
+            PnPContext.RequestModules?.Clear();
+
             await PnPContext.BatchClient.ExecuteBatch(batch).ConfigureAwait(false);
         }
 
@@ -603,6 +605,8 @@ namespace PnP.Core.Model
             {
                 await QueryClient.AddGraphBatchRequestsForNonExpandableCollectionsAsync(this, batch, entityInfo, selectors, fromJsonCasting, postMappingJson).ConfigureAwait(false);
             }
+
+            PnPContext.RequestModules?.Clear();
 
             return new BatchSingleResult<TModel>(batch, batchRequestId);
         }
@@ -679,6 +683,8 @@ namespace PnP.Core.Model
 
             // Add the request to the batch
             batch.Add(this, entityInfo, HttpMethod.Post, postApiCall, default, fromJsonCasting, postMappingJson, "AddBatch");
+
+            PnPContext.RequestModules?.Clear();
         }
 
         /// <summary>
@@ -708,6 +714,7 @@ namespace PnP.Core.Model
             // Add the request to the batch
             var batch = PnPContext.BatchClient.EnsureBatch();
             batch.Add(this, entityInfo, HttpMethod.Post, postApiCall, default, fromJsonCasting, postMappingJson, "Add");
+            PnPContext.RequestModules?.Clear();
             await PnPContext.BatchClient.ExecuteBatch(batch).ConfigureAwait(false);
         }
 
@@ -770,6 +777,7 @@ namespace PnP.Core.Model
             }
 
             batch.Add(this, entityInfo, new HttpMethod("PATCH"), api.ApiCall, default, fromJsonCasting, postMappingJson, "UpdateBatch");
+            PnPContext.RequestModules?.Clear();
         }
 
         /// <summary>
@@ -793,6 +801,7 @@ namespace PnP.Core.Model
             // Add the request to the batch
             var batch = PnPContext.BatchClient.EnsureBatch();
             batch.Add(this, entityInfo, new HttpMethod("PATCH"), api.ApiCall, default, fromJsonCasting, postMappingJson, "Update");
+            PnPContext.RequestModules?.Clear();
             await PnPContext.BatchClient.ExecuteBatch(batch).ConfigureAwait(false);
         }
 
@@ -827,6 +836,7 @@ namespace PnP.Core.Model
 
             // Also try to build the rest equivalent, this will be used in case we encounter mixed rest/graph batches
             batch.Add(this, entityInfo, HttpMethod.Delete, api.ApiCall, default, fromJsonCasting, postMappingJson, "DeleteBatch");
+            PnPContext.RequestModules?.Clear();
         }
 
         /// <summary>
@@ -851,6 +861,7 @@ namespace PnP.Core.Model
             }
 
             batch.Add(this, entityInfo, HttpMethod.Delete, api.ApiCall, default, fromJsonCasting, postMappingJson, "Delete");
+            PnPContext.RequestModules?.Clear();
             await PnPContext.BatchClient.ExecuteBatch(batch).ConfigureAwait(false);
         }
 
@@ -884,6 +895,7 @@ namespace PnP.Core.Model
 
             // Add the request to the batch
             batch.Add(this, entityInfo, method, apiCall, default, fromJsonCasting: MappingHandler, postMappingJson: PostMappingHandler, CleanupOperationName(operationName));
+            PnPContext.RequestModules?.Clear();
         }
 
         /// <summary>
@@ -918,6 +930,7 @@ namespace PnP.Core.Model
             // Add the request to the batch
             var batch = PnPContext.BatchClient.EnsureBatch();
             batch.Add(this, entityInfo, method, apiCall, default, fromJsonCasting: MappingHandler, postMappingJson: PostMappingHandler, CleanupOperationName(operationName));
+            PnPContext.RequestModules?.Clear();
             await PnPContext.BatchClient.ExecuteBatch(batch).ConfigureAwait(false);
             return batch;
         }
@@ -956,6 +969,7 @@ namespace PnP.Core.Model
 
             // Add the request to the batch
             Guid batchRequestId = batch.Add(this, entityInfo, method, apiCall, default, fromJsonCasting: MappingHandler, postMappingJson: PostMappingHandler, CleanupOperationName(operationName));
+            PnPContext.RequestModules?.Clear();
             return batch.GetRequest(batchRequestId);
         }
 

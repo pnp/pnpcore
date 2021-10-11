@@ -6,13 +6,21 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
-## [Unreleased]
+## [unreleased]
+
+### Added
+
+- Added IRequestModule pipeline concept enabling to intercept pre/post http requests. First use case is the `WithHeaders()` option [jansenbe - Bert Jansen]
+
+### Changed
+
+## [1.4.0]
 
 ### Added
 
 - Added IWeb.GetFileByServerRelativeUrlOrDefault methods that can return null for non existing files + dropped the IFile.Exists property as it never really worked [jansenbe - Bert Jansen]
 - Added support for reading, configuring and saving of collapsible sections on pages #539 [jansenbe - Bert Jansen]
-- Admin library providing Microsoft 365 admin functionality to PnP Core SDK users [jansenbe - Bert Jansen]
+- Preview of Admin library providing Microsoft 365 admin functionality to PnP Core SDK users [jansenbe - Bert Jansen]
 - Support for running unit tests using Application permissions (compared to default Delegated) [jansenbe - Bert Jansen]
 - PnP Transformation Framework to support transforming external content to SharePoint Online modern pages [paolopia - Paolo Pialorsi]
 
