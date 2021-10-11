@@ -161,12 +161,12 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// Gets or sets the Information Protection Label Id for an individual site collection.
         /// </summary>
-        public string SensitivityLabelId { get; set; }
+        public Guid SensitivityLabelId { get; set; }
 
         /// <summary>
         /// Information Protection Label Id for an individual site collection
         /// </summary>
-        public Guid SensitivityLabel { get; }
+        public string SensitivityLabel { get; }
 
         /// <summary>
         /// Returns whether or not this site is a HubSite. Hub sites can be associated with one or more sites.

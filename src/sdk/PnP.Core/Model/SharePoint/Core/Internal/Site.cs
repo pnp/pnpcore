@@ -111,9 +111,11 @@ namespace PnP.Core.Model.SharePoint
 
         public string SearchBoxPlaceholderText { get => GetValue<string>(); set => SetValue(value); }
 
-        public string SensitivityLabelId { get => GetValue<string>(); set => SetValue(value); }
+        [SharePointProperty("SensitivityLabelInfo", JsonPath = "Id")]
+        public Guid SensitivityLabelId { get => GetValue<Guid>(); set => SetValue(value); }
 
-        public Guid SensitivityLabel { get => GetValue<Guid>(); set => SetValue(value); }
+        [SharePointProperty("SensitivityLabelInfo", JsonPath = "DisplayName")]
+        public string SensitivityLabel { get => GetValue<string>(); set => SetValue(value); }
 
         public string ServerRelativeUrl { get => GetValue<string>(); set => SetValue(value); }
 

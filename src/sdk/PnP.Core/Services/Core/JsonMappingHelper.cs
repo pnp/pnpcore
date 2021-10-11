@@ -1435,7 +1435,15 @@ namespace PnP.Core.Services
                         {
                             // Overriding parsing instead of using .GetGuid() because
                             // some formats (with squirrely braces) throw an exception (e.g. - "{00000000-0000-0000-0000-000000000000}")
-                            return Guid.Parse(jsonElement.ToString());
+                            var guidString = jsonElement.ToString();
+                            if (!string.IsNullOrEmpty(guidString))
+                            {
+                                return Guid.Parse(guidString);
+                            }
+                            else
+                            {
+                                return Guid.Empty;
+                            }
                         }
                     case "Int16":
                         {
