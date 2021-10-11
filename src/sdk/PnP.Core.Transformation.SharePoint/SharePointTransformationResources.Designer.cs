@@ -538,6 +538,15 @@ namespace PnP.Core.Transformation.SharePoint {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to No web parts were found on page.
+        /// </summary>
+        internal static string Info_AnalysingNoWebPartsFound {
+            get {
+                return ResourceManager.GetString("Info_AnalysingNoWebPartsFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Calling Web Services to Extract Web Parts from page &apos;{0}&apos;.
         /// </summary>
         internal static string Info_CallingWebServicesToExtractWebPartsFromPage {
