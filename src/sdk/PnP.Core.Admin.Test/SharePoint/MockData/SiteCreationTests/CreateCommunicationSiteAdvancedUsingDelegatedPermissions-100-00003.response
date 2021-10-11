@@ -1,0 +1,9 @@
+--batchresponse_5c2127ed-e13b-4754-83ee-ebf69f9451ef
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+HTTP/1.1 200 OK
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+
+{"d":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/pnpcoresdktestcommsite4b97cd510c98440aa0f4e158a37fe82b/_api/Web","uri":"https://bertonline.sharepoint.com/sites/pnpcoresdktestcommsite4b97cd510c98440aa0f4e158a37fe82b/_api/Web","type":"SP.Web"},"Description":"This is a test site collection","Id":"e9af56da-941d-4cd6-9bab-ae63ad77a0c6","Language":1033,"Title":"PnP Core SDK Test","Url":"https://bertonline.sharepoint.com/sites/pnpcoresdktestcommsite4b97cd510c98440aa0f4e158a37fe82b"}}
+--batchresponse_5c2127ed-e13b-4754-83ee-ebf69f9451ef--
