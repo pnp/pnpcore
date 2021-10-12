@@ -162,6 +162,9 @@
   <data name="Info_PublishMessage" xml:space="preserve">
     <value>Published by the PnP Transformation Framework</value>
   </data>
+  <data name="Info_RunningTransformationTask" xml:space="preserve">
+    <value>Running transformation task {0} on data source item {1}</value>
+  </data>
   <data name="Info_TransformArticleHeaderImageUrl" xml:space="preserve">
     <value>Image Url:</value>
   </data>

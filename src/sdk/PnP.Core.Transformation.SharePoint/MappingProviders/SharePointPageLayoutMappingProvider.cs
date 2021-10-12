@@ -19,6 +19,7 @@ using System.Linq;
 using PnP.Core.Transformation.SharePoint.Publishing;
 using Microsoft.Extensions.Caching.Memory;
 using PnP.Core.Transformation.SharePoint.Services.Builder.Configuration;
+using PnP.Core.Transformation.Services.Core;
 
 namespace PnP.Core.Transformation.SharePoint.MappingProviders
 {
@@ -29,21 +30,27 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
     {
         private ILogger<SharePointPageLayoutMappingProvider> logger;
         private readonly IOptions<SharePointTransformationOptions> options;
+        private readonly CorrelationService correlationService;
         private readonly IServiceProvider serviceProvider;
         private readonly IMemoryCache memoryCache;
+
+        private Guid taskId;
 
         /// <summary>
         /// Main constructor for the mapping provider
         /// </summary>
         /// <param name="logger">Logger for tracing activities</param>
         /// <param name="options">Configuration options</param>
+        /// <param name="correlationService">The Correlation Service</param>
         /// <param name="serviceProvider">Service provider</param>
         public SharePointPageLayoutMappingProvider(ILogger<SharePointPageLayoutMappingProvider> logger,
             IOptions<SharePointTransformationOptions> options,
+            CorrelationService correlationService,
             IServiceProvider serviceProvider)
         {
             this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
             this.options = options ?? throw new ArgumentNullException(nameof(options));
+            this.correlationService = correlationService ?? throw new ArgumentNullException(nameof(correlationService));
             this.serviceProvider = serviceProvider;
             this.memoryCache = this.serviceProvider.GetService<IMemoryCache>();
         }
@@ -56,7 +63,11 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
         /// <returns>The output of the mapping activity</returns>
         public async Task<PageLayoutMappingProviderOutput> MapPageLayoutAsync(PageLayoutMappingProviderInput input, CancellationToken token = default)
         {
-            logger.LogInformation($"Invoked: {this.GetType().Namespace}.{this.GetType().Name}.MapPageLayoutAsync");
+            this.taskId = input.Context.Task.Id;
+
+            logger.LogInformation(this.correlationService.CorrelateString(
+                this.taskId,
+                $"Invoked: {this.GetType().Namespace}.{this.GetType().Name}.MapPageLayoutAsync"));
 
             // Check that we have input data
             if (input == null) throw new ArgumentNullException(nameof(input));
@@ -114,9 +125,10 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
             {
                 publishingPageTransformationModel = GeneratePageLayout(pageItem);
 
-                logger.LogInformation(string.Format(System.Globalization.CultureInfo.InvariantCulture,
-                    SharePointTransformationResources.Info_PageLayoutMappingGeneration, 
-                    pageFile.ServerRelativeUrl, input.PageLayout));
+                logger.LogInformation(this.correlationService.CorrelateString(
+                    this.taskId,
+                    SharePointTransformationResources.Info_PageLayoutMappingGeneration), 
+                    pageFile.ServerRelativeUrl, input.PageLayout);
             }
 
             // Still no layout...can't continue...
@@ -124,13 +136,14 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
             {
                 var errorMessage = string.Format(System.Globalization.CultureInfo.InvariantCulture,
                     SharePointTransformationResources.Error_NoPageLayoutTransformationModel, input.PageLayout, pageFile.ServerRelativeUrl);
-                logger.LogInformation(errorMessage);
+                logger.LogInformation(this.correlationService.CorrelateString(this.taskId, errorMessage));
                 throw new Exception(errorMessage);
             }
 
-            logger.LogInformation(string.Format(System.Globalization.CultureInfo.InvariantCulture,
-                SharePointTransformationResources.Info_PageLayoutMappingBeingUsed, 
-                pageFile.ServerRelativeUrl, input.PageLayout, publishingPageTransformationModel.Name));
+            logger.LogInformation(this.correlationService.CorrelateString(
+                this.taskId,
+                SharePointTransformationResources.Info_PageLayoutMappingBeingUsed), 
+                pageFile.ServerRelativeUrl, input.PageLayout, publishingPageTransformationModel.Name);
 
             return new SharePointPageLayoutMappingProviderOutput { PageLayout = publishingPageTransformationModel };
         }
@@ -141,7 +154,7 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
 
             // Let's try to generate a 'basic' model and use that...not optimal, but better than bailing out.
             var pageLayoutAnalyzer = this.serviceProvider.GetService<PageLayoutAnalyser>();
-            var newPageLayoutMapping = pageLayoutAnalyzer.AnalysePageLayoutFromPublishingPage(pageItem);
+            var newPageLayoutMapping = pageLayoutAnalyzer.AnalysePageLayoutFromPublishingPage(pageItem, this.taskId);
 
             // Return to requestor
             return newPageLayoutMapping;
@@ -220,7 +233,8 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
                 {
                     var errorMessage = string.Format(System.Globalization.CultureInfo.InvariantCulture,
                         SharePointTransformationResources.Error_WebPartMappingSchemaValidation, e.Message);
-                    this.logger.LogError(e.Exception, errorMessage);
+                    this.logger.LogError(e.Exception, this.correlationService.CorrelateString(
+                        this.taskId, errorMessage));
                     throw new ApplicationException(errorMessage);
                 });
             }

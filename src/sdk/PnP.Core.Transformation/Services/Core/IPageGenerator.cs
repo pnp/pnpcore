@@ -19,7 +19,7 @@ namespace PnP.Core.Transformation.Services.Core
         /// <param name="mappingOutput">The output of the initial mapping from the data source</param>
         /// <param name="targetPageUri">The URI of the target page to create</param>
         /// <param name="token">The cancellation token, if any</param>
-        /// <returns>The URL of the transformed page</returns>
-        Task<Uri> GenerateAsync(PageTransformationContext context, MappingProviderOutput mappingOutput, Uri targetPageUri, CancellationToken token = default);
+        /// <returns>The output of the transformed page</returns>
+        Task<PageGeneratorOutput> GenerateAsync(PageTransformationContext context, MappingProviderOutput mappingOutput, Uri targetPageUri, CancellationToken token = default);
     }
 }

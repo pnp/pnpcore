@@ -9,12 +9,14 @@ using AngleSharp.Io;
 using AngleSharp.Html.Dom;
 using System.Linq;
 using AngleSharp.Css.Dom;
+using PnP.Core.Transformation.Services.Core;
 
 namespace PnP.Core.Transformation.SharePoint.Services
 {
     public class HtmlTransformator
     {
         private ILogger<HtmlTransformator> logger;
+        private readonly CorrelationService correlationService;
 
         #region Internal table classes
         internal class Table
@@ -74,9 +76,11 @@ namespace PnP.Core.Transformation.SharePoint.Services
         /// <summary>
         /// HtmlTransformator class constructor
         /// </summary>
-        public HtmlTransformator(ILogger<HtmlTransformator> logger)
+        public HtmlTransformator(ILogger<HtmlTransformator> logger,
+            CorrelationService correlationService)
         {
             this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
+            this.correlationService = correlationService ?? throw new ArgumentNullException(nameof(correlationService));
 
             var config = Configuration.Default.WithDefaultLoader(new LoaderOptions { IsResourceLoadingEnabled = true }).WithCss();
             var context = BrowsingContext.New(config);
@@ -247,7 +251,6 @@ namespace PnP.Core.Transformation.SharePoint.Services
 
         protected virtual void TransformTables(IHtmlCollection<IElement> tables, IHtmlDocument document)
         {
-
             List<Tuple<IElement, IElement, IElement>> tableReplaceList = new List<Tuple<IElement, IElement, IElement>>();
 
             foreach (var table in tables)
@@ -261,8 +264,9 @@ namespace PnP.Core.Transformation.SharePoint.Services
                 }
                 catch (Exception ex)
                 {
-                    logger.LogWarning(string.Format(System.Globalization.CultureInfo.InvariantCulture,
-                        SharePointTransformationResources.Warning_TableCouldNotBeNormalized, ex.Message));
+                    logger.LogWarning(
+                        SharePointTransformationResources.Warning_TableCouldNotBeNormalized,
+                        ex.Message);
                 }
 
                 // If we could not normalize this table then let's skip it

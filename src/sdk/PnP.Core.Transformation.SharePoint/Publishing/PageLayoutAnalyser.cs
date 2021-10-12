@@ -13,6 +13,7 @@ using AngleSharp.Dom;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.DependencyInjection;
+using PnP.Core.Transformation.Services.Core;
 
 namespace PnP.Core.Transformation.SharePoint.Publishing
 {
@@ -22,6 +23,7 @@ namespace PnP.Core.Transformation.SharePoint.Publishing
     internal class PageLayoutAnalyser
     {
         private ILogger<PageLayoutAnalyser> logger;
+        private readonly CorrelationService correlationService;
         private readonly IServiceProvider serviceProvider;
         private readonly IMemoryCache memoryCache;
 
@@ -54,9 +56,11 @@ namespace PnP.Core.Transformation.SharePoint.Publishing
         /// Analyse Page Layouts class constructor
         /// </summary>
         public PageLayoutAnalyser(ILogger<PageLayoutAnalyser> logger,
+            CorrelationService correlationService,
             IServiceProvider serviceProvider)
         {
             this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
+            this.correlationService = correlationService ?? throw new ArgumentNullException(nameof(correlationService));
             this.serviceProvider = serviceProvider;
             this.memoryCache = this.serviceProvider.GetService<IMemoryCache>();
 
@@ -70,62 +74,69 @@ namespace PnP.Core.Transformation.SharePoint.Publishing
         #endregion
 
         #region Public interface
-        /// <summary>
-        /// Main entry point into the class to analyse the page layouts
-        /// </summary>
-        /// <param name="skipOOBPageLayouts">Skip OOB page layouts</param>
-        public void AnalyseAll(ListItem pageLayoutItem, bool skipOOBPageLayouts = false)
-        {
-            // Determine if ‘default’ layouts for the OOB page layouts
-            // When there’s no layout we “generate” a best effort one and store it in cache. Generation can 
-            // be done by looking at the field types and inspecting the layout aspx file. This same generation 
-            // part can be used in point 2 for customers to generate a starting layout mapping file which they then can edit
-            // Don't assume that you are in a top level site, you maybe in a sub site
 
-            using (ClientContext siteCollContext = EnsureSiteCollectionContext(pageLayoutItem.Context as ClientContext))
-            {
-                var spPageLayouts = GetAllPageLayouts(siteCollContext);
+        ///// <summary>
+        ///// Main entry point into the class to analyse the page layouts
+        ///// </summary>
+        ///// <param name="skipOOBPageLayouts">Skip OOB page layouts</param>
+        //public void AnalyseAll(ListItem pageLayoutItem, bool skipOOBPageLayouts = false)
+        //{
+        //    // Determine if ‘default’ layouts for the OOB page layouts
+        //    // When there’s no layout we “generate” a best effort one and store it in cache. Generation can 
+        //    // be done by looking at the field types and inspecting the layout aspx file. This same generation 
+        //    // part can be used in point 2 for customers to generate a starting layout mapping file which they then can edit
+        //    // Don't assume that you are in a top level site, you maybe in a sub site
 
-                if (spPageLayouts != null)
-                {
-                    foreach (ListItem layout in spPageLayouts)
-                    {
-                        try
-                        {
-                            if (skipOOBPageLayouts)
-                            {
-                                // Check if this is an OOB page layout and skip if so
-                                string pageLayoutName = Path.GetFileNameWithoutExtension(layout[SharePointConstants.FileLeafRefField].ToString());
-                                var oobPageLayoutFile = SharePointConstants.OobPublishingPageLayouts.Any(o => o.Equals(pageLayoutName, StringComparison.InvariantCultureIgnoreCase));
-                                if (oobPageLayoutFile)
-                                {
-                                    logger.LogInformation(string.Format(System.Globalization.CultureInfo.InvariantCulture,
-                                        SharePointTransformationResources.Info_OOBPageLayoutSkipped, pageLayoutName));
-                                    continue;
-                                }
-                            }
+        //    using (ClientContext siteCollContext = EnsureSiteCollectionContext(pageLayoutItem.Context as ClientContext))
+        //    {
+        //        var spPageLayouts = GetAllPageLayouts(siteCollContext);
 
-                            AnalysePageLayout(layout);
-                        }
-                        catch (Exception)
-                        {
-                            logger.LogError(SharePointTransformationResources.Error_CannotProcessPageLayoutAnalyseAll);
-                        }
+        //        if (spPageLayouts != null)
+        //        {
+        //            foreach (ListItem layout in spPageLayouts)
+        //            {
+        //                try
+        //                {
+        //                    if (skipOOBPageLayouts)
+        //                    {
+        //                        // Check if this is an OOB page layout and skip if so
+        //                        string pageLayoutName = Path.GetFileNameWithoutExtension(layout[SharePointConstants.FileLeafRefField].ToString());
+        //                        var oobPageLayoutFile = SharePointConstants.OobPublishingPageLayouts.Any(o => o.Equals(pageLayoutName, StringComparison.InvariantCultureIgnoreCase));
+        //                        if (oobPageLayoutFile)
+        //                        {
+        //                            logger.LogInformation(this.correlationService.CorrelateString(
+        //                                taskId,
+        //                                SharePointTransformationResources.Info_OOBPageLayoutSkipped), pageLayoutName);
+        //                            continue;
+        //                        }
+        //                    }
 
-                    }
-                }
-                else
-                {
-                    logger.LogInformation(SharePointTransformationResources.Info_AnalyserNoLayoutsFound);
-                }
-            }
-        }
+        //                    AnalysePageLayout(layout);
+        //                }
+        //                catch (Exception)
+        //                {
+        //                    logger.LogError(this.correlationService.CorrelateString(
+        //                        taskId,
+        //                        SharePointTransformationResources.Error_CannotProcessPageLayoutAnalyseAll));
+        //                }
+
+        //            }
+        //        }
+        //        else
+        //        {
+        //            logger.LogInformation(this.correlationService.CorrelateString(
+        //                taskId,
+        //                SharePointTransformationResources.Info_AnalyserNoLayoutsFound));
+        //        }
+        //    }
+        //}
 
         /// <summary>
         /// Analyses a single page layout from a provided file
         /// </summary>
         /// <param name="pageLayoutItem">Page layout list item</param>
-        public PageLayout AnalysePageLayout(ListItem pageLayoutItem)
+        /// <param name="taskId">ID of the transformation task</param>
+        public PageLayout AnalysePageLayout(ListItem pageLayoutItem, Guid taskId)
         {
             try
             {
@@ -134,17 +145,17 @@ namespace PnP.Core.Transformation.SharePoint.Publishing
                 var assocContentTypeParts = assocContentType.Split(new string[] { ";#" }, StringSplitOptions.RemoveEmptyEntries);
 
                 // Load content type fields in memory once
-                var contentTypeFields = LoadContentTypeFields(pageLayoutItem, assocContentTypeParts[1]);
+                var contentTypeFields = LoadContentTypeFields(pageLayoutItem, assocContentTypeParts[1], taskId);
 
                 // Extract page header
-                var extractedHeader = ExtractPageHeaderFromPageLayoutAssociatedContentType(contentTypeFields);
+                var extractedHeader = ExtractPageHeaderFromPageLayoutAssociatedContentType(contentTypeFields, taskId);
 
                 // Analyze the pagelayout file content
-                var extractedHtmlBlocks = ExtractControlsFromPageLayoutHtml(pageLayoutItem);
-                extractedHtmlBlocks.WebPartFields = CleanExtractedWebPartFields(extractedHtmlBlocks.WebPartFields, contentTypeFields);
+                var extractedHtmlBlocks = ExtractControlsFromPageLayoutHtml(pageLayoutItem, taskId);
+                extractedHtmlBlocks.WebPartFields = CleanExtractedWebPartFields(extractedHtmlBlocks.WebPartFields, contentTypeFields, taskId);
 
                 // Detect the fields that will become metadata in the target site
-                var extractedMetaDataFields = ExtractMetaDataFromPageLayoutAssociatedContentType(contentTypeFields, extractedHtmlBlocks.WebPartFields, extractedHeader);
+                var extractedMetaDataFields = ExtractMetaDataFromPageLayoutAssociatedContentType(contentTypeFields, extractedHtmlBlocks.WebPartFields, extractedHeader, taskId);
 
                 var metaData = new MetaData
                 {
@@ -192,15 +203,18 @@ namespace PnP.Core.Transformation.SharePoint.Publishing
                     _mapping.PageLayouts = new[] { layoutMapping };
                 }
 
-                logger.LogInformation(string.Format(System.Globalization.CultureInfo.InvariantCulture,
-                    SharePointTransformationResources.Info_AnalyserMappingLayout, layoutMapping.Name));
+                logger.LogInformation(this.correlationService.CorrelateString(
+                    taskId,
+                    SharePointTransformationResources.Info_AnalyserMappingLayout), layoutMapping.Name);
 
                 return layoutMapping;
 
             }
             catch (Exception)
             {
-                logger.LogError(SharePointTransformationResources.Error_CannotProcessPageLayoutAnalyse);
+                logger.LogError(this.correlationService.CorrelateString(
+                    taskId,
+                    SharePointTransformationResources.Error_CannotProcessPageLayoutAnalyse));
             }
 
             return null;
@@ -210,7 +224,7 @@ namespace PnP.Core.Transformation.SharePoint.Publishing
         /// Determine the page layout from a publishing page
         /// </summary>
         /// <param name="publishingPage">Publishing page to analyze the page layout for</param>
-        public PageLayout AnalysePageLayoutFromPublishingPage(ListItem publishingPage)
+        public PageLayout AnalysePageLayoutFromPublishingPage(ListItem publishingPage, Guid taskId)
         {
             ClientContext siteCollContext = EnsureSiteCollectionContext(publishingPage.Context as ClientContext);
 
@@ -228,11 +242,13 @@ namespace PnP.Core.Transformation.SharePoint.Publishing
                 siteCollContext.Load(file, o => o.ListItemAllFields);
                 siteCollContext.ExecuteQueryRetry();
 
-                return AnalysePageLayout(file.ListItemAllFields);
+                return AnalysePageLayout(file.ListItemAllFields, taskId);
             }
             else
             {
-                logger.LogWarning(SharePointTransformationResources.Warning_PageLayoutsCannotBeDetermined);
+                logger.LogWarning(this.correlationService.CorrelateString(
+                    taskId,
+                    SharePointTransformationResources.Warning_PageLayoutsCannotBeDetermined));
             }
 
             return null;
@@ -275,15 +291,16 @@ namespace PnP.Core.Transformation.SharePoint.Publishing
                     xmlMapping.Serialize(sw, _mapping);
                 }
 
-                logger.LogInformation(string.Format(System.Globalization.CultureInfo.InvariantCulture,
-                    SharePointTransformationResources.Info_XmlMappingSavedAs, mappingFileName));
+                logger.LogInformation(
+                    SharePointTransformationResources.Info_XmlMappingSavedAs, mappingFileName);
 
                 return mappingFileName;
             }
             catch (Exception ex)
             {
-                logger.LogError(string.Format(System.Globalization.CultureInfo.InvariantCulture,
-                    SharePointTransformationResources.Error_CannotWriteToXmlFile, ex.Message, ex.StackTrace));
+                logger.LogError(
+                    SharePointTransformationResources.Error_CannotWriteToXmlFile, 
+                    ex.Message, ex.StackTrace);
             }
 
             return string.Empty;
@@ -353,15 +370,17 @@ namespace PnP.Core.Transformation.SharePoint.Publishing
 
                 var galleryItemsCount = galleryItems.Count;
 
-                logger.LogInformation(string.Format(System.Globalization.CultureInfo.InvariantCulture,
-                    SharePointTransformationResources.Info_AnalyserFoundItems, galleryItemsCount));
+                logger.LogInformation(
+                    SharePointTransformationResources.Info_AnalyserFoundItems,
+                    galleryItemsCount);
 
                 return galleryItemsCount > 0 ? galleryItems : null;
 
             }
             catch (Exception)
             {
-                logger.LogError(SharePointTransformationResources.Error_AnalyserCouldNotFindLayouts);
+                logger.LogError(
+                    SharePointTransformationResources.Error_AnalyserCouldNotFindLayouts);
             }
 
             return null;
@@ -370,7 +389,7 @@ namespace PnP.Core.Transformation.SharePoint.Publishing
         /// <summary>
         /// Get Metadata mapping from the page layout associated content type
         /// </summary>
-        private MetaDataField[] ExtractMetaDataFromPageLayoutAssociatedContentType(FieldCollection spFields, List<WebPartField> webPartFields, Header extractedHeader)
+        private MetaDataField[] ExtractMetaDataFromPageLayoutAssociatedContentType(FieldCollection spFields, List<WebPartField> webPartFields, Header extractedHeader, Guid taskId)
         {
             List<MetaDataField> fields = new List<MetaDataField>();
 
@@ -426,7 +445,9 @@ namespace PnP.Core.Transformation.SharePoint.Publishing
             }
             catch (Exception ex)
             {
-                logger.LogError(SharePointTransformationResources.Error_AnalyserErrorOccurredExtractMetadata);
+                logger.LogError(this.correlationService.CorrelateString(
+                    taskId,
+                    SharePointTransformationResources.Error_AnalyserErrorOccurredExtractMetadata));
             }
 
             return fields.ToArray();
@@ -441,7 +462,7 @@ namespace PnP.Core.Transformation.SharePoint.Publishing
         ///     Item1 = tagprefix
         ///     Item2 = Namespace
         /// </returns>
-        internal List<Tuple<string, string>> ExtractWebPartPrefixesFromNamespaces(ListItem pageLayout)
+        internal List<Tuple<string, string>> ExtractWebPartPrefixesFromNamespaces(ListItem pageLayout, Guid taskId)
         {
             var tagPrefixes = new List<Tuple<string, string>>();
 
@@ -482,7 +503,9 @@ namespace PnP.Core.Transformation.SharePoint.Publishing
             }
             catch (Exception ex)
             {
-                logger.LogError(SharePointTransformationResources.Error_AnalyserErrorOccurredExtractNamespaces);
+                logger.LogError(this.correlationService.CorrelateString(
+                    taskId,
+                    SharePointTransformationResources.Error_AnalyserErrorOccurredExtractNamespaces));
             }
 
             return tagPrefixes;
@@ -491,7 +514,7 @@ namespace PnP.Core.Transformation.SharePoint.Publishing
         /// <summary>
         /// Extract the web parts from the page layout HTML outside of web part zones
         /// </summary>
-        internal ExtractedHtmlBlocksEntity ExtractControlsFromPageLayoutHtml(ListItem pageLayout)
+        internal ExtractedHtmlBlocksEntity ExtractControlsFromPageLayoutHtml(ListItem pageLayout, Guid taskId)
         {
             /*Plan
              * Scan through the file to find the web parts by the tags
@@ -519,7 +542,7 @@ namespace PnP.Core.Transformation.SharePoint.Publishing
                     List<IEnumerable<IElement>> multipleTagFinds = new List<IEnumerable<IElement>>();
 
                     //List of all the assembly references and prefixes in the page
-                    List<Tuple<string, string>> prefixesAndNameSpaces = ExtractWebPartPrefixesFromNamespaces(pageLayout);
+                    List<Tuple<string, string>> prefixesAndNameSpaces = ExtractWebPartPrefixesFromNamespaces(pageLayout, taskId);
 
                     // Determine the possible web parts from the page from the namespaces used in the aspx header
                     prefixesAndNameSpaces.ForEach(p =>
@@ -660,7 +683,9 @@ namespace PnP.Core.Transformation.SharePoint.Publishing
             }
             catch (Exception ex)
             {
-                logger.LogError(SharePointTransformationResources.Error_AnalyserErrorOccurredExtractHtmlBlocks);
+                logger.LogError(this.correlationService.CorrelateString(
+                    taskId,
+                    SharePointTransformationResources.Error_AnalyserErrorOccurredExtractHtmlBlocks));
             }
 
             return extractedHtmlBlocks;
@@ -717,7 +742,7 @@ namespace PnP.Core.Transformation.SharePoint.Publishing
         /// </summary>
         /// <param name="contentTypeId"></param>
         /// <returns></returns>
-        private FieldCollection LoadContentTypeFields(ListItem pageLayoutItem, string contentTypeId)
+        private FieldCollection LoadContentTypeFields(ListItem pageLayoutItem, string contentTypeId, Guid taskId)
         {
             ClientContext siteCollContext = EnsureSiteCollectionContext(pageLayoutItem.Context as ClientContext);
 
@@ -739,7 +764,9 @@ namespace PnP.Core.Transformation.SharePoint.Publishing
             }
             catch (Exception)
             {
-                logger.LogError(SharePointTransformationResources.Error_CannotMapMetadataFields);
+                logger.LogError(this.correlationService.CorrelateString(
+                    taskId,
+                    SharePointTransformationResources.Error_CannotMapMetadataFields));
                 throw;
             }
         }
@@ -750,7 +777,7 @@ namespace PnP.Core.Transformation.SharePoint.Publishing
         /// <param name="webPartFields">List of extracted web parts</param>
         /// <param name="spFields">Collection of fields</param>
         /// <returns></returns>
-        private List<WebPartField> CleanExtractedWebPartFields(List<WebPartField> webPartFields, FieldCollection spFields)
+        private List<WebPartField> CleanExtractedWebPartFields(List<WebPartField> webPartFields, FieldCollection spFields, Guid taskId)
         {
             List<WebPartField> cleanedWebPartFields = new List<WebPartField>();
 
@@ -817,7 +844,9 @@ namespace PnP.Core.Transformation.SharePoint.Publishing
             }
             catch (Exception)
             {
-                logger.LogError(SharePointTransformationResources.Error_AnalyserCleaningExtractedWebPartFields);
+                logger.LogError(this.correlationService.CorrelateString(
+                    taskId,
+                    SharePointTransformationResources.Error_AnalyserCleaningExtractedWebPartFields));
             }
 
             return cleanedWebPartFields;
@@ -827,7 +856,7 @@ namespace PnP.Core.Transformation.SharePoint.Publishing
         /// Sets the page layout header field defaults
         /// </summary>
         /// <param name="spFields"></param>
-        private Header ExtractPageHeaderFromPageLayoutAssociatedContentType(FieldCollection spFields)
+        private Header ExtractPageHeaderFromPageLayoutAssociatedContentType(FieldCollection spFields, Guid taskId)
         {
             try
             {
@@ -867,7 +896,9 @@ namespace PnP.Core.Transformation.SharePoint.Publishing
             }
             catch (Exception)
             {
-                logger.LogError(SharePointTransformationResources.Error_AnalyserExtractPageHeaderFromPageLayout);
+                logger.LogError(this.correlationService.CorrelateString(
+                    taskId,
+                    SharePointTransformationResources.Error_AnalyserExtractPageHeaderFromPageLayout));
             }
 
             return null;
@@ -901,7 +932,9 @@ namespace PnP.Core.Transformation.SharePoint.Publishing
             }
             catch (Exception ex)
             {
-                logger.LogError(SharePointTransformationResources.Info_AnalyserFoundItems, ex.Message);
+                logger.LogError(
+                    SharePointTransformationResources.Error_CannotGetSiteCollContext,
+                    ex.Message);
                 throw;
             }
         }
@@ -925,7 +958,8 @@ namespace PnP.Core.Transformation.SharePoint.Publishing
                 }
                 catch (Exception ex)
                 {
-                    logger.LogError(SharePointTransformationResources.Error_CannotCastToEnum);
+                    logger.LogError(
+                        SharePointTransformationResources.Error_CannotCastToEnum);
                 }
             }
 
