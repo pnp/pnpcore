@@ -220,6 +220,40 @@ addedFile.ListItemAllFields["Field2"] = true;
 await addedFile.ListItemAllFields.UpdateAsync();
 ```
 
+## Updating the file Author, Editor, Created or Modified properties
+
+Each file has an `Author` property (the one who created the file), an `Editor` property (the one who last changed the file), a `Created` property (when was the file added) and a `Modified` property (when was the file changed). These are system properties and they cannot be simply overwritten. Using the `UpdateOverwriteVersion` methods this however is possible as shown in below code snippet:
+
+```csharp
+// Load the default documents folder of the site
+var doc = await context.Web.Lists.GetByTitleAsync("Documents", p => p.Fields);
+// Upload a file
+var file = await doc.RootFolder.Files.AddAsync("demo.docx", System.IO.File.OpenRead($".{System.IO.Path.DirectorySeparatorChar}demo.docx"), true);
+
+// Load the file metadata again to get the ListItemFields populated
+await file.LoadAsync(p => p.ListItemAllFields)
+
+// Get a user to use as author/editor
+var currentUser = await context.Web.GetCurrentUserAsync();
+
+// The new Created/Modified date to set
+var newDate = new DateTime(2020, 10, 20);
+
+// Get the earlier loaded Author and Editor fields
+var author = doc.Fields.AsRequested().FirstOrDefault(p => p.InternalName == "Author");
+var editor = doc.Fields.AsRequested().FirstOrDefault(p => p.InternalName == "Editor");
+
+// Update file properties
+file.ListItemAllFields["Title"] = "new title";
+file.ListItemAllFields["Created"] = newDate;
+file.ListItemAllFields["Modified"] = newDate;
+file.ListItemAllFields["Author"] = author.NewFieldUserValue(currentUser);
+file.ListItemAllFields["Editor"] = editor.NewFieldUserValue(currentUser);
+
+// Persist the updated properties
+await file.ListItemAllFields.UpdateOverwriteVersionAsync();
+```
+
 ## Downloading files
 
 If you want to download a file you do need to use either the [GetContentAsync method](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IFile.html#PnP_Core_Model_SharePoint_IFile_GetContentAsync_System_Boolean_) if you prefer a Stream as result type or [GetContentBytesAsync](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IFile.html#collapsible-PnP_Core_Model_SharePoint_IFile_GetContentBytesAsync) if you prefer a byte array.
