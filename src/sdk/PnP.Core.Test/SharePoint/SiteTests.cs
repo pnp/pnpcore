@@ -1,6 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PnP.Core.Model.SharePoint;
 using PnP.Core.Test.Utilities;
+using System;
 using System.Threading.Tasks;
 
 namespace PnP.Core.Test.SharePoint
@@ -122,8 +123,8 @@ namespace PnP.Core.Test.SharePoint
                 Assert.IsNotNull(site);
                 Assert.AreEqual(SearchBoxInNavBar.Inherit, site.SearchBoxInNavBar);
                 Assert.IsNull(site.SearchBoxPlaceholderText);
-                Assert.IsNull(site.SensitivityLabelId);
-                Assert.AreEqual(default, site.SensitivityLabel);
+                Assert.IsTrue(site.SensitivityLabelId == Guid.Empty);
+                Assert.IsTrue(site.SensitivityLabel == "");
                 Assert.AreNotEqual("", site.ServerRelativeUrl);
                 // outcome depends on tenant level settings...just hit the properties
                 Assert.IsTrue(site.ShareByEmailEnabled == true || site.ShareByEmailEnabled == false);

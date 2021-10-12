@@ -1,7 +1,9 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using PnP.Core.Admin.Model.Microsoft365;
 using PnP.Core.Admin.Test.Utilities;
 using PnP.Core.Services;
 using PnP.Core.Test.Common;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace PnP.Core.Admin.Test.Microsoft365
@@ -64,5 +66,23 @@ namespace PnP.Core.Admin.Test.Microsoft365
             }
         }
 
+        [TestMethod]
+        public async Task GetSensitivityLabelsUsingDelegatedPermissions()
+        {
+            //TestCommon.Instance.Mocking = false;
+            TestCommon.Instance.UseApplicationPermissions = false;
+            try
+            {
+                using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+                {
+                    var labels = await SensitivityLabelManager.GetLabelsUsingDelegatedPermissionsAsync(context);
+                    Assert.IsTrue(labels.Any());    
+                }
+            }
+            finally
+            {
+                TestCommon.Instance.UseApplicationPermissions = false;
+            }
+        }
     }
 }

@@ -98,5 +98,19 @@ namespace PnP.Core.Admin.Model.Microsoft365
         /// <returns>True if using application permissions, false otherwise</returns>
         bool AccessTokenUsesApplicationPermissions(string accessToken);
         #endregion
+
+        #region Sensitivity labels
+        /// <summary>
+        /// Get the available sensitivity labels for the calling user or application
+        /// </summary>
+        /// <returns>List of sensitivity labels</returns>
+        Task<List<ISensitivityLabel>> GetSensitivityLabelsAsync();
+
+        /// <summary>
+        /// Get the available sensitivity labels for the calling user or application
+        /// </summary>
+        /// <returns>List of sensitivity labels</returns>
+        List<ISensitivityLabel> GetSensitivityLabels();
+        #endregion
     }
 }

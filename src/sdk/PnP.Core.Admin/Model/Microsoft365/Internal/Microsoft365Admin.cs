@@ -287,5 +287,16 @@ namespace PnP.Core.Admin.Model.Microsoft365
         }
         #endregion
 
+        #region Sensitivity labels
+        public async Task<List<ISensitivityLabel>> GetSensitivityLabelsAsync()
+        {
+            return await SensitivityLabelManager.GetLabelsUsingDelegatedPermissionsAsync(context).ConfigureAwait(false);
+        }
+
+        public List<ISensitivityLabel> GetSensitivityLabels()
+        {
+            return GetSensitivityLabelsAsync().GetAwaiter().GetResult();
+        }
+        #endregion
     }
 }
