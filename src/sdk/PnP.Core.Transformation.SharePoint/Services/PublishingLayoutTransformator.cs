@@ -6,6 +6,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using PnP.Core.Transformation.Services.Core;
+
 namespace PnP.Core.Transformation.SharePoint.Services
 {
     /// <summary>
@@ -14,13 +16,16 @@ namespace PnP.Core.Transformation.SharePoint.Services
     internal class PublishingLayoutTransformator
     {
         private ILogger<PublishingLayoutTransformator> logger;
+        private readonly CorrelationService correlationService;
         private readonly IServiceProvider serviceProvider;
 
 
         public PublishingLayoutTransformator(ILogger<PublishingLayoutTransformator> logger,
+            CorrelationService correlationService,
             IServiceProvider serviceProvider)
         {
             this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
+            this.correlationService = correlationService ?? throw new ArgumentNullException(nameof(correlationService));
             this.serviceProvider = serviceProvider;
         }
 
@@ -92,7 +97,8 @@ namespace PnP.Core.Transformation.SharePoint.Services
 
                     if (maxColumns > 3)
                     {
-                        this.logger.LogError(SharePointTransformationResources.Error_Maximum3ColumnsAllowed);
+                        this.logger.LogError(
+                            SharePointTransformationResources.Error_Maximum3ColumnsAllowed);
                         throw new Exception(SharePointTransformationResources.Error_Maximum3ColumnsAllowed);
                     }
                     else

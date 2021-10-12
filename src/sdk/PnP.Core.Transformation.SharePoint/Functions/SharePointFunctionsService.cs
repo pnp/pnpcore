@@ -35,6 +35,7 @@ namespace PnP.Core.Transformation.SharePoint.Functions
         private readonly IUrlMappingProvider urlMappingProvider;
         private readonly IUserMappingProvider userMappingProvider;
         private readonly IOptions<SharePointTransformationOptions> options;
+        private readonly CorrelationService correlationService;
 
         private Regex siteUrlRegex = new Regex(@"https?:\/\/(?<hostName>[\w.]*)(?<serverRelativeUrl>[\w\/.]*)");
         private Regex siteLinkRelativeUrlRegex = new Regex(@"\/sites\/(?<sitePath>\w*)\/(?<siteRelativePath>[\w\/.]*)");
@@ -49,6 +50,7 @@ namespace PnP.Core.Transformation.SharePoint.Functions
             IUrlMappingProvider urlMappingProvider,
             IUserMappingProvider userMappingProvider,
             IOptions<SharePointTransformationOptions> options,
+            CorrelationService correlationService,
             IServiceProvider serviceProvider)
         {
             this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
@@ -56,6 +58,7 @@ namespace PnP.Core.Transformation.SharePoint.Functions
             this.urlMappingProvider = urlMappingProvider ?? throw new ArgumentNullException(nameof(urlMappingProvider));
             this.userMappingProvider = userMappingProvider ?? throw new ArgumentNullException(nameof(userMappingProvider));
             this.options = options ?? throw new ArgumentNullException(nameof(options));
+            this.correlationService = correlationService ?? throw new ArgumentNullException(nameof(correlationService));
             this.serviceProvider = serviceProvider;
             this.memoryCache = this.serviceProvider.GetService<IMemoryCache>();
         }
@@ -703,9 +706,10 @@ namespace PnP.Core.Transformation.SharePoint.Functions
             }
             else
             {
-                logger.LogError(string.Format(
-                    SharePointTransformationResources.Error_ReturnCrossSiteRelativePathFailedFallback,
-                    imageLink));
+                logger.LogError(this.correlationService.CorrelateString(
+                    this.PageTransformationContext.Task.Id,
+                    SharePointTransformationResources.Error_ReturnCrossSiteRelativePathFailedFallback),
+                    imageLink);
 
                 // Fall back to send back the same link
                 return imageLink;
@@ -726,14 +730,18 @@ namespace PnP.Core.Transformation.SharePoint.Functions
 
                 var targetAssetRelativeUrl = PersistImageFileContent(sourceAssetRelativeUrl, context);
 
-                logger.LogInformation(string.Format(SharePointTransformationResources.Info_ImageFilePersisted,
-                    sourceAssetRelativeUrl, targetAssetRelativeUrl));
+                logger.LogInformation(this.correlationService.CorrelateString(
+                    this.PageTransformationContext.Task.Id,
+                    SharePointTransformationResources.Info_ImageFilePersisted),
+                    sourceAssetRelativeUrl, targetAssetRelativeUrl);
 
                 return targetAssetRelativeUrl;
             }
 
-            logger.LogError(string.Format(SharePointTransformationResources.Error_AssetTransferFailedFallback,
-                sourceAssetRelativeUrl));
+            logger.LogError(this.correlationService.CorrelateString(
+                this.PageTransformationContext.Task.Id,
+                SharePointTransformationResources.Error_AssetTransferFailedFallback),
+                sourceAssetRelativeUrl);
 
             // Fall back to send back the same link
             return sourceAssetRelativeUrl;
@@ -926,7 +934,9 @@ namespace PnP.Core.Transformation.SharePoint.Functions
                 }
                 catch (Exception ex)
                 {
-                    logger.LogError(SharePointTransformationResources.Error_DocumentEmbedLookup, ex);
+                    logger.LogError(ex, this.correlationService.CorrelateString(
+                        this.PageTransformationContext.Task.Id,
+                        SharePointTransformationResources.Error_DocumentEmbedLookup));
 
                     results.Add("DocumentWeb", "");
                     results.Add("DocumentListId", "");
@@ -959,12 +969,16 @@ namespace PnP.Core.Transformation.SharePoint.Functions
                 if (ex.ServerErrorTypeName == "System.IO.FileNotFoundException")
                 {
                     // provided file is not retrievable...we're eating the exception this file not be used in the target web part
-                    logger.LogError(SharePointTransformationResources.Error_DocumentEmbedLookupFileNotRetrievable, ex);
+                    logger.LogError(ex, this.correlationService.CorrelateString(
+                        this.PageTransformationContext.Task.Id,
+                        SharePointTransformationResources.Error_DocumentEmbedLookupFileNotRetrievable));
                     return null;
                 }
                 else
                 {
-                    logger.LogError(SharePointTransformationResources.Error_DocumentEmbedLookup, ex);
+                    logger.LogError(ex, this.correlationService.CorrelateString(
+                        this.PageTransformationContext.Task.Id,
+                        SharePointTransformationResources.Error_DocumentEmbedLookup));
                     throw;
                 }
             }
@@ -1112,7 +1126,9 @@ namespace PnP.Core.Transformation.SharePoint.Functions
                 }
                 catch (Exception ex)
                 {
-                    logger.LogError(SharePointTransformationResources.Error_LoadContentFromFile, ex);
+                    logger.LogError(ex, this.correlationService.CorrelateString(
+                        this.PageTransformationContext.Task.Id,
+                        SharePointTransformationResources.Error_LoadContentFromFile));
                     return "";
                 }
             }
@@ -1127,12 +1143,16 @@ namespace PnP.Core.Transformation.SharePoint.Functions
                     if (ex.ServerErrorTypeName == "System.IO.FileNotFoundException")
                     {
                         // Provided html was not found, should not happen but if it happens we're not stopping the transformation
-                        logger.LogError(SharePointTransformationResources.Error_LoadContentFromFileContentLink, ex);
+                        logger.LogError(ex, this.correlationService.CorrelateString(
+                            this.PageTransformationContext.Task.Id,
+                            SharePointTransformationResources.Error_LoadContentFromFileContentLink));
                         return "";
                     }
                     else
                     {
-                        logger.LogError(SharePointTransformationResources.Error_LoadContentFromFileContentLink, ex);
+                        logger.LogError(this.correlationService.CorrelateString(
+                            this.PageTransformationContext.Task.Id,
+                            SharePointTransformationResources.Error_LoadContentFromFileContentLink), ex);
                         return "";
                     }
                 }

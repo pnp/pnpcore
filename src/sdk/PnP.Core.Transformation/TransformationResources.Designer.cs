@@ -196,6 +196,15 @@ namespace PnP.Core.Transformation {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Running transformation task {0} on data source item {1}.
+        /// </summary>
+        internal static string Info_RunningTransformationTask {
+            get {
+                return ResourceManager.GetString("Info_RunningTransformationTask", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Image Url:.
         /// </summary>
         internal static string Info_TransformArticleHeaderImageUrl {

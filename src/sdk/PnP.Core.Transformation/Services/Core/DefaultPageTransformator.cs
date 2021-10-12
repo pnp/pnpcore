@@ -6,6 +6,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Options;
 using PnP.Core.Transformation.Services.MappingProviders;
+using PnP.Core.Transformation.Extensions;
 
 namespace PnP.Core.Transformation.Services.Core
 {
@@ -21,6 +22,8 @@ namespace PnP.Core.Transformation.Services.Core
         private readonly IEnumerable<IPagePostTransformation> pagePostTransformations;
         private readonly IOptions<PageTransformationOptions> defaultPageTransformationOptions;
         private readonly IPageGenerator pageGenerator;
+        private readonly CorrelationService correlationService;
+        private readonly TelemetryService telemetry;
 
         /// <summary>
         /// Constructor with DI support
@@ -32,6 +35,8 @@ namespace PnP.Core.Transformation.Services.Core
         /// <param name="pagePostTransformations">The list of pre transformations to call</param>
         /// <param name="pageTransformationOptions">The options</param>
         /// <param name="pageGenerator">The page generator to create the actual SPO modern page</param>
+        /// <param name="correlationService">The correlation service instance</param>
+        /// <param name="telemetry">The telemetry service</param>
         public DefaultPageTransformator(
             ILogger<DefaultPageTransformator> logger,
             IMappingProvider mappingProvider,
@@ -39,7 +44,9 @@ namespace PnP.Core.Transformation.Services.Core
             IEnumerable<IPagePreTransformation> pagePreTransformations,
             IEnumerable<IPagePostTransformation> pagePostTransformations,
             IOptions<PageTransformationOptions> pageTransformationOptions,
-            IPageGenerator pageGenerator)
+            IPageGenerator pageGenerator,
+            CorrelationService correlationService,
+            TelemetryService telemetry)
         {
             this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
             this.mappingProvider = mappingProvider ?? throw new ArgumentNullException(nameof(mappingProvider));
@@ -48,6 +55,8 @@ namespace PnP.Core.Transformation.Services.Core
             this.pagePostTransformations = pagePostTransformations ?? throw new ArgumentNullException(nameof(pagePostTransformations));
             this.defaultPageTransformationOptions = pageTransformationOptions ?? throw new ArgumentNullException(nameof(pageTransformationOptions));
             this.pageGenerator = pageGenerator ?? throw new ArgumentNullException(nameof(pageGenerator));
+            this.correlationService = correlationService ?? throw new ArgumentNullException(nameof(correlationService));
+            this.telemetry = telemetry ?? throw new ArgumentNullException(nameof(telemetry));
         }
 
         /// <summary>
@@ -60,7 +69,9 @@ namespace PnP.Core.Transformation.Services.Core
         {
             if (task == null) throw new ArgumentNullException(nameof(task));
 
-            logger.LogInformation("Running transformation task {id} on data source item {sourceItemId}", task.Id, task.SourceItemId.Id);
+            logger.LogInformation(this.correlationService.CorrelateString(
+                task.Id,
+                string.Format(TransformationResources.Info_RunningTransformationTask, task.Id, task.SourceItemId.Id)));
 
             // Get the source item by id
             var sourceItem = await task.SourceProvider.GetItemAsync(task.SourceItemId, token).ConfigureAwait(false);
@@ -76,6 +87,9 @@ namespace PnP.Core.Transformation.Services.Core
                 token.ThrowIfCancellationRequested();
             }
 
+            // Save start date and time for telemetry
+            DateTime transformationStartDateTime = DateTime.Now;
+
             // Invoke the configured main mapping provider
             var context = new PageTransformationContext(task, sourceItem, targetPageUri);
             var input = new MappingProviderInput(context);
@@ -83,8 +97,21 @@ namespace PnP.Core.Transformation.Services.Core
             token.ThrowIfCancellationRequested();
 
             // Here we generate the actual SPO modern page in SharePoint Online
-            var generatedPageUri = await pageGenerator.GenerateAsync(context, output, targetPageUri, token).ConfigureAwait(false);
+            var generatedPage = await pageGenerator.GenerateAsync(context, output, targetPageUri, token).ConfigureAwait(false);
+            var generatedPageUri = generatedPage.GeneratedPageUrl;
             token.ThrowIfCancellationRequested();
+
+            // Save duration for telemetry
+            TimeSpan duration = DateTime.Now.Subtract(transformationStartDateTime);
+
+            // Save telemetry
+            var telemetryProperties = output.TelemetryProperties.Merge(generatedPage.TelemetryProperties);
+
+            // Add global telemetry properties
+            telemetryProperties.Add(TelemetryService.CorrelationId, task.Id.ToString());
+            telemetryProperties.Add(TelemetryService.AADTenantId, context.Task.TargetContext.GlobalOptions.AADTenantId.ToString());
+
+            this.telemetry.LogTransformationCompleted(duration, telemetryProperties);
 
             // Call post transformations handlers
             var postContext = new PagePostTransformationContext(task, sourceItem, generatedPageUri);
