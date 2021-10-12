@@ -16,16 +16,13 @@ namespace PnP.Core.Transformation.SharePoint.Services
     internal class PublishingLayoutTransformator
     {
         private ILogger<PublishingLayoutTransformator> logger;
-        private readonly CorrelationService correlationService;
         private readonly IServiceProvider serviceProvider;
 
 
         public PublishingLayoutTransformator(ILogger<PublishingLayoutTransformator> logger,
-            CorrelationService correlationService,
             IServiceProvider serviceProvider)
         {
             this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
-            this.correlationService = correlationService ?? throw new ArgumentNullException(nameof(correlationService));
             this.serviceProvider = serviceProvider;
         }
 

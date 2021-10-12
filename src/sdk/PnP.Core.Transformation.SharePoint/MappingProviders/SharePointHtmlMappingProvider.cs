@@ -26,7 +26,6 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
     {
         private readonly ILogger<SharePointHtmlMappingProvider> logger;
         private readonly IOptions<SharePointTransformationOptions> options;
-        private readonly CorrelationService correlationService;
         private readonly IServiceProvider serviceProvider;
 
         private const int DefaultTableWidth = 800;
@@ -39,16 +38,13 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
         /// </summary>
         /// <param name="logger">Logger for tracing activities</param>
         /// <param name="options">Configuration options</param>
-        /// <param name="correlationService">The Correlation Service</param>
         /// <param name="serviceProvider">Service provider</param>
         public SharePointHtmlMappingProvider(ILogger<SharePointHtmlMappingProvider> logger,
             IOptions<SharePointTransformationOptions> options,
-            CorrelationService correlationService,
             IServiceProvider serviceProvider)
         {
             this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
             this.options = options ?? throw new ArgumentNullException(nameof(options));
-            this.correlationService = correlationService ?? throw new ArgumentNullException(nameof(correlationService));
             this.serviceProvider = serviceProvider;
 
             // Instantiate the AngleSharp Html parser, configure to load the Style property as well
@@ -66,9 +62,9 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
         {
             this.taskId = input.Context.Task.Id;
 
-            logger.LogInformation(this.correlationService.CorrelateString(
-                this.taskId,
-                $"Invoked: {this.GetType().Namespace}.{this.GetType().Name}.MapHtmlAsync"));
+            logger.LogInformation(
+                $"Invoked: {this.GetType().Namespace}.{this.GetType().Name}.MapHtmlAsync"
+                .CorrelateString(this.taskId));
 
             string text = input.HtmlContent;
 
@@ -225,10 +221,10 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
                 }
                 catch (Exception ex)
                 {
-                    logger.LogWarning(this.correlationService.CorrelateString(
-                        this.taskId,
+                    logger.LogWarning(
                         string.Format("{0} - {1}",
-                        SharePointTransformationResources.Warning_TableCouldNotBeNormalized, ex)));
+                        SharePointTransformationResources.Warning_TableCouldNotBeNormalized, ex)
+                        .CorrelateString(this.taskId));
                 }
 
                 // If we could not normalize this table then let's skip it

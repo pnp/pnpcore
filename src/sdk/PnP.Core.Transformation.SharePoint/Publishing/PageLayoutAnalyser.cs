@@ -23,7 +23,6 @@ namespace PnP.Core.Transformation.SharePoint.Publishing
     internal class PageLayoutAnalyser
     {
         private ILogger<PageLayoutAnalyser> logger;
-        private readonly CorrelationService correlationService;
         private readonly IServiceProvider serviceProvider;
         private readonly IMemoryCache memoryCache;
 
@@ -56,11 +55,9 @@ namespace PnP.Core.Transformation.SharePoint.Publishing
         /// Analyse Page Layouts class constructor
         /// </summary>
         public PageLayoutAnalyser(ILogger<PageLayoutAnalyser> logger,
-            CorrelationService correlationService,
             IServiceProvider serviceProvider)
         {
             this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
-            this.correlationService = correlationService ?? throw new ArgumentNullException(nameof(correlationService));
             this.serviceProvider = serviceProvider;
             this.memoryCache = this.serviceProvider.GetService<IMemoryCache>();
 
@@ -203,18 +200,18 @@ namespace PnP.Core.Transformation.SharePoint.Publishing
                     _mapping.PageLayouts = new[] { layoutMapping };
                 }
 
-                logger.LogInformation(this.correlationService.CorrelateString(
-                    taskId,
-                    SharePointTransformationResources.Info_AnalyserMappingLayout), layoutMapping.Name);
+                logger.LogInformation(
+                    SharePointTransformationResources.Info_AnalyserMappingLayout
+                    .CorrelateString(taskId), layoutMapping.Name);
 
                 return layoutMapping;
 
             }
             catch (Exception)
             {
-                logger.LogError(this.correlationService.CorrelateString(
-                    taskId,
-                    SharePointTransformationResources.Error_CannotProcessPageLayoutAnalyse));
+                logger.LogError(
+                    SharePointTransformationResources.Error_CannotProcessPageLayoutAnalyse
+                    .CorrelateString(taskId));
             }
 
             return null;
@@ -246,9 +243,9 @@ namespace PnP.Core.Transformation.SharePoint.Publishing
             }
             else
             {
-                logger.LogWarning(this.correlationService.CorrelateString(
-                    taskId,
-                    SharePointTransformationResources.Warning_PageLayoutsCannotBeDetermined));
+                logger.LogWarning(
+                    SharePointTransformationResources.Warning_PageLayoutsCannotBeDetermined
+                    .CorrelateString(taskId));
             }
 
             return null;
@@ -445,9 +442,9 @@ namespace PnP.Core.Transformation.SharePoint.Publishing
             }
             catch (Exception ex)
             {
-                logger.LogError(this.correlationService.CorrelateString(
-                    taskId,
-                    SharePointTransformationResources.Error_AnalyserErrorOccurredExtractMetadata));
+                logger.LogError(
+                    SharePointTransformationResources.Error_AnalyserErrorOccurredExtractMetadata
+                    .CorrelateString(taskId));
             }
 
             return fields.ToArray();
@@ -503,9 +500,9 @@ namespace PnP.Core.Transformation.SharePoint.Publishing
             }
             catch (Exception ex)
             {
-                logger.LogError(this.correlationService.CorrelateString(
-                    taskId,
-                    SharePointTransformationResources.Error_AnalyserErrorOccurredExtractNamespaces));
+                logger.LogError(
+                    SharePointTransformationResources.Error_AnalyserErrorOccurredExtractNamespaces
+                    .CorrelateString(taskId));
             }
 
             return tagPrefixes;
@@ -683,9 +680,9 @@ namespace PnP.Core.Transformation.SharePoint.Publishing
             }
             catch (Exception ex)
             {
-                logger.LogError(this.correlationService.CorrelateString(
-                    taskId,
-                    SharePointTransformationResources.Error_AnalyserErrorOccurredExtractHtmlBlocks));
+                logger.LogError(
+                    SharePointTransformationResources.Error_AnalyserErrorOccurredExtractHtmlBlocks
+                    .CorrelateString(taskId));
             }
 
             return extractedHtmlBlocks;
@@ -764,9 +761,9 @@ namespace PnP.Core.Transformation.SharePoint.Publishing
             }
             catch (Exception)
             {
-                logger.LogError(this.correlationService.CorrelateString(
-                    taskId,
-                    SharePointTransformationResources.Error_CannotMapMetadataFields));
+                logger.LogError(
+                    SharePointTransformationResources.Error_CannotMapMetadataFields
+                    .CorrelateString(taskId));
                 throw;
             }
         }
@@ -844,9 +841,9 @@ namespace PnP.Core.Transformation.SharePoint.Publishing
             }
             catch (Exception)
             {
-                logger.LogError(this.correlationService.CorrelateString(
-                    taskId,
-                    SharePointTransformationResources.Error_AnalyserCleaningExtractedWebPartFields));
+                logger.LogError(
+                    SharePointTransformationResources.Error_AnalyserCleaningExtractedWebPartFields
+                    .CorrelateString(taskId));
             }
 
             return cleanedWebPartFields;
@@ -896,9 +893,9 @@ namespace PnP.Core.Transformation.SharePoint.Publishing
             }
             catch (Exception)
             {
-                logger.LogError(this.correlationService.CorrelateString(
-                    taskId,
-                    SharePointTransformationResources.Error_AnalyserExtractPageHeaderFromPageLayout));
+                logger.LogError(
+                    SharePointTransformationResources.Error_AnalyserExtractPageHeaderFromPageLayout
+                    .CorrelateString(taskId));
             }
 
             return null;

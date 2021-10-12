@@ -57,7 +57,6 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
         private readonly IOptions<SharePointTransformationOptions> spOptions;
         private readonly IOptions<PageTransformationOptions> pageOptions;
         private readonly IMemoryCache memoryCache;
-        private readonly CorrelationService correlationService;
         private readonly IServiceProvider serviceProvider;
         private readonly TokenParser tokenParser;
         private readonly PublishingFunctionProcessor publishingFunctionProcessor;
@@ -73,20 +72,17 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
         /// <param name="spOptions">SharePoint configuration options</param>
         /// <param name="pageOptions">Target page configuration options</param>
         /// <param name="publishingFunctionProcessor">Function processor for publishing pages</param>
-        /// <param name="correlationService">The Correlation Service</param>
         /// <param name="serviceProvider">Service provider</param>
         public SharePointMappingProvider(ILogger<SharePointMappingProvider> logger,
             IOptions<SharePointTransformationOptions> spOptions,
             IOptions<PageTransformationOptions> pageOptions,
             PublishingFunctionProcessor publishingFunctionProcessor,
-            CorrelationService correlationService,
             IServiceProvider serviceProvider)
         {
             this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
             this.spOptions = spOptions ?? throw new ArgumentNullException(nameof(spOptions));
             this.pageOptions = pageOptions ?? throw new ArgumentNullException(nameof(pageOptions));
             this.publishingFunctionProcessor = publishingFunctionProcessor ?? throw new ArgumentNullException(nameof(publishingFunctionProcessor));
-            this.correlationService = correlationService ?? throw new ArgumentNullException(nameof(correlationService));
             this.serviceProvider = serviceProvider;
 
             this.memoryCache = this.serviceProvider.GetService<IMemoryCache>();
@@ -105,9 +101,9 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
 
             MappingProviderOutput result = new MappingProviderOutput();
 
-            logger.LogInformation(this.correlationService.CorrelateString(
-                this.taskId,
-                $"Invoked: {this.GetType().Namespace}.{this.GetType().Name}.MapAsync"));
+            logger.LogInformation(
+                $"Invoked: {this.GetType().Namespace}.{this.GetType().Name}.MapAsync"
+                .CorrelateString(this.taskId));
 
             // Validate input
             if (input == null) throw new ArgumentNullException(nameof(input));
@@ -161,10 +157,10 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
             result.TelemetryProperties.Add(TelemetryPropertiesNames.SourceVersionNumber, sourcePage.SourceVersionNumber.ToString());
 
             // Log that we've finished the validation stage
-            logger.LogInformation(this.correlationService.CorrelateString(
-                    this.taskId,
-                    SharePointTransformationResources.Info_PageValidationChecksComplete),
-                    pageFile.ServerRelativeUrl);
+            logger.LogInformation(
+                SharePointTransformationResources.Info_PageValidationChecksComplete
+                .CorrelateString(this.taskId),
+                pageFile.ServerRelativeUrl);
 
             // Extract the list of Web Parts to process and the reference page layout
             var (pageLayout, layout, webPartsToProcess) = await AnalyzePageAsync(input.Context, pageFile, pageItem, sourcePage).ConfigureAwait(false);
@@ -183,9 +179,9 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
             (sourcePage.Folder, targetPageName) = DeterminePageFolder(sourceContext, sourcePage, pageItem, input.Context.TargetPageUri);
 
             // Log that we've finished the analysis stage
-            logger.LogInformation(this.correlationService.CorrelateString(
-                this.taskId, 
-                SharePointTransformationResources.Info_PageAnalysisComplete), 
+            logger.LogInformation(
+                SharePointTransformationResources.Info_PageAnalysisComplete
+                .CorrelateString(this.taskId), 
                 pageFile.ServerRelativeUrl);
             result.TargetPage.Folder = sourcePage.Folder;
             
@@ -224,9 +220,9 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
                 if (sourceWebParts == null || sourceWebParts.Count == 0)
                 {
                     // nothing to transform
-                    logger.LogWarning(this.correlationService.CorrelateString(
-                        this.taskId,
-                        SharePointTransformationResources.Warning_NothingToTransform));
+                    logger.LogWarning(
+                        SharePointTransformationResources.Warning_NothingToTransform
+                        .CorrelateString(this.taskId));
                 }
                 else
                 {
@@ -418,16 +414,16 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
                 }
                 else
                 {
-                    logger.LogWarning(this.correlationService.CorrelateString(
-                        this.taskId,
-                        SharePointTransformationResources.Warning_TransformGetItemPermissionsAccessDenied));
+                    logger.LogWarning(
+                        SharePointTransformationResources.Warning_TransformGetItemPermissionsAccessDenied
+                        .CorrelateString(this.taskId));
                     return lip;
                 }
             }
 
-            logger.LogInformation(this.correlationService.CorrelateString(
-                this.taskId,
-                SharePointTransformationResources.Info_GetItemLevelPermissions));
+            logger.LogInformation(
+                SharePointTransformationResources.Info_GetItemLevelPermissions
+                .CorrelateString(this.taskId));
 
             return lip;
         }
@@ -579,9 +575,10 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
                         {
                             if (document.FirstChild != null && string.IsNullOrEmpty(document.FirstChild.TextContent))
                             {
-                                logger.LogInformation(this.correlationService.CorrelateString(
-                                    this.taskId,
-                                    SharePointTransformationResources.Info_TransformRemovingEmptyWebPart));
+                                logger.LogInformation(
+                                    SharePointTransformationResources.Info_TransformRemovingEmptyWebPart
+                                    .CorrelateString(this.taskId));
+
                                 // Drop text part
                                 column.Controls.Remove(cc);
                             }
@@ -694,9 +691,9 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
         private void ManageCombinedMapping(Page targetPage, WebPartEntity webPart, Mapping mapping)
         {
             // Use the mapping data => make one list of Text and WebParts to allow for correct ordering
-            logger.LogDebug(this.correlationService.CorrelateString(
-                this.taskId,
-                SharePointTransformationResources.Debug_CombiningMappingData));
+            logger.LogDebug(
+                SharePointTransformationResources.Debug_CombiningMappingData
+                .CorrelateString(this.taskId));
             var combinedMappinglist = new List<CombinedMapping>();
             if (mapping.ClientSideText != null)
             {
@@ -740,9 +737,9 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
                     // Parse the Text to support custom tokens
                     control["Text"] = this.tokenParser.ReplaceSourceTokens(map.ClientSideText.Text, webPart.Properties);
 
-                    logger.LogInformation(this.correlationService.CorrelateString(
-                        this.taskId,
-                        SharePointTransformationResources.Info_AddedClientSideTextWebPart));
+                    logger.LogInformation(
+                        SharePointTransformationResources.Info_AddedClientSideTextWebPart
+                        .CorrelateString(this.taskId));
                 }
                 else if (map.ClientSideWebPart != null)
                 {
@@ -755,9 +752,9 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
                         // Parse the control ID to support generic web part placement scenarios
                         control["ControlId"] = this.tokenParser.ReplaceSourceTokens(map.ClientSideWebPart.ControlId, webPart.Properties);
 
-                        logger.LogInformation(this.correlationService.CorrelateString(
-                            this.taskId,
-                            SharePointTransformationResources.Info_UsingCustomModernWebPart));
+                        logger.LogInformation(
+                            SharePointTransformationResources.Info_UsingCustomModernWebPart
+                            .CorrelateString(this.taskId));
                     }
                     else
                     {
@@ -768,9 +765,9 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
                         control["Title"] = webPart.Title;
                         control["Properties"] = webPart.Properties;
 
-                        logger.LogInformation(this.correlationService.CorrelateString(
-                            this.taskId,
-                            SharePointTransformationResources.Info_ContentUsingModernWebPart),
+                        logger.LogInformation(
+                            SharePointTransformationResources.Info_ContentUsingModernWebPart
+                            .CorrelateString(this.taskId),
                             map.ClientSideWebPart.Type);
                     }
                 }
@@ -1030,9 +1027,9 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
                     break;
             }
 
-            logger.LogInformation(this.correlationService.CorrelateString(
-                this.taskId,
-                SharePointTransformationResources.Info_TransformPageModernTitle), pageFile.ServerRelativeUrl, pageTitle);
+            logger.LogInformation(
+                SharePointTransformationResources.Info_TransformPageModernTitle
+                .CorrelateString(this.taskId), pageFile.ServerRelativeUrl, pageTitle);
 
             return pageTitle;
         }
@@ -1144,9 +1141,9 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
 
             if (pageFile != null && pageItem == null)
             {
-                logger.LogInformation(this.correlationService.CorrelateString(
-                    this.taskId,
-                    SharePointTransformationResources.Info_PageLivesOutsideOfALibrary), pageFile.ServerRelativeUrl);
+                logger.LogInformation(
+                    SharePointTransformationResources.Info_PageLivesOutsideOfALibrary
+                    .CorrelateString(this.taskId), pageFile.ServerRelativeUrl);
 
                 // This is always a web part page
                 result = SourcePageType.WebPartPage;
@@ -1164,7 +1161,7 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
                 {
                     var errorMessage = string.Format(System.Globalization.CultureInfo.InvariantCulture,
                         SharePointTransformationResources.Error_SourcePageNotFound, pageFile.ServerRelativeUrl);
-                    logger.LogInformation(this.correlationService.CorrelateString(this.taskId, errorMessage));
+                    logger.LogInformation(errorMessage.CorrelateString(this.taskId));
                     throw new ArgumentNullException(errorMessage);
                 }
 
@@ -1174,16 +1171,16 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
                 {
                     var errorMessage = string.Format(System.Globalization.CultureInfo.InvariantCulture,
                         SharePointTransformationResources.Error_PageNotValidMissingFileRef, pageFile.ServerRelativeUrl);
-                    logger.LogInformation(this.correlationService.CorrelateString(this.taskId, errorMessage));
+                    logger.LogInformation(errorMessage.CorrelateString(this.taskId));
                     throw new ArgumentNullException(errorMessage);
                 }
 
                 // Store the page type
                 result = pageItem.PageType();
 
-                logger.LogInformation(this.correlationService.CorrelateString(
-                    this.taskId,
-                    SharePointTransformationResources.Info_TransformationMode),
+                logger.LogInformation(
+                    SharePointTransformationResources.Info_TransformationMode
+                    .CorrelateString(this.taskId),
                     pageFile.ServerRelativeUrl,
                     result.FormatAsFriendlyTitle());
 
@@ -1218,8 +1215,9 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
 
             if (!string.IsNullOrEmpty(pageTypeExceptionMessage))
             {
-                logger.LogError(this.correlationService.CorrelateString(
-                    this.taskId, pageTypeExceptionMessage));
+                logger.LogError(
+                    pageTypeExceptionMessage
+                    .CorrelateString(this.taskId));
                 throw new ArgumentNullException(pageTypeExceptionMessage);
             }
         }
@@ -1373,9 +1371,9 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
                         foundWebPart.WebPartType = GetType(foundWebPart.WebPartXml.Value);
                     }
 
-                    logger.LogInformation(this.correlationService.CorrelateString(
-                        this.taskId,
-                        SharePointTransformationResources.Info_ContentTransformFoundSourceWebParts),
+                    logger.LogInformation(
+                        SharePointTransformationResources.Info_ContentTransformFoundSourceWebParts
+                        .CorrelateString(this.taskId),
                         pageFile.ServerRelativeUrl,
                         foundWebPart.WebPartDefinition.WebPart.Title,
                         foundWebPart.WebPartType.GetTypeShort());
@@ -1401,9 +1399,9 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
             }
             else
             {
-                logger.LogInformation(this.correlationService.CorrelateString(
-                    this.taskId,
-                    SharePointTransformationResources.Info_NoWebPartsFound),
+                logger.LogInformation(
+                    SharePointTransformationResources.Info_NoWebPartsFound
+                    .CorrelateString(this.taskId),
                     pageFile.ServerRelativeUrl);
             }
 
@@ -1502,9 +1500,9 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
                         foundWebPart.WebPartType = GetType(foundWebPart.WebPartXmlOnPremises);
                     }
 
-                    logger.LogInformation(this.correlationService.CorrelateString(
-                        this.taskId,
-                        SharePointTransformationResources.Info_ContentTransformFoundSourceWebParts),
+                    logger.LogInformation(
+                        SharePointTransformationResources.Info_ContentTransformFoundSourceWebParts
+                        .CorrelateString(this.taskId),
                         pageFile.ServerRelativeUrl,
                         foundWebPart.WebPartDefinition.WebPart.Title,
                         foundWebPart.WebPartType.GetTypeShort());
@@ -1529,9 +1527,9 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
             }
             else
             {
-                logger.LogInformation(this.correlationService.CorrelateString(
-                    this.taskId,
-                    SharePointTransformationResources.Info_NoWebPartsFound),
+                logger.LogInformation(
+                    SharePointTransformationResources.Info_NoWebPartsFound
+                    .CorrelateString(this.taskId),
                     pageFile.ServerRelativeUrl);
             }
 
@@ -1610,8 +1608,8 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
                         var unsupportedError = string.Format(System.Globalization.CultureInfo.InvariantCulture,
                             SharePointTransformationResources.Error_UnsupportedSourceVersion,
                             wikiPage.ServerRelativeUrl);
-                        logger.LogError(this.correlationService.CorrelateString(
-                            this.taskId, unsupportedError));
+                        logger.LogError(unsupportedError
+                            .CorrelateString(this.taskId));
 
                         throw new ApplicationException(unsupportedError);
                     }
@@ -1627,9 +1625,9 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
                 }
                 else
                 {
-                    logger.LogError(this.correlationService.CorrelateString(
-                        this.taskId,
-                        SharePointTransformationResources.Error_AnalysingNoWebPartsFound),
+                    logger.LogError(
+                        SharePointTransformationResources.Error_AnalysingNoWebPartsFound
+                        .CorrelateString(this.taskId),
                         wikiPage.ServerRelativeUrl);
                 }
 
@@ -1740,8 +1738,8 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
                     SharePointTransformationResources.Error_NoPageLayoutTransformationModel,
                     page.PageLayout);
 
-                logger.LogError(this.correlationService.CorrelateString(
-                    this.taskId, noPageLayoutError));
+                logger.LogError(noPageLayoutError
+                    .CorrelateString(this.taskId));
                 throw new Exception(noPageLayoutError);
             }
 
@@ -1793,9 +1791,9 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
                     }
                     else
                     {
-                        logger.LogWarning(this.correlationService.CorrelateString(
-                            this.taskId,
-                            SharePointTransformationResources.Warning_CannotRetrieveFieldValue));
+                        logger.LogWarning(
+                            SharePointTransformationResources.Warning_CannotRetrieveFieldValue
+                            .CorrelateString(this.taskId));
                     }
                 }
 
@@ -1818,10 +1816,10 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
 
                         if (string.IsNullOrEmpty(fieldContents))
                         {
-                            logger.LogWarning(this.correlationService.CorrelateString(
-                                this.taskId,
-                                SharePointTransformationResources.Warning_SkippedWebPartDueToEmptyInSourcee),
-                                    fieldWebPart.TargetWebPart, fieldWebPart.Name);
+                            logger.LogWarning(
+                                SharePointTransformationResources.Warning_SkippedWebPartDueToEmptyInSourcee
+                                .CorrelateString(this.taskId),
+                                fieldWebPart.TargetWebPart, fieldWebPart.Name);
                             continue;
                         }
                     }
@@ -2095,9 +2093,9 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
             }
             else
             {
-                logger.LogInformation(this.correlationService.CorrelateString(
-                    this.taskId,
-                    SharePointTransformationResources.Info_AnalysingNoWebPartsFound));
+                logger.LogInformation(
+                    SharePointTransformationResources.Info_AnalysingNoWebPartsFound
+                    .CorrelateString(this.taskId));
             }
 
             #endregion
@@ -2277,9 +2275,9 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
             }
             else
             {
-                logger.LogInformation(this.correlationService.CorrelateString(
-                    this.taskId,
-                    SharePointTransformationResources.Info_AnalysingNoWebPartsFound));
+                logger.LogInformation(
+                    SharePointTransformationResources.Info_AnalysingNoWebPartsFound
+                    .CorrelateString(this.taskId));
             }
 
             #endregion
@@ -2453,9 +2451,9 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
         {
             try
             {
-                logger.LogInformation(this.correlationService.CorrelateString(
-                    this.taskId,
-                    SharePointTransformationResources.Info_CallingWebServicesToExtractWebPartsFromPage));
+                logger.LogInformation(
+                    SharePointTransformationResources.Info_CallingWebServicesToExtractWebPartsFromPage
+                    .CorrelateString(this.taskId));
 
                 string webUrl = sourceContext.Web.EnsureProperty(w => w.Url);
                 string webServiceUrl = webUrl + "/_vti_bin/WebPartPages.asmx";
@@ -2516,9 +2514,9 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
             }
             catch (WebException ex)
             {
-                logger.LogError(this.correlationService.CorrelateString(
-                    this.taskId,
-                    SharePointTransformationResources.Error_CallingWebServicesToExtractWebPartsFromPage),
+                logger.LogError(
+                    SharePointTransformationResources.Error_CallingWebServicesToExtractWebPartsFromPage
+                    .CorrelateString(this.taskId),
                     ex.Message);
             }
 
@@ -2580,9 +2578,9 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
 
             try
             {
-                logger.LogInformation(this.correlationService.CorrelateString(
-                    this.taskId,
-                    SharePointTransformationResources.Info_RetreivingExportWebPartXmlWorkaround),
+                logger.LogInformation(
+                    SharePointTransformationResources.Info_RetreivingExportWebPartXmlWorkaround
+                    .CorrelateString(this.taskId),
                     webPartGuid, pageFile.ServerRelativeUrl);
 
                 var pageItem = pageFile.EnsureProperty(p => p.ListItemAllFields);
@@ -2629,9 +2627,9 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
             }
             catch (WebException ex)
             {
-                logger.LogError(this.correlationService.CorrelateString(
-                    this.taskId,
-                    SharePointTransformationResources.Error_WebPartXmlNotExported),
+                logger.LogError(
+                    SharePointTransformationResources.Error_WebPartXmlNotExported
+                    .CorrelateString(this.taskId),
                     webPartGuid, pageFile.ServerRelativeUrl, ex.Message);
             }
 
@@ -2941,9 +2939,9 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
 
             try
             {
-                logger.LogInformation(this.correlationService.CorrelateString(
-                    this.taskId,
-                    SharePointTransformationResources.Info_RetreivingExportWebPartXmlWorkaround),
+                logger.LogInformation(
+                    SharePointTransformationResources.Info_RetreivingExportWebPartXmlWorkaround
+                    .CorrelateString(this.taskId),
                     webPartGuid, pageFile.ServerRelativeUrl);
 
                 string webPartXml = string.Empty;
@@ -2987,9 +2985,9 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
             }
             catch (WebException ex)
             {
-                logger.LogInformation(this.correlationService.CorrelateString(
-                    this.taskId,
-                    SharePointTransformationResources.Error_WebPartXmlNotExported),
+                logger.LogInformation(
+                    SharePointTransformationResources.Error_WebPartXmlNotExported
+                    .CorrelateString(this.taskId),
                     webPartGuid, pageFile.ServerRelativeUrl, ex.Message);
             }
 
@@ -3246,9 +3244,9 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
 
             try
             {
-                logger.LogInformation(this.correlationService.CorrelateString(
-                    this.taskId,
-                    SharePointTransformationResources.Info_CallingWebServicesToExtractWebPartsFromPage),
+                logger.LogInformation(
+                    SharePointTransformationResources.Info_CallingWebServicesToExtractWebPartsFromPage
+                    .CorrelateString(this.taskId),
                     pageFile.ServerRelativeUrl);
 
                 string webUrl = context.Web.EnsureProperty(p => p.Url);
@@ -3310,9 +3308,9 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
             }
             catch (WebException ex)
             {
-                logger.LogError(this.correlationService.CorrelateString(
-                    this.taskId,
-                    SharePointTransformationResources.Error_CallingWebServicesToExtractWebPartsFromPage),
+                logger.LogError(
+                    SharePointTransformationResources.Error_CallingWebServicesToExtractWebPartsFromPage
+                    .CorrelateString(this.taskId),
                     pageFile.ServerRelativeUrl);
             }
 
@@ -3845,9 +3843,9 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
 
             if (sourceClientContext.Web.RootFolder.IsPropertyAvailable("WelcomePage") && !string.IsNullOrEmpty(sourceClientContext.Web.RootFolder.WelcomePage))
             {
-                logger.LogInformation(this.correlationService.CorrelateString(
-                    this.taskId,
-                    SharePointTransformationResources.Info_WelcomePageSettingsIsPresent));
+                logger.LogInformation(
+                    SharePointTransformationResources.Info_WelcomePageSettingsIsPresent
+                    .CorrelateString(this.taskId));
 
                 var homePageUrl = sourceClientContext.Web.RootFolder.WelcomePage;
                 var homepageName = Path.GetFileName(sourceClientContext.Web.RootFolder.WelcomePage);
@@ -3856,16 +3854,16 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
                 {
                     if (homepageName.Equals(fileLeafRef, StringComparison.InvariantCultureIgnoreCase))
                     {
-                        logger.LogInformation(this.correlationService.CorrelateString(
-                            this.taskId,
-                            SharePointTransformationResources.Info_TransformSourcePageIsHomePage));
+                        logger.LogInformation(
+                            SharePointTransformationResources.Info_TransformSourcePageIsHomePage
+                            .CorrelateString(this.taskId));
                         result.IsHomePage = true;
                     }
                     else
                     {
-                        logger.LogInformation(this.correlationService.CorrelateString(
-                            this.taskId,
-                            SharePointTransformationResources.Info_TransformSourcePageIsNotHomePage));
+                        logger.LogInformation(
+                            SharePointTransformationResources.Info_TransformSourcePageIsNotHomePage
+                            .CorrelateString(this.taskId));
                         result.IsHomePage = false;
                     }
                 }
@@ -3950,9 +3948,9 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
                         webPartToRetrieve.WebPartType = GetType(webPartToRetrieve.WebPartXmlOnPremises);
                     }
 
-                    logger.LogInformation(this.correlationService.CorrelateString(
-                        this.taskId,
-                        SharePointTransformationResources.Info_ContentTransformFoundSourceWebParts),
+                    logger.LogInformation(
+                        SharePointTransformationResources.Info_ContentTransformFoundSourceWebParts
+                        .CorrelateString(this.taskId),
                         wikiPage.ServerRelativeUrl,
                         webPartToRetrieve.WebPartDefinition.WebPart.Title,
                         webPartToRetrieve.WebPartType.GetTypeShort());
@@ -4058,9 +4056,9 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
                         webPartToRetrieve.WebPartType = GetType(webPartToRetrieve.WebPartXml.Value);
                     }
 
-                    logger.LogInformation(this.correlationService.CorrelateString(
-                        this.taskId,
-                        SharePointTransformationResources.Info_ContentTransformFoundSourceWebParts),
+                    logger.LogInformation(
+                        SharePointTransformationResources.Info_ContentTransformFoundSourceWebParts
+                        .CorrelateString(this.taskId),
                         wikiPage.ServerRelativeUrl,
                         webPartToRetrieve.WebPartDefinition.WebPart.Title,
                         webPartToRetrieve.WebPartType.GetTypeShort());

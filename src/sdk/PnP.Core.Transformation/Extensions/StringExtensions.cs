@@ -310,5 +310,16 @@ namespace PnP.Core.Transformation
             }
             return sb.ToString();
         }
+
+        /// <summary>
+        /// Returns a string enriched with the current Task Correlation ID
+        /// </summary>
+        /// <param name="taskId">The ID to correlate the string to</param>
+        /// <param name="input">The string to correlate</param>
+        /// <returns></returns>
+        public static string CorrelateString(this string input, Guid taskId)
+        {
+            return $"[{taskId}] {input}";
+        }
     }
 }

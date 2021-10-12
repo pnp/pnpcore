@@ -78,9 +78,6 @@ namespace Microsoft.Extensions.DependencyInjection
             builder.Services.TryAddTransient<IAssetPersistenceProvider, FileSystemAssetPersistenceProvider>();
             builder.Services.TryAddTransient<TokenParser, TokenParser>();
 
-            // Register the Correlation Service
-            builder.Services.AddTransient<CorrelationService, CorrelationService>();
-
             // Register the Telemetry Service
             builder.Services.AddTransient<TelemetryService, TelemetryService>();
 

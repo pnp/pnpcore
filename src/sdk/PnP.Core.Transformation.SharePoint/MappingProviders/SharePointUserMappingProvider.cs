@@ -19,7 +19,6 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
     {
         private ILogger<SharePointUserMappingProvider> logger;
         private readonly IOptions<SharePointTransformationOptions> options;
-        private readonly CorrelationService correlationService;
         private readonly IServiceProvider serviceProvider;
 
         /// <summary>
@@ -27,16 +26,13 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
         /// </summary>
         /// <param name="logger">Logger for tracing activities</param>
         /// <param name="options">Configuration options</param>
-        /// <param name="correlationService">The Correlation Service</param>
         /// <param name="serviceProvider">Service provider</param>
         public SharePointUserMappingProvider(ILogger<SharePointUserMappingProvider> logger,
             IOptions<SharePointTransformationOptions> options,
-            CorrelationService correlationService,
             IServiceProvider serviceProvider)
         {
             this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
             this.options = options ?? throw new ArgumentNullException(nameof(options));
-            this.correlationService = correlationService ?? throw new ArgumentNullException(nameof(correlationService));
             this.serviceProvider = serviceProvider;
         }
 
@@ -48,9 +44,9 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
         /// <returns>The output of the mapping activity</returns>
         public async Task<UserMappingProviderOutput> MapUserAsync(UserMappingProviderInput input, CancellationToken token = default)
         {
-            logger.LogInformation(this.correlationService.CorrelateString(
-                input.Context.Task.Id,
-                $"Invoked: {this.GetType().Namespace}.{this.GetType().Name}.MapUserAsync"));
+            logger.LogInformation(
+                $"Invoked: {this.GetType().Namespace}.{this.GetType().Name}.MapUserAsync"
+                .CorrelateString(input.Context.Task.Id));
 
             // Should never happen, but just in case
             if (string.IsNullOrEmpty(input?.UserPrincipalName))
@@ -64,17 +60,17 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
                 return new UserMappingProviderOutput { UserPrincipalName = input?.UserPrincipalName };
             }
 
-            logger.LogDebug(this.correlationService.CorrelateString(
-                input.Context.Task.Id,
-                SharePointTransformationResources.Debug_UserTransformPrincipalInput), 
+            logger.LogDebug(
+                SharePointTransformationResources.Debug_UserTransformPrincipalInput
+                .CorrelateString(input.Context.Task.Id), 
                 input.UserPrincipalName.GetUserName());
 
             // In case we have a valid list of user mappings
             if (this.options.Value.UserMappings != null && this.options.Value.UserMappings.Count > 0)
             {
-                logger.LogInformation(this.correlationService.CorrelateString(
-                    input.Context.Task.Id,
-                    SharePointTransformationResources.Info_UserTransformDefaultMapping),
+                logger.LogInformation(
+                    SharePointTransformationResources.Info_UserTransformDefaultMapping
+                    .CorrelateString(input.Context.Task.Id),
                     input.UserPrincipalName.GetUserName());
 
                 // Try to find user mapping
@@ -89,9 +85,9 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
                     result = userMapping.TargetUser;
 
                     // Log successfull user mapping
-                    logger.LogInformation(this.correlationService.CorrelateString(
-                        input.Context.Task.Id,
-                        SharePointTransformationResources.Info_UserTransformSuccess),
+                    logger.LogInformation(
+                        SharePointTransformationResources.Info_UserTransformSuccess
+                        .CorrelateString(input.Context.Task.Id),
                         userNameToCheck, result);
 
                     // Ensure user in the target site collection if not yet done
@@ -100,9 +96,9 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
                 else
                 {
                     // Log unsuccessfull user mapping
-                    logger.LogInformation(this.correlationService.CorrelateString(
-                        input.Context.Task.Id,
-                        SharePointTransformationResources.Info_UserTransformMappingNotFound),
+                    logger.LogInformation(
+                        SharePointTransformationResources.Info_UserTransformMappingNotFound
+                        .CorrelateString(input.Context.Task.Id),
                         userNameToCheck);
                 }
 

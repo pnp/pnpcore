@@ -30,7 +30,6 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
     {
         private ILogger<SharePointPageLayoutMappingProvider> logger;
         private readonly IOptions<SharePointTransformationOptions> options;
-        private readonly CorrelationService correlationService;
         private readonly IServiceProvider serviceProvider;
         private readonly IMemoryCache memoryCache;
 
@@ -41,16 +40,13 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
         /// </summary>
         /// <param name="logger">Logger for tracing activities</param>
         /// <param name="options">Configuration options</param>
-        /// <param name="correlationService">The Correlation Service</param>
         /// <param name="serviceProvider">Service provider</param>
         public SharePointPageLayoutMappingProvider(ILogger<SharePointPageLayoutMappingProvider> logger,
             IOptions<SharePointTransformationOptions> options,
-            CorrelationService correlationService,
             IServiceProvider serviceProvider)
         {
             this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
             this.options = options ?? throw new ArgumentNullException(nameof(options));
-            this.correlationService = correlationService ?? throw new ArgumentNullException(nameof(correlationService));
             this.serviceProvider = serviceProvider;
             this.memoryCache = this.serviceProvider.GetService<IMemoryCache>();
         }
@@ -65,9 +61,9 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
         {
             this.taskId = input.Context.Task.Id;
 
-            logger.LogInformation(this.correlationService.CorrelateString(
-                this.taskId,
-                $"Invoked: {this.GetType().Namespace}.{this.GetType().Name}.MapPageLayoutAsync"));
+            logger.LogInformation(
+                $"Invoked: {this.GetType().Namespace}.{this.GetType().Name}.MapPageLayoutAsync"
+                .CorrelateString(this.taskId));
 
             // Check that we have input data
             if (input == null) throw new ArgumentNullException(nameof(input));
@@ -125,9 +121,9 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
             {
                 publishingPageTransformationModel = GeneratePageLayout(pageItem);
 
-                logger.LogInformation(this.correlationService.CorrelateString(
-                    this.taskId,
-                    SharePointTransformationResources.Info_PageLayoutMappingGeneration), 
+                logger.LogInformation(
+                    SharePointTransformationResources.Info_PageLayoutMappingGeneration
+                    .CorrelateString(this.taskId), 
                     pageFile.ServerRelativeUrl, input.PageLayout);
             }
 
@@ -136,13 +132,13 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
             {
                 var errorMessage = string.Format(System.Globalization.CultureInfo.InvariantCulture,
                     SharePointTransformationResources.Error_NoPageLayoutTransformationModel, input.PageLayout, pageFile.ServerRelativeUrl);
-                logger.LogInformation(this.correlationService.CorrelateString(this.taskId, errorMessage));
+                logger.LogInformation(errorMessage.CorrelateString(this.taskId));
                 throw new Exception(errorMessage);
             }
 
-            logger.LogInformation(this.correlationService.CorrelateString(
-                this.taskId,
-                SharePointTransformationResources.Info_PageLayoutMappingBeingUsed), 
+            logger.LogInformation(
+                SharePointTransformationResources.Info_PageLayoutMappingBeingUsed
+                .CorrelateString(this.taskId), 
                 pageFile.ServerRelativeUrl, input.PageLayout, publishingPageTransformationModel.Name);
 
             return new SharePointPageLayoutMappingProviderOutput { PageLayout = publishingPageTransformationModel };
@@ -233,8 +229,8 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
                 {
                     var errorMessage = string.Format(System.Globalization.CultureInfo.InvariantCulture,
                         SharePointTransformationResources.Error_WebPartMappingSchemaValidation, e.Message);
-                    this.logger.LogError(e.Exception, this.correlationService.CorrelateString(
-                        this.taskId, errorMessage));
+                    this.logger.LogError(e.Exception, 
+                        errorMessage.CorrelateString(this.taskId));
                     throw new ApplicationException(errorMessage);
                 });
             }

@@ -22,7 +22,6 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
     {
         private ILogger<SharePointUrlMappingProvider> logger;
         private readonly IOptions<SharePointTransformationOptions> options;
-        private readonly CorrelationService correlationService;
         private readonly IServiceProvider serviceProvider;
 
         /// <summary>
@@ -30,16 +29,13 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
         /// </summary>
         /// <param name="logger">Logger for tracing activities</param>
         /// <param name="options">Configuration options</param>
-        /// <param name="correlationService">The Correlation Service</param>
         /// <param name="serviceProvider">Service provider</param>
         public SharePointUrlMappingProvider(ILogger<SharePointUrlMappingProvider> logger,
             IOptions<SharePointTransformationOptions> options,
-            CorrelationService correlationService,
             IServiceProvider serviceProvider)
         {
             this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
             this.options = options ?? throw new ArgumentNullException(nameof(options));
-            this.correlationService = correlationService ?? throw new ArgumentNullException(nameof(correlationService));
             this.serviceProvider = serviceProvider;
         }
 
@@ -56,9 +52,9 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
                 throw new ArgumentNullException(nameof(input));
             }
 
-            logger.LogInformation(this.correlationService.CorrelateString(
-                input.Context.Task.Id,
-                $"Invoked: {this.GetType().Namespace}.{this.GetType().Name}.MapUrlAsync"));
+            logger.LogInformation(
+                $"Invoked: {this.GetType().Namespace}.{this.GetType().Name}.MapUrlAsync"
+                .CorrelateString(input.Context.Task.Id));
 
             // Try cast
             var sharePointSourceItem = input.Context.SourceItem as SharePointSourceItem;

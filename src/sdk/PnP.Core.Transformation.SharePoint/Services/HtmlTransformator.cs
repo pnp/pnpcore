@@ -16,7 +16,6 @@ namespace PnP.Core.Transformation.SharePoint.Services
     public class HtmlTransformator
     {
         private ILogger<HtmlTransformator> logger;
-        private readonly CorrelationService correlationService;
 
         #region Internal table classes
         internal class Table
@@ -76,11 +75,9 @@ namespace PnP.Core.Transformation.SharePoint.Services
         /// <summary>
         /// HtmlTransformator class constructor
         /// </summary>
-        public HtmlTransformator(ILogger<HtmlTransformator> logger,
-            CorrelationService correlationService)
+        public HtmlTransformator(ILogger<HtmlTransformator> logger)
         {
             this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
-            this.correlationService = correlationService ?? throw new ArgumentNullException(nameof(correlationService));
 
             var config = Configuration.Default.WithDefaultLoader(new LoaderOptions { IsResourceLoadingEnabled = true }).WithCss();
             var context = BrowsingContext.New(config);

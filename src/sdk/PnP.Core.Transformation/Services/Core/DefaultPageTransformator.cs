@@ -22,7 +22,6 @@ namespace PnP.Core.Transformation.Services.Core
         private readonly IEnumerable<IPagePostTransformation> pagePostTransformations;
         private readonly IOptions<PageTransformationOptions> defaultPageTransformationOptions;
         private readonly IPageGenerator pageGenerator;
-        private readonly CorrelationService correlationService;
         private readonly TelemetryService telemetry;
 
         /// <summary>
@@ -35,7 +34,6 @@ namespace PnP.Core.Transformation.Services.Core
         /// <param name="pagePostTransformations">The list of pre transformations to call</param>
         /// <param name="pageTransformationOptions">The options</param>
         /// <param name="pageGenerator">The page generator to create the actual SPO modern page</param>
-        /// <param name="correlationService">The correlation service instance</param>
         /// <param name="telemetry">The telemetry service</param>
         public DefaultPageTransformator(
             ILogger<DefaultPageTransformator> logger,
@@ -45,7 +43,6 @@ namespace PnP.Core.Transformation.Services.Core
             IEnumerable<IPagePostTransformation> pagePostTransformations,
             IOptions<PageTransformationOptions> pageTransformationOptions,
             IPageGenerator pageGenerator,
-            CorrelationService correlationService,
             TelemetryService telemetry)
         {
             this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
@@ -55,7 +52,6 @@ namespace PnP.Core.Transformation.Services.Core
             this.pagePostTransformations = pagePostTransformations ?? throw new ArgumentNullException(nameof(pagePostTransformations));
             this.defaultPageTransformationOptions = pageTransformationOptions ?? throw new ArgumentNullException(nameof(pageTransformationOptions));
             this.pageGenerator = pageGenerator ?? throw new ArgumentNullException(nameof(pageGenerator));
-            this.correlationService = correlationService ?? throw new ArgumentNullException(nameof(correlationService));
             this.telemetry = telemetry ?? throw new ArgumentNullException(nameof(telemetry));
         }
 
@@ -69,9 +65,9 @@ namespace PnP.Core.Transformation.Services.Core
         {
             if (task == null) throw new ArgumentNullException(nameof(task));
 
-            logger.LogInformation(this.correlationService.CorrelateString(
-                task.Id,
-                string.Format(TransformationResources.Info_RunningTransformationTask, task.Id, task.SourceItemId.Id)));
+            logger.LogInformation(
+                TransformationResources.Info_RunningTransformationTask.CorrelateString(task.Id), 
+                task.Id, task.SourceItemId.Id);
 
             // Get the source item by id
             var sourceItem = await task.SourceProvider.GetItemAsync(task.SourceItemId, token).ConfigureAwait(false);

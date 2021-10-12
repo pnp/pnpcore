@@ -18,7 +18,6 @@ namespace PnP.Core.Transformation.Services.Core
 
         private readonly TelemetryClient telemetryClient;
         private readonly TelemetryConfiguration telemetryConfiguration = TelemetryConfiguration.CreateDefault();
-        private readonly CorrelationService correlationService;
 
         private string version;
 
@@ -32,14 +31,10 @@ namespace PnP.Core.Transformation.Services.Core
         /// <summary>
         /// Instantiates the telemetry client
         /// </summary>
-        /// <param name="correlationService">The Correlation Service</param>
-        public TelemetryService(
-            CorrelationService correlationService)
+        public TelemetryService()
         {
             try
             {
-                this.correlationService = correlationService ?? throw new ArgumentNullException(nameof(correlationService));
-
                 this.version = this.GetType().Assembly.FullName;
 
                 this.telemetryConfiguration.InstrumentationKey = TELEMETRY_INSTRUMENTATION_KEY;
