@@ -13,7 +13,7 @@ namespace PnP.Core.Model.SharePoint
     /// <summary>
     /// File class, write your custom code here
     /// </summary>
-    [SharePointType("SP.File", Target = typeof(Folder), Uri = "_api/Web/getFileById('{Id}')", Get = "_api/Web/getFolderById('{Parent.Id}')/Files", LinqGet = "_api/Web/getFolderById('{Parent.Id}')/Files")]
+    [SharePointType("SP.File", Target = typeof(Folder), Uri = "_api/Web/getFileById('{Id}')", LinqGet = "_api/Web/getFolderById('{Parent.Id}')/Files")]
     [SharePointType("SP.File", Target = typeof(Web), Uri = "_api/Web/getFileById('{Id}')")]
     [SharePointType("SP.File", Target = typeof(ListItem), Uri = "_api/Web/lists(guid'{List.Id}')/items({Parent.Id})/file")]
     internal partial class File : BaseDataModel<IFile>, IFile
