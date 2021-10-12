@@ -949,6 +949,64 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Admin.Model.SharePoint.CommunicationSiteOptions.SiteDesign
   nameWithType: CommunicationSiteOptions.SiteDesign
+- uid: PnP.Core.Admin.Model.SharePoint.IAppManager
+  name: IAppManager
+  href: api/PnP.Core.Admin.Model.SharePoint.IAppManager.html
+  commentId: T:PnP.Core.Admin.Model.SharePoint.IAppManager
+  fullName: PnP.Core.Admin.Model.SharePoint.IAppManager
+  nameWithType: IAppManager
+- uid: PnP.Core.Admin.Model.SharePoint.IAppManager.EnsureTenantAppCatalog
+  name: EnsureTenantAppCatalog()
+  href: api/PnP.Core.Admin.Model.SharePoint.IAppManager.html#PnP_Core_Admin_Model_SharePoint_IAppManager_EnsureTenantAppCatalog
+  commentId: M:PnP.Core.Admin.Model.SharePoint.IAppManager.EnsureTenantAppCatalog
+  fullName: PnP.Core.Admin.Model.SharePoint.IAppManager.EnsureTenantAppCatalog()
+  nameWithType: IAppManager.EnsureTenantAppCatalog()
+- uid: PnP.Core.Admin.Model.SharePoint.IAppManager.EnsureTenantAppCatalog*
+  name: EnsureTenantAppCatalog
+  href: api/PnP.Core.Admin.Model.SharePoint.IAppManager.html#PnP_Core_Admin_Model_SharePoint_IAppManager_EnsureTenantAppCatalog_
+  commentId: Overload:PnP.Core.Admin.Model.SharePoint.IAppManager.EnsureTenantAppCatalog
+  isSpec: "True"
+  fullName: PnP.Core.Admin.Model.SharePoint.IAppManager.EnsureTenantAppCatalog
+  nameWithType: IAppManager.EnsureTenantAppCatalog
+- uid: PnP.Core.Admin.Model.SharePoint.IAppManager.EnsureTenantAppCatalogAsync
+  name: EnsureTenantAppCatalogAsync()
+  href: api/PnP.Core.Admin.Model.SharePoint.IAppManager.html#PnP_Core_Admin_Model_SharePoint_IAppManager_EnsureTenantAppCatalogAsync
+  commentId: M:PnP.Core.Admin.Model.SharePoint.IAppManager.EnsureTenantAppCatalogAsync
+  fullName: PnP.Core.Admin.Model.SharePoint.IAppManager.EnsureTenantAppCatalogAsync()
+  nameWithType: IAppManager.EnsureTenantAppCatalogAsync()
+- uid: PnP.Core.Admin.Model.SharePoint.IAppManager.EnsureTenantAppCatalogAsync*
+  name: EnsureTenantAppCatalogAsync
+  href: api/PnP.Core.Admin.Model.SharePoint.IAppManager.html#PnP_Core_Admin_Model_SharePoint_IAppManager_EnsureTenantAppCatalogAsync_
+  commentId: Overload:PnP.Core.Admin.Model.SharePoint.IAppManager.EnsureTenantAppCatalogAsync
+  isSpec: "True"
+  fullName: PnP.Core.Admin.Model.SharePoint.IAppManager.EnsureTenantAppCatalogAsync
+  nameWithType: IAppManager.EnsureTenantAppCatalogAsync
+- uid: PnP.Core.Admin.Model.SharePoint.IAppManager.GetTenantAppCatalogUri
+  name: GetTenantAppCatalogUri()
+  href: api/PnP.Core.Admin.Model.SharePoint.IAppManager.html#PnP_Core_Admin_Model_SharePoint_IAppManager_GetTenantAppCatalogUri
+  commentId: M:PnP.Core.Admin.Model.SharePoint.IAppManager.GetTenantAppCatalogUri
+  fullName: PnP.Core.Admin.Model.SharePoint.IAppManager.GetTenantAppCatalogUri()
+  nameWithType: IAppManager.GetTenantAppCatalogUri()
+- uid: PnP.Core.Admin.Model.SharePoint.IAppManager.GetTenantAppCatalogUri*
+  name: GetTenantAppCatalogUri
+  href: api/PnP.Core.Admin.Model.SharePoint.IAppManager.html#PnP_Core_Admin_Model_SharePoint_IAppManager_GetTenantAppCatalogUri_
+  commentId: Overload:PnP.Core.Admin.Model.SharePoint.IAppManager.GetTenantAppCatalogUri
+  isSpec: "True"
+  fullName: PnP.Core.Admin.Model.SharePoint.IAppManager.GetTenantAppCatalogUri
+  nameWithType: IAppManager.GetTenantAppCatalogUri
+- uid: PnP.Core.Admin.Model.SharePoint.IAppManager.GetTenantAppCatalogUriAsync
+  name: GetTenantAppCatalogUriAsync()
+  href: api/PnP.Core.Admin.Model.SharePoint.IAppManager.html#PnP_Core_Admin_Model_SharePoint_IAppManager_GetTenantAppCatalogUriAsync
+  commentId: M:PnP.Core.Admin.Model.SharePoint.IAppManager.GetTenantAppCatalogUriAsync
+  fullName: PnP.Core.Admin.Model.SharePoint.IAppManager.GetTenantAppCatalogUriAsync()
+  nameWithType: IAppManager.GetTenantAppCatalogUriAsync()
+- uid: PnP.Core.Admin.Model.SharePoint.IAppManager.GetTenantAppCatalogUriAsync*
+  name: GetTenantAppCatalogUriAsync
+  href: api/PnP.Core.Admin.Model.SharePoint.IAppManager.html#PnP_Core_Admin_Model_SharePoint_IAppManager_GetTenantAppCatalogUriAsync_
+  commentId: Overload:PnP.Core.Admin.Model.SharePoint.IAppManager.GetTenantAppCatalogUriAsync
+  isSpec: "True"
+  fullName: PnP.Core.Admin.Model.SharePoint.IAppManager.GetTenantAppCatalogUriAsync
+  nameWithType: IAppManager.GetTenantAppCatalogUriAsync
 - uid: PnP.Core.Admin.Model.SharePoint.IRecycledSiteCollection
   name: IRecycledSiteCollection
   href: api/PnP.Core.Admin.Model.SharePoint.IRecycledSiteCollection.html
@@ -1130,162 +1188,6 @@ references:
   commentId: T:PnP.Core.Admin.Model.SharePoint.ISharePointAdmin
   fullName: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin
   nameWithType: ISharePointAdmin
-- uid: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.CreateSiteCollection(PnP.Core.Admin.Model.SharePoint.CommonSiteOptions,PnP.Core.Admin.Model.SharePoint.SiteCreationOptions)
-  name: CreateSiteCollection(CommonSiteOptions, SiteCreationOptions)
-  href: api/PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.html#PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_CreateSiteCollection_PnP_Core_Admin_Model_SharePoint_CommonSiteOptions_PnP_Core_Admin_Model_SharePoint_SiteCreationOptions_
-  commentId: M:PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.CreateSiteCollection(PnP.Core.Admin.Model.SharePoint.CommonSiteOptions,PnP.Core.Admin.Model.SharePoint.SiteCreationOptions)
-  fullName: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.CreateSiteCollection(PnP.Core.Admin.Model.SharePoint.CommonSiteOptions, PnP.Core.Admin.Model.SharePoint.SiteCreationOptions)
-  nameWithType: ISharePointAdmin.CreateSiteCollection(CommonSiteOptions, SiteCreationOptions)
-- uid: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.CreateSiteCollection*
-  name: CreateSiteCollection
-  href: api/PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.html#PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_CreateSiteCollection_
-  commentId: Overload:PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.CreateSiteCollection
-  isSpec: "True"
-  fullName: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.CreateSiteCollection
-  nameWithType: ISharePointAdmin.CreateSiteCollection
-- uid: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.CreateSiteCollectionAsync(PnP.Core.Admin.Model.SharePoint.CommonSiteOptions,PnP.Core.Admin.Model.SharePoint.SiteCreationOptions)
-  name: CreateSiteCollectionAsync(CommonSiteOptions, SiteCreationOptions)
-  href: api/PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.html#PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_CreateSiteCollectionAsync_PnP_Core_Admin_Model_SharePoint_CommonSiteOptions_PnP_Core_Admin_Model_SharePoint_SiteCreationOptions_
-  commentId: M:PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.CreateSiteCollectionAsync(PnP.Core.Admin.Model.SharePoint.CommonSiteOptions,PnP.Core.Admin.Model.SharePoint.SiteCreationOptions)
-  fullName: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.CreateSiteCollectionAsync(PnP.Core.Admin.Model.SharePoint.CommonSiteOptions, PnP.Core.Admin.Model.SharePoint.SiteCreationOptions)
-  nameWithType: ISharePointAdmin.CreateSiteCollectionAsync(CommonSiteOptions, SiteCreationOptions)
-- uid: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.CreateSiteCollectionAsync*
-  name: CreateSiteCollectionAsync
-  href: api/PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.html#PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_CreateSiteCollectionAsync_
-  commentId: Overload:PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.CreateSiteCollectionAsync
-  isSpec: "True"
-  fullName: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.CreateSiteCollectionAsync
-  nameWithType: ISharePointAdmin.CreateSiteCollectionAsync
-- uid: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.DeleteSiteCollection(Uri,System.String)
-  name: DeleteSiteCollection(Uri, String)
-  href: api/PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.html#PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_DeleteSiteCollection_Uri_System_String_
-  commentId: M:PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.DeleteSiteCollection(Uri,System.String)
-  fullName: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.DeleteSiteCollection(Uri, System.String)
-  nameWithType: ISharePointAdmin.DeleteSiteCollection(Uri, String)
-- uid: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.DeleteSiteCollection*
-  name: DeleteSiteCollection
-  href: api/PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.html#PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_DeleteSiteCollection_
-  commentId: Overload:PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.DeleteSiteCollection
-  isSpec: "True"
-  fullName: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.DeleteSiteCollection
-  nameWithType: ISharePointAdmin.DeleteSiteCollection
-- uid: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.DeleteSiteCollectionAsync(Uri,System.String)
-  name: DeleteSiteCollectionAsync(Uri, String)
-  href: api/PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.html#PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_DeleteSiteCollectionAsync_Uri_System_String_
-  commentId: M:PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.DeleteSiteCollectionAsync(Uri,System.String)
-  fullName: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.DeleteSiteCollectionAsync(Uri, System.String)
-  nameWithType: ISharePointAdmin.DeleteSiteCollectionAsync(Uri, String)
-- uid: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.DeleteSiteCollectionAsync*
-  name: DeleteSiteCollectionAsync
-  href: api/PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.html#PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_DeleteSiteCollectionAsync_
-  commentId: Overload:PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.DeleteSiteCollectionAsync
-  isSpec: "True"
-  fullName: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.DeleteSiteCollectionAsync
-  nameWithType: ISharePointAdmin.DeleteSiteCollectionAsync
-- uid: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.EnsureTenantAppCatalog
-  name: EnsureTenantAppCatalog()
-  href: api/PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.html#PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_EnsureTenantAppCatalog
-  commentId: M:PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.EnsureTenantAppCatalog
-  fullName: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.EnsureTenantAppCatalog()
-  nameWithType: ISharePointAdmin.EnsureTenantAppCatalog()
-- uid: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.EnsureTenantAppCatalog*
-  name: EnsureTenantAppCatalog
-  href: api/PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.html#PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_EnsureTenantAppCatalog_
-  commentId: Overload:PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.EnsureTenantAppCatalog
-  isSpec: "True"
-  fullName: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.EnsureTenantAppCatalog
-  nameWithType: ISharePointAdmin.EnsureTenantAppCatalog
-- uid: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.EnsureTenantAppCatalogAsync
-  name: EnsureTenantAppCatalogAsync()
-  href: api/PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.html#PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_EnsureTenantAppCatalogAsync
-  commentId: M:PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.EnsureTenantAppCatalogAsync
-  fullName: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.EnsureTenantAppCatalogAsync()
-  nameWithType: ISharePointAdmin.EnsureTenantAppCatalogAsync()
-- uid: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.EnsureTenantAppCatalogAsync*
-  name: EnsureTenantAppCatalogAsync
-  href: api/PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.html#PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_EnsureTenantAppCatalogAsync_
-  commentId: Overload:PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.EnsureTenantAppCatalogAsync
-  isSpec: "True"
-  fullName: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.EnsureTenantAppCatalogAsync
-  nameWithType: ISharePointAdmin.EnsureTenantAppCatalogAsync
-- uid: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetRecycledSiteCollections
-  name: GetRecycledSiteCollections()
-  href: api/PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.html#PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_GetRecycledSiteCollections
-  commentId: M:PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetRecycledSiteCollections
-  fullName: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetRecycledSiteCollections()
-  nameWithType: ISharePointAdmin.GetRecycledSiteCollections()
-- uid: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetRecycledSiteCollections*
-  name: GetRecycledSiteCollections
-  href: api/PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.html#PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_GetRecycledSiteCollections_
-  commentId: Overload:PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetRecycledSiteCollections
-  isSpec: "True"
-  fullName: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetRecycledSiteCollections
-  nameWithType: ISharePointAdmin.GetRecycledSiteCollections
-- uid: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetRecycledSiteCollectionsAsync
-  name: GetRecycledSiteCollectionsAsync()
-  href: api/PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.html#PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_GetRecycledSiteCollectionsAsync
-  commentId: M:PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetRecycledSiteCollectionsAsync
-  fullName: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetRecycledSiteCollectionsAsync()
-  nameWithType: ISharePointAdmin.GetRecycledSiteCollectionsAsync()
-- uid: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetRecycledSiteCollectionsAsync*
-  name: GetRecycledSiteCollectionsAsync
-  href: api/PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.html#PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_GetRecycledSiteCollectionsAsync_
-  commentId: Overload:PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetRecycledSiteCollectionsAsync
-  isSpec: "True"
-  fullName: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetRecycledSiteCollectionsAsync
-  nameWithType: ISharePointAdmin.GetRecycledSiteCollectionsAsync
-- uid: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetSiteCollections(System.Boolean)
-  name: GetSiteCollections(Boolean)
-  href: api/PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.html#PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_GetSiteCollections_System_Boolean_
-  commentId: M:PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetSiteCollections(System.Boolean)
-  fullName: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetSiteCollections(System.Boolean)
-  nameWithType: ISharePointAdmin.GetSiteCollections(Boolean)
-- uid: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetSiteCollections*
-  name: GetSiteCollections
-  href: api/PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.html#PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_GetSiteCollections_
-  commentId: Overload:PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetSiteCollections
-  isSpec: "True"
-  fullName: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetSiteCollections
-  nameWithType: ISharePointAdmin.GetSiteCollections
-- uid: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetSiteCollectionsAsync(System.Boolean)
-  name: GetSiteCollectionsAsync(Boolean)
-  href: api/PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.html#PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_GetSiteCollectionsAsync_System_Boolean_
-  commentId: M:PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetSiteCollectionsAsync(System.Boolean)
-  fullName: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetSiteCollectionsAsync(System.Boolean)
-  nameWithType: ISharePointAdmin.GetSiteCollectionsAsync(Boolean)
-- uid: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetSiteCollectionsAsync*
-  name: GetSiteCollectionsAsync
-  href: api/PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.html#PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_GetSiteCollectionsAsync_
-  commentId: Overload:PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetSiteCollectionsAsync
-  isSpec: "True"
-  fullName: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetSiteCollectionsAsync
-  nameWithType: ISharePointAdmin.GetSiteCollectionsAsync
-- uid: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetSiteCollectionsWithDetails
-  name: GetSiteCollectionsWithDetails()
-  href: api/PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.html#PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_GetSiteCollectionsWithDetails
-  commentId: M:PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetSiteCollectionsWithDetails
-  fullName: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetSiteCollectionsWithDetails()
-  nameWithType: ISharePointAdmin.GetSiteCollectionsWithDetails()
-- uid: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetSiteCollectionsWithDetails*
-  name: GetSiteCollectionsWithDetails
-  href: api/PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.html#PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_GetSiteCollectionsWithDetails_
-  commentId: Overload:PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetSiteCollectionsWithDetails
-  isSpec: "True"
-  fullName: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetSiteCollectionsWithDetails
-  nameWithType: ISharePointAdmin.GetSiteCollectionsWithDetails
-- uid: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetSiteCollectionsWithDetailsAsync
-  name: GetSiteCollectionsWithDetailsAsync()
-  href: api/PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.html#PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_GetSiteCollectionsWithDetailsAsync
-  commentId: M:PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetSiteCollectionsWithDetailsAsync
-  fullName: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetSiteCollectionsWithDetailsAsync()
-  nameWithType: ISharePointAdmin.GetSiteCollectionsWithDetailsAsync()
-- uid: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetSiteCollectionsWithDetailsAsync*
-  name: GetSiteCollectionsWithDetailsAsync
-  href: api/PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.html#PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_GetSiteCollectionsWithDetailsAsync_
-  commentId: Overload:PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetSiteCollectionsWithDetailsAsync
-  isSpec: "True"
-  fullName: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetSiteCollectionsWithDetailsAsync
-  nameWithType: ISharePointAdmin.GetSiteCollectionsWithDetailsAsync
 - uid: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantAdminCenterContext
   name: GetTenantAdminCenterContext()
   href: api/PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.html#PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_GetTenantAdminCenterContext
@@ -1364,32 +1266,6 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantAdminsAsync
   nameWithType: ISharePointAdmin.GetTenantAdminsAsync
-- uid: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantAppCatalogUri
-  name: GetTenantAppCatalogUri()
-  href: api/PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.html#PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_GetTenantAppCatalogUri
-  commentId: M:PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantAppCatalogUri
-  fullName: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantAppCatalogUri()
-  nameWithType: ISharePointAdmin.GetTenantAppCatalogUri()
-- uid: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantAppCatalogUri*
-  name: GetTenantAppCatalogUri
-  href: api/PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.html#PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_GetTenantAppCatalogUri_
-  commentId: Overload:PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantAppCatalogUri
-  isSpec: "True"
-  fullName: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantAppCatalogUri
-  nameWithType: ISharePointAdmin.GetTenantAppCatalogUri
-- uid: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantAppCatalogUriAsync
-  name: GetTenantAppCatalogUriAsync()
-  href: api/PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.html#PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_GetTenantAppCatalogUriAsync
-  commentId: M:PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantAppCatalogUriAsync
-  fullName: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantAppCatalogUriAsync()
-  nameWithType: ISharePointAdmin.GetTenantAppCatalogUriAsync()
-- uid: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantAppCatalogUriAsync*
-  name: GetTenantAppCatalogUriAsync
-  href: api/PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.html#PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_GetTenantAppCatalogUriAsync_
-  commentId: Overload:PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantAppCatalogUriAsync
-  isSpec: "True"
-  fullName: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantAppCatalogUriAsync
-  nameWithType: ISharePointAdmin.GetTenantAppCatalogUriAsync
 - uid: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.GetTenantMySiteHostUri
   name: GetTenantMySiteHostUri()
   href: api/PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.html#PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_GetTenantMySiteHostUri
@@ -1468,58 +1344,6 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.IsCurrentUserTenantAdminAsync
   nameWithType: ISharePointAdmin.IsCurrentUserTenantAdminAsync
-- uid: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.RecycleSiteCollection(Uri,System.String)
-  name: RecycleSiteCollection(Uri, String)
-  href: api/PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.html#PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_RecycleSiteCollection_Uri_System_String_
-  commentId: M:PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.RecycleSiteCollection(Uri,System.String)
-  fullName: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.RecycleSiteCollection(Uri, System.String)
-  nameWithType: ISharePointAdmin.RecycleSiteCollection(Uri, String)
-- uid: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.RecycleSiteCollection*
-  name: RecycleSiteCollection
-  href: api/PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.html#PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_RecycleSiteCollection_
-  commentId: Overload:PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.RecycleSiteCollection
-  isSpec: "True"
-  fullName: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.RecycleSiteCollection
-  nameWithType: ISharePointAdmin.RecycleSiteCollection
-- uid: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.RecycleSiteCollectionAsync(Uri,System.String)
-  name: RecycleSiteCollectionAsync(Uri, String)
-  href: api/PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.html#PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_RecycleSiteCollectionAsync_Uri_System_String_
-  commentId: M:PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.RecycleSiteCollectionAsync(Uri,System.String)
-  fullName: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.RecycleSiteCollectionAsync(Uri, System.String)
-  nameWithType: ISharePointAdmin.RecycleSiteCollectionAsync(Uri, String)
-- uid: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.RecycleSiteCollectionAsync*
-  name: RecycleSiteCollectionAsync
-  href: api/PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.html#PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_RecycleSiteCollectionAsync_
-  commentId: Overload:PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.RecycleSiteCollectionAsync
-  isSpec: "True"
-  fullName: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.RecycleSiteCollectionAsync
-  nameWithType: ISharePointAdmin.RecycleSiteCollectionAsync
-- uid: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.RestoreSiteCollection(Uri)
-  name: RestoreSiteCollection(Uri)
-  href: api/PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.html#PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_RestoreSiteCollection_Uri_
-  commentId: M:PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.RestoreSiteCollection(Uri)
-  fullName: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.RestoreSiteCollection(Uri)
-  nameWithType: ISharePointAdmin.RestoreSiteCollection(Uri)
-- uid: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.RestoreSiteCollection*
-  name: RestoreSiteCollection
-  href: api/PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.html#PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_RestoreSiteCollection_
-  commentId: Overload:PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.RestoreSiteCollection
-  isSpec: "True"
-  fullName: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.RestoreSiteCollection
-  nameWithType: ISharePointAdmin.RestoreSiteCollection
-- uid: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.RestoreSiteCollectionAsync(Uri)
-  name: RestoreSiteCollectionAsync(Uri)
-  href: api/PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.html#PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_RestoreSiteCollectionAsync_Uri_
-  commentId: M:PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.RestoreSiteCollectionAsync(Uri)
-  fullName: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.RestoreSiteCollectionAsync(Uri)
-  nameWithType: ISharePointAdmin.RestoreSiteCollectionAsync(Uri)
-- uid: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.RestoreSiteCollectionAsync*
-  name: RestoreSiteCollectionAsync
-  href: api/PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.html#PnP_Core_Admin_Model_SharePoint_ISharePointAdmin_RestoreSiteCollectionAsync_
-  commentId: Overload:PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.RestoreSiteCollectionAsync
-  isSpec: "True"
-  fullName: PnP.Core.Admin.Model.SharePoint.ISharePointAdmin.RestoreSiteCollectionAsync
-  nameWithType: ISharePointAdmin.RestoreSiteCollectionAsync
 - uid: PnP.Core.Admin.Model.SharePoint.ISiteCollection
   name: ISiteCollection
   href: api/PnP.Core.Admin.Model.SharePoint.ISiteCollection.html
@@ -1591,6 +1415,194 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Admin.Model.SharePoint.ISiteCollection.Url
   nameWithType: ISiteCollection.Url
+- uid: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager
+  name: ISiteCollectionManager
+  href: api/PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.html
+  commentId: T:PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager
+  fullName: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager
+  nameWithType: ISiteCollectionManager
+- uid: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.CreateSiteCollection(PnP.Core.Admin.Model.SharePoint.CommonSiteOptions,PnP.Core.Admin.Model.SharePoint.SiteCreationOptions)
+  name: CreateSiteCollection(CommonSiteOptions, SiteCreationOptions)
+  href: api/PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.html#PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_CreateSiteCollection_PnP_Core_Admin_Model_SharePoint_CommonSiteOptions_PnP_Core_Admin_Model_SharePoint_SiteCreationOptions_
+  commentId: M:PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.CreateSiteCollection(PnP.Core.Admin.Model.SharePoint.CommonSiteOptions,PnP.Core.Admin.Model.SharePoint.SiteCreationOptions)
+  fullName: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.CreateSiteCollection(PnP.Core.Admin.Model.SharePoint.CommonSiteOptions, PnP.Core.Admin.Model.SharePoint.SiteCreationOptions)
+  nameWithType: ISiteCollectionManager.CreateSiteCollection(CommonSiteOptions, SiteCreationOptions)
+- uid: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.CreateSiteCollection*
+  name: CreateSiteCollection
+  href: api/PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.html#PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_CreateSiteCollection_
+  commentId: Overload:PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.CreateSiteCollection
+  isSpec: "True"
+  fullName: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.CreateSiteCollection
+  nameWithType: ISiteCollectionManager.CreateSiteCollection
+- uid: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.CreateSiteCollectionAsync(PnP.Core.Admin.Model.SharePoint.CommonSiteOptions,PnP.Core.Admin.Model.SharePoint.SiteCreationOptions)
+  name: CreateSiteCollectionAsync(CommonSiteOptions, SiteCreationOptions)
+  href: api/PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.html#PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_CreateSiteCollectionAsync_PnP_Core_Admin_Model_SharePoint_CommonSiteOptions_PnP_Core_Admin_Model_SharePoint_SiteCreationOptions_
+  commentId: M:PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.CreateSiteCollectionAsync(PnP.Core.Admin.Model.SharePoint.CommonSiteOptions,PnP.Core.Admin.Model.SharePoint.SiteCreationOptions)
+  fullName: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.CreateSiteCollectionAsync(PnP.Core.Admin.Model.SharePoint.CommonSiteOptions, PnP.Core.Admin.Model.SharePoint.SiteCreationOptions)
+  nameWithType: ISiteCollectionManager.CreateSiteCollectionAsync(CommonSiteOptions, SiteCreationOptions)
+- uid: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.CreateSiteCollectionAsync*
+  name: CreateSiteCollectionAsync
+  href: api/PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.html#PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_CreateSiteCollectionAsync_
+  commentId: Overload:PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.CreateSiteCollectionAsync
+  isSpec: "True"
+  fullName: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.CreateSiteCollectionAsync
+  nameWithType: ISiteCollectionManager.CreateSiteCollectionAsync
+- uid: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.DeleteSiteCollection(Uri,System.String)
+  name: DeleteSiteCollection(Uri, String)
+  href: api/PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.html#PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_DeleteSiteCollection_Uri_System_String_
+  commentId: M:PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.DeleteSiteCollection(Uri,System.String)
+  fullName: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.DeleteSiteCollection(Uri, System.String)
+  nameWithType: ISiteCollectionManager.DeleteSiteCollection(Uri, String)
+- uid: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.DeleteSiteCollection*
+  name: DeleteSiteCollection
+  href: api/PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.html#PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_DeleteSiteCollection_
+  commentId: Overload:PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.DeleteSiteCollection
+  isSpec: "True"
+  fullName: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.DeleteSiteCollection
+  nameWithType: ISiteCollectionManager.DeleteSiteCollection
+- uid: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.DeleteSiteCollectionAsync(Uri,System.String)
+  name: DeleteSiteCollectionAsync(Uri, String)
+  href: api/PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.html#PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_DeleteSiteCollectionAsync_Uri_System_String_
+  commentId: M:PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.DeleteSiteCollectionAsync(Uri,System.String)
+  fullName: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.DeleteSiteCollectionAsync(Uri, System.String)
+  nameWithType: ISiteCollectionManager.DeleteSiteCollectionAsync(Uri, String)
+- uid: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.DeleteSiteCollectionAsync*
+  name: DeleteSiteCollectionAsync
+  href: api/PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.html#PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_DeleteSiteCollectionAsync_
+  commentId: Overload:PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.DeleteSiteCollectionAsync
+  isSpec: "True"
+  fullName: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.DeleteSiteCollectionAsync
+  nameWithType: ISiteCollectionManager.DeleteSiteCollectionAsync
+- uid: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.GetRecycledSiteCollections
+  name: GetRecycledSiteCollections()
+  href: api/PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.html#PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_GetRecycledSiteCollections
+  commentId: M:PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.GetRecycledSiteCollections
+  fullName: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.GetRecycledSiteCollections()
+  nameWithType: ISiteCollectionManager.GetRecycledSiteCollections()
+- uid: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.GetRecycledSiteCollections*
+  name: GetRecycledSiteCollections
+  href: api/PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.html#PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_GetRecycledSiteCollections_
+  commentId: Overload:PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.GetRecycledSiteCollections
+  isSpec: "True"
+  fullName: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.GetRecycledSiteCollections
+  nameWithType: ISiteCollectionManager.GetRecycledSiteCollections
+- uid: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.GetRecycledSiteCollectionsAsync
+  name: GetRecycledSiteCollectionsAsync()
+  href: api/PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.html#PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_GetRecycledSiteCollectionsAsync
+  commentId: M:PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.GetRecycledSiteCollectionsAsync
+  fullName: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.GetRecycledSiteCollectionsAsync()
+  nameWithType: ISiteCollectionManager.GetRecycledSiteCollectionsAsync()
+- uid: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.GetRecycledSiteCollectionsAsync*
+  name: GetRecycledSiteCollectionsAsync
+  href: api/PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.html#PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_GetRecycledSiteCollectionsAsync_
+  commentId: Overload:PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.GetRecycledSiteCollectionsAsync
+  isSpec: "True"
+  fullName: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.GetRecycledSiteCollectionsAsync
+  nameWithType: ISiteCollectionManager.GetRecycledSiteCollectionsAsync
+- uid: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.GetSiteCollections(System.Boolean)
+  name: GetSiteCollections(Boolean)
+  href: api/PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.html#PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_GetSiteCollections_System_Boolean_
+  commentId: M:PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.GetSiteCollections(System.Boolean)
+  fullName: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.GetSiteCollections(System.Boolean)
+  nameWithType: ISiteCollectionManager.GetSiteCollections(Boolean)
+- uid: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.GetSiteCollections*
+  name: GetSiteCollections
+  href: api/PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.html#PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_GetSiteCollections_
+  commentId: Overload:PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.GetSiteCollections
+  isSpec: "True"
+  fullName: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.GetSiteCollections
+  nameWithType: ISiteCollectionManager.GetSiteCollections
+- uid: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.GetSiteCollectionsAsync(System.Boolean)
+  name: GetSiteCollectionsAsync(Boolean)
+  href: api/PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.html#PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_GetSiteCollectionsAsync_System_Boolean_
+  commentId: M:PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.GetSiteCollectionsAsync(System.Boolean)
+  fullName: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.GetSiteCollectionsAsync(System.Boolean)
+  nameWithType: ISiteCollectionManager.GetSiteCollectionsAsync(Boolean)
+- uid: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.GetSiteCollectionsAsync*
+  name: GetSiteCollectionsAsync
+  href: api/PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.html#PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_GetSiteCollectionsAsync_
+  commentId: Overload:PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.GetSiteCollectionsAsync
+  isSpec: "True"
+  fullName: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.GetSiteCollectionsAsync
+  nameWithType: ISiteCollectionManager.GetSiteCollectionsAsync
+- uid: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.GetSiteCollectionsWithDetails
+  name: GetSiteCollectionsWithDetails()
+  href: api/PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.html#PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_GetSiteCollectionsWithDetails
+  commentId: M:PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.GetSiteCollectionsWithDetails
+  fullName: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.GetSiteCollectionsWithDetails()
+  nameWithType: ISiteCollectionManager.GetSiteCollectionsWithDetails()
+- uid: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.GetSiteCollectionsWithDetails*
+  name: GetSiteCollectionsWithDetails
+  href: api/PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.html#PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_GetSiteCollectionsWithDetails_
+  commentId: Overload:PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.GetSiteCollectionsWithDetails
+  isSpec: "True"
+  fullName: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.GetSiteCollectionsWithDetails
+  nameWithType: ISiteCollectionManager.GetSiteCollectionsWithDetails
+- uid: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.GetSiteCollectionsWithDetailsAsync
+  name: GetSiteCollectionsWithDetailsAsync()
+  href: api/PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.html#PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_GetSiteCollectionsWithDetailsAsync
+  commentId: M:PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.GetSiteCollectionsWithDetailsAsync
+  fullName: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.GetSiteCollectionsWithDetailsAsync()
+  nameWithType: ISiteCollectionManager.GetSiteCollectionsWithDetailsAsync()
+- uid: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.GetSiteCollectionsWithDetailsAsync*
+  name: GetSiteCollectionsWithDetailsAsync
+  href: api/PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.html#PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_GetSiteCollectionsWithDetailsAsync_
+  commentId: Overload:PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.GetSiteCollectionsWithDetailsAsync
+  isSpec: "True"
+  fullName: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.GetSiteCollectionsWithDetailsAsync
+  nameWithType: ISiteCollectionManager.GetSiteCollectionsWithDetailsAsync
+- uid: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.RecycleSiteCollection(Uri,System.String)
+  name: RecycleSiteCollection(Uri, String)
+  href: api/PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.html#PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_RecycleSiteCollection_Uri_System_String_
+  commentId: M:PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.RecycleSiteCollection(Uri,System.String)
+  fullName: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.RecycleSiteCollection(Uri, System.String)
+  nameWithType: ISiteCollectionManager.RecycleSiteCollection(Uri, String)
+- uid: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.RecycleSiteCollection*
+  name: RecycleSiteCollection
+  href: api/PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.html#PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_RecycleSiteCollection_
+  commentId: Overload:PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.RecycleSiteCollection
+  isSpec: "True"
+  fullName: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.RecycleSiteCollection
+  nameWithType: ISiteCollectionManager.RecycleSiteCollection
+- uid: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.RecycleSiteCollectionAsync(Uri,System.String)
+  name: RecycleSiteCollectionAsync(Uri, String)
+  href: api/PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.html#PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_RecycleSiteCollectionAsync_Uri_System_String_
+  commentId: M:PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.RecycleSiteCollectionAsync(Uri,System.String)
+  fullName: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.RecycleSiteCollectionAsync(Uri, System.String)
+  nameWithType: ISiteCollectionManager.RecycleSiteCollectionAsync(Uri, String)
+- uid: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.RecycleSiteCollectionAsync*
+  name: RecycleSiteCollectionAsync
+  href: api/PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.html#PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_RecycleSiteCollectionAsync_
+  commentId: Overload:PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.RecycleSiteCollectionAsync
+  isSpec: "True"
+  fullName: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.RecycleSiteCollectionAsync
+  nameWithType: ISiteCollectionManager.RecycleSiteCollectionAsync
+- uid: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.RestoreSiteCollection(Uri)
+  name: RestoreSiteCollection(Uri)
+  href: api/PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.html#PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_RestoreSiteCollection_Uri_
+  commentId: M:PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.RestoreSiteCollection(Uri)
+  fullName: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.RestoreSiteCollection(Uri)
+  nameWithType: ISiteCollectionManager.RestoreSiteCollection(Uri)
+- uid: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.RestoreSiteCollection*
+  name: RestoreSiteCollection
+  href: api/PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.html#PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_RestoreSiteCollection_
+  commentId: Overload:PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.RestoreSiteCollection
+  isSpec: "True"
+  fullName: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.RestoreSiteCollection
+  nameWithType: ISiteCollectionManager.RestoreSiteCollection
+- uid: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.RestoreSiteCollectionAsync(Uri)
+  name: RestoreSiteCollectionAsync(Uri)
+  href: api/PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.html#PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_RestoreSiteCollectionAsync_Uri_
+  commentId: M:PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.RestoreSiteCollectionAsync(Uri)
+  fullName: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.RestoreSiteCollectionAsync(Uri)
+  nameWithType: ISiteCollectionManager.RestoreSiteCollectionAsync(Uri)
+- uid: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.RestoreSiteCollectionAsync*
+  name: RestoreSiteCollectionAsync
+  href: api/PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.html#PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_RestoreSiteCollectionAsync_
+  commentId: Overload:PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.RestoreSiteCollectionAsync
+  isSpec: "True"
+  fullName: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.RestoreSiteCollectionAsync
+  nameWithType: ISiteCollectionManager.RestoreSiteCollectionAsync
 - uid: PnP.Core.Admin.Model.SharePoint.ISiteCollectionWithDetails
   name: ISiteCollectionWithDetails
   href: api/PnP.Core.Admin.Model.SharePoint.ISiteCollectionWithDetails.html
@@ -37986,6 +37998,19 @@ references:
   commentId: T:PnP.Core.Services.PnPContextExtensions
   fullName: PnP.Core.Services.PnPContextExtensions
   nameWithType: PnPContextExtensions
+- uid: PnP.Core.Services.PnPContextExtensions.GetAppManager(PnP.Core.Services.PnPContext)
+  name: GetAppManager(PnPContext)
+  href: api/PnP.Core.Services.PnPContextExtensions.html#PnP_Core_Services_PnPContextExtensions_GetAppManager_PnP_Core_Services_PnPContext_
+  commentId: M:PnP.Core.Services.PnPContextExtensions.GetAppManager(PnP.Core.Services.PnPContext)
+  fullName: PnP.Core.Services.PnPContextExtensions.GetAppManager(PnP.Core.Services.PnPContext)
+  nameWithType: PnPContextExtensions.GetAppManager(PnPContext)
+- uid: PnP.Core.Services.PnPContextExtensions.GetAppManager*
+  name: GetAppManager
+  href: api/PnP.Core.Services.PnPContextExtensions.html#PnP_Core_Services_PnPContextExtensions_GetAppManager_
+  commentId: Overload:PnP.Core.Services.PnPContextExtensions.GetAppManager
+  isSpec: "True"
+  fullName: PnP.Core.Services.PnPContextExtensions.GetAppManager
+  nameWithType: PnPContextExtensions.GetAppManager
 - uid: PnP.Core.Services.PnPContextExtensions.GetMicrosoft365Admin(PnP.Core.Services.PnPContext)
   name: GetMicrosoft365Admin(PnPContext)
   href: api/PnP.Core.Services.PnPContextExtensions.html#PnP_Core_Services_PnPContextExtensions_GetMicrosoft365Admin_PnP_Core_Services_PnPContext_
@@ -38012,6 +38037,19 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Services.PnPContextExtensions.GetSharePointAdmin
   nameWithType: PnPContextExtensions.GetSharePointAdmin
+- uid: PnP.Core.Services.PnPContextExtensions.GetSiteCollectionManager(PnP.Core.Services.PnPContext)
+  name: GetSiteCollectionManager(PnPContext)
+  href: api/PnP.Core.Services.PnPContextExtensions.html#PnP_Core_Services_PnPContextExtensions_GetSiteCollectionManager_PnP_Core_Services_PnPContext_
+  commentId: M:PnP.Core.Services.PnPContextExtensions.GetSiteCollectionManager(PnP.Core.Services.PnPContext)
+  fullName: PnP.Core.Services.PnPContextExtensions.GetSiteCollectionManager(PnP.Core.Services.PnPContext)
+  nameWithType: PnPContextExtensions.GetSiteCollectionManager(PnPContext)
+- uid: PnP.Core.Services.PnPContextExtensions.GetSiteCollectionManager*
+  name: GetSiteCollectionManager
+  href: api/PnP.Core.Services.PnPContextExtensions.html#PnP_Core_Services_PnPContextExtensions_GetSiteCollectionManager_
+  commentId: Overload:PnP.Core.Services.PnPContextExtensions.GetSiteCollectionManager
+  isSpec: "True"
+  fullName: PnP.Core.Services.PnPContextExtensions.GetSiteCollectionManager
+  nameWithType: PnPContextExtensions.GetSiteCollectionManager
 - uid: PnP.Core.Services.PnPContextFactory
   name: PnPContextFactory
   href: api/PnP.Core.Services.PnPContextFactory.html

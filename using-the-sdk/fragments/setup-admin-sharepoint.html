@@ -89,7 +89,7 @@
 }
 </code></pre>
 <h2 id="pnpcoreadmin-dependency">PnP.Core.Admin dependency</h2>
-<p>The functionality shown in this article depends on the <a href="https://www.nuget.org/packages/PnP.Core.Admin">PnP.Core.Admin nuget package</a>. Once the PnP.Core.Admin nuget package has been installed you can get to the SharePoint admin features via using the <code>GetSharePointAdmin</code> extension method:</p>
+<p>The functionality shown in this article depends on the <a href="https://www.nuget.org/packages/PnP.Core.Admin">PnP.Core.Admin nuget package</a>. Once the PnP.Core.Admin nuget package has been installed you can get to the SharePoint admin features via using the <code>GetSharePointAdmin</code>, <code>GetAppManager</code> and <code>GetSiteCollectionManager</code> extension methods:</p>
 <pre><code class="lang-csharp">using (var context = await pnpContextFactory.CreateAsync(&quot;SiteToWorkWith&quot;))
 {
     // Use the GetSharePointAdmin extension method on any PnPContext 

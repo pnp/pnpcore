@@ -91,7 +91,7 @@
 }
 </code></pre>
 <h2 id="pnpcoreadmin-dependency">PnP.Core.Admin dependency</h2>
-<p>The functionality shown in this article depends on the <a href="https://www.nuget.org/packages/PnP.Core.Admin">PnP.Core.Admin nuget package</a>. Once the PnP.Core.Admin nuget package has been installed you can get to the SharePoint admin features via using the <code>GetSharePointAdmin</code> extension method:</p>
+<p>The functionality shown in this article depends on the <a href="https://www.nuget.org/packages/PnP.Core.Admin">PnP.Core.Admin nuget package</a>. Once the PnP.Core.Admin nuget package has been installed you can get to the SharePoint admin features via using the <code>GetSharePointAdmin</code>, <code>GetAppManager</code> and <code>GetSiteCollectionManager</code> extension methods:</p>
 <pre><code class="lang-csharp">using (var context = await pnpContextFactory.CreateAsync(&quot;SiteToWorkWith&quot;))
 {
     // Use the GetSharePointAdmin extension method on any PnPContext 
@@ -103,12 +103,12 @@
 <p>When deploying SharePoint apps (SharePoint SPFx solutions, but also the classic SharePoint Add-Ins) these apps are first added into an app catalog. There's one app catalog site at tenant level hosting the app catalog with apps that are available for all sites in your tenant, alternatively you can setup an app catalog at site collection level to scope the apps to the site collection.</p>
 <p>When you're running setup tasks you need to ensure there's an app catalog site setup, using the <code>GetTenantAppCatalogUri</code> methods you can get the current tenant app catalog site url:</p>
 <pre><code class="lang-csharp">// Get the tenant app catalog url, returns null if there's none setup
-var url = await context.GetSharePointAdmin().GetTenantAppCatalogUriAsync();
+var url = await context.GetAppManager().GetTenantAppCatalogUriAsync();
 </code></pre>
 <h2 id="ensuring-theres-a-tenant-app-catalog">Ensuring there's a tenant app catalog</h2>
 <p>If you want to ensure there's a tenant app catalog because you need to deploy an app to it, you can use the <code>EnsureTenantAppCatalog</code> methods. If the tenant app catalog site exists the methods return false, if there was no app catalog it will be setup using the default path of <code>sites/appcatalog</code> and the method returns true.</p>
 <pre><code class="lang-csharp">// Get the tenant app catalog url, returns null if there's none setup
-if (await context.GetSharePointAdmin().EnsureTenantAppCatalogAsync())
+if (await context.GetAppManager().EnsureTenantAppCatalogAsync())
 {
     // App catalog site was missing, but now added as /sites/appcatalog
 }
