@@ -23,6 +23,7 @@ namespace PnP.Core.Transformation.Services.Core
         private string version;
 
         public const string CorrelationId = "PnPCorrelationId";
+        public const string AADTenantId = "AADTenantId";
         private const string PageTransformed = "PageTransformed";
         private const string EngineVersion = "Version";
         private const string Duration = "Duration";

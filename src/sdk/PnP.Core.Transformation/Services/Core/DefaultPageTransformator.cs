@@ -106,7 +106,11 @@ namespace PnP.Core.Transformation.Services.Core
 
             // Save telemetry
             var telemetryProperties = output.TelemetryProperties.Merge(generatedPage.TelemetryProperties);
+
+            // Add global telemetry properties
             telemetryProperties.Add(TelemetryService.CorrelationId, task.Id.ToString());
+            telemetryProperties.Add(TelemetryService.AADTenantId, context.Task.TargetContext.GlobalOptions.AADTenantId.ToString());
+
             this.telemetry.LogTransformationCompleted(duration, telemetryProperties);
 
             // Call post transformations handlers
