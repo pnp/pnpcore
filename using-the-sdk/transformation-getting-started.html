@@ -1,0 +1,271 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html lang="en">
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>PnP Transformation Framework - Getting Started | PnP Core SDK </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="PnP Transformation Framework - Getting Started | PnP Core SDK ">
+    <meta name="generator" content="docfx 2.56.5.0">
+    <meta name="description" content="The PnP Core SDK is a modern .NET SDK designed to work for Microsoft 365. It provides a unified object model for working with SharePoint Online and Teams which is agnostic to the underlying API's being called.">
+    <link rel="shortcut icon" href="https://c.s-microsoft.com/favicon.ico?v2">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    <meta property="docfx:newtab" content="true">
+  </head>  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../images/logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <label class="glyphicon glyphicon-search" for="search-query"></label>
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first="First" data-prev="Previous" data-next="Next" data-last="Last"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+                  <div class="contribution-panel mobile-hide pull-right">
+                      <a href="https://github.com/pnp/pnpcore/blob/dev/docs/using-the-sdk/transformation-getting-started.md/#L1" title="Improve this Doc" class="improve-doc-lg"><i class="glyphicon glyphicon-pencil"></i></a>
+                  </div>
+                    <h1 id="pnp-transformation-framework---getting-started">PnP Transformation Framework - Getting Started</h1>
+
+<p>The PnP Transformation Framework is a library to transform content pages from any source platform into Microsoft SharePoint Online modern pages.</p>
+<p>At the time of this writing, there is native support for transforming SharePoint classic pages from SharePoint 2013, 2016, 2019, and Online into SharePoint modern pages in SharePoint Online. However, the architecture of the framework is open and extensible
+and can be used to create any custom data source for reading content pages from any third party platform.</p>
+<p>You can use the PnP Transformation Framework either via <a href="https://github.com/pnp/powershell">PnP PowerShell</a> or in your own .NET code as a referenced library.</p>
+<h2 id="transforming-sharepoint-pages-via-pnp-powershell">Transforming SharePoint pages via PnP PowerShell</h2>
+<p>In order to use the PnP Transformation Framewok in PnP PowerShell, you need to <a href="https://pnp.github.io/powershell/#getting-up-and-running">install</a> the latest build of the PowerShell library.</p>
+<p>Once you have done that, you can simply invoke the <em>Invoke-PnPTransformation</em> cmdlet to trigger a page transformation.
+Here you can see a sample code excerpt to transform a page from a SharePoint Online classic site into another SharePoint Online modern site.</p>
+<pre><code class="lang-powershell"># Connect to the target site
+$targetConnection = Connect-PnPOnline https://target-tenant.sharepoint.com/sites/TargetModernSite/ -ReturnConnection
+
+# Connect to the source site
+Connect-PnPOnline https://source-tenant.sharepoint.com/sites/SourceClassicSite/
+
+# Trigger transformation
+Invoke-PnPTransformation -Identity source-page.aspx -TargetConnection $targetConnection
+</code></pre>
+<p>The <em>Invoke-PnPTransformation</em> cmdlet supports a rich set of options to easily customize the transformation behavior. In the following example, you can see an invocation with additional settings levaraging the parameters splatting capability of PowerShell and reusing the same settings to transform multiple pages.</p>
+<pre><code class="lang-powershell"># Connect to the target site
+$targetConnection = Connect-PnPOnline https://target-tenant.sharepoint.com/sites/TargetModernSite/ -ReturnConnection
+
+# Connect to the source site
+Connect-PnPOnline https://source-tenant.sharepoint.com/sites/SourceClassicSite/
+
+# Or you can use parameter splatting
+$transformationParams = @{ 
+    LocalStoragePath = &quot;c:\temp&quot;
+    CopyPageMetadata = $true
+    KeepPageCreationModificationInformation = $true
+    KeepPageSpecificPermissions = $true
+    Overwrite = $true
+    SetAuthorInPageHeader = $true
+    TargetPagePrefix = &quot;Migrated_&quot;
+    RemoveEmptySectionsAndColumns = $true
+    HandleWikiImagesAndVideos = $true
+    AddTableListImageAsImageWebPart = $true
+    IncludeTitleBarWebPart = $true
+    SkipHiddenWebParts = $true
+    TargetConnection = $targetConnection
+}
+
+Invoke-PnPTransformation -Identity first-page.aspx @transformationParams
+Invoke-PnPTransformation -Identity second-page.aspx @transformationParams
+</code></pre>
+<p>Notice that the <em>Invoke-PnPTransformation</em> cmdlet supports SharePoint classic as the unique data source, so you cannot use it to plug into the PnP Transformation Framework a custom data source of your own.</p>
+<h2 id="transforming-sharepoint-pages-with-custom-net-code">Transforming SharePoint pages with custom .NET code</h2>
+<p>If you want to use the PnP Transformation Framework in your own custom developed solutions, or eventually leveraging a custom data source that you implemented, you can reference the <a href="https://www.nuget.org/packages/PnP.Core.Transformation/">PnP Transformation Framework NuGet package</a> in your .NET solution.</p>
+<p>In particular, if you like to transform classic SharePoint content pages to SharePoint Online, you can reference the <a href="https://www.nuget.org/packages/PnP.Core.Transformation.SharePoint/">PnP Transformation Framework library for SharePoint</a>, which includes a dependency on the main PnP Transformation Framework NuGet package.</p>
+<div class="NOTE">
+<h5>Note</h5>
+<p>PnP Transformation Framework library for SharePoint relies on the SharePoint Client-Side Object Model (CSOM) to read the classic content pages from the source.</p>
+</div>
+<p>The PnP Transformation Framework is based on the PnP Core SDK and relies on dependency injection, so in order to start using it in your code, you need to setup a host context. In the following code excerpt, you can see an example of a console application to transform a SharePoint classic page.</p>
+<pre><code class="lang-csharp">var host = Host.CreateDefaultBuilder()
+// Configure logging
+.ConfigureServices((hostingContext, services) =&gt;
+{
+    // Add the PnP Core SDK library
+    services.AddPnPCore(options =&gt; {
+        options.PnPContext.GraphFirst = true;
+        options.HttpRequests.UserAgent = &quot;ISV|Contoso|ProductX&quot;;
+
+        options.Sites.Add(&quot;TargetSite&quot;, new PnPCoreSiteOptions
+        {
+            SiteUrl = &quot;https://target-tenant.sharepoint.com/sites/TargetModernSite/&quot;
+        });
+    });
+
+    services.AddPnPCoreAuthentication(
+        options =&gt; {
+            // Configure an Authentication Provider relying on the interactive authentication
+            options.Credentials.Configurations.Add(&quot;interactive&quot;,
+                new PnPCoreAuthenticationCredentialConfigurationOptions
+                {
+                    ClientId = &quot;{your_client_id}&quot;,
+                    TenantId = &quot;{your_tenant_id}&quot;,
+                    Interactive = new PnPCoreAuthenticationInteractiveOptions
+                    {
+                        RedirectUri = new Uri(&quot;http://localhost&quot;)
+                    }
+                });
+
+            // Configure the default authentication provider
+            options.Credentials.DefaultConfiguration = &quot;interactive&quot;;
+
+            // Map the site defined in AddPnPCore with the 
+            // Authentication Provider configured in this action
+            options.Sites.Add(&quot;TargetSite&quot;,
+                new PnPCoreAuthenticationSiteOptions
+                {
+                    AuthenticationProviderName = &quot;interactive&quot;
+                });
+        }
+    );
+
+    // Register the transformation services for SharePoint as the data source
+    services.AddPnPSharePointTransformation(
+        pnpOptions =&gt; // Global settings
+        {
+            pnpOptions.DisableTelemetry = false;
+            pnpOptions.PersistenceProviderConnectionString = @&quot;c:\temp&quot;;
+        },
+        pageOptions =&gt; // Target modern page creation settings
+        {
+            pageOptions.CopyPageMetadata = true;
+            pageOptions.KeepPageCreationModificationInformation = true;
+            pageOptions.PostAsNews = false;
+            pageOptions.PublishPage = false;
+            pageOptions.DisablePageComments = false;
+            pageOptions.KeepPageSpecificPermissions = true;
+            pageOptions.Overwrite = true;
+            pageOptions.ReplaceHomePageWithDefaultHomePage = true;
+            pageOptions.SetAuthorInPageHeader = true;
+            pageOptions.TargetPagePrefix = &quot;Migrated_&quot;;
+            pageOptions.TargetPageTakesSourcePageName = true;
+        },
+        spOptions =&gt; // SharePoint classic source settings
+        {
+            spOptions.RemoveEmptySectionsAndColumns = true;
+            spOptions.ShouldMapUsers = true;
+            spOptions.HandleWikiImagesAndVideos = true;
+            spOptions.AddTableListImageAsImageWebPart = true;
+            spOptions.IncludeTitleBarWebPart = true;
+            spOptions.SkipHiddenWebParts = true;
+            spOptions.SkipUrlRewrite = true;
+        }
+    );
+
+})
+// Let the builder know we're running in a console
+.UseConsoleLifetime()
+// Add services to the container
+.Build();
+
+// Start console host
+await host.StartAsync();
+
+using (var scope = host.Services.CreateScope())
+{
+    // Obtain a PnP Context factory
+    var pnpContextFactory = scope.ServiceProvider.GetRequiredService&lt;IPnPContextFactory&gt;();
+    var pageTransformator = scope.ServiceProvider.GetRequiredService&lt;IPageTransformator&gt;();
+
+    using (var sourceContext = new ClientContext(&quot;https://source-tenant.sharepoint.com/sites/SourceClassicSite/&quot;))
+    {
+        var targetContext = await pnpContextFactory.CreateAsync(&quot;TargetSite&quot;);
+        var sourceUri = new Uri(&quot;https://source-tenant.sharepoint.com/sites/SourceClassicSite/sitepages/source-page.aspx&quot;);
+
+        var result = await pageTransformator.TransformSharePointAsync(sourceContext, targetContext, sourceUri);
+
+        Console.WriteLine(result.AbsoluteUri);
+    }
+}
+</code></pre>
+<p>Aside from the dependency injection plumbing and from all the configuration settings for the transformation framework, the real code is all about getting a reference to the data source, which is a CSOM <em>ClientContext</em> object, and the target, which is <em>PnPContext</em> of PnP Core SDK. Then, you simply invoke the <em>TransformSharePointAsync</em> method providing the source context (<em>ClientContext</em> of CSOM), the target context (<em>PnPContext</em> of PnP Core SDK), and the URL of the page to transform (as a <em>Uri</em> type instance). Under the cover the transformation will take place for you and will return you back the URL of the transformed page.</p>
+<div class="NOTE">
+<h5>Note</h5>
+<p>Supporting dependency injection and the service-oriented model makes really simple to use the PnP Transformation Framework in .NET Core and modern cloud-hosted solutions like Azure Functions, Containers, etc.</p>
+</div>
+</article>
+          </div>
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              </nav>
+            </div>
+          </div>        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            <span>PnP Core SDK<br>Generated by <strong><a href='https://dotnet.github.io/docfx' alt='Doc FX Website'>DocFX</a></strong> with <strong><a href='https://ovasquez.github.io/docfx-material' alt='DocFx Material Theme'>Material UI</a></strong></span>
+            
+            <img src="https://telemetry.sharepointpnp.com/@pnp.github.io/index/" alt="spacer">
+          </div>
+        </div>
+      </footer>    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>  </body>
+</html>
