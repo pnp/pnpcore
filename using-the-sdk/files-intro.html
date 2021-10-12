@@ -259,6 +259,36 @@ addedFile.ListItemAllFields[&quot;Field2&quot;] = true;
 // Persist the ListItem changes
 await addedFile.ListItemAllFields.UpdateAsync();
 </code></pre>
+<h2 id="updating-the-file-author-editor-created-or-modified-properties">Updating the file Author, Editor, Created or Modified properties</h2>
+<p>Each file has an <code>Author</code> property (the one who created the file), an <code>Editor</code> property (the one who last changed the file), a <code>Created</code> property (when was the file added) and a <code>Modified</code> property (when was the file changed). These are system properties and they cannot be simply overwritten. Using the <code>UpdateOverwriteVersion</code> methods this however is possible as shown in below code snippet:</p>
+<pre><code class="lang-csharp">// Load the default documents folder of the site
+var doc = await context.Web.Lists.GetByTitleAsync(&quot;Documents&quot;, p =&gt; p.Fields);
+// Upload a file
+var file = await doc.RootFolder.Files.AddAsync(&quot;demo.docx&quot;, System.IO.File.OpenRead($&quot;.{System.IO.Path.DirectorySeparatorChar}demo.docx&quot;), true);
+
+// Load the file metadata again to get the ListItemFields populated
+await file.LoadAsync(p =&gt; p.ListItemAllFields)
+
+// Get a user to use as author/editor
+var currentUser = await context.Web.GetCurrentUserAsync();
+
+// The new Created/Modified date to set
+var newDate = new DateTime(2020, 10, 20);
+
+// Get the earlier loaded Author and Editor fields
+var author = doc.Fields.AsRequested().FirstOrDefault(p =&gt; p.InternalName == &quot;Author&quot;);
+var editor = doc.Fields.AsRequested().FirstOrDefault(p =&gt; p.InternalName == &quot;Editor&quot;);
+
+// Update file properties
+file.ListItemAllFields[&quot;Title&quot;] = &quot;new title&quot;;
+file.ListItemAllFields[&quot;Created&quot;] = newDate;
+file.ListItemAllFields[&quot;Modified&quot;] = newDate;
+file.ListItemAllFields[&quot;Author&quot;] = author.NewFieldUserValue(currentUser);
+file.ListItemAllFields[&quot;Editor&quot;] = editor.NewFieldUserValue(currentUser);
+
+// Persist the updated properties
+await file.ListItemAllFields.UpdateOverwriteVersionAsync();
+</code></pre>
 <h2 id="downloading-files">Downloading files</h2>
 <p>If you want to download a file you do need to use either the <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IFile.html#PnP_Core_Model_SharePoint_IFile_GetContentAsync_System_Boolean_">GetContentAsync method</a> if you prefer a Stream as result type or <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IFile.html#collapsible-PnP_Core_Model_SharePoint_IFile_GetContentBytesAsync">GetContentBytesAsync</a> if you prefer a byte array.</p>
 <div class="NOTE">
