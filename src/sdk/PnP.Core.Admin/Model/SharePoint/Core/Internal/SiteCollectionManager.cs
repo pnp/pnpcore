@@ -1,117 +1,87 @@
-﻿using PnP.Core.Admin.Services.Core.CSOM.Requests.Tenant;
-using PnP.Core.Model.SharePoint;
-using PnP.Core.Services;
-using PnP.Core.Services.Core.CSOM.Requests;
+﻿using PnP.Core.Services;
 using System;
 using System.Collections.Generic;
-using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace PnP.Core.Admin.Model.SharePoint
 {
-    internal static class SiteCollectionManager
+    internal class SiteCollectionManager : ISiteCollectionManager
     {
+        private readonly PnPContext context;
 
-        internal static async Task RecycleSiteCollectionAsync(PnPContext context, Uri siteToRecycle, string webTemplate)
+        internal SiteCollectionManager(PnPContext pnpContext)
         {
-            using (var tenantAdminContext = await context.GetSharePointAdmin().GetTenantAdminCenterContextAsync().ConfigureAwait(false))
-            {
-                // When recycling a group connected site then use the groupsitemanager endpoint. This will also recycle the connected Microsoft 365 group
-                if (HasGroup(webTemplate))
-                {
-                    await (context.Web as Web).RawRequestAsync(new ApiCall($"_api/GroupSiteManager/Delete?siteUrl='{siteToRecycle.AbsoluteUri}'", ApiType.SPORest), HttpMethod.Post).ConfigureAwait(false);
-                }
-                else
-                {
-                    List<IRequest<object>> csomRequests = new List<IRequest<object>>
-                    {
-                        new RemoveSiteRequest(siteToRecycle)
-                    };
-
-                    var result = await (tenantAdminContext.Web as Web).RawRequestAsync(new ApiCall(csomRequests), HttpMethod.Post).ConfigureAwait(false);
-
-                    await WaitForSpoOperationCompleteAsync(tenantAdminContext, result.ApiCall.CSOMRequests[0].Result as SpoOperation).ConfigureAwait(false);
-                }
-            }
+            context = pnpContext;
         }
 
-        internal static async Task DeleteSiteCollectionAsync(PnPContext context, Uri siteToDelete, string webTemplate)
+        public async Task<List<ISiteCollection>> GetSiteCollectionsAsync(bool ignoreUserIsSharePointAdmin = false)
         {
-            using (var tenantAdminContext = await context.GetSharePointAdmin().GetTenantAdminCenterContextAsync().ConfigureAwait(false))
-            {
-                // first recycle the site collection
-                await RecycleSiteCollectionAsync(tenantAdminContext, siteToDelete, webTemplate).ConfigureAwait(false);
-
-                // Only supporting permanent delete of non group connected sites. For group connected sites permanently deleting the group will
-                // trigger the deletion of the linked resources (like the SharePoint site).  
-                if (!HasGroup(webTemplate))
-                {
-                    // once that's done remove the site collection from the recycle bin
-                    List<IRequest<object>> csomRequests = new List<IRequest<object>>
-                    {
-                        new RemoveDeletedSiteRequest(siteToDelete)
-                    };
-
-                    var result = await (tenantAdminContext.Web as Web).RawRequestAsync(new ApiCall(csomRequests), HttpMethod.Post).ConfigureAwait(false);
-
-                    await WaitForSpoOperationCompleteAsync(tenantAdminContext, result.ApiCall.CSOMRequests[0].Result as SpoOperation).ConfigureAwait(false);
-                }
-            }
+            return await SiteCollectionEnumerator.GetAsync(context, ignoreUserIsSharePointAdmin).ConfigureAwait(false);
         }
 
-        internal static async Task RestoreSiteCollectionAsync(PnPContext context, Uri siteToRecycle)
+        public List<ISiteCollection> GetSiteCollections(bool ignoreUserIsSharePointAdmin = false)
         {
-            using (var tenantAdminContext = await context.GetSharePointAdmin().GetTenantAdminCenterContextAsync().ConfigureAwait(false))
-            {
-                List<IRequest<object>> csomRequests = new List<IRequest<object>>
-                {
-                    new RestoreDeletedSiteRequest(siteToRecycle)
-                };
-
-                var result = await (tenantAdminContext.Web as Web).RawRequestAsync(new ApiCall(csomRequests), HttpMethod.Post).ConfigureAwait(false);
-
-                await WaitForSpoOperationCompleteAsync(tenantAdminContext, result.ApiCall.CSOMRequests[0].Result as SpoOperation).ConfigureAwait(false);
-            }
+            return GetSiteCollectionsAsync(ignoreUserIsSharePointAdmin).GetAwaiter().GetResult();
         }
 
-        internal static async Task WaitForSpoOperationCompleteAsync(PnPContext tenantAdminContext, SpoOperation operation, int maxStatusChecks = 10)
+        public async Task<List<ISiteCollectionWithDetails>> GetSiteCollectionsWithDetailsAsync()
         {
-            if (operation.IsComplete)
-            {
-                return;
-            }
-
-            List<IRequest<object>> csomRequests = new List<IRequest<object>>
-            {
-                new SpoOperationRequest(operation.ObjectIdentity)
-            };
-
-            bool operationComplete = false;
-            var statusCheckAttempt = 1;
-
-            do
-            {
-                await tenantAdminContext.WaitAsync(TimeSpan.FromMilliseconds(operation.PollingInterval)).ConfigureAwait(false);
-
-                var result = await (tenantAdminContext.Web as Web).RawRequestAsync(new ApiCall(csomRequests), HttpMethod.Post).ConfigureAwait(false);
-
-                operation = result.ApiCall.CSOMRequests[0].Result as SpoOperation;
-
-                if (operation.IsComplete)
-                {
-                    operationComplete = true;
-                }
-
-                statusCheckAttempt++;
-            }
-            while (!operationComplete && statusCheckAttempt <= maxStatusChecks);
-
+            return await SiteCollectionEnumerator.GetWithDetailsViaTenantAdminHiddenListAsync(context).ConfigureAwait(false);
         }
 
-        private static bool HasGroup(string webTemplate)
+        public List<ISiteCollectionWithDetails> GetSiteCollectionsWithDetails()
         {
-            return webTemplate.Equals(PnPAdminConstants.TeamSiteTemplate, StringComparison.InvariantCultureIgnoreCase);
+            return GetSiteCollectionsWithDetailsAsync().GetAwaiter().GetResult();
         }
 
+        public async Task<List<IRecycledSiteCollection>> GetRecycledSiteCollectionsAsync()
+        {
+            return await SiteCollectionEnumerator.GetRecycledWithDetailsViaTenantAdminHiddenListAsync(context).ConfigureAwait(false);
+        }
+
+        public List<IRecycledSiteCollection> GetRecycledSiteCollections()
+        {
+            return GetRecycledSiteCollectionsAsync().GetAwaiter().GetResult();
+        }
+
+        public async Task<PnPContext> CreateSiteCollectionAsync(CommonSiteOptions siteToCreate, SiteCreationOptions creationOptions = null)
+        {
+            return await SiteCollectionCreator.CreateSiteCollectionAsync(context, siteToCreate, creationOptions).ConfigureAwait(false);
+        }
+
+        public PnPContext CreateSiteCollection(CommonSiteOptions siteToCreate, SiteCreationOptions creationOptions = null)
+        {
+            return CreateSiteCollectionAsync(siteToCreate, creationOptions).GetAwaiter().GetResult();
+        }
+
+        public async Task RecycleSiteCollectionAsync(Uri siteToDelete, string webTemplate)
+        {
+            await SiteCollectionManagement.RecycleSiteCollectionAsync(context, siteToDelete, webTemplate).ConfigureAwait(false);
+        }
+
+        public void RecycleSiteCollection(Uri siteToDelete, string webTemplate)
+        {
+            RecycleSiteCollectionAsync(siteToDelete, webTemplate).GetAwaiter().GetResult();
+        }
+
+        public void RestoreSiteCollection(Uri siteToRestore)
+        {
+            RestoreSiteCollectionAsync(siteToRestore).GetAwaiter().GetResult();
+        }
+
+        public async Task RestoreSiteCollectionAsync(Uri siteToRestore)
+        {
+            await SiteCollectionManagement.RestoreSiteCollectionAsync(context, siteToRestore).ConfigureAwait(false);
+        }
+
+        public async Task DeleteSiteCollectionAsync(Uri siteToDelete, string webTemplate)
+        {
+            await SiteCollectionManagement.DeleteSiteCollectionAsync(context, siteToDelete, webTemplate).ConfigureAwait(false);
+        }
+
+        public void DeleteSiteCollection(Uri siteToDelete, string webTemplate)
+        {
+            DeleteSiteCollectionAsync(siteToDelete, webTemplate).GetAwaiter().GetResult();
+        }
     }
 }

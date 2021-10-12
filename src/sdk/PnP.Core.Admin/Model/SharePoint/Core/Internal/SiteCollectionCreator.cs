@@ -174,7 +174,7 @@ namespace PnP.Core.Admin.Model.SharePoint
 
                 if (!op.IsComplete)
                 {
-                    await SiteCollectionManager.WaitForSpoOperationCompleteAsync(tenantAdminContext, op).ConfigureAwait(false);
+                    await SiteCollectionManagement.WaitForSpoOperationCompleteAsync(tenantAdminContext, op).ConfigureAwait(false);
                 }
 
                 return await context.CloneAsync(siteToCreate.Url).ConfigureAwait(false);

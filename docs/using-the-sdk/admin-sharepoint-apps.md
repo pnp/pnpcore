@@ -12,7 +12,7 @@ When you're running setup tasks you need to ensure there's an app catalog site s
 
 ```csharp
 // Get the tenant app catalog url, returns null if there's none setup
-var url = await context.GetSharePointAdmin().GetTenantAppCatalogUriAsync();
+var url = await context.GetAppManager().GetTenantAppCatalogUriAsync();
 ```
 
 ## Ensuring there's a tenant app catalog
@@ -21,7 +21,7 @@ If you want to ensure there's a tenant app catalog because you need to deploy an
 
 ```csharp
 // Get the tenant app catalog url, returns null if there's none setup
-if (await context.GetSharePointAdmin().EnsureTenantAppCatalogAsync())
+if (await context.GetAppManager().EnsureTenantAppCatalogAsync())
 {
     // App catalog site was missing, but now added as /sites/appcatalog
 }

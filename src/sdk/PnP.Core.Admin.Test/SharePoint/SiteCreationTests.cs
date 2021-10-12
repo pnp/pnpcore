@@ -80,7 +80,7 @@ namespace PnP.Core.Admin.Test.SharePoint
                         return input;
                     };
 
-                    using (var newSiteContext = context.GetSharePointAdmin().CreateSiteCollection(communicationSiteToCreate, siteCreationOptions))
+                    using (var newSiteContext = context.GetSiteCollectionManager().CreateSiteCollection(communicationSiteToCreate, siteCreationOptions))
                     {
                         var web = await newSiteContext.Web.GetAsync(p => p.Url, p => p.Title, p => p.Description, p => p.Language);
                         Assert.IsTrue(web.Url == communicationSiteToCreate.Url);
@@ -101,7 +101,7 @@ namespace PnP.Core.Admin.Test.SharePoint
                 TestCommon.Instance.UseApplicationPermissions = false;
                 using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
                 {
-                    context.GetSharePointAdmin().DeleteSiteCollection(communicationSiteToCreate.Url, communicationSiteToCreate.WebTemplate);
+                    context.GetSiteCollectionManager().DeleteSiteCollection(communicationSiteToCreate.Url, communicationSiteToCreate.WebTemplate);
                 }
 
             }
@@ -151,7 +151,7 @@ namespace PnP.Core.Admin.Test.SharePoint
                         UsingApplicationPermissions = false
                     };
 
-                    using (var newSiteContext = context.GetSharePointAdmin().CreateSiteCollection(communicationSiteToCreate, siteCreationOptions))
+                    using (var newSiteContext = context.GetSiteCollectionManager().CreateSiteCollection(communicationSiteToCreate, siteCreationOptions))
                     {
                         var site = await newSiteContext.Site.GetAsync(p => p.SensitivityLabelId, p => p.SensitivityLabel);
                         var web = await newSiteContext.Web.GetAsync(p => p.Url, p => p.Title, p => p.Description, p => p.Language);
@@ -175,7 +175,7 @@ namespace PnP.Core.Admin.Test.SharePoint
                 TestCommon.Instance.UseApplicationPermissions = false;
                 using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
                 {
-                    context.GetSharePointAdmin().DeleteSiteCollection(communicationSiteToCreate.Url, communicationSiteToCreate.WebTemplate);
+                    context.GetSiteCollectionManager().DeleteSiteCollection(communicationSiteToCreate.Url, communicationSiteToCreate.WebTemplate);
                 }
 
             }
@@ -224,7 +224,7 @@ namespace PnP.Core.Admin.Test.SharePoint
                         WaitForAsyncProvisioning = true
                     };
 
-                    using (var newSiteContext = context.GetSharePointAdmin().CreateSiteCollection(communicationSiteToCreate, siteCreationOptions))
+                    using (var newSiteContext = context.GetSiteCollectionManager().CreateSiteCollection(communicationSiteToCreate, siteCreationOptions))
                     {
                         var web = await newSiteContext.Web.GetAsync(p => p.Url, p => p.Title, p => p.Description, p => p.Language);
                         Assert.IsTrue(web.Url == communicationSiteToCreate.Url);
@@ -245,7 +245,7 @@ namespace PnP.Core.Admin.Test.SharePoint
                 TestCommon.Instance.UseApplicationPermissions = false;
                 using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
                 {
-                    context.GetSharePointAdmin().DeleteSiteCollection(communicationSiteToCreate.Url, communicationSiteToCreate.WebTemplate);
+                    context.GetSiteCollectionManager().DeleteSiteCollection(communicationSiteToCreate.Url, communicationSiteToCreate.WebTemplate);
                 }
 
             }
@@ -300,7 +300,7 @@ namespace PnP.Core.Admin.Test.SharePoint
                         UsingApplicationPermissions = true
                     };
 
-                    using (var newSiteContext = context.GetSharePointAdmin().CreateSiteCollection(communicationSiteToCreate, siteCreationOptions))
+                    using (var newSiteContext = context.GetSiteCollectionManager().CreateSiteCollection(communicationSiteToCreate, siteCreationOptions))
                     {
                         var web = await newSiteContext.Web.GetAsync(p => p.Url, p => p.Title, p => p.Description, p => p.Language);
                         Assert.IsTrue(web.Url == communicationSiteToCreate.Url);
@@ -320,7 +320,7 @@ namespace PnP.Core.Admin.Test.SharePoint
             {
                 using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
                 {
-                    context.GetSharePointAdmin().DeleteSiteCollection(communicationSiteToCreate.Url, communicationSiteToCreate.WebTemplate);
+                    context.GetSiteCollectionManager().DeleteSiteCollection(communicationSiteToCreate.Url, communicationSiteToCreate.WebTemplate);
                 }
                 TestCommon.Instance.UseApplicationPermissions = false;
             }
@@ -372,7 +372,7 @@ namespace PnP.Core.Admin.Test.SharePoint
                         UsingApplicationPermissions = false
                     };
 
-                    using (var newSiteContext = context.GetSharePointAdmin().CreateSiteCollection(teamSiteToCreate, siteCreationOptions))
+                    using (var newSiteContext = context.GetSiteCollectionManager().CreateSiteCollection(teamSiteToCreate, siteCreationOptions))
                     {
                         var web = await newSiteContext.Web.GetAsync(p => p.Url, p => p.Title, p => p.Description, p => p.Language);
                         Assert.IsTrue(web.Url == teamSiteToCreate.Url);
@@ -387,7 +387,7 @@ namespace PnP.Core.Admin.Test.SharePoint
                 TestCommon.Instance.UseApplicationPermissions = false;
                 using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
                 {
-                    context.GetSharePointAdmin().DeleteSiteCollection(teamSiteToCreate.Url, teamSiteToCreate.WebTemplate);
+                    context.GetSiteCollectionManager().DeleteSiteCollection(teamSiteToCreate.Url, teamSiteToCreate.WebTemplate);
                 }
 
             }
@@ -452,7 +452,7 @@ namespace PnP.Core.Admin.Test.SharePoint
                         return input;
                     };
 
-                    using (var newSiteContext = context.GetSharePointAdmin().CreateSiteCollection(teamSiteToCreate, siteCreationOptions))
+                    using (var newSiteContext = context.GetSiteCollectionManager().CreateSiteCollection(teamSiteToCreate, siteCreationOptions))
                     {
                         createdSiteCollection = newSiteContext.Uri;
 
@@ -475,7 +475,7 @@ namespace PnP.Core.Admin.Test.SharePoint
                 TestCommon.Instance.UseApplicationPermissions = false;
                 using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
                 {
-                    context.GetSharePointAdmin().DeleteSiteCollection(createdSiteCollection, teamSiteToCreate.WebTemplate);
+                    context.GetSiteCollectionManager().DeleteSiteCollection(createdSiteCollection, teamSiteToCreate.WebTemplate);
                 }
 
             }
@@ -527,7 +527,7 @@ namespace PnP.Core.Admin.Test.SharePoint
                             UsingApplicationPermissions = false
                         };
 
-                        using (var newSiteContext = tenantAdminContext.GetSharePointAdmin().CreateSiteCollection(classicSite, siteCreationOptions))
+                        using (var newSiteContext = tenantAdminContext.GetSiteCollectionManager().CreateSiteCollection(classicSite, siteCreationOptions))
                         {
                             var web = await newSiteContext.Web.GetAsync(p => p.Url, p => p.Title, p => p.Description, p => p.Language);
                             Assert.IsTrue(web.Url == classicSite.Url);
@@ -542,7 +542,7 @@ namespace PnP.Core.Admin.Test.SharePoint
                 TestCommon.Instance.UseApplicationPermissions = false;
                 using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
                 {
-                    context.GetSharePointAdmin().DeleteSiteCollection(classicSite.Url, classicSite.WebTemplate);
+                    context.GetSiteCollectionManager().DeleteSiteCollection(classicSite.Url, classicSite.WebTemplate);
                 }
 
             }
@@ -594,7 +594,7 @@ namespace PnP.Core.Admin.Test.SharePoint
                             UsingApplicationPermissions = false
                         };
 
-                        using (var newSiteContext = adminContext.GetSharePointAdmin().CreateSiteCollection(communicationSiteToCreate, siteCreationOptions))
+                        using (var newSiteContext = adminContext.GetSiteCollectionManager().CreateSiteCollection(communicationSiteToCreate, siteCreationOptions))
                         {
                             var web = await newSiteContext.Web.GetAsync(p => p.Url, p => p.Title, p => p.Description, p => p.Language);
                             Assert.IsTrue(web.Url == communicationSiteToCreate.Url);
@@ -610,10 +610,10 @@ namespace PnP.Core.Admin.Test.SharePoint
                         }
 
                         // Recycle the site collection
-                        adminContext.GetSharePointAdmin().RecycleSiteCollection(communicationSiteToCreate.Url, communicationSiteToCreate.WebTemplate);
+                        adminContext.GetSiteCollectionManager().RecycleSiteCollection(communicationSiteToCreate.Url, communicationSiteToCreate.WebTemplate);
 
                         // Verify the site collection is returned as recycled site
-                        var recycledSites = adminContext.GetSharePointAdmin().GetRecycledSiteCollections();
+                        var recycledSites = adminContext.GetSiteCollectionManager().GetRecycledSiteCollections();
                         var recycledCommunicationSite = recycledSites.FirstOrDefault(c => c.Url == communicationSiteToCreate.Url);
                         Assert.IsNotNull(recycledCommunicationSite);
                         Assert.IsTrue(!string.IsNullOrEmpty(recycledCommunicationSite.Name));
@@ -627,9 +627,9 @@ namespace PnP.Core.Admin.Test.SharePoint
 
 
                         // Restore the recycled site collection again
-                        adminContext.GetSharePointAdmin().RestoreSiteCollection(communicationSiteToCreate.Url);
+                        adminContext.GetSiteCollectionManager().RestoreSiteCollection(communicationSiteToCreate.Url);
                         // Verify the site collection is not returned as recycled site
-                        recycledSites = adminContext.GetSharePointAdmin().GetRecycledSiteCollections();
+                        recycledSites = adminContext.GetSiteCollectionManager().GetRecycledSiteCollections();
                         recycledCommunicationSite = recycledSites.FirstOrDefault(c => c.Url == communicationSiteToCreate.Url);
                         Assert.IsNull(recycledCommunicationSite);
 
@@ -647,7 +647,7 @@ namespace PnP.Core.Admin.Test.SharePoint
                 TestCommon.Instance.UseApplicationPermissions = false;
                 using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
                 {
-                    context.GetSharePointAdmin().DeleteSiteCollection(communicationSiteToCreate.Url, communicationSiteToCreate.WebTemplate);
+                    context.GetSiteCollectionManager().DeleteSiteCollection(communicationSiteToCreate.Url, communicationSiteToCreate.WebTemplate);
                 }
 
             }

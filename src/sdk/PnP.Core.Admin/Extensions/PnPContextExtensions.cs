@@ -22,6 +22,26 @@ namespace PnP.Core.Services
         }
 
         /// <summary>
+        /// Extends a <see cref="PnPContext"/> with site collection admin functionality
+        /// </summary>
+        /// <param name="context"><see cref="PnPContext"/> to extend</param>
+        /// <returns>An <see cref="ISiteCollectionManager"/> instance enabling site collection admin operations</returns>
+        public static ISiteCollectionManager GetSiteCollectionManager(this PnPContext context)
+        {
+            return new SiteCollectionManager(context);
+        }
+
+        /// <summary>
+        /// Extends a <see cref="PnPContext"/> with app admin functionality
+        /// </summary>
+        /// <param name="context"><see cref="PnPContext"/> to extend</param>
+        /// <returns>An <see cref="ISiteCollectionManager"/> instance enabling app admin operations</returns>
+        public static IAppManager GetAppManager(this PnPContext context)
+        {
+            return new AppManager(context);
+        }
+
+        /// <summary>
         /// Extends a <see cref="PnPContext"/> with Microsoft 365 admin functionality
         /// </summary>
         /// <param name="context"><see cref="PnPContext"/> to extend</param>

@@ -181,7 +181,7 @@ namespace PnP.Core.Admin.Test.SharePoint
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                var url = context.GetSharePointAdmin().GetTenantAppCatalogUri();
+                var url = context.GetAppManager().GetTenantAppCatalogUri();
                 Assert.IsTrue(url != null);
             }
         }
@@ -192,7 +192,7 @@ namespace PnP.Core.Admin.Test.SharePoint
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                var tenantAppCatalogCreated = context.GetSharePointAdmin().EnsureTenantAppCatalog();
+                var tenantAppCatalogCreated = context.GetAppManager().EnsureTenantAppCatalog();
                 Assert.IsFalse(tenantAppCatalogCreated);
             }
         }

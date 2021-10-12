@@ -1,5 +1,4 @@
-﻿using Microsoft.Extensions.Logging;
-using PnP.Core.Model;
+﻿using PnP.Core.Model;
 using PnP.Core.Model.Security;
 using PnP.Core.Model.SharePoint;
 using PnP.Core.QueryModel;
@@ -193,107 +192,6 @@ namespace PnP.Core.Admin.Model.SharePoint
         public bool IsCurrentUserTenantAdmin()
         {
             return IsCurrentUserTenantAdminAsync().GetAwaiter().GetResult();
-        }
-
-        public async Task<Uri> GetTenantAppCatalogUriAsync()
-        {
-            var result = await (context.Web as Web).RawRequestAsync(new ApiCall("_api/SP_TenantSettings_Current", ApiType.SPORest), HttpMethod.Get).ConfigureAwait(false);
-
-            var root = JsonDocument.Parse(result.Json).RootElement.GetProperty("d").GetProperty("CorporateCatalogUrl");
-
-            if (root.ValueKind == JsonValueKind.String)
-            {
-                return new Uri(root.GetString());
-            }
-
-            return null;
-        }
-
-        public Uri GetTenantAppCatalogUri()
-        {
-            return GetTenantAppCatalogUriAsync().GetAwaiter().GetResult();
-        }
-
-        public async Task<bool> EnsureTenantAppCatalogAsync()
-        {
-            var result = await (context.Web as Web).RawRequestAsync(new ApiCall("_api/web/EnsureTenantAppCatalog(callerId='pnpcoresdk')", ApiType.SPORest), HttpMethod.Post).ConfigureAwait(false);
-            var root = JsonDocument.Parse(result.Json).RootElement.GetProperty("d").GetProperty("EnsureTenantAppCatalog");
-            return root.GetBoolean();
-        }
-
-        public bool EnsureTenantAppCatalog()
-        {
-            return EnsureTenantAppCatalogAsync().GetAwaiter().GetResult();
-        }
-
-        public async Task<List<ISiteCollection>> GetSiteCollectionsAsync(bool ignoreUserIsSharePointAdmin = false)
-        {
-            return await SiteCollectionEnumerator.GetAsync(context, ignoreUserIsSharePointAdmin).ConfigureAwait(false);
-        }
-
-        public List<ISiteCollection> GetSiteCollections(bool ignoreUserIsSharePointAdmin = false)
-        {
-            return GetSiteCollectionsAsync(ignoreUserIsSharePointAdmin).GetAwaiter().GetResult();
-        }
-
-        public async Task<List<ISiteCollectionWithDetails>> GetSiteCollectionsWithDetailsAsync()
-        {
-            return await SiteCollectionEnumerator.GetWithDetailsViaTenantAdminHiddenListAsync(context).ConfigureAwait(false);
-        }
-
-        public List<ISiteCollectionWithDetails> GetSiteCollectionsWithDetails()
-        {
-            return GetSiteCollectionsWithDetailsAsync().GetAwaiter().GetResult();
-        }
-
-        public async Task<List<IRecycledSiteCollection>> GetRecycledSiteCollectionsAsync()
-        {
-            return await SiteCollectionEnumerator.GetRecycledWithDetailsViaTenantAdminHiddenListAsync(context).ConfigureAwait(false);
-        }
-
-        public List<IRecycledSiteCollection> GetRecycledSiteCollections()
-        {
-            return GetRecycledSiteCollectionsAsync().GetAwaiter().GetResult();
-        }
-
-        public async Task<PnPContext> CreateSiteCollectionAsync(CommonSiteOptions siteToCreate, SiteCreationOptions creationOptions = null)
-        {
-            return await SiteCollectionCreator.CreateSiteCollectionAsync(context, siteToCreate, creationOptions).ConfigureAwait(false);
-        }
-
-        public PnPContext CreateSiteCollection(CommonSiteOptions siteToCreate, SiteCreationOptions creationOptions = null)
-        {
-            return CreateSiteCollectionAsync(siteToCreate, creationOptions).GetAwaiter().GetResult();
-        }
-
-        public async Task RecycleSiteCollectionAsync(Uri siteToDelete, string webTemplate)
-        {
-            await SiteCollectionManager.RecycleSiteCollectionAsync(context, siteToDelete, webTemplate).ConfigureAwait(false);
-        }
-
-        public void RecycleSiteCollection(Uri siteToDelete, string webTemplate)
-        {
-            RecycleSiteCollectionAsync(siteToDelete, webTemplate).GetAwaiter().GetResult();
-        }
-
-        public void RestoreSiteCollection(Uri siteToRestore)
-        {
-            RestoreSiteCollectionAsync(siteToRestore).GetAwaiter().GetResult();
-        }
-
-        public async Task RestoreSiteCollectionAsync(Uri siteToRestore)
-        {
-            await SiteCollectionManager.RestoreSiteCollectionAsync(context, siteToRestore).ConfigureAwait(false);
-        }
-
-        public async Task DeleteSiteCollectionAsync(Uri siteToDelete, string webTemplate)
-        {
-            await SiteCollectionManager.DeleteSiteCollectionAsync(context, siteToDelete, webTemplate).ConfigureAwait(false);
-        }
-
-        public void DeleteSiteCollection(Uri siteToDelete, string webTemplate)
-        {
-            DeleteSiteCollectionAsync(siteToDelete, webTemplate).GetAwaiter().GetResult();
         }
     }
 }

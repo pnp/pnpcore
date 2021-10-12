@@ -1,4 +1,4 @@
-# Sites
+# Site Collections
 
 The Core SDK Admin library provides SharePoint Admin security related APIs for enumerating, creating, updating and deleting site collections.
 
@@ -20,7 +20,7 @@ Below sample shows how to use the `GetSiteCollections` methods:
 
 ```csharp
 // Get a list of site collections
-var siteCollections = await context.GetSharePointAdmin().GetSiteCollectionsAsync();
+var siteCollections = await context.GetSiteCollectionManager().GetSiteCollectionsAsync();
 ```
 
 ### Getting all site collections with details
@@ -43,5 +43,5 @@ Below sample shows how to use the `GetSiteCollectionsWithDetails` methods:
 
 ```csharp
 // Get a list of site collections with details about each site collection
-var siteCollections = await context.GetSharePointAdmin().GetSiteCollectionsWithDetailsAsync();
+var siteCollections = await context.GetSiteCollectionManager().GetSiteCollectionsWithDetailsAsync();
 ```
