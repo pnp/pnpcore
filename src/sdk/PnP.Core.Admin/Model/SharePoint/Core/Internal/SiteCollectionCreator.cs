@@ -60,10 +60,11 @@ namespace PnP.Core.Admin.Model.SharePoint
 
             payload.Add("HubSiteId", siteToCreate.HubSiteId);
 
+            // Sensitivity labels have replaced classification (see https://docs.microsoft.com/en-us/microsoft-365/compliance/sensitivity-labels-teams-groups-sites?view=o365-worldwide#classic-azure-ad-group-classification)
+            // once enabled. Therefore we prefer setting a sensitivity label id over classification when specified.
             if (siteToCreate.SensitivityLabelId != Guid.Empty)
             {
                 payload.Add("SensitivityLabel", siteToCreate.SensitivityLabelId);
-                //payload["Classification"] = siteCollectionCreationInformation.SensitivityLabel;
             }
             else
             {
@@ -102,9 +103,11 @@ namespace PnP.Core.Admin.Model.SharePoint
                     { "Description", siteToCreate.Description ?? "" }
                 };
 
+                // Sensitivity labels have replaced classification (see https://docs.microsoft.com/en-us/microsoft-365/compliance/sensitivity-labels-teams-groups-sites?view=o365-worldwide#classic-azure-ad-group-classification)
+                // once enabled. Therefore we prefer setting a sensitivity label id over classification when specified. Also note that for setting sensitivity labels on 
+                // group connected sites one needs to have at least one Azure AD P1 license. See https://docs.microsoft.com/en-us/azure/active-directory/enterprise-users/groups-assign-sensitivity-labels
                 if (siteToCreate.SensitivityLabelId != Guid.Empty)
                 {
-                    //optionalParams.Add("Classification", siteCollectionCreationInformation.SensitivityLabel ?? "");
                     creationOptionsValues.Add($"SensitivityLabel:{siteToCreate.SensitivityLabelId}");
                 }
                 else

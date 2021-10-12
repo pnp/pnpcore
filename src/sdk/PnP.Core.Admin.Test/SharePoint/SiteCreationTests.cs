@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using PnP.Core.Admin.Model.Microsoft365;
 using PnP.Core.Admin.Model.SharePoint;
 using PnP.Core.Admin.Test.Utilities;
 using PnP.Core.Model;
@@ -121,27 +122,41 @@ namespace PnP.Core.Admin.Test.SharePoint
                 using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
                 {
 
+                    // Get a list of available sensitivity labels
+                    var labels = await SensitivityLabelManager.GetLabelsUsingDelegatedPermissionsAsync(context);
+                    var siteLabel = labels.FirstOrDefault(p => p.ApplicableTo.Contains("site"));
+                    Guid sensitivityLabelId = Guid.Empty;
+
                     // Persist the used site url as we need to have the same url when we run an offline test
                     Uri siteUrl;
                     if (!TestCommon.Instance.Mocking)
                     {
                         siteUrl = new Uri($"https://{context.Uri.DnsSafeHost}/sites/pnpcoresdktestcommsite{Guid.NewGuid().ToString().Replace("-", "")}");
+
+                        if (siteLabel != null)
+                        {
+                            sensitivityLabelId = siteLabel.Id;
+                        }
+
                         Dictionary<string, string> properties = new Dictionary<string, string>
                         {
-                            { "SiteUrl", siteUrl.ToString() }
+                            { "SiteUrl", siteUrl.ToString() },
+                            { "SensitivityLabelId", sensitivityLabelId.ToString() }
                         };
+
                         TestManager.SaveProperties(context, properties);
                     }
                     else
                     {
                         siteUrl = new Uri(TestManager.GetProperties(context)["SiteUrl"]);
+                        sensitivityLabelId = Guid.Parse(TestManager.GetProperties(context)["SensitivityLabelId"]);
                     }
 
                     communicationSiteToCreate = new CommunicationSiteOptions(siteUrl, "PnP Core SDK Test")
                     {
                         Description = "This is a test site collection",
                         Language = Language.English,
-                        SensitivityLabelId = Guid.Parse("fc60ee7c-2723-44c1-a0ef-296c3c36babc"),
+                        SensitivityLabelId = sensitivityLabelId,
                         ShareByEmailEnabled = true,
                     };
 
