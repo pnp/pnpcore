@@ -121,7 +121,8 @@ namespace PnP.Core.Test.SharePoint
                     p => p.LastItemUserModifiedDate,
                     p => p.LogoAlignment,
                     p => p.MasterUrl,
-                    p => p.MegaMenuEnabled
+                    p => p.MegaMenuEnabled,
+                    p => p.HasUniqueRoleAssignments
                     );
                 
                 var web = context.Web;
@@ -136,6 +137,7 @@ namespace PnP.Core.Test.SharePoint
                 Assert.AreEqual(LogoAlignment.Left, web.LogoAlignment);
                 Assert.AreNotEqual("", web.MasterUrl);
                 Assert.IsFalse(web.MegaMenuEnabled);
+                Assert.IsTrue(web.HasUniqueRoleAssignments);
             }
         }
 

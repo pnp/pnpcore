@@ -310,7 +310,10 @@ namespace PnP.Core.Model.SharePoint
         public ISharePointGroup AssociatedVisitorGroup { get => GetModelValue<ISharePointGroup>(); }
 
         public IRoleAssignmentCollection RoleAssignments { get => GetModelCollectionValue<IRoleAssignmentCollection>(); }
+
         public IRoleDefinitionCollection RoleDefinitions { get => GetModelCollectionValue<IRoleDefinitionCollection>(); }
+
+        public bool HasUniqueRoleAssignments { get => GetValue<bool>(); set => SetValue(value); }
 
         [KeyProperty(nameof(Id))]
         public override object Key { get => Id; set => Id = Guid.Parse(value.ToString()); }

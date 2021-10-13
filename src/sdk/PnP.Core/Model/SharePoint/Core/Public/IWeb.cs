@@ -512,6 +512,11 @@ namespace PnP.Core.Model.SharePoint
         public IRoleAssignmentCollection RoleAssignments { get; }
 
         /// <summary>
+        /// Returns if the list has unique role assignments
+        /// </summary>
+        public bool HasUniqueRoleAssignments { get; }
+
+        /// <summary>
         /// A special property used to add an asterisk to a $select statement
         /// </summary>
         public object All { get; }
