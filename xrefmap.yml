@@ -20887,6 +20887,19 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IListItem.GetRoleDefinitionsAsync
   nameWithType: IListItem.GetRoleDefinitionsAsync
+- uid: PnP.Core.Model.SharePoint.IListItem.HasUniqueRoleAssignments
+  name: HasUniqueRoleAssignments
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_HasUniqueRoleAssignments
+  commentId: P:PnP.Core.Model.SharePoint.IListItem.HasUniqueRoleAssignments
+  fullName: PnP.Core.Model.SharePoint.IListItem.HasUniqueRoleAssignments
+  nameWithType: IListItem.HasUniqueRoleAssignments
+- uid: PnP.Core.Model.SharePoint.IListItem.HasUniqueRoleAssignments*
+  name: HasUniqueRoleAssignments
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_HasUniqueRoleAssignments_
+  commentId: Overload:PnP.Core.Model.SharePoint.IListItem.HasUniqueRoleAssignments
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IListItem.HasUniqueRoleAssignments
+  nameWithType: IListItem.HasUniqueRoleAssignments
 - uid: PnP.Core.Model.SharePoint.IListItem.Id
   name: Id
   href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_Id
