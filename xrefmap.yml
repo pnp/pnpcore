@@ -29778,6 +29778,19 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IWeb.GetUserByIdBatchAsync
   nameWithType: IWeb.GetUserByIdBatchAsync
+- uid: PnP.Core.Model.SharePoint.IWeb.HasUniqueRoleAssignments
+  name: HasUniqueRoleAssignments
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_HasUniqueRoleAssignments
+  commentId: P:PnP.Core.Model.SharePoint.IWeb.HasUniqueRoleAssignments
+  fullName: PnP.Core.Model.SharePoint.IWeb.HasUniqueRoleAssignments
+  nameWithType: IWeb.HasUniqueRoleAssignments
+- uid: PnP.Core.Model.SharePoint.IWeb.HasUniqueRoleAssignments*
+  name: HasUniqueRoleAssignments
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_HasUniqueRoleAssignments_
+  commentId: Overload:PnP.Core.Model.SharePoint.IWeb.HasUniqueRoleAssignments
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IWeb.HasUniqueRoleAssignments
+  nameWithType: IWeb.HasUniqueRoleAssignments
 - uid: PnP.Core.Model.SharePoint.IWeb.HeaderEmphasis
   name: HeaderEmphasis
   href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_HeaderEmphasis
