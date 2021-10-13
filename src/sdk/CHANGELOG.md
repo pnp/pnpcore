@@ -16,7 +16,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 ### Changed
 
 - Remove non linq get query as it caused issues when loading additional properties on an added file #570 [jansenbe - Bert Jansen]
-- Added `HasUniqueRoleAssignments` property on `IWeb` #575 [jansenbe - Bert Jansen]
+- Added `HasUniqueRoleAssignments` property on `IWeb` and `IListItem` #575 [jansenbe - Bert Jansen]
 
 ## [1.4.0]
 

@@ -512,7 +512,7 @@ namespace PnP.Core.Model.SharePoint
         public IRoleAssignmentCollection RoleAssignments { get; }
 
         /// <summary>
-        /// Returns if the list has unique role assignments
+        /// Returns if the web has unique role assignments
         /// </summary>
         public bool HasUniqueRoleAssignments { get; }
 

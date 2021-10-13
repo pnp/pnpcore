@@ -231,6 +231,8 @@ namespace PnP.Core.Model.SharePoint
         [KeyProperty(nameof(Id))]
         public override object Key { get => Id; set => Id = (int)value; }
 
+        public bool HasUniqueRoleAssignments { get => GetValue<bool>(); set => SetValue(value); }
+
         public IRoleAssignmentCollection RoleAssignments { get => GetModelCollectionValue<IRoleAssignmentCollection>(); }
 
         // Not in public interface as Comments is not an expandable property in REST

@@ -93,6 +93,11 @@ namespace PnP.Core.Model.SharePoint
         public Guid UniqueId { get; }
 
         /// <summary>
+        /// Returns if the list item has unique role assignments
+        /// </summary>
+        public bool HasUniqueRoleAssignments { get; }
+
+        /// <summary>
         /// Role assignments of the list item
         /// </summary>
         public IRoleAssignmentCollection RoleAssignments { get; }
