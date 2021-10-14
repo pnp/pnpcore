@@ -19707,6 +19707,19 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IList.IsApplicationList
   nameWithType: IList.IsApplicationList
+- uid: PnP.Core.Model.SharePoint.IList.ItemCount
+  name: ItemCount
+  href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_ItemCount
+  commentId: P:PnP.Core.Model.SharePoint.IList.ItemCount
+  fullName: PnP.Core.Model.SharePoint.IList.ItemCount
+  nameWithType: IList.ItemCount
+- uid: PnP.Core.Model.SharePoint.IList.ItemCount*
+  name: ItemCount
+  href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_ItemCount_
+  commentId: Overload:PnP.Core.Model.SharePoint.IList.ItemCount
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IList.ItemCount
+  nameWithType: IList.ItemCount
 - uid: PnP.Core.Model.SharePoint.IList.Items
   name: Items
   href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_Items
