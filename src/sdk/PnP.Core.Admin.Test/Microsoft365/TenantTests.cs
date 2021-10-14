@@ -84,5 +84,24 @@ namespace PnP.Core.Admin.Test.Microsoft365
                 TestCommon.Instance.UseApplicationPermissions = false;
             }
         }
+
+        [TestMethod]
+        public async Task GetSensitivityLabelsUsingApplicationPermissions()
+        {
+            //TestCommon.Instance.Mocking = false;
+            TestCommon.Instance.UseApplicationPermissions = true;
+            try
+            {
+                using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+                {
+                    var labels = await SensitivityLabelManager.GetLabelsUsingApplicationPermissionsAsync(context);
+                    Assert.IsTrue(labels.Any());
+                }
+            }
+            finally
+            {
+                TestCommon.Instance.UseApplicationPermissions = false;
+            }
+        }
     }
 }

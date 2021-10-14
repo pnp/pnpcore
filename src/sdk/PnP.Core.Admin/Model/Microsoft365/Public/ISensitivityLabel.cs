@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace PnP.Core.Admin.Model.Microsoft365
 {
@@ -19,24 +18,24 @@ namespace PnP.Core.Admin.Model.Microsoft365
         public string Name {  get; }
 
         /// <summary>
-        /// Display name of the sensitivity label
-        /// </summary>
-        public string DisplayName {  get; }
-
-        /// <summary>
         /// Description of the sensitivity label
         /// </summary>
         public string Description {  get; }
 
         /// <summary>
-        /// Is this the default sensitivity label?
+        /// Is this the sensitivity label active?
         /// </summary>
-        public bool IsDefault { get; }
+        public bool IsActive { get; }
 
         /// <summary>
-        /// To what services is this label applicable (email, site, unifiedgroup)
+        /// Tooltip to use if this label is used in a user interface
         /// </summary>
-        public List<string> ApplicableTo {  get; }
+        public string Tooltip { get; }
+
+        /// <summary>
+        /// The sensitivity setting for this label
+        /// </summary>
+        public int Sensitivity {  get; }
         
     }
 }

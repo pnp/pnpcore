@@ -124,7 +124,7 @@ namespace PnP.Core.Admin.Test.SharePoint
 
                     // Get a list of available sensitivity labels
                     var labels = await SensitivityLabelManager.GetLabelsUsingDelegatedPermissionsAsync(context);
-                    var siteLabel = labels.FirstOrDefault(p => p.ApplicableTo.Contains("site"));
+                    var siteLabel = labels.FirstOrDefault();
                     Guid sensitivityLabelId = Guid.Empty;
 
                     // Persist the used site url as we need to have the same url when we run an offline test

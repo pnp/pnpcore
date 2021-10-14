@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace PnP.Core.Admin.Model.Microsoft365
 {
@@ -9,12 +8,12 @@ namespace PnP.Core.Admin.Model.Microsoft365
 
         public string Name { get; set; }
 
-        public string DisplayName { get; set; }
-
         public string Description { get; set; }
 
-        public bool IsDefault { get; set; }
+        public bool IsActive { get; set; }
 
-        public List<string> ApplicableTo { get; set; }
+        public string Tooltip { get; set; }
+
+        public int Sensitivity { get; set; }
     }
 }

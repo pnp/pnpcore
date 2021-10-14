@@ -1,9 +1,8 @@
-﻿using PnP.Core.Model.SharePoint;
+﻿using PnP.Core.Model;
+using PnP.Core.Model.SharePoint;
 using PnP.Core.Services;
-using System;
 using System.Collections.Generic;
 using System.Net.Http;
-using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 
@@ -15,7 +14,7 @@ namespace PnP.Core.Admin.Model.Microsoft365
         {
             if (await context.GetMicrosoft365Admin().AccessTokenUsesApplicationPermissionsAsync().ConfigureAwait(false))
             {
-                throw new NotSupportedException("PnP Core Admin library is still in development, this feature is coming");
+                return await GetLabelsUsingApplicationPermissionsAsync(context).ConfigureAwait(false);
             }
             else
             {
@@ -25,7 +24,19 @@ namespace PnP.Core.Admin.Model.Microsoft365
 
         internal static async Task<List<ISensitivityLabel>> GetLabelsUsingDelegatedPermissionsAsync(PnPContext context)
         {
-            var labels = await (context.Web as Web).RawRequestAsync(new ApiCall("me/informationProtection/sensitivityLabels", ApiType.GraphBeta), HttpMethod.Get).ConfigureAwait(false);
+            return await GetLabelsImplementationAsync(context, "me/informationprotection/policy/labels").ConfigureAwait(false);   
+        }
+
+        internal static async Task<List<ISensitivityLabel>> GetLabelsUsingApplicationPermissionsAsync(PnPContext context)
+        {
+            return await GetLabelsImplementationAsync(context, "informationprotection/policy/labels").ConfigureAwait(false);
+        }
+
+        private static async Task<List<ISensitivityLabel>> GetLabelsImplementationAsync(PnPContext context, string apiRequest)
+        {
+            // This API requires the user-agent to be explicetely passed in batch requests
+            var labels = await (context.Web.WithHeaders(new Dictionary<string, string>() { { "User-Agent", context.GlobalOptions.HttpUserAgent } }) as Web)
+                .RawRequestAsync(new ApiCall(apiRequest, ApiType.GraphBeta), HttpMethod.Get).ConfigureAwait(false);
 
             var json = JsonSerializer.Deserialize<JsonElement>(labels.Json);
 
@@ -40,16 +51,11 @@ namespace PnP.Core.Admin.Model.Microsoft365
                     {
                         Id = value.GetProperty("id").GetGuid(),
                         Name = value.GetProperty("name").GetString(),
-                        DisplayName = value.GetProperty("displayName").GetString(),
                         Description = value.GetProperty("description").GetString(),
-                        IsDefault = value.GetProperty("isDefault").GetBoolean(),
+                        IsActive = value.GetProperty("isActive").GetBoolean(),
+                        Sensitivity = value.GetProperty("sensitivity").GetInt32(),
+                        Tooltip = value.GetProperty("tooltip").GetString()
                     };
-
-                    var appliesTo = value.GetProperty("applicableTo").GetString();
-                    if (!string.IsNullOrEmpty(appliesTo))
-                    {
-                        label.ApplicableTo = new List<string>(appliesTo.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries));
-                    }
 
                     sensitivityLabels.Add(label);
                 }
@@ -59,4 +65,5 @@ namespace PnP.Core.Admin.Model.Microsoft365
             return sensitivityLabels;
         }
     }
+
 }
