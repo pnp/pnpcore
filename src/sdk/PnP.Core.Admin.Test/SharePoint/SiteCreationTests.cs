@@ -300,7 +300,7 @@ namespace PnP.Core.Admin.Test.SharePoint
                     {
                         siteUrl = new Uri(TestManager.GetProperties(context)["SiteUrl"]);
                         owner = TestManager.GetProperties(context)["SiteOwner"];
-                    }                    
+                    }
 
                     communicationSiteToCreate = new CommunicationSiteOptions(siteUrl, "PnP Core SDK Test")
                     {
@@ -447,7 +447,7 @@ namespace PnP.Core.Admin.Test.SharePoint
                     {
                         Description = "This is a test site collection",
                         Language = Language.English,
-                        IsPublic= true,
+                        IsPublic = true,
                     };
 
 
@@ -548,6 +548,79 @@ namespace PnP.Core.Admin.Test.SharePoint
                             Assert.IsTrue(web.Url == classicSite.Url);
                             Assert.IsTrue(web.Title == classicSite.Title);
                             Assert.IsTrue(web.Language == (int)classicSite.Language);
+                        }
+                    }
+                }
+            }
+            finally
+            {
+                TestCommon.Instance.UseApplicationPermissions = false;
+                using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+                {
+                    context.GetSiteCollectionManager().DeleteSiteCollection(classicSite.Url, classicSite.WebTemplate);
+                }
+
+            }
+        }
+
+        [TestMethod]
+        public async Task CreateClassicSiteUsingApplicationPermissions()
+        {
+            //TestCommon.Instance.Mocking = false;
+            TestCommon.Instance.UseApplicationPermissions = true;
+
+            ClassicSiteOptions classicSite = null;
+
+            // Create the site collection
+            try
+            {
+                using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.NoGroupTestSite))
+                {
+                    using (var tenantAdminContext = await context.GetSharePointAdmin().GetTenantAdminCenterContextAsync())
+                    {
+                        // Determine the user to set as owner
+                        await context.Web.LoadAsync(p => p.AssociatedOwnerGroup.QueryProperties(p => p.Users));
+                        var user = context.Web.AssociatedOwnerGroup.Users.AsRequested().FirstOrDefault();
+
+                        // Persist the used site url as we need to have the same url when we run an offline test
+                        Uri siteUrl;
+                        string owner = user.LoginName;
+                        if (!TestCommon.Instance.Mocking)
+                        {
+                            siteUrl = new Uri($"https://{context.Uri.DnsSafeHost}/sites/pnpcoresdktestclassicsite{Guid.NewGuid().ToString().Replace("-", "")}");
+                            Dictionary<string, string> properties = new Dictionary<string, string>
+                            {
+                                { "SiteUrl", siteUrl.ToString() },
+                                { "SiteOwner", owner }
+                            };
+                            TestManager.SaveProperties(context, properties);
+                        }
+                        else
+                        {
+                            siteUrl = new Uri(TestManager.GetProperties(context)["SiteUrl"]);
+                            owner = TestManager.GetProperties(context)["SiteOwner"];
+                        }
+
+                        classicSite = new ClassicSiteOptions(siteUrl, "PnP Core SDK Test", "STS#0", owner, Language.English,
+                            Model.SharePoint.TimeZone.UTCPLUS0100_BRUSSELS_COPENHAGEN_MADRID_PARIS);
+
+                        SiteCreationOptions siteCreationOptions = new SiteCreationOptions()
+                        {
+                            UsingApplicationPermissions = false
+                        };
+
+                        using (var newSiteContext = tenantAdminContext.GetSiteCollectionManager().CreateSiteCollection(classicSite, siteCreationOptions))
+                        {
+                            var web = await newSiteContext.Web.GetAsync(p => p.Url, p => p.Title, p => p.Description, p => p.Language);
+                            Assert.IsTrue(web.Url == classicSite.Url);
+                            Assert.IsTrue(web.Title == classicSite.Title);
+                            Assert.IsTrue(web.Language == (int)classicSite.Language);
+                        }
+
+                        if (context.Mode == TestMode.Record)
+                        {
+                            // Add a little delay between creation and deletion
+                            await Task.Delay(TimeSpan.FromSeconds(15));
                         }
                     }
                 }
