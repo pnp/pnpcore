@@ -5379,6 +5379,18 @@
     },
     {
       "type": "Conceptual",
+      "source_relative_path": "using-the-sdk/admin-m365-informationprotection.md",
+      "output": {
+        ".html": {
+          "relative_path": "using-the-sdk/admin-m365-informationprotection.html",
+          "hash": "P8M5m1MRYe3OG0NtMATqgg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
       "source_relative_path": "using-the-sdk/admin-m365-multigeo.md",
       "output": {
         ".html": {
@@ -5443,7 +5455,7 @@
       "output": {
         ".html": {
           "relative_path": "using-the-sdk/admin-sharepoint-sites.html",
-          "hash": "/eoLxQDmQb6bMHK0bxwzGQ=="
+          "hash": "D6wCzcbeZoF+v9IdVtHTRQ=="
         }
       },
       "is_incremental": false,
@@ -6031,7 +6043,7 @@
       "output": {
         ".html": {
           "relative_path": "using-the-sdk/toc.html",
-          "hash": "T4igHqW/2MIgnQI8bcARow=="
+          "hash": "NN8afzZiOH6/Jc7nra4ZGw=="
         }
       },
       "is_incremental": false,
@@ -6088,7 +6100,7 @@
         "ConceptualDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build",
-          "total_file_count": 78,
+          "total_file_count": 79,
           "skipped_file_count": 0
         },
         "ManagedReferenceDocumentProcessor": {

@@ -132,6 +132,170 @@ var siteCollections = await context.GetSiteCollectionManager().GetSiteCollection
 <pre><code class="lang-csharp">// Get a list of site collections with details about each site collection
 var siteCollections = await context.GetSiteCollectionManager().GetSiteCollectionsWithDetailsAsync();
 </code></pre>
+<h2 id="creating-site-collections">Creating site collections</h2>
+<p>In SharePoint site collections can be split up into three categories:</p>
+<ul>
+<li>Modern, non group connected, sites (e.g. communication site)</li>
+<li>Modern group connected site collections (e.g. team site)</li>
+<li>Classic site collections (e.g. classic team site, classic publishing portal)</li>
+</ul>
+<p>It's highly recommended to use one of the &quot;modern&quot; site collections as these offer more features and are faster to provision. When it comes to provisioning site collections then the site collection category and used authentication approach determine how a site collection is create and how long that will take. For the PnP Core SDK user all site collections are created via one of the <code>CreateSiteCollection</code> methods, but it's good to understand the needed <code>Options</code> as outlined in below table.</p>
+<table>
+<thead>
+<tr>
+<th>Category</th>
+<th>Delegated permissions</th>
+<th>Application permissions</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Modern, no group</td>
+<td>Use <code>CommunicationSiteOptions</code> or <code>TeamSiteWithoutGroupOptions</code></td>
+<td>Use <code>CommunicationSiteOptions</code> or <code>TeamSiteWithoutGroupOptions</code>. The <code>Owner</code> property must be set.</td>
+</tr>
+<tr>
+<td>Modern, with group</td>
+<td>Use <code>TeamSiteOptions</code></td>
+<td>coming soon</td>
+</tr>
+<tr>
+<td>Classic site</td>
+<td>Use <code>ClassicSiteOptions</code></td>
+<td>Use <code>ClassicSiteOptions</code></td>
+</tr>
+</tbody>
+</table>
+<p>All provisioning flows will only return once the site collection is done, for the modern sites this is a matter of seconds, for classic sites this can take up to 10-15 minutes.</p>
+<h3 id="basic-site-collection-creation-flow">Basic site collection creation flow</h3>
+<p>The code structure to create a site collection is identical, regardless of which site you're creating or which type of permission you're using:</p>
+<pre><code class="lang-csharp">var communicationSiteToCreate = new CommunicationSiteOptions(new Uri(&quot;https://contoso.sharepoint.com/sites/sitename&quot;), &quot;My communication site&quot;)
+{
+    Description = &quot;My site description&quot;,
+    Language = Language.English,
+};
+
+using (var newSiteContext = await context.GetSiteCollectionManager().CreateSiteCollectionAsync(communicationSiteToCreate))
+{
+    // Do work on the created site collection via the newSiteContext
+}
+</code></pre>
+<p>So depending on what <code>Options</code> object you pass into the <code>CreateSiteCollection</code> method a different type of site collection will be created. The constructors of the respective <code>Options</code> classes will ensure you're providing the minimally needed information needed to create the site collection, additional input can always be provided via the other <code>Options</code> class attributes.</p>
+<h3 id="controlling-the-site-collection-creation-behavior">Controlling the site collection creation behavior</h3>
+<p>The <code>CreateSiteCollection</code> methods accept an optional <code>SiteCreationOptions</code> instance that you can use to control the site collection creation flow. Following properties can be set:</p>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Default</th>
+<th>Applies to</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>WaitAfterCreation</code></td>
+<td>not set</td>
+<td>Modern + Classic</td>
+<td>Defines the wait time in seconds after the site collection creation call returns. If specified this overrides the <code>WaitForAsyncProvisioning</code> setting</td>
+</tr>
+<tr>
+<td><code>WaitAfterStatusCheck</code></td>
+<td>10</td>
+<td>Modern</td>
+<td>The modern site provisioning might seldomly be queued, if so this property determines how many seconds the code waits between queue checks.</td>
+</tr>
+<tr>
+<td><code>MaxStatusChecks</code></td>
+<td>12</td>
+<td>Modern</td>
+<td>The modern site provisioning might seldomly be queued, if so this property determines how often the queue will be checked</td>
+</tr>
+<tr>
+<td><code>WaitForAsyncProvisioning</code></td>
+<td>not set</td>
+<td>Modern</td>
+<td>Modern sites are provisioned very fast, but there's an async completion that needs to happen. If you want to wait for the async provisioning logic to complete then set this value to <code>true</code></td>
+</tr>
+<tr>
+<td><code>WaitAfterAsyncProvisioningStatusCheck</code></td>
+<td>15</td>
+<td>Modern</td>
+<td>If <code>WaitForAsyncProvisioning</code> is <code>true</code> then this property determines the wait time between the async provisioning status checks</td>
+</tr>
+<tr>
+<td><code>MaxAsyncProvisioningStatusChecks</code></td>
+<td>80</td>
+<td>Modern</td>
+<td>If <code>WaitForAsyncProvisioning</code> is <code>true</code> then this property determines the maximum amount of async provisioning status checks</td>
+</tr>
+<tr>
+<td><code>UsingApplicationPermissions</code></td>
+<td>Automatic check</td>
+<td>Modern + Classic</td>
+<td>By default <code>CreateSiteCollection</code> methods will check if application permissions are used, if you need to create multiple site collections your code can use one of the  <code>AccessTokenUsesApplicationPermissions</code> methods store the outcome in this property. This way the check only happens once.</td>
+</tr>
+</tbody>
+</table>
+<p>Below sample creates a communication site and waits for the async provisioning to complete:</p>
+<pre><code class="lang-csharp">var communicationSiteToCreate = new CommunicationSiteOptions(new Uri(&quot;https://contoso.sharepoint.com/sites/sitename&quot;), &quot;My communication site&quot;)
+{
+    Description = &quot;My site description&quot;,
+    Language = Language.English,
+};
+
+SiteCreationOptions siteCreationOptions = new SiteCreationOptions()
+{
+    WaitForAsyncProvisioning = true
+};
+
+using (var newSiteContext = await context.GetSiteCollectionManager().CreateSiteCollectionAsync(communicationSiteToCreate, siteCreationOptions))
+{
+    // Do work on the created site collection via the newSiteContext
+}
+</code></pre>
+<h2 id="recycling-site-collections">Recycling site collections</h2>
+<p>A site collection can be recycled and then later on permanently deleted or restored. Recycling site collection is done using one of the <code>RecycleSiteCollection</code> methods:</p>
+<pre><code class="lang-csharp">// Get the web template of the site to recycle
+await contextOfSiteToDelete.Web.EnsurePropertiesAsync(p =&gt; p.WebTemplate, p =&gt; p.WebTemplateConfiguration);
+var webTemplate = $&quot;{contextOfSiteToDelete.Web.WebTemplate}#{contextOfSiteToDelete.Web.WebTemplateConfiguration}&quot;;
+
+// Recycle the site collection
+await context.GetSiteCollectionManager().RecycleSiteCollectionAsync(new Uri(&quot;https://contoso.sharepoint.com/sites/sitename&quot;), webTemplate);
+</code></pre>
+<div class="NOTE">
+<h5>Note</h5>
+<p>When a group connected site is recycled then also the linked Microsoft 365 group is recycled</p>
+</div>
+<h2 id="enumerate-the-recycled-site-collections">Enumerate the recycled site collections</h2>
+<p>To get a list of recycled site collections you can use the <code>GetRecycledSiteCollections</code> methods:</p>
+<pre><code class="lang-csharp">var recycledSites = await context.GetSiteCollectionManager().GetRecycledSiteCollectionsAsync();
+foreach(var site in recycledSites)
+{
+    // restore the recycled site or permanently delete it
+}
+</code></pre>
+<h2 id="restoring-a-recycled-site-collection">Restoring a recycled site collection</h2>
+<p>A recycled site collection can be restored as long it still sits in the site collection recycle bin. To do so use the <code>RestoreSiteCollection</code> methods:</p>
+<pre><code class="lang-csharp">var recycledSites = await context.GetSiteCollectionManager().GetRecycledSiteCollectionsAsync();
+foreach(var site in recycledSites)
+{
+    // restore all recycled site collections
+    await context.GetSiteCollectionManager().RestoreSiteCollectionAsync(site.Url);
+}
+</code></pre>
+<h2 id="deleting-site-collections">Deleting site collections</h2>
+<p>A site collection can also deleted via one of the <code>DeleteSiteCollection</code> methods.</p>
+<div class="NOTE">
+<h5>Note</h5>
+<p>A group connected site will not be permanently deleted, calling the <code>DeleteSiteCollection</code> methods will recycle the site collection and group.</p>
+</div>
+<pre><code class="lang-csharp">// Get the web template of the site to delete
+await contextOfSiteToDelete.Web.EnsurePropertiesAsync(p =&gt; p.WebTemplate, p =&gt; p.WebTemplateConfiguration);
+var webTemplate = $&quot;{contextOfSiteToDelete.Web.WebTemplate}#{contextOfSiteToDelete.Web.WebTemplateConfiguration}&quot;;
+
+await context.GetSiteCollectionManager().DeleteSiteCollectionAsync(new Uri(&quot;https://contoso.sharepoint.com/sites/sitename&quot;), webTemplate);
+</code></pre>
 </article>
           </div>
           <div class="hidden-sm col-md-2" role="complementary">
