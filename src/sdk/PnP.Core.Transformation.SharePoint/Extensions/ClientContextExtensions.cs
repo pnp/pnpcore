@@ -1,25 +1,13 @@
-using PnP.Core.Transformation.SharePoint;
+using Microsoft.SharePoint.Client;
 using PnP.Core.Transformation.SharePoint.Model;
-using PnP.Core.Transformation.SharePoint.Utilities;
 using System;
 using System.Collections.Concurrent;
-using System.Collections.Generic;
 using System.Configuration;
 using System.Diagnostics;
-using System.IdentityModel.Tokens.Jwt;
-using System.IO;
 using System.Linq;
 using System.Net;
-using System.Net.Http;
 using System.Reflection;
-using System.Security.Cryptography.X509Certificates;
-using System.Text.Json;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using System.Xml;
-using Microsoft.Extensions.Logging;
-using Microsoft.SharePoint.Client;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace PnP.Core.Transformation.SharePoint.Extensions
 {

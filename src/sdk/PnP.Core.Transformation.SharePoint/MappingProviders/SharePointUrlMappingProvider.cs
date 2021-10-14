@@ -1,17 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading;
-using System.Threading.Tasks;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.SharePoint.Client;
 using PnP.Core.Transformation.Services.MappingProviders;
-using PnP.Core.Transformation.SharePoint.Services.Builder.Configuration;
 using PnP.Core.Transformation.SharePoint.Extensions;
-using PnP.Core.Transformation.Services.Core;
+using PnP.Core.Transformation.SharePoint.Services.Builder.Configuration;
+using System;
+using System.Linq;
+using System.Text.RegularExpressions;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace PnP.Core.Transformation.SharePoint.MappingProviders
 {

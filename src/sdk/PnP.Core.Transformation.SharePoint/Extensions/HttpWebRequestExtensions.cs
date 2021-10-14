@@ -1,8 +1,5 @@
 ﻿using Microsoft.SharePoint.Client;
 using PnP.Core.Transformation.SharePoint.Utilities;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace System.Net
 {

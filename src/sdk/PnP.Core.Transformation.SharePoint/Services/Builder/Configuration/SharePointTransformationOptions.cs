@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace PnP.Core.Transformation.SharePoint.Services.Builder.Configuration
 {
-    
+
     /// <summary>
     /// Options used for SharePoint transformations
     /// </summary>

@@ -1,5 +1,5 @@
-﻿using System;
-using PnP.Core.Services;
+﻿using PnP.Core.Services;
+using System;
 
 namespace PnP.Core.Transformation.Services.Core
 {

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace PnP.Core.Transformation.SharePoint.Publishing
+﻿namespace PnP.Core.Transformation.SharePoint.Publishing
 {
     /// <summary>
     /// Class for holding data properties for the fields that will be used in the page header

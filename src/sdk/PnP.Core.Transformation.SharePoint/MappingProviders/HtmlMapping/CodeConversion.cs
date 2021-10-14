@@ -1,20 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace PnP.Core.Transformation.SharePoint.MappingProviders.HtmlMapping
+﻿namespace PnP.Core.Transformation.SharePoint.MappingProviders.HtmlMapping
 {
     /// <summary>
     /// Methods to convert colors
     /// </summary>
-    public static class CodeConversion
+    internal static class CodeConversion
     {
         /// <summary>
         /// Map wiki table style to a RTE compatible style
         /// </summary>
         /// <param name="tableStyleCode">Code used for the wiki table style</param>
         /// <returns>RTE compatible table style</returns>
-        public static string TableStyleCodeToName(int tableStyleCode)
+        internal static string TableStyleCodeToName(int tableStyleCode)
         {
             //ms-rteTable-default: basic grid lines
             //ms-rteTable-0: no grid
@@ -67,7 +63,7 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders.HtmlMapping
         /// </summary>
         /// <param name="fontCode">Wiki font size code</param>
         /// <returns>RTE font size name</returns>
-        public static string FontCodeToName(int fontCode)
+        internal static string FontCodeToName(int fontCode)
         {
             switch (fontCode)
             {
@@ -114,7 +110,7 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders.HtmlMapping
         /// </summary>
         /// <param name="colorCode">Used color number</param>
         /// <returns>RTE color string</returns>
-        public static string ColorCodeToForegroundColorName(int colorCode)
+        internal static string ColorCodeToForegroundColorName(int colorCode)
         {
             return colorCode switch
             {
@@ -137,7 +133,7 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders.HtmlMapping
         /// </summary>
         /// <param name="themeCode">Theme color code</param>
         /// <returns>RTE color string</returns>
-        public static string ThemeCodeToForegroundColorName(int themeCode)
+        internal static string ThemeCodeToForegroundColorName(int themeCode)
         {
             return themeCode switch
             {
@@ -158,7 +154,7 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders.HtmlMapping
         /// </summary>
         /// <param name="colorCode">Used color number</param>
         /// <returns>RTE color string</returns>
-        public static string ColorCodeToBackgroundColorName(int colorCode)
+        internal static string ColorCodeToBackgroundColorName(int colorCode)
         {
             return colorCode switch
             {

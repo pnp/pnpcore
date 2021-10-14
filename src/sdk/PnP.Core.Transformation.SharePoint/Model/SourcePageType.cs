@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace PnP.Core.Transformation.SharePoint.Model
+﻿namespace PnP.Core.Transformation.SharePoint.Model
 {
     /// <summary>
     /// Defines the different types of pages supported

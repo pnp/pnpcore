@@ -1,25 +1,22 @@
-﻿using System;
-using System.Collections.Concurrent;
+﻿using Microsoft.Extensions.Caching.Memory;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
+using PnP.Core.Transformation.Services.MappingProviders;
+using PnP.Core.Transformation.SharePoint.Extensions;
+using PnP.Core.Transformation.SharePoint.MappingFiles.Publishing;
+using PnP.Core.Transformation.SharePoint.Publishing;
+using PnP.Core.Transformation.SharePoint.Services.Builder.Configuration;
+using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Text;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.Linq;
 using System.Xml.Schema;
 using System.Xml.Serialization;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
-using Microsoft.Extensions.DependencyInjection;
-using PnP.Core.Transformation.Services.MappingProviders;
-using PnP.Core.Transformation.SharePoint.MappingFiles.Publishing;
-using PnP.Core.Transformation.SharePoint.Extensions;
-using System.Linq;
-using PnP.Core.Transformation.SharePoint.Publishing;
-using Microsoft.Extensions.Caching.Memory;
-using PnP.Core.Transformation.SharePoint.Services.Builder.Configuration;
-using PnP.Core.Transformation.Services.Core;
 
 namespace PnP.Core.Transformation.SharePoint.MappingProviders
 {

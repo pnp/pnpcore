@@ -3,7 +3,7 @@
     /// <summary>
     /// Specifies logical join types.
     /// </summary>
-    public enum LogicalJoinType
+    internal enum LogicalJoinType
     {
         /// <summary>
         /// Indicates an Or logical join.

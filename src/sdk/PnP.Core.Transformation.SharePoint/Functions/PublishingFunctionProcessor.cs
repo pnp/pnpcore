@@ -3,12 +3,10 @@ using Microsoft.Extensions.Options;
 using Microsoft.SharePoint.Client;
 using PnP.Core.Transformation.Services.Core;
 using PnP.Core.Transformation.SharePoint.Extensions;
-using PnP.Core.Transformation.SharePoint.MappingFiles.Publishing;
 using PnP.Core.Transformation.SharePoint.Services.Builder.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
-using System.Text;
 using System.Text.RegularExpressions;
 
 namespace PnP.Core.Transformation.SharePoint.Functions
@@ -24,11 +22,34 @@ namespace PnP.Core.Transformation.SharePoint.Functions
 #pragma warning disable CA1720
         public enum FieldType
         {
+            /// <summary>
+            /// String type
+            /// </summary>
             String = 0,
+
+            /// <summary>
+            /// Bool type
+            /// </summary>
             Bool = 1,
+
+            /// <summary>
+            /// Guid type
+            /// </summary>
             Guid = 2,
+
+            /// <summary>
+            /// Integer type
+            /// </summary>
             Integer = 3,
+
+            /// <summary>
+            /// Datetime type
+            /// </summary>
             DateTime = 4,
+
+            /// <summary>
+            /// User type
+            /// </summary>
             User = 5,
         }
 #pragma warning restore CA1720
@@ -41,8 +62,8 @@ namespace PnP.Core.Transformation.SharePoint.Functions
             get { return "{@Name}"; }
         }
 
-        private PublishingPageTransformation publishingPageTransformation;
-        private ClientContext sourceClientContext;
+        //private PublishingPageTransformation publishingPageTransformation;
+        //private ClientContext sourceClientContext;
         private ListItem page;
 
         private ILogger<FunctionProcessor> logger;

@@ -1,9 +1,4 @@
-﻿using PnP.Core.Services;
-using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace PnP.Core.Transformation.Services.Core
+﻿namespace PnP.Core.Transformation.Services.Core
 {
     /// <summary>
     /// Defines the options to transform a page into a SharePoint Online modern page

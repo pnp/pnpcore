@@ -3,7 +3,7 @@
     /// <summary>
     /// Element in KQL query
     /// </summary>
-    public class KQLElement
+    internal class KQLElement
     {
         /// <summary>
         /// Filter attribute name

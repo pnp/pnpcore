@@ -1,25 +1,23 @@
-﻿using Microsoft.Extensions.Caching.Memory;
+﻿using AngleSharp;
+using AngleSharp.Html.Parser;
+using AngleSharp.Io;
+using Microsoft.Extensions.Caching.Memory;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
+using Microsoft.SharePoint.Client;
+using PnP.Core.Transformation.Services.Core;
+using PnP.Core.Transformation.Services.MappingProviders;
+using PnP.Core.Transformation.SharePoint.Extensions;
+using PnP.Core.Transformation.SharePoint.Services;
+using PnP.Core.Transformation.SharePoint.Services.Builder.Configuration;
+using PnP.Core.Transformation.SharePoint.Utilities;
 using System;
 using System.Collections.Generic;
-using System.Text;
-using System.Text.RegularExpressions;
-using Microsoft.Extensions.DependencyInjection;
 using System.IO;
-using PnP.Core.Transformation.Services.MappingProviders;
-using PnP.Core.Transformation.SharePoint.Services;
-using Microsoft.Extensions.Options;
-using PnP.Core.Transformation.SharePoint.Services.Builder.Configuration;
-using AngleSharp;
-using AngleSharp.Io;
-using AngleSharp.Html.Parser;
 using System.Linq;
-using Microsoft.SharePoint.Client;
+using System.Text.RegularExpressions;
 using System.Xml.Linq;
-using PnP.Core.Transformation.Services.Core;
-using PnP.Core.Transformation.Extensions;
-using PnP.Core.Transformation.SharePoint.Extensions;
-using PnP.Core.Transformation.SharePoint.Utilities;
 
 namespace PnP.Core.Transformation.SharePoint.Functions
 {
@@ -188,6 +186,12 @@ namespace PnP.Core.Transformation.SharePoint.Functions
             return Path.GetFileName(path);
         }
 
+        /// <summary>
+        /// Concatenates 2 strings.
+        /// </summary>
+        /// <param name="string1">First string</param>
+        /// <param name="string2">Second string</param>
+        /// <returns>Concatenation of the passed strings</returns>
         [FunctionDocumentation(Description = "Concatenates 2 strings.",
                                Example = "{CompleteString} = Concatenate({String1},{String2})")]
         [InputDocumentation(Name = "{String1}", Description = "First string")]
@@ -198,6 +202,12 @@ namespace PnP.Core.Transformation.SharePoint.Functions
             return ConcatenateWithDelimiter(string1, string2);
         }
 
+        /// <summary>
+        /// Concatenates 2 strings with a semicolon in between
+        /// </summary>
+        /// <param name="string1">First string</param>
+        /// <param name="string2">Second string</param>
+        /// <returns>Concatenation of the passed strings</returns>
         [FunctionDocumentation(Description = "Concatenates 2 strings with a semicolon in between.",
                        Example = "{CompleteString} = ConcatenateWithSemiColonDelimiter({String1},{String2})")]
         [InputDocumentation(Name = "{String1}", Description = "First string")]
@@ -208,6 +218,12 @@ namespace PnP.Core.Transformation.SharePoint.Functions
             return ConcatenateWithDelimiter(string1, string2, ";");
         }
 
+        /// <summary>
+        /// Concatenates 2 strings with a pipe character in between
+        /// </summary>
+        /// <param name="string1">First string</param>
+        /// <param name="string2">Second string</param>
+        /// <returns>Concatenation of the passed strings</returns>
         [FunctionDocumentation(Description = "Concatenates 2 strings with a pipe character in between.",
                Example = "{CompleteString} = ConcatenateWithSemiColonDelimiter({String1},{String2})")]
         [InputDocumentation(Name = "{String1}", Description = "First string")]
@@ -893,6 +909,11 @@ namespace PnP.Core.Transformation.SharePoint.Functions
         #endregion
 
         #region DocumentEmbed functions
+        /// <summary>
+        /// Does lookup a file based on the given server relative path and return needed properties of the file. Returns null if file was not found
+        /// </summary>
+        /// <param name="serverRelativeUrl">Server relative file name</param>
+        /// <returns></returns>
         [FunctionDocumentation(Description = "Does lookup a file based on the given server relative path and return needed properties of the file. Returns null if file was not found.",
                                Example = "DocumentEmbedLookup({ServerRelativeFileName})")]
         [InputDocumentation(Name = "{ServerRelativeFileName}", Description = "Server relative file name")]
@@ -983,6 +1004,11 @@ namespace PnP.Core.Transformation.SharePoint.Functions
         #endregion
 
         #region Content Embed functions
+        /// <summary>
+        /// Analyzes sourcetype and return recommended mapping
+        /// </summary>
+        /// <param name="sourceType">Sourcetype of the viewed page in pageviewerwebpart</param>
+        /// <returns></returns>
         [SelectorDocumentation(Description = "Analyzes sourcetype and return recommended mapping.",
                                Example = "ContentEmbedSelectorSourceType({SourceType})")]
         [InputDocumentation(Name = "{SourceType}", Description = "Sourcetype of the viewed page in pageviewerwebpart")]
@@ -998,6 +1024,14 @@ namespace PnP.Core.Transformation.SharePoint.Functions
             return "ServerFolderOrFile";
         }
 
+        /// <summary>
+        /// Content editor can be transformed in various ways depending on whether a link was used, what file type was used, if script is used or not...
+        /// </summary>
+        /// <param name="contentLink">Link value if set</param>
+        /// <param name="embeddedContent">Content embedded inside the web part</param>
+        /// <param name="fileContent">Text content of the file. Return empty string if file was not found</param>
+        /// <param name="useCommunityScriptEditor">The UseCommunityScriptEditor mapping property provided via the PageTransformationInformation instance</param>
+        /// <returns></returns>
         [SelectorDocumentation(Description = "Content editor can be transformed in various ways depending on whether a link was used, what file type was used, if script is used or not...",
                                Example = "ContentEmbedSelectorContentLink({ContentLink}, {Content}, {FileContents}, {UseCommunityScriptEditor})")]
         [InputDocumentation(Name = "{ContentLink}", Description = "Link value if set")]
@@ -1334,6 +1368,12 @@ namespace PnP.Core.Transformation.SharePoint.Functions
             return results;
         }
 
+        /// <summary>
+        /// Analyzes a list and returns if the list can be transformed
+        /// </summary>
+        /// <param name="listGuid">Guid of the list used by the CBQ web part</param>
+        /// <param name="listName">Name of the list used by the CBQ web part</param>
+        /// <returns></returns>
         [SelectorDocumentation(Description = "Analyzes a list and returns if the list can be transformed.",
                                Example = "ContentByQuerySelector({ListGuid},{ListName})")]
         [InputDocumentation(Name = "{ListGuid}", Description = "Guid of the list used by the CBQ web part")]

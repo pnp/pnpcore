@@ -8,7 +8,7 @@
     /// Defines a CAML operator. This is an abstract class. To instanciate an operator use public static methods.
     /// </summary>
 #pragma warning disable CA1716
-    public abstract class Operator : Statement
+    internal abstract class Operator : Statement
     {
 #pragma warning restore CA1716
         internal readonly string OperatorTypeString;

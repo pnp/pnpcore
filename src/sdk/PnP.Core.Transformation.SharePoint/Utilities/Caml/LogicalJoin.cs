@@ -7,7 +7,7 @@
     /// Defines a CAML logical join. This class has no constructors available. To instanciate a
     /// new logical join use public static methods.
     /// </summary>
-    public class LogicalJoin : Statement
+    internal class LogicalJoin : Statement
     {
         /// <summary>
         /// Gets the logical join type.

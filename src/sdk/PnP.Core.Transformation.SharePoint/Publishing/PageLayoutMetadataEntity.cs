@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace PnP.Core.Transformation.SharePoint.Publishing
+﻿namespace PnP.Core.Transformation.SharePoint.Publishing
 {
     /// <summary>
     /// Class that will be used to hold the fields that will be used the field to metadata mapping

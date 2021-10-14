@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace PnP.Core.Transformation.SharePoint.Services
+﻿namespace PnP.Core.Transformation.SharePoint.Services
 {
     internal class TelemetryPropertiesNames
     {

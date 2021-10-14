@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Microsoft.Extensions.Options;
+using PnP.Core.Services;
+using PnP.Core.Transformation.Services.Core;
+using System;
 using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.Extensions.Options;
-using PnP.Core.Services;
-using PnP.Core.Transformation.Services.Core;
 
 namespace PnP.Core.Transformation.SharePoint
 {
@@ -17,7 +16,11 @@ namespace PnP.Core.Transformation.SharePoint
     {
         private readonly PageTransformationOptions defaultPageTransformationOptions;
 
-
+        /// <summary>
+        /// Default constructor
+        /// </summary>
+        /// <param name="pageTransformationOptions">Page transformation options</param>
+        /// <exception cref="ArgumentNullException"></exception>
         public SharePointTargetPageUriResolver(IOptions<PageTransformationOptions> pageTransformationOptions)
         {
             this.defaultPageTransformationOptions = pageTransformationOptions?.Value ?? throw new ArgumentNullException(nameof(pageTransformationOptions));

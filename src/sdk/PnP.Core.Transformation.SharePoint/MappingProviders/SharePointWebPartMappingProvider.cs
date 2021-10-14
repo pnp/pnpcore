@@ -1,8 +1,16 @@
-﻿using System;
-using System.Collections.Concurrent;
+﻿using Microsoft.Extensions.Caching.Memory;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
+using PnP.Core.Transformation.Model;
+using PnP.Core.Transformation.Services.MappingProviders;
+using PnP.Core.Transformation.SharePoint.Functions;
+using PnP.Core.Transformation.SharePoint.MappingFiles;
+using PnP.Core.Transformation.SharePoint.Services.Builder.Configuration;
+using PnP.Core.Transformation.SharePoint.Services.MappingProviders;
+using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Text;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -10,19 +18,7 @@ using System.Xml;
 using System.Xml.Linq;
 using System.Xml.Schema;
 using System.Xml.Serialization;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
-using Microsoft.Extensions.DependencyInjection;
-using PnP.Core.Transformation.Services.MappingProviders;
-using PnP.Core.Transformation.SharePoint.Services.Builder.Configuration;
-using PnP.Core.Transformation.SharePoint.MappingFiles;
 using System.Xml.XPath;
-using Microsoft.Extensions.Caching.Memory;
-using PnP.Core.Transformation.Model;
-using PnP.Core.Transformation.SharePoint.Services.MappingProviders;
-using PnP.Core.Transformation.SharePoint.Functions;
-using Newtonsoft.Json.Linq;
-using PnP.Core.Transformation.Services.Core;
 
 namespace PnP.Core.Transformation.SharePoint.MappingProviders
 {
@@ -64,7 +60,9 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
         /// <param name="input">The input for the mapping activity</param>
         /// <param name="token">The cancellation token to use, if any</param>
         /// <returns>The output of the mapping activity</returns>
+#pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
         public async Task<WebPartMappingProviderOutput> MapWebPartAsync(WebPartMappingProviderInput input, CancellationToken token = default)
+#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
         {
             // Check that we have input data
             if (input == null) throw new ArgumentNullException(nameof(input));

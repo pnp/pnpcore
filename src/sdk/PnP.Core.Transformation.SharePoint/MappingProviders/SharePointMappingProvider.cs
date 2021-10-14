@@ -1,4 +1,23 @@
-﻿using System;
+﻿using AngleSharp.Dom;
+using AngleSharp.Html.Dom;
+using AngleSharp.Html.Parser;
+using Microsoft.Extensions.Caching.Memory;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
+using Microsoft.SharePoint.Client;
+using Microsoft.SharePoint.Client.WebParts;
+using PnP.Core.Transformation.Model;
+using PnP.Core.Transformation.Services.Core;
+using PnP.Core.Transformation.Services.MappingProviders;
+using PnP.Core.Transformation.SharePoint.Extensions;
+using PnP.Core.Transformation.SharePoint.Functions;
+using PnP.Core.Transformation.SharePoint.MappingFiles;
+using PnP.Core.Transformation.SharePoint.Model;
+using PnP.Core.Transformation.SharePoint.Services;
+using PnP.Core.Transformation.SharePoint.Services.Builder.Configuration;
+using PnP.Core.Transformation.SharePoint.Services.MappingProviders;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -10,28 +29,7 @@ using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.Linq;
 using System.Xml.XPath;
-using AngleSharp.Dom;
-using AngleSharp.Html.Dom;
-using AngleSharp.Html.Parser;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
-using Microsoft.SharePoint.Client;
-using Microsoft.SharePoint.Client.WebParts;
-using Newtonsoft.Json.Linq;
 using PnPCoreModelSP = PnP.Core.Model.SharePoint;
-using PnP.Core.Transformation.Model;
-using PnP.Core.Transformation.Services.Core;
-using PnP.Core.Transformation.Services.MappingProviders;
-using PnP.Core.Transformation.SharePoint.Extensions;
-using PnP.Core.Transformation.SharePoint.MappingFiles;
-using PnP.Core.Transformation.SharePoint.Model;
-using PnP.Core.Transformation.SharePoint.Services;
-using PnP.Core.Transformation.SharePoint.Services.Builder.Configuration;
-using PnP.Core.Transformation.SharePoint.Services.MappingProviders;
-using Microsoft.Extensions.Caching.Memory;
-using PnP.Core.Transformation.SharePoint.Utilities;
-using PnP.Core.Transformation.SharePoint.Functions;
 using PublishingMapping = PnP.Core.Transformation.SharePoint.MappingFiles.Publishing;
 
 namespace PnP.Core.Transformation.SharePoint.MappingProviders
@@ -1536,7 +1534,9 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
             return new Tuple<Model.PageLayout, List<WebPartEntity>>(layout, webparts);
         }
 
+#pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
         private async Task<Tuple<Model.PageLayout, List<WebPartEntity>>> AnalyzeWikiPageAsync(PageTransformationContext context, Microsoft.SharePoint.Client.File wikiPage, ListItem pageItem, SourcePageInformation page)
+#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
         {
             List<WebPartEntity> webparts = new List<WebPartEntity>();
             string pageContents = null;
@@ -2527,6 +2527,7 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
         /// Gets the tag prefixes from the document
         /// </summary>
         /// <param name="webPartPage"></param>
+        /// <param name="parser">Html parser to use</param>
         /// <returns></returns>
         internal List<Tuple<string, string>> ExtractWebPartPrefixesFromNamespaces(IHtmlDocument webPartPage, HtmlParser parser)
         {
@@ -3246,7 +3247,7 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
             {
                 logger.LogInformation(
                     SharePointTransformationResources.Info_CallingWebServicesToExtractWebPartsFromPage
-                    .CorrelateString(this.taskId),
+                    .CorrelateString(taskId),
                     pageFile.ServerRelativeUrl);
 
                 string webUrl = context.Web.EnsureProperty(p => p.Url);
@@ -3276,9 +3277,9 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
                 request.Accept = "text/xml";
                 request.Headers.Add("SOAPAction", "\"http://microsoft.com/sharepoint/webpartpages/GetWebPartPage\"");
 
-                using (System.IO.Stream stream = request.GetRequestStream())
+                using (Stream stream = request.GetRequestStream())
                 {
-                    using (System.IO.StreamWriter writer = new System.IO.StreamWriter(stream))
+                    using (StreamWriter writer = new System.IO.StreamWriter(stream))
                     {
                         writer.Write(soapEnvelope.ToString());
                     }
@@ -3306,11 +3307,11 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
                     }
                 }
             }
-            catch (WebException ex)
+            catch (WebException)
             {
                 logger.LogError(
                     SharePointTransformationResources.Error_CallingWebServicesToExtractWebPartsFromPage
-                    .CorrelateString(this.taskId),
+                    .CorrelateString(taskId),
                     pageFile.ServerRelativeUrl);
             }
 

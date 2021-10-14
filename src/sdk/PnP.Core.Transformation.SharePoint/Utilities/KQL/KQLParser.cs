@@ -6,7 +6,7 @@ namespace PnP.Core.Transformation.SharePoint.KQL
     /// <summary>
     /// Class to parse KQL queries
     /// </summary>
-    public class KQLParser
+    internal class KQLParser
     {
         /// <summary>
         /// Parses a KQL query and returns a list of tokens

@@ -7,6 +7,7 @@ namespace PnP.Core.Transformation
     /// </summary>
     public static class WebParts
     {
+#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
         public const string WikiText = "SharePointPnP.Modernization.WikiTextPart";
         public const string WikiImage = "SharePointPnP.Modernization.WikiImagePart";
         public const string WikiVideo = "SharePointPnP.Modernization.WikiVideoPart";
@@ -100,6 +101,7 @@ namespace PnP.Core.Transformation
         public const string SPUserCode = "Microsoft.SharePoint.WebPartPages.SPUserCodeWebPart, Microsoft.SharePoint, Version=16.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c";
         public const string ClientSide = "Microsoft.SharePoint.WebPartPages.ClientSideWebPart, Microsoft.SharePoint, Version=16.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c";
         public const string Client = "Microsoft.SharePoint.WebPartPages.ClientWebPart, Microsoft.SharePoint, Version=16.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c";
+#pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
 
 
         /// <summary>

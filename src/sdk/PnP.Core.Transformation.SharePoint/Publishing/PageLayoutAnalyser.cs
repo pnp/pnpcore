@@ -1,19 +1,18 @@
-﻿using AngleSharp.Html.Parser;
+﻿using AngleSharp.Dom;
+using AngleSharp.Html.Parser;
+using Microsoft.Extensions.Caching.Memory;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using Microsoft.SharePoint.Client;
+using PnP.Core.Transformation.SharePoint.Extensions;
 using PnP.Core.Transformation.SharePoint.MappingFiles.Publishing;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
-using PnP.Core.Transformation.SharePoint.Extensions;
-using System.Xml.Serialization;
 using System.Text.RegularExpressions;
-using AngleSharp.Dom;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Caching.Memory;
-using Microsoft.Extensions.DependencyInjection;
-using PnP.Core.Transformation.Services.Core;
+using System.Xml.Serialization;
 
 namespace PnP.Core.Transformation.SharePoint.Publishing
 {
@@ -221,6 +220,7 @@ namespace PnP.Core.Transformation.SharePoint.Publishing
         /// Determine the page layout from a publishing page
         /// </summary>
         /// <param name="publishingPage">Publishing page to analyze the page layout for</param>
+        /// <param name="taskId">ID of the transformation task</param>
         public PageLayout AnalysePageLayoutFromPublishingPage(ListItem publishingPage, Guid taskId)
         {
             ClientContext siteCollContext = EnsureSiteCollectionContext(publishingPage.Context as ClientContext);
@@ -440,7 +440,7 @@ namespace PnP.Core.Transformation.SharePoint.Publishing
                     }
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 logger.LogError(
                     SharePointTransformationResources.Error_AnalyserErrorOccurredExtractMetadata
@@ -454,6 +454,7 @@ namespace PnP.Core.Transformation.SharePoint.Publishing
         /// Scan through the file to find the TagPrefixes in ASPX Header
         /// </summary>
         /// <param name="pageLayout"></param>
+        /// <param name="taskId">ID of the transformation task</param>
         /// <returns>
         ///     List&lt;Tuple&lt;string, string&gt;&gt;
         ///     Item1 = tagprefix
@@ -498,7 +499,7 @@ namespace PnP.Core.Transformation.SharePoint.Publishing
 
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 logger.LogError(
                     SharePointTransformationResources.Error_AnalyserErrorOccurredExtractNamespaces
@@ -678,7 +679,7 @@ namespace PnP.Core.Transformation.SharePoint.Publishing
 
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 logger.LogError(
                     SharePointTransformationResources.Error_AnalyserErrorOccurredExtractHtmlBlocks
@@ -737,7 +738,9 @@ namespace PnP.Core.Transformation.SharePoint.Publishing
         /// <summary>
         /// Loads the content type fields
         /// </summary>
+        /// <param name="pageLayoutItem">ListItem linked to the page layout</param>
         /// <param name="contentTypeId"></param>
+        /// <param name="taskId">ID of the transformation task</param>
         /// <returns></returns>
         private FieldCollection LoadContentTypeFields(ListItem pageLayoutItem, string contentTypeId, Guid taskId)
         {
@@ -773,6 +776,7 @@ namespace PnP.Core.Transformation.SharePoint.Publishing
         /// </summary>
         /// <param name="webPartFields">List of extracted web parts</param>
         /// <param name="spFields">Collection of fields</param>
+        /// <param name="taskId">ID of the transformation task</param>
         /// <returns></returns>
         private List<WebPartField> CleanExtractedWebPartFields(List<WebPartField> webPartFields, FieldCollection spFields, Guid taskId)
         {
@@ -853,6 +857,7 @@ namespace PnP.Core.Transformation.SharePoint.Publishing
         /// Sets the page layout header field defaults
         /// </summary>
         /// <param name="spFields"></param>
+        /// <param name="taskId">ID of the transformation task</param>
         private Header ExtractPageHeaderFromPageLayoutAssociatedContentType(FieldCollection spFields, Guid taskId)
         {
             try
@@ -953,7 +958,7 @@ namespace PnP.Core.Transformation.SharePoint.Publishing
                     return (T)Enum.Parse(typeof(T), enumString, true);
 
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     logger.LogError(
                         SharePointTransformationResources.Error_CannotCastToEnum);

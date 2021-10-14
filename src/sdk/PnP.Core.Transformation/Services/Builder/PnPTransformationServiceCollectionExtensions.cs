@@ -1,10 +1,8 @@
-﻿using PnP.Core.Transformation.Services;
+﻿using Microsoft.Extensions.DependencyInjection.Extensions;
 using PnP.Core.Transformation.Services.Builder;
 using PnP.Core.Transformation.Services.Builder.Configuration;
-using System;
-using Microsoft.Extensions.DependencyInjection.Extensions;
 using PnP.Core.Transformation.Services.Core;
-using PnP.Core.Transformation.Services.MappingProviders;
+using System;
 using System.Linq;
 
 namespace Microsoft.Extensions.DependencyInjection
@@ -32,7 +30,7 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <param name="pageOptions">An Action to configure the Page Transformation options</param>
         /// <returns>A PnPTransformationBuilder instance</returns>
         public static IPnPTransformationBuilder AddPnPTransformation(this IServiceCollection services,
-            Action<PnPTransformationOptions> options, 
+            Action<PnPTransformationOptions> options,
             Action<PageTransformationOptions> pageOptions)
         {
             if (services == null)
@@ -52,7 +50,7 @@ namespace Microsoft.Extensions.DependencyInjection
 
             // TODO: Consider using the distributed one or providing an option to use the distributed one
             // Add the caching services
-            services.AddMemoryCache(); 
+            services.AddMemoryCache();
 
             var builder = new PnPTransformationBuilder(services);
 

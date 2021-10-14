@@ -3,7 +3,7 @@
     /// <summary>
     /// KQL filter types
     /// </summary>
-    public enum KQLFilterType
+    internal enum KQLFilterType
     {
         Text = 0,
         KeywordFilter = 1,

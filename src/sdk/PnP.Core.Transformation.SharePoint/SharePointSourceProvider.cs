@@ -1,12 +1,10 @@
-﻿using System;
+﻿using Microsoft.SharePoint.Client;
+using PnP.Core.Transformation.Services.Core;
+using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.SharePoint.Client;
-using PnP.Core.Services;
-using PnP.Core.Transformation.Services.Core;
 
 namespace PnP.Core.Transformation.SharePoint
 {
@@ -34,7 +32,9 @@ namespace PnP.Core.Transformation.SharePoint
         /// </summary>
         /// <param name="token">The cancellation token, if any</param>
         /// <returns></returns>
+#pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
         public async IAsyncEnumerable<ISourceItemId> GetItemsIdsAsync([EnumeratorCancellation] CancellationToken token = default)
+#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
         {
             for (int x = 0; x < 10; x++)
             {

@@ -1,8 +1,5 @@
 ﻿using PnP.Core.Transformation.Services.MappingProviders;
 using PnP.Core.Transformation.SharePoint.MappingFiles.Publishing;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace PnP.Core.Transformation.SharePoint.MappingProviders
 {

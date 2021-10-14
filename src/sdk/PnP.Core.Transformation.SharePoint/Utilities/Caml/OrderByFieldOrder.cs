@@ -3,7 +3,7 @@
     /// <summary>
     /// Specifies the order of query result.
     /// </summary>
-    public enum OrderByFieldOrder
+    internal enum OrderByFieldOrder
     {
         /// <summary>
         /// Defines ascending order.

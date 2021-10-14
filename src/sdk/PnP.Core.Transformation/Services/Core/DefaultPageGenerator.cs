@@ -1,21 +1,20 @@
-﻿using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
+﻿using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
+using Newtonsoft.Json.Linq;
+using PnP.Core.Model;
+using PnP.Core.Model.SharePoint;
+using PnP.Core.QueryModel;
+using PnP.Core.Transformation.Model;
 using PnP.Core.Transformation.Services.MappingProviders;
 using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
+using System.Net;
+using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
-using PnP.Core.Model.SharePoint;
-using System.Text.Json;
-using System.Linq;
-using Newtonsoft.Json.Linq;
-using System.Net;
-using PnP.Core.Model;
-using Microsoft.Extensions.Caching.Memory;
-using PnP.Core.QueryModel;
-using PnP.Core.Transformation.Model;
 
 namespace PnP.Core.Transformation.Services.Core
 {
@@ -48,6 +47,17 @@ namespace PnP.Core.Transformation.Services.Core
             this.tokenParser = this.serviceProvider.GetService<TokenParser>();
         }
 
+        /// <summary>
+        /// Translates the provided input into a page
+        /// </summary>
+        /// <param name="context">Page transformation options</param>
+        /// <param name="mappingOutput">The mapping provider output</param>
+        /// <param name="targetPageUri">The url for the target page</param>
+        /// <param name="token">Cancellation token</param>
+        /// <returns>The result of the page generation</returns>
+        /// <exception cref="ArgumentNullException"></exception>
+        /// <exception cref="ArgumentException"></exception>
+        /// <exception cref="ApplicationException"></exception>
         public async Task<PageGeneratorOutput> GenerateAsync(PageTransformationContext context, MappingProviderOutput mappingOutput, Uri targetPageUri, CancellationToken token = default)
         {
             #region Validate input arguments
@@ -112,7 +122,7 @@ namespace PnP.Core.Transformation.Services.Core
                 targetFile = await targetWeb.GetFileByServerRelativeUrlAsync(targetPageUriString).ConfigureAwait(false);
                 targetFileExists = true;
             }
-            catch (SharePointRestServiceException ex)
+            catch (SharePointRestServiceException)
             {
                 // Simply ignore this exception and assume that the page does not exist
                 targetFileExists = false;
@@ -448,7 +458,7 @@ namespace PnP.Core.Transformation.Services.Core
             // Retrieve the list of fields from cache
             var fieldsToCopy = await GetFieldsFromCache(targetFile, targetWeb, targetSite).ConfigureAwait(false);
 
-            bool listItemWasReloaded = false;
+            //bool listItemWasReloaded = false;
             if (fieldsToCopy.Count > 0)
             {
                 // Load the list item corresponding to the file

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace PnP.Core.Transformation.Model
+﻿namespace PnP.Core.Transformation.Model
 {
     /// <summary>
     /// Defines a set of standard field names for SharePoint items

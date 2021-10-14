@@ -1,16 +1,14 @@
 ﻿using AngleSharp.Dom;
 using AngleSharp.Html.Parser;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace PnP.Core.Transformation.SharePoint.Utilities
 {
     /// <summary>
     /// This class is used to rewrite the html coming out of the SummaryLinks web part
     /// </summary>
-    public class SummaryLinksHtmlTransformator
+    internal class SummaryLinksHtmlTransformator
     {
         private HtmlParser parser;
         private string webPartTitle;
@@ -27,6 +25,9 @@ namespace PnP.Core.Transformation.SharePoint.Utilities
         #endregion
 
         #region Properties
+        /// <summary>
+        /// Title of the summary links web part
+        /// </summary>
         public string WebPartTitle
         {
             get

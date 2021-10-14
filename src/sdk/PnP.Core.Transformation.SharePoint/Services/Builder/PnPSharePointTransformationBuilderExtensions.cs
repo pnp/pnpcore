@@ -1,18 +1,16 @@
-﻿using PnP.Core.Transformation.Services;
+﻿using Microsoft.Extensions.DependencyInjection.Extensions;
 using PnP.Core.Transformation.Services.Builder;
 using PnP.Core.Transformation.Services.Builder.Configuration;
-using System;
-using System.Reflection.Emit;
-using Microsoft.Extensions.DependencyInjection.Extensions;
 using PnP.Core.Transformation.Services.Core;
 using PnP.Core.Transformation.Services.MappingProviders;
 using PnP.Core.Transformation.SharePoint;
-using PnP.Core.Transformation.SharePoint.Services.Builder;
-using PnP.Core.Transformation.SharePoint.Services.Builder.Configuration;
+using PnP.Core.Transformation.SharePoint.Functions;
 using PnP.Core.Transformation.SharePoint.MappingProviders;
 using PnP.Core.Transformation.SharePoint.Publishing;
-using PnP.Core.Transformation.SharePoint.Functions;
 using PnP.Core.Transformation.SharePoint.Services;
+using PnP.Core.Transformation.SharePoint.Services.Builder;
+using PnP.Core.Transformation.SharePoint.Services.Builder.Configuration;
+using System;
 
 namespace Microsoft.Extensions.DependencyInjection
 {

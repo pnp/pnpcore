@@ -1,13 +1,8 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using PnP.Core.Services;
 using PnP.Core.Transformation.Services.Builder.Configuration;
 using PnP.Core.Transformation.Services.Core;
 using PnP.Core.Transformation.SharePoint.Services.Builder.Configuration;
 using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading;
 
 namespace PnP.Core.Transformation.SharePoint.Services
 {

@@ -3,7 +3,6 @@ using Microsoft.ApplicationInsights.Extensibility;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
-using System.Text;
 
 namespace PnP.Core.Transformation.Services.Core
 {
@@ -21,8 +20,8 @@ namespace PnP.Core.Transformation.Services.Core
 
         private string version;
 
-        public const string CorrelationId = "PnPCorrelationId";
-        public const string AADTenantId = "AADTenantId";
+        internal const string CorrelationId = "PnPCorrelationId";
+        internal const string AADTenantId = "AADTenantId";
         private const string PageTransformed = "PageTransformed";
         private const string EngineVersion = "Version";
         private const string Duration = "Duration";
@@ -73,7 +72,7 @@ namespace PnP.Core.Transformation.Services.Core
                     Dictionary<string, double> metrics = new Dictionary<string, double>(5);
 
                     // Page transformation engine version
-                    properties.Add(EngineVersion, GetVersion());
+                    properties.Add(EngineVersion, TelemetryService.GetVersion());
 
                     // Populate metrics
                     if (duration != TimeSpan.Zero)
@@ -119,7 +118,7 @@ namespace PnP.Core.Transformation.Services.Core
                     Dictionary<string, double> metrics = new Dictionary<string, double>();
 
                     // Page transformation engine version
-                    properties.Add(EngineVersion, GetVersion());
+                    properties.Add(EngineVersion, TelemetryService.GetVersion());
 
                     if (!string.IsNullOrEmpty(location))
                     {
@@ -144,7 +143,7 @@ namespace PnP.Core.Transformation.Services.Core
         /// Gets the version of the assembly
         /// </summary>
         /// <returns></returns>
-        internal string GetVersion()
+        internal static string GetVersion()
         {
             try
             {
