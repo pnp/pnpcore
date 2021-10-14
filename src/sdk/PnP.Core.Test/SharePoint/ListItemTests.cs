@@ -230,7 +230,7 @@ namespace PnP.Core.Test.SharePoint
             {
                 var listTitle = TestCommon.GetPnPSdkTestAssetName("BulkAddListItemsWithBadFieldNameTest");
                 var list = await context.Web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
-                
+
                 IField myField = await list.Fields.AddTextAsync("MetaInfo", new FieldTextOptions()
                 {
                     Group = "Custom Fields",
@@ -281,7 +281,7 @@ namespace PnP.Core.Test.SharePoint
                 IField myUserField = await list.Fields.AddUserAsync("User1", new FieldUserOptions()
                 {
                     Group = "Custom Fields",
-                    AddToDefaultView = true,                    
+                    AddToDefaultView = true,
                 });
 
                 // load the current user
@@ -315,7 +315,7 @@ namespace PnP.Core.Test.SharePoint
                 Assert.IsTrue((firstListItem["User1"] as IFieldUserValue).LookupId == currentUser.Id);
 
                 firstListItem.Title = "updated title 2";
-                
+
                 // This update cleared out the user value, fixed now by ensuring a freshly loaded fieldvalue object has no pending changes
                 await firstListItem.UpdateAsync();
 
@@ -427,7 +427,7 @@ namespace PnP.Core.Test.SharePoint
                             var newDate = new DateTime(2020, 10, 20);
 
                             firstItem.Values["Author"] = author.NewFieldUserValue(currentUser);
-                            firstItem.Values["Editor"] = editor.NewFieldUserValue(currentUser);                             
+                            firstItem.Values["Editor"] = editor.NewFieldUserValue(currentUser);
                             firstItem.Values["Created"] = newDate;
                             firstItem.Values["Modified"] = newDate;
 
@@ -1336,7 +1336,7 @@ namespace PnP.Core.Test.SharePoint
                     }
                     await context.ExecuteAsync();
 
-                    foreach(var item in myList.Items.AsRequested())
+                    foreach (var item in myList.Items.AsRequested())
                     {
                         item["MetaInfo"] = "{DFC8691F-2432-4741-B780-3CAE3235A612}:SW|MyStringWithXmlValues";
                         item["Title"] = "okido";
@@ -1351,7 +1351,7 @@ namespace PnP.Core.Test.SharePoint
                 using (var context2 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
                 {
                     var myList2 = context2.Web.Lists.FirstOrDefault(p => p.Title == listTitle);
-                    await myList2.LoadAsync(p => p.Items.QueryProperties(p=>p.Title, p=>p.FieldValuesAsText));
+                    await myList2.LoadAsync(p => p.Items.QueryProperties(p => p.Title, p => p.FieldValuesAsText));
 
                     foreach (var item2 in myList2.Items.AsRequested())
                     {
@@ -3457,7 +3457,7 @@ namespace PnP.Core.Test.SharePoint
 
                         // ListDataAsStream loading
                         list2.Items.Clear();
-                        
+
                         var output = await list2.LoadListDataAsStreamAsync(new RenderListDataOptions()
                         {
                             ViewXml = viewXml,
@@ -3465,7 +3465,7 @@ namespace PnP.Core.Test.SharePoint
                         }).ConfigureAwait(false);
 
                         listItem = list2.Items.AsRequested().FirstOrDefault();
-                        
+
                         Assert.AreEqual("Yes", listItem.Values["With_x0020_Space"]);
                         Assert.AreEqual("Yes", listItem.Values["With_Underscore"]);
                         Assert.AreEqual("Yes", listItem.Values["With_x0020_SpaceAnd_Underscore"]);
@@ -4267,7 +4267,7 @@ namespace PnP.Core.Test.SharePoint
 
                 comments = await item.GetCommentsAsync(p => p.Replies);
                 firstComment = comments.AsRequested().First();
-                
+
                 Assert.IsTrue(firstComment.Id == "1");
                 Assert.IsTrue(firstComment.Replies.Length == 0);
 

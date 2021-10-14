@@ -55,7 +55,7 @@ namespace PnP.Core.Test.SharePoint
                 Assert.AreEqual("Title", field.Title);
             }
         }
-        
+
         [TestMethod]
         public async Task AddListFieldNoOptionTest()
         {

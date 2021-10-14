@@ -110,7 +110,7 @@ namespace PnP.Core.QueryModel
         internal string GetFilters(ODataTargetPlatform targetPlatform, bool urlEncode = true)
         {
             var sb = new StringBuilder();
-            ProcessFilters(Filters, sb, targetPlatform,0, urlEncode);
+            ProcessFilters(Filters, sb, targetPlatform, 0, urlEncode);
             return sb.ToString();
         }
 

@@ -82,7 +82,7 @@ namespace PnP.Core.Admin.Model.SharePoint
         private async static Task LoadSitesViaTenantAdminHiddenListAsync(PnPContext context, string viewXml, Action<IEnumerable<IListItem>> processResults, bool allSites = true, int pageSize = 500)
         {
             string sitesInformationListAllUrl = "DO_NOT_DELETE_SPLIST_TENANTADMIN_ALL_SITES_AGGREGA";
-            string sitesInformationListUrl =    "DO_NOT_DELETE_SPLIST_TENANTADMIN_AGGREGATED_SITECO";
+            string sitesInformationListUrl = "DO_NOT_DELETE_SPLIST_TENANTADMIN_AGGREGATED_SITECO";
 
             using (var tenantAdminContext = await context.GetSharePointAdmin().GetTenantAdminCenterContextAsync().ConfigureAwait(false))
             {
@@ -131,7 +131,7 @@ namespace PnP.Core.Admin.Model.SharePoint
                         processResults.Invoke(myList.Items.AsRequested());
                     }
                 }
-            }            
+            }
         }
 
         /// <summary>
@@ -293,7 +293,7 @@ namespace PnP.Core.Admin.Model.SharePoint
             List<ISiteCollection> loadedSites = new List<ISiteCollection>();
 
             ApiCall sitesEnumerationApiCall = new ApiCall("sites", ApiType.Graph);
-            
+
             bool paging = true;
             while (paging)
             {
@@ -369,7 +369,7 @@ namespace PnP.Core.Admin.Model.SharePoint
                                           sharePointIds.GetProperty("siteId").GetGuid(),
                                           sharePointIds.GetProperty("webId").GetGuid(),
                                           siteInformation.TryGetProperty("displayName", out JsonElement rootWebDescription) ? rootWebDescription.GetString() : null);
-                        }                        
+                        }
                     }
                 }
 

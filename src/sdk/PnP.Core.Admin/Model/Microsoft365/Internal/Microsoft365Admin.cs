@@ -100,7 +100,7 @@ namespace PnP.Core.Admin.Model.Microsoft365
 
         public async Task<List<IGeoLocationInformation>> GetMultiGeoLocationsAsync()
         {
-            var result = await(context.Web as Web).RawRequestAsync(new ApiCall("sites?filter=siteCollection/root%20ne%20null&select=webUrl,siteCollection", ApiType.Graph), HttpMethod.Get).ConfigureAwait(false);
+            var result = await (context.Web as Web).RawRequestAsync(new ApiCall("sites?filter=siteCollection/root%20ne%20null&select=webUrl,siteCollection", ApiType.Graph), HttpMethod.Get).ConfigureAwait(false);
 
             #region Json responses
             /* Response if not multi-geo

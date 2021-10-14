@@ -5,7 +5,7 @@ namespace PnP.Core.Admin.Model.SharePoint
     /// <summary>
     /// Contains the available options for creating a classic site collection (e.g. classic team site)
     /// </summary>
-    public class ClassicSiteOptions: CommonSiteOptions
+    public class ClassicSiteOptions : CommonSiteOptions
     {
         /// <summary>
         /// Default constuctor for creating a <see cref="ClassicSiteOptions"/> object used to define a classic site collection creation

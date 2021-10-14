@@ -73,7 +73,7 @@
 
         public void Set(PermissionKind permissionKind)
         {
-            if(!IsPropertyAvailable(l => l.Low) && !IsPropertyAvailable(l => l.High))
+            if (!IsPropertyAvailable(l => l.Low) && !IsPropertyAvailable(l => l.High))
             {
                 Low = 0;
                 High = 0;

@@ -217,7 +217,7 @@ namespace PnP.Core.Test.Security
                 await first.RemoveRoleDefinitionsAsync(firstUser.Id, new string[] { "Full Control" });
 
                 await first.LoadAsync(f => f.RoleAssignments);
-                
+
                 Assert.AreEqual(0, first.RoleAssignments.Length);
 
                 // Delete the list

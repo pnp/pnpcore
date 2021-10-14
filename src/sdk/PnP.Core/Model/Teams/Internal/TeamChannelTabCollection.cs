@@ -107,7 +107,7 @@ namespace PnP.Core.Model.Teams
                 throw new ArgumentNullException(nameof(name));
             }
 
-            if(documentLibraryUri == null)
+            if (documentLibraryUri == null)
             {
                 throw new ArgumentNullException(nameof(documentLibraryUri));
             }

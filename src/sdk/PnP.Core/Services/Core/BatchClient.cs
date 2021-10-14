@@ -303,7 +303,7 @@ namespace PnP.Core.Services
                         else
                         {
                             // implement logic to split batch in a rest batch and a graph batch
-                            (Batch spoRestBatch, Batch graphBatch, Batch graphBetaBatch, Batch csomBatch) = SplitIntoBatchesPerApiType(batch, PnPContext.GraphAlwaysUseBeta);                            
+                            (Batch spoRestBatch, Batch graphBatch, Batch graphBetaBatch, Batch csomBatch) = SplitIntoBatchesPerApiType(batch, PnPContext.GraphAlwaysUseBeta);
 
                             // execute the 4 batches
                             await ExecuteSharePointRestBatchAsync(spoRestBatch).ConfigureAwait(false);
@@ -395,7 +395,7 @@ namespace PnP.Core.Services
                         );
                         anyPageToLoad = true;
                     }
-                } 
+                }
                 // Loop until there is no other pages to load
             } while (anyPageToLoad);
 
@@ -805,7 +805,7 @@ namespace PnP.Core.Services
                     if (request.ApiCall.Headers != null && request.ApiCall.Headers.Count > 0)
                     {
                         foreach (var key in request.ApiCall.Headers.Keys)
-                        {                            
+                        {
                             string existingKey = graphRequest.Headers.Keys.FirstOrDefault(k => k.Equals(key, StringComparison.InvariantCultureIgnoreCase));
                             if (string.IsNullOrWhiteSpace(existingKey))
                             {
@@ -1342,10 +1342,10 @@ namespace PnP.Core.Services
                         }
 
                         httpStatusCode = 0;
-                        responseContentOpen = false;                        
+                        responseContentOpen = false;
                         responseContent = new StringBuilder();
                     }
-                    
+
                     collectHeaders = false;
                     responseHeaders = new Dictionary<string, string>();
 
@@ -1503,7 +1503,7 @@ namespace PnP.Core.Services
                     }
 
                     // Add extra headers
-                    foreach(var extraHeader in headers)
+                    foreach (var extraHeader in headers)
                     {
                         if (!request.Headers.Contains(extraHeader.Key))
                         {
@@ -1708,9 +1708,9 @@ namespace PnP.Core.Services
             }
         }
 
-#endregion
+        #endregion
 
-#region CSOM batching
+        #region CSOM batching
         /// <summary>
         /// Execute a batch with CSOM requests.
         /// See https://docs.microsoft.com/en-us/openspecs/sharepoint_protocols/ms-csom/fd645da2-fa28-4daa-b3cd-8f4e506df117 for the CSOM protocol specs
@@ -2008,7 +2008,7 @@ namespace PnP.Core.Services
 
             return batches;
         }
-#endregion
+        #endregion
 
         /// <summary>
         /// Checks if a batch contains an API call that still has unresolved tokens...no point in sending the request at that point

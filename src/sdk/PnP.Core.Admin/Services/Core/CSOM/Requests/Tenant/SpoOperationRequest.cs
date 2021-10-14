@@ -31,7 +31,7 @@ namespace PnP.Core.Admin.Services.Core.CSOM.Requests.Tenant
             IdentityPath = idProvider.GetActionId();
             QueryIdPath = idProvider.GetActionId();
 
-            List <ActionObjectPath> actions = new List<ActionObjectPath>();
+            List<ActionObjectPath> actions = new List<ActionObjectPath>();
             ActionObjectPath spoOperation = new ActionObjectPath()
             {
                 Action = new QueryAction()

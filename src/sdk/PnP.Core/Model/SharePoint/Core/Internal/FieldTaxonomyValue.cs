@@ -67,7 +67,7 @@ namespace PnP.Core.Model.SharePoint
             {
                 return null;
             }
-            
+
             if (properties.ContainsKey("Label"))
             {
                 Label = properties["Label"];

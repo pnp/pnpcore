@@ -104,7 +104,7 @@ namespace PnP.Core.Model.SharePoint
             {
                 // We're liking a reply
                 await RequestAsync(new ApiCall($"{BuildBaseApiRequestForLikeUnLike(entity)}/like", apiType: ApiType.SPORest), HttpMethod.Post).ConfigureAwait(false);
-            }            
+            }
         }
 
         public void Like()

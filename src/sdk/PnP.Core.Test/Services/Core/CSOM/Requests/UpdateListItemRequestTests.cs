@@ -21,7 +21,7 @@ namespace PnP.Core.Test.Services.Core.CSOM.Requests
                 FieldValue = "Test field value"
             });
             IIdProvider idProvider = new IteratorIdProvider();
-            List<ActionObjectPath> actionObjectPaths =  request.GetRequest(idProvider);
+            List<ActionObjectPath> actionObjectPaths = request.GetRequest(idProvider);
 
             ActionObjectPath setFieldsActionPath = actionObjectPaths[0];
             Assert.AreEqual("<Method Name=\"SetFieldValue\" Id=\"4\" ObjectPathId=\"1\"><Parameters><Parameter Type=\"String\">Test Field</Parameter><Parameter Type=\"String\">Test field value</Parameter></Parameters></Method>", setFieldsActionPath.Action.ToString());

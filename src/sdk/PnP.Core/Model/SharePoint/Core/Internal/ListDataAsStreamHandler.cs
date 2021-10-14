@@ -104,7 +104,7 @@ namespace PnP.Core.Model.SharePoint
                             if (property.Name == "ID")
                             {
                                 // already handled, so continue
-                            }                            
+                            }
                             // Handle the overflow fields
                             else
                             {
@@ -219,7 +219,7 @@ namespace PnP.Core.Model.SharePoint
                             ct.SetSystemProperty(p => p.Name, contentTypeName.GetString());
                             (ct as IMetadataExtensible).Metadata.Add(PnPConstants.MetaDataRestId, contentTypeId.GetString());
                             (ct as IMetadataExtensible).Metadata.Add(PnPConstants.MetaDataType, "SP.ContentType");
-                            (ct as ContentType).Requested = true;                            
+                            (ct as ContentType).Requested = true;
                         }
 
                         // Ensure the values are committed to the model when an item is being added: this
@@ -243,7 +243,7 @@ namespace PnP.Core.Model.SharePoint
                 {
                     field = fields.AsRequested().FirstOrDefault(p => p.InternalName == property.Name);
                     fieldLookupCache.Add(property.Name, field);
-                }               
+                }
 
                 if (field != null)
                 {
@@ -476,7 +476,7 @@ namespace PnP.Core.Model.SharePoint
                             propertyToUpdate.Value = property.Value;
                         }
                     }
-                
+
                 }
             }
 
@@ -484,7 +484,7 @@ namespace PnP.Core.Model.SharePoint
         }
 
         private static Tuple<FieldValue, bool> DetectSpecialFieldType(string name, IField field)
-        { 
+        {
             // Some system fields are of type lookup but should not be processed as lookup
             if (BuiltInFields.Contains(name))
             {
@@ -492,7 +492,7 @@ namespace PnP.Core.Model.SharePoint
             }
 
             switch (field.TypeAsString)
-                {
+            {
                 case "URL": return new Tuple<FieldValue, bool>(new FieldUrlValue() { Field = field }, false);
                 case "UserMulti": return new Tuple<FieldValue, bool>(new FieldUserValue() { Field = field }, true);
                 case "User": return new Tuple<FieldValue, bool>(new FieldUserValue() { Field = field }, false);
@@ -548,7 +548,7 @@ namespace PnP.Core.Model.SharePoint
                         }
                         else if (propertyValue.ValueKind == JsonValueKind.String)
                         {
-                            return StringToBool(propertyValue.GetString());                            
+                            return StringToBool(propertyValue.GetString());
                         }
                         else if (propertyValue.ValueKind == JsonValueKind.Number)
                         {
@@ -595,7 +595,7 @@ namespace PnP.Core.Model.SharePoint
                                 return intValue;
                             }
                             // Numbers and currency are provided in US format
-                            else if(double.TryParse(propertyValue.GetString(), NumberStyles.Number, CultureInfo.CreateSpecificCulture("en-US"), out double doubleValue))
+                            else if (double.TryParse(propertyValue.GetString(), NumberStyles.Number, CultureInfo.CreateSpecificCulture("en-US"), out double doubleValue))
                             {
                                 return doubleValue;
                             }

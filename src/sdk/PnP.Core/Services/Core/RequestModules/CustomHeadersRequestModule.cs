@@ -35,7 +35,7 @@ namespace PnP.Core.Services
                         }
                         else
                         {
-                            currentHeaders.Add(header.Key, header.Value);  
+                            currentHeaders.Add(header.Key, header.Value);
                         }
                     }
                 }

@@ -185,7 +185,7 @@ namespace PnP.Core.QueryModel
                 // Check if collection supports pagination
                 var pageableCollection = collection as ISupportPaging;
                 var typedCollection = collection as BaseDataModelCollection<TModel>;
-                
+
                 if (pageableCollection == null || // If the result set is not pageable
                     !pageableCollection.CanPage || // or if the result set is pageable, but there is no support for paging (no nextLink metadata)
                     (typedCollection != null && originalBatchRequest.ApiCall.Type == ApiType.SPORest && pageableCollection.CanPage && !query.Top.HasValue && count < typedCollection.PnPContext.GlobalOptions.HttpSharePointRestDefaultPageSize) || // or if the result set comes from SPO REST, is pageable, there is support for nextLink, there is no Top constraint and but the results are the whole result set

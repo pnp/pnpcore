@@ -128,7 +128,7 @@ namespace PnP.Core.Admin.Model.SharePoint
                     creationOptionsValues.Add($"SiteAlias:{siteToCreate.SiteAlias}");
                 }
                 creationOptionsValues.Add($"HubSiteId:{siteToCreate.HubSiteId}");
-                
+
                 if (siteToCreate.Owners != null && siteToCreate.Owners.Length > 0)
                 {
                     optionalParams.Add("Owners", siteToCreate.Owners);
@@ -159,7 +159,7 @@ namespace PnP.Core.Admin.Model.SharePoint
         {
             using (var tenantAdminContext = await context.GetSharePointAdmin().GetTenantAdminCenterContextAsync().ConfigureAwait(false))
             {
-                string owner = siteToCreate.Owner;                
+                string owner = siteToCreate.Owner;
                 var splitOwner = owner.Split(new char[] { '|' }, StringSplitOptions.RemoveEmptyEntries);
                 if (splitOwner.Length == 3)
                 {

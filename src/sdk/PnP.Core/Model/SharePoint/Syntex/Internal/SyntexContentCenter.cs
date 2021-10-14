@@ -105,7 +105,7 @@ namespace PnP.Core.Model.SharePoint
                     SyntexModel syntexModel = new SyntexModel()
                     {
                         ListItem = model,
-                        File = modelFile.Value                       
+                        File = modelFile.Value
                     };
                     models.Add(syntexModel);
                 }
@@ -118,6 +118,6 @@ namespace PnP.Core.Model.SharePoint
         {
             return GetSyntexModelsAsync(modelName).GetAwaiter().GetResult();
         }
-        
+
     }
 }

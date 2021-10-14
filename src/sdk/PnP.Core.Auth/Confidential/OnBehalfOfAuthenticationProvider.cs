@@ -50,7 +50,7 @@ namespace PnP.Core.Auth
             SecureString clientSecret,
             Func<string> userTokenProvider)
             : this(clientId, tenantId, new PnPCoreAuthenticationOnBehalfOfOptions
-            {                
+            {
                 ClientSecret = clientSecret?.ToInsecureString()
             }, userTokenProvider)
         {
@@ -155,7 +155,7 @@ namespace PnP.Core.Auth
                     .Create(ClientId)
                     .WithCertificate(Certificate)
                     .WithPnPAdditionalAuthenticationSettings(
-                        options.OnBehalfOf.AuthorityUri, 
+                        options.OnBehalfOf.AuthorityUri,
                         options.OnBehalfOf.RedirectUri,
                         TenantId)
                     .Build();

@@ -90,6 +90,6 @@ namespace PnP.Core.Model
             var body = expression.Body as MemberExpression ?? ((UnaryExpression)expression.Body).Operand as MemberExpression;
 
             (model as TransientObject).SetSystemValue(value, body.Member.Name);
-        }        
+        }
     }
 }

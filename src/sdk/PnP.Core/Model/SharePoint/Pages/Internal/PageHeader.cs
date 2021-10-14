@@ -106,7 +106,7 @@ namespace PnP.Core.Model.SharePoint
         {
             get
             {
-                return uniqueId;    
+                return uniqueId;
             }
         }
 
@@ -319,7 +319,7 @@ namespace PnP.Core.Model.SharePoint
                                     double.TryParse(translateYEN, System.Globalization.NumberStyles.Float, cultureToUse, out double translateY);
                                     TranslateY = translateY;
                                 }
-                                
+
                                 if (properties.TryGetProperty("altText", out JsonElement altText))
                                 {
                                     AlternativeText = altText.GetString();
@@ -462,7 +462,7 @@ namespace PnP.Core.Model.SharePoint
 
                 headerImageResolved = true;
             }
-            catch(SharePointRestServiceException ex)
+            catch (SharePointRestServiceException ex)
             {
                 var error = ex.Error as SharePointRestError;
 

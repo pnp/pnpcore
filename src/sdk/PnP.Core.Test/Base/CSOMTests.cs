@@ -27,7 +27,7 @@ namespace PnP.Core.Test.Base
             //TestCommon.Instance.GenerateMockingDebugFiles = true;
         }
 
-        
+
         [TestMethod]
         public async Task SimplePropertyRequest()
         {
@@ -46,7 +46,7 @@ namespace PnP.Core.Test.Base
                 Assert.IsTrue((response.ApiCall.CSOMRequests[0].Result as IWeb).Title == web.Title);
             }
         }
-        
+
         [TestMethod]
         public async Task MultipleSimplePropertyRequests()
         {
@@ -285,7 +285,7 @@ namespace PnP.Core.Test.Base
 
                 // update first 4 items
                 var firstItems = list.Items.Take(4).ToList();
-                foreach(var item in firstItems)
+                foreach (var item in firstItems)
                 {
                     item.Title = "Updated!";
                     // SytemUpdate uses a CSOM call under the covers
@@ -298,7 +298,7 @@ namespace PnP.Core.Test.Base
                 firstItems = list.Items.Take(4).ToList();
                 foreach (var item in firstItems)
                 {
-                    Assert.AreEqual(item.Title, "Updated!"); 
+                    Assert.AreEqual(item.Title, "Updated!");
                 }
 
                 await list.DeleteAsync();

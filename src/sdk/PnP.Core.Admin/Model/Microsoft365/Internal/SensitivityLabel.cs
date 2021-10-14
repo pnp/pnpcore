@@ -4,7 +4,7 @@ namespace PnP.Core.Admin.Model.Microsoft365
 {
     internal class SensitivityLabel : ISensitivityLabel
     {
-        public Guid Id {get; set; }
+        public Guid Id { get; set; }
 
         public string Name { get; set; }
 

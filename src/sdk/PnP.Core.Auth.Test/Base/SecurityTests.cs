@@ -14,7 +14,7 @@ namespace PnP.Core.Auth.Test.Base
         public static void TestFixtureSetup(TestContext context)
         {
             // Install the debug cert in the certstore ~ this works on Linux as well
-            string path = $"TestAssets{Path.DirectorySeparatorChar}pnp.pfx";            
+            string path = $"TestAssets{Path.DirectorySeparatorChar}pnp.pfx";
             using (X509Certificate2 certificate = new X509Certificate2(path, "PnPRocks!", X509KeyStorageFlags.PersistKeySet))
             {
                 X509Store xstore = new X509Store(StoreName.My, StoreLocation.CurrentUser);

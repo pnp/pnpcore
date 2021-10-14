@@ -25,7 +25,7 @@ namespace PnP.Core.Model
                     if (value.Value is FieldValue fieldValue && fieldValue.HasChanges)
                     {
                         changedProperties.Add(value.Key, value.Value);
-                    } 
+                    }
                     else if (value.Value is FieldValueCollection fieldValueCollection && fieldValueCollection.HasChanges)
                     {
                         changedProperties.Add(value.Key, value.Value);
@@ -70,7 +70,7 @@ namespace PnP.Core.Model
                 return false;
             }
         }
-            
+
         /// <summary>
         /// Default constructor
         /// </summary>
@@ -127,7 +127,7 @@ namespace PnP.Core.Model
 
         internal virtual void Commit()
         {
-            foreach(var property in base.Values)
+            foreach (var property in base.Values)
             {
                 // If there are FieldValue or FieldValueCollection properties (in case of an ListItem) then they need to be committed as well
                 if (property is FieldValue propertyFieldValue)

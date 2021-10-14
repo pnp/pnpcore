@@ -1218,7 +1218,7 @@ namespace PnP.Core.Test.SharePoint
                 // Make a change
                 myList.ContentTypesEnabled = true;
                 await myList.UpdateAsync();
-                
+
                 var changes = await myList.GetChangesAsync(new ChangeQueryOptions(false, true)
                 {
                     FetchLimit = 5,
@@ -1266,7 +1266,7 @@ namespace PnP.Core.Test.SharePoint
                 }
 
                 // Add an item
-                await myList.Items.AddAsync(new Dictionary<string, object>() { { "Title", "Test" } });                             
+                await myList.Items.AddAsync(new Dictionary<string, object>() { { "Title", "Test" } });
 
                 var changes = await myList.GetChangesAsync(new ChangeQueryOptions(false, true)
                 {

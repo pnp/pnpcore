@@ -11,7 +11,7 @@ namespace PnP.Core.Services
     public class PnPGlobalSettingsOptions
     {
         private const string UserAgentPrefix = "NONISV|SharePointPnP|PnPCoreSDK";
-        
+
         /// <summary>
         /// Turns on/off telemetry, can be customized via configuration. Defaults to false.
         /// </summary>

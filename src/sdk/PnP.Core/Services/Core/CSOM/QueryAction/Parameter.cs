@@ -87,7 +87,7 @@ namespace PnP.Core.Services.Core.CSOM.QueryAction
         }
     }
 
-    internal class ObjectReferenceParameter : Parameter 
+    internal class ObjectReferenceParameter : Parameter
     {
         internal int ObjectPathId { get; set; }
 

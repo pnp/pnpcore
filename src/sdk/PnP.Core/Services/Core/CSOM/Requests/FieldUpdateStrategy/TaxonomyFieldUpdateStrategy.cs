@@ -51,7 +51,7 @@ namespace PnP.Core.Services.Core.CSOM.Requests.FieldUpdateStrategy
                 Parameters = fld.GetRequestParameters(identity.Id)
             };
 
-            return new List<ActionObjectPath>(){ 
+            return new List<ActionObjectPath>(){
                 new ActionObjectPath()
                 {
                     Action = setFieldValueByValue,

@@ -233,8 +233,8 @@ namespace PnP.Core.Services
                                         else
                                         {
                                             listItem = null;
-                                        } 
-                                            
+                                        }
+
                                         list = GetParentDataModel(listItem as IMetadataExtensible) as Model.SharePoint.IList;
                                     }
                                     else if (pnpObject is Model.SharePoint.IListItemVersion listItemVersion)

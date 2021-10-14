@@ -181,7 +181,7 @@ namespace PnP.Core.Model.SharePoint
         }
 
         #endregion
-        
+
         #region Hub Site
 
         /// <summary>
@@ -217,7 +217,7 @@ namespace PnP.Core.Model.SharePoint
         {
             var result = false;
 
-            await EnsurePropertiesAsync(p=>p.IsHubSite).ConfigureAwait(false);
+            await EnsurePropertiesAsync(p => p.IsHubSite).ConfigureAwait(false);
 
             if (IsHubSite)
             {

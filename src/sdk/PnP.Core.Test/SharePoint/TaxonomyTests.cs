@@ -116,7 +116,7 @@ namespace PnP.Core.Test.SharePoint
             {
                 bool groupFound = false;
 
-                await foreach(var group in context.TermStore.Groups)
+                await foreach (var group in context.TermStore.Groups)
                 {
                     groupFound = true;
                 }
@@ -234,15 +234,18 @@ namespace PnP.Core.Test.SharePoint
                 var termStoreUpdated = await context.TermStore.GetAsync(p => p.Groups, o => o.Id);
                 // Extensions
 
-                Assert.ThrowsException<ArgumentNullException>(() => {
+                Assert.ThrowsException<ArgumentNullException>(() =>
+                {
                     termStoreUpdated.Groups.GetByName(string.Empty);
                 });
 
-                Assert.ThrowsException<ArgumentNullException>(() => {
+                Assert.ThrowsException<ArgumentNullException>(() =>
+                {
                     termStoreUpdated.Groups.GetByName(null);
                 });
 
-                Assert.ThrowsException<ArgumentNullException>(() => {
+                Assert.ThrowsException<ArgumentNullException>(() =>
+                {
                     termStoreUpdated.Groups.GetById(string.Empty);
                 });
 
@@ -308,11 +311,13 @@ namespace PnP.Core.Test.SharePoint
 
                 // Add new group
 
-                await Assert.ThrowsExceptionAsync<ArgumentNullException>(async () => {
+                await Assert.ThrowsExceptionAsync<ArgumentNullException>(async () =>
+                {
                     await termStore.Groups.AddAsync(string.Empty);
                 });
 
-                await Assert.ThrowsExceptionAsync<ArgumentNullException>(async () => {
+                await Assert.ThrowsExceptionAsync<ArgumentNullException>(async () =>
+                {
                     await termStore.Groups.AddBatchAsync(string.Empty);
                     await context.ExecuteAsync();
                 });
@@ -613,12 +618,14 @@ namespace PnP.Core.Test.SharePoint
                 Assert.IsTrue(newGroup.Name == newGroupName);
 
                 // Add term set
-                await Assert.ThrowsExceptionAsync<ArgumentNullException>(async () => {
+                await Assert.ThrowsExceptionAsync<ArgumentNullException>(async () =>
+                {
                     var termSet = await newGroup.Sets.AddBatchAsync(string.Empty);
                     await context.ExecuteAsync();
                 });
 
-                await Assert.ThrowsExceptionAsync<ArgumentNullException>(async () => {
+                await Assert.ThrowsExceptionAsync<ArgumentNullException>(async () =>
+                {
                     var termSet = await newGroup.Sets.AddAsync(string.Empty);
                     await context.ExecuteAsync();
                 });
@@ -662,7 +669,7 @@ namespace PnP.Core.Test.SharePoint
 
                     Assert.IsTrue(termsetLoadedViaLinq2.IsPropertyAvailable(p => p.Properties));
                     Assert.IsTrue(termsetLoadedViaLinq2.Properties.FirstOrDefault(p => p.KeyField == "property1") != null);
-                    
+
                     // test property update
                     termsetLoadedViaLinq2.AddProperty("property1", "value1-updated");
                     await termsetLoadedViaLinq2.UpdateAsync();
@@ -871,7 +878,7 @@ namespace PnP.Core.Test.SharePoint
                 newTerm.AddLabelAndDescription("T1 Dutch", "nl-NL", false, "Dutch label");
                 newTerm.Update();
 
-                var newTerm2 = termSet.Terms.AddBatch( "T2", "Description in English");
+                var newTerm2 = termSet.Terms.AddBatch("T2", "Description in English");
                 await context.ExecuteAsync();
 
                 // add child term
@@ -894,7 +901,7 @@ namespace PnP.Core.Test.SharePoint
                         if (termSet2 != null)
                         {
                             // Load terms and parent group
-                            termSet2.Load(p => p.Terms, o=>o.Id);
+                            termSet2.Load(p => p.Terms, o => o.Id);
                             Assert.IsTrue(termSet2.Terms.Length > 0);
 
                             // Group is automatically assigned if the group was loaded before
@@ -940,16 +947,18 @@ namespace PnP.Core.Test.SharePoint
 
                 // Add term set
                 var termSet = group.Sets.Add("PnPSet1", "Set description");
-                               
-                await Assert.ThrowsExceptionAsync<ArgumentNullException>(async () => {
+
+                await Assert.ThrowsExceptionAsync<ArgumentNullException>(async () =>
+                {
                     await termSet.Terms.AddAsync(string.Empty);
                 });
 
-                await Assert.ThrowsExceptionAsync<ArgumentNullException>(async () => {
+                await Assert.ThrowsExceptionAsync<ArgumentNullException>(async () =>
+                {
                     await termSet.Terms.AddBatchAsync(string.Empty);
                     await context.ExecuteAsync();
                 });
-                
+
                 // Delete term set 
                 termSet.Delete();
 
@@ -969,7 +978,7 @@ namespace PnP.Core.Test.SharePoint
 
                 // Add new group
                 var group = await context.TermStore.Groups.AddAsync(newGroupName);
-                
+
                 // Add term set
                 var termSet = await group.Sets.AddAsync("PnPSet1", "Set description");
 

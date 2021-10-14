@@ -163,7 +163,7 @@ namespace PnP.Core.Model.SharePoint
                         concreteInstance.Requested = true;
 
                         entityField.PropertyInfo?.SetValue(pnpObject, concreteInstance);
-                    }                    
+                    }
                     else // Simple property mapping
                     {
                         // Set the object property value taken from the JSON payload

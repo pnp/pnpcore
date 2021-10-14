@@ -889,7 +889,7 @@ namespace PnP.Core.Model.SharePoint
         public async Task<bool> IsSubSiteAsync()
         {
             await PnPContext.Site.EnsurePropertiesAsync(p => p.RootWeb).ConfigureAwait(false);
-            
+
             // If the id's differ this implies the current web is a sub site
             return PnPContext.Site.RootWeb.Id != Id;
         }
@@ -919,7 +919,7 @@ namespace PnP.Core.Model.SharePoint
                 await Features.EnableAsync(PageSchedulingFeature).ConfigureAwait(false);
             }
         }
-        
+
         public void EnsurePageScheduling()
         {
             EnsurePageSchedulingAsync().GetAwaiter().GetResult();

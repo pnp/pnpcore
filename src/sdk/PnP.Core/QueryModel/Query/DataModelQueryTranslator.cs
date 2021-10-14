@@ -114,7 +114,7 @@ namespace PnP.Core.QueryModel
                     }
                 }
             }
-            
+
         }
 
         private void VisitOrderBy(MethodCallExpression m, bool ascending = true)

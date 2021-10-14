@@ -41,7 +41,7 @@ namespace PnP.Core.Services
         /// <summary>
         /// Contains additional response headers (if any)
         /// </summary>
-        internal Dictionary<string, string> Headers { get;  }
+        internal Dictionary<string, string> Headers { get; }
 
         /// <summary>
         /// Stream containing binary content of the response

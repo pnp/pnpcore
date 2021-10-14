@@ -14,7 +14,7 @@
         /// Compact List Mode
         /// </summary>
         COMPACTLIST,
-        
+
         /// <summary>
         /// Tiles Mode
         /// </summary>

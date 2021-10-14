@@ -210,7 +210,7 @@ namespace PnP.Core.Test.SharePoint
         [TestMethod]
         public async Task AddListViewSpecificBatch()
         {
-           //TestCommon.Instance.Mocking = false;
+            //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 var list = await context.Web.Lists.GetByTitleAsync("Documents", p => p.Title, p => p.ListExperience, p => p.Views);
@@ -257,7 +257,7 @@ namespace PnP.Core.Test.SharePoint
                 Assert.AreEqual(viewTitle, result.Title);
 
                 var list2 = await context.Web.Lists.GetByTitleAsync("Documents", p => p.Title, p => p.Views);
-                var newView = list2.Views.AsRequested().FirstOrDefault(o=>o.Title == viewTitle);
+                var newView = list2.Views.AsRequested().FirstOrDefault(o => o.Title == viewTitle);
                 Assert.IsNotNull(newView);
                 Assert.IsTrue(newView.ViewType2 == ViewType2.COMPACTLIST);
 

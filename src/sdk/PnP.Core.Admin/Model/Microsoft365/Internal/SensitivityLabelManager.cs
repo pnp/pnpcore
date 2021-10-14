@@ -24,7 +24,7 @@ namespace PnP.Core.Admin.Model.Microsoft365
 
         internal static async Task<List<ISensitivityLabel>> GetLabelsUsingDelegatedPermissionsAsync(PnPContext context)
         {
-            return await GetLabelsImplementationAsync(context, "me/informationprotection/policy/labels").ConfigureAwait(false);   
+            return await GetLabelsImplementationAsync(context, "me/informationprotection/policy/labels").ConfigureAwait(false);
         }
 
         internal static async Task<List<ISensitivityLabel>> GetLabelsUsingApplicationPermissionsAsync(PnPContext context)

@@ -4,7 +4,7 @@
     /// Defines if and who liked a list item.
     /// </summary>
     [ConcreteType(typeof(LikedByInformation))]
-    public interface ILikedByInformation: IDataModel<ILikedByInformation>, IDataModelGet<ILikedByInformation>, IDataModelLoad<ILikedByInformation>
+    public interface ILikedByInformation : IDataModel<ILikedByInformation>, IDataModelGet<ILikedByInformation>, IDataModelLoad<ILikedByInformation>
     {
         /// <summary>
         /// Is this list item liked?

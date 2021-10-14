@@ -545,7 +545,7 @@ namespace PnP.Core.Model
             // p.Items
             var collectionMemberExpression = Expression.MakeMemberAccess(parentParameter, listProperty);
             var lambdaType = typeof(Func<,>).MakeGenericType(interfaceType, typeof(object));
-            
+
             var result = new List<LambdaExpression>(expressions.Length + 1);
             // Add expression for current collection
             var collectionExpression = Expression.Lambda(lambdaType, collectionMemberExpression, parentParameter);

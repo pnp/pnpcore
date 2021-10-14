@@ -44,7 +44,7 @@ namespace PnP.Core.Model.SharePoint
             else
             {
                 writer.WriteStringValue(value);
-            }            
+            }
         }
     }
 }

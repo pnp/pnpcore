@@ -76,7 +76,7 @@ namespace PnP.Core.Admin.Test.Microsoft365
                 using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
                 {
                     var labels = await SensitivityLabelManager.GetLabelsUsingDelegatedPermissionsAsync(context);
-                    Assert.IsTrue(labels.Any());    
+                    Assert.IsTrue(labels.Any());
                 }
             }
             finally

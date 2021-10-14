@@ -208,7 +208,7 @@ namespace PnP.Core.Test.Base
 
             bool requestPassed = false;
             int numberOfRequestsPassed = 0;
-            
+
             try
             {
                 // Hookup a fake TestManager class that simply returns the created telemetry properties versus sending them to AppInsights.

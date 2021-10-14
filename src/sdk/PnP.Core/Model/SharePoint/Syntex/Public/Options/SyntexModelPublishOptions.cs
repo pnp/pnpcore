@@ -3,7 +3,7 @@
     /// <summary>
     /// Information about the library to publish a Syntex model to
     /// </summary>
-    public class SyntexModelPublishOptions: SyntexModelUnPublishOptions
+    public class SyntexModelPublishOptions : SyntexModelUnPublishOptions
     {
         /// <summary>
         /// Default constructor

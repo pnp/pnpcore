@@ -130,7 +130,7 @@ namespace PnP.Core.Services
         /// <param name="operationName">Name of the operation, used for telemetry purposes</param>
         /// <param name="requestModules">List with request modules to execute</param>
         /// <returns>The id to created batch request</returns>
-        internal Guid Add(TransientObject model, EntityInfo entityInfo, HttpMethod method, ApiCall apiCall, 
+        internal Guid Add(TransientObject model, EntityInfo entityInfo, HttpMethod method, ApiCall apiCall,
             ApiCall backupApiCall, Func<FromJson, object> fromJsonCasting, Action<string> postMappingJson, string operationName, List<IRequestModule> requestModules)
         {
             var lastAddedRequest = GetLastRequest();
@@ -212,7 +212,7 @@ namespace PnP.Core.Services
                 request.ApiCall.Type.ToString(),
                 request.ApiCall.Request,
                 request.Method,
-                !string.IsNullOrEmpty(request.ApiCall.JsonBody) ? request.ApiCall.JsonBody : "")); 
+                !string.IsNullOrEmpty(request.ApiCall.JsonBody) ? request.ApiCall.JsonBody : ""));
         }
 
         /// <summary>

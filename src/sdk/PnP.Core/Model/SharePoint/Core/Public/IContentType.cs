@@ -100,7 +100,7 @@
         /// Gets or Sets the New Form URL of the Content Type
         /// </summary>
         public string NewFormUrl { get; set; }
-        
+
         /// <summary>
         /// Gets or Sets whether the Content Type is read only
         /// </summary>

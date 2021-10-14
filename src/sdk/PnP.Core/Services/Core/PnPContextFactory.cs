@@ -52,7 +52,7 @@ namespace PnP.Core.Services
             ContextOptions = contextOptions?.Value;
             GlobalOptions = globalOptions?.Value;
 
-            ConnectTelemetry();            
+            ConnectTelemetry();
         }
 
         /// <summary>
@@ -285,7 +285,7 @@ namespace PnP.Core.Services
 
             // Combine the default properties to load with optional additional properties
             var (siteProps, webProps) = GetDefaultPropertiesToLoad(options);
-            
+
             // Use the query client to build the correct initialization query for the given Web properties 
             BaseDataModel<IWeb> concreteEntity = EntityManager.GetEntityConcreteInstance(typeof(IWeb), context.Web, context) as BaseDataModel<IWeb>;
             var entityInfo = EntityManager.GetClassInfo(concreteEntity.GetType(), concreteEntity, null, webProps.ToArray());
@@ -330,11 +330,11 @@ namespace PnP.Core.Services
 
         internal static async Task CopyContextInitializationAsync(PnPContext source, PnPContext target)
         {
-            if (source.Web.IsPropertyAvailable(p=>p.Id) && 
+            if (source.Web.IsPropertyAvailable(p => p.Id) &&
                 source.Web.IsPropertyAvailable(p => p.Url) &&
-                source.Web.IsPropertyAvailable(p=>p.RegionalSettings) &&
-                source.Site.IsPropertyAvailable(p=>p.Id) &&
-                source.Site.IsPropertyAvailable(p=>p.GroupId))
+                source.Web.IsPropertyAvailable(p => p.RegionalSettings) &&
+                source.Site.IsPropertyAvailable(p => p.Id) &&
+                source.Site.IsPropertyAvailable(p => p.GroupId))
             {
                 target.Web.SetSystemProperty(p => p.Id, source.Web.Id);
                 target.Web.SetSystemProperty(p => p.Url, source.Web.Url);
@@ -342,7 +342,7 @@ namespace PnP.Core.Services
                 (target.Web as Web).Metadata = new Dictionary<string, string>((source.Web as Web).Metadata);
 
                 // Copy regional settings, important to trigger the creation of the regional settings model from the target web model
-                var regionalSettings = target.Web.RegionalSettings;                
+                var regionalSettings = target.Web.RegionalSettings;
                 if (source.Web.RegionalSettings.IsPropertyAvailable(p => p.AM)) { regionalSettings.SetSystemProperty(p => p.AM, source.Web.RegionalSettings.AM); };
                 if (source.Web.RegionalSettings.IsPropertyAvailable(p => p.CollationLCID)) { regionalSettings.SetSystemProperty(p => p.CollationLCID, source.Web.RegionalSettings.CollationLCID); };
                 if (source.Web.RegionalSettings.IsPropertyAvailable(p => p.DateFormat)) { regionalSettings.SetSystemProperty(p => p.DateFormat, source.Web.RegionalSettings.DateFormat); };
@@ -380,7 +380,7 @@ namespace PnP.Core.Services
                 // Copy site settings                
                 target.Site.SetSystemProperty(p => p.Id, source.Site.Id);
                 target.Site.SetSystemProperty(p => p.GroupId, source.Site.GroupId);
-                target.Site.Requested = true; 
+                target.Site.Requested = true;
                 (target.Site as Site).Metadata = new Dictionary<string, string>((source.Site as Site).Metadata);
 
                 // Copy the additional initialization properties (if any)
@@ -395,7 +395,7 @@ namespace PnP.Core.Services
 
                     if (source.LocalContextOptions.AdditionalSitePropertiesOnCreate != null)
                     {
-                        
+
                         foreach (var prop in source.LocalContextOptions.AdditionalSitePropertiesOnCreate)
                         {
                             if (!prop.Body.Type.ImplementsInterface(typeof(IDataModelParent)) && !prop.Body.Type.ImplementsInterface(typeof(IQueryable)))
@@ -403,7 +403,7 @@ namespace PnP.Core.Services
                                 clonedSiteProperties.Add(prop);
                                 target.Site.SetSystemProperty(prop, GetPropertyValue(source.Site, prop));
                             }
-                        }                        
+                        }
                     }
 
                     if (source.LocalContextOptions.AdditionalWebPropertiesOnCreate != null)
@@ -491,7 +491,7 @@ namespace PnP.Core.Services
 #if NET5_0
             if (RuntimeInformation.RuntimeIdentifier == "browser-wasm")
             {
-               connectTelemetry = false;            
+                connectTelemetry = false;
             }
 #endif
 
@@ -514,7 +514,7 @@ namespace PnP.Core.Services
             {
                 // Blazor WASM cannot handle the AppInsights NuGet package way of working,
                 // hence we're sending just one event to track WASM usage via a manual post
-                await SendBlazorInitEventAsync(context).ConfigureAwait(false);                 
+                await SendBlazorInitEventAsync(context).ConfigureAwait(false);
                 telemetryInitialized = true;
             }
 #endif
@@ -576,10 +576,10 @@ namespace PnP.Core.Services
                         }
                         // Add the batch Content-Type header
                         content.Headers.Add($"Content-Type", "application/x-json-stream");
-                        
+
                         // Connect content to request
                         request.Content = content;
-                        
+
                         HttpResponseMessage response = await httpClient.SendAsync(request).ConfigureAwait(false);
                         if (!response.IsSuccessStatusCode)
                         {

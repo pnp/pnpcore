@@ -217,7 +217,7 @@ namespace PnP.Core.Model.SharePoint
                 "(UTC+10:00)" => TZConvert.GetTimeZoneInfo("AUS Eastern Standard Time"),
                 "(UTC+11:00)" => TZConvert.GetTimeZoneInfo("Central Pacific Standard Time"),
                 "(UTC+12:00)" => TZConvert.GetTimeZoneInfo("New Zealand Standard Time"),
-                "(UTC+13:00)" => TZConvert.GetTimeZoneInfo("Tonga Standard Time"),                
+                "(UTC+13:00)" => TZConvert.GetTimeZoneInfo("Tonga Standard Time"),
                 _ => throw new ArgumentException("Unknown timezone mapping"),
             };
 

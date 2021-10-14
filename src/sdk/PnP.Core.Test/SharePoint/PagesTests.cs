@@ -186,7 +186,7 @@ namespace PnP.Core.Test.SharePoint
 
                     Assert.IsTrue(pages.AsEnumerable().First() != null);
                     Assert.IsTrue(pages.AsEnumerable().First().PagesLibrary != null);
-                    
+
                     // x BERT: This still gives me back the name in English, most likely because of my user's profile
                     // I would change the test inner logic forcing the language of the request (if possible)
 
@@ -323,14 +323,14 @@ namespace PnP.Core.Test.SharePoint
 
         private static async Task DisableMultilingual(Core.Services.PnPContext context)
         {
-            await context.Web.LoadAsync(p => p.Features, p => p.SupportedUILanguageIds);            
+            await context.Web.LoadAsync(p => p.Features, p => p.SupportedUILanguageIds);
             await context.Web.Features.DisableBatchAsync(new Guid("24611c05-ee19-45da-955f-6602264abaf8"));
             context.Web.SupportedUILanguageIds.Remove(1043);
             context.Web.SupportedUILanguageIds.Remove(1036);
             await context.Web.UpdateBatchAsync();
             await context.ExecuteAsync();
         }
-        
+
         [TestMethod]
         public async Task GenerateGetAndDeletePageTranslations()
         {
@@ -372,11 +372,11 @@ namespace PnP.Core.Test.SharePoint
 
                 var pages = await context.Web.GetPagesAsync(pageName);
                 await pages.AsEnumerable().First().DeleteAsync();
-                
+
                 // turn off multilingual again
                 await DisableMultilingual(context);
             }
-        }        
+        }
         #endregion
 
         #region Page deletion
@@ -416,7 +416,7 @@ namespace PnP.Core.Test.SharePoint
                 string pageName = TestCommon.GetPnPSdkTestAssetName("PageTextTest.aspx");
 
                 page.AddSection(CanvasSectionTemplate.OneColumn, 1);
-                
+
                 page.AddControl(page.NewTextPart("Normal"), page.Sections[0].Columns[0]);
                 page.AddControl(page.NewTextPart("<p>Normal</p><p>Normal</p>"), page.Sections[0].Columns[0]);
                 page.AddControl(page.NewTextPart("<h2>Heading1</h2><p>Normal</p>"), page.Sections[0].Columns[0]);
@@ -531,7 +531,7 @@ namespace PnP.Core.Test.SharePoint
                 page.AddSection(CanvasSectionTemplate.OneColumnFullWidth, 1);
                 page.AddSection(CanvasSectionTemplate.OneColumn, 2);
                 page.AddSection(CanvasSectionTemplate.TwoColumn, 3);
-                page.AddSection(CanvasSectionTemplate.TwoColumnLeft , 4);
+                page.AddSection(CanvasSectionTemplate.TwoColumnLeft, 4);
                 page.AddSection(CanvasSectionTemplate.TwoColumnRight, 5);
                 page.AddSection(CanvasSectionTemplate.ThreeColumn, 6);
 
@@ -592,13 +592,13 @@ namespace PnP.Core.Test.SharePoint
 
                 Assert.IsTrue(page.Sections[1].Type == CanvasSectionTemplate.OneColumn);
                 Assert.IsTrue(page.Sections[1].ZoneEmphasis == (int)VariantThemeType.None);
-                
+
                 Assert.IsTrue(page.Sections[2].Type == CanvasSectionTemplate.TwoColumn);
                 Assert.IsTrue(page.Sections[2].ZoneEmphasis == (int)VariantThemeType.Soft);
-                
+
                 Assert.IsTrue(page.Sections[3].Type == CanvasSectionTemplate.TwoColumnLeft);
                 Assert.IsTrue(page.Sections[3].ZoneEmphasis == (int)VariantThemeType.Strong);
-                
+
                 Assert.IsTrue(page.Sections[4].Type == CanvasSectionTemplate.TwoColumnRight);
                 Assert.IsTrue(page.Sections[4].ZoneEmphasis == (int)VariantThemeType.Neutral);
 
@@ -1054,7 +1054,7 @@ namespace PnP.Core.Test.SharePoint
                 {
                     await page.SaveAsync(pageName);
                 }
-                catch(ClientException ex)
+                catch (ClientException ex)
                 {
                     if ((ex.Error as ClientError).Type == ErrorType.Unsupported)
                     {
@@ -1175,7 +1175,7 @@ namespace PnP.Core.Test.SharePoint
                 page.AddControl(page.NewTextPart("PnP"), page.Sections[0].Columns[0]);
 
                 page.PageTitle = pageTitle;
-                
+
                 // Save the page
                 await page.SaveAsync(pageName);
 
@@ -1354,7 +1354,7 @@ namespace PnP.Core.Test.SharePoint
                 page.PageHeader.ShowTopicHeader = true;
                 page.PageHeader.TopicHeader = "I'm a topic header";
                 page.PageHeader.TextAlignment = PageHeaderTitleAlignment.Center;
-                page.PageHeader.ShowPublishDate = true;                
+                page.PageHeader.ShowPublishDate = true;
 
                 // Save the page
                 await page.SaveAsync(pageName);
@@ -1801,12 +1801,12 @@ namespace PnP.Core.Test.SharePoint
                 newPage.AddControl(newPage.NewTextPart("I"), newPage.Sections[0].Columns[0]);
                 newPage.AddControl(newPage.NewTextPart("like"), newPage.Sections[0].Columns[1]);
                 newPage.AddControl(newPage.NewTextPart("PnP"), newPage.Sections[0].Columns[2]);
-                
+
                 // Save the page
                 await newPage.SaveAsync(pageName);
 
                 // Load the Page File
-                var pageFile = await newPage.GetPageFileAsync(p=>p.UniqueId, p=>p.ListId, p=>p.ListItemAllFields);
+                var pageFile = await newPage.GetPageFileAsync(p => p.UniqueId, p => p.ListId, p => p.ListItemAllFields);
 
                 pageFile.ListItemAllFields["ContentTypeId"] = PageConstants.ModernArticlePage;
                 await pageFile.ListItemAllFields.SystemUpdateAsync();
@@ -1905,7 +1905,7 @@ namespace PnP.Core.Test.SharePoint
                 // Create new page from this template
                 string pageName = TestCommon.GetPnPSdkTestAssetName("FromTemplate.aspx");
                 (templatePage.Sections[0].Controls[0] as IPageText).Text = "Updated content";
-                templatePage.Save(pageName);                
+                templatePage.Save(pageName);
 
                 pages = await context.Web.GetPagesAsync(TestCommon.GetPnPSdkTestAssetName(""));
                 var fromTemplatePage = pages.AsEnumerable().FirstOrDefault(p => p.Name == pageName);
@@ -1968,7 +1968,7 @@ namespace PnP.Core.Test.SharePoint
                                                        .Where(p => p.TemplateType == ListTemplateType.WebPageLibrary)
                                                        .ToListAsync()
                                                        .ConfigureAwait(false);
-                if(libraries.Count == 1)
+                if (libraries.Count == 1)
                 {
                     //configure PAges Library for Testcase
                     IList pagesLibrary = libraries.First();
@@ -1997,7 +1997,7 @@ namespace PnP.Core.Test.SharePoint
                     var pageFile = await page.GetPageFileAsync(p => p.Level);
                     //as we have no MinorVersions it should be Published
                     Assert.IsTrue(pageFile.Level == PublishedStatus.Published);
-                    
+
                     //call publish again should not fail
                     await page.PublishAsync();
 
@@ -2065,7 +2065,7 @@ namespace PnP.Core.Test.SharePoint
                     // Save the page
                     await page.SaveAsync(pageName);
 
-                    var pageFile = await page.GetPageFileAsync(p => p.Level, p=>p.CheckOutType);
+                    var pageFile = await page.GetPageFileAsync(p => p.Level, p => p.CheckOutType);
                     Assert.AreNotEqual(CheckOutType.None, pageFile.CheckOutType);
                     //as we have no MinorVersions but ForceCheckout it should not be Published
                     Assert.IsTrue(pageFile.Level != PublishedStatus.Published);
@@ -2274,7 +2274,7 @@ namespace PnP.Core.Test.SharePoint
 
                 // Save the page
                 await page.SaveAsync(pageName);
-                
+
                 // promote as news article
                 await page.PromoteAsNewsArticleAsync();
 
@@ -2391,7 +2391,7 @@ namespace PnP.Core.Test.SharePoint
             {
                 var newPage = await context.Web.NewPageAsync();
                 string pageName = TestCommon.GetPnPSdkTestAssetName("DisableEnablePageComments.aspx");
-                
+
                 // Save the page
                 await newPage.SaveAsync(pageName);
 
@@ -2555,7 +2555,7 @@ namespace PnP.Core.Test.SharePoint
                     var properties = TestManager.GetProperties(context);
                     scheduleDate = new DateTime(long.Parse(properties["Ticks"]));
                 }
-                
+
                 newPage.SchedulePublish(scheduleDate);
 
                 // Verify the scheduled publishing date
@@ -2688,7 +2688,7 @@ namespace PnP.Core.Test.SharePoint
                 var pages = await context.Web.GetPagesAsync("Home.aspx");
                 var homePage = pages.First();
 
-                var file = await homePage.GetPageFileAsync(p=>p.ListId, p=>p.UniqueId, p=>p.ServerRelativeUrl);                
+                var file = await homePage.GetPageFileAsync(p => p.ListId, p => p.UniqueId, p => p.ServerRelativeUrl);
                 siteId = context.Site.Id;
                 webId = context.Web.Id;
                 listId = file.ListId;
@@ -2746,7 +2746,7 @@ namespace PnP.Core.Test.SharePoint
                 // Create new "home" page
                 var newPage = await context.Web.NewPageAsync(PageLayoutType.Home);
                 string pageName = TestCommon.GetPnPSdkTestAssetName("HomePageCreate.aspx");
-                
+
                 // A simple section and text control to the page                
                 newPage.AddControl(newPage.NewTextPart("PnP"), newPage.DefaultSection.DefaultColumn);
 

@@ -86,7 +86,7 @@ namespace PnP.Core.Test.SharePoint
                 Assert.IsTrue(!string.IsNullOrEmpty(models.First().Name));
                 Assert.IsTrue(models.First().ModelLastTrained != DateTime.MinValue);
                 Assert.IsTrue(models.First().Id > 0);
-                string description = models.First().Description;                
+                string description = models.First().Description;
             }
         }
 
@@ -279,7 +279,7 @@ namespace PnP.Core.Test.SharePoint
                 Assert.IsFalse(batchPublishResult.IsAvailable);
                 await context.ExecuteAsync();
 
-                foreach(var result in batchPublishResult)
+                foreach (var result in batchPublishResult)
                 {
                     Assert.IsTrue(result.ErrorMessage == null);
                     Assert.IsTrue(result.StatusCode == 201);
@@ -438,7 +438,7 @@ namespace PnP.Core.Test.SharePoint
 
                 var batch = context.NewBatch();
                 var batchResult = await modelToRegister.GetModelPublicationsBatchAsync(batch);
-                Assert.IsFalse(batchResult.IsAvailable);                
+                Assert.IsFalse(batchResult.IsAvailable);
                 await context.ExecuteAsync(batch);
                 Assert.IsTrue(batchResult.IsAvailable);
 
@@ -618,12 +618,12 @@ namespace PnP.Core.Test.SharePoint
                 Assert.IsTrue(result.Succeeded);
 
                 // Classify and extract the library, use a small page size to trigger the paging logic
-                var results = await testLibrary.ClassifyAndExtractAsync(pageSize:4);
+                var results = await testLibrary.ClassifyAndExtractAsync(pageSize: 4);
 
                 Assert.IsTrue(results.Count == 10);
 
                 // Validate results
-                foreach(var classifyInformation in results)
+                foreach (var classifyInformation in results)
                 {
                     Assert.IsTrue(classifyInformation.Created != DateTime.MinValue);
                     Assert.IsTrue(classifyInformation.DeliverDate != DateTime.MinValue);

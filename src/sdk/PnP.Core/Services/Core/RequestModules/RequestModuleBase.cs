@@ -12,7 +12,7 @@ namespace PnP.Core.Services
         /// <summary>
         /// Each request module must have a unique id, override this property in your request module
         /// </summary>
-        public virtual Guid Id => throw new NotImplementedException(); 
+        public virtual Guid Id => throw new NotImplementedException();
 
         /// <summary>
         /// Defines if the request module is applied when invoking SPO REST requests. Defaults to true

@@ -37,7 +37,7 @@ namespace PnP.Core.Model.Security
 
             var newGroup = CreateNewAndAdd() as SharePointGroup;
             newGroup.Title = name;
-         
+
             return await newGroup.AddAsync().ConfigureAwait(false) as SharePointGroup;
         }
 

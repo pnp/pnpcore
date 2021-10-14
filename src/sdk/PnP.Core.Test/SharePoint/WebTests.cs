@@ -124,7 +124,7 @@ namespace PnP.Core.Test.SharePoint
                     p => p.MegaMenuEnabled,
                     p => p.HasUniqueRoleAssignments
                     );
-                
+
                 var web = context.Web;
 
                 Assert.IsNotNull(web);
@@ -569,7 +569,7 @@ namespace PnP.Core.Test.SharePoint
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSubSite))
             {
                 await context.Web.LoadAsync(p => p.RegionalSettings);
-                await context.Web.RegionalSettings.LoadAsync(p=>p.TimeZones);
+                await context.Web.RegionalSettings.LoadAsync(p => p.TimeZones);
 
                 var timeZones = context.Web.RegionalSettings.TimeZones;
 
@@ -594,13 +594,13 @@ namespace PnP.Core.Test.SharePoint
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSubSite))
             {
-                await context.Web.RegionalSettings.LoadAsync(p=>p.DecimalSeparator, p => p.TimeZone);
+                await context.Web.RegionalSettings.LoadAsync(p => p.DecimalSeparator, p => p.TimeZone);
 
                 Assert.IsTrue(context.Web.RegionalSettings.Requested);
                 Assert.IsTrue(context.Web.RegionalSettings.IsPropertyAvailable(p => p.DecimalSeparator));
                 Assert.IsTrue(context.Web.RegionalSettings.IsPropertyAvailable(p => p.TimeZone));
                 Assert.IsTrue(context.Web.RegionalSettings.TimeZone.Requested);
-                Assert.IsTrue(context.Web.RegionalSettings.TimeZone.IsPropertyAvailable(p=>p.Bias));
+                Assert.IsTrue(context.Web.RegionalSettings.TimeZone.IsPropertyAvailable(p => p.Bias));
             }
         }
 
@@ -1135,9 +1135,9 @@ namespace PnP.Core.Test.SharePoint
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 string webTitle = "AddWebWithCustomOptions";
-                var addedWeb = await context.Web.Webs.AddAsync(new WebOptions 
-                { 
-                    Title = webTitle, 
+                var addedWeb = await context.Web.Webs.AddAsync(new WebOptions
+                {
+                    Title = webTitle,
                     Url = webTitle,
                     Description = "Description of the sub web",
                     Template = "STS#0",
@@ -1304,7 +1304,7 @@ namespace PnP.Core.Test.SharePoint
                     ChangeTokenStart = firstChangeToken,
                     ChangeTokenEnd = lastChangetoken
                 });
-               
+
                 Assert.IsTrue(changes2.Count == 9);
             }
         }

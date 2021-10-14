@@ -79,7 +79,7 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// Gets the Html Schema Xml
         /// </summary>
-        public string HtmlSchemaXml { get;  }
+        public string HtmlSchemaXml { get; }
 
         /// <summary>
         /// Gets the Id

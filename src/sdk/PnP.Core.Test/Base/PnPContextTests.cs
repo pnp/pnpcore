@@ -356,10 +356,10 @@ namespace PnP.Core.Test.Base
         {
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextWithOptionsAsync(TestCommon.TestSite, new PnPContextOptions()
-                                                            {
-                                                                AdditionalSitePropertiesOnCreate = new Expression<Func<ISite, object>>[] { s => s.Url, s => s.HubSiteId },
-                                                                AdditionalWebPropertiesOnCreate = new Expression<Func<IWeb, object>>[] { w => w.ServerRelativeUrl }
-                                                            })
+            {
+                AdditionalSitePropertiesOnCreate = new Expression<Func<ISite, object>>[] { s => s.Url, s => s.HubSiteId },
+                AdditionalWebPropertiesOnCreate = new Expression<Func<IWeb, object>>[] { w => w.ServerRelativeUrl }
+            })
                 )
             {
                 Assert.IsNotNull(context.Web);
@@ -395,7 +395,7 @@ namespace PnP.Core.Test.Base
                                                                                            s => s.Features },
                 AdditionalWebPropertiesOnCreate = new Expression<Func<IWeb, object>>[] { w => w.ServerRelativeUrl,
                                                                                          w => w.Fields, w => w.Features,
-                                                                                         w => w.Lists.QueryProperties(r => r.Title, 
+                                                                                         w => w.Lists.QueryProperties(r => r.Title,
                                                                                             r => r.RootFolder.QueryProperties(p=>p.ServerRelativeUrl)) }
             })
                 )
@@ -424,7 +424,7 @@ namespace PnP.Core.Test.Base
                 Assert.IsTrue(context.Web.IsPropertyAvailable(p => p.Lists));
                 Assert.IsTrue(context.Web.Lists.AsRequested().FirstOrDefault().IsPropertyAvailable(p => p.Title));
                 Assert.IsTrue(context.Web.Lists.AsRequested().FirstOrDefault().IsPropertyAvailable(p => p.RootFolder));
-                Assert.IsTrue(context.Web.Lists.AsRequested().FirstOrDefault().RootFolder.IsPropertyAvailable(p=>p.ServerRelativeUrl));
+                Assert.IsTrue(context.Web.Lists.AsRequested().FirstOrDefault().RootFolder.IsPropertyAvailable(p => p.ServerRelativeUrl));
 
                 Assert.IsTrue(context.Site.IsPropertyAvailable(p => p.Url));
                 Assert.IsTrue(context.Site.IsPropertyAvailable(p => p.HubSiteId));

@@ -104,7 +104,7 @@ namespace PnP.Core.Model.SharePoint
                     Type = (Section as CanvasSection).SectionType == 0 ? 1 : (Section as CanvasSection).SectionType,
                     DisplayName = Section.DisplayName,
                     IsExpanded = Section.IsExpanded,
-                    ShowDividerLine = Section.ShowDividerLine,                    
+                    ShowDividerLine = Section.ShowDividerLine,
                 };
 
                 if (Section.IconAlignment.HasValue)

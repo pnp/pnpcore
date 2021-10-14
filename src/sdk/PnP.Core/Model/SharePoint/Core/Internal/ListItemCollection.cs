@@ -190,7 +190,7 @@ namespace PnP.Core.Model.SharePoint
                 RemoveFromModel = removeFromModel
             };
         }
-        
+
         #endregion
 
     }

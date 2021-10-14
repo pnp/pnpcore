@@ -29,7 +29,7 @@ namespace PnP.Core.Test.SharePoint
                 Assert.IsNotNull(site);
                 Assert.AreEqual(default, site.HubSiteId);
                 Assert.IsFalse(site.IsHubSite);
-                
+
             }
         }
 
@@ -46,7 +46,8 @@ namespace PnP.Core.Test.SharePoint
                 Assert.IsNotNull(site);
                 Assert.IsTrue(site.IsPropertyAvailable(s => s.IsHubSite));
 
-                if (!site.IsHubSite) { 
+                if (!site.IsHubSite)
+                {
                     var hub = await site.RegisterHubSiteAsync();
                     Assert.IsNotNull(hub);
                 }
@@ -58,7 +59,7 @@ namespace PnP.Core.Test.SharePoint
                 {
                     PnPContext = context,
                     Id = site.HubSiteId
-                   
+
                 };
 
                 await hubSite.LoadAsync();
@@ -231,7 +232,8 @@ namespace PnP.Core.Test.SharePoint
                 var result = await site.RegisterHubSiteAsync();
                 Assert.IsNotNull(result);
 
-                await Assert.ThrowsExceptionAsync<ClientException>( async () => {
+                await Assert.ThrowsExceptionAsync<ClientException>(async () =>
+                {
 
                     // Check this is updated
                     site = await context.Site.GetAsync(

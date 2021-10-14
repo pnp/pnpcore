@@ -171,8 +171,8 @@ namespace PnP.Core.Model.SharePoint
             }
         }
 
-        public DateTime? ScheduledPublishDate 
-        { 
+        public DateTime? ScheduledPublishDate
+        {
             get
             {
                 if (PageListItem != null && PageListItem.Values.ContainsKey(PageConstants._PublishStartDate) && PageListItem[PageConstants._PublishStartDate] != null)
@@ -367,7 +367,7 @@ namespace PnP.Core.Model.SharePoint
                 </View>";
 
             string extraPropertiesToLoad = $"";
-            if (pagesLibrary.Fields.AsRequested().FirstOrDefault(p=>p.InternalName == PageConstants._PublishStartDate) != null)
+            if (pagesLibrary.Fields.AsRequested().FirstOrDefault(p => p.InternalName == PageConstants._PublishStartDate) != null)
             {
                 extraPropertiesToLoad = "<FieldRef Name='{PageConstants._PublishStartDate}' />";
             }
@@ -1390,7 +1390,7 @@ namespace PnP.Core.Model.SharePoint
                     AddSection(new CanvasSection(this) { ZoneEmphasis = 0 }, 0);
                     currentSection = sections.FirstOrDefault();
                 }
-                
+
                 ApplyCollapsibleSectionSettings(zoneGroupMetadata, currentSection);
 
                 var currentColumn = currentSection.Columns.FirstOrDefault();
@@ -2228,7 +2228,7 @@ namespace PnP.Core.Model.SharePoint
             // "Additions to this Web site have been blocked" error
             await PageListItem.SystemUpdateAsync().ConfigureAwait(false);
         }
-        
+
         public void RemoveSchedulePublish()
         {
             RemoveSchedulePublishAsync().GetAwaiter().GetResult();
@@ -2581,7 +2581,7 @@ namespace PnP.Core.Model.SharePoint
                 DefaultWebPart.SpacesModelViewer => "e19cef07-c1ad-42ea-a3d8-a536d6415476",
                 DefaultWebPart.SpacesImageThreeSixty => "8bcd4369-10e6-46a9-b718-fa47db2864ca",
                 DefaultWebPart.SpacesVideoThreeSixty => "4bdfb4be-6e39-4b1d-af8b-addbd3a582ff",
-                DefaultWebPart.SpacesText2D => "e30ff702-e1a4-4e02-8c11-3cce0139727a", 
+                DefaultWebPart.SpacesText2D => "e30ff702-e1a4-4e02-8c11-3cce0139727a",
                 DefaultWebPart.SpacesVideoPlayer => "8902cf6d-22e5-4615-b036-57c613b8db6b",
                 DefaultWebPart.SpacesPeople => "102f1fc1-3369-4372-8e44-f27dd11a9377",
                 _ => "",

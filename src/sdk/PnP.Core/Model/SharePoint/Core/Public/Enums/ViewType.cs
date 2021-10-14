@@ -24,7 +24,7 @@
         /// Calendar list view type
         /// </summary>
         CALENDAR,
-        
+
         /// <summary>
         /// List view type that displays recurring events
         /// </summary>

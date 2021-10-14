@@ -73,7 +73,7 @@ namespace PnP.Core.Admin.Test.SharePoint
         private void VerifySite(List<ISiteCollection> sites, PnPContext context)
         {
             Assert.IsTrue(sites.Count > 0);
-            var myTestSite = sites.FirstOrDefault(p => p.Id == context.Site.Id);                
+            var myTestSite = sites.FirstOrDefault(p => p.Id == context.Site.Id);
             Assert.IsTrue(myTestSite != null);
             Assert.IsTrue(myTestSite.RootWebId == context.Web.Id);
             Assert.IsTrue(!string.IsNullOrEmpty(myTestSite.Name));

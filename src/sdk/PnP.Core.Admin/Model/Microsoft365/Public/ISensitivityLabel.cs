@@ -15,12 +15,12 @@ namespace PnP.Core.Admin.Model.Microsoft365
         /// <summary>
         /// Name of the sensitivity label
         /// </summary>
-        public string Name {  get; }
+        public string Name { get; }
 
         /// <summary>
         /// Description of the sensitivity label
         /// </summary>
-        public string Description {  get; }
+        public string Description { get; }
 
         /// <summary>
         /// Is this the sensitivity label active?
@@ -35,7 +35,7 @@ namespace PnP.Core.Admin.Model.Microsoft365
         /// <summary>
         /// The sensitivity setting for this label
         /// </summary>
-        public int Sensitivity {  get; }
-        
+        public int Sensitivity { get; }
+
     }
 }

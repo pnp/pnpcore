@@ -152,6 +152,6 @@ namespace PnP.Core.Services
         /// <summary>
         /// Optional Http-Headers for Request to make
         /// </summary>
-        internal Dictionary<string, string> Headers { get; set; } 
+        internal Dictionary<string, string> Headers { get; set; }
     }
 }

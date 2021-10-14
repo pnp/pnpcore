@@ -21,7 +21,7 @@ namespace PnP.Core.Services.Core.CSOM.QueryIdentities
             return $"<StaticProperty  Id=\"{Id}\" TypeId=\"{TypeId}\" Name=\"{Name}\" />";
         }
     }
-    
+
     internal class NamedProperty
     {
         public string Name { get; set; }

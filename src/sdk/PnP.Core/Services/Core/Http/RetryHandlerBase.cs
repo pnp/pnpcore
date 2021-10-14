@@ -69,7 +69,7 @@ namespace PnP.Core.Services
                 if (response.Content != null)
                 {
 #if NET5_0
-                    await response.Content.ReadAsByteArrayAsync(cancellationToken).ConfigureAwait(false);                    
+                    await response.Content.ReadAsByteArrayAsync(cancellationToken).ConfigureAwait(false);
 #else
                     await response.Content.ReadAsByteArrayAsync().ConfigureAwait(false);
 #endif

@@ -43,7 +43,7 @@ namespace PnP.Core.Test.Security
                     // get existing role def
                     var adminRoleDef = context.Web.RoleDefinitions.AsEnumerable().Where(r => r.Name == "Administrator");
                     Assert.IsNotNull(adminRoleDef);
-                    
+
                     roleDefinition = await context.Web.RoleDefinitions.AddAsync("Test RoleDef 2", Model.SharePoint.RoleType.Administrator, new Model.SharePoint.PermissionKind[] { Model.SharePoint.PermissionKind.AddAndCustomizePages }, "", false, 0);
                     Assert.IsTrue(roleDefinition.Requested);
                 }

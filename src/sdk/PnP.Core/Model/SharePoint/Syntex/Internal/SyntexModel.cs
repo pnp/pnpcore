@@ -747,7 +747,7 @@ namespace PnP.Core.Model.SharePoint
         public async Task<IEnumerableBatchResult<ISyntexModelPublicationResult>> UnPublishModelBatchAsync(Batch batch, List<SyntexModelUnPublishOptions> unPublicationOptions)
         {
             List<SyntexModelPublication> modelUnPublications = BuildModelUnPublishList(unPublicationOptions);
-            
+
             var unPublishInfo = new
             {
                 publications = modelUnPublications

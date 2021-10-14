@@ -230,7 +230,7 @@ namespace PnP.Core.Model.SharePoint
         /// Collection of role assignments for this list
         /// </summary>
         public IRoleAssignmentCollection RoleAssignments { get; }
-        
+
         /// <summary>
         /// Get a list of the views
         /// </summary>

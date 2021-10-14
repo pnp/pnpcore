@@ -70,83 +70,83 @@ namespace PnP.Core.Test.Base
 
             return requests;
         }
-/*
-        private async Task<List<string>> GetODataAPICallTestAsync<TModel, TModelInterface>(Tuple<TModel, EntityInfo, Expression<Func<TModelInterface, object>>[]> input,
-                                                                                           ODataQuery<TModelInterface> query,
-                                                                                           bool? collectionMode = false, Expression<Func<TModelInterface, bool>>[] filter = null, bool firstOrDefaultMode = false)
-        {
-            var (model, entityInfo, expressions) = (input.Item1, input.Item2, input.Item3);
-
-            // Instantiate the relevant collection class
-            var assembly = Assembly.GetAssembly(typeof(IWeb));
-            var collectionType = assembly.GetType(typeof(TModel).FullName + "Collection");
-            var modelCollection = Activator.CreateInstance(collectionType, (model as IDataModelWithContext).PnPContext, null, null);
-
-            // Process the input expressions
-
-            IQueryable<TModelInterface> selectionTarget = modelCollection as IQueryable<TModelInterface>;
-            if (expressions != null)
-            {
-                selectionTarget = QueryClient.ProcessExpression(selectionTarget, entityInfo, expressions);
-            }
-
-            // Translate the expressions to a query
-            var actualQuery = DataModelQueryProvider<TModelInterface>.Translate(selectionTarget.Expression);
-
-            // Unite with the provided query
-            if (collectionMode == null || (collectionMode.HasValue && collectionMode.Value == false))
-            {
-                if (query != null)
+        /*
+                private async Task<List<string>> GetODataAPICallTestAsync<TModel, TModelInterface>(Tuple<TModel, EntityInfo, Expression<Func<TModelInterface, object>>[]> input,
+                                                                                                   ODataQuery<TModelInterface> query,
+                                                                                                   bool? collectionMode = false, Expression<Func<TModelInterface, bool>>[] filter = null, bool firstOrDefaultMode = false)
                 {
-                    if (query.Top.HasValue)
+                    var (model, entityInfo, expressions) = (input.Item1, input.Item2, input.Item3);
+
+                    // Instantiate the relevant collection class
+                    var assembly = Assembly.GetAssembly(typeof(IWeb));
+                    var collectionType = assembly.GetType(typeof(TModel).FullName + "Collection");
+                    var modelCollection = Activator.CreateInstance(collectionType, (model as IDataModelWithContext).PnPContext, null, null);
+
+                    // Process the input expressions
+
+                    IQueryable<TModelInterface> selectionTarget = modelCollection as IQueryable<TModelInterface>;
+                    if (expressions != null)
                     {
-                        actualQuery.Top = query.Top;
+                        selectionTarget = QueryClient.ProcessExpression(selectionTarget, entityInfo, expressions);
                     }
 
-                    if (query.Skip.HasValue)
+                    // Translate the expressions to a query
+                    var actualQuery = DataModelQueryProvider<TModelInterface>.Translate(selectionTarget.Expression);
+
+                    // Unite with the provided query
+                    if (collectionMode == null || (collectionMode.HasValue && collectionMode.Value == false))
                     {
-                        actualQuery.Skip = query.Skip;
+                        if (query != null)
+                        {
+                            if (query.Top.HasValue)
+                            {
+                                actualQuery.Top = query.Top;
+                            }
+
+                            if (query.Skip.HasValue)
+                            {
+                                actualQuery.Skip = query.Skip;
+                            }
+
+                            actualQuery.Filters.AddRange(query.Filters);
+
+                            actualQuery.OrderBy.AddRange(query.OrderBy);
+                        }
+                    }
+                    else
+                    {
+                        // In collection mode we rely on the expression parsing by the entity system but do use the linq query for filtering
+                        if (filter != null)
+                        {
+                            selectionTarget = selectionTarget.Where(filter[0]);
+
+                            // Team Channel querying will not work with $top...let's rely on client side filtering instead
+                            if (firstOrDefaultMode && typeof(TModelInterface) != typeof(ITeamChannel))
+                            {
+                                selectionTarget = selectionTarget.Take(1);
+                            }
+
+                            actualQuery = DataModelQueryProvider<TModelInterface>.Translate(selectionTarget.Expression);
+                        }
+                        else
+                        {
+                            actualQuery = DataModelQueryProvider<TModelInterface>.Translate(null);
+                        }
                     }
 
-                    actualQuery.Filters.AddRange(query.Filters);
+                    List<string> requests = new List<string>();
 
-                    actualQuery.OrderBy.AddRange(query.OrderBy);
+                    //// Build the proper ApiCall
+                    //var apiCalls = await QueryClient.BuildGetAPICallAsync<TModelInterface>((BaseDataModel<TModelInterface>)(object)model, entityInfo, oDataQuery: actualQuery, default(ApiCall));
+
+                    //foreach (var apiCall in apiCalls)
+                    //{
+                    //    requests.Add(CleanRequestUrl((model as IDataModelWithContext).PnPContext, apiCall.Request));
+                    //}
+
+                    return requests;
                 }
-            }
-            else
-            {
-                // In collection mode we rely on the expression parsing by the entity system but do use the linq query for filtering
-                if (filter != null)
-                {
-                    selectionTarget = selectionTarget.Where(filter[0]);
-
-                    // Team Channel querying will not work with $top...let's rely on client side filtering instead
-                    if (firstOrDefaultMode && typeof(TModelInterface) != typeof(ITeamChannel))
-                    {
-                        selectionTarget = selectionTarget.Take(1);
-                    }
-
-                    actualQuery = DataModelQueryProvider<TModelInterface>.Translate(selectionTarget.Expression);
-                }
-                else
-                {
-                    actualQuery = DataModelQueryProvider<TModelInterface>.Translate(null);
-                }
-            }
-
-            List<string> requests = new List<string>();
-
-            //// Build the proper ApiCall
-            //var apiCalls = await QueryClient.BuildGetAPICallAsync<TModelInterface>((BaseDataModel<TModelInterface>)(object)model, entityInfo, oDataQuery: actualQuery, default(ApiCall));
-
-            //foreach (var apiCall in apiCalls)
-            //{
-            //    requests.Add(CleanRequestUrl((model as IDataModelWithContext).PnPContext, apiCall.Request));
-            //}
-
-            return requests;
-        }
-*/
+        */
         private static string CleanRequestUrl(PnPContext context, string query)
         {
             query = query.Replace($"/{context.Uri.DnsSafeHost}", "/{hostname}");

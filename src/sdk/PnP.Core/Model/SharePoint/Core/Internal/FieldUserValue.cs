@@ -24,7 +24,7 @@ namespace PnP.Core.Model.SharePoint
                 return GetValue<ISharePointPrincipal>();
             }
             set
-            { 
+            {
                 SetValue(value);
 
                 if (value != null)
@@ -51,7 +51,7 @@ namespace PnP.Core.Model.SharePoint
             if (json.ValueKind == JsonValueKind.String)
             {
                 LookupId = int.Parse(json.GetString());
-            } 
+            }
             else if (json.ValueKind == JsonValueKind.Number)
             {
                 LookupId = json.GetInt32();
@@ -74,7 +74,7 @@ namespace PnP.Core.Model.SharePoint
                 if (string.IsNullOrEmpty(properties["id"]))
                 {
                     LookupId = -1;
-                    
+
                     // Clear changes
                     Commit();
 

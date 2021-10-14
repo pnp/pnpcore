@@ -19,7 +19,7 @@ namespace PnP.Core.Model
             BatchRequest = batch.GetRequest(batchRequestId);
         }
     }
-    
+
     internal class BatchSingleResult<T> : BatchResult, IBatchSingleResult<T>
     {
         private readonly T result;

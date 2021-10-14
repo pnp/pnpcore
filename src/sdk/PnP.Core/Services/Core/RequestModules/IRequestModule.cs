@@ -32,12 +32,12 @@ namespace PnP.Core.Services
         /// <summary>
         /// Delegate that can be implemented to manipulate the request headers
         /// </summary>
-        Action<Dictionary<string, string>> RequestHeaderHandler { get; } 
+        Action<Dictionary<string, string>> RequestHeaderHandler { get; }
 
         /// <summary>
         /// Delegate that can be implemented to manipulate the request url before it gets send to the server
         /// </summary>
-        Func<string, string> RequestUrlHandler {  get; }
+        Func<string, string> RequestUrlHandler { get; }
 
         /// <summary>
         /// Delegate that can be implemented to manipulate the request body before it gets send to the server

@@ -318,7 +318,7 @@ namespace PnP.Core.Model.SharePoint
         {
             var fieldValueCollection = NewFieldValueCollection();
 
-            foreach(var value in fieldValues)
+            foreach (var value in fieldValues)
             {
                 fieldValueCollection.Values.Add(value);
             }
@@ -330,7 +330,7 @@ namespace PnP.Core.Model.SharePoint
         {
             var fieldValueCollection = NewFieldValueCollection();
 
-            foreach(var keyValuePair in fieldValues)
+            foreach (var keyValuePair in fieldValues)
             {
                 fieldValueCollection.Values.Add(NewFieldTaxonomyValue(keyValuePair.Key, keyValuePair.Value));
             }

@@ -54,7 +54,7 @@ namespace PnP.Core.Model.SharePoint
             ExpandUpdatePayLoad = (payload) =>
             {
                 List<ExpandoObject> propertiesToAdd = new List<ExpandoObject>();
-                foreach(var property in Properties)
+                foreach (var property in Properties)
                 {
                     ExpandoObject propertyToAdd = new ExpandoObject();
                     propertyToAdd.SetProperty("key", property.KeyField);

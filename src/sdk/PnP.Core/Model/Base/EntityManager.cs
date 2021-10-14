@@ -507,7 +507,7 @@ namespace PnP.Core.Model
                         {
                             var fld = ((fieldExpressionBody as MethodCallExpression).Arguments[0] as MemberExpression).Member.Name;
 
-                            Type publicTypeRecursive = null;                            
+                            Type publicTypeRecursive = null;
                             if ((fieldExpressionBody as MethodCallExpression).Type.GetGenericArguments().Length > 0)
                             {
                                 // Expandable property (e.g. List.RootFolder)

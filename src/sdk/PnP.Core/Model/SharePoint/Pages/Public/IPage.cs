@@ -100,7 +100,7 @@ namespace PnP.Core.Model.SharePoint
         /// Id of the SharePoint <see cref="IListItem"/> connected to the page being reposted
         /// </summary>
         public Guid RepostSourceItemId { get; set; }
-        
+
         /// <summary>
         /// PnPContext to work with
         /// </summary>

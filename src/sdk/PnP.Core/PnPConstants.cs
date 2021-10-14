@@ -113,10 +113,10 @@ namespace PnP.Core
         /// <summary>
         /// Cached JsonSerializerOptions for performance using IgnoreNullValues = true and PropertyNamingPolicy = JsonNamingPolicy.CamelCase
         /// </summary>
-        internal static JsonSerializerOptions JsonSerializer_IgnoreNullValues_CamelCase = new JsonSerializerOptions() 
-        { 
-            IgnoreNullValues = true, 
-            PropertyNamingPolicy = JsonNamingPolicy.CamelCase 
+        internal static JsonSerializerOptions JsonSerializer_IgnoreNullValues_CamelCase = new JsonSerializerOptions()
+        {
+            IgnoreNullValues = true,
+            PropertyNamingPolicy = JsonNamingPolicy.CamelCase
         };
 
         /// <summary>
@@ -132,13 +132,13 @@ namespace PnP.Core
         /// <summary>
         /// Cached JsonSerializerOptions for performance using IgnoreNullValues = true with JsonStringEnumConverter
         /// </summary>
-        internal static JsonSerializerOptions JsonSerializer_IgnoreNullValues_StringEnumConvertor = new JsonSerializerOptions() 
-        { 
-            IgnoreNullValues = true, 
-            Converters = 
-            { 
-                new JsonStringEnumConverter() 
-            } 
+        internal static JsonSerializerOptions JsonSerializer_IgnoreNullValues_StringEnumConvertor = new JsonSerializerOptions()
+        {
+            IgnoreNullValues = true,
+            Converters =
+            {
+                new JsonStringEnumConverter()
+            }
         };
 
         /// <summary>

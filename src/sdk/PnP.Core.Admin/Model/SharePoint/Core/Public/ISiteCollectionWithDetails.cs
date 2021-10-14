@@ -7,7 +7,7 @@ namespace PnP.Core.Admin.Model.SharePoint
     /// A SharePoint site collection with details reference
     /// </summary>
     [ConcreteType(typeof(SiteCollectionWithDetails))]
-    public interface ISiteCollectionWithDetails: ISiteCollection
+    public interface ISiteCollectionWithDetails : ISiteCollection
     {
         /// <summary>
         /// Date time when this site collection was created

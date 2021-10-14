@@ -31,7 +31,7 @@ namespace PnP.Core.Services
         /// </summary>
         /// <param name="type"><see cref="ApiRequestType"/> of the request</param>
         /// <param name="request">Actual API call to issue</param>
-        public ApiRequest(ApiRequestType type, string request): this(HttpMethod.Get, type, request, null)
+        public ApiRequest(ApiRequestType type, string request) : this(HttpMethod.Get, type, request, null)
         {
         }
 

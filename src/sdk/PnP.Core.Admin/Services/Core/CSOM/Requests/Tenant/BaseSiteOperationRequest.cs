@@ -75,7 +75,7 @@ namespace PnP.Core.Admin.Services.Core.CSOM.Requests.Tenant
                         {
                             new Property()
                             {
-                                Name = "PollingInterval"                                
+                                Name = "PollingInterval"
                             },
                             new Property()
                             {

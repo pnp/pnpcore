@@ -15,7 +15,7 @@ namespace PnP.Core.Model.SharePoint
     {
         #region Construction
         public Attachment()
-        {            
+        {
         }
         #endregion
 

@@ -33,9 +33,9 @@ namespace PnP.Core.Admin.Services.Core.CSOM.Requests.Tenant
 
         public string WebTemplate { get; set; }
 
-        public int TimeZoneId {  get; set; }
+        public int TimeZoneId { get; set; }
 
-        public string Title {  get; set; }
+        public string Title { get; set; }
 
         internal int IdentityPath { get; private set; }
 

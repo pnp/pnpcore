@@ -14,7 +14,7 @@ namespace PnP.Core.Services.Core.CSOM.Utils.DateHelpers
         public DateTime? ConverDate(string dateValue)
         {
             DateTime? result = null;
-            foreach(IDateConversionStrategy strategy in AvailableConverters)
+            foreach (IDateConversionStrategy strategy in AvailableConverters)
             {
                 result = strategy.ConverDate(dateValue);
                 if (result.HasValue)

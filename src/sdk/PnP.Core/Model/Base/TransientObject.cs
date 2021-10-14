@@ -45,8 +45,8 @@ namespace PnP.Core.Model
                 }
 
                 return result;
-            } 
-        }        
+            }
+        }
 
         /// <summary>
         /// Are the changes done on this model instance
