@@ -190,7 +190,10 @@ var classifyAndExtractResult = await testDocument.ClassifyAndExtractAsync();
 
 ### Classify and extract all files in a library
 
-When you've published a Syntex model to an existing library the files in that library are not automatically classified and extracted by that model, only newly added files will be classified and extracted. Previous chapter showed how you can trigger this for a single file, but you can also classify and extract all files in a library using the `ClassifyAndExtractAsync` method on the `IList`:
+When you've published a Syntex model to an existing library the files in that library are not automatically classified and extracted by that model, only newly added files will be classified and extracted. Previous chapter showed how you can trigger this for a single file, but you can also classify and extract all files in a library using the `ClassifyAndExtractAsync` method on the `IList`.
+
+> [!Note]
+> For libraries containing 5000 items or more it's strongly recommended to use the off peak SharePoint Syntex queue. See the `ClassifyAndExtractOffPeak` methods in the next chapter to learn how to use the off peak queue.
 
 ```csharp
 // Get a reference to the list to be classified and extracted
