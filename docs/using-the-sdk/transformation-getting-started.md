@@ -9,7 +9,7 @@ You can use the PnP Transformation Framework either via [PnP PowerShell](https:/
 
 ## Transforming SharePoint pages via PnP PowerShell
 
-In order to use the PnP Transformation Framewok in PnP PowerShell, you need to [install](https://pnp.github.io/powershell/#getting-up-and-running) the latest build of the PowerShell library. 
+In order to use the PnP Transformation Framework in PnP PowerShell, you need to [install](https://pnp.github.io/powershell/#getting-up-and-running) the latest build of the PowerShell library. 
 
 Once you have done that, you can simply invoke the *Invoke-PnPTransformation* cmdlet to trigger a page transformation.
 Here you can see a sample code excerpt to transform a page from a SharePoint Online classic site into another SharePoint Online modern site.
