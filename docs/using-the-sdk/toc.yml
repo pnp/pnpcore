@@ -135,6 +135,8 @@
     href: admin-m365-security.md
   - name: Multi-geo
     href: admin-m365-multigeo.md
+  - name: Information Protection
+    href: admin-m365-informationprotection.md
 - name: "Transformation Framework"
   items:
   - name: Getting started
