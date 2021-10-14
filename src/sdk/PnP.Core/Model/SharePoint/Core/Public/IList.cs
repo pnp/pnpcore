@@ -202,6 +202,11 @@ namespace PnP.Core.Model.SharePoint
         string ListItemEntityTypeFullName { get; }
 
         /// <summary>
+        /// Number of items in the library
+        /// </summary>
+        public int ItemCount { get; }
+
+        /// <summary>
         /// Collection of list items in the current List object
         /// </summary>
         public IListItemCollection Items { get; }

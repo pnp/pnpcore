@@ -170,6 +170,8 @@ namespace PnP.Core.Model.SharePoint
 
         public string ListItemEntityTypeFullName { get => GetValue<string>(); set => SetValue(value); }
 
+        public int ItemCount { get => GetValue<int>(); set => SetValue(value); }
+
         public IFolder RootFolder { get => GetModelValue<IFolder>(); }
 
         public IInformationRightsManagementSettings InformationRightsManagementSettings { get => GetModelValue<IInformationRightsManagementSettings>(); }

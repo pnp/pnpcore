@@ -311,6 +311,10 @@ namespace PnP.Core.Test.SharePoint
                 }
                 await context.ExecuteAsync();
 
+                // Check the item count in the list
+                await myList.LoadAsync(p => p.ItemCount);
+                Assert.IsTrue(myList.ItemCount == 10);
+
                 using (var context2 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
                 {
                     var list2 = context2.Web.Lists.GetByTitle(listTitle);
