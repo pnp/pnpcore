@@ -421,19 +421,6 @@ references:
   commentId: T:PnP.Core.Admin.Model.Microsoft365.ISensitivityLabel
   fullName: PnP.Core.Admin.Model.Microsoft365.ISensitivityLabel
   nameWithType: ISensitivityLabel
-- uid: PnP.Core.Admin.Model.Microsoft365.ISensitivityLabel.ApplicableTo
-  name: ApplicableTo
-  href: api/PnP.Core.Admin.Model.Microsoft365.ISensitivityLabel.html#PnP_Core_Admin_Model_Microsoft365_ISensitivityLabel_ApplicableTo
-  commentId: P:PnP.Core.Admin.Model.Microsoft365.ISensitivityLabel.ApplicableTo
-  fullName: PnP.Core.Admin.Model.Microsoft365.ISensitivityLabel.ApplicableTo
-  nameWithType: ISensitivityLabel.ApplicableTo
-- uid: PnP.Core.Admin.Model.Microsoft365.ISensitivityLabel.ApplicableTo*
-  name: ApplicableTo
-  href: api/PnP.Core.Admin.Model.Microsoft365.ISensitivityLabel.html#PnP_Core_Admin_Model_Microsoft365_ISensitivityLabel_ApplicableTo_
-  commentId: Overload:PnP.Core.Admin.Model.Microsoft365.ISensitivityLabel.ApplicableTo
-  isSpec: "True"
-  fullName: PnP.Core.Admin.Model.Microsoft365.ISensitivityLabel.ApplicableTo
-  nameWithType: ISensitivityLabel.ApplicableTo
 - uid: PnP.Core.Admin.Model.Microsoft365.ISensitivityLabel.Description
   name: Description
   href: api/PnP.Core.Admin.Model.Microsoft365.ISensitivityLabel.html#PnP_Core_Admin_Model_Microsoft365_ISensitivityLabel_Description
@@ -447,19 +434,6 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Admin.Model.Microsoft365.ISensitivityLabel.Description
   nameWithType: ISensitivityLabel.Description
-- uid: PnP.Core.Admin.Model.Microsoft365.ISensitivityLabel.DisplayName
-  name: DisplayName
-  href: api/PnP.Core.Admin.Model.Microsoft365.ISensitivityLabel.html#PnP_Core_Admin_Model_Microsoft365_ISensitivityLabel_DisplayName
-  commentId: P:PnP.Core.Admin.Model.Microsoft365.ISensitivityLabel.DisplayName
-  fullName: PnP.Core.Admin.Model.Microsoft365.ISensitivityLabel.DisplayName
-  nameWithType: ISensitivityLabel.DisplayName
-- uid: PnP.Core.Admin.Model.Microsoft365.ISensitivityLabel.DisplayName*
-  name: DisplayName
-  href: api/PnP.Core.Admin.Model.Microsoft365.ISensitivityLabel.html#PnP_Core_Admin_Model_Microsoft365_ISensitivityLabel_DisplayName_
-  commentId: Overload:PnP.Core.Admin.Model.Microsoft365.ISensitivityLabel.DisplayName
-  isSpec: "True"
-  fullName: PnP.Core.Admin.Model.Microsoft365.ISensitivityLabel.DisplayName
-  nameWithType: ISensitivityLabel.DisplayName
 - uid: PnP.Core.Admin.Model.Microsoft365.ISensitivityLabel.Id
   name: Id
   href: api/PnP.Core.Admin.Model.Microsoft365.ISensitivityLabel.html#PnP_Core_Admin_Model_Microsoft365_ISensitivityLabel_Id
@@ -473,19 +447,19 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Admin.Model.Microsoft365.ISensitivityLabel.Id
   nameWithType: ISensitivityLabel.Id
-- uid: PnP.Core.Admin.Model.Microsoft365.ISensitivityLabel.IsDefault
-  name: IsDefault
-  href: api/PnP.Core.Admin.Model.Microsoft365.ISensitivityLabel.html#PnP_Core_Admin_Model_Microsoft365_ISensitivityLabel_IsDefault
-  commentId: P:PnP.Core.Admin.Model.Microsoft365.ISensitivityLabel.IsDefault
-  fullName: PnP.Core.Admin.Model.Microsoft365.ISensitivityLabel.IsDefault
-  nameWithType: ISensitivityLabel.IsDefault
-- uid: PnP.Core.Admin.Model.Microsoft365.ISensitivityLabel.IsDefault*
-  name: IsDefault
-  href: api/PnP.Core.Admin.Model.Microsoft365.ISensitivityLabel.html#PnP_Core_Admin_Model_Microsoft365_ISensitivityLabel_IsDefault_
-  commentId: Overload:PnP.Core.Admin.Model.Microsoft365.ISensitivityLabel.IsDefault
+- uid: PnP.Core.Admin.Model.Microsoft365.ISensitivityLabel.IsActive
+  name: IsActive
+  href: api/PnP.Core.Admin.Model.Microsoft365.ISensitivityLabel.html#PnP_Core_Admin_Model_Microsoft365_ISensitivityLabel_IsActive
+  commentId: P:PnP.Core.Admin.Model.Microsoft365.ISensitivityLabel.IsActive
+  fullName: PnP.Core.Admin.Model.Microsoft365.ISensitivityLabel.IsActive
+  nameWithType: ISensitivityLabel.IsActive
+- uid: PnP.Core.Admin.Model.Microsoft365.ISensitivityLabel.IsActive*
+  name: IsActive
+  href: api/PnP.Core.Admin.Model.Microsoft365.ISensitivityLabel.html#PnP_Core_Admin_Model_Microsoft365_ISensitivityLabel_IsActive_
+  commentId: Overload:PnP.Core.Admin.Model.Microsoft365.ISensitivityLabel.IsActive
   isSpec: "True"
-  fullName: PnP.Core.Admin.Model.Microsoft365.ISensitivityLabel.IsDefault
-  nameWithType: ISensitivityLabel.IsDefault
+  fullName: PnP.Core.Admin.Model.Microsoft365.ISensitivityLabel.IsActive
+  nameWithType: ISensitivityLabel.IsActive
 - uid: PnP.Core.Admin.Model.Microsoft365.ISensitivityLabel.Name
   name: Name
   href: api/PnP.Core.Admin.Model.Microsoft365.ISensitivityLabel.html#PnP_Core_Admin_Model_Microsoft365_ISensitivityLabel_Name
@@ -499,6 +473,32 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Admin.Model.Microsoft365.ISensitivityLabel.Name
   nameWithType: ISensitivityLabel.Name
+- uid: PnP.Core.Admin.Model.Microsoft365.ISensitivityLabel.Sensitivity
+  name: Sensitivity
+  href: api/PnP.Core.Admin.Model.Microsoft365.ISensitivityLabel.html#PnP_Core_Admin_Model_Microsoft365_ISensitivityLabel_Sensitivity
+  commentId: P:PnP.Core.Admin.Model.Microsoft365.ISensitivityLabel.Sensitivity
+  fullName: PnP.Core.Admin.Model.Microsoft365.ISensitivityLabel.Sensitivity
+  nameWithType: ISensitivityLabel.Sensitivity
+- uid: PnP.Core.Admin.Model.Microsoft365.ISensitivityLabel.Sensitivity*
+  name: Sensitivity
+  href: api/PnP.Core.Admin.Model.Microsoft365.ISensitivityLabel.html#PnP_Core_Admin_Model_Microsoft365_ISensitivityLabel_Sensitivity_
+  commentId: Overload:PnP.Core.Admin.Model.Microsoft365.ISensitivityLabel.Sensitivity
+  isSpec: "True"
+  fullName: PnP.Core.Admin.Model.Microsoft365.ISensitivityLabel.Sensitivity
+  nameWithType: ISensitivityLabel.Sensitivity
+- uid: PnP.Core.Admin.Model.Microsoft365.ISensitivityLabel.Tooltip
+  name: Tooltip
+  href: api/PnP.Core.Admin.Model.Microsoft365.ISensitivityLabel.html#PnP_Core_Admin_Model_Microsoft365_ISensitivityLabel_Tooltip
+  commentId: P:PnP.Core.Admin.Model.Microsoft365.ISensitivityLabel.Tooltip
+  fullName: PnP.Core.Admin.Model.Microsoft365.ISensitivityLabel.Tooltip
+  nameWithType: ISensitivityLabel.Tooltip
+- uid: PnP.Core.Admin.Model.Microsoft365.ISensitivityLabel.Tooltip*
+  name: Tooltip
+  href: api/PnP.Core.Admin.Model.Microsoft365.ISensitivityLabel.html#PnP_Core_Admin_Model_Microsoft365_ISensitivityLabel_Tooltip_
+  commentId: Overload:PnP.Core.Admin.Model.Microsoft365.ISensitivityLabel.Tooltip
+  isSpec: "True"
+  fullName: PnP.Core.Admin.Model.Microsoft365.ISensitivityLabel.Tooltip
+  nameWithType: ISensitivityLabel.Tooltip
 - uid: PnP.Core.Admin.Model.SharePoint
   name: PnP.Core.Admin.Model.SharePoint
   href: api/PnP.Core.Admin.Model.SharePoint.html
