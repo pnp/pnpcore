@@ -5919,6 +5919,18 @@
     },
     {
       "type": "Conceptual",
+      "source_relative_path": "using-the-sdk/security-intro.md",
+      "output": {
+        ".html": {
+          "relative_path": "using-the-sdk/security-intro.html",
+          "hash": "yHc4TUrQXG8653VYT8hBlw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
       "source_relative_path": "using-the-sdk/sites-hubsites.md",
       "output": {
         ".html": {
@@ -6043,7 +6055,7 @@
       "output": {
         ".html": {
           "relative_path": "using-the-sdk/toc.html",
-          "hash": "NN8afzZiOH6/Jc7nra4ZGw=="
+          "hash": "7bVabcDxj18H5sPOeHWPyQ=="
         }
       },
       "is_incremental": false,
@@ -6100,7 +6112,7 @@
         "ConceptualDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build",
-          "total_file_count": 79,
+          "total_file_count": 80,
           "skipped_file_count": 0
         },
         "ManagedReferenceDocumentProcessor": {
