@@ -97,6 +97,10 @@
   items:
   - name: Overview
     href: folders-intro.md
+- name: Security
+  items:
+  - name: Overview
+    href: security-intro.md
 - name: Teams
   items:
   - name: Overview
