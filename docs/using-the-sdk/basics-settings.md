@@ -20,7 +20,8 @@ Below snippet shows the settings which are used by the PnP Core SDK, you can sim
         "UseRetryAfterHeader": "false",
         "MaxRetries": "10",
         "DelayInSeconds": "3",
-        "UseIncrementalDelay": "true"
+        "UseIncrementalDelay": "true",
+        "DefaultPageSize": 100
       },
       "MicrosoftGraph": {
         "UseRetryAfterHeader": "true",
@@ -70,6 +71,7 @@ PnPCore:HttpRequests:SharePointRest:UseRetryAfterHeader | false | Use retry-afte
 PnPCore:HttpRequests:SharePointRest:MaxRetries | 10 | Maximum number of retries before retrying a SharePoint Rest request throws an exception.
 PnPCore:HttpRequests:SharePointRest:DelayInSeconds | 3 | Delay in seconds between SharePoint Rest request retries.
 PnPCore:HttpRequests:SharePointRest:IncrementalDelay | true | Delays get incrementally longer with each retry.
+PnPCore:HttpRequests:SharePointRest:DefaultPageSize | 100 | Page size using when paging is automatically applied during data querying via the PnP Core SDK LINQ support.
 PnPCore:HttpRequests:MicrosoftGraph:UseRetryAfterHeader | true | Use retry-after http header when calculating the wait time in seconds for Microsoft Graph request retry.
 PnPCore:HttpRequests:MicrosoftGraph:MaxRetries | 10 | Maximum number of retries before retrying a Microsoft Graph request throws an exception.
 PnPCore:HttpRequests:MicrosoftGraph:DelayInSeconds | 3 | Delay in seconds between Microsoft Graph request retries.

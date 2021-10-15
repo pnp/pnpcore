@@ -108,7 +108,8 @@ Like with loading the model in the previous chapter you've two ways of using the
 Below sample shows the various options for loading and using collections. 
 
 > [!Note]
-> When you want to enumerate or query (via LINQ) already loaded data you need to first use the `AsRequested()` method to return the domain model objects as an `IEnumerable`.
+> - When you want to enumerate or query (via LINQ) already loaded data you need to first use the `AsRequested()` method to return the domain model objects as an `IEnumerable`.
+> - When using a filter via the `Where` LINQ statement then always use an operator: `Where(p => p.BoolProperty == true)` works, but `Where(p => p.BoolProperty)` is ignored.
 
 ```csharp
 using (var context = await pnpContextFactory.CreateAsync("SiteToWorkWith"))
