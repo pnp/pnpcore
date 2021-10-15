@@ -19,6 +19,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Added `HasUniqueRoleAssignments` property on `IWeb` and `IListItem` #575 [jansenbe - Bert Jansen]
 - Added `ItemCount` property on `IList` [jansenbe - Bert Jansen]
 - Changed `IFileVersion.Size` to be a long, needed for large file versions [jansenbe - Bert Jansen]
+- Fixed updating of role definitions [jansenbe - Bert Jansen]
 
 ## [1.4.0]
 
