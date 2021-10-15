@@ -23,7 +23,7 @@ namespace PnP.Core.Model.SharePoint
 
         public bool IsCurrentVersion { get => GetValue<bool>(); set => SetValue(value); }
 
-        public int Size { get => GetValue<int>(); set => SetValue(value); }
+        public long Size { get => GetValue<long>(); set => SetValue(value); }
 
         public string Url { get => GetValue<string>(); set => SetValue(value); }
 
