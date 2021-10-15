@@ -118,7 +118,10 @@ foreach (var listItem in myList.Items.AsRequested())
 </code></pre>
 <div class="NOTE">
 <h5>Note</h5>
-<p>When referencing a field keep in mind that you need to use the field's <code>StaticName</code>. If you've created a field with name <code>Version Tag</code> then the <code>StaticName</code> will be <code>Version_x0020_Tag</code>, so you will be using <code>myItem[&quot;Version_x0020_Tag&quot;]</code> to work with the field.</p>
+<ul>
+<li>When referencing a field keep in mind that you need to use the field's <code>StaticName</code>. If you've created a field with name <code>Version Tag</code> then the <code>StaticName</code> will be <code>Version_x0020_Tag</code>, so you will be using <code>myItem[&quot;Version_x0020_Tag&quot;]</code> to work with the field.</li>
+<li>Filtering on the <code>HasUniqueRoleAssignments</code> field is not allowed by SharePoint.</li>
+</ul>
 </div>
 <h3 id="getting-list-items-via-a-caml-query">Getting list items via a CAML query</h3>
 <p>SharePoint <a href="https://docs.microsoft.com/en-us/sharepoint/dev/schema/query-schema">CAML</a> queries allow you to express a filter when loading list item data and scope down the loaded fields to the ones you need. You can use call the <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IList.html#collapsible-PnP_Core_Model_SharePoint_IList_LoadItemsByCamlQueryAsync_PnP_Core_Model_SharePoint_CamlQueryOptions_">LoadItemsByCamlQueryAsync method</a> on an <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IList.html">IList</a> for this purpose. When using this method you can either provide the CAML query directly or use the <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.CamlQueryOptions.html">CamlQueryOptions</a> class for more fine-grained control. If you use this class you typically would use the <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.CamlQueryOptions.html#collapsible-PnP_Core_Model_SharePoint_CamlQueryOptions_ViewXml">ViewXml property</a>, but also <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.CamlQueryOptions.html#collapsible-PnP_Core_Model_SharePoint_CamlQueryOptions_FolderServerRelativeUrl">FolderServerRelativeUrl</a> is used a lot to scope the query to given folder in the list.</p>

@@ -173,7 +173,10 @@
 <p>Below sample shows the various options for loading and using collections.</p>
 <div class="NOTE">
 <h5>Note</h5>
-<p>When you want to enumerate or query (via LINQ) already loaded data you need to first use the <code>AsRequested()</code> method to return the domain model objects as an <code>IEnumerable</code>.</p>
+<ul>
+<li>When you want to enumerate or query (via LINQ) already loaded data you need to first use the <code>AsRequested()</code> method to return the domain model objects as an <code>IEnumerable</code>.</li>
+<li>When using a filter via the <code>Where</code> LINQ statement then always use an operator: <code>Where(p =&gt; p.BoolProperty == true)</code> works, but <code>Where(p =&gt; p.BoolProperty)</code> is ignored.</li>
+</ul>
 </div>
 <pre><code class="lang-csharp">using (var context = await pnpContextFactory.CreateAsync(&quot;SiteToWorkWith&quot;))
 {

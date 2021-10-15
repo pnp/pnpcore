@@ -99,7 +99,8 @@
         &quot;UseRetryAfterHeader&quot;: &quot;false&quot;,
         &quot;MaxRetries&quot;: &quot;10&quot;,
         &quot;DelayInSeconds&quot;: &quot;3&quot;,
-        &quot;UseIncrementalDelay&quot;: &quot;true&quot;
+        &quot;UseIncrementalDelay&quot;: &quot;true&quot;,
+        &quot;DefaultPageSize&quot;: 100
       },
       &quot;MicrosoftGraph&quot;: {
         &quot;UseRetryAfterHeader&quot;: &quot;true&quot;,
@@ -193,6 +194,11 @@
 <td>PnPCore:HttpRequests:SharePointRest:IncrementalDelay</td>
 <td>true</td>
 <td>Delays get incrementally longer with each retry.</td>
+</tr>
+<tr>
+<td>PnPCore:HttpRequests:SharePointRest:DefaultPageSize</td>
+<td>100</td>
+<td>Page size using when paging is automatically applied during data querying via the PnP Core SDK LINQ support.</td>
 </tr>
 <tr>
 <td>PnPCore:HttpRequests:MicrosoftGraph:UseRetryAfterHeader</td>
