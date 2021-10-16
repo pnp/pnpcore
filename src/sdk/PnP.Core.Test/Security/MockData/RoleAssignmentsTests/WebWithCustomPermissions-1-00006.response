@@ -1,0 +1,9 @@
+--batchresponse_dabf4fae-bfaf-4ca6-bdc8-3b8b42a0f031
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+HTTP/1.1 200 OK
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+
+{"d":{"results":[{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-2/permissionweb/_api/Web/RoleDefinitions(1073741830)","uri":"https://bertonline.sharepoint.com/sites/prov-2/permissionweb/_api/Web/RoleDefinitions(1073741830)","type":"SP.RoleDefinition"},"BasePermissions":{"__metadata":{"type":"SP.BasePermissions"},"High":"432","Low":"1011030767"},"Description":"Can add, edit and delete lists; can view, add, update and delete list items and documents.","Hidden":false,"Id":1073741830,"Name":"Edit","Order":48,"RoleTypeKind":6}]}}
+--batchresponse_dabf4fae-bfaf-4ca6-bdc8-3b8b42a0f031--
