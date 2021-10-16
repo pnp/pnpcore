@@ -1,0 +1,9 @@
+--batchresponse_07d0652b-2604-4e04-8c4e-2aec319c8037
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+HTTP/1.1 200 OK
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+
+{"d":{"__metadata":{"id":"https://m365x790252.sharepoint.com/sites/pnpcoresdktestgroup/_api/web/tenantappcatalog/AvailableApps/GetById('8422d80c-ca1a-4e29-a498-dbbc737f9b4a')","uri":"https://m365x790252.sharepoint.com/sites/pnpcoresdktestgroup/_api/web/tenantappcatalog/AvailableApps/GetById('8422d80c-ca1a-4e29-a498-dbbc737f9b4a')","type":"Microsoft.SharePoint.Marketplace.CorporateCuratedGallery.CorporateCatalogAppMetadata"},"AadAppId":"00000000-0000-0000-0000-000000000000","AadPermissions":null,"AppCatalogVersion":"1.0.0.0","CanUpgrade":false,"CDNLocation":"SharePoint Online","ContainsTenantWideExtension":false,"CurrentVersionDeployed":true,"Deployed":true,"ErrorMessage":"No errors.","ID":"8422d80c-ca1a-4e29-a498-dbbc737f9b4a","InstalledVersion":"","IsClientSideSolution":true,"IsEnabled":true,"IsPackageDefaultSkipFeatureDeployment":true,"IsValidAppPackage":true,"ProductId":"394b1638-93fa-488a-9f96-1735f5b96f2c","ShortDescription":"","SkipDeploymentFeature":false,"ThumbnailUrl":"","Title":"pnp-alm-app-client-side-solution"}}
+--batchresponse_07d0652b-2604-4e04-8c4e-2aec319c8037--

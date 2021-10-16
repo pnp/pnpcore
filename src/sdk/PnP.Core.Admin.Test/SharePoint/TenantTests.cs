@@ -154,7 +154,7 @@ namespace PnP.Core.Admin.Test.SharePoint
         {
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
-            {
+            {                
                 Assert.IsTrue(context.GetSharePointAdmin().IsCurrentUserTenantAdmin());
             }
         }
@@ -166,37 +166,13 @@ namespace PnP.Core.Admin.Test.SharePoint
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 context.BatchClient.MockingFileRewriteHandler = (string input) =>
-                {
+                {                    
                     return "{ \"responses\": [ { \"id\": \"1\", \"status\": 200, \"headers\": { \"Cache-Control\": \"no-cache\", \"x-ms-resource-unit\": \"2\", \"OData-Version\": \"4.0\", \"Content-Type\": \"application/json;odata.metadata=minimal;odata.streaming=true;IEEE754Compatible=false;charset=utf-8\" }, \"body\": { \"@odata.context\": \"https://graph.microsoft.com/v1.0/$metadata#directoryObjects\", \"@odata.count\": 0, \"value\": [] } } ] }";
                 };
 
                 Assert.IsFalse(context.GetSharePointAdmin().IsCurrentUserTenantAdmin());
             }
         }
-
-
-        [TestMethod]
-        public async Task GetTenantAppCatalogUrl()
-        {
-            //TestCommon.Instance.Mocking = false;
-            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
-            {
-                var url = context.GetAppManager().GetTenantAppCatalogUri();
-                Assert.IsTrue(url != null);
-            }
-        }
-
-        [TestMethod]
-        public async Task EnsureTenantAppCatalogUrl()
-        {
-            //TestCommon.Instance.Mocking = false;
-            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
-            {
-                var tenantAppCatalogCreated = context.GetAppManager().EnsureTenantAppCatalog();
-                Assert.IsFalse(tenantAppCatalogCreated);
-            }
-        }
-
         [TestMethod]
         public async Task GetTenantProperties()
         {

@@ -29,4 +29,10 @@
 		<ProjectReference Include="..\PnP.Core.Test.Common\PnP.Core.Test.Common.csproj" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <None Update="TestAssets\pnp-alm-app.sppkg">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
+	</ItemGroup>
+
 </Project>

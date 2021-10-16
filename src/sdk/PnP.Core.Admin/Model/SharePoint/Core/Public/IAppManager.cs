@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace PnP.Core.Admin.Model.SharePoint
@@ -6,30 +7,80 @@ namespace PnP.Core.Admin.Model.SharePoint
     /// <summary>
     /// App Admin features
     /// </summary>
-    public interface IAppManager
+    public interface IAppManager<T> : IAppOperations where T : IApp
     {
         /// <summary>
-        /// Returns the URI of the current tenant app catalog
+        /// Gets available app by it's unique id.
         /// </summary>
-        /// <returns></returns>
-        Task<Uri> GetTenantAppCatalogUriAsync();
+        /// <param name="id">The unique id of the app. Notice that this is not the product id as listed in the app catalog.</param>
+        /// <returns>An instance of the app.</returns>
+        T GetAvailable(Guid id);
 
         /// <summary>
-        /// Returns the URI of the current tenant app catalog
+        /// Gets available app by it's unique id.
         /// </summary>
-        /// <returns></returns>
-        Uri GetTenantAppCatalogUri();
+        /// <param name="id">The unique id of the app. Notice that this is not the product id as listed in the app catalog.</param>
+        /// <returns>An instance of the app.</returns>
+        Task<T> GetAvailableAsync(Guid id);
 
         /// <summary>
-        /// Ensures there's a tenant app catalog, if not present it will be created
+        /// Gets available app by it's title.
         /// </summary>
-        /// <returns>True if the app catalog was created, false if the app catalog already existed</returns>
-        Task<bool> EnsureTenantAppCatalogAsync();
+        /// <param name="title">An app's title.</param>
+        /// <returns>An instance of the app.</returns>
+        T GetAvailable(string title);
 
         /// <summary>
-        /// Ensures there's a tenant app catalog, if not present it will be created
+        /// Gets available app by it's title.
         /// </summary>
-        /// <returns>True if the app catalog was created, false if the app catalog already existed</returns>
-        bool EnsureTenantAppCatalog();
+        /// <param name="title">An app's title.</param>
+        /// <returns>An instance of the app.</returns>
+        Task<T> GetAvailableAsync(string title);
+
+        /// <summary>
+        /// Gets all available apps from the app catalog.
+        /// </summary>
+        /// <returns>A collection of apps.</returns>
+        IList<T> GetAvailable();
+
+        /// <summary>
+        /// Gets all available apps from the app catalog.
+        /// </summary>
+        /// <returns>A collection of apps.</returns>
+        Task<IList<T>> GetAvailableAsync();
+
+        /// <summary>
+        /// Uploads a file to the app catalog.
+        /// </summary>
+        /// <param name="file">A byte array containing the file.</param>
+        /// <param name="fileName">The filename (e.g. myapp.sppkg) of the file to upload.</param>
+        /// <param name="overwrite">If true will overwrite an existing entry.</param>
+        /// <returns>An instance of the app.</returns>
+        T Add(byte[] file, string fileName, bool overwrite = false);
+
+        /// <summary>
+        /// Uploads a file to the app catalog.
+        /// </summary>
+        /// <param name="file">A byte array containing the file.</param>
+        /// <param name="fileName">The filename (e.g. myapp.sppkg) of the file to upload.</param>
+        /// <param name="overwrite">If true will overwrite an existing entry.</param>
+        /// <returns>An instance of the app.</returns>
+        Task<T> AddAsync(byte[] file, string fileName, bool overwrite = false);
+
+        /// <summary>
+        /// Uploads an app file to the app catalog.
+        /// </summary>
+        /// <param name="path"></param>
+        /// <param name="overwrite">If true will overwrite an existing entry.</param>
+        /// <returns>An instance of the app.</returns>
+        T Add(string path, bool overwrite = false);
+
+        /// <summary>
+        /// Uploads an app file to the app catalog.
+        /// </summary>
+        /// <param name="path"></param>
+        /// <param name="overwrite">If true will overwrite an existing entry.</param>
+        /// <returns>An instance of the app.</returns>
+        Task<T> AddAsync(string path, bool overwrite = false);
     }
 }

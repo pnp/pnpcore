@@ -1,0 +1,9 @@
+--batchresponse_cdb0378c-7450-4034-9aa0-df8526ede0a1
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+HTTP/1.1 200 OK
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+
+{"d":{"__metadata":{"id":"https://m365x790252.sharepoint.com/sites/pnpcoresdktestgroup/_api/Site","uri":"https://m365x790252.sharepoint.com/sites/pnpcoresdktestgroup/_api/Site","type":"SP.Site"},"GroupId":"35655e29-b619-4c63-bd0c-750b71d40841","Id":"286393c5-fb92-4650-a1a6-1685d73cfd81"}}
+--batchresponse_cdb0378c-7450-4034-9aa0-df8526ede0a1--

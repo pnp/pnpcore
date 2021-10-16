@@ -61,6 +61,42 @@ namespace PnP.Core.Admin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Tenant app catalog site is not found. Create it either manually or using the corresponding method from the App Manager class..
+        /// </summary>
+        internal static string Exception_AppManager_AppCatalogNotFound {
+            get {
+                return ResourceManager.GetString("Exception_AppManager_AppCatalogNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to File not found.
+        /// </summary>
+        internal static string Exception_AppManager_FileNotFound {
+            get {
+                return ResourceManager.GetString("Exception_AppManager_FileNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Timeout occurred while trying to get the App metadata from the server.
+        /// </summary>
+        internal static string Exception_AppManager_GetAppTimeout {
+            get {
+                return ResourceManager.GetString("Exception_AppManager_GetAppTimeout", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unable to resolve the AppManager for the type: {0}.
+        /// </summary>
+        internal static string Exception_AppManager_NotResolved {
+            get {
+                return ResourceManager.GetString("Exception_AppManager_NotResolved", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The site creation for site {0} did not succeed. Returned siteStatus = {1}.
         /// </summary>
         internal static string Exception_SiteCreation {
@@ -75,6 +111,15 @@ namespace PnP.Core.Admin {
         internal static string Exception_SiteCreationStatusCheck {
             get {
                 return ResourceManager.GetString("Exception_SiteCreationStatusCheck", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unexpected JSON.
+        /// </summary>
+        internal static string Exception_UnexpectedJson {
+            get {
+                return ResourceManager.GetString("Exception_UnexpectedJson", resourceCulture);
             }
         }
         
