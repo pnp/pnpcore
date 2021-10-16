@@ -19,7 +19,7 @@ namespace PnP.Core {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class PnPCoreResources {
@@ -498,6 +498,15 @@ namespace PnP.Core {
         internal static string Exception_PropertyNotLoaded_OnlyQueryPropertiesSupported {
             get {
                 return ResourceManager.GetString("Exception_PropertyNotLoaded_OnlyQueryPropertiesSupported", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Role definition &apos;{0}&apos; not found..
+        /// </summary>
+        internal static string Exception_RoleDefinition_NotFound {
+            get {
+                return ResourceManager.GetString("Exception_RoleDefinition_NotFound", resourceCulture);
             }
         }
         

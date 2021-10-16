@@ -1,4 +1,4 @@
---batchresponse_dd4bef2f-199e-4b8e-bfba-61dc6fb09d5d
+--batchresponse_ae252923-c0f6-426b-9300-ed33cdd9bbf2
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
@@ -6,7 +6,7 @@ HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
 {"d":{"BreakRoleInheritance":null}}
---batchresponse_dd4bef2f-199e-4b8e-bfba-61dc6fb09d5d
+--batchresponse_ae252923-c0f6-426b-9300-ed33cdd9bbf2
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
@@ -14,7 +14,7 @@ HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
 {"d":{"AddRoleAssignment":null}}
---batchresponse_dd4bef2f-199e-4b8e-bfba-61dc6fb09d5d
+--batchresponse_ae252923-c0f6-426b-9300-ed33cdd9bbf2
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
@@ -22,4 +22,4 @@ HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
 {"d":{"AddRoleAssignment":null}}
---batchresponse_dd4bef2f-199e-4b8e-bfba-61dc6fb09d5d--
+--batchresponse_ae252923-c0f6-426b-9300-ed33cdd9bbf2--

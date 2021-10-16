@@ -1,9 +1,9 @@
---batchresponse_d638f8d8-274e-4444-ac58-3cf015584274
+--batchresponse_cd54fdaf-b514-4545-972c-ff8fed7303e8
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{"d":{"ResetRoleInheritance":null}}
---batchresponse_d638f8d8-274e-4444-ac58-3cf015584274--
+{"d":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-2/permissionweb/_api/Web","uri":"https://bertonline.sharepoint.com/sites/prov-2/permissionweb/_api/Web","type":"SP.Web"},"RoleAssignments":{"results":[]},"HasUniqueRoleAssignments":true,"Id":"09498741-c6fa-4d4b-a3c6-174ff63d9677"}}
+--batchresponse_cd54fdaf-b514-4545-972c-ff8fed7303e8--

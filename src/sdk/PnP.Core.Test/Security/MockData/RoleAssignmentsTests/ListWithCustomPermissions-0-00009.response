@@ -1,0 +1,9 @@
+--batchresponse_39ebd4f6-560d-4a27-a668-973653020f16
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+HTTP/1.1 200 OK
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+
+{"d":{"AddRoleAssignment":null}}
+--batchresponse_39ebd4f6-560d-4a27-a668-973653020f16--

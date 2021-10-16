@@ -1114,20 +1114,29 @@ namespace PnP.Core.Model.SharePoint
 
         public async Task<bool> AddRoleDefinitionsAsync(int principalId, params string[] names)
         {
+            if (names == null || names.Length == 0)
+            {
+                return false;
+            }
+
+            var roleDefinitions = await PnPContext.Web.RoleDefinitions.ToListAsync().ConfigureAwait(false);
+            var batch = PnPContext.NewBatch();
             foreach (var name in names)
             {
-                var roleDefinition = await PnPContext.Web.RoleDefinitions.FirstOrDefaultAsync(d => d.Name == name).ConfigureAwait(false);
+                var roleDefinition = roleDefinitions.FirstOrDefault(d => d.Name == name);
                 if (roleDefinition != null)
                 {
-                    await AddRoleDefinitionAsync(principalId, roleDefinition).ConfigureAwait(false);
-                    return true;
+                    await AddRoleDefinitionBatchAsync(batch, principalId, roleDefinition).ConfigureAwait(false);
                 }
                 else
                 {
-                    throw new ArgumentException($"Role definition '{name}' not found.");
+                    throw new ArgumentException(string.Format(PnPCoreResources.Exception_RoleDefinition_NotFound, name));
                 }
             }
-            return false;
+            // Send role updates to server
+            await PnPContext.ExecuteAsync(batch).ConfigureAwait(false);
+
+            return true;
         }
 
         private ApiCall BuildAddRoleDefinitionsApiCall(int principalId, IRoleDefinition roleDefinition)
@@ -1174,22 +1183,30 @@ namespace PnP.Core.Model.SharePoint
 
         public async Task<bool> RemoveRoleDefinitionsAsync(int principalId, params string[] names)
         {
+            if (names == null || names.Length == 0)
+            {
+                return false;
+            }
+
+            var roleDefinitions = await GetRoleDefinitionsAsync(principalId).ConfigureAwait(false);
+            var batch = PnPContext.NewBatch();
             foreach (var name in names)
             {
-                var roleDefinitions = await GetRoleDefinitionsAsync(principalId).ConfigureAwait(false);
-
                 var roleDefinition = roleDefinitions.AsRequested().FirstOrDefault(r => r.Name == name);
                 if (roleDefinition != null)
                 {
-                    await RemoveRoleDefinitionAsync(principalId, roleDefinition).ConfigureAwait(false);
-                    return true;
+                    await RemoveRoleDefinitionBatchAsync(batch, principalId, roleDefinition).ConfigureAwait(false);
                 }
                 else
                 {
-                    throw new ArgumentException($"Role definition '{name}' not found for this group.");
+                    throw new ArgumentException(string.Format(PnPCoreResources.Exception_RoleDefinition_NotFound, name));
                 }
             }
-            return false;
+            
+            // Send role updates to server
+            await PnPContext.ExecuteAsync(batch).ConfigureAwait(false);
+
+            return true;
         }
 
         public async Task RemoveRoleDefinitionAsync(int principalId, IRoleDefinition roleDefinition)
