@@ -103,6 +103,8 @@
     href: security-intro.md
   - name: Groups
     href: security-groups.md
+  - name: Users
+    href: security-users.md
 - name: Teams
   items:
   - name: Overview
