@@ -104,5 +104,56 @@ namespace PnP.Core.Test.Security
                 }
             }
         }
+
+        [TestMethod]
+        public async Task CreateUpdateDeleteWebRoleDefinitionBatch()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                context.Web.Load(w => w.RoleDefinitions);
+
+                IRoleDefinition roleDefinition = null;
+
+                try
+                {
+                    // get existing role def
+                    var adminRoleDef = context.Web.RoleDefinitions.AsEnumerable().Where(r => r.Name == "Administrator");
+                    Assert.IsNotNull(adminRoleDef);
+
+                    // Add new one
+                    roleDefinition = await context.Web.RoleDefinitions.AddBatchAsync("Test RoleDef 2", Model.SharePoint.RoleType.Administrator, new Model.SharePoint.PermissionKind[] { Model.SharePoint.PermissionKind.AddAndCustomizePages }, "", false, 0);
+                    await context.ExecuteAsync();
+
+                    Assert.IsTrue(roleDefinition.Requested);
+
+                    // grab added role def again from server
+                    var addedRoleDefinition = await context.Web.RoleDefinitions.FirstOrDefaultAsync(d => d.Name == "Test RoleDef 2");
+
+                    // Remove AddAndCustomizePages role, add other + set description
+                    addedRoleDefinition.BasePermissions.Clear(Model.SharePoint.PermissionKind.AddAndCustomizePages);
+                    addedRoleDefinition.BasePermissions.Set(Model.SharePoint.PermissionKind.AddListItems);
+                    addedRoleDefinition.Description = "hi new role";
+                    await addedRoleDefinition.UpdateBatchAsync();
+                    await context.ExecuteAsync();
+
+                    // read again from server
+                    addedRoleDefinition = await context.Web.RoleDefinitions.FirstOrDefaultAsync(d => d.Name == "Test RoleDef 2");
+
+                    // Verify
+                    Assert.IsTrue(addedRoleDefinition.Description == "hi new role");
+                    Assert.IsTrue(addedRoleDefinition.BasePermissions.Has(Model.SharePoint.PermissionKind.AddListItems));
+                    Assert.IsFalse(addedRoleDefinition.BasePermissions.Has(Model.SharePoint.PermissionKind.AddAndCustomizePages));
+                }
+                finally
+                {
+                    if (roleDefinition != null)
+                    {
+                        await roleDefinition.DeleteBatchAsync();
+                        await context.ExecuteAsync();
+                    }
+                }
+            }
+        }
     }
 }
