@@ -46,6 +46,7 @@ foreach (var listItem in myList.Items.AsRequested())
 > [!Note]
 > - When referencing a field keep in mind that you need to use the field's `StaticName`. If you've created a field with name `Version Tag` then the `StaticName` will be `Version_x0020_Tag`, so you will be using `myItem["Version_x0020_Tag"]` to work with the field.
 > - Filtering on the `HasUniqueRoleAssignments` field is not allowed by SharePoint.
+> - Filtering on the `FileSystemObjectType` field is not allowed by SharePoint unless it's done via one of the CAML query methods (`LoadItemsByCamlQuery` or `LoadListDataAsStream`).
 
 ### Getting list items via a CAML query
 
