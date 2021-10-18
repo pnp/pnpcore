@@ -121,6 +121,7 @@ foreach (var listItem in myList.Items.AsRequested())
 <ul>
 <li>When referencing a field keep in mind that you need to use the field's <code>StaticName</code>. If you've created a field with name <code>Version Tag</code> then the <code>StaticName</code> will be <code>Version_x0020_Tag</code>, so you will be using <code>myItem[&quot;Version_x0020_Tag&quot;]</code> to work with the field.</li>
 <li>Filtering on the <code>HasUniqueRoleAssignments</code> field is not allowed by SharePoint.</li>
+<li>Filtering on the <code>FileSystemObjectType</code> field is not allowed by SharePoint unless it's done via one of the CAML query methods (<code>LoadItemsByCamlQuery</code> or <code>LoadListDataAsStream</code>).</li>
 </ul>
 </div>
 <h3 id="getting-list-items-via-a-caml-query">Getting list items via a CAML query</h3>
