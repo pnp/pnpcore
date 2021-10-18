@@ -190,24 +190,33 @@ namespace PnP.Core.Model.SharePoint
                             }
                         }
 
-                        // Post processing for ListItem properties
-                        if (row.TryGetProperty("UniqueId", out JsonElement uniqueId))
-                        {
-                            itemToUpdate.SetSystemProperty(p => p.UniqueId, Guid.Parse(uniqueId.ToString()));
-                        }
-
-                        if (row.TryGetProperty("ServerRedirectedEmbedUrl", out JsonElement serverRedirectedEmbedUrl))
-                        {
-                            itemToUpdate.SetSystemProperty(p => p.ServerRedirectedEmbedUri, serverRedirectedEmbedUrl.GetString());
-                            itemToUpdate.SetSystemProperty(p => p.ServerRedirectedEmbedUrl, serverRedirectedEmbedUrl.GetString());
-                        }
-
                         if (row.TryGetProperty("FSObjType", out JsonElement fsObjType))
                         {
                             if (Enum.TryParse(fsObjType.GetString(), out FileSystemObjectType fsot))
                             {
                                 itemToUpdate.SetSystemProperty(p => p.FileSystemObjectType, fsot);
                             }
+                        }
+
+                        // Post processing for ListItem properties
+                        if (row.TryGetProperty("UniqueId", out JsonElement uniqueId))
+                        {
+                            itemToUpdate.SetSystemProperty(p => p.UniqueId, Guid.Parse(uniqueId.ToString()));
+
+                            if (itemToUpdate.FileSystemObjectType == FileSystemObjectType.File)
+                            {
+                                var file = itemToUpdate.File;
+                                file.SetSystemProperty(p => p.UniqueId, Guid.Parse(uniqueId.ToString()));
+                                (file as IMetadataExtensible).Metadata.Add(PnPConstants.MetaDataRestId, uniqueId.ToString());
+                                (file as IMetadataExtensible).Metadata.Add(PnPConstants.MetaDataType, "SP.File");
+                                (file as File).Requested = true;
+                            }
+                        }
+
+                        if (row.TryGetProperty("ServerRedirectedEmbedUrl", out JsonElement serverRedirectedEmbedUrl))
+                        {
+                            itemToUpdate.SetSystemProperty(p => p.ServerRedirectedEmbedUri, serverRedirectedEmbedUrl.GetString());
+                            itemToUpdate.SetSystemProperty(p => p.ServerRedirectedEmbedUrl, serverRedirectedEmbedUrl.GetString());
                         }
 
                         if (row.TryGetProperty("ContentTypeId", out JsonElement contentTypeId) && row.TryGetProperty("ContentType", out JsonElement contentTypeName))

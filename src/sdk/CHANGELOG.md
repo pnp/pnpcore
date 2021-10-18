@@ -22,6 +22,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Changed `IFileVersion.Size` to be a long and map to "Length" SharePoint property instead of the "Size" property, needed for large file versions #581 [jansenbe - Bert Jansen]
 - Fixed updating of role definitions [jansenbe - Bert Jansen]
 - Implement SharePoint Group description property restrictions + more SharePoint group tests [jansenbe - Bert Jansen]
+- Populate the `IFile` linked to an `IListItem` when getting list items via LoadListDataAsStream [jansenbe - Bert Jansen]
 
 ## [1.4.0]
 
