@@ -39,7 +39,7 @@ foreach(var group in context.Web.SiteGroups.AsRequested())
 
 ### Adding a group with a custom role definition
 
-Adding a new SharePoint group is done via the usual `Add` methods. When a group is added you also need to assign a role to it (see [Configuring roles](using-the-sdk/security-intro.html)) otherwise the users added to group will not have any permissions on the SharePoint site.
+Adding a new SharePoint group is done via the usual `Add` methods. When a group is added you also need to assign a role to it (see [Configuring roles](./security-intro.md#configuring-roles)) otherwise the users added to group will not have any permissions on the SharePoint site.
 
 ```csharp
 // Add a new role definition for our new group, a limited reader role
