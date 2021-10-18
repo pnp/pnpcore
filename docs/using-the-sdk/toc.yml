@@ -101,6 +101,8 @@
   items:
   - name: Overview
     href: security-intro.md
+  - name: Groups
+    href: security-groups.md
 - name: Teams
   items:
   - name: Overview
