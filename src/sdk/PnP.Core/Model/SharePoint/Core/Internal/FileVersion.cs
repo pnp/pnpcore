@@ -23,6 +23,8 @@ namespace PnP.Core.Model.SharePoint
 
         public bool IsCurrentVersion { get => GetValue<bool>(); set => SetValue(value); }
 
+        // We're using the Length property as that's Int64 while Size is Int32 resulting in errors whith 2GB plus files
+        [SharePointProperty("Length")]
         public long Size { get => GetValue<long>(); set => SetValue(value); }
 
         public string Url { get => GetValue<string>(); set => SetValue(value); }

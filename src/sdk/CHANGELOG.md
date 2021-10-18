@@ -19,7 +19,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Remove non linq get query as it caused issues when loading additional properties on an added file #570 [jansenbe - Bert Jansen]
 - Added `HasUniqueRoleAssignments` property on `IWeb` and `IListItem` #575 [jansenbe - Bert Jansen]
 - Added `ItemCount` property on `IList` [jansenbe - Bert Jansen]
-- Changed `IFileVersion.Size` to be a long, needed for large file versions [jansenbe - Bert Jansen]
+- Changed `IFileVersion.Size` to be a long and map to "Length" SharePoint property instead of the "Size" property, needed for large file versions #581 [jansenbe - Bert Jansen]
 - Fixed updating of role definitions [jansenbe - Bert Jansen]
 - Implement SharePoint Group description property restrictions + more SharePoint group tests [jansenbe - Bert Jansen]
 
