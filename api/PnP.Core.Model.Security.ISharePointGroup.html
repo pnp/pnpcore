@@ -539,7 +539,7 @@
   <h4 id="PnP_Core_Model_Security_ISharePointGroup_Description" data-uid="PnP.Core.Model.Security.ISharePointGroup.Description"><a href="#collapsible-PnP_Core_Model_Security_ISharePointGroup_Description" class="expander" data-toggle="collapse">Description</a></h4>
   
   <div id="collapsible-PnP_Core_Model_Security_ISharePointGroup_Description" class="collapse in">
-  <div class="markdown level1 summary"><p>Group description</p>
+  <div class="markdown level1 summary"><p>Group description. Note that HTML tags will be stripped and that the max length of the description will be limited to 511 characters</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -633,7 +633,7 @@
   <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">string OwnerTitle { get; set; }</code></pre>
+    <pre><code class="lang-csharp hljs">string OwnerTitle { get; }</code></pre>
   </div>
 
   
@@ -677,7 +677,7 @@
   <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">bool RequestToJoinLeaveEmailSetting { get; set; }</code></pre>
+    <pre><code class="lang-csharp hljs">string RequestToJoinLeaveEmailSetting { get; set; }</code></pre>
   </div>
 
   
@@ -688,7 +688,7 @@
   <table>
     <tr>
       <td>
-        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a>
         <p>
       </td>
     </tr>

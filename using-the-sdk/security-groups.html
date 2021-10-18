@@ -1,0 +1,201 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html lang="en">
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Working with groups | PnP Core SDK </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Working with groups | PnP Core SDK ">
+    <meta name="generator" content="docfx 2.56.5.0">
+    <meta name="description" content="The PnP Core SDK is a modern .NET SDK designed to work for Microsoft 365. It provides a unified object model for working with SharePoint Online and Teams which is agnostic to the underlying API's being called.">
+    <link rel="shortcut icon" href="https://c.s-microsoft.com/favicon.ico?v2">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    <meta property="docfx:newtab" content="true">
+  </head>  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../images/logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <label class="glyphicon glyphicon-search" for="search-query"></label>
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first="First" data-prev="Previous" data-next="Next" data-last="Last"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+                  <div class="contribution-panel mobile-hide pull-right">
+                      <a href="https://github.com/pnp/pnpcore/blob/dev/docs/using-the-sdk/security-groups.md/#L1" title="Improve this Doc" class="improve-doc-lg"><i class="glyphicon glyphicon-pencil"></i></a>
+                  </div>
+                    <h1 id="working-with-groups">Working with groups</h1>
+
+<p>In Microsoft 365 there's the concept of Microsoft 365 group with owners and members and there are SharePoint groups. The latter is the main topic of this page as SharePoint groups is the common model to used to grant users or other groups access to a SharePoint site.</p>
+<p>In the remainder of this article you'll see a lot of <code>context</code> use: in this case this is a <code>PnPContext</code> which was obtained via the <code>PnPContextFactory</code> as explained in the <a href="readme.html">overview article</a> and show below:</p>
+<pre><code class="lang-csharp">using (var context = await pnpContextFactory.CreateAsync(&quot;SiteToWorkWith&quot;))
+{
+    // See next chapter on how to use the PnPContext for working with lists
+}
+</code></pre>
+<h2 id="sharepoint-groups">SharePoint Groups</h2>
+<p>SharePoint groups are defined at the web level and by default does each web has an owners group, a members group and a visitors group. Adding users to those default created groups is a commonly used model, but you can also add a new group with it's role definitions and users.</p>
+<h3 id="getting-groups">Getting groups</h3>
+<p>To get the groups on a web you query the <code>SiteGroups</code> property which return a collection of <code>ISharePointGroup</code> instances. If you want to work with the default groups you can get a reference to these groups via the <code>AssociatedOwnerGroup</code>, <code>AssociatedMemberGroup</code> or <code>AssociatedVisitorGroup</code> properties of an <code>IWeb</code>.</p>
+<pre><code class="lang-csharp">// Option A: Load the default groups
+await context.Web.LoadAsync(p =&gt; p.AssociatedMemberGroup, p =&gt; p.AssociatedOwnerGroup, p =&gt; p.AssociatedVisitorGroup);
+
+await foreach(var user in context.Web.AssociatedOwnerGroup.Users.AsAsyncEnumerable())
+{
+    // do something with the user/group
+}
+
+// Option B: load all the groups with their users
+await context.Web.LoadAsync(p =&gt; p.SiteGroups.QueryProperties(u =&gt; u.Users));
+
+foreach(var group in context.Web.SiteGroups.AsRequested())
+{
+    // do something with the group
+}
+</code></pre>
+<h3 id="adding-a-group-with-a-custom-role-definition">Adding a group with a custom role definition</h3>
+<p>Adding a new SharePoint group is done via the usual <code>Add</code> methods. When a group is added you also need to assign a role to it (see <a href="security-intro.html#configuring-roles">Configuring roles</a>) otherwise the users added to group will not have any permissions on the SharePoint site.</p>
+<pre><code class="lang-csharp">// Add a new role definition for our new group, a limited reader role
+var roleDefinition = await context.Web.RoleDefinitions.AddAsync(roleDefName, Model.SharePoint.RoleType.Reader, new Model.SharePoint.PermissionKind[] { Model.SharePoint.PermissionKind.Open });
+
+// Add the new SharePoint group
+var siteGroup = await context.Web.SiteGroups.AddAsync(&quot;Limited readers&quot;);
+
+// Add the role definition to our group
+await siteGroup.AddRoleDefinitionsAsync(roleDefinition.Name);
+</code></pre>
+<h3 id="editing-a-group">Editing a group</h3>
+<p>To update a group you first change the needed properties and then call one of the <code>Update</code> methods.</p>
+<div class="NOTE">
+<h5>Note</h5>
+<p>A group's description cannot contain html characters and it's length is limited to 511 characters.</p>
+</div>
+<pre><code class="lang-csharp">// First get the group to update
+var siteGroup = await context.Web.SiteGroups.FirstOrDefaultAsync(g =&gt; g.Title == &quot;Limited readers&quot;);
+
+// Update the group, e.g. the Description property
+siteGroup.Description = &quot;Group for users with limited read access to this site&quot;;
+await siteGroup.UpdateAsync();
+</code></pre>
+<h3 id="deleting-a-group">Deleting a group</h3>
+<p>To delete a group use one of the <code>Delete</code> methods.</p>
+<pre><code class="lang-csharp">// First get the group to delete
+var siteGroup = await context.Web.SiteGroups.FirstOrDefaultAsync(g =&gt; g.Title == &quot;Limited readers&quot;);
+
+// Delete the group
+await siteGroup.DeleteAsync();
+</code></pre>
+<h3 id="adding-usersgroups-to-a-group">Adding users/groups to a group</h3>
+<p>Once a group has been created adding users or other groups is a common task which can be done using one of the <code>AddUser</code> methods.</p>
+<pre><code class="lang-csharp">// First get the group to add users to
+var siteGroup = await context.Web.SiteGroups.FirstOrDefaultAsync(g =&gt; g.Title == &quot;Limited readers&quot;);
+// Get the user to add
+var currentUser = await context.Web.GetCurrentUserAsync();
+// Add the user
+await addedGroup.AddUserAsync(currentUser.LoginName);
+</code></pre>
+<h3 id="listing-the-users-in-a-group">Listing the users in a group</h3>
+<p>To query the users in a group you need to load/get the <code>Users</code> property of the group.</p>
+<pre><code class="lang-csharp">// Notice how the users are loaded
+var myGroup = await context.Web.SiteGroups.QueryProperties(p =&gt; p.Users).FirstOrDefaultAsync(g =&gt; g.Title == &quot;Limited readers&quot;);
+
+foreach(var user in myGroup.Users.AsRequested())
+{
+    // do something with the group user
+}
+</code></pre>
+<h3 id="removing-usersgroups-from-a-group">Removing users/groups from a group</h3>
+<p>Removing users from a group is done using the <code>RemoveUser</code> methods.</p>
+<pre><code class="lang-csharp">// First get the group to remove users from
+var siteGroup = await context.Web.SiteGroups.FirstOrDefaultAsync(g =&gt; g.Title == &quot;Limited readers&quot;);
+// Get the user to remove
+var currentUser = await context.Web.GetCurrentUserAsync();
+// Remove the user
+await addedGroup.RemoveUserAsync(currentUser.Id);
+</code></pre>
+<h2 id="microsoft-365-groups">Microsoft 365 groups</h2>
+<p>When a site is connected to a Microsoft 365 group then the Microsoft 365 group's owners are also site collection administrators and are part of the site's default &quot;Owners&quot; SharePoint group. The Microsoft's 365 group members will be automatically part of the site's default &quot;Members&quot; SharePoint group. Important to understand is that the Microsoft 365 group's owners and members complement the existing SharePoint security model, meaning it's perfectly possible to define add a SharePoint group with members in a Microsoft 365 group connected site (e.g. a team site). Important to understand is the permissions set of the SharePoint site via SharePoint groups do not apply to the Microsoft 365 group and it's other connected resources (e.g. a mailbox, Yammer group etc). Go <a href="https://docs.microsoft.com/en-us/sharepoint/dev/transform/modernize-connect-to-office365-group">here</a> to learn more.</p>
+</article>
+          </div>
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              </nav>
+            </div>
+          </div>        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            <span>PnP Core SDK<br>Generated by <strong><a href='https://dotnet.github.io/docfx' alt='Doc FX Website'>DocFX</a></strong> with <strong><a href='https://ovasquez.github.io/docfx-material' alt='DocFx Material Theme'>Material UI</a></strong></span>
+            
+            <img src="https://telemetry.sharepointpnp.com/@pnp.github.io/index/" alt="spacer">
+          </div>
+        </div>
+      </footer>    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>  </body>
+</html>

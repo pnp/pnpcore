@@ -244,7 +244,7 @@
     internal TeamChannel()
     {
         // Validation handler to prevent updating the general channel
-        ValidateUpdateHandler = (ref PropertyUpdateRequest propertyUpdateRequest) =&gt;
+        ValidateUpdateHandler = (PropertyUpdateRequest propertyUpdateRequest) =&gt;
         {
             // Prevent setting all values on the general channel
             if (DisplayName == &quot;General&quot;)

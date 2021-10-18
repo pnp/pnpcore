@@ -120,13 +120,13 @@
   <h4 id="PnP_Core_Model_Security_ISharePointPrincipal_Id" data-uid="PnP.Core.Model.Security.ISharePointPrincipal.Id"><a href="#collapsible-PnP_Core_Model_Security_ISharePointPrincipal_Id" class="expander" data-toggle="collapse">Id</a></h4>
   
   <div id="collapsible-PnP_Core_Model_Security_ISharePointPrincipal_Id" class="collapse in">
-  <div class="markdown level1 summary"><p>Gets a value that specifies the member identifier for the user or group.</p>
+  <div class="markdown level1 summary"><p>Gets a value that specifies the member identifier for the principal (user/group).</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">int Id { get; set; }</code></pre>
+    <pre><code class="lang-csharp hljs">int Id { get; }</code></pre>
   </div>
 
   
@@ -170,7 +170,7 @@
   <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">bool IsHiddenInUI { get; }</code></pre>
+    <pre><code class="lang-csharp hljs">bool IsHiddenInUI { get; set; }</code></pre>
   </div>
 
   
@@ -208,13 +208,13 @@
   <h4 id="PnP_Core_Model_Security_ISharePointPrincipal_LoginName" data-uid="PnP.Core.Model.Security.ISharePointPrincipal.LoginName"><a href="#collapsible-PnP_Core_Model_Security_ISharePointPrincipal_LoginName" class="expander" data-toggle="collapse">LoginName</a></h4>
   
   <div id="collapsible-PnP_Core_Model_Security_ISharePointPrincipal_LoginName" class="collapse in">
-  <div class="markdown level1 summary"><p>Gets the login name of the user.</p>
+  <div class="markdown level1 summary"><p>Gets the login name of the principal (user/group).</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">string LoginName { get; set; }</code></pre>
+    <pre><code class="lang-csharp hljs">string LoginName { get; }</code></pre>
   </div>
 
   
@@ -296,7 +296,7 @@
   <h4 id="PnP_Core_Model_Security_ISharePointPrincipal_Title" data-uid="PnP.Core.Model.Security.ISharePointPrincipal.Title"><a href="#collapsible-PnP_Core_Model_Security_ISharePointPrincipal_Title" class="expander" data-toggle="collapse">Title</a></h4>
   
   <div id="collapsible-PnP_Core_Model_Security_ISharePointPrincipal_Title" class="collapse in">
-  <div class="markdown level1 summary"><p>Name of the user</p>
+  <div class="markdown level1 summary"><p>Name of the principal (user/group).</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>

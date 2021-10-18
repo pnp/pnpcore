@@ -84,6 +84,12 @@
 
 <p>In SharePoint the definition of what a user or group can do on a securable object (Web, List, ListItem) is defined as a role (a.k.a. permission level). For example the role &quot;Full Control&quot; has many permissions like &quot;Manage Lists&quot;, &quot;View Items&quot; and more. The default <strong>owners</strong> group of a site has the &quot;Full Control&quot; role granting all users and groups part of the <strong>owners</strong> group the related permissions like &quot;Manage Lists&quot;, &quot;View Items&quot; and more. Roles are always managed at the root web level, meaning there's only one set of roles defined per site collection.</p>
 <p>By default securable objects inherit permissions: the permissions set on the site are inherited by each list and the are again inherited by each list item. If a user is then added to the site's contributors group he immediately has the &quot;Full Control&quot; role on all of the content in the site. However, sometimes it's need to provide other permissions for a sub site, for a list or for a list item which is implemented by breaking the permission inheritance for the securable object followed by setting the correct permissions on the securable object.</p>
+<p>In the remainder of this article you'll see a lot of <code>context</code> use: in this case this is a <code>PnPContext</code> which was obtained via the <code>PnPContextFactory</code> as explained in the <a href="readme.html">overview article</a> and show below:</p>
+<pre><code class="lang-csharp">using (var context = await pnpContextFactory.CreateAsync(&quot;SiteToWorkWith&quot;))
+{
+    // See next chapter on how to use the PnPContext for working with lists
+}
+</code></pre>
 <h2 id="configuring-roles">Configuring roles</h2>
 <h3 id="listing-the-existing-roles">Listing the existing roles</h3>
 <p>To query the roles defined on the <code>IWeb</code> instance load the <code>RoleDefinitions</code> property on the root web of the site collection.</p>
@@ -123,7 +129,7 @@ var customRole = await roleDefinitions.AddAsync(&quot;My custom role&quot;,
 </code></pre>
 <h3 id="updating-a-role">Updating a role</h3>
 <p>A role can also be updated, simply call one of the <code>Update</code> methods after having changed the role. The change the permissions a role has use the <code>Clear</code> and <code>Set</code> methods on the <code>BasePermissions</code> property:</p>
-<pre><code class="lang-csharp">customRole = await context.Web.RoleDefinitions.FirstOrDefaultAsync(d =&gt; d.Name == &quot;My custom role&quot;);
+<pre><code class="lang-csharp">var customRole = await context.Web.RoleDefinitions.FirstOrDefaultAsync(d =&gt; d.Name == &quot;My custom role&quot;);
 
 customRole.BasePermissions.Clear(PermissionKind.ViewPages);
 customRole.BasePermissions.Set(PermissionKind.AddListItems);
@@ -133,7 +139,7 @@ await customRole.UpdateAsync();
 </code></pre>
 <h3 id="deleting-a-role">Deleting a role</h3>
 <p>Deleting a role can be done via the <code>Delete</code> methods:</p>
-<pre><code class="lang-csharp">customRole = await context.Web.RoleDefinitions.FirstOrDefaultAsync(d =&gt; d.Name == &quot;My custom role&quot;);
+<pre><code class="lang-csharp">var customRole = await context.Web.RoleDefinitions.FirstOrDefaultAsync(d =&gt; d.Name == &quot;My custom role&quot;);
 // Delete the role
 await customRole.DeleteAsync();
 </code></pre>

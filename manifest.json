@@ -1326,7 +1326,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.Security.ISharePointGroup.html",
-          "hash": "TS5s1QP/JS4Ecjc9LQctdg=="
+          "hash": "aEI3TCzgu+n3YcMBEcS2Uw=="
         }
       },
       "is_incremental": false,
@@ -1350,7 +1350,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.Security.ISharePointPrincipal.html",
-          "hash": "HcYZVQmrOn1AM/Re//PtGA=="
+          "hash": "4waef2YNMgNL2C8wUXpPmg=="
         }
       },
       "is_incremental": false,
@@ -4878,7 +4878,7 @@
       "output": {
         ".html": {
           "relative_path": "contributing/event handlers.html",
-          "hash": "SlfTt6oSXEpNiGXSFefMHg=="
+          "hash": "BzNHV1dooM4NS3rBzwVRuA=="
         }
       },
       "is_incremental": false,
@@ -5931,11 +5931,23 @@
     },
     {
       "type": "Conceptual",
+      "source_relative_path": "using-the-sdk/security-groups.md",
+      "output": {
+        ".html": {
+          "relative_path": "using-the-sdk/security-groups.html",
+          "hash": "YW2IN0rSy/NShaj6Y3epbQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
       "source_relative_path": "using-the-sdk/security-intro.md",
       "output": {
         ".html": {
           "relative_path": "using-the-sdk/security-intro.html",
-          "hash": "jU0DYHE978AM1lMp7gx3LQ=="
+          "hash": "HxMMoRLbwnNEaOQSWJudxw=="
         }
       },
       "is_incremental": false,
@@ -6067,7 +6079,7 @@
       "output": {
         ".html": {
           "relative_path": "using-the-sdk/toc.html",
-          "hash": "7bVabcDxj18H5sPOeHWPyQ=="
+          "hash": "kAZn3YqrHI4LYCLDFB3vjQ=="
         }
       },
       "is_incremental": false,
@@ -6124,7 +6136,7 @@
         "ConceptualDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build",
-          "total_file_count": 80,
+          "total_file_count": 81,
           "skipped_file_count": 0
         },
         "ManagedReferenceDocumentProcessor": {
