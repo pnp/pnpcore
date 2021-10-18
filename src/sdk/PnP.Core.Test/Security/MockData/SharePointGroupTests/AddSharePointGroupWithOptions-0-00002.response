@@ -1,0 +1,10 @@
+--batchresponse_ccdf14d5-a17d-43f9-9a7f-1a05f4237037
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+HTTP/1.1 201 Created
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+LOCATION: https://bertonline.sharepoint.com/sites/prov-2/_api/Web/SiteGroups/GetById(22)
+
+{"d":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-2/_api/Web/SiteGroups/GetById(22)","uri":"https://bertonline.sharepoint.com/sites/prov-2/_api/Web/SiteGroups/GetById(22)","type":"SP.Group"},"Owner":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-2/_api/Web/SiteGroups/GetById(22)/Owner"}},"Users":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-2/_api/Web/SiteGroups/GetById(22)/Users"}},"Id":22,"IsHiddenInUI":false,"LoginName":"PNP_SDK_TEST_TestGroupOptions","Title":"PNP_SDK_TEST_TestGroupOptions","PrincipalType":8,"AllowMembersEditMembership":false,"AllowRequestToJoinLeave":false,"AutoAcceptRequestToJoinLeave":false,"Description":null,"OnlyAllowMembersViewMembership":true,"OwnerTitle":"Bert Jansen (Cloud)","RequestToJoinLeaveEmailSetting":null}}
+--batchresponse_ccdf14d5-a17d-43f9-9a7f-1a05f4237037--

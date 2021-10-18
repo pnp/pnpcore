@@ -4,6 +4,15 @@ In SharePoint the definition of what a user or group can do on a securable objec
 
 By default securable objects inherit permissions: the permissions set on the site are inherited by each list and the are again inherited by each list item. If a user is then added to the site's contributors group he immediately has the "Full Control" role on all of the content in the site. However, sometimes it's need to provide other permissions for a sub site, for a list or for a list item which is implemented by breaking the permission inheritance for the securable object followed by setting the correct permissions on the securable object.
 
+In the remainder of this article you'll see a lot of `context` use: in this case this is a `PnPContext` which was obtained via the `PnPContextFactory` as explained in the [overview article](readme.md) and show below:
+
+```csharp
+using (var context = await pnpContextFactory.CreateAsync("SiteToWorkWith"))
+{
+    // See next chapter on how to use the PnPContext for working with lists
+}
+```
+
 ## Configuring roles
 
 ### Listing the existing roles
@@ -58,7 +67,7 @@ var customRole = await roleDefinitions.AddAsync("My custom role",
 A role can also be updated, simply call one of the `Update` methods after having changed the role. The change the permissions a role has use the `Clear` and `Set` methods on the `BasePermissions` property:
 
 ```csharp
-customRole = await context.Web.RoleDefinitions.FirstOrDefaultAsync(d => d.Name == "My custom role");
+var customRole = await context.Web.RoleDefinitions.FirstOrDefaultAsync(d => d.Name == "My custom role");
 
 customRole.BasePermissions.Clear(PermissionKind.ViewPages);
 customRole.BasePermissions.Set(PermissionKind.AddListItems);
@@ -72,7 +81,7 @@ await customRole.UpdateAsync();
 Deleting a role can be done via the `Delete` methods:
 
 ```csharp
-customRole = await context.Web.RoleDefinitions.FirstOrDefaultAsync(d => d.Name == "My custom role");
+var customRole = await context.Web.RoleDefinitions.FirstOrDefaultAsync(d => d.Name == "My custom role");
 // Delete the role
 await customRole.DeleteAsync();
 ```

@@ -21,6 +21,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Added `ItemCount` property on `IList` [jansenbe - Bert Jansen]
 - Changed `IFileVersion.Size` to be a long, needed for large file versions [jansenbe - Bert Jansen]
 - Fixed updating of role definitions [jansenbe - Bert Jansen]
+- Implement SharePoint Group description property restrictions + more SharePoint group tests [jansenbe - Bert Jansen]
 
 ## [1.4.0]
 

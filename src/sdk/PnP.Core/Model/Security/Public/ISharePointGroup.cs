@@ -40,7 +40,7 @@ namespace PnP.Core.Model.Security
         public bool CanCurrentUserViewMembership { get; set; }
 
         /// <summary>
-        /// Group description
+        /// Group description. Note that HTML tags will be stripped and that the max length of the description will be limited to 511 characters
         /// </summary>
         public string Description { get; set; }
 
@@ -52,12 +52,12 @@ namespace PnP.Core.Model.Security
         /// <summary>
         /// Group owner title
         /// </summary>
-        public string OwnerTitle { get; set; }
+        public string OwnerTitle { get; }
 
         /// <summary>
         /// Email configuration for the group join or leave operations
         /// </summary>
-        public bool RequestToJoinLeaveEmailSetting { get; set; }
+        public string RequestToJoinLeaveEmailSetting { get; set; }
 
         /// <summary>
         /// Members of this group
