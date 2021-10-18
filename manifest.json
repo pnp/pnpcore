@@ -5164,6 +5164,18 @@
     },
     {
       "type": "Conceptual",
+      "source_relative_path": "demos/Demo.PersistentTokenCache/README.md",
+      "output": {
+        ".html": {
+          "relative_path": "demos/Demo.PersistentTokenCache/README.html",
+          "hash": "uV6DxPvtFnnrwSjP97tLGg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
       "source_relative_path": "demos/Demo.RPi/README.md",
       "output": {
         ".html": {
@@ -5214,7 +5226,7 @@
       "output": {
         ".html": {
           "relative_path": "demos/README.html",
-          "hash": "k/N+nnWU7HAyD4y+DmSU/A=="
+          "hash": "1H0lp76aEKllRINeX03Fbg=="
         }
       },
       "is_incremental": false,
@@ -6148,7 +6160,7 @@
         "ConceptualDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build",
-          "total_file_count": 82,
+          "total_file_count": 83,
           "skipped_file_count": 0
         },
         "ManagedReferenceDocumentProcessor": {
