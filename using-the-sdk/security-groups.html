@@ -124,7 +124,7 @@ await siteGroup.AddRoleDefinitionsAsync(roleDefinition.Name);
 <p>To update a group you first change the needed properties and then call one of the <code>Update</code> methods.</p>
 <div class="NOTE">
 <h5>Note</h5>
-<p>A group's description cannot contain html characters and it's length is limited to 511 characters.</p>
+<p>As a group's description cannot contain html characters the provided html is turned into text automatically. Also is the description length automatically truncated at 511 characters.</p>
 </div>
 <pre><code class="lang-csharp">// First get the group to update
 var siteGroup = await context.Web.SiteGroups.FirstOrDefaultAsync(g =&gt; g.Title == &quot;Limited readers&quot;);
