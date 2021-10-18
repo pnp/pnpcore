@@ -5,7 +5,7 @@ Samples are best way to learn how to use, hence we've some example PnP Core SDK 
 Sample | Description | .Net version | PnP Core version | Authentication Type
 -------|-------------|-----------------|-------------|----------------
 [Demo.Console](Demo.Console/README.md) | Demo console app that shows how to use the PnP Core SDK for working with Microsoft 365 data | 5.0.0 | v1.4.0 | Interactive login (`InteractiveAuthenticationProvider`)
-[Demo.PersistentTokenCache](Demo.Console/README.md) | Demo console app that shows how to use the PnP Core SDK with a custom authentication provider that utilizes an MSAL token cache avoiding credential prompts after first login | 5.0.0 | v1.4.0 | Custom `IAuthenticationProvider` implementation
+[Demo.PersistentTokenCache](Demo.PersistentTokenCache/README.md) | Demo console app that shows how to use the PnP Core SDK with a custom authentication provider that utilizes an MSAL token cache avoiding credential prompts after first login | 5.0.0 | v1.4.0 | Custom `IAuthenticationProvider` implementation
 [Demo.ASPNetCore](Demo.ASPNetCore/README.md) | Demo application showing how use the PnP Core SDK from an ASP.Net Core application | 5.0.0 | v1.4.0 | Custom authentication is used via the (`ExternalAuthenticationProvider`)
 [Demo.AzureFunction](Demo.AzureFunction/README.md) | Azure Function that shows how to use the PnP Core SDK via dependency injection | .net core 3.1 | v1.4.0 | Application permissions (`X509CertificateAuthenticationProvider`)
 [Demo.Blazor](Demo.Blazor/README.md) | Sample Blazor WASM application that prototypes how the PnP Core SDK can be used in Blazor development | 5.0.0 | v1.4.0 | Custom `IAuthenticationProvider` implementation

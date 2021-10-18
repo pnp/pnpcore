@@ -9,6 +9,8 @@
     href: Demo.Blazor/README.md
   - name: Console App
     href: Demo.Console/README.md
+  - name: Persistent token cache demo
+    href: Demo.PersistentTokenCache/README.md
   - name: Raspberry Pi
     href: Demo.RPi/README.md
   - name: WPF App
