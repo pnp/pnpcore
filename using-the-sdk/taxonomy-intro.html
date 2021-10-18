@@ -89,10 +89,6 @@
     // See next chapter on how to use the PnPContext for adding, updating and deleting data
 }
 </code></pre>
-<div class="NOTE">
-<h5>Note</h5>
-<p>The taxonomy implementation uses Microsoft Graph and currently the Microsoft Graph taxonomy APIs are in beta. See the <a href="basics-apis.html">&quot;Graph V1 versus Graph Beta&quot; section</a> to learn more.</p>
-</div>
 <h2 id="working-the-term-store">Working the term store</h2>
 <p>All taxonomy objects like term groups, term sets and terms live in a term store. This term store can be access via the <code>TermStore</code> property of the <code>PnPContext</code> you're using:</p>
 <pre><code class="lang-csharp">var termStore = await context.TermStore.GetAsync();

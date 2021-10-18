@@ -89,10 +89,6 @@
     // See next chapter on how to use the PnPContext for adding, updating and deleting data
 }
 </code></pre>
-<div class="NOTE">
-<h5>Note</h5>
-<p>The taxonomy implementation uses Microsoft Graph and currently the Microsoft Graph taxonomy APIs are in beta. See the <a href="basics-apis.html">&quot;Graph V1 versus Graph Beta&quot; section</a> to learn more.</p>
-</div>
 <h2 id="working-with-term-set-properties">Working with term set properties</h2>
 <p>A term set has a property bag implemented via the <code>Properties</code> property on an <code>ITermSet</code>. This property bag is of type <code>ITermSetPropertyCollection</code> and you can perform CRUD operations on it. To read the term set properties you can read all properties of a term set or use a LINQ query to load specific properties</p>
 <pre><code class="lang-csharp">// Load a term set with all it's properties
