@@ -138,22 +138,81 @@ await customRole.UpdateAsync();
 await customRole.DeleteAsync();
 </code></pre>
 <h2 id="assigning-roles">Assigning roles</h2>
-<p>To actually grant a permission a role needs to be associated to a user or group. By default the groups and user and their associated roles are maintained at the root web level, but it's possible to break permission inheritance and have different permissions at sub web, list or list item level.</p>
-<h3 id="assigningremoving-role-for-a-user-or-group-at-web-level">Assigning/removing role for a user or group at web level</h3>
-<p>todo</p>
-<pre><code class="lang-csharp">
+<p>To actually grant a permission a role needs to be assigned to a user or group. By default the groups and user and their assigned roles are maintained at the root web level, but it's possible to break permission inheritance and have different permissions at sub web, list or list item level. In PnP Core SDK the three objects that can be secured (<code>IWeb</code>, <code>IList</code> and <code>IListItem</code>) all implement the <code>ISecurableObject</code> interface providing the needed properties and methods to configure security.</p>
+<div class="NOTE">
+<h5>Note</h5>
+<p>The below chapters use an <code>IList</code> as sample but they apply to either <code>IWeb</code>, <code>IList</code> and <code>IListItem</code>.</p>
+</div>
+<h3 id="breaking-permission-inheritance">Breaking permission inheritance</h3>
+<p>By default permissions are inherited, so each securable object inherits from it's securable object parent. If you want to configure different permissions for let's say an <code>IList</code> then you need to first break permission inheritance using one of the <code>BreakRoleInheritance</code> methods. Using the first method parameter <code>copyRoleAssignments</code> can opt to copy over the current permissions so that you can edit them later on. If set to <code>false</code> then no permissions are copied over. The second parameter <code>clearSubscopes</code> determines what will happen with the existing custom permissions: imagine the scenario where that a list in a sub has custom permissions set and then the custom permissions are defined on the web which is the list's <code>ISecurableObject</code> parent. When <code>clearSubscopes</code> is set to <code>true</code> then existing custom permissions on securable child objects are dropped in favor of the current one, if set to <code>false</code> the existing custom permissions are left as is.</p>
+<pre><code class="lang-csharp">var myList = await context.Web.Lists.GetByTitleAsync(&quot;mylist&quot;);
+// Break permission inheritance
+await myList.BreakRoleInheritanceAsync(false, true);
 </code></pre>
-<h3 id="configure-web-list-or-list-item-to-use-unique-permissions">Configure web, list or list item to use unique permissions</h3>
-<p>todo</p>
-<pre><code class="lang-csharp">
+<h3 id="restoring-permission-inheritance">Restoring permission inheritance</h3>
+<p>If a securable object again needs to inherit the permissions from it's securable parent object then use one of the <code>ResetRoleInheritance</code> methods.</p>
+<pre><code class="lang-csharp">var myList = await context.Web.Lists.GetByTitleAsync(&quot;mylist&quot;);
+// Reset permission inheritance
+await myList.ResetRoleInheritanceAsync();
 </code></pre>
-<h3 id="assigningremoving-role-for-a-user-or-group-at-list-level">Assigning/removing role for a user or group at list level</h3>
-<p>todo</p>
-<pre><code class="lang-csharp">
+<h3 id="listing-the-current-roles-a-user-or-group-has-on-a-securable-object">Listing the current roles a user or group has on a securable object</h3>
+<p>To get a list of the currently assigned roles for a securable object use the <code>GetRoleDefinitions</code> methods. Simply pass in the id of principal (= user or group) you want to get the roles for.</p>
+<pre><code class="lang-csharp">var myList = await context.Web.Lists.GetByTitleAsync(&quot;mylist&quot;);
+// Load the role assignments on this list, also load the role definitions
+await myList.LoadAsync(w =&gt; w.RoleAssignments.QueryProperties(p =&gt; p.RoleDefinitions));
+
+foreach (var roleAssignment in myList.RoleAssignments.AsRequested())
+{
+    // do something with the role assignment
+}
 </code></pre>
-<h3 id="assigningremoving-role-for-a-user-or-group-at-list-item-level">Assigning/removing role for a user or group at list item level</h3>
-<p>todo</p>
-<pre><code class="lang-csharp">
+<h3 id="checking-if-custom-permissions-are-defined">Checking if custom permissions are defined</h3>
+<p>Checking if a securable object has custom role assignments is done via the <code>HasUniqueRoleAssignments</code>.</p>
+<div class="NOTE">
+<h5>Note</h5>
+<p>When loading data you can apply a filter (via the <code>where()</code> LINQ operator) and you can filter on <code>HasUniqueRoleAssignments == true</code> when querying webs and lists, however this is not possible when querying list items.</p>
+</div>
+<pre><code class="lang-csharp">var myList = await context.Web.Lists.GetByTitleAsync(&quot;mylist&quot;);
+// Load the role assignments on this list, also load the role definitions
+await myList.LoadAsync(w =&gt; w.HasUniqueRoleAssignments);
+
+if (myList.HasUniqueRoleAssignments)
+{
+    // List has custom permissions set, let's reset them
+    await myList.ResetRoleInheritanceAsync();
+}
+</code></pre>
+<h3 id="assigning-roles-to-a-user-or-group">Assigning roles to a user or group</h3>
+<p>Once you've broken permissions inheritance you will often assign roles for one or more users and groups to the securable object. To do so there are approaches: doing a bulk role assignment via the <code>AddRoleDefinitions</code> methods or assigning one role via the <code>AddRoleDefinition</code> methods. Both are shown in below example.</p>
+<pre><code class="lang-csharp">var myList = await context.Web.Lists.GetByTitleAsync(&quot;mylist&quot;);
+
+// Get current user
+var currentUser = await context.Web.GetCurrentUserAsync();
+
+// Approach A: adding single role to the current user
+var roleDefinitions = (await context.Web.GetAsync(p =&gt; p.RoleDefinitions)).RoleDefinitions;
+var editRole = roleDefinitions.AsRequested().FirstOrDefault(p =&gt; p.Name == &quot;Edit&quot;);
+
+await myList.AddRoleDefinitionAsync(currentUser.Id, editRole);
+
+// Approach B: adding multiple roles at once
+await myList.AddRoleDefinitionsAsync(currentUser.Id, new string[] { &quot;Full Control&quot;, &quot;Edit&quot; });
+</code></pre>
+<h3 id="removing-roles-from-a-user-or-group">Removing roles from a user or group</h3>
+<p>Just like adding roles there's also options for removing roles from a user or group for a securable object: doing a bulk role removal via the <code>RemoveRoleDefinitions</code> methods or removing one role via the <code>RemoveRoleDefinition</code> methods. Both are shown in below example.</p>
+<pre><code class="lang-csharp">var myList = await context.Web.Lists.GetByTitleAsync(&quot;mylist&quot;);
+
+// Get current user
+var currentUser = await context.Web.GetCurrentUserAsync();
+
+// Approach A: remove single role to the current user
+var roleDefinitions = (await context.Web.GetAsync(p =&gt; p.RoleDefinitions)).RoleDefinitions;
+var editRole = roleDefinitions.AsRequested().FirstOrDefault(p =&gt; p.Name == &quot;Edit&quot;);
+
+await myList.RemoveRoleDefinitionAsync(currentUser.Id, editRole);
+
+// Approach B: Removing multiple roles at once
+await myList.RemoveRoleDefinitionsAsync(currentUser.Id, new string[] { &quot;Full Control&quot;, &quot;Edit&quot; });
 </code></pre>
 </article>
           </div>
