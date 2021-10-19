@@ -6,9 +6,6 @@ The PnP Core SDK uses a default configuration and as such you're not required to
 
 Below snippet shows the settings which are used by the PnP Core SDK, you can simply include this snippet in your application settings file next to your custom settings.
 
-> [!Important]
-> The defined url's are case sensitive. The PnP Core SDK internally does a lot of batching to optimize performance and in SharePoint REST batching the case of the used url's needs to be correct.
-
 ```json
 {
   "PnPCore": {
