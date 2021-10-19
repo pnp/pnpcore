@@ -1,5 +1,7 @@
 # PnP Core SDK
 
+The PnP Core SDK is an SDK designed to work for Microsoft 365. It provides a unified object model for working with SharePoint Online and Teams which is agnostic to the underlying APIs being called. The initial goal for this library will be to cover the needs of developers working with either SharePoint Online or Teams, but we're also open to extend this library further towards other Microsoft 365 workloads if there's community demand for doing so.
+
 ![Build and Test](https://github.com/pnp/pnpcore/workflows/Build%20and%20Test/badge.svg?branch=dev) [![codecov](https://codecov.io/gh/jansenbe/pnpcore/branch/dev/graph/badge.svg?token=FL0EY8DRPQ)](https://codecov.io/gh/jansenbe/pnpcore) ![Refresh documentation](https://github.com/pnp/pnpcore/workflows/Refresh%20documentation/badge.svg?branch=dev) ![Nightly nuget release](https://github.com/pnp/pnpcore/workflows/Nightly%20nuget%20release/badge.svg?branch=dev)
 
 Nuget package | Description | Latest version | Latest nightly development version
@@ -8,8 +10,6 @@ PnP.Core | The PnP Core SDK | [![PnP.Core Nuget package](https://img.shields.io/
 PnP.Core.Auth | The authentication provider for the PnP Core SDK | [![PnP.Core.Auth Nuget package](https://img.shields.io/nuget/v/PnP.Core.Auth.svg)](https://www.nuget.org/packages/PnP.Core.Auth/) | [![PnP.Core.Auth Nuget package](https://img.shields.io/nuget/vpre/PnP.Core.Auth.svg)](https://www.nuget.org/packages/PnP.Core.Auth/)
 PnP.Core.Admin | Microsoft 365 admin features for the PnP Core SDK | soon | [![PnP.Core.Admin Nuget package](https://img.shields.io/nuget/vpre/PnP.Core.Admin.svg)](https://www.nuget.org/packages/PnP.Core.Admin/)
 PnP.Core.Transformation | PnP Transformation Framework | soon | [![PnP.Core.Transformation Nuget package](https://img.shields.io/nuget/vpre/PnP.Core.Transformation.svg)](https://www.nuget.org/packages/PnP.Core.Transformation/)
-
-The PnP Core SDK is an SDK designed to work for Microsoft 365. It provides a unified object model for working with SharePoint Online and Teams which is agnostic to the underlying APIs being called. The initial goal for this library will be to cover the needs of developers working with either SharePoint Online or Teams, but we're also open to extend this library further towards other Microsoft 365 workloads if there's community demand for doing so.
 
 ## Getting started 🚀
 
