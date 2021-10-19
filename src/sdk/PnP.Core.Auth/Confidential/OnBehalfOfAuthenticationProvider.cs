@@ -157,7 +157,8 @@ namespace PnP.Core.Auth
                     .WithPnPAdditionalAuthenticationSettings(
                         options.OnBehalfOf.AuthorityUri,
                         options.OnBehalfOf.RedirectUri,
-                        TenantId)
+                        TenantId,
+                        options.Environment)
                     .Build();
             }
             else
@@ -168,7 +169,8 @@ namespace PnP.Core.Auth
                     .WithPnPAdditionalAuthenticationSettings(
                         options.OnBehalfOf.AuthorityUri,
                         options.OnBehalfOf.RedirectUri,
-                        TenantId)
+                        TenantId,
+                        options.Environment)
                     .Build();
             }
 

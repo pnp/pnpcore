@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Security.Cryptography.X509Certificates;
+using PnP.Core.Services;
 
 namespace PnP.Core.Auth.Services.Builder.Configuration
 {
@@ -9,6 +10,11 @@ namespace PnP.Core.Auth.Services.Builder.Configuration
     /// </summary>
     public class PnPCoreAuthenticationOptions
     {
+        /// <summary>
+        /// The Microsoft 365 cloud environment that's used
+        /// </summary>
+        public string Environment { get; set; }
+
         /// <summary>
         /// The sites options
         /// </summary>
@@ -75,6 +81,11 @@ namespace PnP.Core.Auth.Services.Builder.Configuration
         /// The Tenant ID for the application, can be null
         /// </summary>
         public string TenantId { get; set; }
+
+        /// <summary>
+        /// The Microsoft 365 cloud environment that's used
+        /// </summary>
+        public Microsoft365Environment? Environment { get; set; }
 
         /// <summary>
         /// The options for the X509 Certificate Authentication Provider

@@ -102,6 +102,7 @@ namespace PnP.Core.Auth
             {
                 ClientId = ClientId,
                 TenantId = TenantId,
+                Environment = options.Environment,
                 UsernamePassword = new PnPCoreAuthenticationUsernamePasswordOptions
                 {
                     Username = credentials.UserName,

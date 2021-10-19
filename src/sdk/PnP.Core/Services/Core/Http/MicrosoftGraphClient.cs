@@ -12,6 +12,7 @@ namespace PnP.Core.Services
     {
         private readonly ILogger logger;
         private readonly PnPGlobalSettingsOptions globalSettings;
+        private bool baseAddressWasSet = false;
 
         /// <summary>
         /// Returns the configured Microsoft Graph http client
@@ -49,6 +50,15 @@ namespace PnP.Core.Services
             }
 
             Client = client;
+        }
+
+        internal void UpdateBaseAddress(string authority)
+        {
+            if (!baseAddressWasSet && !string.IsNullOrEmpty(authority))
+            {
+                Client.BaseAddress = new Uri($"https://{authority}/");
+                baseAddressWasSet = true;
+            }
         }
     }
 }

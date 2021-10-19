@@ -43,14 +43,5 @@ namespace PnP.Core.Test.Misc
             Assert.IsTrue(expected.Length == 151);
         }
 
-        //[TestMethod()]
-        //public void ComplexHtmlWithLengtLimit2()
-        //{
-        //    string input = "<title>GitHub - pnp/pnpcore: The PnP Core SDK is a modern .NET SDK designed to work for Microsoft 365. It provides a unified object model for working with SharePoint Online and Teams which is agnostic to the underlying API&#39;s being called. GitHub - pnp/pnpcore: The PnP Core SDK is a modern .NET SDK designed to work for Microsoft 365. It provides a unified object model for working with SharePoint Online and Teams which is agnostic to the underlying API&#39;s being called. GitHub - pnp/pnpcore: The PnP Core SDK is a modern .NET SDK designed to work for Microsoft 365. It provides a unified object model for working with SharePoint Online and Teams which is agnostic to the underlying API&#39;s being called</title><meta name=\"description\" content=\"The PnP Core SDK is a modern .NET SDK designed to work for Microsoft 365. It provides a unified object model for working with SharePoint Online and Teams which is agnostic to the underlying API&#39;s being called - GitHub - pnp/pnpcore: The PnP Core SDK is a modern .NET SDK designed to work for Microsoft 365. It provides a unified object model for working with SharePoint Online and Teams which is agnostic to the underlying API&#39;s being called\"><link rel=\"search\" type=\"application/opensearchdescription+xml\" href=\"/opensearch.xml\" title=\"GitHub\"><link rel=\"fluid-icon\" href=\"https://github.com/fluidicon.png\" title=\"GitHub\">";
-        //    string expected = "GitHub - pnp/pnpcore: The PnP Core SDK is a modern .NET SDK designed to work for Microsoft 365. It provides a unified object model for working with Sha";
-        //    var result = HtmlToText.ConvertSimpleHtmlToText(input, 511);
-        //    Assert.AreEqual(expected, result);
-        //    Assert.IsTrue(expected.Length == 511);
-        //}
     }
 }

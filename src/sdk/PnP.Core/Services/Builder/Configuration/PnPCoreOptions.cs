@@ -14,6 +14,11 @@ namespace PnP.Core.Services.Builder.Configuration
         public bool DisableTelemetry { get; set; }
 
         /// <summary>
+        /// The Microsoft 365 cloud environment that's used
+        /// </summary>
+        public string Environment { get; set; }
+
+        /// <summary>
         /// AAD tenant id, used for telemetry purposes. Can be customized via configuration
         /// </summary>
         public Guid AADTenantId { get; set; }

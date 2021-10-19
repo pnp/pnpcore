@@ -113,7 +113,8 @@ namespace PnP.Core.Auth
                 .WithPnPAdditionalAuthenticationSettings(
                     options.UsernamePassword.AuthorityUri,
                     options.UsernamePassword.RedirectUri,
-                    TenantId)
+                    TenantId,
+                    options.Environment)
                 .Build();
 
             // Log the initialization information

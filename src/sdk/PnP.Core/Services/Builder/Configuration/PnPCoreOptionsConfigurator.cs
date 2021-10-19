@@ -41,6 +41,15 @@ namespace PnP.Core.Services.Builder.Configuration
         {
             options.DisableTelemetry = pnpCoreOptions.Value.DisableTelemetry;
             options.AADTenantId = pnpCoreOptions.Value.AADTenantId;
+
+            if (!string.IsNullOrEmpty(pnpCoreOptions.Value.Environment))
+            {
+                if (Enum.TryParse(pnpCoreOptions.Value.Environment, out Microsoft365Environment environment))
+                {
+                    options.Environment = environment;
+                }
+            }
+
             if (pnpCoreOptions.Value?.HttpRequests != null)
             {
                 if (pnpCoreOptions.Value?.HttpRequests?.MicrosoftGraph != null)

@@ -17,6 +17,11 @@ namespace PnP.Core.Services
         /// </summary>
         public bool DisableTelemetry { get; set; }
 
+        /// <summary>
+        /// The Microsoft 365 cloud environment that's used
+        /// </summary>
+        public Microsoft365Environment? Environment { get; set; }
+
         #region Http request settings
 
         private string httpUserAgent;

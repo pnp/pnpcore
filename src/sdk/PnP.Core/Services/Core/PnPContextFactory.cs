@@ -273,6 +273,13 @@ namespace PnP.Core.Services
         /// <returns></returns>
         internal static async Task InitializeContextAsync(PnPContext context, PnPContextOptions options)
         {
+            // Set environment if not yet set
+            if (!context.Environment.HasValue)
+            {
+                context.Environment = CloudManager.GetEnvironmentFromUri(context.Uri);
+                // Ensure the Microsoft Graph URL is set depending on the used cloud environment
+                context.GraphClient.UpdateBaseAddress(CloudManager.GetMicrosoftGraphAuthority(context.Environment.Value));
+            }
 
             // Store the provided options, needed for context cloning
             context.LocalContextOptions = options;

@@ -119,7 +119,8 @@ namespace PnP.Core.Auth
                 .WithPnPAdditionalAuthenticationSettings(
                     options.X509Certificate.AuthorityUri,
                     options.X509Certificate.RedirectUri,
-                    TenantId)
+                    TenantId,
+                    options.Environment)
                 .Build();
 
             // Log the initialization information

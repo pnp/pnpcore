@@ -97,7 +97,8 @@ namespace PnP.Core.Auth
                 .WithPnPAdditionalAuthenticationSettings(
                     options.DeviceCode.AuthorityUri,
                     RedirectUri,
-                    TenantId)
+                    TenantId,
+                    options.Environment)
                 .Build();
 
             // Log the initialization information

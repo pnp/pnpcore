@@ -112,6 +112,13 @@ namespace PnP.Core.Services
                 GraphCanUseBeta = ContextOptions.GraphCanUseBeta;
             }
 
+            if (globalOptions != null && globalOptions.Environment.HasValue)
+            {
+                Environment = globalOptions.Environment.Value;
+                // Ensure the Microsoft Graph URL is set depending on the used cloud environment
+                GraphClient.UpdateBaseAddress(CloudManager.GetMicrosoftGraphAuthority(Environment.Value));
+            }
+
             BatchClient = new BatchClient(this, GlobalOptions, telemetryManager);
         }
         #endregion
@@ -142,6 +149,11 @@ namespace PnP.Core.Services
         /// Connected Microsoft Graph client
         /// </summary>
         public MicrosoftGraphClient GraphClient { get; }
+
+        /// <summary>
+        /// Returns the used Microsoft 365 cloud environment
+        /// </summary>
+        public Microsoft365Environment? Environment { get; internal set; }
 
         /// <summary>
         /// Connected batch client
@@ -511,7 +523,8 @@ namespace PnP.Core.Services
                 GraphAlwaysUseBeta = GraphAlwaysUseBeta,
                 GraphFirst = GraphFirst,
                 // Set the Uri for which this context was cloned
-                Uri = uri
+                Uri = uri,
+                Environment = Environment
             };
             return clonedContext;
         }
