@@ -177,6 +177,31 @@ namespace PnP.Core.Model.SharePoint
         public bool IsApplicationList { get; set; }
 
         /// <summary>
+        /// Gets a bool value that indicates whether the list is a gallery, such list templates, Web Parts, or Master Pages.
+        /// </summary>
+        public bool IsCatalog { get; }
+
+        /// <summary>
+        /// Is this library the default document library of this site
+        /// </summary>
+        public bool IsDefaultDocumentLibrary { get; }
+
+        /// <summary>
+        /// Gets a bool value that indicates whether the document library is a private list with restricted permissions, such as for Solutions
+        /// </summary>
+        public bool IsPrivate { get; }
+
+        /// <summary>
+        /// Is this library the site's site asset library
+        /// </summary>
+        public bool IsSiteAssetsLibrary { get; }
+
+        /// <summary>
+        /// Specifies whether the list is system list that does not contain end user data and created by system account.
+        /// </summary>
+        public bool IsSystemList { get; }
+
+        /// <summary>
         /// Defines the Read Security property, optional attribute.
         /// </summary>
         public int ReadSecurity { get; set; }

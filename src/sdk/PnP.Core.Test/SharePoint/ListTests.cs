@@ -879,6 +879,36 @@ namespace PnP.Core.Test.SharePoint
         }
 
         [TestMethod]
+        public async Task VerifyIsProperties()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var list = await context.Web.Lists.GetByServerRelativeUrlAsync($"{context.Uri.LocalPath}/shared%20documents", p => p.IsApplicationList, 
+                    p => p.IsCatalog, p=>p.IsDefaultDocumentLibrary, p => p.IsPrivate, p => p.IsSiteAssetsLibrary, p => p.IsSystemList);
+
+                Assert.IsTrue(list.Requested);
+                Assert.AreEqual(list.IsApplicationList, false);
+                Assert.AreEqual(list.IsCatalog, false);
+                Assert.AreEqual(list.IsDefaultDocumentLibrary, true);
+                Assert.AreEqual(list.IsPrivate, false);
+                Assert.AreEqual(list.IsSiteAssetsLibrary, false);
+                Assert.AreEqual(list.IsSystemList, false);
+
+                list = await context.Web.Lists.GetByServerRelativeUrlAsync($"{context.Uri.LocalPath}/_catalogs/masterpage", p => p.IsApplicationList,
+                    p => p.IsCatalog, p => p.IsDefaultDocumentLibrary, p => p.IsPrivate, p => p.IsSiteAssetsLibrary, p => p.IsSystemList);
+
+                Assert.IsTrue(list.Requested);
+                Assert.AreEqual(list.IsApplicationList, true);
+                Assert.AreEqual(list.IsCatalog, true);
+                Assert.AreEqual(list.IsDefaultDocumentLibrary, false);
+                Assert.AreEqual(list.IsPrivate, false);
+                Assert.AreEqual(list.IsSiteAssetsLibrary, false);
+                Assert.AreEqual(list.IsSystemList, true);
+            }
+        }
+
+        [TestMethod]
         public async Task GetListByIdFollowedByAdd()
         {
             //TestCommon.Instance.Mocking = false;

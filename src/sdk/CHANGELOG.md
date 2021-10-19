@@ -23,6 +23,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Fixed updating of role definitions [jansenbe - Bert Jansen]
 - Implement SharePoint Group description property restrictions + more SharePoint group tests [jansenbe - Bert Jansen]
 - Populate the `IFile` linked to an `IListItem` when getting list items via LoadListDataAsStream [jansenbe - Bert Jansen]
+- Added the `IsCatalog`, `IsDefaultDocumentLibrary`, `IsPrivate`, `IsSiteAssetsLibrary`, `IsSystemList` properties on `IList` [jansenbe - Bert Jansen]
 
 ## [1.4.0]
 

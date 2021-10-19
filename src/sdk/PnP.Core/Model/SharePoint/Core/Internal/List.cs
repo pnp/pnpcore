@@ -156,6 +156,16 @@ namespace PnP.Core.Model.SharePoint
 
         public bool IsApplicationList { get => GetValue<bool>(); set => SetValue(value); }
 
+        public bool IsCatalog { get => GetValue<bool>(); set => SetValue(value); }
+
+        public bool IsDefaultDocumentLibrary { get => GetValue<bool>(); set => SetValue(value); }
+
+        public bool IsPrivate { get => GetValue<bool>(); set => SetValue(value); }
+
+        public bool IsSiteAssetsLibrary { get => GetValue<bool>(); set => SetValue(value); }
+
+        public bool IsSystemList { get => GetValue<bool>(); set => SetValue(value); }
+
         public int ReadSecurity { get => GetValue<int>(); set => SetValue(value); }
 
         public int WriteSecurity { get => GetValue<int>(); set => SetValue(value); }
