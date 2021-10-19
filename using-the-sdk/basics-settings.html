@@ -92,6 +92,7 @@
 <pre><code class="lang-json">{
   &quot;PnPCore&quot;: {
     &quot;DisableTelemetry&quot;: &quot;false&quot;,
+    &quot;Environment&quot;: &quot;Production&quot;,
     &quot;HttpRequests&quot;: {
       &quot;UserAgent&quot;: &quot;ISV|Contoso|ProductX&quot;,
       &quot;Timeout&quot;: &quot;100&quot;,
@@ -219,6 +220,11 @@
 <td>PnPCore:HttpRequests:MicrosoftGraph:IncrementalDelay</td>
 <td>true</td>
 <td>Delays get incrementally longer with each retry.</td>
+</tr>
+<tr>
+<td>PnPCore:Environment</td>
+<td>Production</td>
+<td>Use this setting if you are using a cloud environment <strong>different</strong> from the standard production cloud: possible values are <code>Production</code>, <code>PreProduction</code>, <code>USGovernment</code> (a.k.a GCC), <code>USGovernmentHigh</code> (a.k.a GCC High), <code>USGovernmentDoD</code> (a.k.a DoD), <code>China</code> and <code>Germany</code>. <strong>Important:</strong> use the correct casing when using these values.</td>
 </tr>
 <tr>
 <td>PnPCore:DisableTelemetry</td>

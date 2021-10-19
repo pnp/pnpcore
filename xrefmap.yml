@@ -3580,6 +3580,19 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationCredentialConfigurationOptions.DeviceCode
   nameWithType: PnPCoreAuthenticationCredentialConfigurationOptions.DeviceCode
+- uid: PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationCredentialConfigurationOptions.Environment
+  name: Environment
+  href: api/PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationCredentialConfigurationOptions.html#PnP_Core_Auth_Services_Builder_Configuration_PnPCoreAuthenticationCredentialConfigurationOptions_Environment
+  commentId: P:PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationCredentialConfigurationOptions.Environment
+  fullName: PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationCredentialConfigurationOptions.Environment
+  nameWithType: PnPCoreAuthenticationCredentialConfigurationOptions.Environment
+- uid: PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationCredentialConfigurationOptions.Environment*
+  name: Environment
+  href: api/PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationCredentialConfigurationOptions.html#PnP_Core_Auth_Services_Builder_Configuration_PnPCoreAuthenticationCredentialConfigurationOptions_Environment_
+  commentId: Overload:PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationCredentialConfigurationOptions.Environment
+  isSpec: "True"
+  fullName: PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationCredentialConfigurationOptions.Environment
+  nameWithType: PnPCoreAuthenticationCredentialConfigurationOptions.Environment
 - uid: PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationCredentialConfigurationOptions.Interactive
   name: Interactive
   href: api/PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationCredentialConfigurationOptions.html#PnP_Core_Auth_Services_Builder_Configuration_PnPCoreAuthenticationCredentialConfigurationOptions_Interactive
@@ -3791,6 +3804,19 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationOptions.Credentials
   nameWithType: PnPCoreAuthenticationOptions.Credentials
+- uid: PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationOptions.Environment
+  name: Environment
+  href: api/PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationOptions.html#PnP_Core_Auth_Services_Builder_Configuration_PnPCoreAuthenticationOptions_Environment
+  commentId: P:PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationOptions.Environment
+  fullName: PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationOptions.Environment
+  nameWithType: PnPCoreAuthenticationOptions.Environment
+- uid: PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationOptions.Environment*
+  name: Environment
+  href: api/PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationOptions.html#PnP_Core_Auth_Services_Builder_Configuration_PnPCoreAuthenticationOptions_Environment_
+  commentId: Overload:PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationOptions.Environment
+  isSpec: "True"
+  fullName: PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationOptions.Environment
+  nameWithType: PnPCoreAuthenticationOptions.Environment
 - uid: PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationOptions.Sites
   name: Sites
   href: api/PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationOptions.html#PnP_Core_Auth_Services_Builder_Configuration_PnPCoreAuthenticationOptions_Sites
@@ -37234,6 +37260,19 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Services.Builder.Configuration.PnPCoreOptions.DisableTelemetry
   nameWithType: PnPCoreOptions.DisableTelemetry
+- uid: PnP.Core.Services.Builder.Configuration.PnPCoreOptions.Environment
+  name: Environment
+  href: api/PnP.Core.Services.Builder.Configuration.PnPCoreOptions.html#PnP_Core_Services_Builder_Configuration_PnPCoreOptions_Environment
+  commentId: P:PnP.Core.Services.Builder.Configuration.PnPCoreOptions.Environment
+  fullName: PnP.Core.Services.Builder.Configuration.PnPCoreOptions.Environment
+  nameWithType: PnPCoreOptions.Environment
+- uid: PnP.Core.Services.Builder.Configuration.PnPCoreOptions.Environment*
+  name: Environment
+  href: api/PnP.Core.Services.Builder.Configuration.PnPCoreOptions.html#PnP_Core_Services_Builder_Configuration_PnPCoreOptions_Environment_
+  commentId: Overload:PnP.Core.Services.Builder.Configuration.PnPCoreOptions.Environment
+  isSpec: "True"
+  fullName: PnP.Core.Services.Builder.Configuration.PnPCoreOptions.Environment
+  nameWithType: PnPCoreOptions.Environment
 - uid: PnP.Core.Services.Builder.Configuration.PnPCoreOptions.HttpRequests
   name: HttpRequests
   href: api/PnP.Core.Services.Builder.Configuration.PnPCoreOptions.html#PnP_Core_Services_Builder_Configuration_PnPCoreOptions_HttpRequests
@@ -37552,6 +37591,54 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Services.IPnPContextFactory.CreateAsync
   nameWithType: IPnPContextFactory.CreateAsync
+- uid: PnP.Core.Services.Microsoft365Environment
+  name: Microsoft365Environment
+  href: api/PnP.Core.Services.Microsoft365Environment.html
+  commentId: T:PnP.Core.Services.Microsoft365Environment
+  fullName: PnP.Core.Services.Microsoft365Environment
+  nameWithType: Microsoft365Environment
+- uid: PnP.Core.Services.Microsoft365Environment.China
+  name: China
+  href: api/PnP.Core.Services.Microsoft365Environment.html#PnP_Core_Services_Microsoft365Environment_China
+  commentId: F:PnP.Core.Services.Microsoft365Environment.China
+  fullName: PnP.Core.Services.Microsoft365Environment.China
+  nameWithType: Microsoft365Environment.China
+- uid: PnP.Core.Services.Microsoft365Environment.Germany
+  name: Germany
+  href: api/PnP.Core.Services.Microsoft365Environment.html#PnP_Core_Services_Microsoft365Environment_Germany
+  commentId: F:PnP.Core.Services.Microsoft365Environment.Germany
+  fullName: PnP.Core.Services.Microsoft365Environment.Germany
+  nameWithType: Microsoft365Environment.Germany
+- uid: PnP.Core.Services.Microsoft365Environment.PreProduction
+  name: PreProduction
+  href: api/PnP.Core.Services.Microsoft365Environment.html#PnP_Core_Services_Microsoft365Environment_PreProduction
+  commentId: F:PnP.Core.Services.Microsoft365Environment.PreProduction
+  fullName: PnP.Core.Services.Microsoft365Environment.PreProduction
+  nameWithType: Microsoft365Environment.PreProduction
+- uid: PnP.Core.Services.Microsoft365Environment.Production
+  name: Production
+  href: api/PnP.Core.Services.Microsoft365Environment.html#PnP_Core_Services_Microsoft365Environment_Production
+  commentId: F:PnP.Core.Services.Microsoft365Environment.Production
+  fullName: PnP.Core.Services.Microsoft365Environment.Production
+  nameWithType: Microsoft365Environment.Production
+- uid: PnP.Core.Services.Microsoft365Environment.USGovernment
+  name: USGovernment
+  href: api/PnP.Core.Services.Microsoft365Environment.html#PnP_Core_Services_Microsoft365Environment_USGovernment
+  commentId: F:PnP.Core.Services.Microsoft365Environment.USGovernment
+  fullName: PnP.Core.Services.Microsoft365Environment.USGovernment
+  nameWithType: Microsoft365Environment.USGovernment
+- uid: PnP.Core.Services.Microsoft365Environment.USGovernmentDoD
+  name: USGovernmentDoD
+  href: api/PnP.Core.Services.Microsoft365Environment.html#PnP_Core_Services_Microsoft365Environment_USGovernmentDoD
+  commentId: F:PnP.Core.Services.Microsoft365Environment.USGovernmentDoD
+  fullName: PnP.Core.Services.Microsoft365Environment.USGovernmentDoD
+  nameWithType: Microsoft365Environment.USGovernmentDoD
+- uid: PnP.Core.Services.Microsoft365Environment.USGovernmentHigh
+  name: USGovernmentHigh
+  href: api/PnP.Core.Services.Microsoft365Environment.html#PnP_Core_Services_Microsoft365Environment_USGovernmentHigh
+  commentId: F:PnP.Core.Services.Microsoft365Environment.USGovernmentHigh
+  fullName: PnP.Core.Services.Microsoft365Environment.USGovernmentHigh
+  nameWithType: Microsoft365Environment.USGovernmentHigh
 - uid: PnP.Core.Services.MicrosoftGraphClient
   name: MicrosoftGraphClient
   href: api/PnP.Core.Services.MicrosoftGraphClient.html
@@ -37688,6 +37775,19 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Services.PnPContext.Dispose
   nameWithType: PnPContext.Dispose
+- uid: PnP.Core.Services.PnPContext.Environment
+  name: Environment
+  href: api/PnP.Core.Services.PnPContext.html#PnP_Core_Services_PnPContext_Environment
+  commentId: P:PnP.Core.Services.PnPContext.Environment
+  fullName: PnP.Core.Services.PnPContext.Environment
+  nameWithType: PnPContext.Environment
+- uid: PnP.Core.Services.PnPContext.Environment*
+  name: Environment
+  href: api/PnP.Core.Services.PnPContext.html#PnP_Core_Services_PnPContext_Environment_
+  commentId: Overload:PnP.Core.Services.PnPContext.Environment
+  isSpec: "True"
+  fullName: PnP.Core.Services.PnPContext.Environment
+  nameWithType: PnPContext.Environment
 - uid: PnP.Core.Services.PnPContext.Execute(PnP.Core.Services.Batch,System.Boolean)
   name: Execute(Batch, Boolean)
   href: api/PnP.Core.Services.PnPContext.html#PnP_Core_Services_PnPContext_Execute_PnP_Core_Services_Batch_System_Boolean_
@@ -38375,6 +38475,19 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Services.PnPGlobalSettingsOptions.DisableTelemetry
   nameWithType: PnPGlobalSettingsOptions.DisableTelemetry
+- uid: PnP.Core.Services.PnPGlobalSettingsOptions.Environment
+  name: Environment
+  href: api/PnP.Core.Services.PnPGlobalSettingsOptions.html#PnP_Core_Services_PnPGlobalSettingsOptions_Environment
+  commentId: P:PnP.Core.Services.PnPGlobalSettingsOptions.Environment
+  fullName: PnP.Core.Services.PnPGlobalSettingsOptions.Environment
+  nameWithType: PnPGlobalSettingsOptions.Environment
+- uid: PnP.Core.Services.PnPGlobalSettingsOptions.Environment*
+  name: Environment
+  href: api/PnP.Core.Services.PnPGlobalSettingsOptions.html#PnP_Core_Services_PnPGlobalSettingsOptions_Environment_
+  commentId: Overload:PnP.Core.Services.PnPGlobalSettingsOptions.Environment
+  isSpec: "True"
+  fullName: PnP.Core.Services.PnPGlobalSettingsOptions.Environment
+  nameWithType: PnPGlobalSettingsOptions.Environment
 - uid: PnP.Core.Services.PnPGlobalSettingsOptions.HttpMicrosoftGraphDelayInSeconds
   name: HttpMicrosoftGraphDelayInSeconds
   href: api/PnP.Core.Services.PnPGlobalSettingsOptions.html#PnP_Core_Services_PnPGlobalSettingsOptions_HttpMicrosoftGraphDelayInSeconds
