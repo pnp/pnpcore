@@ -12,13 +12,12 @@ The PnP Core SDK is maintained in the PnP GitHub repository: https://github.com/
 
 ## Referencing the PnP Core SDK in your project
 
-The recommended approach is to use the preview [PnP.Core nuget package](https://www.nuget.org/packages/PnP.Core) together with the preview [PnP.Core.Auth nuget package](https://www.nuget.org/packages/PnP.Core.Auth). The former is the actual PnP Core SDK library, while the latter is an helper library that provides a useful set of Authentication Providers to authenticate against Azure Active Directory.
+The recommended approach is to use the preview [PnP.Core nuget package](https://www.nuget.org/packages/PnP.Core) together with the [PnP.Core.Auth nuget package](https://www.nuget.org/packages/PnP.Core.Auth). The former is the actual PnP Core SDK library, while the latter is an helper library that provides a useful set of Authentication Providers to authenticate against Azure Active Directory.
 Each night these preview packages are refreshed, so you can always upgrade to the latest dev bits by upgrading your nuget package to the latest version.
 
 > [!Note]
 >
 > - If you want to use the PnP Core SDK authentication providers then simply add the [PnP.Core.Auth nuget package](https://www.nuget.org/packages/PnP.Core.Auth), the correct [PnP.Core nuget package](https://www.nuget.org/packages/PnP.Core) will be automatically added as it's a dependency of the [PnP.Core.Auth nuget package](https://www.nuget.org/packages/PnP.Core.Auth).
-> - If you want to debug the SDK code you can include the PnP Core project (`src\PnP.Core\PnP.Core.csproj`) in your project as a dependency.
 
 ## Configuring the needed services
 
