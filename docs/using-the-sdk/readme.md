@@ -7,7 +7,7 @@ The PnP Core SDK is designed to be used in modern .Net development, hence it rel
 The PnP Core SDK is maintained in the PnP GitHub repository: https://github.com/pnp/pnpcore. You'll find:
 
 - The code of the PnP Core SDK in the `src\sdk` folder
-- Examples of how to use the PnP Core SDK in the `src\samples` folder
+- Examples of how to use the PnP Core SDK in the `samples` folder
 - The source of the documentation you are reading right now in the `docs` folder
 
 ## Referencing the PnP Core SDK in your project
