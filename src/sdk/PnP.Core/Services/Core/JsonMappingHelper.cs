@@ -108,8 +108,6 @@ namespace PnP.Core.Services
             // variable to capture the id value
             string idFieldValue = null;
 
-            bool hasResults = false;
-
             if (apiResponse.JsonElement.ValueKind == JsonValueKind.Object)
             {
                 // Enumerate the received properties and try to map them to the model
@@ -168,9 +166,6 @@ namespace PnP.Core.Services
                                 PropertyInfo pnpChildIdProperty = null;
                                 foreach (var childJson in resultsProperty.EnumerateArray())
                                 {
-                                    // Keep track in order to know if proceed to next page
-                                    hasResults = true;
-
                                     // Create a new model instance to add to the collection
                                     var pnpChild = typedCollection.CreateNew();
 
@@ -371,8 +366,9 @@ namespace PnP.Core.Services
             if (apiResponse.ApiCall.Request.Contains("$top", StringComparison.InvariantCultureIgnoreCase))
             {
                 var parent = (pnpObject as IDataModelParent).Parent;
+
                 // Go to next page if previous one contains any item
-                if (parent != null && hasResults && parent is IManageableCollection && parent is IMetadataExtensible && parent.GetType().ImplementsInterface(typeof(ISupportPaging)))
+                if (parent != null && parent is IManageableCollection && parent is IMetadataExtensible && parent.GetType().ImplementsInterface(typeof(ISupportPaging)))
                 {
                     TrackAndUpdateMetaData(parent as IMetadataExtensible, "__next", BuildNextPageRestUrl(apiResponse.ApiCall.Request));
                 }
