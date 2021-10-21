@@ -71,11 +71,6 @@ namespace PnP.Core.Admin.Model.SharePoint
                 payload["Classification"] = siteToCreate.Classification ?? "";
             }
 
-            if (siteToCreate.PreferredDataLocation.HasValue)
-            {
-                payload.Add("PreferredDataLocation", siteToCreate.PreferredDataLocation.Value.ToString());
-            }
-
             return await CreateSiteUsingSpoRestImplementationAsync(context, true, payload, creationOptions).ConfigureAwait(false);
         }
 
@@ -237,7 +232,6 @@ namespace PnP.Core.Admin.Model.SharePoint
             {
                 apiCall = $"_api/GroupSiteManager/CreateGroupEx";
                 statusProperty = "CreateGroupEx";
-                var json = new { payload }.AsExpando();
                 body = JsonSerializer.Serialize(payload, PnPConstants.JsonSerializer_IgnoreNullValues_CamelCase);
             }
 

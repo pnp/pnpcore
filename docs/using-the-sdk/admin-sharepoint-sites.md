@@ -63,6 +63,9 @@ Classic site | Use `ClassicSiteOptions` | Use `ClassicSiteOptions`
 
 All provisioning flows will only return once the site collection is done, for the modern sites this is a matter of seconds, for classic sites this can take up to 10-15 minutes.
 
+> [!Note]
+> If your tenant is a multi-geo tenant then go [here](admin-m365-multigeo.md#Creating-new-site-collections-in-the-right-geo-location) to checkout how you can control the geo location where the site collection will be created.
+
 ### Basic site collection creation flow
 
 The code structure to create a site collection is identical, regardless of which site you're creating or which type of permission you're using:

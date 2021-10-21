@@ -64,10 +64,5 @@ namespace PnP.Core.Admin.Model.SharePoint
         /// </summary>
         public Guid SensitivityLabelId { get; set; }
 
-        /// <summary>
-        /// The geography in which to create the site collection. Only applicable to multi-geo enabled tenants
-        /// </summary>
-        public GeoLocation? PreferredDataLocation { get; set; }
-
     }
 }
