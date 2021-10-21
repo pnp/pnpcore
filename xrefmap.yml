@@ -783,19 +783,6 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Admin.Model.SharePoint.CommonNoGroupSiteOptions.Owner
   nameWithType: CommonNoGroupSiteOptions.Owner
-- uid: PnP.Core.Admin.Model.SharePoint.CommonNoGroupSiteOptions.PreferredDataLocation
-  name: PreferredDataLocation
-  href: api/PnP.Core.Admin.Model.SharePoint.CommonNoGroupSiteOptions.html#PnP_Core_Admin_Model_SharePoint_CommonNoGroupSiteOptions_PreferredDataLocation
-  commentId: P:PnP.Core.Admin.Model.SharePoint.CommonNoGroupSiteOptions.PreferredDataLocation
-  fullName: PnP.Core.Admin.Model.SharePoint.CommonNoGroupSiteOptions.PreferredDataLocation
-  nameWithType: CommonNoGroupSiteOptions.PreferredDataLocation
-- uid: PnP.Core.Admin.Model.SharePoint.CommonNoGroupSiteOptions.PreferredDataLocation*
-  name: PreferredDataLocation
-  href: api/PnP.Core.Admin.Model.SharePoint.CommonNoGroupSiteOptions.html#PnP_Core_Admin_Model_SharePoint_CommonNoGroupSiteOptions_PreferredDataLocation_
-  commentId: Overload:PnP.Core.Admin.Model.SharePoint.CommonNoGroupSiteOptions.PreferredDataLocation
-  isSpec: "True"
-  fullName: PnP.Core.Admin.Model.SharePoint.CommonNoGroupSiteOptions.PreferredDataLocation
-  nameWithType: CommonNoGroupSiteOptions.PreferredDataLocation
 - uid: PnP.Core.Admin.Model.SharePoint.CommonNoGroupSiteOptions.SensitivityLabelId
   name: SensitivityLabelId
   href: api/PnP.Core.Admin.Model.SharePoint.CommonNoGroupSiteOptions.html#PnP_Core_Admin_Model_SharePoint_CommonNoGroupSiteOptions_SensitivityLabelId

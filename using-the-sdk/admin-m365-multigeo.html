@@ -124,6 +124,50 @@ else
     // Do admin work per geo location
 }
 </code></pre>
+<h2 id="creating-new-site-collections-in-the-right-geo-location">Creating new site collections in the right geo location</h2>
+<p>How to use PnP Core SDK to create site collections is described in the <a href="admin-sharepoint-sites.html#creating-site-collections">Site Collections</a> page. When working in a multi-geo tenant it's important to control where a site collection will be created and therefore some additional steps have to be taken in account. These steps depend per category of sites and used permissions:</p>
+<table>
+<thead>
+<tr>
+<th>Category</th>
+<th>Delegated permissions</th>
+<th>Application permissions</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Modern, no group</td>
+<td>Ensure the <code>context</code> you use is for a site in the target geo location + specify URL valid for the target geo location</td>
+<td>Ensure the <code>context</code> you use is for a site in the target geo location + specify URL valid for the target geo location</td>
+</tr>
+<tr>
+<td>Modern, with group</td>
+<td>Ensure the <code>context</code> you use is for a site in the target geo location + set the <code>PreferredDataLocation</code> value in the <code>TeamSiteOptions</code></td>
+<td>Set the <code>PreferredDataLocation</code> value in the <code>TeamSiteOptions</code></td>
+</tr>
+<tr>
+<td>Classic site</td>
+<td>Ensure the <code>context</code> you use is for a site in the target geo location + specify URL valid for the target geo location</td>
+<td>Ensure the <code>context</code> you use is for a site in the target geo location + specify URL valid for the target geo location</td>
+</tr>
+</tbody>
+</table>
+<p>So for modern sites without group and classic sites the story is simple: ensure the context and new site url you specify are valid for the target geo location. For group connected sites the story is different as the group's location determines where the associated SharePoint site will be created. To correctly do that you need to specify the <code>PreferredDataLocation</code>:</p>
+<pre><code class="lang-csharp">teamSiteToCreate = new TeamSiteOptions(alias, &quot;PnP Core SDK Test&quot;)
+{
+    Description = &quot;This is a test site collection&quot;,
+    Language = Language.English,
+    IsPublic = true,
+    PreferredDataLocation = GeoLocation.NAM
+};
+
+// Ensure the used context is for a site in NAM geo location
+using (var newSiteContext = await context.GetSiteCollectionManager().CreateSiteCollectionAsync(teamSiteToCreate))
+{
+    // Do work on the created site collection via the newSiteContext
+}
+</code></pre>
+<p>If you don't specify the <code>PreferredDataLocation</code> during the creation then the preferred data location from the account creating the team site (if any) is taken, if not the site will be created in the default geo location.</p>
 </article>
           </div>
           <div class="hidden-sm col-md-2" role="complementary">

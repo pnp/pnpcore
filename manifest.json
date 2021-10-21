@@ -138,7 +138,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Admin.Model.SharePoint.CommonNoGroupSiteOptions.html",
-          "hash": "2uG3bA4hWrDRRTnWG3Ztig=="
+          "hash": "x49YBvx9v2GHoDLt6EC1rA=="
         }
       },
       "is_incremental": false,
@@ -174,7 +174,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Admin.Model.SharePoint.CommunicationSiteOptions.html",
-          "hash": "3vaKfRxyvKOhJTAvGs2wGQ=="
+          "hash": "5rgpsLGYe7W2/RK2TAuOeA=="
         }
       },
       "is_incremental": false,
@@ -294,7 +294,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Admin.Model.SharePoint.TeamSiteWithoutGroupOptions.html",
-          "hash": "HqSuUxgZJMrZJTY1S1WNTw=="
+          "hash": "6BoGhEHmivMovYJ2vccITA=="
         }
       },
       "is_incremental": false,
@@ -5431,7 +5431,7 @@
       "output": {
         ".html": {
           "relative_path": "using-the-sdk/admin-m365-multigeo.html",
-          "hash": "9cAO5nd5p+ZseQpqpFE8Uw=="
+          "hash": "2/Yk5FxUkrvmuyZUX2IT1A=="
         }
       },
       "is_incremental": false,
@@ -5491,7 +5491,7 @@
       "output": {
         ".html": {
           "relative_path": "using-the-sdk/admin-sharepoint-sites.html",
-          "hash": "D6wCzcbeZoF+v9IdVtHTRQ=="
+          "hash": "GTyZ88DGWKM5rnOJH/EXGQ=="
         }
       },
       "is_incremental": false,
