@@ -692,6 +692,29 @@ namespace PnP.Core.Test.Base
         }
 
         [TestMethod]
+        public async Task RepeatedCloneOffLineTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var ctx2 = await context.CloneAsync(TestCommon.TestSite);
+                await ctx2.Web.EnsurePropertiesAsync(w => w.Title);
+
+                var ctx3 = await context.CloneAsync(TestCommon.NoGroupTestSite);
+                await ctx3.Web.EnsurePropertiesAsync(w => w.Title);
+
+                Assert.IsTrue(!ctx2.Web.Title.Equals(ctx3.Web.Title));
+
+                // Clone an already cloned context again
+                var ctx4 = await ctx3.CloneAsync(TestCommon.TestSite);
+                await ctx4.Web.EnsurePropertiesAsync(w => w.Title);
+
+                Assert.IsTrue(!ctx4.Web.Title.Equals(ctx3.Web.Title));
+                Assert.IsTrue(ctx4.Web.Title.Equals(ctx2.Web.Title));
+            }
+        }
+
+        [TestMethod]
         public async Task LiveAccessTokenAnalysis()
         {
             TestCommon.PnPCoreSDKTestUserSetup();

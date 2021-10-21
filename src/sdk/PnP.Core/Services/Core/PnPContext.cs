@@ -208,6 +208,10 @@ namespace PnP.Core.Services
         /// </summary>
         internal Dictionary<string, Uri> TestUris { get; set; }
 
+        /// <summary>
+        /// Number of clones created from this context
+        /// </summary>
+        internal int CloneCount { get; set; } = 0;
         #endregion
 
 #endif
@@ -485,7 +489,8 @@ namespace PnP.Core.Services
 #if DEBUG
             if (Mode != TestMode.Default)
             {
-                clonedContext = await CloneForTestingAsync(this, uri, TestName, TestId + 100).ConfigureAwait(false);
+                CloneCount++;
+                clonedContext = await CloneForTestingAsync(this, uri, TestName, TestId + (100 * CloneCount)).ConfigureAwait(false);
             }
             else
             {
@@ -634,6 +639,7 @@ namespace PnP.Core.Services
             }
 
             PnPContext clonedContext = CreateClonedContext(uri);
+            clonedContext.CloneCount = source.CloneCount + 13;
 
             if (source.Mode == TestMode.Mock)
             {
