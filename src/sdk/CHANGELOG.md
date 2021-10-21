@@ -26,6 +26,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Populate the `IFile` linked to an `IListItem` when getting list items via LoadListDataAsStream [jansenbe - Bert Jansen]
 - Added the `IsCatalog`, `IsDefaultDocumentLibrary`, `IsPrivate`, `IsSiteAssetsLibrary`, `IsSystemList` properties on `IList` [jansenbe - Bert Jansen]
 - Rest based paging did not always continue to the next page [jansenbe - Bert Jansen]
+- Improved offline test file generation when cloning a PnPContext #591 [jansenbe - Bert Jansen]
 
 ## [1.4.0]
 

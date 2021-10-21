@@ -694,7 +694,7 @@ namespace PnP.Core.Admin.Test.SharePoint
                         if (context.Mode == TestMode.Record)
                         {
                             // Add a little delay between creation and deletion
-                            await Task.Delay(TimeSpan.FromSeconds(15));
+                            await Task.Delay(TimeSpan.FromSeconds(30));
                         }
 
                         // Recycle the site collection
@@ -716,6 +716,13 @@ namespace PnP.Core.Admin.Test.SharePoint
 
                         // Restore the recycled site collection again
                         adminContext.GetSiteCollectionManager().RestoreSiteCollection(communicationSiteToCreate.Url);
+
+                        if (context.Mode == TestMode.Record)
+                        {
+                            // Add a little delay between creation and deletion
+                            await Task.Delay(TimeSpan.FromSeconds(30));
+                        }
+
                         // Verify the site collection is not returned as recycled site
                         recycledSites = adminContext.GetSiteCollectionManager().GetRecycledSiteCollections();
                         recycledCommunicationSite = recycledSites.FirstOrDefault(c => c.Url == communicationSiteToCreate.Url);
@@ -724,7 +731,7 @@ namespace PnP.Core.Admin.Test.SharePoint
                         if (context.Mode == TestMode.Record)
                         {
                             // Add a little delay between creation and deletion
-                            await Task.Delay(TimeSpan.FromSeconds(15));
+                            await Task.Delay(TimeSpan.FromSeconds(30));
                         }
                     }
                 }
