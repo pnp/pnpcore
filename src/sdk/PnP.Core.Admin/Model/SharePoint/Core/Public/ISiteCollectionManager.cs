@@ -133,5 +133,8 @@ namespace PnP.Core.Admin.Model.SharePoint
         /// <param name="webTemplate">The web template (e.g. STS#3, GROUP#0) of the site collection is used to determine the best delete approach</param>
         /// <returns></returns>
         void DeleteSiteCollection(Uri siteToDelete, string webTemplate);
+
+
+        Task GetSiteCollectionPropertiesAsync(Uri site);
     }
 }

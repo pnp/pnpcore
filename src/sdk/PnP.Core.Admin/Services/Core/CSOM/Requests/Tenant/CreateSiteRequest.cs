@@ -205,7 +205,7 @@ namespace PnP.Core.Admin.Services.Core.CSOM.Requests.Tenant
                 ObjectPath = new ConstructorPath
                 {
                     Id = IdentityPath,
-                    TypeId = "{268004ae-ef6b-4e9b-8425-127220d84719}"
+                    TypeId = PnPAdminConstants.CsomTenantObject
                 }
             };
 

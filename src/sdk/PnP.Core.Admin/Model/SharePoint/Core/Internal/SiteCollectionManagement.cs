@@ -113,5 +113,18 @@ namespace PnP.Core.Admin.Model.SharePoint
             return webTemplate.Equals(PnPAdminConstants.TeamSiteTemplate, StringComparison.InvariantCultureIgnoreCase);
         }
 
+        internal static async Task GetSiteCollectionPropertiesByUrlAsync(PnPContext context, Uri siteUrl, bool detailed)
+        {
+            using (var tenantAdminContext = await context.GetSharePointAdmin().GetTenantAdminCenterContextAsync().ConfigureAwait(false))
+            {
+                List<IRequest<object>> csomRequests = new List<IRequest<object>>
+                {
+                    new GetSitePropertiesRequest(siteUrl, detailed)
+                };
+
+                var result = await (tenantAdminContext.Web as Web).RawRequestAsync(new ApiCall(csomRequests), HttpMethod.Post).ConfigureAwait(false);                
+            }
+        }
+
     }
 }
