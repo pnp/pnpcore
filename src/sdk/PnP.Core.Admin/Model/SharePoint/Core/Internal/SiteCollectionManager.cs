@@ -83,5 +83,15 @@ namespace PnP.Core.Admin.Model.SharePoint
         {
             DeleteSiteCollectionAsync(siteToDelete, webTemplate).GetAwaiter().GetResult();
         }
+
+        public async Task<ISiteCollectionProperties> GetSiteCollectionPropertiesAsync(Uri site)
+        {
+            return await SiteCollectionManagement.GetSiteCollectionPropertiesByUrlAsync(context, site, true).ConfigureAwait(true);
+        }
+
+        public ISiteCollectionProperties GetSiteCollectionProperties(Uri site)
+        {
+            return GetSiteCollectionPropertiesAsync(site).GetAwaiter().GetResult();
+        }
     }
 }

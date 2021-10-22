@@ -22,5 +22,12 @@
         /// </summary>
         internal const string TeamSiteWithoutGroupTemplate = "STS#3";
 
+        // CSOM objects
+
+        /// <summary>
+        /// Identifier for the CSOM Tenant object
+        /// </summary>
+        internal const string CsomTenantObject = "{268004ae-ef6b-4e9b-8425-127220d84719}";
+
     }
 }
