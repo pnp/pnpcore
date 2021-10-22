@@ -110,6 +110,30 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Admin.Model.SharePoint.AppViewsPolicy.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Admin.Model.SharePoint.AppViewsPolicy.html",
+          "hash": "buo9tojORoWDdxEO3XkzMw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Admin.Model.SharePoint.BlockDownloadLinksFileTypes.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Admin.Model.SharePoint.BlockDownloadLinksFileTypes.html",
+          "hash": "xwGS/XyM7MHnGjr6KVrTCw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/PnP.Core.Admin.Model.SharePoint.ClassicSiteOptions.yml",
       "output": {
         ".html": {
@@ -182,6 +206,42 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Admin.Model.SharePoint.CompanyWideSharingLinksPolicy.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Admin.Model.SharePoint.CompanyWideSharingLinksPolicy.html",
+          "hash": "8KdsHbt/86GK54BxvXmnzw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Admin.Model.SharePoint.DenyAddAndCustomizePagesStatus.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Admin.Model.SharePoint.DenyAddAndCustomizePagesStatus.html",
+          "hash": "+d/tL9TWAG4P/U+Q5Z1XlQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Admin.Model.SharePoint.FlowsPolicy.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Admin.Model.SharePoint.FlowsPolicy.html",
+          "hash": "kVSwPjLDuQJ2Zs+j2YixfA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/PnP.Core.Admin.Model.SharePoint.IAppManager.yml",
       "output": {
         ".html": {
@@ -234,7 +294,19 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.html",
-          "hash": "K97flXBmgt6SK8pZlSJiyQ=="
+          "hash": "F8M4tQCeBYx6mz0F7RDfsA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Admin.Model.SharePoint.ISiteCollectionProperties.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Admin.Model.SharePoint.ISiteCollectionProperties.html",
+          "hash": "JYA9rgRrwHjR4suU4pcCAg=="
         }
       },
       "is_incremental": false,
@@ -266,11 +338,131 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Admin.Model.SharePoint.MediaTranscriptionPolicyType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Admin.Model.SharePoint.MediaTranscriptionPolicyType.html",
+          "hash": "cGkJESS38hw669lmumlirg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Admin.Model.SharePoint.PWAEnabledStatus.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Admin.Model.SharePoint.PWAEnabledStatus.html",
+          "hash": "7ftPw0mVEk3DhfzNSaPP7w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Admin.Model.SharePoint.RestrictedToRegion.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Admin.Model.SharePoint.RestrictedToRegion.html",
+          "hash": "YNLKBsmK2bb6YMso2cJR7g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Admin.Model.SharePoint.SPOConditionalAccessPolicyType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Admin.Model.SharePoint.SPOConditionalAccessPolicyType.html",
+          "hash": "BVNAjw6kOoMTKNc7vhRtdg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Admin.Model.SharePoint.SPOLimitedAccessFileType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Admin.Model.SharePoint.SPOLimitedAccessFileType.html",
+          "hash": "ncgC5Ef60pzw7aBsd2qurw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Admin.Model.SharePoint.SharingCapabilities.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Admin.Model.SharePoint.SharingCapabilities.html",
+          "hash": "YaJhPccbqs5Blg4oDDxRtQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Admin.Model.SharePoint.SharingDomainRestrictionModes.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Admin.Model.SharePoint.SharingDomainRestrictionModes.html",
+          "hash": "P9lIVQMB6139x5ATCO6OTg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Admin.Model.SharePoint.SharingLinkType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Admin.Model.SharePoint.SharingLinkType.html",
+          "hash": "+O2IQkVasgw24YxI5JvUIQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Admin.Model.SharePoint.SharingPermissionType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Admin.Model.SharePoint.SharingPermissionType.html",
+          "hash": "rEj19U+JMbBnEOXfwnPkEw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/PnP.Core.Admin.Model.SharePoint.SiteCreationOptions.yml",
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Admin.Model.SharePoint.SiteCreationOptions.html",
           "hash": "VK0afcpUoXo+Ls+KWD3DIw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Admin.Model.SharePoint.SiteUserInfoVisibilityPolicyValue.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Admin.Model.SharePoint.SiteUserInfoVisibilityPolicyValue.html",
+          "hash": "pE2sRfv0ztmbw4/UgzyERQ=="
         }
       },
       "is_incremental": false,
@@ -302,6 +494,18 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Admin.Model.SharePoint.TeamsChannelTypeValue.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Admin.Model.SharePoint.TeamsChannelTypeValue.html",
+          "hash": "M9/psN9XJlpfynXdVh5u8Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/PnP.Core.Admin.Model.SharePoint.TimeZone.yml",
       "output": {
         ".html": {
@@ -318,7 +522,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Admin.Model.SharePoint.html",
-          "hash": "l+mczwXKnPzx3awPlMCPfw=="
+          "hash": "yHolhedI/5QYujQf7ULsbw=="
         }
       },
       "is_incremental": false,
@@ -4866,7 +5070,7 @@
       "output": {
         ".html": {
           "relative_path": "api/toc.html",
-          "hash": "lnymAhJj4wF1+DbOEbcf0g=="
+          "hash": "FGG7y4mCyzr1V50gGDNmAw=="
         }
       },
       "is_incremental": false,
@@ -6178,7 +6382,7 @@
         "ManagedReferenceDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build",
-          "total_file_count": 403,
+          "total_file_count": 420,
           "skipped_file_count": 0
         },
         "ResourceDocumentProcessor": {
