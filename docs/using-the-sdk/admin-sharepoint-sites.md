@@ -46,6 +46,22 @@ Below sample shows how to use the `GetSiteCollectionsWithDetails` methods:
 var siteCollections = await context.GetSiteCollectionManager().GetSiteCollectionsWithDetailsAsync();
 ```
 
+## Getting and setting site collection properties
+
+A site collection has many properties which can only be set as a SharePoint Administrator. For example you can configure a site collection to not allow Power Automate Flows. Before site collection properties can be set you first need to get the current properties via on of the `GetSiteCollectionProperties` methods, followed by changing the properties you want to change and calling an `Update` method to send the change to SharePoint:
+
+```csharp
+// Get all the properties of this site collection
+var siteProperties = await context.GetSiteCollectionManager().GetSiteCollectionPropertiesAsync(new Uri("https://contoso.sharepoint.com/sites/sitetocheck"));
+
+// Update site properties
+siteProperties.Title = "New site title";
+siteProperties.DisableFlows = FlowsPolicy.Disabled;
+
+// Send the changes back to the server
+await siteProperties.UpdateAsync();
+```
+
 ## Creating site collections
 
 In SharePoint site collections can be split up into three categories:

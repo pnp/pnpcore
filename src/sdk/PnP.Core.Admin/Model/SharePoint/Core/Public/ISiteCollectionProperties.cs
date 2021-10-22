@@ -197,7 +197,10 @@ namespace PnP.Core.Admin.Model.SharePoint
         string LockIssue { get; }
 
         /// <summary>
-        /// A string representing the lock state of the site
+        /// A string representing the lock state of the site. Valid values are 
+        /// - Unlock: the site is not locked, default state
+        /// - NoAccess: the site is locked for all access
+        /// - ReadOnly: the site is set to read only status
         /// </summary>
         string LockState { get; set; }
 
@@ -306,7 +309,9 @@ namespace PnP.Core.Admin.Model.SharePoint
         /// </summary>
         bool SocialBarOnSitePagesDisabled { get; set; }
         /// <summary>
-        /// The status of the site
+        /// The status of the site, possible values are:
+        /// - Active: default status for a site
+        /// - Recycled: the site is the tenant's site collection recyclebin
         /// </summary>
         string Status { get; }
 
