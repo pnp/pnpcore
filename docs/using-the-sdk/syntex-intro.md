@@ -14,6 +14,21 @@ using (var context = await pnpContextFactory.CreateAsync("SiteToWorkWith"))
 }
 ```
 
+## Checking if Syntex is enabled
+
+SharePoint Syntex is an add-on to Microsoft 365 that has to be acquired separately, so you can't assume every tenant can use SharePoint Syntex. To check for the SharePoint Syntex enabled you can use the `IsSyntexEnabled` methods:
+
+```csharp
+if (await context.Web.IsSyntexEnabledAsync())
+{
+    // Syntex is enabled
+}
+else
+{
+    // No Syntex :-(
+}
+```
+
 ## Connecting to a Syntex Content Center site
 
 Connecting to a SharePoint Syntex Content Center site is an essential step when you're using the PnP Core SDK Syntex support. The SharePoint Syntex Content Center site is special type of site that contains content understanding models: via a content understanding model you teach SharePoint Syntex to read your content the way you would using machine teaching to build AI models with no code. SharePoint Syntex can automatically suggest or create metadata, invoke custom Power Automate workflows, and attach compliance labels to enforce retention or record management policies.

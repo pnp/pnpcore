@@ -1,0 +1,9 @@
+--batchresponse_56fa43b8-dd6f-4166-9e38-8d64930fe0c7
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+HTTP/1.1 200 OK
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+
+{"d":{"MachineLearningCaptureEnabled":true}}
+--batchresponse_56fa43b8-dd6f-4166-9e38-8d64930fe0c7--

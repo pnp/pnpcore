@@ -888,6 +888,18 @@ namespace PnP.Core.Model.SharePoint
 
         #region Syntex support
         /// <summary>
+        /// Is Syntex enabled
+        /// </summary>
+        /// <returns>True if Syntex is enabled, false otherwise</returns>
+        Task<bool> IsSyntexEnabledAsync();
+
+        /// <summary>
+        /// Is Syntex enabled
+        /// </summary>
+        /// <returns>True if Syntex is enabled, false otherwise</returns>
+        bool IsSyntexEnabled();
+
+        /// <summary>
         /// Is this web a Syntex Content Center
         /// </summary>
         /// <returns>True if this web is a Syntex Content Center, false otherwise</returns>
