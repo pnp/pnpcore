@@ -28,6 +28,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Rest based paging did not always continue to the next page [jansenbe - Bert Jansen]
 - Improved offline test file generation when cloning a PnPContext #591 [jansenbe - Bert Jansen]
 - Added `IsSyntexEnabled` methods on `IWeb` [jansenbe - Bert Jansen]
+- Fixed ListItem datetime handling - time was always send to SharePoint in AM #593 [bilenth - Bilen]
 
 ## [1.4.0]
 
