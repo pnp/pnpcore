@@ -31272,6 +31272,32 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IWeb.IsSyntexContentCenterAsync
   nameWithType: IWeb.IsSyntexContentCenterAsync
+- uid: PnP.Core.Model.SharePoint.IWeb.IsSyntexEnabled
+  name: IsSyntexEnabled()
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_IsSyntexEnabled
+  commentId: M:PnP.Core.Model.SharePoint.IWeb.IsSyntexEnabled
+  fullName: PnP.Core.Model.SharePoint.IWeb.IsSyntexEnabled()
+  nameWithType: IWeb.IsSyntexEnabled()
+- uid: PnP.Core.Model.SharePoint.IWeb.IsSyntexEnabled*
+  name: IsSyntexEnabled
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_IsSyntexEnabled_
+  commentId: Overload:PnP.Core.Model.SharePoint.IWeb.IsSyntexEnabled
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IWeb.IsSyntexEnabled
+  nameWithType: IWeb.IsSyntexEnabled
+- uid: PnP.Core.Model.SharePoint.IWeb.IsSyntexEnabledAsync
+  name: IsSyntexEnabledAsync()
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_IsSyntexEnabledAsync
+  commentId: M:PnP.Core.Model.SharePoint.IWeb.IsSyntexEnabledAsync
+  fullName: PnP.Core.Model.SharePoint.IWeb.IsSyntexEnabledAsync()
+  nameWithType: IWeb.IsSyntexEnabledAsync()
+- uid: PnP.Core.Model.SharePoint.IWeb.IsSyntexEnabledAsync*
+  name: IsSyntexEnabledAsync
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_IsSyntexEnabledAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.IWeb.IsSyntexEnabledAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IWeb.IsSyntexEnabledAsync
+  nameWithType: IWeb.IsSyntexEnabledAsync
 - uid: PnP.Core.Model.SharePoint.IWeb.Language
   name: Language
   href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_Language
