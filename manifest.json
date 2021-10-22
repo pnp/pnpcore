@@ -306,7 +306,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Admin.Model.SharePoint.ISiteCollectionProperties.html",
-          "hash": "JYA9rgRrwHjR4suU4pcCAg=="
+          "hash": "XToodMjZVjEu4j2g3AYTOg=="
         }
       },
       "is_incremental": false,
@@ -5695,7 +5695,7 @@
       "output": {
         ".html": {
           "relative_path": "using-the-sdk/admin-sharepoint-sites.html",
-          "hash": "GTyZ88DGWKM5rnOJH/EXGQ=="
+          "hash": "dDVlwLYl4zYCcgHKnzlzoQ=="
         }
       },
       "is_incremental": false,
