@@ -519,7 +519,7 @@ namespace PnP.Core.Model.SharePoint
             DateTime localDateTime = context.Web.RegionalSettings.TimeZone.UtcToLocalTime(inputInUTC);
 
             // Apply the delta from UTC to get the date used by the site and apply formatting 
-            return (localDateTime).ToString("yyyy-MM-dd hh:mm:ss", CultureInfo.InvariantCulture);
+            return (localDateTime).ToString("yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture);
         }
 
         private static string DoubleToSharePointString(PnPContext context, double input)
