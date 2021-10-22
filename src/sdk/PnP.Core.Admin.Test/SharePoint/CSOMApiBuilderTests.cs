@@ -29,7 +29,7 @@ namespace PnP.Core.Admin.Test.SharePoint
             builder.AddRequest(request);
             string xmlBody = builder.SerializeCSOMRequests();
 
-            Assert.AreEqual(xmlBody, "<Request AddExpandoFieldTypeSuffix=\"true\" SchemaVersion=\"15.0.0.0\" LibraryVersion=\"16.0.0.0\" ApplicationName=\"pnp core sdk\" xmlns=\"http://schemas.microsoft.com/sharepoint/clientquery/2009\"><Actions><ObjectPath Id=\"4\" ObjectPathId=\"1\" /><ObjectPath Id=\"5\" ObjectPathId=\"3\" /><Query Id=\"6\" ObjectPathId=\"3\" ><Query SelectAllProperties=\"true\"><Properties /></Query></Query></Actions><ObjectPaths><Method Id=\"3\" ParentId=\"1\" Name=\"GetSitePropertiesByUrl\"><Parameters><Parameter Type=\"String\">https://bertonline.sharepoint.com/sites/removeme</Parameter><Parameter Type=\"Boolean\">true</Parameter></Parameters></Method><Constructor Id=\"1\" TypeId=\"{268004ae-ef6b-4e9b-8425-127220d84719}\" /></ObjectPaths></Request>");
+            Assert.AreEqual(xmlBody, "<Request AddExpandoFieldTypeSuffix=\"true\" SchemaVersion=\"15.0.0.0\" LibraryVersion=\"16.0.0.0\" ApplicationName=\"pnp core sdk\" xmlns=\"http://schemas.microsoft.com/sharepoint/clientquery/2009\"><Actions><ObjectPath Id=\"4\" ObjectPathId=\"1\" /><ObjectPath Id=\"5\" ObjectPathId=\"3\" /><Query Id=\"2\" ObjectPathId=\"3\" ><Query SelectAllProperties=\"true\"><Properties /></Query></Query></Actions><ObjectPaths><Method Id=\"3\" ParentId=\"1\" Name=\"GetSitePropertiesByUrl\"><Parameters><Parameter Type=\"String\">https://bertonline.sharepoint.com/sites/removeme</Parameter><Parameter Type=\"Boolean\">true</Parameter></Parameters></Method><Constructor Id=\"1\" TypeId=\"{268004ae-ef6b-4e9b-8425-127220d84719}\" /></ObjectPaths></Request>");
         }
     }
 }

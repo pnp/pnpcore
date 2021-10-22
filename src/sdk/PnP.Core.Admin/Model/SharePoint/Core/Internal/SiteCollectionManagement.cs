@@ -1,4 +1,5 @@
 ﻿using PnP.Core.Admin.Services.Core.CSOM.Requests.Tenant;
+using PnP.Core.Model;
 using PnP.Core.Model.SharePoint;
 using PnP.Core.Services;
 using PnP.Core.Services.Core.CSOM.Requests;
@@ -113,7 +114,7 @@ namespace PnP.Core.Admin.Model.SharePoint
             return webTemplate.Equals(PnPAdminConstants.TeamSiteTemplate, StringComparison.InvariantCultureIgnoreCase);
         }
 
-        internal static async Task GetSiteCollectionPropertiesByUrlAsync(PnPContext context, Uri siteUrl, bool detailed)
+        internal static async Task<ISiteCollectionProperties> GetSiteCollectionPropertiesByUrlAsync(PnPContext context, Uri siteUrl, bool detailed)
         {
             using (var tenantAdminContext = await context.GetSharePointAdmin().GetTenantAdminCenterContextAsync().ConfigureAwait(false))
             {
@@ -122,7 +123,24 @@ namespace PnP.Core.Admin.Model.SharePoint
                     new GetSitePropertiesRequest(siteUrl, detailed)
                 };
 
-                var result = await (tenantAdminContext.Web as Web).RawRequestAsync(new ApiCall(csomRequests), HttpMethod.Post).ConfigureAwait(false);                
+                var result = await (tenantAdminContext.Web as Web).RawRequestAsync(new ApiCall(csomRequests), HttpMethod.Post).ConfigureAwait(false);
+                (result.ApiCall.CSOMRequests[0].Result as IDataModelWithContext).PnPContext = tenantAdminContext;
+
+                return result.ApiCall.CSOMRequests[0].Result as ISiteCollectionProperties;
+            }
+        }
+
+        internal static async Task UpdateSiteCollectionPropertiesAsync(PnPContext context, SiteCollectionProperties properties)
+        {
+            using (var tenantAdminContext = await context.GetSharePointAdmin().GetTenantAdminCenterContextAsync().ConfigureAwait(false))
+            {
+                List<IRequest<object>> csomRequests = new List<IRequest<object>>
+                {
+                    new SetSitePropertiesRequest(properties)
+                };
+
+                var result = await (tenantAdminContext.Web as Web).RawRequestAsync(new ApiCall(csomRequests), HttpMethod.Post).ConfigureAwait(false);
+                await WaitForSpoOperationCompleteAsync(tenantAdminContext, result.ApiCall.CSOMRequests[0].Result as SpoOperation).ConfigureAwait(false);
             }
         }
 

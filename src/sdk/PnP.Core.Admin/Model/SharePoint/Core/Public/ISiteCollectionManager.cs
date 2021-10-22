@@ -134,7 +134,18 @@ namespace PnP.Core.Admin.Model.SharePoint
         /// <returns></returns>
         void DeleteSiteCollection(Uri siteToDelete, string webTemplate);
 
+        /// <summary>
+        /// Returns the properties of a site collection
+        /// </summary>
+        /// <param name="site">Site collection to get the properties for</param>
+        /// <returns>The site collection properties</returns>
+        Task<ISiteCollectionProperties> GetSiteCollectionPropertiesAsync(Uri site);
 
-        Task GetSiteCollectionPropertiesAsync(Uri site);
+        /// <summary>
+        /// Returns the properties of a site collection
+        /// </summary>
+        /// <param name="site">Site collection to get the properties for</param>
+        /// <returns>The site collection properties</returns>
+        ISiteCollectionProperties GetSiteCollectionProperties(Uri site);
     }
 }
