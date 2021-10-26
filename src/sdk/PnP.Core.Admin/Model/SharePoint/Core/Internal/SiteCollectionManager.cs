@@ -46,6 +46,11 @@ namespace PnP.Core.Admin.Model.SharePoint
 
         public async Task<PnPContext> CreateSiteCollectionAsync(CommonSiteOptions siteToCreate, SiteCreationOptions creationOptions = null)
         {
+            if (siteToCreate == null)
+            {
+                throw new ArgumentNullException(nameof(siteToCreate));
+            }
+
             return await SiteCollectionCreator.CreateSiteCollectionAsync(context, siteToCreate, creationOptions).ConfigureAwait(false);
         }
 
@@ -54,14 +59,19 @@ namespace PnP.Core.Admin.Model.SharePoint
             return CreateSiteCollectionAsync(siteToCreate, creationOptions).GetAwaiter().GetResult();
         }
 
-        public async Task RecycleSiteCollectionAsync(Uri siteToDelete, string webTemplate)
+        public async Task RecycleSiteCollectionAsync(Uri siteToDelete)
         {
-            await SiteCollectionManagement.RecycleSiteCollectionAsync(context, siteToDelete, webTemplate).ConfigureAwait(false);
+            if (siteToDelete == null)
+            {
+                throw new ArgumentNullException(nameof(siteToDelete));
+            }
+            
+            await SiteCollectionManagement.RecycleSiteCollectionAsync(context, siteToDelete).ConfigureAwait(false);
         }
 
-        public void RecycleSiteCollection(Uri siteToDelete, string webTemplate)
+        public void RecycleSiteCollection(Uri siteToDelete)
         {
-            RecycleSiteCollectionAsync(siteToDelete, webTemplate).GetAwaiter().GetResult();
+            RecycleSiteCollectionAsync(siteToDelete).GetAwaiter().GetResult();
         }
 
         public void RestoreSiteCollection(Uri siteToRestore)
@@ -71,27 +81,57 @@ namespace PnP.Core.Admin.Model.SharePoint
 
         public async Task RestoreSiteCollectionAsync(Uri siteToRestore)
         {
+            if (siteToRestore == null)
+            {
+                throw new ArgumentNullException(nameof(siteToRestore));
+            }
+
             await SiteCollectionManagement.RestoreSiteCollectionAsync(context, siteToRestore).ConfigureAwait(false);
         }
 
-        public async Task DeleteSiteCollectionAsync(Uri siteToDelete, string webTemplate)
+        public async Task DeleteSiteCollectionAsync(Uri siteToDelete)
         {
-            await SiteCollectionManagement.DeleteSiteCollectionAsync(context, siteToDelete, webTemplate).ConfigureAwait(false);
+            if (siteToDelete == null)
+            {
+                throw new ArgumentNullException(nameof(siteToDelete));
+            }
+
+            await SiteCollectionManagement.DeleteSiteCollectionAsync(context, siteToDelete).ConfigureAwait(false);
         }
 
-        public void DeleteSiteCollection(Uri siteToDelete, string webTemplate)
+        public void DeleteSiteCollection(Uri siteToDelete)
         {
-            DeleteSiteCollectionAsync(siteToDelete, webTemplate).GetAwaiter().GetResult();
+            DeleteSiteCollectionAsync(siteToDelete).GetAwaiter().GetResult();
         }
 
         public async Task<ISiteCollectionProperties> GetSiteCollectionPropertiesAsync(Uri site)
         {
+            if (site == null)
+            {
+                throw new ArgumentNullException(nameof(site));
+            }
+
             return await SiteCollectionManagement.GetSiteCollectionPropertiesByUrlAsync(context, site, true).ConfigureAwait(true);
         }
 
         public ISiteCollectionProperties GetSiteCollectionProperties(Uri site)
         {
             return GetSiteCollectionPropertiesAsync(site).GetAwaiter().GetResult();
+        }
+
+        public async Task ConnectSiteCollectionToGroupAsync(ConnectSiteToGroupOptions siteGroupConnectOptions, CreationOptions creationOptions = null)
+        {
+            if (siteGroupConnectOptions == null)
+            {
+                throw new ArgumentNullException(nameof(siteGroupConnectOptions));
+            }
+
+            await SiteCollectionCreator.ConnectGroupToSiteAsync(context, siteGroupConnectOptions, creationOptions).ConfigureAwait(true);
+        }
+
+        public void ConnectSiteCollectionToGroup(ConnectSiteToGroupOptions siteGroupConnectOptions, CreationOptions creationOptions = null)
+        {
+            ConnectSiteCollectionToGroupAsync(siteGroupConnectOptions, creationOptions).GetAwaiter().GetResult();
         }
     }
 }

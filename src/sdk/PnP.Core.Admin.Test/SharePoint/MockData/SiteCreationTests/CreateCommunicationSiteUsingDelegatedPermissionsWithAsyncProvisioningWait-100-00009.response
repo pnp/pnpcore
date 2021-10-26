@@ -1,4 +1,4 @@
---batchresponse_30c6d525-1630-4057-879c-d2255a836325
+--batchresponse_40e3b6c0-9908-4d70-8a0a-3a5bc3fe96d9
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
@@ -6,4 +6,4 @@ HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
 {"d":{"ValidatePendingWebTemplateExtension":false}}
---batchresponse_30c6d525-1630-4057-879c-d2255a836325--
+--batchresponse_40e3b6c0-9908-4d70-8a0a-3a5bc3fe96d9--

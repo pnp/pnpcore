@@ -1,4 +1,4 @@
---batchresponse_ee7bfcf5-b55a-4713-ae0b-bdf29bfc6e25
+--batchresponse_9e5246b1-ee38-4357-a511-d8dee7845985
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
@@ -6,4 +6,4 @@ HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
 {"d":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/pnpcoresdktest/_api/Web","uri":"https://bertonline.sharepoint.com/sites/pnpcoresdktest/_api/Web","type":"SP.Web"},"AssociatedOwnerGroup":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/pnpcoresdktest/_api/Web/AssociatedOwnerGroup","uri":"https://bertonline.sharepoint.com/sites/pnpcoresdktest/_api/Web/AssociatedOwnerGroup","type":"SP.Group"},"Users":{"results":[{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/pnpcoresdktest/_api/Web/GetUserById(6)","uri":"https://bertonline.sharepoint.com/sites/pnpcoresdktest/_api/Web/GetUserById(6)","type":"SP.User"},"Alerts":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/pnpcoresdktest/_api/Web/GetUserById(6)/Alerts"}},"Groups":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/pnpcoresdktest/_api/Web/GetUserById(6)/Groups"}},"Id":6,"IsHiddenInUI":false,"LoginName":"i:0#.f|membership|bert.jansen@bertonline.onmicrosoft.com","Title":"Bert Jansen (Cloud)","PrincipalType":1,"Email":"bert.jansen@bertonline.onmicrosoft.com","Expiration":"","IsEmailAuthenticationGuestUser":false,"IsShareByEmailGuestUser":false,"IsSiteAdmin":true,"UserId":{"__metadata":{"type":"SP.UserIdInfo"},"NameId":"1003000084e4ff61","NameIdIssuer":"urn:federation:microsoftonline"},"UserPrincipalName":"bert.jansen@bertonline.onmicrosoft.com"}]},"Id":3},"Id":"bc3f47bc-6313-43a4-b21d-ffe6200c0436"}}
---batchresponse_ee7bfcf5-b55a-4713-ae0b-bdf29bfc6e25--
+--batchresponse_9e5246b1-ee38-4357-a511-d8dee7845985--

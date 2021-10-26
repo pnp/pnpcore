@@ -89,18 +89,16 @@ namespace PnP.Core.Admin.Model.SharePoint
         /// has a connected group then also that group is automatically recycled
         /// </summary>
         /// <param name="siteToDelete">Site collection to recycle</param>
-        /// <param name="webTemplate">The web template (e.g. STS#3, GROUP#0) of the site collection is used to determine the best delete approach</param>
         /// <returns></returns>
-        Task RecycleSiteCollectionAsync(Uri siteToDelete, string webTemplate);
+        Task RecycleSiteCollectionAsync(Uri siteToDelete);
 
         /// <summary>
         /// Recycle a site collection. The site collection ends up in the recycle bin and can be restored. When the site collection
         /// has a connected group then also that group is automatically recycled
         /// </summary>
         /// <param name="siteToDelete">Site collection to recycle</param>
-        /// <param name="webTemplate">The web template (e.g. STS#3, GROUP#0) of the site collection is used to determine the best delete approach</param>
         /// <returns></returns>
-        void RecycleSiteCollection(Uri siteToDelete, string webTemplate);
+        void RecycleSiteCollection(Uri siteToDelete);
 
         /// <summary>
         /// Restores a site collection from the recycle bin. When the site collection
@@ -122,17 +120,15 @@ namespace PnP.Core.Admin.Model.SharePoint
         /// Deletes a site collection. The deleted site collection is also removed from the recycle bin!
         /// </summary>
         /// <param name="siteToDelete">Site collection to delete</param>
-        /// <param name="webTemplate">The web template (e.g. STS#3, GROUP#0) of the site collection is used to determine the best delete approach</param>
         /// <returns></returns>
-        Task DeleteSiteCollectionAsync(Uri siteToDelete, string webTemplate);
+        Task DeleteSiteCollectionAsync(Uri siteToDelete);
 
         /// <summary>
         /// Deletes a site collection. The deleted site collection is also removed from the recycle bin!
         /// </summary>
         /// <param name="siteToDelete">Site collection to delete</param>
-        /// <param name="webTemplate">The web template (e.g. STS#3, GROUP#0) of the site collection is used to determine the best delete approach</param>
         /// <returns></returns>
-        void DeleteSiteCollection(Uri siteToDelete, string webTemplate);
+        void DeleteSiteCollection(Uri siteToDelete);
 
         /// <summary>
         /// Returns the properties of a site collection
@@ -147,5 +143,19 @@ namespace PnP.Core.Admin.Model.SharePoint
         /// <param name="site">Site collection to get the properties for</param>
         /// <returns>The site collection properties</returns>
         ISiteCollectionProperties GetSiteCollectionProperties(Uri site);
+
+        /// <summary>
+        /// Connects an existing site collection to a new Microsoft 365 group
+        /// </summary>
+        /// <param name="siteGroupConnectOptions">Information needed to handle the connection of the site collection to a new Microsoft 365 group. </param>
+        /// <param name="creationOptions">Options to control the connect to site process</param>
+        Task ConnectSiteCollectionToGroupAsync(ConnectSiteToGroupOptions siteGroupConnectOptions, CreationOptions creationOptions = null);
+
+        /// <summary>
+        /// Connects an existing site collection to a new Microsoft 365 group
+        /// </summary>
+        /// <param name="siteGroupConnectOptions">Information needed to handle the connection of the site collection to a new Microsoft 365 group. </param>
+        /// <param name="creationOptions">Options to control the connect to site process</param>
+        void ConnectSiteCollectionToGroup(ConnectSiteToGroupOptions siteGroupConnectOptions, CreationOptions creationOptions = null);
     }
 }
