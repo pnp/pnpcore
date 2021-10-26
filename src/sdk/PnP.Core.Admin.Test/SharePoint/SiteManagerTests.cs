@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using PnP.Core.Admin.Model.SharePoint;
 using PnP.Core.Admin.Test.Utilities;
 using PnP.Core.Services;
 using System;
@@ -158,6 +159,81 @@ namespace PnP.Core.Admin.Test.SharePoint
             }
         }
 
+        [TestMethod]
+        public async Task ConnectGroupToExistingSiteUsingDelegatedPermissions()
+        {
+            //TestCommon.Instance.Mocking = false;
+            TestCommon.Instance.UseApplicationPermissions = false;
 
+            TeamSiteWithoutGroupOptions teamSiteToCreate = null;
+            
+            try
+            {
+                using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+                {
+
+                    // Persist the used site url as we need to have the same url when we run an offline test
+                    Uri siteUrl;
+                    string alias = null;
+                    if (!TestCommon.Instance.Mocking)
+                    {
+                        Guid tempId = Guid.NewGuid();
+                        siteUrl = new Uri($"https://{context.Uri.DnsSafeHost}/sites/pnpcoresdktestteamsite{tempId.ToString().Replace("-", "")}");
+                        alias = $"pnpcoresdktestteamsite{tempId.ToString().Replace("-", "")}";
+                        Dictionary<string, string> properties = new Dictionary<string, string>
+                        {
+                            { "SiteUrl", siteUrl.ToString() },
+                            { "Alias", alias },
+                        };
+                        TestManager.SaveProperties(context, properties);
+                    }
+                    else
+                    {
+                        siteUrl = new Uri(TestManager.GetProperties(context)["SiteUrl"]);
+                        alias = TestManager.GetProperties(context)["Alias"];
+                    }
+
+                    teamSiteToCreate = new TeamSiteWithoutGroupOptions(siteUrl, "PnP Core SDK Test")
+                    {
+                        Description = "This is a test site collection",
+                        Language = Language.English,
+                    };
+
+
+                    SiteCreationOptions siteCreationOptions = new SiteCreationOptions()
+                    {
+                        UsingApplicationPermissions = false
+                    };
+
+                    // first create the site collection
+                    using (var newSiteContext = context.GetSiteCollectionManager().CreateSiteCollection(teamSiteToCreate, siteCreationOptions))
+                    {
+                        var web = await newSiteContext.Web.GetAsync(p => p.Url, p => p.Title);
+
+                        // Add a group to the created site collection
+                        ConnectSiteToGroupOptions groupConnectOptions = new ConnectSiteToGroupOptions(teamSiteToCreate.Url, alias, web.Title);
+                        CreationOptions creationOptions = new CreationOptions()
+                        {
+                            UsingApplicationPermissions = false
+                        };
+                        newSiteContext.GetSiteCollectionManager().ConnectSiteCollectionToGroup(groupConnectOptions, creationOptions);
+
+                        // load site again to see if there's a group connected
+                        await context.Site.LoadAsync(p => p.GroupId);
+                        Assert.IsTrue(context.Site.GroupId != Guid.Empty);
+                    }
+                }
+            }
+            finally
+            {
+                TestCommon.Instance.UseApplicationPermissions = false;
+                // Cleanup the created site collection
+                using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+                {
+                    context.GetSiteCollectionManager().DeleteSiteCollection(teamSiteToCreate.Url);
+                }
+
+            }
+        }
     }
 }

@@ -135,17 +135,22 @@ using (var newSiteContext = await context.GetSiteCollectionManager().CreateSiteC
 }
 ```
 
+## Connecting a site to a new Microsoft 365 group
+
+By default only new team sites are connected to a Microsoft 365 group, but what if you'd wanted to connect your existing classic team sites to a Microsoft 365 group? A reason to do this would be for example the need to set up a Teams team for the site or use any other Microsoft 365 service that's connected to a Microsoft 365 group. Luckily you can take an existing site, create a new Microsoft 365 group for it, and hook it up to site. To do this you have to use one of the `ConnectSiteCollectionToGroup` methods: these methods take in an `ConnectSiteToGroupOptions` object defining the three mandatory properties: the url of the site that needs to be connected to group, the alias to use for the group and the display name to use for the group:
+
+```csharp
+ConnectSiteToGroupOptions groupConnectOptions = new ConnectSiteToGroupOptions(new Uri("https://contoso.sharepoint.com/sites/sitetogroupconnect"), "sitealias", "Site title");
+await context.GetSiteCollectionManager().ConnectSiteCollectionToGroupAsync(groupConnectOptions);
+```
+
 ## Recycling site collections
 
 A site collection can be recycled and then later on permanently deleted or restored. Recycling site collection is done using one of the `RecycleSiteCollection` methods:
 
 ```csharp
-// Get the web template of the site to recycle
-await contextOfSiteToDelete.Web.EnsurePropertiesAsync(p => p.WebTemplate, p => p.WebTemplateConfiguration);
-var webTemplate = $"{contextOfSiteToDelete.Web.WebTemplate}#{contextOfSiteToDelete.Web.WebTemplateConfiguration}";
-
 // Recycle the site collection
-await context.GetSiteCollectionManager().RecycleSiteCollectionAsync(new Uri("https://contoso.sharepoint.com/sites/sitename"), webTemplate);
+await context.GetSiteCollectionManager().RecycleSiteCollectionAsync(new Uri("https://contoso.sharepoint.com/sites/sitename"));
 ```
 
 > [!Note]
@@ -184,9 +189,5 @@ A site collection can also deleted via one of the `DeleteSiteCollection` methods
 > A group connected site will not be permanently deleted, calling the `DeleteSiteCollection` methods will recycle the site collection and group.
 
 ```csharp
-// Get the web template of the site to delete
-await contextOfSiteToDelete.Web.EnsurePropertiesAsync(p => p.WebTemplate, p => p.WebTemplateConfiguration);
-var webTemplate = $"{contextOfSiteToDelete.Web.WebTemplate}#{contextOfSiteToDelete.Web.WebTemplateConfiguration}";
-
-await context.GetSiteCollectionManager().DeleteSiteCollectionAsync(new Uri("https://contoso.sharepoint.com/sites/sitename"), webTemplate);
+await context.GetSiteCollectionManager().DeleteSiteCollectionAsync(new Uri("https://contoso.sharepoint.com/sites/sitename"));
 ```

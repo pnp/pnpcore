@@ -13,14 +13,15 @@ namespace PnP.Core.Admin.Model.SharePoint
     internal static class SiteCollectionManagement
     {
 
-        internal static async Task RecycleSiteCollectionAsync(PnPContext context, Uri siteToRecycle, string webTemplate)
+        internal static async Task<bool> RecycleSiteCollectionAsync(PnPContext context, Uri siteToRecycle)
         {
             using (var tenantAdminContext = await context.GetSharePointAdmin().GetTenantAdminCenterContextAsync().ConfigureAwait(false))
             {
                 // When recycling a group connected site then use the groupsitemanager endpoint. This will also recycle the connected Microsoft 365 group
-                if (HasGroup(webTemplate))
+                if (await HasGroupAsync(context, siteToRecycle).ConfigureAwait(false))
                 {
                     await (context.Web as Web).RawRequestAsync(new ApiCall($"_api/GroupSiteManager/Delete?siteUrl='{siteToRecycle.AbsoluteUri}'", ApiType.SPORest), HttpMethod.Post).ConfigureAwait(false);
+                    return true;
                 }
                 else
                 {
@@ -32,20 +33,21 @@ namespace PnP.Core.Admin.Model.SharePoint
                     var result = await (tenantAdminContext.Web as Web).RawRequestAsync(new ApiCall(csomRequests), HttpMethod.Post).ConfigureAwait(false);
 
                     await WaitForSpoOperationCompleteAsync(tenantAdminContext, result.ApiCall.CSOMRequests[0].Result as SpoOperation).ConfigureAwait(false);
+                    return false;
                 }
             }
         }
 
-        internal static async Task DeleteSiteCollectionAsync(PnPContext context, Uri siteToDelete, string webTemplate)
+        internal static async Task DeleteSiteCollectionAsync(PnPContext context, Uri siteToDelete)
         {
             using (var tenantAdminContext = await context.GetSharePointAdmin().GetTenantAdminCenterContextAsync().ConfigureAwait(false))
             {
                 // first recycle the site collection
-                await RecycleSiteCollectionAsync(tenantAdminContext, siteToDelete, webTemplate).ConfigureAwait(false);
+                bool siteHasGroup = await RecycleSiteCollectionAsync(context, siteToDelete).ConfigureAwait(false);
 
                 // Only supporting permanent delete of non group connected sites. For group connected sites permanently deleting the group will
                 // trigger the deletion of the linked resources (like the SharePoint site).  
-                if (!HasGroup(webTemplate))
+                if (!siteHasGroup)
                 {
                     // once that's done remove the site collection from the recycle bin
                     List<IRequest<object>> csomRequests = new List<IRequest<object>>
@@ -109,9 +111,19 @@ namespace PnP.Core.Admin.Model.SharePoint
 
         }
 
-        private static bool HasGroup(string webTemplate)
+        private static async Task<bool> HasGroupAsync(PnPContext context, Uri siteToCheck)
         {
-            return webTemplate.Equals(PnPAdminConstants.TeamSiteTemplate, StringComparison.InvariantCultureIgnoreCase);
+            if (context.Uri == siteToCheck)
+            {
+                return context.Site.GroupId != Guid.Empty;
+            }
+            else
+            {
+                using (var siteContext = await context.CloneAsync(siteToCheck).ConfigureAwait(false))
+                {
+                    return siteContext.Site.GroupId != Guid.Empty;
+                }
+            }
         }
 
         internal static async Task<ISiteCollectionProperties> GetSiteCollectionPropertiesByUrlAsync(PnPContext context, Uri siteUrl, bool detailed)
