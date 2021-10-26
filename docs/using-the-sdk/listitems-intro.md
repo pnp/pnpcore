@@ -74,6 +74,7 @@ string viewXml = @"<View>
                         </BeginsWith>
                       </Where>
                     </Query>
+                    <OrderBy Override='TRUE'><FieldRef Name= 'ID' Ascending= 'FALSE' /></OrderBy>
                    </View>";
 
 // Execute the query
@@ -116,6 +117,7 @@ string viewXml = @"<View>
                         </BeginsWith>
                       </Where>
                     </Query>
+                    <OrderBy Override='TRUE'><FieldRef Name= 'ID' Ascending= 'FALSE' /></OrderBy>
                     <RowLimit>20</RowLimit>
                    </View>";
 
@@ -172,6 +174,7 @@ string viewXml = @"<View>
                         </BeginsWith>
                       </Where>
                     </Query>
+                    <OrderBy Override='TRUE'><FieldRef Name= 'ID' Ascending= 'FALSE' /></OrderBy>
                     <RowLimit>5</RowLimit>
                    </View>";
 
@@ -215,6 +218,7 @@ string viewXml = @"<View>
                         </BeginsWith>
                       </Where>
                     </Query>
+                    <OrderBy Override='TRUE'><FieldRef Name= 'ID' Ascending= 'FALSE' /></OrderBy>
                     <RowLimit Paged='TRUE'>20</RowLimit>
                    </View>";
 
