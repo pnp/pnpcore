@@ -1002,6 +1002,109 @@ references:
   commentId: F:PnP.Core.Admin.Model.SharePoint.CompanyWideSharingLinksPolicy.Unknown
   fullName: PnP.Core.Admin.Model.SharePoint.CompanyWideSharingLinksPolicy.Unknown
   nameWithType: CompanyWideSharingLinksPolicy.Unknown
+- uid: PnP.Core.Admin.Model.SharePoint.ConnectSiteToGroupOptions
+  name: ConnectSiteToGroupOptions
+  href: api/PnP.Core.Admin.Model.SharePoint.ConnectSiteToGroupOptions.html
+  commentId: T:PnP.Core.Admin.Model.SharePoint.ConnectSiteToGroupOptions
+  fullName: PnP.Core.Admin.Model.SharePoint.ConnectSiteToGroupOptions
+  nameWithType: ConnectSiteToGroupOptions
+- uid: PnP.Core.Admin.Model.SharePoint.ConnectSiteToGroupOptions.#ctor(Uri,System.String,System.String)
+  name: ConnectSiteToGroupOptions(Uri, String, String)
+  href: api/PnP.Core.Admin.Model.SharePoint.ConnectSiteToGroupOptions.html#PnP_Core_Admin_Model_SharePoint_ConnectSiteToGroupOptions__ctor_Uri_System_String_System_String_
+  commentId: M:PnP.Core.Admin.Model.SharePoint.ConnectSiteToGroupOptions.#ctor(Uri,System.String,System.String)
+  fullName: PnP.Core.Admin.Model.SharePoint.ConnectSiteToGroupOptions.ConnectSiteToGroupOptions(Uri, System.String, System.String)
+  nameWithType: ConnectSiteToGroupOptions.ConnectSiteToGroupOptions(Uri, String, String)
+- uid: PnP.Core.Admin.Model.SharePoint.ConnectSiteToGroupOptions.#ctor*
+  name: ConnectSiteToGroupOptions
+  href: api/PnP.Core.Admin.Model.SharePoint.ConnectSiteToGroupOptions.html#PnP_Core_Admin_Model_SharePoint_ConnectSiteToGroupOptions__ctor_
+  commentId: Overload:PnP.Core.Admin.Model.SharePoint.ConnectSiteToGroupOptions.#ctor
+  isSpec: "True"
+  fullName: PnP.Core.Admin.Model.SharePoint.ConnectSiteToGroupOptions.ConnectSiteToGroupOptions
+  nameWithType: ConnectSiteToGroupOptions.ConnectSiteToGroupOptions
+- uid: PnP.Core.Admin.Model.SharePoint.ConnectSiteToGroupOptions.KeepOldHomePage
+  name: KeepOldHomePage
+  href: api/PnP.Core.Admin.Model.SharePoint.ConnectSiteToGroupOptions.html#PnP_Core_Admin_Model_SharePoint_ConnectSiteToGroupOptions_KeepOldHomePage
+  commentId: P:PnP.Core.Admin.Model.SharePoint.ConnectSiteToGroupOptions.KeepOldHomePage
+  fullName: PnP.Core.Admin.Model.SharePoint.ConnectSiteToGroupOptions.KeepOldHomePage
+  nameWithType: ConnectSiteToGroupOptions.KeepOldHomePage
+- uid: PnP.Core.Admin.Model.SharePoint.ConnectSiteToGroupOptions.KeepOldHomePage*
+  name: KeepOldHomePage
+  href: api/PnP.Core.Admin.Model.SharePoint.ConnectSiteToGroupOptions.html#PnP_Core_Admin_Model_SharePoint_ConnectSiteToGroupOptions_KeepOldHomePage_
+  commentId: Overload:PnP.Core.Admin.Model.SharePoint.ConnectSiteToGroupOptions.KeepOldHomePage
+  isSpec: "True"
+  fullName: PnP.Core.Admin.Model.SharePoint.ConnectSiteToGroupOptions.KeepOldHomePage
+  nameWithType: ConnectSiteToGroupOptions.KeepOldHomePage
+- uid: PnP.Core.Admin.Model.SharePoint.ConnectSiteToGroupOptions.Owners
+  name: Owners
+  href: api/PnP.Core.Admin.Model.SharePoint.ConnectSiteToGroupOptions.html#PnP_Core_Admin_Model_SharePoint_ConnectSiteToGroupOptions_Owners
+  commentId: P:PnP.Core.Admin.Model.SharePoint.ConnectSiteToGroupOptions.Owners
+  fullName: PnP.Core.Admin.Model.SharePoint.ConnectSiteToGroupOptions.Owners
+  nameWithType: ConnectSiteToGroupOptions.Owners
+- uid: PnP.Core.Admin.Model.SharePoint.ConnectSiteToGroupOptions.Owners*
+  name: Owners
+  href: api/PnP.Core.Admin.Model.SharePoint.ConnectSiteToGroupOptions.html#PnP_Core_Admin_Model_SharePoint_ConnectSiteToGroupOptions_Owners_
+  commentId: Overload:PnP.Core.Admin.Model.SharePoint.ConnectSiteToGroupOptions.Owners
+  isSpec: "True"
+  fullName: PnP.Core.Admin.Model.SharePoint.ConnectSiteToGroupOptions.Owners
+  nameWithType: ConnectSiteToGroupOptions.Owners
+- uid: PnP.Core.Admin.Model.SharePoint.ConnectSiteToGroupOptions.Url
+  name: Url
+  href: api/PnP.Core.Admin.Model.SharePoint.ConnectSiteToGroupOptions.html#PnP_Core_Admin_Model_SharePoint_ConnectSiteToGroupOptions_Url
+  commentId: P:PnP.Core.Admin.Model.SharePoint.ConnectSiteToGroupOptions.Url
+  fullName: PnP.Core.Admin.Model.SharePoint.ConnectSiteToGroupOptions.Url
+  nameWithType: ConnectSiteToGroupOptions.Url
+- uid: PnP.Core.Admin.Model.SharePoint.ConnectSiteToGroupOptions.Url*
+  name: Url
+  href: api/PnP.Core.Admin.Model.SharePoint.ConnectSiteToGroupOptions.html#PnP_Core_Admin_Model_SharePoint_ConnectSiteToGroupOptions_Url_
+  commentId: Overload:PnP.Core.Admin.Model.SharePoint.ConnectSiteToGroupOptions.Url
+  isSpec: "True"
+  fullName: PnP.Core.Admin.Model.SharePoint.ConnectSiteToGroupOptions.Url
+  nameWithType: ConnectSiteToGroupOptions.Url
+- uid: PnP.Core.Admin.Model.SharePoint.CreationOptions
+  name: CreationOptions
+  href: api/PnP.Core.Admin.Model.SharePoint.CreationOptions.html
+  commentId: T:PnP.Core.Admin.Model.SharePoint.CreationOptions
+  fullName: PnP.Core.Admin.Model.SharePoint.CreationOptions
+  nameWithType: CreationOptions
+- uid: PnP.Core.Admin.Model.SharePoint.CreationOptions.MaxStatusChecks
+  name: MaxStatusChecks
+  href: api/PnP.Core.Admin.Model.SharePoint.CreationOptions.html#PnP_Core_Admin_Model_SharePoint_CreationOptions_MaxStatusChecks
+  commentId: P:PnP.Core.Admin.Model.SharePoint.CreationOptions.MaxStatusChecks
+  fullName: PnP.Core.Admin.Model.SharePoint.CreationOptions.MaxStatusChecks
+  nameWithType: CreationOptions.MaxStatusChecks
+- uid: PnP.Core.Admin.Model.SharePoint.CreationOptions.MaxStatusChecks*
+  name: MaxStatusChecks
+  href: api/PnP.Core.Admin.Model.SharePoint.CreationOptions.html#PnP_Core_Admin_Model_SharePoint_CreationOptions_MaxStatusChecks_
+  commentId: Overload:PnP.Core.Admin.Model.SharePoint.CreationOptions.MaxStatusChecks
+  isSpec: "True"
+  fullName: PnP.Core.Admin.Model.SharePoint.CreationOptions.MaxStatusChecks
+  nameWithType: CreationOptions.MaxStatusChecks
+- uid: PnP.Core.Admin.Model.SharePoint.CreationOptions.UsingApplicationPermissions
+  name: UsingApplicationPermissions
+  href: api/PnP.Core.Admin.Model.SharePoint.CreationOptions.html#PnP_Core_Admin_Model_SharePoint_CreationOptions_UsingApplicationPermissions
+  commentId: P:PnP.Core.Admin.Model.SharePoint.CreationOptions.UsingApplicationPermissions
+  fullName: PnP.Core.Admin.Model.SharePoint.CreationOptions.UsingApplicationPermissions
+  nameWithType: CreationOptions.UsingApplicationPermissions
+- uid: PnP.Core.Admin.Model.SharePoint.CreationOptions.UsingApplicationPermissions*
+  name: UsingApplicationPermissions
+  href: api/PnP.Core.Admin.Model.SharePoint.CreationOptions.html#PnP_Core_Admin_Model_SharePoint_CreationOptions_UsingApplicationPermissions_
+  commentId: Overload:PnP.Core.Admin.Model.SharePoint.CreationOptions.UsingApplicationPermissions
+  isSpec: "True"
+  fullName: PnP.Core.Admin.Model.SharePoint.CreationOptions.UsingApplicationPermissions
+  nameWithType: CreationOptions.UsingApplicationPermissions
+- uid: PnP.Core.Admin.Model.SharePoint.CreationOptions.WaitAfterStatusCheck
+  name: WaitAfterStatusCheck
+  href: api/PnP.Core.Admin.Model.SharePoint.CreationOptions.html#PnP_Core_Admin_Model_SharePoint_CreationOptions_WaitAfterStatusCheck
+  commentId: P:PnP.Core.Admin.Model.SharePoint.CreationOptions.WaitAfterStatusCheck
+  fullName: PnP.Core.Admin.Model.SharePoint.CreationOptions.WaitAfterStatusCheck
+  nameWithType: CreationOptions.WaitAfterStatusCheck
+- uid: PnP.Core.Admin.Model.SharePoint.CreationOptions.WaitAfterStatusCheck*
+  name: WaitAfterStatusCheck
+  href: api/PnP.Core.Admin.Model.SharePoint.CreationOptions.html#PnP_Core_Admin_Model_SharePoint_CreationOptions_WaitAfterStatusCheck_
+  commentId: Overload:PnP.Core.Admin.Model.SharePoint.CreationOptions.WaitAfterStatusCheck
+  isSpec: "True"
+  fullName: PnP.Core.Admin.Model.SharePoint.CreationOptions.WaitAfterStatusCheck
+  nameWithType: CreationOptions.WaitAfterStatusCheck
 - uid: PnP.Core.Admin.Model.SharePoint.DenyAddAndCustomizePagesStatus
   name: DenyAddAndCustomizePagesStatus
   href: api/PnP.Core.Admin.Model.SharePoint.DenyAddAndCustomizePagesStatus.html
@@ -1522,6 +1625,32 @@ references:
   commentId: T:PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager
   fullName: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager
   nameWithType: ISiteCollectionManager
+- uid: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.ConnectSiteCollectionToGroup(PnP.Core.Admin.Model.SharePoint.ConnectSiteToGroupOptions,PnP.Core.Admin.Model.SharePoint.CreationOptions)
+  name: ConnectSiteCollectionToGroup(ConnectSiteToGroupOptions, CreationOptions)
+  href: api/PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.html#PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_ConnectSiteCollectionToGroup_PnP_Core_Admin_Model_SharePoint_ConnectSiteToGroupOptions_PnP_Core_Admin_Model_SharePoint_CreationOptions_
+  commentId: M:PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.ConnectSiteCollectionToGroup(PnP.Core.Admin.Model.SharePoint.ConnectSiteToGroupOptions,PnP.Core.Admin.Model.SharePoint.CreationOptions)
+  fullName: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.ConnectSiteCollectionToGroup(PnP.Core.Admin.Model.SharePoint.ConnectSiteToGroupOptions, PnP.Core.Admin.Model.SharePoint.CreationOptions)
+  nameWithType: ISiteCollectionManager.ConnectSiteCollectionToGroup(ConnectSiteToGroupOptions, CreationOptions)
+- uid: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.ConnectSiteCollectionToGroup*
+  name: ConnectSiteCollectionToGroup
+  href: api/PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.html#PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_ConnectSiteCollectionToGroup_
+  commentId: Overload:PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.ConnectSiteCollectionToGroup
+  isSpec: "True"
+  fullName: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.ConnectSiteCollectionToGroup
+  nameWithType: ISiteCollectionManager.ConnectSiteCollectionToGroup
+- uid: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.ConnectSiteCollectionToGroupAsync(PnP.Core.Admin.Model.SharePoint.ConnectSiteToGroupOptions,PnP.Core.Admin.Model.SharePoint.CreationOptions)
+  name: ConnectSiteCollectionToGroupAsync(ConnectSiteToGroupOptions, CreationOptions)
+  href: api/PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.html#PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_ConnectSiteCollectionToGroupAsync_PnP_Core_Admin_Model_SharePoint_ConnectSiteToGroupOptions_PnP_Core_Admin_Model_SharePoint_CreationOptions_
+  commentId: M:PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.ConnectSiteCollectionToGroupAsync(PnP.Core.Admin.Model.SharePoint.ConnectSiteToGroupOptions,PnP.Core.Admin.Model.SharePoint.CreationOptions)
+  fullName: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.ConnectSiteCollectionToGroupAsync(PnP.Core.Admin.Model.SharePoint.ConnectSiteToGroupOptions, PnP.Core.Admin.Model.SharePoint.CreationOptions)
+  nameWithType: ISiteCollectionManager.ConnectSiteCollectionToGroupAsync(ConnectSiteToGroupOptions, CreationOptions)
+- uid: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.ConnectSiteCollectionToGroupAsync*
+  name: ConnectSiteCollectionToGroupAsync
+  href: api/PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.html#PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_ConnectSiteCollectionToGroupAsync_
+  commentId: Overload:PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.ConnectSiteCollectionToGroupAsync
+  isSpec: "True"
+  fullName: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.ConnectSiteCollectionToGroupAsync
+  nameWithType: ISiteCollectionManager.ConnectSiteCollectionToGroupAsync
 - uid: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.CreateSiteCollection(PnP.Core.Admin.Model.SharePoint.CommonSiteOptions,PnP.Core.Admin.Model.SharePoint.SiteCreationOptions)
   name: CreateSiteCollection(CommonSiteOptions, SiteCreationOptions)
   href: api/PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.html#PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_CreateSiteCollection_PnP_Core_Admin_Model_SharePoint_CommonSiteOptions_PnP_Core_Admin_Model_SharePoint_SiteCreationOptions_
@@ -1548,12 +1677,12 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.CreateSiteCollectionAsync
   nameWithType: ISiteCollectionManager.CreateSiteCollectionAsync
-- uid: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.DeleteSiteCollection(Uri,System.String)
-  name: DeleteSiteCollection(Uri, String)
-  href: api/PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.html#PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_DeleteSiteCollection_Uri_System_String_
-  commentId: M:PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.DeleteSiteCollection(Uri,System.String)
-  fullName: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.DeleteSiteCollection(Uri, System.String)
-  nameWithType: ISiteCollectionManager.DeleteSiteCollection(Uri, String)
+- uid: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.DeleteSiteCollection(Uri)
+  name: DeleteSiteCollection(Uri)
+  href: api/PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.html#PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_DeleteSiteCollection_Uri_
+  commentId: M:PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.DeleteSiteCollection(Uri)
+  fullName: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.DeleteSiteCollection(Uri)
+  nameWithType: ISiteCollectionManager.DeleteSiteCollection(Uri)
 - uid: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.DeleteSiteCollection*
   name: DeleteSiteCollection
   href: api/PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.html#PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_DeleteSiteCollection_
@@ -1561,12 +1690,12 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.DeleteSiteCollection
   nameWithType: ISiteCollectionManager.DeleteSiteCollection
-- uid: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.DeleteSiteCollectionAsync(Uri,System.String)
-  name: DeleteSiteCollectionAsync(Uri, String)
-  href: api/PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.html#PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_DeleteSiteCollectionAsync_Uri_System_String_
-  commentId: M:PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.DeleteSiteCollectionAsync(Uri,System.String)
-  fullName: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.DeleteSiteCollectionAsync(Uri, System.String)
-  nameWithType: ISiteCollectionManager.DeleteSiteCollectionAsync(Uri, String)
+- uid: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.DeleteSiteCollectionAsync(Uri)
+  name: DeleteSiteCollectionAsync(Uri)
+  href: api/PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.html#PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_DeleteSiteCollectionAsync_Uri_
+  commentId: M:PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.DeleteSiteCollectionAsync(Uri)
+  fullName: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.DeleteSiteCollectionAsync(Uri)
+  nameWithType: ISiteCollectionManager.DeleteSiteCollectionAsync(Uri)
 - uid: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.DeleteSiteCollectionAsync*
   name: DeleteSiteCollectionAsync
   href: api/PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.html#PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_DeleteSiteCollectionAsync_
@@ -1678,12 +1807,12 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.GetSiteCollectionsWithDetailsAsync
   nameWithType: ISiteCollectionManager.GetSiteCollectionsWithDetailsAsync
-- uid: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.RecycleSiteCollection(Uri,System.String)
-  name: RecycleSiteCollection(Uri, String)
-  href: api/PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.html#PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_RecycleSiteCollection_Uri_System_String_
-  commentId: M:PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.RecycleSiteCollection(Uri,System.String)
-  fullName: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.RecycleSiteCollection(Uri, System.String)
-  nameWithType: ISiteCollectionManager.RecycleSiteCollection(Uri, String)
+- uid: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.RecycleSiteCollection(Uri)
+  name: RecycleSiteCollection(Uri)
+  href: api/PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.html#PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_RecycleSiteCollection_Uri_
+  commentId: M:PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.RecycleSiteCollection(Uri)
+  fullName: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.RecycleSiteCollection(Uri)
+  nameWithType: ISiteCollectionManager.RecycleSiteCollection(Uri)
 - uid: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.RecycleSiteCollection*
   name: RecycleSiteCollection
   href: api/PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.html#PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_RecycleSiteCollection_
@@ -1691,12 +1820,12 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.RecycleSiteCollection
   nameWithType: ISiteCollectionManager.RecycleSiteCollection
-- uid: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.RecycleSiteCollectionAsync(Uri,System.String)
-  name: RecycleSiteCollectionAsync(Uri, String)
-  href: api/PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.html#PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_RecycleSiteCollectionAsync_Uri_System_String_
-  commentId: M:PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.RecycleSiteCollectionAsync(Uri,System.String)
-  fullName: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.RecycleSiteCollectionAsync(Uri, System.String)
-  nameWithType: ISiteCollectionManager.RecycleSiteCollectionAsync(Uri, String)
+- uid: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.RecycleSiteCollectionAsync(Uri)
+  name: RecycleSiteCollectionAsync(Uri)
+  href: api/PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.html#PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_RecycleSiteCollectionAsync_Uri_
+  commentId: M:PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.RecycleSiteCollectionAsync(Uri)
+  fullName: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.RecycleSiteCollectionAsync(Uri)
+  nameWithType: ISiteCollectionManager.RecycleSiteCollectionAsync(Uri)
 - uid: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.RecycleSiteCollectionAsync*
   name: RecycleSiteCollectionAsync
   href: api/PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.html#PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_RecycleSiteCollectionAsync_
@@ -3312,32 +3441,6 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Admin.Model.SharePoint.SiteCreationOptions.MaxAsyncProvisioningStatusChecks
   nameWithType: SiteCreationOptions.MaxAsyncProvisioningStatusChecks
-- uid: PnP.Core.Admin.Model.SharePoint.SiteCreationOptions.MaxStatusChecks
-  name: MaxStatusChecks
-  href: api/PnP.Core.Admin.Model.SharePoint.SiteCreationOptions.html#PnP_Core_Admin_Model_SharePoint_SiteCreationOptions_MaxStatusChecks
-  commentId: P:PnP.Core.Admin.Model.SharePoint.SiteCreationOptions.MaxStatusChecks
-  fullName: PnP.Core.Admin.Model.SharePoint.SiteCreationOptions.MaxStatusChecks
-  nameWithType: SiteCreationOptions.MaxStatusChecks
-- uid: PnP.Core.Admin.Model.SharePoint.SiteCreationOptions.MaxStatusChecks*
-  name: MaxStatusChecks
-  href: api/PnP.Core.Admin.Model.SharePoint.SiteCreationOptions.html#PnP_Core_Admin_Model_SharePoint_SiteCreationOptions_MaxStatusChecks_
-  commentId: Overload:PnP.Core.Admin.Model.SharePoint.SiteCreationOptions.MaxStatusChecks
-  isSpec: "True"
-  fullName: PnP.Core.Admin.Model.SharePoint.SiteCreationOptions.MaxStatusChecks
-  nameWithType: SiteCreationOptions.MaxStatusChecks
-- uid: PnP.Core.Admin.Model.SharePoint.SiteCreationOptions.UsingApplicationPermissions
-  name: UsingApplicationPermissions
-  href: api/PnP.Core.Admin.Model.SharePoint.SiteCreationOptions.html#PnP_Core_Admin_Model_SharePoint_SiteCreationOptions_UsingApplicationPermissions
-  commentId: P:PnP.Core.Admin.Model.SharePoint.SiteCreationOptions.UsingApplicationPermissions
-  fullName: PnP.Core.Admin.Model.SharePoint.SiteCreationOptions.UsingApplicationPermissions
-  nameWithType: SiteCreationOptions.UsingApplicationPermissions
-- uid: PnP.Core.Admin.Model.SharePoint.SiteCreationOptions.UsingApplicationPermissions*
-  name: UsingApplicationPermissions
-  href: api/PnP.Core.Admin.Model.SharePoint.SiteCreationOptions.html#PnP_Core_Admin_Model_SharePoint_SiteCreationOptions_UsingApplicationPermissions_
-  commentId: Overload:PnP.Core.Admin.Model.SharePoint.SiteCreationOptions.UsingApplicationPermissions
-  isSpec: "True"
-  fullName: PnP.Core.Admin.Model.SharePoint.SiteCreationOptions.UsingApplicationPermissions
-  nameWithType: SiteCreationOptions.UsingApplicationPermissions
 - uid: PnP.Core.Admin.Model.SharePoint.SiteCreationOptions.WaitAfterAsyncProvisioningStatusCheck
   name: WaitAfterAsyncProvisioningStatusCheck
   href: api/PnP.Core.Admin.Model.SharePoint.SiteCreationOptions.html#PnP_Core_Admin_Model_SharePoint_SiteCreationOptions_WaitAfterAsyncProvisioningStatusCheck
@@ -3364,19 +3467,6 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Admin.Model.SharePoint.SiteCreationOptions.WaitAfterCreation
   nameWithType: SiteCreationOptions.WaitAfterCreation
-- uid: PnP.Core.Admin.Model.SharePoint.SiteCreationOptions.WaitAfterStatusCheck
-  name: WaitAfterStatusCheck
-  href: api/PnP.Core.Admin.Model.SharePoint.SiteCreationOptions.html#PnP_Core_Admin_Model_SharePoint_SiteCreationOptions_WaitAfterStatusCheck
-  commentId: P:PnP.Core.Admin.Model.SharePoint.SiteCreationOptions.WaitAfterStatusCheck
-  fullName: PnP.Core.Admin.Model.SharePoint.SiteCreationOptions.WaitAfterStatusCheck
-  nameWithType: SiteCreationOptions.WaitAfterStatusCheck
-- uid: PnP.Core.Admin.Model.SharePoint.SiteCreationOptions.WaitAfterStatusCheck*
-  name: WaitAfterStatusCheck
-  href: api/PnP.Core.Admin.Model.SharePoint.SiteCreationOptions.html#PnP_Core_Admin_Model_SharePoint_SiteCreationOptions_WaitAfterStatusCheck_
-  commentId: Overload:PnP.Core.Admin.Model.SharePoint.SiteCreationOptions.WaitAfterStatusCheck
-  isSpec: "True"
-  fullName: PnP.Core.Admin.Model.SharePoint.SiteCreationOptions.WaitAfterStatusCheck
-  nameWithType: SiteCreationOptions.WaitAfterStatusCheck
 - uid: PnP.Core.Admin.Model.SharePoint.SiteCreationOptions.WaitForAsyncProvisioning
   name: WaitForAsyncProvisioning
   href: api/PnP.Core.Admin.Model.SharePoint.SiteCreationOptions.html#PnP_Core_Admin_Model_SharePoint_SiteCreationOptions_WaitForAsyncProvisioning
