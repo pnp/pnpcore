@@ -115,6 +115,11 @@ var url = await context.GetSharePointAdmin().GetTenantMySiteHostUriAsync();
 <p>Support for discovering vanity urls is planned for later. When you're tenant is a multi-geo tenant then checkout the <a href="admin-m365-multigeo.html">Microsoft 365 multi geo admin article</a>.</p>
 </div>
 <h2 id="building-a-context-to-read-data-from-sharepoint-tenant-admin">Building a context to read data from SharePoint Tenant Admin</h2>
+<div class="IMPORTANT">
+<h5>Important</h5>
+<p>You need to be either a SharePoint Administrator or Global Administrator to use these methods.</p>
+</div>
+
 <p>The SharePoint Tenant Admin center site is not a site one typically would connect to, but in case you need it your code can use the <code>GetTenantAdminCenterContextAsync</code> methods:</p>
 <pre><code class="lang-csharp">using (var tenantContext = await context.GetSharePointAdmin().GetTenantAdminCenterContextAsync())
 {

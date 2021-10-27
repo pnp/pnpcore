@@ -5695,7 +5695,7 @@
       "output": {
         ".html": {
           "relative_path": "using-the-sdk/admin-sharepoint-discovery.html",
-          "hash": "2fuIzvgWzfo2vkfWk8SJrg=="
+          "hash": "zqhy/4FmC0yFe7QrESJizg=="
         }
       },
       "is_incremental": false,
@@ -5707,7 +5707,7 @@
       "output": {
         ".html": {
           "relative_path": "using-the-sdk/admin-sharepoint-security.html",
-          "hash": "kIppJp6h/ctpCB+Cs6bDsA=="
+          "hash": "l+mxlwJHWoEAkbPFAF+Nkg=="
         }
       },
       "is_incremental": false,
@@ -5719,7 +5719,7 @@
       "output": {
         ".html": {
           "relative_path": "using-the-sdk/admin-sharepoint-sites.html",
-          "hash": "2K577DcrHX+6I1AYP4W5Rw=="
+          "hash": "UckWMQLdF5zQ9Ya8XE5q5A=="
         }
       },
       "is_incremental": false,
@@ -6020,6 +6020,18 @@
         ".html": {
           "relative_path": "using-the-sdk/fragments/setup-admin-sharepoint.html",
           "hash": "NSuttNo08NhV9kyOeg8Vjg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "using-the-sdk/fragments/sharepoint-admin-required.md",
+      "output": {
+        ".html": {
+          "relative_path": "using-the-sdk/fragments/sharepoint-admin-required.html",
+          "hash": "YwtXtHaKsyJOAFFi954zrg=="
         }
       },
       "is_incremental": false,
@@ -6400,7 +6412,7 @@
         "ConceptualDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build",
-          "total_file_count": 83,
+          "total_file_count": 84,
           "skipped_file_count": 0
         },
         "ManagedReferenceDocumentProcessor": {
