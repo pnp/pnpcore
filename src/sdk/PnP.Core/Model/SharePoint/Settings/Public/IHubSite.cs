@@ -39,7 +39,7 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// The HubSite ID
         /// </summary>
-        public Guid Id { get; set; }
+        public Guid Id { get; }
 
         /// <summary>
         /// The logo URL of the HubSite
@@ -54,7 +54,7 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// Hub permissions sync tag
         /// </summary>
-        public int PermissionsSyncTag { get; set; }
+        public int PermissionsSyncTag { get; }
 
         /// <summary>
         /// Gets or sets if the HubSite Join requires approval.
@@ -69,12 +69,12 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// The Site Collection ID of the HubSite
         /// </summary>
-        public Guid SiteId { get; set; }
+        public Guid SiteId { get; }
 
         /// <summary>
         /// The URL of the HubSite
         /// </summary>
-        public string SiteUrl { get; set; }
+        public string SiteUrl { get; }
 
         /// <summary>
         /// List of security groups with access to join the HubSite.
@@ -86,7 +86,7 @@ namespace PnP.Core.Model.SharePoint
         /// The tenant instance ID in which the site hub is located.
         /// Use empty guid for the default tenant instance.
         /// </summary>
-        public Guid TenantInstanceId { get; set; }
+        public Guid TenantInstanceId { get; }
 
         /// <summary>
         /// Specifies the name of the HubSite.

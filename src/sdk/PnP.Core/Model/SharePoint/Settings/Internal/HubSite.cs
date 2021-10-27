@@ -6,9 +6,7 @@ namespace PnP.Core.Model.SharePoint
     /// <summary>
     /// HubSite class, write your custom code here
     /// </summary>
-#pragma warning disable CA2243 // Attribute string literals should parse correctly
-    [SharePointType("SP.HubSite", Uri = "_api/HubSites/GetById?hubSiteId='{Site.HubSiteId}'", Get = "_api/HubSites/GetById?hubSiteId='{Site.HubSiteId}'", LinqGet = "_api/HubSites")]
-#pragma warning restore CA2243 // Attribute string literals should parse correctly
+    [SharePointType("SP.HubSite", Uri = "_api/HubSites/GetById?hubSiteId='{Site.HubSiteId}'", LinqGet = "_api/HubSites")]
     internal partial class HubSite : BaseDataModel<IHubSite>, IHubSite
     {
         #region Construction
