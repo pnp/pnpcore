@@ -15,6 +15,11 @@ namespace PnP.Core.Admin.Model.SharePoint
         /// <param name="displayName">Name of the site</param>
         public ConnectSiteToGroupOptions(Uri url, string alias, string displayName) : base(alias, displayName)
         {
+            if (url == null)
+            {
+                throw new ArgumentNullException(nameof(url));
+            }
+
             Url = url;
         }
 

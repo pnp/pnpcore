@@ -750,5 +750,119 @@ namespace PnP.Core.Admin.Test.SharePoint
 
         #endregion
 
+        #region Handle input exceptions
+        [TestMethod]
+        public async Task HandleExceptions()
+        {
+            //TestCommon.Instance.Mocking = false;
+            TestCommon.Instance.UseApplicationPermissions = false;
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+
+                Assert.ThrowsException<ArgumentNullException>(() =>
+                {
+                    SiteCreationOptions siteCreationOptions = new SiteCreationOptions()
+                    {
+                        UsingApplicationPermissions = false
+                    };
+
+                    using (var newSiteContext = context.GetSiteCollectionManager().CreateSiteCollection(null, siteCreationOptions))
+                    {
+                    }
+                });
+
+                Assert.ThrowsException<ArgumentNullException>(() =>
+                {
+                    CommunicationSiteOptions communicationSiteToCreate = new CommunicationSiteOptions(null, "PnP Core SDK Test")
+                    {
+                        Description = "This is a test site collection",
+                        Language = Language.English,
+                    };
+                });
+
+                Assert.ThrowsException<ArgumentNullException>(() =>
+                {
+                    CommunicationSiteOptions communicationSiteToCreate = new CommunicationSiteOptions(new Uri("https://contoso.sharepoint.com/sites/dummy"), null)
+                    {
+                        Description = "This is a test site collection",
+                        Language = Language.English,
+                    };
+                });
+
+                Assert.ThrowsException<ArgumentNullException>(() =>
+                {
+                    TeamSiteOptions communicationSiteToCreate = new TeamSiteOptions(null, "display name");
+                });
+
+                Assert.ThrowsException<ArgumentNullException>(() =>
+                {
+                    TeamSiteOptions communicationSiteToCreate = new TeamSiteOptions("alias", null);
+                });
+
+                Assert.ThrowsException<ArgumentNullException>(() =>
+                {
+                    ClassicSiteOptions communicationSiteToCreate = new ClassicSiteOptions(null, "title", "webtemplate", "owner", Language.Default, Model.SharePoint.TimeZone.None);
+                });
+
+                Assert.ThrowsException<ArgumentNullException>(() =>
+                {
+                    ClassicSiteOptions communicationSiteToCreate = new ClassicSiteOptions(new Uri("https://contoso.sharepoint.com/sites/dummy"), "", "webtemplate", "owner", Language.Default, Model.SharePoint.TimeZone.None);
+                });
+
+                Assert.ThrowsException<ArgumentNullException>(() =>
+                {
+                    ClassicSiteOptions communicationSiteToCreate = new ClassicSiteOptions(new Uri("https://contoso.sharepoint.com/sites/dummy"), "title", "", "owner", Language.Default, Model.SharePoint.TimeZone.None);
+                });
+
+                Assert.ThrowsException<ArgumentNullException>(() =>
+                {
+                    ClassicSiteOptions communicationSiteToCreate = new ClassicSiteOptions(new Uri("https://contoso.sharepoint.com/sites/dummy"), "title", "webtemplate", "", Language.Default, Model.SharePoint.TimeZone.None);
+                });
+
+                Assert.ThrowsException<ArgumentException>(() =>
+                {
+                    ClassicSiteOptions communicationSiteToCreate = new ClassicSiteOptions(new Uri("https://contoso.sharepoint.com/sites/dummy"), "title", "webtemplate", "owner", Language.Default, Model.SharePoint.TimeZone.None);
+                });
+
+                Assert.ThrowsException<ArgumentNullException>(() =>
+                {
+                    CreationOptions creationOptions = new CreationOptions()
+                    {
+                        UsingApplicationPermissions = false
+                    };
+
+                    context.GetSiteCollectionManager().ConnectSiteCollectionToGroup(null, creationOptions);
+                });
+
+                Assert.ThrowsException<ArgumentNullException>(() =>
+                {
+                    ConnectSiteToGroupOptions communicationSiteToCreate = new ConnectSiteToGroupOptions(null, "alias", "displayname");
+                });
+
+                Assert.ThrowsException<ArgumentNullException>(() =>
+                {
+                    context.GetSiteCollectionManager().RecycleSiteCollection(null);
+                });
+
+                Assert.ThrowsException<ArgumentNullException>(() =>
+                {
+                    context.GetSiteCollectionManager().RestoreSiteCollection(null);
+                });
+
+                Assert.ThrowsException<ArgumentNullException>(() =>
+                {
+                    context.GetSiteCollectionManager().DeleteSiteCollection(null);
+                });
+
+                Assert.ThrowsException<ArgumentNullException>(() =>
+                {
+                    context.GetSiteCollectionManager().GetSiteCollectionProperties(null);
+                });
+
+            }
+        }
+        #endregion
+
     }
 }

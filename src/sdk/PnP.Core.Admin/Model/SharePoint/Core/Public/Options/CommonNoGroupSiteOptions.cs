@@ -15,6 +15,16 @@ namespace PnP.Core.Admin.Model.SharePoint
         /// <param name="title">Title of the site to create</param>
         public CommonNoGroupSiteOptions(Uri url, string title)
         {
+            if (url == null)
+            {
+                throw new ArgumentNullException(nameof(url));
+            }
+
+            if (string.IsNullOrEmpty(title))
+            {
+                throw new ArgumentNullException(nameof(title));
+            }
+
             Url = url;
             Title = title;
         }

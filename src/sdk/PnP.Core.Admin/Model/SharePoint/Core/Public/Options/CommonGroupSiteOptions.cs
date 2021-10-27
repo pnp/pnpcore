@@ -15,6 +15,16 @@ namespace PnP.Core.Admin.Model.SharePoint
         /// <param name="displayName">Display name for the group to create</param>
         public CommonGroupSiteOptions(string alias, string displayName)
         {
+            if (alias == null)
+            {
+                throw new ArgumentNullException(nameof(alias));
+            }
+
+            if (displayName == null)
+            {
+                throw new ArgumentNullException(nameof(displayName));
+            }
+
             Alias = alias;
             DisplayName = displayName;
         }

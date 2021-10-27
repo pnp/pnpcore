@@ -18,6 +18,31 @@ namespace PnP.Core.Admin.Model.SharePoint
         /// <param name="timeZone">Time zone of the classic site collection to create</param>
         public ClassicSiteOptions(Uri url, string title, string webTemplate, string siteOwnerLogin, Language language, TimeZone timeZone)
         {
+            if (url == null)
+            {
+                throw new ArgumentNullException(nameof(url));
+            }
+
+            if (string.IsNullOrEmpty(title))
+            {
+                throw new ArgumentNullException(nameof(title));
+            }
+
+            if (string.IsNullOrEmpty(webTemplate))
+            {
+                throw new ArgumentNullException(nameof(webTemplate));
+            }
+
+            if (string.IsNullOrEmpty(siteOwnerLogin))
+            {
+                throw new ArgumentNullException(nameof(siteOwnerLogin));
+            }
+
+            if (timeZone == TimeZone.None)
+            {
+                throw new ArgumentException("Provide a timeZone value");
+            }
+
             Url = url;
             Title = title;
             WebTemplate = webTemplate;

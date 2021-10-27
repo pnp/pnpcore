@@ -47,27 +47,6 @@ namespace PnP.Core.Admin.Model.SharePoint
 
         internal static async Task<PnPContext> ConnectGroupToSiteAsync(PnPContext contextIn, ConnectSiteToGroupOptions siteToGroupify, CreationOptions creationOptions)
         {            
-            if (siteToGroupify.Url == null)
-            {
-#pragma warning disable CA2208 // Instantiate argument exceptions correctly
-                throw new ArgumentNullException(nameof(siteToGroupify.Url));
-#pragma warning restore CA2208 // Instantiate argument exceptions correctly
-            }
-
-            if (siteToGroupify.Alias == null)
-            {
-#pragma warning disable CA2208 // Instantiate argument exceptions correctly
-                throw new ArgumentNullException(nameof(siteToGroupify.Alias));
-#pragma warning restore CA2208 // Instantiate argument exceptions correctly
-            }
-
-            if (siteToGroupify.DisplayName == null)
-            {
-#pragma warning disable CA2208 // Instantiate argument exceptions correctly
-                throw new ArgumentNullException(nameof(siteToGroupify.DisplayName));
-#pragma warning restore CA2208 // Instantiate argument exceptions correctly
-            }
-
             using (var context = await GetContextForGroupConnectAsync(contextIn, siteToGroupify.Url).ConfigureAwait(false))
             {
                 // Provide default creation options as input
