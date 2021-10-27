@@ -190,6 +190,10 @@ await siteProperties.UpdateAsync();
 <p>If your tenant is a multi-geo tenant then go <a href="admin-m365-multigeo.html">here</a> to checkout how you can control the geo location where the site collection will be created.</p>
 </div>
 <h3 id="basic-site-collection-creation-flow">Basic site collection creation flow</h3>
+<div class="IMPORTANT">
+<h5>Important</h5>
+<p><strong>When creating classic sites</strong> you need to be either a SharePoint Administrator or Global Administrator to use these methods.</p>
+</div>
 <p>The code structure to create a site collection is identical, regardless of which site you're creating or which type of permission you're using:</p>
 <pre><code class="lang-csharp">var communicationSiteToCreate = new CommunicationSiteOptions(new Uri(&quot;https://contoso.sharepoint.com/sites/sitename&quot;), &quot;My communication site&quot;)
 {
