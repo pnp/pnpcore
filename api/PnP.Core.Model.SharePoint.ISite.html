@@ -2368,7 +2368,7 @@ True - notification bar is enabled; False - otherwise</p>
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_ISite_GetHubSiteData_System_Nullable_Guid__.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.ISite.GetHubSiteData(System.Nullable%7BGuid%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/ISite.cs/#L310" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/ISite.cs/#L338" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Model_SharePoint_ISite_GetHubSiteData_" data-uid="PnP.Core.Model.SharePoint.ISite.GetHubSiteData*"></a>
@@ -2382,7 +2382,7 @@ True - notification bar is enabled; False - otherwise</p>
   <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">Task&lt;IHubSite&gt; GetHubSiteData(Guid? Id)</code></pre>
+    <pre><code class="lang-csharp hljs">IHubSite GetHubSiteData(Guid? id)</code></pre>
   </div>
 
   <h5 class="parameters">Parameters</h5>
@@ -2390,7 +2390,62 @@ True - notification bar is enabled; False - otherwise</p>
     <tr>
       <td>
         <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.nullable-1">Nullable</a>&lt;<span class="xref">Guid</span>&gt;</span>
-        <span class="parametername">Id</span>
+        <span class="parametername">id</span>
+        <p><p>Hub Site Guid</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="PnP.Core.Model.SharePoint.IHubSite.html">IHubSite</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_ISite_GetHubSiteDataAsync_System_Nullable_Guid__.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.ISite.GetHubSiteDataAsync(System.Nullable%7BGuid%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/ISite.cs/#L331" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_ISite_GetHubSiteDataAsync_" data-uid="PnP.Core.Model.SharePoint.ISite.GetHubSiteDataAsync*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_ISite_GetHubSiteDataAsync_System_Nullable_Guid__" data-uid="PnP.Core.Model.SharePoint.ISite.GetHubSiteDataAsync(System.Nullable{Guid})"><a href="#collapsible-PnP_Core_Model_SharePoint_ISite_GetHubSiteDataAsync_System_Nullable_Guid__" class="expander" data-toggle="collapse">GetHubSiteDataAsync(Nullable&lt;Guid&gt;)</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_ISite_GetHubSiteDataAsync_System_Nullable_Guid__" class="collapse in">
+  <div class="markdown level1 summary"><p>Gets hubsite data from the current site OR another specified hub site ID</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task&lt;IHubSite&gt; GetHubSiteDataAsync(Guid? id)</code></pre>
+  </div>
+
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.nullable-1">Nullable</a>&lt;<span class="xref">Guid</span>&gt;</span>
+        <span class="parametername">id</span>
         <p><p>Hub Site Guid</p>
 </p>
       </td>
@@ -2420,10 +2475,64 @@ True - notification bar is enabled; False - otherwise</p>
   
   <span class="small pull-right mobile-hide">
     <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_ISite_JoinHubSite_Guid_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.ISite.JoinHubSite(Guid)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/ISite.cs/#L312" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_ISite_JoinHubSite_" data-uid="PnP.Core.Model.SharePoint.ISite.JoinHubSite*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_ISite_JoinHubSite_Guid_" data-uid="PnP.Core.Model.SharePoint.ISite.JoinHubSite(Guid)"><a href="#collapsible-PnP_Core_Model_SharePoint_ISite_JoinHubSite_Guid_" class="expander" data-toggle="collapse">JoinHubSite(Guid)</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_ISite_JoinHubSite_Guid_" class="collapse in">
+  <div class="markdown level1 summary"><p>Associates the current site to a primary hub site</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">bool JoinHubSite(Guid hubSiteId)</code></pre>
+  </div>
+
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><span class="xref">Guid</span></span>
+        <span class="parametername">hubSiteId</span>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_ISite_JoinHubSiteAsync_Guid_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.ISite.JoinHubSiteAsync(Guid)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/ISite.cs/#L297" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/ISite.cs/#L307" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Model_SharePoint_ISite_JoinHubSiteAsync_" data-uid="PnP.Core.Model.SharePoint.ISite.JoinHubSiteAsync*"></a>
@@ -2456,6 +2565,50 @@ True - notification bar is enabled; False - otherwise</p>
     <tr>
       <td>
         <span class="xref">Task</span>&lt;<a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a>&gt;
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_ISite_RegisterHubSite.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.ISite.RegisterHubSite%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/ISite.cs/#L292" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_ISite_RegisterHubSite_" data-uid="PnP.Core.Model.SharePoint.ISite.RegisterHubSite*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_ISite_RegisterHubSite" data-uid="PnP.Core.Model.SharePoint.ISite.RegisterHubSite"><a href="#collapsible-PnP_Core_Model_SharePoint_ISite_RegisterHubSite" class="expander" data-toggle="collapse">RegisterHubSite()</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_ISite_RegisterHubSite" class="collapse in">
+  <div class="markdown level1 summary"><p>Registers the current site as a primary hub site</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">IHubSite RegisterHubSite()</code></pre>
+  </div>
+
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="PnP.Core.Model.SharePoint.IHubSite.html">IHubSite</a>
         <p>
       </td>
     </tr>
@@ -2518,10 +2671,54 @@ True - notification bar is enabled; False - otherwise</p>
   
   <span class="small pull-right mobile-hide">
     <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_ISite_UnJoinHubSite.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.ISite.UnJoinHubSite%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/ISite.cs/#L324" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_ISite_UnJoinHubSite_" data-uid="PnP.Core.Model.SharePoint.ISite.UnJoinHubSite*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_ISite_UnJoinHubSite" data-uid="PnP.Core.Model.SharePoint.ISite.UnJoinHubSite"><a href="#collapsible-PnP_Core_Model_SharePoint_ISite_UnJoinHubSite" class="expander" data-toggle="collapse">UnJoinHubSite()</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_ISite_UnJoinHubSite" class="collapse in">
+  <div class="markdown level1 summary"><p>Disassociates current site from primary hub site</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">bool UnJoinHubSite()</code></pre>
+  </div>
+
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_ISite_UnJoinHubSiteAsync.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.ISite.UnJoinHubSiteAsync%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/ISite.cs/#L303" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/ISite.cs/#L318" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Model_SharePoint_ISite_UnJoinHubSiteAsync_" data-uid="PnP.Core.Model.SharePoint.ISite.UnJoinHubSiteAsync*"></a>
@@ -2562,10 +2759,54 @@ True - notification bar is enabled; False - otherwise</p>
   
   <span class="small pull-right mobile-hide">
     <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_ISite_UnregisterHubSite.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.ISite.UnregisterHubSite%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/ISite.cs/#L302" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_ISite_UnregisterHubSite_" data-uid="PnP.Core.Model.SharePoint.ISite.UnregisterHubSite*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_ISite_UnregisterHubSite" data-uid="PnP.Core.Model.SharePoint.ISite.UnregisterHubSite"><a href="#collapsible-PnP_Core_Model_SharePoint_ISite_UnregisterHubSite" class="expander" data-toggle="collapse">UnregisterHubSite()</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_ISite_UnregisterHubSite" class="collapse in">
+  <div class="markdown level1 summary"><p>Unregisters the current site as a primary hub site</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">bool UnregisterHubSite()</code></pre>
+  </div>
+
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_ISite_UnregisterHubSiteAsync.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.ISite.UnregisterHubSiteAsync%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/ISite.cs/#L292" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/ISite.cs/#L297" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Model_SharePoint_ISite_UnregisterHubSiteAsync_" data-uid="PnP.Core.Model.SharePoint.ISite.UnregisterHubSiteAsync*"></a>

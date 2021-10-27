@@ -26439,6 +26439,22 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.ISite.GetHubSiteData
   nameWithType: ISite.GetHubSiteData
+- uid: PnP.Core.Model.SharePoint.ISite.GetHubSiteDataAsync(System.Nullable{Guid})
+  name: GetHubSiteDataAsync(Nullable<Guid>)
+  href: api/PnP.Core.Model.SharePoint.ISite.html#PnP_Core_Model_SharePoint_ISite_GetHubSiteDataAsync_System_Nullable_Guid__
+  commentId: M:PnP.Core.Model.SharePoint.ISite.GetHubSiteDataAsync(System.Nullable{Guid})
+  name.vb: GetHubSiteDataAsync(Nullable(Of Guid))
+  fullName: PnP.Core.Model.SharePoint.ISite.GetHubSiteDataAsync(System.Nullable<Guid>)
+  fullName.vb: PnP.Core.Model.SharePoint.ISite.GetHubSiteDataAsync(System.Nullable(Of Guid))
+  nameWithType: ISite.GetHubSiteDataAsync(Nullable<Guid>)
+  nameWithType.vb: ISite.GetHubSiteDataAsync(Nullable(Of Guid))
+- uid: PnP.Core.Model.SharePoint.ISite.GetHubSiteDataAsync*
+  name: GetHubSiteDataAsync
+  href: api/PnP.Core.Model.SharePoint.ISite.html#PnP_Core_Model_SharePoint_ISite_GetHubSiteDataAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.ISite.GetHubSiteDataAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.ISite.GetHubSiteDataAsync
+  nameWithType: ISite.GetHubSiteDataAsync
 - uid: PnP.Core.Model.SharePoint.ISite.GroupId
   name: GroupId
   href: api/PnP.Core.Model.SharePoint.ISite.html#PnP_Core_Model_SharePoint_ISite_GroupId
@@ -26504,6 +26520,19 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.ISite.IsHubSite
   nameWithType: ISite.IsHubSite
+- uid: PnP.Core.Model.SharePoint.ISite.JoinHubSite(Guid)
+  name: JoinHubSite(Guid)
+  href: api/PnP.Core.Model.SharePoint.ISite.html#PnP_Core_Model_SharePoint_ISite_JoinHubSite_Guid_
+  commentId: M:PnP.Core.Model.SharePoint.ISite.JoinHubSite(Guid)
+  fullName: PnP.Core.Model.SharePoint.ISite.JoinHubSite(Guid)
+  nameWithType: ISite.JoinHubSite(Guid)
+- uid: PnP.Core.Model.SharePoint.ISite.JoinHubSite*
+  name: JoinHubSite
+  href: api/PnP.Core.Model.SharePoint.ISite.html#PnP_Core_Model_SharePoint_ISite_JoinHubSite_
+  commentId: Overload:PnP.Core.Model.SharePoint.ISite.JoinHubSite
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.ISite.JoinHubSite
+  nameWithType: ISite.JoinHubSite
 - uid: PnP.Core.Model.SharePoint.ISite.JoinHubSiteAsync(Guid)
   name: JoinHubSiteAsync(Guid)
   href: api/PnP.Core.Model.SharePoint.ISite.html#PnP_Core_Model_SharePoint_ISite_JoinHubSiteAsync_Guid_
@@ -26569,6 +26598,19 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.ISite.RecycleBin
   nameWithType: ISite.RecycleBin
+- uid: PnP.Core.Model.SharePoint.ISite.RegisterHubSite
+  name: RegisterHubSite()
+  href: api/PnP.Core.Model.SharePoint.ISite.html#PnP_Core_Model_SharePoint_ISite_RegisterHubSite
+  commentId: M:PnP.Core.Model.SharePoint.ISite.RegisterHubSite
+  fullName: PnP.Core.Model.SharePoint.ISite.RegisterHubSite()
+  nameWithType: ISite.RegisterHubSite()
+- uid: PnP.Core.Model.SharePoint.ISite.RegisterHubSite*
+  name: RegisterHubSite
+  href: api/PnP.Core.Model.SharePoint.ISite.html#PnP_Core_Model_SharePoint_ISite_RegisterHubSite_
+  commentId: Overload:PnP.Core.Model.SharePoint.ISite.RegisterHubSite
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.ISite.RegisterHubSite
+  nameWithType: ISite.RegisterHubSite
 - uid: PnP.Core.Model.SharePoint.ISite.RegisterHubSiteAsync
   name: RegisterHubSiteAsync()
   href: api/PnP.Core.Model.SharePoint.ISite.html#PnP_Core_Model_SharePoint_ISite_RegisterHubSiteAsync
@@ -26777,6 +26819,19 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.ISite.TrimAuditLog
   nameWithType: ISite.TrimAuditLog
+- uid: PnP.Core.Model.SharePoint.ISite.UnJoinHubSite
+  name: UnJoinHubSite()
+  href: api/PnP.Core.Model.SharePoint.ISite.html#PnP_Core_Model_SharePoint_ISite_UnJoinHubSite
+  commentId: M:PnP.Core.Model.SharePoint.ISite.UnJoinHubSite
+  fullName: PnP.Core.Model.SharePoint.ISite.UnJoinHubSite()
+  nameWithType: ISite.UnJoinHubSite()
+- uid: PnP.Core.Model.SharePoint.ISite.UnJoinHubSite*
+  name: UnJoinHubSite
+  href: api/PnP.Core.Model.SharePoint.ISite.html#PnP_Core_Model_SharePoint_ISite_UnJoinHubSite_
+  commentId: Overload:PnP.Core.Model.SharePoint.ISite.UnJoinHubSite
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.ISite.UnJoinHubSite
+  nameWithType: ISite.UnJoinHubSite
 - uid: PnP.Core.Model.SharePoint.ISite.UnJoinHubSiteAsync
   name: UnJoinHubSiteAsync()
   href: api/PnP.Core.Model.SharePoint.ISite.html#PnP_Core_Model_SharePoint_ISite_UnJoinHubSiteAsync
@@ -26790,6 +26845,19 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.ISite.UnJoinHubSiteAsync
   nameWithType: ISite.UnJoinHubSiteAsync
+- uid: PnP.Core.Model.SharePoint.ISite.UnregisterHubSite
+  name: UnregisterHubSite()
+  href: api/PnP.Core.Model.SharePoint.ISite.html#PnP_Core_Model_SharePoint_ISite_UnregisterHubSite
+  commentId: M:PnP.Core.Model.SharePoint.ISite.UnregisterHubSite
+  fullName: PnP.Core.Model.SharePoint.ISite.UnregisterHubSite()
+  nameWithType: ISite.UnregisterHubSite()
+- uid: PnP.Core.Model.SharePoint.ISite.UnregisterHubSite*
+  name: UnregisterHubSite
+  href: api/PnP.Core.Model.SharePoint.ISite.html#PnP_Core_Model_SharePoint_ISite_UnregisterHubSite_
+  commentId: Overload:PnP.Core.Model.SharePoint.ISite.UnregisterHubSite
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.ISite.UnregisterHubSite
+  nameWithType: ISite.UnregisterHubSite
 - uid: PnP.Core.Model.SharePoint.ISite.UnregisterHubSiteAsync
   name: UnregisterHubSiteAsync()
   href: api/PnP.Core.Model.SharePoint.ISite.html#PnP_Core_Model_SharePoint_ISite_UnregisterHubSiteAsync

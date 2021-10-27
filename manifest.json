@@ -138,7 +138,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Admin.Model.SharePoint.ClassicSiteOptions.html",
-          "hash": "1m7l/3HAJzzDCsizBKdwFg=="
+          "hash": "oCVJdmPMKLYOXy+DOzgHAQ=="
         }
       },
       "is_incremental": false,
@@ -150,7 +150,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Admin.Model.SharePoint.CommonGroupSiteOptions.html",
-          "hash": "119G3ie1dZV1xwJ2Qr0wfQ=="
+          "hash": "JXMIfQAZBUAOKIqwMwwg4Q=="
         }
       },
       "is_incremental": false,
@@ -162,7 +162,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Admin.Model.SharePoint.CommonNoGroupSiteOptions.html",
-          "hash": "x49YBvx9v2GHoDLt6EC1rA=="
+          "hash": "TvDne2E6WobsFExS6jGz7Q=="
         }
       },
       "is_incremental": false,
@@ -222,7 +222,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Admin.Model.SharePoint.ConnectSiteToGroupOptions.html",
-          "hash": "AMQkki4UaS66ckqx4NAKAQ=="
+          "hash": "L/Nc8Wz6lpQeO2ogTdG6CA=="
         }
       },
       "is_incremental": false,
@@ -2982,7 +2982,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.ISite.html",
-          "hash": "71+A5OjN/gjHSrgQUnwbkQ=="
+          "hash": "xu+N6HwWemo1DzaolAXHBw=="
         }
       },
       "is_incremental": false,
