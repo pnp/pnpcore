@@ -85,6 +85,9 @@ All provisioning flows will only return once the site collection is done, for th
 
 ### Basic site collection creation flow
 
+> [!Important]
+> **When creating classic sites** you need to be either a SharePoint Administrator or Global Administrator to use these methods.
+
 The code structure to create a site collection is identical, regardless of which site you're creating or which type of permission you're using:
 
 ```csharp
