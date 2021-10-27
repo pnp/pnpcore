@@ -29,6 +29,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Improved offline test file generation when cloning a PnPContext #591 [jansenbe - Bert Jansen]
 - Added `IsSyntexEnabled` methods on `IWeb` [jansenbe - Bert Jansen]
 - Fixed ListItem datetime handling - time was always send to SharePoint in AM #593 [bilenth - Bilen]
+- Added non async method for working with hub sites in `ISite` [jansenbe - Bert Jansen]
 
 ## [1.4.0]
 

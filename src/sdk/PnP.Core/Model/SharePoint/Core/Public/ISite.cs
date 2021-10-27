@@ -287,14 +287,29 @@ namespace PnP.Core.Model.SharePoint
         public Task<IHubSite> RegisterHubSiteAsync();
 
         /// <summary>
+        /// Registers the current site as a primary hub site
+        /// </summary>
+        public IHubSite RegisterHubSite();
+
+        /// <summary>
         /// Unregisters the current site as a primary hub site
         /// </summary>
         public Task<bool> UnregisterHubSiteAsync();
 
         /// <summary>
+        /// Unregisters the current site as a primary hub site
+        /// </summary>
+        public bool UnregisterHubSite();
+
+        /// <summary>
         /// Associates the current site to a primary hub site
         /// </summary>
         public Task<bool> JoinHubSiteAsync(Guid hubSiteId);
+
+        /// <summary>
+        /// Associates the current site to a primary hub site
+        /// </summary>
+        public bool JoinHubSite(Guid hubSiteId);
 
         /// <summary>
         /// Disassociates current site from primary hub site
@@ -303,11 +318,23 @@ namespace PnP.Core.Model.SharePoint
         public Task<bool> UnJoinHubSiteAsync();
 
         /// <summary>
+        /// Disassociates current site from primary hub site
+        /// </summary>
+        /// <returns></returns>
+        public bool UnJoinHubSite();
+
+        /// <summary>
         /// Gets hubsite data from the current site OR another specified hub site ID
         /// </summary>
-        /// <param name="Id">Hub Site Guid</param>
+        /// <param name="id">Hub Site Guid</param>
         /// <returns></returns>
-        public Task<IHubSite> GetHubSiteData(Guid? Id);
+        public Task<IHubSite> GetHubSiteDataAsync(Guid? id);
 
+        /// <summary>
+        /// Gets hubsite data from the current site OR another specified hub site ID
+        /// </summary>
+        /// <param name="id">Hub Site Guid</param>
+        /// <returns></returns>
+        public IHubSite GetHubSiteData(Guid? id);
     }
 }

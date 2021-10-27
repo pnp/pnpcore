@@ -48,7 +48,7 @@ namespace PnP.Core.Test.SharePoint
 
                 if (!site.IsHubSite)
                 {
-                    var hub = await site.RegisterHubSiteAsync();
+                    var hub = site.RegisterHubSite();
                     Assert.IsNotNull(hub);
                 }
 
@@ -72,7 +72,7 @@ namespace PnP.Core.Test.SharePoint
                     p => p.HubSiteId,
                     p => p.IsHubSite);
 
-                await site.UnregisterHubSiteAsync();
+                site.UnregisterHubSite();
             }
         }
 
@@ -152,7 +152,7 @@ namespace PnP.Core.Test.SharePoint
                     site = await context2.Site.GetAsync(p => p.HubSiteId); // refresh the hubsite id
 
                     // Using another site/context get a hub site ID that is NOT part of the current context.
-                    var hubResult = await context.Site.GetHubSiteData(site.HubSiteId);
+                    var hubResult = context.Site.GetHubSiteData(site.HubSiteId);
 
                     Assert.AreEqual(hubResult.Id, site.HubSiteId);
                     Assert.IsTrue(!string.IsNullOrEmpty(hubResult.Title));
@@ -287,10 +287,10 @@ namespace PnP.Core.Test.SharePoint
 
                     Assert.AreNotEqual(default, site.HubSiteId);
 
-                    var resultJoin = await assocSite.JoinHubSiteAsync(site.HubSiteId);
+                    var resultJoin = assocSite.JoinHubSite(site.HubSiteId);
                     Assert.IsTrue(resultJoin);
 
-                    var resultUnJoin = await assocSite.UnJoinHubSiteAsync();
+                    var resultUnJoin = assocSite.UnJoinHubSite();
                     Assert.IsTrue(resultUnJoin);
                 }
 

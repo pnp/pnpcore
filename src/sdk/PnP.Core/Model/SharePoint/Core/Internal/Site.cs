@@ -210,6 +210,11 @@ namespace PnP.Core.Model.SharePoint
             return hubSite;
         }
 
+        public IHubSite RegisterHubSite()
+        {
+            return RegisterHubSiteAsync().GetAwaiter().GetResult();
+        }
+
         /// <summary>
         /// Unregisters the current site as a primary hub site
         /// </summary>
@@ -231,6 +236,11 @@ namespace PnP.Core.Model.SharePoint
             }
 
             return result;
+        }
+
+        public bool UnregisterHubSite()
+        {
+            return UnregisterHubSiteAsync().GetAwaiter().GetResult();
         }
 
         /// <summary>
@@ -256,6 +266,10 @@ namespace PnP.Core.Model.SharePoint
             return result;
         }
 
+        public bool JoinHubSite(Guid hubSiteId)
+        {
+            return JoinHubSiteAsync(hubSiteId).GetAwaiter().GetResult();
+        }
 
         /// <summary>
         /// Disassociates the current site to a primary hub site
@@ -265,18 +279,22 @@ namespace PnP.Core.Model.SharePoint
             return await JoinHubSiteAsync(Guid.Empty).ConfigureAwait(false);
         }
 
+        public bool UnJoinHubSite()
+        {
+            return UnJoinHubSiteAsync().GetAwaiter().GetResult();
+        }
 
         /// <summary>
         /// Gets hubsite data from the current site OR another specified hub site ID
         /// </summary>
-        /// <param name="Id">Hub Site Guid</param>
+        /// <param name="id">Hub Site Guid</param>
         /// <returns></returns>
-        public async Task<IHubSite> GetHubSiteData(Guid? Id)
+        public async Task<IHubSite> GetHubSiteDataAsync(Guid? id)
         {
             IHubSite hubSite = new HubSite()
             {
                 PnPContext = PnPContext,
-                Id = Id ?? HubSiteId
+                Id = id ?? HubSiteId
             };
 
             var hubResult = await hubSite.GetAsync().ConfigureAwait(false);
@@ -284,6 +302,10 @@ namespace PnP.Core.Model.SharePoint
             return hubResult;
         }
 
+        public IHubSite GetHubSiteData(Guid? id)
+        {
+            return GetHubSiteDataAsync(id).GetAwaiter().GetResult();
+        }
         #endregion
 
         #region Get Changes
