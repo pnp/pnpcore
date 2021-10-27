@@ -24,6 +24,8 @@ var url = await context.GetSharePointAdmin().GetTenantMySiteHostUriAsync();
 
 ## Building a context to read data from SharePoint Tenant Admin
 
+[!INCLUDE [SharePoint Admin required](fragments/sharepoint-admin-required.md)]
+
 The SharePoint Tenant Admin center site is not a site one typically would connect to, but in case you need it your code can use the `GetTenantAdminCenterContextAsync` methods:
 
 ```csharp

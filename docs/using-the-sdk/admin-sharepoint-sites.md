@@ -25,6 +25,8 @@ var siteCollections = await context.GetSiteCollectionManager().GetSiteCollection
 
 ### Getting all site collections with details
 
+[!INCLUDE [SharePoint Admin required](fragments/sharepoint-admin-required.md)]
+
 Whereas above approach works for any user, the amount of information returned for a given site collection is limited. If you want to get site collection list with more details about each site collection then consider using the `GetSiteCollectionsWithDetails` methods. The collected information per site collection is:
 
 - The various id's such as site collection id, root web id and Microsoft Graph site id
@@ -36,9 +38,6 @@ Whereas above approach works for any user, the amount of information returned fo
 - Storage quota information
 - Template details
 
-> [!Important]
-> The `GetSiteCollectionsWithDetails` methods do not work when using delegated permissions while the user is **not** a SharePoint Tenant administrator.
-
 Below sample shows how to use the `GetSiteCollectionsWithDetails` methods:
 
 ```csharp
@@ -47,6 +46,8 @@ var siteCollections = await context.GetSiteCollectionManager().GetSiteCollection
 ```
 
 ## Getting and setting site collection properties
+
+[!INCLUDE [SharePoint Admin required](fragments/sharepoint-admin-required.md)]
 
 A site collection has many properties which can only be set as a SharePoint Administrator. For example you can configure a site collection to not allow Power Automate Flows. Before site collection properties can be set you first need to get the current properties via on of the `GetSiteCollectionProperties` methods, followed by changing the properties you want to change and calling an `Update` method to send the change to SharePoint:
 
@@ -146,6 +147,8 @@ await context.GetSiteCollectionManager().ConnectSiteCollectionToGroupAsync(group
 
 ## Recycling site collections
 
+[!INCLUDE [SharePoint Admin required](fragments/sharepoint-admin-required.md)]
+
 A site collection can be recycled and then later on permanently deleted or restored. Recycling site collection is done using one of the `RecycleSiteCollection` methods:
 
 ```csharp
@@ -157,6 +160,8 @@ await context.GetSiteCollectionManager().RecycleSiteCollectionAsync(new Uri("htt
 > When a group connected site is recycled then also the linked Microsoft 365 group is recycled
 
 ## Enumerate the recycled site collections
+
+[!INCLUDE [SharePoint Admin required](fragments/sharepoint-admin-required.md)]
 
 To get a list of recycled site collections you can use the `GetRecycledSiteCollections` methods:
 
@@ -170,6 +175,8 @@ foreach(var site in recycledSites)
 
 ## Restoring a recycled site collection
 
+[!INCLUDE [SharePoint Admin required](fragments/sharepoint-admin-required.md)]
+
 A recycled site collection can be restored as long it still sits in the site collection recycle bin. To do so use the `RestoreSiteCollection` methods:
 
 ```csharp
@@ -182,6 +189,8 @@ foreach(var site in recycledSites)
 ```
 
 ## Deleting site collections
+
+[!INCLUDE [SharePoint Admin required](fragments/sharepoint-admin-required.md)]
 
 A site collection can also deleted via one of the `DeleteSiteCollection` methods.
 

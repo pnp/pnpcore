@@ -22,6 +22,8 @@ else
 
 ## Getting the SharePoint tenant administrators
 
+[!INCLUDE [SharePoint Admin required](fragments/sharepoint-admin-required.md)]
+
 If you need to list all the SharePoint admins use the `GetTenantAdmins` methods which will return a `ISharePointUser` instance for each admin user.
 
 ```csharp
