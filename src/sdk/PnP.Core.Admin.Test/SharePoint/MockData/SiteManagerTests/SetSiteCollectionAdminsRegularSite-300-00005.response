@@ -1,0 +1,9 @@
+--batchresponse_281a6f7c-beb7-4c87-ab10-6ea25a2025ba
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+HTTP/1.1 200 OK
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+
+{"d":{"SetSiteSecondaryAdministrators":null}}
+--batchresponse_281a6f7c-beb7-4c87-ab10-6ea25a2025ba--

@@ -101,5 +101,25 @@ namespace PnP.Core.Admin.Test.SharePoint
             }
         }
 
+        [TestMethod]
+        public async Task EnumerateSiteWithDetails()
+        {
+            //TestCommon.Instance.Mocking = false;
+            TestCommon.Instance.UseApplicationPermissions = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var site = context.GetSiteCollectionManager().GetSiteCollectionWithDetails(context.Uri);
+
+                Assert.IsTrue(site != null);
+                Assert.IsTrue(site.RootWebId == context.Web.Id);
+                Assert.IsTrue(!string.IsNullOrEmpty(site.Name));
+                Assert.IsTrue(!string.IsNullOrEmpty(site.CreatedBy));
+                Assert.IsTrue(site.TimeCreated > DateTime.MinValue);
+                Assert.IsTrue(site.StorageQuota > 0);
+                Assert.IsTrue(site.StorageUsed > 0);
+                Assert.IsTrue(!string.IsNullOrEmpty(site.TemplateName));
+            }
+        }
+
     }
 }

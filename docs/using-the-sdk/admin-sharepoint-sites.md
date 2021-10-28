@@ -27,7 +27,7 @@ var siteCollections = await context.GetSiteCollectionManager().GetSiteCollection
 
 [!INCLUDE [SharePoint Admin required](fragments/sharepoint-admin-required.md)]
 
-Whereas above approach works for any user, the amount of information returned for a given site collection is limited. If you want to get site collection list with more details about each site collection then consider using the `GetSiteCollectionsWithDetails` methods. The collected information per site collection is:
+Whereas above approach works for any user, the amount of information returned for a given site collection is limited. If you want to get site collection list with more details about each site collection then consider using the `GetSiteCollectionsWithDetails` or `GetSiteCollectionWithDetails` methods. The collected information per site collection is:
 
 - The various id's such as site collection id, root web id and Microsoft Graph site id
 - The site collection url
@@ -43,6 +43,9 @@ Below sample shows how to use the `GetSiteCollectionsWithDetails` methods:
 ```csharp
 // Get a list of site collections with details about each site collection
 var siteCollections = await context.GetSiteCollectionManager().GetSiteCollectionsWithDetailsAsync();
+
+// Get details for one given site collection
+var siteToCheckDetails = await context.GetSiteCollectionManager().GetSiteCollectionWithDetailsAsync(new Uri("https://contoso.sharepoint.com/sites/sitetocheck"));
 ```
 
 ## Getting and setting site collection properties

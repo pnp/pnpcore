@@ -168,42 +168,93 @@ namespace PnP.Core.Admin.Model.SharePoint
 
             await LoadSitesViaTenantAdminHiddenListAsync(context, sitesListAllQuery, (IEnumerable<IListItem> listItems) =>
             {
-                foreach (var listItem in listItems)
-                {
-                    if (listItem["TimeDeleted"] != null)
-                    {
-                        continue;
-                    }
-
-                    Uri url = new Uri(listItem["SiteUrl"].ToString());
-                    Guid siteId = Guid.Parse(listItem["SiteId"].ToString());
-                    Guid webId = Guid.Parse(listItem["RootWebId"].ToString());
-
-                    if (loadedSites.FirstOrDefault(p => p.Id == siteId) == null)
-                    {
-                        loadedSites.Add(new SiteCollectionWithDetails()
-                        {
-                            GraphId = $"{url.DnsSafeHost},{siteId},{webId}",
-                            Url = new Uri(listItem["SiteUrl"].ToString()),
-                            Id = siteId,
-                            RootWebId = webId,
-                            Name = listItem["Title"]?.ToString(),
-                            CreatedBy = listItem["CreatedBy"]?.ToString(),
-                            TimeCreated = listItem["TimeCreated"] != null ? (DateTime)listItem["TimeCreated"] : DateTime.MinValue,
-                            ShareByEmailEnabled = (bool)listItem["ShareByEmailEnabled"],
-                            ShareByLinkEnabled = (bool)listItem["ShareByLinkEnabled"],
-                            SiteOwnerName = listItem["SiteOwnerName"]?.ToString(),
-                            SiteOwnerEmail = listItem["SiteOwnerEmail"]?.ToString(),
-                            StorageQuota = Convert.ToInt64(listItem["StorageQuota"].ToString()),
-                            StorageUsed = Convert.ToInt64(listItem["StorageUsed"].ToString()),
-                            TemplateId = (int)listItem["TemplateId"],
-                            TemplateName = listItem["TemplateName"]?.ToString(),
-                        });
-                    }
-                }
+                ProcessLoadedSitesFromTenantAdminHiddenList(listItems, loadedSites);
             }, true, pageSize).ConfigureAwait(false);
 
             return loadedSites;
+        }
+
+        private static void ProcessLoadedSitesFromTenantAdminHiddenList(IEnumerable<IListItem> listItems, List<ISiteCollectionWithDetails> loadedSites)
+        {
+            foreach (var listItem in listItems)
+            {
+                if (listItem["TimeDeleted"] != null)
+                {
+                    continue;
+                }
+
+                Uri url = new Uri(listItem["SiteUrl"].ToString());
+                Guid siteId = Guid.Parse(listItem["SiteId"].ToString());
+                Guid webId = Guid.Parse(listItem["RootWebId"].ToString());
+
+                if (loadedSites.FirstOrDefault(p => p.Id == siteId) == null)
+                {
+                    loadedSites.Add(new SiteCollectionWithDetails()
+                    {
+                        GraphId = $"{url.DnsSafeHost},{siteId},{webId}",
+                        Url = new Uri(listItem["SiteUrl"].ToString()),
+                        Id = siteId,
+                        RootWebId = webId,
+                        Name = listItem["Title"]?.ToString(),
+                        CreatedBy = listItem["CreatedBy"]?.ToString(),
+                        TimeCreated = listItem["TimeCreated"] != null ? (DateTime)listItem["TimeCreated"] : DateTime.MinValue,
+                        ShareByEmailEnabled = (bool)listItem["ShareByEmailEnabled"],
+                        ShareByLinkEnabled = (bool)listItem["ShareByLinkEnabled"],
+                        SiteOwnerName = listItem["SiteOwnerName"]?.ToString(),
+                        SiteOwnerEmail = listItem["SiteOwnerEmail"]?.ToString(),
+                        StorageQuota = Convert.ToInt64(listItem["StorageQuota"].ToString()),
+                        StorageUsed = Convert.ToInt64(listItem["StorageUsed"].ToString()),
+                        TemplateId = (int)listItem["TemplateId"],
+                        TemplateName = listItem["TemplateName"]?.ToString(),
+                    });
+                }
+            }
+        }
+
+        internal async static Task<ISiteCollectionWithDetails> GetWithDetailsViaTenantAdminHiddenListAsync(PnPContext context, Uri url)
+        {
+            // Removed query part to avoid running into list view threshold errors
+            string sitesListAllQuery = @"<View Scope='RecursiveAll'>
+                                            <ViewFields>
+                                                <FieldRef Name='SiteUrl' />
+                                                <FieldRef Name='Title' />
+                                                <FieldRef Name='SiteId' />
+                                                <FieldRef Name='RootWebId' />
+                                                <FieldRef Name='CreatedBy' />
+                                                <FieldRef Name='TimeCreated' />
+                                                <FieldRef Name='TimeDeleted' />
+                                                <FieldRef Name='ShareByEmailEnabled' />
+                                                <FieldRef Name='ShareByLinkEnabled' />
+                                                <FieldRef Name='SiteOwnerName' />
+                                                <FieldRef Name='SiteOwnerEmail' />
+                                                <FieldRef Name='StorageQuota' />
+                                                <FieldRef Name='StorageUsed' />
+                                                <FieldRef Name='TemplateId' />
+                                                <FieldRef Name='TemplateName' />
+                                            </ViewFields>
+                                            <Query>
+                                                <Where>
+                                                    <Eq>
+                                                        <FieldRef Name='SiteUrl' /><Value Type='Text'>%URL%</Value>
+                                                    </Eq>
+                                                </Where>
+                                            </Query>
+                                            <OrderBy Override='TRUE'><FieldRef Name= 'ID' Ascending= 'FALSE' /></OrderBy>
+                                         </View>";
+
+            List<ISiteCollectionWithDetails> loadedSites = new List<ISiteCollectionWithDetails>();
+
+            await LoadSitesViaTenantAdminHiddenListAsync(context, sitesListAllQuery.Replace("%URL%", url.AbsoluteUri), (IEnumerable<IListItem> listItems) =>
+            {
+                ProcessLoadedSitesFromTenantAdminHiddenList(listItems, loadedSites);
+            }, true, 500).ConfigureAwait(false);
+
+            if (loadedSites.Count > 0)
+            {
+                return loadedSites[0];
+            }
+
+            return null;
         }
 
         internal async static Task<List<IRecycledSiteCollection>> GetRecycledWithDetailsViaTenantAdminHiddenListAsync(PnPContext context, int pageSize = 100)

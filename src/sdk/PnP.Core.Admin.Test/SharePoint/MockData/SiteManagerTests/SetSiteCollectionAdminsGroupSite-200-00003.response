@@ -1,0 +1,9 @@
+--batchresponse_0a740b0a-c4d4-4a18-97b6-f190d41034bf
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+HTTP/1.1 200 OK
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+
+{"d":{"results":[{"__metadata":{"id":"https://bertonline-admin.sharepoint.com/_api/SP.Directory.User4dfe0aa9-349d-4d5c-9a03-30f0a332f004","uri":"https://bertonline-admin.sharepoint.com/_api/SP.Directory.User4dfe0aa9-349d-4d5c-9a03-30f0a332f004","type":"SP.Directory.User"},"displayName":"Bert Jansen (Cloud)","id":"33aca310-a489-4121-b853-663d0327fe08","mail":"bert.jansen@bertonline.onmicrosoft.com","principalName":"bert.jansen@bertonline.onmicrosoft.com"}]}}
+--batchresponse_0a740b0a-c4d4-4a18-97b6-f190d41034bf--
