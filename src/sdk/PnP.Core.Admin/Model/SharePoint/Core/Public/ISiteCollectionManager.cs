@@ -51,6 +51,22 @@ namespace PnP.Core.Admin.Model.SharePoint
         List<ISiteCollectionWithDetails> GetSiteCollectionsWithDetails();
 
         /// <summary>
+        /// Returns details about the requested site. This method
+        /// queries a hidden list in the SharePoint Tenant Admin site and therefore requires the user or application to 
+        /// have the proper permissions
+        /// </summary>
+        /// <returns>Site collection details, null if the passed site was not found</returns>
+        Task<ISiteCollectionWithDetails> GetSiteCollectionWithDetailsAsync(Uri url);
+
+        /// <summary>
+        /// Returns details about the requested site. This method
+        /// queries a hidden list in the SharePoint Tenant Admin site and therefore requires the user or application to 
+        /// have the proper permissions
+        /// </summary>
+        /// <returns>Site collection details, null if the passed site was not found</returns>
+        ISiteCollectionWithDetails GetSiteCollectionWithDetails(Uri url);
+
+        /// <summary>
         /// Returns a list of the recycled site collections in the current tenant including details about the site. This method
         /// queries a hidden list in the SharePoint Tenant Admin site and therefore requires the user or application to 
         /// have the proper permissions
@@ -157,5 +173,41 @@ namespace PnP.Core.Admin.Model.SharePoint
         /// <param name="siteGroupConnectOptions">Information needed to handle the connection of the site collection to a new Microsoft 365 group. </param>
         /// <param name="creationOptions">Options to control the connect to site process</param>
         void ConnectSiteCollectionToGroup(ConnectSiteToGroupOptions siteGroupConnectOptions, CreationOptions creationOptions = null);
+
+        /// <summary>
+        /// Gets the administrators of the site collection
+        /// </summary>
+        /// <param name="site">Url of the site collection to get the administrators for</param>
+        /// <returns>The list of site collection administrators</returns>
+        Task<List<ISiteCollectionAdmin>> GetSiteCollectionAdminsAsync(Uri site);
+
+        /// <summary>
+        /// Gets the administrators of the site collection
+        /// </summary>
+        /// <param name="site">Url of the site collection to get the administrators for</param>
+        /// <returns>The list of site collection administrators</returns>
+        List<ISiteCollectionAdmin> GetSiteCollectionAdmins(Uri site);
+
+        /// <summary>
+        /// Sets the administrators of the site collection by providing the list of login names. The first in the list will be the primary admin, the others will be
+        /// secondary admins. When the site collection is group connected you can also opt to set group owners as they are also SharePoint site collection administrators.
+        /// To stay in sync with with SharePoint Tenant admin center does, when adding a group owner the user is also added as group member.
+        /// </summary>
+        /// <param name="site">Url of the site collection to set the administrators for</param>
+        /// <param name="sharePointAdminLoginNames">List of SharePoint Admins login names (e.g. i:0#.f|membership|anna@contoso.onmicrosoft.com) to set as admin</param>
+        /// <param name="ownerGroupAzureAdUserIds">List of Azure AD user ids to set as admin via adding them to the connected Microsoft 365 group owners</param>
+        /// <returns></returns>
+        Task SetSiteCollectionAdminsAsync(Uri site, List<string> sharePointAdminLoginNames = null, List<Guid> ownerGroupAzureAdUserIds = null);
+
+        /// <summary>
+        /// Sets the administrators of the site collection by providing the list of login names. The first in the list will be the primary admin, the others will be
+        /// secondary admins. When the site collection is group connected you can also opt to set group owners as they are also SharePoint site collection administrators.
+        /// To stay in sync with with SharePoint Tenant admin center does, when adding a group owner the user is also added as group member.
+        /// </summary>
+        /// <param name="site">Url of the site collection to set the administrators for</param>
+        /// <param name="sharePointAdminLoginNames">List of SharePoint Admins login names (e.g. i:0#.f|membership|anna@contoso.onmicrosoft.com) to set as admin</param>
+        /// <param name="ownerGroupAzureAdUserIds">List of Azure AD user ids to set as admin via adding them to the connected Microsoft 365 group owners</param>
+        /// <returns></returns>
+        void SetSiteCollectionAdmins(Uri site, List<string> sharePointAdminLoginNames = null, List<Guid> ownerGroupAzureAdUserIds = null);
     }
 }

@@ -1,0 +1,9 @@
+--batchresponse_5b256569-92e0-42bc-89b3-5bec89c7ddfd
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+HTTP/1.1 200 OK
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+
+{"d":{"GetSiteSecondaryAdministrators":{"__metadata":{"type":"Collection(Microsoft.Online.SharePoint.TenantAdministration.SecondaryAdministratorsInfo)"},"results":[{"email":"","loginName":"c:0(.s|true","name":"Everyone","userPrincipalName":null}]}}}
+--batchresponse_5b256569-92e0-42bc-89b3-5bec89c7ddfd--

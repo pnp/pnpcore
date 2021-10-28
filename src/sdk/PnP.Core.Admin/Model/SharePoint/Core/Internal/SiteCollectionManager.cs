@@ -34,6 +34,16 @@ namespace PnP.Core.Admin.Model.SharePoint
             return GetSiteCollectionsWithDetailsAsync().GetAwaiter().GetResult();
         }
 
+        public async Task<ISiteCollectionWithDetails> GetSiteCollectionWithDetailsAsync(Uri url)
+        {
+            return await SiteCollectionEnumerator.GetWithDetailsViaTenantAdminHiddenListAsync(context, url).ConfigureAwait(false);
+        }
+
+        public ISiteCollectionWithDetails GetSiteCollectionWithDetails(Uri url)
+        {
+            return GetSiteCollectionWithDetailsAsync(url).GetAwaiter().GetResult();
+        }
+
         public async Task<List<IRecycledSiteCollection>> GetRecycledSiteCollectionsAsync()
         {
             return await SiteCollectionEnumerator.GetRecycledWithDetailsViaTenantAdminHiddenListAsync(context).ConfigureAwait(false);
@@ -132,6 +142,36 @@ namespace PnP.Core.Admin.Model.SharePoint
         public void ConnectSiteCollectionToGroup(ConnectSiteToGroupOptions siteGroupConnectOptions, CreationOptions creationOptions = null)
         {
             ConnectSiteCollectionToGroupAsync(siteGroupConnectOptions, creationOptions).GetAwaiter().GetResult();
+        }
+
+        public async Task<List<ISiteCollectionAdmin>> GetSiteCollectionAdminsAsync(Uri site)
+        {
+            if (site == null)
+            {
+                throw new ArgumentNullException(nameof(site));
+            }
+
+            return await SiteCollectionManagement.GetSiteCollectionAdminsAsync(context, site).ConfigureAwait(true);
+        }
+
+        public List<ISiteCollectionAdmin> GetSiteCollectionAdmins(Uri site)
+        {
+            return GetSiteCollectionAdminsAsync(site).GetAwaiter().GetResult();
+        }
+
+        public async Task SetSiteCollectionAdminsAsync(Uri site, List<string> sharePointAdminLoginNames = null, List<Guid> ownerGroupAzureAdUserIds = null)
+        {
+            if (site == null)
+            {
+                throw new ArgumentNullException(nameof(site));
+            }
+
+            await SiteCollectionManagement.SetSiteCollectionAdminsAsync(context, site, sharePointAdminLoginNames, ownerGroupAzureAdUserIds).ConfigureAwait(true);
+        }
+
+        public void SetSiteCollectionAdmins(Uri site, List<string> sharePointAdminLoginNames = null, List<Guid> ownerGroupAzureAdUserIds = null)
+        {
+            SetSiteCollectionAdminsAsync(site, sharePointAdminLoginNames, ownerGroupAzureAdUserIds).GetAwaiter().GetResult();
         }
     }
 }

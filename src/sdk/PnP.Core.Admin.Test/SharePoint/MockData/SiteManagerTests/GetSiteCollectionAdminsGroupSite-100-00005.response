@@ -1,0 +1,9 @@
+--batchresponse_220d2e89-4ce3-4de2-a012-9f7d37511abf
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+HTTP/1.1 200 OK
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+
+{"d":{"GetSiteSecondaryAdministrators":{"__metadata":{"type":"Collection(Microsoft.Online.SharePoint.TenantAdministration.SecondaryAdministratorsInfo)"},"results":[{"email":"bert.jansen@bertonline.onmicrosoft.com","loginName":"i:0#.f|membership|bert.jansen@bertonline.onmicrosoft.com","name":"Bert Jansen (Cloud)","userPrincipalName":"bert.jansen@bertonline.onmicrosoft.com"}]}}}
+--batchresponse_220d2e89-4ce3-4de2-a012-9f7d37511abf--
