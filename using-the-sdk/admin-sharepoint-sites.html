@@ -118,7 +118,7 @@ var siteCollections = await context.GetSiteCollectionManager().GetSiteCollection
 <p>You need to be either a SharePoint Administrator or Global Administrator to use these methods.</p>
 </div>
 
-<p>Whereas above approach works for any user, the amount of information returned for a given site collection is limited. If you want to get site collection list with more details about each site collection then consider using the <code>GetSiteCollectionsWithDetails</code> methods. The collected information per site collection is:</p>
+<p>Whereas above approach works for any user, the amount of information returned for a given site collection is limited. If you want to get site collection list with more details about each site collection then consider using the <code>GetSiteCollectionsWithDetails</code> or <code>GetSiteCollectionWithDetails</code> methods. The collected information per site collection is:</p>
 <ul>
 <li>The various id's such as site collection id, root web id and Microsoft Graph site id</li>
 <li>The site collection url</li>
@@ -132,6 +132,9 @@ var siteCollections = await context.GetSiteCollectionManager().GetSiteCollection
 <p>Below sample shows how to use the <code>GetSiteCollectionsWithDetails</code> methods:</p>
 <pre><code class="lang-csharp">// Get a list of site collections with details about each site collection
 var siteCollections = await context.GetSiteCollectionManager().GetSiteCollectionsWithDetailsAsync();
+
+// Get details for one given site collection
+var siteToCheckDetails = await context.GetSiteCollectionManager().GetSiteCollectionWithDetailsAsync(new Uri(&quot;https://contoso.sharepoint.com/sites/sitetocheck&quot;));
 </code></pre>
 <h2 id="getting-and-setting-site-collection-properties">Getting and setting site collection properties</h2>
 <div class="IMPORTANT">

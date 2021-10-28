@@ -126,6 +126,51 @@ foreach(var admin in admins)
     // Do something with the admin user
 }
 </code></pre>
+<h2 id="getting-the-administrators-of-a-site-collection">Getting the administrators of a site collection</h2>
+<div class="IMPORTANT">
+<h5>Important</h5>
+<p>You need to be either a SharePoint Administrator or Global Administrator to use these methods.</p>
+</div>
+
+<p>To get the administrators of a given site collection use the <code>GetSiteCollectionAdmins</code> methods. You do not have to have access to the site collection to enumerate it's administrators as these methods depend on tenant APIs that only work for SharePoint administrators. When getting the administrators you'll see a difference between Microsoft 365 group connected site collections and the other site collections:</p>
+<ul>
+<li>For Microsoft 365 group connected site collections the Microsoft 365 group owners are included, they have the <code>IsMicrosoft365GroupOwner</code> property set to <code>true</code>. These users don't have the <code>LoginName</code> property set, instead the <code>Id</code> property is set</li>
+<li>For the other site collections the returned users all have the <code>LoginName</code> property set, the <code>Id</code> property is not set. Also one of the admins is marked as <code>IsSecondaryAdmin == false</code>, that one administrator is the primary site collection administrator</li>
+</ul>
+<pre><code class="lang-csharp">// Get the site collection admins
+var admins = await context.GetSharePointAdmin().GetSiteCollectionAdminsAsync(new Uri(&quot;https://contoso.sharepoint.com/sites/somesite&quot;));
+
+foreach(var admin in admins)
+{
+    // Do something with the site collection admin user
+}
+</code></pre>
+<h2 id="setting-the-administrators-of-a-site-collection">Setting the administrators of a site collection</h2>
+<div class="IMPORTANT">
+<h5>Important</h5>
+<p>You need to be either a SharePoint Administrator or Global Administrator to use these methods.</p>
+</div>
+
+<p>To set the administrators of a given site collection use the <code>SetSiteCollectionAdmins</code> methods. You do not have to have access to the site collection to set it's administrators as these methods depend on tenant APIs that only work for SharePoint administrators. When setting the administrators you'll see a difference between Microsoft 365 group connected site collections and the other site collections:</p>
+<ul>
+<li>For the other site collections you provide a list of login names (e.g. <code>i:0#.f|membership|anna@contoso.onmicrosoft.com</code> or <code>c:0-.f|rolemanager|spo-grid-all-users/6492ece7-7f5d-4499-8130-50e761e25bd9</code>). The first one if the list will be set as the primary site collection administrator, the others will be set as secondary site collection administrators</li>
+<li>For Microsoft 365 group connected site collections you do have the same option as for the other site collections with the difference that the primary site collection administrator of group connected sites is never updated. Next to that you can also specify the Azure AD user id's of users you want to grant site collection admin permissions by adding them to the Microsoft 365 group's owners. To stay in sync with with SharePoint Tenant admin center does, when adding a Microsoft 365 group owner the user is also added as a Microsoft 365 group member.</li>
+</ul>
+<pre><code class="lang-csharp">// Set the site collection admins for a regular site
+List&lt;string&gt; newAdmins = new List&lt;string&gt;();
+newAdmins.Add(&quot;i:0#.f|membership|anna@contoso.onmicrosoft.com&quot;);
+newAdmins.Add(&quot;c:0-.f|rolemanager|spo-grid-all-users/6492ece7-7f5d-4499-8130-50e761e25bd9&quot;);
+context.GetSiteCollectionManager().SetSiteCollectionAdmins(new Uri(&quot;https://contoso.sharepoint.com/sites/somesite&quot;), newAdmins);
+
+// Set the site collection admins for a Microsoft 365 group connected site
+List&lt;Guid&gt; newGroupOwners = new List&lt;Guid&gt;();
+newGroupOwners.Add(Guid.Parse(&quot;3d25e9c4-b20f-443b-ab4d-8ab0668f72ee&quot;));
+
+List&lt;string&gt; newAdmins = new List&lt;string&gt;();
+newAdmins.Add(&quot;c:0-.f|rolemanager|spo-grid-all-users/6492ece7-7f5d-4499-8130-50e761e25bd9&quot;);
+
+context.GetSiteCollectionManager().SetSiteCollectionAdmins(new Uri(&quot;https://contoso.sharepoint.com/sites/somesite&quot;), newAdmins, newGroupOwners);
+</code></pre>
 </article>
           </div>
           <div class="hidden-sm col-md-2" role="complementary">
