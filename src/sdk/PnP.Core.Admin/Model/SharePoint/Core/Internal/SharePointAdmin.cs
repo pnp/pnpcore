@@ -1,8 +1,10 @@
-﻿using PnP.Core.Model;
+﻿using PnP.Core.Admin.Services.Core.CSOM.Requests.Tenant;
+using PnP.Core.Model;
 using PnP.Core.Model.Security;
 using PnP.Core.Model.SharePoint;
 using PnP.Core.QueryModel;
 using PnP.Core.Services;
+using PnP.Core.Services.Core.CSOM.Requests;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -192,6 +194,27 @@ namespace PnP.Core.Admin.Model.SharePoint
         public bool IsCurrentUserTenantAdmin()
         {
             return IsCurrentUserTenantAdminAsync().GetAwaiter().GetResult();
+        }
+
+        public async Task<ITenantProperties> GetTenantPropertiesAsync()
+        {
+            using (var tenantAdminContext = await context.GetSharePointAdmin().GetTenantAdminCenterContextAsync().ConfigureAwait(false))
+            {
+                List<IRequest<object>> csomRequests = new List<IRequest<object>>
+                {
+                    new GetTenantPropertiesRequest()
+                };
+
+                var result = await (tenantAdminContext.Web as Web).RawRequestAsync(new ApiCall(csomRequests), HttpMethod.Post).ConfigureAwait(false);
+                (result.ApiCall.CSOMRequests[0].Result as IDataModelWithContext).PnPContext = tenantAdminContext;
+
+                return result.ApiCall.CSOMRequests[0].Result as ITenantProperties;
+            }
+        }
+
+        public ITenantProperties GetTenantProperties()
+        {
+            return GetTenantPropertiesAsync().GetAwaiter().GetResult();
         }
     }
 }

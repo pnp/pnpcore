@@ -1,6 +1,7 @@
 ﻿using PnP.Core.Model;
 using PnP.Core.Services;
 using System;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace PnP.Core.Admin.Model.SharePoint
@@ -9,6 +10,8 @@ namespace PnP.Core.Admin.Model.SharePoint
     internal class SiteCollectionProperties : TransientObject, ISiteCollectionProperties, IDataModelWithContext
     {
         #region Properties
+        [JsonPropertyName("_ObjectIdentity_")]
+        public string ObjectIdentity { get; set; }
 
         public bool AllowDownloadingNonWebViewableFiles { get => GetValue<bool>(); set => SetValue(value); }
 

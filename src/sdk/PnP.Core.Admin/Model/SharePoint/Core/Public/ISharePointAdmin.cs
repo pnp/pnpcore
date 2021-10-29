@@ -82,5 +82,17 @@ namespace PnP.Core.Admin.Model.SharePoint
         /// </summary>
         /// <returns>True if the user is a SharePoint Online tenant admin, false otherwise</returns>
         bool IsCurrentUserTenantAdmin();
+
+        /// <summary>
+        /// Gets the properties of this tenant
+        /// </summary>
+        /// <returns>Properties of the tenant</returns>
+        Task<ITenantProperties> GetTenantPropertiesAsync();
+
+        /// <summary>
+        /// Gets the properties of this tenant
+        /// </summary>
+        /// <returns>Properties of the tenant</returns>
+        ITenantProperties GetTenantProperties();
     }
 }
