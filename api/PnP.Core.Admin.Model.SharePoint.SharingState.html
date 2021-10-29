@@ -5,9 +5,11 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Discovery | PnP Core SDK </title>
+    <title>Enum SharingState
+   | PnP Core SDK </title>
     <meta name="viewport" content="width=device-width">
-    <meta name="title" content="Discovery | PnP Core SDK ">
+    <meta name="title" content="Enum SharingState
+   | PnP Core SDK ">
     <meta name="generator" content="docfx 2.56.5.0">
     <meta name="description" content="The PnP Core SDK is a modern .NET SDK designed to work for Microsoft 365. It provides a unified object model for working with SharePoint Online and Teams which is agnostic to the underlying API's being called.">
     <link rel="shortcut icon" href="https://c.s-microsoft.com/favicon.ico?v2">
@@ -76,56 +78,51 @@
         </div>
         <div class="article row grid-right">
           <div class="col-md-10">
-            <article class="content wrap" id="_content" data-uid="">
+            <article class="content wrap" id="_content" data-uid="PnP.Core.Admin.Model.SharePoint.SharingState">
                   <div class="contribution-panel mobile-hide pull-right">
-                      <a href="https://github.com/pnp/pnpcore/blob/dev/docs/using-the-sdk/admin-sharepoint-discovery.md/#L1" title="Improve this Doc" class="improve-doc-lg"><i class="glyphicon glyphicon-pencil"></i></a>
+                      <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Admin/Model/SharePoint/Core/Public/Enums/SharingState.cs/#L6" title="View Source" class="view-source-lg"><i class="fa fa-code"></i></a>
+                      <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Admin_Model_SharePoint_SharingState.md&amp;value=---%0Auid%3A%20PnP.Core.Admin.Model.SharePoint.SharingState%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc" class="improve-doc-lg"><i class="glyphicon glyphicon-pencil"></i></a>
                   </div>
-                    <h1 id="discovery">Discovery</h1>
-
-<p>The Core SDK Admin library provides support for discovering relevant information of the SharePoint Online tenant that's being used.</p>
-<h2 id="creating-context">Creating Context</h2>
-<p>In this article, you'll see a lot of <code>context</code> use: in this case this is a <code>PnPContext</code> which was obtained via the <code>PnPContextFactory</code> as explained in the <a href="readme.html">overview article</a> and show below:</p>
-<pre><code class="lang-csharp">using (var context = await pnpContextFactory.CreateAsync(&quot;SiteToWorkWith&quot;))
-{
-    // See next chapter on how to use the PnPContext for doing SharePoint admin operations
-}
-</code></pre>
-<h2 id="pnpcoreadmin-dependency">PnP.Core.Admin dependency</h2>
-<p>The functionality shown in this article depends on the <a href="https://www.nuget.org/packages/PnP.Core.Admin">PnP.Core.Admin nuget package</a>. Once the PnP.Core.Admin nuget package has been installed you can get to the SharePoint admin features via using the <code>GetSharePointAdmin</code>, <code>GetAppManager</code> and <code>GetSiteCollectionManager</code> extension methods:</p>
-<pre><code class="lang-csharp">using (var context = await pnpContextFactory.CreateAsync(&quot;SiteToWorkWith&quot;))
-{
-    // Use the GetSharePointAdmin extension method on any PnPContext 
-    // to tap into the SharePoint admin features
-    var url = context.GetSharePointAdmin().GetTenantAdminCenterUri();
-}
-</code></pre>
-<h2 id="getting-the-key-tenant-urls">Getting the key tenant urls</h2>
-<p>A SharePoint Online tenant does have a portal host, a host for the OneDrive for Business sites, a tenant admin center site and more. Using the <code>GetTenant...UriAsync</code> methods your code can easily get these urls:</p>
-<pre><code class="lang-csharp">// Returns the SharePoint tenant admin center url (e.g. https://contoso-admin.sharepoint.com)
-var url = await context.GetSharePointAdmin().GetTenantAdminCenterUriAsync();
-
-// Returns the SharePoint tenant portal url (e.g. https://contoso.sharepoint.com)
-var url = await context.GetSharePointAdmin().GetTenantPortalUriAsync();
-
-// Returns the SharePoint tenant my site host url (e.g. https://contoso-my.sharepoint.com)
-var url = await context.GetSharePointAdmin().GetTenantMySiteHostUriAsync();
-</code></pre>
-<div class="NOTE">
-<h5>Note</h5>
-<p>Support for discovering vanity urls is planned for later. When you're tenant is a multi-geo tenant then checkout the <a href="admin-m365-multigeo.html">Microsoft 365 multi geo admin article</a>.</p>
+                      <h1 id="PnP_Core_Admin_Model_SharePoint_SharingState" data-uid="PnP.Core.Admin.Model.SharePoint.SharingState">Enum SharingState
+  </h1>
+  <div class="markdown level0 summary"><p>Contains the possible values for the default sharing state</p>
 </div>
-<h2 id="building-a-context-to-read-data-from-sharepoint-tenant-admin">Building a context to read data from SharePoint Tenant Admin</h2>
-<div class="IMPORTANT">
-<h5>Important</h5>
-<p>You need to be either a SharePoint Administrator or Global Administrator to use these methods.</p>
-</div>
+  <div class="markdown level0 conceptual"></div>
 
-<p>The SharePoint Tenant Admin center site is not a site one typically would connect to, but in case you need it your code can use the <code>GetTenantAdminCenterContextAsync</code> methods:</p>
-<pre><code class="lang-csharp">using (var tenantContext = await context.GetSharePointAdmin().GetTenantAdminCenterContextAsync())
-{
-    // do work with the SharePoint Tenant Admin Center site
-}
-</code></pre>
+  
+  
+  
+  <h6><strong>Namespace</strong>: <a class="xref" href="PnP.Core.Admin.Model.SharePoint.html">PnP.Core.Admin.Model.SharePoint</a></h6>
+  <h6><strong>Assembly</strong>: PnP.Core.Admin.dll</h6>
+  
+  <h5 id="PnP_Core_Admin_Model_SharePoint_SharingState_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public enum SharingState : int</code></pre>
+  </div>
+
+  
+  
+  
+  
+      <h4 id="PnP_Core_Admin_Model_SharePoint_SharingState_Off"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_SharingState_Off" class="expander" data-toggle="collapse">Off</a></h4>
+  
+      <div id="collapsible-PnP_Core_Admin_Model_SharePoint_SharingState_Off" class="collapse in">
+        <p><p>Implies that Tenant Admin is forcing Sharing Property State to behave as if they are set to False</p>
+</p>
+      </div>
+      <h4 id="PnP_Core_Admin_Model_SharePoint_SharingState_On"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_SharingState_On" class="expander" data-toggle="collapse">On</a></h4>
+  
+      <div id="collapsible-PnP_Core_Admin_Model_SharePoint_SharingState_On" class="collapse in">
+        <p><p>Implies that Tenant Admin is forcing Sharing Property State to behave as if they are set to True</p>
+</p>
+      </div>
+      <h4 id="PnP_Core_Admin_Model_SharePoint_SharingState_Unspecified"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_SharingState_Unspecified" class="expander" data-toggle="collapse">Unspecified</a></h4>
+  
+      <div id="collapsible-PnP_Core_Admin_Model_SharePoint_SharingState_Unspecified" class="collapse in">
+        <p><p>Implies that the Tenant Admin is choosing to let Site and Web Owners specify the behavior for Sharing Property State</p>
+</p>
+      </div>
+  
 </article>
           </div>
           <div class="hidden-sm col-md-2" role="complementary">
