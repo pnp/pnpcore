@@ -1,4 +1,10 @@
-# PnP Core SDK
+
+<h1 align="center">
+  <a href="https://pnp.github.io/pnpcore">
+    <img alt="PnP Core SDK" src="./docs/pnp-core-sdk-red.svg" height="100">
+  </a>
+  <br>PnP Core SDK<br>
+</h1>
 
 The PnP Core SDK is an SDK designed to work for Microsoft 365. It provides a unified object model for working with SharePoint Online and Teams which is agnostic to the underlying APIs being called. The initial goal for this library will be to cover the needs of developers working with either SharePoint Online or Teams, but we're also open to extend this library further towards other Microsoft 365 workloads if there's community demand for doing so.
 
@@ -8,11 +14,11 @@ The PnP Core SDK is an SDK designed to work for Microsoft 365. It provides a uni
 
 Nuget package |  Downloads | Stable | Preview 
 --------------|------------|--------|--------
-[PnP.Core](https://pnp.github.io/pnpcore/using-the-sdk/readme.html) | ![Downloads](https://img.shields.io/nuget/dt/pnp.core.svg) | [![PnP.Core Nuget package](https://img.shields.io/nuget/v/PnP.Core.svg)](https://www.nuget.org/packages/PnP.Core/) | [![PnP.Core Nuget package](https://img.shields.io/nuget/vpre/PnP.Core.svg)](https://www.nuget.org/packages/PnP.Core/)
-[PnP.Core.Auth](https://pnp.github.io/pnpcore/using-the-sdk/configuring%20authentication.html) | ![Downloads](https://img.shields.io/nuget/dt/pnp.core.auth.svg) |[![PnP.Core.Auth Nuget package](https://img.shields.io/nuget/v/PnP.Core.Auth.svg)](https://www.nuget.org/packages/PnP.Core.Auth/) | [![PnP.Core.Auth Nuget package](https://img.shields.io/nuget/vpre/PnP.Core.Auth.svg)](https://www.nuget.org/packages/PnP.Core.Auth/)
-[PnP.Core.Admin](https://pnp.github.io/pnpcore/using-the-sdk/admin-sharepoint-tenant.html) | ![Downloads](https://img.shields.io/nuget/dt/pnp.core.admin.svg) | soon | [![PnP.Core.Admin Nuget package](https://img.shields.io/nuget/vpre/PnP.Core.Admin.svg)](https://www.nuget.org/packages/PnP.Core.Admin/)
-[PnP.Core.Transformation](https://pnp.github.io/pnpcore/using-the-sdk/transformation-getting-started.html) | ![Downloads](https://img.shields.io/nuget/dt/pnp.core.transformation.svg) | soon | [![PnP.Core.Transformation Nuget package](https://img.shields.io/nuget/vpre/PnP.Core.Transformation.svg)](https://www.nuget.org/packages/PnP.Core.Transformation/)
-[PnP.Core.Transformation.SharePoint](https://pnp.github.io/pnpcore/using-the-sdk/transformation-getting-started.html) | ![Downloads](https://img.shields.io/nuget/dt/pnp.core.transformation.sharepoint.svg) | soon | [![PnP.Core.Transformation Nuget package](https://img.shields.io/nuget/vpre/PnP.Core.Transformation.sharepoint.svg)](https://www.nuget.org/packages/PnP.Core.Transformation.sharepoint/)
+[PnP.Core](https://pnp.github.io/pnpcore/using-the-sdk/readme.html) | [![Downloads](https://img.shields.io/nuget/dt/pnp.core.svg)](https://www.nuget.org/packages/PnP.Core/) | [![PnP.Core Nuget package](https://img.shields.io/nuget/v/PnP.Core.svg)](https://www.nuget.org/packages/PnP.Core/) | [![PnP.Core Nuget package](https://img.shields.io/nuget/vpre/PnP.Core.svg)](https://www.nuget.org/packages/PnP.Core/)
+[PnP.Core.Auth](https://pnp.github.io/pnpcore/using-the-sdk/configuring%20authentication.html) | [![Downloads](https://img.shields.io/nuget/dt/pnp.core.auth.svg)](https://www.nuget.org/packages/PnP.Core.Auth/) |[![PnP.Core.Auth Nuget package](https://img.shields.io/nuget/v/PnP.Core.Auth.svg)](https://www.nuget.org/packages/PnP.Core.Auth/) | [![PnP.Core.Auth Nuget package](https://img.shields.io/nuget/vpre/PnP.Core.Auth.svg)](https://www.nuget.org/packages/PnP.Core.Auth/)
+[PnP.Core.Admin](https://pnp.github.io/pnpcore/using-the-sdk/admin-sharepoint-tenant.html) | [![Downloads](https://img.shields.io/nuget/dt/pnp.core.admin.svg)](https://www.nuget.org/packages/PnP.Core.Admin/) | soon | [![PnP.Core.Admin Nuget package](https://img.shields.io/nuget/vpre/PnP.Core.Admin.svg)](https://www.nuget.org/packages/PnP.Core.Admin/)
+[PnP.Core.Transformation](https://pnp.github.io/pnpcore/using-the-sdk/transformation-getting-started.html) | [![Downloads](https://img.shields.io/nuget/dt/pnp.core.transformation.svg)](https://www.nuget.org/packages/PnP.Core.Transformation/) | soon | [![PnP.Core.Transformation Nuget package](https://img.shields.io/nuget/vpre/PnP.Core.Transformation.svg)](https://www.nuget.org/packages/PnP.Core.Transformation/)
+[PnP.Core.Transformation.SharePoint](https://pnp.github.io/pnpcore/using-the-sdk/transformation-getting-started.html) | [![Downloads](https://img.shields.io/nuget/dt/pnp.core.transformation.sharepoint.svg)](https://www.nuget.org/packages/PnP.Core.Transformation.sharepoint) | soon | [![PnP.Core.Transformation Nuget package](https://img.shields.io/nuget/vpre/PnP.Core.Transformation.sharepoint.svg)](https://www.nuget.org/packages/PnP.Core.Transformation.sharepoint/)
 ## Getting started 🚀
 
 For more details on how to get started with the PnP.Core SDK checkout our [documentation](https://pnp.github.io/pnpcore/using-the-sdk/readme.html).
