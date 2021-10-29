@@ -8,11 +8,11 @@ The PnP Core SDK is an SDK designed to work for Microsoft 365. It provides a uni
 
 Nuget package | Description | Downloads | Stable | Preview 
 --------------|-------------|-----------|----------------|------------------------------------
-PnP.Core | The PnP Core SDK | [![Downloads](https://img.shields.io/nuget/dt/pnp.core.svg)](https://www.nuget.org/packages/pnp.core) | [![PnP.Core Nuget package](https://img.shields.io/nuget/v/PnP.Core.svg)](https://www.nuget.org/packages/PnP.Core/) | [![PnP.Core Nuget package](https://img.shields.io/nuget/vpre/PnP.Core.svg)](https://www.nuget.org/packages/PnP.Core/)
-PnP.Core.Auth | The authentication provider for the PnP Core SDK | [![Downloads](https://img.shields.io/nuget/dt/pnp.core.auth.svg)](https://www.nuget.org/packages/pnp.core.auth) |[![PnP.Core.Auth Nuget package](https://img.shields.io/nuget/v/PnP.Core.Auth.svg)](https://www.nuget.org/packages/PnP.Core.Auth/) | [![PnP.Core.Auth Nuget package](https://img.shields.io/nuget/vpre/PnP.Core.Auth.svg)](https://www.nuget.org/packages/PnP.Core.Auth/)
-PnP.Core.Admin | Microsoft 365 admin features for the PnP Core SDK | - | soon | [![PnP.Core.Admin Nuget package](https://img.shields.io/nuget/vpre/PnP.Core.Admin.svg)](https://www.nuget.org/packages/PnP.Core.Admin/)
-PnP.Core.Transformation | PnP Transformation Framework | - | soon | [![PnP.Core.Transformation Nuget package](https://img.shields.io/nuget/vpre/PnP.Core.Transformation.svg)](https://www.nuget.org/packages/PnP.Core.Transformation/)
-
+PnP.Core | The PnP Core SDK | ![Downloads](https://img.shields.io/nuget/dt/pnp.core.svg) | [![PnP.Core Nuget package](https://img.shields.io/nuget/v/PnP.Core.svg)](https://www.nuget.org/packages/PnP.Core/) | [![PnP.Core Nuget package](https://img.shields.io/nuget/vpre/PnP.Core.svg)](https://www.nuget.org/packages/PnP.Core/)
+PnP.Core.Auth | The authentication provider for the PnP Core SDK | ![Downloads](https://img.shields.io/nuget/dt/pnp.core.auth.svg) |[![PnP.Core.Auth Nuget package](https://img.shields.io/nuget/v/PnP.Core.Auth.svg)](https://www.nuget.org/packages/PnP.Core.Auth/) | [![PnP.Core.Auth Nuget package](https://img.shields.io/nuget/vpre/PnP.Core.Auth.svg)](https://www.nuget.org/packages/PnP.Core.Auth/)
+PnP.Core.Admin | Microsoft 365 admin features for the PnP Core SDK | ![Downloads](https://img.shields.io/nuget/dt/pnp.core.admin.svg) | soon | [![PnP.Core.Admin Nuget package](https://img.shields.io/nuget/vpre/PnP.Core.Admin.svg)](https://www.nuget.org/packages/PnP.Core.Admin/)
+PnP.Core.Transformation | PnP Transformation Framework | ![Downloads](https://img.shields.io/nuget/dt/pnp.core.transformation.svg) | soon | [![PnP.Core.Transformation Nuget package](https://img.shields.io/nuget/vpre/PnP.Core.Transformation.svg)](https://www.nuget.org/packages/PnP.Core.Transformation/)
+PnP.Core.Transformation.SharePoint | Transformation from SharePoint | ![Downloads](https://img.shields.io/nuget/dt/pnp.core.transformation.sharepoint.svg) | soon | [![PnP.Core.Transformation Nuget package](https://img.shields.io/nuget/vpre/PnP.Core.Transformation.sharepoint.svg)](https://www.nuget.org/packages/PnP.Core.Transformation.sharepoint/)
 ## Getting started 🚀
 
 For more details on how to get started with the PnP.Core SDK checkout our [documentation](https://pnp.github.io/pnpcore/using-the-sdk/readme.html).
