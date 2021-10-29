@@ -3,6 +3,7 @@ using PnP.Core.Model;
 using PnP.Core.QueryModel;
 using PnP.Core.Test.Utilities;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -87,25 +88,29 @@ namespace PnP.Core.Test.QueryModel
         }
 
         [TestMethod]
-        public void TestQueryProperties()
+        public async Task TestQueryProperties()
         {
-            Assert.ThrowsException<InvalidOperationException>(() =>
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                ISupportQuery<Model.SharePoint.IList> bla = null;
-                bla.QueryProperties();
-            });
+                Assert.ThrowsException<InvalidOperationException>(() =>
+                {
+                    ISupportQuery<Model.SharePoint.IList> bla = null;
+                    bla.QueryProperties();
+                });
 
-            Assert.ThrowsException<ArgumentNullException>(() =>
-            {
-                IQueryable<Model.SharePoint.IList> bla = null;
-                bla.QueryProperties();
-            });
+                Assert.ThrowsException<ArgumentNullException>(() =>
+                {
+                    IQueryable<Model.SharePoint.IList> bla = null;
+                    bla.QueryProperties();
+                });
 
-            Assert.ThrowsException<ArgumentNullException>(() =>
-            {
-                IQueryable<Model.SharePoint.IList> bla = null;
-                bla.QueryProperties(null);
-            });
+                Assert.ThrowsException<ArgumentNullException>(() =>
+                {
+                    IQueryable<Model.SharePoint.IList> bla = context.Web.Lists;
+                    bla.QueryProperties(null);
+                });
+            }
         }
 
 
@@ -140,10 +145,22 @@ namespace PnP.Core.Test.QueryModel
 
                 await Assert.ThrowsExceptionAsync<ArgumentNullException>(async () =>
                 {
+                    IQueryable<Model.SharePoint.IList> bla = null;
+                    await bla.FirstAsync(null);
+                });
+
+                await Assert.ThrowsExceptionAsync<ArgumentNullException>(async () =>
+                {
                     IQueryable<Model.SharePoint.IList> bla = context.Web.Lists;
                     await bla.FirstAsync(null);
                 });
-                
+
+                await Assert.ThrowsExceptionAsync<ArgumentNullException>(async () =>
+                {
+                    IQueryable<Model.SharePoint.IList> bla = null;
+                    await bla.FirstOrDefaultAsync(null);
+                });
+
                 await Assert.ThrowsExceptionAsync<ArgumentNullException>(async () =>
                 {
                     IQueryable<Model.SharePoint.IList> bla = context.Web.Lists;
@@ -196,5 +213,54 @@ namespace PnP.Core.Test.QueryModel
             }
         }
 
+        [TestMethod]
+        public async Task TestForEachAsync()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                await context.Web.Lists.ForEachAsync(async x => 
+                {
+                    Assert.IsTrue(!string.IsNullOrEmpty(x.Title));
+                });
+
+                await Assert.ThrowsExceptionAsync<ArgumentNullException>(async () =>
+                {
+                    IQueryable<Model.SharePoint.IList> bla = null;
+                    await bla.ForEachAsync(async x => { });
+                });
+
+                await Assert.ThrowsExceptionAsync<ArgumentNullException>(async () =>
+                {
+                    await context.Web.Lists.ForEachAsync(null);
+                });
+            }
+        }
+
+        [TestMethod]
+        public async Task TestAsAsyncEnmerable()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var b = context.Web.Lists.AsAsyncEnumerable();
+
+                await Assert.ThrowsExceptionAsync<ArgumentNullException>(async () =>
+                {
+                    IQueryable<Model.SharePoint.IList> bla = null;
+                    var a = bla.AsAsyncEnumerable();
+                });
+            }
+        }
+
+        [TestMethod]
+        public async Task TestAsRequested()
+        {
+            await Assert.ThrowsExceptionAsync<ArgumentNullException>(async () =>
+            {
+                IDataModelCollection<Model.SharePoint.IList> bla = null;
+                var a = bla.AsRequested();
+            });
+        }
     }
 }
