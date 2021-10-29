@@ -129,8 +129,8 @@
     href: syntex-intro.md
 - name: "Admin: SharePoint"
   items:
-  - name: Discovery
-    href: admin-sharepoint-discovery.md
+  - name: Tenant
+    href: admin-sharepoint-tenant.md
   - name: Security
     href: admin-sharepoint-security.md
   - name: Site Collections

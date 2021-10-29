@@ -1,6 +1,6 @@
-# Discovery
+# Tenant
 
-The Core SDK Admin library provides support for discovering relevant information of the SharePoint Online tenant that's being used.
+The Core SDK Admin library provides support for getting and setting relevant information of the SharePoint Online tenant that's being used.
 
 [!INCLUDE [SharePoint Admin setup](fragments/setup-admin-sharepoint.md)]
 
@@ -21,6 +21,41 @@ var url = await context.GetSharePointAdmin().GetTenantMySiteHostUriAsync();
 
 > [!Note]
 > Support for discovering vanity urls is planned for later. When you're tenant is a multi-geo tenant then checkout the [Microsoft 365 multi geo admin article](admin-m365-multigeo.md).
+
+## Getting the tenant properties
+
+[!INCLUDE [SharePoint Admin required](fragments/sharepoint-admin-required.md)]
+
+There are more than hundred properties that control how a tenant operates and using the `GetTenantProperties` methods you can request these properties:
+
+```csharp
+var tenantProperties = await context.GetSharePointAdmin().GetTenantPropertiesAsync();
+
+if (tenantProperties.BlockMacSync)
+{
+    // syncing from Mac devices is blocked
+}
+```
+
+## Setting tenant properties
+
+[!INCLUDE [SharePoint Admin required](fragments/sharepoint-admin-required.md)]
+
+There are more than hundred properties that control how a tenant operates and using the `Update` methods on the `ITenantProperties` object you can update these properties:
+
+```csharp
+// First get the properties
+var tenantProperties = await context.GetSharePointAdmin().GetTenantPropertiesAsync();
+
+if (tenantProperties.BlockMacSync)
+{
+    // syncing from Mac devices is blocked, let's unblock this
+    tenantProperties.BlockMacSync = false;
+
+    // Send the updated properties to the server
+    await tenantProperties.UpdateAsync();
+}
+```
 
 ## Building a context to read data from SharePoint Tenant Admin
 
