@@ -3,7 +3,6 @@
   <a href="https://pnp.github.io/pnpcore">
     <img alt="PnP Core SDK" src="./docs/pnp-core-sdk-red.svg" height="100">
   </a>
-  <br>PnP Core SDK<br>
 </h1>
 
 The PnP Core SDK is an SDK designed to work for Microsoft 365. It provides a unified object model for working with SharePoint Online and Teams which is agnostic to the underlying APIs being called. The initial goal for this library will be to cover the needs of developers working with either SharePoint Online or Teams, but we're also open to extend this library further towards other Microsoft 365 workloads if there's community demand for doing so.
