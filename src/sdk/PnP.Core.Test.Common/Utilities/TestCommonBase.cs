@@ -400,7 +400,7 @@ namespace PnP.Core.Test.Common.Utilities
             }
             else
             {
-                string testEnvironmentFile = "..\\..\\..\\env.txt";
+                var testEnvironmentFile = Path.Combine("..", "..", "..", "env.txt");
                 if (File.Exists(testEnvironmentFile))
                 {
                     string content = File.ReadAllText(testEnvironmentFile);
