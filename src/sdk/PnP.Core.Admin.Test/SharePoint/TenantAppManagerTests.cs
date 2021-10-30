@@ -35,17 +35,17 @@ namespace PnP.Core.Admin.Test.SharePoint
                 Assert.IsTrue(url != null);
             }
         }
-        [TestMethod]
-        public async Task GetTenantAppCatalogUrlReturnsNullTest()
-        {
-            //TestCommon.Instance.Mocking = false;
-            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
-            {
 
-                var url = context.GetTenantAppManager().GetTenantAppCatalogUri();
-                Assert.IsTrue(url == null);
-            }
-        }
+        //[TestMethod]
+        //public async Task GetTenantAppCatalogUrlReturnsNullTest()
+        //{
+        //    //TestCommon.Instance.Mocking = false;
+        //    using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+        //    {
+        //        var url = context.GetTenantAppManager().GetTenantAppCatalogUri();
+        //        Assert.IsTrue(url == null);
+        //    }
+        //}
 
         [TestMethod]
         public async Task EnsureTenantAppCatalogUrlTest()
