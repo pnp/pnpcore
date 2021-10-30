@@ -1,0 +1,9 @@
+--batchresponse_ed4d058e-c3c9-498c-907a-752ad4b15159
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+HTTP/1.1 200 OK
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+
+{"d":{"__metadata":{"id":"https://m365x082484.sharepoint.com/sites/ContosoNews/_api/Site","uri":"https://m365x082484.sharepoint.com/sites/ContosoNews/_api/Site","type":"SP.Site"},"GroupId":"00000000-0000-0000-0000-000000000000","Id":"f48e92a5-33b2-4001-bead-4de30c8e104c"}}
+--batchresponse_ed4d058e-c3c9-498c-907a-752ad4b15159--

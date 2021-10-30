@@ -32,13 +32,23 @@ namespace PnP.Core.Services
         }
 
         /// <summary>
-        /// Extends a <see cref="PnPContext"/> with app admin functionality
+        /// Extends a <see cref="PnPContext"/> with tenant Application Lifecycle Management (ALM) functionality
         /// </summary>
         /// <param name="context"><see cref="PnPContext"/> to extend</param>
-        /// <returns>An <see cref="ISiteCollectionManager"/> instance enabling app admin operations</returns>
-        public static IAppManager GetAppManager(this PnPContext context)
+        /// <returns>An <see cref="ITenantAppManager"/> instance enabling tenant app catalog operations</returns>
+        public static ITenantAppManager GetTenantAppManager(this PnPContext context)
         {
-            return new AppManager(context);
+            return new TenantAppManager(context);
+        }
+
+        /// <summary>
+        /// Extends a <see cref="PnPContext"/> with site collection Application Lifecycle Management (ALM) functionality
+        /// </summary>
+        /// <param name="context"><see cref="PnPContext"/> to extend</param>
+        /// <returns>An <see cref="ISiteCollectionAppManager"/> instance enabling site collection app catalog operations</returns>
+        public static ISiteCollectionAppManager GetSiteCollectionAppManager(this PnPContext context)
+        {
+            return new SiteCollectionAppManager(context);
         }
 
         /// <summary>

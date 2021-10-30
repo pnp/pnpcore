@@ -1,0 +1,9 @@
+--batchresponse_658d6397-5cd0-4e7c-aee7-5a76e283b218
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+HTTP/1.1 200 OK
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+
+{"d":{"results":[{"__metadata":{"id":"https://m365x790252.sharepoint.com/sites/pnpcoresdktestgroup/_api/Microsoft.SharePoint.Marketplace.CorporateCuratedGallery.CorporateCatalogAppMetadata09b51672-778c-4304-9783-8383d339f99a","uri":"https://m365x790252.sharepoint.com/sites/pnpcoresdktestgroup/_api/Microsoft.SharePoint.Marketplace.CorporateCuratedGallery.CorporateCatalogAppMetadata09b51672-778c-4304-9783-8383d339f99a","type":"Microsoft.SharePoint.Marketplace.CorporateCuratedGallery.CorporateCatalogAppMetadata"},"AadAppId":"00000000-0000-0000-0000-000000000000","AadPermissions":null,"AppCatalogVersion":"1.0.0.0","CanUpgrade":false,"CDNLocation":"SharePoint Online","ContainsTenantWideExtension":false,"CurrentVersionDeployed":true,"Deployed":true,"ErrorMessage":"No errors.","ID":"b9e3338a-dd4b-4951-8f78-f72e05b34583","InstalledVersion":"","IsClientSideSolution":true,"IsEnabled":true,"IsPackageDefaultSkipFeatureDeployment":true,"IsValidAppPackage":true,"ProductId":"f5248b94-7ce0-4468-9e71-7df38442a1c9","ShortDescription":"A handy, intuitive, responsive and easily maintainable categorized FAQ","SkipDeploymentFeature":false,"ThumbnailUrl":"https://store-images.s-microsoft.com/image/apps.34376.09b9df95-ee99-48bb-b746-d3b160c58186.698d6a01-eef9-4405-a333-41159ac9cf91.53ca751d-dfc6-4bc6-9cf3-a12b400c52ec.png","Title":"Modern FAQ"}]}}
+--batchresponse_658d6397-5cd0-4e7c-aee7-5a76e283b218--

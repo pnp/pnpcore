@@ -67,6 +67,11 @@ namespace PnP.Core.Test.Common.Utilities
         internal static string TestSiteAccessToken { get { return "TestSiteAccessToken"; } }
 
         /// <summary>
+        /// Name of the site collection app catalog site
+        /// </summary>
+        internal static string SiteCollectionAppCatalogSite { get { return "SiteCollectionAppCatalogSite"; } }
+
+        /// <summary>
         /// Set Mocking to false to switch the test system in recording mode for all contexts being created
         /// </summary>
         public bool Mocking { get; set; } = true;

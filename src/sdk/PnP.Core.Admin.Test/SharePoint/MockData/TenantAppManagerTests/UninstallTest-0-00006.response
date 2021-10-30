@@ -1,0 +1,9 @@
+--batchresponse_d03db376-f817-4459-8a4f-c36fea91fc67
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+HTTP/1.1 400 Bad Request
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+
+{"error":{"code":"-1, System.InvalidOperationException","message":{"lang":"en-US","value":"Another job exists for this app instance. Please retry after that job is done."}}}
+--batchresponse_d03db376-f817-4459-8a4f-c36fea91fc67--
