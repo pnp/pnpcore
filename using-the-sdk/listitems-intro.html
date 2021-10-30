@@ -120,6 +120,7 @@ foreach (var listItem in myList.Items.AsRequested())
 <h5>Note</h5>
 <ul>
 <li>When referencing a field keep in mind that you need to use the field's <code>StaticName</code>. If you've created a field with name <code>Version Tag</code> then the <code>StaticName</code> will be <code>Version_x0020_Tag</code>, so you will be using <code>myItem[&quot;Version_x0020_Tag&quot;]</code> to work with the field.</li>
+<li>When referencing a field ensure to use the correct field name casing: <code>version</code> is not the same as <code>Version</code>.</li>
 <li>Filtering on the <code>HasUniqueRoleAssignments</code> field is not allowed by SharePoint.</li>
 <li>Filtering on the <code>FileSystemObjectType</code> field is not allowed by SharePoint unless it's done via one of the CAML query methods (<code>LoadItemsByCamlQuery</code> or <code>LoadListDataAsStream</code>).</li>
 </ul>
@@ -350,6 +351,13 @@ for (int i = 0; i &lt; 20; i++)
 // Execute all added batch requests as a single request to the server
 await context.ExecuteAsync();
 </code></pre>
+<div class="NOTE">
+<h5>Note</h5>
+<ul>
+<li>When referencing a field keep in mind that you need to use the field's <code>StaticName</code>. If you've created a field with name <code>Version Tag</code> then the <code>StaticName</code> will be <code>Version_x0020_Tag</code>, so you will be using <code>myItem[&quot;Version_x0020_Tag&quot;]</code> to work with the field.</li>
+<li>When referencing a field ensure to use the correct field name casing: <code>version</code> is not the same as <code>Version</code>.</li>
+</ul>
+</div>
 <h2 id="updating-list-items">Updating list items</h2>
 <p>Updating a list item comes down to updating the field values followed by calling an <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IListItem.html">IListItem</a> Update method such as <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.IDataModelUpdate.html#PnP_Core_Model_IDataModelUpdate_UpdateAsync">UpdateAsync</a>. Depending on how you want to do the update you do have alternative methods:</p>
 <table>
@@ -394,6 +402,13 @@ addedItem[&quot;Field A&quot;] = 100;
 // Update the item in SharePoint
 await addedItem.UpdateAsync();
 </code></pre>
+<div class="NOTE">
+<h5>Note</h5>
+<ul>
+<li>When referencing a field keep in mind that you need to use the field's <code>StaticName</code>. If you've created a field with name <code>Version Tag</code> then the <code>StaticName</code> will be <code>Version_x0020_Tag</code>, so you will be using <code>myItem[&quot;Version_x0020_Tag&quot;]</code> to work with the field.</li>
+<li>When referencing a field ensure to use the correct field name casing: <code>version</code> is not the same as <code>Version</code>.</li>
+</ul>
+</div>
 <h2 id="deleting-list-items">Deleting list items</h2>
 <p>Using the Delete methods like DeleteAsync or DeleteBatchAsync you can delete one or more list items in a single server roundtrip. Batching is preferred if you need to delete multiple list items.</p>
 <pre><code class="lang-csharp">// Assume the fields where not yet loaded, so loading them with the list
