@@ -45,6 +45,7 @@ foreach (var listItem in myList.Items.AsRequested())
 
 > [!Note]
 > - When referencing a field keep in mind that you need to use the field's `StaticName`. If you've created a field with name `Version Tag` then the `StaticName` will be `Version_x0020_Tag`, so you will be using `myItem["Version_x0020_Tag"]` to work with the field.
+> - When referencing a field ensure to use the correct field name casing: `version` is not the same as `Version`.
 > - Filtering on the `HasUniqueRoleAssignments` field is not allowed by SharePoint.
 > - Filtering on the `FileSystemObjectType` field is not allowed by SharePoint unless it's done via one of the CAML query methods (`LoadItemsByCamlQuery` or `LoadListDataAsStream`).
 
@@ -292,6 +293,11 @@ for (int i = 0; i < 20; i++)
 await context.ExecuteAsync();
 ```
 
+> [!Note]
+> - When referencing a field keep in mind that you need to use the field's `StaticName`. If you've created a field with name `Version Tag` then the `StaticName` will be `Version_x0020_Tag`, so you will be using `myItem["Version_x0020_Tag"]` to work with the field.
+> - When referencing a field ensure to use the correct field name casing: `version` is not the same as `Version`.
+
+
 ## Updating list items
 
 Updating a list item comes down to updating the field values followed by calling an [IListItem](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IListItem.html) Update method such as [UpdateAsync](https://pnp.github.io/pnpcore/api/PnP.Core.Model.IDataModelUpdate.html#PnP_Core_Model_IDataModelUpdate_UpdateAsync). Depending on how you want to do the update you do have alternative methods:
@@ -322,6 +328,10 @@ addedItem["Field A"] = 100;
 // Update the item in SharePoint
 await addedItem.UpdateAsync();
 ```
+
+> [!Note]
+> - When referencing a field keep in mind that you need to use the field's `StaticName`. If you've created a field with name `Version Tag` then the `StaticName` will be `Version_x0020_Tag`, so you will be using `myItem["Version_x0020_Tag"]` to work with the field.
+> - When referencing a field ensure to use the correct field name casing: `version` is not the same as `Version`.
 
 ## Deleting list items
 
