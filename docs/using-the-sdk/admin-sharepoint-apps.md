@@ -18,7 +18,8 @@ var tenantAppManager = context.GetTenantAppManager();
 var siteCollectionAppManager = context.GetSiteCollectionAppManager();
 ```
 
-> ***Important.*** If you're willing to work with the site collection app catalog, you should call the `GetSiteCollectionAppManager` extension method using the site collection's app catalog context.
+> [!Important]
+> If you're willing to work with the site collection app catalog, you should call the `GetSiteCollectionAppManager` extension method using the site collection's app catalog context.
 
 Depending on your requirements you will create any of the above objects to work with apps in your app catalog sites.
 
@@ -93,7 +94,8 @@ await appManager.InstallAsync(app.Id);
 await app.InstallAsync();
 ```
 
-> ***Important.*** Install operation is context-specific. It means that you should use the `PnPContext` instance from the corresponding site to install the app to that site.
+> [!Important]
+> Install operation is context-specific. It means that you should use the `PnPContext` instance from the corresponding site to install the app to that site.
 
 ### Upgrade an app
 
@@ -107,7 +109,8 @@ await appManager.UpgradeAsync(app.Id);
 await app.UpgradeAsync();
 ```
 
-> ***Important.*** Upgrade operation is context-specific. It means that you should use the `PnPContext` instance from the corresponding site to upgrade the app on that site.
+> [!Important]
+> Upgrade operation is context-specific. It means that you should use the `PnPContext` instance from the corresponding site to upgrade the app on that site.
 
 ### Uninstall an app
 
@@ -121,7 +124,8 @@ await appManager.uninstallAsync(app.Id);
 await app.UninstallAsync();
 ```
 
-> ***Important.*** Uninstall operation is context-specific. It means that you should use the `PnPContext` instance from the corresponding site to uninstall the app from that site.
+> [!Important]
+> Uninstall operation is context-specific. It means that you should use the `PnPContext` instance from the corresponding site to uninstall the app from that site.
 
 ### Retract an app
 
