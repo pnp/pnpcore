@@ -84,14 +84,14 @@
 
 <p>The Core SDK Admin library provides SharePoint Apps related APIs for configuring app prerequisites for managing apps.</p>
 <h2 id="creating-context">Creating Context</h2>
-<p>In this article, you'll see a lot of <code>context</code> use: in this case this is a <code>PnPContext</code> which was obtained via the <code>PnPContextFactory</code> as explained in the <a href="readme.html">overview article</a> and show below:</p>
+<p>In this article, you'll see a lot of <code>context</code> use: in this case this is a <code>PnPContext</code> which was obtained via the <code>PnPContextFactory</code> as explained in the <a href="readme.html">overview article</a> and shown below:</p>
 <pre><code class="lang-csharp">using (var context = await pnpContextFactory.CreateAsync(&quot;SiteToWorkWith&quot;))
 {
     // See next chapter on how to use the PnPContext for doing SharePoint admin operations
 }
 </code></pre>
 <h2 id="pnpcoreadmin-dependency">PnP.Core.Admin dependency</h2>
-<p>The functionality shown in this article depends on the <a href="https://www.nuget.org/packages/PnP.Core.Admin">PnP.Core.Admin nuget package</a>. Once the PnP.Core.Admin nuget package has been installed you can get to the SharePoint admin features via using the <code>GetSharePointAdmin</code>, <code>GetAppManager</code> and <code>GetSiteCollectionManager</code> extension methods:</p>
+<p>The functionality shown in this article depends on the <a href="https://www.nuget.org/packages/PnP.Core.Admin">PnP.Core.Admin nuget package</a>. Once the PnP.Core.Admin nuget package has been installed you can get to the SharePoint admin features via using the <code>GetSharePointAdmin</code>, <code>GetSiteCollectionAppManager</code>, <code>GetTenantAppManager</code> and <code>GetSiteCollectionManager</code> extension methods:</p>
 <pre><code class="lang-csharp">using (var context = await pnpContextFactory.CreateAsync(&quot;SiteToWorkWith&quot;))
 {
     // Use the GetSharePointAdmin extension method on any PnPContext 
@@ -99,16 +99,117 @@
     var url = context.GetSharePointAdmin().GetTenantAdminCenterUri();
 }
 </code></pre>
-<h2 id="getting-the-url-for-the-tenant-app-catalog-site">Getting the url for the tenant app catalog site</h2>
-<p>When deploying SharePoint apps (SharePoint SPFx solutions, but also the classic SharePoint Add-Ins) these apps are first added into an app catalog. There's one app catalog site at tenant level hosting the app catalog with apps that are available for all sites in your tenant, alternatively you can setup an app catalog at site collection level to scope the apps to the site collection.</p>
+<h2 id="two-types-of-app-catalogs">Two types of app catalogs</h2>
+<p>There are two types of app catalogs available in SharePoint Online. One is global at the tenant level called tenant app catalog. It hosts all the apps that are available for all sites in your tenant. The other app catalog type is a site collection app catalog. It's aimed to host apps for the specific site collection only.</p>
+<p><code>PnP.Core.Admin</code> package provides an explicit way of managing either tenant or site collection scoped apps. To do so, you should create an instance of the corresponding app manager using one of the extension methods <code>GetTenantAppManager</code> or <code>GetSiteCollectionAppManager</code>:</p>
+<pre><code class="lang-csharp">// instantiate a class to work with various tenant app catalog related operations
+var tenantAppManager = context.GetTenantAppManager();
+
+// instantiate a class to work with various site collection app catalog related operations
+var siteCollectionAppManager = context.GetSiteCollectionAppManager();
+</code></pre>
+<blockquote>
+<p><em><strong>Important.</strong></em> If you're willing to work with the site collection app catalog, you should call the <code>GetSiteCollectionAppManager</code> extension method using the site collection's app catalog context.</p>
+</blockquote>
+<p>Depending on your requirements you will create any of the above objects to work with apps in your app catalog sites.</p>
+<h2 id="common-app-operations">Common app operations</h2>
+<p>Tenant and site collection app managers provide some common app operations like <code>GetAvailable</code>, <code>Add</code>, <code>Deploy</code>, <code>Install</code>, etc. These operations are available for both tenant and site collection app managers and are listed below.</p>
+<p>In the samples below you will see a lot of <code>appManager</code> usages. <code>appManager</code> can be either tenant or site collection app catalog manager (depending on which extension method you use). As mentioned above, all the below methods apply to any of the app catalog managers.</p>
+<h3 id="get-available-apps">Get available app(s)</h3>
+<p>You can use the method <code>GetAvailable</code> to get either all or specific apps by their id or title. The app's id corresponds to the <code>UniqueId</code> field value inside the out-of-the-box <code>AppCatalog</code> list where all the apps are located.</p>
+<pre><code class="lang-csharp">// gets all available apps for the app catalog
+var allApps = await appManager.GetAvailableAsync();
+
+// gets the app instance by it's unique id
+var app = await appManager.GetAvailableAsync(new Guid(&quot;34427a18-486d-45d2-b4e5-9fd5324ede53&quot;));
+
+// get the app instance by it's title
+var app = await appManager.GetAvailableAsync(&quot;title of my app&quot;);
+</code></pre>
+<h3 id="add-an-app">Add an app</h3>
+<p>To add an app to the app catalog you should use the <code>Add</code> method. It accepts a file path or a binary file as a bytes array:</p>
+<pre><code class="lang-csharp">// adds app package to the app catalog and overwrites if there is an existing one
+var app = await appManager.AddAsync(&quot;path/to/file.sppkg&quot;, true);
+
+// adds app package using bytes array and app name
+var bytes = System.IO.File.ReadAllBytes(&quot;path/to/file.sppkg&quot;);
+var app = await appManager.AddAsync(bytes, &quot;My App&quot;, true);
+</code></pre>
+<p><code>Add</code> method returns an instance of the <code>App</code> object, which you can use to perform further operations.</p>
+<h3 id="deploy-an-app">Deploy an app</h3>
+<p>When your app is added to the app catalog, it's not yet available to the sites. To make it available you should first deploy it using the corresponding method:</p>
+<pre><code class="lang-csharp">var app = await appManager.AddAsync(packagePath, true);
+
+// deploy the app using the app's unique id
+var result = await appManager.DeployAsync(app.Id, false);
+</code></pre>
+<p>Upon deployment, you can specify whether to perform global deployment (when your app immediately becomes available for all the sites). In SharePoint Framework this feature is called &quot;Skip feature deployment&quot;. When you provide <code>skipFeatureDeployment=true</code> for the <code>Deploy</code> method, the app will be deployed globally.</p>
+<p>To deploy the app you can also use the app instance itself:</p>
+<pre><code class="lang-csharp">var app = await appManager.AddAsync(packagePath, true);
+// deploys app globally using app instance
+await app.DeployAsync(true);
+</code></pre>
+<p>Under the hood, the app instance calls the <code>Deploy</code> method from the <code>appManager</code>.</p>
+<h3 id="install-an-app">Install an app</h3>
+<p>To install the app into the specific site you need to call the <code>Install</code> method:</p>
+<pre><code class="lang-csharp">// install the app to the site
+await appManager.InstallAsync(app.Id);
+
+// or use app instance
+await app.InstallAsync();
+</code></pre>
+<blockquote>
+<p><em><strong>Important.</strong></em> Install operation is context-specific. It means that you should use the <code>PnPContext</code> instance from the corresponding site to install the app to that site.</p>
+</blockquote>
+<h3 id="upgrade-an-app">Upgrade an app</h3>
+<p>To upgrade the app on the specific site you need to call the <code>Upgrade</code> method:</p>
+<pre><code class="lang-csharp">// upgrades the app on the site
+await appManager.UpgradeAsync(app.Id);
+
+// or use app instance
+await app.UpgradeAsync();
+</code></pre>
+<blockquote>
+<p><em><strong>Important.</strong></em> Upgrade operation is context-specific. It means that you should use the <code>PnPContext</code> instance from the corresponding site to upgrade the app on that site.</p>
+</blockquote>
+<h3 id="uninstall-an-app">Uninstall an app</h3>
+<p>To uninstall the app from the specific site you need to call the <code>Uninstall</code> method:</p>
+<pre><code class="lang-csharp">// uninstalls the app from the site
+await appManager.uninstallAsync(app.Id);
+
+// or use app instance
+await app.UninstallAsync();
+</code></pre>
+<blockquote>
+<p><em><strong>Important.</strong></em> Uninstall operation is context-specific. It means that you should use the <code>PnPContext</code> instance from the corresponding site to uninstall the app from that site.</p>
+</blockquote>
+<h3 id="retract-an-app">Retract an app</h3>
+<p>Retract operation is the opposite to Deploy. If you don't want your app to be available for sites, you should call <code>Retract</code>. Retract command does not delete the app from the app catalog.</p>
+<pre><code class="lang-csharp">// retracts app
+await appManager.RetractAsync(app.Id);
+
+// or use app instance
+await app.RetractAsync();
+</code></pre>
+<h3 id="remove-an-app">Remove an app</h3>
+<p>To completely remove the app from the app catalog you should call the <code>Remove</code> method:</p>
+<pre><code class="lang-csharp">// removes the app from the corresponding app catalog
+await appManager.RemoveAsync(app.Id);
+
+// or use app instance
+await app.RemoveAsync();
+</code></pre>
+<h2 id="tenant-app-catalog-specific-operations">Tenant app catalog specific operations</h2>
+<p>Some methods are available only for the tenant app catalog. They are listed below.</p>
+<h3 id="getting-the-url-for-the-tenant-app-catalog-site">Getting the url for the tenant app catalog site</h3>
 <p>When you're running setup tasks you need to ensure there's an app catalog site setup, using the <code>GetTenantAppCatalogUri</code> methods you can get the current tenant app catalog site url:</p>
 <pre><code class="lang-csharp">// Get the tenant app catalog url, returns null if there's none setup
-var url = await context.GetAppManager().GetTenantAppCatalogUriAsync();
+var url = await context.GetTenantAppManager().GetTenantAppCatalogUriAsync();
 </code></pre>
-<h2 id="ensuring-theres-a-tenant-app-catalog">Ensuring there's a tenant app catalog</h2>
+<h3 id="ensuring-theres-a-tenant-app-catalog">Ensuring there's a tenant app catalog</h3>
 <p>If you want to ensure there's a tenant app catalog because you need to deploy an app to it, you can use the <code>EnsureTenantAppCatalog</code> methods. If the tenant app catalog site exists the methods return false, if there was no app catalog it will be setup using the default path of <code>sites/appcatalog</code> and the method returns true.</p>
 <pre><code class="lang-csharp">// Get the tenant app catalog url, returns null if there's none setup
-if (await context.GetAppManager().EnsureTenantAppCatalogAsync())
+if (await context.GetTenantAppManager().EnsureTenantAppCatalogAsync())
 {
     // App catalog site was missing, but now added as /sites/appcatalog
 }
@@ -118,6 +219,56 @@ else
 }
 </code></pre>
 <p>Note that you have to use the <code>GetTenantAppCatalogUri</code> to get the actual app catalog site url, even when there was no app catalog site and it was created by calling <code>EnsureTenantAppCatalog</code> it's still recommended to get the actual url.</p>
+<h3 id="check-whether-the-solution-contains-ms-teams-component">Check whether the solution contains MS Teams component</h3>
+<p>SharePoint Framework solutions might extend MS Teams as well. You can check, whether a particular SPFx app extends MS Teams or not:</p>
+<pre><code class="lang-csharp">// get tenant app manager 
+var tenantAppManager = context.GetTenantAppManager();
+
+// get app
+var app = await tenantAppManager.GetAvailableAsync(&quot;My App Title&quot;);
+
+// check it
+var containsTeams = await tenantAppManager.SolutionContainsTeamsComponentAsync(app.Id);
+</code></pre>
+<p>For example, If your SPFx solution lists any webpart with <code>TeamsPersonalApp</code> or <code>TeamsTab</code> as supported hosts, the method above will return <em>true</em>.</p>
+<h3 id="list-all-site-collection-app-catalogs">List all site collection app catalogs</h3>
+<p>Using the <code>GetSiteCollectionAppCatalogs</code> you can get all site collection app catalogs from the whole tenant:</p>
+<pre><code class="lang-csharp">var tenantAppManager = context.GetTenantAppManager();
+var siteAppCatalogList = await tenantAppManager.GetSiteCollectionAppCatalogsAsync();
+</code></pre>
+<p>The result includes site collection app catalog metadata like absolute url and unique id.</p>
+<h3 id="get-all-apps-acquired-from-sharepoint-store">Get all apps, acquired from SharePoint Store</h3>
+<p>Your tenant app catalog hosts not only custom apps, but also apps installed from the SharePoint store. To easily get all third-party apps from the SharePoint Store, use the method below:</p>
+<pre><code class="lang-csharp">var tenantAppManager = context.GetTenantAppManager();
+var storeApps = await tenantAppManager.GetStoreAppsAsync();
+</code></pre>
+<p><code>storeApps</code> is a collection of App instances, where you can do all common operations like <code>Install</code>, <code>UnInstall</code>, etc.</p>
+<h3 id="automate-sharepoint-store-apps-deployment-and-installation">Automate SharePoint Store apps deployment and installation</h3>
+<p>With tenant app manager you can also automate the process of installing apps from the SharePoint Store. To deploy an app from SharePoint Store you should know the unique store asset id. You can easily find it in the query string on the app home page. Usually the url has a format <code>https://appsource.microsoft.com/en-us/product/office/WA200001111</code> or <code>&lt;your tenant&gt;sites/appcatalog/_layouts/15/appStore.aspx/appDetail/WA200001111</code>. The last part of the url is your asset id, i.e. <code>WA200001111</code>. Then you can use the below code to add the app:</p>
+<pre><code class="lang-csharp">var tenantAppManager = context.GetTenantAppManager();
+var app = tenantAppManager.AddAndDeployStoreApp(&quot;WA200001111&quot;, CultureInfo.GetCultureInfo(1033).Name, false, true);
+</code></pre>
+<p>The method returns an App instance so that you can further install it to any SharePoint site using apps API.</p>
+<h3 id="check-if-an-upgrade-for-an-app-is-available">Check if an upgrade for an app is available</h3>
+<p>Use below API to check whether the upgrade is available for the specific app on a site:</p>
+<pre><code class="lang-csharp">var tenantAppManager = context.GetTenantAppManager();
+var app = await tenantAppManager.GetAvailableAsync(&quot;My App Title&quot;);
+var result = await tenantAppManager.IsAppUpgradeAvailableAsync(app.Id);
+</code></pre>
+<p>The method returns <em>true</em> if the app can be upgraded from the app catalog using the most recent version.</p>
+<h3 id="download-ms-teams-solution-from-sharepoint-framework-app">Download MS Teams solution from SharePoint Framework app</h3>
+<p>SharePoint Framework solutions might extend MS Teams as well. If you want to download Teams specific component from SharePoint Framework solution, you should use <code>DownloadTeamsSolution</code> method:</p>
+<pre><code class="lang-csharp">var tenantAppManager = context.GetTenantAppManager();
+var app = await tenantAppManager.GetAvailableAsync(&quot;My App Title&quot;);
+
+// download MS Teams's solution stream
+using (var stream = await tenantAppManager.DownloadTeamsSolutionAsync(app.Id))
+using (var outputFileStream = new FileStream(&quot;teams app.zip&quot;, FileMode.Create))
+{
+    // save stream to a file
+    stream.CopyTo(outputFileStream);
+}
+</code></pre>
 </article>
           </div>
           <div class="hidden-sm col-md-2" role="complementary">
