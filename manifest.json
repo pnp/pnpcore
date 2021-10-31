@@ -5442,7 +5442,7 @@
       "output": {
         ".html": {
           "relative_path": "contributing/writing tests.html",
-          "hash": "4QOi4RHA+kJkKqpRKTpnGg=="
+          "hash": "PFD8HEOWLgAL10j6M+dF3g=="
         }
       },
       "is_incremental": false,
@@ -5723,6 +5723,28 @@
     },
     {
       "type": "Resource",
+      "source_relative_path": "images/filter-coverage.jpg",
+      "output": {
+        "resource": {
+          "relative_path": "images/filter-coverage.jpg"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/line-coverage.jpg",
+      "output": {
+        "resource": {
+          "relative_path": "images/line-coverage.jpg"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
       "source_relative_path": "images/logo.svg",
       "output": {
         "resource": {
@@ -5793,6 +5815,17 @@
       "output": {
         "resource": {
           "relative_path": "images/test explorer.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/vs-code-coverage.png",
+      "output": {
+        "resource": {
+          "relative_path": "images/vs-code-coverage.png"
         }
       },
       "is_incremental": false,

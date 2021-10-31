@@ -201,6 +201,35 @@ public class GetTests
 <li>When you use <code>GetContextAsync</code> multiple times in a single test case then use a sequence number for all but the first usage. The second usage would be like this: <code>await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1)</code>, the third usage <code>await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2)</code>.</li>
 </ul>
 </div>
+<h3 id="analyze-code-coverage">Analyze Code Coverage</h3>
+<p>PnP Core SDK is built with quality in mind, thus among other things, we maintain good code coverage &gt; 80%. Ideally, all new code you add to the library should be covered with tests at not less than 80%. If you want to see, which lines are covered and which are not, you can use one of the methods below.</p>
+<h4 id="if-you-have-visual-studio-ultimate">If you have Visual Studio Ultimate</h4>
+<p>In this case, seeing the coverage is as easy as opening Test Explorer and right-clicking on the desired test and selecting <em>&quot;Analyze Code Coverage&quot;</em>:</p>
+<p><img src="../images/vs-code-coverage.png" alt="Visual Studio Code Coverage"></p>
+<p>Visual Studio will run the tests and will highlight all the covered and uncovered lines in your source code.</p>
+<h4 id="if-you-do-not-have-visual-studio-ultimate">If you do <strong>not</strong> have Visual Studio Ultimate</h4>
+<p>In case if you use any other Visual Studio editions or use VSCode, you can see the coverage by running a PowerShell script. The script is cross-platform, so you can use it on any OS.</p>
+<ol>
+<li><p>Install the prerequisites. The script uses a special <a href="https://github.com/danielpalme/ReportGenerator">ReportGenerator</a> tool to convert code coverage reports into the human-readable format. You should install it globally first:</p>
+<pre><code class="lang-bash">dotnet tool install -g dotnet-reportgenerator-globaltool
+</code></pre>
+<p>You may need to restart all your shells so that <code>reportgenerator</code> becomes globally available in PowerShell.</p>
+</li>
+<li><p>Navigate to <code>src\tools\CodeCoverage\</code> and run <code>.\Analyze-Code-Coverage.ps1</code>. You should provide either <code>-TestProjectName</code> or <code>-FqdnClassName</code> parameters.<br>
+For example below command will run all tests in the specified class and will launch a browser with the coverage report:</p>
+<pre><code class="lang-powershell">.\Analyze-Code-Coverage.ps1 -FqdnClassName PnP.Core.Test.SharePoint.FilesTests
+</code></pre>
+<p>Or run all tests in the specified test project and do <strong>not</strong> open a browser with the coverage report:</p>
+<pre><code class="lang-powershell">.\Analyze-Code-Coverage.ps1 -TestProjectName PnP.Core.Test -OpenReport $false
+</code></pre>
+<p>If you use <code>-OpenReport $false</code>, you can just refresh the page in a browser to see the updated results.</p>
+</li>
+<li><p>Analyze the report. By default, it shows you all the files. You should narrow down the results to find the file(s) you're interested in by applying a filter at the top right input  above the files list:</p>
+<p><img src="../images/filter-coverage.jpg" alt="Filter files"></p>
+<p>Then you can click on each individual file to see the actual line coverage:</p>
+<p><img src="../images/line-coverage.jpg" alt="Line coverage"></p>
+</li>
+</ol>
 <h2 id="frequently-asked-questions">Frequently Asked Questions</h2>
 <h3 id="do-i-need-to-recreate-the-sites-after-each-live-test-run">Do I need to recreate the sites after each live test run?</h3>
 <p>You can opt to recreate the sites each time, but that will be time consuming. It's better to clean the created artifacts before launching a new live test run. The artifacts to clean obviously depend on the written test cases and it's a best practice to keep the <code>cleantestenv.copyme.ps1</code> script up to date with the needed cleaning work. You can tailor this script for your environment and save it as <code>cleantestenv.xxx.ps1</code> (xxx identifies your test environment) to add your specific cleanup instructions.
