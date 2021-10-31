@@ -122,6 +122,53 @@ If you follow below steps you'll be creating test cases according to the PnP Cor
 > - Each checked in test must be checked in with mocking turned on and as such with the appropriate offline test files (the `.response` files). This is important as it ensures that test cases execute really fast and that tests can be used in build/deploy pipelines.
 > - When you use `GetContextAsync` multiple times in a single test case then use a sequence number for all but the first usage. The second usage would be like this: `await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1)`, the third usage `await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2)`.
 
+### Analyze Code Coverage
+
+PnP Core SDK is built with quality in mind, thus among other things, we maintain good code coverage > 80%. Ideally, all new code you add to the library should be covered with tests at not less than 80%. If you want to see, which lines are covered and which are not, you can use one of the methods below.
+
+#### If you have Visual Studio Ultimate
+
+In this case, seeing the coverage is as easy as opening Test Explorer and right-clicking on the desired test and selecting *"Analyze Code Coverage"*:
+
+![Visual Studio Code Coverage](../images/vs-code-coverage.png)
+
+Visual Studio will run the tests and will highlight all the covered and uncovered lines in your source code.
+
+#### If you do **not** have Visual Studio Ultimate
+
+In case if you use any other Visual Studio editions or use VSCode, you can see the coverage by running a PowerShell script. The script is cross-platform, so you can use it on any OS.
+
+1. Install the prerequisites. The script uses a special [ReportGenerator](https://github.com/danielpalme/ReportGenerator) tool to convert code coverage reports into the human-readable format. You should install it globally first:
+
+   ```bash
+   dotnet tool install -g dotnet-reportgenerator-globaltool
+   ```
+
+   You may need to restart all your shells so that `reportgenerator` becomes globally available in PowerShell.
+
+2. Navigate to `src\tools\CodeCoverage\` and run `.\Analyze-Code-Coverage.ps1`. You should provide either `-TestProjectName` or `-FqdnClassName` parameters.  
+   For example below command will run all tests in the specified class and will launch a browser with the coverage report:
+
+   ```powershell
+   .\Analyze-Code-Coverage.ps1 -FqdnClassName PnP.Core.Test.SharePoint.FilesTests
+   ```
+
+   Or run all tests in the specified test project and do **not** open a browser with the coverage report:
+
+   ```powershell
+   .\Analyze-Code-Coverage.ps1 -TestProjectName PnP.Core.Test -OpenReport $false
+   ```
+
+   If you use `-OpenReport $false`, you can just refresh the page in a browser to see the updated results.
+
+3. Analyze the report. By default, it shows you all the files. You should narrow down the results to find the file(s) you're interested in by applying a filter at the top right input  above the files list:
+
+   ![Filter files](../images/filter-coverage.jpg)
+
+   Then you can click on each individual file to see the actual line coverage:
+
+   ![Line coverage](../images/line-coverage.jpg)
+
 ## Frequently Asked Questions
 
 ### Do I need to recreate the sites after each live test run?
