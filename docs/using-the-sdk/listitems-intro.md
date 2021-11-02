@@ -16,7 +16,7 @@ using (var context = await pnpContextFactory.CreateAsync("SiteToWorkWith"))
 The PnP Core SDK supports multiple ways to read list items and what approach to use depends on your list size and your use case. For a large list you need to use a paged approach and it's also recommended to write a query that only returns the items you really need versus loading all list items. When writing custom queries you also should consider only returning the list fields you need in your application, the lesser rows and fields to return the faster the response will come from the server.
 
 > [!Important]
-> When processing list item responses from the server the SDK will translate the server response into a easy to use field value classes in case of complex field types. This feature depends on the List field information being present, you can load your list field information once when you get load your list like (`var myList = context.Web.Lists.GetByTitle("My List", p => p.Title, p => p.Items, p => p.Fields.QueryProperties(p => p.InternalName, p => p.FieldTypeKind, p => p.TypeAsString, p => p.Title));`). The minimal required field properties are `InternalName`, `FieldTypeKind`, `TypeAsString` and `Title`.
+> When processing list item responses from the server the SDK will translate the server response into a easy to use field value classes in case of complex field types. This feature depends on the List field information being present, you can load your list field information once when you get load your list like (`var myList = context.Web.Lists.GetByTitle("My List", p => p.Title, p => p.Fields.QueryProperties(p => p.InternalName, p => p.FieldTypeKind, p => p.TypeAsString, p => p.Title));`). The minimal required field properties are `InternalName`, `FieldTypeKind`, `TypeAsString` and `Title`.
 
 Use below information to help pick the best option for reading list items.
 
@@ -39,7 +39,8 @@ You want to have more details on the list item properties (e.g. author name inst
 If you simply want to load all list items in a small list (< 100 items) you load the [Items property](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_Items) of your list.
 
 ```csharp
-// Assume the fields where not yet loaded, so loading them with the list
+// Assume the fields where not yet loaded, so loading them with the list.
+// Also expand the items when loading the list
 var myList = context.Web.Lists.GetByTitle("My List", p => p.Title, p => p.Items, 
                                                      p => p.Fields.QueryProperties(p => p.InternalName, 
                                                                                    p => p.FieldTypeKind, 
@@ -63,6 +64,7 @@ If you'd like to load list item properties then this is possible via `QueryPrope
 
 ```csharp
 // Assume the fields where not yet loaded, so loading them with the list
+// Also expand the items when loading the list, including specific item properties
 var myList = context.Web.Lists.GetByTitle("My List", p => p.Title, 
             p => p.Items.QueryProperties(p => p.RoleAssignments.QueryProperties(p => p.PrincipalId, 
                                                                                 p => p.RoleDefinitions)), 
