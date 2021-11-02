@@ -160,6 +160,10 @@ var response = context.Web.ExecuteRequest(apiRequest);
 var apiRequest = new ApiRequest(ApiRequestType.SPORest, &quot;https://contoso.sharepoint.com/sites/anothersite/_api/web&quot;);
 var response = await context.Web.ExecuteRequestAsync(apiRequest);
 </code></pre>
+<div class="NOTE">
+<h5>Note</h5>
+<p>When you're using text content (e.g. json for the request body) then you need to ensure it's correctly encoded. Using the default System.Text.Json library will handle unicode characters automatically. When using Newtonsoft then use the <code>JsonSerializerSettings.StringEscapeHandling</code> property of the <code>JsonSerializerSettings</code> class.</p>
+</div>
 <h2 id="making-a-custom-microsoft-graph-request">Making a custom Microsoft Graph request</h2>
 <p>Below sample shows how to make a custom Microsoft Graph request:</p>
 <pre><code class="lang-csharp">// Custom Microsoft Graph request
@@ -169,6 +173,10 @@ var response = context.Team.ExecuteRequest(apiRequest);
 
 // Parse the json response returned via response.Response
 </code></pre>
+<div class="NOTE">
+<h5>Note</h5>
+<p>When you're using text content (e.g. json for the request body) then you need to ensure it's correctly encoded. Using the default System.Text.Json library will handle unicode characters automatically. When using Newtonsoft then use the <code>JsonSerializerSettings.StringEscapeHandling</code> property of the <code>JsonSerializerSettings</code> class.</p>
+</div>
 <h2 id="batching-custom-api-requests">Batching custom API requests</h2>
 <p>To optimize performance it's recommended to limit the amount of server roundtrips and therefore batching custom API requests can be used. Batching requests is quite similar to interactive requests, you simply use one of the available <code>ExecuteRequestBatch</code> methods. Since batching requests implies that you'll only get a result once the batch is executed you do not get back a JSON string, instead you get an <code>IBatchSingleResult&lt;BatchResultValue&lt;string&gt;&gt;</code> which allows you to check if the batch was executed and if so get the batch result via the <code>Value</code> property.</p>
 <pre><code class="lang-csharp">// Create a new batch
