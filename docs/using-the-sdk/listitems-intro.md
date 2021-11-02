@@ -24,15 +24,15 @@ Use below information to help pick the best option for reading list items.
 
 Requirements | Recommended approach
 -------------|---------------------
-List item count <= 100 | Option A: expand the items via a `Get` or `Load` method
-List item count > 100 | Option B: iterate over the list items using implicit paging
+List item count <= 100 | [Option A](#a-getting-list-items-max-100-items): expand the items via a `Get` or `Load` method
+List item count > 100 | [Option B](#b-getting-list-items-via-paging-no-item-limit): iterate over the list items using implicit paging
 
 ### You need to read 'system properties' like FileLeafRef, FileDirRef or you need to filter list items
 
 Requirements | Recommended approach
 -------------|---------------------
-You want to also 'expand' list item collections like `RoleAssignments` | Option C: use a CAML query via the `LoadItemsByCamlQuery` methods
-You want to have more details on the list item properties (e.g. author name instead of only the author id) | Option D: use a CAML query via the `ListDataAsStream` methods
+You want to also 'expand' list item collections like `RoleAssignments` | [Option C](#c-getting-list-items-via-the-loaditemsbycamlquery-approach): use a CAML query via the `LoadItemsByCamlQuery` methods
+You want to have more details on the list item properties (e.g. author name instead of only the author id) | [Option D](#d-using-the-listdataasstream-approach): use a CAML query via the `ListDataAsStream` methods
 
 ### A. Getting list items (max 100 items)
 
@@ -77,9 +77,7 @@ var myList = context.Web.Lists.GetByTitle("My List", p => p.Title,
 > - When list items are loaded in this manner SharePoint Online will only return 100 items, to get more you'll need to use a paged approach
 > - When referencing a field keep in mind that you need to use the field's `StaticName`. If you've created a field with name `Version Tag` then the `StaticName` will be `Version_x0020_Tag`, so you will be using `myItem["Version_x0020_Tag"]` to work with the field.
 > - When referencing a field ensure to use the correct field name casing: `version` is not the same as `Version`.
-> - Filtering on the `HasUniqueRoleAssignments` field is not allowed by SharePoint.
-> - Filtering on the `FileSystemObjectType` field is not allowed by SharePoint unless it's done via one of the CAML query methods (`LoadItemsByCamlQuery` or `LoadListDataAsStream`).
-> - If you want to load 'system properties' like FileLeafRef, FileDirRef etc then these are not returned. See the other query options if you need these fields
+> - Filtering on the `HasUniqueRoleAssignments` and `FileSystemObjectType` fields is not allowed by SharePoint.
 
 ### B. Getting list items via paging (no item limit)
 
@@ -131,8 +129,7 @@ foreach(var listItem in myList.Items.QueryProperties(
 > - When referencing a field keep in mind that you need to use the field's `StaticName`. If you've created a field with name `Version Tag` then the `StaticName` will be `Version_x0020_Tag`, so you will be using `myItem["Version_x0020_Tag"]` to work with the field.
 > - When referencing a field ensure to use the correct field name casing: `version` is not the same as `Version`.
 > - Filtering on the `HasUniqueRoleAssignments` field is not allowed by SharePoint.
-> - Filtering on the `FileSystemObjectType` field is not allowed by SharePoint unless it's done via one of the CAML query methods (`LoadItemsByCamlQuery` or `LoadListDataAsStream`).
-> - If you want to load 'system properties' like FileLeafRef, FileDirRef etc then these are not returned. See the other query options if you need these fields
+> - Filtering on the `HasUniqueRoleAssignments` and `FileSystemObjectType` fields is not allowed by SharePoint.
 
 ### C. Getting list items via the LoadItemsByCamlQuery approach
 
@@ -178,6 +175,12 @@ foreach (var listItem in myList.Items.AsRequested())
     // item loaded RoleAssignments and RoleDefinitions
 }
 ```
+
+> [!Note]
+>
+> - When referencing a field keep in mind that you need to use the field's `StaticName`. If you've created a field with name `Version Tag` then the `StaticName` will be `Version_x0020_Tag`, so you will be using `myItem["Version_x0020_Tag"]` to work with the field.
+> - When referencing a field ensure to use the correct field name casing: `version` is not the same as `Version`.
+> - Filtering on the `HasUniqueRoleAssignments` field is not allowed by SharePoint.
 
 #### Using paging with LoadItemsByCamlQuery
 
@@ -283,6 +286,12 @@ foreach (var listItem in myList.Items.AsRequested())
 }
 ```
 
+> [!Note]
+>
+> - When referencing a field keep in mind that you need to use the field's `StaticName`. If you've created a field with name `Version Tag` then the `StaticName` will be `Version_x0020_Tag`, so you will be using `myItem["Version_x0020_Tag"]` to work with the field.
+> - When referencing a field ensure to use the correct field name casing: `version` is not the same as `Version`.
+> - Filtering on the `HasUniqueRoleAssignments` field is not allowed by SharePoint.
+
 #### Using paging with ListDataAsStream
 
 ```csharp
@@ -384,7 +393,6 @@ await context.ExecuteAsync();
 > [!Note]
 > - When referencing a field keep in mind that you need to use the field's `StaticName`. If you've created a field with name `Version Tag` then the `StaticName` will be `Version_x0020_Tag`, so you will be using `myItem["Version_x0020_Tag"]` to work with the field.
 > - When referencing a field ensure to use the correct field name casing: `version` is not the same as `Version`.
-
 
 ## Updating list items
 
