@@ -107,11 +107,11 @@
 <tbody>
 <tr>
 <td>List item count &lt;= 100</td>
-<td>Option A: expand the items via a <code>Get</code> or <code>Load</code> method</td>
+<td><a href="#a-getting-list-items-max-100-items">Option A</a>: expand the items via a <code>Get</code> or <code>Load</code> method</td>
 </tr>
 <tr>
 <td>List item count &gt; 100</td>
-<td>Option B: iterate over the list items using implicit paging</td>
+<td><a href="#b-getting-list-items-via-paging-no-item-limit">Option B</a>: iterate over the list items using implicit paging</td>
 </tr>
 </tbody>
 </table>
@@ -126,11 +126,11 @@
 <tbody>
 <tr>
 <td>You want to also 'expand' list item collections like <code>RoleAssignments</code></td>
-<td>Option C: use a CAML query via the <code>LoadItemsByCamlQuery</code> methods</td>
+<td><a href="#c-getting-list-items-via-the-loaditemsbycamlquery-approach">Option C</a>: use a CAML query via the <code>LoadItemsByCamlQuery</code> methods</td>
 </tr>
 <tr>
 <td>You want to have more details on the list item properties (e.g. author name instead of only the author id)</td>
-<td>Option D: use a CAML query via the <code>ListDataAsStream</code> methods</td>
+<td><a href="#d-using-the-listdataasstream-approach">Option D</a>: use a CAML query via the <code>ListDataAsStream</code> methods</td>
 </tr>
 </tbody>
 </table>
@@ -171,9 +171,7 @@ var myList = context.Web.Lists.GetByTitle(&quot;My List&quot;, p =&gt; p.Title,
 <li>When list items are loaded in this manner SharePoint Online will only return 100 items, to get more you'll need to use a paged approach</li>
 <li>When referencing a field keep in mind that you need to use the field's <code>StaticName</code>. If you've created a field with name <code>Version Tag</code> then the <code>StaticName</code> will be <code>Version_x0020_Tag</code>, so you will be using <code>myItem[&quot;Version_x0020_Tag&quot;]</code> to work with the field.</li>
 <li>When referencing a field ensure to use the correct field name casing: <code>version</code> is not the same as <code>Version</code>.</li>
-<li>Filtering on the <code>HasUniqueRoleAssignments</code> field is not allowed by SharePoint.</li>
-<li>Filtering on the <code>FileSystemObjectType</code> field is not allowed by SharePoint unless it's done via one of the CAML query methods (<code>LoadItemsByCamlQuery</code> or <code>LoadListDataAsStream</code>).</li>
-<li>If you want to load 'system properties' like FileLeafRef, FileDirRef etc then these are not returned. See the other query options if you need these fields</li>
+<li>Filtering on the <code>HasUniqueRoleAssignments</code> and <code>FileSystemObjectType</code> fields is not allowed by SharePoint.</li>
 </ul>
 </div>
 <h3 id="b-getting-list-items-via-paging-no-item-limit">B. Getting list items via paging (no item limit)</h3>
@@ -220,8 +218,7 @@ foreach(var listItem in myList.Items.QueryProperties(
 <li>When referencing a field keep in mind that you need to use the field's <code>StaticName</code>. If you've created a field with name <code>Version Tag</code> then the <code>StaticName</code> will be <code>Version_x0020_Tag</code>, so you will be using <code>myItem[&quot;Version_x0020_Tag&quot;]</code> to work with the field.</li>
 <li>When referencing a field ensure to use the correct field name casing: <code>version</code> is not the same as <code>Version</code>.</li>
 <li>Filtering on the <code>HasUniqueRoleAssignments</code> field is not allowed by SharePoint.</li>
-<li>Filtering on the <code>FileSystemObjectType</code> field is not allowed by SharePoint unless it's done via one of the CAML query methods (<code>LoadItemsByCamlQuery</code> or <code>LoadListDataAsStream</code>).</li>
-<li>If you want to load 'system properties' like FileLeafRef, FileDirRef etc then these are not returned. See the other query options if you need these fields</li>
+<li>Filtering on the <code>HasUniqueRoleAssignments</code> and <code>FileSystemObjectType</code> fields is not allowed by SharePoint.</li>
 </ul>
 </div>
 <h3 id="c-getting-list-items-via-the-loaditemsbycamlquery-approach">C. Getting list items via the LoadItemsByCamlQuery approach</h3>
@@ -265,6 +262,14 @@ foreach (var listItem in myList.Items.AsRequested())
     // item loaded RoleAssignments and RoleDefinitions
 }
 </code></pre>
+<div class="NOTE">
+<h5>Note</h5>
+<ul>
+<li>When referencing a field keep in mind that you need to use the field's <code>StaticName</code>. If you've created a field with name <code>Version Tag</code> then the <code>StaticName</code> will be <code>Version_x0020_Tag</code>, so you will be using <code>myItem[&quot;Version_x0020_Tag&quot;]</code> to work with the field.</li>
+<li>When referencing a field ensure to use the correct field name casing: <code>version</code> is not the same as <code>Version</code>.</li>
+<li>Filtering on the <code>HasUniqueRoleAssignments</code> field is not allowed by SharePoint.</li>
+</ul>
+</div>
 <h4 id="using-paging-with-loaditemsbycamlquery">Using paging with LoadItemsByCamlQuery</h4>
 <p>By setting a row limit in the CAML query combined with using the the PagingInfo attribute of the <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.CamlQueryOptions.html">CamlQueryOptions</a> class you can use CAML queries to load data in a paged manner. Below snippet shows the initial page load getting 20 items and the next one getting the next 20 items.</p>
 <pre><code class="lang-csharp">// Assume the fields where not yet loaded, so loading them with the list
@@ -363,6 +368,14 @@ foreach (var listItem in myList.Items.AsRequested())
     // Do something with the list item
 }
 </code></pre>
+<div class="NOTE">
+<h5>Note</h5>
+<ul>
+<li>When referencing a field keep in mind that you need to use the field's <code>StaticName</code>. If you've created a field with name <code>Version Tag</code> then the <code>StaticName</code> will be <code>Version_x0020_Tag</code>, so you will be using <code>myItem[&quot;Version_x0020_Tag&quot;]</code> to work with the field.</li>
+<li>When referencing a field ensure to use the correct field name casing: <code>version</code> is not the same as <code>Version</code>.</li>
+<li>Filtering on the <code>HasUniqueRoleAssignments</code> field is not allowed by SharePoint.</li>
+</ul>
+</div>
 <h4 id="using-paging-with-listdataasstream">Using paging with ListDataAsStream</h4>
 <pre><code class="lang-csharp">// Assume the fields where not yet loaded, so loading them with the list
 var myList = context.Web.Lists.GetByTitle(&quot;My List&quot;, p =&gt; p.Title, 
