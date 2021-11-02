@@ -9,6 +9,7 @@ using System.Linq.Expressions;
 using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
+using System.Xml;
 
 namespace PnP.Core.Model.SharePoint
 {
@@ -387,6 +388,11 @@ namespace PnP.Core.Model.SharePoint
 
         private async Task<ApiCall> BuildGetItemsByCamlQueryApiCall(CamlQueryOptions queryOptions, params Expression<Func<IListItem, object>>[] selectors)
         {
+            if (queryOptions == null)
+            {
+                throw new ArgumentNullException(nameof(queryOptions));
+            }
+
             // Build body
             ExpandoObject camlQuery;
 
@@ -430,7 +436,7 @@ namespace PnP.Core.Model.SharePoint
             {
                 var entityInfo = EntityManager.GetClassInfo(concreteEntity.GetType(), concreteEntity, null, selectors);
                 var apiCallRequest = await QueryClient.BuildGetAPICallAsync(concreteEntity, entityInfo, new ApiCall(baseRequestUri, ApiType.SPORest), true).ConfigureAwait(false);
-                baseRequestUri = apiCallRequest.ApiCall.Request;
+                baseRequestUri = RewriteGetItemsQueryString(queryOptions.ViewXml, apiCallRequest.ApiCall.Request);
             }
 
             return new ApiCall(baseRequestUri, ApiType.SPORest, body, "Items")
@@ -438,6 +444,46 @@ namespace PnP.Core.Model.SharePoint
                 SkipCollectionClearing = true
             };
         }
+
+        internal static string RewriteGetItemsQueryString(string viewXml, string query)
+        {
+            // Get the viewfields from the CAML query
+            // sample: <View><ViewFields><FieldRef Name='Title' /><FieldRef Name='FileRef' /></ViewFields><RowLimit>5</RowLimit></View>
+
+            XmlDocument xmlDocument = new XmlDocument();
+            xmlDocument.LoadXml(viewXml);
+            XmlNode root = xmlDocument.DocumentElement;
+
+            // Get FieldRef nodes
+            XmlNodeList fieldRefNodes = root.SelectNodes("//View/ViewFields/FieldRef");
+
+            List<string> fields = new List<string>();
+
+            bool first = true;
+            foreach(var fieldRefNode in fieldRefNodes)
+            {
+                if (fieldRefNode is XmlNode xmlNode)
+                {
+                    if (first)
+                    {
+                        fields.Add("*");
+                        first = false;
+                    }
+
+                    fields.Add(xmlNode.Attributes["Name"].Value);
+                }
+            }
+
+            if (fields.Count > 0)
+            {
+                return $"https://{UrlUtility.CombineRelativeUrlWithUrlParameters(query, $"$select={string.Join(",", fields)}")}".Replace("%2f", "/");
+            }
+            else
+            {
+                return query;
+            }
+        }
+
         #endregion
 
         #region GetListDataAsStream

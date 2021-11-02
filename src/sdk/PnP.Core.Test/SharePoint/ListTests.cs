@@ -366,6 +366,112 @@ namespace PnP.Core.Test.SharePoint
         }
 
         [TestMethod]
+        public void RewriteQueryStringTest()
+        {
+            // there are fieldrefs | no * provided in $select
+            var rewrite = List.RewriteGetItemsQueryString("<View><ViewFields><FieldRef Name='Title' /><FieldRef Name='FileRef' /></ViewFields><RowLimit>5</RowLimit></View>", 
+                                                          "https://bertonline.sharepoint.com/sites/prov-2/_api/Web/Lists(guid'3968c1e1-0a86-40db-95f8-614e53888609')/GetItems?$select=Id,RoleAssignments/PrincipalId&$expand=RoleAssignments,RoleAssignments/RoleDefinitionBindings");
+
+            Assert.AreEqual(rewrite.ToLower(), "https://bertonline.sharepoint.com/sites/prov-2/_api/Web/Lists(guid'3968c1e1-0a86-40db-95f8-614e53888609')/GetItems?$select=Id,RoleAssignments/PrincipalId,*,Title,FileRef&$expand=RoleAssignments,RoleAssignments/RoleDefinitionBindings".ToLower());
+
+            // there are fieldrefs | * provided in $select
+            rewrite = List.RewriteGetItemsQueryString("<View><ViewFields><FieldRef Name='Title' /><FieldRef Name='FileRef' /></ViewFields><RowLimit>5</RowLimit></View>",
+                                                          "https://bertonline.sharepoint.com/sites/prov-2/_api/Web/Lists(guid'3968c1e1-0a86-40db-95f8-614e53888609')/GetItems?$select=*,Id,RoleAssignments/PrincipalId&$expand=RoleAssignments,RoleAssignments/RoleDefinitionBindings");
+
+            Assert.AreEqual(rewrite.ToLower(), "https://bertonline.sharepoint.com/sites/prov-2/_api/Web/Lists(guid'3968c1e1-0a86-40db-95f8-614e53888609')/GetItems?$select=*,Id,RoleAssignments/PrincipalId,Title,FileRef&$expand=RoleAssignments,RoleAssignments/RoleDefinitionBindings".ToLower());
+
+            // there are fieldrefs | * + a fieldref value provided in $select
+            rewrite = List.RewriteGetItemsQueryString("<View><ViewFields><FieldRef Name='Title' /><FieldRef Name='FileRef' /></ViewFields><RowLimit>5</RowLimit></View>",
+                                                          "https://bertonline.sharepoint.com/sites/prov-2/_api/Web/Lists(guid'3968c1e1-0a86-40db-95f8-614e53888609')/GetItems?$select=*,Id,Title,RoleAssignments/PrincipalId&$expand=RoleAssignments,RoleAssignments/RoleDefinitionBindings");
+
+            Assert.AreEqual(rewrite.ToLower(), "https://bertonline.sharepoint.com/sites/prov-2/_api/Web/Lists(guid'3968c1e1-0a86-40db-95f8-614e53888609')/GetItems?$select=*,Id,Title,RoleAssignments/PrincipalId,FileRef&$expand=RoleAssignments,RoleAssignments/RoleDefinitionBindings".ToLower());
+
+            // there are duplicate fieldrefs | no * provided in $select
+            rewrite = List.RewriteGetItemsQueryString("<View><ViewFields><FieldRef Name='Title' /><FieldRef Name='FileRef' /><FieldRef Name='Title' /></ViewFields><RowLimit>5</RowLimit></View>",
+                                                          "https://bertonline.sharepoint.com/sites/prov-2/_api/Web/Lists(guid'3968c1e1-0a86-40db-95f8-614e53888609')/GetItems?$select=Id,RoleAssignments/PrincipalId&$expand=RoleAssignments,RoleAssignments/RoleDefinitionBindings");
+
+            Assert.AreEqual(rewrite.ToLower(), "https://bertonline.sharepoint.com/sites/prov-2/_api/Web/Lists(guid'3968c1e1-0a86-40db-95f8-614e53888609')/GetItems?$select=Id,RoleAssignments/PrincipalId,*,Title,FileRef&$expand=RoleAssignments,RoleAssignments/RoleDefinitionBindings".ToLower());
+
+            // there no fieldrefs | no * provided in $select
+            rewrite = List.RewriteGetItemsQueryString("<View><RowLimit>5</RowLimit></View>",
+                                                          "https://bertonline.sharepoint.com/sites/prov-2/_api/Web/Lists(guid'3968c1e1-0a86-40db-95f8-614e53888609')/GetItems?$select=Id,RoleAssignments/PrincipalId&$expand=RoleAssignments,RoleAssignments/RoleDefinitionBindings");
+
+            Assert.AreEqual(rewrite.ToLower(), "https://bertonline.sharepoint.com/sites/prov-2/_api/Web/Lists(guid'3968c1e1-0a86-40db-95f8-614e53888609')/GetItems?$select=Id,RoleAssignments/PrincipalId&$expand=RoleAssignments,RoleAssignments/RoleDefinitionBindings".ToLower());
+        }
+
+        [TestMethod]
+        public async Task GetItemsByCAMLQueryWithSelectors()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                // Create a new list
+                string listTitle = "GetItemsByCAMLQueryWithSelectors";
+                var myList = context.Web.Lists.GetByTitle(listTitle);
+
+                if (TestCommon.Instance.Mocking && myList != null)
+                {
+                    Assert.Inconclusive("Test data set should be setup to not have the list available.");
+                }
+
+                if (myList == null)
+                {
+                    myList = await context.Web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
+                }
+
+                // Add items to the list
+                for (int i = 0; i < 10; i++)
+                {
+                    Dictionary<string, object> values = new Dictionary<string, object>
+                        {
+                            { "Title", $"Item {i}" }
+                        };
+
+                    await myList.Items.AddBatchAsync(values);
+                }
+                await context.ExecuteAsync();
+
+                // Check the item count in the list
+                await myList.LoadAsync(p => p.ItemCount);
+                Assert.IsTrue(myList.ItemCount == 10);
+
+                using (var context2 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+                {
+                    var list2 = context2.Web.Lists.GetByTitle(listTitle);
+                    if (list2 != null)
+                    {
+                        Assert.ThrowsException<ArgumentNullException>(() =>
+                        {
+                            list2.LoadItemsByCamlQuery(queryOptions: null);
+                        });
+
+                        Assert.ThrowsException<ArgumentNullException>(() =>
+                        {
+                            list2.LoadItemsByCamlQuery(query: null);
+                        });
+
+                        list2.LoadItemsByCamlQuery("<View><ViewFields><FieldRef Name='Title' /><FieldRef Name='FileRef' /></ViewFields><RowLimit>5</RowLimit></View>", 
+                            p=>p.RoleAssignments.QueryProperties(p=>p.PrincipalId, p=>p.RoleDefinitions));
+                        Assert.IsTrue(list2.Items.Length == 5);
+                        var first = list2.Items.AsRequested().First();
+                        Assert.IsTrue(first["FileRef"] != null && !string.IsNullOrEmpty(first["FileRef"].ToString()));
+                        Assert.IsTrue(first.RoleAssignments.Requested);
+                        var firstRoleAssignment = first.RoleAssignments.AsRequested().First();
+                        Assert.IsTrue(firstRoleAssignment.Requested);
+                        Assert.IsTrue(firstRoleAssignment.IsPropertyAvailable(p => p.PrincipalId));
+                        Assert.IsTrue(firstRoleAssignment.RoleDefinitions.Requested);
+                        Assert.IsTrue(firstRoleAssignment.RoleDefinitions.AsRequested().First().IsPropertyAvailable(p => p.Id));
+
+                    }
+                }
+
+                // Cleanup the created list
+                await myList.DeleteAsync();
+            }
+        }
+
+
+        [TestMethod]
         public async Task GetItemsByCAMLQuerySimpleNonAsyncTest()
         {
             //TestCommon.Instance.Mocking = false;
