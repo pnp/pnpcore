@@ -225,7 +225,6 @@ foreach(var listItem in myList.Items.QueryProperties(
 <h3 id="c-getting-list-items-via-the-loaditemsbycamlquery-approach">C. Getting list items via the LoadItemsByCamlQuery approach</h3>
 <p>SharePoint <a href="https://docs.microsoft.com/en-us/sharepoint/dev/schema/query-schema">CAML</a> queries allow you to express a filter when loading list item data and scope down the loaded fields to the ones you need. You can use call the <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IList.html#collapsible-PnP_Core_Model_SharePoint_IList_LoadItemsByCamlQueryAsync_PnP_Core_Model_SharePoint_CamlQueryOptions_">LoadItemsByCamlQueryAsync method</a> on an <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IList.html">IList</a> for this purpose. When using this method you can either provide the CAML query directly or use the <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.CamlQueryOptions.html">CamlQueryOptions</a> class for more fine-grained control. If you use this class you typically would use the <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.CamlQueryOptions.html#collapsible-PnP_Core_Model_SharePoint_CamlQueryOptions_ViewXml">ViewXml property</a>, but also <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.CamlQueryOptions.html#collapsible-PnP_Core_Model_SharePoint_CamlQueryOptions_FolderServerRelativeUrl">FolderServerRelativeUrl</a> is used a lot to scope the query to given folder in the list.</p>
 <pre><code class="lang-csharp">// Assume the fields where not yet loaded, so loading them with the list
-// If you are using CAML query, do not use the parameter 'p =&gt; p.Items'. It causes full items to load, ignoring the CAML query. 
 var myList = context.Web.Lists.GetByTitle(&quot;My List&quot;, p =&gt; p.Title,
                                                      p =&gt; p.Fields.QueryProperties(p =&gt; p.InternalName, 
                                                                                    p =&gt; p.FieldTypeKind, 
@@ -274,7 +273,6 @@ foreach (var listItem in myList.Items.AsRequested())
 <h4 id="using-paging-with-loaditemsbycamlquery">Using paging with LoadItemsByCamlQuery</h4>
 <p>By setting a row limit in the CAML query combined with using the the PagingInfo attribute of the <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.CamlQueryOptions.html">CamlQueryOptions</a> class you can use CAML queries to load data in a paged manner. Below snippet loads all pages in memory and then iterates over the loaded items:</p>
 <pre><code class="lang-csharp">// Assume the fields where not yet loaded, so loading them with the list
-// If you are using CAML query, do not use the parameter 'p =&gt; p.Items'. It causes full items to load, ignoring the CAML query. 
 var myList = context.Web.Lists.GetByTitle(&quot;My List&quot;, p =&gt; p.Title,
                                                      p =&gt; p.Fields.QueryProperties(p =&gt; p.InternalName, 
                                                                                    p =&gt; p.FieldTypeKind, 
