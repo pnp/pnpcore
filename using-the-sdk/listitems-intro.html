@@ -172,7 +172,7 @@ var myList = context.Web.Lists.GetByTitle(&quot;My List&quot;, p =&gt; p.Title,
 <ul>
 <li>When list items are loaded in this manner SharePoint Online will only return 100 items, to get more you'll need to use a paged approach</li>
 <li>When referencing a field keep in mind that you need to use the field's <code>StaticName</code>. If you've created a field with name <code>Version Tag</code> then the <code>StaticName</code> will be <code>Version_x0020_Tag</code>, so you will be using <code>myItem[&quot;Version_x0020_Tag&quot;]</code> to work with the field.</li>
-<li>When referencing a field ensure to use the correct field name casing: <code>version</code> is not the same as <code>Version</code>.</li>
+<li>When referencing a field ensure to use the correct field name casing: <code>version_x0020_tag</code> is not the same as <code>Version_x0020_Tag</code>.</li>
 <li>Filtering on the <code>HasUniqueRoleAssignments</code> and <code>FileSystemObjectType</code> fields is not allowed by SharePoint.</li>
 </ul>
 </div>
@@ -218,8 +218,7 @@ foreach(var listItem in myList.Items.QueryProperties(
 <h5>Note</h5>
 <ul>
 <li>When referencing a field keep in mind that you need to use the field's <code>StaticName</code>. If you've created a field with name <code>Version Tag</code> then the <code>StaticName</code> will be <code>Version_x0020_Tag</code>, so you will be using <code>myItem[&quot;Version_x0020_Tag&quot;]</code> to work with the field.</li>
-<li>When referencing a field ensure to use the correct field name casing: <code>version</code> is not the same as <code>Version</code>.</li>
-<li>Filtering on the <code>HasUniqueRoleAssignments</code> field is not allowed by SharePoint.</li>
+<li>When referencing a field ensure to use the correct field name casing: <code>version_x0020_tag</code> is not the same as <code>Version_x0020_Tag</code>.</li>
 <li>Filtering on the <code>HasUniqueRoleAssignments</code> and <code>FileSystemObjectType</code> fields is not allowed by SharePoint.</li>
 </ul>
 </div>
@@ -268,7 +267,7 @@ foreach (var listItem in myList.Items.AsRequested())
 <h5>Note</h5>
 <ul>
 <li>When referencing a field keep in mind that you need to use the field's <code>StaticName</code>. If you've created a field with name <code>Version Tag</code> then the <code>StaticName</code> will be <code>Version_x0020_Tag</code>, so you will be using <code>myItem[&quot;Version_x0020_Tag&quot;]</code> to work with the field.</li>
-<li>When referencing a field ensure to use the correct field name casing: <code>version</code> is not the same as <code>Version</code>.</li>
+<li>When referencing a field ensure to use the correct field name casing: <code>version_x0020_tag</code> is not the same as <code>Version_x0020_Tag</code>.</li>
 <li>Filtering on the <code>HasUniqueRoleAssignments</code> field is not allowed by SharePoint.</li>
 </ul>
 </div>
@@ -374,7 +373,7 @@ foreach (var listItem in myList.Items.AsRequested())
 <h5>Note</h5>
 <ul>
 <li>When referencing a field keep in mind that you need to use the field's <code>StaticName</code>. If you've created a field with name <code>Version Tag</code> then the <code>StaticName</code> will be <code>Version_x0020_Tag</code>, so you will be using <code>myItem[&quot;Version_x0020_Tag&quot;]</code> to work with the field.</li>
-<li>When referencing a field ensure to use the correct field name casing: <code>version</code> is not the same as <code>Version</code>.</li>
+<li>When referencing a field ensure to use the correct field name casing: <code>version_x0020_tag</code> is not the same as <code>Version_x0020_Tag</code>.</li>
 <li>Filtering on the <code>HasUniqueRoleAssignments</code> field is not allowed by SharePoint.</li>
 </ul>
 </div>
