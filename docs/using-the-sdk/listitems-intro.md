@@ -231,8 +231,9 @@ while (paging)
         DatesInUtc = true,
         PagingInfo = nextPage
     },
-    // Load list item collections
-    p => p.RoleAssignments.QueryProperties(p => p.PrincipalId, p => p.RoleDefinitions.QueryProperties(rd => rd.Id, rd => rd.Name)),
+    // Load list item collections (e.g. RoleAssignments)
+    p => p.RoleAssignments.QueryProperties(p => p.PrincipalId, 
+          p => p.RoleDefinitions.QueryProperties(rd => rd.Id, rd => rd.Name)),
     // Load FieldValuesAsText to get access to 'system' properties
     p => p.FieldValuesAsText,
     // Load the HasUniqueRoleAssignments property
@@ -282,8 +283,9 @@ while (paging)
         DatesInUtc = true,
         PagingInfo = nextPage
     },
-    // Load list item collections
-    p => p.RoleAssignments.QueryProperties(p => p.PrincipalId, p => p.RoleDefinitions.QueryProperties(rd => rd.Id, rd => rd.Name)),
+    // Load list item collections (e.g. RoleAssignments)
+    p => p.RoleAssignments.QueryProperties(p => p.PrincipalId, 
+          p => p.RoleDefinitions.QueryProperties(rd => rd.Id, rd => rd.Name)),
     // Load FieldValuesAsText to get access to 'system' properties
     p => p.FieldValuesAsText,
     // Load the HasUniqueRoleAssignments property
@@ -414,6 +416,41 @@ while (paging)
 foreach (var listItem in myList.Items.AsRequested())
 {
     // Do something with the list item
+}
+```
+
+Sometimes loading all pages in memory is not what you need (e.g. due to memory/performance constraints) and you'd rather want to read a page, process it and then read the next page. This can be done by clearing the loaded items collection while paging as shown in this sample:
+
+```csharp
+// Load all the needed data using paged requests
+bool paging = true;
+string nextPage = null;
+while (paging)
+{
+  // Clear the previous page (if any)
+    myList.Items.Clear();
+
+    // Execute the query, this populates a page of list items 
+    var output = await pagesLibrary.LoadListDataAsStreamAsync(new RenderListDataOptions()
+    {
+        ViewXml = viewXml,
+        RenderOptions = RenderListDataOptionsFlags.ListData,
+        Paging = nextPage ?? null,
+    }).ConfigureAwait(false);
+
+    if (output.ContainsKey("NextHref"))
+    {
+        nextPage = output["NextHref"].ToString().Substring(1);
+    }
+    else
+    {
+        paging = false;
+    }
+
+    // Iterate over the retrieved page of list items
+    foreach (var listItem in myList.Items.AsRequested())
+    {
+    }
 }
 ```
 
