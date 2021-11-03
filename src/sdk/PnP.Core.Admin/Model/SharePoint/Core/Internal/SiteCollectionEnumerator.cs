@@ -486,16 +486,19 @@ namespace PnP.Core.Admin.Model.SharePoint
                         from += pageSize;
                         to += pageSize;
 
-                        foreach (var hit in hitsContainer.GetProperty("hits").EnumerateArray())
+                        if (hitsContainer.TryGetProperty("hits", out JsonElement hits) && hits.ValueKind == JsonValueKind.Array)
                         {
-                            GetSiteAndWebId(hit.GetProperty("hitId").GetString(), out Guid siteId, out Guid webId);
+                            foreach (var hit in hits.EnumerateArray())
+                            {
+                                GetSiteAndWebId(hit.GetProperty("hitId").GetString(), out Guid siteId, out Guid webId);
 
-                            AddLoadedSite(loadedSites,
-                                          hit.GetProperty("hitId").GetString(),
-                                          hit.GetProperty("resource").GetProperty("webUrl").GetString(),
-                                          siteId,
-                                          webId,
-                                          hit.GetProperty("resource").TryGetProperty("name", out JsonElement rootWebDescription) ? rootWebDescription.GetString() : null);
+                                AddLoadedSite(loadedSites,
+                                              hit.GetProperty("hitId").GetString(),
+                                              hit.GetProperty("resource").GetProperty("webUrl").GetString(),
+                                              siteId,
+                                              webId,
+                                              hit.GetProperty("resource").TryGetProperty("name", out JsonElement rootWebDescription) ? rootWebDescription.GetString() : null);
+                            }
                         }
                     }
                 }
