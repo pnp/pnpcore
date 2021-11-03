@@ -281,50 +281,72 @@ var myList = context.Web.Lists.GetByTitle(&quot;My List&quot;, p =&gt; p.Title,
                                                                                    p =&gt; p.TypeAsString, 
                                                                                    p =&gt; p.Title));
 
-// Build a query that only returns the first 20 rows where the Title field starts with &quot;Item1&quot;
-string viewXml = @&quot;&lt;View&gt;
-                    &lt;ViewFields&gt;
-                      &lt;FieldRef Name='Title' /&gt;
-                      &lt;FieldRef Name='FileRef' /&gt;
-                    &lt;/ViewFields&gt;
-                    &lt;Query&gt;
-                      &lt;Where&gt;
-                        &lt;BeginsWith&gt;
-                          &lt;FieldRef Name='Title'/&gt;
-                          &lt;Value Type='text'&gt;Item1&lt;/Value&gt;
-                        &lt;/BeginsWith&gt;
-                      &lt;/Where&gt;
-                    &lt;/Query&gt;
-                    &lt;OrderBy Override='TRUE'&gt;&lt;FieldRef Name= 'ID' Ascending= 'FALSE' /&gt;&lt;/OrderBy&gt;
-                    &lt;RowLimit&gt;20&lt;/RowLimit&gt;
-                   &lt;/View&gt;&quot;;
+int pageSize = 500;
+// Filter on files and load 'system' properties like FileRef
+string viewXml = @$&quot;&lt;View&gt;
+    &lt;ViewFields&gt;
+      &lt;FieldRef Name='Title' /&gt;
+      &lt;FieldRef Name='FileRef' /&gt;
+      &lt;FieldRef Name='FileLeafRef' /&gt;
+      &lt;FieldRef Name='FSObjType'/&gt;
+      &lt;FieldRef Name='File_x0020_Size' /&gt;
+    &lt;/ViewFields&gt;
+    &lt;Query&gt;
+        &lt;Where&gt;
+        &lt;Eq&gt;
+            &lt;FieldRef Name='FSObjType'/&gt;
+            &lt;Value Type='Integer'&gt;0&lt;/Value&gt;
+        &lt;/Eq&gt;
+        &lt;/Where&gt;
+    &lt;/Query&gt;
+    &lt;OrderBy Override='TRUE'&gt;&lt;FieldRef Name= 'ID' Ascending= 'FALSE' /&gt;&lt;/OrderBy&gt;
+    &lt;RowLimit&gt;{pageSize}&lt;/RowLimit&gt;
+    &lt;/View&gt;&quot;;
 
-// Execute the query loading the first 20
-await myList.LoadItemsByCamlQueryAsync(new CamlQueryOptions()
+// Load all the needed data using paged requests
+bool paging = true;
+string nextPage = null;
+int pages = 0;
+while (paging)
 {
-    ViewXml = viewXml,
-    DatesInUtc = true
-}, p =&gt; p.RoleAssignments.QueryProperties(p =&gt; p.PrincipalId, p =&gt; p.RoleDefinitions));
+    // Execute the query
+    await myList.LoadItemsByCamlQueryAsync(new CamlQueryOptions()
+    {
+        ViewXml = viewXml,
+        DatesInUtc = true,
+        PagingInfo = nextPage
+    },
+    // Load list item collections
+    p =&gt; p.RoleAssignments.QueryProperties(p =&gt; p.PrincipalId, p =&gt; p.RoleDefinitions.QueryProperties(rd =&gt; rd.Id, rd =&gt; rd.Name)),
+    // Load FieldValuesAsText to get access to 'system' properties
+    p =&gt; p.FieldValuesAsText,
+    // Load the HasUniqueRoleAssignments property
+    p =&gt; p.HasUniqueRoleAssignments);
 
-// Execute the query loading the next 20
-await myList.LoadItemsByCamlQueryAsync(new CamlQueryOptions()
-{
-    ViewXml = viewXml,
-    DatesInUtc = true,
-    PagingInfo = $&quot;Paged=TRUE&amp;p_ID={myList.Items.Last().Id}&quot;
-});
+    pages++;
+
+    if (myList.Items.Length == pages * pageSize)
+    {
+        nextPage = $&quot;Paged=TRUE&amp;p_ID={myList.Items.AsRequested().Last().Id}&quot;;
+    }
+    else
+    {
+        paging = false;
+    }
+}
 
 // Iterate over the retrieved list items
 foreach (var listItem in myList.Items.AsRequested())
 {
     // Do something with the list item and the per 
     // item loaded RoleAssignments and RoleDefinitions
+    var fileSize = listItem.FieldValuesAsText[&quot;File_x005f_x0020_x005f_Size&quot;];
 }
 </code></pre>
 <div class="NOTE">
 <h5>Note</h5>
 <ul>
-<li>If you're query is ordered by one or more fields these fields also have to specified in the PagingInfo, e.g. if ordered on Title the PagingInfo would be <code>$&quot;Paged=TRUE&amp;p_ID={list2.Items.Last().Id}&amp;p_Title=${list2.Items.Last().Title}&quot;</code>. If you want to load the previous page you also need to add <code>&amp;PagedPrev=TRUE</code>. When using the <code>LoadListDataAsStream</code> methods the paging info is automatically returned.</li>
+<li>If you're query is ordered by one or more fields these fields also have to specified in the PagingInfo, e.g. if ordered on Title the PagingInfo would be <code>$&quot;Paged=TRUE&amp;p_ID={list2.Items.AsRequested().Last().Id}&amp;p_Title=${list2.Items.AsRequested().Last().Title}&quot;</code>. If you want to load the previous page you also need to add <code>&amp;PagedPrev=TRUE</code>. When using the <code>LoadListDataAsStream</code> methods the paging info is automatically returned.</li>
 </ul>
 </div>
 <h3 id="d-using-the-listdataasstream-approach">D. Using the ListDataAsStream approach</h3>
