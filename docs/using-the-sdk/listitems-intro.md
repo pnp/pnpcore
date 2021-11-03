@@ -196,50 +196,72 @@ var myList = context.Web.Lists.GetByTitle("My List", p => p.Title,
                                                                                    p => p.TypeAsString, 
                                                                                    p => p.Title));
 
-// Build a query that only returns the first 20 rows where the Title field starts with "Item1"
-string viewXml = @"<View>
-                    <ViewFields>
-                      <FieldRef Name='Title' />
-                      <FieldRef Name='FileRef' />
-                    </ViewFields>
-                    <Query>
-                      <Where>
-                        <BeginsWith>
-                          <FieldRef Name='Title'/>
-                          <Value Type='text'>Item1</Value>
-                        </BeginsWith>
-                      </Where>
-                    </Query>
-                    <OrderBy Override='TRUE'><FieldRef Name= 'ID' Ascending= 'FALSE' /></OrderBy>
-                    <RowLimit>20</RowLimit>
-                   </View>";
+int pageSize = 500;
+// Filter on files and load 'system' properties like FileRef
+string viewXml = @$"<View>
+    <ViewFields>
+      <FieldRef Name='Title' />
+      <FieldRef Name='FileRef' />
+      <FieldRef Name='FileLeafRef' />
+      <FieldRef Name='FSObjType'/>
+      <FieldRef Name='File_x0020_Size' />
+    </ViewFields>
+    <Query>
+        <Where>
+        <Eq>
+            <FieldRef Name='FSObjType'/>
+            <Value Type='Integer'>0</Value>
+        </Eq>
+        </Where>
+    </Query>
+    <OrderBy Override='TRUE'><FieldRef Name= 'ID' Ascending= 'FALSE' /></OrderBy>
+    <RowLimit>{pageSize}</RowLimit>
+    </View>";
 
-// Execute the query loading the first 20
-await myList.LoadItemsByCamlQueryAsync(new CamlQueryOptions()
+// Load all the needed data using paged requests
+bool paging = true;
+string nextPage = null;
+int pages = 0;
+while (paging)
 {
-    ViewXml = viewXml,
-    DatesInUtc = true
-}, p => p.RoleAssignments.QueryProperties(p => p.PrincipalId, p => p.RoleDefinitions));
+    // Execute the query
+    await myList.LoadItemsByCamlQueryAsync(new CamlQueryOptions()
+    {
+        ViewXml = viewXml,
+        DatesInUtc = true,
+        PagingInfo = nextPage
+    },
+    // Load list item collections
+    p => p.RoleAssignments.QueryProperties(p => p.PrincipalId, p => p.RoleDefinitions.QueryProperties(rd => rd.Id, rd => rd.Name)),
+    // Load FieldValuesAsText to get access to 'system' properties
+    p => p.FieldValuesAsText,
+    // Load the HasUniqueRoleAssignments property
+    p => p.HasUniqueRoleAssignments);
 
-// Execute the query loading the next 20
-await myList.LoadItemsByCamlQueryAsync(new CamlQueryOptions()
-{
-    ViewXml = viewXml,
-    DatesInUtc = true,
-    PagingInfo = $"Paged=TRUE&p_ID={myList.Items.Last().Id}"
-});
+    pages++;
+
+    if (myList.Items.Length == pages * pageSize)
+    {
+        nextPage = $"Paged=TRUE&p_ID={myList.Items.AsRequested().Last().Id}";
+    }
+    else
+    {
+        paging = false;
+    }
+}
 
 // Iterate over the retrieved list items
 foreach (var listItem in myList.Items.AsRequested())
 {
     // Do something with the list item and the per 
     // item loaded RoleAssignments and RoleDefinitions
+    var fileSize = listItem.FieldValuesAsText["File_x005f_x0020_x005f_Size"];
 }
 ```
 
 > [!Note]
 >
-> - If you're query is ordered by one or more fields these fields also have to specified in the PagingInfo, e.g. if ordered on Title the PagingInfo would be `$"Paged=TRUE&p_ID={list2.Items.Last().Id}&p_Title=${list2.Items.Last().Title}"`. If you want to load the previous page you also need to add `&PagedPrev=TRUE`. When using the `LoadListDataAsStream` methods the paging info is automatically returned.
+> - If you're query is ordered by one or more fields these fields also have to specified in the PagingInfo, e.g. if ordered on Title the PagingInfo would be `$"Paged=TRUE&p_ID={list2.Items.AsRequested().Last().Id}&p_Title=${list2.Items.AsRequested().Last().Title}"`. If you want to load the previous page you also need to add `&PagedPrev=TRUE`. When using the `LoadListDataAsStream` methods the paging info is automatically returned.
 
 ### D. Using the ListDataAsStream approach
 
