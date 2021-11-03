@@ -138,7 +138,6 @@ SharePoint [CAML](https://docs.microsoft.com/en-us/sharepoint/dev/schema/query-s
 
 ```csharp
 // Assume the fields where not yet loaded, so loading them with the list
-// If you are using CAML query, do not use the parameter 'p => p.Items'. It causes full items to load, ignoring the CAML query. 
 var myList = context.Web.Lists.GetByTitle("My List", p => p.Title,
                                                      p => p.Fields.QueryProperties(p => p.InternalName, 
                                                                                    p => p.FieldTypeKind, 
@@ -189,7 +188,6 @@ By setting a row limit in the CAML query combined with using the the PagingInfo 
 
 ```csharp
 // Assume the fields where not yet loaded, so loading them with the list
-// If you are using CAML query, do not use the parameter 'p => p.Items'. It causes full items to load, ignoring the CAML query. 
 var myList = context.Web.Lists.GetByTitle("My List", p => p.Title,
                                                      p => p.Fields.QueryProperties(p => p.InternalName, 
                                                                                    p => p.FieldTypeKind, 
