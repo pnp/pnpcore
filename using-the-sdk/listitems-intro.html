@@ -272,7 +272,7 @@ foreach (var listItem in myList.Items.AsRequested())
 </ul>
 </div>
 <h4 id="using-paging-with-loaditemsbycamlquery">Using paging with LoadItemsByCamlQuery</h4>
-<p>By setting a row limit in the CAML query combined with using the the PagingInfo attribute of the <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.CamlQueryOptions.html">CamlQueryOptions</a> class you can use CAML queries to load data in a paged manner. Below snippet shows the initial page load getting 20 items and the next one getting the next 20 items.</p>
+<p>By setting a row limit in the CAML query combined with using the the PagingInfo attribute of the <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.CamlQueryOptions.html">CamlQueryOptions</a> class you can use CAML queries to load data in a paged manner. Below snippet loads all pages in memory and then iterates over the loaded items:</p>
 <pre><code class="lang-csharp">// Assume the fields where not yet loaded, so loading them with the list
 // If you are using CAML query, do not use the parameter 'p =&gt; p.Items'. It causes full items to load, ignoring the CAML query. 
 var myList = context.Web.Lists.GetByTitle(&quot;My List&quot;, p =&gt; p.Title,
@@ -335,7 +335,7 @@ while (paging)
     }
 }
 
-// Iterate over the retrieved list items
+// Iterate over ALL the retrieved list items
 foreach (var listItem in myList.Items.AsRequested())
 {
     // Do something with the list item and the per 
@@ -349,6 +349,48 @@ foreach (var listItem in myList.Items.AsRequested())
 <li>If you're query is ordered by one or more fields these fields also have to specified in the PagingInfo, e.g. if ordered on Title the PagingInfo would be <code>$&quot;Paged=TRUE&amp;p_ID={list2.Items.AsRequested().Last().Id}&amp;p_Title=${list2.Items.AsRequested().Last().Title}&quot;</code>. If you want to load the previous page you also need to add <code>&amp;PagedPrev=TRUE</code>. When using the <code>LoadListDataAsStream</code> methods the paging info is automatically returned.</li>
 </ul>
 </div>
+<p>Sometimes loading all pages in memory is not what you need (e.g. due to memory/performance constraints) and you'd rather want to read a page, process it and then read the next page. This can be done by clearing the loaded items collection while paging as shown in this sample:</p>
+<pre><code class="lang-csharp">bool paging = true;
+string nextPage = null;
+int pages = 0;
+int totalItemsLoaded = 0;
+while (paging)
+{
+    // Clear the previous page (if any)
+    myList.Items.Clear();
+
+    // Execute the query, this populates a page of list items 
+    await myList.LoadItemsByCamlQueryAsync(new CamlQueryOptions()
+    {
+        ViewXml = viewXml,
+        DatesInUtc = true,
+        PagingInfo = nextPage
+    },
+    // Load list item collections
+    p =&gt; p.RoleAssignments.QueryProperties(p =&gt; p.PrincipalId, p =&gt; p.RoleDefinitions.QueryProperties(rd =&gt; rd.Id, rd =&gt; rd.Name)),
+    // Load FieldValuesAsText to get access to 'system' properties
+    p =&gt; p.FieldValuesAsText,
+    // Load the HasUniqueRoleAssignments property
+    p =&gt; p.HasUniqueRoleAssignments);
+
+    pages++;
+    totalItemsLoaded = totalItemsLoaded + myList.Items.Length;
+
+    if (totalItemsLoaded == pages * pageSize)
+    {
+        nextPage = $&quot;Paged=TRUE&amp;p_ID={myList.Items.AsRequested().Last().Id}&quot;;
+    }
+    else
+    {
+        paging = false;
+    }
+
+    // Iterate over the retrieved page of list items
+    foreach (var listItem in myList.Items.AsRequested())
+    {        
+    }
+}
+</code></pre>
 <h3 id="d-using-the-listdataasstream-approach">D. Using the ListDataAsStream approach</h3>
 <p>Using the <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_LoadListDataAsStreamAsync_PnP_Core_Model_SharePoint_RenderListDataOptions_">LoadListDataAsStreamAsync method</a> gives you the most control over how to query the list and what data to return. Using this method is similar to the above described <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IList.html#collapsible-PnP_Core_Model_SharePoint_IList_LoadItemsByCamlQueryAsync_System_String_">LoadItemsByCamlQueryAsync method</a> as you typically specify a <a href="https://docs.microsoft.com/en-us/sharepoint/dev/schema/query-schema">CAML</a> query when using this method. To configure the input of this method you need to use the <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.RenderListDataOptions.html">RenderListDataOptions class</a>. Defining the CAML query to run can be done via the ViewXml property and telling what type of data to return can be done via the <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.RenderListDataOptions.html#PnP_Core_Model_SharePoint_RenderListDataOptions_RenderOptions">RenderOptions</a> property.</p>
 <pre><code class="lang-csharp">// Assume the fields where not yet loaded, so loading them with the list
