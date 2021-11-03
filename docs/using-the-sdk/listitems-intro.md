@@ -185,7 +185,7 @@ foreach (var listItem in myList.Items.AsRequested())
 
 #### Using paging with LoadItemsByCamlQuery
 
-By setting a row limit in the CAML query combined with using the the PagingInfo attribute of the [CamlQueryOptions](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.CamlQueryOptions.html) class you can use CAML queries to load data in a paged manner. Below snippet shows the initial page load getting 20 items and the next one getting the next 20 items.
+By setting a row limit in the CAML query combined with using the the PagingInfo attribute of the [CamlQueryOptions](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.CamlQueryOptions.html) class you can use CAML queries to load data in a paged manner. Below snippet loads all pages in memory and then iterates over the loaded items:
 
 ```csharp
 // Assume the fields where not yet loaded, so loading them with the list
@@ -250,7 +250,7 @@ while (paging)
     }
 }
 
-// Iterate over the retrieved list items
+// Iterate over ALL the retrieved list items
 foreach (var listItem in myList.Items.AsRequested())
 {
     // Do something with the list item and the per 
@@ -262,6 +262,51 @@ foreach (var listItem in myList.Items.AsRequested())
 > [!Note]
 >
 > - If you're query is ordered by one or more fields these fields also have to specified in the PagingInfo, e.g. if ordered on Title the PagingInfo would be `$"Paged=TRUE&p_ID={list2.Items.AsRequested().Last().Id}&p_Title=${list2.Items.AsRequested().Last().Title}"`. If you want to load the previous page you also need to add `&PagedPrev=TRUE`. When using the `LoadListDataAsStream` methods the paging info is automatically returned.
+
+Sometimes loading all pages in memory is not what you need (e.g. due to memory/performance constraints) and you'd rather want to read a page, process it and then read the next page. This can be done by clearing the loaded items collection while paging as shown in this sample:
+
+```csharp
+bool paging = true;
+string nextPage = null;
+int pages = 0;
+int totalItemsLoaded = 0;
+while (paging)
+{
+    // Clear the previous page (if any)
+    myList.Items.Clear();
+
+    // Execute the query, this populates a page of list items 
+    await myList.LoadItemsByCamlQueryAsync(new CamlQueryOptions()
+    {
+        ViewXml = viewXml,
+        DatesInUtc = true,
+        PagingInfo = nextPage
+    },
+    // Load list item collections
+    p => p.RoleAssignments.QueryProperties(p => p.PrincipalId, p => p.RoleDefinitions.QueryProperties(rd => rd.Id, rd => rd.Name)),
+    // Load FieldValuesAsText to get access to 'system' properties
+    p => p.FieldValuesAsText,
+    // Load the HasUniqueRoleAssignments property
+    p => p.HasUniqueRoleAssignments);
+
+    pages++;
+    totalItemsLoaded = totalItemsLoaded + myList.Items.Length;
+
+    if (totalItemsLoaded == pages * pageSize)
+    {
+        nextPage = $"Paged=TRUE&p_ID={myList.Items.AsRequested().Last().Id}";
+    }
+    else
+    {
+        paging = false;
+    }
+
+    // Iterate over the retrieved page of list items
+    foreach (var listItem in myList.Items.AsRequested())
+    {        
+    }
+}
+```
 
 ### D. Using the ListDataAsStream approach
 
