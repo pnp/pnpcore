@@ -124,6 +124,9 @@ $app.'Certificate Thumbprint' | clip
 Paste this copied values in a safe place, because you will need them soon.
 In the `c:\temp` folder (or whatever else folder you will choose) there will also be a file named `PnP.Core.SDK.Consumer.pfx`, which includes the private key of the self-signed certificate generated for you, as well as a file named `PnP.Core.SDK.Consumer.cer`, which includes the public key of the self-signed certificate generated for you.
 
+> [!Note]
+> If you can't use PowerShell to generate a self-signed certificate then checkout [Generate self-signed certificates with the .NET CLI](https://docs.microsoft.com/en-us/dotnet/core/additional-tools/self-signed-certificates-guide). It for example shows how to use OpenSSL on Linux to create a self-signed certificate.
+
 #### Configuring PnP Core SDK to use the configured application
 
 When you're configuring your application to use the PnP Core SDK you will have to configure the `PnP.Core` services and the `PnP.Core.Auth` services using the `AddPnPCore` and `AddPnPCoreAuthentication` methods, respectively. The `ClientId` and `TenantId` are those of the application that you just registered in Azure Active Directory..
@@ -167,6 +170,9 @@ services.AddPnPCoreAuthentication(
             });
 });
 ```
+
+> [!Note]
+> If you're using PnP Core SDK on Linux you can use https://github.com/gsoft-inc/dotnet-certificate-tool as tool to import your certificate.
 
 ## Using the multi-tenant PnP Azure AD application
 
