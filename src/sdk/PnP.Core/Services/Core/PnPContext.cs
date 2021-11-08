@@ -418,9 +418,7 @@ namespace PnP.Core.Services
         /// <returns>New <see cref="PnPContext"/></returns>
         public PnPContext Clone()
         {
-#pragma warning disable CA2000 // Dispose objects before losing scope
             return CloneAsync().GetAwaiter().GetResult();
-#pragma warning restore CA2000 // Dispose objects before losing scope
         }
 
         /// <summary>
@@ -439,9 +437,7 @@ namespace PnP.Core.Services
         /// <returns>New <see cref="PnPContext"/> for the request config</returns>
         public PnPContext Clone(string name)
         {
-#pragma warning disable CA2000 // Dispose objects before losing scope
             return CloneAsync(name).GetAwaiter().GetResult();
-#pragma warning restore CA2000 // Dispose objects before losing scope
         }
 
         /// <summary>
@@ -472,9 +468,7 @@ namespace PnP.Core.Services
         /// <returns>New <see cref="PnPContext"/></returns>
         public PnPContext Clone(Uri uri)
         {
-#pragma warning disable CA2000 // Dispose objects before losing scope
             return CloneAsync(uri).GetAwaiter().GetResult();
-#pragma warning restore CA2000 // Dispose objects before losing scope
         }
 
         /// <summary>
@@ -502,6 +496,45 @@ namespace PnP.Core.Services
             return clonedContext;
         }
 
+        /// <summary>
+        /// Clones this context for another SharePoint site
+        /// </summary>
+        /// <param name="groupId">Id of the other Microsoft 365 group to create a <see cref="PnPContext"/> for</param>
+        /// <returns>New <see cref="PnPContext"/></returns>
+        public PnPContext Clone(Guid groupId)
+        { 
+            return CloneAsync(groupId).GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        /// Clones this context for another SharePoint site
+        /// </summary>
+        /// <param name="groupId">Id of the other Microsoft 365 group to create a <see cref="PnPContext"/> for</param>
+        /// <returns>New <see cref="PnPContext"/></returns>
+        public async Task<PnPContext> CloneAsync(Guid groupId)
+        {
+            if (groupId == Guid.Empty)
+            {
+                throw new ArgumentException(nameof(groupId));
+            }
+
+            PnPContext clonedContext = PrepareClonedContext();
+#if DEBUG
+            if (Mode != TestMode.Default)
+            {
+                CloneCount++;
+                clonedContext = await CloneForTestingAsync(this, groupId, TestId + (100 * CloneCount)).ConfigureAwait(false);
+            }
+            else
+            {
+                await InitializeClonedContextAsync(groupId, clonedContext).ConfigureAwait(false);
+            }
+#else
+            await InitializeClonedContextAsync(groupId, clonedContext).ConfigureAwait(false);
+#endif
+            return clonedContext;
+        }
+
         private async Task InitializeClonedContextAsync(Uri uri, PnPContext clonedContext)
         {
             if (!uri.Equals(Uri))
@@ -514,6 +547,21 @@ namespace PnP.Core.Services
             }
         }
 
+        private async Task InitializeClonedContextAsync(Guid groupId, PnPContext clonedContext)
+        {
+            if (!groupId.Equals(Site.GroupId))
+            {
+                await PnPContextFactory.ConfigureForGroup(clonedContext, groupId).ConfigureAwait(false);
+                await PnPContextFactory.InitializeContextAsync(clonedContext, LocalContextOptions).ConfigureAwait(false);
+            }
+            else
+            {
+                // Ensure the context has an Url set
+                clonedContext.Uri = Uri;
+                await PnPContextFactory.CopyContextInitializationAsync(this, clonedContext).ConfigureAwait(false);
+            }
+        }
+
         private PnPContext CreateClonedContext(Uri uri)
         {
             if (uri == null)
@@ -521,19 +569,24 @@ namespace PnP.Core.Services
                 throw new ArgumentNullException(nameof(uri));
             }
 
+            PnPContext clonedContext = PrepareClonedContext();
+            clonedContext.Uri = uri;
+
+            return clonedContext;
+        }
+
+        private PnPContext PrepareClonedContext()
+        {
             PnPContext clonedContext = new PnPContext(Logger, AuthenticationProvider, RestClient, GraphClient, ContextOptions, GlobalOptions, telemetry)
             {
                 // Take over graph settings
                 GraphCanUseBeta = graphCanUseBeta,
                 GraphAlwaysUseBeta = GraphAlwaysUseBeta,
                 GraphFirst = GraphFirst,
-                // Set the Uri for which this context was cloned
-                Uri = uri,
                 Environment = Environment
             };
             return clonedContext;
         }
-
         #endregion
 
         #region Internal methods
@@ -620,11 +673,6 @@ namespace PnP.Core.Services
             {
                 if (!string.IsNullOrEmpty(name))
                 {
-                    if (string.IsNullOrEmpty(name))
-                    {
-                        throw new ArgumentException(string.Format(PnPCoreResources.Exception_PnPContext_EmptyConfiguration, nameof(name)));
-                    }
-
                     var configuration = ContextOptions.Configurations.FirstOrDefault(c => c.Name == name);
                     if (configuration == null)
                     {
@@ -651,6 +699,26 @@ namespace PnP.Core.Services
             }
 
             await InitializeClonedContextAsync(uri, clonedContext).ConfigureAwait(false);
+
+            return clonedContext;
+        }
+
+        internal async Task<PnPContext> CloneForTestingAsync(PnPContext source, Guid groupId, int id)
+        {
+
+            PnPContext clonedContext = PrepareClonedContext();
+            clonedContext.CloneCount = source.CloneCount + 13;
+
+            if (source.Mode == TestMode.Mock)
+            {
+                clonedContext.SetMockMode(id, source.TestName, source.TestFilePath, source.GenerateTestMockingDebugFiles, source.TestUris);
+            }
+            else
+            {
+                clonedContext.SetRecordingMode(id, source.TestName, source.TestFilePath, source.GenerateTestMockingDebugFiles, source.TestUris);
+            }
+
+            await InitializeClonedContextAsync(groupId, clonedContext).ConfigureAwait(false);
 
             return clonedContext;
         }

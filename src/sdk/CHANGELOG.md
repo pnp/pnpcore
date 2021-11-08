@@ -33,6 +33,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Fixed ListItem datetime handling - time was always send to SharePoint in AM #593 [bilenth - Bilen]
 - Added non async method for working with hub sites in `ISite` [jansenbe - Bert Jansen]
 - Enabled support for loading "system" fields when doing a CAML query #607 [jansenbe - Bert Jansen]
+- Added support for cloning a PnPContext for a group id [jansenbe - Bert Jansen]
 
 ## [1.4.0]
 

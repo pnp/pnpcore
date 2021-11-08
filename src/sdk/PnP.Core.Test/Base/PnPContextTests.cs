@@ -337,6 +337,97 @@ namespace PnP.Core.Test.Base
         }
 
         [TestMethod]
+        public async Task ContextCloningForGroupId()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            var contextForSiteWithGroup = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2);
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.NoGroupTestSite))
+            {
+                await context.Web.LoadAsync(p => p.Title);
+
+                Assert.ThrowsException<ArgumentException>(() => context.Clone(Guid.Empty));
+
+                using (var clonedContext = context.Clone(contextForSiteWithGroup.Site.GroupId))
+                {
+                    Assert.AreNotEqual(context.Uri, clonedContext.Uri);
+                    Assert.AreEqual(context.AuthenticationProvider, clonedContext.AuthenticationProvider);
+
+                    Assert.AreEqual(context.GraphAlwaysUseBeta, clonedContext.GraphAlwaysUseBeta);
+                    Assert.AreEqual(context.GraphCanUseBeta, clonedContext.GraphCanUseBeta);
+                    Assert.AreEqual(context.GraphFirst, clonedContext.GraphFirst);
+
+                    Assert.AreEqual(context.RestClient, clonedContext.RestClient);
+                    Assert.AreEqual(context.GraphClient, clonedContext.GraphClient);
+                    Assert.AreEqual(context.Logger, clonedContext.Logger);
+
+                    Assert.AreNotEqual(context.Id, clonedContext.Id);
+
+                    // Since we loaded the same site as for contextForSiteWithGroup we should see the same data
+                    Assert.AreEqual(contextForSiteWithGroup.Uri, clonedContext.Uri);
+
+                    Assert.AreEqual(contextForSiteWithGroup.GraphAlwaysUseBeta, clonedContext.GraphAlwaysUseBeta);
+                    Assert.AreEqual(contextForSiteWithGroup.GraphCanUseBeta, clonedContext.GraphCanUseBeta);
+                    Assert.AreEqual(contextForSiteWithGroup.GraphFirst, clonedContext.GraphFirst);
+
+                    Assert.AreEqual(contextForSiteWithGroup.RestClient, clonedContext.RestClient);
+                    Assert.AreEqual(contextForSiteWithGroup.GraphClient, clonedContext.GraphClient);
+                    Assert.AreEqual(contextForSiteWithGroup.Logger, clonedContext.Logger);
+
+                    Assert.AreNotEqual(contextForSiteWithGroup.Id, clonedContext.Id);
+                }
+
+                // Since test cases work with mocking data we need to use a custom Clone method, this one will use
+                // the PnPContext.Clone method and additionally will copy of the "test" settings
+                using (var clonedContext = await TestCommon.Instance.CloneAsync(context, TestCommon.TestSubSite, 1))
+                {
+                    await clonedContext.Web.LoadAsync(p => p.Title);
+
+                    Assert.AreNotEqual(context.Web.Title, clonedContext.Web.Title);
+                }
+            }
+        }
+
+        [TestMethod]
+        public async Task ContextCloningForSameGroupId()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                await context.Web.LoadAsync(p => p.Title);
+
+                Assert.ThrowsException<ArgumentException>(() => context.Clone(Guid.Empty));
+
+                using (var clonedContext = context.Clone(context.Site.GroupId))
+                {
+                    Assert.AreEqual(context.Uri, clonedContext.Uri);
+                    Assert.AreEqual(context.AuthenticationProvider, clonedContext.AuthenticationProvider);
+
+                    Assert.AreEqual(context.GraphAlwaysUseBeta, clonedContext.GraphAlwaysUseBeta);
+                    Assert.AreEqual(context.GraphCanUseBeta, clonedContext.GraphCanUseBeta);
+                    Assert.AreEqual(context.GraphFirst, clonedContext.GraphFirst);
+
+                    Assert.AreEqual(context.RestClient, clonedContext.RestClient);
+                    Assert.AreEqual(context.GraphClient, clonedContext.GraphClient);
+                    Assert.AreEqual(context.Logger, clonedContext.Logger);
+
+                    Assert.AreNotEqual(context.Id, clonedContext.Id);
+                }
+
+                // Since test cases work with mocking data we need to use a custom Clone method, this one will use
+                // the PnPContext.Clone method and additionally will copy of the "test" settings
+                using (var clonedContext = await TestCommon.Instance.CloneAsync(context, TestCommon.TestSubSite, 1))
+                {
+                    await clonedContext.Web.LoadAsync(p => p.Title);
+
+                    Assert.AreNotEqual(context.Web.Title, clonedContext.Web.Title);
+                }
+            }
+        }
+
+        [TestMethod]
         public async Task SetAADTenant()
         {
             PnPContextFactoryOptions options = new PnPContextFactoryOptions();
