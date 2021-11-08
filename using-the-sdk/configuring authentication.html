@@ -192,6 +192,10 @@ services.AddPnPCoreAuthentication(
 </code></pre>
 <p>Paste this copied values in a safe place, because you will need them soon.
 In the <code>c:\temp</code> folder (or whatever else folder you will choose) there will also be a file named <code>PnP.Core.SDK.Consumer.pfx</code>, which includes the private key of the self-signed certificate generated for you, as well as a file named <code>PnP.Core.SDK.Consumer.cer</code>, which includes the public key of the self-signed certificate generated for you.</p>
+<div class="NOTE">
+<h5>Note</h5>
+<p>If you can't use PowerShell to generate a self-signed certificate then checkout <a href="https://docs.microsoft.com/en-us/dotnet/core/additional-tools/self-signed-certificates-guide">Generate self-signed certificates with the .NET CLI</a>. It for example shows how to use OpenSSL on Linux to create a self-signed certificate.</p>
+</div>
 <h4 id="configuring-pnp-core-sdk-to-use-the-configured-application-1">Configuring PnP Core SDK to use the configured application</h4>
 <p>When you're configuring your application to use the PnP Core SDK you will have to configure the <code>PnP.Core</code> services and the <code>PnP.Core.Auth</code> services using the <code>AddPnPCore</code> and <code>AddPnPCoreAuthentication</code> methods, respectively. The <code>ClientId</code> and <code>TenantId</code> are those of the application that you just registered in Azure Active Directory..</p>
 <pre><code class="lang-csharp">// Add the PnP Core SDK library
@@ -232,6 +236,10 @@ services.AddPnPCoreAuthentication(
             });
 });
 </code></pre>
+<div class="NOTE">
+<h5>Note</h5>
+<p>If you're using PnP Core SDK on Linux you can use <a href="https://github.com/gsoft-inc/dotnet-certificate-tool">https://github.com/gsoft-inc/dotnet-certificate-tool</a> as tool to import your certificate.</p>
+</div>
 <h2 id="using-the-multi-tenant-pnp-azure-ad-application">Using the multi-tenant PnP Azure AD application</h2>
 <p>Azure AD has the concept of multi-tenant applications allowing you to re-use an application created in another Azure AD tenant. The PnP team did setup a general purpose Azure AD application (named &quot;PnP Office 365 Management Shell&quot;) configured with the needed permissions, and you can reuse this application. It means that you don't need to create your own Azure AD application, instead you simply need to consent permissions to the already created multi-tenant application.</p>
 <h3 id="step-1">Step 1</h3>
