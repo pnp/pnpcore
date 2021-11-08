@@ -5988,6 +5988,18 @@
     },
     {
       "type": "Conceptual",
+      "source_relative_path": "using-the-sdk/admin-sharepoint-modernize.md",
+      "output": {
+        ".html": {
+          "relative_path": "using-the-sdk/admin-sharepoint-modernize.html",
+          "hash": "zFe1k6kOYGiWQ4rkIFK25Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
       "source_relative_path": "using-the-sdk/admin-sharepoint-security.md",
       "output": {
         ".html": {
@@ -6652,7 +6664,7 @@
       "output": {
         ".html": {
           "relative_path": "using-the-sdk/toc.html",
-          "hash": "jNNP5drmI1iVfqrGSyBadA=="
+          "hash": "LqzzqZaNW+MI83MxA8kk0A=="
         }
       },
       "is_incremental": false,
@@ -6709,7 +6721,7 @@
         "ConceptualDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build",
-          "total_file_count": 84,
+          "total_file_count": 85,
           "skipped_file_count": 0
         },
         "ManagedReferenceDocumentProcessor": {

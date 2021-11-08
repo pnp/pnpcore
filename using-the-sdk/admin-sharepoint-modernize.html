@@ -1,0 +1,169 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html lang="en">
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Site Collections | PnP Core SDK </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Site Collections | PnP Core SDK ">
+    <meta name="generator" content="docfx 2.56.5.0">
+    <meta name="description" content="The PnP Core SDK is a modern .NET SDK designed to work for Microsoft 365. It provides a unified object model for working with SharePoint Online and Teams which is agnostic to the underlying API's being called.">
+    <link rel="shortcut icon" href="https://c.s-microsoft.com/favicon.ico?v2">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    <meta property="docfx:newtab" content="true">
+  </head>  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../images/logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <label class="glyphicon glyphicon-search" for="search-query"></label>
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first="First" data-prev="Previous" data-next="Next" data-last="Last"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+                  <div class="contribution-panel mobile-hide pull-right">
+                      <a href="https://github.com/pnp/pnpcore/blob/dev/docs/using-the-sdk/admin-sharepoint-modernize.md/#L1" title="Improve this Doc" class="improve-doc-lg"><i class="glyphicon glyphicon-pencil"></i></a>
+                  </div>
+                    <h1 id="site-collections">Site Collections</h1>
+
+<p>The Core SDK Admin library provides SharePoint Modernization APIs that allow you to &quot;upgrade&quot; classic sites to become modern Team or Communication sites. To learn more about modernizing your SharePoint sites checkout <a href="https://aka.ms/sharepoint/modernization">https://aka.ms/sharepoint/modernization</a>.</p>
+<h2 id="creating-context">Creating Context</h2>
+<p>In this article, you'll see a lot of <code>context</code> use: in this case this is a <code>PnPContext</code> which was obtained via the <code>PnPContextFactory</code> as explained in the <a href="readme.html">overview article</a> and shown below:</p>
+<pre><code class="lang-csharp">using (var context = await pnpContextFactory.CreateAsync(&quot;SiteToWorkWith&quot;))
+{
+    // See next chapter on how to use the PnPContext for doing SharePoint admin operations
+}
+</code></pre>
+<h2 id="pnpcoreadmin-dependency">PnP.Core.Admin dependency</h2>
+<p>The functionality shown in this article depends on the <a href="https://www.nuget.org/packages/PnP.Core.Admin">PnP.Core.Admin nuget package</a>. Once the PnP.Core.Admin nuget package has been installed you can get to the SharePoint admin features via using the <code>GetSharePointAdmin</code>, <code>GetSiteCollectionAppManager</code>, <code>GetTenantAppManager</code> and <code>GetSiteCollectionManager</code> extension methods:</p>
+<pre><code class="lang-csharp">using (var context = await pnpContextFactory.CreateAsync(&quot;SiteToWorkWith&quot;))
+{
+    // Use the GetSharePointAdmin extension method on any PnPContext 
+    // to tap into the SharePoint admin features
+    var url = context.GetSharePointAdmin().GetTenantAdminCenterUri();
+}
+</code></pre>
+<h2 id="connecting-a-site-to-a-new-microsoft-365-group">Connecting a site to a new Microsoft 365 group</h2>
+<p>By default only new team sites are connected to a Microsoft 365 group, but what if you'd wanted to connect your existing classic team sites to a Microsoft 365 group? A reason to do this would be for example the need to set up a Teams team for the site or use any other Microsoft 365 service that's connected to a Microsoft 365 group. Luckily you can take an existing site, create a new Microsoft 365 group for it, and hook it up to site. To do this you have to use one of the <code>ConnectSiteCollectionToGroup</code> methods: these methods take in an <code>ConnectSiteToGroupOptions</code> object defining the three mandatory properties: the url of the site that needs to be connected to group, the alias to use for the group and the display name to use for the group:</p>
+<pre><code class="lang-csharp">ConnectSiteToGroupOptions groupConnectOptions = new ConnectSiteToGroupOptions(new Uri(&quot;https://contoso.sharepoint.com/sites/sitetogroupconnect&quot;), &quot;sitealias&quot;, &quot;Site title&quot;);
+await context.GetSiteCollectionManager().ConnectSiteCollectionToGroupAsync(groupConnectOptions);
+</code></pre>
+<h2 id="control-the-add-teams-prompt">Control the &quot;Add Teams&quot; prompt</h2>
+<p>Microsoft 365 group connected sites by default show a prompt in their left navigation to enable the creation of Team. Sometimes you might not want your users to create a Team or you do want to create the Team programmatically. For those cases you can use the <code>IsAddTeamsPromptHidden</code> and <code>HideAddTeamsPrompt</code> methods:</p>
+<pre><code class="lang-csharp">// Check if the Add Teams prompt is hidden
+var isAddTeamsPromptHidden = await context.GetSiteCollectionManager().IsAddTeamsPromptHiddenAsync(new Uri(&quot;https://contoso.sharepoint.com/sites/sitetogroupconnect&quot;));
+
+if (!isAddTeamsPromptHidden)
+{
+    // Hide the Add Teams prompt
+    await context.GetSiteCollectionManager().HideAddTeamsPromptAsync(new Uri(&quot;https://contoso.sharepoint.com/sites/sitetogroupconnect&quot;));
+}
+</code></pre>
+<h2 id="create-a-team-for-a-microsoft-365-group-connected-site">Create a Team for a Microsoft 365 Group connected site</h2>
+<p>Once a site collection is connected to a Microsoft 365 group it's eligible to be &quot;teamified&quot;, so creating a Team linked to the site's Microsoft 365 group. To do so, the PnP Core SDK Teams admin API features are needed, more specifically the <code>CreateTeam</code> methods.</p>
+<pre><code class="lang-csharp">Guid groupId = Guid.Parse(&quot;&quot;);
+using (var contextWithTeam = await context.GetTeamManager().CreateTeamAsync(new TeamForGroupOptions(groupId)))
+{
+    // Post a message in the Teams general channel
+    await context.Team.LoadAsync(p =&gt; p.PrimaryChannel);
+    await context.Team.PrimaryChannel.LoadAsync(p =&gt; p.Messages);
+    await context.Team.PrimaryChannel.Messages.AddAsync(&quot;Hi Teams!&quot;);     
+}
+</code></pre>
+<h2 id="enabling-communication-site-features">Enabling communication site features</h2>
+<p>Connecting to a Microsoft 365 group and possible also adding a Team is one way to modernize your classic team sites, but you can also turn a classic team site into a communication site by enabling the communication site features. Communication site features can be enabled on a site collection assuming that:</p>
+<ul>
+<li>The site collection is not connected to a Microsoft 365 group</li>
+<li>The site collection's template is STS#0 or EHS#1</li>
+</ul>
+<p>If above requirements are met you can use the <code>EnableCommunicationSiteFeatures</code> methods to transform your classic site into a communication site.</p>
+<pre><code class="lang-csharp">// Enable the communication site features on this classic site, uses Topic design package (default)
+await context.GetSiteCollectionManager().EnableCommunicationSiteFeaturesAsync(context.Uri);
+
+// Enable the communication site features on this classic site, uses Showcase design package
+await context.GetSiteCollectionManager().EnableCommunicationSiteFeaturesAsync(context.Uri, Guid.Parse(&quot;6142d2a0-63a5-4ba0-aede-d9fefca2c767&quot;));
+</code></pre>
+</article>
+          </div>
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              </nav>
+            </div>
+          </div>        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            <span>PnP Core SDK<br>Generated by <strong><a href='https://dotnet.github.io/docfx' alt='Doc FX Website'>DocFX</a></strong> with <strong><a href='https://ovasquez.github.io/docfx-material' alt='DocFx Material Theme'>Material UI</a></strong></span>
+            
+            <img src="https://telemetry.sharepointpnp.com/@pnp.github.io/index/" alt="spacer">
+          </div>
+        </div>
+      </footer>    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>  </body>
+</html>
