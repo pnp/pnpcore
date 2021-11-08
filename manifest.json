@@ -414,7 +414,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.html",
-          "hash": "D2AOj5fbH9sDsgzj/YZmOA=="
+          "hash": "h6+G7zOS9RLv+4pJnrgE1Q=="
         }
       },
       "is_incremental": false,
@@ -751,6 +751,66 @@
         ".html": {
           "relative_path": "api/PnP.Core.Admin.Model.SharePoint.html",
           "hash": "s7XLDSu99AgtRCNBVoUivQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Admin.Model.Teams.ITeamManager.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Admin.Model.Teams.ITeamManager.html",
+          "hash": "1npS1mx4rX/vECELhY2gBg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Admin.Model.Teams.TeamCreationOptions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Admin.Model.Teams.TeamCreationOptions.html",
+          "hash": "YDisL/Hv0am3TyuYWqYDqg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Admin.Model.Teams.TeamForGroupOptions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Admin.Model.Teams.TeamForGroupOptions.html",
+          "hash": "wiDVxeV0z9aHqJTkL6OiBw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Admin.Model.Teams.TeamOptions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Admin.Model.Teams.TeamOptions.html",
+          "hash": "nZUPabd7dg3yiD1TQ8PZ9A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Admin.Model.Teams.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Admin.Model.Teams.html",
+          "hash": "+X/8vvfneEUMt/DjAQJw8g=="
         }
       },
       "is_incremental": false,
@@ -5130,7 +5190,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Services.PnPContext.html",
-          "hash": "NgEH5Xbn/SM4n3GTw5vc0A=="
+          "hash": "L/ei7YAci6IZcj6HblT9zA=="
         }
       },
       "is_incremental": false,
@@ -5142,7 +5202,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Services.PnPContextExtensions.html",
-          "hash": "QKqn4FP/eOTtVlOUZY3FqQ=="
+          "hash": "GFpd4aVTFqpuuKVOGuIJcg=="
         }
       },
       "is_incremental": false,
@@ -5298,7 +5358,7 @@
       "output": {
         ".html": {
           "relative_path": "api/toc.html",
-          "hash": "2MVjfuA4Xr6H/H07hrDcpw=="
+          "hash": "Um02DXAAlJT4RsYNQaGSiw=="
         }
       },
       "is_incremental": false,
@@ -6655,7 +6715,7 @@
         "ManagedReferenceDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build",
-          "total_file_count": 439,
+          "total_file_count": 444,
           "skipped_file_count": 0
         },
         "ResourceDocumentProcessor": {

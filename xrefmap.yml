@@ -2589,6 +2589,44 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.DeleteSiteCollectionAsync
   nameWithType: ISiteCollectionManager.DeleteSiteCollectionAsync
+- uid: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.EnableCommunicationSiteFeatures(Uri)
+  name: EnableCommunicationSiteFeatures(Uri)
+  href: api/PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.html#PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_EnableCommunicationSiteFeatures_Uri_
+  commentId: M:PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.EnableCommunicationSiteFeatures(Uri)
+  fullName: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.EnableCommunicationSiteFeatures(Uri)
+  nameWithType: ISiteCollectionManager.EnableCommunicationSiteFeatures(Uri)
+- uid: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.EnableCommunicationSiteFeatures(Uri,Guid)
+  name: EnableCommunicationSiteFeatures(Uri, Guid)
+  href: api/PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.html#PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_EnableCommunicationSiteFeatures_Uri_Guid_
+  commentId: M:PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.EnableCommunicationSiteFeatures(Uri,Guid)
+  fullName: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.EnableCommunicationSiteFeatures(Uri, Guid)
+  nameWithType: ISiteCollectionManager.EnableCommunicationSiteFeatures(Uri, Guid)
+- uid: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.EnableCommunicationSiteFeatures*
+  name: EnableCommunicationSiteFeatures
+  href: api/PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.html#PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_EnableCommunicationSiteFeatures_
+  commentId: Overload:PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.EnableCommunicationSiteFeatures
+  isSpec: "True"
+  fullName: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.EnableCommunicationSiteFeatures
+  nameWithType: ISiteCollectionManager.EnableCommunicationSiteFeatures
+- uid: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.EnableCommunicationSiteFeaturesAsync(Uri)
+  name: EnableCommunicationSiteFeaturesAsync(Uri)
+  href: api/PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.html#PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_EnableCommunicationSiteFeaturesAsync_Uri_
+  commentId: M:PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.EnableCommunicationSiteFeaturesAsync(Uri)
+  fullName: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.EnableCommunicationSiteFeaturesAsync(Uri)
+  nameWithType: ISiteCollectionManager.EnableCommunicationSiteFeaturesAsync(Uri)
+- uid: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.EnableCommunicationSiteFeaturesAsync(Uri,Guid)
+  name: EnableCommunicationSiteFeaturesAsync(Uri, Guid)
+  href: api/PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.html#PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_EnableCommunicationSiteFeaturesAsync_Uri_Guid_
+  commentId: M:PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.EnableCommunicationSiteFeaturesAsync(Uri,Guid)
+  fullName: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.EnableCommunicationSiteFeaturesAsync(Uri, Guid)
+  nameWithType: ISiteCollectionManager.EnableCommunicationSiteFeaturesAsync(Uri, Guid)
+- uid: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.EnableCommunicationSiteFeaturesAsync*
+  name: EnableCommunicationSiteFeaturesAsync
+  href: api/PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.html#PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_EnableCommunicationSiteFeaturesAsync_
+  commentId: Overload:PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.EnableCommunicationSiteFeaturesAsync
+  isSpec: "True"
+  fullName: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.EnableCommunicationSiteFeaturesAsync
+  nameWithType: ISiteCollectionManager.EnableCommunicationSiteFeaturesAsync
 - uid: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.GetRecycledSiteCollections
   name: GetRecycledSiteCollections()
   href: api/PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.html#PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_GetRecycledSiteCollections
@@ -2745,6 +2783,58 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.GetSiteCollectionWithDetailsAsync
   nameWithType: ISiteCollectionManager.GetSiteCollectionWithDetailsAsync
+- uid: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.HideAddTeamsPrompt(Uri)
+  name: HideAddTeamsPrompt(Uri)
+  href: api/PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.html#PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_HideAddTeamsPrompt_Uri_
+  commentId: M:PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.HideAddTeamsPrompt(Uri)
+  fullName: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.HideAddTeamsPrompt(Uri)
+  nameWithType: ISiteCollectionManager.HideAddTeamsPrompt(Uri)
+- uid: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.HideAddTeamsPrompt*
+  name: HideAddTeamsPrompt
+  href: api/PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.html#PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_HideAddTeamsPrompt_
+  commentId: Overload:PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.HideAddTeamsPrompt
+  isSpec: "True"
+  fullName: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.HideAddTeamsPrompt
+  nameWithType: ISiteCollectionManager.HideAddTeamsPrompt
+- uid: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.HideAddTeamsPromptAsync(Uri)
+  name: HideAddTeamsPromptAsync(Uri)
+  href: api/PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.html#PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_HideAddTeamsPromptAsync_Uri_
+  commentId: M:PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.HideAddTeamsPromptAsync(Uri)
+  fullName: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.HideAddTeamsPromptAsync(Uri)
+  nameWithType: ISiteCollectionManager.HideAddTeamsPromptAsync(Uri)
+- uid: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.HideAddTeamsPromptAsync*
+  name: HideAddTeamsPromptAsync
+  href: api/PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.html#PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_HideAddTeamsPromptAsync_
+  commentId: Overload:PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.HideAddTeamsPromptAsync
+  isSpec: "True"
+  fullName: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.HideAddTeamsPromptAsync
+  nameWithType: ISiteCollectionManager.HideAddTeamsPromptAsync
+- uid: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.IsAddTeamsPromptHidden(Uri)
+  name: IsAddTeamsPromptHidden(Uri)
+  href: api/PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.html#PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_IsAddTeamsPromptHidden_Uri_
+  commentId: M:PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.IsAddTeamsPromptHidden(Uri)
+  fullName: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.IsAddTeamsPromptHidden(Uri)
+  nameWithType: ISiteCollectionManager.IsAddTeamsPromptHidden(Uri)
+- uid: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.IsAddTeamsPromptHidden*
+  name: IsAddTeamsPromptHidden
+  href: api/PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.html#PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_IsAddTeamsPromptHidden_
+  commentId: Overload:PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.IsAddTeamsPromptHidden
+  isSpec: "True"
+  fullName: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.IsAddTeamsPromptHidden
+  nameWithType: ISiteCollectionManager.IsAddTeamsPromptHidden
+- uid: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.IsAddTeamsPromptHiddenAsync(Uri)
+  name: IsAddTeamsPromptHiddenAsync(Uri)
+  href: api/PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.html#PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_IsAddTeamsPromptHiddenAsync_Uri_
+  commentId: M:PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.IsAddTeamsPromptHiddenAsync(Uri)
+  fullName: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.IsAddTeamsPromptHiddenAsync(Uri)
+  nameWithType: ISiteCollectionManager.IsAddTeamsPromptHiddenAsync(Uri)
+- uid: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.IsAddTeamsPromptHiddenAsync*
+  name: IsAddTeamsPromptHiddenAsync
+  href: api/PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.html#PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_IsAddTeamsPromptHiddenAsync_
+  commentId: Overload:PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.IsAddTeamsPromptHiddenAsync
+  isSpec: "True"
+  fullName: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.IsAddTeamsPromptHiddenAsync
+  nameWithType: ISiteCollectionManager.IsAddTeamsPromptHiddenAsync
 - uid: PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.RecycleSiteCollection(Uri)
   name: RecycleSiteCollection(Uri)
   href: api/PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.html#PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_RecycleSiteCollection_Uri_
@@ -7455,6 +7545,114 @@ references:
   commentId: F:PnP.Core.Admin.Model.SharePoint.Workflows2013State.Enabled
   fullName: PnP.Core.Admin.Model.SharePoint.Workflows2013State.Enabled
   nameWithType: Workflows2013State.Enabled
+- uid: PnP.Core.Admin.Model.Teams
+  name: PnP.Core.Admin.Model.Teams
+  href: api/PnP.Core.Admin.Model.Teams.html
+  commentId: N:PnP.Core.Admin.Model.Teams
+  fullName: PnP.Core.Admin.Model.Teams
+  nameWithType: PnP.Core.Admin.Model.Teams
+- uid: PnP.Core.Admin.Model.Teams.ITeamManager
+  name: ITeamManager
+  href: api/PnP.Core.Admin.Model.Teams.ITeamManager.html
+  commentId: T:PnP.Core.Admin.Model.Teams.ITeamManager
+  fullName: PnP.Core.Admin.Model.Teams.ITeamManager
+  nameWithType: ITeamManager
+- uid: PnP.Core.Admin.Model.Teams.ITeamManager.CreateTeam(PnP.Core.Admin.Model.Teams.TeamOptions,PnP.Core.Admin.Model.Teams.TeamCreationOptions)
+  name: CreateTeam(TeamOptions, TeamCreationOptions)
+  href: api/PnP.Core.Admin.Model.Teams.ITeamManager.html#PnP_Core_Admin_Model_Teams_ITeamManager_CreateTeam_PnP_Core_Admin_Model_Teams_TeamOptions_PnP_Core_Admin_Model_Teams_TeamCreationOptions_
+  commentId: M:PnP.Core.Admin.Model.Teams.ITeamManager.CreateTeam(PnP.Core.Admin.Model.Teams.TeamOptions,PnP.Core.Admin.Model.Teams.TeamCreationOptions)
+  fullName: PnP.Core.Admin.Model.Teams.ITeamManager.CreateTeam(PnP.Core.Admin.Model.Teams.TeamOptions, PnP.Core.Admin.Model.Teams.TeamCreationOptions)
+  nameWithType: ITeamManager.CreateTeam(TeamOptions, TeamCreationOptions)
+- uid: PnP.Core.Admin.Model.Teams.ITeamManager.CreateTeam*
+  name: CreateTeam
+  href: api/PnP.Core.Admin.Model.Teams.ITeamManager.html#PnP_Core_Admin_Model_Teams_ITeamManager_CreateTeam_
+  commentId: Overload:PnP.Core.Admin.Model.Teams.ITeamManager.CreateTeam
+  isSpec: "True"
+  fullName: PnP.Core.Admin.Model.Teams.ITeamManager.CreateTeam
+  nameWithType: ITeamManager.CreateTeam
+- uid: PnP.Core.Admin.Model.Teams.ITeamManager.CreateTeamAsync(PnP.Core.Admin.Model.Teams.TeamOptions,PnP.Core.Admin.Model.Teams.TeamCreationOptions)
+  name: CreateTeamAsync(TeamOptions, TeamCreationOptions)
+  href: api/PnP.Core.Admin.Model.Teams.ITeamManager.html#PnP_Core_Admin_Model_Teams_ITeamManager_CreateTeamAsync_PnP_Core_Admin_Model_Teams_TeamOptions_PnP_Core_Admin_Model_Teams_TeamCreationOptions_
+  commentId: M:PnP.Core.Admin.Model.Teams.ITeamManager.CreateTeamAsync(PnP.Core.Admin.Model.Teams.TeamOptions,PnP.Core.Admin.Model.Teams.TeamCreationOptions)
+  fullName: PnP.Core.Admin.Model.Teams.ITeamManager.CreateTeamAsync(PnP.Core.Admin.Model.Teams.TeamOptions, PnP.Core.Admin.Model.Teams.TeamCreationOptions)
+  nameWithType: ITeamManager.CreateTeamAsync(TeamOptions, TeamCreationOptions)
+- uid: PnP.Core.Admin.Model.Teams.ITeamManager.CreateTeamAsync*
+  name: CreateTeamAsync
+  href: api/PnP.Core.Admin.Model.Teams.ITeamManager.html#PnP_Core_Admin_Model_Teams_ITeamManager_CreateTeamAsync_
+  commentId: Overload:PnP.Core.Admin.Model.Teams.ITeamManager.CreateTeamAsync
+  isSpec: "True"
+  fullName: PnP.Core.Admin.Model.Teams.ITeamManager.CreateTeamAsync
+  nameWithType: ITeamManager.CreateTeamAsync
+- uid: PnP.Core.Admin.Model.Teams.TeamCreationOptions
+  name: TeamCreationOptions
+  href: api/PnP.Core.Admin.Model.Teams.TeamCreationOptions.html
+  commentId: T:PnP.Core.Admin.Model.Teams.TeamCreationOptions
+  fullName: PnP.Core.Admin.Model.Teams.TeamCreationOptions
+  nameWithType: TeamCreationOptions
+- uid: PnP.Core.Admin.Model.Teams.TeamCreationOptions.MaxStatusChecks
+  name: MaxStatusChecks
+  href: api/PnP.Core.Admin.Model.Teams.TeamCreationOptions.html#PnP_Core_Admin_Model_Teams_TeamCreationOptions_MaxStatusChecks
+  commentId: P:PnP.Core.Admin.Model.Teams.TeamCreationOptions.MaxStatusChecks
+  fullName: PnP.Core.Admin.Model.Teams.TeamCreationOptions.MaxStatusChecks
+  nameWithType: TeamCreationOptions.MaxStatusChecks
+- uid: PnP.Core.Admin.Model.Teams.TeamCreationOptions.MaxStatusChecks*
+  name: MaxStatusChecks
+  href: api/PnP.Core.Admin.Model.Teams.TeamCreationOptions.html#PnP_Core_Admin_Model_Teams_TeamCreationOptions_MaxStatusChecks_
+  commentId: Overload:PnP.Core.Admin.Model.Teams.TeamCreationOptions.MaxStatusChecks
+  isSpec: "True"
+  fullName: PnP.Core.Admin.Model.Teams.TeamCreationOptions.MaxStatusChecks
+  nameWithType: TeamCreationOptions.MaxStatusChecks
+- uid: PnP.Core.Admin.Model.Teams.TeamCreationOptions.WaitAfterStatusCheck
+  name: WaitAfterStatusCheck
+  href: api/PnP.Core.Admin.Model.Teams.TeamCreationOptions.html#PnP_Core_Admin_Model_Teams_TeamCreationOptions_WaitAfterStatusCheck
+  commentId: P:PnP.Core.Admin.Model.Teams.TeamCreationOptions.WaitAfterStatusCheck
+  fullName: PnP.Core.Admin.Model.Teams.TeamCreationOptions.WaitAfterStatusCheck
+  nameWithType: TeamCreationOptions.WaitAfterStatusCheck
+- uid: PnP.Core.Admin.Model.Teams.TeamCreationOptions.WaitAfterStatusCheck*
+  name: WaitAfterStatusCheck
+  href: api/PnP.Core.Admin.Model.Teams.TeamCreationOptions.html#PnP_Core_Admin_Model_Teams_TeamCreationOptions_WaitAfterStatusCheck_
+  commentId: Overload:PnP.Core.Admin.Model.Teams.TeamCreationOptions.WaitAfterStatusCheck
+  isSpec: "True"
+  fullName: PnP.Core.Admin.Model.Teams.TeamCreationOptions.WaitAfterStatusCheck
+  nameWithType: TeamCreationOptions.WaitAfterStatusCheck
+- uid: PnP.Core.Admin.Model.Teams.TeamForGroupOptions
+  name: TeamForGroupOptions
+  href: api/PnP.Core.Admin.Model.Teams.TeamForGroupOptions.html
+  commentId: T:PnP.Core.Admin.Model.Teams.TeamForGroupOptions
+  fullName: PnP.Core.Admin.Model.Teams.TeamForGroupOptions
+  nameWithType: TeamForGroupOptions
+- uid: PnP.Core.Admin.Model.Teams.TeamForGroupOptions.#ctor(Guid)
+  name: TeamForGroupOptions(Guid)
+  href: api/PnP.Core.Admin.Model.Teams.TeamForGroupOptions.html#PnP_Core_Admin_Model_Teams_TeamForGroupOptions__ctor_Guid_
+  commentId: M:PnP.Core.Admin.Model.Teams.TeamForGroupOptions.#ctor(Guid)
+  fullName: PnP.Core.Admin.Model.Teams.TeamForGroupOptions.TeamForGroupOptions(Guid)
+  nameWithType: TeamForGroupOptions.TeamForGroupOptions(Guid)
+- uid: PnP.Core.Admin.Model.Teams.TeamForGroupOptions.#ctor*
+  name: TeamForGroupOptions
+  href: api/PnP.Core.Admin.Model.Teams.TeamForGroupOptions.html#PnP_Core_Admin_Model_Teams_TeamForGroupOptions__ctor_
+  commentId: Overload:PnP.Core.Admin.Model.Teams.TeamForGroupOptions.#ctor
+  isSpec: "True"
+  fullName: PnP.Core.Admin.Model.Teams.TeamForGroupOptions.TeamForGroupOptions
+  nameWithType: TeamForGroupOptions.TeamForGroupOptions
+- uid: PnP.Core.Admin.Model.Teams.TeamForGroupOptions.GroupId
+  name: GroupId
+  href: api/PnP.Core.Admin.Model.Teams.TeamForGroupOptions.html#PnP_Core_Admin_Model_Teams_TeamForGroupOptions_GroupId
+  commentId: P:PnP.Core.Admin.Model.Teams.TeamForGroupOptions.GroupId
+  fullName: PnP.Core.Admin.Model.Teams.TeamForGroupOptions.GroupId
+  nameWithType: TeamForGroupOptions.GroupId
+- uid: PnP.Core.Admin.Model.Teams.TeamForGroupOptions.GroupId*
+  name: GroupId
+  href: api/PnP.Core.Admin.Model.Teams.TeamForGroupOptions.html#PnP_Core_Admin_Model_Teams_TeamForGroupOptions_GroupId_
+  commentId: Overload:PnP.Core.Admin.Model.Teams.TeamForGroupOptions.GroupId
+  isSpec: "True"
+  fullName: PnP.Core.Admin.Model.Teams.TeamForGroupOptions.GroupId
+  nameWithType: TeamForGroupOptions.GroupId
+- uid: PnP.Core.Admin.Model.Teams.TeamOptions
+  name: TeamOptions
+  href: api/PnP.Core.Admin.Model.Teams.TeamOptions.html
+  commentId: T:PnP.Core.Admin.Model.Teams.TeamOptions
+  fullName: PnP.Core.Admin.Model.Teams.TeamOptions
+  nameWithType: TeamOptions
 - uid: PnP.Core.Auth
   name: PnP.Core.Auth
   href: api/PnP.Core.Auth.html
@@ -42466,6 +42664,12 @@ references:
   commentId: M:PnP.Core.Services.PnPContext.Clone
   fullName: PnP.Core.Services.PnPContext.Clone()
   nameWithType: PnPContext.Clone()
+- uid: PnP.Core.Services.PnPContext.Clone(Guid)
+  name: Clone(Guid)
+  href: api/PnP.Core.Services.PnPContext.html#PnP_Core_Services_PnPContext_Clone_Guid_
+  commentId: M:PnP.Core.Services.PnPContext.Clone(Guid)
+  fullName: PnP.Core.Services.PnPContext.Clone(Guid)
+  nameWithType: PnPContext.Clone(Guid)
 - uid: PnP.Core.Services.PnPContext.Clone(System.String)
   name: Clone(String)
   href: api/PnP.Core.Services.PnPContext.html#PnP_Core_Services_PnPContext_Clone_System_String_
@@ -42491,6 +42695,12 @@ references:
   commentId: M:PnP.Core.Services.PnPContext.CloneAsync
   fullName: PnP.Core.Services.PnPContext.CloneAsync()
   nameWithType: PnPContext.CloneAsync()
+- uid: PnP.Core.Services.PnPContext.CloneAsync(Guid)
+  name: CloneAsync(Guid)
+  href: api/PnP.Core.Services.PnPContext.html#PnP_Core_Services_PnPContext_CloneAsync_Guid_
+  commentId: M:PnP.Core.Services.PnPContext.CloneAsync(Guid)
+  fullName: PnP.Core.Services.PnPContext.CloneAsync(Guid)
+  nameWithType: PnPContext.CloneAsync(Guid)
 - uid: PnP.Core.Services.PnPContext.CloneAsync(System.String)
   name: CloneAsync(String)
   href: api/PnP.Core.Services.PnPContext.html#PnP_Core_Services_PnPContext_CloneAsync_System_String_
@@ -42833,6 +43043,19 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Services.PnPContextExtensions.GetSiteCollectionManager
   nameWithType: PnPContextExtensions.GetSiteCollectionManager
+- uid: PnP.Core.Services.PnPContextExtensions.GetTeamManager(PnP.Core.Services.PnPContext)
+  name: GetTeamManager(PnPContext)
+  href: api/PnP.Core.Services.PnPContextExtensions.html#PnP_Core_Services_PnPContextExtensions_GetTeamManager_PnP_Core_Services_PnPContext_
+  commentId: M:PnP.Core.Services.PnPContextExtensions.GetTeamManager(PnP.Core.Services.PnPContext)
+  fullName: PnP.Core.Services.PnPContextExtensions.GetTeamManager(PnP.Core.Services.PnPContext)
+  nameWithType: PnPContextExtensions.GetTeamManager(PnPContext)
+- uid: PnP.Core.Services.PnPContextExtensions.GetTeamManager*
+  name: GetTeamManager
+  href: api/PnP.Core.Services.PnPContextExtensions.html#PnP_Core_Services_PnPContextExtensions_GetTeamManager_
+  commentId: Overload:PnP.Core.Services.PnPContextExtensions.GetTeamManager
+  isSpec: "True"
+  fullName: PnP.Core.Services.PnPContextExtensions.GetTeamManager
+  nameWithType: PnPContextExtensions.GetTeamManager
 - uid: PnP.Core.Services.PnPContextExtensions.GetTenantAppManager(PnP.Core.Services.PnPContext)
   name: GetTenantAppManager(PnPContext)
   href: api/PnP.Core.Services.PnPContextExtensions.html#PnP_Core_Services_PnPContextExtensions_GetTenantAppManager_PnP_Core_Services_PnPContext_

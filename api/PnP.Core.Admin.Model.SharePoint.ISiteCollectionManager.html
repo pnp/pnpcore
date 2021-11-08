@@ -455,6 +455,250 @@ Pass in a <a class="xref" href="PnP.Core.Admin.Model.SharePoint.CommunicationSit
   
   <span class="small pull-right mobile-hide">
     <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_EnableCommunicationSiteFeatures_Uri_.md&amp;value=---%0Auid%3A%20PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.EnableCommunicationSiteFeatures(Uri)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Admin/Model/SharePoint/Core/Public/ISiteCollectionManager.cs/#L263" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_EnableCommunicationSiteFeatures_" data-uid="PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.EnableCommunicationSiteFeatures*"></a>
+  
+  <h4 id="PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_EnableCommunicationSiteFeatures_Uri_" data-uid="PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.EnableCommunicationSiteFeatures(Uri)"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_EnableCommunicationSiteFeatures_Uri_" class="expander" data-toggle="collapse">EnableCommunicationSiteFeatures(Uri)</a></h4>
+  
+  <div id="collapsible-PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_EnableCommunicationSiteFeatures_Uri_" class="collapse in">
+  <div class="markdown level1 summary"><p>Enables the communication site features on this team site using the Topic design.
+Requirements:</p>
+<ul>
+<li>Only works when the site collection was not connected to an Microsoft 365 group</li>
+<li>Web is root web of the site collection, cannot be applied to sub sites</li>
+<li>Web template is &quot;STS#0&quot; or &quot;EHS#1&quot; (so TeamSite)</li>
+</ul>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void EnableCommunicationSiteFeatures(Uri site)</code></pre>
+  </div>
+
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><span class="xref">Uri</span></span>
+        <span class="parametername">site</span>
+        <p><p>Url of the team site collection to enable communication site features for</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_EnableCommunicationSiteFeatures_Uri_Guid_.md&amp;value=---%0Auid%3A%20PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.EnableCommunicationSiteFeatures(Uri%2CGuid)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Admin/Model/SharePoint/Core/Public/ISiteCollectionManager.cs/#L289" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_EnableCommunicationSiteFeatures_" data-uid="PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.EnableCommunicationSiteFeatures*"></a>
+  
+  <h4 id="PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_EnableCommunicationSiteFeatures_Uri_Guid_" data-uid="PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.EnableCommunicationSiteFeatures(Uri,Guid)"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_EnableCommunicationSiteFeatures_Uri_Guid_" class="expander" data-toggle="collapse">EnableCommunicationSiteFeatures(Uri, Guid)</a></h4>
+  
+  <div id="collapsible-PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_EnableCommunicationSiteFeatures_Uri_Guid_" class="collapse in">
+  <div class="markdown level1 summary"><p>Enables the communication site features on this team site using the Topic design.
+Requirements:</p>
+<ul>
+<li>Use 96c933ac-3698-44c7-9f4a-5fd17d71af9e (Topic), 6142d2a0-63a5-4ba0-aede-d9fefca2c767 (Showcase) or f6cc5403-0d63-442e-96c0-285923709ffc (Blank) as design package id</li>
+<li>Only works when the site collection was not connected to an Microsoft 365 group</li>
+<li>Web is root web of the site collection, cannot be applied to sub sites</li>
+<li>Web template is &quot;STS#0&quot; or &quot;EHS#1&quot; (so TeamSite)</li>
+</ul>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void EnableCommunicationSiteFeatures(Uri site, Guid designPackageId)</code></pre>
+  </div>
+
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><span class="xref">Uri</span></span>
+        <span class="parametername">site</span>
+        <p><p>Url of the team site collection to enable communication site features for</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><span class="xref">Guid</span></span>
+        <span class="parametername">designPackageId</span>
+        <p><p>Design package id to apply</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_EnableCommunicationSiteFeaturesAsync_Uri_.md&amp;value=---%0Auid%3A%20PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.EnableCommunicationSiteFeaturesAsync(Uri)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Admin/Model/SharePoint/Core/Public/ISiteCollectionManager.cs/#L252" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_EnableCommunicationSiteFeaturesAsync_" data-uid="PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.EnableCommunicationSiteFeaturesAsync*"></a>
+  
+  <h4 id="PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_EnableCommunicationSiteFeaturesAsync_Uri_" data-uid="PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.EnableCommunicationSiteFeaturesAsync(Uri)"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_EnableCommunicationSiteFeaturesAsync_Uri_" class="expander" data-toggle="collapse">EnableCommunicationSiteFeaturesAsync(Uri)</a></h4>
+  
+  <div id="collapsible-PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_EnableCommunicationSiteFeaturesAsync_Uri_" class="collapse in">
+  <div class="markdown level1 summary"><p>Enables the communication site features on this team site using the Topic design.
+Requirements:</p>
+<ul>
+<li>Only works when the site collection was not connected to an Microsoft 365 group</li>
+<li>Web is root web of the site collection, cannot be applied to sub sites</li>
+<li>Web template is &quot;STS#0&quot; or &quot;EHS#1&quot; (so TeamSite)</li>
+</ul>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task EnableCommunicationSiteFeaturesAsync(Uri site)</code></pre>
+  </div>
+
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><span class="xref">Uri</span></span>
+        <span class="parametername">site</span>
+        <p><p>Url of the team site collection to enable communication site features for</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="xref">Task</span>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_EnableCommunicationSiteFeaturesAsync_Uri_Guid_.md&amp;value=---%0Auid%3A%20PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.EnableCommunicationSiteFeaturesAsync(Uri%2CGuid)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Admin/Model/SharePoint/Core/Public/ISiteCollectionManager.cs/#L276" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_EnableCommunicationSiteFeaturesAsync_" data-uid="PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.EnableCommunicationSiteFeaturesAsync*"></a>
+  
+  <h4 id="PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_EnableCommunicationSiteFeaturesAsync_Uri_Guid_" data-uid="PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.EnableCommunicationSiteFeaturesAsync(Uri,Guid)"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_EnableCommunicationSiteFeaturesAsync_Uri_Guid_" class="expander" data-toggle="collapse">EnableCommunicationSiteFeaturesAsync(Uri, Guid)</a></h4>
+  
+  <div id="collapsible-PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_EnableCommunicationSiteFeaturesAsync_Uri_Guid_" class="collapse in">
+  <div class="markdown level1 summary"><p>Enables the communication site features on this team site using the Topic design.
+Requirements:</p>
+<ul>
+<li>Use 96c933ac-3698-44c7-9f4a-5fd17d71af9e (Topic), 6142d2a0-63a5-4ba0-aede-d9fefca2c767 (Showcase) or f6cc5403-0d63-442e-96c0-285923709ffc (Blank) as design package id</li>
+<li>Only works when the site collection was not connected to an Microsoft 365 group</li>
+<li>Web is root web of the site collection, cannot be applied to sub sites</li>
+<li>Web template is &quot;STS#0&quot; or &quot;EHS#1&quot; (so TeamSite)</li>
+</ul>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task EnableCommunicationSiteFeaturesAsync(Uri site, Guid designPackageId)</code></pre>
+  </div>
+
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><span class="xref">Uri</span></span>
+        <span class="parametername">site</span>
+        <p><p>Url of the team site collection to enable communication site features for</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><span class="xref">Guid</span></span>
+        <span class="parametername">designPackageId</span>
+        <p><p>Design package id to apply</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="xref">Task</span>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_GetRecycledSiteCollections.md&amp;value=---%0Auid%3A%20PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.GetRecycledSiteCollections%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
@@ -1089,6 +1333,230 @@ have the proper permissions</p>
       <td>
         <span class="xref">Task</span>&lt;<a class="xref" href="PnP.Core.Admin.Model.SharePoint.ISiteCollectionWithDetails.html">ISiteCollectionWithDetails</a>&gt;
         <p><p>Site collection details, null if the passed site was not found</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_HideAddTeamsPrompt_Uri_.md&amp;value=---%0Auid%3A%20PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.HideAddTeamsPrompt(Uri)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Admin/Model/SharePoint/Core/Public/ISiteCollectionManager.cs/#L227" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_HideAddTeamsPrompt_" data-uid="PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.HideAddTeamsPrompt*"></a>
+  
+  <h4 id="PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_HideAddTeamsPrompt_Uri_" data-uid="PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.HideAddTeamsPrompt(Uri)"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_HideAddTeamsPrompt_Uri_" class="expander" data-toggle="collapse">HideAddTeamsPrompt(Uri)</a></h4>
+  
+  <div id="collapsible-PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_HideAddTeamsPrompt_Uri_" class="collapse in">
+  <div class="markdown level1 summary"><p>Hides the Add Microsoft Teams banner. Only works when the site collection was already connected to an Microsoft 365 group</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">bool HideAddTeamsPrompt(Uri site)</code></pre>
+  </div>
+
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><span class="xref">Uri</span></span>
+        <span class="parametername">site</span>
+        <p><p>Url of the site collection to hide the Add Teams prompt for</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a>
+        <p><p>True if hidden</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_HideAddTeamsPromptAsync_Uri_.md&amp;value=---%0Auid%3A%20PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.HideAddTeamsPromptAsync(Uri)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Admin/Model/SharePoint/Core/Public/ISiteCollectionManager.cs/#L220" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_HideAddTeamsPromptAsync_" data-uid="PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.HideAddTeamsPromptAsync*"></a>
+  
+  <h4 id="PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_HideAddTeamsPromptAsync_Uri_" data-uid="PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.HideAddTeamsPromptAsync(Uri)"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_HideAddTeamsPromptAsync_Uri_" class="expander" data-toggle="collapse">HideAddTeamsPromptAsync(Uri)</a></h4>
+  
+  <div id="collapsible-PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_HideAddTeamsPromptAsync_Uri_" class="collapse in">
+  <div class="markdown level1 summary"><p>Hides the Add Microsoft Teams banner. Only works when the site collection was already connected to an Microsoft 365 group</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task&lt;bool&gt; HideAddTeamsPromptAsync(Uri site)</code></pre>
+  </div>
+
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><span class="xref">Uri</span></span>
+        <span class="parametername">site</span>
+        <p><p>Url of the site collection to hide the Add Teams prompt for</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="xref">Task</span>&lt;<a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a>&gt;
+        <p><p>True if hidden</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_IsAddTeamsPromptHidden_Uri_.md&amp;value=---%0Auid%3A%20PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.IsAddTeamsPromptHidden(Uri)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Admin/Model/SharePoint/Core/Public/ISiteCollectionManager.cs/#L241" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_IsAddTeamsPromptHidden_" data-uid="PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.IsAddTeamsPromptHidden*"></a>
+  
+  <h4 id="PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_IsAddTeamsPromptHidden_Uri_" data-uid="PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.IsAddTeamsPromptHidden(Uri)"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_IsAddTeamsPromptHidden_Uri_" class="expander" data-toggle="collapse">IsAddTeamsPromptHidden(Uri)</a></h4>
+  
+  <div id="collapsible-PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_IsAddTeamsPromptHidden_Uri_" class="collapse in">
+  <div class="markdown level1 summary"><p>Checks if the Add Microsoft Teams banner is hidden. Only works when the site collection was already connected to an Microsoft 365 group.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">bool IsAddTeamsPromptHidden(Uri site)</code></pre>
+  </div>
+
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><span class="xref">Uri</span></span>
+        <span class="parametername">site</span>
+        <p><p>Url of the site collection to check the Add Teams prompt status for</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a>
+        <p><p>True if hidden, false otherwise.</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_IsAddTeamsPromptHiddenAsync_Uri_.md&amp;value=---%0Auid%3A%20PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.IsAddTeamsPromptHiddenAsync(Uri)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Admin/Model/SharePoint/Core/Public/ISiteCollectionManager.cs/#L234" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_IsAddTeamsPromptHiddenAsync_" data-uid="PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.IsAddTeamsPromptHiddenAsync*"></a>
+  
+  <h4 id="PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_IsAddTeamsPromptHiddenAsync_Uri_" data-uid="PnP.Core.Admin.Model.SharePoint.ISiteCollectionManager.IsAddTeamsPromptHiddenAsync(Uri)"><a href="#collapsible-PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_IsAddTeamsPromptHiddenAsync_Uri_" class="expander" data-toggle="collapse">IsAddTeamsPromptHiddenAsync(Uri)</a></h4>
+  
+  <div id="collapsible-PnP_Core_Admin_Model_SharePoint_ISiteCollectionManager_IsAddTeamsPromptHiddenAsync_Uri_" class="collapse in">
+  <div class="markdown level1 summary"><p>Checks if the Add Microsoft Teams banner is hidden. Only works when the site collection was already connected to an Microsoft 365 group</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task&lt;bool&gt; IsAddTeamsPromptHiddenAsync(Uri site)</code></pre>
+  </div>
+
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><span class="xref">Uri</span></span>
+        <span class="parametername">site</span>
+        <p><p>Url of the site collection to check the Add Teams prompt status for</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="xref">Task</span>&lt;<a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a>&gt;
+        <p><p>True if hidden, false otherwise.</p>
 </p>
       </td>
     </tr>
