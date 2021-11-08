@@ -1,6 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PnP.Core.Admin.Model.Microsoft365;
 using PnP.Core.Admin.Model.SharePoint;
+using PnP.Core.Admin.Model.Teams;
 using PnP.Core.Admin.Test.Utilities;
 using PnP.Core.Model;
 using PnP.Core.QueryModel;
@@ -859,6 +860,95 @@ namespace PnP.Core.Admin.Test.SharePoint
                 {
                     context.GetSiteCollectionManager().GetSiteCollectionProperties(null);
                 });
+
+            }
+        }
+        #endregion
+
+        #region Modernization
+        [TestMethod]
+        public async Task TeamifyTeamSiteUsingDelegatedPermissions()
+        {
+            //TestCommon.Instance.Mocking = false;
+            TestCommon.Instance.UseApplicationPermissions = false;
+
+            TeamSiteOptions teamSiteToCreate = null;
+
+            // Create the site collection
+            Uri createdSiteCollection = null;
+            try
+            {
+                using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+                {
+
+                    // Persist the used site url as we need to have the same url when we run an offline test
+                    string alias;
+                    if (!TestCommon.Instance.Mocking)
+                    {
+                        alias = $"pnpcoresdktestteamsite{Guid.NewGuid().ToString().Replace("-", "")}";
+                        Dictionary<string, string> properties = new Dictionary<string, string>
+                        {
+                            { "Alias", alias }
+                        };
+                        TestManager.SaveProperties(context, properties);
+                    }
+                    else
+                    {
+                        alias = TestManager.GetProperties(context)["Alias"];
+                    }
+
+                    teamSiteToCreate = new TeamSiteOptions(alias, "PnP Core SDK Test")
+                    {
+                        Description = "This is a test site collection",
+                        Language = Language.English,
+                        IsPublic = true,
+                    };
+
+
+                    SiteCreationOptions siteCreationOptions = new SiteCreationOptions()
+                    {
+                        UsingApplicationPermissions = false
+                    };
+
+                    using (var newSiteContext = context.GetSiteCollectionManager().CreateSiteCollection(teamSiteToCreate, siteCreationOptions))
+                    {
+                        createdSiteCollection = newSiteContext.Uri;
+
+                        Assert.IsTrue(newSiteContext.Site.GroupId != Guid.Empty);
+
+                        // Check prompt
+                        var isAddTeamsPromptHidden = newSiteContext.GetSiteCollectionManager().IsAddTeamsPromptHidden(newSiteContext.Uri);
+
+                        Assert.IsFalse(isAddTeamsPromptHidden);
+
+                        // Hide prompt
+                        var hidden = newSiteContext.GetSiteCollectionManager().HideAddTeamsPrompt(newSiteContext.Uri);
+
+                        isAddTeamsPromptHidden = newSiteContext.GetSiteCollectionManager().IsAddTeamsPromptHidden(newSiteContext.Uri);
+                        Assert.IsTrue(isAddTeamsPromptHidden);
+
+                        // Add teams team
+                        using (var contextWithTeam = newSiteContext.GetTeamManager().CreateTeam(new TeamForGroupOptions(newSiteContext.Site.GroupId)))
+                        {
+                            Assert.IsTrue(contextWithTeam.Team.Requested);
+                            Assert.IsTrue(contextWithTeam.Team.IsPropertyAvailable(p => p.Id));
+                        }
+                    }
+
+                    if (context.Mode == TestMode.Record)
+                    {
+                        // Add a little delay between creation and deletion
+                        await Task.Delay(TimeSpan.FromSeconds(15));
+                    }
+                }
+            }
+            finally
+            {
+                TestCommon.Instance.UseApplicationPermissions = false;
+                using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+                {
+                    context.GetSiteCollectionManager().DeleteSiteCollection(createdSiteCollection);
+                }
 
             }
         }

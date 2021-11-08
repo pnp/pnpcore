@@ -1,5 +1,6 @@
 ﻿using PnP.Core.Admin.Model.Microsoft365;
 using PnP.Core.Admin.Model.SharePoint;
+using PnP.Core.Admin.Model.Teams;
 using System;
 using System.Threading.Tasks;
 
@@ -29,6 +30,16 @@ namespace PnP.Core.Services
         public static ISiteCollectionManager GetSiteCollectionManager(this PnPContext context)
         {
             return new SiteCollectionManager(context);
+        }
+
+        /// <summary>
+        /// Extends a <see cref="PnPContext"/> with Teams admin functionality
+        /// </summary>
+        /// <param name="context"><see cref="PnPContext"/> to extend</param>
+        /// <returns>An <see cref="ISiteCollectionManager"/> instance enabling site collection admin operations</returns>
+        public static ITeamManager GetTeamManager(this PnPContext context)
+        {
+            return new TeamManager(context);
         }
 
         /// <summary>

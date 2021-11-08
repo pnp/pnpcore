@@ -209,5 +209,85 @@ namespace PnP.Core.Admin.Model.SharePoint
         /// <param name="ownerGroupAzureAdUserIds">List of Azure AD user ids to set as admin via adding them to the connected Microsoft 365 group owners</param>
         /// <returns></returns>
         void SetSiteCollectionAdmins(Uri site, List<string> sharePointAdminLoginNames = null, List<Guid> ownerGroupAzureAdUserIds = null);
+
+        #region Modernization
+
+        /// <summary>
+        /// Hides the Add Microsoft Teams banner. Only works when the site collection was already connected to an Microsoft 365 group
+        /// </summary>
+        /// <param name="site">Url of the site collection to hide the Add Teams prompt for</param>
+        /// <returns>True if hidden</returns>
+        Task<bool> HideAddTeamsPromptAsync(Uri site);
+
+        /// <summary>
+        /// Hides the Add Microsoft Teams banner. Only works when the site collection was already connected to an Microsoft 365 group
+        /// </summary>
+        /// <param name="site">Url of the site collection to hide the Add Teams prompt for</param>
+        /// <returns>True if hidden</returns>
+        bool HideAddTeamsPrompt(Uri site);
+
+        /// <summary>
+        /// Checks if the Add Microsoft Teams banner is hidden. Only works when the site collection was already connected to an Microsoft 365 group
+        /// </summary>
+        /// <param name="site">Url of the site collection to check the Add Teams prompt status for</param>
+        /// <returns>True if hidden, false otherwise.</returns>
+        Task<bool> IsAddTeamsPromptHiddenAsync(Uri site);
+
+        /// <summary>
+        /// Checks if the Add Microsoft Teams banner is hidden. Only works when the site collection was already connected to an Microsoft 365 group.
+        /// </summary>
+        /// <param name="site">Url of the site collection to check the Add Teams prompt status for</param>
+        /// <returns>True if hidden, false otherwise.</returns>
+        bool IsAddTeamsPromptHidden(Uri site);
+
+        /// <summary>
+        /// Enables the communication site features on this team site using the Topic design. 
+        /// Requirements:
+        /// - Only works when the site collection was not connected to an Microsoft 365 group
+        /// - Web is root web of the site collection, cannot be applied to sub sites
+        /// - Web template is "STS#0" or "EHS#1" (so TeamSite)
+        /// </summary>
+        /// <param name="site">Url of the team site collection to enable communication site features for</param>
+        /// <returns></returns>
+        Task EnableCommunicationSiteFeaturesAsync(Uri site);
+
+        /// <summary>
+        /// Enables the communication site features on this team site using the Topic design. 
+        /// Requirements:
+        /// - Only works when the site collection was not connected to an Microsoft 365 group
+        /// - Web is root web of the site collection, cannot be applied to sub sites
+        /// - Web template is "STS#0" or "EHS#1" (so TeamSite)
+        /// </summary>
+        /// <param name="site">Url of the team site collection to enable communication site features for</param>
+        /// <returns></returns>
+        void EnableCommunicationSiteFeatures(Uri site);
+
+        /// <summary>
+        /// Enables the communication site features on this team site using the Topic design. 
+        /// Requirements:
+        /// - Use 96c933ac-3698-44c7-9f4a-5fd17d71af9e (Topic), 6142d2a0-63a5-4ba0-aede-d9fefca2c767 (Showcase) or f6cc5403-0d63-442e-96c0-285923709ffc (Blank) as design package id
+        /// - Only works when the site collection was not connected to an Microsoft 365 group
+        /// - Web is root web of the site collection, cannot be applied to sub sites
+        /// - Web template is "STS#0" or "EHS#1" (so TeamSite)
+        /// </summary>
+        /// <param name="site">Url of the team site collection to enable communication site features for</param>
+        /// <param name="designPackageId">Design package id to apply</param>
+        /// <returns></returns>
+        Task EnableCommunicationSiteFeaturesAsync(Uri site, Guid designPackageId);
+
+        /// <summary>
+        /// Enables the communication site features on this team site using the Topic design. 
+        /// Requirements:
+        /// - Use 96c933ac-3698-44c7-9f4a-5fd17d71af9e (Topic), 6142d2a0-63a5-4ba0-aede-d9fefca2c767 (Showcase) or f6cc5403-0d63-442e-96c0-285923709ffc (Blank) as design package id
+        /// - Only works when the site collection was not connected to an Microsoft 365 group
+        /// - Web is root web of the site collection, cannot be applied to sub sites
+        /// - Web template is "STS#0" or "EHS#1" (so TeamSite)
+        /// </summary>
+        /// <param name="site">Url of the team site collection to enable communication site features for</param>
+        /// <param name="designPackageId">Design package id to apply</param>
+        /// <returns></returns>
+        void EnableCommunicationSiteFeatures(Uri site, Guid designPackageId);
+
+        #endregion
     }
 }

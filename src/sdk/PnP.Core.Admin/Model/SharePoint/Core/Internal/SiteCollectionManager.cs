@@ -166,12 +166,54 @@ namespace PnP.Core.Admin.Model.SharePoint
                 throw new ArgumentNullException(nameof(site));
             }
 
-            await SiteCollectionManagement.SetSiteCollectionAdminsAsync(context, site, sharePointAdminLoginNames, ownerGroupAzureAdUserIds).ConfigureAwait(true);
+            await SiteCollectionManagement.SetSiteCollectionAdminsAsync(context, site, sharePointAdminLoginNames, ownerGroupAzureAdUserIds).ConfigureAwait(false);
         }
 
         public void SetSiteCollectionAdmins(Uri site, List<string> sharePointAdminLoginNames = null, List<Guid> ownerGroupAzureAdUserIds = null)
         {
             SetSiteCollectionAdminsAsync(site, sharePointAdminLoginNames, ownerGroupAzureAdUserIds).GetAwaiter().GetResult();
         }
+
+        #region Modernization
+        public async Task<bool> HideAddTeamsPromptAsync(Uri url)
+        {
+            return await SiteCollectionModernizer.HideAddTeamsPromptAsync(context, url).ConfigureAwait(false);
+        }
+
+        public bool HideAddTeamsPrompt(Uri url)
+        {
+            return HideAddTeamsPromptAsync(url).GetAwaiter().GetResult();
+        }
+
+        public async Task<bool> IsAddTeamsPromptHiddenAsync(Uri url)
+        {
+            return await SiteCollectionModernizer.IsAddTeamsPromptHiddenAsync(context, url).ConfigureAwait(false);
+        }
+
+        public bool IsAddTeamsPromptHidden(Uri url)
+        {
+            return IsAddTeamsPromptHiddenAsync(url).GetAwaiter().GetResult();
+        }
+
+        public async Task EnableCommunicationSiteFeaturesAsync(Uri url, Guid designPackageId)
+        {
+            await SiteCollectionModernizer.EnableCommunicationSiteFeaturesAsync(context, url, designPackageId).ConfigureAwait(false);
+        }
+
+        public void EnableCommunicationSiteFeatures(Uri url, Guid designPackageId)
+        {
+            EnableCommunicationSiteFeaturesAsync(url, designPackageId).GetAwaiter().GetResult();
+        }
+
+        public async Task EnableCommunicationSiteFeaturesAsync(Uri url)
+        {
+            await EnableCommunicationSiteFeaturesAsync(url, PnPAdminConstants.CommunicationSiteDesignTopic).ConfigureAwait(false);
+        }
+
+        public void EnableCommunicationSiteFeatures(Uri url)
+        {
+            EnableCommunicationSiteFeaturesAsync(url).GetAwaiter().GetResult();
+        }        
+        #endregion
     }
 }

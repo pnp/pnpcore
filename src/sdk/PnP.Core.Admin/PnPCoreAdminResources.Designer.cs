@@ -19,7 +19,7 @@ namespace PnP.Core.Admin {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class PnPCoreAdminResources {
@@ -115,11 +115,38 @@ namespace PnP.Core.Admin {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The Team creation for group {0} did not succeed. Check the inner exception for details..
+        /// </summary>
+        internal static string Exception_TeamCreation {
+            get {
+                return ResourceManager.GetString("Exception_TeamCreation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Unexpected JSON.
         /// </summary>
         internal static string Exception_UnexpectedJson {
             get {
                 return ResourceManager.GetString("Exception_UnexpectedJson", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please specify a valid design package id: 96c933ac-3698-44c7-9f4a-5fd17d71af9e (Topic), 6142d2a0-63a5-4ba0-aede-d9fefca2c767 (Showcase) or f6cc5403-0d63-442e-96c0-285923709ffc (Blank).
+        /// </summary>
+        internal static string Exception_Unsupported_InvalidDesignPackageId {
+            get {
+                return ResourceManager.GetString("Exception_Unsupported_InvalidDesignPackageId", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The site collection has to be connected to a Microsoft 365 group.
+        /// </summary>
+        internal static string Exception_Unsupported_SiteHasToBeGroupConnected {
+            get {
+                return ResourceManager.GetString("Exception_Unsupported_SiteHasToBeGroupConnected", resourceCulture);
             }
         }
         
@@ -138,6 +165,15 @@ namespace PnP.Core.Admin {
         internal static string Log_Information_ExceptionWhileGettingSharePointAdmins {
             get {
                 return ResourceManager.GetString("Log_Information_ExceptionWhileGettingSharePointAdmins", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Following exception was eaten while creating a Team for group {0} : {1}.
+        /// </summary>
+        internal static string Log_Warning_ExceptionWhileCreatingTeamForGroup {
+            get {
+                return ResourceManager.GetString("Log_Warning_ExceptionWhileCreatingTeamForGroup", resourceCulture);
             }
         }
         
