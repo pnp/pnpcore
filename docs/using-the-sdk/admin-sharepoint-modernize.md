@@ -1,4 +1,4 @@
-# Site Collections
+# Modernize your sites
 
 The Core SDK Admin library provides SharePoint Modernization APIs that allow you to "upgrade" classic sites to become modern Team or Communication sites. To learn more about modernizing your SharePoint sites checkout https://aka.ms/sharepoint/modernization.
 
@@ -9,7 +9,10 @@ The Core SDK Admin library provides SharePoint Modernization APIs that allow you
 By default only new team sites are connected to a Microsoft 365 group, but what if you'd wanted to connect your existing classic team sites to a Microsoft 365 group? A reason to do this would be for example the need to set up a Teams team for the site or use any other Microsoft 365 service that's connected to a Microsoft 365 group. Luckily you can take an existing site, create a new Microsoft 365 group for it, and hook it up to site. To do this you have to use one of the `ConnectSiteCollectionToGroup` methods: these methods take in an `ConnectSiteToGroupOptions` object defining the three mandatory properties: the url of the site that needs to be connected to group, the alias to use for the group and the display name to use for the group:
 
 ```csharp
-ConnectSiteToGroupOptions groupConnectOptions = new ConnectSiteToGroupOptions(new Uri("https://contoso.sharepoint.com/sites/sitetogroupconnect"), "sitealias", "Site title");
+ConnectSiteToGroupOptions groupConnectOptions = new ConnectSiteToGroupOptions(
+    new Uri("https://contoso.sharepoint.com/sites/sitetogroupconnect"), 
+    "sitealias", 
+    "Site title");
 await context.GetSiteCollectionManager().ConnectSiteCollectionToGroupAsync(groupConnectOptions);
 ```
 
@@ -19,12 +22,14 @@ Microsoft 365 group connected sites by default show a prompt in their left navig
 
 ```csharp
 // Check if the Add Teams prompt is hidden
-var isAddTeamsPromptHidden = await context.GetSiteCollectionManager().IsAddTeamsPromptHiddenAsync(new Uri("https://contoso.sharepoint.com/sites/sitetogroupconnect"));
+var isAddTeamsPromptHidden = await context.GetSiteCollectionManager().IsAddTeamsPromptHiddenAsync(
+    new Uri("https://contoso.sharepoint.com/sites/sitetogroupconnect"));
 
 if (!isAddTeamsPromptHidden)
 {
     // Hide the Add Teams prompt
-    await context.GetSiteCollectionManager().HideAddTeamsPromptAsync(new Uri("https://contoso.sharepoint.com/sites/sitetogroupconnect"));
+    await context.GetSiteCollectionManager().HideAddTeamsPromptAsync(
+        new Uri("https://contoso.sharepoint.com/sites/sitetogroupconnect"));
 }
 ```
 
@@ -34,7 +39,8 @@ Once a site collection is connected to a Microsoft 365 group it's eligible to be
 
 ```csharp
 Guid groupId = Guid.Parse("");
-using (var contextWithTeam = await context.GetTeamManager().CreateTeamAsync(new TeamForGroupOptions(groupId)))
+using (var contextWithTeam = await context.GetTeamManager().CreateTeamAsync(
+    new TeamForGroupOptions(groupId)))
 {
     // Post a message in the Teams general channel
     await context.Team.LoadAsync(p => p.PrimaryChannel);
@@ -57,5 +63,6 @@ If above requirements are met you can use the `EnableCommunicationSiteFeatures` 
 await context.GetSiteCollectionManager().EnableCommunicationSiteFeaturesAsync(context.Uri);
 
 // Enable the communication site features on this classic site, uses Showcase design package
-await context.GetSiteCollectionManager().EnableCommunicationSiteFeaturesAsync(context.Uri, Guid.Parse("6142d2a0-63a5-4ba0-aede-d9fefca2c767"));
+await context.GetSiteCollectionManager().EnableCommunicationSiteFeaturesAsync(context.Uri, 
+    Guid.Parse("6142d2a0-63a5-4ba0-aede-d9fefca2c767"));
 ```
