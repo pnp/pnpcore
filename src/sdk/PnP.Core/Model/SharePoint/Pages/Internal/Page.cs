@@ -1928,7 +1928,10 @@ namespace PnP.Core.Model.SharePoint
             if (hasOneColumnFullWidthSection)
             {
                 await PnPContext.Web.EnsurePropertiesAsync(p => p.WebTemplate).ConfigureAwait(true);
-                if (!PnPContext.Web.WebTemplate.Equals("SITEPAGEPUBLISHING", StringComparison.InvariantCultureIgnoreCase))
+                if (!PnPContext.Web.WebTemplate.Equals("SITEPAGEPUBLISHING", StringComparison.InvariantCultureIgnoreCase) &&
+                    // we allow enabling communication site features on STS and EHS sites, so don't block adding full width sections on those sites
+                    !PnPContext.Web.WebTemplate.Equals("STS", StringComparison.InvariantCultureIgnoreCase) &&
+                    !PnPContext.Web.WebTemplate.Equals("EHS", StringComparison.InvariantCultureIgnoreCase))
                 {
                     throw new ClientException(ErrorType.Unsupported, string.Format(PnPCoreResources.Exception_Page_CantUseFullWidthSection, PnPContext.Web.WebTemplate));
                 }
