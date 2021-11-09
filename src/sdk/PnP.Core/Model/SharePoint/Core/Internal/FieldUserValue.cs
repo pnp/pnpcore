@@ -7,7 +7,7 @@ using System.Text.Json;
 
 namespace PnP.Core.Model.SharePoint
 {
-    internal class FieldUserValue : FieldLookupValue, IFieldUserValue
+    internal sealed class FieldUserValue : FieldLookupValue, IFieldUserValue
     {
         internal FieldUserValue() : base()
         {

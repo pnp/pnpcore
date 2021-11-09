@@ -5,7 +5,7 @@ namespace PnP.Core.Services
     /// <summary>
     /// Retry handler for SharePoint REST requests
     /// </summary>
-    internal class SharePointRestRetryHandler : RetryHandlerBase
+    internal sealed class SharePointRestRetryHandler : RetryHandlerBase
     {
         #region Construction
         public SharePointRestRetryHandler(IOptions<PnPGlobalSettingsOptions> globalSettings) : base(globalSettings?.Value)

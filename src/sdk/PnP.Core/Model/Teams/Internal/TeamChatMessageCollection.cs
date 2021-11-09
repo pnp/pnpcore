@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace PnP.Core.Model.Teams
 {
-    internal partial class TeamChatMessageCollection : QueryableDataModelCollection<ITeamChatMessage>, ITeamChatMessageCollection
+    internal sealed class TeamChatMessageCollection : QueryableDataModelCollection<ITeamChatMessage>, ITeamChatMessageCollection
     {
         public TeamChatMessageCollection(PnPContext context, IDataModelParent parent, string memberName = null)
             : base(context, parent, memberName)

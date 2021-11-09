@@ -9,7 +9,7 @@ using System.Collections.Generic;
 
 namespace PnP.Core.Admin.Services.Core.CSOM.Requests.Tenant
 {
-    internal class GetSitePropertiesRequest : IRequest<object>
+    internal sealed class GetSitePropertiesRequest : IRequest<object>
     {
         internal GetSitePropertiesRequest(Uri siteUrl, bool detailed)
         {

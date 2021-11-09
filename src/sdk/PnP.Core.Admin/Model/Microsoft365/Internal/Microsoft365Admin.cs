@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace PnP.Core.Admin.Model.Microsoft365
 {
-    internal class Microsoft365Admin : IMicrosoft365Admin
+    internal sealed class Microsoft365Admin : IMicrosoft365Admin
     {
         private readonly PnPContext context;
 

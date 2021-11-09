@@ -7,8 +7,7 @@ namespace PnP.Core.Model.SharePoint
 {
 
     [GraphType(Uri = V, LinqGet = baseUri)]
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Usage", "CA2243:Attribute string literals should parse correctly", Justification = "<Pending>")]
-    internal partial class TermGroup : BaseDataModel<ITermGroup>, ITermGroup
+    internal sealed class TermGroup : BaseDataModel<ITermGroup>, ITermGroup
     {
         private const string baseUri = "sites/{hostname},{Site.Id},{Web.Id}/termstore/groups";
         private const string V = baseUri + "/{GraphId}";

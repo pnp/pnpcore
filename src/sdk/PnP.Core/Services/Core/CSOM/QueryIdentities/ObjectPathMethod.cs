@@ -22,7 +22,7 @@ namespace PnP.Core.Services.Core.CSOM.QueryIdentities
         }
     }
 
-    internal class ConstructorPath : ObjectPathMethod
+    internal sealed class ConstructorPath : ObjectPathMethod
     {
         internal string TypeId { get; set; }
 
@@ -40,7 +40,7 @@ namespace PnP.Core.Services.Core.CSOM.QueryIdentities
         }
     }
 
-    internal class MethodParameter
+    internal sealed class MethodParameter
     {
         internal string TypeId { get; set; }
 

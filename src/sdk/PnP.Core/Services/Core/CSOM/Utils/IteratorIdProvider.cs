@@ -1,8 +1,8 @@
 ﻿namespace PnP.Core.Services.Core.CSOM.Utils
 {
-    internal class IteratorIdProvider : IIdProvider
+    internal sealed class IteratorIdProvider : IIdProvider
     {
-        protected int Id { get; private set; }
+        internal int Id { get; private set; }
 
         public int GetActionId()
         {

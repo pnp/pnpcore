@@ -7,7 +7,7 @@ namespace PnP.Core.Model.SharePoint
     /// TimeZone class, write your custom code here
     /// </summary>
     [SharePointType("SP.TimeZone", Uri = "_api/web/regionalsettings/timezone", LinqGet = "_api/web/regionalsettings/timezone")]
-    internal partial class TimeZone : BaseDataModel<ITimeZone>, ITimeZone
+    internal sealed class TimeZone : BaseDataModel<ITimeZone>, ITimeZone
     {
         #region Construction
         public TimeZone()

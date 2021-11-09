@@ -5,8 +5,7 @@ using System.Threading.Tasks;
 namespace PnP.Core.Model.Security
 {
     [SharePointType("SP.User", Uri = "_api/Web/GetUserById({Id})", LinqGet = "_api/Web/SiteUsers")]
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Usage", "CA2243:Attribute string literals should parse correctly", Justification = "<Pending>")]
-    internal partial class SharePointUser : BaseDataModel<ISharePointUser>, ISharePointUser
+    internal sealed class SharePointUser : BaseDataModel<ISharePointUser>, ISharePointUser
     {
         #region Construction
         public SharePointUser()

@@ -2,7 +2,7 @@
 
 namespace PnP.Core.Admin.Model.SharePoint
 {
-    internal class SpoOperation
+    internal sealed class SpoOperation
     {
         [JsonPropertyName("_ObjectIdentity_")]
         public string ObjectIdentity { get; set; }

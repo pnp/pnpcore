@@ -4,7 +4,7 @@ using System.Text.Json;
 
 namespace PnP.Core.Model.SharePoint
 {
-    internal class FieldLocationValue : FieldValue, IFieldLocationValue
+    internal sealed class FieldLocationValue : FieldValue, IFieldLocationValue
     {
         internal FieldLocationValue() : base()
         {

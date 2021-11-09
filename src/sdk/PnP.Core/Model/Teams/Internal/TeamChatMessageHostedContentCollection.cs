@@ -1,6 +1,6 @@
 ﻿namespace PnP.Core.Model.Teams
 {
-    internal partial class TeamChatMessageHostedContentCollection : BaseDataModelCollection<ITeamChatMessageHostedContent>, ITeamChatMessageHostedContentCollection
+    internal sealed class TeamChatMessageHostedContentCollection : BaseDataModelCollection<ITeamChatMessageHostedContent>, ITeamChatMessageHostedContentCollection
     {
     }
 }

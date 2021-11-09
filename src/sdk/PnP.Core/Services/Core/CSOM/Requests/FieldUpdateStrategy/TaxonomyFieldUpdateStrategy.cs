@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace PnP.Core.Services.Core.CSOM.Requests.FieldUpdateStrategy
 {
-    internal class TaxonomyFieldUpdateStrategy : IFieldUpdateStrategy
+    internal sealed class TaxonomyFieldUpdateStrategy : IFieldUpdateStrategy
     {
         internal IIdProvider IdProvider { get; private set; }
 

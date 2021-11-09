@@ -3,7 +3,7 @@ using PnP.Core.Services.Core.CSOM.Utils.Model;
 
 namespace PnP.Core.Services.Core.CSOM.QueryAction
 {
-    internal class ContentTypeCreationParameter : Parameter
+    internal sealed class ContentTypeCreationParameter : Parameter
     {
         internal new ContentTypeCreationInfo Value { get; set; }
 

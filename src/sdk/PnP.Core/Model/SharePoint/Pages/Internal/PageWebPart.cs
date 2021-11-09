@@ -11,7 +11,7 @@ namespace PnP.Core.Model.SharePoint
     /// This class is used to instantiate controls of type 3 (= client side web parts). Using this class you can instantiate a control and 
     /// add it on a <see cref="IPage"/>.
     /// </summary>
-    internal class PageWebPart : CanvasControl, IPageWebPart
+    internal sealed class PageWebPart : CanvasControl, IPageWebPart
     {
         #region variables
         // Constants
@@ -382,7 +382,7 @@ namespace PnP.Core.Model.SharePoint
         /// Overrideable method that allows inheriting webparts to control the HTML rendering
         /// </summary>
         /// <param name="htmlWriter">Reference to the html renderer used</param>
-        protected virtual void RenderHtmlProperties(ref StringBuilder htmlWriter)
+        internal void RenderHtmlProperties(ref StringBuilder htmlWriter)
         {
             if (!ServerProcessedContent.Equals(default))
             {

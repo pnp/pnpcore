@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace PnP.Core.Admin.Model.SharePoint
 {
     [SharePointType("Microsoft.Online.SharePoint.TenantAdministration.SiteProperties")]
-    internal class SiteCollectionProperties : TransientObject, ISiteCollectionProperties, IDataModelWithContext
+    internal sealed class SiteCollectionProperties : TransientObject, ISiteCollectionProperties, IDataModelWithContext
     {
         #region Properties
         [JsonPropertyName("_ObjectIdentity_")]

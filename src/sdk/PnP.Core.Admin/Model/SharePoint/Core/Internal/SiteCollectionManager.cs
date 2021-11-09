@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace PnP.Core.Admin.Model.SharePoint
 {
-    internal class SiteCollectionManager : ISiteCollectionManager
+    internal sealed class SiteCollectionManager : ISiteCollectionManager
     {
         private readonly PnPContext context;
 

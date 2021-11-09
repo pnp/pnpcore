@@ -7,7 +7,7 @@ namespace PnP.Core.Model.SharePoint
     /// ListItemVersion class, write your custom code here
     /// </summary>
     [SharePointType("SP.ListItemVersion", Target = typeof(IListItem), Uri = "_api/web/lists/getbyid(guid'{List.Id}')/items({Parent.Id})/versions/getbyid({Id})", LinqGet = "_api/web/lists(guid'{List.Id}')/items({Parent.Id})/versions")]
-    internal partial class ListItemVersion : ExpandoBaseDataModel<IListItemVersion>, IListItemVersion
+    internal sealed class ListItemVersion : ExpandoBaseDataModel<IListItemVersion>, IListItemVersion
     {
         #region Properties
         public DateTime Created { get => GetValue<DateTime>(); set => SetValue(value); }

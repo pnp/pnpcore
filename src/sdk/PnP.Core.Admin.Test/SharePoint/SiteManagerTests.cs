@@ -29,7 +29,9 @@ namespace PnP.Core.Admin.Test.SharePoint
                     Assert.IsTrue(siteProperties.AllowEditing);
                     Assert.IsTrue(siteProperties.AllowSelfServiceUpgrade);
                     Assert.AreEqual(siteProperties.AnonymousLinkExpirationInDays, 0);
+#pragma warning disable CS0618 // Type or member is obsolete
                     Assert.IsTrue(siteProperties.AuthContextStrength == null);
+#pragma warning restore CS0618 // Type or member is obsolete
                     Assert.IsTrue(siteProperties.AuthenticationContextName == null);
                     Assert.IsTrue(siteProperties.BlockDownloadLinksFileType == Model.SharePoint.BlockDownloadLinksFileTypes.WebPreviewableFiles);
                     Assert.IsFalse(siteProperties.CommentsOnSitePagesDisabled);

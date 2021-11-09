@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace PnP.Core.Admin.Model.SharePoint
 {
-    internal class TenantAppManager : AppManager<ITenantApp>, ITenantAppManager
+    internal sealed class TenantAppManager : AppManager<ITenantApp>, ITenantAppManager
     {
         protected override string Scope => "tenant";
 

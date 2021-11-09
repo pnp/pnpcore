@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace PnP.Core.Model.SharePoint
 {
-    internal class SyntexModel : ISyntexModel
+    internal sealed class SyntexModel : ISyntexModel
     {
         #region Properties
 

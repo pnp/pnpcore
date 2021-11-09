@@ -2,7 +2,7 @@
 
 namespace PnP.Core.Model.SharePoint
 {
-    internal class SyntexClassifyAndExtractResult : ISyntexClassifyAndExtractResult
+    internal sealed class SyntexClassifyAndExtractResult : ISyntexClassifyAndExtractResult
     {
         public DateTime Created { get; internal set; }
 

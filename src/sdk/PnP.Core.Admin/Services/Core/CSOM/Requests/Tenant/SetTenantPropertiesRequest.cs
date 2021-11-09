@@ -11,7 +11,7 @@ using System.ComponentModel;
 
 namespace PnP.Core.Admin.Services.Core.CSOM.Requests.Tenant
 {
-    internal class SetTenantPropertiesRequest : IRequest<object>
+    internal sealed class SetTenantPropertiesRequest : IRequest<object>
     {
         internal SetTenantPropertiesRequest(TenantProperties properties)
         {

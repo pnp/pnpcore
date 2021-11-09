@@ -17,7 +17,7 @@ namespace PnP.Core.QueryModel
     /// We support what is defined here: https://docs.microsoft.com/en-us/sharepoint/dev/sp-add-ins/use-odata-query-operations-in-sharepoint-rest-requests#odata-query-operators-supported-in-the-sharepoint-rest-service
     /// except the substrinof and startswith functions
     /// </remarks>
-    internal class ODataQuery<TModel>
+    internal sealed class ODataQuery<TModel>
     {
         private const string EncodedSpace = "%20";
         private readonly CultureInfo FormatProvider = CultureInfo.InvariantCulture;

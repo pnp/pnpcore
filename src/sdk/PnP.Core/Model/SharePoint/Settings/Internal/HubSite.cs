@@ -7,7 +7,7 @@ namespace PnP.Core.Model.SharePoint
     /// HubSite class, write your custom code here
     /// </summary>
     [SharePointType("SP.HubSite", Uri = "_api/HubSites/GetById?hubSiteId='{Site.HubSiteId}'", LinqGet = "_api/HubSites")]
-    internal partial class HubSite : BaseDataModel<IHubSite>, IHubSite
+    internal sealed class HubSite : BaseDataModel<IHubSite>, IHubSite
     {
         #region Construction
         public HubSite()

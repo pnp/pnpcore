@@ -4,7 +4,7 @@ namespace PnP.Core.Model.SharePoint
     /// InformationRightsManagementFileSettings class, write your custom code here
     /// </summary>
     [SharePointType("SP.InformationRightsManagementFileSettings")]
-    internal partial class InformationRightsManagementFileSettings : BaseDataModel<IInformationRightsManagementFileSettings>, IInformationRightsManagementFileSettings
+    internal sealed class InformationRightsManagementFileSettings : BaseDataModel<IInformationRightsManagementFileSettings>, IInformationRightsManagementFileSettings
     {
         #region Construction
         public InformationRightsManagementFileSettings() { }

@@ -2,7 +2,7 @@
 
 namespace PnP.Core.Admin.Model.SharePoint
 {
-    internal class SiteCollectionAdmin : ISiteCollectionAdmin
+    internal sealed class SiteCollectionAdmin : ISiteCollectionAdmin
     {
         public Guid Id { get; set; }
 

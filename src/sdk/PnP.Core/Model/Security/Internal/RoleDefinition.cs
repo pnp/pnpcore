@@ -7,7 +7,7 @@ namespace PnP.Core.Model.Security
 {
     [SharePointType("SP.RoleDefinition", Target = typeof(Web), Uri = "_api/Web/RoleDefinitions({Id})", Get = "_api/web/RoleDefinitions", LinqGet = "_api/web/RoleDefinitions")]
     [SharePointType("SP.RoleDefinition", Target = typeof(RoleAssignment), Uri = "_api/Web/RoleAssignments/GetByPrincipalId({Parent.Id})/RoleDefinitionBindings({Id})", Get = "_api/Web/RoleAssignments/GetByPrincipalId({Parent.Id})/RoleDefinitionBindings", LinqGet = "_api/Web/RoleAssignments/GetByPrincipalId({Parent.Id})/RoleDefinitionBindings")]
-    internal class RoleDefinition : BaseDataModel<IRoleDefinition>, IRoleDefinition
+    internal sealed class RoleDefinition : BaseDataModel<IRoleDefinition>, IRoleDefinition
     {
 
         public RoleDefinition()

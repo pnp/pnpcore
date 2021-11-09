@@ -3,7 +3,7 @@ using PnP.Core.Services.Core.CSOM.QueryIdentities;
 
 namespace PnP.Core.Services.Core.CSOM
 {
-    internal class ActionObjectPath
+    internal sealed class ActionObjectPath
     {
         internal BaseAction Action { get; set; }
 

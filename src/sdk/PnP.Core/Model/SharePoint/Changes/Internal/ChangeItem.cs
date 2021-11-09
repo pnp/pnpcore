@@ -3,7 +3,7 @@
 namespace PnP.Core.Model.SharePoint
 {
     [SharePointType("SP.ChangeItem")]
-    internal partial class ChangeItem : Change, IChangeItem
+    internal sealed class ChangeItem : Change, IChangeItem
     {
         public ChangeActivityType ActivityType { get => GetValue<ChangeActivityType>(); set => SetValue(value); }
         public IContentType ContentTypeId { get => GetValue<IContentType>(); set => SetValue(value); }

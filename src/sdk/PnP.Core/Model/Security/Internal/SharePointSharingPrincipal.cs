@@ -1,7 +1,7 @@
 ﻿namespace PnP.Core.Model.Security
 {
     [SharePointType("SP.Sharing.Principal")]
-    internal partial class SharePointSharingPrincipal : BaseDataModel<ISharePointSharingPrincipal>, ISharePointSharingPrincipal
+    internal sealed class SharePointSharingPrincipal : BaseDataModel<ISharePointSharingPrincipal>, ISharePointSharingPrincipal
     {
         #region Construction
         public SharePointSharingPrincipal()

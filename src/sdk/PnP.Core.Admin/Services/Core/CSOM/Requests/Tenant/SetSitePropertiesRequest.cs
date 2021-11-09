@@ -11,7 +11,7 @@ using System.ComponentModel;
 
 namespace PnP.Core.Admin.Services.Core.CSOM.Requests.Tenant
 {
-    internal class SetSitePropertiesRequest : IRequest<object>
+    internal sealed class SetSitePropertiesRequest : IRequest<object>
     {
         internal SetSitePropertiesRequest(SiteCollectionProperties properties)
         {

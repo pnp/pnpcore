@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PnP.Core.Model.SharePoint
 {
-    internal partial class CommentCollection : QueryableDataModelCollection<IComment>, ICommentCollection
+    internal sealed class CommentCollection : QueryableDataModelCollection<IComment>, ICommentCollection
     {
         public CommentCollection(PnPContext context, IDataModelParent parent, string memberName) : base(context, parent, memberName)
         {

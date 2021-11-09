@@ -1,6 +1,6 @@
 ﻿namespace PnP.Core.Admin.Model.SharePoint
 {
-    internal class TenantApp : App, ITenantApp
+    internal sealed class TenantApp : App, ITenantApp
     {
     }
 }

@@ -11,8 +11,7 @@ namespace PnP.Core.Model.SharePoint
     [SharePointType("SP.View", Uri = "_api/web/lists/getbyid(guid'{Parent.Id}')/Views(guid'{Id}')",
             Get = "_api/web/lists(guid'{Parent.Id}')/Views", LinqGet = "_api/web/lists(guid'{Parent.Id}')/Views",
             Delete = "_api/web/lists(guid'{Parent.Id}')/Views(guid'{Id}')/DeleteObject")]
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Usage", "CA2243:Attribute string literals should parse correctly", Justification = "<Pending>")]
-    internal partial class View : BaseDataModel<IView>, IView
+    internal sealed class View : BaseDataModel<IView>, IView
     {
         internal const string ViewOptionsAdditionalInformationKey = "ViewOptions";
 

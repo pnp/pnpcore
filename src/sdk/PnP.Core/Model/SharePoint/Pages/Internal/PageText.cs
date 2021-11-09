@@ -10,7 +10,7 @@ namespace PnP.Core.Model.SharePoint
     /// <summary>
     /// Controls of type 4 ( = text control)
     /// </summary>
-    internal class PageText : CanvasControl, IPageText
+    internal sealed class PageText : CanvasControl, IPageText
     {
         #region variables
         internal const string TextRteAttribute = "data-sp-rte";

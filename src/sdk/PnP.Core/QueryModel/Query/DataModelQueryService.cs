@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace PnP.Core.QueryModel
 {
-    internal class DataModelQueryService<TModel>
+    internal sealed class DataModelQueryService<TModel>
     {
         public PnPContext PnPContext { get; }
 
@@ -24,7 +24,7 @@ namespace PnP.Core.QueryModel
         /// Protected default constructor, to force creation using
         /// the PnPContext instance
         /// </summary>
-        protected DataModelQueryService()
+        internal DataModelQueryService()
         {
         }
 

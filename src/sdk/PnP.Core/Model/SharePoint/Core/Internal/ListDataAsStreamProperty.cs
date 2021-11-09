@@ -3,7 +3,7 @@ using System.Text.Json;
 
 namespace PnP.Core.Model.SharePoint
 {
-    internal class ListDataAsStreamProperty
+    internal sealed class ListDataAsStreamProperty
     {
         internal string Name { get; set; }
 

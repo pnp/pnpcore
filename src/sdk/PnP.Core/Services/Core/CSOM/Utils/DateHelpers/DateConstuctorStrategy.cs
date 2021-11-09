@@ -2,7 +2,7 @@
 
 namespace PnP.Core.Services.Core.CSOM.Utils.DateHelpers
 {
-    internal class DateConstuctorStrategy : IDateConversionStrategy
+    internal sealed class DateConstuctorStrategy : IDateConversionStrategy
     {
         public DateTime? ConverDate(string dateValue)
         {

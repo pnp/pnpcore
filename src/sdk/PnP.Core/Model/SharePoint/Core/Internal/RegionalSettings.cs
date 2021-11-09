@@ -7,7 +7,7 @@ namespace PnP.Core.Model.SharePoint
     /// RegionalSettings class, write your custom code here
     /// </summary>
     [SharePointType("SP.RegionalSettings", Uri = "_api/web/regionalsettings", LinqGet = "_api/web/regionalsettings")]
-    internal partial class RegionalSettings : BaseDataModel<IRegionalSettings>, IRegionalSettings
+    internal sealed class RegionalSettings : BaseDataModel<IRegionalSettings>, IRegionalSettings
     {
         internal static Expression<Func<IRegionalSettings, object>>[] LocaleSettingsExpression = new Expression<Func<IRegionalSettings, object>>[] { p => p.DecimalSeparator, p => p.DateSeparator, p => p.TimeZone };
 

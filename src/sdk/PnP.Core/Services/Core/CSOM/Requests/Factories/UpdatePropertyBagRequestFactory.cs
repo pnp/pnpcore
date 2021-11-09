@@ -5,7 +5,7 @@ using PnP.Core.Services.Core.CSOM.Requests.Web;
 
 namespace PnP.Core.Services.Core.CSOM.Requests.Factories
 {
-    internal class UpdatePropertyBagRequestFactory
+    internal sealed class UpdatePropertyBagRequestFactory
     {
         internal static UpdatePropertyBagRequest GetUpdatePropertyBagRequest<T>(T propertyValueContainer) where T : IDataModelWithContext
         {

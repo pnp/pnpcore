@@ -2,7 +2,7 @@
 
 namespace PnP.Core.Model.SharePoint
 {
-    internal class PageSettingsSlice
+    internal sealed class PageSettingsSlice
     {
         [JsonPropertyName("isDefaultDescription")]
         public bool? IsDefaultDescription { get; set; }

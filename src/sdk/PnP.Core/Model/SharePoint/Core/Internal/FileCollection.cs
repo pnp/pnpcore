@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace PnP.Core.Model.SharePoint
 {
-    internal partial class FileCollection : QueryableDataModelCollection<IFile>, IFileCollection
+    internal sealed class FileCollection : QueryableDataModelCollection<IFile>, IFileCollection
     {
         private const int maxFileSizeForRegularUpload = 10 * 1024 * 1024;
 

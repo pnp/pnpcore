@@ -6,7 +6,7 @@ using System.Text.Json;
 
 namespace PnP.Core.Model.SharePoint
 {
-    internal class FieldTaxonomyValue : FieldValue, IFieldTaxonomyValue
+    internal sealed class FieldTaxonomyValue : FieldValue, IFieldTaxonomyValue
     {
         internal FieldTaxonomyValue() : base()
         {

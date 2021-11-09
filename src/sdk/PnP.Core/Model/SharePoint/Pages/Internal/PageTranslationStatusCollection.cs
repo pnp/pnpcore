@@ -5,7 +5,7 @@ namespace PnP.Core.Model.SharePoint
     /// <summary>
     /// Translation status of a page
     /// </summary>
-    internal class PageTranslationStatusCollection : IPageTranslationStatusCollection
+    internal sealed class PageTranslationStatusCollection : IPageTranslationStatusCollection
     {
         public List<string> UntranslatedLanguages { get; set; }
 

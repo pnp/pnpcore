@@ -20,7 +20,7 @@ namespace PnP.Core.Services
     /// <summary>
     /// Client that's reponsible for creating and processing batch requests
     /// </summary>
-    internal class BatchClient
+    internal sealed class BatchClient
     {
 #if DEBUG
         // Simple counter used to construct the batch key used for test mocking

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PnP.Core.Model.Security
 {
-    internal partial class RoleDefinitionCollection : QueryableDataModelCollection<IRoleDefinition>, IRoleDefinitionCollection
+    internal sealed class RoleDefinitionCollection : QueryableDataModelCollection<IRoleDefinition>, IRoleDefinitionCollection
     {
 
         public RoleDefinitionCollection(PnPContext context, IDataModelParent parent, string memberName = null) : base(context, parent, memberName)

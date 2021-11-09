@@ -8,7 +8,7 @@ namespace PnP.Core.Model.SharePoint
     /// <summary>
     /// Represents a section on the canvas
     /// </summary>
-    internal class CanvasSection : ICanvasSection
+    internal sealed class CanvasSection : ICanvasSection
     {
 
         #region variables

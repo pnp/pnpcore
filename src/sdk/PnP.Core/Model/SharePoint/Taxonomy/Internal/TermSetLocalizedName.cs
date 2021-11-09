@@ -1,7 +1,7 @@
 ﻿namespace PnP.Core.Model.SharePoint
 {
     [GraphType]
-    internal partial class TermSetLocalizedName : BaseDataModel<ITermSetLocalizedName>, ITermSetLocalizedName
+    internal sealed class TermSetLocalizedName : BaseDataModel<ITermSetLocalizedName>, ITermSetLocalizedName
     {
         #region Properties
         public string LanguageTag { get => GetValue<string>(); set => SetValue(value); }

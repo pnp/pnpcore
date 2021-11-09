@@ -18,7 +18,7 @@ namespace PnP.Core.Model.SharePoint
     /// </summary>
     [SharePointType("SP.Web", Uri = V, LinqGet = "_api/web/webinfos")]
     [GraphType(Get = "sites/{hostname}:{serverrelativepath}")]
-    internal partial class Web : BaseDataModel<IWeb>, IWeb
+    internal sealed class Web : BaseDataModel<IWeb>, IWeb
     {
         private const string V = "_api/web";
         private static readonly Guid MultilingualPagesFeature = new Guid("24611c05-ee19-45da-955f-6602264abaf8");

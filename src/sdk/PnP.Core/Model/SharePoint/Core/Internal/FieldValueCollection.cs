@@ -8,7 +8,7 @@ using System.Text.Json;
 
 namespace PnP.Core.Model.SharePoint
 {
-    internal class FieldValueCollection : IFieldValueCollection
+    internal sealed class FieldValueCollection : IFieldValueCollection
     {
         private bool hasChangedDueToDeleteOrAdd;
 

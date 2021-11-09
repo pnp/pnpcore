@@ -25,7 +25,7 @@ namespace PnP.Core.Model.SharePoint
     [SharePointType("SP.ListItem", Target = typeof(File), Uri = "_api/web/getFileById('{Parent.Id}')/listitemallfields")]
     [SharePointType("SP.ListItem", Target = typeof(Folder), Uri = "_api/Web/getFolderById('{Parent.Id}')/listitemallfields")]
     //[GraphType(OverflowProperty = "fields")]
-    internal partial class ListItem : ExpandoBaseDataModel<IListItem>, IListItem
+    internal sealed class ListItem : ExpandoBaseDataModel<IListItem>, IListItem
     {
         internal const string FolderPath = "folderPath";
         internal const string UnderlyingObjectType = "underlyingObjectType";
@@ -578,7 +578,7 @@ namespace PnP.Core.Model.SharePoint
             UpdateOverwriteVersionBatchAsync().GetAwaiter().GetResult();
         }
 
-        protected async Task PrepareUpdateCall(UpdateListItemRequest request)
+        internal async Task PrepareUpdateCall(UpdateListItemRequest request)
         {
             string listId = "";
             if ((this as IDataModelParent).Parent is IFile file)

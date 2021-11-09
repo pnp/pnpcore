@@ -16,7 +16,7 @@ using System.Threading.Tasks;
 
 namespace PnP.Core.Model.SharePoint
 {
-    internal partial class Page : IPage
+    internal sealed class Page : IPage
     {
         private bool isDefaultDescription;
         private string pageTitle;

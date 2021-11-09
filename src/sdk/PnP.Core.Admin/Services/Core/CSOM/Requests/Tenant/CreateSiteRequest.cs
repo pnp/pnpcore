@@ -9,7 +9,7 @@ using System.Collections.Generic;
 
 namespace PnP.Core.Admin.Services.Core.CSOM.Requests.Tenant
 {
-    internal class CreateSiteRequest : IRequest<object>
+    internal sealed class CreateSiteRequest : IRequest<object>
     {
         internal CreateSiteRequest(Uri siteUrl, string title, string owner, string webTemplate, int lcid, int timeZoneId)
         {

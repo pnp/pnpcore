@@ -8,10 +8,8 @@ namespace PnP.Core.Model.SharePoint
     /// <summary>
     /// Attachment class, write your custom code here
     /// </summary>
-#pragma warning disable CA2243 // Attribute string literals should parse correctly
     [SharePointType("SP.Attachment", Uri = "_api/web/lists/getbyid(guid'{List.Id}')/items({Parent.Id})/attachmentfiles/getbyfilename('{Id}')", LinqGet = "_api/web/lists/getbyid(guid'{List.Id}')/items({Parent.Id})/attachmentfiles")]
-#pragma warning restore CA2243 // Attribute string literals should parse correctly
-    internal partial class Attachment : BaseDataModel<IAttachment>, IAttachment
+    internal sealed class Attachment : BaseDataModel<IAttachment>, IAttachment
     {
         #region Construction
         public Attachment()

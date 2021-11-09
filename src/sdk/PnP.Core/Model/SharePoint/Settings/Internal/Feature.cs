@@ -8,7 +8,7 @@ namespace PnP.Core.Model.SharePoint
 
     [SharePointType("SP.Feature", Target = typeof(Site), Uri = "_api/Site/Features/GetById(guid'{DefinitionId}')')", Get = "_api/Site/Features", LinqGet = "_api/Site/Features")]
     [SharePointType("SP.Feature", Target = typeof(Web), Uri = "_api/Web/Features/GetById(guid'{DefinitionId}')", Get = "_api/Web/Features", LinqGet = "_api/Web/Features")]
-    internal partial class Feature : BaseDataModel<IFeature>, IFeature
+    internal sealed class Feature : BaseDataModel<IFeature>, IFeature
     {
         #region Construction
         public Feature()

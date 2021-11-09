@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace PnP.Core.Admin.Model.SharePoint
 {
-    internal class TenantProperties : TransientObject, ITenantProperties, IDataModelWithContext
+    internal sealed class TenantProperties : TransientObject, ITenantProperties, IDataModelWithContext
     {
         #region Properties
         [JsonPropertyName("_ObjectIdentity_")]

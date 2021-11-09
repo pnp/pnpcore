@@ -8,7 +8,7 @@ using System.Collections.Generic;
 
 namespace PnP.Core.Admin.Services.Core.CSOM.Requests.Tenant
 {
-    internal class SpoOperationRequest : IRequest<object>
+    internal sealed class SpoOperationRequest : IRequest<object>
     {
 
         internal SpoOperationRequest(string objectIdentity)

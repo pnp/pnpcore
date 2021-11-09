@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace PnP.Core.Model.SharePoint
 {
-    internal class SyntexContentCenter : ISyntexContentCenter
+    internal sealed class SyntexContentCenter : ISyntexContentCenter
     {
         public IWeb Web { get; internal set; }
 

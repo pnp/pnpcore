@@ -6,7 +6,7 @@ using System.Text.Json;
 
 namespace PnP.Core.Model.SharePoint
 {
-    internal class CanvasColumn : ICanvasColumn
+    internal sealed class CanvasColumn : ICanvasColumn
     {
         #region variables
         internal const string CanvasControlAttribute = "data-sp-canvascontrol";

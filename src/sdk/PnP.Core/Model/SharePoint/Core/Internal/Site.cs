@@ -14,7 +14,7 @@ namespace PnP.Core.Model.SharePoint
     /// </summary>
     [SharePointType("SP.Site", Uri = "_api/Site")]
     [GraphType(Get = "sites/{hostname}:{serverrelativepath}")]
-    internal partial class Site : BaseDataModel<ISite>, ISite
+    internal sealed class Site : BaseDataModel<ISite>, ISite
     {
         #region Construction
         public Site()

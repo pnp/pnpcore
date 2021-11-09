@@ -6,8 +6,7 @@ using System.Text.Json;
 namespace PnP.Core.Model.Teams
 {
     [GraphType(Uri = tabUri)]
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Usage", "CA2243:Attribute string literals should parse correctly", Justification = "<Pending>")]
-    internal partial class TeamChannelTab : BaseDataModel<ITeamChannelTab>, ITeamChannelTab
+    internal sealed class TeamChannelTab : BaseDataModel<ITeamChannelTab>, ITeamChannelTab
     {
         private const string baseUri = "teams/{Site.GroupId}/channels/{Parent.GraphId}/tabs";
         private const string tabUri = baseUri + "/{GraphId}";

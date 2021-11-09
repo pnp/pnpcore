@@ -10,7 +10,7 @@ namespace PnP.Core.Model.SharePoint
     /// <summary>
     /// Base class for reading and writing of "special" field types like a lookup, user, url...
     /// </summary>
-    internal class FieldUrlValue : FieldValue, IFieldUrlValue
+    internal sealed class FieldUrlValue : FieldValue, IFieldUrlValue
     {
         internal FieldUrlValue() : base()
         {

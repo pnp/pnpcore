@@ -5,7 +5,7 @@ using System.Text.Json.Serialization;
 
 namespace PnP.Core.Services.Core.CSOM.Utils.CustomConverters
 {
-    internal class DateTimeConverter : JsonConverter<DateTime>
+    internal sealed class DateTimeConverter : JsonConverter<DateTime>
     {
         internal CSOMDateConverter DateConverter = new CSOMDateConverter();
 

@@ -1,7 +1,7 @@
 ﻿namespace PnP.Core.Model.SharePoint
 {
     [SharePointType("SP.BasePermissions", Target = typeof(Web), Uri = "_api/Web/EffectiveBasePermissions)")]
-    internal partial class BasePermissions : BaseDataModel<IBasePermissions>, IBasePermissions
+    internal sealed class BasePermissions : BaseDataModel<IBasePermissions>, IBasePermissions
     {
         #region Properties
         public long Low { get => GetValue<long>(); set => SetValue(value); }

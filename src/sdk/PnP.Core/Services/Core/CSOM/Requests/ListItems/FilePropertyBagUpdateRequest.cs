@@ -2,7 +2,7 @@
 
 namespace PnP.Core.Services.Core.CSOM.Requests.ListItems
 {
-    internal class FilePropertyBagUpdateRequest : UpdatePropertyBagRequest
+    internal sealed class FilePropertyBagUpdateRequest : UpdatePropertyBagRequest
     {
         internal FilePropertyBagUpdateRequest(string fileId)
         {

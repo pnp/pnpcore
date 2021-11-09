@@ -219,16 +219,20 @@ namespace PnP.Core.Test.QueryModel
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
+#pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
                 await context.Web.Lists.ForEachAsync(async x => 
                 {
                     Assert.IsTrue(!string.IsNullOrEmpty(x.Title));
                 });
+#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
 
                 await Assert.ThrowsExceptionAsync<ArgumentNullException>(async () =>
-                {
-                    IQueryable<Model.SharePoint.IList> bla = null;
-                    await bla.ForEachAsync(async x => { });
-                });
+                  {
+                      IQueryable<Model.SharePoint.IList> bla = null;
+#pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
+                      await bla.ForEachAsync(async x => { });
+#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
+                  });
 
                 await Assert.ThrowsExceptionAsync<ArgumentNullException>(async () =>
                 {
@@ -245,22 +249,26 @@ namespace PnP.Core.Test.QueryModel
             {
                 var b = context.Web.Lists.AsAsyncEnumerable();
 
+#pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
                 await Assert.ThrowsExceptionAsync<ArgumentNullException>(async () =>
                 {
                     IQueryable<Model.SharePoint.IList> bla = null;
                     var a = bla.AsAsyncEnumerable();
                 });
+#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
             }
         }
 
         [TestMethod]
         public async Task TestAsRequested()
         {
+#pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
             await Assert.ThrowsExceptionAsync<ArgumentNullException>(async () =>
             {
                 IDataModelCollection<Model.SharePoint.IList> bla = null;
                 var a = bla.AsRequested();
             });
+#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
         }
     }
 }

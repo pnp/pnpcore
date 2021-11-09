@@ -2,7 +2,7 @@
 
 namespace PnP.Core.Admin.Model.SharePoint
 {
-    internal class SiteCollectionAppManager : AppManager<ISiteCollectionApp>, ISiteCollectionAppManager
+    internal sealed class SiteCollectionAppManager : AppManager<ISiteCollectionApp>, ISiteCollectionAppManager
     {
         protected override string Scope => "sitecollection";
 

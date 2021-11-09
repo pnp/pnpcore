@@ -2,7 +2,7 @@
 
 namespace PnP.Core.Model
 {
-    internal class EntitySharePointTypeInfo
+    internal sealed class EntitySharePointTypeInfo
     {
         /// <summary>
         /// Data store type when using REST

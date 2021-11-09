@@ -7,8 +7,7 @@ using System.Text.Json;
 namespace PnP.Core.Model.Teams
 {
     [GraphType(Uri = chatMessageUri, Beta = true, LinqGet = baseUri)]
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Usage", "CA2243:Attribute string literals should parse correctly", Justification = "<Pending>")]
-    internal partial class TeamChatMessage : BaseDataModel<ITeamChatMessage>, ITeamChatMessage
+    internal sealed class TeamChatMessage : BaseDataModel<ITeamChatMessage>, ITeamChatMessage
     {
         private const string baseUri = "teams/{Site.GroupId}/channels/{Parent.GraphId}/messages";
         private const string chatMessageUri = baseUri + "/{GraphId}";

@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace PnP.Core.Services.Core.CSOM.Utils.Model
 {
-    internal class CSOMItemField
+    internal sealed class CSOMItemField
     {
         private string fieldType;
 

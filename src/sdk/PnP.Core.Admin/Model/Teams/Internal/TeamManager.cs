@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace PnP.Core.Admin.Model.Teams
 {
-    internal class TeamManager : ITeamManager
+    internal sealed class TeamManager : ITeamManager
     {
         private readonly PnPContext context;
 

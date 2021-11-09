@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PnP.Core.Model.SharePoint
 {
-    internal partial class WebCollection : QueryableDataModelCollection<IWeb>, IWebCollection
+    internal sealed class WebCollection : QueryableDataModelCollection<IWeb>, IWebCollection
     {
         public WebCollection(PnPContext context, IDataModelParent parent, string memberName = null)
             : base(context, parent, memberName)

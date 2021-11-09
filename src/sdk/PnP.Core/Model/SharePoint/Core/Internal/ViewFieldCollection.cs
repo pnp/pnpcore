@@ -4,7 +4,7 @@ namespace PnP.Core.Model.SharePoint
     /// ViewFieldCollection class, write your custom code here
     /// </summary>
     [SharePointType("SP.ViewFieldCollection", Uri = "_api/xxx", LinqGet = "_api/xxx")]
-    internal partial class ViewFieldCollection : BaseDataModel<IViewFieldCollection>, IViewFieldCollection
+    internal sealed class ViewFieldCollection : BaseDataModel<IViewFieldCollection>, IViewFieldCollection
     {
         #region New properties
 

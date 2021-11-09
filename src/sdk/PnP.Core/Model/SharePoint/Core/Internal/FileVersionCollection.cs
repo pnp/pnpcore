@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PnP.Core.Model.SharePoint
 {
-    internal partial class FileVersionCollection : QueryableDataModelCollection<IFileVersion>, IFileVersionCollection
+    internal sealed class FileVersionCollection : QueryableDataModelCollection<IFileVersion>, IFileVersionCollection
     {
         public FileVersionCollection(PnPContext context, IDataModelParent parent, string memberName = null)
             : base(context, parent, memberName)

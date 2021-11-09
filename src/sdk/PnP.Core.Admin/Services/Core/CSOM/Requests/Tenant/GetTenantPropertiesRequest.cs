@@ -8,7 +8,7 @@ using System.Collections.Generic;
 
 namespace PnP.Core.Admin.Services.Core.CSOM.Requests.Tenant
 {
-    internal class GetTenantPropertiesRequest : IRequest<object>
+    internal sealed class GetTenantPropertiesRequest : IRequest<object>
     {
         internal GetTenantPropertiesRequest()
         {

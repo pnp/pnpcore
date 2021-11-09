@@ -4,7 +4,7 @@ using System.Text.Json.Serialization;
 
 namespace PnP.Core.Test.Services.Core.CSOM.Utils.CustomConverters
 {
-    internal class SPGuidConverter : JsonConverter<Guid>
+    internal sealed class SPGuidConverter : JsonConverter<Guid>
     {
         public override Guid Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {

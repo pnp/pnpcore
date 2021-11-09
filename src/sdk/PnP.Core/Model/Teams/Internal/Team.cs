@@ -9,8 +9,7 @@ using System.Threading.Tasks;
 namespace PnP.Core.Model.Teams
 {
     [GraphType(Uri = "teams/{Site.GroupId}", LinqGet = "teams")]
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Usage", "CA2243:Attribute string literals should parse correctly", Justification = "<Pending>")]
-    internal partial class Team : BaseDataModel<ITeam>, ITeam
+    internal sealed class Team : BaseDataModel<ITeam>, ITeam
     {
         #region Construction
         public Team()

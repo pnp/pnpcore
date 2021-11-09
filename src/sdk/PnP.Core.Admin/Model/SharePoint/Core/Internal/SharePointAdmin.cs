@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace PnP.Core.Admin.Model.SharePoint
 {
-    internal class SharePointAdmin : ISharePointAdmin
+    internal sealed class SharePointAdmin : ISharePointAdmin
     {
         private readonly PnPContext context;
 

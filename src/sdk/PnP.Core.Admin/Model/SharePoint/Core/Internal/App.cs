@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace PnP.Core.Admin.Model.SharePoint
 {
-    internal partial class App : IApp
+    internal class App : IApp
     {
         public Guid Id { get; set; }
 

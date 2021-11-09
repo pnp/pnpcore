@@ -3,7 +3,7 @@
 namespace PnP.Core.Model.SharePoint
 {
     [SharePointType("SP.ChangeList")]
-    internal partial class ChangeList : Change, IChangeList
+    internal sealed class ChangeList : Change, IChangeList
     {
         public string Editor { get => GetValue<string>(); set => SetValue(value); }
 

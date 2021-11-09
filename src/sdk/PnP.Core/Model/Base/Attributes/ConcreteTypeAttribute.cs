@@ -6,7 +6,7 @@ namespace PnP.Core.Model
     /// Attribute to declare the concrete type for this interface
     /// </summary>
     [AttributeUsage(AttributeTargets.Interface, AllowMultiple = false)]
-    internal class ConcreteTypeAttribute : Attribute
+    internal sealed class ConcreteTypeAttribute : Attribute
     {
         public ConcreteTypeAttribute(Type type)
         {

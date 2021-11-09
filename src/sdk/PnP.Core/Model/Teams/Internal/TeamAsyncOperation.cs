@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace PnP.Core.Model.Teams
 {
     [GraphType]
-    internal class TeamAsyncOperation : BaseDataModel<ITeamAsyncOperation>, ITeamAsyncOperation
+    internal sealed class TeamAsyncOperation : BaseDataModel<ITeamAsyncOperation>, ITeamAsyncOperation
     {
         internal int WaitTimeInSeconds { get; set; } = 5;
         internal int MaxRetries { get; set; } = 50;

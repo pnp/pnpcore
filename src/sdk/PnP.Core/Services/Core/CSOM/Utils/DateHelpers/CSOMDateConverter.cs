@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace PnP.Core.Services.Core.CSOM.Utils.DateHelpers
 {
-    internal class CSOMDateConverter : IDateConversionStrategy
+    internal sealed class CSOMDateConverter : IDateConversionStrategy
     {
         internal List<IDateConversionStrategy> AvailableConverters { get; set; } = new List<IDateConversionStrategy>()
         {

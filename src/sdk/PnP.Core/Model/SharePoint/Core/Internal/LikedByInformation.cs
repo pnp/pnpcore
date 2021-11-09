@@ -1,7 +1,7 @@
 ﻿namespace PnP.Core.Model.SharePoint
 {
     [SharePointType("Microsoft.SharePoint.Likes.likedByInformation")]
-    internal class LikedByInformation : BaseDataModel<ILikedByInformation>, ILikedByInformation
+    internal sealed class LikedByInformation : BaseDataModel<ILikedByInformation>, ILikedByInformation
     {
         public bool IsLikedByUser { get => GetModelValue<bool>(); set => SetModelValue(value); }
 
