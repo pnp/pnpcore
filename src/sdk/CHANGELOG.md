@@ -35,6 +35,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Enabled support for loading "system" fields when doing a CAML query #607 [jansenbe - Bert Jansen]
 - Added support for cloning a PnPContext for a group id [jansenbe - Bert Jansen]
 - PERF: where possible made all internal classes sealed. See https://devblogs.microsoft.com/dotnet/performance-improvements-in-net-6/#peanut-butter for details on the why [jansenbe - Bert Jansen]
+- Improved SPO REST error handling, now the relevant batch request headers (like the request correlation id) are included in the error [jansenbe - Bert Jansen]
 
 ## [1.4.0]
 

@@ -102,6 +102,26 @@ namespace PnP.Core
         /// </summary>
         internal static Guid CustomHeadersModuleId = Guid.Parse("{46307280-190E-4365-8AA1-085C451E7799}");
 
+        /// <summary>
+        /// SPRequestGuid SharePoint REST response header
+        /// </summary>
+        internal const string SPRequestGuidHeader = "SPRequestGuid";
+
+        /// <summary>
+        /// SPClientServiceRequestDuration SharePoint REST response header
+        /// </summary>
+        internal const string SPClientServiceRequestDurationHeader = "SPClientServiceRequestDuration";
+
+        /// <summary>
+        /// X-SharePointHealthScore SharePoint REST response header
+        /// </summary>
+        internal const string XSharePointHealthScoreHeader = "X-SharePointHealthScore";
+
+        /// <summary>
+        /// X-SP-SERVERSTATE SharePoint REST response header
+        /// </summary>
+        internal const string XSPServerStateHeader = "X-SP-SERVERSTATE";
+
         #region Json serializers options
 
         /// <summary>

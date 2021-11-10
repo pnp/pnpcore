@@ -10,6 +10,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -1000,10 +1001,7 @@ namespace PnP.Core.Services
 
                     // Make the batch call
                     using StringContent content = new StringContent(requestBody);
-
-#pragma warning disable CA2000 // Dispose objects before losing scope
                     using (var request = new HttpRequestMessage(HttpMethod.Post, $"{splitRestBatch.Site.ToString().TrimEnd(new char[] { '/' })}/_api/$batch"))
-#pragma warning restore CA2000 // Dispose objects before losing scope
                     {
                         // Remove the default Content-Type content header
                         if (content.Headers.Contains("Content-Type"))
@@ -1061,14 +1059,17 @@ namespace PnP.Core.Services
                                             }
 #endif
 
-                                            await ProcessSharePointRestBatchResponse(splitRestBatch, batchResponse).ConfigureAwait(false);
+                                            await ProcessSharePointRestBatchResponse(splitRestBatch, batchResponse, response.Headers).ConfigureAwait(false);
                                         }
                                     }
                                 }
                                 else
                                 {
                                     // Something went wrong...
-                                    throw new SharePointRestServiceException(ErrorType.SharePointRestServiceError, (int)response.StatusCode, await response.Content.ReadAsStringAsync().ConfigureAwait(false));
+                                    throw new SharePointRestServiceException(ErrorType.SharePointRestServiceError, 
+                                        (int)response.StatusCode, 
+                                        await response.Content.ReadAsStringAsync().ConfigureAwait(false), 
+                                        SpoRestResposeHeadersToPropagate(response.Headers));
                                 }
                             }
                             finally
@@ -1081,7 +1082,7 @@ namespace PnP.Core.Services
                         {
                             string batchResponse = TestManager.MockResponse(PnPContext, requestKey);
 
-                            await ProcessSharePointRestBatchResponse(splitRestBatch, batchResponse).ConfigureAwait(false);
+                            await ProcessSharePointRestBatchResponse(splitRestBatch, batchResponse, null).ConfigureAwait(false);
                         }
 #endif
 
@@ -1231,13 +1232,14 @@ namespace PnP.Core.Services
         /// </summary>
         /// <param name="restBatch">The batch request to process</param>
         /// <param name="batchResponse">The raw content of the response</param>
+        /// <param name="headers">Batch request response headers</param>
         /// <returns></returns>
-        private async Task ProcessSharePointRestBatchResponse(SPORestBatch restBatch, string batchResponse)
+        private async Task ProcessSharePointRestBatchResponse(SPORestBatch restBatch, string batchResponse, HttpResponseHeaders headers)
         {
             using (var tracer = Tracer.Track(PnPContext.Logger, "ExecuteSharePointRestBatchAsync-JSONToModel"))
             {
                 // Process the batch response, assign each response to it's request 
-                ProcessSharePointRestBatchResponseContent(restBatch.Batch, batchResponse);
+                ProcessSharePointRestBatchResponseContent(restBatch.Batch, batchResponse, headers);
 
                 // Map the retrieved JSON to our domain model
                 foreach (var batchRequest in restBatch.Batch.Requests.Values)
@@ -1264,7 +1266,8 @@ namespace PnP.Core.Services
         /// </summary>
         /// <param name="batch">Batch that we're processing</param>
         /// <param name="batchResponse">Batch response received from the server</param>
-        private static void ProcessSharePointRestBatchResponseContent(Batch batch, string batchResponse)
+        /// <param name="headers">Batch request response headers</param>
+        private static void ProcessSharePointRestBatchResponseContent(Batch batch, string batchResponse, HttpResponseHeaders headers)
         {
 #if !NET5_0
             var responseLines = batchResponse.Split(new char[] { '\n' });
@@ -1274,7 +1277,9 @@ namespace PnP.Core.Services
 
             bool responseContentOpen = false;
             bool collectHeaders = false;
-            Dictionary<string, string> responseHeaders = new Dictionary<string, string>();
+            Dictionary<string,string> responseHeadersToPropagate = SpoRestResposeHeadersToPropagate(headers);
+
+            Dictionary<string, string> responseHeaders = new Dictionary<string, string>(responseHeadersToPropagate);
             StringBuilder responseContent = new StringBuilder();
 #if NET5_0
             foreach (ReadOnlySpan<char> line in batchResponse.SplitLines())
@@ -1296,8 +1301,7 @@ namespace PnP.Core.Services
                         {
                             if (batch.ThrowOnError)
                             {
-                                // Todo: parsing json in line to provide a more structured error message + add to logging
-                                throw new SharePointRestServiceException(ErrorType.SharePointRestServiceError, (int)httpStatusCode, responseContent.ToString());
+                                throw new SharePointRestServiceException(ErrorType.SharePointRestServiceError, (int)httpStatusCode, responseContent.ToString(), responseHeaders);
                             }
                             else
                             {
@@ -1305,7 +1309,7 @@ namespace PnP.Core.Services
                                 batch.AddBatchResult(currentBatchRequest,
                                                      httpStatusCode,
                                                      responseContent.ToString(),
-                                                     new SharePointRestError(ErrorType.SharePointRestServiceError, (int)httpStatusCode, responseContent.ToString()));
+                                                     new SharePointRestError(ErrorType.SharePointRestServiceError, (int)httpStatusCode, responseContent.ToString(), responseHeaders));
                             }
                         }
                         else
@@ -1347,7 +1351,7 @@ namespace PnP.Core.Services
                     }
 
                     collectHeaders = false;
-                    responseHeaders = new Dictionary<string, string>();
+                    responseHeaders = new Dictionary<string, string>(responseHeadersToPropagate);
 
                     counter++;
                 }
@@ -1400,6 +1404,36 @@ namespace PnP.Core.Services
 #endif
                 }
             }
+        }
+
+        private static Dictionary<string, string> SpoRestResposeHeadersToPropagate(HttpResponseHeaders headers)
+        {
+            Dictionary<string, string> responseHeaders = new Dictionary<string, string>();
+
+            if (headers != null && headers.Any())
+            {
+                if (headers.TryGetValues(PnPConstants.SPRequestGuidHeader, out IEnumerable<string> spRequestGuidHeader))
+                {
+                    responseHeaders.Add(PnPConstants.SPRequestGuidHeader, string.Join(",", spRequestGuidHeader));
+                }
+
+                if (headers.TryGetValues(PnPConstants.SPClientServiceRequestDurationHeader, out IEnumerable<string> spClientServiceRequestDurationHeader))
+                {
+                    responseHeaders.Add(PnPConstants.SPClientServiceRequestDurationHeader, string.Join(",", spClientServiceRequestDurationHeader));
+                }
+
+                if (headers.TryGetValues(PnPConstants.XSharePointHealthScoreHeader, out IEnumerable<string> xSharePointHealthScoreHeader))
+                {
+                    responseHeaders.Add(PnPConstants.XSharePointHealthScoreHeader, string.Join(",", xSharePointHealthScoreHeader));
+                }
+
+                if (headers.TryGetValues(PnPConstants.XSPServerStateHeader, out IEnumerable<string> xSPServerStateHeader))
+                {
+                    responseHeaders.Add(PnPConstants.XSPServerStateHeader, string.Join(",", xSPServerStateHeader));
+                }
+            }
+
+            return responseHeaders;
         }
 
         private static void ExecuteSpoRestRequestModules(BatchRequest request, Dictionary<string, string> headers, ref string requestUrl, ref string requestBody)
@@ -1585,7 +1619,10 @@ namespace PnP.Core.Services
                         else
                         {
                             // Something went wrong...
-                            throw new SharePointRestServiceException(ErrorType.SharePointRestServiceError, (int)response.StatusCode, await response.Content.ReadAsStringAsync().ConfigureAwait(false));
+                            throw new SharePointRestServiceException(ErrorType.SharePointRestServiceError, 
+                                (int)response.StatusCode, 
+                                await response.Content.ReadAsStringAsync().ConfigureAwait(false),
+                                SpoRestResposeHeadersToPropagate(response.Headers));
                         }
 #if DEBUG
                     }
@@ -1641,14 +1678,7 @@ namespace PnP.Core.Services
             }
 
             // Process response headers
-            Dictionary<string, string> responseHeaders = new Dictionary<string, string>();
-            if (response != null)
-            {
-                foreach (var header in response.Headers)
-                {
-                    responseHeaders.Add(header.Key, header.Value.FirstOrDefault());
-                }
-            }
+            Dictionary<string, string> responseHeaders = SpoRestResposeHeadersToPropagate(response?.Headers);
 
             // Run request modules if they're connected
             if (restRequest.RequestModules != null && restRequest.RequestModules.Count > 0)
@@ -1830,7 +1860,10 @@ namespace PnP.Core.Services
                                     else
                                     {
                                         // Something went wrong...
-                                        throw new SharePointRestServiceException(ErrorType.SharePointRestServiceError, (int)response.StatusCode, await response.Content.ReadAsStringAsync().ConfigureAwait(false));
+                                        throw new SharePointRestServiceException(ErrorType.SharePointRestServiceError, 
+                                            (int)response.StatusCode, 
+                                            await response.Content.ReadAsStringAsync().ConfigureAwait(false),
+                                            SpoRestResposeHeadersToPropagate(response.Headers));
                                     }
                                 }
                                 finally
