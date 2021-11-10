@@ -105,7 +105,7 @@
 <p>Using the <code>GetSiteCollections</code> methods any user/app can enumerate site collections but depending on the user/app's permissions the results will be different:</p>
 <ul>
 <li>When using <strong>application permissions</strong> with <code>Sites.Read.All</code> the Microsoft Graph Sites endpoint is queried and <strong>all</strong> site collections in the tenant are returned</li>
-<li>When using <strong>delegated permissions</strong> with <code>Sites.Read.All</code> and a user that's not a SharePoint Tenant admin then the Microsoft Graph Search endpoint is queries to return all site collections that the user can access, so a <strong>subset</strong> of the site collections is returned</li>
+<li>When using <strong>delegated permissions</strong> with <code>Sites.Read.All</code> and a user that's not a SharePoint Tenant admin then the Microsoft Graph Search endpoint is queried to return all site collections that the user can access, so a <strong>subset</strong> of the site collections is returned</li>
 <li>When using <strong>delegated permissions</strong> and the user is a SharePoint Tenant administrator then a hidden list in the SharePoint Tenant Admin Center site is queried and <strong>all</strong> site collections in the tenant are returned</li>
 </ul>
 <p>Below sample shows how to use the <code>GetSiteCollections</code> methods:</p>

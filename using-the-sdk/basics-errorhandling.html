@@ -106,7 +106,7 @@
 </ul>
 <p>All PnP Core exceptions inherit from <code>PnPException</code>, for service calls there's an extra base exception named <code>ServiceException</code> which enables you to filter out all service call related exceptions.</p>
 <h2 id="catching-a-pnp-core-sdk-exception-and-getting-the-exception-details">Catching a PnP Core SDK exception and getting the exception details</h2>
-<p>All PnP Core SDK specific exceptions inherit from <code>PnPException</code> making it easy for you to filter them out. Also each <code>PnPException</code> does have an <code>Error</code> property holding detailed exception information. As <code>PnPException</code> is an abstract base class you'd typically want to work with the actual exceptions like <code>ClientException</code>, <code>AuthenticationException</code>, <code>SharePointRestServiceException</code>, <code>MicrosoftGraphServiceException</code> and <code>CsomServiceException</code> as shown in below code snippets. The first snippet shows how to log the detailed exception information:</p>
+<p>All PnP Core SDK specific exceptions inherit from <code>PnPException</code> making it easy for you to filter them out. Also each <code>PnPException</code> does have an <code>Error</code> property holding detailed exception information. As <code>PnPException</code> is an abstract base class you'd typically want to work with the actual exceptions like <code>ClientException</code>, <code>AuthenticationException</code>, <code>SharePointRestServiceException</code>, <code>MicrosoftGraphServiceException</code> and <code>CsomServiceException</code> as shown in below code snippets. The first snippet shows how to log the detailed exception information, when you call <code>ToString()</code> on the exception a stacktrace will be included, calling <code>ToString()</code> on an <code>Error</code> object will just get you the error details.</p>
 <pre><code class="lang-csharp">try
 {
     // Make service call    
@@ -114,7 +114,10 @@
 // Catch all service exceptions
 catch (ServiceException ex)
 {
-    // Option 1: Only handle SharePoint REST exceptions
+    // Option 1: Dump full error information to your log, including exception stacktrace
+    Console.WriteLine(ex.ToString());
+
+    // Option 2: Only handle SharePoint REST exceptions
     if (ex is SharePointRestServiceException)
     {
         // Let's get the detailed error information
@@ -124,7 +127,7 @@ catch (ServiceException ex)
         Console.WriteLine(error.ToString());
     }
 
-    // Option 2: handle all service errors
+    // Option 3: handle all service errors
     Console.WriteLine(ex.Error.ToString());
 }
 </code></pre>
