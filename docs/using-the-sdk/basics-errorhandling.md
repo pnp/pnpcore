@@ -28,7 +28,7 @@ All PnP Core exceptions inherit from `PnPException`, for service calls there's a
 
 ## Catching a PnP Core SDK exception and getting the exception details
 
-All PnP Core SDK specific exceptions inherit from `PnPException` making it easy for you to filter them out. Also each `PnPException` does have an `Error` property holding detailed exception information. As `PnPException` is an abstract base class you'd typically want to work with the actual exceptions like `ClientException`, `AuthenticationException`, `SharePointRestServiceException`, `MicrosoftGraphServiceException` and `CsomServiceException` as shown in below code snippets. The first snippet shows how to log the detailed exception information:
+All PnP Core SDK specific exceptions inherit from `PnPException` making it easy for you to filter them out. Also each `PnPException` does have an `Error` property holding detailed exception information. As `PnPException` is an abstract base class you'd typically want to work with the actual exceptions like `ClientException`, `AuthenticationException`, `SharePointRestServiceException`, `MicrosoftGraphServiceException` and `CsomServiceException` as shown in below code snippets. The first snippet shows how to log the detailed exception information, when you call `ToString()` on the exception a stacktrace will be included, calling `ToString()` on an `Error` object will just get you the error details.
 
 ```csharp
 try
@@ -38,7 +38,10 @@ try
 // Catch all service exceptions
 catch (ServiceException ex)
 {
-    // Option 1: Only handle SharePoint REST exceptions
+    // Option 1: Dump full error information to your log, including exception stacktrace
+    Console.WriteLine(ex.ToString());
+
+    // Option 2: Only handle SharePoint REST exceptions
     if (ex is SharePointRestServiceException)
     {
         // Let's get the detailed error information
@@ -48,7 +51,7 @@ catch (ServiceException ex)
         Console.WriteLine(error.ToString());
     }
 
-    // Option 2: handle all service errors
+    // Option 3: handle all service errors
     Console.WriteLine(ex.Error.ToString());
 }
 ```

@@ -13,7 +13,7 @@ The typical SharePoint Online tenants contains hundreds of site collections and 
 Using the `GetSiteCollections` methods any user/app can enumerate site collections but depending on the user/app's permissions the results will be different:
 
 - When using **application permissions** with `Sites.Read.All` the Microsoft Graph Sites endpoint is queried and **all** site collections in the tenant are returned
-- When using **delegated permissions** with `Sites.Read.All` and a user that's not a SharePoint Tenant admin then the Microsoft Graph Search endpoint is queries to return all site collections that the user can access, so a **subset** of the site collections is returned
+- When using **delegated permissions** with `Sites.Read.All` and a user that's not a SharePoint Tenant admin then the Microsoft Graph Search endpoint is queried to return all site collections that the user can access, so a **subset** of the site collections is returned
 - When using **delegated permissions** and the user is a SharePoint Tenant administrator then a hidden list in the SharePoint Tenant Admin Center site is queried and **all** site collections in the tenant are returned
 
 Below sample shows how to use the `GetSiteCollections` methods:
