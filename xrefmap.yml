@@ -43688,12 +43688,15 @@ references:
   commentId: T:PnP.Core.SharePointRestError
   fullName: PnP.Core.SharePointRestError
   nameWithType: SharePointRestError
-- uid: PnP.Core.SharePointRestError.#ctor(PnP.Core.ErrorType,System.Int32,System.String)
-  name: SharePointRestError(ErrorType, Int32, String)
-  href: api/PnP.Core.SharePointRestError.html#PnP_Core_SharePointRestError__ctor_PnP_Core_ErrorType_System_Int32_System_String_
-  commentId: M:PnP.Core.SharePointRestError.#ctor(PnP.Core.ErrorType,System.Int32,System.String)
-  fullName: PnP.Core.SharePointRestError.SharePointRestError(PnP.Core.ErrorType, System.Int32, System.String)
-  nameWithType: SharePointRestError.SharePointRestError(ErrorType, Int32, String)
+- uid: PnP.Core.SharePointRestError.#ctor(PnP.Core.ErrorType,System.Int32,System.String,Dictionary{System.String,System.String})
+  name: SharePointRestError(ErrorType, Int32, String, Dictionary<String, String>)
+  href: api/PnP.Core.SharePointRestError.html#PnP_Core_SharePointRestError__ctor_PnP_Core_ErrorType_System_Int32_System_String_Dictionary_System_String_System_String__
+  commentId: M:PnP.Core.SharePointRestError.#ctor(PnP.Core.ErrorType,System.Int32,System.String,Dictionary{System.String,System.String})
+  name.vb: SharePointRestError(ErrorType, Int32, String, Dictionary(Of String, String))
+  fullName: PnP.Core.SharePointRestError.SharePointRestError(PnP.Core.ErrorType, System.Int32, System.String, Dictionary<System.String, System.String>)
+  fullName.vb: PnP.Core.SharePointRestError.SharePointRestError(PnP.Core.ErrorType, System.Int32, System.String, Dictionary(Of System.String, System.String))
+  nameWithType: SharePointRestError.SharePointRestError(ErrorType, Int32, String, Dictionary<String, String>)
+  nameWithType.vb: SharePointRestError.SharePointRestError(ErrorType, Int32, String, Dictionary(Of String, String))
 - uid: PnP.Core.SharePointRestError.#ctor*
   name: SharePointRestError
   href: api/PnP.Core.SharePointRestError.html#PnP_Core_SharePointRestError__ctor_
@@ -43733,12 +43736,15 @@ references:
   commentId: T:PnP.Core.SharePointRestServiceException
   fullName: PnP.Core.SharePointRestServiceException
   nameWithType: SharePointRestServiceException
-- uid: PnP.Core.SharePointRestServiceException.#ctor(PnP.Core.ErrorType,System.Int32,System.String)
-  name: SharePointRestServiceException(ErrorType, Int32, String)
-  href: api/PnP.Core.SharePointRestServiceException.html#PnP_Core_SharePointRestServiceException__ctor_PnP_Core_ErrorType_System_Int32_System_String_
-  commentId: M:PnP.Core.SharePointRestServiceException.#ctor(PnP.Core.ErrorType,System.Int32,System.String)
-  fullName: PnP.Core.SharePointRestServiceException.SharePointRestServiceException(PnP.Core.ErrorType, System.Int32, System.String)
-  nameWithType: SharePointRestServiceException.SharePointRestServiceException(ErrorType, Int32, String)
+- uid: PnP.Core.SharePointRestServiceException.#ctor(PnP.Core.ErrorType,System.Int32,System.String,Dictionary{System.String,System.String})
+  name: SharePointRestServiceException(ErrorType, Int32, String, Dictionary<String, String>)
+  href: api/PnP.Core.SharePointRestServiceException.html#PnP_Core_SharePointRestServiceException__ctor_PnP_Core_ErrorType_System_Int32_System_String_Dictionary_System_String_System_String__
+  commentId: M:PnP.Core.SharePointRestServiceException.#ctor(PnP.Core.ErrorType,System.Int32,System.String,Dictionary{System.String,System.String})
+  name.vb: SharePointRestServiceException(ErrorType, Int32, String, Dictionary(Of String, String))
+  fullName: PnP.Core.SharePointRestServiceException.SharePointRestServiceException(PnP.Core.ErrorType, System.Int32, System.String, Dictionary<System.String, System.String>)
+  fullName.vb: PnP.Core.SharePointRestServiceException.SharePointRestServiceException(PnP.Core.ErrorType, System.Int32, System.String, Dictionary(Of System.String, System.String))
+  nameWithType: SharePointRestServiceException.SharePointRestServiceException(ErrorType, Int32, String, Dictionary<String, String>)
+  nameWithType.vb: SharePointRestServiceException.SharePointRestServiceException(ErrorType, Int32, String, Dictionary(Of String, String))
 - uid: PnP.Core.SharePointRestServiceException.#ctor*
   name: SharePointRestServiceException
   href: api/PnP.Core.SharePointRestServiceException.html#PnP_Core_SharePointRestServiceException__ctor_

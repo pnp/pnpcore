@@ -5310,7 +5310,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.SharePointRestError.html",
-          "hash": "8MVaY5qaEXu/5uDvtoRtfA=="
+          "hash": "qAA//qpFODTNm9rT3mZJXg=="
         }
       },
       "is_incremental": false,
@@ -5322,7 +5322,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.SharePointRestServiceException.html",
-          "hash": "w7nS6UHDvTzQi+ajl5Ro9Q=="
+          "hash": "jUtQyLhJgR2F7/+SkPCUNw=="
         }
       },
       "is_incremental": false,

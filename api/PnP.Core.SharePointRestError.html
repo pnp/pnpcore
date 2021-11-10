@@ -80,7 +80,7 @@
           <div class="col-md-10">
             <article class="content wrap" id="_content" data-uid="PnP.Core.SharePointRestError">
                   <div class="contribution-panel mobile-hide pull-right">
-                      <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Exceptions/SharePointRestError.cs/#L10" title="View Source" class="view-source-lg"><i class="fa fa-code"></i></a>
+                      <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Exceptions/SharePointRestError.cs/#L11" title="View Source" class="view-source-lg"><i class="fa fa-code"></i></a>
                       <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_SharePointRestError.md&amp;value=---%0Auid%3A%20PnP.Core.SharePointRestError%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc" class="improve-doc-lg"><i class="glyphicon glyphicon-pencil"></i></a>
                   </div>
                       <h1 id="PnP_Core_SharePointRestError" data-uid="PnP.Core.SharePointRestError">Class SharePointRestError
@@ -143,24 +143,24 @@
   
   <span class="small pull-right mobile-hide">
     <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_SharePointRestError__ctor_PnP_Core_ErrorType_System_Int32_System_String_.md&amp;value=---%0Auid%3A%20PnP.Core.SharePointRestError.%23ctor(PnP.Core.ErrorType%2CSystem.Int32%2CSystem.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_SharePointRestError__ctor_PnP_Core_ErrorType_System_Int32_System_String_Dictionary_System_String_System_String__.md&amp;value=---%0Auid%3A%20PnP.Core.SharePointRestError.%23ctor(PnP.Core.ErrorType%2CSystem.Int32%2CSystem.String%2CDictionary%7BSystem.String%2CSystem.String%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Exceptions/SharePointRestError.cs/#L18" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Exceptions/SharePointRestError.cs/#L20" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_SharePointRestError__ctor_" data-uid="PnP.Core.SharePointRestError.#ctor*"></a>
   
-  <h4 id="PnP_Core_SharePointRestError__ctor_PnP_Core_ErrorType_System_Int32_System_String_" data-uid="PnP.Core.SharePointRestError.#ctor(PnP.Core.ErrorType,System.Int32,System.String)"><a href="#collapsible-PnP_Core_SharePointRestError__ctor_PnP_Core_ErrorType_System_Int32_System_String_" class="expander" data-toggle="collapse">SharePointRestError(ErrorType, Int32, String)</a></h4>
+  <h4 id="PnP_Core_SharePointRestError__ctor_PnP_Core_ErrorType_System_Int32_System_String_Dictionary_System_String_System_String__" data-uid="PnP.Core.SharePointRestError.#ctor(PnP.Core.ErrorType,System.Int32,System.String,Dictionary{System.String,System.String})"><a href="#collapsible-PnP_Core_SharePointRestError__ctor_PnP_Core_ErrorType_System_Int32_System_String_Dictionary_System_String_System_String__" class="expander" data-toggle="collapse">SharePointRestError(ErrorType, Int32, String, Dictionary&lt;String, String&gt;)</a></h4>
   
-  <div id="collapsible-PnP_Core_SharePointRestError__ctor_PnP_Core_ErrorType_System_Int32_System_String_" class="collapse in">
+  <div id="collapsible-PnP_Core_SharePointRestError__ctor_PnP_Core_ErrorType_System_Int32_System_String_Dictionary_System_String_System_String__" class="collapse in">
   <div class="markdown level1 summary"><p>Default constructor for the <a class="xref" href="PnP.Core.SharePointRestError.html">SharePointRestError</a> error</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public SharePointRestError(ErrorType type, int httpResponseCode, string response)</code></pre>
+    <pre><code class="lang-csharp hljs">public SharePointRestError(ErrorType type, int httpResponseCode, string response, Dictionary&lt;string, string&gt; responseHeaders = null)</code></pre>
   </div>
 
   <h5 class="parameters">Parameters</h5>
@@ -189,6 +189,14 @@
 </p>
       </td>
     </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><span class="xref">Dictionary</span>&lt;<a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a>, <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a>&gt;</span>
+        <span class="parametername">responseHeaders</span>
+        <p><p>Optional collection of request response headers</p>
+</p>
+      </td>
+    </tr>
   </table>
   
   
@@ -210,7 +218,7 @@
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_SharePointRestError_ServerErrorCode.md&amp;value=---%0Auid%3A%20PnP.Core.SharePointRestError.ServerErrorCode%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Exceptions/SharePointRestError.cs/#L37" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Exceptions/SharePointRestError.cs/#L54" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_SharePointRestError_ServerErrorCode_" data-uid="PnP.Core.SharePointRestError.ServerErrorCode*"></a>
@@ -256,7 +264,7 @@
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_SharePointRestError_ToString.md&amp;value=---%0Auid%3A%20PnP.Core.SharePointRestError.ToString%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Exceptions/SharePointRestError.cs/#L43" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Exceptions/SharePointRestError.cs/#L60" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_SharePointRestError_ToString_" data-uid="PnP.Core.SharePointRestError.ToString*"></a>
