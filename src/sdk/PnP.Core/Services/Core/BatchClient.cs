@@ -1479,14 +1479,17 @@ namespace PnP.Core.Services
 
                 if (!left.IsNullOrEmpty() && !right.IsNullOrEmpty())
                 {
-                    headers.Add(left.Trim().ToString(), right.Trim().ToString());
+                    if (!headers.ContainsKey(left.Trim().ToString()))
+                    {
+                        headers.Add(left.Trim().ToString(), right.Trim().ToString());
+                    }
                 }
             }
         }
 
-        #endregion
+#endregion
 
-        #region SharePoint REST interactive calls
+#region SharePoint REST interactive calls
 
         private async Task ExecuteSharePointRestInteractiveAsync(Batch batch)
         {
@@ -1738,9 +1741,9 @@ namespace PnP.Core.Services
             }
         }
 
-        #endregion
+#endregion
 
-        #region CSOM batching
+#region CSOM batching
         /// <summary>
         /// Execute a batch with CSOM requests.
         /// See https://docs.microsoft.com/en-us/openspecs/sharepoint_protocols/ms-csom/fd645da2-fa28-4daa-b3cd-8f4e506df117 for the CSOM protocol specs
@@ -2041,7 +2044,7 @@ namespace PnP.Core.Services
 
             return batches;
         }
-        #endregion
+#endregion
 
         /// <summary>
         /// Checks if a batch contains an API call that still has unresolved tokens...no point in sending the request at that point
