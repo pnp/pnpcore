@@ -336,6 +336,67 @@ namespace PnP.Core.Test.Base
             Assert.IsTrue(requests.Count == 1);
             Assert.AreEqual(requests[0], "_api/web?$select=Id%2cUrl%2cCustomMasterUrl%2cFields%2cLists%2fTitle%2cLists%2fId%2cLists%2fRootFolder%2fServerRelativeUrl%2cLists%2fRootFolder%2fUniqueId%2cFeatures%2cRegionalSettings%2f*%2cRegionalSettings%2fDateFormat&$expand=Fields%2cLists%2cLists%2fRootFolder%2cFeatures%2cRegionalSettings%2cRegionalSettings%2fTimeZone", true);
         }
+
+        [TestMethod]
+        public async Task ComplexPropertyRequestWithTwoTopLevelQueryProperties()
+        {
+            //TestCommon.Instance.Mocking = false;
+            
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                await context.Web.LoadAsync(w => w.Lists.QueryProperties(
+                                               l => l.Title,
+                                               l => l.HasUniqueRoleAssignments,
+                                               l => l.Fields.QueryProperties(
+                                                   p => p.InternalName,
+                                                   p => p.FieldTypeKind,
+                                                   p => p.TypeAsString,
+                                                   p => p.Title),
+                                               l => l.RoleAssignments.QueryProperties(
+                                                   ra => ra.PrincipalId,
+                                                       ra => ra.RoleDefinitions.QueryProperties(
+                                                           rd => rd.Id,
+                                                           rd => rd.Name
+                                                       )
+                                                   ),
+                                               l => l.RootFolder.QueryProperties(rf => rf.Name)
+                                               ));
+
+                foreach (var reqList in context.Web.Lists.AsRequested())
+                {
+                    foreach (var ra in reqList.RoleAssignments.AsRequested())
+                    {
+                        // we will never get here since RoleAssigments contains zero records
+                        Assert.IsTrue(reqList.Fields.Length > 0);
+                        Assert.IsTrue(ra.RoleDefinitions.Length > 0);
+                        Assert.IsTrue(!string.IsNullOrEmpty(reqList.RootFolder.Name));
+                    }
+                }
+
+                var list = context.Web.Lists.GetByTitle("Documents", 
+                                               l => l.Title,
+                                               l => l.HasUniqueRoleAssignments,
+                                               l => l.Fields.QueryProperties(
+                                                   p => p.InternalName,
+                                                   p => p.FieldTypeKind,
+                                                   p => p.TypeAsString,
+                                                   p => p.Title),
+                                               l => l.RoleAssignments.QueryProperties(
+                                                   ra => ra.PrincipalId,
+                                                       ra => ra.RoleDefinitions.QueryProperties(
+                                                           rd => rd.Id,
+                                                           rd => rd.Name
+                                                       )
+                                                   ),
+                                               l => l.RootFolder.QueryProperties(rf => rf.Name)
+                                               );
+                Assert.IsTrue(list.Fields.Length > 0);
+                Assert.IsTrue(list.RoleAssignments.Length > 0);
+                Assert.IsTrue(list.RoleAssignments.AsRequested().FirstOrDefault().RoleDefinitions.Length > 0);
+                Assert.IsTrue(!string.IsNullOrEmpty(list.RootFolder.Name));
+
+            }
+        }
         #endregion
         /*
                 #region Graph only tests using the Taxonomy model

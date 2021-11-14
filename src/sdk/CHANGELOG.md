@@ -38,6 +38,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Improved SPO REST error handling, now the relevant batch request headers (like the request correlation id) are included in the error [jansenbe - Bert Jansen]
 - Fix: prevent duplicate header additions when processing returned headers in REST batch [jansenbe - Bert Jansen]
 - Throw more descriptive exceptions when a `PnPContext` is created using the `IPnPContextFactory` while authentication is not properly configured  #623 [jansenbe - Bert Jansen]
+- Fix: Mixing multiple top level `QueryProperties` statements when one of them has child `QueryProperties` generated a wrong query #625 [jansenbe - Bert Jansen]
 
 ## [1.4.0]
 

@@ -190,6 +190,7 @@ namespace PnP.Core.Services
                     {
                         AddExpandableExpandRest(sb, field, expandableField, path);
                     }
+                    path = "";
                 }
             }
         }
@@ -224,6 +225,7 @@ namespace PnP.Core.Services
                     {
                         path = path + "/" + JsonMappingHelper.GetRestField(expandableFieldInfo);
                         AddExpandableSelectRest(sb, field, expandableField, path);
+                        path = "";
                     }
                 }
             }
