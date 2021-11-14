@@ -186,6 +186,16 @@ namespace PnP.Core.Services
         /// <returns>A PnPContext object based on the provided configuration name</returns>
         public async virtual Task<PnPContext> CreateAsync(Uri url, IAuthenticationProvider authenticationProvider, PnPContextOptions options = null)
         {
+            if (url == null)
+            {
+                throw new ArgumentNullException(nameof(url));
+            }
+
+            if (authenticationProvider == null)
+            {
+                throw new ArgumentNullException(nameof(authenticationProvider), PnPCoreResources.Exception_CreatePnPContext_AuthenticationProvider);
+            }
+
             // Use the provided settings to create a new instance of PnPContext
             var context = new PnPContext(Log, authenticationProvider, SharePointRestClient, MicrosoftGraphClient, ContextOptions, GlobalOptions, TelemetryManager)
             {
@@ -227,6 +237,16 @@ namespace PnP.Core.Services
         /// <returns>A PnPContext object based on the provided configuration name</returns>
         public async virtual Task<PnPContext> CreateAsync(Guid groupId, IAuthenticationProvider authenticationProvider, PnPContextOptions options = null)
         {
+            if (groupId == Guid.Empty)
+            {
+                throw new ArgumentException(PnPCoreResources.Exception_CreatePnPContext_GroupId, nameof(groupId));
+            }
+
+            if (authenticationProvider == null)
+            {
+                throw new ArgumentNullException(nameof(authenticationProvider), PnPCoreResources.Exception_CreatePnPContext_AuthenticationProvider);
+            }
+
             // Use the provided settings to create a new instance of PnPContext
             var context = new PnPContext(Log, authenticationProvider, SharePointRestClient, MicrosoftGraphClient, ContextOptions, GlobalOptions, TelemetryManager);
 

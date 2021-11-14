@@ -135,6 +135,12 @@
   <data name="Exception_ConfigurationError_InvalidPnPContextConfigurationName" xml:space="preserve">
     <value>Invalid configuration name '{0}' for PnPContext creation</value>
   </data>
+  <data name="Exception_CreatePnPContext_AuthenticationProvider" xml:space="preserve">
+    <value>There was no authentication provider setup, please ensure you define an authentication provider via configuration or via code. See https://pnp.github.io/pnpcore/using-the-sdk/readme.html for more details</value>
+  </data>
+  <data name="Exception_CreatePnPContext_GroupId" xml:space="preserve">
+    <value>Please provide the id (Guid) of a the Microsoft 365 group you want to create a PnPContext for</value>
+  </data>
   <data name="Exception_Feature_AlreadyActivated" xml:space="preserve">
     <value>Feature was already activated</value>
   </data>

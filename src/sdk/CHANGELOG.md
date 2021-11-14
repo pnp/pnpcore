@@ -37,6 +37,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - PERF: where possible made all internal classes sealed. See https://devblogs.microsoft.com/dotnet/performance-improvements-in-net-6/#peanut-butter for details on the why [jansenbe - Bert Jansen]
 - Improved SPO REST error handling, now the relevant batch request headers (like the request correlation id) are included in the error [jansenbe - Bert Jansen]
 - Fix: prevent duplicate header additions when processing returned headers in REST batch [jansenbe - Bert Jansen]
+- Throw more descriptive exceptions when a `PnPContext` is created using the `IPnPContextFactory` while authentication is not properly configured  #623 [jansenbe - Bert Jansen]
 
 ## [1.4.0]
 

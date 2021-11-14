@@ -115,6 +115,24 @@ namespace PnP.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to There was no authentication provider setup, please ensure you define an authentication provider via configuration or via code. See https://pnp.github.io/pnpcore/using-the-sdk/readme.html for more details.
+        /// </summary>
+        internal static string Exception_CreatePnPContext_AuthenticationProvider {
+            get {
+                return ResourceManager.GetString("Exception_CreatePnPContext_AuthenticationProvider", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please provide the id (Guid) of a the Microsoft 365 group you want to create a PnPContext for.
+        /// </summary>
+        internal static string Exception_CreatePnPContext_GroupId {
+            get {
+                return ResourceManager.GetString("Exception_CreatePnPContext_GroupId", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Feature was already activated.
         /// </summary>
         internal static string Exception_Feature_AlreadyActivated {
