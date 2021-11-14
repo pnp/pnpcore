@@ -242,11 +242,10 @@ services.AddPnPCoreAuthentication(
 </div>
 <h2 id="using-the-multi-tenant-pnp-azure-ad-application">Using the multi-tenant PnP Azure AD application</h2>
 <p>Azure AD has the concept of multi-tenant applications allowing you to re-use an application created in another Azure AD tenant. The PnP team did setup a general purpose Azure AD application (named &quot;PnP Office 365 Management Shell&quot;) configured with the needed permissions, and you can reuse this application. It means that you don't need to create your own Azure AD application, instead you simply need to consent permissions to the already created multi-tenant application.</p>
-<h3 id="step-1">Step 1</h3>
+<h3 id="step-1-consent-to-the-pnp-office-365-management-shell-application">Step 1: Consent to the PnP Office 365 Management Shell application</h3>
 <p>To consent permissions to the PnP multi-tenant application first update below content URL: replace contoso.onmicrosoft.com with your Azure AD tenant name, which typically is company.onmicrosoft.com.</p>
 <pre><code>https://login.microsoftonline.com/contoso.onmicrosoft.com/adminconsent?client_id=31359c7f-bd7e-475c-86db-fdb8c937548e&amp;state=12345&amp;redirect_uri=https://aka.ms/sppnp
 </code></pre>
-<h3 id="step-2">Step 2</h3>
 <p>Login to your Microsoft 365 tenant (e.g. by browsing to SharePoint Online), open a new browser tab and paste the URL you've just created. Azure AD will eventually ask you to login, and then it will prompt you to consent permissions to the app:</p>
 <p><img src="../images/PnP%20admin%20consent.png" alt="PnP Multi-tenant app admin consent"></p>
 <p>Click on <strong>Accept</strong> to accept the requested permissions. At that point you will be redirected to the PnP Site (<a href="https://aka.ms/sppnp">https://aka.ms/sppnp</a>). You've now successfully registered the PnP multi-tenant application in your Azure AD environment and you can use it with the PnP Core SDK. The PnP Core SDK defaults to this application, so if you're not specifying any Azure AD application details when setting up authentication for the application, then the PnP Core SDK automatically uses the PnP application (application id 31359c7f-bd7e-475c-86db-fdb8c937548e).</p>
@@ -254,6 +253,49 @@ services.AddPnPCoreAuthentication(
 <h5>Note</h5>
 <p>If you get errors during this consent process it's most likely because you are not an Azure AD tenant administrator. Please contact your admins and check with them for further steps.</p>
 </div>
+<h3 id="step-2-configure-your-project-authentication-settings">Step 2: Configure your project authentication settings</h3>
+<p>If you're using the PnP Management Shell Azure AD application then you can leave out the application id and tenant id from your authentication setup. Below samples show how to use the <code>InteractiveAuthenticationProvider</code> in combination with the PnP Management Shell Azure AD application. Using code you can configure authentication like this:</p>
+<pre><code class="lang-csharp">var host = 
+    Host.CreateDefaultBuilder()                
+        // Configure logging
+        .ConfigureLogging((hostingContext, logging) =&gt;
+        {
+            logging.AddEventSourceLogger();
+            logging.AddConsole();
+        })
+        .ConfigureServices((hostingContext, services) =&gt;
+        {                
+            // Add the PnP Core SDK library services
+            services.AddPnPCore();
+            // Add the PnP Core SDK library services configuration from the appsettings.json file
+            services.Configure&lt;PnPCoreOptions&gt;(hostingContext.Configuration.GetSection(&quot;PnPCore&quot;));
+            // Add the PnP Core SDK Authentication Providers
+            services.AddPnPCoreAuthentication(options =&gt;
+            {
+                options.Credentials.Configurations.Add(&quot;Default&quot;, new PnPCoreAuthenticationCredentialConfigurationOptions
+                {
+                    Interactive = new PnPCoreAuthenticationInteractiveOptions { },
+                });
+                options.Credentials.DefaultConfiguration = &quot;Default&quot;;
+            });
+        })
+        // Let the builder know we're running in a console
+        .UseConsoleLifetime()
+        // Add services to the container
+        .Build();
+</code></pre>
+<p>This snippet show the JSON authentication section to use:</p>
+<pre><code class="lang-json">&quot;Credentials&quot;: {
+    &quot;DefaultConfiguration&quot;: &quot;myAuthConfig&quot;,
+        &quot;Configurations&quot;: {
+            &quot;myAuthConfig&quot;: {
+                &quot;Interactive&quot;: {
+                &quot;RedirectUri&quot;: &quot;http://localhost&quot;
+                }
+            }
+    }
+}
+</code></pre>
 <h2 id="using-the-credential-manager">Using the credential manager</h2>
 <p>Another supported option to authenticate to a created Azure AD application, configured for delegated permissions, is via username and password, through the <code>UsernamePasswordAuthenticationProvider</code>. To configure this in a secure way it's recommended to setup a credential manager entry and to use the <code>CredentialManagerAuthenticationProvider</code>. Below steps walk you through the setup on Windows, but a similar credential manager concepts exists on other platforms as well.</p>
 <ol>
