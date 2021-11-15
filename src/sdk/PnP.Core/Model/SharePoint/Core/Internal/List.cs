@@ -18,7 +18,6 @@ namespace PnP.Core.Model.SharePoint
     /// </summary>
     [SharePointType("SP.List", Uri = "_api/Web/Lists(guid'{Id}')", Update = "_api/web/lists/getbyid(guid'{Id}')", LinqGet = "_api/web/lists")]
     //[GraphType(Get = "sites/{Parent.GraphId}/lists/{GraphId}", LinqGet = "sites/{Parent.GraphId}/lists")]
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Usage", "CA2243:Attribute string literals should parse correctly", Justification = "<Pending>")]
     internal sealed class List : BaseDataModel<IList>, IList
     {
         // List of fields that loaded when the Lists collection is requested. This approach is needed as 

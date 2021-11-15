@@ -4,7 +4,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a RegionalSettings object
     /// </summary>
     [ConcreteType(typeof(RegionalSettings))]
-    public interface IRegionalSettings : IDataModel<IRegionalSettings>, IDataModelGet<IRegionalSettings>, IDataModelLoad<IRegionalSettings>
+    public interface IRegionalSettings : IDataModel<IRegionalSettings>, IDataModelGet<IRegionalSettings>, IDataModelLoad<IRegionalSettings>, IQueryableDataModel
     {
 
         #region Properties

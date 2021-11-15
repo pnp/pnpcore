@@ -799,6 +799,15 @@ namespace PnP.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The used model ({0}) does not implement IQueryableDataModel.
+        /// </summary>
+        internal static string Exception_Unsupported_NoIQueryableDataModel {
+            get {
+                return ResourceManager.GetString("Exception_Unsupported_NoIQueryableDataModel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Page publish scheduling only works on the pages library in the root web of a site collection.
         /// </summary>
         internal static string Exception_Unsupported_PagePublishingOnSubWeb {

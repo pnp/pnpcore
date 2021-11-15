@@ -8,7 +8,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a comment.
     /// </summary>
     [ConcreteType(typeof(Comment))]
-    public interface IComment : IDataModel<IComment>, IDataModelGet<IComment>, IDataModelLoad<IComment> /*, IDataModelUpdate*/, IDataModelDelete
+    public interface IComment : IDataModel<IComment>, IDataModelGet<IComment>, IDataModelLoad<IComment>, IDataModelDelete, IQueryableDataModel
     {
 
         /// <summary>

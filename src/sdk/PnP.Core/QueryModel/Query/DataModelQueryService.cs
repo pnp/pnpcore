@@ -142,10 +142,9 @@ namespace PnP.Core.QueryModel
                     }
                 }
             }
-            // For what is not supported, we return an empty collection
             else
             {
-                return Enumerable.Empty<TModel>();
+                throw new ClientException(ErrorType.Unsupported, string.Format(PnPCoreResources.Exception_Unsupported_NoIQueryableDataModel, typeof(TModel).ToString()));
             }
         }
 

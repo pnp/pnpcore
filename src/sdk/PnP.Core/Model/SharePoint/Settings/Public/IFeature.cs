@@ -6,7 +6,7 @@ namespace PnP.Core.Model.SharePoint
     /// Represents a Feature in SharePoint Online
     /// </summary>
     [ConcreteType(typeof(Feature))]
-    public interface IFeature : IDataModel<IFeature>, IDataModelGet<IFeature>
+    public interface IFeature : IDataModel<IFeature>, IDataModelGet<IFeature>, IQueryableDataModel
     {
         /// <summary>
         /// The ID of the Feature
