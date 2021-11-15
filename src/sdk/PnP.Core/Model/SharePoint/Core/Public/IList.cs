@@ -257,6 +257,11 @@ namespace PnP.Core.Model.SharePoint
         public IViewCollection Views { get; }
 
         /// <summary>
+        /// Collection of list webhooks
+        /// </summary>
+        public IListSubscriptionCollection Webhooks { get; }
+
+        /// <summary>
         /// A special property used to add an asterisk to a $select statement
         /// </summary>
         public object All { get; }

@@ -1,0 +1,10 @@
+--batchresponse_4e471cc6-bc89-4bb3-b8b4-89847b27cbfb
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+HTTP/1.1 201 Created
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+LOCATION: https://m365x790252.sharepoint.com/sites/pnpcoresdktestgroup/_api/web/lists(guid'84c3d851-b4f0-4c9f-a3b2-a0479a02e811')/Subscriptions
+
+{"d":{"__metadata":{"id":"https://m365x790252.sharepoint.com/sites/pnpcoresdktestgroup/_api/web/lists(guid'84c3d851-b4f0-4c9f-a3b2-a0479a02e811')/Subscriptions","uri":"https://m365x790252.sharepoint.com/sites/pnpcoresdktestgroup/_api/web/lists(guid'84c3d851-b4f0-4c9f-a3b2-a0479a02e811')/Subscriptions","type":"Microsoft.SharePoint.Webhooks.Subscription"},"clientState":null,"expirationDateTime":"2021-11-16T21:56:11.9350265Z","id":"0d55d0cb-aeac-4fb1-81c1-a9fe2537dfa1","notificationUrl":"https://6e4569a36d94.ngrok.io/api/HandleEvent","resource":"84c3d851-b4f0-4c9f-a3b2-a0479a02e811","resourceData":null}}
+--batchresponse_4e471cc6-bc89-4bb3-b8b4-89847b27cbfb--

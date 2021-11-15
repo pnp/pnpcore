@@ -19,7 +19,7 @@ namespace PnP.Core {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class PnPCoreResources {
@@ -174,6 +174,15 @@ namespace PnP.Core {
         internal static string Exception_InstanceWasDeleted {
             get {
                 return ResourceManager.GetString("Exception_InstanceWasDeleted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The specified expiration date is invalid. Should be greater than today and within {0} months.
+        /// </summary>
+        internal static string Exception_Invalid_WebhookExpiration {
+            get {
+                return ResourceManager.GetString("Exception_Invalid_WebhookExpiration", resourceCulture);
             }
         }
         
