@@ -1319,35 +1319,54 @@ namespace PnP.Core.Test.SharePoint
                 // Add a new content type
                 IContentType newContentType = await context.Web.ContentTypes.AddAsync("0x0100554FB756A84E4A4899FB819522D2BF50", "ChangeTest", "TESTING", "TESTING");
 
-                var changes = await context.Web.GetChangesAsync(new ChangeQueryOptions(false, true)
+                try
                 {
-                    ContentType = true,
-                    FetchLimit = 5
-                });
+                    var changes = await context.Web.GetChangesAsync(new ChangeQueryOptions(false, true)
+                    {
+                        ContentType = true,
+                        FetchLimit = 1000
+                    });
 
-                Assert.IsNotNull(changes);
-                Assert.IsTrue(changes.Count > 0);
-                Assert.IsTrue((changes.Last() as IChangeContentType).ContentTypeId != null);
-                Assert.IsTrue((changes.Last() as IChangeContentType).WebId != Guid.Empty);
+                    Assert.IsNotNull(changes);
+                    Assert.IsTrue(changes.Count > 0);
+                    Assert.IsTrue((changes.Last() as IChangeContentType).ContentTypeId != null);
+                    Assert.IsTrue((changes.Last() as IChangeContentType).WebId != Guid.Empty);
 
-                Assert.IsTrue(changes.Last().IsPropertyAvailable<IChangeContentType>(p => p.ContentTypeId));
-                Assert.ThrowsException<ClientException>(() =>
+                    Assert.IsTrue(changes.Last().IsPropertyAvailable<IChangeContentType>(p => p.ContentTypeId));
+                    Assert.ThrowsException<ClientException>(() =>
+                    {
+                        changes.Last().IsPropertyAvailable<IChangeContentType>(p => p.ContentTypeId.Name);
+                    });
+                    Assert.ThrowsException<ArgumentNullException>(() =>
+                    {
+                        changes.Last().IsPropertyAvailable<IChangeContentType>(null);
+                    });
+
+                    // Load additional properties based upon the returned content type
+                    IChangeContentType contentTypeToValidate = null;
+                    foreach (var change in changes)
+                    {
+                        if (change is IChangeContentType changeContentType)
+                        {
+                            if (changeContentType.ContentTypeId.StringId == "0x0100554FB756A84E4A4899FB819522D2BF50")
+                            {
+                                contentTypeToValidate = changeContentType;
+                                break;
+                            }
+                        }
+                    }
+
+                    if (contentTypeToValidate != null)
+                    {
+                        await contentTypeToValidate.ContentTypeId.LoadAsync(p => p.Group);
+                        Assert.IsTrue(contentTypeToValidate.ContentTypeId.IsPropertyAvailable(p => p.Group));
+                    }
+                }
+                finally
                 {
-                    changes.Last().IsPropertyAvailable<IChangeContentType>(p => p.ContentTypeId.Name);
-                });
-                Assert.ThrowsException<ArgumentNullException>(() =>
-                {
-                    changes.Last().IsPropertyAvailable<IChangeContentType>(null);
-                });
-
-                // Load additional properties based upon the returned content type
-                var changedContentType = (changes.Last() as IChangeContentType).ContentTypeId;
-                await changedContentType.LoadAsync(p => p.Group);
-
-                Assert.IsTrue(changedContentType.IsPropertyAvailable(p => p.Group));
-
-                // Delete the content type again
-                await newContentType.DeleteAsync();
+                    // Delete the content type again
+                    await newContentType.DeleteAsync();
+                }
             }
         }
 
