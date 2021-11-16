@@ -646,6 +646,8 @@ namespace PnP.Core.Transformation.SharePoint.Functions
         [InputDocumentation(Name = "{ServerRelativeFileName}", Description = "Server relative file name of the image")]
         [OutputDocumentation(Name = "{ImageListId}", Description = "Id of the list holding the file")]
         [OutputDocumentation(Name = "{ImageUniqueId}", Description = "UniqueId of the file")]
+        [OutputDocumentation(Name = "{ImageHeight}", Description = "Height of the image")]
+        [OutputDocumentation(Name = "{ImageWidth}", Description = "Width of the image")]
         public Dictionary<string, string> ImageLookup(string serverRelativeImagePath)
         {
 
@@ -670,17 +672,39 @@ namespace PnP.Core.Transformation.SharePoint.Functions
             {
                 results.Add("ImageListId", "");
                 results.Add("ImageUniqueId", "");
+                results.Add("ImageHeight", "-1");
+                results.Add("ImageWidth", "-1");
                 return results;
             }
 
             try
             {
                 var pageHeaderImage = this.SourceContext.Web.GetFileByServerRelativeUrl(serverRelativeImagePath);
-                this.SourceContext.Load(pageHeaderImage, p => p.UniqueId, p => p.ListId);
+                this.SourceContext.Load(pageHeaderImage, p => p.UniqueId, p => p.ListId, p => p.Properties);
                 this.SourceContext.ExecuteQueryRetry();
 
                 results.Add("ImageListId", pageHeaderImage.ListId.ToString());
                 results.Add("ImageUniqueId", pageHeaderImage.UniqueId.ToString());
+
+                if (pageHeaderImage.Properties.FieldValues.ContainsKey("vti_lastheight"))
+                {
+                    var height = pageHeaderImage.Properties.FieldValues["vti_lastheight"].ToString();
+                    if (string.IsNullOrEmpty(height) || height == "0")
+                    {
+                        height = "-1";
+                    }
+                    results.Add("ImageHeight", height);
+                }
+                if (pageHeaderImage.Properties.FieldValues.ContainsKey("vti_lastwidth"))
+                {
+                    var width = pageHeaderImage.Properties.FieldValues["vti_lastwidth"].ToString();
+                    if (string.IsNullOrEmpty(width) || width == "0")
+                    {
+                        width = "-1";
+                    }
+                    results.Add("ImageWidth", width);
+                }
+
                 return results;
             }
             catch (ServerException ex)
