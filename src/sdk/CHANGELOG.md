@@ -40,6 +40,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Throw more descriptive exceptions when a `PnPContext` is created using the `IPnPContextFactory` while authentication is not properly configured  #623 [jansenbe - Bert Jansen]
 - Fix: Mixing multiple top level `QueryProperties` statements when one of them has child `QueryProperties` generated a wrong query #625 [jansenbe - Bert Jansen]
 - Added `IQueryable` where it still was missing + throw exception when not LINQ query is not possible #627 [jansenbe - Bert Jansen]
+- Fix: multi value lookup only persisted first lookup value #628 [jansenbe - Bert Jansen]
 
 ## [1.4.0]
 

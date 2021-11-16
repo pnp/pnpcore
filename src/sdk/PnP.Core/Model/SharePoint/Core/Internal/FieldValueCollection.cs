@@ -113,7 +113,7 @@ namespace PnP.Core.Model.SharePoint
 
             foreach (var item in Values)
             {
-                sb.Append($"{(item as FieldLookupValue).ToValidateUpdateItemJson()};#");
+                sb.Append($"{(item as FieldLookupValue).ToValidateUpdateItemJson()};#;#");
             }
 
             return sb.ToString();
