@@ -1,0 +1,188 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html lang="en">
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Working with list webhooks | PnP Core SDK </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Working with list webhooks | PnP Core SDK ">
+    <meta name="generator" content="docfx 2.56.5.0">
+    <meta name="description" content="The PnP Core SDK is a modern .NET SDK designed to work for Microsoft 365. It provides a unified object model for working with SharePoint Online and Teams which is agnostic to the underlying API's being called.">
+    <link rel="shortcut icon" href="https://c.s-microsoft.com/favicon.ico?v2">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    <meta property="docfx:newtab" content="true">
+  </head>  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../images/logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <label class="glyphicon glyphicon-search" for="search-query"></label>
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first="First" data-prev="Previous" data-next="Next" data-last="Last"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+                  <div class="contribution-panel mobile-hide pull-right">
+                      <a href="https://github.com/pnp/pnpcore/blob/dev/docs/using-the-sdk/lists-webhooks.md/#L1" title="Improve this Doc" class="improve-doc-lg"><i class="glyphicon glyphicon-pencil"></i></a>
+                  </div>
+                    <h1 id="working-with-list-webhooks">Working with list webhooks</h1>
+
+<p>PnP Core SDK allows you to perform all needed CRUD operations with list webhooks in a convenient fluent manner. The webhook instance is represented via the <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IListSubscription.html">IListSubscription</a> interface.</p>
+<h2 id="fetch-and-filter-webhooks">Fetch and filter webhooks</h2>
+<p>To get all list webhooks, you can use regular <code>Load</code> methods.</p>
+<p>Load webhooks as part of the list request:</p>
+<pre><code class="lang-csharp">var list = await context.Web.Lists.GetByTitleAsync(&quot;My List&quot;, l =&gt; l.Webhooks);
+</code></pre>
+<p>Or load webhooks explicitly:</p>
+<pre><code class="lang-csharp">var list = await context.Web.Lists.GetByTitleAsync(&quot;My List&quot;);
+list.Webhooks.Load();
+</code></pre>
+<p>Or load using list instance:</p>
+<pre><code class="lang-csharp">var list = await context.Web.Lists.GetByTitleAsync(&quot;My List&quot;);
+list.Load(l =&gt; l.Webhooks);
+</code></pre>
+<p>Later on you can iterate over the webhooks collection:</p>
+<pre><code class="lang-csharp">foreach (var webhook in list.Webhooks.AsRequested())
+{
+    // do something
+}
+</code></pre>
+<p>You can also use LINQ to filter webhooks by their properties. For example, to get all webhooks, where the client state contains specific string:</p>
+<pre><code class="lang-csharp">var webhooks = await list.Webhooks.Where(w =&gt; w.ClientState.Contains(&quot;state&quot;)).ToListAsync();
+
+foreach (var webhook in webhooks)
+{
+    // do something
+}
+</code></pre>
+<h2 id="get-webhook-by-id">Get webhook by Id</h2>
+<p>To get a webhook by its Id, you can use a dedicated method:</p>
+<pre><code class="lang-csharp">var list = await context.Web.Lists.GetByTitleAsync(&quot;My List&quot;);
+
+// get by id
+var webhook = await list.Webhooks.GetByIdAsync(new Guid(&quot;&lt;webhook id&gt;&quot;));
+</code></pre>
+<p>Or you can use LINQ filter:</p>
+<pre><code class="lang-csharp">var webhookId = new Guid(&quot;&lt;id&gt;&quot;);
+var webhook = await list.Webhooks.FirstOrDefaultAsync(w =&gt; w.Id == webhookId);
+</code></pre>
+<h2 id="add-a-webhook">Add a webhook</h2>
+<p>To add a webhook, you should provide notification url, expiration date and optionally client state. You can use client state for validating notifications, tagging different subscriptions, or other reasons.</p>
+<p>There are a few different method overloads available in PnP Core SDK to add a new webhook:</p>
+<pre><code class="lang-csharp">var list = await context.Web.Lists.GetByTitleAsync(&quot;My List&quot;);
+
+// creates a new webhook subscription with validity period of 180 days (maximum possible), doesn't set client state
+var webhook = await list.Webhooks.AddAsync(&quot;https://my-handler.url&quot;);
+
+// creates a new webhook subscription with validity period of 1 month, doesn't set client state
+var webhook = await list.Webhooks.AddAsync(&quot;https://my-handler.url&quot;, 1);
+
+// creates a new webhook subscription with validity period of 1 month and sets client state.
+var webhook = await list.Webhooks.AddAsync(&quot;https://my-handler.url&quot;, DateTime.UtcNow.AddMonths(1), &quot;tag:client&quot;);
+</code></pre>
+<div class="NOTE">
+<h5>Note</h5>
+<p>The maximum expiration time for SharePoint list webhooks is 180 days.</p>
+</div>
+<h2 id="update-a-webhook">Update a webhook</h2>
+<p>To update a webhook, you should set properties you want to change and then call the <code>Update</code> method:</p>
+<pre><code class="lang-csharp">var list = await context.Web.Lists.GetByTitleAsync(&quot;My List&quot;);
+var webhook = await list.Webhooks.GetByIdAsync(new Guid(&quot;&lt;webhook id&gt;&quot;));
+
+// change expiration for the webhook
+webhook.ExpirationDateTime = DateTime.UtcNow.AddDays(180);
+
+// update it
+await webhook.UpdateAsync();
+</code></pre>
+<h2 id="delete-a-webhook">Delete a webhook</h2>
+<p>To delete a webhook just call the <code>Delete</code> method on the webhook instance:</p>
+<pre><code class="lang-csharp">var list = await context.Web.Lists.GetByTitleAsync(&quot;My List&quot;);
+var webhook = await list.Webhooks.GetByIdAsync(new Guid(&quot;&lt;guid&gt;&quot;));
+
+// delete it
+await webhook.DeleteAsync();
+</code></pre>
+</article>
+          </div>
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              </nav>
+            </div>
+          </div>        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            <span>PnP Core SDK<br>Generated by <strong><a href='https://dotnet.github.io/docfx' alt='Doc FX Website'>DocFX</a></strong> with <strong><a href='https://ovasquez.github.io/docfx-material' alt='DocFx Material Theme'>Material UI</a></strong></span>
+            
+            <img src="https://telemetry.sharepointpnp.com/@pnp.github.io/index/" alt="spacer">
+          </div>
+        </div>
+      </footer>    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>  </body>
+</html>

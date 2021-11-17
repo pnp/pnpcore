@@ -3030,7 +3030,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.IList.html",
-          "hash": "CMbSTl4HUP3fjCylsiocbA=="
+          "hash": "SFSK3B8iX7CeBu+c0Kyn9g=="
         }
       },
       "is_incremental": false,
@@ -3091,6 +3091,30 @@
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.IListItemVersionCollection.html",
           "hash": "X6yThS6naXOCW95pt4gUWQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.SharePoint.IListSubscription.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.SharePoint.IListSubscription.html",
+          "hash": "369cc3z57XjdYVRZCHTyOQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.SharePoint.IListSubscriptionCollection.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.SharePoint.IListSubscriptionCollection.html",
+          "hash": "4sJyYZjy8g20p4sPutOIJg=="
         }
       },
       "is_incremental": false,
@@ -4182,7 +4206,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.html",
-          "hash": "nuEpXmQT/iMZSTsD0miXeg=="
+          "hash": "DdoQQ6l12iuzxx98H1Z0eg=="
         }
       },
       "is_incremental": false,
@@ -5358,7 +5382,7 @@
       "output": {
         ".html": {
           "relative_path": "api/toc.html",
-          "hash": "Um02DXAAlJT4RsYNQaGSiw=="
+          "hash": "5Pm60A92xc6U+LIRuLR/TQ=="
         }
       },
       "is_incremental": false,
@@ -6400,7 +6424,7 @@
       "output": {
         ".html": {
           "relative_path": "using-the-sdk/lists-intro.html",
-          "hash": "NNllriVz/fYo5+L28G7DeA=="
+          "hash": "sb2fxGkSxD/IXhiFvJZw+w=="
         }
       },
       "is_incremental": false,
@@ -6413,6 +6437,18 @@
         ".html": {
           "relative_path": "using-the-sdk/lists-views.html",
           "hash": "dcjhUwtFD8Dd3rOMO9mmRA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "using-the-sdk/lists-webhooks.md",
+      "output": {
+        ".html": {
+          "relative_path": "using-the-sdk/lists-webhooks.html",
+          "hash": "NJjGubJKxdT7hW1a8QLVbw=="
         }
       },
       "is_incremental": false,
@@ -6664,7 +6700,7 @@
       "output": {
         ".html": {
           "relative_path": "using-the-sdk/toc.html",
-          "hash": "LqzzqZaNW+MI83MxA8kk0A=="
+          "hash": "Xgsf5CFDeUO8cP64zqjlJg=="
         }
       },
       "is_incremental": false,
@@ -6721,13 +6757,13 @@
         "ConceptualDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build",
-          "total_file_count": 85,
+          "total_file_count": 86,
           "skipped_file_count": 0
         },
         "ManagedReferenceDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build",
-          "total_file_count": 444,
+          "total_file_count": 446,
           "skipped_file_count": 0
         },
         "ResourceDocumentProcessor": {

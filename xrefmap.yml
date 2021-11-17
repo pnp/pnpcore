@@ -25070,6 +25070,19 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IList.Views
   nameWithType: IList.Views
+- uid: PnP.Core.Model.SharePoint.IList.Webhooks
+  name: Webhooks
+  href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_Webhooks
+  commentId: P:PnP.Core.Model.SharePoint.IList.Webhooks
+  fullName: PnP.Core.Model.SharePoint.IList.Webhooks
+  nameWithType: IList.Webhooks
+- uid: PnP.Core.Model.SharePoint.IList.Webhooks*
+  name: Webhooks
+  href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_Webhooks_
+  commentId: Overload:PnP.Core.Model.SharePoint.IList.Webhooks
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IList.Webhooks
+  nameWithType: IList.Webhooks
 - uid: PnP.Core.Model.SharePoint.IList.WriteSecurity
   name: WriteSecurity
   href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_WriteSecurity
@@ -26375,6 +26388,209 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IListItemVersionCollection.GetByIdAsync
   nameWithType: IListItemVersionCollection.GetByIdAsync
+- uid: PnP.Core.Model.SharePoint.IListSubscription
+  name: IListSubscription
+  href: api/PnP.Core.Model.SharePoint.IListSubscription.html
+  commentId: T:PnP.Core.Model.SharePoint.IListSubscription
+  fullName: PnP.Core.Model.SharePoint.IListSubscription
+  nameWithType: IListSubscription
+- uid: PnP.Core.Model.SharePoint.IListSubscription.ClientState
+  name: ClientState
+  href: api/PnP.Core.Model.SharePoint.IListSubscription.html#PnP_Core_Model_SharePoint_IListSubscription_ClientState
+  commentId: P:PnP.Core.Model.SharePoint.IListSubscription.ClientState
+  fullName: PnP.Core.Model.SharePoint.IListSubscription.ClientState
+  nameWithType: IListSubscription.ClientState
+- uid: PnP.Core.Model.SharePoint.IListSubscription.ClientState*
+  name: ClientState
+  href: api/PnP.Core.Model.SharePoint.IListSubscription.html#PnP_Core_Model_SharePoint_IListSubscription_ClientState_
+  commentId: Overload:PnP.Core.Model.SharePoint.IListSubscription.ClientState
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IListSubscription.ClientState
+  nameWithType: IListSubscription.ClientState
+- uid: PnP.Core.Model.SharePoint.IListSubscription.ExpirationDateTime
+  name: ExpirationDateTime
+  href: api/PnP.Core.Model.SharePoint.IListSubscription.html#PnP_Core_Model_SharePoint_IListSubscription_ExpirationDateTime
+  commentId: P:PnP.Core.Model.SharePoint.IListSubscription.ExpirationDateTime
+  fullName: PnP.Core.Model.SharePoint.IListSubscription.ExpirationDateTime
+  nameWithType: IListSubscription.ExpirationDateTime
+- uid: PnP.Core.Model.SharePoint.IListSubscription.ExpirationDateTime*
+  name: ExpirationDateTime
+  href: api/PnP.Core.Model.SharePoint.IListSubscription.html#PnP_Core_Model_SharePoint_IListSubscription_ExpirationDateTime_
+  commentId: Overload:PnP.Core.Model.SharePoint.IListSubscription.ExpirationDateTime
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IListSubscription.ExpirationDateTime
+  nameWithType: IListSubscription.ExpirationDateTime
+- uid: PnP.Core.Model.SharePoint.IListSubscription.Id
+  name: Id
+  href: api/PnP.Core.Model.SharePoint.IListSubscription.html#PnP_Core_Model_SharePoint_IListSubscription_Id
+  commentId: P:PnP.Core.Model.SharePoint.IListSubscription.Id
+  fullName: PnP.Core.Model.SharePoint.IListSubscription.Id
+  nameWithType: IListSubscription.Id
+- uid: PnP.Core.Model.SharePoint.IListSubscription.Id*
+  name: Id
+  href: api/PnP.Core.Model.SharePoint.IListSubscription.html#PnP_Core_Model_SharePoint_IListSubscription_Id_
+  commentId: Overload:PnP.Core.Model.SharePoint.IListSubscription.Id
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IListSubscription.Id
+  nameWithType: IListSubscription.Id
+- uid: PnP.Core.Model.SharePoint.IListSubscription.NotificationUrl
+  name: NotificationUrl
+  href: api/PnP.Core.Model.SharePoint.IListSubscription.html#PnP_Core_Model_SharePoint_IListSubscription_NotificationUrl
+  commentId: P:PnP.Core.Model.SharePoint.IListSubscription.NotificationUrl
+  fullName: PnP.Core.Model.SharePoint.IListSubscription.NotificationUrl
+  nameWithType: IListSubscription.NotificationUrl
+- uid: PnP.Core.Model.SharePoint.IListSubscription.NotificationUrl*
+  name: NotificationUrl
+  href: api/PnP.Core.Model.SharePoint.IListSubscription.html#PnP_Core_Model_SharePoint_IListSubscription_NotificationUrl_
+  commentId: Overload:PnP.Core.Model.SharePoint.IListSubscription.NotificationUrl
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IListSubscription.NotificationUrl
+  nameWithType: IListSubscription.NotificationUrl
+- uid: PnP.Core.Model.SharePoint.IListSubscription.Resource
+  name: Resource
+  href: api/PnP.Core.Model.SharePoint.IListSubscription.html#PnP_Core_Model_SharePoint_IListSubscription_Resource
+  commentId: P:PnP.Core.Model.SharePoint.IListSubscription.Resource
+  fullName: PnP.Core.Model.SharePoint.IListSubscription.Resource
+  nameWithType: IListSubscription.Resource
+- uid: PnP.Core.Model.SharePoint.IListSubscription.Resource*
+  name: Resource
+  href: api/PnP.Core.Model.SharePoint.IListSubscription.html#PnP_Core_Model_SharePoint_IListSubscription_Resource_
+  commentId: Overload:PnP.Core.Model.SharePoint.IListSubscription.Resource
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IListSubscription.Resource
+  nameWithType: IListSubscription.Resource
+- uid: PnP.Core.Model.SharePoint.IListSubscriptionCollection
+  name: IListSubscriptionCollection
+  href: api/PnP.Core.Model.SharePoint.IListSubscriptionCollection.html
+  commentId: T:PnP.Core.Model.SharePoint.IListSubscriptionCollection
+  fullName: PnP.Core.Model.SharePoint.IListSubscriptionCollection
+  nameWithType: IListSubscriptionCollection
+- uid: PnP.Core.Model.SharePoint.IListSubscriptionCollection.Add(System.String,DateTime,System.String)
+  name: Add(String, DateTime, String)
+  href: api/PnP.Core.Model.SharePoint.IListSubscriptionCollection.html#PnP_Core_Model_SharePoint_IListSubscriptionCollection_Add_System_String_DateTime_System_String_
+  commentId: M:PnP.Core.Model.SharePoint.IListSubscriptionCollection.Add(System.String,DateTime,System.String)
+  fullName: PnP.Core.Model.SharePoint.IListSubscriptionCollection.Add(System.String, DateTime, System.String)
+  nameWithType: IListSubscriptionCollection.Add(String, DateTime, String)
+- uid: PnP.Core.Model.SharePoint.IListSubscriptionCollection.Add(System.String,System.Int32,System.String)
+  name: Add(String, Int32, String)
+  href: api/PnP.Core.Model.SharePoint.IListSubscriptionCollection.html#PnP_Core_Model_SharePoint_IListSubscriptionCollection_Add_System_String_System_Int32_System_String_
+  commentId: M:PnP.Core.Model.SharePoint.IListSubscriptionCollection.Add(System.String,System.Int32,System.String)
+  fullName: PnP.Core.Model.SharePoint.IListSubscriptionCollection.Add(System.String, System.Int32, System.String)
+  nameWithType: IListSubscriptionCollection.Add(String, Int32, String)
+- uid: PnP.Core.Model.SharePoint.IListSubscriptionCollection.Add*
+  name: Add
+  href: api/PnP.Core.Model.SharePoint.IListSubscriptionCollection.html#PnP_Core_Model_SharePoint_IListSubscriptionCollection_Add_
+  commentId: Overload:PnP.Core.Model.SharePoint.IListSubscriptionCollection.Add
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IListSubscriptionCollection.Add
+  nameWithType: IListSubscriptionCollection.Add
+- uid: PnP.Core.Model.SharePoint.IListSubscriptionCollection.AddAsync(System.String,DateTime,System.String)
+  name: AddAsync(String, DateTime, String)
+  href: api/PnP.Core.Model.SharePoint.IListSubscriptionCollection.html#PnP_Core_Model_SharePoint_IListSubscriptionCollection_AddAsync_System_String_DateTime_System_String_
+  commentId: M:PnP.Core.Model.SharePoint.IListSubscriptionCollection.AddAsync(System.String,DateTime,System.String)
+  fullName: PnP.Core.Model.SharePoint.IListSubscriptionCollection.AddAsync(System.String, DateTime, System.String)
+  nameWithType: IListSubscriptionCollection.AddAsync(String, DateTime, String)
+- uid: PnP.Core.Model.SharePoint.IListSubscriptionCollection.AddAsync(System.String,System.Int32,System.String)
+  name: AddAsync(String, Int32, String)
+  href: api/PnP.Core.Model.SharePoint.IListSubscriptionCollection.html#PnP_Core_Model_SharePoint_IListSubscriptionCollection_AddAsync_System_String_System_Int32_System_String_
+  commentId: M:PnP.Core.Model.SharePoint.IListSubscriptionCollection.AddAsync(System.String,System.Int32,System.String)
+  fullName: PnP.Core.Model.SharePoint.IListSubscriptionCollection.AddAsync(System.String, System.Int32, System.String)
+  nameWithType: IListSubscriptionCollection.AddAsync(String, Int32, String)
+- uid: PnP.Core.Model.SharePoint.IListSubscriptionCollection.AddAsync*
+  name: AddAsync
+  href: api/PnP.Core.Model.SharePoint.IListSubscriptionCollection.html#PnP_Core_Model_SharePoint_IListSubscriptionCollection_AddAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.IListSubscriptionCollection.AddAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IListSubscriptionCollection.AddAsync
+  nameWithType: IListSubscriptionCollection.AddAsync
+- uid: PnP.Core.Model.SharePoint.IListSubscriptionCollection.AddBatch(PnP.Core.Services.Batch,System.String,DateTime,System.String)
+  name: AddBatch(Batch, String, DateTime, String)
+  href: api/PnP.Core.Model.SharePoint.IListSubscriptionCollection.html#PnP_Core_Model_SharePoint_IListSubscriptionCollection_AddBatch_PnP_Core_Services_Batch_System_String_DateTime_System_String_
+  commentId: M:PnP.Core.Model.SharePoint.IListSubscriptionCollection.AddBatch(PnP.Core.Services.Batch,System.String,DateTime,System.String)
+  fullName: PnP.Core.Model.SharePoint.IListSubscriptionCollection.AddBatch(PnP.Core.Services.Batch, System.String, DateTime, System.String)
+  nameWithType: IListSubscriptionCollection.AddBatch(Batch, String, DateTime, String)
+- uid: PnP.Core.Model.SharePoint.IListSubscriptionCollection.AddBatch(PnP.Core.Services.Batch,System.String,System.Int32,System.String)
+  name: AddBatch(Batch, String, Int32, String)
+  href: api/PnP.Core.Model.SharePoint.IListSubscriptionCollection.html#PnP_Core_Model_SharePoint_IListSubscriptionCollection_AddBatch_PnP_Core_Services_Batch_System_String_System_Int32_System_String_
+  commentId: M:PnP.Core.Model.SharePoint.IListSubscriptionCollection.AddBatch(PnP.Core.Services.Batch,System.String,System.Int32,System.String)
+  fullName: PnP.Core.Model.SharePoint.IListSubscriptionCollection.AddBatch(PnP.Core.Services.Batch, System.String, System.Int32, System.String)
+  nameWithType: IListSubscriptionCollection.AddBatch(Batch, String, Int32, String)
+- uid: PnP.Core.Model.SharePoint.IListSubscriptionCollection.AddBatch(System.String,DateTime,System.String)
+  name: AddBatch(String, DateTime, String)
+  href: api/PnP.Core.Model.SharePoint.IListSubscriptionCollection.html#PnP_Core_Model_SharePoint_IListSubscriptionCollection_AddBatch_System_String_DateTime_System_String_
+  commentId: M:PnP.Core.Model.SharePoint.IListSubscriptionCollection.AddBatch(System.String,DateTime,System.String)
+  fullName: PnP.Core.Model.SharePoint.IListSubscriptionCollection.AddBatch(System.String, DateTime, System.String)
+  nameWithType: IListSubscriptionCollection.AddBatch(String, DateTime, String)
+- uid: PnP.Core.Model.SharePoint.IListSubscriptionCollection.AddBatch(System.String,System.Int32,System.String)
+  name: AddBatch(String, Int32, String)
+  href: api/PnP.Core.Model.SharePoint.IListSubscriptionCollection.html#PnP_Core_Model_SharePoint_IListSubscriptionCollection_AddBatch_System_String_System_Int32_System_String_
+  commentId: M:PnP.Core.Model.SharePoint.IListSubscriptionCollection.AddBatch(System.String,System.Int32,System.String)
+  fullName: PnP.Core.Model.SharePoint.IListSubscriptionCollection.AddBatch(System.String, System.Int32, System.String)
+  nameWithType: IListSubscriptionCollection.AddBatch(String, Int32, String)
+- uid: PnP.Core.Model.SharePoint.IListSubscriptionCollection.AddBatch*
+  name: AddBatch
+  href: api/PnP.Core.Model.SharePoint.IListSubscriptionCollection.html#PnP_Core_Model_SharePoint_IListSubscriptionCollection_AddBatch_
+  commentId: Overload:PnP.Core.Model.SharePoint.IListSubscriptionCollection.AddBatch
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IListSubscriptionCollection.AddBatch
+  nameWithType: IListSubscriptionCollection.AddBatch
+- uid: PnP.Core.Model.SharePoint.IListSubscriptionCollection.AddBatchAsync(PnP.Core.Services.Batch,System.String,DateTime,System.String)
+  name: AddBatchAsync(Batch, String, DateTime, String)
+  href: api/PnP.Core.Model.SharePoint.IListSubscriptionCollection.html#PnP_Core_Model_SharePoint_IListSubscriptionCollection_AddBatchAsync_PnP_Core_Services_Batch_System_String_DateTime_System_String_
+  commentId: M:PnP.Core.Model.SharePoint.IListSubscriptionCollection.AddBatchAsync(PnP.Core.Services.Batch,System.String,DateTime,System.String)
+  fullName: PnP.Core.Model.SharePoint.IListSubscriptionCollection.AddBatchAsync(PnP.Core.Services.Batch, System.String, DateTime, System.String)
+  nameWithType: IListSubscriptionCollection.AddBatchAsync(Batch, String, DateTime, String)
+- uid: PnP.Core.Model.SharePoint.IListSubscriptionCollection.AddBatchAsync(PnP.Core.Services.Batch,System.String,System.Int32,System.String)
+  name: AddBatchAsync(Batch, String, Int32, String)
+  href: api/PnP.Core.Model.SharePoint.IListSubscriptionCollection.html#PnP_Core_Model_SharePoint_IListSubscriptionCollection_AddBatchAsync_PnP_Core_Services_Batch_System_String_System_Int32_System_String_
+  commentId: M:PnP.Core.Model.SharePoint.IListSubscriptionCollection.AddBatchAsync(PnP.Core.Services.Batch,System.String,System.Int32,System.String)
+  fullName: PnP.Core.Model.SharePoint.IListSubscriptionCollection.AddBatchAsync(PnP.Core.Services.Batch, System.String, System.Int32, System.String)
+  nameWithType: IListSubscriptionCollection.AddBatchAsync(Batch, String, Int32, String)
+- uid: PnP.Core.Model.SharePoint.IListSubscriptionCollection.AddBatchAsync(System.String,DateTime,System.String)
+  name: AddBatchAsync(String, DateTime, String)
+  href: api/PnP.Core.Model.SharePoint.IListSubscriptionCollection.html#PnP_Core_Model_SharePoint_IListSubscriptionCollection_AddBatchAsync_System_String_DateTime_System_String_
+  commentId: M:PnP.Core.Model.SharePoint.IListSubscriptionCollection.AddBatchAsync(System.String,DateTime,System.String)
+  fullName: PnP.Core.Model.SharePoint.IListSubscriptionCollection.AddBatchAsync(System.String, DateTime, System.String)
+  nameWithType: IListSubscriptionCollection.AddBatchAsync(String, DateTime, String)
+- uid: PnP.Core.Model.SharePoint.IListSubscriptionCollection.AddBatchAsync(System.String,System.Int32,System.String)
+  name: AddBatchAsync(String, Int32, String)
+  href: api/PnP.Core.Model.SharePoint.IListSubscriptionCollection.html#PnP_Core_Model_SharePoint_IListSubscriptionCollection_AddBatchAsync_System_String_System_Int32_System_String_
+  commentId: M:PnP.Core.Model.SharePoint.IListSubscriptionCollection.AddBatchAsync(System.String,System.Int32,System.String)
+  fullName: PnP.Core.Model.SharePoint.IListSubscriptionCollection.AddBatchAsync(System.String, System.Int32, System.String)
+  nameWithType: IListSubscriptionCollection.AddBatchAsync(String, Int32, String)
+- uid: PnP.Core.Model.SharePoint.IListSubscriptionCollection.AddBatchAsync*
+  name: AddBatchAsync
+  href: api/PnP.Core.Model.SharePoint.IListSubscriptionCollection.html#PnP_Core_Model_SharePoint_IListSubscriptionCollection_AddBatchAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.IListSubscriptionCollection.AddBatchAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IListSubscriptionCollection.AddBatchAsync
+  nameWithType: IListSubscriptionCollection.AddBatchAsync
+- uid: PnP.Core.Model.SharePoint.IListSubscriptionCollection.GetById(Guid)
+  name: GetById(Guid)
+  href: api/PnP.Core.Model.SharePoint.IListSubscriptionCollection.html#PnP_Core_Model_SharePoint_IListSubscriptionCollection_GetById_Guid_
+  commentId: M:PnP.Core.Model.SharePoint.IListSubscriptionCollection.GetById(Guid)
+  fullName: PnP.Core.Model.SharePoint.IListSubscriptionCollection.GetById(Guid)
+  nameWithType: IListSubscriptionCollection.GetById(Guid)
+- uid: PnP.Core.Model.SharePoint.IListSubscriptionCollection.GetById*
+  name: GetById
+  href: api/PnP.Core.Model.SharePoint.IListSubscriptionCollection.html#PnP_Core_Model_SharePoint_IListSubscriptionCollection_GetById_
+  commentId: Overload:PnP.Core.Model.SharePoint.IListSubscriptionCollection.GetById
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IListSubscriptionCollection.GetById
+  nameWithType: IListSubscriptionCollection.GetById
+- uid: PnP.Core.Model.SharePoint.IListSubscriptionCollection.GetByIdAsync(Guid)
+  name: GetByIdAsync(Guid)
+  href: api/PnP.Core.Model.SharePoint.IListSubscriptionCollection.html#PnP_Core_Model_SharePoint_IListSubscriptionCollection_GetByIdAsync_Guid_
+  commentId: M:PnP.Core.Model.SharePoint.IListSubscriptionCollection.GetByIdAsync(Guid)
+  fullName: PnP.Core.Model.SharePoint.IListSubscriptionCollection.GetByIdAsync(Guid)
+  nameWithType: IListSubscriptionCollection.GetByIdAsync(Guid)
+- uid: PnP.Core.Model.SharePoint.IListSubscriptionCollection.GetByIdAsync*
+  name: GetByIdAsync
+  href: api/PnP.Core.Model.SharePoint.IListSubscriptionCollection.html#PnP_Core_Model_SharePoint_IListSubscriptionCollection_GetByIdAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.IListSubscriptionCollection.GetByIdAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IListSubscriptionCollection.GetByIdAsync
+  nameWithType: IListSubscriptionCollection.GetByIdAsync
 - uid: PnP.Core.Model.SharePoint.IPage
   name: IPage
   href: api/PnP.Core.Model.SharePoint.IPage.html
