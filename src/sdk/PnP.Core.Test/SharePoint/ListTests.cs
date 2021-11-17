@@ -1444,6 +1444,12 @@ namespace PnP.Core.Test.SharePoint
 
                 Assert.IsNotNull(assetLibrary);    
                 Assert.IsTrue(assetLibrary.Id != Guid.Empty);
+
+
+                var assetLibrary2 = context.Web.Lists.EnsureSiteAssetsLibrary(p => p.RootFolder.QueryProperties(p => p.Files));
+                Assert.IsNotNull(assetLibrary2);
+                Assert.IsTrue(assetLibrary2.Id != Guid.Empty);
+                Assert.IsTrue(assetLibrary2.IsPropertyAvailable(p => p.RootFolder));                
             }
         }
     }

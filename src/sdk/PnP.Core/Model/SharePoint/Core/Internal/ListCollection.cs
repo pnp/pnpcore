@@ -159,16 +159,21 @@ namespace PnP.Core.Model.SharePoint
         #endregion
 
         #region EnsureSiteAssetsLibrary methods
-        public async Task<IList> EnsureSiteAssetsLibraryAsync()
+        public async Task<IList> EnsureSiteAssetsLibraryAsync(params Expression<Func<IList, object>>[] selectors)
         {
             var assetLibrary = CreateNew() as List;
-            await assetLibrary.RequestAsync(new ApiCall("_api/Web/Lists/EnsureSiteAssetsLibrary", ApiType.SPORest), HttpMethod.Post).ConfigureAwait(false);
+
+            var apiCall = new ApiCall("_api/Web/Lists/EnsureSiteAssetsLibrary", ApiType.SPORest);
+            var entityInfo = EntityManager.GetClassInfo(assetLibrary.GetType(), assetLibrary, expressions: selectors);
+            var query = await QueryClient.BuildGetAPICallAsync(assetLibrary, entityInfo, apiCall).ConfigureAwait(false);
+
+            await assetLibrary.RequestAsync(new ApiCall(query.ApiCall.Request, ApiType.SPORest), HttpMethod.Post).ConfigureAwait(false);
             return assetLibrary;
         }
 
-        public IList EnsureSiteAssetsLibrary()
+        public IList EnsureSiteAssetsLibrary(params Expression<Func<IList, object>>[] selectors)
         {
-            return EnsureSiteAssetsLibraryAsync().GetAwaiter().GetResult();
+            return EnsureSiteAssetsLibraryAsync(selectors).GetAwaiter().GetResult();
         }
         #endregion
     }

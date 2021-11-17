@@ -123,14 +123,16 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// Ensures there's an Asset Library in the site, if not present it will be created
         /// </summary>
+        /// <param name="selectors">The expressions declaring the fields to select</param>
         /// <returns>The asset library</returns>
-        Task<IList> EnsureSiteAssetsLibraryAsync();
+        Task<IList> EnsureSiteAssetsLibraryAsync(params Expression<Func<IList, object>>[] selectors);
 
         /// <summary>
         /// Ensures there's an Asset Library in the site, if not present it will be created
         /// </summary>
+        /// <param name="selectors">The expressions declaring the fields to select</param>
         /// <returns>The asset library</returns>
-        IList EnsureSiteAssetsLibrary();
+        IList EnsureSiteAssetsLibrary(params Expression<Func<IList, object>>[] selectors);
         #endregion
 
     }
