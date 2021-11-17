@@ -119,5 +119,19 @@ namespace PnP.Core.Model.SharePoint
         public Task<IList> GetByServerRelativeUrlAsync(string serverRelativeUrl, params Expression<Func<IList, object>>[] selectors);
         #endregion
 
+        #region EnsureSiteAssetsLibrary
+        /// <summary>
+        /// Ensures there's an Asset Library in the site, if not present it will be created
+        /// </summary>
+        /// <returns>The asset library</returns>
+        Task<IList> EnsureSiteAssetsLibraryAsync();
+
+        /// <summary>
+        /// Ensures there's an Asset Library in the site, if not present it will be created
+        /// </summary>
+        /// <returns>The asset library</returns>
+        IList EnsureSiteAssetsLibrary();
+        #endregion
+
     }
 }

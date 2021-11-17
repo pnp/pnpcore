@@ -1433,5 +1433,18 @@ namespace PnP.Core.Test.SharePoint
             }
         }
 
+        [TestMethod]
+        public async Task EnsureAssetLibraryTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var assetLibrary = context.Web.Lists.EnsureSiteAssetsLibrary();
+
+                Assert.IsNotNull(assetLibrary);    
+                Assert.IsTrue(assetLibrary.Id != Guid.Empty);
+            }
+        }
     }
 }

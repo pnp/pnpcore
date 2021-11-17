@@ -2,6 +2,7 @@
 using PnP.Core.Services;
 using System;
 using System.Linq.Expressions;
+using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace PnP.Core.Model.SharePoint
@@ -155,6 +156,20 @@ namespace PnP.Core.Model.SharePoint
             return GetByServerRelativeUrlAsync(serverRelativeUrl, selectors).GetAwaiter().GetResult();
         }
 
+        #endregion
+
+        #region EnsureSiteAssetsLibrary methods
+        public async Task<IList> EnsureSiteAssetsLibraryAsync()
+        {
+            var assetLibrary = CreateNew() as List;
+            await assetLibrary.RequestAsync(new ApiCall("_api/Web/Lists/EnsureSiteAssetsLibrary", ApiType.SPORest), HttpMethod.Post).ConfigureAwait(false);
+            return assetLibrary;
+        }
+
+        public IList EnsureSiteAssetsLibrary()
+        {
+            return EnsureSiteAssetsLibraryAsync().GetAwaiter().GetResult();
+        }
         #endregion
     }
 }
