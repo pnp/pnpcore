@@ -38,9 +38,9 @@ A web can have zero or more sub webs and to load these you use the [Webs propert
 
 ```csharp
 // Load the sub webs
-await context.Web.GetAsync(p => p.Webs);
+await context.Web.LoadAsync(p => p.Webs);
 
-foreach (var subWeb in context.Web.Webs)
+foreach (var subWeb in context.Web.Webs.AsRequested())
 {
     using (var contextSubWeb = await pnpContextFactory.CreateAsync(subWeb.Url))
     {
