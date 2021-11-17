@@ -196,6 +196,9 @@ namespace PnP.Core.Model.SharePoint
 
         public IViewCollection Views { get => GetModelCollectionValue<IViewCollection>(); }
 
+        [SharePointProperty("subscriptions")]
+        public IListSubscriptionCollection Webhooks { get => GetModelCollectionValue<IListSubscriptionCollection>(); }
+
         public bool HasUniqueRoleAssignments { get => GetValue<bool>(); set => SetValue(value); }
 
         public IRoleAssignmentCollection RoleAssignments { get => GetModelCollectionValue<IRoleAssignmentCollection>(); }
