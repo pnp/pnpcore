@@ -25166,6 +25166,32 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IListCollection.AddBatchAsync
   nameWithType: IListCollection.AddBatchAsync
+- uid: PnP.Core.Model.SharePoint.IListCollection.EnsureSiteAssetsLibrary
+  name: EnsureSiteAssetsLibrary()
+  href: api/PnP.Core.Model.SharePoint.IListCollection.html#PnP_Core_Model_SharePoint_IListCollection_EnsureSiteAssetsLibrary
+  commentId: M:PnP.Core.Model.SharePoint.IListCollection.EnsureSiteAssetsLibrary
+  fullName: PnP.Core.Model.SharePoint.IListCollection.EnsureSiteAssetsLibrary()
+  nameWithType: IListCollection.EnsureSiteAssetsLibrary()
+- uid: PnP.Core.Model.SharePoint.IListCollection.EnsureSiteAssetsLibrary*
+  name: EnsureSiteAssetsLibrary
+  href: api/PnP.Core.Model.SharePoint.IListCollection.html#PnP_Core_Model_SharePoint_IListCollection_EnsureSiteAssetsLibrary_
+  commentId: Overload:PnP.Core.Model.SharePoint.IListCollection.EnsureSiteAssetsLibrary
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IListCollection.EnsureSiteAssetsLibrary
+  nameWithType: IListCollection.EnsureSiteAssetsLibrary
+- uid: PnP.Core.Model.SharePoint.IListCollection.EnsureSiteAssetsLibraryAsync
+  name: EnsureSiteAssetsLibraryAsync()
+  href: api/PnP.Core.Model.SharePoint.IListCollection.html#PnP_Core_Model_SharePoint_IListCollection_EnsureSiteAssetsLibraryAsync
+  commentId: M:PnP.Core.Model.SharePoint.IListCollection.EnsureSiteAssetsLibraryAsync
+  fullName: PnP.Core.Model.SharePoint.IListCollection.EnsureSiteAssetsLibraryAsync()
+  nameWithType: IListCollection.EnsureSiteAssetsLibraryAsync()
+- uid: PnP.Core.Model.SharePoint.IListCollection.EnsureSiteAssetsLibraryAsync*
+  name: EnsureSiteAssetsLibraryAsync
+  href: api/PnP.Core.Model.SharePoint.IListCollection.html#PnP_Core_Model_SharePoint_IListCollection_EnsureSiteAssetsLibraryAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.IListCollection.EnsureSiteAssetsLibraryAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IListCollection.EnsureSiteAssetsLibraryAsync
+  nameWithType: IListCollection.EnsureSiteAssetsLibraryAsync
 - uid: PnP.Core.Model.SharePoint.IListCollection.GetById(Guid,Expression{Func{PnP.Core.Model.SharePoint.IList,System.Object}}[])
   name: GetById(Guid, Expression<Func<IList, Object>>[])
   href: api/PnP.Core.Model.SharePoint.IListCollection.html#PnP_Core_Model_SharePoint_IListCollection_GetById_Guid_Expression_Func_PnP_Core_Model_SharePoint_IList_System_Object_____
