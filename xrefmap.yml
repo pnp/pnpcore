@@ -25166,12 +25166,15 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IListCollection.AddBatchAsync
   nameWithType: IListCollection.AddBatchAsync
-- uid: PnP.Core.Model.SharePoint.IListCollection.EnsureSiteAssetsLibrary
-  name: EnsureSiteAssetsLibrary()
-  href: api/PnP.Core.Model.SharePoint.IListCollection.html#PnP_Core_Model_SharePoint_IListCollection_EnsureSiteAssetsLibrary
-  commentId: M:PnP.Core.Model.SharePoint.IListCollection.EnsureSiteAssetsLibrary
-  fullName: PnP.Core.Model.SharePoint.IListCollection.EnsureSiteAssetsLibrary()
-  nameWithType: IListCollection.EnsureSiteAssetsLibrary()
+- uid: PnP.Core.Model.SharePoint.IListCollection.EnsureSiteAssetsLibrary(Expression{Func{PnP.Core.Model.SharePoint.IList,System.Object}}[])
+  name: EnsureSiteAssetsLibrary(Expression<Func<IList, Object>>[])
+  href: api/PnP.Core.Model.SharePoint.IListCollection.html#PnP_Core_Model_SharePoint_IListCollection_EnsureSiteAssetsLibrary_Expression_Func_PnP_Core_Model_SharePoint_IList_System_Object_____
+  commentId: M:PnP.Core.Model.SharePoint.IListCollection.EnsureSiteAssetsLibrary(Expression{Func{PnP.Core.Model.SharePoint.IList,System.Object}}[])
+  name.vb: EnsureSiteAssetsLibrary(Expression(Of Func(Of IList, Object))())
+  fullName: PnP.Core.Model.SharePoint.IListCollection.EnsureSiteAssetsLibrary(Expression<Func<PnP.Core.Model.SharePoint.IList, System.Object>>[])
+  fullName.vb: PnP.Core.Model.SharePoint.IListCollection.EnsureSiteAssetsLibrary(Expression(Of Func(Of PnP.Core.Model.SharePoint.IList, System.Object))())
+  nameWithType: IListCollection.EnsureSiteAssetsLibrary(Expression<Func<IList, Object>>[])
+  nameWithType.vb: IListCollection.EnsureSiteAssetsLibrary(Expression(Of Func(Of IList, Object))())
 - uid: PnP.Core.Model.SharePoint.IListCollection.EnsureSiteAssetsLibrary*
   name: EnsureSiteAssetsLibrary
   href: api/PnP.Core.Model.SharePoint.IListCollection.html#PnP_Core_Model_SharePoint_IListCollection_EnsureSiteAssetsLibrary_
@@ -25179,12 +25182,15 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IListCollection.EnsureSiteAssetsLibrary
   nameWithType: IListCollection.EnsureSiteAssetsLibrary
-- uid: PnP.Core.Model.SharePoint.IListCollection.EnsureSiteAssetsLibraryAsync
-  name: EnsureSiteAssetsLibraryAsync()
-  href: api/PnP.Core.Model.SharePoint.IListCollection.html#PnP_Core_Model_SharePoint_IListCollection_EnsureSiteAssetsLibraryAsync
-  commentId: M:PnP.Core.Model.SharePoint.IListCollection.EnsureSiteAssetsLibraryAsync
-  fullName: PnP.Core.Model.SharePoint.IListCollection.EnsureSiteAssetsLibraryAsync()
-  nameWithType: IListCollection.EnsureSiteAssetsLibraryAsync()
+- uid: PnP.Core.Model.SharePoint.IListCollection.EnsureSiteAssetsLibraryAsync(Expression{Func{PnP.Core.Model.SharePoint.IList,System.Object}}[])
+  name: EnsureSiteAssetsLibraryAsync(Expression<Func<IList, Object>>[])
+  href: api/PnP.Core.Model.SharePoint.IListCollection.html#PnP_Core_Model_SharePoint_IListCollection_EnsureSiteAssetsLibraryAsync_Expression_Func_PnP_Core_Model_SharePoint_IList_System_Object_____
+  commentId: M:PnP.Core.Model.SharePoint.IListCollection.EnsureSiteAssetsLibraryAsync(Expression{Func{PnP.Core.Model.SharePoint.IList,System.Object}}[])
+  name.vb: EnsureSiteAssetsLibraryAsync(Expression(Of Func(Of IList, Object))())
+  fullName: PnP.Core.Model.SharePoint.IListCollection.EnsureSiteAssetsLibraryAsync(Expression<Func<PnP.Core.Model.SharePoint.IList, System.Object>>[])
+  fullName.vb: PnP.Core.Model.SharePoint.IListCollection.EnsureSiteAssetsLibraryAsync(Expression(Of Func(Of PnP.Core.Model.SharePoint.IList, System.Object))())
+  nameWithType: IListCollection.EnsureSiteAssetsLibraryAsync(Expression<Func<IList, Object>>[])
+  nameWithType.vb: IListCollection.EnsureSiteAssetsLibraryAsync(Expression(Of Func(Of IList, Object))())
 - uid: PnP.Core.Model.SharePoint.IListCollection.EnsureSiteAssetsLibraryAsync*
   name: EnsureSiteAssetsLibraryAsync
   href: api/PnP.Core.Model.SharePoint.IListCollection.html#PnP_Core_Model_SharePoint_IListCollection_EnsureSiteAssetsLibraryAsync_
