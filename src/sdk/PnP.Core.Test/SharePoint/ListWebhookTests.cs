@@ -13,6 +13,65 @@ namespace PnP.Core.Test.SharePoint
     {
         private const string webhookHost = "https://6e4569a36d94.ngrok.io";
 
+        #region Instructions for online tests
+        /*        
+        1. Deploy an Azure Function host containing below 2 functions with anonymous access
+        2. Launch the function on localhost port 7071
+        3. Launch ngrok: ngrok http 7071 --host-header=localhost
+        4. Update the ngrok url in the webhookHost variable
+
+        public static class Function1
+        {
+	        [Function("HandleEvent")]
+	        public static HttpResponseData RunAsync([HttpTrigger(AuthorizationLevel.Function, "get", "post")] HttpRequestData req,
+		        FunctionContext executionContext)
+	        {
+		        var logger = executionContext.GetLogger(nameof(Function1));
+		        logger.LogInformation("C# HTTP trigger function processed a request.");
+
+		        var query = System.Web.HttpUtility.ParseQueryString(req.Url.Query);
+		        var token = query["validationtoken"];
+
+		        if (!string.IsNullOrEmpty(token))
+		        {
+			        var tokenResponse = req.CreateResponse(HttpStatusCode.OK);
+			        tokenResponse.Headers.Add("Content-Type", "text/plain");
+			        tokenResponse.WriteString(token);
+			        return tokenResponse;
+		        }
+
+		        var response = req.CreateResponse(HttpStatusCode.OK);
+		        response.Headers.Add("Content-Type", "text/plain");
+		        return response;
+	        }
+
+	        [Function("HandleEventNew")]
+	        public static HttpResponseData RunAsync2([HttpTrigger(AuthorizationLevel.Function, "get", "post")] HttpRequestData req,
+		        FunctionContext executionContext)
+	        {
+		        var logger = executionContext.GetLogger(nameof(Function1));
+		        logger.LogInformation("C# HTTP trigger function processed a request.");
+
+		        var query = System.Web.HttpUtility.ParseQueryString(req.Url.Query);
+		        var token = query["validationtoken"];
+
+		        if (!string.IsNullOrEmpty(token))
+		        {
+			        var tokenResponse = req.CreateResponse(HttpStatusCode.OK);
+			        tokenResponse.Headers.Add("Content-Type", "text/plain");
+			        tokenResponse.WriteString(token);
+			        return tokenResponse;
+		        }
+
+		        var response = req.CreateResponse(HttpStatusCode.OK);
+		        response.Headers.Add("Content-Type", "text/plain");
+
+		        return response;
+	        }
+        }
+        */
+        #endregion
+
         [ClassInitialize]
         public static void TestFixtureSetup(TestContext context)
         {
