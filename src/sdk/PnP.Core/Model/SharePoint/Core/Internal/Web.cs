@@ -16,7 +16,7 @@ namespace PnP.Core.Model.SharePoint
     /// <summary>
     /// Web class, write your custom code here
     /// </summary>
-    [SharePointType("SP.Web", Uri = V, LinqGet = "_api/web/webinfos")]
+    [SharePointType("SP.Web", Uri = V, LinqGet = "_api/web/webs")]
     [GraphType(Get = "sites/{hostname}:{serverrelativepath}")]
     internal sealed class Web : BaseDataModel<IWeb>, IWeb
     {
