@@ -15,6 +15,8 @@ namespace System.Linq
         internal static object GetConstantValue(this Expression expression)
         {
             expression = StripQuotes(expression);
+            var notSupportedException = new NotSupportedException(string.Format(PnPCoreResources.Exception_Unsupported_ExpressionConstantOnlyTypes, expression, typeof(ConstantExpression), typeof(MemberExpression)));
+
             switch (expression)
             {
                 case ConstantExpression ce:
@@ -22,9 +24,16 @@ namespace System.Linq
                 case MemberExpression me:
                     object obj = GetConstantValue(me.Expression);
                     return me.Member.GetValue(obj);
+                case NewExpression ne:
+                    if (ne.Type.Name == nameof(Guid))
+                    {
+                        return Expression.Lambda<Func<Guid>>(expression).Compile().Invoke();
+                    }
+
+                    throw notSupportedException;
             }
 
-            throw new NotSupportedException(string.Format(PnPCoreResources.Exception_Unsupported_ExpressionConstantOnlyTypes, expression, typeof(ConstantExpression), typeof(MemberExpression)));
+            throw notSupportedException;
         }
 
         internal static Expression StripQuotes(this Expression e)
