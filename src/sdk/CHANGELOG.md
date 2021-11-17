@@ -16,6 +16,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Added support for SharePoint Syntex off-peak hours content classification and extraction for lists and folders [jansenbe - Bert Jansen]
 - Added support for breaking permission inheritance and configuring custom security for a web [jansenbe - Bert Jansen]
 - Support for using PnP Core SDK with other cloud environments such as the US government clouds (GCC, GCC High and DoD), Germany and China clouds [jansenbe - Bert Jansen]
+- Added support to for using `new Guid()` in PnP Core SDK LINQ queries #633 [s-KaiNet - Sergei Sergeev]
 
 ### Changed
 
