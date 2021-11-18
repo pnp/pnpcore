@@ -9,6 +9,9 @@ Sample | Description | .NET version | PnP Core version | Authentication Type | F
 [Out of process](Demo.AzureFunction.OutOfProcess.AppOnly/readme.md) | Azure v4 Function using PnP Core SDK via dependency injection showing how to create and configure a site collection | .NET 6.0 | v1.4.0 | Application permissions (`X509CertificateAuthenticationProvider`) | V4, isolated process
 [V3 function](Demo.AzureFunction/README.md) | Azure v3 Function that shows how to use the PnP Core SDK via dependency injection | .NET Core 3.1 | v1.4.0 | Application permissions (`X509CertificateAuthenticationProvider`) | V3, in-process
 
+> [!Important]
+> Another very useful Azure Functions sample is described on Sergei Sergeev's blog [How to access SharePoint data from Azure Function with SPFx and PnP Core SDK](https://spblog.net/post/2020/12/10/how-to-access-sharepoint-data-from-azure-function-with-spfx-and-pnp-core). It shows how to setup an Azure Function using an on-behalf-of auth flow via the [OnBehalfOfAuthenticationProvider](https://pnp.github.io/pnpcore/api/PnP.Core.Auth.OnBehalfOfAuthenticationProvider.html) and then call this Azure Function from a [SharePoint Framework](https://docs.microsoft.com/en-us/sharepoint/dev/spfx/sharepoint-framework-overview) web part.
+
 Checkout the **README.md** file from each sample to learn more.
 
 ## Web applications
