@@ -5572,7 +5572,7 @@
       "output": {
         ".html": {
           "relative_path": "demos/Demo.AzureFunction.OutOfProcess.AppOnly/readme.html",
-          "hash": "oRG6qnCgir+R4S/LUp20zg=="
+          "hash": "Dxw3mmxYkOlfUB0E8X1cYA=="
         }
       },
       "is_incremental": false,
@@ -5777,7 +5777,7 @@
       "output": {
         ".html": {
           "relative_path": "demos/README.html",
-          "hash": "CacATA6UQJy6wksq4r65TA=="
+          "hash": "qAxl1lVqWg6GQiS63GxOCQ=="
         }
       },
       "is_incremental": false,
@@ -5789,7 +5789,7 @@
       "output": {
         ".html": {
           "relative_path": "demos/toc.html",
-          "hash": "xrMJFS6pRAnPcSzR8uS1vw=="
+          "hash": "8q+I/7/lU4Iva2a82SxVUw=="
         }
       },
       "is_incremental": false,
