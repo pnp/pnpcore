@@ -1,6 +1,6 @@
 # PnP Core SDK - Azure Function v4 Sample using out-of-process with .NET 6
 
-This solution demonstrates how to build a simple backend API in the form of an HTTP Trigger Azure Function. The sample contains a `ProvisionSite` function that creates a new site collection including a new site page containing some text and an image. This Azure function is using application permissions (app-only).
+This solution demonstrates how to build a simple backend API in the form of an HTTP Trigger Azure Function. The sample contains a `CreateSite` function that creates a new site collection including a new site page containing some text and an image. This Azure function is using application permissions (app-only).
 
 ## Source code
 
