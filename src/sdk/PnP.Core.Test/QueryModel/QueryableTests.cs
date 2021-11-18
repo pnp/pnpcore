@@ -187,6 +187,229 @@ namespace PnP.Core.Test.QueryModel
             }
         }
 
+        [TestMethod]
+        public async Task TestNewGuidQuery()
+        {
+            //TestCommon.Instance.Mocking = false;
+            var expected = "$filter=Id eq (guid'69e8b219-d7af-4ac9-bc23-d382b7de985e')";
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var query = (from w in context.Web.Lists
+                             where w.Id == new Guid("69e8b219-d7af-4ac9-bc23-d382b7de985e")
+                             select w);
+
+                var actual = query.ToString();
+                Assert.IsNotNull(actual);
+                Assert.AreEqual(expected, actual);
+            }
+        }
+
+        [TestMethod]
+        public async Task TestQueryWhereLINQWithFunctionFilters()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            var expected = "$filter=(startswith(Title,'Test') eq true and Description eq 'Test')";
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var query = (from l in context.Web.Lists
+                             where l.Title.StartsWith("Test") && l.Description == "Test"
+                             select l);
+
+                var actual = query.ToString();
+                Assert.IsNotNull(actual);
+                Assert.AreEqual(expected, actual);
+            }
+        }
+
+        [TestMethod]
+        public async Task TestQueryWhereLINQWithFunctionExplicitFilters()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            var expected = "$filter=(startswith(Title,'Test') eq true and Description eq 'Test')";
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var query = (from l in context.Web.Lists
+                             where l.Title.StartsWith("Test") == true && l.Description == "Test"
+                             select l);
+
+                var actual = query.ToString();
+                Assert.IsNotNull(actual);
+                Assert.AreEqual(expected, actual);
+            }
+        }
+
+        [TestMethod]
+        public async Task TestQueryWhereLINQWithComplexFunctionFilters()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            var expected = "$filter=(Description eq 'Test' and startswith(Title,'Test') eq true)";
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var query = (from l in context.Web.Lists
+                             where l.Description == "Test" && l.Title.StartsWith("Test")
+                             select l);
+
+                var actual = query.ToString();
+                Assert.IsNotNull(actual);
+                Assert.AreEqual(expected, actual);
+            }
+        }
+
+        [TestMethod]
+        public async Task TestQueryWhereLINQOrConditionFilters()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            var expected = "$filter=(Description eq 'Test' or startswith(Title,'Test') eq true)";
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var query = (from l in context.Web.Lists
+                             where l.Description == "Test" || l.Title.StartsWith("Test")
+                             select l);
+
+                var actual = query.ToString();
+                Assert.IsNotNull(actual);
+                Assert.AreEqual(expected, actual);
+            }
+        }
+
+        [TestMethod]
+        public async Task TestQueryWhereLINQNotConditionFilters()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            var expected = "$filter=(Description eq 'Test' and startswith(Title,'Test') eq false)";
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var query = (from l in context.Web.Lists
+                             where l.Description == "Test" && !l.Title.StartsWith("Test")
+                             select l);
+
+                var actual = query.ToString();
+                Assert.IsNotNull(actual);
+                Assert.AreEqual(expected, actual);
+            }
+        }
+
+        [TestMethod]
+        public async Task TestQueryWhereLINQNotConditionMultipleFilters()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            var expected = "$filter=((Description eq 'Test' and startswith(Title,'Test') eq false) and Hidden eq true)";
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var query = (from l in context.Web.Lists
+                             where l.Description == "Test" && !l.Title.StartsWith("Test") && l.Hidden
+                             select l);
+
+                var actual = query.ToString();
+                Assert.IsNotNull(actual);
+                Assert.AreEqual(expected, actual);
+            }
+        }
+
+        [TestMethod]
+        public async Task TestQueryWhereLINQNotConditionMultipleUnaryFilters()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            var expected = "$filter=((Description eq 'Test' and startswith(Title,'Test') eq true) and Hidden eq false)";
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var query = (from l in context.Web.Lists
+                             where l.Description == "Test" && l.Title.StartsWith("Test") && !l.Hidden
+                             select l);
+
+                var actual = query.ToString();
+                Assert.IsNotNull(actual);
+                Assert.AreEqual(expected, actual);
+            }
+        }
+
+        [TestMethod]
+        public async Task TestQueryWhereBoolCondition()
+        {
+            //TestCommon.Instance.Mocking = false;
+            var expected = "$filter=Hidden eq true";
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var query = (from w in context.Web.Lists
+                             where w.Hidden
+                             select w);
+
+                var actual = query.ToString();
+                Assert.IsNotNull(actual);
+                Assert.AreEqual(expected, actual);
+            }
+        }
+
+        [TestMethod]
+        public async Task TestQueryWhereBoolComplexCondition()
+        {
+            //TestCommon.Instance.Mocking = false;
+            var expected = "$filter=(Hidden eq true and Title eq 'Hello')";
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var query = (from w in context.Web.Lists
+                             where w.Hidden && w.Title == "Hello"
+                             select w);
+
+                var actual = query.ToString();
+                Assert.IsNotNull(actual);
+                Assert.AreEqual(expected, actual);
+            }
+        }
+
+        [TestMethod]
+        public async Task TestQueryWhereUnaryBoolComplexCondition()
+        {
+            //TestCommon.Instance.Mocking = false;
+            var expected = "$filter=(Hidden eq false and Title eq 'Hello')";
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var query = (from w in context.Web.Lists
+                             where !w.Hidden && w.Title == "Hello"
+                             select w);
+
+                var actual = query.ToString();
+                Assert.IsNotNull(actual);
+                Assert.AreEqual(expected, actual);
+            }
+        }
+
+        [TestMethod]
+        public async Task TestQueryWhereUnaryBoolCondition()
+        {
+            //TestCommon.Instance.Mocking = false;
+            var expected = "$filter=Hidden eq false";
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var query = (from w in context.Web.Lists
+                             where !w.Hidden
+                             select w);
+
+                var actual = query.ToString();
+                Assert.IsNotNull(actual);
+                Assert.AreEqual(expected, actual);
+            }
+        }
+
         //[TestMethod]
         //public async Task QueryWithoutPagingCheck()
         //{

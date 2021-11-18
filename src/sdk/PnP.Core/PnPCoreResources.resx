@@ -336,6 +336,9 @@
   <data name="Exception_Unsupported_ExpressionOnlyTypes" xml:space="preserve">
     <value>Expression {0} is not supported. Only {1} and {2} are supported</value>
   </data>
+  <data name="Exception_Unsupported_ExpressionType" xml:space="preserve">
+    <value>Expression type {0} is not supported inside filtering expressions</value>
+  </data>
   <data name="Exception_Unsupported_ExtraGet" xml:space="preserve">
     <value>Loading the {0} property requires an extra GET request ({1}) which is not supported when using nested QueryProperties methods</value>
   </data>
