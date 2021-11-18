@@ -7,7 +7,7 @@ This solution demonstrates how to build a simple backend API in the form of an H
 You can find the sample source code here: [/samples/Demo.AzureFunction.OutOfProcess.AppOnly](https://github.com/pnp/pnpcore/tree/dev/samples/Demo.AzureFunction.OutOfProcess.AppOnly)
 
 > [!Note]
-> This sample was created with Visual Studio 2022 using .NET 6.0 and has been tested with a Windows Azure Function v4 running out-of-process (so using process isolation).
+> This sample was created with [Visual Studio 202](https://visualstudio.microsoft.com/vs/preview/)2 using [.NET 6.0](https://dotnet.microsoft.com/) and has been created as an [Azure Function v4](https://docs.microsoft.com/en-us/azure/azure-functions/create-first-function-vs-code-csharp?tabs=in-process) running out-of-process (so using process isolation).
 
 ## Sample configuration
 
