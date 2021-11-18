@@ -83,12 +83,45 @@
                     <h1 id="pnp-core-samples">PnP Core Samples</h1>
 
 <p>Samples are best way to learn how to use, hence we've some example PnP Core SDK sample applications for you to learn. Following samples are available:</p>
+<h2 id="azure-function-samples">Azure function samples</h2>
 <table>
 <thead>
 <tr>
 <th>Sample</th>
 <th>Description</th>
-<th>.Net version</th>
+<th>.NET version</th>
+<th>PnP Core version</th>
+<th>Authentication Type</th>
+<th>Function mode</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="Demo.AzureFunction.OutOfProcess.AppOnly/readme.html">Demo.AzureFunction.OutOfProcess.AppOnly</a></td>
+<td>Azure v4 Function using PnP Core SDK via dependency injection showing how to create and configure a site collection</td>
+<td>.NET 6.0</td>
+<td>v1.4.0</td>
+<td>Application permissions (<code>X509CertificateAuthenticationProvider</code>)</td>
+<td>V4, isolated process</td>
+</tr>
+<tr>
+<td><a href="Demo.AzureFunction/README.html">Demo.AzureFunction</a></td>
+<td>Azure v3 Function that shows how to use the PnP Core SDK via dependency injection</td>
+<td>.NET Core 3.1</td>
+<td>v1.4.0</td>
+<td>Application permissions (<code>X509CertificateAuthenticationProvider</code>)</td>
+<td>V3, in-process</td>
+</tr>
+</tbody>
+</table>
+<p>Checkout the <strong>README.md</strong> file from each sample to learn more.</p>
+<h2 id="console-applications">Console applications</h2>
+<table>
+<thead>
+<tr>
+<th>Sample</th>
+<th>Description</th>
+<th>.NET version</th>
 <th>PnP Core version</th>
 <th>Authentication Type</th>
 </tr>
@@ -97,7 +130,7 @@
 <tr>
 <td><a href="Demo.Console/README.html">Demo.Console</a></td>
 <td>Demo console app that shows how to use the PnP Core SDK for working with Microsoft 365 data</td>
-<td>5.0.0</td>
+<td>.NET 5.0.0</td>
 <td>v1.4.0</td>
 <td>Interactive login (<code>InteractiveAuthenticationProvider</code>)</td>
 </tr>
@@ -109,39 +142,62 @@
 <td>Custom <code>IAuthenticationProvider</code> implementation</td>
 </tr>
 <tr>
+<td><a href="Demo.RPi/README.html">Demo.RPi</a></td>
+<td>Sample application running on <a href="https://dotnet.microsoft.com/download/dotnet-core/3.1">dotNet</a> Core on the Raspberry Pi</td>
+<td>.NET 5.0.0</td>
+<td>v1.4.0</td>
+<td>Username password login (<code>UsernamePasswordAuthenticationProvider</code>)</td>
+</tr>
+</tbody>
+</table>
+<p>Checkout the <strong>README.md</strong> file from each sample to learn more.</p>
+<h2 id="web-applications">Web applications</h2>
+<table>
+<thead>
+<tr>
+<th>Sample</th>
+<th>Description</th>
+<th>.NET version</th>
+<th>PnP Core version</th>
+<th>Authentication Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
 <td><a href="Demo.ASPNetCore/README.html">Demo.ASPNetCore</a></td>
 <td>Demo application showing how use the PnP Core SDK from an ASP.Net Core application</td>
-<td>5.0.0</td>
+<td>.NET 5.0.0</td>
 <td>v1.4.0</td>
 <td>Custom authentication is used via the (<code>ExternalAuthenticationProvider</code>)</td>
 </tr>
 <tr>
-<td><a href="Demo.AzureFunction/README.html">Demo.AzureFunction</a></td>
-<td>Azure Function that shows how to use the PnP Core SDK via dependency injection</td>
-<td>.net core 3.1</td>
-<td>v1.4.0</td>
-<td>Application permissions (<code>X509CertificateAuthenticationProvider</code>)</td>
-</tr>
-<tr>
 <td><a href="Demo.Blazor/README.html">Demo.Blazor</a></td>
 <td>Sample Blazor WASM application that prototypes how the PnP Core SDK can be used in Blazor development</td>
-<td>5.0.0</td>
+<td>.NET 5.0.0</td>
 <td>v1.4.0</td>
 <td>Custom <code>IAuthenticationProvider</code> implementation</td>
 </tr>
+</tbody>
+</table>
+<p>Checkout the <strong>README.md</strong> file from each sample to learn more.</p>
+<h2 id="desktop-applications">Desktop applications</h2>
+<table>
+<thead>
+<tr>
+<th>Sample</th>
+<th>Description</th>
+<th>.NET version</th>
+<th>PnP Core version</th>
+<th>Authentication Type</th>
+</tr>
+</thead>
+<tbody>
 <tr>
 <td><a href="Demo.WPF/README.html">Demo.WPF</a></td>
 <td>Sample WPF windows application showing how dependency injection and the PnP Core SDK can be used in WPF/XAML apps</td>
-<td>5.0.0</td>
+<td>.NET 5.0.0</td>
 <td>v1.4.0</td>
 <td>Interactive login (<code>InteractiveAuthenticationProvider</code>)</td>
-</tr>
-<tr>
-<td><a href="Demo.RPi/README.html">Demo.RPi</a></td>
-<td>Sample application running on <a href="https://dotnet.microsoft.com/download/dotnet-core/3.1">dotNet</a> Core on the Raspberry Pi</td>
-<td>5.0.0</td>
-<td>v1.4.0</td>
-<td>Username password login (<code>UsernamePasswordAuthenticationProvider</code>)</td>
 </tr>
 </tbody>
 </table>

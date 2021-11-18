@@ -5556,6 +5556,29 @@
       "version": ""
     },
     {
+      "type": "Resource",
+      "source_relative_path": "demos/Demo.AzureFunction.OutOfProcess.AppOnly/parker.png",
+      "output": {
+        "resource": {
+          "relative_path": "demos/Demo.AzureFunction.OutOfProcess.AppOnly/parker.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "demos/Demo.AzureFunction.OutOfProcess.AppOnly/readme.md",
+      "output": {
+        ".html": {
+          "relative_path": "demos/Demo.AzureFunction.OutOfProcess.AppOnly/readme.html",
+          "hash": "oRG6qnCgir+R4S/LUp20zg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
       "type": "Conceptual",
       "source_relative_path": "demos/Demo.AzureFunction/README.md",
       "output": {
@@ -5754,7 +5777,7 @@
       "output": {
         ".html": {
           "relative_path": "demos/README.html",
-          "hash": "KYn3oEw9rxgX3Q8sdFBFKA=="
+          "hash": "CacATA6UQJy6wksq4r65TA=="
         }
       },
       "is_incremental": false,
@@ -5766,7 +5789,7 @@
       "output": {
         ".html": {
           "relative_path": "demos/toc.html",
-          "hash": "H/1QaQOMbFDWeqQhqpTLLQ=="
+          "hash": "xrMJFS6pRAnPcSzR8uS1vw=="
         }
       },
       "is_incremental": false,
@@ -6757,7 +6780,7 @@
         "ConceptualDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build",
-          "total_file_count": 86,
+          "total_file_count": 87,
           "skipped_file_count": 0
         },
         "ManagedReferenceDocumentProcessor": {
