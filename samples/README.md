@@ -6,7 +6,7 @@ Samples are best way to learn how to use, hence we've some example PnP Core SDK 
 
 Sample | Description | .NET version | PnP Core version | Authentication Type | Function mode
 -------|-------------|--------------|------------------|---------------------|--------------
-[Demo.AzureFunction.OutOfProcess.AppOnly](Demo.AzureFunction.OutOfProcess.AppOnly/README.md) | Azure v4 Function using PnP Core SDK via dependency injection showing how to create and configure a site collection | .NET 6.0 | v1.4.0 | Application permissions (`X509CertificateAuthenticationProvider`) | V4, isolated process
+[Demo.AzureFunction.OutOfProcess.AppOnly](Demo.AzureFunction.OutOfProcess.AppOnly/readme.md) | Azure v4 Function using PnP Core SDK via dependency injection showing how to create and configure a site collection | .NET 6.0 | v1.4.0 | Application permissions (`X509CertificateAuthenticationProvider`) | V4, isolated process
 [Demo.AzureFunction](Demo.AzureFunction/README.md) | Azure v3 Function that shows how to use the PnP Core SDK via dependency injection | .NET Core 3.1 | v1.4.0 | Application permissions (`X509CertificateAuthenticationProvider`) | V3, in-process
 
 Checkout the **README.md** file from each sample to learn more.
