@@ -1,0 +1,399 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html lang="en">
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Build an v4 Azure Function that runs as an isolated process while using application (app-only) permissions | PnP Core SDK </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Build an v4 Azure Function that runs as an isolated process while using application (app-only) permissions | PnP Core SDK ">
+    <meta name="generator" content="docfx 2.56.5.0">
+    <meta name="description" content="The PnP Core SDK is a modern .NET SDK designed to work for Microsoft 365. It provides a unified object model for working with SharePoint Online and Teams which is agnostic to the underlying API's being called.">
+    <link rel="shortcut icon" href="https://c.s-microsoft.com/favicon.ico?v2">
+    <link rel="stylesheet" href="../../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../../styles/docfx.css">
+    <link rel="stylesheet" href="../../styles/main.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
+    <meta property="docfx:navrel" content="../../toc.html">
+    <meta property="docfx:tocrel" content="../../toc.html">
+    
+    <meta property="docfx:rel" content="../../">
+    <meta property="docfx:newtab" content="true">
+  </head>  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../../index.html">
+                <img id="logo" class="svg" src="../../images/logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <label class="glyphicon glyphicon-search" for="search-query"></label>
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first="First" data-prev="Previous" data-next="Next" data-last="Last"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        <div class="article row grid">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+                  <div class="contribution-panel mobile-hide pull-right">
+                      <a href="https://github.com/pnp/pnpcore/blob/dev/docs/tutorials/azurefunctions/v4processisolatedapponly.md/#L1" title="Improve this Doc" class="improve-doc-lg"><i class="glyphicon glyphicon-pencil"></i></a>
+                  </div>
+                    <h1 id="build-an-v4-azure-function-that-runs-as-an-isolated-process-while-using-application-app-only-permissions">Build an v4 Azure Function that runs as an isolated process while using application (app-only) permissions</h1>
+
+<p>PnP Core SDK works great in Azure functions and this tutorial will walk you through the needed steps to create an <a href="https://docs.microsoft.com/en-us/azure/azure-functions/create-first-function-vs-code-csharp?tabs=in-process">.NET 6.0 Azure V4 function which runs as an isolated process</a>. Process isolation is a feature in Azure Functions that will ensure your function code will not collide with the code already loaded by the Azure Function host process.</p>
+<h2 id="pre-requisites">Pre-requisites</h2>
+<p>Before you start this tutorial your development environment needs to be correctly setup and you do need to have a Microsoft 365 tenant available. If you don't have one, you can get a Microsoft 365 developer subscription when you join the <a href="https://developer.microsoft.com/office/dev-program">Microsoft 365 Developer Program</a>. See the <a href="https://docs.microsoft.com/en-us/office/developer-program/office-365-developer-program">Microsoft 365 Developer Program documentation</a> for step-by-step instructions about how to join the Microsoft 365 Developer Program and sign up and configure your subscription.</p>
+<p>As development environment this tutorial uses Visual Studio 2022, you can either use the free community edition or subscription based professional or enterprise editions. See the <a href="https://visualstudio.microsoft.com/vs/">Microsoft Visual Studio site</a> to learn more about Visual Studio and how to install and use it.</p>
+<h2 id="tutorial-source-code">Tutorial source code</h2>
+<p>If you follow this tutorial you end up with a working Azure Function that uses PnP Core SDK. This same tutorial is also available as a <a href="https://pnp.github.io/pnpcore/demos/Demo.AzureFunction.OutOfProcess.AppOnly/readme.html">sample containing the source code and brief setup instructions</a>.</p>
+<h2 id="create-and-configure-the-azure-ad-application">Create and configure the Azure AD application</h2>
+<h3 id="install-pnp-powershell">Install PnP PowerShell</h3>
+<p>To configure the Azure AD application with the needed permissions and configured with a certificate (needed for application permissions) we're using <a href="https://pnp.github.io/powershell/">PnP.PowerShell</a>. If you already have <a href="https://pnp.github.io/powershell/">PnP.PowerShell</a> installed you can skip this step, if not run below command from a PowerShell prompt:</p>
+<pre><code class="lang-PowerShell">Install-Module -Name PnP.PowerShell
+</code></pre>
+<h3 id="create-the-azure-ad-application">Create the Azure AD application</h3>
+<p>Using PnP PowerShell this becomes really simple. Running cmdlet will create a new Azure AD application, will create a new self-signed certificate and will configure that certificate with the Azure AD application. Finally the right permissions are configured and you're prompted to consent these permissions.</p>
+<pre><code class="lang-powershell"># Ensure you replace contoso.onmicrosoft.com with your Azure AD tenant name
+# Ensure you replace joe@contoso.onmicrosoft.com with the user id that's an Azure AD admin (or global admin)
+
+Register-PnPAzureADApp -ApplicationName FunctionDemoSiteProvisiong -Tenant contoso.onmicrosoft.com -Store CurrentUser -GraphApplicationPermissions &quot;Sites.FullControl.All&quot; -SharePointApplicationPermissions &quot;Sites.FullControl.All&quot; -Username &quot;joe@contoso.onmicrosoft.com&quot; -Interactive
+</code></pre>
+<p><img src="../images/azfuncv4apponly-1.png" alt="Register-PnPAzureADApp"></p>
+<p><img src="../images/azfuncv4apponly-2.png" alt="Consent"></p>
+<div class="IMPORTANT">
+<h5>Important</h5>
+<p>Once this cmdlet is done you do need to to copy <strong>Certificate Thumbprint</strong> and <strong>AzureAppID/ClientId</strong> values from the cmdlet output as these will be needed later in this tutorial.</p>
+</div>
+<p><img src="../images/azfuncv4apponly-3.png" alt="Copy ID and thumbprint"></p>
+<h2 id="create-the-azure-function">Create the Azure Function</h2>
+<h3 id="scaffold-a-new-azure-function-project">Scaffold a new Azure Function project</h3>
+<p>Open up Visual Studio 2022 and choose the <strong>Create a new project</strong> option, select <strong>Azure</strong> in the platforms dropdown and then pick <strong>Azure Functions</strong> and click <strong>Next</strong>.</p>
+<p><img src="../images/azfuncv4apponly-4.png" alt="Create Azure Function"></p>
+<p>Enter a <strong>Project name</strong> and <strong>Location</strong> and click on <strong>Create</strong>. In the <strong>Create a new Azure Functions application</strong> choose <strong>.NET 6 isolated</strong> in the drop down and then pick <strong>Http trigger</strong> and click on <strong>Create</strong>.</p>
+<p><img src="../images/azfuncv4apponly-5.png" alt="Create Azure Function"></p>
+<h3 id="add-configuration-settings-and-code">Add configuration settings and code</h3>
+<p>Start with adding a new class to the project: right click the project, choose <strong>Add</strong> and then pick <strong>Class...</strong>. Name the class <strong>AzureFunctionSettings.cs</strong> and click on <strong>Add</strong>. Replace the class code with below snippet:</p>
+<pre><code class="lang-csharp">internal class AzureFunctionSettings
+{
+    public string SiteUrl { get; set; }
+    public string TenantId { get; set; }
+    public string ClientId { get; set; }
+    public StoreName CertificateStoreName { get; set; }
+    public StoreLocation CertificateStoreLocation { get; set; }
+    public string CertificateThumbprint { get; set; }
+}
+</code></pre>
+<p>On top of the class add this using statement:</p>
+<pre><code class="lang-csharp">using System.Security.Cryptography.X509Certificates;
+</code></pre>
+<p>Open the <strong>local.settings.json</strong> file and replace it's contents with below:</p>
+<pre><code class="lang-json">{
+  &quot;IsEncrypted&quot;: false,
+  &quot;Values&quot;: {
+    &quot;AzureWebJobsStorage&quot;: &quot;UseDevelopmentStorage=true&quot;,
+    &quot;FUNCTIONS_WORKER_RUNTIME&quot;: &quot;dotnet-isolated&quot;,
+    &quot;SiteUrl&quot;: &quot;&lt;base site collection url to connect to&gt;&quot;,
+    &quot;TenantId&quot;: &quot;&lt;tenant id&gt;&quot;,
+    &quot;ClientId&quot;: &quot;&lt;application client id&gt;&quot;,
+    &quot;CertificateThumbPrint&quot;: &quot;&lt;thumbprint&gt;&quot;,
+    &quot;WEBSITE_LOAD_CERTIFICATES&quot;: &quot;&lt;thumbprint&gt;&quot;
+  },
+  &quot;Host&quot;: {
+    &quot;CORS&quot;: &quot;*&quot;
+  }
+}
+</code></pre>
+<p>Next update the configuration file to match your environment:</p>
+<ul>
+<li>Add a SharePoint site url: e.g. <a href="https://contoso.sharepoint.com">https://contoso.sharepoint.com</a></li>
+<li>Add the ClientId you've captured before</li>
+<li>Fill the <code>CertificateThumbPrint</code> and <code>WEBSITE_LOAD_CERTIFICATES</code> keys with the ThumbPrint value you've captured before</li>
+</ul>
+<p>To get your tenant id you can use below PnP PowerShell cmdlet, just replace contoso with your tenant name. Insert the returned tenant id in the configuration file.</p>
+<pre><code class="lang-PowerShell">Get-PnPTenantId -TenantUrl https://contoso.sharepoint.com
+</code></pre>
+<p>Your <strong>local.settings.json</strong> file should now be similar to below sample:</p>
+<pre><code class="lang-json">{
+  &quot;IsEncrypted&quot;: false,
+  &quot;Values&quot;: {
+    &quot;AzureWebJobsStorage&quot;: &quot;UseDevelopmentStorage=true&quot;,
+    &quot;FUNCTIONS_WORKER_RUNTIME&quot;: &quot;dotnet-isolated&quot;,
+    &quot;SiteUrl&quot;: &quot;https://contoso.sharepoint.com&quot;,
+    &quot;TenantId&quot;: &quot;9bd71689-66cb-4560-bb09-ab908ec21437&quot;,
+    &quot;ClientId&quot;: &quot;8bb62681-cddd-41e0-bfdf-ab908ec8a3c3&quot;,
+    &quot;CertificateThumbPrint&quot;: &quot;1C3342BA9B5269FDBCDCAB5D6334F1A60C73B184&quot;,
+    &quot;WEBSITE_LOAD_CERTIFICATES&quot;: &quot;1C3342BA9B5269FDBCDCAB5D6334F1A60C73B184&quot;
+  },
+  &quot;Host&quot;: {
+    &quot;CORS&quot;: &quot;*&quot;
+  }
+}
+</code></pre>
+<h3 id="add-and-configure-pnp-core-sdk">Add and Configure PnP Core SDK</h3>
+<p>Right click the project, choose <strong>Manage Nuget Packages...</strong>, ensure <strong>Include prerelease</strong> is checked, click on the <strong>Browse</strong> tab and enter <strong>PnP.Core</strong> in the search box. Select <strong>PnP.Core.Auth</strong> and click on <strong>Install</strong>. A <strong>Preview Changes</strong> dialog appears, click <strong>OK</strong> to continue. In the <strong>License Acceptance</strong> dialog click <strong>I Accept</strong>. Now repeat the same process for the <strong>PnP.Core.Admin</strong> package. Clicking on the <strong>Installed</strong> tab should then show this:</p>
+<p><img src="../images/azfuncv4apponly-6.png" alt="Add nuget packages"></p>
+<p>Continue with opening <strong>Program.cs</strong>: this class is executed and function startup and this is the place where we can add and configure the PnP Core SDK services. Replace the contents of the <code>Main()</code> method with below code:</p>
+<pre><code class="lang-csharp">public static void Main()
+{
+    AzureFunctionSettings azureFunctionSettings = null;
+
+    var host = new HostBuilder()
+        .ConfigureFunctionsWorkerDefaults()
+        .ConfigureServices((context, services) =&gt;
+        {
+            // Add our global configuration instance
+            services.AddSingleton(options =&gt;
+            {
+                var configuration = context.Configuration;
+                azureFunctionSettings = new AzureFunctionSettings();
+                configuration.Bind(azureFunctionSettings);
+                return configuration;
+            });
+
+            // Add and configure PnP Core SDK
+            services.AddPnPCore(options =&gt;
+            {
+                // Configure an authentication provider with certificate (Required for app only)
+                var authProvider = new X509CertificateAuthenticationProvider(azureFunctionSettings.ClientId,
+                    azureFunctionSettings.TenantId,
+                    StoreName.My,
+                    StoreLocation.CurrentUser,
+                    azureFunctionSettings.CertificateThumbprint);
+
+                // And set it as default
+                options.DefaultAuthenticationProvider = authProvider;
+
+                // Add a default configuration with the site configured in app settings
+                options.Sites.Add(&quot;Default&quot;,
+                        new PnP.Core.Services.Builder.Configuration.PnPCoreSiteOptions
+                        {
+                            SiteUrl = azureFunctionSettings.SiteUrl,
+                            AuthenticationProvider = authProvider
+                        });
+            });
+
+        })
+        .Build();
+
+    host.Run();
+}
+</code></pre>
+<p>Replace the using statements at the top of <strong>Program.cs</strong> with these:</p>
+<pre><code class="lang-csharp">using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using PnP.Core.Auth;
+using System.Security.Cryptography.X509Certificates;
+</code></pre>
+<p>With above code in place PnP Core SDK is added to the services container of the Azure Function (via <code>AddPnPCore</code>). During the add we've configure PnP Core SDK to use application permissions by setting up the <code>X509CertificateAuthenticationProvider</code> and we've finalized the PnP Core SDK setup by adding a default configuration that uses our SharePoint site url from configuration and authentication provider. For configuring PnP Core SDK we also needed data from the <strong>local.settings.json</strong> configuration file which implemented by creating and populating a <code>AzureFunctionSettings</code> class and adding that to the function's services container.</p>
+<h3 id="using-pnp-core-sdk-in-the-function">Using PnP Core SDK in the function</h3>
+<p>The final step before we can test the Azure Function is adding our actual function code. Start with right clicking on <strong>Function1.cs</strong>, choose <strong>Rename</strong> and name it <strong>CreateSite.cs</strong>. Click <strong>Yes</strong> on the rename ask. Open <strong>CreateSite.cs</strong> and replace the <code>CreateSite</code> class with below class</p>
+<pre><code class="lang-csharp">public class CreateSite
+{
+    private readonly ILogger logger;
+    private readonly IPnPContextFactory contextFactory;
+
+    public CreateSite(IPnPContextFactory pnpContextFactory, ILoggerFactory loggerFactory)
+    {
+        logger = loggerFactory.CreateLogger&lt;CreateSite&gt;();
+        contextFactory = pnpContextFactory;
+    }
+
+    /// &lt;summary&gt;
+    /// Demo function that creates a site collection, uploads an image to site assets and creates a page with an image web part
+    /// GET/POST url: http://localhost:7071/api/CreateSite?owner=bert.jansen@bertonline.onmicrosoft.com&amp;sitename=deleteme1844
+    /// &lt;/summary&gt;
+    /// &lt;param name=&quot;req&quot;&gt;&lt;/param&gt;
+    /// &lt;returns&gt;&lt;/returns&gt;
+    [Function(&quot;CreateSite&quot;)]
+    public async Task&lt;HttpResponseData&gt; Run([HttpTrigger(AuthorizationLevel.Function, &quot;get&quot;, &quot;post&quot;)] HttpRequestData req)
+    {
+        logger.LogInformation(&quot;CreateSite function starting...&quot;);
+
+        // Parse the url parameters
+        NameValueCollection parameters = HttpUtility.ParseQueryString(req.Url.Query);
+        var siteName = parameters[&quot;siteName&quot;];
+        var owner = parameters[&quot;owner&quot;];
+
+        HttpResponseData response = null;
+
+        try
+        {
+            using (var pnpContext = await contextFactory.CreateAsync(&quot;Default&quot;))
+            {
+                response = req.CreateResponse(HttpStatusCode.OK);
+                response.Headers.Add(&quot;Content-Type&quot;, &quot;application/json&quot;);
+
+                var communicationSiteToCreate = new CommunicationSiteOptions(new Uri($&quot;https://{pnpContext.Uri.DnsSafeHost}/sites/{siteName}&quot;), &quot;Demo site&quot;)
+                {
+                    Description = &quot;PnP Core SDK demo site&quot;,
+                    Language = Language.English,
+                    Owner = $&quot;i:0#.f|membership|{owner}&quot;
+                };
+
+                logger.LogInformation($&quot;Creating site: {communicationSiteToCreate.Url}&quot;);
+
+                // Create the new site collection
+                using (var newSiteContext = await pnpContext.GetSiteCollectionManager().CreateSiteCollectionAsync(communicationSiteToCreate))
+                {
+                    logger.LogInformation($&quot;Site created: {communicationSiteToCreate.Url}&quot;);
+
+                    // Step 1: Upload image to site assets library
+                    var siteAssetsLibrary = await newSiteContext.Web.Lists.EnsureSiteAssetsLibraryAsync(p =&gt; p.RootFolder);
+                    var uploadFolder = await siteAssetsLibrary.RootFolder.EnsureFolderAsync(&quot;SitePages/PnP&quot;);
+                    var addedFile = await uploadFolder.Files.AddAsync(&quot;parker.png&quot;,File.OpenRead($&quot;.{Path.DirectorySeparatorChar}parker.png&quot;), true);
+
+                    // Step 2: Create the page
+                    var page = await newSiteContext.Web.NewPageAsync();
+                    page.AddSection(CanvasSectionTemplate.TwoColumnRight, 1);
+
+                    // Add text
+                    page.AddControl(page.NewTextPart(&quot;&lt;H1&gt;Hello everyone!&lt;/H1&gt;&quot;), page.Sections[0].Columns[0]);
+
+                    // Get the image web part 'blueprint'
+                    var availableComponents = await page.AvailablePageComponentsAsync();
+                    var imageWebPartComponent = availableComponents.FirstOrDefault(p =&gt; p.Id == page.DefaultWebPartToWebPartId(DefaultWebPart.Image));
+
+                    // Configure and add the image web part
+                    var imagePart = page.NewWebPart(imageWebPartComponent);
+                    imagePart.PropertiesJson = PrepareImageWebPartConfiguration(newSiteContext, addedFile.ServerRelativeUrl,
+                                                                                siteAssetsLibrary.Id, addedFile.UniqueId);
+                    page.AddControl(imagePart, page.Sections[0].Columns[1]);
+
+                    // Save the page
+                    await page.SaveAsync(&quot;PnP.aspx&quot;);
+
+                    // Return the URL of the created site
+                    await response.WriteStringAsync(JsonSerializer.Serialize(new { siteUrl = newSiteContext.Uri.AbsoluteUri }));
+                }
+
+                return response;
+            }
+        }
+        catch (Exception ex)
+        {
+            response = req.CreateResponse(HttpStatusCode.OK);
+            response.Headers.Add(&quot;Content-Type&quot;, &quot;application/json&quot;);
+            await response.WriteStringAsync(JsonSerializer.Serialize(new { error = ex.Message }));
+            return response;
+        }
+    }
+
+    private static string PrepareImageWebPartConfiguration(PnPContext context, string imageUrl, Guid siteAssetsId, Guid imageId)
+    {
+        string baseImageWebPart = &quot;{\&quot;webPartData\&quot;:{\&quot;id\&quot;:\&quot;d1d91016-032f-456d-98a4-721247c305e8\&quot;,\&quot;instanceId\&quot;:\&quot;{InstanceId}\&quot;,\&quot;title\&quot;:\&quot;Image\&quot;,\&quot;description\&quot;:\&quot;Add an image, picture or photo to your page including text overlays and ability to crop and resize images.\&quot;,\&quot;audiences\&quot;:[],\&quot;serverProcessedContent\&quot;:{\&quot;htmlStrings\&quot;:{},\&quot;searchablePlainTexts\&quot;:{},\&quot;imageSources\&quot;:{\&quot;imageSource\&quot;:\&quot;{FullyQualifiedImageUrl}\&quot;},\&quot;links\&quot;:{},\&quot;customMetadata\&quot;:{\&quot;imageSource\&quot;:{\&quot;siteId\&quot;:\&quot;{SiteId}\&quot;,\&quot;webId\&quot;:\&quot;{WebId}\&quot;,\&quot;listId\&quot;:\&quot;{{ListId}}\&quot;,\&quot;uniqueId\&quot;:\&quot;{UniqueId}\&quot;,\&quot;imgWidth\&quot;:-1,\&quot;imgHeight\&quot;:-1}}},\&quot;dataVersion\&quot;:\&quot;1.9\&quot;,\&quot;properties\&quot;:{\&quot;imageSourceType\&quot;:2,\&quot;captionText\&quot;:\&quot;\&quot;,\&quot;altText\&quot;:\&quot;\&quot;,\&quot;linkUrl\&quot;:\&quot;\&quot;,\&quot;overlayText\&quot;:\&quot;\&quot;,\&quot;fileName\&quot;:\&quot;\&quot;,\&quot;siteId\&quot;:\&quot;{SiteId}\&quot;,\&quot;webId\&quot;:\&quot;{WebId}\&quot;,\&quot;listId\&quot;:\&quot;{{ListId}}\&quot;,\&quot;uniqueId\&quot;:\&quot;{UniqueId}\&quot;,\&quot;imgWidth\&quot;:-1,\&quot;imgHeight\&quot;:-1,\&quot;alignment\&quot;:\&quot;Center\&quot;,\&quot;fixAspectRatio\&quot;:false}}}&quot;;
+
+        return baseImageWebPart.Replace(&quot;{InstanceId}&quot;, Guid.NewGuid().ToString())
+                                .Replace(&quot;{FullyQualifiedImageUrl}&quot;, $&quot;https://{context.Uri.DnsSafeHost}{imageUrl}&quot;)
+                                .Replace(&quot;{SiteId}&quot;, context.Site.Id.ToString())
+                                .Replace(&quot;{WebId}&quot;, context.Web.Id.ToString())
+                                .Replace(&quot;{ListId}&quot;, siteAssetsId.ToString())
+                                .Replace(&quot;{UniqueId}&quot;, imageId.ToString());
+    }
+}
+</code></pre>
+<p>Replace the namespaces on top of the file with these:</p>
+<pre><code class="lang-csharp">using Microsoft.Azure.Functions.Worker;
+using Microsoft.Azure.Functions.Worker.Http;
+using Microsoft.Extensions.Logging;
+using PnP.Core.Admin.Model.SharePoint;
+using PnP.Core.Model.SharePoint;
+using PnP.Core.Services;
+using System;
+using System.Collections.Specialized;
+using System.IO;
+using System.Linq;
+using System.Net;
+using System.Text.Json;
+using System.Threading.Tasks;
+using System.Web;
+</code></pre>
+<p>This <strong>CreateSite</strong> Azure Function will do a number of things:</p>
+<ol>
+<li>It will create a <code>PnPContext</code> for the site you've setup in <strong>local.settings.json</strong></li>
+<li>It will create a new site collection using the name and owner information passed in via the request</li>
+<li>It will ensure there is a Site Assets library in the newly created SharePoint site</li>
+<li>It will ensure there's a folder <code>SitePages</code> having a sub folder <code>PnP</code> in the Site Assets library</li>
+<li>It will upload an image named <strong>parker.png</strong> to the <code>PnP</code> folder</li>
+<li>It will create a new page with a two column section
+<ol>
+<li>In the first column text is displayed</li>
+<li>In the second column the uploaded image is shown via an image web part</li>
+</ol>
+</li>
+</ol>
+<p>Before we can test the sample we still need to add the <strong>parker.png</strong> image file, you can <a href="https://github.com/pnp/media/blob/master/parker/pnp/600w/parker.png">grab the original PnP parker from here</a> but you can obviously take any image you have and name if <strong>parker.png</strong>. Important is that you you change the <strong>Copy to Output Directory</strong> to <strong>Copy Always</strong></p>
+<p><img src="../images/azfuncv4apponly-7.png" alt="Configure parker.png"></p>
+<h2 id="test-the-azure-function">Test the Azure Function</h2>
+<p>Start with putting a breakpoint on the first line of the <strong>Run</strong> method (line 38) so a breakpoint is hit when the function is invoked. Now press <strong>F5</strong> to start the function, you should see a console window:</p>
+<p><img src="../images/azfuncv4apponly-8.png" alt="Running Azure function"></p>
+<p>To test the function we need to construct a URL first, start with copying the URL the function is running on (<code>http://localhost:7071/api/CreateSite</code>) and then add <code>owner</code> and <code>siteName</code> URL parameters so that you get this:</p>
+<pre><code class="lang-text">http://localhost:7071/api/CreateSite?owner=joe@contoso.onmicrosoft.com&amp;sitename=myPnPCoreSDKDemoSite1
+</code></pre>
+<p>Ensure you use an owner that exists in your tenant and that the provided site name does not yet exist, in above case a site collection named <code>https://contoso.sharepoint.com/sites/myPnPCoreSDKDemoSite1</code> will be created. Now copy the crafted URL and paste it into your browser address bar and hit enter. What will happen is that the function will be invoked and execution will stop at your breakpoint. By pressing <strong>F10</strong> you can walk over the code step by step, press <strong>F5</strong> to just continue execution. Once the execution ended you see the created site collection URL in the output:</p>
+<p><img src="../images/azfuncv4apponly-9.png" alt="Function call result"></p>
+<p>Feel free to open the created site collection and navigate the <strong>PnP.aspx</strong> page to see parker :-)</p>
+<p><img src="../images/azfuncv4apponly-10.png" alt="Resulting pnp.aspx page"></p>
+</article>
+          </div>
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              </nav>
+            </div>
+          </div>        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            <span>PnP Core SDK<br>Generated by <strong><a href='https://dotnet.github.io/docfx' alt='Doc FX Website'>DocFX</a></strong> with <strong><a href='https://ovasquez.github.io/docfx-material' alt='DocFx Material Theme'>Material UI</a></strong></span>
+            
+            <img src="https://telemetry.sharepointpnp.com/@pnp.github.io/index/" alt="spacer">
+          </div>
+        </div>
+      </footer>    </div>
+    
+    <script type="text/javascript" src="../../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../../styles/docfx.js"></script>
+    <script type="text/javascript" src="../../styles/main.js"></script>  </body>
+</html>

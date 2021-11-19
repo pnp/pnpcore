@@ -5572,7 +5572,7 @@
       "output": {
         ".html": {
           "relative_path": "demos/Demo.AzureFunction.OutOfProcess.AppOnly/readme.html",
-          "hash": "hQo6RkqDpzmnDQsB9JI0Tw=="
+          "hash": "BDeXMbCRf9cLSfjKMn/yjQ=="
         }
       },
       "is_incremental": false,
@@ -5979,7 +5979,141 @@
       "output": {
         ".html": {
           "relative_path": "toc.html",
-          "hash": "o9PNSQ63xfQgEf4Y87V0oA=="
+          "hash": "pCduUnl5wWfKUOvW0rqGfw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "tutorials/azurefunctions/v4processisolatedapponly.md",
+      "output": {
+        ".html": {
+          "relative_path": "tutorials/azurefunctions/v4processisolatedapponly.html",
+          "hash": "sCumPTqT1x/fL5CXQuATKw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "tutorials/images/azfuncv4apponly-1.png",
+      "output": {
+        "resource": {
+          "relative_path": "tutorials/images/azfuncv4apponly-1.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "tutorials/images/azfuncv4apponly-10.png",
+      "output": {
+        "resource": {
+          "relative_path": "tutorials/images/azfuncv4apponly-10.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "tutorials/images/azfuncv4apponly-2.png",
+      "output": {
+        "resource": {
+          "relative_path": "tutorials/images/azfuncv4apponly-2.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "tutorials/images/azfuncv4apponly-3.png",
+      "output": {
+        "resource": {
+          "relative_path": "tutorials/images/azfuncv4apponly-3.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "tutorials/images/azfuncv4apponly-4.png",
+      "output": {
+        "resource": {
+          "relative_path": "tutorials/images/azfuncv4apponly-4.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "tutorials/images/azfuncv4apponly-5.png",
+      "output": {
+        "resource": {
+          "relative_path": "tutorials/images/azfuncv4apponly-5.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "tutorials/images/azfuncv4apponly-6.png",
+      "output": {
+        "resource": {
+          "relative_path": "tutorials/images/azfuncv4apponly-6.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "tutorials/images/azfuncv4apponly-7.png",
+      "output": {
+        "resource": {
+          "relative_path": "tutorials/images/azfuncv4apponly-7.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "tutorials/images/azfuncv4apponly-8.png",
+      "output": {
+        "resource": {
+          "relative_path": "tutorials/images/azfuncv4apponly-8.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "tutorials/images/azfuncv4apponly-9.png",
+      "output": {
+        "resource": {
+          "relative_path": "tutorials/images/azfuncv4apponly-9.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "tutorials/readme.md",
+      "output": {
+        ".html": {
+          "relative_path": "tutorials/readme.html",
+          "hash": "QFM0rxtACy6yIQ9AFXxRqQ=="
         }
       },
       "is_incremental": false,
@@ -6780,7 +6914,7 @@
         "ConceptualDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build",
-          "total_file_count": 87,
+          "total_file_count": 89,
           "skipped_file_count": 0
         },
         "ManagedReferenceDocumentProcessor": {
