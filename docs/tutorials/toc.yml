@@ -1,0 +1,2 @@
+- name: Azure V4 function
+  href: azurefunctions/v4processisolatedapponly.md
