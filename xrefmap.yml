@@ -43684,15 +43684,6 @@ references:
   commentId: M:PnP.Core.Services.PnPGlobalSettingsOptions.#ctor
   fullName: PnP.Core.Services.PnPGlobalSettingsOptions.PnPGlobalSettingsOptions()
   nameWithType: PnPGlobalSettingsOptions.PnPGlobalSettingsOptions()
-- uid: PnP.Core.Services.PnPGlobalSettingsOptions.#ctor(ILogger{PnP.Core.Services.PnPGlobalSettingsOptions})
-  name: PnPGlobalSettingsOptions(ILogger<PnPGlobalSettingsOptions>)
-  href: api/PnP.Core.Services.PnPGlobalSettingsOptions.html#PnP_Core_Services_PnPGlobalSettingsOptions__ctor_ILogger_PnP_Core_Services_PnPGlobalSettingsOptions__
-  commentId: M:PnP.Core.Services.PnPGlobalSettingsOptions.#ctor(ILogger{PnP.Core.Services.PnPGlobalSettingsOptions})
-  name.vb: PnPGlobalSettingsOptions(ILogger(Of PnPGlobalSettingsOptions))
-  fullName: PnP.Core.Services.PnPGlobalSettingsOptions.PnPGlobalSettingsOptions(ILogger<PnP.Core.Services.PnPGlobalSettingsOptions>)
-  fullName.vb: PnP.Core.Services.PnPGlobalSettingsOptions.PnPGlobalSettingsOptions(ILogger(Of PnP.Core.Services.PnPGlobalSettingsOptions))
-  nameWithType: PnPGlobalSettingsOptions.PnPGlobalSettingsOptions(ILogger<PnPGlobalSettingsOptions>)
-  nameWithType.vb: PnPGlobalSettingsOptions.PnPGlobalSettingsOptions(ILogger(Of PnPGlobalSettingsOptions))
 - uid: PnP.Core.Services.PnPGlobalSettingsOptions.#ctor*
   name: PnPGlobalSettingsOptions
   href: api/PnP.Core.Services.PnPGlobalSettingsOptions.html#PnP_Core_Services_PnPGlobalSettingsOptions__ctor_
