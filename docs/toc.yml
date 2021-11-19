@@ -6,6 +6,6 @@
 - name: Samples
   href: demos/README.md
 - name: Tutorials
-  href: tutorials/readme.md
+  href: tutorials/
 - name: Contributing
   href: contributing/
