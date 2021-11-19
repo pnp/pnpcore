@@ -5572,7 +5572,7 @@
       "output": {
         ".html": {
           "relative_path": "demos/Demo.AzureFunction.OutOfProcess.AppOnly/readme.html",
-          "hash": "BDeXMbCRf9cLSfjKMn/yjQ=="
+          "hash": "b6+fPn8Pn9EzTvRWV7es5g=="
         }
       },
       "is_incremental": false,
@@ -5691,6 +5691,29 @@
       "version": ""
     },
     {
+      "type": "Resource",
+      "source_relative_path": "demos/Demo.Console.Minimal/preview.png",
+      "output": {
+        "resource": {
+          "relative_path": "demos/Demo.Console.Minimal/preview.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "demos/Demo.Console.Minimal/readme.md",
+      "output": {
+        ".html": {
+          "relative_path": "demos/Demo.Console.Minimal/readme.html",
+          "hash": "Hl3ixFhkYA1xJ3fyPL/5jw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
       "type": "Conceptual",
       "source_relative_path": "demos/Demo.Console/README.md",
       "output": {
@@ -5777,7 +5800,7 @@
       "output": {
         ".html": {
           "relative_path": "demos/README.html",
-          "hash": "iw91l3V7YQPLLp9f/OArYQ=="
+          "hash": "y4Nw7Xz4tgQouU4Yi4o3mw=="
         }
       },
       "is_incremental": false,
@@ -5789,7 +5812,7 @@
       "output": {
         ".html": {
           "relative_path": "demos/toc.html",
-          "hash": "8q+I/7/lU4Iva2a82SxVUw=="
+          "hash": "SrglRALSY+S9e8FP0Wu1KQ=="
         }
       },
       "is_incremental": false,
@@ -5998,6 +6021,18 @@
       "version": ""
     },
     {
+      "type": "Conceptual",
+      "source_relative_path": "tutorials/console/minimalconsole.md",
+      "output": {
+        ".html": {
+          "relative_path": "tutorials/console/minimalconsole.html",
+          "hash": "Y+UUck7uWuaeUuIkyFpKDA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
       "type": "Resource",
       "source_relative_path": "tutorials/images/azfuncv4apponly-1.png",
       "output": {
@@ -6102,6 +6137,39 @@
       "output": {
         "resource": {
           "relative_path": "tutorials/images/azfuncv4apponly-9.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "tutorials/images/consolesimple-1.png",
+      "output": {
+        "resource": {
+          "relative_path": "tutorials/images/consolesimple-1.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "tutorials/images/consolesimple-2.png",
+      "output": {
+        "resource": {
+          "relative_path": "tutorials/images/consolesimple-2.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "tutorials/images/consolesimple-3.png",
+      "output": {
+        "resource": {
+          "relative_path": "tutorials/images/consolesimple-3.png"
         }
       },
       "is_incremental": false,
@@ -6926,7 +6994,7 @@
         "ConceptualDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build",
-          "total_file_count": 89,
+          "total_file_count": 91,
           "skipped_file_count": 0
         },
         "ManagedReferenceDocumentProcessor": {

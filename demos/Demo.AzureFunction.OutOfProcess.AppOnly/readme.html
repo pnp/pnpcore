@@ -103,7 +103,10 @@ Register-PnPAzureADApp -ApplicationName FunctionDemoSiteProvisiong -Tenant conto
 </code></pre>
 <div class="IMPORTANT">
 <h5>Important</h5>
-<p>Once this cmdlet is done you do need to to copy <strong>certificate thumbprint</strong> and <strong>ClientId</strong> values as these will be needed for the configuration step</p>
+<ul>
+<li>Approving application permissions requires you to use a user ID which is Azure AD admin or global admin in your tenant</li>
+<li>Once this cmdlet is done you do need to to copy <strong>certificate thumbprint</strong> and <strong>ClientId</strong> values as these will be needed for the configuration step</li>
+</ul>
 </div>
 <p>If you prefer to manually create and configure the Azure AD application then follow these steps:</p>
 <ol>
@@ -155,7 +158,7 @@ Register-PnPAzureADApp -ApplicationName FunctionDemoSiteProvisiong -Tenant conto
 }
 </code></pre>
 <h2 id="run-the-sample">Run the sample</h2>
-<p>If you're using Visual Studio then press F5 to launch the sample, if you're using command line then use <code>func start</code>.</p>
+<p>If you're using Visual Studio then press <strong>F5</strong> to launch the sample, if you're using command line then use <code>func start</code>.</p>
 <div class="NOTE">
 <h5>Note</h5>
 <p>To use command line you first have to install the <a href="https://docs.microsoft.com/en-us/azure/azure-functions/functions-run-local?tabs=v4%2Cwindows%2Ccsharp%2Cportal%2Cbash%2Ckeda#v2">Azure function core tools version 4.x</a></p>
