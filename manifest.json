@@ -5991,7 +5991,7 @@
       "output": {
         ".html": {
           "relative_path": "tutorials/azurefunctions/v4processisolatedapponly.html",
-          "hash": "sCumPTqT1x/fL5CXQuATKw=="
+          "hash": "/Qw/e7y+Ay1vDgMGowkNdQ=="
         }
       },
       "is_incremental": false,
@@ -6114,6 +6114,18 @@
         ".html": {
           "relative_path": "tutorials/readme.html",
           "hash": "3RZYfnuHIjUzPPjLI6V4uQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "tutorials/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "tutorials/toc.html",
+          "hash": "AqoT/BXQYjI+ogOZN+0fTg=="
         }
       },
       "is_incremental": false,
