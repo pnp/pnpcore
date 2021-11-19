@@ -10,7 +10,7 @@ As development environment this tutorial uses Visual Studio 2022, you can either
 
 ## Tutorial source code
 
-If you follow this tutorial you end up with a working Azure Function that uses PnP Core SDK. This same tutorial is also available as a [sample containing the source code and brief setup instructions](../../../samples/Demo.AzureFunction.OutOfProcess.AppOnly/readme.md).
+If you follow this tutorial you end up with a working Azure Function that uses PnP Core SDK. This same tutorial is also available as a [sample containing the source code and brief setup instructions](https://pnp.github.io/pnpcore/demos/Demo.AzureFunction.OutOfProcess.AppOnly/readme.html).
 
 ## Create and configure the Azure AD application
 
