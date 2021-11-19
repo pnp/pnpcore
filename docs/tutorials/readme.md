@@ -4,8 +4,8 @@ Here are the different tutorials and training assets available for you to get st
 
 ## Getting started with PnP Core SDK
 
-- Soon
+- [Minimal .NET 6 console application](console/minimalconsole.md)
 
 ## Using PnP Core SDK in Azure Functions
 
-- [V4 Azure function using .NET 6.0 running as an isolated process](azurefunctions/v4processisolatedapponly.md)
+- [V4 Azure function using .NET 6 running as an isolated process](azurefunctions/v4processisolatedapponly.md)

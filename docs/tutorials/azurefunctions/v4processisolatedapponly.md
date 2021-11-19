@@ -26,6 +26,10 @@ Install-Module -Name PnP.PowerShell
 
 Using PnP PowerShell this becomes really simple. Running cmdlet will create a new Azure AD application, will create a new self-signed certificate and will configure that certificate with the Azure AD application. Finally the right permissions are configured and you're prompted to consent these permissions.
 
+> [!Important]
+>
+> Approving application permissions requires you to use a user which is Azure AD admin or global admin in your tenant
+
 ```powershell
 # Ensure you replace contoso.onmicrosoft.com with your Azure AD tenant name
 # Ensure you replace joe@contoso.onmicrosoft.com with the user id that's an Azure AD admin (or global admin)

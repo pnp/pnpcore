@@ -27,7 +27,7 @@ Register-PnPAzureADApp -ApplicationName FunctionDemoSiteProvisiong -Tenant conto
 
 > [!Important]
 >
-> - Approving application permissions requires you to use a user ID which is Azure AD admin or global admin in your tenant
+> - Approving application permissions requires you to use a user which is Azure AD admin or global admin in your tenant
 > - Once this cmdlet is done you do need to to copy **certificate thumbprint** and **ClientId** values as these will be needed for the configuration step
 
 If you prefer to manually create and configure the Azure AD application then follow these steps:

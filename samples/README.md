@@ -29,7 +29,7 @@ Sample | Description | .NET version | PnP Core version | Authentication Type
 -------|-------------|-----------------|-------------|----------------
 [Minimal Console demo](Demo.Console.Minimal/readme.md) | Most simplistic console app that shows how to use the PnP Core SDK for working with Microsoft 365 data | .NET 6 | v1.4.0 | Interactive login (`InteractiveAuthenticationProvider`)
 [Console demo](Demo.Console/README.md) | Demo console app that shows how to use the PnP Core SDK for working with Microsoft 365 data | .NET 5 | v1.4.0 | Interactive login (`InteractiveAuthenticationProvider`)
-[Persistent TokenCache](Demo.PersistentTokenCache/README.md) | Demo console app that shows how to use the PnP Core SDK with a custom authentication provider that utilizes an MSAL token cache avoiding credential prompts after first login | 5.0.0 | v1.4.0 | Custom `IAuthenticationProvider` implementation
+[Persistent TokenCache](Demo.PersistentTokenCache/README.md) | Demo console app that shows how to use the PnP Core SDK with a custom authentication provider that utilizes an MSAL token cache avoiding credential prompts after first login | .NET 5 | v1.4.0 | Custom `IAuthenticationProvider` implementation
 [Pi demo](Demo.RPi/README.md) | Sample application running on [dotNet](https://dotnet.microsoft.com/download/dotnet-core/3.1) Core on the Raspberry Pi | .NET 5 | v1.4.0 | Username password login (`UsernamePasswordAuthenticationProvider`)
 
 Checkout the **README.md** file from each sample to learn more.
