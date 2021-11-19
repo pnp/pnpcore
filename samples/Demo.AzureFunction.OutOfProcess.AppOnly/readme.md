@@ -26,7 +26,9 @@ Register-PnPAzureADApp -ApplicationName FunctionDemoSiteProvisiong -Tenant conto
 ```
 
 > [!Important]
-> Once this cmdlet is done you do need to to copy **certificate thumbprint** and **ClientId** values as these will be needed for the configuration step
+>
+> - Approving application permissions requires you to use a user ID which is Azure AD admin or global admin in your tenant
+> - Once this cmdlet is done you do need to to copy **certificate thumbprint** and **ClientId** values as these will be needed for the configuration step
 
 If you prefer to manually create and configure the Azure AD application then follow these steps:
 
@@ -84,10 +86,9 @@ After filling in the configuration data your file will look like this:
 
 ## Run the sample
 
-If you're using Visual Studio then press F5 to launch the sample, if you're using command line then use `func start`.
+If you're using Visual Studio then press **F5** to launch the sample, if you're using command line then use `func start`.
 
 > [!Note]
 > To use command line you first have to install the [Azure function core tools version 4.x](https://docs.microsoft.com/en-us/azure/azure-functions/functions-run-local?tabs=v4%2Cwindows%2Ccsharp%2Cportal%2Cbash%2Ckeda#v2)
 
 With the sample running go to your browser and load this url: `http://localhost:7071/api/CreateSite?owner=joe@contoso.onmicrosoft.com&sitename=azurefunctiondemo001`, doing this will call into your Azure function passing the owner of the site collection that will be created and the site collection name. You have to update the url parameters accordingly, above sample will result in a site collection with url https://contoso.sharepoint.com/sites/azurefunctiondemo001 having joe@contoso.onmicrosoft.com set as owner.
-

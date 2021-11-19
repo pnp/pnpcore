@@ -6,7 +6,7 @@ Samples are best way to learn how to use, hence we've some example PnP Core SDK 
 
 Sample | Description | .NET version | PnP Core version | Authentication Type | Function mode
 -------|-------------|--------------|------------------|---------------------|--------------
-[Out of process](Demo.AzureFunction.OutOfProcess.AppOnly/readme.md) | Azure v4 Function using PnP Core SDK via dependency injection showing how to create and configure a site collection | .NET 6.0 | v1.4.0 | Application permissions (`X509CertificateAuthenticationProvider`) | V4, isolated process
+[Out of process](Demo.AzureFunction.OutOfProcess.AppOnly/readme.md) | Azure v4 Function using PnP Core SDK via dependency injection showing how to create and configure a site collection | .NET 6 | v1.4.0 | Application permissions (`X509CertificateAuthenticationProvider`) | V4, isolated process
 [V3 function](Demo.AzureFunction/README.md) | Azure v3 Function that shows how to use the PnP Core SDK via dependency injection | .NET Core 3.1 | v1.4.0 | Application permissions (`X509CertificateAuthenticationProvider`) | V3, in-process
 
 > [!Important]
@@ -18,8 +18,8 @@ Checkout the **README.md** file from each sample to learn more.
 
 Sample | Description | .NET version | PnP Core version | Authentication Type
 -------|-------------|-----------------|-------------|----------------
-[ASPNet Core site](Demo.ASPNetCore/README.md) | Demo application showing how use the PnP Core SDK from an ASP.Net Core application | .NET 5.0.0 | v1.4.0 | Custom authentication is used via the (`ExternalAuthenticationProvider`)
-[ASPNET Blazor app](Demo.Blazor/README.md) | Sample Blazor WASM application that prototypes how the PnP Core SDK can be used in Blazor development | .NET 5.0.0 | v1.4.0 | Custom `IAuthenticationProvider` implementation
+[ASPNet Core site](Demo.ASPNetCore/README.md) | Demo application showing how use the PnP Core SDK from an ASP.Net Core application | .NET 5 | v1.4.0 | Custom authentication is used via the (`ExternalAuthenticationProvider`)
+[ASPNET Blazor app](Demo.Blazor/README.md) | Sample Blazor WASM application that prototypes how the PnP Core SDK can be used in Blazor development | .NET 5 | v1.4.0 | Custom `IAuthenticationProvider` implementation
 
 Checkout the **README.md** file from each sample to learn more.
 
@@ -27,9 +27,10 @@ Checkout the **README.md** file from each sample to learn more.
 
 Sample | Description | .NET version | PnP Core version | Authentication Type
 -------|-------------|-----------------|-------------|----------------
-[Console demo](Demo.Console/README.md) | Demo console app that shows how to use the PnP Core SDK for working with Microsoft 365 data | .NET 5.0.0 | v1.4.0 | Interactive login (`InteractiveAuthenticationProvider`)
+[Minimal Console demo](Demo.Console.Minimal/readme.md) | Most simplistic console app that shows how to use the PnP Core SDK for working with Microsoft 365 data | .NET 6 | v1.4.0 | Interactive login (`InteractiveAuthenticationProvider`)
+[Console demo](Demo.Console/README.md) | Demo console app that shows how to use the PnP Core SDK for working with Microsoft 365 data | .NET 5 | v1.4.0 | Interactive login (`InteractiveAuthenticationProvider`)
 [Persistent TokenCache](Demo.PersistentTokenCache/README.md) | Demo console app that shows how to use the PnP Core SDK with a custom authentication provider that utilizes an MSAL token cache avoiding credential prompts after first login | 5.0.0 | v1.4.0 | Custom `IAuthenticationProvider` implementation
-[Pi demo](Demo.RPi/README.md) | Sample application running on [dotNet](https://dotnet.microsoft.com/download/dotnet-core/3.1) Core on the Raspberry Pi | .NET 5.0.0 | v1.4.0 | Username password login (`UsernamePasswordAuthenticationProvider`)
+[Pi demo](Demo.RPi/README.md) | Sample application running on [dotNet](https://dotnet.microsoft.com/download/dotnet-core/3.1) Core on the Raspberry Pi | .NET 5 | v1.4.0 | Username password login (`UsernamePasswordAuthenticationProvider`)
 
 Checkout the **README.md** file from each sample to learn more.
 
@@ -37,6 +38,6 @@ Checkout the **README.md** file from each sample to learn more.
 
 Sample | Description | .NET version | PnP Core version | Authentication Type
 -------|-------------|-----------------|-------------|----------------
-[WPF app](Demo.WPF/README.md) | Sample WPF windows application showing how dependency injection and the PnP Core SDK can be used in WPF/XAML apps | .NET 5.0.0 | v1.4.0 | Interactive login (`InteractiveAuthenticationProvider`)
+[WPF app](Demo.WPF/README.md) | Sample WPF windows application showing how dependency injection and the PnP Core SDK can be used in WPF/XAML apps | .NET 5 | v1.4.0 | Interactive login (`InteractiveAuthenticationProvider`)
 
 Checkout the **README.md** file from each sample to learn more.

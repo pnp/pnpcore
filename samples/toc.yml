@@ -9,6 +9,8 @@
     href: Demo.ASPNetCore/README.md
   - name: Blazor App
     href: Demo.Blazor/README.md
+  - name: Minimal Console App
+    href: Demo.Console.Minimal/readme.md
   - name: Console App
     href: Demo.Console/README.md
   - name: Persistent token cache demo
