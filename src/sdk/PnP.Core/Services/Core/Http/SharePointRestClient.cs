@@ -39,6 +39,11 @@ namespace PnP.Core.Services
                 throw new ArgumentNullException(nameof(options));
             }
 
+            if (globalSettings.Logger == null)
+            {
+                globalSettings.Logger = logger;
+            }
+
             client.DefaultRequestHeaders.Add("Accept", "application/json;odata=verbose");
             client.Timeout = globalSettings.GetHttpTimeout();
 

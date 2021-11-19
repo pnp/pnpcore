@@ -142,15 +142,6 @@ namespace PnP.Core.Services
 
         }
 
-        /// <summary>
-        /// Custom constructor
-        /// </summary>
-        /// <param name="log">Connected logger</param>
-        public PnPGlobalSettingsOptions(ILogger<PnPGlobalSettingsOptions> log)
-        {
-            Logger = log;
-        }
-
         private static string GetVersionTag()
         {
             Assembly coreAssembly = Assembly.GetExecutingAssembly();

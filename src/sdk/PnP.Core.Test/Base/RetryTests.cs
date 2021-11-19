@@ -38,7 +38,7 @@ namespace PnP.Core.Test.Base
         public async Task SharePointRestRetryTest(HttpStatusCode statusCode)
         {
             MockResponseHandler responseHandler = new MockResponseHandler();
-            SharePointRestRetryHandler retryHandler = new SharePointRestRetryHandler(null)
+            SharePointRestRetryHandler retryHandler = new SharePointRestRetryHandler(null, null)
             {
                 InnerHandler = responseHandler,
                 // Set delay to zero to speed up test case
@@ -92,7 +92,7 @@ namespace PnP.Core.Test.Base
         public async Task MicrosoftGraphRetryTest(HttpStatusCode statusCode)
         {
             MockResponseHandler responseHandler = new MockResponseHandler();
-            MicrosoftGraphRetryHandler retryHandler = new MicrosoftGraphRetryHandler(null)
+            MicrosoftGraphRetryHandler retryHandler = new MicrosoftGraphRetryHandler(null, null)
             {
                 InnerHandler = responseHandler,
                 // Set delay to zero to speed up test case

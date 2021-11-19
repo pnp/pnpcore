@@ -21,9 +21,14 @@ namespace PnP.Core.Services
         internal const int MAXDELAY = 300;
 
         #region Construction
-        public RetryHandlerBase(PnPGlobalSettingsOptions globalSettings)
+        public RetryHandlerBase(ILogger<RetryHandlerBase> log, PnPGlobalSettingsOptions globalSettings)
         {
             GlobalSettings = globalSettings;
+
+            if (GlobalSettings != null && GlobalSettings.Logger == null)
+            {
+                GlobalSettings.Logger = log;
+            }
         }
         #endregion
 
@@ -58,7 +63,6 @@ namespace PnP.Core.Services
         /// <param name="response">The <see cref="HttpResponseMessage"/> which is returned and includes the HTTP request needs to be retried.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> for the retry.</param>
         /// <returns></returns>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Reliability", "CA2000:Dispose objects before losing scope", Justification = "Disposing will prevent cloning of the request needed for the retry")]
         private async Task<HttpResponseMessage> SendRetryAsync(HttpResponseMessage response, CancellationToken cancellationToken)
         {
             int retryCount = 0;

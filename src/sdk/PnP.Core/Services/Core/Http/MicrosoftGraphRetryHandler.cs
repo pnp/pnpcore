@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Options;
+﻿using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 
 namespace PnP.Core.Services
 {
@@ -8,7 +9,7 @@ namespace PnP.Core.Services
     internal sealed class MicrosoftGraphRetryHandler : RetryHandlerBase
     {
         #region Construction
-        public MicrosoftGraphRetryHandler(IOptions<PnPGlobalSettingsOptions> globalSettings) : base(globalSettings?.Value)
+        public MicrosoftGraphRetryHandler(ILogger<RetryHandlerBase> log, IOptions<PnPGlobalSettingsOptions> globalSettings) : base(log, globalSettings?.Value)
         {
             Configure();
         }

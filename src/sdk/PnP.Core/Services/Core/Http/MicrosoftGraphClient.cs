@@ -40,6 +40,11 @@ namespace PnP.Core.Services
                 throw new ArgumentNullException(nameof(options));
             }
 
+            if (globalSettings.Logger == null)
+            {
+                globalSettings.Logger = logger;
+            }
+
             client.BaseAddress = PnPConstants.MicrosoftGraphBaseUri;
             client.DefaultRequestHeaders.Add("Accept", "application/json;odata.metadata=minimal;odata.streaming=true;IEEE754Compatible=true");
             client.Timeout = globalSettings.GetHttpTimeout();
