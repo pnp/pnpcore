@@ -5572,7 +5572,7 @@
       "output": {
         ".html": {
           "relative_path": "demos/Demo.AzureFunction.OutOfProcess.AppOnly/readme.html",
-          "hash": "b6+fPn8Pn9EzTvRWV7es5g=="
+          "hash": "iWHc/txWc4jsz4ZevXvO4A=="
         }
       },
       "is_incremental": false,
@@ -5800,7 +5800,7 @@
       "output": {
         ".html": {
           "relative_path": "demos/README.html",
-          "hash": "y4Nw7Xz4tgQouU4Yi4o3mw=="
+          "hash": "PQg+NYZ4R6qeZaViQzArTg=="
         }
       },
       "is_incremental": false,
@@ -6014,7 +6014,7 @@
       "output": {
         ".html": {
           "relative_path": "tutorials/azurefunctions/v4processisolatedapponly.html",
-          "hash": "/Qw/e7y+Ay1vDgMGowkNdQ=="
+          "hash": "I7MZqZoUMxlglGrc2RuV8A=="
         }
       },
       "is_incremental": false,
@@ -6181,7 +6181,7 @@
       "output": {
         ".html": {
           "relative_path": "tutorials/readme.html",
-          "hash": "eBPcUIlFhHtsg+erSFJHUg=="
+          "hash": "khNCfnlVPB7W6fY4ttivKA=="
         }
       },
       "is_incremental": false,
