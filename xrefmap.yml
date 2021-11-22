@@ -26685,6 +26685,32 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IPage.AddHeaderControl
   nameWithType: IPage.AddHeaderControl
+- uid: PnP.Core.Model.SharePoint.IPage.AddInlineImage(PnP.Core.Model.SharePoint.IPageText,System.String,PnP.Core.Model.SharePoint.PageImageOptions)
+  name: AddInlineImage(IPageText, String, PageImageOptions)
+  href: api/PnP.Core.Model.SharePoint.IPage.html#PnP_Core_Model_SharePoint_IPage_AddInlineImage_PnP_Core_Model_SharePoint_IPageText_System_String_PnP_Core_Model_SharePoint_PageImageOptions_
+  commentId: M:PnP.Core.Model.SharePoint.IPage.AddInlineImage(PnP.Core.Model.SharePoint.IPageText,System.String,PnP.Core.Model.SharePoint.PageImageOptions)
+  fullName: PnP.Core.Model.SharePoint.IPage.AddInlineImage(PnP.Core.Model.SharePoint.IPageText, System.String, PnP.Core.Model.SharePoint.PageImageOptions)
+  nameWithType: IPage.AddInlineImage(IPageText, String, PageImageOptions)
+- uid: PnP.Core.Model.SharePoint.IPage.AddInlineImage*
+  name: AddInlineImage
+  href: api/PnP.Core.Model.SharePoint.IPage.html#PnP_Core_Model_SharePoint_IPage_AddInlineImage_
+  commentId: Overload:PnP.Core.Model.SharePoint.IPage.AddInlineImage
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IPage.AddInlineImage
+  nameWithType: IPage.AddInlineImage
+- uid: PnP.Core.Model.SharePoint.IPage.AddInlineImageAsync(PnP.Core.Model.SharePoint.IPageText,System.String,PnP.Core.Model.SharePoint.PageImageOptions)
+  name: AddInlineImageAsync(IPageText, String, PageImageOptions)
+  href: api/PnP.Core.Model.SharePoint.IPage.html#PnP_Core_Model_SharePoint_IPage_AddInlineImageAsync_PnP_Core_Model_SharePoint_IPageText_System_String_PnP_Core_Model_SharePoint_PageImageOptions_
+  commentId: M:PnP.Core.Model.SharePoint.IPage.AddInlineImageAsync(PnP.Core.Model.SharePoint.IPageText,System.String,PnP.Core.Model.SharePoint.PageImageOptions)
+  fullName: PnP.Core.Model.SharePoint.IPage.AddInlineImageAsync(PnP.Core.Model.SharePoint.IPageText, System.String, PnP.Core.Model.SharePoint.PageImageOptions)
+  nameWithType: IPage.AddInlineImageAsync(IPageText, String, PageImageOptions)
+- uid: PnP.Core.Model.SharePoint.IPage.AddInlineImageAsync*
+  name: AddInlineImageAsync
+  href: api/PnP.Core.Model.SharePoint.IPage.html#PnP_Core_Model_SharePoint_IPage_AddInlineImageAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.IPage.AddInlineImageAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IPage.AddInlineImageAsync
+  nameWithType: IPage.AddInlineImageAsync
 - uid: PnP.Core.Model.SharePoint.IPage.AddSection(PnP.Core.Model.SharePoint.CanvasSectionTemplate,System.Single)
   name: AddSection(CanvasSectionTemplate, Single)
   href: api/PnP.Core.Model.SharePoint.IPage.html#PnP_Core_Model_SharePoint_IPage_AddSection_PnP_Core_Model_SharePoint_CanvasSectionTemplate_System_Single_
@@ -27017,6 +27043,32 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IPage.GetCommentsAsync
   nameWithType: IPage.GetCommentsAsync
+- uid: PnP.Core.Model.SharePoint.IPage.GetImageWebPart(System.String,PnP.Core.Model.SharePoint.PageImageOptions)
+  name: GetImageWebPart(String, PageImageOptions)
+  href: api/PnP.Core.Model.SharePoint.IPage.html#PnP_Core_Model_SharePoint_IPage_GetImageWebPart_System_String_PnP_Core_Model_SharePoint_PageImageOptions_
+  commentId: M:PnP.Core.Model.SharePoint.IPage.GetImageWebPart(System.String,PnP.Core.Model.SharePoint.PageImageOptions)
+  fullName: PnP.Core.Model.SharePoint.IPage.GetImageWebPart(System.String, PnP.Core.Model.SharePoint.PageImageOptions)
+  nameWithType: IPage.GetImageWebPart(String, PageImageOptions)
+- uid: PnP.Core.Model.SharePoint.IPage.GetImageWebPart*
+  name: GetImageWebPart
+  href: api/PnP.Core.Model.SharePoint.IPage.html#PnP_Core_Model_SharePoint_IPage_GetImageWebPart_
+  commentId: Overload:PnP.Core.Model.SharePoint.IPage.GetImageWebPart
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IPage.GetImageWebPart
+  nameWithType: IPage.GetImageWebPart
+- uid: PnP.Core.Model.SharePoint.IPage.GetImageWebPartAsync(System.String,PnP.Core.Model.SharePoint.PageImageOptions)
+  name: GetImageWebPartAsync(String, PageImageOptions)
+  href: api/PnP.Core.Model.SharePoint.IPage.html#PnP_Core_Model_SharePoint_IPage_GetImageWebPartAsync_System_String_PnP_Core_Model_SharePoint_PageImageOptions_
+  commentId: M:PnP.Core.Model.SharePoint.IPage.GetImageWebPartAsync(System.String,PnP.Core.Model.SharePoint.PageImageOptions)
+  fullName: PnP.Core.Model.SharePoint.IPage.GetImageWebPartAsync(System.String, PnP.Core.Model.SharePoint.PageImageOptions)
+  nameWithType: IPage.GetImageWebPartAsync(String, PageImageOptions)
+- uid: PnP.Core.Model.SharePoint.IPage.GetImageWebPartAsync*
+  name: GetImageWebPartAsync
+  href: api/PnP.Core.Model.SharePoint.IPage.html#PnP_Core_Model_SharePoint_IPage_GetImageWebPartAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.IPage.GetImageWebPartAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IPage.GetImageWebPartAsync
+  nameWithType: IPage.GetImageWebPartAsync
 - uid: PnP.Core.Model.SharePoint.IPage.GetLikedByInformation
   name: GetLikedByInformation()
   href: api/PnP.Core.Model.SharePoint.IPage.html#PnP_Core_Model_SharePoint_IPage_GetLikedByInformation
@@ -28309,6 +28361,19 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IPageWebPart.PropertiesJson
   nameWithType: IPageWebPart.PropertiesJson
+- uid: PnP.Core.Model.SharePoint.IPageWebPart.RichTextEditorInstanceId
+  name: RichTextEditorInstanceId
+  href: api/PnP.Core.Model.SharePoint.IPageWebPart.html#PnP_Core_Model_SharePoint_IPageWebPart_RichTextEditorInstanceId
+  commentId: P:PnP.Core.Model.SharePoint.IPageWebPart.RichTextEditorInstanceId
+  fullName: PnP.Core.Model.SharePoint.IPageWebPart.RichTextEditorInstanceId
+  nameWithType: IPageWebPart.RichTextEditorInstanceId
+- uid: PnP.Core.Model.SharePoint.IPageWebPart.RichTextEditorInstanceId*
+  name: RichTextEditorInstanceId
+  href: api/PnP.Core.Model.SharePoint.IPageWebPart.html#PnP_Core_Model_SharePoint_IPageWebPart_RichTextEditorInstanceId_
+  commentId: Overload:PnP.Core.Model.SharePoint.IPageWebPart.RichTextEditorInstanceId
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IPageWebPart.RichTextEditorInstanceId
+  nameWithType: IPageWebPart.RichTextEditorInstanceId
 - uid: PnP.Core.Model.SharePoint.IPageWebPart.ServerProcessedContent
   name: ServerProcessedContent
   href: api/PnP.Core.Model.SharePoint.IPageWebPart.html#PnP_Core_Model_SharePoint_IPageWebPart_ServerProcessedContent
@@ -36747,6 +36812,49 @@ references:
   commentId: F:PnP.Core.Model.SharePoint.PageHeaderType.None
   fullName: PnP.Core.Model.SharePoint.PageHeaderType.None
   nameWithType: PageHeaderType.None
+- uid: PnP.Core.Model.SharePoint.PageImageAlignment
+  name: PageImageAlignment
+  href: api/PnP.Core.Model.SharePoint.PageImageAlignment.html
+  commentId: T:PnP.Core.Model.SharePoint.PageImageAlignment
+  fullName: PnP.Core.Model.SharePoint.PageImageAlignment
+  nameWithType: PageImageAlignment
+- uid: PnP.Core.Model.SharePoint.PageImageAlignment.Center
+  name: Center
+  href: api/PnP.Core.Model.SharePoint.PageImageAlignment.html#PnP_Core_Model_SharePoint_PageImageAlignment_Center
+  commentId: F:PnP.Core.Model.SharePoint.PageImageAlignment.Center
+  fullName: PnP.Core.Model.SharePoint.PageImageAlignment.Center
+  nameWithType: PageImageAlignment.Center
+- uid: PnP.Core.Model.SharePoint.PageImageAlignment.Left
+  name: Left
+  href: api/PnP.Core.Model.SharePoint.PageImageAlignment.html#PnP_Core_Model_SharePoint_PageImageAlignment_Left
+  commentId: F:PnP.Core.Model.SharePoint.PageImageAlignment.Left
+  fullName: PnP.Core.Model.SharePoint.PageImageAlignment.Left
+  nameWithType: PageImageAlignment.Left
+- uid: PnP.Core.Model.SharePoint.PageImageAlignment.Right
+  name: Right
+  href: api/PnP.Core.Model.SharePoint.PageImageAlignment.html#PnP_Core_Model_SharePoint_PageImageAlignment_Right
+  commentId: F:PnP.Core.Model.SharePoint.PageImageAlignment.Right
+  fullName: PnP.Core.Model.SharePoint.PageImageAlignment.Right
+  nameWithType: PageImageAlignment.Right
+- uid: PnP.Core.Model.SharePoint.PageImageOptions
+  name: PageImageOptions
+  href: api/PnP.Core.Model.SharePoint.PageImageOptions.html
+  commentId: T:PnP.Core.Model.SharePoint.PageImageOptions
+  fullName: PnP.Core.Model.SharePoint.PageImageOptions
+  nameWithType: PageImageOptions
+- uid: PnP.Core.Model.SharePoint.PageImageOptions.Alignment
+  name: Alignment
+  href: api/PnP.Core.Model.SharePoint.PageImageOptions.html#PnP_Core_Model_SharePoint_PageImageOptions_Alignment
+  commentId: P:PnP.Core.Model.SharePoint.PageImageOptions.Alignment
+  fullName: PnP.Core.Model.SharePoint.PageImageOptions.Alignment
+  nameWithType: PageImageOptions.Alignment
+- uid: PnP.Core.Model.SharePoint.PageImageOptions.Alignment*
+  name: Alignment
+  href: api/PnP.Core.Model.SharePoint.PageImageOptions.html#PnP_Core_Model_SharePoint_PageImageOptions_Alignment_
+  commentId: Overload:PnP.Core.Model.SharePoint.PageImageOptions.Alignment
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.PageImageOptions.Alignment
+  nameWithType: PageImageOptions.Alignment
 - uid: PnP.Core.Model.SharePoint.PageLayoutType
   name: PageLayoutType
   href: api/PnP.Core.Model.SharePoint.PageLayoutType.html

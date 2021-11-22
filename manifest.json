@@ -3126,7 +3126,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.IPage.html",
-          "hash": "faQrQUrpAnEfckoYfe8jUw=="
+          "hash": "tf58/oFrcW29mQ+tac5XHw=="
         }
       },
       "is_incremental": false,
@@ -3198,7 +3198,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.IPageWebPart.html",
-          "hash": "hAYdFN6eSZ9voNU9j6ozMA=="
+          "hash": "jlqCpDxpkYjdYlwx0WFPdg=="
         }
       },
       "is_incremental": false,
@@ -3830,6 +3830,30 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.SharePoint.PageImageAlignment.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.SharePoint.PageImageAlignment.html",
+          "hash": "nhIc0JzKRRFa7hECAMm3OQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.SharePoint.PageImageOptions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.SharePoint.PageImageOptions.html",
+          "hash": "bHoY/MqxocPQDGAxc6sekQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/PnP.Core.Model.SharePoint.PageLayoutType.yml",
       "output": {
         ".html": {
@@ -4206,7 +4230,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.html",
-          "hash": "DdoQQ6l12iuzxx98H1Z0eg=="
+          "hash": "b8hyxMa/CJvbofbmqhEt/A=="
         }
       },
       "is_incremental": false,
@@ -5382,7 +5406,7 @@
       "output": {
         ".html": {
           "relative_path": "api/toc.html",
-          "hash": "5Pm60A92xc6U+LIRuLR/TQ=="
+          "hash": "eC0rSp7PCKqxK2vrOSGIAw=="
         }
       },
       "is_incremental": false,
@@ -7000,7 +7024,7 @@
         "ManagedReferenceDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build",
-          "total_file_count": 446,
+          "total_file_count": 448,
           "skipped_file_count": 0
         },
         "ResourceDocumentProcessor": {
