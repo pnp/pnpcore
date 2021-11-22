@@ -343,7 +343,7 @@ namespace PnP.Core.Admin.Model.SharePoint
         {
             List<ISiteCollection> loadedSites = new List<ISiteCollection>();
 
-            ApiCall sitesEnumerationApiCall = new ApiCall("sites", ApiType.Graph);
+            ApiCall sitesEnumerationApiCall = new ApiCall("sites?$select=sharepointIds,id,webUrl,displayName,root", ApiType.Graph);
 
             bool paging = true;
             while (paging)
