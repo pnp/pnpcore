@@ -1270,12 +1270,12 @@ namespace PnP.Core.Test.SharePoint
                 var textPart = page.NewTextPart("");
 
                 // Input validation
-                Assert.ThrowsException<ArgumentNullException>(() => { page.AddInlineImage(null, "/sites/prov-2/siteassets/__siteicon__.png"); });
-                Assert.ThrowsException<ArgumentNullException>(() => { page.AddInlineImage(textPart, null); });
+                Assert.ThrowsException<ArgumentNullException>(() => { page.GetInlineImage(null, "/sites/prov-2/siteassets/__siteicon__.png"); });
+                Assert.ThrowsException<ArgumentNullException>(() => { page.GetInlineImage(textPart, null); });
 
-                var html1 = page.AddInlineImage(textPart, "/sites/prov-2/siteassets/__siteicon__.png");
-                var html2 = page.AddInlineImage(textPart, "/sites/prov-2/siteassets/__siteicon__.png", new PageImageOptions() { Alignment = PageImageAlignment.Left});
-                var html3 = page.AddInlineImage(textPart, "/sites/prov-2/siteassets/__siteicon__.png", new PageImageOptions() { Alignment = PageImageAlignment.Right});
+                var html1 = page.GetInlineImage(textPart, "/sites/prov-2/siteassets/__siteicon__.png");
+                var html2 = page.GetInlineImage(textPart, "/sites/prov-2/siteassets/__siteicon__.png", new PageImageOptions() { Alignment = PageImageAlignment.Left});
+                var html3 = page.GetInlineImage(textPart, "/sites/prov-2/siteassets/__siteicon__.png", new PageImageOptions() { Alignment = PageImageAlignment.Right});
                 string htmlAdded = $"<p>Before inline images</p>{html1}<p>Post image</p>{html2}<p>Post image</p>{html3}<p>Post image</p>";
                 textPart.Text = htmlAdded;
                 page.AddControl(textPart, page.Sections[0].Columns[0]);
@@ -1285,8 +1285,8 @@ namespace PnP.Core.Test.SharePoint
 
                 // Add text with 2 inline images
                 var textPart2 = page.NewTextPart("");
-                var html21 = page.AddInlineImage(textPart2, "/sites/prov-2/siteassets/__siteicon__.png", new PageImageOptions { Alignment = PageImageAlignment.Center});
-                var html22 = page.AddInlineImage(textPart2, "/sites/prov-2/siteassets/__siteicon__.png", new PageImageOptions { Alignment = PageImageAlignment.Left });
+                var html21 = page.GetInlineImage(textPart2, "/sites/prov-2/siteassets/__siteicon__.png", new PageImageOptions { Alignment = PageImageAlignment.Center});
+                var html22 = page.GetInlineImage(textPart2, "/sites/prov-2/siteassets/__siteicon__.png", new PageImageOptions { Alignment = PageImageAlignment.Left });
                 textPart2.Text = $"<p>Before inline images</p>{html21}<p>Post image</p>{html22}<p>Post image</p>";
                 page.AddControl(textPart2, page.Sections[0].Columns[1]);
 

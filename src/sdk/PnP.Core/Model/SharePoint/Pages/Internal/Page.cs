@@ -2636,7 +2636,7 @@ namespace PnP.Core.Model.SharePoint
         #endregion
 
         #region Image handling, including inline
-        public async Task<string> AddInlineImageAsync(IPageText textEditorInstance, string serverRelativeUrl, PageImageOptions imageOptions = null)
+        public async Task<string> GetInlineImageAsync(IPageText textEditorInstance, string serverRelativeUrl, PageImageOptions imageOptions = null)
         {
             if (textEditorInstance == null)
             {
@@ -2658,9 +2658,9 @@ namespace PnP.Core.Model.SharePoint
             return inlineImageHtml.Replace(inlineImageTextControl, inlineImageWebPart.InstanceId.ToString());
         }
 
-        public string AddInlineImage(IPageText textEditorInstance, string serverRelativeUrl, PageImageOptions imageOptions = null)
+        public string GetInlineImage(IPageText textEditorInstance, string serverRelativeUrl, PageImageOptions imageOptions = null)
         {
-            return AddInlineImageAsync(textEditorInstance, serverRelativeUrl, imageOptions).GetAwaiter().GetResult();
+            return GetInlineImageAsync(textEditorInstance, serverRelativeUrl, imageOptions).GetAwaiter().GetResult();
         }
 
         public async Task<IPageWebPart> GetImageWebPartAsync(string serverRelativeUrl, PageImageOptions imageOptions = null)

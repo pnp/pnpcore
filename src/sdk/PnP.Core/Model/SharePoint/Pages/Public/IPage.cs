@@ -577,7 +577,7 @@ namespace PnP.Core.Model.SharePoint
         /// <param name="serverRelativeUrl">Server relative url of the image to add inline</param>
         /// <param name="imageOptions">Options to configure the inline image when being added</param>
         /// <returns>Html snippet to be appended to the text editor content</returns>
-        public Task<string> AddInlineImageAsync(IPageText textEditorInstance, string serverRelativeUrl, PageImageOptions imageOptions = null);
+        public Task<string> GetInlineImageAsync(IPageText textEditorInstance, string serverRelativeUrl, PageImageOptions imageOptions = null);
 
         /// <summary>
         /// Prepares an inline image for adding to text by adding the needed image web part and returning the HTML snippet that needs to be appended to the text editor content
@@ -586,7 +586,7 @@ namespace PnP.Core.Model.SharePoint
         /// <param name="serverRelativeUrl">Server relative url of the image to add inline</param>
         /// <param name="imageOptions">Options to configure the inline image when being added</param>
         /// <returns>Html snippet to be appended to the text editor content</returns>
-        public string AddInlineImage(IPageText textEditorInstance, string serverRelativeUrl, PageImageOptions imageOptions = null);
+        public string GetInlineImage(IPageText textEditorInstance, string serverRelativeUrl, PageImageOptions imageOptions = null);
     }
 
 }
