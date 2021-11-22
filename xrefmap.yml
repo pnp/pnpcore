@@ -26685,32 +26685,6 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IPage.AddHeaderControl
   nameWithType: IPage.AddHeaderControl
-- uid: PnP.Core.Model.SharePoint.IPage.AddInlineImage(PnP.Core.Model.SharePoint.IPageText,System.String,PnP.Core.Model.SharePoint.PageImageOptions)
-  name: AddInlineImage(IPageText, String, PageImageOptions)
-  href: api/PnP.Core.Model.SharePoint.IPage.html#PnP_Core_Model_SharePoint_IPage_AddInlineImage_PnP_Core_Model_SharePoint_IPageText_System_String_PnP_Core_Model_SharePoint_PageImageOptions_
-  commentId: M:PnP.Core.Model.SharePoint.IPage.AddInlineImage(PnP.Core.Model.SharePoint.IPageText,System.String,PnP.Core.Model.SharePoint.PageImageOptions)
-  fullName: PnP.Core.Model.SharePoint.IPage.AddInlineImage(PnP.Core.Model.SharePoint.IPageText, System.String, PnP.Core.Model.SharePoint.PageImageOptions)
-  nameWithType: IPage.AddInlineImage(IPageText, String, PageImageOptions)
-- uid: PnP.Core.Model.SharePoint.IPage.AddInlineImage*
-  name: AddInlineImage
-  href: api/PnP.Core.Model.SharePoint.IPage.html#PnP_Core_Model_SharePoint_IPage_AddInlineImage_
-  commentId: Overload:PnP.Core.Model.SharePoint.IPage.AddInlineImage
-  isSpec: "True"
-  fullName: PnP.Core.Model.SharePoint.IPage.AddInlineImage
-  nameWithType: IPage.AddInlineImage
-- uid: PnP.Core.Model.SharePoint.IPage.AddInlineImageAsync(PnP.Core.Model.SharePoint.IPageText,System.String,PnP.Core.Model.SharePoint.PageImageOptions)
-  name: AddInlineImageAsync(IPageText, String, PageImageOptions)
-  href: api/PnP.Core.Model.SharePoint.IPage.html#PnP_Core_Model_SharePoint_IPage_AddInlineImageAsync_PnP_Core_Model_SharePoint_IPageText_System_String_PnP_Core_Model_SharePoint_PageImageOptions_
-  commentId: M:PnP.Core.Model.SharePoint.IPage.AddInlineImageAsync(PnP.Core.Model.SharePoint.IPageText,System.String,PnP.Core.Model.SharePoint.PageImageOptions)
-  fullName: PnP.Core.Model.SharePoint.IPage.AddInlineImageAsync(PnP.Core.Model.SharePoint.IPageText, System.String, PnP.Core.Model.SharePoint.PageImageOptions)
-  nameWithType: IPage.AddInlineImageAsync(IPageText, String, PageImageOptions)
-- uid: PnP.Core.Model.SharePoint.IPage.AddInlineImageAsync*
-  name: AddInlineImageAsync
-  href: api/PnP.Core.Model.SharePoint.IPage.html#PnP_Core_Model_SharePoint_IPage_AddInlineImageAsync_
-  commentId: Overload:PnP.Core.Model.SharePoint.IPage.AddInlineImageAsync
-  isSpec: "True"
-  fullName: PnP.Core.Model.SharePoint.IPage.AddInlineImageAsync
-  nameWithType: IPage.AddInlineImageAsync
 - uid: PnP.Core.Model.SharePoint.IPage.AddSection(PnP.Core.Model.SharePoint.CanvasSectionTemplate,System.Single)
   name: AddSection(CanvasSectionTemplate, Single)
   href: api/PnP.Core.Model.SharePoint.IPage.html#PnP_Core_Model_SharePoint_IPage_AddSection_PnP_Core_Model_SharePoint_CanvasSectionTemplate_System_Single_
@@ -27069,6 +27043,32 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IPage.GetImageWebPartAsync
   nameWithType: IPage.GetImageWebPartAsync
+- uid: PnP.Core.Model.SharePoint.IPage.GetInlineImage(PnP.Core.Model.SharePoint.IPageText,System.String,PnP.Core.Model.SharePoint.PageImageOptions)
+  name: GetInlineImage(IPageText, String, PageImageOptions)
+  href: api/PnP.Core.Model.SharePoint.IPage.html#PnP_Core_Model_SharePoint_IPage_GetInlineImage_PnP_Core_Model_SharePoint_IPageText_System_String_PnP_Core_Model_SharePoint_PageImageOptions_
+  commentId: M:PnP.Core.Model.SharePoint.IPage.GetInlineImage(PnP.Core.Model.SharePoint.IPageText,System.String,PnP.Core.Model.SharePoint.PageImageOptions)
+  fullName: PnP.Core.Model.SharePoint.IPage.GetInlineImage(PnP.Core.Model.SharePoint.IPageText, System.String, PnP.Core.Model.SharePoint.PageImageOptions)
+  nameWithType: IPage.GetInlineImage(IPageText, String, PageImageOptions)
+- uid: PnP.Core.Model.SharePoint.IPage.GetInlineImage*
+  name: GetInlineImage
+  href: api/PnP.Core.Model.SharePoint.IPage.html#PnP_Core_Model_SharePoint_IPage_GetInlineImage_
+  commentId: Overload:PnP.Core.Model.SharePoint.IPage.GetInlineImage
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IPage.GetInlineImage
+  nameWithType: IPage.GetInlineImage
+- uid: PnP.Core.Model.SharePoint.IPage.GetInlineImageAsync(PnP.Core.Model.SharePoint.IPageText,System.String,PnP.Core.Model.SharePoint.PageImageOptions)
+  name: GetInlineImageAsync(IPageText, String, PageImageOptions)
+  href: api/PnP.Core.Model.SharePoint.IPage.html#PnP_Core_Model_SharePoint_IPage_GetInlineImageAsync_PnP_Core_Model_SharePoint_IPageText_System_String_PnP_Core_Model_SharePoint_PageImageOptions_
+  commentId: M:PnP.Core.Model.SharePoint.IPage.GetInlineImageAsync(PnP.Core.Model.SharePoint.IPageText,System.String,PnP.Core.Model.SharePoint.PageImageOptions)
+  fullName: PnP.Core.Model.SharePoint.IPage.GetInlineImageAsync(PnP.Core.Model.SharePoint.IPageText, System.String, PnP.Core.Model.SharePoint.PageImageOptions)
+  nameWithType: IPage.GetInlineImageAsync(IPageText, String, PageImageOptions)
+- uid: PnP.Core.Model.SharePoint.IPage.GetInlineImageAsync*
+  name: GetInlineImageAsync
+  href: api/PnP.Core.Model.SharePoint.IPage.html#PnP_Core_Model_SharePoint_IPage_GetInlineImageAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.IPage.GetInlineImageAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IPage.GetInlineImageAsync
+  nameWithType: IPage.GetInlineImageAsync
 - uid: PnP.Core.Model.SharePoint.IPage.GetLikedByInformation
   name: GetLikedByInformation()
   href: api/PnP.Core.Model.SharePoint.IPage.html#PnP_Core_Model_SharePoint_IPage_GetLikedByInformation
