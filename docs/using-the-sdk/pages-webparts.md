@@ -81,7 +81,7 @@ var inlineImage = await page.GetInlineImageAsync(textPart, "/sites/prov-2/siteas
 textPart.Text = $"<H1>My header</H1>{inlineImage}<p>Text after image</p>";
 
 // Adding text part control to the first section, first column
-page.AddControl(textPart), page.Sections[0].Columns[0]);
+page.AddControl(textPart, page.Sections[0].Columns[0]);
 
 // Save the page
 await page.SaveAsync("MyPage.aspx");
