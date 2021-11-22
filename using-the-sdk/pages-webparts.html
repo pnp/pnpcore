@@ -128,7 +128,31 @@ page.AddControl(page.NewTextPart(&quot;PnP &lt;span class=\&quot;fontSizeXLargeP
 // Save the page
 await page.SaveAsync(&quot;MyPage.aspx&quot;);
 </code></pre>
+<h3 id="using-inline-images-in-text-parts">Using inline images in text parts</h3>
+<p>During fall 2021 inline images were added to SharePoint providing users the option to include images inside the their text parts. To add an inline image to your text you can use the <code>GetInlineImage</code> methods to configure an image to be added inline. The method returns a html snippet that you can add add to your text part.</p>
+<pre><code class="lang-csharp">// Create the page
+var page = await context.Web.NewPageAsync();
+
+// adding sections to the page
+page.AddSection(CanvasSectionTemplate.OneColumn, 1);
+
+// Create text part
+var textPart = page.NewTextPart();
+
+// Prepare inline image for inserting
+var inlineImage = await page.GetInlineImageAsync(textPart, &quot;/sites/prov-2/siteassets/__siteicon__.png&quot;, new PageImageOptions() { Alignment = PageImageAlignment.Left});
+
+// Insert the inline image in the text part text
+textPart.Text = $&quot;&lt;H1&gt;My header&lt;/H1&gt;{inlineImage}&lt;p&gt;Text after image&lt;/p&gt;&quot;;
+
+// Adding text part control to the first section, first column
+page.AddControl(textPart), page.Sections[0].Columns[0]);
+
+// Save the page
+await page.SaveAsync(&quot;MyPage.aspx&quot;);
+</code></pre>
 <h2 id="working-with-web-parts">Working with web parts</h2>
+<h3 id="generic-instructions-that-apply-for-all-web-parts">Generic instructions that apply for all web parts</h3>
 <p>Adding web parts is quite similar to adding text parts, but the configuration of web parts takes more work. When creating a web part you start from a blueprint of that web part, using the <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IPage.html#PnP_Core_Model_SharePoint_IPage_AvailablePageComponentsAsync_System_String_">AvailablePageComponentsAsync method</a> you can get a list of all the possible web parts that can be added on a page. If you've installed custom web parts on the site hosting the page then these will show up as well in that list.</p>
 <div class="IMPORTANT">
 <h5>Important</h5>
@@ -197,6 +221,23 @@ await page.SaveAsync(&quot;MyPage.aspx&quot;);
 <h5>Note</h5>
 <p>Above approach using the workbench also works good for getting a formatted text snippet.</p>
 </div>
+<h3 id="image-web-part-instructions">Image web part instructions</h3>
+<p>As image web parts are very commonly used on pages, PnP Core SDK provides enhanced support which makes it easier to add an image web part. This enhanced support comes in the form of the <code>GetImageWebPart</code> methods:</p>
+<pre><code class="lang-csharp">// Create the page
+var page = await context.Web.NewPageAsync();
+
+// adding sections to the page
+page.AddSection(CanvasSectionTemplate.OneColumn, 1);
+
+// configure an image web part for a given site relative url
+var image = await GetImageWebPartAsync(&quot;/sites/prov-2/siteassets/__siteicon__.png&quot;, new PageImageOptions { Alignment = PageImageAlignment.Left });
+
+// add the web part to the first column of the first section
+page.AddControl(image, page.Sections[0].Columns[0]);
+
+// Save the page
+await page.SaveAsync(&quot;MyPage.aspx&quot;);
+</code></pre>
 </article>
           </div>
           <div class="hidden-sm col-md-2" role="complementary">
