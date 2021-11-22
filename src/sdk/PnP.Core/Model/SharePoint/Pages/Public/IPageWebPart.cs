@@ -92,5 +92,9 @@ namespace PnP.Core.Model.SharePoint
         /// </summary>
         public bool IsHeaderControl { get; set; }
 
+        /// <summary>
+        /// If this webpart is used inline in a text editor then this property points to the editor using it
+        /// </summary>
+        public string RichTextEditorInstanceId { get; }
     }
 }

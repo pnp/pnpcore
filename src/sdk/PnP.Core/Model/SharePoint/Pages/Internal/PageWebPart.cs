@@ -80,7 +80,7 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// ID of the client side web part
         /// </summary>
-        public string WebPartId { get; private set; }
+        public string WebPartId { get; internal set; }
 
         /// <summary>
         /// Supports full bleed display experience
@@ -166,6 +166,10 @@ namespace PnP.Core.Model.SharePoint
         /// </summary>
         public bool IsHeaderControl { get; set; }
 
+        /// <summary>
+        /// If this webpart is used inline in a text editor then this property points to the editor using it
+        /// </summary>
+        public string RichTextEditorInstanceId { get; internal set; }
         #endregion
 
         #region public methods
@@ -243,6 +247,22 @@ namespace PnP.Core.Model.SharePoint
                     LayoutIndex = Column.LayoutIndex,
                     ControlIndex = controlIndex,
                 };
+
+                if (SpControlData != null)
+                {
+                    controlData.RteInstanceId = SpControlData.RteInstanceId;
+                    controlData.AddedFromPersistedData = SpControlData.AddedFromPersistedData;
+                    controlData.ReservedHeight = SpControlData.ReservedHeight;
+                    controlData.ReservedWidth = SpControlData.ReservedWidth;
+                }
+                else
+                {
+                    if (!string.IsNullOrEmpty(RichTextEditorInstanceId))
+                    {
+                        controlData.RteInstanceId = RichTextEditorInstanceId;
+                        controlData.AddedFromPersistedData = true;
+                    }
+                }
 
                 if (section.Type == CanvasSectionTemplate.OneColumnVerticalSection)
                 {
@@ -360,11 +380,11 @@ namespace PnP.Core.Model.SharePoint
             StringBuilder html = new StringBuilder();
             if (UsingSpControlDataOnly || IsHeaderControl)
             {
-                html.Append($@"<div {CanvasControlAttribute}=""{CanvasControlData}"" {CanvasDataVersionAttribute}=""{DataVersion}"" {ControlDataAttribute}=""{JsonControlData.Replace("\"", "&quot;")}""></div>");
+                html.Append($@"<div {CanvasControlAttribute}=""{CanvasControlData}"" {CanvasDataVersionAttribute}=""{CanvasDataVersion}"" {ControlDataAttribute}=""{JsonControlData.Replace("\"", "&quot;")}""></div>");
             }
             else
             {
-                html.Append($@"<div {CanvasControlAttribute}=""{CanvasControlData}"" {CanvasDataVersionAttribute}=""{DataVersion}"" {ControlDataAttribute}=""{JsonControlData.Replace("\"", "&quot;")}"">");
+                html.Append($@"<div {CanvasControlAttribute}=""{CanvasControlData}"" {CanvasDataVersionAttribute}=""{CanvasDataVersion}"" {ControlDataAttribute}=""{JsonControlData.Replace("\"", "&quot;")}"">");
                 html.Append($@"<div {WebPartAttribute}=""{WebPartData}"" {WebPartDataVersionAttribute}=""{DataVersion}"" {WebPartDataAttribute}=""{JsonWebPartData.Replace("\"", "&quot;").Replace("<", "&lt;").Replace(">", "&gt;")}"">");
                 html.Append($@"<div {WebPartComponentIdAttribute}="""">");
                 html.Append(WebPartId);
@@ -450,6 +470,7 @@ namespace PnP.Core.Model.SharePoint
 
             SpControlData = JsonSerializer.Deserialize<WebPartControlData>(element.GetAttribute(ControlDataAttribute), PnPConstants.JsonSerializer_IgnoreNullValues);
             controlType = SpControlData.ControlType;
+            RichTextEditorInstanceId = SpControlData.RteInstanceId;
 
             var wpDiv = element.GetElementsByTagName("div").FirstOrDefault(a => a.HasAttribute(WebPartDataAttribute));
 

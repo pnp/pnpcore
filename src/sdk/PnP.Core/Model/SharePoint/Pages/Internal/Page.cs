@@ -18,6 +18,9 @@ namespace PnP.Core.Model.SharePoint
 {
     internal sealed class Page : IPage
     {
+        private const string inlineImageHtml = "<div tabindex=\"-1\" data-cke-widget-wrapper=\"1\" data-cke-filter=\"off\" class=\"cke_widget_wrapper cke_widget_block cke_widget_inlineimage cke_widget_wrapper_webPartInRteInlineImage cke_widget_wrapper_webPartInRteAlignCenter cke_widget_wrapper_webPartInRte\" data-cke-display-name=\"div\" data-cke-widget-id=\"0\" role=\"region\" aria-label=\"Inline image in RTE. Use Alt + F11 to go to toolbar. Use Alt + P to open the property pane.\"><div data-webpart-id=\"image\" class=\"webPartInRte webPartInRteAlignCenter webPartInRteInlineImage cke_widget_element\" data-cke-widget-data=\"%7B%22classes%22%3A%7B%22webPartInRteInlineImage%22%3A1%2C%22webPartInRteAlignCenter%22%3A1%2C%22webPartInRte%22%3A1%7D%7D\" data-cke-widget-upcasted=\"1\" data-cke-widget-keep-attr=\"0\" data-widget=\"inlineimage\" data-instance-id=\"{TextEditorInstanceId}\" title=\"\"></div></div>";
+        private const string inlineImageTextControl = "{TextEditorInstanceId}";
+
         private bool isDefaultDescription;
         private string pageTitle;
         private string pageName;
@@ -709,6 +712,8 @@ namespace PnP.Core.Model.SharePoint
                 (control as CanvasControl).column = DefaultSection.DefaultColumn;
             }
 
+            ProcessPageTextInlineControls(control);
+
             Controls.Add(control);
         }
 
@@ -735,6 +740,8 @@ namespace PnP.Core.Model.SharePoint
             }
             control.Order = order;
 
+            ProcessPageTextInlineControls(control);
+
             Controls.Add(control);
         }
 
@@ -756,6 +763,8 @@ namespace PnP.Core.Model.SharePoint
 
             (control as CanvasControl).section = section;
             (control as CanvasControl).column = section.DefaultColumn;
+
+            ProcessPageTextInlineControls(control);
 
             Controls.Add(control);
         }
@@ -781,6 +790,8 @@ namespace PnP.Core.Model.SharePoint
             (control as CanvasControl).column = section.DefaultColumn;
             control.Order = order;
 
+            ProcessPageTextInlineControls(control);
+
             Controls.Add(control);
         }
 
@@ -802,6 +813,8 @@ namespace PnP.Core.Model.SharePoint
 
             (control as CanvasControl).section = column.Section;
             (control as CanvasControl).column = column;
+
+            ProcessPageTextInlineControls(control);
 
             Controls.Add(control);
         }
@@ -2620,6 +2633,90 @@ namespace PnP.Core.Model.SharePoint
             string str = Convert.ToBase64String(input).Split(new char[] { '=' })[0];
             return str.Replace('+', '-').Replace('/', '_');
         }
+        #endregion
+
+        #region Image handling, including inline
+        public async Task<string> AddInlineImageAsync(IPageText textEditorInstance, string serverRelativeUrl, PageImageOptions imageOptions = null)
+        {
+            if (textEditorInstance == null)
+            {
+                throw new ArgumentNullException(nameof(textEditorInstance));
+            }
+
+            if (string.IsNullOrEmpty(serverRelativeUrl))
+            {
+                throw new ArgumentNullException(nameof(serverRelativeUrl));
+            }
+
+            var inlineImageWebPart = await GetImageWebPartAsync(serverRelativeUrl, imageOptions).ConfigureAwait(false);
+            (inlineImageWebPart as PageWebPart).RichTextEditorInstanceId = textEditorInstance.InstanceId.ToString();
+
+            // Add the image web part to collection of inline web parts
+            (textEditorInstance as PageText).InlineWebParts.Add(inlineImageWebPart as PageWebPart);
+
+            // Prepare the text snippet to insert
+            return inlineImageHtml.Replace(inlineImageTextControl, inlineImageWebPart.InstanceId.ToString());
+        }
+
+        public string AddInlineImage(IPageText textEditorInstance, string serverRelativeUrl, PageImageOptions imageOptions = null)
+        {
+            return AddInlineImageAsync(textEditorInstance, serverRelativeUrl, imageOptions).GetAwaiter().GetResult();
+        }
+
+        public async Task<IPageWebPart> GetImageWebPartAsync(string serverRelativeUrl, PageImageOptions imageOptions = null)
+        {
+            if (string.IsNullOrEmpty(serverRelativeUrl))
+            {
+                throw new ArgumentNullException(nameof(serverRelativeUrl));
+            }
+
+            // Find the server relative image
+            var image = await PnPContext.Web.GetFileByServerRelativeUrlAsync(serverRelativeUrl, p => p.UniqueId, p => p.ListId).ConfigureAwait(false);
+
+            if (imageOptions == null)
+            {
+                imageOptions = new PageImageOptions();
+            }
+
+            // Prepare configuration for the image web part
+            string inlineImageWebPart = "{\"webPartData\":{\"serverProcessedContent\":{\"htmlStrings\":{},\"searchablePlainTexts\":{},\"imageSources\":{\"imageSource\":\"{FullyQualifiedImageUrl}\"},\"links\":{},\"customMetadata\":{\"imageSource\":{\"siteId\":\"{SiteId}\",\"webId\":\"{WebId}\",\"listId\":\"{{ListId}}\",\"uniqueId\":\"{UniqueId}\",\"imgWidth\":-1,\"imgHeight\":-1}}},\"dataVersion\":\"1.9\",\"properties\":{\"imageSourceType\":2,\"captionText\":\"\",\"altText\":\"\",\"linkUrl\":\"\",\"overlayText\":\"\",\"fileName\":\"\",\"siteId\":\"{SiteId}\",\"webId\":\"{WebId}\",\"listId\":\"{{ListId}}\",\"uniqueId\":\"{UniqueId}\",\"imgWidth\":-1,\"imgHeight\":-1,\"alignment\":\"{Alignment}\",\"fixAspectRatio\":false}}}";
+            inlineImageWebPart = inlineImageWebPart
+                                   .Replace("{FullyQualifiedImageUrl}", $"https://{PnPContext.Uri.DnsSafeHost}{serverRelativeUrl}")
+                                   .Replace("{Alignment}", imageOptions.Alignment.ToString())
+                                   .Replace("{SiteId}", PnPContext.Site.Id.ToString())
+                                   .Replace("{WebId}", PnPContext.Web.Id.ToString())
+                                   .Replace("{ListId}", image.ListId.ToString())
+                                   .Replace("{UniqueId}", image.UniqueId.ToString());
+
+            // Create the web part
+            var webPart = NewWebPart();
+            (webPart as PageWebPart).WebPartId = WebPartEnumToId(DefaultWebPart.Image);            
+            webPart.PropertiesJson = inlineImageWebPart;
+
+            return webPart;
+        }
+
+        public IPageWebPart GetImageWebPart(string serverRelativeUrl, PageImageOptions imageOptions = null)
+        {
+            return GetImageWebPartAsync(serverRelativeUrl, imageOptions).GetAwaiter().GetResult();
+        }
+
+        private void ProcessPageTextInlineControls(ICanvasControl control)
+        {
+            if (control is PageText pageText)
+            {
+                if (pageText.InlineWebParts.Any())
+                {
+                    foreach (var webPart in pageText.InlineWebParts)
+                    {
+                        webPart.section = control.Section;
+                        webPart.column = control.Column;
+                        Controls.Add(webPart);
+                    }
+                }
+            }
+        }
+
         #endregion
 
         #endregion
