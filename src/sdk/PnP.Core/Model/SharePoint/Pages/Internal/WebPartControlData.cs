@@ -12,5 +12,17 @@ namespace PnP.Core.Model.SharePoint
         /// </summary>
         [JsonPropertyName("webPartId")]
         public string WebPartId { get; set; }
+
+        [JsonPropertyName("rteInstanceId")]
+        public string RteInstanceId { get; set; }
+
+        [JsonPropertyName("addedFromPersistedData")]
+        public bool AddedFromPersistedData { get; set; }
+
+        [JsonPropertyName("reservedHeight")]
+        public int ReservedHeight { get; set; }
+
+        [JsonPropertyName("reservedWidth")]
+        public int ReservedWidth { get; set; }
     }
 }

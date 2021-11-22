@@ -553,6 +553,40 @@ namespace PnP.Core.Model.SharePoint
         /// </summary>
         /// <returns></returns>
         public ILikedByInformation GetLikedByInformation();
+
+        /// <summary>
+        /// Prepares an Image web part for adding to a page
+        /// </summary>
+        /// <param name="serverRelativeUrl">Server relative url of the image to show in the image web part</param>
+        /// <param name="imageOptions">Options to configure the image when being added</param>
+        /// <returns>Configured image web part which can be added to the page</returns>
+        public Task<IPageWebPart> GetImageWebPartAsync(string serverRelativeUrl, PageImageOptions imageOptions = null);
+
+        /// <summary>
+        /// Prepares an Image web part for adding to a page
+        /// </summary>
+        /// <param name="serverRelativeUrl">Server relative url of the image to show in the image web part</param>
+        /// <param name="imageOptions">Options to configure the image when being added</param>
+        /// <returns>Configured image web part which can be added to the page</returns>
+        public IPageWebPart GetImageWebPart(string serverRelativeUrl, PageImageOptions imageOptions = null);
+
+        /// <summary>
+        /// Prepares an inline image for adding to text by adding the needed image web part and returning the HTML snippet that needs to be appended to the text editor content
+        /// </summary>
+        /// <param name="textEditorInstance">Text editor instance to add the inline image to</param>
+        /// <param name="serverRelativeUrl">Server relative url of the image to add inline</param>
+        /// <param name="imageOptions">Options to configure the inline image when being added</param>
+        /// <returns>Html snippet to be appended to the text editor content</returns>
+        public Task<string> AddInlineImageAsync(IPageText textEditorInstance, string serverRelativeUrl, PageImageOptions imageOptions = null);
+
+        /// <summary>
+        /// Prepares an inline image for adding to text by adding the needed image web part and returning the HTML snippet that needs to be appended to the text editor content
+        /// </summary>
+        /// <param name="textEditorInstance">Text editor instance to add the inline image to</param>
+        /// <param name="serverRelativeUrl">Server relative url of the image to add inline</param>
+        /// <param name="imageOptions">Options to configure the inline image when being added</param>
+        /// <returns>Html snippet to be appended to the text editor content</returns>
+        public string AddInlineImage(IPageText textEditorInstance, string serverRelativeUrl, PageImageOptions imageOptions = null);
     }
 
 }

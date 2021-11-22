@@ -1255,6 +1255,65 @@ namespace PnP.Core.Test.SharePoint
                 await page.DeleteAsync();
             }
         }
+
+        [TestMethod]
+        public async Task PageTextWithInlineImageTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var page = await context.Web.NewPageAsync();
+                string pageName = TestCommon.GetPnPSdkTestAssetName("PageTextWithInlineImageTest.aspx");
+                page.AddSection(CanvasSectionTemplate.TwoColumn, 1);
+
+                // Add text with 3 inline images
+                var textPart = page.NewTextPart("");
+
+                // Input validation
+                Assert.ThrowsException<ArgumentNullException>(() => { page.AddInlineImage(null, "/sites/prov-2/siteassets/__siteicon__.png"); });
+                Assert.ThrowsException<ArgumentNullException>(() => { page.AddInlineImage(textPart, null); });
+
+                var html1 = page.AddInlineImage(textPart, "/sites/prov-2/siteassets/__siteicon__.png");
+                var html2 = page.AddInlineImage(textPart, "/sites/prov-2/siteassets/__siteicon__.png", new PageImageOptions() { Alignment = PageImageAlignment.Left});
+                var html3 = page.AddInlineImage(textPart, "/sites/prov-2/siteassets/__siteicon__.png", new PageImageOptions() { Alignment = PageImageAlignment.Right});
+                string htmlAdded = $"<p>Before inline images</p>{html1}<p>Post image</p>{html2}<p>Post image</p>{html3}<p>Post image</p>";
+                textPart.Text = htmlAdded;
+                page.AddControl(textPart, page.Sections[0].Columns[0]);
+
+                // Add simple text
+                page.AddControl(page.NewTextPart("Second editor in this column"), page.Sections[0].Columns[0]);
+
+                // Add text with 2 inline images
+                var textPart2 = page.NewTextPart("");
+                var html21 = page.AddInlineImage(textPart2, "/sites/prov-2/siteassets/__siteicon__.png", new PageImageOptions { Alignment = PageImageAlignment.Center});
+                var html22 = page.AddInlineImage(textPart2, "/sites/prov-2/siteassets/__siteicon__.png", new PageImageOptions { Alignment = PageImageAlignment.Left });
+                textPart2.Text = $"<p>Before inline images</p>{html21}<p>Post image</p>{html22}<p>Post image</p>";
+                page.AddControl(textPart2, page.Sections[0].Columns[1]);
+
+                page.AddSection(CanvasSectionTemplate.TwoColumn, 2);
+
+                // Input validation
+                Assert.ThrowsException<ArgumentNullException>(() => { page.GetImageWebPart(null); });
+
+                page.AddControl(page.GetImageWebPart("/sites/prov-2/siteassets/__siteicon__.png", new PageImageOptions { Alignment = PageImageAlignment.Left }), page.Sections[1].Columns[0]);
+                page.AddControl(page.GetImageWebPart("/sites/prov-2/siteassets/__siteicon__.png"), page.Sections[1].Columns[1]);
+
+                // Persist the page
+                await page.SaveAsync(pageName);
+
+                // load the page again and verify
+                var pages = await context.Web.GetPagesAsync(pageName);
+                var createdPage = pages.First();
+
+                Assert.IsTrue(!string.IsNullOrEmpty((createdPage.Sections[0].Columns[0].Controls[0] as PageWebPart).RichTextEditorInstanceId));
+
+                // Clone the page
+                await createdPage.SaveAsync(TestCommon.GetPnPSdkTestAssetName("ClonePageTextWithInlineImageTest.aspx"));
+
+                await page.DeleteAsync();
+                await createdPage.DeleteAsync();
+            }
+        }
         #endregion
 
         #region Page Header handling
