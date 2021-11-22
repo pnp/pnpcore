@@ -151,7 +151,7 @@ services.AddPnPCoreAuthentication(
                 TenantId = &quot;{your_tenant_id}&quot;,
                 Interactive = new PnPCoreAuthenticationInteractiveOptions
                 {
-                    RedirectUri = &quot;http://localhost&quot;
+                    RedirectUri = new Uri(&quot;http://localhost&quot;)
                 }
             });
 
