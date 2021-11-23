@@ -49,6 +49,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Fix: multi value lookup only persisted first lookup value #628 [jansenbe - Bert Jansen]
 - Fix: LINQ queries on the sub webs (webs) now work ~ improved logic that chooses between REST and Graph #631 [jansenbe - Bert Jansen]
 - Http clients and retry handlers never got their logger assigned, fixed now so that for example throttling will show in logs [jansenbe - Bert Jansen]
+- Increased reliability via retry on SocketException in SendAsync #650 [patrikhellgren - Patrik Hellgren]
 
 ## [1.4.0]
 
