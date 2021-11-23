@@ -18721,6 +18721,19 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IField.AllowMultipleValues
   nameWithType: IField.AllowMultipleValues
+- uid: PnP.Core.Model.SharePoint.IField.AnchorId
+  name: AnchorId
+  href: api/PnP.Core.Model.SharePoint.IField.html#PnP_Core_Model_SharePoint_IField_AnchorId
+  commentId: P:PnP.Core.Model.SharePoint.IField.AnchorId
+  fullName: PnP.Core.Model.SharePoint.IField.AnchorId
+  nameWithType: IField.AnchorId
+- uid: PnP.Core.Model.SharePoint.IField.AnchorId*
+  name: AnchorId
+  href: api/PnP.Core.Model.SharePoint.IField.html#PnP_Core_Model_SharePoint_IField_AnchorId_
+  commentId: Overload:PnP.Core.Model.SharePoint.IField.AnchorId
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IField.AnchorId
+  nameWithType: IField.AnchorId
 - uid: PnP.Core.Model.SharePoint.IField.AppendOnly
   name: AppendOnly
   href: api/PnP.Core.Model.SharePoint.IField.html#PnP_Core_Model_SharePoint_IField_AppendOnly
@@ -18825,6 +18838,19 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IField.ClientValidationMessage
   nameWithType: IField.ClientValidationMessage
+- uid: PnP.Core.Model.SharePoint.IField.CreateValuesInEditForm
+  name: CreateValuesInEditForm
+  href: api/PnP.Core.Model.SharePoint.IField.html#PnP_Core_Model_SharePoint_IField_CreateValuesInEditForm
+  commentId: P:PnP.Core.Model.SharePoint.IField.CreateValuesInEditForm
+  fullName: PnP.Core.Model.SharePoint.IField.CreateValuesInEditForm
+  nameWithType: IField.CreateValuesInEditForm
+- uid: PnP.Core.Model.SharePoint.IField.CreateValuesInEditForm*
+  name: CreateValuesInEditForm
+  href: api/PnP.Core.Model.SharePoint.IField.html#PnP_Core_Model_SharePoint_IField_CreateValuesInEditForm_
+  commentId: Overload:PnP.Core.Model.SharePoint.IField.CreateValuesInEditForm
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IField.CreateValuesInEditForm
+  nameWithType: IField.CreateValuesInEditForm
 - uid: PnP.Core.Model.SharePoint.IField.CurrencyLocaleId
   name: CurrencyLocaleId
   href: api/PnP.Core.Model.SharePoint.IField.html#PnP_Core_Model_SharePoint_IField_CurrencyLocaleId
@@ -19163,6 +19189,19 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IField.InternalName
   nameWithType: IField.InternalName
+- uid: PnP.Core.Model.SharePoint.IField.IsAnchorValid
+  name: IsAnchorValid
+  href: api/PnP.Core.Model.SharePoint.IField.html#PnP_Core_Model_SharePoint_IField_IsAnchorValid
+  commentId: P:PnP.Core.Model.SharePoint.IField.IsAnchorValid
+  fullName: PnP.Core.Model.SharePoint.IField.IsAnchorValid
+  nameWithType: IField.IsAnchorValid
+- uid: PnP.Core.Model.SharePoint.IField.IsAnchorValid*
+  name: IsAnchorValid
+  href: api/PnP.Core.Model.SharePoint.IField.html#PnP_Core_Model_SharePoint_IField_IsAnchorValid_
+  commentId: Overload:PnP.Core.Model.SharePoint.IField.IsAnchorValid
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IField.IsAnchorValid
+  nameWithType: IField.IsAnchorValid
 - uid: PnP.Core.Model.SharePoint.IField.IsDependentLookup
   name: IsDependentLookup
   href: api/PnP.Core.Model.SharePoint.IField.html#PnP_Core_Model_SharePoint_IField_IsDependentLookup
@@ -19176,6 +19215,32 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IField.IsDependentLookup
   nameWithType: IField.IsDependentLookup
+- uid: PnP.Core.Model.SharePoint.IField.IsKeyword
+  name: IsKeyword
+  href: api/PnP.Core.Model.SharePoint.IField.html#PnP_Core_Model_SharePoint_IField_IsKeyword
+  commentId: P:PnP.Core.Model.SharePoint.IField.IsKeyword
+  fullName: PnP.Core.Model.SharePoint.IField.IsKeyword
+  nameWithType: IField.IsKeyword
+- uid: PnP.Core.Model.SharePoint.IField.IsKeyword*
+  name: IsKeyword
+  href: api/PnP.Core.Model.SharePoint.IField.html#PnP_Core_Model_SharePoint_IField_IsKeyword_
+  commentId: Overload:PnP.Core.Model.SharePoint.IField.IsKeyword
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IField.IsKeyword
+  nameWithType: IField.IsKeyword
+- uid: PnP.Core.Model.SharePoint.IField.IsPathRendered
+  name: IsPathRendered
+  href: api/PnP.Core.Model.SharePoint.IField.html#PnP_Core_Model_SharePoint_IField_IsPathRendered
+  commentId: P:PnP.Core.Model.SharePoint.IField.IsPathRendered
+  fullName: PnP.Core.Model.SharePoint.IField.IsPathRendered
+  nameWithType: IField.IsPathRendered
+- uid: PnP.Core.Model.SharePoint.IField.IsPathRendered*
+  name: IsPathRendered
+  href: api/PnP.Core.Model.SharePoint.IField.html#PnP_Core_Model_SharePoint_IField_IsPathRendered_
+  commentId: Overload:PnP.Core.Model.SharePoint.IField.IsPathRendered
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IField.IsPathRendered
+  nameWithType: IField.IsPathRendered
 - uid: PnP.Core.Model.SharePoint.IField.IsRelationship
   name: IsRelationship
   href: api/PnP.Core.Model.SharePoint.IField.html#PnP_Core_Model_SharePoint_IField_IsRelationship
@@ -19189,6 +19254,19 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IField.IsRelationship
   nameWithType: IField.IsRelationship
+- uid: PnP.Core.Model.SharePoint.IField.IsTermSetValid
+  name: IsTermSetValid
+  href: api/PnP.Core.Model.SharePoint.IField.html#PnP_Core_Model_SharePoint_IField_IsTermSetValid
+  commentId: P:PnP.Core.Model.SharePoint.IField.IsTermSetValid
+  fullName: PnP.Core.Model.SharePoint.IField.IsTermSetValid
+  nameWithType: IField.IsTermSetValid
+- uid: PnP.Core.Model.SharePoint.IField.IsTermSetValid*
+  name: IsTermSetValid
+  href: api/PnP.Core.Model.SharePoint.IField.html#PnP_Core_Model_SharePoint_IField_IsTermSetValid_
+  commentId: Overload:PnP.Core.Model.SharePoint.IField.IsTermSetValid
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IField.IsTermSetValid
+  nameWithType: IField.IsTermSetValid
 - uid: PnP.Core.Model.SharePoint.IField.JSLink
   name: JSLink
   href: api/PnP.Core.Model.SharePoint.IField.html#PnP_Core_Model_SharePoint_IField_JSLink
@@ -19395,6 +19473,19 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IField.NumberOfLines
   nameWithType: IField.NumberOfLines
+- uid: PnP.Core.Model.SharePoint.IField.Open
+  name: Open
+  href: api/PnP.Core.Model.SharePoint.IField.html#PnP_Core_Model_SharePoint_IField_Open
+  commentId: P:PnP.Core.Model.SharePoint.IField.Open
+  fullName: PnP.Core.Model.SharePoint.IField.Open
+  nameWithType: IField.Open
+- uid: PnP.Core.Model.SharePoint.IField.Open*
+  name: Open
+  href: api/PnP.Core.Model.SharePoint.IField.html#PnP_Core_Model_SharePoint_IField_Open_
+  commentId: Overload:PnP.Core.Model.SharePoint.IField.Open
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IField.Open
+  nameWithType: IField.Open
 - uid: PnP.Core.Model.SharePoint.IField.OutputType
   name: OutputType
   href: api/PnP.Core.Model.SharePoint.IField.html#PnP_Core_Model_SharePoint_IField_OutputType
@@ -19603,6 +19694,19 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IField.Sortable
   nameWithType: IField.Sortable
+- uid: PnP.Core.Model.SharePoint.IField.SspId
+  name: SspId
+  href: api/PnP.Core.Model.SharePoint.IField.html#PnP_Core_Model_SharePoint_IField_SspId
+  commentId: P:PnP.Core.Model.SharePoint.IField.SspId
+  fullName: PnP.Core.Model.SharePoint.IField.SspId
+  nameWithType: IField.SspId
+- uid: PnP.Core.Model.SharePoint.IField.SspId*
+  name: SspId
+  href: api/PnP.Core.Model.SharePoint.IField.html#PnP_Core_Model_SharePoint_IField_SspId_
+  commentId: Overload:PnP.Core.Model.SharePoint.IField.SspId
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IField.SspId
+  nameWithType: IField.SspId
 - uid: PnP.Core.Model.SharePoint.IField.StaticName
   name: StaticName
   href: api/PnP.Core.Model.SharePoint.IField.html#PnP_Core_Model_SharePoint_IField_StaticName
@@ -19616,6 +19720,45 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IField.StaticName
   nameWithType: IField.StaticName
+- uid: PnP.Core.Model.SharePoint.IField.TargetTemplate
+  name: TargetTemplate
+  href: api/PnP.Core.Model.SharePoint.IField.html#PnP_Core_Model_SharePoint_IField_TargetTemplate
+  commentId: P:PnP.Core.Model.SharePoint.IField.TargetTemplate
+  fullName: PnP.Core.Model.SharePoint.IField.TargetTemplate
+  nameWithType: IField.TargetTemplate
+- uid: PnP.Core.Model.SharePoint.IField.TargetTemplate*
+  name: TargetTemplate
+  href: api/PnP.Core.Model.SharePoint.IField.html#PnP_Core_Model_SharePoint_IField_TargetTemplate_
+  commentId: Overload:PnP.Core.Model.SharePoint.IField.TargetTemplate
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IField.TargetTemplate
+  nameWithType: IField.TargetTemplate
+- uid: PnP.Core.Model.SharePoint.IField.TermSetId
+  name: TermSetId
+  href: api/PnP.Core.Model.SharePoint.IField.html#PnP_Core_Model_SharePoint_IField_TermSetId
+  commentId: P:PnP.Core.Model.SharePoint.IField.TermSetId
+  fullName: PnP.Core.Model.SharePoint.IField.TermSetId
+  nameWithType: IField.TermSetId
+- uid: PnP.Core.Model.SharePoint.IField.TermSetId*
+  name: TermSetId
+  href: api/PnP.Core.Model.SharePoint.IField.html#PnP_Core_Model_SharePoint_IField_TermSetId_
+  commentId: Overload:PnP.Core.Model.SharePoint.IField.TermSetId
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IField.TermSetId
+  nameWithType: IField.TermSetId
+- uid: PnP.Core.Model.SharePoint.IField.TextField
+  name: TextField
+  href: api/PnP.Core.Model.SharePoint.IField.html#PnP_Core_Model_SharePoint_IField_TextField
+  commentId: P:PnP.Core.Model.SharePoint.IField.TextField
+  fullName: PnP.Core.Model.SharePoint.IField.TextField
+  nameWithType: IField.TextField
+- uid: PnP.Core.Model.SharePoint.IField.TextField*
+  name: TextField
+  href: api/PnP.Core.Model.SharePoint.IField.html#PnP_Core_Model_SharePoint_IField_TextField_
+  commentId: Overload:PnP.Core.Model.SharePoint.IField.TextField
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IField.TextField
+  nameWithType: IField.TextField
 - uid: PnP.Core.Model.SharePoint.IField.Title
   name: Title
   href: api/PnP.Core.Model.SharePoint.IField.html#PnP_Core_Model_SharePoint_IField_Title
@@ -19681,6 +19824,19 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IField.UnlimitedLengthInDocumentLibrary
   nameWithType: IField.UnlimitedLengthInDocumentLibrary
+- uid: PnP.Core.Model.SharePoint.IField.UserCreated
+  name: UserCreated
+  href: api/PnP.Core.Model.SharePoint.IField.html#PnP_Core_Model_SharePoint_IField_UserCreated
+  commentId: P:PnP.Core.Model.SharePoint.IField.UserCreated
+  fullName: PnP.Core.Model.SharePoint.IField.UserCreated
+  nameWithType: IField.UserCreated
+- uid: PnP.Core.Model.SharePoint.IField.UserCreated*
+  name: UserCreated
+  href: api/PnP.Core.Model.SharePoint.IField.html#PnP_Core_Model_SharePoint_IField_UserCreated_
+  commentId: Overload:PnP.Core.Model.SharePoint.IField.UserCreated
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IField.UserCreated
+  nameWithType: IField.UserCreated
 - uid: PnP.Core.Model.SharePoint.IField.ValidationFormula
   name: ValidationFormula
   href: api/PnP.Core.Model.SharePoint.IField.html#PnP_Core_Model_SharePoint_IField_ValidationFormula
