@@ -128,14 +128,25 @@ namespace PnP.Core
         /// Cached JsonSerializerOptions for performance using IgnoreNullValues = true
         /// See https://github.com/dotnet/runtime/issues/38982 and https://www.meziantou.net/avoid-performance-issue-with-jsonserializer-by-reusing-the-same-instance-of-json.htm
         /// </summary>
-        internal static JsonSerializerOptions JsonSerializer_IgnoreNullValues = new JsonSerializerOptions() { IgnoreNullValues = true };
+        internal static JsonSerializerOptions JsonSerializer_IgnoreNullValues = new JsonSerializerOptions
+        {
+#if NET5_0_OR_GREATER
+            DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull
+#else
+            IgnoreNullValues = true
+#endif
+        };
 
         /// <summary>
         /// Cached JsonSerializerOptions for performance using IgnoreNullValues = true and PropertyNamingPolicy = JsonNamingPolicy.CamelCase
         /// </summary>
         internal static JsonSerializerOptions JsonSerializer_IgnoreNullValues_CamelCase = new JsonSerializerOptions()
         {
+#if NET5_0_OR_GREATER
+            DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
+#else
             IgnoreNullValues = true,
+#endif
             PropertyNamingPolicy = JsonNamingPolicy.CamelCase
         };
 
@@ -154,7 +165,11 @@ namespace PnP.Core
         /// </summary>
         internal static JsonSerializerOptions JsonSerializer_IgnoreNullValues_StringEnumConvertor = new JsonSerializerOptions()
         {
+#if NET5_0_OR_GREATER
+            DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
+#else
             IgnoreNullValues = true,
+#endif
             Converters =
             {
                 new JsonStringEnumConverter()
@@ -199,7 +214,11 @@ namespace PnP.Core
         /// </summary>
         internal static JsonSerializerOptions JsonSerializer_IgnoreNullValues_SharePointRestCollectionJsonConverter_JsonStringEnumConverter = new JsonSerializerOptions()
         {
+#if NET5_0_OR_GREATER
+            DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
+#else
             IgnoreNullValues = true,
+#endif
             Converters =
             {
                 new SharePointRestCollectionJsonConverter<string>(),
@@ -207,6 +226,6 @@ namespace PnP.Core
             }
         };
 
-        #endregion
+#endregion
     }
 }

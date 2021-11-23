@@ -8,6 +8,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -183,7 +184,7 @@ namespace PnP.Core.Test.Base
                             // deserialize the mock data
                             JsonSerializerOptions options = new JsonSerializerOptions()
                             {
-                                IgnoreNullValues = true,
+                                DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
                                 PropertyNamingPolicy = JsonNamingPolicy.CamelCase
                             };
                             var graphBatchResponses = JsonSerializer.Deserialize<BatchClient.GraphBatchResponses>(input, options);
@@ -245,7 +246,7 @@ namespace PnP.Core.Test.Base
                             // deserialize the mock data
                             JsonSerializerOptions options = new JsonSerializerOptions()
                             {
-                                IgnoreNullValues = true,
+                                DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
                                 PropertyNamingPolicy = JsonNamingPolicy.CamelCase
                             };
                             var graphBatchResponses = JsonSerializer.Deserialize<BatchClient.GraphBatchResponses>(input, options);
@@ -307,7 +308,7 @@ namespace PnP.Core.Test.Base
                             // deserialize the mock data
                             JsonSerializerOptions options = new JsonSerializerOptions()
                             {
-                                IgnoreNullValues = true,
+                                DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
                                 PropertyNamingPolicy = JsonNamingPolicy.CamelCase
                             };
                             var graphBatchResponses = JsonSerializer.Deserialize<BatchClient.GraphBatchResponses>(input, options);
@@ -359,7 +360,7 @@ namespace PnP.Core.Test.Base
                             // deserialize the mock data
                             JsonSerializerOptions options = new JsonSerializerOptions()
                             {
-                                IgnoreNullValues = true,
+                                DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
                                 PropertyNamingPolicy = JsonNamingPolicy.CamelCase
                             };
                             var graphBatchResponses = JsonSerializer.Deserialize<BatchClient.GraphBatchResponses>(input, options);

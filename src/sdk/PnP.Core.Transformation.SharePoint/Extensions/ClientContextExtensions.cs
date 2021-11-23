@@ -31,7 +31,6 @@ namespace PnP.Core.Transformation.SharePoint.Extensions
         /// <summary>
         /// Static constructor, only executed once per class load
         /// </summary>
-#pragma warning disable CA1810
         static ClientContextExtensions()
         {
             try
@@ -47,17 +46,15 @@ namespace PnP.Core.Transformation.SharePoint.Extensions
                 ClientContextExtensions.userAgentFromConfig = Environment.GetEnvironmentVariable("SharePointPnPUserAgent", EnvironmentVariableTarget.Process);
             }
 
-//#if NET5_0
-//            loggerFactory = LoggerFactory.Create(builder => builder.AddConsole());
-//#else
-//            var serviceCollection = new ServiceCollection();
-//            serviceCollection.AddLogging(builder => builder.AddConsole());
-//            loggerFactory = serviceCollection.BuildServiceProvider().GetService<ILoggerFactory>();
-//#endif
-//            log = new Logger<ClientContext>(loggerFactory);
+            //#if NET5_0_OR_GREATER
+            //            loggerFactory = LoggerFactory.Create(builder => builder.AddConsole());
+            //#else
+            //            var serviceCollection = new ServiceCollection();
+            //            serviceCollection.AddLogging(builder => builder.AddConsole());
+            //            loggerFactory = serviceCollection.BuildServiceProvider().GetService<ILoggerFactory>();
+            //#endif
+            //            log = new Logger<ClientContext>(loggerFactory);
         }
-#pragma warning restore CA1810
-
         /// <summary>
         /// Executes the current set of data retrieval queries and method invocations and retries it if needed using the Task Library.
         /// </summary>

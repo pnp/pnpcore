@@ -3,7 +3,7 @@ using Microsoft.ApplicationInsights.Extensibility;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
-#if NET5_0
+#if NET5_0_OR_GREATER
 using System.Runtime.InteropServices;
 #endif
 
@@ -90,7 +90,7 @@ namespace PnP.Core.Services
         private static string GetOSVersion()
         {
 
-#if NET5_0
+#if NET5_0_OR_GREATER
             if (RuntimeInformation.RuntimeIdentifier == "browser-wasm")
             {
                 return "WASM";

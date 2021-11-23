@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Net.Http;
-#if NET5_0
+#if NET5_0_OR_GREATER
 using System.Runtime.InteropServices;
 using System.Text.Json;
 #endif
@@ -25,7 +25,7 @@ namespace PnP.Core.Services
                                                                                      w => w.RegionalSettings.QueryProperties(r => r.TimeZone, r => r.All) };
         private static readonly Expression<Func<ISite, object>>[] defaultSiteProps = { s => s.Id, s => s.GroupId };
 
-#if NET5_0
+#if NET5_0_OR_GREATER
         private static readonly HttpClient httpClient = new HttpClient();
 #endif
         private bool telemetryInitialized;
@@ -515,7 +515,7 @@ namespace PnP.Core.Services
                 connectTelemetry = false;
             }
 
-#if NET5_0
+#if NET5_0_OR_GREATER
             if (RuntimeInformation.RuntimeIdentifier == "browser-wasm")
             {
                 connectTelemetry = false;
@@ -536,7 +536,7 @@ namespace PnP.Core.Services
                 return;
             }
 
-#if NET5_0
+#if NET5_0_OR_GREATER
             if (RuntimeInformation.RuntimeIdentifier == "browser-wasm")
             {
                 // Blazor WASM cannot handle the AppInsights NuGet package way of working,
@@ -558,7 +558,7 @@ namespace PnP.Core.Services
             telemetryInitialized = true;
         }
 
-#if NET5_0
+#if NET5_0_OR_GREATER
         private async Task SendBlazorInitEventAsync(PnPContext context)
         {
             try

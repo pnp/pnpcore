@@ -1269,7 +1269,7 @@ namespace PnP.Core.Services
         /// <param name="headers">Batch request response headers</param>
         private static void ProcessSharePointRestBatchResponseContent(Batch batch, string batchResponse, HttpResponseHeaders headers)
         {
-#if !NET5_0
+#if !NET5_0_OR_GREATER
             var responseLines = batchResponse.Split(new char[] { '\n' });
 #endif
             int counter = -1;
@@ -1281,7 +1281,7 @@ namespace PnP.Core.Services
 
             Dictionary<string, string> responseHeaders = new Dictionary<string, string>(responseHeadersToPropagate);
             StringBuilder responseContent = new StringBuilder();
-#if NET5_0
+#if NET5_0_OR_GREATER
             foreach (ReadOnlySpan<char> line in batchResponse.SplitLines())
 #else
             foreach (var line in responseLines)
@@ -1359,7 +1359,7 @@ namespace PnP.Core.Services
                 else if (line.StartsWith("HTTP/1.1 "))
                 {
                     // HTTP/1.1 200 OK
-#if NET5_0
+#if NET5_0_OR_GREATER
                     if (int.TryParse(line.Slice(9, 3), out int parsedHttpStatusCode))
 #else
                     if (int.TryParse(line.Substring(9, 3), out int parsedHttpStatusCode))
@@ -1377,7 +1377,7 @@ namespace PnP.Core.Services
                 else if ((line.StartsWith("{") || httpStatusCode == HttpStatusCode.NoContent) && !responseContentOpen)
                 {
                     // content can be seperated via \r\n and we split on \n. Since we're using AppendLine remove the carriage return to avoid duplication
-#if NET5_0
+#if NET5_0_OR_GREATER
                     responseContent.Append(line).AppendLine();
 #else
                     responseContent.AppendLine(line.TrimEnd('\r'));
@@ -1388,7 +1388,7 @@ namespace PnP.Core.Services
                 else if (responseContentOpen)
                 {
                     // content can be seperated via \r\n and we split on \n. Since we're using AppendLine remove the carriage return to avoid duplication
-#if NET5_0
+#if NET5_0_OR_GREATER
                     responseContent.Append(line).AppendLine();
 #else
                     responseContent.AppendLine(line.TrimEnd('\r'));
@@ -1397,7 +1397,7 @@ namespace PnP.Core.Services
                 // Response headers e.g. CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
                 else if (collectHeaders)
                 {
-#if NET5_0
+#if NET5_0_OR_GREATER
                     HeaderSplit(line, responseHeaders);
 #else
                     HeaderSplit(line.AsSpan(), responseHeaders);
