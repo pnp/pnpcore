@@ -433,12 +433,12 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// Gets a Boolean value that specifies whether the Term object identified by the AnchorId property is valid.
         /// </summary>
-        public bool IsAnchorValid { get; set; }
+        public bool IsAnchorValid { get; }
 
         /// <summary>
         /// Gets a Boolean value that specifies whether the TermSet object identified by the TermSetId property exists and is available for tagging.
         /// </summary>
-        public bool IsTermSetValid { get; set; }
+        public bool IsTermSetValid { get; }
 
         /// <summary>
         /// Gets or sets a Boolean value that specifies whether the new Term objects can be added to the TermSet while typing in the TaxonomyField editor control.
@@ -469,7 +469,6 @@ namespace PnP.Core.Model.SharePoint
         /// Gets or sets the Web-relative URL of the target page that is used to construct the hyperlink on each Term object when the TaxonomyField object is rendered.
         /// </summary>
         public string TargetTemplate { get; set; }
-
 
         #endregion
 
