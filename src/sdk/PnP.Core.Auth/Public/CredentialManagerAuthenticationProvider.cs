@@ -59,11 +59,11 @@ namespace PnP.Core.Auth
         /// </summary>
         /// <param name="logger">The instance of the logger service provided by DI</param>
         /// <param name="msalHttpClientFactory">The instance of the Msal Http Client Factory service provided by DI</param>
-        public CredentialManagerAuthenticationProvider(ILogger<OAuthAuthenticationProvider> logger, IMsalHttpClientFactory httpClientFactory)
+        public CredentialManagerAuthenticationProvider(ILogger<OAuthAuthenticationProvider> logger, IMsalHttpClientFactory msalHttpClientFactory)
             : base(logger)
         {
             // Create an instance of the inner UsernamePasswordAuthenticationProvider
-            usernamePasswordProvider = new UsernamePasswordAuthenticationProvider(logger, httpClientFactory);
+            usernamePasswordProvider = new UsernamePasswordAuthenticationProvider(logger, msalHttpClientFactory);
         }
 
 

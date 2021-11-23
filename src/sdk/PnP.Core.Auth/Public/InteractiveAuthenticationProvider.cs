@@ -76,10 +76,10 @@ namespace PnP.Core.Auth
         /// </summary>
         /// <param name="logger">The instance of the logger service provided by DI</param>
         /// <param name="msalHttpClientFactory">The instance of the Msal Http Client Factory service provided by DI</param>
-        public InteractiveAuthenticationProvider(ILogger<OAuthAuthenticationProvider> logger, IMsalHttpClientFactory httpClientFactory)
+        public InteractiveAuthenticationProvider(ILogger<OAuthAuthenticationProvider> logger, IMsalHttpClientFactory msalHttpClientFactory)
             : base(logger)
         {
-            msalHttpClientFactory = httpClientFactory;
+            this.msalHttpClientFactory = msalHttpClientFactory;
         }
 
         /// <summary>
