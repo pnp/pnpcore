@@ -407,6 +407,72 @@ namespace PnP.Core.Model.SharePoint
         public FieldUserSelectionMode SelectionMode { get; set; }
         #endregion
 
+        #region Taxonomy Field
+
+        /// <summary>
+        /// Gets or sets the GUID of the anchor Term object for a TaxonomyField
+        /// </summary>
+        public Guid AnchorId { get; set; }
+
+        /// <summary>
+        /// Gets or sets a Boolean value that specifies whether the new Term objects can be added to the TermSet while typing in the TaxonomyField editor control.
+        /// </summary>
+        public bool CreateValuesInEditForm { get; set; }
+
+        /// <summary>
+        /// Gets or sets a Boolean value that indicates whether the TaxonomyField value points to the Enterprise Keywords TermSet object.
+        /// </summary>
+        public bool IsKeyword { get; set; }
+
+        /// <summary>
+        /// Gets or sets a Boolean value that specifies whether the default Label objects of all the parent Term objects of a Term in the TaxonomyField object 
+        /// will be rendered in addition to the default label of that Term.
+        /// </summary>
+        public bool IsPathRendered { get; set; }
+
+        /// <summary>
+        /// Gets a Boolean value that specifies whether the Term object identified by the AnchorId property is valid.
+        /// </summary>
+        public bool IsAnchorValid { get; set; }
+
+        /// <summary>
+        /// Gets a Boolean value that specifies whether the TermSet object identified by the TermSetId property exists and is available for tagging.
+        /// </summary>
+        public bool IsTermSetValid { get; set; }
+
+        /// <summary>
+        /// Gets or sets a Boolean value that specifies whether the new Term objects can be added to the TermSet while typing in the TaxonomyField editor control.
+        /// </summary>
+        public bool Open { get; set; }
+
+        /// <summary>
+        /// Gets or sets the GUID that identifies the TermStore object, which contains the Enterprise Keywords for the site that the current TaxonomyField belongs to.
+        /// </summary>
+        public Guid SspId { get; set; }
+
+        /// <summary>
+        /// Gets or sets the GUID of the TermSet object that contains the Term objects used by the current TaxonomyField object.
+        /// </summary>
+        public Guid TermSetId { get; set; }
+
+        /// <summary>
+        /// Gets or sets the GUID that identifies the hidden text field in an item.
+        /// </summary>
+        public Guid TextField { get; set; }
+
+        /// <summary>
+        /// Gets or sets a Boolean value that specifies whether the TaxonomyField object is linked to a customized TermSet object.
+        /// </summary>
+        public bool UserCreated { get; set; }
+
+        /// <summary>
+        /// Gets or sets the Web-relative URL of the target page that is used to construct the hyperlink on each Term object when the TaxonomyField object is rendered.
+        /// </summary>
+        public string TargetTemplate { get; set; }
+
+
+        #endregion
+
         /// <summary>
         /// A special property used to add an asterisk to a $select statement
         /// </summary>

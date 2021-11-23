@@ -170,6 +170,30 @@ namespace PnP.Core.Model.SharePoint
 
         public RelationshipDeleteBehaviorType RelationshipDeleteBehavior { get => GetValue<RelationshipDeleteBehaviorType>(); set => SetValue(value); }
 
+        public Guid AnchorId { get => GetValue<Guid>(); set => SetValue(value); }
+
+        public bool CreateValuesInEditForm { get => GetValue<bool>(); set => SetValue(value); }
+
+        public bool IsKeyword { get => GetValue<bool>(); set => SetValue(value); }
+
+        public bool IsPathRendered { get => GetValue<bool>(); set => SetValue(value); }
+
+        public bool IsAnchorValid { get => GetValue<bool>(); set => SetValue(value); }
+
+        public bool IsTermSetValid { get => GetValue<bool>(); set => SetValue(value); }
+
+        public bool Open { get => GetValue<bool>(); set => SetValue(value); }
+
+        public Guid SspId { get => GetValue<Guid>(); set => SetValue(value); }
+
+        public Guid TermSetId { get => GetValue<Guid>(); set => SetValue(value); }
+
+        public Guid TextField { get => GetValue<Guid>(); set => SetValue(value); }
+
+        public bool UserCreated { get => GetValue<bool>(); set => SetValue(value); }
+
+        public string TargetTemplate { get => GetValue<string>(); set => SetValue(value); }
+
         [KeyProperty(nameof(Id))]
         public override object Key { get => Id; set => Id = Guid.Parse(value.ToString()); }
 
