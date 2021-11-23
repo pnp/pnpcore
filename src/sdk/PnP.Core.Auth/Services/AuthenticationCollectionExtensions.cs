@@ -1,6 +1,8 @@
-﻿using PnP.Core.Auth;
+﻿using Microsoft.Identity.Client;
+using PnP.Core.Auth;
 using PnP.Core.Auth.Services;
 using PnP.Core.Auth.Services.Builder.Configuration;
+using PnP.Core.Auth.Services.Http;
 using PnP.Core.Services;
 using System;
 
@@ -40,9 +42,18 @@ namespace Microsoft.Extensions.DependencyInjection
             }
 
             AddAuthenticationProviders(collection);
+            AddMsalHttpClientFactory(collection);
             collection.ConfigureOptions<AuthenticationProvidersOptionsConfigurator>();
 
             return collection;
+        }
+
+        private static void AddMsalHttpClientFactory(IServiceCollection collection)
+        {
+            collection.AddTransient<IMsalHttpClientFactory, MsalHttpClientFactory>();
+            collection.AddTransient<MsalRetryHandler, MsalRetryHandler>();
+            collection.AddHttpClient("MsalHttpClient")
+                .AddHttpMessageHandler<MsalRetryHandler>();
         }
 
         private static void AddAuthenticationProviders(IServiceCollection collection)

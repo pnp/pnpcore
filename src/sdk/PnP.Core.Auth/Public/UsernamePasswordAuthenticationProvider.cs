@@ -33,6 +33,9 @@ namespace PnP.Core.Auth
         // Instance private member, to keep the token cache at service instance level
         private IPublicClientApplication publicClientApplication;
 
+        // Instance private member, to keep the Msal Http Client Factory at service instance level
+        private IMsalHttpClientFactory msalHttpClientFactory;
+
         /// <summary>
         /// Public constructor for external consumers of the library
         /// </summary>
@@ -58,7 +61,7 @@ namespace PnP.Core.Auth
         /// <param name="options">Options for the authentication provider</param>
         public UsernamePasswordAuthenticationProvider(string clientId, string tenantId,
             PnPCoreAuthenticationUsernamePasswordOptions options)
-            : this(null)
+            : this(null, null)
         {
             Init(new PnPCoreAuthenticationCredentialConfigurationOptions
             {
@@ -69,12 +72,14 @@ namespace PnP.Core.Auth
         }
 
         /// <summary>
-        /// Public constructor leveraging DI to initialize the ILogger interfafce
+        /// Public constructor leveraging DI to initialize the ILogger and IMsalHttpClientFactory interfaces
         /// </summary>
         /// <param name="logger">The instance of the logger service provided by DI</param>
-        public UsernamePasswordAuthenticationProvider(ILogger<OAuthAuthenticationProvider> logger)
+        /// <param name="msalHttpClientFactory">The instance of the Msal Http Client Factory service provided by DI</param>
+        public UsernamePasswordAuthenticationProvider(ILogger<OAuthAuthenticationProvider> logger, IMsalHttpClientFactory httpClientFactory)
             : base(logger)
         {
+            msalHttpClientFactory = httpClientFactory;
         }
 
         /// <summary>
@@ -115,6 +120,7 @@ namespace PnP.Core.Auth
                     options.UsernamePassword.RedirectUri,
                     TenantId,
                     options.Environment)
+                .WithHttpClientFactory(msalHttpClientFactory)
                 .Build();
 
             // Log the initialization information
