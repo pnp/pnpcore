@@ -100,6 +100,26 @@ namespace PnP.Core.Services
         /// </summary>
         public bool HttpMicrosoftGraphUseIncrementalDelay { get; set; } = true;
 
+        /// <summary>
+        /// Use the Retry-After header for calculating the delay in case of a retry. Defaults to true
+        /// </summary>
+        public bool HttpMsalUseRetryAfterHeader { get; set; } = true;
+
+        /// <summary>
+        /// When not using retry-after, how many times can a retry be made. Defaults to 10
+        /// </summary>
+        public int HttpMsalMaxRetries { get; set; } = 10;
+
+        /// <summary>
+        /// How many seconds to wait for the next retry attempt. Defaults to 3
+        /// </summary>
+        public int HttpMsalDelayInSeconds { get; set; } = 3;
+
+        /// <summary>
+        /// Use an incremental strategy for the delay: each retry doubles the previous delay time. Defaults to true
+        /// </summary>
+        public bool HttpMsalUseIncrementalDelay { get; set; } = true;
+
         #endregion
 
         #region Internal only settings (supporting, they cannot be assigned from configuration)

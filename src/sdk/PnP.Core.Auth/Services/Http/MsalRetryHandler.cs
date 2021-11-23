@@ -20,10 +20,10 @@ namespace PnP.Core.Auth.Services.Http
         {
             if (GlobalSettings != null)
             {
-                UseRetryAfterHeader = GlobalSettings.HttpMicrosoftGraphUseRetryAfterHeader;
-                MaxRetries = GlobalSettings.HttpMicrosoftGraphMaxRetries;
-                DelayInSeconds = GlobalSettings.HttpMicrosoftGraphDelayInSeconds;
-                IncrementalDelay = GlobalSettings.HttpMicrosoftGraphUseIncrementalDelay;
+                UseRetryAfterHeader = GlobalSettings.HttpMsalUseRetryAfterHeader;
+                MaxRetries = GlobalSettings.HttpMsalMaxRetries;
+                DelayInSeconds = GlobalSettings.HttpMsalDelayInSeconds;
+                IncrementalDelay = GlobalSettings.HttpMsalUseIncrementalDelay;
             }
         }
 
