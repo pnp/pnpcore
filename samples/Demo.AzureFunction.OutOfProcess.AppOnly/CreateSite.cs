@@ -72,20 +72,13 @@ namespace ProvisioningDemo
 
                         // Step 2: Create the page
                         var page = await newSiteContext.Web.NewPageAsync();
-                        page.AddSection(CanvasSectionTemplate.TwoColumnRight, 1);
+                        page.AddSection(CanvasSectionTemplate.OneColumn, 1);
 
-                        // Add text
-                        page.AddControl(page.NewTextPart("<H1>Hello everyone!</H1>"), page.Sections[0].Columns[0]);
-
-                        // Get the image web part 'blueprint'
-                        var availableComponents = await page.AvailablePageComponentsAsync();
-                        var imageWebPartComponent = availableComponents.FirstOrDefault(p => p.Id == page.DefaultWebPartToWebPartId(DefaultWebPart.Image));
-
-                        // Configure and add the image web part
-                        var imagePart = page.NewWebPart(imageWebPartComponent);
-                        imagePart.PropertiesJson = PrepareImageWebPartConfiguration(newSiteContext, addedFile.ServerRelativeUrl,
-                                                                                    siteAssetsLibrary.Id, addedFile.UniqueId);
-                        page.AddControl(imagePart, page.Sections[0].Columns[1]);
+                        // Add text with inline image
+                        var text = page.NewTextPart();
+                        var parker = await page.GetInlineImageAsync(text, addedFile.ServerRelativeUrl, new PageImageOptions { Alignment = PageImageAlignment.Left });
+                        text.Text = $"<H2>Hello everyone!</H2>{parker}<P>Community rocks, sharing is caring!</P>";
+                        page.AddControl(text, page.Sections[0].Columns[0]);
 
                         // Save the page
                         await page.SaveAsync("PnP.aspx");
@@ -104,18 +97,6 @@ namespace ProvisioningDemo
                 await response.WriteStringAsync(JsonSerializer.Serialize(new { error = ex.Message }));
                 return response;
             }
-        }
-
-        private static string PrepareImageWebPartConfiguration(PnPContext context, string imageUrl, Guid siteAssetsId, Guid imageId)
-        {
-            string baseImageWebPart = "{\"webPartData\":{\"id\":\"d1d91016-032f-456d-98a4-721247c305e8\",\"instanceId\":\"{InstanceId}\",\"title\":\"Image\",\"description\":\"Add an image, picture or photo to your page including text overlays and ability to crop and resize images.\",\"audiences\":[],\"serverProcessedContent\":{\"htmlStrings\":{},\"searchablePlainTexts\":{},\"imageSources\":{\"imageSource\":\"{FullyQualifiedImageUrl}\"},\"links\":{},\"customMetadata\":{\"imageSource\":{\"siteId\":\"{SiteId}\",\"webId\":\"{WebId}\",\"listId\":\"{{ListId}}\",\"uniqueId\":\"{UniqueId}\",\"imgWidth\":-1,\"imgHeight\":-1}}},\"dataVersion\":\"1.9\",\"properties\":{\"imageSourceType\":2,\"captionText\":\"\",\"altText\":\"\",\"linkUrl\":\"\",\"overlayText\":\"\",\"fileName\":\"\",\"siteId\":\"{SiteId}\",\"webId\":\"{WebId}\",\"listId\":\"{{ListId}}\",\"uniqueId\":\"{UniqueId}\",\"imgWidth\":-1,\"imgHeight\":-1,\"alignment\":\"Center\",\"fixAspectRatio\":false}}}";
-
-            return baseImageWebPart.Replace("{InstanceId}", Guid.NewGuid().ToString())
-                                   .Replace("{FullyQualifiedImageUrl}", $"https://{context.Uri.DnsSafeHost}{imageUrl}")
-                                   .Replace("{SiteId}", context.Site.Id.ToString())
-                                   .Replace("{WebId}", context.Web.Id.ToString())
-                                   .Replace("{ListId}", siteAssetsId.ToString())
-                                   .Replace("{UniqueId}", imageId.ToString());
         }
     }
 }
