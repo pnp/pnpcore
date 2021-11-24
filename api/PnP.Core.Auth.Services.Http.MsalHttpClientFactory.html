@@ -5,10 +5,10 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Class PnPCoreSiteOptions
+    <title>Class MsalHttpClientFactory
    | PnP Core SDK </title>
     <meta name="viewport" content="width=device-width">
-    <meta name="title" content="Class PnPCoreSiteOptions
+    <meta name="title" content="Class MsalHttpClientFactory
    | PnP Core SDK ">
     <meta name="generator" content="docfx 2.56.5.0">
     <meta name="description" content="The PnP Core SDK is a modern .NET SDK designed to work for Microsoft 365. It provides a unified object model for working with SharePoint Online and Teams which is agnostic to the underlying API's being called.">
@@ -78,72 +78,70 @@
         </div>
         <div class="article row grid-right">
           <div class="col-md-10">
-            <article class="content wrap" id="_content" data-uid="PnP.Core.Services.Builder.Configuration.PnPCoreSiteOptions">
+            <article class="content wrap" id="_content" data-uid="PnP.Core.Auth.Services.Http.MsalHttpClientFactory">
                   <div class="contribution-panel mobile-hide pull-right">
-                      <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Builder/Configuration/PnPCoreOptions.cs/#L192" title="View Source" class="view-source-lg"><i class="fa fa-code"></i></a>
-                      <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Services_Builder_Configuration_PnPCoreSiteOptions.md&amp;value=---%0Auid%3A%20PnP.Core.Services.Builder.Configuration.PnPCoreSiteOptions%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc" class="improve-doc-lg"><i class="glyphicon glyphicon-pencil"></i></a>
+                      <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Auth/Services/Http/MsalHttpClientFactory.cs/#L9" title="View Source" class="view-source-lg"><i class="fa fa-code"></i></a>
+                      <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Auth_Services_Http_MsalHttpClientFactory.md&amp;value=---%0Auid%3A%20PnP.Core.Auth.Services.Http.MsalHttpClientFactory%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc" class="improve-doc-lg"><i class="glyphicon glyphicon-pencil"></i></a>
                   </div>
-                      <h1 id="PnP_Core_Services_Builder_Configuration_PnPCoreSiteOptions" data-uid="PnP.Core.Services.Builder.Configuration.PnPCoreSiteOptions">Class PnPCoreSiteOptions
+                      <h1 id="PnP_Core_Auth_Services_Http_MsalHttpClientFactory" data-uid="PnP.Core.Auth.Services.Http.MsalHttpClientFactory">Class MsalHttpClientFactory
   </h1>
-  <div class="markdown level0 summary"><p>Options for configuring a single site in PnP Core SDK</p>
+  <div class="markdown level0 summary"><p>Factory responsible for creating HttpClient as .NET recommends to use a single instance of HttpClient.</p>
 </div>
   <div class="markdown level0 conceptual"></div>
 
   <div class="inheritance">
     <h5>Inheritance</h5>
     <div class="level0"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object">Object</a></div>
-    <div class="level1"><span class="xref">PnPCoreSiteOptions</span></div>
+    <div class="level1"><span class="xref">MsalHttpClientFactory</span></div>
   </div>
   
   
   
-  <h6><strong>Namespace</strong>: <a class="xref" href="PnP.Core.Services.Builder.Configuration.html">PnP.Core.Services.Builder.Configuration</a></h6>
-  <h6><strong>Assembly</strong>: PnP.Core.dll</h6>
+  <h6><strong>Namespace</strong>: <a class="xref" href="PnP.Core.Auth.Services.Http.html">PnP.Core.Auth.Services.Http</a></h6>
+  <h6><strong>Assembly</strong>: PnP.Core.Auth.dll</h6>
   
-  <h5 id="PnP_Core_Services_Builder_Configuration_PnPCoreSiteOptions_syntax">Syntax</h5>
+  <h5 id="PnP_Core_Auth_Services_Http_MsalHttpClientFactory_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class PnPCoreSiteOptions : object</code></pre>
+    <pre><code class="lang-csharp hljs">public sealed class MsalHttpClientFactory : IMsalHttpClientFactory</code></pre>
   </div>
 
   
   
   
   
-  <h3 id="properties">Properties
+  <h3 id="constructors">Constructors
   </h3>
   
   <span class="small pull-right mobile-hide">
     <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Services_Builder_Configuration_PnPCoreSiteOptions_AuthenticationProvider.md&amp;value=---%0Auid%3A%20PnP.Core.Services.Builder.Configuration.PnPCoreSiteOptions.AuthenticationProvider%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Auth_Services_Http_MsalHttpClientFactory__ctor_IHttpClientFactory_.md&amp;value=---%0Auid%3A%20PnP.Core.Auth.Services.Http.MsalHttpClientFactory.%23ctor(IHttpClientFactory)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Builder/Configuration/PnPCoreOptions.cs/#L202" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Auth/Services/Http/MsalHttpClientFactory.cs/#L17" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
-  <a id="PnP_Core_Services_Builder_Configuration_PnPCoreSiteOptions_AuthenticationProvider_" data-uid="PnP.Core.Services.Builder.Configuration.PnPCoreSiteOptions.AuthenticationProvider*"></a>
+  <a id="PnP_Core_Auth_Services_Http_MsalHttpClientFactory__ctor_" data-uid="PnP.Core.Auth.Services.Http.MsalHttpClientFactory.#ctor*"></a>
   
-  <h4 id="PnP_Core_Services_Builder_Configuration_PnPCoreSiteOptions_AuthenticationProvider" data-uid="PnP.Core.Services.Builder.Configuration.PnPCoreSiteOptions.AuthenticationProvider"><a href="#collapsible-PnP_Core_Services_Builder_Configuration_PnPCoreSiteOptions_AuthenticationProvider" class="expander" data-toggle="collapse">AuthenticationProvider</a></h4>
+  <h4 id="PnP_Core_Auth_Services_Http_MsalHttpClientFactory__ctor_IHttpClientFactory_" data-uid="PnP.Core.Auth.Services.Http.MsalHttpClientFactory.#ctor(IHttpClientFactory)"><a href="#collapsible-PnP_Core_Auth_Services_Http_MsalHttpClientFactory__ctor_IHttpClientFactory_" class="expander" data-toggle="collapse">MsalHttpClientFactory(IHttpClientFactory)</a></h4>
   
-  <div id="collapsible-PnP_Core_Services_Builder_Configuration_PnPCoreSiteOptions_AuthenticationProvider" class="collapse in">
-  <div class="markdown level1 summary"><p>The Authentication Provider</p>
+  <div id="collapsible-PnP_Core_Auth_Services_Http_MsalHttpClientFactory__ctor_IHttpClientFactory_" class="collapse in">
+  <div class="markdown level1 summary"><p>Default Constructor</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public IAuthenticationProvider AuthenticationProvider { get; set; }</code></pre>
+    <pre><code class="lang-csharp hljs">public MsalHttpClientFactory(IHttpClientFactory httpClientFactory)</code></pre>
   </div>
 
-  
-  
-  
-  
-  <h5 class="propertyValue">Property Value</h5>
+  <h5 class="parameters">Parameters</h5>
   <table>
     <tr>
       <td>
-        <a class="xref" href="PnP.Core.Services.IAuthenticationProvider.html">IAuthenticationProvider</a>
-        <p>
+        <span class="pull-right"><span class="xref">IHttpClientFactory</span></span>
+        <span class="parametername">httpClientFactory</span>
+        <p><p>Client factory that will handle the <see cref="!:HttpClient"></see> creation</p>
+</p>
       </td>
     </tr>
   </table>
@@ -154,43 +152,50 @@
   
   
   
+  
+  
+  
+  
   </div>
+  <h3 id="methods">Methods
+  </h3>
   
   <span class="small pull-right mobile-hide">
     <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Services_Builder_Configuration_PnPCoreSiteOptions_SiteUrl.md&amp;value=---%0Auid%3A%20PnP.Core.Services.Builder.Configuration.PnPCoreSiteOptions.SiteUrl%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Auth_Services_Http_MsalHttpClientFactory_GetHttpClient.md&amp;value=---%0Auid%3A%20PnP.Core.Auth.Services.Http.MsalHttpClientFactory.GetHttpClient%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Builder/Configuration/PnPCoreOptions.cs/#L197" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Auth/Services/Http/MsalHttpClientFactory.cs/#L26" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
-  <a id="PnP_Core_Services_Builder_Configuration_PnPCoreSiteOptions_SiteUrl_" data-uid="PnP.Core.Services.Builder.Configuration.PnPCoreSiteOptions.SiteUrl*"></a>
+  <a id="PnP_Core_Auth_Services_Http_MsalHttpClientFactory_GetHttpClient_" data-uid="PnP.Core.Auth.Services.Http.MsalHttpClientFactory.GetHttpClient*"></a>
   
-  <h4 id="PnP_Core_Services_Builder_Configuration_PnPCoreSiteOptions_SiteUrl" data-uid="PnP.Core.Services.Builder.Configuration.PnPCoreSiteOptions.SiteUrl"><a href="#collapsible-PnP_Core_Services_Builder_Configuration_PnPCoreSiteOptions_SiteUrl" class="expander" data-toggle="collapse">SiteUrl</a></h4>
+  <h4 id="PnP_Core_Auth_Services_Http_MsalHttpClientFactory_GetHttpClient" data-uid="PnP.Core.Auth.Services.Http.MsalHttpClientFactory.GetHttpClient"><a href="#collapsible-PnP_Core_Auth_Services_Http_MsalHttpClientFactory_GetHttpClient" class="expander" data-toggle="collapse">GetHttpClient()</a></h4>
   
-  <div id="collapsible-PnP_Core_Services_Builder_Configuration_PnPCoreSiteOptions_SiteUrl" class="collapse in">
-  <div class="markdown level1 summary"><p>The URL of the target site</p>
+  <div id="collapsible-PnP_Core_Auth_Services_Http_MsalHttpClientFactory_GetHttpClient" class="collapse in">
+  <div class="markdown level1 summary"><p>Returns the configured <see cref="!:HttpClient"></see></p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public string SiteUrl { get; set; }</code></pre>
+    <pre><code class="lang-csharp hljs">public HttpClient GetHttpClient()</code></pre>
   </div>
 
   
-  
-  
-  
-  <h5 class="propertyValue">Property Value</h5>
+  <h5 class="returns">Returns</h5>
   <table>
     <tr>
       <td>
-        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a>
-        <p>
+        <span class="xref">HttpClient</span>
+        <p><p>The configured <see cref="!:HttpClient"></see></p>
+</p>
       </td>
     </tr>
   </table>
+  
+  
+  
   
   
   

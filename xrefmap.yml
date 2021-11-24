@@ -7665,15 +7665,15 @@ references:
   commentId: T:PnP.Core.Auth.CredentialManagerAuthenticationProvider
   fullName: PnP.Core.Auth.CredentialManagerAuthenticationProvider
   nameWithType: CredentialManagerAuthenticationProvider
-- uid: PnP.Core.Auth.CredentialManagerAuthenticationProvider.#ctor(ILogger{PnP.Core.Auth.OAuthAuthenticationProvider})
-  name: CredentialManagerAuthenticationProvider(ILogger<OAuthAuthenticationProvider>)
-  href: api/PnP.Core.Auth.CredentialManagerAuthenticationProvider.html#PnP_Core_Auth_CredentialManagerAuthenticationProvider__ctor_ILogger_PnP_Core_Auth_OAuthAuthenticationProvider__
-  commentId: M:PnP.Core.Auth.CredentialManagerAuthenticationProvider.#ctor(ILogger{PnP.Core.Auth.OAuthAuthenticationProvider})
-  name.vb: CredentialManagerAuthenticationProvider(ILogger(Of OAuthAuthenticationProvider))
-  fullName: PnP.Core.Auth.CredentialManagerAuthenticationProvider.CredentialManagerAuthenticationProvider(ILogger<PnP.Core.Auth.OAuthAuthenticationProvider>)
-  fullName.vb: PnP.Core.Auth.CredentialManagerAuthenticationProvider.CredentialManagerAuthenticationProvider(ILogger(Of PnP.Core.Auth.OAuthAuthenticationProvider))
-  nameWithType: CredentialManagerAuthenticationProvider.CredentialManagerAuthenticationProvider(ILogger<OAuthAuthenticationProvider>)
-  nameWithType.vb: CredentialManagerAuthenticationProvider.CredentialManagerAuthenticationProvider(ILogger(Of OAuthAuthenticationProvider))
+- uid: PnP.Core.Auth.CredentialManagerAuthenticationProvider.#ctor(ILogger{PnP.Core.Auth.OAuthAuthenticationProvider},IMsalHttpClientFactory)
+  name: CredentialManagerAuthenticationProvider(ILogger<OAuthAuthenticationProvider>, IMsalHttpClientFactory)
+  href: api/PnP.Core.Auth.CredentialManagerAuthenticationProvider.html#PnP_Core_Auth_CredentialManagerAuthenticationProvider__ctor_ILogger_PnP_Core_Auth_OAuthAuthenticationProvider__IMsalHttpClientFactory_
+  commentId: M:PnP.Core.Auth.CredentialManagerAuthenticationProvider.#ctor(ILogger{PnP.Core.Auth.OAuthAuthenticationProvider},IMsalHttpClientFactory)
+  name.vb: CredentialManagerAuthenticationProvider(ILogger(Of OAuthAuthenticationProvider), IMsalHttpClientFactory)
+  fullName: PnP.Core.Auth.CredentialManagerAuthenticationProvider.CredentialManagerAuthenticationProvider(ILogger<PnP.Core.Auth.OAuthAuthenticationProvider>, IMsalHttpClientFactory)
+  fullName.vb: PnP.Core.Auth.CredentialManagerAuthenticationProvider.CredentialManagerAuthenticationProvider(ILogger(Of PnP.Core.Auth.OAuthAuthenticationProvider), IMsalHttpClientFactory)
+  nameWithType: CredentialManagerAuthenticationProvider.CredentialManagerAuthenticationProvider(ILogger<OAuthAuthenticationProvider>, IMsalHttpClientFactory)
+  nameWithType.vb: CredentialManagerAuthenticationProvider.CredentialManagerAuthenticationProvider(ILogger(Of OAuthAuthenticationProvider), IMsalHttpClientFactory)
 - uid: PnP.Core.Auth.CredentialManagerAuthenticationProvider.#ctor(System.String,System.String,PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationCredentialManagerOptions)
   name: CredentialManagerAuthenticationProvider(String, String, PnPCoreAuthenticationCredentialManagerOptions)
   href: api/PnP.Core.Auth.CredentialManagerAuthenticationProvider.html#PnP_Core_Auth_CredentialManagerAuthenticationProvider__ctor_System_String_System_String_PnP_Core_Auth_Services_Builder_Configuration_PnPCoreAuthenticationCredentialManagerOptions_
@@ -7747,15 +7747,15 @@ references:
   commentId: T:PnP.Core.Auth.DeviceCodeAuthenticationProvider
   fullName: PnP.Core.Auth.DeviceCodeAuthenticationProvider
   nameWithType: DeviceCodeAuthenticationProvider
-- uid: PnP.Core.Auth.DeviceCodeAuthenticationProvider.#ctor(ILogger{PnP.Core.Auth.OAuthAuthenticationProvider})
-  name: DeviceCodeAuthenticationProvider(ILogger<OAuthAuthenticationProvider>)
-  href: api/PnP.Core.Auth.DeviceCodeAuthenticationProvider.html#PnP_Core_Auth_DeviceCodeAuthenticationProvider__ctor_ILogger_PnP_Core_Auth_OAuthAuthenticationProvider__
-  commentId: M:PnP.Core.Auth.DeviceCodeAuthenticationProvider.#ctor(ILogger{PnP.Core.Auth.OAuthAuthenticationProvider})
-  name.vb: DeviceCodeAuthenticationProvider(ILogger(Of OAuthAuthenticationProvider))
-  fullName: PnP.Core.Auth.DeviceCodeAuthenticationProvider.DeviceCodeAuthenticationProvider(ILogger<PnP.Core.Auth.OAuthAuthenticationProvider>)
-  fullName.vb: PnP.Core.Auth.DeviceCodeAuthenticationProvider.DeviceCodeAuthenticationProvider(ILogger(Of PnP.Core.Auth.OAuthAuthenticationProvider))
-  nameWithType: DeviceCodeAuthenticationProvider.DeviceCodeAuthenticationProvider(ILogger<OAuthAuthenticationProvider>)
-  nameWithType.vb: DeviceCodeAuthenticationProvider.DeviceCodeAuthenticationProvider(ILogger(Of OAuthAuthenticationProvider))
+- uid: PnP.Core.Auth.DeviceCodeAuthenticationProvider.#ctor(ILogger{PnP.Core.Auth.OAuthAuthenticationProvider},IMsalHttpClientFactory)
+  name: DeviceCodeAuthenticationProvider(ILogger<OAuthAuthenticationProvider>, IMsalHttpClientFactory)
+  href: api/PnP.Core.Auth.DeviceCodeAuthenticationProvider.html#PnP_Core_Auth_DeviceCodeAuthenticationProvider__ctor_ILogger_PnP_Core_Auth_OAuthAuthenticationProvider__IMsalHttpClientFactory_
+  commentId: M:PnP.Core.Auth.DeviceCodeAuthenticationProvider.#ctor(ILogger{PnP.Core.Auth.OAuthAuthenticationProvider},IMsalHttpClientFactory)
+  name.vb: DeviceCodeAuthenticationProvider(ILogger(Of OAuthAuthenticationProvider), IMsalHttpClientFactory)
+  fullName: PnP.Core.Auth.DeviceCodeAuthenticationProvider.DeviceCodeAuthenticationProvider(ILogger<PnP.Core.Auth.OAuthAuthenticationProvider>, IMsalHttpClientFactory)
+  fullName.vb: PnP.Core.Auth.DeviceCodeAuthenticationProvider.DeviceCodeAuthenticationProvider(ILogger(Of PnP.Core.Auth.OAuthAuthenticationProvider), IMsalHttpClientFactory)
+  nameWithType: DeviceCodeAuthenticationProvider.DeviceCodeAuthenticationProvider(ILogger<OAuthAuthenticationProvider>, IMsalHttpClientFactory)
+  nameWithType.vb: DeviceCodeAuthenticationProvider.DeviceCodeAuthenticationProvider(ILogger(Of OAuthAuthenticationProvider), IMsalHttpClientFactory)
 - uid: PnP.Core.Auth.DeviceCodeAuthenticationProvider.#ctor(System.String,System.String,PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationDeviceCodeOptions,Action{PnP.Core.Auth.DeviceCodeNotification})
   name: DeviceCodeAuthenticationProvider(String, String, PnPCoreAuthenticationDeviceCodeOptions, Action<DeviceCodeNotification>)
   href: api/PnP.Core.Auth.DeviceCodeAuthenticationProvider.html#PnP_Core_Auth_DeviceCodeAuthenticationProvider__ctor_System_String_System_String_PnP_Core_Auth_Services_Builder_Configuration_PnPCoreAuthenticationDeviceCodeOptions_Action_PnP_Core_Auth_DeviceCodeNotification__
@@ -7978,15 +7978,15 @@ references:
   commentId: M:PnP.Core.Auth.InteractiveAuthenticationProvider.#ctor
   fullName: PnP.Core.Auth.InteractiveAuthenticationProvider.InteractiveAuthenticationProvider()
   nameWithType: InteractiveAuthenticationProvider.InteractiveAuthenticationProvider()
-- uid: PnP.Core.Auth.InteractiveAuthenticationProvider.#ctor(ILogger{PnP.Core.Auth.OAuthAuthenticationProvider})
-  name: InteractiveAuthenticationProvider(ILogger<OAuthAuthenticationProvider>)
-  href: api/PnP.Core.Auth.InteractiveAuthenticationProvider.html#PnP_Core_Auth_InteractiveAuthenticationProvider__ctor_ILogger_PnP_Core_Auth_OAuthAuthenticationProvider__
-  commentId: M:PnP.Core.Auth.InteractiveAuthenticationProvider.#ctor(ILogger{PnP.Core.Auth.OAuthAuthenticationProvider})
-  name.vb: InteractiveAuthenticationProvider(ILogger(Of OAuthAuthenticationProvider))
-  fullName: PnP.Core.Auth.InteractiveAuthenticationProvider.InteractiveAuthenticationProvider(ILogger<PnP.Core.Auth.OAuthAuthenticationProvider>)
-  fullName.vb: PnP.Core.Auth.InteractiveAuthenticationProvider.InteractiveAuthenticationProvider(ILogger(Of PnP.Core.Auth.OAuthAuthenticationProvider))
-  nameWithType: InteractiveAuthenticationProvider.InteractiveAuthenticationProvider(ILogger<OAuthAuthenticationProvider>)
-  nameWithType.vb: InteractiveAuthenticationProvider.InteractiveAuthenticationProvider(ILogger(Of OAuthAuthenticationProvider))
+- uid: PnP.Core.Auth.InteractiveAuthenticationProvider.#ctor(ILogger{PnP.Core.Auth.OAuthAuthenticationProvider},IMsalHttpClientFactory)
+  name: InteractiveAuthenticationProvider(ILogger<OAuthAuthenticationProvider>, IMsalHttpClientFactory)
+  href: api/PnP.Core.Auth.InteractiveAuthenticationProvider.html#PnP_Core_Auth_InteractiveAuthenticationProvider__ctor_ILogger_PnP_Core_Auth_OAuthAuthenticationProvider__IMsalHttpClientFactory_
+  commentId: M:PnP.Core.Auth.InteractiveAuthenticationProvider.#ctor(ILogger{PnP.Core.Auth.OAuthAuthenticationProvider},IMsalHttpClientFactory)
+  name.vb: InteractiveAuthenticationProvider(ILogger(Of OAuthAuthenticationProvider), IMsalHttpClientFactory)
+  fullName: PnP.Core.Auth.InteractiveAuthenticationProvider.InteractiveAuthenticationProvider(ILogger<PnP.Core.Auth.OAuthAuthenticationProvider>, IMsalHttpClientFactory)
+  fullName.vb: PnP.Core.Auth.InteractiveAuthenticationProvider.InteractiveAuthenticationProvider(ILogger(Of PnP.Core.Auth.OAuthAuthenticationProvider), IMsalHttpClientFactory)
+  nameWithType: InteractiveAuthenticationProvider.InteractiveAuthenticationProvider(ILogger<OAuthAuthenticationProvider>, IMsalHttpClientFactory)
+  nameWithType.vb: InteractiveAuthenticationProvider.InteractiveAuthenticationProvider(ILogger(Of OAuthAuthenticationProvider), IMsalHttpClientFactory)
 - uid: PnP.Core.Auth.InteractiveAuthenticationProvider.#ctor(System.String,System.String,PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationInteractiveOptions)
   name: InteractiveAuthenticationProvider(String, String, PnPCoreAuthenticationInteractiveOptions)
   href: api/PnP.Core.Auth.InteractiveAuthenticationProvider.html#PnP_Core_Auth_InteractiveAuthenticationProvider__ctor_System_String_System_String_PnP_Core_Auth_Services_Builder_Configuration_PnPCoreAuthenticationInteractiveOptions_
@@ -8162,15 +8162,15 @@ references:
   commentId: T:PnP.Core.Auth.OnBehalfOfAuthenticationProvider
   fullName: PnP.Core.Auth.OnBehalfOfAuthenticationProvider
   nameWithType: OnBehalfOfAuthenticationProvider
-- uid: PnP.Core.Auth.OnBehalfOfAuthenticationProvider.#ctor(ILogger{PnP.Core.Auth.OAuthAuthenticationProvider})
-  name: OnBehalfOfAuthenticationProvider(ILogger<OAuthAuthenticationProvider>)
-  href: api/PnP.Core.Auth.OnBehalfOfAuthenticationProvider.html#PnP_Core_Auth_OnBehalfOfAuthenticationProvider__ctor_ILogger_PnP_Core_Auth_OAuthAuthenticationProvider__
-  commentId: M:PnP.Core.Auth.OnBehalfOfAuthenticationProvider.#ctor(ILogger{PnP.Core.Auth.OAuthAuthenticationProvider})
-  name.vb: OnBehalfOfAuthenticationProvider(ILogger(Of OAuthAuthenticationProvider))
-  fullName: PnP.Core.Auth.OnBehalfOfAuthenticationProvider.OnBehalfOfAuthenticationProvider(ILogger<PnP.Core.Auth.OAuthAuthenticationProvider>)
-  fullName.vb: PnP.Core.Auth.OnBehalfOfAuthenticationProvider.OnBehalfOfAuthenticationProvider(ILogger(Of PnP.Core.Auth.OAuthAuthenticationProvider))
-  nameWithType: OnBehalfOfAuthenticationProvider.OnBehalfOfAuthenticationProvider(ILogger<OAuthAuthenticationProvider>)
-  nameWithType.vb: OnBehalfOfAuthenticationProvider.OnBehalfOfAuthenticationProvider(ILogger(Of OAuthAuthenticationProvider))
+- uid: PnP.Core.Auth.OnBehalfOfAuthenticationProvider.#ctor(ILogger{PnP.Core.Auth.OAuthAuthenticationProvider},IMsalHttpClientFactory)
+  name: OnBehalfOfAuthenticationProvider(ILogger<OAuthAuthenticationProvider>, IMsalHttpClientFactory)
+  href: api/PnP.Core.Auth.OnBehalfOfAuthenticationProvider.html#PnP_Core_Auth_OnBehalfOfAuthenticationProvider__ctor_ILogger_PnP_Core_Auth_OAuthAuthenticationProvider__IMsalHttpClientFactory_
+  commentId: M:PnP.Core.Auth.OnBehalfOfAuthenticationProvider.#ctor(ILogger{PnP.Core.Auth.OAuthAuthenticationProvider},IMsalHttpClientFactory)
+  name.vb: OnBehalfOfAuthenticationProvider(ILogger(Of OAuthAuthenticationProvider), IMsalHttpClientFactory)
+  fullName: PnP.Core.Auth.OnBehalfOfAuthenticationProvider.OnBehalfOfAuthenticationProvider(ILogger<PnP.Core.Auth.OAuthAuthenticationProvider>, IMsalHttpClientFactory)
+  fullName.vb: PnP.Core.Auth.OnBehalfOfAuthenticationProvider.OnBehalfOfAuthenticationProvider(ILogger(Of PnP.Core.Auth.OAuthAuthenticationProvider), IMsalHttpClientFactory)
+  nameWithType: OnBehalfOfAuthenticationProvider.OnBehalfOfAuthenticationProvider(ILogger<OAuthAuthenticationProvider>, IMsalHttpClientFactory)
+  nameWithType.vb: OnBehalfOfAuthenticationProvider.OnBehalfOfAuthenticationProvider(ILogger(Of OAuthAuthenticationProvider), IMsalHttpClientFactory)
 - uid: PnP.Core.Auth.OnBehalfOfAuthenticationProvider.#ctor(System.String,System.String,PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationOnBehalfOfOptions,Func{System.String})
   name: OnBehalfOfAuthenticationProvider(String, String, PnPCoreAuthenticationOnBehalfOfOptions, Func<String>)
   href: api/PnP.Core.Auth.OnBehalfOfAuthenticationProvider.html#PnP_Core_Auth_OnBehalfOfAuthenticationProvider__ctor_System_String_System_String_PnP_Core_Auth_Services_Builder_Configuration_PnPCoreAuthenticationOnBehalfOfOptions_Func_System_String__
@@ -8816,6 +8816,44 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationX509CertificateOptions.Thumbprint
   nameWithType: PnPCoreAuthenticationX509CertificateOptions.Thumbprint
+- uid: PnP.Core.Auth.Services.Http
+  name: PnP.Core.Auth.Services.Http
+  href: api/PnP.Core.Auth.Services.Http.html
+  commentId: N:PnP.Core.Auth.Services.Http
+  fullName: PnP.Core.Auth.Services.Http
+  nameWithType: PnP.Core.Auth.Services.Http
+- uid: PnP.Core.Auth.Services.Http.MsalHttpClientFactory
+  name: MsalHttpClientFactory
+  href: api/PnP.Core.Auth.Services.Http.MsalHttpClientFactory.html
+  commentId: T:PnP.Core.Auth.Services.Http.MsalHttpClientFactory
+  fullName: PnP.Core.Auth.Services.Http.MsalHttpClientFactory
+  nameWithType: MsalHttpClientFactory
+- uid: PnP.Core.Auth.Services.Http.MsalHttpClientFactory.#ctor(IHttpClientFactory)
+  name: MsalHttpClientFactory(IHttpClientFactory)
+  href: api/PnP.Core.Auth.Services.Http.MsalHttpClientFactory.html#PnP_Core_Auth_Services_Http_MsalHttpClientFactory__ctor_IHttpClientFactory_
+  commentId: M:PnP.Core.Auth.Services.Http.MsalHttpClientFactory.#ctor(IHttpClientFactory)
+  fullName: PnP.Core.Auth.Services.Http.MsalHttpClientFactory.MsalHttpClientFactory(IHttpClientFactory)
+  nameWithType: MsalHttpClientFactory.MsalHttpClientFactory(IHttpClientFactory)
+- uid: PnP.Core.Auth.Services.Http.MsalHttpClientFactory.#ctor*
+  name: MsalHttpClientFactory
+  href: api/PnP.Core.Auth.Services.Http.MsalHttpClientFactory.html#PnP_Core_Auth_Services_Http_MsalHttpClientFactory__ctor_
+  commentId: Overload:PnP.Core.Auth.Services.Http.MsalHttpClientFactory.#ctor
+  isSpec: "True"
+  fullName: PnP.Core.Auth.Services.Http.MsalHttpClientFactory.MsalHttpClientFactory
+  nameWithType: MsalHttpClientFactory.MsalHttpClientFactory
+- uid: PnP.Core.Auth.Services.Http.MsalHttpClientFactory.GetHttpClient
+  name: GetHttpClient()
+  href: api/PnP.Core.Auth.Services.Http.MsalHttpClientFactory.html#PnP_Core_Auth_Services_Http_MsalHttpClientFactory_GetHttpClient
+  commentId: M:PnP.Core.Auth.Services.Http.MsalHttpClientFactory.GetHttpClient
+  fullName: PnP.Core.Auth.Services.Http.MsalHttpClientFactory.GetHttpClient()
+  nameWithType: MsalHttpClientFactory.GetHttpClient()
+- uid: PnP.Core.Auth.Services.Http.MsalHttpClientFactory.GetHttpClient*
+  name: GetHttpClient
+  href: api/PnP.Core.Auth.Services.Http.MsalHttpClientFactory.html#PnP_Core_Auth_Services_Http_MsalHttpClientFactory_GetHttpClient_
+  commentId: Overload:PnP.Core.Auth.Services.Http.MsalHttpClientFactory.GetHttpClient
+  isSpec: "True"
+  fullName: PnP.Core.Auth.Services.Http.MsalHttpClientFactory.GetHttpClient
+  nameWithType: MsalHttpClientFactory.GetHttpClient
 - uid: PnP.Core.Auth.Services.IAuthenticationProviderFactory
   name: IAuthenticationProviderFactory
   href: api/PnP.Core.Auth.Services.IAuthenticationProviderFactory.html
@@ -8899,15 +8937,15 @@ references:
   commentId: T:PnP.Core.Auth.UsernamePasswordAuthenticationProvider
   fullName: PnP.Core.Auth.UsernamePasswordAuthenticationProvider
   nameWithType: UsernamePasswordAuthenticationProvider
-- uid: PnP.Core.Auth.UsernamePasswordAuthenticationProvider.#ctor(ILogger{PnP.Core.Auth.OAuthAuthenticationProvider})
-  name: UsernamePasswordAuthenticationProvider(ILogger<OAuthAuthenticationProvider>)
-  href: api/PnP.Core.Auth.UsernamePasswordAuthenticationProvider.html#PnP_Core_Auth_UsernamePasswordAuthenticationProvider__ctor_ILogger_PnP_Core_Auth_OAuthAuthenticationProvider__
-  commentId: M:PnP.Core.Auth.UsernamePasswordAuthenticationProvider.#ctor(ILogger{PnP.Core.Auth.OAuthAuthenticationProvider})
-  name.vb: UsernamePasswordAuthenticationProvider(ILogger(Of OAuthAuthenticationProvider))
-  fullName: PnP.Core.Auth.UsernamePasswordAuthenticationProvider.UsernamePasswordAuthenticationProvider(ILogger<PnP.Core.Auth.OAuthAuthenticationProvider>)
-  fullName.vb: PnP.Core.Auth.UsernamePasswordAuthenticationProvider.UsernamePasswordAuthenticationProvider(ILogger(Of PnP.Core.Auth.OAuthAuthenticationProvider))
-  nameWithType: UsernamePasswordAuthenticationProvider.UsernamePasswordAuthenticationProvider(ILogger<OAuthAuthenticationProvider>)
-  nameWithType.vb: UsernamePasswordAuthenticationProvider.UsernamePasswordAuthenticationProvider(ILogger(Of OAuthAuthenticationProvider))
+- uid: PnP.Core.Auth.UsernamePasswordAuthenticationProvider.#ctor(ILogger{PnP.Core.Auth.OAuthAuthenticationProvider},IMsalHttpClientFactory)
+  name: UsernamePasswordAuthenticationProvider(ILogger<OAuthAuthenticationProvider>, IMsalHttpClientFactory)
+  href: api/PnP.Core.Auth.UsernamePasswordAuthenticationProvider.html#PnP_Core_Auth_UsernamePasswordAuthenticationProvider__ctor_ILogger_PnP_Core_Auth_OAuthAuthenticationProvider__IMsalHttpClientFactory_
+  commentId: M:PnP.Core.Auth.UsernamePasswordAuthenticationProvider.#ctor(ILogger{PnP.Core.Auth.OAuthAuthenticationProvider},IMsalHttpClientFactory)
+  name.vb: UsernamePasswordAuthenticationProvider(ILogger(Of OAuthAuthenticationProvider), IMsalHttpClientFactory)
+  fullName: PnP.Core.Auth.UsernamePasswordAuthenticationProvider.UsernamePasswordAuthenticationProvider(ILogger<PnP.Core.Auth.OAuthAuthenticationProvider>, IMsalHttpClientFactory)
+  fullName.vb: PnP.Core.Auth.UsernamePasswordAuthenticationProvider.UsernamePasswordAuthenticationProvider(ILogger(Of PnP.Core.Auth.OAuthAuthenticationProvider), IMsalHttpClientFactory)
+  nameWithType: UsernamePasswordAuthenticationProvider.UsernamePasswordAuthenticationProvider(ILogger<OAuthAuthenticationProvider>, IMsalHttpClientFactory)
+  nameWithType.vb: UsernamePasswordAuthenticationProvider.UsernamePasswordAuthenticationProvider(ILogger(Of OAuthAuthenticationProvider), IMsalHttpClientFactory)
 - uid: PnP.Core.Auth.UsernamePasswordAuthenticationProvider.#ctor(System.String,System.String,PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationUsernamePasswordOptions)
   name: UsernamePasswordAuthenticationProvider(String, String, PnPCoreAuthenticationUsernamePasswordOptions)
   href: api/PnP.Core.Auth.UsernamePasswordAuthenticationProvider.html#PnP_Core_Auth_UsernamePasswordAuthenticationProvider__ctor_System_String_System_String_PnP_Core_Auth_Services_Builder_Configuration_PnPCoreAuthenticationUsernamePasswordOptions_
@@ -8994,15 +9032,15 @@ references:
   commentId: T:PnP.Core.Auth.X509CertificateAuthenticationProvider
   fullName: PnP.Core.Auth.X509CertificateAuthenticationProvider
   nameWithType: X509CertificateAuthenticationProvider
-- uid: PnP.Core.Auth.X509CertificateAuthenticationProvider.#ctor(ILogger{PnP.Core.Auth.OAuthAuthenticationProvider})
-  name: X509CertificateAuthenticationProvider(ILogger<OAuthAuthenticationProvider>)
-  href: api/PnP.Core.Auth.X509CertificateAuthenticationProvider.html#PnP_Core_Auth_X509CertificateAuthenticationProvider__ctor_ILogger_PnP_Core_Auth_OAuthAuthenticationProvider__
-  commentId: M:PnP.Core.Auth.X509CertificateAuthenticationProvider.#ctor(ILogger{PnP.Core.Auth.OAuthAuthenticationProvider})
-  name.vb: X509CertificateAuthenticationProvider(ILogger(Of OAuthAuthenticationProvider))
-  fullName: PnP.Core.Auth.X509CertificateAuthenticationProvider.X509CertificateAuthenticationProvider(ILogger<PnP.Core.Auth.OAuthAuthenticationProvider>)
-  fullName.vb: PnP.Core.Auth.X509CertificateAuthenticationProvider.X509CertificateAuthenticationProvider(ILogger(Of PnP.Core.Auth.OAuthAuthenticationProvider))
-  nameWithType: X509CertificateAuthenticationProvider.X509CertificateAuthenticationProvider(ILogger<OAuthAuthenticationProvider>)
-  nameWithType.vb: X509CertificateAuthenticationProvider.X509CertificateAuthenticationProvider(ILogger(Of OAuthAuthenticationProvider))
+- uid: PnP.Core.Auth.X509CertificateAuthenticationProvider.#ctor(ILogger{PnP.Core.Auth.OAuthAuthenticationProvider},IMsalHttpClientFactory)
+  name: X509CertificateAuthenticationProvider(ILogger<OAuthAuthenticationProvider>, IMsalHttpClientFactory)
+  href: api/PnP.Core.Auth.X509CertificateAuthenticationProvider.html#PnP_Core_Auth_X509CertificateAuthenticationProvider__ctor_ILogger_PnP_Core_Auth_OAuthAuthenticationProvider__IMsalHttpClientFactory_
+  commentId: M:PnP.Core.Auth.X509CertificateAuthenticationProvider.#ctor(ILogger{PnP.Core.Auth.OAuthAuthenticationProvider},IMsalHttpClientFactory)
+  name.vb: X509CertificateAuthenticationProvider(ILogger(Of OAuthAuthenticationProvider), IMsalHttpClientFactory)
+  fullName: PnP.Core.Auth.X509CertificateAuthenticationProvider.X509CertificateAuthenticationProvider(ILogger<PnP.Core.Auth.OAuthAuthenticationProvider>, IMsalHttpClientFactory)
+  fullName.vb: PnP.Core.Auth.X509CertificateAuthenticationProvider.X509CertificateAuthenticationProvider(ILogger(Of PnP.Core.Auth.OAuthAuthenticationProvider), IMsalHttpClientFactory)
+  nameWithType: X509CertificateAuthenticationProvider.X509CertificateAuthenticationProvider(ILogger<OAuthAuthenticationProvider>, IMsalHttpClientFactory)
+  nameWithType.vb: X509CertificateAuthenticationProvider.X509CertificateAuthenticationProvider(ILogger(Of OAuthAuthenticationProvider), IMsalHttpClientFactory)
 - uid: PnP.Core.Auth.X509CertificateAuthenticationProvider.#ctor(System.String,System.String,PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationX509CertificateOptions)
   name: X509CertificateAuthenticationProvider(String, String, PnPCoreAuthenticationX509CertificateOptions)
   href: api/PnP.Core.Auth.X509CertificateAuthenticationProvider.html#PnP_Core_Auth_X509CertificateAuthenticationProvider__ctor_System_String_System_String_PnP_Core_Auth_Services_Builder_Configuration_PnPCoreAuthenticationX509CertificateOptions_
@@ -42505,6 +42543,64 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Services.Builder.Configuration.PnPCoreContextOptions.GraphFirst
   nameWithType: PnPCoreContextOptions.GraphFirst
+- uid: PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsAzureActiveDirectoryOptions
+  name: PnPCoreHttpRequestsAzureActiveDirectoryOptions
+  href: api/PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsAzureActiveDirectoryOptions.html
+  commentId: T:PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsAzureActiveDirectoryOptions
+  fullName: PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsAzureActiveDirectoryOptions
+  nameWithType: PnPCoreHttpRequestsAzureActiveDirectoryOptions
+- uid: PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsAzureActiveDirectoryOptions.DelayInSeconds
+  name: DelayInSeconds
+  href: api/PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsAzureActiveDirectoryOptions.html#PnP_Core_Services_Builder_Configuration_PnPCoreHttpRequestsAzureActiveDirectoryOptions_DelayInSeconds
+  commentId: P:PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsAzureActiveDirectoryOptions.DelayInSeconds
+  fullName: PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsAzureActiveDirectoryOptions.DelayInSeconds
+  nameWithType: PnPCoreHttpRequestsAzureActiveDirectoryOptions.DelayInSeconds
+- uid: PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsAzureActiveDirectoryOptions.DelayInSeconds*
+  name: DelayInSeconds
+  href: api/PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsAzureActiveDirectoryOptions.html#PnP_Core_Services_Builder_Configuration_PnPCoreHttpRequestsAzureActiveDirectoryOptions_DelayInSeconds_
+  commentId: Overload:PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsAzureActiveDirectoryOptions.DelayInSeconds
+  isSpec: "True"
+  fullName: PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsAzureActiveDirectoryOptions.DelayInSeconds
+  nameWithType: PnPCoreHttpRequestsAzureActiveDirectoryOptions.DelayInSeconds
+- uid: PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsAzureActiveDirectoryOptions.MaxRetries
+  name: MaxRetries
+  href: api/PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsAzureActiveDirectoryOptions.html#PnP_Core_Services_Builder_Configuration_PnPCoreHttpRequestsAzureActiveDirectoryOptions_MaxRetries
+  commentId: P:PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsAzureActiveDirectoryOptions.MaxRetries
+  fullName: PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsAzureActiveDirectoryOptions.MaxRetries
+  nameWithType: PnPCoreHttpRequestsAzureActiveDirectoryOptions.MaxRetries
+- uid: PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsAzureActiveDirectoryOptions.MaxRetries*
+  name: MaxRetries
+  href: api/PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsAzureActiveDirectoryOptions.html#PnP_Core_Services_Builder_Configuration_PnPCoreHttpRequestsAzureActiveDirectoryOptions_MaxRetries_
+  commentId: Overload:PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsAzureActiveDirectoryOptions.MaxRetries
+  isSpec: "True"
+  fullName: PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsAzureActiveDirectoryOptions.MaxRetries
+  nameWithType: PnPCoreHttpRequestsAzureActiveDirectoryOptions.MaxRetries
+- uid: PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsAzureActiveDirectoryOptions.UseIncrementalDelay
+  name: UseIncrementalDelay
+  href: api/PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsAzureActiveDirectoryOptions.html#PnP_Core_Services_Builder_Configuration_PnPCoreHttpRequestsAzureActiveDirectoryOptions_UseIncrementalDelay
+  commentId: P:PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsAzureActiveDirectoryOptions.UseIncrementalDelay
+  fullName: PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsAzureActiveDirectoryOptions.UseIncrementalDelay
+  nameWithType: PnPCoreHttpRequestsAzureActiveDirectoryOptions.UseIncrementalDelay
+- uid: PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsAzureActiveDirectoryOptions.UseIncrementalDelay*
+  name: UseIncrementalDelay
+  href: api/PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsAzureActiveDirectoryOptions.html#PnP_Core_Services_Builder_Configuration_PnPCoreHttpRequestsAzureActiveDirectoryOptions_UseIncrementalDelay_
+  commentId: Overload:PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsAzureActiveDirectoryOptions.UseIncrementalDelay
+  isSpec: "True"
+  fullName: PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsAzureActiveDirectoryOptions.UseIncrementalDelay
+  nameWithType: PnPCoreHttpRequestsAzureActiveDirectoryOptions.UseIncrementalDelay
+- uid: PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsAzureActiveDirectoryOptions.UseRetryAfterHeader
+  name: UseRetryAfterHeader
+  href: api/PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsAzureActiveDirectoryOptions.html#PnP_Core_Services_Builder_Configuration_PnPCoreHttpRequestsAzureActiveDirectoryOptions_UseRetryAfterHeader
+  commentId: P:PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsAzureActiveDirectoryOptions.UseRetryAfterHeader
+  fullName: PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsAzureActiveDirectoryOptions.UseRetryAfterHeader
+  nameWithType: PnPCoreHttpRequestsAzureActiveDirectoryOptions.UseRetryAfterHeader
+- uid: PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsAzureActiveDirectoryOptions.UseRetryAfterHeader*
+  name: UseRetryAfterHeader
+  href: api/PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsAzureActiveDirectoryOptions.html#PnP_Core_Services_Builder_Configuration_PnPCoreHttpRequestsAzureActiveDirectoryOptions_UseRetryAfterHeader_
+  commentId: Overload:PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsAzureActiveDirectoryOptions.UseRetryAfterHeader
+  isSpec: "True"
+  fullName: PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsAzureActiveDirectoryOptions.UseRetryAfterHeader
+  nameWithType: PnPCoreHttpRequestsAzureActiveDirectoryOptions.UseRetryAfterHeader
 - uid: PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsGraphOptions
   name: PnPCoreHttpRequestsGraphOptions
   href: api/PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsGraphOptions.html
@@ -42569,6 +42665,19 @@ references:
   commentId: T:PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsOptions
   fullName: PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsOptions
   nameWithType: PnPCoreHttpRequestsOptions
+- uid: PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsOptions.AzureActiveDirectory
+  name: AzureActiveDirectory
+  href: api/PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsOptions.html#PnP_Core_Services_Builder_Configuration_PnPCoreHttpRequestsOptions_AzureActiveDirectory
+  commentId: P:PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsOptions.AzureActiveDirectory
+  fullName: PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsOptions.AzureActiveDirectory
+  nameWithType: PnPCoreHttpRequestsOptions.AzureActiveDirectory
+- uid: PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsOptions.AzureActiveDirectory*
+  name: AzureActiveDirectory
+  href: api/PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsOptions.html#PnP_Core_Services_Builder_Configuration_PnPCoreHttpRequestsOptions_AzureActiveDirectory_
+  commentId: Overload:PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsOptions.AzureActiveDirectory
+  isSpec: "True"
+  fullName: PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsOptions.AzureActiveDirectory
+  nameWithType: PnPCoreHttpRequestsOptions.AzureActiveDirectory
 - uid: PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsOptions.MicrosoftGraph
   name: MicrosoftGraph
   href: api/PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsOptions.html#PnP_Core_Services_Builder_Configuration_PnPCoreHttpRequestsOptions_MicrosoftGraph
@@ -43994,6 +44103,58 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Services.PnPGlobalSettingsOptions.Environment
   nameWithType: PnPGlobalSettingsOptions.Environment
+- uid: PnP.Core.Services.PnPGlobalSettingsOptions.HttpAzureActiveDirectoryDelayInSeconds
+  name: HttpAzureActiveDirectoryDelayInSeconds
+  href: api/PnP.Core.Services.PnPGlobalSettingsOptions.html#PnP_Core_Services_PnPGlobalSettingsOptions_HttpAzureActiveDirectoryDelayInSeconds
+  commentId: P:PnP.Core.Services.PnPGlobalSettingsOptions.HttpAzureActiveDirectoryDelayInSeconds
+  fullName: PnP.Core.Services.PnPGlobalSettingsOptions.HttpAzureActiveDirectoryDelayInSeconds
+  nameWithType: PnPGlobalSettingsOptions.HttpAzureActiveDirectoryDelayInSeconds
+- uid: PnP.Core.Services.PnPGlobalSettingsOptions.HttpAzureActiveDirectoryDelayInSeconds*
+  name: HttpAzureActiveDirectoryDelayInSeconds
+  href: api/PnP.Core.Services.PnPGlobalSettingsOptions.html#PnP_Core_Services_PnPGlobalSettingsOptions_HttpAzureActiveDirectoryDelayInSeconds_
+  commentId: Overload:PnP.Core.Services.PnPGlobalSettingsOptions.HttpAzureActiveDirectoryDelayInSeconds
+  isSpec: "True"
+  fullName: PnP.Core.Services.PnPGlobalSettingsOptions.HttpAzureActiveDirectoryDelayInSeconds
+  nameWithType: PnPGlobalSettingsOptions.HttpAzureActiveDirectoryDelayInSeconds
+- uid: PnP.Core.Services.PnPGlobalSettingsOptions.HttpAzureActiveDirectoryMaxRetries
+  name: HttpAzureActiveDirectoryMaxRetries
+  href: api/PnP.Core.Services.PnPGlobalSettingsOptions.html#PnP_Core_Services_PnPGlobalSettingsOptions_HttpAzureActiveDirectoryMaxRetries
+  commentId: P:PnP.Core.Services.PnPGlobalSettingsOptions.HttpAzureActiveDirectoryMaxRetries
+  fullName: PnP.Core.Services.PnPGlobalSettingsOptions.HttpAzureActiveDirectoryMaxRetries
+  nameWithType: PnPGlobalSettingsOptions.HttpAzureActiveDirectoryMaxRetries
+- uid: PnP.Core.Services.PnPGlobalSettingsOptions.HttpAzureActiveDirectoryMaxRetries*
+  name: HttpAzureActiveDirectoryMaxRetries
+  href: api/PnP.Core.Services.PnPGlobalSettingsOptions.html#PnP_Core_Services_PnPGlobalSettingsOptions_HttpAzureActiveDirectoryMaxRetries_
+  commentId: Overload:PnP.Core.Services.PnPGlobalSettingsOptions.HttpAzureActiveDirectoryMaxRetries
+  isSpec: "True"
+  fullName: PnP.Core.Services.PnPGlobalSettingsOptions.HttpAzureActiveDirectoryMaxRetries
+  nameWithType: PnPGlobalSettingsOptions.HttpAzureActiveDirectoryMaxRetries
+- uid: PnP.Core.Services.PnPGlobalSettingsOptions.HttpAzureActiveDirectoryUseIncrementalDelay
+  name: HttpAzureActiveDirectoryUseIncrementalDelay
+  href: api/PnP.Core.Services.PnPGlobalSettingsOptions.html#PnP_Core_Services_PnPGlobalSettingsOptions_HttpAzureActiveDirectoryUseIncrementalDelay
+  commentId: P:PnP.Core.Services.PnPGlobalSettingsOptions.HttpAzureActiveDirectoryUseIncrementalDelay
+  fullName: PnP.Core.Services.PnPGlobalSettingsOptions.HttpAzureActiveDirectoryUseIncrementalDelay
+  nameWithType: PnPGlobalSettingsOptions.HttpAzureActiveDirectoryUseIncrementalDelay
+- uid: PnP.Core.Services.PnPGlobalSettingsOptions.HttpAzureActiveDirectoryUseIncrementalDelay*
+  name: HttpAzureActiveDirectoryUseIncrementalDelay
+  href: api/PnP.Core.Services.PnPGlobalSettingsOptions.html#PnP_Core_Services_PnPGlobalSettingsOptions_HttpAzureActiveDirectoryUseIncrementalDelay_
+  commentId: Overload:PnP.Core.Services.PnPGlobalSettingsOptions.HttpAzureActiveDirectoryUseIncrementalDelay
+  isSpec: "True"
+  fullName: PnP.Core.Services.PnPGlobalSettingsOptions.HttpAzureActiveDirectoryUseIncrementalDelay
+  nameWithType: PnPGlobalSettingsOptions.HttpAzureActiveDirectoryUseIncrementalDelay
+- uid: PnP.Core.Services.PnPGlobalSettingsOptions.HttpAzureActiveDirectoryUseRetryAfterHeader
+  name: HttpAzureActiveDirectoryUseRetryAfterHeader
+  href: api/PnP.Core.Services.PnPGlobalSettingsOptions.html#PnP_Core_Services_PnPGlobalSettingsOptions_HttpAzureActiveDirectoryUseRetryAfterHeader
+  commentId: P:PnP.Core.Services.PnPGlobalSettingsOptions.HttpAzureActiveDirectoryUseRetryAfterHeader
+  fullName: PnP.Core.Services.PnPGlobalSettingsOptions.HttpAzureActiveDirectoryUseRetryAfterHeader
+  nameWithType: PnPGlobalSettingsOptions.HttpAzureActiveDirectoryUseRetryAfterHeader
+- uid: PnP.Core.Services.PnPGlobalSettingsOptions.HttpAzureActiveDirectoryUseRetryAfterHeader*
+  name: HttpAzureActiveDirectoryUseRetryAfterHeader
+  href: api/PnP.Core.Services.PnPGlobalSettingsOptions.html#PnP_Core_Services_PnPGlobalSettingsOptions_HttpAzureActiveDirectoryUseRetryAfterHeader_
+  commentId: Overload:PnP.Core.Services.PnPGlobalSettingsOptions.HttpAzureActiveDirectoryUseRetryAfterHeader
+  isSpec: "True"
+  fullName: PnP.Core.Services.PnPGlobalSettingsOptions.HttpAzureActiveDirectoryUseRetryAfterHeader
+  nameWithType: PnPGlobalSettingsOptions.HttpAzureActiveDirectoryUseRetryAfterHeader
 - uid: PnP.Core.Services.PnPGlobalSettingsOptions.HttpMicrosoftGraphDelayInSeconds
   name: HttpMicrosoftGraphDelayInSeconds
   href: api/PnP.Core.Services.PnPGlobalSettingsOptions.html#PnP_Core_Services_PnPGlobalSettingsOptions_HttpMicrosoftGraphDelayInSeconds

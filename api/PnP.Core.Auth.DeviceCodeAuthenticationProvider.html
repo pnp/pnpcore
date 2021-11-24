@@ -130,24 +130,24 @@
   
   <span class="small pull-right mobile-hide">
     <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Auth_DeviceCodeAuthenticationProvider__ctor_ILogger_PnP_Core_Auth_OAuthAuthenticationProvider__.md&amp;value=---%0Auid%3A%20PnP.Core.Auth.DeviceCodeAuthenticationProvider.%23ctor(ILogger%7BPnP.Core.Auth.OAuthAuthenticationProvider%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Auth_DeviceCodeAuthenticationProvider__ctor_ILogger_PnP_Core_Auth_OAuthAuthenticationProvider__IMsalHttpClientFactory_.md&amp;value=---%0Auid%3A%20PnP.Core.Auth.DeviceCodeAuthenticationProvider.%23ctor(ILogger%7BPnP.Core.Auth.OAuthAuthenticationProvider%7D%2CIMsalHttpClientFactory)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Auth/Public/DeviceCodeAuthenticationProvider.cs/#L72" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Auth/Public/DeviceCodeAuthenticationProvider.cs/#L76" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Auth_DeviceCodeAuthenticationProvider__ctor_" data-uid="PnP.Core.Auth.DeviceCodeAuthenticationProvider.#ctor*"></a>
   
-  <h4 id="PnP_Core_Auth_DeviceCodeAuthenticationProvider__ctor_ILogger_PnP_Core_Auth_OAuthAuthenticationProvider__" data-uid="PnP.Core.Auth.DeviceCodeAuthenticationProvider.#ctor(ILogger{PnP.Core.Auth.OAuthAuthenticationProvider})"><a href="#collapsible-PnP_Core_Auth_DeviceCodeAuthenticationProvider__ctor_ILogger_PnP_Core_Auth_OAuthAuthenticationProvider__" class="expander" data-toggle="collapse">DeviceCodeAuthenticationProvider(ILogger&lt;OAuthAuthenticationProvider&gt;)</a></h4>
+  <h4 id="PnP_Core_Auth_DeviceCodeAuthenticationProvider__ctor_ILogger_PnP_Core_Auth_OAuthAuthenticationProvider__IMsalHttpClientFactory_" data-uid="PnP.Core.Auth.DeviceCodeAuthenticationProvider.#ctor(ILogger{PnP.Core.Auth.OAuthAuthenticationProvider},IMsalHttpClientFactory)"><a href="#collapsible-PnP_Core_Auth_DeviceCodeAuthenticationProvider__ctor_ILogger_PnP_Core_Auth_OAuthAuthenticationProvider__IMsalHttpClientFactory_" class="expander" data-toggle="collapse">DeviceCodeAuthenticationProvider(ILogger&lt;OAuthAuthenticationProvider&gt;, IMsalHttpClientFactory)</a></h4>
   
-  <div id="collapsible-PnP_Core_Auth_DeviceCodeAuthenticationProvider__ctor_ILogger_PnP_Core_Auth_OAuthAuthenticationProvider__" class="collapse in">
-  <div class="markdown level1 summary"><p>Public constructor leveraging DI to initialize the ILogger interfafce</p>
+  <div id="collapsible-PnP_Core_Auth_DeviceCodeAuthenticationProvider__ctor_ILogger_PnP_Core_Auth_OAuthAuthenticationProvider__IMsalHttpClientFactory_" class="collapse in">
+  <div class="markdown level1 summary"><p>Public constructor leveraging DI to initialize the ILogger and IMsalHttpClientFactory interfaces</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public DeviceCodeAuthenticationProvider(ILogger&lt;OAuthAuthenticationProvider&gt; logger)</code></pre>
+    <pre><code class="lang-csharp hljs">public DeviceCodeAuthenticationProvider(ILogger&lt;OAuthAuthenticationProvider&gt; logger, IMsalHttpClientFactory msalHttpClientFactory)</code></pre>
   </div>
 
   <h5 class="parameters">Parameters</h5>
@@ -157,6 +157,14 @@
         <span class="pull-right"><span class="xref">ILogger</span>&lt;<a class="xref" href="PnP.Core.Auth.OAuthAuthenticationProvider.html">OAuthAuthenticationProvider</a>&gt;</span>
         <span class="parametername">logger</span>
         <p><p>The instance of the logger service provided by DI</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><span class="xref">IMsalHttpClientFactory</span></span>
+        <span class="parametername">msalHttpClientFactory</span>
+        <p><p>The instance of the Msal Http Client Factory service provided by DI</p>
 </p>
       </td>
     </tr>
@@ -179,7 +187,7 @@
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Auth_DeviceCodeAuthenticationProvider__ctor_System_String_System_String_PnP_Core_Auth_Services_Builder_Configuration_PnPCoreAuthenticationDeviceCodeOptions_Action_PnP_Core_Auth_DeviceCodeNotification__.md&amp;value=---%0Auid%3A%20PnP.Core.Auth.DeviceCodeAuthenticationProvider.%23ctor(System.String%2CSystem.String%2CPnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationDeviceCodeOptions%2CAction%7BPnP.Core.Auth.DeviceCodeNotification%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Auth/Public/DeviceCodeAuthenticationProvider.cs/#L55" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Auth/Public/DeviceCodeAuthenticationProvider.cs/#L58" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Auth_DeviceCodeAuthenticationProvider__ctor_" data-uid="PnP.Core.Auth.DeviceCodeAuthenticationProvider.#ctor*"></a>
@@ -249,7 +257,7 @@
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Auth_DeviceCodeAuthenticationProvider__ctor_System_String_System_String_Uri_Action_PnP_Core_Auth_DeviceCodeNotification__.md&amp;value=---%0Auid%3A%20PnP.Core.Auth.DeviceCodeAuthenticationProvider.%23ctor(System.String%2CSystem.String%2CUri%2CAction%7BPnP.Core.Auth.DeviceCodeNotification%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Auth/Public/DeviceCodeAuthenticationProvider.cs/#L39" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Auth/Public/DeviceCodeAuthenticationProvider.cs/#L42" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Auth_DeviceCodeAuthenticationProvider__ctor_" data-uid="PnP.Core.Auth.DeviceCodeAuthenticationProvider.#ctor*"></a>
@@ -411,7 +419,7 @@
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Auth_DeviceCodeAuthenticationProvider_AuthenticateRequestAsync_Uri_HttpRequestMessage_.md&amp;value=---%0Auid%3A%20PnP.Core.Auth.DeviceCodeAuthenticationProvider.AuthenticateRequestAsync(Uri%2CHttpRequestMessage)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Auth/Public/DeviceCodeAuthenticationProvider.cs/#L114" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Auth/Public/DeviceCodeAuthenticationProvider.cs/#L120" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Auth_DeviceCodeAuthenticationProvider_AuthenticateRequestAsync_" data-uid="PnP.Core.Auth.DeviceCodeAuthenticationProvider.AuthenticateRequestAsync*"></a>
@@ -477,7 +485,7 @@
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Auth_DeviceCodeAuthenticationProvider_GetAccessTokenAsync_Uri_.md&amp;value=---%0Auid%3A%20PnP.Core.Auth.DeviceCodeAuthenticationProvider.GetAccessTokenAsync(Uri)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Auth/Public/DeviceCodeAuthenticationProvider.cs/#L195" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Auth/Public/DeviceCodeAuthenticationProvider.cs/#L201" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Auth_DeviceCodeAuthenticationProvider_GetAccessTokenAsync_" data-uid="PnP.Core.Auth.DeviceCodeAuthenticationProvider.GetAccessTokenAsync*"></a>
@@ -535,7 +543,7 @@
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Auth_DeviceCodeAuthenticationProvider_GetAccessTokenAsync_Uri_System_String___.md&amp;value=---%0Auid%3A%20PnP.Core.Auth.DeviceCodeAuthenticationProvider.GetAccessTokenAsync(Uri%2CSystem.String%5B%5D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Auth/Public/DeviceCodeAuthenticationProvider.cs/#L136" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Auth/Public/DeviceCodeAuthenticationProvider.cs/#L142" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Auth_DeviceCodeAuthenticationProvider_GetAccessTokenAsync_" data-uid="PnP.Core.Auth.DeviceCodeAuthenticationProvider.GetAccessTokenAsync*"></a>

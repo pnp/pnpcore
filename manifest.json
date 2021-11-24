@@ -18,7 +18,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Microsoft.Extensions.DependencyInjection.AuthenticationCollectionExtensions.html",
-          "hash": "7yoAMxnkyFcpPHbHHwn2uQ=="
+          "hash": "kDYO1tfHzalrgYP+nnzGSw=="
         }
       },
       "is_incremental": false,
@@ -822,7 +822,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Auth.CredentialManagerAuthenticationProvider.html",
-          "hash": "dtUH9y5YJPTtiJueGt9O0Q=="
+          "hash": "LFgNwGM95pBD3JV3l5l4cw=="
         }
       },
       "is_incremental": false,
@@ -834,7 +834,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Auth.DeviceCodeAuthenticationProvider.html",
-          "hash": "YMv0JA2U6RwCIcrNAA+X+g=="
+          "hash": "34KOZDIi9mLAnHtG04w29w=="
         }
       },
       "is_incremental": false,
@@ -846,7 +846,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Auth.DeviceCodeNotification.html",
-          "hash": "fqDbzTeTLAncXi28JRpj8g=="
+          "hash": "7BNGK1/lcxM3nWXZgJQ7bQ=="
         }
       },
       "is_incremental": false,
@@ -870,7 +870,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Auth.InteractiveAuthenticationProvider.html",
-          "hash": "BHfA5LkoZ38A40qTdZU1yQ=="
+          "hash": "RZMtjl1efyE5PtKxr16gug=="
         }
       },
       "is_incremental": false,
@@ -882,7 +882,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Auth.OAuthAuthenticationProvider.html",
-          "hash": "glDm4EPnAyLiVNZgSTLYnQ=="
+          "hash": "cIRlE6fYbcw8H/Pglaegfg=="
         }
       },
       "is_incremental": false,
@@ -894,7 +894,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Auth.OnBehalfOfAuthenticationProvider.html",
-          "hash": "qq5tq1dt4wEkm6eo1fYVbQ=="
+          "hash": "0QabsjnPHI826If+VSDljw=="
         }
       },
       "is_incremental": false,
@@ -1094,6 +1094,30 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Auth.Services.Http.MsalHttpClientFactory.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Auth.Services.Http.MsalHttpClientFactory.html",
+          "hash": "aLUnZLWBXEfTSTwa6+p6ow=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Auth.Services.Http.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Auth.Services.Http.html",
+          "hash": "jJqZdtJl99Wzu+c4ARhv5A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/PnP.Core.Auth.Services.IAuthenticationProviderFactory.yml",
       "output": {
         ".html": {
@@ -1134,7 +1158,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Auth.UsernamePasswordAuthenticationProvider.html",
-          "hash": "WNxiPyFSwatr2MpIBwJYLg=="
+          "hash": "XOoj1LOtIjHM6GJi9NFMTw=="
         }
       },
       "is_incremental": false,
@@ -1146,7 +1170,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Auth.X509CertificateAuthenticationProvider.html",
-          "hash": "cCLuxqNDZC8qYs1Y8uiTrg=="
+          "hash": "1eUnOrnxvlfhipK0Z48fyA=="
         }
       },
       "is_incremental": false,
@@ -5034,7 +5058,19 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Services.Builder.Configuration.PnPCoreContextOptions.html",
-          "hash": "g73XhiK4s1tTXhgcf07hEQ=="
+          "hash": "OlsRqgtVsklGpVzd9SUApg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsAzureActiveDirectoryOptions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsAzureActiveDirectoryOptions.html",
+          "hash": "XrW2MVFVkIw/X/mWIqQWpw=="
         }
       },
       "is_incremental": false,
@@ -5046,7 +5082,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsGraphOptions.html",
-          "hash": "H8lI4CInrec+tHmrHr5zBQ=="
+          "hash": "alJv61hnq4mnicbBKvHcjA=="
         }
       },
       "is_incremental": false,
@@ -5058,7 +5094,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsOptions.html",
-          "hash": "B+2lUCmLjEXcKtvQpgBpEw=="
+          "hash": "02o/K77EDJDeYVpXpNc9kw=="
         }
       },
       "is_incremental": false,
@@ -5070,7 +5106,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsSharePointRestOptions.html",
-          "hash": "J49wtmx67Og3Td2PfuyCeA=="
+          "hash": "PYon+chEQA5OTp8+tRg6sw=="
         }
       },
       "is_incremental": false,
@@ -5094,7 +5130,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Services.Builder.Configuration.PnPCoreSiteOptions.html",
-          "hash": "VLs+opwWy287BIXplAL0PA=="
+          "hash": "tm042vKsv3bxjiionra24g=="
         }
       },
       "is_incremental": false,
@@ -5106,7 +5142,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Services.Builder.Configuration.PnPCoreSitesOptions.html",
-          "hash": "g82sX48pe+AdesnyW0tIOQ=="
+          "hash": "k6ePkaLfwWf1GQtrsMLyiQ=="
         }
       },
       "is_incremental": false,
@@ -5118,7 +5154,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Services.Builder.Configuration.html",
-          "hash": "0JvtoF2+9wkf/vTQ+xJglw=="
+          "hash": "VX3IGj2ILiDjRTHTv/4Tmg=="
         }
       },
       "is_incremental": false,
@@ -5322,7 +5358,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Services.PnPGlobalSettingsOptions.html",
-          "hash": "em++k7Sa6Sl3zKdixIqOrA=="
+          "hash": "cboQB5foEdEbCQL0F7J3/Q=="
         }
       },
       "is_incremental": false,
@@ -5406,7 +5442,7 @@
       "output": {
         ".html": {
           "relative_path": "api/toc.html",
-          "hash": "eC0rSp7PCKqxK2vrOSGIAw=="
+          "hash": "muldHKYPf7v9geVo28vt2A=="
         }
       },
       "is_incremental": false,
@@ -7024,7 +7060,7 @@
         "ManagedReferenceDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build",
-          "total_file_count": 448,
+          "total_file_count": 451,
           "skipped_file_count": 0
         },
         "ResourceDocumentProcessor": {
