@@ -247,7 +247,7 @@ using System.Security.Cryptography.X509Certificates;
 
     /// &lt;summary&gt;
     /// Demo function that creates a site collection, uploads an image to site assets and creates a page with an image web part
-    /// GET/POST url: http://localhost:7071/api/CreateSite?owner=bert.jansen@bertonline.onmicrosoft.com&amp;sitename=deleteme1844
+    /// GET/POST url: http://localhost:7071/api/CreateSite?owner=joe@contoso.onmicrosoft.com&amp;sitename=myPnPCoreSDKDemoSite1
     /// &lt;/summary&gt;
     /// &lt;param name=&quot;req&quot;&gt;&lt;/param&gt;
     /// &lt;returns&gt;&lt;/returns&gt;
@@ -291,20 +291,13 @@ using System.Security.Cryptography.X509Certificates;
 
                     // Step 2: Create the page
                     var page = await newSiteContext.Web.NewPageAsync();
-                    page.AddSection(CanvasSectionTemplate.TwoColumnRight, 1);
+                    page.AddSection(CanvasSectionTemplate.OneColumn, 1);
 
-                    // Add text
-                    page.AddControl(page.NewTextPart(&quot;&lt;H1&gt;Hello everyone!&lt;/H1&gt;&quot;), page.Sections[0].Columns[0]);
-
-                    // Get the image web part 'blueprint'
-                    var availableComponents = await page.AvailablePageComponentsAsync();
-                    var imageWebPartComponent = availableComponents.FirstOrDefault(p =&gt; p.Id == page.DefaultWebPartToWebPartId(DefaultWebPart.Image));
-
-                    // Configure and add the image web part
-                    var imagePart = page.NewWebPart(imageWebPartComponent);
-                    imagePart.PropertiesJson = PrepareImageWebPartConfiguration(newSiteContext, addedFile.ServerRelativeUrl,
-                                                                                siteAssetsLibrary.Id, addedFile.UniqueId);
-                    page.AddControl(imagePart, page.Sections[0].Columns[1]);
+                    // Add text with inline image
+                    var text = page.NewTextPart();
+                    var parker = await page.GetInlineImageAsync(text, addedFile.ServerRelativeUrl, new PageImageOptions { Alignment = PageImageAlignment.Left });
+                    text.Text = $&quot;&lt;H2&gt;Hello everyone!&lt;/H2&gt;{parker}&lt;P&gt;Community rocks, sharing is caring!&lt;/P&gt;&quot;;
+                    page.AddControl(text, page.Sections[0].Columns[0]);
 
                     // Save the page
                     await page.SaveAsync(&quot;PnP.aspx&quot;);
@@ -324,18 +317,6 @@ using System.Security.Cryptography.X509Certificates;
             return response;
         }
     }
-
-    private static string PrepareImageWebPartConfiguration(PnPContext context, string imageUrl, Guid siteAssetsId, Guid imageId)
-    {
-        string baseImageWebPart = &quot;{\&quot;webPartData\&quot;:{\&quot;id\&quot;:\&quot;d1d91016-032f-456d-98a4-721247c305e8\&quot;,\&quot;instanceId\&quot;:\&quot;{InstanceId}\&quot;,\&quot;title\&quot;:\&quot;Image\&quot;,\&quot;description\&quot;:\&quot;Add an image, picture or photo to your page including text overlays and ability to crop and resize images.\&quot;,\&quot;audiences\&quot;:[],\&quot;serverProcessedContent\&quot;:{\&quot;htmlStrings\&quot;:{},\&quot;searchablePlainTexts\&quot;:{},\&quot;imageSources\&quot;:{\&quot;imageSource\&quot;:\&quot;{FullyQualifiedImageUrl}\&quot;},\&quot;links\&quot;:{},\&quot;customMetadata\&quot;:{\&quot;imageSource\&quot;:{\&quot;siteId\&quot;:\&quot;{SiteId}\&quot;,\&quot;webId\&quot;:\&quot;{WebId}\&quot;,\&quot;listId\&quot;:\&quot;{{ListId}}\&quot;,\&quot;uniqueId\&quot;:\&quot;{UniqueId}\&quot;,\&quot;imgWidth\&quot;:-1,\&quot;imgHeight\&quot;:-1}}},\&quot;dataVersion\&quot;:\&quot;1.9\&quot;,\&quot;properties\&quot;:{\&quot;imageSourceType\&quot;:2,\&quot;captionText\&quot;:\&quot;\&quot;,\&quot;altText\&quot;:\&quot;\&quot;,\&quot;linkUrl\&quot;:\&quot;\&quot;,\&quot;overlayText\&quot;:\&quot;\&quot;,\&quot;fileName\&quot;:\&quot;\&quot;,\&quot;siteId\&quot;:\&quot;{SiteId}\&quot;,\&quot;webId\&quot;:\&quot;{WebId}\&quot;,\&quot;listId\&quot;:\&quot;{{ListId}}\&quot;,\&quot;uniqueId\&quot;:\&quot;{UniqueId}\&quot;,\&quot;imgWidth\&quot;:-1,\&quot;imgHeight\&quot;:-1,\&quot;alignment\&quot;:\&quot;Center\&quot;,\&quot;fixAspectRatio\&quot;:false}}}&quot;;
-
-        return baseImageWebPart.Replace(&quot;{InstanceId}&quot;, Guid.NewGuid().ToString())
-                                .Replace(&quot;{FullyQualifiedImageUrl}&quot;, $&quot;https://{context.Uri.DnsSafeHost}{imageUrl}&quot;)
-                                .Replace(&quot;{SiteId}&quot;, context.Site.Id.ToString())
-                                .Replace(&quot;{WebId}&quot;, context.Web.Id.ToString())
-                                .Replace(&quot;{ListId}&quot;, siteAssetsId.ToString())
-                                .Replace(&quot;{UniqueId}&quot;, imageId.ToString());
-    }
 }
 </code></pre>
 <p>Replace the namespaces on top of the file with these:</p>
@@ -348,7 +329,6 @@ using PnP.Core.Services;
 using System;
 using System.Collections.Specialized;
 using System.IO;
-using System.Linq;
 using System.Net;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -361,12 +341,7 @@ using System.Web;
 <li>It will ensure there is a Site Assets library in the newly created SharePoint site</li>
 <li>It will ensure there's a folder <code>SitePages</code> having a sub folder <code>PnP</code> in the Site Assets library</li>
 <li>It will upload an image named <strong>parker.png</strong> to the <code>PnP</code> folder</li>
-<li>It will create a new page with a two column section
-<ol>
-<li>In the first column text is displayed</li>
-<li>In the second column the uploaded image is shown via an image web part</li>
-</ol>
-</li>
+<li>It will create a new page with a one column section and insert text with an inline image</li>
 </ol>
 <p>Before we can test the sample we still need to add the <strong>parker.png</strong> image file, you can <a href="https://github.com/pnp/media/blob/master/parker/pnp/600w/parker.png">grab the original PnP parker from here</a> but you can obviously take any image you have and name if <strong>parker.png</strong>. Important is that you you change the <strong>Copy to Output Directory</strong> to <strong>Copy Always</strong></p>
 <p><img src="../images/azfuncv4apponly-7.png" alt="Configure parker.png"></p>
