@@ -217,7 +217,7 @@ public class CreateSite
 
     /// <summary>
     /// Demo function that creates a site collection, uploads an image to site assets and creates a page with an image web part
-    /// GET/POST url: http://localhost:7071/api/CreateSite?owner=bert.jansen@bertonline.onmicrosoft.com&sitename=deleteme1844
+    /// GET/POST url: http://localhost:7071/api/CreateSite?owner=joe@contoso.onmicrosoft.com&sitename=myPnPCoreSDKDemoSite1
     /// </summary>
     /// <param name="req"></param>
     /// <returns></returns>
@@ -261,20 +261,13 @@ public class CreateSite
 
                     // Step 2: Create the page
                     var page = await newSiteContext.Web.NewPageAsync();
-                    page.AddSection(CanvasSectionTemplate.TwoColumnRight, 1);
+                    page.AddSection(CanvasSectionTemplate.OneColumn, 1);
 
-                    // Add text
-                    page.AddControl(page.NewTextPart("<H1>Hello everyone!</H1>"), page.Sections[0].Columns[0]);
-
-                    // Get the image web part 'blueprint'
-                    var availableComponents = await page.AvailablePageComponentsAsync();
-                    var imageWebPartComponent = availableComponents.FirstOrDefault(p => p.Id == page.DefaultWebPartToWebPartId(DefaultWebPart.Image));
-
-                    // Configure and add the image web part
-                    var imagePart = page.NewWebPart(imageWebPartComponent);
-                    imagePart.PropertiesJson = PrepareImageWebPartConfiguration(newSiteContext, addedFile.ServerRelativeUrl,
-                                                                                siteAssetsLibrary.Id, addedFile.UniqueId);
-                    page.AddControl(imagePart, page.Sections[0].Columns[1]);
+                    // Add text with inline image
+                    var text = page.NewTextPart();
+                    var parker = await page.GetInlineImageAsync(text, addedFile.ServerRelativeUrl, new PageImageOptions { Alignment = PageImageAlignment.Left });
+                    text.Text = $"<H2>Hello everyone!</H2>{parker}<P>Community rocks, sharing is caring!</P>";
+                    page.AddControl(text, page.Sections[0].Columns[0]);
 
                     // Save the page
                     await page.SaveAsync("PnP.aspx");
@@ -294,18 +287,6 @@ public class CreateSite
             return response;
         }
     }
-
-    private static string PrepareImageWebPartConfiguration(PnPContext context, string imageUrl, Guid siteAssetsId, Guid imageId)
-    {
-        string baseImageWebPart = "{\"webPartData\":{\"id\":\"d1d91016-032f-456d-98a4-721247c305e8\",\"instanceId\":\"{InstanceId}\",\"title\":\"Image\",\"description\":\"Add an image, picture or photo to your page including text overlays and ability to crop and resize images.\",\"audiences\":[],\"serverProcessedContent\":{\"htmlStrings\":{},\"searchablePlainTexts\":{},\"imageSources\":{\"imageSource\":\"{FullyQualifiedImageUrl}\"},\"links\":{},\"customMetadata\":{\"imageSource\":{\"siteId\":\"{SiteId}\",\"webId\":\"{WebId}\",\"listId\":\"{{ListId}}\",\"uniqueId\":\"{UniqueId}\",\"imgWidth\":-1,\"imgHeight\":-1}}},\"dataVersion\":\"1.9\",\"properties\":{\"imageSourceType\":2,\"captionText\":\"\",\"altText\":\"\",\"linkUrl\":\"\",\"overlayText\":\"\",\"fileName\":\"\",\"siteId\":\"{SiteId}\",\"webId\":\"{WebId}\",\"listId\":\"{{ListId}}\",\"uniqueId\":\"{UniqueId}\",\"imgWidth\":-1,\"imgHeight\":-1,\"alignment\":\"Center\",\"fixAspectRatio\":false}}}";
-
-        return baseImageWebPart.Replace("{InstanceId}", Guid.NewGuid().ToString())
-                                .Replace("{FullyQualifiedImageUrl}", $"https://{context.Uri.DnsSafeHost}{imageUrl}")
-                                .Replace("{SiteId}", context.Site.Id.ToString())
-                                .Replace("{WebId}", context.Web.Id.ToString())
-                                .Replace("{ListId}", siteAssetsId.ToString())
-                                .Replace("{UniqueId}", imageId.ToString());
-    }
 }
 ```
 
@@ -321,7 +302,6 @@ using PnP.Core.Services;
 using System;
 using System.Collections.Specialized;
 using System.IO;
-using System.Linq;
 using System.Net;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -335,9 +315,7 @@ This **CreateSite** Azure Function will do a number of things:
 3. It will ensure there is a Site Assets library in the newly created SharePoint site
 4. It will ensure there's a folder `SitePages` having a sub folder `PnP` in the Site Assets library
 5. It will upload an image named **parker.png** to the `PnP` folder
-6. It will create a new page with a two column section
-   1. In the first column text is displayed
-   2. In the second column the uploaded image is shown via an image web part
+6. It will create a new page with a one column section and insert text with an inline image
 
 Before we can test the sample we still need to add the **parker.png** image file, you can [grab the original PnP parker from here](https://github.com/pnp/media/blob/master/parker/pnp/600w/parker.png) but you can obviously take any image you have and name if **parker.png**. Important is that you you change the **Copy to Output Directory** to **Copy Always**
 
