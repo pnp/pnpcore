@@ -72,7 +72,7 @@ namespace ProvisioningDemo
 
                         // Step 2: Create the page
                         var page = await newSiteContext.Web.NewPageAsync();
-                        page.AddSection(CanvasSectionTemplate.TwoColumnRight, 1);
+                        page.AddSection(CanvasSectionTemplate.OneColumn, 1);
 
                         // Add text with inline image
                         var text = page.NewTextPart();
