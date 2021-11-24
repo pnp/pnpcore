@@ -5,7 +5,7 @@ using PnP.Core.Services;
 namespace PnP.Core.Auth.Services.Http
 {
     /// <summary>
-    /// Retry handler for Microsoft Graph requests
+    /// Retry handler for Azure AD authentication requests via MSAL
     /// </summary>
     internal sealed class MsalRetryHandler : RetryHandlerBase
     {
@@ -20,10 +20,10 @@ namespace PnP.Core.Auth.Services.Http
         {
             if (GlobalSettings != null)
             {
-                UseRetryAfterHeader = GlobalSettings.HttpMsalUseRetryAfterHeader;
-                MaxRetries = GlobalSettings.HttpMsalMaxRetries;
-                DelayInSeconds = GlobalSettings.HttpMsalDelayInSeconds;
-                IncrementalDelay = GlobalSettings.HttpMsalUseIncrementalDelay;
+                UseRetryAfterHeader = GlobalSettings.HttpAzureActiveDirectoryUseRetryAfterHeader;
+                MaxRetries = GlobalSettings.HttpAzureActiveDirectoryMaxRetries;
+                DelayInSeconds = GlobalSettings.HttpAzureActiveDirectoryDelayInSeconds;
+                IncrementalDelay = GlobalSettings.HttpAzureActiveDirectoryUseIncrementalDelay;
             }
         }
 

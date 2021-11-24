@@ -26,7 +26,7 @@ namespace PnP.Core.Auth
         private IConfidentialClientApplication confidentialClientApplication;
 
         // Instance private member, to keep the Msal Http Client Factory at service instance level
-        private IMsalHttpClientFactory msalHttpClientFactory;
+        private readonly IMsalHttpClientFactory msalHttpClientFactory;
 
         /// <summary>
         /// Public constructor for external consumers of the library

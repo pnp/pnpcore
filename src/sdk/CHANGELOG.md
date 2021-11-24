@@ -22,6 +22,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Added support for handling images used inline of a text part on a page [jansenbe - Bert Jansen]
 - Added support for .NET 6 ~ PnP Core SDK now will ship with as .NET Standard 2.0, .NET 5 and .NET 6 package [jansenbe - Bert Jansen]
 - Added taxonomy field related properties. #653 [s-KaiNet - Sergei Sergeev]
+- Added support for handling throttling and network resilience for Azure AD requests made via MSAL #656 [patrikhellgren - Patrik Hellgren]
 
 ### Changed
 
