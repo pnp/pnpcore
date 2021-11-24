@@ -878,6 +878,47 @@ namespace PnP.Core.Test.SharePoint
         }
 
         [TestMethod]
+        public async Task UpdatingPageTextDoesNotMakeSectionCollapsible()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var newPage = await context.Web.NewPageAsync();
+                string pageName = TestCommon.GetPnPSdkTestAssetName("UpdatingPageTextDoesNotMakeSectionCollapsible.aspx");
+                newPage.AddSection(CanvasSectionTemplate.OneColumn, 1);
+                newPage.AddControl(newPage.NewTextPart("before"), newPage.Sections[0].Columns[0]);
+
+                // Save the page
+                await newPage.SaveAsync(pageName);
+
+                Assert.IsFalse(newPage.Sections[0].Collapsible);
+
+                using (var context2 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))
+                {
+                    newPage = (await context2.Web.GetPagesAsync(pageName)).FirstOrDefault();
+
+                    Assert.IsFalse(newPage.Sections[0].Collapsible);
+
+                    // Update text 
+                    (newPage.Controls.First() as IPageText).Text = "after";
+
+                    // Update the page
+                    await newPage.SaveAsync(pageName);
+
+                    // Load the page again
+                    var pages = await context2.Web.GetPagesAsync(pageName);
+                    var updatedPage = pages.AsEnumerable().First();
+
+                    Assert.IsTrue(updatedPage.Sections.Count == 1);
+                    Assert.IsFalse(updatedPage.Sections[0].Collapsible);
+
+                    // Delete the page
+                    await updatedPage.DeleteAsync();                    
+                }
+            }
+        }
+
+        [TestMethod]
         public async Task PageSectionsAndWebPartsCreateTest()
         {
             //TestCommon.Instance.Mocking = false;
