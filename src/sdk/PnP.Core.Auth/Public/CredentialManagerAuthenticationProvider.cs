@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
+using Microsoft.Identity.Client;
 using PnP.Core.Auth.Services.Builder.Configuration;
 using System;
 using System.Configuration;
@@ -28,7 +29,7 @@ namespace PnP.Core.Auth
         /// <param name="options">Options for the authentication provider</param>
         public CredentialManagerAuthenticationProvider(string clientId, string tenantId,
             PnPCoreAuthenticationCredentialManagerOptions options)
-            : this(null)
+            : this(null, null)
         {
             Init(new PnPCoreAuthenticationCredentialConfigurationOptions
             {
@@ -54,14 +55,15 @@ namespace PnP.Core.Auth
         }
 
         /// <summary>
-        /// Public constructor leveraging DI to initialize the ILogger interfafce
+        /// Public constructor leveraging DI to initialize the ILogger and IMsalHttpClientFactory interfaces
         /// </summary>
         /// <param name="logger">The instance of the logger service provided by DI</param>
-        public CredentialManagerAuthenticationProvider(ILogger<OAuthAuthenticationProvider> logger)
+        /// <param name="msalHttpClientFactory">The instance of the Msal Http Client Factory service provided by DI</param>
+        public CredentialManagerAuthenticationProvider(ILogger<OAuthAuthenticationProvider> logger, IMsalHttpClientFactory msalHttpClientFactory)
             : base(logger)
         {
             // Create an instance of the inner UsernamePasswordAuthenticationProvider
-            usernamePasswordProvider = new UsernamePasswordAuthenticationProvider(logger);
+            usernamePasswordProvider = new UsernamePasswordAuthenticationProvider(logger, msalHttpClientFactory);
         }
 
 

@@ -39,6 +39,9 @@ namespace PnP.Core.Auth
         // Instance private member, to keep the token cache at service instance level
         private IConfidentialClientApplication confidentialClientApplication;
 
+        // Instance private member, to keep the Msal Http Client Factory at service instance level
+        private IMsalHttpClientFactory msalHttpClientFactory;
+
         /// <summary>
         /// Public constructor for external consumers of the library
         /// </summary>
@@ -66,7 +69,7 @@ namespace PnP.Core.Auth
         public OnBehalfOfAuthenticationProvider(string clientId, string tenantId,
             PnPCoreAuthenticationOnBehalfOfOptions options,
             Func<string> userTokenProvider)
-            : this(null)
+            : this(null, null)
         {
             UserTokenProvider = userTokenProvider;
             Init(new PnPCoreAuthenticationCredentialConfigurationOptions
@@ -89,7 +92,7 @@ namespace PnP.Core.Auth
         public OnBehalfOfAuthenticationProvider(string clientId, string tenantId,
             StoreName storeName, StoreLocation storeLocation, string thumbprint,
             Func<string> userTokenProvider)
-            : this(null)
+            : this(null, null)
         {
             UserTokenProvider = userTokenProvider;
             Init(new PnPCoreAuthenticationCredentialConfigurationOptions
@@ -106,12 +109,14 @@ namespace PnP.Core.Auth
         }
 
         /// <summary>
-        /// Public constructor leveraging DI to initialize the ILogger interfafce
+        /// Public constructor leveraging DI to initialize the ILogger and IMsalHttpClientFactory interfaces
         /// </summary>
         /// <param name="logger">The instance of the logger service provided by DI</param>
-        public OnBehalfOfAuthenticationProvider(ILogger<OAuthAuthenticationProvider> logger)
+        /// <param name="msalHttpClientFactory">The instance of the Msal Http Client Factory service provided by DI</param>
+        public OnBehalfOfAuthenticationProvider(ILogger<OAuthAuthenticationProvider> logger, IMsalHttpClientFactory msalHttpClientFactory)
             : base(logger)
         {
+            this.msalHttpClientFactory = msalHttpClientFactory;
         }
 
         /// <summary>
@@ -154,6 +159,7 @@ namespace PnP.Core.Auth
                 confidentialClientApplication = ConfidentialClientApplicationBuilder
                     .Create(ClientId)
                     .WithCertificate(Certificate)
+                    .WithHttpClientFactory(msalHttpClientFactory)
                     .WithPnPAdditionalAuthenticationSettings(
                         options.OnBehalfOf.AuthorityUri,
                         options.OnBehalfOf.RedirectUri,
@@ -166,6 +172,7 @@ namespace PnP.Core.Auth
                 confidentialClientApplication = ConfidentialClientApplicationBuilder
                     .Create(ClientId)
                     .WithClientSecret(ClientSecret.ToInsecureString())
+                    .WithHttpClientFactory(msalHttpClientFactory)
                     .WithPnPAdditionalAuthenticationSettings(
                         options.OnBehalfOf.AuthorityUri,
                         options.OnBehalfOf.RedirectUri,

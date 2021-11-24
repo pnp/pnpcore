@@ -101,7 +101,7 @@ namespace PnP.Core.Services
 
                 // Drain response content to free connections. Need to perform this
                 // before retry attempt and before the TooManyRetries ServiceException.
-                if (response.Content != null)
+                if (response?.Content != null)
                 {
 #if NET5_0_OR_GREATER
                     await response.Content.ReadAsByteArrayAsync(cancellationToken).ConfigureAwait(false);
