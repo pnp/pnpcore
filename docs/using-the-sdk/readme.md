@@ -269,7 +269,7 @@ using (var scope = host.Services.CreateScope())
 host.Dispose();
 ```
 
-If you prefer to create a `PnPContext` by specifying the URL you need in code or you want to be able to easily switch between authentication providers then below sample shows how to so. This snippet works **without an configuration file**, all you need to do is add the needed authentication provider configuration(s) and then later on in your code acquire the needed authentication providers via the `IAuthenticationProviderFactory`. Once you have your authentication provider you can use it in the ´Create´ methods on the context factory:
+If you prefer to create a `PnPContext` by specifying the URL you need in code or you want to be able to easily switch between authentication providers then below sample shows how to so. This snippet works **without an configuration file**, all you need to do is add the needed authentication provider configuration(s) and then later on in your code acquire the needed authentication providers via the `IAuthenticationProviderFactory`. Once you have your authentication provider you can use it in the `Create` methods on the context factory:
 
 ```csharp
 var host = Host.CreateDefaultBuilder()
@@ -278,24 +278,26 @@ var host = Host.CreateDefaultBuilder()
         services.AddPnPCore();
         services.AddPnPCoreAuthentication(options =>
         {
-            options.Credentials.Configurations.Add("interactive", new PnPCoreAuthenticationCredentialConfigurationOptions
-            {
-                ClientId = "c545f9ce-1c11-440b-812b-0b35217d9e83",
-                Interactive = new PnPCoreAuthenticationInteractiveOptions
-                {
-                    RedirectUri = new Uri("http://localhost")
-                }
-            });
+            options.Credentials.Configurations.Add("interactive", 
+              new PnPCoreAuthenticationCredentialConfigurationOptions
+              {
+                  ClientId = "c545f9ce-1c11-440b-812b-0b35217d9e83",
+                  Interactive = new PnPCoreAuthenticationInteractiveOptions
+                  {
+                      RedirectUri = new Uri("http://localhost")
+                  }
+              });
 
-            options.Credentials.Configurations.Add("usernamepassword", new PnPCoreAuthenticationCredentialConfigurationOptions
-            {
-                ClientId = "c545f9ce-1c11-440b-812b-0b35217d9e83",                
-                UsernamePassword = new PnPCoreAuthenticationUsernamePasswordOptions
-                {
-                    Username = "joe@contoso.onmicrosoft.com",
-                    Password = "xxx"
-                }
-            });
+            options.Credentials.Configurations.Add("usernamepassword", 
+              new PnPCoreAuthenticationCredentialConfigurationOptions
+              {
+                  ClientId = "c545f9ce-1c11-440b-812b-0b35217d9e83",                
+                  UsernamePassword = new PnPCoreAuthenticationUsernamePasswordOptions
+                  {
+                      Username = "joe@contoso.onmicrosoft.com",
+                      Password = "xxx"
+                  }
+              });
 
         });
     })
@@ -312,12 +314,14 @@ using (var scope = host.Services.CreateScope())
     var interactiveAuthProvider = pnpAuthenticationProviderFactory.Create("interactive");
     var passwordManagerAuthProvider = pnpAuthenticationProviderFactory.Create("usernamepassword");
 
-    using (var context = await pnpContextFactory.CreateAsync(new Uri("https://contoso.sharepoint.com/sites/prov-1"), interactiveAuthProvider))
+    using (var context = await pnpContextFactory.CreateAsync(new Uri("https://contoso.sharepoint.com/sites/prov-1"), 
+                                                             interactiveAuthProvider))
     {
         await context.Web.LoadAsync(p => p.Title);
         Console.WriteLine($"The title of the web is {context.Web.Title}");
 
-        using (var context2 = await pnpContextFactory.CreateAsync(new Uri("https://contoso.sharepoint.com/sites/prov-1"), passwordManagerAuthProvider))
+        using (var context2 = await pnpContextFactory.CreateAsync(new Uri("https://contoso.sharepoint.com/sites/prov-1"), 
+                                                                  passwordManagerAuthProvider))
         {
             await context2.Web.LoadAsync(p => p.Title);
             Console.WriteLine($"The title of the web is {context2.Web.Title}");
