@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 namespace PnP.Core.Model.SharePoint
 {
@@ -41,6 +42,9 @@ namespace PnP.Core.Model.SharePoint
 
         /// <summary>
         /// Collection of child terms of this term
+        /// Implements <see cref="IQueryable{T}"/>. <br />
+        /// See <see href="https://pnp.github.io/pnpcore/using-the-sdk/basics-getdata.html#requesting-model-collections">Requesting model collections</see> 
+        /// and <see href="https://pnp.github.io/pnpcore/using-the-sdk/basics-iqueryable.html">IQueryable performance considerations</see> to learn more.
         /// </summary>
         public ITermCollection Terms { get; }
 

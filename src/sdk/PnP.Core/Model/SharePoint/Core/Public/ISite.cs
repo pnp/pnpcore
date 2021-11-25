@@ -1,6 +1,7 @@
 ﻿using PnP.Core.Model.Security;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace PnP.Core.Model.SharePoint
@@ -48,11 +49,17 @@ namespace PnP.Core.Model.SharePoint
 
         /// <summary>
         /// Collection of sub-webs in the current Site object
+        /// Implements <see cref="IQueryable{T}"/>. <br />
+        /// See <see href="https://pnp.github.io/pnpcore/using-the-sdk/basics-getdata.html#requesting-model-collections">Requesting model collections</see> 
+        /// and <see href="https://pnp.github.io/pnpcore/using-the-sdk/basics-iqueryable.html">IQueryable performance considerations</see> to learn more.
         /// </summary>
         public IWebCollection AllWebs { get; }
 
         /// <summary>
         /// Collection of features enabled for the site
+        /// Implements <see cref="IQueryable{T}"/>. <br />
+        /// See <see href="https://pnp.github.io/pnpcore/using-the-sdk/basics-getdata.html#requesting-model-collections">Requesting model collections</see> 
+        /// and <see href="https://pnp.github.io/pnpcore/using-the-sdk/basics-iqueryable.html">IQueryable performance considerations</see> to learn more.
         /// </summary>
         public IFeatureCollection Features { get; }
 
@@ -197,6 +204,9 @@ namespace PnP.Core.Model.SharePoint
 
         /// <summary>
         /// Gets a value that specifies the collection of Recycle Bin items for the site collection.
+        /// Implements <see cref="IQueryable{T}"/>. <br />
+        /// See <see href="https://pnp.github.io/pnpcore/using-the-sdk/basics-getdata.html#requesting-model-collections">Requesting model collections</see> 
+        /// and <see href="https://pnp.github.io/pnpcore/using-the-sdk/basics-iqueryable.html">IQueryable performance considerations</see> to learn more.
         /// </summary>
         public IRecycleBinItemCollection RecycleBin { get; }
 
@@ -247,6 +257,9 @@ namespace PnP.Core.Model.SharePoint
 
         /// <summary>
         /// Gets a value that specifies the collection of user custom actions for the site collection.
+        /// Implements <see cref="IQueryable{T}"/>. <br />
+        /// See <see href="https://pnp.github.io/pnpcore/using-the-sdk/basics-getdata.html#requesting-model-collections">Requesting model collections</see> 
+        /// and <see href="https://pnp.github.io/pnpcore/using-the-sdk/basics-iqueryable.html">IQueryable performance considerations</see> to learn more.
         /// </summary>
         public IUserCustomActionCollection UserCustomActions { get; }
 
