@@ -160,7 +160,7 @@ Name | Value
 CertificateThumbPrint | thumbprint, e.g. 1C3342BA9B5269FDBCDCAB5D6334F1A60C73B184
 WEBSITE_LOAD_CERTIFICATES | thumbprint, e.g. 1C3342BA9B5269FDBCDCAB5D6334F1A60C73B184
 
-## Deploy the Function App code from Visual Studio
+### Deploy the Function App code from Visual Studio
 
 Final step now that the Function App is configured is to deploy our bits.
 
@@ -170,7 +170,7 @@ Final step now that the Function App is configured is to deploy our bits.
   - Select the downloaded profile
 - Click on **Publish** to push your project to the Azure Function App
 
-## Test your Function App in Azure
+### Test your Function App in Azure
 
 To test your Function App you now need to build an URL that points to your Azure Function App + it's function authorization key. To that URL the `owner` and `siteName` URL parameters have to be added. To get your Azure Function URL follow these steps:
 
