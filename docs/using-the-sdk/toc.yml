@@ -8,6 +8,8 @@
     href: basics-getdata-paging.md
   - name: Adding, updating and deleting data
     href: basics-addupdatedelete.md
+  - name: IQueryable performance considerations
+    href: basics-iqueryable.md
   - name: Advanced PnPContext use
     href: basics-context.md
   - name: Batching requests

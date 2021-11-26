@@ -2,6 +2,7 @@ using PnP.Core.Model.Security;
 using PnP.Core.Services;
 using System;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace PnP.Core.Model.SharePoint
@@ -181,6 +182,9 @@ namespace PnP.Core.Model.SharePoint
 
         /// <summary>
         /// Gets a value that returns a collection of file version objects that represent the versions of the file.
+        /// Implements <see cref="IQueryable{T}"/>. <br />
+        /// See <see href="https://pnp.github.io/pnpcore/using-the-sdk/basics-getdata.html#requesting-model-collections">Requesting model collections</see> 
+        /// and <see href="https://pnp.github.io/pnpcore/using-the-sdk/basics-iqueryable.html">IQueryable performance considerations</see> to learn more.
         /// </summary>
         public IFileVersionCollection Versions { get; }
 
