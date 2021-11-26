@@ -5632,7 +5632,7 @@
       "output": {
         ".html": {
           "relative_path": "demos/Demo.AzureFunction.OutOfProcess.AppOnly/readme.html",
-          "hash": "G+fOWHr8VM+We4e8EO/QWQ=="
+          "hash": "VXBBoU1X7vbyYgbgy/vsYg=="
         }
       },
       "is_incremental": false,
@@ -6074,7 +6074,7 @@
       "output": {
         ".html": {
           "relative_path": "tutorials/azurefunctions/v4processisolatedapponly.html",
-          "hash": "YEYzLhogumLKfomnzejJXg=="
+          "hash": "UHPUkQO+x1dD24ARZ97jeA=="
         }
       },
       "is_incremental": false,
