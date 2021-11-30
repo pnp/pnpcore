@@ -212,7 +212,7 @@ private static X509Certificate2 LoadCertificate(AzureFunctionSettings azureFunct
                                     "",
                                     X509KeyStorageFlags.Exportable |
                                     X509KeyStorageFlags.MachineKeySet |
-                                    X509KeyStorageFlags.PersistKeySet);
+                                    X509KeyStorageFlags.EphemeralKeySet);
     }
     else
     {

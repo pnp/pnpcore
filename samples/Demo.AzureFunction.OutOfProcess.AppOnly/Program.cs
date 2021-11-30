@@ -82,7 +82,7 @@ namespace ProvisioningDemo
                                             "",
                                             X509KeyStorageFlags.Exportable |
                                             X509KeyStorageFlags.MachineKeySet |
-                                            X509KeyStorageFlags.PersistKeySet);
+                                            X509KeyStorageFlags.EphemeralKeySet);
             }
             else
             {
