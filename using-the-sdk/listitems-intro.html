@@ -96,7 +96,7 @@
 <p>When processing list item responses from the server the SDK will translate the server response into a easy to use field value classes in case of complex field types. This feature depends on the List field information being present, you can load your list field information once when you get load your list like (<code>var myList = context.Web.Lists.GetByTitle(&quot;My List&quot;, p =&gt; p.Title, p =&gt; p.Fields.QueryProperties(p =&gt; p.InternalName, p =&gt; p.FieldTypeKind, p =&gt; p.TypeAsString, p =&gt; p.Title));</code>). The minimal required field properties are <code>InternalName</code>, <code>FieldTypeKind</code>, <code>TypeAsString</code> and <code>Title</code>.</p>
 </div>
 <p>Use below information to help pick the best option for reading list items.</p>
-<h3 id="no-need-to-read-system-properties-like-fileleafref-filedirref-and-no-need-to-filter-list-items">No need to read 'system properties' like FileLeafRef, FileDirRef and no need to filter list items</h3>
+<h3 id="no-need-to-read-system-properties-like-fileleafref-filedirref-and-youve-no-need-to-filter-list-items">No need to read 'system properties' like FileLeafRef, FileDirRef and you've no need to filter list items</h3>
 <table>
 <thead>
 <tr>
@@ -115,7 +115,7 @@
 </tr>
 </tbody>
 </table>
-<h3 id="you-need-to-read-system-properties-like-fileleafref-filedirref-or-you-need-to-filter-list-items">You need to read 'system properties' like FileLeafRef, FileDirRef or you need to filter list items</h3>
+<h3 id="you-need-to-read-system-properties-like-fileleafref-filedirref-or-you-need-to-filter-list-items-or-you-want-to-define-the-returned-fields">You need to read 'system properties' like FileLeafRef, FileDirRef or you need to filter list items or you want to define the returned fields</h3>
 <table>
 <thead>
 <tr>
