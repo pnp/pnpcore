@@ -54,6 +54,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Increased reliability via retry on SocketException in SendAsync #650 [patrikhellgren - Patrik Hellgren]
 - Non collapsible sections were wrongly loaded as collapsible sections in collapsed state [jansenbe - Bert Jansen]
 - Page sections where not removeable #666 [jansenbe - Bert Jansen]
+- List item documentation update #668 [koenzomers - Koen Zomers]
 
 ## [1.4.0]
 

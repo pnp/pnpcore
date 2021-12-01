@@ -20,19 +20,19 @@ The PnP Core SDK supports multiple ways to read list items and what approach to 
 
 Use below information to help pick the best option for reading list items.
 
-### No need to read 'system properties' like FileLeafRef, FileDirRef and no need to filter list items
+### No need to read 'system properties' like FileLeafRef, FileDirRef and you've no need to filter list items
 
 Requirements | Recommended approach
 -------------|---------------------
 List item count <= 100 | [Option A](#a-getting-list-items-max-100-items): expand the items via a `Get` or `Load` method
 List item count > 100 | [Option B](#b-getting-list-items-via-paging-no-item-limit): iterate over the list items using implicit paging
 
-### You need to read 'system properties' like FileLeafRef, FileDirRef or you need to filter list items
+### You need to read 'system properties' like FileLeafRef, FileDirRef or you need to filter list items or you want to define the returned fields
 
 Requirements | Recommended approach
 -------------|---------------------
 You want to also 'expand' list item collections like `RoleAssignments` | [Option C](#c-getting-list-items-via-the-loaditemsbycamlquery-approach): use a CAML query via the `LoadItemsByCamlQuery` methods
-You want to have more details on the list item properties (e.g. author name instead of only the author id or using a custom added field) | [Option D](#d-using-the-listdataasstream-approach): use a CAML query via the `ListDataAsStream` methods
+You want to have more details on the list item properties (e.g. author name instead of only the author id) | [Option D](#d-using-the-listdataasstream-approach): use a CAML query via the `ListDataAsStream` methods
 
 ### A. Getting list items (max 100 items)
 
