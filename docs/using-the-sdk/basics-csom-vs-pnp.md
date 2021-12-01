@@ -22,7 +22,7 @@ using (var context = await pnpContextFactory.CreateAsync("SiteToWorkWith"))
 }
 ```
 
-`PnPContext` is the starting point for all PnP Core SDK-related operations. However you have a lot more options on how to instantiate a `PnPContext` - using configuration name, site url, group id, using default or custom authentication provider and so on. All the method overloads are available at the `PnpContextFactory`.
+`PnPContext` is the starting point for all PnP Core SDK-related operations. However you have a lot more options on how to instantiate a `PnPContext` - using configuration name, site url, group id, using default or custom authentication provider and so on. All the method overloads are available at the `PnpContextFactory`. See the [Getting started page](./readme.md) to learn more about instantiating a `PnPContext`.
 
 ## Loading objects
 
@@ -104,8 +104,8 @@ The PnP Core SDK equivalent will be:
 ```csharp
 using (var context = await pnpContextFactory.CreateAsync("SiteToWorkWith"))
 {
-  var list = await context.Web.Lists.GetByTitleAsync("Documents"); // executes the first HTTP request
-  var web = await context.Web.GetAsync(w => w.Title, w => w.Id); // executes the second HTTP request
+  var web = await context.Web.GetAsync(w => w.Title, w => w.Id); // executes the first HTTP request
+  var list = await context.Web.Lists.GetByTitleAsync("Documents"); // executes the second HTTP request
 
   Console.WriteLine(list.Title);
   Console.WriteLine(web.Title);
