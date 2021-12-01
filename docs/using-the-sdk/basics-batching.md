@@ -95,9 +95,9 @@ While above example showed how to add items in a batch it's also possible to bat
 
 ```csharp
 // Create a single batch that loads SharePoint Site and Web data + Teams Members. As this involves REST and Graph the net
-// result will two batch requests going to Microsoft 365. One SharePoint batch request for the web + site data, one Microsoft
+// result will issue two batch requests going to Microsoft 365. One SharePoint batch request for the web + site data, one Microsoft
 // Graph batch request for the Teams data
-var batch = context.BatchClient.EnsureBatch();
+var batch = context.NewBatch();
 await context.Web.LoadBatchAsync(batch, p => p.Lists, p => p.Features);
 await context.Site.LoadBatchAsync(batch, p => p.Features, p => p.IsHubSite);
 await context.Team.LoadBatchAsync(batch, p => p.Members);
@@ -152,7 +152,7 @@ var sitePagesList = sitePages.AsEnumerable().First();
 In case of a collection the returned variable (e.g. `siteAssets` in above sample) simply allows you to query the results. When you're returning a simple type or a single model (e.g. `web` and `site` in below sample) you can access the batch loaded data via the `Result` property. Checking whether the batch was executed still happens via the `IsAvailable` property.
 
 ```csharp
-var batch = context.BatchClient.EnsureBatch();
+var batch = context.NewBatch();
 var web = await context.Web.GetBatchAsync(batch, p => p.Lists, p => p.Features);
 var site = await context.Site.GetBatchAsync(batch, p => p.Features, p => p.IsHubSite);
 

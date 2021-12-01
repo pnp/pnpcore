@@ -20,6 +20,8 @@
     href: basics-errorhandling.md
   - name: Custom API requests
     href: basics-customapirequests.md
+  - name: SharePoint CSOM vs PnP Core SDK
+    href: basics-csom-vs-pnp.md
   - name: PnP Framework interop
     href: basics-pnpframework.md
   - name: Microsoft Graph SDK interop
