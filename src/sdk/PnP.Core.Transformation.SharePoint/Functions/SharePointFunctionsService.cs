@@ -765,7 +765,22 @@ namespace PnP.Core.Transformation.SharePoint.Functions
                     return $"{siteCollectionToken}/{sourceAssetRelativeUrl.Substring(sourceAssetRelativeUrl.IndexOf("_layouts /", StringComparison.InvariantCultureIgnoreCase))}";
                 }
 
-                var targetAssetRelativeUrl = PersistImageFileContent(sourceAssetRelativeUrl, context);
+                var targetAssetRelativeUrl = "";
+
+                // Determine if the asset URL resides in the root site collection
+                // TODO: What if it is in a sub web not on the same web as the page
+                if (!sourceAssetRelativeUrl.ContainsIgnoringCasing(context.Web.ServerRelativeUrl) && 
+                    sourceAssetRelativeUrl.ContainsIgnoringCasing(context.Site.ServerRelativeUrl))
+                {
+                    string siteCollectionUrl = context.Site.EnsureProperty(o => o.Url);
+                    var siteCollContext = context.Clone(siteCollectionUrl);
+
+                    targetAssetRelativeUrl = PersistImageFileContent(sourceAssetRelativeUrl, siteCollContext);
+                }
+                else
+                {
+                    targetAssetRelativeUrl = PersistImageFileContent(sourceAssetRelativeUrl, context);
+                }
 
                 logger.LogInformation(
                     SharePointTransformationResources.Info_ImageFilePersisted
