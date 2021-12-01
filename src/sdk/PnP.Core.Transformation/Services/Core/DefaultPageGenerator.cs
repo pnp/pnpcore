@@ -1,21 +1,21 @@
-﻿using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
+﻿using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
+using Newtonsoft.Json.Linq;
+using PnP.Core.Model;
+using PnP.Core.Model.SharePoint;
+using PnP.Core.QueryModel;
+using PnP.Core.Transformation.Model;
 using PnP.Core.Transformation.Services.MappingProviders;
 using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
+using System.Net;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
-using PnP.Core.Model.SharePoint;
-using System.Text.Json;
-using System.Linq;
-using Newtonsoft.Json.Linq;
-using System.Net;
-using PnP.Core.Model;
-using Microsoft.Extensions.Caching.Memory;
-using PnP.Core.QueryModel;
-using PnP.Core.Transformation.Model;
 
 namespace PnP.Core.Transformation.Services.Core
 {
@@ -48,7 +48,18 @@ namespace PnP.Core.Transformation.Services.Core
             this.tokenParser = this.serviceProvider.GetService<TokenParser>();
         }
 
-        public async Task<Uri> GenerateAsync(PageTransformationContext context, MappingProviderOutput mappingOutput, Uri targetPageUri, CancellationToken token = default)
+        /// <summary>
+        /// Translates the provided input into a page
+        /// </summary>
+        /// <param name="context">Page transformation options</param>
+        /// <param name="mappingOutput">The mapping provider output</param>
+        /// <param name="targetPageUri">The url for the target page</param>
+        /// <param name="token">Cancellation token</param>
+        /// <returns>The result of the page generation</returns>
+        /// <exception cref="ArgumentNullException"></exception>
+        /// <exception cref="ArgumentException"></exception>
+        /// <exception cref="ApplicationException"></exception>
+        public async Task<PageGeneratorOutput> GenerateAsync(PageTransformationContext context, MappingProviderOutput mappingOutput, Uri targetPageUri, CancellationToken token = default)
         {
             #region Validate input arguments
 
@@ -69,6 +80,8 @@ namespace PnP.Core.Transformation.Services.Core
 
             #endregion
 
+            var result = new PageGeneratorOutput();
+
             #region Validate target site
 
             // Ensure to have the needed target web properties
@@ -82,7 +95,9 @@ namespace PnP.Core.Transformation.Services.Core
                 targetWeb.WebTemplate != "BDR" &&
                 targetWeb.WebTemplate != "DEV")
             {
-                logger.LogError(TransformationResources.Error_CrossSiteTransferTargetsNonModernSite);
+                logger.LogError(
+                    TransformationResources.Error_CrossSiteTransferTargetsNonModernSite
+                    .CorrelateString(context.Task.Id));
                 throw new ArgumentException(TransformationResources.Error_CrossSiteTransferTargetsNonModernSite);
             }
 
@@ -94,7 +109,9 @@ namespace PnP.Core.Transformation.Services.Core
             if (this.defaultPageTransformationOptions.PostAsNews && !this.defaultPageTransformationOptions.PublishPage)
             {
                 this.defaultPageTransformationOptions.PublishPage = true;
-                logger.LogWarning(TransformationResources.Warning_PostingAPageAsNewsRequiresPagePublishing);
+                logger.LogWarning(
+                    TransformationResources.Warning_PostingAPageAsNewsRequiresPagePublishing
+                    .CorrelateString(context.Task.Id));
             }
 
             // Check if the target page already exists
@@ -106,15 +123,17 @@ namespace PnP.Core.Transformation.Services.Core
                 targetFile = await targetWeb.GetFileByServerRelativeUrlAsync(targetPageUriString).ConfigureAwait(false);
                 targetFileExists = true;
             }
-            catch (SharePointRestServiceException ex)
+            catch (SharePointRestServiceException)
             {
                 // Simply ignore this exception and assume that the page does not exist
                 targetFileExists = false;
             }
             if (targetFileExists)
             {
-                logger.LogInformation(string.Format(System.Globalization.CultureInfo.InvariantCulture,
-                    TransformationResources.Info_PageAlreadyExistsInTargetLocation, targetPageUri.ToString()));
+                logger.LogInformation(
+                    TransformationResources.Info_PageAlreadyExistsInTargetLocation
+                    .CorrelateString(context.Task.Id),
+                    targetPageUri);
 
                 if (!this.defaultPageTransformationOptions.Overwrite)
                 {
@@ -122,7 +141,8 @@ namespace PnP.Core.Transformation.Services.Core
                     var errorMessage = string.Format(System.Globalization.CultureInfo.InvariantCulture,
                         TransformationResources.Error_PageNotOverwriteIfExists, targetPageUri.ToString());
 
-                    logger.LogError(errorMessage);
+                    logger.LogError(errorMessage
+                        .CorrelateString(context.Task.Id));
                     throw new ApplicationException(errorMessage);
                 }
             }
@@ -140,7 +160,9 @@ namespace PnP.Core.Transformation.Services.Core
 
             #region Check if the page is the home page
 
-            logger.LogDebug(TransformationResources.Debug_TransformCheckIfPageIsHomePage);
+            logger.LogDebug(
+                TransformationResources.Debug_TransformCheckIfPageIsHomePage
+                .CorrelateString(context.Task.Id));
 
             // Check if the page is the home page
             bool replacedByOOBHomePage = false;
@@ -154,27 +176,35 @@ namespace PnP.Core.Transformation.Services.Core
                     targetPage.KeepDefaultWebParts = true;
                     replacedByOOBHomePage = true;
 
-                    logger.LogInformation(TransformationResources.Info_TransformSourcePageHomePageUsingStock);
+                    logger.LogInformation(
+                        TransformationResources.Info_TransformSourcePageHomePageUsingStock
+                        .CorrelateString(context.Task.Id));
                 }
             }
 
             // If it is not the home, let's define the actual page structure
             if (!replacedByOOBHomePage)
             {
-                logger.LogInformation(TransformationResources.Info_TransformSourcePageAsArticlePage);
+                logger.LogInformation(
+                    TransformationResources.Info_TransformSourcePageAsArticlePage
+                    .CorrelateString(context.Task.Id));
 
                 #region Configure header from target page
                 if (mappingOutput.TargetPage.PageHeader == null || (mappingOutput.TargetPage.PageHeader as PageHeader).Type == PageHeaderType.None)
                 {
-                    logger.LogInformation(TransformationResources.Info_TransformArticleSetHeaderToNone);
+                    logger.LogInformation(
+                        TransformationResources.Info_TransformArticleSetHeaderToNone
+                        .CorrelateString(context.Task.Id));
 
                     if (mappingOutput.TargetPage.SetAuthorInPageHeader)
                     {
                         targetPage.SetDefaultPageHeader();
                         targetPage.PageHeader.LayoutType = PageHeaderLayoutType.NoImage;
 
-                        logger.LogInformation(TransformationResources.Info_TransformArticleSetHeaderToNoneWithAuthor);
-                        await SetAuthorInPageHeaderAsync(context, mappingOutput, targetPage, token).ConfigureAwait(false);
+                        logger.LogInformation(
+                            TransformationResources.Info_TransformArticleSetHeaderToNoneWithAuthor
+                            .CorrelateString(context.Task.Id));
+                        await SetAuthorInPageHeaderAsync(context, mappingOutput, targetPage, context.Task.Id, token).ConfigureAwait(false);
                     }
                     else
                     {
@@ -183,13 +213,16 @@ namespace PnP.Core.Transformation.Services.Core
                 }
                 else if ((mappingOutput.TargetPage.PageHeader as PageHeader).Type == PageHeaderType.Default)
                 {
-                    logger.LogInformation(TransformationResources.Info_TransformArticleSetHeaderToDefault);
+                    logger.LogInformation(
+                        TransformationResources.Info_TransformArticleSetHeaderToDefault
+                        .CorrelateString(context.Task.Id));
                     targetPage.SetDefaultPageHeader();
                 }
                 else if ((mappingOutput.TargetPage.PageHeader as PageHeader).Type == PageHeaderType.Custom)
                 {
                     var infoMessage = $"{TransformationResources.Info_TransformArticleSetHeaderToCustom} {TransformationResources.Info_TransformArticleHeaderImageUrl} {mappingOutput.TargetPage.PageHeader.ImageServerRelativeUrl}";
-                    logger.LogInformation(infoMessage);
+                    logger.LogInformation(infoMessage
+                        .CorrelateString(context.Task.Id));
 
                     targetPage.SetCustomPageHeader(mappingOutput.TargetPage.PageHeader.ImageServerRelativeUrl,
                         mappingOutput.TargetPage.PageHeader.TranslateX,
@@ -206,10 +239,10 @@ namespace PnP.Core.Transformation.Services.Core
             // Create the web parts and the transformed content
 
             // Process all the sections, columns, and controls
-            await GenerateTargetCanvasControlsAsync(targetWeb, targetPage, mappingOutput).ConfigureAwait(false);
+            await GenerateTargetCanvasControlsAsync(targetWeb, targetPage, mappingOutput, context.Task.Id).ConfigureAwait(false);
 
             // Process metadata
-            await CopyPageMetadataAsync(targetFile, mappingOutput).ConfigureAwait(false);
+            await CopyPageMetadataAsync(targetFile, mappingOutput, context.Task.Id).ConfigureAwait(false);
 
             // TODO: Process permissions
 
@@ -323,7 +356,7 @@ namespace PnP.Core.Transformation.Services.Core
                 && mappingOutput.TargetPage.Editor != null) ||
                 this.defaultPageTransformationOptions.PostAsNews)
             {
-                await UpdateTargetPageWithSourcePageInformationAsync(targetFile, mappingOutput).ConfigureAwait(false);
+                await UpdateTargetPageWithSourcePageInformationAsync(targetFile, mappingOutput, context.Task.Id).ConfigureAwait(false);
             }
 
             // Return the generated page URL
@@ -336,10 +369,12 @@ namespace PnP.Core.Transformation.Services.Core
                 throw new ApplicationException(TransformationResources.Error_InvalidTargetPageUri);
             }
 
-            return targetPageUri;
+            result.GeneratedPageUrl = targetPageUri;
+
+            return result;
         }
 
-        private async Task UpdateTargetPageWithSourcePageInformationAsync(IFile targetFile, MappingProviderOutput mappingOutput)
+        private async Task UpdateTargetPageWithSourcePageInformationAsync(IFile targetFile, MappingProviderOutput mappingOutput, Guid taskId)
         {
             try
             {
@@ -406,11 +441,13 @@ namespace PnP.Core.Transformation.Services.Core
             catch (Exception ex)
             {
                 // Eat exceptions as this is not critical for the generated page
-                logger.LogWarning(string.Format(TransformationResources.Warning_NonCriticalErrorDuringPublish, ex.Message));
+                logger.LogWarning(
+                    TransformationResources.Warning_NonCriticalErrorDuringPublish
+                    .CorrelateString(taskId), ex.Message);
             }
         }
 
-        private async Task CopyPageMetadataAsync(IFile targetFile, MappingProviderOutput mappingOutput)
+        private async Task CopyPageMetadataAsync(IFile targetFile, MappingProviderOutput mappingOutput, Guid taskId)
         {
             // Ensure the properties to define the cache key
             var targetWeb = targetFile.PnPContext.Web;
@@ -422,7 +459,7 @@ namespace PnP.Core.Transformation.Services.Core
             // Retrieve the list of fields from cache
             var fieldsToCopy = await GetFieldsFromCache(targetFile, targetWeb, targetSite).ConfigureAwait(false);
 
-            bool listItemWasReloaded = false;
+            //bool listItemWasReloaded = false;
             if (fieldsToCopy.Count > 0)
             {
                 // Load the list item corresponding to the file
@@ -436,16 +473,18 @@ namespace PnP.Core.Transformation.Services.Core
                 // TODO: Complete metadata fields handling (taxonomy with mapping provider and other fields)
                 foreach (var fieldToCopy in fieldsToCopy.Where(f => f.Type == "TaxonomyFieldTypeMulti" || f.Type == "TaxonomyFieldType"))
                 {
-                    logger.LogInformation(string.Format(System.Globalization.CultureInfo.InvariantCulture,
-                        TransformationResources.Info_MappingTaxonomyField, fieldToCopy.Name));
+                    logger.LogInformation(
+                        TransformationResources.Info_MappingTaxonomyField
+                        .CorrelateString(taskId), fieldToCopy.Name);
 
                     // https://pnp.github.io/pnpcore/using-the-sdk/listitems-fields.html#taxonomy-fields
                 }
 
                 foreach (var fieldToCopy in fieldsToCopy.Where(f => f.Type != "TaxonomyFieldTypeMulti" && f.Type != "TaxonomyFieldType"))
                 {
-                    logger.LogInformation(string.Format(System.Globalization.CultureInfo.InvariantCulture,
-                        TransformationResources.Info_MappingRegularField, fieldToCopy.Name));
+                    logger.LogInformation(
+                        TransformationResources.Info_MappingRegularField
+                        .CorrelateString(taskId), fieldToCopy.Name);
 
                     // https://pnp.github.io/pnpcore/using-the-sdk/listitems-fields.html
                 }
@@ -482,7 +521,7 @@ namespace PnP.Core.Transformation.Services.Core
             return result;
         }
 
-        private async Task GenerateTargetCanvasControlsAsync(IWeb targetWeb, IPage targetPage, MappingProviderOutput mappingOutput)
+        private async Task GenerateTargetCanvasControlsAsync(IWeb targetWeb, IPage targetPage, MappingProviderOutput mappingOutput, Guid taskId)
         {
             // Prepare global tokens
             var globalTokens = await PrepareGlobalTokensAsync(targetWeb).ConfigureAwait(false);
@@ -508,13 +547,13 @@ namespace PnP.Core.Transformation.Services.Core
 
                     foreach (var control in column.Controls)
                     {
-                        GenerateTargetCanvasControl(targetPage, componentsToAdd, controlOrder, targetColumn, control, globalTokens);
+                        GenerateTargetCanvasControl(targetPage, componentsToAdd, controlOrder, targetColumn, control, globalTokens, taskId);
                     }
                 }
             }
         }
 
-        private void GenerateTargetCanvasControl(IPage targetPage, List<PageComponent> componentsToAdd, int controlOrder, ICanvasColumn targetColumn, Model.CanvasControl control, Dictionary<string, string> globalTokens)
+        private void GenerateTargetCanvasControl(IPage targetPage, List<PageComponent> componentsToAdd, int controlOrder, ICanvasColumn targetColumn, Model.CanvasControl control, Dictionary<string, string> globalTokens, Guid taskId)
         {
             // Prepare a web part control container
             IPageComponent baseControl = null;
@@ -530,7 +569,9 @@ namespace PnP.Core.Transformation.Services.Core
                     targetPage.AddControl(text, targetColumn, controlOrder);
 
                     // Log the just executed action
-                    logger.LogInformation(TransformationResources.Info_CreatedTextControl);
+                    logger.LogInformation(
+                        TransformationResources.Info_CreatedTextControl
+                        .CorrelateString(taskId));
 
                     break;
                 case Model.CanvasControlType.CustomClientSideWebPart:
@@ -539,7 +580,9 @@ namespace PnP.Core.Transformation.Services.Core
                     // Check if this web part belongs to the list of "usable" web parts for this site
                     baseControl = componentsToAdd.FirstOrDefault(p => p.Id.Equals($"{{{ControlId}}}", StringComparison.InvariantCultureIgnoreCase));
 
-                    logger.LogInformation(TransformationResources.Info_UsingCustomModernWebPart);
+                    logger.LogInformation(
+                        TransformationResources.Info_UsingCustomModernWebPart
+                        .CorrelateString(taskId));
 
                     break;
                 case Model.CanvasControlType.DefaultWebPart:
@@ -574,8 +617,9 @@ namespace PnP.Core.Transformation.Services.Core
                                     // Override the JSON data we read from the model as this is fully dynamic due to the nature of the add-in client part
                                     jsonControlData = jsonProperties.ToString(Newtonsoft.Json.Formatting.None);
 
-                                    logger.LogInformation(string.Format(System.Globalization.CultureInfo.InvariantCulture,
-                                        TransformationResources.Info_ContentUsingAddinWebPart, baseControl.Name));
+                                    logger.LogInformation(
+                                        TransformationResources.Info_ContentUsingAddinWebPart
+                                        .CorrelateString(taskId), baseControl.Name);
 
                                     break;
                                 }
@@ -587,8 +631,9 @@ namespace PnP.Core.Transformation.Services.Core
                     {
                         baseControl = componentsToAdd.FirstOrDefault(p => p.Name.Equals(webPartName, StringComparison.InvariantCultureIgnoreCase));
 
-                        logger.LogInformation(string.Format(System.Globalization.CultureInfo.InvariantCulture,
-                            TransformationResources.Info_ContentUsingModernWebPart, webPartType));
+                        logger.LogInformation(
+                            TransformationResources.Info_ContentUsingModernWebPart
+                            .CorrelateString(taskId), webPartType);
                     }
 
                     // If we found the web part as a possible candidate to use then add it
@@ -603,12 +648,15 @@ namespace PnP.Core.Transformation.Services.Core
                         // Add the actual text control to the page
                         targetPage.AddControl(myWebPart, targetColumn, controlOrder);
 
-                        logger.LogInformation(string.Format(System.Globalization.CultureInfo.InvariantCulture,
-                            TransformationResources.Info_AddedClientSideWebPartToPage, webPartTitle));
+                        logger.LogInformation(
+                            TransformationResources.Info_AddedClientSideWebPartToPage
+                            .CorrelateString(taskId), webPartTitle);
                     }
                     else
                     {
-                        logger.LogWarning(TransformationResources.Warning_ContentWarnModernNotFound);
+                        logger.LogWarning(
+                            TransformationResources.Warning_ContentWarnModernNotFound
+                            .CorrelateString(taskId));
                     }
 
                     break;
@@ -655,7 +703,7 @@ namespace PnP.Core.Transformation.Services.Core
         }
 
 
-        internal async Task SetAuthorInPageHeaderAsync(PageTransformationContext context, MappingProviderOutput mappingOutput, IPage targetClientSidePage, CancellationToken token = default)
+        internal async Task SetAuthorInPageHeaderAsync(PageTransformationContext context, MappingProviderOutput mappingOutput, IPage targetClientSidePage, Guid taskId, CancellationToken token = default)
         {
             // Try to get th
             var userMappingProvider = serviceProvider.GetService<IUserMappingProvider>();
@@ -681,7 +729,11 @@ namespace PnP.Core.Transformation.Services.Core
                             // Don't serialize null values
                             var jsonSerializerOptions = new JsonSerializerOptions()
                             {
+#if NET5_0_OR_GREATER
+                                DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
+#else
                                 IgnoreNullValues = true,
+#endif
                             };
 
                             var json = JsonSerializer.Serialize(author, jsonSerializerOptions);
@@ -694,23 +746,25 @@ namespace PnP.Core.Transformation.Services.Core
                     }
                     else
                     {
-                        logger.LogWarning(string.Format(System.Globalization.CultureInfo.InvariantCulture,
-                            TransformationResources.Warning_PageHeaderAuthorNotSet,
-                            mappingOutput.TargetPage.Author));
+                        logger.LogWarning(
+                            TransformationResources.Warning_PageHeaderAuthorNotSet
+                            .CorrelateString(taskId),
+                            mappingOutput.TargetPage.Author);
                     }
                 }
                 else
                 {
-                    logger.LogWarning(string.Format(System.Globalization.CultureInfo.InvariantCulture,
-                        TransformationResources.Warning_PageHeaderAuthorNotSet,
-                        mappingOutput.TargetPage.Author));
+                    logger.LogWarning(
+                        TransformationResources.Warning_PageHeaderAuthorNotSet
+                        .CorrelateString(taskId),
+                        mappingOutput.TargetPage.Author);
                 }
             }
             catch (Exception ex)
             {
-                logger.LogWarning(string.Format(System.Globalization.CultureInfo.InvariantCulture,
-                    TransformationResources.Warning_PageHeaderAuthorNotSetGenericError,
-                    ex.Message));
+                logger.LogWarning(
+                    TransformationResources.Warning_PageHeaderAuthorNotSetGenericError
+                    .CorrelateString(taskId), ex.Message);
             }
         }
 

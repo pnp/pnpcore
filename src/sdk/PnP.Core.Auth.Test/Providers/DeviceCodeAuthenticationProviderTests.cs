@@ -28,7 +28,8 @@ namespace PnP.Core.Auth.Test.Providers
 
             using (var context = await TestCommon.Instance.GetContextAsync(
                 TestCommon.TestSiteDeviceCode,
-                (authProvider) => {
+                (authProvider) =>
+                {
                     ((DeviceCodeAuthenticationProvider)authProvider)
                         .DeviceCodeVerification = DeviceCodeVerificationCallback;
                 }))
@@ -44,7 +45,8 @@ namespace PnP.Core.Auth.Test.Providers
 
             using (var context = await TestCommon.Instance.GetContextAsync(
                 TestCommon.TestSiteDeviceCode,
-                (authProvider) => {
+                (authProvider) =>
+                {
                     ((DeviceCodeAuthenticationProvider)authProvider)
                         .DeviceCodeVerification = DeviceCodeVerificationCallback;
                 }))

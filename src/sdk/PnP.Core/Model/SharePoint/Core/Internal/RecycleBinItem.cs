@@ -13,7 +13,7 @@ namespace PnP.Core.Model.SharePoint
         Uri = "_api/Web/RecycleBin(guid'{Id}')", Get = "_api/Web/RecycleBin", LinqGet = "_api/Web/RecycleBin")]
     [SharePointType("SP.RecycleBinItem", Target = typeof(Site),
         Uri = "_api/Site/RecycleBin(guid'{Id}')", Get = "_api/Site/RecycleBin", LinqGet = "_api/Site/RecycleBin")]
-    internal partial class RecycleBinItem : BaseDataModel<IRecycleBinItem>, IRecycleBinItem
+    internal sealed class RecycleBinItem : BaseDataModel<IRecycleBinItem>, IRecycleBinItem
     {
         #region Construction
         public RecycleBinItem()

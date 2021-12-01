@@ -11,9 +11,6 @@ using (var context = await pnpContextFactory.CreateAsync("SiteToWorkWith"))
 }
 ```
 
-> [!Note]
-> The taxonomy implementation uses Microsoft Graph and currently the Microsoft Graph taxonomy APIs are in beta. See the ["Graph V1 versus Graph Beta" section](basics-apis.md) to learn more.
-
 ## Working the term store
 
 All taxonomy objects like term groups, term sets and terms live in a term store. This term store can be access via the `TermStore` property of the `PnPContext` you're using:

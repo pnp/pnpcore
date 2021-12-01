@@ -1,14 +1,20 @@
 - name: Overview of Samples
   href: README.md
   items:
+  - name: Azure V4 Function
+    href: Demo.AzureFunction.OutOfProcess.AppOnly/readme.md
+  - name: Azure V3 Function
+    href: Demo.AzureFunction/README.md
   - name: ASP.NET Core
     href: Demo.ASPNetCore/README.md
-  - name: Azure Function
-    href: Demo.AzureFunction/README.md
   - name: Blazor App
     href: Demo.Blazor/README.md
+  - name: Minimal Console App
+    href: Demo.Console.Minimal/readme.md
   - name: Console App
     href: Demo.Console/README.md
+  - name: Persistent token cache demo
+    href: Demo.PersistentTokenCache/README.md
   - name: Raspberry Pi
     href: Demo.RPi/README.md
   - name: WPF App

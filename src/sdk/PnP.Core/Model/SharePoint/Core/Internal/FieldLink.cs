@@ -9,9 +9,7 @@ namespace PnP.Core.Model.SharePoint
     /// FieldLink class, write your custom code here
     /// </summary>
     [SharePointType("SP.FieldLink", Target = typeof(ContentType), Uri = "_api/Web/ContentTypes('{Parent.Id}')/FieldLinks')", Get = "_api/Web/ContentTypes('{Parent.Id}')/FieldLinks", LinqGet = "_api/Web/ContentTypes('{Parent.Id}')/FieldLinks")]
-    // TODO A special target should be achieve to support List Content Types
-    //[SharePointType("SP.FieldLink", Target = typeof(ContentType), Uri = "_api/Web/ContentTypes('{Parent.Id}')/FieldLinks')", Get = "_api/Web/ContentTypes('{Parent.Id}')/FieldLinks", LinqGet = "_api/Web/ContentTypes('{Parent.Id}')/FieldLinks")]
-    internal partial class FieldLink : BaseDataModel<IFieldLink>, IFieldLink
+    internal sealed class FieldLink : BaseDataModel<IFieldLink>, IFieldLink
     {
         #region Construction
         public FieldLink()

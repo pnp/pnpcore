@@ -1,11 +1,11 @@
-﻿using System;
+﻿using Microsoft.Extensions.Logging;
+using PnP.Core.Services;
+using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.Extensions.Logging;
-using PnP.Core.Services;
 
 namespace PnP.Core.Transformation.Services.Core
 {
@@ -164,7 +164,9 @@ namespace PnP.Core.Transformation.Services.Core
         /// <param name="query">Query to use for filtering</param>
         /// <param name="token">The cancellation token, if any</param>
         /// <returns></returns>
+#pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
         public override async IAsyncEnumerable<TransformationProcessTaskStatus> GetTasksStatusAsync(TasksStatusQuery query, [EnumeratorCancellation] CancellationToken token = default)
+#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
         {
             if (query == null) throw new ArgumentNullException(nameof(query));
 

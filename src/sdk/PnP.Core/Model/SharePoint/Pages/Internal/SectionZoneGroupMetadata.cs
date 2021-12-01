@@ -2,7 +2,7 @@
 
 namespace PnP.Core.Model.SharePoint
 {
-    internal class SectionZoneGroupMetadata
+    internal sealed class SectionZoneGroupMetadata
     {
         [JsonPropertyName("type")]
         public int Type

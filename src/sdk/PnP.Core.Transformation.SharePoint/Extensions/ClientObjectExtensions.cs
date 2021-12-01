@@ -1,6 +1,4 @@
 ﻿using Microsoft.SharePoint.Client;
-using PnP.Core.Transformation.SharePoint;
-using PnP.Core.Transformation.SharePoint.Utilities;
 using System;
 using System.Linq.Expressions;
 using System.Reflection;

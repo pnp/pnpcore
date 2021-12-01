@@ -8,6 +8,8 @@
     href: basics-getdata-paging.md
   - name: Adding, updating and deleting data
     href: basics-addupdatedelete.md
+  - name: IQueryable performance considerations
+    href: basics-iqueryable.md
   - name: Advanced PnPContext use
     href: basics-context.md
   - name: Batching requests
@@ -18,6 +20,8 @@
     href: basics-errorhandling.md
   - name: Custom API requests
     href: basics-customapirequests.md
+  - name: SharePoint CSOM vs PnP Core SDK
+    href: basics-csom-vs-pnp.md
   - name: PnP Framework interop
     href: basics-pnpframework.md
   - name: Microsoft Graph SDK interop
@@ -53,6 +57,8 @@
     href: lists-intro.md
   - name: Working with views
     href: lists-views.md
+  - name: Webhooks
+    href: lists-webhooks.md
 - name: Fields
   items:
   - name: Overview
@@ -97,6 +103,14 @@
   items:
   - name: Overview
     href: folders-intro.md
+- name: Security
+  items:
+  - name: Overview
+    href: security-intro.md
+  - name: Groups
+    href: security-groups.md
+  - name: Users
+    href: security-users.md
 - name: Teams
   items:
   - name: Overview
@@ -121,17 +135,25 @@
     href: syntex-intro.md
 - name: "Admin: SharePoint"
   items:
-  - name: Discovery
-    href: admin-sharepoint-discovery.md
+  - name: Tenant
+    href: admin-sharepoint-tenant.md
   - name: Security
     href: admin-sharepoint-security.md
-  - name: Sites
+  - name: Site Collections
     href: admin-sharepoint-sites.md
   - name: Apps
     href: admin-sharepoint-apps.md
+  - name: Modernize sites
+    href: admin-sharepoint-modernize.md
 - name: "Admin: Microsoft 365"
   items:
   - name: Security
     href: admin-m365-security.md
   - name: Multi-geo
     href: admin-m365-multigeo.md
+  - name: Information Protection
+    href: admin-m365-informationprotection.md
+- name: "Transformation Framework"
+  items:
+  - name: Getting started
+    href: transformation-getting-started.md

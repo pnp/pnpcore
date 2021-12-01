@@ -466,7 +466,7 @@ namespace PnP.Core.Test.SharePoint
                 foundCustomAction.Description = "UPDATED DESCRIPTION";
                 foundCustomAction.Rights.Set(PermissionKind.ApproveItems); // not in the default set which has been added during the creation of the actions
                 await foundCustomAction.UpdateAsync();
- 
+
                 web = await context.Web.GetAsync(p => p.UserCustomActions);
 
                 Assert.IsNotNull(web.UserCustomActions);

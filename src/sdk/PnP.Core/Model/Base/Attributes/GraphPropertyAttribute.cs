@@ -3,7 +3,7 @@
     /// <summary>
     /// Attribute to define how a model property maps to a Microsoft Graph field for usage in Microsoft Graph API calls
     /// </summary>
-    internal class GraphPropertyAttribute : PropertyAttribute
+    internal sealed class GraphPropertyAttribute : PropertyAttribute
     {
         internal GraphPropertyAttribute(string fieldName)
         {

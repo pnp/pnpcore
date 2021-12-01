@@ -28,7 +28,7 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// The user's loginName.
         /// </summary>
-        public string LoginName { get;  }
+        public string LoginName { get; }
 
         /// <summary>
         /// The user's name.

@@ -164,7 +164,7 @@ namespace PnP.Core.QueryModel
             return (TResult)result;
         }
 
-        private async IAsyncEnumerable<TResult> GetAsyncEnumerable<TResult>(Expression expression, [EnumeratorCancellation]CancellationToken token)
+        private async IAsyncEnumerable<TResult> GetAsyncEnumerable<TResult>(Expression expression, [EnumeratorCancellation] CancellationToken token)
         {
             IAsyncEnumerable<TResult> results = (IAsyncEnumerable<TResult>)await ExecuteObjectAsync(expression, token).ConfigureAwait(false);
             await foreach (TResult result in results.WithCancellation(token))
@@ -172,6 +172,6 @@ namespace PnP.Core.QueryModel
                 yield return result;
             }
         }
-        
+
     }
 }

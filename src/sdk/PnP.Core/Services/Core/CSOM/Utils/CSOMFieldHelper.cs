@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace PnP.Core.Services.Core.CSOM.Utils
 {
-    internal class CSOMFieldHelper
+    internal sealed class CSOMFieldHelper
     {
         public ListItem Component { get; private set; }
 

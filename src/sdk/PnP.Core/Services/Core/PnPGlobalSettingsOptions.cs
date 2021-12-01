@@ -11,11 +11,16 @@ namespace PnP.Core.Services
     public class PnPGlobalSettingsOptions
     {
         private const string UserAgentPrefix = "NONISV|SharePointPnP|PnPCoreSDK";
-        
+
         /// <summary>
         /// Turns on/off telemetry, can be customized via configuration. Defaults to false.
         /// </summary>
         public bool DisableTelemetry { get; set; }
+
+        /// <summary>
+        /// The Microsoft 365 cloud environment that's used
+        /// </summary>
+        public Microsoft365Environment? Environment { get; set; }
 
         #region Http request settings
 
@@ -95,6 +100,26 @@ namespace PnP.Core.Services
         /// </summary>
         public bool HttpMicrosoftGraphUseIncrementalDelay { get; set; } = true;
 
+        /// <summary>
+        /// Use the Retry-After header for calculating the delay in case of a retry. Defaults to true
+        /// </summary>
+        public bool HttpAzureActiveDirectoryUseRetryAfterHeader { get; set; } = true;
+
+        /// <summary>
+        /// When not using retry-after, how many times can a retry be made. Defaults to 10
+        /// </summary>
+        public int HttpAzureActiveDirectoryMaxRetries { get; set; } = 10;
+
+        /// <summary>
+        /// How many seconds to wait for the next retry attempt. Defaults to 3
+        /// </summary>
+        public int HttpAzureActiveDirectoryDelayInSeconds { get; set; } = 3;
+
+        /// <summary>
+        /// Use an incremental strategy for the delay: each retry doubles the previous delay time. Defaults to true
+        /// </summary>
+        public bool HttpAzureActiveDirectoryUseIncrementalDelay { get; set; } = true;
+
         #endregion
 
         #region Internal only settings (supporting, they cannot be assigned from configuration)
@@ -135,15 +160,6 @@ namespace PnP.Core.Services
         public PnPGlobalSettingsOptions()
         {
 
-        }
-
-        /// <summary>
-        /// Custom constructor
-        /// </summary>
-        /// <param name="log">Connected logger</param>
-        public PnPGlobalSettingsOptions(ILogger<PnPGlobalSettingsOptions> log)
-        {
-            Logger = log;
         }
 
         private static string GetVersionTag()

@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace PnP.Core.Services.Core.CSOM.Requests.Fields
 {
-    internal class ProvisionTaxonomyFieldRequest : IRequest<object>
+    internal sealed class ProvisionTaxonomyFieldRequest : IRequest<object>
     {
         public object Result { get; set; }
 

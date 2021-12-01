@@ -2,7 +2,7 @@
 
 namespace PnP.Core.Services.Core.CSOM.Utils.DateHelpers
 {
-    internal class FromMilisecondsConversionStrategy : IDateConversionStrategy
+    internal sealed class FromMilisecondsConversionStrategy : IDateConversionStrategy
     {
         /// <summary>
         /// JS reference date is 1/1/1970, however .NET reference date is 1/1/0001

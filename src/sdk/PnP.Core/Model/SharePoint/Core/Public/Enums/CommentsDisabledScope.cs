@@ -10,22 +10,22 @@
         /// No Scope
         /// </summary>
         None = 0,
-        
+
         /// <summary>
         /// Item Scoped
         /// </summary>
         Item = 1,
-        
+
         /// <summary>
         /// Web Scoped
         /// </summary>
         Web = 2,
-        
+
         /// <summary>
         /// Tenant Scoped
         /// </summary>
         Tenant = 3,
-        
+
         /// <summary>
         /// Site Scoped
         /// </summary>

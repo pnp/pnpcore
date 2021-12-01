@@ -1,7 +1,7 @@
 ﻿namespace PnP.Core.Model.Security
 {
     [GraphType]
-    internal partial class Identity : BaseDataModel<IIdentity>, IIdentity
+    internal sealed class Identity : BaseDataModel<IIdentity>, IIdentity
     {
         #region Properties
         public string Id { get => GetValue<string>(); set => SetValue(value); }

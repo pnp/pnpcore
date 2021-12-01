@@ -125,8 +125,8 @@ namespace PnP.Core.Test.Base
                 var page = termSet.Terms.Take(pageSize).ToArray();
                 Assert.IsTrue(page.Length == pageSize);
 
-                page = termSet.Terms.Take(pageSize*2).ToArray();
-                Assert.IsTrue(page.Length == pageSize*2);
+                page = termSet.Terms.Take(pageSize * 2).ToArray();
+                Assert.IsTrue(page.Length == pageSize * 2);
 
                 page = termSet.Terms.Take(pageSize * 3).ToArray();
                 Assert.IsTrue(page.Length == pageSize * 3);
@@ -254,7 +254,7 @@ namespace PnP.Core.Test.Base
 
                             // We should have loaded 1 list item
                             Assert.IsTrue(queryResult3.Count == 2);
-                        });                        
+                        });
 
                         await list3.Items.LoadAsync();
                         // Do we have all items?

@@ -1,4 +1,23 @@
-﻿using System;
+﻿using AngleSharp.Dom;
+using AngleSharp.Html.Dom;
+using AngleSharp.Html.Parser;
+using Microsoft.Extensions.Caching.Memory;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
+using Microsoft.SharePoint.Client;
+using Microsoft.SharePoint.Client.WebParts;
+using PnP.Core.Transformation.Model;
+using PnP.Core.Transformation.Services.Core;
+using PnP.Core.Transformation.Services.MappingProviders;
+using PnP.Core.Transformation.SharePoint.Extensions;
+using PnP.Core.Transformation.SharePoint.Functions;
+using PnP.Core.Transformation.SharePoint.MappingFiles;
+using PnP.Core.Transformation.SharePoint.Model;
+using PnP.Core.Transformation.SharePoint.Services;
+using PnP.Core.Transformation.SharePoint.Services.Builder.Configuration;
+using PnP.Core.Transformation.SharePoint.Services.MappingProviders;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -10,28 +29,7 @@ using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.Linq;
 using System.Xml.XPath;
-using AngleSharp.Dom;
-using AngleSharp.Html.Dom;
-using AngleSharp.Html.Parser;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
-using Microsoft.SharePoint.Client;
-using Microsoft.SharePoint.Client.WebParts;
-using Newtonsoft.Json.Linq;
 using PnPCoreModelSP = PnP.Core.Model.SharePoint;
-using PnP.Core.Transformation.Model;
-using PnP.Core.Transformation.Services.Core;
-using PnP.Core.Transformation.Services.MappingProviders;
-using PnP.Core.Transformation.SharePoint.Extensions;
-using PnP.Core.Transformation.SharePoint.MappingFiles;
-using PnP.Core.Transformation.SharePoint.Model;
-using PnP.Core.Transformation.SharePoint.Services;
-using PnP.Core.Transformation.SharePoint.Services.Builder.Configuration;
-using PnP.Core.Transformation.SharePoint.Services.MappingProviders;
-using Microsoft.Extensions.Caching.Memory;
-using PnP.Core.Transformation.SharePoint.Utilities;
-using PnP.Core.Transformation.SharePoint.Functions;
 using PublishingMapping = PnP.Core.Transformation.SharePoint.MappingFiles.Publishing;
 
 namespace PnP.Core.Transformation.SharePoint.MappingProviders
@@ -62,6 +60,8 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
         private readonly PublishingFunctionProcessor publishingFunctionProcessor;
 
         private const string webPartMarkerString = "[[WebPartMarker]]";
+
+        private Guid taskId;
 
         /// <summary>
         /// Main constructor for the mapping provider
@@ -95,9 +95,13 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
         /// <returns>The output of the mapping</returns>
         public async Task<MappingProviderOutput> MapAsync(MappingProviderInput input, CancellationToken token = default)
         {
+            this.taskId = input.Context.Task.Id;
+
             MappingProviderOutput result = new MappingProviderOutput();
 
-            logger.LogInformation($"Invoked: {this.GetType().Namespace}.{this.GetType().Name}.MapAsync");
+            logger.LogInformation(
+                $"Invoked: {this.GetType().Namespace}.{this.GetType().Name}.MapAsync"
+                .CorrelateString(this.taskId));
 
             // Validate input
             if (input == null) throw new ArgumentNullException(nameof(input));
@@ -118,6 +122,10 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
             var crossSiteTransformation = IsCrossSiteTransformation(input, sourceItem);
             var crossTenantTransformation = IsCrossTenantTransformation(input, sourceItem);
 
+            // Store telemetry settings
+            result.TelemetryProperties.Add(TelemetryPropertiesNames.CrossFarm, crossTenantTransformation.ToString());
+            result.TelemetryProperties.Add(TelemetryPropertiesNames.CrossSite, crossSiteTransformation.ToString());
+
             // Read source page information
             var sourcePage = ReadSourcePageInformation(pageItem);
 
@@ -136,12 +144,21 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
             // Evaluate the source page type
             sourcePage.PageType = EvaluatePageType(pageFile, pageItem, crossSiteTransformation, crossTenantTransformation);
 
+            // Store telemetry settings
+            result.TelemetryProperties.Add(TelemetryPropertiesNames.PageType, sourcePage.PageType.ToString());
+
             // Retrieve Version and ExactVersion of source and target
             (sourcePage.SourceVersion, sourcePage.SourceVersionNumber) = sourceContext.GetVersions();
 
+            // Store telemetry settings
+            result.TelemetryProperties.Add(TelemetryPropertiesNames.SourceVersion, sourcePage.SourceVersion.ToString());
+            result.TelemetryProperties.Add(TelemetryPropertiesNames.SourceVersionNumber, sourcePage.SourceVersionNumber.ToString());
+
             // Log that we've finished the validation stage
-            logger.LogInformation(string.Format(System.Globalization.CultureInfo.InvariantCulture,
-                    SharePointTransformationResources.Info_PageValidationChecksComplete, pageFile.ServerRelativeUrl));
+            logger.LogInformation(
+                SharePointTransformationResources.Info_PageValidationChecksComplete
+                .CorrelateString(this.taskId),
+                pageFile.ServerRelativeUrl);
 
             // Extract the list of Web Parts to process and the reference page layout
             var (pageLayout, layout, webPartsToProcess) = await AnalyzePageAsync(input.Context, pageFile, pageItem, sourcePage).ConfigureAwait(false);
@@ -160,8 +177,10 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
             (sourcePage.Folder, targetPageName) = DeterminePageFolder(sourceContext, sourcePage, pageItem, input.Context.TargetPageUri);
 
             // Log that we've finished the analysis stage
-            logger.LogInformation(string.Format(System.Globalization.CultureInfo.InvariantCulture,
-                SharePointTransformationResources.Info_PageAnalysisComplete, pageFile.ServerRelativeUrl));
+            logger.LogInformation(
+                SharePointTransformationResources.Info_PageAnalysisComplete
+                .CorrelateString(this.taskId), 
+                pageFile.ServerRelativeUrl);
             result.TargetPage.Folder = sourcePage.Folder;
             
             if (sourcePage.PageType == SourcePageType.BlogPage)
@@ -199,7 +218,9 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
                 if (sourceWebParts == null || sourceWebParts.Count == 0)
                 {
                     // nothing to transform
-                    logger.LogWarning(SharePointTransformationResources.Warning_NothingToTransform);
+                    logger.LogWarning(
+                        SharePointTransformationResources.Warning_NothingToTransform
+                        .CorrelateString(this.taskId));
                 }
                 else
                 {
@@ -391,12 +412,16 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
                 }
                 else
                 {
-                    logger.LogWarning(SharePointTransformationResources.Warning_TransformGetItemPermissionsAccessDenied);
+                    logger.LogWarning(
+                        SharePointTransformationResources.Warning_TransformGetItemPermissionsAccessDenied
+                        .CorrelateString(this.taskId));
                     return lip;
                 }
             }
 
-            logger.LogInformation(SharePointTransformationResources.Info_GetItemLevelPermissions);
+            logger.LogInformation(
+                SharePointTransformationResources.Info_GetItemLevelPermissions
+                .CorrelateString(this.taskId));
 
             return lip;
         }
@@ -548,7 +573,10 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
                         {
                             if (document.FirstChild != null && string.IsNullOrEmpty(document.FirstChild.TextContent))
                             {
-                                logger.LogInformation(SharePointTransformationResources.Info_TransformRemovingEmptyWebPart);
+                                logger.LogInformation(
+                                    SharePointTransformationResources.Info_TransformRemovingEmptyWebPart
+                                    .CorrelateString(this.taskId));
+
                                 // Drop text part
                                 column.Controls.Remove(cc);
                             }
@@ -661,7 +689,9 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
         private void ManageCombinedMapping(Page targetPage, WebPartEntity webPart, Mapping mapping)
         {
             // Use the mapping data => make one list of Text and WebParts to allow for correct ordering
-            logger.LogDebug(SharePointTransformationResources.Debug_CombiningMappingData);
+            logger.LogDebug(
+                SharePointTransformationResources.Debug_CombiningMappingData
+                .CorrelateString(this.taskId));
             var combinedMappinglist = new List<CombinedMapping>();
             if (mapping.ClientSideText != null)
             {
@@ -705,7 +735,9 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
                     // Parse the Text to support custom tokens
                     control["Text"] = this.tokenParser.ReplaceSourceTokens(map.ClientSideText.Text, webPart.Properties);
 
-                    logger.LogInformation(SharePointTransformationResources.Info_AddedClientSideTextWebPart);
+                    logger.LogInformation(
+                        SharePointTransformationResources.Info_AddedClientSideTextWebPart
+                        .CorrelateString(this.taskId));
                 }
                 else if (map.ClientSideWebPart != null)
                 {
@@ -718,7 +750,9 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
                         // Parse the control ID to support generic web part placement scenarios
                         control["ControlId"] = this.tokenParser.ReplaceSourceTokens(map.ClientSideWebPart.ControlId, webPart.Properties);
 
-                        logger.LogInformation(SharePointTransformationResources.Info_UsingCustomModernWebPart);
+                        logger.LogInformation(
+                            SharePointTransformationResources.Info_UsingCustomModernWebPart
+                            .CorrelateString(this.taskId));
                     }
                     else
                     {
@@ -729,10 +763,10 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
                         control["Title"] = webPart.Title;
                         control["Properties"] = webPart.Properties;
 
-                        logger.LogInformation(string.Format(
-                            System.Globalization.CultureInfo.InvariantCulture,
-                            SharePointTransformationResources.Info_ContentUsingModernWebPart,
-                            map.ClientSideWebPart.Type.ToString()));
+                        logger.LogInformation(
+                            SharePointTransformationResources.Info_ContentUsingModernWebPart
+                            .CorrelateString(this.taskId),
+                            map.ClientSideWebPart.Type);
                     }
                 }
 
@@ -991,8 +1025,9 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
                     break;
             }
 
-            logger.LogInformation(string.Format(System.Globalization.CultureInfo.InvariantCulture,
-                SharePointTransformationResources.Info_TransformPageModernTitle, pageFile.ServerRelativeUrl, pageTitle));
+            logger.LogInformation(
+                SharePointTransformationResources.Info_TransformPageModernTitle
+                .CorrelateString(this.taskId), pageFile.ServerRelativeUrl, pageTitle);
 
             return pageTitle;
         }
@@ -1104,8 +1139,9 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
 
             if (pageFile != null && pageItem == null)
             {
-                logger.LogInformation(string.Format(System.Globalization.CultureInfo.InvariantCulture,
-                    SharePointTransformationResources.Info_PageLivesOutsideOfALibrary, pageFile.ServerRelativeUrl));
+                logger.LogInformation(
+                    SharePointTransformationResources.Info_PageLivesOutsideOfALibrary
+                    .CorrelateString(this.taskId), pageFile.ServerRelativeUrl);
 
                 // This is always a web part page
                 result = SourcePageType.WebPartPage;
@@ -1123,7 +1159,7 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
                 {
                     var errorMessage = string.Format(System.Globalization.CultureInfo.InvariantCulture,
                         SharePointTransformationResources.Error_SourcePageNotFound, pageFile.ServerRelativeUrl);
-                    logger.LogInformation(errorMessage);
+                    logger.LogInformation(errorMessage.CorrelateString(this.taskId));
                     throw new ArgumentNullException(errorMessage);
                 }
 
@@ -1133,17 +1169,18 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
                 {
                     var errorMessage = string.Format(System.Globalization.CultureInfo.InvariantCulture,
                         SharePointTransformationResources.Error_PageNotValidMissingFileRef, pageFile.ServerRelativeUrl);
-                    logger.LogInformation(errorMessage);
+                    logger.LogInformation(errorMessage.CorrelateString(this.taskId));
                     throw new ArgumentNullException(errorMessage);
                 }
 
                 // Store the page type
                 result = pageItem.PageType();
 
-                logger.LogInformation(string.Format(System.Globalization.CultureInfo.InvariantCulture,
-                    SharePointTransformationResources.Info_TransformationMode,
+                logger.LogInformation(
+                    SharePointTransformationResources.Info_TransformationMode
+                    .CorrelateString(this.taskId),
                     pageFile.ServerRelativeUrl,
-                    result.FormatAsFriendlyTitle()));
+                    result.FormatAsFriendlyTitle());
 
                 ValidatePageType(pageFile, result, crossSiteTransformation, crossTenantTransformation);
             }
@@ -1176,7 +1213,9 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
 
             if (!string.IsNullOrEmpty(pageTypeExceptionMessage))
             {
-                logger.LogError(pageTypeExceptionMessage);
+                logger.LogError(
+                    pageTypeExceptionMessage
+                    .CorrelateString(this.taskId));
                 throw new ArgumentNullException(pageTypeExceptionMessage);
             }
         }
@@ -1330,11 +1369,12 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
                         foundWebPart.WebPartType = GetType(foundWebPart.WebPartXml.Value);
                     }
 
-                    logger.LogInformation(string.Format(System.Globalization.CultureInfo.InvariantCulture,
-                        SharePointTransformationResources.Info_ContentTransformFoundSourceWebParts,
+                    logger.LogInformation(
+                        SharePointTransformationResources.Info_ContentTransformFoundSourceWebParts
+                        .CorrelateString(this.taskId),
                         pageFile.ServerRelativeUrl,
                         foundWebPart.WebPartDefinition.WebPart.Title,
-                        foundWebPart.WebPartType.GetTypeShort()));
+                        foundWebPart.WebPartType.GetTypeShort());
 
                     webparts.Add(new WebPartEntity()
                     {
@@ -1357,10 +1397,10 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
             }
             else
             {
-                logger.LogInformation(string.Format(
-                    System.Globalization.CultureInfo.InvariantCulture,
-                    SharePointTransformationResources.Info_NoWebPartsFound,
-                    pageFile.ServerRelativeUrl));
+                logger.LogInformation(
+                    SharePointTransformationResources.Info_NoWebPartsFound
+                    .CorrelateString(this.taskId),
+                    pageFile.ServerRelativeUrl);
             }
 
             return new Tuple<Model.PageLayout, List<WebPartEntity>>(layout, webparts);
@@ -1458,11 +1498,12 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
                         foundWebPart.WebPartType = GetType(foundWebPart.WebPartXmlOnPremises);
                     }
 
-                    logger.LogInformation(string.Format(System.Globalization.CultureInfo.InvariantCulture,
-                        SharePointTransformationResources.Info_ContentTransformFoundSourceWebParts,
+                    logger.LogInformation(
+                        SharePointTransformationResources.Info_ContentTransformFoundSourceWebParts
+                        .CorrelateString(this.taskId),
                         pageFile.ServerRelativeUrl,
                         foundWebPart.WebPartDefinition.WebPart.Title,
-                        foundWebPart.WebPartType.GetTypeShort()));
+                        foundWebPart.WebPartType.GetTypeShort());
 
                     webparts.Add(new WebPartEntity()
                     {
@@ -1484,16 +1525,18 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
             }
             else
             {
-                logger.LogInformation(string.Format(
-                    System.Globalization.CultureInfo.InvariantCulture,
-                    SharePointTransformationResources.Info_NoWebPartsFound,
-                    pageFile.ServerRelativeUrl));
+                logger.LogInformation(
+                    SharePointTransformationResources.Info_NoWebPartsFound
+                    .CorrelateString(this.taskId),
+                    pageFile.ServerRelativeUrl);
             }
 
             return new Tuple<Model.PageLayout, List<WebPartEntity>>(layout, webparts);
         }
 
+#pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
         private async Task<Tuple<Model.PageLayout, List<WebPartEntity>>> AnalyzeWikiPageAsync(PageTransformationContext context, Microsoft.SharePoint.Client.File wikiPage, ListItem pageItem, SourcePageInformation page)
+#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
         {
             List<WebPartEntity> webparts = new List<WebPartEntity>();
             string pageContents = null;
@@ -1565,7 +1608,8 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
                         var unsupportedError = string.Format(System.Globalization.CultureInfo.InvariantCulture,
                             SharePointTransformationResources.Error_UnsupportedSourceVersion,
                             wikiPage.ServerRelativeUrl);
-                        logger.LogError(unsupportedError);
+                        logger.LogError(unsupportedError
+                            .CorrelateString(this.taskId));
 
                         throw new ApplicationException(unsupportedError);
                     }
@@ -1581,9 +1625,10 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
                 }
                 else
                 {
-                    logger.LogError(string.Format(System.Globalization.CultureInfo.InvariantCulture,
-                        SharePointTransformationResources.Error_AnalysingNoWebPartsFound,
-                        wikiPage.ServerRelativeUrl));
+                    logger.LogError(
+                        SharePointTransformationResources.Error_AnalysingNoWebPartsFound
+                        .CorrelateString(this.taskId),
+                        wikiPage.ServerRelativeUrl);
                 }
 
                 // Somehow the wiki was not standard formatted, so lets wrap its contents in a text block
@@ -1693,7 +1738,8 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
                     SharePointTransformationResources.Error_NoPageLayoutTransformationModel,
                     page.PageLayout);
 
-                logger.LogError(noPageLayoutError);
+                logger.LogError(noPageLayoutError
+                    .CorrelateString(this.taskId));
                 throw new Exception(noPageLayoutError);
             }
 
@@ -1745,7 +1791,9 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
                     }
                     else
                     {
-                        logger.LogWarning(SharePointTransformationResources.Warning_CannotRetrieveFieldValue);
+                        logger.LogWarning(
+                            SharePointTransformationResources.Warning_CannotRetrieveFieldValue
+                            .CorrelateString(this.taskId));
                     }
                 }
 
@@ -1769,8 +1817,9 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
                         if (string.IsNullOrEmpty(fieldContents))
                         {
                             logger.LogWarning(
-                                string.Format(SharePointTransformationResources.Warning_SkippedWebPartDueToEmptyInSourcee,
-                                    fieldWebPart.TargetWebPart, fieldWebPart.Name));
+                                SharePointTransformationResources.Warning_SkippedWebPartDueToEmptyInSourcee
+                                .CorrelateString(this.taskId),
+                                fieldWebPart.TargetWebPart, fieldWebPart.Name);
                             continue;
                         }
                     }
@@ -2044,7 +2093,9 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
             }
             else
             {
-                logger.LogInformation(SharePointTransformationResources.Info_AnalysingNoWebPartsFound);
+                logger.LogInformation(
+                    SharePointTransformationResources.Info_AnalysingNoWebPartsFound
+                    .CorrelateString(this.taskId));
             }
 
             #endregion
@@ -2224,7 +2275,9 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
             }
             else
             {
-                logger.LogInformation(SharePointTransformationResources.Info_AnalysingNoWebPartsFound);
+                logger.LogInformation(
+                    SharePointTransformationResources.Info_AnalysingNoWebPartsFound
+                    .CorrelateString(this.taskId));
             }
 
             #endregion
@@ -2398,7 +2451,9 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
         {
             try
             {
-                logger.LogInformation(SharePointTransformationResources.Info_CallingWebServicesToExtractWebPartsFromPage);
+                logger.LogInformation(
+                    SharePointTransformationResources.Info_CallingWebServicesToExtractWebPartsFromPage
+                    .CorrelateString(this.taskId));
 
                 string webUrl = sourceContext.Web.EnsureProperty(w => w.Url);
                 string webServiceUrl = webUrl + "/_vti_bin/WebPartPages.asmx";
@@ -2459,8 +2514,10 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
             }
             catch (WebException ex)
             {
-                logger.LogError(string.Format(
-                    SharePointTransformationResources.Error_CallingWebServicesToExtractWebPartsFromPage, ex.Message));
+                logger.LogError(
+                    SharePointTransformationResources.Error_CallingWebServicesToExtractWebPartsFromPage
+                    .CorrelateString(this.taskId),
+                    ex.Message);
             }
 
             return new Tuple<string, string>(string.Empty, string.Empty);
@@ -2470,6 +2527,7 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
         /// Gets the tag prefixes from the document
         /// </summary>
         /// <param name="webPartPage"></param>
+        /// <param name="parser">Html parser to use</param>
         /// <returns></returns>
         internal List<Tuple<string, string>> ExtractWebPartPrefixesFromNamespaces(IHtmlDocument webPartPage, HtmlParser parser)
         {
@@ -2521,9 +2579,10 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
 
             try
             {
-                logger.LogInformation(string.Format(
-                    SharePointTransformationResources.Info_RetreivingExportWebPartXmlWorkaround,
-                    webPartGuid, pageFile.ServerRelativeUrl));
+                logger.LogInformation(
+                    SharePointTransformationResources.Info_RetreivingExportWebPartXmlWorkaround
+                    .CorrelateString(this.taskId),
+                    webPartGuid, pageFile.ServerRelativeUrl);
 
                 var pageItem = pageFile.EnsureProperty(p => p.ListItemAllFields);
                 var pageUrl = pageItem[SharePointConstants.FileRefField].ToString();
@@ -2569,8 +2628,10 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
             }
             catch (WebException ex)
             {
-                logger.LogError(string.Format(SharePointTransformationResources.Error_WebPartXmlNotExported,
-                    webPartGuid, pageFile.ServerRelativeUrl, ex.Message));
+                logger.LogError(
+                    SharePointTransformationResources.Error_WebPartXmlNotExported
+                    .CorrelateString(this.taskId),
+                    webPartGuid, pageFile.ServerRelativeUrl, ex.Message);
             }
 
             return string.Empty;
@@ -2879,10 +2940,10 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
 
             try
             {
-                logger.LogInformation(string.Format(
-                    System.Globalization.CultureInfo.InvariantCulture,
-                    SharePointTransformationResources.Info_RetreivingExportWebPartXmlWorkaround,
-                    webPartGuid, pageFile.ServerRelativeUrl));
+                logger.LogInformation(
+                    SharePointTransformationResources.Info_RetreivingExportWebPartXmlWorkaround
+                    .CorrelateString(this.taskId),
+                    webPartGuid, pageFile.ServerRelativeUrl);
 
                 string webPartXml = string.Empty;
                 string serverRelativeUrl = context.Web.EnsureProperty(w => w.ServerRelativeUrl);
@@ -2925,10 +2986,10 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
             }
             catch (WebException ex)
             {
-                logger.LogInformation(string.Format(
-                    System.Globalization.CultureInfo.InvariantCulture,
-                    SharePointTransformationResources.Error_WebPartXmlNotExported,
-                    webPartGuid, pageFile.ServerRelativeUrl, ex.Message));
+                logger.LogInformation(
+                    SharePointTransformationResources.Error_WebPartXmlNotExported
+                    .CorrelateString(this.taskId),
+                    webPartGuid, pageFile.ServerRelativeUrl, ex.Message);
             }
 
             return string.Empty;
@@ -3184,10 +3245,10 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
 
             try
             {
-                logger.LogInformation(string.Format(
-                    System.Globalization.CultureInfo.InvariantCulture,
-                    SharePointTransformationResources.Info_CallingWebServicesToExtractWebPartsFromPage,
-                    pageFile.ServerRelativeUrl));
+                logger.LogInformation(
+                    SharePointTransformationResources.Info_CallingWebServicesToExtractWebPartsFromPage
+                    .CorrelateString(taskId),
+                    pageFile.ServerRelativeUrl);
 
                 string webUrl = context.Web.EnsureProperty(p => p.Url);
                 string webServiceUrl = webUrl + "/_vti_bin/WebPartPages.asmx";
@@ -3216,9 +3277,9 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
                 request.Accept = "text/xml";
                 request.Headers.Add("SOAPAction", "\"http://microsoft.com/sharepoint/webpartpages/GetWebPartPage\"");
 
-                using (System.IO.Stream stream = request.GetRequestStream())
+                using (Stream stream = request.GetRequestStream())
                 {
-                    using (System.IO.StreamWriter writer = new System.IO.StreamWriter(stream))
+                    using (StreamWriter writer = new System.IO.StreamWriter(stream))
                     {
                         writer.Write(soapEnvelope.ToString());
                     }
@@ -3246,12 +3307,12 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
                     }
                 }
             }
-            catch (WebException ex)
+            catch (WebException)
             {
-                logger.LogError(string.Format(
-                    System.Globalization.CultureInfo.InvariantCulture,
-                    SharePointTransformationResources.Error_CallingWebServicesToExtractWebPartsFromPage,
-                    pageFile.ServerRelativeUrl));
+                logger.LogError(
+                    SharePointTransformationResources.Error_CallingWebServicesToExtractWebPartsFromPage
+                    .CorrelateString(taskId),
+                    pageFile.ServerRelativeUrl);
             }
 
             return new Tuple<string, string>(string.Empty, string.Empty);
@@ -3783,7 +3844,9 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
 
             if (sourceClientContext.Web.RootFolder.IsPropertyAvailable("WelcomePage") && !string.IsNullOrEmpty(sourceClientContext.Web.RootFolder.WelcomePage))
             {
-                logger.LogInformation(SharePointTransformationResources.Info_WelcomePageSettingsIsPresent);
+                logger.LogInformation(
+                    SharePointTransformationResources.Info_WelcomePageSettingsIsPresent
+                    .CorrelateString(this.taskId));
 
                 var homePageUrl = sourceClientContext.Web.RootFolder.WelcomePage;
                 var homepageName = Path.GetFileName(sourceClientContext.Web.RootFolder.WelcomePage);
@@ -3792,12 +3855,16 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
                 {
                     if (homepageName.Equals(fileLeafRef, StringComparison.InvariantCultureIgnoreCase))
                     {
-                        logger.LogInformation(SharePointTransformationResources.Info_TransformSourcePageIsHomePage);
+                        logger.LogInformation(
+                            SharePointTransformationResources.Info_TransformSourcePageIsHomePage
+                            .CorrelateString(this.taskId));
                         result.IsHomePage = true;
                     }
                     else
                     {
-                        logger.LogInformation(SharePointTransformationResources.Info_TransformSourcePageIsNotHomePage);
+                        logger.LogInformation(
+                            SharePointTransformationResources.Info_TransformSourcePageIsNotHomePage
+                            .CorrelateString(this.taskId));
                         result.IsHomePage = false;
                     }
                 }
@@ -3882,11 +3949,12 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
                         webPartToRetrieve.WebPartType = GetType(webPartToRetrieve.WebPartXmlOnPremises);
                     }
 
-                    logger.LogInformation(string.Format(System.Globalization.CultureInfo.InvariantCulture,
-                        SharePointTransformationResources.Info_ContentTransformFoundSourceWebParts,
+                    logger.LogInformation(
+                        SharePointTransformationResources.Info_ContentTransformFoundSourceWebParts
+                        .CorrelateString(this.taskId),
                         wikiPage.ServerRelativeUrl,
                         webPartToRetrieve.WebPartDefinition.WebPart.Title,
-                        webPartToRetrieve.WebPartType.GetTypeShort()));
+                        webPartToRetrieve.WebPartType.GetTypeShort());
 
                     webparts.Add(new WebPartEntity()
                     {
@@ -3989,11 +4057,12 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
                         webPartToRetrieve.WebPartType = GetType(webPartToRetrieve.WebPartXml.Value);
                     }
 
-                    logger.LogInformation(string.Format(System.Globalization.CultureInfo.InvariantCulture,
-                        SharePointTransformationResources.Info_ContentTransformFoundSourceWebParts,
+                    logger.LogInformation(
+                        SharePointTransformationResources.Info_ContentTransformFoundSourceWebParts
+                        .CorrelateString(this.taskId),
                         wikiPage.ServerRelativeUrl,
                         webPartToRetrieve.WebPartDefinition.WebPart.Title,
-                        webPartToRetrieve.WebPartType.GetTypeShort()));
+                        webPartToRetrieve.WebPartType.GetTypeShort());
 
                     webparts.Add(new WebPartEntity()
                     {

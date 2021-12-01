@@ -41,6 +41,15 @@ namespace PnP.Core.Services.Builder.Configuration
         {
             options.DisableTelemetry = pnpCoreOptions.Value.DisableTelemetry;
             options.AADTenantId = pnpCoreOptions.Value.AADTenantId;
+
+            if (!string.IsNullOrEmpty(pnpCoreOptions.Value.Environment))
+            {
+                if (Enum.TryParse(pnpCoreOptions.Value.Environment, out Microsoft365Environment environment))
+                {
+                    options.Environment = environment;
+                }
+            }
+
             if (pnpCoreOptions.Value?.HttpRequests != null)
             {
                 if (pnpCoreOptions.Value?.HttpRequests?.MicrosoftGraph != null)
@@ -57,6 +66,13 @@ namespace PnP.Core.Services.Builder.Configuration
                     options.HttpSharePointRestUseIncrementalDelay = pnpCoreOptions.Value.HttpRequests.SharePointRest.UseIncrementalDelay;
                     options.HttpSharePointRestUseRetryAfterHeader = pnpCoreOptions.Value.HttpRequests.SharePointRest.UseRetryAfterHeader;
                     options.HttpSharePointRestDefaultPageSize = pnpCoreOptions.Value.HttpRequests.SharePointRest.DefaultPageSize;
+                }
+                if (pnpCoreOptions.Value?.HttpRequests?.AzureActiveDirectory != null)
+                {
+                    options.HttpAzureActiveDirectoryDelayInSeconds = pnpCoreOptions.Value.HttpRequests.AzureActiveDirectory.DelayInSeconds;
+                    options.HttpAzureActiveDirectoryMaxRetries = pnpCoreOptions.Value.HttpRequests.AzureActiveDirectory.MaxRetries;
+                    options.HttpAzureActiveDirectoryUseIncrementalDelay = pnpCoreOptions.Value.HttpRequests.AzureActiveDirectory.UseIncrementalDelay;
+                    options.HttpAzureActiveDirectoryUseRetryAfterHeader = pnpCoreOptions.Value.HttpRequests.AzureActiveDirectory.UseRetryAfterHeader;
                 }
                 options.HttpUserAgent = pnpCoreOptions.Value.HttpRequests.UserAgent;
                 options.HttpTimeout = pnpCoreOptions.Value.HttpRequests.Timeout;

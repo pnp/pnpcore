@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace PnP.Core.Services.Core.CSOM.Utils.DateHelpers
 {
-    internal class CSOMDateConverter : IDateConversionStrategy
+    internal sealed class CSOMDateConverter : IDateConversionStrategy
     {
         internal List<IDateConversionStrategy> AvailableConverters { get; set; } = new List<IDateConversionStrategy>()
         {
@@ -14,7 +14,7 @@ namespace PnP.Core.Services.Core.CSOM.Utils.DateHelpers
         public DateTime? ConverDate(string dateValue)
         {
             DateTime? result = null;
-            foreach(IDateConversionStrategy strategy in AvailableConverters)
+            foreach (IDateConversionStrategy strategy in AvailableConverters)
             {
                 result = strategy.ConverDate(dateValue);
                 if (result.HasValue)

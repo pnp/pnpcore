@@ -7,7 +7,7 @@ namespace PnP.Core.Transformation.SharePoint.Functions
     /// <summary>
     /// The result of an equiality comparison with <see cref="XmlComparer"/>
     /// </summary>
-    public class XmlEqualityResult
+    internal class XmlEqualityResult
     {
         private const string DefaultError = "Can't find match for subtree.";
         private const string SuccessMessage = "Success";

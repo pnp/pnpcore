@@ -6,7 +6,7 @@ namespace PnP.Core.Model.SharePoint
     /// StorageMetrics class, write your custom code here
     /// </summary>
     [SharePointType("SP.StorageMetrics", Target = typeof(IFolder), Uri = "_api/web/getFolderById('{Parent.Id}')/StorageMetrics", LinqGet = "_api/web/getFolderById('{Parent.Id}')/StorageMetrics")]
-    internal partial class StorageMetrics : BaseDataModel<IStorageMetrics>, IStorageMetrics
+    internal sealed class StorageMetrics : BaseDataModel<IStorageMetrics>, IStorageMetrics
     {
         #region Construction
         public StorageMetrics()

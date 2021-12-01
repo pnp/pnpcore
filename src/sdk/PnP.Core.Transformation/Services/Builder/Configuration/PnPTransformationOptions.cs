@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace PnP.Core.Transformation.Services.Builder.Configuration
+﻿namespace PnP.Core.Transformation.Services.Builder.Configuration
 {
     /// <summary>
     /// Options for configuring PnP Core SDK

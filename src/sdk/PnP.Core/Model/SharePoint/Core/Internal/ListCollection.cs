@@ -2,11 +2,12 @@
 using PnP.Core.Services;
 using System;
 using System.Linq.Expressions;
+using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace PnP.Core.Model.SharePoint
 {
-    internal partial class ListCollection : QueryableDataModelCollection<IList>, IListCollection
+    internal sealed class ListCollection : QueryableDataModelCollection<IList>, IListCollection
     {
         public ListCollection(PnPContext context, IDataModelParent parent, string memberName = null)
             : base(context, parent, memberName)
@@ -155,6 +156,25 @@ namespace PnP.Core.Model.SharePoint
             return GetByServerRelativeUrlAsync(serverRelativeUrl, selectors).GetAwaiter().GetResult();
         }
 
+        #endregion
+
+        #region EnsureSiteAssetsLibrary methods
+        public async Task<IList> EnsureSiteAssetsLibraryAsync(params Expression<Func<IList, object>>[] selectors)
+        {
+            var assetLibrary = CreateNew() as List;
+
+            var apiCall = new ApiCall("_api/Web/Lists/EnsureSiteAssetsLibrary", ApiType.SPORest);
+            var entityInfo = EntityManager.GetClassInfo(assetLibrary.GetType(), assetLibrary, expressions: selectors);
+            var query = await QueryClient.BuildGetAPICallAsync(assetLibrary, entityInfo, apiCall).ConfigureAwait(false);
+
+            await assetLibrary.RequestAsync(new ApiCall(query.ApiCall.Request, ApiType.SPORest), HttpMethod.Post).ConfigureAwait(false);
+            return assetLibrary;
+        }
+
+        public IList EnsureSiteAssetsLibrary(params Expression<Func<IList, object>>[] selectors)
+        {
+            return EnsureSiteAssetsLibraryAsync(selectors).GetAwaiter().GetResult();
+        }
         #endregion
     }
 }

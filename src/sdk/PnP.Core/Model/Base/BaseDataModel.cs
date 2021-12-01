@@ -186,12 +186,12 @@ namespace PnP.Core.Model
             ConfigureApiTypeAndRequest(request, out ApiType apiType, out string apiRequest);
 
             var apiResponse = await RawRequestAsync(new ApiCall(apiRequest, apiType, request.Body)
-                                {
-                                    ExecuteRequestApiCall = true,
-                                    SkipCollectionClearing = true,
-                                    RawRequest = true,
-                                    Headers = request.Headers
-                                } , request.HttpMethod).ConfigureAwait(false);
+            {
+                ExecuteRequestApiCall = true,
+                SkipCollectionClearing = true,
+                RawRequest = true,
+                Headers = request.Headers
+            }, request.HttpMethod).ConfigureAwait(false);
 
             return new ApiRequestResponse()
             {
@@ -950,7 +950,7 @@ namespace PnP.Core.Model
             {
                 // Get entity information for the entity to update
                 entityInfo = GetClassInfo();
-                
+
                 // Mark request as raw
                 apiCall.RawRequest = true;
 

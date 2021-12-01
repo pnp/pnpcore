@@ -3,7 +3,7 @@ using System;
 namespace PnP.Core.Model.SharePoint
 {
 
-    internal partial class ComplianceTag : IComplianceTag
+    internal sealed class ComplianceTag : IComplianceTag
     {
         public bool AcceptMessagesOnlyFromSendersOrMembers { get; set; }
         public string AccessType { get; set; }

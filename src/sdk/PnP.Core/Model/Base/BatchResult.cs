@@ -19,8 +19,8 @@ namespace PnP.Core.Model
             BatchRequest = batch.GetRequest(batchRequestId);
         }
     }
-    
-    internal class BatchSingleResult<T> : BatchResult, IBatchSingleResult<T>
+
+    internal sealed class BatchSingleResult<T> : BatchResult, IBatchSingleResult<T>
     {
         private readonly T result;
 
@@ -58,7 +58,7 @@ namespace PnP.Core.Model
         }
     }
 
-    internal class BatchEnumerableBatchResult<T> : BatchResult, IEnumerableBatchResult<T>
+    internal sealed class BatchEnumerableBatchResult<T> : BatchResult, IEnumerableBatchResult<T>
     {
         private readonly IReadOnlyList<T> result;
 

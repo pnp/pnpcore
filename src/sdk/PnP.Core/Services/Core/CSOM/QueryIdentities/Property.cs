@@ -12,7 +12,7 @@ namespace PnP.Core.Services.Core.CSOM.QueryIdentities
         }
     }
 
-    internal class StaticProperty : Identity
+    internal sealed class StaticProperty : Identity
     {
         internal string TypeId { get; set; }
 
@@ -21,8 +21,8 @@ namespace PnP.Core.Services.Core.CSOM.QueryIdentities
             return $"<StaticProperty  Id=\"{Id}\" TypeId=\"{TypeId}\" Name=\"{Name}\" />";
         }
     }
-    
-    internal class NamedProperty
+
+    internal sealed class NamedProperty
     {
         public string Name { get; set; }
 

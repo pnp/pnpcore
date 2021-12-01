@@ -5,7 +5,7 @@ namespace PnP.Core.Model.SharePoint
     /// <summary>
     /// Hodlds properties for Taxonomy filed
     /// </summary>
-    internal class TaxonomyFieldCreationOptions : FieldCreationOptions
+    internal sealed class TaxonomyFieldCreationOptions : FieldCreationOptions
     {
         private bool multiValue;
 

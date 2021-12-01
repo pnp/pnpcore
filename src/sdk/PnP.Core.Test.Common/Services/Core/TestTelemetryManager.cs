@@ -4,11 +4,11 @@ using System.Collections.Generic;
 
 namespace PnP.Core.Test.Common.Services
 {
-    internal class TestTelemetryManager: TelemetryManager
+    internal class TestTelemetryManager : TelemetryManager
     {
         public Action<Dictionary<string, string>, string> TelemetryEvent { get; set; }
 
-        internal TestTelemetryManager(PnPGlobalSettingsOptions globalOptions): base(globalOptions)
+        internal TestTelemetryManager(PnPGlobalSettingsOptions globalOptions) : base(globalOptions)
         {
             TelemetryConfiguration.InstrumentationKey = "6073339d-9e70-4004-9ff7-1345316ade97";
         }

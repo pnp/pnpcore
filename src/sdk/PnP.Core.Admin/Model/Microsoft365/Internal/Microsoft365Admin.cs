@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace PnP.Core.Admin.Model.Microsoft365
 {
-    internal class Microsoft365Admin : IMicrosoft365Admin
+    internal sealed class Microsoft365Admin : IMicrosoft365Admin
     {
         private readonly PnPContext context;
 
@@ -100,7 +100,7 @@ namespace PnP.Core.Admin.Model.Microsoft365
 
         public async Task<List<IGeoLocationInformation>> GetMultiGeoLocationsAsync()
         {
-            var result = await(context.Web as Web).RawRequestAsync(new ApiCall("sites?filter=siteCollection/root%20ne%20null&select=webUrl,siteCollection", ApiType.Graph), HttpMethod.Get).ConfigureAwait(false);
+            var result = await (context.Web as Web).RawRequestAsync(new ApiCall("sites?filter=siteCollection/root%20ne%20null&select=webUrl,siteCollection", ApiType.Graph), HttpMethod.Get).ConfigureAwait(false);
 
             #region Json responses
             /* Response if not multi-geo
@@ -287,5 +287,16 @@ namespace PnP.Core.Admin.Model.Microsoft365
         }
         #endregion
 
+        #region Sensitivity labels
+        public async Task<List<ISensitivityLabel>> GetSensitivityLabelsAsync()
+        {
+            return await SensitivityLabelManager.GetLabelsUsingDelegatedPermissionsAsync(context).ConfigureAwait(false);
+        }
+
+        public List<ISensitivityLabel> GetSensitivityLabels()
+        {
+            return GetSensitivityLabelsAsync().GetAwaiter().GetResult();
+        }
+        #endregion
     }
 }

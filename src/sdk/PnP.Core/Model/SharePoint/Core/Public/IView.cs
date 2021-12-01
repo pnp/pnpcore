@@ -6,7 +6,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a View object
     /// </summary>
     [ConcreteType(typeof(View))]
-    public interface IView : IDataModel<IView>, IDataModelGet<IView>, IDataModelLoad<IView>, IDataModelUpdate, IDataModelDelete
+    public interface IView : IDataModel<IView>, IDataModelGet<IView>, IDataModelLoad<IView>, IDataModelUpdate, IDataModelDelete, IQueryableDataModel
     {
         #region Properties
 
@@ -79,7 +79,7 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// Gets the Html Schema Xml
         /// </summary>
-        public string HtmlSchemaXml { get;  }
+        public string HtmlSchemaXml { get; }
 
         /// <summary>
         /// Gets the Id

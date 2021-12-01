@@ -1,6 +1,7 @@
 ﻿using PnP.Core.Model.Security;
 using PnP.Core.Services;
 using System;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
@@ -10,7 +11,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a SharePoint Online list item
     /// </summary>
     [ConcreteType(typeof(ListItem))]
-    public interface IListItem : IDataModel<IListItem>, IDataModelGet<IListItem>, IDataModelLoad<IListItem>, IDataModelUpdate, IDataModelDelete, IDataModelSupportingGetChanges, IExpandoDataModel, IQueryableDataModel
+    public interface IListItem : IDataModel<IListItem>, IDataModelGet<IListItem>, IDataModelLoad<IListItem>, IDataModelUpdate, IDataModelDelete, IDataModelSupportingGetChanges, ISecurableObject, IExpandoDataModel, IQueryableDataModel
     {
         /// <summary>
         /// Id of the list item
@@ -93,22 +94,23 @@ namespace PnP.Core.Model.SharePoint
         public Guid UniqueId { get; }
 
         /// <summary>
-        /// Role assignments of the list item
-        /// </summary>
-        public IRoleAssignmentCollection RoleAssignments { get; }
-
-        /// <summary>
         /// Information about the likes on this list item
         /// </summary>
         public ILikedByInformation LikedByInformation { get; }
 
         /// <summary>
         /// Gets a value that returns a collection of list item version objects that represent the versions of the list item
+        /// Implements <see cref="IQueryable{T}"/>. <br />
+        /// See <see href="https://pnp.github.io/pnpcore/using-the-sdk/basics-getdata.html#requesting-model-collections">Requesting model collections</see> 
+        /// and <see href="https://pnp.github.io/pnpcore/using-the-sdk/basics-iqueryable.html">IQueryable performance considerations</see> to learn more.
         /// </summary>
         public IListItemVersionCollection Versions { get; }
 
         /// <summary>
         /// Collection of attachments for this list item
+        /// Implements <see cref="IQueryable{T}"/>. <br />
+        /// See <see href="https://pnp.github.io/pnpcore/using-the-sdk/basics-getdata.html#requesting-model-collections">Requesting model collections</see> 
+        /// and <see href="https://pnp.github.io/pnpcore/using-the-sdk/basics-iqueryable.html">IQueryable performance considerations</see> to learn more.
         /// </summary>
         public IAttachmentCollection AttachmentFiles { get; }
 
@@ -444,243 +446,6 @@ namespace PnP.Core.Model.SharePoint
         /// <param name="batch">Batch to add the request to</param>
         /// <returns></returns>
         public Task<IBatchSingleResult<BatchResultValue<Guid>>> RecycleBatchAsync(Batch batch);
-        #endregion
-
-        #region Permissions
-
-        /// <summary>
-        /// Break role inheritance on the current item
-        /// </summary>
-        /// <param name="copyRoleAssignments"></param>
-        /// <param name="clearSubscopes"></param>
-        /// <returns></returns>
-        public void BreakRoleInheritance(bool copyRoleAssignments, bool clearSubscopes);
-
-        /// <summary>
-        /// Break role inheritance on the current item
-        /// </summary>
-        /// <param name="copyRoleAssignments"></param>
-        /// <param name="clearSubscopes"></param>
-        /// <returns></returns>
-        public Task BreakRoleInheritanceAsync(bool copyRoleAssignments, bool clearSubscopes);
-
-        /// <summary>
-        /// Break role inheritance on the current item
-        /// </summary>
-        /// <param name="batch">The batch to add this request to</param>
-        /// <param name="copyRoleAssignments"></param>
-        /// <param name="clearSubscopes"></param>
-        /// <returns></returns>
-        public void BreakRoleInheritanceBatch(Batch batch, bool copyRoleAssignments, bool clearSubscopes);
-
-        /// <summary>
-        /// Break role inheritance on the current item
-        /// </summary>
-        /// <param name="batch">The batch to add this request to</param>
-        /// <param name="copyRoleAssignments"></param>
-        /// <param name="clearSubscopes"></param>
-        /// <returns></returns>
-        public Task BreakRoleInheritanceBatchAsync(Batch batch, bool copyRoleAssignments, bool clearSubscopes);
-
-        /// <summary>
-        /// Break role inheritance on the current item
-        /// </summary>
-        /// <param name="copyRoleAssignments"></param>
-        /// <param name="clearSubscopes"></param>
-        /// <returns></returns>
-        public void BreakRoleInheritanceBatch(bool copyRoleAssignments, bool clearSubscopes);
-
-        /// <summary>
-        /// Break role inheritance on the current item
-        /// </summary>
-        /// <param name="copyRoleAssignments"></param>
-        /// <param name="clearSubscopes"></param>
-        /// <returns></returns>
-        public Task BreakRoleInheritanceBatchAsync(bool copyRoleAssignments, bool clearSubscopes);
-
-        /// <summary>
-        /// Reset role inheritance on the current item
-        /// </summary>
-        /// <returns></returns>
-        public void ResetRoleInheritance();
-
-        /// <summary>
-        /// Reset role inheritance on the current item
-        /// </summary>
-        /// <returns></returns>
-        public Task ResetRoleInheritanceAsync();
-
-        /// <summary>
-        /// Reset role inheritance on the current item
-        /// </summary>
-        /// <param name="batch">The batch to add this request to</param>
-        /// <returns></returns>
-        public void ResetRoleInheritanceBatch(Batch batch);
-
-        /// <summary>
-        /// Reset role inheritance on the current item
-        /// </summary>
-        /// <param name="batch">The batch to add this request to</param>
-        /// <returns></returns>
-        public Task ResetRoleInheritanceBatchAsync(Batch batch);
-
-        /// <summary>
-        /// Reset role inheritance on the current item
-        /// </summary>
-        /// <returns></returns>
-        public void ResetRoleInheritanceBatch();
-
-        /// <summary>
-        /// Reset role inheritance on the current item
-        /// </summary>
-        /// <returns></returns>
-        public Task ResetRoleInheritanceBatchAsync();
-
-        /// <summary>
-        /// Returns the role definitions for a specific principal id (IUser.Id or ISharePointGroup.Id)
-        /// </summary>
-        /// <param name="principalId"></param>
-        /// <returns></returns>
-        public IRoleDefinitionCollection GetRoleDefinitions(int principalId);
-
-        /// <summary>
-        /// Returns the role definitions for a specific principal id (IUser.Id or ISharePointGroup.Id)
-        /// </summary>
-        /// <param name="principalId"></param>
-        /// <returns></returns>
-        public Task<IRoleDefinitionCollection> GetRoleDefinitionsAsync(int principalId);
-
-        /// <summary>
-        /// Add role definitions for a specific principal id (IUser.Id or ISharePointGroup.Id)
-        /// </summary>
-        /// <param name="principalId"></param>
-        /// <param name="names"></param>
-        /// <returns></returns>
-        public bool AddRoleDefinitions(int principalId, params string[] names);
-
-        /// <summary>
-        /// Adds role definitions for a specific principal id (IUser.Id or ISharePointGroup.Id)
-        /// </summary>
-        /// <param name="principalId"></param>
-        /// <param name="names"></param>
-        /// <returns></returns>
-        public Task<bool> AddRoleDefinitionsAsync(int principalId, params string[] names);
-
-        /// <summary>
-        /// Add role definitions for a specific principal id (IUser.Id or ISharePointGroup.Id)
-        /// </summary>
-        /// <param name="principalId"></param>
-        /// <param name="roleDefinition">Role definition to add</param>
-        /// <returns></returns>
-        public void AddRoleDefinition(int principalId, IRoleDefinition roleDefinition);
-
-        /// <summary>
-        /// Adds role definitions for a specific principal id (IUser.Id or ISharePointGroup.Id)
-        /// </summary>
-        /// <param name="principalId"></param>
-        /// <param name="roleDefinition">Role definition to add</param>
-        /// <returns></returns>
-        public Task AddRoleDefinitionAsync(int principalId, IRoleDefinition roleDefinition);
-
-        /// <summary>
-        /// Add role definitions for a specific principal id (IUser.Id or ISharePointGroup.Id)
-        /// </summary>
-        /// <param name="batch">The batch to add this request to</param>
-        /// <param name="principalId"></param>
-        /// <param name="roleDefinition">Role definition to add</param>
-        /// <returns></returns>
-        public void AddRoleDefinitionBatch(Batch batch, int principalId, IRoleDefinition roleDefinition);
-
-        /// <summary>
-        /// Adds role definitions for a specific principal id (IUser.Id or ISharePointGroup.Id)
-        /// </summary>
-        /// <param name="batch">The batch to add this request to</param>
-        /// <param name="principalId"></param>
-        /// <param name="roleDefinition">Role definition to add</param>
-        /// <returns></returns>
-        public Task AddRoleDefinitionBatchAsync(Batch batch, int principalId, IRoleDefinition roleDefinition);
-
-        /// <summary>
-        /// Add role definitions for a specific principal id (IUser.Id or ISharePointGroup.Id)
-        /// </summary>
-        /// <param name="principalId"></param>
-        /// <param name="roleDefinition">Role definition to add</param>
-        /// <returns></returns>
-        public void AddRoleDefinitionBatch(int principalId, IRoleDefinition roleDefinition);
-
-        /// <summary>
-        /// Adds role definitions for a specific principal id (IUser.Id or ISharePointGroup.Id)
-        /// </summary>
-        /// <param name="principalId"></param>
-        /// <param name="roleDefinition">Role definition to add</param>
-        /// <returns></returns>
-        public Task AddRoleDefinitionBatchAsync(int principalId, IRoleDefinition roleDefinition);
-
-        /// <summary>
-        /// Removes role definitions for a specific principal id (IUser.Id or ISharePointGroup.Id)
-        /// </summary>
-        /// <param name="principalId"></param>
-        /// <param name="names"></param>
-        /// <returns></returns>
-        public bool RemoveRoleDefinitions(int principalId, params string[] names);
-
-        /// <summary>
-        /// Removes role definitions for a specific principal id (IUser.Id or ISharePointGroup.Id)
-        /// </summary>
-        /// <param name="principalId"></param>
-        /// <param name="names"></param>
-        /// <returns></returns>
-        public Task<bool> RemoveRoleDefinitionsAsync(int principalId, params string[] names);
-
-        /// <summary>
-        /// Removes role definitions for a specific principal id (IUser.Id or ISharePointGroup.Id)
-        /// </summary>
-        /// <param name="principalId"></param>
-        /// <param name="roleDefinition">Role definition to remove</param>
-        /// <returns></returns>
-        public void RemoveRoleDefinition(int principalId, IRoleDefinition roleDefinition);
-
-        /// <summary>
-        /// Removes role definitions for a specific principal id (IUser.Id or ISharePointGroup.Id)
-        /// </summary>
-        /// <param name="principalId"></param>
-        /// <param name="roleDefinition">Role definition to remove</param>
-        /// <returns></returns>
-        public Task RemoveRoleDefinitionAsync(int principalId, IRoleDefinition roleDefinition);
-
-        /// <summary>
-        /// Removes role definitions for a specific principal id (IUser.Id or ISharePointGroup.Id)
-        /// </summary>
-        /// <param name="principalId"></param>
-        /// <param name="roleDefinition">Role definition to remove</param>
-        /// <returns></returns>
-        public void RemoveRoleDefinitionBatch(int principalId, IRoleDefinition roleDefinition);
-
-        /// <summary>
-        /// Removes role definitions for a specific principal id (IUser.Id or ISharePointGroup.Id)
-        /// </summary>
-        /// <param name="principalId"></param>
-        /// <param name="roleDefinition">Role definition to remove</param>
-        /// <returns></returns>
-        public Task RemoveRoleDefinitionBatchAsync(int principalId, IRoleDefinition roleDefinition);
-
-        /// <summary>
-        /// Removes role definitions for a specific principal id (IUser.Id or ISharePointGroup.Id)
-        /// </summary>
-        /// <param name="batch">The batch to add this request to</param>
-        /// <param name="principalId"></param>
-        /// <param name="roleDefinition">Role definition to remove</param>
-        /// <returns></returns>
-        public void RemoveRoleDefinitionBatch(Batch batch, int principalId, IRoleDefinition roleDefinition);
-
-        /// <summary>
-        /// Removes role definitions for a specific principal id (IUser.Id or ISharePointGroup.Id)
-        /// </summary>
-        /// <param name="batch">The batch to add this request to</param>
-        /// <param name="principalId"></param>
-        /// <param name="roleDefinition">Role definition to remove</param>
-        /// <returns></returns>
-        public Task RemoveRoleDefinitionBatchAsync(Batch batch, int principalId, IRoleDefinition roleDefinition);
         #endregion
 
         #region Comments and liking

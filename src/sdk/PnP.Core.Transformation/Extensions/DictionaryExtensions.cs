@@ -3,7 +3,7 @@
 namespace PnP.Core.Transformation.Extensions
 {
     /// <summary>
-    /// Extension class to provide additional functionalities on top of Dictionary<TKey, TValue></TKey>
+    /// Extension class to provide additional functionalities on top of Dictionary
     /// </summary>
     internal static class DictionaryExtensions
     {

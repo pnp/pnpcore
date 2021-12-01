@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using PnP.Core.Model;
 using PnP.Core.Model.SharePoint;
 using PnP.Core.QueryModel;
 using PnP.Core.Services;
@@ -121,9 +122,10 @@ namespace PnP.Core.Test.SharePoint
                     p => p.LastItemUserModifiedDate,
                     p => p.LogoAlignment,
                     p => p.MasterUrl,
-                    p => p.MegaMenuEnabled
+                    p => p.MegaMenuEnabled,
+                    p => p.HasUniqueRoleAssignments
                     );
-                
+
                 var web = context.Web;
 
                 Assert.IsNotNull(web);
@@ -136,6 +138,7 @@ namespace PnP.Core.Test.SharePoint
                 Assert.AreEqual(LogoAlignment.Left, web.LogoAlignment);
                 Assert.AreNotEqual("", web.MasterUrl);
                 Assert.IsFalse(web.MegaMenuEnabled);
+                Assert.IsTrue(web.HasUniqueRoleAssignments);
             }
         }
 
@@ -567,7 +570,7 @@ namespace PnP.Core.Test.SharePoint
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSubSite))
             {
                 await context.Web.LoadAsync(p => p.RegionalSettings);
-                await context.Web.RegionalSettings.LoadAsync(p=>p.TimeZones);
+                await context.Web.RegionalSettings.LoadAsync(p => p.TimeZones);
 
                 var timeZones = context.Web.RegionalSettings.TimeZones;
 
@@ -592,13 +595,13 @@ namespace PnP.Core.Test.SharePoint
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSubSite))
             {
-                await context.Web.RegionalSettings.LoadAsync(p=>p.DecimalSeparator, p => p.TimeZone);
+                await context.Web.RegionalSettings.LoadAsync(p => p.DecimalSeparator, p => p.TimeZone);
 
                 Assert.IsTrue(context.Web.RegionalSettings.Requested);
                 Assert.IsTrue(context.Web.RegionalSettings.IsPropertyAvailable(p => p.DecimalSeparator));
                 Assert.IsTrue(context.Web.RegionalSettings.IsPropertyAvailable(p => p.TimeZone));
                 Assert.IsTrue(context.Web.RegionalSettings.TimeZone.Requested);
-                Assert.IsTrue(context.Web.RegionalSettings.TimeZone.IsPropertyAvailable(p=>p.Bias));
+                Assert.IsTrue(context.Web.RegionalSettings.TimeZone.IsPropertyAvailable(p => p.Bias));
             }
         }
 
@@ -1133,9 +1136,9 @@ namespace PnP.Core.Test.SharePoint
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 string webTitle = "AddWebWithCustomOptions";
-                var addedWeb = await context.Web.Webs.AddAsync(new WebOptions 
-                { 
-                    Title = webTitle, 
+                var addedWeb = await context.Web.Webs.AddAsync(new WebOptions
+                {
+                    Title = webTitle,
                     Url = webTitle,
                     Description = "Description of the sub web",
                     Template = "STS#0",
@@ -1302,7 +1305,7 @@ namespace PnP.Core.Test.SharePoint
                     ChangeTokenStart = firstChangeToken,
                     ChangeTokenEnd = lastChangetoken
                 });
-               
+
                 Assert.IsTrue(changes2.Count == 9);
             }
         }
@@ -1317,35 +1320,54 @@ namespace PnP.Core.Test.SharePoint
                 // Add a new content type
                 IContentType newContentType = await context.Web.ContentTypes.AddAsync("0x0100554FB756A84E4A4899FB819522D2BF50", "ChangeTest", "TESTING", "TESTING");
 
-                var changes = await context.Web.GetChangesAsync(new ChangeQueryOptions(false, true)
+                try
                 {
-                    ContentType = true,
-                    FetchLimit = 5
-                });
+                    var changes = await context.Web.GetChangesAsync(new ChangeQueryOptions(false, true)
+                    {
+                        ContentType = true,
+                        FetchLimit = 1000
+                    });
 
-                Assert.IsNotNull(changes);
-                Assert.IsTrue(changes.Count > 0);
-                Assert.IsTrue((changes.Last() as IChangeContentType).ContentTypeId != null);
-                Assert.IsTrue((changes.Last() as IChangeContentType).WebId != Guid.Empty);
+                    Assert.IsNotNull(changes);
+                    Assert.IsTrue(changes.Count > 0);
+                    Assert.IsTrue((changes.Last() as IChangeContentType).ContentTypeId != null);
+                    Assert.IsTrue((changes.Last() as IChangeContentType).WebId != Guid.Empty);
 
-                Assert.IsTrue(changes.Last().IsPropertyAvailable<IChangeContentType>(p => p.ContentTypeId));
-                Assert.ThrowsException<ClientException>(() =>
+                    Assert.IsTrue(changes.Last().IsPropertyAvailable<IChangeContentType>(p => p.ContentTypeId));
+                    Assert.ThrowsException<ClientException>(() =>
+                    {
+                        changes.Last().IsPropertyAvailable<IChangeContentType>(p => p.ContentTypeId.Name);
+                    });
+                    Assert.ThrowsException<ArgumentNullException>(() =>
+                    {
+                        changes.Last().IsPropertyAvailable<IChangeContentType>(null);
+                    });
+
+                    // Load additional properties based upon the returned content type
+                    IChangeContentType contentTypeToValidate = null;
+                    foreach (var change in changes)
+                    {
+                        if (change is IChangeContentType changeContentType)
+                        {
+                            if (changeContentType.ContentTypeId.StringId == "0x0100554FB756A84E4A4899FB819522D2BF50")
+                            {
+                                contentTypeToValidate = changeContentType;
+                                break;
+                            }
+                        }
+                    }
+
+                    if (contentTypeToValidate != null)
+                    {
+                        await contentTypeToValidate.ContentTypeId.LoadAsync(p => p.Group);
+                        Assert.IsTrue(contentTypeToValidate.ContentTypeId.IsPropertyAvailable(p => p.Group));
+                    }
+                }
+                finally
                 {
-                    changes.Last().IsPropertyAvailable<IChangeContentType>(p => p.ContentTypeId.Name);
-                });
-                Assert.ThrowsException<ArgumentNullException>(() =>
-                {
-                    changes.Last().IsPropertyAvailable<IChangeContentType>(null);
-                });
-
-                // Load additional properties based upon the returned content type
-                var changedContentType = (changes.Last() as IChangeContentType).ContentTypeId;
-                await changedContentType.LoadAsync(p => p.Group);
-
-                Assert.IsTrue(changedContentType.IsPropertyAvailable(p => p.Group));
-
-                // Delete the content type again
-                await newContentType.DeleteAsync();
+                    // Delete the content type again
+                    await newContentType.DeleteAsync();
+                }
             }
         }
 
@@ -1408,6 +1430,23 @@ namespace PnP.Core.Test.SharePoint
             }
         }
 
+        [TestMethod]
+        public async Task GetSubWebs()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                context.Web.Load(w => w.Webs);
+                Assert.IsTrue(context.Web.Webs.Length > 0);
 
+                var webs = context.Web.Webs.ToList();
+                Assert.IsTrue(webs.Count == context.Web.Webs.Length);
+                Guid id = webs.First().Id;
+
+                var webs2 = context.Web.Webs.Where(p => p.Id == id).ToList();
+                Assert.IsTrue(webs2.Count == 1);
+                Assert.IsTrue(webs2.First().Id == webs.First().Id);
+            }
+        }
     }
 }

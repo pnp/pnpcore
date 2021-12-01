@@ -5,7 +5,7 @@ namespace PnP.Core.Services
     /// <summary>
     /// Generic module that can be used to plug in custom logic to the request pipeline
     /// </summary>
-    internal class GenericRequestModule : RequestModuleBase
+    internal sealed class GenericRequestModule : RequestModuleBase
     {
         /// <summary>
         /// Default constructor

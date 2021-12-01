@@ -2,7 +2,7 @@
 
 namespace PnP.Core.Services.Core.CSOM.Requests.ListItems
 {
-    internal class FolderPropertyBagUpdateRequest : UpdatePropertyBagRequest
+    internal sealed class FolderPropertyBagUpdateRequest : UpdatePropertyBagRequest
     {
         internal FolderPropertyBagUpdateRequest(string parentId)
         {

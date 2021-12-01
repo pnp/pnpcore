@@ -155,7 +155,7 @@ namespace PnP.Core.QueryModel
                 Expression.Call(
                     null,
                     QueryableMethods.QueryProperties.MakeGenericMethod(typeof(TResult)),
-                    new Expression[] { source.Expression, Expression.NewArrayInit(typeof(Expression<Func<TResult, object>>), selectors)}
+                    new Expression[] { source.Expression, Expression.NewArrayInit(typeof(Expression<Func<TResult, object>>), selectors) }
                 ));
         }
 

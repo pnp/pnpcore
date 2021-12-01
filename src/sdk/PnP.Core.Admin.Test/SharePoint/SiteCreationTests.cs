@@ -1,7 +1,10 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using PnP.Core.Admin.Model.Microsoft365;
 using PnP.Core.Admin.Model.SharePoint;
+using PnP.Core.Admin.Model.Teams;
 using PnP.Core.Admin.Test.Utilities;
 using PnP.Core.Model;
+using PnP.Core.Model.SharePoint;
 using PnP.Core.QueryModel;
 using PnP.Core.Services;
 using System;
@@ -42,7 +45,7 @@ namespace PnP.Core.Admin.Test.SharePoint
                 {
 
                     // Persist the used site url as we need to have the same url when we run an offline test
-                    Uri siteUrl; 
+                    Uri siteUrl;
                     if (!TestCommon.Instance.Mocking)
                     {
                         siteUrl = new Uri($"https://{context.Uri.DnsSafeHost}/sites/pnpcoresdktestcommsite{Guid.NewGuid().ToString().Replace("-", "")}");
@@ -60,7 +63,7 @@ namespace PnP.Core.Admin.Test.SharePoint
                     communicationSiteToCreate = new CommunicationSiteOptions(siteUrl, "PnP Core SDK Test")
                     {
                         Description = "This is a test site collection",
-                        Language = Language.English,                        
+                        Language = Language.English,
                     };
 
 
@@ -80,7 +83,7 @@ namespace PnP.Core.Admin.Test.SharePoint
                         return input;
                     };
 
-                    using (var newSiteContext = context.GetSharePointAdmin().CreateSiteCollection(communicationSiteToCreate, siteCreationOptions))
+                    using (var newSiteContext = context.GetSiteCollectionManager().CreateSiteCollection(communicationSiteToCreate, siteCreationOptions))
                     {
                         var web = await newSiteContext.Web.GetAsync(p => p.Url, p => p.Title, p => p.Description, p => p.Language);
                         Assert.IsTrue(web.Url == communicationSiteToCreate.Url);
@@ -101,7 +104,95 @@ namespace PnP.Core.Admin.Test.SharePoint
                 TestCommon.Instance.UseApplicationPermissions = false;
                 using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
                 {
-                    context.GetSharePointAdmin().DeleteSiteCollection(communicationSiteToCreate.Url, communicationSiteToCreate.WebTemplate);
+                    context.GetSiteCollectionManager().DeleteSiteCollection(communicationSiteToCreate.Url);
+                }
+
+            }
+        }
+
+        [TestMethod]
+        public async Task CreateCommunicationSiteAdvancedUsingDelegatedPermissions()
+        {
+            //TestCommon.Instance.Mocking = false;
+            TestCommon.Instance.UseApplicationPermissions = false;
+
+            CommunicationSiteOptions communicationSiteToCreate = null;
+
+            // Create the site collection
+            try
+            {
+                using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+                {
+
+                    // Get a list of available sensitivity labels
+                    var labels = await SensitivityLabelManager.GetLabelsUsingDelegatedPermissionsAsync(context);
+                    var siteLabel = labels.FirstOrDefault();
+                    Guid sensitivityLabelId = Guid.Empty;
+
+                    // Persist the used site url as we need to have the same url when we run an offline test
+                    Uri siteUrl;
+                    if (!TestCommon.Instance.Mocking)
+                    {
+                        siteUrl = new Uri($"https://{context.Uri.DnsSafeHost}/sites/pnpcoresdktestcommsite{Guid.NewGuid().ToString().Replace("-", "")}");
+
+                        if (siteLabel != null)
+                        {
+                            sensitivityLabelId = siteLabel.Id;
+                        }
+
+                        Dictionary<string, string> properties = new Dictionary<string, string>
+                        {
+                            { "SiteUrl", siteUrl.ToString() },
+                            { "SensitivityLabelId", sensitivityLabelId.ToString() }
+                        };
+
+                        TestManager.SaveProperties(context, properties);
+                    }
+                    else
+                    {
+                        siteUrl = new Uri(TestManager.GetProperties(context)["SiteUrl"]);
+                        sensitivityLabelId = Guid.Parse(TestManager.GetProperties(context)["SensitivityLabelId"]);
+                    }
+
+                    communicationSiteToCreate = new CommunicationSiteOptions(siteUrl, "PnP Core SDK Test")
+                    {
+                        Description = "This is a test site collection",
+                        Language = Language.English,
+                        SensitivityLabelId = sensitivityLabelId,
+                        ShareByEmailEnabled = true,
+                    };
+
+
+                    SiteCreationOptions siteCreationOptions = new SiteCreationOptions()
+                    {
+                        UsingApplicationPermissions = false
+                    };
+
+                    using (var newSiteContext = context.GetSiteCollectionManager().CreateSiteCollection(communicationSiteToCreate, siteCreationOptions))
+                    {
+                        var site = await newSiteContext.Site.GetAsync(p => p.SensitivityLabelId, p => p.SensitivityLabel);
+                        var web = await newSiteContext.Web.GetAsync(p => p.Url, p => p.Title, p => p.Description, p => p.Language);
+
+                        Assert.IsTrue(web.Url == communicationSiteToCreate.Url);
+                        Assert.IsTrue(web.Title == communicationSiteToCreate.Title);
+                        Assert.IsTrue(web.Description == communicationSiteToCreate.Description);
+                        Assert.IsTrue(web.Language == (int)communicationSiteToCreate.Language);
+                        Assert.IsTrue(site.SensitivityLabelId == communicationSiteToCreate.SensitivityLabelId);
+                    }
+
+                    if (context.Mode == TestMode.Record)
+                    {
+                        // Add a little delay between creation and deletion
+                        await Task.Delay(TimeSpan.FromSeconds(15));
+                    }
+                }
+            }
+            finally
+            {
+                TestCommon.Instance.UseApplicationPermissions = false;
+                using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+                {
+                    context.GetSiteCollectionManager().DeleteSiteCollection(communicationSiteToCreate.Url);
                 }
 
             }
@@ -150,7 +241,7 @@ namespace PnP.Core.Admin.Test.SharePoint
                         WaitForAsyncProvisioning = true
                     };
 
-                    using (var newSiteContext = context.GetSharePointAdmin().CreateSiteCollection(communicationSiteToCreate, siteCreationOptions))
+                    using (var newSiteContext = context.GetSiteCollectionManager().CreateSiteCollection(communicationSiteToCreate, siteCreationOptions))
                     {
                         var web = await newSiteContext.Web.GetAsync(p => p.Url, p => p.Title, p => p.Description, p => p.Language);
                         Assert.IsTrue(web.Url == communicationSiteToCreate.Url);
@@ -171,7 +262,7 @@ namespace PnP.Core.Admin.Test.SharePoint
                 TestCommon.Instance.UseApplicationPermissions = false;
                 using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
                 {
-                    context.GetSharePointAdmin().DeleteSiteCollection(communicationSiteToCreate.Url, communicationSiteToCreate.WebTemplate);
+                    context.GetSiteCollectionManager().DeleteSiteCollection(communicationSiteToCreate.Url);
                 }
 
             }
@@ -211,7 +302,7 @@ namespace PnP.Core.Admin.Test.SharePoint
                     {
                         siteUrl = new Uri(TestManager.GetProperties(context)["SiteUrl"]);
                         owner = TestManager.GetProperties(context)["SiteOwner"];
-                    }                    
+                    }
 
                     communicationSiteToCreate = new CommunicationSiteOptions(siteUrl, "PnP Core SDK Test")
                     {
@@ -226,7 +317,7 @@ namespace PnP.Core.Admin.Test.SharePoint
                         UsingApplicationPermissions = true
                     };
 
-                    using (var newSiteContext = context.GetSharePointAdmin().CreateSiteCollection(communicationSiteToCreate, siteCreationOptions))
+                    using (var newSiteContext = context.GetSiteCollectionManager().CreateSiteCollection(communicationSiteToCreate, siteCreationOptions))
                     {
                         var web = await newSiteContext.Web.GetAsync(p => p.Url, p => p.Title, p => p.Description, p => p.Language);
                         Assert.IsTrue(web.Url == communicationSiteToCreate.Url);
@@ -246,7 +337,7 @@ namespace PnP.Core.Admin.Test.SharePoint
             {
                 using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
                 {
-                    context.GetSharePointAdmin().DeleteSiteCollection(communicationSiteToCreate.Url, communicationSiteToCreate.WebTemplate);
+                    context.GetSiteCollectionManager().DeleteSiteCollection(communicationSiteToCreate.Url);
                 }
                 TestCommon.Instance.UseApplicationPermissions = false;
             }
@@ -298,7 +389,7 @@ namespace PnP.Core.Admin.Test.SharePoint
                         UsingApplicationPermissions = false
                     };
 
-                    using (var newSiteContext = context.GetSharePointAdmin().CreateSiteCollection(teamSiteToCreate, siteCreationOptions))
+                    using (var newSiteContext = context.GetSiteCollectionManager().CreateSiteCollection(teamSiteToCreate, siteCreationOptions))
                     {
                         var web = await newSiteContext.Web.GetAsync(p => p.Url, p => p.Title, p => p.Description, p => p.Language);
                         Assert.IsTrue(web.Url == teamSiteToCreate.Url);
@@ -313,7 +404,7 @@ namespace PnP.Core.Admin.Test.SharePoint
                 TestCommon.Instance.UseApplicationPermissions = false;
                 using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
                 {
-                    context.GetSharePointAdmin().DeleteSiteCollection(teamSiteToCreate.Url, teamSiteToCreate.WebTemplate);
+                    context.GetSiteCollectionManager().DeleteSiteCollection(teamSiteToCreate.Url);
                 }
 
             }
@@ -358,7 +449,7 @@ namespace PnP.Core.Admin.Test.SharePoint
                     {
                         Description = "This is a test site collection",
                         Language = Language.English,
-                        IsPublic= true,
+                        IsPublic = true,
                     };
 
 
@@ -378,7 +469,7 @@ namespace PnP.Core.Admin.Test.SharePoint
                         return input;
                     };
 
-                    using (var newSiteContext = context.GetSharePointAdmin().CreateSiteCollection(teamSiteToCreate, siteCreationOptions))
+                    using (var newSiteContext = context.GetSiteCollectionManager().CreateSiteCollection(teamSiteToCreate, siteCreationOptions))
                     {
                         createdSiteCollection = newSiteContext.Uri;
 
@@ -401,7 +492,7 @@ namespace PnP.Core.Admin.Test.SharePoint
                 TestCommon.Instance.UseApplicationPermissions = false;
                 using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
                 {
-                    context.GetSharePointAdmin().DeleteSiteCollection(createdSiteCollection, teamSiteToCreate.WebTemplate);
+                    context.GetSiteCollectionManager().DeleteSiteCollection(createdSiteCollection);
                 }
 
             }
@@ -453,7 +544,7 @@ namespace PnP.Core.Admin.Test.SharePoint
                             UsingApplicationPermissions = false
                         };
 
-                        using (var newSiteContext = tenantAdminContext.GetSharePointAdmin().CreateSiteCollection(classicSite, siteCreationOptions))
+                        using (var newSiteContext = tenantAdminContext.GetSiteCollectionManager().CreateSiteCollection(classicSite, siteCreationOptions))
                         {
                             var web = await newSiteContext.Web.GetAsync(p => p.Url, p => p.Title, p => p.Description, p => p.Language);
                             Assert.IsTrue(web.Url == classicSite.Url);
@@ -468,7 +559,80 @@ namespace PnP.Core.Admin.Test.SharePoint
                 TestCommon.Instance.UseApplicationPermissions = false;
                 using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
                 {
-                    context.GetSharePointAdmin().DeleteSiteCollection(classicSite.Url, classicSite.WebTemplate);
+                    context.GetSiteCollectionManager().DeleteSiteCollection(classicSite.Url);
+                }
+
+            }
+        }
+
+        [TestMethod]
+        public async Task CreateClassicSiteUsingApplicationPermissions()
+        {
+            //TestCommon.Instance.Mocking = false;
+            TestCommon.Instance.UseApplicationPermissions = true;
+
+            ClassicSiteOptions classicSite = null;
+
+            // Create the site collection
+            try
+            {
+                using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.NoGroupTestSite))
+                {
+                    using (var tenantAdminContext = await context.GetSharePointAdmin().GetTenantAdminCenterContextAsync())
+                    {
+                        // Determine the user to set as owner
+                        await context.Web.LoadAsync(p => p.AssociatedOwnerGroup.QueryProperties(p => p.Users));
+                        var user = context.Web.AssociatedOwnerGroup.Users.AsRequested().FirstOrDefault();
+
+                        // Persist the used site url as we need to have the same url when we run an offline test
+                        Uri siteUrl;
+                        string owner = user.LoginName;
+                        if (!TestCommon.Instance.Mocking)
+                        {
+                            siteUrl = new Uri($"https://{context.Uri.DnsSafeHost}/sites/pnpcoresdktestclassicsite{Guid.NewGuid().ToString().Replace("-", "")}");
+                            Dictionary<string, string> properties = new Dictionary<string, string>
+                            {
+                                { "SiteUrl", siteUrl.ToString() },
+                                { "SiteOwner", owner }
+                            };
+                            TestManager.SaveProperties(context, properties);
+                        }
+                        else
+                        {
+                            siteUrl = new Uri(TestManager.GetProperties(context)["SiteUrl"]);
+                            owner = TestManager.GetProperties(context)["SiteOwner"];
+                        }
+
+                        classicSite = new ClassicSiteOptions(siteUrl, "PnP Core SDK Test", "STS#0", owner, Language.English,
+                            Model.SharePoint.TimeZone.UTCPLUS0100_BRUSSELS_COPENHAGEN_MADRID_PARIS);
+
+                        SiteCreationOptions siteCreationOptions = new SiteCreationOptions()
+                        {
+                            UsingApplicationPermissions = false
+                        };
+
+                        using (var newSiteContext = tenantAdminContext.GetSiteCollectionManager().CreateSiteCollection(classicSite, siteCreationOptions))
+                        {
+                            var web = await newSiteContext.Web.GetAsync(p => p.Url, p => p.Title, p => p.Description, p => p.Language);
+                            Assert.IsTrue(web.Url == classicSite.Url);
+                            Assert.IsTrue(web.Title == classicSite.Title);
+                            Assert.IsTrue(web.Language == (int)classicSite.Language);
+                        }
+
+                        if (context.Mode == TestMode.Record)
+                        {
+                            // Add a little delay between creation and deletion
+                            await Task.Delay(TimeSpan.FromSeconds(15));
+                        }
+                    }
+                }
+            }
+            finally
+            {
+                TestCommon.Instance.UseApplicationPermissions = false;
+                using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+                {
+                    context.GetSiteCollectionManager().DeleteSiteCollection(classicSite.Url);
                 }
 
             }
@@ -520,7 +684,7 @@ namespace PnP.Core.Admin.Test.SharePoint
                             UsingApplicationPermissions = false
                         };
 
-                        using (var newSiteContext = adminContext.GetSharePointAdmin().CreateSiteCollection(communicationSiteToCreate, siteCreationOptions))
+                        using (var newSiteContext = adminContext.GetSiteCollectionManager().CreateSiteCollection(communicationSiteToCreate, siteCreationOptions))
                         {
                             var web = await newSiteContext.Web.GetAsync(p => p.Url, p => p.Title, p => p.Description, p => p.Language);
                             Assert.IsTrue(web.Url == communicationSiteToCreate.Url);
@@ -532,14 +696,14 @@ namespace PnP.Core.Admin.Test.SharePoint
                         if (context.Mode == TestMode.Record)
                         {
                             // Add a little delay between creation and deletion
-                            await Task.Delay(TimeSpan.FromSeconds(15));
+                            await Task.Delay(TimeSpan.FromSeconds(30));
                         }
 
                         // Recycle the site collection
-                        adminContext.GetSharePointAdmin().RecycleSiteCollection(communicationSiteToCreate.Url, communicationSiteToCreate.WebTemplate);
+                        adminContext.GetSiteCollectionManager().RecycleSiteCollection(communicationSiteToCreate.Url);
 
                         // Verify the site collection is returned as recycled site
-                        var recycledSites = adminContext.GetSharePointAdmin().GetRecycledSiteCollections();
+                        var recycledSites = adminContext.GetSiteCollectionManager().GetRecycledSiteCollections();
                         var recycledCommunicationSite = recycledSites.FirstOrDefault(c => c.Url == communicationSiteToCreate.Url);
                         Assert.IsNotNull(recycledCommunicationSite);
                         Assert.IsTrue(!string.IsNullOrEmpty(recycledCommunicationSite.Name));
@@ -553,16 +717,23 @@ namespace PnP.Core.Admin.Test.SharePoint
 
 
                         // Restore the recycled site collection again
-                        adminContext.GetSharePointAdmin().RestoreSiteCollection(communicationSiteToCreate.Url);
+                        adminContext.GetSiteCollectionManager().RestoreSiteCollection(communicationSiteToCreate.Url);
+
+                        if (context.Mode == TestMode.Record)
+                        {
+                            // Add a little delay between creation and deletion
+                            await Task.Delay(TimeSpan.FromSeconds(30));
+                        }
+
                         // Verify the site collection is not returned as recycled site
-                        recycledSites = adminContext.GetSharePointAdmin().GetRecycledSiteCollections();
+                        recycledSites = adminContext.GetSiteCollectionManager().GetRecycledSiteCollections();
                         recycledCommunicationSite = recycledSites.FirstOrDefault(c => c.Url == communicationSiteToCreate.Url);
                         Assert.IsNull(recycledCommunicationSite);
 
                         if (context.Mode == TestMode.Record)
                         {
                             // Add a little delay between creation and deletion
-                            await Task.Delay(TimeSpan.FromSeconds(15));
+                            await Task.Delay(TimeSpan.FromSeconds(30));
                         }
                     }
                 }
@@ -573,12 +744,313 @@ namespace PnP.Core.Admin.Test.SharePoint
                 TestCommon.Instance.UseApplicationPermissions = false;
                 using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
                 {
-                    context.GetSharePointAdmin().DeleteSiteCollection(communicationSiteToCreate.Url, communicationSiteToCreate.WebTemplate);
+                    context.GetSiteCollectionManager().DeleteSiteCollection(communicationSiteToCreate.Url);
                 }
 
             }
         }
 
+        #endregion
+
+        #region Handle input exceptions
+        [TestMethod]
+        public async Task HandleExceptions()
+        {
+            //TestCommon.Instance.Mocking = false;
+            TestCommon.Instance.UseApplicationPermissions = false;
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+
+                Assert.ThrowsException<ArgumentNullException>(() =>
+                {
+                    SiteCreationOptions siteCreationOptions = new SiteCreationOptions()
+                    {
+                        UsingApplicationPermissions = false
+                    };
+
+                    using (var newSiteContext = context.GetSiteCollectionManager().CreateSiteCollection(null, siteCreationOptions))
+                    {
+                    }
+                });
+
+                Assert.ThrowsException<ArgumentNullException>(() =>
+                {
+                    CommunicationSiteOptions communicationSiteToCreate = new CommunicationSiteOptions(null, "PnP Core SDK Test")
+                    {
+                        Description = "This is a test site collection",
+                        Language = Language.English,
+                    };
+                });
+
+                Assert.ThrowsException<ArgumentNullException>(() =>
+                {
+                    CommunicationSiteOptions communicationSiteToCreate = new CommunicationSiteOptions(new Uri("https://contoso.sharepoint.com/sites/dummy"), null)
+                    {
+                        Description = "This is a test site collection",
+                        Language = Language.English,
+                    };
+                });
+
+                Assert.ThrowsException<ArgumentNullException>(() =>
+                {
+                    TeamSiteOptions communicationSiteToCreate = new TeamSiteOptions(null, "display name");
+                });
+
+                Assert.ThrowsException<ArgumentNullException>(() =>
+                {
+                    TeamSiteOptions communicationSiteToCreate = new TeamSiteOptions("alias", null);
+                });
+
+                Assert.ThrowsException<ArgumentNullException>(() =>
+                {
+                    ClassicSiteOptions communicationSiteToCreate = new ClassicSiteOptions(null, "title", "webtemplate", "owner", Language.Default, Model.SharePoint.TimeZone.None);
+                });
+
+                Assert.ThrowsException<ArgumentNullException>(() =>
+                {
+                    ClassicSiteOptions communicationSiteToCreate = new ClassicSiteOptions(new Uri("https://contoso.sharepoint.com/sites/dummy"), "", "webtemplate", "owner", Language.Default, Model.SharePoint.TimeZone.None);
+                });
+
+                Assert.ThrowsException<ArgumentNullException>(() =>
+                {
+                    ClassicSiteOptions communicationSiteToCreate = new ClassicSiteOptions(new Uri("https://contoso.sharepoint.com/sites/dummy"), "title", "", "owner", Language.Default, Model.SharePoint.TimeZone.None);
+                });
+
+                Assert.ThrowsException<ArgumentNullException>(() =>
+                {
+                    ClassicSiteOptions communicationSiteToCreate = new ClassicSiteOptions(new Uri("https://contoso.sharepoint.com/sites/dummy"), "title", "webtemplate", "", Language.Default, Model.SharePoint.TimeZone.None);
+                });
+
+                Assert.ThrowsException<ArgumentException>(() =>
+                {
+                    ClassicSiteOptions communicationSiteToCreate = new ClassicSiteOptions(new Uri("https://contoso.sharepoint.com/sites/dummy"), "title", "webtemplate", "owner", Language.Default, Model.SharePoint.TimeZone.None);
+                });
+
+                Assert.ThrowsException<ArgumentNullException>(() =>
+                {
+                    CreationOptions creationOptions = new CreationOptions()
+                    {
+                        UsingApplicationPermissions = false
+                    };
+
+                    context.GetSiteCollectionManager().ConnectSiteCollectionToGroup(null, creationOptions);
+                });
+
+                Assert.ThrowsException<ArgumentNullException>(() =>
+                {
+                    ConnectSiteToGroupOptions communicationSiteToCreate = new ConnectSiteToGroupOptions(null, "alias", "displayname");
+                });
+
+                Assert.ThrowsException<ArgumentNullException>(() =>
+                {
+                    context.GetSiteCollectionManager().RecycleSiteCollection(null);
+                });
+
+                Assert.ThrowsException<ArgumentNullException>(() =>
+                {
+                    context.GetSiteCollectionManager().RestoreSiteCollection(null);
+                });
+
+                Assert.ThrowsException<ArgumentNullException>(() =>
+                {
+                    context.GetSiteCollectionManager().DeleteSiteCollection(null);
+                });
+
+                Assert.ThrowsException<ArgumentNullException>(() =>
+                {
+                    context.GetSiteCollectionManager().GetSiteCollectionProperties(null);
+                });
+
+            }
+        }
+        #endregion
+
+        #region Modernization
+        [TestMethod]
+        public async Task TeamifyTeamSiteUsingDelegatedPermissions()
+        {
+            //TestCommon.Instance.Mocking = false;
+            TestCommon.Instance.UseApplicationPermissions = false;
+
+            TeamSiteOptions teamSiteToCreate = null;
+
+            // Create the site collection
+            Uri createdSiteCollection = null;
+            try
+            {
+                using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+                {
+
+                    // Persist the used site url as we need to have the same url when we run an offline test
+                    string alias;
+                    if (!TestCommon.Instance.Mocking)
+                    {
+                        alias = $"pnpcoresdktestteamsite{Guid.NewGuid().ToString().Replace("-", "")}";
+                        Dictionary<string, string> properties = new Dictionary<string, string>
+                        {
+                            { "Alias", alias }
+                        };
+                        TestManager.SaveProperties(context, properties);
+                    }
+                    else
+                    {
+                        alias = TestManager.GetProperties(context)["Alias"];
+                    }
+
+                    teamSiteToCreate = new TeamSiteOptions(alias, "PnP Core SDK Test")
+                    {
+                        Description = "This is a test site collection",
+                        Language = Language.English,
+                        IsPublic = true,
+                    };
+
+
+                    SiteCreationOptions siteCreationOptions = new SiteCreationOptions()
+                    {
+                        UsingApplicationPermissions = false
+                    };
+
+                    using (var newSiteContext = context.GetSiteCollectionManager().CreateSiteCollection(teamSiteToCreate, siteCreationOptions))
+                    {
+                        createdSiteCollection = newSiteContext.Uri;
+
+                        Assert.IsTrue(newSiteContext.Site.GroupId != Guid.Empty);
+
+                        // Check prompt
+                        var isAddTeamsPromptHidden = newSiteContext.GetSiteCollectionManager().IsAddTeamsPromptHidden(newSiteContext.Uri);
+
+                        Assert.IsFalse(isAddTeamsPromptHidden);
+
+                        // Hide prompt
+                        var hidden = newSiteContext.GetSiteCollectionManager().HideAddTeamsPrompt(newSiteContext.Uri);
+
+                        isAddTeamsPromptHidden = newSiteContext.GetSiteCollectionManager().IsAddTeamsPromptHidden(newSiteContext.Uri);
+                        Assert.IsTrue(isAddTeamsPromptHidden);
+
+                        // Add teams team
+                        using (var contextWithTeam = newSiteContext.GetTeamManager().CreateTeam(new TeamForGroupOptions(newSiteContext.Site.GroupId)))
+                        {
+                            Assert.IsTrue(contextWithTeam.Team.Requested);
+                            Assert.IsTrue(contextWithTeam.Team.IsPropertyAvailable(p => p.Id));
+                        }
+                    }
+
+                    if (context.Mode == TestMode.Record)
+                    {
+                        // Add a little delay between creation and deletion
+                        await Task.Delay(TimeSpan.FromSeconds(15));
+                    }
+                }
+            }
+            finally
+            {
+                TestCommon.Instance.UseApplicationPermissions = false;
+                using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+                {
+                    context.GetSiteCollectionManager().DeleteSiteCollection(createdSiteCollection);
+                }
+
+            }
+        }
+
+        [TestMethod]
+        public async Task EnableCommunicationSiteFeaturesOnClassicSiteUsingDelegatedPermissions()
+        {
+            //TestCommon.Instance.Mocking = false;
+            TestCommon.Instance.UseApplicationPermissions = false;
+
+            ClassicSiteOptions classicSite = null;
+
+            // Create the site collection
+            try
+            {
+                using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+                {
+                    using (var tenantAdminContext = await context.GetSharePointAdmin().GetTenantAdminCenterContextAsync())
+                    {
+                        // Persist the used site url as we need to have the same url when we run an offline test
+                        Uri siteUrl;
+                        string owner;
+                        if (!TestCommon.Instance.Mocking)
+                        {
+                            siteUrl = new Uri($"https://{context.Uri.DnsSafeHost}/sites/pnpcoresdktestclassicsite{Guid.NewGuid().ToString().Replace("-", "")}");
+                            owner = context.Web.GetCurrentUser().LoginName;
+                            Dictionary<string, string> properties = new Dictionary<string, string>
+                            {
+                                { "SiteUrl", siteUrl.ToString() },
+                                { "Owner",  owner}
+                            };
+                            TestManager.SaveProperties(context, properties);
+                        }
+                        else
+                        {
+                            siteUrl = new Uri(TestManager.GetProperties(context)["SiteUrl"]);
+                            owner = TestManager.GetProperties(context)["Owner"];
+                        }
+
+                        classicSite = new ClassicSiteOptions(siteUrl, "PnP Core SDK Test", "STS#0", owner, Language.English,
+                            Model.SharePoint.TimeZone.UTCPLUS0100_BRUSSELS_COPENHAGEN_MADRID_PARIS);
+
+                        SiteCreationOptions siteCreationOptions = new SiteCreationOptions()
+                        {
+                            UsingApplicationPermissions = false
+                        };
+
+                        using (var newSiteContext = tenantAdminContext.GetSiteCollectionManager().CreateSiteCollection(classicSite, siteCreationOptions))
+                        {
+                            var web = await newSiteContext.Web.GetAsync(p => p.Url, p => p.Title, p => p.Description, p => p.Language);
+                            Assert.IsTrue(web.Url == classicSite.Url);
+                            Assert.IsTrue(web.Title == classicSite.Title);
+                            Assert.IsTrue(web.Language == (int)classicSite.Language);
+
+                            Assert.ThrowsException<ClientException>(() => newSiteContext.GetSiteCollectionManager().EnableCommunicationSiteFeatures(newSiteContext.Uri, Guid.Empty));
+                            Assert.ThrowsException<ClientException>(() => newSiteContext.GetSiteCollectionManager().EnableCommunicationSiteFeatures(newSiteContext.Uri, Guid.NewGuid()));
+
+                            // Enable the communication site features on this classic site
+                            newSiteContext.GetSiteCollectionManager().EnableCommunicationSiteFeatures(newSiteContext.Uri);
+
+                            // create a full width page...as that only works on a site with the communication features active. This also verifies that modern page creation is enabled
+                            var page = await newSiteContext.Web.NewPageAsync();
+                            string pageName = TestCommon.GetPnPSdkTestAssetName("fullwidth.aspx");
+
+                            // Add all the possible sections 
+                            page.AddSection(CanvasSectionTemplate.OneColumnFullWidth, 1);
+
+                            // Instantiate a default web part
+                            var imageWebPartComponent = await page.InstantiateDefaultWebPartAsync(DefaultWebPart.Image);
+
+                            // Add a text control in each section
+                            page.AddControl(imageWebPartComponent, page.Sections[0].Columns[0]);
+
+                            await page.SaveAsync(pageName);
+
+                            // load page again
+                            var pages = await newSiteContext.Web.GetPagesAsync(pageName);
+
+                            Assert.IsTrue(pages.Count == 1);
+
+                            page = pages.AsEnumerable().First();
+
+                            Assert.IsTrue(page.Sections.Count == 1);
+                            Assert.IsTrue(page.Sections[0].Type == CanvasSectionTemplate.OneColumnFullWidth);
+                            Assert.IsTrue(page.Sections[0].Columns[0].Controls.Count == 1);
+                            Assert.IsTrue(page.Sections[0].Columns[0].Controls[0] is IPageWebPart);
+                            Assert.IsTrue((page.Sections[0].Columns[0].Controls[0] as IPageWebPart).WebPartId == page.DefaultWebPartToWebPartId(DefaultWebPart.Image));
+                        }
+                    }
+                }
+            }
+            finally
+            {
+                TestCommon.Instance.UseApplicationPermissions = false;
+                using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+                {
+                    context.GetSiteCollectionManager().DeleteSiteCollection(classicSite.Url);
+                }
+
+            }
+        }
         #endregion
 
     }

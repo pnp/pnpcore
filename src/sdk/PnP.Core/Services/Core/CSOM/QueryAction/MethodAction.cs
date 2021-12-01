@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace PnP.Core.Services.Core.CSOM.QueryAction
 {
-    internal class MethodAction : BaseAction
+    internal sealed class MethodAction : BaseAction
     {
         internal string Name { get; set; }
 

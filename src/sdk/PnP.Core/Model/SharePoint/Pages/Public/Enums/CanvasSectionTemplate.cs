@@ -11,7 +11,7 @@
         OneColumn = 0,
 
         /// <summary>
-        /// One column, full browser width. This one only works for communication sites in combination with image or hero webparts
+        /// One column, full browser width. This one only works for sites having communication sites features enabled in combination with image or hero webparts
         /// </summary>
         OneColumnFullWidth = 1,
 

@@ -200,7 +200,7 @@ namespace PnP.Core.Test.Teams
                 var result = channel.Result.Tabs.AddDocumentLibraryTabBatch(batch, testTabName, new Uri(testSiteLib));
 
                 context.Execute(batch);
-                
+
                 Assert.IsNotNull(result);
                 Assert.AreEqual(testTabName, result.DisplayName);
 
@@ -223,7 +223,7 @@ namespace PnP.Core.Test.Teams
                 Assert.IsNotNull(channel);
 
                 channel = await channel.GetAsync(o => o.Tabs);
-                
+
                 var testTabName = "WikiTestTab";
                 var result = await channel.Tabs.AddWikiTabAsync(testTabName);
 
@@ -307,7 +307,7 @@ namespace PnP.Core.Test.Teams
                 context.Execute(batch);
 
                 var testTabName = "WikiTestTab";
-                var result = channel.Result.Tabs.AddWikiTabBatch(batch,testTabName);
+                var result = channel.Result.Tabs.AddWikiTabBatch(batch, testTabName);
                 context.Execute(batch);
 
                 Assert.IsNotNull(result);
@@ -331,7 +331,7 @@ namespace PnP.Core.Test.Teams
 
                 var channel = team.Channels.AsRequested().FirstOrDefault(i => i.DisplayName == "General");
                 Assert.IsNotNull(channel);
-                
+
                 channel = channel.Get(o => o.Tabs);
 
                 var result = channel.Tabs.AddWikiTab(string.Empty);

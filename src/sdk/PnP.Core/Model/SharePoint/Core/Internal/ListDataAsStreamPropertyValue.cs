@@ -2,7 +2,7 @@
 
 namespace PnP.Core.Model.SharePoint
 {
-    internal class ListDataAsStreamPropertyValue
+    internal sealed class ListDataAsStreamPropertyValue
     {
         internal Dictionary<string, string> Properties { get; } = new Dictionary<string, string>();
 

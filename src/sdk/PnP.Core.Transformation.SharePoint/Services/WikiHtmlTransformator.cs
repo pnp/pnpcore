@@ -10,7 +10,6 @@ using PnP.Core.Transformation.SharePoint.Services.Builder.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace PnP.Core.Transformation.SharePoint.Services
 {

@@ -108,17 +108,17 @@ namespace PnP.Core.Model.SharePoint
         /// Return information to initialize Grid for quick edit
         /// </summary>
         GridInitInfo = 262144,
-        
+
         /// <summary>
         /// Indicator if the vroom API of the SPItemUrl returned in MediaTAUrlGenerator should use site url as host
         /// </summary>
         SiteUrlAsMediaTASPItemHost = 524288,
-        
+
         /// <summary>
         /// Return the files representing mount points in the list
         /// </summary>
         AddToOneDrive = 1048576,
-        
+
         /// <summary>
         /// Return SPFX CustomAction
         /// </summary>

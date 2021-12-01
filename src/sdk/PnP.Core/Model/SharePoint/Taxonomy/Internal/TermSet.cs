@@ -9,8 +9,7 @@ using System.Threading.Tasks;
 namespace PnP.Core.Model.SharePoint
 {
     [GraphType(Uri = V, Delete = "sites/{hostname},{Site.Id},{Web.Id}/termStore/groups/{Parent.GraphId}/sets/{GraphId}", LinqGet = "sites/{hostname},{Site.Id},{Web.Id}/termStore/groups/{Parent.GraphId}/sets")]
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Usage", "CA2243:Attribute string literals should parse correctly", Justification = "<Pending>")]
-    internal partial class TermSet : BaseDataModel<ITermSet>, ITermSet
+    internal sealed class TermSet : BaseDataModel<ITermSet>, ITermSet
     {
         private const string baseUri = "sites/{hostname},{Site.Id},{Web.Id}/termstore/sets";
         private const string V = baseUri + "/{GraphId}";
@@ -54,7 +53,7 @@ namespace PnP.Core.Model.SharePoint
             ExpandUpdatePayLoad = (payload) =>
             {
                 List<ExpandoObject> propertiesToAdd = new List<ExpandoObject>();
-                foreach(var property in Properties)
+                foreach (var property in Properties)
                 {
                     ExpandoObject propertyToAdd = new ExpandoObject();
                     propertyToAdd.SetProperty("key", property.KeyField);

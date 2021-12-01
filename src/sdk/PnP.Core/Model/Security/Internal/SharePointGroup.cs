@@ -1,5 +1,6 @@
 ﻿using PnP.Core.QueryModel;
 using PnP.Core.Services;
+using PnP.Core.Utilities;
 using System;
 using System.Linq;
 using System.Net.Http;
@@ -9,8 +10,7 @@ using System.Threading.Tasks;
 namespace PnP.Core.Model.Security
 {
     [SharePointType("SP.Group", Uri = "_api/Web/sitegroups/getbyid({Id})", LinqGet = "_api/Web/SiteGroups", Delete = "_api/Web/SiteGroups/RemoveById({Id})")]
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Usage", "CA2243:Attribute string literals should parse correctly", Justification = "<Pending>")]
-    internal partial class SharePointGroup : BaseDataModel<ISharePointGroup>, ISharePointGroup
+    internal sealed class SharePointGroup : BaseDataModel<ISharePointGroup>, ISharePointGroup
     {
         #region Construction
         public SharePointGroup()
@@ -30,6 +30,14 @@ namespace PnP.Core.Model.Security
                     return new ApiCall(endPointUri, ApiType.SPORest, jsonBody);
 
                 }).ConfigureAwait(false);
+            };
+
+            ValidateUpdateHandler = (PropertyUpdateRequest propertyUpdateRequest) =>
+            {
+                if (propertyUpdateRequest.PropertyName == nameof(Description))
+                {
+                    propertyUpdateRequest.Value = HtmlToText.ConvertSimpleHtmlToText(propertyUpdateRequest.Value.ToString(), 511);
+                }
             };
         }
         #endregion
@@ -63,7 +71,7 @@ namespace PnP.Core.Model.Security
 
         public string OwnerTitle { get => GetValue<string>(); set => SetValue(value); }
 
-        public bool RequestToJoinLeaveEmailSetting { get => GetValue<bool>(); set => SetValue(value); }
+        public string RequestToJoinLeaveEmailSetting { get => GetValue<string>(); set => SetValue(value); }
 
         public ISharePointUserCollection Users { get => GetModelCollectionValue<ISharePointUserCollection>(); }
 

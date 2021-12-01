@@ -3,7 +3,7 @@ using Microsoft.ApplicationInsights.Extensibility;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
-#if NET5_0
+#if NET5_0_OR_GREATER
 using System.Runtime.InteropServices;
 #endif
 
@@ -18,7 +18,7 @@ namespace PnP.Core.Services
             // Ensure there's only one telemetry client and configuration created in the current process
             // Otherwise we're running into possible memory leaks: https://briancaos.wordpress.com/2020/05/07/c-azure-telemetryclient-will-leak-memory-if-not-implemented-as-a-singleton/
             (TelemetryConfiguration, TelemetryClient) = TelemetryClientFactory.GetTelemetryClientAndConfiguration(InstrumentationKey);
-            
+
             GlobalOptions = globalOptions;
 
             Assembly coreAssembly = Assembly.GetExecutingAssembly();
@@ -83,17 +83,17 @@ namespace PnP.Core.Services
                 { "OS", GetOSVersion() },
                 { "Operation", request.OperationName },
             };
-            
+
             return properties;
         }
 
         private static string GetOSVersion()
         {
 
-#if NET5_0
+#if NET5_0_OR_GREATER
             if (RuntimeInformation.RuntimeIdentifier == "browser-wasm")
             {
-               return "WASM";            
+                return "WASM";
             }
 #endif
 

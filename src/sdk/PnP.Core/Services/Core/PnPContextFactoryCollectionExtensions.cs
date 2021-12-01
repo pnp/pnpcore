@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Net.Http;
-#if NET5_0
+#if NET5_0_OR_GREATER
 using System.Runtime.InteropServices;
 #endif
 
@@ -69,7 +69,7 @@ namespace PnP.Core.Services
 
         private static IServiceCollection AddHttpClients(this IServiceCollection collection)
         {
-#if NET5_0
+#if NET5_0_OR_GREATER
             if (RuntimeInformation.RuntimeIdentifier == "browser-wasm")
             {
                 collection.AddHttpClient<SharePointRestClient>()

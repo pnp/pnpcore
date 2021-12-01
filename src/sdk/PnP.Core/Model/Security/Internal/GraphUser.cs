@@ -4,8 +4,7 @@ using System.Threading.Tasks;
 namespace PnP.Core.Model.Security
 {
     [GraphType(Get = "users/{GraphId}")]
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Usage", "CA2243:Attribute string literals should parse correctly", Justification = "<Pending>")]
-    internal partial class GraphUser : BaseDataModel<IGraphUser>, IGraphUser
+    internal sealed class GraphUser : BaseDataModel<IGraphUser>, IGraphUser
     {
         #region Construction
         public GraphUser()

@@ -56,7 +56,7 @@ namespace PnP.Core.Services.Core.CSOM.Requests.ListItems
             List<ActionObjectPath> result = new List<ActionObjectPath>();
             foreach (CSOMItemField fld in FieldsToUpdate)
             {
-                if(fld.FieldType == null)
+                if (fld.FieldType == null)
                 {
                     result.AddRange(defaultStrategy.GetFieldUpdateAction(fld, listItemIdentity));
                 }
@@ -70,7 +70,7 @@ namespace PnP.Core.Services.Core.CSOM.Requests.ListItems
                 }
             }
 
-            if(FieldsToUpdate.Any(fld => fld.FieldType == "TaxonomyFieldType" || fld.FieldType == "FieldTaxonomyValue" ||  fld.FieldType == "TaxonomyFieldTypeMulti"))
+            if (FieldsToUpdate.Any(fld => fld.FieldType == "TaxonomyFieldType" || fld.FieldType == "FieldTaxonomyValue" || fld.FieldType == "TaxonomyFieldTypeMulti"))
             {
                 result.Add(new ActionObjectPath()
                 {

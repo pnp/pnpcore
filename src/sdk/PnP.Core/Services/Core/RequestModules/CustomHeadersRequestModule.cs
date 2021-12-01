@@ -7,7 +7,7 @@ namespace PnP.Core.Services
     /// <summary>
     /// Request module that inserts custom headers into the HTTP requests being made
     /// </summary>
-    internal class CustomHeadersRequestModule : RequestModuleBase
+    internal sealed class CustomHeadersRequestModule : RequestModuleBase
     {
         /// <summary>
         /// Default constructor, configures the custom header module. If provided header was already defined then it will be overwritten
@@ -35,7 +35,7 @@ namespace PnP.Core.Services
                         }
                         else
                         {
-                            currentHeaders.Add(header.Key, header.Value);  
+                            currentHeaders.Add(header.Key, header.Value);
                         }
                     }
                 }

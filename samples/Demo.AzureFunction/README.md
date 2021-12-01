@@ -2,9 +2,6 @@
 
 This solution demonstrates how to build a simple backend API in the form of an HTTP Trigger Azure Function. A GetSiteDocuments() function that returns the list of documents in the Shared Documents library of the configured site via using an App-Only context authenticated with a self signed certificate.
 
-> [!Important]
-> Another very useful Azure Functions sample is described on Sergei Sergeev's blog [How to access SharePoint data from Azure Function with SPFx and PnP Core SDK](https://spblog.net/post/2020/12/10/how-to-access-sharepoint-data-from-azure-function-with-spfx-and-pnp-core). It shows how to setup an Azure Function using an on-behalf-of auth flow via the [OnBehalfOfAuthenticationProvider](https://pnp.github.io/pnpcore/api/PnP.Core.Auth.OnBehalfOfAuthenticationProvider.html) and then call this Azure Function from a [SharePoint Framework](https://docs.microsoft.com/en-us/sharepoint/dev/spfx/sharepoint-framework-overview) web part.
-
 ## Source code
 
 You can find the sample source code here: [/samples/Demo.AzureFunction](https://github.com/pnp/pnpcore/tree/dev/samples/Demo.AzureFunction)

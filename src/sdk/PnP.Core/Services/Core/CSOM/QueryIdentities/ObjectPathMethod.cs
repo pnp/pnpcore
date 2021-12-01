@@ -10,12 +10,19 @@ namespace PnP.Core.Services.Core.CSOM.QueryIdentities
 
         public override string ToString()
         {
-            string parameters = string.Join("", Parameters.Properties.Select(p => p.SerializeParameter()));
-            return $"<Method Id=\"{Id}\" ParentId=\"{ParentId}\" Name=\"{Name}\"><Parameters>{parameters}</Parameters></Method>";
+            if (Parameters != null && Parameters.Properties != null && Parameters.Properties.Count > 0)
+            {
+                string parameters = string.Join("", Parameters.Properties.Select(p => p.SerializeParameter()));
+                return $"<Method Id=\"{Id}\" ParentId=\"{ParentId}\" Name=\"{Name}\"><Parameters>{parameters}</Parameters></Method>";
+            }
+            else
+            {
+                return $"<Method Id=\"{Id}\" ParentId=\"{ParentId}\" Name=\"{Name}\" />";
+            }
         }
     }
 
-    internal class ConstructorPath : ObjectPathMethod
+    internal sealed class ConstructorPath : ObjectPathMethod
     {
         internal string TypeId { get; set; }
 
@@ -33,7 +40,7 @@ namespace PnP.Core.Services.Core.CSOM.QueryIdentities
         }
     }
 
-    internal class MethodParameter
+    internal sealed class MethodParameter
     {
         internal string TypeId { get; set; }
 

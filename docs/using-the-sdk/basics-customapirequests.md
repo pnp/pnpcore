@@ -49,6 +49,10 @@ var apiRequest = new ApiRequest(ApiRequestType.SPORest, "https://contoso.sharepo
 var response = await context.Web.ExecuteRequestAsync(apiRequest);
 ```
 
+> [!Note]
+>
+> When you're using text content (e.g. json for the request body) then you need to ensure it's correctly encoded. Using the default System.Text.Json library will handle unicode characters automatically. When using Newtonsoft then use the `JsonSerializerSettings.StringEscapeHandling` property of the `JsonSerializerSettings` class.
+
 ## Making a custom Microsoft Graph request
 
 Below sample shows how to make a custom Microsoft Graph request:
@@ -61,6 +65,10 @@ var response = context.Team.ExecuteRequest(apiRequest);
 
 // Parse the json response returned via response.Response
 ```
+
+> [!Note]
+>
+> When you're using text content (e.g. json for the request body) then you need to ensure it's correctly encoded. Using the default System.Text.Json library will handle unicode characters automatically. When using Newtonsoft then use the `JsonSerializerSettings.StringEscapeHandling` property of the `JsonSerializerSettings` class.
 
 ## Batching custom API requests
 

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace PnP.Core
 {
@@ -28,9 +29,10 @@ namespace PnP.Core
         /// <param name="type">Type of the error</param>
         /// <param name="httpResponseCode">Http response code of the service request</param>
         /// <param name="response">Response of the service request that errored out</param>
-        public SharePointRestServiceException(ErrorType type, int httpResponseCode, string response) : base("SharePoint Rest service exception")
+        /// <param name="responseHeaders">Optional collection of request response headers</param>
+        public SharePointRestServiceException(ErrorType type, int httpResponseCode, string response, Dictionary<string, string> responseHeaders = null) : base("SharePoint Rest service exception")
         {
-            Error = new SharePointRestError(type, httpResponseCode, response);
+            Error = new SharePointRestError(type, httpResponseCode, response, responseHeaders);
         }
         #endregion
 

@@ -34,7 +34,7 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// Gets the size of this version of the file.
         /// </summary>
-        public int Size { get; }
+        public long Size { get; }
 
         /// <summary>
         /// Gets a value that specifies the relative URL of the file version based on the URL for the site or subsite.

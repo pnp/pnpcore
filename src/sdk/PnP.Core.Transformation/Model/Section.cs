@@ -1,7 +1,5 @@
 ﻿using PnP.Core.Model.SharePoint;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace PnP.Core.Transformation.Model
 {

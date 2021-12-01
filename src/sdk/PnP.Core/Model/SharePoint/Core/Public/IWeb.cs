@@ -2,6 +2,7 @@ using PnP.Core.Model.Security;
 using PnP.Core.Services;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
@@ -11,7 +12,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a Web object of SharePoint Online
     /// </summary>
     [ConcreteType(typeof(Web))]
-    public interface IWeb : IDataModel<IWeb>, IDataModelGet<IWeb>, IDataModelLoad<IWeb>, IDataModelUpdate, IDataModelDelete, IDataModelSupportingGetChanges, IQueryableDataModel
+    public interface IWeb : IDataModel<IWeb>, IDataModelGet<IWeb>, IDataModelLoad<IWeb>, IDataModelUpdate, IDataModelDelete, IDataModelSupportingGetChanges, ISecurableObject, IQueryableDataModel
     {
         #region Properties
         /// <summary>
@@ -223,6 +224,9 @@ namespace PnP.Core.Model.SharePoint
 
         /// <summary>
         /// Gets the recycle bin of the website.
+        /// Implements <see cref="IQueryable{T}"/>. <br />
+        /// See <see href="https://pnp.github.io/pnpcore/using-the-sdk/basics-getdata.html#requesting-model-collections">Requesting model collections</see> 
+        /// and <see href="https://pnp.github.io/pnpcore/using-the-sdk/basics-iqueryable.html">IQueryable performance considerations</see> to learn more.
         /// </summary>
         public IRecycleBinItemCollection RecycleBin { get; }
 
@@ -407,32 +411,50 @@ namespace PnP.Core.Model.SharePoint
 #pragma warning restore CA1721 // Property names should not match get methods
 
         /// <summary>
-        /// Collection of lists in the current Web object
+        /// Collection of lists in the current Web object.
+        /// Implements <see cref="IQueryable{T}"/>. <br />
+        /// See <see href="https://pnp.github.io/pnpcore/using-the-sdk/basics-getdata.html#requesting-model-collections">Requesting model collections</see> 
+        /// and <see href="https://pnp.github.io/pnpcore/using-the-sdk/basics-iqueryable.html">IQueryable performance considerations</see> to learn more.
         /// </summary>
         public IListCollection Lists { get; }
 
         /// <summary>
         /// Collection of content types in the current Web object
+        /// Implements <see cref="IQueryable{T}"/>. <br />
+        /// See <see href="https://pnp.github.io/pnpcore/using-the-sdk/basics-getdata.html#requesting-model-collections">Requesting model collections</see> 
+        /// and <see href="https://pnp.github.io/pnpcore/using-the-sdk/basics-iqueryable.html">IQueryable performance considerations</see> to learn more.
         /// </summary>
         public IContentTypeCollection ContentTypes { get; }
 
         /// <summary>
         /// Collection of fields in the current Web object
+        /// Implements <see cref="IQueryable{T}"/>. <br />
+        /// See <see href="https://pnp.github.io/pnpcore/using-the-sdk/basics-getdata.html#requesting-model-collections">Requesting model collections</see> 
+        /// and <see href="https://pnp.github.io/pnpcore/using-the-sdk/basics-iqueryable.html">IQueryable performance considerations</see> to learn more.
         /// </summary>
         public IFieldCollection Fields { get; }
 
         /// <summary>
         /// Collection of webs in this current web
+        /// Implements <see cref="IQueryable{T}"/>. <br />
+        /// See <see href="https://pnp.github.io/pnpcore/using-the-sdk/basics-getdata.html#requesting-model-collections">Requesting model collections</see> 
+        /// and <see href="https://pnp.github.io/pnpcore/using-the-sdk/basics-iqueryable.html">IQueryable performance considerations</see> to learn more.
         /// </summary>
         public IWebCollection Webs { get; }
 
         /// <summary>
         /// Collection of features enabled for the web
+        /// Implements <see cref="IQueryable{T}"/>. <br />
+        /// See <see href="https://pnp.github.io/pnpcore/using-the-sdk/basics-getdata.html#requesting-model-collections">Requesting model collections</see> 
+        /// and <see href="https://pnp.github.io/pnpcore/using-the-sdk/basics-iqueryable.html">IQueryable performance considerations</see> to learn more.
         /// </summary>
         public IFeatureCollection Features { get; }
 
         /// <summary>
         /// Collection of folders in the current Web object
+        /// Implements <see cref="IQueryable{T}"/>. <br />
+        /// See <see href="https://pnp.github.io/pnpcore/using-the-sdk/basics-getdata.html#requesting-model-collections">Requesting model collections</see> 
+        /// and <see href="https://pnp.github.io/pnpcore/using-the-sdk/basics-iqueryable.html">IQueryable performance considerations</see> to learn more.
         /// </summary>
         public IFolderCollection Folders { get; }
 
@@ -443,11 +465,17 @@ namespace PnP.Core.Model.SharePoint
 
         /// <summary>
         /// Gets the collection of all content types that apply to the current scope, including those of the current Web site, as well as any parent Web sites.
+        /// Implements <see cref="IQueryable{T}"/>. <br />
+        /// See <see href="https://pnp.github.io/pnpcore/using-the-sdk/basics-getdata.html#requesting-model-collections">Requesting model collections</see> 
+        /// and <see href="https://pnp.github.io/pnpcore/using-the-sdk/basics-iqueryable.html">IQueryable performance considerations</see> to learn more.
         /// </summary>
         public IContentTypeCollection AvailableContentTypes { get; }
 
         /// <summary>
         /// Gets a value that specifies the collection of all fields available for the current scope, including those of the current site, as well as any parent sites.
+        /// Implements <see cref="IQueryable{T}"/>. <br />
+        /// See <see href="https://pnp.github.io/pnpcore/using-the-sdk/basics-getdata.html#requesting-model-collections">Requesting model collections</see> 
+        /// and <see href="https://pnp.github.io/pnpcore/using-the-sdk/basics-iqueryable.html">IQueryable performance considerations</see> to learn more.
         /// </summary>
         public IFieldCollection AvailableFields { get; }
 
@@ -463,16 +491,25 @@ namespace PnP.Core.Model.SharePoint
 
         /// <summary>
         /// Gets the collection of all users that belong to the site collection.
+        /// Implements <see cref="IQueryable{T}"/>. <br />
+        /// See <see href="https://pnp.github.io/pnpcore/using-the-sdk/basics-getdata.html#requesting-model-collections">Requesting model collections</see> 
+        /// and <see href="https://pnp.github.io/pnpcore/using-the-sdk/basics-iqueryable.html">IQueryable performance considerations</see> to learn more.
         /// </summary>
         public ISharePointUserCollection SiteUsers { get; }
 
         /// <summary>
         /// Gets the collection of all groups that belong to the site collection.
+        /// Implements <see cref="IQueryable{T}"/>. <br />
+        /// See <see href="https://pnp.github.io/pnpcore/using-the-sdk/basics-getdata.html#requesting-model-collections">Requesting model collections</see> 
+        /// and <see href="https://pnp.github.io/pnpcore/using-the-sdk/basics-iqueryable.html">IQueryable performance considerations</see> to learn more.
         /// </summary>
         public ISharePointGroupCollection SiteGroups { get; }
 
         /// <summary>
         /// Gets a value that specifies the collection of user custom actions for the site.
+        /// Implements <see cref="IQueryable{T}"/>. <br />
+        /// See <see href="https://pnp.github.io/pnpcore/using-the-sdk/basics-getdata.html#requesting-model-collections">Requesting model collections</see> 
+        /// and <see href="https://pnp.github.io/pnpcore/using-the-sdk/basics-iqueryable.html">IQueryable performance considerations</see> to learn more.
         /// </summary>
         public IUserCustomActionCollection UserCustomActions { get; }
 
@@ -503,13 +540,11 @@ namespace PnP.Core.Model.SharePoint
 
         /// <summary>
         /// Role Definitions defined in this web
+        /// Implements <see cref="IQueryable{T}"/>. <br />
+        /// See <see href="https://pnp.github.io/pnpcore/using-the-sdk/basics-getdata.html#requesting-model-collections">Requesting model collections</see> 
+        /// and <see href="https://pnp.github.io/pnpcore/using-the-sdk/basics-iqueryable.html">IQueryable performance considerations</see> to learn more.
         /// </summary>
         public IRoleDefinitionCollection RoleDefinitions { get; }
-
-        /// <summary>
-        /// Role Assignments defined in this web
-        /// </summary>
-        public IRoleAssignmentCollection RoleAssignments { get; }
 
         /// <summary>
         /// A special property used to add an asterisk to a $select statement
@@ -892,6 +927,18 @@ namespace PnP.Core.Model.SharePoint
         #endregion
 
         #region Syntex support
+        /// <summary>
+        /// Is Syntex enabled
+        /// </summary>
+        /// <returns>True if Syntex is enabled, false otherwise</returns>
+        Task<bool> IsSyntexEnabledAsync();
+
+        /// <summary>
+        /// Is Syntex enabled
+        /// </summary>
+        /// <returns>True if Syntex is enabled, false otherwise</returns>
+        bool IsSyntexEnabled();
+
         /// <summary>
         /// Is this web a Syntex Content Center
         /// </summary>

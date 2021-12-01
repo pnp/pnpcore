@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using AngleSharp;
+﻿using AngleSharp;
 using AngleSharp.Css.Dom;
 using AngleSharp.Dom;
 using AngleSharp.Html.Dom;
@@ -15,6 +9,11 @@ using Microsoft.Extensions.Options;
 using PnP.Core.Transformation.Services.MappingProviders;
 using PnP.Core.Transformation.SharePoint.MappingProviders.HtmlMapping;
 using PnP.Core.Transformation.SharePoint.Services.Builder.Configuration;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace PnP.Core.Transformation.SharePoint.MappingProviders
 {
@@ -29,6 +28,8 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
 
         private const int DefaultTableWidth = 800;
         private readonly HtmlParser parser;
+
+        private Guid taskId;
 
         /// <summary>
         /// Main constructor for the mapping provider
@@ -57,7 +58,11 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
         /// <returns>The output of the mapping activity</returns>
         public Task<HtmlMappingProviderOutput> MapHtmlAsync(HtmlMappingProviderInput input, CancellationToken token = default)
         {
-            logger.LogInformation($"Invoked: {this.GetType().Namespace}.{this.GetType().Name}.MapHtmlAsync");
+            this.taskId = input.Context.Task.Id;
+
+            logger.LogInformation(
+                $"Invoked: {this.GetType().Namespace}.{this.GetType().Name}.MapHtmlAsync"
+                .CorrelateString(this.taskId));
 
             string text = input.HtmlContent;
 
@@ -214,7 +219,10 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
                 }
                 catch (Exception ex)
                 {
-                    logger.LogWarning(ex, SharePointTransformationResources.Warning_TableCouldNotBeNormalized);
+                    logger.LogWarning(
+                        string.Format("{0} - {1}",
+                        SharePointTransformationResources.Warning_TableCouldNotBeNormalized, ex)
+                        .CorrelateString(this.taskId));
                 }
 
                 // If we could not normalize this table then let's skip it

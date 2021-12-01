@@ -6,7 +6,7 @@ namespace PnP.Core.Model
     /// Indicates that this property is a key property, specifying the keyfield name is required
     /// </summary>
     [AttributeUsage(AttributeTargets.Property, AllowMultiple = false)]
-    internal class KeyPropertyAttribute : Attribute
+    internal sealed class KeyPropertyAttribute : Attribute
     {
         internal KeyPropertyAttribute(string keyPopertyName)
         {

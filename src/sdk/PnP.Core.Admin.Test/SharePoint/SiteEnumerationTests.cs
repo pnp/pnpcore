@@ -73,7 +73,7 @@ namespace PnP.Core.Admin.Test.SharePoint
         private void VerifySite(List<ISiteCollection> sites, PnPContext context)
         {
             Assert.IsTrue(sites.Count > 0);
-            var myTestSite = sites.FirstOrDefault(p => p.Id == context.Site.Id);                
+            var myTestSite = sites.FirstOrDefault(p => p.Id == context.Site.Id);
             Assert.IsTrue(myTestSite != null);
             Assert.IsTrue(myTestSite.RootWebId == context.Web.Id);
             Assert.IsTrue(!string.IsNullOrEmpty(myTestSite.Name));
@@ -98,6 +98,26 @@ namespace PnP.Core.Admin.Test.SharePoint
                 Assert.IsTrue(myTestSite.StorageQuota > 0);
                 Assert.IsTrue(myTestSite.StorageUsed > 0);
                 Assert.IsTrue(!string.IsNullOrEmpty(myTestSite.TemplateName));
+            }
+        }
+
+        [TestMethod]
+        public async Task EnumerateSiteWithDetails()
+        {
+            //TestCommon.Instance.Mocking = false;
+            TestCommon.Instance.UseApplicationPermissions = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var site = context.GetSiteCollectionManager().GetSiteCollectionWithDetails(context.Uri);
+
+                Assert.IsTrue(site != null);
+                Assert.IsTrue(site.RootWebId == context.Web.Id);
+                Assert.IsTrue(!string.IsNullOrEmpty(site.Name));
+                Assert.IsTrue(!string.IsNullOrEmpty(site.CreatedBy));
+                Assert.IsTrue(site.TimeCreated > DateTime.MinValue);
+                Assert.IsTrue(site.StorageQuota > 0);
+                Assert.IsTrue(site.StorageUsed > 0);
+                Assert.IsTrue(!string.IsNullOrEmpty(site.TemplateName));
             }
         }
 

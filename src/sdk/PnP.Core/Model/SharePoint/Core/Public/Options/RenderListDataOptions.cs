@@ -109,7 +109,7 @@ namespace PnP.Core.Model.SharePoint
                 sb.AppendLine("<View Scope='Recursive'>");
                 sb.AppendLine("<ViewFields>");
 
-                foreach(var field in fieldInternalNames)
+                foreach (var field in fieldInternalNames)
                 {
                     if (!string.IsNullOrEmpty(field))
                     {

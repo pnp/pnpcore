@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace System
+﻿namespace System
 {
     /// <summary>
     /// Extensions methods for uri
     /// </summary>
-    public static class UriExtensions
+    internal static class UriExtensions
     {
         /// <summary>
         /// Combines a uri with a relative path
@@ -15,7 +11,7 @@ namespace System
         /// <param name="uri"></param>
         /// <param name="path"></param>
         /// <returns></returns>
-        public static Uri Combine(this Uri uri, string path)
+        internal static Uri Combine(this Uri uri, string path)
         {
             if (uri == null) throw new ArgumentNullException(nameof(uri));
             if (path == null) throw new ArgumentNullException(nameof(path));

@@ -27,8 +27,8 @@ namespace PnP.Core.Test.QueryModel
                 context.GraphFirst = true;
 
                 // QueryProperties with LoadAsync
-                await context.Web.LoadAsync(w => w.Title, 
-                    w => w.Description, 
+                await context.Web.LoadAsync(w => w.Title,
+                    w => w.Description,
                     w => w.Lists.QueryProperties(l => l.Id, l => l.Title));
 
                 Assert.IsNotNull(context.Web.Lists);
@@ -283,7 +283,7 @@ namespace PnP.Core.Test.QueryModel
                 Assert.ThrowsException<InvalidOperationException>(() =>
                 {
                     var query = context.Web.AssociatedOwnerGroup.QueryProperties(p => p.Title);
-                });                               
+                });
             }
         }
     }

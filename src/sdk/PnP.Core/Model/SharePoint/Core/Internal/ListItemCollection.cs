@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace PnP.Core.Model.SharePoint
 {
-    internal partial class ListItemCollection : QueryableDataModelCollection<IListItem>, IListItemCollection
+    internal sealed class ListItemCollection : QueryableDataModelCollection<IListItem>, IListItemCollection
     {
         public ListItemCollection(PnPContext context, IDataModelParent parent, string memberName = null)
             : base(context, parent, memberName)
@@ -190,7 +190,7 @@ namespace PnP.Core.Model.SharePoint
                 RemoveFromModel = removeFromModel
             };
         }
-        
+
         #endregion
 
     }

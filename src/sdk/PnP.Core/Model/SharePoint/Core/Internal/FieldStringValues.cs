@@ -4,7 +4,7 @@ namespace PnP.Core.Model.SharePoint
     /// Field string values class
     /// </summary>
     [SharePointType("SP.PropertyValues")]
-    internal partial class FieldStringValues : ExpandoBaseDataModel<IFieldStringValues>, IFieldStringValues
+    internal sealed class FieldStringValues : ExpandoBaseDataModel<IFieldStringValues>, IFieldStringValues
     {
         #region Construction
         public FieldStringValues()

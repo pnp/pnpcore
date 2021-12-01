@@ -6,7 +6,7 @@ namespace PnP.Core.Model.SharePoint
     /// InformationRightsManagementSettings class, write your custom code here
     /// </summary>
     [SharePointType("SP.InformationRightsManagementSettings", Target = typeof(InformationRightsManagementSettings), Uri = "_api/web/lists/getbyid(guid'{Parent.Id}')/InformationRightsManagementSettings")]
-    internal partial class InformationRightsManagementSettings : BaseDataModel<IInformationRightsManagementSettings>, IInformationRightsManagementSettings
+    internal sealed class InformationRightsManagementSettings : BaseDataModel<IInformationRightsManagementSettings>, IInformationRightsManagementSettings
     {
         #region Construction
         public InformationRightsManagementSettings()

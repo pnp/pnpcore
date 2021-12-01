@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace PnP.Core.Model.Teams
 {
-    internal partial class TeamChatMessageCollection : QueryableDataModelCollection<ITeamChatMessage>, ITeamChatMessageCollection
+    internal sealed class TeamChatMessageCollection : QueryableDataModelCollection<ITeamChatMessage>, ITeamChatMessageCollection
     {
         public TeamChatMessageCollection(PnPContext context, IDataModelParent parent, string memberName = null)
             : base(context, parent, memberName)
@@ -23,7 +23,7 @@ namespace PnP.Core.Model.Teams
         /// <returns></returns>
         public async Task<ITeamChatMessage> AddAsync(ChatMessageOptions options)
         {
-            if(options == default)
+            if (options == default)
             {
                 throw new ArgumentNullException(nameof(options));
             }
@@ -45,11 +45,11 @@ namespace PnP.Core.Model.Teams
                 ContentType = options.ContentType,
             };
 
-            if(options.Attachments != null && options.Attachments.Count > 0)
+            if (options.Attachments != null && options.Attachments.Count > 0)
             {
                 var attachments = new TeamChatMessageAttachmentCollection();
 
-                foreach(var optionAttachment in options.Attachments)
+                foreach (var optionAttachment in options.Attachments)
                 {
                     attachments.Add(new TeamChatMessageAttachment()
                     {

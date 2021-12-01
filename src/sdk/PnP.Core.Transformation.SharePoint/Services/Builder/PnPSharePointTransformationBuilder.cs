@@ -1,10 +1,7 @@
-﻿using System;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.DependencyInjection.Extensions;
+﻿using Microsoft.Extensions.DependencyInjection;
 using PnP.Core.Transformation.Services.Builder;
-using PnP.Core.Transformation.Services.Core;
-using PnP.Core.Transformation.Services.MappingProviders;
 using PnP.Core.Transformation.SharePoint.Services.Builder.Configuration;
+using System;
 
 namespace PnP.Core.Transformation.SharePoint.Services.Builder
 {

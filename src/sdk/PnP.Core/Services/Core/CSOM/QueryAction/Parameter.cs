@@ -27,8 +27,12 @@ namespace PnP.Core.Services.Core.CSOM.QueryAction
             {
                 if (Value is List<string>)
                 {
-                    //Multi-choice specific
                     string multiValue = string.Join("", (Value as List<string>).Select(value => $"<Object Type=\"String\">{TypeSpecificHandling(value, Type)}</Object>"));
+                    return $"<{ParameterTagName} Type=\"Array\">{multiValue}</{ParameterTagName}>";
+                }
+                else if (Value is List<Guid>)
+                {
+                    string multiValue = string.Join("", (Value as List<Guid>).Select(value => $"<Object Type=\"Guid\">{TypeSpecificHandling(value.ToString(), Type)}</Object>"));
                     return $"<{ParameterTagName} Type=\"Array\">{multiValue}</{ParameterTagName}>";
                 }
                 else if (Value is List<NamedProperty>)
@@ -87,7 +91,7 @@ namespace PnP.Core.Services.Core.CSOM.QueryAction
         }
     }
 
-    internal class ObjectReferenceParameter : Parameter 
+    internal class ObjectReferenceParameter : Parameter
     {
         internal int ObjectPathId { get; set; }
 

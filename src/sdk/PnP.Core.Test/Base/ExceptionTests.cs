@@ -127,14 +127,20 @@ namespace PnP.Core.Test.Base
         {
             bool sharePointRestServiceExceptionThrown = false;
             SharePointRestError error = null;
+
+            Dictionary<string, string> headers = new Dictionary<string, string>
+            {
+                { PnPConstants.SPRequestGuidHeader, "E91534F0-D3B4-4062-B872-41301FC1EC86" },
+                { PnPConstants.XSPServerStateHeader, "0" },
+                { PnPConstants.XSharePointHealthScoreHeader, "2" },
+                { PnPConstants.SPClientServiceRequestDurationHeader, "13" }
+            };
+
             try
             {
-                SharePointRestServiceException restException = new SharePointRestServiceException(ErrorType.SharePointRestServiceError, 400, sampleRestSimpleError);
-                restException.Error.AdditionalData = new Dictionary<string, object>
-                {
-                    { "Extra1", "extra error data" },
-                    { "Extra2", true }
-                };
+                SharePointRestServiceException restException = new SharePointRestServiceException(ErrorType.SharePointRestServiceError, 400, sampleRestSimpleError, headers);
+                restException.Error.AdditionalData.Add("Extra1", "extra error data");
+                restException.Error.AdditionalData.Add("Extra2", true);
 
                 throw restException;
             }
@@ -147,6 +153,8 @@ namespace PnP.Core.Test.Base
                 }
             }
 
+            Assert.IsTrue(error.ClientRequestId == "E91534F0-D3B4-4062-B872-41301FC1EC86");
+
             var restErrorString = error.ToString();
 
             Assert.IsTrue(restErrorString.Contains("HttpResponseCode:"));
@@ -155,6 +163,9 @@ namespace PnP.Core.Test.Base
             Assert.IsTrue(restErrorString.Contains("ClientRequestId:"));
             Assert.IsTrue(restErrorString.Contains("Extra1: extra error data"));
             Assert.IsTrue(restErrorString.Contains("Extra2: True"));
+            Assert.IsTrue(restErrorString.Contains("SPClientServiceRequestDuration: 13"));
+            Assert.IsTrue(restErrorString.Contains("X-SharePointHealthScore: 2"));
+            Assert.IsTrue(restErrorString.Contains("X-SP-SERVERSTATE: 0"));
 
             Assert.IsTrue(sharePointRestServiceExceptionThrown);
             Assert.IsTrue(string.IsNullOrEmpty(error.Code));
@@ -267,7 +278,27 @@ namespace PnP.Core.Test.Base
             }
         }
 
+        [TestMethod]
+        public async Task RestErrorLoggingOfFailingRequest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                string error = null;
+                try
+                {
+                    var apiRequest = new ApiRequest(ApiRequestType.SPORest, "_api/web/lists/getbytitle('nonexisting')");
+                    await context.Web.ExecuteRequestAsync(apiRequest);
+                }
+                catch (SharePointRestServiceException ex)
+                {
+                    error = ex.ToString();
+                }
 
+                Assert.IsTrue(!string.IsNullOrEmpty(error));
+
+            }
+        }
         #endregion
 
         #region ClientException Tests

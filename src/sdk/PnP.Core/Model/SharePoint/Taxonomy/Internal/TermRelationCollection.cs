@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace PnP.Core.Model.SharePoint
 {
-    internal partial class TermRelationCollection : QueryableDataModelCollection<ITermRelation>, ITermRelationCollection
+    internal sealed class TermRelationCollection : QueryableDataModelCollection<ITermRelation>, ITermRelationCollection
     {
         public TermRelationCollection(PnPContext context, IDataModelParent parent, string memberName = null)
             : base(context, parent, memberName)

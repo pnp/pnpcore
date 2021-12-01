@@ -16,7 +16,7 @@ namespace PnP.Core.Model.SharePoint
     /// PropertyValues class
     /// </summary>
     [SharePointType("SP.PropertyValues")]
-    internal partial class PropertyValues : ExpandoBaseDataModel<IPropertyValues>, IPropertyValues
+    internal sealed class PropertyValues : ExpandoBaseDataModel<IPropertyValues>, IPropertyValues
     {
         #region Construction
         public PropertyValues()
@@ -95,7 +95,7 @@ namespace PnP.Core.Model.SharePoint
         #endregion
 
         #region Methods
-        internal virtual UpdatePropertyBagRequest GetUpdatePropertyBag()
+        internal UpdatePropertyBagRequest GetUpdatePropertyBag()
         {
             UpdatePropertyBagRequest request = UpdatePropertyBagRequestFactory.GetUpdatePropertyBagRequest(this);
 

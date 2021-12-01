@@ -9,12 +9,12 @@
         /// Hosted Content Id
         /// </summary>
         public string Id { get; set; }
-            
+
         /// <summary>
         /// Hosted content type
         /// </summary>
         public string ContentType { get; set; }
-        
+
         /// <summary>
         /// Hosted content bytes
         /// </summary>

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace PnP.Core.Model.SharePoint
 {
-    internal partial class FileCollection : QueryableDataModelCollection<IFile>, IFileCollection
+    internal sealed class FileCollection : QueryableDataModelCollection<IFile>, IFileCollection
     {
         private const int maxFileSizeForRegularUpload = 10 * 1024 * 1024;
 
@@ -56,7 +56,7 @@ namespace PnP.Core.Model.SharePoint
             }
 
             // Replace # with - as AddTemplateFile cannot handle an # in the name. This replacement is the same behavior than the SharePoint UI does
-            var encodedServerRelativePageName = WebUtility.UrlEncode(serverRelativePageName.Replace("'", "''").Replace("#","-")).Replace("+", "%20");
+            var encodedServerRelativePageName = WebUtility.UrlEncode(serverRelativePageName.Replace("'", "''").Replace("#", "-")).Replace("+", "%20");
             var newFile = CreateNewAndAdd() as File;
             string fileCreateRequest = $"_api/web/getFolderById('{{Parent.Id}}')/files/AddTemplateFile(urlOfFile='{encodedServerRelativePageName}',templateFileType={(int)templateFileType})";
             var api = new ApiCall(fileCreateRequest, ApiType.SPORest);

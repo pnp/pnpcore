@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 namespace PnP.Core.Model.Teams
 {
@@ -45,11 +46,17 @@ namespace PnP.Core.Model.Teams
 
         /// <summary>
         /// Tabs in this Channel
+        /// Implements <see cref="IQueryable{T}"/>. <br />
+        /// See <see href="https://pnp.github.io/pnpcore/using-the-sdk/basics-getdata.html#requesting-model-collections">Requesting model collections</see> 
+        /// and <see href="https://pnp.github.io/pnpcore/using-the-sdk/basics-iqueryable.html">IQueryable performance considerations</see> to learn more.
         /// </summary>
         public ITeamChannelTabCollection Tabs { get; }
 
         /// <summary>
         /// Messages in this Team Channel
+        /// Implements <see cref="IQueryable{T}"/>. <br />
+        /// See <see href="https://pnp.github.io/pnpcore/using-the-sdk/basics-getdata.html#requesting-model-collections">Requesting model collections</see> 
+        /// and <see href="https://pnp.github.io/pnpcore/using-the-sdk/basics-iqueryable.html">IQueryable performance considerations</see> to learn more.
         /// </summary>
         public ITeamChatMessageCollection Messages { get; }
     }

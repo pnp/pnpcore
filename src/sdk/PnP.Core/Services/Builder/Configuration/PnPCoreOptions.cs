@@ -14,6 +14,11 @@ namespace PnP.Core.Services.Builder.Configuration
         public bool DisableTelemetry { get; set; }
 
         /// <summary>
+        /// The Microsoft 365 cloud environment that's used
+        /// </summary>
+        public string Environment { get; set; }
+
+        /// <summary>
         /// AAD tenant id, used for telemetry purposes. Can be customized via configuration
         /// </summary>
         public Guid AADTenantId { get; set; }
@@ -63,6 +68,11 @@ namespace PnP.Core.Services.Builder.Configuration
         /// Microsoft Graph REST options
         /// </summary>
         public PnPCoreHttpRequestsGraphOptions MicrosoftGraph { get; set; } = new PnPCoreHttpRequestsGraphOptions();
+
+        /// <summary>
+        /// Azure AD options
+        /// </summary>
+        public PnPCoreHttpRequestsAzureActiveDirectoryOptions AzureActiveDirectory { get; set; } = new PnPCoreHttpRequestsAzureActiveDirectoryOptions();
     }
 
     /// <summary>
@@ -100,6 +110,32 @@ namespace PnP.Core.Services.Builder.Configuration
     /// Microsoft Graph REST options
     /// </summary>
     public class PnPCoreHttpRequestsGraphOptions
+    {
+        /// <summary>
+        /// Use the Retry-After header for calculating the delay in case of a retry. Defaults to true
+        /// </summary>
+        public bool UseRetryAfterHeader { get; set; } = true;
+
+        /// <summary>
+        /// When not using retry-after, how many times can a retry be made. Defaults to 10
+        /// </summary>
+        public int MaxRetries { get; set; } = 10;
+
+        /// <summary>
+        /// How many seconds to wait for the next retry attempt. Defaults to 3
+        /// </summary>
+        public int DelayInSeconds { get; set; } = 3;
+
+        /// <summary>
+        /// Use an incremental strategy for the delay: each retry doubles the previous delay time. Defaults to true
+        /// </summary>
+        public bool UseIncrementalDelay { get; set; } = true;
+    }
+
+    /// <summary>
+    /// Microsoft Graph REST options
+    /// </summary>
+    public class PnPCoreHttpRequestsAzureActiveDirectoryOptions
     {
         /// <summary>
         /// Use the Retry-After header for calculating the delay in case of a retry. Defaults to true

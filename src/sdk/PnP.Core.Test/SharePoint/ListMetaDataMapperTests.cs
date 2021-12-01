@@ -51,7 +51,7 @@ namespace PnP.Core.Test.SharePoint
         [TestMethod]
         public void RestEntityToServerRelativeUrlTest()
         {
-            Assert.AreEqual("https://contoso.sharepoint.com/sites/siteA/lists/Demo", 
+            Assert.AreEqual("https://contoso.sharepoint.com/sites/siteA/lists/Demo",
                 ListMetaDataMapper.RestEntityTypeNameToUrl(new System.Uri("https://contoso.sharepoint.com/sites/siteA"), "DemoList", ListTemplateType.GenericList));
 
             Assert.AreEqual("https://contoso.sharepoint.com/sites/siteA/lists/199f4c089b2a87472ebd357031a7c11be9threadtacv2_wiki",

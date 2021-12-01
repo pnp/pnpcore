@@ -14,7 +14,7 @@ namespace PnP.Core.Model.SharePoint
     /// </summary>
     [SharePointType("SP.Site", Uri = "_api/Site")]
     [GraphType(Get = "sites/{hostname}:{serverrelativepath}")]
-    internal partial class Site : BaseDataModel<ISite>, ISite
+    internal sealed class Site : BaseDataModel<ISite>, ISite
     {
         #region Construction
         public Site()
@@ -111,9 +111,11 @@ namespace PnP.Core.Model.SharePoint
 
         public string SearchBoxPlaceholderText { get => GetValue<string>(); set => SetValue(value); }
 
-        public string SensitivityLabelId { get => GetValue<string>(); set => SetValue(value); }
+        [SharePointProperty("SensitivityLabelInfo", JsonPath = "Id")]
+        public Guid SensitivityLabelId { get => GetValue<Guid>(); set => SetValue(value); }
 
-        public Guid SensitivityLabel { get => GetValue<Guid>(); set => SetValue(value); }
+        [SharePointProperty("SensitivityLabelInfo", JsonPath = "DisplayName")]
+        public string SensitivityLabel { get => GetValue<string>(); set => SetValue(value); }
 
         public string ServerRelativeUrl { get => GetValue<string>(); set => SetValue(value); }
 
@@ -179,7 +181,7 @@ namespace PnP.Core.Model.SharePoint
         }
 
         #endregion
-        
+
         #region Hub Site
 
         /// <summary>
@@ -208,6 +210,11 @@ namespace PnP.Core.Model.SharePoint
             return hubSite;
         }
 
+        public IHubSite RegisterHubSite()
+        {
+            return RegisterHubSiteAsync().GetAwaiter().GetResult();
+        }
+
         /// <summary>
         /// Unregisters the current site as a primary hub site
         /// </summary>
@@ -215,7 +222,7 @@ namespace PnP.Core.Model.SharePoint
         {
             var result = false;
 
-            await EnsurePropertiesAsync(p=>p.IsHubSite).ConfigureAwait(false);
+            await EnsurePropertiesAsync(p => p.IsHubSite).ConfigureAwait(false);
 
             if (IsHubSite)
             {
@@ -229,6 +236,11 @@ namespace PnP.Core.Model.SharePoint
             }
 
             return result;
+        }
+
+        public bool UnregisterHubSite()
+        {
+            return UnregisterHubSiteAsync().GetAwaiter().GetResult();
         }
 
         /// <summary>
@@ -254,6 +266,10 @@ namespace PnP.Core.Model.SharePoint
             return result;
         }
 
+        public bool JoinHubSite(Guid hubSiteId)
+        {
+            return JoinHubSiteAsync(hubSiteId).GetAwaiter().GetResult();
+        }
 
         /// <summary>
         /// Disassociates the current site to a primary hub site
@@ -263,18 +279,22 @@ namespace PnP.Core.Model.SharePoint
             return await JoinHubSiteAsync(Guid.Empty).ConfigureAwait(false);
         }
 
+        public bool UnJoinHubSite()
+        {
+            return UnJoinHubSiteAsync().GetAwaiter().GetResult();
+        }
 
         /// <summary>
         /// Gets hubsite data from the current site OR another specified hub site ID
         /// </summary>
-        /// <param name="Id">Hub Site Guid</param>
+        /// <param name="id">Hub Site Guid</param>
         /// <returns></returns>
-        public async Task<IHubSite> GetHubSiteData(Guid? Id)
+        public async Task<IHubSite> GetHubSiteDataAsync(Guid? id)
         {
             IHubSite hubSite = new HubSite()
             {
                 PnPContext = PnPContext,
-                Id = Id ?? HubSiteId
+                Id = id ?? HubSiteId
             };
 
             var hubResult = await hubSite.GetAsync().ConfigureAwait(false);
@@ -282,6 +302,10 @@ namespace PnP.Core.Model.SharePoint
             return hubResult;
         }
 
+        public IHubSite GetHubSiteData(Guid? id)
+        {
+            return GetHubSiteDataAsync(id).GetAwaiter().GetResult();
+        }
         #endregion
 
         #region Get Changes

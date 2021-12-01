@@ -11,10 +11,8 @@ namespace PnP.Core.Model.SharePoint
     /// <summary>
     /// comment class, write your custom code here
     /// </summary>
-#pragma warning disable CA2243 // Attribute string literals should parse correctly
     [SharePointType("Microsoft.SharePoint.Comments.comment", Uri = "_api/web/lists(guid'{List.Id}')/getitembyid({Parent.Id})/comments('{Id}')", LinqGet = "_api/web/lists(guid'{List.Id}')/getitembyid({Parent.Id})/comments")]
-#pragma warning restore CA2243 // Attribute string literals should parse correctly
-    internal partial class Comment : BaseDataModel<IComment>, IComment
+    internal sealed class Comment : BaseDataModel<IComment>, IComment
     {
         #region Construction
         public Comment()
@@ -104,7 +102,7 @@ namespace PnP.Core.Model.SharePoint
             {
                 // We're liking a reply
                 await RequestAsync(new ApiCall($"{BuildBaseApiRequestForLikeUnLike(entity)}/like", apiType: ApiType.SPORest), HttpMethod.Post).ConfigureAwait(false);
-            }            
+            }
         }
 
         public void Like()

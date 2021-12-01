@@ -4,7 +4,6 @@ using PnP.Core.Model.SharePoint;
 using PnP.Core.QueryModel;
 using PnP.Core.Services;
 using PnP.Core.Test.Utilities;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
@@ -203,7 +202,7 @@ namespace PnP.Core.Test.Base
                 Assert.IsTrue(!string.IsNullOrEmpty(apiResponse.Requests.First().Value.ResponseJson));
                 Assert.IsTrue(apiResponse.Requests.First().Value.ResponseHttpStatusCode == System.Net.HttpStatusCode.OK);
                 Assert.IsTrue(!string.IsNullOrEmpty(context.Web.WelcomePage));
-            } 
+            }
         }
 
         [TestMethod]
@@ -216,7 +215,7 @@ namespace PnP.Core.Test.Base
                 CustomHeadersRequestModule customHeadersRequestModule = new CustomHeadersRequestModule(extraHeaders, null);
 
                 GenericRequestModule testModule = new GenericRequestModule()
-                {                    
+                {
 
                     RequestHeaderHandler = (headers) =>
                     {
@@ -235,9 +234,9 @@ namespace PnP.Core.Test.Base
                         return responseContent;
                     }
                 };
-                
-                var result = await context.Web.WithModule(customHeadersRequestModule).WithModule(testModule).GetAsync( p=> p.All);
-                Assert.IsTrue(result.IsPropertyAvailable(p=>p.MasterUrl));
+
+                var result = await context.Web.WithModule(customHeadersRequestModule).WithModule(testModule).GetAsync(p => p.All);
+                Assert.IsTrue(result.IsPropertyAvailable(p => p.MasterUrl));
                 Assert.IsTrue(context.RequestModules.Any() == false);
 
                 context.Web.WithHeaders(extraHeaders, (responseHeaders) => { Assert.IsTrue(responseHeaders.Count > 0); }).WithModule(testModule).Load(p => p.All);

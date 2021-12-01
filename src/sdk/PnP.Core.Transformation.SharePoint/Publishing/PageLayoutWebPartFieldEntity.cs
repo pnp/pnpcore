@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace PnP.Core.Transformation.SharePoint.Publishing
+﻿namespace PnP.Core.Transformation.SharePoint.Publishing
 {
     /// <summary>
     /// Class for holding data properties for field to web part mapping

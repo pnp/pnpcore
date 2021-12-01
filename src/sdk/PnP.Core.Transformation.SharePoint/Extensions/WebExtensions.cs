@@ -1,12 +1,6 @@
 ﻿using Microsoft.SharePoint.Client;
-using PnP.Core.Transformation.SharePoint.Model;
-using PnP.Core.Transformation.SharePoint.Utilities;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 

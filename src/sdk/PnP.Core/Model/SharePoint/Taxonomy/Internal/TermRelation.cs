@@ -5,8 +5,7 @@ using System.Text.Json;
 namespace PnP.Core.Model.SharePoint
 {
     [GraphType(Uri = V, LinqGet = baseUri)]
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Usage", "CA2243:Attribute string literals should parse correctly", Justification = "<Pending>")]
-    internal partial class TermRelation : BaseDataModel<ITermRelation>, ITermRelation
+    internal sealed class TermRelation : BaseDataModel<ITermRelation>, ITermRelation
     {
         private const string baseUri = "sites/{hostname},{Site.Id},{Web.Id}/termstore/sets/{Parent.GraphId}/relations";
         private const string V = baseUri + "/{GraphId}";

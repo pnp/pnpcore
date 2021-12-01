@@ -9,7 +9,7 @@ using System.Collections.Generic;
 
 namespace PnP.Core.Admin.Services.Core.CSOM.Requests.Tenant
 {
-    internal class CreateSiteRequest : IRequest<object>
+    internal sealed class CreateSiteRequest : IRequest<object>
     {
         internal CreateSiteRequest(Uri siteUrl, string title, string owner, string webTemplate, int lcid, int timeZoneId)
         {
@@ -33,9 +33,9 @@ namespace PnP.Core.Admin.Services.Core.CSOM.Requests.Tenant
 
         public string WebTemplate { get; set; }
 
-        public int TimeZoneId {  get; set; }
+        public int TimeZoneId { get; set; }
 
-        public string Title {  get; set; }
+        public string Title { get; set; }
 
         internal int IdentityPath { get; private set; }
 
@@ -205,7 +205,7 @@ namespace PnP.Core.Admin.Services.Core.CSOM.Requests.Tenant
                 ObjectPath = new ConstructorPath
                 {
                     Id = IdentityPath,
-                    TypeId = "{268004ae-ef6b-4e9b-8425-127220d84719}"
+                    TypeId = PnPAdminConstants.CsomTenantObject
                 }
             };
 

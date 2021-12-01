@@ -6,12 +6,12 @@ using System.Linq;
 
 namespace PnP.Core.Services.Core.CSOM.Utils.Model
 {
-    internal class CSOMItemField
+    internal sealed class CSOMItemField
     {
         private string fieldType;
 
         public string FieldName { get; set; }
-        
+
         public string FieldType
         {
             get
@@ -30,7 +30,7 @@ namespace PnP.Core.Services.Core.CSOM.Utils.Model
 
         private string GetFieldType()
         {
-            if(FieldValue is FieldValueCollection)
+            if (FieldValue is FieldValueCollection)
             {
                 FieldValueCollection collection = FieldValue as FieldValueCollection;
                 string typeAsString = collection.TypeAsString;
@@ -56,7 +56,7 @@ namespace PnP.Core.Services.Core.CSOM.Utils.Model
         public List<Parameter> GetRequestParameters(int referenceObjectPathId = 0)
         {
             List<Parameter> parameters = new List<Parameter>();
-            if(referenceObjectPathId == 0)
+            if (referenceObjectPathId == 0)
             {
                 parameters.Add(new Parameter()
                 {
@@ -75,7 +75,7 @@ namespace PnP.Core.Services.Core.CSOM.Utils.Model
 
             return parameters;
         }
-        
+
         internal Parameter GetFieldValueParameter()
         {
             string fieldType = FieldType ?? (FieldValue?.GetType().Name);
@@ -83,7 +83,7 @@ namespace PnP.Core.Services.Core.CSOM.Utils.Model
             {
                 IFieldValueCollection collection = FieldValue as IFieldValueCollection;
 
-                if(collection.Values.FirstOrDefault() is FieldTaxonomyValue)
+                if (collection.Values.FirstOrDefault() is FieldTaxonomyValue)
                 {
                     return new TaxonomyMultiParameter(collection);
                 }

@@ -3,7 +3,7 @@
 namespace PnP.Core.Model.Teams
 {
     [GraphType]
-    internal partial class TeamIdentitySet : BaseDataModel<ITeamIdentitySet>, ITeamIdentitySet
+    internal sealed class TeamIdentitySet : BaseDataModel<ITeamIdentitySet>, ITeamIdentitySet
     {
         #region Properties
         public IIdentity Application { get => GetModelValue<IIdentity>(); }

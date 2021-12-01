@@ -3,7 +3,7 @@
     /// <summary>
     /// Class used to provide information on a field update request
     /// </summary>
-    internal class PropertyUpdateRequest
+    internal sealed class PropertyUpdateRequest
     {
 
         internal PropertyUpdateRequest(string fieldName, object fieldValue)

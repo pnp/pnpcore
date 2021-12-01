@@ -28,7 +28,7 @@ namespace PnP.Core.Test.SharePoint
                 var documents = context.Web.Lists.GetByTitle("Documents", l => l.Fields);
                 Assert.IsTrue(documents.Fields.Length > 0);
 
-                IField field = documents.Fields.AsEnumerable().FirstOrDefault(p => p.InternalName == "Title");
+                IField field = documents.Fields.AsRequested().FirstOrDefault(p => p.InternalName == "Title");
                 // Test a string property
                 Assert.AreEqual("Title", field.InternalName);
                 // Test a boolean property
@@ -55,7 +55,7 @@ namespace PnP.Core.Test.SharePoint
                 Assert.AreEqual("Title", field.Title);
             }
         }
-        
+
         [TestMethod]
         public async Task AddListFieldNoOptionTest()
         {

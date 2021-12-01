@@ -1,0 +1,9 @@
+--batchresponse_aeb33fb1-d46b-4685-aa4f-7eb5be919d34
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+HTTP/1.1 200 OK
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+
+{"d":{"Upgrade":null}}
+--batchresponse_aeb33fb1-d46b-4685-aa4f-7eb5be919d34--

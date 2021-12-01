@@ -1,0 +1,9 @@
+--batchresponse_b3cfb3e6-4c4c-4be1-85ac-a47f205ec3bd
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+HTTP/1.1 200 OK
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+
+{"d":{"HideTeamifyPrompt":null}}
+--batchresponse_b3cfb3e6-4c4c-4be1-85ac-a47f205ec3bd--

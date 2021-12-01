@@ -1,6 +1,6 @@
 ﻿namespace PnP.Core.Model.SharePoint
 {
-    internal class SyntexModelPublicationResult: ISyntexModelPublicationResult
+    internal sealed class SyntexModelPublicationResult : ISyntexModelPublicationResult
     {
         public string ErrorMessage { get; internal set; }
 

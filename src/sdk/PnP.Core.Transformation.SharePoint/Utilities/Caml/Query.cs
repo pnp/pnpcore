@@ -10,7 +10,7 @@
     /// Defines a CAML query. This class has no constructors available. To instanciate a
     /// new query use public static methods.
     /// </summary>
-    public class Query
+    internal class Query
     {
         private readonly List<FieldReference> orderByFields = new List<FieldReference>();
 

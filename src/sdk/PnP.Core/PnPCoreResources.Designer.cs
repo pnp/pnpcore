@@ -115,6 +115,24 @@ namespace PnP.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to There was no authentication provider setup, please ensure you define an authentication provider via configuration or via code. See https://pnp.github.io/pnpcore/using-the-sdk/readme.html for more details.
+        /// </summary>
+        internal static string Exception_CreatePnPContext_AuthenticationProvider {
+            get {
+                return ResourceManager.GetString("Exception_CreatePnPContext_AuthenticationProvider", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please provide the id (Guid) of a the Microsoft 365 group you want to create a PnPContext for.
+        /// </summary>
+        internal static string Exception_CreatePnPContext_GroupId {
+            get {
+                return ResourceManager.GetString("Exception_CreatePnPContext_GroupId", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Feature was already activated.
         /// </summary>
         internal static string Exception_Feature_AlreadyActivated {
@@ -156,6 +174,15 @@ namespace PnP.Core {
         internal static string Exception_InstanceWasDeleted {
             get {
                 return ResourceManager.GetString("Exception_InstanceWasDeleted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The specified expiration date is invalid. Should be greater than today and within {0} months.
+        /// </summary>
+        internal static string Exception_Invalid_WebhookExpiration {
+            get {
+                return ResourceManager.GetString("Exception_Invalid_WebhookExpiration", resourceCulture);
             }
         }
         
@@ -502,6 +529,15 @@ namespace PnP.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Role definition &apos;{0}&apos; not found..
+        /// </summary>
+        internal static string Exception_RoleDefinition_NotFound {
+            get {
+                return ResourceManager.GetString("Exception_RoleDefinition_NotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Requests inside a batch reached their max retry count of {0}.
         /// </summary>
         internal static string Exception_ServiceException_BatchMaxRetries {
@@ -768,6 +804,15 @@ namespace PnP.Core {
         internal static string Exception_Unsupported_NodeType {
             get {
                 return ResourceManager.GetString("Exception_Unsupported_NodeType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The used model ({0}) does not implement IQueryableDataModel.
+        /// </summary>
+        internal static string Exception_Unsupported_NoIQueryableDataModel {
+            get {
+                return ResourceManager.GetString("Exception_Unsupported_NoIQueryableDataModel", resourceCulture);
             }
         }
         

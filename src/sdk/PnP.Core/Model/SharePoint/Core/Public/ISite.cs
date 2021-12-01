@@ -1,6 +1,7 @@
 ﻿using PnP.Core.Model.Security;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace PnP.Core.Model.SharePoint
@@ -48,11 +49,17 @@ namespace PnP.Core.Model.SharePoint
 
         /// <summary>
         /// Collection of sub-webs in the current Site object
+        /// Implements <see cref="IQueryable{T}"/>. <br />
+        /// See <see href="https://pnp.github.io/pnpcore/using-the-sdk/basics-getdata.html#requesting-model-collections">Requesting model collections</see> 
+        /// and <see href="https://pnp.github.io/pnpcore/using-the-sdk/basics-iqueryable.html">IQueryable performance considerations</see> to learn more.
         /// </summary>
         public IWebCollection AllWebs { get; }
 
         /// <summary>
         /// Collection of features enabled for the site
+        /// Implements <see cref="IQueryable{T}"/>. <br />
+        /// See <see href="https://pnp.github.io/pnpcore/using-the-sdk/basics-getdata.html#requesting-model-collections">Requesting model collections</see> 
+        /// and <see href="https://pnp.github.io/pnpcore/using-the-sdk/basics-iqueryable.html">IQueryable performance considerations</see> to learn more.
         /// </summary>
         public IFeatureCollection Features { get; }
 
@@ -161,12 +168,12 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// Gets or sets the Information Protection Label Id for an individual site collection.
         /// </summary>
-        public string SensitivityLabelId { get; set; }
+        public Guid SensitivityLabelId { get; set; }
 
         /// <summary>
         /// Information Protection Label Id for an individual site collection
         /// </summary>
-        public Guid SensitivityLabel { get; }
+        public string SensitivityLabel { get; }
 
         /// <summary>
         /// Returns whether or not this site is a HubSite. Hub sites can be associated with one or more sites.
@@ -197,6 +204,9 @@ namespace PnP.Core.Model.SharePoint
 
         /// <summary>
         /// Gets a value that specifies the collection of Recycle Bin items for the site collection.
+        /// Implements <see cref="IQueryable{T}"/>. <br />
+        /// See <see href="https://pnp.github.io/pnpcore/using-the-sdk/basics-getdata.html#requesting-model-collections">Requesting model collections</see> 
+        /// and <see href="https://pnp.github.io/pnpcore/using-the-sdk/basics-iqueryable.html">IQueryable performance considerations</see> to learn more.
         /// </summary>
         public IRecycleBinItemCollection RecycleBin { get; }
 
@@ -247,6 +257,9 @@ namespace PnP.Core.Model.SharePoint
 
         /// <summary>
         /// Gets a value that specifies the collection of user custom actions for the site collection.
+        /// Implements <see cref="IQueryable{T}"/>. <br />
+        /// See <see href="https://pnp.github.io/pnpcore/using-the-sdk/basics-getdata.html#requesting-model-collections">Requesting model collections</see> 
+        /// and <see href="https://pnp.github.io/pnpcore/using-the-sdk/basics-iqueryable.html">IQueryable performance considerations</see> to learn more.
         /// </summary>
         public IUserCustomActionCollection UserCustomActions { get; }
 
@@ -287,14 +300,29 @@ namespace PnP.Core.Model.SharePoint
         public Task<IHubSite> RegisterHubSiteAsync();
 
         /// <summary>
+        /// Registers the current site as a primary hub site
+        /// </summary>
+        public IHubSite RegisterHubSite();
+
+        /// <summary>
         /// Unregisters the current site as a primary hub site
         /// </summary>
         public Task<bool> UnregisterHubSiteAsync();
 
         /// <summary>
+        /// Unregisters the current site as a primary hub site
+        /// </summary>
+        public bool UnregisterHubSite();
+
+        /// <summary>
         /// Associates the current site to a primary hub site
         /// </summary>
         public Task<bool> JoinHubSiteAsync(Guid hubSiteId);
+
+        /// <summary>
+        /// Associates the current site to a primary hub site
+        /// </summary>
+        public bool JoinHubSite(Guid hubSiteId);
 
         /// <summary>
         /// Disassociates current site from primary hub site
@@ -303,11 +331,23 @@ namespace PnP.Core.Model.SharePoint
         public Task<bool> UnJoinHubSiteAsync();
 
         /// <summary>
+        /// Disassociates current site from primary hub site
+        /// </summary>
+        /// <returns></returns>
+        public bool UnJoinHubSite();
+
+        /// <summary>
         /// Gets hubsite data from the current site OR another specified hub site ID
         /// </summary>
-        /// <param name="Id">Hub Site Guid</param>
+        /// <param name="id">Hub Site Guid</param>
         /// <returns></returns>
-        public Task<IHubSite> GetHubSiteData(Guid? Id);
+        public Task<IHubSite> GetHubSiteDataAsync(Guid? id);
 
+        /// <summary>
+        /// Gets hubsite data from the current site OR another specified hub site ID
+        /// </summary>
+        /// <param name="id">Hub Site Guid</param>
+        /// <returns></returns>
+        public IHubSite GetHubSiteData(Guid? id);
     }
 }

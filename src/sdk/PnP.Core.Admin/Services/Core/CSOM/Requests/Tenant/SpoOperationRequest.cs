@@ -8,7 +8,7 @@ using System.Collections.Generic;
 
 namespace PnP.Core.Admin.Services.Core.CSOM.Requests.Tenant
 {
-    internal class SpoOperationRequest : IRequest<object>
+    internal sealed class SpoOperationRequest : IRequest<object>
     {
 
         internal SpoOperationRequest(string objectIdentity)
@@ -31,7 +31,7 @@ namespace PnP.Core.Admin.Services.Core.CSOM.Requests.Tenant
             IdentityPath = idProvider.GetActionId();
             QueryIdPath = idProvider.GetActionId();
 
-            List <ActionObjectPath> actions = new List<ActionObjectPath>();
+            List<ActionObjectPath> actions = new List<ActionObjectPath>();
             ActionObjectPath spoOperation = new ActionObjectPath()
             {
                 Action = new QueryAction()

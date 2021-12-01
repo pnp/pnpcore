@@ -1,8 +1,8 @@
-﻿using System;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using PnP.Core.Transformation.Services.Core;
 using PnP.Core.Transformation.Services.MappingProviders;
+using System;
 
 namespace PnP.Core.Transformation.Services.Builder
 {
@@ -161,6 +161,6 @@ namespace PnP.Core.Transformation.Services.Builder
             Services.AddTransient<IAssetPersistenceProvider, T>();
 
             return this;
-        }        
+        }
     }
 }

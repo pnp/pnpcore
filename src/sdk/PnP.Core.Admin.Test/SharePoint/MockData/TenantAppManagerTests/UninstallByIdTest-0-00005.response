@@ -1,0 +1,9 @@
+--batchresponse_96f0ab09-5f77-4932-991c-fa79255f86ee
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+HTTP/1.1 200 OK
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+
+{"d":{"Uninstall":null}}
+--batchresponse_96f0ab09-5f77-4932-991c-fa79255f86ee--

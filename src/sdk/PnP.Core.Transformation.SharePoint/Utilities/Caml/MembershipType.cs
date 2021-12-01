@@ -4,7 +4,7 @@
     /// Defines membership types used by Membership operator.
     /// </summary>
     /// <seealso cref="Operator.Membership"/>
-    public enum MembershipType
+    internal enum MembershipType
     {
         /// <summary>
         /// Indicates SPWeb.AllUsers membership.

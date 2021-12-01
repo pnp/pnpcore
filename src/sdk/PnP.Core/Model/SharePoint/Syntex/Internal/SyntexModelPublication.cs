@@ -3,7 +3,7 @@
 namespace PnP.Core.Model.SharePoint
 {
 
-    internal class SyntexModelPublication : ISyntexModelPublication
+    internal sealed class SyntexModelPublication : ISyntexModelPublication
     {
 
         public Guid ModelUniqueId { get; internal set; }

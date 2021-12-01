@@ -286,7 +286,7 @@ namespace PnP.Core.Test.SharePoint
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                IFolder parentFolder = (await context.Web.Lists.GetByTitleAsync("Documents", p=>p.RootFolder)).RootFolder;
+                IFolder parentFolder = (await context.Web.Lists.GetByTitleAsync("Documents", p => p.RootFolder)).RootFolder;
                 IFolder newFolder = await parentFolder.Folders.AddAsync("TEST");
 
                 // Test the created object

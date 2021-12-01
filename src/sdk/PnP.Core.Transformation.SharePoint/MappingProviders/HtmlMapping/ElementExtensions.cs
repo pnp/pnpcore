@@ -11,14 +11,14 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders.HtmlMapping
     /// <summary>
     /// Extensions methods for <see cref="IElement"/>
     /// </summary>
-    public static class ElementExtensions
+    internal static class ElementExtensions
     {
         /// <summary>
         /// Gets if element is a block
         /// </summary>
         /// <param name="element"></param>
         /// <returns></returns>
-        public static bool IsBlockElement(this IElement element)
+        internal static bool IsBlockElement(this IElement element)
         {
             var tag = element.TagName.ToLower();
             if (tag == "article" ||
@@ -70,7 +70,7 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders.HtmlMapping
         /// </summary>
         /// <param name="element"></param>
         /// <returns></returns>
-        public static bool IsStrikeThrough(this IElement element)
+        internal static bool IsStrikeThrough(this IElement element)
         {
             if (element.GetStyle() != null && (!string.IsNullOrEmpty(element.GetStyle().GetTextDecoration()) && element.GetStyle().GetTextDecoration().Equals("line-through", StringComparison.InvariantCultureIgnoreCase) ||
                                                !string.IsNullOrEmpty(element.GetStyle().GetPropertyValue("text-decoration-line")) && element.GetStyle().GetPropertyValue("text-decoration-line").Equals("line-through", StringComparison.InvariantCultureIgnoreCase)))
@@ -86,7 +86,7 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders.HtmlMapping
         /// </summary>
         /// <param name="element"></param>
         /// <returns></returns>
-        public static bool IsUnderline(this IElement element)
+        internal static bool IsUnderline(this IElement element)
         {
             if (element.GetStyle() != null && (!string.IsNullOrEmpty(element.GetStyle().GetTextDecoration()) && element.GetStyle().GetTextDecoration().Equals("underline", StringComparison.InvariantCultureIgnoreCase) ||
                                                !string.IsNullOrEmpty(element.GetStyle().GetPropertyValue("text-decoration-line")) && element.GetStyle().GetPropertyValue("text-decoration-line").Equals("underline", StringComparison.InvariantCultureIgnoreCase)))

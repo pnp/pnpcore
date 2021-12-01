@@ -63,9 +63,13 @@ namespace PnP.Core.Transformation.Test.Utilities
                 // Add the PnP Core SDK Authentication Providers
                 .AddPnPCore();
 
-            var clientId = configuration.GetSection("PnPCore:Credentials:Configurations:CredentialManager:ClientId")?.Value;
-            var tenantId = configuration.GetSection("PnPCore:Credentials:Configurations:CredentialManager:TenantId")?.Value;
-            var credentialManager = configuration.GetSection("PnPCore:Credentials:Configurations:CredentialManager:CredentialManager:CredentialManagerName")?.Value;
+            // The default configuration has to use credential manager for auth
+
+            var defaultConfiguration = configuration.GetSection("PnPCore:Credentials:DefaultConfiguration")?.Value;
+
+            var clientId = configuration.GetSection($"PnPCore:Credentials:Configurations:{defaultConfiguration}:ClientId")?.Value;
+            var tenantId = configuration.GetSection($"PnPCore:Credentials:Configurations:{defaultConfiguration}:TenantId")?.Value;
+            var credentialManager = configuration.GetSection($"PnPCore:Credentials:Configurations:{defaultConfiguration}:CredentialManager:CredentialManagerName")?.Value;
 
             var resource = $"https://{new Uri(configuration["SourceTestSite"]).Authority}";
 

@@ -1,6 +1,6 @@
 ﻿namespace PnP.Core.Model.Teams
 {
-    internal partial class TeamChatMessageAttachmentCollection : BaseDataModelCollection<ITeamChatMessageAttachment>, ITeamChatMessageAttachmentCollection
+    internal sealed class TeamChatMessageAttachmentCollection : BaseDataModelCollection<ITeamChatMessageAttachment>, ITeamChatMessageAttachmentCollection
     {
     }
 }

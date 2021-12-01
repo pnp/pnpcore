@@ -7,7 +7,7 @@ namespace PnP.Core.Model.SharePoint
     /// A list item attachment
     /// </summary>
     [ConcreteType(typeof(Attachment))]
-    public interface IAttachment : IDataModel<IAttachment>, IDataModelGet<IAttachment>, IDataModelUpdate, IDataModelDelete
+    public interface IAttachment : IDataModel<IAttachment>, IDataModelGet<IAttachment>, IDataModelUpdate, IDataModelDelete, IQueryableDataModel
     {
 
         /// <summary>

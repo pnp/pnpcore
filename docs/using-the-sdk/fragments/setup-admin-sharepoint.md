@@ -1,6 +1,6 @@
 ## Creating Context
 
-In this article, you'll see a lot of `context` use: in this case this is a `PnPContext` which was obtained via the `PnPContextFactory` as explained in the [overview article](../readme.md) and show below:
+In this article, you'll see a lot of `context` use: in this case this is a `PnPContext` which was obtained via the `PnPContextFactory` as explained in the [overview article](../readme.md) and shown below:
 
 ```csharp
 using (var context = await pnpContextFactory.CreateAsync("SiteToWorkWith"))
@@ -11,7 +11,7 @@ using (var context = await pnpContextFactory.CreateAsync("SiteToWorkWith"))
 
 ## PnP.Core.Admin dependency
 
-The functionality shown in this article depends on the [PnP.Core.Admin nuget package](https://www.nuget.org/packages/PnP.Core.Admin). Once the PnP.Core.Admin nuget package has been installed you can get to the SharePoint admin features via using the `GetSharePointAdmin` extension method:
+The functionality shown in this article depends on the [PnP.Core.Admin nuget package](https://www.nuget.org/packages/PnP.Core.Admin). Once the PnP.Core.Admin nuget package has been installed you can get to the SharePoint admin features via using the `GetSharePointAdmin`, `GetSiteCollectionAppManager`, `GetTenantAppManager` and `GetSiteCollectionManager` extension methods:
 
 ```csharp
 using (var context = await pnpContextFactory.CreateAsync("SiteToWorkWith"))

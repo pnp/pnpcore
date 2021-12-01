@@ -18,7 +18,7 @@ namespace PnP.Core.Test.Teams
             // Configure mocking default for all tests in this class, unless override by a specific test
             //TestCommon.Instance.Mocking = false;
         }
-                
+
         [TestMethod]
         public async Task GetChannelsAsyncTest()
         {

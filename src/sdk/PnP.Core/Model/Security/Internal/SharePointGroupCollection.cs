@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace PnP.Core.Model.Security
 {
-    internal partial class SharePointGroupCollection : QueryableDataModelCollection<ISharePointGroup>, ISharePointGroupCollection
+    internal sealed class SharePointGroupCollection : QueryableDataModelCollection<ISharePointGroup>, ISharePointGroupCollection
     {
         public SharePointGroupCollection(PnPContext context, IDataModelParent parent, string memberName = null) : base(context, parent, memberName)
         {
@@ -37,7 +37,7 @@ namespace PnP.Core.Model.Security
 
             var newGroup = CreateNewAndAdd() as SharePointGroup;
             newGroup.Title = name;
-         
+
             return await newGroup.AddAsync().ConfigureAwait(false) as SharePointGroup;
         }
 

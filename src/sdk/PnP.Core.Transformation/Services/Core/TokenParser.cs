@@ -1,13 +1,11 @@
 ﻿using Microsoft.Extensions.Caching.Memory;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using PnP.Core.Services;
 using PnP.Core.Transformation.Extensions;
-using PnP.Core.Transformation.Services.Core.Tokens;
-using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
 
 namespace PnP.Core.Transformation.Services.Core

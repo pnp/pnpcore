@@ -9,6 +9,7 @@ using System.Linq.Expressions;
 using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
+using System.Xml;
 
 namespace PnP.Core.Model.SharePoint
 {
@@ -17,8 +18,7 @@ namespace PnP.Core.Model.SharePoint
     /// </summary>
     [SharePointType("SP.List", Uri = "_api/Web/Lists(guid'{Id}')", Update = "_api/web/lists/getbyid(guid'{Id}')", LinqGet = "_api/web/lists")]
     //[GraphType(Get = "sites/{Parent.GraphId}/lists/{GraphId}", LinqGet = "sites/{Parent.GraphId}/lists")]
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Usage", "CA2243:Attribute string literals should parse correctly", Justification = "<Pending>")]
-    internal partial class List : BaseDataModel<IList>, IList
+    internal sealed class List : BaseDataModel<IList>, IList
     {
         // List of fields that loaded when the Lists collection is requested. This approach is needed as 
         // Graph requires the "system" field to be loaded as trigger to return all lists 
@@ -156,6 +156,16 @@ namespace PnP.Core.Model.SharePoint
 
         public bool IsApplicationList { get => GetValue<bool>(); set => SetValue(value); }
 
+        public bool IsCatalog { get => GetValue<bool>(); set => SetValue(value); }
+
+        public bool IsDefaultDocumentLibrary { get => GetValue<bool>(); set => SetValue(value); }
+
+        public bool IsPrivate { get => GetValue<bool>(); set => SetValue(value); }
+
+        public bool IsSiteAssetsLibrary { get => GetValue<bool>(); set => SetValue(value); }
+
+        public bool IsSystemList { get => GetValue<bool>(); set => SetValue(value); }
+
         public int ReadSecurity { get => GetValue<int>(); set => SetValue(value); }
 
         public int WriteSecurity { get => GetValue<int>(); set => SetValue(value); }
@@ -170,6 +180,8 @@ namespace PnP.Core.Model.SharePoint
 
         public string ListItemEntityTypeFullName { get => GetValue<string>(); set => SetValue(value); }
 
+        public int ItemCount { get => GetValue<int>(); set => SetValue(value); }
+
         public IFolder RootFolder { get => GetModelValue<IFolder>(); }
 
         public IInformationRightsManagementSettings InformationRightsManagementSettings { get => GetModelValue<IInformationRightsManagementSettings>(); }
@@ -183,6 +195,9 @@ namespace PnP.Core.Model.SharePoint
         public IFieldCollection Fields { get => GetModelCollectionValue<IFieldCollection>(); }
 
         public IViewCollection Views { get => GetModelCollectionValue<IViewCollection>(); }
+
+        [SharePointProperty("subscriptions")]
+        public IListSubscriptionCollection Webhooks { get => GetModelCollectionValue<IListSubscriptionCollection>(); }
 
         public bool HasUniqueRoleAssignments { get => GetValue<bool>(); set => SetValue(value); }
 
@@ -375,6 +390,11 @@ namespace PnP.Core.Model.SharePoint
 
         private async Task<ApiCall> BuildGetItemsByCamlQueryApiCall(CamlQueryOptions queryOptions, params Expression<Func<IListItem, object>>[] selectors)
         {
+            if (queryOptions == null)
+            {
+                throw new ArgumentNullException(nameof(queryOptions));
+            }
+
             // Build body
             ExpandoObject camlQuery;
 
@@ -418,7 +438,7 @@ namespace PnP.Core.Model.SharePoint
             {
                 var entityInfo = EntityManager.GetClassInfo(concreteEntity.GetType(), concreteEntity, null, selectors);
                 var apiCallRequest = await QueryClient.BuildGetAPICallAsync(concreteEntity, entityInfo, new ApiCall(baseRequestUri, ApiType.SPORest), true).ConfigureAwait(false);
-                baseRequestUri = apiCallRequest.ApiCall.Request;
+                baseRequestUri = RewriteGetItemsQueryString(queryOptions.ViewXml, apiCallRequest.ApiCall.Request);
             }
 
             return new ApiCall(baseRequestUri, ApiType.SPORest, body, "Items")
@@ -426,6 +446,46 @@ namespace PnP.Core.Model.SharePoint
                 SkipCollectionClearing = true
             };
         }
+
+        internal static string RewriteGetItemsQueryString(string viewXml, string query)
+        {
+            // Get the viewfields from the CAML query
+            // sample: <View><ViewFields><FieldRef Name='Title' /><FieldRef Name='FileRef' /></ViewFields><RowLimit>5</RowLimit></View>
+
+            XmlDocument xmlDocument = new XmlDocument();
+            xmlDocument.LoadXml(viewXml);
+            XmlNode root = xmlDocument.DocumentElement;
+
+            // Get FieldRef nodes
+            XmlNodeList fieldRefNodes = root.SelectNodes("//View/ViewFields/FieldRef");
+
+            List<string> fields = new List<string>();
+
+            bool first = true;
+            foreach(var fieldRefNode in fieldRefNodes)
+            {
+                if (fieldRefNode is XmlNode xmlNode)
+                {
+                    if (first)
+                    {
+                        fields.Add("*");
+                        first = false;
+                    }
+
+                    fields.Add(xmlNode.Attributes["Name"].Value);
+                }
+            }
+
+            if (fields.Count > 0)
+            {
+                return $"https://{UrlUtility.CombineRelativeUrlWithUrlParameters(query, $"$select={string.Join(",", fields)}")}".Replace("%2f", "/");
+            }
+            else
+            {
+                return query;
+            }
+        }
+
         #endregion
 
         #region GetListDataAsStream
@@ -594,8 +654,34 @@ namespace PnP.Core.Model.SharePoint
 
         public async Task BreakRoleInheritanceAsync(bool copyRoleAssignments, bool clearSubscopes)
         {
-            var apiCall = new ApiCall($"_api/Web/Lists(guid'{Id}')/breakroleinheritance(copyRoleAssignments={copyRoleAssignments.ToString().ToLower()},clearSubscopes={clearSubscopes.ToString().ToLower()})", ApiType.SPORest);
+            ApiCall apiCall = BuildBreakRoleInheritanceApiCall(copyRoleAssignments, clearSubscopes);
             await RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
+        }
+
+        private ApiCall BuildBreakRoleInheritanceApiCall(bool copyRoleAssignments, bool clearSubscopes)
+        {
+            return new ApiCall($"_api/Web/Lists(guid'{Id}')/breakroleinheritance(copyRoleAssignments={copyRoleAssignments.ToString().ToLower()},clearSubscopes={clearSubscopes.ToString().ToLower()})", ApiType.SPORest);
+        }
+
+        public void BreakRoleInheritanceBatch(Batch batch, bool copyRoleAssignments, bool clearSubscopes)
+        {
+            BreakRoleInheritanceBatchAsync(batch, copyRoleAssignments, clearSubscopes).GetAwaiter().GetResult();
+        }
+
+        public async Task BreakRoleInheritanceBatchAsync(Batch batch, bool copyRoleAssignments, bool clearSubscopes)
+        {
+            ApiCall apiCall = BuildBreakRoleInheritanceApiCall(copyRoleAssignments, clearSubscopes);
+            await RawRequestBatchAsync(batch, apiCall, HttpMethod.Post).ConfigureAwait(false);
+        }
+
+        public void BreakRoleInheritanceBatch(bool copyRoleAssignments, bool clearSubscopes)
+        {
+            BreakRoleInheritanceBatchAsync(copyRoleAssignments, clearSubscopes).GetAwaiter().GetResult();
+        }
+
+        public async Task BreakRoleInheritanceBatchAsync(bool copyRoleAssignments, bool clearSubscopes)
+        {
+            await BreakRoleInheritanceBatchAsync(PnPContext.CurrentBatch, copyRoleAssignments, clearSubscopes).ConfigureAwait(false);
         }
 
         public void ResetRoleInheritance()
@@ -605,8 +691,34 @@ namespace PnP.Core.Model.SharePoint
 
         public async Task ResetRoleInheritanceAsync()
         {
-            var apiCall = new ApiCall($"_api/Web/Lists(guid'{Id}')/resetroleinheritance", ApiType.SPORest);
+            ApiCall apiCall = BuildResetRoleInheritanceApiCall();
             await RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
+        }
+
+        private ApiCall BuildResetRoleInheritanceApiCall()
+        {
+            return new ApiCall($"_api/Web/Lists(guid'{Id}')/resetroleinheritance", ApiType.SPORest);
+        }
+
+        public void ResetRoleInheritanceBatch(Batch batch)
+        {
+            ResetRoleInheritanceBatchAsync(batch).GetAwaiter().GetResult();
+        }
+
+        public async Task ResetRoleInheritanceBatchAsync(Batch batch)
+        {
+            ApiCall apiCall = BuildResetRoleInheritanceApiCall();
+            await RawRequestBatchAsync(batch, apiCall, HttpMethod.Post).ConfigureAwait(false);
+        }
+
+        public void ResetRoleInheritanceBatch()
+        {
+            ResetRoleInheritanceBatchAsync().GetAwaiter().GetResult();
+        }
+
+        public async Task ResetRoleInheritanceBatchAsync()
+        {
+            await ResetRoleInheritanceBatchAsync(PnPContext.CurrentBatch).ConfigureAwait(false);
         }
 
         public IRoleDefinitionCollection GetRoleDefinitions(int principalId)
@@ -631,22 +743,66 @@ namespace PnP.Core.Model.SharePoint
 
         public async Task<bool> AddRoleDefinitionsAsync(int principalId, params string[] names)
         {
-            var result = false;
+            if (names == null || names.Length == 0)
+            {
+                return false;
+            }
+
+            var roleDefinitions = await PnPContext.Web.RoleDefinitions.ToListAsync().ConfigureAwait(false);
+            var batch = PnPContext.NewBatch();
             foreach (var name in names)
             {
-                var roleDefinition = await PnPContext.Web.RoleDefinitions.FirstOrDefaultAsync(d => d.Name == name).ConfigureAwait(false);
+                var roleDefinition = roleDefinitions.FirstOrDefault(d => d.Name == name);
                 if (roleDefinition != null)
                 {
-                    var apiCall = new ApiCall($"_api/web/lists(guid'{Id}')/roleassignments/addroleassignment(principalid={principalId},roledefid={roleDefinition.Id})", ApiType.SPORest);
-                    var response = await RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
-                    result = response.StatusCode == System.Net.HttpStatusCode.OK;
+                    await AddRoleDefinitionBatchAsync(batch, principalId, roleDefinition).ConfigureAwait(false);
                 }
                 else
                 {
-                    throw new ArgumentException($"Role definition '{name}' not found.");
+                    throw new ArgumentException(string.Format(PnPCoreResources.Exception_RoleDefinition_NotFound, name));
                 }
             }
-            return result;
+            // Send role updates to server
+            await PnPContext.ExecuteAsync(batch).ConfigureAwait(false);
+
+            return true;
+        }
+
+        private ApiCall BuildAddRoleDefinitionsApiCall(int principalId, IRoleDefinition roleDefinition)
+        {
+            return new ApiCall($"_api/web/lists(guid'{Id}')/roleassignments/addroleassignment(principalid={principalId},roledefid={roleDefinition.Id})", ApiType.SPORest);
+        }
+
+        public async Task AddRoleDefinitionAsync(int principalId, IRoleDefinition roleDefinition)
+        {
+            ApiCall apiCall = BuildAddRoleDefinitionsApiCall(principalId, roleDefinition);
+            await RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
+        }
+
+        public void AddRoleDefinition(int principalId, IRoleDefinition roleDefinition)
+        {
+            AddRoleDefinitionAsync(principalId, roleDefinition).GetAwaiter().GetResult();
+        }
+
+        public void AddRoleDefinitionBatch(Batch batch, int principalId, IRoleDefinition roleDefinition)
+        {
+            AddRoleDefinitionBatchAsync(batch, principalId, roleDefinition).GetAwaiter().GetResult();
+        }
+
+        public async Task AddRoleDefinitionBatchAsync(Batch batch, int principalId, IRoleDefinition roleDefinition)
+        {
+            ApiCall apiCall = BuildAddRoleDefinitionsApiCall(principalId, roleDefinition);
+            await RawRequestBatchAsync(batch, apiCall, HttpMethod.Post).ConfigureAwait(false);
+        }
+
+        public void AddRoleDefinitionBatch(int principalId, IRoleDefinition roleDefinition)
+        {
+            AddRoleDefinitionBatchAsync(principalId, roleDefinition).GetAwaiter().GetResult();
+        }
+
+        public async Task AddRoleDefinitionBatchAsync(int principalId, IRoleDefinition roleDefinition)
+        {
+            await AddRoleDefinitionBatchAsync(PnPContext.CurrentBatch, principalId, roleDefinition).ConfigureAwait(false);
         }
 
         public bool RemoveRoleDefinitions(int principalId, params string[] names)
@@ -656,24 +812,67 @@ namespace PnP.Core.Model.SharePoint
 
         public async Task<bool> RemoveRoleDefinitionsAsync(int principalId, params string[] names)
         {
-            var result = false;
+            if (names == null || names.Length == 0)
+            {
+                return false;
+            }
+
+            var roleDefinitions = await GetRoleDefinitionsAsync(principalId).ConfigureAwait(false);
+            var batch = PnPContext.NewBatch();
             foreach (var name in names)
             {
-                var roleDefinitions = await GetRoleDefinitionsAsync(principalId).ConfigureAwait(false);
-
                 var roleDefinition = roleDefinitions.AsRequested().FirstOrDefault(r => r.Name == name);
                 if (roleDefinition != null)
                 {
-                    var apiCall = new ApiCall($"_api/web/lists(guid'{Id}')/roleassignments/removeroleassignment(principalid={principalId},roledefid={roleDefinition.Id})", ApiType.SPORest);
-                    var response = await RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
-                    result = response.StatusCode == System.Net.HttpStatusCode.OK;
+                    await RemoveRoleDefinitionBatchAsync(batch, principalId, roleDefinition).ConfigureAwait(false);
                 }
                 else
                 {
-                    throw new ArgumentException($"Role definition '{name}' not found for this group.");
+                    throw new ArgumentException(string.Format(PnPCoreResources.Exception_RoleDefinition_NotFound, name));
                 }
             }
-            return result;
+
+            // Send role updates to server
+            await PnPContext.ExecuteAsync(batch).ConfigureAwait(false);
+
+            return true;
+        }
+
+        public async Task RemoveRoleDefinitionAsync(int principalId, IRoleDefinition roleDefinition)
+        {
+            ApiCall apiCall = BuildRemoveRoleDefinitionApiCall(principalId, roleDefinition);
+            await RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
+        }
+
+        public void RemoveRoleDefinition(int principalId, IRoleDefinition roleDefinition)
+        {
+            RemoveRoleDefinitionAsync(principalId, roleDefinition).GetAwaiter().GetResult();
+        }
+
+        public void RemoveRoleDefinitionBatch(int principalId, IRoleDefinition roleDefinition)
+        {
+            RemoveRoleDefinitionBatchAsync(principalId, roleDefinition).GetAwaiter().GetResult();
+        }
+
+        public async Task RemoveRoleDefinitionBatchAsync(int principalId, IRoleDefinition roleDefinition)
+        {
+            await RemoveRoleDefinitionBatchAsync(PnPContext.CurrentBatch, principalId, roleDefinition).ConfigureAwait(false);
+        }
+
+        public void RemoveRoleDefinitionBatch(Batch batch, int principalId, IRoleDefinition roleDefinition)
+        {
+            RemoveRoleDefinitionBatchAsync(batch, principalId, roleDefinition).GetAwaiter().GetResult();
+        }
+
+        public async Task RemoveRoleDefinitionBatchAsync(Batch batch, int principalId, IRoleDefinition roleDefinition)
+        {
+            ApiCall apiCall = BuildRemoveRoleDefinitionApiCall(principalId, roleDefinition);
+            await RawRequestBatchAsync(batch, apiCall, HttpMethod.Post).ConfigureAwait(false);
+        }
+
+        private ApiCall BuildRemoveRoleDefinitionApiCall(int principalId, IRoleDefinition roleDefinition)
+        {
+            return new ApiCall($"_api/web/lists(guid'{Id}')/roleassignments/removeroleassignment(principalid={principalId},roledefid={roleDefinition.Id})", ApiType.SPORest);
         }
         #endregion
 

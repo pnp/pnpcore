@@ -66,7 +66,7 @@ services.AddPnPCoreAuthentication(
                 TenantId = "{your_tenant_id}",
                 Interactive = new PnPCoreAuthenticationInteractiveOptions
                 {
-                    RedirectUri = "http://localhost"
+                    RedirectUri = new Uri("http://localhost")
                 }
             });
 
@@ -124,6 +124,9 @@ $app.'Certificate Thumbprint' | clip
 Paste this copied values in a safe place, because you will need them soon.
 In the `c:\temp` folder (or whatever else folder you will choose) there will also be a file named `PnP.Core.SDK.Consumer.pfx`, which includes the private key of the self-signed certificate generated for you, as well as a file named `PnP.Core.SDK.Consumer.cer`, which includes the public key of the self-signed certificate generated for you.
 
+> [!Note]
+> If you can't use PowerShell to generate a self-signed certificate then checkout [Generate self-signed certificates with the .NET CLI](https://docs.microsoft.com/en-us/dotnet/core/additional-tools/self-signed-certificates-guide). It for example shows how to use OpenSSL on Linux to create a self-signed certificate.
+
 #### Configuring PnP Core SDK to use the configured application
 
 When you're configuring your application to use the PnP Core SDK you will have to configure the `PnP.Core` services and the `PnP.Core.Auth` services using the `AddPnPCore` and `AddPnPCoreAuthentication` methods, respectively. The `ClientId` and `TenantId` are those of the application that you just registered in Azure Active Directory..
@@ -168,19 +171,20 @@ services.AddPnPCoreAuthentication(
 });
 ```
 
+> [!Note]
+> If you're using PnP Core SDK on Linux you can use https://github.com/gsoft-inc/dotnet-certificate-tool as tool to import your certificate.
+
 ## Using the multi-tenant PnP Azure AD application
 
 Azure AD has the concept of multi-tenant applications allowing you to re-use an application created in another Azure AD tenant. The PnP team did setup a general purpose Azure AD application (named "PnP Office 365 Management Shell") configured with the needed permissions, and you can reuse this application. It means that you don't need to create your own Azure AD application, instead you simply need to consent permissions to the already created multi-tenant application.
 
-### Step 1
+### Step 1: Consent to the PnP Office 365 Management Shell application
 
 To consent permissions to the PnP multi-tenant application first update below content URL: replace contoso.onmicrosoft.com with your Azure AD tenant name, which typically is company.onmicrosoft.com.
 
 ```
 https://login.microsoftonline.com/contoso.onmicrosoft.com/adminconsent?client_id=31359c7f-bd7e-475c-86db-fdb8c937548e&state=12345&redirect_uri=https://aka.ms/sppnp
 ```
-
-### Step 2
 
 Login to your Microsoft 365 tenant (e.g. by browsing to SharePoint Online), open a new browser tab and paste the URL you've just created. Azure AD will eventually ask you to login, and then it will prompt you to consent permissions to the app:
 
@@ -190,6 +194,56 @@ Click on **Accept** to accept the requested permissions. At that point you will 
 
 > [!Note]
 > If you get errors during this consent process it's most likely because you are not an Azure AD tenant administrator. Please contact your admins and check with them for further steps.
+
+### Step 2: Configure your project authentication settings
+
+If you're using the PnP Management Shell Azure AD application then you can leave out the application id and tenant id from your authentication setup. Below samples show how to use the `InteractiveAuthenticationProvider` in combination with the PnP Management Shell Azure AD application. Using code you can configure authentication like this:
+
+```csharp
+var host = 
+    Host.CreateDefaultBuilder()                
+        // Configure logging
+        .ConfigureLogging((hostingContext, logging) =>
+        {
+            logging.AddEventSourceLogger();
+            logging.AddConsole();
+        })
+        .ConfigureServices((hostingContext, services) =>
+        {                
+            // Add the PnP Core SDK library services
+            services.AddPnPCore();
+            // Add the PnP Core SDK library services configuration from the appsettings.json file
+            services.Configure<PnPCoreOptions>(hostingContext.Configuration.GetSection("PnPCore"));
+            // Add the PnP Core SDK Authentication Providers
+            services.AddPnPCoreAuthentication(options =>
+            {
+                options.Credentials.Configurations.Add("Default", new PnPCoreAuthenticationCredentialConfigurationOptions
+                {
+                    Interactive = new PnPCoreAuthenticationInteractiveOptions { },
+                });
+                options.Credentials.DefaultConfiguration = "Default";
+            });
+        })
+        // Let the builder know we're running in a console
+        .UseConsoleLifetime()
+        // Add services to the container
+        .Build();
+```
+
+This snippet show the JSON authentication section to use:
+
+```json
+"Credentials": {
+    "DefaultConfiguration": "myAuthConfig",
+        "Configurations": {
+            "myAuthConfig": {
+                "Interactive": {
+                "RedirectUri": "http://localhost"
+                }
+            }
+    }
+}
+```
 
 ## Using the credential manager
 

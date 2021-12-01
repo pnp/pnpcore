@@ -2,7 +2,7 @@
 
 namespace PnP.Core.Services.Core.CSOM.QueryAction
 {
-    internal class CSOMFieldParameter : Parameter
+    internal sealed class CSOMFieldParameter : Parameter
     {
         internal ICSOMField Field { get; set; }
 

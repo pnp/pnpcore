@@ -309,8 +309,8 @@ namespace PnP.Core.Test.Utilities
                     // Just to show a different syntex doing the same
                     var web = await context.Web.GetAsync(w => w.UserCustomActions);
                     var query = from uca in web.UserCustomActions
-                            where uca.Name == customActionName
-                            select uca;
+                                where uca.Name == customActionName
+                                select uca;
                     IUserCustomAction foundUserCustomAction = query.FirstOrDefault();
                     await foundUserCustomAction.DeleteAsync();
                 }

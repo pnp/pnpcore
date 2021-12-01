@@ -8,7 +8,7 @@ using System.Text.Json;
 
 namespace PnP.Core.Model.SharePoint
 {
-    internal class FieldValueCollection : IFieldValueCollection
+    internal sealed class FieldValueCollection : IFieldValueCollection
     {
         private bool hasChangedDueToDeleteOrAdd;
 
@@ -67,7 +67,7 @@ namespace PnP.Core.Model.SharePoint
         internal void Commit()
         {
             hasChangedDueToDeleteOrAdd = false;
-            foreach(var fieldValue in Values)
+            foreach (var fieldValue in Values)
             {
                 if (fieldValue != null && fieldValue is FieldValue)
                 {
@@ -113,7 +113,7 @@ namespace PnP.Core.Model.SharePoint
 
             foreach (var item in Values)
             {
-                sb.Append($"{(item as FieldLookupValue).ToValidateUpdateItemJson()};#");
+                sb.Append($"{(item as FieldLookupValue).ToValidateUpdateItemJson()};#;#");
             }
 
             return sb.ToString();
@@ -129,8 +129,8 @@ namespace PnP.Core.Model.SharePoint
         }
 
         public void RemoveTaxonomyFieldValue(Guid termId)
-        {            
-            foreach(var valueToRemove in Values.Cast<IFieldTaxonomyValue>().Where(p => p.TermId == termId).ToList())
+        {
+            foreach (var valueToRemove in Values.Cast<IFieldTaxonomyValue>().Where(p => p.TermId == termId).ToList())
             {
                 Values.Remove(valueToRemove);
             }

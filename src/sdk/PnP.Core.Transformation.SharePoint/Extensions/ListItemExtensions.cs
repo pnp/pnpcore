@@ -1,8 +1,6 @@
 ﻿using Microsoft.SharePoint.Client;
 using PnP.Core.Transformation.SharePoint.Model;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace PnP.Core.Transformation.SharePoint.Extensions
 {

@@ -2,7 +2,7 @@
 
 namespace PnP.Core.Model.SharePoint
 {
-    internal class SectionEmphasis
+    internal sealed class SectionEmphasis
     {
         [JsonPropertyName("zoneEmphasis")]
         [JsonConverter(typeof(EmphasisJsonConverter))]

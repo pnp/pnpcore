@@ -17,14 +17,26 @@ namespace PnP.Core.Transformation.SharePoint.Functions
     /// </list>
     /// This type of comparison is useful when comparing the XML documents used as messages, configuration, etc. in various specifications.
     /// </summary>
-    public static class XmlComparer
+    internal static class XmlComparer
     {
+        /// <summary>
+        /// Compare two XML fragements
+        /// </summary>
+        /// <param name="xmlA">Fragment A</param>
+        /// <param name="xmlB">Fragment B</param>
+        /// <returns>Information about the equality of the fragments</returns>
         public static XmlEqualityResult AreEqual(string xmlA, string xmlB)
         {
             return AreEqual(ParseXml(xmlA).Root, ParseXml(xmlB).Root);
         }
 
 
+        /// <summary>
+        /// Compare two XML fragements
+        /// </summary>
+        /// <param name="xmlA">Fragment A</param>
+        /// <param name="xmlB">Fragment B</param>
+        /// <returns>Information about the equality of the fragments</returns>
         public static XmlEqualityResult AreEqual(XElement xmlA, XElement xmlB)
         {
             if (xmlA == null)
@@ -178,6 +190,12 @@ namespace PnP.Core.Transformation.SharePoint.Functions
             return -1;
         }
 
+        /// <summary>
+        /// Parses the provided XML
+        /// </summary>
+        /// <param name="xml">Provided XML</param>
+        /// <returns>Parsed XML as <see cref="XDocument"/></returns>
+        /// <exception cref="ArgumentException"></exception>
         public static XDocument ParseXml(string xml)
         {
             try

@@ -1,11 +1,11 @@
 ﻿using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using PnP.Core.Services;
+using PnP.Core.Test.Common.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using PnP.Core.Test.Common.Utilities;
 
 namespace PnP.Core.Test.Common.Services
 {

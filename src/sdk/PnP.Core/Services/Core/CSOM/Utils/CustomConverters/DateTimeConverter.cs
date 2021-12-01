@@ -5,7 +5,7 @@ using System.Text.Json.Serialization;
 
 namespace PnP.Core.Services.Core.CSOM.Utils.CustomConverters
 {
-    internal class DateTimeConverter : JsonConverter<DateTime>
+    internal sealed class DateTimeConverter : JsonConverter<DateTime>
     {
         internal CSOMDateConverter DateConverter = new CSOMDateConverter();
 
@@ -15,7 +15,7 @@ namespace PnP.Core.Services.Core.CSOM.Utils.CustomConverters
             //ok, so far I found two different date formats returned from the endpoint
             //You can check out both in \PnP.Core.Test\Services\Core\CSOM\Utils\CSOMResponseHelperTests.cs
             //Hence we need two strategies
-            DateTime? result =  DateConverter.ConverDate(value);
+            DateTime? result = DateConverter.ConverDate(value);
 
             return result.HasValue ? result.Value : DateTime.MinValue;
         }

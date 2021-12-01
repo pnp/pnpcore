@@ -1,5 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PnP.Core.Model.SharePoint;
+using PnP.Core.QueryModel;
 using PnP.Core.Test.Utilities;
 using System;
 using System.Linq;
@@ -602,6 +603,40 @@ namespace PnP.Core.Test.SharePoint
                                       select ct).FirstOrDefault();
 
                 Assert.IsNull(fieldToFind);
+            }
+        }
+
+        [TestMethod]
+        public async Task TaxonomyFieldPropertiesTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var termStore = await context.TermStore.GetAsync(t => t.Groups);
+                var group = termStore.Groups.AsRequested().FirstOrDefault(g => g.Name == "System");
+                await group.LoadAsync(g => g.Sets);
+                var termSet = group.Sets.AsRequested().FirstOrDefault();
+
+                var fieldTitle = "tax_test_" + DateTime.UtcNow.Ticks;
+                await context.Web.Fields.AddTaxonomyAsync(fieldTitle, new FieldTaxonomyOptions
+                {
+                    TermSetId = new Guid(termSet.Id),
+                    TermStoreId = new Guid(termStore.Id),
+                });
+
+                // request it again, since not all properties are mapped on the initail creation request
+                var newField = await context.Web.Fields.FirstOrDefaultAsync(f => f.Title == fieldTitle);
+
+                Assert.IsTrue(newField.TermSetId.Equals(new Guid(termSet.Id)));
+                Assert.IsTrue(newField.SspId.Equals(new Guid(termStore.Id)));
+                Assert.IsTrue(newField.IsTermSetValid);
+
+                var fieldsToDelete = await context.Web.Fields.Where(f => f.Title.StartsWith("tax_test")).ToListAsync();
+
+                foreach (var field in fieldsToDelete)
+                {
+                    field.Delete();
+                }
             }
         }
     }

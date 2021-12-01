@@ -2,7 +2,7 @@
 
 namespace PnP.Core.Admin.Model.SharePoint
 {
-    internal class RecycledSiteCollection : IRecycledSiteCollection
+    internal sealed class RecycledSiteCollection : IRecycledSiteCollection
     {
         public Guid Id { get; set; }
 

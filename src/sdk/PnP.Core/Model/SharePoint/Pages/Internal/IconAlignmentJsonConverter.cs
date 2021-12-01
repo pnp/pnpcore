@@ -8,7 +8,7 @@ namespace PnP.Core.Model.SharePoint
     /// The IconAlignment property is used on collapsible sections and has string values left and right. However when no value is set 
     /// the property acts as bool property with value true
     /// </summary>
-    internal class IconAlignmentJsonConverter : JsonConverter<string>
+    internal sealed class IconAlignmentJsonConverter : JsonConverter<string>
     {
         public override bool CanConvert(Type typeToConvert)
         {
@@ -44,7 +44,7 @@ namespace PnP.Core.Model.SharePoint
             else
             {
                 writer.WriteStringValue(value);
-            }            
+            }
         }
     }
 }

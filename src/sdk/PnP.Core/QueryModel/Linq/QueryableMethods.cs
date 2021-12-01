@@ -62,7 +62,7 @@ namespace PnP.Core.QueryModel
                     && type.GetGenericTypeDefinition() == typeof(Expression<>)
                     && type.GetGenericArguments()[0].IsGenericType
                     && type.GetGenericArguments()[0].GetGenericArguments().Length == funcGenericArgs;
-            
+
             /* Not used, so commenting it
             static bool IsSelector<T>(Type type)
                 => type.IsGenericType

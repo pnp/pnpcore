@@ -5,7 +5,7 @@ namespace PnP.Core.Model.SharePoint
     /// <summary>
     /// Json header control data that will be included in each client side web part (de-)serialization (data-sp-controldata)
     /// </summary>
-    internal class HeaderControlData
+    internal sealed class HeaderControlData
     {
         /// <summary>
         /// Gets or sets JsonProperty "id"

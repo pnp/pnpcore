@@ -3,7 +3,7 @@
     /// <summary>
     /// Operators on KQL property filters
     /// </summary>
-    public enum KQLPropertyOperator
+    internal enum KQLPropertyOperator
     {
         Matches = 0,
         EqualTo = 1,

@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
 
 namespace PnP.Core.Transformation.Services.MappingProviders
-{    
+{
     /// <summary>
     /// Provides the basic interface for a generic mapping provider
     /// </summary>

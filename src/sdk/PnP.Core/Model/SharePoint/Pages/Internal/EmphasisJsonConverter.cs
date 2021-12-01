@@ -4,7 +4,7 @@ using System.Text.Json.Serialization;
 
 namespace PnP.Core.Model.SharePoint
 {
-    internal class EmphasisJsonConverter : JsonConverter<int>
+    internal sealed class EmphasisJsonConverter : JsonConverter<int>
     {
         public override bool CanConvert(Type typeToConvert)
         {

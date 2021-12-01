@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using PnP.Core.Transformation.Model;
+﻿using PnP.Core.Transformation.Model;
 using PnP.Core.Transformation.Services.Core;
+using System.Collections.Generic;
 
 namespace PnP.Core.Transformation.Services.MappingProviders
 {

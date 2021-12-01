@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace PnP.Core.Transformation.SharePoint.Model
+﻿namespace PnP.Core.Transformation.SharePoint.Model
 {
     /// <summary>
     /// Possible layouts used by wiki or webpart pages

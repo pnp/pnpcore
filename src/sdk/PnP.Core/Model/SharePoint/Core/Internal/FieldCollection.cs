@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace PnP.Core.Model.SharePoint
 {
-    internal partial class FieldCollection : QueryableDataModelCollection<IField>, IFieldCollection
+    internal sealed class FieldCollection : QueryableDataModelCollection<IField>, IFieldCollection
     {
         internal const string FIELD_XML_FORMAT = @"<Field Type=""{0}"" Name=""{1}"" DisplayName=""{2}"" ID=""{3}"" Group=""{4}"" Required=""{5}"" {6}/>";
         internal const string FIELD_XML_FORMAT_WITH_CHILD_NODES = @"<Field Type=""{0}"" Name=""{1}"" DisplayName=""{2}"" ID=""{3}"" Group=""{4}"" Required=""{5}"" {6}>{7}</Field>";

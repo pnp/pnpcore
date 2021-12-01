@@ -1,7 +1,7 @@
-﻿using PnP.Core.Model.Security;
-using PnP.Core.Services;
+﻿using PnP.Core.Services;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
@@ -11,7 +11,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a List object of SharePoint Online
     /// </summary>
     [ConcreteType(typeof(List))]
-    public interface IList : IDataModel<IList>, IDataModelGet<IList>, IDataModelLoad<IList>, IDataModelUpdate, IDataModelDelete, IDataModelSupportingGetChanges, IQueryableDataModel
+    public interface IList : IDataModel<IList>, IDataModelGet<IList>, IDataModelLoad<IList>, IDataModelUpdate, IDataModelDelete, IDataModelSupportingGetChanges, ISecurableObject, IQueryableDataModel
     {
         #region Properties
 
@@ -177,6 +177,31 @@ namespace PnP.Core.Model.SharePoint
         public bool IsApplicationList { get; set; }
 
         /// <summary>
+        /// Gets a bool value that indicates whether the list is a gallery, such list templates, Web Parts, or Master Pages.
+        /// </summary>
+        public bool IsCatalog { get; }
+
+        /// <summary>
+        /// Is this library the default document library of this site
+        /// </summary>
+        public bool IsDefaultDocumentLibrary { get; }
+
+        /// <summary>
+        /// Gets a bool value that indicates whether the document library is a private list with restricted permissions, such as for Solutions
+        /// </summary>
+        public bool IsPrivate { get; }
+
+        /// <summary>
+        /// Is this library the site's site asset library
+        /// </summary>
+        public bool IsSiteAssetsLibrary { get; }
+
+        /// <summary>
+        /// Specifies whether the list is system list that does not contain end user data and created by system account.
+        /// </summary>
+        public bool IsSystemList { get; }
+
+        /// <summary>
         /// Defines the Read Security property, optional attribute.
         /// </summary>
         public int ReadSecurity { get; set; }
@@ -202,17 +227,31 @@ namespace PnP.Core.Model.SharePoint
         string ListItemEntityTypeFullName { get; }
 
         /// <summary>
+        /// Number of items in the library
+        /// </summary>
+        public int ItemCount { get; }
+
+        /// <summary>
         /// Collection of list items in the current List object
+        /// Implements <see cref="IQueryable{T}"/>. <br />
+        /// See <see href="https://pnp.github.io/pnpcore/using-the-sdk/basics-getdata.html#requesting-model-collections">Requesting model collections</see> 
+        /// and <see href="https://pnp.github.io/pnpcore/using-the-sdk/basics-iqueryable.html">IQueryable performance considerations</see> to learn more.
         /// </summary>
         public IListItemCollection Items { get; }
 
         /// <summary>
         /// Collection of content types for this list
+        /// Implements <see cref="IQueryable{T}"/>. <br />
+        /// See <see href="https://pnp.github.io/pnpcore/using-the-sdk/basics-getdata.html#requesting-model-collections">Requesting model collections</see> 
+        /// and <see href="https://pnp.github.io/pnpcore/using-the-sdk/basics-iqueryable.html">IQueryable performance considerations</see> to learn more.
         /// </summary>
         public IContentTypeCollection ContentTypes { get; }
 
         /// <summary>
         /// Collection of fields for this list
+        /// Implements <see cref="IQueryable{T}"/>. <br />
+        /// See <see href="https://pnp.github.io/pnpcore/using-the-sdk/basics-getdata.html#requesting-model-collections">Requesting model collections</see> 
+        /// and <see href="https://pnp.github.io/pnpcore/using-the-sdk/basics-iqueryable.html">IQueryable performance considerations</see> to learn more.
         /// </summary>
         public IFieldCollection Fields { get; }
 
@@ -222,19 +261,20 @@ namespace PnP.Core.Model.SharePoint
         public IInformationRightsManagementSettings InformationRightsManagementSettings { get; }
 
         /// <summary>
-        /// Collection of role assignments for this list
-        /// </summary>
-        public IRoleAssignmentCollection RoleAssignments { get; }
-        
-        /// <summary>
         /// Get a list of the views
+        /// Implements <see cref="IQueryable{T}"/>. <br />
+        /// See <see href="https://pnp.github.io/pnpcore/using-the-sdk/basics-getdata.html#requesting-model-collections">Requesting model collections</see> 
+        /// and <see href="https://pnp.github.io/pnpcore/using-the-sdk/basics-iqueryable.html">IQueryable performance considerations</see> to learn more.
         /// </summary>
         public IViewCollection Views { get; }
 
         /// <summary>
-        /// Returns if the list has unique role assignments
+        /// Collection of list webhooks
+        /// Implements <see cref="IQueryable{T}"/>. <br />
+        /// See <see href="https://pnp.github.io/pnpcore/using-the-sdk/basics-getdata.html#requesting-model-collections">Requesting model collections</see> 
+        /// and <see href="https://pnp.github.io/pnpcore/using-the-sdk/basics-iqueryable.html">IQueryable performance considerations</see> to learn more.
         /// </summary>
-        public bool HasUniqueRoleAssignments { get; }
+        public IListSubscriptionCollection Webhooks { get; }
 
         /// <summary>
         /// A special property used to add an asterisk to a $select statement
@@ -461,76 +501,6 @@ namespace PnP.Core.Model.SharePoint
         /// <param name="blockEdit">Prevent editing of the list (Record)</param>
         /// <param name="syncToItems">If true the compliance tag is synced to the list items in this list</param>
         public Task SetComplianceTagBatchAsync(Batch batch, string complianceTagValue, bool blockDelete, bool blockEdit, bool syncToItems);
-
-        /// <summary>
-        /// Creates unique role assignments for the list.
-        /// </summary>
-        /// <param name="copyRoleAssignments">Specifies whether to copy the role assignments from the parent securable object. If the value is false, the collection of role assignments must contain only 1 role assignment containing the current user after the operation.</param>
-        /// <param name="clearSubscopes">If the securable object is a site, and the clearsubscopes parameter is true, the role assignments for all child securable objects in the current site and in the sites which inherit role assignments from the current site must be cleared and those securable objects will inherit role assignments from the current site after this call. If the securable object is a site, and the clearsubscopes parameter is false, the role assignments for all child securable objects which do not inherit role assignments from their parent object must remain unchanged. If the securable object is not a site, and the clearsubscopes parameter is true, the role assignments for all child securable objects must be cleared and those securable objects will inherit role assignments from the current securable object after this call. If the securable object is not a site, and the clearsubscopes parameter is false, the role assignments for all child securable objects which do not inherit role assignments from their parent object must remain unchanged.</param>
-        public void BreakRoleInheritance(bool copyRoleAssignments, bool clearSubscopes);
-
-        /// <summary>
-        /// Creates unique role assignments for the list.
-        /// </summary>
-        /// <param name="copyRoleAssignments">Specifies whether to copy the role assignments from the parent securable object. If the value is false, the collection of role assignments must contain only 1 role assignment containing the current user after the operation.</param>
-        /// <param name="clearSubscopes">If the securable object is a site, and the clearsubscopes parameter is true, the role assignments for all child securable objects in the current site and in the sites which inherit role assignments from the current site must be cleared and those securable objects will inherit role assignments from the current site after this call. If the securable object is a site, and the clearsubscopes parameter is false, the role assignments for all child securable objects which do not inherit role assignments from their parent object must remain unchanged. If the securable object is not a site, and the clearsubscopes parameter is true, the role assignments for all child securable objects must be cleared and those securable objects will inherit role assignments from the current securable object after this call. If the securable object is not a site, and the clearsubscopes parameter is false, the role assignments for all child securable objects which do not inherit role assignments from their parent object must remain unchanged.</param>
-        public Task BreakRoleInheritanceAsync(bool copyRoleAssignments, bool clearSubscopes);
-
-        /// <summary>
-        /// Removes the local role assignments so that the list, and all its descendant objects, re-inherit role assignments from the parent object.
-        /// </summary>
-        public void ResetRoleInheritance();
-
-        /// <summary>
-        /// Removes the local role assignments so that the list, and all its descendant objects, re-inherit role assignments from the parent object.
-        /// </summary>
-        public Task ResetRoleInheritanceAsync();
-
-        /// <summary>
-        /// Returns the role definitions for a specific principal id (IUser.Id or ISharePointGroup.Id)
-        /// </summary>
-        /// <param name="principalId"></param>
-        /// <returns></returns>
-        public IRoleDefinitionCollection GetRoleDefinitions(int principalId);
-
-        /// <summary>
-        /// Returns the role definitions for a specific principal id (IUser.Id or ISharePointGroup.Id)
-        /// </summary>
-        /// <param name="principalId"></param>
-        /// <returns></returns>
-        public Task<IRoleDefinitionCollection> GetRoleDefinitionsAsync(int principalId);
-
-        /// <summary>
-        /// Add role definitions for a specific principal id (IUser.Id or ISharePointGroup.Id)
-        /// </summary>
-        /// <param name="principalId"></param>
-        /// <param name="names"></param>
-        /// <returns></returns>
-        public bool AddRoleDefinitions(int principalId, params string[] names);
-
-        /// <summary>
-        /// Adds role definitions for a specific principal id (IUser.Id or ISharePointGroup.Id)
-        /// </summary>
-        /// <param name="principalId"></param>
-        /// <param name="names"></param>
-        /// <returns></returns>
-        public Task<bool> AddRoleDefinitionsAsync(int principalId, params string[] names);
-
-        /// <summary>
-        /// Adds role definitions for a specific principal id (IUser.Id or ISharePointGroup.Id)
-        /// </summary>
-        /// <param name="principalId"></param>
-        /// <param name="names"></param>
-        /// <returns></returns>
-        public bool RemoveRoleDefinitions(int principalId, params string[] names);
-
-        /// <summary>
-        /// adds role definitions for a specific principal id (IUser.Id or ISharePointGroup.Id)
-        /// </summary>
-        /// <param name="principalId"></param>
-        /// <param name="names"></param>
-        /// <returns></returns>
-        public Task<bool> RemoveRoleDefinitionsAsync(int principalId, params string[] names);
 
         /// <summary>
         /// Adds a folder

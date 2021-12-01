@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Microsoft.SharePoint.Client;
-using PnP.Core.Transformation.Model;
-using PnP.Core.Transformation.Services.Core;
-using PnP.Core.Transformation.Services.MappingProviders;
+﻿using PnP.Core.Transformation.Services.MappingProviders;
 using PnP.Core.Transformation.SharePoint.MappingFiles;
 
 namespace PnP.Core.Transformation.SharePoint.Services.MappingProviders

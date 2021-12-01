@@ -27,7 +27,7 @@
         /// Clears the specified permission for the current instance.
         /// </summary>
         void Clear(PermissionKind permissionKind);
-        
+
         /// <summary>
         /// Clears all permissions for the current instance.
         /// </summary>

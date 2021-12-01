@@ -1925,16 +1925,16 @@ namespace PnP.Core.Test.SharePoint
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
             {
                 var list = await context.Web.Lists.GetByTitleAsync(libraryName, l => l.RootFolder.QueryProperties(f => f.ServerRelativeUrl));
-                
+
                 const string fileContent1 = "PnP Rocks !!!";
                 const string fileContent2 = "BlahBlahBlah???";
-                
+
                 var contentStream1 = new MemoryStream(Encoding.UTF8.GetBytes(fileContent1));
                 var contentStream2 = new MemoryStream(Encoding.UTF8.GetBytes(fileContent2));
 
                 string documentName = $"{nameof(GetFileVersionContentAsyncTest)}.txt";
                 IFile testDocument = await list.RootFolder.Files.AddAsync(documentName, contentStream1);
-                
+
                 // Create 2 additional minor versions
                 await testDocument.CheckoutAsync();
                 await testDocument.CheckinAsync();
@@ -1945,15 +1945,15 @@ namespace PnP.Core.Test.SharePoint
                 await testDocument.CheckoutAsync();
                 testDocument = await list.RootFolder.Files.AddAsync(documentName, contentStream2, true);
                 await testDocument.CheckinAsync("OVERWROTE A FILE", CheckinType.MajorCheckIn);
-                
+
                 // Create another major version
                 await testDocument.CheckoutAsync();
                 await testDocument.CheckinAsync("TEST COMMENT", CheckinType.MajorCheckIn);
-                
-                IFile documentWithVersions = await context.Web.GetFileByServerRelativeUrlAsync(testDocument.ServerRelativeUrl, 
+
+                IFile documentWithVersions = await context.Web.GetFileByServerRelativeUrlAsync(testDocument.ServerRelativeUrl,
                     f => f.Versions,
                     f => f.CheckInComment,
-                    f => f.MajorVersion, 
+                    f => f.MajorVersion,
                     f => f.MinorVersion,
                     f => f.UIVersionLabel);
 
@@ -1963,14 +1963,14 @@ namespace PnP.Core.Test.SharePoint
                 Assert.AreEqual("2.0", documentWithVersions.UIVersionLabel);
 
                 Assert.IsNotNull(documentWithVersions.Versions);
-                
+
                 var versions = documentWithVersions.Versions.AsRequested().ToList();
 
                 // The versions history contains 2 versions
                 Assert.AreEqual(4, versions.Count);
-                
+
                 Assert.AreEqual($"_vti_history/1/{libraryName}/{documentName}", versions.ElementAt(0).Url);
-                
+
                 Assert.AreEqual("0.1", versions.ElementAt(0).VersionLabel);
                 Assert.AreEqual("0.2", versions.ElementAt(1).VersionLabel);
                 Assert.AreEqual("0.3", versions.ElementAt(2).VersionLabel);
@@ -1986,7 +1986,7 @@ namespace PnP.Core.Test.SharePoint
                 downloadedContentStream.Seek(0, SeekOrigin.Begin);
                 // Get string from the content stream
                 string downloadedContent = await new StreamReader(downloadedContentStream).ReadToEndAsync();
-                
+
                 Assert.IsTrue(!string.IsNullOrEmpty(downloadedContent));
                 Assert.AreEqual(fileContent1, downloadedContent);
                 Assert.AreNotEqual(fileContent2, downloadedContent);
@@ -2864,7 +2864,7 @@ namespace PnP.Core.Test.SharePoint
                 Assert.IsNotNull(documentWithVersions.Versions);
 
                 var versions = documentWithVersions.Versions.AsRequested().ToList();
-                
+
                 // The versions history contains 2 versions
                 Assert.AreEqual(2, versions.Count);
                 Assert.AreEqual($"_vti_history/1/{libraryName}/{documentName}", versions.ElementAt(0).Url);
@@ -2895,9 +2895,9 @@ namespace PnP.Core.Test.SharePoint
                 await context.ExecuteAsync();
 
                 Assert.IsNotNull(documentWithVersions.Versions);
-                
+
                 var versions = documentWithVersions.Versions.AsRequested().ToList();
-                
+
                 // The versions history contains 2 versions
                 Assert.AreEqual(2, versions.Count);
                 Assert.AreEqual($"_vti_history/1/{libraryName}/{documentName}", versions.ElementAt(0).Url);
@@ -2928,7 +2928,7 @@ namespace PnP.Core.Test.SharePoint
                 await context.ExecuteAsync();
 
                 Assert.IsNotNull(documentWithVersions.Versions);
-                
+
                 var versions = documentWithVersions.Versions.AsRequested().ToList();
 
                 // The versions history contains 2 versions

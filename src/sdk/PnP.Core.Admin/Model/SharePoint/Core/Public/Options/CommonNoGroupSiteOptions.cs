@@ -15,6 +15,16 @@ namespace PnP.Core.Admin.Model.SharePoint
         /// <param name="title">Title of the site to create</param>
         public CommonNoGroupSiteOptions(Uri url, string title)
         {
+            if (url == null)
+            {
+                throw new ArgumentNullException(nameof(url));
+            }
+
+            if (string.IsNullOrEmpty(title))
+            {
+                throw new ArgumentNullException(nameof(title));
+            }
+
             Url = url;
             Title = title;
         }
@@ -63,11 +73,6 @@ namespace PnP.Core.Admin.Model.SharePoint
         /// The Sensitivity label to use. See https://www.youtube.com/watch?v=NxvUXBiPFcw for more information.
         /// </summary>
         public Guid SensitivityLabelId { get; set; }
-
-        /// <summary>
-        /// The geography in which to create the site collection. Only applicable to multi-geo enabled tenants
-        /// </summary>
-        public GeoLocation? PreferredDataLocation { get; set; }
 
     }
 }

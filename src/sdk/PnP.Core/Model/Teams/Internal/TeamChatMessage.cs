@@ -7,8 +7,7 @@ using System.Text.Json;
 namespace PnP.Core.Model.Teams
 {
     [GraphType(Uri = chatMessageUri, Beta = true, LinqGet = baseUri)]
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Usage", "CA2243:Attribute string literals should parse correctly", Justification = "<Pending>")]
-    internal partial class TeamChatMessage : BaseDataModel<ITeamChatMessage>, ITeamChatMessage
+    internal sealed class TeamChatMessage : BaseDataModel<ITeamChatMessage>, ITeamChatMessage
     {
         private const string baseUri = "teams/{Site.GroupId}/channels/{Parent.GraphId}/messages";
         private const string chatMessageUri = baseUri + "/{GraphId}";
@@ -25,13 +24,13 @@ namespace PnP.Core.Model.Teams
                 body.body.content = Body.Content;
                 body.body.contentType = Body.ContentType.ToString();
 
-                if(Attachments.Length > 0)
+                if (Attachments.Length > 0)
                 {
                     dynamic attachmentList = new List<dynamic>();
-                    foreach(var attachment in Attachments)
+                    foreach (var attachment in Attachments)
                     {
                         dynamic attach = new ExpandoObject();
-                        attach.id = attachment.Id;                        
+                        attach.id = attachment.Id;
                         attach.content = attachment.Content;
                         attach.contentUrl = attachment.ContentUrl;
                         attach.contentType = attachment.ContentType;
@@ -43,7 +42,7 @@ namespace PnP.Core.Model.Teams
                     body.attachments = attachmentList;
                 }
 
-                if(HostedContents.Length > 0)
+                if (HostedContents.Length > 0)
                 {
                     dynamic hostedContentList = new List<dynamic>();
                     foreach (var hostedContent in HostedContents)
@@ -54,7 +53,7 @@ namespace PnP.Core.Model.Teams
 
                         //Complex named parameter
                         ((IDictionary<string, object>)hContent).Add("@microsoft.graph.temporaryId", hostedContent.Id);
-                        
+
                         hostedContentList.Add(hContent);
                     }
 

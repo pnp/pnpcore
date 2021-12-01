@@ -1,7 +1,7 @@
 ﻿namespace PnP.Core.Model.Teams
 {
     [GraphType]
-    internal partial class TeamFunSettings : BaseDataModel<ITeamFunSettings>, ITeamFunSettings
+    internal sealed class TeamFunSettings : BaseDataModel<ITeamFunSettings>, ITeamFunSettings
     {
         #region Construction
         public TeamFunSettings()

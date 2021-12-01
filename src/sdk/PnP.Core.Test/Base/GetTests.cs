@@ -677,7 +677,7 @@ namespace PnP.Core.Test.Base
 
                 Assert.IsTrue(foundList != null);
                 Assert.IsTrue(context.Web.Lists.Requested);
-                
+
                 var firstList = context.Web.Lists.AsRequested().First();
                 Assert.AreEqual(firstList.Id, foundList.Id);
                 Assert.IsTrue(foundList.Requested);
@@ -690,7 +690,7 @@ namespace PnP.Core.Test.Base
                 var firstContentType = foundList.ContentTypes.AsRequested().First();
                 Assert.IsTrue(firstContentType.IsPropertyAvailable(p => p.Name));
                 Assert.IsTrue(firstContentType.IsPropertyAvailable(p => p.FieldLinks));
-                
+
                 var firstFieldLink = firstContentType.FieldLinks.AsRequested().First();
                 Assert.IsTrue(firstFieldLink.IsPropertyAvailable(p => p.Name));
             }
@@ -1039,7 +1039,7 @@ namespace PnP.Core.Test.Base
                 // Expand for a property that is implemented using it's own graph query which has url parameters defined and which uses a JsonPath
                 // Url for loading installed apps is teams/{Site.GroupId}/installedapps?$expand=TeamsApp
                 team = await context.Team.GetAsync(p => p.InstalledApps.QueryProperties(p => p.DistributionMethod));
-                
+
                 foreach (var installedApp in team.InstalledApps.AsRequested())
                 {
                     Assert.IsTrue(installedApp.IsPropertyAvailable(p => p.DistributionMethod));

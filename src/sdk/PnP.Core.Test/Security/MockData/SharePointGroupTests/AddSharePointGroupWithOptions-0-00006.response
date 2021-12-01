@@ -1,0 +1,9 @@
+--batchresponse_824a74af-2a93-4734-9c8e-fb04bc2953ac
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+HTTP/1.1 200 OK
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+
+{"d":{"results":[{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-2/_api/Web/SiteGroups/GetById(22)","uri":"https://bertonline.sharepoint.com/sites/prov-2/_api/Web/SiteGroups/GetById(22)","type":"SP.Group"},"Owner":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-2/_api/Web/SiteGroups/GetById(22)/Owner"}},"Users":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-2/_api/Web/SiteGroups/GetById(22)/Users"}},"Id":22,"IsHiddenInUI":false,"LoginName":"test group","Title":"test group","PrincipalType":8,"AllowMembersEditMembership":true,"AllowRequestToJoinLeave":true,"AutoAcceptRequestToJoinLeave":true,"CanCurrentUserEditMembership":true,"CanCurrentUserManageGroup":true,"CanCurrentUserViewMembership":true,"Description":"just a sample test group","OnlyAllowMembersViewMembership":true,"OwnerTitle":"Bert Jansen (Cloud)","RequestToJoinLeaveEmailSetting":"joe@contoso.sharepoint.com"}]}}
+--batchresponse_824a74af-2a93-4734-9c8e-fb04bc2953ac--

@@ -7,7 +7,7 @@
     /// <summary>
     /// Represents a reference to a field within a query.
     /// </summary>
-    public class FieldReference
+    internal class FieldReference
     {
         /// <summary>
         /// Field alias.

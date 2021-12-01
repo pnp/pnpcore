@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace PnP.Core.Model.SharePoint
 {
-    internal partial class FolderCollection : QueryableDataModelCollection<IFolder>, IFolderCollection
+    internal sealed class FolderCollection : QueryableDataModelCollection<IFolder>, IFolderCollection
     {
         public FolderCollection(PnPContext context, IDataModelParent parent, string memberName = null) : base(context, parent, memberName)
         {

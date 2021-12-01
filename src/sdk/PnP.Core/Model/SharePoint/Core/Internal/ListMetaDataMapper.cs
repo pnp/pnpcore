@@ -20,7 +20,7 @@ namespace PnP.Core.Model.SharePoint
             {
                 entityName = $"OData__x005f_catalogs_x002f_{entityName}";
             }
-            
+
             // Build the name
             string entityNameToUse = $"{entityName.Replace(" ", "")}{(isList ? "List" : "")}";
             // Ensure first character is upper case
@@ -99,9 +99,9 @@ namespace PnP.Core.Model.SharePoint
                 listTemplateType == ListTemplateType.MySiteDocumentLibrary ||
                 listTemplateType == ListTemplateType.SharingLinks ||
                 // IWConvertedForms
-                listTemplateType == (ListTemplateType)10102 || 
+                listTemplateType == (ListTemplateType)10102 ||
                 // Sharing Links
-                listTemplateType == (ListTemplateType)3300 )
+                listTemplateType == (ListTemplateType)3300)
             {
                 isList = false;
                 isLibrary = true;
@@ -109,7 +109,7 @@ namespace PnP.Core.Model.SharePoint
 
             if (listTemplateType.ToString().EndsWith("Catalog") ||
                 listTemplateType == ListTemplateType.MaintenanceLogs ||
-                listTemplateType == ListTemplateType.NoCodePublic || 
+                listTemplateType == ListTemplateType.NoCodePublic ||
                 listTemplateType == ListTemplateType.UserInformation)
             {
                 isList = false;

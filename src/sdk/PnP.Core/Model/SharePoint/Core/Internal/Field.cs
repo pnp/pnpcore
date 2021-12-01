@@ -14,7 +14,7 @@ namespace PnP.Core.Model.SharePoint
     /// </summary>
     [SharePointType("SP.Field", Target = typeof(Web), Uri = "_api/Web/Fields('{Id}')", Get = "_api/Web/Fields", LinqGet = "_api/Web/Fields")]
     [SharePointType("SP.Field", Target = typeof(List), Uri = "_api/Web/Lists(guid'{Parent.Id}')/Fields('{Id}')", Get = "_api/Web/Lists(guid'{Parent.Id}')/Fields", LinqGet = "_api/Web/Lists(guid'{Parent.Id}')/Fields")]
-    internal partial class Field : BaseDataModel<IField>, IField
+    internal sealed class Field : BaseDataModel<IField>, IField
     {
         internal const string FieldOptionsAdditionalInformationKey = "FieldOptions";
 
@@ -170,6 +170,30 @@ namespace PnP.Core.Model.SharePoint
 
         public RelationshipDeleteBehaviorType RelationshipDeleteBehavior { get => GetValue<RelationshipDeleteBehaviorType>(); set => SetValue(value); }
 
+        public Guid AnchorId { get => GetValue<Guid>(); set => SetValue(value); }
+
+        public bool CreateValuesInEditForm { get => GetValue<bool>(); set => SetValue(value); }
+
+        public bool IsKeyword { get => GetValue<bool>(); set => SetValue(value); }
+
+        public bool IsPathRendered { get => GetValue<bool>(); set => SetValue(value); }
+
+        public bool IsAnchorValid { get => GetValue<bool>(); set => SetValue(value); }
+
+        public bool IsTermSetValid { get => GetValue<bool>(); set => SetValue(value); }
+
+        public bool Open { get => GetValue<bool>(); set => SetValue(value); }
+
+        public Guid SspId { get => GetValue<Guid>(); set => SetValue(value); }
+
+        public Guid TermSetId { get => GetValue<Guid>(); set => SetValue(value); }
+
+        public Guid TextField { get => GetValue<Guid>(); set => SetValue(value); }
+
+        public bool UserCreated { get => GetValue<bool>(); set => SetValue(value); }
+
+        public string TargetTemplate { get => GetValue<string>(); set => SetValue(value); }
+
         [KeyProperty(nameof(Id))]
         public override object Key { get => Id; set => Id = Guid.Parse(value.ToString()); }
 
@@ -318,7 +342,7 @@ namespace PnP.Core.Model.SharePoint
         {
             var fieldValueCollection = NewFieldValueCollection();
 
-            foreach(var value in fieldValues)
+            foreach (var value in fieldValues)
             {
                 fieldValueCollection.Values.Add(value);
             }
@@ -330,7 +354,7 @@ namespace PnP.Core.Model.SharePoint
         {
             var fieldValueCollection = NewFieldValueCollection();
 
-            foreach(var keyValuePair in fieldValues)
+            foreach (var keyValuePair in fieldValues)
             {
                 fieldValueCollection.Values.Add(NewFieldTaxonomyValue(keyValuePair.Key, keyValuePair.Value));
             }

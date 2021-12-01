@@ -3,7 +3,7 @@
 namespace PnP.Core.Model.Security
 {
     [GraphType(Get = "groups/{GraphId}")]
-    internal partial class GraphGroup : BaseDataModel<IGraphGroup>, IGraphGroup
+    internal sealed class GraphGroup : BaseDataModel<IGraphGroup>, IGraphGroup
     {
         #region Construction
         internal GraphGroup()

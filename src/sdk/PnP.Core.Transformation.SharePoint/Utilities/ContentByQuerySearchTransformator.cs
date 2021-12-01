@@ -2,19 +2,17 @@
 using Microsoft.SharePoint.Client;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using PnP.Core.Transformation.Extensions;
-using PnP.Core.Transformation.SharePoint.KQL;
 using PnP.Core.Transformation.SharePoint.Extensions;
+using PnP.Core.Transformation.SharePoint.KQL;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace PnP.Core.Transformation.SharePoint.Utilities
 {
     #region Highlighted content properties model
 
-    public enum ContentRollupLayout
+    internal enum ContentRollupLayout
     {
         Card = 1,
         List = 2,
@@ -24,7 +22,7 @@ namespace PnP.Core.Transformation.SharePoint.Utilities
         Custom = 999
     }
 
-    public class ContentRollupWebPartProperties
+    internal class ContentRollupWebPartProperties
     {
         [JsonProperty(PropertyName = "displayMaps")]
         public string DisplayMaps { get; set; } // will be populated from json string
@@ -83,7 +81,7 @@ namespace PnP.Core.Transformation.SharePoint.Utilities
 
     #region ISearchQuery enums and classes
 
-    public enum ContentLocation
+    internal enum ContentLocation
     {
         CurrentSite = 1,
         CurrentSiteCollection = 2,
@@ -94,7 +92,7 @@ namespace PnP.Core.Transformation.SharePoint.Utilities
         SelectedSites = 99
     }
 
-    public enum DocumentType
+    internal enum DocumentType
     {
         Word = 1,
         Excel = 2,
@@ -105,7 +103,7 @@ namespace PnP.Core.Transformation.SharePoint.Utilities
         Any = 99
     }
 
-    public enum FilterType
+    internal enum FilterType
     {
         TitleContaining = 1,            // title like "*value*"
         AnyTextContaining = 2,          // any field like "*value*
@@ -117,7 +115,7 @@ namespace PnP.Core.Transformation.SharePoint.Utilities
         RecentlyAdded = 8
     }
 
-    public enum ContentType
+    internal enum ContentType
     {
         Document = 1,
         Page = 2,
@@ -132,13 +130,13 @@ namespace PnP.Core.Transformation.SharePoint.Utilities
         All = 99
     }
 
-    public enum UserType
+    internal enum UserType
     {
         CurrentUser = 1, //Indicates user is the current session user.
         SpecificUser = 2 //Indicates user is who match the given match text (e.g. name).
     }
 
-    public enum FilterOperator
+    internal enum FilterOperator
     {
         Equals = 1,
         NotEqual = 2,
@@ -151,7 +149,7 @@ namespace PnP.Core.Transformation.SharePoint.Utilities
         Between = 9
     }
 
-    public enum SortType
+    internal enum SortType
     {
         MostRecent = 1,
         MostViewed = 2,
@@ -160,7 +158,7 @@ namespace PnP.Core.Transformation.SharePoint.Utilities
         FieldDescending = 5
     }
 
-    public class ManagedPropertiesRefinerOptions
+    internal class ManagedPropertiesRefinerOptions
     {
         [JsonProperty(PropertyName = "number")]
         public int? Number { get; set; } // How many unique managed properties to return
@@ -168,7 +166,7 @@ namespace PnP.Core.Transformation.SharePoint.Utilities
         public string ManagedPropertyMatchText { get; set; } // Text to filter managed properties by name
     }
 
-    public class SearchQueryFilter
+    internal class SearchQueryFilter
     {
         [JsonProperty(PropertyName = "filterType")]
         public FilterType? FilterType { get; set; }
@@ -198,7 +196,7 @@ namespace PnP.Core.Transformation.SharePoint.Utilities
 
     }
 
-    public class SearchQuery
+    internal class SearchQuery
     {
         [JsonProperty(PropertyName = "advancedQueryText")]
         public string AdvancedQueryText { get; set; }
@@ -231,7 +229,7 @@ namespace PnP.Core.Transformation.SharePoint.Utilities
 
     #region ISiteMetadata enums and classes
 
-    public class SiteReference
+    internal class SiteReference
     {
         [JsonProperty(PropertyName = "WebId")]
         public string WebId { get; set; }
@@ -249,7 +247,7 @@ namespace PnP.Core.Transformation.SharePoint.Utilities
         public string GroupId { get; set; } // The id of the group when site reference type is 'GroupReference, It's not available for other site reference types
     }
 
-    public class SiteMetadata
+    internal class SiteMetadata
     {
         [JsonProperty(PropertyName = "Acronym")]
         public string Acronym { get; set; } // The acronym of the site. Used in banner image if the banner image url is not available
@@ -273,13 +271,13 @@ namespace PnP.Core.Transformation.SharePoint.Utilities
 
     #region ContentByQuery model
 
-    public enum SortDirection
+    internal enum SortDirection
     {
         Asc,
         Desc
     }
 
-    public enum FilterChainingOperator
+    internal enum FilterChainingOperator
     {
         /// <summary>
         /// Filter is chained using an And operator
@@ -292,7 +290,7 @@ namespace PnP.Core.Transformation.SharePoint.Utilities
         Or
     }
 
-    public enum FilterFieldQueryOperator
+    internal enum FilterFieldQueryOperator
     {
         /// <summary>
         /// Equal to
@@ -345,7 +343,7 @@ namespace PnP.Core.Transformation.SharePoint.Utilities
         ContainsAll
     }
 
-    public class ContentByQuery
+    internal class ContentByQuery
     {
         // query scope
 
@@ -407,7 +405,7 @@ namespace PnP.Core.Transformation.SharePoint.Utilities
 
     #region ContentBySearch model
 
-    public class ContentBySearch
+    internal class ContentBySearch
     {
         public string DataProviderJson { get; set; }
         public string SelectedPropertiesJson { get; set; }
@@ -419,7 +417,7 @@ namespace PnP.Core.Transformation.SharePoint.Utilities
 
     #region Result class
 
-    public class ContentByQuerySearchTransformatorResult
+    internal class ContentByQuerySearchTransformatorResult
     {
         public string Properties { get; set; }
         public string SearchablePlainTexts { get; set; }
@@ -432,7 +430,7 @@ namespace PnP.Core.Transformation.SharePoint.Utilities
     /// <summary>
     /// Class used to generate contentrollup (=highlighted content) web part properties coming from either a content by query or content by search web part
     /// </summary>
-    public class ContentByQuerySearchTransformator
+    internal class ContentByQuerySearchTransformator
     {
         private ContentRollupWebPartProperties properties;
         private ClientContext clientContext;

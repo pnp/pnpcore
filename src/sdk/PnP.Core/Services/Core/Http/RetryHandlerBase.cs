@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Net.Http.Headers;
+using System.Net.Sockets;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -21,9 +21,14 @@ namespace PnP.Core.Services
         internal const int MAXDELAY = 300;
 
         #region Construction
-        public RetryHandlerBase(PnPGlobalSettingsOptions globalSettings)
+        public RetryHandlerBase(ILogger<RetryHandlerBase> log, PnPGlobalSettingsOptions globalSettings)
         {
             GlobalSettings = globalSettings;
+
+            if (GlobalSettings != null && GlobalSettings.Logger == null)
+            {
+                GlobalSettings.Logger = log;
+            }
         }
         #endregion
 
@@ -33,43 +38,73 @@ namespace PnP.Core.Services
         internal int DelayInSeconds { get; set; } = 3;
         internal bool IncrementalDelay { get; set; } = true;
 
-        protected async override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
-        {
-            var response = await base.SendAsync(request, cancellationToken).ConfigureAwait(false);
-
-            if (ShouldRetry(response.StatusCode))
-            {
-                if (GlobalSettings != null && GlobalSettings.Logger != null)
-                {
-                    GlobalSettings.Logger.LogInformation($"Retrying request {request.RequestUri} due to status code {response.StatusCode}");
-                }
-
-                // Handle retry handling
-                response = await SendRetryAsync(response, cancellationToken).ConfigureAwait(false);
-            }
-
-            return response;
-        }
-
-
-        /// <summary>
-        /// Retry sending the HTTP request 
-        /// </summary>
-        /// <param name="response">The <see cref="HttpResponseMessage"/> which is returned and includes the HTTP request needs to be retried.</param>
-        /// <param name="cancellationToken">The <see cref="CancellationToken"/> for the retry.</param>
-        /// <returns></returns>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Reliability", "CA2000:Dispose objects before losing scope", Justification = "Disposing will prevent cloning of the request needed for the retry")]
-        private async Task<HttpResponseMessage> SendRetryAsync(HttpResponseMessage response, CancellationToken cancellationToken)
+        protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
         {
             int retryCount = 0;
 
-            while (retryCount < MaxRetries)
+            while (true)
             {
-                // Drain response content to free responses.
-                if (response.Content != null)
+                HttpResponseMessage response = null;
+
+                try
                 {
-#if NET5_0
-                    await response.Content.ReadAsByteArrayAsync(cancellationToken).ConfigureAwait(false);                    
+                    response = await base.SendAsync(request, cancellationToken).ConfigureAwait(false);
+
+                    if (!ShouldRetry(response.StatusCode))
+                    {
+                        return response;
+                    }
+
+                    if (retryCount >= MaxRetries)
+                    {
+                        // Drain response content to free connections. Need to perform this
+                        // before retry attempt and before the TooManyRetries ServiceException.
+                        if (response.Content != null)
+                        {
+#if NET5_0_OR_GREATER
+                            await response.Content.ReadAsByteArrayAsync(cancellationToken).ConfigureAwait(false);
+#else
+                            await response.Content.ReadAsByteArrayAsync().ConfigureAwait(false);
+#endif
+                        }
+
+                        throw new ServiceException(ErrorType.TooManyRetries, (int)response.StatusCode,
+                            string.Format(PnPCoreResources.Exception_ServiceException_MaxRetries, retryCount));
+                    }
+
+                    if (GlobalSettings != null && GlobalSettings.Logger != null)
+                    {
+                        GlobalSettings.Logger.LogInformation($"Retrying request {request.RequestUri} due to status code {response.StatusCode}");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    // Find innermost exception and check if it is a SocketException
+                    Exception innermostEx = ex;
+
+                    while (innermostEx.InnerException != null) innermostEx = innermostEx.InnerException;
+                    if (!(innermostEx is SocketException))
+                    {
+                        throw;
+                    }
+
+                    if (retryCount >= MaxRetries)
+                    {
+                        throw;
+                    }
+
+                    if (GlobalSettings != null && GlobalSettings.Logger != null)
+                    {
+                        GlobalSettings.Logger.LogInformation($"Retrying request {request.RequestUri} due to exception {innermostEx.GetType()}: {innermostEx.Message}");
+                    }
+                }
+
+                // Drain response content to free connections. Need to perform this
+                // before retry attempt and before the TooManyRetries ServiceException.
+                if (response?.Content != null)
+                {
+#if NET5_0_OR_GREATER
+                    await response.Content.ReadAsByteArrayAsync(cancellationToken).ConfigureAwait(false);
 #else
                     await response.Content.ReadAsByteArrayAsync().ConfigureAwait(false);
 #endif
@@ -80,27 +115,14 @@ namespace PnP.Core.Services
 
                 // general clone request with internal CloneAsync (see CloneAsync for details) extension method 
                 // do not dispose this request as that breaks the request cloning
-                var request = await response.RequestMessage.CloneAsync().ConfigureAwait(false);
-
+                request = await request.CloneAsync().ConfigureAwait(false);
                 // Increase retryCount and then update Retry-Attempt in request header if needed
                 retryCount++;
                 AddOrUpdateRetryAttempt(request, retryCount);
 
                 // Delay time
                 await delay.ConfigureAwait(false);
-
-                // Call base.SendAsync to send the request
-                response = await base.SendAsync(request, cancellationToken).ConfigureAwait(false);
-
-                if (!ShouldRetry(response.StatusCode))
-                {
-                    return response;
-                }
-
             }
-
-            throw new ServiceException(ErrorType.TooManyRetries, (int)response.StatusCode,
-                string.Format(PnPCoreResources.Exception_ServiceException_MaxRetries, retryCount));
         }
 
         /// <summary>
@@ -122,10 +144,9 @@ namespace PnP.Core.Services
 
         private Task Delay(HttpResponseMessage response, int retryCount, int delay, CancellationToken cancellationToken)
         {
-            HttpHeaders headers = response.Headers;
             double delayInSeconds = delay;
 
-            if (UseRetryAfterHeader && headers.TryGetValues(RETRY_AFTER, out IEnumerable<string> values))
+            if (UseRetryAfterHeader && response != null && response.Headers.TryGetValues(RETRY_AFTER, out IEnumerable<string> values))
             {
                 // Can we use the provided retry-after header?
                 string retryAfter = values.First();

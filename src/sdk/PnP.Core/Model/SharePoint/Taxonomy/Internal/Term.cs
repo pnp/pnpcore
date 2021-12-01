@@ -9,9 +9,8 @@ using System.Threading.Tasks;
 
 namespace PnP.Core.Model.SharePoint
 {
-    [GraphType( Uri = V, LinqGet = baseUri)]
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Usage", "CA2243:Attribute string literals should parse correctly", Justification = "<Pending>")]
-    internal partial class Term : BaseDataModel<ITerm>, ITerm
+    [GraphType(Uri = V, LinqGet = baseUri)]
+    internal sealed class Term : BaseDataModel<ITerm>, ITerm
     {
         private const string baseUri = "sites/{hostname},{Site.Id},{Web.Id}/termstore/sets/{Parent.GraphId}/terms";
         private const string V = baseUri + "/{GraphId}";

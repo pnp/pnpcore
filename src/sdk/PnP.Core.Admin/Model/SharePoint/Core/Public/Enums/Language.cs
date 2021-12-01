@@ -9,7 +9,7 @@
         /// Use default tenant language
         /// </summary>
         Default = 0,
-        
+
         /// <summary>
         /// Arabic
         /// </summary>

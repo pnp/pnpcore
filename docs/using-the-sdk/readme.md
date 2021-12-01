@@ -7,18 +7,17 @@ The PnP Core SDK is designed to be used in modern .Net development, hence it rel
 The PnP Core SDK is maintained in the PnP GitHub repository: https://github.com/pnp/pnpcore. You'll find:
 
 - The code of the PnP Core SDK in the `src\sdk` folder
-- Examples of how to use the PnP Core SDK in the `src\samples` folder
+- Examples of how to use the PnP Core SDK in the `samples` folder
 - The source of the documentation you are reading right now in the `docs` folder
 
 ## Referencing the PnP Core SDK in your project
 
-The recommended approach is to use the preview [PnP.Core nuget package](https://www.nuget.org/packages/PnP.Core) together with the preview [PnP.Core.Auth nuget package](https://www.nuget.org/packages/PnP.Core.Auth). The former is the actual PnP Core SDK library, while the latter is an helper library that provides a useful set of Authentication Providers to authenticate against Azure Active Directory.
+The recommended approach is to use the preview [PnP.Core nuget package](https://www.nuget.org/packages/PnP.Core) together with the [PnP.Core.Auth nuget package](https://www.nuget.org/packages/PnP.Core.Auth). The former is the actual PnP Core SDK library, while the latter is an helper library that provides a useful set of Authentication Providers to authenticate against Azure Active Directory.
 Each night these preview packages are refreshed, so you can always upgrade to the latest dev bits by upgrading your nuget package to the latest version.
 
 > [!Note]
 >
 > - If you want to use the PnP Core SDK authentication providers then simply add the [PnP.Core.Auth nuget package](https://www.nuget.org/packages/PnP.Core.Auth), the correct [PnP.Core nuget package](https://www.nuget.org/packages/PnP.Core) will be automatically added as it's a dependency of the [PnP.Core.Auth nuget package](https://www.nuget.org/packages/PnP.Core.Auth).
-> - If you want to debug the SDK code you can include the PnP Core project (`src\PnP.Core\PnP.Core.csproj`) in your project as a dependency.
 
 ## Configuring the needed services
 
@@ -268,6 +267,67 @@ using (var scope = host.Services.CreateScope())
 
 // Cleanup console host
 host.Dispose();
+```
+
+If you prefer to create a `PnPContext` by specifying the URL you need in code or you want to be able to easily switch between authentication providers then below sample shows how to so. This snippet works **without an configuration file**, all you need to do is add the needed authentication provider configuration(s) and then later on in your code acquire the needed authentication providers via the `IAuthenticationProviderFactory`. Once you have your authentication provider you can use it in the `Create` methods on the context factory:
+
+```csharp
+var host = Host.CreateDefaultBuilder()
+    .ConfigureServices((context, services) => 
+    {
+        services.AddPnPCore();
+        services.AddPnPCoreAuthentication(options =>
+        {
+            options.Credentials.Configurations.Add("interactive", 
+              new PnPCoreAuthenticationCredentialConfigurationOptions
+              {
+                  ClientId = "c545f9ce-1c11-440b-812b-0b35217d9e83",
+                  Interactive = new PnPCoreAuthenticationInteractiveOptions
+                  {
+                      RedirectUri = new Uri("http://localhost")
+                  }
+              });
+
+            options.Credentials.Configurations.Add("usernamepassword", 
+              new PnPCoreAuthenticationCredentialConfigurationOptions
+              {
+                  ClientId = "c545f9ce-1c11-440b-812b-0b35217d9e83",                
+                  UsernamePassword = new PnPCoreAuthenticationUsernamePasswordOptions
+                  {
+                      Username = "joe@contoso.onmicrosoft.com",
+                      Password = "xxx"
+                  }
+              });
+
+        });
+    })
+    .UseConsoleLifetime()
+    .Build();
+
+await host.StartAsync();
+
+using (var scope = host.Services.CreateScope())
+{
+    var pnpContextFactory = scope.ServiceProvider.GetRequiredService<IPnPContextFactory>();
+    var pnpAuthenticationProviderFactory = scope.ServiceProvider.GetRequiredService<IAuthenticationProviderFactory>();
+
+    var interactiveAuthProvider = pnpAuthenticationProviderFactory.Create("interactive");
+    var passwordManagerAuthProvider = pnpAuthenticationProviderFactory.Create("usernamepassword");
+
+    using (var context = await pnpContextFactory.CreateAsync(new Uri("https://contoso.sharepoint.com/sites/prov-1"), 
+                                                             interactiveAuthProvider))
+    {
+        await context.Web.LoadAsync(p => p.Title);
+        Console.WriteLine($"The title of the web is {context.Web.Title}");
+
+        using (var context2 = await pnpContextFactory.CreateAsync(new Uri("https://contoso.sharepoint.com/sites/prov-1"), 
+                                                                  passwordManagerAuthProvider))
+        {
+            await context2.Web.LoadAsync(p => p.Title);
+            Console.WriteLine($"The title of the web is {context2.Web.Title}");
+        }
+    }
+}
 ```
 
 Next to creating a new `PnPContext` you can also clone an existing one, cloning is very convenient if you for example created a context for the root web of your site collection but now want to work with a sub site. Below snippet shows how to use cloning:

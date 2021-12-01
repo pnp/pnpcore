@@ -1,11 +1,11 @@
 ﻿using Microsoft.Extensions.Logging;
 using PnP.Core.Transformation.Model;
-using PublishingMapping = PnP.Core.Transformation.SharePoint.MappingFiles.Publishing;
 using PnP.Core.Transformation.SharePoint.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
+using PublishingMapping = PnP.Core.Transformation.SharePoint.MappingFiles.Publishing;
+
 namespace PnP.Core.Transformation.SharePoint.Services
 {
     /// <summary>
@@ -92,7 +92,8 @@ namespace PnP.Core.Transformation.SharePoint.Services
 
                     if (maxColumns > 3)
                     {
-                        this.logger.LogError(SharePointTransformationResources.Error_Maximum3ColumnsAllowed);
+                        this.logger.LogError(
+                            SharePointTransformationResources.Error_Maximum3ColumnsAllowed);
                         throw new Exception(SharePointTransformationResources.Error_Maximum3ColumnsAllowed);
                     }
                     else

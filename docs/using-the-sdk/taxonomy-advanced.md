@@ -11,9 +11,6 @@ using (var context = await pnpContextFactory.CreateAsync("SiteToWorkWith"))
 }
 ```
 
-> [!Note]
-> The taxonomy implementation uses Microsoft Graph and currently the Microsoft Graph taxonomy APIs are in beta. See the ["Graph V1 versus Graph Beta" section](basics-apis.md) to learn more.
-
 ## Working with term set properties
 
 A term set has a property bag implemented via the `Properties` property on an `ITermSet`. This property bag is of type `ITermSetPropertyCollection` and you can perform CRUD operations on it. To read the term set properties you can read all properties of a term set or use a LINQ query to load specific properties

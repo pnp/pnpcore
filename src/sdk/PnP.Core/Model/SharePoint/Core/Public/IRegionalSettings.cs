@@ -1,10 +1,12 @@
+using System.Linq;
+
 namespace PnP.Core.Model.SharePoint
 {
     /// <summary>
     /// Public interface to define a RegionalSettings object
     /// </summary>
     [ConcreteType(typeof(RegionalSettings))]
-    public interface IRegionalSettings : IDataModel<IRegionalSettings>, IDataModelGet<IRegionalSettings>, IDataModelLoad<IRegionalSettings>
+    public interface IRegionalSettings : IDataModel<IRegionalSettings>, IDataModelGet<IRegionalSettings>, IDataModelLoad<IRegionalSettings>, IQueryableDataModel
     {
 
         #region Properties
@@ -126,6 +128,9 @@ namespace PnP.Core.Model.SharePoint
 
         /// <summary>
         /// Gets the collection of time zones used in SharePoint Online.
+        /// Implements <see cref="IQueryable{T}"/>. <br />
+        /// See <see href="https://pnp.github.io/pnpcore/using-the-sdk/basics-getdata.html#requesting-model-collections">Requesting model collections</see> 
+        /// and <see href="https://pnp.github.io/pnpcore/using-the-sdk/basics-iqueryable.html">IQueryable performance considerations</see> to learn more.
         /// </summary>
         public ITimeZoneCollection TimeZones { get; }
 

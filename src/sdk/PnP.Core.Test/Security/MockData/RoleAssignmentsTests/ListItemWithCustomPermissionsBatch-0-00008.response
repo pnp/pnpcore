@@ -1,0 +1,25 @@
+--batchresponse_aca0e80f-b43e-4e4d-a0cf-ad6c9ca69ad6
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+HTTP/1.1 200 OK
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+
+{"d":{"BreakRoleInheritance":null}}
+--batchresponse_aca0e80f-b43e-4e4d-a0cf-ad6c9ca69ad6
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+HTTP/1.1 200 OK
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+
+{"d":{"AddRoleAssignment":null}}
+--batchresponse_aca0e80f-b43e-4e4d-a0cf-ad6c9ca69ad6
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+HTTP/1.1 200 OK
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+
+{"d":{"AddRoleAssignment":null}}
+--batchresponse_aca0e80f-b43e-4e4d-a0cf-ad6c9ca69ad6--

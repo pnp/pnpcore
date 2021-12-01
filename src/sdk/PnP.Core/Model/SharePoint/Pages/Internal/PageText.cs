@@ -1,6 +1,7 @@
 ﻿using AngleSharp.Dom;
 using AngleSharp.Html.Parser;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.Json;
@@ -10,7 +11,7 @@ namespace PnP.Core.Model.SharePoint
     /// <summary>
     /// Controls of type 4 ( = text control)
     /// </summary>
-    internal class PageText : CanvasControl, IPageText
+    internal sealed class PageText : CanvasControl, IPageText
     {
         #region variables
         internal const string TextRteAttribute = "data-sp-rte";
@@ -59,6 +60,11 @@ namespace PnP.Core.Model.SharePoint
         /// Deserialized value of the "data-sp-controldata" attribute
         /// </summary>
         internal TextControlData SpControlData { get; private set; }
+
+        /// <summary>
+        /// List of web parts to be added when this text control is added
+        /// </summary>
+        internal List<PageWebPart> InlineWebParts { get; } = new List<PageWebPart>();
         #endregion
 
         #region public methods
@@ -104,7 +110,7 @@ namespace PnP.Core.Model.SharePoint
                     Type = (Section as CanvasSection).SectionType == 0 ? 1 : (Section as CanvasSection).SectionType,
                     DisplayName = Section.DisplayName,
                     IsExpanded = Section.IsExpanded,
-                    ShowDividerLine = Section.ShowDividerLine,                    
+                    ShowDividerLine = Section.ShowDividerLine,
                 };
 
                 if (Section.IconAlignment.HasValue)
@@ -132,9 +138,7 @@ namespace PnP.Core.Model.SharePoint
                 var nodeList = new HtmlParser().ParseFragment(Text, null);
                 PreviewText = string.Concat(nodeList.Select(x => x.Text()));
             }
-#pragma warning disable CA1031 // Do not catch general exception types
             catch { }
-#pragma warning restore CA1031 // Do not catch general exception types
 
             StringBuilder html = new StringBuilder();
             html.Append($@"<div {CanvasControlAttribute}=""{CanvasControlData}"" {CanvasDataVersionAttribute}=""{ DataVersion}""  {ControlDataAttribute}=""{jsonControlData.Replace("\"", "&quot;")}"">");
@@ -157,7 +161,7 @@ namespace PnP.Core.Model.SharePoint
             html.Append("</div>");
             html.Append("</div>");
             return html.ToString();
-        }
+        }        
         #endregion
 
         #region Internal and private methods

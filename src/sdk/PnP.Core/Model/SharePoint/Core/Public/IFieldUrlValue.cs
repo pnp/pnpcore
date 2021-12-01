@@ -3,7 +3,7 @@
     /// <summary>
     /// Represents the value in a field of type Url
     /// </summary>
-    public interface IFieldUrlValue: IFieldValue
+    public interface IFieldUrlValue : IFieldValue
     {
         /// <summary>
         /// Url

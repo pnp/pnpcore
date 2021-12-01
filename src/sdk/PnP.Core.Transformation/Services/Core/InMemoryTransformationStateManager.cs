@@ -54,7 +54,9 @@ namespace PnP.Core.Transformation.Services.Core
         /// <param name="query">The query to retrieve the tasks statuses related to the process</param>
         /// <param name="token">The cancellation token, if any</param>
         /// <returns>An asynchronous enumerable of tasks statuses</returns>
+#pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
         public async IAsyncEnumerable<TransformationProcessTaskStatus> GetProcessTasksStatus(Guid processId, TasksStatusQuery query, [EnumeratorCancellation] CancellationToken token = default)
+#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
         {
             if (query == null) throw new ArgumentNullException(nameof(query));
 

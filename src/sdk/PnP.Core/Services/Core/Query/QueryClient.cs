@@ -44,6 +44,18 @@ namespace PnP.Core.Services
             {
                 useGraph = apiOverride.Type == ApiType.Graph;
             }
+            else if (useGraph && useLinqGet)
+            {
+                // LINQ Get will based upon the defined LinqGet query + query arguments determined via entity and oDataQuery.
+                // e.g. _api/web/lists or _api/web/webs
+                // When there are no query arguments and when the model supports Graph (e.g. Web) then useGraph = true while
+                // the queried collections (e.g. webs, lists) might not be decorated with a GraphType attribute
+
+                if (string.IsNullOrEmpty(entity.GraphLinqGet) && !string.IsNullOrEmpty(entity.SharePointLinqGet))
+                {
+                    useGraph= false;
+                }
+            }
 
             if (useGraph)
             {
@@ -190,6 +202,7 @@ namespace PnP.Core.Services
                     {
                         AddExpandableExpandRest(sb, field, expandableField, path);
                     }
+                    path = "";
                 }
             }
         }
@@ -224,6 +237,7 @@ namespace PnP.Core.Services
                     {
                         path = path + "/" + JsonMappingHelper.GetRestField(expandableFieldInfo);
                         AddExpandableSelectRest(sb, field, expandableField, path);
+                        path = "";
                     }
                 }
             }

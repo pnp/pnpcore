@@ -25,7 +25,7 @@ namespace PnP.Core.Model.SharePoint
     [SharePointType("SP.ListItem", Target = typeof(File), Uri = "_api/web/getFileById('{Parent.Id}')/listitemallfields")]
     [SharePointType("SP.ListItem", Target = typeof(Folder), Uri = "_api/Web/getFolderById('{Parent.Id}')/listitemallfields")]
     //[GraphType(OverflowProperty = "fields")]
-    internal partial class ListItem : ExpandoBaseDataModel<IListItem>, IListItem
+    internal sealed class ListItem : ExpandoBaseDataModel<IListItem>, IListItem
     {
         internal const string FolderPath = "folderPath";
         internal const string UnderlyingObjectType = "underlyingObjectType";
@@ -230,6 +230,8 @@ namespace PnP.Core.Model.SharePoint
 
         [KeyProperty(nameof(Id))]
         public override object Key { get => Id; set => Id = (int)value; }
+
+        public bool HasUniqueRoleAssignments { get => GetValue<bool>(); set => SetValue(value); }
 
         public IRoleAssignmentCollection RoleAssignments { get => GetModelCollectionValue<IRoleAssignmentCollection>(); }
 
@@ -517,7 +519,7 @@ namespace PnP.Core.Model.SharePoint
             DateTime localDateTime = context.Web.RegionalSettings.TimeZone.UtcToLocalTime(inputInUTC);
 
             // Apply the delta from UTC to get the date used by the site and apply formatting 
-            return (localDateTime).ToString("yyyy-MM-dd hh:mm:ss", CultureInfo.InvariantCulture);
+            return (localDateTime).ToString("yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture);
         }
 
         private static string DoubleToSharePointString(PnPContext context, double input)
@@ -576,7 +578,7 @@ namespace PnP.Core.Model.SharePoint
             UpdateOverwriteVersionBatchAsync().GetAwaiter().GetResult();
         }
 
-        protected async Task PrepareUpdateCall(UpdateListItemRequest request)
+        internal async Task PrepareUpdateCall(UpdateListItemRequest request)
         {
             string listId = "";
             if ((this as IDataModelParent).Parent is IFile file)
@@ -1112,20 +1114,29 @@ namespace PnP.Core.Model.SharePoint
 
         public async Task<bool> AddRoleDefinitionsAsync(int principalId, params string[] names)
         {
+            if (names == null || names.Length == 0)
+            {
+                return false;
+            }
+
+            var roleDefinitions = await PnPContext.Web.RoleDefinitions.ToListAsync().ConfigureAwait(false);
+            var batch = PnPContext.NewBatch();
             foreach (var name in names)
             {
-                var roleDefinition = await PnPContext.Web.RoleDefinitions.FirstOrDefaultAsync(d => d.Name == name).ConfigureAwait(false);
+                var roleDefinition = roleDefinitions.FirstOrDefault(d => d.Name == name);
                 if (roleDefinition != null)
                 {
-                    await AddRoleDefinitionAsync(principalId, roleDefinition).ConfigureAwait(false);
-                    return true;
+                    await AddRoleDefinitionBatchAsync(batch, principalId, roleDefinition).ConfigureAwait(false);
                 }
                 else
                 {
-                    throw new ArgumentException($"Role definition '{name}' not found.");
+                    throw new ArgumentException(string.Format(PnPCoreResources.Exception_RoleDefinition_NotFound, name));
                 }
             }
-            return false;
+            // Send role updates to server
+            await PnPContext.ExecuteAsync(batch).ConfigureAwait(false);
+
+            return true;
         }
 
         private ApiCall BuildAddRoleDefinitionsApiCall(int principalId, IRoleDefinition roleDefinition)
@@ -1172,22 +1183,30 @@ namespace PnP.Core.Model.SharePoint
 
         public async Task<bool> RemoveRoleDefinitionsAsync(int principalId, params string[] names)
         {
+            if (names == null || names.Length == 0)
+            {
+                return false;
+            }
+
+            var roleDefinitions = await GetRoleDefinitionsAsync(principalId).ConfigureAwait(false);
+            var batch = PnPContext.NewBatch();
             foreach (var name in names)
             {
-                var roleDefinitions = await GetRoleDefinitionsAsync(principalId).ConfigureAwait(false);
-
                 var roleDefinition = roleDefinitions.AsRequested().FirstOrDefault(r => r.Name == name);
                 if (roleDefinition != null)
                 {
-                    await RemoveRoleDefinitionAsync(principalId, roleDefinition).ConfigureAwait(false);
-                    return true;
+                    await RemoveRoleDefinitionBatchAsync(batch, principalId, roleDefinition).ConfigureAwait(false);
                 }
                 else
                 {
-                    throw new ArgumentException($"Role definition '{name}' not found for this group.");
+                    throw new ArgumentException(string.Format(PnPCoreResources.Exception_RoleDefinition_NotFound, name));
                 }
             }
-            return false;
+            
+            // Send role updates to server
+            await PnPContext.ExecuteAsync(batch).ConfigureAwait(false);
+
+            return true;
         }
 
         public async Task RemoveRoleDefinitionAsync(int principalId, IRoleDefinition roleDefinition)

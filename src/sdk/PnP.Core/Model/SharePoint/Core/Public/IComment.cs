@@ -1,5 +1,6 @@
 ﻿using PnP.Core.Model.Security;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace PnP.Core.Model.SharePoint
@@ -8,7 +9,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a comment.
     /// </summary>
     [ConcreteType(typeof(Comment))]
-    public interface IComment : IDataModel<IComment>, IDataModelGet<IComment>, IDataModelLoad<IComment> /*, IDataModelUpdate*/, IDataModelDelete
+    public interface IComment : IDataModel<IComment>, IDataModelGet<IComment>, IDataModelLoad<IComment>, IDataModelDelete, IQueryableDataModel
     {
 
         /// <summary>
@@ -73,6 +74,9 @@ namespace PnP.Core.Model.SharePoint
 
         /// <summary>
         /// List of users who have liked the comment.
+        /// Implements <see cref="IQueryable{T}"/>. <br />
+        /// See <see href="https://pnp.github.io/pnpcore/using-the-sdk/basics-getdata.html#requesting-model-collections">Requesting model collections</see> 
+        /// and <see href="https://pnp.github.io/pnpcore/using-the-sdk/basics-iqueryable.html">IQueryable performance considerations</see> to learn more.
         /// </summary>
         public ICommentLikeUserEntityCollection LikedBy { get; }
 
@@ -83,6 +87,9 @@ namespace PnP.Core.Model.SharePoint
 
         /// <summary>
         /// List of users who are at mentioned in this comment.
+        /// Implements <see cref="IQueryable{T}"/>. <br />
+        /// See <see href="https://pnp.github.io/pnpcore/using-the-sdk/basics-getdata.html#requesting-model-collections">Requesting model collections</see> 
+        /// and <see href="https://pnp.github.io/pnpcore/using-the-sdk/basics-iqueryable.html">IQueryable performance considerations</see> to learn more.
         /// </summary>
         public ICommentLikeUserEntityCollection Mentions { get; }
 

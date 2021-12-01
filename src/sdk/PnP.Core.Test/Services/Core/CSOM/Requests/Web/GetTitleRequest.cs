@@ -76,7 +76,7 @@ namespace PnP.Core.Test.Services.Core.CSOM.Requests
                             }
                         }
                     }
-                },                     
+                },
             };
             result.Add(identityQuery);
 

@@ -24,7 +24,7 @@
         /// Calendar list view type
         /// </summary>
         Calendar = 524288,
-        
+
         /// <summary>
         /// List view type that displays recurring events
         /// </summary>

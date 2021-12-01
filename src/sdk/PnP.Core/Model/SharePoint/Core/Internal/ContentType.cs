@@ -12,7 +12,7 @@ namespace PnP.Core.Model.SharePoint
 {
     [SharePointType("SP.ContentType", Target = typeof(Web), Uri = "_api/Web/ContentTypes('{Id}')", LinqGet = "_api/web/ContentTypes")]
     [SharePointType("SP.ContentType", Target = typeof(List), Uri = "_api/Web/Lists(guid'{Parent.Id}')/ContentTypes('{Id}')", LinqGet = "_api/Web/Lists(guid'{Parent.Id}')/ContentTypes")]
-    internal partial class ContentType : BaseDataModel<IContentType>, IContentType
+    internal sealed class ContentType : BaseDataModel<IContentType>, IContentType
     {
         #region Construction
         public ContentType()

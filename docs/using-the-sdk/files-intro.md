@@ -185,7 +185,8 @@ await testDocument.DeleteAsync();
 Adding a file comes down to create a file reference and uploading the file's bytes and this can be done via the [AddAsync method on a Files collection](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IFileCollection.html#PnP_Core_Model_SharePoint_IFileCollection_AddAsync_System_String_Stream_System_Boolean_). This method takes a stream of bytes as input for the file contents.
 
 >[!Note]
-> See the [working with large files](files-large.md) page for some more complete file upload/download samples.
+> - See the [working with large files](files-large.md) page for some more complete file upload/download samples.
+> - Don't forget to load the `ListItemFields` property if you want to set the file properties after adding. This can be done in multiple ways `await addedFile.ListItemAllFields.LoadAsync()`, `await addedFile.LoadAsync(p => p.ListItemAllFields)` or `addedFile = await context.Web.GetFileByServerRelativeUrlAsync(addedFile.ServerRelativeUrl, p => p.ListItemAllFields)`.
 
 ```csharp
 // Get a reference to a folder
@@ -217,6 +218,40 @@ addedFile.ListItemAllFields["Field1"] = "Hi there";
 addedFile.ListItemAllFields["Field2"] = true;
 // Persist the ListItem changes
 await addedFile.ListItemAllFields.UpdateAsync();
+```
+
+## Updating the file Author, Editor, Created or Modified properties
+
+Each file has an `Author` property (the one who created the file), an `Editor` property (the one who last changed the file), a `Created` property (when was the file added) and a `Modified` property (when was the file changed). These are system properties and they cannot be simply overwritten. Using the `UpdateOverwriteVersion` methods this however is possible as shown in below code snippet:
+
+```csharp
+// Load the default documents folder of the site
+var doc = await context.Web.Lists.GetByTitleAsync("Documents", p => p.Fields);
+// Upload a file
+var file = await doc.RootFolder.Files.AddAsync("demo.docx", System.IO.File.OpenRead($".{System.IO.Path.DirectorySeparatorChar}demo.docx"), true);
+
+// Load the file metadata again to get the ListItemFields populated
+await file.LoadAsync(p => p.ListItemAllFields)
+
+// Get a user to use as author/editor
+var currentUser = await context.Web.GetCurrentUserAsync();
+
+// The new Created/Modified date to set
+var newDate = new DateTime(2020, 10, 20);
+
+// Get the earlier loaded Author and Editor fields
+var author = doc.Fields.AsRequested().FirstOrDefault(p => p.InternalName == "Author");
+var editor = doc.Fields.AsRequested().FirstOrDefault(p => p.InternalName == "Editor");
+
+// Update file properties
+file.ListItemAllFields["Title"] = "new title";
+file.ListItemAllFields["Created"] = newDate;
+file.ListItemAllFields["Modified"] = newDate;
+file.ListItemAllFields["Author"] = author.NewFieldUserValue(currentUser);
+file.ListItemAllFields["Editor"] = editor.NewFieldUserValue(currentUser);
+
+// Persist the updated properties
+await file.ListItemAllFields.UpdateOverwriteVersionAsync();
 ```
 
 ## Downloading files

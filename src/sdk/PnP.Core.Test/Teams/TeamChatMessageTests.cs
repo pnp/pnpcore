@@ -20,7 +20,7 @@ namespace PnP.Core.Test.Teams
             // Configure mocking default for all tests in this class, unless override by a specific test
             //TestCommon.Instance.Mocking = false;
         }
-                
+
         [TestMethod]
         public async Task GetChatMessageAsyncTest()
         {
@@ -42,7 +42,7 @@ namespace PnP.Core.Test.Teams
                 // There appears to be no remove option yet in this feature - so add a recognisable message
                 var body = "Hello, this is a unit test (GetChatMessageAsyncTest) posting a message - PnP Rocks!";
                 await chatMessages.AddAsync(body);
-                
+
                 channel = await channel.GetAsync(o => o.Messages);
                 var updateMessages = channel.Messages.AsRequested();
 
@@ -88,7 +88,7 @@ namespace PnP.Core.Test.Teams
                 // There appears to be no remove option yet in this feature - so add a recognisable message
                 var body = $"Hello, this is a unit test (AddChatMessageTest) posting a message - PnP Rocks! - Woah...";
                 chatMessages.Add(body);
-                
+
                 channel = channel.Get(o => o.Messages);
                 var updateMessages = channel.Messages.AsRequested();
 
@@ -178,10 +178,10 @@ namespace PnP.Core.Test.Teams
                 // assume as if there are no chat messages
                 // There appears to be no remove option yet in this feature - so add a recognisable message
                 var body = $"<h1>Hello</h1><br />This is a unit test (AddChatMessageHtmlAsyncTest) posting a message - <strong>PnP Rocks!</strong> - Woah...";
-                
+
                 await chatMessages.AddAsync(body, ChatMessageContentType.Html);
-                
-                channel =  await channel.GetAsync(o => o.Messages);
+
+                channel = await channel.GetAsync(o => o.Messages);
                 var updateMessages = channel.Messages;
 
                 var message = updateMessages.AsEnumerable().Last();
@@ -223,11 +223,11 @@ namespace PnP.Core.Test.Teams
                 // Upload File to SharePoint Library - it will have to remain i guess as onetime upload.
                 IFolder folder = await context.Web.Lists.GetByTitle("Documents").RootFolder.GetAsync();
                 IFile existingFile = await folder.Files.FirstOrDefaultAsync(o => o.Name == "test_added.docx");
-                if(existingFile == default)
+                if (existingFile == default)
                 {
                     existingFile = await folder.Files.AddAsync("test_added.docx", System.IO.File.OpenRead($".{Path.DirectorySeparatorChar}TestAssets{Path.DirectorySeparatorChar}test.docx"));
                 }
-                
+
                 Assert.IsNotNull(existingFile);
                 Assert.AreEqual("test_added.docx", existingFile.Name);
 
@@ -235,10 +235,11 @@ namespace PnP.Core.Test.Teams
                 // assume as if there are no chat messages
                 var attachmentId = existingFile.ETag.AsGraphEtag(); // Needs to be the documents eTag - just the GUID part
                 var body = $"<h1>Hello</h1><br />This is a unit test with a file attachment (AddChatMessageHtmlAsyncTest) posting a message - <attachment id=\"{attachmentId}\"></attachment>";
-                
+
                 var fileUri = new Uri(existingFile.LinkingUrl);
 
-                await chatMessages.AddAsync(new ChatMessageOptions{
+                await chatMessages.AddAsync(new ChatMessageOptions
+                {
                     Content = body,
                     ContentType = ChatMessageContentType.Html,
                     Attachments = {
@@ -254,7 +255,7 @@ namespace PnP.Core.Test.Teams
                         }
                     }
                 });
-                
+
                 channel = await channel.GetAsync(o => o.Messages);
                 var updateMessages = channel.Messages;
 
@@ -299,9 +300,9 @@ namespace PnP.Core.Test.Teams
 
                 // Useful reference - https://docs.microsoft.com/en-us/graph/api/chatmessage-post?view=graph-rest-beta&tabs=http#example-5-sending-inline-images-along-with-the-message
                 // assume as if there are no chat messages
-                
+
                 var body = $"<div><div><h1>Hello</h1><p>This is a unit test (AddChatMessageInlineImagesAsyncTest) posting a message with inline image</p><div><span><img height=\"392\" src=\"../hostedContents/1/$value\" width=\"300\" style=\"vertical-align:bottom; width:300px; height:392px\"></span></div></div></div>";
-                
+
                 await chatMessages.AddAsync(new ChatMessageOptions
                 {
                     Content = body,
@@ -316,7 +317,7 @@ namespace PnP.Core.Test.Teams
                         }
                     }
                 });
-                
+
                 channel = await channel.GetAsync(o => o.Messages);
                 var updateMessages = channel.Messages;
 
@@ -350,7 +351,7 @@ namespace PnP.Core.Test.Teams
             {
                 var batch = context.NewBatch();
 
-                var team = context.Team.GetBatch(batch, o => o.PrimaryChannel);                
+                var team = context.Team.GetBatch(batch, o => o.PrimaryChannel);
                 context.Execute(batch);
 
                 var primaryChannel = team.Result.PrimaryChannel;
@@ -370,15 +371,15 @@ namespace PnP.Core.Test.Teams
 
                 ITeamChatMessageHostedContentCollection coll = new TeamChatMessageHostedContentCollection
                 {
-                    
+
                 };
 
                 batch = context.NewBatch();
                 chatMessages.AddBatch(batch, new ChatMessageOptions
-                    {
-                        Content = body,
-                        ContentType = ChatMessageContentType.Html,
-                        HostedContents = {
+                {
+                    Content = body,
+                    ContentType = ChatMessageContentType.Html,
+                    HostedContents = {
                             new ChatMessageHostedContentOptions
                             {
                                 Id = "1",
@@ -386,10 +387,10 @@ namespace PnP.Core.Test.Teams
                                 ContentType = "image/png"
                             }
                         }
-                    });
+                });
 
                 context.Execute(batch);
-                                
+
                 var batch2 = context.NewBatch();
 
                 channel = channel.Result.GetBatch(batch2, o => o.Messages);
@@ -424,7 +425,7 @@ namespace PnP.Core.Test.Teams
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 var team = await context.Team.GetAsync(o => o.PrimaryChannel);
-                
+
                 var channel = team.PrimaryChannel;
                 Assert.IsNotNull(channel);
 
@@ -478,7 +479,7 @@ namespace PnP.Core.Test.Teams
                 channel = await channel.GetAsync(o => o.Messages);
                 var updateMessages = channel.Messages;
 
-                var message = updateMessages.AsEnumerable().OrderByDescending(o=>o.Subject = subject).Last();
+                var message = updateMessages.AsEnumerable().OrderByDescending(o => o.Subject = subject).Last();
                 Assert.IsNotNull(message.CreatedDateTime);
                 // Depending on regional settings this check might fail
                 //Assert.AreEqual(message.DeletedDateTime, DateTime.MinValue);
@@ -502,7 +503,7 @@ namespace PnP.Core.Test.Teams
             }
         }
 
-        [TestMethod]    
+        [TestMethod]
         public async Task AddChatMessageSubjectAsyncTest()
         {
             //TestCommon.Instance.Mocking = false;
@@ -521,7 +522,7 @@ namespace PnP.Core.Test.Teams
                 // There appears to be no remove option yet in this feature - so add a recognisable message
                 var body = $"Hello, This is a unit test (AddChatMessageSubjectAsyncTest) posting a message - PnP Rocks! - Woah...";
                 await chatMessages.AddAsync(body, subject: "This is a subject test");
-               
+
                 channel = await channel.GetAsync(o => o.Messages);
                 var updateMessages = channel.Messages.AsEnumerable();
 
@@ -566,12 +567,12 @@ namespace PnP.Core.Test.Teams
                 // There appears to be no remove option yet in this feature - so add a recognisable message
                 var attachmentId = "74d20c7f34aa4a7fb74e2b30004247c5";
                 var body = $"<attachment id=\"{attachmentId}\"></attachment>";
-               
+
                 await chatMessages.AddAsync(new ChatMessageOptions
-                    {
-                        Content = body,
-                        ContentType = ChatMessageContentType.Html,
-                        Attachments =
+                {
+                    Content = body,
+                    ContentType = ChatMessageContentType.Html,
+                    Attachments =
                         {
                              new ChatMessageAttachmentOptions
                             {
@@ -584,8 +585,8 @@ namespace PnP.Core.Test.Teams
                                 ThumbnailUrl = null
                             }
                         }
-                    });
-                
+                });
+
                 channel = await channel.GetAsync(o => o.Messages);
                 var updateMessages = channel.Messages.AsRequested();
 
@@ -630,7 +631,7 @@ namespace PnP.Core.Test.Teams
                 // There appears to be no remove option yet in this feature - so add a recognisable message
                 var attachmentId = "74d20c7f34aa4a7fb74e2b30004247c5";
                 var body = $"<attachment id=\"{attachmentId}\"></attachment>";
-                
+
                 await chatMessages.AddAsync(new ChatMessageOptions
                 {
                     Content = body,
@@ -690,14 +691,14 @@ namespace PnP.Core.Test.Teams
                 var chatMessages = channel.Result.Messages;
 
                 Assert.IsNotNull(chatMessages);
-                                
+
                 // assume as if there are no chat messages
                 // There appears to be no remove option yet in this feature - so add a recognisable message
                 var body = $"Hello, this is a unit test (AddChatMessageBatchTest) posting a message - PnP Rocks! - Woah...";
-                
+
                 chatMessages.AddBatch(body, ChatMessageContentType.Text, "Batch Test");
                 context.Execute();
-                
+
 
                 channel = channelQuery.GetBatch(o => o.Messages);
                 context.Execute();
@@ -750,7 +751,7 @@ namespace PnP.Core.Test.Teams
                 var body = $"Hello, this is a unit test (AddChatMessageBatchTest) posting a message - PnP Rocks! - Woah...";
                 await chatMessages.AddBatchAsync(body, ChatMessageContentType.Text, "Batch Test");
                 await context.ExecuteAsync();
-            
+
                 channel = channelQuery.GetBatch(o => o.Messages);
                 await context.ExecuteAsync();
                 var updateMessages = channel.Result.Messages;
@@ -917,7 +918,7 @@ namespace PnP.Core.Test.Teams
                 var body = $"Hello, this is a unit test (AddChatMessageSpecificBatchTest) posting a message - PnP Rocks! - Woah...";
                 chatMessages.AddBatch(batch, body);
                 context.Execute(batch);
-                
+
                 var batch2 = context.NewBatch();
                 channel = channelQuery.GetBatch(batch2, o => o.Messages);
                 context.Execute(batch2);
@@ -969,7 +970,7 @@ namespace PnP.Core.Test.Teams
                 var body = $"Hello, this is a unit test (AddChatMessageSpecificBatchAsyncTest) posting a message - PnP Rocks! - Woah...";
                 await chatMessages.AddBatchAsync(batch, body, ChatMessageContentType.Text, "Batch Async Test");
                 await context.ExecuteAsync(batch);
-                
+
 
                 var batch2 = context.NewBatch();
                 channel = await channelQuery.GetBatchAsync(batch2, o => o.Messages);
@@ -1053,7 +1054,7 @@ namespace PnP.Core.Test.Teams
                 var body = string.Empty;
                 chatMessages.AddBatch(batch, body);
                 context.Execute(batch);
-                
+
             }
         }
 
@@ -1079,7 +1080,7 @@ namespace PnP.Core.Test.Teams
                 // There appears to be no remove option yet in this feature - so add a recognisable message
                 var body = string.Empty;
                 chatMessages.Add(body);
-                
+
             }
         }
 
@@ -1106,7 +1107,7 @@ namespace PnP.Core.Test.Teams
         //        var body = $"Hello, this is a unit test (AddChatMessageReactionTest) posting a message - PnP Rocks! - Woah...";
         //        var result = chatMessages.Add(body);
 
-                
+
         //    }
         //}
     }

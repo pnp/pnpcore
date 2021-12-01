@@ -1,0 +1,9 @@
+--batchresponse_2360d6ff-3f02-44d4-a1eb-62b2f7f34904
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+HTTP/1.1 400 Bad Request
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+
+{"error":{"code":"-2147467261, System.ArgumentNullException","message":{"lang":"en-US","value":"Value cannot be null.\r\nParameter name: url"}}}
+--batchresponse_2360d6ff-3f02-44d4-a1eb-62b2f7f34904--

@@ -6,7 +6,7 @@ namespace PnP.Core.Model
     /// <summary>
     /// Describes a field in our metadata model
     /// </summary>
-    internal class EntityFieldInfo : ICloneable
+    internal sealed class EntityFieldInfo : ICloneable
     {
         /// <summary>
         /// Field name in the model

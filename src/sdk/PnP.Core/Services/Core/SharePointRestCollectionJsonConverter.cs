@@ -4,7 +4,7 @@ using System.Text.Json.Serialization;
 
 namespace PnP.Core.Services
 {
-    internal class SharePointRestCollectionJsonConverter<TItem> : JsonConverter<TItem[]>
+    internal sealed class SharePointRestCollectionJsonConverter<TItem> : JsonConverter<TItem[]>
     {
         public override TItem[] Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {

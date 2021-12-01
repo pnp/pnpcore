@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace PnP.Core.Model.SharePoint
 {
-    internal partial class RecycleBinItemCollection : QueryableDataModelCollection<IRecycleBinItem>, IRecycleBinItemCollection
+    internal sealed class RecycleBinItemCollection : QueryableDataModelCollection<IRecycleBinItem>, IRecycleBinItemCollection
     {
 
         public RecycleBinItemCollection(PnPContext context, IDataModelParent parent, string memberName = null) : base(context, parent, memberName)

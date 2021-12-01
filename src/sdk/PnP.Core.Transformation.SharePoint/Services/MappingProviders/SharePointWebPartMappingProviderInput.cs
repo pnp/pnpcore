@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Microsoft.SharePoint.Client;
-using PnP.Core.Transformation.Model;
+﻿using Microsoft.SharePoint.Client;
 using PnP.Core.Transformation.Services.Core;
 using PnP.Core.Transformation.Services.MappingProviders;
 
@@ -19,6 +15,7 @@ namespace PnP.Core.Transformation.SharePoint.Services.MappingProviders
         /// Creates an instance for the specified context and web part
         /// </summary>
         /// <param name="context">The transformation context</param>
+        /// <param name="sourceContext">Context for the source site</param>
         public SharePointWebPartMappingProviderInput(PageTransformationContext context, 
             ClientContext sourceContext) : base(context)
         {

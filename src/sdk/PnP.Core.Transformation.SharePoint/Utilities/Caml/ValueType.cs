@@ -3,7 +3,7 @@
     /// <summary>
     /// Specifies types of reference for a field in a list.
     /// </summary>
-    public enum ValueType
+    internal enum ValueType
     {
         /// <summary>
         /// Indicates a Text field type

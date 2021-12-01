@@ -1,7 +1,5 @@
 ﻿using PnP.Core.Transformation.Model;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace PnP.Core.Transformation.Services.MappingProviders
 {
@@ -24,5 +22,10 @@ namespace PnP.Core.Transformation.Services.MappingProviders
         /// Defines the list item permissions for the target page
         /// </summary>
         public ListItemPermission Permissions { get; set; }
+
+        /// <summary>
+        /// Defines a dictionary of custom properties retrieved during source content processing and useful for telemetry
+        /// </summary>
+        public Dictionary<string, string> TelemetryProperties { get; set; } = new Dictionary<string, string>();
     }
 }

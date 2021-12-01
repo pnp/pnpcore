@@ -12,6 +12,7 @@ namespace PnP.Core.Services
     {
         private readonly ILogger logger;
         private readonly PnPGlobalSettingsOptions globalSettings;
+        private bool baseAddressWasSet = false;
 
         /// <summary>
         /// Returns the configured Microsoft Graph http client
@@ -39,6 +40,11 @@ namespace PnP.Core.Services
                 throw new ArgumentNullException(nameof(options));
             }
 
+            if (globalSettings.Logger == null)
+            {
+                globalSettings.Logger = logger;
+            }
+
             client.BaseAddress = PnPConstants.MicrosoftGraphBaseUri;
             client.DefaultRequestHeaders.Add("Accept", "application/json;odata.metadata=minimal;odata.streaming=true;IEEE754Compatible=true");
             client.Timeout = globalSettings.GetHttpTimeout();
@@ -49,6 +55,15 @@ namespace PnP.Core.Services
             }
 
             Client = client;
+        }
+
+        internal void UpdateBaseAddress(string authority)
+        {
+            if (!baseAddressWasSet && !string.IsNullOrEmpty(authority))
+            {
+                Client.BaseAddress = new Uri($"https://{authority}/");
+                baseAddressWasSet = true;
+            }
         }
     }
 }

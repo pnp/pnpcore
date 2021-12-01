@@ -1,7 +1,7 @@
 ﻿namespace PnP.Core.Model.SharePoint
 {
     [GraphType]
-    internal partial class TermSetProperty : BaseDataModel<ITermSetProperty>, ITermSetProperty
+    internal sealed class TermSetProperty : BaseDataModel<ITermSetProperty>, ITermSetProperty
     {
         #region Properties
         [GraphProperty("key")]

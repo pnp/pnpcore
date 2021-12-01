@@ -6,7 +6,7 @@ namespace PnP.Core.Model.SharePoint
     /// EffectiveInformationRightsManagementSettings class, write your custom code here
     /// </summary>
     [SharePointType("SP.EffectiveInformationRightsManagementSettings", Target = typeof(IFile))]
-    internal partial class EffectiveInformationRightsManagementSettings : BaseDataModel<IEffectiveInformationRightsManagementSettings>, IEffectiveInformationRightsManagementSettings
+    internal sealed class EffectiveInformationRightsManagementSettings : BaseDataModel<IEffectiveInformationRightsManagementSettings>, IEffectiveInformationRightsManagementSettings
     {
         #region Construction
         public EffectiveInformationRightsManagementSettings()
