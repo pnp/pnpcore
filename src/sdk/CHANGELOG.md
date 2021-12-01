@@ -53,6 +53,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Http clients and retry handlers never got their logger assigned, fixed now so that for example throttling will show in logs [jansenbe - Bert Jansen]
 - Increased reliability via retry on SocketException in SendAsync #650 [patrikhellgren - Patrik Hellgren]
 - Non collapsible sections were wrongly loaded as collapsible sections in collapsed state [jansenbe - Bert Jansen]
+- Page sections where not removeable #666 [jansenbe - Bert Jansen]
 
 ## [1.4.0]
 

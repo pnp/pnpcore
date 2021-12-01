@@ -566,6 +566,75 @@ namespace PnP.Core.Test.SharePoint
         }
 
         [TestMethod]
+        public async Task PageSectionsCreateRemoveTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.NoGroupTestSite))
+            {
+                var page = await context.Web.NewPageAsync();
+                string pageName = TestCommon.GetPnPSdkTestAssetName("PageSectionsCreateRemoveTest.aspx");
+
+                // Add all the possible sections 
+                page.AddSection(CanvasSectionTemplate.OneColumnFullWidth, 1);
+                page.AddSection(CanvasSectionTemplate.OneColumn, 2);
+                page.AddSection(CanvasSectionTemplate.TwoColumn, 3);
+                page.AddSection(CanvasSectionTemplate.TwoColumnLeft, 4);
+                page.AddSection(CanvasSectionTemplate.TwoColumnRight, 5);
+                page.AddSection(CanvasSectionTemplate.ThreeColumn, 6);
+
+                await page.SaveAsync(pageName);
+
+                // load page again
+                var pages = await context.Web.GetPagesAsync(pageName);
+
+                Assert.IsTrue(pages.Count == 1);
+
+                page = pages.AsEnumerable().First();
+
+                Assert.IsTrue(page.Sections.Count == 6);
+                Assert.IsTrue(page.Sections[0].Type == CanvasSectionTemplate.OneColumnFullWidth);
+                Assert.IsTrue(page.Sections[1].Type == CanvasSectionTemplate.OneColumn);
+                Assert.IsTrue(page.Sections[2].Type == CanvasSectionTemplate.TwoColumn);
+                Assert.IsTrue(page.Sections[3].Type == CanvasSectionTemplate.TwoColumnLeft);
+                Assert.IsTrue(page.Sections[4].Type == CanvasSectionTemplate.TwoColumnRight);
+                Assert.IsTrue(page.Sections[5].Type == CanvasSectionTemplate.ThreeColumn);
+
+                page.Sections.RemoveAt(5);
+                page.Sections.RemoveAt(4);
+
+                await page.SaveAsync(pageName);
+
+                pages = await context.Web.GetPagesAsync(pageName);
+
+                Assert.IsTrue(pages.Count == 1);
+
+                page = pages.AsEnumerable().First();
+
+                Assert.IsTrue(page.Sections.Count == 4);
+                Assert.IsTrue(page.Sections[0].Type == CanvasSectionTemplate.OneColumnFullWidth);
+                Assert.IsTrue(page.Sections[1].Type == CanvasSectionTemplate.OneColumn);
+                Assert.IsTrue(page.Sections[2].Type == CanvasSectionTemplate.TwoColumn);
+                Assert.IsTrue(page.Sections[3].Type == CanvasSectionTemplate.TwoColumnLeft);
+
+                // Delete all sections
+                page.ClearPage();
+
+                await page.SaveAsync(pageName);
+
+                pages = await context.Web.GetPagesAsync(pageName);
+
+                Assert.IsTrue(pages.Count == 1);
+
+                page = pages.AsEnumerable().First();
+
+                Assert.IsTrue(page.Sections.Count == 0);
+
+                // delete the page
+                await page.DeleteAsync();
+            }
+        }
+
+        [TestMethod]
         public async Task PageSectionsWithEmphasisCreateTest()
         {
             //TestCommon.Instance.Mocking = false;
