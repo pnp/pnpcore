@@ -1,0 +1,263 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html lang="en">
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>SharePoint CSOM vs PnP Core SDK | PnP Core SDK </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="SharePoint CSOM vs PnP Core SDK | PnP Core SDK ">
+    <meta name="generator" content="docfx 2.56.5.0">
+    <meta name="description" content="The PnP Core SDK is a modern .NET SDK designed to work for Microsoft 365. It provides a unified object model for working with SharePoint Online and Teams which is agnostic to the underlying API's being called.">
+    <link rel="shortcut icon" href="https://c.s-microsoft.com/favicon.ico?v2">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    <meta property="docfx:newtab" content="true">
+  </head>  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../images/logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <label class="glyphicon glyphicon-search" for="search-query"></label>
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first="First" data-prev="Previous" data-next="Next" data-last="Last"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+                  <div class="contribution-panel mobile-hide pull-right">
+                      <a href="https://github.com/pnp/pnpcore/blob/dev/docs/using-the-sdk/basics-csom-vs-pnp.md/#L1" title="Improve this Doc" class="improve-doc-lg"><i class="glyphicon glyphicon-pencil"></i></a>
+                  </div>
+                    <h1 id="sharepoint-csom-vs-pnp-core-sdk">SharePoint CSOM vs PnP Core SDK</h1>
+
+<p>Some PnP Core SDK code looks very similar to the SharePoint CSOM code. While it feels like the PnP Core SDK works the same as CSOM, in some situations, it's not the case. Let's explore the similarities/differences between CSOM and PnP Core SDK.</p>
+<h2 id="the-context">The context</h2>
+<p>In the same way as for CSOM, in the PnP Core SDK it's all starts with the context:</p>
+<p><em>CSOM:</em></p>
+<pre><code class="lang-csharp">using (var csomContext = new ClientContext(siteUrl))
+{
+}
+</code></pre>
+<p><em>PnP Core SDK:</em></p>
+<pre><code class="lang-csharp">using (var context = await pnpContextFactory.CreateAsync(&quot;SiteToWorkWith&quot;))
+{
+}
+</code></pre>
+<p><code>PnPContext</code> is the starting point for all PnP Core SDK-related operations. However you have a lot more options on how to instantiate a <code>PnPContext</code> - using configuration name, site url, group id, using default or custom authentication provider and so on. All the method overloads are available at the <code>PnpContextFactory</code>. See the <a href="readme.html">Getting started page</a> to learn more about instantiating a <code>PnPContext</code>.</p>
+<h2 id="loading-objects">Loading objects</h2>
+<h3 id="loading-data-into-the-context">Loading data into the context</h3>
+<p>You can load data directly to the <code>PnPContext</code>, which is very similar to the CSOM. In the PnP Core SDK all <em><code>Load*</code></em> methods are available on the SharePoint model objects themselves.</p>
+<p><em>CSOM:</em></p>
+<pre><code class="lang-csharp">using (var csomContext = new ClientContext(siteUrl))
+{
+  csomContext.Load(csomContext.Web, w =&gt; w.Title, w =&gt; w.Id);
+
+  csomContext.ExecuteQuery(); // executes the actual HTTP request
+
+  Console.WriteLine(csomContext.Web.Title);
+}
+</code></pre>
+<p><em>PnP Core SDK:</em></p>
+<pre><code class="lang-csharp">using (var context = await pnpContextFactory.CreateAsync(&quot;SiteToWorkWith&quot;))
+{
+  await context.Web.LoadAsync(w =&gt; w.Title, w =&gt; w.Id); // HTTP request is executed immediately
+
+  Console.WriteLine(context.Web.Title);
+}
+</code></pre>
+<p>Here we can see the very first and the very important difference:</p>
+<div class="NOTE">
+<h5>Note</h5>
+<p>All <em><code>Load*</code></em> methods in PnP Core SDK immediately execute the request, in contradiction to the CSOM where you should explicitly call <code>ExecuteQuery</code>. The only exception from this rule is <a href="basics-batching.html">batching</a> (<em><code>LoadBatch*</code></em> methods).</p>
+</div>
+<p>If you use batching, you should explicitly call <code>Execute</code> method:</p>
+<p><em>PnP Core SDK:</em></p>
+<pre><code class="lang-csharp">using (var context = await pnpContextFactory.CreateAsync(&quot;SiteToWorkWith&quot;))
+{
+  await context.Web.LoadBatchAsync(w =&gt; w.Title, w =&gt; w.Id);
+
+  await context.ExecuteAsync(); // executes the actual HTTP request with all batched queries
+
+  Console.WriteLine(context.Web.Title);
+}
+</code></pre>
+<h3 id="loading-data-into-the-variable">Loading data into the variable</h3>
+<p>With CSOM you can also load data into the variable:</p>
+<p><em>CSOM:</em></p>
+<pre><code class="lang-csharp">using (var csomContext = new ClientContext(siteUrl))
+{
+  var web = csomContext.Web;
+  csomContext.Load(web, w =&gt; w.Title, w =&gt; w.Id);
+
+  var list = web.Lists.GetByTitle(&quot;Documents&quot;);
+  csomContext.Load(list);
+
+  csomContext.ExecuteQuery(); // executes the actual HTTP request
+
+  Console.WriteLine(list.Title);
+  Console.WriteLine(web.Title);
+}
+</code></pre>
+<p>The PnP Core SDK equivalent will be:</p>
+<p><em>PnP Core SDK:</em></p>
+<pre><code class="lang-csharp">using (var context = await pnpContextFactory.CreateAsync(&quot;SiteToWorkWith&quot;))
+{
+  var web = await context.Web.GetAsync(w =&gt; w.Title, w =&gt; w.Id); // executes the first HTTP request
+  var list = await context.Web.Lists.GetByTitleAsync(&quot;Documents&quot;); // executes the second HTTP request
+
+  Console.WriteLine(list.Title);
+  Console.WriteLine(web.Title);
+}
+</code></pre>
+<p>The key difference is that the PnP Core SDK always creates a new variable when you use <em><code>Get*</code></em> methods, whereas in the CSOM sometimes you cannot do the same and can only reference a variable from the context. In the latter sample, the PnP Core SDK sends two HTTP requests to get data whereas the CSOM sends only one. If you want fewer HTTP requests in your code consider <a href="basics-batching.html">batching</a> approach.</p>
+<p>Also consider a code to get an item by its id:</p>
+<p><em>CSOM:</em></p>
+<pre><code class="lang-csharp">using (var csomContext = new ClientContext(siteUrl))
+{
+  var item = csomContext.Web.Lists.GetByTitle(&quot;AddTest&quot;).GetItemById(1);
+  csomContext.Load(item);
+  csomContext.ExecuteQuery();
+}
+</code></pre>
+<p><em>PnP Core SDK:</em></p>
+<pre><code class="lang-csharp">using (var context = await pnpContextFactory.CreateAsync(&quot;SiteToWorkWith&quot;))
+{
+  var item = context.Web.Lists.GetByTitle(&quot;AddTest&quot;).Items.GetById(1);
+}
+</code></pre>
+<p>In the latter case the code sends two HTTP requests to get the item. This is because we write it in a synchronous way. To learn more why it happens, check out <a href="basics-async.html">async vs sync</a> page.</p>
+<h2 id="loading-collections">Loading collections</h2>
+<p>The differences in loading collections between the CSOM and the PnP Core SDK are somewhat similar to the regular object loading. You can either load it into the context or as a separate variable.</p>
+<p><em>CSOM:</em></p>
+<pre><code class="lang-csharp">using (var csomContext = new ClientContext(siteUrl))
+{
+  // load the list collection into the context
+  csomContext.Load(csomContext.Web.Lists, lists =&gt; lists.Include(
+                                                    l =&gt; l.Id,
+                                                    l =&gt; l.Title,
+                                                    l =&gt; l.RootFolder));
+
+  // load into the variable
+  var lists = csomContext.LoadQuery(csomContext.Web.Lists.Where(l =&gt; !l.Hidden));
+
+  // execute the request
+  csomContext.ExecuteQuery();
+}
+</code></pre>
+<p><em>PnP Core SDK:</em></p>
+<pre><code class="lang-csharp">using (var context = await pnpContextFactory.CreateAsync(&quot;SiteToWorkWith&quot;))
+{
+  // load the list collection into the context
+  await context.Web.Lists.LoadAsync(l =&gt; l.Id, l =&gt; l.Title, l =&gt; l.RootFolder); // immediately executes the request
+
+  // load into the variable
+  var lists = await context.Web.Lists.Where(l =&gt; l.Hidden == false).ToListAsync(); // immediately executes the request
+}
+</code></pre>
+<p>In the PnP Core SDK, if you need to filter a collection, you can apply the LINQ filter query directly to the collection. Upon execution, the LINQ will be translated to the REST OData filter.</p>
+<h2 id="crud-operations">CRUD operations</h2>
+<p>CRUD operations are very similar in both libraries. Consider the code to update a list item:</p>
+<p><em>CSOM:</em></p>
+<pre><code class="lang-csharp">using (var csomContext = new ClientContext(siteUrl))
+{
+  var list = csomContext.Web.Lists.GetByTitle(&quot;ListTitle&quot;);
+  var item = list.GetItemById(1);
+
+  item[&quot;Title&quot;] = &quot;new title&quot;;
+
+  item.Update();
+
+  csomContext.ExecuteQuery();
+}
+</code></pre>
+<p><em>PnP Core SDK:</em></p>
+<pre><code class="lang-csharp">using (var context = await pnpContextFactory.CreateAsync(&quot;SiteToWorkWith&quot;))
+{
+  var list = await context.Web.Lists.GetByTitleAsync(&quot;AddTest&quot;);
+  var item = await list.Items.GetByIdAsync(1);
+
+  item[&quot;Title&quot;] = &quot;new value&quot;;
+  await item.UpdateAsync(); // sends HTTP request to update the item
+}
+</code></pre>
+<p>In the PnP Core SDK an item is updated immediately at the <code>UpdateAsync</code> line, in the CSOM you have to call <code>Update</code> and <code>ExecuteQuery</code> to commit the changes. If you need to CRUD multiple elements, consider <a href="basics-batching.html">batching</a>.</p>
+</article>
+          </div>
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              </nav>
+            </div>
+          </div>        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            <span>PnP Core SDK<br>Generated by <strong><a href='https://dotnet.github.io/docfx' alt='Doc FX Website'>DocFX</a></strong> with <strong><a href='https://ovasquez.github.io/docfx-material' alt='DocFx Material Theme'>Material UI</a></strong></span>
+            
+            <img src="https://telemetry.sharepointpnp.com/@pnp.github.io/index/" alt="spacer">
+          </div>
+        </div>
+      </footer>    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>  </body>
+</html>

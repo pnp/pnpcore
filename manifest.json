@@ -1446,7 +1446,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.IDataModelCollectionLoad-1.html",
-          "hash": "VaBG52pejLGAQczJWW3sOw=="
+          "hash": "LXRw9wkaNCUK3I1C1JsAsQ=="
         }
       },
       "is_incremental": false,
@@ -3522,7 +3522,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.ITermSet.html",
-          "hash": "3R9tJ5/TR6DntY/9azusuw=="
+          "hash": "EkCjNR6Rx0pG0sLB8iG+ZQ=="
         }
       },
       "is_incremental": false,
@@ -6397,7 +6397,7 @@
       "output": {
         ".html": {
           "relative_path": "using-the-sdk/basics-batching.html",
-          "hash": "p70ib7FKDL+I6k10fWveWQ=="
+          "hash": "R7I4hqSYjng0TOLec2/xhQ=="
         }
       },
       "is_incremental": false,
@@ -6410,6 +6410,18 @@
         ".html": {
           "relative_path": "using-the-sdk/basics-context.html",
           "hash": "KPSFWU6x9wiPT2dh7nXL5Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "using-the-sdk/basics-csom-vs-pnp.md",
+      "output": {
+        ".html": {
+          "relative_path": "using-the-sdk/basics-csom-vs-pnp.html",
+          "hash": "8+Lo1cGtF+hptyPwH3Jn5g=="
         }
       },
       "is_incremental": false,
@@ -7009,7 +7021,7 @@
       "output": {
         ".html": {
           "relative_path": "using-the-sdk/toc.html",
-          "hash": "pT5jv8IcXbilPbU/B5OVGQ=="
+          "hash": "hYJX5c2FIdFwCrgAzT1IOA=="
         }
       },
       "is_incremental": false,
@@ -7066,7 +7078,7 @@
         "ConceptualDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build",
-          "total_file_count": 92,
+          "total_file_count": 93,
           "skipped_file_count": 0
         },
         "ManagedReferenceDocumentProcessor": {

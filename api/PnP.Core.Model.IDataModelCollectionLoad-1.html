@@ -136,7 +136,7 @@
   <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">Task LoadAsync(params Expression&lt;Func&lt;TModel, object&gt;&gt;[] expressions)</code></pre>
+    <pre><code class="lang-csharp hljs">Task LoadAsync(params Expression&lt;Func&lt;TModel, object&gt;&gt;[] selectors)</code></pre>
   </div>
 
   <h5 class="parameters">Parameters</h5>
@@ -144,7 +144,7 @@
     <tr>
       <td>
         <span class="pull-right"><span class="xref">Expression</span>&lt;<span class="xref">Func</span>&lt;TModel, <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object">Object</a>&gt;&gt;[]</span>
-        <span class="parametername">expressions</span>
+        <span class="parametername">selectors</span>
         <p><p>The properties to select</p>
 </p>
       </td>
@@ -192,7 +192,7 @@
   <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">Task&lt;IBatchResult&gt; LoadBatchAsync(Batch batch, params Expression&lt;Func&lt;TModel, object&gt;&gt;[] expressions)</code></pre>
+    <pre><code class="lang-csharp hljs">Task&lt;IBatchResult&gt; LoadBatchAsync(Batch batch, params Expression&lt;Func&lt;TModel, object&gt;&gt;[] selectors)</code></pre>
   </div>
 
   <h5 class="parameters">Parameters</h5>
@@ -208,7 +208,7 @@
     <tr>
       <td>
         <span class="pull-right"><span class="xref">Expression</span>&lt;<span class="xref">Func</span>&lt;TModel, <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object">Object</a>&gt;&gt;[]</span>
-        <span class="parametername">expressions</span>
+        <span class="parametername">selectors</span>
         <p><p>The properties to select</p>
 </p>
       </td>
