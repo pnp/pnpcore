@@ -32,7 +32,7 @@ List item count > 100 | [Option B](#b-getting-list-items-via-paging-no-item-limi
 Requirements | Recommended approach
 -------------|---------------------
 You want to also 'expand' list item collections like `RoleAssignments` | [Option C](#c-getting-list-items-via-the-loaditemsbycamlquery-approach): use a CAML query via the `LoadItemsByCamlQuery` methods
-You want to have more details on the list item properties (e.g. author name instead of only the author id) | [Option D](#d-using-the-listdataasstream-approach): use a CAML query via the `ListDataAsStream` methods
+You want to have more details on the list item properties (e.g. author name instead of only the author id or using a custom added field) | [Option D](#d-using-the-listdataasstream-approach): use a CAML query via the `ListDataAsStream` methods
 
 ### A. Getting list items (max 100 items)
 
