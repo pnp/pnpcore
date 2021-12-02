@@ -22,6 +22,8 @@
     href: basics-customapirequests.md
   - name: SharePoint CSOM vs PnP Core SDK
     href: basics-csom-vs-pnp.md
+  - name: Multi-Threading
+    href: basics-threading.md
   - name: PnP Framework interop
     href: basics-pnpframework.md
   - name: Microsoft Graph SDK interop
