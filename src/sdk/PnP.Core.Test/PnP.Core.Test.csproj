@@ -50,6 +50,9 @@
 		<None Update="TestAssets\pageheader.jpg">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</None>
+		<None Update="TestAssets\parker-ms-300.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
 		<None Update="TestAssets\test.docx">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</None>

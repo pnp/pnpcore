@@ -131,6 +131,12 @@
     href: taxonomy-intro.md
   - name: Advanced
     href: taxonomy-advanced.md
+- name: Social
+  items:
+  - name: User profiles
+    href: social-user-profiles.md
+  - name: Content following
+    href: social-following.md
 - name: SharePoint Syntex
   items:
   - name: Overview

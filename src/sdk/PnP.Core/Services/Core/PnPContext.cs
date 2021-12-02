@@ -50,6 +50,12 @@ namespace PnP.Core.Services
         {
             return new TermStore();
         }, true);
+
+        private readonly Lazy<ISocial> social = new Lazy<ISocial>(() =>
+        {
+            return new Social();
+        }, true);
+
         #endregion
 
         #region Internal properties
@@ -348,6 +354,18 @@ namespace PnP.Core.Services
             {
                 (termStore.Value as TermStore).PnPContext = this;
                 return termStore.Value;
+            }
+        }
+
+        /// <summary>
+        /// Entry point for the social-related APIs
+        /// </summary>
+        public ISocial Social
+        {
+            get
+            {
+                social.Value.PnPContext = this;
+                return social.Value;
             }
         }
         #endregion

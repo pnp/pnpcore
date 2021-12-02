@@ -1,0 +1,9 @@
+--batchresponse_dffabe82-32f6-40ca-bd30-eec41e84be70
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+HTTP/1.1 200 OK
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+
+{"d":{"__metadata":{"id":"https://m365x790252.sharepoint.com/sites/pnpcoresdktestgroup/_api/SP.UserProfiles.PeopleManager/getmyproperties","uri":"https://m365x790252.sharepoint.com/sites/pnpcoresdktestgroup/_api/SP.UserProfiles.PeopleManager/getmyproperties","type":"SP.UserProfiles.PersonProperties"},"AccountName":"i:0#.f|membership|admin@m365x790252.onmicrosoft.com","DisplayName":"MOD Administrator"}}
+--batchresponse_dffabe82-32f6-40ca-bd30-eec41e84be70--

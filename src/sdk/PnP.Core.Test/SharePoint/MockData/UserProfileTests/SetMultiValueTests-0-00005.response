@@ -1,0 +1,9 @@
+--batchresponse_ea8426d5-8eb0-4ecf-803d-94d1269a3d09
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+HTTP/1.1 200 OK
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+
+{"d":{"GetUserProfilePropertyFor":"python|nodejs"}}
+--batchresponse_ea8426d5-8eb0-4ecf-803d-94d1269a3d09--

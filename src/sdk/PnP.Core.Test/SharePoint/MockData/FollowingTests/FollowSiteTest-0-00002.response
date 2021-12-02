@@ -1,0 +1,9 @@
+--batchresponse_b2b2cfbd-1b53-483d-b9ce-9fb6b004997d
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+HTTP/1.1 200 OK
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+
+{"d":{"Follow":0}}
+--batchresponse_b2b2cfbd-1b53-483d-b9ce-9fb6b004997d--

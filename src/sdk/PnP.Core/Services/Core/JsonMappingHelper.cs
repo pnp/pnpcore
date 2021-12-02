@@ -1309,6 +1309,53 @@ namespace PnP.Core.Services
                                 return jsonElement.EnumerateArray().Select(item => item.GetString()).ToArray();
                             }
                         }
+                    case "Dictionary`2":
+                        {
+                            #region sample JSON
+                            /*
+                              "PropName": {
+                                "results": [
+                                    {
+                                        "__metadata": {
+                                            "type": "SP.KeyValue"
+                                        },
+                                        "Key": "UserProfile_GUID",
+                                        "Value": "554558fe-55e1-4163-986a-e5cc5a1ca1d2",
+                                        "ValueType": "Edm.String"
+                                    },
+                                    ...]
+                             */
+                            #endregion
+
+                            if (jsonElement.TryGetProperty("results", out JsonElement results))
+                            {
+                                var dictionary = new Dictionary<string, object>();
+                                foreach (var element in results.EnumerateArray())
+                                {
+                                    var value = element.GetProperty("Value");
+                                    var key = element.GetProperty("Key").GetString();
+
+                                    switch (value.ValueKind)
+                                    {
+                                        case JsonValueKind.String:
+                                            dictionary.Add(key, value.GetString());
+                                            break;
+                                        case JsonValueKind.Number:
+                                            dictionary.Add(key, value.GetInt32());
+                                            break;
+                                        case JsonValueKind.False:
+                                        case JsonValueKind.True:
+                                            dictionary.Add(key, value.GetBoolean());
+                                            break;
+
+                                    }
+                                }
+
+                                return dictionary;
+                            }
+
+                            return null;
+                        }
                     // Used on TermStore model (and maybe more in future)
                     case "List`1":
                         {

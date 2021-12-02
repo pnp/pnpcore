@@ -189,6 +189,9 @@
   <data name="Exception_Json_EmptyArray" xml:space="preserve">
     <value>The expected JSON array is empty</value>
   </data>
+  <data name="Exception_Json_Unexpected" xml:space="preserve">
+    <value>Unexpected JSON</value>
+  </data>
   <data name="Exception_LinqError_MissingValue" xml:space="preserve">
     <value>Missing value for {0} in {1}</value>
   </data>
@@ -348,6 +351,9 @@
   <data name="Exception_Unsupported_FileServerRelativeUrlNotLoaded" xml:space="preserve">
     <value>Ensure you've requested the 'FileServerRelativeUrl' property before you call UpdateAsync() on a file's properties</value>
   </data>
+  <data name="Exception_Unsupported_FollowRequest" xml:space="preserve">
+    <value>The Follow request is not supported</value>
+  </data>
   <data name="Exception_Unsupported_GraphUserOnSharePoint" xml:space="preserve">
     <value>You can't call AsGraphUserAsync on a SharePoint user with principal type different than User or SecurityGroup</value>
   </data>
@@ -380,6 +386,9 @@
   </data>
   <data name="Exception_Unsupported_QueryPropertiesUse" xml:space="preserve">
     <value>This function can be called from a LINQ query only</value>
+  </data>
+  <data name="Exception_Unsupported_Selector" xml:space="preserve">
+    <value>The selector type is not supported</value>
   </data>
   <data name="Exception_Unsupported_SharePointUserOnGraph" xml:space="preserve">
     <value>You can't call AsSharePointUserAsync on a Graph user without the UserPrincipalProperty requested and populated</value>

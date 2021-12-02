@@ -1,0 +1,9 @@
+--batchresponse_ffe00aa0-d53c-41b8-8ace-99d23c499c34
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+HTTP/1.1 200 OK
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+
+{"d":{"SetSingleValueProfileProperty":null}}
+--batchresponse_ffe00aa0-d53c-41b8-8ace-99d23c499c34--
