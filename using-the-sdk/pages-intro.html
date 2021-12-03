@@ -241,6 +241,33 @@ page.AddControl(page.NewWebPart(imageWebPartComponent), page.Sections[0].Columns
 // Save the page
 await page.SaveAsync(&quot;MyPage.aspx&quot;);
 </code></pre>
+<h3 id="updating-the-page-author-editor-created-and-modified-system-properties">Updating the page Author, Editor, Created and Modified system properties</h3>
+<p>A common request is to change the list item <code>Author</code>, <code>Editor</code>, <code>Created</code> and <code>Modified</code> system properties of a page, which is allowed via the <code>UpdateOverWriteVersion</code> methods.</p>
+<pre><code class="lang-csharp">// Load the page you want to update
+var pages = await context.Web.GetPagesAsync(&quot;mypage.aspx&quot;);
+var myPage = pages.AsEnumerable().First();
+
+// Load the page file with it's associated list item
+var pageFile = await myPage.GetPageFileAsync(p =&gt; p.ListItemAllFields);
+
+// Load the Author and Editor fields                
+var author = myPage.PagesLibrary.Fields.AsRequested().FirstOrDefault(p =&gt; p.InternalName == &quot;Author&quot;);
+var editor = myPage.PagesLibrary.Fields.AsRequested().FirstOrDefault(p =&gt; p.InternalName == &quot;Editor&quot;);
+
+// Load the user to set as Author/Editor
+var currentUser = await context.Web.GetCurrentUserAsync();
+// Define the new date for Created/Modified
+var newDate = new DateTime(2020, 10, 20);
+
+// Update the properties
+pageFile.ListItemAllFields[&quot;Author&quot;] = author.NewFieldUserValue(currentUser);
+pageFile.ListItemAllFields[&quot;Editor&quot;] = editor.NewFieldUserValue(currentUser);
+pageFile.ListItemAllFields[&quot;Created&quot;] = newDate;
+pageFile.ListItemAllFields[&quot;Modified&quot;] = newDate;
+
+// Persist the changes
+await pageFile.ListItemAllFields.UpdateOverwriteVersionAsync();
+</code></pre>
 <h2 id="deleting-a-page">Deleting a page</h2>
 <p>You can delete pages via the <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IPage.html#PnP_Core_Model_SharePoint_IPage_DeleteAsync">DeleteAsync method</a>:</p>
 <pre><code class="lang-csharp">await page.DeleteAsync();
