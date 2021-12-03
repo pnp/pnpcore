@@ -532,6 +532,43 @@ await addedItem.UpdateAsync();
 > - When referencing a field keep in mind that you need to use the field's `StaticName`. If you've created a field with name `Version Tag` then the `StaticName` will be `Version_x0020_Tag`, so you will be using `myItem["Version_x0020_Tag"]` to work with the field.
 > - When referencing a field ensure to use the correct field name casing: `version` is not the same as `Version`.
 
+### Updating the list item Author, Editor, Created and Modified system properties
+
+A common request is to change the list item `Author`, `Editor`, `Created` and `Modified` system properties, which is allowed via the `UpdateOverWriteVersion` methods.
+
+```csharp
+// Load the list
+var myList = context.Web.Lists.GetByTitle("My List", p => p.Title, 
+                                                     p => p.Fields.QueryProperties(
+                                                       p => p.InternalName, 
+                                                       p => p.FieldTypeKind, 
+                                                       p => p.TypeAsString, 
+                                                       p => p.Title));
+
+// Grab first item
+var firstItem = myList.Items.AsRequested().FirstOrDefault();
+if (firstItem != null)
+{
+    // Load the Author and Editor fields
+    var author = myList.Fields.AsRequested().FirstOrDefault(p => p.InternalName == "Author");
+    var editor = myList.Fields.AsRequested().FirstOrDefault(p => p.InternalName == "Editor");
+
+    // Load the user to set as Author/Editor
+    var currentUser = await context.Web.GetCurrentUserAsync();
+    // Define the new date for Created/Modified
+    var newDate = new DateTime(2020, 10, 20);
+
+    // Update the properties
+    firstItem.Values["Author"] = author.NewFieldUserValue(currentUser);
+    firstItem.Values["Editor"] = editor.NewFieldUserValue(currentUser);
+    firstItem.Values["Created"] = newDate;
+    firstItem.Values["Modified"] = newDate;
+
+    // Persist the changes
+    await firstItem.UpdateOverwriteVersionAsync();
+}
+```
+
 ## Deleting list items
 
 Using the Delete methods like DeleteAsync or DeleteBatchAsync you can delete one or more list items in a single server roundtrip. Batching is preferred if you need to delete multiple list items.

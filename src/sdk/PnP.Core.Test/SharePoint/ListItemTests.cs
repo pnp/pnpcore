@@ -439,8 +439,10 @@ namespace PnP.Core.Test.SharePoint
 
                             if (!TestCommon.RunningInGitHubWorkflow())
                             {
-                                Assert.IsTrue(firstItem.Values["Created"].ToString() == newDate.ToString());
-                                Assert.IsTrue(firstItem.Values["Modified"].ToString() == newDate.ToString());
+                                Assert.IsTrue(((DateTime)firstItem.Values["Created"]).Year == newDate.Year);
+                                Assert.IsTrue(((DateTime)firstItem.Values["Created"]).Month == newDate.Month);
+                                Assert.IsTrue(((DateTime)firstItem.Values["Modified"]).Year == newDate.Year);
+                                Assert.IsTrue(((DateTime)firstItem.Values["Modified"]).Month == newDate.Month);
                             }
                         }
                     }

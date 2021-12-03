@@ -2000,6 +2000,56 @@ namespace PnP.Core.Test.SharePoint
         }
 
         [TestMethod]
+        public async Task CreateAndUpdatePageAuthorEditorCreatedModified()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var newPage = await context.Web.NewPageAsync();
+                string pageName = TestCommon.GetPnPSdkTestAssetName("CreateAndUpdatePageAuthorEditorCreatedModified.aspx");
+
+                newPage.AddSection(CanvasSectionTemplate.ThreeColumn, 1, VariantThemeType.Soft, VariantThemeType.Strong);
+                newPage.AddControl(newPage.NewTextPart("I"), newPage.Sections[0].Columns[0]);
+                newPage.AddControl(newPage.NewTextPart("like"), newPage.Sections[0].Columns[1]);
+                newPage.AddControl(newPage.NewTextPart("PnP"), newPage.Sections[0].Columns[2]);
+
+                // Save the page
+                await newPage.SaveAsync(pageName);
+
+                // Load the Page File
+                var pageFile = await newPage.GetPageFileAsync(p => p.ListItemAllFields);
+                
+                // load the current user
+                var currentUser = await context.Web.GetCurrentUserAsync();
+                var newDate = new DateTime(2020, 10, 20);
+
+                // Load the Author and Editor fields                
+                var author = newPage.PagesLibrary.Fields.AsRequested().FirstOrDefault(p => p.InternalName == "Author");
+                var editor = newPage.PagesLibrary.Fields.AsRequested().FirstOrDefault(p => p.InternalName == "Editor");
+
+                pageFile.ListItemAllFields["Author"] = author.NewFieldUserValue(currentUser);
+                pageFile.ListItemAllFields["Editor"] = editor.NewFieldUserValue(currentUser);
+                pageFile.ListItemAllFields["Created"] = newDate;
+                pageFile.ListItemAllFields["Modified"] = newDate;
+                await pageFile.ListItemAllFields.UpdateOverwriteVersionAsync();
+
+                // Load the page again
+                var pages = await context.Web.GetPagesAsync(pageName);
+                var updatedPage = pages.AsEnumerable().First();
+
+                pageFile = await updatedPage.GetPageFileAsync(p => p.ListItemAllFields);
+                
+                Assert.IsTrue(((DateTime)pageFile.ListItemAllFields["Created"]).Year == newDate.Year);
+                Assert.IsTrue(((DateTime)pageFile.ListItemAllFields["Created"]).Month == newDate.Month);
+                Assert.IsTrue(((DateTime)pageFile.ListItemAllFields["Modified"]).Year == newDate.Year);
+                Assert.IsTrue(((DateTime)pageFile.ListItemAllFields["Modified"]).Month == newDate.Month);
+
+                // Delete the page
+                await updatedPage.DeleteAsync();
+            }
+        }
+
+        [TestMethod]
         public async Task SavePageAsTemplate()
         {
             //TestCommon.Instance.Mocking = false;

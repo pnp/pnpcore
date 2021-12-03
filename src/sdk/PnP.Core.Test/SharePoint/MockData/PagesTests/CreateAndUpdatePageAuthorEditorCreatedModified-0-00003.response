@@ -1,0 +1,9 @@
+--batchresponse_60883167-b4a9-4477-bc28-0f7252408393
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+HTTP/1.1 404 Not Found
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+
+{"error":{"code":"-2130575338, Microsoft.SharePoint.SPException","message":{"lang":"en-US","value":"The file /sites/prov-2/SitePages/PNP_SDK_TEST_CreateAndUpdatePageAuthorEditorCreatedModified.aspx does not exist."}}}
+--batchresponse_60883167-b4a9-4477-bc28-0f7252408393--
