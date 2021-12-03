@@ -568,7 +568,14 @@ namespace PnP.Core.Services
                 {
 #endif
                     // Ensure the request contains authentication information
-                    await PnPContext.AuthenticationProvider.AuthenticateRequestAsync(PnPConstants.MicrosoftGraphBaseUri, request).ConfigureAwait(false);
+                    var graphBaseUri = PnPConstants.MicrosoftGraphBaseUri;
+
+                    if (PnPContext.Environment.HasValue)
+                    {
+                        graphBaseUri = new Uri($"https://{CloudManager.GetMicrosoftGraphAuthority(PnPContext.Environment.Value)}/");
+                    }
+
+                    await PnPContext.AuthenticationProvider.AuthenticateRequestAsync(graphBaseUri, request).ConfigureAwait(false);
 
                     // Send the request
                     HttpResponseMessage response = await PnPContext.GraphClient.Client.SendAsync(request, HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false);
