@@ -1,6 +1,8 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PnP.Core.Admin.Model.SharePoint;
 using PnP.Core.Admin.Test.Utilities;
+using PnP.Core.Model;
+using PnP.Core.QueryModel;
 using PnP.Core.Services;
 using System;
 using System.Collections.Generic;
@@ -349,6 +351,95 @@ namespace PnP.Core.Admin.Test.SharePoint
         }
 
         [TestMethod]
+        public async Task SetSiteCollectionAdminsRegularSiteApplicationPermissions()
+        {
+            //TestCommon.Instance.Mocking = false;
+            TestCommon.Instance.UseApplicationPermissions = true;
+
+            CommunicationSiteOptions communicationSiteToCreate = null;
+
+            // Create the site collection
+            try
+            {
+                using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.NoGroupTestSite))
+                {
+                    // Determine the user to set as owner
+                    await context.Web.LoadAsync(p => p.AssociatedOwnerGroup.QueryProperties(p => p.Users));
+                    var user = context.Web.AssociatedOwnerGroup.Users.AsRequested().FirstOrDefault();
+
+                    // Persist the used site url as we need to have the same url when we run an offline test
+                    Uri siteUrl;
+                    string owner = user.LoginName;
+                    if (!TestCommon.Instance.Mocking)
+                    {
+                        siteUrl = new Uri($"https://{context.Uri.DnsSafeHost}/sites/pnpcoresdktestcommsite{Guid.NewGuid().ToString().Replace("-", "")}");
+                        Dictionary<string, string> properties = new Dictionary<string, string>
+                        {
+                            { "SiteUrl", siteUrl.ToString() },
+                            { "SiteOwner", owner }
+                        };
+                        TestManager.SaveProperties(context, properties);
+                    }
+                    else
+                    {
+                        siteUrl = new Uri(TestManager.GetProperties(context)["SiteUrl"]);
+                        owner = TestManager.GetProperties(context)["SiteOwner"];
+                    }
+
+                    communicationSiteToCreate = new CommunicationSiteOptions(siteUrl, "PnP Core SDK Test")
+                    {
+                        Description = "This is a test site collection",
+                        Language = Language.English,
+                        Owner = owner
+                    };
+
+
+                    SiteCreationOptions siteCreationOptions = new SiteCreationOptions()
+                    {
+                        UsingApplicationPermissions = true
+                    };
+
+                    context.GetSiteCollectionManager().CreateSiteCollection(communicationSiteToCreate, siteCreationOptions);
+
+                    // get current admins
+                    var admins = context.GetSiteCollectionManager().GetSiteCollectionAdmins(communicationSiteToCreate.Url);
+
+                    // update admins
+                    List<string> newAdmins = new List<string>();
+                    foreach (var admin in admins)
+                    {
+                        newAdmins.Add(admin.LoginName);
+                    }
+
+                    // everyone claim
+                    newAdmins.Add("c:0(.s|true");
+
+                    // set admins
+                    context.GetSiteCollectionManager().SetSiteCollectionAdmins(communicationSiteToCreate.Url, newAdmins);
+
+                    // Get admins again and verify if the added admin is present
+                    admins = context.GetSiteCollectionManager().GetSiteCollectionAdmins(communicationSiteToCreate.Url);
+
+                    Assert.IsNotNull(admins.FirstOrDefault(p => p.LoginName == "c:0(.s|true"));
+
+                    if (context.Mode == TestMode.Record)
+                    {
+                        // Add a little delay between creation and deletion
+                        await Task.Delay(TimeSpan.FromSeconds(15));
+                    }
+                }
+            }
+            finally
+            {
+                using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+                {
+                    context.GetSiteCollectionManager().DeleteSiteCollection(communicationSiteToCreate.Url);
+                }
+                TestCommon.Instance.UseApplicationPermissions = false;
+            }
+        }
+
+        [TestMethod]
         public async Task SetSiteCollectionAdminsGroupSite()
         {
             //TestCommon.Instance.Mocking = false;
@@ -441,6 +532,7 @@ namespace PnP.Core.Admin.Test.SharePoint
 
             }
         }
+
 
         #region Handle input exceptions
         [TestMethod]
