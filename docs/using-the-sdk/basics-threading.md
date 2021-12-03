@@ -1,6 +1,9 @@
 # Multi-threading with PnP Core SDK
 
-The key PnP Core SDK classes like `PnPContext`, the model classes (e.g. `IWeb`, `ITeamChannel`,...) and model collection classes (e.g. `IListCollection`, `ITeamChannelCollection`) are not thread-safe and therefore it's not recommended to build solutions that have multiple threads sharing these classes. Doing so may lead to unexpected results and exceptions.
+The key PnP Core SDK classes like `PnPContext`, the model classes (e.g. `IWeb`, `ITeamChannel`,...) and model collection classes (e.g. `IListCollection`, `ITeamChannelCollection`) are **not thread-safe** and therefore it's not recommended to build solutions that have multiple threads sharing these classes. Doing so may lead to unexpected results and exceptions.
+
+> [!Important]
+> While threading is a very attractive option to speed up operations do keep in mind that your application might get throttled sooner as throttling protection kicks in whenever the amount of requests an application makes in a given time window exceeds a certain threshold. The threshold itself is a dynamic one that depends on many factors. See the [Avoid getting throttled or blocked in SharePoint Online](https://docs.microsoft.com/en-us/sharepoint/dev/general-development/how-to-avoid-getting-throttled-or-blocked-in-sharepoint-online) article for more details.
 
 ## What options do I have to parallelize operations?
 

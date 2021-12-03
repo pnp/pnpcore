@@ -75,8 +75,5 @@ context.GetSiteCollectionManager().SetSiteCollectionAdmins(new Uri("https://cont
 List<Guid> newGroupOwners = new List<Guid>();
 newGroupOwners.Add(Guid.Parse("3d25e9c4-b20f-443b-ab4d-8ab0668f72ee"));
 
-List<string> newAdmins = new List<string>();
-newAdmins.Add("c:0-.f|rolemanager|spo-grid-all-users/6492ece7-7f5d-4499-8130-50e761e25bd9");
-
-context.GetSiteCollectionManager().SetSiteCollectionAdmins(new Uri("https://contoso.sharepoint.com/sites/somesite"), newAdmins, newGroupOwners);
+context.GetSiteCollectionManager().SetSiteCollectionAdmins(new Uri("https://contoso.sharepoint.com/sites/somesite"), newGroupOwners);
 ```
