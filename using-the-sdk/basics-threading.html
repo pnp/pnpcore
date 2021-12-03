@@ -82,7 +82,11 @@
                   </div>
                     <h1 id="multi-threading-with-pnp-core-sdk">Multi-threading with PnP Core SDK</h1>
 
-<p>The key PnP Core SDK classes like <code>PnPContext</code>, the model classes (e.g. <code>IWeb</code>, <code>ITeamChannel</code>,...) and model collection classes (e.g. <code>IListCollection</code>, <code>ITeamChannelCollection</code>) are not thread-safe and therefore it's not recommended to build solutions that have multiple threads sharing these classes. Doing so may lead to unexpected results and exceptions.</p>
+<p>The key PnP Core SDK classes like <code>PnPContext</code>, the model classes (e.g. <code>IWeb</code>, <code>ITeamChannel</code>,...) and model collection classes (e.g. <code>IListCollection</code>, <code>ITeamChannelCollection</code>) are <strong>not thread-safe</strong> and therefore it's not recommended to build solutions that have multiple threads sharing these classes. Doing so may lead to unexpected results and exceptions.</p>
+<div class="IMPORTANT">
+<h5>Important</h5>
+<p>While threading is a very attractive option to speed up operations do keep in mind that your application might get throttled sooner as throttling protection kicks in whenever the amount of requests an application makes in a given time window exceeds a certain threshold. The threshold itself is a dynamic one that depends on many factors. See the <a href="https://docs.microsoft.com/en-us/sharepoint/dev/general-development/how-to-avoid-getting-throttled-or-blocked-in-sharepoint-online">Avoid getting throttled or blocked in SharePoint Online</a> article for more details.</p>
+</div>
 <h2 id="what-options-do-i-have-to-parallelize-operations">What options do I have to parallelize operations?</h2>
 <p>The main thing to do is to <strong>create a <code>PnPContext</code> per thread</strong> by either creating a new one (e.g. if you're running a thread per site/web) or by cloning the current one in case you're parallelizing work inside the same site/web. Below code samples show two implementations of running operations for a given <code>IWeb</code> in parallel:</p>
 <pre><code class="lang-csharp">var urls = new[] { &quot;https://contoso.sharepoint.com/sites/siteA&quot;, &quot;https://contoso.sharepoint.com/sites/siteB&quot; };
