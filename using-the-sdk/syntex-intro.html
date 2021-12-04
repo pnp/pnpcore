@@ -93,11 +93,22 @@
     // See next chapter on how to use the PnPContext for working with Syntex Models
 }
 </code></pre>
-<h2 id="checking-if-syntex-is-enabled">Checking if Syntex is enabled</h2>
+<h2 id="checking-if-sharepoint-syntex-is-enabled-for-the-tenant">Checking if SharePoint Syntex is enabled for the tenant</h2>
 <p>SharePoint Syntex is an add-on to Microsoft 365 that has to be acquired separately, so you can't assume every tenant can use SharePoint Syntex. To check for the SharePoint Syntex enabled you can use the <code>IsSyntexEnabled</code> methods:</p>
 <pre><code class="lang-csharp">if (await context.Web.IsSyntexEnabledAsync())
 {
     // Syntex is enabled
+}
+else
+{
+    // No Syntex :-(
+}
+</code></pre>
+<h2 id="checking-if-sharepoint-syntex-is-enabled-for-the-current-user">Checking if SharePoint Syntex is enabled for the current user</h2>
+<p>SharePoint Syntex is an add-on to Microsoft 365 that has to be acquired separately and licensed to users, so you can't assume every tenant user can use SharePoint Syntex. To check for the SharePoint Syntex enabled for the current user you can use the <code>IsSyntexEnabledForCurrentUser</code> methods:</p>
+<pre><code class="lang-csharp">if (await context.Web.IsSyntexEnabledForCurrentUserAsync())
+{
+    // SharePoint Syntex is enabled for the current user
 }
 else
 {

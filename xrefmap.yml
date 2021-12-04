@@ -35400,6 +35400,32 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IWeb.IsSyntexEnabledAsync
   nameWithType: IWeb.IsSyntexEnabledAsync
+- uid: PnP.Core.Model.SharePoint.IWeb.IsSyntexEnabledForCurrentUser
+  name: IsSyntexEnabledForCurrentUser()
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_IsSyntexEnabledForCurrentUser
+  commentId: M:PnP.Core.Model.SharePoint.IWeb.IsSyntexEnabledForCurrentUser
+  fullName: PnP.Core.Model.SharePoint.IWeb.IsSyntexEnabledForCurrentUser()
+  nameWithType: IWeb.IsSyntexEnabledForCurrentUser()
+- uid: PnP.Core.Model.SharePoint.IWeb.IsSyntexEnabledForCurrentUser*
+  name: IsSyntexEnabledForCurrentUser
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_IsSyntexEnabledForCurrentUser_
+  commentId: Overload:PnP.Core.Model.SharePoint.IWeb.IsSyntexEnabledForCurrentUser
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IWeb.IsSyntexEnabledForCurrentUser
+  nameWithType: IWeb.IsSyntexEnabledForCurrentUser
+- uid: PnP.Core.Model.SharePoint.IWeb.IsSyntexEnabledForCurrentUserAsync
+  name: IsSyntexEnabledForCurrentUserAsync()
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_IsSyntexEnabledForCurrentUserAsync
+  commentId: M:PnP.Core.Model.SharePoint.IWeb.IsSyntexEnabledForCurrentUserAsync
+  fullName: PnP.Core.Model.SharePoint.IWeb.IsSyntexEnabledForCurrentUserAsync()
+  nameWithType: IWeb.IsSyntexEnabledForCurrentUserAsync()
+- uid: PnP.Core.Model.SharePoint.IWeb.IsSyntexEnabledForCurrentUserAsync*
+  name: IsSyntexEnabledForCurrentUserAsync
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_IsSyntexEnabledForCurrentUserAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.IWeb.IsSyntexEnabledForCurrentUserAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IWeb.IsSyntexEnabledForCurrentUserAsync
+  nameWithType: IWeb.IsSyntexEnabledForCurrentUserAsync
 - uid: PnP.Core.Model.SharePoint.IWeb.Language
   name: Language
   href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_Language
