@@ -928,16 +928,28 @@ namespace PnP.Core.Model.SharePoint
 
         #region Syntex support
         /// <summary>
-        /// Is Syntex enabled
+        /// Is the tenant enabled for SharePoint Syntex
         /// </summary>
-        /// <returns>True if Syntex is enabled, false otherwise</returns>
+        /// <returns>True if SharePoint Syntex is enabled, false otherwise</returns>
         Task<bool> IsSyntexEnabledAsync();
 
         /// <summary>
-        /// Is Syntex enabled
+        /// Is the tenant enabled for SharePoint Syntex
         /// </summary>
-        /// <returns>True if Syntex is enabled, false otherwise</returns>
+        /// <returns>True if SharePoint Syntex is enabled, false otherwise</returns>
         bool IsSyntexEnabled();
+
+        /// <summary>
+        /// Is SharePoint Syntex enabled for the current user
+        /// </summary>
+        /// <returns>True if SharePoint Syntex is enabled for the current user, false otherwise</returns>
+        Task<bool> IsSyntexEnabledForCurrentUserAsync();
+
+        /// <summary>
+        /// Is SharePoint Syntex enabled for the current user
+        /// </summary>
+        /// <returns>True if SharePoint Syntex is enabled for the current user, false otherwise</returns>
+        bool IsSyntexEnabledForCurrentUser();
 
         /// <summary>
         /// Is this web a Syntex Content Center

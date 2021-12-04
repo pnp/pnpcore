@@ -849,6 +849,22 @@ namespace PnP.Core.Model.SharePoint
             return IsSyntexEnabledAsync().GetAwaiter().GetResult();
         }
 
+        public async Task<bool> IsSyntexEnabledForCurrentUserAsync()
+        {
+            ApiCall apiCall = new ApiCall($"_api/machinelearning/MachineLearningEnabled/UserSyntexEnabled", ApiType.SPORest);
+            var response = await RawRequestAsync(apiCall, HttpMethod.Get).ConfigureAwait(false);
+
+            // Json response: {"d":{"UserSyntexEnabled":true}}
+            var machineLearningCaptureEnabled = JsonSerializer.Deserialize<JsonElement>(response.Json).GetProperty("d").GetProperty("UserSyntexEnabled");
+
+            return machineLearningCaptureEnabled.GetBoolean();
+        }
+
+        public bool IsSyntexEnabledForCurrentUser()
+        {
+            return IsSyntexEnabledForCurrentUserAsync().GetAwaiter().GetResult();
+        }
+
         public async Task<bool> IsSyntexContentCenterAsync()
         {
             await EnsurePropertiesAsync(p => p.WebTemplate).ConfigureAwait(false);

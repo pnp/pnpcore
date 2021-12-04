@@ -14,7 +14,7 @@ using (var context = await pnpContextFactory.CreateAsync("SiteToWorkWith"))
 }
 ```
 
-## Checking if Syntex is enabled
+## Checking if SharePoint Syntex is enabled for the tenant
 
 SharePoint Syntex is an add-on to Microsoft 365 that has to be acquired separately, so you can't assume every tenant can use SharePoint Syntex. To check for the SharePoint Syntex enabled you can use the `IsSyntexEnabled` methods:
 
@@ -22,6 +22,21 @@ SharePoint Syntex is an add-on to Microsoft 365 that has to be acquired separate
 if (await context.Web.IsSyntexEnabledAsync())
 {
     // Syntex is enabled
+}
+else
+{
+    // No Syntex :-(
+}
+```
+
+## Checking if SharePoint Syntex is enabled for the current user
+
+SharePoint Syntex is an add-on to Microsoft 365 that has to be acquired separately and licensed to users, so you can't assume every tenant user can use SharePoint Syntex. To check for the SharePoint Syntex enabled for the current user you can use the `IsSyntexEnabledForCurrentUser` methods:
+
+```csharp
+if (await context.Web.IsSyntexEnabledForCurrentUserAsync())
+{
+    // SharePoint Syntex is enabled for the current user
 }
 else
 {
