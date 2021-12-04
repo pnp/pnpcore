@@ -200,6 +200,27 @@ namespace PnP.Core.Test.SharePoint
         }
 
         [TestMethod]
+        public async Task ListGetBatchMethods()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                context.GraphFirst = false;
+
+                var documentLibrary = context.Web.Lists.GetByTitleBatch("Documents", p => p.ContentTypes.QueryProperties(p => p.FieldLinks));
+
+                Assert.IsFalse(documentLibrary.Requested);
+
+                await context.ExecuteAsync();
+
+                Assert.IsTrue(documentLibrary.Requested);
+                Assert.IsTrue(documentLibrary.IsPropertyAvailable(p => p.Id));
+                Assert.IsTrue(documentLibrary.ContentTypes.AsRequested().First().IsPropertyAvailable(p => p.FieldLinks));
+                Assert.IsTrue(documentLibrary.ContentTypes.AsRequested().First().FieldLinks.AsRequested().First().IsPropertyAvailable(p => p.Name));
+            }
+        }
+
+        [TestMethod]
         public async Task ListLinqGetExceptionMethods()
         {
             //TestCommon.Instance.Mocking = false;
