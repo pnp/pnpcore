@@ -34,6 +34,19 @@ namespace PnP.Core.Test.SharePoint
         }
 
         [TestMethod]
+        public async Task IsSyntexEnabledForCurrentUser()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var syntexEnabled = context.Web.IsSyntexEnabledForCurrentUser();
+
+                // Just to verify we got here, as not all developers have syntex enabled we can't assume the answer
+                Assert.IsTrue(syntexEnabled == true || syntexEnabled == false);
+            }
+        }
+
+        [TestMethod]
         public async Task IsSyntexContentCenterNegative()
         {
             //TestCommon.Instance.Mocking = false;

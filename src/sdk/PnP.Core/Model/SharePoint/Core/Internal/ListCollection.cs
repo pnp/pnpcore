@@ -1,6 +1,7 @@
 ﻿using PnP.Core.QueryModel;
 using PnP.Core.Services;
 using System;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -102,6 +103,46 @@ namespace PnP.Core.Model.SharePoint
             return await this.QueryProperties(selectors).FirstOrDefaultAsync(l => l.Title == title).ConfigureAwait(false);
         }
 
+        public async Task<IList> GetByTitleBatchAsync(Batch batch, string title, params Expression<Func<IList, object>>[] selectors)
+        {
+            if (title == null)
+            {
+                throw new ArgumentNullException(nameof(title));
+            }
+
+            List list = new List()
+            {
+                PnPContext = PnPContext,
+                Parent = this
+            };
+
+            await list.BaseBatchRetrieveAsync(batch, apiOverride: BuildGetListByTitleApiCall(title),
+                                                                    fromJsonCasting: list.MappingHandler,
+                                                                    postMappingJson: list.PostMappingHandler,
+                                                                    selectors: selectors).ConfigureAwait(false);
+            return list;
+
+        }
+
+        public IList GetByTitleBatch(Batch batch, string title, params Expression<Func<IList, object>>[] selectors)
+        {
+            return GetByTitleBatchAsync(batch, title, selectors).GetAwaiter().GetResult();
+        }
+
+        public async Task<IList> GetByTitleBatchAsync(string title, params Expression<Func<IList, object>>[] selectors)
+        {
+            return await GetByTitleBatchAsync(PnPContext.CurrentBatch, title, selectors).ConfigureAwait(false); 
+        }
+
+        public IList GetByTitleBatch(string title, params Expression<Func<IList, object>>[] selectors)
+        {
+            return GetByTitleBatchAsync(title, selectors).GetAwaiter().GetResult();
+        }
+
+        private static ApiCall BuildGetListByTitleApiCall(string listTitle)
+        {
+            return new ApiCall($"_api/web/lists/getbytitle('{listTitle}')", ApiType.SPORest);
+        }
         #endregion
 
         #region GetById methods

@@ -7,7 +7,6 @@ using PnP.Core.Services;
 using System;
 using System.Collections.Specialized;
 using System.IO;
-using System.Linq;
 using System.Net;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -19,11 +18,13 @@ namespace ProvisioningDemo
     {
         private readonly ILogger logger;
         private readonly IPnPContextFactory contextFactory;
+        private readonly AzureFunctionSettings azureFunctionSettings;
 
-        public CreateSite(IPnPContextFactory pnpContextFactory, ILoggerFactory loggerFactory)
+        public CreateSite(IPnPContextFactory pnpContextFactory, ILoggerFactory loggerFactory, AzureFunctionSettings settings)
         {
             logger = loggerFactory.CreateLogger<CreateSite>();
             contextFactory = pnpContextFactory;
+            azureFunctionSettings = settings;
         }
 
         /// <summary>
@@ -68,7 +69,7 @@ namespace ProvisioningDemo
                         // Step 1: Upload image to site assets library
                         var siteAssetsLibrary = await newSiteContext.Web.Lists.EnsureSiteAssetsLibraryAsync(p => p.RootFolder);
                         var uploadFolder = await siteAssetsLibrary.RootFolder.EnsureFolderAsync("SitePages/PnP");
-                        var addedFile = await uploadFolder.Files.AddAsync("parker.png",File.OpenRead($".{Path.DirectorySeparatorChar}parker.png"), true);
+                        var addedFile = await uploadFolder.Files.AddAsync("parker.png", File.OpenRead($".{Path.DirectorySeparatorChar}parker.png"), true);
 
                         // Step 2: Create the page
                         var page = await newSiteContext.Web.NewPageAsync();

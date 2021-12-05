@@ -24,6 +24,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Added taxonomy field related properties. #653 [s-KaiNet - Sergei Sergeev]
 - Added support for handling throttling and network resilience for Azure AD requests made via MSAL #656 [patrikhellgren - Patrik Hellgren]
 - Added documentation and inline comments to help SDK users understand `IQueryable` and when to use `.AsRequested()` #660 [s-KaiNet - Sergei Sergeev]
+- Added documentation to help CSOM developers switch to PnP Core SDK #669 [s-KaiNet - Sergei Sergeev]
 
 ### Changed
 
@@ -53,6 +54,9 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Http clients and retry handlers never got their logger assigned, fixed now so that for example throttling will show in logs [jansenbe - Bert Jansen]
 - Increased reliability via retry on SocketException in SendAsync #650 [patrikhellgren - Patrik Hellgren]
 - Non collapsible sections were wrongly loaded as collapsible sections in collapsed state [jansenbe - Bert Jansen]
+- Page sections where not removeable #666 [jansenbe - Bert Jansen]
+- List item documentation update #668 [koenzomers - Koen Zomers]
+- Added `IsSyntexEnabledForCurrentUser` methods on `IWeb` [jansenbe - Bert Jansen]
 
 ## [1.4.0]
 

@@ -20,14 +20,14 @@ The PnP Core SDK supports multiple ways to read list items and what approach to 
 
 Use below information to help pick the best option for reading list items.
 
-### No need to read 'system properties' like FileLeafRef, FileDirRef and no need to filter list items
+### No need to read 'system properties' like FileLeafRef, FileDirRef and you've no need to filter list items
 
 Requirements | Recommended approach
 -------------|---------------------
 List item count <= 100 | [Option A](#a-getting-list-items-max-100-items): expand the items via a `Get` or `Load` method
 List item count > 100 | [Option B](#b-getting-list-items-via-paging-no-item-limit): iterate over the list items using implicit paging
 
-### You need to read 'system properties' like FileLeafRef, FileDirRef or you need to filter list items
+### You need to read 'system properties' like FileLeafRef, FileDirRef or you need to filter list items or you want to define the returned fields
 
 Requirements | Recommended approach
 -------------|---------------------
@@ -531,6 +531,43 @@ await addedItem.UpdateAsync();
 > [!Note]
 > - When referencing a field keep in mind that you need to use the field's `StaticName`. If you've created a field with name `Version Tag` then the `StaticName` will be `Version_x0020_Tag`, so you will be using `myItem["Version_x0020_Tag"]` to work with the field.
 > - When referencing a field ensure to use the correct field name casing: `version` is not the same as `Version`.
+
+### Updating the list item Author, Editor, Created and Modified system properties
+
+A common request is to change the list item `Author`, `Editor`, `Created` and `Modified` system properties, which is allowed via the `UpdateOverWriteVersion` methods.
+
+```csharp
+// Load the list
+var myList = context.Web.Lists.GetByTitle("My List", p => p.Title, 
+                                                     p => p.Fields.QueryProperties(
+                                                       p => p.InternalName, 
+                                                       p => p.FieldTypeKind, 
+                                                       p => p.TypeAsString, 
+                                                       p => p.Title));
+
+// Grab first item
+var firstItem = myList.Items.AsRequested().FirstOrDefault();
+if (firstItem != null)
+{
+    // Load the Author and Editor fields
+    var author = myList.Fields.AsRequested().FirstOrDefault(p => p.InternalName == "Author");
+    var editor = myList.Fields.AsRequested().FirstOrDefault(p => p.InternalName == "Editor");
+
+    // Load the user to set as Author/Editor
+    var currentUser = await context.Web.GetCurrentUserAsync();
+    // Define the new date for Created/Modified
+    var newDate = new DateTime(2020, 10, 20);
+
+    // Update the properties
+    firstItem.Values["Author"] = author.NewFieldUserValue(currentUser);
+    firstItem.Values["Editor"] = editor.NewFieldUserValue(currentUser);
+    firstItem.Values["Created"] = newDate;
+    firstItem.Values["Modified"] = newDate;
+
+    // Persist the changes
+    await firstItem.UpdateOverwriteVersionAsync();
+}
+```
 
 ## Deleting list items
 

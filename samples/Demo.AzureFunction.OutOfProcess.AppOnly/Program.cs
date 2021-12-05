@@ -1,7 +1,10 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using PnP.Core.Auth;
+using PnP.Core.Auth.Services.Builder.Configuration;
+using PnP.Core.Services.Builder.Configuration;
+using System;
+using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 
 namespace ProvisioningDemo
@@ -25,32 +28,72 @@ namespace ProvisioningDemo
                         return configuration;
                     });
 
+                    // Add our configuration class
+                    services.AddSingleton(options => { return azureFunctionSettings; });
+
                     // Add and configure PnP Core SDK
                     services.AddPnPCore(options =>
                     {
-                        // Configure an authentication provider with certificate (Required for app only)
-                        var authProvider = new X509CertificateAuthenticationProvider(azureFunctionSettings.ClientId,
-                            azureFunctionSettings.TenantId,
-                            StoreName.My,
-                            StoreLocation.CurrentUser,
-                            azureFunctionSettings.CertificateThumbprint);
+                        // Add the base site url
+                        options.Sites.Add("Default", new PnPCoreSiteOptions
+                        {
+                            SiteUrl = azureFunctionSettings.SiteUrl
+                        });
+                    });
 
-                        // And set it as default
-                        options.DefaultAuthenticationProvider = authProvider;
+                    services.AddPnPCoreAuthentication(options =>
+                    {
+                        // Load the certificate to use
+                        X509Certificate2 cert = LoadCertificate(azureFunctionSettings);
 
-                        // Add a default configuration with the site configured in app settings
-                        options.Sites.Add("Default",
-                               new PnP.Core.Services.Builder.Configuration.PnPCoreSiteOptions
-                               {
-                                   SiteUrl = azureFunctionSettings.SiteUrl,
-                                   AuthenticationProvider = authProvider
-                               });
+                        // Configure certificate based auth
+                        options.Credentials.Configurations.Add("CertAuth", new PnPCoreAuthenticationCredentialConfigurationOptions
+                        {
+                            ClientId = azureFunctionSettings.ClientId,
+                            TenantId = azureFunctionSettings.TenantId,
+                            X509Certificate = new PnPCoreAuthenticationX509CertificateOptions
+                            {
+                                Certificate = LoadCertificate(azureFunctionSettings),
+                            }
+                        });
+
+                        // Connect this auth method to the configured site
+                        options.Sites.Add("Default", new PnPCoreAuthenticationSiteOptions
+                        {
+                            AuthenticationProviderName = "CertAuth",
+                        });
                     });
 
                 })
                 .Build();
 
             host.Run();
+        }
+
+        private static X509Certificate2 LoadCertificate(AzureFunctionSettings azureFunctionSettings)
+        {
+            // Will only be populated correctly when running in the Azure Function host
+            string certBase64Encoded = Environment.GetEnvironmentVariable("CertificateFromKeyVault");
+
+            if (!string.IsNullOrEmpty(certBase64Encoded))
+            {
+                // Azure Function flow
+                return new X509Certificate2(Convert.FromBase64String(certBase64Encoded),
+                                            "",
+                                            X509KeyStorageFlags.Exportable |
+                                            X509KeyStorageFlags.MachineKeySet |
+                                            X509KeyStorageFlags.EphemeralKeySet);
+            }
+            else
+            {
+                // Local flow
+                var store = new X509Store(StoreName.My, StoreLocation.CurrentUser);
+                store.Open(OpenFlags.ReadOnly | OpenFlags.OpenExistingOnly);
+                var certificateCollection = store.Certificates.Find(X509FindType.FindByThumbprint, azureFunctionSettings.CertificateThumbprint, false);
+                store.Close();
+
+                return certificateCollection.First();
+            }
         }
     }
 }

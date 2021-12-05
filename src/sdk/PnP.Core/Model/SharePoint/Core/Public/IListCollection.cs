@@ -81,6 +81,40 @@ namespace PnP.Core.Model.SharePoint
         /// <param name="selectors">The expressions declaring the fields to select</param>
         /// <returns>The resulting list instance, if any</returns>
         public Task<IList> GetByTitleAsync(string title, params Expression<Func<IList, object>>[] selectors);
+
+        /// <summary>
+        /// Select a list by title
+        /// </summary>
+        /// <param name="title">The title to search for</param>
+        /// <param name="selectors">The expressions declaring the fields to select</param>
+        /// <returns>The resulting list instance, if any</returns>
+        public Task<IList> GetByTitleBatchAsync(string title, params Expression<Func<IList, object>>[] selectors);
+
+        /// <summary>
+        /// Select a list by title
+        /// </summary>
+        /// <param name="title">The title to search for</param>
+        /// <param name="selectors">The expressions declaring the fields to select</param>
+        /// <returns>The resulting list instance, if any</returns>
+        public IList GetByTitleBatch(string title, params Expression<Func<IList, object>>[] selectors);
+
+        /// <summary>
+        /// Select a list by title
+        /// </summary>
+        /// <param name="batch">Batch to add this request to</param>
+        /// <param name="title">The title to search for</param>
+        /// <param name="selectors">The expressions declaring the fields to select</param>
+        /// <returns>The resulting list instance, if any</returns>
+        public Task<IList> GetByTitleBatchAsync(Batch batch, string title, params Expression<Func<IList, object>>[] selectors);
+
+        /// <summary>
+        /// Select a list by title
+        /// </summary>
+        /// <param name="batch">Batch to add this request to</param>
+        /// <param name="title">The title to search for</param>
+        /// <param name="selectors">The expressions declaring the fields to select</param>
+        /// <returns>The resulting list instance, if any</returns>
+        public IList GetByTitleBatch(Batch batch, string title, params Expression<Func<IList, object>>[] selectors);
         #endregion
 
         #region GetById methods

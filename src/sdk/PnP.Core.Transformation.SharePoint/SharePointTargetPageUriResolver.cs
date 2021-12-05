@@ -1,11 +1,12 @@
-﻿using Microsoft.Extensions.Options;
-using PnP.Core.Services;
-using PnP.Core.Transformation.Services.Core;
 using System;
 using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Options;
+using PnP.Core.Services;
+using PnP.Core.Transformation.Services.Core;
+using PnP.Core.Transformation.SharePoint.Extensions;
 
 namespace PnP.Core.Transformation.SharePoint
 {
@@ -40,8 +41,14 @@ namespace PnP.Core.Transformation.SharePoint
             if (!(sourceItem is SharePointSourceItem spItem))
                 throw new ArgumentException($"Only source item of type {typeof(SharePointSourceItem)} is supported", nameof(sourceItem));
 
+            var sourceWeb = spItem.SourceContext.Web;
+            sourceWeb.EnsureProperties(w => w.Url);
+
+            var webUri = new Uri(sourceWeb.Url);
+            
             var itemSiteLocalUri = new StringBuilder();
-            foreach (var s in spItem.Id.Uri.Segments.Skip(3).Take(spItem.Id.Uri.Segments.Length - 4))
+            // Remove all the segements of the web URL.
+            foreach (var s in spItem.Id.Uri.Segments.Skip(webUri.Segments.Length).Take(spItem.Id.Uri.Segments.Length - 4))
             {
                 itemSiteLocalUri.Append(s);
             }

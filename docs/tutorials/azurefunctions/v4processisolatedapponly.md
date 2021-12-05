@@ -63,7 +63,7 @@ Enter a **Project name** and **Location** and click on **Create**. In the **Crea
 Start with adding a new class to the project: right click the project, choose **Add** and then pick **Class...**. Name the class **AzureFunctionSettings.cs** and click on **Add**. Replace the class code with below snippet:
 
 ```csharp
-internal class AzureFunctionSettings
+public class AzureFunctionSettings
 {
     public string SiteUrl { get; set; }
     public string TenantId { get; set; }
@@ -158,32 +158,72 @@ public static void Main()
                 return configuration;
             });
 
+            // Add our configuration class
+            services.AddSingleton(options => { return azureFunctionSettings; });
+
             // Add and configure PnP Core SDK
             services.AddPnPCore(options =>
             {
-                // Configure an authentication provider with certificate (Required for app only)
-                var authProvider = new X509CertificateAuthenticationProvider(azureFunctionSettings.ClientId,
-                    azureFunctionSettings.TenantId,
-                    StoreName.My,
-                    StoreLocation.CurrentUser,
-                    azureFunctionSettings.CertificateThumbprint);
+                // Add the base site url
+                options.Sites.Add("Default", new PnPCoreSiteOptions
+                {
+                    SiteUrl = azureFunctionSettings.SiteUrl
+                });
+            });
 
-                // And set it as default
-                options.DefaultAuthenticationProvider = authProvider;
+            services.AddPnPCoreAuthentication(options =>
+            {
+                // Load the certificate to use
+                X509Certificate2 cert = LoadCertificate(azureFunctionSettings);
 
-                // Add a default configuration with the site configured in app settings
-                options.Sites.Add("Default",
-                        new PnP.Core.Services.Builder.Configuration.PnPCoreSiteOptions
-                        {
-                            SiteUrl = azureFunctionSettings.SiteUrl,
-                            AuthenticationProvider = authProvider
-                        });
+                // Configure certificate based auth
+                options.Credentials.Configurations.Add("CertAuth", new PnPCoreAuthenticationCredentialConfigurationOptions
+                {
+                    ClientId = azureFunctionSettings.ClientId,
+                    TenantId = azureFunctionSettings.TenantId,
+                    X509Certificate = new PnPCoreAuthenticationX509CertificateOptions
+                    {
+                        Certificate = LoadCertificate(azureFunctionSettings),
+                    }
+                });
+
+                // Connect this auth method to the configured site
+                options.Sites.Add("Default", new PnPCoreAuthenticationSiteOptions
+                {
+                    AuthenticationProviderName = "CertAuth",
+                });
             });
 
         })
         .Build();
 
     host.Run();
+}
+
+private static X509Certificate2 LoadCertificate(AzureFunctionSettings azureFunctionSettings)
+{
+    // Will only be populated correctly when running in the Azure Function host
+    string certBase64Encoded = Environment.GetEnvironmentVariable("CertificateFromKeyVault");
+
+    if (!string.IsNullOrEmpty(certBase64Encoded))
+    {
+        // Azure Function flow
+        return new X509Certificate2(Convert.FromBase64String(certBase64Encoded),
+                                    "",
+                                    X509KeyStorageFlags.Exportable |
+                                    X509KeyStorageFlags.MachineKeySet |
+                                    X509KeyStorageFlags.EphemeralKeySet);
+    }
+    else
+    {
+        // Local flow
+        var store = new X509Store(StoreName.My, StoreLocation.CurrentUser);
+        store.Open(OpenFlags.ReadOnly | OpenFlags.OpenExistingOnly);
+        var certificateCollection = store.Certificates.Find(X509FindType.FindByThumbprint, azureFunctionSettings.CertificateThumbprint, false);
+        store.Close();
+
+        return certificateCollection.First();
+    }
 }
 ```
 
@@ -193,11 +233,16 @@ Replace the using statements at the top of **Program.cs** with these:
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using PnP.Core.Auth;
+using PnP.Core.Auth.Services.Builder.Configuration;
+using PnP.Core.Services.Builder.Configuration;
+using System;
+using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 ```
 
-With above code in place PnP Core SDK is added to the services container of the Azure Function (via `AddPnPCore`). During the add we've configure PnP Core SDK to use application permissions by setting up the `X509CertificateAuthenticationProvider` and we've finalized the PnP Core SDK setup by adding a default configuration that uses our SharePoint site url from configuration and authentication provider. For configuring PnP Core SDK we also needed data from the **local.settings.json** configuration file which implemented by creating and populating a `AzureFunctionSettings` class and adding that to the function's services container.
+With above code in place PnP Core SDK is added to the services container of the Azure Function (via `AddPnPCore`). During the add we've configured the site URL to use. Next using `AddPnPCoreAuthentication` authentication is setup to use `X509Certificate` based authentication. The needed certificate is read using the `LoadCertificate` certificate method which supports various certificate load methods. With authentication configured the final step is connect the configured authentication provider with the site we configured earlier on.
+
+For configuring PnP Core SDK we also needed data from the **local.settings.json** configuration file which implemented by creating and populating a `AzureFunctionSettings` class and adding that to the function's services container.
 
 ### Using PnP Core SDK in the function
 
@@ -208,11 +253,13 @@ public class CreateSite
 {
     private readonly ILogger logger;
     private readonly IPnPContextFactory contextFactory;
+    private readonly AzureFunctionSettings azureFunctionSettings;
 
-    public CreateSite(IPnPContextFactory pnpContextFactory, ILoggerFactory loggerFactory)
+    public CreateSite(IPnPContextFactory pnpContextFactory, ILoggerFactory loggerFactory, AzureFunctionSettings settings)
     {
         logger = loggerFactory.CreateLogger<CreateSite>();
         contextFactory = pnpContextFactory;
+        azureFunctionSettings = settings;
     }
 
     /// <summary>
@@ -340,3 +387,93 @@ Ensure you use an owner that exists in your tenant and that the provided site na
 Feel free to open the created site collection and navigate the **PnP.aspx** page to see parker :-)
 
 ![Resulting pnp.aspx page](../images/azfuncv4apponly-10.png)
+
+## Deploy the sample to Azure
+
+### Create Azure Function App
+
+Go to the [Azure Portal](https://portal.azure.com/) and create a new Function App (consumption plan) using following settings:
+
+- Publish: **Code**
+- Runtime stack: **.NET**
+- Version: **6**
+- Region: pick the region that works best for you
+
+Click **Review + create**, verify the settings and click **Create**. Now your function is provisioned in Azure.
+
+### Configure the Function App
+
+Once the Function App has been created navigate to **Settings** -> **Configuration** and add the following **Application settings**:
+
+Name | Value
+-----|------
+SiteUrl | base site collection url to connect to, e.g. https://contoso.sharepoint.com
+TenantId | tenant id, e.g. 9bd71689-66cb-4560-bb09-ab908ec21437
+ClientId | application client id, e.g. 8bb62681-cddd-41e0-bfdf-ab908ec8a3c3
+
+Click **Save** to persist the changes.
+
+Under **Function runtime settings** verify the Runtime version is set to **~4**.
+
+### Deploying the certificate - use KeyVault
+
+Final configuration step needed is ensuring the Azure Function App can use the configured certificate. Quite often you want to reuse your certificate across multiple Azure resources and then consolidating all secrets and certificates in an Azure KeyVault is a commonly used scenario. So let's explain how to make that happen.
+
+- Ensure the managed identity of the function is on: click on **Settings** -> **Identity** and ensure System assigned status is set to **On**
+- Navigate to your Azure KeyVault or create a new one if you've none available
+- In KeyVault click on **Settings** -> **Certificates** -> **Generate/Import** -> select **Import** in the dropdown and provide a name and path the PFX file you've created earlier on via the `Register-PnPAzureADApp` Powershell cmdlet. Click **Create** to add the certificate
+- In KeyVault click on **Settings** -> **Access Policies** -> **+ Add Access Policy**:
+  - Select Secret Permission **Get**
+  - Select Certificate Permission **Get**
+  - Select principal:
+    - Click on **none selected**
+    - In the **Principal** page enter the name of the Azure Function App, this selects the managed identity that you've enabled before. Click **Select** to pick that principal
+  - Click **Add** to add the new Access Policy
+  - Click **Save** to persist the changes
+
+Using above steps you've now uploaded your certificate in a KeyVault and you've enabled your Function App to read secrets from the vault using it's managed identity. Final step is letting the Azure Function App now which certificate to pick. For that follow these steps:
+
+- In KeyVault click on your certificate and then click on the **Current version**. The certificate details will be shown, copy the **Certificate Identifier** e.g. `https://mykeyvault.vault.azure.net/certificates/PnPCoreSDKDemo/6c752ad7218248b0976f387ef288523a`
+- In the Function App navigate to **Settings** -> **Configuration** and add the following **Application setting**. Note the certificate version identifier has been dropped from the URL.
+
+Name | Value
+-----|------
+CertificateFromKeyVault | @Microsoft.KeyVault(SecretUri=https://mykeyvault.vault.azure.net/certificates/PnPCoreSDKDemo/)
+
+Click **Save** to persist the changes.
+
+### Deploying the certificate - local upload to Function App
+
+Previous steps showed you how to manage your certificate via KeyVault, but you can also opt to simply upload the certificate to the Azure Function App.
+
+- Navigate to **Settings** -> **TLS/SSL Settings** and click on **Private Key Certificates (.pfx)**
+- Click on **Upload Certificate**, browse to the location of the PFX file you've created earlier on via the `Register-PnPAzureADApp` Powershell cmdlet. Click **Upload** to upload the certificate
+- Navigate to **Settings** -> **Configuration** and add the following **Application settings**
+
+Name | Value
+-----|------
+CertificateThumbPrint | thumbprint, e.g. 1C3342BA9B5269FDBCDCAB5D6334F1A60C73B184
+WEBSITE_LOAD_CERTIFICATES | thumbprint, e.g. 1C3342BA9B5269FDBCDCAB5D6334F1A60C73B184
+
+### Deploy the Function App code from Visual Studio
+
+Final step now that the Function App is configured is to deploy our bits.
+
+- Right click the project in Visual Studio and choose **Publish...**
+- Chose the **Import Profile** option:
+  - Navigate to your Azure Function App in Azure Portal and click on **Get publish profile** from the **Overview** page
+  - Select the downloaded profile
+- Click on **Publish** to push your project to the Azure Function App
+
+### Test your Function App in Azure
+
+To test your Function App you now need to build an URL that points to your Azure Function App + it's function authorization key. To that URL the `owner` and `siteName` URL parameters have to be added. To get your Azure Function URL follow these steps:
+
+- Navigate to your Azure Function App in Azure Portal and Navigate to **Functions** -> **Functions**
+- Click on the **CreateSite** function
+- Click on **Get Function Url** and copy the proposed URL
+- Append `&owner=joe@contoso.onmicrosoft.com&sitename=azurefunctiondemo001`
+
+The final result will be something along these lines:
+
+`https://myfunctionapphost.azurewebsites.net/api/CreateSite?code=OerO/tVAIGbCacM1e6PYi6MsH5rsHmzpjUmZMlKTYayDhcYMJ9zjZw==&owner=joe@contoso.onmicrosoft.com&sitename=azurefunctiondemo001`

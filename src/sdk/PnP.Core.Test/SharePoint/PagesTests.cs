@@ -566,6 +566,75 @@ namespace PnP.Core.Test.SharePoint
         }
 
         [TestMethod]
+        public async Task PageSectionsCreateRemoveTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.NoGroupTestSite))
+            {
+                var page = await context.Web.NewPageAsync();
+                string pageName = TestCommon.GetPnPSdkTestAssetName("PageSectionsCreateRemoveTest.aspx");
+
+                // Add all the possible sections 
+                page.AddSection(CanvasSectionTemplate.OneColumnFullWidth, 1);
+                page.AddSection(CanvasSectionTemplate.OneColumn, 2);
+                page.AddSection(CanvasSectionTemplate.TwoColumn, 3);
+                page.AddSection(CanvasSectionTemplate.TwoColumnLeft, 4);
+                page.AddSection(CanvasSectionTemplate.TwoColumnRight, 5);
+                page.AddSection(CanvasSectionTemplate.ThreeColumn, 6);
+
+                await page.SaveAsync(pageName);
+
+                // load page again
+                var pages = await context.Web.GetPagesAsync(pageName);
+
+                Assert.IsTrue(pages.Count == 1);
+
+                page = pages.AsEnumerable().First();
+
+                Assert.IsTrue(page.Sections.Count == 6);
+                Assert.IsTrue(page.Sections[0].Type == CanvasSectionTemplate.OneColumnFullWidth);
+                Assert.IsTrue(page.Sections[1].Type == CanvasSectionTemplate.OneColumn);
+                Assert.IsTrue(page.Sections[2].Type == CanvasSectionTemplate.TwoColumn);
+                Assert.IsTrue(page.Sections[3].Type == CanvasSectionTemplate.TwoColumnLeft);
+                Assert.IsTrue(page.Sections[4].Type == CanvasSectionTemplate.TwoColumnRight);
+                Assert.IsTrue(page.Sections[5].Type == CanvasSectionTemplate.ThreeColumn);
+
+                page.Sections.RemoveAt(5);
+                page.Sections.RemoveAt(4);
+
+                await page.SaveAsync(pageName);
+
+                pages = await context.Web.GetPagesAsync(pageName);
+
+                Assert.IsTrue(pages.Count == 1);
+
+                page = pages.AsEnumerable().First();
+
+                Assert.IsTrue(page.Sections.Count == 4);
+                Assert.IsTrue(page.Sections[0].Type == CanvasSectionTemplate.OneColumnFullWidth);
+                Assert.IsTrue(page.Sections[1].Type == CanvasSectionTemplate.OneColumn);
+                Assert.IsTrue(page.Sections[2].Type == CanvasSectionTemplate.TwoColumn);
+                Assert.IsTrue(page.Sections[3].Type == CanvasSectionTemplate.TwoColumnLeft);
+
+                // Delete all sections
+                page.ClearPage();
+
+                await page.SaveAsync(pageName);
+
+                pages = await context.Web.GetPagesAsync(pageName);
+
+                Assert.IsTrue(pages.Count == 1);
+
+                page = pages.AsEnumerable().First();
+
+                Assert.IsTrue(page.Sections.Count == 0);
+
+                // delete the page
+                await page.DeleteAsync();
+            }
+        }
+
+        [TestMethod]
         public async Task PageSectionsWithEmphasisCreateTest()
         {
             //TestCommon.Instance.Mocking = false;
@@ -1924,6 +1993,56 @@ namespace PnP.Core.Test.SharePoint
                 Assert.IsTrue(updatedPage.Sections.Count == 1);
                 Assert.IsTrue(updatedPage.Sections[0].Columns.Count == 3);
                 Assert.IsTrue(updatedPage.Sections[0].Controls.Count == 3);
+
+                // Delete the page
+                await updatedPage.DeleteAsync();
+            }
+        }
+
+        [TestMethod]
+        public async Task CreateAndUpdatePageAuthorEditorCreatedModified()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var newPage = await context.Web.NewPageAsync();
+                string pageName = TestCommon.GetPnPSdkTestAssetName("CreateAndUpdatePageAuthorEditorCreatedModified.aspx");
+
+                newPage.AddSection(CanvasSectionTemplate.ThreeColumn, 1, VariantThemeType.Soft, VariantThemeType.Strong);
+                newPage.AddControl(newPage.NewTextPart("I"), newPage.Sections[0].Columns[0]);
+                newPage.AddControl(newPage.NewTextPart("like"), newPage.Sections[0].Columns[1]);
+                newPage.AddControl(newPage.NewTextPart("PnP"), newPage.Sections[0].Columns[2]);
+
+                // Save the page
+                await newPage.SaveAsync(pageName);
+
+                // Load the Page File
+                var pageFile = await newPage.GetPageFileAsync(p => p.ListItemAllFields);
+                
+                // load the current user
+                var currentUser = await context.Web.GetCurrentUserAsync();
+                var newDate = new DateTime(2020, 10, 20);
+
+                // Load the Author and Editor fields                
+                var author = newPage.PagesLibrary.Fields.AsRequested().FirstOrDefault(p => p.InternalName == "Author");
+                var editor = newPage.PagesLibrary.Fields.AsRequested().FirstOrDefault(p => p.InternalName == "Editor");
+
+                pageFile.ListItemAllFields["Author"] = author.NewFieldUserValue(currentUser);
+                pageFile.ListItemAllFields["Editor"] = editor.NewFieldUserValue(currentUser);
+                pageFile.ListItemAllFields["Created"] = newDate;
+                pageFile.ListItemAllFields["Modified"] = newDate;
+                await pageFile.ListItemAllFields.UpdateOverwriteVersionAsync();
+
+                // Load the page again
+                var pages = await context.Web.GetPagesAsync(pageName);
+                var updatedPage = pages.AsEnumerable().First();
+
+                pageFile = await updatedPage.GetPageFileAsync(p => p.ListItemAllFields);
+                
+                Assert.IsTrue(((DateTime)pageFile.ListItemAllFields["Created"]).Year == newDate.Year);
+                Assert.IsTrue(((DateTime)pageFile.ListItemAllFields["Created"]).Month == newDate.Month);
+                Assert.IsTrue(((DateTime)pageFile.ListItemAllFields["Modified"]).Year == newDate.Year);
+                Assert.IsTrue(((DateTime)pageFile.ListItemAllFields["Modified"]).Month == newDate.Month);
 
                 // Delete the page
                 await updatedPage.DeleteAsync();
