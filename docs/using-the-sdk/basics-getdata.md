@@ -99,7 +99,7 @@ using (var context = await pnpContextFactory.CreateAsync("SiteToWorkWith"))
     var lists = await context.Web.Lists.Where(p => p.Title == "Site Pages").ToListAsync();
 
     // Option C: we assume there's only one list with that title so we can use FirstOrDefaultAsync
-    var sitePagesList = await context.Web.Lists.Where(p => p.Title == "Site Pages").FirstOrDefaultAsync();
+    var sitePagesList = await context.Web.Lists.FirstOrDefaultAsync(p => p.Title == "Site Pages");
 }
 ```
 
@@ -128,7 +128,7 @@ using (var context = await pnpContextFactory.CreateAsync("SiteToWorkWith"))
     // are not loaded into the context
     var lists = await context.Web.Lists.Where(p => p.Title == "Site Pages").ToListAsync();
 
-    foreach(var list in lists.AsRequested())
+    foreach(var list in lists)
     {
         // Use list
     }

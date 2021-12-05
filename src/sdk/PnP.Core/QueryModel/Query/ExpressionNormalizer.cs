@@ -59,7 +59,7 @@ namespace PnP.Core.QueryModel
         }
 
         /// <summary>
-        /// Converts <see cref="UnaryExpression" to the <see cref="BinaryExpression"/> by examining operands./>
+        /// Converts <see cref="UnaryExpression"/> to the <see cref="BinaryExpression"/> by examining operands.
         /// </summary>
         /// <param name="unaryExpression"></param>
         /// <returns></returns>
