@@ -51,8 +51,8 @@ using (var context = await pnpContextFactory.CreateAsync("SiteToWorkWith"))
     // Data is loaded into the context
     await context.Web.LoadAsync(p => p.Title, p => p.Lists);
 
-    // We're using AsRequested() to query the already loaded domain models, 
-    // otherwise a new query would be issued to load the lists
+    // We're using AsRequested() to query the already loaded domain models, if not a new query would 
+    // issued to load the lists
     foreach (var list in context.Web.Lists.AsRequested())
     {
         // do something with the list
@@ -75,8 +75,8 @@ using (var context = await pnpContextFactory.CreateAsync("SiteToWorkWith"))
     // Load the data into variable
     var web = await context.Web.GetAsync(p => p.Title, p => p.Lists);
 
-    // We're using AsRequested() to query the already loaded domain models, 
-    // otherwise a new query would be issued to load the lists
+    // We're using AsRequested() to query the already loaded domain models, if not a new query would 
+    // issued to load the lists
     foreach (var list in web.Lists.AsRequested())
     {
         // do something with the list
@@ -92,8 +92,7 @@ Previous chapter showed how to load data starting from a single model (e.g. load
 using (var context = await pnpContextFactory.CreateAsync("SiteToWorkWith"))
 {
     // Option A: Load the Lists using a model load => no filtering option
-    var web = await context.Web.GetAsync(p => p.Title, p => p.Lists);
-    var lists = web.Lists.AsRequested();
+    var lists = await context.Web.GetAsync(p => p.Title, p => p.Lists);
 
     // Option B: Load the Lists using a LINQ query ==> filtering is possible,
     // only lists with title "Site Pages" are returned
@@ -112,7 +111,6 @@ Below sample shows the various options for loading and using collections.
 >
 > - When you want to enumerate or query (via LINQ) already loaded data you need to first use the `AsRequested()` method to return the domain model objects as an `IList`.
 > - `IQueryable` is an interface used by almost all collections (like `Lists`, `Fields`, etc.) in PnP Core SDK. It's very powerful, but should be used carefully to avoid some common performance pitfalls. Read [IQueryable performance considerations](basics-iqueryable.md) to learn more.
-> - When using a filter via the `Where` LINQ statement then always use an operator: `Where(p => p.BoolProperty == true)` works, but `Where(p => p.BoolProperty)` is ignored.
 
 ```csharp
 using (var context = await pnpContextFactory.CreateAsync("SiteToWorkWith"))
@@ -194,7 +192,7 @@ using (var context = await pnpContextFactory.CreateAsync("SiteToWorkWith"))
     //     for each content type the field links are controlled loaded 
     //       with the name property
     var list = await context.Web.Lists.Where(p => p.TemplateType == ListTemplateType.DocumentLibrary && 
-                                                  p.Hidden == true)
+                                                  p.Hidden)
                                       .QueryProperties(
                                         p => p.Title, p => p.TemplateType, 
                                         p => p.ContentTypes.QueryProperties(

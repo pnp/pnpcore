@@ -718,6 +718,15 @@ namespace PnP.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Expression type {0} is not supported inside filtering expressions.
+        /// </summary>
+        internal static string Exception_Unsupported_ExpressionType {
+            get {
+                return ResourceManager.GetString("Exception_Unsupported_ExpressionType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Loading the {0} property requires an extra GET request ({1}) which is not supported when using nested QueryProperties methods.
         /// </summary>
         internal static string Exception_Unsupported_ExtraGet {
