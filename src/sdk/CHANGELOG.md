@@ -57,6 +57,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Page sections where not removeable #666 [jansenbe - Bert Jansen]
 - List item documentation update #668 [koenzomers - Koen Zomers]
 - Added `IsSyntexEnabledForCurrentUser` methods on `IWeb` [jansenbe - Bert Jansen]
+- Improved LINQ query syntax #675 [s-KaiNet - Sergei Sergeev]
 
 ## [1.4.0]
 
