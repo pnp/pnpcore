@@ -223,6 +223,9 @@ await page.SaveAsync("MyPage.aspx");
 
 A common request is to change the list item `Author`, `Editor`, `Created` and `Modified` system properties of a page, which is allowed via the `UpdateOverWriteVersion` methods.
 
+> [!Note]
+> The Azure AD application you're using must have the `Sites.FullControl.All` permission to make updating the `Author`, `Editor`, `Created` and `Modified` system properties work.
+
 ```csharp
 // Load the page you want to update
 var pages = await context.Web.GetPagesAsync("mypage.aspx");

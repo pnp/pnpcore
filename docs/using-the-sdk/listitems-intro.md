@@ -536,6 +536,9 @@ await addedItem.UpdateAsync();
 
 A common request is to change the list item `Author`, `Editor`, `Created` and `Modified` system properties, which is allowed via the `UpdateOverWriteVersion` methods.
 
+> [!Note]
+> The Azure AD application you're using must have the `Sites.FullControl.All` permission to make updating the `Author`, `Editor`, `Created` and `Modified` system properties work.
+
 ```csharp
 // Load the list
 var myList = context.Web.Lists.GetByTitle("My List", p => p.Title, 
