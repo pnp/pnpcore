@@ -1,9 +1,9 @@
---batchresponse_5dc23abb-3046-493a-afe9-4f6147682902
+--batchresponse_4ca8f746-b5dd-4a2f-b21c-e3db0da05243
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
-HTTP/1.1 404 Not Found
+HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{"error":{"code":"-2130575338, Microsoft.SharePoint.SPException","message":{"lang":"en-US","value":"The file /sites/prov-2/SitePages/PNP_SDK_TEST_PageTextWithInlineImageTest.aspx does not exist."}}}
---batchresponse_5dc23abb-3046-493a-afe9-4f6147682902--
+{"d":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-2/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/prov-2/siteassets/__siteicon__.png')","uri":"https://bertonline.sharepoint.com/sites/prov-2/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/prov-2/siteassets/__siteicon__.png')","type":"SP.File"},"ListId":"ac73faf0-a863-41e6-a565-6c9f705f2d84","UniqueId":"e3e958ef-bbc8-479f-a0fb-b3132b901fc7"}}
+--batchresponse_4ca8f746-b5dd-4a2f-b21c-e3db0da05243--

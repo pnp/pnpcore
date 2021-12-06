@@ -2678,11 +2678,24 @@ namespace PnP.Core.Model.SharePoint
                 imageOptions = new PageImageOptions();
             }
 
+            // Set defaults in case height and width are not set
+            if (!imageOptions.Height.HasValue)
+            {
+                imageOptions.Height = -1;
+            }
+
+            if (!imageOptions.Width.HasValue)
+            {
+                imageOptions.Width = -1;
+            }
+
             // Prepare configuration for the image web part
-            string inlineImageWebPart = "{\"webPartData\":{\"serverProcessedContent\":{\"htmlStrings\":{},\"searchablePlainTexts\":{},\"imageSources\":{\"imageSource\":\"{FullyQualifiedImageUrl}\"},\"links\":{},\"customMetadata\":{\"imageSource\":{\"siteId\":\"{SiteId}\",\"webId\":\"{WebId}\",\"listId\":\"{{ListId}}\",\"uniqueId\":\"{UniqueId}\",\"imgWidth\":-1,\"imgHeight\":-1}}},\"dataVersion\":\"1.9\",\"properties\":{\"imageSourceType\":2,\"captionText\":\"\",\"altText\":\"\",\"linkUrl\":\"\",\"overlayText\":\"\",\"fileName\":\"\",\"siteId\":\"{SiteId}\",\"webId\":\"{WebId}\",\"listId\":\"{{ListId}}\",\"uniqueId\":\"{UniqueId}\",\"imgWidth\":-1,\"imgHeight\":-1,\"alignment\":\"{Alignment}\",\"fixAspectRatio\":false}}}";
+            string inlineImageWebPart = "{\"webPartData\":{\"serverProcessedContent\":{\"htmlStrings\":{},\"searchablePlainTexts\":{},\"imageSources\":{\"imageSource\":\"{FullyQualifiedImageUrl}\"},\"links\":{},\"customMetadata\":{\"imageSource\":{\"siteId\":\"{SiteId}\",\"webId\":\"{WebId}\",\"listId\":\"{{ListId}}\",\"uniqueId\":\"{UniqueId}\",\"imgWidth\":-1,\"imgHeight\":-1}}},\"dataVersion\":\"1.9\",\"properties\":{\"imageSourceType\":2,\"captionText\":\"\",\"altText\":\"\",\"linkUrl\":\"\",\"overlayText\":\"\",\"fileName\":\"\",\"siteId\":\"{SiteId}\",\"webId\":\"{WebId}\",\"listId\":\"{{ListId}}\",\"uniqueId\":\"{UniqueId}\",\"imgWidth\":{Width},\"imgHeight\":{Height},\"alignment\":\"{Alignment}\",\"fixAspectRatio\":false}}}";
             inlineImageWebPart = inlineImageWebPart
                                    .Replace("{FullyQualifiedImageUrl}", $"https://{PnPContext.Uri.DnsSafeHost}{serverRelativeUrl}")
                                    .Replace("{Alignment}", imageOptions.Alignment.ToString())
+                                   .Replace("{Height}", imageOptions.Height.Value.ToString())
+                                   .Replace("{Width}", imageOptions.Width.Value.ToString())
                                    .Replace("{SiteId}", PnPContext.Site.Id.ToString())
                                    .Replace("{WebId}", PnPContext.Web.Id.ToString())
                                    .Replace("{ListId}", image.ListId.ToString())

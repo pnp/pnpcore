@@ -1397,7 +1397,8 @@ namespace PnP.Core.Test.SharePoint
                 var textPart2 = page.NewTextPart("");
                 var html21 = page.GetInlineImage(textPart2, "/sites/prov-2/siteassets/__siteicon__.png", new PageImageOptions { Alignment = PageImageAlignment.Center});
                 var html22 = page.GetInlineImage(textPart2, "/sites/prov-2/siteassets/__siteicon__.png", new PageImageOptions { Alignment = PageImageAlignment.Left });
-                textPart2.Text = $"<p>Before inline images</p>{html21}<p>Post image</p>{html22}<p>Post image</p>";
+                var html33 = page.GetInlineImage(textPart2, "/sites/prov-2/siteassets/__siteicon__.png", new PageImageOptions { Alignment = PageImageAlignment.Left, Height = 50, Width = 50 });
+                textPart2.Text = $"<p>Before inline images</p>{html21}<p>Post image</p>{html22}<p>Post image</p>{html33}<p>Post image</p>";
                 page.AddControl(textPart2, page.Sections[0].Columns[1]);
 
                 page.AddSection(CanvasSectionTemplate.TwoColumn, 2);
@@ -1407,6 +1408,7 @@ namespace PnP.Core.Test.SharePoint
 
                 page.AddControl(page.GetImageWebPart("/sites/prov-2/siteassets/__siteicon__.png", new PageImageOptions { Alignment = PageImageAlignment.Left }), page.Sections[1].Columns[0]);
                 page.AddControl(page.GetImageWebPart("/sites/prov-2/siteassets/__siteicon__.png"), page.Sections[1].Columns[1]);
+                page.AddControl(page.GetImageWebPart("/sites/prov-2/siteassets/__siteicon__.png", new PageImageOptions { Alignment = PageImageAlignment.Left, Height = 50, Width = 50 }), page.Sections[1].Columns[1]);
 
                 // Persist the page
                 await page.SaveAsync(pageName);
