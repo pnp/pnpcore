@@ -24980,6 +24980,44 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IList.LoadListDataAsStreamAsync
   nameWithType: IList.LoadListDataAsStreamAsync
+- uid: PnP.Core.Model.SharePoint.IList.LoadListDataAsStreamBatch(PnP.Core.Model.SharePoint.RenderListDataOptions)
+  name: LoadListDataAsStreamBatch(RenderListDataOptions)
+  href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_LoadListDataAsStreamBatch_PnP_Core_Model_SharePoint_RenderListDataOptions_
+  commentId: M:PnP.Core.Model.SharePoint.IList.LoadListDataAsStreamBatch(PnP.Core.Model.SharePoint.RenderListDataOptions)
+  fullName: PnP.Core.Model.SharePoint.IList.LoadListDataAsStreamBatch(PnP.Core.Model.SharePoint.RenderListDataOptions)
+  nameWithType: IList.LoadListDataAsStreamBatch(RenderListDataOptions)
+- uid: PnP.Core.Model.SharePoint.IList.LoadListDataAsStreamBatch(PnP.Core.Services.Batch,PnP.Core.Model.SharePoint.RenderListDataOptions)
+  name: LoadListDataAsStreamBatch(Batch, RenderListDataOptions)
+  href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_LoadListDataAsStreamBatch_PnP_Core_Services_Batch_PnP_Core_Model_SharePoint_RenderListDataOptions_
+  commentId: M:PnP.Core.Model.SharePoint.IList.LoadListDataAsStreamBatch(PnP.Core.Services.Batch,PnP.Core.Model.SharePoint.RenderListDataOptions)
+  fullName: PnP.Core.Model.SharePoint.IList.LoadListDataAsStreamBatch(PnP.Core.Services.Batch, PnP.Core.Model.SharePoint.RenderListDataOptions)
+  nameWithType: IList.LoadListDataAsStreamBatch(Batch, RenderListDataOptions)
+- uid: PnP.Core.Model.SharePoint.IList.LoadListDataAsStreamBatch*
+  name: LoadListDataAsStreamBatch
+  href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_LoadListDataAsStreamBatch_
+  commentId: Overload:PnP.Core.Model.SharePoint.IList.LoadListDataAsStreamBatch
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IList.LoadListDataAsStreamBatch
+  nameWithType: IList.LoadListDataAsStreamBatch
+- uid: PnP.Core.Model.SharePoint.IList.LoadListDataAsStreamBatchAsync(PnP.Core.Model.SharePoint.RenderListDataOptions)
+  name: LoadListDataAsStreamBatchAsync(RenderListDataOptions)
+  href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_LoadListDataAsStreamBatchAsync_PnP_Core_Model_SharePoint_RenderListDataOptions_
+  commentId: M:PnP.Core.Model.SharePoint.IList.LoadListDataAsStreamBatchAsync(PnP.Core.Model.SharePoint.RenderListDataOptions)
+  fullName: PnP.Core.Model.SharePoint.IList.LoadListDataAsStreamBatchAsync(PnP.Core.Model.SharePoint.RenderListDataOptions)
+  nameWithType: IList.LoadListDataAsStreamBatchAsync(RenderListDataOptions)
+- uid: PnP.Core.Model.SharePoint.IList.LoadListDataAsStreamBatchAsync(PnP.Core.Services.Batch,PnP.Core.Model.SharePoint.RenderListDataOptions)
+  name: LoadListDataAsStreamBatchAsync(Batch, RenderListDataOptions)
+  href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_LoadListDataAsStreamBatchAsync_PnP_Core_Services_Batch_PnP_Core_Model_SharePoint_RenderListDataOptions_
+  commentId: M:PnP.Core.Model.SharePoint.IList.LoadListDataAsStreamBatchAsync(PnP.Core.Services.Batch,PnP.Core.Model.SharePoint.RenderListDataOptions)
+  fullName: PnP.Core.Model.SharePoint.IList.LoadListDataAsStreamBatchAsync(PnP.Core.Services.Batch, PnP.Core.Model.SharePoint.RenderListDataOptions)
+  nameWithType: IList.LoadListDataAsStreamBatchAsync(Batch, RenderListDataOptions)
+- uid: PnP.Core.Model.SharePoint.IList.LoadListDataAsStreamBatchAsync*
+  name: LoadListDataAsStreamBatchAsync
+  href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_LoadListDataAsStreamBatchAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.IList.LoadListDataAsStreamBatchAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IList.LoadListDataAsStreamBatchAsync
+  nameWithType: IList.LoadListDataAsStreamBatchAsync
 - uid: PnP.Core.Model.SharePoint.IList.MaxVersionLimit
   name: MaxVersionLimit
   href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_MaxVersionLimit
