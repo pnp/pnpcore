@@ -58,6 +58,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - List item documentation update #668 [koenzomers - Koen Zomers]
 - Added `IsSyntexEnabledForCurrentUser` methods on `IWeb` [jansenbe - Bert Jansen]
 - Improved LINQ query syntax #675 [s-KaiNet - Sergei Sergeev]
+- SharePoint Syntex Content Center sites pages can use a full width section [jansenbe - Bert Jansen]
 
 ## [1.4.0]
 
