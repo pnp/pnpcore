@@ -25392,6 +25392,56 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IListCollection.EnsureSiteAssetsLibraryAsync
   nameWithType: IListCollection.EnsureSiteAssetsLibraryAsync
+- uid: PnP.Core.Model.SharePoint.IListCollection.EnsureSiteAssetsLibraryBatch(Expression{Func{PnP.Core.Model.SharePoint.IList,System.Object}}[])
+  name: EnsureSiteAssetsLibraryBatch(Expression<Func<IList, Object>>[])
+  href: api/PnP.Core.Model.SharePoint.IListCollection.html#PnP_Core_Model_SharePoint_IListCollection_EnsureSiteAssetsLibraryBatch_Expression_Func_PnP_Core_Model_SharePoint_IList_System_Object_____
+  commentId: M:PnP.Core.Model.SharePoint.IListCollection.EnsureSiteAssetsLibraryBatch(Expression{Func{PnP.Core.Model.SharePoint.IList,System.Object}}[])
+  name.vb: EnsureSiteAssetsLibraryBatch(Expression(Of Func(Of IList, Object))())
+  fullName: PnP.Core.Model.SharePoint.IListCollection.EnsureSiteAssetsLibraryBatch(Expression<Func<PnP.Core.Model.SharePoint.IList, System.Object>>[])
+  fullName.vb: PnP.Core.Model.SharePoint.IListCollection.EnsureSiteAssetsLibraryBatch(Expression(Of Func(Of PnP.Core.Model.SharePoint.IList, System.Object))())
+  nameWithType: IListCollection.EnsureSiteAssetsLibraryBatch(Expression<Func<IList, Object>>[])
+  nameWithType.vb: IListCollection.EnsureSiteAssetsLibraryBatch(Expression(Of Func(Of IList, Object))())
+- uid: PnP.Core.Model.SharePoint.IListCollection.EnsureSiteAssetsLibraryBatch(PnP.Core.Services.Batch,Expression{Func{PnP.Core.Model.SharePoint.IList,System.Object}}[])
+  name: EnsureSiteAssetsLibraryBatch(Batch, Expression<Func<IList, Object>>[])
+  href: api/PnP.Core.Model.SharePoint.IListCollection.html#PnP_Core_Model_SharePoint_IListCollection_EnsureSiteAssetsLibraryBatch_PnP_Core_Services_Batch_Expression_Func_PnP_Core_Model_SharePoint_IList_System_Object_____
+  commentId: M:PnP.Core.Model.SharePoint.IListCollection.EnsureSiteAssetsLibraryBatch(PnP.Core.Services.Batch,Expression{Func{PnP.Core.Model.SharePoint.IList,System.Object}}[])
+  name.vb: EnsureSiteAssetsLibraryBatch(Batch, Expression(Of Func(Of IList, Object))())
+  fullName: PnP.Core.Model.SharePoint.IListCollection.EnsureSiteAssetsLibraryBatch(PnP.Core.Services.Batch, Expression<Func<PnP.Core.Model.SharePoint.IList, System.Object>>[])
+  fullName.vb: PnP.Core.Model.SharePoint.IListCollection.EnsureSiteAssetsLibraryBatch(PnP.Core.Services.Batch, Expression(Of Func(Of PnP.Core.Model.SharePoint.IList, System.Object))())
+  nameWithType: IListCollection.EnsureSiteAssetsLibraryBatch(Batch, Expression<Func<IList, Object>>[])
+  nameWithType.vb: IListCollection.EnsureSiteAssetsLibraryBatch(Batch, Expression(Of Func(Of IList, Object))())
+- uid: PnP.Core.Model.SharePoint.IListCollection.EnsureSiteAssetsLibraryBatch*
+  name: EnsureSiteAssetsLibraryBatch
+  href: api/PnP.Core.Model.SharePoint.IListCollection.html#PnP_Core_Model_SharePoint_IListCollection_EnsureSiteAssetsLibraryBatch_
+  commentId: Overload:PnP.Core.Model.SharePoint.IListCollection.EnsureSiteAssetsLibraryBatch
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IListCollection.EnsureSiteAssetsLibraryBatch
+  nameWithType: IListCollection.EnsureSiteAssetsLibraryBatch
+- uid: PnP.Core.Model.SharePoint.IListCollection.EnsureSiteAssetsLibraryBatchAsync(Expression{Func{PnP.Core.Model.SharePoint.IList,System.Object}}[])
+  name: EnsureSiteAssetsLibraryBatchAsync(Expression<Func<IList, Object>>[])
+  href: api/PnP.Core.Model.SharePoint.IListCollection.html#PnP_Core_Model_SharePoint_IListCollection_EnsureSiteAssetsLibraryBatchAsync_Expression_Func_PnP_Core_Model_SharePoint_IList_System_Object_____
+  commentId: M:PnP.Core.Model.SharePoint.IListCollection.EnsureSiteAssetsLibraryBatchAsync(Expression{Func{PnP.Core.Model.SharePoint.IList,System.Object}}[])
+  name.vb: EnsureSiteAssetsLibraryBatchAsync(Expression(Of Func(Of IList, Object))())
+  fullName: PnP.Core.Model.SharePoint.IListCollection.EnsureSiteAssetsLibraryBatchAsync(Expression<Func<PnP.Core.Model.SharePoint.IList, System.Object>>[])
+  fullName.vb: PnP.Core.Model.SharePoint.IListCollection.EnsureSiteAssetsLibraryBatchAsync(Expression(Of Func(Of PnP.Core.Model.SharePoint.IList, System.Object))())
+  nameWithType: IListCollection.EnsureSiteAssetsLibraryBatchAsync(Expression<Func<IList, Object>>[])
+  nameWithType.vb: IListCollection.EnsureSiteAssetsLibraryBatchAsync(Expression(Of Func(Of IList, Object))())
+- uid: PnP.Core.Model.SharePoint.IListCollection.EnsureSiteAssetsLibraryBatchAsync(PnP.Core.Services.Batch,Expression{Func{PnP.Core.Model.SharePoint.IList,System.Object}}[])
+  name: EnsureSiteAssetsLibraryBatchAsync(Batch, Expression<Func<IList, Object>>[])
+  href: api/PnP.Core.Model.SharePoint.IListCollection.html#PnP_Core_Model_SharePoint_IListCollection_EnsureSiteAssetsLibraryBatchAsync_PnP_Core_Services_Batch_Expression_Func_PnP_Core_Model_SharePoint_IList_System_Object_____
+  commentId: M:PnP.Core.Model.SharePoint.IListCollection.EnsureSiteAssetsLibraryBatchAsync(PnP.Core.Services.Batch,Expression{Func{PnP.Core.Model.SharePoint.IList,System.Object}}[])
+  name.vb: EnsureSiteAssetsLibraryBatchAsync(Batch, Expression(Of Func(Of IList, Object))())
+  fullName: PnP.Core.Model.SharePoint.IListCollection.EnsureSiteAssetsLibraryBatchAsync(PnP.Core.Services.Batch, Expression<Func<PnP.Core.Model.SharePoint.IList, System.Object>>[])
+  fullName.vb: PnP.Core.Model.SharePoint.IListCollection.EnsureSiteAssetsLibraryBatchAsync(PnP.Core.Services.Batch, Expression(Of Func(Of PnP.Core.Model.SharePoint.IList, System.Object))())
+  nameWithType: IListCollection.EnsureSiteAssetsLibraryBatchAsync(Batch, Expression<Func<IList, Object>>[])
+  nameWithType.vb: IListCollection.EnsureSiteAssetsLibraryBatchAsync(Batch, Expression(Of Func(Of IList, Object))())
+- uid: PnP.Core.Model.SharePoint.IListCollection.EnsureSiteAssetsLibraryBatchAsync*
+  name: EnsureSiteAssetsLibraryBatchAsync
+  href: api/PnP.Core.Model.SharePoint.IListCollection.html#PnP_Core_Model_SharePoint_IListCollection_EnsureSiteAssetsLibraryBatchAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.IListCollection.EnsureSiteAssetsLibraryBatchAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IListCollection.EnsureSiteAssetsLibraryBatchAsync
+  nameWithType: IListCollection.EnsureSiteAssetsLibraryBatchAsync
 - uid: PnP.Core.Model.SharePoint.IListCollection.GetById(Guid,Expression{Func{PnP.Core.Model.SharePoint.IList,System.Object}}[])
   name: GetById(Guid, Expression<Func<IList, Object>>[])
   href: api/PnP.Core.Model.SharePoint.IListCollection.html#PnP_Core_Model_SharePoint_IListCollection_GetById_Guid_Expression_Func_PnP_Core_Model_SharePoint_IList_System_Object_____
@@ -25424,6 +25474,56 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IListCollection.GetByIdAsync
   nameWithType: IListCollection.GetByIdAsync
+- uid: PnP.Core.Model.SharePoint.IListCollection.GetByIdBatch(Guid,Expression{Func{PnP.Core.Model.SharePoint.IList,System.Object}}[])
+  name: GetByIdBatch(Guid, Expression<Func<IList, Object>>[])
+  href: api/PnP.Core.Model.SharePoint.IListCollection.html#PnP_Core_Model_SharePoint_IListCollection_GetByIdBatch_Guid_Expression_Func_PnP_Core_Model_SharePoint_IList_System_Object_____
+  commentId: M:PnP.Core.Model.SharePoint.IListCollection.GetByIdBatch(Guid,Expression{Func{PnP.Core.Model.SharePoint.IList,System.Object}}[])
+  name.vb: GetByIdBatch(Guid, Expression(Of Func(Of IList, Object))())
+  fullName: PnP.Core.Model.SharePoint.IListCollection.GetByIdBatch(Guid, Expression<Func<PnP.Core.Model.SharePoint.IList, System.Object>>[])
+  fullName.vb: PnP.Core.Model.SharePoint.IListCollection.GetByIdBatch(Guid, Expression(Of Func(Of PnP.Core.Model.SharePoint.IList, System.Object))())
+  nameWithType: IListCollection.GetByIdBatch(Guid, Expression<Func<IList, Object>>[])
+  nameWithType.vb: IListCollection.GetByIdBatch(Guid, Expression(Of Func(Of IList, Object))())
+- uid: PnP.Core.Model.SharePoint.IListCollection.GetByIdBatch(PnP.Core.Services.Batch,Guid,Expression{Func{PnP.Core.Model.SharePoint.IList,System.Object}}[])
+  name: GetByIdBatch(Batch, Guid, Expression<Func<IList, Object>>[])
+  href: api/PnP.Core.Model.SharePoint.IListCollection.html#PnP_Core_Model_SharePoint_IListCollection_GetByIdBatch_PnP_Core_Services_Batch_Guid_Expression_Func_PnP_Core_Model_SharePoint_IList_System_Object_____
+  commentId: M:PnP.Core.Model.SharePoint.IListCollection.GetByIdBatch(PnP.Core.Services.Batch,Guid,Expression{Func{PnP.Core.Model.SharePoint.IList,System.Object}}[])
+  name.vb: GetByIdBatch(Batch, Guid, Expression(Of Func(Of IList, Object))())
+  fullName: PnP.Core.Model.SharePoint.IListCollection.GetByIdBatch(PnP.Core.Services.Batch, Guid, Expression<Func<PnP.Core.Model.SharePoint.IList, System.Object>>[])
+  fullName.vb: PnP.Core.Model.SharePoint.IListCollection.GetByIdBatch(PnP.Core.Services.Batch, Guid, Expression(Of Func(Of PnP.Core.Model.SharePoint.IList, System.Object))())
+  nameWithType: IListCollection.GetByIdBatch(Batch, Guid, Expression<Func<IList, Object>>[])
+  nameWithType.vb: IListCollection.GetByIdBatch(Batch, Guid, Expression(Of Func(Of IList, Object))())
+- uid: PnP.Core.Model.SharePoint.IListCollection.GetByIdBatch*
+  name: GetByIdBatch
+  href: api/PnP.Core.Model.SharePoint.IListCollection.html#PnP_Core_Model_SharePoint_IListCollection_GetByIdBatch_
+  commentId: Overload:PnP.Core.Model.SharePoint.IListCollection.GetByIdBatch
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IListCollection.GetByIdBatch
+  nameWithType: IListCollection.GetByIdBatch
+- uid: PnP.Core.Model.SharePoint.IListCollection.GetByIdBatchAsync(Guid,Expression{Func{PnP.Core.Model.SharePoint.IList,System.Object}}[])
+  name: GetByIdBatchAsync(Guid, Expression<Func<IList, Object>>[])
+  href: api/PnP.Core.Model.SharePoint.IListCollection.html#PnP_Core_Model_SharePoint_IListCollection_GetByIdBatchAsync_Guid_Expression_Func_PnP_Core_Model_SharePoint_IList_System_Object_____
+  commentId: M:PnP.Core.Model.SharePoint.IListCollection.GetByIdBatchAsync(Guid,Expression{Func{PnP.Core.Model.SharePoint.IList,System.Object}}[])
+  name.vb: GetByIdBatchAsync(Guid, Expression(Of Func(Of IList, Object))())
+  fullName: PnP.Core.Model.SharePoint.IListCollection.GetByIdBatchAsync(Guid, Expression<Func<PnP.Core.Model.SharePoint.IList, System.Object>>[])
+  fullName.vb: PnP.Core.Model.SharePoint.IListCollection.GetByIdBatchAsync(Guid, Expression(Of Func(Of PnP.Core.Model.SharePoint.IList, System.Object))())
+  nameWithType: IListCollection.GetByIdBatchAsync(Guid, Expression<Func<IList, Object>>[])
+  nameWithType.vb: IListCollection.GetByIdBatchAsync(Guid, Expression(Of Func(Of IList, Object))())
+- uid: PnP.Core.Model.SharePoint.IListCollection.GetByIdBatchAsync(PnP.Core.Services.Batch,Guid,Expression{Func{PnP.Core.Model.SharePoint.IList,System.Object}}[])
+  name: GetByIdBatchAsync(Batch, Guid, Expression<Func<IList, Object>>[])
+  href: api/PnP.Core.Model.SharePoint.IListCollection.html#PnP_Core_Model_SharePoint_IListCollection_GetByIdBatchAsync_PnP_Core_Services_Batch_Guid_Expression_Func_PnP_Core_Model_SharePoint_IList_System_Object_____
+  commentId: M:PnP.Core.Model.SharePoint.IListCollection.GetByIdBatchAsync(PnP.Core.Services.Batch,Guid,Expression{Func{PnP.Core.Model.SharePoint.IList,System.Object}}[])
+  name.vb: GetByIdBatchAsync(Batch, Guid, Expression(Of Func(Of IList, Object))())
+  fullName: PnP.Core.Model.SharePoint.IListCollection.GetByIdBatchAsync(PnP.Core.Services.Batch, Guid, Expression<Func<PnP.Core.Model.SharePoint.IList, System.Object>>[])
+  fullName.vb: PnP.Core.Model.SharePoint.IListCollection.GetByIdBatchAsync(PnP.Core.Services.Batch, Guid, Expression(Of Func(Of PnP.Core.Model.SharePoint.IList, System.Object))())
+  nameWithType: IListCollection.GetByIdBatchAsync(Batch, Guid, Expression<Func<IList, Object>>[])
+  nameWithType.vb: IListCollection.GetByIdBatchAsync(Batch, Guid, Expression(Of Func(Of IList, Object))())
+- uid: PnP.Core.Model.SharePoint.IListCollection.GetByIdBatchAsync*
+  name: GetByIdBatchAsync
+  href: api/PnP.Core.Model.SharePoint.IListCollection.html#PnP_Core_Model_SharePoint_IListCollection_GetByIdBatchAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.IListCollection.GetByIdBatchAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IListCollection.GetByIdBatchAsync
+  nameWithType: IListCollection.GetByIdBatchAsync
 - uid: PnP.Core.Model.SharePoint.IListCollection.GetByServerRelativeUrl(System.String,Expression{Func{PnP.Core.Model.SharePoint.IList,System.Object}}[])
   name: GetByServerRelativeUrl(String, Expression<Func<IList, Object>>[])
   href: api/PnP.Core.Model.SharePoint.IListCollection.html#PnP_Core_Model_SharePoint_IListCollection_GetByServerRelativeUrl_System_String_Expression_Func_PnP_Core_Model_SharePoint_IList_System_Object_____
@@ -25456,6 +25556,56 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IListCollection.GetByServerRelativeUrlAsync
   nameWithType: IListCollection.GetByServerRelativeUrlAsync
+- uid: PnP.Core.Model.SharePoint.IListCollection.GetByServerRelativeUrlBatch(PnP.Core.Services.Batch,System.String,Expression{Func{PnP.Core.Model.SharePoint.IList,System.Object}}[])
+  name: GetByServerRelativeUrlBatch(Batch, String, Expression<Func<IList, Object>>[])
+  href: api/PnP.Core.Model.SharePoint.IListCollection.html#PnP_Core_Model_SharePoint_IListCollection_GetByServerRelativeUrlBatch_PnP_Core_Services_Batch_System_String_Expression_Func_PnP_Core_Model_SharePoint_IList_System_Object_____
+  commentId: M:PnP.Core.Model.SharePoint.IListCollection.GetByServerRelativeUrlBatch(PnP.Core.Services.Batch,System.String,Expression{Func{PnP.Core.Model.SharePoint.IList,System.Object}}[])
+  name.vb: GetByServerRelativeUrlBatch(Batch, String, Expression(Of Func(Of IList, Object))())
+  fullName: PnP.Core.Model.SharePoint.IListCollection.GetByServerRelativeUrlBatch(PnP.Core.Services.Batch, System.String, Expression<Func<PnP.Core.Model.SharePoint.IList, System.Object>>[])
+  fullName.vb: PnP.Core.Model.SharePoint.IListCollection.GetByServerRelativeUrlBatch(PnP.Core.Services.Batch, System.String, Expression(Of Func(Of PnP.Core.Model.SharePoint.IList, System.Object))())
+  nameWithType: IListCollection.GetByServerRelativeUrlBatch(Batch, String, Expression<Func<IList, Object>>[])
+  nameWithType.vb: IListCollection.GetByServerRelativeUrlBatch(Batch, String, Expression(Of Func(Of IList, Object))())
+- uid: PnP.Core.Model.SharePoint.IListCollection.GetByServerRelativeUrlBatch(System.String,Expression{Func{PnP.Core.Model.SharePoint.IList,System.Object}}[])
+  name: GetByServerRelativeUrlBatch(String, Expression<Func<IList, Object>>[])
+  href: api/PnP.Core.Model.SharePoint.IListCollection.html#PnP_Core_Model_SharePoint_IListCollection_GetByServerRelativeUrlBatch_System_String_Expression_Func_PnP_Core_Model_SharePoint_IList_System_Object_____
+  commentId: M:PnP.Core.Model.SharePoint.IListCollection.GetByServerRelativeUrlBatch(System.String,Expression{Func{PnP.Core.Model.SharePoint.IList,System.Object}}[])
+  name.vb: GetByServerRelativeUrlBatch(String, Expression(Of Func(Of IList, Object))())
+  fullName: PnP.Core.Model.SharePoint.IListCollection.GetByServerRelativeUrlBatch(System.String, Expression<Func<PnP.Core.Model.SharePoint.IList, System.Object>>[])
+  fullName.vb: PnP.Core.Model.SharePoint.IListCollection.GetByServerRelativeUrlBatch(System.String, Expression(Of Func(Of PnP.Core.Model.SharePoint.IList, System.Object))())
+  nameWithType: IListCollection.GetByServerRelativeUrlBatch(String, Expression<Func<IList, Object>>[])
+  nameWithType.vb: IListCollection.GetByServerRelativeUrlBatch(String, Expression(Of Func(Of IList, Object))())
+- uid: PnP.Core.Model.SharePoint.IListCollection.GetByServerRelativeUrlBatch*
+  name: GetByServerRelativeUrlBatch
+  href: api/PnP.Core.Model.SharePoint.IListCollection.html#PnP_Core_Model_SharePoint_IListCollection_GetByServerRelativeUrlBatch_
+  commentId: Overload:PnP.Core.Model.SharePoint.IListCollection.GetByServerRelativeUrlBatch
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IListCollection.GetByServerRelativeUrlBatch
+  nameWithType: IListCollection.GetByServerRelativeUrlBatch
+- uid: PnP.Core.Model.SharePoint.IListCollection.GetByServerRelativeUrlBatchAsync(PnP.Core.Services.Batch,System.String,Expression{Func{PnP.Core.Model.SharePoint.IList,System.Object}}[])
+  name: GetByServerRelativeUrlBatchAsync(Batch, String, Expression<Func<IList, Object>>[])
+  href: api/PnP.Core.Model.SharePoint.IListCollection.html#PnP_Core_Model_SharePoint_IListCollection_GetByServerRelativeUrlBatchAsync_PnP_Core_Services_Batch_System_String_Expression_Func_PnP_Core_Model_SharePoint_IList_System_Object_____
+  commentId: M:PnP.Core.Model.SharePoint.IListCollection.GetByServerRelativeUrlBatchAsync(PnP.Core.Services.Batch,System.String,Expression{Func{PnP.Core.Model.SharePoint.IList,System.Object}}[])
+  name.vb: GetByServerRelativeUrlBatchAsync(Batch, String, Expression(Of Func(Of IList, Object))())
+  fullName: PnP.Core.Model.SharePoint.IListCollection.GetByServerRelativeUrlBatchAsync(PnP.Core.Services.Batch, System.String, Expression<Func<PnP.Core.Model.SharePoint.IList, System.Object>>[])
+  fullName.vb: PnP.Core.Model.SharePoint.IListCollection.GetByServerRelativeUrlBatchAsync(PnP.Core.Services.Batch, System.String, Expression(Of Func(Of PnP.Core.Model.SharePoint.IList, System.Object))())
+  nameWithType: IListCollection.GetByServerRelativeUrlBatchAsync(Batch, String, Expression<Func<IList, Object>>[])
+  nameWithType.vb: IListCollection.GetByServerRelativeUrlBatchAsync(Batch, String, Expression(Of Func(Of IList, Object))())
+- uid: PnP.Core.Model.SharePoint.IListCollection.GetByServerRelativeUrlBatchAsync(System.String,Expression{Func{PnP.Core.Model.SharePoint.IList,System.Object}}[])
+  name: GetByServerRelativeUrlBatchAsync(String, Expression<Func<IList, Object>>[])
+  href: api/PnP.Core.Model.SharePoint.IListCollection.html#PnP_Core_Model_SharePoint_IListCollection_GetByServerRelativeUrlBatchAsync_System_String_Expression_Func_PnP_Core_Model_SharePoint_IList_System_Object_____
+  commentId: M:PnP.Core.Model.SharePoint.IListCollection.GetByServerRelativeUrlBatchAsync(System.String,Expression{Func{PnP.Core.Model.SharePoint.IList,System.Object}}[])
+  name.vb: GetByServerRelativeUrlBatchAsync(String, Expression(Of Func(Of IList, Object))())
+  fullName: PnP.Core.Model.SharePoint.IListCollection.GetByServerRelativeUrlBatchAsync(System.String, Expression<Func<PnP.Core.Model.SharePoint.IList, System.Object>>[])
+  fullName.vb: PnP.Core.Model.SharePoint.IListCollection.GetByServerRelativeUrlBatchAsync(System.String, Expression(Of Func(Of PnP.Core.Model.SharePoint.IList, System.Object))())
+  nameWithType: IListCollection.GetByServerRelativeUrlBatchAsync(String, Expression<Func<IList, Object>>[])
+  nameWithType.vb: IListCollection.GetByServerRelativeUrlBatchAsync(String, Expression(Of Func(Of IList, Object))())
+- uid: PnP.Core.Model.SharePoint.IListCollection.GetByServerRelativeUrlBatchAsync*
+  name: GetByServerRelativeUrlBatchAsync
+  href: api/PnP.Core.Model.SharePoint.IListCollection.html#PnP_Core_Model_SharePoint_IListCollection_GetByServerRelativeUrlBatchAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.IListCollection.GetByServerRelativeUrlBatchAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IListCollection.GetByServerRelativeUrlBatchAsync
+  nameWithType: IListCollection.GetByServerRelativeUrlBatchAsync
 - uid: PnP.Core.Model.SharePoint.IListCollection.GetByTitle(System.String,Expression{Func{PnP.Core.Model.SharePoint.IList,System.Object}}[])
   name: GetByTitle(String, Expression<Func<IList, Object>>[])
   href: api/PnP.Core.Model.SharePoint.IListCollection.html#PnP_Core_Model_SharePoint_IListCollection_GetByTitle_System_String_Expression_Func_PnP_Core_Model_SharePoint_IList_System_Object_____
