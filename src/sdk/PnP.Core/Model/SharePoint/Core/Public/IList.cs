@@ -437,6 +437,36 @@ namespace PnP.Core.Model.SharePoint
         public Dictionary<string, object> LoadListDataAsStream(RenderListDataOptions renderOptions);
 
         /// <summary>
+        /// Loads list items based up on a CAML query and the RenderListDataAsStream API
+        /// </summary>
+        /// <param name="renderOptions"><see cref="RenderListDataOptions"/> defining the query to execute</param>
+        /// <returns></returns>
+        public Task<IBatchSingleResult<Dictionary<string, object>>> LoadListDataAsStreamBatchAsync(RenderListDataOptions renderOptions);
+
+        /// <summary>
+        /// Loads list items based up on a CAML query and the RenderListDataAsStream API
+        /// </summary>
+        /// <param name="renderOptions"><see cref="RenderListDataOptions"/> defining the query to execute</param>
+        /// <returns></returns>
+        public IBatchSingleResult<Dictionary<string, object>> LoadListDataAsStreamBatch(RenderListDataOptions renderOptions);
+
+        /// <summary>
+        /// Loads list items based up on a CAML query and the RenderListDataAsStream API
+        /// </summary>
+        /// <param name="batch">Batch to add this request to </param>
+        /// <param name="renderOptions"><see cref="RenderListDataOptions"/> defining the query to execute</param>
+        /// <returns></returns>
+        public Task<IBatchSingleResult<Dictionary<string, object>>> LoadListDataAsStreamBatchAsync(Batch batch, RenderListDataOptions renderOptions);
+
+        /// <summary>
+        /// Loads list items based up on a CAML query and the RenderListDataAsStream API
+        /// </summary>
+        /// <param name="batch">Batch to add this request to </param>
+        /// <param name="renderOptions"><see cref="RenderListDataOptions"/> defining the query to execute</param>
+        /// <returns></returns>
+        public IBatchSingleResult<Dictionary<string, object>> LoadListDataAsStreamBatch(Batch batch, RenderListDataOptions renderOptions);
+
+        /// <summary>
         /// Retrieves the compliance tag / retention label for this list
         /// </summary>
         public IComplianceTag GetComplianceTag();

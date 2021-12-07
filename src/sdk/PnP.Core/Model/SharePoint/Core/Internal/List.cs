@@ -450,7 +450,7 @@ namespace PnP.Core.Model.SharePoint
             List<string> fields = new List<string>();
 
             bool first = true;
-            foreach(var fieldRefNode in fieldRefNodes)
+            foreach (var fieldRefNode in fieldRefNodes)
             {
                 if (fieldRefNode is XmlNode xmlNode)
                 {
@@ -514,6 +514,46 @@ namespace PnP.Core.Model.SharePoint
         public Dictionary<string, object> LoadListDataAsStream(RenderListDataOptions renderOptions)
         {
             return LoadListDataAsStreamAsync(renderOptions).GetAwaiter().GetResult();
+        }
+
+        public async Task<IBatchSingleResult<Dictionary<string, object>>> LoadListDataAsStreamBatchAsync(Batch batch, RenderListDataOptions renderOptions)
+        {
+            ApiCall apiCall = BuildGetListDataAsStreamApiCall(renderOptions);
+            apiCall.RawRequest = true;
+            apiCall.RawSingleResult = new Dictionary<string, object>();
+            apiCall.RawResultsHandler = async (json, apiCall) =>
+            {
+                var result = await ListDataAsStreamHandler.Deserialize(json, this).ConfigureAwait(false);
+                foreach (var item in result)
+                {
+                    (apiCall.RawSingleResult as Dictionary<string, object>).Add(item.Key, item.Value);
+                }
+            };
+
+            if (!ArePropertiesAvailable(LoadFieldsExpression))
+            {
+                // Get field information via batch
+                await LoadBatchAsync(batch, LoadFieldsExpression).ConfigureAwait(false);
+            }
+            // GetListDataAsStream request via batch
+            var batchRequest = await RawRequestBatchAsync(batch, apiCall, HttpMethod.Post).ConfigureAwait(false);
+
+            return new BatchSingleResult<Dictionary<string, object>>(batch, batchRequest.Id, apiCall.RawSingleResult as Dictionary<string, object>);
+        }
+
+        public IBatchSingleResult<Dictionary<string, object>> LoadListDataAsStreamBatch(Batch batch, RenderListDataOptions renderOptions)
+        {
+            return LoadListDataAsStreamBatchAsync(batch, renderOptions).GetAwaiter().GetResult();
+        }
+
+        public async Task<IBatchSingleResult<Dictionary<string, object>>> LoadListDataAsStreamBatchAsync(RenderListDataOptions renderOptions)
+        { 
+            return await LoadListDataAsStreamBatchAsync(PnPContext.CurrentBatch, renderOptions).ConfigureAwait(false);
+        }
+
+        public IBatchSingleResult<Dictionary<string, object>> LoadListDataAsStreamBatch(RenderListDataOptions renderOptions)
+        {
+            return LoadListDataAsStreamBatchAsync(renderOptions).GetAwaiter().GetResult();
         }
 
         private ApiCall BuildGetListDataAsStreamApiCall(RenderListDataOptions renderOptions)

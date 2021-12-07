@@ -77,11 +77,52 @@ namespace PnP.Core.Test.SharePoint
                         Assert.IsTrue(result.ContainsKey("LastRow"));
                         Assert.IsTrue(result.ContainsKey("RowLimit"));
                         Assert.IsTrue((int)result["RowLimit"] == 5);
-                    }
-                }
 
-                // Cleanup the created list
-                await myList.DeleteAsync();
+                        list3.Items.Clear();
+
+                        var batch = context3.NewBatch();
+                        var resultBatch = await list3.LoadListDataAsStreamBatchAsync(batch, new RenderListDataOptions() { ViewXml = "<View><ViewFields><FieldRef Name='Title' /></ViewFields><RowLimit>5</RowLimit></View>", RenderOptions = RenderListDataOptionsFlags.ListData }); ;
+
+                        Assert.IsFalse(resultBatch.IsAvailable);
+
+                        // Execute the batch
+                        await context3.ExecuteAsync(batch);
+
+                        Assert.IsTrue(resultBatch.IsAvailable);
+
+                        Assert.IsTrue(list3.Items.Length == 5);
+                        Assert.IsTrue(resultBatch.Result.ContainsKey("FirstRow"));
+                        Assert.IsTrue(resultBatch.Result.ContainsKey("LastRow"));
+                        Assert.IsTrue(resultBatch.Result.ContainsKey("RowLimit"));
+                        Assert.IsTrue((int)resultBatch.Result["RowLimit"] == 5);
+                    }
+
+                    using (var context4 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 3))
+                    {
+                        var list4 = context4.Web.Lists.GetByTitle(listTitle);
+                        if (list4 != null)
+                        {                            
+                            var resultBatch = list4.LoadListDataAsStreamBatch(new RenderListDataOptions() { ViewXml = "<View><ViewFields><FieldRef Name='Title' /></ViewFields><RowLimit>5</RowLimit></View>", RenderOptions = RenderListDataOptionsFlags.ListData }); ;
+
+                            Assert.IsFalse(resultBatch.IsAvailable);
+
+                            // Execute the batch
+                            await context4.ExecuteAsync();
+
+                            Assert.IsTrue(resultBatch.IsAvailable);
+
+                            Assert.IsTrue(list4.Items.Length == 5);
+                            Assert.IsTrue(resultBatch.Result.ContainsKey("FirstRow"));
+                            Assert.IsTrue(resultBatch.Result.ContainsKey("LastRow"));
+                            Assert.IsTrue(resultBatch.Result.ContainsKey("RowLimit"));
+                            Assert.IsTrue((int)resultBatch.Result["RowLimit"] == 5);
+
+                        }
+                    }
+
+                    // Cleanup the created list
+                    await myList.DeleteAsync();
+                }
             }
         }
 

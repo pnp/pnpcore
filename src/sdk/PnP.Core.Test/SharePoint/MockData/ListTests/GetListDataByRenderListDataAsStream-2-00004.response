@@ -1,0 +1,124 @@
+--batchresponse_02f0f122-6a6a-41d5-83ec-b33c29c61332
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+HTTP/1.1 200 OK
+CONTENT-TYPE: application/json; charset=utf-8
+
+{ "Row" : 
+[{
+"ID": "1",
+"PermMask": "0x7ffffffffffbffff",
+"FSObjType": "0",
+"UniqueId": "{C1419531-D3B9-4FD3-BADD-8EB7628526A0}",
+"ContentTypeId": "0x0100F0C9317AEB28CF408DFB976BEABDA296",
+"FileRef": "\u002fsites\u002fprov-2\u002fLists\u002fGetListDataByRenderListDataAsStream\u002f1_.000",
+"FileRef.urlencode": "%2Fsites%2Fprov%2D2%2FLists%2FGetListDataByRenderListDataAsStream%2F1%5F%2E000",
+"FileRef.urlencodeasurl": "\u002fsites\u002fprov-2\u002fLists\u002fGetListDataByRenderListDataAsStream\u002f1_.000",
+"FileRef.urlencoding": "\u002fsites\u002fprov-2\u002fLists\u002fGetListDataByRenderListDataAsStream\u002f1_.000",
+"FileRef.scriptencodeasurl": "\\u002fsites\\u002fprov-2\\u002fLists\\u002fGetListDataByRenderListDataAsStream\\u002f1_.000",
+"Attachments": "0",
+"SMTotalSize": "184",
+"_CommentFlags": "",
+"_CommentCount": "",
+"Title": "Item 0",
+"ItemChildCount": "0",
+"FolderChildCount": "0",
+"owshiddenversion": "1",
+"Restricted": ""
+}
+,{
+"ID": "2",
+"PermMask": "0x7ffffffffffbffff",
+"FSObjType": "0",
+"UniqueId": "{3F403C28-B4E4-47CE-91F1-D3AA0DDBCEBD}",
+"ContentTypeId": "0x0100F0C9317AEB28CF408DFB976BEABDA296",
+"FileRef": "\u002fsites\u002fprov-2\u002fLists\u002fGetListDataByRenderListDataAsStream\u002f2_.000",
+"FileRef.urlencode": "%2Fsites%2Fprov%2D2%2FLists%2FGetListDataByRenderListDataAsStream%2F2%5F%2E000",
+"FileRef.urlencodeasurl": "\u002fsites\u002fprov-2\u002fLists\u002fGetListDataByRenderListDataAsStream\u002f2_.000",
+"FileRef.urlencoding": "\u002fsites\u002fprov-2\u002fLists\u002fGetListDataByRenderListDataAsStream\u002f2_.000",
+"FileRef.scriptencodeasurl": "\\u002fsites\\u002fprov-2\\u002fLists\\u002fGetListDataByRenderListDataAsStream\\u002f2_.000",
+"Attachments": "0",
+"SMTotalSize": "184",
+"_CommentFlags": "",
+"_CommentCount": "",
+"Title": "Item 1",
+"ItemChildCount": "0",
+"FolderChildCount": "0",
+"owshiddenversion": "1",
+"Restricted": ""
+}
+,{
+"ID": "3",
+"PermMask": "0x7ffffffffffbffff",
+"FSObjType": "0",
+"UniqueId": "{0A0FE960-BBE2-4B72-99F9-BD9F3994DB2E}",
+"ContentTypeId": "0x0100F0C9317AEB28CF408DFB976BEABDA296",
+"FileRef": "\u002fsites\u002fprov-2\u002fLists\u002fGetListDataByRenderListDataAsStream\u002f3_.000",
+"FileRef.urlencode": "%2Fsites%2Fprov%2D2%2FLists%2FGetListDataByRenderListDataAsStream%2F3%5F%2E000",
+"FileRef.urlencodeasurl": "\u002fsites\u002fprov-2\u002fLists\u002fGetListDataByRenderListDataAsStream\u002f3_.000",
+"FileRef.urlencoding": "\u002fsites\u002fprov-2\u002fLists\u002fGetListDataByRenderListDataAsStream\u002f3_.000",
+"FileRef.scriptencodeasurl": "\\u002fsites\\u002fprov-2\\u002fLists\\u002fGetListDataByRenderListDataAsStream\\u002f3_.000",
+"Attachments": "0",
+"SMTotalSize": "184",
+"_CommentFlags": "",
+"_CommentCount": "",
+"Title": "Item 2",
+"ItemChildCount": "0",
+"FolderChildCount": "0",
+"owshiddenversion": "1",
+"Restricted": ""
+}
+,{
+"ID": "4",
+"PermMask": "0x7ffffffffffbffff",
+"FSObjType": "0",
+"UniqueId": "{0D46C620-A756-438C-AA14-8E9A578326AE}",
+"ContentTypeId": "0x0100F0C9317AEB28CF408DFB976BEABDA296",
+"FileRef": "\u002fsites\u002fprov-2\u002fLists\u002fGetListDataByRenderListDataAsStream\u002f4_.000",
+"FileRef.urlencode": "%2Fsites%2Fprov%2D2%2FLists%2FGetListDataByRenderListDataAsStream%2F4%5F%2E000",
+"FileRef.urlencodeasurl": "\u002fsites\u002fprov-2\u002fLists\u002fGetListDataByRenderListDataAsStream\u002f4_.000",
+"FileRef.urlencoding": "\u002fsites\u002fprov-2\u002fLists\u002fGetListDataByRenderListDataAsStream\u002f4_.000",
+"FileRef.scriptencodeasurl": "\\u002fsites\\u002fprov-2\\u002fLists\\u002fGetListDataByRenderListDataAsStream\\u002f4_.000",
+"Attachments": "0",
+"SMTotalSize": "184",
+"_CommentFlags": "",
+"_CommentCount": "",
+"Title": "Item 3",
+"ItemChildCount": "0",
+"FolderChildCount": "0",
+"owshiddenversion": "1",
+"Restricted": ""
+}
+,{
+"ID": "5",
+"PermMask": "0x7ffffffffffbffff",
+"FSObjType": "0",
+"UniqueId": "{6D23F1EC-3F6E-4017-859A-309828E04B3A}",
+"ContentTypeId": "0x0100F0C9317AEB28CF408DFB976BEABDA296",
+"FileRef": "\u002fsites\u002fprov-2\u002fLists\u002fGetListDataByRenderListDataAsStream\u002f5_.000",
+"FileRef.urlencode": "%2Fsites%2Fprov%2D2%2FLists%2FGetListDataByRenderListDataAsStream%2F5%5F%2E000",
+"FileRef.urlencodeasurl": "\u002fsites\u002fprov-2\u002fLists\u002fGetListDataByRenderListDataAsStream\u002f5_.000",
+"FileRef.urlencoding": "\u002fsites\u002fprov-2\u002fLists\u002fGetListDataByRenderListDataAsStream\u002f5_.000",
+"FileRef.scriptencodeasurl": "\\u002fsites\\u002fprov-2\\u002fLists\\u002fGetListDataByRenderListDataAsStream\\u002f5_.000",
+"Attachments": "0",
+"SMTotalSize": "184",
+"_CommentFlags": "",
+"_CommentCount": "",
+"Title": "Item 4",
+"ItemChildCount": "0",
+"FolderChildCount": "0",
+"owshiddenversion": "1",
+"Restricted": ""
+}
+],"FirstRow" : 1,
+"FolderPermissions" : "0x7ffffffffffbffff"
+,"LastRow" : 5,
+"RowLimit" : 5
+,"FilterLink" : "?"
+,"ForceNoHierarchy" : "1"
+,"HierarchyHasIndention" : ""
+,"CurrentFolderSpItemUrl" : ""
+
+}
+--batchresponse_02f0f122-6a6a-41d5-83ec-b33c29c61332--
