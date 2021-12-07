@@ -208,6 +208,7 @@ namespace PnP.Core.Test.SharePoint
                 context.GraphFirst = false;
 
                 var documentLibrary = context.Web.Lists.GetByTitleBatch("Documents", p => p.ContentTypes.QueryProperties(p => p.FieldLinks));
+                var documentLibrary2 = context.Web.Lists.GetByServerRelativeUrlBatch($"{context.Uri.LocalPath}/siteassets", p => p.ContentTypes.QueryProperties(p => p.FieldLinks));
 
                 Assert.IsFalse(documentLibrary.Requested);
 
@@ -217,6 +218,19 @@ namespace PnP.Core.Test.SharePoint
                 Assert.IsTrue(documentLibrary.IsPropertyAvailable(p => p.Id));
                 Assert.IsTrue(documentLibrary.ContentTypes.AsRequested().First().IsPropertyAvailable(p => p.FieldLinks));
                 Assert.IsTrue(documentLibrary.ContentTypes.AsRequested().First().FieldLinks.AsRequested().First().IsPropertyAvailable(p => p.Name));
+                Assert.IsTrue(documentLibrary2.Requested);
+                Assert.IsTrue(documentLibrary2.IsPropertyAvailable(p => p.Id));
+                Assert.IsTrue(documentLibrary2.ContentTypes.AsRequested().First().IsPropertyAvailable(p => p.FieldLinks));
+                Assert.IsTrue(documentLibrary2.ContentTypes.AsRequested().First().FieldLinks.AsRequested().First().IsPropertyAvailable(p => p.Name));
+
+                var documentLibrary3 = context.Web.Lists.GetByIdBatch(documentLibrary.Id, p => p.ContentTypes.QueryProperties(p => p.FieldLinks));
+                await context.ExecuteAsync();
+
+                Assert.IsTrue(documentLibrary3.Requested);
+                Assert.IsTrue(documentLibrary3.IsPropertyAvailable(p => p.Id));
+                Assert.IsTrue(documentLibrary3.ContentTypes.AsRequested().First().IsPropertyAvailable(p => p.FieldLinks));
+                Assert.IsTrue(documentLibrary3.ContentTypes.AsRequested().First().FieldLinks.AsRequested().First().IsPropertyAvailable(p => p.Name));
+
             }
         }
 
@@ -1470,7 +1484,17 @@ namespace PnP.Core.Test.SharePoint
                 var assetLibrary2 = context.Web.Lists.EnsureSiteAssetsLibrary(p => p.RootFolder.QueryProperties(p => p.Files));
                 Assert.IsNotNull(assetLibrary2);
                 Assert.IsTrue(assetLibrary2.Id != Guid.Empty);
-                Assert.IsTrue(assetLibrary2.IsPropertyAvailable(p => p.RootFolder));                
+                Assert.IsTrue(assetLibrary2.IsPropertyAvailable(p => p.RootFolder));
+
+                var assetLibrary3 = context.Web.Lists.EnsureSiteAssetsLibraryBatch(p => p.RootFolder.QueryProperties(p => p.Files));
+
+                Assert.IsFalse(assetLibrary3.Requested);
+
+                await context.ExecuteAsync();
+                Assert.IsTrue(assetLibrary3.Requested);
+                Assert.IsNotNull(assetLibrary3);
+                Assert.IsTrue(assetLibrary3.Id != Guid.Empty);
+                Assert.IsTrue(assetLibrary3.IsPropertyAvailable(p => p.RootFolder));
             }
         }
     }

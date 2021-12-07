@@ -131,7 +131,7 @@ namespace PnP.Core.Model.SharePoint
 
         public async Task<IList> GetByTitleBatchAsync(string title, params Expression<Func<IList, object>>[] selectors)
         {
-            return await GetByTitleBatchAsync(PnPContext.CurrentBatch, title, selectors).ConfigureAwait(false); 
+            return await GetByTitleBatchAsync(PnPContext.CurrentBatch, title, selectors).ConfigureAwait(false);
         }
 
         public IList GetByTitleBatch(string title, params Expression<Func<IList, object>>[] selectors)
@@ -168,6 +168,46 @@ namespace PnP.Core.Model.SharePoint
             return await this.QueryProperties(selectors).FirstOrDefaultAsync(l => l.Id == id).ConfigureAwait(false);
         }
 
+        public async Task<IList> GetByIdBatchAsync(Batch batch, Guid id, params Expression<Func<IList, object>>[] selectors)
+        {
+            if (id == Guid.Empty)
+            {
+                throw new ArgumentException(nameof(id));
+            }
+
+            List list = new List()
+            {
+                PnPContext = PnPContext,
+                Parent = this
+            };
+
+            await list.BaseBatchRetrieveAsync(batch, apiOverride: BuildGetListByIdApiCall(id),
+                                                                    fromJsonCasting: list.MappingHandler,
+                                                                    postMappingJson: list.PostMappingHandler,
+                                                                    selectors: selectors).ConfigureAwait(false);
+            return list;
+
+        }
+
+        public IList GetByIdBatch(Batch batch, Guid id, params Expression<Func<IList, object>>[] selectors)
+        {
+            return GetByIdBatchAsync(batch, id, selectors).GetAwaiter().GetResult();
+        }
+
+        public async Task<IList> GetByIdBatchAsync(Guid id, params Expression<Func<IList, object>>[] selectors)
+        {
+            return await GetByIdBatchAsync(PnPContext.CurrentBatch, id, selectors).ConfigureAwait(false);
+        }
+
+        public IList GetByIdBatch(Guid id, params Expression<Func<IList, object>>[] selectors)
+        {
+            return GetByIdBatchAsync(id, selectors).GetAwaiter().GetResult();
+        }
+
+        private static ApiCall BuildGetListByIdApiCall(Guid id)
+        {
+            return new ApiCall($"_api/web/lists/getbyid('{id}')", ApiType.SPORest);
+        }
         #endregion
 
         #region GetByServerRelativeUrl methods
@@ -184,7 +224,7 @@ namespace PnP.Core.Model.SharePoint
                 throw new ArgumentException(PnPCoreResources.Exception_GetListByServerRelativeUrl_ServerRelativeUrl);
             }
 
-            return await BaseDataModelExtensions.BaseGetAsync(this, new ApiCall($"_api/web/getlist('{serverRelativeUrl}')", ApiType.SPORest), selectors).ConfigureAwait(false);
+            return await BaseDataModelExtensions.BaseGetAsync(this, BuildGetListByServerRelativeUrlApiCall(serverRelativeUrl), selectors).ConfigureAwait(false);
         }
 
         public IList GetByServerRelativeUrl(string serverRelativeUrl, params Expression<Func<IList, object>>[] selectors)
@@ -197,6 +237,72 @@ namespace PnP.Core.Model.SharePoint
             return GetByServerRelativeUrlAsync(serverRelativeUrl, selectors).GetAwaiter().GetResult();
         }
 
+        public async Task<IList> GetByServerRelativeUrlBatchAsync(string serverRelativeUrl, params Expression<Func<IList, object>>[] selectors)
+        {
+            if (serverRelativeUrl == null)
+            {
+                throw new ArgumentNullException(nameof(serverRelativeUrl));
+            }
+
+            if (string.IsNullOrEmpty(serverRelativeUrl))
+            {
+                throw new ArgumentException(PnPCoreResources.Exception_GetListByServerRelativeUrl_ServerRelativeUrl);
+            }
+
+            return await GetByServerRelativeUrlBatchAsync(PnPContext.CurrentBatch, serverRelativeUrl, selectors).ConfigureAwait(false);
+        }
+
+        public IList GetByServerRelativeUrlBatch(string serverRelativeUrl, params Expression<Func<IList, object>>[] selectors)
+        {
+            if (serverRelativeUrl == null)
+            {
+                throw new ArgumentNullException(nameof(serverRelativeUrl));
+            }
+
+            return GetByServerRelativeUrlBatchAsync(serverRelativeUrl, selectors).GetAwaiter().GetResult();
+        }
+
+        public async Task<IList> GetByServerRelativeUrlBatchAsync(Batch batch, string serverRelativeUrl, params Expression<Func<IList, object>>[] selectors)
+        {
+            if (serverRelativeUrl == null)
+            {
+                throw new ArgumentNullException(nameof(serverRelativeUrl));
+            }
+
+            if (string.IsNullOrEmpty(serverRelativeUrl))
+            {
+                throw new ArgumentException(PnPCoreResources.Exception_GetListByServerRelativeUrl_ServerRelativeUrl);
+            }
+
+            List list = new List()
+            {
+                PnPContext = PnPContext,
+                Parent = this
+            };
+
+            await list.BaseBatchRetrieveAsync(batch, apiOverride: BuildGetListByServerRelativeUrlApiCall(serverRelativeUrl),
+                                                                    fromJsonCasting: list.MappingHandler,
+                                                                    postMappingJson: list.PostMappingHandler,
+                                                                    selectors: selectors).ConfigureAwait(false);
+            return list;
+        }
+
+        public IList GetByServerRelativeUrlBatch(Batch batch, string serverRelativeUrl, params Expression<Func<IList, object>>[] selectors)
+        {
+            if (serverRelativeUrl == null)
+            {
+                throw new ArgumentNullException(nameof(serverRelativeUrl));
+            }
+
+            return GetByServerRelativeUrlBatchAsync(batch, serverRelativeUrl, selectors).GetAwaiter().GetResult();
+        }
+
+
+        private static ApiCall BuildGetListByServerRelativeUrlApiCall(string serverRelativeUrl)
+        {
+            return new ApiCall($"_api/web/getlist('{serverRelativeUrl}')", ApiType.SPORest);
+        }
+
         #endregion
 
         #region EnsureSiteAssetsLibrary methods
@@ -204,7 +310,7 @@ namespace PnP.Core.Model.SharePoint
         {
             var assetLibrary = CreateNew() as List;
 
-            var apiCall = new ApiCall("_api/Web/Lists/EnsureSiteAssetsLibrary", ApiType.SPORest);
+            var apiCall = BuildEnsureSiteAssetsLibraryApiCall();
             var entityInfo = EntityManager.GetClassInfo(assetLibrary.GetType(), assetLibrary, expressions: selectors);
             var query = await QueryClient.BuildGetAPICallAsync(assetLibrary, entityInfo, apiCall).ConfigureAwait(false);
 
@@ -215,6 +321,39 @@ namespace PnP.Core.Model.SharePoint
         public IList EnsureSiteAssetsLibrary(params Expression<Func<IList, object>>[] selectors)
         {
             return EnsureSiteAssetsLibraryAsync(selectors).GetAwaiter().GetResult();
+        }
+
+        public async Task<IList> EnsureSiteAssetsLibraryBatchAsync(params Expression<Func<IList, object>>[] selectors)
+        {
+            return await EnsureSiteAssetsLibraryBatchAsync(PnPContext.CurrentBatch, selectors).ConfigureAwait(false);
+        }
+
+        public IList EnsureSiteAssetsLibraryBatch(params Expression<Func<IList, object>>[] selectors)
+        {
+            return EnsureSiteAssetsLibraryBatchAsync(selectors).GetAwaiter().GetResult();
+        }
+
+        public async Task<IList> EnsureSiteAssetsLibraryBatchAsync(Batch batch, params Expression<Func<IList, object>>[] selectors)
+        {
+            var assetLibrary = CreateNew() as List;
+
+            var apiCall = BuildEnsureSiteAssetsLibraryApiCall();
+            var entityInfo = EntityManager.GetClassInfo(assetLibrary.GetType(), assetLibrary, expressions: selectors);
+            var query = await QueryClient.BuildGetAPICallAsync(assetLibrary, entityInfo, apiCall).ConfigureAwait(false);
+
+            await assetLibrary.RequestBatchAsync(batch, new ApiCall(query.ApiCall.Request, ApiType.SPORest), HttpMethod.Post).ConfigureAwait(false);
+
+            return assetLibrary;
+        }
+
+        public IList EnsureSiteAssetsLibraryBatch(Batch batch, params Expression<Func<IList, object>>[] selectors)
+        {
+            return EnsureSiteAssetsLibraryBatchAsync(batch, selectors).GetAwaiter().GetResult();
+        }
+
+        private static ApiCall BuildEnsureSiteAssetsLibraryApiCall()
+        {
+            return new ApiCall("_api/Web/Lists/EnsureSiteAssetsLibrary", ApiType.SPORest);
         }
         #endregion
     }
