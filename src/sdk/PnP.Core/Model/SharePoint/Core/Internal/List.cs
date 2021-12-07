@@ -238,18 +238,6 @@ namespace PnP.Core.Model.SharePoint
 
         #region Extension methods
 
-        #region BatchGetByTitle
-        private static ApiCall GetByTitleApiCall(string title)
-        {
-            return new ApiCall($"_api/web/lists/getbytitle('{title}')", ApiType.SPORest);
-        }
-
-        internal Task<IBatchSingleResult<IList>> BatchGetByTitleAsync(Batch batch, string title, params Expression<Func<IList, object>>[] expressions)
-        {
-            return GetBatchAsync(batch, GetByTitleApiCall(title), expressions);
-        }
-        #endregion
-
         #region Recycle
         public Guid Recycle()
         {
