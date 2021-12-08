@@ -1,0 +1,9 @@
+--batchresponse_f34846fd-b763-4368-bfba-d8db7200f429
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+HTTP/1.1 200 OK
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+
+{"d":{"SetListComplianceTag":null}}
+--batchresponse_f34846fd-b763-4368-bfba-d8db7200f429--

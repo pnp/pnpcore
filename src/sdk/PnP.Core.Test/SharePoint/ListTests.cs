@@ -1538,5 +1538,51 @@ namespace PnP.Core.Test.SharePoint
                 Assert.IsTrue(assetLibrary3.IsPropertyAvailable(p => p.RootFolder));
             }
         }
+
+        [TestMethod]
+        public async Task ComplianceTagTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+
+                // Create a new list
+                string listTitle = TestCommon.GetPnPSdkTestAssetName("ComplianceTagTest");
+                var myList = context.Web.Lists.GetByTitle(listTitle);
+
+                if (TestCommon.Instance.Mocking && myList != null)
+                {
+                    Assert.Inconclusive("Test data set should be setup to not have the list available.");
+                }
+
+                if (myList == null)
+                {
+                    myList = await context.Web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
+                }
+
+                // Add an item
+                await myList.Items.AddAsync(new Dictionary<string, object>() { { "Title", "Test" } });
+
+                // Add a compliance tag
+                // Ensure a retentionlabel is created first: https://compliance.microsoft.com/informationgovernance?viewid=labels
+                myList.SetComplianceTag("Retain1Year", false, false, false);
+
+                // Read the compliance tag again
+                var complianceTag = myList.GetComplianceTag();
+
+                Assert.IsTrue(complianceTag != null);
+                
+                var complianceTagViaBatch = myList.GetComplianceTagBatch();
+                Assert.IsFalse(complianceTagViaBatch.IsAvailable);
+
+                await context.ExecuteAsync();
+
+                Assert.IsTrue(complianceTagViaBatch.IsAvailable);
+                Assert.IsTrue(complianceTagViaBatch.Result.TagName == "Retain1Year");
+
+                await myList.DeleteAsync();
+            }
+        }
     }
 }

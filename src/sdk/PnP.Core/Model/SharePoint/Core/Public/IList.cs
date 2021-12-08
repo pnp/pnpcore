@@ -477,6 +477,28 @@ namespace PnP.Core.Model.SharePoint
         public Task<IComplianceTag> GetComplianceTagAsync();
 
         /// <summary>
+        /// Retrieves the compliance tag / retention label for this list
+        /// </summary>
+        /// <param name="batch">Batch to add this request to </param>
+        public Task<IBatchSingleResult<IComplianceTag>> GetComplianceTagBatchAsync(Batch batch);
+
+        /// <summary>
+        /// Retrieves the compliance tag / retention label for this list
+        /// </summary>
+        /// <param name="batch">Batch to add this request to </param>
+        public IBatchSingleResult<IComplianceTag> GetComplianceTagBatch(Batch batch);
+
+        /// <summary>
+        /// Retrieves the compliance tag / retention label for this list
+        /// </summary>
+        public Task<IBatchSingleResult<IComplianceTag>> GetComplianceTagBatchAsync();
+
+        /// <summary>
+        /// Retrieves the compliance tag / retention label for this list
+        /// </summary>
+        public IBatchSingleResult<IComplianceTag> GetComplianceTagBatch();
+
+        /// <summary>
         /// Sets a compliance tag / retention label for this list
         /// </summary>
         /// <param name="complianceTagValue">Compliance tag</param>

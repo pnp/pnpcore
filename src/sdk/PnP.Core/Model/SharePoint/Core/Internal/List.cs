@@ -547,7 +547,7 @@ namespace PnP.Core.Model.SharePoint
         }
 
         public async Task<IBatchSingleResult<Dictionary<string, object>>> LoadListDataAsStreamBatchAsync(RenderListDataOptions renderOptions)
-        { 
+        {
             return await LoadListDataAsStreamBatchAsync(PnPContext.CurrentBatch, renderOptions).ConfigureAwait(false);
         }
 
@@ -604,7 +604,7 @@ namespace PnP.Core.Model.SharePoint
             await EnsurePropertiesAsync(l => l.RootFolder).ConfigureAwait(false);
             await RootFolder.EnsurePropertiesAsync(f => f.ServerRelativeUrl).ConfigureAwait(false);
             var listUrl = RootFolder.ServerRelativeUrl;
-            var apiCall = new ApiCall($"_api/SP.CompliancePolicy.SPPolicyStoreProxy.GetListComplianceTag(listUrl='{listUrl}')", ApiType.SPORest);
+            ApiCall apiCall = BuildGetComplianceTagApiCall(listUrl);
             var response = await RawRequestAsync(apiCall, HttpMethod.Get).ConfigureAwait(false);
 
             if (!string.IsNullOrEmpty(response.Json))
@@ -619,6 +619,70 @@ namespace PnP.Core.Model.SharePoint
             }
 
             return null;
+        }
+
+        private static ApiCall BuildGetComplianceTagApiCall(string listUrl)
+        {
+            return new ApiCall($"_api/SP.CompliancePolicy.SPPolicyStoreProxy.GetListComplianceTag(listUrl='{listUrl}')", ApiType.SPORest);
+        }
+
+        public async Task<IBatchSingleResult<IComplianceTag>> GetComplianceTagBatchAsync(Batch batch)
+        {
+            await EnsurePropertiesAsync(l => l.RootFolder).ConfigureAwait(false);
+            await RootFolder.EnsurePropertiesAsync(f => f.ServerRelativeUrl).ConfigureAwait(false);
+            var listUrl = RootFolder.ServerRelativeUrl;
+
+            ApiCall apiCall = BuildGetComplianceTagApiCall(listUrl);
+            apiCall.RawRequest = true;
+            apiCall.RawSingleResult = new ComplianceTag();
+            apiCall.RawResultsHandler = (json, apiCall) =>
+            {
+                var jsonElement = JsonSerializer.Deserialize<JsonElement>(json).GetProperty("d");
+
+                if (jsonElement.TryGetProperty("GetListComplianceTag", out JsonElement getAvailableTagsForSite))
+                {
+                    var tag = getAvailableTagsForSite.ToObject<ComplianceTag>(PnPConstants.JsonSerializer_PropertyNameCaseInsensitiveTrue);
+                    (apiCall.RawSingleResult as ComplianceTag).TagId = tag.TagId;
+                    (apiCall.RawSingleResult as ComplianceTag).TagName = tag.TagName;
+                    (apiCall.RawSingleResult as ComplianceTag).TagRetentionBasedOn = tag.TagRetentionBasedOn;
+                    (apiCall.RawSingleResult as ComplianceTag).TagDuration = tag.TagDuration;
+                    (apiCall.RawSingleResult as ComplianceTag).SuperLock = tag.SuperLock;
+                    (apiCall.RawSingleResult as ComplianceTag).SharingCapabilities = tag.SharingCapabilities;
+                    (apiCall.RawSingleResult as ComplianceTag).ReviewerEmail = tag.ReviewerEmail;
+                    (apiCall.RawSingleResult as ComplianceTag).RequireSenderAuthenticationEnabled = tag.RequireSenderAuthenticationEnabled;
+                    (apiCall.RawSingleResult as ComplianceTag).Notes = tag.Notes;
+                    (apiCall.RawSingleResult as ComplianceTag).IsEventTag = tag.IsEventTag;
+                    (apiCall.RawSingleResult as ComplianceTag).HasRetentionAction = tag.HasRetentionAction;
+                    (apiCall.RawSingleResult as ComplianceTag).EncryptionRMSTemplateId = tag.EncryptionRMSTemplateId;
+                    (apiCall.RawSingleResult as ComplianceTag).DisplayName = tag.DisplayName;
+                    (apiCall.RawSingleResult as ComplianceTag).ContainsSiteLabel = tag.ContainsSiteLabel;
+                    (apiCall.RawSingleResult as ComplianceTag).BlockEdit = tag.BlockEdit;
+                    (apiCall.RawSingleResult as ComplianceTag).BlockDelete = tag.BlockDelete;
+                    (apiCall.RawSingleResult as ComplianceTag).AutoDelete = tag.AutoDelete;
+                    (apiCall.RawSingleResult as ComplianceTag).AllowAccessFromUnmanagedDevice = tag.AllowAccessFromUnmanagedDevice;
+                    (apiCall.RawSingleResult as ComplianceTag).AccessType = tag.AccessType;
+                    (apiCall.RawSingleResult as ComplianceTag).AcceptMessagesOnlyFromSendersOrMembers = tag.AcceptMessagesOnlyFromSendersOrMembers;
+                }
+            };
+
+            var batchRequest = await RawRequestBatchAsync(batch, apiCall, HttpMethod.Get).ConfigureAwait(false);
+
+            return new BatchSingleResult<ComplianceTag>(batch, batchRequest.Id, apiCall.RawSingleResult as ComplianceTag);
+        }
+
+        public IBatchSingleResult<IComplianceTag> GetComplianceTagBatch(Batch batch)
+        {
+            return GetComplianceTagBatchAsync(batch).GetAwaiter().GetResult();
+        }
+
+        public async Task<IBatchSingleResult<IComplianceTag>> GetComplianceTagBatchAsync()
+        {
+            return await GetComplianceTagBatchAsync(PnPContext.CurrentBatch).ConfigureAwait(false);
+        }
+
+        public IBatchSingleResult<IComplianceTag> GetComplianceTagBatch()
+        {
+            return GetComplianceTagBatchAsync().GetAwaiter().GetResult();
         }
 
         public void SetComplianceTag(string complianceTagValue, bool blockDelete, bool blockEdit, bool syncToItems)

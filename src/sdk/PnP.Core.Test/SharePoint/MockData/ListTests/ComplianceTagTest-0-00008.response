@@ -1,0 +1,9 @@
+--batchresponse_61a4bd92-26da-4d43-a890-aacae64ac5d2
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+HTTP/1.1 200 OK
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+
+{"d":{"GetListComplianceTag":{"__metadata":{"type":"SP.CompliancePolicy.ComplianceTag"},"AcceptMessagesOnlyFromSendersOrMembers":false,"AccessType":null,"AllowAccessFromUnmanagedDevice":null,"AutoDelete":true,"BlockDelete":true,"BlockEdit":false,"ComplianceFlags":1,"ContainsSiteLabel":false,"DisplayName":"","EncryptionRMSTemplateId":null,"HasRetentionAction":true,"IsEventTag":false,"MultiStageReviewerEmail":null,"NextStageComplianceTag":null,"Notes":null,"RequireSenderAuthenticationEnabled":false,"ReviewerEmail":null,"SharingCapabilities":null,"SuperLock":false,"TagDuration":365,"TagId":"04fb0f24-f9e8-460c-956f-b89ca41ebf28","TagName":"Retain1Year","TagRetentionBasedOn":"CreationAgeInDays","UnlockedAsDefault":false}}}
+--batchresponse_61a4bd92-26da-4d43-a890-aacae64ac5d2--
