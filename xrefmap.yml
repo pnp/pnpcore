@@ -24597,6 +24597,44 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IList.GetComplianceTagAsync
   nameWithType: IList.GetComplianceTagAsync
+- uid: PnP.Core.Model.SharePoint.IList.GetComplianceTagBatch
+  name: GetComplianceTagBatch()
+  href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_GetComplianceTagBatch
+  commentId: M:PnP.Core.Model.SharePoint.IList.GetComplianceTagBatch
+  fullName: PnP.Core.Model.SharePoint.IList.GetComplianceTagBatch()
+  nameWithType: IList.GetComplianceTagBatch()
+- uid: PnP.Core.Model.SharePoint.IList.GetComplianceTagBatch(PnP.Core.Services.Batch)
+  name: GetComplianceTagBatch(Batch)
+  href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_GetComplianceTagBatch_PnP_Core_Services_Batch_
+  commentId: M:PnP.Core.Model.SharePoint.IList.GetComplianceTagBatch(PnP.Core.Services.Batch)
+  fullName: PnP.Core.Model.SharePoint.IList.GetComplianceTagBatch(PnP.Core.Services.Batch)
+  nameWithType: IList.GetComplianceTagBatch(Batch)
+- uid: PnP.Core.Model.SharePoint.IList.GetComplianceTagBatch*
+  name: GetComplianceTagBatch
+  href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_GetComplianceTagBatch_
+  commentId: Overload:PnP.Core.Model.SharePoint.IList.GetComplianceTagBatch
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IList.GetComplianceTagBatch
+  nameWithType: IList.GetComplianceTagBatch
+- uid: PnP.Core.Model.SharePoint.IList.GetComplianceTagBatchAsync
+  name: GetComplianceTagBatchAsync()
+  href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_GetComplianceTagBatchAsync
+  commentId: M:PnP.Core.Model.SharePoint.IList.GetComplianceTagBatchAsync
+  fullName: PnP.Core.Model.SharePoint.IList.GetComplianceTagBatchAsync()
+  nameWithType: IList.GetComplianceTagBatchAsync()
+- uid: PnP.Core.Model.SharePoint.IList.GetComplianceTagBatchAsync(PnP.Core.Services.Batch)
+  name: GetComplianceTagBatchAsync(Batch)
+  href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_GetComplianceTagBatchAsync_PnP_Core_Services_Batch_
+  commentId: M:PnP.Core.Model.SharePoint.IList.GetComplianceTagBatchAsync(PnP.Core.Services.Batch)
+  fullName: PnP.Core.Model.SharePoint.IList.GetComplianceTagBatchAsync(PnP.Core.Services.Batch)
+  nameWithType: IList.GetComplianceTagBatchAsync(Batch)
+- uid: PnP.Core.Model.SharePoint.IList.GetComplianceTagBatchAsync*
+  name: GetComplianceTagBatchAsync
+  href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_GetComplianceTagBatchAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.IList.GetComplianceTagBatchAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IList.GetComplianceTagBatchAsync
+  nameWithType: IList.GetComplianceTagBatchAsync
 - uid: PnP.Core.Model.SharePoint.IList.Hidden
   name: Hidden
   href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_Hidden
