@@ -24807,6 +24807,44 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IList.AddListFolderAsync
   nameWithType: IList.AddListFolderAsync
+- uid: PnP.Core.Model.SharePoint.IList.AddListFolderBatch(PnP.Core.Services.Batch,System.String,System.String,System.String)
+  name: AddListFolderBatch(Batch, String, String, String)
+  href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_AddListFolderBatch_PnP_Core_Services_Batch_System_String_System_String_System_String_
+  commentId: M:PnP.Core.Model.SharePoint.IList.AddListFolderBatch(PnP.Core.Services.Batch,System.String,System.String,System.String)
+  fullName: PnP.Core.Model.SharePoint.IList.AddListFolderBatch(PnP.Core.Services.Batch, System.String, System.String, System.String)
+  nameWithType: IList.AddListFolderBatch(Batch, String, String, String)
+- uid: PnP.Core.Model.SharePoint.IList.AddListFolderBatch(System.String,System.String,System.String)
+  name: AddListFolderBatch(String, String, String)
+  href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_AddListFolderBatch_System_String_System_String_System_String_
+  commentId: M:PnP.Core.Model.SharePoint.IList.AddListFolderBatch(System.String,System.String,System.String)
+  fullName: PnP.Core.Model.SharePoint.IList.AddListFolderBatch(System.String, System.String, System.String)
+  nameWithType: IList.AddListFolderBatch(String, String, String)
+- uid: PnP.Core.Model.SharePoint.IList.AddListFolderBatch*
+  name: AddListFolderBatch
+  href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_AddListFolderBatch_
+  commentId: Overload:PnP.Core.Model.SharePoint.IList.AddListFolderBatch
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IList.AddListFolderBatch
+  nameWithType: IList.AddListFolderBatch
+- uid: PnP.Core.Model.SharePoint.IList.AddListFolderBatchAsync(PnP.Core.Services.Batch,System.String,System.String,System.String)
+  name: AddListFolderBatchAsync(Batch, String, String, String)
+  href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_AddListFolderBatchAsync_PnP_Core_Services_Batch_System_String_System_String_System_String_
+  commentId: M:PnP.Core.Model.SharePoint.IList.AddListFolderBatchAsync(PnP.Core.Services.Batch,System.String,System.String,System.String)
+  fullName: PnP.Core.Model.SharePoint.IList.AddListFolderBatchAsync(PnP.Core.Services.Batch, System.String, System.String, System.String)
+  nameWithType: IList.AddListFolderBatchAsync(Batch, String, String, String)
+- uid: PnP.Core.Model.SharePoint.IList.AddListFolderBatchAsync(System.String,System.String,System.String)
+  name: AddListFolderBatchAsync(String, String, String)
+  href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_AddListFolderBatchAsync_System_String_System_String_System_String_
+  commentId: M:PnP.Core.Model.SharePoint.IList.AddListFolderBatchAsync(System.String,System.String,System.String)
+  fullName: PnP.Core.Model.SharePoint.IList.AddListFolderBatchAsync(System.String, System.String, System.String)
+  nameWithType: IList.AddListFolderBatchAsync(String, String, String)
+- uid: PnP.Core.Model.SharePoint.IList.AddListFolderBatchAsync*
+  name: AddListFolderBatchAsync
+  href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_AddListFolderBatchAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.IList.AddListFolderBatchAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IList.AddListFolderBatchAsync
+  nameWithType: IList.AddListFolderBatchAsync
 - uid: PnP.Core.Model.SharePoint.IList.All
   name: All
   href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_All
