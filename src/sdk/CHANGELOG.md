@@ -60,6 +60,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Improved LINQ query syntax #675 [s-KaiNet - Sergei Sergeev]
 - SharePoint Syntex Content Center sites pages can use a full width section [jansenbe - Bert Jansen]
 - Added `LoadListDataAsStream` batch methods [jansenbe - Bert Jansen]
+- Documentation update showing improved PnP PowerShell syntax for creating Azure AD applications #681 [JackStrap - Jack Strapopoulos]
 
 ## [1.4.0]
 
