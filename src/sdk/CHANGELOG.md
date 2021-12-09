@@ -25,6 +25,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Added support for handling throttling and network resilience for Azure AD requests made via MSAL #656 [patrikhellgren - Patrik Hellgren]
 - Added documentation and inline comments to help SDK users understand `IQueryable` and when to use `.AsRequested()` #660 [s-KaiNet - Sergei Sergeev]
 - Added documentation to help CSOM developers switch to PnP Core SDK #669 [s-KaiNet - Sergei Sergeev]
+- Added user profiles and social following features #680 [s-KaiNet - Sergei Sergeev]
 
 ### Changed
 

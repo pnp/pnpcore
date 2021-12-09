@@ -1,5 +1,4 @@
-﻿using PnP.Core.Model.SharePoint;
-using PnP.Core.Services;
+﻿using PnP.Core.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +7,7 @@ using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
 
-namespace PnP.Core.Model
+namespace PnP.Core.Model.SharePoint
 {
     internal abstract class SocialBase<TModel> : BaseDataModel<TModel>
     {
