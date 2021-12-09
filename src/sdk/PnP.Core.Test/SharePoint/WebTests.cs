@@ -1260,6 +1260,19 @@ namespace PnP.Core.Test.SharePoint
 
                 Assert.IsNotNull(changes);
                 Assert.IsTrue(changes.Count > 0);
+
+                var changesBatch = context.Web.GetChangesBatch(new ChangeQueryOptions(true, true)
+                {
+                    FetchLimit = 5
+                });
+
+                Assert.IsFalse(changesBatch.IsAvailable);
+
+                await context.ExecuteAsync();
+
+                Assert.IsTrue(changesBatch.IsAvailable);
+
+                Assert.IsTrue(changesBatch.Count > 0);
             }
         }
 

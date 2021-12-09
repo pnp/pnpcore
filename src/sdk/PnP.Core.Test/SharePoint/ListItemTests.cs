@@ -3840,6 +3840,18 @@ namespace PnP.Core.Test.SharePoint
                     Assert.IsNotNull(changes2);
                     Assert.IsTrue(changes2.Count == 1);
 
+                    var changesBatch2 = listItem.GetChangesBatch(new ChangeQueryOptions(true, true)
+                    {
+                        FetchLimit = 5,
+                    });
+
+                    Assert.IsFalse(changesBatch2.IsAvailable);
+
+                    context.Execute();
+
+                    Assert.IsTrue(changesBatch2.IsAvailable);
+                    Assert.IsTrue(changes2.Count == 1);
+
                 }
             }
             finally

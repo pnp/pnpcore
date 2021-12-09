@@ -1068,6 +1068,18 @@ namespace PnP.Core.Test.SharePoint
 
                 Assert.IsNotNull(changes);
                 Assert.IsTrue(changes.Count > 0);
+
+                var changesBatch = folder.GetChangesBatch(new ChangeQueryOptions(true, true)
+                {
+                    FetchLimit = 5,
+                });
+
+                Assert.IsFalse(changesBatch.IsAvailable);
+
+                context.Execute();
+
+                Assert.IsTrue(changesBatch.IsAvailable);
+                Assert.IsTrue(changesBatch.Count > 0);
             }
         }
 

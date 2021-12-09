@@ -1384,6 +1384,29 @@ namespace PnP.Core.Test.SharePoint
 
                 Assert.IsNotNull(changes);
                 Assert.IsTrue(changes.Count > 0);
+
+                var list2 = await context.Web.Lists.GetByTitleAsync("Site Assets", p => p.Id);
+                
+                var changesBatch = list.GetChangesBatch(new ChangeQueryOptions(true, true)
+                {
+                    FetchLimit = 5,
+                });
+                var changes2Batch = list2.GetChangesBatch(new ChangeQueryOptions(true, true)
+                {
+                    FetchLimit = 5,
+                });
+
+                Assert.IsFalse(changesBatch.IsAvailable);
+                Assert.IsFalse(changes2Batch.IsAvailable);
+
+                await context.ExecuteAsync();
+
+                Assert.IsTrue(changesBatch.IsAvailable);
+                Assert.IsTrue(changes2Batch.IsAvailable);
+
+                Assert.IsTrue(changesBatch.Count > 0);
+                Assert.IsTrue(changes2Batch.Count > 0);
+
             }
         }
 

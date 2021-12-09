@@ -1148,6 +1148,36 @@ namespace PnP.Core.Model.SharePoint
             return GetChangesAsync(query).GetAwaiter().GetResult();
         }
 
+        public async Task<IEnumerableBatchResult<IChange>> GetChangesBatchAsync(Batch batch, ChangeQueryOptions query)
+        {
+            var apiCall = ChangeCollectionHandler.GetApiCall(this, query);
+            apiCall.RawEnumerableResult = new List<IChange>();
+            apiCall.RawResultsHandler = (json, apiCall) =>
+            {
+                var batchFirstRequest = batch.Requests.First().Value;
+                ApiCallResponse response = new ApiCallResponse(apiCall, json, System.Net.HttpStatusCode.OK, batchFirstRequest.Id, batchFirstRequest.ResponseHeaders);
+                ((List<IChange>)apiCall.RawEnumerableResult).AddRange(ChangeCollectionHandler.Deserialize(response, this, PnPContext).ToList());
+            };
+
+            var batchRequest = await RawRequestBatchAsync(batch, apiCall, HttpMethod.Post).ConfigureAwait(false);
+
+            return new BatchEnumerableBatchResult<IChange>(batch, batchRequest.Id, (IReadOnlyList<IChange>)apiCall.RawEnumerableResult);
+        }
+
+        public IEnumerableBatchResult<IChange> GetChangesBatch(Batch batch, ChangeQueryOptions query)
+        {
+            return GetChangesBatchAsync(batch, query).GetAwaiter().GetResult();
+        }
+
+        public async Task<IEnumerableBatchResult<IChange>> GetChangesBatchAsync(ChangeQueryOptions query)
+        {
+            return await GetChangesBatchAsync(PnPContext.CurrentBatch, query).ConfigureAwait(false);
+        }
+
+        public IEnumerableBatchResult<IChange> GetChangesBatch(ChangeQueryOptions query)
+        {
+            return GetChangesBatchAsync(query).GetAwaiter().GetResult();
+        }
         #endregion
 
         #endregion
