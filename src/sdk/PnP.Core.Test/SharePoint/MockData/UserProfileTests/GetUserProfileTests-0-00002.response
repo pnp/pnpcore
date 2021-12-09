@@ -1,0 +1,9 @@
+--batchresponse_299ac8c2-a60a-49b8-bf03-a2b28a20d57d
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+HTTP/1.1 200 OK
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+
+{"d":{"__metadata":{"id":"https://m365x790252.sharepoint.com/sites/pnpcoresdktestgroup/_api/SP.UserProfiles.PeopleManager","uri":"https://m365x790252.sharepoint.com/sites/pnpcoresdktestgroup/_api/SP.UserProfiles.PeopleManager","type":"SP.UserProfiles.PeopleManager"},"EditProfileLink":"https://m365x790252-my.sharepoint.com:443/_layouts/15/EditProfile.aspx?UserSettingsProvider=dfb95e82%2D8132%2D404b%2Db693%2D25418fdac9b6&ReturnUrl=https%3A%2F%2Fm365x790252%2Esharepoint%2Ecom%2Fsites%2Fpnpcoresdktestgroup%2F%5Fapi%2F%24batch","IsMyPeopleListPublic":true}}
+--batchresponse_299ac8c2-a60a-49b8-bf03-a2b28a20d57d--

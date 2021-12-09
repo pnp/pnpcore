@@ -19,7 +19,7 @@ namespace PnP.Core {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class PnPCoreResources {
@@ -273,6 +273,15 @@ namespace PnP.Core {
         internal static string Exception_Json_EmptyArray {
             get {
                 return ResourceManager.GetString("Exception_Json_EmptyArray", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unexpected JSON.
+        /// </summary>
+        internal static string Exception_Json_Unexpected {
+            get {
+                return ResourceManager.GetString("Exception_Json_Unexpected", resourceCulture);
             }
         }
         
@@ -754,6 +763,15 @@ namespace PnP.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The Follow request is not supported.
+        /// </summary>
+        internal static string Exception_Unsupported_FollowRequest {
+            get {
+                return ResourceManager.GetString("Exception_Unsupported_FollowRequest", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to You can&apos;t call AsGraphUserAsync on a SharePoint user with principal type different than User or SecurityGroup.
         /// </summary>
         internal static string Exception_Unsupported_GraphUserOnSharePoint {
@@ -849,6 +867,15 @@ namespace PnP.Core {
         internal static string Exception_Unsupported_QueryPropertiesUse {
             get {
                 return ResourceManager.GetString("Exception_Unsupported_QueryPropertiesUse", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The selector type is not supported.
+        /// </summary>
+        internal static string Exception_Unsupported_Selector {
+            get {
+                return ResourceManager.GetString("Exception_Unsupported_Selector", resourceCulture);
             }
         }
         

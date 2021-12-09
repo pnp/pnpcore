@@ -1,0 +1,9 @@
+--batchresponse_cbfe90c7-56b2-4079-b87b-12d3dfb71fb2
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+HTTP/1.1 200 OK
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+
+{"d":{"GetUserProfilePropertyFor":"csharp|typescript"}}
+--batchresponse_cbfe90c7-56b2-4079-b87b-12d3dfb71fb2--
