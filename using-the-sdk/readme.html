@@ -306,6 +306,10 @@ Each night these preview packages are refreshed, so you can always upgrade to th
 </div>
 <h2 id="obtaining-a-pnpcontext">Obtaining a PnPContext</h2>
 <p>The <code>PnPContext</code> is the entry point for using the PnP Core SDK, you can create a <code>PnPContext</code> from either a SharePoint site URL or the id of a Microsoft 365 group.</p>
+<div class="NOTE">
+<h5>Note</h5>
+<p>You'll get a <code>PnPContext</code> for the <strong>root web</strong> of the site collection. Checkout the <a href="webs-intro.html#getting-sub-webs">Getting sub webs</a> content to learn how to get a <code>PnPContext</code> for the sub webs of the root web.</p>
+</div>
 <pre><code class="lang-csharp">// Start console host
 await host.StartAsync();
 
