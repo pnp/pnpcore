@@ -1,0 +1,167 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html lang="en">
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>User profiles APIs | PnP Core SDK </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="User profiles APIs | PnP Core SDK ">
+    <meta name="generator" content="docfx 2.56.5.0">
+    <meta name="description" content="The PnP Core SDK is a modern .NET SDK designed to work for Microsoft 365. It provides a unified object model for working with SharePoint Online and Teams which is agnostic to the underlying API's being called.">
+    <link rel="shortcut icon" href="https://c.s-microsoft.com/favicon.ico?v2">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    <meta property="docfx:newtab" content="true">
+  </head>  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../images/logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <label class="glyphicon glyphicon-search" for="search-query"></label>
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first="First" data-prev="Previous" data-next="Next" data-last="Last"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+                  <div class="contribution-panel mobile-hide pull-right">
+                      <a href="https://github.com/pnp/pnpcore/blob/dev/docs/using-the-sdk/social-user-profiles.md/#L1" title="Improve this Doc" class="improve-doc-lg"><i class="glyphicon glyphicon-pencil"></i></a>
+                  </div>
+                    <h1 id="user-profiles-apis">User profiles APIs</h1>
+
+<p>User profiles APIs allow you to read and write user profile properties, change profile picture url, manage OneDrive quotas and other profile-related operations.</p>
+<p>In the remainder of this article you'll see a lot of <code>context</code> use: in this case this is a <code>PnPContext</code> which was obtained via the <code>PnPContextFactory</code> as explained in the <a href="readme.html">overview article</a> and shown below:</p>
+<pre><code class="lang-csharp">using (var context = await pnpContextFactory.CreateAsync(&quot;SiteToWorkWith&quot;))
+{
+}
+</code></pre>
+<h2 id="getting-users-properties">Getting user's properties</h2>
+<p>To get the current user's properties use below code:</p>
+<pre><code class="lang-csharp">IPersonProperties properties = await context.Social.UserProfile.GetMyPropertiesAsync();
+</code></pre>
+<p>The return value contains user properties - such as <code>AccountName</code>, <code>Email</code>, <code>PersonalSiteHostUrl</code>, <code>Title</code>, <code>DirectReports</code>, etc. and the profile properties - the set of properties coming and configuring under the user profile service. This set of properties is available under <code>UserProfileProperties</code> property.</p>
+<p>The amount of return data is quite big, since it includes <code>UserProfileProperties</code> by default. If you need only a few properties, you can apply a select query:</p>
+<pre><code class="lang-csharp">IPersonProperties properties = await context.Social.UserProfile.GetMyPropertiesAsync(p =&gt; p.DisplayName, p =&gt; p.AccountName);
+</code></pre>
+<p>In the case above only <code>DisplayName</code> and <code>AccountName</code> will be initialized.</p>
+<p>You can also query user properties for the specific person by account's name using <code>GetPropertiesFor</code>:</p>
+<pre><code class="lang-csharp">var accountName = &quot;i:0#.f|membership|admin@m365x790252.onmicrosoft.com&quot;;
+IPersonProperties properties = await context.Social.UserProfile.GetPropertiesForAsync(accountName, p =&gt; p.DisplayName, p =&gt; p.AccountName);
+</code></pre>
+<p>Finally, if you have a need to get only one specific user profile property, you can use the method <code>GetPropertyFor</code>:</p>
+<pre><code class="lang-csharp">var accountName = &quot;i:0#.f|membership|admin@m365x790252.onmicrosoft.com&quot;;
+string propertyValue = await context.Social.UserProfile.GetPropertyForAsync(accountName, &quot;FirstName&quot;);
+</code></pre>
+<p>Some properties contain multiple values, in this case they will be separated with &quot;<code>|</code>&quot; character.</p>
+<h2 id="setting-user-profile-properties">Setting user profile properties</h2>
+<p>PnP Core SDK allows you to set user profile properties. To do so, you should call corresponding method:</p>
+<pre><code class="lang-csharp">var accountName = &quot;i:0#.f|membership|admin@m365x790252.onmicrosoft.com&quot;;
+await context.Social.UserProfile.SetSingleValueProfilePropertyAsync(accountName, &quot;FirstName&quot;, &quot;John&quot;);
+</code></pre>
+<p>The code above changes the first name for the account.</p>
+<p>If you have a need to change multi-value property, use <code>SetMultiValuedProfileProperty</code>:</p>
+<pre><code class="lang-csharp">var accountName = &quot;i:0#.f|membership|admin@m365x790252.onmicrosoft.com&quot;;
+var skills = new List&lt;string&gt;() { &quot;csharp&quot;, &quot;typescript&quot; };
+await context.Social.UserProfile.SetMultiValuedProfilePropertyAsync(accountName, &quot;SPS-Skills&quot;, skills);
+</code></pre>
+<p>Please note, that the code above replaces a property with a new value. To add a new value to the list, you should first retrieve the property value with <code>GetPropertyFor</code> and then update it.</p>
+<h2 id="setting-profile-picture">Setting profile picture</h2>
+<p>To set a user's profile picture:</p>
+<pre><code class="lang-csharp">var fileBytes = System.IO.File.ReadAllBytes(&quot;path/to the picture.jpg&quot;);
+await context.Social.UserProfile.SetMyProfilePictureAsync(fileBytes);
+</code></pre>
+<p>Due to some caching mechanism, the image might not be available immediately on the UI.</p>
+<h2 id="working-with-onedrive-quotas">Working with OneDrive quotas</h2>
+<p>You can also manipulate OneDrive quotas for a user.</p>
+<p>To get user's OneDrive max quota:</p>
+<pre><code class="lang-csharp">var accountName = &quot;i:0#.f|membership|admin@m365x790252.onmicrosoft.com&quot;;
+var result = await context.Social.UserProfile.GetUserOneDriveQuotaMaxAsync(accountName);
+</code></pre>
+<p>To reset quota to its defaults:</p>
+<pre><code class="lang-csharp">var outcome = await context.Social.UserProfile.ResetUserOneDriveQuotaToDefaultAsync(accountName);
+</code></pre>
+<p>To set quota:</p>
+<pre><code class="lang-csharp">// set quota to approx. 5TB and warning to 4TB
+var outcome = await context.Social.UserProfile.SetUserOneDriveQuotaAsync(accountName, 5497558138880, 4497558138880);
+</code></pre>
+</article>
+          </div>
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              </nav>
+            </div>
+          </div>        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            <span>PnP Core SDK<br>Generated by <strong><a href='https://dotnet.github.io/docfx' alt='Doc FX Website'>DocFX</a></strong> with <strong><a href='https://ovasquez.github.io/docfx-material' alt='DocFx Material Theme'>Material UI</a></strong></span>
+            
+            <img src="https://telemetry.sharepointpnp.com/@pnp.github.io/index/" alt="spacer">
+          </div>
+        </div>
+      </footer>    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>  </body>
+</html>
