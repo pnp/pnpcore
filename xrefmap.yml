@@ -10847,6 +10847,44 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.IDataModelSupportingGetChanges.GetChangesAsync
   nameWithType: IDataModelSupportingGetChanges.GetChangesAsync
+- uid: PnP.Core.Model.IDataModelSupportingGetChanges.GetChangesBatch(PnP.Core.Model.SharePoint.ChangeQueryOptions)
+  name: GetChangesBatch(ChangeQueryOptions)
+  href: api/PnP.Core.Model.IDataModelSupportingGetChanges.html#PnP_Core_Model_IDataModelSupportingGetChanges_GetChangesBatch_PnP_Core_Model_SharePoint_ChangeQueryOptions_
+  commentId: M:PnP.Core.Model.IDataModelSupportingGetChanges.GetChangesBatch(PnP.Core.Model.SharePoint.ChangeQueryOptions)
+  fullName: PnP.Core.Model.IDataModelSupportingGetChanges.GetChangesBatch(PnP.Core.Model.SharePoint.ChangeQueryOptions)
+  nameWithType: IDataModelSupportingGetChanges.GetChangesBatch(ChangeQueryOptions)
+- uid: PnP.Core.Model.IDataModelSupportingGetChanges.GetChangesBatch(PnP.Core.Services.Batch,PnP.Core.Model.SharePoint.ChangeQueryOptions)
+  name: GetChangesBatch(Batch, ChangeQueryOptions)
+  href: api/PnP.Core.Model.IDataModelSupportingGetChanges.html#PnP_Core_Model_IDataModelSupportingGetChanges_GetChangesBatch_PnP_Core_Services_Batch_PnP_Core_Model_SharePoint_ChangeQueryOptions_
+  commentId: M:PnP.Core.Model.IDataModelSupportingGetChanges.GetChangesBatch(PnP.Core.Services.Batch,PnP.Core.Model.SharePoint.ChangeQueryOptions)
+  fullName: PnP.Core.Model.IDataModelSupportingGetChanges.GetChangesBatch(PnP.Core.Services.Batch, PnP.Core.Model.SharePoint.ChangeQueryOptions)
+  nameWithType: IDataModelSupportingGetChanges.GetChangesBatch(Batch, ChangeQueryOptions)
+- uid: PnP.Core.Model.IDataModelSupportingGetChanges.GetChangesBatch*
+  name: GetChangesBatch
+  href: api/PnP.Core.Model.IDataModelSupportingGetChanges.html#PnP_Core_Model_IDataModelSupportingGetChanges_GetChangesBatch_
+  commentId: Overload:PnP.Core.Model.IDataModelSupportingGetChanges.GetChangesBatch
+  isSpec: "True"
+  fullName: PnP.Core.Model.IDataModelSupportingGetChanges.GetChangesBatch
+  nameWithType: IDataModelSupportingGetChanges.GetChangesBatch
+- uid: PnP.Core.Model.IDataModelSupportingGetChanges.GetChangesBatchAsync(PnP.Core.Model.SharePoint.ChangeQueryOptions)
+  name: GetChangesBatchAsync(ChangeQueryOptions)
+  href: api/PnP.Core.Model.IDataModelSupportingGetChanges.html#PnP_Core_Model_IDataModelSupportingGetChanges_GetChangesBatchAsync_PnP_Core_Model_SharePoint_ChangeQueryOptions_
+  commentId: M:PnP.Core.Model.IDataModelSupportingGetChanges.GetChangesBatchAsync(PnP.Core.Model.SharePoint.ChangeQueryOptions)
+  fullName: PnP.Core.Model.IDataModelSupportingGetChanges.GetChangesBatchAsync(PnP.Core.Model.SharePoint.ChangeQueryOptions)
+  nameWithType: IDataModelSupportingGetChanges.GetChangesBatchAsync(ChangeQueryOptions)
+- uid: PnP.Core.Model.IDataModelSupportingGetChanges.GetChangesBatchAsync(PnP.Core.Services.Batch,PnP.Core.Model.SharePoint.ChangeQueryOptions)
+  name: GetChangesBatchAsync(Batch, ChangeQueryOptions)
+  href: api/PnP.Core.Model.IDataModelSupportingGetChanges.html#PnP_Core_Model_IDataModelSupportingGetChanges_GetChangesBatchAsync_PnP_Core_Services_Batch_PnP_Core_Model_SharePoint_ChangeQueryOptions_
+  commentId: M:PnP.Core.Model.IDataModelSupportingGetChanges.GetChangesBatchAsync(PnP.Core.Services.Batch,PnP.Core.Model.SharePoint.ChangeQueryOptions)
+  fullName: PnP.Core.Model.IDataModelSupportingGetChanges.GetChangesBatchAsync(PnP.Core.Services.Batch, PnP.Core.Model.SharePoint.ChangeQueryOptions)
+  nameWithType: IDataModelSupportingGetChanges.GetChangesBatchAsync(Batch, ChangeQueryOptions)
+- uid: PnP.Core.Model.IDataModelSupportingGetChanges.GetChangesBatchAsync*
+  name: GetChangesBatchAsync
+  href: api/PnP.Core.Model.IDataModelSupportingGetChanges.html#PnP_Core_Model_IDataModelSupportingGetChanges_GetChangesBatchAsync_
+  commentId: Overload:PnP.Core.Model.IDataModelSupportingGetChanges.GetChangesBatchAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.IDataModelSupportingGetChanges.GetChangesBatchAsync
+  nameWithType: IDataModelSupportingGetChanges.GetChangesBatchAsync
 - uid: PnP.Core.Model.IDataModelUpdate
   name: IDataModelUpdate
   href: api/PnP.Core.Model.IDataModelUpdate.html
