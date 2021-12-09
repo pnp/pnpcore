@@ -94,6 +94,10 @@ The easiest way to register an application in Azure Active Directory for app-onl
 ```powershell
 $app = Register-PnPAzureADApp -ApplicationName "PnP.Core.SDK.Consumer" -Tenant contoso.onmicrosoft.com -OutPath c:\temp -CertificatePassword (ConvertTo-SecureString -String "password" -AsPlainText -Force) -Scopes "MSGraph.Group.ReadWrite.All","MSGraph.User.ReadWrite.All","SPO.Sites.FullControl.All","SPO.TermStore.ReadWrite.All","SPO.User.ReadWrite.All" -Store CurrentUser
 ```
+With SharePoint PnP PowerShell Online cmdlets version 3.29.2101.0 and higher.
+```powershell
+$app = Register-PnPAzureADApp -Interactive -ApplicationName "PnP.Core.SDK.Consumer" -Tenant contoso.onmicrosoft.com -OutPath d:\temp -CertificatePassword (ConvertTo-SecureString -String "password" -AsPlainText -Force) -GraphApplicationPermissions "Group.ReadWrite.All, User.ReadWrite.All" -SharePointApplicationPermissions "Sites.FullControl.All, TermStore.ReadWrite.All, User.ReadWrite.All" -Store CurrentUser
+```
 
 The above command will register for you in Azure Active Directory an app with name `PnP.Core.SDK.Consumer`, with a self-signed certificate that will be also saved on your filesystem under the `c:\temp` folder (remember to create the folder or to provide the path of an already existing folder), with a certificate password value of `password` (you should provide your own strong password, indeed). Remember to replace `contoso.onmicrosoft.com` with your Azure AD tenant name, which typically is `company.onmicrosoft.com`. The permissions granted to the app will be:
 
