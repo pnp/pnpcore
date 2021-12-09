@@ -573,6 +573,44 @@ namespace PnP.Core.Model.SharePoint
         public Task<IListItem> AddListFolderAsync(string path, string parentFolder = null, string contentTypeId = "0x0120");
 
         /// <summary>
+        /// Adds a folder
+        /// </summary>
+        /// <param name="path"></param>
+        /// <param name="parentFolder"></param>
+        /// <param name="contentTypeId"></param>
+        /// <returns></returns>
+        public IListItem AddListFolderBatch(string path, string parentFolder = null, string contentTypeId = "0x0120");
+
+        /// <summary>
+        /// Adds a folder
+        /// </summary>
+        /// <param name="path"></param>
+        /// <param name="parentFolder"></param>
+        /// <param name="contentTypeId"></param>
+        /// <returns></returns>
+        public Task<IListItem> AddListFolderBatchAsync(string path, string parentFolder = null, string contentTypeId = "0x0120");
+
+        /// <summary>
+        /// Adds a folder
+        /// </summary>
+        /// <param name="batch">Batch to add this request to </param>
+        /// <param name="path"></param>
+        /// <param name="parentFolder"></param>
+        /// <param name="contentTypeId"></param>
+        /// <returns></returns>
+        public IListItem AddListFolderBatch(Batch batch, string path, string parentFolder = null, string contentTypeId = "0x0120");
+
+        /// <summary>
+        /// Adds a folder
+        /// </summary>
+        /// <param name="batch">Batch to add this request to </param>
+        /// <param name="path"></param>
+        /// <param name="parentFolder"></param>
+        /// <param name="contentTypeId"></param>
+        /// <returns></returns>
+        public Task<IListItem> AddListFolderBatchAsync(Batch batch, string path, string parentFolder = null, string contentTypeId = "0x0120");
+
+        /// <summary>
         /// Classifies and extracts all unprocessed files in the list
         /// </summary>
         /// <param name="force">Also classify and extract files that were processed before</param>

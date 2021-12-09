@@ -977,7 +977,12 @@ namespace PnP.Core.Model.SharePoint
 
         public async Task<IListItem> AddListFolderAsync(string path, string parentFolder = null, string contentTypeId = "0x0120")
         {
-            return await Items.AddAsync(new Dictionary<string, object>
+            return await Items.AddAsync(BuildAddListFolderPayLoad(path, contentTypeId), parentFolder, FileSystemObjectType.Folder).ConfigureAwait(false);
+        }
+
+        private static Dictionary<string, object> BuildAddListFolderPayLoad(string path, string contentTypeId)
+        {
+            return new Dictionary<string, object>
             {
                 {
                     "Title",path
@@ -988,7 +993,27 @@ namespace PnP.Core.Model.SharePoint
                 {
                     "ContentTypeId", contentTypeId
                 }
-            }, parentFolder, FileSystemObjectType.Folder).ConfigureAwait(false);
+            };
+        }
+
+        public async Task<IListItem> AddListFolderBatchAsync(Batch batch, string path, string parentFolder = null, string contentTypeId = "0x0120")
+        {
+            return await Items.AddBatchAsync(batch, BuildAddListFolderPayLoad(path, contentTypeId), parentFolder, FileSystemObjectType.Folder).ConfigureAwait(false);
+        }
+
+        public IListItem AddListFolderBatch(Batch batch, string path, string parentFolder = null, string contentTypeId = "0x0120")
+        {
+            return AddListFolderBatchAsync(batch, path, parentFolder, contentTypeId).GetAwaiter().GetResult();
+        }
+
+        public async Task<IListItem> AddListFolderBatchAsync(string path, string parentFolder = null, string contentTypeId = "0x0120")
+        {
+            return await Items.AddBatchAsync(PnPContext.CurrentBatch, BuildAddListFolderPayLoad(path, contentTypeId), parentFolder, FileSystemObjectType.Folder).ConfigureAwait(false);
+        }
+
+        public IListItem AddListFolderBatch(string path, string parentFolder = null, string contentTypeId = "0x0120")
+        {
+            return AddListFolderBatchAsync(path, parentFolder, contentTypeId).GetAwaiter().GetResult();
         }
         #endregion
 

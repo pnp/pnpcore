@@ -167,6 +167,16 @@ namespace PnP.Core.Test.SharePoint
                 var newFolderItem = await list.Items.GetByIdAsync(folderItem.Id);
                 Assert.IsTrue(newFolderItem["ContentTypeId"].ToString().StartsWith("0x0120"));
 
+                var batchFolder1 = list.AddListFolderBatch("Folder1");
+                var batchFolder2 = list.AddListFolderBatch("Folder2");
+
+                await context.ExecuteAsync();
+
+                var newbatchFolder1 = await list.Items.GetByIdAsync(batchFolder1.Id);
+                var newbatchFolder2 = await list.Items.GetByIdAsync(batchFolder2.Id);
+                Assert.IsTrue(newbatchFolder1["ContentTypeId"].ToString().StartsWith("0x0120"));
+                Assert.IsTrue(newbatchFolder2["ContentTypeId"].ToString().StartsWith("0x0120"));
+
                 await list.DeleteAsync();
             }
         }
