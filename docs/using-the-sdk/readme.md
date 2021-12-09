@@ -245,6 +245,9 @@ In above sample the following configuration file is used: `appsettings.demo.json
 
 The `PnPContext` is the entry point for using the PnP Core SDK, you can create a `PnPContext` from either a SharePoint site URL or the id of a Microsoft 365 group.
 
+> [!Note]
+> You'll get a `PnPContext` for the **root web** of the site collection. Checkout the [Getting sub webs](./webs-intro.md#getting-sub-webs) content to learn how to get a `PnPContext` for the sub webs of the root web.
+
 ```csharp
 // Start console host
 await host.StartAsync();
