@@ -47,6 +47,13 @@ namespace PnP.Core.Services
 
             client.BaseAddress = PnPConstants.MicrosoftGraphBaseUri;
             client.DefaultRequestHeaders.Add("Accept", "application/json;odata.metadata=minimal;odata.streaming=true;IEEE754Compatible=true");
+
+#if NET5_0_OR_GREATER
+            client.DefaultRequestHeaders.Add("Accept-Encoding", "gzip, deflate, br");
+#else
+            client.DefaultRequestHeaders.Add("Accept-Encoding", "gzip");
+#endif
+
             client.Timeout = globalSettings.GetHttpTimeout();
 
             if (!string.IsNullOrEmpty(globalSettings.HttpUserAgent))

@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Text;
 using System.Text.Json;
 
 namespace PnP.Core.Services
@@ -62,17 +63,28 @@ namespace PnP.Core.Services
         /// <param name="context">Current PnPContext</param>
         /// <param name="requestKey">Key we used to calculate the hash used to identify this request</param>
         /// <param name="response">Response that came back from the server</param>
-        internal static void RecordResponse(PnPContext context, string requestKey, Stream response)
+        internal static void RecordResponse(PnPContext context, string requestKey, ref Stream response)
         {
             //requestKey = GeneralizeRequestKey(requestKey, context);
 
             string fileName = GetResponseFile(context, /*SHA256(requestKey),*/ GetOrderPrefix(requestKey));
 
+            var reader = new StreamReader(response);
+            var content = reader.ReadToEnd();
+
             // Write request to a file, overwrites the existing file
-            using (var memStream = new MemoryStream())
+            File.WriteAllText(fileName, content);
+
+            // If the stream can be reused then let's do that
+            if (response.CanSeek)
             {
-                response.CopyTo(memStream);
-                File.WriteAllBytes(fileName, memStream.ToArray());
+                response.Seek(0, SeekOrigin.Begin);
+            }
+            else
+            {
+                // If not create a new one
+                response.Dispose();
+                response = new MemoryStream(Encoding.UTF8.GetBytes(content));
             }
         }
 

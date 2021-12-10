@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using System;
+using System.Net;
 using System.Net.Http;
 #if NET5_0_OR_GREATER
 using System.Runtime.InteropServices;
@@ -84,7 +85,8 @@ namespace PnP.Core.Services
                     // tell the http client to not use the default (empty) cookie container
                     .ConfigurePrimaryHttpMessageHandler(() => new HttpClientHandler()
                     {
-                        UseCookies = false
+                        UseCookies = false,
+                        AutomaticDecompression = DecompressionMethods.All
                     });
             }
 #else
@@ -95,12 +97,21 @@ namespace PnP.Core.Services
                 // tell the http client to not use the default (empty) cookie container
                 .ConfigurePrimaryHttpMessageHandler(() => new HttpClientHandler()
                 {
-                    UseCookies = false
+                    UseCookies = false,
+                    AutomaticDecompression = DecompressionMethods.GZip
                 });
 #endif
 
             collection.AddHttpClient<MicrosoftGraphClient>()
-                .AddHttpMessageHandler<MicrosoftGraphRetryHandler>();
+                .AddHttpMessageHandler<MicrosoftGraphRetryHandler>()
+                .ConfigurePrimaryHttpMessageHandler(() => new HttpClientHandler()
+                {
+#if NET5_0_OR_GREATER
+                    AutomaticDecompression = DecompressionMethods.All
+#else
+                    AutomaticDecompression = DecompressionMethods.GZip
+#endif
+                });
 
             return collection;
         }
