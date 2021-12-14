@@ -107,13 +107,16 @@ namespace PnP.Core.Services.Core.CSOM.Utils
                     }
                     else
                     {
-                        // Let's set its value into the update message
-                        result.Add(new CSOMItemField()
+                        if (!(JsonMappingHelper.IsModelCollection(changedField.DataType) || JsonMappingHelper.IsModelType(changedField.DataType)))
                         {
-                            FieldName = changedField.SharePointName,
-                            FieldType = changedField.DataType.Name,
-                            FieldValue = Component.GetValue(changedField.Name)
-                        });
+                            // Let's set its value into the update message
+                            result.Add(new CSOMItemField()
+                            {
+                                FieldName = changedField.SharePointName,
+                                FieldType = changedField.DataType.Name,
+                                FieldValue = Component.GetValue(changedField.Name)
+                            });
+                        }
                     }
                 }
             }

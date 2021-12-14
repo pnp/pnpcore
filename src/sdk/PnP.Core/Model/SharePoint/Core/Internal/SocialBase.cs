@@ -36,7 +36,7 @@ namespace PnP.Core.Model.SharePoint
         {
             var result = await ExecuteWithSelectAsync(baseUrl, selectors).ConfigureAwait(false);
 
-            return (await ParseResultsAsync<PersonProperties>(result.Json, root => root.Get("d")?.Get("results")).ConfigureAwait(false)).Cast<IPersonProperties>().ToList();
+            return (await ParseResultsAsync<PersonProperties>(result.Json, root => root.Get("value")).ConfigureAwait(false)).Cast<IPersonProperties>().ToList();
         }
 
         protected async Task<IPersonProperties> GetGenericPeopleManagerResultAsync(string baseUrl, params Expression<Func<IPersonProperties, object>>[] selectors)
@@ -63,7 +63,7 @@ namespace PnP.Core.Model.SharePoint
                 return personProps;
             }
 
-            var entityInfo = EntityManager.Instance.GetStaticClassInfo(typeof(TModel));
+            var entityInfo = EntityManager.Instance.GetStaticClassInfo(typeof(T));
 
             foreach (var row in dataRows.EnumerateArray())
             {
@@ -80,17 +80,12 @@ namespace PnP.Core.Model.SharePoint
             var results = new List<IPersonProperties>();
             var json = JsonSerializer.Deserialize<JsonElement>(response.Json);
 
-            if (json.TryGetProperty("d", out JsonElement dRoot))
-            {
-                var entityInfo = EntityManager.Instance.GetStaticClassInfo(typeof(PersonProperties));
+            var entityInfo = EntityManager.Instance.GetStaticClassInfo(typeof(PersonProperties));
 
-                var prop = new PersonProperties();
-                await JsonMappingHelper.FromJson(prop, entityInfo, new ApiResponse(new ApiCall(String.Empty, ApiType.SPORest), dRoot, Guid.Empty)).ConfigureAwait(false);
+            var prop = new PersonProperties();
+            await JsonMappingHelper.FromJson(prop, entityInfo, new ApiResponse(new ApiCall(String.Empty, ApiType.SPORest), json, Guid.Empty)).ConfigureAwait(false);
 
-                return prop;
-            }
-
-            return null;
+            return prop;
         }
 
         protected async Task<ApiCallResponse> ExecuteWithSelectAsync(string baseUrl, params Expression<Func<IPersonProperties, object>>[] selectors)
@@ -112,12 +107,17 @@ namespace PnP.Core.Model.SharePoint
             return await RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
         }
 
-        protected async Task<string> GetSingleResult(string baseUrl, string rootPropertyName)
+        protected async Task<string> GetSingleResult(string baseUrl)
         {
             var response = await ExecuteAsync(baseUrl).ConfigureAwait(false);
             var json = JsonSerializer.Deserialize<JsonElement>(response.Json);
 
-            var result = json.Get("d")?.Get(rootPropertyName);
+            var result = json.Get("value");
+
+            if (result == null)
+            {
+                result = json.Get("odata.null");
+            }
 
             if (result == null)
             {

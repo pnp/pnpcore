@@ -261,13 +261,10 @@ namespace PnP.Core.Model.SharePoint
         private static Guid ParseRecycleResponse(string json)
         {
             var document = JsonSerializer.Deserialize<JsonElement>(json);
-            if (document.TryGetProperty("d", out JsonElement root))
+            if (document.TryGetProperty("value", out JsonElement recycleBinItemId))
             {
-                if (root.TryGetProperty("Recycle", out JsonElement recycleBinItemId))
-                {
-                    // return the recyclebin item id
-                    return recycleBinItemId.GetGuid();
-                }
+                // return the recyclebin item id
+                return recycleBinItemId.GetGuid();
             }
             return Guid.Empty;
         }
@@ -563,7 +560,6 @@ namespace PnP.Core.Model.SharePoint
             {
                 parameters = new
                 {
-                    __metadata = new { type = "SP.RenderListDataParameters" },
                     renderOptions.AddRequiredFields,
                     renderOptions.AllowMultipleValueFilterForTaxonomyFields,
                     renderOptions.AudienceTarget,
@@ -609,13 +605,7 @@ namespace PnP.Core.Model.SharePoint
 
             if (!string.IsNullOrEmpty(response.Json))
             {
-                var json = JsonSerializer.Deserialize<JsonElement>(response.Json).GetProperty("d");
-
-                if (json.TryGetProperty("GetListComplianceTag", out JsonElement getAvailableTagsForSite))
-                {
-                    var tag = getAvailableTagsForSite.ToObject<ComplianceTag>(PnPConstants.JsonSerializer_PropertyNameCaseInsensitiveTrue);
-                    return tag;
-                }
+                return JsonSerializer.Deserialize<ComplianceTag>(response.Json, PnPConstants.JsonSerializer_PropertyNameCaseInsensitiveTrue);
             }
 
             return null;
@@ -637,32 +627,27 @@ namespace PnP.Core.Model.SharePoint
             apiCall.RawSingleResult = new ComplianceTag();
             apiCall.RawResultsHandler = (json, apiCall) =>
             {
-                var jsonElement = JsonSerializer.Deserialize<JsonElement>(json).GetProperty("d");
-
-                if (jsonElement.TryGetProperty("GetListComplianceTag", out JsonElement getAvailableTagsForSite))
-                {
-                    var tag = getAvailableTagsForSite.ToObject<ComplianceTag>(PnPConstants.JsonSerializer_PropertyNameCaseInsensitiveTrue);
-                    (apiCall.RawSingleResult as ComplianceTag).TagId = tag.TagId;
-                    (apiCall.RawSingleResult as ComplianceTag).TagName = tag.TagName;
-                    (apiCall.RawSingleResult as ComplianceTag).TagRetentionBasedOn = tag.TagRetentionBasedOn;
-                    (apiCall.RawSingleResult as ComplianceTag).TagDuration = tag.TagDuration;
-                    (apiCall.RawSingleResult as ComplianceTag).SuperLock = tag.SuperLock;
-                    (apiCall.RawSingleResult as ComplianceTag).SharingCapabilities = tag.SharingCapabilities;
-                    (apiCall.RawSingleResult as ComplianceTag).ReviewerEmail = tag.ReviewerEmail;
-                    (apiCall.RawSingleResult as ComplianceTag).RequireSenderAuthenticationEnabled = tag.RequireSenderAuthenticationEnabled;
-                    (apiCall.RawSingleResult as ComplianceTag).Notes = tag.Notes;
-                    (apiCall.RawSingleResult as ComplianceTag).IsEventTag = tag.IsEventTag;
-                    (apiCall.RawSingleResult as ComplianceTag).HasRetentionAction = tag.HasRetentionAction;
-                    (apiCall.RawSingleResult as ComplianceTag).EncryptionRMSTemplateId = tag.EncryptionRMSTemplateId;
-                    (apiCall.RawSingleResult as ComplianceTag).DisplayName = tag.DisplayName;
-                    (apiCall.RawSingleResult as ComplianceTag).ContainsSiteLabel = tag.ContainsSiteLabel;
-                    (apiCall.RawSingleResult as ComplianceTag).BlockEdit = tag.BlockEdit;
-                    (apiCall.RawSingleResult as ComplianceTag).BlockDelete = tag.BlockDelete;
-                    (apiCall.RawSingleResult as ComplianceTag).AutoDelete = tag.AutoDelete;
-                    (apiCall.RawSingleResult as ComplianceTag).AllowAccessFromUnmanagedDevice = tag.AllowAccessFromUnmanagedDevice;
-                    (apiCall.RawSingleResult as ComplianceTag).AccessType = tag.AccessType;
-                    (apiCall.RawSingleResult as ComplianceTag).AcceptMessagesOnlyFromSendersOrMembers = tag.AcceptMessagesOnlyFromSendersOrMembers;
-                }
+                var tag = JsonSerializer.Deserialize<ComplianceTag>(json, PnPConstants.JsonSerializer_PropertyNameCaseInsensitiveTrue);
+                (apiCall.RawSingleResult as ComplianceTag).TagId = tag.TagId;
+                (apiCall.RawSingleResult as ComplianceTag).TagName = tag.TagName;
+                (apiCall.RawSingleResult as ComplianceTag).TagRetentionBasedOn = tag.TagRetentionBasedOn;
+                (apiCall.RawSingleResult as ComplianceTag).TagDuration = tag.TagDuration;
+                (apiCall.RawSingleResult as ComplianceTag).SuperLock = tag.SuperLock;
+                (apiCall.RawSingleResult as ComplianceTag).SharingCapabilities = tag.SharingCapabilities;
+                (apiCall.RawSingleResult as ComplianceTag).ReviewerEmail = tag.ReviewerEmail;
+                (apiCall.RawSingleResult as ComplianceTag).RequireSenderAuthenticationEnabled = tag.RequireSenderAuthenticationEnabled;
+                (apiCall.RawSingleResult as ComplianceTag).Notes = tag.Notes;
+                (apiCall.RawSingleResult as ComplianceTag).IsEventTag = tag.IsEventTag;
+                (apiCall.RawSingleResult as ComplianceTag).HasRetentionAction = tag.HasRetentionAction;
+                (apiCall.RawSingleResult as ComplianceTag).EncryptionRMSTemplateId = tag.EncryptionRMSTemplateId;
+                (apiCall.RawSingleResult as ComplianceTag).DisplayName = tag.DisplayName;
+                (apiCall.RawSingleResult as ComplianceTag).ContainsSiteLabel = tag.ContainsSiteLabel;
+                (apiCall.RawSingleResult as ComplianceTag).BlockEdit = tag.BlockEdit;
+                (apiCall.RawSingleResult as ComplianceTag).BlockDelete = tag.BlockDelete;
+                (apiCall.RawSingleResult as ComplianceTag).AutoDelete = tag.AutoDelete;
+                (apiCall.RawSingleResult as ComplianceTag).AllowAccessFromUnmanagedDevice = tag.AllowAccessFromUnmanagedDevice;
+                (apiCall.RawSingleResult as ComplianceTag).AccessType = tag.AccessType;
+                (apiCall.RawSingleResult as ComplianceTag).AcceptMessagesOnlyFromSendersOrMembers = tag.AcceptMessagesOnlyFromSendersOrMembers;
             };
 
             var batchRequest = await RawRequestBatchAsync(batch, apiCall, HttpMethod.Get).ConfigureAwait(false);

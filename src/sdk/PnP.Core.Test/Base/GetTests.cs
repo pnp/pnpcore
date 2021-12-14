@@ -207,10 +207,10 @@ namespace PnP.Core.Test.Base
                 Assert.IsTrue(!string.IsNullOrEmpty(webImplementation.GetMetadata("type")));
                 Assert.IsTrue(webImplementation.GetMetadata("type") == "SP.Web");
 
-                Assert.IsTrue(!string.IsNullOrEmpty(webImplementation.GetMetadata("uri")));
+                //Assert.IsTrue(!string.IsNullOrEmpty(webImplementation.GetMetadata("uri")));
                 //Assert.IsTrue(new Uri($"{context.Uri.ToString()}/_api/Web") == new Uri(webImplementation.GetMetadata("uri")));
 
-                Assert.IsTrue(!string.IsNullOrEmpty(webImplementation.GetMetadata("id")));
+                //Assert.IsTrue(!string.IsNullOrEmpty(webImplementation.GetMetadata("id")));
                 //Assert.IsTrue(new Uri($"{context.Uri.ToString()}/_api/Web") == new Uri(webImplementation.GetMetadata("id")));
 
                 Assert.IsTrue(!string.IsNullOrEmpty(webImplementation.GetMetadata("restId")));

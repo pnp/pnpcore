@@ -166,43 +166,7 @@ namespace PnP.Core.Test.SharePoint
                 await folderToDelete.DeleteAsync();
             }
         }
-
-        [TestMethod]
-        public async Task LoadPagesInNonEnglishSite()
-        {
-            //TestCommon.Instance.Mocking = false;
-            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
-            {
-                // Create a new sub site to test as we don't want to break the main site home page
-                string webTitle = "DutchWeb";
-                var addedWeb = await context.Web.Webs.AddAsync(new WebOptions { Title = webTitle, Url = webTitle, Language = 1043 });
-
-                try
-                {
-                    // Create a context for the newly created web
-                    using (var context2 = await TestCommon.Instance.CloneAsync(context, addedWeb.Url, 1))
-                    {
-                        // Read the current home page
-                        string pageName = "Home.aspx";
-                        var pages = await context2.Web.GetPagesAsync(pageName);
-
-                        Assert.IsTrue(pages.AsEnumerable().First() != null);
-                        Assert.IsTrue(pages.AsEnumerable().First().PagesLibrary != null);
-
-                        // x BERT: This still gives me back the name in English, most likely because of my user's profile
-                        // I would change the test inner logic forcing the language of the request (if possible)
-
-                        Assert.IsTrue(pages.AsEnumerable().First().PagesLibrary.Title == "Sitepagina's");
-                    }
-                }
-                finally
-                {
-                    // Delete the web to cleanup the test artefacts
-                    await addedWeb.DeleteAsync();
-                }
-            }
-        }
-
+        
         [TestMethod]
         public async Task LoadPagesWhenThereAreMultiplePagesLibraries()
         {

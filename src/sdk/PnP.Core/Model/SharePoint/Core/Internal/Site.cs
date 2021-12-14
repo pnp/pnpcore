@@ -160,21 +160,20 @@ namespace PnP.Core.Model.SharePoint
 
             if (!string.IsNullOrEmpty(response.Json))
             {
-                var json = JsonSerializer.Deserialize<JsonElement>(response.Json).GetProperty("d");
 
-                if (json.TryGetProperty("GetAvailableTagsForSite", out JsonElement getAvailableTagsForSite))
+                var json = JsonSerializer.Deserialize<JsonElement>(response.Json)/*.GetProperty("d")*/;
+
+                if (json.TryGetProperty("value", out JsonElement getAvailableTagsForSite))
                 {
-                    if (getAvailableTagsForSite.TryGetProperty("results", out JsonElement result))
+                    var returnTags = new List<IComplianceTag>();
+                    var tags = JsonSerializer.Deserialize<IEnumerable<ComplianceTag>>(getAvailableTagsForSite.GetRawText(), PnPConstants.JsonSerializer_PropertyNameCaseInsensitiveTrue);
+                    foreach (var tag in tags)
                     {
-                        var returnTags = new List<IComplianceTag>();
-                        var tags = JsonSerializer.Deserialize<IEnumerable<ComplianceTag>>(result.GetRawText(), PnPConstants.JsonSerializer_PropertyNameCaseInsensitiveTrue);
-                        foreach (var tag in tags)
-                        {
-                            returnTags.Add(tag);
-                        }
-                        return returnTags;
+                        returnTags.Add(tag);
                     }
+                    return returnTags;
                 }
+                
             }
 
             return new List<IComplianceTag>();

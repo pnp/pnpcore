@@ -8,7 +8,7 @@ namespace PnP.Core.Model.SharePoint
     {
         internal static ISyntexClassifyAndExtractResult ProcessClassifyAndExtractResponse(string json)
         {
-            var root = JsonSerializer.Deserialize<JsonElement>(json).GetProperty("d");
+            var root = JsonSerializer.Deserialize<JsonElement>(json);
             return new SyntexClassifyAndExtractResult
             {
                 Created = root.GetProperty("Created").GetDateTime(),

@@ -36,11 +36,11 @@ namespace PnP.Core.Model.SharePoint
             MappingHandler = (FromJson input) =>
             {
                 // The AddValidateUpdateItemUsingPath call returns the id of the added list item
-                if (input.FieldName == "AddValidateUpdateItemUsingPath")
+                if (input.FieldName == "value")
                 {
-                    if (input.JsonElement.TryGetProperty("results", out JsonElement resultsProperty))
+                    if (input.JsonElement.ValueKind == JsonValueKind.Array)
                     {
-                        foreach (var field in resultsProperty.EnumerateArray())
+                        foreach (var field in input.JsonElement.EnumerateArray())
                         {
                             var fieldName = field.GetProperty("FieldName").GetString();
                             var fieldValue = field.GetProperty("FieldValue").GetString();
@@ -97,7 +97,7 @@ namespace PnP.Core.Model.SharePoint
             {
                 var parentList = Parent.Parent as List;
                 // sample parent list uri: https://bertonline.sharepoint.com/sites/modern/_api/Web/Lists(guid'b2d52a36-52f1-48a4-b499-629063c6a38c')
-                var parentListUri = parentList.GetMetadata(PnPConstants.MetaDataUri);
+                var parentListUri = $"{PnPContext.Uri.AbsoluteUri}/_api/Web/Lists(guid'{parentList.Id}')";
 
                 // sample parent list entity type name: DemolistList (skip last 4 chars)
                 // Sample parent library type name: MyDocs
@@ -279,9 +279,9 @@ namespace PnP.Core.Model.SharePoint
 
             if (!string.IsNullOrEmpty(response.Json))
             {
-                var json = JsonSerializer.Deserialize<JsonElement>(response.Json).GetProperty("d");
+                var json = JsonSerializer.Deserialize<JsonElement>(response.Json);
 
-                if (json.TryGetProperty("DisplayName", out JsonElement displayName))
+                if (json.TryGetProperty("value", out JsonElement displayName))
                 {
                     return displayName.GetString();
                 }
@@ -409,13 +409,19 @@ namespace PnP.Core.Model.SharePoint
                 typeof(ExpandoObject),
                 PnPConstants.JsonSerializer_WriteIndentedTrue);
 
-            var itemUri = GetMetadata(PnPConstants.MetaDataUri);
-
-            // If this list we're adding items to was not fetched from the server than throw an error
-            if (string.IsNullOrEmpty(itemUri))
+            var entityInfo = EntityManager.Instance.GetStaticClassInfo(this.GetType());
+            
+            if (Parent is IManageableCollection)
             {
-                throw new ClientException(ErrorType.PropertyNotLoaded, PnPCoreResources.Exception_PropertyNotLoaded_List);
+                // Parent is a collection, so jump one level up
+                entityInfo.Target = Parent.Parent.GetType();
             }
+            else
+            {
+                entityInfo.Target = Parent.GetType();
+            }
+            
+            var itemUri = $"{PnPContext.Uri}/{entityInfo.SharePointUri}";
 
             // Prepare the variable to contain the target URL for the update operation
             var updateUrl = await ApiHelper.ParseApiCallAsync(this, $"{itemUri}/ValidateUpdateListItem").ConfigureAwait(false);
@@ -701,11 +707,9 @@ namespace PnP.Core.Model.SharePoint
 
             if (!string.IsNullOrEmpty(response.Json))
             {
-                var json = JsonSerializer.Deserialize<JsonElement>(response.Json).GetProperty("d");
+                var json = JsonSerializer.Deserialize<JsonElement>(response.Json);
 
-#pragma warning disable CA1507 // Use nameof to express symbol names
-                if (json.TryGetProperty("CommentsDisabled", out JsonElement commentsDisabled))
-#pragma warning restore CA1507 // Use nameof to express symbol names
+                if (json.TryGetProperty("value", out JsonElement commentsDisabled))
                 {
                     return commentsDisabled.GetBoolean();
                 }
@@ -809,13 +813,10 @@ namespace PnP.Core.Model.SharePoint
         private static Guid ProcessRecyleResponse(string json)
         {
             var document = JsonSerializer.Deserialize<JsonElement>(json);
-            if (document.TryGetProperty("d", out JsonElement root))
+            if (document.TryGetProperty("value", out JsonElement recycleBinItemId))
             {
-                if (root.TryGetProperty("Recycle", out JsonElement recycleBinItemId))
-                {
-                    // return the recyclebin item id
-                    return recycleBinItemId.GetGuid();
-                }
+                // return the recyclebin item id
+                return recycleBinItemId.GetGuid();
             }
 
             return Guid.Empty;
