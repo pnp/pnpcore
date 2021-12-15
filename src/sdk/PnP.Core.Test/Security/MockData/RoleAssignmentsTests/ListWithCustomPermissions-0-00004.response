@@ -1,9 +1,0 @@
---batchresponse_bcf90323-1132-4a26-b671-74bd21c0c09d
-Content-Type: application/http
-Content-Transfer-Encoding: binary
-
-HTTP/1.1 200 OK
-CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
-
-{"d":{"BreakRoleInheritance":null}}
---batchresponse_bcf90323-1132-4a26-b671-74bd21c0c09d--

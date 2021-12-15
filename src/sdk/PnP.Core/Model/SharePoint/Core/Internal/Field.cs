@@ -123,7 +123,6 @@ namespace PnP.Core.Model.SharePoint
 
         public string Mappings { get => GetValue<string>(); set => SetValue(value); }
 
-        [SharePointProperty("Choices", JsonPath = "results")]
         public string[] Choices { get => GetValue<string[]>(); set => SetValue(value); }
 
         public CalendarType DateTimeCalendarType { get => GetValue<CalendarType>(); set => SetValue(value); }

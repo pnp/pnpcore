@@ -11,9 +11,12 @@ namespace PnP.Core.Test.SharePoint
     [TestClass]
     public class ListWebhookTests
     {
-        private const string webhookHost = "https://6e4569a36d94.ngrok.io";
+        // function app hosted to allow live test runs
+        private const string webhookHost = "https://pnpcoresdkwebhooktest.azurewebsites.net";
 
-        #region Instructions for online tests
+        #region Instructions for online tests with local function app
+        //private const string webhookHost = "https://6e4569a36d94.ngrok.io";
+
         /*        
         1. Deploy an Azure Function host containing below 2 functions with anonymous access
         2. Launch the function on localhost port 7071
@@ -354,7 +357,7 @@ namespace PnP.Core.Test.SharePoint
             {
                 var list = context.Web.Lists.GetByServerRelativeUrl($"{context.Uri.LocalPath}/Shared Documents");
                 var webhook = list.Webhooks.Add($"{webhookHost}/api/HandleEvent", DateTime.UtcNow.AddDays(1), "state");
-                var wh = list.Webhooks.Where(w => w.NotificationUrl.Contains("ngrok")).ToList();
+                var wh = list.Webhooks.Where(w => w.NotificationUrl.Contains("pnpcoresdkwebhooktest")).ToList();
 
                 Assert.IsTrue(wh.Count > 0);
             }

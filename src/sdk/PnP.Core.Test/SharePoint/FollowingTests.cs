@@ -10,7 +10,12 @@ namespace PnP.Core.Test.SharePoint
     [TestClass]
     public class FollowingTests
     {
-        private const string testAccountName = "i:0#.f|membership|admin@m365x790252.onmicrosoft.com";
+        //private const string testAccountName = "i:0#.f|membership|admin@m365x790252.onmicrosoft.com";
+        //private const string followTestAccountName = "i:0%23.f|membership|alexw@M365x790252.onmicrosoft.com";
+        //private const string socialTag = "4fd0d107-8df7-4ace-bffc-72aa0f9a736a";
+        private const string testAccountName = "i:0#.f|membership|bert.jansen@bertonline.onmicrosoft.com";
+        private const string followTestAccountName = "i:0%23.f|membership|kevinc@bertonline.onmicrosoft.com";
+        private const string socialTag = "141a8d79-6429-4659-bdbe-6d3652e67503";
 
         [ClassInitialize]
         public static void TestFixtureSetup(TestContext context)
@@ -116,7 +121,7 @@ namespace PnP.Core.Test.SharePoint
 
             var followed = context.Social.Following.Follow(new FollowPersonData
             {
-                AccountName = "i:0%23.f|membership|alexw@M365x790252.onmicrosoft.com"
+                AccountName = followTestAccountName
             });
 
             Assert.IsTrue(followed == SocialFollowResult.Ok || followed == SocialFollowResult.AlreadyFollowing);
@@ -146,7 +151,7 @@ namespace PnP.Core.Test.SharePoint
 
             var followed = context.Social.Following.Follow(new FollowTagData
             {
-                TagGuid = new Guid("4fd0d107-8df7-4ace-bffc-72aa0f9a736a")
+                TagGuid = new Guid(socialTag)
             });
 
             Assert.IsTrue(followed == SocialFollowResult.Ok || followed == SocialFollowResult.AlreadyFollowing);

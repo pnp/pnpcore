@@ -838,8 +838,7 @@ namespace PnP.Core.Model.SharePoint
             ApiCall apiCall = new ApiCall($"_api/machinelearning/MachineLearningEnabled/MachineLearningCaptureEnabled", ApiType.SPORest);
             var response = await RawRequestAsync(apiCall, HttpMethod.Get).ConfigureAwait(false);
 
-            // Json response: {"d":{"MachineLearningCaptureEnabled":true}}
-            var machineLearningCaptureEnabled = JsonSerializer.Deserialize<JsonElement>(response.Json).GetProperty("d").GetProperty("MachineLearningCaptureEnabled");
+            var machineLearningCaptureEnabled = JsonSerializer.Deserialize<JsonElement>(response.Json).GetProperty("value");
 
             return machineLearningCaptureEnabled.GetBoolean();
         }
@@ -854,8 +853,7 @@ namespace PnP.Core.Model.SharePoint
             ApiCall apiCall = new ApiCall($"_api/machinelearning/MachineLearningEnabled/UserSyntexEnabled", ApiType.SPORest);
             var response = await RawRequestAsync(apiCall, HttpMethod.Get).ConfigureAwait(false);
 
-            // Json response: {"d":{"UserSyntexEnabled":true}}
-            var machineLearningCaptureEnabled = JsonSerializer.Deserialize<JsonElement>(response.Json).GetProperty("d").GetProperty("UserSyntexEnabled");
+            var machineLearningCaptureEnabled = JsonSerializer.Deserialize<JsonElement>(response.Json).GetProperty("value");
 
             return machineLearningCaptureEnabled.GetBoolean();
         }

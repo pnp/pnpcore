@@ -192,7 +192,7 @@ namespace PnP.Core.Test.Security
         {
             //TestCommon.Instance.Mocking = false;
 
-            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.NoGroupTestSite))
             {
                 // Create a new list
                 string listName = TestCommon.GetPnPSdkTestAssetName("RemoveItemRoleAssignmentTest");

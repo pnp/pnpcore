@@ -1,9 +1,0 @@
---batchresponse_08cd2c26-a6d7-4ac9-ae4e-0bf9e8a2d238
-Content-Type: application/http
-Content-Transfer-Encoding: binary
-
-HTTP/1.1 200 OK
-CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
-
-{"d":{"GetUserProfilePropertyFor":"+12345"}}
---batchresponse_08cd2c26-a6d7-4ac9-ae4e-0bf9e8a2d238--

@@ -1,9 +1,0 @@
---batchresponse_d3da3b39-715a-401d-b0c6-256c63a898b9
-Content-Type: application/http
-Content-Transfer-Encoding: binary
-
-HTTP/1.1 200 OK
-CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
-
-{"d":{"results":[{"__metadata":{"id":"https://m365x790252.sharepoint.com/sites/pnpcoresdktestgroup/_api/SP.UserProfiles.PersonPropertiesf0e1fc1d-8d65-4aa1-8f92-9625ae30813d","uri":"https://m365x790252.sharepoint.com/sites/pnpcoresdktestgroup/_api/SP.UserProfiles.PersonPropertiesf0e1fc1d-8d65-4aa1-8f92-9625ae30813d","type":"SP.UserProfiles.PersonProperties"},"AccountName":"i:0#.f|membership|alland@m365x790252.onmicrosoft.com"},{"__metadata":{"id":"https://m365x790252.sharepoint.com/sites/pnpcoresdktestgroup/_api/SP.UserProfiles.PersonProperties9c74dc88-7eca-405b-84b6-6428046f2778","uri":"https://m365x790252.sharepoint.com/sites/pnpcoresdktestgroup/_api/SP.UserProfiles.PersonProperties9c74dc88-7eca-405b-84b6-6428046f2778","type":"SP.UserProfiles.PersonProperties"},"AccountName":"i:0#.f|membership|alexw@m365x790252.onmicrosoft.com"}]}}
---batchresponse_d3da3b39-715a-401d-b0c6-256c63a898b9--

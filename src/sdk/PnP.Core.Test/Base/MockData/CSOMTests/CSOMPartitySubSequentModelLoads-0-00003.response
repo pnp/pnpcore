@@ -1,9 +1,0 @@
---batchresponse_0cf33dde-95a2-442f-b604-ced997d681cc
-Content-Type: application/http
-Content-Transfer-Encoding: binary
-
-HTTP/1.1 200 OK
-CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
-
-{"d":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-2/_api/Web","uri":"https://bertonline.sharepoint.com/sites/prov-2/_api/Web","type":"SP.Web"},"AlternateCssUrl":"","Id":"2c99a486-d6c9-4a4b-8d6f-a9faa364c92c","MasterUrl":"/sites/prov-2/_catalogs/masterpage/seattle.master"}}
---batchresponse_0cf33dde-95a2-442f-b604-ced997d681cc--

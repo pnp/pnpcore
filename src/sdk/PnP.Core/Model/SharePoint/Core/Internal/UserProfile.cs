@@ -49,10 +49,9 @@ namespace PnP.Core.Model.SharePoint
 
         public async Task<string> GetPropertyForAsync(string accountName, string propertyName)
         {
-            var methodName = "GetUserProfilePropertyFor";
-            var baseUrl = $"{Uri}/{methodName}(accountname='{HttpUtility.UrlEncode(accountName)}',propertyname='{HttpUtility.UrlEncode(propertyName)}')";
+            var baseUrl = $"{Uri}/GetUserProfilePropertyFor(accountname='{HttpUtility.UrlEncode(accountName)}',propertyname='{HttpUtility.UrlEncode(propertyName)}')";
 
-            return await GetSingleResult(baseUrl, methodName).ConfigureAwait(false);
+            return await GetSingleResult(baseUrl).ConfigureAwait(false);
         }
 
         public long GetUserOneDriveQuotaMax(string accountName)
@@ -62,10 +61,9 @@ namespace PnP.Core.Model.SharePoint
 
         public async Task<long> GetUserOneDriveQuotaMaxAsync(string accountName)
         {
-            var methodName = "GetUserOneDriveQuotaMax";
-            var baseUrl = $"{Uri}/{methodName}(accountname='{HttpUtility.UrlEncode(accountName)}')";
+            var baseUrl = $"{Uri}/GetUserOneDriveQuotaMax(accountname='{HttpUtility.UrlEncode(accountName)}')";
 
-            return long.Parse(await GetSingleResult(baseUrl, methodName).ConfigureAwait(false));
+            return long.Parse(await GetSingleResult(baseUrl).ConfigureAwait(false));
         }
 
         public string ResetUserOneDriveQuotaToDefault(string accountName)
@@ -75,10 +73,9 @@ namespace PnP.Core.Model.SharePoint
 
         public async Task<string> ResetUserOneDriveQuotaToDefaultAsync(string accountName)
         {
-            var methodName = "ResetUserOneDriveQuotaToDefault";
-            var baseUrl = $"{Uri}/{methodName}(accountname='{HttpUtility.UrlEncode(accountName)}')";
+            var baseUrl = $"{Uri}/ResetUserOneDriveQuotaToDefault(accountname='{HttpUtility.UrlEncode(accountName)}')";
 
-            return await GetSingleResult(baseUrl, methodName).ConfigureAwait(false);
+            return await GetSingleResult(baseUrl).ConfigureAwait(false);
         }
 
         public void SetMultiValuedProfileProperty(string accountName, string propertyName, IList<string> propertyValues)
@@ -137,10 +134,9 @@ namespace PnP.Core.Model.SharePoint
 
         public async Task<string> SetUserOneDriveQuotaAsync(string accountName, long newQuota, long newQuotaWarning)
         {
-            var methodName = "SetUserOneDriveQuota";
-            var baseUrl = $"{Uri}/{methodName}(accountname='{HttpUtility.UrlEncode(accountName)}',newQuota={newQuota},newQuotaWarning={newQuotaWarning})";
+            var baseUrl = $"{Uri}/SetUserOneDriveQuota(accountname='{HttpUtility.UrlEncode(accountName)}',newQuota={newQuota},newQuotaWarning={newQuotaWarning})";
 
-            return await GetSingleResult(baseUrl, methodName).ConfigureAwait(false);
+            return await GetSingleResult(baseUrl).ConfigureAwait(false);
         }
 
         public string SetUserOneDriveQuota(string accountName, long newQuota, long newQuotaWarning)

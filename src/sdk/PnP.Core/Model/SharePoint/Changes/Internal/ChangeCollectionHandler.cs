@@ -12,7 +12,14 @@ namespace PnP.Core.Model.SharePoint
     {
         internal static ApiCall GetApiCall<TModel>(IDataModel<TModel> parent, ChangeQueryOptions query)
         {
-            return new ApiCall(GetApiCallUrl(parent), ApiType.SPORest, GetChangeQueryBody(query));
+            return new ApiCall(GetApiCallUrl(parent), ApiType.SPORest, GetChangeQueryBody(query))
+            {
+                // We force this request to return verbose metadata as we need that information to determine the returned change token
+                Headers = new Dictionary<string, string>
+                {
+                    ["Accept"] = "application/json;odata=verbose"
+                }
+            };
         }
 
         internal static string GetApiCallUrl<TModel>(IDataModel<TModel> parent)

@@ -1,9 +1,0 @@
---batchresponse_d8b6304e-126e-4f47-9b9c-e5a8b799068d
-Content-Type: application/http
-Content-Transfer-Encoding: binary
-
-HTTP/1.1 200 OK
-CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
-
-{"d":{"Restore":null}}
---batchresponse_d8b6304e-126e-4f47-9b9c-e5a8b799068d--

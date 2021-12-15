@@ -1,9 +1,0 @@
---batchresponse_c1ea7114-e313-440c-91c3-cd6b87471594
-Content-Type: application/http
-Content-Transfer-Encoding: binary
-
-HTTP/1.1 200 OK
-CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
-
-{"d":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-2/permissionweb/_api/Web","uri":"https://bertonline.sharepoint.com/sites/prov-2/permissionweb/_api/Web","type":"SP.Web"},"RoleAssignments":{"results":[{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-2/permissionweb/_api/Web/RoleAssignments/GetByPrincipalId(11)","uri":"https://bertonline.sharepoint.com/sites/prov-2/permissionweb/_api/Web/RoleAssignments/GetByPrincipalId(11)","type":"SP.RoleAssignment"},"RoleDefinitionBindings":{"results":[{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-2/permissionweb/_api/Web/RoleDefinitions(1073741829)","uri":"https://bertonline.sharepoint.com/sites/prov-2/permissionweb/_api/Web/RoleDefinitions(1073741829)","type":"SP.RoleDefinition"},"BasePermissions":{"__metadata":{"type":"SP.BasePermissions"},"High":"2147483647","Low":"4294967295"},"Description":"Has full control.","Hidden":false,"Id":1073741829,"Name":"Full Control","Order":1,"RoleTypeKind":5},{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-2/permissionweb/_api/Web/RoleDefinitions(1073741830)","uri":"https://bertonline.sharepoint.com/sites/prov-2/permissionweb/_api/Web/RoleDefinitions(1073741830)","type":"SP.RoleDefinition"},"BasePermissions":{"__metadata":{"type":"SP.BasePermissions"},"High":"432","Low":"1011030767"},"Description":"Can add, edit and delete lists; can view, add, update and delete list items and documents.","Hidden":false,"Id":1073741830,"Name":"Edit","Order":48,"RoleTypeKind":6}]},"PrincipalId":11}]},"HasUniqueRoleAssignments":true,"Id":"09498741-c6fa-4d4b-a3c6-174ff63d9677"}}
---batchresponse_c1ea7114-e313-440c-91c3-cd6b87471594--

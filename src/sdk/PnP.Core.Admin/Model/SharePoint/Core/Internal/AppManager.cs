@@ -35,7 +35,7 @@ namespace PnP.Core.Admin.Model.SharePoint
         {
             var result = await (context.Web as Web).RawRequestAsync(new ApiCall("_api/SP_TenantSettings_Current", ApiType.SPORest), HttpMethod.Get).ConfigureAwait(false);
 
-            var root = JsonDocument.Parse(result.Json).RootElement.GetProperty("d").GetProperty("CorporateCatalogUrl");
+            var root = JsonDocument.Parse(result.Json).RootElement.GetProperty("CorporateCatalogUrl");
 
             if (root.ValueKind == JsonValueKind.String)
             {
@@ -53,7 +53,7 @@ namespace PnP.Core.Admin.Model.SharePoint
         public async Task<bool> EnsureTenantAppCatalogAsync()
         {
             var result = await (context.Web as Web).RawRequestAsync(new ApiCall("_api/web/EnsureTenantAppCatalog(callerId='pnpcoresdk')", ApiType.SPORest), HttpMethod.Post).ConfigureAwait(false);
-            var root = JsonDocument.Parse(result.Json).RootElement.GetProperty("d").GetProperty("EnsureTenantAppCatalog");
+            var root = JsonDocument.Parse(result.Json).RootElement.GetProperty("value");
             return root.GetBoolean();
         }
 
@@ -208,7 +208,7 @@ namespace PnP.Core.Admin.Model.SharePoint
                 var response = await (pnpContext.Web as Web).RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
                 var document = JsonSerializer.Deserialize<JsonElement>(response.Json);
 
-                var uniqueId = document.Get("d")?.Get("UniqueId")?.GetString();
+                var uniqueId = document.Get("UniqueId")?.GetString();
 
                 if (string.IsNullOrEmpty(uniqueId))
                 {
@@ -381,18 +381,16 @@ namespace PnP.Core.Admin.Model.SharePoint
         /// <returns>An instance of the object, which implements TModel interface.</returns>
         protected TModel GetModelFromJson<TModel>(string json)
         {
-            var document = JsonSerializer.Deserialize<JsonElement>(json);
-
-            var modelJson = document.Get("d");
-
-            if (modelJson == null)
+            if (string.IsNullOrEmpty(json))
             {
                 throw new ClientException(PnPCoreAdminResources.Exception_UnexpectedJson);
             }
 
+            var document = JsonSerializer.Deserialize<JsonElement>(json);
+
             var type = EntityManager.GetEntityConcreteInstance(typeof(TModel)).GetType();
 
-            var model = (TModel)(modelJson.Value).ToObject(type, PnPConstants.JsonSerializer_PropertyNameCaseInsensitiveTrue);
+            var model = (TModel)document.ToObject(type, PnPConstants.JsonSerializer_PropertyNameCaseInsensitiveTrue);
 
             if (model is IDataModelWithContext)
             {
@@ -412,7 +410,7 @@ namespace PnP.Core.Admin.Model.SharePoint
         {
             var document = JsonSerializer.Deserialize<JsonElement>(json);
 
-            var modelJson = document.Get("d")?.Get("results");
+            var modelJson = document.Get("value");
 
             if (modelJson == null)
             {

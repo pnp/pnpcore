@@ -1,9 +1,0 @@
---batchresponse_be9bd9e1-abff-4e37-b444-253401cfbde9
-Content-Type: application/http
-Content-Transfer-Encoding: binary
-
-HTTP/1.1 200 OK
-CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
-
-{"d":{"__metadata":{"id":"https://m365x790252.sharepoint.com/sites/pnpcoresdktestgroup/_api/SP_TenantSettings_Current","uri":"https://m365x790252.sharepoint.com/sites/pnpcoresdktestgroup/_api/SP_TenantSettings_Current","type":"SP.TenantSettings"},"CorporateCatalogUrl":"https://m365x790252.sharepoint.com/sites/appcatalog"}}
---batchresponse_be9bd9e1-abff-4e37-b444-253401cfbde9--

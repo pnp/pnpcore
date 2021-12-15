@@ -1,9 +1,0 @@
---batchresponse_aaa5a98e-c393-44e6-a0da-b7e16e8a1467
-Content-Type: application/http
-Content-Transfer-Encoding: binary
-
-HTTP/1.1 200 OK
-CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
-
-{"d":{"Follow":1}}
---batchresponse_aaa5a98e-c393-44e6-a0da-b7e16e8a1467--

@@ -1,9 +1,0 @@
---batchresponse_e95acae0-a294-41bd-ad49-ac4b29c36e2c
-Content-Type: application/http
-Content-Transfer-Encoding: binary
-
-HTTP/1.1 200 OK
-CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
-
-{"d":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-2/_api/Web","uri":"https://bertonline.sharepoint.com/sites/prov-2/_api/Web","type":"SP.Web"},"AssociatedOwnerGroup":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-2/_api/Web/AssociatedOwnerGroup","uri":"https://bertonline.sharepoint.com/sites/prov-2/_api/Web/AssociatedOwnerGroup","type":"SP.Group"},"Owner":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-2/_api/Web/AssociatedOwnerGroup/Owner"}},"Users":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-2/_api/Web/AssociatedOwnerGroup/Users"}},"Id":3,"IsHiddenInUI":false,"LoginName":"prov-2 Owners","Title":"prov-2 Owners","PrincipalType":8,"AllowMembersEditMembership":false,"AllowRequestToJoinLeave":false,"AutoAcceptRequestToJoinLeave":false,"Description":null,"OnlyAllowMembersViewMembership":false,"OwnerTitle":"prov-2 Owners","RequestToJoinLeaveEmailSetting":""},"AlternateCssUrl":"","Id":"2c99a486-d6c9-4a4b-8d6f-a9faa364c92c"}}
---batchresponse_e95acae0-a294-41bd-ad49-ac4b29c36e2c--

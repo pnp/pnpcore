@@ -390,20 +390,20 @@ namespace PnP.Core.Admin.Model.SharePoint
             */
             #endregion
 
-            int siteStatus = responseJson.GetProperty("d").GetProperty(statusProperty).GetProperty("SiteStatus").GetInt32();
+            int siteStatus = responseJson.GetProperty("SiteStatus").GetInt32();
 
             PnPContext responseContext;
             if (siteStatus == 2)
             {
                 // Site creation succeeded
-                responseContext = await context.CloneAsync(new Uri(responseJson.GetProperty("d").GetProperty(statusProperty).GetProperty("SiteUrl").ToString())).ConfigureAwait(false);
+                responseContext = await context.CloneAsync(new Uri(responseJson.GetProperty("SiteUrl").ToString())).ConfigureAwait(false);
             }
             else if (siteStatus == 1)
             {
                 Guid groupId = Guid.Empty;
                 if (siteCreationModel != SiteCreationModel.SPSiteManagerCreate)
                 {
-                    groupId = responseJson.GetProperty("d").GetProperty(statusProperty).GetProperty("GroupId").GetGuid();
+                    groupId = responseJson.GetProperty("GroupId").GetGuid();
                 }
 
                 // Site creation in progress, let's wait for it to finish
@@ -544,12 +544,12 @@ namespace PnP.Core.Admin.Model.SharePoint
                     */
                     #endregion
 
-                    int siteStatus = responseJson.GetProperty("d").GetProperty(statusProperty).GetProperty("SiteStatus").GetInt32();
+                    int siteStatus = responseJson.GetProperty("SiteStatus").GetInt32();
                     lastSiteStatus = siteStatus;
                     if (siteStatus == 2)
                     {
                         siteCreated = true;
-                        siteUrl = responseJson.GetProperty("d").GetProperty(statusProperty).GetProperty("SiteUrl").GetString();
+                        siteUrl = responseJson.GetProperty("SiteUrl").GetString();
                     }
                 }
                 catch (Exception ex)

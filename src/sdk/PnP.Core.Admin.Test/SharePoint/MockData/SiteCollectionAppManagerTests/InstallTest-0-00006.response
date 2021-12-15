@@ -1,9 +1,0 @@
---batchresponse_b86e4b3a-f26c-4963-b70e-4c10f5b69e53
-Content-Type: application/http
-Content-Transfer-Encoding: binary
-
-HTTP/1.1 200 OK
-CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
-
-{"d":{"Install":null}}
---batchresponse_b86e4b3a-f26c-4963-b70e-4c10f5b69e53--

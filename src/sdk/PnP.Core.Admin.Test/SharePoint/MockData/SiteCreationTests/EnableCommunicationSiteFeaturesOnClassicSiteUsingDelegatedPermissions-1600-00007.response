@@ -1,9 +1,0 @@
---batchresponse_3b8fe5b8-b335-4463-a515-97c9a6927cdd
-Content-Type: application/http
-Content-Transfer-Encoding: binary
-
-HTTP/1.1 404 Not Found
-CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
-
-{"error":{"code":"-2130575338, Microsoft.SharePoint.SPException","message":{"lang":"en-US","value":"The file /sites/pnpcoresdktestclassicsite31139eeac55446f888d696ec313a544b/SitePages/PNP_SDK_TEST_fullwidth.aspx does not exist."}}}
---batchresponse_3b8fe5b8-b335-4463-a515-97c9a6927cdd--

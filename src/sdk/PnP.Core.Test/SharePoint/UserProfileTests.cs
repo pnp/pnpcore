@@ -11,7 +11,8 @@ namespace PnP.Core.Test.SharePoint
     [TestClass]
     public class UserProfileTests
     {
-        private const string testAccountName = "i:0#.f|membership|admin@m365x790252.onmicrosoft.com";
+        //private const string testAccountName = "i:0#.f|membership|admin@m365x790252.onmicrosoft.com";
+        private const string testAccountName = "i:0#.f|membership|bert.jansen@bertonline.onmicrosoft.com";
 
         [ClassInitialize]
         public static void TestFixtureSetup(TestContext context)

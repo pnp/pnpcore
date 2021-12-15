@@ -1,9 +1,0 @@
---batchresponse_824f4034-c18f-4ab3-8a7f-7471eabb78d9
-Content-Type: application/http
-Content-Transfer-Encoding: binary
-
-HTTP/1.1 200 OK
-CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
-
-{"d":{"GetUserOneDriveQuotaMax":"5497558138880"}}
---batchresponse_824f4034-c18f-4ab3-8a7f-7471eabb78d9--

@@ -51,7 +51,7 @@ namespace PnP.Core.Admin.Model.SharePoint
             await ExecuteGenericApiPostAsync(apiCall, (response) =>
             {
                 var document = JsonSerializer.Deserialize<JsonElement>(response.Json);
-                var result = document.Get("d")?.Get(method);
+                var result = document.Get(method);
 
                 if (result == null)
                 {
@@ -76,7 +76,7 @@ namespace PnP.Core.Admin.Model.SharePoint
             return await ExecuteGenericApiPostAsync(apiCall, (response) =>
             {
                 var document = JsonSerializer.Deserialize<JsonElement>(response.Json);
-                var result = document.Get("d")?.Get("SolutionContainsTeamsComponent");
+                var result = document.Get("value");
 
                 if (result == null)
                 {
@@ -130,7 +130,7 @@ namespace PnP.Core.Admin.Model.SharePoint
 
             return await ExecuteWithDisposeAsync(pnpContext, async () =>
             {
-                await (pnpContext.Web as Web).RawRequestAsync(apiCall, HttpMethod.Get).ConfigureAwait(false);
+                await (pnpContext.Web as Web).RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
                 var list = await pnpContext.Web.Lists.GetByServerRelativeUrlAsync($"{pnpContext.Uri.LocalPath}/appcatalog").ConfigureAwait(false);
                 var query = new CamlQueryOptions
                 {
@@ -156,7 +156,7 @@ namespace PnP.Core.Admin.Model.SharePoint
             return await ExecuteGenericApiPostAsync(apiCall, (response) =>
             {
                 var document = JsonSerializer.Deserialize<JsonElement>(response.Json);
-                var result = document.Get("d")?.Get("IsAppUpgradeAvailable")?.Get("IsUpgradeAvailable");
+                var result = document.Get("IsUpgradeAvailable");
 
                 if (result == null)
                 {

@@ -1,9 +1,0 @@
---batchresponse_e9d75db4-513e-4362-a35a-1d30806eee00
-Content-Type: application/http
-Content-Transfer-Encoding: binary
-
-HTTP/1.1 200 OK
-CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
-
-{"d":{"CreateGroupEx":{"__metadata":{"type":"Microsoft.SharePoint.Portal.GroupSiteInfo"},"DocumentsUrl":null,"ErrorMessage":null,"GroupId":"2810cd46-0698-4eae-a878-38209cab2395","SiteStatus":1,"SiteUrl":"https://bertonline.sharepoint.com/sites/pnpcoresdktestteamsite756c3e052d2a421f85bc6ce8d651ca87"}}}
---batchresponse_e9d75db4-513e-4362-a35a-1d30806eee00--

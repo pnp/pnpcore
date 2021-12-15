@@ -1,1 +1,0 @@
-{"responses": [{"id": "1","status":400,"headers" : {"Cache-Control":"no-cache","Content-Type":"application/json"},"body":{"error":{"code":"invalidRequest","message":"Invalid hostname for this tenancy","innerError":{"date":"2021-10-04T08:30:10","request-id":"a88cec25-a107-4750-86aa-3fa80dfd25aa","client-request-id":"a88cec25-a107-4750-86aa-3fa80dfd25aa"}}}}]}

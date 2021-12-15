@@ -1,9 +1,0 @@
---batchresponse_a851f6d0-ac43-4070-9e2a-81f570c77707
-Content-Type: application/http
-Content-Transfer-Encoding: binary
-
-HTTP/1.1 200 OK
-CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
-
-{"d":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-2/subsite/_api/Web","uri":"https://bertonline.sharepoint.com/sites/prov-2/subsite/_api/Web","type":"SP.Web"},"RegionalSettings":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-2/subsite/_api/Web/RegionalSettings","uri":"https://bertonline.sharepoint.com/sites/prov-2/subsite/_api/Web/RegionalSettings","type":"SP.RegionalSettings"},"InstalledLanguages":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-2/subsite/_api/Web/RegionalSettings/InstalledLanguages"}},"TimeZone":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-2/subsite/_api/Web/RegionalSettings/TimeZone"}},"TimeZones":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-2/subsite/_api/Web/RegionalSettings/TimeZones"}},"AdjustHijriDays":0,"AlternateCalendarType":0,"AM":"AM","CalendarType":1,"Collation":25,"CollationLCID":2070,"DateFormat":0,"DateSeparator":"/","DecimalSeparator":".","DigitGrouping":"3;0","FirstDayOfWeek":0,"FirstWeekOfYear":0,"IsEastAsia":false,"IsRightToLeft":false,"IsUIRightToLeft":false,"ListSeparator":",","LocaleId":1033,"NegativeSign":"-","NegNumberMode":1,"PM":"PM","PositiveSign":"","ShowWeeks":false,"ThousandSeparator":",","Time24":false,"TimeMarkerPosition":0,"TimeSeparator":":","WorkDayEndHour":1020,"WorkDays":62,"WorkDayStartHour":480},"Id":"29ae779d-bb4e-41b9-b0e7-5cb93b1758ec"}}
---batchresponse_a851f6d0-ac43-4070-9e2a-81f570c77707--

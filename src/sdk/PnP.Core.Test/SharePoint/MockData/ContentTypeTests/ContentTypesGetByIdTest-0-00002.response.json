@@ -1,0 +1,1 @@
+{"IsSuccessStatusCode":true,"StatusCode":200,"Headers":{"SPRequestGuid":"a7f60ca0-e071-3000-787b-427696cf9e99","SPClientServiceRequestDuration":"34","X-SharePointHealthScore":"1","X-SP-SERVERSTATE":"ReadOnly=0"},"Response":"{\u0022value\u0022:[{\u0022Id\u0022:{\u0022StringValue\u0022:\u00220x01\u0022},\u0022StringId\u0022:\u00220x01\u0022}]}"}

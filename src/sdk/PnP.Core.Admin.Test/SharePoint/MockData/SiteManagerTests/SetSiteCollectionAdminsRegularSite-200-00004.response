@@ -1,9 +1,0 @@
---batchresponse_95cb31be-37c6-4bf7-81ba-17e7b05ac72e
-Content-Type: application/http
-Content-Transfer-Encoding: binary
-
-HTTP/1.1 200 OK
-CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
-
-{"d":{"GetSiteSecondaryAdministrators":{"__metadata":{"type":"Collection(Microsoft.Online.SharePoint.TenantAdministration.SecondaryAdministratorsInfo)"},"results":[]}}}
---batchresponse_95cb31be-37c6-4bf7-81ba-17e7b05ac72e--

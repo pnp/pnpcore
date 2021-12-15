@@ -1,9 +1,0 @@
---batchresponse_ab5e59bb-d506-4f97-9e05-30d913cd8852
-Content-Type: application/http
-Content-Transfer-Encoding: binary
-
-HTTP/1.1 200 OK
-CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
-
-{"d":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-2/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/prov-2/Shared Documents/PNP_SDK_TEST_GetFileIRMSettingsBatchAsyncTest.docx')","uri":"https://bertonline.sharepoint.com/sites/prov-2/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/prov-2/Shared%20Documents/PNP_SDK_TEST_GetFileIRMSettingsBatchAsyncTest.docx')","type":"SP.File"},"InformationRightsManagementSettings":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-2/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/prov-2/Shared Documents/PNP_SDK_TEST_GetFileIRMSettingsBatchAsyncTest.docx')/InformationRightsManagementSettings","uri":"https://bertonline.sharepoint.com/sites/prov-2/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/prov-2/Shared%20Documents/PNP_SDK_TEST_GetFileIRMSettingsBatchAsyncTest.docx')/InformationRightsManagementSettings","type":"SP.InformationRightsManagementFileSettings"},"AllowPrint":false,"AllowScript":false,"AllowWriteCopy":false,"DisableDocumentBrowserView":false,"DocumentAccessExpireDays":90,"EnableDocumentAccessExpire":false,"EnableDocumentBrowserPublishingView":false,"EnableGroupProtection":false,"EnableLicenseCacheExpire":false,"GroupName":"","IrmEnabled":false,"LicenseCacheExpireDays":30,"PolicyDescription":"","PolicyTitle":"","TemplateId":""},"UniqueId":"3bca018a-ecee-4186-8b66-d2482d163e2c"}}
---batchresponse_ab5e59bb-d506-4f97-9e05-30d913cd8852--

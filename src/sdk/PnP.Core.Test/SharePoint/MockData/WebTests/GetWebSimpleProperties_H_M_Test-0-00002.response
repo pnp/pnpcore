@@ -1,9 +1,0 @@
---batchresponse_32fbda05-2af3-4269-9731-a70ec76a79a1
-Content-Type: application/http
-Content-Transfer-Encoding: binary
-
-HTTP/1.1 200 OK
-CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
-
-{"d":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-2/_api/Web","uri":"https://bertonline.sharepoint.com/sites/prov-2/_api/Web","type":"SP.Web"},"HasUniqueRoleAssignments":true,"HeaderEmphasis":0,"HeaderLayout":2,"HideTitleInHeader":false,"Id":"2c99a486-d6c9-4a4b-8d6f-a9faa364c92c","IsHomepageModernized":false,"IsProvisioningComplete":true,"IsRevertHomepageLinkHidden":false,"Language":1033,"LastItemModifiedDate":"2021-10-12T17:33:01Z","LastItemUserModifiedDate":"2021-10-12T17:33:01Z","LogoAlignment":0,"MasterUrl":"/sites/prov-2/_catalogs/masterpage/seattle.master","MegaMenuEnabled":false}}
---batchresponse_32fbda05-2af3-4269-9731-a70ec76a79a1--

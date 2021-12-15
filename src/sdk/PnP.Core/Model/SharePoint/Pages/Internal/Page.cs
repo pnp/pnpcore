@@ -1871,7 +1871,13 @@ namespace PnP.Core.Model.SharePoint
                 pageName += ".aspx";
             }
 
-            return await pagesLibrary.PnPContext.Web.GetFileByServerRelativeUrlOrDefaultAsync($"{pagesLibrary.RootFolder.ServerRelativeUrl}/{pageName}", p => p.ListItemAllFields, p => p.ServerRelativeUrl, p => p.ListId).ConfigureAwait(false);
+            return await pagesLibrary.PnPContext.Web.GetFileByServerRelativeUrlOrDefaultAsync($"{pagesLibrary.RootFolder.ServerRelativeUrl}/{pageName}",
+                    p => p.ListItemAllFields.QueryProperties(p => p.All, 
+                        p => p.ParentList.QueryProperties(
+                            p => p.Fields.QueryProperties(p => p.InternalName, p => p.FieldTypeKind, p => p.TypeAsString, p => p.Title)
+                        )
+                    ), 
+                    p => p.ServerRelativeUrl, p => p.ListId).ConfigureAwait(false);
         }
 
         private async Task EnsurePageListItemAsync(string pageName)
@@ -1988,17 +1994,17 @@ namespace PnP.Core.Model.SharePoint
                 TranslatedLanguages = new List<IPageTranslationStatus>()
             };
 
-            var root = JsonSerializer.Deserialize<JsonElement>(response).GetProperty("d");
+            var root = JsonSerializer.Deserialize<JsonElement>(response);
 
             // Process untranslated languages
-            var untranslatedLanguages = root.GetProperty("UntranslatedLanguages").GetProperty("results");
+            var untranslatedLanguages = root.GetProperty("UntranslatedLanguages");
             foreach (var untranslatedLanguage in untranslatedLanguages.EnumerateArray())
             {
                 translationStatus.UntranslatedLanguages.Add(untranslatedLanguage.GetString());
             }
 
             // Process translationstatus 
-            var translationStatusCollection = root.GetProperty("Items").GetProperty("results");
+            var translationStatusCollection = root.GetProperty("Items");
             foreach (var status in translationStatusCollection.EnumerateArray())
             {
                 translationStatus.TranslatedLanguages.Add(new PageTranslationStatus()
@@ -2441,7 +2447,7 @@ namespace PnP.Core.Model.SharePoint
 
             if (!string.IsNullOrEmpty(response.Json))
             {
-                var root = JsonSerializer.Deserialize<JsonElement>(response.Json).GetProperty("d").GetProperty("GetClientSideWebParts").GetProperty("results");
+                var root = JsonSerializer.Deserialize<JsonElement>(response.Json).GetProperty("value");
 
                 var clientSideComponents = JsonSerializer.Deserialize<List<PageComponent>>(root.ToString(), PnPConstants.JsonSerializer_IgnoreNullValues);
 

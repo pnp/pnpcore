@@ -36,6 +36,13 @@ namespace PnP.Core.Model.SharePoint
         {
 
 #pragma warning disable CA1507 // Use nameof to express symbol names
+            if (json.TryGetProperty("DisplayName", out JsonElement displayName))
+#pragma warning restore CA1507 // Use nameof to express symbol names
+            {
+                DisplayName = displayName.GetString();
+            }
+
+#pragma warning disable CA1507 // Use nameof to express symbol names
             if (json.TryGetProperty("LocationUri", out JsonElement locationUri))
 #pragma warning restore CA1507 // Use nameof to express symbol names
             {

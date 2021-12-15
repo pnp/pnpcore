@@ -472,34 +472,41 @@ namespace PnP.Core.Services
 
             foreach (var graphBatch in graphBatches)
             {
-                if (!await ExecuteMicrosoftGraphBatchRequestAsync(graphBatch).ConfigureAwait(false))
+                if (graphBatch.Requests.Count == 1)
                 {
-                    // If a request did not succeed and the returned error indicated a retry then try again
-                    int retryCount = 0;
-                    bool success = false;
-
-                    while (retryCount < HttpMicrosoftGraphMaxRetries)
+                    await ExecuteMicrosoftGraphInteractiveAsync(graphBatch).ConfigureAwait(false);
+                }
+                else
+                {
+                    if (!await ExecuteMicrosoftGraphBatchRequestAsync(graphBatch).ConfigureAwait(false))
                     {
-                        // Call Delay method to get delay time 
-                        Task delay = Delay(retryCount, HttpMicrosoftGraphDelayInSeconds, HttpMicrosoftGraphUseIncrementalDelay);
+                        // If a request did not succeed and the returned error indicated a retry then try again
+                        int retryCount = 0;
+                        bool success = false;
 
-                        await delay.ConfigureAwait(false);
-
-                        // Increase retryCount 
-                        retryCount++;
-
-                        success = await ExecuteMicrosoftGraphBatchRequestAsync(graphBatch).ConfigureAwait(false);
-                        if (success)
+                        while (retryCount < HttpMicrosoftGraphMaxRetries)
                         {
-                            break;
-                        }
-                    }
+                            // Call Delay method to get delay time 
+                            Task delay = Delay(retryCount, HttpMicrosoftGraphDelayInSeconds, HttpMicrosoftGraphUseIncrementalDelay);
 
-                    if (!success)
-                    {
-                        // We passed the max retries...time to throw an error
-                        throw new ServiceException(ErrorType.TooManyBatchRetries, 0,
-                            string.Format(PnPCoreResources.Exception_ServiceException_BatchMaxRetries, retryCount));
+                            await delay.ConfigureAwait(false);
+
+                            // Increase retryCount 
+                            retryCount++;
+
+                            success = await ExecuteMicrosoftGraphBatchRequestAsync(graphBatch).ConfigureAwait(false);
+                            if (success)
+                            {
+                                break;
+                            }
+                        }
+
+                        if (!success)
+                        {
+                            // We passed the max retries...time to throw an error
+                            throw new ServiceException(ErrorType.TooManyBatchRetries, 0,
+                                string.Format(PnPCoreResources.Exception_ServiceException_BatchMaxRetries, retryCount));
+                        }
                     }
                 }
             }
@@ -603,9 +610,8 @@ namespace PnP.Core.Services
                                         }
 
                                         // Write response
-                                        TestManager.RecordResponse(PnPContext, requestKey, batchResponse);
+                                        TestManager.RecordResponse(PnPContext, requestKey, batchResponse, response.IsSuccessStatusCode, (int)response.StatusCode, MicrosoftGraphResposeHeadersToPropagate(response?.Headers));
                                     }
-
 #endif
 
                                     var ready = await ProcessGraphRestBatchResponse(batch, batchResponse).ConfigureAwait(false);
@@ -619,7 +625,9 @@ namespace PnP.Core.Services
                         else
                         {
                             // Something went wrong...
-                            throw new MicrosoftGraphServiceException(ErrorType.GraphServiceError, (int)response.StatusCode, await response.Content.ReadAsStringAsync().ConfigureAwait(false));
+                            throw new MicrosoftGraphServiceException(ErrorType.GraphServiceError, 
+                                                                      (int)response.StatusCode, 
+                                                                      await response.Content.ReadAsStringAsync().ConfigureAwait(false));
                         }
                     }
                     finally
@@ -630,8 +638,8 @@ namespace PnP.Core.Services
                 }
                 else
                 {
-
-                    string batchResponse = TestManager.MockResponse(PnPContext, requestKey);
+                    var testResponse = TestManager.MockResponse(PnPContext, requestKey);
+                    string batchResponse = testResponse.Response;
 
                     // Call out to the rewrite handler if that one is connected
                     if (MockingFileRewriteHandler != null)
@@ -861,6 +869,21 @@ namespace PnP.Core.Services
             return new Tuple<string, string>(stringContent, batchKey.ToString());
         }
 
+        private static Dictionary<string, string> MicrosoftGraphResposeHeadersToPropagate(HttpResponseHeaders headers)
+        {
+            Dictionary<string, string> responseHeaders = new Dictionary<string, string>();
+
+            if (headers != null && headers.Any())
+            {
+                foreach (var header in headers)
+                {
+                    responseHeaders[header.Key] = string.Join(",", header.Value);
+                }
+            }
+
+            return responseHeaders;
+        }
+
         private static void ExecuteMicrosoftGraphRequestModules(BatchRequest request, Dictionary<string, string> headers, ref string requestUrl, ref string requestBody)
         {
             foreach (var module in request.RequestModules.Where(p => p.ExecuteForMicrosoftGraph))
@@ -894,6 +917,245 @@ namespace PnP.Core.Services
 
             return responseStringContent;
         }
+
+        private async Task ExecuteMicrosoftGraphInteractiveAsync(Batch batch)
+        {
+            var graphRequest = batch.Requests.First().Value;
+            StringContent content = null;
+            ByteArrayContent binaryContent = null;
+
+            try
+            {
+                string graphEndpoint = DetermineGraphEndpoint(batch);
+                string requestUrl = graphRequest.ApiCall.Request;
+                string requestBody = graphRequest.ApiCall.JsonBody;
+
+                PnPContext.Logger.LogDebug($"{graphEndpoint} : {requestBody}");
+
+                Dictionary<string, string> headers = new Dictionary<string, string>();
+
+                // Run request modules if they're connected
+                if (graphRequest.RequestModules != null && graphRequest.RequestModules.Count > 0)
+                {
+                    ExecuteMicrosoftGraphRequestModules(graphRequest, headers, ref requestUrl, ref requestBody);
+                }
+
+                // Make the request
+                using (var request = new HttpRequestMessage(graphRequest.Method, $"https://{CloudManager.GetMicrosoftGraphAuthority(PnPContext.Environment.Value)}/{graphEndpoint}/{requestUrl}"))
+                {
+
+                    if (!string.IsNullOrEmpty(requestBody))
+                    {
+                        content = new StringContent(requestBody, Encoding.UTF8, "application/json");
+                        request.Content = content;
+
+                        // Remove the default Content-Type content header
+                        if (content.Headers.Contains("Content-Type"))
+                        {
+                            content.Headers.Remove("Content-Type");
+                        }
+
+                        content.Headers.Add($"Content-Type", $"application/json");
+                        PnPContext.Logger.LogDebug(requestBody);
+                    }
+                    else if (graphRequest.ApiCall.BinaryBody != null)
+                    {
+                        binaryContent = new ByteArrayContent(graphRequest.ApiCall.BinaryBody);
+                        request.Content = binaryContent;
+                    }
+
+                    // Add extra headers
+                    foreach (var extraHeader in headers)
+                    {
+                        if (!request.Headers.Contains(extraHeader.Key))
+                        {
+                            request.Headers.Add(extraHeader.Key, extraHeader.Value);
+                        }
+                    }
+
+                    telemetryManager?.LogServiceRequest(graphRequest, PnPContext);
+
+#if DEBUG
+                    string batchKey = null;
+                    if (PnPContext.Mode != TestMode.Default)
+                    {
+                        batchKey = $"{testUseCounter}@@{request.Method}|{graphRequest.ApiCall.Request}@@";
+                        testUseCounter++;
+                    }
+
+                    // Test recording
+                    if (PnPContext.Mode == TestMode.Record && PnPContext.GenerateTestMockingDebugFiles)
+                    {
+                        // Write request
+                        TestManager.RecordRequest(PnPContext, batchKey, $"{graphRequest.Method}-{graphRequest.ApiCall.Request}-{(graphRequest.ApiCall.JsonBody ?? "")}");
+                    }
+
+                    // If we are not mocking data, or if the mock data is not yet available
+                    if (PnPContext.Mode != TestMode.Mock)
+                    {
+#endif
+                        // Ensure the request contains authentication information
+                        var graphBaseUri = PnPConstants.MicrosoftGraphBaseUri;
+
+                        if (PnPContext.Environment.HasValue)
+                        {
+                            graphBaseUri = new Uri($"https://{CloudManager.GetMicrosoftGraphAuthority(PnPContext.Environment.Value)}/");
+                        }
+
+                        await PnPContext.AuthenticationProvider.AuthenticateRequestAsync(graphBaseUri, request).ConfigureAwait(false);
+
+                        // Send the request
+                        HttpResponseMessage response = await PnPContext.GraphClient.Client.SendAsync(request, HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false);
+
+                        // Process the request response
+                        if (response.IsSuccessStatusCode)
+                        {
+                            // Get the response string, using HttpCompletionOption.ResponseHeadersRead and ReadAsStreamAsync to lower the memory
+                            // pressure when processing larger responses + performance is better
+                            Stream requestResponseStream = await response.Content.ReadAsStreamAsync().ConfigureAwait(false);
+
+#if DEBUG
+                            if (PnPContext.Mode == TestMode.Record && !graphRequest.ApiCall.StreamResponse)
+                            {
+                                // Call out to the rewrite handler if that one is connected
+                                if (MockingFileRewriteHandler != null)
+                                {
+                                    string responseStringContent = null;
+                                    if (response.StatusCode == HttpStatusCode.NoContent)
+                                    {
+                                        responseStringContent = "";
+                                    }
+                                    else
+                                    {
+                                        using (var streamReader = new StreamReader(requestResponseStream))
+                                        {
+                                            string requestResponse = await streamReader.ReadToEndAsync().ConfigureAwait(false);
+                                            responseStringContent = requestResponse;
+                                        }
+                                    }
+
+                                    var mockedRewrittenFileString = MockingFileRewriteHandler(responseStringContent);
+                                    requestResponseStream = mockedRewrittenFileString.AsStream();
+                                }
+
+                                // Write response
+                                TestManager.RecordResponse(PnPContext, batchKey, ref requestResponseStream, response.IsSuccessStatusCode, (int)response.StatusCode, MicrosoftGraphResposeHeadersToPropagate(response?.Headers));
+                            }
+#endif
+                            await ProcessMicrosoftGraphInteractiveResponse(graphRequest, response.StatusCode, MicrosoftGraphResposeHeadersToPropagate(response?.Headers), requestResponseStream).ConfigureAwait(false);
+
+                        }
+                        else
+                        {
+                            string errorContent = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+#if DEBUG
+                            if (PnPContext.Mode == TestMode.Record)
+                            {
+                                // Write response
+                                TestManager.RecordResponse(PnPContext, batchKey, errorContent, response.IsSuccessStatusCode, (int)response.StatusCode, MicrosoftGraphResposeHeadersToPropagate(response?.Headers));
+                            }
+#endif
+
+                            // Something went wrong...
+                            throw new MicrosoftGraphServiceException(
+                                ErrorType.GraphServiceError, 
+                                (int)response.StatusCode,
+                                errorContent);
+                        }
+#if DEBUG
+                    }
+                    else
+                    {
+                        var testResponse = TestManager.MockResponse(PnPContext, batchKey);
+
+                        if (!testResponse.IsSuccessStatusCode)
+                        {
+                            throw new MicrosoftGraphServiceException(ErrorType.GraphServiceError,
+                                   testResponse.StatusCode,
+                                   testResponse.Response);
+                        }
+
+                        await ProcessMicrosoftGraphInteractiveResponse(graphRequest, (HttpStatusCode)testResponse.StatusCode, testResponse.Headers, testResponse.Response.AsStream()).ConfigureAwait(false);
+                    }
+#endif
+                    // Mark batch as executed
+                    batch.Executed = true;
+                }
+            }
+            finally
+            {
+                if (content != null)
+                {
+                    content.Dispose();
+                }
+                if (binaryContent != null)
+                {
+                    binaryContent.Dispose();
+                }
+            }
+        }
+
+        private static async Task ProcessMicrosoftGraphInteractiveResponse(BatchRequest graphRequest, HttpStatusCode statusCode, Dictionary<string, string> responseHeaders, Stream responseContent)
+        {
+            // If a binary response content is expected
+            if (graphRequest.ApiCall.ExpectBinaryResponse)
+            {
+                // Add it to the request and stop processing the response
+                graphRequest.AddResponse(responseContent, statusCode);
+                return;
+            }
+
+            string responseStringContent = null;
+            if (statusCode == HttpStatusCode.NoContent)
+            {
+                responseStringContent = "";
+            }
+            else
+            {
+                using (var streamReader = new StreamReader(responseContent))
+                {
+                    string requestResponse = await streamReader.ReadToEndAsync().ConfigureAwait(false);
+                    responseStringContent = requestResponse;
+                }
+            }
+
+            // Run request modules if they're connected
+            if (graphRequest.RequestModules != null && graphRequest.RequestModules.Count > 0)
+            {
+                responseStringContent = ExecuteMicrosoftGraphRequestModulesOnResponse(statusCode, responseHeaders, graphRequest, responseStringContent);
+            }
+
+            // Store the response for further processing
+            graphRequest.AddResponse(responseStringContent, statusCode, responseHeaders);
+
+            // Commit succesful updates in our model
+            if (graphRequest.Method == new HttpMethod("PATCH") || graphRequest.ApiCall.Commit)
+            {
+                if (graphRequest.Model is TransientObject)
+                {
+                    graphRequest.Model.Commit();
+                }
+            }
+
+            // Update our model by processing the "delete"
+            if (graphRequest.Method == HttpMethod.Delete)
+            {
+                if (graphRequest.Model is TransientObject)
+                {
+                    graphRequest.Model.RemoveFromParentCollection();
+                }
+            }
+
+            if (!string.IsNullOrEmpty(graphRequest.ResponseJson))
+            {
+                // A raw request does not require loading of the response into the model
+                if (!graphRequest.ApiCall.RawRequest)
+                {
+                    await JsonMappingHelper.MapJsonToModel(graphRequest).ConfigureAwait(false);
+                }
+            }
+        }
+
         #endregion
 
         #region SharePoint REST batching
@@ -996,113 +1258,125 @@ namespace PnP.Core.Services
             // Execute the batches
             foreach (var restBatch in restBatches)
             {
-                // A batch can contain more than the maximum number of items in a SharePoint batch, so if needed breakup a batch in multiple batches
-                var splitRestBatches = SharePointRestBatchSplittingBySize(restBatch);
-
-                foreach (var splitRestBatch in splitRestBatches)
+                // If there's only one request in the batch then we don't need to use batching to execute the request. 
+                // Non batched executions can use network payload compression, hence we skip batching for single requests.
+                
+                // If the code explicitely used a batch method than honor that as otherwise we would have breaking changes
+                if (restBatch.Batch.Requests.Count == 1 && restBatch.Batch.Requests.First().Value.ApiCall.RawSingleResult == null 
+                                                        && restBatch.Batch.Requests.First().Value.ApiCall.RawEnumerableResult == null)
                 {
+                    await ExecuteSharePointRestInteractiveAsync(restBatch.Batch).ConfigureAwait(false);
+                }
+                else
+                {
+                    // A batch can contain more than the maximum number of items in a SharePoint batch, so if needed breakup a batch in multiple batches
+                    var splitRestBatches = SharePointRestBatchSplittingBySize(restBatch);
 
-                    (string requestBody, string requestKey) = BuildSharePointRestBatchRequestContent(splitRestBatch.Batch);
-
-                    PnPContext.Logger.LogDebug(requestBody);
-
-                    // Make the batch call
-                    using StringContent content = new StringContent(requestBody);
-                    using (var request = new HttpRequestMessage(HttpMethod.Post, $"{splitRestBatch.Site.ToString().TrimEnd(new char[] { '/' })}/_api/$batch"))
+                    foreach (var splitRestBatch in splitRestBatches)
                     {
-                        // Remove the default Content-Type content header
-                        if (content.Headers.Contains("Content-Type"))
+
+                        (string requestBody, string requestKey) = BuildSharePointRestBatchRequestContent(splitRestBatch.Batch);
+
+                        PnPContext.Logger.LogDebug(requestBody);
+
+                        // Make the batch call
+                        using StringContent content = new StringContent(requestBody);
+                        using (var request = new HttpRequestMessage(HttpMethod.Post, $"{splitRestBatch.Site.ToString().TrimEnd(new char[] { '/' })}/_api/$batch"))
                         {
-                            content.Headers.Remove("Content-Type");
-                        }
-                        // Add the batch Content-Type header
-                        content.Headers.Add($"Content-Type", $"multipart/mixed; boundary=batch_{splitRestBatch.Batch.Id}");
-
-                        // Connect content to request
-                        request.Content = content;
-
-#if DEBUG
-                        // Test recording
-                        if (PnPContext.Mode == TestMode.Record && PnPContext.GenerateTestMockingDebugFiles)
-                        {
-                            // Write request
-                            TestManager.RecordRequest(PnPContext, requestKey, content.ReadAsStringAsync().Result);
-                        }
-
-                        // If we are not mocking or if there is no mock data
-                        if (PnPContext.Mode != TestMode.Mock)
-                        {
-#endif
-                            // Process the authentication headers using the currently
-                            // configured instance of IAuthenticationProvider
-                            await ProcessSharePointRestAuthentication(splitRestBatch.Site, request).ConfigureAwait(false);
-
-                            // Send the request
-                            HttpResponseMessage response = await PnPContext.RestClient.Client.SendAsync(request, HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false);
-
-                            try
+                            // Remove the default Content-Type content header
+                            if (content.Headers.Contains("Content-Type"))
                             {
-                                // Process the request response
-                                if (response.IsSuccessStatusCode)
-                                {
-                                    // Get the response string, using HttpCompletionOption.ResponseHeadersRead and ReadAsStreamAsync to lower the memory
-                                    // pressure when processing larger responses + performance is better
-                                    using (Stream streamToReadFrom = await response.Content.ReadAsStreamAsync().ConfigureAwait(false))
-                                    {
-                                        using (StreamReader reader = new StreamReader(streamToReadFrom))
-                                        {
-                                            string batchResponse = await reader.ReadToEndAsync().ConfigureAwait(false);
-#if DEBUG
-                                            if (PnPContext.Mode == TestMode.Record)
-                                            {
-                                                // Call out to the rewrite handler if that one is connected
-                                                if (MockingFileRewriteHandler != null)
-                                                {
-                                                    batchResponse = MockingFileRewriteHandler(batchResponse);
-                                                }
+                                content.Headers.Remove("Content-Type");
+                            }
+                            // Add the batch Content-Type header
+                            content.Headers.Add($"Content-Type", $"multipart/mixed; boundary=batch_{splitRestBatch.Batch.Id}");
 
-                                                // Write response
-                                                TestManager.RecordResponse(PnPContext, requestKey, batchResponse);
-                                            }
+                            // Connect content to request
+                            request.Content = content;
+
+#if DEBUG
+                            // Test recording
+                            if (PnPContext.Mode == TestMode.Record && PnPContext.GenerateTestMockingDebugFiles)
+                            {
+                                // Write request
+                                TestManager.RecordRequest(PnPContext, requestKey, content.ReadAsStringAsync().Result);
+                            }
+
+                            // If we are not mocking or if there is no mock data
+                            if (PnPContext.Mode != TestMode.Mock)
+                            {
+#endif
+                                // Process the authentication headers using the currently
+                                // configured instance of IAuthenticationProvider
+                                await ProcessSharePointRestAuthentication(splitRestBatch.Site, request).ConfigureAwait(false);
+
+                                // Send the request
+                                HttpResponseMessage response = await PnPContext.RestClient.Client.SendAsync(request, HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false);
+
+                                try
+                                {
+                                    // Process the request response
+                                    if (response.IsSuccessStatusCode)
+                                    {
+                                        // Get the response string, using HttpCompletionOption.ResponseHeadersRead and ReadAsStreamAsync to lower the memory
+                                        // pressure when processing larger responses + performance is better
+                                        using (Stream streamToReadFrom = await response.Content.ReadAsStreamAsync().ConfigureAwait(false))
+                                        {
+                                            using (StreamReader reader = new StreamReader(streamToReadFrom))
+                                            {
+                                                string batchResponse = await reader.ReadToEndAsync().ConfigureAwait(false);
+#if DEBUG
+                                                if (PnPContext.Mode == TestMode.Record)
+                                                {
+                                                    // Call out to the rewrite handler if that one is connected
+                                                    if (MockingFileRewriteHandler != null)
+                                                    {
+                                                        batchResponse = MockingFileRewriteHandler(batchResponse);
+                                                    }
+
+                                                    // Write response
+                                                    TestManager.RecordResponse(PnPContext, requestKey, batchResponse, response.IsSuccessStatusCode, (int)response.StatusCode, SpoRestResposeHeadersToPropagate(response?.Headers));
+                                                }
 #endif
 
-                                            await ProcessSharePointRestBatchResponse(splitRestBatch, batchResponse, response.Headers).ConfigureAwait(false);
+                                                await ProcessSharePointRestBatchResponse(splitRestBatch, batchResponse, SpoRestResposeHeadersToPropagate(response?.Headers)).ConfigureAwait(false);
+                                            }
                                         }
                                     }
+                                    else
+                                    {
+                                        // Something went wrong...
+                                        throw new SharePointRestServiceException(ErrorType.SharePointRestServiceError,
+                                            (int)response.StatusCode,
+                                            await response.Content.ReadAsStringAsync().ConfigureAwait(false),
+                                            SpoRestResposeHeadersToPropagate(response.Headers));
+                                    }
                                 }
-                                else
+                                finally
                                 {
-                                    // Something went wrong...
-                                    throw new SharePointRestServiceException(ErrorType.SharePointRestServiceError, 
-                                        (int)response.StatusCode, 
-                                        await response.Content.ReadAsStringAsync().ConfigureAwait(false), 
-                                        SpoRestResposeHeadersToPropagate(response.Headers));
+                                    response.Dispose();
                                 }
-                            }
-                            finally
-                            {
-                                response.Dispose();
-                            }
 #if DEBUG
-                        }
-                        else
-                        {
-                            string batchResponse = TestManager.MockResponse(PnPContext, requestKey);
+                            }
+                            else
+                            {
+                                var testResponse = TestManager.MockResponse(PnPContext, requestKey);
 
-                            await ProcessSharePointRestBatchResponse(splitRestBatch, batchResponse, null).ConfigureAwait(false);
-                        }
+                                await ProcessSharePointRestBatchResponse(splitRestBatch, testResponse.Response, testResponse.Headers).ConfigureAwait(false);
+                            }
 #endif
 
-                        // Mark batch as executed
-                        splitRestBatch.Batch.Executed = true;
+                            // Mark batch as executed
+                            splitRestBatch.Batch.Executed = true;
 
-                        // Copy the results collection to the upper batch
-                        restBatch.Batch.Results.AddRange(splitRestBatch.Batch.Results);
+                            // Copy the results collection to the upper batch
+                            restBatch.Batch.Results.AddRange(splitRestBatch.Batch.Results);
+                        }
                     }
-                }
 
-                // Copy the results collection to the upper batch
-                batch.Results.AddRange(restBatch.Batch.Results);
+                    // Copy the results collection to the upper batch
+                    batch.Results.AddRange(restBatch.Batch.Results);
+                }
             }
 
             // Mark the original (non split) batch as complete
@@ -1138,12 +1412,28 @@ namespace PnP.Core.Services
                 Dictionary<string, string> headers = new Dictionary<string, string>();
                 if (request.Method == HttpMethod.Get)
                 {
-                    headers.Add("Accept", "application/json;odata=verbose");
+                    headers.Add("Accept", "application/json;odata=nometadata");
                 }
                 else if (request.Method == new HttpMethod("PATCH") || request.Method == HttpMethod.Post || request.Method == HttpMethod.Delete)
                 {
-                    headers.Add("Accept", "application/json;odata=verbose");
+                    headers.Add("Accept", "application/json;odata=nometadata");
                     headers.Add("Content-Type", "application/json;odata=verbose");
+                }
+
+                if (request.ApiCall.Headers != null && request.ApiCall.Headers.Count > 0)
+                {
+                    foreach (var key in request.ApiCall.Headers.Keys)
+                    {
+                        string existingKey = headers.Keys.FirstOrDefault(k => k.Equals(key, StringComparison.InvariantCultureIgnoreCase));
+                        if (string.IsNullOrWhiteSpace(existingKey))
+                        {
+                            headers.Add(key, request.ApiCall.Headers[key]);
+                        }
+                        else
+                        {
+                            headers[existingKey] = request.ApiCall.Headers[key];
+                        }
+                    }
                 }
 
                 string requestUrl = request.ApiCall.Request;
@@ -1241,7 +1531,7 @@ namespace PnP.Core.Services
         /// <param name="batchResponse">The raw content of the response</param>
         /// <param name="headers">Batch request response headers</param>
         /// <returns></returns>
-        private async Task ProcessSharePointRestBatchResponse(SPORestBatch restBatch, string batchResponse, HttpResponseHeaders headers)
+        private async Task ProcessSharePointRestBatchResponse(SPORestBatch restBatch, string batchResponse, Dictionary<string, string> headers)
         {
             using (var tracer = Tracer.Track(PnPContext.Logger, "ExecuteSharePointRestBatchAsync-JSONToModel"))
             {
@@ -1273,8 +1563,8 @@ namespace PnP.Core.Services
         /// </summary>
         /// <param name="batch">Batch that we're processing</param>
         /// <param name="batchResponse">Batch response received from the server</param>
-        /// <param name="headers">Batch request response headers</param>
-        private static void ProcessSharePointRestBatchResponseContent(Batch batch, string batchResponse, HttpResponseHeaders headers)
+        /// <param name="responseHeadersToPropagate">Batch request response headers</param>
+        private static void ProcessSharePointRestBatchResponseContent(Batch batch, string batchResponse, Dictionary<string, string> responseHeadersToPropagate)
         {
 #if !NET5_0_OR_GREATER
             var responseLines = batchResponse.Split(new char[] { '\n' });
@@ -1283,8 +1573,7 @@ namespace PnP.Core.Services
             var httpStatusCode = HttpStatusCode.Continue;
 
             bool responseContentOpen = false;
-            bool collectHeaders = false;
-            Dictionary<string,string> responseHeadersToPropagate = SpoRestResposeHeadersToPropagate(headers);
+            bool collectHeaders = false;            
 
             Dictionary<string, string> responseHeaders = new Dictionary<string, string>(responseHeadersToPropagate);
             StringBuilder responseContent = new StringBuilder();
@@ -1510,6 +1799,22 @@ namespace PnP.Core.Services
                 string requestBody = restRequest.ApiCall.JsonBody;
                 Dictionary<string, string> headers = new Dictionary<string, string>();
 
+                if (restRequest.ApiCall.Headers != null && restRequest.ApiCall.Headers.Count > 0)
+                {
+                    foreach (var key in restRequest.ApiCall.Headers.Keys)
+                    {
+                        string existingKey = headers.Keys.FirstOrDefault(k => k.Equals(key, StringComparison.InvariantCultureIgnoreCase));
+                        if (string.IsNullOrWhiteSpace(existingKey))
+                        {
+                            headers.Add(key, restRequest.ApiCall.Headers[key]);
+                        }
+                        else
+                        {
+                            headers[existingKey] = restRequest.ApiCall.Headers[key];
+                        }
+                    }
+                }
+
                 // Run request modules if they're connected
                 if (restRequest.RequestModules != null && restRequest.RequestModules.Count > 0)
                 {
@@ -1546,11 +1851,21 @@ namespace PnP.Core.Services
                         request.Headers.Add($"binarystringresponsebody", "true");
                     }
 
+                    if (request.Method == HttpMethod.Delete || request.Method == HttpMethod.Post || request.Method == new HttpMethod("PATCH"))
+                    {
+                        request.Headers.Add("If-Match", "*");
+                    }
+
                     // Add extra headers
                     foreach (var extraHeader in headers)
                     {
                         if (!request.Headers.Contains(extraHeader.Key))
                         {
+                            request.Headers.Add(extraHeader.Key, extraHeader.Value);
+                        }
+                        else
+                        {
+                            request.Headers.Remove(extraHeader.Key);
                             request.Headers.Add(extraHeader.Key, extraHeader.Value);
                         }
                     }
@@ -1614,34 +1929,63 @@ namespace PnP.Core.Services
                                 // Call out to the rewrite handler if that one is connected
                                 if (MockingFileRewriteHandler != null)
                                 {
-                                    var mockedRewrittenFileString = MockingFileRewriteHandler(requestResponseStream.CopyAsString());
+                                    string responseStringContent = null;
+                                    if (response.StatusCode == HttpStatusCode.NoContent)
+                                    {
+                                        responseStringContent = "";
+                                    }
+                                    else
+                                    {
+                                        using (var streamReader = new StreamReader(requestResponseStream))
+                                        {
+                                            string requestResponse = await streamReader.ReadToEndAsync().ConfigureAwait(false);
+                                            responseStringContent = requestResponse;
+                                        }
+                                    }
+
+                                    var mockedRewrittenFileString = MockingFileRewriteHandler(responseStringContent);
                                     requestResponseStream = mockedRewrittenFileString.AsStream();
                                 }
 
                                 // Write response
-                                TestManager.RecordResponse(PnPContext, batchKey, requestResponseStream);
+                                TestManager.RecordResponse(PnPContext, batchKey, ref requestResponseStream, response.IsSuccessStatusCode, (int)response.StatusCode, SpoRestResposeHeadersToPropagate(response?.Headers));
                             }
 #endif
 
-                            await ProcessSharePointRestInteractiveResponse(restRequest, response.StatusCode, response, requestResponseStream).ConfigureAwait(false);
+                            await ProcessSharePointRestInteractiveResponse(restRequest, response.StatusCode, SpoRestResposeHeadersToPropagate(response?.Headers), requestResponseStream).ConfigureAwait(false);
 
                         }
                         else
                         {
+                            string errorContent = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+#if DEBUG
+                            if (PnPContext.Mode == TestMode.Record)
+                            {
+                                // Write response
+                                TestManager.RecordResponse(PnPContext, batchKey, errorContent, response.IsSuccessStatusCode, (int)response.StatusCode, SpoRestResposeHeadersToPropagate(response?.Headers));
+                            }
+#endif
                             // Something went wrong...
                             throw new SharePointRestServiceException(ErrorType.SharePointRestServiceError, 
-                                (int)response.StatusCode, 
-                                await response.Content.ReadAsStringAsync().ConfigureAwait(false),
-                                SpoRestResposeHeadersToPropagate(response.Headers));
+                                                                        (int)response.StatusCode,
+                                                                        errorContent,
+                                                                        SpoRestResposeHeadersToPropagate(response.Headers));
                         }
 #if DEBUG
                     }
                     else
                     {
-                        var requestResponseStream = TestManager.MockResponseAsStream(PnPContext, batchKey);
+                        var testResponse = TestManager.MockResponse(PnPContext, batchKey);
 
-                        // TODO: get status code from recorded response file
-                        await ProcessSharePointRestInteractiveResponse(restRequest, HttpStatusCode.OK, null, requestResponseStream).ConfigureAwait(false);
+                        if (!testResponse.IsSuccessStatusCode)
+                        {
+                            throw new SharePointRestServiceException(ErrorType.SharePointRestServiceError,
+                                   testResponse.StatusCode,
+                                   testResponse.Response,
+                                   testResponse.Headers);
+                        }
+
+                        await ProcessSharePointRestInteractiveResponse(restRequest, (HttpStatusCode)testResponse.StatusCode, testResponse.Headers, testResponse.Response.AsStream()).ConfigureAwait(false);
                     }
 #endif
 
@@ -1662,7 +2006,7 @@ namespace PnP.Core.Services
             }
         }
 
-        private static async Task ProcessSharePointRestInteractiveResponse(BatchRequest restRequest, HttpStatusCode statusCode, HttpResponseMessage response, Stream responseContent)
+        private static async Task ProcessSharePointRestInteractiveResponse(BatchRequest restRequest, HttpStatusCode statusCode, Dictionary<string, string> responseHeaders, Stream responseContent)
         {
             // If a binary response content is expected
             if (restRequest.ApiCall.ExpectBinaryResponse)
@@ -1686,9 +2030,6 @@ namespace PnP.Core.Services
                     responseStringContent = requestResponse;
                 }
             }
-
-            // Process response headers
-            Dictionary<string, string> responseHeaders = SpoRestResposeHeadersToPropagate(response?.Headers);
 
             // Run request modules if they're connected
             if (restRequest.RequestModules != null && restRequest.RequestModules.Count > 0)
@@ -1859,7 +2200,7 @@ namespace PnP.Core.Services
                                                     }
 
                                                     // Write response
-                                                    TestManager.RecordResponse(PnPContext, requestKey, batchResponse);
+                                                    TestManager.RecordResponse(PnPContext, requestKey, batchResponse, response.IsSuccessStatusCode, (int)response.StatusCode, SpoRestResposeHeadersToPropagate(response?.Headers));
                                                 }
 #endif
 
@@ -1869,11 +2210,20 @@ namespace PnP.Core.Services
                                     }
                                     else
                                     {
+
+                                        string errorContent = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+#if DEBUG
+                                        if (PnPContext.Mode == TestMode.Record)
+                                        {
+                                            // Write response
+                                            TestManager.RecordResponse(PnPContext, requestKey, errorContent, response.IsSuccessStatusCode, (int)response.StatusCode, SpoRestResposeHeadersToPropagate(response?.Headers));
+                                        }
+#endif
                                         // Something went wrong...
-                                        throw new SharePointRestServiceException(ErrorType.SharePointRestServiceError, 
-                                            (int)response.StatusCode, 
-                                            await response.Content.ReadAsStringAsync().ConfigureAwait(false),
-                                            SpoRestResposeHeadersToPropagate(response.Headers));
+                                        throw new SharePointRestServiceException(ErrorType.SharePointRestServiceError,
+                                                                                    (int)response.StatusCode,
+                                                                                    errorContent,
+                                                                                    SpoRestResposeHeadersToPropagate(response.Headers));
                                     }
                                 }
                                 finally
@@ -1884,9 +2234,17 @@ namespace PnP.Core.Services
                             }
                             else
                             {
-                                string batchResponse = TestManager.MockResponse(PnPContext, requestKey);
+                                var testResponse = TestManager.MockResponse(PnPContext, requestKey);
 
-                                ProcessCsomBatchResponse(csomBatch, batchResponse, HttpStatusCode.OK);
+                                if (!testResponse.IsSuccessStatusCode)
+                                {
+                                    throw new SharePointRestServiceException(ErrorType.SharePointRestServiceError,
+                                           testResponse.StatusCode,
+                                           testResponse.Response,
+                                           testResponse.Headers);
+                                }
+
+                                ProcessCsomBatchResponse(csomBatch, testResponse.Response, (HttpStatusCode)testResponse.StatusCode);
                             }
 #endif
 

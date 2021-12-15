@@ -1,9 +1,0 @@
---batchresponse_defced22-5928-4dce-a192-2b0abd32d11e
-Content-Type: application/http
-Content-Transfer-Encoding: binary
-
-HTTP/1.1 200 OK
-CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
-
-{"d":{"Deploy":null}}
---batchresponse_defced22-5928-4dce-a192-2b0abd32d11e--

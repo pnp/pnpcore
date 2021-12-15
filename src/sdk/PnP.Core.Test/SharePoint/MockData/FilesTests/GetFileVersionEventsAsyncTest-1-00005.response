@@ -1,9 +1,0 @@
---batchresponse_76126707-66ac-40a6-bf29-49dd12006f70
-Content-Type: application/http
-Content-Transfer-Encoding: binary
-
-HTTP/1.1 200 OK
-CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
-
-{"d":{"CheckOut":null}}
---batchresponse_76126707-66ac-40a6-bf29-49dd12006f70--

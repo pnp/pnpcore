@@ -79,7 +79,7 @@ namespace PnP.Core
 
         private void ParseError(JsonElement error)
         {
-            if (error.TryGetProperty("error", out JsonElement errorData))
+            if (error.TryGetProperty("odata.error", out JsonElement errorData))
             {
                 // enumerate the properties in the error 
                 foreach (var errorField in errorData.EnumerateObject())

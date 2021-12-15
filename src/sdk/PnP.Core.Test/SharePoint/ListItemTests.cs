@@ -3226,7 +3226,7 @@ namespace PnP.Core.Test.SharePoint
                 IField addedNumberField1 = await list.Fields.AddNumberBatchAsync("TestNumberField", new FieldNumberOptions()
                 {
                     Group = fieldGroup,
-                    AddToDefaultView = true,
+                    AddToDefaultView = true
                 });
                 await context.ExecuteAsync();
 
@@ -3277,7 +3277,7 @@ namespace PnP.Core.Test.SharePoint
                     Assert.IsFalse(string.IsNullOrWhiteSpace(listItem.ContentType.Name));
                     Assert.IsFalse(listItem.ContentType.Sealed);
 
-                    Assert.AreEqual(10, listItem.Values["TestNumberField"]);
+                    Assert.AreEqual(10.0, listItem.Values["TestNumberField"]);
                     Assert.AreEqual(true, listItem.Values["TestBoolField"]);
                     Assert.AreEqual("This is my test", listItem.Values["TestStringField"]);
                 }

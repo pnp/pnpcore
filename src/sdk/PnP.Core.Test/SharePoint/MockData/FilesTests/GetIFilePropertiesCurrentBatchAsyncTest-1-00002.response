@@ -1,9 +1,0 @@
---batchresponse_91d51e7e-3049-4de1-a1b5-1c53d8a5f874
-Content-Type: application/http
-Content-Transfer-Encoding: binary
-
-HTTP/1.1 200 OK
-CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
-
-{"d":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-2/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/prov-2/Shared Documents/PNP_SDK_TEST_GetIFilePropertiesCurrentBatchAsyncTest.docx')","uri":"https://bertonline.sharepoint.com/sites/prov-2/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/prov-2/Shared%20Documents/PNP_SDK_TEST_GetIFilePropertiesCurrentBatchAsyncTest.docx')","type":"SP.File"},"HasAlternateContentStreams":false,"Length":"17824","ServerRedirectedUrl":"https://bertonline.sharepoint.com/sites/prov-2/_layouts/15/Doc.aspx?sourcedoc=%7BFD12E8BC-466B-4319-8F1B-5C6BC0D11BD6%7D&file=PNP_SDK_TEST_GetIFilePropertiesCurrentBatchAsyncTest.docx&action=default&mobileredirect=true","UniqueId":"fd12e8bc-466b-4319-8f1b-5c6bc0d11bd6","VroomDriveID":"b!QJ4v-RAR70OqDggi4T-3uoakmSzJ1ktKjW-p-qNkySxwbjITulgOTpswCBifIdVV","VroomItemID":"01O2ADSGN45AJP222GDFBY6G24NPANCG6W"}}
---batchresponse_91d51e7e-3049-4de1-a1b5-1c53d8a5f874--

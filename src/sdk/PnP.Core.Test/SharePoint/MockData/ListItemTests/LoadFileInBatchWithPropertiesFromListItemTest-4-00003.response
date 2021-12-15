@@ -1,9 +1,0 @@
---batchresponse_cda3d260-46ae-4f70-b8fa-307a301afc1e
-Content-Type: application/http
-Content-Transfer-Encoding: binary
-
-HTTP/1.1 200 OK
-CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
-
-
---batchresponse_cda3d260-46ae-4f70-b8fa-307a301afc1e--

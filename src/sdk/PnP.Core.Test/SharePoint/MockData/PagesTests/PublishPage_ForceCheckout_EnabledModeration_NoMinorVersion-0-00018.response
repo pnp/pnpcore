@@ -1,9 +1,0 @@
---batchresponse_a9620d53-fae8-4087-b202-dcfabc932ce4
-Content-Type: application/http
-Content-Transfer-Encoding: binary
-
-HTTP/1.1 200 OK
-CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
-
-
---batchresponse_a9620d53-fae8-4087-b202-dcfabc932ce4--

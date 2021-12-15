@@ -1,9 +1,0 @@
---batchresponse_2a5be1fd-5f17-4edd-8e3c-0072b5e9a48b
-Content-Type: application/http
-Content-Transfer-Encoding: binary
-
-HTTP/1.1 200 OK
-CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
-
-{"d":{"__metadata":{"id":"https://m365x790252.sharepoint.com/sites/pnpcoresdktestgroup/_api/web/lists/getbyid(guid'84c3d851-b4f0-4c9f-a3b2-a0479a02e811')/Subscriptions(guid'9ec660b8-fe03-4709-91d1-83e5109f41a7')","uri":"https://m365x790252.sharepoint.com/sites/pnpcoresdktestgroup/_api/web/lists/getbyid(guid'84c3d851-b4f0-4c9f-a3b2-a0479a02e811')/Subscriptions(guid'9ec660b8-fe03-4709-91d1-83e5109f41a7')","type":"Microsoft.SharePoint.Webhooks.Subscription"},"expirationDateTime":"2021-11-16T17:34:10.5318014Z","id":"9ec660b8-fe03-4709-91d1-83e5109f41a7"}}
---batchresponse_2a5be1fd-5f17-4edd-8e3c-0072b5e9a48b--

@@ -1,9 +1,0 @@
---batchresponse_8557b71f-9c15-4a9b-b2fb-124548b16233
-Content-Type: application/http
-Content-Transfer-Encoding: binary
-
-HTTP/1.1 200 OK
-CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
-
-{"d":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-2/permissionwebbatch/_api/Web","uri":"https://bertonline.sharepoint.com/sites/prov-2/permissionwebbatch/_api/Web","type":"SP.Web"},"RoleAssignments":{"results":[{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-2/permissionwebbatch/_api/Web/RoleAssignments/GetByPrincipalId(11)","uri":"https://bertonline.sharepoint.com/sites/prov-2/permissionwebbatch/_api/Web/RoleAssignments/GetByPrincipalId(11)","type":"SP.RoleAssignment"},"RoleDefinitionBindings":{"results":[{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-2/permissionwebbatch/_api/Web/RoleDefinitions(1073741829)","uri":"https://bertonline.sharepoint.com/sites/prov-2/permissionwebbatch/_api/Web/RoleDefinitions(1073741829)","type":"SP.RoleDefinition"},"BasePermissions":{"__metadata":{"type":"SP.BasePermissions"},"High":"2147483647","Low":"4294967295"},"Description":"Has full control.","Hidden":false,"Id":1073741829,"Name":"Full Control","Order":1,"RoleTypeKind":5}]},"PrincipalId":11}]},"HasUniqueRoleAssignments":true,"Id":"80186b99-3e31-4060-8093-4caaea52c83c"}}
---batchresponse_8557b71f-9c15-4a9b-b2fb-124548b16233--

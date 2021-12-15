@@ -42,13 +42,11 @@ namespace PnP.Core.Model.SharePoint
             var response = await RawRequestAsync(apiCall, HttpMethod.Get).ConfigureAwait(false);
             var document = JsonSerializer.Deserialize<JsonElement>(response.Json);
 
-            var modelJson = document.Get("d");
-
             var entityInfo = EntityManager.Instance.GetStaticClassInfo(typeof(FollowingInfo));
             var socialInfo = new FollowingInfo();
-            await JsonMappingHelper.FromJson(socialInfo, entityInfo, new ApiResponse(apiCall, modelJson.Value, Guid.Empty)).ConfigureAwait(false);
+            await JsonMappingHelper.FromJson(socialInfo, entityInfo, new ApiResponse(apiCall, document, Guid.Empty)).ConfigureAwait(false);
 
-            var socialActorNode = modelJson.Value.Get(nameof(socialInfo.SocialActor));
+            var socialActorNode = document.Get(nameof(socialInfo.SocialActor));
             if (socialActorNode != null)
             {
                 var socialActor = new SocialActor();
@@ -74,10 +72,9 @@ namespace PnP.Core.Model.SharePoint
 
         public async Task<bool> AmIFollowedByAsync(string accountName)
         {
-            var methodName = "AmIFollowedBy";
-            var baseUrl = $"_api/SP.UserProfiles.PeopleManager/{methodName}(accountName='{HttpUtility.UrlEncode(accountName)}')";
+            var baseUrl = $"_api/SP.UserProfiles.PeopleManager/AmIFollowedBy(accountName='{HttpUtility.UrlEncode(accountName)}')";
 
-            return bool.Parse(await GetSingleResult(baseUrl, methodName).ConfigureAwait(false));
+            return bool.Parse(await GetSingleResult(baseUrl).ConfigureAwait(false));
         }
 
         public bool AmIFollowedBy(string accountName)
@@ -87,10 +84,9 @@ namespace PnP.Core.Model.SharePoint
 
         public async Task<bool> AmIFollowingAsync(string accountName)
         {
-            var methodName = "AmIFollowing";
-            var baseUrl = $"_api/SP.UserProfiles.PeopleManager/{methodName}(accountName='{HttpUtility.UrlEncode(accountName)}')";
+            var baseUrl = $"_api/SP.UserProfiles.PeopleManager/AmIFollowing(accountName='{HttpUtility.UrlEncode(accountName)}')";
 
-            return bool.Parse(await GetSingleResult(baseUrl, methodName).ConfigureAwait(false));
+            return bool.Parse(await GetSingleResult(baseUrl).ConfigureAwait(false));
         }
 
         public bool AmIFollowing(string accountName)
@@ -105,10 +101,9 @@ namespace PnP.Core.Model.SharePoint
 
         public async Task<SocialFollowResult> FollowAsync(FollowData request)
         {
-            var methodName = "Follow";
-            var baseUrl = $"{Uri}/{methodName}{BuildFollowUrl(request)}";
+            var baseUrl = $"{Uri}/Follow{BuildFollowUrl(request)}";
 
-            var result = int.Parse(await GetSingleResult(baseUrl, methodName).ConfigureAwait(false));
+            var result = int.Parse(await GetSingleResult(baseUrl).ConfigureAwait(false));
 
             return (SocialFollowResult)result;
         }
@@ -120,10 +115,9 @@ namespace PnP.Core.Model.SharePoint
 
         public async Task StopFollowingAsync(FollowData request)
         {
-            var methodName = "StopFollowing";
-            var baseUrl = $"{Uri}/{methodName}{BuildFollowUrl(request)}";
+            var baseUrl = $"{Uri}/StopFollowing{BuildFollowUrl(request)}";
 
-            await GetSingleResult(baseUrl, methodName).ConfigureAwait(false);
+            await GetSingleResult(baseUrl).ConfigureAwait(false);
         }
 
         public bool IsFollowed(FollowData request)
@@ -133,10 +127,9 @@ namespace PnP.Core.Model.SharePoint
 
         public async Task<bool> IsFollowedAsync(FollowData request)
         {
-            var methodName = "IsFollowed";
-            var baseUrl = $"{Uri}/{methodName}{BuildFollowUrl(request)}";
+            var baseUrl = $"{Uri}/IsFollowed{BuildFollowUrl(request)}";
 
-            return bool.Parse(await GetSingleResult(baseUrl, methodName).ConfigureAwait(false));
+            return bool.Parse(await GetSingleResult(baseUrl).ConfigureAwait(false));
         }
 
         public IList<ISocialActor> FollowedByMe(SocialActorTypes types)
@@ -154,7 +147,7 @@ namespace PnP.Core.Model.SharePoint
 
             var response = await RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
 
-            return (await SocialBase<IFollowing>.ParseResultsAsync<SocialActor>(response.Json, root => root.Get("d")?.Get("Followed")?.Get("results")).ConfigureAwait(false)).Cast<ISocialActor>().ToList();
+            return (await ParseResultsAsync<SocialActor>(response.Json, root => root.Get("value")).ConfigureAwait(false)).Cast<ISocialActor>().ToList();
         }
 
         public int FollowedByMeCount(SocialActorTypes types)
@@ -174,7 +167,7 @@ namespace PnP.Core.Model.SharePoint
             var response = await RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
             var json = JsonSerializer.Deserialize<JsonElement>(response.Json);
 
-            var result = json.Get("d")?.Get(methodName);
+            var result = json.Get("value");
 
             if (result == null)
             {
@@ -199,7 +192,7 @@ namespace PnP.Core.Model.SharePoint
 
             var response = await RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
 
-            return (await SocialBase<IFollowing>.ParseResultsAsync<SocialActor>(response.Json, root => root.Get("d")?.Get("Followers")?.Get("results")).ConfigureAwait(false)).Cast<ISocialActor>().ToList();
+            return (await ParseResultsAsync<SocialActor>(response.Json, root => root.Get("value")).ConfigureAwait(false)).Cast<ISocialActor>().ToList();
         }
 
         public IList<ISocialActor> MySuggestions()
@@ -217,7 +210,7 @@ namespace PnP.Core.Model.SharePoint
 
             var response = await RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
 
-            return (await SocialBase<IFollowing>.ParseResultsAsync<SocialActor>(response.Json, root => root.Get("d")?.Get("Suggestions")?.Get("results")).ConfigureAwait(false)).Cast<ISocialActor>().ToList();
+            return (await ParseResultsAsync<SocialActor>(response.Json, root => root.Get("value")).ConfigureAwait(false)).Cast<ISocialActor>().ToList();
         }
 
         private string BuildFollowUrl(FollowData request)

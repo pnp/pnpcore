@@ -56,8 +56,8 @@ namespace PnP.Core.Services
         public string Body { get; set; }
 
         /// <summary>
-        /// The optional headers of the API call to execute - for example IF-Match for PATCH Request. Currently only supported for Graph calls.
+        /// The optional headers of the API call to execute - for example IF-Match for PATCH Request.
         /// </summary>
-        public Dictionary<string, string> Headers { get; }
+        public Dictionary<string, string> Headers { get; internal set; }
     }
 }

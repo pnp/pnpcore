@@ -702,6 +702,12 @@ namespace PnP.Core.Admin.Test.SharePoint
                         // Recycle the site collection
                         adminContext.GetSiteCollectionManager().RecycleSiteCollection(communicationSiteToCreate.Url);
 
+                        if (context.Mode == TestMode.Record)
+                        {
+                            // Add a little delay between creation and deletion
+                            await Task.Delay(TimeSpan.FromSeconds(30));
+                        }
+
                         // Verify the site collection is returned as recycled site
                         var recycledSites = adminContext.GetSiteCollectionManager().GetRecycledSiteCollections();
                         var recycledCommunicationSite = recycledSites.FirstOrDefault(c => c.Url == communicationSiteToCreate.Url);

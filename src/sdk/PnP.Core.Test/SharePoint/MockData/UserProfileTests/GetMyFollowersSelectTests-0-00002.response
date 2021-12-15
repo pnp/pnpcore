@@ -1,9 +1,0 @@
---batchresponse_73046a94-9566-46b3-92c6-c683045c3459
-Content-Type: application/http
-Content-Transfer-Encoding: binary
-
-HTTP/1.1 200 OK
-CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
-
-{"d":{"results":[{"__metadata":{"id":"https://m365x790252.sharepoint.com/sites/pnpcoresdktestgroup/_api/SP.UserProfiles.PersonProperties810010e7-ff32-42a1-8660-d8f91cee859e","uri":"https://m365x790252.sharepoint.com/sites/pnpcoresdktestgroup/_api/SP.UserProfiles.PersonProperties810010e7-ff32-42a1-8660-d8f91cee859e","type":"SP.UserProfiles.PersonProperties"},"AccountName":"i:0#.f|membership|alland@m365x790252.onmicrosoft.com","DisplayName":"Allan Deyoung"},{"__metadata":{"id":"https://m365x790252.sharepoint.com/sites/pnpcoresdktestgroup/_api/SP.UserProfiles.PersonProperties0d9e45a6-03f2-40b9-8b12-7c4da46101f6","uri":"https://m365x790252.sharepoint.com/sites/pnpcoresdktestgroup/_api/SP.UserProfiles.PersonProperties0d9e45a6-03f2-40b9-8b12-7c4da46101f6","type":"SP.UserProfiles.PersonProperties"},"AccountName":"i:0#.f|membership|alexw@m365x790252.onmicrosoft.com","DisplayName":"Alex Wilber"}]}}
---batchresponse_73046a94-9566-46b3-92c6-c683045c3459--

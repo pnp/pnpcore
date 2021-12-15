@@ -1,9 +1,0 @@
---batchresponse_f3ff36e6-f8a0-4496-8a08-9be341aeaefd
-Content-Type: application/http
-Content-Transfer-Encoding: binary
-
-HTTP/1.1 200 OK
-CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
-
-{"d":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-2/DutchTemplateWeb/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/prov-2/DutchTemplateWeb/SitePages/Templates')","uri":"https://bertonline.sharepoint.com/sites/prov-2/DutchTemplateWeb/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/prov-2/DutchTemplateWeb/SitePages/Templates')","type":"SP.Folder"},"Name":"Templates","UniqueId":"59cc9242-0b33-4f58-8f16-3a5557f3b7bd"}}
---batchresponse_f3ff36e6-f8a0-4496-8a08-9be341aeaefd--

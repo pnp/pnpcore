@@ -210,6 +210,13 @@ namespace PnP.Core.Model
             {
                 case ApiRequestType.SPORest:
                     {
+                        // Ensure external API requests keep using odata=verbose for SharePoint REST requests (see #655)
+                        if (request.Headers == null)
+                        {
+                            request.Headers = new Dictionary<string, string>();
+                        }
+                        request.Headers["Accept"] = "application/json;odata=verbose";
+
                         if (apiRequest != null && !apiRequest.StartsWith("https://", StringComparison.InvariantCultureIgnoreCase))
                         {
                             apiRequest = $"{PnPContext.Uri.AbsoluteUri.ToString().TrimEnd(new char[] { '/' })}/{apiRequest}";

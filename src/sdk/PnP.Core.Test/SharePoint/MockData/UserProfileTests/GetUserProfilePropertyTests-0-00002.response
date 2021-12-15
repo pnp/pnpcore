@@ -1,9 +1,0 @@
---batchresponse_0002bbd2-8781-47ac-b974-b0cedf3e154b
-Content-Type: application/http
-Content-Transfer-Encoding: binary
-
-HTTP/1.1 200 OK
-CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
-
-{"d":{"GetUserProfilePropertyFor":"MOD"}}
---batchresponse_0002bbd2-8781-47ac-b974-b0cedf3e154b--

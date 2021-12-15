@@ -434,13 +434,10 @@ namespace PnP.Core.Model.SharePoint
         private static Guid ProcessRecycleResponse(string json)
         {
             var document = JsonSerializer.Deserialize<JsonElement>(json);
-            if (document.TryGetProperty("d", out JsonElement root))
+            if (document.TryGetProperty("value", out JsonElement recycleBinItemId))
             {
-                if (root.TryGetProperty("Recycle", out JsonElement recycleBinItemId))
-                {
-                    // return the recyclebin item id
-                    return recycleBinItemId.GetGuid();
-                }
+                // return the recyclebin item id
+                return recycleBinItemId.GetGuid();
             }
 
             return Guid.Empty;
@@ -724,7 +721,7 @@ namespace PnP.Core.Model.SharePoint
 
         private static ISyntexClassifyAndExtractResult ProcessClassifyAndExtractResponse(string json)
         {
-            var root = JsonSerializer.Deserialize<JsonElement>(json).GetProperty("d");
+            var root = JsonSerializer.Deserialize<JsonElement>(json);
             return new SyntexClassifyAndExtractResult
             {
                 Created = root.GetProperty("Created").GetDateTime(),

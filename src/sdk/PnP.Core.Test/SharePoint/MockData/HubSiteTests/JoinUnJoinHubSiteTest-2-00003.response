@@ -1,9 +1,0 @@
---batchresponse_4f79d079-589e-44da-b656-85d53bc35aac
-Content-Type: application/http
-Content-Transfer-Encoding: binary
-
-HTTP/1.1 200 OK
-CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
-
-{"d":{"JoinHubSite":null}}
---batchresponse_4f79d079-589e-44da-b656-85d53bc35aac--

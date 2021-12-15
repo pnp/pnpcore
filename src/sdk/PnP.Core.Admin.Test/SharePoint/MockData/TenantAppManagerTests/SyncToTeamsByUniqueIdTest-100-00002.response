@@ -1,9 +1,0 @@
---batchresponse_063bb053-7030-4e4d-a8f2-00d94ed118a8
-Content-Type: application/http
-Content-Transfer-Encoding: binary
-
-HTTP/1.1 400 Bad Request
-CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
-
-{"error":{"code":"10005","message":{"lang":"en-US","value":"Authentication method is not allowed."}}}
---batchresponse_063bb053-7030-4e4d-a8f2-00d94ed118a8--

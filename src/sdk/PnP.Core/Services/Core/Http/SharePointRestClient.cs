@@ -44,7 +44,13 @@ namespace PnP.Core.Services
                 globalSettings.Logger = logger;
             }
 
-            client.DefaultRequestHeaders.Add("Accept", "application/json;odata=verbose");
+            client.DefaultRequestHeaders.Add("Accept", "application/json;odata=nometadata");
+#if NET5_0_OR_GREATER
+            client.DefaultRequestHeaders.Add("Accept-Encoding", "gzip, deflate, br");
+#else
+            client.DefaultRequestHeaders.Add("Accept-Encoding", "gzip");
+#endif
+
             client.Timeout = globalSettings.GetHttpTimeout();
 
             if (!string.IsNullOrEmpty(globalSettings.HttpUserAgent))

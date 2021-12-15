@@ -1,9 +1,0 @@
---batchresponse_6129ec1b-586b-40ac-979e-3a80e4bdba92
-Content-Type: application/http
-Content-Transfer-Encoding: binary
-
-HTTP/1.1 200 OK
-CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
-
-{"d":{"Like":null}}
---batchresponse_6129ec1b-586b-40ac-979e-3a80e4bdba92--

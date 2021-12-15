@@ -1,9 +1,0 @@
---batchresponse_f231568f-97f4-4518-bb7a-fb3588b1ed77
-Content-Type: application/http
-Content-Transfer-Encoding: binary
-
-HTTP/1.1 200 OK
-CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
-
-{"d":{"CheckOut":null}}
---batchresponse_f231568f-97f4-4518-bb7a-fb3588b1ed77--

@@ -127,13 +127,10 @@ namespace PnP.Core.Model.SharePoint
             if (!string.IsNullOrEmpty(response.Json))
             {
                 var document = JsonSerializer.Deserialize<JsonElement>(response.Json);
-                if (document.TryGetProperty("d", out JsonElement root))
+                if (document.TryGetProperty("value", out JsonElement recycleBinItemId))
                 {
-                    if (root.TryGetProperty("Recycle", out JsonElement recycleBinItemId))
-                    {
-                        // return the recyclebin item id
-                        return recycleBinItemId.GetGuid();
-                    }
+                    // return the recyclebin item id
+                    return recycleBinItemId.GetGuid();
                 }
             }
 

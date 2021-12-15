@@ -111,13 +111,16 @@ namespace PnP.Core.Services
             if (apiResponse.JsonElement.ValueKind == JsonValueKind.Object)
             {
                 // Enumerate the received properties and try to map them to the model
-                foreach (var property in apiResponse.JsonElement.EnumerateObject())
+                //foreach (var property in apiResponse.JsonElement.EnumerateObject())
+                foreach(var orderedProperty in OrderedProperties(apiResponse.JsonElement))
                 {
+                    var property = orderedProperty.Value;
+
                     // Find the model field linked to this field
                     EntityFieldInfo entityField = null;
 
                     // Do we need to re-parent this json mapping to a non expandable collection in the current model?
-                    if (!string.IsNullOrEmpty(apiResponse.ApiCall.ReceivingProperty) && property.NameEquals("results"))
+                    if (!string.IsNullOrEmpty(apiResponse.ApiCall.ReceivingProperty) && property.NameEquals("value"))
                     {
                         entityField = entity.Fields.FirstOrDefault(p => !string.IsNullOrEmpty(p.Name) && p.Name.Equals(apiResponse.ApiCall.ReceivingProperty, StringComparison.InvariantCultureIgnoreCase)) ??
                                       entity.Fields.FirstOrDefault(p => !string.IsNullOrEmpty(p.SharePointName) && p.SharePointName.Equals(apiResponse.ApiCall.ReceivingProperty, StringComparison.InvariantCultureIgnoreCase));
@@ -143,7 +146,7 @@ namespace PnP.Core.Services
                             JsonElement resultsProperty = default;
 
                             // If the property is named "results" and is of type Array, it means it is a collection of items
-                            if (property.Value.ValueKind == JsonValueKind.Array && property.NameEquals("results"))
+                            if (property.Value.ValueKind == JsonValueKind.Array)
                             {
                                 // and we use it directly
                                 resultsProperty = property.Value;
@@ -157,7 +160,7 @@ namespace PnP.Core.Services
                                 }
 
                                 // otherwise we try to get the child property called "results", if any
-                                property.Value.TryGetProperty("results", out resultsProperty);
+                                property.Value.TryGetProperty("value", out resultsProperty);
                             }
 
                             // Expanded objects are under the results property, if any (i.e. it is not the default one)
@@ -218,23 +221,6 @@ namespace PnP.Core.Services
 
                                 requested = true;
                             }
-
-                            #region Stop tracking the deferred properties to safe on memory and processing time
-                            //else if (property.Value.TryGetProperty("__deferred", out JsonElement deferredProperty))
-                            //{
-                            //// Let's keep track of these "pointers" to load additional data, no actual usage at this point yet though
-
-                            //// __deferred property
-                            ////"__deferred": {
-                            ////    "uri": "https://bertonline.sharepoint.com/sites/modern/_api/site/RootWeb/WorkflowAssociations"
-                            ////}
-
-                            //if (!metadataBasedObject.Metadata.ContainsKey(entityField.Name))
-                            //{
-                            //    metadataBasedObject.Metadata.Add(entityField.Name, deferredProperty.GetProperty("uri").GetString());
-                            //}
-                            //}
-                            #endregion
                         }
                         // Are we loading another model type (e.g. Site.RootWeb)?
                         else if (IsModelType(entityField.PropertyInfo.PropertyType))
@@ -259,6 +245,12 @@ namespace PnP.Core.Services
                             if (string.IsNullOrEmpty(idFieldValue) && property.Name.Equals(entity.SharePointKeyField.SharePointName, StringComparison.InvariantCultureIgnoreCase))
                             {
                                 idFieldValue = GetJsonPropertyValue(property).ToString();
+                                
+                                // Store the rest ID field for follow-up rest requests
+                                if (!(pnpObject as IMetadataExtensible).Metadata.ContainsKey(PnPConstants.MetaDataRestId) && !string.IsNullOrEmpty(idFieldValue))
+                                {
+                                    (pnpObject as IMetadataExtensible).Metadata.Add(PnPConstants.MetaDataRestId, idFieldValue);
+                                }
                             }
 
                             if (!string.IsNullOrEmpty(entityField.SharePointJsonPath))
@@ -327,14 +319,14 @@ namespace PnP.Core.Services
                             {
 
                                 // Verify if we can map the received json to a supported field type
-                                (object fieldValue, string fieldName) = ProcessSpecialRestFieldType(pnpObject, property.Name, property.Value);
+                                (object fieldValue, string fieldName) = await ProcessSpecialRestFieldTypeAsync(pnpObject, property.Name, property.Value).ConfigureAwait(false);
                                 if (fieldName != null)
                                 {
                                     AddToDictionary(dictionaryPropertyToAddValueTo, fieldName, fieldValue, pnpObject);
                                 }
                                 else
                                 {
-                                    if (property.Value.ValueKind == JsonValueKind.Object)
+                                    if (property.Value.ValueKind == JsonValueKind.Object || (property.Value.ValueKind == JsonValueKind.Array && property.Name == "value"))
                                     {
                                         // Handling of complex type via calling out to custom handler, no value is returned as the custom
                                         // handler can update multiple fields based upon what json result came back
@@ -377,7 +369,34 @@ namespace PnP.Core.Services
             return requested;
         }
 
-        private static Tuple<object, string> ProcessSpecialRestFieldType(TransientObject pnpObject, string propertyName, JsonElement json)
+        private static SortedList<int, JsonProperty> OrderedProperties(JsonElement jsonElement)
+        {
+            SortedList<int, JsonProperty> result =  new SortedList<int, JsonProperty>();
+
+            int order = 0;
+            foreach (var property in jsonElement.EnumerateObject())
+            {
+                if (property.Value.ValueKind != JsonValueKind.Array && property.Value.ValueKind != JsonValueKind.Object)
+                {
+                    result.Add(order, property);
+                    order++;
+                }
+            }
+
+            foreach (var property in jsonElement.EnumerateObject())
+            {
+                if (property.Value.ValueKind == JsonValueKind.Array || property.Value.ValueKind == JsonValueKind.Object)
+                {
+                    result.Add(order, property);
+                    order++;
+                }
+            }
+
+            return result;
+        }
+
+
+        private async static Task<Tuple<object, string>> ProcessSpecialRestFieldTypeAsync(TransientObject pnpObject, string propertyName, JsonElement json)
         {
             // This special processing only applies to list items, property bags are excluded
             if (pnpObject.GetType() != typeof(ListItem))
@@ -385,181 +404,140 @@ namespace PnP.Core.Services
                 return new Tuple<object, string>(null, null);
             }
 
-            if (json.ValueKind == JsonValueKind.Object && json.TryGetProperty(PnPConstants.SharePointRestMetadata, out JsonElement metadata) && metadata.TryGetProperty(PnPConstants.MetaDataType, out JsonElement type))
-            {
+            var field = await GetListItemFieldAsync(pnpObject, propertyName).ConfigureAwait(false);
 
-                switch (type.GetString())
+            // For Lookup, LookupMulti, User and UserMulti fields we use the "Id" field
+            if (field == null && propertyName.EndsWith("Id") && propertyName.Length > 2)
+            {
+                propertyName = propertyName.Substring(0, propertyName.Length - 2);
+                field = await GetListItemFieldAsync(pnpObject, propertyName).ConfigureAwait(false);
+            }
+
+            if (field != null)
+            {
+                if (BuiltInFields.Contains(field.InternalName))
                 {
-                    case "SP.FieldUrlValue":
+                    return new Tuple<object, string>(null, null);
+                }
+
+                switch (field.TypeAsString)
+                {
+                    case "URL":
                         {
-                            var fieldValue = new FieldUrlValue() { Field = GetListItemField(pnpObject, propertyName) };
-                            fieldValue.FromJson(json);
+                            if (json.ValueKind == JsonValueKind.Null)
+                            {
+                                return new Tuple<object, string>(null, propertyName);
+                            }
+
+                            var fieldValue = new FieldUrlValue() { Field = field };
+                            if (json.ValueKind != JsonValueKind.Null)
+                            {
+                                fieldValue.FromJson(json);
+                            }
                             fieldValue.IsArray = false;
                             return new Tuple<object, string>(fieldValue, propertyName);
                         };
-                    case "SP.Taxonomy.TaxonomyFieldValue":
+                    case "TaxonomyFieldType":
                         {
-                            #region Sample json
-                            /*
-                              "MMSingle": {
-                                "__metadata": {
-                                  "type": "SP.Taxonomy.TaxonomyFieldValue"
-                                },
-                                "Label": "1",
-                                "TermGuid": "ed5449ec-4a4f-4102-8f07-5a207c438571",
-                                "WssId": 1
-                              },
-                            */
-                            #endregion
+                            if (json.ValueKind == JsonValueKind.Null)
+                            {
+                                return new Tuple<object, string>(null, propertyName);
+                            }
 
-                            var fieldValue = new FieldTaxonomyValue() { Field = GetListItemField(pnpObject, propertyName) };
+                            var fieldValue = new FieldTaxonomyValue() { Field = field };
                             fieldValue.FromJson(json);
                             fieldValue.IsArray = false;
                             return new Tuple<object, string>(fieldValue, propertyName);
                         }
-                    case "Collection(SP.Taxonomy.TaxonomyFieldValue)":
+                    case "TaxonomyFieldTypeMulti":
                         {
-                            #region Sample json
-                            /*
-                                "MMMultiple": {
-                                "__metadata": {
-                                    "type": "Collection(SP.Taxonomy.TaxonomyFieldValue)"
-                                },
-                                "results": [
-                                    {
-                                    "Label": "LBI",
-                                    "TermGuid": "ed5449ec-4a4f-4102-8f07-5a207c438571",
-                                    "WssId": 1
-                                    },
-                                    {
-                                    "Label": "MBI",
-                                    "TermGuid": "1824510b-00e1-40ac-8294-528b1c9421e0",
-                                    "WssId": 2
-                                    },
-                                    {
-                                    "Label": "HBI",
-                                    "TermGuid": "0b709a34-a74e-4d07-b493-48041424a917",
-                                    "WssId": 3
-                                    }
-                                ]
-                                },
-                            */
-                            #endregion
-
-                            if (json.TryGetProperty("results", out JsonElement results))
+                            var values = new FieldValueCollection(field, propertyName);
+                            if (json.ValueKind == JsonValueKind.Array)
                             {
-                                var field = GetListItemField(pnpObject, propertyName);
-                                var values = new FieldValueCollection(field, propertyName);
-                                if (results.ValueKind == JsonValueKind.Array)
+                                foreach (var term in json.EnumerateArray())
                                 {
-                                    foreach (var term in results.EnumerateArray())
-                                    {
-                                        var fieldValue = new FieldTaxonomyValue() { Field = field };
-                                        fieldValue.FromJson(term);
-                                        fieldValue.IsArray = true;
-                                        values.Values.Add(fieldValue);
-                                    }
+                                    var fieldValue = new FieldTaxonomyValue() { Field = field };
+                                    fieldValue.FromJson(term);
+                                    fieldValue.IsArray = true;
+                                    values.Values.Add(fieldValue);
                                 }
-                                return new Tuple<object, string>(values, propertyName);
                             }
-
-                            return new Tuple<object, string>(null, null);
+                            return new Tuple<object, string>(values, propertyName);
                         }
-                    case "Collection(Edm.Int32)":
+                    case "MultiChoice":
                         {
-                            #region Sample json
-                            /*
-                              "LookupMultipleId": {
-                                "__metadata": {
-                                  "type": "Collection(Edm.Int32)"
-                                },
-                                "results": [
-                                  1,
-                                  71
-                                ]
-                              },
-
-                              "PersonMultipleId": {
-                                "__metadata": {
-                                  "type": "Collection(Edm.Int32)"
-                                },
-                                "results": [
-                                  14,
-                                  6
-                                ]
-                              },
-                             */
-                            #endregion
-
-                            if (json.TryGetProperty("results", out JsonElement results))
+                            var values = new List<string>();
+                            if (json.ValueKind == JsonValueKind.Array)
                             {
-                                string actualPropertyName = propertyName.Substring(0, propertyName.Length - 2);
-                                var field = GetListItemField(pnpObject, actualPropertyName);
-                                var values = new FieldValueCollection(field, actualPropertyName);
-                                if (results.ValueKind == JsonValueKind.Array)
+                                foreach (var choice in json.EnumerateArray())
                                 {
-                                    foreach (var lookupId in results.EnumerateArray())
-                                    {
-                                        FieldLookupValue fieldValue;
-                                        if (field != null)
-                                        {
-                                            if (field.TypeAsString == "UserMulti")
-                                            {
-                                                fieldValue = new FieldUserValue() { Field = field };
-                                            }
-                                            else
-                                            {
-                                                fieldValue = new FieldLookupValue() { Field = field };
-                                            }
-                                        }
-                                        else
-                                        {
-                                            // No field found...assume lookup value
-                                            fieldValue = new FieldLookupValue() { Field = field };
-                                        }
-
-                                        fieldValue.FromJson(lookupId);
-                                        fieldValue.IsArray = true;
-                                        values.Values.Add(fieldValue);
-                                    }
+                                    values.Add(choice.GetString());
                                 }
-                                return new Tuple<object, string>(values, actualPropertyName);
                             }
-
-                            return new Tuple<object, string>(null, null);
+                            return new Tuple<object, string>(values, propertyName);
                         }
-                    case "Collection(Edm.String)":
+                    case "Lookup":
                         {
-                            #region Sample json
-                            /*
-                              "ChoiceMultiple": {
-                                "__metadata": {
-                                  "type": "Collection(Edm.String)"
-                                },
-                                "results": [
-                                  "Choice 1",
-                                  "Choice 3",
-                                  "Choice 4"
-                                ]
-                              }
-                             */
-                            #endregion
-
-                            // PersonMulitple fields are also listed under the same type, but have StringId appended to their name
-                            if (!(propertyName.EndsWith("StringId") && propertyName.Length > 8) && json.TryGetProperty("results", out JsonElement results))
+                            if (json.ValueKind == JsonValueKind.Null)
                             {
-                                var values = new List<string>();
-                                if (results.ValueKind == JsonValueKind.Array)
-                                {
-                                    foreach (var choice in results.EnumerateArray())
-                                    {
-                                        values.Add(choice.GetString());
-                                    }
-                                }
-                                return new Tuple<object, string>(values, propertyName);
+                                return new Tuple<object, string>(null, propertyName);
                             }
 
-                            return new Tuple<object, string>(null, null);
+                            var fieldValue = new FieldLookupValue() { Field = field };
+                            fieldValue.FromJson(json);
+                            fieldValue.IsArray = false;
+                            return new Tuple<object, string>(fieldValue, propertyName);
+                        }
+                    case "LookupMulti":
+                        {
+                            var values = new FieldValueCollection(field, propertyName);
+                            if (json.ValueKind == JsonValueKind.Array)
+                            {
+                                foreach (var lookupId in json.EnumerateArray())
+                                {
+                                    FieldLookupValue fieldValue = new FieldLookupValue() { Field = field };
+                                    fieldValue.FromJson(lookupId);
+                                    fieldValue.IsArray = true;
+                                    values.Values.Add(fieldValue);
+                                }
+                            }
+                            return new Tuple<object, string>(values, propertyName);
+                        }
+                    case "User":
+                        {
+                            var fieldValue = new FieldUserValue() { Field = field };
+                            if (json.ValueKind != JsonValueKind.Null)
+                            {
+                                fieldValue.FromJson(json);
+                            }
+                            fieldValue.IsArray = false;
+                            return new Tuple<object, string>(fieldValue, propertyName);
+                        }
+                    case "UserMulti":
+                        {
+                            var values = new FieldValueCollection(field, propertyName);
+                            if (json.ValueKind == JsonValueKind.Array)
+                            {
+                                foreach (var lookupId in json.EnumerateArray())
+                                {
+                                    FieldUserValue fieldValue = new FieldUserValue() { Field = field };
+                                    fieldValue.FromJson(lookupId);
+                                    fieldValue.IsArray = true;
+                                    values.Values.Add(fieldValue);
+                                }
+                            }
+                            return new Tuple<object, string>(values, propertyName);
+                        }
+                    case "Location":
+                        {
+                            var fieldValue = new FieldLocationValue() { Field = field };
+                            if (json.ValueKind != JsonValueKind.Null)
+                            {
+                                var parsedFieldContent = JsonSerializer.Deserialize<JsonElement>(json.GetString());
+                                fieldValue.FromJson(parsedFieldContent);
+                            }
+                            fieldValue.IsArray = false;
+                            return new Tuple<object, string>(fieldValue, propertyName);
                         }
                     default:
                         {
@@ -567,87 +545,41 @@ namespace PnP.Core.Services
                         }
                 }
             }
-            else
-            {
-                if (propertyName.EndsWith("StringId") && propertyName.Length > 8)
-                {
-                    #region Sample json
-                    /*
-                     "LookupSingleField1Id": 1
-                     "PersonSingleId": 6,
-                     "PersonSingleStringId": "6",
-                     "UserSingleField1Id": null,
-                     "UserSingleField1StringId": null,
-                     "UserMultiField1Id": null,
-                     "UserMultiField1StringId": null,
-                     */
-                    #endregion
-
-                    string actualPropertyName = propertyName.Substring(0, propertyName.Length - 8);
-                    var field = GetListItemField(pnpObject, actualPropertyName);
-                    if (json.ValueKind == JsonValueKind.Null && field != null && field.TypeAsString == "UserMulti")
-                    {
-                        // Add empty value collection
-                        var values = new FieldValueCollection(field, actualPropertyName);
-                        return new Tuple<object, string>(values, actualPropertyName);
-                    }
-                    else
-                    {
-                        var fieldValue = new FieldUserValue() { Field = field };
-                        fieldValue.FromJson(json);
-                        fieldValue.IsArray = false;
-                        return new Tuple<object, string>(fieldValue, actualPropertyName);
-                    }
-                }
-                else if (propertyName.EndsWith("Id") && propertyName.Length > 2)
-                {
-                    string actualPropertyName = propertyName.Substring(0, propertyName.Length - 2);
-                    var field = GetListItemField(pnpObject, actualPropertyName);
-                    if (field != null && field.TypeAsString == "Lookup")
-                    {
-                        if (json.ValueKind == JsonValueKind.Null)
-                        {
-                            return new Tuple<object, string>(null, actualPropertyName);
-                        }
-                        else
-                        {
-                            var fieldValue = new FieldLookupValue() { Field = field };
-                            fieldValue.FromJson(json);
-                            fieldValue.IsArray = false;
-                            return new Tuple<object, string>(fieldValue, actualPropertyName);
-                        }
-                    }
-                }
-                else if (json.ValueKind == JsonValueKind.String && (json.GetString().StartsWith("{") && json.GetString().Contains("LocationUri") && json.GetString().EndsWith("}")))
-                {
-                    #region Sample json
-                    /*
-                      "Location": "{\"LocationSource\":\"Bing\",\"LocationUri\":\"https://www.bingapis.com/api/v6/addresses/QWRkcmVzcy83MDA5ODM%3d%3d?setLang=en\",\"UniqueId\":\"https://www.bingapis.com/api/v6/addresses/QWRkcmVzcy83MDA5ODMwODI3MTUyMzc1%3d%3d?setLang=en\",\"Address\":{\"Street\":\"ffffffstraat 1\",\"City\":\"cccc\",\"State\":\"Vlaanderen\",\"CountryOrRegion\":\"Belgium\",\"PostalCode\":\"9999\"},\"Coordinates\":{}}",                     
-                    */
-                    #endregion
-
-                    // investigate if this can be a location field
-                    var parsedFieldContent = JsonSerializer.Deserialize<JsonElement>(json.GetString());
-                    var fieldValue = new FieldLocationValue() { Field = GetListItemField(pnpObject, propertyName) };
-                    fieldValue.FromJson(parsedFieldContent);
-                    fieldValue.IsArray = false;
-                    return new Tuple<object, string>(fieldValue, propertyName);
-                }
-
-            }
 
             return new Tuple<object, string>(null, null);
         }
 
-        private static IField GetListItemField(TransientObject pnpObject, string fieldName)
+        private async static Task<IField> GetListItemFieldAsync(TransientObject pnpObject, string fieldName)
         {
-            if ((pnpObject as IDataModelParent).Parent.Parent is List parentList)
+            List parentList = null;
+
+            if ((pnpObject as IDataModelParent).Parent.Parent is List)
             {
-                if (parentList.ArePropertiesAvailable(List.LoadFieldsExpression))
+                parentList = (pnpObject as IDataModelParent).Parent.Parent as List;
+            }
+            else if (((pnpObject as IDataModelParent).Parent is File) || (pnpObject as IDataModelParent).Parent is Folder)
+            {
+                if ((pnpObject as ListItem).IsPropertyAvailable(p => p.ParentList))
                 {
+                    parentList = (List)(pnpObject as IListItem).ParentList;
+                }
+            }
+            
+            if (parentList != null)
+            {
+                if (!parentList.ArePropertiesAvailable(List.LoadFieldsExpression) && !parentList.Metadata.ContainsKey(PnPConstants.MetaDataRestId))
+                {
+                    //todo
+                }
+                else
+                {
+                    // Ensure the needed list fields data is loaded
+                    await parentList.EnsurePropertiesAsync(List.LoadFieldsExpression).ConfigureAwait(false);
+
                     return parentList.Fields.AsRequested().FirstOrDefault(p => p.InternalName == fieldName);
                 }
             }
+
             return null;
         }
 
@@ -658,6 +590,13 @@ namespace PnP.Core.Services
             {
                 targetMetadataObject.Metadata.Add(PnPConstants.MetaDataRestId, idFieldValue);
             }
+
+            // Store the SharePointType 
+            if (!targetMetadataObject.Metadata.ContainsKey(PnPConstants.MetaDataType) && !string.IsNullOrEmpty(entity.SharePointType))
+            {
+                targetMetadataObject.Metadata.Add(PnPConstants.MetaDataType, entity.SharePointType);
+            }
+
             // Store graph ID for transition to graph when needed. No point in doing this when we've disabled graph first behaviour or when the entity does not support rest + graph
             if (entity.SupportsGraphAndRest && !targetMetadataObject.Metadata.ContainsKey(PnPConstants.MetaDataGraphId))
             {
@@ -1311,75 +1250,32 @@ namespace PnP.Core.Services
                         }
                     case "Dictionary`2":
                         {
-                            #region sample JSON
-                            /*
-                              "PropName": {
-                                "results": [
-                                    {
-                                        "__metadata": {
-                                            "type": "SP.KeyValue"
-                                        },
-                                        "Key": "UserProfile_GUID",
-                                        "Value": "554558fe-55e1-4163-986a-e5cc5a1ca1d2",
-                                        "ValueType": "Edm.String"
-                                    },
-                                    ...]
-                             */
-                            #endregion
-
-                            if (jsonElement.TryGetProperty("results", out JsonElement results))
+                            var dictionary = new Dictionary<string, object>();
+                            foreach (var element in jsonElement.EnumerateArray())
                             {
-                                var dictionary = new Dictionary<string, object>();
-                                foreach (var element in results.EnumerateArray())
+                                var value = element.GetProperty("Value");
+                                var key = element.GetProperty("Key").GetString();
+
+                                switch (value.ValueKind)
                                 {
-                                    var value = element.GetProperty("Value");
-                                    var key = element.GetProperty("Key").GetString();
+                                    case JsonValueKind.String:
+                                        dictionary.Add(key, value.GetString());
+                                        break;
+                                    case JsonValueKind.Number:
+                                        dictionary.Add(key, value.GetInt32());
+                                        break;
+                                    case JsonValueKind.False:
+                                    case JsonValueKind.True:
+                                        dictionary.Add(key, value.GetBoolean());
+                                        break;
 
-                                    switch (value.ValueKind)
-                                    {
-                                        case JsonValueKind.String:
-                                            dictionary.Add(key, value.GetString());
-                                            break;
-                                        case JsonValueKind.Number:
-                                            dictionary.Add(key, value.GetInt32());
-                                            break;
-                                        case JsonValueKind.False:
-                                        case JsonValueKind.True:
-                                            dictionary.Add(key, value.GetBoolean());
-                                            break;
-
-                                    }
                                 }
-
-                                return dictionary;
                             }
 
-                            return null;
+                            return dictionary;
                         }
-                    // Used on TermStore model (and maybe more in future)
                     case "List`1":
                         {
-                            // When the call was made via SharePoint REST the list is wrapped into a collection object. E.g.
-                            //
-                            //"SupportedUILanguageIds": {
-                            //    "__metadata": {
-                            //        "type": "Collection(Edm.Int32)"
-                            //    },
-                            //"results": [
-                            //    1033,
-                            //    1043,
-                            //    1031,
-                            //    1036
-                            //    ]
-                            //}
-                            //
-                            // If so see if there's a results property and use that
-
-                            if (jsonElement.ValueKind == JsonValueKind.Object && jsonElement.TryGetProperty("results", out JsonElement results))
-                            {
-                                jsonElement = results;
-                            }
-
                             if (jsonElement.ValueKind != JsonValueKind.Array)
                             {
                                 return null;

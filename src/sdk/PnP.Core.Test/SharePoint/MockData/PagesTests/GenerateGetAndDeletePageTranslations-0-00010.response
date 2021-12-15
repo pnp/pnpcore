@@ -1,9 +1,0 @@
---batchresponse_74976b1a-89df-4e61-b00a-555e5fec8c00
-Content-Type: application/http
-Content-Transfer-Encoding: binary
-
-HTTP/1.1 200 OK
-CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
-
-{"d":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/pnpcoresdktest/_api/sitepages/pages(711)/translations/create","uri":"https://bertonline.sharepoint.com/sites/pnpcoresdktest/_api/sitepages/pages(711)/translations/create","type":"SP.TranslationStatusCollection"},"UntranslatedLanguages":{"__metadata":{"type":"Collection(Edm.String)"},"results":[]},"Items":{"__metadata":{"type":"Collection(SP.TranslationStatus)"},"results":[{"Culture":"nl-nl","FileStatus":2,"HasPublishedVersion":false,"LastModified":"2021-10-04T08:20:34Z","Path":{"__metadata":{"type":"SP.ResourcePath"},"DecodedUrl":"SitePages/nl/PNP_SDK_TEST_PageToTranslate.aspx"},"Title":"Translate into Dutch: PNP_SDK_TEST_PageToTranslate"},{"Culture":"fr-fr","FileStatus":2,"HasPublishedVersion":false,"LastModified":"2021-10-04T08:20:35Z","Path":{"__metadata":{"type":"SP.ResourcePath"},"DecodedUrl":"SitePages/fr/PNP_SDK_TEST_PageToTranslate.aspx"},"Title":"Translate into French: PNP_SDK_TEST_PageToTranslate"}]}}}
---batchresponse_74976b1a-89df-4e61-b00a-555e5fec8c00--
