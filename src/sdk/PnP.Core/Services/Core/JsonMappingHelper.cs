@@ -1250,60 +1250,32 @@ namespace PnP.Core.Services
                         }
                     case "Dictionary`2":
                         {
-
-                            //if (jsonElement.TryGetProperty("results", out JsonElement results))
-                            //{
-                                var dictionary = new Dictionary<string, object>();
-                                foreach (var element in jsonElement.EnumerateArray())
-                                {
-                                    var value = element.GetProperty("Value");
-                                    var key = element.GetProperty("Key").GetString();
-
-                                    switch (value.ValueKind)
-                                    {
-                                        case JsonValueKind.String:
-                                            dictionary.Add(key, value.GetString());
-                                            break;
-                                        case JsonValueKind.Number:
-                                            dictionary.Add(key, value.GetInt32());
-                                            break;
-                                        case JsonValueKind.False:
-                                        case JsonValueKind.True:
-                                            dictionary.Add(key, value.GetBoolean());
-                                            break;
-
-                                    }
-                                }
-
-                                return dictionary;
-                            //}
-
-                            //return null;
-                        }
-                    // Used on TermStore model (and maybe more in future)
-                    case "List`1":
-                        {
-                            // When the call was made via SharePoint REST the list is wrapped into a collection object. E.g.
-                            //
-                            //"SupportedUILanguageIds": {
-                            //    "__metadata": {
-                            //        "type": "Collection(Edm.Int32)"
-                            //    },
-                            //"results": [
-                            //    1033,
-                            //    1043,
-                            //    1031,
-                            //    1036
-                            //    ]
-                            //}
-                            //
-                            // If so see if there's a results property and use that
-
-                            if (jsonElement.ValueKind == JsonValueKind.Object && jsonElement.TryGetProperty("results", out JsonElement results))
+                            var dictionary = new Dictionary<string, object>();
+                            foreach (var element in jsonElement.EnumerateArray())
                             {
-                                jsonElement = results;
+                                var value = element.GetProperty("Value");
+                                var key = element.GetProperty("Key").GetString();
+
+                                switch (value.ValueKind)
+                                {
+                                    case JsonValueKind.String:
+                                        dictionary.Add(key, value.GetString());
+                                        break;
+                                    case JsonValueKind.Number:
+                                        dictionary.Add(key, value.GetInt32());
+                                        break;
+                                    case JsonValueKind.False:
+                                    case JsonValueKind.True:
+                                        dictionary.Add(key, value.GetBoolean());
+                                        break;
+
+                                }
                             }
 
+                            return dictionary;
+                        }
+                    case "List`1":
+                        {
                             if (jsonElement.ValueKind != JsonValueKind.Array)
                             {
                                 return null;

@@ -161,7 +161,7 @@ namespace PnP.Core.Model.SharePoint
             if (!string.IsNullOrEmpty(response.Json))
             {
 
-                var json = JsonSerializer.Deserialize<JsonElement>(response.Json)/*.GetProperty("d")*/;
+                var json = JsonSerializer.Deserialize<JsonElement>(response.Json);
 
                 if (json.TryGetProperty("value", out JsonElement getAvailableTagsForSite))
                 {
