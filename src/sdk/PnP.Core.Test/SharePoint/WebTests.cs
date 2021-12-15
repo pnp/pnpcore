@@ -829,9 +829,9 @@ namespace PnP.Core.Test.SharePoint
 
                 if (!string.IsNullOrEmpty(response.Response))
                 {
-                    var json = JsonDocument.Parse(response.Response).RootElement;
+                    var json = JsonDocument.Parse(response.Response).RootElement.GetProperty("d");
 
-                    if (json.TryGetProperty("value", out JsonElement utcToLocalTimeViaServerCall))
+                    if (json.TryGetProperty("UTCToLocalTime", out JsonElement utcToLocalTimeViaServerCall))
                     {
                         if (utcToLocalTimeViaServerCall.TryGetDateTime(out DateTime utcToLocalTimeViaServerCallDateTime))
                         {
@@ -851,9 +851,9 @@ namespace PnP.Core.Test.SharePoint
 
                 if (!string.IsNullOrEmpty(response2.Response))
                 {
-                    var json = JsonDocument.Parse(response2.Response).RootElement;
+                    var json = JsonDocument.Parse(response2.Response).RootElement.GetProperty("d");
 
-                    if (json.TryGetProperty("value", out JsonElement LocalTimeToUtcViaServerCall))
+                    if (json.TryGetProperty("LocalTimeToUTC", out JsonElement LocalTimeToUtcViaServerCall))
                     {
                         if (LocalTimeToUtcViaServerCall.TryGetDateTime(out DateTime LocalTimeToUtcViaServerCallDateTime))
                         {
