@@ -1,9 +1,0 @@
---batchresponse_51f18b8d-5be1-4ed9-b222-efca6b1cd30d
-Content-Type: application/http
-Content-Transfer-Encoding: binary
-
-HTTP/1.1 200 OK
-CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
-
-{"d":{"MoveTo":null}}
---batchresponse_51f18b8d-5be1-4ed9-b222-efca6b1cd30d--

@@ -1,9 +1,0 @@
---batchresponse_c757a215-9572-45d2-8592-3a85891734ba
-Content-Type: application/http
-Content-Transfer-Encoding: binary
-
-HTTP/1.1 200 OK
-CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
-
-{"d":{"results":[]}}
---batchresponse_c757a215-9572-45d2-8592-3a85891734ba--

@@ -1,9 +1,0 @@
---batchresponse_fa7f53a5-bacd-4a08-aa21-d947d221da9c
-Content-Type: application/http
-Content-Transfer-Encoding: binary
-
-HTTP/1.1 400 Bad Request
-CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
-
-{"error":{"code":"-2147024809, System.ArgumentException","message":{"lang":"en-US","value":"Server relative urls must start with SPWeb.ServerRelativeUrl"}}}
---batchresponse_fa7f53a5-bacd-4a08-aa21-d947d221da9c--

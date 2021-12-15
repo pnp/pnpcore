@@ -1,9 +1,0 @@
---batchresponse_5cb74580-6fa4-4626-bca5-6127929988cd
-Content-Type: application/http
-Content-Transfer-Encoding: binary
-
-HTTP/1.1 200 OK
-CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
-
-{"d":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-2/_api/Site","uri":"https://bertonline.sharepoint.com/sites/prov-2/_api/Site","type":"SP.Site"},"AllowCreateDeclarativeWorkflow":true,"AllowDesigner":true,"AllowExternalEmbeddingWrapper":1,"AllowMasterPageEditing":false,"AllowRevertFromTemplate":false,"AllowSaveDeclarativeWorkflowAsTemplate":true,"AllowSavePublishDeclarativeWorkflow":true,"AuditLogTrimmingRetention":90,"CanSyncHubSitePermissions":false,"ChannelGroupId":"00000000-0000-0000-0000-000000000000","Classification":"","CommentsOnSitePagesDisabled":false,"DisableAppViews":false,"DisableCompanyWideSharingLinks":false,"DisableFlows":false,"ExternalSharingTipsEnabled":false,"ExternalUserExpirationInDays":0,"GeoLocation":"EUR","GroupId":"d40d729b-df60-4b57-ac8f-102595090e0a","Id":"f92f9e40-1110-43ef-aa0e-0822e13fb7ba"}}
---batchresponse_5cb74580-6fa4-4626-bca5-6127929988cd--

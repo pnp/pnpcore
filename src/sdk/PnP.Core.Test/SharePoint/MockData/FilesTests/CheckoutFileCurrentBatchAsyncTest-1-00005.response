@@ -1,9 +1,0 @@
---batchresponse_df66dee1-6e1d-4f66-a696-0b219c1dc5eb
-Content-Type: application/http
-Content-Transfer-Encoding: binary
-
-HTTP/1.1 200 OK
-CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
-
-{"d":{"UndoCheckOut":null}}
---batchresponse_df66dee1-6e1d-4f66-a696-0b219c1dc5eb--

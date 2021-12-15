@@ -1,9 +1,0 @@
---batchresponse_4f673e52-a393-45f7-9fe6-6c4e5c58a739
-Content-Type: application/http
-Content-Transfer-Encoding: binary
-
-HTTP/1.1 200 OK
-CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
-
-{"d":{"Recycle":"af8612b2-54e9-46dd-8204-c8b01faedfb5"}}
---batchresponse_4f673e52-a393-45f7-9fe6-6c4e5c58a739--

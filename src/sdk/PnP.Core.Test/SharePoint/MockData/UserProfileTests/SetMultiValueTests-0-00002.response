@@ -1,9 +1,0 @@
---batchresponse_e09ba43f-53b2-4e08-8bf0-0429d0063bf9
-Content-Type: application/http
-Content-Transfer-Encoding: binary
-
-HTTP/1.1 200 OK
-CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
-
-{"d":{"SetMultiValuedProfileProperty":null}}
---batchresponse_e09ba43f-53b2-4e08-8bf0-0429d0063bf9--

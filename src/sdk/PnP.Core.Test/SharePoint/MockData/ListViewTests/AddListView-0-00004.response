@@ -1,9 +1,0 @@
---batchresponse_17b6239d-e53a-4d1f-ab46-1cac0c050d22
-Content-Type: application/http
-Content-Transfer-Encoding: binary
-
-HTTP/1.1 200 OK
-CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
-
-{"d":{"DeleteObject":null}}
---batchresponse_17b6239d-e53a-4d1f-ab46-1cac0c050d22--

@@ -1,9 +1,0 @@
---batchresponse_52345362-5520-4c94-8859-cf538101cdcc
-Content-Type: application/http
-Content-Transfer-Encoding: binary
-
-HTTP/1.1 200 OK
-CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
-
-{"d":{"ResetRoleInheritance":null}}
---batchresponse_52345362-5520-4c94-8859-cf538101cdcc--

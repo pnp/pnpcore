@@ -3,7 +3,6 @@ using PnP.Core.Services.Core;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Net.Http;
 using System.Text;
 using System.Text.Json;
 
@@ -46,12 +45,24 @@ namespace PnP.Core.Services
         /// <param name="context">Current PnPContext</param>
         /// <param name="requestKey">Key we used to calculate the hash used to identify this request</param>
         /// <param name="response">Response that came back from the server</param>
-        internal static void RecordResponse(PnPContext context, string requestKey, string response)
+        /// <param name="isSuccessStatusCode">Indicates whether the mocked request did have a Success status code</param>
+        /// <param name="statusCode">Http response status code</param>        
+        /// <param name="responseHeaders">Response headers to persist</param>
+        internal static void RecordResponse(PnPContext context, string requestKey, string response, bool isSuccessStatusCode, int statusCode, Dictionary<string, string> responseHeaders)
         {
             string fileName = GetResponseFile(context, GetOrderPrefix(requestKey));
 
-            // Write request to a file, overwrites the existing file
-            File.WriteAllText(fileName, response);
+            TestResponse testResponse = new TestResponse
+            {
+                StatusCode = statusCode,
+                IsSuccessStatusCode = isSuccessStatusCode,
+                Headers = responseHeaders,
+                Response = response
+            };
+
+            var json = JsonSerializer.Serialize(testResponse);
+
+            File.WriteAllText(fileName, json);
         }
 
         /// <summary>
@@ -61,50 +72,14 @@ namespace PnP.Core.Services
         /// <param name="requestKey">Key we used to calculate the hash used to identify this request</param>
         /// <param name="response">Response that came back from the server</param>
         /// <param name="isSuccessStatusCode">Indicates whether the mocked request did have a Success status code</param>
-        /// <param name="httpResponse">Http response details</param>        
-        internal static void RecordResponse(PnPContext context, string requestKey, string response, bool isSuccessStatusCode, HttpResponseMessage httpResponse)
+        /// <param name="statusCode">Http response status code</param>        
+        /// <param name="responseHeaders">Response headers to persist</param>
+        internal static void RecordResponse(PnPContext context, string requestKey, ref Stream response, bool isSuccessStatusCode, int statusCode, Dictionary<string, string> responseHeaders)
         {
-            string fileName = GetResponseFile(context, GetOrderPrefix(requestKey));
-
-            // Write request to a file, overwrites the existing file
-            File.WriteAllText(fileName, response);
-
-            if (httpResponse != null)
-            {
-                fileName = GetExtraFile(context, GetOrderPrefix(requestKey));
-
-                TestResponse testResponse = new TestResponse
-                {
-                    StatusCode = (int)httpResponse.StatusCode,
-                    IsSuccessStatusCode = isSuccessStatusCode,
-                };
-
-                foreach(var header in httpResponse.Headers)
-                {
-                    testResponse.Headers.Add(header.Key, string.Join(",", header.Value));
-                }
-
-                var json = JsonSerializer.Serialize(testResponse);
-
-                File.WriteAllText(fileName, json);
-            }
-        }
-
-        /// <summary>
-        /// Record the response of a request
-        /// </summary>
-        /// <param name="context">Current PnPContext</param>
-        /// <param name="requestKey">Key we used to calculate the hash used to identify this request</param>
-        /// <param name="response">Response that came back from the server</param>
-        internal static void RecordResponse(PnPContext context, string requestKey, ref Stream response)
-        {            
-            string fileName = GetResponseFile(context, GetOrderPrefix(requestKey));
-
             var reader = new StreamReader(response);
             var content = reader.ReadToEnd();
 
-            // Write request to a file, overwrites the existing file
-            File.WriteAllText(fileName, content);
+            RecordResponse(context, requestKey, content, isSuccessStatusCode, statusCode, responseHeaders);
 
             // If the stream can be reused then let's do that
             if (response.CanSeek)
@@ -125,47 +100,18 @@ namespace PnP.Core.Services
         /// <param name="context">Current PnPContext</param>
         /// <param name="requestKey">Key we used to calculate the hash, used to identify the response to return</param>
         /// <returns>Server response from the mock response</returns>
-        internal static Stream MockResponseAsStream(PnPContext context, string requestKey)
-        {
-            return MockResponse(context, requestKey).AsStream();
-        }
-
-        /// <summary>
-        /// Mocks the response for a given request
-        /// </summary>
-        /// <param name="context">Current PnPContext</param>
-        /// <param name="requestKey">Key we used to calculate the hash, used to identify the response to return</param>
-        /// <returns>Server response from the mock response</returns>
-        internal static string MockResponse(PnPContext context, string requestKey)
+        internal static TestResponse MockResponse(PnPContext context, string requestKey)
         {
             string fileName = GetResponseFile(context, GetOrderPrefix(requestKey));
 
             if (File.Exists(fileName))
             {
-                return File.ReadAllText(fileName);
+                return JsonSerializer.Deserialize<TestResponse>(File.ReadAllText(fileName));
             }
             else
             {
                 throw new ClientException(ErrorType.OfflineDataError, string.Format(PnPCoreResources.Exception_Test_MissingResponseFile, context.TestName, fileName, requestKey));
             }
-        }
-
-        /// <summary>
-        /// Mocks the response for a given request
-        /// </summary>
-        /// <param name="context">Current PnPContext</param>
-        /// <param name="requestKey">Key we used to calculate the hash, used to identify the response to return</param>
-        /// <returns>Server response from the mock response</returns>
-        internal static TestResponse MockExtraResponse(PnPContext context, string requestKey)
-        {
-            string fileName = GetExtraFile(context, GetOrderPrefix(requestKey));
-
-            if (File.Exists(fileName))
-            {
-                return JsonSerializer.Deserialize<TestResponse>(File.ReadAllText(fileName));
-            }
-
-            return null;
         }
 
         /// <summary>
@@ -238,17 +184,12 @@ namespace PnP.Core.Services
 
         private static string GetResponseFile(PnPContext context, string orderPrefix)
         {
-            return Path.Combine(GetPath(context), $"{context.TestName}-{context.TestId}-{orderPrefix}.response");
+            return Path.Combine(GetPath(context), $"{context.TestName}-{context.TestId}-{orderPrefix}.response.json");
         }
 
         private static string GetRequestFile(PnPContext context, string orderPrefix)
         {
             return Path.Combine(GetPath(context), $"{context.TestName}-{context.TestId}-{orderPrefix}.request");
-        }
-
-        private static string GetExtraFile(PnPContext context, string orderPrefix)
-        {
-            return Path.Combine(GetPath(context), $"{context.TestName}-{context.TestId}-{orderPrefix}.extra");
         }
 
         private static string GetDebugFile(PnPContext context, string orderPrefix)

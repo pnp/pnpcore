@@ -1,9 +1,0 @@
---batchresponse_ea5596eb-c82c-4842-aea0-0c1af0157762
-Content-Type: application/http
-Content-Transfer-Encoding: binary
-
-HTTP/1.1 204 No Content
-CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
-
-
---batchresponse_ea5596eb-c82c-4842-aea0-0c1af0157762--

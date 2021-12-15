@@ -1,9 +1,0 @@
---batchresponse_128b6243-9e1b-4c7a-b328-df9664d9c245
-Content-Type: application/http
-Content-Transfer-Encoding: binary
-
-HTTP/1.1 200 OK
-CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
-
-{"d":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-2/_api/Web","uri":"https://bertonline.sharepoint.com/sites/prov-2/_api/Web","type":"SP.Web"},"Id":"2c99a486-d6c9-4a4b-8d6f-a9faa364c92c","NavAudienceTargetingEnabled":false,"NextStepsFirstRunEnabled":false,"NotificationsInOneDriveForBusinessEnabled":true,"NotificationsInSharePointEnabled":true,"ObjectCacheEnabled":false,"PreviewFeaturesEnabled":true,"PrimaryColor":"#986f0b","RecycleBinEnabled":true,"SaveSiteAsTemplateEnabled":true,"SearchBoxPlaceholderText":null,"ServerRelativeUrl":"/sites/prov-2","SiteLogoDescription":null,"SiteLogoUrl":"/sites/prov-2/_api/GroupService/GetGroupImage?id='3963012e-b375-45fc-b72e-9755fa794ebb'&hash=637689300827035618","SyndicationEnabled":true}}
---batchresponse_128b6243-9e1b-4c7a-b328-df9664d9c245--

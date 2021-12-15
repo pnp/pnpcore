@@ -610,9 +610,8 @@ namespace PnP.Core.Services
                                         }
 
                                         // Write response
-                                        TestManager.RecordResponse(PnPContext, requestKey, batchResponse);
+                                        TestManager.RecordResponse(PnPContext, requestKey, batchResponse, response.IsSuccessStatusCode, (int)response.StatusCode, MicrosoftGraphResposeHeadersToPropagate(response?.Headers));
                                     }
-
 #endif
 
                                     var ready = await ProcessGraphRestBatchResponse(batch, batchResponse).ConfigureAwait(false);
@@ -626,7 +625,9 @@ namespace PnP.Core.Services
                         else
                         {
                             // Something went wrong...
-                            throw new MicrosoftGraphServiceException(ErrorType.GraphServiceError, (int)response.StatusCode, await response.Content.ReadAsStringAsync().ConfigureAwait(false));
+                            throw new MicrosoftGraphServiceException(ErrorType.GraphServiceError, 
+                                                                      (int)response.StatusCode, 
+                                                                      await response.Content.ReadAsStringAsync().ConfigureAwait(false));
                         }
                     }
                     finally
@@ -637,8 +638,8 @@ namespace PnP.Core.Services
                 }
                 else
                 {
-
-                    string batchResponse = TestManager.MockResponse(PnPContext, requestKey);
+                    var testResponse = TestManager.MockResponse(PnPContext, requestKey);
+                    string batchResponse = testResponse.Response;
 
                     // Call out to the rewrite handler if that one is connected
                     if (MockingFileRewriteHandler != null)
@@ -1024,10 +1025,10 @@ namespace PnP.Core.Services
                                 }
 
                                 // Write response
-                                TestManager.RecordResponse(PnPContext, batchKey, ref requestResponseStream);
+                                TestManager.RecordResponse(PnPContext, batchKey, ref requestResponseStream, response.IsSuccessStatusCode, (int)response.StatusCode, MicrosoftGraphResposeHeadersToPropagate(response?.Headers));
                             }
 #endif
-                            await ProcessMicrosoftGraphInteractiveResponse(graphRequest, response.StatusCode, response, requestResponseStream).ConfigureAwait(false);
+                            await ProcessMicrosoftGraphInteractiveResponse(graphRequest, response.StatusCode, MicrosoftGraphResposeHeadersToPropagate(response?.Headers), requestResponseStream).ConfigureAwait(false);
 
                         }
                         else
@@ -1037,7 +1038,7 @@ namespace PnP.Core.Services
                             if (PnPContext.Mode == TestMode.Record)
                             {
                                 // Write response
-                                TestManager.RecordResponse(PnPContext, batchKey, errorContent, false, response);
+                                TestManager.RecordResponse(PnPContext, batchKey, errorContent, response.IsSuccessStatusCode, (int)response.StatusCode, MicrosoftGraphResposeHeadersToPropagate(response?.Headers));
                             }
 #endif
 
@@ -1051,31 +1052,16 @@ namespace PnP.Core.Services
                     }
                     else
                     {
-                        var requestResponseStream = TestManager.MockResponseAsStream(PnPContext, batchKey);
+                        var testResponse = TestManager.MockResponse(PnPContext, batchKey);
 
-                        HttpStatusCode mockedResponseStatus = HttpStatusCode.OK;
-
-                        var extraResponse = TestManager.MockExtraResponse(PnPContext, batchKey);
-                        if (extraResponse != null)
+                        if (!testResponse.IsSuccessStatusCode)
                         {
-                            mockedResponseStatus = (HttpStatusCode)extraResponse.StatusCode;
-
-                            if (!extraResponse.IsSuccessStatusCode)
-                            {
-                                string errorMessage = null;
-                                using (var streamReader = new StreamReader(requestResponseStream))
-                                {
-                                    requestResponseStream.Seek(0, SeekOrigin.Begin);
-                                    errorMessage = await streamReader.ReadToEndAsync().ConfigureAwait(false);
-                                }
-
-                                throw new MicrosoftGraphServiceException(ErrorType.GraphServiceError,
-                                    extraResponse.StatusCode,
-                                    errorMessage);
-                            }
+                            throw new MicrosoftGraphServiceException(ErrorType.GraphServiceError,
+                                   testResponse.StatusCode,
+                                   testResponse.Response);
                         }
 
-                        await ProcessMicrosoftGraphInteractiveResponse(graphRequest, mockedResponseStatus, null, requestResponseStream).ConfigureAwait(false);
+                        await ProcessMicrosoftGraphInteractiveResponse(graphRequest, (HttpStatusCode)testResponse.StatusCode, testResponse.Headers, testResponse.Response.AsStream()).ConfigureAwait(false);
                     }
 #endif
                     // Mark batch as executed
@@ -1095,7 +1081,7 @@ namespace PnP.Core.Services
             }
         }
 
-        private static async Task ProcessMicrosoftGraphInteractiveResponse(BatchRequest graphRequest, HttpStatusCode statusCode, HttpResponseMessage response, Stream responseContent)
+        private static async Task ProcessMicrosoftGraphInteractiveResponse(BatchRequest graphRequest, HttpStatusCode statusCode, Dictionary<string, string> responseHeaders, Stream responseContent)
         {
             // If a binary response content is expected
             if (graphRequest.ApiCall.ExpectBinaryResponse)
@@ -1118,9 +1104,6 @@ namespace PnP.Core.Services
                     responseStringContent = requestResponse;
                 }
             }
-
-            // Process response headers
-            Dictionary<string, string> responseHeaders = MicrosoftGraphResposeHeadersToPropagate(response?.Headers);
 
             // Run request modules if they're connected
             if (graphRequest.RequestModules != null && graphRequest.RequestModules.Count > 0)
@@ -1338,11 +1321,11 @@ namespace PnP.Core.Services
                                                     }
 
                                                     // Write response
-                                                    TestManager.RecordResponse(PnPContext, requestKey, batchResponse);
+                                                    TestManager.RecordResponse(PnPContext, requestKey, batchResponse, response.IsSuccessStatusCode, (int)response.StatusCode, SpoRestResposeHeadersToPropagate(response?.Headers));
                                                 }
 #endif
 
-                                                await ProcessSharePointRestBatchResponse(splitRestBatch, batchResponse, response.Headers).ConfigureAwait(false);
+                                                await ProcessSharePointRestBatchResponse(splitRestBatch, batchResponse, SpoRestResposeHeadersToPropagate(response?.Headers)).ConfigureAwait(false);
                                             }
                                         }
                                     }
@@ -1363,9 +1346,9 @@ namespace PnP.Core.Services
                             }
                             else
                             {
-                                string batchResponse = TestManager.MockResponse(PnPContext, requestKey);
+                                var testResponse = TestManager.MockResponse(PnPContext, requestKey);
 
-                                await ProcessSharePointRestBatchResponse(splitRestBatch, batchResponse, null).ConfigureAwait(false);
+                                await ProcessSharePointRestBatchResponse(splitRestBatch, testResponse.Response, testResponse.Headers).ConfigureAwait(false);
                             }
 #endif
 
@@ -1534,7 +1517,7 @@ namespace PnP.Core.Services
         /// <param name="batchResponse">The raw content of the response</param>
         /// <param name="headers">Batch request response headers</param>
         /// <returns></returns>
-        private async Task ProcessSharePointRestBatchResponse(SPORestBatch restBatch, string batchResponse, HttpResponseHeaders headers)
+        private async Task ProcessSharePointRestBatchResponse(SPORestBatch restBatch, string batchResponse, Dictionary<string, string> headers)
         {
             using (var tracer = Tracer.Track(PnPContext.Logger, "ExecuteSharePointRestBatchAsync-JSONToModel"))
             {
@@ -1566,8 +1549,8 @@ namespace PnP.Core.Services
         /// </summary>
         /// <param name="batch">Batch that we're processing</param>
         /// <param name="batchResponse">Batch response received from the server</param>
-        /// <param name="headers">Batch request response headers</param>
-        private static void ProcessSharePointRestBatchResponseContent(Batch batch, string batchResponse, HttpResponseHeaders headers)
+        /// <param name="responseHeadersToPropagate">Batch request response headers</param>
+        private static void ProcessSharePointRestBatchResponseContent(Batch batch, string batchResponse, Dictionary<string, string> responseHeadersToPropagate)
         {
 #if !NET5_0_OR_GREATER
             var responseLines = batchResponse.Split(new char[] { '\n' });
@@ -1576,8 +1559,7 @@ namespace PnP.Core.Services
             var httpStatusCode = HttpStatusCode.Continue;
 
             bool responseContentOpen = false;
-            bool collectHeaders = false;
-            Dictionary<string,string> responseHeadersToPropagate = SpoRestResposeHeadersToPropagate(headers);
+            bool collectHeaders = false;            
 
             Dictionary<string, string> responseHeaders = new Dictionary<string, string>(responseHeadersToPropagate);
             StringBuilder responseContent = new StringBuilder();
@@ -1938,11 +1920,11 @@ namespace PnP.Core.Services
                                 }
 
                                 // Write response
-                                TestManager.RecordResponse(PnPContext, batchKey, ref requestResponseStream);
+                                TestManager.RecordResponse(PnPContext, batchKey, ref requestResponseStream, response.IsSuccessStatusCode, (int)response.StatusCode, SpoRestResposeHeadersToPropagate(response?.Headers));
                             }
 #endif
 
-                            await ProcessSharePointRestInteractiveResponse(restRequest, response.StatusCode, response, requestResponseStream).ConfigureAwait(false);
+                            await ProcessSharePointRestInteractiveResponse(restRequest, response.StatusCode, SpoRestResposeHeadersToPropagate(response?.Headers), requestResponseStream).ConfigureAwait(false);
 
                         }
                         else
@@ -1952,45 +1934,30 @@ namespace PnP.Core.Services
                             if (PnPContext.Mode == TestMode.Record)
                             {
                                 // Write response
-                                TestManager.RecordResponse(PnPContext, batchKey, errorContent, false, response);
+                                TestManager.RecordResponse(PnPContext, batchKey, errorContent, response.IsSuccessStatusCode, (int)response.StatusCode, SpoRestResposeHeadersToPropagate(response?.Headers));
                             }
 #endif
                             // Something went wrong...
                             throw new SharePointRestServiceException(ErrorType.SharePointRestServiceError, 
-                            (int)response.StatusCode,
-                            errorContent,
-                            SpoRestResposeHeadersToPropagate(response.Headers));
+                                                                        (int)response.StatusCode,
+                                                                        errorContent,
+                                                                        SpoRestResposeHeadersToPropagate(response.Headers));
                         }
 #if DEBUG
                     }
                     else
                     {
-                        var requestResponseStream = TestManager.MockResponseAsStream(PnPContext, batchKey);
+                        var testResponse = TestManager.MockResponse(PnPContext, batchKey);
 
-                        HttpStatusCode mockedResponseStatus = HttpStatusCode.OK;
-
-                        var extraResponse = TestManager.MockExtraResponse(PnPContext, batchKey);
-                        if (extraResponse != null)
+                        if (!testResponse.IsSuccessStatusCode)
                         {
-                            mockedResponseStatus = (HttpStatusCode)extraResponse.StatusCode;
-
-                            if (!extraResponse.IsSuccessStatusCode)
-                            {
-                                string errorMessage = null;
-                                using (var streamReader = new StreamReader(requestResponseStream))
-                                {
-                                    requestResponseStream.Seek(0, SeekOrigin.Begin);
-                                    errorMessage = await streamReader.ReadToEndAsync().ConfigureAwait(false);                                    
-                                }
-
-                                throw new SharePointRestServiceException(ErrorType.SharePointRestServiceError,
-                                    extraResponse.StatusCode,
-                                    errorMessage,
-                                    extraResponse.Headers);
-                            }
+                            throw new SharePointRestServiceException(ErrorType.SharePointRestServiceError,
+                                   testResponse.StatusCode,
+                                   testResponse.Response,
+                                   testResponse.Headers);
                         }
 
-                        await ProcessSharePointRestInteractiveResponse(restRequest, mockedResponseStatus, null, requestResponseStream).ConfigureAwait(false);
+                        await ProcessSharePointRestInteractiveResponse(restRequest, (HttpStatusCode)testResponse.StatusCode, testResponse.Headers, testResponse.Response.AsStream()).ConfigureAwait(false);
                     }
 #endif
 
@@ -2011,7 +1978,7 @@ namespace PnP.Core.Services
             }
         }
 
-        private static async Task ProcessSharePointRestInteractiveResponse(BatchRequest restRequest, HttpStatusCode statusCode, HttpResponseMessage response, Stream responseContent)
+        private static async Task ProcessSharePointRestInteractiveResponse(BatchRequest restRequest, HttpStatusCode statusCode, Dictionary<string, string> responseHeaders, Stream responseContent)
         {
             // If a binary response content is expected
             if (restRequest.ApiCall.ExpectBinaryResponse)
@@ -2035,9 +2002,6 @@ namespace PnP.Core.Services
                     responseStringContent = requestResponse;
                 }
             }
-
-            // Process response headers
-            Dictionary<string, string> responseHeaders = SpoRestResposeHeadersToPropagate(response?.Headers);
 
             // Run request modules if they're connected
             if (restRequest.RequestModules != null && restRequest.RequestModules.Count > 0)
@@ -2208,7 +2172,7 @@ namespace PnP.Core.Services
                                                     }
 
                                                     // Write response
-                                                    TestManager.RecordResponse(PnPContext, requestKey, batchResponse);
+                                                    TestManager.RecordResponse(PnPContext, requestKey, batchResponse, response.IsSuccessStatusCode, (int)response.StatusCode, SpoRestResposeHeadersToPropagate(response?.Headers));
                                                 }
 #endif
 
@@ -2218,11 +2182,20 @@ namespace PnP.Core.Services
                                     }
                                     else
                                     {
+
+                                        string errorContent = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+#if DEBUG
+                                        if (PnPContext.Mode == TestMode.Record)
+                                        {
+                                            // Write response
+                                            TestManager.RecordResponse(PnPContext, requestKey, errorContent, response.IsSuccessStatusCode, (int)response.StatusCode, SpoRestResposeHeadersToPropagate(response?.Headers));
+                                        }
+#endif
                                         // Something went wrong...
-                                        throw new SharePointRestServiceException(ErrorType.SharePointRestServiceError, 
-                                            (int)response.StatusCode, 
-                                            await response.Content.ReadAsStringAsync().ConfigureAwait(false),
-                                            SpoRestResposeHeadersToPropagate(response.Headers));
+                                        throw new SharePointRestServiceException(ErrorType.SharePointRestServiceError,
+                                                                                    (int)response.StatusCode,
+                                                                                    errorContent,
+                                                                                    SpoRestResposeHeadersToPropagate(response.Headers));
                                     }
                                 }
                                 finally
@@ -2233,9 +2206,17 @@ namespace PnP.Core.Services
                             }
                             else
                             {
-                                string batchResponse = TestManager.MockResponse(PnPContext, requestKey);
+                                var testResponse = TestManager.MockResponse(PnPContext, requestKey);
 
-                                ProcessCsomBatchResponse(csomBatch, batchResponse, HttpStatusCode.OK);
+                                if (!testResponse.IsSuccessStatusCode)
+                                {
+                                    throw new SharePointRestServiceException(ErrorType.SharePointRestServiceError,
+                                           testResponse.StatusCode,
+                                           testResponse.Response,
+                                           testResponse.Headers);
+                                }
+
+                                ProcessCsomBatchResponse(csomBatch, testResponse.Response, (HttpStatusCode)testResponse.StatusCode);
                             }
 #endif
 

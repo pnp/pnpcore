@@ -415,7 +415,12 @@ namespace PnP.Core.Services
 
             if (field != null)
             {
-                switch(field.TypeAsString)
+                if (BuiltInFields.Contains(field.InternalName))
+                {
+                    return new Tuple<object, string>(null, null);
+                }
+
+                switch (field.TypeAsString)
                 {
                     case "URL":
                         {

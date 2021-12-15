@@ -1,9 +1,0 @@
---batchresponse_c8acde80-dd22-482a-b3c0-ab8905c967a9
-Content-Type: application/http
-Content-Transfer-Encoding: binary
-
-HTTP/1.1 200 OK
-CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
-
-{"d":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-2/subsite/_api/web/regionalsettings/timezone","uri":"https://bertonline.sharepoint.com/sites/prov-2/subsite/_api/web/regionalsettings/timezone","type":"SP.TimeZone"},"Description":"(UTC-08:00) Pacific Time (US and Canada)","Id":13,"Information":{"__metadata":{"type":"SP.TimeZoneInformation"},"Bias":480,"DaylightBias":-60,"StandardBias":0}}}
---batchresponse_c8acde80-dd22-482a-b3c0-ab8905c967a9--

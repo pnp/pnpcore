@@ -1,9 +1,0 @@
---batchresponse_c7f9a305-e1a6-47fe-bbad-d3bf8360ebcf
-Content-Type: application/http
-Content-Transfer-Encoding: binary
-
-HTTP/1.1 200 OK
-CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
-
-{"d":{"StopFollowing":null}}
---batchresponse_c7f9a305-e1a6-47fe-bbad-d3bf8360ebcf--

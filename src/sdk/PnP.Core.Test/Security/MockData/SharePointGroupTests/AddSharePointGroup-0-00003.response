@@ -1,9 +1,0 @@
---batchresponse_d5ec4d59-41ca-4ae1-8cf9-6130e94f03e8
-Content-Type: application/http
-Content-Transfer-Encoding: binary
-
-HTTP/1.1 200 OK
-CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
-
-{"d":{"results":[{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-2/_api/Web/SiteGroups/GetById(12)","uri":"https://bertonline.sharepoint.com/sites/prov-2/_api/Web/SiteGroups/GetById(12)","type":"SP.Group"},"Owner":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-2/_api/Web/SiteGroups/GetById(12)/Owner"}},"Users":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-2/_api/Web/SiteGroups/GetById(12)/Users"}},"Id":12,"IsHiddenInUI":false,"LoginName":"PNP_SDK_TEST_TestGroup","Title":"PNP_SDK_TEST_TestGroup","PrincipalType":8,"AllowMembersEditMembership":false,"AllowRequestToJoinLeave":false,"AutoAcceptRequestToJoinLeave":false,"Description":null,"OnlyAllowMembersViewMembership":true,"OwnerTitle":"Bert Jansen (Cloud)","RequestToJoinLeaveEmailSetting":null}]}}
---batchresponse_d5ec4d59-41ca-4ae1-8cf9-6130e94f03e8--
