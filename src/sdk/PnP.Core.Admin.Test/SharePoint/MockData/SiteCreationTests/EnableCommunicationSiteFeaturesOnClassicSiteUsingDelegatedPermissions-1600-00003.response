@@ -1,9 +1,0 @@
---batchresponse_a728d93d-121a-45f5-9686-916069af83ec
-Content-Type: application/http
-Content-Transfer-Encoding: binary
-
-HTTP/1.1 200 OK
-CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
-
-{"d":{"Enable":null}}
---batchresponse_a728d93d-121a-45f5-9686-916069af83ec--

@@ -1,9 +1,0 @@
---batchresponse_3e992c51-6cac-4e6b-abb6-04ad463688ed
-Content-Type: application/http
-Content-Transfer-Encoding: binary
-
-HTTP/1.1 200 OK
-CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
-
-{"d":{"EnsureTenantAppCatalog":false}}
---batchresponse_3e992c51-6cac-4e6b-abb6-04ad463688ed--

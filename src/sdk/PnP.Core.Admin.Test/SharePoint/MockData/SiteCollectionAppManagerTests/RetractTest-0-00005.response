@@ -1,9 +1,0 @@
---batchresponse_c9265480-5f00-44b5-b224-c5cd9fdd6eab
-Content-Type: application/http
-Content-Transfer-Encoding: binary
-
-HTTP/1.1 200 OK
-CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
-
-{"d":{"Retract":null}}
---batchresponse_c9265480-5f00-44b5-b224-c5cd9fdd6eab--

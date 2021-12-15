@@ -1,9 +1,0 @@
---batchresponse_2675fcd7-c800-45c0-8686-cfa35c0f0359
-Content-Type: application/http
-Content-Transfer-Encoding: binary
-
-HTTP/1.1 200 OK
-CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
-
-{"d":{"GetSiteSecondaryAdministrators":{"__metadata":{"type":"Collection(Microsoft.Online.SharePoint.TenantAdministration.SecondaryAdministratorsInfo)"},"results":[]}}}
---batchresponse_2675fcd7-c800-45c0-8686-cfa35c0f0359--

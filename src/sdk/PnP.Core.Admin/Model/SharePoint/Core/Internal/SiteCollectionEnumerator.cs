@@ -97,7 +97,7 @@ namespace PnP.Core.Admin.Model.SharePoint
                 }
 
                 var myList = await tenantAdminContext.Web.Lists.GetByServerRelativeUrlAsync(
-                                $"{tenantAdminContext.Uri}Lists/{listToQuery}",
+                                $"Lists/{listToQuery}",
                                 p => p.Title,
                                 p => p.Fields.QueryProperties(p => p.InternalName,
                                                               p => p.FieldTypeKind,

@@ -40,8 +40,9 @@ namespace PnP.Core.Admin.Model.SharePoint
                 */
                 #endregion
 
-                var valueProperty = JsonSerializer.Deserialize<JsonElement>(response.Json).GetProperty("d").GetProperty("HideTeamifyPrompt");
-                return valueProperty.ValueKind == JsonValueKind.Null;
+                var valueProperty = JsonSerializer.Deserialize<JsonElement>(response.Json).GetProperty("odata.null");
+
+                return valueProperty.GetBoolean() == true;
             }
         }
 
@@ -67,7 +68,7 @@ namespace PnP.Core.Admin.Model.SharePoint
                 */
                 #endregion
 
-                return JsonSerializer.Deserialize<JsonElement>(response.Json).GetProperty("d").GetProperty("IsTeamifyPromptHidden").GetBoolean();
+                return JsonSerializer.Deserialize<JsonElement>(response.Json).GetProperty("value").GetBoolean();
             }
         }
 

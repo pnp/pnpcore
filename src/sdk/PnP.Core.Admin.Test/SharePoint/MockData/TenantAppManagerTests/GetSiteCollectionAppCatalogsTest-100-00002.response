@@ -1,9 +1,0 @@
---batchresponse_638e1bfc-214e-4306-88fc-5877565ccf06
-Content-Type: application/http
-Content-Transfer-Encoding: binary
-
-HTTP/1.1 200 OK
-CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
-
-{"d":{"results":[{"__metadata":{"id":"https://m365x790252.sharepoint.com/sites/appcatalog/_api/Microsoft.SharePoint.Marketplace.CorporateCuratedGallery.SiteCollectionAppCatalogAllowedItem190af77d-eda9-459e-836f-b322b170c98c","uri":"https://m365x790252.sharepoint.com/sites/appcatalog/_api/Microsoft.SharePoint.Marketplace.CorporateCuratedGallery.SiteCollectionAppCatalogAllowedItem190af77d-eda9-459e-836f-b322b170c98c","type":"Microsoft.SharePoint.Marketplace.CorporateCuratedGallery.SiteCollectionAppCatalogAllowedItem"},"AbsoluteUrl":"https://m365x790252.sharepoint.com/sites/dev-catalog","SiteID":"654616af-c929-43c9-97c2-43c0b656da55"}]}}
---batchresponse_638e1bfc-214e-4306-88fc-5877565ccf06--

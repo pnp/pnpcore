@@ -1,9 +1,0 @@
---batchresponse_46386cd9-5758-4e14-bfef-f25d0d768547
-Content-Type: application/http
-Content-Transfer-Encoding: binary
-
-HTTP/1.1 200 OK
-CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
-
-{"d":{"Deploy":null}}
---batchresponse_46386cd9-5758-4e14-bfef-f25d0d768547--

@@ -1,9 +1,0 @@
---batchresponse_e707238e-da82-474a-bd40-2b827f16dd12
-Content-Type: application/http
-Content-Transfer-Encoding: binary
-
-HTTP/1.1 200 OK
-CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
-
-{"d":{"results":[{"__metadata":{"id":"https://bertonline-admin.sharepoint.com/_api/SP.Directory.User86c641ee-cab3-4561-b902-eebdf6fb5cbc","uri":"https://bertonline-admin.sharepoint.com/_api/SP.Directory.User86c641ee-cab3-4561-b902-eebdf6fb5cbc","type":"SP.Directory.User"},"displayName":"Bert Jansen (Cloud)","id":"33aca310-a489-4121-b853-663d0327fe08","mail":"bert.jansen@bertonline.onmicrosoft.com","principalName":"bert.jansen@bertonline.onmicrosoft.com"},{"__metadata":{"id":"https://bertonline-admin.sharepoint.com/_api/SP.Directory.Userad7c6634-821b-443a-bac1-681915e19028","uri":"https://bertonline-admin.sharepoint.com/_api/SP.Directory.Userad7c6634-821b-443a-bac1-681915e19028","type":"SP.Directory.User"},"displayName":"Kevin Cook","id":"7cffa5d0-513a-4f44-b40c-c3b0dba47e07","mail":"KevinC@bertonline.onmicrosoft.com","principalName":"KevinC@bertonline.onmicrosoft.com"},{"__metadata":{"id":"https://bertonline-admin.sharepoint.com/_api/SP.Directory.User42fefc19-c41c-4b56-a906-6d094f807079","uri":"https://bertonline-admin.sharepoint.com/_api/SP.Directory.User42fefc19-c41c-4b56-a906-6d094f807079","type":"SP.Directory.User"},"displayName":"Test","id":"167987be-02e0-41bf-9cc9-a2bf687c530c","mail":"test@bertonline.onmicrosoft.com","principalName":"test@bertonline.onmicrosoft.com"}]}}
---batchresponse_e707238e-da82-474a-bd40-2b827f16dd12--

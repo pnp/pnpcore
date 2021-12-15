@@ -1020,7 +1020,21 @@ namespace PnP.Core.Services
                                 // Call out to the rewrite handler if that one is connected
                                 if (MockingFileRewriteHandler != null)
                                 {
-                                    var mockedRewrittenFileString = MockingFileRewriteHandler(requestResponseStream.CopyAsString());
+                                    string responseStringContent = null;
+                                    if (response.StatusCode == HttpStatusCode.NoContent)
+                                    {
+                                        responseStringContent = "";
+                                    }
+                                    else
+                                    {
+                                        using (var streamReader = new StreamReader(requestResponseStream))
+                                        {
+                                            string requestResponse = await streamReader.ReadToEndAsync().ConfigureAwait(false);
+                                            responseStringContent = requestResponse;
+                                        }
+                                    }
+
+                                    var mockedRewrittenFileString = MockingFileRewriteHandler(responseStringContent);
                                     requestResponseStream = mockedRewrittenFileString.AsStream();
                                 }
 
@@ -1915,7 +1929,21 @@ namespace PnP.Core.Services
                                 // Call out to the rewrite handler if that one is connected
                                 if (MockingFileRewriteHandler != null)
                                 {
-                                    var mockedRewrittenFileString = MockingFileRewriteHandler(requestResponseStream.CopyAsString());
+                                    string responseStringContent = null;
+                                    if (response.StatusCode == HttpStatusCode.NoContent)
+                                    {
+                                        responseStringContent = "";
+                                    }
+                                    else
+                                    {
+                                        using (var streamReader = new StreamReader(requestResponseStream))
+                                        {
+                                            string requestResponse = await streamReader.ReadToEndAsync().ConfigureAwait(false);
+                                            responseStringContent = requestResponse;
+                                        }
+                                    }
+
+                                    var mockedRewrittenFileString = MockingFileRewriteHandler(responseStringContent);
                                     requestResponseStream = mockedRewrittenFileString.AsStream();
                                 }
 

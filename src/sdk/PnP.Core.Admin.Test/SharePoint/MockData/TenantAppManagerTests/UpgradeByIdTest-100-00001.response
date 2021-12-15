@@ -1,9 +1,0 @@
---batchresponse_50469f70-80dd-4886-a7a1-7c6c23801062
-Content-Type: application/http
-Content-Transfer-Encoding: binary
-
-HTTP/1.1 200 OK
-CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
-
-{"d":{"__metadata":{"id":"https://m365x790252.sharepoint.com/sites/appcatalog/_api/Site","uri":"https://m365x790252.sharepoint.com/sites/appcatalog/_api/Site","type":"SP.Site"},"GroupId":"00000000-0000-0000-0000-000000000000","Id":"9c23c117-9f57-4f35-a919-502ad997d239"}}
---batchresponse_50469f70-80dd-4886-a7a1-7c6c23801062--

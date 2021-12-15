@@ -1,9 +1,0 @@
---batchresponse_b06ffc12-2db6-4578-90c3-afa264a4c5e6
-Content-Type: application/http
-Content-Transfer-Encoding: binary
-
-HTTP/1.1 200 OK
-CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
-
-{"d":{"IsTeamifyPromptHidden":true}}
---batchresponse_b06ffc12-2db6-4578-90c3-afa264a4c5e6--

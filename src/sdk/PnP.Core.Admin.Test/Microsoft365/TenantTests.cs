@@ -26,7 +26,6 @@ namespace PnP.Core.Admin.Test.Microsoft365
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 var multiGeoTenant = context.GetMicrosoft365Admin().IsMultiGeoTenant();
-                Assert.IsFalse(multiGeoTenant);
             }
         }
 
@@ -36,8 +35,17 @@ namespace PnP.Core.Admin.Test.Microsoft365
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
+                var multiGeoTenant = context.GetMicrosoft365Admin().IsMultiGeoTenant();
                 var locations = context.GetMicrosoft365Admin().GetMultiGeoLocations();
-                Assert.IsNull(locations);
+                if (multiGeoTenant)
+                {
+                    Assert.IsNotNull(locations);
+                    Assert.IsTrue(locations.Count > 0);
+                }
+                else
+                {
+                    Assert.IsNull(locations);
+                }
             }
         }
 

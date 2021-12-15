@@ -1,9 +1,0 @@
---batchresponse_4e6810b7-a867-4d6a-b59b-bd3893654009
-Content-Type: application/http
-Content-Transfer-Encoding: binary
-
-HTTP/1.1 200 OK
-CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
-
-{"d":{"AddAndDeployStoreAppById":null}}
---batchresponse_4e6810b7-a867-4d6a-b59b-bd3893654009--

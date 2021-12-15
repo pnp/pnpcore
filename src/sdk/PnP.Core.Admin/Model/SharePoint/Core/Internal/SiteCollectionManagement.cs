@@ -225,7 +225,7 @@ namespace PnP.Core.Admin.Model.SharePoint
                     #endregion
 
                     var groupOwnerJsonResponse = JsonSerializer.Deserialize<JsonElement>(groupOwnerResults.Json);
-                    if (groupOwnerJsonResponse.GetProperty("d").TryGetProperty("results", out JsonElement valueProperty))
+                    if (groupOwnerJsonResponse.TryGetProperty("value", out JsonElement valueProperty))
                     {
                         if (valueProperty.ValueKind == JsonValueKind.Array)
                         {
@@ -294,7 +294,7 @@ namespace PnP.Core.Admin.Model.SharePoint
                 #endregion
 
                 var jsonResponse = JsonSerializer.Deserialize<JsonElement>(results.Json);
-                if (jsonResponse.GetProperty("d").GetProperty("GetSiteSecondaryAdministrators").TryGetProperty("results", out JsonElement resultsProperty))
+                if (jsonResponse.TryGetProperty("value", out JsonElement resultsProperty))
                 {
                     if (resultsProperty.ValueKind == JsonValueKind.Array)
                     {
