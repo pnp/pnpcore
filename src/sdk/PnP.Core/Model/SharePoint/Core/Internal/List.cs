@@ -605,6 +605,15 @@ namespace PnP.Core.Model.SharePoint
 
             if (!string.IsNullOrEmpty(response.Json))
             {
+                var parsedJson = JsonSerializer.Deserialize<JsonElement>(response.Json, PnPConstants.JsonSerializer_PropertyNameCaseInsensitiveTrue);
+                if (parsedJson.TryGetProperty("odata.null", out JsonElement odataNull))
+                {
+                    if (odataNull.GetBoolean())
+                    {
+                        return null;
+                    }
+                }
+
                 return JsonSerializer.Deserialize<ComplianceTag>(response.Json, PnPConstants.JsonSerializer_PropertyNameCaseInsensitiveTrue);
             }
 
