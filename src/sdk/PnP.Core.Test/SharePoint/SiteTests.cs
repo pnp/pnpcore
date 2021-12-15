@@ -3,6 +3,7 @@ using PnP.Core.Model.SharePoint;
 using PnP.Core.Test.Utilities;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace PnP.Core.Test.SharePoint
@@ -232,6 +233,7 @@ namespace PnP.Core.Test.SharePoint
 
                     // TODO: Compliance tags are not returned for the site...more research is needed
                     Assert.IsTrue(complianceTags != null);
+                    Assert.IsTrue(complianceTags.Any() == false);
                 }
                 finally
                 {
