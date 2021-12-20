@@ -337,26 +337,22 @@ namespace PnP.Core.Admin.Model.SharePoint
         private static async Task<PnPContext> CreateSiteUsingSpoRestImplementationAsync(PnPContext context, SiteCreationModel siteCreationModel, Dictionary<string, object> payload, SiteCreationOptions creationOptions)
         {
             string apiCall;
-            string statusProperty;
             string body;
 
             if (siteCreationModel == SiteCreationModel.SPSiteManagerCreate)
             {
                 apiCall = $"_api/SPSiteManager/Create";
-                statusProperty = "Create";
                 var json = new { request = payload }.AsExpando();
                 body = JsonSerializer.Serialize(json, typeof(ExpandoObject));
             }
             else if (siteCreationModel == SiteCreationModel.GroupSiteManagerCreateGroupEx)
             {
                 apiCall = $"_api/GroupSiteManager/CreateGroupEx";
-                statusProperty = "CreateGroupEx";
                 body = JsonSerializer.Serialize(payload, PnPConstants.JsonSerializer_IgnoreNullValues_CamelCase);
             }
             else if (siteCreationModel == SiteCreationModel.GroupSiteManagerCreateGroupForSite)
             {
                 apiCall = $"_api/GroupSiteManager/CreateGroupForSite";
-                statusProperty = "CreateGroupForSite";
                 body = JsonSerializer.Serialize(payload, PnPConstants.JsonSerializer_IgnoreNullValues_CamelCase);
             }
             else
@@ -502,17 +498,14 @@ namespace PnP.Core.Admin.Model.SharePoint
             int lastSiteStatus = -1;
 
             string apiCall;
-            string statusProperty;
 
             if (siteCreationModel == SiteCreationModel.SPSiteManagerCreate)
             {
                 apiCall = $"_api/SPSiteManager/status?url='{HttpUtility.UrlEncode(urlOrGroupToCheck)}'";
-                statusProperty = "Status";
             }
             else
             {
                 apiCall = $"_api/groupsitemanager/GetSiteStatus('{urlOrGroupToCheck}')";
-                statusProperty = "GetSiteStatus";
             }
 
             do
