@@ -16,7 +16,7 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// Gets or sets the field internal name specified in the field link.
         /// </summary>
-        public string FieldInternalName { get; set; }
+        public string FieldInternalName { get; }
 
         /// <summary>
         /// Gets or sets a Boolean value that specifies whether the field is displayed in forms that can be edited.

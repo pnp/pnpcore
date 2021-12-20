@@ -64,6 +64,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Documentation update showing improved PnP PowerShell syntax for creating Azure AD applications #681 [JackStrap - Jack Strapopoulos]
 - PERF: use network compression, batches with just one request are now handled as "regular" request enabling compression to work #654 [jansenbe - Bert Jansen]
 - PERF: switched to using odata=nometadata to pull less data across the wire for SharePoint REST requests #655 [jansenbe - Bert Jansen]
+- Fix: adding, updating and removing FieldLinks from site/list content types now is supported [jansenbe - Bert Jansen]
 
 ## [1.4.0]
 

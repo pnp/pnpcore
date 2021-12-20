@@ -70,6 +70,11 @@ namespace PnP.Core.Services.Core.CSOM.QueryAction
                     string properties = string.Join("", (Value as List<NamedProperty>).Select(value => $"<Property Name=\"{value.Name}\" Type=\"{value.Type}\">{value.Value}</Property>"));
                     return $"<{ParameterTagName} TypeId=\"{{{TypeId}}}\">{properties}</{ParameterTagName}>";
                 }
+                else if (Value is IdentityProperty identityProperty)
+                {
+                    var property = identityProperty.ToString();
+                    return $"<{ParameterTagName} TypeId=\"{{{TypeId}}}\">{property}</{ParameterTagName}>";
+                }
 
                 return $"<{ParameterTagName} TypeId=\"{{{TypeId}}}\">{stringValue}</{ParameterTagName}>";
             }

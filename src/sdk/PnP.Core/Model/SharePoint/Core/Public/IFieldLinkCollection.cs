@@ -14,82 +14,52 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// Adds a field link via a batch
         /// </summary>
-        /// <param name="fieldInternalName">Internal name of the field</param>
-        /// <param name="displayName">Display name of the field</param>
-        /// <param name="hidden">Field is hidden</param>
-        /// <param name="required">Field is required</param>
-        /// <param name="readOnly">Field is read only</param>
-        /// <param name="showInDisplayForm">Show the field in the display form</param>
-        /// <returns>Added field link</returns>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Naming", "CA1716:Identifiers should not match keywords", Justification = "<Pending>")]
-        Task<IFieldLink> AddBatchAsync(string fieldInternalName, string displayName = null, bool hidden = false, bool required = false, bool readOnly = false, bool showInDisplayForm = true);
+        /// <param name="field">Field to add as field link</param>
+        Task AddBatchAsync(IField field);
 
         /// <summary>
         /// Adds a field link via a batch
         /// </summary>
-        /// <param name="fieldInternalName">Internal name of the field</param>
-        /// <param name="displayName">Display name of the field</param>
-        /// <param name="hidden">Field is hidden</param>
-        /// <param name="required">Field is required</param>
-        /// <param name="readOnly">Field is read only</param>
-        /// <param name="showInDisplayForm">Show the field in the display form</param>
-        /// <returns>Added field link</returns>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Naming", "CA1716:Identifiers should not match keywords", Justification = "<Pending>")]
-        IFieldLink AddBatch(string fieldInternalName, string displayName = null, bool hidden = false, bool required = false, bool readOnly = false, bool showInDisplayForm = true);
+        /// <param name="field">Field to add as field link</param>
+        void AddBatch(IField field);
 
         /// <summary>
         /// Adds a field link via a batch
         /// </summary>
         /// <param name="batch">Batcht to add this request to</param>
-        /// <param name="fieldInternalName">Internal name of the field</param>
-        /// <param name="displayName">Display name of the field</param>
-        /// <param name="hidden">Field is hidden</param>
-        /// <param name="required">Field is required</param>
-        /// <param name="readOnly">Field is read only</param>
-        /// <param name="showInDisplayForm">Show the field in the display form</param>
-        /// <returns>Added field link</returns>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Naming", "CA1716:Identifiers should not match keywords", Justification = "<Pending>")]
-        Task<IFieldLink> AddBatchAsync(Batch batch, string fieldInternalName, string displayName = null, bool hidden = false, bool required = false, bool readOnly = false, bool showInDisplayForm = true);
+        /// <param name="field">Field to add as field link</param>
+        Task AddBatchAsync(Batch batch, IField field);
 
         /// <summary>
         /// Adds a field link via a batch
         /// </summary>
         /// <param name="batch">Batcht to add this request to</param>
-        /// <param name="fieldInternalName">Internal name of the field</param>
-        /// <param name="displayName">Display name of the field</param>
-        /// <param name="hidden">Field is hidden</param>
-        /// <param name="required">Field is required</param>
-        /// <param name="readOnly">Field is read only</param>
-        /// <param name="showInDisplayForm">Show the field in the display form</param>
-        /// <returns>Added field link</returns>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Naming", "CA1716:Identifiers should not match keywords", Justification = "<Pending>")]
-        IFieldLink AddBatch(Batch batch, string fieldInternalName, string displayName = null, bool hidden = false, bool required = false, bool readOnly = false, bool showInDisplayForm = true);
+        /// <param name="field">Field to add as field link</param>
+        void AddBatch(Batch batch, IField field);
 
         /// <summary>
-        /// Adds a field link 
+        /// Adds a field link for the given field
         /// </summary>
-        /// <param name="fieldInternalName">Internal name of the field</param>
+        /// <param name="field">Field to add as field link</param>
         /// <param name="displayName">Display name of the field</param>
         /// <param name="hidden">Field is hidden</param>
         /// <param name="required">Field is required</param>
         /// <param name="readOnly">Field is read only</param>
         /// <param name="showInDisplayForm">Show the field in the display form</param>
-        /// <returns>Added field link</returns>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Naming", "CA1716:Identifiers should not match keywords", Justification = "<Pending>")]
-        Task<IFieldLink> AddAsync(string fieldInternalName, string displayName = null, bool hidden = false, bool required = false, bool readOnly = false, bool showInDisplayForm = true);
-
+        /// <returns>added FieldLink</returns>
+        Task<IFieldLink> AddAsync(IField field, string displayName = null, bool hidden = false, bool required = false, bool readOnly = false, bool showInDisplayForm = true);
 
         /// <summary>
-        /// Adds a field link 
+        /// Adds a field link for the given field
         /// </summary>
-        /// <param name="fieldInternalName">Internal name of the field</param>
+        /// <param name="field">Field to add as field link</param>
         /// <param name="displayName">Display name of the field</param>
         /// <param name="hidden">Field is hidden</param>
         /// <param name="required">Field is required</param>
         /// <param name="readOnly">Field is read only</param>
         /// <param name="showInDisplayForm">Show the field in the display form</param>
-        /// <returns>Added field link</returns>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Naming", "CA1716:Identifiers should not match keywords", Justification = "<Pending>")]
-        IFieldLink Add(string fieldInternalName, string displayName = null, bool hidden = false, bool required = false, bool readOnly = false, bool showInDisplayForm = true);
+        /// <returns>added FieldLink</returns>
+        IFieldLink Add(IField field, string displayName = null, bool hidden = false, bool required = false, bool readOnly = false, bool showInDisplayForm = true);
+
     }
 }

@@ -18,7 +18,7 @@ namespace PnP.Core.Services.Core.CSOM.QueryIdentities
 
         public override string ToString()
         {
-            return $"<StaticProperty  Id=\"{Id}\" TypeId=\"{TypeId}\" Name=\"{Name}\" />";
+            return $"<StaticProperty Id=\"{Id}\" TypeId=\"{TypeId}\" Name=\"{Name}\" />";
         }
     }
 
@@ -42,4 +42,17 @@ namespace PnP.Core.Services.Core.CSOM.QueryIdentities
             return $"<Property Name=\"{Name}\" Type=\"{Type}\">{stringValue}</Property>";
         }
     }
+
+    internal sealed class IdentityProperty
+    {
+        internal string Name { get; set; }
+
+        internal string ObjectPathId { get; set; }
+
+        public override string ToString()
+        {
+            return $"<Property Name=\"{Name}\" ObjectPathId=\"{ObjectPathId}\" />";
+        }
+    }
+
 }
