@@ -21233,12 +21233,12 @@ references:
   commentId: T:PnP.Core.Model.SharePoint.IFieldLinkCollection
   fullName: PnP.Core.Model.SharePoint.IFieldLinkCollection
   nameWithType: IFieldLinkCollection
-- uid: PnP.Core.Model.SharePoint.IFieldLinkCollection.Add(System.String,System.String,System.Boolean,System.Boolean,System.Boolean,System.Boolean)
-  name: Add(String, String, Boolean, Boolean, Boolean, Boolean)
-  href: api/PnP.Core.Model.SharePoint.IFieldLinkCollection.html#PnP_Core_Model_SharePoint_IFieldLinkCollection_Add_System_String_System_String_System_Boolean_System_Boolean_System_Boolean_System_Boolean_
-  commentId: M:PnP.Core.Model.SharePoint.IFieldLinkCollection.Add(System.String,System.String,System.Boolean,System.Boolean,System.Boolean,System.Boolean)
-  fullName: PnP.Core.Model.SharePoint.IFieldLinkCollection.Add(System.String, System.String, System.Boolean, System.Boolean, System.Boolean, System.Boolean)
-  nameWithType: IFieldLinkCollection.Add(String, String, Boolean, Boolean, Boolean, Boolean)
+- uid: PnP.Core.Model.SharePoint.IFieldLinkCollection.Add(PnP.Core.Model.SharePoint.IField,System.String,System.Boolean,System.Boolean,System.Boolean,System.Boolean)
+  name: Add(IField, String, Boolean, Boolean, Boolean, Boolean)
+  href: api/PnP.Core.Model.SharePoint.IFieldLinkCollection.html#PnP_Core_Model_SharePoint_IFieldLinkCollection_Add_PnP_Core_Model_SharePoint_IField_System_String_System_Boolean_System_Boolean_System_Boolean_System_Boolean_
+  commentId: M:PnP.Core.Model.SharePoint.IFieldLinkCollection.Add(PnP.Core.Model.SharePoint.IField,System.String,System.Boolean,System.Boolean,System.Boolean,System.Boolean)
+  fullName: PnP.Core.Model.SharePoint.IFieldLinkCollection.Add(PnP.Core.Model.SharePoint.IField, System.String, System.Boolean, System.Boolean, System.Boolean, System.Boolean)
+  nameWithType: IFieldLinkCollection.Add(IField, String, Boolean, Boolean, Boolean, Boolean)
 - uid: PnP.Core.Model.SharePoint.IFieldLinkCollection.Add*
   name: Add
   href: api/PnP.Core.Model.SharePoint.IFieldLinkCollection.html#PnP_Core_Model_SharePoint_IFieldLinkCollection_Add_
@@ -21246,12 +21246,12 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IFieldLinkCollection.Add
   nameWithType: IFieldLinkCollection.Add
-- uid: PnP.Core.Model.SharePoint.IFieldLinkCollection.AddAsync(System.String,System.String,System.Boolean,System.Boolean,System.Boolean,System.Boolean)
-  name: AddAsync(String, String, Boolean, Boolean, Boolean, Boolean)
-  href: api/PnP.Core.Model.SharePoint.IFieldLinkCollection.html#PnP_Core_Model_SharePoint_IFieldLinkCollection_AddAsync_System_String_System_String_System_Boolean_System_Boolean_System_Boolean_System_Boolean_
-  commentId: M:PnP.Core.Model.SharePoint.IFieldLinkCollection.AddAsync(System.String,System.String,System.Boolean,System.Boolean,System.Boolean,System.Boolean)
-  fullName: PnP.Core.Model.SharePoint.IFieldLinkCollection.AddAsync(System.String, System.String, System.Boolean, System.Boolean, System.Boolean, System.Boolean)
-  nameWithType: IFieldLinkCollection.AddAsync(String, String, Boolean, Boolean, Boolean, Boolean)
+- uid: PnP.Core.Model.SharePoint.IFieldLinkCollection.AddAsync(PnP.Core.Model.SharePoint.IField,System.String,System.Boolean,System.Boolean,System.Boolean,System.Boolean)
+  name: AddAsync(IField, String, Boolean, Boolean, Boolean, Boolean)
+  href: api/PnP.Core.Model.SharePoint.IFieldLinkCollection.html#PnP_Core_Model_SharePoint_IFieldLinkCollection_AddAsync_PnP_Core_Model_SharePoint_IField_System_String_System_Boolean_System_Boolean_System_Boolean_System_Boolean_
+  commentId: M:PnP.Core.Model.SharePoint.IFieldLinkCollection.AddAsync(PnP.Core.Model.SharePoint.IField,System.String,System.Boolean,System.Boolean,System.Boolean,System.Boolean)
+  fullName: PnP.Core.Model.SharePoint.IFieldLinkCollection.AddAsync(PnP.Core.Model.SharePoint.IField, System.String, System.Boolean, System.Boolean, System.Boolean, System.Boolean)
+  nameWithType: IFieldLinkCollection.AddAsync(IField, String, Boolean, Boolean, Boolean, Boolean)
 - uid: PnP.Core.Model.SharePoint.IFieldLinkCollection.AddAsync*
   name: AddAsync
   href: api/PnP.Core.Model.SharePoint.IFieldLinkCollection.html#PnP_Core_Model_SharePoint_IFieldLinkCollection_AddAsync_
@@ -21259,18 +21259,18 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IFieldLinkCollection.AddAsync
   nameWithType: IFieldLinkCollection.AddAsync
-- uid: PnP.Core.Model.SharePoint.IFieldLinkCollection.AddBatch(PnP.Core.Services.Batch,System.String,System.String,System.Boolean,System.Boolean,System.Boolean,System.Boolean)
-  name: AddBatch(Batch, String, String, Boolean, Boolean, Boolean, Boolean)
-  href: api/PnP.Core.Model.SharePoint.IFieldLinkCollection.html#PnP_Core_Model_SharePoint_IFieldLinkCollection_AddBatch_PnP_Core_Services_Batch_System_String_System_String_System_Boolean_System_Boolean_System_Boolean_System_Boolean_
-  commentId: M:PnP.Core.Model.SharePoint.IFieldLinkCollection.AddBatch(PnP.Core.Services.Batch,System.String,System.String,System.Boolean,System.Boolean,System.Boolean,System.Boolean)
-  fullName: PnP.Core.Model.SharePoint.IFieldLinkCollection.AddBatch(PnP.Core.Services.Batch, System.String, System.String, System.Boolean, System.Boolean, System.Boolean, System.Boolean)
-  nameWithType: IFieldLinkCollection.AddBatch(Batch, String, String, Boolean, Boolean, Boolean, Boolean)
-- uid: PnP.Core.Model.SharePoint.IFieldLinkCollection.AddBatch(System.String,System.String,System.Boolean,System.Boolean,System.Boolean,System.Boolean)
-  name: AddBatch(String, String, Boolean, Boolean, Boolean, Boolean)
-  href: api/PnP.Core.Model.SharePoint.IFieldLinkCollection.html#PnP_Core_Model_SharePoint_IFieldLinkCollection_AddBatch_System_String_System_String_System_Boolean_System_Boolean_System_Boolean_System_Boolean_
-  commentId: M:PnP.Core.Model.SharePoint.IFieldLinkCollection.AddBatch(System.String,System.String,System.Boolean,System.Boolean,System.Boolean,System.Boolean)
-  fullName: PnP.Core.Model.SharePoint.IFieldLinkCollection.AddBatch(System.String, System.String, System.Boolean, System.Boolean, System.Boolean, System.Boolean)
-  nameWithType: IFieldLinkCollection.AddBatch(String, String, Boolean, Boolean, Boolean, Boolean)
+- uid: PnP.Core.Model.SharePoint.IFieldLinkCollection.AddBatch(PnP.Core.Model.SharePoint.IField)
+  name: AddBatch(IField)
+  href: api/PnP.Core.Model.SharePoint.IFieldLinkCollection.html#PnP_Core_Model_SharePoint_IFieldLinkCollection_AddBatch_PnP_Core_Model_SharePoint_IField_
+  commentId: M:PnP.Core.Model.SharePoint.IFieldLinkCollection.AddBatch(PnP.Core.Model.SharePoint.IField)
+  fullName: PnP.Core.Model.SharePoint.IFieldLinkCollection.AddBatch(PnP.Core.Model.SharePoint.IField)
+  nameWithType: IFieldLinkCollection.AddBatch(IField)
+- uid: PnP.Core.Model.SharePoint.IFieldLinkCollection.AddBatch(PnP.Core.Services.Batch,PnP.Core.Model.SharePoint.IField)
+  name: AddBatch(Batch, IField)
+  href: api/PnP.Core.Model.SharePoint.IFieldLinkCollection.html#PnP_Core_Model_SharePoint_IFieldLinkCollection_AddBatch_PnP_Core_Services_Batch_PnP_Core_Model_SharePoint_IField_
+  commentId: M:PnP.Core.Model.SharePoint.IFieldLinkCollection.AddBatch(PnP.Core.Services.Batch,PnP.Core.Model.SharePoint.IField)
+  fullName: PnP.Core.Model.SharePoint.IFieldLinkCollection.AddBatch(PnP.Core.Services.Batch, PnP.Core.Model.SharePoint.IField)
+  nameWithType: IFieldLinkCollection.AddBatch(Batch, IField)
 - uid: PnP.Core.Model.SharePoint.IFieldLinkCollection.AddBatch*
   name: AddBatch
   href: api/PnP.Core.Model.SharePoint.IFieldLinkCollection.html#PnP_Core_Model_SharePoint_IFieldLinkCollection_AddBatch_
@@ -21278,18 +21278,18 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IFieldLinkCollection.AddBatch
   nameWithType: IFieldLinkCollection.AddBatch
-- uid: PnP.Core.Model.SharePoint.IFieldLinkCollection.AddBatchAsync(PnP.Core.Services.Batch,System.String,System.String,System.Boolean,System.Boolean,System.Boolean,System.Boolean)
-  name: AddBatchAsync(Batch, String, String, Boolean, Boolean, Boolean, Boolean)
-  href: api/PnP.Core.Model.SharePoint.IFieldLinkCollection.html#PnP_Core_Model_SharePoint_IFieldLinkCollection_AddBatchAsync_PnP_Core_Services_Batch_System_String_System_String_System_Boolean_System_Boolean_System_Boolean_System_Boolean_
-  commentId: M:PnP.Core.Model.SharePoint.IFieldLinkCollection.AddBatchAsync(PnP.Core.Services.Batch,System.String,System.String,System.Boolean,System.Boolean,System.Boolean,System.Boolean)
-  fullName: PnP.Core.Model.SharePoint.IFieldLinkCollection.AddBatchAsync(PnP.Core.Services.Batch, System.String, System.String, System.Boolean, System.Boolean, System.Boolean, System.Boolean)
-  nameWithType: IFieldLinkCollection.AddBatchAsync(Batch, String, String, Boolean, Boolean, Boolean, Boolean)
-- uid: PnP.Core.Model.SharePoint.IFieldLinkCollection.AddBatchAsync(System.String,System.String,System.Boolean,System.Boolean,System.Boolean,System.Boolean)
-  name: AddBatchAsync(String, String, Boolean, Boolean, Boolean, Boolean)
-  href: api/PnP.Core.Model.SharePoint.IFieldLinkCollection.html#PnP_Core_Model_SharePoint_IFieldLinkCollection_AddBatchAsync_System_String_System_String_System_Boolean_System_Boolean_System_Boolean_System_Boolean_
-  commentId: M:PnP.Core.Model.SharePoint.IFieldLinkCollection.AddBatchAsync(System.String,System.String,System.Boolean,System.Boolean,System.Boolean,System.Boolean)
-  fullName: PnP.Core.Model.SharePoint.IFieldLinkCollection.AddBatchAsync(System.String, System.String, System.Boolean, System.Boolean, System.Boolean, System.Boolean)
-  nameWithType: IFieldLinkCollection.AddBatchAsync(String, String, Boolean, Boolean, Boolean, Boolean)
+- uid: PnP.Core.Model.SharePoint.IFieldLinkCollection.AddBatchAsync(PnP.Core.Model.SharePoint.IField)
+  name: AddBatchAsync(IField)
+  href: api/PnP.Core.Model.SharePoint.IFieldLinkCollection.html#PnP_Core_Model_SharePoint_IFieldLinkCollection_AddBatchAsync_PnP_Core_Model_SharePoint_IField_
+  commentId: M:PnP.Core.Model.SharePoint.IFieldLinkCollection.AddBatchAsync(PnP.Core.Model.SharePoint.IField)
+  fullName: PnP.Core.Model.SharePoint.IFieldLinkCollection.AddBatchAsync(PnP.Core.Model.SharePoint.IField)
+  nameWithType: IFieldLinkCollection.AddBatchAsync(IField)
+- uid: PnP.Core.Model.SharePoint.IFieldLinkCollection.AddBatchAsync(PnP.Core.Services.Batch,PnP.Core.Model.SharePoint.IField)
+  name: AddBatchAsync(Batch, IField)
+  href: api/PnP.Core.Model.SharePoint.IFieldLinkCollection.html#PnP_Core_Model_SharePoint_IFieldLinkCollection_AddBatchAsync_PnP_Core_Services_Batch_PnP_Core_Model_SharePoint_IField_
+  commentId: M:PnP.Core.Model.SharePoint.IFieldLinkCollection.AddBatchAsync(PnP.Core.Services.Batch,PnP.Core.Model.SharePoint.IField)
+  fullName: PnP.Core.Model.SharePoint.IFieldLinkCollection.AddBatchAsync(PnP.Core.Services.Batch, PnP.Core.Model.SharePoint.IField)
+  nameWithType: IFieldLinkCollection.AddBatchAsync(Batch, IField)
 - uid: PnP.Core.Model.SharePoint.IFieldLinkCollection.AddBatchAsync*
   name: AddBatchAsync
   href: api/PnP.Core.Model.SharePoint.IFieldLinkCollection.html#PnP_Core_Model_SharePoint_IFieldLinkCollection_AddBatchAsync_
