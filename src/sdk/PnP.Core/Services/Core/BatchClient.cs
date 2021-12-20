@@ -323,6 +323,7 @@ namespace PnP.Core.Services
                             }
                             batch.Results.AddRange(graphBetaBatch.Results);
                             batch.Results.AddRange(csomBatch.Results);
+                            batch.Executed = true;
                         }
                     }
                     else
