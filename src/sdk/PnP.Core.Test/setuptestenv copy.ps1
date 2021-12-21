@@ -14,35 +14,31 @@ PS C:\> .\setuptestenv.ps1
 #>
 
 # Tenant name
-$tenantName = "" #e.g. contoso
+$tenantName = "loitzl2" #e.g. contoso
 # If you use credential manager then specify the used credential manager entry, if left blank you'll be asked for a user/pwd
-$credentialManagerCredentialToUse = ""
+$credentialManagerCredentialToUse = "loitzl2"
 
 # Get the tenant credentials.
 $credentials = $null
 $UPN = $null
-if(![String]::IsNullOrEmpty($credentialManagerCredentialToUse) -and (Get-PnPStoredCredential -Name $credentialManagerCredentialToUse) -ne $null)
-{
-$UPN = (Get-PnPStoredCredential -Name $credentialManagerCredentialToUse).UserName
-$credentials = $credentialManagerCredentialToUse
+if (![String]::IsNullOrEmpty($credentialManagerCredentialToUse) -and (Get-PnPStoredCredential -Name $credentialManagerCredentialToUse) -ne $null) {
+    $UPN = (Get-PnPStoredCredential -Name $credentialManagerCredentialToUse).UserName
+    $credentials = $credentialManagerCredentialToUse
 }
-else
-{
-# Prompts for credentials, if not found in the Windows Credential Manager.
-$UPN = Read-Host -Prompt "Please enter UPN"
-$pass = Read-host -AsSecureString "Please enter password"
-$credentials = new-object management.automation.pscredential $UPN,$pass
+else {
+    # Prompts for credentials, if not found in the Windows Credential Manager.
+    $UPN = Read-Host -Prompt "Please enter UPN"
+    $pass = Read-host -AsSecureString "Please enter password"
+    $credentials = new-object management.automation.pscredential $UPN, $pass
 }
 
-if($credentials -eq $null)
-{
-Write-Host "Error: No credentials supplied." -ForegroundColor Red
-exit 1
+if ($credentials -eq $null) {
+    Write-Host "Error: No credentials supplied." -ForegroundColor Red
+    exit 1
 }
 
-if ($tenantName -eq $null -or $tenantName.Length -le 0)
-{
-$tenantName = Read-Host -Prompt 'Input your tenant name (e.g. contoso)'
+if ($tenantName -eq $null -or $tenantName.Length -le 0) {
+    $tenantName = Read-Host -Prompt 'Input your tenant name (e.g. contoso)'
 }
 
 # Tenant admin url
@@ -51,7 +47,7 @@ $tenantUrl = "https://$tenantName.sharepoint.com"
 $tenantContext = Connect-PnPOnline -Url $tenantUrl -Credentials $credentials -Verbose -ReturnConnection
 
 # Add test Client Side app package
-$app = Add-PnPApp -Path .\TestAssets\pnpcoresdk-test-app.sppkg -Publish
+$app = Add-PnPApp -Path ./TestAssets/pnpcoresdk-test-app.sppkg -Publish
 
 
 # Create test site without a group
@@ -72,7 +68,7 @@ Install-PnPApp -Identity $app
 # Teamify the site
 Add-PnPTeamsTeam
 # Create test document in default documents Library
-Add-PnPFile -Path .\TestAssets\test.docx -Folder "Shared Documents"
+Add-PnPFile -Path ./TestAssets/test.docx -Folder "Shared Documents"
 # Add sub site
 New-PnPWeb -Title "Sub site" -Url "subsite" -Locale 1033 -Template "STS#3"
 

@@ -12,12 +12,32 @@ using System.Text;
 using System.Threading.Tasks;
 using PnP.Core.Services.Core.CSOM.Requests;
 using PnP.Core.Services.Core.CSOM.Requests.Terms;
+using PnP.Core.Test.Utilities;
 
 namespace PnP.Core.Test.Services.Core.CSOM.Requests
 {
     [TestClass]
     public class GetTermsByCustomPropertyRequestTests
     {
+        [ClassInitialize]
+        public static void TestFixtureSetup(TestContext context)
+        {
+            // Configure mocking default for all tests in this class, unless override by a specific test
+            TestCommon.Instance.Mocking = false;
+        }
+
+        [TestMethod]
+        public async Task GetTermsByCustomProperty()
+        {
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var termStore = await context.TermStore.GetAsync();
+                var termGroup = await termStore.Groups.GetByNameAsync("People");
+                var termSet = await termGroup.Sets.GetByIdAsync("8ed8c9ea-7052-4c1d-a4d7-b9c10bffea6f");
+            }
+        }
+
         [TestMethod]
         public void GetTermsByCustomPropertyRequest_Test_GetCorrectRequest()
         {
