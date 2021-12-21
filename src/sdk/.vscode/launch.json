@@ -19,8 +19,7 @@
             "args": [],
             "cwd": "${workspaceFolder}/PnP.Core.Test",
             "console": "internalConsole",
-            "stopAtEntry": false,
-            "enableStepFiltering": false
+            "stopAtEntry": false
         },
         {
             "name": ".NET Core Attach",
