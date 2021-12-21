@@ -4361,5 +4361,115 @@ namespace PnP.Core.Test.SharePoint
         }
 
         #endregion
+
+        #region Compliance
+        [TestMethod]
+        public async Task ComplianceTagTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+
+                // Create a new list
+                string listTitle = TestCommon.GetPnPSdkTestAssetName("ListItemComplianceTagTest");
+                var myList = context.Web.Lists.GetByTitle(listTitle);
+
+                try
+                {
+                    if (TestCommon.Instance.Mocking && myList != null)
+                    {
+                        Assert.Inconclusive("Test data set should be setup to not have the list available.");
+                    }
+
+                    if (myList == null)
+                    {
+                        myList = await context.Web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
+                    }
+
+                    // Add an item
+                    var addedItem = await myList.Items.AddAsync(new Dictionary<string, object>() { { "Title", "Test" } });
+
+                    // Add Compliance tag
+                    addedItem.SetComplianceTag("Retain1Year", false, false, false, false);
+
+                    // Read the set compliance tag
+                    using (var context2 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+                    {
+                        var list2 = context2.Web.Lists.GetByTitle(listTitle);
+                        if (list2 != null)
+                        {
+                            await list2.LoadListDataAsStreamAsync(new RenderListDataOptions() { ViewXml = "<View><ViewFields><FieldRef Name='Title' /><FieldRef Name='_ComplianceTag' /></ViewFields><RowLimit>5</RowLimit></View>", RenderOptions = RenderListDataOptionsFlags.ListData });
+                            Assert.IsTrue(list2.Items.Length == 1);
+                            var firstItem = list2.Items.AsRequested().First();
+
+                            Assert.IsTrue(firstItem.Values["_ComplianceTag"].ToString() == "Retain1Year");
+                        }
+                    }
+                }
+                finally
+                {
+                    await myList.DeleteAsync();
+                }
+            }
+        }
+
+        [TestMethod]
+        public async Task ComplianceTagBatchTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+
+                // Create a new list
+                string listTitle = TestCommon.GetPnPSdkTestAssetName("ListItemComplianceTagBatchTest");
+                var myList = context.Web.Lists.GetByTitle(listTitle);
+
+                try
+                {
+                    if (TestCommon.Instance.Mocking && myList != null)
+                    {
+                        Assert.Inconclusive("Test data set should be setup to not have the list available.");
+                    }
+
+                    if (myList == null)
+                    {
+                        myList = await context.Web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
+                    }
+
+                    // Add an item
+                    var addedItem = await myList.Items.AddAsync(new Dictionary<string, object>() { { "Title", "Test" } });
+
+                    // Add Compliance tag
+                    addedItem.SetComplianceTagBatch("Retain1Year", false, false, false, false);
+                    // Add something else to force batch end point being used
+                    myList.ContentTypesEnabled = true;
+                    myList.UpdateBatch();
+
+                    // Execute batch
+                    await context.ExecuteAsync();
+
+                    // Read the set compliance tag
+                    using (var context2 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+                    {
+                        var list2 = context2.Web.Lists.GetByTitle(listTitle);
+                        if (list2 != null)
+                        {
+                            await list2.LoadListDataAsStreamAsync(new RenderListDataOptions() { ViewXml = "<View><ViewFields><FieldRef Name='Title' /><FieldRef Name='_ComplianceTag' /></ViewFields><RowLimit>5</RowLimit></View>", RenderOptions = RenderListDataOptionsFlags.ListData });
+                            Assert.IsTrue(list2.Items.Length == 1);
+                            var firstItem = list2.Items.AsRequested().First();
+
+                            Assert.IsTrue(firstItem.Values["_ComplianceTag"].ToString() == "Retain1Year");
+                        }
+                    }
+                }
+                finally
+                {
+                    await myList.DeleteAsync();
+                }
+            }
+        }
+        #endregion
     }
 }

@@ -155,7 +155,7 @@ namespace PnP.Core.Model.SharePoint
 
         public async Task<IEnumerable<IComplianceTag>> GetAvailableComplianceTagsAsync()
         {
-            var apiCall = new ApiCall("_api/SP.CompliancePolicy.SPPolicyStoreProxy.GetAvailableTagsForSite(siteUrl='{Site.Url}')", ApiType.SPORest);
+            var apiCall = new ApiCall("_api/SP.CompliancePolicy.SPPolicyStoreProxy.GetAvailableTagsForSite(siteUrl=@a1)?@a1='{Site.Url}'", ApiType.SPORest);
             var response = await RawRequestAsync(apiCall, HttpMethod.Get).ConfigureAwait(false);
 
             if (!string.IsNullOrEmpty(response.Json))

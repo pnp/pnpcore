@@ -194,51 +194,13 @@ namespace PnP.Core.Test.SharePoint
         {
             //TestCommon.Instance.Mocking = false;
 
-            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.NoGroupTestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
+                // Check if the compliance tag is also visible at site level
+                var complianceTags = context.Site.GetAvailableComplianceTags();
 
-                // Create a new list
-                string listTitle = TestCommon.GetPnPSdkTestAssetName("ComplianceTagTest");
-                var myList = context.Web.Lists.GetByTitle(listTitle);
-
-                try
-                {
-                    if (TestCommon.Instance.Mocking && myList != null)
-                    {
-                        Assert.Inconclusive("Test data set should be setup to not have the list available.");
-                    }
-
-                    if (myList == null)
-                    {
-                        myList = await context.Web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
-                    }
-
-                    // Add an item
-                    await myList.Items.AddAsync(new Dictionary<string, object>() { { "Title", "Test" } });
-
-                    // Read the compliance tag again
-                    var complianceTagBefore = myList.GetComplianceTag();
-
-                    // Add a compliance tag
-                    // Ensure a retentionlabel is created first: https://compliance.microsoft.com/informationgovernance?viewid=labels
-                    myList.SetComplianceTag("Retain1Year", false, false, false);
-
-                    // Read the compliance tag again
-                    var complianceTag = myList.GetComplianceTag();
-
-                    Assert.IsTrue(complianceTag != null);
-
-                    // Check if the compliance tag is also visible at site level
-                    var complianceTags = context.Site.GetAvailableComplianceTags();
-
-                    // TODO: Compliance tags are not returned for the site...more research is needed
-                    Assert.IsTrue(complianceTags != null);
-                    Assert.IsTrue(complianceTags.Any() == false);
-                }
-                finally
-                {
-                    await myList.DeleteAsync();
-                }
+                Assert.IsTrue(complianceTags != null);
+                Assert.IsTrue(complianceTags.Any() == true);
             }
         }
     }
