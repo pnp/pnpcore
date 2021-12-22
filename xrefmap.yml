@@ -16040,6 +16040,176 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IBasePermissions.Set
   nameWithType: IBasePermissions.Set
+- uid: PnP.Core.Model.SharePoint.IBrandingManager
+  name: IBrandingManager
+  href: api/PnP.Core.Model.SharePoint.IBrandingManager.html
+  commentId: T:PnP.Core.Model.SharePoint.IBrandingManager
+  fullName: PnP.Core.Model.SharePoint.IBrandingManager
+  nameWithType: IBrandingManager
+- uid: PnP.Core.Model.SharePoint.IBrandingManager.GetAvailableThemes
+  name: GetAvailableThemes()
+  href: api/PnP.Core.Model.SharePoint.IBrandingManager.html#PnP_Core_Model_SharePoint_IBrandingManager_GetAvailableThemes
+  commentId: M:PnP.Core.Model.SharePoint.IBrandingManager.GetAvailableThemes
+  fullName: PnP.Core.Model.SharePoint.IBrandingManager.GetAvailableThemes()
+  nameWithType: IBrandingManager.GetAvailableThemes()
+- uid: PnP.Core.Model.SharePoint.IBrandingManager.GetAvailableThemes*
+  name: GetAvailableThemes
+  href: api/PnP.Core.Model.SharePoint.IBrandingManager.html#PnP_Core_Model_SharePoint_IBrandingManager_GetAvailableThemes_
+  commentId: Overload:PnP.Core.Model.SharePoint.IBrandingManager.GetAvailableThemes
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IBrandingManager.GetAvailableThemes
+  nameWithType: IBrandingManager.GetAvailableThemes
+- uid: PnP.Core.Model.SharePoint.IBrandingManager.GetAvailableThemesAsync
+  name: GetAvailableThemesAsync()
+  href: api/PnP.Core.Model.SharePoint.IBrandingManager.html#PnP_Core_Model_SharePoint_IBrandingManager_GetAvailableThemesAsync
+  commentId: M:PnP.Core.Model.SharePoint.IBrandingManager.GetAvailableThemesAsync
+  fullName: PnP.Core.Model.SharePoint.IBrandingManager.GetAvailableThemesAsync()
+  nameWithType: IBrandingManager.GetAvailableThemesAsync()
+- uid: PnP.Core.Model.SharePoint.IBrandingManager.GetAvailableThemesAsync*
+  name: GetAvailableThemesAsync
+  href: api/PnP.Core.Model.SharePoint.IBrandingManager.html#PnP_Core_Model_SharePoint_IBrandingManager_GetAvailableThemesAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.IBrandingManager.GetAvailableThemesAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IBrandingManager.GetAvailableThemesAsync
+  nameWithType: IBrandingManager.GetAvailableThemesAsync
+- uid: PnP.Core.Model.SharePoint.IBrandingManager.GetAvailableThemesBatch
+  name: GetAvailableThemesBatch()
+  href: api/PnP.Core.Model.SharePoint.IBrandingManager.html#PnP_Core_Model_SharePoint_IBrandingManager_GetAvailableThemesBatch
+  commentId: M:PnP.Core.Model.SharePoint.IBrandingManager.GetAvailableThemesBatch
+  fullName: PnP.Core.Model.SharePoint.IBrandingManager.GetAvailableThemesBatch()
+  nameWithType: IBrandingManager.GetAvailableThemesBatch()
+- uid: PnP.Core.Model.SharePoint.IBrandingManager.GetAvailableThemesBatch(PnP.Core.Services.Batch)
+  name: GetAvailableThemesBatch(Batch)
+  href: api/PnP.Core.Model.SharePoint.IBrandingManager.html#PnP_Core_Model_SharePoint_IBrandingManager_GetAvailableThemesBatch_PnP_Core_Services_Batch_
+  commentId: M:PnP.Core.Model.SharePoint.IBrandingManager.GetAvailableThemesBatch(PnP.Core.Services.Batch)
+  fullName: PnP.Core.Model.SharePoint.IBrandingManager.GetAvailableThemesBatch(PnP.Core.Services.Batch)
+  nameWithType: IBrandingManager.GetAvailableThemesBatch(Batch)
+- uid: PnP.Core.Model.SharePoint.IBrandingManager.GetAvailableThemesBatch*
+  name: GetAvailableThemesBatch
+  href: api/PnP.Core.Model.SharePoint.IBrandingManager.html#PnP_Core_Model_SharePoint_IBrandingManager_GetAvailableThemesBatch_
+  commentId: Overload:PnP.Core.Model.SharePoint.IBrandingManager.GetAvailableThemesBatch
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IBrandingManager.GetAvailableThemesBatch
+  nameWithType: IBrandingManager.GetAvailableThemesBatch
+- uid: PnP.Core.Model.SharePoint.IBrandingManager.GetAvailableThemesBatchAsync
+  name: GetAvailableThemesBatchAsync()
+  href: api/PnP.Core.Model.SharePoint.IBrandingManager.html#PnP_Core_Model_SharePoint_IBrandingManager_GetAvailableThemesBatchAsync
+  commentId: M:PnP.Core.Model.SharePoint.IBrandingManager.GetAvailableThemesBatchAsync
+  fullName: PnP.Core.Model.SharePoint.IBrandingManager.GetAvailableThemesBatchAsync()
+  nameWithType: IBrandingManager.GetAvailableThemesBatchAsync()
+- uid: PnP.Core.Model.SharePoint.IBrandingManager.GetAvailableThemesBatchAsync(PnP.Core.Services.Batch)
+  name: GetAvailableThemesBatchAsync(Batch)
+  href: api/PnP.Core.Model.SharePoint.IBrandingManager.html#PnP_Core_Model_SharePoint_IBrandingManager_GetAvailableThemesBatchAsync_PnP_Core_Services_Batch_
+  commentId: M:PnP.Core.Model.SharePoint.IBrandingManager.GetAvailableThemesBatchAsync(PnP.Core.Services.Batch)
+  fullName: PnP.Core.Model.SharePoint.IBrandingManager.GetAvailableThemesBatchAsync(PnP.Core.Services.Batch)
+  nameWithType: IBrandingManager.GetAvailableThemesBatchAsync(Batch)
+- uid: PnP.Core.Model.SharePoint.IBrandingManager.GetAvailableThemesBatchAsync*
+  name: GetAvailableThemesBatchAsync
+  href: api/PnP.Core.Model.SharePoint.IBrandingManager.html#PnP_Core_Model_SharePoint_IBrandingManager_GetAvailableThemesBatchAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.IBrandingManager.GetAvailableThemesBatchAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IBrandingManager.GetAvailableThemesBatchAsync
+  nameWithType: IBrandingManager.GetAvailableThemesBatchAsync
+- uid: PnP.Core.Model.SharePoint.IBrandingManager.SetTheme(PnP.Core.Model.SharePoint.ITheme)
+  name: SetTheme(ITheme)
+  href: api/PnP.Core.Model.SharePoint.IBrandingManager.html#PnP_Core_Model_SharePoint_IBrandingManager_SetTheme_PnP_Core_Model_SharePoint_ITheme_
+  commentId: M:PnP.Core.Model.SharePoint.IBrandingManager.SetTheme(PnP.Core.Model.SharePoint.ITheme)
+  fullName: PnP.Core.Model.SharePoint.IBrandingManager.SetTheme(PnP.Core.Model.SharePoint.ITheme)
+  nameWithType: IBrandingManager.SetTheme(ITheme)
+- uid: PnP.Core.Model.SharePoint.IBrandingManager.SetTheme(PnP.Core.Model.SharePoint.SharePointTheme)
+  name: SetTheme(SharePointTheme)
+  href: api/PnP.Core.Model.SharePoint.IBrandingManager.html#PnP_Core_Model_SharePoint_IBrandingManager_SetTheme_PnP_Core_Model_SharePoint_SharePointTheme_
+  commentId: M:PnP.Core.Model.SharePoint.IBrandingManager.SetTheme(PnP.Core.Model.SharePoint.SharePointTheme)
+  fullName: PnP.Core.Model.SharePoint.IBrandingManager.SetTheme(PnP.Core.Model.SharePoint.SharePointTheme)
+  nameWithType: IBrandingManager.SetTheme(SharePointTheme)
+- uid: PnP.Core.Model.SharePoint.IBrandingManager.SetTheme*
+  name: SetTheme
+  href: api/PnP.Core.Model.SharePoint.IBrandingManager.html#PnP_Core_Model_SharePoint_IBrandingManager_SetTheme_
+  commentId: Overload:PnP.Core.Model.SharePoint.IBrandingManager.SetTheme
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IBrandingManager.SetTheme
+  nameWithType: IBrandingManager.SetTheme
+- uid: PnP.Core.Model.SharePoint.IBrandingManager.SetThemeAsync(PnP.Core.Model.SharePoint.ITheme)
+  name: SetThemeAsync(ITheme)
+  href: api/PnP.Core.Model.SharePoint.IBrandingManager.html#PnP_Core_Model_SharePoint_IBrandingManager_SetThemeAsync_PnP_Core_Model_SharePoint_ITheme_
+  commentId: M:PnP.Core.Model.SharePoint.IBrandingManager.SetThemeAsync(PnP.Core.Model.SharePoint.ITheme)
+  fullName: PnP.Core.Model.SharePoint.IBrandingManager.SetThemeAsync(PnP.Core.Model.SharePoint.ITheme)
+  nameWithType: IBrandingManager.SetThemeAsync(ITheme)
+- uid: PnP.Core.Model.SharePoint.IBrandingManager.SetThemeAsync(PnP.Core.Model.SharePoint.SharePointTheme)
+  name: SetThemeAsync(SharePointTheme)
+  href: api/PnP.Core.Model.SharePoint.IBrandingManager.html#PnP_Core_Model_SharePoint_IBrandingManager_SetThemeAsync_PnP_Core_Model_SharePoint_SharePointTheme_
+  commentId: M:PnP.Core.Model.SharePoint.IBrandingManager.SetThemeAsync(PnP.Core.Model.SharePoint.SharePointTheme)
+  fullName: PnP.Core.Model.SharePoint.IBrandingManager.SetThemeAsync(PnP.Core.Model.SharePoint.SharePointTheme)
+  nameWithType: IBrandingManager.SetThemeAsync(SharePointTheme)
+- uid: PnP.Core.Model.SharePoint.IBrandingManager.SetThemeAsync*
+  name: SetThemeAsync
+  href: api/PnP.Core.Model.SharePoint.IBrandingManager.html#PnP_Core_Model_SharePoint_IBrandingManager_SetThemeAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.IBrandingManager.SetThemeAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IBrandingManager.SetThemeAsync
+  nameWithType: IBrandingManager.SetThemeAsync
+- uid: PnP.Core.Model.SharePoint.IBrandingManager.SetThemeBatch(PnP.Core.Model.SharePoint.ITheme)
+  name: SetThemeBatch(ITheme)
+  href: api/PnP.Core.Model.SharePoint.IBrandingManager.html#PnP_Core_Model_SharePoint_IBrandingManager_SetThemeBatch_PnP_Core_Model_SharePoint_ITheme_
+  commentId: M:PnP.Core.Model.SharePoint.IBrandingManager.SetThemeBatch(PnP.Core.Model.SharePoint.ITheme)
+  fullName: PnP.Core.Model.SharePoint.IBrandingManager.SetThemeBatch(PnP.Core.Model.SharePoint.ITheme)
+  nameWithType: IBrandingManager.SetThemeBatch(ITheme)
+- uid: PnP.Core.Model.SharePoint.IBrandingManager.SetThemeBatch(PnP.Core.Model.SharePoint.SharePointTheme)
+  name: SetThemeBatch(SharePointTheme)
+  href: api/PnP.Core.Model.SharePoint.IBrandingManager.html#PnP_Core_Model_SharePoint_IBrandingManager_SetThemeBatch_PnP_Core_Model_SharePoint_SharePointTheme_
+  commentId: M:PnP.Core.Model.SharePoint.IBrandingManager.SetThemeBatch(PnP.Core.Model.SharePoint.SharePointTheme)
+  fullName: PnP.Core.Model.SharePoint.IBrandingManager.SetThemeBatch(PnP.Core.Model.SharePoint.SharePointTheme)
+  nameWithType: IBrandingManager.SetThemeBatch(SharePointTheme)
+- uid: PnP.Core.Model.SharePoint.IBrandingManager.SetThemeBatch(PnP.Core.Services.Batch,PnP.Core.Model.SharePoint.ITheme)
+  name: SetThemeBatch(Batch, ITheme)
+  href: api/PnP.Core.Model.SharePoint.IBrandingManager.html#PnP_Core_Model_SharePoint_IBrandingManager_SetThemeBatch_PnP_Core_Services_Batch_PnP_Core_Model_SharePoint_ITheme_
+  commentId: M:PnP.Core.Model.SharePoint.IBrandingManager.SetThemeBatch(PnP.Core.Services.Batch,PnP.Core.Model.SharePoint.ITheme)
+  fullName: PnP.Core.Model.SharePoint.IBrandingManager.SetThemeBatch(PnP.Core.Services.Batch, PnP.Core.Model.SharePoint.ITheme)
+  nameWithType: IBrandingManager.SetThemeBatch(Batch, ITheme)
+- uid: PnP.Core.Model.SharePoint.IBrandingManager.SetThemeBatch(PnP.Core.Services.Batch,PnP.Core.Model.SharePoint.SharePointTheme)
+  name: SetThemeBatch(Batch, SharePointTheme)
+  href: api/PnP.Core.Model.SharePoint.IBrandingManager.html#PnP_Core_Model_SharePoint_IBrandingManager_SetThemeBatch_PnP_Core_Services_Batch_PnP_Core_Model_SharePoint_SharePointTheme_
+  commentId: M:PnP.Core.Model.SharePoint.IBrandingManager.SetThemeBatch(PnP.Core.Services.Batch,PnP.Core.Model.SharePoint.SharePointTheme)
+  fullName: PnP.Core.Model.SharePoint.IBrandingManager.SetThemeBatch(PnP.Core.Services.Batch, PnP.Core.Model.SharePoint.SharePointTheme)
+  nameWithType: IBrandingManager.SetThemeBatch(Batch, SharePointTheme)
+- uid: PnP.Core.Model.SharePoint.IBrandingManager.SetThemeBatch*
+  name: SetThemeBatch
+  href: api/PnP.Core.Model.SharePoint.IBrandingManager.html#PnP_Core_Model_SharePoint_IBrandingManager_SetThemeBatch_
+  commentId: Overload:PnP.Core.Model.SharePoint.IBrandingManager.SetThemeBatch
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IBrandingManager.SetThemeBatch
+  nameWithType: IBrandingManager.SetThemeBatch
+- uid: PnP.Core.Model.SharePoint.IBrandingManager.SetThemeBatchAsync(PnP.Core.Model.SharePoint.ITheme)
+  name: SetThemeBatchAsync(ITheme)
+  href: api/PnP.Core.Model.SharePoint.IBrandingManager.html#PnP_Core_Model_SharePoint_IBrandingManager_SetThemeBatchAsync_PnP_Core_Model_SharePoint_ITheme_
+  commentId: M:PnP.Core.Model.SharePoint.IBrandingManager.SetThemeBatchAsync(PnP.Core.Model.SharePoint.ITheme)
+  fullName: PnP.Core.Model.SharePoint.IBrandingManager.SetThemeBatchAsync(PnP.Core.Model.SharePoint.ITheme)
+  nameWithType: IBrandingManager.SetThemeBatchAsync(ITheme)
+- uid: PnP.Core.Model.SharePoint.IBrandingManager.SetThemeBatchAsync(PnP.Core.Model.SharePoint.SharePointTheme)
+  name: SetThemeBatchAsync(SharePointTheme)
+  href: api/PnP.Core.Model.SharePoint.IBrandingManager.html#PnP_Core_Model_SharePoint_IBrandingManager_SetThemeBatchAsync_PnP_Core_Model_SharePoint_SharePointTheme_
+  commentId: M:PnP.Core.Model.SharePoint.IBrandingManager.SetThemeBatchAsync(PnP.Core.Model.SharePoint.SharePointTheme)
+  fullName: PnP.Core.Model.SharePoint.IBrandingManager.SetThemeBatchAsync(PnP.Core.Model.SharePoint.SharePointTheme)
+  nameWithType: IBrandingManager.SetThemeBatchAsync(SharePointTheme)
+- uid: PnP.Core.Model.SharePoint.IBrandingManager.SetThemeBatchAsync(PnP.Core.Services.Batch,PnP.Core.Model.SharePoint.ITheme)
+  name: SetThemeBatchAsync(Batch, ITheme)
+  href: api/PnP.Core.Model.SharePoint.IBrandingManager.html#PnP_Core_Model_SharePoint_IBrandingManager_SetThemeBatchAsync_PnP_Core_Services_Batch_PnP_Core_Model_SharePoint_ITheme_
+  commentId: M:PnP.Core.Model.SharePoint.IBrandingManager.SetThemeBatchAsync(PnP.Core.Services.Batch,PnP.Core.Model.SharePoint.ITheme)
+  fullName: PnP.Core.Model.SharePoint.IBrandingManager.SetThemeBatchAsync(PnP.Core.Services.Batch, PnP.Core.Model.SharePoint.ITheme)
+  nameWithType: IBrandingManager.SetThemeBatchAsync(Batch, ITheme)
+- uid: PnP.Core.Model.SharePoint.IBrandingManager.SetThemeBatchAsync(PnP.Core.Services.Batch,PnP.Core.Model.SharePoint.SharePointTheme)
+  name: SetThemeBatchAsync(Batch, SharePointTheme)
+  href: api/PnP.Core.Model.SharePoint.IBrandingManager.html#PnP_Core_Model_SharePoint_IBrandingManager_SetThemeBatchAsync_PnP_Core_Services_Batch_PnP_Core_Model_SharePoint_SharePointTheme_
+  commentId: M:PnP.Core.Model.SharePoint.IBrandingManager.SetThemeBatchAsync(PnP.Core.Services.Batch,PnP.Core.Model.SharePoint.SharePointTheme)
+  fullName: PnP.Core.Model.SharePoint.IBrandingManager.SetThemeBatchAsync(PnP.Core.Services.Batch, PnP.Core.Model.SharePoint.SharePointTheme)
+  nameWithType: IBrandingManager.SetThemeBatchAsync(Batch, SharePointTheme)
+- uid: PnP.Core.Model.SharePoint.IBrandingManager.SetThemeBatchAsync*
+  name: SetThemeBatchAsync
+  href: api/PnP.Core.Model.SharePoint.IBrandingManager.html#PnP_Core_Model_SharePoint_IBrandingManager_SetThemeBatchAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.IBrandingManager.SetThemeBatchAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IBrandingManager.SetThemeBatchAsync
+  nameWithType: IBrandingManager.SetThemeBatchAsync
 - uid: PnP.Core.Model.SharePoint.ICanvasColumn
   name: ICanvasColumn
   href: api/PnP.Core.Model.SharePoint.ICanvasColumn.html
@@ -34236,6 +34406,51 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.ITermStore.Languages
   nameWithType: ITermStore.Languages
+- uid: PnP.Core.Model.SharePoint.ITheme
+  name: ITheme
+  href: api/PnP.Core.Model.SharePoint.ITheme.html
+  commentId: T:PnP.Core.Model.SharePoint.ITheme
+  fullName: PnP.Core.Model.SharePoint.ITheme
+  nameWithType: ITheme
+- uid: PnP.Core.Model.SharePoint.ITheme.IsCustomTheme
+  name: IsCustomTheme
+  href: api/PnP.Core.Model.SharePoint.ITheme.html#PnP_Core_Model_SharePoint_ITheme_IsCustomTheme
+  commentId: P:PnP.Core.Model.SharePoint.ITheme.IsCustomTheme
+  fullName: PnP.Core.Model.SharePoint.ITheme.IsCustomTheme
+  nameWithType: ITheme.IsCustomTheme
+- uid: PnP.Core.Model.SharePoint.ITheme.IsCustomTheme*
+  name: IsCustomTheme
+  href: api/PnP.Core.Model.SharePoint.ITheme.html#PnP_Core_Model_SharePoint_ITheme_IsCustomTheme_
+  commentId: Overload:PnP.Core.Model.SharePoint.ITheme.IsCustomTheme
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.ITheme.IsCustomTheme
+  nameWithType: ITheme.IsCustomTheme
+- uid: PnP.Core.Model.SharePoint.ITheme.Name
+  name: Name
+  href: api/PnP.Core.Model.SharePoint.ITheme.html#PnP_Core_Model_SharePoint_ITheme_Name
+  commentId: P:PnP.Core.Model.SharePoint.ITheme.Name
+  fullName: PnP.Core.Model.SharePoint.ITheme.Name
+  nameWithType: ITheme.Name
+- uid: PnP.Core.Model.SharePoint.ITheme.Name*
+  name: Name
+  href: api/PnP.Core.Model.SharePoint.ITheme.html#PnP_Core_Model_SharePoint_ITheme_Name_
+  commentId: Overload:PnP.Core.Model.SharePoint.ITheme.Name
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.ITheme.Name
+  nameWithType: ITheme.Name
+- uid: PnP.Core.Model.SharePoint.ITheme.ThemeJson
+  name: ThemeJson
+  href: api/PnP.Core.Model.SharePoint.ITheme.html#PnP_Core_Model_SharePoint_ITheme_ThemeJson
+  commentId: P:PnP.Core.Model.SharePoint.ITheme.ThemeJson
+  fullName: PnP.Core.Model.SharePoint.ITheme.ThemeJson
+  nameWithType: ITheme.ThemeJson
+- uid: PnP.Core.Model.SharePoint.ITheme.ThemeJson*
+  name: ThemeJson
+  href: api/PnP.Core.Model.SharePoint.ITheme.html#PnP_Core_Model_SharePoint_ITheme_ThemeJson_
+  commentId: Overload:PnP.Core.Model.SharePoint.ITheme.ThemeJson
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.ITheme.ThemeJson
+  nameWithType: ITheme.ThemeJson
 - uid: PnP.Core.Model.SharePoint.ITimeZone
   name: ITimeZone
   href: api/PnP.Core.Model.SharePoint.ITimeZone.html
@@ -36384,6 +36599,19 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IWeb.FooterLayout
   nameWithType: IWeb.FooterLayout
+- uid: PnP.Core.Model.SharePoint.IWeb.GetBrandingManager
+  name: GetBrandingManager()
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_GetBrandingManager
+  commentId: M:PnP.Core.Model.SharePoint.IWeb.GetBrandingManager
+  fullName: PnP.Core.Model.SharePoint.IWeb.GetBrandingManager()
+  nameWithType: IWeb.GetBrandingManager()
+- uid: PnP.Core.Model.SharePoint.IWeb.GetBrandingManager*
+  name: GetBrandingManager
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_GetBrandingManager_
+  commentId: Overload:PnP.Core.Model.SharePoint.IWeb.GetBrandingManager
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IWeb.GetBrandingManager
+  nameWithType: IWeb.GetBrandingManager
 - uid: PnP.Core.Model.SharePoint.IWeb.GetCurrentUser
   name: GetCurrentUser()
   href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_GetCurrentUser
@@ -39758,6 +39986,66 @@ references:
   commentId: F:PnP.Core.Model.SharePoint.SearchScope.Tenant
   fullName: PnP.Core.Model.SharePoint.SearchScope.Tenant
   nameWithType: SearchScope.Tenant
+- uid: PnP.Core.Model.SharePoint.SharePointTheme
+  name: SharePointTheme
+  href: api/PnP.Core.Model.SharePoint.SharePointTheme.html
+  commentId: T:PnP.Core.Model.SharePoint.SharePointTheme
+  fullName: PnP.Core.Model.SharePoint.SharePointTheme
+  nameWithType: SharePointTheme
+- uid: PnP.Core.Model.SharePoint.SharePointTheme.Blue
+  name: Blue
+  href: api/PnP.Core.Model.SharePoint.SharePointTheme.html#PnP_Core_Model_SharePoint_SharePointTheme_Blue
+  commentId: F:PnP.Core.Model.SharePoint.SharePointTheme.Blue
+  fullName: PnP.Core.Model.SharePoint.SharePointTheme.Blue
+  nameWithType: SharePointTheme.Blue
+- uid: PnP.Core.Model.SharePoint.SharePointTheme.DarkBlue
+  name: DarkBlue
+  href: api/PnP.Core.Model.SharePoint.SharePointTheme.html#PnP_Core_Model_SharePoint_SharePointTheme_DarkBlue
+  commentId: F:PnP.Core.Model.SharePoint.SharePointTheme.DarkBlue
+  fullName: PnP.Core.Model.SharePoint.SharePointTheme.DarkBlue
+  nameWithType: SharePointTheme.DarkBlue
+- uid: PnP.Core.Model.SharePoint.SharePointTheme.DarkYellow
+  name: DarkYellow
+  href: api/PnP.Core.Model.SharePoint.SharePointTheme.html#PnP_Core_Model_SharePoint_SharePointTheme_DarkYellow
+  commentId: F:PnP.Core.Model.SharePoint.SharePointTheme.DarkYellow
+  fullName: PnP.Core.Model.SharePoint.SharePointTheme.DarkYellow
+  nameWithType: SharePointTheme.DarkYellow
+- uid: PnP.Core.Model.SharePoint.SharePointTheme.Gray
+  name: Gray
+  href: api/PnP.Core.Model.SharePoint.SharePointTheme.html#PnP_Core_Model_SharePoint_SharePointTheme_Gray
+  commentId: F:PnP.Core.Model.SharePoint.SharePointTheme.Gray
+  fullName: PnP.Core.Model.SharePoint.SharePointTheme.Gray
+  nameWithType: SharePointTheme.Gray
+- uid: PnP.Core.Model.SharePoint.SharePointTheme.Green
+  name: Green
+  href: api/PnP.Core.Model.SharePoint.SharePointTheme.html#PnP_Core_Model_SharePoint_SharePointTheme_Green
+  commentId: F:PnP.Core.Model.SharePoint.SharePointTheme.Green
+  fullName: PnP.Core.Model.SharePoint.SharePointTheme.Green
+  nameWithType: SharePointTheme.Green
+- uid: PnP.Core.Model.SharePoint.SharePointTheme.Orange
+  name: Orange
+  href: api/PnP.Core.Model.SharePoint.SharePointTheme.html#PnP_Core_Model_SharePoint_SharePointTheme_Orange
+  commentId: F:PnP.Core.Model.SharePoint.SharePointTheme.Orange
+  fullName: PnP.Core.Model.SharePoint.SharePointTheme.Orange
+  nameWithType: SharePointTheme.Orange
+- uid: PnP.Core.Model.SharePoint.SharePointTheme.Purple
+  name: Purple
+  href: api/PnP.Core.Model.SharePoint.SharePointTheme.html#PnP_Core_Model_SharePoint_SharePointTheme_Purple
+  commentId: F:PnP.Core.Model.SharePoint.SharePointTheme.Purple
+  fullName: PnP.Core.Model.SharePoint.SharePointTheme.Purple
+  nameWithType: SharePointTheme.Purple
+- uid: PnP.Core.Model.SharePoint.SharePointTheme.Red
+  name: Red
+  href: api/PnP.Core.Model.SharePoint.SharePointTheme.html#PnP_Core_Model_SharePoint_SharePointTheme_Red
+  commentId: F:PnP.Core.Model.SharePoint.SharePointTheme.Red
+  fullName: PnP.Core.Model.SharePoint.SharePointTheme.Red
+  nameWithType: SharePointTheme.Red
+- uid: PnP.Core.Model.SharePoint.SharePointTheme.Teal
+  name: Teal
+  href: api/PnP.Core.Model.SharePoint.SharePointTheme.html#PnP_Core_Model_SharePoint_SharePointTheme_Teal
+  commentId: F:PnP.Core.Model.SharePoint.SharePointTheme.Teal
+  fullName: PnP.Core.Model.SharePoint.SharePointTheme.Teal
+  nameWithType: SharePointTheme.Teal
 - uid: PnP.Core.Model.SharePoint.SharingState
   name: SharingState
   href: api/PnP.Core.Model.SharePoint.SharingState.html
