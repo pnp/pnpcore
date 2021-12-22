@@ -36816,6 +36816,32 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IWeb.GetUserByIdBatchAsync
   nameWithType: IWeb.GetUserByIdBatchAsync
+- uid: PnP.Core.Model.SharePoint.IWeb.HasCommunicationSiteFeatures
+  name: HasCommunicationSiteFeatures()
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_HasCommunicationSiteFeatures
+  commentId: M:PnP.Core.Model.SharePoint.IWeb.HasCommunicationSiteFeatures
+  fullName: PnP.Core.Model.SharePoint.IWeb.HasCommunicationSiteFeatures()
+  nameWithType: IWeb.HasCommunicationSiteFeatures()
+- uid: PnP.Core.Model.SharePoint.IWeb.HasCommunicationSiteFeatures*
+  name: HasCommunicationSiteFeatures
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_HasCommunicationSiteFeatures_
+  commentId: Overload:PnP.Core.Model.SharePoint.IWeb.HasCommunicationSiteFeatures
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IWeb.HasCommunicationSiteFeatures
+  nameWithType: IWeb.HasCommunicationSiteFeatures
+- uid: PnP.Core.Model.SharePoint.IWeb.HasCommunicationSiteFeaturesAsync
+  name: HasCommunicationSiteFeaturesAsync()
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_HasCommunicationSiteFeaturesAsync
+  commentId: M:PnP.Core.Model.SharePoint.IWeb.HasCommunicationSiteFeaturesAsync
+  fullName: PnP.Core.Model.SharePoint.IWeb.HasCommunicationSiteFeaturesAsync()
+  nameWithType: IWeb.HasCommunicationSiteFeaturesAsync()
+- uid: PnP.Core.Model.SharePoint.IWeb.HasCommunicationSiteFeaturesAsync*
+  name: HasCommunicationSiteFeaturesAsync
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_HasCommunicationSiteFeaturesAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.IWeb.HasCommunicationSiteFeaturesAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IWeb.HasCommunicationSiteFeaturesAsync
+  nameWithType: IWeb.HasCommunicationSiteFeaturesAsync
 - uid: PnP.Core.Model.SharePoint.IWeb.HeaderEmphasis
   name: HeaderEmphasis
   href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_HeaderEmphasis
