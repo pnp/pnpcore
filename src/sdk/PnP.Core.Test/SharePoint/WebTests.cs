@@ -1461,5 +1461,31 @@ namespace PnP.Core.Test.SharePoint
                 Assert.IsTrue(webs2.First().Id == webs.First().Id);
             }
         }
+
+        [TestMethod]
+        public void HasCommunicationSiteFeatures()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            {
+                Assert.IsFalse(context.Web.HasCommunicationSiteFeatures());
+            }
+
+            using (var context = TestCommon.Instance.GetContext(TestCommon.NoGroupTestSite, 1))
+            {
+                Assert.IsTrue(context.Web.HasCommunicationSiteFeatures());
+            }
+
+            using (var context = TestCommon.Instance.GetContext(TestCommon.SyntexContentCenterTestSite, 2))
+            {
+                Assert.IsTrue(context.Web.HasCommunicationSiteFeatures());
+            }
+
+            using (var context = TestCommon.Instance.GetContext(TestCommon.VivaTopicCenterTestSite, 3))
+            {
+                Assert.IsTrue(context.Web.HasCommunicationSiteFeatures());
+            }
+        }       
     }
 }

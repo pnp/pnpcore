@@ -866,7 +866,11 @@ namespace PnP.Core.Model.SharePoint
         public async Task<bool> IsSyntexContentCenterAsync()
         {
             await EnsurePropertiesAsync(p => p.WebTemplate).ConfigureAwait(false);
+            return IsSyntexContentCenterCheck();
+        }
 
+        private bool IsSyntexContentCenterCheck()
+        {
             // Syntex Content Center sites use a specific template
             if (WebTemplate == "CONTENTCTR")
             {
@@ -1233,6 +1237,29 @@ namespace PnP.Core.Model.SharePoint
         private ApiCall BuildRemoveRoleDefinitionApiCall(int principalId, IRoleDefinition roleDefinition)
         {
             return new ApiCall($"_api/web/roleassignments/removeroleassignment(principalid={principalId},roledefid={roleDefinition.Id})", ApiType.SPORest);
+        }
+        #endregion
+
+        #region Has Communication Site features
+        public async Task<bool> HasCommunicationSiteFeaturesAsync()
+        {
+            await EnsurePropertiesAsync(p => p.WebTemplate, p => p.Features).ConfigureAwait(false);
+            
+            // Syntex Content Center did enable communication site features in a different manner
+            if (IsSyntexContentCenterCheck())
+            {
+                return true;
+            }
+
+            // Was the communication site feature enabled?
+            var communicationSiteFeature = Guid.Parse("f39dad74-ea79-46ef-9ef7-fe2370754f6f");
+            var feature = Features.AsRequested().FirstOrDefault(p => p.DefinitionId == communicationSiteFeature);
+            return feature != null;
+        }
+
+        public bool HasCommunicationSiteFeatures()
+        {
+            return HasCommunicationSiteFeaturesAsync().GetAwaiter().GetResult();
         }
         #endregion
 

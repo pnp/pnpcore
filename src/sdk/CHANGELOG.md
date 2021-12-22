@@ -6,6 +6,16 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
+## [Unreleased]
+
+### Added
+
+- Added `HasCommunicationSiteFeatures` methods on `IWeb` [jansenbe - Bert Jansen]
+
+### Changed
+
+
+
 ## [1.5.0]
 
 ### Added

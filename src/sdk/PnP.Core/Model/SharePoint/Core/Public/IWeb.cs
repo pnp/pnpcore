@@ -1017,6 +1017,20 @@ namespace PnP.Core.Model.SharePoint
 
         #endregion
 
+        #region Has Communication Site features
+        /// <summary>
+        /// Does this web have the communication site features enabled?
+        /// </summary>
+        /// <returns>True if enabled, false otherwise</returns>
+        Task<bool> HasCommunicationSiteFeaturesAsync();
+
+        /// <summary>
+        /// Does this web have the communication site features enabled?
+        /// </summary>
+        /// <returns>True if enabled, false otherwise</returns>
+        bool HasCommunicationSiteFeatures();
+        #endregion
+
         #endregion
 
         #region TO IMPLEMENT
