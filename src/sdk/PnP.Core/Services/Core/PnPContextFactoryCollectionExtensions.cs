@@ -75,6 +75,8 @@ namespace PnP.Core.Services
             {
                 collection.AddHttpClient<SharePointRestClient>()
                     .AddHttpMessageHandler<SharePointRestRetryHandler>();
+                collection.AddHttpClient<MicrosoftGraphClient>()
+                    .AddHttpMessageHandler<MicrosoftGraphRetryHandler>();
             }
             else
             {
@@ -86,6 +88,12 @@ namespace PnP.Core.Services
                     .ConfigurePrimaryHttpMessageHandler(() => new HttpClientHandler()
                     {
                         UseCookies = false,
+                        AutomaticDecompression = DecompressionMethods.All
+                    });
+                collection.AddHttpClient<MicrosoftGraphClient>()
+                    .AddHttpMessageHandler<MicrosoftGraphRetryHandler>()
+                    .ConfigurePrimaryHttpMessageHandler(() => new HttpClientHandler()
+                    {
                         AutomaticDecompression = DecompressionMethods.All
                     });
             }
@@ -100,19 +108,13 @@ namespace PnP.Core.Services
                     UseCookies = false,
                     AutomaticDecompression = DecompressionMethods.GZip
                 });
-#endif
-
             collection.AddHttpClient<MicrosoftGraphClient>()
                 .AddHttpMessageHandler<MicrosoftGraphRetryHandler>()
                 .ConfigurePrimaryHttpMessageHandler(() => new HttpClientHandler()
                 {
-#if NET5_0_OR_GREATER
-                    AutomaticDecompression = DecompressionMethods.All
-#else
                     AutomaticDecompression = DecompressionMethods.GZip
-#endif
                 });
-
+#endif
             return collection;
         }
 
