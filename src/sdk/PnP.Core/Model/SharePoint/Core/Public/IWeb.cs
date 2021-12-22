@@ -1031,6 +1031,14 @@ namespace PnP.Core.Model.SharePoint
         bool HasCommunicationSiteFeatures();
         #endregion
 
+        #region Branding
+        /// <summary>
+        /// Returns the branding manager which can be used to change the look of the web
+        /// </summary>
+        /// <returns>An <see cref="IBrandingManager"/> instance</returns>
+        IBrandingManager GetBrandingManager();
+        #endregion
+
         #endregion
 
         #region TO IMPLEMENT

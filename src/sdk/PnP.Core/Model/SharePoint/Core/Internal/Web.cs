@@ -1263,6 +1263,12 @@ namespace PnP.Core.Model.SharePoint
         }
         #endregion
 
+        #region Branding
+        public IBrandingManager GetBrandingManager()
+        {
+            return new BrandingManager(PnPContext);
+        }
+        #endregion
         #endregion
     }
 }
