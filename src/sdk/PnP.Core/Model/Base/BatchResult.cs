@@ -46,7 +46,7 @@ namespace PnP.Core.Model
                     throw new InvalidOperationException(PnPCoreResources.Exception_BatchResult_BatchNotYetExecuted);
                 }
 
-                if (BatchRequest.ApiCall.RawRequest)
+                if (BatchRequest.ApiCall.RawRequest || BatchRequest.ApiCall.RawResultsHandler != null)
                 {
                     return result;
                 }
