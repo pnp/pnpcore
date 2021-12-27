@@ -381,5 +381,192 @@ namespace PnP.Core.Model.SharePoint
         }
 
         #endregion
+
+        #region Site chrome
+        public async Task<IChromeOptions> GetChromeOptionsAsync()
+        {
+            var web = await context.Web.GetAsync(p => p.HeaderEmphasis,
+                                        p => p.HeaderLayout,
+                                        p => p.HideTitleInHeader,
+                                        p => p.FooterEmphasis,
+                                        p => p.FooterEnabled,
+                                        p => p.FooterLayout,
+                                        p => p.LogoAlignment,
+                                        p => p.MegaMenuEnabled,
+                                        p => p.QuickLaunchEnabled,
+                                        // Load these properties now as they're needed in the HasCommunicationSiteFeaturesAsync method
+                                        p => p.WebTemplate,
+                                        p => p.Features).ConfigureAwait(false);
+
+            var hasCommunicationSiteFeatures = await web.HasCommunicationSiteFeaturesAsync().ConfigureAwait(false);
+
+            var chromeOptions = new ChromeOptions();
+
+            ProcessChromeOptionsResponse(web, hasCommunicationSiteFeatures, chromeOptions);
+
+            return chromeOptions;
+        }
+
+        private static void ProcessChromeOptionsResponse(IWeb web, bool hasCommunicationSiteFeatures, ChromeOptions chromeOptions)
+        {
+            chromeOptions.Header = new HeaderOptions
+            {
+                Layout = web.HeaderLayout,
+                LogoAlignment = web.LogoAlignment,
+                HideTitle = web.HideTitleInHeader,
+                Emphasis = web.HeaderEmphasis
+            };
+
+            if (hasCommunicationSiteFeatures)
+            {
+                chromeOptions.Navigation = new NavigationOptions
+                {
+                    MegaMenuEnabled = web.MegaMenuEnabled,
+                    Visible = web.QuickLaunchEnabled
+                };
+
+                chromeOptions.Footer = new FooterOptions
+                {
+                    Layout = web.FooterLayout,
+                    Emphasis = web.FooterEmphasis,
+                    Enabled = web.FooterEnabled
+                };
+            }
+        }
+
+        public IChromeOptions GetChromeOptions()
+        {
+            return GetChromeOptionsAsync().GetAwaiter().GetResult();
+        }
+
+        public async Task<IBatchSingleResult<IChromeOptions>> GetChromeOptionsBatchAsync(Batch batch)
+        {
+            var web = await context.Web.GetBatchAsync(batch,
+                                                p => p.HeaderEmphasis,
+                                                p => p.HeaderLayout,
+                                                p => p.HideTitleInHeader,
+                                                p => p.FooterEmphasis,
+                                                p => p.FooterEnabled,
+                                                p => p.FooterLayout,
+                                                p => p.LogoAlignment,
+                                                p => p.MegaMenuEnabled,
+                                                p => p.QuickLaunchEnabled,
+                                                // Load these properties now as they're needed in the HasCommunicationSiteFeaturesAsync method
+                                                p => p.WebTemplate,
+                                                p => p.Features).ConfigureAwait(false);
+            
+            // Add this extra request as we we need the web load request fully processed before we can use it in the event
+            // handler below. Adding the event handler to the web batch requests will result in the handler firing
+            // before the web instance is fully loaded. Ensure a REST only property is loaded as the previous call is also REST 
+            // and we don't want to end up with a mixed batch
+            var site = await context.Site.GetBatchAsync(batch, p => p.GroupId).ConfigureAwait(false);
+
+            var chromeOptions = new ChromeOptions();
+
+            var lastRequestId = batch.PrepareLastAddedRequestForBatchProcessing(async (json, apiCall) =>
+            {
+                bool hasCommunicationSiteFeatures = await web.Result.HasCommunicationSiteFeaturesAsync().ConfigureAwait(false);                   
+                ProcessChromeOptionsResponse(web.Result, hasCommunicationSiteFeatures, apiCall.RawSingleResult as ChromeOptions);
+            }, chromeOptions);
+
+            return new BatchSingleResult<IChromeOptions>(batch, lastRequestId, chromeOptions);
+
+        }
+
+        public IBatchSingleResult<IChromeOptions> GetChromeOptionsBatch(Batch batch)
+        {
+            return GetChromeOptionsBatchAsync(batch).GetAwaiter().GetResult();  
+        }
+
+        public async Task<IBatchSingleResult<IChromeOptions>> GetChromeOptionsBatchAsync()
+        {
+            return await GetChromeOptionsBatchAsync(context.CurrentBatch).ConfigureAwait(false);
+        }
+
+        public IBatchSingleResult<IChromeOptions> GetChromeOptionsBatch()
+        {
+            return GetChromeOptionsBatchAsync().GetAwaiter().GetResult();
+        }
+
+        public async Task SetChromeOptionsAsync(IChromeOptions chromeOptions)
+        {
+            // Setting chrome options takes two calls, so batch them for performance reasons
+            var batch = context.NewBatch();
+
+            await BuildSetChromeOptionsRequests(chromeOptions, batch).ConfigureAwait(false);
+
+            // Execute the batch
+            await context.ExecuteAsync(batch).ConfigureAwait(false);
+        }
+
+        private async Task BuildSetChromeOptionsRequests(IChromeOptions chromeOptions, Batch batch)
+        {
+            // Update chrome options
+            await (context.Web as Web).RawRequestBatchAsync(batch, BuildSetChromeOptionsApiCall(chromeOptions), HttpMethod.Post, "SetChromeOptions").ConfigureAwait(false);
+            // Update the navigation visibility
+            await (context.Web as Web).RawRequestBatchAsync(batch, BuildQuickLaunchEnabledApiCall(chromeOptions), new HttpMethod("PATCH"), "Update").ConfigureAwait(false);
+        }
+
+        public void SetChromeOptions(IChromeOptions chromeOptions)
+        {
+            SetChromeOptionsAsync(chromeOptions).GetAwaiter().GetResult();
+        }
+
+        private static ApiCall BuildSetChromeOptionsApiCall(IChromeOptions chromeOptions)
+        {
+            var body = new
+            {
+                headerLayout = chromeOptions.Header.Layout,
+                headerEmphasis = chromeOptions.Header.Emphasis,
+                hideTitleInHeader = chromeOptions.Header.HideTitle,
+                logoAlignment = chromeOptions.Header.LogoAlignment,
+                megaMenuEnabled = chromeOptions.Navigation != null ? chromeOptions.Navigation.MegaMenuEnabled : false,
+                footerEnabled = chromeOptions.Footer != null ? chromeOptions.Footer.Enabled : false,
+                footerLayout = chromeOptions.Footer != null ? chromeOptions.Footer.Layout : FooterLayoutType.Simple,
+                footerEmphasis = chromeOptions.Footer != null ? chromeOptions.Footer.Emphasis : FooterVariantThemeType.Strong
+            };
+
+            string jsonBody = JsonSerializer.Serialize(body);
+
+            return new ApiCall("_api/web/SetChromeOptions", ApiType.SPORest, jsonBody);
+        }
+
+        private static ApiCall BuildQuickLaunchEnabledApiCall(IChromeOptions chromeOptions)
+        {
+            var body = new
+            {
+                __metadata = new
+                {
+                    type = "SP.Web"
+                },
+                QuickLaunchEnabled = chromeOptions.Navigation != null ? chromeOptions.Navigation.Visible : true,
+            };
+
+            string jsonBody = JsonSerializer.Serialize(body);
+
+            return new ApiCall("_api/web", ApiType.SPORest, jsonBody);
+        }
+
+        public async Task SetChromeOptionsBatchAsync(Batch batch, IChromeOptions chromeOptions)
+        {
+            await BuildSetChromeOptionsRequests(chromeOptions, batch).ConfigureAwait(false);
+        }
+
+        public void SetChromeOptionsBatch(Batch batch, IChromeOptions chromeOptions)
+        {
+            SetChromeOptionsBatchAsync(batch, chromeOptions).GetAwaiter().GetResult();
+        }
+
+        public async Task SetChromeOptionsBatchAsync(IChromeOptions chromeOptions)
+        {
+            await SetChromeOptionsBatchAsync(context.CurrentBatch, chromeOptions).ConfigureAwait(false);
+        }
+
+        public void SetChromeOptionsBatch(IChromeOptions chromeOptions)
+        {
+            SetChromeOptionsBatchAsync(chromeOptions).GetAwaiter().GetResult();
+        }
+
+        #endregion
     }
 }

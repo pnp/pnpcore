@@ -138,5 +138,90 @@ namespace PnP.Core.Model.SharePoint
         void SetThemeBatch(ITheme theme);
 
         #endregion
+
+        #region Site chrome 
+
+        /// <summary>
+        /// Gets the site's chrome (header/footer/navigation) options
+        /// </summary>
+        /// <returns>Site's <see cref="IChromeOptions"/></returns>
+        Task<IChromeOptions> GetChromeOptionsAsync();
+
+        /// <summary>
+        /// Gets the site's chrome (header/footer/navigation) options
+        /// </summary>
+        /// <returns>Site's <see cref="IChromeOptions"/></returns>
+        IChromeOptions GetChromeOptions();
+
+        /// <summary>
+        /// Gets the site's chrome (header/footer/navigation) options
+        /// </summary>
+        /// <param name="batch">Batch to add this request to</param>
+        /// <returns>Site's <see cref="IChromeOptions"/></returns>
+        Task<IBatchSingleResult<IChromeOptions>> GetChromeOptionsBatchAsync(Batch batch);
+
+        /// <summary>
+        /// Gets the site's chrome (header/footer/navigation) options
+        /// </summary>
+        /// <param name="batch">Batch to add this request to</param>
+        /// <returns>Site's <see cref="IChromeOptions"/></returns>
+        IBatchSingleResult<IChromeOptions> GetChromeOptionsBatch(Batch batch);
+
+        /// <summary>
+        /// Gets the site's chrome (header/footer/navigation) options
+        /// </summary>
+        /// <returns>Site's <see cref="IChromeOptions"/></returns>
+        Task<IBatchSingleResult<IChromeOptions>> GetChromeOptionsBatchAsync();
+
+        /// <summary>
+        /// Gets the site's chrome (header/footer/navigation) options
+        /// </summary>
+        /// <returns>Site's <see cref="IChromeOptions"/></returns>
+        IBatchSingleResult<IChromeOptions> GetChromeOptionsBatch();
+
+        /// <summary>
+        /// Sets the site's chrome (header/footer/navigation) options
+        /// </summary>
+        /// <param name="chromeOptions">Site chrome options to apply</param>
+        /// <returns></returns>
+        Task SetChromeOptionsAsync(IChromeOptions chromeOptions);
+
+        /// <summary>
+        /// Sets the site's chrome (header/footer/navigation) options
+        /// </summary>
+        /// <param name="chromeOptions">Site chrome options to apply</param>
+        /// <returns></returns>
+        void SetChromeOptions(IChromeOptions chromeOptions);
+
+        /// <summary>
+        /// Sets the site's chrome (header/footer/navigation) options
+        /// </summary>
+        /// <param name="batch">Batch to add this request to</param>
+        /// <param name="chromeOptions">Site chrome options to apply</param>
+        /// <returns></returns>
+        Task SetChromeOptionsBatchAsync(Batch batch, IChromeOptions chromeOptions);
+
+        /// <summary>
+        /// Sets the site's chrome (header/footer/navigation) options
+        /// </summary>
+        /// <param name="batch">Batch to add this request to</param>
+        /// <param name="chromeOptions">Site chrome options to apply</param>
+        /// <returns></returns>
+        void SetChromeOptionsBatch(Batch batch, IChromeOptions chromeOptions);
+
+        /// <summary>
+        /// Sets the site's chrome (header/footer/navigation) options
+        /// </summary>
+        /// <param name="chromeOptions">Site chrome options to apply</param>
+        /// <returns></returns>
+        Task SetChromeOptionsBatchAsync(IChromeOptions chromeOptions);
+
+        /// <summary>
+        /// Sets the site's chrome (header/footer/navigation) options
+        /// </summary>
+        /// <param name="chromeOptions">Site chrome options to apply</param>
+        /// <returns></returns>
+        void SetChromeOptionsBatch(IChromeOptions chromeOptions);
+        #endregion
     }
 }
