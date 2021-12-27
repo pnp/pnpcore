@@ -11,7 +11,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 ### Added
 
 - Added `HasCommunicationSiteFeatures` methods on `IWeb` [jansenbe - Bert Jansen]
-- Web branding via `IBrandingManager` with support for getting and setting themes [jansenbe - Bert Jansen]
+- Web branding via `IBrandingManager` with support for getting and setting themes and site chrome (header/footer/navigation) [jansenbe - Bert Jansen]
 
 ### Changed
 

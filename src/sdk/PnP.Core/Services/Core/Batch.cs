@@ -215,6 +215,38 @@ namespace PnP.Core.Services
                 !string.IsNullOrEmpty(request.ApiCall.JsonBody) ? request.ApiCall.JsonBody : ""));
         }
 
+        internal Guid PrepareLastAddedRequestForBatchProcessing<T>(Action<string, ApiCall> rawResultsHandler, T resultObject)
+        {
+            var lastBatchRequest = Requests.Last().Value;
+            var key = Requests.Last().Key;
+            var sourceApiCall = lastBatchRequest.ApiCall;
+
+            lastBatchRequest.ApiCall = new ApiCall()
+            {
+                BinaryBody = sourceApiCall.BinaryBody,
+                Commit = sourceApiCall.Commit,
+                CSOMRequests = sourceApiCall.CSOMRequests,
+                ExecuteRequestApiCall = sourceApiCall.ExecuteRequestApiCall,
+                ExpectBinaryResponse = sourceApiCall.ExpectBinaryResponse,
+                Headers = sourceApiCall.Headers,
+                Interactive = sourceApiCall.Interactive,
+                JsonBody = sourceApiCall.JsonBody,
+                LoadPages = sourceApiCall.LoadPages,
+                RawResultsHandler = rawResultsHandler,
+                RawSingleResult = resultObject,
+                ReceivingProperty = sourceApiCall.ReceivingProperty,
+                RemoveFromModel = sourceApiCall.RemoveFromModel,
+                Request = sourceApiCall.Request,
+                SkipCollectionClearing = sourceApiCall.SkipCollectionClearing,
+                StreamResponse = sourceApiCall.StreamResponse,
+                Type = sourceApiCall.Type
+            };
+
+            Requests[key] = lastBatchRequest;
+
+            return lastBatchRequest.Id;
+        }
+
         /// <summary>
         /// Gets the last request in the list of requests
         /// </summary>

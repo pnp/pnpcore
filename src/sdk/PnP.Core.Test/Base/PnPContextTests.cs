@@ -825,5 +825,41 @@ namespace PnP.Core.Test.Base
             Assert.IsTrue(PnPContext.AccessTokenHasRole(Constants.ApplicationAccessToken, "Sites.FullControl.All"));
             Assert.IsTrue(PnPContext.AccessTokenUsesApplicationPermissions(Constants.ApplicationAccessToken));
         }
+
+        [TestMethod]
+        public async Task MaintainChangedAfterReloading()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                await context.Web.LoadAsync(p => p.HeaderEmphasis,
+                                                 p => p.HeaderLayout,
+                                                 p => p.HideTitleInHeader,
+                                                 p => p.LogoAlignment,
+                                                 p => p.MegaMenuEnabled,
+                                                 p => p.QuickLaunchEnabled,
+                                                 // Load these properties now as they're needed in the HasCommunicationSiteFeaturesAsync method
+                                                 p => p.WebTemplate);
+
+                Assert.IsTrue((context.Web as Web).ChangedProperties.Count == 0);
+                Assert.IsFalse(context.Web.IsPropertyAvailable(p => p.FooterEnabled));
+                Assert.IsTrue(context.Web.IsPropertyAvailable(p => p.HeaderLayout));
+
+                context.Web.LogoAlignment = LogoAlignment.Right;
+
+                Assert.IsTrue((context.Web as Web).ChangedProperties.Count == 1);
+
+                // Load other properties
+                await context.Web.LoadAsync( p => p.FooterEmphasis,
+                                                p => p.FooterEnabled,
+                                                p => p.FooterLayout,
+                                                p => p.Features);
+
+                Assert.IsTrue((context.Web as Web).ChangedProperties.Count == 1);
+                Assert.IsTrue(context.Web.IsPropertyAvailable(p => p.FooterEnabled));
+                Assert.IsTrue(context.Web.IsPropertyAvailable(p => p.HeaderLayout));
+
+            }
+        }
     }
 }

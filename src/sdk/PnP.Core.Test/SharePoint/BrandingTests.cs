@@ -102,5 +102,207 @@ namespace PnP.Core.Test.SharePoint
             }
         }
 
+        [TestMethod]
+        public void GetChromeOptionsForTeamSite()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            {
+                var chrome = context.Web.GetBrandingManager().GetChromeOptions();
+
+                Assert.IsTrue(chrome != null);                
+                Assert.IsNotNull(chrome.Header);
+                Assert.IsNull(chrome.Footer);
+                Assert.IsNull(chrome.Navigation);
+            }
+        }
+
+        [TestMethod]
+        public void GetChromeOptionsForCommunicationSite()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            using (var context = TestCommon.Instance.GetContext(TestCommon.NoGroupTestSite))
+            {
+                var chrome = context.Web.GetBrandingManager().GetChromeOptions();
+
+                Assert.IsTrue(chrome != null);
+                Assert.IsNotNull(chrome.Header);
+                Assert.IsNotNull(chrome.Footer);
+                Assert.IsNotNull(chrome.Navigation);
+            }
+        }
+
+        [TestMethod]
+        public void GetChromeOptionsForTeamSiteBatch()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            {
+                var chrome = context.Web.GetBrandingManager().GetChromeOptionsBatch();
+
+                Assert.IsFalse(chrome.IsAvailable);
+
+                context.Execute();
+
+                Assert.IsTrue(chrome.IsAvailable);
+
+                Assert.IsTrue(chrome.Result != null);
+                Assert.IsNotNull(chrome.Result.Header);
+                Assert.IsNull(chrome.Result.Footer);
+                Assert.IsNull(chrome.Result.Navigation);
+            }
+        }
+
+        [TestMethod]
+        public void GetChromeOptionsForCommunicationSiteBatch()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            using (var context = TestCommon.Instance.GetContext(TestCommon.NoGroupTestSite))
+            {
+                var chrome = context.Web.GetBrandingManager().GetChromeOptionsBatch();
+
+                Assert.IsFalse(chrome.IsAvailable);
+
+                context.Execute();
+
+                Assert.IsTrue(chrome.IsAvailable);
+
+                Assert.IsTrue(chrome.Result != null);
+                Assert.IsNotNull(chrome.Result.Header);
+                Assert.IsNotNull(chrome.Result.Footer);
+                Assert.IsNotNull(chrome.Result.Navigation);
+            }
+        }
+
+        [TestMethod]
+        public void SetChromeOptionsForTeamSite()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            {
+                var chrome = context.Web.GetBrandingManager().GetChromeOptions();
+
+                Assert.IsTrue(chrome != null);
+
+                chrome.Header.Emphasis = Model.SharePoint.VariantThemeType.Strong;
+                chrome.Header.HideTitle = true;
+                chrome.Header.Layout = Model.SharePoint.HeaderLayoutType.Extended;
+                chrome.Header.LogoAlignment = Model.SharePoint.LogoAlignment.Middle;
+
+                context.Web.GetBrandingManager().SetChromeOptions(chrome);
+
+                chrome = context.Web.GetBrandingManager().GetChromeOptions();
+                
+                Assert.IsTrue(chrome != null);
+                Assert.IsTrue(chrome.Header.Emphasis == Model.SharePoint.VariantThemeType.Strong);
+                Assert.IsTrue(chrome.Header.HideTitle == true);
+                Assert.IsTrue(chrome.Header.Layout == Model.SharePoint.HeaderLayoutType.Extended);
+                Assert.IsTrue(chrome.Header.LogoAlignment == Model.SharePoint.LogoAlignment.Middle);
+
+                // Reset chrome options again
+                chrome.Header.Emphasis = Model.SharePoint.VariantThemeType.None;
+                chrome.Header.HideTitle = false;
+                chrome.Header.Layout = Model.SharePoint.HeaderLayoutType.None;
+                chrome.Header.LogoAlignment = Model.SharePoint.LogoAlignment.Left;
+
+                context.Web.GetBrandingManager().SetChromeOptions(chrome);
+            }
+        }
+
+        [TestMethod]
+        public void SetChromeOptionsForTeamSiteBatch()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            {
+                var chrome = context.Web.GetBrandingManager().GetChromeOptions();
+
+                Assert.IsTrue(chrome != null);
+
+                chrome.Header.Emphasis = Model.SharePoint.VariantThemeType.Strong;
+                chrome.Header.HideTitle = true;
+                chrome.Header.Layout = Model.SharePoint.HeaderLayoutType.Extended;
+                chrome.Header.LogoAlignment = Model.SharePoint.LogoAlignment.Middle;
+
+                context.Web.GetBrandingManager().SetChromeOptionsBatch(chrome);
+
+                context.Execute();
+
+                chrome = context.Web.GetBrandingManager().GetChromeOptions();
+
+                Assert.IsTrue(chrome != null);
+                Assert.IsTrue(chrome.Header.Emphasis == Model.SharePoint.VariantThemeType.Strong);
+                Assert.IsTrue(chrome.Header.HideTitle == true);
+                Assert.IsTrue(chrome.Header.Layout == Model.SharePoint.HeaderLayoutType.Extended);
+                Assert.IsTrue(chrome.Header.LogoAlignment == Model.SharePoint.LogoAlignment.Middle);
+
+                // Reset chrome options again
+                chrome.Header.Emphasis = Model.SharePoint.VariantThemeType.None;
+                chrome.Header.HideTitle = false;
+                chrome.Header.Layout = Model.SharePoint.HeaderLayoutType.None;
+                chrome.Header.LogoAlignment = Model.SharePoint.LogoAlignment.Left;
+
+                context.Web.GetBrandingManager().SetChromeOptionsBatch(chrome);
+
+                context.Execute();
+            }
+        }
+
+        [TestMethod]
+        public void SetChromeOptionsForCommunicationSite()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            using (var context = TestCommon.Instance.GetContext(TestCommon.NoGroupTestSite))
+            {
+                var chrome = context.Web.GetBrandingManager().GetChromeOptions();
+
+                Assert.IsTrue(chrome != null);
+
+                chrome.Header.Emphasis = Model.SharePoint.VariantThemeType.Strong;
+                chrome.Header.HideTitle = true;
+                chrome.Header.Layout = Model.SharePoint.HeaderLayoutType.Extended;
+                chrome.Header.LogoAlignment = Model.SharePoint.LogoAlignment.Middle;
+                chrome.Navigation.MegaMenuEnabled = true;
+                chrome.Navigation.Visible = false;
+                chrome.Footer.Enabled = true;
+                chrome.Footer.Emphasis = Model.SharePoint.FooterVariantThemeType.None;
+                chrome.Footer.Layout = Model.SharePoint.FooterLayoutType.Extended;
+
+                context.Web.GetBrandingManager().SetChromeOptions(chrome);
+
+                chrome = context.Web.GetBrandingManager().GetChromeOptions();
+
+                Assert.IsTrue(chrome != null);
+                Assert.IsTrue(chrome.Header.Emphasis == Model.SharePoint.VariantThemeType.Strong);
+                Assert.IsTrue(chrome.Header.HideTitle == true);
+                Assert.IsTrue(chrome.Header.Layout == Model.SharePoint.HeaderLayoutType.Extended);
+                Assert.IsTrue(chrome.Header.LogoAlignment == Model.SharePoint.LogoAlignment.Middle);
+                Assert.IsTrue(chrome.Navigation.MegaMenuEnabled == true);
+                Assert.IsTrue(chrome.Navigation.Visible == false);
+                Assert.IsTrue(chrome.Footer.Enabled == true);
+                Assert.IsTrue(chrome.Footer.Emphasis == Model.SharePoint.FooterVariantThemeType.None);
+                Assert.IsTrue(chrome.Footer.Layout == Model.SharePoint.FooterLayoutType.Extended);
+
+                // Reset chrome options again
+                chrome.Header.Emphasis = Model.SharePoint.VariantThemeType.None;
+                chrome.Header.HideTitle = false;
+                chrome.Header.Layout = Model.SharePoint.HeaderLayoutType.None;
+                chrome.Header.LogoAlignment = Model.SharePoint.LogoAlignment.Left;
+                chrome.Navigation.MegaMenuEnabled = false;
+                chrome.Navigation.Visible = true;
+                chrome.Footer.Enabled = true;
+                chrome.Footer.Emphasis = Model.SharePoint.FooterVariantThemeType.Strong;
+                chrome.Footer.Layout = Model.SharePoint.FooterLayoutType.Simple;
+
+                context.Web.GetBrandingManager().SetChromeOptions(chrome);
+            }
+        }
     }
 }
