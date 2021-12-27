@@ -41,7 +41,7 @@ namespace PnP.Core.Model
         {
             get
             {
-                if (!IsAvailable)
+                if (!IsAvailable && BatchRequest.ExecutionNeeded)
                 {
                     throw new InvalidOperationException(PnPCoreResources.Exception_BatchResult_BatchNotYetExecuted);
                 }

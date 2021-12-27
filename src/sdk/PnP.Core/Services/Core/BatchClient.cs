@@ -1546,6 +1546,7 @@ namespace PnP.Core.Services
                         {
                             await JsonMappingHelper.MapJsonToModel(batchRequest).ConfigureAwait(false);
                         }
+
                         // Invoke a delegate (if defined) to trigger processing of raw batch requests
                         batchRequest.ApiCall.RawResultsHandler?.Invoke(batchRequest.ResponseJson, batchRequest.ApiCall);
                     }
