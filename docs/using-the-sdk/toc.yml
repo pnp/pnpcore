@@ -87,6 +87,10 @@
     href: files-intro.md
   - name: Large files
     href: files-large.md
+- name: Folders
+  items:
+  - name: Overview
+    href: folders-intro.md
 - name: Pages
   items:
   - name: Overview
@@ -101,10 +105,10 @@
     href: pages-multilingual.md
   - name: Commenting and liking
     href: pages-social.md
-- name: Folders
+- name: Branding
   items:
   - name: Overview
-    href: folders-intro.md
+    href: branding-intro.md
 - name: Security
   items:
   - name: Overview
