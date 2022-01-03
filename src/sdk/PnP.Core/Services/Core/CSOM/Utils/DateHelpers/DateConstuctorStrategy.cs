@@ -16,6 +16,13 @@ namespace PnP.Core.Services.Core.CSOM.Utils.DateHelpers
                     return DateTime.MinValue;
                 }
 
+                // CSOM request is was returning Date(2022,0,3,13,32,4,77) as of 2022...service bug? 
+                // Creating a new DateTime with month 0 will fail (see #703)
+                if (constructorValues[1] == "0")
+                {
+                    return DateTime.MinValue;
+                }
+
                 result = new DateTime(
                     Convert.ToInt32(constructorValues[0]),
                     Convert.ToInt32(constructorValues[1]),

@@ -106,6 +106,68 @@ namespace PnP.Core.Admin.Test.SharePoint
         }
 
         [TestMethod]
+        public async Task GetSiteCollectionPropertiesForNewSite()
+        {
+            //TestCommon.Instance.Mocking = false;
+            TestCommon.Instance.UseApplicationPermissions = false;
+
+            CommunicationSiteOptions communicationSiteToCreate = null;
+            try
+            {
+                using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+                {
+
+                    // Persist the used site url as we need to have the same url when we run an offline test
+                    Uri siteUrl;
+                    if (!TestCommon.Instance.Mocking)
+                    {
+                        siteUrl = new Uri($"https://{context.Uri.DnsSafeHost}/sites/pnpcoresdktestcommsite{Guid.NewGuid().ToString().Replace("-", "")}");
+                        Dictionary<string, string> properties = new Dictionary<string, string>
+                        {
+                            { "SiteUrl", siteUrl.ToString() }
+                        };
+                        TestManager.SaveProperties(context, properties);
+                    }
+                    else
+                    {
+                        siteUrl = new Uri(TestManager.GetProperties(context)["SiteUrl"]);
+                    }
+
+                    communicationSiteToCreate = new CommunicationSiteOptions(siteUrl, "PnP Core SDK Test")
+                    {
+                        Description = "This is a test site collection",
+                        Language = Language.English,
+                    };
+
+                    SiteCreationOptions siteCreationOptions = new SiteCreationOptions()
+                    {
+                        UsingApplicationPermissions = false
+                    };
+
+                    using (var newSiteContext = context.GetSiteCollectionManager().CreateSiteCollection(communicationSiteToCreate, siteCreationOptions))
+                    {
+                        var siteProperties = newSiteContext.GetSiteCollectionManager().GetSiteCollectionProperties(newSiteContext.Uri);
+                        Assert.IsNotNull(siteProperties);
+                    }
+
+                    if (context.Mode == TestMode.Record)
+                    {
+                        // Add a little delay between creation and deletion
+                        await Task.Delay(TimeSpan.FromSeconds(15));
+                    }
+                }
+            }
+            finally
+            {
+                TestCommon.Instance.UseApplicationPermissions = false;
+                using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+                {
+                    context.GetSiteCollectionManager().DeleteSiteCollection(communicationSiteToCreate.Url);
+                }
+            }
+        }
+
+        [TestMethod]
         public async Task SetSiteCollectionProperties()
         {
             //TestCommon.Instance.Mocking = false;

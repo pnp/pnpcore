@@ -16,6 +16,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 ### Changed
 
 - Check for browser-wasm when adding Microsoft GraphClient #700 [avuorine - Andreas Vuorinen]
+- GetSiteCollectionProperties call (uses CSOM) returns a 0 value for month (e.g. `Date(2022,0,3,13,32,4,77)`). Added temporary fix #703 [jansenbe - Bert Jansen]
 
 ## [1.5.0]
 
