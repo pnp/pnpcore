@@ -37,7 +37,7 @@ namespace PnP.Core.Services
         public SortedList<int, BatchRequest> Requests { get; internal set; } = new SortedList<int, BatchRequest>();
 
         /// <summary>
-        /// List with batch results, will be populated when <see cref="ThrowOnError"/> is set
+        /// List with batch results, will be populated when <see cref="ThrowOnError"/> is set to false
         /// </summary>
         internal List<BatchResult> Results { get; private set; } = new List<BatchResult>();
 
@@ -51,6 +51,22 @@ namespace PnP.Core.Services
         /// Was this <see cref="Batch"/> executed?
         /// </summary>
         public bool Executed { get; internal set; }
+
+        /// <summary>
+        /// Event handler triggered when batch execution is done
+        /// </summary>
+        internal Action BatchExecuted { get; set; }
+
+        /// <summary>
+        /// Returns true if this batch had errors and throw on error was turned off
+        /// </summary>
+        internal bool HasErrors
+        {
+            get
+            {
+                return !ThrowOnError && Results.Count > 0;
+            }
+        }
 
         /// <summary>
         /// Only use Graph batching when all requests in the batch are targeting Graph

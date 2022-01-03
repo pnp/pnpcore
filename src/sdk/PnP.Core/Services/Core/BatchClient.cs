@@ -410,6 +410,9 @@ namespace PnP.Core.Services
                 batch.Requests.Add(r.Order, r);
             });
 
+            // If there's an event handler attached then invoke it
+            batch.BatchExecuted?.Invoke();
+
             return batch.Results;
         }
 
