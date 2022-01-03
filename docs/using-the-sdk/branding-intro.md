@@ -64,7 +64,7 @@ var chrome = await context.Web.GetBrandingManager().GetChromeOptionsAsync();
 To set the chrome options for a site you first need to load the existing chrome options using one of the `GetChromeOptions` methods, update the resulting `IChromeOptions` instance and finally use one of the `SetChromeOptions` to persist the new chrome options.
 
 ```csharp
-var chrome = await context.Web.GetBrandingManager().GetChromeOptions();
+var chrome = await context.Web.GetBrandingManager().GetChromeOptionsAsync();
 
 // Update chrome options for a site without communication site features
 chrome.Header.Emphasis = VariantThemeType.Strong;
