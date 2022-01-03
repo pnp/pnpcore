@@ -6813,6 +6813,18 @@
     },
     {
       "type": "Conceptual",
+      "source_relative_path": "using-the-sdk/branding-intro.md",
+      "output": {
+        ".html": {
+          "relative_path": "using-the-sdk/branding-intro.html",
+          "hash": "1ksHJZZWkmqt3vavx07Gqw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
       "source_relative_path": "using-the-sdk/changes-sharepoint.md",
       "output": {
         ".html": {
@@ -7321,7 +7333,7 @@
       "output": {
         ".html": {
           "relative_path": "using-the-sdk/toc.html",
-          "hash": "Po8Si6M3HCOkJ1Z1R2VLsA=="
+          "hash": "LsxPb2MAuhorjB0/s3KoXA=="
         }
       },
       "is_incremental": false,
@@ -7378,7 +7390,7 @@
         "ConceptualDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build",
-          "total_file_count": 96,
+          "total_file_count": 97,
           "skipped_file_count": 0
         },
         "ManagedReferenceDocumentProcessor": {
