@@ -284,24 +284,24 @@ namespace PnP.Core.Services
                     else
                     {
                         // Let's keep track of the object metadata, useful when creating new requests
-                        if (property.Name == "__metadata")
+                        if (property.Name == PnPConstants.SharePointRestMetadata)
                         {
                             TrackSharePointMetaData(metadataBasedObject, property);
                         }
                         // Let's also store: 
                         // - the EntityTypeName value as metadata as it's useful for constructing future rest calls
                         // - the __next link, used in (list item) paging
-                        else if (property.Name == "EntityTypeName")
+                        else if (property.Name == PnPConstants.MetaDataRestEntityTypeName)
                         {
                             TrackMetaData(metadataBasedObject, property, null);
                         }
-                        else if (property.Name == "__next")
+                        else if (property.Name == PnPConstants.SharePointRestListItemNextLink)
                         {
                             // Only applies to paging on listitems
                             if (metadataBasedObject is List)
                             {
                                 var listItemCollection = (metadataBasedObject as List).Items;
-                                if (listItemCollection != null && listItemCollection.Requested)
+                                if (listItemCollection != null)
                                 {
                                     TrackAndUpdateMetaData(listItemCollection as IMetadataExtensible, property);
                                 }
@@ -362,7 +362,12 @@ namespace PnP.Core.Services
                 // Go to next page if previous one contains any item
                 if (parent != null && parent is IManageableCollection && parent is IMetadataExtensible && parent.GetType().ImplementsInterface(typeof(ISupportPaging)))
                 {
-                    TrackAndUpdateMetaData(parent as IMetadataExtensible, "__next", BuildNextPageRestUrl(apiResponse.ApiCall.Request));
+                    // SharePoint REST paging using provided link with a skiptoken should be kept
+                    if (!((parent as IMetadataExtensible).Metadata.ContainsKey(PnPConstants.SharePointRestListItemNextLink) &&
+                        (parent as IMetadataExtensible).Metadata[PnPConstants.SharePointRestListItemNextLink].Contains("skiptoken", StringComparison.InvariantCultureIgnoreCase)))
+                    {
+                        TrackAndUpdateMetaData(parent as IMetadataExtensible, PnPConstants.SharePointRestListItemNextLink, BuildNextPageRestUrl(apiResponse.ApiCall.Request));
+                    }
                 }
             }
 

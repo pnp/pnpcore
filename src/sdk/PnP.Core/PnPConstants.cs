@@ -85,7 +85,7 @@ namespace PnP.Core
         /// <summary>
         /// Next link in SharePoint REST
         /// </summary>
-        internal const string SharePointRestListItemNextLink = "__next";
+        internal const string SharePointRestListItemNextLink = "odata.nextLink";
 
         /// <summary>
         /// Metadata property in SharePoint REST
