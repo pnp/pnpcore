@@ -126,7 +126,7 @@ if (customTheme != null)
 </code></pre>
 <h2 id="set-the-sites-chrome-options">Set the site's chrome options</h2>
 <p>To set the chrome options for a site you first need to load the existing chrome options using one of the <code>GetChromeOptions</code> methods, update the resulting <code>IChromeOptions</code> instance and finally use one of the <code>SetChromeOptions</code> to persist the new chrome options.</p>
-<pre><code class="lang-csharp">var chrome = await context.Web.GetBrandingManager().GetChromeOptions();
+<pre><code class="lang-csharp">var chrome = await context.Web.GetBrandingManager().GetChromeOptionsAsync();
 
 // Update chrome options for a site without communication site features
 chrome.Header.Emphasis = VariantThemeType.Strong;
