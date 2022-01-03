@@ -497,14 +497,30 @@ namespace PnP.Core.Model.SharePoint
 
             // Execute the batch
             await context.ExecuteAsync(batch).ConfigureAwait(false);
+
+            // Update the chrome updates in the current web
+            ReflectChromeUpdatesInCurrentWeb(context, chromeOptions);
         }
 
         private async Task BuildSetChromeOptionsRequests(IChromeOptions chromeOptions, Batch batch)
         {
             // Update chrome options
             await (context.Web as Web).RawRequestBatchAsync(batch, BuildSetChromeOptionsApiCall(chromeOptions), HttpMethod.Post, "SetChromeOptions").ConfigureAwait(false);
-            // Update the navigation visibility
-            await (context.Web as Web).RawRequestBatchAsync(batch, BuildQuickLaunchEnabledApiCall(chromeOptions), new HttpMethod("PATCH"), "Update").ConfigureAwait(false);
+
+            if (chromeOptions.Navigation != null)
+            {
+                // Update the navigation visibility
+                await (context.Web as Web).RawRequestBatchAsync(batch, BuildQuickLaunchEnabledApiCall(chromeOptions), new HttpMethod("PATCH"), "Update").ConfigureAwait(false);
+            }
+
+            // Get notified when the batch is processed so that 
+            batch.BatchExecuted = () => {
+                if (!batch.HasErrors)
+                {
+                    // Update the chrome updates in the current web
+                    ReflectChromeUpdatesInCurrentWeb(context, chromeOptions);
+                }
+            };
         }
 
         public void SetChromeOptions(IChromeOptions chromeOptions)
@@ -565,6 +581,27 @@ namespace PnP.Core.Model.SharePoint
         public void SetChromeOptionsBatch(IChromeOptions chromeOptions)
         {
             SetChromeOptionsBatchAsync(chromeOptions).GetAwaiter().GetResult();
+        }
+
+        private static void ReflectChromeUpdatesInCurrentWeb(PnPContext context, IChromeOptions chromeOptions)
+        {
+            context.Web.SetSystemProperty(p => p.HeaderEmphasis, chromeOptions.Header.Emphasis);
+            context.Web.SetSystemProperty(p => p.HeaderLayout, chromeOptions.Header.Layout);
+            context.Web.SetSystemProperty(p => p.HideTitleInHeader, chromeOptions.Header.HideTitle);
+            context.Web.SetSystemProperty(p => p.LogoAlignment, chromeOptions.Header.LogoAlignment);
+
+            if (chromeOptions.Navigation != null)
+            {
+                context.Web.SetSystemProperty(p => p.MegaMenuEnabled, chromeOptions.Navigation.MegaMenuEnabled);
+                context.Web.SetSystemProperty(p => p.QuickLaunchEnabled, chromeOptions.Navigation.Visible);
+            }
+
+            if (chromeOptions.Footer != null)
+            {
+                context.Web.SetSystemProperty(p => p.FooterEmphasis, chromeOptions.Footer.Emphasis);
+                context.Web.SetSystemProperty(p => p.FooterEnabled, chromeOptions.Footer.Enabled);
+                context.Web.SetSystemProperty(p => p.FooterLayout, chromeOptions.Footer.Layout);
+            }
         }
 
         #endregion

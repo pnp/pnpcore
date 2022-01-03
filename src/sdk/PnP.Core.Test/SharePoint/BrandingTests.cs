@@ -204,6 +204,12 @@ namespace PnP.Core.Test.SharePoint
                 Assert.IsTrue(chrome.Header.Layout == Model.SharePoint.HeaderLayoutType.Extended);
                 Assert.IsTrue(chrome.Header.LogoAlignment == Model.SharePoint.LogoAlignment.Middle);
 
+                // Also verify the respective web properties are updated
+                Assert.IsTrue(context.Web.HeaderEmphasis == Model.SharePoint.VariantThemeType.Strong);
+                Assert.IsTrue(context.Web.HideTitleInHeader == true);
+                Assert.IsTrue(context.Web.HeaderLayout == Model.SharePoint.HeaderLayoutType.Extended);
+                Assert.IsTrue(context.Web.LogoAlignment == Model.SharePoint.LogoAlignment.Middle);
+
                 // Reset chrome options again
                 chrome.Header.Emphasis = Model.SharePoint.VariantThemeType.None;
                 chrome.Header.HideTitle = false;
@@ -233,6 +239,12 @@ namespace PnP.Core.Test.SharePoint
                 context.Web.GetBrandingManager().SetChromeOptionsBatch(chrome);
 
                 context.Execute();
+
+                // Also verify the respective web properties are updated
+                Assert.IsTrue(context.Web.HeaderEmphasis == Model.SharePoint.VariantThemeType.Strong);
+                Assert.IsTrue(context.Web.HideTitleInHeader == true);
+                Assert.IsTrue(context.Web.HeaderLayout == Model.SharePoint.HeaderLayoutType.Extended);
+                Assert.IsTrue(context.Web.LogoAlignment == Model.SharePoint.LogoAlignment.Middle);
 
                 chrome = context.Web.GetBrandingManager().GetChromeOptions();
 
@@ -289,6 +301,17 @@ namespace PnP.Core.Test.SharePoint
                 Assert.IsTrue(chrome.Footer.Enabled == true);
                 Assert.IsTrue(chrome.Footer.Emphasis == Model.SharePoint.FooterVariantThemeType.None);
                 Assert.IsTrue(chrome.Footer.Layout == Model.SharePoint.FooterLayoutType.Extended);
+
+                // Also verify the respective web properties are updated
+                Assert.IsTrue(context.Web.HeaderEmphasis == Model.SharePoint.VariantThemeType.Strong);
+                Assert.IsTrue(context.Web.HideTitleInHeader == true);
+                Assert.IsTrue(context.Web.HeaderLayout == Model.SharePoint.HeaderLayoutType.Extended);
+                Assert.IsTrue(context.Web.LogoAlignment == Model.SharePoint.LogoAlignment.Middle);
+                Assert.IsTrue(context.Web.MegaMenuEnabled == true);
+                Assert.IsTrue(context.Web.QuickLaunchEnabled == false);
+                Assert.IsTrue(context.Web.FooterEnabled == true);
+                Assert.IsTrue(context.Web.FooterEmphasis == Model.SharePoint.FooterVariantThemeType.None);
+                Assert.IsTrue(context.Web.FooterLayout == Model.SharePoint.FooterLayoutType.Extended);
 
                 // Reset chrome options again
                 chrome.Header.Emphasis = Model.SharePoint.VariantThemeType.None;
