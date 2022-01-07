@@ -619,6 +619,15 @@ namespace PnP.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You can only set the background image when the header layout is set to Extended..
+        /// </summary>
+        internal static string Exception_Unsupported_BackgroundImageHeaderIsNotOfTypeExtended {
+            get {
+                return ResourceManager.GetString("Exception_Unsupported_BackgroundImageHeaderIsNotOfTypeExtended", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Batch could not be added to list of batches.
         /// </summary>
         internal static string Exception_Unsupported_CannotAddBatch {
@@ -840,6 +849,15 @@ namespace PnP.Core {
         internal static string Exception_Unsupported_NoIQueryableDataModel {
             get {
                 return ResourceManager.GetString("Exception_Unsupported_NoIQueryableDataModel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Image is not a supported mime type: image/png, image/jpeg, image/gif, image/bmp, image/tiff.
+        /// </summary>
+        internal static string Exception_Unsupported_NotAnImageMimeType {
+            get {
+                return ResourceManager.GetString("Exception_Unsupported_NotAnImageMimeType", resourceCulture);
             }
         }
         

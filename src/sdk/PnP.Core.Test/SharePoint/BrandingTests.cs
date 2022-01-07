@@ -1,5 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using PnP.Core.Model;
 using PnP.Core.Test.Utilities;
+using System.IO;
 using System.Linq;
 
 namespace PnP.Core.Test.SharePoint
@@ -327,5 +329,122 @@ namespace PnP.Core.Test.SharePoint
                 context.Web.GetBrandingManager().SetChromeOptions(chrome);
             }
         }
+
+        [TestMethod]
+        public void SetSiteLogoForCommunicationsSite()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            using (var context = TestCommon.Instance.GetContext(TestCommon.NoGroupTestSite))
+            {
+                var chrome = context.Web.GetBrandingManager().GetChromeOptions();
+
+                try
+                {
+                    chrome.Header.SetSiteLogo("parker-ms-300.png", File.OpenRead($".{Path.DirectorySeparatorChar}TestAssets{Path.DirectorySeparatorChar}parker-ms-300.png"), true);
+                    chrome.Header.SetSiteLogoThumbnail("parker-ms-300.png", File.OpenRead($".{Path.DirectorySeparatorChar}TestAssets{Path.DirectorySeparatorChar}parker-ms-300.png"), true);
+                }
+                finally
+                {
+                    chrome.Header.ResetSiteLogo();
+                    chrome.Header.ResetSiteLogoThumbnail();
+                }
+            }
+        }
+
+        [TestMethod]
+        public void SetSiteLogoForTeamSite()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            {
+                var chrome = context.Web.GetBrandingManager().GetChromeOptions();
+
+                try
+                {
+                    chrome.Header.SetSiteLogo("parker-ms-300.png", File.OpenRead($".{Path.DirectorySeparatorChar}TestAssets{Path.DirectorySeparatorChar}parker-ms-300.png"), true);
+                }
+                finally
+                {
+                    chrome.Header.ResetSiteLogo();                    
+                }
+            }
+        }
+
+        [TestMethod]
+        public void SetSiteHeaderBackgroundForCommunicationsSite()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            using (var context = TestCommon.Instance.GetContext(TestCommon.NoGroupTestSite))
+            {
+                var chrome = context.Web.GetBrandingManager().GetChromeOptions();
+
+                try
+                {
+                    // Header layout is not set to extended, so exception will be thrown.
+                    Assert.ThrowsException<ClientException>(() =>
+                    {
+                        // Set the header
+                        chrome.Header.SetHeaderBackgroundImage("pageheader.jpg", File.OpenRead($".{Path.DirectorySeparatorChar}TestAssets{Path.DirectorySeparatorChar}pageheader.jpg"), 0, 0, true);
+                    });
+
+                    // Ensure the extended layout is selected
+                    chrome.Header.Layout = Model.SharePoint.HeaderLayoutType.Extended;
+                    context.Web.GetBrandingManager().SetChromeOptions(chrome);
+
+                    // Set the header
+                    chrome.Header.SetHeaderBackgroundImage("pageheader.jpg", File.OpenRead($".{Path.DirectorySeparatorChar}TestAssets{Path.DirectorySeparatorChar}pageheader.jpg"), 0, 0, true);
+                }
+                finally
+                {
+                    // Clear the background image
+                    chrome.Header.ClearHeaderBackgroundImage();
+
+                    // Set header back to default model
+                    chrome.Header.Layout = Model.SharePoint.HeaderLayoutType.Standard;
+                    context.Web.GetBrandingManager().SetChromeOptions(chrome);
+                }
+            }
+        }
+
+        [TestMethod]
+        public void SetSiteHeaderBackgroundForTeamSite()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            {
+                var chrome = context.Web.GetBrandingManager().GetChromeOptions();
+
+                try
+                {
+                    // Header layout is not set to extended, so exception will be thrown.
+                    Assert.ThrowsException<ClientException>(() =>
+                    {
+                        // Set the header
+                        chrome.Header.SetHeaderBackgroundImage("pageheader.jpg", File.OpenRead($".{Path.DirectorySeparatorChar}TestAssets{Path.DirectorySeparatorChar}pageheader.jpg"), 0, 0, true);
+                    });
+
+                    // Ensure the extended layout is selected
+                    chrome.Header.Layout = Model.SharePoint.HeaderLayoutType.Extended;
+                    context.Web.GetBrandingManager().SetChromeOptions(chrome);
+
+                    // Set the header
+                    chrome.Header.SetHeaderBackgroundImage("pageheader.jpg", File.OpenRead($".{Path.DirectorySeparatorChar}TestAssets{Path.DirectorySeparatorChar}pageheader.jpg"), 23.35, 34.66, true);
+                }
+                finally
+                {
+                    // Clear the background image
+                    chrome.Header.ClearHeaderBackgroundImage();
+
+                    // Set header back to default model
+                    chrome.Header.Layout = Model.SharePoint.HeaderLayoutType.Standard;
+                    context.Web.GetBrandingManager().SetChromeOptions(chrome);
+                }
+            }
+        }
+
     }
 }

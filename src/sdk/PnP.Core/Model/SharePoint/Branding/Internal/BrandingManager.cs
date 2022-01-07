@@ -400,16 +400,16 @@ namespace PnP.Core.Model.SharePoint
 
             var hasCommunicationSiteFeatures = await web.HasCommunicationSiteFeaturesAsync().ConfigureAwait(false);
 
-            var chromeOptions = new ChromeOptions();
+            var chromeOptions = new ChromeOptions(context);
 
             ProcessChromeOptionsResponse(web, hasCommunicationSiteFeatures, chromeOptions);
 
             return chromeOptions;
         }
 
-        private static void ProcessChromeOptionsResponse(IWeb web, bool hasCommunicationSiteFeatures, ChromeOptions chromeOptions)
+        private void ProcessChromeOptionsResponse(IWeb web, bool hasCommunicationSiteFeatures, ChromeOptions chromeOptions)
         {
-            chromeOptions.Header = new HeaderOptions
+            chromeOptions.Header = new HeaderOptions(context)
             {
                 Layout = web.HeaderLayout,
                 LogoAlignment = web.LogoAlignment,
@@ -461,7 +461,7 @@ namespace PnP.Core.Model.SharePoint
             // and we don't want to end up with a mixed batch
             var site = await context.Site.GetBatchAsync(batch, p => p.GroupId).ConfigureAwait(false);
 
-            var chromeOptions = new ChromeOptions();
+            var chromeOptions = new ChromeOptions(context);
 
             var lastRequestId = batch.PrepareLastAddedRequestForBatchProcessing(async (json, apiCall) =>
             {
