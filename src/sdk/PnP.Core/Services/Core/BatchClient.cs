@@ -1858,14 +1858,26 @@ namespace PnP.Core.Services
                     // Add extra headers
                     foreach (var extraHeader in headers)
                     {
-                        if (!request.Headers.Contains(extraHeader.Key))
+                        if (extraHeader.Key == "Content-Type")
                         {
-                            request.Headers.Add(extraHeader.Key, extraHeader.Value);
+                            // Remove the default Content-Type content header
+                            if (request.Content.Headers.Contains("Content-Type"))
+                            {
+                                request.Content.Headers.Remove("Content-Type");
+                            }
+                            request.Content.Headers.Add(extraHeader.Key, extraHeader.Value);
                         }
                         else
                         {
-                            request.Headers.Remove(extraHeader.Key);
-                            request.Headers.Add(extraHeader.Key, extraHeader.Value);
+                            if (!request.Headers.Contains(extraHeader.Key))
+                            {
+                                request.Headers.Add(extraHeader.Key, extraHeader.Value);
+                            }
+                            else
+                            {
+                                request.Headers.Remove(extraHeader.Key);
+                                request.Headers.Add(extraHeader.Key, extraHeader.Value);
+                            }
                         }
                     }
 
