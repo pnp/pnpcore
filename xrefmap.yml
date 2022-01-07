@@ -24520,6 +24520,32 @@ references:
   commentId: T:PnP.Core.Model.SharePoint.IHeaderOptions
   fullName: PnP.Core.Model.SharePoint.IHeaderOptions
   nameWithType: IHeaderOptions
+- uid: PnP.Core.Model.SharePoint.IHeaderOptions.ClearHeaderBackgroundImage
+  name: ClearHeaderBackgroundImage()
+  href: api/PnP.Core.Model.SharePoint.IHeaderOptions.html#PnP_Core_Model_SharePoint_IHeaderOptions_ClearHeaderBackgroundImage
+  commentId: M:PnP.Core.Model.SharePoint.IHeaderOptions.ClearHeaderBackgroundImage
+  fullName: PnP.Core.Model.SharePoint.IHeaderOptions.ClearHeaderBackgroundImage()
+  nameWithType: IHeaderOptions.ClearHeaderBackgroundImage()
+- uid: PnP.Core.Model.SharePoint.IHeaderOptions.ClearHeaderBackgroundImage*
+  name: ClearHeaderBackgroundImage
+  href: api/PnP.Core.Model.SharePoint.IHeaderOptions.html#PnP_Core_Model_SharePoint_IHeaderOptions_ClearHeaderBackgroundImage_
+  commentId: Overload:PnP.Core.Model.SharePoint.IHeaderOptions.ClearHeaderBackgroundImage
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IHeaderOptions.ClearHeaderBackgroundImage
+  nameWithType: IHeaderOptions.ClearHeaderBackgroundImage
+- uid: PnP.Core.Model.SharePoint.IHeaderOptions.ClearHeaderBackgroundImageAsync
+  name: ClearHeaderBackgroundImageAsync()
+  href: api/PnP.Core.Model.SharePoint.IHeaderOptions.html#PnP_Core_Model_SharePoint_IHeaderOptions_ClearHeaderBackgroundImageAsync
+  commentId: M:PnP.Core.Model.SharePoint.IHeaderOptions.ClearHeaderBackgroundImageAsync
+  fullName: PnP.Core.Model.SharePoint.IHeaderOptions.ClearHeaderBackgroundImageAsync()
+  nameWithType: IHeaderOptions.ClearHeaderBackgroundImageAsync()
+- uid: PnP.Core.Model.SharePoint.IHeaderOptions.ClearHeaderBackgroundImageAsync*
+  name: ClearHeaderBackgroundImageAsync
+  href: api/PnP.Core.Model.SharePoint.IHeaderOptions.html#PnP_Core_Model_SharePoint_IHeaderOptions_ClearHeaderBackgroundImageAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.IHeaderOptions.ClearHeaderBackgroundImageAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IHeaderOptions.ClearHeaderBackgroundImageAsync
+  nameWithType: IHeaderOptions.ClearHeaderBackgroundImageAsync
 - uid: PnP.Core.Model.SharePoint.IHeaderOptions.Emphasis
   name: Emphasis
   href: api/PnP.Core.Model.SharePoint.IHeaderOptions.html#PnP_Core_Model_SharePoint_IHeaderOptions_Emphasis
@@ -24572,6 +24598,136 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IHeaderOptions.LogoAlignment
   nameWithType: IHeaderOptions.LogoAlignment
+- uid: PnP.Core.Model.SharePoint.IHeaderOptions.ResetSiteLogo
+  name: ResetSiteLogo()
+  href: api/PnP.Core.Model.SharePoint.IHeaderOptions.html#PnP_Core_Model_SharePoint_IHeaderOptions_ResetSiteLogo
+  commentId: M:PnP.Core.Model.SharePoint.IHeaderOptions.ResetSiteLogo
+  fullName: PnP.Core.Model.SharePoint.IHeaderOptions.ResetSiteLogo()
+  nameWithType: IHeaderOptions.ResetSiteLogo()
+- uid: PnP.Core.Model.SharePoint.IHeaderOptions.ResetSiteLogo*
+  name: ResetSiteLogo
+  href: api/PnP.Core.Model.SharePoint.IHeaderOptions.html#PnP_Core_Model_SharePoint_IHeaderOptions_ResetSiteLogo_
+  commentId: Overload:PnP.Core.Model.SharePoint.IHeaderOptions.ResetSiteLogo
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IHeaderOptions.ResetSiteLogo
+  nameWithType: IHeaderOptions.ResetSiteLogo
+- uid: PnP.Core.Model.SharePoint.IHeaderOptions.ResetSiteLogoAsync
+  name: ResetSiteLogoAsync()
+  href: api/PnP.Core.Model.SharePoint.IHeaderOptions.html#PnP_Core_Model_SharePoint_IHeaderOptions_ResetSiteLogoAsync
+  commentId: M:PnP.Core.Model.SharePoint.IHeaderOptions.ResetSiteLogoAsync
+  fullName: PnP.Core.Model.SharePoint.IHeaderOptions.ResetSiteLogoAsync()
+  nameWithType: IHeaderOptions.ResetSiteLogoAsync()
+- uid: PnP.Core.Model.SharePoint.IHeaderOptions.ResetSiteLogoAsync*
+  name: ResetSiteLogoAsync
+  href: api/PnP.Core.Model.SharePoint.IHeaderOptions.html#PnP_Core_Model_SharePoint_IHeaderOptions_ResetSiteLogoAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.IHeaderOptions.ResetSiteLogoAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IHeaderOptions.ResetSiteLogoAsync
+  nameWithType: IHeaderOptions.ResetSiteLogoAsync
+- uid: PnP.Core.Model.SharePoint.IHeaderOptions.ResetSiteLogoThumbnail
+  name: ResetSiteLogoThumbnail()
+  href: api/PnP.Core.Model.SharePoint.IHeaderOptions.html#PnP_Core_Model_SharePoint_IHeaderOptions_ResetSiteLogoThumbnail
+  commentId: M:PnP.Core.Model.SharePoint.IHeaderOptions.ResetSiteLogoThumbnail
+  fullName: PnP.Core.Model.SharePoint.IHeaderOptions.ResetSiteLogoThumbnail()
+  nameWithType: IHeaderOptions.ResetSiteLogoThumbnail()
+- uid: PnP.Core.Model.SharePoint.IHeaderOptions.ResetSiteLogoThumbnail*
+  name: ResetSiteLogoThumbnail
+  href: api/PnP.Core.Model.SharePoint.IHeaderOptions.html#PnP_Core_Model_SharePoint_IHeaderOptions_ResetSiteLogoThumbnail_
+  commentId: Overload:PnP.Core.Model.SharePoint.IHeaderOptions.ResetSiteLogoThumbnail
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IHeaderOptions.ResetSiteLogoThumbnail
+  nameWithType: IHeaderOptions.ResetSiteLogoThumbnail
+- uid: PnP.Core.Model.SharePoint.IHeaderOptions.ResetSiteLogoThumbnailAsync
+  name: ResetSiteLogoThumbnailAsync()
+  href: api/PnP.Core.Model.SharePoint.IHeaderOptions.html#PnP_Core_Model_SharePoint_IHeaderOptions_ResetSiteLogoThumbnailAsync
+  commentId: M:PnP.Core.Model.SharePoint.IHeaderOptions.ResetSiteLogoThumbnailAsync
+  fullName: PnP.Core.Model.SharePoint.IHeaderOptions.ResetSiteLogoThumbnailAsync()
+  nameWithType: IHeaderOptions.ResetSiteLogoThumbnailAsync()
+- uid: PnP.Core.Model.SharePoint.IHeaderOptions.ResetSiteLogoThumbnailAsync*
+  name: ResetSiteLogoThumbnailAsync
+  href: api/PnP.Core.Model.SharePoint.IHeaderOptions.html#PnP_Core_Model_SharePoint_IHeaderOptions_ResetSiteLogoThumbnailAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.IHeaderOptions.ResetSiteLogoThumbnailAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IHeaderOptions.ResetSiteLogoThumbnailAsync
+  nameWithType: IHeaderOptions.ResetSiteLogoThumbnailAsync
+- uid: PnP.Core.Model.SharePoint.IHeaderOptions.SetHeaderBackgroundImage(System.String,Stream,System.Double,System.Double,System.Boolean)
+  name: SetHeaderBackgroundImage(String, Stream, Double, Double, Boolean)
+  href: api/PnP.Core.Model.SharePoint.IHeaderOptions.html#PnP_Core_Model_SharePoint_IHeaderOptions_SetHeaderBackgroundImage_System_String_Stream_System_Double_System_Double_System_Boolean_
+  commentId: M:PnP.Core.Model.SharePoint.IHeaderOptions.SetHeaderBackgroundImage(System.String,Stream,System.Double,System.Double,System.Boolean)
+  fullName: PnP.Core.Model.SharePoint.IHeaderOptions.SetHeaderBackgroundImage(System.String, Stream, System.Double, System.Double, System.Boolean)
+  nameWithType: IHeaderOptions.SetHeaderBackgroundImage(String, Stream, Double, Double, Boolean)
+- uid: PnP.Core.Model.SharePoint.IHeaderOptions.SetHeaderBackgroundImage*
+  name: SetHeaderBackgroundImage
+  href: api/PnP.Core.Model.SharePoint.IHeaderOptions.html#PnP_Core_Model_SharePoint_IHeaderOptions_SetHeaderBackgroundImage_
+  commentId: Overload:PnP.Core.Model.SharePoint.IHeaderOptions.SetHeaderBackgroundImage
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IHeaderOptions.SetHeaderBackgroundImage
+  nameWithType: IHeaderOptions.SetHeaderBackgroundImage
+- uid: PnP.Core.Model.SharePoint.IHeaderOptions.SetHeaderBackgroundImageAsync(System.String,Stream,System.Double,System.Double,System.Boolean)
+  name: SetHeaderBackgroundImageAsync(String, Stream, Double, Double, Boolean)
+  href: api/PnP.Core.Model.SharePoint.IHeaderOptions.html#PnP_Core_Model_SharePoint_IHeaderOptions_SetHeaderBackgroundImageAsync_System_String_Stream_System_Double_System_Double_System_Boolean_
+  commentId: M:PnP.Core.Model.SharePoint.IHeaderOptions.SetHeaderBackgroundImageAsync(System.String,Stream,System.Double,System.Double,System.Boolean)
+  fullName: PnP.Core.Model.SharePoint.IHeaderOptions.SetHeaderBackgroundImageAsync(System.String, Stream, System.Double, System.Double, System.Boolean)
+  nameWithType: IHeaderOptions.SetHeaderBackgroundImageAsync(String, Stream, Double, Double, Boolean)
+- uid: PnP.Core.Model.SharePoint.IHeaderOptions.SetHeaderBackgroundImageAsync*
+  name: SetHeaderBackgroundImageAsync
+  href: api/PnP.Core.Model.SharePoint.IHeaderOptions.html#PnP_Core_Model_SharePoint_IHeaderOptions_SetHeaderBackgroundImageAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.IHeaderOptions.SetHeaderBackgroundImageAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IHeaderOptions.SetHeaderBackgroundImageAsync
+  nameWithType: IHeaderOptions.SetHeaderBackgroundImageAsync
+- uid: PnP.Core.Model.SharePoint.IHeaderOptions.SetSiteLogo(System.String,Stream,System.Boolean)
+  name: SetSiteLogo(String, Stream, Boolean)
+  href: api/PnP.Core.Model.SharePoint.IHeaderOptions.html#PnP_Core_Model_SharePoint_IHeaderOptions_SetSiteLogo_System_String_Stream_System_Boolean_
+  commentId: M:PnP.Core.Model.SharePoint.IHeaderOptions.SetSiteLogo(System.String,Stream,System.Boolean)
+  fullName: PnP.Core.Model.SharePoint.IHeaderOptions.SetSiteLogo(System.String, Stream, System.Boolean)
+  nameWithType: IHeaderOptions.SetSiteLogo(String, Stream, Boolean)
+- uid: PnP.Core.Model.SharePoint.IHeaderOptions.SetSiteLogo*
+  name: SetSiteLogo
+  href: api/PnP.Core.Model.SharePoint.IHeaderOptions.html#PnP_Core_Model_SharePoint_IHeaderOptions_SetSiteLogo_
+  commentId: Overload:PnP.Core.Model.SharePoint.IHeaderOptions.SetSiteLogo
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IHeaderOptions.SetSiteLogo
+  nameWithType: IHeaderOptions.SetSiteLogo
+- uid: PnP.Core.Model.SharePoint.IHeaderOptions.SetSiteLogoAsync(System.String,Stream,System.Boolean)
+  name: SetSiteLogoAsync(String, Stream, Boolean)
+  href: api/PnP.Core.Model.SharePoint.IHeaderOptions.html#PnP_Core_Model_SharePoint_IHeaderOptions_SetSiteLogoAsync_System_String_Stream_System_Boolean_
+  commentId: M:PnP.Core.Model.SharePoint.IHeaderOptions.SetSiteLogoAsync(System.String,Stream,System.Boolean)
+  fullName: PnP.Core.Model.SharePoint.IHeaderOptions.SetSiteLogoAsync(System.String, Stream, System.Boolean)
+  nameWithType: IHeaderOptions.SetSiteLogoAsync(String, Stream, Boolean)
+- uid: PnP.Core.Model.SharePoint.IHeaderOptions.SetSiteLogoAsync*
+  name: SetSiteLogoAsync
+  href: api/PnP.Core.Model.SharePoint.IHeaderOptions.html#PnP_Core_Model_SharePoint_IHeaderOptions_SetSiteLogoAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.IHeaderOptions.SetSiteLogoAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IHeaderOptions.SetSiteLogoAsync
+  nameWithType: IHeaderOptions.SetSiteLogoAsync
+- uid: PnP.Core.Model.SharePoint.IHeaderOptions.SetSiteLogoThumbnail(System.String,Stream,System.Boolean)
+  name: SetSiteLogoThumbnail(String, Stream, Boolean)
+  href: api/PnP.Core.Model.SharePoint.IHeaderOptions.html#PnP_Core_Model_SharePoint_IHeaderOptions_SetSiteLogoThumbnail_System_String_Stream_System_Boolean_
+  commentId: M:PnP.Core.Model.SharePoint.IHeaderOptions.SetSiteLogoThumbnail(System.String,Stream,System.Boolean)
+  fullName: PnP.Core.Model.SharePoint.IHeaderOptions.SetSiteLogoThumbnail(System.String, Stream, System.Boolean)
+  nameWithType: IHeaderOptions.SetSiteLogoThumbnail(String, Stream, Boolean)
+- uid: PnP.Core.Model.SharePoint.IHeaderOptions.SetSiteLogoThumbnail*
+  name: SetSiteLogoThumbnail
+  href: api/PnP.Core.Model.SharePoint.IHeaderOptions.html#PnP_Core_Model_SharePoint_IHeaderOptions_SetSiteLogoThumbnail_
+  commentId: Overload:PnP.Core.Model.SharePoint.IHeaderOptions.SetSiteLogoThumbnail
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IHeaderOptions.SetSiteLogoThumbnail
+  nameWithType: IHeaderOptions.SetSiteLogoThumbnail
+- uid: PnP.Core.Model.SharePoint.IHeaderOptions.SetSiteLogoThumbnailAsync(System.String,Stream,System.Boolean)
+  name: SetSiteLogoThumbnailAsync(String, Stream, Boolean)
+  href: api/PnP.Core.Model.SharePoint.IHeaderOptions.html#PnP_Core_Model_SharePoint_IHeaderOptions_SetSiteLogoThumbnailAsync_System_String_Stream_System_Boolean_
+  commentId: M:PnP.Core.Model.SharePoint.IHeaderOptions.SetSiteLogoThumbnailAsync(System.String,Stream,System.Boolean)
+  fullName: PnP.Core.Model.SharePoint.IHeaderOptions.SetSiteLogoThumbnailAsync(System.String, Stream, System.Boolean)
+  nameWithType: IHeaderOptions.SetSiteLogoThumbnailAsync(String, Stream, Boolean)
+- uid: PnP.Core.Model.SharePoint.IHeaderOptions.SetSiteLogoThumbnailAsync*
+  name: SetSiteLogoThumbnailAsync
+  href: api/PnP.Core.Model.SharePoint.IHeaderOptions.html#PnP_Core_Model_SharePoint_IHeaderOptions_SetSiteLogoThumbnailAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.IHeaderOptions.SetSiteLogoThumbnailAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IHeaderOptions.SetSiteLogoThumbnailAsync
+  nameWithType: IHeaderOptions.SetSiteLogoThumbnailAsync
 - uid: PnP.Core.Model.SharePoint.IHubSite
   name: IHubSite
   href: api/PnP.Core.Model.SharePoint.IHubSite.html
