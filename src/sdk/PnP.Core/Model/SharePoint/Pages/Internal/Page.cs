@@ -9,7 +9,6 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Net;
 using System.Net.Http;
-using System.Security.Cryptography;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -26,10 +25,6 @@ namespace PnP.Core.Model.SharePoint
         private string pageName;
         private static readonly Expression<Func<IList, object>>[] getPagesLibraryExpression = new Expression<Func<IList, object>>[] {p => p.Title, p => p.TemplateType, p => p.EnableFolderCreation,
             p => p.EnableMinorVersions, p => p.EnableModeration, p => p.EnableVersioning, p => p.ForceCheckout, p => p.RootFolder.QueryProperties(p => p.Properties, p => p.ServerRelativeUrl), p => p.ListItemEntityTypeFullName, p => p.Fields };
-#pragma warning disable CA5351 // Do Not Use Broken Cryptographic Algorithms
-        private static readonly MD5 md5 = MD5.Create();
-#pragma warning restore CA5351 // Do Not Use Broken Cryptographic Algorithms
-
         #region Construction
 
         internal Page(PnPContext context, IList pagesLibrary, IListItem pageListItem, PageLayoutType pageLayoutType = PageLayoutType.Article)
@@ -2628,12 +2623,24 @@ namespace PnP.Core.Model.SharePoint
 
         private static string GenerateUrlHash(string value)
         {
+#if NET5_0_OR_GREATER
+            if (System.Runtime.InteropServices.RuntimeInformation.RuntimeIdentifier == "browser-wasm")
+            {
+                // https://docs.microsoft.com/en-us/dotnet/core/compatibility/cryptography/5.0/cryptography-apis-not-supported-on-blazor-webassembly
+                return "";
+            }
+            else
+            {
+                return WebUtility.UrlEncode(Base64Encode(MD5Hash(value)));
+            }
+#else
             return WebUtility.UrlEncode(Base64Encode(MD5Hash(value)));
+#endif
         }
 
         private static byte[] MD5Hash(string stringToHash)
         {
-            return md5.ComputeHash(Encoding.UTF8.GetBytes(stringToHash));
+            return System.Security.Cryptography.MD5.Create().ComputeHash(Encoding.UTF8.GetBytes(stringToHash));
         }
 
         private static string Base64Encode(byte[] input)

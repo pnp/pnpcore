@@ -18,6 +18,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Check for browser-wasm when adding Microsoft GraphClient #700 [avuorine - Andreas Vuorinen]
 - GetSiteCollectionProperties call (uses CSOM) returns a 0 value for month (e.g. `Date(2022,0,3,13,32,4,77)`). Added temporary fix for #703 [jansenbe - Bert Jansen]
 - If an SPO REST query returns an "odata.nextLink" value and that one contains a skiptoken parameter then use that instead of building a next link. Fixes #701 [jansenbe - Bert Jansen]
+- Blazor wasm problem on .NET 5+ with MD5 hashing: PlatformNotSupportedException #705 [jansenbe - Bert Jansen]
 
 ## [1.5.0]
 
