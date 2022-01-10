@@ -2546,7 +2546,7 @@ namespace PnP.Core.Services
             }
 
             // Step 2: consolidate when we have multiple requests for the same key field
-            foreach (var consolidation in getConsolidation.Where(p => p.Requests.Count > 1))
+            foreach (var consolidation in getConsolidation.Where(p => p.Requests.Count(p => p.ApiCall.RawRequest == false) > 1))
             {
                 var firstRequest = consolidation.Requests.OrderBy(p => p.Order).First();
 
