@@ -35,77 +35,92 @@ namespace PnP.Core.Model.SharePoint
         internal override IFieldValue FromJson(JsonElement json)
         {
 
-#pragma warning disable CA1507 // Use nameof to express symbol names
-            if (json.TryGetProperty("DisplayName", out JsonElement displayName))
-#pragma warning restore CA1507 // Use nameof to express symbol names
+            if (json.ValueKind == JsonValueKind.Null || json.ValueKind == JsonValueKind.Undefined)
             {
-                DisplayName = displayName.GetString();
+                DisplayName = null;
+                LocationUri = null;
+                Street = null;
+                City = null;
+                State = null;
+                CountryOrRegion = null;
+                PostalCode = null;
+                Latitude = 0;
+                Longitude = 0;
             }
-
-#pragma warning disable CA1507 // Use nameof to express symbol names
-            if (json.TryGetProperty("LocationUri", out JsonElement locationUri))
-#pragma warning restore CA1507 // Use nameof to express symbol names
-            {
-                LocationUri = locationUri.GetString();
-            }
-
-            if (json.TryGetProperty("Address", out JsonElement address))
+            else
             {
 #pragma warning disable CA1507 // Use nameof to express symbol names
-                if (address.TryGetProperty("Street", out JsonElement street))
+                if (json.TryGetProperty("DisplayName", out JsonElement displayName))
 #pragma warning restore CA1507 // Use nameof to express symbol names
                 {
-                    Street = street.GetString();
+                    DisplayName = displayName.GetString();
                 }
 
 #pragma warning disable CA1507 // Use nameof to express symbol names
-                if (address.TryGetProperty("City", out JsonElement city))
+                if (json.TryGetProperty("LocationUri", out JsonElement locationUri))
 #pragma warning restore CA1507 // Use nameof to express symbol names
                 {
-                    City = city.GetString();
+                    LocationUri = locationUri.GetString();
                 }
 
-#pragma warning disable CA1507 // Use nameof to express symbol names
-                if (address.TryGetProperty("State", out JsonElement state))
-#pragma warning restore CA1507 // Use nameof to express symbol names
+                if (json.TryGetProperty("Address", out JsonElement address))
                 {
-                    State = state.GetString();
-                }
-
 #pragma warning disable CA1507 // Use nameof to express symbol names
-                if (address.TryGetProperty("CountryOrRegion", out JsonElement countryOrRegion))
+                    if (address.TryGetProperty("Street", out JsonElement street))
 #pragma warning restore CA1507 // Use nameof to express symbol names
-                {
-                    CountryOrRegion = countryOrRegion.GetString();
-                }
-
-#pragma warning disable CA1507 // Use nameof to express symbol names
-                if (address.TryGetProperty("PostalCode", out JsonElement postalCode))
-#pragma warning restore CA1507 // Use nameof to express symbol names
-                {
-                    PostalCode = postalCode.GetString();
-                }
-            }
-
-            if (json.TryGetProperty("Coordinates", out JsonElement coordinates))
-            {
-#pragma warning disable CA1507 // Use nameof to express symbol names
-                if (coordinates.TryGetProperty("Latitude", out JsonElement latitude))
-#pragma warning restore CA1507 // Use nameof to express symbol names
-                {
-                    if (latitude.ValueKind == JsonValueKind.Number)
                     {
-                        Latitude = latitude.GetDouble();
+                        Street = street.GetString();
+                    }
+
+#pragma warning disable CA1507 // Use nameof to express symbol names
+                    if (address.TryGetProperty("City", out JsonElement city))
+#pragma warning restore CA1507 // Use nameof to express symbol names
+                    {
+                        City = city.GetString();
+                    }
+
+#pragma warning disable CA1507 // Use nameof to express symbol names
+                    if (address.TryGetProperty("State", out JsonElement state))
+#pragma warning restore CA1507 // Use nameof to express symbol names
+                    {
+                        State = state.GetString();
+                    }
+
+#pragma warning disable CA1507 // Use nameof to express symbol names
+                    if (address.TryGetProperty("CountryOrRegion", out JsonElement countryOrRegion))
+#pragma warning restore CA1507 // Use nameof to express symbol names
+                    {
+                        CountryOrRegion = countryOrRegion.GetString();
+                    }
+
+#pragma warning disable CA1507 // Use nameof to express symbol names
+                    if (address.TryGetProperty("PostalCode", out JsonElement postalCode))
+#pragma warning restore CA1507 // Use nameof to express symbol names
+                    {
+                        PostalCode = postalCode.GetString();
                     }
                 }
 
-#pragma warning disable CA1507 // Use nameof to express symbol names
-                if (coordinates.TryGetProperty("Longitude", out JsonElement longitude))
-#pragma warning restore CA1507 // Use nameof to express symbol names
+                if (json.TryGetProperty("Coordinates", out JsonElement coordinates))
                 {
-                    if (longitude.ValueKind == JsonValueKind.Number)
+#pragma warning disable CA1507 // Use nameof to express symbol names
+                    if (coordinates.TryGetProperty("Latitude", out JsonElement latitude))
+#pragma warning restore CA1507 // Use nameof to express symbol names
                     {
-                        Longitude = longitude.GetDouble();
+                        if (latitude.ValueKind == JsonValueKind.Number)
+                        {
+                            Latitude = latitude.GetDouble();
+                        }
+                    }
+
+#pragma warning disable CA1507 // Use nameof to express symbol names
+                    if (coordinates.TryGetProperty("Longitude", out JsonElement longitude))
+#pragma warning restore CA1507 // Use nameof to express symbol names
+                    {
+                        if (longitude.ValueKind == JsonValueKind.Number)
+                        {
+                            Longitude = longitude.GetDouble();
+                        }
                     }
                 }
             }
@@ -118,54 +133,69 @@ namespace PnP.Core.Model.SharePoint
 
         internal override IFieldValue FromListDataAsStream(Dictionary<string, string> properties)
         {
-            if (properties.ContainsKey("DisplayName"))
+            if (!properties.ContainsKey("Latitude") || !properties.ContainsKey("DisplayName"))
             {
-                DisplayName = properties["DisplayName"];
+                DisplayName = null;
+                LocationUri = null;
+                Street = null;
+                City = null;
+                State = null;
+                CountryOrRegion = null;
+                PostalCode = null;
+                Latitude = 0;
+                Longitude = 0;
             }
-
-            if (properties.ContainsKey("LocationUri"))
+            else
             {
-                LocationUri = properties["LocationUri"];
-            }
-
-            if (properties.ContainsKey("Street"))
-            {
-                Street = properties["Street"];
-            }
-
-            if (properties.ContainsKey("City"))
-            {
-                City = properties["City"];
-            }
-
-            if (properties.ContainsKey("State"))
-            {
-                State = properties["State"];
-            }
-
-            if (properties.ContainsKey("CountryOrRegion"))
-            {
-                CountryOrRegion = properties["CountryOrRegion"];
-            }
-
-            if (properties.ContainsKey("PostalCode"))
-            {
-                PostalCode = properties["PostalCode"];
-            }
-
-            if (properties.ContainsKey("Latitude"))
-            {
-                if (double.TryParse(properties["Latitude"], out double latitude))
+                if (properties.ContainsKey("DisplayName"))
                 {
-                    Latitude = latitude;
+                    DisplayName = properties["DisplayName"];
                 }
-            }
 
-            if (properties.ContainsKey("Longitude"))
-            {
-                if (double.TryParse(properties["Longitude"], out double longitude))
+                if (properties.ContainsKey("LocationUri"))
                 {
-                    Longitude = longitude;
+                    LocationUri = properties["LocationUri"];
+                }
+
+                if (properties.ContainsKey("Street"))
+                {
+                    Street = properties["Street"];
+                }
+
+                if (properties.ContainsKey("City"))
+                {
+                    City = properties["City"];
+                }
+
+                if (properties.ContainsKey("State"))
+                {
+                    State = properties["State"];
+                }
+
+                if (properties.ContainsKey("CountryOrRegion"))
+                {
+                    CountryOrRegion = properties["CountryOrRegion"];
+                }
+
+                if (properties.ContainsKey("PostalCode"))
+                {
+                    PostalCode = properties["PostalCode"];
+                }
+
+                if (properties.ContainsKey("Latitude"))
+                {
+                    if (double.TryParse(properties["Latitude"], out double latitude))
+                    {
+                        Latitude = latitude;
+                    }
+                }
+
+                if (properties.ContainsKey("Longitude"))
+                {
+                    if (double.TryParse(properties["Longitude"], out double longitude))
+                    {
+                        Longitude = longitude;
+                    }
                 }
             }
 

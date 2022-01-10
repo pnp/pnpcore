@@ -53,10 +53,15 @@ namespace PnP.Core.Model.SharePoint
                         WssId = wssId.GetInt32();
                     }
                 }
-
-                // Clear changes
-                Commit();
             }
+            else if (json.ValueKind == JsonValueKind.Undefined || json.ValueKind == JsonValueKind.Null)
+            {
+                TermId = Guid.Empty;
+                Label = null;
+            }
+
+            // Clear changes
+            Commit();
 
             return this;
         }
@@ -65,20 +70,23 @@ namespace PnP.Core.Model.SharePoint
         {
             if (!properties.ContainsKey("TermID"))
             {
-                return null;
+                TermId = Guid.Empty;
+                Label = null;
             }
-
-            if (properties.ContainsKey("Label"))
+            else
             {
-                Label = properties["Label"];
-            }
+                if (properties.ContainsKey("Label"))
+                {
+                    Label = properties["Label"];
+                }
 
-            if (properties.ContainsKey("TermID"))
-            {
-                TermId = Guid.Parse(properties["TermID"]);
-            }
+                if (properties.ContainsKey("TermID"))
+                {
+                    TermId = Guid.Parse(properties["TermID"]);
+                }
 
-            WssId = -1;
+                WssId = -1;
+            }
 
             // Clear changes
             Commit();

@@ -429,28 +429,33 @@ namespace PnP.Core.Services
                 {
                     case "URL":
                         {
+                            var fieldValue = new FieldUrlValue() { Field = field };
+
                             if (json.ValueKind == JsonValueKind.Null)
                             {
-                                return new Tuple<object, string>(null, propertyName);
+                                fieldValue.FromJson(new JsonElement());
                             }
-
-                            var fieldValue = new FieldUrlValue() { Field = field };
-                            if (json.ValueKind != JsonValueKind.Null)
+                            else
                             {
                                 fieldValue.FromJson(json);
                             }
+
                             fieldValue.IsArray = false;
                             return new Tuple<object, string>(fieldValue, propertyName);
                         };
                     case "TaxonomyFieldType":
                         {
+                            var fieldValue = new FieldTaxonomyValue() { Field = field };
+
                             if (json.ValueKind == JsonValueKind.Null)
                             {
-                                return new Tuple<object, string>(null, propertyName);
+                                fieldValue.FromJson(new JsonElement());
+                            }
+                            else
+                            {
+                                fieldValue.FromJson(json);
                             }
 
-                            var fieldValue = new FieldTaxonomyValue() { Field = field };
-                            fieldValue.FromJson(json);
                             fieldValue.IsArray = false;
                             return new Tuple<object, string>(fieldValue, propertyName);
                         }
@@ -483,13 +488,15 @@ namespace PnP.Core.Services
                         }
                     case "Lookup":
                         {
-                            if (json.ValueKind == JsonValueKind.Null)
-                            {
-                                return new Tuple<object, string>(null, propertyName);
-                            }
-
                             var fieldValue = new FieldLookupValue() { Field = field };
-                            fieldValue.FromJson(json);
+                            if (json.ValueKind == JsonValueKind.Null || json.ValueKind == JsonValueKind.Undefined)
+                            {
+                                fieldValue.FromJson(new JsonElement());
+                            }
+                            else
+                            {
+                                fieldValue.FromJson(json);
+                            }
                             fieldValue.IsArray = false;
                             return new Tuple<object, string>(fieldValue, propertyName);
                         }
@@ -511,9 +518,13 @@ namespace PnP.Core.Services
                     case "User":
                         {
                             var fieldValue = new FieldUserValue() { Field = field };
-                            if (json.ValueKind != JsonValueKind.Null)
+                            if (json.ValueKind != JsonValueKind.Null && json.ValueKind != JsonValueKind.Undefined)
                             {
                                 fieldValue.FromJson(json);
+                            }
+                            else
+                            {
+                                fieldValue.FromJson(new JsonElement());
                             }
                             fieldValue.IsArray = false;
                             return new Tuple<object, string>(fieldValue, propertyName);
@@ -536,10 +547,14 @@ namespace PnP.Core.Services
                     case "Location":
                         {
                             var fieldValue = new FieldLocationValue() { Field = field };
-                            if (json.ValueKind != JsonValueKind.Null)
+                            if (json.ValueKind != JsonValueKind.Null && json.ValueKind != JsonValueKind.Undefined)
                             {
                                 var parsedFieldContent = JsonSerializer.Deserialize<JsonElement>(json.GetString());
                                 fieldValue.FromJson(parsedFieldContent);
+                            }
+                            else
+                            {
+                                fieldValue.FromJson(new JsonElement());
                             }
                             fieldValue.IsArray = false;
                             return new Tuple<object, string>(fieldValue, propertyName);

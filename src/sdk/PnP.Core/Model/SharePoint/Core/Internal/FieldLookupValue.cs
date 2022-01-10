@@ -40,38 +40,40 @@ namespace PnP.Core.Model.SharePoint
             if (json.ValueKind == JsonValueKind.Number)
             {
                 LookupId = json.GetInt32();
-
-                // Clear changes
-                Commit();
-
-                return this;
             }
             else
             {
-                return null;
+                LookupId = -1;
             }
+
+            // Clear changes
+            Commit();
+
+            return this;
         }
 
         internal override IFieldValue FromListDataAsStream(Dictionary<string, string> properties)
         {
             if (!properties.ContainsKey("lookupId"))
             {
-                return null;
+                LookupId = -1;
             }
-
-            if (properties.ContainsKey("lookupId"))
+            else
             {
-                LookupId = int.Parse(properties["lookupId"]);
-            }
+                if (properties.ContainsKey("lookupId"))
+                {
+                    LookupId = int.Parse(properties["lookupId"]);
+                }
 
-            if (properties.ContainsKey("lookupValue"))
-            {
-                LookupValue = properties["lookupValue"];
-            }
+                if (properties.ContainsKey("lookupValue"))
+                {
+                    LookupValue = properties["lookupValue"];
+                }
 
-            if (properties.ContainsKey("isSecretFieldValue"))
-            {
-                IsSecretFieldValue = bool.Parse(properties["isSecretFieldValue"]);
+                if (properties.ContainsKey("isSecretFieldValue"))
+                {
+                    IsSecretFieldValue = bool.Parse(properties["isSecretFieldValue"]);
+                }
             }
 
             // Clear changes

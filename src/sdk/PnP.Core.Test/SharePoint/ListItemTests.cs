@@ -2872,7 +2872,8 @@ namespace PnP.Core.Test.SharePoint
                 {
                     if (field.Value.Properties["Url"].ToString() == "")
                     {
-                        Assert.IsTrue(addedItem[field.Key] == null);
+                        Assert.IsTrue((addedItem[field.Key] as IFieldUrlValue).Url == null);
+                        Assert.IsTrue((addedItem[field.Key] as IFieldUrlValue).Description == null);
                     }
                     else
                     {
@@ -2920,7 +2921,8 @@ namespace PnP.Core.Test.SharePoint
                 {
                     if ((Guid)field.Value.Properties["Term1"] == Guid.Empty)
                     {
-                        Assert.IsTrue(addedItem[field.Key] == null);
+                        Assert.IsTrue((addedItem[field.Key] as IFieldTaxonomyValue).TermId == Guid.Empty);
+                        Assert.IsTrue((addedItem[field.Key] as IFieldTaxonomyValue).Label == null);
                     }
                     else
                     {
@@ -2964,10 +2966,6 @@ namespace PnP.Core.Test.SharePoint
                     }
 
                     if (idToCheck == -1)
-                    {
-                        Assert.IsTrue(addedItem[field.Key] == null);
-                    }
-                    else
                     {
                         Assert.IsTrue(addedItem[field.Key] is IFieldLookupValue);
                         Assert.IsTrue((addedItem[field.Key] as IFieldLookupValue).LookupId == idToCheck);

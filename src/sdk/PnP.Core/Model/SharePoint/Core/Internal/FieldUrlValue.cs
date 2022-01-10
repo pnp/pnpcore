@@ -26,23 +26,31 @@ namespace PnP.Core.Model.SharePoint
 
         internal override IFieldValue FromJson(JsonElement json)
         {
-#pragma warning disable CA1507 // Use nameof to express symbol names
-            if (json.TryGetProperty("Url", out JsonElement url))
-#pragma warning restore CA1507 // Use nameof to express symbol names
+            if (json.ValueKind == JsonValueKind.Undefined || json.ValueKind == JsonValueKind.Null)
             {
-                Url = url.GetString();
+                Url = null;
+                Description = null;
             }
+            else
+            {
+#pragma warning disable CA1507 // Use nameof to express symbol names
+                if (json.TryGetProperty("Url", out JsonElement url))
+#pragma warning restore CA1507 // Use nameof to express symbol names
+                {
+                    Url = url.GetString();
+                }
 
 #pragma warning disable CA1507 // Use nameof to express symbol names
-            if (json.TryGetProperty("Description", out JsonElement description))
+                if (json.TryGetProperty("Description", out JsonElement description))
 #pragma warning restore CA1507 // Use nameof to express symbol names
-            {
-                Description = description.GetString();
-            }
+                {
+                    Description = description.GetString();
+                }
 
-            if (!HasValue(nameof(Description)))
-            {
-                Description = Url;
+                if (!HasValue(nameof(Description)))
+                {
+                    Description = Url;
+                }
             }
 
             // Clear changes
@@ -56,20 +64,23 @@ namespace PnP.Core.Model.SharePoint
             // empty url value => return null. Needed to have the same behaviour as when doing a GetAsync() call
             if (!properties.Any() || string.IsNullOrEmpty(properties.First().Value))
             {
-                return null;
+                Url = null;
+                Description = null;
             }
-
-            // first property is the url field
-            Url = properties.First().Value;
-
-            if (properties.ContainsKey("desc"))
+            else
             {
-                Description = properties["desc"];
-            }
+                // first property is the url field
+                Url = properties.First().Value;
 
-            if (!HasValue(nameof(Description)) && HasValue(nameof(Url)))
-            {
-                Description = Url;
+                if (properties.ContainsKey("desc"))
+                {
+                    Description = properties["desc"];
+                }
+
+                if (!HasValue(nameof(Description)) && HasValue(nameof(Url)))
+                {
+                    Description = Url;
+                }
             }
 
             // Clear changes
