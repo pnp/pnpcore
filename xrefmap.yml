@@ -24475,6 +24475,45 @@ references:
   commentId: T:PnP.Core.Model.SharePoint.IFooterOptions
   fullName: PnP.Core.Model.SharePoint.IFooterOptions
   nameWithType: IFooterOptions
+- uid: PnP.Core.Model.SharePoint.IFooterOptions.ClearLogo
+  name: ClearLogo()
+  href: api/PnP.Core.Model.SharePoint.IFooterOptions.html#PnP_Core_Model_SharePoint_IFooterOptions_ClearLogo
+  commentId: M:PnP.Core.Model.SharePoint.IFooterOptions.ClearLogo
+  fullName: PnP.Core.Model.SharePoint.IFooterOptions.ClearLogo()
+  nameWithType: IFooterOptions.ClearLogo()
+- uid: PnP.Core.Model.SharePoint.IFooterOptions.ClearLogo*
+  name: ClearLogo
+  href: api/PnP.Core.Model.SharePoint.IFooterOptions.html#PnP_Core_Model_SharePoint_IFooterOptions_ClearLogo_
+  commentId: Overload:PnP.Core.Model.SharePoint.IFooterOptions.ClearLogo
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IFooterOptions.ClearLogo
+  nameWithType: IFooterOptions.ClearLogo
+- uid: PnP.Core.Model.SharePoint.IFooterOptions.ClearLogoAsync
+  name: ClearLogoAsync()
+  href: api/PnP.Core.Model.SharePoint.IFooterOptions.html#PnP_Core_Model_SharePoint_IFooterOptions_ClearLogoAsync
+  commentId: M:PnP.Core.Model.SharePoint.IFooterOptions.ClearLogoAsync
+  fullName: PnP.Core.Model.SharePoint.IFooterOptions.ClearLogoAsync()
+  nameWithType: IFooterOptions.ClearLogoAsync()
+- uid: PnP.Core.Model.SharePoint.IFooterOptions.ClearLogoAsync*
+  name: ClearLogoAsync
+  href: api/PnP.Core.Model.SharePoint.IFooterOptions.html#PnP_Core_Model_SharePoint_IFooterOptions_ClearLogoAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.IFooterOptions.ClearLogoAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IFooterOptions.ClearLogoAsync
+  nameWithType: IFooterOptions.ClearLogoAsync
+- uid: PnP.Core.Model.SharePoint.IFooterOptions.DisplayName
+  name: DisplayName
+  href: api/PnP.Core.Model.SharePoint.IFooterOptions.html#PnP_Core_Model_SharePoint_IFooterOptions_DisplayName
+  commentId: P:PnP.Core.Model.SharePoint.IFooterOptions.DisplayName
+  fullName: PnP.Core.Model.SharePoint.IFooterOptions.DisplayName
+  nameWithType: IFooterOptions.DisplayName
+- uid: PnP.Core.Model.SharePoint.IFooterOptions.DisplayName*
+  name: DisplayName
+  href: api/PnP.Core.Model.SharePoint.IFooterOptions.html#PnP_Core_Model_SharePoint_IFooterOptions_DisplayName_
+  commentId: Overload:PnP.Core.Model.SharePoint.IFooterOptions.DisplayName
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IFooterOptions.DisplayName
+  nameWithType: IFooterOptions.DisplayName
 - uid: PnP.Core.Model.SharePoint.IFooterOptions.Emphasis
   name: Emphasis
   href: api/PnP.Core.Model.SharePoint.IFooterOptions.html#PnP_Core_Model_SharePoint_IFooterOptions_Emphasis
@@ -24514,6 +24553,32 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IFooterOptions.Layout
   nameWithType: IFooterOptions.Layout
+- uid: PnP.Core.Model.SharePoint.IFooterOptions.SetLogo(System.String,Stream,System.Boolean)
+  name: SetLogo(String, Stream, Boolean)
+  href: api/PnP.Core.Model.SharePoint.IFooterOptions.html#PnP_Core_Model_SharePoint_IFooterOptions_SetLogo_System_String_Stream_System_Boolean_
+  commentId: M:PnP.Core.Model.SharePoint.IFooterOptions.SetLogo(System.String,Stream,System.Boolean)
+  fullName: PnP.Core.Model.SharePoint.IFooterOptions.SetLogo(System.String, Stream, System.Boolean)
+  nameWithType: IFooterOptions.SetLogo(String, Stream, Boolean)
+- uid: PnP.Core.Model.SharePoint.IFooterOptions.SetLogo*
+  name: SetLogo
+  href: api/PnP.Core.Model.SharePoint.IFooterOptions.html#PnP_Core_Model_SharePoint_IFooterOptions_SetLogo_
+  commentId: Overload:PnP.Core.Model.SharePoint.IFooterOptions.SetLogo
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IFooterOptions.SetLogo
+  nameWithType: IFooterOptions.SetLogo
+- uid: PnP.Core.Model.SharePoint.IFooterOptions.SetLogoAsync(System.String,Stream,System.Boolean)
+  name: SetLogoAsync(String, Stream, Boolean)
+  href: api/PnP.Core.Model.SharePoint.IFooterOptions.html#PnP_Core_Model_SharePoint_IFooterOptions_SetLogoAsync_System_String_Stream_System_Boolean_
+  commentId: M:PnP.Core.Model.SharePoint.IFooterOptions.SetLogoAsync(System.String,Stream,System.Boolean)
+  fullName: PnP.Core.Model.SharePoint.IFooterOptions.SetLogoAsync(System.String, Stream, System.Boolean)
+  nameWithType: IFooterOptions.SetLogoAsync(String, Stream, Boolean)
+- uid: PnP.Core.Model.SharePoint.IFooterOptions.SetLogoAsync*
+  name: SetLogoAsync
+  href: api/PnP.Core.Model.SharePoint.IFooterOptions.html#PnP_Core_Model_SharePoint_IFooterOptions_SetLogoAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.IFooterOptions.SetLogoAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IFooterOptions.SetLogoAsync
+  nameWithType: IFooterOptions.SetLogoAsync
 - uid: PnP.Core.Model.SharePoint.IHeaderOptions
   name: IHeaderOptions
   href: api/PnP.Core.Model.SharePoint.IHeaderOptions.html
