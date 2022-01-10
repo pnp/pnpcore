@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Dynamic;
 using System.Globalization;
+using System.Linq;
 using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -59,15 +60,15 @@ namespace PnP.Core.Model.SharePoint
             }
 
             // Add out of the box themes
-            BrandingManager.AddOutOfTheBoxTheme(availableThemes, SharePointTheme.Teal);
-            BrandingManager.AddOutOfTheBoxTheme(availableThemes, SharePointTheme.Blue);
-            BrandingManager.AddOutOfTheBoxTheme(availableThemes, SharePointTheme.Orange);
-            BrandingManager.AddOutOfTheBoxTheme(availableThemes, SharePointTheme.Red);
-            BrandingManager.AddOutOfTheBoxTheme(availableThemes, SharePointTheme.Purple);
-            BrandingManager.AddOutOfTheBoxTheme(availableThemes, SharePointTheme.Green);
-            BrandingManager.AddOutOfTheBoxTheme(availableThemes, SharePointTheme.Gray);
-            BrandingManager.AddOutOfTheBoxTheme(availableThemes, SharePointTheme.DarkYellow);
-            BrandingManager.AddOutOfTheBoxTheme(availableThemes, SharePointTheme.DarkBlue);
+            AddOutOfTheBoxTheme(availableThemes, SharePointTheme.Teal);
+            AddOutOfTheBoxTheme(availableThemes, SharePointTheme.Blue);
+            AddOutOfTheBoxTheme(availableThemes, SharePointTheme.Orange);
+            AddOutOfTheBoxTheme(availableThemes, SharePointTheme.Red);
+            AddOutOfTheBoxTheme(availableThemes, SharePointTheme.Purple);
+            AddOutOfTheBoxTheme(availableThemes, SharePointTheme.Green);
+            AddOutOfTheBoxTheme(availableThemes, SharePointTheme.Gray);
+            AddOutOfTheBoxTheme(availableThemes, SharePointTheme.DarkYellow);
+            AddOutOfTheBoxTheme(availableThemes, SharePointTheme.DarkBlue);
 
         }
 
@@ -385,7 +386,10 @@ namespace PnP.Core.Model.SharePoint
         #region Site chrome
         public async Task<IChromeOptions> GetChromeOptionsAsync()
         {
-            var web = await context.Web.GetAsync(p => p.HeaderEmphasis,
+            var batch = context.NewBatch();
+
+            var web = await context.Web.GetBatchAsync(batch,
+                                        p => p.HeaderEmphasis,
                                         p => p.HeaderLayout,
                                         p => p.HideTitleInHeader,
                                         p => p.FooterEmphasis,
@@ -398,16 +402,21 @@ namespace PnP.Core.Model.SharePoint
                                         p => p.WebTemplate,
                                         p => p.Features).ConfigureAwait(false);
 
-            var hasCommunicationSiteFeatures = await web.HasCommunicationSiteFeaturesAsync().ConfigureAwait(false);
+            var menuState = await GetMenuStateBatchAsync(batch).ConfigureAwait(false);
+
+            // Execute batch
+            await context.ExecuteAsync(batch).ConfigureAwait(false);
+
+            var hasCommunicationSiteFeatures = await web.Result.HasCommunicationSiteFeaturesAsync().ConfigureAwait(false);
 
             var chromeOptions = new ChromeOptions(context);
 
-            ProcessChromeOptionsResponse(web, hasCommunicationSiteFeatures, chromeOptions);
+            ProcessChromeOptionsResponse(web.Result, hasCommunicationSiteFeatures, menuState.Result, chromeOptions);
 
             return chromeOptions;
         }
 
-        private void ProcessChromeOptionsResponse(IWeb web, bool hasCommunicationSiteFeatures, ChromeOptions chromeOptions)
+        private void ProcessChromeOptionsResponse(IWeb web, bool hasCommunicationSiteFeatures, MenuState menuState, ChromeOptions chromeOptions)
         {
             chromeOptions.Header = new HeaderOptions(context)
             {
@@ -425,12 +434,27 @@ namespace PnP.Core.Model.SharePoint
                     Visible = web.QuickLaunchEnabled
                 };
 
-                chromeOptions.Footer = new FooterOptions
+                chromeOptions.Footer = new FooterOptions(context)
                 {
                     Layout = web.FooterLayout,
                     Emphasis = web.FooterEmphasis,
                     Enabled = web.FooterEnabled
                 };
+
+                if (menuState != null)
+                {
+                    (chromeOptions.Footer as FooterOptions).MenuState = menuState;
+
+                    var titleNode = menuState.Nodes.FirstOrDefault(p => p.Title == "7376cd83-67ac-4753-b156-6a7b3fa0fc1f");
+                    if (titleNode != null)
+                    {
+                        var displayNameNode = titleNode.Nodes.FirstOrDefault(p => p.NodeType == 0);
+                        if (displayNameNode != null)
+                        {
+                            chromeOptions.Footer.DisplayName = displayNameNode.Title;
+                        }
+                    }
+                }
             }
         }
 
@@ -455,6 +479,8 @@ namespace PnP.Core.Model.SharePoint
                                                 p => p.WebTemplate,
                                                 p => p.Features).ConfigureAwait(false);
             
+            var menuState = await GetMenuStateBatchAsync(batch).ConfigureAwait(false);
+
             // Add this extra request as we we need the web load request fully processed before we can use it in the event
             // handler below. Adding the event handler to the web batch requests will result in the handler firing
             // before the web instance is fully loaded. Ensure a REST only property is loaded as the previous call is also REST 
@@ -466,7 +492,7 @@ namespace PnP.Core.Model.SharePoint
             var lastRequestId = batch.PrepareLastAddedRequestForBatchProcessing(async (json, apiCall) =>
             {
                 bool hasCommunicationSiteFeatures = await web.Result.HasCommunicationSiteFeaturesAsync().ConfigureAwait(false);                   
-                ProcessChromeOptionsResponse(web.Result, hasCommunicationSiteFeatures, apiCall.RawSingleResult as ChromeOptions);
+                ProcessChromeOptionsResponse(web.Result, hasCommunicationSiteFeatures, menuState.Result, apiCall.RawSingleResult as ChromeOptions);
             }, chromeOptions);
 
             return new BatchSingleResult<IChromeOptions>(batch, lastRequestId, chromeOptions);
@@ -511,6 +537,9 @@ namespace PnP.Core.Model.SharePoint
             {
                 // Update the navigation visibility
                 await (context.Web as Web).RawRequestBatchAsync(batch, BuildQuickLaunchEnabledApiCall(chromeOptions), new HttpMethod("PATCH"), "Update").ConfigureAwait(false);
+            
+                // Update the footer displayName
+                await BuildAndAddSaveMenuStateRequestAsync(chromeOptions.Footer as FooterOptions, null, batch).ConfigureAwait(false);
             }
 
             // Get notified when the batch is processed so that 
@@ -581,6 +610,63 @@ namespace PnP.Core.Model.SharePoint
         public void SetChromeOptionsBatch(IChromeOptions chromeOptions)
         {
             SetChromeOptionsBatchAsync(chromeOptions).GetAwaiter().GetResult();
+        }
+
+        internal async Task<IBatchSingleResult<MenuState>> GetMenuStateBatchAsync(Batch batch)
+        {
+            ApiCall apiCall = BuildGetMenuStateApiCall();
+
+            // Since we're doing a raw batch request the processing of the batch response needs be implemented
+            apiCall.RawSingleResult = new MenuState();
+            apiCall.RawResultsHandler = (json, apiCall) =>
+            {
+                ProcessGetMenuStateResponse(json, (MenuState)apiCall.RawSingleResult);
+            };
+
+            // Add the request to the batch
+            var batchRequest = await (context.Web as Web).RawRequestBatchAsync(batch, apiCall, HttpMethod.Get).ConfigureAwait(false);
+
+            // Return the batch result as Enumerable
+            return new BatchSingleResult<MenuState>(batch, batchRequest.Id, (MenuState)apiCall.RawSingleResult);
+        }
+
+        private static ApiCall BuildGetMenuStateApiCall()
+        {
+            return new ApiCall("_api/navigation/MenuState?menuNodeKey='13b7c916-4fea-4bb2-8994-5cf274aeb530'", ApiType.SPORest);
+        }
+
+        internal static void ProcessGetMenuStateResponse(string jsonString, MenuState menuState)
+        {
+            var jsonMenuState = JsonSerializer.Deserialize<MenuState>(jsonString);
+
+            menuState.FriendlyUrlPrefix = jsonMenuState.FriendlyUrlPrefix;
+            menuState.SimpleUrl = jsonMenuState.SimpleUrl;
+            menuState.SPSitePrefix = jsonMenuState.SPSitePrefix;
+            menuState.SPWebPrefix = jsonMenuState.SPWebPrefix;
+            menuState.StartingNodeKey = jsonMenuState.StartingNodeKey;
+            menuState.StartingNodeTitle = jsonMenuState.StartingNodeTitle;
+            menuState.Version = jsonMenuState.Version;
+            menuState.Nodes = jsonMenuState.Nodes;
+        }
+
+        private async Task BuildAndAddSaveMenuStateRequestAsync(FooterOptions footerOptions, string serverRelativeUrl, Batch batch)
+        {
+            await (context.Web as Web).RawRequestBatchAsync(batch, BuildSaveMenuStateApiCall(footerOptions, serverRelativeUrl), HttpMethod.Post, "SaveMenuState").ConfigureAwait(false);
+        }
+
+        internal static ApiCall BuildSaveMenuStateApiCall(FooterOptions footerOptions, string serverRelativeUrl)
+        {
+            string jsonBody = JsonSerializer.Serialize(footerOptions.GetMenuStateToPersist(serverRelativeUrl));
+
+            var apiCall = new ApiCall("_api/navigation/SaveMenuState", ApiType.SPORest, jsonBody)
+            {
+                // The provided JSON is of the minimal odata type
+                Headers = new Dictionary<string, string>
+                {
+                    { "Content-Type", "application/json;odata.metadata=nometadata" },
+                }
+            };
+            return apiCall;
         }
 
         private static void ReflectChromeUpdatesInCurrentWeb(PnPContext context, IChromeOptions chromeOptions)

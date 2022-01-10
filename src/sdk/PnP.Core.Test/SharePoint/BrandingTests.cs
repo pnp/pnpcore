@@ -1,5 +1,4 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using PnP.Core.Model;
 using PnP.Core.Test.Utilities;
 using System.IO;
 using System.Linq;
@@ -288,6 +287,7 @@ namespace PnP.Core.Test.SharePoint
                 chrome.Footer.Enabled = true;
                 chrome.Footer.Emphasis = Model.SharePoint.FooterVariantThemeType.None;
                 chrome.Footer.Layout = Model.SharePoint.FooterLayoutType.Extended;
+                chrome.Footer.DisplayName = "PnP Rocks!";
 
                 context.Web.GetBrandingManager().SetChromeOptions(chrome);
 
@@ -303,6 +303,7 @@ namespace PnP.Core.Test.SharePoint
                 Assert.IsTrue(chrome.Footer.Enabled == true);
                 Assert.IsTrue(chrome.Footer.Emphasis == Model.SharePoint.FooterVariantThemeType.None);
                 Assert.IsTrue(chrome.Footer.Layout == Model.SharePoint.FooterLayoutType.Extended);
+                Assert.IsTrue(chrome.Footer.DisplayName == "PnP Rocks!");
 
                 // Also verify the respective web properties are updated
                 Assert.IsTrue(context.Web.HeaderEmphasis == Model.SharePoint.VariantThemeType.Strong);
@@ -325,6 +326,7 @@ namespace PnP.Core.Test.SharePoint
                 chrome.Footer.Enabled = true;
                 chrome.Footer.Emphasis = Model.SharePoint.FooterVariantThemeType.Strong;
                 chrome.Footer.Layout = Model.SharePoint.FooterLayoutType.Simple;
+                chrome.Footer.DisplayName = "";
 
                 context.Web.GetBrandingManager().SetChromeOptions(chrome);
             }
@@ -442,6 +444,26 @@ namespace PnP.Core.Test.SharePoint
                     // Set header back to default model
                     chrome.Header.Layout = Model.SharePoint.HeaderLayoutType.Standard;
                     context.Web.GetBrandingManager().SetChromeOptions(chrome);
+                }
+            }
+        }
+
+        [TestMethod]
+        public void SetFooterLogoForCommunicationsSite()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            using (var context = TestCommon.Instance.GetContext(TestCommon.NoGroupTestSite))
+            {
+                var chrome = context.Web.GetBrandingManager().GetChromeOptions();
+                try
+                {
+                    // Set the footer
+                    chrome.Footer.SetLogo("parker-ms-300.png", File.OpenRead($".{Path.DirectorySeparatorChar}TestAssets{Path.DirectorySeparatorChar}parker-ms-300.png"), true);
+                }
+                finally
+                {
+                    chrome.Footer.ClearLogo();
                 }
             }
         }
