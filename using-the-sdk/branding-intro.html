@@ -146,6 +146,7 @@ chrome.Navigation.Visible = false;
 chrome.Footer.Enabled = true;
 chrome.Footer.Emphasis = FooterVariantThemeType.None;
 chrome.Footer.Layout = FooterLayoutType.Extended;
+chrome.Footer.DisplayName == &quot;Contoso&quot;;
 
 await context.Web.GetBrandingManager().SetChromeOptionsAsync(chrome);
 </code></pre>
@@ -177,6 +178,16 @@ await chrome.Header.SetHeaderBackgroundImageAsync(&quot;pageheader.jpg&quot;, Fi
 
 // Clear the background image
 await chrome.Header.ClearHeaderBackgroundImageAsync();
+</code></pre>
+<h2 id="set-and-clear-the-footer-logo">Set and clear the footer logo</h2>
+<p>When a site has a footer you can optionally put a logo in the footer via one of the <code>SetLogo</code> methods. Clearing a set footer logo can be done using one of the <code>ClearLogo</code> methods.</p>
+<pre><code class="lang-csharp">var chrome = await context.Web.GetBrandingManager().GetChromeOptionsAsync();
+
+// Set the footer
+await chrome.Footer.SetLogoAsync(&quot;parker-ms-300.png&quot;, File.OpenRead($&quot;.{Path.DirectorySeparatorChar}parker-ms-300.png&quot;), true);
+
+// Clear the footer logo
+await chrome.Footer.ClearLogoAsync();
 </code></pre>
 </article>
           </div>
