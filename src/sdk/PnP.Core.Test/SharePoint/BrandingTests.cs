@@ -1,5 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PnP.Core.Test.Utilities;
+using System;
 using System.IO;
 using System.Linq;
 
@@ -464,6 +465,36 @@ namespace PnP.Core.Test.SharePoint
                 finally
                 {
                     chrome.Footer.ClearLogo();
+                }
+            }
+        }
+
+        [TestMethod]
+        public void ConfigureFooterWhileFooterLogoWasSetForCommunicationsSite()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            using (var context = TestCommon.Instance.GetContext(TestCommon.NoGroupTestSite))
+            {
+                var chrome = context.Web.GetBrandingManager().GetChromeOptions();
+                try
+                {
+                    // Set the footer
+                    chrome.Footer.SetLogo("parker-ms-300.png", File.OpenRead($".{Path.DirectorySeparatorChar}TestAssets{Path.DirectorySeparatorChar}parker-ms-300.png"), true);
+
+                    // Set the footer display name
+                    chrome.Footer.DisplayName = DateTime.Now.AddDays(1).ToString();
+                    context.Web.GetBrandingManager().SetChromeOptions(chrome);
+
+                    // Check settings
+                    chrome = context.Web.GetBrandingManager().GetChromeOptions();
+                    Assert.IsTrue(DateTime.Parse(chrome.Footer.DisplayName) > DateTime.Now);
+                }
+                finally
+                {
+                    chrome.Footer.ClearLogo();
+                    chrome.Footer.DisplayName = "";
+                    context.Web.GetBrandingManager().SetChromeOptions(chrome);
                 }
             }
         }
