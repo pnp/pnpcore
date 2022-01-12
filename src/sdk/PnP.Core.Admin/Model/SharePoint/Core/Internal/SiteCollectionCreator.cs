@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 using PnP.Core.Admin.Services.Core.CSOM.Requests.Tenant;
+using PnP.Core.Admin.Utilities;
 using PnP.Core.Model.SharePoint;
 using PnP.Core.Services;
 using PnP.Core.Services.Core.CSOM.Requests;
@@ -63,7 +64,7 @@ namespace PnP.Core.Admin.Model.SharePoint
                     Dictionary<string, object> payload = new Dictionary<string, object>
                     {
                         { "displayName", siteToGroupify.DisplayName },
-                        { "alias", siteToGroupify.Alias },
+                        { "alias", NormalizeSiteAlias(siteToGroupify.Alias) },
                         { "isPublic", siteToGroupify.IsPublic }
                     };
 
@@ -191,7 +192,7 @@ namespace PnP.Core.Admin.Model.SharePoint
                 Dictionary<string, object> payload = new Dictionary<string, object>
                 {
                     { "displayName", siteToCreate.DisplayName },
-                    { "alias", siteToCreate.Alias },
+                    { "alias", NormalizeSiteAlias(siteToCreate.Alias) },
                     { "isPublic", siteToCreate.IsPublic }
                 };
 
@@ -607,6 +608,13 @@ namespace PnP.Core.Admin.Model.SharePoint
             }
 
             return Guid.Empty;
+        }
+
+        private static string NormalizeSiteAlias(string alias)
+        {
+            alias = NormalizeInput.RemoveUnallowedCharacters(alias);
+            alias = NormalizeInput.ReplaceAccentedCharactersWithLatin(alias);
+            return alias;
         }
 
 

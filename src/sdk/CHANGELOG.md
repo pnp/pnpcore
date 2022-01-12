@@ -20,6 +20,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - If an SPO REST query returns an "odata.nextLink" value and that one contains a skiptoken parameter then use that instead of building a next link. Fixes #701 [jansenbe - Bert Jansen]
 - Blazor wasm problem on .NET 5+ with MD5 hashing: PlatformNotSupportedException #705 [jansenbe - Bert Jansen]
 - Updating "empty" fields in exising list item did not work as expected #707 [jansenbe - Bert Jansen]
+- Normalize site alias names before using them [jansenbe - Bert Jansen]
 
 ## [1.5.0]
 
