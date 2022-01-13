@@ -33,7 +33,7 @@ In order for the user to authenticate on the App, A new app registration should 
   - Select __Microsoft Graph__ > __Delegated permissions__ > select __TeamSettings.ReadWrite.All__
   - Select __Microsoft Graph__ > __Delegated permissions__ > select __TeamsTab.ReadWrite.All__
 
-- Click __Grand admin consent for {tenant}__
+- Click __Grant admin consent for {tenant}__
 
 - From __Overview__,
   - copy the value of __Directory (tenant) ID__
