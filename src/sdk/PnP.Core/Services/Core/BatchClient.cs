@@ -1154,6 +1154,8 @@ namespace PnP.Core.Services
                 {
                     await JsonMappingHelper.MapJsonToModel(graphRequest).ConfigureAwait(false);
                 }
+                // Invoke a delegate (if defined) to trigger processing of raw batch requests
+                graphRequest.ApiCall.RawResultsHandler?.Invoke(graphRequest.ResponseJson, graphRequest.ApiCall);
             }
         }
 
