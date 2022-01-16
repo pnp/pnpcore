@@ -1065,11 +1065,16 @@ namespace PnP.Core.Services
                             }
 #endif
 
-                            // Something went wrong...
-                            throw new MicrosoftGraphServiceException(
-                                ErrorType.GraphServiceError, 
-                                (int)response.StatusCode,
-                                errorContent);
+                            if (batch.ThrowOnError)
+                            {
+                                // Something went wrong...
+                                throw new MicrosoftGraphServiceException(ErrorType.GraphServiceError,(int)response.StatusCode,errorContent);
+                            }
+                            else
+                            {
+                                batch.AddBatchResult(graphRequest, response.StatusCode, errorContent,
+                                                     new MicrosoftGraphError(ErrorType.GraphServiceError, (int)response.StatusCode, errorContent));
+                            }
                         }
 #if DEBUG
                     }
