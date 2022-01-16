@@ -478,15 +478,7 @@ namespace PnP.Core.Services
             {
                 if (graphBatch.Requests.Count == 1)
                 {
-                    if (graphBatch.Requests.First().Value.Method == HttpMethod.Get)
-                    {
-                        await ExecuteMicrosoftGraphInteractiveAsync(graphBatch).ConfigureAwait(false);
-                    }
-                    else
-                    {
-                        //compression provides error on Post to graph api
-                        await ExecuteMicrosoftGraphBatchRequestAsync(graphBatch).ConfigureAwait(false);
-                    }
+                    await ExecuteMicrosoftGraphInteractiveAsync(graphBatch).ConfigureAwait(false);
                 }
                 else
                 {
