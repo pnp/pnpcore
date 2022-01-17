@@ -483,12 +483,12 @@ namespace PnP.Core.Test.SharePoint
                     chrome.Footer.SetLogo("parker-ms-300.png", File.OpenRead($".{Path.DirectorySeparatorChar}TestAssets{Path.DirectorySeparatorChar}parker-ms-300.png"), true);
 
                     // Set the footer display name
-                    chrome.Footer.DisplayName = DateTime.Now.AddDays(1).ToString();
+                    chrome.Footer.DisplayName = DateTime.Now.AddDays(-1).ToString();
                     context.Web.GetBrandingManager().SetChromeOptions(chrome);
 
                     // Check settings
                     chrome = context.Web.GetBrandingManager().GetChromeOptions();
-                    Assert.IsTrue(DateTime.Parse(chrome.Footer.DisplayName) > DateTime.Now);
+                    Assert.IsTrue(DateTime.Parse(chrome.Footer.DisplayName) < DateTime.Now);
                 }
                 finally
                 {
