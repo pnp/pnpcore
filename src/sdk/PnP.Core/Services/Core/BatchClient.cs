@@ -476,7 +476,9 @@ namespace PnP.Core.Services
 
             foreach (var graphBatch in graphBatches)
             {
-                if (graphBatch.Requests.Count == 1)
+                // If the code explicitely used a batch method than honor that as otherwise we would have breaking changes
+                if (graphBatch.Requests.Count == 1 && graphBatch.Requests.First().Value.ApiCall.RawSingleResult == null
+                                                   && graphBatch.Requests.First().Value.ApiCall.RawEnumerableResult == null)
                 {
                     await ExecuteMicrosoftGraphInteractiveAsync(graphBatch).ConfigureAwait(false);
                 }

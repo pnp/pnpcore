@@ -1169,6 +1169,23 @@ namespace PnP.Core.Test.Base
         }
 
         [TestMethod]
+        public async Task ExecuteGraphSingleBatchRequest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                // Relative url for current site
+                var batch = context.NewBatch();
+                var drivesResponse = context.Web.ExecuteRequestBatch(batch, new ApiRequest(ApiRequestType.Graph, "drives"));
+                Assert.IsTrue(drivesResponse.IsAvailable == false);
+                await context.ExecuteAsync(batch);
+
+                Assert.IsTrue(drivesResponse.IsAvailable);
+                Assert.IsFalse(string.IsNullOrEmpty(drivesResponse.Result.Value));
+            }
+        }
+
+        [TestMethod]
         public async Task ExecuteGraphBatchRequest()
         {
             //TestCommon.Instance.Mocking = false;
