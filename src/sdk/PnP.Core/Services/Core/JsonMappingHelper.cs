@@ -1695,23 +1695,5 @@ namespace PnP.Core.Services
 
             return null;
         }
-
-        /// <summary>
-        /// Used for Attribute addedFromPersistedData in WebPartControlData as it can be bool or string
-        /// </summary>
-        internal class BoolJsonConverter : System.Text.Json.Serialization.JsonConverter<bool>
-        {
-            public override bool Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-            {
-                bool result = false;
-                bool.TryParse(System.Text.Encoding.Default.GetString(reader.ValueSpan.ToArray()), out result);
-                return result;
-            }
-
-            public override void Write(Utf8JsonWriter writer, bool value, JsonSerializerOptions options)
-            {
-                writer.WriteBooleanValue(value);
-            }
-        }
     }
 }

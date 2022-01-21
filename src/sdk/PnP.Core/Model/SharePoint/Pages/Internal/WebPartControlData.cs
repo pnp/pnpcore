@@ -1,4 +1,5 @@
-﻿using System.Text.Json.Serialization;
+﻿using PnP.Core.Services.Core;
+using System.Text.Json.Serialization;
 
 namespace PnP.Core.Model.SharePoint
 {
@@ -17,7 +18,7 @@ namespace PnP.Core.Model.SharePoint
         public string RteInstanceId { get; set; }
 
         [JsonPropertyName("addedFromPersistedData")]
-        [JsonConverter(typeof(Services.JsonMappingHelper.BoolJsonConverter))]
+        [JsonConverter(typeof(BoolJsonConverter))]
         public bool AddedFromPersistedData { get; set; }
 
         [JsonPropertyName("reservedHeight")]

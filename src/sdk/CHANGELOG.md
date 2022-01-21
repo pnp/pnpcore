@@ -21,6 +21,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Blazor wasm problem on .NET 5+ with MD5 hashing: PlatformNotSupportedException #705 [jansenbe - Bert Jansen]
 - Updating "empty" fields in exising list item did not work as expected #707 [jansenbe - Bert Jansen]
 - Normalize site alias names before using them [jansenbe - Bert Jansen]
+- Introduce BoolJsonConverter in order to handle both appearances of addedFromPersistedData #728 [czullu - Christian Zuellig]
 
 ## [1.5.0]
 
