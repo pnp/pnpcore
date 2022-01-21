@@ -17,6 +17,7 @@ namespace PnP.Core.Model.SharePoint
         public string RteInstanceId { get; set; }
 
         [JsonPropertyName("addedFromPersistedData")]
+        [JsonConverter(typeof(Services.JsonMappingHelper.BoolJsonConverter))]
         public bool AddedFromPersistedData { get; set; }
 
         [JsonPropertyName("reservedHeight")]
