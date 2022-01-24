@@ -124,13 +124,17 @@ namespace PnP.Core.Model
                 string.Format(PnPCoreResources.Exception_PropertyNotLoaded, propertyName));
         }
 
-        protected virtual T GetValue<T>([System.Runtime.CompilerServices.CallerMemberName] string propertyName = "")
+        protected virtual T GetValue<T>([System.Runtime.CompilerServices.CallerMemberName] string propertyName = "", bool allowToBeAbsent=false)
         {
             CheckDeleted();
 
             if (current.TryGetValue(propertyName, out object value))
             {
                 return (T)value;
+            }
+            if(allowToBeAbsent)
+            {
+                return default(T);
             }
 
             throw new ClientException(ErrorType.PropertyNotLoaded,

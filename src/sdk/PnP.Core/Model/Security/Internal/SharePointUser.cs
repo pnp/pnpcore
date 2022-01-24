@@ -17,7 +17,7 @@ namespace PnP.Core.Model.Security
         public int Id { get => GetValue<int>(); set => SetValue(value); }
 
         [SharePointProperty("AadObjectId", JsonPath = "NameId")]
-        public string AadObjectId { get => GetValue<string>(); set => SetValue(value); }
+        public string AadObjectId { get => GetValue<string>("AadObjectId",true); set => SetValue(value); }
 
         public bool IsHiddenInUI { get => GetValue<bool>(); set => SetValue(value); }
 
