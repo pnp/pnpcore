@@ -1,4 +1,5 @@
-﻿using PnP.Core.Model.Security;
+﻿using PnP.Core.Model.Base;
+using PnP.Core.Model.Security;
 using PnP.Core.Services;
 using System;
 using System.Collections.Generic;
@@ -35,6 +36,7 @@ namespace PnP.Core.Model.SharePoint
         public IWeb RootWeb { get => GetModelValue<IWeb>(); set => SetModelValue(value); }
 
         private IWebCollection allWebs;
+        private bool? isHomeSite;
 
         // Note: AllWebs is no real property in SharePoint, so expand/select do not return a thing...
         // TODO: evaluate why we need this
@@ -52,6 +54,28 @@ namespace PnP.Core.Model.SharePoint
             set
             {
                 allWebs = value;
+            }
+        }
+        /// <summary>
+        /// Checks if current site is a HomeSite
+        /// </summary>
+        public bool IsHomeSite
+        {
+            get
+            {
+                if (!isHomeSite.HasValue)
+                {
+                    var apiCall = new ApiCall($"_api/SP.SPHSite/Details", ApiType.SPORest);
+                    var result = RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false).GetAwaiter().GetResult();
+
+                    if (!String.IsNullOrEmpty(result.Json))
+                    {
+                        SPHSiteReference siteReference = JsonSerializer.Deserialize<SPHSiteReference>(result.Json);
+                        isHomeSite = siteReference.SiteId != null ? Guid.Parse(siteReference.SiteId) == Id : false;
+                    }
+                    
+                }
+                return isHomeSite.Value;
             }
         }
 

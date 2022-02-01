@@ -36,6 +36,7 @@
 
 	<ItemGroup>
 		<Folder Include="Base\MockData\GraphRestTransitionTests\" />
+		<Folder Include="Mock\NET\" />
 		<Folder Include="QueryModel\MockData\" />
 		<Folder Include="Security\MockData\ListItemSecurityTests\" />
 		<Folder Include="Security\MockData\UserTests\" />
