@@ -9,12 +9,13 @@ namespace PnP.Core.Services
     /// </summary>
     public class FromJson
     {
-        internal FromJson(string fieldName, JsonElement jsonElement, Type targetType, ILogger logger)
+        internal FromJson(string fieldName, JsonElement jsonElement, Type targetType, ILogger logger, ApiResponse apiResponse)
         {
             FieldName = fieldName;
             JsonElement = jsonElement;
             TargetType = targetType;
             Log = logger;
+            ApiResponse = apiResponse;
         }
 
         internal string FieldName { get; private set; }
@@ -24,5 +25,7 @@ namespace PnP.Core.Services
         internal Type TargetType { get; private set; }
 
         internal ILogger Log { get; private set; }
+
+        internal ApiResponse ApiResponse { get; private set; }
     }
 }

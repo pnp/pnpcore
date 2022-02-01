@@ -174,7 +174,7 @@ namespace PnP.Core.Model.SharePoint
                     else // Simple property mapping
                     {
                         // Set the object property value taken from the JSON payload
-                        entityField.PropertyInfo?.SetValue(pnpObject, JsonMappingHelper.GetJsonFieldValue(null, entityField.Name,
+                        entityField.PropertyInfo?.SetValue(pnpObject, JsonMappingHelper.GetJsonFieldValue(null, entityField.Name, default,
                             property.Value, entityField.DataType, entityField.SharePointUseCustomMapping, null));
                     }
                 }

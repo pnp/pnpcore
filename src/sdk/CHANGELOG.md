@@ -22,6 +22,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Updating "empty" fields in exising list item did not work as expected #707 [jansenbe - Bert Jansen]
 - Normalize site alias names before using them [jansenbe - Bert Jansen]
 - Introduce BoolJsonConverter in order to handle both appearances of addedFromPersistedData #728 [czullu - Christian Zuellig]
+- ExecuteAsync(throwOnError:false) is ignored during listitem handling code that processed the list item response #741 [jansenbe - Bert Jansen]
 
 ## [1.5.0]
 

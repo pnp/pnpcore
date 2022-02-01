@@ -49,7 +49,18 @@ namespace PnP.Core.Model.SharePoint
                             // not be added which is indicated via the HasException property on the field. If so then throw an error.
                             if (field.TryGetProperty("HasException", out JsonElement hasExceptionProperty) && hasExceptionProperty.GetBoolean() == true)
                             {
-                                throw new SharePointRestServiceException(string.Format(PnPCoreResources.Exception_ListItemAdd_WrongInternalFieldName, fieldName));
+                                if (!input.ApiResponse.Equals(default) && input.ApiResponse.BatchRequestId != Guid.Empty && !PnPContext.CurrentBatch.ThrowOnError)
+                                {
+                                    // Add error to used batch
+                                    PnPContext.CurrentBatch.AddBatchResult(PnPContext.CurrentBatch.GetRequest(input.ApiResponse.BatchRequestId),
+                                                             System.Net.HttpStatusCode.OK,
+                                                             input.JsonElement.ToString(),
+                                                             new SharePointRestError(ErrorType.SharePointRestServiceError, (int)System.Net.HttpStatusCode.OK, string.Format(PnPCoreResources.Exception_ListItemAdd_WrongInternalFieldName, fieldName)));
+                                }
+                                else
+                                {
+                                    throw new SharePointRestServiceException(string.Format(PnPCoreResources.Exception_ListItemAdd_WrongInternalFieldName, fieldName));
+                                }
                             }
 
                             if (fieldName == "Id")

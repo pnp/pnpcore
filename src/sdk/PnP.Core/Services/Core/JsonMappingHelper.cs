@@ -266,7 +266,7 @@ namespace PnP.Core.Services
                                         // a json object returned that does have all properties loaded 
                                         if (!jsonElement.Equals(property.Value))
                                         {
-                                            jsonPathField.PropertyInfo?.SetValue(pnpObject, GetJsonFieldValue(contextAwareObject, jsonPathField.Name,
+                                            jsonPathField.PropertyInfo?.SetValue(pnpObject, GetJsonFieldValue(contextAwareObject, jsonPathField.Name, apiResponse,
                                                     jsonElement, jsonPathField.DataType, jsonPathField.SharePointUseCustomMapping, fromJsonCasting));
                                         }
                                     }
@@ -275,7 +275,7 @@ namespace PnP.Core.Services
                             else
                             {
                                 // Set the object property value taken from the JSON payload
-                                entityField.PropertyInfo?.SetValue(pnpObject, GetJsonFieldValue(contextAwareObject, entityField.Name,
+                                entityField.PropertyInfo?.SetValue(pnpObject, GetJsonFieldValue(contextAwareObject, entityField.Name, apiResponse,
                                     property.Value, entityField.DataType, entityField.SharePointUseCustomMapping, fromJsonCasting));
                             }
                             requested = true;
@@ -330,7 +330,7 @@ namespace PnP.Core.Services
                                     {
                                         // Handling of complex type via calling out to custom handler, no value is returned as the custom
                                         // handler can update multiple fields based upon what json result came back
-                                        fromJsonCasting?.Invoke(new FromJson(property.Name, property.Value, Type.GetType("System.Object"), contextAwareObject.PnPContext.Logger));
+                                        fromJsonCasting?.Invoke(new FromJson(property.Name, property.Value, Type.GetType("System.Object"), contextAwareObject.PnPContext.Logger, apiResponse));
                                     }
                                     else
                                     {
@@ -870,7 +870,7 @@ namespace PnP.Core.Services
                                         {
                                             // Handling of complex type via calling out to custom handler, no value is returned as the custom
                                             // handler can update multiple fields based upon what json result came back
-                                            fromJsonCasting?.Invoke(new FromJson(overflowField.Name, overflowField.Value, Type.GetType("System.Object"), contextAwareObject.PnPContext.Logger));
+                                            fromJsonCasting?.Invoke(new FromJson(overflowField.Name, overflowField.Value, Type.GetType("System.Object"), contextAwareObject.PnPContext.Logger, apiResponse));
                                         }
                                         else
                                         {
@@ -896,7 +896,7 @@ namespace PnP.Core.Services
                                             // a json object returned that does have all properties loaded (e.g. a TeamsApp object with only id and distributionMethod loaded)
                                             if (!jsonElement.Equals(property.Value))
                                             {
-                                                jsonPathField.PropertyInfo?.SetValue(pnpObject, GetJsonFieldValue(contextAwareObject, jsonPathField.Name,
+                                                jsonPathField.PropertyInfo?.SetValue(pnpObject, GetJsonFieldValue(contextAwareObject, jsonPathField.Name, apiResponse,
                                                     jsonElement, jsonPathField.DataType, jsonPathField.GraphUseCustomMapping, fromJsonCasting));
                                             }
                                         }
@@ -905,7 +905,7 @@ namespace PnP.Core.Services
                                 else
                                 {
                                     // regular field mapping
-                                    entityField.PropertyInfo?.SetValue(pnpObject, GetJsonFieldValue(contextAwareObject, entityField.Name, property.Value, entityField.DataType, entityField.GraphUseCustomMapping, fromJsonCasting));
+                                    entityField.PropertyInfo?.SetValue(pnpObject, GetJsonFieldValue(contextAwareObject, entityField.Name, apiResponse, property.Value, entityField.DataType, entityField.GraphUseCustomMapping, fromJsonCasting));
                                 }
                             }
 
@@ -1224,12 +1224,12 @@ namespace PnP.Core.Services
             }
         }
 
-        internal static object GetJsonFieldValue(IDataModelWithContext pnpObject, string fieldName, JsonElement jsonElement, Type propertyType, bool useCustomMapping, Func<FromJson, object> fromJsonCasting)
+        internal static object GetJsonFieldValue(IDataModelWithContext pnpObject, string fieldName, ApiResponse apiResponse, JsonElement jsonElement, Type propertyType, bool useCustomMapping, Func<FromJson, object> fromJsonCasting)
         {
             // If a field mandates a custom mapping then the field handling is fully handled via the custom mapping handler
             if (useCustomMapping)
             {
-                return fromJsonCasting?.Invoke(new FromJson(fieldName, jsonElement, propertyType, pnpObject?.PnPContext.Logger));
+                return fromJsonCasting?.Invoke(new FromJson(fieldName, jsonElement, propertyType, pnpObject?.PnPContext.Logger, apiResponse));
             }
 
             if (propertyType.IsEnum)
@@ -1573,7 +1573,7 @@ namespace PnP.Core.Services
                     default:
                         {
                             // Do a call back for the cases where we don't have a default mapping
-                            return fromJsonCasting?.Invoke(new FromJson(fieldName, jsonElement, propertyType, pnpObject?.PnPContext.Logger));
+                            return fromJsonCasting?.Invoke(new FromJson(fieldName, jsonElement, propertyType, pnpObject?.PnPContext.Logger, apiResponse));
                         }
                 }
             }
