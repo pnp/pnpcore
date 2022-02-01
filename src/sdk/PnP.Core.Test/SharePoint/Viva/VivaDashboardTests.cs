@@ -250,7 +250,7 @@ namespace PnP.Core.Test.SharePoint.Viva
         [TestMethod]
         public async Task GetCustomACE()
         {
-            TestCommon.Instance.Mocking = false;
+            //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 IVivaDashboard dashboard = context.Web.GetVivaDashboard();
