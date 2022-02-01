@@ -278,46 +278,52 @@ namespace PnP.Core.Model.SharePoint
 
                                 if (properties.TryGetProperty("translateX", out JsonElement translateXElement))
                                 {
-                                    var translateXEN = translateXElement.GetDecimal().ToString();
+                                    if (translateXElement.ValueKind == JsonValueKind.Number)
+                                    {
+                                        var translateXEN = translateXElement.GetDecimal().ToString();
 
-                                    System.Globalization.CultureInfo cultureToUse;
-                                    if (translateXEN.Contains("."))
-                                    {
-                                        cultureToUse = usCulture;
-                                    }
-                                    else if (translateXEN.Contains(","))
-                                    {
-                                        cultureToUse = europeanCulture;
-                                    }
-                                    else
-                                    {
-                                        cultureToUse = usCulture;
-                                    }
+                                        System.Globalization.CultureInfo cultureToUse;
+                                        if (translateXEN.Contains("."))
+                                        {
+                                            cultureToUse = usCulture;
+                                        }
+                                        else if (translateXEN.Contains(","))
+                                        {
+                                            cultureToUse = europeanCulture;
+                                        }
+                                        else
+                                        {
+                                            cultureToUse = usCulture;
+                                        }
 
-                                    double.TryParse(translateXEN, System.Globalization.NumberStyles.Float, cultureToUse, out double translateX);
-                                    TranslateX = translateX;
+                                        double.TryParse(translateXEN, System.Globalization.NumberStyles.Float, cultureToUse, out double translateX);
+                                        TranslateX = translateX;
+                                    }
                                 }
 
                                 if (properties.TryGetProperty("translateY", out JsonElement translateYElement))
                                 {
-                                    var translateYEN = translateYElement.GetDecimal().ToString();
+                                    if (translateYElement.ValueKind == JsonValueKind.Number)
+                                    {
+                                        var translateYEN = translateYElement.GetDecimal().ToString();
 
-                                    System.Globalization.CultureInfo cultureToUse;
-                                    if (translateYEN.Contains("."))
-                                    {
-                                        cultureToUse = usCulture;
-                                    }
-                                    else if (translateYEN.Contains(","))
-                                    {
-                                        cultureToUse = europeanCulture;
-                                    }
-                                    else
-                                    {
-                                        cultureToUse = usCulture;
-                                    }
+                                        System.Globalization.CultureInfo cultureToUse;
+                                        if (translateYEN.Contains("."))
+                                        {
+                                            cultureToUse = usCulture;
+                                        }
+                                        else if (translateYEN.Contains(","))
+                                        {
+                                            cultureToUse = europeanCulture;
+                                        }
+                                        else
+                                        {
+                                            cultureToUse = usCulture;
+                                        }
 
-                                    double.TryParse(translateYEN, System.Globalization.NumberStyles.Float, cultureToUse, out double translateY);
-                                    TranslateY = translateY;
+                                        double.TryParse(translateYEN, System.Globalization.NumberStyles.Float, cultureToUse, out double translateY);
+                                        TranslateY = translateY;
+                                    }
                                 }
 
                                 if (properties.TryGetProperty("altText", out JsonElement altText))
