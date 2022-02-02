@@ -116,7 +116,22 @@ namespace PnP.Core.Model.SharePoint
         #region GetContent
         public async Task<Stream> GetContentAsync(bool streamContent = false)
         {
+
+#if NET5_0_OR_GREATER
+            string downloadUrl;
+            if (System.Runtime.InteropServices.RuntimeInformation.RuntimeIdentifier == "browser-wasm")
+            {
+                // for WASM we use the browser's network stack and need to comply to CORS policies
+                // hence we're not using the download.aspx page approach here
+                downloadUrl = $"{PnPContext.Uri}/_api/Web/getFileById('{UniqueId}')/$value";
+            }
+            else
+            {
+                downloadUrl = $"{PnPContext.Uri}/_layouts/15/download.aspx?UniqueId={UniqueId}";
+            }
+#else
             string downloadUrl = $"{PnPContext.Uri}/_layouts/15/download.aspx?UniqueId={UniqueId}";
+#endif
 
             var apiCall = new ApiCall(downloadUrl, ApiType.SPORest)
             {

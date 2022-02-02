@@ -18,12 +18,13 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Check for browser-wasm when adding Microsoft GraphClient #700 [avuorine - Andreas Vuorinen]
 - GetSiteCollectionProperties call (uses CSOM) returns a 0 value for month (e.g. `Date(2022,0,3,13,32,4,77)`). Added temporary fix for #703 [jansenbe - Bert Jansen]
 - If an SPO REST query returns an "odata.nextLink" value and that one contains a skiptoken parameter then use that instead of building a next link. Fixes #701 [jansenbe - Bert Jansen]
-- Blazor wasm problem on .NET 5+ with MD5 hashing: PlatformNotSupportedException #705 [jansenbe - Bert Jansen]
+- Blazor WASM problem on .NET 5+ with MD5 hashing: PlatformNotSupportedException #705 [jansenbe - Bert Jansen]
 - Updating "empty" fields in exising list item did not work as expected #707 [jansenbe - Bert Jansen]
 - Normalize site alias names before using them [jansenbe - Bert Jansen]
 - Introduce BoolJsonConverter in order to handle both appearances of addedFromPersistedData #728 [czullu - Christian Zuellig]
 - ExecuteAsync(throwOnError:false) is ignored during listitem handling code that processed the list item response #741 [jansenbe - Bert Jansen]
 - GetPagesAsync fails with pageHeader translateX or translateY as nulls - additional checks added #740 [jansenbe - Bert Jansen]
+- Blazor WASM cannot download files using the download.aspx page due to CORS limitations #736 [jansenbe - Bert Jansen]
 
 ## [1.5.0]
 
