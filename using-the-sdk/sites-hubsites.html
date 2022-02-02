@@ -115,9 +115,9 @@ if(!site.IsHubSite){
 </code></pre>
 <h2 id="join-a-hub-site">Join a hub site</h2>
 <p>This associates the site to an existing hub site, using this code to apply this to a site:</p>
-<div class="NOTE">
-<h5>Note</h5>
-<p>Ignore the section &quot;creating a context&quot;, this is included in the code below.</p>
+<div class="IMPORTANT">
+<h5>Important</h5>
+<p>Joining a hub site does require delegated permissions to work.</p>
 </div>
 <pre><code class="lang-csharp">using (var contextPrimaryHub = await pnpContextFactory.CreateAsync(&quot;PrimaryHubSite&quot;))
 {
@@ -143,6 +143,10 @@ if(!site.IsHubSite){
 
 </code></pre>
 <h2 id="unjoin-a-hub-site">Unjoin a hub site</h2>
+<div class="IMPORTANT">
+<h5>Important</h5>
+<p>Unjoining a hub site does require delegated permissions to work.</p>
+</div>
 <p>This removes the association on the site to an existing hub site, using this code to apply this to a site:</p>
 <pre><code class="lang-csharp">
 ISite site = await context.Site.GetAsync(
@@ -164,7 +168,6 @@ ISite site = await context.Site.GetAsync(
 if(site.IsHubSite){
     var result = await site.UnregisterHubSiteAsync();
 }
-
 </code></pre>
 </article>
           </div>
