@@ -70,6 +70,15 @@ namespace PnP.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Batchrequest {0} was not found in one of the current batches.
+        /// </summary>
+        internal static string Exception_BatchClient_BatchRequestIdNotFound {
+            get {
+                return ResourceManager.GetString("Exception_BatchClient_BatchRequestIdNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cannot access the result since batch was not yet executed.
         /// </summary>
         internal static string Exception_BatchResult_BatchNotYetExecuted {

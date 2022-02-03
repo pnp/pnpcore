@@ -120,6 +120,9 @@
   <data name="Exception_ArgumentExpressionNotValid" xml:space="preserve">
     <value>Argument expression is not valid</value>
   </data>
+  <data name="Exception_BatchClient_BatchRequestIdNotFound" xml:space="preserve">
+    <value>Batchrequest {0} was not found in one of the current batches</value>
+  </data>
   <data name="Exception_BatchResult_BatchNotYetExecuted" xml:space="preserve">
     <value>Cannot access the result since batch was not yet executed</value>
   </data>

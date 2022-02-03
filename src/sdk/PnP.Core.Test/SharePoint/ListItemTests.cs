@@ -285,43 +285,100 @@ namespace PnP.Core.Test.SharePoint
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                var listTitle = TestCommon.GetPnPSdkTestAssetName("BulkAddListItemsWithBadFieldNameTest");
+                var listTitle = TestCommon.GetPnPSdkTestAssetName("BulkAddListItemsWithBadFieldNameTestDontThrowOnError");
+                var list = await context.Web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
+                try
+                {
+                    IField myField = await list.Fields.AddTextAsync("MetaInfo", new FieldTextOptions()
+                    {
+                        Group = "Custom Fields",
+                        AddToDefaultView = true,
+                    });
+
+                    Assert.IsTrue(myField.InternalName != "MetaInfo");
+
+                    List<Dictionary<string, object>> propertiesToUpdate = new List<Dictionary<string, object>>();
+
+                    var prop = new Dictionary<string, object>
+                    {
+                        { "Title", "My title 1" },
+                        { "MetaInfo", "abc" }
+                    };
+                    propertiesToUpdate.Add(prop);
+
+                    var prop2 = new Dictionary<string, object>
+                    {
+                        { "Title", "My title 2" },
+                        { "MetaInfo", "abc" }
+                    };
+                    propertiesToUpdate.Add(prop2);
+
+                    foreach (var propItem in propertiesToUpdate)
+                    {
+                        await list.Items.AddBatchAsync(propItem);
+                    }
+
+                    var errors = await context.ExecuteAsync(false);
+
+                    Assert.IsTrue(errors.Count == 2);
+                }
+                finally
+                {
+                    await list.DeleteAsync();
+                }
+            }
+        }
+
+        [TestMethod]
+        public async Task BulkAddListItemsWithBadFieldNameTestDontThrowOnErrorNamedBatch()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var listTitle = TestCommon.GetPnPSdkTestAssetName("BulkAddListItemsWithBadFieldNameTestDontThrowOnErrorNamedBatch");
                 var list = await context.Web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
 
-                IField myField = await list.Fields.AddTextAsync("MetaInfo", new FieldTextOptions()
+                try
                 {
-                    Group = "Custom Fields",
-                    AddToDefaultView = true,
-                });
+                    IField myField = await list.Fields.AddTextAsync("MetaInfo", new FieldTextOptions()
+                    {
+                        Group = "Custom Fields",
+                        AddToDefaultView = true,
+                    });
 
-                Assert.IsTrue(myField.InternalName != "MetaInfo");
+                    Assert.IsTrue(myField.InternalName != "MetaInfo");
 
-                List<Dictionary<string, object>> propertiesToUpdate = new List<Dictionary<string, object>>();
+                    var batch = context.NewBatch();
 
-                var prop = new Dictionary<string, object>
-                {
-                    { "Title", "My title 1" },
-                    { "MetaInfo", "abc" }
-                };
-                propertiesToUpdate.Add(prop);
+                    List<Dictionary<string, object>> propertiesToUpdate = new List<Dictionary<string, object>>();
 
-                var prop2 = new Dictionary<string, object>
-                {
-                    { "Title", "My title 2" },
-                    { "MetaInfo", "abc" }
-                };
-                propertiesToUpdate.Add(prop2);
+                    var prop = new Dictionary<string, object>
+                    {
+                        { "Title", "My title 1" },
+                        { "MetaInfo", "abc" }
+                    };
+                    propertiesToUpdate.Add(prop);
 
-                foreach (var propItem in propertiesToUpdate)
-                {
-                    await list.Items.AddBatchAsync(propItem);
+                    var prop2 = new Dictionary<string, object>
+                    {
+                        { "Title", "My title 2" },
+                        { "MetaInfo", "abc" }
+                    };
+                    propertiesToUpdate.Add(prop2);
+
+                    foreach (var propItem in propertiesToUpdate)
+                    {
+                        await list.Items.AddBatchAsync(batch, propItem);
+                    }
+
+                    var errors = await context.ExecuteAsync(batch, false);
+
+                    Assert.IsTrue(errors.Count == 2);
                 }
-                
-                var errors = await context.ExecuteAsync(false);
-
-                Assert.IsTrue(errors.Count == 2);
-
-                await list.DeleteAsync();
+                finally
+                {
+                    await list.DeleteAsync();
+                }
             }
         }
 

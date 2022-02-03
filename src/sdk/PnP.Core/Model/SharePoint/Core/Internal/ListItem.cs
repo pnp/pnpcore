@@ -49,15 +49,22 @@ namespace PnP.Core.Model.SharePoint
                             // not be added which is indicated via the HasException property on the field. If so then throw an error.
                             if (field.TryGetProperty("HasException", out JsonElement hasExceptionProperty) && hasExceptionProperty.GetBoolean() == true)
                             {
-                                if (!input.ApiResponse.Equals(default) && input.ApiResponse.BatchRequestId != Guid.Empty && !PnPContext.CurrentBatch.ThrowOnError)
+                                bool handled = false;
+                                if (!input.ApiResponse.Equals(default) && input.ApiResponse.BatchRequestId != Guid.Empty)
                                 {
-                                    // Add error to used batch
-                                    PnPContext.CurrentBatch.AddBatchResult(PnPContext.CurrentBatch.GetRequest(input.ApiResponse.BatchRequestId),
-                                                             System.Net.HttpStatusCode.OK,
-                                                             input.JsonElement.ToString(),
-                                                             new SharePointRestError(ErrorType.SharePointRestServiceError, (int)System.Net.HttpStatusCode.OK, string.Format(PnPCoreResources.Exception_ListItemAdd_WrongInternalFieldName, fieldName)));
+                                    var actualBatch = PnPContext.BatchClient.GetBatchByBatchRequestId(input.ApiResponse.BatchRequestId);
+                                    if (!actualBatch.ThrowOnError)
+                                    {
+                                        // Add error to used batch
+                                        actualBatch.AddBatchResult(actualBatch.GetRequest(input.ApiResponse.BatchRequestId),
+                                                                 System.Net.HttpStatusCode.OK,
+                                                                 input.JsonElement.ToString(),
+                                                                 new SharePointRestError(ErrorType.SharePointRestServiceError, (int)System.Net.HttpStatusCode.OK, string.Format(PnPCoreResources.Exception_ListItemAdd_WrongInternalFieldName, fieldName)));
+                                        handled = true;     
+                                    }
                                 }
-                                else
+
+                                if (!handled)
                                 {
                                     throw new SharePointRestServiceException(string.Format(PnPCoreResources.Exception_ListItemAdd_WrongInternalFieldName, fieldName));
                                 }

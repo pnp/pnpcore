@@ -209,6 +209,17 @@ namespace PnP.Core.Services
         }
 
         /// <summary>
+        /// Verifies if this batch contains the given batch request
+        /// </summary>
+        /// <param name="id">If of the batch request to check for</param>
+        /// <returns>True if the batch contains the request, false otherwise</returns>
+        internal bool ContainsRequest(Guid id)
+        {
+            var request = Requests.FirstOrDefault(r => r.Value.Id == id);
+            return request.Value != null;
+        }
+
+        /// <summary>
         /// Promotes a backup rest call to be the actual api call
         /// </summary>
         internal void MakeSPORestOnlyBatch()

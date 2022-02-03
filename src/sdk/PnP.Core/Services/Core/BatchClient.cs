@@ -238,6 +238,19 @@ namespace PnP.Core.Services
             return null;
         }
 
+        internal Batch GetBatchByBatchRequestId(Guid id)
+        {
+            foreach(var batch in batches.Values)
+            {
+                if (batch.ContainsRequest(id))
+                {
+                    return batch;
+                }
+            }
+
+            throw new ClientException(string.Format(PnPCoreResources.Exception_BatchClient_BatchRequestIdNotFound, id));
+        }
+
         /// <summary>
         /// Executes a given batch
         /// </summary>
