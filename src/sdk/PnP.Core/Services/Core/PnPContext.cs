@@ -808,7 +808,8 @@ namespace PnP.Core.Services
         {
             if (GlobalOptions.AADTenantId == Guid.Empty && Uri != null)
             {
-                using (var request = new HttpRequestMessage(HttpMethod.Get, $"{Uri}/_vti_bin/client.svc"))
+                // Hit client.svc on the root site collection to avoid being redirected there
+                using (var request = new HttpRequestMessage(HttpMethod.Get, $"{Uri.Scheme }://{Uri.DnsSafeHost}/_vti_bin/client.svc"))
                 {
                     request.Headers.Add("Authorization", "Bearer");
                     HttpResponseMessage response = await httpClient.SendAsync(request).ConfigureAwait(false);
