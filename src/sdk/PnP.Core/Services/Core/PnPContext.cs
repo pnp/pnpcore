@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Net.Http;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace PnP.Core.Services
@@ -804,34 +805,86 @@ namespace PnP.Core.Services
         /// <summary>
         /// Gets the Azure Active Directory tenant id. Using the client.svc endpoint approach as that one will also work with vanity SharePoint domains
         /// </summary>
-        internal async Task SetAADTenantId()
+        internal async Task SetAADTenantId(bool useOpenIdConfiguration = false)
         {
             if (GlobalOptions.AADTenantId == Guid.Empty && Uri != null)
             {
-                // Hit client.svc on the root site collection to avoid being redirected there
-                using (var request = new HttpRequestMessage(HttpMethod.Get, $"{Uri.Scheme }://{Uri.DnsSafeHost}/_vti_bin/client.svc"))
+                if (useOpenIdConfiguration)
                 {
-                    request.Headers.Add("Authorization", "Bearer");
-                    HttpResponseMessage response = await httpClient.SendAsync(request).ConfigureAwait(false);
+                    // This approach is used when running from Blazor WASM as the other approach results in an OPTIONS call with a redirect,
+                    // which is not allowed. Returned error: "Response to preflight request doesn't pass access control check: Redirect
+                    // is not allowed for a preflight request"
 
-                    // Grab the tenant id from the wwwauthenticate header. 
-                    var bearerResponseHeader = response.Headers.WwwAuthenticate.ToString();
-                    const string bearer = "Bearer realm=\"";
-                    var bearerIndex = bearerResponseHeader.IndexOf(bearer, StringComparison.Ordinal);
-
-                    var realmIndex = bearerIndex + bearer.Length;
-
-                    if (bearerResponseHeader.Length >= realmIndex + 36)
+                    string loginEndpoint = "login.microsoftonline.com";
+                    if (Environment.HasValue)
                     {
-                        var targetRealm = bearerResponseHeader.Substring(realmIndex, 36);
+                        loginEndpoint = CloudManager.GetAzureADLoginAuthority(Environment.Value);
+                    }
 
-                        if (Guid.TryParse(targetRealm, out Guid realmGuid))
+                    // Approach might not always work given the tenant name parsing, but at least works for 99%+ of the tenants
+                    using (var request = new HttpRequestMessage(HttpMethod.Get, $"https://{loginEndpoint}/{GetTenantNameFromUrl(Uri.ToString())}.onmicrosoft.com/.well-known/openid-configuration"))
+                    {
+                        HttpResponseMessage response = await httpClient.SendAsync(request).ConfigureAwait(false);
+                        var jsonResponse = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+
+                        var json = JsonSerializer.Deserialize<JsonElement>(jsonResponse);
+                        if (json.TryGetProperty("token_endpoint", out JsonElement tokenEndpoint))
                         {
-                            GlobalOptions.AADTenantId = realmGuid;
+                            string targetRealm = GetSubstringFromMiddle(tokenEndpoint.GetString(), $"https://{loginEndpoint}/", "/oauth2/");
+                            if (Guid.TryParse(targetRealm, out Guid realmGuid))
+                            {
+                                GlobalOptions.AADTenantId = realmGuid;
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    // Default approach for non Blazor WASM usage us
+
+                    using (var request = new HttpRequestMessage(HttpMethod.Get, $"{Uri}/_vti_bin/client.svc"))
+                    {
+                        request.Headers.Add("Authorization", "Bearer");
+                        request.Headers.Add("Access-Control-Allow-Origin", "*");
+                        HttpResponseMessage response = await httpClient.SendAsync(request).ConfigureAwait(false);
+
+                        // Grab the tenant id from the wwwauthenticate header. 
+                        var bearerResponseHeader = response.Headers.WwwAuthenticate.ToString();
+                        const string bearer = "Bearer realm=\"";
+                        var bearerIndex = bearerResponseHeader.IndexOf(bearer, StringComparison.Ordinal);
+
+                        var realmIndex = bearerIndex + bearer.Length;
+
+                        if (bearerResponseHeader.Length >= realmIndex + 36)
+                        {
+                            var targetRealm = bearerResponseHeader.Substring(realmIndex, 36);
+
+                            if (Guid.TryParse(targetRealm, out Guid realmGuid))
+                            {
+                                GlobalOptions.AADTenantId = realmGuid;
+                            }
                         }
                     }
                 }
             }
+        }
+
+        private static string GetTenantNameFromUrl(string tenantUrl)
+        {
+            if (tenantUrl.ToLower().Contains("-admin.sharepoint."))
+            {
+                return GetSubstringFromMiddle(tenantUrl, "https://", "-admin.sharepoint.");
+            }
+            else
+            {
+                return GetSubstringFromMiddle(tenantUrl, "https://", ".sharepoint.");
+            }
+        }
+
+        private static string GetSubstringFromMiddle(string originalString, string prefix, string suffix)
+        {
+            var index = originalString.IndexOf(suffix, StringComparison.OrdinalIgnoreCase);
+            return index != -1 ? originalString.Substring(prefix.Length, index - prefix.Length) : null;
         }
 
         /// <summary>

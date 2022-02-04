@@ -436,8 +436,14 @@ namespace PnP.Core.Test.Base
             {
                 context.Uri = new Uri("https://officedevpnp.sharepoint.com/sites/PnPCoreSDKDoNotDelete");
 
+                // Regular approach
                 await context.SetAADTenantId();
+                Assert.AreEqual(globalOptions.AADTenantId, Guid.Parse("73da091f-a58d-405f-9015-9bd386425255"));
 
+                // Blazor WASM approach
+                globalOptions.AADTenantId = Guid.Empty;
+
+                await context.SetAADTenantId(true);
                 Assert.AreEqual(globalOptions.AADTenantId, Guid.Parse("73da091f-a58d-405f-9015-9bd386425255"));
             }
         }

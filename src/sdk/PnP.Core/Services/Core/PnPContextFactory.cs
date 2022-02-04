@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Net.Http;
+using System.Reflection;
 #if NET5_0_OR_GREATER
 using System.Runtime.InteropServices;
 using System.Text.Json;
@@ -543,6 +544,7 @@ namespace PnP.Core.Services
                 // hence we're sending just one event to track WASM usage via a manual post
                 await SendBlazorInitEventAsync(context).ConfigureAwait(false);
                 telemetryInitialized = true;
+                return;
             }
 #endif
 
@@ -564,11 +566,11 @@ namespace PnP.Core.Services
             try
             {
                 // Ensure the tenant id was fetched
-                await context.SetAADTenantId().ConfigureAwait(false);
+                await context.SetAADTenantId(true).ConfigureAwait(false);
 
                 using (var request = new HttpRequestMessage(HttpMethod.Post, $"https://dc.services.visualstudio.com/v2/track"))
                 {
-
+                    Assembly coreAssembly = Assembly.GetExecutingAssembly();
                     // Build payload
                     var body = new
                     {
@@ -584,7 +586,7 @@ namespace PnP.Core.Services
                                 name = "PnPCoreInit",
                                 properties = new
                                 {
-                                    PnPCoreSDKVersion = "1.0.0.0",
+                                    PnPCoreSDKVersion = ((AssemblyFileVersionAttribute)coreAssembly.GetCustomAttribute(typeof(AssemblyFileVersionAttribute))).Version,
                                     AADTenantId = GlobalOptions.AADTenantId.ToString(),
                                     OS = "WASM"
                                 }
