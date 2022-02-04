@@ -587,7 +587,15 @@ namespace PnP.Core.Model.SharePoint
                             }
                             else
                             {
-                                return 0;
+                                // When there's no value then return null
+                                if (propertyValue.ValueKind == JsonValueKind.String && string.IsNullOrEmpty(propertyValue.GetString()))
+                                {
+                                    return null;
+                                }
+                                else
+                                {
+                                    return 0;
+                                }
                             }
                         }
                         else
@@ -610,7 +618,15 @@ namespace PnP.Core.Model.SharePoint
                             }
                             else
                             {
-                                return 0.0d;
+                                // When there's no value return null
+                                if (propertyValue.ValueKind == JsonValueKind.String && string.IsNullOrEmpty(propertyValue.GetString()))
+                                {
+                                    return null;
+                                }
+                                else
+                                {
+                                    return 0.0d;
+                                }
                             }
                         }
                         else
@@ -654,8 +670,12 @@ namespace PnP.Core.Model.SharePoint
                                     }
                                 }
                             }
+                            else
+                            {
+                                return null;
+                            }
                         }
-                        return 0.0d;
+                        return null;
                     }
                 default:
                     {

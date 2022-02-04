@@ -25,6 +25,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - ExecuteAsync(throwOnError:false) is ignored during listitem handling code that processed the list item response #741 [jansenbe - Bert Jansen]
 - GetPagesAsync fails with pageHeader translateX or translateY as nulls - additional checks added #740 [jansenbe - Bert Jansen]
 - Blazor WASM cannot download files using the download.aspx page due to CORS limitations #736 [jansenbe - Bert Jansen]
+- When using LoadListDataAsStreamAsync to load list items number columns without a value set where returned as value 0 whereas they should have been returned as null #751 [jansenbe - Bert Jansen]
 
 ## [1.5.0]
 
