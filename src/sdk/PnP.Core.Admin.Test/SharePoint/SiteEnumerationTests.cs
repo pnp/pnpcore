@@ -44,6 +44,36 @@ namespace PnP.Core.Admin.Test.SharePoint
         }
 
         [TestMethod]
+        public async Task EnumerateSitesWithApplicationPermissionsViaSitesApiWithFilter()
+        {
+            //TestCommon.Instance.Mocking = false;
+            try
+            {
+                TestCommon.Instance.UseApplicationPermissions = true;
+                using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+                {
+                    var personalSites = await SiteCollectionEnumerator.GetViaGraphSitesApiAsync(context, SiteCollectionFilter.OnlyPersonalSites);
+
+                    VerifyPersonalSite(personalSites, context);
+
+                    var allButPersonalSites = await SiteCollectionEnumerator.GetViaGraphSitesApiAsync(context, SiteCollectionFilter.ExcludePersonalSites);
+
+                    foreach(var personalSite in personalSites)
+                    {
+                        if (allButPersonalSites.FirstOrDefault(p=>p.Id == personalSite.Id) != null)
+                        {
+                            Assert.Fail($"Personal site with id {personalSite.Id} should not have been found");
+                        }
+                    }
+                }
+            }
+            finally
+            {
+                TestCommon.Instance.UseApplicationPermissions = false;
+            }
+        }
+
+        [TestMethod]
         public async Task EnumerateSitesWithDelegatedPermissionsViaSearchApi()
         {
             //TestCommon.Instance.Mocking = false;
@@ -54,6 +84,29 @@ namespace PnP.Core.Admin.Test.SharePoint
 
                 VerifySite(sites, context);
 
+            }
+        }
+
+        [TestMethod]
+        public async Task EnumerateSitesWithDelegatedPermissionsViaSearchApiWithFilter()
+        {
+            //TestCommon.Instance.Mocking = false;
+            TestCommon.Instance.UseApplicationPermissions = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var personalSites = await SiteCollectionEnumerator.GetViaGraphSearchApiAsync(context, SiteCollectionFilter.OnlyPersonalSites);
+
+                VerifyPersonalSite(personalSites, context);
+
+                var allButPersonalSites = await SiteCollectionEnumerator.GetViaGraphSitesApiAsync(context, SiteCollectionFilter.ExcludePersonalSites);
+
+                foreach (var personalSite in personalSites)
+                {
+                    if (allButPersonalSites.FirstOrDefault(p => p.Id == personalSite.Id) != null)
+                    {
+                        Assert.Fail($"Personal site with id {personalSite.Id} should not have been found");
+                    }
+                }
             }
         }
 
@@ -70,6 +123,29 @@ namespace PnP.Core.Admin.Test.SharePoint
             }
         }
 
+        [TestMethod]
+        public async Task EnumerateSitesWithDelegatedPermissionsViaSharePointAdminCenterWithFilter()
+        {
+            //TestCommon.Instance.Mocking = false;
+            TestCommon.Instance.UseApplicationPermissions = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var personalSites = await SiteCollectionEnumerator.GetViaTenantAdminHiddenListAsync(context);
+
+                VerifyPersonalSite(personalSites, context);
+
+                var allButPersonalSites = await SiteCollectionEnumerator.GetViaGraphSitesApiAsync(context, SiteCollectionFilter.ExcludePersonalSites);
+
+                foreach (var personalSite in personalSites)
+                {
+                    if (allButPersonalSites.FirstOrDefault(p => p.Id == personalSite.Id) != null)
+                    {
+                        Assert.Fail($"Personal site with id {personalSite.Id} should not have been found");
+                    }
+                }
+            }
+        }
+
         private void VerifySite(List<ISiteCollection> sites, PnPContext context)
         {
             Assert.IsTrue(sites.Count > 0);
@@ -77,6 +153,11 @@ namespace PnP.Core.Admin.Test.SharePoint
             Assert.IsTrue(myTestSite != null);
             Assert.IsTrue(myTestSite.RootWebId == context.Web.Id);
             Assert.IsTrue(!string.IsNullOrEmpty(myTestSite.Name));
+        }
+
+        private void VerifyPersonalSite(List<ISiteCollection> sites, PnPContext context)
+        {
+            Assert.IsTrue(sites.Count > 0);            
         }
 
         [TestMethod]

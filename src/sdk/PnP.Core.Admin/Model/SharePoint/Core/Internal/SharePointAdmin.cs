@@ -39,7 +39,8 @@ namespace PnP.Core.Admin.Model.SharePoint
             {
                 // Tenant is using vanity urls
                 // TODO: check for alternative method
-                throw new ClientException(ErrorType.Unsupported, PnPCoreAdminResources.Exception_VanityUrl);
+                //throw new ClientException(ErrorType.Unsupported, PnPCoreAdminResources.Exception_VanityUrl);
+                return null;
             }
         }
 
@@ -80,7 +81,8 @@ namespace PnP.Core.Admin.Model.SharePoint
             {
                 // Tenant is using vanity urls
                 // TODO: check for alternative method
-                throw new ClientException(ErrorType.Unsupported, PnPCoreAdminResources.Exception_VanityUrl);
+                //throw new ClientException(ErrorType.Unsupported, PnPCoreAdminResources.Exception_VanityUrl);
+                return null;
             }
         }
 
@@ -121,7 +123,8 @@ namespace PnP.Core.Admin.Model.SharePoint
             {
                 // Tenant is using vanity urls
                 // TODO: check for alternative method
-                throw new ClientException(ErrorType.Unsupported, PnPCoreAdminResources.Exception_VanityUrl);
+                //throw new ClientException(ErrorType.Unsupported, PnPCoreAdminResources.Exception_VanityUrl);
+                return null;
             }
         }
 

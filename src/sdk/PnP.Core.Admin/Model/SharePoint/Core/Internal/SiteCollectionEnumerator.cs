@@ -1,4 +1,5 @@
-﻿using PnP.Core.Model.SharePoint;
+﻿using Microsoft.Extensions.Logging;
+using PnP.Core.Model.SharePoint;
 using PnP.Core.QueryModel;
 using PnP.Core.Services;
 using System;
@@ -13,22 +14,22 @@ namespace PnP.Core.Admin.Model.SharePoint
     internal static class SiteCollectionEnumerator
     {
 
-        internal async static Task<List<ISiteCollection>> GetAsync(PnPContext context, bool ignoreUserIsTenantAdmin = false)
+        internal async static Task<List<ISiteCollection>> GetAsync(PnPContext context, bool ignoreUserIsTenantAdmin = false, SiteCollectionFilter filter = SiteCollectionFilter.Default)
         {
             if (!await context.AccessTokenUsesApplicationPermissionsAsync().ConfigureAwait(false))
             {
                 if (!ignoreUserIsTenantAdmin && await context.GetSharePointAdmin().IsCurrentUserTenantAdminAsync().ConfigureAwait(false))
                 {
-                    return await GetViaTenantAdminHiddenListAsync(context).ConfigureAwait(false);
+                    return await GetViaTenantAdminHiddenListAsync(context, filter).ConfigureAwait(false);
                 }
                 else
                 {
-                    return await GetViaGraphSearchApiAsync(context).ConfigureAwait(false);
+                    return await GetViaGraphSearchApiAsync(context, filter).ConfigureAwait(false);
                 }
             }
             else
             {
-                return await GetViaGraphSitesApiAsync(context).ConfigureAwait(false);
+                return await GetViaGraphSitesApiAsync(context, filter).ConfigureAwait(false);
             }
         }
 
@@ -37,7 +38,7 @@ namespace PnP.Core.Admin.Model.SharePoint
         /// application permissions with Sites.Read.All or higher or when the user has read access to SharePoint tenant admin,
         /// which is the case for global SharePoint administrators
         /// </summary>
-        internal async static Task<List<ISiteCollection>> GetViaTenantAdminHiddenListAsync(PnPContext context, int pageSize = 500)
+        internal async static Task<List<ISiteCollection>> GetViaTenantAdminHiddenListAsync(PnPContext context, SiteCollectionFilter filter = SiteCollectionFilter.Default, int pageSize = 500)
         {
             // Removed query part to avoid running into list view threshold errors
             string sitesListAllQuery = @"<View Scope='RecursiveAll'>
@@ -54,6 +55,9 @@ namespace PnP.Core.Admin.Model.SharePoint
 
             List<ISiteCollection> loadedSites = new List<ISiteCollection>();
 
+            // Get the my site host url
+            var mySiteHostUrl = await context.GetSharePointAdmin().GetTenantMySiteHostUriAsync().ConfigureAwait(false);
+
             await LoadSitesViaTenantAdminHiddenListAsync(context, sitesListAllQuery, (IEnumerable<IListItem> listItems) =>
             {
                 foreach (var listItem in listItems)
@@ -68,6 +72,9 @@ namespace PnP.Core.Admin.Model.SharePoint
                     Guid webId = Guid.Parse(listItem["RootWebId"].ToString());
 
                     AddLoadedSite(loadedSites,
+                                  context.Logger,
+                                  mySiteHostUrl,
+                                  filter,
                                   $"{url.DnsSafeHost},{siteId},{webId}",
                                   listItem["SiteUrl"].ToString(),
                                   siteId,
@@ -339,9 +346,12 @@ namespace PnP.Core.Admin.Model.SharePoint
         /// <summary>
         /// Enumerating site collections using Graph Sites endpoint. Only works when using application permissions with Sites.Read.All or higher!
         /// </summary>
-        internal async static Task<List<ISiteCollection>> GetViaGraphSitesApiAsync(PnPContext context)
+        internal async static Task<List<ISiteCollection>> GetViaGraphSitesApiAsync(PnPContext context, SiteCollectionFilter filter = SiteCollectionFilter.Default)
         {
             List<ISiteCollection> loadedSites = new List<ISiteCollection>();
+
+            // Get the my site host url
+            var mySiteHostUrl = await context.GetSharePointAdmin().GetTenantMySiteHostUriAsync().ConfigureAwait(false);
 
             ApiCall sitesEnumerationApiCall = new ApiCall("sites?$select=sharepointIds,id,webUrl,displayName,root", ApiType.Graph);
 
@@ -415,6 +425,9 @@ namespace PnP.Core.Admin.Model.SharePoint
                             var sharePointIds = siteInformation.GetProperty("sharepointIds");
 
                             AddLoadedSite(loadedSites,
+                                          context.Logger,
+                                          mySiteHostUrl,
+                                          filter,
                                           siteInformation.GetProperty("id").GetString(),
                                           siteInformation.GetProperty("webUrl").GetString(),
                                           sharePointIds.GetProperty("siteId").GetGuid(),
@@ -432,11 +445,14 @@ namespace PnP.Core.Admin.Model.SharePoint
         /// <summary>
         /// Enumerating site collections using Graph Search endpoint. Only works when using delegated permissions!
         /// </summary>
-        internal async static Task<List<ISiteCollection>> GetViaGraphSearchApiAsync(PnPContext context, int pageSize = 500)
+        internal async static Task<List<ISiteCollection>> GetViaGraphSearchApiAsync(PnPContext context, SiteCollectionFilter filter = SiteCollectionFilter.Default, int pageSize = 500)
         {
             string requestBody = "{\"requests\": [{ \"entityTypes\": [\"site\"], \"query\": { \"queryString\": \"contentclass:STS_Site\" }, \"from\": %from%, \"size\": %to%, \"fields\": [ \"webUrl\", \"id\", \"name\" ] }]}";
 
             List<ISiteCollection> loadedSites = new List<ISiteCollection>();
+
+            // Get the my site host url
+            var mySiteHostUrl = await context.GetSharePointAdmin().GetTenantMySiteHostUriAsync().ConfigureAwait(false);
 
             bool paging = true;
             int from = 0;
@@ -493,6 +509,9 @@ namespace PnP.Core.Admin.Model.SharePoint
                                 GetSiteAndWebId(hit.GetProperty("hitId").GetString(), out Guid siteId, out Guid webId);
 
                                 AddLoadedSite(loadedSites,
+                                              context.Logger,
+                                              mySiteHostUrl,
+                                              filter,
                                               hit.GetProperty("hitId").GetString(),
                                               hit.GetProperty("resource").GetProperty("webUrl").GetString(),
                                               siteId,
@@ -507,8 +526,31 @@ namespace PnP.Core.Admin.Model.SharePoint
             return loadedSites;
         }
 
-        private static void AddLoadedSite(List<ISiteCollection> loadedSites, string graphId, string url, Guid id, Guid rootWebId, string rootWebDescription)
+        private static void AddLoadedSite(List<ISiteCollection> loadedSites, ILogger logger, Uri mySiteHostUri, SiteCollectionFilter filter, string graphId, string url, Guid id, Guid rootWebId, string rootWebDescription)
         {
+            // Only apply the filtering when we received a my site host url, if not then ignore the filter
+            if (mySiteHostUri != null)
+            {
+                // Verify is the site collection to add is a personal site?
+                bool isPersonalSite = new Uri(url).DnsSafeHost.Equals(mySiteHostUri.DnsSafeHost, StringComparison.OrdinalIgnoreCase);
+
+                // Don't add personal sites
+                if (filter == SiteCollectionFilter.ExcludePersonalSites && isPersonalSite)
+                {
+                    return;
+                }
+
+                // Only add personal sites
+                if (filter == SiteCollectionFilter.OnlyPersonalSites && !isPersonalSite)
+                {
+                    return;
+                }
+            }
+            else
+            {
+                logger.LogWarning($"Site collection filter not applied as there was no my site host url provided");
+            }
+
             // Checking for duplicates...should not happen but it does
             if (loadedSites.FirstOrDefault(p => p.Id == id) == null)
             {

@@ -14,14 +14,14 @@ namespace PnP.Core.Admin.Model.SharePoint
             context = pnpContext;
         }
 
-        public async Task<List<ISiteCollection>> GetSiteCollectionsAsync(bool ignoreUserIsSharePointAdmin = false)
+        public async Task<List<ISiteCollection>> GetSiteCollectionsAsync(bool ignoreUserIsSharePointAdmin = false, SiteCollectionFilter filter = SiteCollectionFilter.Default)
         {
-            return await SiteCollectionEnumerator.GetAsync(context, ignoreUserIsSharePointAdmin).ConfigureAwait(false);
+            return await SiteCollectionEnumerator.GetAsync(context, ignoreUserIsSharePointAdmin, filter).ConfigureAwait(false);
         }
 
-        public List<ISiteCollection> GetSiteCollections(bool ignoreUserIsSharePointAdmin = false)
+        public List<ISiteCollection> GetSiteCollections(bool ignoreUserIsSharePointAdmin = false, SiteCollectionFilter filter = SiteCollectionFilter.Default)
         {
-            return GetSiteCollectionsAsync(ignoreUserIsSharePointAdmin).GetAwaiter().GetResult();
+            return GetSiteCollectionsAsync(ignoreUserIsSharePointAdmin, filter).GetAwaiter().GetResult();
         }
 
         public async Task<List<ISiteCollectionWithDetails>> GetSiteCollectionsWithDetailsAsync()
@@ -52,6 +52,16 @@ namespace PnP.Core.Admin.Model.SharePoint
         public List<IRecycledSiteCollection> GetRecycledSiteCollections()
         {
             return GetRecycledSiteCollectionsAsync().GetAwaiter().GetResult();
+        }
+
+        public async Task<List<IWebWithDetails>> GetSiteCollectionWebsWithDetailsAsync(Uri url = null, bool skipAppWebs = true)
+        {
+            return await WebEnumerator.GetWithDetailsAsync(context, url, skipAppWebs).ConfigureAwait(false);
+        }
+
+        public List<IWebWithDetails> GetSiteCollectionWebsWithDetails(Uri url = null, bool skipAppWebs = true)
+        {
+            return GetSiteCollectionWebsWithDetailsAsync(url, skipAppWebs).GetAwaiter().GetResult();
         }
 
         public async Task<PnPContext> CreateSiteCollectionAsync(CommonSiteOptions siteToCreate, SiteCreationOptions creationOptions = null)

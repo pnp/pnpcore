@@ -12,6 +12,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
 - Added `HasCommunicationSiteFeatures` methods on `IWeb` [jansenbe - Bert Jansen]
 - Web branding via `IBrandingManager` with support for getting and setting themes and site chrome (header/footer/navigation) [jansenbe - Bert Jansen]
+- Added admin library support for enumerating all webs in a given site collection [jansenbe - Bert Jansen]
 
 ### Changed
 
@@ -26,6 +27,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - GetPagesAsync fails with pageHeader translateX or translateY as nulls - additional checks added #740 [jansenbe - Bert Jansen]
 - Blazor WASM cannot download files using the download.aspx page due to CORS limitations #736 [jansenbe - Bert Jansen]
 - When using LoadListDataAsStreamAsync to load list items number columns without a value set where returned as value 0 whereas they should have been returned as null #751 [jansenbe - Bert Jansen]
+- The `ISiteCollectionManager.GetSiteCollections` methods now allow to filter OneDrive for Business site collections [jansenbe - Bert Jansen]
 
 ## [1.5.0]
 

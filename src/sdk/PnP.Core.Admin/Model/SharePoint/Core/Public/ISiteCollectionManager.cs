@@ -19,8 +19,9 @@ namespace PnP.Core.Admin.Model.SharePoint
         /// - Delegated permissions, non admin: using the Search endpoint via Graph
         /// </summary>
         /// <param name="ignoreUserIsSharePointAdmin">When set to true and when the user is SharePoint admin then only return the site collections accessible by the user</param>
+        /// <param name="filter">Optional filter to scope the returned site collections</param>
         /// <returns>A list of site collections</returns>
-        Task<List<ISiteCollection>> GetSiteCollectionsAsync(bool ignoreUserIsSharePointAdmin = false);
+        Task<List<ISiteCollection>> GetSiteCollectionsAsync(bool ignoreUserIsSharePointAdmin = false, SiteCollectionFilter filter = SiteCollectionFilter.Default);
 
         /// <summary>
         /// Returns the list of site collections. When using application permissions or a delegated permissions 
@@ -31,8 +32,9 @@ namespace PnP.Core.Admin.Model.SharePoint
         /// - Delegated permissions, non admin: using the Search endpoint via Graph
         /// </summary>
         /// <param name="ignoreUserIsSharePointAdmin">When set to true and when the user is SharePoint admin then only return the site collections accessible by the user</param>
+        /// <param name="filter">Optional filter to scope the returned site collections</param>
         /// <returns>A list of site collections</returns>
-        List<ISiteCollection> GetSiteCollections(bool ignoreUserIsSharePointAdmin = false);
+        List<ISiteCollection> GetSiteCollections(bool ignoreUserIsSharePointAdmin = false, SiteCollectionFilter filter = SiteCollectionFilter.Default);
 
         /// <summary>
         /// Returns a list of the site collections in the current tenant including details about the site. This method
@@ -81,6 +83,24 @@ namespace PnP.Core.Admin.Model.SharePoint
         /// </summary>
         /// <returns>A list of site collections with details</returns>
         List<IRecycledSiteCollection> GetRecycledSiteCollections();
+
+        /// <summary>
+        /// Returns a list of all sub sites for the passed in site collection
+        /// If the current context or passed url are for a sub web then the all sub webs of that sub web are returned
+        /// </summary>
+        /// <returns>List of webs with details</returns>
+        /// <param name="url">Optional URL of the site collection to get the sub sites for. If null the sub sites are retreived for the current site collection</param>
+        /// <param name="skipAppWebs">Skips the SharePoint app webs (APP#0)</param>
+        Task<List<IWebWithDetails>> GetSiteCollectionWebsWithDetailsAsync(Uri url = null, bool skipAppWebs = true);
+
+        /// <summary>
+        /// Returns a list of all sub sites for the passed in site collection
+        /// If the current context or passed url are for a sub web then the all sub webs of that sub web are returned
+        /// </summary>
+        /// <returns>List of webs with details</returns>
+        /// <param name="url">Optional URL of the site collection to get the sub sites for. If null the sub sites are retreived for the current site collection</param>
+        /// <param name="skipAppWebs">Skips the SharePoint app webs (APP#0)</param>
+        List<IWebWithDetails> GetSiteCollectionWebsWithDetails(Uri url = null, bool skipAppWebs = true);
 
         /// <summary>
         /// Creates a site collection and returns a <see cref="PnPContext"/> to start using the created site collection
