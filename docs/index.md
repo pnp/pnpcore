@@ -16,6 +16,10 @@ Using the PnP Core SDK is simple, check out the [getting started](~/using-the-sd
 
 The PnP Core SDK is maintained in the PnP GitHub repository: https://github.com/pnp/pnpcore.
 
+## Supportability and SLA
+
+This library is open-source and community provided library with active community providing support for it. There is no SLA or direct support for this open-source component from Microsoft. Please report any issues using the [issues list](https://github.com/pnp/pnpcore/issues).
+
 ## How can you help?
 
 The model implemented in the preview only covers a small part of what's possible and what's needed. We're asking the community to help us expand the model by:
