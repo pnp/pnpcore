@@ -629,6 +629,7 @@ await addedItem.UpdateAsync();
 </div>
 <pre><code class="lang-csharp">// Load the list
 var myList = context.Web.Lists.GetByTitle(&quot;My List&quot;, p =&gt; p.Title, 
+                                                     p =&gt; p.Items,
                                                      p =&gt; p.Fields.QueryProperties(
                                                        p =&gt; p.InternalName, 
                                                        p =&gt; p.FieldTypeKind, 

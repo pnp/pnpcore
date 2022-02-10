@@ -136,6 +136,14 @@ var siteCollections = await context.GetSiteCollectionManager().GetSiteCollection
 // Get details for one given site collection
 var siteToCheckDetails = await context.GetSiteCollectionManager().GetSiteCollectionWithDetailsAsync(new Uri(&quot;https://contoso.sharepoint.com/sites/sitetocheck&quot;));
 </code></pre>
+<h2 id="enumerate-all-webs-in-a-site-collection">Enumerate all webs in a site collection</h2>
+<p>If you want to know all the webs that exist in a site collection then you can use the <code>GetSiteCollectionWebsWithDetails</code> methods. These methods will return a list with information about <strong>all</strong> webs in the site collection, webs are enumerated recursively to ensure all webs are listed. By default app webs (being created as part of installed SharePoint add-ins) are skipped but these can optionally be included.</p>
+<pre><code class="lang-csharp">var webs = await context.GetSiteCollectionManager().GetSiteCollectionWebsWithDetailsAsync();
+foreach(var web in webs)
+{
+    // do something with the web
+}
+</code></pre>
 <h2 id="getting-and-setting-site-collection-properties">Getting and setting site collection properties</h2>
 <div class="IMPORTANT">
 <h5>Important</h5>
