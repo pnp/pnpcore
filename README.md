@@ -28,7 +28,7 @@ If you want to join our team and help, then checkout the [How can I help](https:
 
 ## Supportability and SLA
 
-This library is open-source and community provided library with active community providing support for it. There is no SLA or direct support for this open-source component from Microsoft. Please report any issues using the [issues list](https://github.com/pnp/pnpcore/issues).
+This library is open-source and community provided component with active community providing support for it. This is not Microsoft provided component so there's no no SLA or direct support for this open-source component from Microsoft. Please report any issues using the [issues list](https://github.com/pnp/pnpcore/issues).
 
 ## Frequently Asked Questions ❓
 
