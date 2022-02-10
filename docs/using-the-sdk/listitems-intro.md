@@ -542,6 +542,7 @@ A common request is to change the list item `Author`, `Editor`, `Created` and `M
 ```csharp
 // Load the list
 var myList = context.Web.Lists.GetByTitle("My List", p => p.Title, 
+                                                     p => p.Items,
                                                      p => p.Fields.QueryProperties(
                                                        p => p.InternalName, 
                                                        p => p.FieldTypeKind, 
