@@ -2289,6 +2289,21 @@
     "title": "Class PnPCoreBuilder | PnP Core SDK",
     "keywords": "Class PnPCoreBuilder Used to configure PnP Core SDK Inheritance Object PnPCoreBuilder Namespace : PnP.Core.Services.Builder Assembly : PnP.Core.dll Syntax public class PnPCoreBuilder : object, IPnPCoreBuilder Constructors PnPCoreBuilder(IServiceCollection) Constructor Declaration public PnPCoreBuilder(IServiceCollection services) Parameters IServiceCollection services The services being configured. Properties Services The services being configured Declaration public virtual IServiceCollection Services { get; } Property Value IServiceCollection Implements IPnPCoreBuilder.Services"
   },
+  "api/PnP.Core.Services.Core.EventHub.html": {
+    "href": "api/PnP.Core.Services.Core.EventHub.html",
+    "title": "Class EventHub | PnP Core SDK",
+    "keywords": "Class EventHub Class that allows a PnP Core SDK consumer to hookup with events being triggered from within PnP Core SDK Inheritance Object EventHub Namespace : PnP.Core.Services.Core Assembly : PnP.Core.dll Syntax public sealed class EventHub : object Constructors EventHub() Default constructor Declaration public EventHub() Properties RequestRetry Event to subscribe to get notified whenever a request is getting retried due to throttling or an error Declaration public Action<RetryEvent> RequestRetry { get; set; } Property Value Action < RetryEvent >"
+  },
+  "api/PnP.Core.Services.Core.html": {
+    "href": "api/PnP.Core.Services.Core.html",
+    "title": "Namespace PnP.Core.Services.Core | PnP Core SDK",
+    "keywords": "Namespace PnP.Core.Services.Core Classes EventHub Class that allows a PnP Core SDK consumer to hookup with events being triggered from within PnP Core SDK RetryEvent Event containing information about the happened retry"
+  },
+  "api/PnP.Core.Services.Core.RetryEvent.html": {
+    "href": "api/PnP.Core.Services.Core.RetryEvent.html",
+    "title": "Class RetryEvent | PnP Core SDK",
+    "keywords": "Class RetryEvent Event containing information about the happened retry Inheritance Object RetryEvent Namespace : PnP.Core.Services.Core Assembly : PnP.Core.dll Syntax public sealed class RetryEvent : object Properties ErrorMessage Error message (SocketException) that triggered the retry Declaration public string ErrorMessage { get; } Property Value String HttpStatusCode Http status code for the retried request Declaration public int HttpStatusCode { get; } Property Value Int32 Request Request that was retried Declaration public Uri Request { get; } Property Value Uri"
+  },
   "api/PnP.Core.Services.FromJson.html": {
     "href": "api/PnP.Core.Services.FromJson.html",
     "title": "Class FromJson | PnP Core SDK",
