@@ -26,7 +26,7 @@ For more details on how to get started with the PnP.Core SDK checkout our [docum
 
 If you want to join our team and help, then checkout the [How can I help](https://pnp.github.io/pnpcore/#how-can-you-help) section in our docs.
 
-## Supportability and SLA
+## Supportability and SLA 💁🏾‍♀️
 
 This library is open-source and community provided component backed by an active community providing support for it. This is not a Microsoft provided component so there's no SLA or direct support for this open-source component from Microsoft. Please report any issues using the [issues list](https://github.com/pnp/pnpcore/issues).
 
