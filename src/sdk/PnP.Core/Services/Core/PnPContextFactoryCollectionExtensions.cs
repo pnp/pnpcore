@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using PnP.Core.Services.Core;
 using System;
 using System.Net;
 using System.Net.Http;
@@ -121,7 +122,8 @@ namespace PnP.Core.Services
         private static IServiceCollection AddPnPServices(this IServiceCollection collection)
         {
             return collection
-                   .AddTransient<IPnPContextFactory, PnPContextFactory>();
+                   .AddTransient<IPnPContextFactory, PnPContextFactory>()
+                   .AddSingleton<EventHub>();
         }
     }
 }

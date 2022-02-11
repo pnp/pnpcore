@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
+using PnP.Core.Services.Core;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,14 +17,16 @@ namespace PnP.Core.Services
     /// </summary>
     internal abstract class RetryHandlerBase : DelegatingHandler
     {
+        private readonly EventHub eventHub;
         private const string RETRY_AFTER = "Retry-After";
         private const string RETRY_ATTEMPT = "Retry-Attempt";
         internal const int MAXDELAY = 300;
 
         #region Construction
-        public RetryHandlerBase(ILogger<RetryHandlerBase> log, PnPGlobalSettingsOptions globalSettings)
+        public RetryHandlerBase(ILogger<RetryHandlerBase> log, PnPGlobalSettingsOptions globalSettings, EventHub events)
         {
             GlobalSettings = globalSettings;
+            eventHub = events;
 
             if (GlobalSettings != null && GlobalSettings.Logger == null)
             {
@@ -45,9 +48,12 @@ namespace PnP.Core.Services
             while (true)
             {
                 HttpResponseMessage response = null;
+                string errorMessage = null;
 
                 try
                 {
+                    errorMessage = null;
+
                     response = await base.SendAsync(request, cancellationToken).ConfigureAwait(false);
 
                     if (!ShouldRetry(response.StatusCode))
@@ -93,6 +99,8 @@ namespace PnP.Core.Services
                         throw;
                     }
 
+                    errorMessage = innermostEx.Message;
+
                     if (GlobalSettings != null && GlobalSettings.Logger != null)
                     {
                         GlobalSettings.Logger.LogInformation($"Retrying request {request.RequestUri} due to exception {innermostEx.GetType()}: {innermostEx.Message}");
@@ -112,6 +120,9 @@ namespace PnP.Core.Services
 
                 // Call Delay method to get delay time from response's Retry-After header or by exponential backoff 
                 Task delay = Delay(response, retryCount, DelayInSeconds, cancellationToken);
+
+                // Notify subscribers
+                eventHub.RequestRetry?.Invoke(new RetryEvent(request.RequestUri, (int)response.StatusCode, errorMessage));
 
                 // general clone request with internal CloneAsync (see CloneAsync for details) extension method 
                 // do not dispose this request as that breaks the request cloning

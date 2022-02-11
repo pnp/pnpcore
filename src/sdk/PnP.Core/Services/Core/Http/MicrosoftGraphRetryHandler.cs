@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using PnP.Core.Services.Core;
 
 namespace PnP.Core.Services
 {
@@ -9,7 +10,7 @@ namespace PnP.Core.Services
     internal sealed class MicrosoftGraphRetryHandler : RetryHandlerBase
     {
         #region Construction
-        public MicrosoftGraphRetryHandler(ILogger<RetryHandlerBase> log, IOptions<PnPGlobalSettingsOptions> globalSettings) : base(log, globalSettings?.Value)
+        public MicrosoftGraphRetryHandler(ILogger<RetryHandlerBase> log, IOptions<PnPGlobalSettingsOptions> globalSettings, EventHub eventHub) : base(log, globalSettings?.Value, eventHub)
         {
             Configure();
         }

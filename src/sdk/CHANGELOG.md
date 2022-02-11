@@ -13,6 +13,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Added `HasCommunicationSiteFeatures` methods on `IWeb` [jansenbe - Bert Jansen]
 - Web branding via `IBrandingManager` with support for getting and setting themes and site chrome (header/footer/navigation) [jansenbe - Bert Jansen]
 - Added admin library support for enumerating all webs in a given site collection [jansenbe - Bert Jansen]
+- EventHub for system notifications - retryevent is the first event being handled, allowing to understand when code get's throttled [jansenbe - Bert Jansen]
 
 ### Changed
 

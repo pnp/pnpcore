@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using PnP.Core.Services;
 using PnP.Core.Services.Builder.Configuration;
+using PnP.Core.Services.Core;
 using System;
 using System.Net;
 using System.Net.Http;
@@ -78,7 +79,8 @@ namespace PnP.Core.Test.Common.Services
         private static IServiceCollection AddPnPServices(this IServiceCollection collection)
         {
             return collection
-                   .AddTransient<IPnPTestContextFactory, TestPnPContextFactory>();
+                   .AddTransient<IPnPTestContextFactory, TestPnPContextFactory>()
+                   .AddSingleton<EventHub>();
         }
     }
 }

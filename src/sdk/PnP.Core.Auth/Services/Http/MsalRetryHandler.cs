@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using PnP.Core.Services;
+using PnP.Core.Services.Core;
 
 namespace PnP.Core.Auth.Services.Http
 {
@@ -10,7 +11,7 @@ namespace PnP.Core.Auth.Services.Http
     internal sealed class MsalRetryHandler : RetryHandlerBase
     {
         #region Construction
-        public MsalRetryHandler(ILogger<RetryHandlerBase> log, IOptions<PnPGlobalSettingsOptions> globalSettings) : base(log, globalSettings?.Value)
+        public MsalRetryHandler(ILogger<RetryHandlerBase> log, IOptions<PnPGlobalSettingsOptions> globalSettings, EventHub eventHub) : base(log, globalSettings?.Value, eventHub)
         {
             Configure();
         }
