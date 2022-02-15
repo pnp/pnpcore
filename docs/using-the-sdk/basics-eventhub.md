@@ -16,7 +16,7 @@ public MyClass(IPnPContextFactory pnpContextFactory, EventHub eventHub)
 }
 ```
 
-## Throttling handling via the event hub
+## Throttling notifications via the event hub
 
 When a request is retried due to either throttling or due to a socket exception the `RequestRetry` is fired providing you with information about the retry. Above sample already showed the code to hook up to the event, in this paragraph you'll find more details about the received `RetryEvent` instance. Following information is passed via this instance:
 
@@ -25,3 +25,5 @@ When a request is retried due to either throttling or due to a socket exception 
 - **Exception**: when the retry is triggered due to a socket exception this property will be set. Use the presence of this property to distinguish between retry due to throttling or network exceptions
 - **WaitTime**: time in seconds execution is waited before the retry is made. The `RequestRetry` is fired before the actual wait starts
 - **PnpContextProperties**: by default there's a property named `WebUrl` contained the URI of the SharePoint web (if available) for which the request was made. If the `PnPContext` instance that triggered the request contained custom properties (see [Advanced PnPContext use](basics-context.md) for details) then these are added here as well
+
+If your code is getting throttled the default retry mechanism will kick in and handle the wait/retry cycle, but for some type of applications it might make sense to stop adding "work" while SharePoint is telling the application it's throttled.
