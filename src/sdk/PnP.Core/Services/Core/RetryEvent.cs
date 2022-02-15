@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Net.Http;
 
 namespace PnP.Core.Services.Core
 {
@@ -10,14 +12,18 @@ namespace PnP.Core.Services.Core
         /// <summary>
         /// Retry event constructor
         /// </summary>
-        /// <param name="request">Request that's retried</param>
+        /// <param name="requestMessage">Request that's retried</param>
         /// <param name="httpStatusCode">Http status code</param>
-        /// <param name="errorMessage">Socket exception that triggered the retry</param>
-        internal RetryEvent(Uri request, int httpStatusCode, string errorMessage)
+        /// <param name="waitTime">Wait before the next try in seconds</param>
+        /// <param name="exception">Socket exception that triggered the retry</param>
+        internal RetryEvent(HttpRequestMessage requestMessage, int httpStatusCode, int waitTime, Exception exception)
         {
-            Request = request;
+            Request = requestMessage.RequestUri;
             HttpStatusCode = httpStatusCode;
-            ErrorMessage = errorMessage;
+            WaitTime = waitTime;
+            Exception = exception;
+
+            ProcessRequestProperties(requestMessage);
         }
 
         /// <summary>
@@ -31,8 +37,40 @@ namespace PnP.Core.Services.Core
         public int HttpStatusCode { get; private set; }
 
         /// <summary>
-        /// Error message (SocketException) that triggered the retry
+        /// Wait before the next try in seconds
         /// </summary>
-        public string ErrorMessage { get; private set; }
+        public int WaitTime { get; private set; }
+
+        /// <summary>
+        /// SocketException that triggered the retry
+        /// </summary>
+        public Exception Exception { get; private set; }
+
+        /// <summary>
+        /// PnPContext properties
+        /// </summary>
+        public IDictionary<string, object> PnpContextProperties { get; internal set; } = new Dictionary<string, object>();
+
+
+        private void ProcessRequestProperties(HttpRequestMessage requestMessage)
+        {
+#if NET5_0_OR_GREATER
+            if (requestMessage.Options != null)
+            {
+                foreach(var property in requestMessage.Options)
+                {
+                    PnpContextProperties[property.Key] = property.Value;
+                }
+            }
+#else
+            if (requestMessage.Properties != null && requestMessage.Properties.Count > 0)
+            {
+                foreach (var property in requestMessage.Properties)
+                {
+                    PnpContextProperties[property.Key] = property.Value;
+                }
+            }
+#endif
+        }
     }
 }

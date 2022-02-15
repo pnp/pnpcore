@@ -200,6 +200,9 @@ namespace PnP.Core.Test.Base
             {
                 await context.Web.LoadAsync(p => p.Title);
 
+                // Add some properties
+                context.Properties.Add("MyProperty", "PnP Rocks!");
+
                 using (var clonedContext = await TestCommon.Instance.CloneAsync(context, 2))
                 {
                     Assert.AreEqual(context.Uri, clonedContext.Uri);
@@ -212,6 +215,10 @@ namespace PnP.Core.Test.Base
                     Assert.AreEqual(context.RestClient, clonedContext.RestClient);
                     Assert.AreEqual(context.GraphClient, clonedContext.GraphClient);
                     Assert.AreEqual(context.Logger, clonedContext.Logger);
+
+                    // Context properties are also cloned
+                    Assert.IsTrue(clonedContext.Properties.ContainsKey("MyProperty"));
+                    Assert.AreEqual(context.Properties["MyProperty"], clonedContext.Properties["MyProperty"]);
 
                     // Cloning for the same site will not run context initialization to save on performance but will copy 
                     // the earlier loaded data into the new model. Validate that everything needed was copied over
@@ -270,6 +277,9 @@ namespace PnP.Core.Test.Base
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
+                // Add some properties
+                context.Properties.Add("MyProperty", "PnP Rocks!");
+
                 await context.Web.LoadAsync(p => p.Title);
 
                 var otherSite = TestCommon.Instance.TestUris[TestCommon.TestSubSite];
@@ -282,6 +292,10 @@ namespace PnP.Core.Test.Base
                     Assert.AreEqual(context.GraphAlwaysUseBeta, clonedContext.GraphAlwaysUseBeta);
                     Assert.AreEqual(context.GraphCanUseBeta, clonedContext.GraphCanUseBeta);
                     Assert.AreEqual(context.GraphFirst, clonedContext.GraphFirst);
+
+                    // Context properties are also cloned
+                    Assert.IsTrue(clonedContext.Properties.ContainsKey("MyProperty"));
+                    Assert.AreEqual(context.Properties["MyProperty"], clonedContext.Properties["MyProperty"]);
 
                     Assert.AreEqual(context.RestClient, clonedContext.RestClient);
                     Assert.AreEqual(context.GraphClient, clonedContext.GraphClient);
@@ -345,6 +359,9 @@ namespace PnP.Core.Test.Base
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.NoGroupTestSite))
             {
+                // Add some properties
+                context.Properties.Add("MyProperty", "PnP Rocks!");
+
                 await context.Web.LoadAsync(p => p.Title);
 
                 Assert.ThrowsException<ArgumentException>(() => context.Clone(Guid.Empty));
@@ -357,6 +374,10 @@ namespace PnP.Core.Test.Base
                     Assert.AreEqual(context.GraphAlwaysUseBeta, clonedContext.GraphAlwaysUseBeta);
                     Assert.AreEqual(context.GraphCanUseBeta, clonedContext.GraphCanUseBeta);
                     Assert.AreEqual(context.GraphFirst, clonedContext.GraphFirst);
+                    
+                    // Context properties are also cloned
+                    Assert.IsTrue(clonedContext.Properties.ContainsKey("MyProperty"));
+                    Assert.AreEqual(context.Properties["MyProperty"], clonedContext.Properties["MyProperty"]);
 
                     Assert.AreEqual(context.RestClient, clonedContext.RestClient);
                     Assert.AreEqual(context.GraphClient, clonedContext.GraphClient);

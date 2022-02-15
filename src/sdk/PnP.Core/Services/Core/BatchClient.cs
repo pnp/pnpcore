@@ -570,6 +570,9 @@ namespace PnP.Core.Services
 
             using (var request = new HttpRequestMessage(HttpMethod.Post, $"{graphEndpoint}/$batch"))
             {
+                // Add custom PnPContext properties to HttpRequest if needed
+                AddHttpRequestMessageProperties(request, batch);
+
                 // Remove the default Content-Type content header
                 if (content.Headers.Contains("Content-Type"))
                 {
@@ -959,6 +962,8 @@ namespace PnP.Core.Services
                 // Make the request
                 using (var request = new HttpRequestMessage(graphRequest.Method, $"https://{CloudManager.GetMicrosoftGraphAuthority(PnPContext.Environment.Value)}/{graphEndpoint}/{requestUrl}"))
                 {
+                    // Add custom PnPContext properties to HttpRequest if needed
+                    AddHttpRequestMessageProperties(request, batch);
 
                     if (!string.IsNullOrEmpty(requestBody))
                     {
@@ -1299,6 +1304,10 @@ namespace PnP.Core.Services
                         using StringContent content = new StringContent(requestBody);
                         using (var request = new HttpRequestMessage(HttpMethod.Post, $"{splitRestBatch.Site.ToString().TrimEnd(new char[] { '/' })}/_api/$batch"))
                         {
+
+                            // Add custom PnPContext properties to HttpRequest if needed
+                            AddHttpRequestMessageProperties(request, splitRestBatch.Batch);
+
                             // Remove the default Content-Type content header
                             if (content.Headers.Contains("Content-Type"))
                             {
@@ -1839,6 +1848,9 @@ namespace PnP.Core.Services
                 {
                     PnPContext.Logger.LogDebug($"{restRequest.Method} {restRequest.ApiCall.Request}");
 
+                    // Add custom PnPContext properties to HttpRequest if needed
+                    AddHttpRequestMessageProperties(request, batch);
+
                     if (!string.IsNullOrEmpty(requestBody))
                     {
                         content = new StringContent(requestBody, Encoding.UTF8, "application/json");
@@ -2173,6 +2185,10 @@ namespace PnP.Core.Services
                     {
                         using (var request = new HttpRequestMessage(HttpMethod.Post, $"{csomBatch.Site.ToString().TrimEnd(new char[] { '/' })}/_vti_bin/client.svc/ProcessQuery"))
                         {
+
+                            // Add custom PnPContext properties to HttpRequest if needed
+                            AddHttpRequestMessageProperties(request, csomBatch.Batch);
+
                             // Remove the default Content-Type content header
                             if (content.Headers.Contains("Content-Type"))
                             {
@@ -2626,6 +2642,44 @@ namespace PnP.Core.Services
             var pnpObjectType = model.GetType();
             var propertyToGet = pnpObjectType.GetProperty(propertyName);
             return propertyToGet.GetValue(model);
+        }
+
+        private static void AddHttpRequestMessageProperties(HttpRequestMessage request, Batch batch)
+        {
+            if (request == null || batch == null)
+            {
+                return;
+            }
+
+            var firstRequest = batch.Requests.FirstOrDefault().Value;
+            if (firstRequest != null)
+            {
+                if (firstRequest.Model is IDataModelWithContext dataModelWithContext)
+                {
+#if NET5_0_OR_GREATER
+                    if (dataModelWithContext.PnPContext?.Uri != null)
+                    {
+                        request.Options.Set(new HttpRequestOptionsKey<string>("webUrl"), dataModelWithContext.PnPContext?.Uri.ToString());
+                    }
+#else
+                    if (dataModelWithContext.PnPContext?.Uri != null)
+                    {
+                        request.Properties["WebUrl"] = dataModelWithContext.PnPContext?.Uri.ToString();
+                    }
+#endif
+                    if (dataModelWithContext.PnPContext.Properties != null && dataModelWithContext.PnPContext.Properties.Count > 0)
+                    {
+                        foreach(var property in dataModelWithContext.PnPContext.Properties)
+                        {
+#if NET5_0_OR_GREATER
+                            request.Options.Set(new HttpRequestOptionsKey<object>(property.Key), property.Value);
+#else
+                            request.Properties[property.Key] = property.Value;
+#endif
+                        }
+                    }
+                }
+            }
         }
     }
 }

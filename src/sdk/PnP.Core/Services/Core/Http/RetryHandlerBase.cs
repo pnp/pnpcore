@@ -48,12 +48,11 @@ namespace PnP.Core.Services
             while (true)
             {
                 HttpResponseMessage response = null;
-                string errorMessage = null;
+                Exception innermostEx = null;
 
                 try
                 {
-                    errorMessage = null;
-
+                    innermostEx = null;
                     response = await base.SendAsync(request, cancellationToken).ConfigureAwait(false);
 
                     if (!ShouldRetry(response.StatusCode))
@@ -86,7 +85,7 @@ namespace PnP.Core.Services
                 catch (Exception ex)
                 {
                     // Find innermost exception and check if it is a SocketException
-                    Exception innermostEx = ex;
+                    innermostEx = ex;
 
                     while (innermostEx.InnerException != null) innermostEx = innermostEx.InnerException;
                     if (!(innermostEx is SocketException))
@@ -99,7 +98,7 @@ namespace PnP.Core.Services
                         throw;
                     }
 
-                    errorMessage = innermostEx.Message;
+                    string errorMessage = innermostEx.Message;
 
                     if (GlobalSettings != null && GlobalSettings.Logger != null)
                     {
@@ -119,10 +118,11 @@ namespace PnP.Core.Services
                 }
 
                 // Call Delay method to get delay time from response's Retry-After header or by exponential backoff 
-                Task delay = Delay(response, retryCount, DelayInSeconds, cancellationToken);
+                TimeSpan delayTimeSpan = CalculateWaitTime(response, retryCount, DelayInSeconds);
+                Task delay = Task.Delay(delayTimeSpan, cancellationToken);
 
                 // Notify subscribers
-                eventHub.RequestRetry?.Invoke(new RetryEvent(request.RequestUri, (int)response.StatusCode, errorMessage));
+                eventHub.RequestRetry?.Invoke(new RetryEvent(request, (int)response.StatusCode, delayTimeSpan.Seconds, innermostEx));
 
                 // general clone request with internal CloneAsync (see CloneAsync for details) extension method 
                 // do not dispose this request as that breaks the request cloning
@@ -153,7 +153,7 @@ namespace PnP.Core.Services
             }
         }
 
-        private Task Delay(HttpResponseMessage response, int retryCount, int delay, CancellationToken cancellationToken)
+        private TimeSpan CalculateWaitTime(HttpResponseMessage response, int retryCount, int delay)
         {
             double delayInSeconds = delay;
 
@@ -184,8 +184,7 @@ namespace PnP.Core.Services
 
             // If the delay goes beyond our max wait time for a delay then cap it
             TimeSpan delayTimeSpan = TimeSpan.FromSeconds(Math.Min(delayInSeconds, MAXDELAY));
-
-            return Task.Delay(delayTimeSpan, cancellationToken);
+            return delayTimeSpan;
         }
 
         internal static bool ShouldRetry(HttpStatusCode statusCode)

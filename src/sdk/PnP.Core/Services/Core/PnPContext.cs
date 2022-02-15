@@ -163,6 +163,11 @@ namespace PnP.Core.Services
         public Microsoft365Environment? Environment { get; internal set; }
 
         /// <summary>
+        /// Collection for custom properties that you want to attach to a <see cref="PnPContext"/>
+        /// </summary>
+        public IDictionary<string, object> Properties { get; internal set; } = new Dictionary<string, object>();
+
+        /// <summary>
         /// Connected batch client
         /// </summary>
         internal BatchClient BatchClient { get; }
@@ -602,7 +607,8 @@ namespace PnP.Core.Services
                 GraphCanUseBeta = graphCanUseBeta,
                 GraphAlwaysUseBeta = GraphAlwaysUseBeta,
                 GraphFirst = GraphFirst,
-                Environment = Environment
+                Environment = Environment,
+                Properties = Properties,
             };
             return clonedContext;
         }
