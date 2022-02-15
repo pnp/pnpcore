@@ -7,8 +7,26 @@ Requesting a `PnPContext` is something each application does, using the `PnPCont
 The `PnPContext` is at the center of PnP Core SDK and sometimes you might want to add additional context to this object. This can be done by adding your custom context as key value pairs in the `PnPContext` `Properties` collection. When a context is cloned (see later chapters on this page), then the added properties are also copied over to the cloned context.
 
 ```csharp
-// Add some properties
+// Option A: Add some properties after the context was created
 context.Properties.Add("MyProperty", "PnP Rocks!");
+
+// Option B: Add properties during PnPContext creation. If you need the 
+// property as part of throttling event handling then this is the recommended
+// pattern to follow
+
+using (var context = await pnpContextFactory.CreateAsync("SiteToWorkWith", 
+                                                        new PnPContextOptions()
+                                                        {
+                                                            Properties = new Dictionary<string, object>
+                                                                        {
+                                                                            { "MyProperty", "PnP Rocks!" }
+                                                                        }
+                                                        })
+    )
+{
+    // Use the context
+}
+
 ```
 
 ## Loading additional IWeb and ISite properties when creating a PnPContext

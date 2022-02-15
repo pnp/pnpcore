@@ -6,6 +6,7 @@ using PnP.Core.Services;
 using PnP.Core.Test.Common;
 using PnP.Core.Test.Utilities;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
@@ -500,6 +501,28 @@ namespace PnP.Core.Test.Base
                 Assert.IsTrue(context.Site.IsPropertyAvailable(p => p.Url));
                 Assert.IsTrue(context.Site.IsPropertyAvailable(p => p.HubSiteId));
 
+            }
+        }
+
+        [TestMethod]
+        public async Task ConfigureWithContextOptionsProperties()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            using (var context = await TestCommon.Instance.GetContextWithOptionsAsync(TestCommon.TestSite, new PnPContextOptions()
+            {
+               Properties = new Dictionary<string, object>
+                            {
+                                { "MyProperty", "PnP Rocks!" }
+                            }
+            })
+                )
+            {
+                Assert.IsNotNull(context.Web);
+                Assert.IsNotNull(context.Site);
+
+                Assert.IsTrue(context.Properties.ContainsKey("MyProperty"));
+                Assert.AreEqual(context.Properties["MyProperty"].ToString(), "PnP Rocks!");
             }
         }
 

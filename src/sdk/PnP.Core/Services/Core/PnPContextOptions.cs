@@ -19,5 +19,10 @@ namespace PnP.Core.Services
         /// Additional <seealso cref="IWeb"/> properties to load when creating a new <seealso cref="PnPContext"/>.
         /// </summary>
         public IEnumerable<Expression<Func<IWeb, object>>> AdditionalWebPropertiesOnCreate { get; set; }
+
+        /// <summary>
+        /// Properties to set on the context during creation
+        /// </summary>
+        public IDictionary<string, object> Properties { get; set; }
     }
 }

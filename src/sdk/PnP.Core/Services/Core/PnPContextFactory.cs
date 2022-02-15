@@ -314,6 +314,9 @@ namespace PnP.Core.Services
             // Store the provided options, needed for context cloning
             context.LocalContextOptions = options;
 
+            // Add context properties (if any)
+            SetPnPContextProperties(context, options);
+
             // IMPORTANT: this first call is an interactive call by design as that allows us set the 
             //            web URL using the correct casing. Correct casing is required in REST batching
 
@@ -504,6 +507,17 @@ namespace PnP.Core.Services
             }
 
             return (siteProps, webProps);
+        }
+
+        private static void SetPnPContextProperties(PnPContext context, PnPContextOptions options)
+        {
+            if (options != null && options.Properties != null && options.Properties.Count > 0)
+            {
+                foreach (var property in options.Properties)
+                {
+                    context.Properties[property.Key] = property.Value;
+                }
+            }
         }
 
         internal static async Task ConfigureForGroup(PnPContext context, Guid groupId)
