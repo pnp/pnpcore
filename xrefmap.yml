@@ -46002,19 +46002,19 @@ references:
   commentId: T:PnP.Core.Services.Core.RetryEvent
   fullName: PnP.Core.Services.Core.RetryEvent
   nameWithType: RetryEvent
-- uid: PnP.Core.Services.Core.RetryEvent.ErrorMessage
-  name: ErrorMessage
-  href: api/PnP.Core.Services.Core.RetryEvent.html#PnP_Core_Services_Core_RetryEvent_ErrorMessage
-  commentId: P:PnP.Core.Services.Core.RetryEvent.ErrorMessage
-  fullName: PnP.Core.Services.Core.RetryEvent.ErrorMessage
-  nameWithType: RetryEvent.ErrorMessage
-- uid: PnP.Core.Services.Core.RetryEvent.ErrorMessage*
-  name: ErrorMessage
-  href: api/PnP.Core.Services.Core.RetryEvent.html#PnP_Core_Services_Core_RetryEvent_ErrorMessage_
-  commentId: Overload:PnP.Core.Services.Core.RetryEvent.ErrorMessage
+- uid: PnP.Core.Services.Core.RetryEvent.Exception
+  name: Exception
+  href: api/PnP.Core.Services.Core.RetryEvent.html#PnP_Core_Services_Core_RetryEvent_Exception
+  commentId: P:PnP.Core.Services.Core.RetryEvent.Exception
+  fullName: PnP.Core.Services.Core.RetryEvent.Exception
+  nameWithType: RetryEvent.Exception
+- uid: PnP.Core.Services.Core.RetryEvent.Exception*
+  name: Exception
+  href: api/PnP.Core.Services.Core.RetryEvent.html#PnP_Core_Services_Core_RetryEvent_Exception_
+  commentId: Overload:PnP.Core.Services.Core.RetryEvent.Exception
   isSpec: "True"
-  fullName: PnP.Core.Services.Core.RetryEvent.ErrorMessage
-  nameWithType: RetryEvent.ErrorMessage
+  fullName: PnP.Core.Services.Core.RetryEvent.Exception
+  nameWithType: RetryEvent.Exception
 - uid: PnP.Core.Services.Core.RetryEvent.HttpStatusCode
   name: HttpStatusCode
   href: api/PnP.Core.Services.Core.RetryEvent.html#PnP_Core_Services_Core_RetryEvent_HttpStatusCode
@@ -46028,6 +46028,19 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Services.Core.RetryEvent.HttpStatusCode
   nameWithType: RetryEvent.HttpStatusCode
+- uid: PnP.Core.Services.Core.RetryEvent.PnpContextProperties
+  name: PnpContextProperties
+  href: api/PnP.Core.Services.Core.RetryEvent.html#PnP_Core_Services_Core_RetryEvent_PnpContextProperties
+  commentId: P:PnP.Core.Services.Core.RetryEvent.PnpContextProperties
+  fullName: PnP.Core.Services.Core.RetryEvent.PnpContextProperties
+  nameWithType: RetryEvent.PnpContextProperties
+- uid: PnP.Core.Services.Core.RetryEvent.PnpContextProperties*
+  name: PnpContextProperties
+  href: api/PnP.Core.Services.Core.RetryEvent.html#PnP_Core_Services_Core_RetryEvent_PnpContextProperties_
+  commentId: Overload:PnP.Core.Services.Core.RetryEvent.PnpContextProperties
+  isSpec: "True"
+  fullName: PnP.Core.Services.Core.RetryEvent.PnpContextProperties
+  nameWithType: RetryEvent.PnpContextProperties
 - uid: PnP.Core.Services.Core.RetryEvent.Request
   name: Request
   href: api/PnP.Core.Services.Core.RetryEvent.html#PnP_Core_Services_Core_RetryEvent_Request
@@ -46041,6 +46054,19 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Services.Core.RetryEvent.Request
   nameWithType: RetryEvent.Request
+- uid: PnP.Core.Services.Core.RetryEvent.WaitTime
+  name: WaitTime
+  href: api/PnP.Core.Services.Core.RetryEvent.html#PnP_Core_Services_Core_RetryEvent_WaitTime
+  commentId: P:PnP.Core.Services.Core.RetryEvent.WaitTime
+  fullName: PnP.Core.Services.Core.RetryEvent.WaitTime
+  nameWithType: RetryEvent.WaitTime
+- uid: PnP.Core.Services.Core.RetryEvent.WaitTime*
+  name: WaitTime
+  href: api/PnP.Core.Services.Core.RetryEvent.html#PnP_Core_Services_Core_RetryEvent_WaitTime_
+  commentId: Overload:PnP.Core.Services.Core.RetryEvent.WaitTime
+  isSpec: "True"
+  fullName: PnP.Core.Services.Core.RetryEvent.WaitTime
+  nameWithType: RetryEvent.WaitTime
 - uid: PnP.Core.Services.FromJson
   name: FromJson
   href: api/PnP.Core.Services.FromJson.html
@@ -46582,6 +46608,19 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Services.PnPContext.NewBatch
   nameWithType: PnPContext.NewBatch
+- uid: PnP.Core.Services.PnPContext.Properties
+  name: Properties
+  href: api/PnP.Core.Services.PnPContext.html#PnP_Core_Services_PnPContext_Properties
+  commentId: P:PnP.Core.Services.PnPContext.Properties
+  fullName: PnP.Core.Services.PnPContext.Properties
+  nameWithType: PnPContext.Properties
+- uid: PnP.Core.Services.PnPContext.Properties*
+  name: Properties
+  href: api/PnP.Core.Services.PnPContext.html#PnP_Core_Services_PnPContext_Properties_
+  commentId: Overload:PnP.Core.Services.PnPContext.Properties
+  isSpec: "True"
+  fullName: PnP.Core.Services.PnPContext.Properties
+  nameWithType: PnPContext.Properties
 - uid: PnP.Core.Services.PnPContext.RestClient
   name: RestClient
   href: api/PnP.Core.Services.PnPContext.html#PnP_Core_Services_PnPContext_RestClient
