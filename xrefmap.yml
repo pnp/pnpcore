@@ -46257,6 +46257,19 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Services.IPnPContextFactory.CreateAsync
   nameWithType: IPnPContextFactory.CreateAsync
+- uid: PnP.Core.Services.IPnPContextFactory.EventHub
+  name: EventHub
+  href: api/PnP.Core.Services.IPnPContextFactory.html#PnP_Core_Services_IPnPContextFactory_EventHub
+  commentId: P:PnP.Core.Services.IPnPContextFactory.EventHub
+  fullName: PnP.Core.Services.IPnPContextFactory.EventHub
+  nameWithType: IPnPContextFactory.EventHub
+- uid: PnP.Core.Services.IPnPContextFactory.EventHub*
+  name: EventHub
+  href: api/PnP.Core.Services.IPnPContextFactory.html#PnP_Core_Services_IPnPContextFactory_EventHub_
+  commentId: Overload:PnP.Core.Services.IPnPContextFactory.EventHub
+  isSpec: "True"
+  fullName: PnP.Core.Services.IPnPContextFactory.EventHub
+  nameWithType: IPnPContextFactory.EventHub
 - uid: PnP.Core.Services.Microsoft365Environment
   name: Microsoft365Environment
   href: api/PnP.Core.Services.Microsoft365Environment.html
@@ -46802,15 +46815,15 @@ references:
   commentId: T:PnP.Core.Services.PnPContextFactory
   fullName: PnP.Core.Services.PnPContextFactory
   nameWithType: PnPContextFactory
-- uid: PnP.Core.Services.PnPContextFactory.#ctor(ILogger{PnP.Core.Services.PnPContext},PnP.Core.Services.SharePointRestClient,PnP.Core.Services.MicrosoftGraphClient,IOptions{PnP.Core.Services.PnPContextFactoryOptions},IOptions{PnP.Core.Services.PnPGlobalSettingsOptions})
-  name: PnPContextFactory(ILogger<PnPContext>, SharePointRestClient, MicrosoftGraphClient, IOptions<PnPContextFactoryOptions>, IOptions<PnPGlobalSettingsOptions>)
-  href: api/PnP.Core.Services.PnPContextFactory.html#PnP_Core_Services_PnPContextFactory__ctor_ILogger_PnP_Core_Services_PnPContext__PnP_Core_Services_SharePointRestClient_PnP_Core_Services_MicrosoftGraphClient_IOptions_PnP_Core_Services_PnPContextFactoryOptions__IOptions_PnP_Core_Services_PnPGlobalSettingsOptions__
-  commentId: M:PnP.Core.Services.PnPContextFactory.#ctor(ILogger{PnP.Core.Services.PnPContext},PnP.Core.Services.SharePointRestClient,PnP.Core.Services.MicrosoftGraphClient,IOptions{PnP.Core.Services.PnPContextFactoryOptions},IOptions{PnP.Core.Services.PnPGlobalSettingsOptions})
-  name.vb: PnPContextFactory(ILogger(Of PnPContext), SharePointRestClient, MicrosoftGraphClient, IOptions(Of PnPContextFactoryOptions), IOptions(Of PnPGlobalSettingsOptions))
-  fullName: PnP.Core.Services.PnPContextFactory.PnPContextFactory(ILogger<PnP.Core.Services.PnPContext>, PnP.Core.Services.SharePointRestClient, PnP.Core.Services.MicrosoftGraphClient, IOptions<PnP.Core.Services.PnPContextFactoryOptions>, IOptions<PnP.Core.Services.PnPGlobalSettingsOptions>)
-  fullName.vb: PnP.Core.Services.PnPContextFactory.PnPContextFactory(ILogger(Of PnP.Core.Services.PnPContext), PnP.Core.Services.SharePointRestClient, PnP.Core.Services.MicrosoftGraphClient, IOptions(Of PnP.Core.Services.PnPContextFactoryOptions), IOptions(Of PnP.Core.Services.PnPGlobalSettingsOptions))
-  nameWithType: PnPContextFactory.PnPContextFactory(ILogger<PnPContext>, SharePointRestClient, MicrosoftGraphClient, IOptions<PnPContextFactoryOptions>, IOptions<PnPGlobalSettingsOptions>)
-  nameWithType.vb: PnPContextFactory.PnPContextFactory(ILogger(Of PnPContext), SharePointRestClient, MicrosoftGraphClient, IOptions(Of PnPContextFactoryOptions), IOptions(Of PnPGlobalSettingsOptions))
+- uid: PnP.Core.Services.PnPContextFactory.#ctor(ILogger{PnP.Core.Services.PnPContext},PnP.Core.Services.SharePointRestClient,PnP.Core.Services.MicrosoftGraphClient,IOptions{PnP.Core.Services.PnPContextFactoryOptions},IOptions{PnP.Core.Services.PnPGlobalSettingsOptions},PnP.Core.Services.Core.EventHub)
+  name: PnPContextFactory(ILogger<PnPContext>, SharePointRestClient, MicrosoftGraphClient, IOptions<PnPContextFactoryOptions>, IOptions<PnPGlobalSettingsOptions>, EventHub)
+  href: api/PnP.Core.Services.PnPContextFactory.html#PnP_Core_Services_PnPContextFactory__ctor_ILogger_PnP_Core_Services_PnPContext__PnP_Core_Services_SharePointRestClient_PnP_Core_Services_MicrosoftGraphClient_IOptions_PnP_Core_Services_PnPContextFactoryOptions__IOptions_PnP_Core_Services_PnPGlobalSettingsOptions__PnP_Core_Services_Core_EventHub_
+  commentId: M:PnP.Core.Services.PnPContextFactory.#ctor(ILogger{PnP.Core.Services.PnPContext},PnP.Core.Services.SharePointRestClient,PnP.Core.Services.MicrosoftGraphClient,IOptions{PnP.Core.Services.PnPContextFactoryOptions},IOptions{PnP.Core.Services.PnPGlobalSettingsOptions},PnP.Core.Services.Core.EventHub)
+  name.vb: PnPContextFactory(ILogger(Of PnPContext), SharePointRestClient, MicrosoftGraphClient, IOptions(Of PnPContextFactoryOptions), IOptions(Of PnPGlobalSettingsOptions), EventHub)
+  fullName: PnP.Core.Services.PnPContextFactory.PnPContextFactory(ILogger<PnP.Core.Services.PnPContext>, PnP.Core.Services.SharePointRestClient, PnP.Core.Services.MicrosoftGraphClient, IOptions<PnP.Core.Services.PnPContextFactoryOptions>, IOptions<PnP.Core.Services.PnPGlobalSettingsOptions>, PnP.Core.Services.Core.EventHub)
+  fullName.vb: PnP.Core.Services.PnPContextFactory.PnPContextFactory(ILogger(Of PnP.Core.Services.PnPContext), PnP.Core.Services.SharePointRestClient, PnP.Core.Services.MicrosoftGraphClient, IOptions(Of PnP.Core.Services.PnPContextFactoryOptions), IOptions(Of PnP.Core.Services.PnPGlobalSettingsOptions), PnP.Core.Services.Core.EventHub)
+  nameWithType: PnPContextFactory.PnPContextFactory(ILogger<PnPContext>, SharePointRestClient, MicrosoftGraphClient, IOptions<PnPContextFactoryOptions>, IOptions<PnPGlobalSettingsOptions>, EventHub)
+  nameWithType.vb: PnPContextFactory.PnPContextFactory(ILogger(Of PnPContext), SharePointRestClient, MicrosoftGraphClient, IOptions(Of PnPContextFactoryOptions), IOptions(Of PnPGlobalSettingsOptions), EventHub)
 - uid: PnP.Core.Services.PnPContextFactory.#ctor*
   name: PnPContextFactory
   href: api/PnP.Core.Services.PnPContextFactory.html#PnP_Core_Services_PnPContextFactory__ctor_
@@ -46923,6 +46936,19 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Services.PnPContextFactory.CreateAsync
   nameWithType: PnPContextFactory.CreateAsync
+- uid: PnP.Core.Services.PnPContextFactory.EventHub
+  name: EventHub
+  href: api/PnP.Core.Services.PnPContextFactory.html#PnP_Core_Services_PnPContextFactory_EventHub
+  commentId: P:PnP.Core.Services.PnPContextFactory.EventHub
+  fullName: PnP.Core.Services.PnPContextFactory.EventHub
+  nameWithType: PnPContextFactory.EventHub
+- uid: PnP.Core.Services.PnPContextFactory.EventHub*
+  name: EventHub
+  href: api/PnP.Core.Services.PnPContextFactory.html#PnP_Core_Services_PnPContextFactory_EventHub_
+  commentId: Overload:PnP.Core.Services.PnPContextFactory.EventHub
+  isSpec: "True"
+  fullName: PnP.Core.Services.PnPContextFactory.EventHub
+  nameWithType: PnPContextFactory.EventHub
 - uid: PnP.Core.Services.PnPContextFactory.GlobalOptions
   name: GlobalOptions
   href: api/PnP.Core.Services.PnPContextFactory.html#PnP_Core_Services_PnPContextFactory_GlobalOptions

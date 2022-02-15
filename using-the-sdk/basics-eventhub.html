@@ -84,10 +84,20 @@
 
 <p>When certain key events happen in PnP Core SDK your code can be informed of that event via subscribing to the event of interest via the PnP Core SDK <code>EventHub</code>. A typical use case for this is throttling, if your code is getting throttled you might want to take action by lowering the load sent to Microsoft 365, next to the default throttling wait/retry mechanism that PnP Core SDK brings.</p>
 <h2 id="using-the-eventhub">Using the EventHub</h2>
-<p>The event hub is implemented via the <code>EventHub</code> class which is added a singleton to your dependency injection container when you configure PnP Core SDK. To subscribe to an event you first need to get a reference to the <code>EventHub</code> by using dependency injection. Once you've a reference then you can implement the needed events. Below sample shows a typical use case:</p>
-<pre><code class="lang-csharp">public MyClass(IPnPContextFactory pnpContextFactory, EventHub eventHub)
+<p>The event hub is implemented via the <code>EventHub</code> class which is added a singleton to your dependency injection container when you configure PnP Core SDK. To subscribe to an event you first need to get a reference to the <code>EventHub</code> by using dependency injection or by using the <code>EventHub</code> property of your <code>IPnPContextFactory</code> instance. Once you've a reference then you can implement the needed events. Below sample shows a typical use case:</p>
+<pre><code class="lang-csharp">// Option A
+public MyClass(IPnPContextFactory pnpContextFactory, EventHub eventHub)
 {
     eventHub.RequestRetry = (retryEvent) =&gt; 
+    {  
+      // request got retried due to throttling or socket exception...    
+    };
+}
+
+// Option B
+public MyClass(IPnPContextFactory pnpContextFactory)
+{
+    pnpContextFactory.EventHub.RequestRetry = (retryEvent) =&gt; 
     {  
       // request got retried due to throttling or socket exception...    
     };
@@ -97,7 +107,7 @@
 <p>When a request is retried due to either throttling or due to a socket exception the <code>RequestRetry</code> is fired providing you with information about the retry. Above sample already showed the code to hook up to the event, in this paragraph you'll find more details about the received <code>RetryEvent</code> instance. Following information is passed via this instance:</p>
 <ul>
 <li><strong>Request uri</strong>: the full request URL of the request that will be retried</li>
-<li><strong>HttpStatusCode</strong>: the HTTP status code that led to the retry. This will be 429, 503 or 503 in case of throttling event</li>
+<li><strong>HttpStatusCode</strong>: the HTTP status code that led to the retry. This will be 429, 503 or 504 in case of throttling event</li>
 <li><strong>Exception</strong>: when the retry is triggered due to a socket exception this property will be set. Use the presence of this property to distinguish between retry due to throttling or network exceptions</li>
 <li><strong>WaitTime</strong>: time in seconds execution is waited before the retry is made. The <code>RequestRetry</code> is fired before the actual wait starts</li>
 <li><strong>PnpContextProperties</strong>: by default there's a property named <code>WebUrl</code> contained the URI of the SharePoint web (if available) for which the request was made. If the <code>PnPContext</code> instance that triggered the request contained custom properties (see <a href="basics-context.html">Advanced PnPContext use</a> for details) then these are added here as well</li>
