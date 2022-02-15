@@ -6733,7 +6733,7 @@
       "output": {
         ".html": {
           "relative_path": "using-the-sdk/basics-context.html",
-          "hash": "KPSFWU6x9wiPT2dh7nXL5Q=="
+          "hash": "IlJHkZf7qdWSkAe7yKSK9Q=="
         }
       },
       "is_incremental": false,
@@ -6782,6 +6782,18 @@
         ".html": {
           "relative_path": "using-the-sdk/basics-errorhandling.html",
           "hash": "IwgFz0kH67MoQiMFs2SpGQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "using-the-sdk/basics-eventhub.md",
+      "output": {
+        ".html": {
+          "relative_path": "using-the-sdk/basics-eventhub.html",
+          "hash": "59S81y6BOYu558oR3xr4aQ=="
         }
       },
       "is_incremental": false,
@@ -6865,7 +6877,7 @@
       "output": {
         ".html": {
           "relative_path": "using-the-sdk/basics-threading.html",
-          "hash": "zaR2mmft9m2mttjuic1CAQ=="
+          "hash": "ppqCSQReuu5FsOWZ7XkRjA=="
         }
       },
       "is_incremental": false,
@@ -7450,7 +7462,7 @@
         "ConceptualDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build",
-          "total_file_count": 97,
+          "total_file_count": 98,
           "skipped_file_count": 0
         },
         "ManagedReferenceDocumentProcessor": {

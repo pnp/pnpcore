@@ -5,9 +5,9 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Multi-threading with PnP Core SDK | PnP Core SDK </title>
+    <title>Using the PnP Core SDK Event hub | PnP Core SDK </title>
     <meta name="viewport" content="width=device-width">
-    <meta name="title" content="Multi-threading with PnP Core SDK | PnP Core SDK ">
+    <meta name="title" content="Using the PnP Core SDK Event hub | PnP Core SDK ">
     <meta name="generator" content="docfx 2.56.5.0">
     <meta name="description" content="The PnP Core SDK is a modern .NET SDK designed to work for Microsoft 365. It provides a unified object model for working with SharePoint Online and Teams which is agnostic to the underlying API's being called.">
     <link rel="shortcut icon" href="https://c.s-microsoft.com/favicon.ico?v2">
@@ -78,86 +78,30 @@
           <div class="col-md-10">
             <article class="content wrap" id="_content" data-uid="">
                   <div class="contribution-panel mobile-hide pull-right">
-                      <a href="https://github.com/pnp/pnpcore/blob/dev/docs/using-the-sdk/basics-threading.md/#L1" title="Improve this Doc" class="improve-doc-lg"><i class="glyphicon glyphicon-pencil"></i></a>
+                      <a href="https://github.com/pnp/pnpcore/blob/dev/docs/using-the-sdk/basics-eventhub.md/#L1" title="Improve this Doc" class="improve-doc-lg"><i class="glyphicon glyphicon-pencil"></i></a>
                   </div>
-                    <h1 id="multi-threading-with-pnp-core-sdk">Multi-threading with PnP Core SDK</h1>
+                    <h1 id="using-the-pnp-core-sdk-event-hub">Using the PnP Core SDK Event hub</h1>
 
-<p>The key PnP Core SDK classes like <code>PnPContext</code>, the model classes (e.g. <code>IWeb</code>, <code>ITeamChannel</code>,...) and model collection classes (e.g. <code>IListCollection</code>, <code>ITeamChannelCollection</code>) are <strong>not thread-safe</strong> and therefore it's not recommended to build solutions that have multiple threads sharing these classes. Doing so may lead to unexpected results and exceptions.</p>
-<div class="IMPORTANT">
-<h5>Important</h5>
-<p>While threading is a very attractive option to speed up operations do keep in mind that your application might get throttled sooner as throttling protection kicks in whenever the amount of requests an application makes in a given time window exceeds a certain threshold. The threshold itself is a dynamic one that depends on many factors. See the <a href="https://docs.microsoft.com/en-us/sharepoint/dev/general-development/how-to-avoid-getting-throttled-or-blocked-in-sharepoint-online">Avoid getting throttled or blocked in SharePoint Online</a> article for more details. Also do know that via the PnP Core SDK <code>EventHub</code> you can get notified when your code is throttled (see <a href="basics-eventhub.html">Using the PnP Core SDK Event hub</a> for more details).</p>
-</div>
-<h2 id="what-options-do-i-have-to-parallelize-operations">What options do I have to parallelize operations?</h2>
-<p>The main thing to do is to <strong>create a <code>PnPContext</code> per thread</strong> by either creating a new one (e.g. if you're running a thread per site/web) or by cloning the current one in case you're parallelizing work inside the same site/web. Below code samples show two implementations of running operations for a given <code>IWeb</code> in parallel:</p>
-<pre><code class="lang-csharp">var urls = new[] { &quot;https://contoso.sharepoint.com/sites/siteA&quot;, &quot;https://contoso.sharepoint.com/sites/siteB&quot; };
-
-var parallelOps = new List&lt;Task&gt;();
-
-foreach (var url in urls)
+<p>When certain key events happen in PnP Core SDK your code can be informed of that event via subscribing to the event of interest via the PnP Core SDK <code>EventHub</code>. A typical use case for this is throttling, if your code is getting throttled you might want to take action by lowering the load sent to Microsoft 365, next to the default throttling wait/retry mechanism that PnP Core SDK brings.</p>
+<h2 id="using-the-eventhub">Using the EventHub</h2>
+<p>The event hub is implemented via the <code>EventHub</code> class which is added a singleton to your dependency injection container when you configure PnP Core SDK. To subscribe to an event you first need to get a reference to the <code>EventHub</code> by using dependency injection. Once you've a reference then you can implement the needed events. Below sample shows a typical use case:</p>
+<pre><code class="lang-csharp">public MyClass(IPnPContextFactory pnpContextFactory, EventHub eventHub)
 {
-    var contextForSite = await context.CloneAsync(new Uri(url));
-    parallelOps.Add(DoWork(contextForSite));
-}
-await Task.WhenAll(parallelOps);
-
-private async Task DoWork(PnPContext context)
-{
-    await foreach (var list in context.Web.Lists.Where(p =&gt; p.Hidden == false).AsAsyncEnumerable())
-    {
-        // do something with the list
-        context.Logger.LogInformation($&quot;Thread: {Thread.CurrentThread.ManagedThreadId}, list {list.Title}&quot;);
-    }
-    
-    context.Dispose();
+    eventHub.RequestRetry = (retryEvent) =&gt; 
+    {  
+      // request got retried due to throttling or socket exception...    
+    };
 }
 </code></pre>
-<p>Slightly more complicated sample to setup, but once configured using a parallel async operation becomes really simple.</p>
-<pre><code class="lang-csharp">// AsyncParallelForEach extension method
-public static class ParallelExtensions
-{    
-    public static async Task AsyncParallelForEach&lt;T&gt;(this IAsyncEnumerable&lt;T&gt; source, Func&lt;T, Task&gt; body, int maxDegreeOfParallelism = DataflowBlockOptions.Unbounded, TaskScheduler scheduler = null)
-    {
-        var options = new ExecutionDataflowBlockOptions
-        {
-            MaxDegreeOfParallelism = maxDegreeOfParallelism
-        };
-        if (scheduler != null)
-            options.TaskScheduler = scheduler;
-        var block = new ActionBlock&lt;T&gt;(body, options);
-        await foreach (var item in source)
-            block.Post(item);
-        block.Complete();
-        await block.Completion;
-    }
-}
-
-// Simple code to return test data as IAsyncEnumerable
-public static async IAsyncEnumerable&lt;string&gt; GetUrlsToProcess()
-{
-    yield return &quot;https://contoso.sharepoint.com/sites/siteA&quot;;
-    yield return &quot;https://contoso.sharepoint.com/sites/siteB&quot;;
-
-    await Task.CompletedTask; 
-}  
-
-private async Task DoWorkAsync(PnPContext context)
-{
-    await foreach (var list in context.Web.Lists.Where(p =&gt; p.Hidden == false).AsAsyncEnumerable())
-    {
-        // do something with the list
-        context.Logger.LogInformation($&quot;Thread: {Thread.CurrentThread.ManagedThreadId}, list {list.Title}&quot;);
-    }
-    
-    context.Dispose();
-}
-
-// Perform async parallel foreach
-await GetUrlsToProcess().AsyncParallelForEach(async url =&gt;
-{
-    var contextForSite = await context.CloneAsync(new Uri(url));
-    await DoWorkAsync(contextForSite);
-});
-</code></pre>
+<h2 id="throttling-handling-via-the-event-hub">Throttling handling via the event hub</h2>
+<p>When a request is retried due to either throttling or due to a socket exception the <code>RequestRetry</code> is fired providing you with information about the retry. Above sample already showed the code to hook up to the event, in this paragraph you'll find more details about the received <code>RetryEvent</code> instance. Following information is passed via this instance:</p>
+<ul>
+<li><strong>Request uri</strong>: the full request URL of the request that will be retried</li>
+<li><strong>HttpStatusCode</strong>: the HTTP status code that led to the retry. This will be 429, 503 or 503 in case of throttling event</li>
+<li><strong>Exception</strong>: when the retry is triggered due to a socket exception this property will be set. Use the presence of this property to distinguish between retry due to throttling or network exceptions</li>
+<li><strong>WaitTime</strong>: time in seconds execution is waited before the retry is made. The <code>RequestRetry</code> is fired before the actual wait starts</li>
+<li><strong>PnpContextProperties</strong>: by default there's a property named <code>WebUrl</code> contained the URI of the SharePoint web (if available) for which the request was made. If the <code>PnPContext</code> instance that triggered the request contained custom properties (see <a href="basics-context.html">Advanced PnPContext use</a> for details) then these are added here as well</li>
+</ul>
 </article>
           </div>
           <div class="hidden-sm col-md-2" role="complementary">
