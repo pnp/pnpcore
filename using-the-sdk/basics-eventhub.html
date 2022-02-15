@@ -93,7 +93,7 @@
     };
 }
 </code></pre>
-<h2 id="throttling-handling-via-the-event-hub">Throttling handling via the event hub</h2>
+<h2 id="throttling-notifications-via-the-event-hub">Throttling notifications via the event hub</h2>
 <p>When a request is retried due to either throttling or due to a socket exception the <code>RequestRetry</code> is fired providing you with information about the retry. Above sample already showed the code to hook up to the event, in this paragraph you'll find more details about the received <code>RetryEvent</code> instance. Following information is passed via this instance:</p>
 <ul>
 <li><strong>Request uri</strong>: the full request URL of the request that will be retried</li>
@@ -102,6 +102,7 @@
 <li><strong>WaitTime</strong>: time in seconds execution is waited before the retry is made. The <code>RequestRetry</code> is fired before the actual wait starts</li>
 <li><strong>PnpContextProperties</strong>: by default there's a property named <code>WebUrl</code> contained the URI of the SharePoint web (if available) for which the request was made. If the <code>PnPContext</code> instance that triggered the request contained custom properties (see <a href="basics-context.html">Advanced PnPContext use</a> for details) then these are added here as well</li>
 </ul>
+<p>If your code is getting throttled the default retry mechanism will kick in and handle the wait/retry cycle, but for some type of applications it might make sense to stop adding &quot;work&quot; while SharePoint is telling the application it's throttled.</p>
 </article>
           </div>
           <div class="hidden-sm col-md-2" role="complementary">
