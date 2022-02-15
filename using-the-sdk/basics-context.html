@@ -85,8 +85,26 @@
 <p>Requesting a <code>PnPContext</code> is something each application does, using the <code>PnPContextFactory</code> as explained in the <a href="readme.html">overview article</a>. Whereas the overview article describes how to get a <code>PnPContext</code> there are additional possibilities when requesting and working with a <code>PnPContext</code>.</p>
 <h2 id="adding-custom-context-to-a-pnpcontext">Adding custom context to a PnPContext</h2>
 <p>The <code>PnPContext</code> is at the center of PnP Core SDK and sometimes you might want to add additional context to this object. This can be done by adding your custom context as key value pairs in the <code>PnPContext</code> <code>Properties</code> collection. When a context is cloned (see later chapters on this page), then the added properties are also copied over to the cloned context.</p>
-<pre><code class="lang-csharp">// Add some properties
+<pre><code class="lang-csharp">// Option A: Add some properties after the context was created
 context.Properties.Add(&quot;MyProperty&quot;, &quot;PnP Rocks!&quot;);
+
+// Option B: Add properties during PnPContext creation. If you need the 
+// property as part of throttling event handling then this is the recommended
+// pattern to follow
+
+using (var context = await pnpContextFactory.CreateAsync(&quot;SiteToWorkWith&quot;, 
+                                                        new PnPContextOptions()
+                                                        {
+                                                            Properties = new Dictionary&lt;string, object&gt;
+                                                                        {
+                                                                            { &quot;MyProperty&quot;, &quot;PnP Rocks!&quot; }
+                                                                        }
+                                                        })
+    )
+{
+    // Use the context
+}
+
 </code></pre>
 <h2 id="loading-additional-iweb-and-isite-properties-when-creating-a-pnpcontext">Loading additional IWeb and ISite properties when creating a PnPContext</h2>
 <p>When a <code>PnPContext</code> is created two calls are issued to SharePoint Online. In a first call the <code>IWeb</code> is loaded with following properties: <code>Id</code>, <code>Url</code> and <code>RegionalSettings</code>. In the second call <code>ISite</code> is loaded with the <code>Id</code> and <code>GroupId</code> properties. If your application needs additional <code>IWeb</code> or <code>ISite</code> properties you can optimize the number of server roundtrips by adding the extra needed properties to the already planned requests for loading <code>IWeb</code> and <code>ISite</code>. To do this you can provide a <code>PnPContextOptions</code> object specifying the additional <code>IWeb</code> and <code>ISite</code> properties to load.</p>

@@ -47177,6 +47177,19 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Services.PnPContextOptions.AdditionalWebPropertiesOnCreate
   nameWithType: PnPContextOptions.AdditionalWebPropertiesOnCreate
+- uid: PnP.Core.Services.PnPContextOptions.Properties
+  name: Properties
+  href: api/PnP.Core.Services.PnPContextOptions.html#PnP_Core_Services_PnPContextOptions_Properties
+  commentId: P:PnP.Core.Services.PnPContextOptions.Properties
+  fullName: PnP.Core.Services.PnPContextOptions.Properties
+  nameWithType: PnPContextOptions.Properties
+- uid: PnP.Core.Services.PnPContextOptions.Properties*
+  name: Properties
+  href: api/PnP.Core.Services.PnPContextOptions.html#PnP_Core_Services_PnPContextOptions_Properties_
+  commentId: Overload:PnP.Core.Services.PnPContextOptions.Properties
+  isSpec: "True"
+  fullName: PnP.Core.Services.PnPContextOptions.Properties
+  nameWithType: PnPContextOptions.Properties
 - uid: PnP.Core.Services.PnPGlobalSettingsOptions
   name: PnPGlobalSettingsOptions
   href: api/PnP.Core.Services.PnPGlobalSettingsOptions.html
