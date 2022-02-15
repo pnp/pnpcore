@@ -3,6 +3,7 @@ using Microsoft.Extensions.Options;
 using PnP.Core.Model;
 using PnP.Core.Model.Security;
 using PnP.Core.Model.SharePoint;
+using PnP.Core.Services.Core;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -39,12 +40,14 @@ namespace PnP.Core.Services
         /// <param name="microsoftGraphClient">Microsoft Graph http client to use</param>
         /// <param name="contextOptions"><see cref="PnPContextFactory"/> options</param>
         /// <param name="globalOptions">Global options to use</param>
+        /// <param name="eventHub">EventHub instance</param>
         public PnPContextFactory(
             ILogger<PnPContext> logger,
             SharePointRestClient sharePointRestClient,
             MicrosoftGraphClient microsoftGraphClient,
             IOptions<PnPContextFactoryOptions> contextOptions,
-            IOptions<PnPGlobalSettingsOptions> globalOptions)
+            IOptions<PnPGlobalSettingsOptions> globalOptions,
+            EventHub eventHub)
         {
             // Store logger and options locally
             Log = logger;
@@ -52,9 +55,15 @@ namespace PnP.Core.Services
             MicrosoftGraphClient = microsoftGraphClient;
             ContextOptions = contextOptions?.Value;
             GlobalOptions = globalOptions?.Value;
+            EventHub = eventHub;
 
             ConnectTelemetry();
         }
+
+        /// <summary>
+        /// Gets the EventHub instance, can be used to tap into events like request retry (due to throttling)
+        /// </summary>
+        public EventHub EventHub { get; }
 
         /// <summary>
         /// Connected logger

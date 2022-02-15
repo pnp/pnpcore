@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using PnP.Core.Services;
+using PnP.Core.Services.Core;
 using PnP.Core.Test.Common.Utilities;
 using System;
 using System.Collections.Generic;
@@ -54,7 +55,8 @@ namespace PnP.Core.Test.Common.Services
             SharePointRestClient sharePointRestClient,
             MicrosoftGraphClient microsoftGraphClient,
             IOptions<PnPContextFactoryOptions> contextOptions,
-            IOptions<PnPGlobalSettingsOptions> globalOptions) : base(logger, sharePointRestClient, microsoftGraphClient, contextOptions, globalOptions)
+            IOptions<PnPGlobalSettingsOptions> globalOptions,
+            EventHub eventHub) : base(logger, sharePointRestClient, microsoftGraphClient, contextOptions, globalOptions, eventHub)
         {
             if (TelemetryManager != null && !TestCommonBase.RunningInGitHubWorkflow())
             {

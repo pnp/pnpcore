@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PnP.Core.Services.Core;
+using System;
 using System.Threading.Tasks;
 
 namespace PnP.Core.Services
@@ -8,6 +9,11 @@ namespace PnP.Core.Services
     /// </summary>
     public interface IPnPContextFactory
     {
+        /// <summary>
+        /// Gets the EventHub instance, can be used to tap into events like request retry (due to throttling)
+        /// </summary>
+        public EventHub EventHub { get; }
+
         /// <summary>
         /// Creates a new instance of PnPContext based on a provided URL and Authentication Provider instance
         /// </summary>
