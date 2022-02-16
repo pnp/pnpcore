@@ -25840,6 +25840,19 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IList.ContentTypesEnabled
   nameWithType: IList.ContentTypesEnabled
+- uid: PnP.Core.Model.SharePoint.IList.Created
+  name: Created
+  href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_Created
+  commentId: P:PnP.Core.Model.SharePoint.IList.Created
+  fullName: PnP.Core.Model.SharePoint.IList.Created
+  nameWithType: IList.Created
+- uid: PnP.Core.Model.SharePoint.IList.Created*
+  name: Created
+  href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_Created_
+  commentId: Overload:PnP.Core.Model.SharePoint.IList.Created
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IList.Created
+  nameWithType: IList.Created
 - uid: PnP.Core.Model.SharePoint.IList.DefaultDisplayFormUrl
   name: DefaultDisplayFormUrl
   href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_DefaultDisplayFormUrl
@@ -26294,6 +26307,45 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IList.Items
   nameWithType: IList.Items
+- uid: PnP.Core.Model.SharePoint.IList.LastItemDeletedDate
+  name: LastItemDeletedDate
+  href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_LastItemDeletedDate
+  commentId: P:PnP.Core.Model.SharePoint.IList.LastItemDeletedDate
+  fullName: PnP.Core.Model.SharePoint.IList.LastItemDeletedDate
+  nameWithType: IList.LastItemDeletedDate
+- uid: PnP.Core.Model.SharePoint.IList.LastItemDeletedDate*
+  name: LastItemDeletedDate
+  href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_LastItemDeletedDate_
+  commentId: Overload:PnP.Core.Model.SharePoint.IList.LastItemDeletedDate
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IList.LastItemDeletedDate
+  nameWithType: IList.LastItemDeletedDate
+- uid: PnP.Core.Model.SharePoint.IList.LastItemModifiedDate
+  name: LastItemModifiedDate
+  href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_LastItemModifiedDate
+  commentId: P:PnP.Core.Model.SharePoint.IList.LastItemModifiedDate
+  fullName: PnP.Core.Model.SharePoint.IList.LastItemModifiedDate
+  nameWithType: IList.LastItemModifiedDate
+- uid: PnP.Core.Model.SharePoint.IList.LastItemModifiedDate*
+  name: LastItemModifiedDate
+  href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_LastItemModifiedDate_
+  commentId: Overload:PnP.Core.Model.SharePoint.IList.LastItemModifiedDate
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IList.LastItemModifiedDate
+  nameWithType: IList.LastItemModifiedDate
+- uid: PnP.Core.Model.SharePoint.IList.LastItemUserModifiedDate
+  name: LastItemUserModifiedDate
+  href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_LastItemUserModifiedDate
+  commentId: P:PnP.Core.Model.SharePoint.IList.LastItemUserModifiedDate
+  fullName: PnP.Core.Model.SharePoint.IList.LastItemUserModifiedDate
+  nameWithType: IList.LastItemUserModifiedDate
+- uid: PnP.Core.Model.SharePoint.IList.LastItemUserModifiedDate*
+  name: LastItemUserModifiedDate
+  href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_LastItemUserModifiedDate_
+  commentId: Overload:PnP.Core.Model.SharePoint.IList.LastItemUserModifiedDate
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IList.LastItemUserModifiedDate
+  nameWithType: IList.LastItemUserModifiedDate
 - uid: PnP.Core.Model.SharePoint.IList.ListExperience
   name: ListExperience
   href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_ListExperience
