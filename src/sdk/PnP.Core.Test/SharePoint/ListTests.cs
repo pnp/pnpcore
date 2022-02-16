@@ -1067,7 +1067,8 @@ namespace PnP.Core.Test.SharePoint
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 var list = await context.Web.Lists.GetByServerRelativeUrlAsync($"{context.Uri.LocalPath}/shared%20documents", p => p.IsApplicationList, 
-                    p => p.IsCatalog, p=>p.IsDefaultDocumentLibrary, p => p.IsPrivate, p => p.IsSiteAssetsLibrary, p => p.IsSystemList);
+                    p => p.IsCatalog, p=>p.IsDefaultDocumentLibrary, p => p.IsPrivate, p => p.IsSiteAssetsLibrary, p => p.IsSystemList,
+                    p => p.Created, p => p.LastItemDeletedDate, p => p.LastItemModifiedDate, p => p.LastItemUserModifiedDate);
 
                 Assert.IsTrue(list.Requested);
                 Assert.AreEqual(list.IsApplicationList, false);
@@ -1076,6 +1077,10 @@ namespace PnP.Core.Test.SharePoint
                 Assert.AreEqual(list.IsPrivate, false);
                 Assert.AreEqual(list.IsSiteAssetsLibrary, false);
                 Assert.AreEqual(list.IsSystemList, false);
+                Assert.IsTrue(list.Created > DateTime.MinValue && list.Created < DateTime.Now);
+                Assert.IsTrue(list.LastItemDeletedDate > DateTime.MinValue && list.LastItemDeletedDate < DateTime.Now);
+                Assert.IsTrue(list.LastItemModifiedDate > DateTime.MinValue && list.LastItemModifiedDate < DateTime.Now);
+                Assert.IsTrue(list.LastItemUserModifiedDate > DateTime.MinValue && list.LastItemUserModifiedDate < DateTime.Now);
 
                 list = await context.Web.Lists.GetByServerRelativeUrlAsync($"{context.Uri.LocalPath}/_catalogs/masterpage", p => p.IsApplicationList,
                     p => p.IsCatalog, p => p.IsDefaultDocumentLibrary, p => p.IsPrivate, p => p.IsSiteAssetsLibrary, p => p.IsSystemList);

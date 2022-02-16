@@ -232,6 +232,29 @@ namespace PnP.Core.Model.SharePoint
         public int ItemCount { get; }
 
         /// <summary>
+        /// Specifies the date and time that the list was created.
+        /// </summary>
+        public DateTime Created { get; }
+
+        /// <summary>
+        /// Specifies when an item in the list was last deleted. If no item has yet been deleted from the list
+        /// the list creation time is returned.
+        /// </summary>
+        public DateTime LastItemDeletedDate { get; }
+
+        /// <summary>
+        /// Specifies when an item, field, or property of the list was last modified. If no item has been created in the list,
+        /// the list creation time is returned.
+        /// </summary>
+        public DateTime LastItemModifiedDate { get; }
+
+        /// <summary>
+        /// Specifies when an item of the list was last modified by a non-system update. A non-system update is a change to a list item that is visible to users.
+        /// If no item has been created in the list, the list creation time is returned.
+        /// </summary>
+        public DateTime LastItemUserModifiedDate { get; }
+
+        /// <summary>
         /// Collection of list items in the current List object
         /// Implements <see cref="IQueryable{T}"/>. <br />
         /// See <see href="https://pnp.github.io/pnpcore/using-the-sdk/basics-getdata.html#requesting-model-collections">Requesting model collections</see> 

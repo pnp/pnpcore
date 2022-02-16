@@ -182,6 +182,14 @@ namespace PnP.Core.Model.SharePoint
 
         public int ItemCount { get => GetValue<int>(); set => SetValue(value); }
 
+        public DateTime Created { get => GetValue<DateTime>(); set => SetValue(value); }
+
+        public DateTime LastItemDeletedDate { get => GetValue<DateTime>(); set => SetValue(value); }
+
+        public DateTime LastItemModifiedDate { get => GetValue<DateTime>(); set => SetValue(value); }
+
+        public DateTime LastItemUserModifiedDate { get => GetValue<DateTime>(); set => SetValue(value); }
+
         public IFolder RootFolder { get => GetModelValue<IFolder>(); }
 
         public IInformationRightsManagementSettings InformationRightsManagementSettings { get => GetModelValue<IInformationRightsManagementSettings>(); }
