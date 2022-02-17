@@ -122,7 +122,7 @@ namespace PnP.Core.Services
                 Task delay = Task.Delay(delayTimeSpan, cancellationToken);
 
                 // Notify subscribers
-                eventHub.RequestRetry?.Invoke(new RetryEvent(request, (int)response.StatusCode, delayTimeSpan.Seconds, innermostEx));
+                eventHub.RequestRetry?.Invoke(new RetryEvent(request, response != null ? (int)response.StatusCode : 0, delayTimeSpan.Seconds, innermostEx));
 
                 // general clone request with internal CloneAsync (see CloneAsync for details) extension method 
                 // do not dispose this request as that breaks the request cloning
