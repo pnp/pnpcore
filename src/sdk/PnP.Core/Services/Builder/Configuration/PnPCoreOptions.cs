@@ -83,7 +83,7 @@ namespace PnP.Core.Services.Builder.Configuration
         /// <summary>
         /// Use the Retry-After header for calculating the delay in case of a retry. Defaults to false
         /// </summary>
-        public bool UseRetryAfterHeader { get; set; }
+        public bool UseRetryAfterHeader { get; set; } = true;
 
         /// <summary>
         /// When not using retry-after, how many times can a retry be made. Defaults to 10
