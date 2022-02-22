@@ -16,6 +16,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - EventHub for system notifications - retryevent is the first event being handled, allowing to understand when code get's throttled [jansenbe - Bert Jansen]
 - Properties on `PnPContext` to enable adding context. These properties are passed along in case of an EventHub notification [jansenbe - Bert Jansen]
 - Added `Created`, `LastItemDeletedDate`, `LastItemModifiedDate` and `LastItemUserModifiedDate` properties on `IList` [jansenbe - Bert Jansen]
+- Added `GetFlowInstances` methods on `IList` to enumerate the Power Automate Flows connected to the list [jansenbe - Bert Jansen]
 
 ### Changed
 

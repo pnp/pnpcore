@@ -1182,6 +1182,89 @@ namespace PnP.Core.Model.SharePoint
         }
         #endregion
 
+        #region Flow
+        public async Task<List<IFlowInstance>> GetFlowInstancesAsync()
+        {
+            ApiCall apiCall = BuildGetFlowInstancesApiCall();
+            var response = await RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
+
+            return ProcessFlowInstances(response.Json);
+        }
+
+        private List<IFlowInstance> ProcessFlowInstances(string json)
+        {
+            List<IFlowInstance> flowInstances = new List<IFlowInstance>();
+
+            if (!string.IsNullOrEmpty(json))
+            {
+                var parsedJson = JsonSerializer.Deserialize<JsonElement>(json, PnPConstants.JsonSerializer_PropertyNameCaseInsensitiveTrue);
+                if (parsedJson.TryGetProperty("SynchronizationData", out JsonElement synchronizationData))
+                {
+                    var cleanedSynchronizationData = synchronizationData.GetString().Replace("\\\"", "\"");
+                    var parsedFlowInstances = JsonSerializer.Deserialize<JsonElement>(cleanedSynchronizationData);
+                    if (parsedFlowInstances.TryGetProperty("value", out JsonElement flowInstanceDefinitions) && flowInstanceDefinitions.ValueKind == JsonValueKind.Array)
+                    {
+                        foreach (var flowInstanceDefinition in flowInstanceDefinitions.EnumerateArray())
+                        {
+                            FlowInstance flowInstance = new FlowInstance
+                            {
+                                Id = flowInstanceDefinition.GetProperty("id").GetString(),
+                                DisplayName = flowInstanceDefinition.GetProperty("properties").GetProperty("displayName").GetString(),
+                                Definition = flowInstanceDefinition.ToString(),
+                            };
+
+                            flowInstances.Add(flowInstance);
+                        }
+                    }
+                }
+            }
+
+            return flowInstances;
+        }
+
+        public List<IFlowInstance> GetFlowInstances()
+        {
+            return GetFlowInstancesAsync().GetAwaiter().GetResult();
+        }
+
+        public async Task<IEnumerableBatchResult<IFlowInstance>> GetFlowInstancesBatchAsync(Batch batch)
+        {
+            ApiCall apiCall = BuildGetFlowInstancesApiCall();
+            apiCall.RawEnumerableResult = new List<IFlowInstance>();
+            apiCall.RawResultsHandler = (json, apiCall) =>
+            {
+                var batchFirstRequest = batch.Requests.First().Value;
+                ApiCallResponse response = new ApiCallResponse(apiCall, json, System.Net.HttpStatusCode.OK, batchFirstRequest.Id, batchFirstRequest.ResponseHeaders);
+                ((List<IFlowInstance>)apiCall.RawEnumerableResult).AddRange(ProcessFlowInstances(response.Json).ToList());
+            };
+
+            var batchRequest = await RawRequestBatchAsync(batch, apiCall, HttpMethod.Post).ConfigureAwait(false);
+
+            return new BatchEnumerableBatchResult<IFlowInstance>(batch, batchRequest.Id, (IReadOnlyList<IFlowInstance>)apiCall.RawEnumerableResult);
+
+        }
+
+        public IEnumerableBatchResult<IFlowInstance> GetFlowInstancesBatch(Batch batch)
+        {
+            return GetFlowInstancesBatchAsync(batch).GetAwaiter().GetResult();
+        }
+
+        public async Task<IEnumerableBatchResult<IFlowInstance>> GetFlowInstancesBatchAsync()
+        {
+            return await GetFlowInstancesBatchAsync(PnPContext.CurrentBatch).ConfigureAwait(false);
+        }
+
+        public IEnumerableBatchResult<IFlowInstance> GetFlowInstancesBatch()
+        {
+            return GetFlowInstancesBatchAsync().GetAwaiter().GetResult();
+        }
+
+        private ApiCall BuildGetFlowInstancesApiCall()
+        {
+            return new ApiCall($"_api/web/lists(guid'{Id}')/syncflowinstances", ApiType.SPORest);
+        }
+        #endregion
+
         #endregion
     }
 }

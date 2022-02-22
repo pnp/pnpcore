@@ -660,6 +660,44 @@ namespace PnP.Core.Model.SharePoint
         /// </summary>
         /// <returns>Information about the created classify and extract requests</returns>
         ISyntexClassifyAndExtractResult ClassifyAndExtractOffPeak();
+
+        /// <summary>
+        /// Returns a list of flow instances connected to this list
+        /// </summary>
+        /// <returns>List of connected flow instances</returns>
+        Task<List<IFlowInstance>> GetFlowInstancesAsync();
+
+        /// <summary>
+        /// Returns a list of flow instances connected to this list
+        /// </summary>
+        /// <returns>List of connected flow instances</returns>
+        List<IFlowInstance> GetFlowInstances();
+
+        /// <summary>
+        /// Returns a list of flow instances connected to this list
+        /// </summary>
+        /// <param name="batch">Batch to add this request to </param>
+        /// <returns>List of connected flow instances</returns>
+        Task<IEnumerableBatchResult<IFlowInstance>> GetFlowInstancesBatchAsync(Batch batch);
+
+        /// <summary>
+        /// Returns a list of flow instances connected to this list
+        /// </summary>
+        /// <param name="batch">Batch to add this request to </param>
+        /// <returns>List of connected flow instances</returns>
+        IEnumerableBatchResult<IFlowInstance> GetFlowInstancesBatch(Batch batch);
+
+        /// <summary>
+        /// Returns a list of flow instances connected to this list
+        /// </summary>
+        /// <returns>List of connected flow instances</returns>
+        Task<IEnumerableBatchResult<IFlowInstance>> GetFlowInstancesBatchAsync();
+
+        /// <summary>
+        /// Returns a list of flow instances connected to this list
+        /// </summary>
+        /// <returns>List of connected flow instances</returns>
+        IEnumerableBatchResult<IFlowInstance> GetFlowInstancesBatch();
         #endregion
     }
 }
