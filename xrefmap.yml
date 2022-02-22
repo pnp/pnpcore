@@ -23752,6 +23752,51 @@ references:
   commentId: T:PnP.Core.Model.SharePoint.IFileVersionEventCollection
   fullName: PnP.Core.Model.SharePoint.IFileVersionEventCollection
   nameWithType: IFileVersionEventCollection
+- uid: PnP.Core.Model.SharePoint.IFlowInstance
+  name: IFlowInstance
+  href: api/PnP.Core.Model.SharePoint.IFlowInstance.html
+  commentId: T:PnP.Core.Model.SharePoint.IFlowInstance
+  fullName: PnP.Core.Model.SharePoint.IFlowInstance
+  nameWithType: IFlowInstance
+- uid: PnP.Core.Model.SharePoint.IFlowInstance.Definition
+  name: Definition
+  href: api/PnP.Core.Model.SharePoint.IFlowInstance.html#PnP_Core_Model_SharePoint_IFlowInstance_Definition
+  commentId: P:PnP.Core.Model.SharePoint.IFlowInstance.Definition
+  fullName: PnP.Core.Model.SharePoint.IFlowInstance.Definition
+  nameWithType: IFlowInstance.Definition
+- uid: PnP.Core.Model.SharePoint.IFlowInstance.Definition*
+  name: Definition
+  href: api/PnP.Core.Model.SharePoint.IFlowInstance.html#PnP_Core_Model_SharePoint_IFlowInstance_Definition_
+  commentId: Overload:PnP.Core.Model.SharePoint.IFlowInstance.Definition
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IFlowInstance.Definition
+  nameWithType: IFlowInstance.Definition
+- uid: PnP.Core.Model.SharePoint.IFlowInstance.DisplayName
+  name: DisplayName
+  href: api/PnP.Core.Model.SharePoint.IFlowInstance.html#PnP_Core_Model_SharePoint_IFlowInstance_DisplayName
+  commentId: P:PnP.Core.Model.SharePoint.IFlowInstance.DisplayName
+  fullName: PnP.Core.Model.SharePoint.IFlowInstance.DisplayName
+  nameWithType: IFlowInstance.DisplayName
+- uid: PnP.Core.Model.SharePoint.IFlowInstance.DisplayName*
+  name: DisplayName
+  href: api/PnP.Core.Model.SharePoint.IFlowInstance.html#PnP_Core_Model_SharePoint_IFlowInstance_DisplayName_
+  commentId: Overload:PnP.Core.Model.SharePoint.IFlowInstance.DisplayName
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IFlowInstance.DisplayName
+  nameWithType: IFlowInstance.DisplayName
+- uid: PnP.Core.Model.SharePoint.IFlowInstance.Id
+  name: Id
+  href: api/PnP.Core.Model.SharePoint.IFlowInstance.html#PnP_Core_Model_SharePoint_IFlowInstance_Id
+  commentId: P:PnP.Core.Model.SharePoint.IFlowInstance.Id
+  fullName: PnP.Core.Model.SharePoint.IFlowInstance.Id
+  nameWithType: IFlowInstance.Id
+- uid: PnP.Core.Model.SharePoint.IFlowInstance.Id*
+  name: Id
+  href: api/PnP.Core.Model.SharePoint.IFlowInstance.html#PnP_Core_Model_SharePoint_IFlowInstance_Id_
+  commentId: Overload:PnP.Core.Model.SharePoint.IFlowInstance.Id
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IFlowInstance.Id
+  nameWithType: IFlowInstance.Id
 - uid: PnP.Core.Model.SharePoint.IFolder
   name: IFolder
   href: api/PnP.Core.Model.SharePoint.IFolder.html
@@ -26112,6 +26157,70 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IList.GetComplianceTagBatchAsync
   nameWithType: IList.GetComplianceTagBatchAsync
+- uid: PnP.Core.Model.SharePoint.IList.GetFlowInstances
+  name: GetFlowInstances()
+  href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_GetFlowInstances
+  commentId: M:PnP.Core.Model.SharePoint.IList.GetFlowInstances
+  fullName: PnP.Core.Model.SharePoint.IList.GetFlowInstances()
+  nameWithType: IList.GetFlowInstances()
+- uid: PnP.Core.Model.SharePoint.IList.GetFlowInstances*
+  name: GetFlowInstances
+  href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_GetFlowInstances_
+  commentId: Overload:PnP.Core.Model.SharePoint.IList.GetFlowInstances
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IList.GetFlowInstances
+  nameWithType: IList.GetFlowInstances
+- uid: PnP.Core.Model.SharePoint.IList.GetFlowInstancesAsync
+  name: GetFlowInstancesAsync()
+  href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_GetFlowInstancesAsync
+  commentId: M:PnP.Core.Model.SharePoint.IList.GetFlowInstancesAsync
+  fullName: PnP.Core.Model.SharePoint.IList.GetFlowInstancesAsync()
+  nameWithType: IList.GetFlowInstancesAsync()
+- uid: PnP.Core.Model.SharePoint.IList.GetFlowInstancesAsync*
+  name: GetFlowInstancesAsync
+  href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_GetFlowInstancesAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.IList.GetFlowInstancesAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IList.GetFlowInstancesAsync
+  nameWithType: IList.GetFlowInstancesAsync
+- uid: PnP.Core.Model.SharePoint.IList.GetFlowInstancesBatch
+  name: GetFlowInstancesBatch()
+  href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_GetFlowInstancesBatch
+  commentId: M:PnP.Core.Model.SharePoint.IList.GetFlowInstancesBatch
+  fullName: PnP.Core.Model.SharePoint.IList.GetFlowInstancesBatch()
+  nameWithType: IList.GetFlowInstancesBatch()
+- uid: PnP.Core.Model.SharePoint.IList.GetFlowInstancesBatch(PnP.Core.Services.Batch)
+  name: GetFlowInstancesBatch(Batch)
+  href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_GetFlowInstancesBatch_PnP_Core_Services_Batch_
+  commentId: M:PnP.Core.Model.SharePoint.IList.GetFlowInstancesBatch(PnP.Core.Services.Batch)
+  fullName: PnP.Core.Model.SharePoint.IList.GetFlowInstancesBatch(PnP.Core.Services.Batch)
+  nameWithType: IList.GetFlowInstancesBatch(Batch)
+- uid: PnP.Core.Model.SharePoint.IList.GetFlowInstancesBatch*
+  name: GetFlowInstancesBatch
+  href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_GetFlowInstancesBatch_
+  commentId: Overload:PnP.Core.Model.SharePoint.IList.GetFlowInstancesBatch
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IList.GetFlowInstancesBatch
+  nameWithType: IList.GetFlowInstancesBatch
+- uid: PnP.Core.Model.SharePoint.IList.GetFlowInstancesBatchAsync
+  name: GetFlowInstancesBatchAsync()
+  href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_GetFlowInstancesBatchAsync
+  commentId: M:PnP.Core.Model.SharePoint.IList.GetFlowInstancesBatchAsync
+  fullName: PnP.Core.Model.SharePoint.IList.GetFlowInstancesBatchAsync()
+  nameWithType: IList.GetFlowInstancesBatchAsync()
+- uid: PnP.Core.Model.SharePoint.IList.GetFlowInstancesBatchAsync(PnP.Core.Services.Batch)
+  name: GetFlowInstancesBatchAsync(Batch)
+  href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_GetFlowInstancesBatchAsync_PnP_Core_Services_Batch_
+  commentId: M:PnP.Core.Model.SharePoint.IList.GetFlowInstancesBatchAsync(PnP.Core.Services.Batch)
+  fullName: PnP.Core.Model.SharePoint.IList.GetFlowInstancesBatchAsync(PnP.Core.Services.Batch)
+  nameWithType: IList.GetFlowInstancesBatchAsync(Batch)
+- uid: PnP.Core.Model.SharePoint.IList.GetFlowInstancesBatchAsync*
+  name: GetFlowInstancesBatchAsync
+  href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_GetFlowInstancesBatchAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.IList.GetFlowInstancesBatchAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IList.GetFlowInstancesBatchAsync
+  nameWithType: IList.GetFlowInstancesBatchAsync
 - uid: PnP.Core.Model.SharePoint.IList.Hidden
   name: Hidden
   href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_Hidden
