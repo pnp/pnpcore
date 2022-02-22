@@ -1200,20 +1200,23 @@ namespace PnP.Core.Model.SharePoint
                 var parsedJson = JsonSerializer.Deserialize<JsonElement>(json, PnPConstants.JsonSerializer_PropertyNameCaseInsensitiveTrue);
                 if (parsedJson.TryGetProperty("SynchronizationData", out JsonElement synchronizationData))
                 {
-                    var cleanedSynchronizationData = synchronizationData.GetString().Replace("\\\"", "\"");
-                    var parsedFlowInstances = JsonSerializer.Deserialize<JsonElement>(cleanedSynchronizationData);
-                    if (parsedFlowInstances.TryGetProperty("value", out JsonElement flowInstanceDefinitions) && flowInstanceDefinitions.ValueKind == JsonValueKind.Array)
+                    if (synchronizationData.ValueKind != JsonValueKind.Null)
                     {
-                        foreach (var flowInstanceDefinition in flowInstanceDefinitions.EnumerateArray())
+                        var cleanedSynchronizationData = synchronizationData.GetString().Replace("\\\"", "\"");
+                        var parsedFlowInstances = JsonSerializer.Deserialize<JsonElement>(cleanedSynchronizationData);
+                        if (parsedFlowInstances.TryGetProperty("value", out JsonElement flowInstanceDefinitions) && flowInstanceDefinitions.ValueKind == JsonValueKind.Array)
                         {
-                            FlowInstance flowInstance = new FlowInstance
+                            foreach (var flowInstanceDefinition in flowInstanceDefinitions.EnumerateArray())
                             {
-                                Id = flowInstanceDefinition.GetProperty("id").GetString(),
-                                DisplayName = flowInstanceDefinition.GetProperty("properties").GetProperty("displayName").GetString(),
-                                Definition = flowInstanceDefinition.ToString(),
-                            };
+                                FlowInstance flowInstance = new FlowInstance
+                                {
+                                    Id = flowInstanceDefinition.GetProperty("id").GetString(),
+                                    DisplayName = flowInstanceDefinition.GetProperty("properties").GetProperty("displayName").GetString(),
+                                    Definition = flowInstanceDefinition.ToString(),
+                                };
 
-                            flowInstances.Add(flowInstance);
+                                flowInstances.Add(flowInstance);
+                            }
                         }
                     }
                 }
