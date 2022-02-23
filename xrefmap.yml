@@ -31818,6 +31818,64 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IRegionalSettings.TimeZones
   nameWithType: IRegionalSettings.TimeZones
+- uid: PnP.Core.Model.SharePoint.ISearchResult
+  name: ISearchResult
+  href: api/PnP.Core.Model.SharePoint.ISearchResult.html
+  commentId: T:PnP.Core.Model.SharePoint.ISearchResult
+  fullName: PnP.Core.Model.SharePoint.ISearchResult
+  nameWithType: ISearchResult
+- uid: PnP.Core.Model.SharePoint.ISearchResult.ElapsedTime
+  name: ElapsedTime
+  href: api/PnP.Core.Model.SharePoint.ISearchResult.html#PnP_Core_Model_SharePoint_ISearchResult_ElapsedTime
+  commentId: P:PnP.Core.Model.SharePoint.ISearchResult.ElapsedTime
+  fullName: PnP.Core.Model.SharePoint.ISearchResult.ElapsedTime
+  nameWithType: ISearchResult.ElapsedTime
+- uid: PnP.Core.Model.SharePoint.ISearchResult.ElapsedTime*
+  name: ElapsedTime
+  href: api/PnP.Core.Model.SharePoint.ISearchResult.html#PnP_Core_Model_SharePoint_ISearchResult_ElapsedTime_
+  commentId: Overload:PnP.Core.Model.SharePoint.ISearchResult.ElapsedTime
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.ISearchResult.ElapsedTime
+  nameWithType: ISearchResult.ElapsedTime
+- uid: PnP.Core.Model.SharePoint.ISearchResult.Rows
+  name: Rows
+  href: api/PnP.Core.Model.SharePoint.ISearchResult.html#PnP_Core_Model_SharePoint_ISearchResult_Rows
+  commentId: P:PnP.Core.Model.SharePoint.ISearchResult.Rows
+  fullName: PnP.Core.Model.SharePoint.ISearchResult.Rows
+  nameWithType: ISearchResult.Rows
+- uid: PnP.Core.Model.SharePoint.ISearchResult.Rows*
+  name: Rows
+  href: api/PnP.Core.Model.SharePoint.ISearchResult.html#PnP_Core_Model_SharePoint_ISearchResult_Rows_
+  commentId: Overload:PnP.Core.Model.SharePoint.ISearchResult.Rows
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.ISearchResult.Rows
+  nameWithType: ISearchResult.Rows
+- uid: PnP.Core.Model.SharePoint.ISearchResult.TotalRows
+  name: TotalRows
+  href: api/PnP.Core.Model.SharePoint.ISearchResult.html#PnP_Core_Model_SharePoint_ISearchResult_TotalRows
+  commentId: P:PnP.Core.Model.SharePoint.ISearchResult.TotalRows
+  fullName: PnP.Core.Model.SharePoint.ISearchResult.TotalRows
+  nameWithType: ISearchResult.TotalRows
+- uid: PnP.Core.Model.SharePoint.ISearchResult.TotalRows*
+  name: TotalRows
+  href: api/PnP.Core.Model.SharePoint.ISearchResult.html#PnP_Core_Model_SharePoint_ISearchResult_TotalRows_
+  commentId: Overload:PnP.Core.Model.SharePoint.ISearchResult.TotalRows
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.ISearchResult.TotalRows
+  nameWithType: ISearchResult.TotalRows
+- uid: PnP.Core.Model.SharePoint.ISearchResult.TotalRowsIncludingDuplicates
+  name: TotalRowsIncludingDuplicates
+  href: api/PnP.Core.Model.SharePoint.ISearchResult.html#PnP_Core_Model_SharePoint_ISearchResult_TotalRowsIncludingDuplicates
+  commentId: P:PnP.Core.Model.SharePoint.ISearchResult.TotalRowsIncludingDuplicates
+  fullName: PnP.Core.Model.SharePoint.ISearchResult.TotalRowsIncludingDuplicates
+  nameWithType: ISearchResult.TotalRowsIncludingDuplicates
+- uid: PnP.Core.Model.SharePoint.ISearchResult.TotalRowsIncludingDuplicates*
+  name: TotalRowsIncludingDuplicates
+  href: api/PnP.Core.Model.SharePoint.ISearchResult.html#PnP_Core_Model_SharePoint_ISearchResult_TotalRowsIncludingDuplicates_
+  commentId: Overload:PnP.Core.Model.SharePoint.ISearchResult.TotalRowsIncludingDuplicates
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.ISearchResult.TotalRowsIncludingDuplicates
+  nameWithType: ISearchResult.TotalRowsIncludingDuplicates
 - uid: PnP.Core.Model.SharePoint.ISecurableObject
   name: ISecurableObject
   href: api/PnP.Core.Model.SharePoint.ISecurableObject.html
@@ -38557,6 +38615,70 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IWeb.SaveSiteAsTemplateEnabled
   nameWithType: IWeb.SaveSiteAsTemplateEnabled
+- uid: PnP.Core.Model.SharePoint.IWeb.Search(PnP.Core.Model.SharePoint.SearchOptions)
+  name: Search(SearchOptions)
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_Search_PnP_Core_Model_SharePoint_SearchOptions_
+  commentId: M:PnP.Core.Model.SharePoint.IWeb.Search(PnP.Core.Model.SharePoint.SearchOptions)
+  fullName: PnP.Core.Model.SharePoint.IWeb.Search(PnP.Core.Model.SharePoint.SearchOptions)
+  nameWithType: IWeb.Search(SearchOptions)
+- uid: PnP.Core.Model.SharePoint.IWeb.Search*
+  name: Search
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_Search_
+  commentId: Overload:PnP.Core.Model.SharePoint.IWeb.Search
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IWeb.Search
+  nameWithType: IWeb.Search
+- uid: PnP.Core.Model.SharePoint.IWeb.SearchAsync(PnP.Core.Model.SharePoint.SearchOptions)
+  name: SearchAsync(SearchOptions)
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_SearchAsync_PnP_Core_Model_SharePoint_SearchOptions_
+  commentId: M:PnP.Core.Model.SharePoint.IWeb.SearchAsync(PnP.Core.Model.SharePoint.SearchOptions)
+  fullName: PnP.Core.Model.SharePoint.IWeb.SearchAsync(PnP.Core.Model.SharePoint.SearchOptions)
+  nameWithType: IWeb.SearchAsync(SearchOptions)
+- uid: PnP.Core.Model.SharePoint.IWeb.SearchAsync*
+  name: SearchAsync
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_SearchAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.IWeb.SearchAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IWeb.SearchAsync
+  nameWithType: IWeb.SearchAsync
+- uid: PnP.Core.Model.SharePoint.IWeb.SearchBatch(PnP.Core.Model.SharePoint.SearchOptions)
+  name: SearchBatch(SearchOptions)
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_SearchBatch_PnP_Core_Model_SharePoint_SearchOptions_
+  commentId: M:PnP.Core.Model.SharePoint.IWeb.SearchBatch(PnP.Core.Model.SharePoint.SearchOptions)
+  fullName: PnP.Core.Model.SharePoint.IWeb.SearchBatch(PnP.Core.Model.SharePoint.SearchOptions)
+  nameWithType: IWeb.SearchBatch(SearchOptions)
+- uid: PnP.Core.Model.SharePoint.IWeb.SearchBatch(PnP.Core.Services.Batch,PnP.Core.Model.SharePoint.SearchOptions)
+  name: SearchBatch(Batch, SearchOptions)
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_SearchBatch_PnP_Core_Services_Batch_PnP_Core_Model_SharePoint_SearchOptions_
+  commentId: M:PnP.Core.Model.SharePoint.IWeb.SearchBatch(PnP.Core.Services.Batch,PnP.Core.Model.SharePoint.SearchOptions)
+  fullName: PnP.Core.Model.SharePoint.IWeb.SearchBatch(PnP.Core.Services.Batch, PnP.Core.Model.SharePoint.SearchOptions)
+  nameWithType: IWeb.SearchBatch(Batch, SearchOptions)
+- uid: PnP.Core.Model.SharePoint.IWeb.SearchBatch*
+  name: SearchBatch
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_SearchBatch_
+  commentId: Overload:PnP.Core.Model.SharePoint.IWeb.SearchBatch
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IWeb.SearchBatch
+  nameWithType: IWeb.SearchBatch
+- uid: PnP.Core.Model.SharePoint.IWeb.SearchBatchAsync(PnP.Core.Model.SharePoint.SearchOptions)
+  name: SearchBatchAsync(SearchOptions)
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_SearchBatchAsync_PnP_Core_Model_SharePoint_SearchOptions_
+  commentId: M:PnP.Core.Model.SharePoint.IWeb.SearchBatchAsync(PnP.Core.Model.SharePoint.SearchOptions)
+  fullName: PnP.Core.Model.SharePoint.IWeb.SearchBatchAsync(PnP.Core.Model.SharePoint.SearchOptions)
+  nameWithType: IWeb.SearchBatchAsync(SearchOptions)
+- uid: PnP.Core.Model.SharePoint.IWeb.SearchBatchAsync(PnP.Core.Services.Batch,PnP.Core.Model.SharePoint.SearchOptions)
+  name: SearchBatchAsync(Batch, SearchOptions)
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_SearchBatchAsync_PnP_Core_Services_Batch_PnP_Core_Model_SharePoint_SearchOptions_
+  commentId: M:PnP.Core.Model.SharePoint.IWeb.SearchBatchAsync(PnP.Core.Services.Batch,PnP.Core.Model.SharePoint.SearchOptions)
+  fullName: PnP.Core.Model.SharePoint.IWeb.SearchBatchAsync(PnP.Core.Services.Batch, PnP.Core.Model.SharePoint.SearchOptions)
+  nameWithType: IWeb.SearchBatchAsync(Batch, SearchOptions)
+- uid: PnP.Core.Model.SharePoint.IWeb.SearchBatchAsync*
+  name: SearchBatchAsync
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_SearchBatchAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.IWeb.SearchBatchAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IWeb.SearchBatchAsync
+  nameWithType: IWeb.SearchBatchAsync
 - uid: PnP.Core.Model.SharePoint.IWeb.SearchBoxInNavBar
   name: SearchBoxInNavBar
   href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_SearchBoxInNavBar
@@ -40845,6 +40967,90 @@ references:
   commentId: F:PnP.Core.Model.SharePoint.SearchBoxInNavBar.ModernOnly
   fullName: PnP.Core.Model.SharePoint.SearchBoxInNavBar.ModernOnly
   nameWithType: SearchBoxInNavBar.ModernOnly
+- uid: PnP.Core.Model.SharePoint.SearchOptions
+  name: SearchOptions
+  href: api/PnP.Core.Model.SharePoint.SearchOptions.html
+  commentId: T:PnP.Core.Model.SharePoint.SearchOptions
+  fullName: PnP.Core.Model.SharePoint.SearchOptions
+  nameWithType: SearchOptions
+- uid: PnP.Core.Model.SharePoint.SearchOptions.#ctor(System.String)
+  name: SearchOptions(String)
+  href: api/PnP.Core.Model.SharePoint.SearchOptions.html#PnP_Core_Model_SharePoint_SearchOptions__ctor_System_String_
+  commentId: M:PnP.Core.Model.SharePoint.SearchOptions.#ctor(System.String)
+  fullName: PnP.Core.Model.SharePoint.SearchOptions.SearchOptions(System.String)
+  nameWithType: SearchOptions.SearchOptions(String)
+- uid: PnP.Core.Model.SharePoint.SearchOptions.#ctor*
+  name: SearchOptions
+  href: api/PnP.Core.Model.SharePoint.SearchOptions.html#PnP_Core_Model_SharePoint_SearchOptions__ctor_
+  commentId: Overload:PnP.Core.Model.SharePoint.SearchOptions.#ctor
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.SearchOptions.SearchOptions
+  nameWithType: SearchOptions.SearchOptions
+- uid: PnP.Core.Model.SharePoint.SearchOptions.ClientType
+  name: ClientType
+  href: api/PnP.Core.Model.SharePoint.SearchOptions.html#PnP_Core_Model_SharePoint_SearchOptions_ClientType
+  commentId: P:PnP.Core.Model.SharePoint.SearchOptions.ClientType
+  fullName: PnP.Core.Model.SharePoint.SearchOptions.ClientType
+  nameWithType: SearchOptions.ClientType
+- uid: PnP.Core.Model.SharePoint.SearchOptions.ClientType*
+  name: ClientType
+  href: api/PnP.Core.Model.SharePoint.SearchOptions.html#PnP_Core_Model_SharePoint_SearchOptions_ClientType_
+  commentId: Overload:PnP.Core.Model.SharePoint.SearchOptions.ClientType
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.SearchOptions.ClientType
+  nameWithType: SearchOptions.ClientType
+- uid: PnP.Core.Model.SharePoint.SearchOptions.Query
+  name: Query
+  href: api/PnP.Core.Model.SharePoint.SearchOptions.html#PnP_Core_Model_SharePoint_SearchOptions_Query
+  commentId: P:PnP.Core.Model.SharePoint.SearchOptions.Query
+  fullName: PnP.Core.Model.SharePoint.SearchOptions.Query
+  nameWithType: SearchOptions.Query
+- uid: PnP.Core.Model.SharePoint.SearchOptions.Query*
+  name: Query
+  href: api/PnP.Core.Model.SharePoint.SearchOptions.html#PnP_Core_Model_SharePoint_SearchOptions_Query_
+  commentId: Overload:PnP.Core.Model.SharePoint.SearchOptions.Query
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.SearchOptions.Query
+  nameWithType: SearchOptions.Query
+- uid: PnP.Core.Model.SharePoint.SearchOptions.RowLimit
+  name: RowLimit
+  href: api/PnP.Core.Model.SharePoint.SearchOptions.html#PnP_Core_Model_SharePoint_SearchOptions_RowLimit
+  commentId: P:PnP.Core.Model.SharePoint.SearchOptions.RowLimit
+  fullName: PnP.Core.Model.SharePoint.SearchOptions.RowLimit
+  nameWithType: SearchOptions.RowLimit
+- uid: PnP.Core.Model.SharePoint.SearchOptions.RowLimit*
+  name: RowLimit
+  href: api/PnP.Core.Model.SharePoint.SearchOptions.html#PnP_Core_Model_SharePoint_SearchOptions_RowLimit_
+  commentId: Overload:PnP.Core.Model.SharePoint.SearchOptions.RowLimit
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.SearchOptions.RowLimit
+  nameWithType: SearchOptions.RowLimit
+- uid: PnP.Core.Model.SharePoint.SearchOptions.SelectProperties
+  name: SelectProperties
+  href: api/PnP.Core.Model.SharePoint.SearchOptions.html#PnP_Core_Model_SharePoint_SearchOptions_SelectProperties
+  commentId: P:PnP.Core.Model.SharePoint.SearchOptions.SelectProperties
+  fullName: PnP.Core.Model.SharePoint.SearchOptions.SelectProperties
+  nameWithType: SearchOptions.SelectProperties
+- uid: PnP.Core.Model.SharePoint.SearchOptions.SelectProperties*
+  name: SelectProperties
+  href: api/PnP.Core.Model.SharePoint.SearchOptions.html#PnP_Core_Model_SharePoint_SearchOptions_SelectProperties_
+  commentId: Overload:PnP.Core.Model.SharePoint.SearchOptions.SelectProperties
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.SearchOptions.SelectProperties
+  nameWithType: SearchOptions.SelectProperties
+- uid: PnP.Core.Model.SharePoint.SearchOptions.TrimDuplicates
+  name: TrimDuplicates
+  href: api/PnP.Core.Model.SharePoint.SearchOptions.html#PnP_Core_Model_SharePoint_SearchOptions_TrimDuplicates
+  commentId: P:PnP.Core.Model.SharePoint.SearchOptions.TrimDuplicates
+  fullName: PnP.Core.Model.SharePoint.SearchOptions.TrimDuplicates
+  nameWithType: SearchOptions.TrimDuplicates
+- uid: PnP.Core.Model.SharePoint.SearchOptions.TrimDuplicates*
+  name: TrimDuplicates
+  href: api/PnP.Core.Model.SharePoint.SearchOptions.html#PnP_Core_Model_SharePoint_SearchOptions_TrimDuplicates_
+  commentId: Overload:PnP.Core.Model.SharePoint.SearchOptions.TrimDuplicates
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.SearchOptions.TrimDuplicates
+  nameWithType: SearchOptions.TrimDuplicates
 - uid: PnP.Core.Model.SharePoint.SearchScope
   name: SearchScope
   href: api/PnP.Core.Model.SharePoint.SearchScope.html
