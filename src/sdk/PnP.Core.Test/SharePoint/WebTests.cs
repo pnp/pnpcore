@@ -1486,6 +1486,66 @@ namespace PnP.Core.Test.SharePoint
             {
                 Assert.IsTrue(context.Web.HasCommunicationSiteFeatures());
             }
-        }       
+        }
+
+        [TestMethod]
+        public async Task SearchBasicTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            {
+
+                SearchOptions searchOptions = new SearchOptions("contenttypeid: \"0x010100*\"")
+                {
+                    RowLimit = 10,
+                    TrimDuplicates = false,
+                    SelectProperties = new System.Collections.Generic.List<string>() { "Path", "Url", "Title", "ListId" }
+                };
+
+                var searchResult = context.Web.Search(searchOptions);
+
+                Assert.IsTrue(searchResult != null);
+                Assert.IsTrue(searchResult.ElapsedTime > 0);
+                Assert.IsTrue(searchResult.TotalRows > 0);
+                Assert.IsTrue(searchResult.TotalRowsIncludingDuplicates > 0);
+                Assert.IsTrue(searchResult.Rows.Count == 10);
+                foreach(var row in searchResult.Rows)
+                {
+                    Assert.IsTrue(row.ContainsKey("Path"));
+                }
+            }
+        }
+
+        [TestMethod]
+        public async Task SearchBasicBatchTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            {
+
+                SearchOptions searchOptions = new SearchOptions("contenttypeid: \"0x010100*\"")
+                {
+                    RowLimit = 10,
+                    TrimDuplicates = false,
+                    SelectProperties = new System.Collections.Generic.List<string>() { "Path", "Url", "Title", "ListId" }
+                };
+
+                var searchResult = context.Web.SearchBatch(searchOptions);
+                Assert.IsFalse(searchResult.IsAvailable);
+
+                await context.ExecuteAsync();
+
+                Assert.IsTrue(searchResult.IsAvailable);
+
+                Assert.IsTrue(searchResult != null);
+                Assert.IsTrue(searchResult.Result.ElapsedTime > 0);
+                Assert.IsTrue(searchResult.Result.TotalRows > 0);
+                Assert.IsTrue(searchResult.Result.TotalRowsIncludingDuplicates > 0);
+                Assert.IsTrue(searchResult.Result.Rows.Count == 10);
+
+            }
+        }
     }
 }

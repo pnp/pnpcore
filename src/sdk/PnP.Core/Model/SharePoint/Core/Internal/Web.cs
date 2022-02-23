@@ -4,12 +4,15 @@ using PnP.Core.Services;
 using System;
 using System.Collections.Generic;
 using System.Dynamic;
+using System.Globalization;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Net;
 using System.Net.Http;
+using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace PnP.Core.Model.SharePoint
 {
@@ -1244,7 +1247,7 @@ namespace PnP.Core.Model.SharePoint
         public async Task<bool> HasCommunicationSiteFeaturesAsync()
         {
             await EnsurePropertiesAsync(p => p.WebTemplate, p => p.Features).ConfigureAwait(false);
-            
+
             // Syntex Content Center did enable communication site features in a different manner
             if (IsSyntexContentCenterCheck())
             {
@@ -1268,6 +1271,233 @@ namespace PnP.Core.Model.SharePoint
         {
             return new BrandingManager(PnPContext);
         }
+        #endregion
+
+        #region Search
+
+        public async Task<ISearchResult> SearchAsync(SearchOptions query)
+        {
+            var apiCall = BuildSearchApiCall(query);
+            var response = await RawRequestAsync(apiCall, HttpMethod.Get).ConfigureAwait(false);
+
+            SearchResult searchResult = new SearchResult();
+            ProcessSearchResults(searchResult, response.Json);
+            return searchResult;
+        }
+
+        public ISearchResult Search(SearchOptions query)
+        {
+            return SearchAsync(query).GetAwaiter().GetResult();
+        }
+
+        public async Task<IBatchSingleResult<ISearchResult>> SearchBatchAsync(SearchOptions query)
+        {
+            return await SearchBatchAsync(PnPContext.CurrentBatch, query).ConfigureAwait(false);
+        }
+
+        public IBatchSingleResult<ISearchResult> SearchBatch(SearchOptions query)
+        {
+            return SearchBatchAsync(query).GetAwaiter().GetResult();
+        }
+
+        public async Task<IBatchSingleResult<ISearchResult>> SearchBatchAsync(Batch batch, SearchOptions query)
+        {
+            var apiCall = BuildSearchApiCall(query);
+            apiCall.RawSingleResult = new SearchResult();
+            apiCall.RawResultsHandler = (json, apiCall) =>
+            {
+                ProcessSearchResults(apiCall.RawSingleResult as SearchResult, json);
+            };
+
+            var batchRequest = await RawRequestBatchAsync(batch, apiCall, HttpMethod.Get).ConfigureAwait(false);
+            return new BatchSingleResult<ISearchResult>(batch, batchRequest.Id, apiCall.RawSingleResult as ISearchResult);
+        }
+
+        public IBatchSingleResult<ISearchResult> SearchBatch(Batch batch, SearchOptions query)
+        {
+            return SearchBatchAsync(batch, query).GetAwaiter().GetResult();
+        }
+
+        private void ProcessSearchResults(SearchResult searchResult, string json)
+        {            
+            if (!string.IsNullOrEmpty(json))
+            {
+                var parsedSearchResult = JsonSerializer.Deserialize<JsonElement>(json);
+                if (parsedSearchResult.ValueKind != JsonValueKind.Null)
+                {
+                    searchResult.ElapsedTime = parsedSearchResult.GetProperty("ElapsedTime").GetInt32();
+                    if (parsedSearchResult.TryGetProperty("PrimaryQueryResult", out JsonElement primaryQueryResult) && 
+                        primaryQueryResult.TryGetProperty("RelevantResults", out JsonElement relevantResults))
+                    {
+                        searchResult.TotalRows = relevantResults.GetProperty("TotalRows").GetInt64();
+                        searchResult.TotalRowsIncludingDuplicates = relevantResults.GetProperty("TotalRowsIncludingDuplicates").GetInt64();
+
+                        if (relevantResults.TryGetProperty("Table", out JsonElement table) && table.TryGetProperty("Rows", out JsonElement rows) && rows.ValueKind == JsonValueKind.Array)
+                        {
+                            foreach(var row in rows.EnumerateArray())
+                            {
+                                var processedRow = ProcessSearchResultRow(row);
+                                if (processedRow != null)
+                                {
+                                    searchResult.Rows.Add(processedRow);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        private Dictionary<string, object> ProcessSearchResultRow(JsonElement row)
+        {
+            if (row.TryGetProperty("Cells", out JsonElement cells) && cells.ValueKind == JsonValueKind.Array)
+            {
+                Dictionary<string, object> result = new Dictionary<string, object>();
+
+                foreach(var cell in cells.EnumerateArray())
+                {
+                    (string key, object value) = ProcessSearchResultCell(cell);
+                    result.Add(key, value);
+                }
+
+                return result;
+            }
+
+            return null;
+        }
+
+        private (string, object) ProcessSearchResultCell(JsonElement cell)
+        {
+            string valueType = cell.GetProperty("ValueType").GetString();
+            string key = cell.GetProperty("Key").GetString();
+            string value = cell.GetProperty("Value").GetString();
+
+            switch (valueType)
+            {
+                case "Null":
+                    {
+                       return (key, null);
+                    };
+                case "Edm.Double":
+                    {
+                        if (double.TryParse(value, NumberStyles.Number, CultureInfo.CreateSpecificCulture("en-US"), out double result))
+                        {
+                            return (key, result);
+                        }
+                        goto default;
+                    };
+                case "Edm.Decimal":
+                    {
+                        if (decimal.TryParse(value, NumberStyles.Number, CultureInfo.CreateSpecificCulture("en-US"), out decimal result))
+                        {
+                            return (key, result);
+                        }
+                        goto default;
+                    };
+                case "Edm.Float":
+                    {
+                        if (float.TryParse(value, NumberStyles.Number, CultureInfo.CreateSpecificCulture("en-US"), out float result))
+                        {
+                            return (key, result);
+                        }
+                        goto default;
+                    };
+                case "Edm.Int16":
+                    {
+                        if (short.TryParse(value, out short result))
+                        {
+                            return (key, result);
+                        }
+                        goto default;
+                    };
+                case "Edm.Int32":
+                    {
+                        if (int.TryParse(value, out int result))
+                        {
+                            return (key, result);
+                        }
+                        goto default;
+                    };
+                case "Edm.Int64":
+                    {
+                        if (long.TryParse(value, out long result))
+                        {
+                            return (key, result);
+                        }
+                        goto default;
+                    };
+                case "Edm.Guid":
+                    {
+                        if (Guid.TryParse(value, out Guid result))
+                        {
+                            return (key, result);
+                        }
+                        goto default;
+                    };
+                case "Edm.Boolean":
+                    {
+                        if (bool.TryParse(value, out bool result))
+                        {
+                            return (key, result);
+                        }
+                        goto default;
+                    };
+                case "Edm.DateTime":
+                    {
+                        if (DateTime.TryParse(value, out DateTime result))
+                        {
+                            return (key, result);
+                        }
+                        goto default;
+                    };
+                case "Edm.DateTimeOffSet":
+                    {
+                        if (DateTimeOffset.TryParse(value, out DateTimeOffset result))
+                        {
+                            return (key, result);
+                        }
+                        goto default;
+                    };
+                default:
+                    {
+                        return (key, value);
+                    }
+            }
+        }
+
+        private ApiCall BuildSearchApiCall(SearchOptions query)
+        {
+            StringBuilder uriBuilder = new StringBuilder();
+
+            uriBuilder.AppendFormat("_api/search/query?querytext='{0}'", HttpUtility.UrlEncode(query.Query?.Replace("'", "''")));
+
+            if (query.TrimDuplicates == true)
+            {
+                uriBuilder.Append("&trimduplicates=true");
+            }
+            else
+            {
+                uriBuilder.Append("&trimduplicates=false");
+            }
+
+            if (query.RowLimit.HasValue && query.RowLimit.Value > 0)
+            {
+                uriBuilder.AppendFormat("&rowlimit={0}", query.RowLimit.Value);
+            }
+
+            if (query.SelectProperties.Count > 0)
+            {
+                uriBuilder.AppendFormat("&selectproperties='{0}'", HttpUtility.UrlEncode(string.Join(",", query.SelectProperties)));
+            }
+
+            if (!string.IsNullOrEmpty(query.ClientType))
+            {
+                uriBuilder.AppendFormat("&clienttype='{0}'", query.ClientType);
+            }
+
+            return new ApiCall(uriBuilder.ToString(), ApiType.SPORest);
+        }
+
         #endregion
         #endregion
     }

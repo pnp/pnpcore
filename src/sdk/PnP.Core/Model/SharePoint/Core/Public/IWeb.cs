@@ -1039,6 +1039,53 @@ namespace PnP.Core.Model.SharePoint
         IBrandingManager GetBrandingManager();
         #endregion
 
+        #region Search
+
+        /// <summary>
+        /// Performs a search query
+        /// </summary>
+        /// <param name="query">Search query to run</param>
+        /// <returns>The results of the search query</returns>
+        Task<ISearchResult> SearchAsync(SearchOptions query);
+
+        /// <summary>
+        /// Performs a search query
+        /// </summary>
+        /// <param name="query">Search query to run</param>
+        /// <returns>The results of the search query</returns>
+        ISearchResult Search(SearchOptions query);
+
+        /// <summary>
+        /// Performs a search query
+        /// </summary>
+        /// <param name="query">Search query to run</param>
+        /// <returns>The results of the search query</returns>
+        Task<IBatchSingleResult<ISearchResult>> SearchBatchAsync(SearchOptions query);
+
+        /// <summary>
+        /// Performs a search query
+        /// </summary>
+        /// <param name="query">Search query to run</param>
+        /// <returns>The results of the search query</returns>
+        IBatchSingleResult<ISearchResult> SearchBatch(SearchOptions query);
+
+        /// <summary>
+        /// Performs a search query
+        /// </summary>
+        /// <param name="query">Search query to run</param>
+        /// <param name="batch">Batch to add this request to</param>
+        /// <returns>The results of the search query</returns>
+        Task<IBatchSingleResult<ISearchResult>> SearchBatchAsync(Batch batch, SearchOptions query);
+
+        /// <summary>
+        /// Performs a search query
+        /// </summary>
+        /// <param name="query">Search query to run</param>
+        /// <param name="batch">Batch to add this request to</param>
+        /// <returns>The results of the search query</returns>
+        IBatchSingleResult<ISearchResult> SearchBatch(Batch batch, SearchOptions query);
+        #endregion
+
         #endregion
 
         #region TO IMPLEMENT

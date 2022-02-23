@@ -17,6 +17,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Properties on `PnPContext` to enable adding context. These properties are passed along in case of an EventHub notification [jansenbe - Bert Jansen]
 - Added `Created`, `LastItemDeletedDate`, `LastItemModifiedDate` and `LastItemUserModifiedDate` properties on `IList` [jansenbe - Bert Jansen]
 - Added `GetFlowInstances` methods on `IList` to enumerate the Power Automate Flows connected to the list [jansenbe - Bert Jansen]
+- Added `Search` methods on `IWeb` offering a search experience #210 [jansenbe - Bert Jansen]
 
 ### Changed
 
