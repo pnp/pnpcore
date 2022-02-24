@@ -63,7 +63,7 @@ namespace PnP.Core.Model.SharePoint
         public List<string> RefineProperties { get; set; } = new List<string>();
 
         /// <summary>
-        /// Client type used for the search query (read only)
+        /// Client type used for the search query (defaults to ContentSearchRegular)
         /// </summary>
         public string ClientType { get; set; } = "ContentSearchRegular";
 
