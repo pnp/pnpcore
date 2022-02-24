@@ -27,5 +27,10 @@ namespace PnP.Core.Model.SharePoint
         /// </summary>
         public List<Dictionary<string, object>> Rows { get; }
 
+        /// <summary>
+        /// Collection of refinement results
+        /// </summary>
+        public Dictionary<string, List<ISearchRefinementResult>> Refinements { get; }
+
     }
 }

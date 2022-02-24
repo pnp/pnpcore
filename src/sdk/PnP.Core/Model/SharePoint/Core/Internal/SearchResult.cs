@@ -11,5 +11,7 @@ namespace PnP.Core.Model.SharePoint
         public long TotalRowsIncludingDuplicates { get; set; }
 
         public List<Dictionary<string, object>> Rows { get; } = new List<Dictionary<string, object>>();
+
+        public Dictionary<string, List<ISearchRefinementResult>> Refinements { get; } = new Dictionary<string, List<ISearchRefinementResult>>();
     }
 }

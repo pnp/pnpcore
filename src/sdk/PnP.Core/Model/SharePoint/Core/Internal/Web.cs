@@ -1319,14 +1319,16 @@ namespace PnP.Core.Model.SharePoint
         }
 
         private void ProcessSearchResults(SearchResult searchResult, string json)
-        {            
+        {
             if (!string.IsNullOrEmpty(json))
             {
                 var parsedSearchResult = JsonSerializer.Deserialize<JsonElement>(json);
                 if (parsedSearchResult.ValueKind != JsonValueKind.Null)
                 {
                     searchResult.ElapsedTime = parsedSearchResult.GetProperty("ElapsedTime").GetInt32();
-                    if (parsedSearchResult.TryGetProperty("PrimaryQueryResult", out JsonElement primaryQueryResult) && 
+
+                    // Process the result rows
+                    if (parsedSearchResult.TryGetProperty("PrimaryQueryResult", out JsonElement primaryQueryResult) &&
                         primaryQueryResult.TryGetProperty("RelevantResults", out JsonElement relevantResults))
                     {
                         searchResult.TotalRows = relevantResults.GetProperty("TotalRows").GetInt64();
@@ -1334,7 +1336,7 @@ namespace PnP.Core.Model.SharePoint
 
                         if (relevantResults.TryGetProperty("Table", out JsonElement table) && table.TryGetProperty("Rows", out JsonElement rows) && rows.ValueKind == JsonValueKind.Array)
                         {
-                            foreach(var row in rows.EnumerateArray())
+                            foreach (var row in rows.EnumerateArray())
                             {
                                 var processedRow = ProcessSearchResultRow(row);
                                 if (processedRow != null)
@@ -1344,8 +1346,43 @@ namespace PnP.Core.Model.SharePoint
                             }
                         }
                     }
+
+                    // Process the refinement rows
+                    if (parsedSearchResult.TryGetProperty("PrimaryQueryResult", out JsonElement primaryQueryResult2) &&
+                        primaryQueryResult2.TryGetProperty("RefinementResults", out JsonElement refinementResults) && refinementResults.ValueKind != JsonValueKind.Null &&
+                        refinementResults.TryGetProperty("Refiners", out JsonElement refiners) && refiners.ValueKind == JsonValueKind.Array)
+                    {
+                        foreach (var refiner in refiners.EnumerateArray())
+                        {
+                            (string usedRefiner, List<ISearchRefinementResult> refinementResultsList) = ProcessSearchRefinementRow(refiner);
+                            searchResult.Refinements.Add(usedRefiner, refinementResultsList);
+                        }
+                    }
                 }
             }
+        }
+
+        private (string, List<ISearchRefinementResult>) ProcessSearchRefinementRow(JsonElement row)
+        {
+            List<ISearchRefinementResult> results = new List<ISearchRefinementResult>();
+            string refiner = row.GetProperty("Name").GetString();
+
+            if (row.TryGetProperty("Entries", out JsonElement entries) && entries.ValueKind == JsonValueKind.Array)
+            {
+                foreach(var entry in entries.EnumerateArray())
+                {
+                    SearchRefinementResult result = new SearchRefinementResult()
+                    {
+                        Count = long.Parse(entry.GetProperty("RefinementCount").GetString()),
+                        Name = entry.GetProperty("RefinementName").GetString(),
+                        Token = entry.GetProperty("RefinementToken").GetString(),
+                        Value = entry.GetProperty("RefinementValue").GetString(),
+                    };
+                    results.Add(result);
+                }
+            }
+
+            return (refiner, results);
         }
 
         private Dictionary<string, object> ProcessSearchResultRow(JsonElement row)
@@ -1354,7 +1391,7 @@ namespace PnP.Core.Model.SharePoint
             {
                 Dictionary<string, object> result = new Dictionary<string, object>();
 
-                foreach(var cell in cells.EnumerateArray())
+                foreach (var cell in cells.EnumerateArray())
                 {
                     (string key, object value) = ProcessSearchResultCell(cell);
                     result.Add(key, value);
@@ -1376,7 +1413,7 @@ namespace PnP.Core.Model.SharePoint
             {
                 case "Null":
                     {
-                       return (key, null);
+                        return (key, null);
                     };
                 case "Edm.Double":
                     {
@@ -1480,6 +1517,16 @@ namespace PnP.Core.Model.SharePoint
                 uriBuilder.Append("&trimduplicates=false");
             }
 
+            if (query.StartRow.HasValue && query.StartRow.Value > 0)
+            {
+                uriBuilder.AppendFormat("&startrow={0}", query.StartRow.Value);
+            }
+
+            if (query.RowsPerPage.HasValue)
+            {
+                uriBuilder.AppendFormat("&rowsperpage={0}", query.RowsPerPage.Value);
+            }
+
             if (query.RowLimit.HasValue && query.RowLimit.Value > 0)
             {
                 uriBuilder.AppendFormat("&rowlimit={0}", query.RowLimit.Value);
@@ -1490,10 +1537,24 @@ namespace PnP.Core.Model.SharePoint
                 uriBuilder.AppendFormat("&selectproperties='{0}'", HttpUtility.UrlEncode(string.Join(",", query.SelectProperties)));
             }
 
+            if (query.SortProperties.Count > 0)
+            {
+                uriBuilder.AppendFormat("&sortlist='{0}'", HttpUtility.UrlEncode(string.Join(",", query.SortProperties)));
+            }
+
+            if (query.RefineProperties.Count > 0)
+            {
+                uriBuilder.AppendFormat("&refiners='{0}'", HttpUtility.UrlEncode(string.Join(",", query.RefineProperties)));
+            }
+
             if (!string.IsNullOrEmpty(query.ClientType))
             {
                 uriBuilder.AppendFormat("&clienttype='{0}'", query.ClientType);
             }
+
+            uriBuilder.Append("&enablequeryrules=false");
+
+            uriBuilder.AppendFormat("&sourceid='{0}'", HttpUtility.UrlEncode(query.ResultSourceId));
 
             return new ApiCall(uriBuilder.ToString(), ApiType.SPORest);
         }

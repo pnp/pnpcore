@@ -1496,7 +1496,7 @@ namespace PnP.Core.Test.SharePoint
             using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
             {
 
-                SearchOptions searchOptions = new SearchOptions("contenttypeid: \"0x010100*\"")
+                SearchOptions searchOptions = new SearchOptions("contenttypeid:\"0x010100*\"")
                 {
                     RowLimit = 10,
                     TrimDuplicates = false,
@@ -1525,7 +1525,7 @@ namespace PnP.Core.Test.SharePoint
             using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
             {
 
-                SearchOptions searchOptions = new SearchOptions("contenttypeid: \"0x010100*\"")
+                SearchOptions searchOptions = new SearchOptions("contenttypeid:\"0x010100*\"")
                 {
                     RowLimit = 10,
                     TrimDuplicates = false,
@@ -1545,6 +1545,81 @@ namespace PnP.Core.Test.SharePoint
                 Assert.IsTrue(searchResult.Result.TotalRowsIncludingDuplicates > 0);
                 Assert.IsTrue(searchResult.Result.Rows.Count == 10);
 
+            }
+        }
+
+        [TestMethod]
+        public void SearchSortingPagingTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            {
+                SearchOptions searchOptions = new SearchOptions("contenttypeid:\"0x010100*\"")
+                {
+                    RowsPerPage = 10,
+                    TrimDuplicates = false,
+                    SelectProperties = new System.Collections.Generic.List<string>() { "Path", "Url", "Title", "ListId" },
+                    SortProperties = new System.Collections.Generic.List<SortOption>() { new SortOption("DocId"), new SortOption("ModifiedBy", SortDirection.Ascending) },
+                };
+
+                var searchResult = context.Web.Search(searchOptions);
+
+                Assert.IsTrue(searchResult != null);
+                Assert.IsTrue(searchResult.ElapsedTime > 0);
+                Assert.IsTrue(searchResult.TotalRows > 0);
+                Assert.IsTrue(searchResult.TotalRowsIncludingDuplicates > 0);
+                Assert.IsTrue(searchResult.Rows.Count == 10);
+
+                // Load next page
+                searchOptions.StartRow = 10;
+                searchResult = context.Web.Search(searchOptions);
+
+                Assert.IsTrue(searchResult != null);
+                Assert.IsTrue(searchResult.ElapsedTime > 0);
+                Assert.IsTrue(searchResult.TotalRows > 0);
+                Assert.IsTrue(searchResult.TotalRowsIncludingDuplicates > 0);
+                Assert.IsTrue(searchResult.Rows.Count == 10);
+            }
+        }
+
+        [TestMethod]
+        public void SearchRefinerTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            {
+
+                SearchOptions searchOptions = new SearchOptions("contentclass:STS_ListItem_DocumentLibrary")
+                {
+                    RowsPerPage = 10,
+                    TrimDuplicates = false,
+                    SelectProperties = new System.Collections.Generic.List<string>() { "Path", "Url", "Title", "ListId" },
+                    SortProperties = new System.Collections.Generic.List<SortOption>() { new SortOption("DocId") },
+                    RefineProperties = new System.Collections.Generic.List<string>() { "ContentTypeId" }
+                };
+
+                var searchResult = context.Web.Search(searchOptions);
+
+                Assert.IsTrue(searchResult != null);
+                Assert.IsTrue(searchResult.ElapsedTime > 0);
+                Assert.IsTrue(searchResult.TotalRows > 0);
+                Assert.IsTrue(searchResult.TotalRowsIncludingDuplicates > 0);
+                Assert.IsTrue(searchResult.Rows.Count == 10);
+                Assert.IsTrue(searchResult.Refinements.Count > 0);
+                foreach(var refiner in searchResult.Refinements)
+                {
+                    Assert.IsTrue(!string.IsNullOrEmpty(refiner.Key));
+                    foreach(var refinementResult in refiner.Value)
+                    {
+                        Assert.IsTrue(refinementResult.Count > 0);
+                        Assert.IsTrue(!string.IsNullOrEmpty(refinementResult.Value));
+                        Assert.IsTrue(!string.IsNullOrEmpty(refinementResult.Token));
+                        Assert.IsTrue(!string.IsNullOrEmpty(refinementResult.Name));
+                    }
+                }
+                
             }
         }
     }
