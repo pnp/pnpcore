@@ -26,5 +26,10 @@ namespace PnP.Core.Model.SharePoint
         /// Default values set on a a multi value taxonomy field
         /// </summary>
         public System.Collections.Generic.List<ITerm> DefaultValues { get; set; }
+
+        /// <summary>
+        /// Defines whether the provisioned field allows for additions to the connected term set
+        /// </summary>
+        public bool OpenTermSet { get; set; } = false;
     }
 }

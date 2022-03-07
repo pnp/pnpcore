@@ -22,7 +22,9 @@ namespace PnP.Core.Services.Core.CSOM.Requests.Fields
 
         public Guid TermSetId { get; set; }
 
-        public ProvisionTaxonomyFieldRequest(string siteId, string webId, string fieldId, string parentId, Guid termStoreId, Guid termSetId)
+        public bool Open { get; set; }
+
+        public ProvisionTaxonomyFieldRequest(string siteId, string webId, string fieldId, string parentId, Guid termStoreId, Guid termSetId, bool open)
         {
             SiteId = siteId;
             WebId = webId;
@@ -30,6 +32,7 @@ namespace PnP.Core.Services.Core.CSOM.Requests.Fields
             ParentId = parentId;
             TermStoreId = termStoreId;
             TermSetId = termSetId;
+            Open = open;
         }
 
         public List<ActionObjectPath> GetRequest(IIdProvider idProvider)
@@ -92,6 +95,23 @@ namespace PnP.Core.Services.Core.CSOM.Requests.Fields
                 }
             };
             result.Add(setTargetTemplate);
+
+            //Set open
+            ActionObjectPath open = new ActionObjectPath()
+            {
+                Action = new SetPropertyAction()
+                {
+                    Id = idProvider.GetActionId(),
+                    ObjectPathId = identity.Id.ToString(),
+                    Name = "Open",
+                    SetParameter = new Parameter()
+                    {
+                        Type = "Boolean",
+                        Value = Open
+                    }
+                }
+            };
+            result.Add(open);
 
             //Set AnchorId
             ActionObjectPath setAnchorId = new ActionObjectPath()

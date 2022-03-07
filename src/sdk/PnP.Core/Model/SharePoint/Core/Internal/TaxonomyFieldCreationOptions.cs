@@ -100,6 +100,8 @@ namespace PnP.Core.Model.SharePoint
             }
         }
 
+        public bool Open { get; set; }
+
         /// <summary>
         /// Constructor
         /// </summary>
