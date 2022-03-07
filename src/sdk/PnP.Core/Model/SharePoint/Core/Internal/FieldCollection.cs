@@ -589,7 +589,8 @@ namespace PnP.Core.Model.SharePoint
             {
                 MultiValue = false,
                 TermStoreId = options.TermStoreId,
-                TermSetId = options.TermSetId
+                TermSetId = options.TermSetId,
+                DefaultValue = options.DefaultValue,
             };
             creationOptions.ImportFromCommonFieldOptions(title, options);
 
@@ -619,7 +620,8 @@ namespace PnP.Core.Model.SharePoint
             {
                 MultiValue = true,
                 TermStoreId = options.TermStoreId,
-                TermSetId = options.TermSetId
+                TermSetId = options.TermSetId,
+                DefaultValues = options.DefaultValues,
             };
             creationOptions.ImportFromCommonFieldOptions(title, options);
 

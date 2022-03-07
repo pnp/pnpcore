@@ -1257,6 +1257,10 @@ namespace PnP.Core.Services
                         {
                             return jsonElement.GetString();
                         }
+                    case "Object":
+                        {
+                            return jsonElement.ToString();
+                        }
                     case "String[]":
                         {
                             if (jsonElement.ValueKind != JsonValueKind.Array)

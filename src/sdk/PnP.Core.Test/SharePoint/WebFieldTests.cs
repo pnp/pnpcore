@@ -639,5 +639,69 @@ namespace PnP.Core.Test.SharePoint
                 }
             }
         }
+
+        [TestMethod]
+        public async Task AddTaxonomyFieldWithDefaultsTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {                
+
+                try
+                {
+                    var termStore = await context.TermStore.GetAsync(t => t.Groups);
+                    var group = termStore.Groups.AsRequested().FirstOrDefault(g => g.Name == "System");
+                    await group.LoadAsync(g => g.Sets);
+                    var termSet = group.Sets.AsRequested().FirstOrDefault();
+
+                    await termSet.LoadAsync(p => p.Terms);
+
+                    ITerm term1 = termSet.Terms.AsRequested().First();
+                    ITerm term2 = termSet.Terms.AsRequested().Last();
+
+                    var fieldTitle = "tax_test_" + DateTime.UtcNow.Ticks;
+                    await context.Web.Fields.AddTaxonomyAsync(fieldTitle, new FieldTaxonomyOptions
+                    {
+                        TermSetId = new Guid(termSet.Id),
+                        TermStoreId = new Guid(termStore.Id),  
+                        DefaultValue = term1
+                    });
+
+                    // request it again, since not all properties are mapped on the initail creation request
+                    var newField = await context.Web.Fields.FirstOrDefaultAsync(f => f.Title == fieldTitle);
+
+                    Assert.IsTrue(newField.TermSetId.Equals(new Guid(termSet.Id)));
+                    Assert.IsTrue(newField.SspId.Equals(new Guid(termStore.Id)));
+                    Assert.IsTrue(newField.IsTermSetValid);
+                    Assert.IsTrue(newField.DefaultValue.ToString().Contains($"{term1.Id}"));
+
+                    fieldTitle = "tax_test_" + DateTime.UtcNow.Ticks;
+                    await context.Web.Fields.AddTaxonomyMultiAsync(fieldTitle, new FieldTaxonomyOptions
+                    {
+                        TermSetId = new Guid(termSet.Id),
+                        TermStoreId = new Guid(termStore.Id),
+                        DefaultValues = new System.Collections.Generic.List<ITerm>() { term1, term2 }
+                    });
+
+                    newField = await context.Web.Fields.FirstOrDefaultAsync(f => f.Title == fieldTitle);
+
+                    Assert.IsTrue(newField.TermSetId.Equals(new Guid(termSet.Id)));
+                    Assert.IsTrue(newField.SspId.Equals(new Guid(termStore.Id)));
+                    Assert.IsTrue(newField.IsTermSetValid);
+                    Assert.IsTrue(newField.DefaultValue.ToString().Contains($"{term1.Id}"));
+                    Assert.IsTrue(newField.DefaultValue.ToString().Contains($"{term2.Id}"));
+
+                }
+                finally
+                {
+                    var fieldsToDelete = await context.Web.Fields.Where(f => f.Title.StartsWith("tax_test")).ToListAsync();
+
+                    foreach (var field in fieldsToDelete)
+                    {
+                        field.Delete();
+                    }
+                }
+            }
+        }
     }
 }

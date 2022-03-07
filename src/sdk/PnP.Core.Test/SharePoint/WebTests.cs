@@ -1489,7 +1489,7 @@ namespace PnP.Core.Test.SharePoint
         }
 
         [TestMethod]
-        public async Task SearchBasicTest()
+        public void SearchBasicTest()
         {
             //TestCommon.Instance.Mocking = false;
 
