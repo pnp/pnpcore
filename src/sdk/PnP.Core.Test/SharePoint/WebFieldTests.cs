@@ -675,6 +675,17 @@ namespace PnP.Core.Test.SharePoint
                     Assert.IsTrue(newField.IsTermSetValid);
                     Assert.IsTrue(newField.DefaultValue.ToString().Contains($"{term1.Id}"));
 
+                    // Update the default value
+                    newField.DefaultValue = $"-1;#{term2.Labels.First(p => p.IsDefault == true).Name}|{term2.Id}";
+                    await newField.UpdateAsync();
+
+                    newField = await context.Web.Fields.FirstOrDefaultAsync(f => f.Title == fieldTitle);
+
+                    Assert.IsTrue(newField.TermSetId.Equals(new Guid(termSet.Id)));
+                    Assert.IsTrue(newField.SspId.Equals(new Guid(termStore.Id)));
+                    Assert.IsTrue(newField.IsTermSetValid);
+                    Assert.IsTrue(newField.DefaultValue.ToString().Contains($"{term2.Id}"));
+
                     fieldTitle = "tax_test_" + DateTime.UtcNow.Ticks;
                     await context.Web.Fields.AddTaxonomyMultiAsync(fieldTitle, new FieldTaxonomyOptions
                     {
