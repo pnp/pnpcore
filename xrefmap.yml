@@ -15447,6 +15447,32 @@ references:
   commentId: T:PnP.Core.Model.SharePoint.FieldTaxonomyOptions
   fullName: PnP.Core.Model.SharePoint.FieldTaxonomyOptions
   nameWithType: FieldTaxonomyOptions
+- uid: PnP.Core.Model.SharePoint.FieldTaxonomyOptions.DefaultValue
+  name: DefaultValue
+  href: api/PnP.Core.Model.SharePoint.FieldTaxonomyOptions.html#PnP_Core_Model_SharePoint_FieldTaxonomyOptions_DefaultValue
+  commentId: P:PnP.Core.Model.SharePoint.FieldTaxonomyOptions.DefaultValue
+  fullName: PnP.Core.Model.SharePoint.FieldTaxonomyOptions.DefaultValue
+  nameWithType: FieldTaxonomyOptions.DefaultValue
+- uid: PnP.Core.Model.SharePoint.FieldTaxonomyOptions.DefaultValue*
+  name: DefaultValue
+  href: api/PnP.Core.Model.SharePoint.FieldTaxonomyOptions.html#PnP_Core_Model_SharePoint_FieldTaxonomyOptions_DefaultValue_
+  commentId: Overload:PnP.Core.Model.SharePoint.FieldTaxonomyOptions.DefaultValue
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.FieldTaxonomyOptions.DefaultValue
+  nameWithType: FieldTaxonomyOptions.DefaultValue
+- uid: PnP.Core.Model.SharePoint.FieldTaxonomyOptions.DefaultValues
+  name: DefaultValues
+  href: api/PnP.Core.Model.SharePoint.FieldTaxonomyOptions.html#PnP_Core_Model_SharePoint_FieldTaxonomyOptions_DefaultValues
+  commentId: P:PnP.Core.Model.SharePoint.FieldTaxonomyOptions.DefaultValues
+  fullName: PnP.Core.Model.SharePoint.FieldTaxonomyOptions.DefaultValues
+  nameWithType: FieldTaxonomyOptions.DefaultValues
+- uid: PnP.Core.Model.SharePoint.FieldTaxonomyOptions.DefaultValues*
+  name: DefaultValues
+  href: api/PnP.Core.Model.SharePoint.FieldTaxonomyOptions.html#PnP_Core_Model_SharePoint_FieldTaxonomyOptions_DefaultValues_
+  commentId: Overload:PnP.Core.Model.SharePoint.FieldTaxonomyOptions.DefaultValues
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.FieldTaxonomyOptions.DefaultValues
+  nameWithType: FieldTaxonomyOptions.DefaultValues
 - uid: PnP.Core.Model.SharePoint.FieldTaxonomyOptions.TermSetId
   name: TermSetId
   href: api/PnP.Core.Model.SharePoint.FieldTaxonomyOptions.html#PnP_Core_Model_SharePoint_FieldTaxonomyOptions_TermSetId
