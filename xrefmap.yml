@@ -15473,6 +15473,19 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.FieldTaxonomyOptions.DefaultValues
   nameWithType: FieldTaxonomyOptions.DefaultValues
+- uid: PnP.Core.Model.SharePoint.FieldTaxonomyOptions.OpenTermSet
+  name: OpenTermSet
+  href: api/PnP.Core.Model.SharePoint.FieldTaxonomyOptions.html#PnP_Core_Model_SharePoint_FieldTaxonomyOptions_OpenTermSet
+  commentId: P:PnP.Core.Model.SharePoint.FieldTaxonomyOptions.OpenTermSet
+  fullName: PnP.Core.Model.SharePoint.FieldTaxonomyOptions.OpenTermSet
+  nameWithType: FieldTaxonomyOptions.OpenTermSet
+- uid: PnP.Core.Model.SharePoint.FieldTaxonomyOptions.OpenTermSet*
+  name: OpenTermSet
+  href: api/PnP.Core.Model.SharePoint.FieldTaxonomyOptions.html#PnP_Core_Model_SharePoint_FieldTaxonomyOptions_OpenTermSet_
+  commentId: Overload:PnP.Core.Model.SharePoint.FieldTaxonomyOptions.OpenTermSet
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.FieldTaxonomyOptions.OpenTermSet
+  nameWithType: FieldTaxonomyOptions.OpenTermSet
 - uid: PnP.Core.Model.SharePoint.FieldTaxonomyOptions.TermSetId
   name: TermSetId
   href: api/PnP.Core.Model.SharePoint.FieldTaxonomyOptions.html#PnP_Core_Model_SharePoint_FieldTaxonomyOptions_TermSetId
