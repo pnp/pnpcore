@@ -107,6 +107,10 @@
     href: pages-multilingual.md
   - name: Commenting and liking
     href: pages-social.md
+- name: Search
+  items:
+  - name: Overview
+    href: search-intro.md
 - name: Branding
   items:
   - name: Overview
