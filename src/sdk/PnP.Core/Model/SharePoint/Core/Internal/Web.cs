@@ -1531,6 +1531,10 @@ namespace PnP.Core.Model.SharePoint
             {
                 uriBuilder.AppendFormat("&rowlimit={0}", query.RowLimit.Value);
             }
+            else if (query.RowsPerPage.HasValue)
+            {
+                uriBuilder.AppendFormat("&rowlimit={0}", query.RowsPerPage.Value);
+            }
 
             if (query.SelectProperties.Count > 0)
             {
