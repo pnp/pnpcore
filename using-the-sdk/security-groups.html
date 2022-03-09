@@ -142,7 +142,7 @@ var siteGroup = await context.Web.SiteGroups.FirstOrDefaultAsync(g =&gt; g.Title
 await siteGroup.DeleteAsync();
 </code></pre>
 <h3 id="adding-usersgroups-to-a-group">Adding users/groups to a group</h3>
-<p>Once a group has been created adding users or other groups is a common task which can be done using one of the <code>AddUser</code> methods.</p>
+<p>Once a group has been created adding users or other groups is a common task which can be done using one of the <code>AddUser</code> methods. Note that you can also add special user accounts representing &quot;Everyone&quot;, Azure AD security groups or Microsoft 365 Groups by specifying the correct login name. The <a href="security-users.html">User</a> page will provide more details on this.</p>
 <pre><code class="lang-csharp">// First get the group to add users to
 var siteGroup = await context.Web.SiteGroups.FirstOrDefaultAsync(g =&gt; g.Title == &quot;Limited readers&quot;);
 // Get the user to add

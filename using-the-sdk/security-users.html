@@ -110,6 +110,16 @@
 <td><code>c:0-.f|rolemanager|spo-grid-all-users/&lt;guid&gt;</code></td>
 <td>Use this user to represent all users except the internal users in your organization</td>
 </tr>
+<tr>
+<td>Azure AD security group</td>
+<td><code>c:0t.c|tenant|&lt;guid&gt;</code></td>
+<td>You can add an Azure AD security group to a SharePoint Group or directly grant it a role by using this login name. The <code>&lt;guid&gt;</code> is the Azure AD object id of the security group</td>
+</tr>
+<tr>
+<td>Microsoft 365 group</td>
+<td><code>c:0o.c|federateddirectoryclaimprovider|&lt;guid&gt;</code></td>
+<td>You can add a Microsoft 365 group to a SharePoint Group or directly grant it a role by using this login name. The <code>&lt;guid&gt;</code> is the Azure AD object id of the Microsoft 365 group. Note that adding this Microsoft 365 group will grant it's members access</td>
+</tr>
 </tbody>
 </table>
 <p>As you can't simply update the user table list to add users, use the approaches as outlined below.</p>
