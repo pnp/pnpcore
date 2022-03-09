@@ -19061,6 +19061,31 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IContentTypeCollection.AddBatchAsync
   nameWithType: IContentTypeCollection.AddBatchAsync
+- uid: PnP.Core.Model.SharePoint.IContentTypeId
+  name: IContentTypeId
+  href: api/PnP.Core.Model.SharePoint.IContentTypeId.html
+  commentId: T:PnP.Core.Model.SharePoint.IContentTypeId
+  fullName: PnP.Core.Model.SharePoint.IContentTypeId
+  nameWithType: IContentTypeId
+- uid: PnP.Core.Model.SharePoint.IContentTypeId.StringValue
+  name: StringValue
+  href: api/PnP.Core.Model.SharePoint.IContentTypeId.html#PnP_Core_Model_SharePoint_IContentTypeId_StringValue
+  commentId: P:PnP.Core.Model.SharePoint.IContentTypeId.StringValue
+  fullName: PnP.Core.Model.SharePoint.IContentTypeId.StringValue
+  nameWithType: IContentTypeId.StringValue
+- uid: PnP.Core.Model.SharePoint.IContentTypeId.StringValue*
+  name: StringValue
+  href: api/PnP.Core.Model.SharePoint.IContentTypeId.html#PnP_Core_Model_SharePoint_IContentTypeId_StringValue_
+  commentId: Overload:PnP.Core.Model.SharePoint.IContentTypeId.StringValue
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IContentTypeId.StringValue
+  nameWithType: IContentTypeId.StringValue
+- uid: PnP.Core.Model.SharePoint.IContentTypeIdCollection
+  name: IContentTypeIdCollection
+  href: api/PnP.Core.Model.SharePoint.IContentTypeIdCollection.html
+  commentId: T:PnP.Core.Model.SharePoint.IContentTypeIdCollection
+  fullName: PnP.Core.Model.SharePoint.IContentTypeIdCollection
+  nameWithType: IContentTypeIdCollection
 - uid: PnP.Core.Model.SharePoint.IEffectiveInformationRightsManagementSettings
   name: IEffectiveInformationRightsManagementSettings
   href: api/PnP.Core.Model.SharePoint.IEffectiveInformationRightsManagementSettings.html
@@ -23945,6 +23970,19 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IFolder.ClassifyAndExtractOffPeakAsync
   nameWithType: IFolder.ClassifyAndExtractOffPeakAsync
+- uid: PnP.Core.Model.SharePoint.IFolder.ContentTypeOrder
+  name: ContentTypeOrder
+  href: api/PnP.Core.Model.SharePoint.IFolder.html#PnP_Core_Model_SharePoint_IFolder_ContentTypeOrder
+  commentId: P:PnP.Core.Model.SharePoint.IFolder.ContentTypeOrder
+  fullName: PnP.Core.Model.SharePoint.IFolder.ContentTypeOrder
+  nameWithType: IFolder.ContentTypeOrder
+- uid: PnP.Core.Model.SharePoint.IFolder.ContentTypeOrder*
+  name: ContentTypeOrder
+  href: api/PnP.Core.Model.SharePoint.IFolder.html#PnP_Core_Model_SharePoint_IFolder_ContentTypeOrder_
+  commentId: Overload:PnP.Core.Model.SharePoint.IFolder.ContentTypeOrder
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IFolder.ContentTypeOrder
+  nameWithType: IFolder.ContentTypeOrder
 - uid: PnP.Core.Model.SharePoint.IFolder.CopyTo(System.String,PnP.Core.Model.SharePoint.MoveCopyOptions)
   name: CopyTo(String, MoveCopyOptions)
   href: api/PnP.Core.Model.SharePoint.IFolder.html#PnP_Core_Model_SharePoint_IFolder_CopyTo_System_String_PnP_Core_Model_SharePoint_MoveCopyOptions_
@@ -24281,6 +24319,19 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IFolder.TimeLastModified
   nameWithType: IFolder.TimeLastModified
+- uid: PnP.Core.Model.SharePoint.IFolder.UniqueContentTypeOrder
+  name: UniqueContentTypeOrder
+  href: api/PnP.Core.Model.SharePoint.IFolder.html#PnP_Core_Model_SharePoint_IFolder_UniqueContentTypeOrder
+  commentId: P:PnP.Core.Model.SharePoint.IFolder.UniqueContentTypeOrder
+  fullName: PnP.Core.Model.SharePoint.IFolder.UniqueContentTypeOrder
+  nameWithType: IFolder.UniqueContentTypeOrder
+- uid: PnP.Core.Model.SharePoint.IFolder.UniqueContentTypeOrder*
+  name: UniqueContentTypeOrder
+  href: api/PnP.Core.Model.SharePoint.IFolder.html#PnP_Core_Model_SharePoint_IFolder_UniqueContentTypeOrder_
+  commentId: Overload:PnP.Core.Model.SharePoint.IFolder.UniqueContentTypeOrder
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IFolder.UniqueContentTypeOrder
+  nameWithType: IFolder.UniqueContentTypeOrder
 - uid: PnP.Core.Model.SharePoint.IFolder.UniqueId
   name: UniqueId
   href: api/PnP.Core.Model.SharePoint.IFolder.html#PnP_Core_Model_SharePoint_IFolder_UniqueId
@@ -26196,6 +26247,32 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IList.GetComplianceTagBatchAsync
   nameWithType: IList.GetComplianceTagBatchAsync
+- uid: PnP.Core.Model.SharePoint.IList.GetContentTypeOrder
+  name: GetContentTypeOrder()
+  href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_GetContentTypeOrder
+  commentId: M:PnP.Core.Model.SharePoint.IList.GetContentTypeOrder
+  fullName: PnP.Core.Model.SharePoint.IList.GetContentTypeOrder()
+  nameWithType: IList.GetContentTypeOrder()
+- uid: PnP.Core.Model.SharePoint.IList.GetContentTypeOrder*
+  name: GetContentTypeOrder
+  href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_GetContentTypeOrder_
+  commentId: Overload:PnP.Core.Model.SharePoint.IList.GetContentTypeOrder
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IList.GetContentTypeOrder
+  nameWithType: IList.GetContentTypeOrder
+- uid: PnP.Core.Model.SharePoint.IList.GetContentTypeOrderAsync
+  name: GetContentTypeOrderAsync()
+  href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_GetContentTypeOrderAsync
+  commentId: M:PnP.Core.Model.SharePoint.IList.GetContentTypeOrderAsync
+  fullName: PnP.Core.Model.SharePoint.IList.GetContentTypeOrderAsync()
+  nameWithType: IList.GetContentTypeOrderAsync()
+- uid: PnP.Core.Model.SharePoint.IList.GetContentTypeOrderAsync*
+  name: GetContentTypeOrderAsync
+  href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_GetContentTypeOrderAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.IList.GetContentTypeOrderAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IList.GetContentTypeOrderAsync
+  nameWithType: IList.GetContentTypeOrderAsync
 - uid: PnP.Core.Model.SharePoint.IList.GetFlowInstances
   name: GetFlowInstances()
   href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_GetFlowInstances
@@ -26849,6 +26926,38 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IList.RecycleBatchAsync
   nameWithType: IList.RecycleBatchAsync
+- uid: PnP.Core.Model.SharePoint.IList.ReorderContentTypes(PnP.Core.Model.SharePoint.List{System.String})
+  name: ReorderContentTypes(List<String>)
+  href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_ReorderContentTypes_PnP_Core_Model_SharePoint_List_System_String__
+  commentId: M:PnP.Core.Model.SharePoint.IList.ReorderContentTypes(PnP.Core.Model.SharePoint.List{System.String})
+  name.vb: ReorderContentTypes(List(Of String))
+  fullName: PnP.Core.Model.SharePoint.IList.ReorderContentTypes(PnP.Core.Model.SharePoint.List<System.String>)
+  fullName.vb: PnP.Core.Model.SharePoint.IList.ReorderContentTypes(PnP.Core.Model.SharePoint.List(Of System.String))
+  nameWithType: IList.ReorderContentTypes(List<String>)
+  nameWithType.vb: IList.ReorderContentTypes(List(Of String))
+- uid: PnP.Core.Model.SharePoint.IList.ReorderContentTypes*
+  name: ReorderContentTypes
+  href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_ReorderContentTypes_
+  commentId: Overload:PnP.Core.Model.SharePoint.IList.ReorderContentTypes
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IList.ReorderContentTypes
+  nameWithType: IList.ReorderContentTypes
+- uid: PnP.Core.Model.SharePoint.IList.ReorderContentTypesAsync(PnP.Core.Model.SharePoint.List{System.String})
+  name: ReorderContentTypesAsync(List<String>)
+  href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_ReorderContentTypesAsync_PnP_Core_Model_SharePoint_List_System_String__
+  commentId: M:PnP.Core.Model.SharePoint.IList.ReorderContentTypesAsync(PnP.Core.Model.SharePoint.List{System.String})
+  name.vb: ReorderContentTypesAsync(List(Of String))
+  fullName: PnP.Core.Model.SharePoint.IList.ReorderContentTypesAsync(PnP.Core.Model.SharePoint.List<System.String>)
+  fullName.vb: PnP.Core.Model.SharePoint.IList.ReorderContentTypesAsync(PnP.Core.Model.SharePoint.List(Of System.String))
+  nameWithType: IList.ReorderContentTypesAsync(List<String>)
+  nameWithType.vb: IList.ReorderContentTypesAsync(List(Of String))
+- uid: PnP.Core.Model.SharePoint.IList.ReorderContentTypesAsync*
+  name: ReorderContentTypesAsync
+  href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_ReorderContentTypesAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.IList.ReorderContentTypesAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IList.ReorderContentTypesAsync
+  nameWithType: IList.ReorderContentTypesAsync
 - uid: PnP.Core.Model.SharePoint.IList.RootFolder
   name: RootFolder
   href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_RootFolder

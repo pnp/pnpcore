@@ -2834,6 +2834,30 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.SharePoint.IContentTypeId.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.SharePoint.IContentTypeId.html",
+          "hash": "xCQS0S7b4lZy2bVyKXE8Kw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.SharePoint.IContentTypeIdCollection.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.SharePoint.IContentTypeIdCollection.html",
+          "hash": "Ku+IZGzg3QuIEqZmbqDI+A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/PnP.Core.Model.SharePoint.IEffectiveInformationRightsManagementSettings.yml",
       "output": {
         ".html": {
@@ -3102,7 +3126,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.IFolder.html",
-          "hash": "fFNb7dO4vNVTkAlsxz/hJA=="
+          "hash": "5Ec+M3kL1NyMZrZMwOUM4g=="
         }
       },
       "is_incremental": false,
@@ -3222,7 +3246,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.IList.html",
-          "hash": "xaeuJq9mSkgvqCMJgF4i5A=="
+          "hash": "nuq0rR95m8I8AUDX7Mlz8w=="
         }
       },
       "is_incremental": false,
@@ -4614,7 +4638,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.html",
-          "hash": "KqKDBbNFCo4EPaaUTZDnbg=="
+          "hash": "XhtAmsnTU1NIQ9ZzkNYocA=="
         }
       },
       "is_incremental": false,
@@ -5838,7 +5862,7 @@
       "output": {
         ".html": {
           "relative_path": "api/toc.html",
-          "hash": "zdEAZVnpKpaRylorvFf/IA=="
+          "hash": "NjoHxwk/j4/76Ki315qJdg=="
         }
       },
       "is_incremental": false,
@@ -6997,7 +7021,7 @@
       "output": {
         ".html": {
           "relative_path": "using-the-sdk/contenttypes-intro.html",
-          "hash": "HU3y+uEQ+WyfDWRA6QTNyA=="
+          "hash": "xwBbU2nAKR+mqpOVqWVe1A=="
         }
       },
       "is_incremental": false,
@@ -7552,7 +7576,7 @@
         "ManagedReferenceDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build",
-          "total_file_count": 484,
+          "total_file_count": 486,
           "skipped_file_count": 0
         },
         "ResourceDocumentProcessor": {
