@@ -136,6 +136,24 @@ var user = await context.Web.EnsureUserAsync(&quot;joe@contoso.onmicrosoft.com&q
 // Special user
 var specialUser = await context.Web.EnsureUserAsync(&quot;Everyone except external users&quot;);
 </code></pre>
+<h2 id="granting-permissions-for-a-user-at-web-level">Granting permissions for a user at web level</h2>
+<p>Once a user is added you can directly permission the user by granting it one or more role definitions via one of the <code>AddRoleDefinitions</code> methods. You can also enumerate the roles a user has via the <code>GetRoleDefinitions</code> methods and remove granted roles via the <code>RemoveRoleDefinitions</code> methods. These methods are equivalent to using the methods provided via the <code>ISecurableObject</code> interface on <code>IWeb</code>.</p>
+<pre><code class="lang-csharp">var user = await context.Web.EnsureUserAsync(&quot;joe@contoso.onmicrosoft.com&quot;);
+
+// Grant the user the Full Control role at web level
+await user.AddRoleDefinitionsAsync(&quot;Full Control&quot;);
+
+// Check the roles the user has been granted
+var currentRoleDefinitions = await user.GetRoleDefinitionsAsync();
+
+if (currentRoleDefinitions.AsRequested().FirstOrDefault(p =&gt; p.Name == &quot;Full Control&quot;))
+{
+    // User was granted Full Control
+}
+
+// Remove the Full Control role from the user at web level
+user.RemoveRoleDefinitions(new string[] { &quot;Full Control&quot; });
+</code></pre>
 <h2 id="microsoft-365-users">Microsoft 365 users</h2>
 <p>When working with SharePoint sites you use a SharePoint user, but when you for example want to add a user to a Microsoft 365 group's owners you need to use a Microsoft Graph user object. When you either have a SharePoint user or Microsoft Graph user you can translate that user via <code>AsGraphUser</code> and <code>AsSharePointUser</code> methods. Below example shows how a user granted access to a Microsoft Teams team can be translated into a SharePoint user.</p>
 <pre><code class="lang-csharp">// Load the Team owners, returns a collection of `IGraphUser` objects

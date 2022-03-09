@@ -110,7 +110,7 @@ foreach(var group in context.Web.SiteGroups.AsRequested())
 }
 </code></pre>
 <h3 id="adding-a-group-with-a-custom-role-definition">Adding a group with a custom role definition</h3>
-<p>Adding a new SharePoint group is done via the usual <code>Add</code> methods. When a group is added you also need to assign a role to it (see <a href="security-intro.html#configuring-roles">Configuring roles</a>) otherwise the users added to group will not have any permissions on the SharePoint site.</p>
+<p>Adding a new SharePoint group is done via the usual <code>Add</code> methods. When a group is added you also need to assign a role to it (see <a href="security-intro.html#configuring-roles">Configuring roles</a>) otherwise the users added to group will not have any permissions on the SharePoint site. The <code>AddRoleDefinitions</code> methods are equivalent to using the methods provided via the <code>ISecurableObject</code> interface on <code>IWeb</code>.</p>
 <pre><code class="lang-csharp">// Add a new role definition for our new group, a limited reader role
 var roleDefinition = await context.Web.RoleDefinitions.AddAsync(roleDefName, Model.SharePoint.RoleType.Reader, new Model.SharePoint.PermissionKind[] { Model.SharePoint.PermissionKind.Open });
 
@@ -147,7 +147,11 @@ await siteGroup.DeleteAsync();
 var siteGroup = await context.Web.SiteGroups.FirstOrDefaultAsync(g =&gt; g.Title == &quot;Limited readers&quot;);
 // Get the user to add
 var currentUser = await context.Web.GetCurrentUserAsync();
-// Add the user
+
+// Add the user: Option A
+await addedGroup.Users.AddAsync(currentUser.LoginName)
+
+// Add the user: Option B
 await addedGroup.AddUserAsync(currentUser.LoginName);
 </code></pre>
 <h3 id="listing-the-users-in-a-group">Listing the users in a group</h3>
@@ -166,7 +170,11 @@ foreach(var user in myGroup.Users.AsRequested())
 var siteGroup = await context.Web.SiteGroups.FirstOrDefaultAsync(g =&gt; g.Title == &quot;Limited readers&quot;);
 // Get the user to remove
 var currentUser = await context.Web.GetCurrentUserAsync();
-// Remove the user
+
+// Remove the user: Option A
+await addedGroup.Users.AsRequested().FirstOrDefault(p =&gt; p.LoginName == currentUser.LoginName).DeleteAsync();
+
+// Remove the user: Option B
 await addedGroup.RemoveUserAsync(currentUser.Id);
 </code></pre>
 <h2 id="microsoft-365-groups">Microsoft 365 groups</h2>

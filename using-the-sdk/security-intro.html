@@ -144,7 +144,7 @@ await customRole.UpdateAsync();
 await customRole.DeleteAsync();
 </code></pre>
 <h2 id="assigning-roles">Assigning roles</h2>
-<p>To actually grant a permission a role needs to be assigned to a user or group. By default the groups and user and their assigned roles are maintained at the root web level, but it's possible to break permission inheritance and have different permissions at sub web, list or list item level. In PnP Core SDK the three objects that can be secured (<code>IWeb</code>, <code>IList</code> and <code>IListItem</code>) all implement the <code>ISecurableObject</code> interface providing the needed properties and methods to configure security.</p>
+<p>To actually grant a permission a role needs to be assigned to a user or group. By default the groups and user and their assigned roles are maintained at the root web level and you can directly grant roles via the user and group models, which is explained in the respective <a href="security-groups.html">Groups</a> and <a href="security-users.html">Users</a> pages. It's however also possible to break permission inheritance and have different permissions at sub web, list or list item level. In PnP Core SDK the three objects that can be secured (<code>IWeb</code>, <code>IList</code> and <code>IListItem</code>) all implement the <code>ISecurableObject</code> interface providing the needed properties and methods to configure security.</p>
 <div class="NOTE">
 <h5>Note</h5>
 <p>The below chapters use an <code>IList</code> as sample but they apply to either <code>IWeb</code>, <code>IList</code> and <code>IListItem</code>.</p>
