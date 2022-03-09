@@ -82,7 +82,7 @@ await siteGroup.DeleteAsync();
 
 ### Adding users/groups to a group
 
-Once a group has been created adding users or other groups is a common task which can be done using one of the `AddUser` methods.
+Once a group has been created adding users or other groups is a common task which can be done using one of the `AddUser` methods. Note that you can also add special user accounts representing "Everyone", Azure AD security groups or Microsoft 365 Groups by specifying the correct login name. The [User](security-users.md) page will provide more details on this.
 
 ```csharp
 // First get the group to add users to
