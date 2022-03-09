@@ -21,6 +21,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Added support for setting default term(s) when creating single/multi value taxonomy fields #776 [jansenbe - Bert Jansen]
 - Added support for setting a termset as open when creating a taxonomy field #778 [jansenbe - Bert Jansen]
 - Added support for changing the content type order of list (influences the order in the "New" menu) #775 [jansenbe - Bert Jansen]
+- Improved options for adding/removing users from a SharePoint group + additional methods to directly grant a role definitions to user #773 [jansenbe - Bert Jansen]
 
 ### Changed
 

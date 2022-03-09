@@ -6,7 +6,7 @@ namespace PnP.Core.Model.Security
     /// Public interface to define a SharePoint User 
     /// </summary>
     [ConcreteType(typeof(SharePointUser))]
-    public interface ISharePointUser : IDataModel<ISharePointUser>, IDataModelGet<ISharePointUser>, IDataModelLoad<ISharePointUser>, ISharePointPrincipal, IQueryableDataModel
+    public interface ISharePointUser : IDataModel<ISharePointUser>, IDataModelGet<ISharePointUser>, IDataModelLoad<ISharePointUser>, IDataModelDelete, ISharePointPrincipal, IQueryableDataModel
     {
         /// <summary>
         /// Id of the underlying graph object (if any)
@@ -67,5 +67,43 @@ namespace PnP.Core.Model.Security
         /// </summary>
         /// <returns></returns>
         public IGraphUser AsGraphUser();
+
+        /// <summary>
+        /// Retrieves the role definitions for this user
+        /// </summary>
+        public IRoleDefinitionCollection GetRoleDefinitions();
+
+        /// <summary>
+        /// Retrieves the role definitions for this user
+        /// </summary>
+        public Task<IRoleDefinitionCollection> GetRoleDefinitionsAsync();
+
+        /// <summary>
+        /// Adds role definitions for this user
+        /// </summary>
+        /// <param name="names"></param>
+        /// <returns></returns>
+        public bool AddRoleDefinitions(params string[] names);
+
+        /// <summary>
+        /// Adds role definitions for this user
+        /// </summary>
+        /// <param name="names"></param>
+        /// <returns></returns>
+        public Task<bool> AddRoleDefinitionsAsync(params string[] names);
+
+        /// <summary>
+        /// Removes role definitions for this user
+        /// </summary>
+        /// <param name="names"></param>
+        /// <returns></returns>
+        public bool RemoveRoleDefinitions(params string[] names);
+
+        /// <summary>
+        /// Removes role definitions for this user
+        /// </summary>
+        /// <param name="names"></param>
+        /// <returns></returns>
+        public Task<bool> RemoveRoleDefinitionsAsync(params string[] names);
     }
 }

@@ -1074,6 +1074,31 @@ namespace PnP.Core.Test.SharePoint
         }
 
         [TestMethod]
+        public async Task AddUserToWebTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var currentUser = await context.Web.GetCurrentUserAsync();
+
+                // Is equivalent to EnsureUser
+                var addedUser = context.Web.SiteUsers.Add(currentUser.LoginName);
+
+                addedUser.AddRoleDefinitions("Full Control");
+
+                var currentRoleDefinitions = addedUser.GetRoleDefinitions();
+
+                Assert.IsNotNull(currentRoleDefinitions.AsRequested().FirstOrDefault(p => p.Name == "Full Control"));
+                
+                addedUser.RemoveRoleDefinitions(new string[] { "Full Control" });
+
+                currentRoleDefinitions = addedUser.GetRoleDefinitions();
+
+                Assert.IsTrue(currentRoleDefinitions == null);                
+            }
+        }
+
+        [TestMethod]
         public async Task AddWebWithDefaults()
         {
             //TestCommon.Instance.Mocking = false;

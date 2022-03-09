@@ -170,7 +170,7 @@ namespace PnP.Core.Test.Security
                 try
                 {
                     siteGroup = await context.Web.SiteGroups.AddAsync(groupName);
-                    
+
                     siteGroup.Description = "<title>GitHub - pnp/pnpcore: The PnP Core SDK is a modern .NET SDK designed to work for Microsoft 365. It provides a unified object model for working with SharePoint Online and Teams which is agnostic to the underlying API&#39;s being called. GitHub - pnp/pnpcore: The PnP Core SDK is a modern .NET SDK designed to work for Microsoft 365. It provides a unified object model for working with SharePoint Online and Teams which is agnostic to the underlying API&#39;s being called. GitHub - pnp/pnpcore: The PnP Core SDK is a modern .NET SDK designed to work for Microsoft 365. It provides a unified object model for working with SharePoint Online and Teams which is agnostic to the underlying API&#39;s being called</title><meta name=\"description\" content=\"The PnP Core SDK is a modern .NET SDK designed to work for Microsoft 365. It provides a unified object model for working with SharePoint Online and Teams which is agnostic to the underlying API&#39;s being called - GitHub - pnp/pnpcore: The PnP Core SDK is a modern .NET SDK designed to work for Microsoft 365. It provides a unified object model for working with SharePoint Online and Teams which is agnostic to the underlying API&#39;s being called\"><link rel=\"search\" type=\"application/opensearchdescription+xml\" href=\"/opensearch.xml\" title=\"GitHub\"><link rel=\"fluid-icon\" href=\"https://github.com/fluidicon.png\" title=\"GitHub\">";
                     await siteGroup.UpdateAsync();
 
@@ -204,7 +204,7 @@ namespace PnP.Core.Test.Security
                     addedGroup = await context.Web.SiteGroups.AddAsync(groupName);
 
                     await addedGroup.AddRoleDefinitionsAsync("Full Control");
-                    
+
                     addedGroup.Title = "test group";
                     addedGroup.Description = "just a sample test group";
                     addedGroup.IsHiddenInUI = false;
@@ -218,7 +218,7 @@ namespace PnP.Core.Test.Security
                     addedGroup.RequestToJoinLeaveEmailSetting = "joe@contoso.sharepoint.com";
                     await addedGroup.UpdateAsync();
 
-                    addedGroup = await context.Web.SiteGroups.QueryProperties(p => p.All, p => p.CanCurrentUserEditMembership, 
+                    addedGroup = await context.Web.SiteGroups.QueryProperties(p => p.All, p => p.CanCurrentUserEditMembership,
                         p => p.CanCurrentUserManageGroup, p => p.CanCurrentUserViewMembership).FirstOrDefaultAsync(g => g.Title == "test group");
 
                     Assert.IsTrue(addedGroup.Requested);
@@ -289,6 +289,98 @@ namespace PnP.Core.Test.Security
         }
 
         [TestMethod]
+        public async Task AddRemoveSharePointGroupUsersOption2()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var groupName = TestCommon.GetPnPSdkTestAssetName("TestGroupUsers");
+                ISharePointGroup addedGroup = null;
+
+                try
+                {
+                    addedGroup = await context.Web.SiteGroups.AddAsync(groupName);
+
+                    await addedGroup.AddRoleDefinitionsAsync("Full Control");
+
+                    // Get current user
+                    var currentUser = await context.Web.GetCurrentUserAsync();
+
+                    addedGroup.Users.Add(currentUser.LoginName);
+
+                    // Query the group again
+                    addedGroup = await context.Web.SiteGroups.QueryProperties(p => p.Users).FirstOrDefaultAsync(g => g.Title == groupName);
+
+                    Assert.IsTrue(addedGroup.Requested);
+                    Assert.IsNotNull(addedGroup.Users.AsRequested().FirstOrDefault(p => p.LoginName == currentUser.LoginName));
+
+                    // remove the user again
+                    addedGroup.Users.AsRequested().FirstOrDefault(p => p.LoginName == currentUser.LoginName).Delete();
+
+                    addedGroup = await context.Web.SiteGroups.QueryProperties(p => p.Users).FirstOrDefaultAsync(g => g.Title == groupName);
+
+                    Assert.IsTrue(addedGroup.Requested);
+                    Assert.IsNull(addedGroup.Users.AsRequested().FirstOrDefault(p => p.LoginName == currentUser.LoginName));
+                }
+                finally
+                {
+                    if (addedGroup != null)
+                    {
+                        await addedGroup.DeleteAsync();
+                    }
+                }
+            }
+        }
+
+        [TestMethod]
+        public async Task AddRemoveSharePointGroupUsersOption2Batch()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var groupName = TestCommon.GetPnPSdkTestAssetName("TestGroupUsersBatch");
+                ISharePointGroup addedGroup = null;
+
+                try
+                {
+                    addedGroup = await context.Web.SiteGroups.AddAsync(groupName);
+
+                    await addedGroup.AddRoleDefinitionsAsync("Full Control");
+
+                    // Get current user
+                    var currentUser = await context.Web.GetCurrentUserAsync();
+
+                    addedGroup.Users.AddBatch(currentUser.LoginName);
+
+                    context.Execute();
+
+                    // Query the group again
+                    addedGroup = await context.Web.SiteGroups.QueryProperties(p => p.Users).FirstOrDefaultAsync(g => g.Title == groupName);
+
+                    Assert.IsTrue(addedGroup.Requested);
+                    Assert.IsNotNull(addedGroup.Users.AsRequested().FirstOrDefault(p => p.LoginName == currentUser.LoginName));
+
+                    // remove the user again
+                    addedGroup.Users.AsRequested().FirstOrDefault(p => p.LoginName == currentUser.LoginName).DeleteBatch();
+                    context.Execute();
+
+                    addedGroup = await context.Web.SiteGroups.QueryProperties(p => p.Users).FirstOrDefaultAsync(g => g.Title == groupName);
+
+                    Assert.IsTrue(addedGroup.Requested);
+                    Assert.IsNull(addedGroup.Users.AsRequested().FirstOrDefault(p => p.LoginName == currentUser.LoginName));
+                }
+                finally
+                {
+                    if (addedGroup != null)
+                    {
+                        await addedGroup.DeleteAsync();
+                    }
+                }
+            }
+        }
+
+
+        [TestMethod]
         public async Task UpdateSharePointGroup()
         {
             //TestCommon.Instance.Mocking = false;
@@ -320,7 +412,6 @@ namespace PnP.Core.Test.Security
                     }
                 }
             }
-        }
-
+        }        
     }
 }

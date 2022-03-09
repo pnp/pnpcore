@@ -59,6 +59,28 @@ var user = await context.Web.EnsureUserAsync("joe@contoso.onmicrosoft.com");
 var specialUser = await context.Web.EnsureUserAsync("Everyone except external users");
 ```
 
+## Granting permissions for a user at web level
+
+Once a user is added you can directly permission the user by granting it one or more role definitions via one of the `AddRoleDefinitions` methods. You can also enumerate the roles a user has via the `GetRoleDefinitions` methods and remove granted roles via the `RemoveRoleDefinitions` methods. These methods are equivalent to using the methods provided via the `ISecurableObject` interface on `IWeb`.
+
+```csharp
+var user = await context.Web.EnsureUserAsync("joe@contoso.onmicrosoft.com");
+
+// Grant the user the Full Control role at web level
+await user.AddRoleDefinitionsAsync("Full Control");
+
+// Check the roles the user has been granted
+var currentRoleDefinitions = await user.GetRoleDefinitionsAsync();
+
+if (currentRoleDefinitions.AsRequested().FirstOrDefault(p => p.Name == "Full Control"))
+{
+    // User was granted Full Control
+}
+
+// Remove the Full Control role from the user at web level
+user.RemoveRoleDefinitions(new string[] { "Full Control" });
+```
+
 ## Microsoft 365 users
 
 When working with SharePoint sites you use a SharePoint user, but when you for example want to add a user to a Microsoft 365 group's owners you need to use a Microsoft Graph user object. When you either have a SharePoint user or Microsoft Graph user you can translate that user via `AsGraphUser` and `AsSharePointUser` methods. Below example shows how a user granted access to a Microsoft Teams team can be translated into a SharePoint user.

@@ -39,7 +39,7 @@ foreach(var group in context.Web.SiteGroups.AsRequested())
 
 ### Adding a group with a custom role definition
 
-Adding a new SharePoint group is done via the usual `Add` methods. When a group is added you also need to assign a role to it (see [Configuring roles](./security-intro.md#configuring-roles)) otherwise the users added to group will not have any permissions on the SharePoint site.
+Adding a new SharePoint group is done via the usual `Add` methods. When a group is added you also need to assign a role to it (see [Configuring roles](./security-intro.md#configuring-roles)) otherwise the users added to group will not have any permissions on the SharePoint site. The `AddRoleDefinitions` methods are equivalent to using the methods provided via the `ISecurableObject` interface on `IWeb`.
 
 ```csharp
 // Add a new role definition for our new group, a limited reader role
@@ -89,7 +89,11 @@ Once a group has been created adding users or other groups is a common task whic
 var siteGroup = await context.Web.SiteGroups.FirstOrDefaultAsync(g => g.Title == "Limited readers");
 // Get the user to add
 var currentUser = await context.Web.GetCurrentUserAsync();
-// Add the user
+
+// Add the user: Option A
+await addedGroup.Users.AddAsync(currentUser.LoginName)
+
+// Add the user: Option B
 await addedGroup.AddUserAsync(currentUser.LoginName);
 ```
 
@@ -116,7 +120,11 @@ Removing users from a group is done using the `RemoveUser` methods.
 var siteGroup = await context.Web.SiteGroups.FirstOrDefaultAsync(g => g.Title == "Limited readers");
 // Get the user to remove
 var currentUser = await context.Web.GetCurrentUserAsync();
-// Remove the user
+
+// Remove the user: Option A
+await addedGroup.Users.AsRequested().FirstOrDefault(p => p.LoginName == currentUser.LoginName).DeleteAsync();
+
+// Remove the user: Option B
 await addedGroup.RemoveUserAsync(currentUser.Id);
 ```
 

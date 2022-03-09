@@ -589,7 +589,8 @@ namespace PnP.Core.Model.SharePoint
 
             SharePointUser sharePointUser = new SharePointUser
             {
-                PnPContext = PnPContext
+                PnPContext = PnPContext,
+                Parent = this
             };
 
             await sharePointUser.RequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
@@ -618,7 +619,8 @@ namespace PnP.Core.Model.SharePoint
 
             SharePointUser sharePointUser = new SharePointUser
             {
-                PnPContext = PnPContext
+                PnPContext = PnPContext,
+                Parent = this
             };
 
             await sharePointUser.RequestBatchAsync(batch, apiCall, HttpMethod.Post).ConfigureAwait(false);
@@ -691,7 +693,8 @@ namespace PnP.Core.Model.SharePoint
 
             SharePointUser sharePointUser = new SharePointUser
             {
-                PnPContext = PnPContext
+                PnPContext = PnPContext,
+                Parent = this
             };
 
             await sharePointUser.RequestAsync(apiCall, HttpMethod.Get).ConfigureAwait(false);
@@ -720,7 +723,8 @@ namespace PnP.Core.Model.SharePoint
 
             SharePointUser sharePointUser = new SharePointUser
             {
-                PnPContext = PnPContext
+                PnPContext = PnPContext,
+                Parent = this
             };
 
             await sharePointUser.RequestBatchAsync(batch, apiCall, HttpMethod.Get).ConfigureAwait(false);
@@ -744,7 +748,8 @@ namespace PnP.Core.Model.SharePoint
 
             SharePointUser sharePointUser = new SharePointUser
             {
-                PnPContext = PnPContext
+                PnPContext = PnPContext,
+                Parent = this
             };
 
             await sharePointUser.RequestAsync(apiCall, HttpMethod.Get).ConfigureAwait(false);
@@ -773,7 +778,8 @@ namespace PnP.Core.Model.SharePoint
 
             SharePointUser sharePointUser = new SharePointUser
             {
-                PnPContext = PnPContext
+                PnPContext = PnPContext,
+                Parent = this
             };
 
             await sharePointUser.RequestBatchAsync(batch, apiCall, HttpMethod.Get).ConfigureAwait(false);

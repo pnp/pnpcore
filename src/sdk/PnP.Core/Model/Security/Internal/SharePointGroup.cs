@@ -92,8 +92,7 @@ namespace PnP.Core.Model.Security
 
         public async Task AddUserAsync(string loginName)
         {
-            var apiCall = GetAddUserApiCall(loginName);
-            await RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
+            await Users.AddAsync(loginName).ConfigureAwait(false);
         }
 
         public void AddUserBatch(string loginName)
@@ -113,26 +112,7 @@ namespace PnP.Core.Model.Security
 
         public async Task AddUserBatchAsync(Batch batch, string loginName)
         {
-            var apiCall = GetAddUserApiCall(loginName);
-            await RawRequestBatchAsync(batch, apiCall, HttpMethod.Post).ConfigureAwait(false);
-        }
-
-        private ApiCall GetAddUserApiCall(string loginName)
-        {
-            // Given this method can apply to multiple parents we're getting the entity info which will 
-            // automatically provide the correct 'parent'
-            // entity.SharePointGet contains the correct endpoint (e.g. _api/web or _api/web/sitegroups(id) )
-            EntityInfo entity = EntityManager.GetClassInfo(typeof(SharePointGroup), this);
-            string endpointUrl = $"{entity.SharePointGet}/Users";
-
-            var parameters = new
-            {
-                __metadata = new { type = "SP.User" },
-                LoginName = loginName
-            };
-
-            string json = JsonSerializer.Serialize(parameters);
-            return new ApiCall(endpointUrl, ApiType.SPORest, json);
+            await Users.AddBatchAsync(batch, loginName).ConfigureAwait(false);
         }
 
         public void RemoveUser(int userId)
@@ -142,8 +122,17 @@ namespace PnP.Core.Model.Security
 
         public async Task RemoveUserAsync(int userId)
         {
-            var apiCall = GetRemoveUserApiCall(userId);
-            await RawRequestAsync(apiCall, HttpMethod.Delete).ConfigureAwait(false);
+            await EnsurePropertiesAsync(p => p.Users).ConfigureAwait(false);
+
+            var userToDelete = Users.AsRequested().FirstOrDefault(p=>p.Id == userId);
+            if (userToDelete != null)
+            {
+                await userToDelete.DeleteAsync().ConfigureAwait(false);
+            }
+            else
+            {
+                throw new ClientException(ErrorType.InvalidParameters, $"User with id {userId} does not exist in this group");
+            }
         }
 
         public void RemoveUserBatch(int userId)
@@ -163,18 +152,17 @@ namespace PnP.Core.Model.Security
 
         public async Task RemoveUserBatchAsync(Batch batch, int userId)
         {
-            var apiCall = GetRemoveUserApiCall(userId);
-            await RawRequestBatchAsync(batch, apiCall, HttpMethod.Delete).ConfigureAwait(false);
-        }
+            await EnsurePropertiesAsync(p => p.Users).ConfigureAwait(false);
 
-        private ApiCall GetRemoveUserApiCall(int userId)
-        {
-            // Given this method can apply to multiple parents we're getting the entity info which will 
-            // automatically provide the correct 'parent'
-            // entity.SharePointGet contains the correct endpoint (e.g. _api/web or _api/web/sitegroups(id) )
-            EntityInfo entity = EntityManager.GetClassInfo(typeof(SharePointGroup), this);
-            string endpointUrl = $"{entity.SharePointGet}/Users/GetById({userId})";
-            return new ApiCall(endpointUrl, ApiType.SPORest);
+            var userToDelete = Users.AsRequested().FirstOrDefault(p => p.Id == userId);
+            if (userToDelete != null)
+            {
+                await userToDelete.DeleteBatchAsync(batch).ConfigureAwait(false);
+            }
+            else
+            {
+                throw new ClientException(ErrorType.InvalidParameters, $"User with id {userId} does not exist in this group");
+            }
         }
 
         public IRoleDefinitionCollection GetRoleDefinitions()
