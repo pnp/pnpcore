@@ -698,6 +698,32 @@ namespace PnP.Core.Model.SharePoint
         /// </summary>
         /// <returns>List of connected flow instances</returns>
         IEnumerableBatchResult<IFlowInstance> GetFlowInstancesBatch();
+
+        /// <summary>
+        /// Reorders the content types on the list. This controls the order of content types in the "New" menu and "List Settings" page
+        /// </summary>
+        /// <param name="contentTypeIdList">Ordered list of content type ids to set</param>
+        /// <returns></returns>
+        Task ReorderContentTypesAsync(List<string> contentTypeIdList);
+
+        /// <summary>
+        /// Reorders the content types on the list. This controls the order of content types in the "New" menu and "List Settings" page
+        /// </summary>
+        /// <param name="contentTypeIdList">Ordered list of content type ids to set</param>
+        /// <returns></returns>
+        void ReorderContentTypes(List<string> contentTypeIdList);
+
+        /// <summary>
+        /// Returns the current list or content types in the current order
+        /// </summary>
+        /// <returns>Ordered list of content type id's, returns null when the list is not enabled to use content types</returns>
+        Task<List<string>> GetContentTypeOrderAsync();
+
+        /// <summary>
+        /// Returns the current list or content types in the current order
+        /// </summary>
+        /// <returns>Ordered list of content type id's, returns null when the list is not enabled to use content types</returns>
+        List<string> GetContentTypeOrder();
         #endregion
     }
 }

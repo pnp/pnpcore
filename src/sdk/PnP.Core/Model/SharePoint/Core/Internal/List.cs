@@ -1268,6 +1268,95 @@ namespace PnP.Core.Model.SharePoint
         }
         #endregion
 
+        #region Content type ordering
+        public async Task ReorderContentTypesAsync(List<string> contentTypeIdList)
+        {
+            if (contentTypeIdList == null)
+            {
+                throw new ArgumentNullException(nameof(contentTypeIdList));
+            }
+
+            await LoadAsync(p => p.ContentTypesEnabled,
+                            p => p.RootFolder.QueryProperties(p => p.ContentTypeOrder, p => p.UniqueContentTypeOrder)).ConfigureAwait(false);
+
+            if (ContentTypesEnabled && contentTypeIdList.Count > 0)
+            {
+                // Create the update body 
+                List<ExpandoObject> contentTypeIds = new List<ExpandoObject>();
+                foreach (var contentTypeId in contentTypeIdList)
+                {
+                    var contentTypeIdToAdd = new
+                    {
+                        __metadata = new { type = "SP.ContentTypeId" },
+                        StringValue = contentTypeId
+                    }.AsExpando();
+
+                    contentTypeIds.Add(contentTypeIdToAdd);
+                }
+
+                var body = new
+                {
+                    __metadata = new { type = "SP.Folder" },
+                    UniqueContentTypeOrder = new
+                    {
+                        __metadata = new { type = "Collection(SP.ContentTypeId)" },
+                        results = contentTypeIds
+                    }
+                };
+
+                // Patch the folder
+                var apiCall = new ApiCall($"_api/web/lists(guid'{Id}')/rootfolder", ApiType.SPORest, JsonSerializer.Serialize(body));
+
+                await (RootFolder as Folder).RequestAsync(apiCall, new HttpMethod("PATCH")).ConfigureAwait(false);
+
+            }
+        }
+
+        public void ReorderContentTypes(List<string> contentTypeIdList)
+        {
+            ReorderContentTypesAsync(contentTypeIdList).GetAwaiter().GetResult();
+        }
+
+        public async Task<List<string>> GetContentTypeOrderAsync()
+        {
+            await LoadAsync(p => p.ContentTypesEnabled, 
+                            p => p.RootFolder.QueryProperties(p => p.ContentTypeOrder, p => p.UniqueContentTypeOrder)).ConfigureAwait(false);
+
+            if (!ContentTypesEnabled)
+            {
+                return null;
+            }
+            else
+            {
+                List<string> contentTypeOrder = new List<string>();
+
+                IContentTypeIdCollection contentTypeIdCollection;
+
+                // If a custom order was set, then UniqueContentTypeOrder
+                if (RootFolder.IsPropertyAvailable(p => p.UniqueContentTypeOrder) && RootFolder.UniqueContentTypeOrder.Length > 0)
+                {
+                    contentTypeIdCollection = RootFolder.UniqueContentTypeOrder;
+                }
+                else
+                {
+                    contentTypeIdCollection = RootFolder.ContentTypeOrder;
+                }
+
+                foreach(var contentTypeId in contentTypeIdCollection.AsRequested())
+                {
+                    contentTypeOrder.Add(contentTypeId.StringValue);
+                }
+
+                return contentTypeOrder;
+            }
+        }
+
+        public List<string> GetContentTypeOrder()
+        {
+            return GetContentTypeOrderAsync().GetAwaiter().GetResult();
+        }
+        #endregion
+
         #endregion
     }
 }

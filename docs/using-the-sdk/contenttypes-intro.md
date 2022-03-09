@@ -89,6 +89,41 @@ var field = list.Fields.AsRequested().First(p => p.InternalName == "myField");
 await contentType.FieldLinks.AddAsync(field, required: true);
 ```
 
+### Getting and setting the content type order in the list "New" menu
+
+When you add content types to a list they're added as last content type in the "New" menu of the list. Sometimes you however want to have your custom content type(s) be the first ones and that can be done by getting the current content type order via one of the `GetContentTypeOrder` methods on `IList`. You'll get a list containing the content type id's in the current order, after reordering this list you can update the content type order via using the `ReorderContentTypes` methods on `IList`. 
+
+```csharp
+// Ensure content type are enabled for the list
+var myList = await context.Web.Lists.GetByTitleAsync("MyList");
+myList.ContentTypesEnabled = true;
+await myList.UpdateAsync();
+
+// Add existing content type (contact)
+var addedContentType = await myList.ContentTypes.AddAvailableContentTypeAsync("0x0106");
+
+// Now we should have two content types added to the list, let's check their order
+var contentTypeOrder = await myList.GetContentTypeOrderAsync();
+
+// turn around the order
+List<string> newContentTypeOrder = new List<string>();
+
+// First add the currently last content type
+newContentTypeOrder.Add(contentTypeOrder.Last());
+
+// Add the remaining content types
+foreach(var contentTypeId in contentTypeOrder)
+{
+    if (!newContentTypeOrder.Contains(contentTypeId))
+    {
+        newContentTypeOrder.Add(contentTypeId);
+    }
+}
+
+// Update the content type order of this list
+await myList.ReorderContentTypesAsync(newContentTypeOrder);
+```
+
 ## Updating content types
 
 Updating a content type comes down to getting a reference to the content type to update, update the needed properties and call the UpdateAsync method.

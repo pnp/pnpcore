@@ -719,5 +719,76 @@ namespace PnP.Core.Test.SharePoint
             }
         }
 
+        [TestMethod]
+        public async Task ContentTypesOrderingOnListTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                // Create a new list
+                await context.Web.LoadAsync(p => p.Lists);
+
+                var web = context.Web;
+
+                string listTitle = "ContentTypesOrderingOnListTest";
+                var myList = web.Lists.AsRequested().FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
+
+                try
+                {
+                    if (TestCommon.Instance.Mocking && myList != null)
+                    {
+                        Assert.Inconclusive("Test data set should be setup to not have the list available.");
+                    }
+
+                    if (myList == null)
+                    {
+                        myList = await web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
+                    }
+
+                    // Ensure content type are enabled for the list
+                    myList.ContentTypesEnabled = true;
+                    await myList.UpdateAsync();
+
+                    // Add existing content type (contact)
+                    var addedContentType = myList.ContentTypes.AddAvailableContentType("0x0106");
+
+                    // Now we should have two content types added to the list, let's check their order
+                    var contentTypeOrder = myList.GetContentTypeOrder();
+
+                    Assert.IsTrue(contentTypeOrder.Count == 2);
+
+                    // turn around the order
+                    System.Collections.Generic.List<string> newContentTypeOrder = new System.Collections.Generic.List<string>();
+
+                    // First add the currently last content type
+                    string firstContentTypeId = contentTypeOrder.Last();
+                    newContentTypeOrder.Add(firstContentTypeId);
+
+                    // Add the remaining contenttypes
+                    foreach(var contentTypeId in contentTypeOrder)
+                    {
+                        if (!newContentTypeOrder.Contains(contentTypeId))
+                        {
+                            newContentTypeOrder.Add(contentTypeId);
+                        }
+                    }
+
+                    // Update the content type order of this list
+                    myList.ReorderContentTypes(newContentTypeOrder);
+
+                    // Load the new order and verify the order
+                    contentTypeOrder = myList.GetContentTypeOrder();
+
+                    Assert.IsTrue(contentTypeOrder.First() == firstContentTypeId);
+
+                }
+                finally
+                {
+                    // Delete list again
+                    await myList.DeleteAsync();
+                }
+            }
+        }
+
     }
 }

@@ -62,6 +62,16 @@ namespace PnP.Core.Model.SharePoint
         public string WelcomePage { get; set; }
 
         /// <summary>
+        /// Default ordered list of content types on a list, before adjustments
+        /// </summary>
+        public IContentTypeIdCollection ContentTypeOrder { get; }
+
+        /// <summary>
+        /// Ordered list of content types on a list: controls order of items in the "New" menu and "List Settings" page
+        /// </summary>
+        public IContentTypeIdCollection UniqueContentTypeOrder { get; }
+
+        /// <summary>
         /// Gets the list item field values for the list item corresponding to the file.
         /// </summary>
         public IListItem ListItemAllFields { get; }

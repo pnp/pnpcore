@@ -65,6 +65,10 @@ namespace PnP.Core.Model.SharePoint
 
         public string WelcomePage { get => GetValue<string>(); set => SetValue(value); }
 
+        public IContentTypeIdCollection ContentTypeOrder { get => GetModelCollectionValue<IContentTypeIdCollection>(); }
+
+        public IContentTypeIdCollection UniqueContentTypeOrder { get => GetModelCollectionValue<IContentTypeIdCollection>(); }
+
         public IFileCollection Files { get => GetModelCollectionValue<IFileCollection>(); }
 
         public IListItem ListItemAllFields { get => GetModelValue<IListItem>(); }
