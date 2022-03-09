@@ -209,7 +209,7 @@ IField myField = await myList.Fields.AddTaxonomyAsync("My Field", new FieldTaxon
 });
 ```
 
-When creating taxonomy fields you might also want to set default term, which can be done via the `DefaultValue` property. When you want to allow users to add new terms to the connected termset you can define the termset as open via the `OpenTermSet` property. Setting a termset as open only is possible is the respective termset is created as open termset.
+When creating taxonomy fields you might also want to set default term, which can be done via the `DefaultValue` property. When you want to allow users to add new terms to the connected termset you can define the termset as open via the `OpenTermSet` property. Setting a termset as open only is possible if the respective termset has an open submission policy.
 
 ```csharp
 // Load the first termset under the System group
