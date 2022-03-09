@@ -230,7 +230,7 @@ IField myField = await myList.Fields.AddLookupMultiAsync(&quot;My Field&quot;, n
     TermSetId = new Guid(&quot;d50ec969-cb27-4a49-839f-3c25d1d607d5&quot;)
 });
 </code></pre>
-<p>When creating taxonomy fields you might also want to set default term, which can be done via the <code>DefaultValue</code> property. When you want to allow users to add new terms to the connected termset you can define the termset as open via the <code>OpenTermSet</code> property. Setting a termset as open only is possible is the respective termset is created as open termset.</p>
+<p>When creating taxonomy fields you might also want to set default term, which can be done via the <code>DefaultValue</code> property. When you want to allow users to add new terms to the connected termset you can define the termset as open via the <code>OpenTermSet</code> property. Setting a termset as open only is possible if the respective termset has an open submission policy.</p>
 <pre><code class="lang-csharp">// Load the first termset under the System group
 var termStore = await context.TermStore.GetAsync(t =&gt; t.Groups);
 var group = termStore.Groups.AsRequested().FirstOrDefault(g =&gt; g.Name == &quot;System&quot;);
