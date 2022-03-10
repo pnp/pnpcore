@@ -1,4 +1,5 @@
 using PnP.Core.Model.Security;
+using PnP.Core.Model.SharePoint.Viva;
 using PnP.Core.Services;
 using System;
 using System.Collections.Generic;
@@ -570,6 +571,20 @@ namespace PnP.Core.Model.SharePoint
         /// <param name="pageName">Page name to filter on, uses a "starts with" filter</param>
         /// <returns>One of more modern pages</returns>
         public List<IPage> GetPages(string pageName = null);
+
+        /// <summary>
+        /// Gets Viva Connections dashboard.
+        /// If there is no dashboard configured, returns null
+        /// </summary>
+        /// <returns>Viva Dashboard or null</returns>
+        public Task<IVivaDashboard> GetVivaDashboardAsync();
+
+        /// <summary>
+        /// Gets Viva Connections dashboard.
+        /// If there is no dashboard configured, returns null
+        /// </summary>
+        /// <returns>Viva Dashboard or null</returns>
+        public IVivaDashboard GetVivaDashboard();
 
         /// <summary>
         /// Creates a new modern page

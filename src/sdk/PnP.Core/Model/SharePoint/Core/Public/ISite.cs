@@ -62,6 +62,10 @@ namespace PnP.Core.Model.SharePoint
         /// and <see href="https://pnp.github.io/pnpcore/using-the-sdk/basics-iqueryable.html">IQueryable performance considerations</see> to learn more.
         /// </summary>
         public IFeatureCollection Features { get; }
+        /// <summary>
+        /// Checks if current site is a HomeSite
+        /// </summary>
+        public bool IsHomeSite { get; }
 
         /// <summary>
         /// Gets or sets a value that specifies whether the creation of declarative workflows is allowed on this site collection.

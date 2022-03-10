@@ -203,5 +203,29 @@ namespace PnP.Core.Test.SharePoint
                 Assert.IsTrue(complianceTags.Any() == true);
             }
         }
+        [TestMethod]
+        public async Task CheckHomeSite_Positive()
+        {
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                Assert.IsTrue(context.Site.IsHomeSite);
+            }
+        }
+        [TestMethod]
+        public async Task CheckHomeSite_Negative()
+        {
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                Assert.IsFalse(context.Site.IsHomeSite);
+            }
+        }
+        [TestMethod]
+        public async Task CheckHomeSite_NotSet()
+        {
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                Assert.IsFalse(context.Site.IsHomeSite);
+            }
+        }
     }
 }

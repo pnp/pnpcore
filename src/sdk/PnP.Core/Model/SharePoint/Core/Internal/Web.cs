@@ -1,4 +1,6 @@
 ﻿using PnP.Core.Model.Security;
+using PnP.Core.Model.SharePoint.Pages.Internal.Viva;
+using PnP.Core.Model.SharePoint.Viva;
 using PnP.Core.QueryModel;
 using PnP.Core.Services;
 using System;
@@ -356,6 +358,26 @@ namespace PnP.Core.Model.SharePoint
         public IPage NewPage(PageLayoutType pageLayoutType = PageLayoutType.Article)
         {
             return NewPageAsync(pageLayoutType).GetAwaiter().GetResult();
+        }
+        /// <summary>
+        /// Returns Viva Dashboard provisioned in the Web. Returns null if there is no Viva Dashboard provisioned
+        /// </summary>
+        /// <returns></returns>
+        public async Task<IVivaDashboard> GetVivaDashboardAsync()
+        {
+            IPage dashboardPage = (await Page.LoadPagesAsync(PnPContext, "Dashboard").ConfigureAwait(false)).FirstOrDefault();
+            if (dashboardPage == null)
+                return null;
+            return new VivaDashboard(dashboardPage);
+        }
+
+        /// <summary>
+        /// Returns Viva Dashboard provisioned in the Web. Returns null if there is no Viva Dashboard provisioned
+        /// </summary>
+        /// <returns></returns>
+        public IVivaDashboard GetVivaDashboard()
+        {
+            return GetVivaDashboardAsync().Result;
         }
         #endregion
 
