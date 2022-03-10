@@ -124,7 +124,7 @@ await siteGroup.AddRoleDefinitionsAsync(roleDefinition.Name);
 <p>To update a group you first change the needed properties and then call one of the <code>Update</code> methods.</p>
 <div class="NOTE">
 <h5>Note</h5>
-<p>As a group's description cannot contain html characters the provided html is turned into text automatically. Also is the description length automatically truncated at 511 characters.</p>
+<p>As a group's description cannot contain html characters the provided html is turned into text automatically. Also is the description length automatically truncated at 511 characters. Futhermore updating a group's description will not show this description in the group's &quot;About Me&quot;, for that you need to update the group's row in the User Information List as shown in the sample code.</p>
 </div>
 <pre><code class="lang-csharp">// First get the group to update
 var siteGroup = await context.Web.SiteGroups.FirstOrDefaultAsync(g =&gt; g.Title == &quot;Limited readers&quot;);
@@ -132,6 +132,12 @@ var siteGroup = await context.Web.SiteGroups.FirstOrDefaultAsync(g =&gt; g.Title
 // Update the group, e.g. the Description property
 siteGroup.Description = &quot;Group for users with limited read access to this site&quot;;
 await siteGroup.UpdateAsync();
+
+// Update &quot;About Me&quot; in group overview page requires updating the group row in the user information list
+await context.Web.EnsurePropertiesAsync(p =&gt; p.SiteUserInfoList);
+var item = await context.Web.SiteUserInfoList.Items.GetByIdAsync(siteGroup.Id);
+item[&quot;Notes&quot;] = &quot;This is my custom description&quot;;
+await item.UpdateAsync();
 </code></pre>
 <h3 id="deleting-a-group">Deleting a group</h3>
 <p>To delete a group use one of the <code>Delete</code> methods.</p>
