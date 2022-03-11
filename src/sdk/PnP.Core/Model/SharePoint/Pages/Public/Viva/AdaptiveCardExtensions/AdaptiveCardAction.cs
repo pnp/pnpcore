@@ -1,26 +1,34 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Text.Json.Serialization;
+﻿using System.Text.Json.Serialization;
 
-namespace PnP.Core.Model.SharePoint.Pages.Public.Viva
+namespace PnP.Core.Model.SharePoint
 {
-
+    /// <summary>
+    /// ACE card button action
+    /// </summary>
     public class ButtonAction
     {
+        /// <summary>
+        /// Button title
+        /// </summary>
         [JsonPropertyName("title")]
         public string Title { get; set; }
+
         /// <summary>
         /// Supported values: positive or defailt
         /// </summary>
         [JsonPropertyName("style")]
         public string Style { get; set; }
+
         /// <summary>
         /// Action to execute
         /// </summary>
         [JsonPropertyName("action")]
         public AdaptiveCardAction Action { get; set; }
     }
+
+    /// <summary>
+    /// ACE card action
+    /// </summary>
     public class AdaptiveCardAction
     {
         /// <summary>
@@ -28,6 +36,7 @@ namespace PnP.Core.Model.SharePoint.Pages.Public.Viva
         /// </summary>
         [JsonPropertyName("type")]
         public string Type { get; set; }
+
         /// <summary>
         /// Action parameters
         /// </summary>
@@ -35,8 +44,15 @@ namespace PnP.Core.Model.SharePoint.Pages.Public.Viva
         public object Parameters { get; set; }
     }
 
+    /// <summary>
+    /// ACE card action
+    /// </summary>
+    /// <typeparam name="T">Type ACE card action</typeparam>
     public class AdaptiveCardAction<T> : AdaptiveCardAction
     {
+        /// <summary>
+        /// ACE card action parameters
+        /// </summary>
         new public T Parameters
         {
             get
@@ -50,29 +66,54 @@ namespace PnP.Core.Model.SharePoint.Pages.Public.Viva
         }
     }
 
+    /// <summary>
+    /// External link ACE action
+    /// </summary>
     public class ExternalLinkAction : AdaptiveCardAction<ExternalLinkActionParameter>
     {
+        /// <summary>
+        /// Default constructor
+        /// </summary>
         public ExternalLinkAction()
         {
             Type = "ExternalLink";
         }
     }
 
+    /// <summary>
+    /// External link parameter
+    /// </summary>
     public class ExternalLinkActionParameter
     {
+        /// <summary>
+        /// External link target
+        /// </summary>
         [JsonPropertyName("target")]
         public string Target { get; set; }
     }
+
+    /// <summary>
+    /// Quick view ACE action
+    /// </summary>
     public class QuickViewAction : AdaptiveCardAction<QuickViewActionParameter>
     {
+        /// <summary>
+        /// Default constructor
+        /// </summary>
         public QuickViewAction()
         {
             Type = "QuickView";
         }
     }
 
+    /// <summary>
+    /// Quick view ACE action parameters
+    /// </summary>
     public class QuickViewActionParameter
     {
+        /// <summary>
+        /// Selected view
+        /// </summary>
         [JsonPropertyName("view")]
         public string View { get; set; }
     }

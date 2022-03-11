@@ -170,6 +170,10 @@ namespace PnP.Core.Model.SharePoint
         /// If this webpart is used inline in a text editor then this property points to the editor using it
         /// </summary>
         public string RichTextEditorInstanceId { get; internal set; }
+
+        internal string ACEIconProperty { get; set; }
+
+        internal string ACECardSize { get; set; }
         #endregion
 
         #region public methods
@@ -344,7 +348,56 @@ namespace PnP.Core.Model.SharePoint
                     }
                 }
 
-                WebPartData webpartData = new WebPartData() { Id = controlData.WebPartId, InstanceId = controlData.Id, Title = Title, Description = Description, DataVersion = DataVersion, Properties = "jsonPropsToReplacePnPRules", DynamicDataPaths = "jsonDynamicDataPathsToReplacePnPRules", DynamicDataValues = "jsonDynamicDataValuesToReplacePnPRules", ServerProcessedContent = "jsonServerProcessedContentToReplacePnPRules" };
+                WebPartData webpartData;
+                if (string.IsNullOrEmpty(ACECardSize))
+                {
+                    webpartData = new WebPartData
+                    { 
+                        Id = controlData.WebPartId, 
+                        InstanceId = controlData.Id, 
+                        Title = Title, 
+                        Description = Description, 
+                        DataVersion = DataVersion, 
+                        Properties = "jsonPropsToReplacePnPRules", 
+                        DynamicDataPaths = "jsonDynamicDataPathsToReplacePnPRules", 
+                        DynamicDataValues = "jsonDynamicDataValuesToReplacePnPRules", 
+                        ServerProcessedContent = "jsonServerProcessedContentToReplacePnPRules" 
+                    };
+                }
+                else
+                {
+                    // The web part represents an ACE
+
+                    if (!string.IsNullOrEmpty(ACECardSize) && (controlData.ReservedWidth == 0 || controlData.ReservedHeight == 0))
+                    {
+                        // ACEs are configured with a reserved with and height, so set these depending on the card size
+                        if (ACECardSize.Equals(CardSize.Medium.ToString(), StringComparison.OrdinalIgnoreCase))
+                        {
+                            controlData.ReservedHeight = 180;
+                            controlData.ReservedWidth = 164;
+                        }
+                        else if (ACECardSize.Equals(CardSize.Large.ToString(), StringComparison.OrdinalIgnoreCase))
+                        {
+                            controlData.ReservedHeight = 180;
+                            controlData.ReservedWidth = 344;
+                        }
+                    }
+
+                    webpartData = new ACEWebPartData
+                    {
+                        Id = controlData.WebPartId,
+                        InstanceId = controlData.Id,
+                        Title = Title,
+                        Description = Description,
+                        DataVersion = DataVersion,
+                        Properties = "jsonPropsToReplacePnPRules",
+                        DynamicDataPaths = "jsonDynamicDataPathsToReplacePnPRules",
+                        DynamicDataValues = "jsonDynamicDataValuesToReplacePnPRules",
+                        ServerProcessedContent = "jsonServerProcessedContentToReplacePnPRules",
+                        CardSize = ACECardSize,
+                        IconProperty = ACEIconProperty
+                    };
+                }
 
                 if (UsingSpControlDataOnly)
                 {
@@ -360,7 +413,14 @@ namespace PnP.Core.Model.SharePoint
                 else
                 {
                     jsonControlData = JsonSerializer.Serialize(controlData);
-                    JsonWebPartData = JsonSerializer.Serialize(webpartData);
+                    if (webpartData is ACEWebPartData)
+                    {
+                        JsonWebPartData = JsonSerializer.Serialize(webpartData as ACEWebPartData);
+                    }
+                    else
+                    {
+                        JsonWebPartData = JsonSerializer.Serialize(webpartData);
+                    }
                     JsonWebPartData = JsonWebPartData.Replace("\"jsonPropsToReplacePnPRules\"", Properties.ToString());
                     JsonWebPartData = JsonWebPartData.Replace("\"jsonServerProcessedContentToReplacePnPRules\"", ServerProcessedContent.ToString());
                     JsonWebPartData = JsonWebPartData.Replace("\"jsonDynamicDataPathsToReplacePnPRules\"", DynamicDataPaths.ToString());
@@ -551,6 +611,16 @@ namespace PnP.Core.Model.SharePoint
                 var wpHtmlProperties = wpDiv.GetElementsByTagName("div").FirstOrDefault(a => a.HasAttribute(WebPartHtmlPropertiesAttribute));
                 HtmlPropertiesData = wpHtmlProperties.InnerHtml;
                 HtmlProperties = wpHtmlProperties.GetAttribute(WebPartHtmlPropertiesAttribute);
+            }
+
+            if (wpJObject.TryGetProperty("iconProperty", out JsonElement ACEIconPropertyElement))
+            {
+                ACEIconProperty = ACEIconPropertyElement.GetString();
+            }
+
+            if (wpJObject.TryGetProperty("cardSize", out JsonElement ACECardSizeElement))
+            {
+                ACECardSize = ACECardSizeElement.GetString();
             }
         }
 

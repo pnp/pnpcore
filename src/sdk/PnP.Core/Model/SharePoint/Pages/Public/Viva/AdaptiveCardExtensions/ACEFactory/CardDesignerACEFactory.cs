@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Text.Json;
 
-namespace PnP.Core.Model.SharePoint.Pages.Public.Viva.AdaptiveCardExtensions.ACEFactory
+namespace PnP.Core.Model.SharePoint
 {
     /// <summary>
     /// Creates new instance of CardDesigner ACE based on provided WebPart
@@ -13,7 +11,8 @@ namespace PnP.Core.Model.SharePoint.Pages.Public.Viva.AdaptiveCardExtensions.ACE
         /// <summary>
         /// Id of CardDesigner AdaptiveCardExtension
         /// </summary>
-        public override string ACEId { get => "9593e615-7320-4b8b-be98-09b97112b12f"; }
+        public override string ACEId { get => VivaDashboard.DefaultACEToId(DefaultACE.CardDesigner); }
+        
         /// <summary>
         /// Returns CardDesigner
         /// </summary>
@@ -27,7 +26,11 @@ namespace PnP.Core.Model.SharePoint.Pages.Public.Viva.AdaptiveCardExtensions.ACE
                 Description = control.Description,
                 InstanceId = control.InstanceId,
                 Title = control.Title,
-                Properties = JsonSerializer.Deserialize<CardDesignerProps>(control.PropertiesJson)
+                Order = control.Order,
+                JsonProperties = control.Properties,
+                Properties = JsonSerializer.Deserialize<CardDesignerProps>(control.PropertiesJson),
+                CardSize = (CardSize)Enum.Parse(typeof(CardSize), (control as PageWebPart).ACECardSize),
+                IconProperty = (control as PageWebPart).ACEIconProperty,
             };
         }
     }

@@ -1,19 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Text.Json;
 
-namespace PnP.Core.Model.SharePoint.Pages.Public.Viva.AdaptiveCardExtensions.ACEFactory
+namespace PnP.Core.Model.SharePoint
 {
     /// <summary>
     /// Creates new instance of TeamsACE based on provided WebPart
     /// </summary>
-    public  class TeamsACEFactory : ACEFactory
+    public class TeamsACEFactory : ACEFactory
     {
         /// <summary>
         /// Id of Teams AdaptiveCardExtension
         /// </summary>
-        public override string ACEId { get => "3f2506d3-390c-426e-b272-4b4ec0ee4d2d"; }
+        public override string ACEId { get => VivaDashboard.DefaultACEToId(DefaultACE.TeamsApp); }
+        
         /// <summary>
         /// Returns TeamsACE
         /// </summary>
@@ -27,7 +26,11 @@ namespace PnP.Core.Model.SharePoint.Pages.Public.Viva.AdaptiveCardExtensions.ACE
                 Description = control.Description,
                 InstanceId = control.InstanceId,
                 Title = control.Title,
-                Properties = JsonSerializer.Deserialize<TeamsACEProperties>(control.PropertiesJson)
+                Order = control.Order,
+                JsonProperties = control.Properties,
+                Properties = JsonSerializer.Deserialize<TeamsACEProperties>(control.PropertiesJson),
+                CardSize = (CardSize)Enum.Parse(typeof(CardSize), (control as PageWebPart).ACECardSize),
+                IconProperty = (control as PageWebPart).ACEIconProperty,
             };
         }
     }

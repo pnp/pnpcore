@@ -52,8 +52,10 @@ $tenantContext = Connect-PnPOnline -Url $tenantUrl -Credentials $credentials -Ve
 
 # Add test Client Side app package
 $app = Add-PnPApp -Path .\TestAssets\pnpcoresdk-test-app.sppkg -Publish
+$app2 = Add-PnPApp -Path .\TestAssets\viva-async-ace.sppkg -Publish
 # or retrieve it's ID if it was already added to the tenant app catalog
 # $app = Get-PnPApp -Identity "pnpcoresdk-test-app-client-side-solution"
+# $app2 = Get-PnPApp -Identity "viva-async-ace-client-side-solution"
 
 # Create test site without a group
 $pnpTestSite = New-PnPSite -Type CommunicationSite -Title "PnP Microsoft 365 library test" -Url  "https://$tenantName.sharepoint.com/sites/pnpcoresdktest"  -Wait -Connection $tenantContext
@@ -67,8 +69,9 @@ $pnpTestSiteWithGroup = New-PnPSite -Type TeamSite -Title "PnP Microsoft 365 lib
 # Connect to the newly created site
 Connect-PnPOnline -Url $pnpTestSiteWithGroup -Credentials $credentials
 
-# Install the client side app to the site
+# Install the client side apps to the site
 Install-PnPApp -Identity $app
+Install-PnPApp -Identity $app2
 
 # Teamify the site
 Add-PnPTeamsTeam

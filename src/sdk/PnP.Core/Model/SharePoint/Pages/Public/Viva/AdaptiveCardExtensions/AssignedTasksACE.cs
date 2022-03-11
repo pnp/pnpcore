@@ -1,17 +1,20 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Text.Json;
 
-namespace PnP.Core.Model.SharePoint.Pages.Public.Viva.AdaptiveCardExtensions
+namespace PnP.Core.Model.SharePoint
 {
+    /// <summary>
+    /// Assigned tasks ACE
+    /// </summary>
     public class AssignedTasksACE : AdaptiveCardExtension
     {
-        public AssignedTasksACE()
+        /// <summary>
+        /// Default constructor
+        /// </summary>
+        public AssignedTasksACE(CardSize cardSize = CardSize.Medium) : base(cardSize)
         {
-            Id = "749d8ca7-0821-4e96-be16-db7b0bcf1a9e";
+            Id = VivaDashboard.DefaultACEToId(DefaultACE.AssignedTasks);
             Title = "Assigned Tasks";
-            Properties = new Object();
+            Properties = new object();
         }
     }
 }

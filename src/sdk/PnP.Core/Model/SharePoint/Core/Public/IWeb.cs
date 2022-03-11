@@ -1,5 +1,4 @@
 using PnP.Core.Model.Security;
-using PnP.Core.Model.SharePoint.Viva;
 using PnP.Core.Services;
 using System;
 using System.Collections.Generic;

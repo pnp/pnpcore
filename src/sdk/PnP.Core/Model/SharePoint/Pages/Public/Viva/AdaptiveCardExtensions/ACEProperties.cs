@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Text.Json.Serialization;
+﻿using System.Text.Json.Serialization;
 
-namespace PnP.Core.Model.SharePoint.Pages.Public.Viva.AdaptiveCardExtensions
+namespace PnP.Core.Model.SharePoint
 {
     /// <summary>
     /// Represents common properties of ACEs
@@ -14,23 +11,27 @@ namespace PnP.Core.Model.SharePoint.Pages.Public.Viva.AdaptiveCardExtensions
         /// Shared Adaptive Card properties
         /// </summary>
         [JsonPropertyName("aceData")]
-        public ACEData AceData { get; set; } = new ACEData();
+        public ACEData AceData { get; internal set; } = new ACEData();
+        
         /// <summary>
         /// ACE Title
         /// </summary>
         [JsonPropertyName("title")]
-        public string Title { get; set; }
+        public string Title { get; internal set; }
+        
         /// <summary>
         /// ACE Description
         /// </summary>
         [JsonPropertyName("description")]
-        public string Description { get; set; }
+        public string Description { get; internal set; }
+        
         /// <summary>
         /// ACE Icon property - usually a link to icon
         /// </summary>
         [JsonPropertyName("iconProperty")]
-        public string IconProperty { get; set; }
+        public string IconProperty { get; internal set; }
     }
+
     /// <summary>
     /// Represents aceDate part of ACE properties
     /// </summary>

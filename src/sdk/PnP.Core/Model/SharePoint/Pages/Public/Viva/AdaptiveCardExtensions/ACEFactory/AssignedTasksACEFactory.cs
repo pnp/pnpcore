@@ -1,19 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Text.Json;
 
-namespace PnP.Core.Model.SharePoint.Pages.Public.Viva.AdaptiveCardExtensions.ACEFactory
+namespace PnP.Core.Model.SharePoint
 {
     /// <summary>
     /// Creates new instance of Assigened Tasks ACE based on provided WebPart
     /// </summary>
-    public class AssignedTasksACEFactory :ACEFactory
+    public class AssignedTasksACEFactory : ACEFactory
     {
         /// <summary>
         /// Id of Assigened Tasks AdaptiveCardExtension
         /// </summary>
-        public override string ACEId { get => "749d8ca7-0821-4e96-be16-db7b0bcf1a9e"; }
+        public override string ACEId { get => VivaDashboard.DefaultACEToId(DefaultACE.AssignedTasks); }
+        
         /// <summary>
         /// Returns Assigened Tasks ACE
         /// </summary>
@@ -27,7 +26,11 @@ namespace PnP.Core.Model.SharePoint.Pages.Public.Viva.AdaptiveCardExtensions.ACE
                 Description = control.Description,
                 InstanceId = control.InstanceId,
                 Title = control.Title,
-                Properties = JsonSerializer.Deserialize<object>(control.PropertiesJson)
+                Order = control.Order,
+                JsonProperties = control.Properties,
+                Properties = JsonSerializer.Deserialize<object>(control.PropertiesJson),
+                CardSize = (CardSize)Enum.Parse(typeof(CardSize), (control as PageWebPart).ACECardSize),
+                IconProperty = (control as PageWebPart).ACEIconProperty,
             };
         }
     }
