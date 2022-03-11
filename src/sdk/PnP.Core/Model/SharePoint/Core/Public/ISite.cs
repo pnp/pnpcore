@@ -61,7 +61,7 @@ namespace PnP.Core.Model.SharePoint
         /// See <see href="https://pnp.github.io/pnpcore/using-the-sdk/basics-getdata.html#requesting-model-collections">Requesting model collections</see> 
         /// and <see href="https://pnp.github.io/pnpcore/using-the-sdk/basics-iqueryable.html">IQueryable performance considerations</see> to learn more.
         /// </summary>
-        public IFeatureCollection Features { get; }
+        public IFeatureCollection Features { get; }        
 
         /// <summary>
         /// Gets or sets a value that specifies whether the creation of declarative workflows is allowed on this site collection.
@@ -349,5 +349,15 @@ namespace PnP.Core.Model.SharePoint
         /// <param name="id">Hub Site Guid</param>
         /// <returns></returns>
         public IHubSite GetHubSiteData(Guid? id);
+
+        /// <summary>
+        /// Checks if current site is a HomeSite
+        /// </summary>
+        public Task<bool> IsHomeSiteAsync();
+
+        /// <summary>
+        /// Checks if current site is a HomeSite
+        /// </summary>
+        public bool IsHomeSite();
     }
 }

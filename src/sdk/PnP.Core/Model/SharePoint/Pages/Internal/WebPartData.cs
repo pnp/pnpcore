@@ -5,7 +5,7 @@ namespace PnP.Core.Model.SharePoint
     /// <summary>
     /// Json web part data that will be included in each client side web part (de-)serialization (data-sp-webpartdata)
     /// </summary>
-    internal sealed class WebPartData
+    internal class WebPartData
     {
         /// <summary>
         /// Gets or sets JsonProperty "id"

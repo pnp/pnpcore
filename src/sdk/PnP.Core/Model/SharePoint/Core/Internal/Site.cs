@@ -34,7 +34,7 @@ namespace PnP.Core.Model.SharePoint
 
         public IWeb RootWeb { get => GetModelValue<IWeb>(); set => SetModelValue(value); }
 
-        private IWebCollection allWebs;
+        private IWebCollection allWebs;        
 
         // Note: AllWebs is no real property in SharePoint, so expand/select do not return a thing...
         // TODO: evaluate why we need this
@@ -53,7 +53,7 @@ namespace PnP.Core.Model.SharePoint
             {
                 allWebs = value;
             }
-        }
+        }        
 
         public bool SocialBarOnSitePagesDisabled { get => GetValue<bool>(); set => SetValue(value); }
 
@@ -352,6 +352,30 @@ namespace PnP.Core.Model.SharePoint
             return GetChangesBatchAsync(query).GetAwaiter().GetResult();
         }
 
+        #endregion
+
+        #region Home site
+        /// <summary>
+        /// Checks if current site is a HomeSite
+        /// </summary>
+        public async Task<bool> IsHomeSiteAsync()
+        {
+            var apiCall = new ApiCall($"_api/SP.SPHSite/Details", ApiType.SPORest);
+            var result = await RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
+
+            if (!string.IsNullOrEmpty(result.Json))
+            {
+                HomeSiteReference siteReference = JsonSerializer.Deserialize<HomeSiteReference>(result.Json);
+                return siteReference.SiteId != null ? Guid.Parse(siteReference.SiteId) == Id : false;
+            }
+
+            return false;
+        }
+
+        public bool IsHomeSite()
+        {
+            return IsHomeSiteAsync().GetAwaiter().GetResult();
+        }
         #endregion
 
         #endregion

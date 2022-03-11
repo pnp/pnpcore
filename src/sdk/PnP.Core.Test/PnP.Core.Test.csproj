@@ -42,6 +42,7 @@
 		<Folder Include="SharePoint\MockData\FilesTests\" />
 		<Folder Include="SharePoint\MockData\SettingTests\" />
 		<Folder Include="SharePoint\MockData\UserCustomActionTests\" />
+		<Folder Include="SharePoint\MockData\VivaDashboardTests\" />
 		<Folder Include="Teams\MockData\TeamLifecycleTests\" />
 		<Folder Include="Teams\MockData\TeamSettingsTests\" />
 	</ItemGroup>

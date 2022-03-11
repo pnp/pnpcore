@@ -357,6 +357,22 @@ namespace PnP.Core.Model.SharePoint
         {
             return NewPageAsync(pageLayoutType).GetAwaiter().GetResult();
         }
+        
+        public async Task<IVivaDashboard> GetVivaDashboardAsync()
+        {
+            IPage dashboardPage = (await Page.LoadPagesAsync(PnPContext, "Dashboard").ConfigureAwait(false)).FirstOrDefault();
+            if (dashboardPage == null)
+            {
+                return null;
+            }
+
+            return new VivaDashboard(dashboardPage);
+        }
+
+        public IVivaDashboard GetVivaDashboard()
+        {
+            return GetVivaDashboardAsync().GetAwaiter().GetResult();
+        }
         #endregion
 
         #region Folders

@@ -572,6 +572,20 @@ namespace PnP.Core.Model.SharePoint
         public List<IPage> GetPages(string pageName = null);
 
         /// <summary>
+        /// Gets Viva Connections dashboard.
+        /// If there is no dashboard configured, returns null
+        /// </summary>
+        /// <returns>Viva Dashboard or null</returns>
+        public Task<IVivaDashboard> GetVivaDashboardAsync();
+
+        /// <summary>
+        /// Gets Viva Connections dashboard.
+        /// If there is no dashboard configured, returns null
+        /// </summary>
+        /// <returns>Viva Dashboard or null</returns>
+        public IVivaDashboard GetVivaDashboard();
+
+        /// <summary>
         /// Creates a new modern page
         /// </summary>
         /// <param name="pageLayoutType">Optionally specify the page type, defaults to <see cref="PageLayoutType.Article"/></param>
