@@ -151,6 +151,10 @@
   items:
   - name: Overview
     href: syntex-intro.md
+- name: Microsoft Viva Connections
+  items:
+  - name: Overview
+    href: vivaconnections-intro.md
 - name: "Admin: SharePoint"
   items:
   - name: Tenant

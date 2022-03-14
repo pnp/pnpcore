@@ -11,12 +11,15 @@ namespace PnP.Core.Test.SharePoint
             Title = "Async Card";
         }
     }
+
     internal class CustomAsyncCardProps : ACEProperties
     {
     }
+
     internal class CustomAsyncCardFactory : ACEFactory
     {
         public override string ACEId => "9e73ef29-1b62-4084-92b5-207bedea22b8";
+
         public override AdaptiveCardExtension BuildACEFromWebPart(IPageWebPart control)
         {
             return new CustomAsyncCard()
