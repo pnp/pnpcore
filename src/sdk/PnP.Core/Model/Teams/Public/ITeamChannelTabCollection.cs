@@ -140,7 +140,7 @@ namespace PnP.Core.Model.Teams
         /// <returns>Newly added DocumentLibrary channel tab</returns>
         public ITeamChannelTab AddDocumentLibraryTabBatch(Batch batch, string name, Uri documentLibraryUri);
 
-        /// <summary>https://github.com/Mathizor/pnpcore/commit/2d76066495c91c5f85c9c3036ad69f6c18dd4876#diff-5b23715c871dd1a65900b86c97d865d4d03fb216bd9cfe6eddeaedd518c09730
+        /// <summary>
         /// Adds a new DocumentLibrary channel tab
         /// </summary>
         /// <param name="name">Display name of the DocumentLibrary channel tab</param>
