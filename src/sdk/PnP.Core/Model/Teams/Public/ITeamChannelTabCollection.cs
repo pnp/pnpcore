@@ -57,6 +57,56 @@ namespace PnP.Core.Model.Teams
         public ITeamChannelTab AddWikiTabBatch(string name);
 
         /// <summary>
+        /// Adds a new Website channel tab
+        /// </summary>
+        /// <param name="name">Display name of the Website channel tab</param>
+        /// <param name="websiteUri">Uri to the website that needs to be added as tab</param>
+        /// <returns>Newly added Website channel tab</returns>
+        public Task<ITeamChannelTab> AddWebsiteTabAsync(string name, Uri websiteUri);
+
+        /// <summary>
+        /// Adds a new Website channel tab
+        /// </summary>
+        /// <param name="name">Display name of the Website channel tab</param>
+        /// <param name="websiteUri">Uri to the website that needs to be added as tab</param>
+        /// <returns>Newly added Website channel tab</returns>
+        public ITeamChannelTab AddWebsiteTab(string name, Uri websiteUri);
+
+        /// <summary>
+        /// Adds a new Website channel tab
+        /// </summary>
+        /// <param name="batch">Batch to use</param>
+        /// <param name="name">Display name of the Website channel tab</param>
+        /// <param name="websiteUri">Uri to website that needs to be added as tab</param>
+        /// <returns>Newly added Website channel tab</returns>
+        public Task<ITeamChannelTab> AddWebsiteTabBatchAsync(Batch batch, string name, Uri websiteUri);
+
+        /// <summary>
+        /// Adds a new DocumentLibrary channel tab
+        /// </summary>
+        /// <param name="batch">Batch to use</param>
+        /// <param name="name">Display name of the Website channel tab</param>
+        /// <param name="websiteUri">Uri to the website that needs to be added as tab</param>
+        /// <returns>Newly added Website channel tab</returns>
+        public ITeamChannelTab AddWebsiteTabBatch(Batch batch, string name, Uri websiteUri);
+
+        /// <summary>
+        /// Adds a new Website channel tab
+        /// </summary>
+        /// <param name="name">Display name of the Website channel tab</param>
+        /// <param name="websiteUri">Uri to the Website that needs to be added as tab</param>
+        /// <returns>Newly added Website channel tab</returns>
+        public Task<ITeamChannelTab> AddWebsiteTabBatchAsync(string name, Uri websiteUri);
+
+        /// <summary>
+        /// Adds a new Website channel tab
+        /// </summary>
+        /// <param name="name">Display name of the Website channel tab</param>
+        /// <param name="websiteUri">Uri to the Website that needs to be added as tab</param>
+        /// <returns>Newly added Website channel tab</returns>
+        public ITeamChannelTab AddWebsiteTabBatch(string name, Uri websiteUri);
+
+        /// <summary>
         /// Adds a new DocumentLibrary channel tab
         /// </summary>
         /// <param name="name">Display name of the DocumentLibrary channel tab</param>
@@ -90,7 +140,7 @@ namespace PnP.Core.Model.Teams
         /// <returns>Newly added DocumentLibrary channel tab</returns>
         public ITeamChannelTab AddDocumentLibraryTabBatch(Batch batch, string name, Uri documentLibraryUri);
 
-        /// <summary>
+        /// <summary>https://github.com/Mathizor/pnpcore/commit/2d76066495c91c5f85c9c3036ad69f6c18dd4876#diff-5b23715c871dd1a65900b86c97d865d4d03fb216bd9cfe6eddeaedd518c09730
         /// Adds a new DocumentLibrary channel tab
         /// </summary>
         /// <param name="name">Display name of the DocumentLibrary channel tab</param>

@@ -93,6 +93,99 @@ namespace PnP.Core.Model.Teams
         }
         #endregion
 
+        #region Website tab
+
+        /// <summary>
+        /// Adds a new Website channel tab
+        /// </summary>
+        /// <param name="name">Display name of the Website channel tab</param>
+        /// <param name="websiteUri">Uri to the website that needs to be added as tab</param>
+        /// <returns>Newly added Website channel tab</returns>
+        public async Task<ITeamChannelTab> AddWebsiteTabAsync(string name, Uri websiteUri)
+        {
+            if (string.IsNullOrEmpty(name))
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
+
+            if (websiteUri == null)
+            {
+                throw new ArgumentNullException(nameof(websiteUri));
+            }
+
+            (TeamChannelTab newTab, Dictionary<string, object> keyValuePairs) = CreateTeamChannelWebsiteTab(name, websiteUri);
+            return await newTab.AddAsync(keyValuePairs).ConfigureAwait(false) as TeamChannelTab;
+        }
+        /// <summary>
+        /// Adds a new Website channel tab
+        /// </summary>
+        /// <param name="name">Display name of the Website channel tab</param>
+        /// <param name="websiteUri">Uri to the website that needs to be added as tab</param>
+        /// <returns>Newly added Website channel tab</returns>
+        public ITeamChannelTab AddWebsiteTab(string name, Uri websiteUri)
+        {
+            return AddWebsiteTabAsync(name, websiteUri).GetAwaiter().GetResult();
+        }
+        /// <summary>
+        /// Adds a new Website channel tab
+        /// </summary>
+        /// <param name="batch">Batch to use</param>
+        /// <param name="name">Display name of the Website channel tab</param>
+        /// <param name="websiteUri">Uri to website that needs to be added as tab</param>
+        /// <returns>Newly added Website channel tab</returns>
+        public async Task<ITeamChannelTab> AddWebsiteTabBatchAsync(Batch batch, string name, Uri websiteUri)
+        {
+            if (string.IsNullOrEmpty(name))
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
+
+            if (websiteUri == null)
+            {
+                throw new ArgumentNullException(nameof(websiteUri));
+            }
+
+            (TeamChannelTab newTab, Dictionary<string, object> keyValuePairs) = CreateTeamChannelWebsiteTab(name, websiteUri);
+
+            return await newTab.AddBatchAsync(batch, keyValuePairs).ConfigureAwait(false) as TeamChannelTab;
+        }
+
+        /// <summary>
+        /// Adds a new DocumentLibrary channel tab
+        /// </summary>
+        /// <param name="batch">Batch to use</param>
+        /// <param name="name">Display name of the Website channel tab</param>
+        /// <param name="websiteUri">Uri to the website that needs to be added as tab</param>
+        /// <returns>Newly added Website channel tab</returns>
+        public ITeamChannelTab AddWebsiteTabBatch(Batch batch, string name, Uri websiteUri)
+        {
+            return AddWebsiteTabBatchAsync(batch, name, websiteUri).GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        /// Adds a new Website channel tab
+        /// </summary>
+        /// <param name="name">Display name of the Website channel tab</param>
+        /// <param name="websiteUri">Uri to the Website that needs to be added as tab</param>
+        /// <returns>Newly added Website channel tab</returns>
+        public async Task<ITeamChannelTab> AddWebsiteTabBatchAsync(string name, Uri websiteUri)
+        {
+            return await AddWebsiteTabBatchAsync(PnPContext.CurrentBatch, name, websiteUri).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Adds a new Website channel tab
+        /// </summary>
+        /// <param name="name">Display name of the Website channel tab</param>
+        /// <param name="websiteUri">Uri to the Website that needs to be added as tab</param>
+        /// <returns>Newly added Website channel tab</returns>
+        public ITeamChannelTab AddWebsiteTabBatch(string name, Uri websiteUri)
+        {
+            return AddWebsiteTabBatchAsync(name, websiteUri).GetAwaiter().GetResult();
+        }
+
+        #endregion
+
         #region Document library tab
         /// <summary>
         /// Adds a new DocumentLibrary tab
@@ -208,6 +301,33 @@ namespace PnP.Core.Model.Teams
                 Parent = this,
                 EntityId = "",
                 ContentUrl = documentLibraryUri.ToString()
+            };
+
+            return new Tuple<TeamChannelTab, Dictionary<string, object>>(newTab, keyValuePairs);
+        }
+
+        /// <summary>
+        /// Creates a website <see cref="TeamChannelTab"/>
+        /// </summary>
+        /// <param name="displayName">Name of the tab</param>
+        /// <param name="websiteUri">Uri to the document library that needs to be added as tab</param>
+        /// <returns>Wiki <see cref="TeamChannelTab"/></returns>
+        private Tuple<TeamChannelTab, Dictionary<string, object>> CreateTeamChannelWebsiteTab(string displayName, Uri websiteUri)
+        {
+            var newTab = CreateTeamChannelTab(displayName);
+
+            Dictionary<string, object> keyValuePairs = new Dictionary<string, object>
+            {
+                { "teamsAppId", "com.microsoft.teamspace.tab.web" },
+            };
+
+            newTab.Configuration = new TeamChannelTabConfiguration
+            {
+                PnPContext = PnPContext,
+                Parent = this,
+                EntityId = "",
+                ContentUrl = websiteUri.ToString(),
+                WebsiteUrl = websiteUri.ToString(),
             };
 
             return new Tuple<TeamChannelTab, Dictionary<string, object>>(newTab, keyValuePairs);
