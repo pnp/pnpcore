@@ -48498,6 +48498,18 @@ references:
   commentId: T:PnP.Core.Services.IPnPContextFactory
   fullName: PnP.Core.Services.IPnPContextFactory
   nameWithType: IPnPContextFactory
+- uid: PnP.Core.Services.IPnPContextFactory.Create(Guid,CancellationToken,PnP.Core.Services.PnPContextOptions)
+  name: Create(Guid, CancellationToken, PnPContextOptions)
+  href: api/PnP.Core.Services.IPnPContextFactory.html#PnP_Core_Services_IPnPContextFactory_Create_Guid_CancellationToken_PnP_Core_Services_PnPContextOptions_
+  commentId: M:PnP.Core.Services.IPnPContextFactory.Create(Guid,CancellationToken,PnP.Core.Services.PnPContextOptions)
+  fullName: PnP.Core.Services.IPnPContextFactory.Create(Guid, CancellationToken, PnP.Core.Services.PnPContextOptions)
+  nameWithType: IPnPContextFactory.Create(Guid, CancellationToken, PnPContextOptions)
+- uid: PnP.Core.Services.IPnPContextFactory.Create(Guid,PnP.Core.Services.IAuthenticationProvider,CancellationToken,PnP.Core.Services.PnPContextOptions)
+  name: Create(Guid, IAuthenticationProvider, CancellationToken, PnPContextOptions)
+  href: api/PnP.Core.Services.IPnPContextFactory.html#PnP_Core_Services_IPnPContextFactory_Create_Guid_PnP_Core_Services_IAuthenticationProvider_CancellationToken_PnP_Core_Services_PnPContextOptions_
+  commentId: M:PnP.Core.Services.IPnPContextFactory.Create(Guid,PnP.Core.Services.IAuthenticationProvider,CancellationToken,PnP.Core.Services.PnPContextOptions)
+  fullName: PnP.Core.Services.IPnPContextFactory.Create(Guid, PnP.Core.Services.IAuthenticationProvider, CancellationToken, PnP.Core.Services.PnPContextOptions)
+  nameWithType: IPnPContextFactory.Create(Guid, IAuthenticationProvider, CancellationToken, PnPContextOptions)
 - uid: PnP.Core.Services.IPnPContextFactory.Create(Guid,PnP.Core.Services.IAuthenticationProvider,PnP.Core.Services.PnPContextOptions)
   name: Create(Guid, IAuthenticationProvider, PnPContextOptions)
   href: api/PnP.Core.Services.IPnPContextFactory.html#PnP_Core_Services_IPnPContextFactory_Create_Guid_PnP_Core_Services_IAuthenticationProvider_PnP_Core_Services_PnPContextOptions_
@@ -48510,6 +48522,15 @@ references:
   commentId: M:PnP.Core.Services.IPnPContextFactory.Create(Guid,PnP.Core.Services.PnPContextOptions)
   fullName: PnP.Core.Services.IPnPContextFactory.Create(Guid, PnP.Core.Services.PnPContextOptions)
   nameWithType: IPnPContextFactory.Create(Guid, PnPContextOptions)
+- uid: PnP.Core.Services.IPnPContextFactory.Create(System.String,Action{PnP.Core.Services.IAuthenticationProvider},CancellationToken,PnP.Core.Services.PnPContextOptions)
+  name: Create(String, Action<IAuthenticationProvider>, CancellationToken, PnPContextOptions)
+  href: api/PnP.Core.Services.IPnPContextFactory.html#PnP_Core_Services_IPnPContextFactory_Create_System_String_Action_PnP_Core_Services_IAuthenticationProvider__CancellationToken_PnP_Core_Services_PnPContextOptions_
+  commentId: M:PnP.Core.Services.IPnPContextFactory.Create(System.String,Action{PnP.Core.Services.IAuthenticationProvider},CancellationToken,PnP.Core.Services.PnPContextOptions)
+  name.vb: Create(String, Action(Of IAuthenticationProvider), CancellationToken, PnPContextOptions)
+  fullName: PnP.Core.Services.IPnPContextFactory.Create(System.String, Action<PnP.Core.Services.IAuthenticationProvider>, CancellationToken, PnP.Core.Services.PnPContextOptions)
+  fullName.vb: PnP.Core.Services.IPnPContextFactory.Create(System.String, Action(Of PnP.Core.Services.IAuthenticationProvider), CancellationToken, PnP.Core.Services.PnPContextOptions)
+  nameWithType: IPnPContextFactory.Create(String, Action<IAuthenticationProvider>, CancellationToken, PnPContextOptions)
+  nameWithType.vb: IPnPContextFactory.Create(String, Action(Of IAuthenticationProvider), CancellationToken, PnPContextOptions)
 - uid: PnP.Core.Services.IPnPContextFactory.Create(System.String,Action{PnP.Core.Services.IAuthenticationProvider},PnP.Core.Services.PnPContextOptions)
   name: Create(String, Action<IAuthenticationProvider>, PnPContextOptions)
   href: api/PnP.Core.Services.IPnPContextFactory.html#PnP_Core_Services_IPnPContextFactory_Create_System_String_Action_PnP_Core_Services_IAuthenticationProvider__PnP_Core_Services_PnPContextOptions_
@@ -48519,12 +48540,30 @@ references:
   fullName.vb: PnP.Core.Services.IPnPContextFactory.Create(System.String, Action(Of PnP.Core.Services.IAuthenticationProvider), PnP.Core.Services.PnPContextOptions)
   nameWithType: IPnPContextFactory.Create(String, Action<IAuthenticationProvider>, PnPContextOptions)
   nameWithType.vb: IPnPContextFactory.Create(String, Action(Of IAuthenticationProvider), PnPContextOptions)
+- uid: PnP.Core.Services.IPnPContextFactory.Create(System.String,CancellationToken,PnP.Core.Services.PnPContextOptions)
+  name: Create(String, CancellationToken, PnPContextOptions)
+  href: api/PnP.Core.Services.IPnPContextFactory.html#PnP_Core_Services_IPnPContextFactory_Create_System_String_CancellationToken_PnP_Core_Services_PnPContextOptions_
+  commentId: M:PnP.Core.Services.IPnPContextFactory.Create(System.String,CancellationToken,PnP.Core.Services.PnPContextOptions)
+  fullName: PnP.Core.Services.IPnPContextFactory.Create(System.String, CancellationToken, PnP.Core.Services.PnPContextOptions)
+  nameWithType: IPnPContextFactory.Create(String, CancellationToken, PnPContextOptions)
 - uid: PnP.Core.Services.IPnPContextFactory.Create(System.String,PnP.Core.Services.PnPContextOptions)
   name: Create(String, PnPContextOptions)
   href: api/PnP.Core.Services.IPnPContextFactory.html#PnP_Core_Services_IPnPContextFactory_Create_System_String_PnP_Core_Services_PnPContextOptions_
   commentId: M:PnP.Core.Services.IPnPContextFactory.Create(System.String,PnP.Core.Services.PnPContextOptions)
   fullName: PnP.Core.Services.IPnPContextFactory.Create(System.String, PnP.Core.Services.PnPContextOptions)
   nameWithType: IPnPContextFactory.Create(String, PnPContextOptions)
+- uid: PnP.Core.Services.IPnPContextFactory.Create(Uri,CancellationToken,PnP.Core.Services.PnPContextOptions)
+  name: Create(Uri, CancellationToken, PnPContextOptions)
+  href: api/PnP.Core.Services.IPnPContextFactory.html#PnP_Core_Services_IPnPContextFactory_Create_Uri_CancellationToken_PnP_Core_Services_PnPContextOptions_
+  commentId: M:PnP.Core.Services.IPnPContextFactory.Create(Uri,CancellationToken,PnP.Core.Services.PnPContextOptions)
+  fullName: PnP.Core.Services.IPnPContextFactory.Create(Uri, CancellationToken, PnP.Core.Services.PnPContextOptions)
+  nameWithType: IPnPContextFactory.Create(Uri, CancellationToken, PnPContextOptions)
+- uid: PnP.Core.Services.IPnPContextFactory.Create(Uri,PnP.Core.Services.IAuthenticationProvider,CancellationToken,PnP.Core.Services.PnPContextOptions)
+  name: Create(Uri, IAuthenticationProvider, CancellationToken, PnPContextOptions)
+  href: api/PnP.Core.Services.IPnPContextFactory.html#PnP_Core_Services_IPnPContextFactory_Create_Uri_PnP_Core_Services_IAuthenticationProvider_CancellationToken_PnP_Core_Services_PnPContextOptions_
+  commentId: M:PnP.Core.Services.IPnPContextFactory.Create(Uri,PnP.Core.Services.IAuthenticationProvider,CancellationToken,PnP.Core.Services.PnPContextOptions)
+  fullName: PnP.Core.Services.IPnPContextFactory.Create(Uri, PnP.Core.Services.IAuthenticationProvider, CancellationToken, PnP.Core.Services.PnPContextOptions)
+  nameWithType: IPnPContextFactory.Create(Uri, IAuthenticationProvider, CancellationToken, PnPContextOptions)
 - uid: PnP.Core.Services.IPnPContextFactory.Create(Uri,PnP.Core.Services.IAuthenticationProvider,PnP.Core.Services.PnPContextOptions)
   name: Create(Uri, IAuthenticationProvider, PnPContextOptions)
   href: api/PnP.Core.Services.IPnPContextFactory.html#PnP_Core_Services_IPnPContextFactory_Create_Uri_PnP_Core_Services_IAuthenticationProvider_PnP_Core_Services_PnPContextOptions_
@@ -48544,6 +48583,18 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Services.IPnPContextFactory.Create
   nameWithType: IPnPContextFactory.Create
+- uid: PnP.Core.Services.IPnPContextFactory.CreateAsync(Guid,CancellationToken,PnP.Core.Services.PnPContextOptions)
+  name: CreateAsync(Guid, CancellationToken, PnPContextOptions)
+  href: api/PnP.Core.Services.IPnPContextFactory.html#PnP_Core_Services_IPnPContextFactory_CreateAsync_Guid_CancellationToken_PnP_Core_Services_PnPContextOptions_
+  commentId: M:PnP.Core.Services.IPnPContextFactory.CreateAsync(Guid,CancellationToken,PnP.Core.Services.PnPContextOptions)
+  fullName: PnP.Core.Services.IPnPContextFactory.CreateAsync(Guid, CancellationToken, PnP.Core.Services.PnPContextOptions)
+  nameWithType: IPnPContextFactory.CreateAsync(Guid, CancellationToken, PnPContextOptions)
+- uid: PnP.Core.Services.IPnPContextFactory.CreateAsync(Guid,PnP.Core.Services.IAuthenticationProvider,CancellationToken,PnP.Core.Services.PnPContextOptions)
+  name: CreateAsync(Guid, IAuthenticationProvider, CancellationToken, PnPContextOptions)
+  href: api/PnP.Core.Services.IPnPContextFactory.html#PnP_Core_Services_IPnPContextFactory_CreateAsync_Guid_PnP_Core_Services_IAuthenticationProvider_CancellationToken_PnP_Core_Services_PnPContextOptions_
+  commentId: M:PnP.Core.Services.IPnPContextFactory.CreateAsync(Guid,PnP.Core.Services.IAuthenticationProvider,CancellationToken,PnP.Core.Services.PnPContextOptions)
+  fullName: PnP.Core.Services.IPnPContextFactory.CreateAsync(Guid, PnP.Core.Services.IAuthenticationProvider, CancellationToken, PnP.Core.Services.PnPContextOptions)
+  nameWithType: IPnPContextFactory.CreateAsync(Guid, IAuthenticationProvider, CancellationToken, PnPContextOptions)
 - uid: PnP.Core.Services.IPnPContextFactory.CreateAsync(Guid,PnP.Core.Services.IAuthenticationProvider,PnP.Core.Services.PnPContextOptions)
   name: CreateAsync(Guid, IAuthenticationProvider, PnPContextOptions)
   href: api/PnP.Core.Services.IPnPContextFactory.html#PnP_Core_Services_IPnPContextFactory_CreateAsync_Guid_PnP_Core_Services_IAuthenticationProvider_PnP_Core_Services_PnPContextOptions_
@@ -48556,6 +48607,15 @@ references:
   commentId: M:PnP.Core.Services.IPnPContextFactory.CreateAsync(Guid,PnP.Core.Services.PnPContextOptions)
   fullName: PnP.Core.Services.IPnPContextFactory.CreateAsync(Guid, PnP.Core.Services.PnPContextOptions)
   nameWithType: IPnPContextFactory.CreateAsync(Guid, PnPContextOptions)
+- uid: PnP.Core.Services.IPnPContextFactory.CreateAsync(System.String,Action{PnP.Core.Services.IAuthenticationProvider},CancellationToken,PnP.Core.Services.PnPContextOptions)
+  name: CreateAsync(String, Action<IAuthenticationProvider>, CancellationToken, PnPContextOptions)
+  href: api/PnP.Core.Services.IPnPContextFactory.html#PnP_Core_Services_IPnPContextFactory_CreateAsync_System_String_Action_PnP_Core_Services_IAuthenticationProvider__CancellationToken_PnP_Core_Services_PnPContextOptions_
+  commentId: M:PnP.Core.Services.IPnPContextFactory.CreateAsync(System.String,Action{PnP.Core.Services.IAuthenticationProvider},CancellationToken,PnP.Core.Services.PnPContextOptions)
+  name.vb: CreateAsync(String, Action(Of IAuthenticationProvider), CancellationToken, PnPContextOptions)
+  fullName: PnP.Core.Services.IPnPContextFactory.CreateAsync(System.String, Action<PnP.Core.Services.IAuthenticationProvider>, CancellationToken, PnP.Core.Services.PnPContextOptions)
+  fullName.vb: PnP.Core.Services.IPnPContextFactory.CreateAsync(System.String, Action(Of PnP.Core.Services.IAuthenticationProvider), CancellationToken, PnP.Core.Services.PnPContextOptions)
+  nameWithType: IPnPContextFactory.CreateAsync(String, Action<IAuthenticationProvider>, CancellationToken, PnPContextOptions)
+  nameWithType.vb: IPnPContextFactory.CreateAsync(String, Action(Of IAuthenticationProvider), CancellationToken, PnPContextOptions)
 - uid: PnP.Core.Services.IPnPContextFactory.CreateAsync(System.String,Action{PnP.Core.Services.IAuthenticationProvider},PnP.Core.Services.PnPContextOptions)
   name: CreateAsync(String, Action<IAuthenticationProvider>, PnPContextOptions)
   href: api/PnP.Core.Services.IPnPContextFactory.html#PnP_Core_Services_IPnPContextFactory_CreateAsync_System_String_Action_PnP_Core_Services_IAuthenticationProvider__PnP_Core_Services_PnPContextOptions_
@@ -48565,12 +48625,30 @@ references:
   fullName.vb: PnP.Core.Services.IPnPContextFactory.CreateAsync(System.String, Action(Of PnP.Core.Services.IAuthenticationProvider), PnP.Core.Services.PnPContextOptions)
   nameWithType: IPnPContextFactory.CreateAsync(String, Action<IAuthenticationProvider>, PnPContextOptions)
   nameWithType.vb: IPnPContextFactory.CreateAsync(String, Action(Of IAuthenticationProvider), PnPContextOptions)
+- uid: PnP.Core.Services.IPnPContextFactory.CreateAsync(System.String,CancellationToken,PnP.Core.Services.PnPContextOptions)
+  name: CreateAsync(String, CancellationToken, PnPContextOptions)
+  href: api/PnP.Core.Services.IPnPContextFactory.html#PnP_Core_Services_IPnPContextFactory_CreateAsync_System_String_CancellationToken_PnP_Core_Services_PnPContextOptions_
+  commentId: M:PnP.Core.Services.IPnPContextFactory.CreateAsync(System.String,CancellationToken,PnP.Core.Services.PnPContextOptions)
+  fullName: PnP.Core.Services.IPnPContextFactory.CreateAsync(System.String, CancellationToken, PnP.Core.Services.PnPContextOptions)
+  nameWithType: IPnPContextFactory.CreateAsync(String, CancellationToken, PnPContextOptions)
 - uid: PnP.Core.Services.IPnPContextFactory.CreateAsync(System.String,PnP.Core.Services.PnPContextOptions)
   name: CreateAsync(String, PnPContextOptions)
   href: api/PnP.Core.Services.IPnPContextFactory.html#PnP_Core_Services_IPnPContextFactory_CreateAsync_System_String_PnP_Core_Services_PnPContextOptions_
   commentId: M:PnP.Core.Services.IPnPContextFactory.CreateAsync(System.String,PnP.Core.Services.PnPContextOptions)
   fullName: PnP.Core.Services.IPnPContextFactory.CreateAsync(System.String, PnP.Core.Services.PnPContextOptions)
   nameWithType: IPnPContextFactory.CreateAsync(String, PnPContextOptions)
+- uid: PnP.Core.Services.IPnPContextFactory.CreateAsync(Uri,CancellationToken,PnP.Core.Services.PnPContextOptions)
+  name: CreateAsync(Uri, CancellationToken, PnPContextOptions)
+  href: api/PnP.Core.Services.IPnPContextFactory.html#PnP_Core_Services_IPnPContextFactory_CreateAsync_Uri_CancellationToken_PnP_Core_Services_PnPContextOptions_
+  commentId: M:PnP.Core.Services.IPnPContextFactory.CreateAsync(Uri,CancellationToken,PnP.Core.Services.PnPContextOptions)
+  fullName: PnP.Core.Services.IPnPContextFactory.CreateAsync(Uri, CancellationToken, PnP.Core.Services.PnPContextOptions)
+  nameWithType: IPnPContextFactory.CreateAsync(Uri, CancellationToken, PnPContextOptions)
+- uid: PnP.Core.Services.IPnPContextFactory.CreateAsync(Uri,PnP.Core.Services.IAuthenticationProvider,CancellationToken,PnP.Core.Services.PnPContextOptions)
+  name: CreateAsync(Uri, IAuthenticationProvider, CancellationToken, PnPContextOptions)
+  href: api/PnP.Core.Services.IPnPContextFactory.html#PnP_Core_Services_IPnPContextFactory_CreateAsync_Uri_PnP_Core_Services_IAuthenticationProvider_CancellationToken_PnP_Core_Services_PnPContextOptions_
+  commentId: M:PnP.Core.Services.IPnPContextFactory.CreateAsync(Uri,PnP.Core.Services.IAuthenticationProvider,CancellationToken,PnP.Core.Services.PnPContextOptions)
+  fullName: PnP.Core.Services.IPnPContextFactory.CreateAsync(Uri, PnP.Core.Services.IAuthenticationProvider, CancellationToken, PnP.Core.Services.PnPContextOptions)
+  nameWithType: IPnPContextFactory.CreateAsync(Uri, IAuthenticationProvider, CancellationToken, PnPContextOptions)
 - uid: PnP.Core.Services.IPnPContextFactory.CreateAsync(Uri,PnP.Core.Services.IAuthenticationProvider,PnP.Core.Services.PnPContextOptions)
   name: CreateAsync(Uri, IAuthenticationProvider, PnPContextOptions)
   href: api/PnP.Core.Services.IPnPContextFactory.html#PnP_Core_Services_IPnPContextFactory_CreateAsync_Uri_PnP_Core_Services_IAuthenticationProvider_PnP_Core_Services_PnPContextOptions_
@@ -49177,6 +49255,18 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Services.PnPContextFactory.ContextOptions
   nameWithType: PnPContextFactory.ContextOptions
+- uid: PnP.Core.Services.PnPContextFactory.Create(Guid,CancellationToken,PnP.Core.Services.PnPContextOptions)
+  name: Create(Guid, CancellationToken, PnPContextOptions)
+  href: api/PnP.Core.Services.PnPContextFactory.html#PnP_Core_Services_PnPContextFactory_Create_Guid_CancellationToken_PnP_Core_Services_PnPContextOptions_
+  commentId: M:PnP.Core.Services.PnPContextFactory.Create(Guid,CancellationToken,PnP.Core.Services.PnPContextOptions)
+  fullName: PnP.Core.Services.PnPContextFactory.Create(Guid, CancellationToken, PnP.Core.Services.PnPContextOptions)
+  nameWithType: PnPContextFactory.Create(Guid, CancellationToken, PnPContextOptions)
+- uid: PnP.Core.Services.PnPContextFactory.Create(Guid,PnP.Core.Services.IAuthenticationProvider,CancellationToken,PnP.Core.Services.PnPContextOptions)
+  name: Create(Guid, IAuthenticationProvider, CancellationToken, PnPContextOptions)
+  href: api/PnP.Core.Services.PnPContextFactory.html#PnP_Core_Services_PnPContextFactory_Create_Guid_PnP_Core_Services_IAuthenticationProvider_CancellationToken_PnP_Core_Services_PnPContextOptions_
+  commentId: M:PnP.Core.Services.PnPContextFactory.Create(Guid,PnP.Core.Services.IAuthenticationProvider,CancellationToken,PnP.Core.Services.PnPContextOptions)
+  fullName: PnP.Core.Services.PnPContextFactory.Create(Guid, PnP.Core.Services.IAuthenticationProvider, CancellationToken, PnP.Core.Services.PnPContextOptions)
+  nameWithType: PnPContextFactory.Create(Guid, IAuthenticationProvider, CancellationToken, PnPContextOptions)
 - uid: PnP.Core.Services.PnPContextFactory.Create(Guid,PnP.Core.Services.IAuthenticationProvider,PnP.Core.Services.PnPContextOptions)
   name: Create(Guid, IAuthenticationProvider, PnPContextOptions)
   href: api/PnP.Core.Services.PnPContextFactory.html#PnP_Core_Services_PnPContextFactory_Create_Guid_PnP_Core_Services_IAuthenticationProvider_PnP_Core_Services_PnPContextOptions_
@@ -49189,6 +49279,15 @@ references:
   commentId: M:PnP.Core.Services.PnPContextFactory.Create(Guid,PnP.Core.Services.PnPContextOptions)
   fullName: PnP.Core.Services.PnPContextFactory.Create(Guid, PnP.Core.Services.PnPContextOptions)
   nameWithType: PnPContextFactory.Create(Guid, PnPContextOptions)
+- uid: PnP.Core.Services.PnPContextFactory.Create(System.String,Action{PnP.Core.Services.IAuthenticationProvider},CancellationToken,PnP.Core.Services.PnPContextOptions)
+  name: Create(String, Action<IAuthenticationProvider>, CancellationToken, PnPContextOptions)
+  href: api/PnP.Core.Services.PnPContextFactory.html#PnP_Core_Services_PnPContextFactory_Create_System_String_Action_PnP_Core_Services_IAuthenticationProvider__CancellationToken_PnP_Core_Services_PnPContextOptions_
+  commentId: M:PnP.Core.Services.PnPContextFactory.Create(System.String,Action{PnP.Core.Services.IAuthenticationProvider},CancellationToken,PnP.Core.Services.PnPContextOptions)
+  name.vb: Create(String, Action(Of IAuthenticationProvider), CancellationToken, PnPContextOptions)
+  fullName: PnP.Core.Services.PnPContextFactory.Create(System.String, Action<PnP.Core.Services.IAuthenticationProvider>, CancellationToken, PnP.Core.Services.PnPContextOptions)
+  fullName.vb: PnP.Core.Services.PnPContextFactory.Create(System.String, Action(Of PnP.Core.Services.IAuthenticationProvider), CancellationToken, PnP.Core.Services.PnPContextOptions)
+  nameWithType: PnPContextFactory.Create(String, Action<IAuthenticationProvider>, CancellationToken, PnPContextOptions)
+  nameWithType.vb: PnPContextFactory.Create(String, Action(Of IAuthenticationProvider), CancellationToken, PnPContextOptions)
 - uid: PnP.Core.Services.PnPContextFactory.Create(System.String,Action{PnP.Core.Services.IAuthenticationProvider},PnP.Core.Services.PnPContextOptions)
   name: Create(String, Action<IAuthenticationProvider>, PnPContextOptions)
   href: api/PnP.Core.Services.PnPContextFactory.html#PnP_Core_Services_PnPContextFactory_Create_System_String_Action_PnP_Core_Services_IAuthenticationProvider__PnP_Core_Services_PnPContextOptions_
@@ -49198,12 +49297,30 @@ references:
   fullName.vb: PnP.Core.Services.PnPContextFactory.Create(System.String, Action(Of PnP.Core.Services.IAuthenticationProvider), PnP.Core.Services.PnPContextOptions)
   nameWithType: PnPContextFactory.Create(String, Action<IAuthenticationProvider>, PnPContextOptions)
   nameWithType.vb: PnPContextFactory.Create(String, Action(Of IAuthenticationProvider), PnPContextOptions)
+- uid: PnP.Core.Services.PnPContextFactory.Create(System.String,CancellationToken,PnP.Core.Services.PnPContextOptions)
+  name: Create(String, CancellationToken, PnPContextOptions)
+  href: api/PnP.Core.Services.PnPContextFactory.html#PnP_Core_Services_PnPContextFactory_Create_System_String_CancellationToken_PnP_Core_Services_PnPContextOptions_
+  commentId: M:PnP.Core.Services.PnPContextFactory.Create(System.String,CancellationToken,PnP.Core.Services.PnPContextOptions)
+  fullName: PnP.Core.Services.PnPContextFactory.Create(System.String, CancellationToken, PnP.Core.Services.PnPContextOptions)
+  nameWithType: PnPContextFactory.Create(String, CancellationToken, PnPContextOptions)
 - uid: PnP.Core.Services.PnPContextFactory.Create(System.String,PnP.Core.Services.PnPContextOptions)
   name: Create(String, PnPContextOptions)
   href: api/PnP.Core.Services.PnPContextFactory.html#PnP_Core_Services_PnPContextFactory_Create_System_String_PnP_Core_Services_PnPContextOptions_
   commentId: M:PnP.Core.Services.PnPContextFactory.Create(System.String,PnP.Core.Services.PnPContextOptions)
   fullName: PnP.Core.Services.PnPContextFactory.Create(System.String, PnP.Core.Services.PnPContextOptions)
   nameWithType: PnPContextFactory.Create(String, PnPContextOptions)
+- uid: PnP.Core.Services.PnPContextFactory.Create(Uri,CancellationToken,PnP.Core.Services.PnPContextOptions)
+  name: Create(Uri, CancellationToken, PnPContextOptions)
+  href: api/PnP.Core.Services.PnPContextFactory.html#PnP_Core_Services_PnPContextFactory_Create_Uri_CancellationToken_PnP_Core_Services_PnPContextOptions_
+  commentId: M:PnP.Core.Services.PnPContextFactory.Create(Uri,CancellationToken,PnP.Core.Services.PnPContextOptions)
+  fullName: PnP.Core.Services.PnPContextFactory.Create(Uri, CancellationToken, PnP.Core.Services.PnPContextOptions)
+  nameWithType: PnPContextFactory.Create(Uri, CancellationToken, PnPContextOptions)
+- uid: PnP.Core.Services.PnPContextFactory.Create(Uri,PnP.Core.Services.IAuthenticationProvider,CancellationToken,PnP.Core.Services.PnPContextOptions)
+  name: Create(Uri, IAuthenticationProvider, CancellationToken, PnPContextOptions)
+  href: api/PnP.Core.Services.PnPContextFactory.html#PnP_Core_Services_PnPContextFactory_Create_Uri_PnP_Core_Services_IAuthenticationProvider_CancellationToken_PnP_Core_Services_PnPContextOptions_
+  commentId: M:PnP.Core.Services.PnPContextFactory.Create(Uri,PnP.Core.Services.IAuthenticationProvider,CancellationToken,PnP.Core.Services.PnPContextOptions)
+  fullName: PnP.Core.Services.PnPContextFactory.Create(Uri, PnP.Core.Services.IAuthenticationProvider, CancellationToken, PnP.Core.Services.PnPContextOptions)
+  nameWithType: PnPContextFactory.Create(Uri, IAuthenticationProvider, CancellationToken, PnPContextOptions)
 - uid: PnP.Core.Services.PnPContextFactory.Create(Uri,PnP.Core.Services.IAuthenticationProvider,PnP.Core.Services.PnPContextOptions)
   name: Create(Uri, IAuthenticationProvider, PnPContextOptions)
   href: api/PnP.Core.Services.PnPContextFactory.html#PnP_Core_Services_PnPContextFactory_Create_Uri_PnP_Core_Services_IAuthenticationProvider_PnP_Core_Services_PnPContextOptions_
@@ -49223,6 +49340,18 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Services.PnPContextFactory.Create
   nameWithType: PnPContextFactory.Create
+- uid: PnP.Core.Services.PnPContextFactory.CreateAsync(Guid,CancellationToken,PnP.Core.Services.PnPContextOptions)
+  name: CreateAsync(Guid, CancellationToken, PnPContextOptions)
+  href: api/PnP.Core.Services.PnPContextFactory.html#PnP_Core_Services_PnPContextFactory_CreateAsync_Guid_CancellationToken_PnP_Core_Services_PnPContextOptions_
+  commentId: M:PnP.Core.Services.PnPContextFactory.CreateAsync(Guid,CancellationToken,PnP.Core.Services.PnPContextOptions)
+  fullName: PnP.Core.Services.PnPContextFactory.CreateAsync(Guid, CancellationToken, PnP.Core.Services.PnPContextOptions)
+  nameWithType: PnPContextFactory.CreateAsync(Guid, CancellationToken, PnPContextOptions)
+- uid: PnP.Core.Services.PnPContextFactory.CreateAsync(Guid,PnP.Core.Services.IAuthenticationProvider,CancellationToken,PnP.Core.Services.PnPContextOptions)
+  name: CreateAsync(Guid, IAuthenticationProvider, CancellationToken, PnPContextOptions)
+  href: api/PnP.Core.Services.PnPContextFactory.html#PnP_Core_Services_PnPContextFactory_CreateAsync_Guid_PnP_Core_Services_IAuthenticationProvider_CancellationToken_PnP_Core_Services_PnPContextOptions_
+  commentId: M:PnP.Core.Services.PnPContextFactory.CreateAsync(Guid,PnP.Core.Services.IAuthenticationProvider,CancellationToken,PnP.Core.Services.PnPContextOptions)
+  fullName: PnP.Core.Services.PnPContextFactory.CreateAsync(Guid, PnP.Core.Services.IAuthenticationProvider, CancellationToken, PnP.Core.Services.PnPContextOptions)
+  nameWithType: PnPContextFactory.CreateAsync(Guid, IAuthenticationProvider, CancellationToken, PnPContextOptions)
 - uid: PnP.Core.Services.PnPContextFactory.CreateAsync(Guid,PnP.Core.Services.IAuthenticationProvider,PnP.Core.Services.PnPContextOptions)
   name: CreateAsync(Guid, IAuthenticationProvider, PnPContextOptions)
   href: api/PnP.Core.Services.PnPContextFactory.html#PnP_Core_Services_PnPContextFactory_CreateAsync_Guid_PnP_Core_Services_IAuthenticationProvider_PnP_Core_Services_PnPContextOptions_
@@ -49235,6 +49364,15 @@ references:
   commentId: M:PnP.Core.Services.PnPContextFactory.CreateAsync(Guid,PnP.Core.Services.PnPContextOptions)
   fullName: PnP.Core.Services.PnPContextFactory.CreateAsync(Guid, PnP.Core.Services.PnPContextOptions)
   nameWithType: PnPContextFactory.CreateAsync(Guid, PnPContextOptions)
+- uid: PnP.Core.Services.PnPContextFactory.CreateAsync(System.String,Action{PnP.Core.Services.IAuthenticationProvider},CancellationToken,PnP.Core.Services.PnPContextOptions)
+  name: CreateAsync(String, Action<IAuthenticationProvider>, CancellationToken, PnPContextOptions)
+  href: api/PnP.Core.Services.PnPContextFactory.html#PnP_Core_Services_PnPContextFactory_CreateAsync_System_String_Action_PnP_Core_Services_IAuthenticationProvider__CancellationToken_PnP_Core_Services_PnPContextOptions_
+  commentId: M:PnP.Core.Services.PnPContextFactory.CreateAsync(System.String,Action{PnP.Core.Services.IAuthenticationProvider},CancellationToken,PnP.Core.Services.PnPContextOptions)
+  name.vb: CreateAsync(String, Action(Of IAuthenticationProvider), CancellationToken, PnPContextOptions)
+  fullName: PnP.Core.Services.PnPContextFactory.CreateAsync(System.String, Action<PnP.Core.Services.IAuthenticationProvider>, CancellationToken, PnP.Core.Services.PnPContextOptions)
+  fullName.vb: PnP.Core.Services.PnPContextFactory.CreateAsync(System.String, Action(Of PnP.Core.Services.IAuthenticationProvider), CancellationToken, PnP.Core.Services.PnPContextOptions)
+  nameWithType: PnPContextFactory.CreateAsync(String, Action<IAuthenticationProvider>, CancellationToken, PnPContextOptions)
+  nameWithType.vb: PnPContextFactory.CreateAsync(String, Action(Of IAuthenticationProvider), CancellationToken, PnPContextOptions)
 - uid: PnP.Core.Services.PnPContextFactory.CreateAsync(System.String,Action{PnP.Core.Services.IAuthenticationProvider},PnP.Core.Services.PnPContextOptions)
   name: CreateAsync(String, Action<IAuthenticationProvider>, PnPContextOptions)
   href: api/PnP.Core.Services.PnPContextFactory.html#PnP_Core_Services_PnPContextFactory_CreateAsync_System_String_Action_PnP_Core_Services_IAuthenticationProvider__PnP_Core_Services_PnPContextOptions_
@@ -49244,12 +49382,30 @@ references:
   fullName.vb: PnP.Core.Services.PnPContextFactory.CreateAsync(System.String, Action(Of PnP.Core.Services.IAuthenticationProvider), PnP.Core.Services.PnPContextOptions)
   nameWithType: PnPContextFactory.CreateAsync(String, Action<IAuthenticationProvider>, PnPContextOptions)
   nameWithType.vb: PnPContextFactory.CreateAsync(String, Action(Of IAuthenticationProvider), PnPContextOptions)
+- uid: PnP.Core.Services.PnPContextFactory.CreateAsync(System.String,CancellationToken,PnP.Core.Services.PnPContextOptions)
+  name: CreateAsync(String, CancellationToken, PnPContextOptions)
+  href: api/PnP.Core.Services.PnPContextFactory.html#PnP_Core_Services_PnPContextFactory_CreateAsync_System_String_CancellationToken_PnP_Core_Services_PnPContextOptions_
+  commentId: M:PnP.Core.Services.PnPContextFactory.CreateAsync(System.String,CancellationToken,PnP.Core.Services.PnPContextOptions)
+  fullName: PnP.Core.Services.PnPContextFactory.CreateAsync(System.String, CancellationToken, PnP.Core.Services.PnPContextOptions)
+  nameWithType: PnPContextFactory.CreateAsync(String, CancellationToken, PnPContextOptions)
 - uid: PnP.Core.Services.PnPContextFactory.CreateAsync(System.String,PnP.Core.Services.PnPContextOptions)
   name: CreateAsync(String, PnPContextOptions)
   href: api/PnP.Core.Services.PnPContextFactory.html#PnP_Core_Services_PnPContextFactory_CreateAsync_System_String_PnP_Core_Services_PnPContextOptions_
   commentId: M:PnP.Core.Services.PnPContextFactory.CreateAsync(System.String,PnP.Core.Services.PnPContextOptions)
   fullName: PnP.Core.Services.PnPContextFactory.CreateAsync(System.String, PnP.Core.Services.PnPContextOptions)
   nameWithType: PnPContextFactory.CreateAsync(String, PnPContextOptions)
+- uid: PnP.Core.Services.PnPContextFactory.CreateAsync(Uri,CancellationToken,PnP.Core.Services.PnPContextOptions)
+  name: CreateAsync(Uri, CancellationToken, PnPContextOptions)
+  href: api/PnP.Core.Services.PnPContextFactory.html#PnP_Core_Services_PnPContextFactory_CreateAsync_Uri_CancellationToken_PnP_Core_Services_PnPContextOptions_
+  commentId: M:PnP.Core.Services.PnPContextFactory.CreateAsync(Uri,CancellationToken,PnP.Core.Services.PnPContextOptions)
+  fullName: PnP.Core.Services.PnPContextFactory.CreateAsync(Uri, CancellationToken, PnP.Core.Services.PnPContextOptions)
+  nameWithType: PnPContextFactory.CreateAsync(Uri, CancellationToken, PnPContextOptions)
+- uid: PnP.Core.Services.PnPContextFactory.CreateAsync(Uri,PnP.Core.Services.IAuthenticationProvider,CancellationToken,PnP.Core.Services.PnPContextOptions)
+  name: CreateAsync(Uri, IAuthenticationProvider, CancellationToken, PnPContextOptions)
+  href: api/PnP.Core.Services.PnPContextFactory.html#PnP_Core_Services_PnPContextFactory_CreateAsync_Uri_PnP_Core_Services_IAuthenticationProvider_CancellationToken_PnP_Core_Services_PnPContextOptions_
+  commentId: M:PnP.Core.Services.PnPContextFactory.CreateAsync(Uri,PnP.Core.Services.IAuthenticationProvider,CancellationToken,PnP.Core.Services.PnPContextOptions)
+  fullName: PnP.Core.Services.PnPContextFactory.CreateAsync(Uri, PnP.Core.Services.IAuthenticationProvider, CancellationToken, PnP.Core.Services.PnPContextOptions)
+  nameWithType: PnPContextFactory.CreateAsync(Uri, IAuthenticationProvider, CancellationToken, PnPContextOptions)
 - uid: PnP.Core.Services.PnPContextFactory.CreateAsync(Uri,PnP.Core.Services.IAuthenticationProvider,PnP.Core.Services.PnPContextOptions)
   name: CreateAsync(Uri, IAuthenticationProvider, PnPContextOptions)
   href: api/PnP.Core.Services.PnPContextFactory.html#PnP_Core_Services_PnPContextFactory_CreateAsync_Uri_PnP_Core_Services_IAuthenticationProvider_PnP_Core_Services_PnPContextOptions_
