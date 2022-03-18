@@ -9,10 +9,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Net.Http;
-using System.Reflection;
+using System.Threading;
 #if NET5_0_OR_GREATER
 using System.Runtime.InteropServices;
 using System.Text.Json;
+using System.Reflection;
 #endif
 using System.Threading.Tasks;
 
@@ -104,7 +105,20 @@ namespace PnP.Core.Services
         /// <returns>A PnPContext object based on the provided configuration name</returns>
         public virtual PnPContext Create(string name, Action<IAuthenticationProvider> initializeAuthenticationProvider, PnPContextOptions options = null)
         {
-            return CreateAsync(name, initializeAuthenticationProvider, options).GetAwaiter().GetResult();
+            return CreateAsync(name, initializeAuthenticationProvider, default, options).GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        /// Creates a new instance of PnPContext based on a provided configuration name
+        /// </summary>
+        /// <param name="name">The name of the PnPContext configuration to use</param>
+        /// <param name="initializeAuthenticationProvider">The function to initialize the authentication provider</param>
+        /// <param name="cancellationToken">The cancellation token to cancel operation</param>
+        /// <param name="options">Options used to configure the created context</param>
+        /// <returns>A PnPContext object based on the provided configuration name</returns>
+        public virtual PnPContext Create(string name, Action<IAuthenticationProvider> initializeAuthenticationProvider, CancellationToken cancellationToken, PnPContextOptions options = null)
+        {
+            return CreateAsync(name, initializeAuthenticationProvider, cancellationToken, options).GetAwaiter().GetResult();
         }
 
         /// <summary>
@@ -122,11 +136,35 @@ namespace PnP.Core.Services
         /// Creates a new instance of PnPContext based on a provided configuration name
         /// </summary>
         /// <param name="name">The name of the PnPContext configuration to use</param>
+        /// <param name="cancellationToken">The cancellation token to cancel operation</param>
+        /// <param name="options">Options used to configure the created context</param>
+        /// <returns>A PnPContext object based on the provided configuration name</returns>
+        public virtual PnPContext Create(string name, CancellationToken cancellationToken, PnPContextOptions options = null)
+        {
+            return CreateAsync(name, cancellationToken, options).GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        /// Creates a new instance of PnPContext based on a provided configuration name
+        /// </summary>
+        /// <param name="name">The name of the PnPContext configuration to use</param>
         /// <param name="options">Options used to configure the created context</param>
         /// <returns>A PnPContext object based on the provided configuration name</returns>
         public async virtual Task<PnPContext> CreateAsync(string name, PnPContextOptions options = null)
         {
-            return await CreateAsync(name, null, options).ConfigureAwait(false);
+            return await CreateAsync(name, null, default, options).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Creates a new instance of PnPContext based on a provided configuration name
+        /// </summary>
+        /// <param name="name">The name of the PnPContext configuration to use</param>
+        /// <param name="cancellationToken">The cancellation token to cancel operation</param>
+        /// <param name="options">Options used to configure the created context</param>
+        /// <returns>A PnPContext object based on the provided configuration name</returns>
+        public async virtual Task<PnPContext> CreateAsync(string name, CancellationToken cancellationToken, PnPContextOptions options = null)
+        {
+            return await CreateAsync(name, null, cancellationToken, options).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -137,6 +175,19 @@ namespace PnP.Core.Services
         /// <param name="options">Options used to configure the created context</param>
         /// <returns>A PnPContext object based on the provided configuration name</returns>
         public async virtual Task<PnPContext> CreateAsync(string name, Action<IAuthenticationProvider> initializeAuthenticationProvider, PnPContextOptions options = null)
+        { 
+            return await CreateAsync(name, initializeAuthenticationProvider, default, options).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Creates a new instance of PnPContext based on a provided configuration name
+        /// </summary>
+        /// <param name="name">The name of the PnPContext configuration to use</param>
+        /// <param name="initializeAuthenticationProvider">The function to initialize the authentication provider</param>
+        /// <param name="cancellationToken">The cancellation token to cancel operation</param>
+        /// <param name="options">Options used to configure the created context</param>
+        /// <returns>A PnPContext object based on the provided configuration name</returns>
+        public async virtual Task<PnPContext> CreateAsync(string name, Action<IAuthenticationProvider> initializeAuthenticationProvider, CancellationToken cancellationToken, PnPContextOptions options = null)
         {
             // Search for the provided configuration
             var configuration = ContextOptions.Configurations.FirstOrDefault(c => c.Name == name);
@@ -149,7 +200,7 @@ namespace PnP.Core.Services
             // Process the Authentication Provider initialization code, if any
             initializeAuthenticationProvider?.Invoke(configuration.AuthenticationProvider);
 
-            return await CreateAsync(configuration.SiteUrl, configuration.AuthenticationProvider, options).ConfigureAwait(false);
+            return await CreateAsync(configuration.SiteUrl, configuration.AuthenticationProvider, cancellationToken, options).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -167,12 +218,37 @@ namespace PnP.Core.Services
         /// Creates a new instance of PnPContext based on a provided configuration name
         /// </summary>
         /// <param name="url">The URL of the PnPContext as a URI</param>
+        /// <param name="cancellationToken">The cancellation token to cancel operation</param>
+        /// <param name="options">Options used to configure the created context</param>
+        /// <returns>A PnPContext object based on the provided configuration name</returns>
+        public virtual PnPContext Create(Uri url, CancellationToken cancellationToken, PnPContextOptions options = null)
+        {
+            return CreateAsync(url, cancellationToken, options).GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        /// Creates a new instance of PnPContext based on a provided configuration name
+        /// </summary>
+        /// <param name="url">The URL of the PnPContext as a URI</param>
         /// <param name="options">Options used to configure the created context</param>
         /// <returns>A PnPContext object based on the provided configuration name</returns>
         public async virtual Task<PnPContext> CreateAsync(Uri url, PnPContextOptions options = null)
         {
             // Use the default settings to create a new instance of PnPContext
-            return await CreateAsync(url, ContextOptions.DefaultAuthenticationProvider, options).ConfigureAwait(false);
+            return await CreateAsync(url, ContextOptions.DefaultAuthenticationProvider, default, options).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Creates a new instance of PnPContext based on a provided configuration name
+        /// </summary>
+        /// <param name="url">The URL of the PnPContext as a URI</param>
+        /// <param name="cancellationToken">The cancellation token to cancel operation</param>
+        /// <param name="options">Options used to configure the created context</param>
+        /// <returns>A PnPContext object based on the provided configuration name</returns>
+        public async virtual Task<PnPContext> CreateAsync(Uri url, CancellationToken cancellationToken, PnPContextOptions options = null)
+        {
+            // Use the default settings to create a new instance of PnPContext
+            return await CreateAsync(url, ContextOptions.DefaultAuthenticationProvider, cancellationToken, options).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -184,7 +260,20 @@ namespace PnP.Core.Services
         /// <returns>A PnPContext object based on the provided configuration name</returns>
         public virtual PnPContext Create(Uri url, IAuthenticationProvider authenticationProvider, PnPContextOptions options = null)
         {
-            return CreateAsync(url, authenticationProvider, options).GetAwaiter().GetResult();
+            return CreateAsync(url, authenticationProvider, default, options).GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        /// Creates a new instance of PnPContext based on a provided configuration name
+        /// </summary>
+        /// <param name="url">The URL of the PnPContext as a URI</param>
+        /// <param name="authenticationProvider">The Authentication Provider to use to authenticate within the PnPContext</param>
+        /// <param name="cancellationToken">The cancellation token to cancel operation</param>
+        /// <param name="options">Options used to configure the created context</param>
+        /// <returns>A PnPContext object based on the provided configuration name</returns>
+        public virtual PnPContext Create(Uri url, IAuthenticationProvider authenticationProvider, CancellationToken cancellationToken, PnPContextOptions options = null)
+        {
+            return CreateAsync(url, authenticationProvider, cancellationToken, options).GetAwaiter().GetResult();
         }
 
         /// <summary>
@@ -195,6 +284,19 @@ namespace PnP.Core.Services
         /// <param name="options">Options used to configure the created context</param>
         /// <returns>A PnPContext object based on the provided configuration name</returns>
         public async virtual Task<PnPContext> CreateAsync(Uri url, IAuthenticationProvider authenticationProvider, PnPContextOptions options = null)
+        {
+            return await CreateAsync(url, authenticationProvider, default, options).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Creates a new instance of PnPContext based on a provided configuration name
+        /// </summary>
+        /// <param name="url">The URL of the PnPContext as a URI</param>
+        /// <param name="authenticationProvider">The Authentication Provider to use to authenticate within the PnPContext</param>
+        /// <param name="cancellationToken">The cancellation token to cancel operation</param>
+        /// <param name="options">Options used to configure the created context</param>
+        /// <returns>A PnPContext object based on the provided configuration name</returns>
+        public async virtual Task<PnPContext> CreateAsync(Uri url, IAuthenticationProvider authenticationProvider, CancellationToken cancellationToken, PnPContextOptions options = null)
         {
             if (url == null)
             {
@@ -209,7 +311,8 @@ namespace PnP.Core.Services
             // Use the provided settings to create a new instance of PnPContext
             var context = new PnPContext(Log, authenticationProvider, SharePointRestClient, MicrosoftGraphClient, ContextOptions, GlobalOptions, TelemetryManager)
             {
-                Uri = url
+                Uri = url,
+                CancellationToken = cancellationToken,
             };
 
             // Configure telemetry, if enabled
@@ -243,9 +346,35 @@ namespace PnP.Core.Services
         /// </summary>
         /// <param name="groupId">The id of an Microsoft 365 group</param>
         /// <param name="authenticationProvider">The Authentication Provider to use to authenticate within the PnPContext</param>
+        /// <param name="cancellationToken">The cancellation token to cancel operation</param>
+        /// <param name="options">Options used to configure the created context</param>
+        /// <returns>A PnPContext object based on the provided configuration name</returns>
+        public virtual PnPContext Create(Guid groupId, IAuthenticationProvider authenticationProvider, CancellationToken cancellationToken, PnPContextOptions options = null)
+        {
+            return CreateAsync(groupId, authenticationProvider, cancellationToken, options).GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        /// Creates a new instance of PnPContext based on a provided group and Authentication Provider instance
+        /// </summary>
+        /// <param name="groupId">The id of an Microsoft 365 group</param>
+        /// <param name="authenticationProvider">The Authentication Provider to use to authenticate within the PnPContext</param>
         /// <param name="options">Options used to configure the created context</param>
         /// <returns>A PnPContext object based on the provided configuration name</returns>
         public async virtual Task<PnPContext> CreateAsync(Guid groupId, IAuthenticationProvider authenticationProvider, PnPContextOptions options = null)
+        { 
+            return await CreateAsync(groupId, authenticationProvider, default, options).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Creates a new instance of PnPContext based on a provided group and Authentication Provider instance
+        /// </summary>
+        /// <param name="groupId">The id of an Microsoft 365 group</param>
+        /// <param name="authenticationProvider">The Authentication Provider to use to authenticate within the PnPContext</param>
+        /// <param name="cancellationToken">The cancellation token to cancel operation</param>
+        /// <param name="options">Options used to configure the created context</param>
+        /// <returns>A PnPContext object based on the provided configuration name</returns>
+        public async virtual Task<PnPContext> CreateAsync(Guid groupId, IAuthenticationProvider authenticationProvider, CancellationToken cancellationToken, PnPContextOptions options = null)
         {
             if (groupId == Guid.Empty)
             {
@@ -258,7 +387,10 @@ namespace PnP.Core.Services
             }
 
             // Use the provided settings to create a new instance of PnPContext
-            var context = new PnPContext(Log, authenticationProvider, SharePointRestClient, MicrosoftGraphClient, ContextOptions, GlobalOptions, TelemetryManager);
+            var context = new PnPContext(Log, authenticationProvider, SharePointRestClient, MicrosoftGraphClient, ContextOptions, GlobalOptions, TelemetryManager)
+            {
+                CancellationToken = cancellationToken,
+            };
 
             // Configure telemetry, if enabled
             await ConfigureTelemetry(context).ConfigureAwait(false);
@@ -287,11 +419,35 @@ namespace PnP.Core.Services
         /// Creates a new instance of PnPContext based on a provided group and using the default Authentication Provider
         /// </summary>
         /// <param name="groupId">The id of an Microsoft 365 group</param>
+        /// <param name="cancellationToken">The cancellation token to cancel operation</param>
+        /// <param name="options">Options used to configure the created context</param>
+        /// <returns>A PnPContext object based on the provided configuration name</returns>
+        public virtual PnPContext Create(Guid groupId, CancellationToken cancellationToken, PnPContextOptions options = null)
+        {
+            return CreateAsync(groupId, cancellationToken, options).GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        /// Creates a new instance of PnPContext based on a provided group and using the default Authentication Provider
+        /// </summary>
+        /// <param name="groupId">The id of an Microsoft 365 group</param>
         /// <param name="options">Options used to configure the created context</param>
         /// <returns>A PnPContext object based on the provided configuration name</returns>
         public async virtual Task<PnPContext> CreateAsync(Guid groupId, PnPContextOptions options = null)
         {
             return await CreateAsync(groupId, ContextOptions.DefaultAuthenticationProvider, options).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Creates a new instance of PnPContext based on a provided group and using the default Authentication Provider
+        /// </summary>
+        /// <param name="groupId">The id of an Microsoft 365 group</param>
+        /// <param name="cancellationToken">The cancellation token to cancel operation</param>
+        /// <param name="options">Options used to configure the created context</param>
+        /// <returns>A PnPContext object based on the provided configuration name</returns>
+        public async virtual Task<PnPContext> CreateAsync(Guid groupId, CancellationToken cancellationToken, PnPContextOptions options = null)
+        {
+            return await CreateAsync(groupId, ContextOptions.DefaultAuthenticationProvider, cancellationToken, options).ConfigureAwait(false);
         }
 
         /// <summary>

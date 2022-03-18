@@ -9,6 +9,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Net.Http;
 using System.Text.Json;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace PnP.Core.Services
@@ -186,6 +187,11 @@ namespace PnP.Core.Services
         /// Modules to be added to the next request's execution pipeline
         /// </summary>
         internal List<IRequestModule> RequestModules { get; set; }
+
+        /// <summary>
+        /// The cancellation token to cancel operation
+        /// </summary>
+        internal CancellationToken CancellationToken { get; set; }
 
 #if DEBUG
 

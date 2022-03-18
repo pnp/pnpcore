@@ -607,7 +607,7 @@ namespace PnP.Core.Services
                     await PnPContext.AuthenticationProvider.AuthenticateRequestAsync(graphBaseUri, request).ConfigureAwait(false);
 
                     // Send the request
-                    HttpResponseMessage response = await PnPContext.GraphClient.Client.SendAsync(request, HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false);
+                    HttpResponseMessage response = await PnPContext.GraphClient.Client.SendAsync(request, HttpCompletionOption.ResponseHeadersRead, PnPContext.CancellationToken).ConfigureAwait(false);
 
                     try
                     {
@@ -1026,7 +1026,7 @@ namespace PnP.Core.Services
                         await PnPContext.AuthenticationProvider.AuthenticateRequestAsync(graphBaseUri, request).ConfigureAwait(false);
 
                         // Send the request
-                        HttpResponseMessage response = await PnPContext.GraphClient.Client.SendAsync(request, HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false);
+                        HttpResponseMessage response = await PnPContext.GraphClient.Client.SendAsync(request, HttpCompletionOption.ResponseHeadersRead, PnPContext.CancellationToken).ConfigureAwait(false);
 
                         // Process the request response
                         if (response.IsSuccessStatusCode)
@@ -1336,7 +1336,7 @@ namespace PnP.Core.Services
                                 await ProcessSharePointRestAuthentication(splitRestBatch.Site, request).ConfigureAwait(false);
 
                                 // Send the request
-                                HttpResponseMessage response = await PnPContext.RestClient.Client.SendAsync(request, HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false);
+                                HttpResponseMessage response = await PnPContext.RestClient.Client.SendAsync(request, HttpCompletionOption.ResponseHeadersRead, PnPContext.CancellationToken).ConfigureAwait(false);
 
                                 try
                                 {
@@ -1953,7 +1953,7 @@ namespace PnP.Core.Services
                         await ProcessSharePointRestAuthentication(site, request).ConfigureAwait(false);
 
                         // Send the request
-                        HttpResponseMessage response = await PnPContext.RestClient.Client.SendAsync(request, httpCompletionOption).ConfigureAwait(false);
+                        HttpResponseMessage response = await PnPContext.RestClient.Client.SendAsync(request, httpCompletionOption, PnPContext.CancellationToken).ConfigureAwait(false);
 
                         // Process the request response
                         if (response.IsSuccessStatusCode)
@@ -2217,7 +2217,7 @@ namespace PnP.Core.Services
                                 await ProcessSharePointRestAuthentication(csomBatch.Site, request).ConfigureAwait(false);
 
                                 // Send the request
-                                HttpResponseMessage response = await PnPContext.RestClient.Client.SendAsync(request, HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false);
+                                HttpResponseMessage response = await PnPContext.RestClient.Client.SendAsync(request, HttpCompletionOption.ResponseHeadersRead, PnPContext.CancellationToken).ConfigureAwait(false);
 
                                 try
                                 {

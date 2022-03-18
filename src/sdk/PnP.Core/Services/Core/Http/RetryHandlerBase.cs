@@ -50,6 +50,9 @@ namespace PnP.Core.Services
                 HttpResponseMessage response = null;
                 Exception innermostEx = null;
 
+                // Throw an exception if we've requested to cancel the operation
+                cancellationToken.ThrowIfCancellationRequested();
+
                 try
                 {
                     innermostEx = null;
@@ -119,6 +122,11 @@ namespace PnP.Core.Services
 
                 // Call Delay method to get delay time from response's Retry-After header or by exponential backoff 
                 TimeSpan delayTimeSpan = CalculateWaitTime(response, retryCount, DelayInSeconds);
+
+                if (GlobalSettings != null && GlobalSettings.Logger != null)
+                {
+                    GlobalSettings.Logger.LogInformation($"Waiting {delayTimeSpan.Seconds} seconds before retrying");
+                }
                 Task delay = Task.Delay(delayTimeSpan, cancellationToken);
 
                 // Notify subscribers
