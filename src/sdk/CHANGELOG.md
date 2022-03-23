@@ -41,6 +41,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - When using LoadListDataAsStreamAsync to load list items number columns without a value set where returned as value 0 whereas they should have been returned as null #751 [jansenbe - Bert Jansen]
 - The `ISiteCollectionManager.GetSiteCollections` methods now allow to filter OneDrive for Business site collections [jansenbe - Bert Jansen]
 - When creating a `PnPContext` via the `IPnPContextFactory` you can now specify a `CancellationToken`. Using this token pending request can be cancelled (e.g. breaking out of a throttling retry loop) [jansenbe - Bert Jansen]
+- Only update the `FieldLink.DisplayName` value when it is specified #792 [jansenbe - Bert Jansen]
 
 ## [1.5.0]
 
