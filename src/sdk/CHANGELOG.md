@@ -42,6 +42,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - The `ISiteCollectionManager.GetSiteCollections` methods now allow to filter OneDrive for Business site collections [jansenbe - Bert Jansen]
 - When creating a `PnPContext` via the `IPnPContextFactory` you can now specify a `CancellationToken`. Using this token pending request can be cancelled (e.g. breaking out of a throttling retry loop) [jansenbe - Bert Jansen]
 - Only update the `FieldLink.DisplayName` value when it is specified #792 [jansenbe - Bert Jansen]
+- Improved `IFolder.EnsureFolderAsync` implementation that works without the need to load all folders on a level, this way the method works on libraries with a large amount of folders #793 [Ironbell]
 
 ## [1.5.0]
 
