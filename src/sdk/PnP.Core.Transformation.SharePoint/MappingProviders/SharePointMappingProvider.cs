@@ -251,6 +251,7 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
                             .MapWebPartAsync(webPartInput, token)
                             .ConfigureAwait(false) as SharePointWebPartMappingProviderOutput;
 
+                        //TODO: What if the output is null?, setting includeTitleWebPart blows this up.
                         ManageCombinedMapping(result.TargetPage, webPart, output.Mapping);
                     }
                 }
@@ -642,7 +643,7 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
                         if (emptyColumns.Count() == 2)
                         {
                             // drop the two empty columns and change to single column section
-                            foreach (var emptyColumn in emptyColumns)
+                            foreach (var emptyColumn in emptyColumns.ToList())
                             {
                                 section.Columns.Remove(emptyColumn);
                             }
