@@ -137,7 +137,7 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
                 }
             }
 
-            var globalTokens = PrepareGlobalTokens();
+            var globalTokens = PrepareGlobalTokens(this.spOptions.Value.MappingProperties); //TODO: Bug Here, the mappings are not included in the tokens.
 
             if (webPartData != null && webPartData.Mappings != null)
             {
@@ -245,7 +245,7 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
         /// Prepares placeholders for global tokens
         /// </summary>
         /// <returns></returns>
-        private Dictionary<string, string> PrepareGlobalTokens()
+        private Dictionary<string, string> PrepareGlobalTokens(Dictionary<string,string> mappingProperties)
         {
             Dictionary<string, string> globalTokens = new Dictionary<string, string>(5);
 
@@ -255,6 +255,12 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
             globalTokens.Add("SiteCollection", "{SiteCollection}");
             globalTokens.Add("WebId", "{WebId}");
             globalTokens.Add("SiteId", "{SiteId}");
+
+            // Add the properties provided via configuration
+            foreach (var property in mappingProperties)
+            {
+                globalTokens.Add(property.Key, property.Value);
+            }
 
             return globalTokens;
         }
