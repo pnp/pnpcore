@@ -9,6 +9,7 @@ using PnP.Core.Transformation.Services.Core;
 using PnP.Core.Transformation.Test.Utilities;
 using PnP.Core.Auth;
 using PnP.Core.Transformation.SharePoint.Test.Utilities;
+using System.Collections.Generic;
 
 namespace PnP.Core.Transformation.SharePoint.Test
 {
@@ -64,6 +65,10 @@ namespace PnP.Core.Transformation.SharePoint.Test
                     spOptions.SkipUrlRewrite = true;
                     spOptions.UrlMappings = null;
                     spOptions.UserMappings = null;
+                    spOptions.MappingProperties = new Dictionary<string, string>()
+                    {
+                        { "UseCommunityScriptEditor", "true" }
+                    }; // This creates a bug later down the line. PnP PowerShell initialises this in that usage.
                 }
             );
 
@@ -125,12 +130,16 @@ namespace PnP.Core.Transformation.SharePoint.Test
                     spOptions.ShouldMapUsers = true;
                     spOptions.HandleWikiImagesAndVideos = true;
                     spOptions.AddTableListImageAsImageWebPart = true;
-                    spOptions.IncludeTitleBarWebPart = true;
+                    spOptions.IncludeTitleBarWebPart = false;
                     spOptions.MappingProperties = null;
                     spOptions.SkipHiddenWebParts = true;
                     spOptions.SkipUrlRewrite = true;
                     spOptions.UrlMappings = null;
                     spOptions.UserMappings = null;
+                    spOptions.MappingProperties = new Dictionary<string, string>()
+                    {
+                        { "UseCommunityScriptEditor", "true" }
+                    }; // This creates a bug later down the line. PnP PowerShell initialises this in that usage.
                 }
             );
 
