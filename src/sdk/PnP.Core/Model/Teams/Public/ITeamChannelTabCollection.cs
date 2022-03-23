@@ -107,11 +107,11 @@ namespace PnP.Core.Model.Teams
         public ITeamChannelTab AddWebsiteTabBatch(string name, Uri websiteUri);
 
         /// <summary>
-        /// Adds a new DocumentLibrary channel tab
+        /// Adds a new Website channel tab
         /// </summary>
         /// <param name="name">Display name of the DocumentLibrary channel tab</param>
         /// <param name="documentLibraryUri">Uri to the document library that needs to be added as tab</param>
-        /// <returns>Newly added DocumentLibrary channel tab</returns>
+        /// <returns>Newly added Website channel tab</returns>
         public Task<ITeamChannelTab> AddDocumentLibraryTabAsync(string name, Uri documentLibraryUri);
 
         /// <summary>

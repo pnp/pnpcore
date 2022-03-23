@@ -24,6 +24,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Improved options for adding/removing users from a SharePoint group + additional methods to directly grant a role definitions to user #773 [jansenbe - Bert Jansen]
 - Added support for reading the Viva Connections dashboard and adding, updating and removing ACEs from the dashboard #664 [mgwojciech - Marcin Wojciechowski]
 - Added support checking if a site is defined as Home Site (needed for Viva Connections support) #664 [mgwojciech - Marcin Wojciechowski]
+- Added option to add a website tab to a Teams channel #791 [MathijsVerbeeck - Mathijs Verbeeck]
 
 ### Changed
 

@@ -339,7 +339,7 @@ namespace PnP.Core.Test.Teams
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
-        public void AddDocLibraryTabBatchExceptionTest()
+        public void AddWebsiteTabBatchExceptionTest()
         {
             //TestCommon.Instance.Mocking = false;
             using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
@@ -528,7 +528,7 @@ namespace PnP.Core.Test.Teams
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
-        public void AddWebsiteTabBatchExceptionTest()
+        public void AddDocLibraryTabBatchExceptionTest()
         {
             //TestCommon.Instance.Mocking = false;
             using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
