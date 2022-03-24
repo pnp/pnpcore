@@ -5,12 +5,12 @@
 		<LangVersion>8.0</LangVersion>
 		<RootNamespace>PnP.Core.Admin</RootNamespace>
 		<AssemblyName>PnP.Core.Admin</AssemblyName>
-		<Version>1.4.0</Version>
+		<Version>1.5.0</Version>
 		<GeneratePackageOnBuild>false</GeneratePackageOnBuild>
-		<Copyright>PnP 2021</Copyright>
+		<Copyright>PnP 2022</Copyright>
 		<Company>PnP</Company>
 		<Authors>PnP</Authors>
-		<Description>[EXPERIMENTAL - Not yet officially released!] This library adds admin related functionality to PnP Core SDK</Description>
+		<Description>This library adds admin related functionality to PnP Core SDK</Description>
 		<PackageProjectUrl>https://aka.ms/pnp/coresdk</PackageProjectUrl>
 		<RepositoryUrl>https://github.com/pnp/pnpcore</RepositoryUrl>
 		<RepositoryType>git</RepositoryType>
