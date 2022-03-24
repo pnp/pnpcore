@@ -119,7 +119,7 @@ namespace PnP.Core.Transformation.SharePoint.Test
                     pageOptions.SetAuthorInPageHeader = true;
                     pageOptions.TargetPageFolder = "";
                     pageOptions.TargetPageName = "";
-                    pageOptions.TargetPagePrefix = "Migrated_";
+                    pageOptions.TargetPagePrefix = "OnPrem_";
                     pageOptions.TargetPageTakesSourcePageName = true;
                 },
                 spOptions => // SharePoint classic source settings
@@ -149,19 +149,19 @@ namespace PnP.Core.Transformation.SharePoint.Test
             var pageTransformator = provider.GetRequiredService<IPageTransformator>();
 
             var targetContext = await pnpContextFactory.CreateAsync(TestCommon.TargetTestSite);
-            var sourceUri = new Uri(config["SourceUri"]);
+            var sourceUri = new Uri(config["OnPremSourceUri"]);
 
             var onPremCreds = TestCommon.ReadWindowsCredentialManagerEntry("OnPrem");
             var onPremAuth = new OnPremisesAuth();
 
-            using (var sourceContext = onPremAuth.GetOnPremisesContext(config["SourceTestSite"], onPremCreds))
+            using (var sourceContext = onPremAuth.GetOnPremisesContext(config["OnPremSourceTestSite"], onPremCreds))
             {
 
                 var result = await pageTransformator.TransformSharePointAsync(sourceContext, targetContext, sourceUri);
                 Console.WriteLine(result.AbsoluteUri);
 
                 Assert.IsNotNull(result);
-                var expectedUri = new Uri($"{targetContext.Web.Url}/SitePages/Migrated_{sourceUri.Segments[sourceUri.Segments.Length - 1]}");
+                var expectedUri = new Uri($"{targetContext.Web.Url}/SitePages/OnPrem_{sourceUri.Segments[sourceUri.Segments.Length - 1]}");
                 Assert.AreEqual(expectedUri.AbsoluteUri, result.AbsoluteUri, ignoreCase: true);
 
             }
