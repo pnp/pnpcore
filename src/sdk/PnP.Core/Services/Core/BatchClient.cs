@@ -1954,7 +1954,6 @@ namespace PnP.Core.Services
 
                         // Send the request
                         HttpResponseMessage response = await PnPContext.RestClient.Client.SendAsync(request, httpCompletionOption, PnPContext.CancellationToken).ConfigureAwait(false);
-
                         // Process the request response
                         if (response.IsSuccessStatusCode)
                         {
