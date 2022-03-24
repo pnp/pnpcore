@@ -1,5 +1,6 @@
 ﻿using Microsoft.SharePoint.Client;
 using PnP.Core.Transformation.Services.Core;
+using PnP.Core.Transformation.SharePoint.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
@@ -36,6 +37,7 @@ namespace PnP.Core.Transformation.SharePoint
         public async IAsyncEnumerable<ISourceItemId> GetItemsIdsAsync([EnumeratorCancellation] CancellationToken token = default)
 #pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
         {
+            SourceContext.Web.EnsureProperties(w => w.Url);
             for (int x = 0; x < 10; x++)
             {
                 yield return new SharePointSourceItemId(new Uri(new Uri(SourceContext.Web.Url + "/"), $"{x}"));

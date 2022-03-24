@@ -251,6 +251,7 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
                             .MapWebPartAsync(webPartInput, token)
                             .ConfigureAwait(false) as SharePointWebPartMappingProviderOutput;
 
+                        //TODO: What if the output is null?, setting includeTitleWebPart blows this up.
                         ManageCombinedMapping(result.TargetPage, webPart, output.Mapping);
                     }
                 }
@@ -642,7 +643,7 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
                         if (emptyColumns.Count() == 2)
                         {
                             // drop the two empty columns and change to single column section
-                            foreach (var emptyColumn in emptyColumns)
+                            foreach (var emptyColumn in emptyColumns.ToList())
                             {
                                 section.Columns.Remove(emptyColumn);
                             }
@@ -1390,8 +1391,8 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
                         IsClosed = foundWebPart.WebPartDefinition.WebPart.IsClosed,
                         Hidden = foundWebPart.WebPartDefinition.WebPart.Hidden,
                         WebPartXml = foundWebPart.WebPartXml == null ? "" : foundWebPart.WebPartXml.Value,
-                        //Properties = ExtractProperties(foundWebPart.WebPartDefinition.WebPart.Properties.FieldValues, 
-                        //    foundWebPart.WebPartType, foundWebPart.WebPartXml == null ? "" : foundWebPart.WebPartXml.Value),
+                        Properties = ExtractProperties(foundWebPart.WebPartDefinition.WebPart.Properties.FieldValues, 
+                            foundWebPart.WebPartType, foundWebPart.WebPartXml == null ? "" : foundWebPart.WebPartXml.Value),
                     });
                 }
             }
@@ -1413,33 +1414,28 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
 
             // Get a reference to the current source context
             var clientContext = pageFile.Context;
-
+                        
             // Load web parts on web part page
             // Note: Web parts placed outside of a web part zone using SPD are not picked up by the web part manager. There's no API that will return those,
             //       only possible option to add parsing of the raw page aspx file.
             var limitedWPManager = pageFile.GetLimitedWebPartManager(PersonalizationScope.Shared);
             clientContext.Load(limitedWPManager);
 
-            // Load page properties
-            var pageProperties = pageFile.Properties;
-            clientContext.Load(pageProperties);
-
             // Load the web parts properties
             IEnumerable<WebPartDefinition> webParts;
-
-            webParts = clientContext.LoadQuery(
-            limitedWPManager.WebParts.IncludeWithDefaultProperties(
-                wp => wp.Id,
-                wp => wp.ZoneId,
-                wp => wp.WebPart.ExportMode,
-                wp => wp.WebPart.Title,
-                wp => wp.WebPart.ZoneIndex,
-                wp => wp.WebPart.IsClosed,
-                wp => wp.WebPart.Hidden,
-                wp => wp.WebPart.Properties));
+            
+            webParts = clientContext.LoadQuery(limitedWPManager.WebParts.IncludeWithDefaultProperties(
+                        wp => wp.Id,
+                        wp => wp.ZoneId,
+                        //wp => wp.WebPart.ExportMode,
+                        wp => wp.WebPart.Title,
+                        wp => wp.WebPart.ZoneIndex,
+                        wp => wp.WebPart.IsClosed,
+                        wp => wp.WebPart.Hidden,
+                        wp => wp.WebPart.Properties));
 
             await clientContext.ExecuteQueryAsync().ConfigureAwait(false);
-
+        
             // Check page type
             var layout = GetLayoutFromWebServices(pageFile);
 
@@ -1518,8 +1514,8 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
                         ZoneIndex = (uint)foundWebPart.WebPartDefinition.WebPart.ZoneIndex,
                         IsClosed = foundWebPart.WebPartDefinition.WebPart.IsClosed,
                         Hidden = foundWebPart.WebPartDefinition.WebPart.Hidden,
-                        //Properties = ExtractProperties(foundWebPart.WebPartDefinition.WebPart.Properties.FieldValues, 
-                        //    foundWebPart.WebPartType, foundWebPart.WebPartXml == null ? "" : foundWebPart.WebPartXml.Value),
+                        Properties = ExtractProperties(foundWebPart.WebPartDefinition.WebPart.Properties.FieldValues, 
+                            foundWebPart.WebPartType, foundWebPart.WebPartXmlOnPremises == null ? "" : foundWebPart.WebPartXmlOnPremises),
                     });
                 }
             }
@@ -2087,7 +2083,7 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
                         ZoneIndex = (uint)foundWebPart.WebPartDefinition.WebPart.ZoneIndex,
                         IsClosed = foundWebPart.WebPartDefinition.WebPart.IsClosed,
                         Hidden = foundWebPart.WebPartDefinition.WebPart.Hidden,
-                        Properties = Properties(webPartProperties, foundWebPart.WebPartType, webPartXmlForPropertiesMethod),
+                        Properties = ExtractProperties(webPartProperties, foundWebPart.WebPartType, webPartXmlForPropertiesMethod),
                     });
                 }
             }
@@ -2269,7 +2265,7 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
                         ZoneIndex = (uint)foundWebPart.WebPartDefinition.WebPart.ZoneIndex,
                         IsClosed = foundWebPart.WebPartDefinition.WebPart.IsClosed,
                         Hidden = foundWebPart.WebPartDefinition.WebPart.Hidden,
-                        Properties = Properties(webPartProperties, foundWebPart.WebPartType, webPartXmlForPropertiesMethod),
+                        Properties = ExtractProperties(webPartProperties, foundWebPart.WebPartType, webPartXmlForPropertiesMethod),
                     });
                 }
             }
@@ -2570,6 +2566,7 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
         /// <param name="pageFile"></param>
         /// <param name="webPartGuid"></param>
         /// <returns></returns>
+        /// TODO: Possible Duplicate Code ExportWebPartXmlWorkaround method
         internal string ExportWebPartXmlWorkaround(ClientContext sourceContext, Microsoft.SharePoint.Client.File pageFile, string webPartGuid)
         {
             // Issue hints and Credit: 
@@ -2925,6 +2922,7 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
         /// <param name="pageFile">The file of the page</param>
         /// <param name="webPartGuid">The ID of the web part</param>
         /// <returns>The XML of the web part</returns>
+        /// TODO: Possible Duplicate Code ExportWebPartXmlWorkaround method
         internal string ExportWebPartXmlWorkaround(Microsoft.SharePoint.Client.File pageFile, string webPartGuid)
         {
             // Issue hints and Credit: 
@@ -4077,7 +4075,7 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
                         ZoneIndex = (uint)webPartToRetrieve.WebPartDefinition.WebPart.ZoneIndex,
                         IsClosed = webPartToRetrieve.WebPartDefinition.WebPart.IsClosed,
                         Hidden = webPartToRetrieve.WebPartDefinition.WebPart.Hidden,
-                        Properties = Properties(webPartToRetrieve.WebPartDefinition.WebPart.Properties.FieldValues,
+                        Properties = ExtractProperties(webPartToRetrieve.WebPartDefinition.WebPart.Properties.FieldValues,
                             webPartToRetrieve.WebPartType, webPartToRetrieve.WebPartXml == null ? "" :
                             webPartToRetrieve.WebPartXml.Value),
                     });
@@ -4092,7 +4090,7 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
         /// <param name="webPartType">Type of the web part</param>
         /// <param name="webPartXml">Web part XML</param>
         /// <returns>Collection of the requested property/value pairs</returns>
-        internal Dictionary<string, string> Properties(Dictionary<string, object> properties, string webPartType, string webPartXml)
+        internal Dictionary<string, string> ExtractProperties(Dictionary<string, object> properties, string webPartType, string webPartXml)
         {
             var webPartMappingProvider = serviceProvider.GetService<IWebPartMappingProvider>();
 
