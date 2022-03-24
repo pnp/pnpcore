@@ -210,6 +210,173 @@ namespace PnP.Core.Test.Teams
             }
         }
 
+
+        [TestMethod]
+        public async Task AddWebsiteTabAsyncTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var team = await context.Team.GetAsync(o => o.Channels);
+                Assert.IsTrue(team.Channels.Length > 0);
+
+                var channel = team.Channels.AsRequested().FirstOrDefault(i => i.DisplayName == "General");
+                Assert.IsNotNull(channel);
+
+                channel = await channel.GetAsync(o => o.Tabs);
+
+                var testTabName = "PnP GitHub";
+                var testSite = $"https://pnp.github.io/";
+                var result = await channel.Tabs.AddWebsiteTabAsync(testTabName, new Uri(testSite));
+
+                Assert.IsNotNull(result);
+                Assert.AreEqual(testTabName, result.DisplayName);
+
+                //Clean up tab
+                await result.DeleteAsync();
+            }
+        }
+
+        [TestMethod]
+        public void AddWebsiteTabBatchTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            {
+                var team = context.Team.GetBatch(o => o.Channels);
+                context.Execute();
+                Assert.IsTrue(team.Result.Channels.Length > 0);
+
+                var channelQuery = team.Result.Channels.AsRequested().FirstOrDefault(i => i.DisplayName == "General");
+                Assert.IsNotNull(channelQuery);
+
+                var channel = channelQuery.GetBatch(o => o.Tabs);
+                context.Execute();
+
+                var testTabName = "PnP GitHub";
+                var testSite = $"https://pnp.github.io/";
+                var result = channel.Result.Tabs.AddWebsiteTabBatch(testTabName, new Uri(testSite));
+                context.Execute();
+
+                Assert.IsNotNull(result);
+                Assert.AreEqual(testTabName, result.DisplayName);
+
+                //Clean up tab
+                result.DeleteBatch();
+                context.Execute();
+            }
+        }
+
+        [TestMethod]
+        public void AddWebsiteTabSpecificBatchTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            {
+                var batch = context.NewBatch();
+                var team = context.Team.GetBatch(batch, o => o.Channels);
+                context.Execute(batch);
+                Assert.IsTrue(team.Result.Channels.Length > 0);
+
+                var firstChannel = team.Result.Channels.AsRequested().FirstOrDefault(i => i.DisplayName == "General");
+                Assert.IsNotNull(firstChannel);
+
+                var channel = firstChannel.GetBatch(batch, o => o.Tabs);
+                context.Execute(batch);
+
+                var testTabName = "PnP GitHub";
+                var testSite = $"https://pnp.github.io/";
+                var result = channel.Result.Tabs.AddWebsiteTabBatch(batch, testTabName, new Uri(testSite));
+                context.Execute(batch);
+
+                Assert.IsNotNull(result);
+                Assert.AreEqual(testTabName, result.DisplayName);
+
+                //Clean up tab
+                result.DeleteBatch(batch);
+                context.Execute(batch);
+            }
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void AddWebsiteTabNullUriExceptionTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            {
+                var team = context.Team.Get(o => o.Channels);
+                Assert.IsTrue(team.Channels.Length > 0);
+
+                var channel = team.Channels.AsRequested().FirstOrDefault(i => i.DisplayName == "General");
+                Assert.IsNotNull(channel);
+
+                channel = channel.Get(o => o.Tabs);
+
+                var result = channel.Tabs.AddWebsiteTab("WebsiteTab", null);
+                Assert.IsNull(result);
+            }
+        }
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void AddWebsiteTabNullNameExceptionTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            {
+                var team = context.Team.Get(o => o.Channels);
+                Assert.IsTrue(team.Channels.Length > 0);
+
+                var channel = team.Channels.AsRequested().FirstOrDefault(i => i.DisplayName == "General");
+                Assert.IsNotNull(channel);
+
+                channel = channel.Get(o => o.Tabs);
+
+                var result = channel.Tabs.AddWebsiteTab(null, new Uri("https://pnp.github.io"));
+                Assert.IsNull(result);
+            }
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void AddWebsiteTabBatchExceptionTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            {
+                var team = context.Team.Get(o => o.Channels);
+                Assert.IsTrue(team.Channels.Length > 0);
+
+                var channel = team.Channels.AsRequested().FirstOrDefault(i => i.DisplayName == "General");
+                Assert.IsNotNull(channel);
+
+                channel = channel.Get(o => o.Tabs);
+
+                var result = channel.Tabs.AddWebsiteTabBatch(string.Empty, new Uri("https://pnp.github.io"));
+                Assert.IsNull(result);
+            }
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void AddWebsiteTabBatchNullUriExceptionTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            {
+                var team = context.Team.Get(o => o.Channels);
+                Assert.IsTrue(team.Channels.Length > 0);
+
+                var channel = team.Channels.AsRequested().FirstOrDefault(i => i.DisplayName == "General");
+                Assert.IsNotNull(channel);
+
+                channel = channel.Get(o => o.Tabs);
+
+                var result = channel.Tabs.AddWebsiteTabBatch("WebsiteTab", null);
+                Assert.IsNull(result);
+            }
+        }
+
         [TestMethod]
         public async Task AddWikiTabAsyncTest()
         {

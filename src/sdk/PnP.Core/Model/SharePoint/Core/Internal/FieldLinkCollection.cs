@@ -52,7 +52,10 @@ namespace PnP.Core.Model.SharePoint
             if (addedFieldLink != null)
             {
                 // Update the field if needed
-                addedFieldLink.DisplayName = displayName;
+                if (!string.IsNullOrEmpty(displayName))
+                {
+                    addedFieldLink.DisplayName = displayName;
+                }
                 addedFieldLink.Hidden = hidden;
                 addedFieldLink.Required = required;
                 addedFieldLink.ReadOnly = readOnly;

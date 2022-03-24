@@ -310,42 +310,33 @@ namespace PnP.Core.Model.SharePoint
                 throw new ArgumentNullException(nameof(folderRelativeUrl));
             }
 
-            var currentFolder = this;
+            var currentFolder = this as IFolder;
+
+            await currentFolder.EnsurePropertiesAsync(p => p.ServerRelativeUrl).ConfigureAwait(false);
 
             var childFolderNames = folderRelativeUrl.Split(new[] { '/' }, StringSplitOptions.RemoveEmptyEntries);
             bool currentFolderWasCreated = false;
+            string currentUrl = currentFolder.ServerRelativeUrl;
+
             foreach (var folderName in childFolderNames)
             {
-                Folder nextFolder = null;
+                currentUrl = $"{currentUrl}/{folderName}";
 
-                // Find next part of the path
                 if (!currentFolderWasCreated)
                 {
-                    await currentFolder.LoadAsync(p => p.Folders).ConfigureAwait(false);
-
-                    var folderCollection = currentFolder.Folders;
-
-                    foreach (Folder existingFolder in folderCollection)
+                    try
                     {
-                        // Compare both with Url decoded as regular. See https://github.com/pnp/PnP-Sites-Core/pull/2803
-                        if (string.Equals(existingFolder.Name, WebUtility.UrlDecode(folderName), StringComparison.InvariantCultureIgnoreCase) ||
-                            string.Equals(existingFolder.Name, folderName, StringComparison.InvariantCultureIgnoreCase))
-                        {
-                            nextFolder = existingFolder;
-                            break;
-                        }
+                        currentFolder = await currentFolder.PnPContext.Web.GetFolderByServerRelativeUrlAsync(currentUrl).ConfigureAwait(false);
                     }
-                }
-
-                // Or create it
-                if (nextFolder == null)
-                {
-                    currentFolder = await currentFolder.AddFolderAsync(folderName).ConfigureAwait(false) as Folder;
-                    currentFolderWasCreated = true;
+                    catch (SharePointRestServiceException)
+                    {
+                        currentFolder = await currentFolder.AddFolderAsync(folderName).ConfigureAwait(false);
+                        currentFolderWasCreated = true;
+                    }
                 }
                 else
                 {
-                    currentFolder = nextFolder;
+                    currentFolder = await currentFolder.AddFolderAsync(folderName).ConfigureAwait(false);
                 }
             }
 
