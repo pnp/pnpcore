@@ -695,6 +695,12 @@ namespace PnP.Core.Services
                 connectTelemetry = false;
             }
 
+            // Second option to turn of telemetry is the PnP wide PNP_DISABLETELEMETRY environment variable
+            if (connectTelemetry && !string.IsNullOrEmpty(Environment.GetEnvironmentVariable("PNP_DISABLETELEMETRY")))
+            {
+                connectTelemetry = false;
+            }
+
 #if NET5_0_OR_GREATER
             if (RuntimeInformation.RuntimeIdentifier == "browser-wasm")
             {
