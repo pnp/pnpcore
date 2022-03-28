@@ -1390,6 +1390,43 @@ namespace PnP.Core.Test.SharePoint
                 await createdPage.DeleteAsync();
             }
         }
+
+        [TestMethod]
+        public async Task PageTextWithInlineImageWithOpitonsTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var page = await context.Web.NewPageAsync();
+                string pageName = TestCommon.GetPnPSdkTestAssetName("PageTextWithInlineImageWithOpitonsTest.aspx");
+                page.AddSection(CanvasSectionTemplate.TwoColumn, 1);
+
+                // Add text with 3 inline images
+                var textPart = page.NewTextPart("");
+
+                var html1 = page.GetInlineImage(textPart, "/sites/prov-2/siteassets/__siteicon__.png", new PageImageOptions() { Link = "https://aka.ms/m365pnp"});
+                var html2 = page.GetInlineImage(textPart, "/sites/prov-2/siteassets/__siteicon__.png", new PageImageOptions() { Alignment = PageImageAlignment.Left, Link = "https://aka.ms/m365pnp", Caption = "PnP Rocks caption" });
+                var html3 = page.GetInlineImage(textPart, "/sites/prov-2/siteassets/__siteicon__.png", new PageImageOptions() { Alignment = PageImageAlignment.Right, Link = "https://aka.ms/m365pnp", Caption = "PnP Rocks caption", AlternativeText = "Alternative text" });
+                string htmlAdded = $"<p>Before inline images</p>{html1}<p>Post image</p>{html2}<p>Post image</p>{html3}<p>Post image</p>";
+                textPart.Text = htmlAdded;
+                page.AddControl(textPart, page.Sections[0].Columns[0]);
+
+                // Persist the page
+                await page.SaveAsync(pageName);
+
+                // load the page again and verify
+                var pages = await context.Web.GetPagesAsync(pageName);
+                var createdPage = pages.First();
+
+                Assert.IsTrue(!string.IsNullOrEmpty((createdPage.Sections[0].Columns[0].Controls[0] as PageWebPart).RichTextEditorInstanceId));
+
+                // Clone the page
+                await createdPage.SaveAsync(TestCommon.GetPnPSdkTestAssetName("ClonePageTextWithInlineImageWithOpitonsTest.aspx"));
+
+                await page.DeleteAsync();
+                await createdPage.DeleteAsync();
+            }
+        }        
         #endregion
 
         #region Page Header handling

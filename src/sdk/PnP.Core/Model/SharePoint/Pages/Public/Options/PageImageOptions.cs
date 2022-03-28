@@ -19,5 +19,25 @@
         /// Defines the height of the image
         /// </summary>
         public int? Height { get; set; }
+
+        /// <summary>
+        /// Link the image should point to on click
+        /// </summary>
+        public string Link { get; set; }
+
+        /// <summary>
+        /// Alternative text of the image
+        /// </summary>
+        public string AlternativeText { get; set; }
+
+        /// <summary>
+        /// Image caption to show underneath the embedded image
+        /// </summary>
+        public string Caption { get; set; }
+
+        /// <summary>
+        /// Internal indicator to specify whether this image will be used as inline image or not
+        /// </summary>
+        internal bool IsInlineImage { get; set; }
     }
 }

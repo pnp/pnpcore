@@ -17,8 +17,9 @@ namespace PnP.Core.Model.SharePoint
 {
     internal sealed class Page : IPage
     {
-        private const string inlineImageHtml = "<div tabindex=\"-1\" data-cke-widget-wrapper=\"1\" data-cke-filter=\"off\" class=\"cke_widget_wrapper cke_widget_block cke_widget_inlineimage cke_widget_wrapper_webPartInRteInlineImage cke_widget_wrapper_webPartInRteAlignCenter cke_widget_wrapper_webPartInRte\" data-cke-display-name=\"div\" data-cke-widget-id=\"0\" role=\"region\" aria-label=\"Inline image in RTE. Use Alt + F11 to go to toolbar. Use Alt + P to open the property pane.\"><div data-webpart-id=\"image\" class=\"webPartInRte webPartInRteAlignCenter webPartInRteInlineImage cke_widget_element\" data-cke-widget-data=\"%7B%22classes%22%3A%7B%22webPartInRteInlineImage%22%3A1%2C%22webPartInRteAlignCenter%22%3A1%2C%22webPartInRte%22%3A1%7D%7D\" data-cke-widget-upcasted=\"1\" data-cke-widget-keep-attr=\"0\" data-widget=\"inlineimage\" data-instance-id=\"{TextEditorInstanceId}\" title=\"\"></div></div>";
+        private const string inlineImageHtml = "<div tabindex=\"-1\" data-cke-widget-wrapper=\"1\" data-cke-filter=\"off\" class=\"cke_widget_wrapper cke_widget_block cke_widget_inlineimage cke_widget_wrapper_webPartInRteInlineImage cke_widget_wrapper_{ImageAlignment} cke_widget_wrapper_webPartInRte\" data-cke-display-name=\"div\" data-cke-widget-id=\"0\" role=\"region\" aria-label=\"Inline image in RTE. Use Alt + F11 to go to toolbar. Use Alt + P to open the property pane.\"><div data-webpart-id=\"image\" class=\"webPartInRte {ImageAlignment} webPartInRteInlineImage cke_widget_element\" data-cke-widget-data=\"%7B%22classes%22%3A%7B%22webPartInRteInlineImage%22%3A1%2C%22{ImageAlignment}%22%3A1%2C%22webPartInRte%22%3A1%7D%7D\" data-cke-widget-upcasted=\"1\" data-cke-widget-keep-attr=\"0\" data-widget=\"inlineimage\" data-instance-id=\"{TextEditorInstanceId}\" title=\"\"></div></div>";
         private const string inlineImageTextControl = "{TextEditorInstanceId}";
+        private const string inlineImageAlignment = "{ImageAlignment}";
 
         private bool isDefaultDescription = true;
         private string pageTitle;
@@ -2663,6 +2664,18 @@ namespace PnP.Core.Model.SharePoint
                 throw new ArgumentNullException(nameof(serverRelativeUrl));
             }
 
+            if (imageOptions == null)
+            {
+                imageOptions = new PageImageOptions
+                {
+                    IsInlineImage = true,
+                };
+            }
+            else
+            {
+                imageOptions.IsInlineImage = true;
+            }
+
             var inlineImageWebPart = await GetImageWebPartAsync(serverRelativeUrl, imageOptions).ConfigureAwait(false);
             (inlineImageWebPart as PageWebPart).RichTextEditorInstanceId = textEditorInstance.InstanceId.ToString();
 
@@ -2670,7 +2683,21 @@ namespace PnP.Core.Model.SharePoint
             (textEditorInstance as PageText).InlineWebParts.Add(inlineImageWebPart as PageWebPart);
 
             // Prepare the text snippet to insert
-            return inlineImageHtml.Replace(inlineImageTextControl, inlineImageWebPart.InstanceId.ToString());
+            string alignmentValue = "webPartInRteAlignLeft";
+            if (imageOptions != null)                 
+            {
+                if (imageOptions.Alignment == PageImageAlignment.Center)
+                {
+                    alignmentValue = "webPartInRteAlignCenter";
+                }
+                else if(imageOptions.Alignment == PageImageAlignment.Right)
+                {
+                    alignmentValue = "webPartInRteAlignRight";
+                }
+            }
+
+            return inlineImageHtml.Replace(inlineImageTextControl, inlineImageWebPart.InstanceId.ToString())
+                                  .Replace(inlineImageAlignment, alignmentValue);
         }
 
         public string GetInlineImage(IPageText textEditorInstance, string serverRelativeUrl, PageImageOptions imageOptions = null)
@@ -2704,18 +2731,37 @@ namespace PnP.Core.Model.SharePoint
                 imageOptions.Width = -1;
             }
 
+            if (imageOptions.Link == null)
+            {
+                imageOptions.Link = "";
+            }
+
+            if (imageOptions.Caption == null)
+            {
+                imageOptions.Caption = "";
+            }
+
+            if (imageOptions.AlternativeText == null)
+            {
+                imageOptions.AlternativeText = "";
+            }
+
             // Prepare configuration for the image web part
-            string inlineImageWebPart = "{\"webPartData\":{\"serverProcessedContent\":{\"htmlStrings\":{},\"searchablePlainTexts\":{},\"imageSources\":{\"imageSource\":\"{FullyQualifiedImageUrl}\"},\"links\":{},\"customMetadata\":{\"imageSource\":{\"siteId\":\"{SiteId}\",\"webId\":\"{WebId}\",\"listId\":\"{{ListId}}\",\"uniqueId\":\"{UniqueId}\",\"imgWidth\":-1,\"imgHeight\":-1}}},\"dataVersion\":\"1.9\",\"properties\":{\"imageSourceType\":2,\"captionText\":\"\",\"altText\":\"\",\"linkUrl\":\"\",\"overlayText\":\"\",\"fileName\":\"\",\"siteId\":\"{SiteId}\",\"webId\":\"{WebId}\",\"listId\":\"{{ListId}}\",\"uniqueId\":\"{UniqueId}\",\"imgWidth\":{Width},\"imgHeight\":{Height},\"alignment\":\"{Alignment}\",\"fixAspectRatio\":false}}}";
+            string inlineImageWebPart = "{\"webPartData\":{\"serverProcessedContent\":{\"htmlStrings\":{},\"searchablePlainTexts\":{\"captionText\":\"{Caption}\"},\"imageSources\":{\"imageSource\":\"{FullyQualifiedImageUrl}\"},\"links\":{\"linkUrl\":\"{Link}\"},\"customMetadata\":{\"imageSource\":{\"siteId\":\"{SiteId}\",\"webId\":\"{WebId}\",\"listId\":\"{{ListId}}\",\"uniqueId\":\"{UniqueId}\",\"imgWidth\":-1,\"imgHeight\":-1}}},\"dataVersion\":\"1.9\",\"properties\":{\"imageSourceType\":2,\"altText\":\"{AltText}\",\"overlayText\":\"\",\"fileName\":\"\",\"siteId\":\"{SiteId}\",\"webId\":\"{WebId}\",\"listId\":\"{{ListId}}\",\"uniqueId\":\"{UniqueId}\",\"imgWidth\":{Width},\"imgHeight\":{Height},\"alignment\":\"{Alignment}\",\"fixAspectRatio\":false,\"isInlineImage\":{IsInlineImage}}}}";
             inlineImageWebPart = inlineImageWebPart
                                    .Replace("{FullyQualifiedImageUrl}", $"https://{PnPContext.Uri.DnsSafeHost}{serverRelativeUrl}")
+                                   .Replace("{IsInlineImage}", imageOptions.IsInlineImage.ToString().ToLower())
                                    .Replace("{Alignment}", imageOptions.Alignment.ToString())
                                    .Replace("{Height}", imageOptions.Height.Value.ToString())
                                    .Replace("{Width}", imageOptions.Width.Value.ToString())
+                                   .Replace("{Link}", imageOptions.Link)
+                                   .Replace("{Caption}", imageOptions.Caption)
+                                   .Replace("{AltText}", imageOptions.AlternativeText)
                                    .Replace("{SiteId}", PnPContext.Site.Id.ToString())
                                    .Replace("{WebId}", PnPContext.Web.Id.ToString())
                                    .Replace("{ListId}", image.ListId.ToString())
                                    .Replace("{UniqueId}", image.UniqueId.ToString());
-
+            
             // Create the web part
             var webPart = NewWebPart();
             (webPart as PageWebPart).WebPartId = WebPartEnumToId(DefaultWebPart.Image);            
