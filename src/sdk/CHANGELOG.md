@@ -44,6 +44,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Only update the `FieldLink.DisplayName` value when it is specified #792 [jansenbe - Bert Jansen]
 - Improved `IFolder.EnsureFolderAsync` implementation that works without the need to load all folders on a level, this way the method works on libraries with a large amount of folders #793 [Ironbell]
 - Added suppport for using the PNP_DISABLETELEMETRY environment variable to turn off PnP Core SDK telemetry (next to the existing configuration option) [jansenbe - Bert Jansen]
+- Page description that is automatically set is flagged as default description, subsequent user page edits will then override this description. This aligns with the OOB behavior and fixes #790 and #765 [jansenbe - Bert Jansen]
 
 ## [1.5.0]
 
