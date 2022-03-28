@@ -41508,6 +41508,32 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.PageImageOptions.Alignment
   nameWithType: PageImageOptions.Alignment
+- uid: PnP.Core.Model.SharePoint.PageImageOptions.AlternativeText
+  name: AlternativeText
+  href: api/PnP.Core.Model.SharePoint.PageImageOptions.html#PnP_Core_Model_SharePoint_PageImageOptions_AlternativeText
+  commentId: P:PnP.Core.Model.SharePoint.PageImageOptions.AlternativeText
+  fullName: PnP.Core.Model.SharePoint.PageImageOptions.AlternativeText
+  nameWithType: PageImageOptions.AlternativeText
+- uid: PnP.Core.Model.SharePoint.PageImageOptions.AlternativeText*
+  name: AlternativeText
+  href: api/PnP.Core.Model.SharePoint.PageImageOptions.html#PnP_Core_Model_SharePoint_PageImageOptions_AlternativeText_
+  commentId: Overload:PnP.Core.Model.SharePoint.PageImageOptions.AlternativeText
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.PageImageOptions.AlternativeText
+  nameWithType: PageImageOptions.AlternativeText
+- uid: PnP.Core.Model.SharePoint.PageImageOptions.Caption
+  name: Caption
+  href: api/PnP.Core.Model.SharePoint.PageImageOptions.html#PnP_Core_Model_SharePoint_PageImageOptions_Caption
+  commentId: P:PnP.Core.Model.SharePoint.PageImageOptions.Caption
+  fullName: PnP.Core.Model.SharePoint.PageImageOptions.Caption
+  nameWithType: PageImageOptions.Caption
+- uid: PnP.Core.Model.SharePoint.PageImageOptions.Caption*
+  name: Caption
+  href: api/PnP.Core.Model.SharePoint.PageImageOptions.html#PnP_Core_Model_SharePoint_PageImageOptions_Caption_
+  commentId: Overload:PnP.Core.Model.SharePoint.PageImageOptions.Caption
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.PageImageOptions.Caption
+  nameWithType: PageImageOptions.Caption
 - uid: PnP.Core.Model.SharePoint.PageImageOptions.Height
   name: Height
   href: api/PnP.Core.Model.SharePoint.PageImageOptions.html#PnP_Core_Model_SharePoint_PageImageOptions_Height
@@ -41521,6 +41547,19 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.PageImageOptions.Height
   nameWithType: PageImageOptions.Height
+- uid: PnP.Core.Model.SharePoint.PageImageOptions.Link
+  name: Link
+  href: api/PnP.Core.Model.SharePoint.PageImageOptions.html#PnP_Core_Model_SharePoint_PageImageOptions_Link
+  commentId: P:PnP.Core.Model.SharePoint.PageImageOptions.Link
+  fullName: PnP.Core.Model.SharePoint.PageImageOptions.Link
+  nameWithType: PageImageOptions.Link
+- uid: PnP.Core.Model.SharePoint.PageImageOptions.Link*
+  name: Link
+  href: api/PnP.Core.Model.SharePoint.PageImageOptions.html#PnP_Core_Model_SharePoint_PageImageOptions_Link_
+  commentId: Overload:PnP.Core.Model.SharePoint.PageImageOptions.Link
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.PageImageOptions.Link
+  nameWithType: PageImageOptions.Link
 - uid: PnP.Core.Model.SharePoint.PageImageOptions.Width
   name: Width
   href: api/PnP.Core.Model.SharePoint.PageImageOptions.html#PnP_Core_Model_SharePoint_PageImageOptions_Width
