@@ -18,7 +18,9 @@ namespace PnP.Core.Model.SharePoint
                 Headers = new Dictionary<string, string>
                 {
                     ["Accept"] = "application/json;odata=verbose"
-                }
+                },
+                // Do need to clear the collections on the current model as we're returning results outside of the model classes
+                SkipCollectionClearing = true,
             };
         }
 
