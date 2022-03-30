@@ -33,7 +33,12 @@ namespace PnP.Core.Model.SharePoint
         public async Task<INavigationNode> GetByIdAsync(int id, params Expression<Func<INavigationNode, object>>[] selectors)
         {
             var apiCall = new ApiCall($"{NavigationConstants.NavigationUri}/GetNodeById('{id}')", ApiType.SPORest);
-            return await BaseDataModelExtensions.BaseGetAsync(this, apiCall, selectors).ConfigureAwait(false);
+            var navigationNode =  await BaseDataModelExtensions.BaseGetAsync(this, apiCall, selectors).ConfigureAwait(false) as NavigationNode;
+
+            if (!navigationNode.Metadata.ContainsKey(PnPConstants.MetaDataRestId))
+                return null;
+
+            return navigationNode;
         }
         #endregion
 
@@ -49,6 +54,16 @@ namespace PnP.Core.Model.SharePoint
             if (navigationNodeOptions == null)
             {
                 throw new ArgumentNullException(nameof(navigationNodeOptions));
+            }
+
+            if (navigationNodeOptions.Title == null)
+            {
+                throw new ArgumentNullException(nameof(navigationNodeOptions.Title));
+            }
+
+            if (navigationNodeOptions.Url == null)
+            {
+                throw new ArgumentNullException(nameof(navigationNodeOptions.Url));
             }
 
             var newNavigationNode = CreateNewAndAdd() as NavigationNode;

@@ -75,7 +75,6 @@ namespace PnP.Core.Model.SharePoint
         /// <param name="selectors"></param>
         /// <returns></returns>
         public List<INavigationNode> GetChildNodes(params Expression<Func<INavigationNode, object>>[] selectors);
-
         #endregion
     }
 }

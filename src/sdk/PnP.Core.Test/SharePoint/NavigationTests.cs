@@ -88,7 +88,55 @@ namespace PnP.Core.Test.SharePoint
                 await parentNode.DeleteAsync();
             }
         }
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public async Task AddNavigationItemWithoutNavigationOptions()
+        {
+            TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var parentNode = await context.Web.Navigation.TopNavigationBar.AddAsync(null);
 
+                // Delete newly created parent node, this will delete the children too.
+                await parentNode.DeleteAsync();
+            }
+        }
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public async Task AddNavigationItemWithoutTitle()
+        {
+            TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var parentNode = await context.Web.Navigation.TopNavigationBar.AddAsync(
+                  new NavigationNodeOptions
+                  {
+                      Url = context.Uri.AbsoluteUri,
+                  });
+
+
+                // Delete newly created parent node, this will delete the children too.
+                await parentNode.DeleteAsync();
+            }
+        }
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public async Task AddNavigationItemWithoutUrl()
+        {
+            TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var parentNode = await context.Web.Navigation.TopNavigationBar.AddAsync(
+                  new NavigationNodeOptions
+                  {
+                      Title = "Test node",
+                  });
+
+
+                // Delete newly created parent node, this will delete the children too.
+                await parentNode.DeleteAsync();
+            }
+        }
         [TestMethod]
         public async Task AddMultipleChildLevels()
         {
@@ -137,6 +185,17 @@ namespace PnP.Core.Test.SharePoint
                 Assert.IsNotNull(nn);
 
                 await nn.DeleteAsync();
+            }
+        }
+
+        [TestMethod]
+        public async Task GetQuickLaunchItemThatDoesntExist()
+        {
+            TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var nn = await context.Web.Navigation.QuickLaunch.GetByIdAsync(0);
+                Assert.IsNull(nn);
             }
         }
 
