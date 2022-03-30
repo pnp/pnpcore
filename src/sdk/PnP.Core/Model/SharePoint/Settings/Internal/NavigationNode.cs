@@ -1,7 +1,9 @@
-﻿using PnP.Core.Services;
+﻿using PnP.Core.QueryModel;
+using PnP.Core.Services;
 using System;
 using System.Collections.Generic;
 using System.Dynamic;
+using System.Linq.Expressions;
 using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -9,34 +11,51 @@ using System.Threading.Tasks;
 namespace PnP.Core.Model.SharePoint
 {
 
-    [SharePointType("SP.NavigationNode", Target = typeof(Web), Uri = "_api/web/navigation/GetNodeById({Id})", Get = "_api /Web/Navigation/QuickLaunch", LinqGet = "_api/Web/Navigation/QuickLaunch")]
+    [SharePointType(NavigationConstants.NodeMetadataType, Target = typeof(Web), Uri = getNodeUri)]
     internal sealed class NavigationNode : BaseDataModel<INavigationNode>, INavigationNode
     {
-        internal const string NavigationNodeOptionsAdditionalInformationKey = "NavigationNodeOptions";
+        private const string baseUri = NavigationConstants.NavigationUri;
+        private const string getNodeUri = baseUri + "GetNodeById({Id})";
+        
+        internal const string NavigationNodeOptionsAdditionalInformationKey = NavigationConstants.NavigationNodeOptions;
+        internal const string NavigationTypeKey = NavigationConstants.NavigationType;
 
         #region Construction
         public NavigationNode()
         {
+            
             // Handler to construct the Add request for this list
 #pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
             AddApiCallHandler = async (additionalInformation) =>
 #pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
             {
                 var navigationNodeOptions = (NavigationNodeOptions)additionalInformation[NavigationNodeOptionsAdditionalInformationKey];
-
+                
+                var apiUrl = string.Empty;
+                if (navigationNodeOptions != null && navigationNodeOptions.ParentNode != null)
+                {
+                    apiUrl += $"{getNodeUri.Replace("{Id}", navigationNodeOptions.ParentNode.Id.ToString())}/Children";
+                }
+                else
+                {
+                    apiUrl = baseUri;
+                    var navigationType = (NavigationType)additionalInformation[NavigationTypeKey];
+                    if (navigationType == NavigationType.QuickLaunch)
+                        apiUrl += NavigationConstants.QuickLaunchUri;
+                    else if (navigationType == NavigationType.TopNavigationBar)
+                        apiUrl += NavigationConstants.TopNavigationBarUri;
+                }
                 // Build body
                 var navigationNodeCreationInformation = new
                 {
-                    __metadata = new { type = "SP.NavigationNode" },
-                    IsVisible = true,
-                    Title = "Test title",
-                    Url = "https://mathijsdev2.sharepoint.com"
-                    
+                    __metadata = new { type = NavigationConstants.NodeMetadataType },
+                    Title = navigationNodeOptions.Title,
+                    Url = navigationNodeOptions.Url
                 }.AsExpando();
 
                 string body = JsonSerializer.Serialize(navigationNodeCreationInformation, typeof(ExpandoObject), PnPConstants.JsonSerializer_IgnoreNullValues);
 
-                return new ApiCall($"_api/web/navigation/quicklaunch", ApiType.SPORest, body);
+                return new ApiCall(apiUrl, ApiType.SPORest, body);
             };
         }
         #endregion
@@ -66,6 +85,36 @@ namespace PnP.Core.Model.SharePoint
         [SharePointProperty("*")]
         public object All { get => null; }
 
+
+        #endregion
+
+        #region Methods
+        public async Task<List<INavigationNode>> GetChildNodes(params Expression<Func<INavigationNode, object>>[] selectors)
+        {
+            var apiCall = new ApiCall($"{getNodeUri.Replace("{Id}", Id.ToString())}/Children", ApiType.SPORest);
+           
+            var response = await RawRequestAsync(apiCall, HttpMethod.Get).ConfigureAwait(false);
+            if (!string.IsNullOrEmpty(response.Json))
+            {
+                var json = JsonSerializer.Deserialize<JsonElement>(response.Json);
+
+                if (json.TryGetProperty("value", out JsonElement getChildNodes))
+                {
+                    var childNodesList = new List<INavigationNode>();
+                    var childNodes = JsonSerializer.Deserialize<IEnumerable<NavigationNode>>(getChildNodes.GetRawText(), PnPConstants.JsonSerializer_PropertyNameCaseInsensitiveTrue);
+                    foreach (var childNode in childNodes)
+                    {
+                        childNode.PnPContext = PnPContext;
+                        childNode.AddMetadata(PnPConstants.MetaDataRestId, $"{childNode.Id}");
+                        childNodesList.Add(childNode);
+                    }
+                    return childNodesList;
+                }
+
+            }
+
+            return new List<INavigationNode>();
+        }
         #endregion
     }
 }

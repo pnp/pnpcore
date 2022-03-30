@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Threading.Tasks;
 
 namespace PnP.Core.Model.SharePoint
 {
@@ -17,7 +19,7 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// The link that the navigation node is referring to
         /// </summary>
-        public string Url { get; }
+        public string Url { get; set; }
 
         /// <summary>
         /// 
@@ -37,7 +39,7 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// Title of the navigation node
         /// </summary>
-        public string Title { get; }
+        public string Title { get; set; }
 
         /// <summary>
         /// 
@@ -57,5 +59,15 @@ namespace PnP.Core.Model.SharePoint
         /// A special property used to add an asterisk to a $select statement
         /// </summary>
         public object All { get; }
+
+        #region Methods
+
+        /// <summary>
+        /// Method to obtain all the child nodes of a navigation node
+        /// </summary>
+        /// <param name="selectors"></param>
+        /// <returns></returns>
+        public Task<List<INavigationNode>> GetChildNodes(params Expression<Func<INavigationNode, object>>[] selectors);
+        #endregion
     }
 }

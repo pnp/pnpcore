@@ -12,6 +12,10 @@ namespace PnP.Core.Model.SharePoint
     [ConcreteType(typeof(NavigationNodeCollection))]
     public interface INavigationNodeCollection : IQueryable<INavigationNode>, IDataModelCollection<INavigationNode>, ISupportModules<INavigationNodeCollection>
     {
+        /// <summary>
+        /// This variable will define whether we will be using the top navigation or the quick launch for our API calls
+        /// </summary>
+        public NavigationType NavigationType { get; }
         // Add extension methods here
         #region Get Methods
 
@@ -31,20 +35,6 @@ namespace PnP.Core.Model.SharePoint
         /// <returns>The navigation node, if any</returns>
         public Task<INavigationNode> GetByIdAsync(int id, params Expression<Func<INavigationNode, object>>[] selectors);
 
-        /// <summary>
-        /// Method to select a all navigation nodes with a specific title
-        /// </summary>
-        /// <param name="title">The title to search for</param>
-        /// <returns>The list of navigation nodes, if any</returns>
-        public List<INavigationNode> GetByTitle(string title, params Expression<Func<INavigationNode, object>>[] selectors);
-
-        /// <summary>
-        /// Method to select a all navigation nodes with a specific title
-        /// </summary>
-        /// <param name="title">The title to search for</param>
-        /// <returns>The list of navigation nodes, if any</returns>
-        public Task<List<INavigationNode>> GetByTitleAsync(string title, params Expression<Func<INavigationNode, object>>[] selectors);
-
         #endregion
 
         #region Add Methods
@@ -61,6 +51,21 @@ namespace PnP.Core.Model.SharePoint
         /// <param name="navigationNodeOptions">The options for the navigation node</param>
         /// <returns>The navigation node</returns>
         public Task<INavigationNode> AddAsync(NavigationNodeOptions navigationNodeOptions);
+        #endregion
+
+        #region Delete Methods
+
+        /// <summary>
+        /// Method to delete all navigation nodes from a specific navigation type
+        /// </summary>
+        /// <returns></returns>
+        public void DeleteAllNodes();
+
+        /// <summary>
+        /// Method to delete all navigation nodes from a specific navigation type
+        /// </summary>
+        /// <returns></returns>
+        public Task DeleteAllNodesAsync();
         #endregion
     }
 }

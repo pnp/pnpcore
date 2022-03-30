@@ -11,11 +11,15 @@ namespace PnP.Core.Model.SharePoint
 {
     internal sealed class NavigationNodeCollection : QueryableDataModelCollection<INavigationNode>, INavigationNodeCollection
     {
+        public NavigationType NavigationType { get; set; }
+
         public NavigationNodeCollection(PnPContext context, IDataModelParent parent, string memberName = null)
            : base(context, parent, memberName)
         {
             PnPContext = context;
             Parent = parent;
+            Enum.TryParse(memberName, out NavigationType tempNavigationType);
+            NavigationType = tempNavigationType;
         }
 
         #region Get Methods
@@ -26,17 +30,8 @@ namespace PnP.Core.Model.SharePoint
 
         public async Task<INavigationNode> GetByIdAsync(int id, params Expression<Func<INavigationNode, object>>[] selectors)
         {
-            return await this.QueryProperties(selectors).FirstOrDefaultAsync(n => n.Id == id).ConfigureAwait(false);
-        }
-
-        public List<INavigationNode> GetByTitle(string title, params Expression<Func<INavigationNode, object>>[] selectors)
-        {
-            return GetByTitleAsync(title, selectors).GetAwaiter().GetResult();
-        }
-
-        public async Task<List<INavigationNode>> GetByTitleAsync(string title, params Expression<Func<INavigationNode, object>>[] selectors)
-        {
-            return await this.QueryProperties(selectors).Where(n => n.Title == title).ToListAsync().ConfigureAwait(false);
+            var apiCall = new ApiCall($"_api/web/navigation/GetNodeById('{id}')", ApiType.SPORest);
+            return await BaseDataModelExtensions.BaseGetAsync(this, apiCall, selectors).ConfigureAwait(false);
         }
         #endregion
 
@@ -59,10 +54,34 @@ namespace PnP.Core.Model.SharePoint
             // options as arguments for the add method
             var additionalInfo = new Dictionary<string, object>()
             {
-                { NavigationNode.NavigationNodeOptionsAdditionalInformationKey, navigationNodeOptions}
+                { NavigationNode.NavigationNodeOptionsAdditionalInformationKey, navigationNodeOptions },
+                { NavigationNode.NavigationTypeKey, NavigationType}
             };
 
             return await newNavigationNode.AddAsync(additionalInfo).ConfigureAwait(false) as NavigationNode;
+        }
+
+        #endregion
+
+        #region Delete Methods
+
+        public void DeleteAllNodes()
+        {
+            DeleteAllNodesAsync().GetAwaiter().GetResult();
+        }
+
+        public async Task DeleteAllNodesAsync()
+        {
+            if (NavigationType == NavigationType.TopNavigationBar)
+                await PnPContext.Web.Navigation.LoadAsync(p => p.TopNavigationBar).ConfigureAwait(false);
+            else if (NavigationType == NavigationType.QuickLaunch)
+                await PnPContext.Web.Navigation.LoadAsync(p => p.QuickLaunch).ConfigureAwait(false);
+
+            foreach (var item in items)
+                await item.DeleteBatchAsync().ConfigureAwait(false);
+
+            await PnPContext.ExecuteAsync().ConfigureAwait(false);
+
         }
 
         #endregion

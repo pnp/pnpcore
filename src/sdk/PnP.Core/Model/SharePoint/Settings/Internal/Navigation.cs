@@ -6,15 +6,9 @@ using System.Threading.Tasks;
 namespace PnP.Core.Model.SharePoint
 {
 
-    [SharePointType("SP.Navigation", Target = typeof(Web), Get = "_api/Web/Navigation", LinqGet = "_api/Web/Navigation")]
+    [SharePointType(NavigationConstants.NavigationMetadataType, Target = typeof(Web), Get = NavigationConstants.NavigationUri, LinqGet = NavigationConstants.NavigationUri)]
     internal sealed class Navigation : BaseDataModel<INavigation>, INavigation
     {
-        #region Construction
-        public Navigation()
-        {
-        }
-        #endregion
-
         #region Properties        
 
         public Guid Id { get => GetValue<Guid>(); set => Guid.NewGuid(); }
@@ -22,7 +16,9 @@ namespace PnP.Core.Model.SharePoint
         [SharePointProperty("UseShared")]
         public bool UseShared { get => GetValue<bool>(); set => SetValue(value); }
 
-        public INavigationNodeCollection QuickLaunch { get => GetModelCollectionValue<INavigationNodeCollection>(); }
+        public INavigationNodeCollection QuickLaunch { get => GetModelCollectionValue<INavigationNodeCollection>(NavigationType.QuickLaunch.ToString()); }
+        
+        public INavigationNodeCollection TopNavigationBar { get => GetModelCollectionValue<INavigationNodeCollection>(NavigationType.TopNavigationBar.ToString()); }
 
         [KeyProperty(nameof(Id))]
         public override object Key { get => Id; set => Id = Guid.Parse(value.ToString()); }

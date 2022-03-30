@@ -23,6 +23,10 @@ namespace PnP.Core.Model.SharePoint
         /// </summary>
         public INavigationNodeCollection QuickLaunch { get; }
 
+        /// <summary>
+        /// A property that will return the navigation nodes of the TopNavigation menu of the web
+        /// </summary>
+        public INavigationNodeCollection TopNavigationBar { get; }
 
         /// <summary>
         /// A special property used to add an asterisk to a $select statement
