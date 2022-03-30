@@ -6,9 +6,11 @@ using System.Threading.Tasks;
 namespace PnP.Core.Model.SharePoint
 {
 
-    [SharePointType(NavigationConstants.NavigationMetadataType, Target = typeof(Web), Get = NavigationConstants.NavigationUri, LinqGet = NavigationConstants.NavigationUri)]
+    [SharePointType(NavigationConstants.NavigationMetadataType, Target = typeof(Web), Get = baseUri, LinqGet = baseUri)]
     internal sealed class Navigation : BaseDataModel<INavigation>, INavigation
     {
+        private const string baseUri = NavigationConstants.NavigationUri;
+
         #region Properties        
 
         public Guid Id { get => GetValue<Guid>(); set => Guid.NewGuid(); }

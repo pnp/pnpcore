@@ -66,6 +66,37 @@ namespace PnP.Core.Model.SharePoint
         /// </summary>
         /// <returns></returns>
         public Task DeleteAllNodesAsync();
+
+        /// <summary>
+        /// Method to delete all navigation nodes from a specific navigation type in a batch
+        /// </summary>
+        /// <returns></returns>
+        public void DeleteAllNodesBatch();
+
+        /// <summary>
+        /// Method to delete all navigation nodes from a specific navigation type in a batch
+        /// </summary>
+        /// <returns></returns>
+        public Task DeleteAllNodesBatchAsync();
+        #endregion
+
+        #region Extension Methods
+
+        /// <summary>
+        /// Function to move a node after another navigation node
+        /// </summary>
+        /// <param name="nodeToMove"></param>
+        /// <param name="nodeToMoveAfter"></param>
+        /// <returns></returns>
+        public void MoveNodeAfter(INavigationNode nodeToMove, INavigationNode nodeToMoveAfter);
+
+        /// <summary>
+        /// Function to move a node after another navigation node
+        /// </summary>
+        /// <param name="nodeToMove"></param>
+        /// <param name="nodeToMoveAfter"></param>
+        /// <returns></returns>
+        public Task MoveNodeAfterAsync(INavigationNode nodeToMove, INavigationNode nodeToMoveAfter);
         #endregion
     }
 }

@@ -1,9 +1,8 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using PnP.Core.Model.SharePoint;
 using PnP.Core.Test.Utilities;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace PnP.Core.Test.SharePoint
@@ -11,7 +10,7 @@ namespace PnP.Core.Test.SharePoint
     [TestClass]
     public class NavigationTests
     {
-        public int AmountOfChildNodes = 5;
+        private readonly int AmountOfChildNodes = 5;
         [ClassInitialize]
         public static void TestFixtureSetup(TestContext context)
         {
@@ -26,7 +25,7 @@ namespace PnP.Core.Test.SharePoint
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 var parentNode = await context.Web.Navigation.QuickLaunch.AddAsync(
-                  new Model.SharePoint.NavigationNodeOptions
+                  new NavigationNodeOptions
                   {
                       Title = "Parent Node",
                       Url = context.Uri.AbsoluteUri
@@ -34,7 +33,7 @@ namespace PnP.Core.Test.SharePoint
                 for (var i = 0; i < AmountOfChildNodes; i++)
                 {
                     await context.Web.Navigation.QuickLaunch.AddAsync(
-                        new Model.SharePoint.NavigationNodeOptions
+                        new NavigationNodeOptions
                         {
                             Title = $"Sub node {i}",
                             Url = context.Uri.AbsoluteUri,
@@ -42,7 +41,7 @@ namespace PnP.Core.Test.SharePoint
                         });
                 }
                 
-                var childNodes = await parentNode.GetChildNodes();
+                var childNodes = await parentNode.GetChildNodesAsync();
                 Assert.IsNotNull(childNodes);
                 Assert.AreEqual(AmountOfChildNodes, childNodes.Count);
                 
@@ -64,7 +63,7 @@ namespace PnP.Core.Test.SharePoint
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 var parentNode = await context.Web.Navigation.TopNavigationBar.AddAsync(
-                  new Model.SharePoint.NavigationNodeOptions
+                  new NavigationNodeOptions
                   {
                       Title = "Parent Node",
                       Url = context.Uri.AbsoluteUri,
@@ -72,7 +71,7 @@ namespace PnP.Core.Test.SharePoint
                 for (var i = 0; i < AmountOfChildNodes; i++)
                 {
                     await context.Web.Navigation.TopNavigationBar.AddAsync(
-                        new Model.SharePoint.NavigationNodeOptions
+                        new NavigationNodeOptions
                         {
                             Title = $"Sub node {i}",
                             Url = context.Uri.AbsoluteUri,
@@ -81,16 +80,11 @@ namespace PnP.Core.Test.SharePoint
                 }
 
 
-                var childNodes = await parentNode.GetChildNodes();
+                var childNodes = await parentNode.GetChildNodesAsync();
                 Assert.IsNotNull(childNodes);
                 Assert.AreEqual(AmountOfChildNodes, childNodes.Count);
 
-                // Delete newly created item
-                foreach (var node in childNodes)
-                {
-                    await node.DeleteAsync();
-                }
-
+                // Delete newly created parent node, this will delete the children too.
                 await parentNode.DeleteAsync();
             }
         }
@@ -102,7 +96,7 @@ namespace PnP.Core.Test.SharePoint
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 var parentNode = await context.Web.Navigation.TopNavigationBar.AddAsync(
-                  new Model.SharePoint.NavigationNodeOptions
+                  new NavigationNodeOptions
                   {
                       Title = "Parent Node",
                       Url = context.Uri.AbsoluteUri,
@@ -110,13 +104,18 @@ namespace PnP.Core.Test.SharePoint
                 var mainNode = parentNode;
                 for (var i = 0; i < AmountOfChildNodes; i++)
                 { 
-                    parentNode = await context.Web.Navigation.TopNavigationBar.AddAsync(
-                        new Model.SharePoint.NavigationNodeOptions
+                    var newNode = await context.Web.Navigation.TopNavigationBar.AddAsync(
+                        new NavigationNodeOptions
                         {
                             Title = $"Sub node {i}",
                             Url = context.Uri.AbsoluteUri,
                             ParentNode = parentNode
                         });
+
+                    var childNodes = parentNode.GetChildNodes();
+                    Assert.AreEqual(childNodes.Count, 1);
+                    Assert.AreEqual(childNodes.First().Title, newNode.Title);
+                    parentNode = newNode;
                 }
                 await mainNode.DeleteAsync();
             }
@@ -128,7 +127,7 @@ namespace PnP.Core.Test.SharePoint
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                var newNode = await context.Web.Navigation.QuickLaunch.AddAsync(new Model.SharePoint.NavigationNodeOptions
+                var newNode = await context.Web.Navigation.QuickLaunch.AddAsync(new NavigationNodeOptions
                 {
                     Title = "Test node",
                     Url = context.Uri.AbsoluteUri,
@@ -150,7 +149,7 @@ namespace PnP.Core.Test.SharePoint
                 for (var i = 0; i < AmountOfChildNodes; i++)
                 {
                     await context.Web.Navigation.TopNavigationBar.AddAsync(
-                        new Model.SharePoint.NavigationNodeOptions
+                        new NavigationNodeOptions
                         {
                             Title = $"Node {i}",
                             Url = context.Uri.AbsoluteUri
@@ -158,6 +157,33 @@ namespace PnP.Core.Test.SharePoint
                 }
 
                 await context.Web.Navigation.TopNavigationBar.DeleteAllNodesAsync();
+
+                await context.Web.Navigation.LoadAsync(y => y.TopNavigationBar);
+                Assert.AreEqual(context.Web.Navigation.TopNavigationBar.RequestedItems.Cast<NavigationNode>().Count(), 0);
+            }
+        }
+
+        [TestMethod]
+        public async Task DeleteAllTopNavigationItemsBatch()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                for (var i = 0; i < AmountOfChildNodes; i++)
+                {
+                    await context.Web.Navigation.TopNavigationBar.AddAsync(
+                        new NavigationNodeOptions
+                        {
+                            Title = $"Node {i}",
+                            Url = context.Uri.AbsoluteUri
+                        });
+                }
+
+                context.Web.Navigation.TopNavigationBar.DeleteAllNodesBatch();
+                await context.ExecuteAsync().ConfigureAwait(false);
+                
+                await context.Web.Navigation.LoadAsync(y => y.TopNavigationBar);
+                Assert.AreEqual(context.Web.Navigation.TopNavigationBar.RequestedItems.Cast<NavigationNode>().Count(), 0);
             }
         }
 
@@ -170,7 +196,7 @@ namespace PnP.Core.Test.SharePoint
                 for (var i = 0; i < AmountOfChildNodes; i++)
                 {
                     context.Web.Navigation.QuickLaunch.Add(
-                        new Model.SharePoint.NavigationNodeOptions
+                        new NavigationNodeOptions
                         {
                             Title = $"Node {i}",
                             Url = context.Uri.AbsoluteUri
@@ -188,7 +214,7 @@ namespace PnP.Core.Test.SharePoint
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 var newNode = context.Web.Navigation.QuickLaunch.Add(
-                        new Model.SharePoint.NavigationNodeOptions
+                        new NavigationNodeOptions
                         {
                             Title = $"Test node",
                             Url = "https://google.be"
@@ -203,6 +229,40 @@ namespace PnP.Core.Test.SharePoint
                 Assert.AreEqual(newNodeObtained.Title, newNode.Title);
 
                 await newNodeObtained.DeleteAsync();
+            }
+        }
+
+        [TestMethod]
+        public async Task MoveNavigationNodes()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var firstNode = await context.Web.Navigation.TopNavigationBar.AddAsync(
+                  new NavigationNodeOptions
+                  {
+                      Title = "Node 1",
+                      Url = context.Uri.AbsoluteUri,
+                  });
+                var secondNode = await context.Web.Navigation.TopNavigationBar.AddAsync(
+                  new NavigationNodeOptions
+                  {
+                      Title = "Node 2",
+                      Url = context.Uri.AbsoluteUri,
+                  });
+
+                await context.Web.Navigation.TopNavigationBar.MoveNodeAfterAsync(firstNode, secondNode);
+                await context.Web.Navigation.LoadAsync(y => y.TopNavigationBar);
+
+                var navigationItems = context.Web.Navigation.TopNavigationBar.RequestedItems.Cast<NavigationNode>();
+
+                var firstNodeIndex = navigationItems.ToList().FindIndex(f => f.Id == firstNode.Id);
+                var lastNodeIndex = navigationItems.ToList().FindIndex(f => f.Id == secondNode.Id);
+
+                Assert.IsTrue(firstNodeIndex > lastNodeIndex);
+
+                await firstNode.DeleteAsync();
+                await secondNode.DeleteAsync();
             }
         }
     }

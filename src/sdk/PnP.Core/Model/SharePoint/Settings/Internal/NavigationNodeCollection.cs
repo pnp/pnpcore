@@ -2,9 +2,11 @@
 using PnP.Core.Services;
 using System;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Net.Http;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace PnP.Core.Model.SharePoint
@@ -30,7 +32,7 @@ namespace PnP.Core.Model.SharePoint
 
         public async Task<INavigationNode> GetByIdAsync(int id, params Expression<Func<INavigationNode, object>>[] selectors)
         {
-            var apiCall = new ApiCall($"_api/web/navigation/GetNodeById('{id}')", ApiType.SPORest);
+            var apiCall = new ApiCall($"{NavigationConstants.NavigationUri}/GetNodeById('{id}')", ApiType.SPORest);
             return await BaseDataModelExtensions.BaseGetAsync(this, apiCall, selectors).ConfigureAwait(false);
         }
         #endregion
@@ -77,12 +79,62 @@ namespace PnP.Core.Model.SharePoint
             else if (NavigationType == NavigationType.QuickLaunch)
                 await PnPContext.Web.Navigation.LoadAsync(p => p.QuickLaunch).ConfigureAwait(false);
 
-            foreach (var item in items)
-                await item.DeleteBatchAsync().ConfigureAwait(false);
-
-            await PnPContext.ExecuteAsync().ConfigureAwait(false);
-
+            foreach (var item in items.ToList())
+                await item.DeleteAsync().ConfigureAwait(false);
         }
+
+        public void DeleteAllNodesBatch()
+        {
+            DeleteAllNodesBatchAsync().GetAwaiter().GetResult();
+        }
+
+        public async Task DeleteAllNodesBatchAsync()
+        {
+            if (NavigationType == NavigationType.TopNavigationBar)
+                await PnPContext.Web.Navigation.LoadAsync(p => p.TopNavigationBar).ConfigureAwait(false);
+            else if (NavigationType == NavigationType.QuickLaunch)
+                await PnPContext.Web.Navigation.LoadAsync(p => p.QuickLaunch).ConfigureAwait(false);
+
+            foreach (var item in items.ToList())
+                await item.DeleteBatchAsync().ConfigureAwait(false);
+        }
+
+        #endregion
+
+        #region Extension Methods
+
+        public void MoveNodeAfter(INavigationNode nodeToMove, INavigationNode nodeToMoveAfter)
+        {
+            MoveNodeAfterAsync(nodeToMove, nodeToMoveAfter).GetAwaiter().GetResult();
+        }
+
+        public async Task MoveNodeAfterAsync(INavigationNode nodeToMove, INavigationNode nodeToMoveAfter)
+        {
+            var apiUrl = NavigationConstants.NavigationUri;
+            if (NavigationType == NavigationType.QuickLaunch)
+                apiUrl += NavigationConstants.QuickLaunchUri;
+            else if (NavigationType == NavigationType.TopNavigationBar)
+                apiUrl += NavigationConstants.TopNavigationBarUri;
+
+            // Build body
+            var requestBody = new
+            {
+                nodeId = nodeToMove.Id,
+                previousNodeId = nodeToMoveAfter.Id
+            }.AsExpando();
+            string body = JsonSerializer.Serialize(requestBody, typeof(ExpandoObject), PnPConstants.JsonSerializer_IgnoreNullValues);
+
+            var apiCall = new ApiCall(apiUrl + "/MoveAfter", ApiType.SPORest, body);
+
+            var navigationNode = new NavigationNode()
+            {
+                PnPContext = PnPContext,
+                Parent = this
+            };
+            await navigationNode.RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
+        }
+
+        
 
         #endregion
     }

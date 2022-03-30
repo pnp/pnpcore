@@ -15,7 +15,7 @@ namespace PnP.Core.Model.SharePoint
     internal sealed class NavigationNode : BaseDataModel<INavigationNode>, INavigationNode
     {
         private const string baseUri = NavigationConstants.NavigationUri;
-        private const string getNodeUri = baseUri + "GetNodeById({Id})";
+        private const string getNodeUri = baseUri + "/GetNodeById({Id})";
         
         internal const string NavigationNodeOptionsAdditionalInformationKey = NavigationConstants.NavigationNodeOptions;
         internal const string NavigationTypeKey = NavigationConstants.NavigationType;
@@ -89,7 +89,11 @@ namespace PnP.Core.Model.SharePoint
         #endregion
 
         #region Methods
-        public async Task<List<INavigationNode>> GetChildNodes(params Expression<Func<INavigationNode, object>>[] selectors)
+        public List<INavigationNode> GetChildNodes(params Expression<Func<INavigationNode, object>>[] selectors)
+        {
+            return GetChildNodesAsync(selectors).GetAwaiter().GetResult();
+        }
+        public async Task<List<INavigationNode>> GetChildNodesAsync(params Expression<Func<INavigationNode, object>>[] selectors)
         {
             var apiCall = new ApiCall($"{getNodeUri.Replace("{Id}", Id.ToString())}/Children", ApiType.SPORest);
            
@@ -112,7 +116,6 @@ namespace PnP.Core.Model.SharePoint
                 }
 
             }
-
             return new List<INavigationNode>();
         }
         #endregion
