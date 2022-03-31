@@ -280,6 +280,73 @@ namespace PnP.Core.Model.Teams
         }
         #endregion
 
+        #region Word tab
+
+        public async Task<ITeamChannelTab> AddWordTabAsync(string name, Uri fileUri, Guid fileId)
+        {
+            if (string.IsNullOrEmpty(name))
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
+
+            if (fileUri == null)
+            {
+                throw new ArgumentNullException(nameof(fileUri));
+            }
+
+            if (fileId == null || fileId == Guid.Empty)
+            {
+                throw new ArgumentNullException(nameof(fileId));
+            }
+
+            (TeamChannelTab newTab, Dictionary<string, object> keyValuePairs) = CreateTeamChannelWordTab(name, fileUri, fileId);
+            return await newTab.AddAsync(keyValuePairs).ConfigureAwait(false) as TeamChannelTab;
+        }
+
+        public ITeamChannelTab AddWordTab(string name, Uri fileUri, Guid fileId)
+        {
+            return AddWordTabAsync(name, fileUri, fileId).GetAwaiter().GetResult();
+        }
+
+        public async Task<ITeamChannelTab> AddWordTabBatchAsync(Batch batch, string name, Uri fileUri, Guid fileId)
+        {
+            if (string.IsNullOrEmpty(name))
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
+
+            if (fileUri== null)
+            {
+                throw new ArgumentNullException(nameof(fileUri));
+            }
+
+            if (fileId == null || fileId == Guid.Empty)
+            {
+                throw new ArgumentNullException(nameof(fileId));
+            }
+
+            (TeamChannelTab newTab, Dictionary<string, object> keyValuePairs) = CreateTeamChannelWordTab(name, fileUri, fileId);
+
+            return await newTab.AddBatchAsync(batch, keyValuePairs).ConfigureAwait(false) as TeamChannelTab;
+        }
+
+        public ITeamChannelTab AddWordTabBatch(Batch batch, string name, Uri fileUri, Guid fileId)
+        {
+            return AddWordTabBatchAsync(batch, name, fileUri, fileId).GetAwaiter().GetResult();
+        }
+
+        public async Task<ITeamChannelTab> AddWordTabBatchAsync(string name, Uri fileUri, Guid fileId)
+        {
+            return await AddWordTabBatchAsync(PnPContext.CurrentBatch, name, fileUri, fileId).ConfigureAwait(false);
+        }
+
+        public ITeamChannelTab AddWordTabBatch(string name, Uri fileUri, Guid fileId)
+        {
+            return AddWordTabBatchAsync(PnPContext.CurrentBatch, name, fileUri, fileId).GetAwaiter().GetResult();
+        }
+
+        #endregion
+
         /// <summary>
         /// Creates a wiki <see cref="TeamChannelTab"/>
         /// </summary>
@@ -332,7 +399,25 @@ namespace PnP.Core.Model.Teams
 
             return new Tuple<TeamChannelTab, Dictionary<string, object>>(newTab, keyValuePairs);
         }
+        private Tuple<TeamChannelTab, Dictionary<string, object>> CreateTeamChannelWordTab(string name, Uri fileUri, Guid fileId)
+        {
+            var newTab = CreateTeamChannelTab(name);
 
+            Dictionary<string, object> keyValuePairs = new Dictionary<string, object>
+            {
+                { "teamsAppId", "com.microsoft.teamspace.tab.file.staticviewer.word" },
+            };
+
+            newTab.Configuration = new TeamChannelTabConfiguration
+            {
+                PnPContext = PnPContext,
+                Parent = this,
+                EntityId = fileId.ToString(),
+                ContentUrl = fileUri.ToString(),
+            };
+
+            return new Tuple<TeamChannelTab, Dictionary<string, object>>(newTab, keyValuePairs);
+        }
         /// <summary>
         /// Creates a wiki <see cref="TeamChannelTab"/>
         /// </summary>
@@ -364,6 +449,5 @@ namespace PnP.Core.Model.Teams
 
             return newChannelTab;
         }
-
     }
 }
