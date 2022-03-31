@@ -58,7 +58,11 @@ namespace PnP.Core.Transformation.SharePoint.Services.Builder.Configuration
         /// Property bag for adding properties that will be exposed to the functions and selectors in the web part mapping file.
         /// These properties are used to condition the transformation process.
         /// </summary>
-        public Dictionary<string, string> MappingProperties { get; set; }
+        public Dictionary<string, string> MappingProperties { get; set; } = new Dictionary<string, string>
+        {
+            // Required for Function Processor
+            { "UseCommunityScriptEditor", "false" }
+        };
 
         /// <summary>
         /// Custom URL mappings

@@ -256,10 +256,14 @@ namespace PnP.Core.Transformation.SharePoint.MappingProviders
             globalTokens.Add("WebId", "{WebId}");
             globalTokens.Add("SiteId", "{SiteId}");
 
-            // Add the properties provided via configuration
-            foreach (var property in mappingProperties)
+
+            if (mappingProperties != null)
             {
-                globalTokens.Add(property.Key, property.Value);
+                // Add the properties provided via configuration
+                foreach (var property in mappingProperties)
+                {
+                    globalTokens.Add(property.Key, property.Value);
+                }
             }
 
             return globalTokens;

@@ -97,7 +97,7 @@ namespace PnP.Core.Transformation.SharePoint.Test
             services.AddTargetTestPnPCore();
 
             // You can use the default settings
-            // services.AddPnPSharePointTransformation();
+             services.AddPnPSharePointTransformation();
 
             // Or you can provide a set of custom settings
             services.AddPnPSharePointTransformation(
@@ -131,15 +131,14 @@ namespace PnP.Core.Transformation.SharePoint.Test
                     spOptions.HandleWikiImagesAndVideos = true;
                     spOptions.AddTableListImageAsImageWebPart = true;
                     spOptions.IncludeTitleBarWebPart = false;
-                    spOptions.MappingProperties = null;
                     spOptions.SkipHiddenWebParts = true;
                     spOptions.SkipUrlRewrite = true;
                     spOptions.UrlMappings = null;
                     spOptions.UserMappings = null;
-                    spOptions.MappingProperties = new Dictionary<string, string>()
-                    {
-                        { "UseCommunityScriptEditor", "true" }
-                    }; // This creates a bug later down the line. PnP PowerShell initialises this in that usage.
+                    //spOptions.MappingProperties = new Dictionary<string, string>()
+                    //{
+                    //    { "UseCommunityScriptEditor", "true" }
+                    //};
                 }
             );
 
