@@ -281,7 +281,13 @@ namespace PnP.Core.Model.Teams
         #endregion
 
         #region Word tab
-
+        /// <summary>
+        /// Adds a new Word channel tab
+        /// </summary>
+        /// <param name="name">Display name of the Website channel tab</param>
+        /// <param name="fileUri">Uri to the file that needs to be displayed as tab</param>
+        /// <param name="fileId">The sourceDoc ID of the file</param>
+        /// <returns>Newly added Word channel tab</returns>
         public async Task<ITeamChannelTab> AddWordTabAsync(string name, Uri fileUri, Guid fileId)
         {
             if (string.IsNullOrEmpty(name))
@@ -302,12 +308,25 @@ namespace PnP.Core.Model.Teams
             (TeamChannelTab newTab, Dictionary<string, object> keyValuePairs) = CreateTeamChannelWordTab(name, fileUri, fileId);
             return await newTab.AddAsync(keyValuePairs).ConfigureAwait(false) as TeamChannelTab;
         }
-
+        /// <summary>
+        /// Adds a new Word channel tab
+        /// </summary>
+        /// <param name="name">Display name of the Website channel tab</param>
+        /// <param name="fileUri">Uri to the website that needs to be displayed as tab</param>
+        /// <param name="fileId">The sourceDoc ID of the file</param>
+        /// <returns>Newly added Word channel tab</returns>
         public ITeamChannelTab AddWordTab(string name, Uri fileUri, Guid fileId)
         {
             return AddWordTabAsync(name, fileUri, fileId).GetAwaiter().GetResult();
         }
-
+        /// <summary>
+        /// Adds a new Word channel tab
+        /// </summary>
+        /// <param name="batch">Batch to use</param>
+        /// <param name="name">Display name of the Website channel tab</param>
+        /// <param name="fileUri">Uri to word file that needs to be displayed as tab</param>
+        /// <param name="fileId">The sourceDoc ID of the file</param>
+        /// <returns>Newly added Word channel tab</returns>
         public async Task<ITeamChannelTab> AddWordTabBatchAsync(Batch batch, string name, Uri fileUri, Guid fileId)
         {
             if (string.IsNullOrEmpty(name))
@@ -329,17 +348,36 @@ namespace PnP.Core.Model.Teams
 
             return await newTab.AddBatchAsync(batch, keyValuePairs).ConfigureAwait(false) as TeamChannelTab;
         }
-
+        /// <summary>
+        /// Adds a new Word channel tab
+        /// </summary>
+        /// <param name="batch">Batch to use</param>
+        /// <param name="name">Display name of the Website channel tab</param>
+        /// <param name="fileUri">Uri to word file that needs to be displayed as tab</param> 
+        /// <param name="fileId">The sourceDoc ID of the file</param>      
+        /// <returns>Newly added Word channel tab</returns>
         public ITeamChannelTab AddWordTabBatch(Batch batch, string name, Uri fileUri, Guid fileId)
         {
             return AddWordTabBatchAsync(batch, name, fileUri, fileId).GetAwaiter().GetResult();
         }
-
+        /// <summary>
+        /// Adds a new Word channel tab
+        /// </summary>
+        /// <param name="name">Display name of the Website channel tab</param>
+        /// <param name="fileUri">Uri to word file that needs to be displayed as tab</param>        
+        /// <param name="fileId">The sourceDoc ID of the file</param>      
+        /// <returns>Newly added Word channel tab</returns>
         public async Task<ITeamChannelTab> AddWordTabBatchAsync(string name, Uri fileUri, Guid fileId)
         {
             return await AddWordTabBatchAsync(PnPContext.CurrentBatch, name, fileUri, fileId).ConfigureAwait(false);
         }
-
+        /// <summary>
+        /// Adds a new Word channel tab
+        /// </summary>
+        /// <param name="name">Display name of the Website channel tab</param>
+        /// <param name="fileUri">Uri to the Word file that needs to be added as tab</param>
+        /// <param name="fileId">The sourceDoc ID of the file</param>
+        /// <returns>Newly added Word channel tab</returns>
         public ITeamChannelTab AddWordTabBatch(string name, Uri fileUri, Guid fileId)
         {
             return AddWordTabBatchAsync(PnPContext.CurrentBatch, name, fileUri, fileId).GetAwaiter().GetResult();
@@ -359,7 +397,7 @@ namespace PnP.Core.Model.Teams
 
             Dictionary<string, object> keyValuePairs = new Dictionary<string, object>
             {
-                { "teamsAppId", "com.microsoft.teamspace.tab.files.sharepoint" },
+                { TeamChannelTabConstants.TeamsAppId, TeamChannelTabConstants.DocumentLibraryAppId },
             };
 
             newTab.Configuration = new TeamChannelTabConfiguration
@@ -385,7 +423,7 @@ namespace PnP.Core.Model.Teams
 
             Dictionary<string, object> keyValuePairs = new Dictionary<string, object>
             {
-                { "teamsAppId", "com.microsoft.teamspace.tab.web" },
+                { TeamChannelTabConstants.TeamsAppId, TeamChannelTabConstants.WebAppId },
             };
 
             newTab.Configuration = new TeamChannelTabConfiguration
@@ -399,13 +437,20 @@ namespace PnP.Core.Model.Teams
 
             return new Tuple<TeamChannelTab, Dictionary<string, object>>(newTab, keyValuePairs);
         }
+        /// <summary>
+        /// Creates a word <see cref="TeamChannelTab"/>
+        /// </summary>
+        /// <param name="name">Name of the tab</param>
+        /// <param name="fileUri">Uri to the Word document that needs to be added as tab</param>
+        /// <param name="fileId">Unique ID of the Word document</param>
+        /// <returns>Wiki <see cref="TeamChannelTab"/></returns>
         private Tuple<TeamChannelTab, Dictionary<string, object>> CreateTeamChannelWordTab(string name, Uri fileUri, Guid fileId)
         {
             var newTab = CreateTeamChannelTab(name);
 
             Dictionary<string, object> keyValuePairs = new Dictionary<string, object>
             {
-                { "teamsAppId", "com.microsoft.teamspace.tab.file.staticviewer.word" },
+                { TeamChannelTabConstants.TeamsAppId, TeamChannelTabConstants.WordAppId },
             };
 
             newTab.Configuration = new TeamChannelTabConfiguration
@@ -429,7 +474,7 @@ namespace PnP.Core.Model.Teams
 
             Dictionary<string, object> keyValuePairs = new Dictionary<string, object>
             {
-                { "teamsAppId", "com.microsoft.teamspace.tab.wiki" }
+                { TeamChannelTabConstants.TeamsAppId, TeamChannelTabConstants.WikiAppId }
             };
 
             return new Tuple<TeamChannelTab, Dictionary<string, object>>(newTab, keyValuePairs);
