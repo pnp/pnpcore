@@ -69,6 +69,7 @@ namespace PnP.Core.Model.SharePoint
         /// <param name="selectors"></param>
         /// <returns></returns>
         public Task<List<INavigationNode>> GetChildNodesAsync(params Expression<Func<INavigationNode, object>>[] selectors);
+        
         /// <summary>
         /// Method to obtain all the child nodes of a navigation node
         /// </summary>

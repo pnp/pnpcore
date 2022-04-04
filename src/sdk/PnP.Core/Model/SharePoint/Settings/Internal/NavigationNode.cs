@@ -1,5 +1,4 @@
-﻿using PnP.Core.QueryModel;
-using PnP.Core.Services;
+﻿using PnP.Core.Services;
 using System;
 using System.Collections.Generic;
 using System.Dynamic;
@@ -41,16 +40,21 @@ namespace PnP.Core.Model.SharePoint
                     apiUrl = baseUri;
                     var navigationType = (NavigationType)additionalInformation[NavigationTypeKey];
                     if (navigationType == NavigationType.QuickLaunch)
+                    {
                         apiUrl += NavigationConstants.QuickLaunchUri;
+                    }
                     else if (navigationType == NavigationType.TopNavigationBar)
+                    {
                         apiUrl += NavigationConstants.TopNavigationBarUri;
+                    }
                 }
+
                 // Build body
                 var navigationNodeCreationInformation = new
                 {
                     __metadata = new { type = NavigationConstants.NodeMetadataType },
-                    Title = navigationNodeOptions.Title,
-                    Url = navigationNodeOptions.Url
+                    navigationNodeOptions.Title,
+                    navigationNodeOptions.Url
                 }.AsExpando();
 
                 string body = JsonSerializer.Serialize(navigationNodeCreationInformation, typeof(ExpandoObject), PnPConstants.JsonSerializer_IgnoreNullValues);
@@ -85,7 +89,6 @@ namespace PnP.Core.Model.SharePoint
         [SharePointProperty("*")]
         public object All { get => null; }
 
-
         #endregion
 
         #region Methods
@@ -93,6 +96,7 @@ namespace PnP.Core.Model.SharePoint
         {
             return GetChildNodesAsync(selectors).GetAwaiter().GetResult();
         }
+
         public async Task<List<INavigationNode>> GetChildNodesAsync(params Expression<Func<INavigationNode, object>>[] selectors)
         {
             var apiCall = new ApiCall($"{getNodeUri.Replace("{Id}", Id.ToString())}/Children", ApiType.SPORest);

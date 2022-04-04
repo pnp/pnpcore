@@ -9,6 +9,7 @@
         /// Title of the new node (e.g. Home)
         /// </summary>
         public string Title { get; set; }
+        
         /// <summary>
         /// Url of the navigationnode (e.g. https://contoso.sharepoint.com/sites/testsite)
         /// </summary>

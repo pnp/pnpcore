@@ -1,7 +1,4 @@
-﻿using PnP.Core.Services;
-using System;
-using System.Net.Http;
-using System.Threading.Tasks;
+﻿using System;
 
 namespace PnP.Core.Model.SharePoint
 {
@@ -27,6 +24,7 @@ namespace PnP.Core.Model.SharePoint
 
         [SharePointProperty("*")]
         public object All { get => null; }
+
         #endregion
     }
 }

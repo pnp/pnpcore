@@ -1,5 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using PnP.Core.Services;
+using System;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
@@ -16,6 +16,7 @@ namespace PnP.Core.Model.SharePoint
         /// This variable will define whether we will be using the top navigation or the quick launch for our API calls
         /// </summary>
         public NavigationType NavigationType { get; }
+        
         // Add extension methods here
         #region Get Methods
 
@@ -78,6 +79,20 @@ namespace PnP.Core.Model.SharePoint
         /// </summary>
         /// <returns></returns>
         public Task DeleteAllNodesBatchAsync();
+
+        /// <summary>
+        /// Method to delete all navigation nodes from a specific navigation type in a batch
+        /// </summary>
+        /// <param name="batch">The batch to add this reques to</param>
+        /// <returns></returns>
+        public void DeleteAllNodesBatch(Batch batch);
+
+        /// <summary>
+        /// Method to delete all navigation nodes from a specific navigation type in a batch
+        /// </summary>
+        /// <param name="batch">The batch to add this reques to</param>
+        /// <returns></returns>
+        public Task DeleteAllNodesBatchAsync(Batch batch);
         #endregion
 
         #region Extension Methods

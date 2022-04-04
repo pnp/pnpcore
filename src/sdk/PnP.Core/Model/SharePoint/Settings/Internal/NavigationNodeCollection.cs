@@ -36,7 +36,9 @@ namespace PnP.Core.Model.SharePoint
             var navigationNode =  await BaseDataModelExtensions.BaseGetAsync(this, apiCall, selectors).ConfigureAwait(false) as NavigationNode;
 
             if (!navigationNode.Metadata.ContainsKey(PnPConstants.MetaDataRestId))
+            {
                 return null;
+            }
 
             return navigationNode;
         }
@@ -58,12 +60,12 @@ namespace PnP.Core.Model.SharePoint
 
             if (navigationNodeOptions.Title == null)
             {
-                throw new ArgumentNullException(nameof(navigationNodeOptions.Title));
+                throw new ArgumentNullException($"{nameof(navigationNodeOptions)}.{nameof(navigationNodeOptions.Title)}");
             }
 
             if (navigationNodeOptions.Url == null)
             {
-                throw new ArgumentNullException(nameof(navigationNodeOptions.Url));
+                throw new ArgumentNullException($"{nameof(navigationNodeOptions)}.{nameof(navigationNodeOptions.Url)}");
             }
 
             var newNavigationNode = CreateNewAndAdd() as NavigationNode;
@@ -90,12 +92,40 @@ namespace PnP.Core.Model.SharePoint
         public async Task DeleteAllNodesAsync()
         {
             if (NavigationType == NavigationType.TopNavigationBar)
+            {
                 await PnPContext.Web.Navigation.LoadAsync(p => p.TopNavigationBar).ConfigureAwait(false);
+            }
             else if (NavigationType == NavigationType.QuickLaunch)
+            {
                 await PnPContext.Web.Navigation.LoadAsync(p => p.QuickLaunch).ConfigureAwait(false);
+            }
 
             foreach (var item in items.ToList())
+            {
                 await item.DeleteAsync().ConfigureAwait(false);
+            }
+        }
+
+        public void DeleteAllNodesBatch(Batch batch)
+        {
+            DeleteAllNodesBatchAsync(batch).GetAwaiter().GetResult();
+        }
+
+        public async Task DeleteAllNodesBatchAsync(Batch batch)
+        {
+            if (NavigationType == NavigationType.TopNavigationBar)
+            {
+                await PnPContext.Web.Navigation.LoadAsync(p => p.TopNavigationBar).ConfigureAwait(false);
+            }
+            else if (NavigationType == NavigationType.QuickLaunch)
+            {
+                await PnPContext.Web.Navigation.LoadAsync(p => p.QuickLaunch).ConfigureAwait(false);
+            }
+
+            foreach (var item in items.ToList())
+            {
+                await item.DeleteBatchAsync(batch).ConfigureAwait(false);
+            }
         }
 
         public void DeleteAllNodesBatch()
@@ -105,15 +135,8 @@ namespace PnP.Core.Model.SharePoint
 
         public async Task DeleteAllNodesBatchAsync()
         {
-            if (NavigationType == NavigationType.TopNavigationBar)
-                await PnPContext.Web.Navigation.LoadAsync(p => p.TopNavigationBar).ConfigureAwait(false);
-            else if (NavigationType == NavigationType.QuickLaunch)
-                await PnPContext.Web.Navigation.LoadAsync(p => p.QuickLaunch).ConfigureAwait(false);
-
-            foreach (var item in items.ToList())
-                await item.DeleteBatchAsync().ConfigureAwait(false);
+            await DeleteAllNodesBatchAsync(PnPContext.CurrentBatch).ConfigureAwait(false);
         }
-
         #endregion
 
         #region Extension Methods
@@ -127,9 +150,13 @@ namespace PnP.Core.Model.SharePoint
         {
             var apiUrl = NavigationConstants.NavigationUri;
             if (NavigationType == NavigationType.QuickLaunch)
+            {
                 apiUrl += NavigationConstants.QuickLaunchUri;
+            }
             else if (NavigationType == NavigationType.TopNavigationBar)
+            {
                 apiUrl += NavigationConstants.TopNavigationBarUri;
+            }
 
             // Build body
             var requestBody = new
@@ -148,8 +175,6 @@ namespace PnP.Core.Model.SharePoint
             };
             await navigationNode.RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
         }
-
-        
 
         #endregion
     }
