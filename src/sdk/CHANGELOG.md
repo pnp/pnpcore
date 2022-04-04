@@ -11,6 +11,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 ### Added
 
 - Support for configuring top and quicklaunch navigation #805 [MathijsVerbeeck - Mathijs Verbeeck]
+- Extended the team channel tabs to following tabs: Word (Configurable), Ppt (Configurable), Excel (Configurable), Pdf (Configurable), Stream, Planner, Forms, OneNote, PowerBi, SharePoint Page or List #808 [MathijsVerbeeck - Mathijs Verbeeck]
 
 ### Changed
 
